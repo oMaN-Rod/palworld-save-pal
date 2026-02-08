@@ -1,13 +1,14 @@
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 from uuid import UUID
 import uuid
-from pydantic import BaseModel, Field, PrivateAttr
+from pydantic import BaseModel, Field, PrivateAttr, computed_field
 
 from palworld_save_pal.dto.item_container_slot import ItemContainerSlotDTO
 from palworld_save_pal.game.item_container_slot import ItemContainerSlot
 from palworld_save_pal.game.dynamic_item import DynamicItem
 from palworld_save_pal.game.pal_objects import PalObjects
+from palworld_save_pal.utils.indexed_collection import IndexedCollection
 from palworld_save_pal.utils.uuid import (
     are_equal_uuids,
     is_empty_uuid,
@@ -32,41 +33,93 @@ class ItemContainer(BaseModel):
     type: ItemContainerType
     slots: List[ItemContainerSlot] = Field(default_factory=list)
     key: Optional[str] = None
-    slot_num: int = 0
 
+    _container_data: Optional[Dict[str, Any]] = PrivateAttr(default=None)
     _container_slots_data: Optional[List[Dict[str, Any]]] = PrivateAttr(
         default_factory=list
     )
-    _dynamic_item_save_data: Optional[List[Dict[str, Any]]] = PrivateAttr(
-        default_factory=list
+    _dynamic_items: Optional[IndexedCollection[UUID, Dict[str, Any]]] = PrivateAttr(
+        default=None
     )
 
     def __init__(
         self,
-        item_container_save_data: Optional[Dict[str, Any]] = None,
-        dynamic_item_save_data: Optional[Dict[str, Any]] = None,
+        container_data: Optional[Dict[str, Any]] = None,
+        dynamic_items: Optional[IndexedCollection[UUID, Dict[str, Any]]] = None,
         **kwargs: Any,
     ) -> None:
         super().__init__(**kwargs)
-        if item_container_save_data and dynamic_item_save_data:
-            self._dynamic_item_save_data = dynamic_item_save_data
-            self._get_container_slots(item_container_save_data)
+        self._dynamic_items = dynamic_items
+
+        if container_data is not None and dynamic_items is not None:
+            self._container_slots_data = PalObjects.get_array_property(
+                PalObjects.get_nested(container_data, "value", "Slots")
+            )
+            self._container_data = container_data
             self._get_items()
+
+    @computed_field
+    def slot_num(self) -> int:
+        return (
+            PalObjects.get_value(
+                PalObjects.get_nested(self._container_data, "value", "SlotNum")
+            )
+            if self._container_data is not None
+            else 0
+        )
+
+    @slot_num.setter
+    def slot_num(self, value: int) -> None:
+        if self._container_data is not None:
+            PalObjects.set_value(
+                PalObjects.get_nested(self._container_data, "value", "SlotNum"), value
+            )
 
     def _set_items(self, new_slots: List[ItemContainerSlotDTO]) -> None:
         logger.debug("%s (%s)", self.type.value, self.id)
         for slot_dto in new_slots:
             self._update_or_create_container_slot(slot_dto)
 
-    def update_from(self, other_container: Dict[str, Any]) -> None:
+    def update_from(
+        self,
+        other_container: Dict[str, Any],
+        common_container: Optional["ItemContainer"] = None,
+    ) -> None:
         logger.debug(
             "%s (%s) with keys %s", self.type.value, self.id, other_container.keys()
         )
         for key, value in other_container.items():
             if key == "slots":
-                new_slots = [ItemContainerSlotDTO(**slot) for slot in value]
+                new_slots = self._build_new_slots(value)
+                self._update_common_container_slots(new_slots, common_container)
                 self._clean_up_inventory(new_slots)
                 self._set_items(new_slots)
+
+    def set_slot_count(self, slot_count: int) -> None:
+        logger.debug("%s (%s) => %s", self.type.value, self.id, slot_count)
+        self.slot_num = slot_count
+        if len(self.slots) > slot_count:
+            slots_to_remove = self.slots[slot_count:]
+            for slot in slots_to_remove:
+                self._remove_container_slot(slot.slot_index)
+
+    def _build_new_slots(
+        self, slots_data: List[Dict[str, Any]]
+    ) -> List[ItemContainerSlotDTO]:
+        return [ItemContainerSlotDTO(**slot) for slot in slots_data]
+
+    def _update_common_container_slots(
+        self,
+        new_slots: List[ItemContainerSlotDTO],
+        common_container: Optional["ItemContainer"] = None,
+    ) -> None:
+        if not common_container or self.type != ItemContainerType.ESSENTIAL:
+            return
+
+        additional_inventory_count = sum(
+            1 for slot in new_slots if slot.static_id.startswith("AdditionalInventory_")
+        )
+        common_container.set_slot_count(42 + (min(additional_inventory_count, 4) * 3))
 
     def _clean_up_inventory(self, new_slots: List[ItemContainerSlotDTO]) -> None:
         logger.debug("%s (%s)", self.type.value, self.id)
@@ -80,46 +133,21 @@ class ItemContainer(BaseModel):
                 and container_slot
                 and container_slot.dynamic_item
             ):
-                self._dynamic_item_save_data.remove(
-                    container_slot.dynamic_item.save_data
-                )
+                self._dynamic_items.remove(container_slot.dynamic_item.save_data)
                 container_slot.dynamic_item = None
             if slot_dto.static_id == "None":
                 self._remove_container_slot(slot_dto.slot_index)
 
-    def _get_container_slots(self, item_container_save_data: Dict[str, Any]) -> None:
-        logger.debug("%s (%s)", self.type.value, self.id)
-        for entry in item_container_save_data:
-            container_id = PalObjects.get_guid(
-                PalObjects.get_nested(entry, "key", "ID")
-            )
-            if are_equal_uuids(container_id, self.id):
-                self._container_slots_data = PalObjects.get_array_property(
-                    PalObjects.get_nested(entry, "value", "Slots")
-                )
-                self.slot_num = PalObjects.get_value(
-                    PalObjects.get_nested(entry, "value", "SlotNum")
-                )
-                break
-
     def _get_dynamic_item(self, local_id: UUID) -> Optional[DynamicItem]:
-        logger.debug("%s (%s) => %s", self.type.value, self.id, local_id)
-        for entry in self._dynamic_item_save_data:
-            local_id_in_created_world = PalObjects.as_uuid(
-                PalObjects.get_nested(
-                    entry, "RawData", "value", "id", "local_id_in_created_world"
-                )
-            )
-            if are_equal_uuids(local_id_in_created_world, local_id):
-                return DynamicItem(local_id=local_id, dynamic_item_save_data=entry)
-        return
+        entry = self._dynamic_items.get(local_id)
+        if entry is not None:
+            return DynamicItem(local_id=local_id, dynamic_item_save_data=entry)
+        return None
 
     def _get_items(self):
-        logger.debug("%s (%s)", self.type.value, self.id)
         self.slots = []
         for slot_data in self._container_slots_data:
             slot = ItemContainerSlot(container_slot_data=slot_data)
-            dynamic_item = None
             if slot.local_id and not is_empty_uuid(slot.local_id):
                 dynamic_item = self._get_dynamic_item(slot.local_id)
                 if not dynamic_item:
@@ -139,7 +167,7 @@ class ItemContainer(BaseModel):
         for slot in self._container_slots_data:
             raw_data = PalObjects.get_value(slot["RawData"])
             current_slot_index = PalObjects.get_nested(raw_data, "slot_index")
-            if are_equal_uuids(current_slot_index, slot_index):
+            if current_slot_index == slot_index:
                 logger.debug("Removing slot %s", slot_index)
                 self._container_slots_data.remove(slot)
                 break
@@ -173,7 +201,9 @@ class ItemContainer(BaseModel):
             slot_dto.dynamic_item.local_id
         ):
             slot_dto.dynamic_item.local_id = (
-                uuid.uuid4() if not slot.dynamic_item else slot.dynamic_item.local_id
+                uuid.uuid4()
+                if not slot.dynamic_item or is_empty_uuid(slot.dynamic_item.local_id)
+                else slot.dynamic_item.local_id
             )
 
         if slot.dynamic_item:
@@ -184,5 +214,5 @@ class ItemContainer(BaseModel):
                 local_id=slot_dto.dynamic_item.local_id, dynamic_item_save_data=new_item
             )
             slot.dynamic_item.update_from(slot_dto.dynamic_item.model_dump())
-            self._dynamic_item_save_data.append(slot.dynamic_item.save_data)
+            self._dynamic_items.add(slot.dynamic_item.save_data)
         slot.local_id = slot_dto.dynamic_item.local_id

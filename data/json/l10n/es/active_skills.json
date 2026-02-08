@@ -21,7 +21,7 @@
   },
   "EPalWazaID::BeamSlicer": {
     "localized_name": "Rayos seccionadores",
-    "description": "Un rayo de luz imbuido de poder dragontino que destruye todo lo que haya ante ti. El área que destruida por el rayo, además, explotará pasados unos momentos."
+    "description": "Un rayo de luz imbuido de poder dragontino que destruye todo lo que haya ante ti. El área destruida por el rayo explotará pasado un instante."
   },
   "EPalWazaID::BlastCanon": {
     "localized_name": "Cañón explosivo",
@@ -279,6 +279,10 @@
     "localized_name": "Psicogravedad",
     "description": "Emplea la telequinesis para impedir que el rival se mueva y lo lanza desde las alturas contra el suelo."
   },
+  "EPalWazaID::RadiantBarrage": {
+    "localized_name": "Descarga radiante",
+    "description": "Dispara una bola de luz que persigue lentamente al enemigo. A medida que la esfera de luz se acerca al objetivo, esta se divide en innumerables balas que salen disparadas hacia él."
+  },
   "EPalWazaID::RaidCutter": {
     "localized_name": "Asalto cortante",
     "description": "Dispara innumerables espadas de viento que vuelan directas hacia el enemigo."
@@ -473,6 +477,10 @@
   },
   "EPalWazaID::Unique_BluePlatypus_Toboggan": {
     "localized_name": "Embate surfero",
+    "description": null
+  },
+  "EPalWazaID::Unique_BluePlatypus_Toboggan_Fire": {
+    "localized_name": "Placaje ígneo",
     "description": null
   },
   "EPalWazaID::Unique_BlueThunderHorse_FlashDash": {
@@ -683,6 +691,18 @@
     "localized_name": "Salto mortal",
     "description": "Técnica exclusiva de Herbil. Tras una breve preparación, hace una voltereta y se lanza contra el enemigo a toda velocidad."
   },
+  "EPalWazaID::Unique_LegendDeer_RadiantPurge_Otomo": {
+    "localized_name": "Luz purificadora",
+    "description": "Técnica exclusiva de Hartalis. Salta alto hacia el cielo, concentra una inmensa esfera de energía y la lanza contra el suelo, purificándolo todo."
+  },
+  "EPalWazaID::Unique_LegendDeer_RadiantWingRush": {
+    "localized_name": "Ala divina",
+    "description": "Técnica exclusiva de Hartalis. Da un salto hacia atrás, genera unas alas de luz en su lomo y carga contra el enemigo desde el aire."
+  },
+  "EPalWazaID::Unique_LegendDeer_WarpPillarBurst": {
+    "localized_name": "Lluvia sacra",
+    "description": "Técnica exclusiva de Hartalis. Tras desaparecer por un instante, su cuerpo comienza a irradiar cientos de rayos de luz de largo alcance."
+  },
   "EPalWazaID::Unique_LilyQueen_LilyHealing": {
     "localized_name": "Protección fecunda",
     "description": "Técnica exclusiva de Lyleen. Recupera PV de todos los aliados a su alcance gracias a un misterioso poder."
@@ -697,7 +717,7 @@
   },
   "EPalWazaID::Unique_MoonQueen_IceMoonBlade": {
     "localized_name": "Destello azul lunar",
-    "description": "Técnica exclusiva de Selyne. Lanza tres espadas en cadena a toda velocidad imbuidas de poder lunar."
+    "description": "Técnica exclusiva de Selyne. \\\\Lanza tres espadas consecutivas a toda velocidad imbuidas de poder lunar."
   },
   "EPalWazaID::Unique_MoonQueen_MoonBeam": {
     "localized_name": "Rayo lunar",
@@ -705,7 +725,7 @@
   },
   "EPalWazaID::Unique_MoonQueen_MoonBlade": {
     "localized_name": "Espada azul lunar",
-    "description": "Técnica exclusiva de Selyne. Lanza dos espadas en cadena a toda velocidad imbuidas de poder lunar."
+    "description": "Técnica exclusiva de Selyne. Lanza dos espadas consecutivas a toda velocidad imbuidas de poder lunar."
   },
   "EPalWazaID::Unique_MysteryMask_LifeSteal": {
     "localized_name": "Robavidas",
@@ -785,7 +805,7 @@
   },
   "EPalWazaID::Unique_SifuDog_Counter": {
     "localized_name": "Guardia extrema",
-    "description": "Técnica exclusiva de Dogen. Adopta una postura de aiki que anula cualquier ataque recibido para luego acercarse al instante al enemigo y desatar un poderoso ataque."
+    "description": "Técnica exclusiva de Dogen. Adopta una postura de Aikido que anula cualquier ataque recibido para luego acercarse al instante al enemigo y desatar un poderoso ataque."
   },
   "EPalWazaID::Unique_SnowTigerBeastman_SnowImpact": {
     "localized_name": "Explosión gélida",
@@ -817,7 +837,7 @@
   },
   "EPalWazaID::Unique_ThunderDragonMan_NumerousSwordAttack": {
     "localized_name": "Polikeraunos",
-    "description": "Técnica exclusiva de Orserk. Invoca numerosas lanzas relámpago y se las echa al enemigo. La primera lanza está imbuida del poder del rayo y explota pasados unos segundos."
+    "description": "Técnica exclusiva de Orserk. Invoca numerosas lanzas relámpago y se las arroja al enemigo. La primera lanza está imbuida del poder del rayo y explota pasados unos segundos."
   },
   "EPalWazaID::Unique_ThunderDragonMan_ThunderSwordAttack": {
     "localized_name": "Keraunos",
@@ -942,6 +962,10 @@
   "EPalWazaID::WaterGun": {
     "localized_name": "Disparo acuoso",
     "description": "Dispara balas de agua que vuelan directas hacia el rival."
+  },
+  "EPalWazaID::Weapon_Use": {
+    "localized_name": "Uso del arma",
+    "description": "Ataca usando el arma en posesión."
   },
   "EPalWazaID::WindCutter": {
     "localized_name": "Cortaviento",

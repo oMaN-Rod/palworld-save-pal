@@ -8,6 +8,8 @@
 	import { handlers } from '$lib/ws/handlers';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	const { children } = $props();
 	const ws = getSocketState();
@@ -32,7 +34,7 @@
 		{#if appState.autoSave}
 			<div class="absolute right-2 top-1 flex shrink-0 flex-row" transition:fade>
 				<div class="flex items-center space-x-2 rounded-full p-3">
-					<span class="text-lg font-bold">Syncing</span>
+					<span class="text-lg font-bold">{m.syncing()}</span>
 					<Spinner size="size-6" />
 				</div>
 			</div>

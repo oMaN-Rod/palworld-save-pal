@@ -2,6 +2,7 @@
 	import { EntryState, type Player } from '$types';
 	import { Tooltip, Progress } from '$components/ui';
 	import { staticIcons } from '$types/icons';
+	import * as m from '$i18n/messages';
 
 	let {
 		player = $bindable(),
@@ -26,13 +27,13 @@
 <div class="flex flex-col space-y-1">
 	<div class="flex flex-row items-center">
 		<Tooltip>
-			<button onclick={handleHeal} aria-label="Health">
-				<img src={staticIcons.hpIcon} alt="Health" class="mr-2 h-6 w-6" />
+			<button onclick={handleHeal} aria-label={m.health()}>
+				<img src={staticIcons.hpIcon} alt={m.health()} class="mr-2 h-6 w-6" />
 			</button>
 
 			{#snippet popup()}
 				<div class="flex flex-col">
-					<span class="font-bold">Restore HP</span>
+					<span class="font-bold">{m.restore_hp()}</span>
 					<span>{Math.round(player.hp / 1000)} / {maxHp}</span>
 				</div>
 			{/snippet}
@@ -48,12 +49,12 @@
 	</div>
 	<div class="flex w-full flex-row items-center">
 		<Tooltip>
-			<button class="mr-2" onclick={handleEat} aria-label="Food">
-				<img src={staticIcons.foodIcon} alt="Food" class="h-6 w-6" />
+			<button class="mr-2" onclick={handleEat} aria-label={m.food()}>
+				<img src={staticIcons.foodIcon} alt={m.food()} class="h-6 w-6" />
 			</button>
 			{#snippet popup()}
 				<div class="flex flex-col">
-					<span class="font-bold">Stomach</span>
+					<span class="font-bold">{m.stomach()}</span>
 					<span>{Math.round(player.stomach)} / 100</span>
 				</div>
 			{/snippet}

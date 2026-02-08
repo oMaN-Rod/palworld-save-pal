@@ -1,0 +1,978 @@
+{
+  "EPalWazaID::AcidRain": {
+    "localized_name": "Kwaśny deszcz",
+    "description": "Tworzy kwaśne chmury, z których na wrogów spada kwaśny deszcz."
+  },
+  "EPalWazaID::AirBlade": {
+    "localized_name": "Ostrze powietrzne",
+    "description": "Wypuszcza ostre strumienie powietrza w kształcie wachlarza."
+  },
+  "EPalWazaID::AirCanon": {
+    "localized_name": "Armata powietrzna",
+    "description": "Szybko wystrzeliwuje strumień powietrza pod wysokim ciśnieniem."
+  },
+  "EPalWazaID::Apocalypse": {
+    "localized_name": "Apokalipsa",
+    "description": "Wytwarza kilka mrocznych wirów wokół wroga."
+  },
+  "EPalWazaID::AquaJet": {
+    "localized_name": "Hydrodżet",
+    "description": "Ciska pędzącą kulą wody we wroga."
+  },
+  "EPalWazaID::BeamSlicer": {
+    "localized_name": "Tnąca wiązka",
+    "description": "Przeszywa obszar przed sobą wiązką nasyconą smoczą mocą. Dotknięty obszar eksploduje po krótkiej chwili."
+  },
+  "EPalWazaID::BlastCanon": {
+    "localized_name": "Armata wybuchowa",
+    "description": "Wystrzeliwuje pocisk energetyczny nasycony smoczą mocą w stronę pozycji wroga. Po uderzeniu pocisk roztrzaskuje się i wywołuje dalekozasięgowy wybuch przed sobą."
+  },
+  "EPalWazaID::BlizzardLance": {
+    "localized_name": "Góra lodowa",
+    "description": "Przywołuje ostrą lodową lancę tuż pod wrogiem."
+  },
+  "EPalWazaID::BubbleShot": {
+    "localized_name": "Eksplozja baniek",
+    "description": "Wystrzeliwuje liczne bańki, które powoli podążają za wrogiem."
+  },
+  "EPalWazaID::BubbleShower": {
+    "localized_name": "Trujący deszcz",
+    "description": "Skupia energię w ciele i rozprasza trujące kule we wszystkie strony."
+  },
+  "EPalWazaID::ChargeCanon": {
+    "localized_name": "Szarżująca armata",
+    "description": "Wystrzeliwuje kulę energii nasyconą smoczą mocą we wroga. Po zderzeniu kula wywołuje wybuch obejmujący szeroki obszar."
+  },
+  "EPalWazaID::Commet": {
+    "localized_name": "Uderzenie komety",
+    "description": "Zrzuca meteoryt prosto w dół, wywołując falę uderzeniową wokół miejsca zderzenia."
+  },
+  "EPalWazaID::CommetRain": {
+    "localized_name": "Deszcz meteorów",
+    "description": "Zrzuca niezliczone meteoryty, wywołując serię fal uderzeniowych."
+  },
+  "EPalWazaID::CrossThunder": {
+    "localized_name": "Krzyżujące się błyskawice",
+    "description": "Wytwarza dwie błyskawice, które przemieszczają się w lewo i w prawo, blokując dostęp z obu stron."
+  },
+  "EPalWazaID::CrossWind": {
+    "localized_name": "Krzyżowy podmuch",
+    "description": "Tworzy przed przeciwnikiem dwa ostrza wiatru i krzyżuje je w potężnym ataku."
+  },
+  "EPalWazaID::DarkArrow": {
+    "localized_name": "Mroczna strzała",
+    "description": "Wystrzeliwuje mroczną energię, która namierza wroga."
+  },
+  "EPalWazaID::DarkBall": {
+    "localized_name": "Mroczna kula",
+    "description": "Uwalnia kulę ciemności, która powoli podąża za wrogiem."
+  },
+  "EPalWazaID::DarkCanon": {
+    "localized_name": "Mroczna armata",
+    "description": "Ciska kulą energii nasyconą mroczną mocą we wroga."
+  },
+  "EPalWazaID::DarkLaser": {
+    "localized_name": "Mroczny laser",
+    "description": "Kumuluje mroczną energię, po czym wystrzeliwuje we wrogów potężną wiązkę."
+  },
+  "EPalWazaID::DarkLegion": {
+    "localized_name": "Mroczna smużka",
+    "description": "Wystrzeliwuje złowrogą kulę mrocznej energii, która nieustannie ściga wroga."
+  },
+  "EPalWazaID::DarkPulse": {
+    "localized_name": "Cienisty napór",
+    "description": "Wystrzeliwuje szybkie mroczne kule w kształcie wachlarza, które rozchodzą się podczas lotu."
+  },
+  "EPalWazaID::DarkWave": {
+    "localized_name": "Wybuch cieni",
+    "description": "Szybko uwalnia mroczną energię, zadając obrażenia wszystkim wokół."
+  },
+  "EPalWazaID::DiamondFall": {
+    "localized_name": "Diamentowy deszcz",
+    "description": "Tworzy liczne bryły lodu, które jedna po drugiej zrzuca na głowę wroga."
+  },
+  "EPalWazaID::DiversionLaser": {
+    "localized_name": "Strumień pod ciśnieniem",
+    "description": "Wystrzeliwuje przed siebie strumień wody pod wysokim ciśnieniem, który Po chwili rozdziela się na lewo i prawo, poszerzając zasięg ataku."
+  },
+  "EPalWazaID::DoubleIcicleThrow": {
+    "localized_name": "Podwójny kolec zamieci",
+    "description": "Tworzy dwa ogromne bloki lodu i wystrzeliwuje je jeden po drugim w stronę wroga. Przy zderzeniu poraża również wszystkich w pobliżu."
+  },
+  "EPalWazaID::DragonBreath": {
+    "localized_name": "Smoczy oddech",
+    "description": "Wydycha smoczą energię, zadając nieustanne obrażenia wszystkim przed sobą."
+  },
+  "EPalWazaID::DragonCanon": {
+    "localized_name": "Smocza armata",
+    "description": "Ciska kulą energii nasyconą smoczą mocą we wroga."
+  },
+  "EPalWazaID::DragonMeteor": {
+    "localized_name": "Smoczy meteor",
+    "description": "Przywołuje liczne małe meteoryty i miota nimi w stronę wroga."
+  },
+  "EPalWazaID::DragonWave": {
+    "localized_name": "Smoczy wybuch",
+    "description": "Szybko uwalnia smoczą energię, zadając obrażenia wszystkim wokół."
+  },
+  "EPalWazaID::ElecWave": {
+    "localized_name": "Fala uderzeniowa",
+    "description": "Szybko uwalnia elektryczność, porażając prądem wszystkich wokół."
+  },
+  "EPalWazaID::Eruption": {
+    "localized_name": "Wulkaniczny deszcz",
+    "description": "Wystrzeliwuje niezliczone bomby wulkaniczne w niebo. Po chwili spadają one deszczem na obszar wokół niego."
+  },
+  "EPalWazaID::FireBall": {
+    "localized_name": "Ognista kula",
+    "description": "Tworzy gigantyczną kulę ognia i ciska nią we wroga. Po uderzeniu kula wybucha, obejmując szeroki obszar."
+  },
+  "EPalWazaID::FireBlast": {
+    "localized_name": "Eksplozja Ignis",
+    "description": "Ciska kulą ognia prosto we wroga."
+  },
+  "EPalWazaID::FireSeed": {
+    "localized_name": "Ogień duszy",
+    "description": "Wystrzeliwuje kule ognia w stronę wroga. Po pokonaniu krótkiego dystansu eksplodują, wytwarzając mniejsze kule ognia, które lecą dalej."
+  },
+  "EPalWazaID::FlameFunnel": {
+    "localized_name": "Płomienny lej",
+    "description": "Tworzy liczne kule ognistej energii, z których wystrzeliwują niezliczone ogniste pociski w stronę wroga."
+  },
+  "EPalWazaID::FlameWall": {
+    "localized_name": "Płomienna ściana",
+    "description": "Tworzy ścianę płomieni w miejscu wroga. Ściana utrzymuje się przez chwilę i zadaje obrażenia wszystkim, którzy się z nią zetkną."
+  },
+  "EPalWazaID::Flamethrower": {
+    "localized_name": "Oddech Ignis",
+    "description": "Wystrzeliwuje płomienie we wroga, zadając nieustanne obrażenia."
+  },
+  "EPalWazaID::FlareArrow": {
+    "localized_name": "Płomienna strzała",
+    "description": "Wystrzeliwuje kolejno trzy płonące strzały, które samoczynnie namierzają wroga."
+  },
+  "EPalWazaID::FlareTornado": {
+    "localized_name": "Płomienna burza",
+    "description": "Wytwarza dwa płonące tornada po obu stronach, po czym miota je w stronę wroga."
+  },
+  "EPalWazaID::FlareTwister": {
+    "localized_name": "-",
+    "description": "-"
+  },
+  "EPalWazaID::FrostBreath": {
+    "localized_name": "Kryształowy oddech",
+    "description": "Spowija wroga podmuchem lodowatego powietrza, zadając nieustanne obrażenia."
+  },
+  "EPalWazaID::GhostFlame": {
+    "localized_name": "Płomień duszy",
+    "description": "Wystrzeliwuje trzy kule złowrogości, które nieustannie ścigają wroga."
+  },
+  "EPalWazaID::GrassTornado": {
+    "localized_name": "Tornado traw",
+    "description": "Wytwarza dwa tornada po obu stronach, po czym kieruje je na wroga."
+  },
+  "EPalWazaID::GravityShot": {
+    "localized_name": "Mroczny strzał",
+    "description": "Wystrzeliwuje pocisk mrocznej energii, który stopniowo przyspiesza."
+  },
+  "EPalWazaID::HolyBlast": {
+    "localized_name": "Święty wybuch",
+    "description": "Tworzy szeroki wybuch światła w miejscu wroga i wokół niego."
+  },
+  "EPalWazaID::Human_Punch": {
+    "localized_name": "Cios",
+    "description": "Zadawaj ciosy z przekonaniem; uwierz w moc pięści."
+  },
+  "EPalWazaID::HydroPump": {
+    "localized_name": "Hydrolaser",
+    "description": "Wystrzeliwuje wodę pod ciśnieniem z zawrotną prędkością, zalewając szeroki obszar przed sobą."
+  },
+  "EPalWazaID::HydroSlicer": {
+    "localized_name": "Wodne ostrze",
+    "description": "Przecina obszar przed sobą skompresowanym strumieniem wody. Z trafionych miejsc po chwili tryska woda."
+  },
+  "EPalWazaID::HyperBeam": {
+    "localized_name": "Pal-eksplozja",
+    "description": "Ładuje niszczycielską energię, po czym wystrzeliwuje potężną wiązkę obejmującą szeroki obszar."
+  },
+  "EPalWazaID::IceAge": {
+    "localized_name": "Mróz absolutny",
+    "description": "Wyrzuca sople spod nóg wroga na szerokim obszarze."
+  },
+  "EPalWazaID::IceBlade": {
+    "localized_name": "Lodowe cięcie",
+    "description": "Tworzy ostrze lodu w kształcie półksiężyca i ciska je do przodu."
+  },
+  "EPalWazaID::IceMissile": {
+    "localized_name": "Lodowy pocisk",
+    "description": "Tworzy w powietrzu lodowe lance, które lecą w stronę wroga."
+  },
+  "EPalWazaID::IceWall": {
+    "localized_name": "Mroźna ściana",
+    "description": "Z ziemi wyrasta potężna lodowa ściana. Ściana pozostaje aktywna przez jakiś czas i pęka po otrzymaniu określonej ilości obrażeń."
+  },
+  "EPalWazaID::IcicleLine": {
+    "localized_name": "Szlak sopli",
+    "description": "Wytwarza filary lodu, które suną po liniach prostych w trzech kierunkach."
+  },
+  "EPalWazaID::IciclePierce": {
+    "localized_name": "Lodowy pocisk",
+    "description": "Wytwarza liczne ostre bloki lodu w powietrzu i ciska nimi w stronę wroga."
+  },
+  "EPalWazaID::IcicleThrow": {
+    "localized_name": "Kolec zamieci",
+    "description": "Tworzy gigantyczną bryłę lodu i ciska nią we wroga. Przy zderzeniu zadaje obrażenia wszystkim wokół."
+  },
+  "EPalWazaID::Inferno": {
+    "localized_name": "Furia Ignis",
+    "description": "Tchnie energię w otaczającą ziemię, która wybucha po upływie określonego czasu."
+  },
+  "EPalWazaID::LightningStrike": {
+    "localized_name": "Uderzenie błyskawicy",
+    "description": "Działa jak piorunochron, przywołując błyskawice, które rażą prądem otaczający teren."
+  },
+  "EPalWazaID::LineGeyser": {
+    "localized_name": "Plusk",
+    "description": "Wytwarza kolumnę wody sunącą prosto przed siebie."
+  },
+  "EPalWazaID::LineThunder": {
+    "localized_name": "Piorunowy ślad",
+    "description": "Wytwarza błyskawicę, która mknie prosto przed siebie."
+  },
+  "EPalWazaID::LockonLaser": {
+    "localized_name": "Laser namierzający",
+    "description": "Celuje we wroga, po czym oddaje strzał z ultraszybkiego lasera."
+  },
+  "EPalWazaID::MudShot": {
+    "localized_name": "Wybuch bagna",
+    "description": "Ciska lepkim błotem we wroga."
+  },
+  "EPalWazaID::PoisonFog": {
+    "localized_name": "Trująca mgła",
+    "description": "Rozpościera przed sobą ostry cień trującej mgły, która zatruwa przeciwnika."
+  },
+  "EPalWazaID::PoisonShot": {
+    "localized_name": "Eksplozja trucizny",
+    "description": "Ciska trującym szlamem we wroga."
+  },
+  "EPalWazaID::PowerBall": {
+    "localized_name": "Potężna bomba",
+    "description": "Ładuje ogromną ilość energii przed wystrzeleniem dużej niszczycielskiej kuli."
+  },
+  "EPalWazaID::PowerShot": {
+    "localized_name": "Potężny strzał",
+    "description": "Ładuje energię w skoncentrowany wybuch."
+  },
+  "EPalWazaID::PredatorBeam": {
+    "localized_name": "Wybuch drapieżnika",
+    "description": null
+  },
+  "EPalWazaID::PredatorLockon": {
+    "localized_name": "Znak drapieżnika",
+    "description": null
+  },
+  "EPalWazaID::PredatorWave": {
+    "localized_name": "Szturm drapieżnika",
+    "description": null
+  },
+  "EPalWazaID::Psychokinesis": {
+    "localized_name": "Psychograwitacja",
+    "description": "Wykorzystuje psychokinezę, by chwycić wrogów, a następnie rzucić ich na ziemię z dużej wysokości."
+  },
+  "EPalWazaID::RadiantBarrage": {
+    "localized_name": "Promienista salwa",
+    "description": "Wystrzeliwuje kulę światła, która powoli podąża za wrogiem. Gdy zbliży się do celu, dzieli się na niezliczone pociski świetlne, które uderzają w przeciwnika."
+  },
+  "EPalWazaID::RaidCutter": {
+    "localized_name": "Szturmowe cięcie",
+    "description": "Wystrzeliwuje niezliczone miecze wiatru, które lecą wprost na wroga."
+  },
+  "EPalWazaID::Railbolt": {
+    "localized_name": "Szyny błyskawic",
+    "description": "Ładuje moc błyskawic do granic możliwości i jednocześnie wystrzeliwuje w stronę wroga liczne impulsy elektryczne."
+  },
+  "EPalWazaID::RangeThunder": {
+    "localized_name": "Wszechogarniający grzmot",
+    "description": "Wytwarza błyskawice, które rozchodzą się po liniach prostych we wszystkich kierunkach."
+  },
+  "EPalWazaID::ReflectiveShuriken": {
+    "localized_name": "Liściasty shuriken",
+    "description": "Wypuszcza ostrze wiatru, które po trafieniu w przeciwnika lub drzewo odbija się i rykoszetem zadaje kolejny cios. Może odbić się maksymalnie 4 razy."
+  },
+  "EPalWazaID::RipTide": {
+    "localized_name": "Wodna nawałnica",
+    "description": "Tworzy fale, które napływają na przeciwnika ze wszystkich stron. Na koniec fale eksplodują w centrum, gdzie tworzy się potężny słup wody."
+  },
+  "EPalWazaID::RockBeat": {
+    "localized_name": "Kamienny cios",
+    "description": "Trzęsie ziemią i unosi ogromny głaz w powietrze."
+  },
+  "EPalWazaID::RockLance": {
+    "localized_name": "Kamienna lanca",
+    "description": "Przywołuje ostrą kamienną włócznię tuż pod wrogiem."
+  },
+  "EPalWazaID::RootAttack": {
+    "localized_name": "Cierniowe pnącze",
+    "description": "Wywołuje ciernie, które ścigają wroga po ziemi, przebijając go od dołu."
+  },
+  "EPalWazaID::RootLance": {
+    "localized_name": "Krąg pnączy",
+    "description": "Wypuszcza ostre korzenie w miejscu wroga i wokół niego."
+  },
+  "EPalWazaID::SandTornado": {
+    "localized_name": "Piaskowe tornado",
+    "description": "Wytwarza dwa piaskowe tornada po obu stronach, po czym kieruje je w stronę wroga."
+  },
+  "EPalWazaID::SandTwister": {
+    "localized_name": "Piaskowa trąba powietrzna",
+    "description": "Tworzy liczne piaskowe tornada, które nieustannie wirują wokół własnej osi."
+  },
+  "EPalWazaID::SeaGush": {
+    "localized_name": "Wodny filar",
+    "description": "Wywołuje eksplozje słupów wody w miejscu, gdzie znajduje się przeciwnik i wokół niego."
+  },
+  "EPalWazaID::SeedMachinegun": {
+    "localized_name": "Seria nasion",
+    "description": "Wystrzeliwuje salwę twardych nasion w znajdujących się przed nim wrogów."
+  },
+  "EPalWazaID::SeedMine": {
+    "localized_name": "Mina z nasion",
+    "description": "Miota śmiercionośnym nasionem. Po trafieniu wroga wybucha."
+  },
+  "EPalWazaID::SelfDestruct": {
+    "localized_name": "Implozja",
+    "description": "Ryzykuje życiem, by wywołać potężny wybuch. Po ataku staje się niezdolny do dalszej walki."
+  },
+  "EPalWazaID::SelfDestruct_Bee": {
+    "localized_name": "Pszczela cisza",
+    "description": "Ryzykuje życiem, by wywołać potężny wybuch, lecz umiera z honorem na polu bitwy."
+  },
+  "EPalWazaID::SelfExplosion": {
+    "localized_name": "Megatonowa implozja",
+    "description": "Ryzykuje życiem, by wywołać ogromny wybuch. Ci, którzy polegli w imię obowiązku, stają się lśniącymi gwiazdami na nocnym niebie."
+  },
+  "EPalWazaID::ShadowBall": {
+    "localized_name": "Kula koszmarów",
+    "description": "Tworzy gigantyczną kulę ciemności i ciska nią we wroga."
+  },
+  "EPalWazaID::ShokeiLaser": {
+    "localized_name": "Zabójczy laser",
+    "description": "Po wycelowaniu we wroga, wystrzeliwuje serię ultraszybkich laserów elektrycznych."
+  },
+  "EPalWazaID::SolarBeam": {
+    "localized_name": "Eksplozja słoneczna",
+    "description": "Kumuluje energię słoneczną, po czym wystrzeliwuje w stronę wrogów potężną wiązkę."
+  },
+  "EPalWazaID::SpecialCutter": {
+    "localized_name": "Wielocięcie",
+    "description": "Wypuszcza trzy błyskawiczne ostrza wiatru w szybkiej sekwencji, które lecą wprost na przeciwnika."
+  },
+  "EPalWazaID::SpreadPulse": {
+    "localized_name": "Eksplozja iskier",
+    "description": "Wystrzeliwuje kule piorunowe w kształcie wachlarza, które rozchodzą się coraz szerzej, im dalej lecą."
+  },
+  "EPalWazaID::StarMine": {
+    "localized_name": "Gwiezdna mina",
+    "description": "Wytwarza gwiazdy wokół wroga, które wybuchają przy kontakcie lub po krótkim czasie."
+  },
+  "EPalWazaID::StoneShotgun": {
+    "localized_name": "Kamienna eksplozja",
+    "description": "Wystrzeliwuje naprzód salwę kamieni."
+  },
+  "EPalWazaID::ThreeCommet": {
+    "localized_name": "Grad komet",
+    "description": "Zrzuca meteoryty jeden po drugim, wywołując fale uderzeniowe wokół miejsc zderzenia."
+  },
+  "EPalWazaID::ThreeThunder": {
+    "localized_name": "Trójbłyskawica",
+    "description": "Wytwarza błyskawicę, która trzykrotnie uderza we wroga z góry."
+  },
+  "EPalWazaID::ThrowRock": {
+    "localized_name": "Kamienna armata",
+    "description": "Wykopuje głaz i ciska nim we wroga."
+  },
+  "EPalWazaID::ThunderBall": {
+    "localized_name": "Elektryczna kula",
+    "description": "Wystrzeliwuje elektryczną kulę, która powoli podąża za wrogiem."
+  },
+  "EPalWazaID::ThunderFunnel": {
+    "localized_name": "Lej plazmy",
+    "description": "Tworzy dwie kule elektryczne, które wystrzeliwują liczne ładunki w stronę wrogów."
+  },
+  "EPalWazaID::ThunderRain": {
+    "localized_name": "Deszcz grzmotów",
+    "description": "Przywołuje błyskawicę, która uderza we wroga po upływie określonego czasu."
+  },
+  "EPalWazaID::ThunderSpear": {
+    "localized_name": "Włócznia grzmotów",
+    "description": "Wystrzeliwuje ultraszybką, błyskawiczną włócznię wprost w stronę wroga."
+  },
+  "EPalWazaID::ThunderStorm": {
+    "localized_name": "Burza z piorunami",
+    "description": "Wytwarza ogromne tornado błyskawic, które powoli porusza się w stronę wroga."
+  },
+  "EPalWazaID::Thunderbolt": {
+    "localized_name": "Błyskawica",
+    "description": "Ładuje elektryczną energię, po czym poraża wrogów potężnym wyładowaniem."
+  },
+  "EPalWazaID::Tremor": {
+    "localized_name": "Kamienny wybuch",
+    "description": "Wywołuje trzęsienie ziemi, po czym ciska masywnym głazem w otoczenie."
+  },
+  "EPalWazaID::TriSpark": {
+    "localized_name": "Trójiskra",
+    "description": "Pędząca kula piorunowa, która leci po linii prostej. Jednocześnie wystrzeliwuje powolne kule, które śledzą wroga."
+  },
+  "EPalWazaID::Unique_Alpaca_Tackle": {
+    "localized_name": "Puszysta szarża",
+    "description": "Umiejętność wyłączna dla Melpaca. Szarżuje naprzód, skąpany w uroczej aurze."
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_Dark_DarkCharge": {
+    "localized_name": "Zuchwała burza cieni",
+    "description": "Umiejętność wyłączna dla Kitsun Noct. Szarżuje naprzód z wysoką prędkością, otoczony intensywnymi fioletowymi płomieniami."
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_FireCharge": {
+    "localized_name": "Zuchwałe płomienie",
+    "description": "Umiejętność wyłączna dla Kitsun. Szarżuje naprzód z wysoką prędkością, otoczony intensywnymi niebieskimi płomieniami."
+  },
+  "EPalWazaID::Unique_Anubis_GroundPunch": {
+    "localized_name": "Uderzenie w ziemię",
+    "description": "Umiejętność wyłączna dla Anubis. Skacze wysoko i uderza w ziemię, wywołując falę uderzeniową zadającą obrażenia na szerokim obszarze."
+  },
+  "EPalWazaID::Unique_Anubis_LowRoundKick": {
+    "localized_name": "Kopnięcie z obrotu",
+    "description": "Umiejętność wyłączna dla Anubis. Wykonuje kopnięcie obrotowe silnymi nogami, trafiając wielu wrogów na dużym obszarze."
+  },
+  "EPalWazaID::Unique_Anubis_Tackle": {
+    "localized_name": "Potężna szarża",
+    "description": "Umiejętność wyłączna dla Anubis. Gwałtownie ściga przeciwników, uwalnia energię i zadaje potężny cios."
+  },
+  "EPalWazaID::Unique_Baphomet_SwallowKite": {
+    "localized_name": "Pazur piekielnych ogni",
+    "description": "Umiejętność wyłączna dla Incineram. Przyciąga do siebie wrogów, używając lewego pazura, by przeciąć ich w powietrzu, po czym ścina ich prawym pazurem."
+  },
+  "EPalWazaID::Unique_BirdDragon_FireBreath": {
+    "localized_name": "Ognisty oddech",
+    "description": "Umiejętność wyłączna dla Vanwyrm. Rusza naprzód, zionąc ogniem z paszczy."
+  },
+  "EPalWazaID::Unique_BirdDragon_Ice_IceBreath": {
+    "localized_name": "Zamieć burzowa",
+    "description": "Umiejętność wyłączna dla Vanwyrm Cryst. Rusza naprzód, wydychając lodowate powietrze z paszczy."
+  },
+  "EPalWazaID::Unique_BlackCentaur_TwoSpearRushes": {
+    "localized_name": "Bliźniacze włócznie",
+    "description": "Umiejętność wyłączna dla Necromus. Otacza bliźniacze włócznie wściekłymi trąbami powietrznymi i szarżuje naprzód, zadając kolejne pchnięcia jedno po drugim."
+  },
+  "EPalWazaID::Unique_BlackGriffon_TackleLaser": {
+    "localized_name": "Boska katastrofa",
+    "description": "Szarżuje naprzód, wytwarzając kule światła, które automatycznie namierzają wrogów i wystrzeliwują salwę laserów."
+  },
+  "EPalWazaID::Unique_BlackGriffon_TackleLaser2": {
+    "localized_name": "Boska katastrofa II",
+    "description": "Umiejętność wyłączna dla Shadowbeaka. Szarżując naprzód, emituje niezliczone niebieskie promienie, które automatycznie namierzają i ścigają wroga."
+  },
+  "EPalWazaID::Unique_BlackMetalDragon_FirePunch": {
+    "localized_name": "Burzliwy oddech ognistej pięści",
+    "description": "Umiejętność wyłączna dla Astegon. Po zadaniu dwóch ciosów przed siebie, wydycha smoczy oddech w dół."
+  },
+  "EPalWazaID::Unique_BluePlatypus_Toboggan": {
+    "localized_name": "Surf-cios",
+    "description": null
+  },
+  "EPalWazaID::Unique_BluePlatypus_Toboggan_Fire": {
+    "localized_name": "Ognisty taran",
+    "description": null
+  },
+  "EPalWazaID::Unique_BlueThunderHorse_FlashDash": {
+    "localized_name": "Błyskawiczny błysk",
+    "description": "Umiejętność wyłączna dla Azurmane. Porusza się z prędkością błyskawicy, pochłaniając wszystko na swojej drodze."
+  },
+  "EPalWazaID::Unique_Boar_Tackle": {
+    "localized_name": "Zuchwała szarża",
+    "description": "Umiejętność wyłączna dla Rushoar. Obiera cel i szarżuje na niego z dziką furią."
+  },
+  "EPalWazaID::Unique_CaptainPenguin_Black_BodySlide_Electric": {
+    "localized_name": "Elektroślizg",
+    "description": "Umiejętność wyłączna dla Penking Lux. Kładzie się brzuchem na ziemi i wytwarza prąd w całym ciele, by wykonać ślizg w stronę przeciwnika, uderzając z dużą siłą."
+  },
+  "EPalWazaID::Unique_CaptainPenguin_BodySlide": {
+    "localized_name": "Poślizg cesarza",
+    "description": "Umiejętność wyłączna dla Penking. Leży na brzuchu, tworząc wokół siebie mroźne powietrze, po czym ślizga się z dużą prędkością w stronę wroga."
+  },
+  "EPalWazaID::Unique_ChickenPal_ChickenPeck": {
+    "localized_name": "Kurzy pęd",
+    "description": "Umiejętność wyłączna dla Chikipi. Leci na wrogów w zasięgu wzroku, atakując ich ostrym dziobem."
+  },
+  "EPalWazaID::Unique_DarkAlien_JumpScractch": {
+    "localized_name": "Złowrogie cięcie",
+    "description": "Umiejętność wyłączna dla Xenovadera. Rzuca się do ataku i zadaje cięcie lewą dłonią."
+  },
+  "EPalWazaID::Unique_DarkCrow_TelePoke": {
+    "localized_name": "Widmowe dziobnięcie",
+    "description": "Umiejętność wyłączna dla Cawgnito. Teleportuje się obok wroga, po czym atakuje go dziobem."
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_BeamSlash": {
+    "localized_name": "Promienne cięcie",
+    "description": "Umiejętność wyłączna dla Xenolord. Tworzy wysokoenergetyczny miecz świetlny w prawej dłoni i zadaje dwa potężne cięcia, błyskawicznie przemieszczając się do przodu."
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_ConvergentBeam": {
+    "localized_name": "Gwiezdny promień",
+    "description": "Umiejętność wyłączna dla Xenolord. Skupia energię przesiąkniętą mrokiem i uwalnia ją jednym impulsem wprost przed siebie."
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_FunnelLaser": {
+    "localized_name": "Laser omega",
+    "description": "Umiejętność wyłączna dla Xenolord. Przyzywa światłość zagłady z podprzestrzeni i nieustannie wystrzeliwuje ją na wszystkie strony, spopielając wszystko, co stanie jej na drodze."
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_SetFunnel": {
+    "localized_name": "Odłamek satelity",
+    "description": "Umiejętność wyłączna dla Xenolord. Wytwarza cztery skrzydła przypominające satelity, wyposażone w automatyczne systemy ataku. Przy kolejnym ataku skrzydła samoczynnie namierzają i atakują przeciwnika."
+  },
+  "EPalWazaID::Unique_DarkMechaDragon_WarpComet": {
+    "localized_name": "Kosmiczny meteor",
+    "description": "Umiejętność wyłączna dla Xenolord. Szybuje w powietrze z prędkością światła i wypuszcza niezliczone meteory. Następnie przemienia się w kometę i szarżuje naprzód, wywołując potężny wybuch w chwili uderzenia."
+  },
+  "EPalWazaID::Unique_DarkScorpion_Pierce": {
+    "localized_name": "Skaczące żądło",
+    "description": "Umiejętność wyłączna dla Menastinga. Wyskakuje wysoko i przebija ofiarę ogonem. Trucizna z jego ogona jest śmiertelna."
+  },
+  "EPalWazaID::Unique_Deer_PushupHorn": {
+    "localized_name": "Podbródkowy z poroża",
+    "description": "Umiejętność wyłączna dla Eikthyrdeera. Szarżuje na przeciwników i wykorzystuje poroże, by wyrzucić ich w powietrze. Aktywacja w trakcie jazdy pozwala kontrolować kierunek szarży."
+  },
+  "EPalWazaID::Unique_DrillGame_ShellAttack": {
+    "localized_name": "Wirująca skorupa",
+    "description": "Umiejętność wyłączna dla Digtoise. Wiruje całym ciałem z ogromną prędkością, poruszając się naprzód. Przewierca wrogów, zadając ciągłe obrażenia."
+  },
+  "EPalWazaID::Unique_Eagle_GlidingNail": {
+    "localized_name": "Pazur wichury",
+    "description": "Umiejętność wyłączna dla Galeclaw. Z wyciągniętymi szponami szybuje naprzód w zaciekłej szarży."
+  },
+  "EPalWazaID::Unique_ElecPanda_ElecScratch": {
+    "localized_name": "Pazur błyskawicy",
+    "description": "Umiejętność wyłączna dla Grizzbolt. Po skoku na wroga dwukrotnie szarpie go elektrycznie naładowanymi pazurami, po czym uderza w ziemię, rażąc otoczenie prądem."
+  },
+  "EPalWazaID::Unique_ElecPanda_GatlingAttack": {
+    "localized_name": "Grzmotowy czołg",
+    "description": "Umiejętność wyłączna dla Grizzbolta. Wyciąga znikąd miniguna i zaczyna ostrzał. Kończy wszystko jednym, potężnym strzałem."
+  },
+  "EPalWazaID::Unique_FairyDragon_FairyTornado": {
+    "localized_name": "Mistyczny wicher",
+    "description": "Umiejętność wyłączna dla Elphidrana. Wytwarza bliźniacze trąby powietrzne nasycone tajemniczą mocą, które prześladują wrogów."
+  },
+  "EPalWazaID::Unique_FeatherOstrich_Tossin": {
+    "localized_name": "Ziemny pęd",
+    "description": "Umiejętność wyłączna dla Dazemu. Natychmiast przyspiesza i pędzi naprzód z zawrotną prędkością."
+  },
+  "EPalWazaID::Unique_FengyunDeeper_CloudTempest": {
+    "localized_name": "Burza chmur",
+    "description": "Umiejętność wyłączna dla Fenglope. Szarżuje naprzód, manipulując atmosferą, tworząc wokół siebie tunel sprężonego powietrza."
+  },
+  "EPalWazaID::Unique_FengyunDeeper_Electric_ThunderTempest": {
+    "localized_name": "Burza grzmotów",
+    "description": "Szarżuje naprzód, manipulując atmosferą i spowijając się chmurami burzowymi."
+  },
+  "EPalWazaID::Unique_FireKirin_Dark_DarkTossin": {
+    "localized_name": "Mroczna szarża",
+    "description": "Umiejętność wyłączna dla Pyrin Noct. Szarżuje naprzód, spowity mrocznymi płomieniami. Za sobą pozostawia płonącą ścieżkę."
+  },
+  "EPalWazaID::Unique_FireKirin_Tackle": {
+    "localized_name": "Szarża Ignis",
+    "description": "Umiejętność wyłączna dla Pyrin. Szarżuje naprzód, spowity płaszczem płomieni. Za sobą pozostawia płonącą ścieżkę."
+  },
+  "EPalWazaID::Unique_FlameBuffalo_FlameHorn": {
+    "localized_name": "Płonący róg",
+    "description": "Umiejętność wyłączna dla Arsox. Namierza cel i szarżuje z impetem, z uniesionym rogiem."
+  },
+  "EPalWazaID::Unique_FlowerDinosaur_Whip": {
+    "localized_name": "Roślinne uderzenie",
+    "description": "Umiejętność wyłączna dla Dinossoma. Używa potężnego ogona, by uderzyć w ziemię przed sobą i wywołać falę uderzeniową w linii prostej."
+  },
+  "EPalWazaID::Unique_Garm_Bite": {
+    "localized_name": "Zaciekły kieł",
+    "description": "Umiejętność wyłączna dla Direhowl. Prędko wyskakuje na wroga i gryzie go."
+  },
+  "EPalWazaID::Unique_GhostAnglerfish_Fire_SweepBait_Fire": {
+    "localized_name": "Zamach ognistym lampionem",
+    "description": "Umiejętność wyłączna dla Ghangler Ignis. Ma na głowie lampion otoczony płomieniami, którym wykonuje zamach, by wyprowadzić atak wprzód."
+  },
+  "EPalWazaID::Unique_GhostAnglerfish_SweepBait": {
+    "localized_name": "Zamach lampionem",
+    "description": "Umiejętność wyłączna dla Ghangler. Długim lampionem umieszczonym na głowie wykonuje szeroki zamach i wyprowadza atak wprzódd."
+  },
+  "EPalWazaID::Unique_GhostBeast_Tossin": {
+    "localized_name": "Duchowy pęd",
+    "description": "Umiejętność wyłączna dla Maraith. Poruszając się powoli, nieustannie miota migotliwe kule ognia w stronę wroga."
+  },
+  "EPalWazaID::Unique_GoldenHorse_StoneDash": {
+    "localized_name": "Kruszący pęd",
+    "description": "Umiejętność wyłączna dla Gildane. Szarżuje naprzód, ciskając kamieniami z wielką siłą na lewo i prawo."
+  },
+  "EPalWazaID::Unique_Gorilla_GroundPunch": {
+    "localized_name": "Grzmot ziemi",
+    "description": "Umiejętność wyłączna dla Gorirat. Uderza w ziemię dwa razy, po czym wyskakuje w powietrze i zadaje potężny cios."
+  },
+  "EPalWazaID::Unique_GrassPanda_Electric_ElectricPunch": {
+    "localized_name": "Wybuchowy cios",
+    "description": "Umiejętność wyłączna dla Mossanda Lux. Nakręca prawe ramię, po czym uderza we wroga naładowanym elektrycznie ciosem."
+  },
+  "EPalWazaID::Unique_GrassPanda_MusclePunch": {
+    "localized_name": "Miażdżący cios",
+    "description": "Umiejętność wyłączna dla Mossanda. Nakręca prawe ramię, po czym uderza we wroga druzgocącym ciosem."
+  },
+  "EPalWazaID::Unique_GrassRabbitMan_GrassRoundKick": {
+    "localized_name": "Kopnięcie z obrotu",
+    "description": "Umiejętność wyłączna dla Verdash. Skacząc naprzód, wykonuje szybkie obrotowe kopnięcie, uderzając we wszystko wokół."
+  },
+  "EPalWazaID::Unique_Grassmammoth_Earthquake": {
+    "localized_name": "Ziemne uderzenie",
+    "description": "Umiejętność wyłączna dla Mammoresta. Wykorzystuje swoje ogromne ciało, by wstrząsnąć ziemią, zadając obrażenia na szerokim obszarze."
+  },
+  "EPalWazaID::Unique_GrimGirl_BrutalMachete": {
+    "localized_name": "Salwa żalu",
+    "description": "Umiejętność wyłączna dla Splatterina. Natychmiast się teleportuje i zadaje szybkie cięcie. Następnie pojawia się nad wrogiem, wbija broń prosto w cel i uwalnia falę mrocznej energii."
+  },
+  "EPalWazaID::Unique_HawkBird_Storm": {
+    "localized_name": "Atak tornado",
+    "description": "Umiejętność wyłączna dla Nitewing. Tworzy tornado przed sobą, po czym szybuje w stronę celu."
+  },
+  "EPalWazaID::Unique_HerculesBeetle_BeetleTackle": {
+    "localized_name": "Gigaróg",
+    "description": "Umiejętność wyłączna dla Warsect . Nadziewa wrogów na swoje cztery potężne rogi."
+  },
+  "EPalWazaID::Unique_Horus_FlareBird": {
+    "localized_name": "Płomień feniksa",
+    "description": "Umiejętność wyłączna dla Faleris. Po stworzeniu prażącego tornada, owija się piekielnym ogniem i szarżuje naprzód."
+  },
+  "EPalWazaID::Unique_Horus_PerfectStorm": {
+    "localized_name": "Fala szalejących płomieni",
+    "description": "Umiejętność wyłączna dla Falerisa. Wytwarza liczne ogniste tornada i szarżuje naprzód, szybując. Tornada zbiegają się w centrum i łączą w jedno potężne tornado."
+  },
+  "EPalWazaID::Unique_Horus_Water_AquaStorm": {
+    "localized_name": "Fala feniksa",
+    "description": "Umiejętność wyłączna dla Faleris Aqua. Po przywołaniu ogromnego tornada, otacza swoje ciało wodą i szarżuje naprzód."
+  },
+  "EPalWazaID::Unique_IceCrocodile_SpitAttack": {
+    "localized_name": "Plująca furia",
+    "description": "Umiejętność wyłączna dla Munchill. Wypluwa trzy granaty, które nie zostały strawione i były chłodzone wewnątrz ciała. Czasem dorzuca coś jeszcze groźniejszego..."
+  },
+  "EPalWazaID::Unique_IceDeer_IceHorn": {
+    "localized_name": "Mrożąca szarża",
+    "description": "Umiejętność wyłączna dla Reindrix. Szarżuje na wroga z porożem spowitym lodem."
+  },
+  "EPalWazaID::Unique_IceHorse_IceBladeAttack": {
+    "localized_name": "Kryształowe skrzydło",
+    "description": "Umiejętność wyłączna dla Frostalliona. Pędzi naprzód, koncentrując mroźne powietrze wokół swoich skrzydeł, i rozcina wrogów lodowym ostrzem."
+  },
+  "EPalWazaID::Unique_IceNarwhal_JumpingHorn": {
+    "localized_name": "Potężne wynurzenie",
+    "description": "Umiejętność wyłączna dla gatunku Whalaska. Rusza przed siebie, po czym na moment nurkuje pod wodę, by następnie z impetem wyskoczyć wysoko w powietrze i zaatakować. W momencie wyskoku następuje eksplozja lodowego żywiołu."
+  },
+  "EPalWazaID::Unique_JetDragon_JumpBeam": {
+    "localized_name": "Świetlna kometa",
+    "description": "Umiejętność wyłączna dla Jetragon. Rozświetla skrzydła i wystrzeliwuje niezliczone wiązki energii, lecąc w stronę wroga. Wiązki eksplodują po trafieniu."
+  },
+  "EPalWazaID::Unique_KingAlpaca_BodyPress": {
+    "localized_name": "Królewskie uderzenie",
+    "description": "Umiejętność wyłączna dla Kingpaki. Wyskakuje wysoko w powietrze, po czym miażdży wroga swoim masywnym cielskiem."
+  },
+  "EPalWazaID::Unique_KingBahamut_AirCrash": {
+    "localized_name": "Potężne miażdżenie",
+    "description": "Umiejętność wyłączna dla Belzamuta Ryu. Po potężnym skoku mknie przez powietrze, gromadząc energię, by zadać niszczycielski cios."
+  },
+  "EPalWazaID::Unique_KingBahamut_ArmSmash": {
+    "localized_name": "Zderzenie siły",
+    "description": "Umiejętność wyłączna dla Blazamuta. Unosi i napina ramiona, po czym zderza je ze sobą, wywołując potężny wybuch w okolicy."
+  },
+  "EPalWazaID::Unique_Kirin_LightningTackle": {
+    "localized_name": "Wichura piorunów",
+    "description": "Umiejętność wyłączna dla Univolt. Wytwarza błyskawice wokół siebie, szarżując na przeciwnika."
+  },
+  "EPalWazaID::Unique_LeafMomonga_SomerSault": {
+    "localized_name": "Liściaste salto",
+    "description": "Umiejętność wyłączna dla Herbil. Przyjmuje postawę do walki, po czym pędzi na wroga i wykonuje salto w powietrzu."
+  },
+  "EPalWazaID::Unique_LegendDeer_RadiantPurge_Otomo": {
+    "localized_name": "Światło oczyszczenia",
+    "description": "Umiejętność wyłączna dla: Hartalis. Wzbija się w powietrze, koncentrując ogromną energię, po czym kieruje ją ku ziemi. Spadająca kula światła oczyszcza wszystko, co znajduje się na powierzchni."
+  },
+  "EPalWazaID::Unique_LegendDeer_RadiantWingRush": {
+    "localized_name": "Boskie skrzydło",
+    "description": "Umiejętność wyłączna dla: Hartalis. Wyskakuje do tyłu, tworząc na plecach świetliste skrzydła, po czym szarżuje na wroga z powietrza."
+  },
+  "EPalWazaID::Unique_LegendDeer_WarpPillarBurst": {
+    "localized_name": "Święty deszcz",
+    "description": "Umiejętność wyłączna dla: Hartalis. Na chwilę znika, po czym z nieba spada deszcz kolumn światła, obejmujący szeroki obszar wokół niego."
+  },
+  "EPalWazaID::Unique_LilyQueen_LilyHealing": {
+    "localized_name": "Obfite uzdrowienie",
+    "description": "Umiejętność wyłączna dla Lyleen. Dzięki uzdrawiającej mocy przywraca zdrowie wszystkim sojusznikom znajdującym się w pobliżu."
+  },
+  "EPalWazaID::Unique_LilyQueen_WindBarrier": {
+    "localized_name": "-",
+    "description": "-"
+  },
+  "EPalWazaID::Unique_Manticore_InfernoStrike": {
+    "localized_name": "Wulkaniczny kieł",
+    "description": "Umiejętność wyłączna dla Blazehowl. Z impetem rzuca się bezlitośnie na wroga, powodując ognistą eksplozję przy uderzeniu."
+  },
+  "EPalWazaID::Unique_MoonQueen_IceMoonBlade": {
+    "localized_name": "Błysk Seigetsu",
+    "description": "Umiejętność wyłączna dla Selyne. Wystrzeliwuje trzy błyskawiczne ostrza, jedno po drugim, nasycone potęgą księżyca."
+  },
+  "EPalWazaID::Unique_MoonQueen_MoonBeam": {
+    "localized_name": "Wiązka światła księżyca",
+    "description": "Umiejętność wyłączna dla Selyne. Magazynuje energię w księżycu na plecach, po czym wystrzeliwuje wiązkę w kształcie półksiężyca."
+  },
+  "EPalWazaID::Unique_MoonQueen_MoonBlade": {
+    "localized_name": "Ostrze Seigetsu",
+    "description": "Umiejętność wyłączna dla Selyne. Kolejno wystrzeliwuje dwa błyskawiczne ostrza nasycone potęgą księżyca."
+  },
+  "EPalWazaID::Unique_MysteryMask_LifeSteal": {
+    "localized_name": "Wysysanie duszy",
+    "description": "Umiejętność wyłączna dla Omascul. Nagle pojawia się obok wroga, chwytając go mocno ramionami, po czym wysysa z niego punkty życia."
+  },
+  "EPalWazaID::Unique_NaughtyCat_CatPress": {
+    "localized_name": "Kocia miazga",
+    "description": "Umiejętność wyłączna dla Grintale'a. Złowieszczo szczerzy zęby przed wyskokiem w powietrze i miażdży przeciwników swoim ciałem."
+  },
+  "EPalWazaID::Unique_NightBlueHorse_DeathStep": {
+    "localized_name": "Zabójczy krok",
+    "description": "Umiejętność wyłączna dla Starryon. Dezorientuje wrogów zwodniczymi ruchami i atakuje ostrymi rogami, zadając tnący cios."
+  },
+  "EPalWazaID::Unique_NightLady_FlameNightmare": {
+    "localized_name": "Płomienny walc",
+    "description": "Umiejętność wyłączna dla Bellanoir Libero. W rytmicznym tańcu wyczarowuje rozszerzające się pierścienie ognia, po czym wypuszcza upiorne płomienie, które ścigają wrogów."
+  },
+  "EPalWazaID::Unique_NightLady_WarpBeam": {
+    "localized_name": "Rozkwit koszmarów",
+    "description": "Umiejętność wyłączna dla Bellanoir Libero. Znika nagle, by zaraz potem pojawić się, wystrzeliwując grad promieni. Rozchodzą się one w powietrzu jak rozkwitający kwiat."
+  },
+  "EPalWazaID::Unique_NightLady_WarpBeam_Straight": {
+    "localized_name": "Promień koszmarów",
+    "description": "Umiejętność wyłączna dla Bellanoir. Nagle znika, by zaraz potem pojawić się z powrotem i zasypać wroga gradem promieni."
+  },
+  "EPalWazaID::Unique_OctopursGirl_InkJet": {
+    "localized_name": "Atramentowy strzał",
+    "description": "Umiejętność wyłączna dla Gloopie. Wypuszcza przed siebie chmurę atramentu, by ukryć swoją sylwetkę. Następnie uderza z zaskoczenia, wykonując silne pchnięcie głową."
+  },
+  "EPalWazaID::Unique_PinkCat_CatPunch": {
+    "localized_name": "Lawina ciosów",
+    "description": "Umiejętność wyłączna dla Cattiva. Ściga wrogów, wymachując obiema rękami i zadając serię ciosów."
+  },
+  "EPalWazaID::Unique_Plesiosaur_LongBreath": {
+    "localized_name": "Długie zioniecie",
+    "description": "Umiejętność wyłączna dla Braloha. Od długiej szyi aż po sam koniec pyska stopniowo rozprasza oddech wypełniony mocą roślin."
+  },
+  "EPalWazaID::Unique_PoseidonOrca_TorrentLaser": {
+    "localized_name": "Morski laser",
+    "description": "Umiejętność wyłączna dla Neptilius. Unosi się lekko, gromadząc wodę przy pysku. Następnie wypuszcza trzy krzyżowe cięcia stumieniem pod wysokim ciśnieniem. W przeciętych miejscach pojawiają się szczeliny, z których tryska woda."
+  },
+  "EPalWazaID::Unique_PurpleSpider_SpiderRaid": {
+    "localized_name": "Atak pajęczej sieci",
+    "description": "Umiejętność wyłączna dla Tarantriss. Wypluwa kulę pajęczej nici, oplatując trafiony cel. Następnie pędzi w jego stronę i zadaje trzy cięcia, by dopełnić dzieła."
+  },
+  "EPalWazaID::Unique_QueenBee_SpinLance": {
+    "localized_name": "Wirujący kostur",
+    "description": "Umiejętność wyłączna dla Elizabee. Kumuluje moc w swoim kosturze i uwalnia ją w wirze energii."
+  },
+  "EPalWazaID::Unique_RedArmorBird_TriplePeck": {
+    "localized_name": "Szarżujący dziób",
+    "description": "Umiejętność wyłączna dla Ragnahawk. Posuwając się naprzód z trzepotem skrzydeł, uderza dziobem i wznieca płomienie wokół siebie — z przodu, po lewej i prawej — wywołując niewielką eksplozję."
+  },
+  "EPalWazaID::Unique_RobinHood_BowSnipe": {
+    "localized_name": "Skoncentrowany strzał",
+    "description": "Umiejętność wyłączna dla Robinquilla. Celuje, naciągając łuk, po czym wypuszcza potężny strzał w stronę wroga."
+  },
+  "EPalWazaID::Unique_Ronin_Iai": {
+    "localized_name": "Iaigiri",
+    "description": "Umiejętność wyłączna dla Bushi. Chwyta za miecz i w mgnieniu oka pojawia się przed wrogiem, zadając błyskawiczny cios przy dobywaniu miecza."
+  },
+  "EPalWazaID::Unique_SaintCentaur_OneSpearRushes": {
+    "localized_name": "Pchnięcie włóczni",
+    "description": "Umiejętność wyłączna dla Paladius. Szarżuje naprzód, otoczony świętą mocą, z włócznią wysuniętą przed siebie. Tarcza w drugiej dłoni blokuje wszystkie ataki podczas szarży."
+  },
+  "EPalWazaID::Unique_SakuraSaurus_SideTackle": {
+    "localized_name": "Muskularny cios",
+    "description": "Umiejętność wyłączna dla Broncherry'ego. Ustawia się bokiem i z impetem uderza w stojących przed nim wrogów, wyrzucając ich wysoko w powietrze."
+  },
+  "EPalWazaID::Unique_ScorpionMan_Uppercut": {
+    "localized_name": "Cios z góry",
+    "description": "Umiejętność wyłączna dla Prixtera. Błyskawicznie skraca dystans do wroga, po czym macha szczypcami w górę z pełną siłą."
+  },
+  "EPalWazaID::Unique_SheepBall_Roll": {
+    "localized_name": "Turlaśny atak",
+    "description": "Umiejętność wyłączna dla SheepBall. Zwija się w kulkę, tocząc się po wrogach na swojej drodze. Po zakończeniu ataku kręci mu się w głowie i jest niezdolny do ruchu."
+  },
+  "EPalWazaID::Unique_SifuDog_Counter": {
+    "localized_name": "Postawa harmonii",
+    "description": "Umiejętność wyłączna dla Dogena. Przyjmuje postawę aiki. W tej pozycji neutralizuje każdy atak, natychmiast zbliża się do wroga i kontratakuje potężnym uderzeniem dłonią."
+  },
+  "EPalWazaID::Unique_SnowTigerBeastman_SnowImpact": {
+    "localized_name": "Lodowcowe zderzenie",
+    "description": "Umiejętność wyłączna dla Bastigor. Wydaje potężny ryk i wyskakuje w powietrze. Następnie wbija obie ręce w ziemię, tworząc ogromne lodowe pęknięcie. Przekazuje energię w głąb gruntu, co ostatecznie prowadzi do potężnej eksplozji lodowej mocy."
+  },
+  "EPalWazaID::Unique_SnowTigerBeastman_TrampleSlash": {
+    "localized_name": "Szpon mrozu",
+    "description": "Umiejętność wyłączna dla Bastigor. Tupie z impetem w ziemię, tworząc przed sobą lodową szczelinę. Następnie błyskawicznie doskakuje i zadaje cięcie prawą ręką."
+  },
+  "EPalWazaID::Unique_SoldierBee_NeedleLance": {
+    "localized_name": "Szarża igłą",
+    "description": "Umiejętność wyłączna dla Beegarde. Szarżuje na wroga z zawrotną prędkością, zadając końcowe pchnięcie włócznią."
+  },
+  "EPalWazaID::Unique_StuffedShark_HiddenWeapon": {
+    "localized_name": "Maniak spustowy",
+    "description": "Umiejętność wyłączna dla gatunku Finsider. Wyciąga z pyska dwa pistolety wodne i oddaje sześć strzałów, na przemian z lewej i prawej strony. Na koniec łączy oba pistolety i wystrzeliwuje potężny, skondensowany pocisk."
+  },
+  "EPalWazaID::Unique_TentacleTurtle_HydroSpin": {
+    "localized_name": "Wir wodny",
+    "description": "Umiejętność wyłączna dla Turtacle. Wykorzystując siłę napędową generowaną przez silnik odrzutowy, leci w kierunku wroga, wirując z dużą prędkością."
+  },
+  "EPalWazaID::Unique_ThunderBird_ThunderStorm": {
+    "localized_name": "Pikująca błyskawica",
+    "description": "Umiejętność wyłączna dla Beakon. Najpierw razi miejsce wroga błyskawicą. Następnie, szybując naprzód, zrzuca błyskawice na prawo i lewo."
+  },
+  "EPalWazaID::Unique_ThunderDog_InazumaShorai": {
+    "localized_name": "Przyzwanie błyskawicy",
+    "description": "Umiejętność wyłączna dla Rayhound. Przywołuje przed sobą kolejne błyskawice, po czym z zawrotną prędkością szarżuje przez luki między nimi."
+  },
+  "EPalWazaID::Unique_ThunderDragonMan_NumerousSwordAttack": {
+    "localized_name": "Polikeraunos",
+    "description": "Umiejętność wyłączna dla Orserka. Przywołuje liczne włócznie gromu i ciska nimi we wroga. Pierwsza z nich jest przepełniona mocą błyskawicy i wybucha po kilku sekundach."
+  },
+  "EPalWazaID::Unique_ThunderDragonMan_ThunderSwordAttack": {
+    "localized_name": "Keraunos",
+    "description": "Umiejętność wyłączna dla Orserk. Przywołuje włócznię błyskawic, skacząc w powietrze, po czym rzuca ją w stronę wroga."
+  },
+  "EPalWazaID::Unique_TropicalOstrich_DashKick": {
+    "localized_name": "Kop z rozpędu",
+    "description": "Umiejętność wyłączna dla Palumba. Biegnie, by nabrać rozpędu, po czym wymierza przeciwnikowi potężne kopnięcie z wyskoku."
+  },
+  "EPalWazaID::Unique_Umihebi_Fire_FireWindingTackle": {
+    "localized_name": "Magmowy wąż",
+    "description": "Umiejętność wyłączna dla Jormuntide Ignis. Wydając ryk, szarżuje w stronę wroga, w trakcie skręcając swoje płonące ciało."
+  },
+  "EPalWazaID::Unique_Umihebi_WindingTackle": {
+    "localized_name": "Pełznące uderzenie",
+    "description": "Umiejętność wyłączna dla Jormuntide. Wydając ryk, szarżuje w stronę wroga, wyginając swoje mokre ciało w wirującym ataku."
+  },
+  "EPalWazaID::Unique_VolcanicMonster_Ice_IceAttack": {
+    "localized_name": "Mroźny wybuch",
+    "description": "Umiejętność wyłączna dla Reptyro Cryst. Unosi przednie łapy i uderza nimi w ziemię, wywołując lodowy wybuch pod wrogami. Jednocześnie bombarduje ich śnieżnymi kulami z powietrza."
+  },
+  "EPalWazaID::Unique_VolcanicMonster_MagmaAttack": {
+    "localized_name": "Wybuch wulkaniczny",
+    "description": "Umiejętność wyłączna dla Reptyro. Unosi przednie łapy i uderza nimi w ziemię, wywołując erupcje wulkaniczne pod wrogami. Równocześnie zasypuje ich lawiną wulkanicznych bomb z powietrza."
+  },
+  "EPalWazaID::Unique_WeaselDragon_FlyingTackle": {
+    "localized_name": "Uderzenie rakietowe",
+    "description": "Umiejętność wyłączna dla Chilleta. Zbiera odrobinę sił i skacze naprzód. Przy lądowaniu zawsze zaciska oczy ze strachu."
+  },
+  "EPalWazaID::Unique_Werewolf_Ice_SnowScratch": {
+    "localized_name": "Śnieżny pazur",
+    "description": "Umiejętność wyłączna dla WereWolf_Ice. Skacze naprzód i zadaje dwa ciosy wściekłymi pazurami nasyconymi lodową energią."
+  },
+  "EPalWazaID::Unique_Werewolf_Scratch": {
+    "localized_name": "Skaczący pazur",
+    "description": "Umiejętność wyłączna dla WereWolf. Skacze naprzód i zadaje dwa ciosy wściekłymi pazurami nasyconymi mroczną energią."
+  },
+  "EPalWazaID::Unique_WhiteDeer_HolyPillar": {
+    "localized_name": "Święta Nova",
+    "description": "Umiejętność wyłączna dla Celesdir. Po wyzwoleniu eksplozji świętego światła na obszarze przed sobą, kroczy naprzód, emanując blaskiem dookoła."
+  },
+  "EPalWazaID::Unique_WhiteShieldDragon_ShieldTackle": {
+    "localized_name": "Szarża Aegis",
+    "description": "Umiejętność wyłączna dla Silvegis. Wznosi tarczę przed sobą, która osłabia wszystkie typy ataków, po czym szarżuje naprzód, miażdżąc wroga."
+  },
+  "EPalWazaID::Unique_WhiteTiger_Ground_IronScratch": {
+    "localized_name": "Kamienny pazur",
+    "description": "Umiejętność wyłączna dla Cryolinx Terra. Najpierw uderza pazurami, potem tnie po raz drugi, a kończy potężnym ciosem całym ciałem. Podczas zamachu pazurami wyrzuca przed siebie kamienie rozchodzące się na kształt wachlarza."
+  },
+  "EPalWazaID::Unique_WhiteTiger_IceScratch": {
+    "localized_name": "Pazur zamieci",
+    "description": "Umiejętność wyłączna dla Cryolinx. Najpierw uderza pazurami, potem wykonuje drugie cięcie, a kończy potężnym ciosem całym ciałem. Podczas zamachu pazurami wyrzuca przed siebie filary lodu w kształcie wachlarza."
+  },
+  "EPalWazaID::Unique_WingGolem_RoundCutter": {
+    "localized_name": "Tnący pierścień",
+    "description": "Umiejętność wyłączna dla Knocklema. Wykonuje potężny zamach i wyrzuca pierścień z pleców. Pierścień leci zataczając krąg."
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Small_DemonEyeCharge": {
+    "localized_name": "Szarża okiem",
+    "description": "Umiejętność wyłączna dla: Demoniczne oko. Szarżuje w stronę wroga. Odbija się po uderzeniu w ziemię lub ścianę."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Dark": {
+    "localized_name": "Miażdżenie szlamem (mroczne)",
+    "description": "Umiejętność wyłączna dla: Fioletowy szlam. Wykonuje skok w stronę przeciwnika i wykonuje atak."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Fire": {
+    "localized_name": "Miażdżenie szlamem (ogniste)",
+    "description": "Umiejętność wyłączna dla: Czerwony szlam. Wykonuje skok w stronę przeciwnika i wykonuje atak."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Leaf": {
+    "localized_name": "Miażdżenie szlamem (roślinne)",
+    "description": "Umiejętność wyłączna dla: Zielony szlam. Wykonuje skok w stronę przeciwnika i wykonuje atak."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Normal": {
+    "localized_name": "Miażdżenie szlamem (neutralne)",
+    "description": "Umiejętność wyłączna dla: Świecący szlam. Wykonuje skok w stronę przeciwnika i wykonuje atak."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Rainbow": {
+    "localized_name": "Miażdżenie szlamem (tęczowe)",
+    "description": "Umiejętność wyłączna dla: Tęczowy szlam. Wykonuje skok w stronę przeciwnika i wykonuje atak."
+  },
+  "EPalWazaID::Unique_YakushimaMonster001_SlimePress_Water": {
+    "localized_name": "Miażdżenie szlamem (wodne)",
+    "description": "Umiejętność wyłączna dla: Niebieski szlam. Wykonuje skok w stronę przeciwnika i wykonuje atak."
+  },
+  "EPalWazaID::Unique_YakushimaMonster002_SwordCharge": {
+    "localized_name": "Szarża z mieczem",
+    "description": "Umiejętność wyłączna dla: Zaklęty miecz. Wykonuje pchnięcie w kierunku wroga."
+  },
+  "EPalWazaID::Unique_YakushimaMonster003_BatCharge": {
+    "localized_name": "Atak nietoperza",
+    "description": "Umiejętność wyłączna dla: Nietoperz jaskiniowy. Wykorzystując całe ciało, rzuca się na przeciwnika. Odbija się po uderzeniu w ziemię lub ścianę."
+  },
+  "EPalWazaID::Unique_Yakushima_EyeTossin": {
+    "localized_name": "Szarża przenikliwego spojrzenia",
+    "description": "Umiejętność wyłączna dla: Oko Cthulhu. Wielokrotnie szarżuje w stronę wroga."
+  },
+  "EPalWazaID::Unique_Yakushima_MouthTossin": {
+    "localized_name": "Błyskawiczna szarża",
+    "description": "Umiejętność wyłączna dla: Oko Cthulhu. Wielokrotnie szarżuje w stronę wroga z ogromną prędkością."
+  },
+  "EPalWazaID::Unique_Yakushima_SummonServant": {
+    "localized_name": "Przywołanie sługi",
+    "description": "Umiejętność wyłączna dla: Oko Cthulhu. Przywołuje czterech sługów, którzy szarżują na wrogów, zadając obrażenia przy zderzeniu. Znikają po trafieniu przez przeciwnika lub upływie określonego czasu."
+  },
+  "EPalWazaID::Unique_Yeti_Grass_GrassBall": {
+    "localized_name": "Trawiasta kula",
+    "description": "Umiejętność wyłączna dla Wumpo Botan. Toczy kulę z trawy, poruszając się naprzód, a gdy ta stanie się wystarczająco duża, wyrzuca ją, powodując wybuch."
+  },
+  "EPalWazaID::Unique_Yeti_SnowBall": {
+    "localized_name": "Kula śnieżna",
+    "description": "Umiejętność wyłączna dla Wumpo. Lepiąc kulę śnieżną, rusza naprzód, a gdy ta stanie się wystarczająco duża, wyrzuca ją, powodując wybuch."
+  },
+  "EPalWazaID::WallSplash": {
+    "localized_name": "Wodna zasłona",
+    "description": "Nieustannie tworzy ściany z kolumn wodnych w miejscu wroga."
+  },
+  "EPalWazaID::WaterBall": {
+    "localized_name": "Wodny wybuch",
+    "description": "Tworzy gigantyczną kulę wody i ciska nią we wroga."
+  },
+  "EPalWazaID::WaterGun": {
+    "localized_name": "Pistolet wodny",
+    "description": "Ciska kulą wody prosto we wroga."
+  },
+  "EPalWazaID::Weapon_Use": {
+    "localized_name": "Użycie broni",
+    "description": "Atak z użyciem posiadanej broni."
+  },
+  "EPalWazaID::WindCutter": {
+    "localized_name": "Cięcie wiatru",
+    "description": "Wystrzeliwuje pędzące ostrze wiatru, które leci prosto we wroga."
+  },
+  "EPalWazaID::WindEdge": {
+    "localized_name": "Ostrze wiatru",
+    "description": "Wystrzeliwuje podmuchy wiatru o kształcie ostrzy, które rozchodzą się jak wachlarz."
+  }
+}

@@ -8,6 +8,8 @@
 	import { assetLoader, calculateFilters } from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	let { skill, onSkillUpdate } = $props<{
 		skill: string | undefined;
@@ -79,7 +81,7 @@
 		const result = await modal.showModal<string>(SkillSelectModal, {
 			type: 'Passive',
 			value: skill,
-			title: 'Select Passive Skill',
+			title: m.select_entity({ entity: c.passiveSkill }),
 			pal: appState.selectedPal
 		});
 		if (!result) return;

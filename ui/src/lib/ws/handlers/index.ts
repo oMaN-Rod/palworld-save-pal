@@ -1,6 +1,7 @@
 import { appStateHandlers } from './appStateHandler';
 import { gpsHandlers } from './gpsHandler';
 import { guildHandlers } from './guildHandler';
+import { lazyLoadHandlers } from './lazyLoadHandler';
 import { palHandlers } from './palHandler';
 import { playerHandlers } from './playerHandler';
 import { presetHandlers } from './presetHandler';
@@ -15,5 +16,6 @@ export const handlers = [
 	...guildHandlers,
 	...presetHandlers,
 	...gpsHandlers,
-	...upsHandlers
+	...upsHandlers,
+	...lazyLoadHandlers
 ];

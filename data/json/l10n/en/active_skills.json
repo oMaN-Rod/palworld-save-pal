@@ -279,6 +279,10 @@
     "localized_name": "Psycho Gravity",
     "description": "Utilizes psychokinesis to grab enemies before flinging them to the ground from above."
   },
+  "EPalWazaID::RadiantBarrage": {
+    "localized_name": "Radiant Barrage",
+    "description": "Unleashes a sphere of light that slowly tracks down an enemy. As it nears its target, it splits into countless light bullets that strike all at once."
+  },
   "EPalWazaID::RaidCutter": {
     "localized_name": "Raid Cutter",
     "description": "Shoots countless wind swords that fly straight towards the enemy."
@@ -475,6 +479,10 @@
     "localized_name": "Surfing Slam",
     "description": null
   },
+  "EPalWazaID::Unique_BluePlatypus_Toboggan_Fire": {
+    "localized_name": "Fire Tackle",
+    "description": null
+  },
   "EPalWazaID::Unique_BlueThunderHorse_FlashDash": {
     "localized_name": "Bolt Blink",
     "description": "Azurmane's exclusive skill. Moves with the speed of lightning, engulfing everything in its path."
@@ -612,7 +620,7 @@
     "description": "Mossanda's exclusive skill. Winds up its right arm before striking an enemy with a devastating punch."
   },
   "EPalWazaID::Unique_GrassRabbitMan_GrassRoundKick": {
-    "localized_name": "Spinning Roundhouse",
+    "localized_name": "Leaping Roundhouse",
     "description": "Verdash's exclusive skill. While jumping forward, it sweeps the surroundings with a high-speed spinning kick."
   },
   "EPalWazaID::Unique_Grassmammoth_Earthquake": {
@@ -683,6 +691,18 @@
     "localized_name": "Konoha Flip",
     "description": "Herbil's exclusive skill. After a brief moment of preparation, charges at the enemy at high speed, finishing with a flip."
   },
+  "EPalWazaID::Unique_LegendDeer_RadiantPurge_Otomo": {
+    "localized_name": "Purifying Light",
+    "description": "Hartalis' exclusive skill. Leaps high into the air, condensing immense energy into a descending sphere of light. When it strikes the ground, it purifies all on the ground below."
+  },
+  "EPalWazaID::Unique_LegendDeer_RadiantWingRush": {
+    "localized_name": "Divine Wing",
+    "description": "Hartalis' exclusive skill. Leaps back and sprouts wings of light, then dives toward the enemy."
+  },
+  "EPalWazaID::Unique_LegendDeer_WarpPillarBurst": {
+    "localized_name": "Sacred Rain",
+    "description": "Hartalis' exclusive skill. Fades from sight, then calls down a massive barrage of light pillars centered on its position."
+  },
   "EPalWazaID::Unique_LilyQueen_LilyHealing": {
     "localized_name": "Bountiful Protection",
     "description": "Lyleen's exclusive skill. Restores health to all allies within range using the power of healing."
@@ -717,7 +737,7 @@
   },
   "EPalWazaID::Unique_NightBlueHorse_DeathStep": {
     "localized_name": "Lethal Step",
-    "description": "Starryon's exclusive skill. Confuses enemies with flickering steps and launches slashing attack with its sharp horns."
+    "description": "Starryon's exclusive skill. Confuses enemies with flickering steps and launches slashing attack with its sharp horn."
   },
   "EPalWazaID::Unique_NightLady_FlameNightmare": {
     "localized_name": "Flame Waltz",
@@ -942,6 +962,10 @@
   "EPalWazaID::WaterGun": {
     "localized_name": "Aqua Gun",
     "description": "Hurls a ball of water straight at an enemy."
+  },
+  "EPalWazaID::Weapon_Use": {
+    "localized_name": "Use Weapon",
+    "description": "Attack with held weapon."
   },
   "EPalWazaID::WindCutter": {
     "localized_name": "Wind Cutter",

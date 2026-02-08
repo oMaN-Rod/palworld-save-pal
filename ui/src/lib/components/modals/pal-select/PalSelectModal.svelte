@@ -8,8 +8,10 @@
 	import { staticIcons } from '$types/icons';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
-	let { title = 'Select a Pal', closeModal } = $props<{
+	let { title = m.select_entity({ entity: c.pal }), closeModal } = $props<{
 		title?: string;
 		closeModal: (value: any) => void;
 	}>();
@@ -59,11 +61,11 @@
 	}
 
 	function getIconPath(option: SelectOption) {
-		const palData = palsData.getByKey(option.value);
+		const palData = palsData.getByKey(option.value as string);
 		if (palData && palData.is_pal) {
-			return assetLoader.loadMenuImage(option.value);
+			return assetLoader.loadMenuImage(option.value as string);
 		} else if (palData && !palData.is_pal) {
-			return assetLoader.loadMenuImage(option.value, false);
+			return assetLoader.loadMenuImage(option.value as string, false);
 		} else {
 			return staticIcons.sadIcon;
 		}
@@ -79,7 +81,7 @@
 		<h3 class="h3">{title}</h3>
 		<Combobox options={selectOptions} bind:value={selectedPal}>
 			{#snippet selectOption(option)}
-				{@const palData = palsData.getByKey(option.value)}
+				{@const palData = palsData.getByKey(option.value as string)}
 				<div class="flex items-center space-x-2">
 					<img src={getIconPath(option)} alt={option.label} class="h-8 w-8" />
 					<div class="grow">
@@ -98,7 +100,7 @@
 				</div>
 			{/snippet}
 		</Combobox>
-		<Input label="Nickname" inputClass="grow" bind:value={nickname} />
+		<Input label={m.nickname()} inputClass="grow" bind:value={nickname} />
 
 		<div class="mt-2 flex flex-row items-center space-x-2">
 			<Tooltip position="bottom">
@@ -110,7 +112,7 @@
 					<Save />
 				</button>
 				{#snippet popup()}
-					<span>Save</span>
+					<span>{c.save}</span>
 				{/snippet}
 			</Tooltip>
 			<Tooltip position="bottom">
@@ -118,7 +120,7 @@
 					<X />
 				</button>
 				{#snippet popup()}
-					<span>Cancel</span>
+					<span>{m.cancel()}</span>
 				{/snippet}
 			</Tooltip>
 		</div>

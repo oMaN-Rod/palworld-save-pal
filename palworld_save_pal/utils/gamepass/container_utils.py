@@ -302,7 +302,8 @@ def save_modified_gamepass(
             except ValueError:
                 logger.error("Invalid player UUID in key: %s", key)
                 continue
-            player_data = player_sav_data[player_uuid]["sav"]
+            if player_uuid in player_sav_data:
+                player_data = player_sav_data[player_uuid]["sav"]
         elif "_dps" in key:
             try:
                 player_uuid = uuid.UUID(key.split("-")[1].replace("_dps", ""))

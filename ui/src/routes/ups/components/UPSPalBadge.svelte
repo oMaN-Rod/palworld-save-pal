@@ -12,6 +12,8 @@
 	} from '$states';
 	import { goto } from '$app/navigation';
 	import type { UPSPal, Pal, AddToCollectionResult } from '$types';
+	import * as m from '$i18n/messages';
+	import { c } from '$utils/commonTranslations';
 
 	let { upsPal, onSelect } = $props<{
 		upsPal: UPSPal;
@@ -37,27 +39,27 @@
 
 	const menuItems = $derived([
 		{
-			label: 'Clone Pal',
+			label: m.clone_selected_pal({ pal: c.pal }),
 			onClick: () => handleClonePal(),
 			icon: Copy
 		},
 		{
-			label: 'Export',
+			label: m.export(),
 			onClick: () => handleExport(),
 			icon: Upload
 		},
 		{
-			label: 'Add to Collection',
+			label: m.add_to_collection(),
 			onClick: () => handleAddToCollection(),
 			icon: FolderPlus
 		},
 		{
-			label: 'Manage Tags',
+			label: m.edit_entity({ entity: c.tags }),
 			onClick: () => handleManageTags(),
 			icon: Tag
 		},
 		{
-			label: 'Delete from UPS',
+			label: m.delete_entity({ entity: m.ups() }),
 			onClick: () => handleDeleteFromUPS(),
 			icon: Trash
 		}
@@ -91,9 +93,7 @@
 			__ups_id: upsPal.id
 		};
 		appState.selectedPal = palWithMetadata;
-		nav.activeTab = 'pal';
-		// Navigate to edit page
-		goto('/edit');
+		goto('/edit/pal');
 	}
 
 	function handleKeydown(event: KeyboardEvent) {
@@ -106,10 +106,10 @@
 
 	async function handleClonePal() {
 		const confirmed = await modal.showConfirmModal({
-			title: 'Clone Pal',
-			message: `Are you sure you want to clone ${upsPal.nickname || upsPal.character_id}?`,
-			confirmText: 'Clone',
-			cancelText: 'Cancel'
+			title: m.clone_selected_pal({ pal: c.pal }),
+			message: m.delete_entity_by_name_confirm({ name: upsPal.nickname || upsPal.character_id }),
+			confirmText: m.clone_selected_pal({ pal: '' }),
+			cancelText: m.cancel()
 		});
 
 		if (confirmed) {
@@ -120,7 +120,7 @@
 	async function handleExport() {
 		// @ts-ignore
 		const result = await modal.showModal<{ target: string; playerId?: string }>(ExportPalModal, {
-			title: 'Export Pal',
+			title: m.export_pals({ pals: c.pal, count: 1 }),
 			pals: [upsPal]
 		});
 
@@ -129,13 +129,16 @@
 			try {
 				await upsState.exportPal(upsPal.id, target, result.playerId);
 				toast.add(
-					`Successfully exported ${upsPal.nickname || upsPal.character_id} to ${result.target.toUpperCase()}`,
-					'Success',
+					m.successfully_cloned_pal_to_entity({
+						pal: upsPal.nickname || upsPal.character_id,
+						entity: result.target.toUpperCase()
+					}),
+					m.success(),
 					'success'
 				);
 			} catch (error) {
 				console.error('Export failed:', error);
-				toast.add('Export failed. Please try again.', 'Error', 'error');
+				toast.add(m.import_failed(), m.error(), 'error');
 			}
 		}
 	}
@@ -143,7 +146,7 @@
 	async function handleAddToCollection() {
 		// @ts-ignore
 		const result = await modal.showModal<AddToCollectionResult>(AddToCollectionModal, {
-			title: 'Add to Collection',
+			title: m.add_to_collection(),
 			pals: [upsPal]
 		});
 
@@ -154,13 +157,17 @@
 				await upsState.loadAll(); // Refresh to update collection counts
 
 				if (result.removeFromCollection) {
-					toast.add('Removed pal from collection', 'Success', 'success');
+					toast.add(
+						m.removed_pals_from_collections({ pals: c.pal, count: 1 }),
+						m.success(),
+						'success'
+					);
 				} else {
-					toast.add('Added pal to collection', 'Success', 'success');
+					toast.add(m.moved_pals_to_collection({ pals: c.pal, count: 1 }), m.success(), 'success');
 				}
 			} catch (error) {
 				console.error('Collection update failed:', error);
-				toast.add('Failed to update collection. Please try again.', 'Error', 'error');
+				toast.add(m.import_failed(), m.error(), 'error');
 			}
 		}
 	}
@@ -168,7 +175,7 @@
 	async function handleManageTags() {
 		// @ts-ignore
 		const result = await modal.showModal<string[]>(EditTagsModal, {
-			title: 'Manage Tags',
+			title: m.edit_entity({ entity: c.tags }),
 			pals: [upsPal]
 		});
 
@@ -176,20 +183,20 @@
 			try {
 				await upsState.updatePal(upsPal.id, { tags: result });
 				await upsState.loadAll(); // Refresh to update available tags
-				toast.add('Updated pal tags', 'Success', 'success');
+				toast.add(m.updated_tags_for_pals({ pals: c.pal, count: 1 }), m.success(), 'success');
 			} catch (error) {
 				console.error('Tag update failed:', error);
-				toast.add('Failed to update tags. Please try again.', 'Error', 'error');
+				toast.add(m.import_failed(), m.error(), 'error');
 			}
 		}
 	}
 
 	async function handleDeleteFromUPS() {
 		const confirmed = await modal.showConfirmModal({
-			title: 'Delete from UPS',
-			message: `Are you sure you want to delete ${upsPal.nickname || upsPal.character_id} from Universal Pal Storage? This action cannot be undone.`,
-			confirmText: 'Delete',
-			cancelText: 'Cancel'
+			title: m.delete_entity({ entity: m.ups() }),
+			message: m.delete_entity_by_name_confirm({ name: upsPal.nickname || upsPal.character_id }),
+			confirmText: m.delete(),
+			cancelText: m.cancel()
 		});
 
 		if (confirmed) {

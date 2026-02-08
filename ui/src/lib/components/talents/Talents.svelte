@@ -3,6 +3,8 @@
 	import { EntryState, type Pal } from '$types';
 	import { Input } from '$components/ui';
 	import { getAppState } from '$states';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	let {
 		pal = $bindable()
@@ -36,7 +38,7 @@
 </script>
 
 <div class="grid grid-cols-[80px_1fr_auto] items-center gap-2">
-	<span>HP</span>
+	<span>{m.hp()}</span>
 	<Slider
 		classes="grow"
 		height="h-2"
@@ -51,7 +53,7 @@
 	/>
 	<Input type="number" inputClass="h-8 p-1" value={hp[0]} onchange={handleUpdateHp} min={0} {max} />
 
-	<span>Attack</span>
+	<span>{m.attack()}</span>
 	<Slider
 		height="h-2"
 		meterBg="bg-red-500"
@@ -72,7 +74,7 @@
 		{max}
 	/>
 
-	<span>Defense</span>
+	<span>{m.defense()}</span>
 	<Slider
 		height="h-2"
 		meterBg="bg-primary-500"

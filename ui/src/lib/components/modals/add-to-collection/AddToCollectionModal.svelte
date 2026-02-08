@@ -5,9 +5,11 @@
 	import { focusModal } from '$utils/modalUtils';
 	import { getUpsState } from '$states';
 	import type { SelectOption, UPSPal } from '$types';
+	import * as m from '$i18n/messages';
+	import { c, p } from '$lib/utils/commonTranslations';
 
 	let {
-		title = 'Add to Collection',
+		title = m.add_to_collection(),
 		message = '',
 		pals = [],
 		closeModal
@@ -115,7 +117,7 @@
 		<div class="space-y-4">
 			<!-- Show pal count -->
 			<p class="text-surface-600 dark:text-surface-400 text-sm">
-				Managing collection for {pals.length} selected pal{pals.length > 1 ? 's' : ''}
+				{m.manage_collection_for_pals({ count: pals.length, pals: c.pals })}
 			</p>
 
 			<!-- Show current collection status -->
@@ -123,14 +125,14 @@
 				<div class="bg-surface-100 dark:bg-surface-800 rounded p-3 text-sm">
 					{#if commonCollection}
 						{@const collection = upsState.collections.find((c) => c.id === commonCollection)}
-						<p class="mb-1 font-medium">Current Collection:</p>
+						<p class="mb-1 font-medium">{m.current_collection()}:</p>
 						<p class="text-surface-600 dark:text-surface-400">
-							{collection ? collection.name : 'Unknown Collection'}
+							{collection ? collection.name : m.unknown_collection()}
 						</p>
 					{:else}
-						<p class="mb-1 font-medium">Mixed Collections:</p>
+						<p class="mb-1 font-medium">{m.mixed_collections()}:</p>
 						<p class="text-surface-600 dark:text-surface-400">
-							Selected pals are in different collections or some have no collection
+							{m.mixed_collections_message({ pals: c.pals })}
 						</p>
 					{/if}
 				</div>
@@ -139,10 +141,10 @@
 			<!-- Collection Selection -->
 			<div>
 				<div class="mb-2 flex items-center justify-between">
-					<span class="text-sm font-medium">Collection</span>
+					<span class="text-sm font-medium">{m.collection({ count: 1 })}</span>
 					{#if !isCreatingCollection}
 						<TooltipButton
-							popupLabel="Create New Collection"
+							popupLabel={m.create_new_collection()}
 							onclick={() => (isCreatingCollection = true)}
 							buttonClass="bg-primary-500 hover:bg-primary-600"
 						>
@@ -156,7 +158,7 @@
 						<Combobox
 							bind:value={selectedCollectionId}
 							options={collectionOptions}
-							placeholder="Select Collection"
+							placeholder={m.select_entity({ entity: m.collection({ count: 1 }) })}
 							inputClass="w-full"
 						/>
 						<button
@@ -164,7 +166,7 @@
 							onclick={() => (selectedCollectionId = undefined)}
 							class="text-sm text-red-500 hover:text-red-600"
 						>
-							Remove from collection
+							{m.remove_from_collection()}
 						</button>
 					</div>
 				{:else}
@@ -172,13 +174,13 @@
 						<Input
 							type="text"
 							bind:value={newCollectionName}
-							placeholder="Collection name"
+							placeholder={m.collection_name()}
 							inputClass="w-full"
 						/>
 						<Input
 							type="text"
 							bind:value={newCollectionDescription}
-							placeholder="Description (optional)"
+							placeholder={m.description_optional()}
 							inputClass="w-full"
 						/>
 						<div class="flex gap-2">
@@ -188,14 +190,14 @@
 								class="rounded bg-green-500 px-3 py-1 text-sm text-white hover:bg-green-600"
 								disabled={!newCollectionName.trim()}
 							>
-								Create
+								{m.create()}
 							</button>
 							<button
 								type="button"
 								onclick={cancelCreateCollection}
 								class="rounded bg-gray-500 px-3 py-1 text-sm text-white hover:bg-gray-600"
 							>
-								Cancel
+								{m.cancel()}
 							</button>
 						</div>
 					</div>
@@ -205,17 +207,17 @@
 			<!-- Show what will happen -->
 			{#if selectedCollectionId !== commonCollection}
 				<div class="bg-surface-100 dark:bg-surface-800 rounded p-3 text-sm">
-					<p class="mb-2 font-medium">Changes:</p>
+					<p class="mb-2 font-medium">{m.changes()}:</p>
 					{#if selectedCollectionId === undefined}
 						<p class="text-red-600 dark:text-red-400">
-							Remove all selected pals from their collections
+							{m.remove_all_from_collections(p.pals)}
 						</p>
 					{:else}
 						{@const targetCollection = upsState.collections.find(
 							(c) => c.id === selectedCollectionId
 						)}
 						<p class="text-green-600 dark:text-green-400">
-							Move all selected pals to "{targetCollection?.name || 'Unknown'}"
+							{m.move_all_to_collection({ pals: c.pals, name: targetCollection?.name || m.unknown() })}
 						</p>
 					{/if}
 				</div>
@@ -230,7 +232,7 @@
 				class="bg-surface-500 hover:bg-surface-600 flex items-center gap-2 rounded-md px-4 py-2 text-white"
 			>
 				<X class="h-4 w-4" />
-				Cancel
+				{m.cancel()}
 			</button>
 			<button
 				type="button"
@@ -240,7 +242,8 @@
 				disabled={isCreatingCollection}
 			>
 				<Save class="h-4 w-4" />
-				{selectedCollectionId === undefined ? 'Remove' : 'Move'} to Collection
+				{selectedCollectionId === undefined ? m.remove() : m.move()}
+				{m.to_collection()}
 			</button>
 		</div>
 	</Card>

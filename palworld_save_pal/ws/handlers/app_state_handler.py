@@ -18,25 +18,30 @@ async def sync_app_state_handler(_: SyncAppStateMessage, ws: WebSocket):
         logger.warning("No save file loaded")
         return
 
+    # Use summaries for player/guild lists
+    player_ids = [str(p) for p in app_state.player_summaries.keys()]
+    guild_ids = [str(g) for g in app_state.guild_summaries.keys()]
+
     data = {
         "level": save_file.level_sav_path,
-        "players": [str(p) for p in (save_file.get_players()).keys()],
-        "guilds": [str(g) for g in (save_file.get_guilds()).keys()],
+        "players": player_ids,
+        "guilds": guild_ids,
         "world_name": save_file.world_name,
         "type": app_state.save_type.name.lower(),
         "size": save_file.size,
+        "has_gps": app_state.has_gps_available(),
     }
 
     response = build_response(MessageType.LOADED_SAVE_FILES, data)
     await ws.send_json(response)
 
-    response = build_response(MessageType.GET_PLAYERS, save_file.get_players())
+    # Send lightweight summaries - players/guilds loaded on-demand
+    response = build_response(
+        MessageType.GET_PLAYER_SUMMARIES, app_state.player_summaries
+    )
     await ws.send_json(response)
 
-    response = build_response(MessageType.GET_GUILDS, save_file.get_guilds())
+    response = build_response(
+        MessageType.GET_GUILD_SUMMARIES, app_state.guild_summaries
+    )
     await ws.send_json(response)
-
-    gps = save_file.get_gps()
-    if gps:
-        response = build_response(MessageType.GET_GPS_PALS, gps)
-        await ws.send_json(response)

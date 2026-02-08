@@ -1,0 +1,1622 @@
+{
+  "Altar": {
+    "localized_name": "Bàn Thờ Triệu Hồi",
+    "description": "Dâng tấm đá có khắc hình Pal để triệu hồi Pal có năng lực mạnh đến căn cứ. Cần chuẩn bị đầy đủ cho trận chiến."
+  },
+  "Andon": {
+    "localized_name": "Đèn Lồng Giấy Nhật Bản",
+    "description": "Đèn lồng giấy Nhật Bản dùng để trang trí. Hãy sử dụng khi xây dựng theo phong cách Nhật Bản."
+  },
+  "Barrel01_Iron": {
+    "localized_name": "Thùng Phuy Đỏ",
+    "description": "Thùng phuy màu đỏ dùng để trang trí."
+  },
+  "Barrel02_Iron": {
+    "localized_name": "Thùng Phuy Xanh Dương",
+    "description": "Thùng phuy màu xanh dương dùng để trang trí."
+  },
+  "Barrel03_Iron": {
+    "localized_name": "Thùng Phuy Xanh Lá",
+    "description": "Thùng phuy màu xanh lá dùng để trang trí."
+  },
+  "Barrel_Wood": {
+    "localized_name": "Thùng Gỗ",
+    "description": "Thùng gỗ có thể đựng được vật phẩm."
+  },
+  "BaseCampBattleDirector": {
+    "localized_name": "Chuông Báo Động",
+    "description": "Chuông thay đổi trạng thái cảnh giác của Pal trong căn cứ. Có thể thay đổi trạng thái nghênh chiến kẻ địch bên ngoài và trạng thái tập trung làm việc vào thời điểm tùy thích."
+  },
+  "BaseCampItemDispenser": {
+    "localized_name": "Máy Lấy Vật Phẩm",
+    "description": "Thiết bị có thể tự do lấy tất cả vật phẩm trong rương ở căn cứ đã đặt nó."
+  },
+  "BaseCampWorkHard": {
+    "localized_name": "Đài Quan Sát",
+    "description": "Có thể chỉ định cách làm việc của Pal trong căn cứ và cho phép/cấm từng công việc riêng lẻ."
+  },
+  "BaseCampWorkerExtraStation": {
+    "localized_name": "Thiết Bị Điều Khiển Palbox",
+    "description": "Thiết bị cho phép bạn điều khiển Palbox từ xa. Hãy đặt nó ở bất cứ đâu bạn muốn triệu hồi Pal để dễ dàng xây dựng căn cứ theo ý thích."
+  },
+  "BathTub_Stone": {
+    "localized_name": "Bồn Tắm Cổ",
+    "description": "Bồn tắm cổ dùng để trang trí."
+  },
+  "Believer_Banner": {
+    "localized_name": "Biểu Ngữ Dọc Của Tổ Chức Bảo Vệ Pal",
+    "description": "Biểu ngữ dọc của Tổ Chức Bảo Vệ Pal dùng để trang trí."
+  },
+  "Believer_Flag": {
+    "localized_name": "Cờ Hiệu Của Tổ Chức Bảo Vệ Pal",
+    "description": "Lá cờ hiệu của Tổ Chức Bảo Vệ Pal dùng để trang trí."
+  },
+  "Bench_Wood": {
+    "localized_name": "Ghế Dài Gỗ",
+    "description": "Ghế dài bằng gỗ dùng để trang trí."
+  },
+  "BlastFurnace": {
+    "localized_name": "Lò Nguyên Thủy",
+    "description": "Có thể tinh luyện Thỏi Kim Loại. Chất lượng có hơi kém và tốc độ chậm. Cần Pal hệ Lửa để đốt lửa."
+  },
+  "BlastFurnace2": {
+    "localized_name": "Lò Cải Tiến",
+    "description": "Có thể tinh luyện Thỏi Kim Loại Tinh Luyện. Chất lượng có cải thiện đôi chút, nhưng tốc độ vẫn chưa đủ. Cần Pal hệ Lửa để đốt lửa."
+  },
+  "BlastFurnace3": {
+    "localized_name": "Lò Điện",
+    "description": "Có thể tinh luyện Thỏi Pal Metal. Cần điện, nhưng có thể tinh luyện nhanh hơn. Cần Pal hệ Lửa để đốt lửa."
+  },
+  "BlastFurnace4": {
+    "localized_name": "Lò Khổng Lồ",
+    "description": "Có thể tinh luyện Hexolite. Nhiều Pal có thể cùng hợp lực tinh luyện nhờ được mở rộng quy mô. Cần Pal hệ Lửa để đốt lửa."
+  },
+  "Bonsai": {
+    "localized_name": "Cây Cảnh Bonsai",
+    "description": "Cây cảnh Bonsai dùng để trang trí. Hãy sử dụng khi xây dựng theo phong cách Nhật Bản."
+  },
+  "Box01_Iron": {
+    "localized_name": "Hộp Đựng Nhỏ",
+    "description": "Hộp đựng nhỏ đựng được vật phẩm."
+  },
+  "Box01_Stone": {
+    "localized_name": "Giỏ Mây Cổ",
+    "description": "Giỏ mây cổ dùng để trang trí."
+  },
+  "Box02_Iron": {
+    "localized_name": "Hộp Đựng Có Vải Bọc",
+    "description": "Hộp đựng có vải bọc đựng được vật phẩm."
+  },
+  "Box_Wood": {
+    "localized_name": "Hộp Gỗ",
+    "description": "Hộp gỗ có thể đựng được vật phẩm."
+  },
+  "BreedFarm": {
+    "localized_name": "Trang Trại Phối Giống",
+    "description": "Bằng cách chỉ định 2 Pal đực và cái, có thể cho chúng đẻ trứng. Cần phải đặt Bánh Kem vào cơ sở."
+  },
+  "BuildableGoddessStatue": {
+    "localized_name": "Tượng Đá Sức Mạnh",
+    "description": "Tượng đá được ghi trong truyền thuyết của đảo Palpagos. Dâng Tượng Lifmunk sẽ được ban cho sức mạnh kỳ diệu."
+  },
+  "Byobu": {
+    "localized_name": "Bình Phong",
+    "description": "Bình phong dùng để trang trí. Hãy sử dụng khi xây dựng theo phong cách Nhật Bản."
+  },
+  "CableCoil01_Iron": {
+    "localized_name": "Tang Cuốn Cáp",
+    "description": "Tang cuốn cáp dùng để trang trí."
+  },
+  "CampFire": {
+    "localized_name": "Lửa Trại",
+    "description": "Cơ sở cần thiết để nấu nguyên liệu. Chỉ có thể nướng những nguyên liệu đơn giản. Cần Pal hệ Lửa để đốt lửa."
+  },
+  "CandleStand": {
+    "localized_name": "Chân Đèn Trang Nghiêm",
+    "description": "Chân đèn uy nghi thắp lên ngọn lửa được Đồng Minh Ngọn Lửa Vĩnh Cửu tôn thờ. Có thể đặt trên sàn để chiếu sáng. Cần có Pal hệ Lửa để thắp sáng."
+  },
+  "Cauldron": {
+    "localized_name": "Vạc Phù Thủy",
+    "description": "Nếu đặt ở căn cứ tốc độ bào chế thuốc sẽ tăng lên. Đặt từ 2 cái trở lên sẽ không có hiệu quả."
+  },
+  "CeilingLamp": {
+    "localized_name": "Đèn Trần",
+    "description": "Nguồn sáng để chiếu sáng căn cứ ngay cả trong đêm tối. Có thể gắn trên trần nhà. Cần phải có điện, nhưng có thể chiếu sáng phạm vi rộng hơn."
+  },
+  "Chair01_Iron": {
+    "localized_name": "Ghế Da",
+    "description": "Ghế da dùng để trang trí."
+  },
+  "Chair01_Pal": {
+    "localized_name": "Ghế Ếch",
+    "description": "Ghế dễ thương dùng để trang trí."
+  },
+  "Chair01_Stone": {
+    "localized_name": "Ghế Gỗ Cổ",
+    "description": "Ghế gỗ cổ dùng để trang trí."
+  },
+  "Chair01_Wood": {
+    "localized_name": "Ghế Gỗ",
+    "description": "Ghế gỗ dùng để trang trí."
+  },
+  "Chair02_Iron": {
+    "localized_name": "Ghế Sắt",
+    "description": "Ghế sắt dùng để trang trí."
+  },
+  "Chair02_Stone": {
+    "localized_name": "Ghế Gỗ Cổ Xanh Lá",
+    "description": "Ghế gỗ xanh lá cổ dùng để trang trí."
+  },
+  "CharacterRankUp": {
+    "localized_name": "Máy Tinh Luyện Pal",
+    "description": "Cơ sở để giúp thăng hạng của Pal. Khi cô đặc tinh chất chiết xuất từ Pal và rót vào Pal cùng loài, có thể giúp Pal phá vỡ giới hạn thể xác."
+  },
+  "Clock01_Stone": {
+    "localized_name": "Đồng Hồ Quả Lắc Cổ",
+    "description": "Đồng hồ quả lắc cổ dùng để trang trí. Bị hỏng, không thể xem giờ."
+  },
+  "Clock01_Wall_Iron": {
+    "localized_name": "Đồng Hồ Treo Tường",
+    "description": "Đồng hồ treo tường dùng để trang trí. Bị hỏng, không thể xem giờ."
+  },
+  "CoalPit": {
+    "localized_name": "Mỏ Khai Thác Than Đá",
+    "description": "Cơ sở để sản xuất Than Đá. Công việc đào Than Đá rất vất vả và tốn sức. Hãy giao cho Pal giỏi công việc đào."
+  },
+  "CompositeDesk": {
+    "localized_name": "Bàn Vẽ Kỹ Thuật",
+    "description": "Cơ sở có thể tạo ra bản thiết kế tiên tiến hơn bằng cách kết hợp nhiều bản thiết kế."
+  },
+  "ConservationGroupBannerA": {
+    "localized_name": "Cờ Của Tổ Chức Bảo Vệ Pal",
+    "description": "Lá cờ của Tổ Chức Bảo Vệ Pal, dùng để trang trí."
+  },
+  "ConservationGroupBannerB": {
+    "localized_name": "Biểu Ngữ Của Tổ Chức Bảo Vệ Pal",
+    "description": "Biểu ngữ ngang của Tổ Chức Bảo Vệ Pal, dùng để trang trí."
+  },
+  "Container01_Iron": {
+    "localized_name": "Hộp Đựng Lớn",
+    "description": "Hộp đựng lớn đựng vật phẩm. Thiết kế mô phỏng di vật của nền văn minh hưng thịnh vào thời cổ đại."
+  },
+  "CookingStove": {
+    "localized_name": "Nồi Nấu Ăn",
+    "description": "Cơ sở cần thiết để nấu nguyên liệu. Bằng cách sử dụng nồi, phạm vi nấu nướng được mở rộng. Cần Pal hệ Lửa để đốt lửa."
+  },
+  "Cooler": {
+    "localized_name": "Máy Làm Mát Dùng Băng",
+    "description": "Thiết bị thổi gió lạnh để giảm nhiệt độ căn cứ. Không mát lắm, nhưng có thể chống chọi được với cái nóng nhẹ. Cần Pal hệ Băng để làm mát."
+  },
+  "CoolerBox": {
+    "localized_name": "Hộp Làm Mát",
+    "description": "Kho lưu trữ thực phẩm nhỏ. Nếu chỉ định Pal hệ Băng, thực phẩm bên trong sẽ khó bị hỏng hơn."
+  },
+  "CoolerPalFoodBox": {
+    "localized_name": "Hộp Thức Ăn Giữ Lạnh",
+    "description": "Hộp thức ăn có thể giữ lạnh. Nếu chỉ định Pal hệ Băng, thực phẩm bên trong sẽ khó bị hỏng hơn."
+  },
+  "CopperPit": {
+    "localized_name": "Mỏ Khai Thác Kim Loại",
+    "description": "Cơ sở để sản xuất Quặng Kim Loại. Công việc đào Quặng Kim Loại rất vất vả và tốn sức. Hãy giao cho Pal giỏi công việc đào."
+  },
+  "CopperPit_2": {
+    "localized_name": "Mỏ Khai Thác Kim Loại II",
+    "description": "Cơ sở để sản xuất hàng loạt Quặng Kim Loại. Công việc đào Quặng Kim Loại rất vất vả và tốn sức. Hãy giao cho Pal giỏi công việc đào."
+  },
+  "Counter_Wood": {
+    "localized_name": "Quầy Gỗ",
+    "description": "Quầy gỗ dùng để trang trí."
+  },
+  "Crusher": {
+    "localized_name": "Máy Nghiền",
+    "description": "Cơ sở có thể nghiền Đá hoặc Gỗ để chuyển đổi thành nguyên liệu khác. Cần Pal có năng lực |tưới nước| để quay bánh xe nước."
+  },
+  "CrystalPit": {
+    "localized_name": "Mỏ Khai Thác Thạch Anh Lục Giác",
+    "description": "Cơ sở dùng để sản xuất Thạch Anh Lục Giác. Công việc đào Thạch Anh Lục Giác rất vất vả và đòi hỏi thể lực. Hãy giao cho những Pal giỏi khai thác."
+  },
+  "Curtain01_Wall_Stone": {
+    "localized_name": "Rèm Cổ",
+    "description": "Rèm cổ dùng để trang trí. Có thể gắn trên tường."
+  },
+  "DamagedScarecrow": {
+    "localized_name": "Hình Nộm Đo Sát Thương",
+    "description": "Hình nộm tập luyện mô phỏng Pengullet. Chỉ có thể đặt ở nơi rộng rãi."
+  },
+  "Decal_PalSticker_PinkCat": {
+    "localized_name": "-",
+    "description": "-"
+  },
+  "DefenseBowGun": {
+    "localized_name": "Nỏ Săn Lắp Ráp",
+    "description": "Cơ sở phòng thủ bằng cách bố trí Pal và chuẩn bị cho trận chiến. Cần có Mũi Tên để sử dụng. Nếu đặt đạn vào rương, Pal được bố trí sẽ tự động nạp đạn."
+  },
+  "DefenseMachinegun": {
+    "localized_name": "Súng Máy Lắp Ráp",
+    "description": "Cơ sở phòng thủ bằng cách bố trí Pal và chuẩn bị cho trận chiến. Cần có Đạn Súng Trường để sử dụng. Nếu đặt đạn vào rương, Pal được bố trí sẽ tự động nạp đạn."
+  },
+  "DefenseMissile": {
+    "localized_name": "Bệ Phóng Tên Lửa Lắp Ráp",
+    "description": "Cơ sở phòng thủ bằng cách bố trí Pal và chuẩn bị cho trận chiến. Cần có Tên Lửa để sử dụng. Nếu đặt đạn vào rương, Pal được bố trí sẽ tự động nạp đạn."
+  },
+  "DefenseWait": {
+    "localized_name": "Bao Cát",
+    "description": "Cơ sở phòng thủ để bảo vệ căn cứ khỏi kẻ địch. Nếu được bố trí, Pal sẽ không làm công việc khác mà sẽ vừa canh gác vừa chuẩn bị cho trận chiến."
+  },
+  "DefenseWall": {
+    "localized_name": "Tường Đá Phòng Thủ",
+    "description": "Tường phòng thủ khổng lồ để ngăn chặn sự xâm nhập của kẻ địch bên ngoài. Vì làm bằng đá nên khá chắc chắn."
+  },
+  "DefenseWall_Metal": {
+    "localized_name": "Tường Kim Loại Phòng Thủ",
+    "description": "Tường phòng thủ khổng lồ để ngăn chặn sự xâm nhập của kẻ địch bên ngoài. Vì làm bằng kim loại nên rất chắc chắn."
+  },
+  "DefenseWall_Wood": {
+    "localized_name": "Tường Gỗ Phòng Thủ",
+    "description": "Tường phòng thủ khổng lồ để ngăn chặn sự xâm nhập của kẻ địch bên ngoài. Vì làm bằng gỗ nên dễ vỡ."
+  },
+  "Desk01_Iron": {
+    "localized_name": "Bàn Làm Việc Sắt",
+    "description": "Bàn làm việc bằng sắt dùng cho trang trí."
+  },
+  "Desk01_Stone": {
+    "localized_name": "Bàn Làm Việc Cổ",
+    "description": "Bàn làm việc cổ dùng cho trang trí."
+  },
+  "DimensionPalStorage": {
+    "localized_name": "Kho Chứa Pal Đa Chiều",
+    "description": "Cơ sở có thể lưu trữ một lượng lớn Pal đã bắt được. Thành viên bang hội có thể đưa và lấy Pal. Nếu đặt ở chế độ riêng tư, có thể sử dụng làm kho lưu trữ Pal của riêng mình."
+  },
+  "DismantlingConveyor": {
+    "localized_name": "Băng Chuyền Xẻ Pal",
+    "description": "Thiết bị tuyệt vời tự động cắt xẻ Pal đã đặt vào."
+  },
+  "DisplayCharacter": {
+    "localized_name": "Lồng Quan Sát",
+    "description": "Lồng dùng để quan sát Pal đã bắt được. Pal ở trong đó không thể chiến đấu hoặc làm việc, nhưng cũng không bị đói."
+  },
+  "ElectricCooler": {
+    "localized_name": "Máy Làm Mát Dùng Điện",
+    "description": "Thiết bị thổi gió lạnh để giảm nhiệt độ căn cứ. Có thể giảm nhiệt độ bằng cách sử dụng năng lượng từ điện. Cần Pal hệ Băng để làm mát."
+  },
+  "ElectricGenerator": {
+    "localized_name": "Máy Phát Điện",
+    "description": "Cơ sở tích trữ điện do Pal hệ Sấm phát ra. Nếu không có cơ sở tích trữ này, các cơ sở chạy bằng điện sẽ không hoạt động."
+  },
+  "ElectricGenerator_Large": {
+    "localized_name": "Máy Phát Điện Lớn",
+    "description": "Cơ sở tích trữ điện do Pal hệ Sấm phát ra. Đã được mở rộng và hiệu quả phát điện cũng được cải thiện."
+  },
+  "ElectricHatchingPalEgg": {
+    "localized_name": "Máy Ấp Trứng Dùng Điện",
+    "description": "Thiết bị dùng để ấp trứng Pal. Cần cung cấp điện, nhưng bên trong máy ấp sẽ tự động duy trì nhiệt độ tối ưu."
+  },
+  "ElectricHeater": {
+    "localized_name": "Lò Sưởi Dùng Điện",
+    "description": "Thiết bị thổi gió ấm để tăng nhiệt độ căn cứ. Có thể tăng nhiệt độ bằng cách sử dụng năng lượng từ điện. Cần Pal hệ Lửa để đốt lửa."
+  },
+  "ElectricKitchen": {
+    "localized_name": "Bếp Điện",
+    "description": "Cơ sở cần thiết để nấu nguyên liệu. Cơ sở cần phải có điện, nhưng khi dùng, có thể nấu nhiều nguyên liệu một cách nhanh chóng. Cần Pal hệ Lửa để đốt lửa."
+  },
+  "EnergyStorage_Electric": {
+    "localized_name": "Tụ Điện",
+    "description": "Cơ sở lưu trữ điện dư thừa được tạo ra bởi Máy Phát Điện."
+  },
+  "Expedition": {
+    "localized_name": "Trạm Phái Cử Pal",
+    "description": "Cơ sở cho Pal đi thám hiểm hầm ngục hoặc nơi tương tự. Pal được cử đi sẽ thu thập và chiến đấu ở nhiều nơi, mang tài nguyên về căn cứ."
+  },
+  "Factory_Hard_01": {
+    "localized_name": "Bàn Gia Công Cao Cấp",
+    "description": "Bàn Gia Công Cao Cấp để chế tạo vật phẩm và áo giáp. Xưởng vẫn còn nhỏ nên chế tạo chưa được nhanh. Cần Pal có khả năng làm việc thủ công."
+  },
+  "Factory_Hard_02": {
+    "localized_name": "Nhà Máy Dây Chuyền Sản Xuất",
+    "description": "Nhà máy chế tạo vật phẩm và áo giáp. Nhờ phân chia công việc cùng nhau nên có thể chế tạo với tốc độ tương đối. Cần Pal có khả năng làm việc thủ công."
+  },
+  "Factory_Hard_03": {
+    "localized_name": "Nhà Máy Dây Chuyền Sản Xuất II",
+    "description": "Nhà máy chế tạo vật phẩm và áo giáp. Công việc được chia nhỏ nên có thể chế tạo khá nhanh chóng. Cần Pal có khả năng làm việc thủ công."
+  },
+  "Factory_Hard_04": {
+    "localized_name": "Nhà Máy Chế Tạo Văn Minh Tiên Tiến",
+    "description": "Nhà máy chế tạo vật phẩm và áo giáp. Sử dụng máy móc hiệu suất cao nên có thể sản xuất ở tốc độ cao. Cần Pal có khả năng làm việc thủ công."
+  },
+  "Factory_Money": {
+    "localized_name": "Nhà Máy Sản Xuất Tiền Vàng",
+    "description": "Nhà máy sản xuất Đồng Vàng. Do gây căng thẳng tinh thần nên chỉ số Minh Mẫn của người lao động sẽ giảm đi. Cần Pal có khả năng làm việc thủ công."
+  },
+  "FarmBlockV2_Berries": {
+    "localized_name": "Nông Trại Quả Mọng",
+    "description": "Nông trại có thể trồng Quả Mọng Đỏ. Thời gian chờ đến khi thu hoạch ngắn, nhưng ăn không no lắm. Cần một số Pal để gieo hạt, tưới nước và thu hoạch."
+  },
+  "FarmBlockV2_Carrot": {
+    "localized_name": "Nông Trại Cà Rốt",
+    "description": "Nông trại có thể trồng Cà Rốt. Thời gian chờ đến khi thu hoạch có hơi dài, nhưng mang lại nhiều món ăn đa dạng. Cần một số Pal để gieo hạt, tưới nước và thu hoạch."
+  },
+  "FarmBlockV2_Lettuce": {
+    "localized_name": "Nông Trại Xà Lách",
+    "description": "Nông trại có thể trồng Xà Lách. Thời gian chờ đến khi thu hoạch có hơi dài, nhưng mang lại nhiều món ăn đa dạng. Cần một số Pal để gieo hạt, tưới nước và thu hoạch."
+  },
+  "FarmBlockV2_Onion": {
+    "localized_name": "Nông Trại Hành Tây",
+    "description": "Nông trại có thể trồng Hành Tây. Thời gian chờ đến khi thu hoạch có hơi dài, nhưng mang lại nhiều món ăn đa dạng. Cần một số Pal để gieo hạt, tưới nước và thu hoạch."
+  },
+  "FarmBlockV2_Potato": {
+    "localized_name": "Nông Trại Khoai Tây",
+    "description": "Nông trại có thể trồng Khoai Tây. Thời gian chờ đến khi thu hoạch có hơi dài, nhưng mang lại nhiều món ăn đa dạng. Cần một số Pal để gieo hạt, tưới nước và thu hoạch."
+  },
+  "FarmBlockV2_tomato": {
+    "localized_name": "Nông Trại Cà Chua",
+    "description": "Nông trại có thể trồng Cà Chua. Thời gian chờ đến khi thu hoạch có hơi dài, nhưng mang lại nhiều món ăn đa dạng. Cần một số Pal để gieo hạt, tưới nước và thu hoạch."
+  },
+  "FarmBlockV2_wheet": {
+    "localized_name": "Nông Trại Lúa Mì",
+    "description": "Nông trại có thể trồng Lúa Mì. Thời gian chờ đến khi thu hoạch ở mức trung bình. Cần một số Pal để gieo hạt, tưới nước và thu hoạch."
+  },
+  "Farm_SkillFruits": {
+    "localized_name": "Nông Trại Quả Kỹ Năng",
+    "description": "Trang trại có thể trồng Quả Kỹ Năng. Bằng cách trồng quả gốc trên mặt đất, có thể thu hoạch nhiều quả cùng loại."
+  },
+  "FastTravelPoint": {
+    "localized_name": "Tượng Đại Bàng",
+    "description": "Bia đá mô phỏng Chikipi. Đặt nó vào sẽ giúp dịch chuyển nhanh hơn."
+  },
+  "FireCult_Banner": {
+    "localized_name": "Biểu Ngữ Dọc Của Đồng Minh Ngọn Lửa Vĩnh Cửu",
+    "description": "Biểu ngữ dọc của Đồng Minh Ngọn Lửa Vĩnh Cửu dùng để trang trí."
+  },
+  "FireCult_Flag": {
+    "localized_name": "Cờ Hiệu Của Đồng Minh Ngọn Lửa Vĩnh Cửu",
+    "description": "Lá cờ hiệu của Đồng Minh Ngọn Lửa Vĩnh Cửu dùng để trang trí."
+  },
+  "FireStand": {
+    "localized_name": "Chân Đèn Dùng Cho Nghi Lễ",
+    "description": "Chân đèn dùng cho nghi lễ, thắp lên ngọn lửa được Đồng Minh Ngọn Lửa Vĩnh Cửu tôn thờ. Có thể đặt trên sàn để chiếu sáng. Cần có Pal hệ Lửa để thắp sáng."
+  },
+  "FishingPond1": {
+    "localized_name": "Ao Câu Cá",
+    "description": "Ao câu cá có trang bị sẵn dụng cụ câu. Khi chỉ định Pal vào, chúng sẽ thảnh thơi câu cá cho bạn. Cần Pal có kỹ năng Công Việc Thủ Công."
+  },
+  "FishingPond2": {
+    "localized_name": "Ao Câu Cá Lớn",
+    "description": "Ao câu cá lớn có trang bị sẵn dụng cụ câu. Vùng nước rộng hơn, giúp câu được Pal lớn hơn. Cần Pal có kỹ năng Công Việc Thủ Công."
+  },
+  "FlourMill": {
+    "localized_name": "Máy Xay Bột",
+    "description": "Cơ sở có thể nghiền Lúa Mì để sản xuất Bột Mì. Cần Pal có năng lực |tưới nước| để quay bánh xe nước."
+  },
+  "FlowerBed": {
+    "localized_name": "Bồn Hoa",
+    "description": "Nếu đặt ở căn cứ tốc độ thu thập sẽ tăng lên. Đặt từ 2 cái trở lên sẽ không có hiệu quả."
+  },
+  "Fountain": {
+    "localized_name": "Đài Phun Nước",
+    "description": "Nếu đặt ở căn cứ tốc độ tưới nước sẽ tăng lên. Đặt từ 2 cái trở lên sẽ không có hiệu quả."
+  },
+  "Fudukue": {
+    "localized_name": "Bàn Làm Việc Kiểu Nhật",
+    "description": "Bàn viết Nhật Bản dùng để trang trí. Hãy sử dụng khi xây dựng theo phong cách Nhật Bản."
+  },
+  "GarbageBag_Iron": {
+    "localized_name": "Túi Rác",
+    "description": "Túi rác dùng để trang trí."
+  },
+  "Glass_DiagonalWall": {
+    "localized_name": "Tường Chéo Thủy Tinh",
+    "description": "Tường chéo dựng trên nền tam giác, để ngăn chặn kẻ xâm nhập. Vì làm bằng kính cường lực nên rất kiên cố."
+  },
+  "Glass_DoorWall": {
+    "localized_name": "Tường Thủy Tinh Có Cửa",
+    "description": "Cửa được dựng trên nền nhà để làm lối vào. Vì làm bằng thủy tinh cứng cáp nên rất chắc chắn."
+  },
+  "Glass_Fence": {
+    "localized_name": "Hàng Rào Thủy Tinh",
+    "description": "Hàng rào được xây dựng trên nền nhà hoặc mái nhà để ngăn rơi ngã. Vì làm bằng thủy tinh cứng cáp nên rất chắc chắn."
+  },
+  "Glass_PyramidRoof": {
+    "localized_name": "Mái Kim Tự Tháp Thủy Tinh",
+    "description": "Mái hình chóp được xây trên tường để che chắn mưa gió. Vì làm bằng kính cường lực nên rất kiên cố."
+  },
+  "Glass_SlantedRoof": {
+    "localized_name": "Mái Nghiêng Thủy Tinh",
+    "description": "Mái nghiêng được xây phía trên tường để che chắn khỏi mưa gió. Vì làm bằng thủy tinh cứng cáp nên rất chắc chắn."
+  },
+  "Glass_SlopedRoofCorner": {
+    "localized_name": "Mái Thủy Tinh Tam Giác Nghiêng",
+    "description": "Mái nghiêng góc được xây trên tường để che chắn mưa gió. Vì làm bằng kính cường lực nên rất kiên cố."
+  },
+  "Glass_TriangleFoundation": {
+    "localized_name": "Nền Tam Giác Thủy Tinh",
+    "description": "Nền tam giác để dựng tường và các công trình khác lên trên. Vì làm bằng kính cường lực nên rất kiên cố."
+  },
+  "Glass_TriangleRoof": {
+    "localized_name": "Mái Tam Giác Thủy Tinh",
+    "description": "Mái tam giác được xây trên tường để che chắn mưa gió. Vì làm bằng kính cường lực nên rất kiên cố."
+  },
+  "Glass_TriangleStairsCorner": {
+    "localized_name": "Mái Góc Thủy Tinh",
+    "description": "Mái góc được xây trên tường để che chắn mưa gió. Vì làm bằng kính cường lực nên rất kiên cố."
+  },
+  "Glass_TriangleWall": {
+    "localized_name": "Tường Tam Giác Thủy Tinh",
+    "description": "Tường tam giác để dựng trên nền nhà. Vì làm bằng thủy tinh cứng cáp nên rất chắc chắn."
+  },
+  "Glass_TriangleWallReverse": {
+    "localized_name": "Tường Tam Giác Thủy Tinh (Đảo Ngược)",
+    "description": "Tường tam giác (đảo ngược) để dựng trên nền nhà. Vì làm bằng kính cường lực nên rất kiên cố."
+  },
+  "Glass_WallGate": {
+    "localized_name": "Lối Đi Bằng Thủy Tinh Cho Pal",
+    "description": "Lối đi cho Pal được dựng trên nền nhà để làm lối ra vào. Vì làm bằng kính cường lực nên rất kiên cố."
+  },
+  "Glass_WindowWall": {
+    "localized_name": "Tường Thủy Tinh Có Cửa Sổ",
+    "description": "Tường có cửa sổ để dựng trên nền nhà và ngăn chặn kẻ xâm nhập. Vì làm bằng thủy tinh cứng cáp nên rất chắc chắn."
+  },
+  "Glass_foundation": {
+    "localized_name": "Nền Nhà Thủy Tinh",
+    "description": "Nền nhà để dựng tường và cơ sở vật chất lên trên. Vì làm bằng thủy tinh cứng cáp nên rất chắc chắn."
+  },
+  "Glass_roof": {
+    "localized_name": "Mái Thủy Tinh",
+    "description": "Mái nhà được xây trên tường để che chắn khỏi mưa gió. Vì làm bằng thủy tinh cứng cáp nên rất chắc chắn."
+  },
+  "Glass_stair": {
+    "localized_name": "Cầu Thang Thủy Tinh",
+    "description": "Cầu thang được đặt dưới nền nhà hoặc mái nhà để có thể leo lên. Vì làm bằng thủy tinh cứng cáp nên rất chắc chắn."
+  },
+  "Glass_wall": {
+    "localized_name": "Tường Thủy Tinh",
+    "description": "Tường để dựng trên nền nhà và ngăn chặn kẻ xâm nhập. Vì làm bằng thủy tinh cứng cáp nên rất chắc chắn."
+  },
+  "GlobalPalStorage": {
+    "localized_name": "Palbox Toàn Cầu",
+    "description": "Cơ sở có thể lưu trữ dữ liệu gen của Pal hoặc khôi phục Pal từ dữ liệu gen đã lưu trữ. Dữ liệu gen đã lưu trữ có thể được chuyển sang thế giới khác."
+  },
+  "Globe01_Stone": {
+    "localized_name": "Mô Hình Quả Địa Cầu Cổ",
+    "description": "Mô hình quả địa cầu cổ dùng để trang trí."
+  },
+  "GoalSoccer_Iron": {
+    "localized_name": "Khung Thành Bóng Đá",
+    "description": "Khung thành bóng đá dùng để trang trí. Không thể ghi điểm dù có đặt SheepBall vào."
+  },
+  "GuardianDogStatue": {
+    "localized_name": "Tượng Yakumo",
+    "description": "Bức tượng Yakumo dùng để trang trí."
+  },
+  "GuildChest": {
+    "localized_name": "Rương Bang Hội",
+    "description": "Rương có thể gửi và nhận đồ vật bên trong ngay lập tức thông qua không gian con. Đồ vật bên trong rương này đặt ở mỗi căn cứ sẽ được chia sẻ."
+  },
+  "HatchingPalEgg": {
+    "localized_name": "Máy Ấp Trứng",
+    "description": "Thiết bị dùng để ấp trứng Pal. Nếu đặt trứng Pal vào, nó sẽ tự động ấp nhưng phải mất thời gian chờ."
+  },
+  "Headstone": {
+    "localized_name": "Bia Mộ",
+    "description": "Bia mộ có thể viết chữ. Hãy sử dụng để ghi chú."
+  },
+  "Heater": {
+    "localized_name": "Lò Sưởi Dùng Lửa",
+    "description": "Thiết bị thổi gió ấm để tăng nhiệt độ căn cứ. Không ấm lắm, nhưng có thể chống chọi được với cái lạnh nhẹ. Cần Pal hệ Lửa để đốt lửa."
+  },
+  "HugeKitchen": {
+    "localized_name": "Bếp Lớn",
+    "description": "Cơ sở cần thiết để nấu nguyên liệu. Nhiều Pal có thể cùng nấu ăn nhờ được mở rộng quy mô. Cần Pal hệ Lửa để đốt lửa."
+  },
+  "Hunter_Banner": {
+    "localized_name": "Biểu Ngữ Dọc Của Tổ Chức Săn Trộm",
+    "description": "Biểu ngữ dọc của Tổ Chức Săn Trộm dùng để trang trí."
+  },
+  "Hunter_Flag": {
+    "localized_name": "Cờ Hiệu Của Tổ Chức Săn Trộm",
+    "description": "Lá cờ hiệu của Tổ Chức Săn Trộm dùng để trang trí."
+  },
+  "Hunter_GangFlag": {
+    "localized_name": "Cờ Của Tổ Chức Săn Trộm",
+    "description": "Lá cờ của Tổ Chức Săn Trộm, dùng để trang trí."
+  },
+  "IceCrusher": {
+    "localized_name": "Máy Nghiền Đông Lạnh",
+    "description": "Cơ sở có thể nghiền Quặng Kim Loại để chuyển đổi thành nguyên liệu khác. Cần cung cấp điện và Pal có năng lực |làm mát| để hoạt động, nhưng cơ sở này làm việc rất hiệu quả."
+  },
+  "Iron_DiagonalWall": {
+    "localized_name": "Tường Chéo Kim Loại",
+    "description": "Tường chéo dựng trên nền tam giác, để ngăn chặn kẻ xâm nhập. Vì làm bằng kim loại nên rất chắc chắn."
+  },
+  "Iron_Fence": {
+    "localized_name": "Hàng Rào Kim Loại",
+    "description": "Hàng rào được xây dựng trên nền nhà hoặc mái nhà để ngăn rơi ngã. Vì làm bằng kim loại nên rất chắc chắn."
+  },
+  "Iron_PyramidRoof": {
+    "localized_name": "Mái Kim Tự Tháp Kim Loại",
+    "description": "Mái hình chóp được xây trên tường để che chắn mưa gió. Vì làm bằng kim loại nên rất chắc chắn."
+  },
+  "Iron_SlopedRoofCorner": {
+    "localized_name": "Mái Kim Loại Tam Giác Nghiêng",
+    "description": "Mái nghiêng góc được xây phía tường để che chắn mưa gió. Vì làm bằng kim loại nên rất chắc chắn."
+  },
+  "Iron_TriangleFoundation": {
+    "localized_name": "Nền Tam Giác Kim Loại",
+    "description": "Nền tam giác để dựng tường và các công trình khác lên trên. Vì làm bằng kim loại nên rất chắc chắn."
+  },
+  "Iron_TriangleRoof": {
+    "localized_name": "Mái Tam Giác Kim Loại",
+    "description": "Mái tam giác được xây trên tường để che chắn mưa gió. Vì làm bằng kim loại nên rất chắc chắn."
+  },
+  "Iron_TriangleStairsCorner": {
+    "localized_name": "Mái Góc Kim Loại",
+    "description": "Mái góc được xây trên tường để che chắn mưa gió. Vì làm bằng kim loại nên rất chắc chắn."
+  },
+  "Iron_TriangleWallReverse": {
+    "localized_name": "Tường Tam Giác Kim Loại (Đảo Ngược)",
+    "description": "Tường tam giác (đảo ngược) để dựng trên nền nhà. Vì làm bằng kim loại nên rất chắc chắn."
+  },
+  "Iron_WallGate": {
+    "localized_name": "Lối Đi Bằng Kim Loại Cho Pal",
+    "description": "Lối đi cho Pal được dựng trên nền nhà để làm lối ra vào. Vì làm bằng kim loại nên rất chắc chắn."
+  },
+  "Irori": {
+    "localized_name": "Lò Sưởi Nhật Bản",
+    "description": "Lò sưởi Nhật Bản dùng để trang trí. Hãy sử dụng khi xây dựng theo phong cách Nhật Bản."
+  },
+  "ItemBooth": {
+    "localized_name": "Chợ Trời (Vật Phẩm)",
+    "description": "Cơ sở để bán vật phẩm. Có thể bán vật phẩm cho người chơi khác. Nếu chỉ định Pal hệ Băng, thực phẩm bên trong sẽ khó bị hỏng hơn."
+  },
+  "ItemChest": {
+    "localized_name": "Rương Gỗ",
+    "description": "Có thể đựng vật phẩm. Vì làm bằng gỗ nên dễ vỡ. Không phải là nơi an toàn để đựng đồ quý giá."
+  },
+  "ItemChest_02": {
+    "localized_name": "Rương Kim Loại",
+    "description": "Có thể đựng vật phẩm. Vì được gia cố bằng kim loại nên khá chắc chắn. Dung lượng chứa cũng tăng lên do kích thước lớn hơn."
+  },
+  "ItemChest_03": {
+    "localized_name": "Rương Kim Loại Tinh Luyện",
+    "description": "Có thể đựng vật phẩm. Làm bằng kim loại tinh luyện nên rất chắc chắn. Hãy sử dụng nó như một nhà kho khổng lồ và an toàn."
+  },
+  "ItemChest_04": {
+    "localized_name": "Rương Văn Minh Tiên Tiến",
+    "description": "Có thể đựng vật phẩm. Khá chắc chắn và có nhiều không gian lưu trữ. Hãy sử dụng nó như một nhà kho khổng lồ và an toàn."
+  },
+  "Ivy01": {
+    "localized_name": "Cây Thường Xuân Lớn Treo Tường",
+    "description": "Cây thường xuân cỡ lớn dùng để trang trí. Có thể gắn trên tường."
+  },
+  "Ivy02": {
+    "localized_name": "Cây Thường Xuân Nhỏ Treo Tường",
+    "description": "Cây thường xuân cỡ nhỏ dùng để trang trí. Có thể gắn trên tường."
+  },
+  "Ivy03": {
+    "localized_name": "Cây Thường Xuân Ngang Treo Tường",
+    "description": "Cây thường xuân ngang dùng để trang trí. Có thể gắn trên tường."
+  },
+  "JapaneseStyle_DiagonalWall": {
+    "localized_name": "Tường Chéo Kiểu Nhật",
+    "description": "Tường chéo dựng trên nền tam giác, để ngăn chặn kẻ xâm nhập. Mang phong cách Nhật Bản trang nhã."
+  },
+  "JapaneseStyle_DoorWall_01": {
+    "localized_name": "Tường Có Cửa Kiểu Nhật A",
+    "description": "Cửa được dựng trên nền nhà để làm lối vào. Có thể xây dựng theo phong cách Nhật Bản trang nhã."
+  },
+  "JapaneseStyle_DoorWall_02": {
+    "localized_name": "Tường Có Cửa Kiểu Nhật B",
+    "description": "Cửa trượt Shoji dùng trong nhà được dựng trên nền nhà để làm lối vào. Có thể xây dựng theo phong cách Nhật Bản trang nhã."
+  },
+  "JapaneseStyle_DoorWall_03": {
+    "localized_name": "Tường Có Cửa Kiểu Nhật C",
+    "description": "Cửa trượt Fusuma dùng trong nhà được dựng trên nền nhà để làm lối vào. Có thể xây dựng theo phong cách Nhật Bản trang nhã."
+  },
+  "JapaneseStyle_Fence": {
+    "localized_name": "Hàng Rào Kiểu Nhật",
+    "description": "Hàng rào được xây dựng trên nền nhà hoặc mái nhà để ngăn rơi ngã. Có thể xây dựng theo phong cách Nhật Bản trang nhã."
+  },
+  "JapaneseStyle_Pillar": {
+    "localized_name": "Cột Kiểu Nhật",
+    "description": "Cột để chống đỡ tòa nhà. Có thể xây dựng theo phong cách Nhật Bản trang nhã."
+  },
+  "JapaneseStyle_PyramidRoof": {
+    "localized_name": "Mái Kim Tự Tháp Kiểu Nhật",
+    "description": "Mái hình chóp được xây trên tường để che chắn mưa gió. Mang phong cách Nhật Bản trang nhã."
+  },
+  "JapaneseStyle_SlantedRoof": {
+    "localized_name": "Mái Nghiêng Kiểu Nhật",
+    "description": "Mái nghiêng được xây phía trên tường để che chắn khỏi mưa gió. Có thể xây dựng theo phong cách Nhật Bản trang nhã."
+  },
+  "JapaneseStyle_SlopedRoofCorner": {
+    "localized_name": "Mái Tam Giác Nghiêng Kiểu Nhật",
+    "description": "Mái nghiêng góc được xây trên tường để che chắn mưa gió. Mang phong cách Nhật Bản trang nhã."
+  },
+  "JapaneseStyle_TriangleFoundation": {
+    "localized_name": "Nền Tam Giác Kiểu Nhật",
+    "description": "Nền tam giác để dựng tường và các công trình khác lên trên. Mang phong cách Nhật Bản trang nhã."
+  },
+  "JapaneseStyle_TriangleRoof_01": {
+    "localized_name": "Mái Tam Giác Kiểu Nhật A",
+    "description": "Mái tam giác được xây trên tường để che chắn mưa gió. Mặt trên phủ chiếu tatami. Mang phong cách Nhật Bản trang nhã."
+  },
+  "JapaneseStyle_TriangleRoof_02": {
+    "localized_name": "Mái Tam Giác Kiểu Nhật B",
+    "description": "Mái tam giác được xây trên tường để che chắn mưa gió. Mặt trên lợp ngói. Mang phong cách Nhật Bản trang nhã."
+  },
+  "JapaneseStyle_TriangleStairsCorner_01": {
+    "localized_name": "Mái Góc Kiểu Nhật",
+    "description": "Mái góc được xây phía trên tường để che chắn mưa gió. Mang phong cách Nhật Bản trang nhã."
+  },
+  "JapaneseStyle_TriangleWall": {
+    "localized_name": "Tường Tam Giác Kiểu Nhật",
+    "description": "Tường tam giác để dựng trên nền nhà. Có thể xây dựng theo phong cách Nhật Bản trang nhã."
+  },
+  "JapaneseStyle_TriangleWallReverse": {
+    "localized_name": "Tường Tam Giác Kiểu Nhật (Đảo Ngược)",
+    "description": "Tường tam giác (đảo ngược) để dựng trên nền nhà. Mang phong cách Nhật Bản trang nhã."
+  },
+  "JapaneseStyle_WallGate": {
+    "localized_name": "Lối Đi Kiểu Nhật Cho Pal",
+    "description": "Lối đi cho Pal được dựng trên nền nhà để làm lối ra vào. Mang phong cách Nhật Bản trang nhã."
+  },
+  "JapaneseStyle_WindowWall": {
+    "localized_name": "Tường Có Cửa Sổ Kiểu Nhật",
+    "description": "Tường có cửa sổ để dựng trên nền nhà và ngăn chặn kẻ xâm nhập. Có thể xây dựng theo phong cách Nhật Bản trang nhã."
+  },
+  "JapaneseStyle_foundation": {
+    "localized_name": "Nền Nhà Kiểu Nhật",
+    "description": "Nền nhà để dựng tường và cơ sở vật chất lên trên. Có thể xây dựng theo phong cách Nhật Bản trang nhã."
+  },
+  "JapaneseStyle_roof_01": {
+    "localized_name": "Mái Kiểu Nhật A",
+    "description": "Mái nhà được xây trên tường để che chắn khỏi mưa gió. Mặt trên là chiếu tatami. Có thể xây dựng theo phong cách Nhật Bản trang nhã."
+  },
+  "JapaneseStyle_roof_02": {
+    "localized_name": "Mái Kiểu Nhật B",
+    "description": "Mái nhà được xây trên tường để che chắn khỏi mưa gió. Mặt trên là ngói. Có thể xây dựng theo phong cách Nhật Bản trang nhã."
+  },
+  "JapaneseStyle_stair": {
+    "localized_name": "Cầu Thang Kiểu Nhật",
+    "description": "Cầu thang được đặt dưới nền nhà hoặc mái nhà để có thể leo lên. Có thể xây dựng theo phong cách Nhật Bản trang nhã."
+  },
+  "JapaneseStyle_wall_01": {
+    "localized_name": "Tường Kiểu Nhật",
+    "description": "Tường để dựng trên nền nhà và ngăn chặn kẻ xâm nhập. Có thể xây dựng theo phong cách Nhật Bản trang nhã."
+  },
+  "Kakejiku": {
+    "localized_name": "Tranh Cuộn Treo Tường",
+    "description": "Tranh cuộn treo tường dùng để trang trí. Hãy sử dụng khi xây dựng theo phong cách Nhật Bản."
+  },
+  "Koro": {
+    "localized_name": "Lư Hương",
+    "description": "Lư hương dùng để trang trí. Hãy sử dụng khi xây dựng theo phong cách Nhật Bản."
+  },
+  "Lab": {
+    "localized_name": "Viện Nghiên Cứu Công Việc Pal",
+    "description": "Cơ sở nghiên cứu về từng công việc của Pal. Khi cho Pal làm việc tại cơ sở này, việc nghiên cứu sẽ tiến triển và có thể thu được nhiều hiệu quả khác nhau."
+  },
+  "Lamp": {
+    "localized_name": "Đèn Đứng",
+    "description": "Nguồn sáng để chiếu sáng căn cứ ngay cả trong đêm tối. Cần phải có điện, nhưng có thể chiếu sáng phạm vi rộng hơn."
+  },
+  "LanternTop": {
+    "localized_name": "Đèn Lồng Cầm Tay",
+    "description": "Đèn lồng cầm tay dùng để trang trí."
+  },
+  "LargeCeilingLamp": {
+    "localized_name": "Đèn Trần Lớn",
+    "description": "Nguồn sáng để chiếu sáng căn cứ ngay cả trong đêm tối. Có thể gắn trên trần nhà. Cần phải có nhiều điện hơn, nhưng có thể chiếu sáng phạm vi rộng hơn nữa."
+  },
+  "LargeLamp": {
+    "localized_name": "Đèn Đứng Lớn",
+    "description": "Nguồn sáng để chiếu sáng căn cứ ngay cả trong đêm tối. Cần phải có nhiều điện hơn, nhưng có thể chiếu sáng phạm vi rộng hơn nữa."
+  },
+  "Light_CandleSticks_Top": {
+    "localized_name": "Đèn Chùm",
+    "description": "Đèn chùm làm nguồn sáng. Cần điện để sáng."
+  },
+  "Light_CandleSticks_Wall": {
+    "localized_name": "Đèn Treo Tường",
+    "description": "Đèn treo tường làm nguồn sáng. Cần điện để sáng."
+  },
+  "Light_FirePlace01": {
+    "localized_name": "Lò Sưởi Gạch",
+    "description": "Lò sưởi gạch làm nguồn sáng. Cần Pal hệ Lửa để đốt lửa."
+  },
+  "Light_FirePlace02": {
+    "localized_name": "Lò Sưởi",
+    "description": "Lò sưởi làm nguồn sáng. Cần Pal hệ Lửa để đốt lửa."
+  },
+  "Light_FloorLamp01": {
+    "localized_name": "Đèn Sàn Màu Nâu Cổ",
+    "description": "Đèn sàn màu nâu cổ làm nguồn sáng. Cần điện để sáng."
+  },
+  "Light_FloorLamp02": {
+    "localized_name": "Đèn Sàn Màu Đỏ Cổ",
+    "description": "Đèn sàn màu đỏ cổ làm nguồn sáng. Cần điện để sáng."
+  },
+  "Light_LightPole01": {
+    "localized_name": "Đèn Đường Đơn Giản",
+    "description": "Đèn đường đơn giản làm nguồn sáng. Cần điện để sáng."
+  },
+  "Light_LightPole02": {
+    "localized_name": "Đèn Đường Hai Nhánh",
+    "description": "Đèn đường hai nhánh làm nguồn sáng. Cần điện để sáng."
+  },
+  "Light_LightPole03": {
+    "localized_name": "Đèn Đường Hoài Cổ",
+    "description": "Đèn đường hoài cổ làm nguồn sáng. Cần điện để sáng."
+  },
+  "Light_LightPole04": {
+    "localized_name": "Đèn Đường Thời Trang",
+    "description": "Đèn đường thời trang làm nguồn sáng. Cần điện để sáng."
+  },
+  "LilyQueenStatue": {
+    "localized_name": "Tượng Lyleen",
+    "description": "Bức tượng Lyleen, dùng để trang trí."
+  },
+  "MachineGame01_Iron": {
+    "localized_name": "Máy Gắp Thú",
+    "description": "Máy gắp thú dùng để trang trí. Bị hỏng, không thể chơi được."
+  },
+  "MachineVending01_Iron": {
+    "localized_name": "Máy Bán Nước Ngọt Tự Động",
+    "description": "Máy bán nước ngọt tự động dùng để trang trí. Không thể mua vật phẩm."
+  },
+  "ManualElectricGenerator": {
+    "localized_name": "Máy Phát Điện Bằng Sức Người",
+    "description": "Cơ sở chuyển đổi chuyển động quay thành năng lượng điện. Hiệu quả kém và Pal làm việc sẽ bị giảm chỉ số Minh Mẫn, nhưng có thể nhận được kinh nghiệm."
+  },
+  "MedicalPalBed_02": {
+    "localized_name": "Giường Pal Bằng Rơm",
+    "description": "Giường rơm cho Pal. Dùng cho Pal khi bị thương hoặc khi ngủ ban đêm. Giường cứng nhưng vẫn tốt hơn là không có gì."
+  },
+  "MedicalPalBed_03": {
+    "localized_name": "Giường Pal Mềm Mại",
+    "description": "Giường êm ái cho Pal ngủ ngon giấc. Dùng cho Pal khi bị thương hoặc khi ngủ ban đêm. Vì êm ái nên Pal sẽ thích lắm."
+  },
+  "MedicalPalBed_04": {
+    "localized_name": "Giường Pal Cỡ Lớn",
+    "description": "Giường lớn cho Pal ngủ ngon giấc. Dùng cho Pal khi bị thương hoặc khi ngủ ban đêm. Pal kích thước lớn cũng có thể ngủ thoải mái."
+  },
+  "MedicalPalBed_05": {
+    "localized_name": "Pal Pod Văn Minh Tiên Tiến",
+    "description": "Khoang hồi phục cho Pal. Dùng cho Pal khi bị thương hoặc khi ngủ ban đêm. Lượng hồi phục đã tăng lên nhờ đổi mới công nghệ."
+  },
+  "MedicineFacility_01": {
+    "localized_name": "Bàn Chế Thuốc Trung Cổ",
+    "description": "Thiết bị bào chế thuốc chữa bệnh cho Pal. Chỉ có thể bào chế thuốc đơn giản. Hãy giao công việc cho Pal có thể bào chế thuốc."
+  },
+  "MedicineFacility_02": {
+    "localized_name": "Bàn Chế Thuốc Dùng Điện",
+    "description": "Thiết bị bào chế thuốc chữa bệnh cho Pal. Cần phải có điện, nhưng cũng có thể bào chế thuốc cấp cao. Hãy giao công việc cho Pal có thể bào chế thuốc."
+  },
+  "MedicineFacility_03": {
+    "localized_name": "Bàn Chế Thuốc Văn Minh Tiên Tiến",
+    "description": "Thiết bị bào chế thuốc chữa bệnh cho Pal. Có thể bào chế những loại thuốc chưa được biết đến với công nghệ tương lai. Hãy giao công việc cho Pal có thể bào chế thuốc."
+  },
+  "Metal_DoorWall": {
+    "localized_name": "Cửa Kim Loại",
+    "description": "Cửa được dựng trên nền nhà để làm lối vào. Vì làm bằng kim loại nên rất chắc chắn."
+  },
+  "Metal_Gate": {
+    "localized_name": "Cổng Kim Loại",
+    "description": "Cổng mà Pal kích thước lớn hơn cũng có thể đi qua. Vì làm bằng kim loại nên rất chắc chắn."
+  },
+  "Metal_SlantedRoof": {
+    "localized_name": "Mái Nghiêng Kim Loại",
+    "description": "Mái nghiêng được xây phía trên tường để che chắn khỏi mưa gió. Vì làm bằng kim loại nên rất chắc chắn."
+  },
+  "Metal_TriangleWall": {
+    "localized_name": "Tường Tam Giác Kim Loại",
+    "description": "Tường tam giác để dựng trên nền nhà. Vì làm bằng kim loại nên rất chắc chắn."
+  },
+  "Metal_WindowWall": {
+    "localized_name": "Tường Kim Loại Có Cửa Sổ",
+    "description": "Tường có cửa sổ để dựng trên nền nhà và ngăn chặn kẻ xâm nhập. Vì làm bằng kim loại nên rất chắc chắn."
+  },
+  "Metal_foundation": {
+    "localized_name": "Nền Nhà Kim Loại",
+    "description": "Nền nhà để dựng tường và cơ sở vật chất lên trên. Vì làm bằng kim loại nên rất chắc chắn."
+  },
+  "Metal_roof": {
+    "localized_name": "Mái Kim Loại",
+    "description": "Mái nhà được xây trên tường để che chắn khỏi mưa gió. Vì làm bằng kim loại nên rất chắc chắn."
+  },
+  "Metal_stair": {
+    "localized_name": "Cầu Thang Kim Loại",
+    "description": "Cầu thang được đặt dưới nền nhà hoặc mái nhà để có thể leo lên. Vì làm bằng kim loại nên rất chắc chắn."
+  },
+  "Metal_wall": {
+    "localized_name": "Tường Kim Loại",
+    "description": "Tường để dựng trên nền nhà và ngăn chặn kẻ xâm nhập. Vì làm bằng kim loại nên rất chắc chắn."
+  },
+  "MiningTool": {
+    "localized_name": "Xe Đẩy Khai Thác Mỏ",
+    "description": "Nếu đặt ở căn cứ tốc độ đào sẽ tăng lên. Đặt từ 2 cái trở lên sẽ không có hiệu quả."
+  },
+  "Mirror01_Stone": {
+    "localized_name": "Gương Hình Bầu Dục Cổ",
+    "description": "Gương hình bầu dục cổ dùng để trang trí."
+  },
+  "Mirror01_Wall_Stone": {
+    "localized_name": "Gương Treo Tường Cổ",
+    "description": "Gương treo tường cổ dùng để trang trí. Có thể gắn trên tường."
+  },
+  "Mirror02_Stone": {
+    "localized_name": "Gương Cổ",
+    "description": "Gương cổ dùng để trang trí."
+  },
+  "MonsterFarm": {
+    "localized_name": "Trang Trại Gia Súc",
+    "description": "Trang trại chăn thả Pal giống cừu và gà. Nếu chỉ định Pal có Kỹ Năng Đồng Hành đặc biệt, nó sẽ sản xuất vật phẩm."
+  },
+  "MultiElectricHatchingPalEgg": {
+    "localized_name": "Máy Ấp Trứng Dùng Điện Cỡ Lớn",
+    "description": "Thiết bị dùng để ấp trứng Pal. Cần cung cấp điện, nhưng có thể ấp nhiều trứng cùng lúc ở nhiệt độ tối ưu."
+  },
+  "MultiHatchingPalEgg": {
+    "localized_name": "Máy Ấp Trứng Cỡ Lớn",
+    "description": "Thiết bị dùng để ấp trứng Pal. Tự động duy trì nhiệt độ tối ưu, cho phép ấp cùng lúc nhiều quả trứng Pal."
+  },
+  "Ninja_Banner": {
+    "localized_name": "Biểu Ngữ Dọc Của Hoa Mặt Trăng",
+    "description": "Biểu ngữ dọc của Hoa Mặt Trăng dùng để trang trí."
+  },
+  "Ninja_Flag": {
+    "localized_name": "Cờ Hiệu Của Hoa Mặt Trăng",
+    "description": "Lá cờ hiệu của Hoa Mặt Trăng dùng để trang trí."
+  },
+  "OilPump": {
+    "localized_name": "Máy Chiết Xuất Dầu Thô",
+    "description": "Thiết bị cần thiết để chiết xuất Dầu Thô từ mỏ dầu. Cần cung cấp lượng điện lớn để hoạt động."
+  },
+  "OlympicCauldron": {
+    "localized_name": "Bệ Đuốc Thiêng",
+    "description": "Nếu đặt ở căn cứ tốc độ đốt lửa sẽ tăng lên. Đặt từ 2 cái trở lên sẽ không có hiệu quả."
+  },
+  "OperatingTable": {
+    "localized_name": "Bàn Phẫu Thuật Pal",
+    "description": "Cơ sở dùng để tiến hành phẫu thuật cho Pal, giúp thay đổi giới tính và kỹ năng bị động của Pal."
+  },
+  "PalBooth": {
+    "localized_name": "Chợ Trời (Pal)",
+    "description": "Cơ sở để bán Pal. Có thể bán Pal cho người chơi khác. Nếu chỉ định Pal hệ Băng, thực phẩm bạn bán sẽ khó bị hỏng hơn."
+  },
+  "PalBoxV2": {
+    "localized_name": "Palbox",
+    "description": "Cơ sở để giữ Pal đã bắt được. Máu của Pal nằm trong hộp sẽ dần hồi phục. Phạm vi xung quanh với cơ sở này làm trung tâm sẽ trở thành căn cứ."
+  },
+  "PalCage": {
+    "localized_name": "Lồng Rỗng",
+    "description": "Chiếc lồng rỗng, dùng để trang trí."
+  },
+  "PalFoodBox": {
+    "localized_name": "Hộp Thức Ăn",
+    "description": "Hộp để đựng thức ăn của Pal. Pal bị đói sẽ ăn thức ăn trong đây. Hãy đảm bảo trong đây luôn có thức ăn."
+  },
+  "PalMedicineBox": {
+    "localized_name": "Kệ Thuốc",
+    "description": "Kệ để cất thuốc của Pal. Pal bị bệnh sẽ uống thuốc ở đây. Hãy đảm bảo trong đây luôn có thuốc."
+  },
+  "Partition_Stone": {
+    "localized_name": "Vách Ngăn Cổ",
+    "description": "Vách ngăn cổ dùng để trang trí."
+  },
+  "Piano01_Stone": {
+    "localized_name": "Đàn Đại Dương Cầm",
+    "description": "Đàn đại dương cầm dùng để trang trí. Không thể chơi được."
+  },
+  "Piano02_Stone": {
+    "localized_name": "Đàn Piano Đứng",
+    "description": "Đàn piano đứng dùng để trang trí. Không thể chơi được."
+  },
+  "PipeClay01_Iron": {
+    "localized_name": "Ống Đất",
+    "description": "Ống đất dùng để trang trí."
+  },
+  "Plant01_Plant": {
+    "localized_name": "Cây Cảnh Trong Nhà",
+    "description": "Cây cảnh dùng để trang trí."
+  },
+  "Plant02_Plant": {
+    "localized_name": "Cây Cảnh Có Kèm Kệ",
+    "description": "Cây cảnh có kèm kệ dùng để trang trí."
+  },
+  "Plant03_Plant": {
+    "localized_name": "Cây Cảnh Để Bàn",
+    "description": "Cây cảnh để bàn dùng để trang trí."
+  },
+  "Plant04_Plant": {
+    "localized_name": "Cây Cảnh Trồng Chậu",
+    "description": "Cây cảnh trồng chậu dùng để trang trí."
+  },
+  "PlayerBed_02": {
+    "localized_name": "Giường Chất Lượng Thấp",
+    "description": "Giường tồi tàn cho con người. Hãy sử dụng khi bị thương hoặc để ngủ vào ban đêm. Nhưng khi không có mái che bạn sẽ lo lắng không ngủ được."
+  },
+  "PlayerBed_03": {
+    "localized_name": "Giường Chất Lượng Cao",
+    "description": "Giường êm ái cho con người ngủ ngon giấc. Hãy sử dụng khi bị thương hoặc để ngủ vào ban đêm. Nhưng khi không có mái che bạn sẽ lo lắng không ngủ được."
+  },
+  "Police_Banner": {
+    "localized_name": "Biểu Ngữ Dọc Của Đội Tự Vệ",
+    "description": "Biểu ngữ dọc của Đội Tự Vệ dùng để trang trí."
+  },
+  "Police_Flag": {
+    "localized_name": "Cờ Hiệu Của Đội Tự Vệ",
+    "description": "Lá cờ hiệu của Đội Tự Vệ dùng để trang trí."
+  },
+  "QuartzPit": {
+    "localized_name": "Mỏ Khai Thác Thạch Anh Tinh Khiết",
+    "description": "Cơ sở để sản xuất Thạch Anh Tinh Khiết. Công việc đào Thạch Anh Tinh Khiết rất vất vả và tốn sức. Hãy giao cho Pal giỏi công việc đào."
+  },
+  "Refrigerator": {
+    "localized_name": "Tủ Lạnh",
+    "description": "Kho lưu trữ thực phẩm dung tích lớn. Nếu chỉ định Pal hệ Băng, thực phẩm bên trong sẽ khó bị hỏng hơn."
+  },
+  "RepairBench": {
+    "localized_name": "Bàn Sửa Chữa",
+    "description": "Bàn gia công để sửa chữa các dụng cụ bị hỏng. Có thể sửa chữa bằng cách tiêu thụ vật liệu."
+  },
+  "Rug01_Stone": {
+    "localized_name": "Thảm Cổ",
+    "description": "Thảm cổ dùng để trang trí."
+  },
+  "Rug02_Stone": {
+    "localized_name": "Thảm Đỏ Cổ",
+    "description": "Thảm đỏ cổ dùng để trang trí."
+  },
+  "Rug03_Stone": {
+    "localized_name": "Thảm Xanh Lá Cổ",
+    "description": "Thảm xanh lá cổ dùng để trang trí."
+  },
+  "Rug04_Stone": {
+    "localized_name": "Thảm Dài Cổ",
+    "description": "Thảm dài cổ dùng để trang trí."
+  },
+  "Rug_Wood": {
+    "localized_name": "-",
+    "description": "-"
+  },
+  "SF_Chair": {
+    "localized_name": "Ghế Kiểu Phòng Nghiên Cứu",
+    "description": "Ghế kiểu phòng nghiên cứu dùng để trang trí."
+  },
+  "SF_Desk": {
+    "localized_name": "Bàn Kiểu Phòng Nghiên Cứu",
+    "description": "Bàn kiểu phòng nghiên cứu dùng để trang trí."
+  },
+  "SF_DiagonalWall": {
+    "localized_name": "Tường Chéo Tinh Tế",
+    "description": "Tường chéo dựng trên nền tam giác, để ngăn chặn kẻ xâm nhập. Mang phong cách tinh tế, hiện đại."
+  },
+  "SF_DoorWall": {
+    "localized_name": "Tường Có Cửa Sạch Sẽ",
+    "description": "Cửa được dựng trên nền nhà để làm lối vào. Có thể xây dựng kiến trúc sạch sẽ và mang phong cách tương lai."
+  },
+  "SF_Fence": {
+    "localized_name": "Hàng Rào Sạch Sẽ",
+    "description": "Hàng rào được xây dựng trên nền nhà hoặc mái nhà để ngăn rơi ngã. Có thể xây dựng theo phong cách sạch sẽ, hiện đại."
+  },
+  "SF_PyramidRoof": {
+    "localized_name": "Mái Kim Tự Tháp Tinh Tế",
+    "description": "Mái hình chóp được xây trên tường để che chắn mưa gió. Mang phong cách tinh tế, hiện đại."
+  },
+  "SF_SlantedRoof": {
+    "localized_name": "Mái Nhà Dốc Sạch Sẽ",
+    "description": "Mái nghiêng được xây phía trên tường để che chắn khỏi mưa gió. Có thể xây dựng kiến trúc sạch sẽ, mang tính tương lai."
+  },
+  "SF_SlopedRoofCorner": {
+    "localized_name": "Mái Nghiêng Góc Tinh Tế",
+    "description": "Mái nghiêng góc được xây phía tường để che chắn mưa gió. Mang phong cách tinh tế, hiện đại."
+  },
+  "SF_TriangleFoundation": {
+    "localized_name": "Nền Tam Giác Tinh Tế",
+    "description": "Nền tam giác để dựng tường và các công trình khác lên trên. Mang phong cách tinh tế, hiện đại."
+  },
+  "SF_TriangleRoof": {
+    "localized_name": "Mái Tam Giác Tinh Tế",
+    "description": "Mái tam giác được xây trên tường để che chắn mưa gió. Mang phong cách tinh tế, hiện đại."
+  },
+  "SF_TriangleStairsCorner": {
+    "localized_name": "Mái Góc Tinh Tế",
+    "description": "Mái góc được xây trên tường để che chắn mưa gió. Mang phong cách tinh tế, hiện đại."
+  },
+  "SF_TriangleWall": {
+    "localized_name": "Tường Tam Giác Sạch Sẽ",
+    "description": "Tường tam giác để xây trên nền nhà. Có thể xây dựng kiến trúc sạch sẽ và mang phong cách tương lai."
+  },
+  "SF_TriangleWallReverse": {
+    "localized_name": "Tường Tam Giác Tinh Tế (Đảo Ngược)",
+    "description": "Tường tam giác (đảo ngược) để xây trên nền nhà. Mang phong cách tinh tế, hiện đại."
+  },
+  "SF_WallGate": {
+    "localized_name": "Lối Đi Tinh Tế Dành Cho Pal",
+    "description": "Lối đi cho Pal được dựng trên nền nhà để làm lối ra vào. Mang phong cách tinh tế, hiện đại."
+  },
+  "SF_WindowWall": {
+    "localized_name": "Tường Có Cửa Sổ Sạch Sẽ",
+    "description": "Tường có cửa sổ được xây trên nền nhà để ngăn chặn kẻ xâm nhập. Có thể xây dựng kiến trúc sạch sẽ, mang tính tương lai."
+  },
+  "SF_foundation": {
+    "localized_name": "Nền Nhà Sạch Sẽ",
+    "description": "Nền móng để xây tường và các cơ sở trên đó. Mang phong cách sạch sẽ, hiện đại."
+  },
+  "SF_roof": {
+    "localized_name": "Mái Nhà Sạch Sẽ",
+    "description": "Mái nhà được xây trên tường để che chắn mưa gió. Mang phong cách sạch sẽ, hiện đại."
+  },
+  "SF_stair": {
+    "localized_name": "Cầu Thang Sạch Sẽ",
+    "description": "Cầu thang được đặt trên nền nhà hoặc dưới mái nhà để leo lên. Mang phong cách sạch sẽ, hiện đại."
+  },
+  "SF_wall": {
+    "localized_name": "Tường Sạch Sẽ",
+    "description": "Tường được xây trên nền nhà để ngăn chặn kẻ xâm nhập. Mang phong cách sạch sẽ, hiện đại."
+  },
+  "SanityDecrease1": {
+    "localized_name": "Thiết Bị Tạo Sóng Alpha",
+    "description": "Thiết bị tạo sóng alpha giúp Pal thư giãn. Chỉ số Minh Mẫn của Pal trong căn cứ sẽ giảm chậm hơn. Đặt từ 2 cái trở lên sẽ không có hiệu quả."
+  },
+  "Scientist_Banner": {
+    "localized_name": "Biểu Ngữ Dọc Của Đơn Vị Nghiên Cứu Gen",
+    "description": "Biểu ngữ dọc của Đơn Vị Nghiên Cứu Gen dùng để trang trí."
+  },
+  "Scientist_Flag": {
+    "localized_name": "Cờ Hiệu Của Đơn Vị Nghiên Cứu Gen",
+    "description": "Lá cờ hiệu của Đơn Vị Nghiên Cứu Gen dùng để trang trí."
+  },
+  "Seika": {
+    "localized_name": "Hoa Tươi",
+    "description": "Hoa tươi dùng để trang trí. Hãy sử dụng khi xây dựng theo phong cách Nhật Bản."
+  },
+  "Shelf01_Iron": {
+    "localized_name": "Kệ Sắt",
+    "description": "Kệ sắt đựng được vật phẩm."
+  },
+  "Shelf01_Stone": {
+    "localized_name": "Kệ Sách Cổ",
+    "description": "Giá sách cổ đựng được vật phẩm."
+  },
+  "Shelf01_Wall_Iron": {
+    "localized_name": "Kệ Sắt Treo Tường",
+    "description": "Kệ sắt gắn tường đựng được vật phẩm. Có thể gắn trên tường."
+  },
+  "Shelf01_Wall_Stone": {
+    "localized_name": "Tủ Treo Tường Cổ",
+    "description": "Tủ cổ đựng được vật phẩm. Có thể gắn trên tường."
+  },
+  "Shelf02_Iron": {
+    "localized_name": "Kệ Sắt Ngang",
+    "description": "Kệ sắt dài đựng được vật phẩm."
+  },
+  "Shelf02_Stone": {
+    "localized_name": "Tủ Quần Áo Cổ",
+    "description": "Tủ quần áo cổ đựng được vật phẩm."
+  },
+  "Shelf03_Iron": {
+    "localized_name": "Tủ Khóa Màu Cam",
+    "description": "Tủ khóa màu cam đựng được vật phẩm. Có dán nhãn Pal."
+  },
+  "Shelf03_Stone": {
+    "localized_name": "Rương Cổ",
+    "description": "Rương cổ đựng được vật phẩm. Có trưng bày ảnh của Pal."
+  },
+  "Shelf04_Iron": {
+    "localized_name": "Tủ Khóa",
+    "description": "Tủ khóa đựng được vật phẩm. Có dán nhãn Pal."
+  },
+  "Shelf04_Stone": {
+    "localized_name": "Rương Phụ Cổ",
+    "description": "Tủ phụ cổ đựng được vật phẩm. Có trưng bày ảnh của Pal."
+  },
+  "Shelf05_Stone": {
+    "localized_name": "Tủ Cổ",
+    "description": "Tủ cổ đựng được vật phẩm."
+  },
+  "Shelf06_Stone": {
+    "localized_name": "Tủ Ngang Cổ",
+    "description": "Tủ ngang cổ đựng được vật phẩm. Có trưng bày ảnh của Pal."
+  },
+  "Shelf07_Stone": {
+    "localized_name": "Tủ Lớn Cổ",
+    "description": "Tủ lớn cổ đựng được vật phẩm."
+  },
+  "Shelf_Cask_Wood": {
+    "localized_name": "Kệ Kèm Thùng Gỗ",
+    "description": "Kệ có thùng gỗ có thể đựng được vật phẩm."
+  },
+  "Shelf_Hang01_Wood": {
+    "localized_name": "Kệ Gỗ Gắn Tường",
+    "description": "Kệ gỗ có thể đựng được vật phẩm. Có thể gắn trên tường."
+  },
+  "Shelf_Hang02_Wood": {
+    "localized_name": "Kệ Trang Trí Gỗ Gắn Tường",
+    "description": "Kệ gỗ dùng để trang trí. Có thể gắn trên tường."
+  },
+  "Shelf_Wood": {
+    "localized_name": "Kệ Gỗ",
+    "description": "Kệ gỗ có thể đựng được vật phẩm."
+  },
+  "Shishiodoshi": {
+    "localized_name": "Vòi Nước Tre Nhật Bản",
+    "description": "Vòi nước tre Nhật Bản dùng để trang trí. Hãy sử dụng khi xây dựng theo phong cách Nhật Bản."
+  },
+  "Shrine_Lantern": {
+    "localized_name": "Đèn Lồng Đá",
+    "description": "Đèn lồng đá dùng để trang trí."
+  },
+  "SignExit_Ceiling_Iron": {
+    "localized_name": "Bảng Chỉ Dẫn Lối Thoát Hiểm Gắn Trần",
+    "description": "Biển báo lối thoát hiểm dùng để trang trí. Có thể gắn trên trần nhà."
+  },
+  "SignExit_Wall_Iron": {
+    "localized_name": "Bảng Chỉ Dẫn Lối Thoát Hiểm Gắn Tường",
+    "description": "Biển báo lối thoát hiểm dùng để trang trí. Có thể gắn trên tường."
+  },
+  "Signboard": {
+    "localized_name": "Bảng Hiệu",
+    "description": "Tấm bảng có thể viết chữ. Hãy sử dụng để ghi chép và liên lạc."
+  },
+  "Silo": {
+    "localized_name": "Silo",
+    "description": "Nếu đặt ở căn cứ tốc độ gieo hạt sẽ tăng lên. Đặt từ 2 cái trở lên sẽ không có hiệu quả."
+  },
+  "SkinChange": {
+    "localized_name": "Thiết Bị Trưng Diện Pal",
+    "description": "Cơ sở thay đổi giao diện. Cơ sở thay đổi giao diện của Pal thành ngoại hình đặc biệt. Có thể sử dụng giao diện có được bên ngoài trò chơi."
+  },
+  "Snowman": {
+    "localized_name": "Người Tuyết",
+    "description": "Nếu đặt ở căn cứ tốc độ làm mát sẽ tăng lên. Đặt từ 2 cái trở lên sẽ không có hiệu quả."
+  },
+  "Sofa01_Iron": {
+    "localized_name": "Ghế Sofa Đơn Bọc Da",
+    "description": "Ghế sofa đơn bọc da dùng để trang trí."
+  },
+  "Sofa01_Stone": {
+    "localized_name": "Ghế Sofa Đơn Cổ",
+    "description": "Ghế sofa đơn cổ dùng để trang trí."
+  },
+  "Sofa02_Iron": {
+    "localized_name": "Ghế Sofa Đôi Bọc Da",
+    "description": "Ghế sofa đôi bọc da dùng để trang trí."
+  },
+  "Sofa02_Stone": {
+    "localized_name": "Ghế Sofa Đôi Cổ",
+    "description": "Ghế sofa đôi cổ dùng để trang trí."
+  },
+  "Sofa03_Stone": {
+    "localized_name": "Ghế Đôn Cổ",
+    "description": "Ghế đôn cổ dùng để trang trí."
+  },
+  "Spa": {
+    "localized_name": "Suối Nước Nóng",
+    "description": "Cơ sở để Pal tại căn cứ đến nghỉ ngơi khi mệt mỏi. Xoa dịu mệt mỏi tích tụ do lao động và hồi phục chỉ số Minh Mẫn."
+  },
+  "Spa2": {
+    "localized_name": "Suối Nước Nóng Cao Cấp",
+    "description": "Cơ sở để Pal tại căn cứ đến nghỉ ngơi khi mệt mỏi. Trở nên thoải mái hơn, giúp hồi phục chỉ số Minh Mẫn nhiều hơn nữa."
+  },
+  "Spa3": {
+    "localized_name": "Suối Nước Nóng Kiểu Nhật",
+    "description": "Cơ sở để Pal tại căn cứ đến nghỉ ngơi khi mệt mỏi. Trong không gian trị liệu kiểu Nhật, Pal có thể hồi phục chỉ số Minh Mẫn nhiều hơn nữa."
+  },
+  "SphereFactory_Black_01": {
+    "localized_name": "Bàn Chế Tạo Quả Cầu Pal",
+    "description": "Bàn gia công các quả cầu để bắt Pal. Xưởng vẫn còn nhỏ nên chế tạo quả cầu Pal chưa nhanh. Cần Pal có khả năng làm việc thủ công."
+  },
+  "SphereFactory_Black_02": {
+    "localized_name": "Nhà Máy Dây Chuyền Sản Xuất Quả Cầu Pal",
+    "description": "Nhà máy sản xuất quả cầu để bắt Pal. Nhờ phân chia công việc cùng nhau nên có thể chế tạo với tốc độ tương đối. Cần Pal có khả năng làm việc thủ công."
+  },
+  "SphereFactory_Black_03": {
+    "localized_name": "Nhà Máy Dây Chuyền Sản Xuất Quả Cầu Pal II",
+    "description": "Nhà máy sản xuất quả cầu để bắt Pal. Công việc được chia nhỏ, có thể chế tạo quả cầu Pal nhanh chóng. Cần Pal có khả năng làm việc thủ công."
+  },
+  "SphereFactory_Black_04": {
+    "localized_name": "Nhà Máy Quả Cầu Pal Văn Minh Tiên Tiến",
+    "description": "Nhà máy sản xuất quả cầu để bắt Pal. Sử dụng máy móc hiệu suất cao nên có thể sản xuất các quả cầu Pal ở tốc độ cao. Cần Pal có khả năng làm việc thủ công."
+  },
+  "StationDeforest2": {
+    "localized_name": "Nơi Đốn Gỗ",
+    "description": "Cơ sở để sản xuất Gỗ. Công việc chặt cây rất vất vả và tốn sức. Hãy giao cho Pal giỏi đốn gỗ."
+  },
+  "StonePit": {
+    "localized_name": "Mỏ Đá",
+    "description": "Cơ sở để sản xuất Đá. Công việc đào Đá rất vất vả và tốn sức. Hãy giao cho Pal giỏi công việc đào."
+  },
+  "Stone_DiagonalWall": {
+    "localized_name": "Tường Chéo Đá",
+    "description": "Tường chéo dựng trên nền tam giác, để ngăn chặn kẻ xâm nhập. Vì làm bằng đá nên khá chắc chắn."
+  },
+  "Stone_DoorWall": {
+    "localized_name": "Cửa Đá",
+    "description": "Cửa được dựng trên nền nhà để làm lối vào. Vì làm bằng đá nên khá chắc chắn."
+  },
+  "Stone_Fence": {
+    "localized_name": "Hàng Rào Đá",
+    "description": "Hàng rào được xây dựng trên nền nhà hoặc mái nhà để ngăn rơi ngã. Vì làm bằng đá nên khá chắc chắn."
+  },
+  "Stone_Gate": {
+    "localized_name": "Cổng Đá",
+    "description": "Cổng mà Pal kích thước lớn hơn cũng có thể đi qua. Vì làm bằng đá nên khá chắc chắn."
+  },
+  "Stone_PyramidRoof": {
+    "localized_name": "Mái Kim Tự Tháp Đá",
+    "description": "Mái hình chóp được xây trên tường để che chắn mưa gió. Vì làm bằng đá nên khá chắc chắn."
+  },
+  "Stone_SlantedRoof": {
+    "localized_name": "Mái Nghiêng Đá",
+    "description": "Mái nghiêng được xây phía trên tường để che chắn khỏi mưa gió. Vì làm bằng đá nên khá chắc chắn."
+  },
+  "Stone_SlopedRoofCorner": {
+    "localized_name": "Mái Đá Tam Giác Nghiêng",
+    "description": "Mái nghiêng góc được xây trên tường để che chắn mưa gió. Vì làm bằng đá nên khá chắc chắn."
+  },
+  "Stone_TriangleFoundation": {
+    "localized_name": "Nền Tam Giác Đá",
+    "description": "Nền tam giác để dựng tường và các công trình khác lên trên. Vì làm bằng đá nên khá chắc chắn."
+  },
+  "Stone_TriangleRoof": {
+    "localized_name": "Mái Tam Giác Đá",
+    "description": "Mái tam giác được xây trên tường để che chắn mưa gió. Vì làm bằng đá nên khá chắc chắn."
+  },
+  "Stone_TriangleStairsCorner": {
+    "localized_name": "Mái Góc Đá",
+    "description": "Mái góc được xây trên tường để che chắn mưa gió. Vì làm bằng đá nên khá chắc chắn."
+  },
+  "Stone_TriangleWall": {
+    "localized_name": "Tường Tam Giác Đá",
+    "description": "Tường tam giác để dựng trên nền nhà. Vì làm bằng đá nên khá chắc chắn."
+  },
+  "Stone_TriangleWallReverse": {
+    "localized_name": "Tường Tam Giác Đá (Đảo Ngược)",
+    "description": "Tường tam giác (đảo ngược) để dựng trên nền nhà. Vì làm bằng đá nên khá chắc chắn."
+  },
+  "Stone_WallGate": {
+    "localized_name": "Lối Đi Bằng Đá Cho Pal",
+    "description": "Lối đi cho Pal được dựng trên nền nhà để làm lối ra vào. Vì làm bằng đá nên khá chắc chắn."
+  },
+  "Stone_WindowWall": {
+    "localized_name": "Tường Đá Có Cửa Sổ",
+    "description": "Tường có cửa sổ để dựng trên nền nhà và ngăn chặn kẻ xâm nhập. Vì làm bằng đá nên khá chắc chắn."
+  },
+  "Stone_foundation": {
+    "localized_name": "Nền Nhà Đá",
+    "description": "Nền nhà để dựng tường và cơ sở vật chất lên trên. Vì làm bằng đá nên khá chắc chắn."
+  },
+  "Stone_roof": {
+    "localized_name": "Mái Đá",
+    "description": "Mái nhà được xây trên tường để che chắn khỏi mưa gió. Vì làm bằng đá nên khá chắc chắn."
+  },
+  "Stone_stair": {
+    "localized_name": "Cầu Thang Đá",
+    "description": "Cầu thang được đặt dưới nền nhà hoặc mái nhà để có thể leo lên. Vì làm bằng đá nên khá chắc chắn."
+  },
+  "Stone_wall": {
+    "localized_name": "Tường Đá",
+    "description": "Tường để dựng trên nền nhà và ngăn chặn kẻ xâm nhập. Vì làm bằng đá nên khá chắc chắn."
+  },
+  "Stool01_Iron": {
+    "localized_name": "Ghế Đẩu Sắt",
+    "description": "Ghế đẩu sắt dùng để trang trí."
+  },
+  "Stool01_Stone": {
+    "localized_name": "Ghế Đẩu Cổ",
+    "description": "Ghế đẩu cổ dùng để trang trí."
+  },
+  "Stool_High_Wood": {
+    "localized_name": "Ghế Đẩu Gỗ Cao",
+    "description": "Ghế đẩu cao bằng gỗ dùng để trang trí."
+  },
+  "Stool_Wood": {
+    "localized_name": "Ghế Đẩu Gỗ",
+    "description": "Ghế đẩu bằng gỗ dùng để trang trí."
+  },
+  "Stove01_Stone": {
+    "localized_name": "Lò Cổ",
+    "description": "Bếp cổ dùng để trang trí."
+  },
+  "Stump": {
+    "localized_name": "Gốc Cây Và Rìu",
+    "description": "Nếu đặt ở căn cứ tốc độ đốn gỗ sẽ tăng lên. Đặt từ 2 cái trở lên sẽ không có hiệu quả."
+  },
+  "SulfurPit": {
+    "localized_name": "Mỏ Khai Thác Lưu Huỳnh",
+    "description": "Cơ sở để sản xuất Lưu Huỳnh. Công việc đào Lưu Huỳnh rất vất vả và tốn sức. Hãy giao cho Pal giỏi công việc đào."
+  },
+  "TableCircular01_Iron": {
+    "localized_name": "Bàn Tròn Sắt",
+    "description": "Bàn tròn sắt dùng để trang trí."
+  },
+  "TableCircular01_Stone": {
+    "localized_name": "Bàn Tròn Cổ",
+    "description": "Bàn tròn cổ dùng để trang trí."
+  },
+  "TableCircular_Wood": {
+    "localized_name": "Bàn Tròn",
+    "description": "Bàn tròn dùng để trang trí."
+  },
+  "TableDresser01_Stone": {
+    "localized_name": "Bàn Trang Điểm Cổ",
+    "description": "Bàn trang điểm để xem vẻ ngoài của mình. Có thể thay đổi ngoại hình của nhân vật."
+  },
+  "TableSide01_Iron": {
+    "localized_name": "Bàn Phụ Gỗ Lim",
+    "description": "Bàn phụ gỗ lim dùng để trang trí."
+  },
+  "TableSink01_Stone": {
+    "localized_name": "Bồn Rửa Mặt Cổ",
+    "description": "Bồn rửa mặt cổ dùng để trang trí."
+  },
+  "TableSquare01_Iron": {
+    "localized_name": "Bàn Gỗ Lim",
+    "description": "Bàn gỗ lim dùng để trang trí."
+  },
+  "TableSquare02_Iron": {
+    "localized_name": "Bàn Thấp Gỗ Lim",
+    "description": "Bàn thấp gỗ lim dùng để trang trí."
+  },
+  "TableSquare_Wood": {
+    "localized_name": "Bàn Vuông",
+    "description": "Bàn vuông dùng để trang trí."
+  },
+  "Tansu": {
+    "localized_name": "Tủ Kiểu Nhật",
+    "description": "Tủ quần áo Nhật Bản đựng được vật phẩm. Hãy sử dụng khi xây dựng theo phong cách Nhật Bản."
+  },
+  "Television01_Iron": {
+    "localized_name": "Tivi Cổ",
+    "description": "Tivi cổ dùng để trang trí. Di vật của nền văn minh cổ đại, giờ chỉ phát hình ảnh của Pengullet."
+  },
+  "Tire01_Iron": {
+    "localized_name": "Lốp Xe",
+    "description": "Lốp xe dùng để trang trí."
+  },
+  "Toilet01_Stone": {
+    "localized_name": "Bồn Cầu Cổ",
+    "description": "Bồn cầu cổ dùng để trang trí. Không thể đi vệ sinh ở đây."
+  },
+  "ToiletHolder01_Stone": {
+    "localized_name": "Giá Đựng Giấy Vệ Sinh Cổ",
+    "description": "Giá đựng giấy vệ sinh cổ dùng để trang trí."
+  },
+  "ToolBoxV1": {
+    "localized_name": "Hộp Dụng Cụ Lớn",
+    "description": "Nếu đặt ở căn cứ tốc độ làm việc thủ công sẽ tăng lên. Đặt từ 2 cái trở lên sẽ không có hiệu quả."
+  },
+  "Torch": {
+    "localized_name": "Đuốc Đứng",
+    "description": "Nguồn sáng để chiếu sáng căn cứ ngay cả trong đêm tối. Cần Pal hệ Lửa để đốt lửa."
+  },
+  "Toro": {
+    "localized_name": "Đèn Lồng Đá",
+    "description": "Đèn lồng đá dùng để trang trí. Hãy sử dụng khi xây dựng theo phong cách Nhật Bản."
+  },
+  "TowlRack01_Stone": {
+    "localized_name": "Giá Treo Khăn Tắm Cổ",
+    "description": "Giá treo khăn tắm cổ dùng để trang trí."
+  },
+  "TrafficBarricade01_Iron": {
+    "localized_name": "Rào Chắn",
+    "description": "Rào chắn dùng để trang trí."
+  },
+  "TrafficBarricade02_Iron": {
+    "localized_name": "Rào Chắn Màu Cam",
+    "description": "Rào chắn màu cam dùng để trang trí."
+  },
+  "TrafficBarricade03_Iron": {
+    "localized_name": "Rào Chắn Sắt Màu Đỏ",
+    "description": "Rào chắn sắt màu đỏ dùng để trang trí."
+  },
+  "TrafficBarricade04_Iron": {
+    "localized_name": "Rào Chắn Sắt Màu Trắng",
+    "description": "Rào chắn sắt màu trắng dùng để trang trí."
+  },
+  "TrafficBarricade05_Iron": {
+    "localized_name": "Hàng Rào Sắt",
+    "description": "Hàng rào sắt dùng để trang trí."
+  },
+  "TrafficCone01_Iron": {
+    "localized_name": "Cọc Tiêu Hình Nón",
+    "description": "Cọc tiêu hình nón dùng để trang trí."
+  },
+  "TrafficCone02_Iron": {
+    "localized_name": "Cọc Cảnh Báo Trụ To",
+    "description": "Cọc cảnh báo trụ to dùng để trang trí."
+  },
+  "TrafficCone03_Iron": {
+    "localized_name": "Cọc Cảnh Báo Trụ Thuôn",
+    "description": "Cọc cảnh báo trụ thuôn dùng để trang trí."
+  },
+  "TrafficLight01_Iron": {
+    "localized_name": "Đèn Giao Thông",
+    "description": "Đèn giao thông dùng để trang trí."
+  },
+  "TrafficSign01_Iron": {
+    "localized_name": "Biển Báo Cấm Pal",
+    "description": "Biển báo cấm Pal dùng để trang trí. Từng được sử dụng trong thời cổ đại, nhưng đã trở nên lỗi thời."
+  },
+  "TrafficSign02_Iron": {
+    "localized_name": "Biển Báo Dừng",
+    "description": "Biển báo tạm dừng dùng để trang trí. Từng được sử dụng trong thời cổ đại, nhưng đã trở nên lỗi thời."
+  },
+  "TrafficSign03_Iron": {
+    "localized_name": "Biển Cảnh Báo Eikthyrdeer",
+    "description": "Biển báo cảnh báo Eikthyrdeer dùng để trang trí. Trong nền văn minh cổ đại, tai nạn va chạm giữa Eikthyrdeer và Pal xảy ra liên tục."
+  },
+  "TrafficSign04_Iron": {
+    "localized_name": "Biển Cảnh Báo Mammorest",
+    "description": "Biển báo cảnh báo Mammorest dùng để trang trí. Trong nền văn minh cổ đại, có rất nhiều trường hợp người chọc giận Mammorest đều đã phải chết."
+  },
+  "TransmissionTower": {
+    "localized_name": "Tháp Truyền Điện",
+    "description": "Nếu đặt ở căn cứ tốc độ phát điện sẽ tăng lên. Đặt từ 2 cái trở lên sẽ không có hiệu quả."
+  },
+  "Trap_LegHold": {
+    "localized_name": "Bẫy Kẹp (Nhỏ)",
+    "description": "Bẫy để giữ chân Pal đi trên đó. Pal bị dính bẫy sẽ dễ bị bắt bằng quả cầu Pal hơn. Chỉ có hiệu quả với Pal nhỏ."
+  },
+  "Trap_LegHold_Big": {
+    "localized_name": "Bẫy Kẹp (Lớn)",
+    "description": "Bẫy kẹp để dừng chuyển động của Pal kích thước lớn. Pal bị dính bẫy sẽ dễ bị bắt bằng quả cầu Pal hơn. Chỉ có hiệu quả với Pal kích thước lớn, không bẫy được Pal nhỏ."
+  },
+  "Trap_MineAttack": {
+    "localized_name": "Mìn Đất",
+    "description": "Bẫy làm Pal phát nổ khi đạp phải. Gây sát thương trên diện rộng."
+  },
+  "Trap_MineElecShock": {
+    "localized_name": "Mìn Điện Giật",
+    "description": "Bẫy làm Pal bị điện giật khi đạp phải. Pal bị điện giật sẽ dễ bị bắt bằng quả cầu Pal hơn."
+  },
+  "Trap_MineFreeze": {
+    "localized_name": "Mìn Đóng Băng",
+    "description": "Bẫy làm Pal bị đóng băng khi đạp phải. Pal bị đóng băng sẽ dễ bị bắt bằng quả cầu Pal hơn."
+  },
+  "Trap_MovingPanel": {
+    "localized_name": "-",
+    "description": "-"
+  },
+  "Trap_Noose": {
+    "localized_name": "Bẫy Treo",
+    "description": "Bẫy bắt Pal đi qua. Pal bị dính bẫy sẽ dễ bị bắt bằng quả cầu Pal hơn. Chỉ có hiệu quả với Pal nhỏ."
+  },
+  "WallSignboard": {
+    "localized_name": "Bảng Hiệu Treo Tường",
+    "description": "Tấm bảng có thể viết chữ. Có thể treo trên tường."
+  },
+  "WallTorch": {
+    "localized_name": "Đuốc Treo Tường",
+    "description": "Nguồn sáng để chiếu sáng căn cứ ngay cả trong đêm tối. Có thể gắn trên tường. Cần Pal hệ Lửa để đốt lửa."
+  },
+  "WallTorch02": {
+    "localized_name": "Đuốc Treo Tường Trang Nghiêm",
+    "description": "Đuốc thiêng rực cháy ngọn lửa được Đồng Minh Ngọn Lửa Vĩnh Cửu tôn thờ. Có thể gắn lên tường để chiếu sáng. Cần có Pal hệ Lửa để thắp sáng."
+  },
+  "WeaponFactory_Dirty_01": {
+    "localized_name": "Bàn Chế Tạo Vũ Khí",
+    "description": "Bàn gia công để sản xuất vũ khí và đạn dược. Xưởng vẫn còn nhỏ, không thể chế tạo vũ khí cấp cao. Cần Pal có khả năng làm việc thủ công."
+  },
+  "WeaponFactory_Dirty_02": {
+    "localized_name": "Nhà Máy Dây Chuyền Sản Xuất Vũ Khí",
+    "description": "Nhà máy sản xuất vũ khí và đạn dược. Nhờ phân chia công việc cùng nhau nên có thể chế tạo vũ khí tốt. Cần Pal có khả năng làm việc thủ công."
+  },
+  "WeaponFactory_Dirty_03": {
+    "localized_name": "Nhà Máy Dây Chuyền Sản Xuất Vũ Khí II",
+    "description": "Nhà máy sản xuất vũ khí và đạn dược. Công việc được chia nhỏ, có thể chế tạo vũ khí cấp cao nhanh chóng. Cần Pal có khả năng làm việc thủ công."
+  },
+  "WeaponFactory_Dirty_04": {
+    "localized_name": "Dây Chuyền Lắp Ráp Văn Minh Tiên Tiến",
+    "description": "Nhà máy sản xuất vũ khí và đạn dược. Sử dụng máy móc hiệu suất cao nên có thể sản xuất vũ khí ở tốc độ cao. Cần Pal có khả năng làm việc thủ công."
+  },
+  "Wire_Fence": {
+    "localized_name": "Hàng Rào Dây Thép",
+    "description": "Hàng rào dây thép dùng để trang trí."
+  },
+  "Wood_Fence": {
+    "localized_name": "Hàng Rào Gỗ",
+    "description": "Hàng rào được xây dựng trên nền nhà hoặc mái nhà để ngăn rơi ngã. Vì làm bằng gỗ nên khá yếu."
+  },
+  "Wood_Gate": {
+    "localized_name": "Cổng Gỗ",
+    "description": "Cổng mà Pal kích thước lớn hơn cũng có thể đi qua. Vì làm bằng gỗ nên dễ vỡ."
+  },
+  "Wood_SlantedRoof": {
+    "localized_name": "Mái Nghiêng Gỗ",
+    "description": "Mái nghiêng được xây phía trên tường để che chắn khỏi mưa gió. Vì làm bằng gỗ nên dễ vỡ."
+  },
+  "Wood_TriangleWall": {
+    "localized_name": "Tường Tam Giác Gỗ",
+    "description": "Tường tam giác để dựng trên nền nhà. Vì làm bằng gỗ nên dễ vỡ."
+  },
+  "Wood_TriangleWallReverse": {
+    "localized_name": "Tường Tam Giác Gỗ (Đảo Ngược)",
+    "description": "Tường tam giác (đảo ngược) để dựng trên nền nhà. Vì làm bằng gỗ nên khá yếu."
+  },
+  "Wood_WindowWall": {
+    "localized_name": "Tường Gỗ Có Cửa Sổ",
+    "description": "Tường có cửa sổ để dựng trên nền nhà và ngăn chặn kẻ xâm nhập. Vì làm bằng gỗ nên dễ vỡ."
+  },
+  "WoodenBarricade": {
+    "localized_name": "Rào Chắn Gỗ",
+    "description": "Rào chắn bằng gỗ, dùng để trang trí."
+  },
+  "Wooden_DiagonalWall": {
+    "localized_name": "Tường Chéo Gỗ",
+    "description": "Tường chéo dựng trên nền tam giác, để ngăn chặn kẻ xâm nhập. Vì làm bằng gỗ nên khá yếu."
+  },
+  "Wooden_DoorWall": {
+    "localized_name": "Cửa Gỗ",
+    "description": "Cửa được dựng trên nền nhà để làm lối vào. Vì làm bằng gỗ nên dễ vỡ."
+  },
+  "Wooden_PyramidRoof": {
+    "localized_name": "Mái Kim Tự Tháp Gỗ",
+    "description": "Mái hình chóp được xây trên tường để che chắn mưa gió. Vì làm bằng gỗ nên khá yếu."
+  },
+  "Wooden_SlopedRoofCorner": {
+    "localized_name": "Mái Gỗ Tam Giác Nghiêng",
+    "description": "Mái nghiêng góc được xây trên tường để che chắn mưa gió. Vì làm bằng gỗ nên khá yếu."
+  },
+  "Wooden_TriangleFoundation": {
+    "localized_name": "Nền Tam Giác Gỗ",
+    "description": "Nền tam giác để dựng tường và các công trình khác lên trên. Vì làm bằng gỗ nên khá yếu."
+  },
+  "Wooden_TriangleRoof": {
+    "localized_name": "Mái Tam Giác Gỗ",
+    "description": "Mái tam giác được xây trên tường để che chắn mưa gió. Vì làm bằng gỗ nên khá yếu."
+  },
+  "Wooden_TriangleStairsCorner": {
+    "localized_name": "Mái Góc Gỗ",
+    "description": "Mái góc được xây trên tường để che chắn mưa gió. Vì làm bằng gỗ nên khá yếu."
+  },
+  "Wooden_WallGate": {
+    "localized_name": "Lối Đi Bằng Gỗ Cho Pal",
+    "description": "Lối đi cho Pal được dựng trên nền nhà để làm lối ra vào. Vì làm bằng gỗ nên khá yếu."
+  },
+  "Wooden_foundation": {
+    "localized_name": "Nền Nhà Gỗ",
+    "description": "Nền nhà để dựng tường và cơ sở vật chất lên trên. Vì làm bằng gỗ nên dễ vỡ."
+  },
+  "Wooden_ladder": {
+    "localized_name": "Thang",
+    "description": "Thang giúp leo lên nơi cao hơn một chút."
+  },
+  "Wooden_roof": {
+    "localized_name": "Mái Gỗ",
+    "description": "Mái nhà được xây trên tường để che chắn khỏi mưa gió. Vì làm bằng gỗ nên dễ vỡ."
+  },
+  "Wooden_stair": {
+    "localized_name": "Cầu Thang Gỗ",
+    "description": "Cầu thang được đặt dưới nền nhà hoặc mái nhà để có thể leo lên. Vì làm bằng gỗ nên dễ vỡ."
+  },
+  "Wooden_wall": {
+    "localized_name": "Tường Gỗ",
+    "description": "Tường để dựng trên nền nhà và ngăn chặn kẻ xâm nhập. Vì làm bằng gỗ nên dễ vỡ."
+  },
+  "WorkBench": {
+    "localized_name": "Bàn Gia Công Nguyên Thủy",
+    "description": "Bàn Gia Công Nguyên Thủy để chế tạo vật phẩm đơn giản. Cần Pal có khả năng làm việc thủ công."
+  },
+  "WorkBench_SkillUnlock": {
+    "localized_name": "Bàn Chế Tạo Trang Bị Pal",
+    "description": "Bàn Gia Công Nguyên Thủy để chế tạo dụng cụ mà Pal sử dụng. Hãy chế tạo yên để cưỡi Pal, hoặc chế tạo súng để Pal bắn."
+  },
+  "WorkSpeedIncrease1": {
+    "localized_name": "Thiết Bị Tạo Sóng Beta",
+    "description": "Thiết bị tạo sóng beta kích thích hoạt động của Pal. Tăng tốc độ làm việc của Pal trong căn cứ. Đặt từ 2 cái trở lên sẽ không có hiệu quả."
+  },
+  "YakushimaBoss002_Relic": {
+    "localized_name": "Tượng Chúa Tể Mặt Trăng",
+    "description": "[Hợp tác với Terraria] Bức tượngChúa Tể Mặt Trăngtỏa sáng ánh vàng. Minh chứng cho một chiến binh đã vượt qua trận chiến khốc liệt tưởng chừng vô vọng."
+  },
+  "Zabuton": {
+    "localized_name": "Đệm Ngồi Nhật Bản",
+    "description": "Đệm ngồi Nhật Bản dùng để trang trí. Hãy sử dụng khi xây dựng theo phong cách Nhật Bản."
+  },
+  "Zaisu": {
+    "localized_name": "Ghế Tựa Nhật Bản",
+    "description": "Ghế tựa Nhật Bản dùng để trang trí. Hãy sử dụng khi xây dựng theo phong cách Nhật Bản."
+  }
+}

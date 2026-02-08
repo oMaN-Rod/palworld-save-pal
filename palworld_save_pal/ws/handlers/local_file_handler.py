@@ -195,45 +195,41 @@ async def process_steam_save(save_path: str, ws: WebSocket, local: bool):
         with open(validation_result.level_meta, "rb") as f:
             level_meta = f.read()
 
-    player_files = FileManager.get_player_saves(validation_result.players_dir)
-
-    global_pal_storage_sav = None
-    if validation_result.global_pal_storage_sav:
-        with open(validation_result.global_pal_storage_sav, "rb") as f:
-            global_pal_storage_sav = f.read()
+    player_file_refs = FileManager.get_player_save_paths(validation_result.players_dir)
 
     await app_state.process_save_files(
         save_path,
         level_sav,
         level_meta,
-        player_files,
+        player_file_refs,
         ws_callback=lambda msg: ws.send_json(
             build_response(MessageType.PROGRESS_MESSAGE, msg)
         ),
         local=local,
-        global_pal_storage_sav=global_pal_storage_sav,
+        gps_file_path=validation_result.global_pal_storage_sav,
     )
 
     data = {
         "level": validation_result.level_sav,
-        "players": [str(p) for p in player_files],
+        "players": [str(p) for p in player_file_refs],
         "world_name": app_state.save_file.world_name,
         "type": "steam",
         "size": app_state.save_file.size,
+        "has_gps": validation_result.global_pal_storage_sav is not None,
     }
 
     response = build_response(MessageType.LOADED_SAVE_FILES, data)
     await ws.send_json(response)
 
-    response = build_response(MessageType.GET_PLAYERS, app_state.players)
+    response = build_response(
+        MessageType.GET_PLAYER_SUMMARIES, app_state.player_summaries
+    )
     await ws.send_json(response)
 
-    response = build_response(MessageType.GET_GUILDS, app_state.guilds)
+    response = build_response(
+        MessageType.GET_GUILD_SUMMARIES, app_state.guild_summaries
+    )
     await ws.send_json(response)
-
-    if global_pal_storage_sav:
-        response = build_response(MessageType.GET_GPS_PALS, app_state.gps)
-        await ws.send_json(response)
 
 
 async def get_gamepass_saves(file_path: str, ws: WebSocket):
@@ -343,26 +339,35 @@ async def select_gamepass_save_handler(
         level_sav,
         level_meta,
         player_files,
-        lambda msg: ws.send_json(build_response(MessageType.PROGRESS_MESSAGE, msg)),
+        ws_callback=lambda msg: ws.send_json(
+            build_response(MessageType.PROGRESS_MESSAGE, msg)
+        ),
         save_type=SaveType.GAMEPASS,
+        gps_file_path=None,
     )
+
     world_name = (
         app_state.save_file.world_name if app_state.save_file.world_name else "Unknown"
     )
     data = {
         "level": f"{level_sav_dir}/container.{seq}",
-        "players": list(player_files.keys()),
+        "players": [str(p) for p in player_files.keys()],
         "world_name": world_name,
         "type": "gamepass",
         "size": app_state.save_file.size,
+        "has_gps": False,
     }
     response = build_response(MessageType.LOADED_SAVE_FILES, data)
     await ws.send_json(response)
 
-    response = build_response(MessageType.GET_PLAYERS, app_state.players)
+    response = build_response(
+        MessageType.GET_PLAYER_SUMMARIES, app_state.player_summaries
+    )
     await ws.send_json(response)
 
-    response = build_response(MessageType.GET_GUILDS, app_state.guilds)
+    response = build_response(
+        MessageType.GET_GUILD_SUMMARIES, app_state.guild_summaries
+    )
     await ws.send_json(response)
 
 

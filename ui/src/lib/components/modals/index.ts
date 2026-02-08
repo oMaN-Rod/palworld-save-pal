@@ -11,6 +11,7 @@ import MultiSkillSelectModal from './multi-skill-select/MultiSkillSelectModal.sv
 import NukeUpsConfirmModal from './nuke-ups-confirm/NukeUpsConfirmModal.svelte';
 import NumberInputModal from './number-input/NumberInputModal.svelte';
 import NumberSliderModal from './number-slider/NumberSliderModal.svelte';
+import OpenFolder from './open-folder/OpenFolder.svelte';
 import PresetConfigModal from './pal-preset-config/PalPresetConfigModal.svelte';
 import PalPresetSelectModal from './pal-preset-select/PalPresetSelectModal.svelte';
 import PalSelectModal from './pal-select/PalSelectModal.svelte';
@@ -31,7 +32,8 @@ export {
 	MultiSkillSelectModal,
 	NukeUpsConfirmModal,
 	NumberInputModal,
-	NumberSliderModal,
+	NumberSliderModal, 
+	OpenFolder, 
 	PalPresetSelectModal,
 	PalSelectModal,
 	PresetConfigModal,
@@ -39,3 +41,4 @@ export {
 	SkillSelectModal,
 	TextInputModal
 };
+

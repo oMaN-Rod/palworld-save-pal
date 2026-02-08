@@ -279,6 +279,10 @@
     "localized_name": "Psychogravitation",
     "description": "Bemächtigt sich mithilfe von Psychokinese Gegnern in der Umgebung und lässt sie aus großer Höhe zu Boden prallen."
   },
+  "EPalWazaID::RadiantBarrage": {
+    "localized_name": "Glanzhagel",
+    "description": "Erzeugt eine Lichtkugel, die dem Gegner langsam nachsetzt. Nach der Annäherung spaltet sie sich in unzählige Lichtgeschosse, die das Ziel angreifen."
+  },
   "EPalWazaID::RaidCutter": {
     "localized_name": "Schnellschneider",
     "description": "Nimmt den Gegner ins Visier und erzeugt unzählige fliegende Luftklingen."
@@ -473,6 +477,10 @@
   },
   "EPalWazaID::Unique_BluePlatypus_Toboggan": {
     "localized_name": "Surftackling",
+    "description": null
+  },
+  "EPalWazaID::Unique_BluePlatypus_Toboggan_Fire": {
+    "localized_name": "Feuertackling",
     "description": null
   },
   "EPalWazaID::Unique_BlueThunderHorse_FlashDash": {
@@ -682,6 +690,18 @@
   "EPalWazaID::Unique_LeafMomonga_SomerSault": {
     "localized_name": "Wendeblatt",
     "description": "Einzigartige Fähigkeit von Herbil. Nimmt kurz eine Kampfhaltung ein und wirft sich dann in rasantem Tempo Purzelbäume schlagend auf den Gegner."
+  },
+  "EPalWazaID::Unique_LegendDeer_RadiantPurge_Otomo": {
+    "localized_name": "Läuterung",
+    "description": "Einzigartige Fähigkeit von Hartalis. Erhebt sich in die Luft, bündelt gewaltige Energie zu einer Lichtkugel und schleudert sie zu Boden. Das Licht läutert alles, was es berührt."
+  },
+  "EPalWazaID::Unique_LegendDeer_RadiantWingRush": {
+    "localized_name": "Segensschwingen",
+    "description": "Einzigartige Fähigkeit von Hartalis. Erhebt sich mit einem Rückwärtssatz in die Luft, entfaltet Flügel aus Licht und stürzt auf den Gegner herab."
+  },
+  "EPalWazaID::Unique_LegendDeer_WarpPillarBurst": {
+    "localized_name": "Himmelstränen",
+    "description": "Einzigartige Fähigkeit von Hartalis. Verschwindet für einen Moment und lässt anschließend im Bereich um sich herum mächtige Säulen aus Licht herabregnen."
   },
   "EPalWazaID::Unique_LilyQueen_LilyHealing": {
     "localized_name": "Segen der Fülle",
@@ -942,6 +962,10 @@
   "EPalWazaID::WaterGun": {
     "localized_name": "Aquaschuss",
     "description": "Nimmt das Ziel ins Visier und erzeugt eine geradeaus fliegende Wasserkugel."
+  },
+  "EPalWazaID::Weapon_Use": {
+    "localized_name": "Waffengebrauch",
+    "description": "Greift mit seiner Waffe an."
   },
   "EPalWazaID::WindCutter": {
     "localized_name": "Windschneider",

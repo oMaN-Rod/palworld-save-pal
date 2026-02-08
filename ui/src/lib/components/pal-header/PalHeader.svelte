@@ -21,16 +21,18 @@
 	import { staticIcons } from '$types/icons';
 	import NumberFlow from '@number-flow/svelte';
 	import type { ValueChangeDetails } from '@zag-js/rating-group';
+	import * as m from '$i18n/messages';
+	import { c, p } from '$lib/utils/commonTranslations';
 
 	let {
 		pal = $bindable(),
 		showActions = true,
 		popup = false
-	} = $props<{
-		pal?: Pal;
+	}: {
+		pal: Pal;
 		showActions?: boolean;
 		popup?: boolean;
-	}>();
+	} = $props();
 
 	const appState = getAppState();
 	const modal = getModalState();
@@ -153,7 +155,7 @@
 		if (!pal) return;
 		// @ts-ignore
 		const result = await modal.showModal<string>(TextInputModal, {
-			title: 'Edit nickname',
+			title: m.edit_entity({ entity: m.nickname() }),
 			value: pal.nickname || pal.name
 		});
 		if (!result) return;
@@ -164,17 +166,27 @@
 	}
 
 	function handleEditGender() {
-		if (pal) {
-			const currentGender = pal.gender;
-			pal.gender = currentGender === PalGender.MALE ? PalGender.FEMALE : PalGender.MALE;
-			pal.state = EntryState.MODIFIED;
+		if (!pal) return;
+
+		let genderCycle: Record<PalGender, PalGender> = {
+			[PalGender.MALE]: PalGender.FEMALE,
+			[PalGender.FEMALE]: PalGender.MALE,
+			[PalGender.NONE]: PalGender.MALE
+		};
+
+		const palData = palsData.getByKey(pal.character_key);
+		if (palData && !palData.is_pal) {
+			genderCycle[PalGender.FEMALE] = PalGender.NONE;
 		}
+
+		pal.gender = genderCycle[pal.gender] ?? PalGender.MALE;
+		pal.state = EntryState.MODIFIED;
 	}
 
 	function handleEditLucky() {
 		const [type, valid] = canBeLucky(pal.character_id);
 		if (!valid) {
-			toast.add(`${type} Pal cannot be Lucky`, undefined, 'warning');
+			toast.add(m.pal_cannot_be_trait({ type, trait: m.lucky() }), undefined, 'warning');
 			return;
 		}
 		if (pal) {
@@ -191,7 +203,7 @@
 			pal.is_boss = false;
 			pal.is_lucky = false;
 			pal.state = EntryState.MODIFIED;
-			toast.add(`${type} Pal cannot be Alpha`, undefined, 'warning');
+			toast.add(m.pal_cannot_be_trait({ type, trait: m.alpha() }), undefined, 'warning');
 			return;
 		}
 		pal.is_boss = !pal.is_boss;
@@ -216,7 +228,7 @@
 	async function handleSelectPreset() {
 		// @ts-ignore
 		const result = await modal.showModal<string>(PalPresetSelectModal, {
-			title: 'Select preset',
+			title: m.select_entity({ entity: c.preset }),
 			selectedPals: [{ character_id: pal.character_id, character_key: pal.character_key }]
 		});
 		if (!result) return;
@@ -279,7 +291,12 @@
 				sanity: config.sanity ? pal.sanity : null,
 				exp: config.exp ? pal.exp : null,
 				element: element,
-				lock_element: config.lock_element
+				lock_element: config.lock_element,
+				nickname: config.nickname ? pal.nickname : null,
+				filtered_nickname: config.filtered_nickname ? pal.nickname : null,
+				stomach: config.stomach ? pal.stomach : null,
+				hp: config.hp ? pal.hp : null,
+				friendship_point: config.friendship_point ? pal.friendship_point : null
 			}
 		} as PresetProfile;
 
@@ -415,7 +432,7 @@
 								<div class="h-6 w-6">
 									<img src={staticIcons.middleClickIcon} alt="Middle Click" class="h-full w-full" />
 								</div>
-								<span class="text-xs font-bold">Level {max_level}</span>
+								<span class="text-xs font-bold">{m.level({ level: max_level })}</span>
 							</div>
 						{/snippet}
 					</Tooltip>
@@ -436,7 +453,7 @@
 					</h6>
 					<div class="flex space-x-2">
 						{#if appState.settings.debug_mode && showActions}
-							<Tooltip position="bottom" label="Debug">
+							<Tooltip position="bottom" label={m.debug()}>
 								<CornerDotButton
 									onClick={() => {
 										goto(
@@ -450,12 +467,12 @@
 							</Tooltip>
 						{/if}
 						{#if showActions}
-							<Tooltip position="bottom" label="Edit nickname">
+							<Tooltip position="bottom" label={m.edit_entity({ entity: m.nickname() })}>
 								<CornerDotButton onClick={handleEditNickname} class="h-8 w-8 p-1">
 									<Edit />
 								</CornerDotButton>
 							</Tooltip>
-							<Tooltip position="bottom" label="Max out Pal stats 💉💪">
+							<Tooltip position="bottom" label={m.max_out_pal_stats(p.pal)}>
 								<CornerDotButton
 									onClick={() => handleMaxOutPal(pal, appState.selectedPlayer!)}
 									class="h-8 w-8 p-1"
@@ -463,19 +480,19 @@
 									<BicepsFlexed />
 								</CornerDotButton>
 							</Tooltip>
-							<Tooltip position="bottom" label="Save as preset">
+							<Tooltip position="bottom" label={m.save_as_preset()}>
 								<CornerDotButton onClick={handleSavePreset} class="h-8 w-8 p-1">
 									<Save />
 								</CornerDotButton>
 							</Tooltip>
-							<Tooltip position="bottom" label="Apply a preset">
+							<Tooltip position="bottom" label={m.apply_preset()}>
 								<CornerDotButton onClick={handleSelectPreset} class="h-8 w-8 p-1">
 									<Play />
 								</CornerDotButton>
 							</Tooltip>
 						{/if}
 
-						<Tooltip position="bottom" label="Toggle gender">
+						<Tooltip position="bottom" label={m.toggle_entity({ entity: m.gender() })}>
 							<CornerDotButton onClick={handleEditGender} class="h-8 w-8 p-1">
 								<img
 									src={assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${pal.gender}.webp`)}
@@ -483,7 +500,7 @@
 								/>
 							</CornerDotButton>
 						</Tooltip>
-						<Tooltip position="bottom" label="Toggle Lucky">
+						<Tooltip position="bottom" label={m.toggle_entity({ entity: m.lucky() })}>
 							<CornerDotButton
 								onClick={handleEditLucky}
 								class={cn('h-8 w-8 p-1', pal.is_lucky && 'bg-secondary-500/25')}
@@ -492,7 +509,7 @@
 								<img src={staticIcons.luckyIcon} alt="Lucky" class="pal-element-badge" />
 							</CornerDotButton>
 						</Tooltip>
-						<Tooltip position="bottom" label="Toggle Alpha">
+						<Tooltip position="bottom" label={m.toggle_entity({ entity: m.alpha() })}>
 							<CornerDotButton
 								onClick={handleEditAlpha}
 								class={cn('h-8 w-8 p-1', pal.is_boss && 'bg-secondary-500/25')}
@@ -520,7 +537,7 @@
 				<hr class="hr my-1" />
 				<div class="flex flex-col space-y-2">
 					<div class="flex">
-						<span class="text-on-surface grow">NEXT</span>
+						<span class="text-on-surface grow">{m.next()}</span>
 						<span class="text-on-surface">{palLevelProgressToNext}</span>
 					</div>
 					<Progress

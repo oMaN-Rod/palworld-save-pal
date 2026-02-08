@@ -4,12 +4,13 @@
 	import { ASSET_DATA_PATH, staticIcons } from '$types/icons';
 	import { assetLoader } from '$utils';
 	import { TimerReset } from 'lucide-svelte';
+	import * as m from '$i18n/messages';
 
 	let { option } = $props<{
 		option: SelectOption;
 	}>();
 
-	const activeSkill = activeSkillsData.getByKey(option.value);
+	const activeSkill = $derived(activeSkillsData.getByKey(option.value as string));
 	const icon = $derived.by(() => {
 		if (!activeSkill) return staticIcons.unknownIcon;
 		const element = elementsData.getByKey(activeSkill.details.element);
@@ -33,7 +34,7 @@
 		</div>
 		<div class="flex flex-row items-center space-x-2">
 			<div class="text-start">
-				<span class="text-xs">{activeSkill?.details.type} Range</span>
+				<span class="text-xs">{activeSkill?.details.type} {m.range()}</span>
 				<span class="font-bold">
 					{activeSkill?.details.min_range} - {activeSkill?.details.max_range}
 				</span>

@@ -3,6 +3,8 @@
 	import { X, Check } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	let {
 		title = 'Confirm Action',

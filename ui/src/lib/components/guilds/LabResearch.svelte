@@ -1,17 +1,23 @@
 <script lang="ts">
-	import { getToastState } from '$states';
-	import { labResearchData, itemsData } from '$lib/data';
 	import { Card } from '$components/ui';
-	import { type Guild, MessageType, type LabResearch, type TreeNode, EntryState } from '$types';
+	import { itemsData, labResearchData } from '$lib/data';
+	import { send } from '$lib/utils/websocketUtils';
+	import { getToastState } from '$states';
+	import { type Guild, type LabResearch, type TreeNode, EntryState, MessageType } from '$types';
 	import { ASSET_DATA_PATH, staticIcons } from '$types/icons';
 	import { assetLoader, debounce, deepCopy } from '$utils';
-	import { send } from '$lib/utils/websocketUtils';
-	import ResearchNode from './ResearchNode.svelte';
 	import { onMount } from 'svelte';
-	let { guild = $bindable(), selectedCategory = $bindable('Handiwork') } = $props<{
+	import ResearchNode from './ResearchNode.svelte';
+	import * as m from '$i18n/messages';
+	import { c, p } from '$lib/utils/commonTranslations';
+
+	let {
+		guild = $bindable(),
+		selectedCategory = $bindable('Handiwork')
+	}: {
 		guild: Guild;
 		selectedCategory: string;
-	}>();
+	} = $props();
 
 	const toast = getToastState();
 
@@ -158,8 +164,12 @@
 		if (node.isCompleted) return;
 		if (!node.isUnlocked) {
 			toast.add(
-				`Unlock prerequisite first: ${labResearchData.getByKey(node.research.details.require_research_id)?.localized_name || 'Unknown'}`,
-				'Locked',
+				m.unlock_prerequisite_entity({
+					entity:
+						labResearchData.getByKey(node.research.details.require_research_id)?.localized_name ||
+						'Unknown'
+				}),
+				m.locked(),
 				'warning'
 			);
 			return;
@@ -355,7 +365,7 @@
 					/>
 				{/each}
 			{:else}
-				<p>Select a category.</p>
+				<span>{m.select_a_entity({ entity: m.category() })}</span>
 			{/if}
 		</div>
 	</div>
@@ -369,24 +379,24 @@
 
 				{#if research.details.effect_type && research.details.effect_type !== 'None'}
 					<div class="mb-4">
-						<h6 class="h6 mb-1">Effect</h6>
-						<p class="text-sm">
+						<h6 class="h6 mb-1">{m.effect()}</h6>
+						<span class="text-sm">
 							{research.details.effect_type}: {research.details.effect_value &&
 							research.details.effect_value > 0
 								? '+'
 								: ''}{research.details.effect_value ?? 0}%
 							{#if research.details.effect_work_suitability && research.details.effect_work_suitability !== 'None'}
-								for {research.details.effect_work_suitability}
+								{m.for()} {research.details.effect_work_suitability}
 							{/if}
 							{#if research.details.effect_item_type && research.details.effect_item_type !== 'None'}
-								for {research.details.effect_item_type}
+								{m.for()} {research.details.effect_item_type}
 							{/if}
-						</p>
+						</span>
 					</div>
 				{/if}
 
 				{#if research.details.materials && research.details.materials.length > 0}
-					<h6 class="h6 mb-1">Research Cost</h6>
+					<h6 class="h6 mb-1">{m.research_cost()}</h6>
 					<div class="space-y-1">
 						{#each research.details.materials as material}
 							{@const itemData = itemsData.getByKey(material.id)}
@@ -410,13 +420,15 @@
 						{/each}
 						<div class="border-surface-600 flex items-center space-x-2 border-t pt-2 text-sm">
 							<img src={staticIcons.workSpeedIcon} alt="Workload" class="h-5 w-5" />
-							<span>Workload</span>
+							<span>{m.workload()}</span>
 							<span class="ml-auto">{research.details.work_amount}</span>
 						</div>
 					</div>
 				{/if}
 			{:else}
-				<p class="text-surface-500 text-center">Select a research node to see details.</p>
+				<span class="text-surface-500 text-center">
+					{m.select_a_entity_to_view({ entity: m.research_node() })}
+				</span>
 			{/if}
 		</Card>
 	{/if}

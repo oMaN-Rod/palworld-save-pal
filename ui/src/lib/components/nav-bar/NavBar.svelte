@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getNavigationState, getAppState, type Page, getModalState } from '$states';
+	import { getAppState, getModalState } from '$states';
 	import { Navigation } from '@skeletonlabs/skeleton-svelte';
 	import {
 		File,
@@ -13,18 +13,24 @@
 		FileHeart,
 		Download,
 		Database,
-		Globe
+		Globe,
+		ChevronsRight,
+		ChevronsLeft
 	} from 'lucide-svelte';
 
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
-	import { SettingsModal } from '$components/modals';
+	import { OpenFolder, SettingsModal } from '$components/modals';
 	import { MessageType } from '$types';
 	import { send } from '$lib/utils/websocketUtils';
 	import { page } from '$app/state';
-	import { goto } from '$app/navigation';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
+	import { persistedState } from 'svelte-persisted-state';
+	import { Folder } from '@lucide/svelte';
 
 	let appState = getAppState();
 	let modal = getModalState();
+	let expanded = persistedState('navbar.expanded', false);
 
 	const activeTile = $derived.by(() => {
 		if (page.url.pathname.startsWith('/edit')) return 'edit';
@@ -42,7 +48,7 @@
 	async function handleLanguageSelect(): Promise<void> {
 		// @ts-ignore
 		const result = await modal.showModal<string>(SettingsModal, {
-			title: 'Settings',
+			title: m.settings(),
 			settings: appState.settings
 		});
 
@@ -53,19 +59,38 @@
 			}, 500);
 		}
 	}
+
+	async function handleOpenFolder(): Promise<void> {
+		// @ts-ignore
+		await modal.showModal(OpenFolder, {
+			title: m.open_folder()
+		});
+	}
 </script>
 
 <Navigation.Rail
 	width="48px"
+	widthExpanded="w-auto"
 	value={activeTile}
-	onValueChange={appState.saveState}
+	onValueChange={() => appState.saveState()}
+	expanded={expanded.current}
 >
 	{#snippet header()}
+		<Navigation.Tile
+			title={m.toggle_entity({ entity: '' })}
+			id="menu"
+			onclick={() => (expanded.current = !expanded.current)}
+		>
+			{#if expanded.current}
+				<ChevronsLeft />
+			{:else}
+				<ChevronsRight />
+			{/if}
+		</Navigation.Tile>
 		{#if appState.saveFile && PUBLIC_DESKTOP_MODE === 'true'}
 			<Navigation.Tile
-				label="Save"
-				labelBase="text-xs"
-				title="Save"
+				labelExpanded={c.save}
+				title={c.save}
 				id="save"
 				onclick={() => appState.writeSave()}
 			>
@@ -75,9 +100,8 @@
 	{/snippet}
 	{#snippet tiles()}
 		<Navigation.Tile
-			label="Edit"
-			labelBase="text-xs"
-			title="Edit"
+			labelExpanded={m.edit()}
+			title={m.edit()}
 			id="edit"
 			href="/edit"
 			active="bg-secondary-500"
@@ -86,9 +110,8 @@
 		</Navigation.Tile>
 		{#if PUBLIC_DESKTOP_MODE === 'true'}
 			<Navigation.Tile
-				label="Files"
-				labelBase="text-xs"
-				title="File"
+				labelExpanded={m.file({ count: 2 })}
+				title={m.file({ count: 2 })}
 				id="file"
 				href="/file"
 				active="bg-secondary-500"
@@ -97,9 +120,8 @@
 			</Navigation.Tile>
 		{:else}
 			<Navigation.Tile
-				label="Transfer"
-				labelBase="text-xs"
-				title="Transfer"
+				labelExpanded={m.transfer({ count: 1 })}
+				title={m.transfer({ count: 1 })}
 				id="upload"
 				href="/upload"
 				active="bg-secondary-500"
@@ -112,9 +134,8 @@
 			</Navigation.Tile>
 		{/if}
 		<Navigation.Tile
-			label="Map"
-			labelBase="text-xs"
-			title="Map"
+			labelExpanded={m.map()}
+			title={m.map()}
 			id="map"
 			href="/worldmap"
 			active="bg-secondary-500"
@@ -122,9 +143,8 @@
 			<Map />
 		</Navigation.Tile>
 		<Navigation.Tile
-			label="About"
-			labelBase="text-xs"
-			title="About"
+			labelExpanded={m.about()}
+			title={m.about()}
 			id="about"
 			href="/about"
 			active="bg-secondary-500"
@@ -132,20 +152,18 @@
 			<Info />
 		</Navigation.Tile>
 		<Navigation.Tile
-			label="Presets"
-			labelBase="text-xs"
-			title="Presets"
+			labelExpanded={c.presets}
+			title={c.presets}
 			id="presets"
 			href="/presets"
 			active="bg-secondary-500"
 		>
 			<FileHeart />
 		</Navigation.Tile>
-		{#if appState.gps}
+		{#if appState.hasGpsAvailable}
 			<Navigation.Tile
-				label="GPS"
-				labelBase="text-xs"
-				title="Global Pal Storage"
+				labelExpanded={m.gps()}
+				title={m.gps()}
 				id="gps"
 				href="/gps"
 				active="bg-secondary-500"
@@ -154,9 +172,8 @@
 			</Navigation.Tile>
 		{/if}
 		<Navigation.Tile
-			label="UPS"
-			labelBase="text-xs"
-			title="Universal Pal Storage"
+			labelExpanded={m.ups()}
+			title={m.ups()}
 			id="ups"
 			href="/ups"
 			active="bg-secondary-500"
@@ -165,9 +182,8 @@
 		</Navigation.Tile>
 		{#if appState.settings.debug_mode}
 			<Navigation.Tile
-				label="Debug"
-				labelBase="text-xs"
-				title="Debug"
+				labelExpanded={m.debug()}
+				title={m.debug()}
 				id="debug"
 				href="/debug"
 				active="bg-secondary-500"
@@ -177,10 +193,19 @@
 		{/if}
 	{/snippet}
 	{#snippet footer()}
+		{#if PUBLIC_DESKTOP_MODE === 'true'}
+			<Navigation.Tile
+				labelExpanded={m.open_folder()}
+				title={m.open_folder()}
+				id="open-folder"
+				onclick={handleOpenFolder}
+			>
+				<Folder />
+			</Navigation.Tile>
+		{/if}
 		<Navigation.Tile
-			label="Settings"
-			labelBase="text-xs"
-			title="Settings"
+			labelExpanded={m.settings()}
+			title={m.settings()}
 			id="settings"
 			onclick={handleLanguageSelect}
 		>

@@ -21,7 +21,7 @@ logger = create_logger(__name__)
 
 FILETIME_EPOCH = datetime(1601, 1, 1, tzinfo=timezone.utc)
 STEAM_ROOT = (
-    os.path.join(os.getenv("LOCALAPPDATA"), "Pal", "Saved", "SaveGames")
+    os.path.join(os.getenv("LOCALAPPDATA", ""), "Pal", "Saved", "SaveGames")
     if os.name == "nt"
     else (
         os.path.join(
@@ -35,7 +35,7 @@ STEAM_ROOT = (
 )
 GAMEPASS_ROOT = (
     os.path.join(
-        os.getenv("LOCALAPPDATA"),
+        os.getenv("LOCALAPPDATA", ""),
         "Packages",
         "PocketpairInc.Palworld_ad4psfrxyesvt",
         "SystemAppData",
@@ -117,19 +117,18 @@ class FileManager:
 
     @staticmethod
     def open_file_dialog(
-        save_type: str, window: webview.Window, save_dir: str = None
+        save_type: str, window: webview.Window, save_dir: str | None = None
     ) -> Optional[str]:
         app_dir = Path(
             __file__
         ).parent.parent.parent.resolve()  # Get the app's root directory
         logger.debug("Application directory: %s", app_dir)
 
+        initial_dir = STEAM_ROOT
         if save_type == "steam":
             file_types = ("Sav Files (*.sav)", "All files (*.*)")
-            initial_dir = STEAM_ROOT
         elif save_type == "local_data":
             file_types = ("Sav Files (*.sav)", "All files (*.*)")
-            initial_dir = STEAM_ROOT
         else:
             file_types = ("Container Index Files (*.index)", "All files (*.*)")
             initial_dir = GAMEPASS_ROOT
@@ -203,6 +202,38 @@ class FileManager:
                 continue
 
         return player_saves
+
+    @staticmethod
+    def get_player_save_paths(players_dir: str) -> Dict[uuid.UUID, Dict[str, str]]:
+        player_save_paths: Dict[uuid.UUID, Dict[str, str]] = {}
+        players_path = Path(players_dir)
+
+        for save_file in players_path.glob("*.sav"):
+            dps = False
+            try:
+                player_id = save_file.stem
+                if "_dps" in player_id:
+                    player_id = player_id.replace("_dps", "")
+                    dps = True
+
+                logger.debug(
+                    "Found player save path: %s, uuid: %s", save_file, player_id
+                )
+                player_uuid = uuid.UUID(player_id)
+
+                if player_uuid not in player_save_paths:
+                    player_save_paths[player_uuid] = {}
+
+                save_type = "dps" if dps else "sav"
+                player_save_paths[player_uuid][save_type] = str(save_file)
+
+            except:
+                logger.error(
+                    "Failed to parse player save path: %s", save_file, exc_info=True
+                )
+                continue
+
+        return player_save_paths
 
     @staticmethod
     def read_level_meta(data: bytes) -> Optional[str]:

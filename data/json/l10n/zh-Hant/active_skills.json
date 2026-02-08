@@ -279,6 +279,10 @@
     "localized_name": "念動引力",
     "description": "以超能力控制四周的敵人， 將他們從高處猛力摔向地面。"
   },
+  "EPalWazaID::RadiantBarrage": {
+    "localized_name": "輝耀彈",
+    "description": "發射一個緩慢追蹤敵人的光球。 光球在接近目標時會分裂成無數光彈攻擊敵人。"
+  },
   "EPalWazaID::RaidCutter": {
     "localized_name": "連環風刃",
     "description": "瞄準敵人射出無數風刃。"
@@ -473,6 +477,10 @@
   },
   "EPalWazaID::Unique_BluePlatypus_Toboggan": {
     "localized_name": "乘風破浪",
+    "description": null
+  },
+  "EPalWazaID::Unique_BluePlatypus_Toboggan_Fire": {
+    "localized_name": "熱浪滾滾",
     "description": null
   },
   "EPalWazaID::Unique_BlueThunderHorse_FlashDash": {
@@ -682,6 +690,18 @@
   "EPalWazaID::Unique_LeafMomonga_SomerSault": {
     "localized_name": "葉返",
     "description": "達鼠泥的專屬技能。 短暫蓄力後高速撞擊敵人， 同時做出後空翻動作。"
+  },
+  "EPalWazaID::Unique_LegendDeer_RadiantPurge_Otomo": {
+    "localized_name": "神光盡滅",
+    "description": "默世鹿的專屬技能。 躍向空中，凝聚巨大的能量然後投向地面。 煌煌天光，滌淨塵世。"
+  },
+  "EPalWazaID::Unique_LegendDeer_RadiantWingRush": {
+    "localized_name": "流光翼彩",
+    "description": "默世鹿的專屬技能。 向後方跳躍並在背後展開光翼， 從空中向敵人發動突擊。"
+  },
+  "EPalWazaID::Unique_LegendDeer_WarpPillarBurst": {
+    "localized_name": "光之雨",
+    "description": "默世鹿的專屬技能。 一瞬間隱去身姿，然後以自身為中心在大範圍召喚大量光柱落下。"
   },
   "EPalWazaID::Unique_LilyQueen_LilyHealing": {
     "localized_name": "豐饒加護",
@@ -942,6 +962,10 @@
   "EPalWazaID::WaterGun": {
     "localized_name": "水槍",
     "description": "朝攻擊對象發射直線飛行的水彈。"
+  },
+  "EPalWazaID::Weapon_Use": {
+    "localized_name": "使用武器",
+    "description": "使用持有的武器進行攻擊。"
   },
   "EPalWazaID::WindCutter": {
     "localized_name": "風刃",

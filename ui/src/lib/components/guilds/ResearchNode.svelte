@@ -5,6 +5,7 @@
 	import { assetLoader } from '$utils';
 	import { cn } from '$theme';
 	import ResearchNode from './ResearchNode.svelte';
+	import * as m from '$i18n/messages';
 
 	let {
 		node,
@@ -93,13 +94,13 @@
 				<div class="text-center">
 					{node.research.localized_name}
 					{#if !node.isCompleted && node.isUnlocked}
-						<br /><span class="text-warning-400 text-xs">(Click to Complete)</span>
+						<br /><span class="text-warning-400 text-xs">({m.click_to_complete()})</span>
 					{/if}
 					{#if node.isCompleted}
-						<br /><span class="text-success-400 text-xs">(Completed)</span>
+						<br /><span class="text-success-400 text-xs">({m.completed()})</span>
 					{/if}
 					{#if !node.isUnlocked}
-						<br /><span class="text-error-400 text-xs">(Locked)</span>
+						<br /><span class="text-error-400 text-xs">({m.locked()})</span>
 					{/if}
 				</div>
 			{/snippet}

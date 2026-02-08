@@ -8,6 +8,27 @@ export const getGpsPalsHandler: WSMessageHandler = {
 	async handle(data: Record<string, Pal>, { goto }) {
 		const appState = getAppState();
 		appState.gps = data;
+		appState.gpsLoaded = true;
+		appState.loadingGps = false;
+	}
+};
+
+export const getGpsResponseHandler: WSMessageHandler = {
+	type: MessageType.GET_GPS_RESPONSE,
+	async handle(
+		data: Record<string, Pal> | { error?: string; available?: boolean; message?: string }
+	) {
+		const appState = getAppState();
+		appState.loadingGps = false;
+
+		if ('error' in data || 'available' in data) {
+			console.log('GPS not available:', data);
+			appState.gpsLoaded = true;
+			return;
+		}
+
+		appState.gps = data as Record<string, Pal>;
+		appState.gpsLoaded = true;
 	}
 };
 
@@ -36,4 +57,4 @@ export const addGpsPalHandler: WSMessageHandler = {
 	}
 };
 
-export const gpsHandlers = [getGpsPalsHandler, addGpsPalHandler];
+export const gpsHandlers = [getGpsPalsHandler, getGpsResponseHandler, addGpsPalHandler];

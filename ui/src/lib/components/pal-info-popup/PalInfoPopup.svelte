@@ -7,6 +7,8 @@
 	import { onMount } from 'svelte';
 	import { Tween } from 'svelte/motion';
 	import { cubicOut } from 'svelte/easing';
+	import * as m from '$i18n/messages';
+	import { c } from '$utils/commonTranslations';
 
 	let { pal = $bindable() } = $props<{
 		pal: Pal;
@@ -131,41 +133,41 @@
 	<PalHeader bind:pal showActions={false} popup />
 	<StatusBadge bind:pal />
 	<div class="flex justify-center space-x-2">
-		<span class="text-surface-300 mr-1 text-xs">IVs</span>
+		<span class="text-surface-300 mr-1 text-xs">{m.ivs()}</span>
 		<div class="chip bg-green-700">
-			<img src={staticIcons.hpIcon} alt="HP" class="h-4 w-4" />
+			<img src={staticIcons.hpIcon} alt={m.hp()} class="h-4 w-4" />
 			<span class="text-sm font-bold">{pal.talent_hp}</span>
 		</div>
 		<div class="chip bg-red-700">
-			<img src={staticIcons.attackIcon} alt="Attack" class="h-6 w-6" />
+			<img src={staticIcons.attackIcon} alt={m.attack()} class="h-6 w-6" />
 			<span class="text-sm font-bold">{pal.talent_shot}</span>
 		</div>
 		<div class="chip bg-blue-700">
-			<img src={staticIcons.defenseIcon} alt="Defense" class="h-6 w-6" />
+			<img src={staticIcons.defenseIcon} alt={m.defense()} class="h-6 w-6" />
 			<span class="text-sm font-bold">{pal.talent_defense}</span>
 		</div>
 	</div>
 	<div class="flex justify-center space-x-2">
-		<span class="text-surface-300 mr-1 text-xs">Souls</span>
+		<span class="text-surface-300 mr-1 text-xs">{m.souls()}</span>
 		<div class="chip bg-green-700">
-			<img src={staticIcons.hpIcon} alt="HP" class="h-4 w-4" />
+			<img src={staticIcons.hpIcon} alt={m.hp()} class="h-4 w-4" />
 			<span class="text-sm font-bold">{pal.rank_hp}</span>
 		</div>
 		<div class="chip bg-red-700">
-			<img src={staticIcons.attackIcon} alt="Attack" class="h-6 w-6" />
+			<img src={staticIcons.attackIcon} alt={m.attack()} class="h-6 w-6" />
 			<span class="text-sm font-bold">{pal.rank_attack}</span>
 		</div>
 		<div class="chip bg-blue-700">
-			<img src={staticIcons.defenseIcon} alt="Defense" class="h-6 w-6" />
+			<img src={staticIcons.defenseIcon} alt={m.defense()} class="h-6 w-6" />
 			<span class="text-sm font-bold">{pal.rank_defense}</span>
 		</div>
 		<div class="chip bg-purple-700">
-			<img src={staticIcons.workSpeedIcon} alt="Defense" class="h-6 w-6" />
+			<img src={staticIcons.workSpeedIcon} alt={m.work_speed()} class="h-6 w-6" />
 			<span class="text-sm font-bold">{pal.rank_craftspeed}</span>
 		</div>
 	</div>
 	{#if activeSkillsToShow.length > 0}
-		<SectionHeader text="Active Skills" />
+		<SectionHeader text={c.activeSkills} />
 		<div
 			style="opacity: {activeProgress.current}; transition: opacity 300ms ease-out;"
 			class="flex w-full flex-col space-y-2"
@@ -176,7 +178,7 @@
 		</div>
 	{/if}
 	{#if passiveSkillsToShow.length > 0}
-		<SectionHeader text="Passive Skills" />
+		<SectionHeader text={c.passiveSkills} />
 		<div
 			class="grid grid-cols-2 gap-2"
 			style="opacity: {passiveProgress.current}; transition: opacity 300ms ease-out;"

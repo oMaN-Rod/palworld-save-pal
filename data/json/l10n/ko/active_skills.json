@@ -53,7 +53,7 @@
   },
   "EPalWazaID::CrossThunder": {
     "localized_name": "크로스 썬더",
-    "description": "적의 좌우를 가로막듯이 2방향으로 나아가는 천둥 공격을 일으킨다."
+    "description": "적의 좌우를 가로막듯이 2방향으로 나아가는 뇌격을 일으킨다."
   },
   "EPalWazaID::CrossWind": {
     "localized_name": "크로스 윈드",
@@ -125,7 +125,7 @@
   },
   "EPalWazaID::FireBall": {
     "localized_name": "화염구",
-    "description": "머리 위에 거대한 화염구를 소환해 적을 향해 날린다. 충돌 시 폭발하여 폭풍이 넓은 범위로 퍼진다."
+    "description": "머리 위에 거대한 불덩이를 소환해 적을 향해 날린다. 충돌 시 폭발하여 폭풍이 넓은 범위로 퍼진다."
   },
   "EPalWazaID::FireBlast": {
     "localized_name": "파이어 샷",
@@ -237,11 +237,11 @@
   },
   "EPalWazaID::LineThunder": {
     "localized_name": "라인 썬더",
-    "description": "일직선으로 날아가는 천둥 공격을 일으킨다."
+    "description": "일직선으로 날아가는 뇌격을 일으킨다."
   },
   "EPalWazaID::LockonLaser": {
     "localized_name": "고정식 레이저",
-    "description": "표적을 적에게 고정한 뒤 초고속 천둥레이저를 발사한다."
+    "description": "표적을 적에게 고정한 뒤 초고속 번개 레이저를 발사한다."
   },
   "EPalWazaID::MudShot": {
     "localized_name": "모래 돌풍",
@@ -279,17 +279,21 @@
     "localized_name": "사이코 그래비티",
     "description": "염력으로 주변 적의 자유를 빼앗아 높은 곳에서 땅으로 내던진다."
   },
+  "EPalWazaID::RadiantBarrage": {
+    "localized_name": "레이디언트 배리지",
+    "description": "적을 천천히 추적하는 빛의 구체를 발사한다. 구체가 대상에게 접근할 시 무수한 빛의 탄환으로 분열해 덮쳐든다."
+  },
   "EPalWazaID::RaidCutter": {
     "localized_name": "급습의 칼날",
     "description": "적을 향해 날아가는 바람의 칼날을 무수히 발사한다."
   },
   "EPalWazaID::Railbolt": {
     "localized_name": "썬더 레일",
-    "description": "천둥의 힘을 한계까지 끌어모아 적을 향해 강력한 다수의 전기 공격을 동시 발사한다."
+    "description": "번개의 힘을 한계까지 끌어모아 적을 향해 강력한 다수의 전기 공격을 동시 발사한다."
   },
   "EPalWazaID::RangeThunder": {
     "localized_name": "전방위 번개",
-    "description": "전방위에 일직선으로 나아가는 천둥 공격을 일으킨다."
+    "description": "전방위에 일직선으로 나아가는 뇌격을 일으킨다."
   },
   "EPalWazaID::ReflectiveShuriken": {
     "localized_name": "리플렉트 리프",
@@ -353,7 +357,7 @@
   },
   "EPalWazaID::ShokeiLaser": {
     "localized_name": "익스큐션 레이저",
-    "description": "적을 조준한 뒤 초고속 천둥 레이저를 여러 번 발사한다."
+    "description": "적을 조준한 뒤 초고속 번개 레이저를 여러 번 발사한다."
   },
   "EPalWazaID::SolarBeam": {
     "localized_name": "태양 폭발",
@@ -361,11 +365,11 @@
   },
   "EPalWazaID::SpecialCutter": {
     "localized_name": "멀티 커터",
-    "description": "적을 향해 쏜살처럼 날아가는 바람의 칼날을 3자루 발사한다."
+    "description": "적을 향해 일직선으로 날아가는 바람의 칼날을 3자루 발사한다."
   },
   "EPalWazaID::SpreadPulse": {
     "localized_name": "스파크 샷",
-    "description": "부채꼴 모양으로 퍼지는 천둥 구체를 발사한다."
+    "description": "부채꼴 모양으로 퍼지는 번개 덩어리를 발사한다."
   },
   "EPalWazaID::StarMine": {
     "localized_name": "스타 마인",
@@ -389,15 +393,15 @@
   },
   "EPalWazaID::ThunderBall": {
     "localized_name": "번개 구체",
-    "description": "적을 천천히 추적하는 천둥 구체를 발사한다."
+    "description": "적을 천천히 추적하는 번개 덩어리를 발사한다."
   },
   "EPalWazaID::ThunderFunnel": {
     "localized_name": "플라즈마 토네이도",
-    "description": "천둥 에너지를 품은 구체 2개를 만들고 적을 향해 천둥 구체를 무수히 발사한다."
+    "description": "번개 에너지를 품은 덩어리 2개를 만들고 적을 향해 번개 덩어리를 무수히 발사한다."
   },
   "EPalWazaID::ThunderRain": {
     "localized_name": "천둥비",
-    "description": "천둥을 소환하고 일정 시간이 지나면 많은 벼락을 떨어뜨린다."
+    "description": "번개를 소환하고 일정 시간이 지나면 많은 벼락을 떨어뜨린다."
   },
   "EPalWazaID::ThunderSpear": {
     "localized_name": "번개 창",
@@ -409,7 +413,7 @@
   },
   "EPalWazaID::Thunderbolt": {
     "localized_name": "전기 볼트",
-    "description": "천둥의 힘을 모아 적을 향해 강력한 전기 공격을 날린다."
+    "description": "번개의 힘을 모아 적을 향해 강력한 전기 공격을 날린다."
   },
   "EPalWazaID::Tremor": {
     "localized_name": "암석 폭발",
@@ -417,7 +421,7 @@
   },
   "EPalWazaID::TriSpark": {
     "localized_name": "트라이 스파크",
-    "description": "직선상으로 날아가는 빠른 번개 구체와 적을 추적하는 느린 번개 구체를 동시에 발사한다."
+    "description": "직선상으로 날아가는 빠른 번개 덩어리와 적을 추적하는 느린 번개 덩어리를 동시에 발사한다."
   },
   "EPalWazaID::Unique_Alpaca_Tackle": {
     "localized_name": "푹신 태클",
@@ -445,7 +449,7 @@
   },
   "EPalWazaID::Unique_Baphomet_SwallowKite": {
     "localized_name": "지옥불 할퀴기",
-    "description": "헬고트 전용 스킬. 접근하며 왼쪽 손톱으로 올려친 후 뛰어올라 오른쪽 손톱으로 물 흐르듯 날렵하게 내리친다."
+    "description": "헬고트 종의 전용 스킬. 접근하며 왼쪽 손톱으로 올려친 후 뛰어올라 오른쪽 손톱으로 물 흐르듯 날렵하게 내리친다."
   },
   "EPalWazaID::Unique_BirdDragon_FireBreath": {
     "localized_name": "플라잉 브레스",
@@ -475,6 +479,10 @@
     "localized_name": "서핑 태클",
     "description": null
   },
+  "EPalWazaID::Unique_BluePlatypus_Toboggan_Fire": {
+    "localized_name": "파이어 태클",
+    "description": null
+  },
   "EPalWazaID::Unique_BlueThunderHorse_FlashDash": {
     "localized_name": "볼트 블링크",
     "description": "썬더호스 전용 스킬. 번개와도 같은 속도로 이동하여 궤도상에 존재하는 모든 것을 휩쓴다."
@@ -493,7 +501,7 @@
   },
   "EPalWazaID::Unique_ChickenPal_ChickenPeck": {
     "localized_name": "치킨 태클",
-    "description": "꼬꼬닭 전용 스킬. 적을 노리고 돌격하여 뾰족한 부리로 돌격한다."
+    "description": "꼬꼬닭 전용 스킬. 적을 노리고 달려들어 뾰족한 부리로 돌격한다."
   },
   "EPalWazaID::Unique_DarkAlien_JumpScractch": {
     "localized_name": "악마의 발톱",
@@ -525,7 +533,7 @@
   },
   "EPalWazaID::Unique_DarkScorpion_Pierce": {
     "localized_name": "점프 찌르기",
-    "description": "데스 스팅 종의 전용 스킬. 힘을 싣고 높이 뛰어올라 독 발린 꼬리로 사냥감을 꿰뚫는다."
+    "description": "데스 스팅 종의 전용 스킬. 힘을 싣고 높이 뛰어올라 독 발린 꼬리로 사냥감을 힘껏 꿰뚫는다."
   },
   "EPalWazaID::Unique_Deer_PushupHorn": {
     "localized_name": "들이받기",
@@ -549,7 +557,7 @@
   },
   "EPalWazaID::Unique_FairyDragon_FairyTornado": {
     "localized_name": "신비의 허리케인",
-    "description": "실피아 전용 스킬. 신비한 힘이 깃든 회오리 2개를 발사하여 적을 쫓게 한다."
+    "description": "실피아 종의 전용 스킬. 신비한 힘이 깃든 회오리 2개를 발사하여 적을 쫓게 한다."
   },
   "EPalWazaID::Unique_FeatherOstrich_Tossin": {
     "localized_name": "어스 대시",
@@ -683,6 +691,18 @@
     "localized_name": "나뭇잎 뒤집기",
     "description": "모몽파 종의 전용 스킬. 눈 깜짝할 새에 자세를 잡고 적에게 고속으로 돌진하며 공중제비로 공격한다."
   },
+  "EPalWazaID::Unique_LegendDeer_RadiantPurge_Otomo": {
+    "localized_name": "정화의 빛",
+    "description": "레젠디얼 전용 스킬. 하늘로 뛰어올라 막대한 에너지를 응축해 땅으로 발사한다. 떨어진 빛의 구체는 지상의 모든 것을 정화한다."
+  },
+  "EPalWazaID::Unique_LegendDeer_RadiantWingRush": {
+    "localized_name": "디바인 윙",
+    "description": "레젠디얼 전용 스킬. 후방으로 뛰어 등에 빛의 날개를 만들어 낸 후 하늘에서 적을 향해 돌진한다."
+  },
+  "EPalWazaID::Unique_LegendDeer_WarpPillarBurst": {
+    "localized_name": "세이크리드 레인",
+    "description": "레젠디얼 전용 스킬. 순식간에 사라진 뒤 자신을 중심으로 넓은 범위에 수많은 빛기둥이 빗발치게 한다."
+  },
   "EPalWazaID::Unique_LilyQueen_LilyHealing": {
     "localized_name": "풍양의 가호",
     "description": "릴린 전용 스킬. 치유의 힘을 사용해 범위 안에 있는 모든 동료의 HP를 회복한다."
@@ -749,7 +769,7 @@
   },
   "EPalWazaID::Unique_PurpleSpider_SpiderRaid": {
     "localized_name": "스파이더 레이드",
-    "description": "스틱툴라 전용 스킬. 먹잇감의 움직임을 막는 거미줄 구체를 뱉는다. 이어서 먹잇감을 향해 전속력으로 달려간 후 3번 할퀴어 숨통을 끊는다."
+    "description": "스틱툴라 전용 스킬. 먹잇감의 움직임을 막는 거미줄 덩어리를 뱉는다. 이어서 먹잇감을 향해 전속력으로 달려간 후 3번 할퀴어 숨통을 끊는다."
   },
   "EPalWazaID::Unique_QueenBee_SpinLance": {
     "localized_name": "스피닝 스태프",
@@ -817,7 +837,7 @@
   },
   "EPalWazaID::Unique_ThunderDragonMan_NumerousSwordAttack": {
     "localized_name": "폴리케라우노스",
-    "description": "전룡맨 종의 전용 스킬. 다수의 번개 창을 소환하여 적에게 던진다. 마지막 한 자루에 번개의 힘을 축적시켜 몇 초 후에 폭발시킨다."
+    "description": "전룡맨 종의 전용 스킬. 다수의 번개 창을 소환하여 적에게 던진다. 처음 한 자루는 번개의 힘을 축적시켜 몇 초 후에 폭발시킨다."
   },
   "EPalWazaID::Unique_ThunderDragonMan_ThunderSwordAttack": {
     "localized_name": "케라노우스",
@@ -942,6 +962,10 @@
   "EPalWazaID::WaterGun": {
     "localized_name": "아쿠아 샷",
     "description": "대상을 향해 일직선으로 날아가는 물 탄환을 발사한다."
+  },
+  "EPalWazaID::Weapon_Use": {
+    "localized_name": "무기 사용",
+    "description": "가지고 있는 무기를 사용해 공격한다."
   },
   "EPalWazaID::WindCutter": {
     "localized_name": "바람의 칼날",

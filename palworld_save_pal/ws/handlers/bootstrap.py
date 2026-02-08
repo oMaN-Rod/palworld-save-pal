@@ -11,8 +11,10 @@ from palworld_save_pal.ws.handlers import (
     guild_handler,
     items_handler,
     lab_research_handler,
+    lazy_load_handler,
     map_objects_handler,
     map_unlock_handler,
+    missions_handler,
     open_in_browser_handler,
     passive_skills_handler,
     player_handler,
@@ -46,6 +48,7 @@ from palworld_save_pal.ws.messages import (
     GetItemsMessage,
     GetLabResearchMessage,
     GetMapObjectsMessage,
+    GetMissionsMessage,
     GetPalsMessage,
     GetPassiveSkillsMessage,
     GetRawDataMessage,
@@ -96,6 +99,9 @@ from palworld_save_pal.ws.messages import (
     GetUpsStatsMessage,
     NukeUpsPalsMessage,
     UnlockMapMessage,
+    RequestPlayerDetailsMessage,
+    RequestGuildDetailsMessage,
+    RequestGpsMessage,
 )
 
 if TYPE_CHECKING:
@@ -292,6 +298,14 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": GetItemsMessage,
             "handler_func": items_handler.get_items_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.GET_MISSIONS.value,
+        {
+            "message_class": GetMissionsMessage,
+            "handler_func": missions_handler.get_missions_handler,
         },
     )
 
@@ -645,5 +659,29 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": UnlockMapMessage,
             "handler_func": map_unlock_handler.unlock_map_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.REQUEST_PLAYER_DETAILS.value,
+        {
+            "message_class": RequestPlayerDetailsMessage,
+            "handler_func": lazy_load_handler.request_player_details_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.REQUEST_GUILD_DETAILS.value,
+        {
+            "message_class": RequestGuildDetailsMessage,
+            "handler_func": lazy_load_handler.request_guild_details_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.REQUEST_GPS.value,
+        {
+            "message_class": RequestGpsMessage,
+            "handler_func": gps_handler.request_gps_handler,
         },
     )

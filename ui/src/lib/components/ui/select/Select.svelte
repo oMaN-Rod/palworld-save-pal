@@ -4,6 +4,7 @@
 	import { cn } from '$theme';
 	import type { Snippet } from 'svelte';
 	import { ChevronDown } from 'lucide-svelte';
+	import * as m from '$i18n/messages';
 
 	let {
 		options = [],
@@ -15,6 +16,7 @@
 		value: _value = $bindable(''),
 		disabled = false,
 		error = false,
+		placeholder = m.select(),
 		selectOption,
 		onChange = (value: string | number) => {},
 		...additionalProps
@@ -28,6 +30,7 @@
 		value?: string | number;
 		disabled?: boolean;
 		error?: boolean;
+		placeholder?: string;
 		selectOption?: Snippet<[SelectOption]>;
 		onChange?: (value: string | number) => void;
 		[key: string]: any;
@@ -153,7 +156,7 @@
 		<div class="flex items-center justify-between">
 			<span>
 				{options.find((opt: SelectOption) => opt.value.toString() === selected)?.label ||
-					'Select a Player'}
+					placeholder}
 			</span>
 			<ChevronDown class={cn('transition-transform', isOpen && 'rotate-180')} />
 		</div>

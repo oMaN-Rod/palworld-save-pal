@@ -1,0 +1,54 @@
+{
+  "Collection": {
+    "localized_name": "Toplama",
+    "description": null
+  },
+  "Cool": {
+    "localized_name": "Soğutma",
+    "description": null
+  },
+  "Deforest": {
+    "localized_name": "Odunculuk",
+    "description": null
+  },
+  "EmitFlame": {
+    "localized_name": "Tutuşturma",
+    "description": null
+  },
+  "GenerateElectricity": {
+    "localized_name": "Elektrik Üretme",
+    "description": null
+  },
+  "Handcraft": {
+    "localized_name": "El İşi",
+    "description": null
+  },
+  "Mining": {
+    "localized_name": "Madencilik",
+    "description": null
+  },
+  "MonsterFarm": {
+    "localized_name": "Çiftçilik",
+    "description": null
+  },
+  "OilExtraction": {
+    "localized_name": "-",
+    "description": null
+  },
+  "ProductMedicine": {
+    "localized_name": "İlaç Üretimi",
+    "description": null
+  },
+  "Seeding": {
+    "localized_name": "Ekim",
+    "description": null
+  },
+  "Transport": {
+    "localized_name": "Taşıma",
+    "description": null
+  },
+  "Watering": {
+    "localized_name": "Sulama",
+    "description": null
+  }
+}

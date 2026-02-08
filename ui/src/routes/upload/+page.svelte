@@ -5,6 +5,8 @@
 	import { Download } from 'lucide-svelte';
 	import { goto } from '$app/navigation';
 	import { send, pushProgressMessage } from '$lib/utils/websocketUtils';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	let appState = getAppState();
 
@@ -36,10 +38,10 @@
 		<Card class="w-1/3">
 			<div class="flex">
 				<div class="flex grow flex-col">
-					<h4 class="h4">Current Save File</h4>
-					<p class="text"><strong>File:</strong> {appState.saveFile.name}</p>
+					<h4 class="h4">{m.current_save_file()}</h4>
+					<p class="text"><strong>{m.file({ count: 1 })}</strong> {appState.saveFile.name}</p>
 					<p class="text">
-						<strong>Size:</strong>
+						<strong>{m.size()}</strong>
 						{(appState.saveFile.size! / 1024 / 1024).toFixed(2)} MB
 					</p>
 				</div>
@@ -49,10 +51,11 @@
 							class="btn preset-filled-primary-500 font-bold"
 							onclick={handleDownloadSaveFile}
 						>
-							<Download /> Download
+							<Download />
+							{m.download()}
 						</button>
 						{#snippet popup()}
-							<span>Download modified Level.sav file</span>
+							<span>{m.download_modified_save()}</span>
 						{/snippet}
 					</Tooltip>
 				</div>
@@ -63,8 +66,8 @@
 		<div class="flex w-full flex-col items-center">
 			<FileDropzone baseClass="w-full hover:bg-surface-800" name="file" bind:files>
 				{#snippet message()}
-					<h3 class="h3">Click to upload your zipped save files</h3>
-					<span>or drag and drop your zip file here</span>
+					<h3 class="h3">{m.upload_zip_files()}</h3>
+					<span>{m.drag_drop_zip()}</span>
 				{/snippet}
 			</FileDropzone>
 			{#if files}
@@ -72,11 +75,11 @@
 					<Tooltip>
 						{#snippet children()}
 							<button class="btn preset-filled-primary-500 font-bold" onclick={handleOnUpload}>
-								Upload
+								{m.upload()}
 							</button>
 						{/snippet}
 						{#snippet popup()}
-							<span>Upload {files ? files[0].name : ''}</span>
+							<span>{m.upload()} {files ? files[0].name : ''}</span>
 						{/snippet}
 					</Tooltip>
 				</div>

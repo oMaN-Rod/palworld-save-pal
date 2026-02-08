@@ -977,6 +977,15 @@
     "cool_time": 35.0,
     "effects": []
   },
+  "EPalWazaID::RadiantBarrage": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 120,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 40.0,
+    "effects": []
+  },
   "EPalWazaID::RaidCutter": {
     "element": "Leaf",
     "type": "Shot",
@@ -1669,6 +1678,21 @@
       }
     ]
   },
+  "EPalWazaID::Unique_BluePlatypus_Toboggan_Fire": {
+    "element": "Fire",
+    "type": "Melee",
+    "power": 115,
+    "min_range": 0,
+    "max_range": 500,
+    "cool_time": 120.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
   "EPalWazaID::Unique_BlueThunderHorse_FlashDash": {
     "element": "Electricity",
     "type": "Melee",
@@ -1685,7 +1709,7 @@
     ]
   },
   "EPalWazaID::Unique_Boar_Tackle": {
-    "element": "Normal",
+    "element": "Earth",
     "type": "Melee",
     "power": 55,
     "min_range": 300,
@@ -2341,6 +2365,33 @@
       }
     ]
   },
+  "EPalWazaID::Unique_LegendDeer_RadiantPurge_Otomo": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 250,
+    "min_range": 0,
+    "max_range": 3000,
+    "cool_time": 100.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_LegendDeer_RadiantWingRush": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 140,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 35.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_LegendDeer_WarpPillarBurst": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 200,
+    "min_range": 0,
+    "max_range": 7500,
+    "cool_time": 60.0,
+    "effects": []
+  },
   "EPalWazaID::Unique_LilyQueen_LilyHealing": {
     "element": "Leaf",
     "type": "Shot",
@@ -2612,7 +2663,7 @@
     "effects": []
   },
   "EPalWazaID::Unique_SakuraSaurus_SideTackle": {
-    "element": "Normal",
+    "element": "Leaf",
     "type": "Melee",
     "power": 80,
     "min_range": 0,
@@ -3165,6 +3216,15 @@
         "value_ex": 0.0
       }
     ]
+  },
+  "EPalWazaID::Weapon_Use": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 50,
+    "min_range": 1000,
+    "max_range": 3000,
+    "cool_time": 5.0,
+    "effects": []
   },
   "EPalWazaID::WindCutter": {
     "element": "Leaf",

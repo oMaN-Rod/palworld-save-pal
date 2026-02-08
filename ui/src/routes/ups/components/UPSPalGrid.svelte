@@ -2,6 +2,7 @@
 	import UPSPalBadge from './UPSPalBadge.svelte';
 	import { getUpsState } from '$states';
 	import type { UPSPal } from '$types';
+	import * as m from '$i18n/messages';
 
 	const upsState = getUpsState();
 
@@ -38,10 +39,10 @@
 					{#if upsPal.transfer_count > 0 || upsPal.clone_count > 0}
 						<div class="space-y-1 rounded bg-black/70 px-2 py-1 text-xs text-white">
 							{#if upsPal.transfer_count > 0}
-								<div title="Transfer count">📤{upsPal.transfer_count}</div>
+								<div title={m.transfer({ count: 2 })}>📤{upsPal.transfer_count}</div>
 							{/if}
 							{#if upsPal.clone_count > 0}
-								<div title="Clone count">🔄{upsPal.clone_count}</div>
+								<div title={m.clones()}>🔄{upsPal.clone_count}</div>
 							{/if}
 						</div>
 					{/if}

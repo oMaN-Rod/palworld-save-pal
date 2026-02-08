@@ -15,7 +15,7 @@ logger = create_logger(__name__)
 
 class Settings(BaseModel):
     _language: str = PrivateAttr(default="en")
-    _save_dir: str = PrivateAttr(default=STEAM_ROOT)
+    _save_dir: str | None = PrivateAttr(default=None)
     _clone_prefix: str = PrivateAttr(default="©️")
     _new_pal_prefix: str = PrivateAttr(default="🆕")
     _debug_mode: bool = PrivateAttr(default=False)
@@ -36,7 +36,7 @@ class Settings(BaseModel):
         self._save()
 
     @computed_field
-    def save_dir(self) -> str:
+    def save_dir(self) -> str | None:
         return self._save_dir
 
     @save_dir.setter

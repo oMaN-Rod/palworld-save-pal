@@ -74,6 +74,7 @@ class GroupType(str, PrefixedEnum):
 class PalGender(str, PrefixedEnum):
     _enum_prefix = "EPalGenderType::"
 
+    NONE = "None"
     MALE = "Male"
     FEMALE = "Female"
 

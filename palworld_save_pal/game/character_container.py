@@ -32,10 +32,14 @@ class CharacterContainer(BaseModel):
 
     _slots_data: Optional[List[Dict[str, Any]]] = PrivateAttr(default_factory=list)
 
-    def __init__(self, character_container_save_data: Dict[str, Any] = None, **kwargs):
+    def __init__(
+        self,
+        container_data: Dict[str, Any] = None,
+        **kwargs,
+    ):
         super().__init__(**kwargs)
-        if character_container_save_data is not None:
-            self._get_characters(character_container_save_data)
+        if container_data is not None:
+            self._load_from_container_data(container_data)
 
     def available_slots(self) -> bool:
         return len(self.slots) < self.size
@@ -110,35 +114,23 @@ class CharacterContainer(BaseModel):
             self.slots[index].slot_index = index
             PalObjects.set_value(slot["SlotIndex"], value=index)
 
-    def _get_characters(self, character_container_save_data: Dict[str, Any]):
+    def _load_from_container_data(self, container_data: Dict[str, Any]):
         logger.debug("%s (%s)", self.type.value, self.id)
-        for character_container in character_container_save_data:
-            container_id = PalObjects.get_guid(
-                PalObjects.get_nested(character_container, "key", "ID")
+        self.size = PalObjects.get_value(container_data["value"]["SlotNum"])
+        self._slots_data = PalObjects.get_array_property(
+            container_data["value"]["Slots"]
+        )
+        for slot in self._slots_data:
+            slot_index = PalObjects.get_value(slot["SlotIndex"])
+            instance_id = PalObjects.get_nested(slot, "RawData", "value", "instance_id")
+            instance_id = (
+                instance_id.UUID()
+                if isinstance(instance_id, ArchiveUUID)
+                else instance_id
             )
-            if not are_equal_uuids(self.id, container_id):
-                continue
-            container_size = PalObjects.get_value(
-                character_container["value"]["SlotNum"]
+            self.slots.append(
+                CharacterContainerSlot(slot_index=slot_index, pal_id=instance_id)
             )
-            self.size = container_size
-            self._slots_data = PalObjects.get_array_property(
-                character_container["value"]["Slots"]
-            )
-            for slot in self._slots_data:
-                slot_index = PalObjects.get_value(slot["SlotIndex"])
-                instance_id = PalObjects.get_nested(
-                    slot, "RawData", "value", "instance_id"
-                )
-                instance_id = (
-                    instance_id.UUID()
-                    if isinstance(instance_id, ArchiveUUID)
-                    else instance_id
-                )
-                self.slots.append(
-                    CharacterContainerSlot(slot_index=slot_index, pal_id=instance_id)
-                )
-            break
         logger.debug(
             "%s (%s) => slots: %s, slots data: %s",
             self.type.value,
@@ -146,4 +138,3 @@ class CharacterContainer(BaseModel):
             self.size,
             len(self.slots),
         )
-        return self

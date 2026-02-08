@@ -1,0 +1,840 @@
+{
+  "Main_BaseCampLevel": {
+    "quest_type": "Main",
+    "rewards": {
+      "exp": 1000
+    }
+  },
+  "Main_BuildHatchingMachine": {
+    "quest_type": "Main",
+    "rewards": {
+      "exp": 550
+    }
+  },
+  "Main_BuildPalBox": {
+    "quest_type": "Main",
+    "rewards": {
+      "exp": 20
+    }
+  },
+  "Main_BuildWorkBench": {
+    "quest_type": "Main",
+    "rewards": {
+      "exp": 8
+    }
+  },
+  "Main_Capture30Pal": {
+    "quest_type": "Main",
+    "rewards": {
+      "exp": 400,
+      "items": [
+        {
+          "id": "PalSphere",
+          "count": 10
+        }
+      ]
+    }
+  },
+  "Main_CaptureDeerGround": {
+    "quest_type": "Main",
+    "location": {
+      "x": -456797.8,
+      "y": 197837.9,
+      "z": -800.0
+    },
+    "rewards": {
+      "exp": 1500,
+      "items": [
+        {
+          "id": "Rankup_1",
+          "count": 1
+        },
+        {
+          "id": "PalSphere_Giga",
+          "count": 3
+        }
+      ]
+    }
+  },
+  "Main_CapturePal": {
+    "quest_type": "Main",
+    "rewards": {
+      "exp": 15,
+      "items": [
+        {
+          "id": "PalSphere",
+          "count": 3
+        }
+      ]
+    }
+  },
+  "Main_CaptureSheepBall": {
+    "quest_type": "Main",
+    "rewards": {
+      "exp": 35,
+      "items": [
+        {
+          "id": "Wool",
+          "count": 10
+        },
+        {
+          "id": "Meat_SheepBall",
+          "count": 5
+        }
+      ]
+    }
+  },
+  "Main_CollectCrystal": {
+    "quest_type": "Main",
+    "rewards": {
+      "exp": 10
+    }
+  },
+  "Main_CraftKitsunebiGear": {
+    "quest_type": "Main",
+    "rewards": {
+      "exp": 450
+    }
+  },
+  "Main_CraftMealPouch": {
+    "quest_type": "Main",
+    "rewards": {
+      "items": [
+        {
+          "id": "GenghisKhan",
+          "count": 10
+        },
+        {
+          "id": "ChickenSaute",
+          "count": 10
+        }
+      ]
+    }
+  },
+  "Main_CraftPalSphere": {
+    "quest_type": "Main",
+    "rewards": {
+      "exp": 12
+    }
+  },
+  "Main_CraftShield": {
+    "quest_type": "Main",
+    "rewards": {
+      "exp": 50
+    }
+  },
+  "Main_DefeatDesertBoss": {
+    "quest_type": "Main",
+    "location": {
+      "x": 29975.275,
+      "y": 413325.0,
+      "z": 15514.0
+    },
+    "rewards": {
+      "exp": 360000
+    }
+  },
+  "Main_DefeatDungeonBoss": {
+    "quest_type": "Main",
+    "location": {
+      "x": -285331.3,
+      "y": 210162.69,
+      "z": 1000.0
+    },
+    "rewards": {
+      "exp": 1000,
+      "items": [
+        {
+          "id": "PalSphere_Mega",
+          "count": 3
+        }
+      ]
+    }
+  },
+  "Main_DefeatForestBoss": {
+    "quest_type": "Main",
+    "location": {
+      "x": -109960.0,
+      "y": 241300.0,
+      "z": 18820.0
+    },
+    "rewards": {
+      "exp": 23000
+    }
+  },
+  "Main_DefeatGrassBoss": {
+    "quest_type": "Main",
+    "location": {
+      "x": -321360.0,
+      "y": 208989.0,
+      "z": 150.0
+    },
+    "rewards": {
+      "exp": 1200
+    }
+  },
+  "Main_DefeatSakurajimaBoss": {
+    "quest_type": "Main",
+    "location": {
+      "x": -29427.572,
+      "y": -115900.055,
+      "z": 6225.5356
+    },
+    "rewards": {
+      "exp": 2200000
+    }
+  },
+  "Main_DefeatSnowyMountainBoss": {
+    "quest_type": "Main",
+    "location": {
+      "x": 81363.0,
+      "y": 90183.0,
+      "z": 63796.0
+    },
+    "rewards": {
+      "exp": 900000
+    }
+  },
+  "Main_DefeatVikingBoss": {
+    "quest_type": "Main",
+    "location": {
+      "x": -889805.2,
+      "y": -435828.0,
+      "z": 19038.922
+    },
+    "rewards": {
+      "exp": 5500000
+    }
+  },
+  "Main_DefeatVolcanoBoss": {
+    "quest_type": "Main",
+    "location": {
+      "x": -361695.0,
+      "y": -112009.0,
+      "z": 61207.5
+    },
+    "rewards": {
+      "exp": 140000
+    }
+  },
+  "Main_DefeatWildBoss": {
+    "quest_type": "Main",
+    "location": {
+      "x": -316071.7,
+      "y": 237782.42,
+      "z": 2600.0
+    },
+    "rewards": {
+      "exp": 500,
+      "items": [
+        {
+          "id": "Fiber",
+          "count": 20
+        },
+        {
+          "id": "Pal_crystal_S",
+          "count": 20
+        },
+        {
+          "id": "Leather",
+          "count": 10
+        }
+      ]
+    }
+  },
+  "Main_EquipClothArmor": {
+    "quest_type": "Main",
+    "rewards": {
+      "exp": 30
+    }
+  },
+  "Main_GainStatus": {
+    "quest_type": "Main",
+    "rewards": {
+      "exp": 5
+    }
+  },
+  "Main_Meal": {
+    "quest_type": "Main",
+    "rewards": {
+      "exp": 20,
+      "items": [
+        {
+          "id": "Berries",
+          "count": 5
+        }
+      ]
+    }
+  },
+  "Main_OpenSurvivalGuide": {
+    "quest_type": "Main"
+  },
+  "Main_PickupWood": {
+    "quest_type": "Main",
+    "rewards": {
+      "exp": 5
+    }
+  },
+  "Main_UnlockFastTravel": {
+    "quest_type": "Main",
+    "location": {
+      "x": -358785.0,
+      "y": 267940.0,
+      "z": 8500.0
+    },
+    "rewards": {
+      "exp": 3
+    }
+  },
+  "Main_UnlockPalBox": {
+    "quest_type": "Main",
+    "rewards": {
+      "exp": 15
+    }
+  },
+  "Main_UnlockPalSphere": {
+    "quest_type": "Main",
+    "rewards": {
+      "exp": 8
+    }
+  },
+  "Main_UseGlider": {
+    "quest_type": "Main",
+    "rewards": {
+      "exp": 100
+    }
+  },
+  "Main_WorkerPal": {
+    "quest_type": "Main",
+    "rewards": {
+      "exp": 20
+    }
+  },
+  "Sub_Angler01": {
+    "quest_type": "Sub",
+    "location": {
+      "x": -331671.0,
+      "y": 335454.0,
+      "z": -1903.0
+    },
+    "rewards": {
+      "exp": 750,
+      "items": [
+        {
+          "id": "FishingBait_1",
+          "count": 15
+        }
+      ]
+    }
+  },
+  "Sub_BossDefeatReward": {
+    "quest_type": "Sub"
+  },
+  "Sub_Breeder01": {
+    "quest_type": "Sub",
+    "location": {
+      "x": -340952.0,
+      "y": 107575.0,
+      "z": -1115.0
+    },
+    "rewards": {
+      "exp": 1750,
+      "items": [
+        {
+          "id": "Rankup_1",
+          "count": 1
+        },
+        {
+          "id": "Medicines",
+          "count": 5
+        }
+      ]
+    }
+  },
+  "Sub_Breeder02": {
+    "quest_type": "Sub",
+    "location": {
+      "x": -14110.0,
+      "y": -135560.0,
+      "z": 4790.0
+    },
+    "rewards": {
+      "exp": 300000,
+      "items": [
+        {
+          "id": "Rankup_3",
+          "count": 1
+        }
+      ]
+    }
+  },
+  "Sub_Breeder03": {
+    "quest_type": "Sub",
+    "location": {
+      "x": -48296.0,
+      "y": 288135.0,
+      "z": 673.0
+    },
+    "rewards": {
+      "exp": 50000,
+      "items": [
+        {
+          "id": "Rankup_2",
+          "count": 1
+        },
+        {
+          "id": "Potion_High",
+          "count": 10
+        }
+      ]
+    }
+  },
+  "Sub_Breeder04": {
+    "quest_type": "Sub",
+    "location": {
+      "x": -697180.75,
+      "y": -322452.22,
+      "z": 15741.0
+    },
+    "rewards": {
+      "exp": 300000,
+      "items": [
+        {
+          "id": "MindControlDrug",
+          "count": 3
+        }
+      ]
+    }
+  },
+  "Sub_Farmer01": {
+    "quest_type": "Sub",
+    "location": {
+      "x": -346423.0,
+      "y": 197007.0,
+      "z": 1029.0
+    },
+    "rewards": {
+      "exp": 500,
+      "items": [
+        {
+          "id": "Fruit__defense_01",
+          "count": 1
+        },
+        {
+          "id": "PalSphere_Mega",
+          "count": 5
+        },
+        {
+          "id": "Money",
+          "count": 2000
+        }
+      ]
+    }
+  },
+  "Sub_Farmer02": {
+    "quest_type": "Sub",
+    "location": {
+      "x": -329082.0,
+      "y": 163717.0,
+      "z": -1311.0
+    },
+    "rewards": {
+      "exp": 500,
+      "items": [
+        {
+          "id": "Cake",
+          "count": 3
+        },
+        {
+          "id": "Fruit_attack_01",
+          "count": 1
+        }
+      ]
+    }
+  },
+  "Sub_Farmer03": {
+    "quest_type": "Sub",
+    "location": {
+      "x": -337585.0,
+      "y": 230200.0,
+      "z": -1656.0
+    },
+    "rewards": {
+      "exp": 250,
+      "items": [
+        {
+          "id": "Cheeseburger_2",
+          "count": 5
+        },
+        {
+          "id": "Money",
+          "count": 2500
+        }
+      ]
+    }
+  },
+  "Sub_Farmer04": {
+    "quest_type": "Sub",
+    "location": {
+      "x": -291046.0,
+      "y": 203720.0,
+      "z": -993.0
+    },
+    "rewards": {
+      "exp": 500,
+      "items": [
+        {
+          "id": "Fruit_hp_01",
+          "count": 1
+        },
+        {
+          "id": "PalSphere_Mega",
+          "count": 5
+        }
+      ]
+    }
+  },
+  "Sub_FoodReward": {
+    "quest_type": "Sub"
+  },
+  "Sub_Kigurumi01": {
+    "quest_type": "Sub",
+    "location": {
+      "x": -229596.77,
+      "y": 167702.84,
+      "z": -1751.0
+    },
+    "rewards": {
+      "exp": 1031,
+      "items": [
+        {
+          "id": "HeadEquip045",
+          "count": 1
+        },
+        {
+          "id": "Player_Outfit_Kigurumi001",
+          "count": 1
+        }
+      ]
+    }
+  },
+  "Sub_Kigurumi01_Replay": {
+    "quest_type": "Sub",
+    "rewards": {
+      "items": [
+        {
+          "id": "HeadEquip045",
+          "count": 1
+        },
+        {
+          "id": "Player_Outfit_Kigurumi001",
+          "count": 1
+        }
+      ]
+    }
+  },
+  "Sub_Nomad01": {
+    "quest_type": "Sub",
+    "location": {
+      "x": 89040.0,
+      "y": 94145.67,
+      "z": 67399.0
+    },
+    "rewards": {
+      "exp": 100000,
+      "items": [
+        {
+          "id": "Blueprint_GrenadeLauncher_3",
+          "count": 1
+        },
+        {
+          "id": "Blueprint_PlasticHelmet_3",
+          "count": 1
+        }
+      ]
+    }
+  },
+  "Sub_Nomad02": {
+    "quest_type": "Sub",
+    "location": {
+      "x": -511240.0,
+      "y": -221020.0,
+      "z": 176.0
+    },
+    "rewards": {
+      "exp": 50000,
+      "items": [
+        {
+          "id": "Blueprint_FlameThrower_3",
+          "count": 1
+        },
+        {
+          "id": "Blueprint_StealHelmet_3",
+          "count": 1
+        }
+      ]
+    }
+  },
+  "Sub_Nomad03": {
+    "quest_type": "Sub",
+    "location": {
+      "x": -670864.75,
+      "y": -178856.0,
+      "z": 8.34377
+    },
+    "rewards": {
+      "exp": 300000,
+      "items": [
+        {
+          "id": "Blueprint_SemiAutoShotgun_3",
+          "count": 1
+        },
+        {
+          "id": "Blueprint_Launcher_Default_3",
+          "count": 1
+        }
+      ]
+    }
+  },
+  "Sub_Nomad04": {
+    "quest_type": "Sub",
+    "location": {
+      "x": -20307.0,
+      "y": -131533.0,
+      "z": 5981.0
+    },
+    "rewards": {
+      "exp": 50000,
+      "items": [
+        {
+          "id": "Blueprint_SemiAutoShotgun_3",
+          "count": 1
+        },
+        {
+          "id": "Blueprint_Launcher_Default_3",
+          "count": 1
+        }
+      ]
+    }
+  },
+  "Sub_PalCaptureCountReward": {
+    "quest_type": "Sub"
+  },
+  "Sub_PalDisplay_A_01": {
+    "quest_type": "Sub"
+  },
+  "Sub_PalDisplay_B_01": {
+    "quest_type": "Sub"
+  },
+  "Sub_PalDisplay_C_01": {
+    "quest_type": "Sub"
+  },
+  "Sub_PalDisplay_D_01": {
+    "quest_type": "Sub"
+  },
+  "Sub_PalDisplay_E_01": {
+    "quest_type": "Sub"
+  },
+  "Sub_PalDisplay_F_01": {
+    "quest_type": "Sub"
+  },
+  "Sub_PalDisplay_G_01": {
+    "quest_type": "Sub"
+  },
+  "Sub_PalDisplay_H_01": {
+    "quest_type": "Sub"
+  },
+  "Sub_PalDisplay_I_01": {
+    "quest_type": "Sub"
+  },
+  "Sub_PaldexReward": {
+    "quest_type": "Sub"
+  },
+  "Sub_Ranger01": {
+    "quest_type": "Sub",
+    "location": {
+      "x": 29076.0,
+      "y": 406040.0,
+      "z": 15773.0
+    },
+    "rewards": {
+      "exp": 50000,
+      "items": [
+        {
+          "id": "Elixir_workspeed_02",
+          "count": 1
+        },
+        {
+          "id": "PalSphere_Legend",
+          "count": 5
+        }
+      ]
+    }
+  },
+  "Sub_Ranger02": {
+    "quest_type": "Sub",
+    "location": {
+      "x": -350489.75,
+      "y": -6617.2056,
+      "z": 1747.0
+    },
+    "rewards": {
+      "exp": 50000,
+      "items": [
+        {
+          "id": "Elixir_hp_02",
+          "count": 1
+        },
+        {
+          "id": "PalSphere_Legend",
+          "count": 5
+        }
+      ]
+    }
+  },
+  "Sub_Ranger03": {
+    "quest_type": "Sub",
+    "location": {
+      "x": -784615.0,
+      "y": -446274.0,
+      "z": -260.0
+    },
+    "rewards": {
+      "exp": 300000,
+      "items": [
+        {
+          "id": "Elixir_attack_02",
+          "count": 1
+        },
+        {
+          "id": "PalSphere_Ultimate",
+          "count": 5
+        }
+      ]
+    }
+  },
+  "Sub_Ranger04": {
+    "quest_type": "Sub",
+    "location": {
+      "x": -181690.0,
+      "y": 237584.0,
+      "z": -1597.0
+    },
+    "rewards": {
+      "exp": 1750,
+      "items": [
+        {
+          "id": "Elixir_stamina_02",
+          "count": 1
+        },
+        {
+          "id": "PalSphere_Giga",
+          "count": 5
+        }
+      ]
+    }
+  },
+  "Sub_Scholar01": {
+    "quest_type": "Sub",
+    "location": {
+      "x": -272761.97,
+      "y": 185543.62,
+      "z": 480.0
+    },
+    "rewards": {
+      "exp": 300000,
+      "items": [
+        {
+          "id": "WorkSuitability_AddTicket_Handcraft",
+          "count": 1
+        }
+      ]
+    }
+  },
+  "Sub_Scholar02": {
+    "quest_type": "Sub",
+    "location": {
+      "x": -83350.34,
+      "y": 137191.16,
+      "z": 8023.0
+    },
+    "rewards": {
+      "exp": 50000,
+      "items": [
+        {
+          "id": "WorkSuitability_AddTicket_Cool",
+          "count": 1
+        }
+      ]
+    }
+  },
+  "Sub_Scholar03": {
+    "quest_type": "Sub",
+    "location": {
+      "x": -272547.06,
+      "y": 264756.25,
+      "z": -1464.0
+    },
+    "rewards": {
+      "exp": 500,
+      "items": [
+        {
+          "id": "WorkSuitability_AddTicket_Collection",
+          "count": 1
+        },
+        {
+          "id": "Homeward",
+          "count": 3
+        },
+        {
+          "id": "Money",
+          "count": 3500
+        }
+      ]
+    }
+  },
+  "Sub_Scholar04": {
+    "quest_type": "Sub",
+    "location": {
+      "x": -606867.0,
+      "y": -482761.84,
+      "z": 6967.0
+    },
+    "rewards": {
+      "exp": 300000,
+      "items": [
+        {
+          "id": "WorkSuitability_AddTicket_Mining",
+          "count": 1
+        }
+      ]
+    }
+  },
+  "Sub_Zoe01": {
+    "quest_type": "Sub",
+    "rewards": {
+      "exp": 2000
+    }
+  },
+  "Sub_Zoe02": {
+    "quest_type": "Sub",
+    "rewards": {
+      "exp": 2500
+    }
+  },
+  "Sub_Zoe03": {
+    "quest_type": "Sub",
+    "rewards": {
+      "exp": 3000
+    }
+  },
+  "Sub_Zoe04": {
+    "quest_type": "Sub"
+  },
+  "Sub_Zoe_Halloween": {
+    "quest_type": "Sub",
+    "rewards": {
+      "exp": 1031
+    }
+  }
+}

@@ -14,18 +14,20 @@
 		label,
 		position = 'bottom',
 		useArrow = true,
-		children
-	} = $props<{
+		children,
+		disabled = false
+	}: {
 		baseClass?: string;
 		background?: string;
 		rounded?: string;
 		popupClass?: string;
-		popup?: Snippet<any>;
+		popup?: Snippet<[]>;
 		label?: string;
 		position?: Placement;
 		useArrow?: boolean;
-		children: any;
-	}>();
+		children: Snippet<[]>;
+		disabled?: boolean;
+	} = $props();
 
 	let open = $state(false);
 	let referenceEl: HTMLElement;
@@ -91,7 +93,7 @@
 	{@render children()}
 </div>
 
-{#if open}
+{#if open && !disabled}
 	<div
 		bind:this={floatingEl}
 		class={cn('floating tooltip-popup', background, popupClass, rounded)}

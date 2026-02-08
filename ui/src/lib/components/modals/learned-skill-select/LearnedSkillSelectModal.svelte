@@ -6,6 +6,8 @@
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
 	import { staticIcons } from '$types/icons';
+	import * as m from '$i18n/messages';
+	import { c } from '$lib/utils/commonTranslations';
 
 	let { closeModal, pal } = $props<{
 		closeModal: (value: any) => void;
@@ -96,11 +98,11 @@
 </script>
 
 <Card class="min-w-[calc(100vw/3)]">
-	<h3 class="h3">Edit Learned Skills</h3>
+	<h3 class="h3">{m.edit_entity({ entity: m.learned_skills() })}</h3>
 	<div class="mt-4 flex items-center space-x-2">
 		<Combobox options={unlearnedSkills} bind:value={selectedSkill}>
 			{#snippet selectOption(option)}
-				{#await getActiveSkillIcon(option.value) then icon}
+				{#await getActiveSkillIcon(option.value as string) then icon}
 					{@const activeSkill = activeSkills.find((s) => s.id === option.value)}
 					<div class="grid grid-cols-[auto_1fr_auto] items-center gap-2">
 						<img src={icon} alt={option.label} class="h-6 w-6" />
@@ -126,7 +128,7 @@
 				<Plus />
 			</button>
 			{#snippet popup()}
-				<span>Add Skill</span>
+				<span>{m.add_skill()}</span>
 			{/snippet}
 		</Tooltip>
 	</div>
@@ -174,7 +176,7 @@
 			</List>
 		{:else}
 			<div class="flex w-full items-center justify-center space-x-2">
-				<span class="text-2xl font-semibold">No skills learned</span>
+				<span class="text-2xl font-semibold">{m.no_skills_learned()}</span>
 				<img src={staticIcons.sadIcon} alt="Sad face" class="h-12 w-12" />
 			</div>
 		{/if}
@@ -186,7 +188,7 @@
 				<Brain />
 			</button>
 			{#snippet popup()}
-				<span>Learn All Skills<br />Matching Pal Type</span>
+				<span>{m.learn_skills_matching_type()}</span>
 			{/snippet}
 		</Tooltip>
 		<Tooltip position="bottom">
@@ -194,7 +196,7 @@
 				<BicepsFlexed />
 			</button>
 			{#snippet popup()}
-				<span>Learn All Skills</span>
+				<span>{m.learn_all_skills()}</span>
 			{/snippet}
 		</Tooltip>
 		<Tooltip position="bottom">
@@ -202,7 +204,7 @@
 				<Delete />
 			</button>
 			{#snippet popup()}
-				<span>Clear</span>
+				<span>{m.clear()}</span>
 			{/snippet}
 		</Tooltip>
 		<Tooltip position="bottom">
@@ -210,7 +212,7 @@
 				<Save />
 			</button>
 			{#snippet popup()}
-				<span>Save</span>
+				<span>{c.save}</span>
 			{/snippet}
 		</Tooltip>
 		<Tooltip position="bottom">
@@ -218,7 +220,7 @@
 				<X />
 			</button>
 			{#snippet popup()}
-				<span>Cancel</span>
+				<span>{m.cancel()}</span>
 			{/snippet}
 		</Tooltip>
 	</div>

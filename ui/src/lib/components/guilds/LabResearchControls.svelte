@@ -7,6 +7,7 @@
 	import type { Guild, GuildLabResearchInfo, WorkSuitability } from '$types';
 	import NumberFlow from '@number-flow/svelte';
 	import { Unlock } from 'lucide-svelte';
+	import * as m from '$i18n/messages';
 
 	let {
 		guild = $bindable(),
@@ -101,7 +102,9 @@
 			<button
 				class="btn hover:ring-secondary-500 border-surface-800 flex items-center justify-center border p-2 text-sm hover:ring-2 hover:ring-inset"
 				onclick={() => unlockAllForCategory(category)}
-				title="Unlock All {workSuitability.localized_name || category} Research"
+				title={m.unlock_all_category_research({
+					category: workSuitability.localized_name || category
+				})}
 			>
 				<Unlock class="h-4 w-4" />
 			</button>

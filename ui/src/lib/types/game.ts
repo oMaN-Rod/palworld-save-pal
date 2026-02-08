@@ -12,6 +12,24 @@ export interface GamepassSave {
 	containers: GamePassContainer[];
 }
 
+export interface PlayerSummary {
+	uid: string;
+	nickname: string;
+	level?: number;
+	guild_id?: string;
+	pal_count: number;
+	loaded: boolean;
+}
+
+export interface GuildSummary {
+	id: string;
+	name: string;
+	admin_player_uid?: string;
+	player_count: number;
+	base_count: number;
+	loaded: boolean;
+}
+
 export type EggConfig = {
 	character_id: string;
 	gender: PalGender;
@@ -132,6 +150,8 @@ export type Player = {
 	boss_technology_points: number;
 	location: WorldMapPoint;
 	last_online_time: string;
+	current_missions: string[];
+	completed_missions: string[];
 };
 
 export type GuildLabResearchInfo = {
@@ -149,6 +169,7 @@ export type Guild = {
 	guild_chest?: ItemContainer;
 	lab_research_data?: GuildLabResearchInfo[];
 	state: EntryState;
+	base_camp_level?: number;
 };
 
 export type Base = {
@@ -185,6 +206,7 @@ export type SaveFileType = 'gamepass' | 'steam';
 export type SaveFile = { name: string; type: SaveFileType; world_name?: string; size?: number };
 export interface DynamicItem {
 	local_id: string;
+	static_id?: string;
 	durability: number;
 	remaining_bullets?: number;
 	type: DynamicItemClass;
@@ -330,7 +352,15 @@ export const palPresetNameDescriptionMap: Record<keyof PalPreset, PalPresetNameD
 		label: 'Element Type',
 		description: `Specify the element type for the Pal in this preset. This will restrict the Pal to only being of the specified element types.`
 	},
-	character_id: { label: 'Pal', description: '' }
+	character_id: { label: 'Pal', description: '' },
+	nickname: { label: 'Nickname', description: 'Apply Nickname to preset' },
+	filtered_nickname: {
+		label: 'Filtered Nickname',
+		description: 'Apply Filtered Nickname to preset'
+	},
+	stomach: { label: 'Stomach', description: 'Apply Stomach to preset' },
+	hp: { label: 'HP', description: 'Apply HP to preset' },
+	friendship_point: { label: 'Friendship Point', description: 'Apply Friendship Point to preset' }
 };
 
 export const defaultPresetConfig: PalPresetConfig = {
@@ -354,7 +384,12 @@ export const defaultPresetConfig: PalPresetConfig = {
 	passive_skills: true,
 	work_suitability: true,
 	sanity: true,
-	exp: true
+	exp: true,
+	nickname: true,
+	filtered_nickname: true,
+	stomach: true,
+	hp: true,
+	friendship_point: true
 };
 
 export type PalPreset = {
@@ -380,6 +415,11 @@ export type PalPreset = {
 	work_suitability?: Record<WorkSuitability, number>;
 	sanity?: number;
 	exp?: number;
+	nickname?: string;
+	filtered_nickname?: string;
+	stomach?: number;
+	hp?: number;
+	friendship_point?: number;
 };
 
 export interface PresetProfile {
@@ -631,6 +671,7 @@ export enum EffectType {
 }
 
 export enum PalGender {
+	NONE = 'None',
 	MALE = 'Male',
 	FEMALE = 'Female'
 }
@@ -830,4 +871,24 @@ export interface ImportToUpsModalResults {
 export interface AddToCollectionResult {
 	collectionId?: number;
 	removeFromCollection: boolean;
+}
+
+export type MissionType = 'Main' | 'Sub';
+
+export interface MissionRewardItem {
+	id: string;
+	count: number;
+}
+
+export interface MissionRewards {
+	exp?: number;
+	items?: MissionRewardItem[];
+}
+
+export interface Mission {
+	id: string;
+	localized_name: string;
+	description: string;
+	quest_type: MissionType;
+	rewards: MissionRewards;
 }

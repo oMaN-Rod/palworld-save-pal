@@ -1,0 +1,2454 @@
+{
+  "Alpaca": {
+    "localized_name": "Melpaca",
+    "description": "Bu Pal'ın pofuduk görüntüsüne kanma. Uzun bacaklarının biriyle atacağı hipersonik bir tekme seni dünyanın öbür ucuna fırlatabilir."
+  },
+  "AmaterasuWolf": {
+    "localized_name": "Kitsun",
+    "description": "Kitsun, görüntüsünün aksine son derece hassastır ve ürkerse bir mağaraya kaçar. Uzun zaman önce, bunlardan birinin senden kaçması kötü bir kehanet kabul edilirdi."
+  },
+  "AmaterasuWolf_Dark": {
+    "localized_name": "Kitsun Noct",
+    "description": "Kitsun Noct, görüntüsünün aksine son derece hassastır ve ürkerse bir mağaraya kaçar. Çok uzun zamandır yalnızlığa gömüldüğü için son derece melankoliktir."
+  },
+  "Ambassador01": {
+    "localized_name": "Çöl Kasabası Elçisi",
+    "description": null
+  },
+  "Anubis": {
+    "localized_name": "Anubis",
+    "description": "Bir zamanlar soyluluğun sembolü olarak görülür; zenginlikten ve güçten uzak duran kişiler için bir idol kabul edilirdi. Fakat zaman içinde bu Pal, ölümle özdeşleşti."
+  },
+  "Arena_BossDefeat": {
+    "localized_name": "Gedikli Avcı",
+    "description": null
+  },
+  "Arena_DarkTrader": {
+    "localized_name": "Karaborsacı",
+    "description": null
+  },
+  "Arena_Female_Presenter": {
+    "localized_name": "Dost Canlısı Pal Terbiyecisi",
+    "description": null
+  },
+  "Arena_Female_Soldier02": {
+    "localized_name": "Geleceği Parlak Pal Terbiyecisi",
+    "description": null
+  },
+  "Arena_Female_Soldier03": {
+    "localized_name": "Gedikli Pal Terbiyecisi",
+    "description": null
+  },
+  "Arena_Female_Soldier04": {
+    "localized_name": "Usta Pal Terbiyecisi",
+    "description": null
+  },
+  "Arena_FireCult_FlameThrower": {
+    "localized_name": "Ölümsüz Ateş Kardeşliği Gazisi",
+    "description": null
+  },
+  "Arena_Hunter_Fat_GatlingGun": {
+    "localized_name": "Örgüt Ezicisi",
+    "description": null
+  },
+  "Arena_Male_DarkTrader02": {
+    "localized_name": "Madalya Tüccarı",
+    "description": null
+  },
+  "Arena_Male_Police_old": {
+    "localized_name": "Reenkarne Olmuş Kişi",
+    "description": null
+  },
+  "Arena_Male_Soldier02": {
+    "localized_name": "Çaylak Pal Terbiyecisi",
+    "description": null
+  },
+  "Arena_Male_Soldier02_Invader": {
+    "localized_name": "Ateşli Pal Terbiyecisi",
+    "description": null
+  },
+  "Arena_Male_Soldier03": {
+    "localized_name": "Zalim Pal Terbiyecisi",
+    "description": null
+  },
+  "Arena_Male_Soldier04": {
+    "localized_name": "Coşkulu Pal Terbiyecisi",
+    "description": null
+  },
+  "Arena_Ninja": {
+    "localized_name": "Ay Goncası Genin",
+    "description": null
+  },
+  "Arena_NinjaElite": {
+    "localized_name": "Ay Goncası Jonin",
+    "description": null
+  },
+  "Arena_PalPassive_Doctor": {
+    "localized_name": "Dr. Brawn",
+    "description": null
+  },
+  "Arena_Ranger04": {
+    "localized_name": "Güzel kokan avcı",
+    "description": null
+  },
+  "Arena_Reward_Emote": {
+    "localized_name": "Aşkın Habercisi",
+    "description": null
+  },
+  "Arena_Reward_Paldex": {
+    "localized_name": "Pal Ekolojik Araştırmacısı",
+    "description": null
+  },
+  "Arena_Scholar01": {
+    "localized_name": "Bir efsanenin peşindeki araştırmacılar",
+    "description": null
+  },
+  "Arena_Scientist_LaserRifle": {
+    "localized_name": "PAL Genetik Araştırma Birimi İnfazcısı",
+    "description": null
+  },
+  "Arena_Soldier": {
+    "localized_name": "Sağlam Paralı Asker",
+    "description": null
+  },
+  "Arena_Viking": {
+    "localized_name": "Feybreak Savaşçısı",
+    "description": null
+  },
+  "Arena_VikingElite": {
+    "localized_name": "Feybreak Başıbozuğu",
+    "description": null
+  },
+  "BOSS_Believer_CrossBow": {
+    "localized_name": "Ego",
+    "description": null
+  },
+  "BOSS_Believer_Fat_GiantClub": {
+    "localized_name": "Tuğla",
+    "description": null
+  },
+  "BOSS_DarkTrader": {
+    "localized_name": "Keçi",
+    "description": null
+  },
+  "BOSS_Female_DesertPeople": {
+    "localized_name": "Fısıltı",
+    "description": null
+  },
+  "BOSS_Female_People": {
+    "localized_name": "Fişek",
+    "description": null
+  },
+  "BOSS_Female_People02": {
+    "localized_name": "Siren",
+    "description": null
+  },
+  "BOSS_Female_People03": {
+    "localized_name": "Dönek",
+    "description": null
+  },
+  "BOSS_Female_Soldier": {
+    "localized_name": "Yeşim",
+    "description": null
+  },
+  "BOSS_Female_Soldier02": {
+    "localized_name": "Pırıltı",
+    "description": null
+  },
+  "BOSS_Female_Soldier03": {
+    "localized_name": "Aloha",
+    "description": null
+  },
+  "BOSS_Female_Soldier04": {
+    "localized_name": "Çabuk",
+    "description": null
+  },
+  "BOSS_FireCult_FlameThrower": {
+    "localized_name": "Gölge",
+    "description": null
+  },
+  "BOSS_Hunter_Fat_GatlingGun": {
+    "localized_name": "Izgara",
+    "description": null
+  },
+  "BOSS_Hunter_Rifle": {
+    "localized_name": "Şahin",
+    "description": null
+  },
+  "BOSS_Male_DesertPeople": {
+    "localized_name": "Hayalet",
+    "description": null
+  },
+  "BOSS_Male_NinjaElite": {
+    "localized_name": "Hayta",
+    "description": null
+  },
+  "BOSS_Male_People": {
+    "localized_name": "Dina",
+    "description": null
+  },
+  "BOSS_Male_People02": {
+    "localized_name": "Tüy",
+    "description": null
+  },
+  "BOSS_Male_People03": {
+    "localized_name": "Akış",
+    "description": null
+  },
+  "BOSS_Male_People2": {
+    "localized_name": "Mit",
+    "description": null
+  },
+  "BOSS_Male_Soldier": {
+    "localized_name": "Çarpma",
+    "description": null
+  },
+  "BOSS_Male_Soldier02": {
+    "localized_name": "Dart",
+    "description": null
+  },
+  "BOSS_Male_Soldier03": {
+    "localized_name": "Clint",
+    "description": null
+  },
+  "BOSS_Male_Soldier04": {
+    "localized_name": "Kement",
+    "description": null
+  },
+  "BOSS_Male_Trader01": {
+    "localized_name": "Sıyırık",
+    "description": null
+  },
+  "BOSS_Male_Trader02": {
+    "localized_name": "Mimik",
+    "description": null
+  },
+  "BOSS_Male_Trader03": {
+    "localized_name": "Billy",
+    "description": null
+  },
+  "BOSS_Ninja": {
+    "localized_name": "Beceriksiz",
+    "description": null
+  },
+  "BOSS_Police_Rifle": {
+    "localized_name": "Kırbaç",
+    "description": null
+  },
+  "BOSS_Police_old": {
+    "localized_name": "Çimdik",
+    "description": null
+  },
+  "BOSS_Scientist_LaserRifle": {
+    "localized_name": "Çabucak",
+    "description": null
+  },
+  "BOSS_Viking": {
+    "localized_name": "Kemirgen",
+    "description": null
+  },
+  "BOSS_VikingElite": {
+    "localized_name": "Zula",
+    "description": null
+  },
+  "BadCatgirl": {
+    "localized_name": "Nyafia",
+    "description": "Gizlediği gözüne bakabilen herkesten tüm kalbiyle nefret eder. Gözüne ısrarla bakmaya devam edersen gözyaşlarına boğulur ve iki hafta boyunca sana küser."
+  },
+  "Baphomet": {
+    "localized_name": "Incineram",
+    "description": "Bu Pal, gecenin karanlığında avını yakalar ve kendi bölgesine getirir. Bu zavallıların daha sonra başına gelenleri hayal etmek güç değil."
+  },
+  "Baphomet_Dark": {
+    "localized_name": "Incineram Noct",
+    "description": "Özellikle bebek Pal'ları hedef alır ve onları kendi bölgesine geri götürür. Çocuğu çalınan bir ebeveynin hissettiği derin çaresizliği ancak hayal edebiliriz."
+  },
+  "Baphomet_Dark_Oilrig": {
+    "localized_name": "Incineram Noct",
+    "description": null
+  },
+  "Bastet": {
+    "localized_name": "Mau",
+    "description": "Uzun kuyruğu koptuğunda bile çürümez. Bazıları bu kopuk kuyrukların şans getirdiğine inanırdı ancak kaçak şekilde avlanan sayısız Mau için bu kuyruklar pek de şanslı sayılmazdı."
+  },
+  "Bastet_Ice": {
+    "localized_name": "Mau Cryst",
+    "description": "Kristalsi kuyruğu çok güzeldir ama bu Pal öldüğünde kuyruğu parçalanır. Bazıları bu Pal'ı yetiştirmenin şans getirdiğine inanır. Bu yüzden esaret altındaki bir Mau Cryst çok iyi muamele görür."
+  },
+  "Believer_Bat": {
+    "localized_name": "Hür Pal İttifakı Fedaisi",
+    "description": null
+  },
+  "Believer_Bat_Camp02": {
+    "localized_name": "Hür Pal İttifakı Fedaisi",
+    "description": null
+  },
+  "Believer_Bat_Invader": {
+    "localized_name": "Hür Pal İttifakı Fedaisi",
+    "description": null
+  },
+  "Believer_CrossBow": {
+    "localized_name": "Hür Pal İttifakı Fedaisi",
+    "description": null
+  },
+  "Believer_CrossBow_Camp02": {
+    "localized_name": "Hür Pal İttifakı Fedaisi",
+    "description": null
+  },
+  "Believer_CrossBow_Invader": {
+    "localized_name": "Hür Pal İttifakı Fedaisi",
+    "description": null
+  },
+  "Believer_CrossBow_Tower": {
+    "localized_name": "Hür Pal İttifakı Fedaisi",
+    "description": null
+  },
+  "Believer_Fat_Cane": {
+    "localized_name": "Hür Pal İttifakı Yargıcı",
+    "description": null
+  },
+  "Believer_Fat_GatlingGun": {
+    "localized_name": "Hür Pal İttifakı Yargıcı",
+    "description": null
+  },
+  "Believer_Fat_Prisoner": {
+    "localized_name": "Hür Pal İttifakı Yargıcı",
+    "description": null
+  },
+  "Believer_Prisoner": {
+    "localized_name": "Hür Pal İttifakı Fedaisi",
+    "description": null
+  },
+  "BerryGoat": {
+    "localized_name": "Caprity",
+    "description": "Bu Pal'ın sırtındaki çalı, Pal düzgün şekilde beslendiği sürece meyve vermeye devam eder. Pal, bu meyveleri potansiyel eşlerine ikram eder ve eş adayları meyvelerin lezzetini beğenirse bir aşk ortaya çıkar."
+  },
+  "BerryGoat_Dark": {
+    "localized_name": "Caprity Noct",
+    "description": "Sırtında büyüyen meyvelerin tadı Pal'ın duygularına göre değişir. Ne kadar ağır şartlar altında büyürse, meyveleri o kadar tatlı olur. Bu sebeple, esaret altında büyüyen çoğu Caprity Noct sevginin ne olduğunu öğrenemez."
+  },
+  "BirdDragon": {
+    "localized_name": "Vanwyrm",
+    "description": "Vanwyrm dış iskeletinden yapılmış bir flütün melodilerinin sıradağları aşabileceği söylenir. Eski çağlarda, bu flütler bir saldırıyı haber vermek için kullanılırdı."
+  },
+  "BirdDragon_Ice": {
+    "localized_name": "Vanwyrm Cryst",
+    "description": "Vanwyrm Cryst dış iskeletinden yapılmış bir flütün melodilerinin sıradağları aşabileceği söylenir. Eski çağlarda, bu flütler savaştan galip çıkıldığını haber vermek için kullanılırdı."
+  },
+  "BlackCentaur": {
+    "localized_name": "Necromus",
+    "description": "Bir zamanlar Paladius ile yekvücuttu. Kararan bedeni, olumsuz duyguların vücut bulmuş hâlidir. Fakat gözlerinin derinliklerindeki bir şefkat pırıltısı hâlâ görülebilir."
+  },
+  "BlackFurDragon": {
+    "localized_name": "Dragostrophe",
+    "description": "Sonsuz boşluktan doğan sessiz bir yaratık. Bu yaratığın önünde durmayacaksın. Bu yaratığa kulak vermeyeceksin."
+  },
+  "BlackGriffon": {
+    "localized_name": "Shadowbeak",
+    "description": "Deliliğin derinliklerinde doğdu, varlığı bile tüm mantığı altüst ediyor. Diğer tüm Pal'larla olan genetik bağlarını kaybettiğinden hâlâ bir Pal sayılabilir mi, söylemek güç."
+  },
+  "BlackMetalDragon": {
+    "localized_name": "Astegon",
+    "description": "Sonsuz boşluktan doğan vahşi bir yaratık. Bu yaratığın önünde durmayacaksın. Bu yaratığa kulak vermeyeceksin."
+  },
+  "BlackPuppy": {
+    "localized_name": "Smokie",
+    "description": "Kapkara alevleri sadece ılık gelebilir ama onlarla temas hâlinde kalan her şey yavaş yavaş, içten içe erir. Bu alevlerin üzerinde bir parça peynir tutarsan gerçek bir lezzet elde edersin."
+  },
+  "Blacksmith01": {
+    "localized_name": "Demirci Çırağı",
+    "description": null
+  },
+  "BlueDragon": {
+    "localized_name": "Azurobe",
+    "description": "Bu Pal'ın beyaz kurdelesi, saf olmayan suyla ıslatıldığında siyaha döner. Zehirleri tespit etmekteki yararlılığı sebebiyle bu Pal bir zamanlar aşırı avlanmanın kurbanıydı. Bu geçmişi sebebiyle insanlığa karşı öfkeliler."
+  },
+  "BlueDragon_Ice": {
+    "localized_name": "Azurobe Cryst",
+    "description": "Beyaz kuşağı çevresinden ısı emmeye devam eder. Garip bir şekilde, kuşağın sıcaklığı hiç değişmez. Bu anormal özelliği yüzünden geçmişte aşırı şekilde av oldular. Hala insanlar hakkında iyi düşünmezler."
+  },
+  "BluePlatypus": {
+    "localized_name": "Fuack",
+    "description": "Kendi vücut suyunu kullanan bu Pal, istediği her yerde dalgalar oluşturabilir. Acelesi olduğunda gövdesi üzerinde kayar fakat bunun sonucunda ulaştığı hız çoğu zaman bir yerlere ölümcül şekilde çarpmasıyla sonuçlanır."
+  },
+  "BluePlatypus_Fire": {
+    "localized_name": "Fuack Ignis",
+    "description": "Sürtünme gücü yüksek bir mideye sahiptir ve vücut sörfü yaparken alev alır. Çok heyecanlandığında çoğu zaman alev topuna dönüşür."
+  },
+  "BlueThunderHorse": {
+    "localized_name": "Azurmane",
+    "description": "Tıpkı Univolt gibi, bir zamanlar bu Pal'ın da Yıldırım Tanrısı'yla bağlantılı olduğuna inanılıyordu. Univolt için olan inanç azaldıkça insanlar Tanrı'nın gerçek elçisinin Azurmane olduğuna inanmaya başladı. Buna rağmen, zaman geçtikçe ikisi de mütevazı bir konuma düşerek sıradan yük beygirleri olarak kullanılmaya başladı."
+  },
+  "BlueberryFairy": {
+    "localized_name": "Prunelia",
+    "description": "Zeki ve zarif yaradılışıyla adanın soyluları tarafından sıklıkla hizmetçi olarak istihdam edilirdi. Fakat gece karşılaşıldığında yüzünün aldığı ürkütücü şekil onu hızla gözden düşürdü."
+  },
+  "Boar": {
+    "localized_name": "Rushoar",
+    "description": "Son derece agresif bir Pal olarak çoğu zaman rakibinin gücünü tartmadan kavgaya girer. Küçük olmasına rağmen güçlü hücumuyla büyük kayaları bile yuvarlayabilir."
+  },
+  "BountyTrader": {
+    "localized_name": "Muhafız",
+    "description": null
+  },
+  "CandleGhost": {
+    "localized_name": "Sootseer",
+    "description": "Bir zamanlar dünyanın sonu yaklaştıkça alevin gücünü kaybedeceğine inanılıyordu. Kıyamet habercileri, alev zayıflamaya her başladığında kutlamalarına başlardı; fakat sonunda, her şeyinSootseer tarafından tezgâhlanan bir şaka olduğu ortaya çıktı. En azından şimdilik."
+  },
+  "CaptainPenguin": {
+    "localized_name": "Penking",
+    "description": "Şaşırtıcı şekilde Pengullet ile akraba değil. Fakat bu Pal gittiği her yerde istediği kadar şımartıldığından şu anda küstahça gezinmek için elinden geleni yapıyor."
+  },
+  "CaptainPenguin_Black": {
+    "localized_name": "Penking Lux",
+    "description": "Su altında avlanabilmek için elektrik gücü kazanmış ve rengini değiştirmiştir. Sonuç olarak,Pengulletartık onu sevmiyordur. Fakat bir şekilde 'in artıkPengullet Luxdiye bir minyonu vardır."
+  },
+  "CaravanLeader01": {
+    "localized_name": "Kervan Lideri",
+    "description": null
+  },
+  "CaravanLeader02": {
+    "localized_name": "Kervan Lideri",
+    "description": null
+  },
+  "CaravanLeader03": {
+    "localized_name": "Kervan Lideri",
+    "description": null
+  },
+  "Carbunclo": {
+    "localized_name": "Lifmunk",
+    "description": "Beş ila yedi yaşında bir insan çocuğu kadar zekidir. Harika bir partner olabilir ancak silah kullanmayı öğrendikten sonra efendilerini öldürdüklerini konu alan çok sayıda dava mevcuttur."
+  },
+  "CatBat": {
+    "localized_name": "Tombat",
+    "description": "Gösterişli kanatlarının havasını diğer Pal'ların önünde atmak için çoğu zaman bir anda ortaya çıkar. Her ne kadar bu bir korkutma taktiği gibi görünse de Pal'ın bu gösteriden bir nevi keyif aldığı anlaşılmaktadır."
+  },
+  "CatMage": {
+    "localized_name": "Katress",
+    "description": "Gölgelerin gücüyle esrarengiz fenomenler ortaya çıkarır. Yiyecekleri çiğ yemeyi tercih eder ve Wixen karşısında özellikle düşmanca bir tavır takınır."
+  },
+  "CatMage_Fire": {
+    "localized_name": "Katress Ignis",
+    "description": "Yetiştirilişi sebebiyle artık yiyeceklerinin yeterince çiğ olup olmadığıyla ilgilenmez. Bu Pal, bu ayrıntılarla uğraşmayı bırakmıştır ve sadece mümkün olduğunca baharatlı yiyecekleri tercih etmektedir. Wixen Noct ile pek iyi geçinemez."
+  },
+  "CatVampire": {
+    "localized_name": "Felbat",
+    "description": "Gölgelerden saldırıya geçen bu Pal, avını bir pelerini andıran kanatları arasında kıstırır. Kanatların arasında olan biteni (veya kanatlarının iç kısmının neden kırmızı lekelerle kaplı olduğunu) bilmemek belki de en iyisidir."
+  },
+  "ChickenPal": {
+    "localized_name": "Chikipi",
+    "description": "Son derece zayıf ve aşırı lezzetlidir. SheepBall ile birlikte en zayıf Pal'lardan biridir. Ne kadar avlanırlarsa avlansınlar tekrar ortaya çıkmaya devam ederler."
+  },
+  "ColorfulBird": {
+    "localized_name": "Tocotoco",
+    "description": "Patlayan yumurtalar üreten ürkütücü bir Pal. Çoğunlukla bu yumurtaları kıç kısmından bir savunma biçimi olarak fırlatır; fakat yumurtaları tükendiğinde Pal'ın kendisi patlar."
+  },
+  "CowPal": {
+    "localized_name": "Mozzarina",
+    "description": "Cinsiyeti fark etmeksizin bu Pal'dan açık bir musluktan fışkıran su gibi süt fışkırır. Bu durum gerçekten hayata dair sırlardan biridir; fakat bu sırrın çözülmemesi muhtemelen daha iyi olacaktır."
+  },
+  "CuteButterfly": {
+    "localized_name": "Cinnamoth",
+    "description": "Pullarını koklamak benzersiz bir mutluluktan uçma hissi ortaya çıkarır. Bu yan ürünü yasaların kontrolüne almak için bazı teşebbüsler olmuştur, fakat Hür Pal İttifakı bu önlemlere şiddetle karşı çıkarak yasaların düzenlenme denemelerini durdurmuştur."
+  },
+  "CuteFox": {
+    "localized_name": "Vixy",
+    "description": "Palpagos Adası'nın simgesi. Bir Vixy, zorbalığının hedefi olursa tüm dünyayla düşman olmaya hazır olsan iyi olur."
+  },
+  "CuteMole": {
+    "localized_name": "Fuddler",
+    "description": "Elmas kadar sert, iri pençeleriyle öne çıkar. Fakat enerjisinin çoğunu bu pençeleri bilemek için kullandığından bazen günler boyunca başka hiçbir şey yapamaz."
+  },
+  "DarkAlien": {
+    "localized_name": "Xenovader",
+    "description": "Bilgileri gönderebilir veya unutarak enerjiye dönüştürebilir. Düzenli olarak birilerine bilgi gönderiyor gibi görünür. - Yanıt ver. Hedef belirlendi. Derhâl yok et."
+  },
+  "DarkAlien_Oilrig": {
+    "localized_name": "Xenovader",
+    "description": null
+  },
+  "DarkCrow": {
+    "localized_name": "Cawgnito",
+    "description": "Uzun zaman önce göklerde özgürce uçardı. Galeclaw ile mücadelesini kaybedince gökyüzünü terk etti ve şimdi gecenin karanlığında gözlerden uzak bir hayat sürüyor."
+  },
+  "DarkMechaDragon": {
+    "localized_name": "Xenolord",
+    "description": "-Hedefe ulaşıldı. Öncelik: |Süpersonik Ejderha| varlığının yerini tespit et -Not: Fetih için son tarih <://Error_Code:126DC> sene aşıldı. -Güncelleme: Fetih emarelerine rastlanmadı. Yerlileşme onaylandı. Ortadan kaldırma protokolünü başlat. -Personele Not: Kritik verileri unutmaktan veya tüketmekten kaçın!"
+  },
+  "DarkScorpion": {
+    "localized_name": "Menasting",
+    "description": "Saf enerjiden oluşan bu Pal'ın içi tamamen boştur. Bu Pal hâlâ canlı olan avlarını boş gövdesinin içine tıkarak orada absorbe eder. Bu Pal'ın içinden gelen dehşet verici çığlıklar çoğu zaman duyulabilir."
+  },
+  "DarkScorpion_Ground": {
+    "localized_name": "Menasting Terra",
+    "description": "Saf enerjiden oluşan bu Pal'ın içi tamamen boştur. Toprağı ve mineralleri dış kabuğunda biriktirerek inanılmaz bir kütleye ulaşır. Saldırısına uğrayanlar sadece dehşet verici inlemeler çıkarabilir."
+  },
+  "DeathPenalty_guide": {
+    "localized_name": "Gedikli Pal Terbiyecisi",
+    "description": null
+  },
+  "Deer": {
+    "localized_name": "Eikthyrdeer",
+    "description": "En etkileyici boynuzlara sahip olanlar sürünün lideri olur. Boynuzları kırıldığında bunalıma girer, sürüden ayrılır ve bir daha onları gören olmaz."
+  },
+  "Deer_Ground": {
+    "localized_name": "Eikthyrdeer Terra",
+    "description": "En sert boynuzlara sahip olan Pal, sürünün lideri olur. Boynuzlarını kaybederse liderlik konumunu da kaybeder. Veda eden bakışlar altında sürüyü terk eder ve sessizce toprağa döner."
+  },
+  "Doctor": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "DreamDemon": {
+    "localized_name": "Daedream",
+    "description": "Sevdiği kişileri uykuya daldırır ve onlara sonsuz mutlu rüyalar gösterir. Büyüsüne yenik düşenler, ölüm kendilerini alana dek uyanamaz."
+  },
+  "DrillGame": {
+    "localized_name": "Digtoise",
+    "description": "En güçlü kabuğa ve onu delebilecek tek matkaba sahip bir Digtoise, popüler çocuk masalı |Digtoise Hikâyesi| ile dünyanın çelişkilerine kafa yorar."
+  },
+  "Eagle": {
+    "localized_name": "Galeclaw",
+    "description": "Bir insanı tutarken bile kolaylıkla havalanabilen bir Pal. Fakat yorulduğunda tuttuklarını bırakma eğilimi sebebiyle pek çok canlı ani bir sonla buluşmuştur."
+  },
+  "ElecCat": {
+    "localized_name": "Sparkit",
+    "description": "Kurak mevsimlerde bu Pal her an öfkesine yenik düşmenin eşiğindedir. Müttefikler arasında bile, en küçük bir kışkırtmada dahi kıvılcımlar uçuşabilir."
+  },
+  "ElecLion": {
+    "localized_name": "Boltmane",
+    "description": "-"
+  },
+  "ElecPanda": {
+    "localized_name": "Grizzbolt",
+    "description": "Dost canlısı gülümsemesi ve kuvvetli bedeniyle, partneri olarak tanıdığı kişiye karşı uysaldır. Fakat bilinmeyen sebeplerle, bir mitralyöz kuşandığında kişiliği yüz seksen derece değişir."
+  },
+  "Emote_location_A_01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Emote_location_A_02": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Emote_location_B_01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Emote_location_B_02": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Emote_location_C_01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Emote_location_C_02": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Emote_location_D_01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Emote_location_D_02": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Emote_location_E_01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Emote_location_E_02": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Emote_location_F_01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Emote_location_F_02": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Emote_location_G_01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Emote_location_G_02": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Emote_location_H_01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Emote_location_H_02": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Emote_location_I_01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Emote_location_I_02": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Epicure01": {
+    "localized_name": "Gurme Avcı",
+    "description": null
+  },
+  "Escort_PalTamer01": {
+    "localized_name": "Koruma Pal Terbiyecisi",
+    "description": null
+  },
+  "Escort_Warrior01": {
+    "localized_name": "Koruma Paralı Asker",
+    "description": null
+  },
+  "FairyDragon": {
+    "localized_name": "Elphidran",
+    "description": "Görüntüsünden de anlaşıldığı kadar masum bir yaradılışa sahiptir. Belki de bu yüzden bazen iyiyle kötüyü ayırt etmekte başarısız olur ve kötü niyetli kişilerin kendisinden yararlanmasına engel olamaz."
+  },
+  "FairyDragon_Water": {
+    "localized_name": "Elphidran Aqua",
+    "description": "Görüntüsünden de anlaşıldığı kadar masum bir yaradılışa sahiptir. Belki de bu yüzden hiçbir hareketinde kötü niyet barındırmaz ve birini öldürmesi hâlinde bile bir duygu sergilemez."
+  },
+  "FeatherOstrich": {
+    "localized_name": "Dazemu",
+    "description": "Bir adım at ve şüphelerini geride bırak. İki adım at ve kaygılarını geride bırak. Üç adım at ve korkularını geride bırak. İstediğin düşmanla yüzleş."
+  },
+  "Female_DesertPeople02": {
+    "localized_name": "Köylü",
+    "description": null
+  },
+  "Female_Farmer01_v01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Female_Farmer01_v02": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Female_Farmer01_v03": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Female_Farmer01_v04": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Female_Nomad01_v01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Female_Nomad01_v02": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Female_Nomad01_v03": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Female_Nomad01_v04": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Female_People02": {
+    "localized_name": "Köylü",
+    "description": null
+  },
+  "Female_People03": {
+    "localized_name": "Köylü",
+    "description": null
+  },
+  "Female_Presenter01": {
+    "localized_name": "Dost Canlısı Pal Terbiyecisi",
+    "description": null
+  },
+  "Female_Ranger01_v01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Female_Ranger01_v02": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Female_Ranger01_v03": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Female_Ranger01_v04": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Female_Soldier01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Female_Soldier02": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Female_Soldier03": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Female_Soldier03_Invader": {
+    "localized_name": "İkizler Terbiyecileri",
+    "description": null
+  },
+  "Female_Soldier04": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Female_Soldier04_Invader": {
+    "localized_name": "İkizler Terbiyecileri",
+    "description": null
+  },
+  "FengyunDeeper": {
+    "localized_name": "Fenglope",
+    "description": "Geçmiş çağlarda güzel görüntüsü, tablolarda sık karşılaşılan bir ögeydi. Zaman geçtikçe güzel postu ve boynuzları da sanat eserlerinde sık sık görülmeye başladı."
+  },
+  "FengyunDeeper_Electric": {
+    "localized_name": "Fenglope Lux",
+    "description": "Geçmiş çağlarda bir Fenglope Lux resmi çizenlerin üzerine yıldırım düştüğüne inanılırdı. Zaman geçtikçe Fenglope Lux çizimleri içeren eserler yıldırımlardan kaçınmak için nazarlıklar olarak değer görmeye başladı ve sık görünen bir manzara hâline geldi."
+  },
+  "FireCult_FlameThrower": {
+    "localized_name": "Ölümsüz Ateş Kardeşliği Gazisi",
+    "description": null
+  },
+  "FireCult_FlameThrower_Invader": {
+    "localized_name": "Ölümsüz Ateş Kardeşliği Gazisi",
+    "description": null
+  },
+  "FireCult_FlameThrower_Relax": {
+    "localized_name": "Ölümsüz Ateş Kardeşliği Gazisi",
+    "description": null
+  },
+  "FireCult_Prisoner": {
+    "localized_name": "Ölümsüz Ateş Kardeşliği Gazisi",
+    "description": null
+  },
+  "FireCult_Rifle": {
+    "localized_name": "Ölümsüz Ateş Kardeşliği Gazisi",
+    "description": null
+  },
+  "FireCult_Rifle_Invader": {
+    "localized_name": "Ölümsüz Ateş Kardeşliği Gazisi",
+    "description": null
+  },
+  "FireCult_Rifle_Relax": {
+    "localized_name": "Ölümsüz Ateş Kardeşliği Gazisi",
+    "description": null
+  },
+  "FireKirin": {
+    "localized_name": "Pyrin",
+    "description": "Tüm bedeni son derece verimli bir ısı kaynağı olarak evrilmiş ve bu Pal'ı inanılmaz bir dayanıklılıkla ödüllendirmiştir. Üzerine binen biri olursa bu Pal onları yakmamaya dikkat eder."
+  },
+  "FireKirin_Dark": {
+    "localized_name": "Pyrin Noct",
+    "description": "Enerji olarak gizemli karanlık madde yakar ve kalan parçacıkları bedeninden dışarı atar. Üzerine binen kişinin karanlığın yolunda dörtnala koşmamaya dikkat etmesi gerekir."
+  },
+  "FlameBambi": {
+    "localized_name": "Rooby",
+    "description": "Vahşi bir Rooby şaşırtıcı şekilde hiç hasta olmaz. Sonsuz sağlığının sırrı bir ağaç dalı yakarak elde ettiği odun kömüründen günde bir parça yemektir."
+  },
+  "FlameBuffalo": {
+    "localized_name": "Arsox",
+    "description": "Kadim zamanlarda etçil Pal'lar acımasızca bu canlıları kovalardı. Attıkları çığlıklardaki absürt hiddet sebebiyle Arsox türü kontrolsüz bir alev topuna dönüşmüş ve bu durum bugüne kadar sürmüştür."
+  },
+  "FlowerDinosaur": {
+    "localized_name": "Dinossom",
+    "description": "Öfkelendiğinde bir daha sakinleştirilemeyen bir Pal. Korkunç hiddeti katlanarak artar. |Kuyruğuna basılmış Dinossom gibi| deyimi, öfkeden çılgına dönen kişileri anlatmak için kullanılır."
+  },
+  "FlowerDinosaur_Electric": {
+    "localized_name": "Dinossom Lux",
+    "description": "Bir yıldırım tarafından çarpılmasına rağmen hayattadır. |Dinossom Lux şimşeği çarpmış gibi| deyimi, ölümün kıyısından dönmek anlamında kullanılır."
+  },
+  "FlowerDoll": {
+    "localized_name": "Petallia",
+    "description": "Yaşamının sonuna geldiğinde devasa bir bitkiye dönüşen bir Pal. Her on yılda bir kez çok güzel bir çiçek açar ve yeni bir Petallia doğar."
+  },
+  "FlowerRabbit": {
+    "localized_name": "Flopie",
+    "description": "Bitki örtüsünün bol olduğu yerleri tercih eder; fakat saman nezlesi son zamanlarda Flopie için sorun teşkil etmeye başlamıştır."
+  },
+  "FlyingManta": {
+    "localized_name": "Celaray",
+    "description": "Bu Pal, rüzgârı sürerek istediği yere yolculuk eder. Yolda kendine bir partner bulabilirse yolculuğu sona erer."
+  },
+  "FlyingManta_Thunder": {
+    "localized_name": "Celaray Lux",
+    "description": "Fazla gösterişli desenleri onların bir eş bulmalarına yardımcı olur. Celaray Luxtarafından meydana gelen elektrik çarpması kazalarının uzun bir geçmişi vardır ve bugün adada, sarı ve siyah çizgili desen tehlikeli bir renk olarak kabul edilir."
+  },
+  "FoxMage": {
+    "localized_name": "Wixen",
+    "description": "Işığın gücüyle esrarengiz fenomenler ortaya çıkarır. Yiyecekleri iyi pişmiş yemeyi tercih eder ve Katress karşısında özellikle düşmanca bir tavır takınır."
+  },
+  "FoxMage_Dark": {
+    "localized_name": "Wixen Noct",
+    "description": "Yetiştirilişi sebebiyle artık yiyeceklerinin yeterince pişmiş olup olmadığıyla ilgilenmez. Bu Pal, bu ayrıntılarla uğraşmayı bırakmıştır ve sadece mümkün olduğunca tatlı yiyecekleri tercih etmektedir. Katress Ignis ile pek iyi geçinemez."
+  },
+  "GYM_BlackGriffon": {
+    "localized_name": "Victor & Shadowbeak",
+    "description": "Deliliğin derinliklerinde doğdu, varlığı bile tüm mantığı altüst ediyor. Diğer tüm Pal'larla olan genetik bağlarını kaybettiğinden hâlâ bir Pal sayılabilir mi, söylemek güç."
+  },
+  "GYM_BlackGriffon_2": {
+    "localized_name": "Victor & Shadowbeak",
+    "description": "Deliliğin derinliklerinde doğdu, varlığı bile tüm mantığı altüst ediyor. Diğer tüm Pal'larla olan genetik bağlarını kaybettiğinden hâlâ bir Pal sayılabilir mi, söylemek güç."
+  },
+  "GYM_BlackGriffon_2_Avatar": {
+    "localized_name": "Victor & Shadowbeak",
+    "description": null
+  },
+  "GYM_ElecPanda": {
+    "localized_name": "Zoe & Grizzbolt",
+    "description": "Dost canlısı gülümsemesi ve kuvvetli bedeniyle, partneri olarak tanıdığı kişiye karşı uysaldır. Fakat bilinmeyen sebeplerle, bir mitralyöz kuşandığında kişiliği yüz seksen derece değişir."
+  },
+  "GYM_ElecPanda_2": {
+    "localized_name": "Zoe & Grizzbolt",
+    "description": "Dost canlısı gülümsemesi ve kuvvetli bedeniyle, partneri olarak tanıdığı kişiye karşı uysaldır. Fakat bilinmeyen sebeplerle, bir mitralyöz kuşandığında kişiliği yüz seksen derece değişir."
+  },
+  "GYM_ElecPanda_Otomo": {
+    "localized_name": "Zoe & Grizzbolt",
+    "description": null
+  },
+  "GYM_Horus": {
+    "localized_name": "Marcus & Faleris",
+    "description": "Avını bulduğunda alevlerden bir kasırgaya sebep olarak tüm bölgeyi yakıp kül eder. Faleris nefesi, hoş kokusuyla bilinir."
+  },
+  "GYM_Horus_2": {
+    "localized_name": "Marcus & Faleris",
+    "description": "Avını bulduğunda alevlerden bir kasırgaya sebep olarak tüm bölgeyi yakıp kül eder. Faleris nefesi, hoş kokusuyla bilinir."
+  },
+  "GYM_LilyQueen": {
+    "localized_name": "Lily & Lyleen",
+    "description": "Sevgi dolu, uysal bir Pal. Ebeveynlerini kaybeden küçük Pal'lara göz kulak olur. Yaramazlık yapan Pal'ları terbiye etmek için tüm gücüyle SolarBeam yeteneğini kullanır."
+  },
+  "GYM_LilyQueen_2": {
+    "localized_name": "Lily & Lyleen",
+    "description": "Sevgi dolu, uysal bir Pal. Ebeveynlerini kaybeden küçük Pal'lara göz kulak olur. Yaramazlık yapan Pal'ları terbiye etmek için tüm gücüyle SolarBeam yeteneğini kullanır."
+  },
+  "GYM_MoonQueen": {
+    "localized_name": "Saya & Selyne",
+    "description": "Arkasında süzülen ve aya benzeyen nesnenin her nesilde daha dairesel bir şekil aldığı söylenir. Bir dolunay olduğundaysa ne olacağını kimse bilmemektedir."
+  },
+  "GYM_MoonQueen_2": {
+    "localized_name": "Saya & Selyne",
+    "description": "Arkasında süzülen ve aya benzeyen nesnenin her nesilde daha dairesel bir şekil aldığı söylenir. Bir dolunay olduğundaysa ne olacağını kimse bilmemektedir."
+  },
+  "GYM_MoonQueen_2_Servant": {
+    "localized_name": "Selyne",
+    "description": null
+  },
+  "GYM_SnowTigerBeastman": {
+    "localized_name": "Bjorn & Bastigor",
+    "description": "Yuvarlak bir şey gördüğü anda onu yumruklamak için kontrol edemediği bir dürtüye kapılır. SnowTigerBeastMan için hayatta kalmaktan sonraki en büyük mücadele bir kardan adam yapmaktır."
+  },
+  "GYM_SnowTigerBeastman_2": {
+    "localized_name": "Bjorn & Bastigor",
+    "description": "Yuvarlak bir şey gördüğü anda onu yumruklamak için kontrol edemediği bir dürtüye kapılır. SnowTigerBeastMan için hayatta kalmaktan sonraki en büyük mücadele bir kardan adam yapmaktır."
+  },
+  "GYM_ThunderDragonMan": {
+    "localized_name": "Axel & Orserk",
+    "description": "Düşmanlarının yaralarına elektrik dalgaları göndererek onları içten dışa doğru kızartır. Orserk türünden bireyler arasındaki dövüşler göz açıp kapayıncaya kadar sona erer."
+  },
+  "GYM_ThunderDragonMan_2": {
+    "localized_name": "Axel & Orserk",
+    "description": "Düşmanlarının yaralarına elektrik dalgaları göndererek onları içten dışa doğru kızartır. Orserk türünden bireyler arasındaki dövüşler göz açıp kapayıncaya kadar sona erer."
+  },
+  "Ganesha": {
+    "localized_name": "Teafant",
+    "description": "Burnu olduğu düşünülen yerinden çok miktarda su aksa da bazıları bu sıvının aslında düpedüz sümük olduğunu söyler. Bu konu Pal uzmanları arasında hararetli bir tartışma konusudur."
+  },
+  "Garm": {
+    "localized_name": "Direhowl",
+    "description": "Uzun zaman önce insanlar yanlarında Direhowl ile ava çıkarlarmış; fakat zaman içinde bu bağ yok olmuştur."
+  },
+  "GhostAnglerfish": {
+    "localized_name": "Ghangler",
+    "description": "Parlak bir yapay yemle karanlıklar aydınlanır. Bu ışığa kapılıp gelen şaşkın Pal’lar, GhostAnglerFishtarafından fark edildiklerinde artık kaçamazlar. Evlerine sağ salim dönene kadar, nereye giderlerse gitsinler yönlendirilirler."
+  },
+  "GhostAnglerfish_Fire": {
+    "localized_name": "Ghangler Ignis",
+    "description": "Yanan yapay yemler aynı zamanda avı pişirmek için de kullanılır. Lezzetli kokunun cazibesine kapılan Pal’lar, Ghangler Ignistarafından bulunduktan sonra artık kaçamazlar. Karınları doyuncaya kadar beslenirler."
+  },
+  "GhostBeast": {
+    "localized_name": "Maraith",
+    "description": "Ölümü yaklaşmış canlı şeylerin yaydığı tuhaf kokudan keyif almasıyla bilinir. Bir Maraith birini sevdiyse sebebinin bu olduğunu varsaymak mantıklıdır."
+  },
+  "GhostRabbit": {
+    "localized_name": "Nitemary",
+    "description": "Taşıdığı şey kendi ruhudur. Birine gönlünü kaptırdığında, tek bir canlı olmak arzusuyla bu kişinin ruhunu zorla çıkarır ve kendininkiyle birleştirir."
+  },
+  "GoldenHorse": {
+    "localized_name": "Gildane",
+    "description": "Simyacılığın adada yaşanan altın çağında sürekli parlayan altın renkli kürkü, elementleri altına dönüştürmek için değerli bir katalizör olarak görülürdü. Zaman içinde önemli bir buluşa imza atıldı: Altın renginin aynı tonuna Pal'ın yelesi işlenerek de ulaşılabiliyordu."
+  },
+  "GoodwillAmbassador": {
+    "localized_name": "Pal Tüccarı",
+    "description": null
+  },
+  "Gorilla": {
+    "localized_name": "Gorirat",
+    "description": "Türdeşleriyle iletişim kurmak için ritmik olarak yere vurur. Her ritmin anlamı sürüden sürüye değişir, ancak aralarındaki farklar hâlâ büyük ölçüde gizemini korumaktadır."
+  },
+  "Gorilla_Ground": {
+    "localized_name": "Gorirat Terra",
+    "description": "Türdeşleriyle iletişim kurmak için ritmik olarak yere vurur. Gorirat türünden daha güçlüdürler. Her Gorirat Terra yere aynı anda vuracak olsa ada 1 saniye içinde batar."
+  },
+  "GrassBoss": {
+    "localized_name": "Zoe",
+    "description": null
+  },
+  "GrassMammoth": {
+    "localized_name": "Mammorest",
+    "description": "Sırtındaki bitki örtüsü bireyden bireye değişir. İnsanların eksiksiz bir bahçe gibi olan bu Pal'la ilişkisi çok eskiye dayanır; hatta Mammorest budama uzmanları bile mevcuttur."
+  },
+  "GrassMammoth_Ice": {
+    "localized_name": "Mammorest Cryst",
+    "description": "Sırtındaki bitki örtüsü bireyden bireye değişir. Bir zamanlar nesli tükendiği düşünülen bitkilerin tohumları, donmuş vaziyette Mammorest Cryst sırtlarında bulunabilirdi."
+  },
+  "GrassPanda": {
+    "localized_name": "Mossanda",
+    "description": "İnanması zor ölçüde güçlü bir Pal. Bir deneyde bu Pal tek seferde 3.000 yaprak kâğıdı delip geçmiştir! Bu Pal'ın etobur olmaması ise bir çeşit mucizedir."
+  },
+  "GrassPanda_Electric": {
+    "localized_name": "Mossanda Lux",
+    "description": "Gücü gerçekten şoke eden bir Pal. Bu Pal bedenindeki elektrik akımlarını değiştirerek kendi gücünü aşırı yükleyebilir. Söz konusu katıksız güçse bu Pal listenin başında olabilir."
+  },
+  "GrassRabbitMan": {
+    "localized_name": "Verdash",
+    "description": "Verdash, koşarak geçtiği toprakları son derece verimli kılmasıyla tanınır. Buralar kısa süre içinde yoğun bir bitki örtüsüyle kaplanır. Bitki öldürücülerin kullanıldığı yerlerde koşmaz."
+  },
+  "GrimGirl": {
+    "localized_name": "Splatterina",
+    "description": "Avını paramparça etmek için kontrol edilemez bir dürtüye sahiptir. Her birey, avını kendine has, karmaşık bir sırayla parçalar. Splatterina tarafından yakalanan biri, önce kafasının koparılması için dua etmelidir."
+  },
+  "Guard_Rifle": {
+    "localized_name": "Muhafız",
+    "description": null
+  },
+  "Guard_Shotgun": {
+    "localized_name": "Muhafız",
+    "description": null
+  },
+  "GuardianDog": {
+    "localized_name": "Yakumo",
+    "description": "Güçlü bir adalet duygusu vardır ve kötülükten nefret eder. Geçmişte ada sakinlerinin sadık ve sevgi dolu yoldaşlarıydılar. Bugünlerdeyse her Yakumo, gördüğü yerde insanlara saldırır."
+  },
+  "HadesBird": {
+    "localized_name": "Helzephyr",
+    "description": "Cehennemin derinliklerinden şimşekler çağırır. Helzephyr tarafından atılan şimşeklerle hayatını kaybedenlerin ruhunun yer altı dünyasına gönderileceği kesindir."
+  },
+  "HadesBird_Electric": {
+    "localized_name": "Helzephyr Lux",
+    "description": "Cehennemin derinliklerinden şimşekler çağırır. Helzephyr türünün bir alt türü kabul edilse de bir teoriye göre cehennemin şimşekleri tarafından çarpılan bir Helzephyr Lux, Helzephyr türüne dönüşecektir."
+  },
+  "HadesBird_Oilrig": {
+    "localized_name": "Helzephyr",
+    "description": null
+  },
+  "HawkBird": {
+    "localized_name": "Nitewing",
+    "description": "Yeni doğmuş Pal'ları yuvasına taşır ve onlara koruyucu ebeveynlik yapar. Bebek Pal kilo alıp palazlandığındaysa onu avlar."
+  },
+  "Hedgehog": {
+    "localized_name": "Jolthog",
+    "description": "Saldırı altındayken bedeninde sakladığı elektriği serbest bırakır. Ürettiği voltaj 10 milyon voltu aştığından fırlatılması hâlinde alışıldık ağır ateşli silahların tümünden daha ölümcül olur."
+  },
+  "Hedgehog_Ice": {
+    "localized_name": "Jolthog Cryst",
+    "description": "Saldırı altındayken bedeninde sakladığı soğuk havayı serbest bırakır. Yaydığı dondurucu akım çevredeki tüm havayı donduracak kadar soğuktur ve her türlü saldırganın bedenini delip geçer."
+  },
+  "Help01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Help02": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Help03": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Help04": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "HerculesBeetle": {
+    "localized_name": "Warsect",
+    "description": "Bedenini çevreleyen ultra sert zırhı son derece güçlü ve ısıya dayanıklıdır. Bir napalm patlamasından bile hasar almadan çıkabilir."
+  },
+  "HerculesBeetle_Ground": {
+    "localized_name": "Warsect Terra",
+    "description": "Bedenini çevreleyen ultra sert zırhı son derece güçlü ve ısıya dayanıklıdır. Üzerine bir Mammorest bassa bile etkilenmez."
+  },
+  "Horus": {
+    "localized_name": "Faleris",
+    "description": "Avını bulduğunda alevlerden bir kasırgaya sebep olarak tüm bölgeyi yakıp kül eder. Faleris nefesi, hoş kokusuyla bilinir."
+  },
+  "Horus_Oilrig": {
+    "localized_name": "Faleris",
+    "description": null
+  },
+  "Horus_Water": {
+    "localized_name": "Faleris Aqua",
+    "description": "Avını bulduğunda tüm bölgeye şiddetli bir sağanak yağdırır. Çoğu zaman av da kaosa kurban gittiğinden, bu sürecin gerçekten av sayılıp sayılmayacağı tartışma konusudur."
+  },
+  "Hunter_Bat": {
+    "localized_name": "Örgüt Haydudu",
+    "description": null
+  },
+  "Hunter_Bat_Invader": {
+    "localized_name": "Örgüt Haydudu",
+    "description": null
+  },
+  "Hunter_BowGun": {
+    "localized_name": "Örgüt Arbaletçisi",
+    "description": null
+  },
+  "Hunter_BowGun_Oilrig": {
+    "localized_name": "Örgüt Arbaletçisi",
+    "description": null
+  },
+  "Hunter_Fat_GatlingGun": {
+    "localized_name": "Örgüt Ezicisi",
+    "description": null
+  },
+  "Hunter_Fat_GatlingGun_Invader": {
+    "localized_name": "Örgüt Ezicisi",
+    "description": null
+  },
+  "Hunter_Fat_GatlingGun_LargeOilrig": {
+    "localized_name": "Örgüt Ezicisi",
+    "description": null
+  },
+  "Hunter_Fat_GatlingGun_MiniOilrig": {
+    "localized_name": "Örgüt Ezicisi",
+    "description": null
+  },
+  "Hunter_Fat_GatlingGun_Oilrig": {
+    "localized_name": "Örgüt Ezicisi",
+    "description": null
+  },
+  "Hunter_Fat_GatlingGun_Tower": {
+    "localized_name": "Örgüt Ezicisi",
+    "description": null
+  },
+  "Hunter_Fat_Prisoner": {
+    "localized_name": "Örgüt Ezicisi",
+    "description": null
+  },
+  "Hunter_FlameThrower": {
+    "localized_name": "Örgüt Temizlikçisi",
+    "description": null
+  },
+  "Hunter_FlameThrower_Invader": {
+    "localized_name": "Örgüt Temizlikçisi",
+    "description": null
+  },
+  "Hunter_FlameThrower_LargeOilrig": {
+    "localized_name": "Örgüt Temizlikçisi",
+    "description": null
+  },
+  "Hunter_FlameThrower_MiiniOilrig": {
+    "localized_name": "Örgüt Temizlikçisi",
+    "description": null
+  },
+  "Hunter_FlameThrower_Oilrig": {
+    "localized_name": "Örgüt Temizlikçisi",
+    "description": null
+  },
+  "Hunter_Grenade": {
+    "localized_name": "Örgüt Bombacısı",
+    "description": null
+  },
+  "Hunter_GrenadeLauncher": {
+    "localized_name": "Örgüt Gediklisi",
+    "description": null
+  },
+  "Hunter_GrenadeLauncher_LargeOilrig": {
+    "localized_name": "Örgüt Gediklisi",
+    "description": null
+  },
+  "Hunter_GrenadeLauncher_Oilrig": {
+    "localized_name": "Örgüt Gediklisi",
+    "description": null
+  },
+  "Hunter_Grenade_Invader": {
+    "localized_name": "Örgüt Bombacısı",
+    "description": null
+  },
+  "Hunter_Grenade_LargeOilrig": {
+    "localized_name": "Örgüt Bombacısı",
+    "description": null
+  },
+  "Hunter_Grenade_MiniOilrig": {
+    "localized_name": "Örgüt Bombacısı",
+    "description": null
+  },
+  "Hunter_Grenade_Oilrig": {
+    "localized_name": "Örgüt Bombacısı",
+    "description": null
+  },
+  "Hunter_Handgun": {
+    "localized_name": "Örgüt Haydudu",
+    "description": null
+  },
+  "Hunter_Handgun_Invader": {
+    "localized_name": "Örgüt Haydudu",
+    "description": null
+  },
+  "Hunter_Handgun_MiniOilrig": {
+    "localized_name": "Örgüt Haydudu",
+    "description": null
+  },
+  "Hunter_Katana": {
+    "localized_name": "Örgüt Silahşoru",
+    "description": null
+  },
+  "Hunter_Katana_Oilrig": {
+    "localized_name": "Örgüt Silahşoru",
+    "description": null
+  },
+  "Hunter_LaserRifle": {
+    "localized_name": "Örgüt Lazer Tüfekçisi",
+    "description": null
+  },
+  "Hunter_LaserRifle_Oilrig": {
+    "localized_name": "Örgüt Lazer Tüfekçisi",
+    "description": null
+  },
+  "Hunter_MissileLauncher": {
+    "localized_name": "Örgüt Müdahalecisi",
+    "description": null
+  },
+  "Hunter_MissileLauncher_LargeOilrig": {
+    "localized_name": "Örgüt Müdahalecisi",
+    "description": null
+  },
+  "Hunter_MissileLauncher_Oilrig": {
+    "localized_name": "Örgüt Müdahalecisi",
+    "description": null
+  },
+  "Hunter_Prisoner": {
+    "localized_name": "Örgüt Haydudu",
+    "description": null
+  },
+  "Hunter_Rifle": {
+    "localized_name": "Örgüt Tüfekçisi",
+    "description": null
+  },
+  "Hunter_Rifle_Invader": {
+    "localized_name": "Örgüt Tüfekçisi",
+    "description": null
+  },
+  "Hunter_Rifle_LargeOilrig": {
+    "localized_name": "Örgüt Tüfekçisi",
+    "description": null
+  },
+  "Hunter_Rifle_MiniOilrig": {
+    "localized_name": "Örgüt Tüfekçisi",
+    "description": null
+  },
+  "Hunter_Rifle_Oilrig": {
+    "localized_name": "Örgüt Tüfekçisi",
+    "description": null
+  },
+  "Hunter_RocketLauncher": {
+    "localized_name": "Örgüt Seçkini",
+    "description": null
+  },
+  "Hunter_RocketLauncher_Invader": {
+    "localized_name": "Örgüt Seçkini",
+    "description": null
+  },
+  "Hunter_RocketLauncher_LargeOilrig": {
+    "localized_name": "Örgüt Seçkini",
+    "description": null
+  },
+  "Hunter_RocketLauncher_MiniOilrig": {
+    "localized_name": "Örgüt Seçkini",
+    "description": null
+  },
+  "Hunter_RocketLauncher_Oilrig": {
+    "localized_name": "Örgüt Seçkini",
+    "description": null
+  },
+  "Hunter_RocketLauncher_Oilrig_LD": {
+    "localized_name": "Örgüt Seçkini",
+    "description": null
+  },
+  "Hunter_Shotgun": {
+    "localized_name": "Örgüt Avcısı",
+    "description": null
+  },
+  "Hunter_Shotgun_Invader": {
+    "localized_name": "Örgüt Avcısı",
+    "description": null
+  },
+  "Hunter_Shotgun_LargeOilrig": {
+    "localized_name": "Örgüt Avcısı",
+    "description": null
+  },
+  "Hunter_Shotgun_MiniOilrig": {
+    "localized_name": "Örgüt Avcısı",
+    "description": null
+  },
+  "Hunter_Shotgun_Oilrig": {
+    "localized_name": "Örgüt Avcısı",
+    "description": null
+  },
+  "IceCrocodile": {
+    "localized_name": "Munchill",
+    "description": "Ağız içi çok serindir ve kapalıyken buzdolabı gibidir. Tükürükte bulunan özel bileşenler de yiyeceklerin bozulmasını önler. İnsanlar için yiyecek deposu olarak kullanmak mümkündür, ancak hijyenik açıdan ağız kapalı tutulmalıdır."
+  },
+  "IceDeer": {
+    "localized_name": "Reindrix",
+    "description": "Saydam, gök mavisi boynuzları mutlak sıfırın soğuğuyla parlar. Bu boynuzlara çıplak elleriyle dokunan kişiler anında donar ve paramparça olurlar."
+  },
+  "IceFox": {
+    "localized_name": "Foxcicle",
+    "description": "Auroranın görünür olduğu gecelerde gökyüzüne bakar ve uluyarak güzel bir şarkı söylemeye başlar. Fakat bu durum, onu düşmanların saldırısına açık hâle getirir."
+  },
+  "IceHorse": {
+    "localized_name": "Frostallion",
+    "description": "Palpagos Adası'nın koruyucu ilahı. Kışı Çağıran olarak da bilinir. Geçmişte, diyarın başına bir felaket geldiğinde gökyüzüne yükselir ve adayı sonsuz bir kışa mahkûm ederek tehdidi ortadan kaldırırdı."
+  },
+  "IceHorse_Dark": {
+    "localized_name": "Frostallion Noct",
+    "description": "Palpagos Adası'nın koruyucu ilahı. Geceyi Çağıran olarak da bilinir. Geçmişte, diyarın başına bir felaket geldiğinde gökyüzüne yükselir ve adayı sonsuz bir karanlığa mahkûm ederek tehdidi ortadan kaldırırdı."
+  },
+  "IceNarwhal": {
+    "localized_name": "Whalaska",
+    "description": "Uyurken, bazı Pal'lar onu bir buz parçası sanıp dinlenmeye gelir. Nazik bir mizaca sahip olduğundan, uyansa bile onları zorla indirmez ama kişisel alanı ihlal edildiği için içten içe strese girer."
+  },
+  "IceNarwhal_Fire": {
+    "localized_name": "Whalaska Ignis",
+    "description": "Bir daha sürüklenen buzla karıştırılmamak için hevesle kırmızıya döndüler. Ancak Pal için bunun bir önemi yoktu, çünkü o kırmızı rengi göremiyordu, bu yüzden çabaları boşa gitti ve kişisel alanları ihlal edilmeye devam etti."
+  },
+  "IceSeal": {
+    "localized_name": "Polapup",
+    "description": "Karda en hızlı kayan kişi en güçlü olandır. Bazen, bir kişi çok hızlı zıpladığında, aniden gökyüzünden düşer. Bu, boss savaşı döneminde daha sık olur. Bazen güneşli,Polapup."
+  },
+  "IceWitch": {
+    "localized_name": "Icelyn",
+    "description": "sıcak olunca vücudum erimeye başlıyor ama güneşlenmeyi çok seviyorum. Sıcak olunca vücudum erimeye başlıyor ama kaplıcaları çok seviyorum. Zaten öleceksem, güneşli bir günde açık hava kaplıcasında erimek isterim."
+  },
+  "Inspector": {
+    "localized_name": "Pal Tüccarı",
+    "description": null
+  },
+  "JellyfishFairy": {
+    "localized_name": "Jelliette",
+    "description": "Pal,Jellroy'e çok benziyor. Arkadaşlarıyla çok takılıyor ve planları çakıştığında yakın arkadaşındanJellroyonun yerine gitmesini istiyor. Ona bir randevuyla teşekkür ediyor."
+  },
+  "JellyfishGhost": {
+    "localized_name": "Jellroy",
+    "description": "Pal,Jelliette'e çok benziyor. Bazen programı uymadığındaJelliette'in yerine geçiyor. Oyunculukta o kadar iyi ki kimse onu fark etmiyor."
+  },
+  "JetDragon": {
+    "localized_name": "Jetragon",
+    "description": "Palpagos Adası'na çok yükseklerden göz kulak olur. Felaketler diyara döndüğünde toprak yarılıp açılacak ve gökyüzü yanacaktır. Kaderinde, felakete karşı topyekûn yıkımla hücuma geçmek vardır."
+  },
+  "Kelpie": {
+    "localized_name": "Kelpsea",
+    "description": "Kişiliği, içinde doğduğu suyun kalitesine bağlı olarak değişir. Kirli sularda doğan bir Kelpsea genelde son derece huysuz olur ve hızlı bir şekilde suça eğilim gösterir."
+  },
+  "Kelpie_Fire": {
+    "localized_name": "Kelpsea Ignis",
+    "description": "Kişiliği, içinde doğduğu suyun sıcaklığına bağlı olarak değişir. Ilık sularda doğan bir Kelpsea genelde tutkulu ve motivasyonu yüksek bir kişiliğe sahip olur."
+  },
+  "KendoFrog": {
+    "localized_name": "Croajiro",
+    "description": "Sürünün onuruna leke sürdürenler kendi canlarını almaya zorlanırlar. Şişkin ses keselerini ağaç dalıyla delerek atmosfere uçarlar ve ölümden sonraki yaşama dönerler."
+  },
+  "KendoFrog_Dark": {
+    "localized_name": "Croajiro Noct",
+    "description": "Croajiro türünün onurundan vazgeçmiş üyeleri bir araya gelip ayrılıkçı gruplar oluşturur. Kendilerine seçtikleri avları alt etmek için her türlü hileli yönteme başvururlar. Gecenin ileri saatlerinde bir Croajiro Noct sürüsü ile karşılaşırsan hayatın tehlikede demektir."
+  },
+  "KingAlpaca": {
+    "localized_name": "Kingpaca",
+    "description": "Melpaca türü, bu Pal'a hizmet eder. Kingpaca türü üyeleri arasındaki çekişmelerde, tebaaları bahis olarak ortaya konur. Türün yalnız görülen üyeleri bu çekişmelerin kaybedenleridir."
+  },
+  "KingAlpaca_Ice": {
+    "localized_name": "Kingpaca Cryst",
+    "description": "Buzdan kalbi yüzünden bu Pal, duygularını göstermek konusunda berbattır. Bu türün yalnız üyeleri acınasıdır ve Melpaca türü tarafından beceriksiz kabul edilirler."
+  },
+  "KingBahamut": {
+    "localized_name": "Blazamut",
+    "description": "Efsaneler bu Pal'ın bir volkanik patlama esnasında doğduğunu söyler. Hatta tuhaf bir grup, bu kıtanın devasa bir Blazamut türü üyesinin sırtında bulunduğunu iddia etmektedir."
+  },
+  "KingBahamut_Dragon": {
+    "localized_name": "Blazamut Ryu",
+    "description": "Uzun zaman önce, dünyanın derinliklerinden ortaya çıktı. Durmak bilmeyen, şiddetli ve merhametsiz alevleriyle tüm adayı geride hiçbir şey kalmayana dek yaktı. Sonsuz Yangın olarak bilinirdi."
+  },
+  "Kirin": {
+    "localized_name": "Univolt",
+    "description": "Bir zamanlar Yıldırım Tanrısı'nın elçisi kabul edilirdi; bu yüzden insanlar tarafından avlanmazdı. Fakat birinin düşen bir yıldırımla öldüğü gözlemlendikten sonra gördüğü saygı yok oldu ve gerçek anlamda bir yük beygiri olmaya kadar düştü."
+  },
+  "Kitsunebi": {
+    "localized_name": "Foxparks",
+    "description": "Doğduğu andan itibaren ateşi kontrol etmekte yeteneksizdir ve istemeden soluduğu alevlerle boğulmaya yatkındır. Foxparks hapşırıkları, orman yangınlarının önde gelen sebeplerinden biridir."
+  },
+  "Kitsunebi_Ice": {
+    "localized_name": "Foxparks Cryst",
+    "description": "Doğduğu andan itibaren soğuk havayı kontrol etmekte yeteneksizdir ve istemeden soluduğu ayazla boğulmaya yatkındır. Foxparks Cryst soğuk algınlığına yakalandığında, burun akıntıları donar, bu da nefes almakta zorlanmasına ve paniklemesine sebep olur."
+  },
+  "LavaGirl": {
+    "localized_name": "Flambelle",
+    "description": "Bu Pal ağlamaya başladığında gözyaşları yerine magma üretir. Akan magma ise bedeni tarafından absorbe edilerek gitgide daha sıcak hâle gelmesine yol açar. Ne kadar çok ağlarsa o kadar güçlü olur."
+  },
+  "LazyCatfish": {
+    "localized_name": "Dumud",
+    "description": "Çok rahatladığı zamanlarda reaksiyon süresi önemli ölçüde artar. Başından kuyruğuna kadar dilimlense bile muhtemelen ölmesi gerektiğini ertesi güne kadar fark etmez."
+  },
+  "LazyCatfish_Gold": {
+    "localized_name": "Dumud Gild",
+    "description": "Vücut yüzeyi inanılmaz bir yansıtıcılığa sahiptir. Dahası, tüm refleks hızları Dumud'den daha yavaştır!"
+  },
+  "LazyDragon": {
+    "localized_name": "Relaxaurus",
+    "description": "Bezgin görüntüsünün aksine son derece vahşidir. Gördüğü her şeyi av olarak algılar ve avını yemeden katiyen durmaz."
+  },
+  "LazyDragon_Electric": {
+    "localized_name": "Relaxaurus Lux",
+    "description": "Bir gün Relaxaurus türünün bir üyesinin aklına bir fikir gelmiş. |Belki de bir şeyleri değiştirmenin zamanı geldi.| diye düşünmüş. Tam da o sırada bir elektrik şoku tüm vücudunu etkisi altına almış!"
+  },
+  "LeafMomonga": {
+    "localized_name": "Herbil",
+    "description": "Kırılan bir şeye vurunca onun tamir edebileceğine e inanırlar. Kullanılan kuvvet miktarHerbilinsanlar için o kadar mükemmeldir ki sadece bir yumrukla durmuş bir kalp tekrar atmaya başlayabilir."
+  },
+  "LeafPrincess": {
+    "localized_name": "Lullu",
+    "description": "Baharın başlarında, polenler adanın her yerinde rüzgâra kapılıp uçuşur. Flopie türünün saman nezlesinin sorumlusu Lullu türüdür."
+  },
+  "LegendDeer": {
+    "localized_name": "Hartalis",
+    "description": "Korkutucu derecede sessizdi ama tuhaf bir şekilde huzur vericiydi. Artık burada hiç kimse yok. Herkes çoktan kurtuluşa ermişti. Ey Kurtarıcı Kral, beni de sonsuz sükûnete götür. – Eski yazıt burada sona eriyor."
+  },
+  "LilyQueen": {
+    "localized_name": "Lyleen",
+    "description": "Sevgi dolu, uysal bir Pal. Ebeveynlerini kaybeden küçük Pal'lara göz kulak olur. Yaramazlık yapan Pal'ları terbiye etmek için tüm gücüyle SolarBeam yeteneğini kullanır."
+  },
+  "LilyQueen_Dark": {
+    "localized_name": "Lyleen Noct",
+    "description": "Zarafet dolu, nazik bir Pal. Saygısızlık yapanları acı verici bir şaplakla kibarca uyarır. Bazı Pal'ların bu cezaya çok düşkün olduğu bilinmektedir."
+  },
+  "LittleBriarRose": {
+    "localized_name": "Bristla",
+    "description": "Bu Pal'ın dikenleri son derece zehirlidir. Cinnamoth türüyle yakın arkadaştır ve sadece Cinnamoth türünden biri nektarını içerken gülümser."
+  },
+  "LizardMan": {
+    "localized_name": "Leezpunk",
+    "description": "Şık duruşunu sürdürmek için her zaman büyük özen gösteren bir Pal. Her daim en havalı pozların peşinde olan bu Pal, bir aynayla karşılaşması durumunda tüm günü poz vererek geçirebilir."
+  },
+  "LizardMan_Fire": {
+    "localized_name": "Leezpunk Ignis",
+    "description": "Duruş şekline sıra dışı bir takıntısı olan bir Pal. Her daim en yakıcı pozların peşinde olan bu Pal'ın sahibi, devamlı hevesle verilmiş pozlarla karşılaşır."
+  },
+  "LizardMan_Oilrig": {
+    "localized_name": "Leezpunk",
+    "description": null
+  },
+  "Male_Angler01_v01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Male_Breeder01_v01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Male_Breeder01_v02": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Male_Breeder01_v03": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Male_Breeder01_v04": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Male_DarkTrader01": {
+    "localized_name": "Karaborsacı",
+    "description": null
+  },
+  "Male_DarkTrader02": {
+    "localized_name": "Madalya Tüccarı",
+    "description": null
+  },
+  "Male_DesertPeople01": {
+    "localized_name": "Köylü",
+    "description": null
+  },
+  "Male_Kigurumi01_v01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Male_Ninja01": {
+    "localized_name": "Ay Goncası Genin",
+    "description": null
+  },
+  "Male_NinjaElite01": {
+    "localized_name": "Ay Goncası Jonin",
+    "description": null
+  },
+  "Male_NinjaElite01_Invader": {
+    "localized_name": "Ay Goncası Jonin",
+    "description": null
+  },
+  "Male_People02": {
+    "localized_name": "Köylü",
+    "description": null
+  },
+  "Male_People03": {
+    "localized_name": "Köylü",
+    "description": null
+  },
+  "Male_Police_old": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Male_Scholar01_v01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Male_Scholar01_v02": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Male_Scholar01_v03": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Male_Scholar01_v04": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Male_Scientist01_LaserRifle": {
+    "localized_name": "PAL Genetik Araştırma Birimi İnfazcısı",
+    "description": null
+  },
+  "Male_Scientist01_LaserRifle_Invader": {
+    "localized_name": "PAL Genetik Araştırma Birimi İnfazcısı",
+    "description": null
+  },
+  "Male_Soldier01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Male_Soldier01_EnemyGroup": {
+    "localized_name": "Sağlam Paralı Asker",
+    "description": null
+  },
+  "Male_Soldier02": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Male_Soldier02_EnemyGroup": {
+    "localized_name": "Sağlam Paralı Asker",
+    "description": null
+  },
+  "Male_Soldier02_Invader": {
+    "localized_name": "Ateşli Pal Terbiyecisi",
+    "description": null
+  },
+  "Male_Soldier03": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Male_Soldier04": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Male_Trader01": {
+    "localized_name": "Köylü",
+    "description": null
+  },
+  "Male_Trader02": {
+    "localized_name": "Köylü",
+    "description": null
+  },
+  "Male_Trader03": {
+    "localized_name": "Köylü",
+    "description": null
+  },
+  "Manticore": {
+    "localized_name": "Blazehowl",
+    "description": "Çiğ eti tercih etse de kendini hep eti pişmiş yerken bulur. Bunun sebebi silah olarak kullandığı son derece kızgın pençeleridir. Avının cayır cayır yandığını bir türlü fark edemez."
+  },
+  "Manticore_Dark": {
+    "localized_name": "Blazehowl Noct",
+    "description": "Çiğ eti tercih etse de kendini hep eti bozulmuş yerken bulur. Bunun sebebi silah olarak kullandığı karanlık pençeleridir. Avının lanetlendiğini bir türlü fark edemez."
+  },
+  "MimicDog": {
+    "localized_name": "Mimog",
+    "description": "Eskiden bir geleneğe göre ölümüyle en aptalca şekilde karşılaşan kişiye bir ödül verilirdi. İlk ödül |Mimog türünden habersiz olarak sandığı açan ve ısırılarak ölen| kişiye verilmişti."
+  },
+  "MobuCitizen": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "MobuCitizen_Male": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "MobuVillager": {
+    "localized_name": "Köylü",
+    "description": null
+  },
+  "Monkey": {
+    "localized_name": "Tanzee",
+    "description": "Uzun zaman önce bu Pal ağaç dalları gibi uzun nesneleri silah olarak kullanırdı. Fakat insanlarla temas kurduktan sonra, biraz daha etkili bir şey olan ateşli silahlarla tanıştı."
+  },
+  "MoonQueen": {
+    "localized_name": "Selyne",
+    "description": "Arkasında süzülen ve aya benzeyen nesnenin her nesilde daha dairesel bir şekil aldığı söylenir. Bir dolunay olduğundaysa ne olacağını kimse bilmemektedir."
+  },
+  "MopBaby": {
+    "localized_name": "Swee",
+    "description": "Yerde sürünerek mikroskobik organik maddeleri yer. Bir süre sonra hiçbir besin değeri olmayan tüm maddeleri dışarı atar. Bu Pal temizlik için paspas olarak kullanıldığında iki taraf da kârlı çıkar!"
+  },
+  "MopKing": {
+    "localized_name": "Sweepa",
+    "description": "Kış uykusundayken çok sayıda Swee türü üyesi bu Pal'ın gövdesindeki sık tüylerin arasında gizlenir. Kaydedilen en yüksek sayı 101'dir."
+  },
+  "MushroomDragon": {
+    "localized_name": "Shroomer",
+    "description": "Sporları çok fazla solunursa kişi transa girer. Bir Shroomer hareket etmiyorsa bazen bunun sebebi bir mantarı taklit ediyor olması değil, kendi sporlarının etkisinde kafasının güzelleşmesidir."
+  },
+  "MushroomDragon_Dark": {
+    "localized_name": "Shroomer Noct",
+    "description": "Bu Pal'ın saldığı çok miktarda spor, güneş ışığına engel olur. Bir Shroomer Noct hareket etmiyorsa bazen bunun sebebi bir mantarı taklit ediyor olması değil, kendi sporları yüzünden hiçbir şey göremiyor olmasıdır."
+  },
+  "Mutant": {
+    "localized_name": "Lunaris",
+    "description": "Dikkatsizce gözlerinin içine bakan herkesi kontrol edebilir. Yanında bir Lunaris ile görülenlerin zihni, Pal'ın kontrolü altındadır."
+  },
+  "MysteryMask": {
+    "localized_name": "Omascul",
+    "description": "Taktığı maskenin, yüzü olmadığı söylenir. Tam önünde görünür ama asla orada değildir. Gölgelerin derinliklerinden, gece gündüz izler. Bakışlarını kaçırırsın, sana daha da yaklaşır."
+  },
+  "NPC_FoodRequire_1": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "NPC_PalDisplay_1": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "NaughtyCat": {
+    "localized_name": "Grintale",
+    "description": "Grintale, bölgesine giren biri olunca gözleri parlayan bir türdür. Mecazen değil, gerçek anlamda gözleri parlar."
+  },
+  "NegativeKoala": {
+    "localized_name": "Depresso",
+    "description": "Devamlı yüzünde olan huysuz ifadesi yüzünden az arkadaşı vardır ama aslında iyi yüreklidir. Sürüsünden ayrılmış Vixy Pal'ları beslediği görülmüştür."
+  },
+  "NegativeOctopus": {
+    "localized_name": "Killamari",
+    "description": "Kendini düşmanlarının başının etrafına sarar ve içlerini emerek boşaltır. Zaman zaman bulunan Pal mumyaları aslında Killamari kurbanlarıdır."
+  },
+  "NegativeOctopus_Neutral": {
+    "localized_name": "Killamari Primo",
+    "description": "Düşmanlarının boynunu ısırırlar ve bütün kanını emerler. Killamari Primoİkisi birbirini ısırdığında, amansızca birbirlerinin kanını emmeye çalışırlar ve biri çürüyene kadar da bırakmazlar."
+  },
+  "NightBlueHorse": {
+    "localized_name": "Starryon",
+    "description": "Uzun, muhteşem yelesinden büyük gurur duyar. Tüylerinde bir kırık görürse o kadar utanır ki düzgün şekilde koşmaya bile odaklanamaz. Statik elektrik tüylerinin kabarmasına neden olduğu için Azurmane türünden ne pahasına olursa olsun kaçınır."
+  },
+  "NightFox": {
+    "localized_name": "Nox",
+    "description": "Yatağında Nox tüyü bulan biri tüyü olduğu gibi bırakıp derhâl oradan ayrılmalıdır. Tüye dokunup almak, sonu asla gelmeyecek bir geceye doğru, dönüşü olmayan bir yolculuktur."
+  },
+  "NightLady": {
+    "localized_name": "Bellanoir",
+    "description": "Var olmaksızın dünyayı sessizce izlerdi. Bir gün, görülme arzusu benliğini ele geçirdi. Gerçekliğe karşı hissettiği dizginsiz intikam hırsıyla Tutulma Sireni böylece doğmuş oldu."
+  },
+  "NightLady_Dark": {
+    "localized_name": "Bellanoir Libero",
+    "description": "Arzularının zincirleri kopunca şaşkına döndü. Kendini görebilmek için bir kimlik istedi. İzleyen, gerçeklikten memnun olmayan kız kardeşleriyse sonsuz boşluğa sürüklendi ve en sonunda gözlerini kapattılar."
+  },
+  "Ninja01_Tower": {
+    "localized_name": "Ay Goncası Genin",
+    "description": null
+  },
+  "NinjaElite01_Tower": {
+    "localized_name": "Ay Goncası Jonin",
+    "description": null
+  },
+  "NinjaElite_Bowgun": {
+    "localized_name": "Ay Goncası Jonin",
+    "description": null
+  },
+  "NinjaElite_NoEquip": {
+    "localized_name": "Ay Goncası Jonin",
+    "description": null
+  },
+  "Ninja_Bowgun": {
+    "localized_name": "Ay Goncası Genin",
+    "description": null
+  },
+  "Ninja_NoEquip": {
+    "localized_name": "Ay Goncası Genin",
+    "description": null
+  },
+  "Ninja_Prisoner": {
+    "localized_name": "Ay Goncası Genin",
+    "description": null
+  },
+  "OctopusGirl": {
+    "localized_name": "Gloopie",
+    "description": "Birlikte uyuduğunuzda ertesi günün programını kontrol etmelisin. Vantuz izleri aşk ısırıklarına benzer, bu nedenle yarı uykulu haldeyken emilirsen, gereksiz yanlış anlaşılmalar olabilir."
+  },
+  "PREDATOR_AmaterasuWolf": {
+    "localized_name": "Kitsun",
+    "description": "Kitsun, görüntüsünün aksine son derece hassastır ve ürkerse bir mağaraya kaçar. Uzun zaman önce, bunlardan birinin senden kaçması kötü bir kehanet kabul edilirdi."
+  },
+  "PREDATOR_Baphomet_Dark": {
+    "localized_name": "Incineram Noct",
+    "description": "Özellikle bebek Pal'ları hedef alır ve onları kendi bölgesine geri götürür. Çocuğu çalınan bir ebeveynin hissettiği derin çaresizliği ancak hayal edebiliriz."
+  },
+  "PREDATOR_BirdDragon": {
+    "localized_name": "Vanwyrm",
+    "description": "Vanwyrm dış iskeletinden yapılmış bir flütün melodilerinin sıradağları aşabileceği söylenir. Eski çağlarda, bu flütler bir saldırıyı haber vermek için kullanılırdı."
+  },
+  "PREDATOR_CandleGhost": {
+    "localized_name": "Sootseer",
+    "description": "Bir zamanlar dünyanın sonu yaklaştıkça alevin gücünü kaybedeceğine inanılıyordu. Kıyamet habercileri, alev zayıflamaya her başladığında kutlamalarına başlardı; fakat sonunda, her şeyinSootseer tarafından tezgâhlanan bir şaka olduğu ortaya çıktı. En azından şimdilik."
+  },
+  "PREDATOR_DrillGame": {
+    "localized_name": "Digtoise",
+    "description": "En güçlü kabuğa ve onu delebilecek tek matkaba sahip bir Digtoise, popüler çocuk masalı |Digtoise Hikâyesi| ile dünyanın çelişkilerine kafa yorar."
+  },
+  "PREDATOR_FairyDragon": {
+    "localized_name": "Elphidran",
+    "description": "Görüntüsünden de anlaşıldığı kadar masum bir yaradılışa sahiptir. Belki de bu yüzden bazen iyiyle kötüyü ayırt etmekte başarısız olur ve kötü niyetli kişilerin kendisinden yararlanmasına engel olamaz."
+  },
+  "PREDATOR_FeatherOstrich": {
+    "localized_name": "Dazemu",
+    "description": "Bir adım at ve şüphelerini geride bırak. İki adım at ve kaygılarını geride bırak. Üç adım at ve korkularını geride bırak. İstediğin düşmanla yüzleş."
+  },
+  "PREDATOR_FlowerDinosaur": {
+    "localized_name": "Dinossom",
+    "description": "Öfkelendiğinde bir daha sakinleştirilemeyen bir Pal. Korkunç hiddeti katlanarak artar. |Kuyruğuna basılmış Dinossom gibi| deyimi, öfkeden çılgına dönen kişileri anlatmak için kullanılır."
+  },
+  "PREDATOR_Garm": {
+    "localized_name": "Direhowl",
+    "description": "Uzun zaman önce insanlar yanlarında Direhowl ile ava çıkarlarmış; fakat zaman içinde bu bağ yok olmuştur."
+  },
+  "PREDATOR_GhostBeast": {
+    "localized_name": "Maraith",
+    "description": "Ölümü yaklaşmış canlı şeylerin yaydığı tuhaf kokudan keyif almasıyla bilinir. Bir Maraith birini sevdiyse sebebinin bu olduğunu varsaymak mantıklıdır."
+  },
+  "PREDATOR_GoldenHorse": {
+    "localized_name": "Gildane",
+    "description": "Simyacılığın adada yaşanan altın çağında sürekli parlayan altın renkli kürkü, elementleri altına dönüştürmek için değerli bir katalizör olarak görülürdü. Zaman içinde önemli bir buluşa imza atıldı: Altın renginin aynı tonuna Pal'ın yelesi işlenerek de ulaşılabiliyordu."
+  },
+  "PREDATOR_Gorilla": {
+    "localized_name": "Gorirat",
+    "description": "Türdeşleriyle iletişim kurmak için ritmik olarak yere vurur. Her ritmin anlamı sürüden sürüye değişir, ancak aralarındaki farklar hâlâ büyük ölçüde gizemini korumaktadır."
+  },
+  "PREDATOR_GrassPanda": {
+    "localized_name": "Mossanda",
+    "description": "İnanması zor ölçüde güçlü bir Pal. Bir deneyde bu Pal tek seferde 3.000 yaprak kâğıdı delip geçmiştir! Bu Pal'ın etobur olmaması ise bir çeşit mucizedir."
+  },
+  "PREDATOR_GrimGirl": {
+    "localized_name": "Splatterina",
+    "description": "Avını paramparça etmek için kontrol edilemez bir dürtüye sahiptir. Her birey, avını kendine has, karmaşık bir sırayla parçalar. Splatterina tarafından yakalanan biri, önce kafasının koparılması için dua etmelidir."
+  },
+  "PREDATOR_HadesBird_Electric": {
+    "localized_name": "Helzephyr Lux",
+    "description": "Cehennemin derinliklerinden şimşekler çağırır. Helzephyr türünün bir alt türü kabul edilse de bir teoriye göre cehennemin şimşekleri tarafından çarpılan bir Helzephyr Lux, Helzephyr türüne dönüşecektir."
+  },
+  "PREDATOR_Horus_Water": {
+    "localized_name": "Faleris Aqua",
+    "description": "Avını bulduğunda tüm bölgeye şiddetli bir sağanak yağdırır. Çoğu zaman av da kaosa kurban gittiğinden, bu sürecin gerçekten av sayılıp sayılmayacağı tartışma konusudur."
+  },
+  "PREDATOR_LazyDragon": {
+    "localized_name": "Relaxaurus",
+    "description": "Bezgin görüntüsünün aksine son derece vahşidir. Gördüğü her şeyi av olarak algılar ve avını yemeden katiyen durmaz."
+  },
+  "PREDATOR_Manticore_Dark": {
+    "localized_name": "Blazehowl Noct",
+    "description": "Çiğ eti tercih etse de kendini hep eti bozulmuş yerken bulur. Bunun sebebi silah olarak kullandığı karanlık pençeleridir. Avının lanetlendiğini bir türlü fark edemez."
+  },
+  "PREDATOR_MushroomDragon": {
+    "localized_name": "Shroomer",
+    "description": "Sporları çok fazla solunursa kişi transa girer. Bir Shroomer hareket etmiyorsa bazen bunun sebebi bir mantarı taklit ediyor olması değil, kendi sporlarının etkisinde kafasının güzelleşmesidir."
+  },
+  "PREDATOR_MysteryMask": {
+    "localized_name": "Omascul",
+    "description": "Taktığı maskenin, yüzü olmadığı söylenir. Tam önünde görünür ama asla orada değildir. Gölgelerin derinliklerinden, gece gündüz izler. Bakışlarını kaçırırsın, sana daha da yaklaşır."
+  },
+  "PREDATOR_NightBlueHorse": {
+    "localized_name": "Starryon",
+    "description": "Uzun, muhteşem yelesinden büyük gurur duyar. Tüylerinde bir kırık görürse o kadar utanır ki düzgün şekilde koşmaya bile odaklanamaz. Statik elektrik tüylerinin kabarmasına neden olduğu için Azurmane türünden ne pahasına olursa olsun kaçınır."
+  },
+  "PREDATOR_PinkLizard": {
+    "localized_name": "Lovander",
+    "description": "Sevgiyle geçecek bir gecenin peşinde, sürekli birilerini kovalar. Başta sadece diğer Pal'lara ilgi göstermiş olsa da son yıllarda insanlar bile çapkınlığının hedefi hâline gelmiştir."
+  },
+  "PREDATOR_PurpleSpider": {
+    "localized_name": "Tarantriss",
+    "description": "Son derece yapışkan ve ilgi meraklısı. Ne kadar direnç görürse o kadar ısrarcı olur. |Kişiliği| de böyledir."
+  },
+  "PREDATOR_RedArmorBird": {
+    "localized_name": "Ragnahawk",
+    "description": "Bazıları bu Pal'ı Beakon ile akrabalığı olan bir tür zannetse de iki Pal arasında bir bağlantı yoktur. Temel olarak taşlarla beslenir ve uzun yıllar içinde gagası ve başı, bu diyete olanak tanıyacak şekilde sertleşmiştir."
+  },
+  "PREDATOR_Ronin_Dark": {
+    "localized_name": "Bushi Noct",
+    "description": "Öldüğünde, bedeni gelecek nesil tarafından kullanılacak bir kılıca dönüşür. Kılıcı miras alan Bushi zayıf bir kalbe sahipse ölünün sesleri onu delirtir. Bu delilikle dönüşüp Bushi Noct hâline gelen Pal, sonsuza kadar dolaşır."
+  },
+  "PREDATOR_ScorpionMan": {
+    "localized_name": "Prixter",
+    "description": "Yaklaşık 5000 farklı türde zehire sahip. İçlerinde anında öldürebilecek kadar güçlü olanlar bile var... Ama hepsi o kadar zayıf ki, hiçbir işe yaramıyor!"
+  },
+  "PREDATOR_SifuDog": {
+    "localized_name": "Dogen",
+    "description": "Mükemmel diğerkâmlığa ulaşabilmek için dinlenmeksizin meditasyon yapar. Dünyevi arzularıyla yüzleşince yemek yer ve düşünür. Bugün çok yemek yedi."
+  },
+  "PREDATOR_ThunderDog": {
+    "localized_name": "Rayhound",
+    "description": "Tüm hızıyla görüldüğünde bir yıldırım zannedilebilir. Rayhound türünden iki birey çarpıştığında, havada gök gürültüsünü andıran bir kükreme yankılanır."
+  },
+  "PREDATOR_Umihebi_Fire": {
+    "localized_name": "Jormuntide Ignis",
+    "description": "Efsaneler, Jormuntide Ignis adlı Pal'ın bir zamanlar işlemediği bir suçla suçlanarak bir volkana atılan bir savaşçı olduğunu, sonra da krallığı yıkmak için bu şekilde geri döndüğünü anlatır."
+  },
+  "PREDATOR_VolcanicMonster_Ice": {
+    "localized_name": "Reptyro Cryst",
+    "description": "Buz gibi soğuk kanı tüm bedeninde dolaşır. Hızlı bir şekilde ısıtılırsa kanı buharlaşır ve bir anda bir buhar patlamasına neden olur."
+  },
+  "PREDATOR_Werewolf_Ice": {
+    "localized_name": "Loupmoon Cryst",
+    "description": "Başındaki boynuzlar hiç erimeyen gizemli bir buzdan oluşur. Boynuzları kırılarak yapılan kar tatlısı gerçekten çok lezzetlidir, ancak hem bunu deneyen kişi hem de Loupmoon Cryst şiddetli bir baş ağrısından şikâyet eder."
+  },
+  "PREDATOR_WhiteTiger_Ground": {
+    "localized_name": "Cryolinx Terra",
+    "description": "Büyük elleriyle pek çok şeyi kolaylıkla taşıyabilir. Ancak kısa bacakları hızını kestiğinden, işleri gecenin çökmesiyle yarım kalır."
+  },
+  "PREDATOR_Yeti": {
+    "localized_name": "Wumpo",
+    "description": "Araştırmacılar bir keresinde gerçek formunu açığa çıkarmak için tüm tüylerini kazıdı. Sonunda geride sadece tüy kaldı; sanki tüyden başka hiçbir şey yoktu."
+  },
+  "PalDealer": {
+    "localized_name": "Pal Tüccarı",
+    "description": null
+  },
+  "PalDealer_Desert": {
+    "localized_name": "Pal Tüccarı",
+    "description": null
+  },
+  "PalDealer_Volcano": {
+    "localized_name": "Pal Tüccarı",
+    "description": null
+  },
+  "PalPassive_Doctor": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "PalTrader": {
+    "localized_name": "Pal Tüccarı",
+    "description": null
+  },
+  "Penguin": {
+    "localized_name": "Pengullet",
+    "description": "Bu Pal'ın tüylerinin tümü neredeyse yok oldu ama ne yazık ki uçma arzusu asla dinmedi. Şu anda bile deneyebildiği her şekilde uçmaya çalışıyor."
+  },
+  "Penguin_Electric": {
+    "localized_name": "Pengullet Lux",
+    "description": "Kanatları tamamen dejenere olmuş ve artık uçamaz hale gelmiştirr. Gökyüzüne olan özlemi kıskançlığa dönüşmüş ve uçan her şeyi vurabilmesini sağlayan elektrik gücüne kavuşmuştur!"
+  },
+  "PinkCat": {
+    "localized_name": "Cattiva",
+    "description": "İlk bakışta öz güveni yüksek görünse de aslında güçsüz ve ürkektir. Cattiva türünden bir Pal'ın oyuncağı olmak pek çok açıdan utançların en büyüğüdür."
+  },
+  "PinkLizard": {
+    "localized_name": "Lovander",
+    "description": "Sevgiyle geçecek bir gecenin peşinde, sürekli birilerini kovalar. Başta sadece diğer Pal'lara ilgi göstermiş olsa da son yıllarda insanlar bile çapkınlığının hedefi hâline gelmiştir."
+  },
+  "PinkRabbit": {
+    "localized_name": "Ribbuny",
+    "description": "Sevecen gülümsemesi hiç eksik olmayan bir Pal. Bazen dokunaçları, Cattiva türünün şakaları sebebiyle düğüm olur. Böyle anlarda ifadesi şeytani bir hâl alır."
+  },
+  "PinkRabbit_Grass": {
+    "localized_name": "Ribbuny Botan",
+    "description": "Her daim neşeyle gülümser. Cattiva türünün şakaları sebebiyle bazen kendi dokunaçlarına dolanırlar ve kurtulmak için mücadele etmeleri gerekir! Zorlu durumlarda bile yüzünden gülümseme eksik olmaz."
+  },
+  "PlantSlime": {
+    "localized_name": "Gumoss",
+    "description": "Ağaç reçinesini andıran bir bedene sahip, tuhaf bir Pal. Gövdesini kaplayacak bir şey bulamadığında gücünü gitgide kaybeder ve zaman içinde çürüyüp gider."
+  },
+  "PlantSlime_Flower": {
+    "localized_name": "Gumoss",
+    "description": null
+  },
+  "Plesiosaur": {
+    "localized_name": "Braloha",
+    "description": "Nefesine karışan polen benzeri madde her bitkiyi tozlaştırabilen mucizevi bir maddedir. Üzerinde bitkiler büyüyen Pal'i düşünürsek, kendisi biraz garip bir rakip."
+  },
+  "Police_BowGun": {
+    "localized_name": "PASG Piyadesi",
+    "description": null
+  },
+  "Police_Chief": {
+    "localized_name": "Motivasyonsuz şef",
+    "description": null
+  },
+  "Police_Handgun": {
+    "localized_name": "PASG Muhafızı",
+    "description": null
+  },
+  "Police_Rifle": {
+    "localized_name": "PASG Piyadesi",
+    "description": null
+  },
+  "Police_Rifle_Tower": {
+    "localized_name": "PASG Piyadesi",
+    "description": null
+  },
+  "Police_Shield_Tower": {
+    "localized_name": "PASG Piyadesi",
+    "description": null
+  },
+  "Police_Shotgun": {
+    "localized_name": "PASG Seçkini",
+    "description": null
+  },
+  "Police_Shotgun_Tower": {
+    "localized_name": "PASG Seçkini",
+    "description": null
+  },
+  "Police_TreasureGuard_NarrowSite": {
+    "localized_name": "PASG Piyadesi",
+    "description": null
+  },
+  "Police_Vigilance": {
+    "localized_name": "PASG Piyadesi",
+    "description": null
+  },
+  "Police_old_Prisoner": {
+    "localized_name": "Tutuklu eski şef",
+    "description": null
+  },
+  "PoseidonOrca": {
+    "localized_name": "Neptilius",
+    "description": "Felaket sona erdikten sonra cennet savaşçıları karşılaştı. 'den sonra yakın sularda güçlülerin gözü önünde belirecekler. Karşılaşma kaçınılmazdır."
+  },
+  "PurpleSpider": {
+    "localized_name": "Tarantriss",
+    "description": "Son derece yapışkan ve ilgi meraklısı. Ne kadar direnç görürse o kadar ısrarcı olur. |Kişiliği| de böyledir."
+  },
+  "QueenBee": {
+    "localized_name": "Elizabee",
+    "description": "Beegarde türüne hükmetmesi için seçilmiş bir kraliçe. Kraliçelerine hizmet etmenin zevki için ölene dek çalışmaya istekli kölelerinin sayısı sonsuzdur."
+  },
+  "QuestMan": {
+    "localized_name": "-",
+    "description": null
+  },
+  "Quest_Farmer03_PinkCat": {
+    "localized_name": "Cattiva",
+    "description": null
+  },
+  "Quest_Farmer03_SheepBall": {
+    "localized_name": "Lamball",
+    "description": null
+  },
+  "Quest_Hunter_Fat_GatlingGun01": {
+    "localized_name": "Örgüt Ezicisi",
+    "description": null
+  },
+  "Quest_Hunter_FlameThrower": {
+    "localized_name": "Örgüt Temizlikçisi",
+    "description": null
+  },
+  "Quest_Hunter_Katana01": {
+    "localized_name": "Örgüt Silahşoru",
+    "description": null
+  },
+  "Quest_Hunter_RocketLauncher01": {
+    "localized_name": "Örgüt Seçkini",
+    "description": null
+  },
+  "RAID_DarkMechaDragon": {
+    "localized_name": "Xenolord",
+    "description": null
+  },
+  "RAID_DarkMechaDragon_2": {
+    "localized_name": "Xenolord",
+    "description": null
+  },
+  "RAID_KingBahamut_Dragon": {
+    "localized_name": "Blazamut Ryu",
+    "description": null
+  },
+  "RAID_KingBahamut_Dragon_2": {
+    "localized_name": "Blazamut Ryu",
+    "description": null
+  },
+  "RAID_LegendDeer": {
+    "localized_name": "Hartalis",
+    "description": null
+  },
+  "RAID_LegendDeer_2": {
+    "localized_name": "Hartalis",
+    "description": null
+  },
+  "RAID_NightLady": {
+    "localized_name": "Bellanoir",
+    "description": null
+  },
+  "RAID_NightLady_Dark": {
+    "localized_name": "Bellanoir Libero",
+    "description": null
+  },
+  "RAID_NightLady_Dark_2": {
+    "localized_name": "Bellanoir Libero",
+    "description": null
+  },
+  "RAID_YakushimaBoss001_Green": {
+    "localized_name": "Hakiki Cthulhu Gözü",
+    "description": null
+  },
+  "RAID_YakushimaBoss001_Green_2": {
+    "localized_name": "Hakiki Cthulhu Gözü",
+    "description": null
+  },
+  "RAID_YakushimaBoss002": {
+    "localized_name": "Ay Efendisi",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_2": {
+    "localized_name": "Ay Efendisi",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Hand_Left": {
+    "localized_name": "Ay Efendisi",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Hand_Left_2": {
+    "localized_name": "Ay Efendisi",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Hand_Right": {
+    "localized_name": "Ay Efendisi",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Hand_Right_2": {
+    "localized_name": "Ay Efendisi",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Head": {
+    "localized_name": "Ay Efendisi",
+    "description": null
+  },
+  "RAID_YakushimaBoss002_Head_2": {
+    "localized_name": "Ay Efendisi",
+    "description": null
+  },
+  "RaijinDaughter": {
+    "localized_name": "Dazzi",
+    "description": "Yalnız Pal'lara karşı çoğu zaman naziktir. Fakat bir Pal bu tavrı gerçek arkadaşlıkla karıştırırsa, bu Pal fırsatı değerlendirerek hedefini bir şimşekle çarpar."
+  },
+  "RaijinDaughter_Water": {
+    "localized_name": "Dazzi Noct",
+    "description": "Yalnız Pal'lara karşı çoğu zaman nazik olsa da hedefini gardını indirmesi için kandırmanın yollarını arayıp saldırıya geçer. Fakat doğru anı hiçbir zaman yakalayamayıp onlarla arkadaş olur."
+  },
+  "RandomEventShop": {
+    "localized_name": "Pal Tüccarı",
+    "description": null
+  },
+  "RedArmorBird": {
+    "localized_name": "Ragnahawk",
+    "description": "Bazıları bu Pal'ı Beakon ile akrabalığı olan bir tür zannetse de iki Pal arasında bir bağlantı yoktur. Temel olarak taşlarla beslenir ve uzun yıllar içinde gagası ve başı, bu diyete olanak tanıyacak şekilde sertleşmiştir."
+  },
+  "Respawn_guide": {
+    "localized_name": "Dost Canlısı Pal Terbiyecisi",
+    "description": null
+  },
+  "Reward_BossDefeat": {
+    "localized_name": "Muhafız",
+    "description": null
+  },
+  "Reward_Emote_A_01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Reward_Emote_B_01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Reward_Emote_C_01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Reward_Emote_D_01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Reward_Emote_E_01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Reward_Emote_F_01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Reward_Emote_G_01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Reward_Emote_H_01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Reward_Emote_I_01": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Reward_Food": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Reward_PalCaptureCount": {
+    "localized_name": "Muhafız",
+    "description": null
+  },
+  "Reward_PalDisplay_A_01": {
+    "localized_name": "Muhafız",
+    "description": null
+  },
+  "Reward_PalDisplay_B_01": {
+    "localized_name": "Muhafız",
+    "description": null
+  },
+  "Reward_PalDisplay_C_01": {
+    "localized_name": "Muhafız",
+    "description": null
+  },
+  "Reward_PalDisplay_D_01": {
+    "localized_name": "Muhafız",
+    "description": null
+  },
+  "Reward_PalDisplay_E_01": {
+    "localized_name": "Muhafız",
+    "description": null
+  },
+  "Reward_PalDisplay_F_01": {
+    "localized_name": "Muhafız",
+    "description": null
+  },
+  "Reward_PalDisplay_G_01": {
+    "localized_name": "Muhafız",
+    "description": null
+  },
+  "Reward_PalDisplay_H_01": {
+    "localized_name": "Muhafız",
+    "description": null
+  },
+  "Reward_PalDisplay_I_01": {
+    "localized_name": "Muhafız",
+    "description": null
+  },
+  "Reward_Paldex": {
+    "localized_name": "Muhafız",
+    "description": null
+  },
+  "Robbery_Leader": {
+    "localized_name": "Pal Tüccarı",
+    "description": null
+  },
+  "Robbery_Minion": {
+    "localized_name": "Pal Tüccarı",
+    "description": null
+  },
+  "RobinHood": {
+    "localized_name": "Robinquill",
+    "description": "Ormanlarda yaşayıp avlanan, insanlara çok benzeyen bir Pal. Bu Pal, Pal'ların ne olduğunun ve uzak geçmişte insanlardan nasıl ayrıldıklarının anlaşılması için büyük önem arz ediyor olabilir."
+  },
+  "RobinHood_Ground": {
+    "localized_name": "Robinquill Terra",
+    "description": "Kayalık yerlerde yaşayıp avlanan, insanlara çok benzeyen bir Pal. Harabelerde ne zaman Robinquill Terra kemikleri bulunsa insan kemikleri de çok yakınında bulunur."
+  },
+  "Ronin": {
+    "localized_name": "Bushi",
+    "description": "Öldüğünde bedeni gelecek nesil tarafından kullanılacak bir kılıca dönüşür. Bu kılıç bir Bushi dışında biri tarafından kuşanılırsa içindeki ruh bu kişi aklını yitirene kadar ona eziyet edecektir."
+  },
+  "Ronin_Dark": {
+    "localized_name": "Bushi Noct",
+    "description": "Öldüğünde, bedeni gelecek nesil tarafından kullanılacak bir kılıca dönüşür. Kılıcı miras alan Bushi zayıf bir kalbe sahipse ölünün sesleri onu delirtir. Bu delilikle dönüşüp Bushi Noct hâline gelen Pal, sonsuza kadar dolaşır."
+  },
+  "SUMMON_DarkAlien": {
+    "localized_name": "Xenovader",
+    "description": null
+  },
+  "SUMMON_DarkAlien_MAX": {
+    "localized_name": "Xenovader",
+    "description": null
+  },
+  "SUMMON_WhiteAlienDragon": {
+    "localized_name": "Xenogard",
+    "description": null
+  },
+  "SUMMON_WhiteAlienDragon_MAX": {
+    "localized_name": "Xenogard",
+    "description": null
+  },
+  "SaintCentaur": {
+    "localized_name": "Paladius",
+    "description": "Bir zamanlar Necromus ile yekvücuttu. Parlayan bedeni tüm olumsuz duygulardan arınmıştır. Fakat gözlerinin derinliklerindeki bir nefret pırıltısı hâlâ görülebilir."
+  },
+  "SakuraSaurus": {
+    "localized_name": "Broncherry",
+    "description": "Kokusu çiftleşmenin öncesinde ve sonrasında büyük ölçüde değişir. Bir partner bulduğunda keyif verici bir aroma salgılar. Bu aromaya |İlk Aşkın Kokusu| denir."
+  },
+  "SakuraSaurus_Water": {
+    "localized_name": "Broncherry Aqua",
+    "description": "Kokusu çiftleşmenin öncesinde ve sonrasında büyük ölçüde değişir. Bir partner bulmadan önce keyif verici bir aroma salgılar. Bu aromaya |Masumiyet Parfümü| denir."
+  },
+  "SalesPerson": {
+    "localized_name": "Gezgin Tüccar",
+    "description": null
+  },
+  "SalesPerson_Desert": {
+    "localized_name": "Gezgin Tüccar",
+    "description": null
+  },
+  "SalesPerson_Desert2": {
+    "localized_name": "Gezgin Tüccar",
+    "description": null
+  },
+  "SalesPerson_Volcano": {
+    "localized_name": "Gezgin Tüccar",
+    "description": null
+  },
+  "SalesPerson_Volcano2": {
+    "localized_name": "Gezgin Tüccar",
+    "description": null
+  },
+  "SalesPerson_Wander": {
+    "localized_name": "Gezgin Tüccar",
+    "description": null
+  },
+  "Scientist_FlameThrower": {
+    "localized_name": "PAL Genetik Araştırma Birimi İnfazcısı",
+    "description": null
+  },
+  "Scientist_FlameThrower_Invader": {
+    "localized_name": "PAL Genetik Araştırma Birimi İnfazcısı",
+    "description": null
+  },
+  "Scientist_Prisoner": {
+    "localized_name": "PAL Genetik Araştırma Birimi İnfazcısı",
+    "description": null
+  },
+  "ScorpionMan": {
+    "localized_name": "Prixter",
+    "description": "Yaklaşık 5000 farklı türde zehire sahip. İçlerinde anında öldürebilecek kadar güçlü olanlar bile var... Ama hepsi o kadar zayıf ki, hiçbir işe yaramıyor!"
+  },
+  "SecurityDrone": {
+    "localized_name": "Hücum Helikopteri",
+    "description": null
+  },
+  "Serpent": {
+    "localized_name": "Surfent",
+    "description": "Hidrodinamik bedeni, sudaki aktiviteler için çok uygundur. Kaçak avcılar çoğu zaman bu Pal'ları yakalar ve sörf tahtası yerine kullanır."
+  },
+  "Serpent_Ground": {
+    "localized_name": "Surfent Terra",
+    "description": "Aerodinamik bedeni, kumdaki aktiviteler için çok uygundur. Kaçak avcılar çoğu zaman bu Pal'ları yakalar ve sörf tahtası yerine kullanır."
+  },
+  "SharkKid": {
+    "localized_name": "Gobfin",
+    "description": "Uzun zaman önce, suda yaşayan devasa ve çok güçlü bir Pal'dı. Ancak gıda kıtlığı başlayınca karada yaşayacak şekilde evrildi. Yürümek çok enerji gerektirdiğinden ebatları gitgide küçüldü ve şimdilerde küçük ve çelimsiz bir Pal hâline geldi."
+  },
+  "SharkKid_Fire": {
+    "localized_name": "Gobfin Ignis",
+    "description": "Uzun zaman önce, suda yaşayan devasa ve çok güçlü bir Pal'dı. Ancak gıda kıtlığı başlayınca karada yaşayacak şekilde evrildi. Yürümenin çok kalori yakması bu Pal'ın ateşi kontrol etme gücünü hayret verici şekilde uyandırdı!"
+  },
+  "Sheepball": {
+    "localized_name": "Lamball",
+    "description": "|Tepelere doğru yapılan tırmanışlar genelde bu Pal'ın aşağı yuvarlanmasıyla biter. Bu durumda başı döner ve hareket edemez, böylece yakalanması ve öldürülmesi kolaylaşır. Bu Pal, besin zincirinin en altına dek yuvarlanmıştır.|"
+  },
+  "SifuDog": {
+    "localized_name": "Dogen",
+    "description": "Mükemmel diğerkâmlığa ulaşabilmek için dinlenmeksizin meditasyon yapar. Dünyevi arzularıyla yüzleşince yemek yer ve düşünür. Bugün çok yemek yedi."
+  },
+  "SkyDragon": {
+    "localized_name": "Quivern",
+    "description": "Bir Quivern ile sarılarak uyumanın ilahi bir deneyim olduğu söylenir; fakat uykusunda dönüp duranlar tarafından ezilerek cennete gönderilenlerin sayısı da az değildir."
+  },
+  "SkyDragon_Grass": {
+    "localized_name": "Quivern Botan",
+    "description": "Bir Quivern Botan ile sarıldığında gün ışığı ve çayırların kokusunu alırsan ertesi gün güneşli olacaktır. Nemli bir kokusu varsa ertesi gün yağmurlu ve berbat olacaktır."
+  },
+  "SmallArmadillo": {
+    "localized_name": "Kikit",
+    "description": "On yıl önce, Kikit futbolu popülerdi. Fakat bu spor, Hür Pal İttifakı'nın ateşli muhalefeti sebebiyle hızla gözden düştü. Buna rağmen, bu durum Kikit türü için fark etmiyordu çünkü bu spor sayesinde eski kabuklarından kurtuluyorlardı."
+  },
+  "SnowPeafowl": {
+    "localized_name": "Frostplume",
+    "description": "Zamana karşı hassastırlar ve her sabah mutlaka aynı saatte uyanırlar. Parpagos adasında günün 24 parçaya bölünmesinin sebebinin kanatlarını açmışFrostplume’ye önden bakınca 24 kapalı alan görülmesi olduğu söylenir."
+  },
+  "SnowTigerBeastman": {
+    "localized_name": "Bastigor",
+    "description": "Yuvarlak bir şey gördüğü anda onu yumruklamak için kontrol edemediği bir dürtüye kapılır. SnowTigerBeastMan için hayatta kalmaktan sonraki en büyük mücadele bir kardan adam yapmaktır."
+  },
+  "SoldierBee": {
+    "localized_name": "Beegarde",
+    "description": "Elizabee için sadakat yemini etmiş bir hizmetçi. Kraliçenin zarar görmesine sebep olan herkes kovandan derhâl kovulur. Kraliçesini korumak için canını bile feda eder."
+  },
+  "StuffedShark": {
+    "localized_name": "Finsider",
+    "description": "Kostümün içinden bir şey dışarı bakıyormuş gibi görünüyor, ama elini içine soktuğunda hiçbir şey yok. Tam tersine, elini istediğin kadar derine sokabilirsin. Evren burada olabilir."
+  },
+  "StuffedShark_Fire": {
+    "localized_name": "Finsider Ignis",
+    "description": "Elini ağzının içine soksan da orada hiçbir şey yoktur ve istediğin kadar derinesokabilirsin. Bunun farklı boyutlu bir alan olduğunu düşünen araştırmacılar, uyku tulumu olarak kullanabilirmiyiz diye düşünerek tüm vücutlarını içine sokmaya çalıştılar ancak karıncalanmaya başladı, bu yüzden vücudun içi olduğu anlaşıldı."
+  },
+  "Suzaku": {
+    "localized_name": "Suzaku",
+    "description": "Bir zamanlar kurak mevsimi getirdiğine inanılırdı. Önceki yıl bir kuraklık olmuşsa insanlar acımasızca sayılarını azaltmaya çalışır; bunun bir sonraki yıl bereketli bir hasadı getireceğini umardı."
+  },
+  "Suzaku_Water": {
+    "localized_name": "Suzaku Aqua",
+    "description": "Bir zamanlar yağmurlu mevsimi getirdiğine inanılırdı. Önceki yıl bir sel olmuşsa insanlar acımasızca sayılarını azaltmaya çalışır; bunun bir sonraki yıl felakete engel olacağını umardı."
+  },
+  "SweetsSheep": {
+    "localized_name": "Woolipop",
+    "description": "Tüm bedeni şekerden 18.000 kat daha tatlıdır. Kokusuna kanan etçil Pal'lar, bu Pal'dan bir ısırık almaları hâlinde yoğun tatlı tadıyla şaşkına döner; hatta bayılır."
+  },
+  "TentacleTurtle": {
+    "localized_name": "Turtacle",
+    "description": "Zayıf bedenini korumak için güçlü bir kabuk geliştirdi. Ancak bunun karşılığında bedeninin savunma gücünü fazlasıyla feda ettiğinden gıdıklanınca bayılır."
+  },
+  "TentacleTurtle_Ground": {
+    "localized_name": "Turtacle Terra",
+    "description": "Zayıf vücudunu koruyabilmek için güçlü bir kabuk edinmiştir. Dokunma duyusunun büyük bir kısmı ellerde ve kabukta yoğunlaşmıştır, bu yüzden sadece vücuduna gizlice dokunulsa bile bunu fark etmez."
+  },
+  "ThunderBird": {
+    "localized_name": "Beakon",
+    "description": "Bazıları Ragnahawk ile akrabalığı olan bir tür zannetse de iki Pal arasında bir bağlantı yoktur. Keskin gagasını kullanarak yıldırımı andıran hızlı bir hareketle avının üzerine iner."
+  },
+  "ThunderDog": {
+    "localized_name": "Rayhound",
+    "description": "Tüm hızıyla görüldüğünde bir yıldırım zannedilebilir. Rayhound türünden iki birey çarpıştığında, havada gök gürültüsünü andıran bir kükreme yankılanır."
+  },
+  "ThunderDragonMan": {
+    "localized_name": "Orserk",
+    "description": "Düşmanlarının yaralarına elektrik dalgaları göndererek onları içten dışa doğru kızartır. Orserk türünden bireyler arasındaki dövüşler göz açıp kapayıncaya kadar sona erer."
+  },
+  "TropicalOstrich": {
+    "localized_name": "Palumba",
+    "description": "Kendilerine özgü bir dansları, düşmanlarının ritmini bozar. Bir bölge savaşında, rakibinin ritmine ilk giren kaybeder. Kur yapmak, zaman öldürmek, her şey için dans ederler! Peki, insanlar için dans gerçekten ne anlama geliyor?"
+  },
+  "Umihebi": {
+    "localized_name": "Jormuntide",
+    "description": "Efsaneler, Jormuntide adlı Pal'ın bir zamanlar işlemediği bir suçla suçlanarak bir girdaba atılan bilge bir adam olduğunu, sonra da krallığı yıkmak için bu şekilde geri döndüğünü anlatır."
+  },
+  "Umihebi_Fire": {
+    "localized_name": "Jormuntide Ignis",
+    "description": "Efsaneler, Jormuntide Ignis adlı Pal'ın bir zamanlar işlemediği bir suçla suçlanarak bir volkana atılan bir savaşçı olduğunu, sonra da krallığı yıkmak için bu şekilde geri döndüğünü anlatır."
+  },
+  "Viking": {
+    "localized_name": "Feybreak Savaşçısı",
+    "description": null
+  },
+  "VikingElite_Tower": {
+    "localized_name": "Feybreak Başıbozuğu",
+    "description": null
+  },
+  "Viking_Elite": {
+    "localized_name": "Feybreak Başıbozuğu",
+    "description": null
+  },
+  "Viking_Elite_Invader": {
+    "localized_name": "Feybreak Başıbozuğu",
+    "description": null
+  },
+  "Viking_Prisoner": {
+    "localized_name": "Feybreak Savaşçısı",
+    "description": null
+  },
+  "Viking_Tower": {
+    "localized_name": "Feybreak Savaşçısı",
+    "description": null
+  },
+  "VioletFairy": {
+    "localized_name": "Vaelet",
+    "description": "Saray, kralın en sevdiği çiçeklerle doluydu. Büyük bir savaş çıktı ve alevler saraya yaklaştı. Kaosun ortasında, bir çiçeğin ruhu ortaya çıktı. - |Kralın Çiçeği| adlı peri masalından"
+  },
+  "VisitingMerchant": {
+    "localized_name": "-",
+    "description": null
+  },
+  "Visitor_Hunter_Rifle": {
+    "localized_name": "Örgüt Haydudu",
+    "description": null
+  },
+  "Visitor_Present": {
+    "localized_name": "Gezgin Tüccar",
+    "description": null
+  },
+  "Visitor_Recruiter": {
+    "localized_name": "Pal İşe Alıcı",
+    "description": null
+  },
+  "VolcanicMonster": {
+    "localized_name": "Reptyro",
+    "description": "Magma kadar sıcak kanı tüm bedeninde dolaşır. Üzerine çokça su atılırsa su hızla ısınır ve bir anda bir buhar patlamasına neden olur."
+  },
+  "VolcanicMonster_Ice": {
+    "localized_name": "Reptyro Cryst",
+    "description": "Buz gibi soğuk kanı tüm bedeninde dolaşır. Hızlı bir şekilde ısıtılırsa kanı buharlaşır ve bir anda bir buhar patlamasına neden olur."
+  },
+  "WeaponsDealer": {
+    "localized_name": "-",
+    "description": null
+  },
+  "WeaselDragon": {
+    "localized_name": "Chillet",
+    "description": "Vücudunu tortop yapıp son derece yüksek hızlarda etrafta yuvarlanabilir. Uzun zaman önce, insanlar bu dönüş hızından faydalanarak tereyağı üretmek için evcilleştirilmiş Chillet Pal'ların sırtlarına süt keseleri bağlarmış."
+  },
+  "WeaselDragon_Fire": {
+    "localized_name": "Chillet Ignis",
+    "description": "Vücudunu tortop yapıp kıvılcımlar çıkaracak kadar yüksek hızlarda yuvarlanabilir. Kıvılcımlar heyecanlandığında da görülür. Bu Pal çok fazla okşanırsa gerçek anlamda yanmaya başlayabilir!"
+  },
+  "Werewolf": {
+    "localized_name": "Loupmoon",
+    "description": "Başındaki boynuzlar ay ışığı altında büyür. Güneşten nefret etmez ama boynuzlarının güneş ışığının vurduğu yerleri kaşınır."
+  },
+  "Werewolf_Ice": {
+    "localized_name": "Loupmoon Cryst",
+    "description": "Başındaki boynuzlar hiç erimeyen gizemli bir buzdan oluşur. Boynuzları kırılarak yapılan kar tatlısı gerçekten çok lezzetlidir, ancak hem bunu deneyen kişi hem de Loupmoon Cryst şiddetli bir baş ağrısından şikâyet eder."
+  },
+  "WhiteAlienDragon": {
+    "localized_name": "Xenogard",
+    "description": "Bilgi tüketir ve enerjiye dönüştürür. Düzenli olarak birilerine bilgi gönderiyor gibi görünür. - Merhaba? Az önce gönderdiğin mesaj neydi? Kontrol etmeden yedim."
+  },
+  "WhiteDeer": {
+    "localized_name": "Celesdir",
+    "description": "Kadim metinler bu Pal'dan |Kurtuluşun Yaratığı| olarak bahseder. Celesdir tarafından yayılan ışık her şeyi arındırır; hiçbir iz bırakmayarak ortadan kaybolmalarını sağlayarak onları gerçek anlamda yok eder."
+  },
+  "WhiteMoth": {
+    "localized_name": "Sibelyx",
+    "description": "Yağmuru çok seven ve çoğu zaman hava düzelene kadar sağanak yağmurun tadını çıkaran bir Pal. Yağmurlu günlerde, Foxparks türü üyeleri bu Pal'ın altına saklanırken görülebilir."
+  },
+  "WhiteShieldDragon": {
+    "localized_name": "Silvegis",
+    "description": "Boynundaki metalik bileşenlerin manyetik nitelikleri vardır. Eğer bacağındaki parçalar çok yaklaşırsa boynuna yapışırlar. Boynunda metal atıkları birikirse huysuzlanarak temizlik yapmaya başlar ve atıkların kolaylıkla çıkmadıklarını görünce öfkelenir."
+  },
+  "WhiteTiger": {
+    "localized_name": "Cryolinx",
+    "description": "Sert pençeleriyle sarp dağlara kolaylıkla tırmanabilir. Fakat kısa bacakları sebebiyle inişlerde zorlanır ve çoğu zaman yüksek yerlerde mahsur kalır."
+  },
+  "WhiteTiger_Ground": {
+    "localized_name": "Cryolinx Terra",
+    "description": "Büyük elleriyle pek çok şeyi kolaylıkla taşıyabilir. Ancak kısa bacakları hızını kestiğinden, işleri gecenin çökmesiyle yarım kalır."
+  },
+  "WindChimes": {
+    "localized_name": "Hangyu",
+    "description": "Devasa kollarıyla demiri bile parçalayabilir. Özellikle canice bir infaz yöntemi olarak, bir zamanlar ağır suçlular halka açık bir meydanda bağlanır ve derileri bir Windchimes tarafından kemiklerinden ayrılırdı."
+  },
+  "WindChimes_Ice": {
+    "localized_name": "Hangyu Cryst",
+    "description": "Devasa kollarıyla buz dağlarını bile parçalayabilir. Acımasız bir küçük düşürme cezası olarak bir zamanlar büyük günahkârlar halka açık bir meydanda bağlanır ve saçları bir Windchimes_Ice tarafından yolunurdu."
+  },
+  "WingGolem": {
+    "localized_name": "Knocklem",
+    "description": "Tam 215 parçaya bölünebilir ve parçaları dağıtılsa dahi kendini yeniden birleştirip tekrar hareket edebilir. Farklı bireylerden alınan parçalar karıştırılırsa kimliğini şaşıracağı için arızalanır."
+  },
+  "WingGolem_Oilrig": {
+    "localized_name": "Knocklem",
+    "description": null
+  },
+  "WizardOwl": {
+    "localized_name": "Hoocrates",
+    "description": "Çoğu zaman düşüncelere dalmış hâldedir ve bazen uyumakta bile zorlanır. |Düşünüyorum, öyleyse varım.|"
+  },
+  "WoolFox": {
+    "localized_name": "Cremis",
+    "description": "SheepBall ile karşılaştırıldığında daha sık bir yünü ve evcilleştirilmeye daha uygun bir kişiliği vardır. Fakat tarihsel olarak her zaman evcil hayvan olarak sahiplenilmiştir. Sevimliliği bir erdem kabul edilir."
+  },
+  "YakushimaBoss001": {
+    "localized_name": "Cthulhu’nun Gözü",
+    "description": "[Terraria İşbirliği] Başka bir dünyadan gelen canavar. Burada evcilleştirilebiliyor gibi görünüyor."
+  },
+  "YakushimaBoss001_Small": {
+    "localized_name": "Şeytan Gözü",
+    "description": "[Terraria İşbirliği] Başka bir dünyadan gelen canavar. Burada evcilleştirilebiliyor gibi görünüyor."
+  },
+  "YakushimaMonster001": {
+    "localized_name": "Yeşil Slime",
+    "description": "[Terraria İşbirliği] Başka bir dünyadan gelen canavar. Burada evcilleştirilebiliyor gibi görünüyor."
+  },
+  "YakushimaMonster001_Blue": {
+    "localized_name": "Mavi Slime",
+    "description": "[Terraria İşbirliği] Başka bir dünyadan gelen canavar. Burada evcilleştirilebiliyor gibi görünüyor."
+  },
+  "YakushimaMonster001_Pink": {
+    "localized_name": "Kırmızı Slime",
+    "description": "[Terraria İşbirliği] Başka bir dünyadan gelen canavar. Burada evcilleştirilebiliyor gibi görünüyor."
+  },
+  "YakushimaMonster001_Purple": {
+    "localized_name": "Mor Slime",
+    "description": "[Terraria İşbirliği] Başka bir dünyadan gelen canavar. Burada evcilleştirilebiliyor gibi görünüyor."
+  },
+  "YakushimaMonster001_Rainbow": {
+    "localized_name": "Gökkuşağı Slime",
+    "description": "[Terraria İşbirliği] Başka bir dünyadan gelen canavar. Burada evcilleştirilebiliyor gibi görünüyor."
+  },
+  "YakushimaMonster001_Red": {
+    "localized_name": "Kırmızı Slime",
+    "description": "[Terraria İşbirliği] Başka bir dünyadan gelen canavar. Burada evcilleştirilebiliyor gibi görünüyor."
+  },
+  "YakushimaMonster002": {
+    "localized_name": "Büyülü Kılıç",
+    "description": "[Terraria İşbirliği] Başka bir dünyadan gelen canavar. Burada evcilleştirilebiliyor gibi görünüyor."
+  },
+  "YakushimaMonster003": {
+    "localized_name": "Mağara Yarasası",
+    "description": "[Terraria İşbirliği] Başka bir dünyadan gelen canavar. Burada evcilleştirilebiliyor gibi görünüyor."
+  },
+  "YakushimaMonster003_Purple": {
+    "localized_name": "Parıldayan Yarasa",
+    "description": "[Terraria İşbirliği] Başka bir dünyadan gelen canavar. Burada evcilleştirilebiliyor gibi görünüyor."
+  },
+  "Yamishima_guide1": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Yamishima_guide2": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Yamishima_guide3": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Yamishima_guide4": {
+    "localized_name": "Ada Sakini",
+    "description": null
+  },
+  "Yamishima_guide5": {
+    "localized_name": "Koruma Paralı Asker",
+    "description": null
+  },
+  "Yeti": {
+    "localized_name": "Wumpo",
+    "description": "Araştırmacılar bir keresinde gerçek formunu açığa çıkarmak için tüm tüylerini kazıdı. Sonunda geride sadece tüy kaldı; sanki tüyden başka hiçbir şey yoktu."
+  },
+  "Yeti_Grass": {
+    "localized_name": "Wumpo Botan",
+    "description": "Araştırmacılar bir keresinde gerçek formunu açığa çıkarmak için tüm çimenlerini biçti. Sonunda geride sadece çimen kaldı; sanki çimenden başka hiçbir şey yoktu."
+  }
+}

@@ -1,0 +1,1622 @@
+{
+  "Altar": {
+    "localized_name": "Ołtarz przywołania",
+    "description": "Złóż płytę przedstawiającą Pala, aby przyzwać potężny okaz do swojej bazy. Wskazana jest szczególna ostrożność i pełna gotowość do walki."
+  },
+  "Andon": {
+    "localized_name": "Japoński lampion papierowy",
+    "description": "Dekoracyjny lampion papierowy. Doskonale pasuje do budowli w japońskim stylu."
+  },
+  "Barrel01_Iron": {
+    "localized_name": "Czerwona metalowa beczka",
+    "description": "Metalowa czerwona beczka dekoracyjna."
+  },
+  "Barrel02_Iron": {
+    "localized_name": "Niebieska metalowa beczka",
+    "description": "Metalowa niebieska beczka dekoracyjna."
+  },
+  "Barrel03_Iron": {
+    "localized_name": "Zielona metalowa beczka",
+    "description": "Metalowa zielona beczka dekoracyjna."
+  },
+  "Barrel_Wood": {
+    "localized_name": "Drewniana beczka",
+    "description": "Drewniana beczka do przechowywania przedmiotów."
+  },
+  "BaseCampBattleDirector": {
+    "localized_name": "Dzwon alarmowy",
+    "description": "Dzwon uruchamiający alarm dla Pali w bazie. W każdej chwili możesz zmienić ich zachowanie: atakować intruzów lub skupić się wyłącznie na pracy."
+  },
+  "BaseCampItemDispenser": {
+    "localized_name": "Maszyna do odbierania przedmiotów",
+    "description": "Urządzenie umożliwiające swobodny dostęp do przedmiotów ze wszystkich skrzyń w bazie."
+  },
+  "BaseCampWorkHard": {
+    "localized_name": "Stanowisko obserwacyjne",
+    "description": "Wydawaj Palom polecenia do pracy przy różnych zadaniach w bazie. Możesz zezwolić na konkretne rodzaje pracy lub zabronić pewnych działań."
+  },
+  "BaseCampWorkerExtraStation": {
+    "localized_name": "Panel sterowania Palboxem",
+    "description": "Terminal umożliwiający zdalną obsługę Palboxa. Ustaw go tam, gdzie chcesz wypuścić Pala, i swobodnie rozwijaj swoją bazę."
+  },
+  "BathTub_Stone": {
+    "localized_name": "Antyczna wanna",
+    "description": "Antyczna dekoracyjna wanna."
+  },
+  "Believer_Banner": {
+    "localized_name": "Pionowy baner Związku Wolnych Pali",
+    "description": "Dekoracyjny pionowy baner Związku Wolnych Pali."
+  },
+  "Believer_Flag": {
+    "localized_name": "Flaga drużyny Związku Wolnych Pali",
+    "description": "Dekoracyjna flaga drużyny Związku Wolnych Pali."
+  },
+  "Bench_Wood": {
+    "localized_name": "Drewniana ławka",
+    "description": "Drewniany dekoracyjny stół."
+  },
+  "BlastFurnace": {
+    "localized_name": "Prymitywny piec hutniczy",
+    "description": "Umożliwia przetwarzanie: Sztaba. Jakość pozostawia wiele do życzenia, a tempo pracy jest powolne. Do rozpalenia ognia potrzebny jest Pal typu ognistego."
+  },
+  "BlastFurnace2": {
+    "localized_name": "Ulepszony piec hutniczy",
+    "description": "Umożliwia przetwarzanie: Rafinowana sztaba. Jakość uległa poprawie, ale tempo pracy wciąż pozostawia wiele do życzenia. Do rozpalenia ognia potrzebny jest Pal typu ognistego."
+  },
+  "BlastFurnace3": {
+    "localized_name": "Elektryczny piec hutniczy",
+    "description": "Umożliwia przetwarzanie: Sztaba z Palmetalu. Użycie wymaga energii elektrycznej, ale przetwarzanie przebiega szybciej. Do rozpalenia ognia potrzebny jest Pal typu ognistego."
+  },
+  "BlastFurnace4": {
+    "localized_name": "Olbrzymi piec hutniczy",
+    "description": "Umożliwia przetwarzanie: Heksolit. Wraz ze wzrostem rozmiaru, kilka Pali może współpracować przy wytapianiu. Do rozpalenia ognia potrzebny jest Pal typu ognistego."
+  },
+  "Bonsai": {
+    "localized_name": "Bonsai",
+    "description": "Dekoracyjne drzewko bonsai. Doskonale pasuje do budowli w japońskim stylu."
+  },
+  "Box01_Iron": {
+    "localized_name": "Mały kontener",
+    "description": "Mały kontener do przechowywania przedmiotów."
+  },
+  "Box01_Stone": {
+    "localized_name": "Antyczny pleciony kosz",
+    "description": "Antyczny pleciony kosz dekoracyjny."
+  },
+  "Box02_Iron": {
+    "localized_name": "Kontener przykryty tkaniną",
+    "description": "Kontener przykryty tkaniną do przechowywania przedmiotów."
+  },
+  "Box_Wood": {
+    "localized_name": "Drewniane pudło",
+    "description": "Drewniane pudło do przechowywania przedmiotów."
+  },
+  "BreedFarm": {
+    "localized_name": "Farma hodowlana",
+    "description": "Przydziel jednego samca i jedną samicę Pala, aby rozpocząć produkcję jaj. Do produkcji niezbędne jest Ciasto, które należy umieścić w obiekcie."
+  },
+  "BuildableGoddessStatue": {
+    "localized_name": "Posąg Mocy",
+    "description": "Kamienny posąg opisywany w legendach na Wyspie Palpagos. Złóż w ofierze Posążek Lifmunka, aby zyskać tajemnicze moce."
+  },
+  "Byobu": {
+    "localized_name": "Dekoracyjny parawan",
+    "description": "Dekoracyjny parawan. Doskonale pasuje do budowli w japońskim stylu."
+  },
+  "CableCoil01_Iron": {
+    "localized_name": "Szpula kabla",
+    "description": "Dekoracyjna szpula kabla."
+  },
+  "CampFire": {
+    "localized_name": "Ognisko",
+    "description": "Niezbędne do gotowania jedzenia. Nadaje się wyłącznie do grillowania prostych składników. Do rozpalenia ognia potrzebny jest Pal typu ognistego."
+  },
+  "CandleStand": {
+    "localized_name": "Ozdobny świecznik",
+    "description": "Okazały świecznik płonąca ogniem czczonym przez wyznawców Bractwa Wiecznego Płomienia. Źródło światła, które można ustawić na podłodze. Do jego zapalenia potrzebny jest Pal typu ognistego."
+  },
+  "Cauldron": {
+    "localized_name": "Kocioł czarownicy",
+    "description": "Umieść go w bazie, aby zwiększyć szybkość wytwarzania lekarstw. Umieszczenie więcej niż jednego nie zwiększa efektu."
+  },
+  "CeilingLamp": {
+    "localized_name": "Lampa sufitowa",
+    "description": "Źródło światła, które oświetla bazę nawet nocą. Można je zamontować na suficie. Wymaga energii elektrycznej, ale rozświetla większy obszar."
+  },
+  "Chair01_Iron": {
+    "localized_name": "Skórzane krzesło",
+    "description": "Skórzane dekoracyjne krzesło."
+  },
+  "Chair01_Pal": {
+    "localized_name": "Krzesło w kształcie żaby",
+    "description": "Urocze dekoracyjne krzesło."
+  },
+  "Chair01_Stone": {
+    "localized_name": "Antyczne drewniane krzesło",
+    "description": "Antyczne drewniane krzesło dekoracyjne."
+  },
+  "Chair01_Wood": {
+    "localized_name": "Drewniane krzesło",
+    "description": "Drewniane dekoracyjne krzesło."
+  },
+  "Chair02_Iron": {
+    "localized_name": "Żelazne krzesło",
+    "description": "Drewniane dekoracyjne krzesło."
+  },
+  "Chair02_Stone": {
+    "localized_name": "Zielone antyczne drewniane krzesło",
+    "description": "Zielone drewniane antyczne krzesło dekoracyjne."
+  },
+  "CharacterRankUp": {
+    "localized_name": "Kondensator Esencji Pali",
+    "description": "Komora służąca do podnoszenia rangi Pala. Pale mogą przekroczyć swoje fizyczne ograniczenia, jeśli otrzymają skoncentrowany ekstrakt pozyskany z Pala tego samego typu."
+  },
+  "Clock01_Stone": {
+    "localized_name": "Antyczny zegar stojący",
+    "description": "Antyczny dekoracyjny zegar stojący. Uszkodzony — nie wskazuje godziny."
+  },
+  "Clock01_Wall_Iron": {
+    "localized_name": "Zegar ścienny",
+    "description": "Dekoracyjny zegar ścienny. Uszkodzony — nie wskazuje godziny."
+  },
+  "CoalPit": {
+    "localized_name": "Kopalnia węgla",
+    "description": "Obiekt do pozyskiwania: Węgiel. Wydobycie surowca Węgiel to wyczerpująca praca fizyczna. Zleć to zadanie Palowi, który dobrze radzi sobie z górnictwem."
+  },
+  "CompositeDesk": {
+    "localized_name": "Stół kreślarski",
+    "description": "Obiekt, który pozwala łączyć wiele schematów w bardziej zaawansowane."
+  },
+  "ConservationGroupBannerA": {
+    "localized_name": "Flaga Związku Wolnych Pali",
+    "description": "Dekoracyjna flaga Związku Wolnych Pali."
+  },
+  "ConservationGroupBannerB": {
+    "localized_name": "Baner Związku Wolnych Pali",
+    "description": "Dekoracyjny poziomy baner Związku Wolnych Pali."
+  },
+  "Container01_Iron": {
+    "localized_name": "Duży kontener",
+    "description": "Duży kontener do przechowywania przedmiotów. Wzory na nim imitują te pozostawione przez starożytną cywilizację w szczycie rozkwitu."
+  },
+  "CookingStove": {
+    "localized_name": "Kociołek",
+    "description": "Niezbędny do gotowania jedzenia. Użycie kotła pozwala na przygotowanie szerszej gamy posiłków. Do rozpalenia ognia potrzebny jest Pal typu ognistego."
+  },
+  "Cooler": {
+    "localized_name": "Chłodziarka",
+    "description": "Urządzenie wydmuchujące chłodne powietrze, obniżające temperaturę w bazie. Nie zapewnia dużej ulgi podczas upałów, ale pomaga przetrwać umiarkowanie gorące warunki. Do chłodzenia potrzebny jest Pal typu lodowego."
+  },
+  "CoolerBox": {
+    "localized_name": "Skrzynka chłodząca",
+    "description": "Mały magazyn żywności. Przydziel Pala typu lodowego, aby pomóc w zabezpieczeniu przechowywanego jedzenia przed psuciem się."
+  },
+  "CoolerPalFoodBox": {
+    "localized_name": "Chłodziarka na żywność",
+    "description": "Pojemnik na karmę, który można utrzymywać w chłodzie. Przydziel do niej Pala typu lodowego, a przechowywana żywność będzie mniej podatna na psucie."
+  },
+  "CopperPit": {
+    "localized_name": "Obszar wydobycia rudy",
+    "description": "Obiekt do pozyskiwania: Ruda. Wydobycie surowca Ruda to ciężka praca wymagająca wytrzymałości fizycznej. Zleć to zadanie Palom wyspecjalizowanym w górnictwie."
+  },
+  "CopperPit_2": {
+    "localized_name": "Obszar wydobycia rudy II",
+    "description": "Obiekt do pozyskiwania dużych ilości surowca: Ruda. Wydobycie surowca Ruda to ciężka praca wymagająca wytrzymałości fizycznej. Zleć to zadanie Palom wyspecjalizowanym w górnictwie."
+  },
+  "Counter_Wood": {
+    "localized_name": "Drewniana lada",
+    "description": "Drewniana dekoracyjna lada."
+  },
+  "Crusher": {
+    "localized_name": "Kruszarka",
+    "description": "Obiekt do przetwarzania surowców Kamień i Drewno na inne materiały. Wymaga Pala z umiejętnością Nawadnianie do wprawienia w ruch turbiny wodnej."
+  },
+  "CrystalPit": {
+    "localized_name": "Kopalnia kwarcu heksolitu",
+    "description": "Placówka, w której wydobywa się Kwarc heksolitu. Kwarc heksolitu jest trudny do wydobycia i wymaga dużej siły. Powierz to zadanie Palowi specjalizującemu się w górnictwie."
+  },
+  "Curtain01_Wall_Stone": {
+    "localized_name": "Antyczna zasłona",
+    "description": "Antyczna dekoracyjna zasłona. Można ją umieścić na ścianie."
+  },
+  "DamagedScarecrow": {
+    "localized_name": "Manekin treningowy",
+    "description": "Manekin treningowy wyglądający jak Pengullet. Może być ustawiony wyłącznie na otwartej przestrzeni."
+  },
+  "Decal_PalSticker_PinkCat": {
+    "localized_name": "-",
+    "description": "-"
+  },
+  "DefenseBowGun": {
+    "localized_name": "Stacjonarna kusza",
+    "description": "Przydziel Pala do obsługi tej instalacji obronnej. Do działania wymaga: Strzała. Umieść amunicję w skrzyni, a przydzielony Pal automatycznie załaduje broń."
+  },
+  "DefenseMachinegun": {
+    "localized_name": "Stacjonarny karabin maszynowy",
+    "description": "Przydziel Pala do obsługi tej instalacji obronnej. Do działania wymaga: Amunicja: Karabin. Umieść amunicję w skrzyni, a przydzielony Pal automatycznie załaduje broń."
+  },
+  "DefenseMissile": {
+    "localized_name": "Stacjonarna wyrzutnia pocisków",
+    "description": "Przydziel Pala do obsługi tej instalacji obronnej. Do działania wymaga: Amunicja: Rakieta. Umieść amunicję w skrzyni, a przydzielony Pal automatycznie załaduje broń."
+  },
+  "DefenseWait": {
+    "localized_name": "Worki z piaskiem",
+    "description": "Instalacja obronna służąca do ochrony bazy przed wrogami. Umieść w niej Pala, a zignoruje on inne zadania, by pozostać na czatach i przygotować się do walki."
+  },
+  "DefenseWall": {
+    "localized_name": "Kamienna ściana obronna",
+    "description": "Masywna ściana obronna zapobiegająca wtargnięciom wrogów. Wykonana z kamienia, jest dość wytrzymała."
+  },
+  "DefenseWall_Metal": {
+    "localized_name": "Metalowa ściana obronna",
+    "description": "Masywna ściana obronna zapobiegająca wtargnięciom wrogów. Wykonana z metalu, jest niezwykle wytrzymała."
+  },
+  "DefenseWall_Wood": {
+    "localized_name": "Drewniana ściana obronna",
+    "description": "Masywna ściana obronna zapobiegająca wtargnięciom wrogów. Wykonana z drewna, łatwo się niszczy."
+  },
+  "Desk01_Iron": {
+    "localized_name": "Żelazne biurko",
+    "description": "Żelazne dekoracyjne biurko."
+  },
+  "Desk01_Stone": {
+    "localized_name": "Antyczne biurko",
+    "description": "Antyczne dekoracyjne biurko."
+  },
+  "DimensionPalStorage": {
+    "localized_name": "Międzywymiarowy skład Pali",
+    "description": "Obiekt do przechowywania dużej liczby schwytanych Pali. Każdy członek gildii może tam umieszczać i wyjmować Pale. Po ustawieniu jako prywatny może pełnić funkcję osobistego magazynu Pali."
+  },
+  "DismantlingConveyor": {
+    "localized_name": "Taśmociąg do dekompletacji Pali",
+    "description": "Fantastyczne urządzenie, które automatycznie utylizuje każdego Pala umieszczonego w środku."
+  },
+  "DisplayCharacter": {
+    "localized_name": "Klatka wystawowa",
+    "description": "Klatka do obserwacji schwytanych Pali. Pale znajdujące się w środku nie mogą brać udziału w walce ani produkcji, ale nie odczuwają głodu."
+  },
+  "ElectricCooler": {
+    "localized_name": "Elektryczna chłodziarka",
+    "description": "Urządzenie wydmuchujące chłodne powietrze, obniżające temperaturę w bazie. Dzięki zasilaniu elektrycznemu potrafi naprawdę skutecznie schłodzić pomieszczenie. Do chłodzenia potrzebny jest Pal typu lodowego."
+  },
+  "ElectricGenerator": {
+    "localized_name": "Generator prądu",
+    "description": "Generator prądu zasilany przez Pale typu elektrycznego. Bez niego urządzenia elektryczne nie będą działać."
+  },
+  "ElectricGenerator_Large": {
+    "localized_name": "Duży generator prądu",
+    "description": "Generator prądu zasilany przez Pale typu elektrycznego. Większy i bardziej wydajny w wytwarzaniu energii."
+  },
+  "ElectricHatchingPalEgg": {
+    "localized_name": "Elektryczny inkubator jaj",
+    "description": "Urządzenie do inkubacji jaj Pali. Wymaga energii elektrycznej, ale automatycznie utrzymuje odpowiednią temperaturę wewnątrz inkubatora."
+  },
+  "ElectricHeater": {
+    "localized_name": "Elektryczny grzejnik",
+    "description": "Urządzenie wydmuchujące ciepłe powietrze, podnoszące temperaturę w bazie. Dzięki zasilaniu elektrycznemu potrafi naprawdę solidnie ogrzać pomieszczenie. Do rozpalenia ognia potrzebny jest Pal typu ognistego."
+  },
+  "ElectricKitchen": {
+    "localized_name": "Kuchnia elektryczna",
+    "description": "Niezbędna do gotowania jedzenia. Do działania wymaga energii elektrycznej, ale pozwala szybko przygotować dużą liczbę posiłków. Do rozpalenia ognia potrzebny jest Pal typu ognistego."
+  },
+  "EnergyStorage_Electric": {
+    "localized_name": "Akumulator",
+    "description": "Obiekt do magazynowania nadmiaru energii elektrycznej wytwarzanej przez Generator prądu."
+  },
+  "Expedition": {
+    "localized_name": "Stacja ekspedycyjna Pali",
+    "description": "Obiekt, dzięki któremu możesz wysyłać Pale na wyprawy, na przykład do lochów. W trakcie misji walczą, zbierają przedmioty i przynoszą zasoby z powrotem do baz."
+  },
+  "Factory_Hard_01": {
+    "localized_name": "Warsztat wysokiej jakości",
+    "description": "Linia produkcyjna do wytwarzania przedmiotów i ekwipunku. Niewielka przestrzeń robocza ogranicza tempo produkcji. Produkcja wymaga Pali potrafiących pracować rękami."
+  },
+  "Factory_Hard_02": {
+    "localized_name": "Linia produkcyjna",
+    "description": "Linia produkcyjna do wytwarzania przedmiotów i ekwipunku. Dzięki podziałowi Pali na grupy tempo produkcji nieco wzrasta. Produkcja wymaga Pali potrafiących pracować rękami."
+  },
+  "Factory_Hard_03": {
+    "localized_name": "Linia produkcyjna II",
+    "description": "Linia produkcyjna do wytwarzania przedmiotów i ekwipunku. Dzięki sprytnemu zarządzaniu tempo produkcji znacznie wzrosło. Produkcja wymaga Pali potrafiących pracować rękami."
+  },
+  "Factory_Hard_04": {
+    "localized_name": "Warsztat zaawansowanej cywilizacji",
+    "description": "Linia produkcyjna do wytwarzania przedmiotów i ekwipunku. Dzięki zastosowaniu zaawansowanej technologii możliwe jest bardzo szybkie ich wykonanie. Produkcja wymaga Pali potrafiących pracować rękami."
+  },
+  "Factory_Money": {
+    "localized_name": "Linia produkcyjna złotych monet",
+    "description": "Linia produkcyjna do wytwarzania pieniędzy. Praca przy niej obciąża umysł, powodując spadek wartości SAN u Pali. Produkcja wymaga Pali potrafiących pracować rękami."
+  },
+  "FarmBlockV2_Berries": {
+    "localized_name": "Plantacja jagód",
+    "description": "Farma, na której rosną Czerwone jagody. Owoce dojrzewają szybko, ale spożycie ich nie zapewnia dużej wartości odżywczej. Do sadzenia nasion, podlewania i zbierania plonów potrzebnych jest kilka Pali."
+  },
+  "FarmBlockV2_Carrot": {
+    "localized_name": "Plantacja marchewek",
+    "description": "Farma, na której rośnie Marchew. Uprawa zajmuje trochę czasu, ale zwiększa różnorodność posiłków, które możesz przygotować. Do sadzenia nasion, podlewania i zbierania plonów potrzebne jest kilka Pali."
+  },
+  "FarmBlockV2_Lettuce": {
+    "localized_name": "Plantacja sałaty",
+    "description": "Farma, na której rośnie Sałata. Uprawa zajmuje trochę czasu, ale zwiększa różnorodność posiłków, które możesz przygotować. Do sadzenia nasion, podlewania i zbierania plonów potrzebnych jest kilka Pali."
+  },
+  "FarmBlockV2_Onion": {
+    "localized_name": "Plantacja cebuli",
+    "description": "Farma, na której rośnie Cebula. Uprawa zajmuje trochę czasu, ale zwiększa różnorodność posiłków, które możesz przygotować. Do sadzenia nasion, podlewania i zbierania plonów potrzebne jest kilka Pali."
+  },
+  "FarmBlockV2_Potato": {
+    "localized_name": "Plantacja ziemniaków",
+    "description": "Farma, na której rośnie Ziemniak. Uprawa zajmuje trochę czasu, ale zwiększa różnorodność posiłków, które możesz przygotować. Do sadzenia nasion, podlewania i zbierania plonów potrzebne jest kilka Pali."
+  },
+  "FarmBlockV2_tomato": {
+    "localized_name": "Plantacja pomidorów",
+    "description": "Farma, na której rośnie Pomidor. Uprawa zajmuje trochę czasu, ale zwiększa różnorodność posiłków, które możesz przygotować. Do sadzenia nasion, podlewania i zbierania plonów potrzebnych jest kilka Pali."
+  },
+  "FarmBlockV2_wheet": {
+    "localized_name": "Plantacja pszenicy",
+    "description": "Farma, na której rośnie Pszenica. Uprawa wymaga przeciętnej ilości czasu do zbiorów. Do sadzenia nasion, podlewania i zbierania plonów potrzebnych jest kilka Pali."
+  },
+  "Farm_SkillFruits": {
+    "localized_name": "Sad owoców umiejętności",
+    "description": "Farma, na której można uprawiać owoce umiejętności. Wystarczy zasadzić oryginalny owoc, by po czasie zebrać kilka sztuk tego samego rodzaju."
+  },
+  "FastTravelPoint": {
+    "localized_name": "Posąg Wielkiego Orła",
+    "description": "Kamienny posąg w kształcie Pala Chikipi. Umożliwia szybkie przemieszczanie się do miejsca, w którym został ustawiony."
+  },
+  "FireCult_Banner": {
+    "localized_name": "Pionowy baner Bractwa Wiecznego Płomienia",
+    "description": "Dekoracyjny pionowy baner Bractwa Wiecznego Płomienia."
+  },
+  "FireCult_Flag": {
+    "localized_name": "Flaga drużyny Bractwa Wiecznego Płomienia",
+    "description": "Dekoracyjna flaga drużyny Bractwa Wiecznego Płomienia."
+  },
+  "FireStand": {
+    "localized_name": "Świecznik rytualny",
+    "description": "Rytualny świecznik płonący ogniem czczonym przez wyznawców Bractwa Wiecznego Płomienia. Źródło światła, które można ustawić na podłodze. Do jego zapalenia potrzebny jest Pal typu ognistego."
+  },
+  "FishingPond1": {
+    "localized_name": "Łowisko",
+    "description": "Łowisko wyposażone w niezbędny sprzęt. Przypisz do niego Pala, aby zajmował się rekreacyjnym wędkowaniem. Wymagany jest Pal zdolny do pracy fizycznej."
+  },
+  "FishingPond2": {
+    "localized_name": "Duże łowisko",
+    "description": "Duże łowisko wyposażone w niezbędny sprzęt. Większy zbiornik wodny umożliwia złowienie dużych Pali. Wymagany jest Pal zdolny do pracy fizycznej."
+  },
+  "FlourMill": {
+    "localized_name": "Młyn",
+    "description": "Obiekt, w którym mielona jest Pszenica i w efekcie powstaje Mąka. Do mielenia potrzebny jest Pal z umiejętnością Nawadnianie do wprawienia w ruch turbiny wodnej."
+  },
+  "FlowerBed": {
+    "localized_name": "Klomb kwiatowy",
+    "description": "Umieść go w bazie, aby zwiększyć szybkość zbierania surowców. Umieszczenie więcej niż jednego nie zwiększa efektu."
+  },
+  "Fountain": {
+    "localized_name": "Fontanna",
+    "description": "Umieść ją w bazie, aby zwiększyć szybkość nawadniania. Umieszczenie więcej niż jednej nie zwiększa efektu."
+  },
+  "Fudukue": {
+    "localized_name": "Biurko w stylu japońskim",
+    "description": "Ozdobne biurko do pisania. Doskonale pasuje do budowli w japońskim stylu."
+  },
+  "GarbageBag_Iron": {
+    "localized_name": "Worek na śmieci",
+    "description": "Dekoracyjny worek na śmieci."
+  },
+  "Glass_DiagonalWall": {
+    "localized_name": "Szklana skośna ściana",
+    "description": "Ściana skośna stawiana na trójkątnym fundamencie w celu powstrzymania intruzów. Wykonana ze szkła przemysłowego, jest bardzo wytrzymała."
+  },
+  "Glass_DoorWall": {
+    "localized_name": "Szklana ściana i drzwi",
+    "description": "Drzwi montowane na fundamencie. Służą jako wejście. Wykonane z przemysłowego szkła, są całkiem wytrzymałe."
+  },
+  "Glass_Fence": {
+    "localized_name": "Szklany płot",
+    "description": "Ogrodzenie chroniące przed upadkiem z fundamentów lub dachów. Wykonane ze szkła przemysłowego, jest bardzo wytrzymałe."
+  },
+  "Glass_PyramidRoof": {
+    "localized_name": "Szklany dach piramidalny",
+    "description": "Stożkowy dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany ze szkła przemysłowego, jest bardzo wytrzymały."
+  },
+  "Glass_SlantedRoof": {
+    "localized_name": "Szklany skośny dach",
+    "description": "Skośny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z przemysłowego szkła, jest całkiem wytrzymały."
+  },
+  "Glass_SlopedRoofCorner": {
+    "localized_name": "Szklany skośny dach trójkątny",
+    "description": "Skośny dach narożny stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany ze szkła przemysłowego, jest bardzo wytrzymały."
+  },
+  "Glass_TriangleFoundation": {
+    "localized_name": "Szklany trójkątny fundament",
+    "description": "Trójkątny fundament do stawiania ścian lub innych struktur. Wykonany ze szkła przemysłowego, jest bardzo wytrzymały."
+  },
+  "Glass_TriangleRoof": {
+    "localized_name": "Szklany trójkątny dach",
+    "description": "Trójkątny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany ze szkła przemysłowego, jest bardzo wytrzymały."
+  },
+  "Glass_TriangleStairsCorner": {
+    "localized_name": "Szklany dach narożny",
+    "description": "Narożny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany ze szkła przemysłowego, jest bardzo wytrzymały."
+  },
+  "Glass_TriangleWall": {
+    "localized_name": "Szklana trójkątna ściana",
+    "description": "Trójkątna ściana stawiana na fundamencie w celu powstrzymania intruzów. Wykonana z przemysłowego szkła, jest całkiem wytrzymała."
+  },
+  "Glass_TriangleWallReverse": {
+    "localized_name": "Szklana trójkątna ściana (odwrócona)",
+    "description": "Trójkątna ściana (odwrócona) stawiana na fundamencie. Wykonana ze szkła przemysłowego, jest bardzo wytrzymała."
+  },
+  "Glass_WallGate": {
+    "localized_name": "Szklane przejście dla Pali",
+    "description": "Przejście dla Pali, stawiane na fundamencie, pełniące funkcję wejścia i wyjścia. Wykonane ze szkła przemysłowego, jest bardzo wytrzymałe."
+  },
+  "Glass_WindowWall": {
+    "localized_name": "Szklana ściana i okno",
+    "description": "Ściana z oknami, stawiana na fundamencie w celu powstrzymania intruzów. Wykonana z przemysłowego szkła, jest całkiem wytrzymała."
+  },
+  "Glass_foundation": {
+    "localized_name": "Szklany fundament",
+    "description": "Fundament do stawiania ścian lub innych struktur. Wykonany z przemysłowego szkła, jest całkiem wytrzymały."
+  },
+  "Glass_roof": {
+    "localized_name": "Szklany dach",
+    "description": "Dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z przemysłowego szkła, jest całkiem wytrzymały."
+  },
+  "Glass_stair": {
+    "localized_name": "Szklane schody",
+    "description": "Schody umieszczane pod fundamentem lub dachem, umożliwiające wejście na górę. Wykonane z przemysłowego szkła, są całkiem wytrzymałe."
+  },
+  "Glass_wall": {
+    "localized_name": "Szklana ściana",
+    "description": "Ściany stawiane na fundamentach w celu powstrzymania intruzów. Wykonane z przemysłowego szkła, są całkiem wytrzymałe."
+  },
+  "GlobalPalStorage": {
+    "localized_name": "Globalny Palbox",
+    "description": "Obiekt służący do przechowywania danych genetycznych Pali i odtwarzania ich na podstawie tych informacji. Zgromadzone dane można także przenosić do innych światów."
+  },
+  "Globe01_Stone": {
+    "localized_name": "Antyczny globus",
+    "description": "Antyczny dekoracyjny globus."
+  },
+  "GoalSoccer_Iron": {
+    "localized_name": "Bramka piłkarska",
+    "description": "Dekoracyjna bramka piłkarska. Wkopanie do niej Pala takiego jak SheepBall nie da ci żadnych punktów."
+  },
+  "GuardianDogStatue": {
+    "localized_name": "Posąg Yakumo",
+    "description": "Dekoracyjny Posąg Yakumo"
+  },
+  "GuildChest": {
+    "localized_name": "Skrzynia gildii",
+    "description": "Skrzynia, z której można błyskawicznie wysyłać i odbierać przedmioty przez podprzestrzeń. Przedmioty w środku są współdzielone przez wszystkie bazy, w których zostanie umieszczona."
+  },
+  "HatchingPalEgg": {
+    "localized_name": "Inkubator jaj",
+    "description": "Służy do inkubacji jaj Pali. Jeśli pozostawisz w nim jajo Pala, po pewnym czasie automatycznie wykluje się z niego młody Pal."
+  },
+  "Headstone": {
+    "localized_name": "Nagrobek",
+    "description": "Nagrobek, na którym można umieścić dowolny tekst. Może służyć do zapisywania informacji."
+  },
+  "Heater": {
+    "localized_name": "Grzejnik",
+    "description": "Urządzenie wydmuchujące ciepłe powietrze, podnoszące temperaturę w bazie. Nie zapewnia dużego ciepła, ale pomaga przetrwać umiarkowanie zimne warunki. Do rozpalenia ognia potrzebny jest Pal typu ognistego."
+  },
+  "HugeKitchen": {
+    "localized_name": "Duży piec kamienny",
+    "description": "Niezbędny do przygotowywania jedzenia. Dzięki większym rozmiarom kilka Pali może współpracować przy gotowaniu. Do rozpalenia ognia potrzebny jest Pal typu ognistego."
+  },
+  "Hunter_Banner": {
+    "localized_name": "Pionowy baner gangu kłusowników",
+    "description": "Dekoracyjny pionowy baner gangu kłusowników."
+  },
+  "Hunter_Flag": {
+    "localized_name": "Flaga drużyny gangu kłusowników",
+    "description": "Dekoracyjna flaga drużyny gangu kłusowników."
+  },
+  "Hunter_GangFlag": {
+    "localized_name": "Flaga gangu kłusowników",
+    "description": "Dekoracyjna flaga gangu kłusowników."
+  },
+  "IceCrusher": {
+    "localized_name": "Chłodząca kruszarka",
+    "description": "Maszyna do rozdrabniania surowca Ruda i przekształcania go w inne materiały. Wymaga zasilania oraz Pala z umiejętnością Chłodzenie, lecz jest bardzo wydajna."
+  },
+  "Iron_DiagonalWall": {
+    "localized_name": "Metalowa skośna ściana",
+    "description": "Ściana skośna, stawiana na trójkątnym fundamencie w celu powstrzymania intruzów. Wykonana z metalu, jest niezwykle wytrzymała."
+  },
+  "Iron_Fence": {
+    "localized_name": "Metalowy płot",
+    "description": "Ogrodzenie chroniące przed upadkiem z fundamentów lub dachów. Wykonane z metalu, jest niezwykle wytrzymałe."
+  },
+  "Iron_PyramidRoof": {
+    "localized_name": "Metalowy dach piramidalny",
+    "description": "Stożkowy dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z metalu, jest niezwykle wytrzymały."
+  },
+  "Iron_SlopedRoofCorner": {
+    "localized_name": "Metalowy skośny dach trójkątny",
+    "description": "Skośny dach narożny stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z metalu, jest niezwykle wytrzymały."
+  },
+  "Iron_TriangleFoundation": {
+    "localized_name": "Metalowy trójkątny fundament",
+    "description": "Trójkątny fundament do stawiania ścian lub innych struktur. Wykonany z metalu, jest niezwykle wytrzymały."
+  },
+  "Iron_TriangleRoof": {
+    "localized_name": "Metalowy trójkątny dach",
+    "description": "Trójkątny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z metalu, jest niezwykle wytrzymały."
+  },
+  "Iron_TriangleStairsCorner": {
+    "localized_name": "Metalowy dach narożny",
+    "description": "Narożny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z metalu, jest niezwykle wytrzymały."
+  },
+  "Iron_TriangleWallReverse": {
+    "localized_name": "Metalowa trójkątna ściana (odwrócona)",
+    "description": "Trójkątna ściana (odwrócona) stawiana na fundamencie. Wykonana z metalu, jest niezwykle wytrzymała."
+  },
+  "Iron_WallGate": {
+    "localized_name": "Metalowe przejście dla Pali",
+    "description": "Przejście dla Pali, stawiane na fundamencie, pełniące funkcję wejścia i wyjścia. Wykonane z metalu, jest niezwykle wytrzymałe."
+  },
+  "Irori": {
+    "localized_name": "Japońskie palenisko",
+    "description": "Dekoracyjne palenisko. Doskonale pasuje do budowli w japońskim stylu."
+  },
+  "ItemBooth": {
+    "localized_name": "Pchli targ (przedmioty)",
+    "description": "Obiekt do sprzedaży przedmiotów. Umieszczając produkty na liście sprzedaży, możesz sprzedawać je innym graczom. Przydziel do niego Pala typu lodowego, a przechowywana żywność będzie mniej podatna na psucie się."
+  },
+  "ItemChest": {
+    "localized_name": "Drewniana skrzynia",
+    "description": "Służy do przechowywania przedmiotów. Wykonana z drewna, łatwo się psuje. Raczej nie jest to najlepsze miejsce do przechowywania cennych rzeczy."
+  },
+  "ItemChest_02": {
+    "localized_name": "Metalowa skrzynia",
+    "description": "Służy do przechowywania przedmiotów. Wzmocniona metalem, jest dość wytrzymała. Większy rozmiar umożliwia przechowywanie większej liczby rzeczy."
+  },
+  "ItemChest_03": {
+    "localized_name": "Skrzynia z rafinowanego metalu",
+    "description": "Służy do przechowywania przedmiotów. Wykonana z żelaza, jest niezwykle wytrzymała. Przydaje się jako duża, bezpieczna skrzynia do składowania."
+  },
+  "ItemChest_04": {
+    "localized_name": "Zaawansowana skrzynia",
+    "description": "Służy do przechowywania przedmiotów. Jest dość wytrzymała i oferuje sporo miejsca na składowanie. Przydatna jako duża, bezpieczna skrzynia do przechowywania przedmiotów."
+  },
+  "Ivy01": {
+    "localized_name": "Duży bluszcz ścienny",
+    "description": "Duży dekoracyjny bluszcz. Można go umieścić na ścianie."
+  },
+  "Ivy02": {
+    "localized_name": "Mały bluszcz ścienny",
+    "description": "Mały dekoracyjny bluszcz. Można go umieścić na ścianie."
+  },
+  "Ivy03": {
+    "localized_name": "Poziomy bluszcz ścienny",
+    "description": "Dekoracyjny bluszcz poziomy. Można go umieścić na ścianie."
+  },
+  "JapaneseStyle_DiagonalWall": {
+    "localized_name": "Skośna ściana w stylu japońskim",
+    "description": "Ściana skośna, stawiana na trójkątnym fundamencie w celu powstrzymania intruzów. Umożliwia tworzenie gustownej architektury w stylu japońskim."
+  },
+  "JapaneseStyle_DoorWall_01": {
+    "localized_name": "Drzwi w stylu japońskim A",
+    "description": "Drzwi montowane na fundamencie. Służą jako wejście. Umożliwiają tworzenie gustownej architektury w stylu japońskim."
+  },
+  "JapaneseStyle_DoorWall_02": {
+    "localized_name": "Drzwi w stylu japońskim B",
+    "description": "Japońskie przesuwne drzwi (shōji) montowane na fundamencie. Do użytku wewnątrz domu. Umożliwiają tworzenie gustownej architektury w stylu japońskim."
+  },
+  "JapaneseStyle_DoorWall_03": {
+    "localized_name": "Drzwi w stylu japońskim C",
+    "description": "Japońskie przesuwne drzwi (fusuma) montowane na fundamencie. Do użytku wewnątrz domu. Umożliwiają tworzenie gustownej architektury w stylu japońskim."
+  },
+  "JapaneseStyle_Fence": {
+    "localized_name": "Plot w stylu japońskim",
+    "description": "Ogrodzenie chroniące przed upadkiem z fundamentów lub dachów. Umożliwia tworzenie gustownej architektury w stylu japońskim."
+  },
+  "JapaneseStyle_Pillar": {
+    "localized_name": "Filar w stylu japońskim",
+    "description": "Kolumna wspierająca konstrukcję. Umożliwia tworzenie gustownej architektury w stylu japońskim."
+  },
+  "JapaneseStyle_PyramidRoof": {
+    "localized_name": "Dach piramidalny w stylu japońskim",
+    "description": "Stożkowy dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Umożliwia tworzenie gustownej architektury w stylu japońskim."
+  },
+  "JapaneseStyle_SlantedRoof": {
+    "localized_name": "Skośny dach w stylu japońskim",
+    "description": "Skośny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Umożliwia tworzenie gustownej architektury w stylu japońskim."
+  },
+  "JapaneseStyle_SlopedRoofCorner": {
+    "localized_name": "Trójkątny skośny dach w stylu japońskim",
+    "description": "Skośny dach narożny stawiany na ścianach, chroniący przed deszczem i wiatrem. Umożliwia tworzenie gustownej architektury w stylu japońskim."
+  },
+  "JapaneseStyle_TriangleFoundation": {
+    "localized_name": "Trójkątny fundament w stylu japońskim",
+    "description": "Trójkątny fundament do stawiania ścian lub innych struktur. Umożliwia tworzenie gustownej architektury w stylu japońskim."
+  },
+  "JapaneseStyle_TriangleRoof_01": {
+    "localized_name": "Trójkątny dach w stylu japońskim A",
+    "description": "Trójkątny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Górna powierzchnia pokryta tatami. Umożliwia tworzenie gustownej architektury w stylu japońskim."
+  },
+  "JapaneseStyle_TriangleRoof_02": {
+    "localized_name": "Trójkątny dach w stylu japońskim B",
+    "description": "Trójkątny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Górna powierzchnia pokryta dachówkami. Umożliwia tworzenie gustownej architektury w stylu japońskim."
+  },
+  "JapaneseStyle_TriangleStairsCorner_01": {
+    "localized_name": "Narożny dach w stylu japońskim",
+    "description": "Narożny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Umożliwia tworzenie gustownej architektury w stylu japońskim."
+  },
+  "JapaneseStyle_TriangleWall": {
+    "localized_name": "Trójkątna ściana w stylu japońskim",
+    "description": "Trójkątna ściana stawiana na fundamencie w celu powstrzymania intruzów. Umożliwia tworzenie gustownej architektury w stylu japońskim."
+  },
+  "JapaneseStyle_TriangleWallReverse": {
+    "localized_name": "Trójkątna ściana w stylu japońskim (odwrócona)",
+    "description": "Trójkątna ściana (odwrócona) stawiana na fundamencie. Umożliwia tworzenie gustownej architektury w stylu japońskim."
+  },
+  "JapaneseStyle_WallGate": {
+    "localized_name": "Przejście dla Pali w stylu japońskim",
+    "description": "Przejście dla Pali, stawiane na fundamencie, pełniące funkcję wejścia i wyjścia. Umożliwia tworzenie gustownej architektury w stylu japońskim."
+  },
+  "JapaneseStyle_WindowWall": {
+    "localized_name": "Ściana z oknem w stylu japońskim",
+    "description": "Ściana z oknami, stawiana na fundamencie w celu powstrzymania intruzów. Umożliwia tworzenie gustownej architektury w stylu japońskim."
+  },
+  "JapaneseStyle_foundation": {
+    "localized_name": "Fundament w stylu japońskim",
+    "description": "Fundament do stawiania ścian lub innych struktur. Umożliwia tworzenie gustownej architektury w stylu japońskim."
+  },
+  "JapaneseStyle_roof_01": {
+    "localized_name": "Dach w stylu japońskim A",
+    "description": "Dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Umożliwia tworzenie gustownej architektury w stylu japońskim."
+  },
+  "JapaneseStyle_roof_02": {
+    "localized_name": "Dach w stylu japońskim B",
+    "description": "Dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Umożliwia tworzenie gustownej architektury w stylu japońskim."
+  },
+  "JapaneseStyle_stair": {
+    "localized_name": "Schody w stylu japońskim",
+    "description": "Schody umieszczane pod fundamentem lub dachem, umożliwiające wejście na górę. Umożliwiają tworzenie gustownej architektury w stylu japońskim."
+  },
+  "JapaneseStyle_wall_01": {
+    "localized_name": "Ściana w stylu japońskim",
+    "description": "Ściany stawiane na fundamentach w celu powstrzymania intruzów. Umożliwiają tworzenie gustownej architektury w stylu japońskim."
+  },
+  "Kakejiku": {
+    "localized_name": "Zwój ścienny",
+    "description": "Dekoracyjny zwój ścienny. Doskonale pasuje do budowli w japońskim stylu."
+  },
+  "Koro": {
+    "localized_name": "Kadzielnica",
+    "description": "Dekoracyjna kadzielnica. Doskonale pasuje do budowli w japońskim stylu."
+  },
+  "Lab": {
+    "localized_name": "Laboratorium pracy Pali",
+    "description": "Obiekt do prowadzenia badań nad różnymi zadaniami wykonywanymi przez Pale. Przydzielając im zadania w tym miejscu, możesz rozwijać badania i zdobywać rozmaite korzyści."
+  },
+  "Lamp": {
+    "localized_name": "Lampa stojąca",
+    "description": "Źródło światła, które oświetla bazę nawet nocą. Wymaga energii elektrycznej, ale rozświetla większy obszar."
+  },
+  "LanternTop": {
+    "localized_name": "Lampion",
+    "description": "Dekoracyjny lampion."
+  },
+  "LargeCeilingLamp": {
+    "localized_name": "Duża lampa sufitowa",
+    "description": "Źródło światła, które oświetla bazę nawet nocą. Można je zamontować na suficie. Wymaga znacznej ilości energii elektrycznej, ale rozświetla jeszcze większy obszar."
+  },
+  "LargeLamp": {
+    "localized_name": "Duża lampa na stojaku",
+    "description": "Źródło światła, które oświetla bazę nawet nocą. Wymaga znacznej ilości energii elektrycznej, ale rozświetla jeszcze większy obszar."
+  },
+  "Light_CandleSticks_Top": {
+    "localized_name": "Żyrandol",
+    "description": "Żyrandol zapewniający oświetlenie. Do działania wymaga energii elektrycznej."
+  },
+  "Light_CandleSticks_Wall": {
+    "localized_name": "Lampa ścienna",
+    "description": "Lampa ścienna zapewniająca oświetlenie. Do działania wymaga energii elektrycznej."
+  },
+  "Light_FirePlace01": {
+    "localized_name": "Ceglany kominek",
+    "description": "Ceglany kominek zapewniający oświetlenie. Musi zostać rozpalony przez Pala typu ognistego."
+  },
+  "Light_FirePlace02": {
+    "localized_name": "Kominek",
+    "description": "Kominek zapewniający oświetlenie. Musi zostać rozpalony przez Pala typu ognistego."
+  },
+  "Light_FloorLamp01": {
+    "localized_name": "Antyczna brązowa lampa podłogowa",
+    "description": "Zabytkowa brązowa lampa podłogowa zapewniająca oświetlenie. Do działania wymaga energii elektrycznej."
+  },
+  "Light_FloorLamp02": {
+    "localized_name": "Antyczna czerwona lampa podłogowa",
+    "description": "Zabytkowa czerwona lampa podłogowa zapewniająca oświetlenie. Do działania wymaga energii elektrycznej."
+  },
+  "Light_LightPole01": {
+    "localized_name": "Prosta latarnia uliczna",
+    "description": "Prosta latarnia uliczna zapewniająca oświetlenie. Do działania wymaga energii elektrycznej."
+  },
+  "Light_LightPole02": {
+    "localized_name": "Podwójna latarnia uliczna",
+    "description": "Podwójna latarnia uliczna zapewniająca oświetlenie. Do działania wymaga energii elektrycznej."
+  },
+  "Light_LightPole03": {
+    "localized_name": "Latarnia uliczna w stylu retro",
+    "description": "Retro latarnia uliczna zapewniająca oświetlenie. Do działania wymaga energii elektrycznej."
+  },
+  "Light_LightPole04": {
+    "localized_name": "Stylowa latarnia uliczna",
+    "description": "Stylowa latarnia uliczna zapewniająca oświetlenie. Do działania wymaga energii elektrycznej."
+  },
+  "LilyQueenStatue": {
+    "localized_name": "Posąg Lyleen",
+    "description": "Dekoracyjny posąg Lyleen."
+  },
+  "MachineGame01_Iron": {
+    "localized_name": "Automat z chwytakiem",
+    "description": "Dekoracyjny automat do gry łapa szczęścia. Uszkodzony — nie da się na nim grać."
+  },
+  "MachineVending01_Iron": {
+    "localized_name": "Automat z colą",
+    "description": "Dekoracyjny automat z colą. Nie można w nim kupować przedmiotów."
+  },
+  "ManualElectricGenerator": {
+    "localized_name": "Generator napędzany siłą ludzką",
+    "description": "Obiekt zamieniający ruch obrotowy w energię elektryczną. Nie jest zbyt wydajny, a Pale pracujące przy nim tracą wartość SAN, lecz zdobywają przy tym punkty doświadczenia."
+  },
+  "MedicalPalBed_02": {
+    "localized_name": "Słomiane łóżko dla Pala",
+    "description": "Słomiane łóżko dla Pali. Pale mogą na nim lub spać w nocy lub wypoczywać, by leczyć obrażenia. Nie jest wygodne, ale lepsze to niż nic."
+  },
+  "MedicalPalBed_03": {
+    "localized_name": "Puszyste łóżko dla Pala",
+    "description": "Puszyste łóżko zapewniające Palom porządny odpoczynek. Pale mogą na nim spać w nocy lub wypoczywać, by leczyć obrażenia. Pale uwielbiają wylegiwać się w miękkich posłaniach jak to."
+  },
+  "MedicalPalBed_04": {
+    "localized_name": "Duże łóżko dla Pala",
+    "description": "Puszyste łóżko zapewniające Palom porządny odpoczynek. Pale mogą na nim spać w nocy lub wypoczywać, by leczyć obrażenia. Nawet duże osobniki mogą spokojnie wypocząć na takim posłaniu."
+  },
+  "MedicalPalBed_05": {
+    "localized_name": "Kapsuła Pala",
+    "description": "Kapsuła lecznicza dla Pali. Używana, gdy Pale są ranne lub potrzebują odpoczynku w nocy. Dzięki postępowi technologicznemu zwiększono skuteczność leczenia."
+  },
+  "MedicineFacility_01": {
+    "localized_name": "Średniowieczny stół apteczny",
+    "description": "Warsztat do wytwarzania lekarstw dla Pali. Może produkować wyłącznie proste medykamenty. Obsługę powierz Palowi potrafiącemu je wytwarzać."
+  },
+  "MedicineFacility_02": {
+    "localized_name": "Elektryczny stół apteczny",
+    "description": "Warsztat do wytwarzania lekarstw dla Pali. Wymaga energii elektrycznej, ale pozwala na produkcję wysokiej jakości medykamentów. Obsługę powierz Palowi potrafiącemu je wytwarzać."
+  },
+  "MedicineFacility_03": {
+    "localized_name": "Zaawansowany stół apteczny",
+    "description": "Obiekt do tworzenia lekarstw na choroby Pali. Dzięki zaawansowanej technologii potrafi także wytwarzać nieznane medykamenty. Zleć to zadanie Palowi umiejącemu pracować z medykamentami."
+  },
+  "Metal_DoorWall": {
+    "localized_name": "Metalowe drzwi",
+    "description": "Drzwi montowane na fundamencie. Służą jako wejście. Wykonane z metalu, są niezwykle wytrzymałe."
+  },
+  "Metal_Gate": {
+    "localized_name": "Metalowa brama",
+    "description": "Brama wystarczająco duża, by mogły przez nią przechodzić duże Pale. Wykonana z metalu, jest niezwykle wytrzymała."
+  },
+  "Metal_SlantedRoof": {
+    "localized_name": "Metalowy skośny dach",
+    "description": "Skośny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z metalu, jest niezwykle wytrzymały."
+  },
+  "Metal_TriangleWall": {
+    "localized_name": "Metalowa trójkątna ściana",
+    "description": "Trójkątna ściana stawiana na fundamencie w celu powstrzymania intruzów. Wykonana z metalu, jest niezwykle wytrzymała."
+  },
+  "Metal_WindowWall": {
+    "localized_name": "Metalowa ściana z oknem",
+    "description": "Ściana stawiana na fundamencie w celu powstrzymania intruzów. Znajduje się w niej okno. Wykonana z metalu, jest niezwykle wytrzymała."
+  },
+  "Metal_foundation": {
+    "localized_name": "Metalowy fundament",
+    "description": "Fundament do stawiania ścian lub innych struktur. Wykonany z metalu, jest niezwykle wytrzymały."
+  },
+  "Metal_roof": {
+    "localized_name": "Metalowy dach",
+    "description": "Dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z metalu, jest niezwykle wytrzymały."
+  },
+  "Metal_stair": {
+    "localized_name": "Metalowe schody",
+    "description": "Schody umieszczane pod fundamentem lub dachem, umożliwiające wejście na górę. Wykonane z metalu, są niezwykle wytrzymałe."
+  },
+  "Metal_wall": {
+    "localized_name": "Metalowa ściana",
+    "description": "Ściany stawiane na fundamentach w celu powstrzymania intruzów. Wykonane z metalu, są niezwykle wytrzymałe."
+  },
+  "MiningTool": {
+    "localized_name": "Wózek górniczy",
+    "description": "Umieść je w bazie, aby zwiększyć szybkość wydobycia. Umieszczenie więcej niż jednego zestawu nie zwiększa efektu."
+  },
+  "Mirror01_Stone": {
+    "localized_name": "Antyczne owalne lustro",
+    "description": "Antyczne owalne lustro dekoracyjne."
+  },
+  "Mirror01_Wall_Stone": {
+    "localized_name": "Antyczne lustro ścienne",
+    "description": "Antyczne dekoracyjne lustro ścienne. Można je umieścić na ścianie."
+  },
+  "Mirror02_Stone": {
+    "localized_name": "Antyczne lustro",
+    "description": "Antyczne dekoracyjne lustro."
+  },
+  "MonsterFarm": {
+    "localized_name": "Ranczo",
+    "description": "Farma do hodowli Pali przypominających owce i ptaki. Przydziel Pala z odpowiednią Umiejętnością Partnera do farmy, aby rozpocząć produkcję przedmiotów."
+  },
+  "MultiElectricHatchingPalEgg": {
+    "localized_name": "Duży elektryczny inkubator jaj",
+    "description": "Urządzenie do inkubacji jaj Pali. Wymaga zasilania, ale umożliwia jednoczesną inkubację wielu jaj w optymalnej temperaturze."
+  },
+  "MultiHatchingPalEgg": {
+    "localized_name": "Duży inkubator jaj",
+    "description": "Urządzenie służące do inkubacji jaj Pali. Automatycznie utrzymuje odpowiednią temperaturę, umożliwiając jednoczesne wykluwanie wielu jaj."
+  },
+  "Ninja_Banner": {
+    "localized_name": "Pionowy baner Księżycowego Kwiatu",
+    "description": "Dekoracyjny pionowy baner Księżycowego Kwiatu."
+  },
+  "Ninja_Flag": {
+    "localized_name": "Flaga drużyny Księżycowego Kwiatu",
+    "description": "Dekoracyjna flaga drużyny Księżycowego Kwiatu."
+  },
+  "OilPump": {
+    "localized_name": "Ekstraktor ropy naftowej",
+    "description": "Sprzęt do wydobycia surowca: Ropa naftowa z pól naftowych. Do działania niezbędne jest zasilanie."
+  },
+  "OlympicCauldron": {
+    "localized_name": "Palenisko",
+    "description": "Umieść je w bazie, aby zwiększyć szybkość rozpalania ognia. Umieszczenie więcej niż jednego nie zwiększa efektu."
+  },
+  "OperatingTable": {
+    "localized_name": "Stół operacyjny dla Pali",
+    "description": "Placówka, w której przeprowadza się operację na Palach, aby zmienić ich płeć lub umiejętności pasywne."
+  },
+  "PalBooth": {
+    "localized_name": "Pchli targ (Pale)",
+    "description": "Obiekt do sprzedaży Pali. Umieszczając Pale na liście sprzedaży, możesz sprzedawać je innym graczom. Przydziel do niego Pala typu lodowego, a przechowywana żywność będzie mniej podatna na psucie się."
+  },
+  "PalBoxV2": {
+    "localized_name": "Palbox",
+    "description": "Struktura do przechowywania schwytanych Pali. Przebywające w niej osobniki stopniowo regenerują zdrowie. Obszar wokół tego obiektu staje się bazą."
+  },
+  "PalCage": {
+    "localized_name": "Pusta klatka",
+    "description": "Dekoracyjna pusta klatka."
+  },
+  "PalFoodBox": {
+    "localized_name": "Karmnik",
+    "description": "Pojemnik na jedzenie dla Pali. Gdy są głodne, same sięgną po jedzenie. Dbaj o jego regularne uzupełnianie, by utrzymać je w dobrym nastroju."
+  },
+  "PalMedicineBox": {
+    "localized_name": "Regał na medykamenty",
+    "description": "Półka na leki. Chore Pale same przyjdą tu po lekarstwo. Pamiętaj, żeby regularnie uzupełniać zapasy."
+  },
+  "Partition_Stone": {
+    "localized_name": "Antyczny parawan",
+    "description": "Antyczny dekoracyjny parawan."
+  },
+  "Piano01_Stone": {
+    "localized_name": "Fortepian",
+    "description": "Dekoracyjny fortepian. Nie można na nim grać."
+  },
+  "Piano02_Stone": {
+    "localized_name": "Pianino",
+    "description": "Dekoracyjne pianino. Nie można na nim grać."
+  },
+  "PipeClay01_Iron": {
+    "localized_name": "Gliniana rura",
+    "description": "Dekoracyjna gliniana rura."
+  },
+  "Plant01_Plant": {
+    "localized_name": "Roślina doniczkowa",
+    "description": "Dekoracyjna roślina doniczkowa."
+  },
+  "Plant02_Plant": {
+    "localized_name": "Roślina doniczkowa i krzesło",
+    "description": "Dekoracyjna roślina doniczkowa i krzesło."
+  },
+  "Plant03_Plant": {
+    "localized_name": "Roślina doniczkowa na stół",
+    "description": "Dekoracyjna roślina doniczkowa na stół."
+  },
+  "Plant04_Plant": {
+    "localized_name": "Roślina w doniczce",
+    "description": "Dekoracyjna roślina w doniczce."
+  },
+  "PlayerBed_02": {
+    "localized_name": "Liche łóżko",
+    "description": "Prymitywne łóżko dla ludzi. Możesz na nim spać w nocy lub wypoczywać, by leczyć obrażenia. Nie wyśpisz się porządnie bez dachu nad głową."
+  },
+  "PlayerBed_03": {
+    "localized_name": "Porządne łóżko",
+    "description": "Puszyste łóżko dla ludzi. Możesz na nim spać w nocy lub wypoczywać, by leczyć obrażenia. Nie wyśpisz się porządnie bez dachu nad głową."
+  },
+  "Police_Banner": {
+    "localized_name": "Pionowy baner SOWP",
+    "description": "Dekoracyjny pionowy baner SOWP."
+  },
+  "Police_Flag": {
+    "localized_name": "Flaga drużyny SOWP",
+    "description": "Dekoracyjna flaga drużyny SOWP."
+  },
+  "QuartzPit": {
+    "localized_name": "Kopalnia czystego kwarcu",
+    "description": "Obiekt, z pomocą którego pozyskuje się Czysty kwarc. Wydobycie surowca Czysty kwarc to ciężka praca wymagająca wytrzymałości fizycznej. Zleć to zadanie Palom wyspecjalizowanym w górnictwie."
+  },
+  "Refrigerator": {
+    "localized_name": "Lodówka",
+    "description": "Duży magazyn żywności. Przydziel Pala typu lodowego, aby pomóc w zabezpieczeniu przechowywanego jedzenia przed psuciem się."
+  },
+  "RepairBench": {
+    "localized_name": "Stół naprawczy",
+    "description": "Stół warsztatowy do naprawy uszkodzonych narzędzi. Do naprawy wymagane są odpowiednie materiały."
+  },
+  "Rug01_Stone": {
+    "localized_name": "Antyczny dywan",
+    "description": "Antyczny dekoracyjny dywan."
+  },
+  "Rug02_Stone": {
+    "localized_name": "Antyczny czerwony dywan",
+    "description": "Antyczny czerwony dekoracyjny dywan."
+  },
+  "Rug03_Stone": {
+    "localized_name": "Antyczny zielony dywan",
+    "description": "Antyczny zielony dekoracyjny dywan."
+  },
+  "Rug04_Stone": {
+    "localized_name": "Antyczny podłużny dywan",
+    "description": "Antyczny podłużny dekoracyjny dywan."
+  },
+  "Rug_Wood": {
+    "localized_name": "-",
+    "description": "-"
+  },
+  "SF_Chair": {
+    "localized_name": "Krzesło w stylu laboratoryjnym",
+    "description": "Dekoracyjne krzesło w stylu laboratoryjnym."
+  },
+  "SF_Desk": {
+    "localized_name": "Biurko w stylu laboratoryjnym",
+    "description": "Dekoracyjne biurko w stylu laboratoryjnym."
+  },
+  "SF_DiagonalWall": {
+    "localized_name": "Minimalistyczna skośna ściana",
+    "description": "Ściana skośna, stawiana na trójkątnym fundamencie w celu powstrzymania intruzów. Umożliwia tworzenie minimalistycznych, modernistycznych konstrukcji."
+  },
+  "SF_DoorWall": {
+    "localized_name": "Minimalistyczna ściana z drzwiami",
+    "description": "Drzwi montowane na fundamencie. Służą jako wejście. Umożliwiają tworzenie minimalistycznych, modernistycznych konstrukcji."
+  },
+  "SF_Fence": {
+    "localized_name": "Minimalistyczny płot",
+    "description": "Ogrodzenie chroniące przed upadkiem z fundamentów lub dachów. Umożliwia tworzenie minimalistycznych, nowoczesnych konstrukcji."
+  },
+  "SF_PyramidRoof": {
+    "localized_name": "Minimalistyczny dach piramidalny",
+    "description": "Stożkowy dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Umożliwia tworzenie minimalistycznych, modernistycznych konstrukcji."
+  },
+  "SF_SlantedRoof": {
+    "localized_name": "Minimalistyczny dach skośny",
+    "description": "Skośny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Umożliwia tworzenie minimalistycznych, modernistycznych konstrukcji."
+  },
+  "SF_SlopedRoofCorner": {
+    "localized_name": "Minimalistyczny trójkątny skośny dach",
+    "description": "Skośny dach narożny stawiany na ścianach, chroniący przed deszczem i wiatrem. Umożliwia tworzenie minimalistycznych, modernistycznych konstrukcji."
+  },
+  "SF_TriangleFoundation": {
+    "localized_name": "Minimalistyczny trójkątny fundament",
+    "description": "Trójkątny fundament do stawiania ścian lub innych struktur. Umożliwia tworzenie minimalistycznych, modernistycznych konstrukcji."
+  },
+  "SF_TriangleRoof": {
+    "localized_name": "Minimalistyczny trójkątny dach",
+    "description": "Trójkątny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Umożliwia tworzenie minimalistycznych, modernistycznych konstrukcji."
+  },
+  "SF_TriangleStairsCorner": {
+    "localized_name": "Minimalistyczny dach narożny",
+    "description": "Narożny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Umożliwia tworzenie minimalistycznych, modernistycznych konstrukcji."
+  },
+  "SF_TriangleWall": {
+    "localized_name": "Minimalistyczna ściana trójkątna",
+    "description": "Trójkątna ściana stawiana na fundamencie. Umożliwia tworzenie minimalistycznych, modernistycznych konstrukcji."
+  },
+  "SF_TriangleWallReverse": {
+    "localized_name": "Minimalistyczna trójkątna ściana (odwrócona)",
+    "description": "Trójkątna ściana (odwrócona) stawiana na fundamencie. Umożliwia tworzenie minimalistycznych, modernistycznych konstrukcji."
+  },
+  "SF_WallGate": {
+    "localized_name": "Minimalistyczne przejście dla Pali",
+    "description": "Przejście dla Pali, stawiane na fundamencie, pełniące funkcję wejścia i wyjścia. Umożliwia tworzenie minimalistycznych, modernistycznych konstrukcji."
+  },
+  "SF_WindowWall": {
+    "localized_name": "Minimalistyczna ściana z oknem",
+    "description": "Ściana z oknami, stawiana na fundamencie w celu powstrzymania intruzów. Umożliwia tworzenie minimalistycznych, modernistycznych konstrukcji."
+  },
+  "SF_foundation": {
+    "localized_name": "Minimalistyczny fundament",
+    "description": "Fundament do stawiania ścian lub innych struktur. Umożliwia tworzenie minimalistycznych, nowoczesnych konstrukcji."
+  },
+  "SF_roof": {
+    "localized_name": "Minimalistyczny dach",
+    "description": "Dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Umożliwia tworzenie minimalistycznych, nowoczesnych konstrukcji."
+  },
+  "SF_stair": {
+    "localized_name": "Minimalistyczne schody",
+    "description": "Schody umieszczane pod fundamentem lub dachem, umożliwiające wejście na górę. Umożliwiają tworzenie minimalistycznych, nowoczesnych konstrukcji."
+  },
+  "SF_wall": {
+    "localized_name": "Minimalistyczna ściana",
+    "description": "Ściany stawiane na fundamentach w celu powstrzymania intruzów. Umożliwiają tworzenie minimalistycznych, nowoczesnych konstrukcji."
+  },
+  "SanityDecrease1": {
+    "localized_name": "Generator fal alfa",
+    "description": "Urządzenie emitujące fale alfa do relaksowania Pali. Spowalnia tempo spadku wartości SAN u sojuszników w bazie. Umieszczenie więcej niż jednego nie zwiększa efektu."
+  },
+  "Scientist_Banner": {
+    "localized_name": "Pionowy baner Jednostki Badań Genetycznych PAL",
+    "description": "Dekoracyjny pionowy baner Jednostki Badań Genetycznych PAL."
+  },
+  "Scientist_Flag": {
+    "localized_name": "Flaga drużyny Jednostki Badań Genetycznych PAL",
+    "description": "Dekoracyjna flaga drużyny Jednostki Badań Genetycznych PAL."
+  },
+  "Seika": {
+    "localized_name": "Kompozycja kwiatowa",
+    "description": "Dekoracyjna kompozycja kwiatowa. Doskonale pasuje do budowli w japońskim stylu."
+  },
+  "Shelf01_Iron": {
+    "localized_name": "Żelazny regał",
+    "description": "Żelazny regał do przechowywania przedmiotów."
+  },
+  "Shelf01_Stone": {
+    "localized_name": "Antyczny regał na książki",
+    "description": "Antyczny regał na książki do przechowywania przedmiotów."
+  },
+  "Shelf01_Wall_Iron": {
+    "localized_name": "Żelazna półka ścienna",
+    "description": "Żelazka półka ścienna do przechowywania przedmiotów. Można ją zamontować na ścianie."
+  },
+  "Shelf01_Wall_Stone": {
+    "localized_name": "Antyczna szafka ścienna",
+    "description": "Antyczna szafka ścienna do przechowywania przedmiotów. Można ją zamontować na ścianie."
+  },
+  "Shelf02_Iron": {
+    "localized_name": "Podłużny żelazny regał",
+    "description": "Podłużny żelazny regał do przechowywania przedmiotów."
+  },
+  "Shelf02_Stone": {
+    "localized_name": "Antyczna szafa",
+    "description": "Antyczny szafa do przechowywania przedmiotów."
+  },
+  "Shelf03_Iron": {
+    "localized_name": "Pomarańczowa szafka",
+    "description": "Pomarańczowa szafka do przechowywania przedmiotów. Ozdobiona naklejkami z Palami."
+  },
+  "Shelf03_Stone": {
+    "localized_name": "Antyczna skrzynia",
+    "description": "Antyczna skrzynia do przechowywania przedmiotów. Ozdobiona zdjęciem Pala."
+  },
+  "Shelf04_Iron": {
+    "localized_name": "Szafka",
+    "description": "Szafka do przechowywania przedmiotów. Ozdobiona naklejkami z Palami."
+  },
+  "Shelf04_Stone": {
+    "localized_name": "Antyczna szafka boczna",
+    "description": "Antyczna szafka boczna do przechowywania przedmiotów. Ozdobiona zdjęciem Pala."
+  },
+  "Shelf05_Stone": {
+    "localized_name": "Antyczny kredens",
+    "description": "Antyczny kredens do przechowywania przedmiotów."
+  },
+  "Shelf06_Stone": {
+    "localized_name": "Antyczny podłużny kredens",
+    "description": "Podłużny antyczny kredens do przechowywania przedmiotów. Ozdobiony zdjęciem Pala."
+  },
+  "Shelf07_Stone": {
+    "localized_name": "Duży antyczny kredens",
+    "description": "Duży antyczny kredens do przechowywania przedmiotów."
+  },
+  "Shelf_Cask_Wood": {
+    "localized_name": "Drewniany regał na beczki",
+    "description": "Drewniany regał na beczki do przechowywania przedmiotów."
+  },
+  "Shelf_Hang01_Wood": {
+    "localized_name": "Drewniana półka ścienna",
+    "description": "Drewniana półka do przechowywania przedmiotów. Można ją zamontować na ścianie."
+  },
+  "Shelf_Hang02_Wood": {
+    "localized_name": "Drewniana półka ścienna dekoracyjna",
+    "description": "Drewniana dekoracyjna półka. Można ją zamontować na ścianie."
+  },
+  "Shelf_Wood": {
+    "localized_name": "Drewniany regał",
+    "description": "Drewniany regał do przechowywania przedmiotów."
+  },
+  "Shishiodoshi": {
+    "localized_name": "Odstraszacz jeleni",
+    "description": "Dekoracyjny odstraszacz jeleni. Doskonale pasuje do budowli w japońskim stylu."
+  },
+  "Shrine_Lantern": {
+    "localized_name": "Latarnia",
+    "description": "Dekoracyjna latarnia."
+  },
+  "SignExit_Ceiling_Iron": {
+    "localized_name": "Sufitowy znak wyjścia ewakuacyjnego",
+    "description": "Dekoracyjny znak wyjścia ewakuacyjnego. Można go umieścić na suficie."
+  },
+  "SignExit_Wall_Iron": {
+    "localized_name": "Ścienny znak wyjścia ewakuacyjnego",
+    "description": "Dekoracyjny znak wyjścia ewakuacyjnego. Można go umieścić na ścianie."
+  },
+  "Signboard": {
+    "localized_name": "Tablica",
+    "description": "Można na niej pisać. Używana do notatek lub komunikacji z innymi."
+  },
+  "Silo": {
+    "localized_name": "Silos",
+    "description": "Umieść go w bazie, aby zwiększyć szybkość sadzenia. Umieszczenie więcej niż jednego nie zwiększa efektu."
+  },
+  "SkinChange": {
+    "localized_name": "Urządzenie do stylizacji Pali",
+    "description": "Przebieralnia dla Pali. Podaruj swoim Palom nowy wygląd! Skórki zdobyte w grze i poza nią można zastosować właśnie tutaj!"
+  },
+  "Snowman": {
+    "localized_name": "Bałwan",
+    "description": "Umieść go w bazie, aby zwiększyć szybkość chłodzenia. Umieszczenie więcej niż jednego nie zwiększa efektu."
+  },
+  "Sofa01_Iron": {
+    "localized_name": "Skórzany fotel",
+    "description": "Dekoracyjny fotel skórzany."
+  },
+  "Sofa01_Stone": {
+    "localized_name": "Antyczny fotel",
+    "description": "Antyczny dekoracyjny fotel."
+  },
+  "Sofa02_Iron": {
+    "localized_name": "Skórzana kanapa",
+    "description": "Dekoracyjna kanapa skórzana."
+  },
+  "Sofa02_Stone": {
+    "localized_name": "Antyczna kanapa",
+    "description": "Antyczna dekoracyjna kanapa."
+  },
+  "Sofa03_Stone": {
+    "localized_name": "Antyczny puf",
+    "description": "Antyczny dekoracyjny puf."
+  },
+  "Spa": {
+    "localized_name": "Gorące źródło",
+    "description": "Obiekt, w którym Pale w bazie mogą odpocząć. Przywraca wartość SAN po długim dniu ciężkiej pracy."
+  },
+  "Spa2": {
+    "localized_name": "Gorące źródło wysokiej jakości",
+    "description": "Obiekt, w którym Pale w bazie mogą odpocząć. Teraz bardziej komfortowy i przywraca więcej SAN."
+  },
+  "Spa3": {
+    "localized_name": "Gorące źródło w stylu japońskim",
+    "description": "Obiekt, w którym zmęczone Pale w bazie mogą się zrelaksować. Tradycyjna, japońska przestrzeń sprzyja regeneracji i pozwala jeszcze skuteczniej odzyskać SAN."
+  },
+  "SphereFactory_Black_01": {
+    "localized_name": "Stół warsztatowy do sfer",
+    "description": "Prymitywny stół warsztatowy do wytwarzania sfer służących do łapania Pali. Niewielka przestrzeń robocza ogranicza tempo produkcji. Produkcja wymaga Pali potrafiących pracować rękami."
+  },
+  "SphereFactory_Black_02": {
+    "localized_name": "Linia produkcyjna sfer",
+    "description": "Linia produkcyjna do wytwarzania sfer służących do łapania Pali. Dzięki podziałowi Pali na grupy tempo produkcji nieco wzrasta. Produkcja wymaga Pali potrafiących pracować rękami."
+  },
+  "SphereFactory_Black_03": {
+    "localized_name": "Linia produkcyjna sfer II",
+    "description": "Linia produkcyjna do wytwarzania sfer służących do łapania Pali. Dzięki sprytnemu zarządzaniu tempo produkcji znacznie wzrosło. Produkcja wymaga Pali potrafiących pracować rękami."
+  },
+  "SphereFactory_Black_04": {
+    "localized_name": "Zaawansowana linia produkcyjna sfer",
+    "description": "Linia produkcyjna do wytwarzania sfer służących do łapania Pali. Dzięki zastosowaniu zaawansowanej technologii możliwe jest bardzo szybkie ich wykonanie. Produkcja wymaga Pali potrafiących pracować rękami."
+  },
+  "StationDeforest2": {
+    "localized_name": "Plac wyrębu",
+    "description": "Obiekt, z pomocą którego pozyskuje się Drewno. Rąbanie drewna to ciężka praca wymagająca dużej wytrzymałości fizycznej. Zleć to zadanie Palom wyspecjalizowanym w wyrębie."
+  },
+  "StonePit": {
+    "localized_name": "Kamieniołom",
+    "description": "Obiekt, z pomocą którego pozyskuje się Kamień. Wydobycie surowca Kamień to wymagające zajęcie, które wymaga dużej wytrzymałości fizycznej. Zleć to zadanie Palom wyspecjalizowanym w górnictwie."
+  },
+  "Stone_DiagonalWall": {
+    "localized_name": "Kamienna skośna ściana",
+    "description": "Ściana skośna, stawiana na trójkątnym fundamencie w celu powstrzymania intruzów. Wykonana z kamienia, jest dość wytrzymała."
+  },
+  "Stone_DoorWall": {
+    "localized_name": "Kamienne drzwi",
+    "description": "Drzwi montowane na fundamencie. Służą jako wejście. Wykonane z kamienia, są dość wytrzymałe."
+  },
+  "Stone_Fence": {
+    "localized_name": "Kamienny płot",
+    "description": "Ogrodzenie chroniące przed upadkiem z fundamentów lub dachów. Wykonane z kamienia, są dość wytrzymałe."
+  },
+  "Stone_Gate": {
+    "localized_name": "Kamienna brama",
+    "description": "Brama wystarczająco duża, by mogły przez nią przechodzić duże Pale. Wykonana z kamienia, jest dość wytrzymała."
+  },
+  "Stone_PyramidRoof": {
+    "localized_name": "Kamienny dach piramidalny",
+    "description": "Stożkowy dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z kamienia, jest dość wytrzymały."
+  },
+  "Stone_SlantedRoof": {
+    "localized_name": "Kamienny skośny dach",
+    "description": "Skośny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z kamienia, jest dość wytrzymały."
+  },
+  "Stone_SlopedRoofCorner": {
+    "localized_name": "Kamienny skośny dach trójkątny",
+    "description": "Narożny skośny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z kamienia, jest dość wytrzymały."
+  },
+  "Stone_TriangleFoundation": {
+    "localized_name": "Kamienny trójkątny fundament",
+    "description": "Trójkątny fundament do stawiania ścian lub innych struktur. Wykonany z kamienia, jest dość wytrzymały."
+  },
+  "Stone_TriangleRoof": {
+    "localized_name": "Kamienny trójkątny dach",
+    "description": "Trójkątny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z kamienia, jest dość wytrzymały."
+  },
+  "Stone_TriangleStairsCorner": {
+    "localized_name": "Kamienny dach narożny",
+    "description": "Narożny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z kamienia, jest dość wytrzymały."
+  },
+  "Stone_TriangleWall": {
+    "localized_name": "Kamienna trójkątna ściana",
+    "description": "Trójkątna ściana stawiana na fundamencie w celu powstrzymania intruzów. Wykonana z kamienia, jest dość wytrzymała."
+  },
+  "Stone_TriangleWallReverse": {
+    "localized_name": "Kamienna trójkątna ściana (odwrócona)",
+    "description": "Trójkątna ściana (odwrócona) stawiana na fundamencie. Wykonana z kamienia, jest dość wytrzymała."
+  },
+  "Stone_WallGate": {
+    "localized_name": "Kamienne przejście dla Pali",
+    "description": "Przejście dla Pali, stawiane na fundamencie, pełniące funkcję wejścia i wyjścia. Wykonane z kamienia, jest dość wytrzymałe."
+  },
+  "Stone_WindowWall": {
+    "localized_name": "Kamienna ściana z oknem",
+    "description": "Ściana stawiana na fundamencie w celu powstrzymania intruzów. Znajduje się w niej okno. Wykonana z kamienia, jest dość wytrzymała."
+  },
+  "Stone_foundation": {
+    "localized_name": "Kamienny fundament",
+    "description": "Fundament do stawiania ścian lub innych struktur. Wykonany z kamienia, jest dość wytrzymały."
+  },
+  "Stone_roof": {
+    "localized_name": "Kamienny dach",
+    "description": "Dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z kamienia, jest dość wytrzymały."
+  },
+  "Stone_stair": {
+    "localized_name": "Kamienne schody",
+    "description": "Schody umieszczane pod fundamentem lub dachem, umożliwiające wejście na górę. Wykonane z kamienia, są dość wytrzymałe."
+  },
+  "Stone_wall": {
+    "localized_name": "Kamienna ściana",
+    "description": "Ściany stawiane na fundamentach w celu powstrzymania intruzów. Wykonane z kamienia, są dość wytrzymałe."
+  },
+  "Stool01_Iron": {
+    "localized_name": "Żelazny stołek",
+    "description": "Żelazny dekoracyjny stołek."
+  },
+  "Stool01_Stone": {
+    "localized_name": "Antyczny stołek",
+    "description": "Antyczny dekoracyjny stołek."
+  },
+  "Stool_High_Wood": {
+    "localized_name": "Drewniany stołek barowy",
+    "description": "Dekoracyjny stołek barowy."
+  },
+  "Stool_Wood": {
+    "localized_name": "Drewniany stołek",
+    "description": "Drewniany dekoracyjny stołek."
+  },
+  "Stove01_Stone": {
+    "localized_name": "Antyczny piec",
+    "description": "Antyczny dekoracyjny piec."
+  },
+  "Stump": {
+    "localized_name": "Pień i siekiera",
+    "description": "Umieść je w bazie, aby zwiększyć szybkość wyrębu. Umieszczenie więcej niż jednego zestawu nie zwiększa efektu."
+  },
+  "SulfurPit": {
+    "localized_name": "Kopalnia siarki",
+    "description": "Obiekt do pozyskiwania: Siarka. Wydobycie surowca Siarka to wyczerpująca praca fizyczna. Zleć to zadanie Palowi, który dobrze radzi sobie z górnictwem."
+  },
+  "TableCircular01_Iron": {
+    "localized_name": "Okrągły żelazny stół",
+    "description": "Okrągły żelazny stół dekoracyjny."
+  },
+  "TableCircular01_Stone": {
+    "localized_name": "Antyczny okrągły stół",
+    "description": "Antyczny okrągły stół dekoracyjny."
+  },
+  "TableCircular_Wood": {
+    "localized_name": "Okrągły stół",
+    "description": "Okrągły dekoracyjny stół."
+  },
+  "TableDresser01_Stone": {
+    "localized_name": "Antyczna toaletka",
+    "description": "Toaletka przydatna do zmiany wyglądu. Umożliwia graczowi edycję wyglądu postaci."
+  },
+  "TableSide01_Iron": {
+    "localized_name": "Boczny stolik z żelaznego drewna",
+    "description": "Boczny stolik dekoracyjny z żelaznego drewna."
+  },
+  "TableSink01_Stone": {
+    "localized_name": "Antyczna umywalka",
+    "description": "Antyczna dekoracyjna umywalka."
+  },
+  "TableSquare01_Iron": {
+    "localized_name": "Stół z żelaznego drewna",
+    "description": "Dekoracyjny stół z żelaznego drewna."
+  },
+  "TableSquare02_Iron": {
+    "localized_name": "Niski stół z żelaznego drewna",
+    "description": "Niski stół z dekoracyjny żelaznego drewna."
+  },
+  "TableSquare_Wood": {
+    "localized_name": "Kwadratowy stół",
+    "description": "Kwadratowy dekoracyjny stół."
+  },
+  "Tansu": {
+    "localized_name": "Skrzynia w stylu japońskim",
+    "description": "Służy do przechowywania przedmiotów. Doskonale pasuje do budowli w japońskim stylu."
+  },
+  "Television01_Iron": {
+    "localized_name": "Stary telewizor",
+    "description": "Stary dekoracyjny telewizor. Pozostałość po starożytnej cywilizacji. Teraz wyświetla już tylko obrazki Pengulleta."
+  },
+  "Tire01_Iron": {
+    "localized_name": "Opona",
+    "description": "Dekoracyjna opona."
+  },
+  "Toilet01_Stone": {
+    "localized_name": "Antyczna toaleta",
+    "description": "Antyczna dekoracyjna toaleta. Nie nadaje się do swojego pierwotnego celu."
+  },
+  "ToiletHolder01_Stone": {
+    "localized_name": "Antyczny uchwyt na papier toaletowy",
+    "description": "Antyczny dekoracyjny uchwyt na papier toaletowy."
+  },
+  "ToolBoxV1": {
+    "localized_name": "Duża skrzynka z narzędziami",
+    "description": "Umieść ją bazie, aby zwiększyć szybkość prac ręcznych. Umieszczenie więcej niż jednej nie zwiększa efektu."
+  },
+  "Torch": {
+    "localized_name": "Pochodnia na stojaku",
+    "description": "Źródło światła, które oświetla bazę nawet nocą. Do rozpalenia ognia potrzebny jest Pal typu ognistego."
+  },
+  "Toro": {
+    "localized_name": "Kamienna latarnia",
+    "description": "Dekoracyjna latarnia kamienna. Doskonale pasuje do budowli w japońskim stylu."
+  },
+  "TowlRack01_Stone": {
+    "localized_name": "Antyczny wieszak na ręczniki",
+    "description": "Antyczny dekoracyjny wieszak na ręczniki."
+  },
+  "TrafficBarricade01_Iron": {
+    "localized_name": "Barykada",
+    "description": "Dekoracyjna barykada."
+  },
+  "TrafficBarricade02_Iron": {
+    "localized_name": "Pomarańczowa barykada",
+    "description": "Pomarańczowa dekoracyjna barykada."
+  },
+  "TrafficBarricade03_Iron": {
+    "localized_name": "Czerwona żelazna barykada",
+    "description": "Czerwona dekoracyjna barykada."
+  },
+  "TrafficBarricade04_Iron": {
+    "localized_name": "Biała żelazna barykada",
+    "description": "Biała dekoracyjna barykada."
+  },
+  "TrafficBarricade05_Iron": {
+    "localized_name": "Żelazne ogrodzenie",
+    "description": "Żelazne dekoracyjne ogrodzenie."
+  },
+  "TrafficCone01_Iron": {
+    "localized_name": "Pachołek drogowy",
+    "description": "Dekoracyjny pachołek drogowy."
+  },
+  "TrafficCone02_Iron": {
+    "localized_name": "Gruby pachołek drogowy",
+    "description": "Szeroki dekoracyjny pachołek drogowy."
+  },
+  "TrafficCone03_Iron": {
+    "localized_name": "Cienki pachołek drogowy",
+    "description": "Wąski dekoracyjny pachołek drogowy."
+  },
+  "TrafficLight01_Iron": {
+    "localized_name": "Sygnalizacja świetlna",
+    "description": "Dekoracyjna sygnalizacja świetlna."
+  },
+  "TrafficSign01_Iron": {
+    "localized_name": "Znak „Palom wstęp wzbroniony|",
+    "description": "Dekoracyjny znak „Palom wstęp wzbrioniony|. Używany w starożytności, dziś nie pełni już żadnej realnej funkcji."
+  },
+  "TrafficSign02_Iron": {
+    "localized_name": "Znak „Stop|",
+    "description": "Dekoracyjny znak „Stop|. Używany w starożytności, dziś nie pełni już żadnej realnej funkcji."
+  },
+  "TrafficSign03_Iron": {
+    "localized_name": "Znak „Uwaga Eikthyrdeery|",
+    "description": "Dekoracyjny znak „Uwaga Eikthyrdeery|. W starożytności często dochodziło do zderzeń między Eikthyrdeerami a innymi Palami."
+  },
+  "TrafficSign04_Iron": {
+    "localized_name": "Znak „Uwaga Mammoresty|",
+    "description": "Dekoracyjny znak „Uwaga Mammoresty|. W starożytności często ginęli ci, którzy rozwścieczyli Mammoresta."
+  },
+  "TransmissionTower": {
+    "localized_name": "Słup elektryczny",
+    "description": "Umieść go w bazie, aby zwiększyć szybkość wytwarzania energii elektrycznej. Umieszczenie więcej niż jednego nie zwiększa efektu."
+  },
+  "Trap_LegHold": {
+    "localized_name": "Potrzask (mały)",
+    "description": "Pułapka unieruchamiająca Pale, które w nią wdepną. Po unieruchomieniu skuteczność chwytania sferą wzrasta. Działa tylko na małe Pale."
+  },
+  "Trap_LegHold_Big": {
+    "localized_name": "Potrzask (duży)",
+    "description": "Potrzask unieruchamiający duże Pale. Skuteczność chwytania sferą uwięzionego Pala wzrasta. Działa tylko na duże Pale — małe nie zostaną złapane."
+  },
+  "Trap_MineAttack": {
+    "localized_name": "Mina",
+    "description": "Pułapka wybuchająca po nadepnięciu przez Pala. Zadaje obrażenia na dużym obszarze."
+  },
+  "Trap_MineElecShock": {
+    "localized_name": "Mina elektryczna",
+    "description": "Pułapka rażąca prądem Pala, który na nią nadepnie. Porażenie zwiększa szansę na jego schwytanie za pomocą sfery."
+  },
+  "Trap_MineFreeze": {
+    "localized_name": "Mina lodowa",
+    "description": "Pułapka zamrażająca Pala, który na nią nadepnie. Zamrożenie zwiększa szansę na jego schwytanie za pomocą sfery."
+  },
+  "Trap_MovingPanel": {
+    "localized_name": "-",
+    "description": "-"
+  },
+  "Trap_Noose": {
+    "localized_name": "Wnyki",
+    "description": "Pułapka chwytająca Pale, które przez nią przechodzą. Schwytane osobniki łatwiej złapać za pomocą sfer. Działa tylko na małe Pale."
+  },
+  "WallSignboard": {
+    "localized_name": "Tabliczka ścienna",
+    "description": "Tablica do pisania. Można ją zawiesić na ścianie."
+  },
+  "WallTorch": {
+    "localized_name": "Pochodnia ścienna",
+    "description": "Źródło światła, które oświetla bazę nawet nocą. Można je umieścić na ścianach. Do rozpalenia ognia potrzebny jest Pal typu ognistego."
+  },
+  "WallTorch02": {
+    "localized_name": "Ozdobna pochodnia ścienna",
+    "description": "Okazała pochodnia płonąca ogniem czczonym przez wyznawców Bractwa Wiecznego Płomienia. Źródło światła, które można zamontować na ścianie. Do jej zapalenia potrzebny jest Pal typu ognistego."
+  },
+  "WeaponFactory_Dirty_01": {
+    "localized_name": "Stół do wytwarzania broni",
+    "description": "Prymitywny stół warsztatowy do wytwarzania broni i amunicji. Niewielka przestrzeń robocza uniemożliwia produkcję broni wysokiej jakości. Produkcja wymaga Pali potrafiących pracować rękami."
+  },
+  "WeaponFactory_Dirty_02": {
+    "localized_name": "Linia produkcyjna broni",
+    "description": "Linia produkcyjna do wytwarzania broni i amunicji. Dzięki podziałowi Pali na grupy tempo produkcji nieco wzrosło. Produkcja wymaga Pali potrafiących pracować rękami."
+  },
+  "WeaponFactory_Dirty_03": {
+    "localized_name": "Linia produkcyjna broni II",
+    "description": "Linia produkcyjna do wytwarzania broni i amunicji. Dzięki sprytnemu zarządzaniu tempo produkcji znacznie wzrosło. Produkcja wymaga Pali potrafiących pracować rękami."
+  },
+  "WeaponFactory_Dirty_04": {
+    "localized_name": "Zbrojownia zaawansowanej cywilizacji",
+    "description": "Linia produkcyjna do wytwarzania broni i amunicji. Dzięki zastosowaniu zaawansowanej technologii możliwe jest bardzo szybkie ich wykonanie. Produkcja wymaga Pali potrafiących pracować rękami."
+  },
+  "Wire_Fence": {
+    "localized_name": "Ogrodzenie z drutem",
+    "description": "Dekoracyjne ogrodzenie z drutu."
+  },
+  "Wood_Fence": {
+    "localized_name": "Drewniany płot",
+    "description": "Ogrodzenie chroniące przed upadkiem z fundamentów lub dachów. Wykonane z drewna, łatwo się niszczy."
+  },
+  "Wood_Gate": {
+    "localized_name": "Drewniana brama",
+    "description": "Brama wystarczająco duża, by mogły przez nią przechodzić duże Pale. Wykonana z drewna, łatwo się niszczy."
+  },
+  "Wood_SlantedRoof": {
+    "localized_name": "Drewniany skośny dach",
+    "description": "Skośny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z drewna, łatwo się niszczy."
+  },
+  "Wood_TriangleWall": {
+    "localized_name": "Drewniana trójkątna ściana",
+    "description": "Trójkątna ściana stawiana na fundamencie w celu powstrzymania intruzów. Wykonana z drewna, łatwo się niszczy."
+  },
+  "Wood_TriangleWallReverse": {
+    "localized_name": "Drewniana trójkątna ściana (odwrócona)",
+    "description": "Trójkątna ściana (odwrócona) stawiana na fundamencie. Wykonana z drewna, łatwo się niszczy."
+  },
+  "Wood_WindowWall": {
+    "localized_name": "Drewniana ściana z oknem",
+    "description": "Ściana stawiana na fundamencie w celu powstrzymania intruzów. Znajduje się w niej okno. Wykonana z drewna, łatwo się niszczy."
+  },
+  "WoodenBarricade": {
+    "localized_name": "Drewniana barykada",
+    "description": "Dekoracyjna drewniana barykada."
+  },
+  "Wooden_DiagonalWall": {
+    "localized_name": "Drewniana skośna ściana",
+    "description": "Ściana skośna, stawiana na trójkątnym fundamencie w celu powstrzymania intruzów. Wykonana z drewna, łatwo się niszczy."
+  },
+  "Wooden_DoorWall": {
+    "localized_name": "Drewniane drzwi",
+    "description": "Drzwi montowane na fundamencie. Służą jako wejście. Wykonane z drewna, łatwo się niszczą."
+  },
+  "Wooden_PyramidRoof": {
+    "localized_name": "Drewniany dach piramidalny",
+    "description": "Stożkowy dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z drewna, łatwo się niszczy."
+  },
+  "Wooden_SlopedRoofCorner": {
+    "localized_name": "Drewniany skośny dach trójkątny",
+    "description": "Skośny dach narożny stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z drewna, łatwo się niszczy."
+  },
+  "Wooden_TriangleFoundation": {
+    "localized_name": "Drewniany trójkątny fundament",
+    "description": "Trójkątny fundament do stawiania ścian lub innych struktur. Wykonany z drewna, łatwo się niszczy."
+  },
+  "Wooden_TriangleRoof": {
+    "localized_name": "Drewniany trójkątny dach",
+    "description": "Trójkątny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z drewna, łatwo się niszczy."
+  },
+  "Wooden_TriangleStairsCorner": {
+    "localized_name": "Drewniany dach narożny",
+    "description": "Narożny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z drewna, łatwo się niszczy."
+  },
+  "Wooden_WallGate": {
+    "localized_name": "Drewniane przejście dla Pali",
+    "description": "Przejście dla Pali, stawiane na fundamencie, pełniące funkcję wejścia i wyjścia. Wykonane z drewna, łatwo się niszczy."
+  },
+  "Wooden_foundation": {
+    "localized_name": "Drewniany fundament",
+    "description": "Fundament do stawiania ścian lub innych struktur. Wykonany z drewna, łatwo się niszczy."
+  },
+  "Wooden_ladder": {
+    "localized_name": "Drabina",
+    "description": "Drabina, dzięki której możesz wspiąć się na nieco wyższe miejsce."
+  },
+  "Wooden_roof": {
+    "localized_name": "Drewniany dach",
+    "description": "Dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z drewna, łatwo się niszczy."
+  },
+  "Wooden_stair": {
+    "localized_name": "Drewniane schody",
+    "description": "Schody umieszczane pod fundamentem lub dachem, by umożliwić wejście na górę. Wykonane z drewna, łatwo się niszczą."
+  },
+  "Wooden_wall": {
+    "localized_name": "Drewniana ściana",
+    "description": "Ściany stawiane na fundamentach w celu powstrzymania intruzów. Wykonane z drewna, łatwo się niszczą."
+  },
+  "WorkBench": {
+    "localized_name": "Prymitywny stół warsztatowy",
+    "description": "Prymitywny stół warsztatowy do wytwarzania prostych przedmiotów. Produkcja wymaga Pala potrafiącego pracować rękami."
+  },
+  "WorkBench_SkillUnlock": {
+    "localized_name": "Stół warsztatowy do Pal Sprzętu",
+    "description": "Prymitywny stół warsztatowy do wytwarzania narzędzi dla Pali. Stwórz siodło, by ujeżdżać Pale, albo broń do ich użytku."
+  },
+  "WorkSpeedIncrease1": {
+    "localized_name": "Generator fal beta",
+    "description": "Urządzenie emitujące fale beta, które pobudzają Pale. Zwiększa szybkość pracy Pali w bazie. Umieszczenie więcej niż jednego nie zwiększa efektu."
+  },
+  "YakushimaBoss002_Relic": {
+    "localized_name": "Posąg Księżycowego Władcy",
+    "description": "[Tides of Terraria] Złoty posąg przedstawiający Księżycowy Władca. Dowód siły po odniesieniu zwycięstwa w beznadziejnej walce."
+  },
+  "Zabuton": {
+    "localized_name": "Japońska poduszka do siedzenia",
+    "description": "Dekoracyjna poduszka do siedzenia. Doskonale pasuje do budowli w japońskim stylu."
+  },
+  "Zaisu": {
+    "localized_name": "Japońskie krzesło podłogowe",
+    "description": "Dekoracyjne krzesło podłogowe. Doskonale pasuje do budowli w japońskim stylu."
+  }
+}
