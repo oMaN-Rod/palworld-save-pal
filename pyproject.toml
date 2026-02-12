@@ -3,7 +3,7 @@ name = "PalworldSavePal"
 version = "0.16.3"
 requires-python = ">=3.12"
 dependencies = [
-    "altgraph==0.17.4",
+    "altgraph==0.17.5",
     "annotated-types==0.7.0",
     "anyio==4.7.0",
     "bottle==0.13.2",
