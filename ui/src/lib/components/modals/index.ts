@@ -1,6 +1,7 @@
 import AddToCollectionModal from './add-to-collection/AddToCollectionModal.svelte';
 import CloneToUpsModal from './clone-to-ups/CloneToUpsModal.svelte';
 import ConfirmModal from './confirm/ConfirmModal.svelte';
+import EditBaseModal from './edit-base/EditBaseModal.svelte';
 import EditTagsModal from './edit-tags/EditTagsModal.svelte';
 import ExportPalModal from './export-pal/ExportPalModal.svelte';
 import FillPalsModal from './fill-pals/FillPalsModal.svelte';
@@ -23,6 +24,7 @@ export {
 	AddToCollectionModal,
 	CloneToUpsModal,
 	ConfirmModal,
+	EditBaseModal,
 	EditTagsModal,
 	ExportPalModal,
 	FillPalsModal,

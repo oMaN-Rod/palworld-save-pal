@@ -11,12 +11,17 @@
   "active_filters_count": "Active Filters ({count})",
   "active_skill": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
       "match": {
         "countPlural=one": "Active Skill",
         "countPlural=other": "Active Skills"
       },
-      "selectors": ["countPlural"]
+      "selectors": [
+        "countPlural"
+      ]
     }
   ],
   "activity": "Activity",
@@ -65,16 +70,22 @@
   "avg_transfers_per_pal": "Avg. transfers per {pal}:",
   "base": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
       "match": {
         "countPlural=one": "Base",
         "countPlural=other": "Bases"
       },
-      "selectors": ["countPlural"]
+      "selectors": [
+        "countPlural"
+      ]
     }
   ],
   "base_container": "Base Container",
   "base_name": "Base Name",
+  "base_range": "Base Range",
   "basecamp_level": "Basecamp Level",
   "blueprint": "Blueprint",
   "body": "Body",
@@ -119,12 +130,17 @@
   "close_toast": "Close toast",
   "collection": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
       "match": {
         "countPlural=one": "Collection",
         "countPlural=other": "Collections"
       },
-      "selectors": ["countPlural"]
+      "selectors": [
+        "countPlural"
+      ]
     }
   ],
   "collection_delete_warning": "Pals in this collection will not be deleted, but they will no longer be associated with this collection.",
@@ -194,14 +210,14 @@
   "error_nuke_operation": "An error occurred during the nuke operation. Please try again.",
   "essential": "Essential",
   "export": "Export",
+  "export_note_message": "Exported pals will be copied to the target location. The originals will remain in UPS.",
   "export_pals": "Export {count} {pals}",
   "export_preset": "Export preset to file",
   "export_selected": "Export Selected",
   "export_target": "Export Target",
   "export_to": "Export To",
-  "exporting_count_selected_pals": "Exporting {count} selected {pals}",
-  "export_note_message": "Exported pals will be copied to the target location. The originals will remain in UPS.",
   "export_to_target": "Export to {target}",
+  "exporting_count_selected_pals": "Exporting {count} selected {pals}",
   "failed_create_pal": "Failed to create new pal. Please try again.",
   "failed_export_pals": "Failed to export {count} {pals}",
   "failed_get_pal_data": "Failed to get pal data",
@@ -211,12 +227,17 @@
   "feed": "Feed",
   "file": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
       "match": {
         "countPlural=one": "File",
         "countPlural=other": "Files"
       },
-      "selectors": ["countPlural"]
+      "selectors": [
+        "countPlural"
+      ]
     }
   ],
   "fill": "Fill",
@@ -225,12 +246,17 @@
   "fill_entity": "Fill {entity}",
   "filter": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
       "match": {
         "countPlural=one": "Filter",
         "countPlural=other": "Filters"
       },
-      "selectors": ["countPlural"]
+      "selectors": [
+        "countPlural"
+      ]
     }
   ],
   "filter_and_sort": "Filter & Sort",
@@ -246,12 +272,17 @@
   "grid_view": "Grid View",
   "guild": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
       "match": {
         "countPlural=one": "Guild",
         "countPlural=other": "Guilds"
       },
-      "selectors": ["countPlural"]
+      "selectors": [
+        "countPlural"
+      ]
     }
   ],
   "guild_name": "Guild Name",
@@ -263,16 +294,20 @@
   "hp": "HP",
   "human": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
       "match": {
         "countPlural=one": "Human",
         "countPlural=other": "Humans"
       },
-      "selectors": ["countPlural"]
+      "selectors": [
+        "countPlural"
+      ]
     }
   ],
   "id": "ID",
-  "ivs": "IVs",
   "import": "Import",
   "import_failed": "Import failed. Please try again.",
   "import_from": "Import From",
@@ -286,16 +321,22 @@
   "inventory": "Inventory",
   "item": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
       "match": {
         "countPlural=one": "Item",
         "countPlural=other": "Items"
       },
-      "selectors": ["countPlural"]
+      "selectors": [
+        "countPlural"
+      ]
     }
   ],
   "item_container": "Item Container",
   "item_copied": "{name} copied to clipboard",
+  "ivs": "IVs",
   "key_items": "Key Items",
   "lab": "Lab",
   "language": "Language",
@@ -399,8 +440,9 @@
   "of": "of",
   "oil_rig": "Oil Rig",
   "oil_rig_pals": "Oil Rig {pals}",
-  "open_drawer": "Open drawer",
   "oops_something_wrong": "Oops... Something went wrong",
+  "open_drawer": "Open drawer",
+  "open_folder": "Open Folder",
   "or_drag_and_drop": "or drag and drop",
   "origin": "Origin",
   "origin_label": "Source:",
@@ -409,12 +451,17 @@
   "page_of_pages": "Page {current} of {total}",
   "pal": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
       "match": {
         "countPlural=one": "Pal",
         "countPlural=other": "Pals"
       },
-      "selectors": ["countPlural"]
+      "selectors": [
+        "countPlural"
+      ]
     }
   ],
   "pal_box_party": "Palbox + party",
@@ -427,35 +474,50 @@
   "passive": "Passive",
   "passive_skill": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
       "match": {
         "countPlural=one": "Passive Skill",
         "countPlural=other": "Passive Skills"
       },
-      "selectors": ["countPlural"]
+      "selectors": [
+        "countPlural"
+      ]
     }
   ],
   "paste": "Paste",
   "player": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
       "match": {
         "countPlural=one": "Player",
         "countPlural=other": "Players"
       },
-      "selectors": ["countPlural"]
+      "selectors": [
+        "countPlural"
+      ]
     }
   ],
   "predator": "Predator",
   "predator_pals": "Predator {pals}",
   "preset": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
       "match": {
         "countPlural=one": "Preset",
         "countPlural=other": "Presets"
       },
-      "selectors": ["countPlural"]
+      "selectors": [
+        "countPlural"
+      ]
     }
   ],
   "preset_name": "Preset name",
@@ -486,12 +548,17 @@
   "right_click_edit_base": "Right-click on a base to edit its name.",
   "save": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
       "match": {
         "countPlural=one": "Save",
         "countPlural=other": "Saves"
       },
-      "selectors": ["countPlural"]
+      "selectors": [
+        "countPlural"
+      ]
     }
   ],
   "save_as_preset": "Save as preset",
@@ -505,7 +572,6 @@
   "search_pals": "Search {pals} by name, character ID, or notes...",
   "search_placeholder": "Search {entity}...",
   "select": "Select",
-  "select_valid_player": "Please select a valid player",
   "select_a_entity": "Select a {entity}",
   "select_a_entity_to_view": "Select a {entity} to view details",
   "select_all_current_base": "Select all in current base",
@@ -519,6 +585,7 @@
   "select_guild_to_load_bases": "Select a guild to load its bases on the map",
   "select_pal_edit_description": "{pals} can be selected in a Players Palbox, Guild Bases, Global Pal Storage, Dimensional Pal Storage, or Universal Pal Storage",
   "select_player_view_entity": "Select a Player to view {entity}",
+  "select_valid_player": "Please select a valid player",
   "selected": "Selected",
   "selected_of_total": "{selected} of {total} selected",
   "selected_tags": "Selected Tags",
@@ -544,9 +611,9 @@
   "stamina": "Stamina",
   "statistics": "Statistics",
   "stats": "Stats",
-  "stomach": "Stomach",
   "steam": "Steam",
   "steam_description": "Steam/Mac: Level.sav save file",
+  "stomach": "Stomach",
   "storage": "Storage",
   "storage_container": "Storage Container",
   "structures": "Structures",
@@ -563,28 +630,38 @@
   "syncing": "Syncing",
   "tag": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
       "match": {
         "countPlural=one": "Tag",
         "countPlural=other": "Tags"
       },
-      "selectors": ["countPlural"]
+      "selectors": [
+        "countPlural"
+      ]
     }
   ],
   "tag_changes": "Tag Changes",
   "tag_delete_warning": "This tag will be removed from all Pals that have it.",
   "tags_for_pals": "Tags for {count} {pals}",
-  "target_available": "Target is available",
   "tags_optional": "Tags (optional)",
   "talents_ivs": "Talents (IVs)",
+  "target_available": "Target is available",
   "technology": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
       "match": {
         "countPlural=one": "Technology",
         "countPlural=other": "Technologies"
       },
-      "selectors": ["countPlural"]
+      "selectors": [
+        "countPlural"
+      ]
     }
   ],
   "technology_points": "Technology Points",
@@ -597,12 +674,17 @@
   "total_pals": "Total {pals}",
   "transfer": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
       "match": {
         "countPlural=one": "Transfer",
         "countPlural=other": "Transfers"
       },
-      "selectors": ["countPlural"]
+      "selectors": [
+        "countPlural"
+      ]
     }
   ],
   "transfer_all_pals": "Transfer all {pals}",
@@ -612,12 +694,17 @@
   "trust_xp": "Trust XP",
   "type": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
       "match": {
         "countPlural=one": "Type",
         "countPlural=other": "Types"
       },
-      "selectors": ["countPlural"]
+      "selectors": [
+        "countPlural"
+      ]
     }
   ],
   "type_label": "Type: {type}",
@@ -645,24 +732,28 @@
   "warning": "Warning",
   "weapon": [
     {
-      "declarations": ["input count", "local countPlural = count: plural"],
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
       "match": {
         "countPlural=one": "Weapon",
         "countPlural=other": "Weapons"
       },
-      "selectors": ["countPlural"]
+      "selectors": [
+        "countPlural"
+      ]
     }
   ],
   "weight": "Weight",
+  "work_speed": "Work Speed",
   "work_suitability": "Work Suitability",
   "working_on_it": "Beep Boop, working on it!",
   "workload": "Workload",
   "workspeed": "Workspeed",
-  "work_speed": "Work Speed",
   "world_coordinates": "World Coordinates",
   "world_name": "World Name",
   "xbox_game_pass": "Xbox Game Pass",
   "xbox_game_pass_description": "Xbox Game Pass: container.index file",
-  "zoom_in_out": "Zoom In/Out",
-  "open_folder": "Open Folder"
+  "zoom_in_out": "Zoom In/Out"
 }

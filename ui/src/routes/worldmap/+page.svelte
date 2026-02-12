@@ -10,7 +10,7 @@
 	import type { Map as OLMap } from 'ol';
 	import type { Base, GuildSummary, Player } from '$types';
 	import { assetLoader } from '$utils';
-	import { TextInputModal } from '$components/modals';
+	import { EditBaseModal } from '$components/modals';
 	import { EntryState, MessageType } from '$types';
 	import { staticIcons } from '$types/icons';
 	import { persistedState } from 'svelte-persisted-state';
@@ -142,11 +142,12 @@
 		}
 	}
 
-	async function handleEditBaseName(base: Base) {
+	async function handleEditBase(base: Base) {
 		// @ts-ignore
-		const result = await modal.showModal<string>(TextInputModal, {
+		const result = await modal.showModal<{ name: string; area_range: number }>(EditBaseModal, {
 			title: m.edit_entity({ entity: m.base({ count: 1 }) }),
-			value: base.name || ''
+			name: base.name || '',
+			areaRange: base.area_range || 3500
 		});
 		if (!result) return;
 
@@ -158,7 +159,8 @@
 		if (guild && guild.bases) {
 			const baseInGuild = Object.values(guild.bases).find((b) => b.id === base.id);
 			if (baseInGuild) {
-				baseInGuild.name = result;
+				baseInGuild.name = result.name;
+				baseInGuild.area_range = result.area_range;
 				guild.state = EntryState.MODIFIED;
 			}
 		}
@@ -368,7 +370,7 @@
 												onclick={() => handleBaseFocus(base)}
 												oncontextmenu={(e) => {
 													e.preventDefault();
-													handleEditBaseName(base);
+													handleEditBase(base);
 												}}
 											>
 												<div class="font-bold">{base.name}</div>
@@ -419,6 +421,6 @@
 		showDungeons={mapOptions.showDungeons}
 		showAlphaPals={mapOptions.showAlphaPals}
 		showPredatorPals={mapOptions.showPredatorPals}
-		onEditBaseName={handleEditBaseName}
+		onEditBase={handleEditBase}
 	/>
 </div>

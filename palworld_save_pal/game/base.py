@@ -106,6 +106,25 @@ class Base(BaseModel):
             else None
         )
 
+    @computed_field
+    def area_range(self) -> Optional[float]:
+        return PalObjects.get_nested(
+            self._base_save_data,
+            "value",
+            "RawData",
+            "value",
+            "area_range",
+        )
+
+    @area_range.setter
+    def area_range(self, value: float):
+        if not self._base_save_data:
+            return
+        logger.debug("%s => %s", self.id, value)
+        PalObjects.set_nested(
+            self._base_save_data, "value", "RawData", "value", "area_range", value=value
+        )
+
     @property
     def save_data(self) -> Dict[str, Any]:
         return {
@@ -171,6 +190,8 @@ class Base(BaseModel):
             self.name = other.name
         else:
             logger.warning("Base name is empty")
+        if other.area_range is not None:
+            self.area_range = other.area_range
 
     def _load_storage_containers(
         self,

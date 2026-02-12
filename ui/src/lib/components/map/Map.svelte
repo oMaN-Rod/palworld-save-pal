@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { View, Map, Layer, Feature, Overlay } from 'svelte-openlayers';
-	import { createIconStyle, createStyle, createTextStyle } from 'svelte-openlayers/utils';
+	import { createIconStyle, createStyle } from 'svelte-openlayers/utils';
 	import { Projection } from 'ol/proj.js';
-	import type { Map as OLMap, MapBrowserEvent, Feature as OLFeature } from 'ol';
+	import type { Map as OLMap, MapBrowserEvent } from 'ol';
 	import { getAppState } from '$states';
 	import {
 		pixelToWorld,
@@ -11,7 +11,9 @@
 		mapToWorld,
 		ORIGIN_GAME_X,
 		ORIGIN_GAME_Y,
-		worldToPixel
+		worldToPixel,
+		SCALE,
+		TRANSFORM_A
 	} from './utils';
 	import { createPalIconStyle, mapImg } from './styles';
 	import { mapObjects } from '$lib/data';
@@ -32,8 +34,10 @@
 	import compass from '$lib/assets/img/compass.webp';
 	import { onMount } from 'svelte';
 	import ContextMenu from 'ol-contextmenu';
-	import GeoJSON from 'ol/format/GeoJSON.js';
-	import type { Geometry } from 'ol/geom';
+	import { Fill, Stroke, Style } from 'ol/style';
+	import CircleStyle from 'ol/style/Circle';
+	import type { FeatureLike } from 'ol/Feature';
+	import type { Base } from '$types';
 
 	// Props to control which markers to display
 	let {
@@ -45,7 +49,7 @@
 		showDungeons = true,
 		showAlphaPals = true,
 		showPredatorPals = true,
-		onEditBaseName
+		onEditBase
 	}: {
 		map?: OLMap | null;
 		showOrigin?: boolean;
@@ -55,7 +59,7 @@
 		showDungeons?: boolean;
 		showAlphaPals?: boolean;
 		showPredatorPals?: boolean;
-		onEditBaseName?: (base: any) => void;
+		onEditBase?: (base: any) => void;
 	} = $props();
 
 	const appState = getAppState();
@@ -85,13 +89,29 @@
 		anchorYUnits: 'fraction'
 	});
 
-	const baseIconStyle = createIconStyle({
-		src: mapImg.baseCamp,
-		scale: 0.83,
-		anchor: [0.5, 0.5],
-		anchorXUnits: 'fraction',
-		anchorYUnits: 'fraction'
-	});
+	const baseIconStyle = (feature: FeatureLike, resolution: number) => {
+		const props = feature.getProperties();
+		const base = props.data as Base;
+		const areaRange = base.area_range || 3500;
+		const mapPixelRadius = (areaRange / SCALE) * Math.abs(TRANSFORM_A);
+		const screenRadius = mapPixelRadius / resolution;
+		return [
+			createIconStyle({
+				src: mapImg.baseCamp,
+				scale: 0.83,
+				anchor: [0.5, 0.5],
+				anchorXUnits: 'fraction',
+				anchorYUnits: 'fraction'
+			}),
+			new Style({
+				image: new CircleStyle({
+					radius: screenRadius,
+					stroke: new Stroke({ color: 'rgba(0, 0, 255, 1)', width: 2, lineDash: [4, 8] }),
+					fill: new Fill({ color: 'rgba(0, 0, 255, 0.1)' })
+				})
+			})
+		];
+	};
 
 	const fastTravelIconStyle = createIconStyle({
 		src: mapImg.fastTravel,
@@ -219,7 +239,7 @@
 				baseContextMenu.on('open', (evt: any) => {
 					const feature = map?.forEachFeatureAtPixel(evt.pixel, (ft) => ft);
 					if (feature && feature.get('type') === 'base') {
-						onEditBaseName?.(feature.get('data'));
+						onEditBase?.(feature.get('data'));
 					}
 					baseContextMenu.closeMenu();
 				});

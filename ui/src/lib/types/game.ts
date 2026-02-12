@@ -182,6 +182,7 @@ export type Base = {
 	storage_containers: Record<string, ItemContainer>;
 	state: EntryState;
 	location: WorldMapPoint;
+	area_range: number;
 };
 
 export type MapObject = {
@@ -192,7 +193,12 @@ export type MapObject = {
 	pal: string;
 };
 
-export type BaseDTO = { id: string; storage_containers: Record<string, ItemContainer> };
+export type BaseDTO = {
+	id: string;
+	storage_containers: Record<string, ItemContainer>;
+	name?: string;
+	area_range?: number;
+};
 
 export type GuildDTO = {
 	name?: string;

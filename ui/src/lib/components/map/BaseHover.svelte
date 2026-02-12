@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Base } from '$types';
+	import { LandPlot } from '@lucide/svelte';
 	import { worldToMap } from './utils';
 	import { Globe, Map } from 'lucide-svelte';
 
@@ -16,6 +17,15 @@
 	<h3 class="text-lg font-bold">{base.name}</h3>
 	<h4 class="text-xs font-light">ID: {base.id}</h4>
 	<div class="mt-2 space-y-1">
+		<div class="flex items-start gap-2">
+			<LandPlot class="text-primary mt-0.5 h-3.5 w-3.5 shrink-0" />
+			<div class="min-w-0 flex-1">
+				<div class="text-muted-foreground text-xs font-medium">Area</div>
+				<div class="font-mono text-xs">
+					{base.area_range}
+				</div>
+			</div>
+		</div>
 		<div class="flex items-start gap-2">
 			<Globe class="text-primary mt-0.5 h-3.5 w-3.5 shrink-0" />
 			<div class="min-w-0 flex-1">

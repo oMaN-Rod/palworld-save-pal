@@ -9,3 +9,4 @@ class BaseDTO(BaseModel):
     id: UUID
     storage_containers: Dict[UUID, ItemContainerDTO]
     name: str | None = None
+    area_range: float | None = None
