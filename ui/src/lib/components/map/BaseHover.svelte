@@ -5,9 +5,11 @@
 	import { Globe, Map } from 'lucide-svelte';
 
 	let {
-		base
+		base,
+		guildName
 	}: {
 		base: Base;
+		guildName?: string;
 	} = $props();
 
 	const mapCoords = $derived(worldToMap(base.location.x, base.location.y));
@@ -15,6 +17,7 @@
 
 <div class="popup-content">
 	<h3 class="text-lg font-bold">{base.name}</h3>
+	<h4 class="text-xs font-bold">Guild: {guildName}</h4>
 	<h4 class="text-xs font-light">ID: {base.id}</h4>
 	<div class="mt-2 space-y-1">
 		<div class="flex items-start gap-2">

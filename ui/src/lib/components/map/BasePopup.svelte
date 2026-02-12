@@ -8,9 +8,11 @@
 	import { ASSET_DATA_PATH } from '$types/icons';
 
 	let {
-		base
+		base,
+		guildName
 	}: {
 		base: Base;
+		guildName?: string;
 	} = $props();
 
 	const mapCoords = $derived(worldToMap(base.location.x, base.location.y));
@@ -40,7 +42,8 @@
 				<Home class="text-primary mt-1 h-5 w-5 shrink-0" />
 				<div class="min-w-0 flex-1">
 					<h3 class="text-foreground truncate text-lg font-bold">{base.name}</h3>
-					<p class="text-muted-foreground truncate text-xs font-light">ID: {base.id}</p>
+					<span class="text-muted-foreground truncate text-xs font-light">Guild: {guildName}</span>
+					<span class="text-muted-foreground truncate text-xs font-light">ID: {base.id}</span>
 				</div>
 			</div>
 		</div>

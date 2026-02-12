@@ -153,7 +153,7 @@
 		return guilds.reduce((acc, guild) => {
 			if (guild.bases) {
 				Object.values(guild.bases).forEach((base) => {
-					acc.push(base);
+					acc.push({ base, guildName: guild.name });
 				});
 			}
 			return acc;
@@ -309,17 +309,17 @@
 			<!-- Base markers layer -->
 			{#if showBases}
 				<Layer.Vector>
-					{#each bases as base}
+					{#each bases as { base, guildName }}
 						<Feature.Point
 							coordinates={worldToPixel(base.location.x, base.location.y)}
 							style={baseIconStyle}
 							properties={{ type: 'base', data: base }}
 						>
 							<Overlay.Hover {positioning} {offset} class={hoverClass}>
-								<BaseHover {base} />
+								<BaseHover {base} {guildName} />
 							</Overlay.Hover>
 							<Overlay.Popup {positioning} {offset}>
-								<BasePopup {base} />
+								<BasePopup {base} {guildName} />
 							</Overlay.Popup>
 						</Feature.Point>
 					{/each}
