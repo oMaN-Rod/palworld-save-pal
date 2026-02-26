@@ -459,6 +459,22 @@
     "localized_name": "Espada de Raio",
     "description": "Espada de Raio para combate à curta distância. Corta o alvo com um laser de alta potência."
   },
+  "BeamSword_2": {
+    "localized_name": "Espada de Raio",
+    "description": "Espada de Raio para combate à curta distância. Corta o alvo com um laser de alta potência."
+  },
+  "BeamSword_3": {
+    "localized_name": "Espada de Raio",
+    "description": "Espada de Raio para combate à curta distância. Corta o alvo com um laser de alta potência."
+  },
+  "BeamSword_4": {
+    "localized_name": "Espada de Raio",
+    "description": "Espada de Raio para combate à curta distância. Corta o alvo com um laser de alta potência."
+  },
+  "BeamSword_5": {
+    "localized_name": "Espada de Raio",
+    "description": "Espada de Raio para combate à curta distância. Corta o alvo com um laser de alta potência."
+  },
   "Beer": {
     "localized_name": "pt-BR Text",
     "description": "pt-BR Text"
@@ -490,6 +506,22 @@
   "Blueprint_AssaultRifle_Default5": {
     "localized_name": "Esquema de Fuzil de Assalto 4",
     "description": "Com isto em mãos, é desbloqueada a receita de [AssaultRifle Default1 (Legendary)], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_BeamSword_2": {
+    "localized_name": "Esquema de Espada de Raio 1",
+    "description": "Com isto em mãos, a receita de [Espada de Raio (Uncommon)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
+  },
+  "Blueprint_BeamSword_3": {
+    "localized_name": "Esquema de Espada de Raio 2",
+    "description": "Com isto em mãos, a receita de [Espada de Raio (Rare)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
+  },
+  "Blueprint_BeamSword_4": {
+    "localized_name": "Esquema de Espada de Raio 3",
+    "description": "Com isto em mãos, a receita de [Espada de Raio (Epic)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
+  },
+  "Blueprint_BeamSword_5": {
+    "localized_name": "Esquema de Espada de Raio 4",
+    "description": "Com isto em mãos, a receita de [Espada de Raio (Legendary)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
   },
   "Blueprint_BowGun_2": {
     "localized_name": "Esquema de Besta 1",
@@ -1415,6 +1447,22 @@
     "localized_name": "Esquema de Elmo de Metal Refinado 4",
     "description": "Com isto em mãos, é desbloqueada a receita de [IronHelmet 5 (Legendary)], que você pode criar em [Factory Hard 02]."
   },
+  "Blueprint_Katana_2": {
+    "localized_name": "Esquema de Katana 1",
+    "description": "Com isto em mãos, a receita de [Katana (Uncommon)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
+  },
+  "Blueprint_Katana_3": {
+    "localized_name": "Esquema de Katana 2",
+    "description": "Com isto em mãos, a receita de [Katana (Rare)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
+  },
+  "Blueprint_Katana_4": {
+    "localized_name": "Esquema de Katana 3",
+    "description": "Com isto em mãos, a receita de [Katana (Epic)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
+  },
+  "Blueprint_Katana_5": {
+    "localized_name": "Esquema de Katana 4",
+    "description": "Com isto em mãos, a receita de [Katana (Legendary)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
+  },
   "Blueprint_LanternTop": {
     "localized_name": "Esquema de Lanterna de Papel Portátil",
     "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|LanternTop|/>]."
@@ -1903,6 +1951,10 @@
     "localized_name": "Esquema de Fuzil de Tiro Único 4",
     "description": "Com isto em mãos, é desbloqueada a receita de [Fuzil de Tiro Único (Legendary)], que você pode criar em [WeaponFactory Dirty 02]."
   },
+  "Blueprint_Spear_ForestBoss_5": {
+    "localized_name": "Esquema da Lança da Lily 4",
+    "description": "Com isto em mãos, a receita de [Spear ForestBoss (Legendary)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 02]."
+  },
   "Blueprint_StealArmorCold_2": {
     "localized_name": "Esquema de Armadura de Metal Pal Resistente a Frio 1",
     "description": "Com isto em mãos, é desbloqueada a receita de [StealArmorCold 2 (Uncommon)], que você pode criar em [Factory Hard 03]."
@@ -1983,6 +2035,22 @@
     "localized_name": "Esquema de Submetralhadora 4",
     "description": "Com isto em mãos, a receita de [Submetralhadora (Legendary)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 02]."
   },
+  "Blueprint_Sword_2": {
+    "localized_name": "Esquema de Espada 1",
+    "description": "Com isto em mãos, a receita de [Espada (Uncommon)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 01]."
+  },
+  "Blueprint_Sword_3": {
+    "localized_name": "Esquema de Espada 2",
+    "description": "Com isto em mãos, a receita de [Espada (Rare)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 01]."
+  },
+  "Blueprint_Sword_4": {
+    "localized_name": "Esquema de Espada 3",
+    "description": "Com isto em mãos, a receita de [Espada (Epic)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 01]."
+  },
+  "Blueprint_Sword_5": {
+    "localized_name": "Esquema de Espada 4",
+    "description": "Com isto em mãos, a receita de [Espada (Legendary)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 01]."
+  },
   "Blueprint_WallTorch02": {
     "localized_name": "Esquema de Tocha de Parede Solene",
     "description": "Enquanto tiver isto com você ou deixar guardado na base, poderá construir [<MapObjectName id=|WallTorch02|/>]."
@@ -2013,7 +2081,7 @@
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "Esquema de Armadura Sagrada",
-    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [PalSummon YakushimaArmor001], que você pode criar em [Factory Hard 02]."
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Armadura de Placas Consagradas], que você pode criar em [Factory Hard 02]."
   },
   "Blueprint_YakushimaArmor001_2": {
     "localized_name": "Esquema de Armadura Sagrada 1",
@@ -2117,7 +2185,7 @@
   },
   "Blueprint_YakushimaHeadEquip001": {
     "localized_name": "Esquema de Máscara Sagrada",
-    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [PalSummon YakushimaHeadEquip001], que você pode criar em [Factory Hard 02]."
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Máscara Consagrada], que você pode criar em [Factory Hard 02]."
   },
   "Blueprint_YakushimaHeadEquip001_2": {
     "localized_name": "Esquema de Máscara Sagrada 1",
@@ -2137,7 +2205,7 @@
   },
   "Blueprint_YakushimaHeadEquip002": {
     "localized_name": "Esquema de Acessório para Cabeça Sagrado",
-    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [PalSummon YakushimaHeadEquip002], que você pode criar em [Factory Hard 02]."
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Capacete Consagrado], que você pode criar em [Factory Hard 02]."
   },
   "Blueprint_YakushimaHeadEquip002_2": {
     "localized_name": "Esquema de Acessório para Cabeça Sagrado 1",
@@ -2157,7 +2225,7 @@
   },
   "Blueprint_YakushimaHeadEquip003": {
     "localized_name": "Esquema de Elmo Sagrado",
-    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [PalSummon YakushimaHeadEquip003], que você pode criar em [Factory Hard 02]."
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Elmo Consagrado], que você pode criar em [Factory Hard 02]."
   },
   "Blueprint_YakushimaHeadEquip003_2": {
     "localized_name": "Esquema de Elmo Sagrado 1",
@@ -2177,7 +2245,7 @@
   },
   "Blueprint_YakushimaHeadEquip004": {
     "localized_name": "Esquema de Capuz Sagrado",
-    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [PalSummon YakushimaHeadEquip004], que você pode criar em [Factory Hard 02]."
+    "description": "[Colaboração com Terraria] Com isto em mãos, é desbloqueada a receita de [Capuz Consagrado], que você pode criar em [Factory Hard 02]."
   },
   "Blueprint_YakushimaHeadEquip004_2": {
     "localized_name": "Esquema de Capuz Sagrado 1",
@@ -3531,10 +3599,6 @@
     "localized_name": "Bala de Pistola",
     "description": "Projétil usado com HandGun Default e armas similares."
   },
-  "HandgunShield": {
-    "localized_name": "Escudo Balístico",
-    "description": "Escudo Balístico"
-  },
   "Head001": {
     "localized_name": "Coroa Real",
     "description": null
@@ -4163,6 +4227,22 @@
     "localized_name": "Katana",
     "description": "Katana para combate à curta distância. Seu gume afiado permite fatiar o alvo com um só golpe."
   },
+  "Katana_2": {
+    "localized_name": "Katana",
+    "description": "Katana para combate à curta distância. Seu gume afiado permite fatiar o alvo com um só golpe."
+  },
+  "Katana_3": {
+    "localized_name": "Katana",
+    "description": "Katana para combate à curta distância. Seu gume afiado permite fatiar o alvo com um só golpe."
+  },
+  "Katana_4": {
+    "localized_name": "Katana",
+    "description": "Katana para combate à curta distância. Seu gume afiado permite fatiar o alvo com um só golpe."
+  },
+  "Katana_5": {
+    "localized_name": "Katana",
+    "description": "Katana para combate à curta distância. Seu gume afiado permite fatiar o alvo com um só golpe."
+  },
   "Lantern": {
     "localized_name": "Lampião de Cintura",
     "description": "Lampião para prender à cintura. Acende sozinho ao anoitecer. É possível alterar o modo de iluminação para que permaneça sempre aceso. Um só já basta para iluminar o ambiente."
@@ -4417,7 +4497,7 @@
   },
   "ManganeseIngot": {
     "localized_name": "Lingote de Marganês",
-    "description": "Liga feita de Minério de Marganês, Lingote de Metal e Carvão Mineral. Com elevada resistência a energia, serve de material para armas."
+    "description": "Liga feita de Minério de Marganês, Minério Metálico e Carvão Mineral. Com elevada resistência a energia, serve de material para armas."
   },
   "ManganeseOre": {
     "localized_name": "Minério de Marganês",
@@ -4637,43 +4717,43 @@
   },
   "OctaviaRevolver": {
     "localized_name": "Revólver de Atirador",
-    "description": "[Colaboração com ULTRAKILL] Revólver que pode ser disparado continuamente usando eletricidade, sem necessidade de recarregar. Enquanto estiver equipado, em vez de lançar esferas de captura, você lançará moedas, que voam na direção do inimigo quando atingidas pelo Revólver de Atirador."
+    "description": "[Colaboração com ULTRAKILL] Revólver que pode ser disparado continuamente usando eletricidade. Enquanto estiver equipado, em vez de lançar esferas de captura, você lançará moedas que voam na direção do inimigo quando atingidas pelos projéteis de Revólver de Atirador."
   },
   "OctaviaRevolver_2": {
     "localized_name": "Revólver de Atirador",
-    "description": "[Colaboração com ULTRAKILL] Revólver que pode ser disparado continuamente usando eletricidade, sem necessidade de recarregar. Enquanto estiver equipado, em vez de lançar esferas de captura, você lançará moedas, que voam na direção do inimigo quando atingidas pelo Revólver de Atirador."
+    "description": "[Colaboração com ULTRAKILL] Revólver que pode ser disparado continuamente usando eletricidade. Enquanto estiver equipado, em vez de lançar esferas de captura, você lançará moedas que voam na direção do inimigo quando atingidas pelos projéteis de Revólver de Atirador."
   },
   "OctaviaRevolver_3": {
     "localized_name": "Revólver de Atirador",
-    "description": "[Colaboração com ULTRAKILL] Revólver que pode ser disparado continuamente usando eletricidade, sem necessidade de recarregar. Enquanto estiver equipado, em vez de lançar esferas de captura, você lançará moedas, que voam na direção do inimigo quando atingidas pelo Revólver de Atirador."
+    "description": "[Colaboração com ULTRAKILL] Revólver que pode ser disparado continuamente usando eletricidade. Enquanto estiver equipado, em vez de lançar esferas de captura, você lançará moedas que voam na direção do inimigo quando atingidas pelos projéteis de Revólver de Atirador."
   },
   "OctaviaRevolver_4": {
     "localized_name": "Revólver de Atirador",
-    "description": "[Colaboração com ULTRAKILL] Revólver que pode ser disparado continuamente usando eletricidade, sem necessidade de recarregar. Enquanto estiver equipado, em vez de lançar esferas de captura, você lançará moedas, que voam na direção do inimigo quando atingidas pelo Revólver de Atirador."
+    "description": "[Colaboração com ULTRAKILL] Revólver que pode ser disparado continuamente usando eletricidade. Enquanto estiver equipado, em vez de lançar esferas de captura, você lançará moedas que voam na direção do inimigo quando atingidas pelos projéteis de Revólver de Atirador."
   },
   "OctaviaRevolver_5": {
     "localized_name": "Revólver de Atirador",
-    "description": "[Colaboração com ULTRAKILL] Revólver que pode ser disparado continuamente usando eletricidade, sem necessidade de recarregar. Enquanto estiver equipado, em vez de lançar esferas de captura, você lançará moedas, que voam na direção do inimigo quando atingidas pelo Revólver de Atirador."
+    "description": "[Colaboração com ULTRAKILL] Revólver que pode ser disparado continuamente usando eletricidade. Enquanto estiver equipado, em vez de lançar esferas de captura, você lançará moedas que voam na direção do inimigo quando atingidas pelos projéteis de Revólver de Atirador."
   },
   "OctaviaShotgun": {
     "localized_name": "Espingarda de Ejeção de Núcleo",
-    "description": "[Colaboração com ULTRAKILL] Espingarda que pode ser disparada continuamente usando energia térmica, sem necessidade de recarregar. Enquanto estiver equipada, em vez de lançar esferas de captura, você lançará núcleos, que explodem quando atingidos pelo Revólver de Atirador."
+    "description": "[Colaboração com ULTRAKILL] Espingarda que pode ser disparada continuamente usando energia térmica. Enquanto estiver equipada, em vez de lançar esferas de captura, você lançará núcleos. Mantenha o comando pressionado para aumentar o alcance. Os núcleos explodem quando atingidos pelos projéteis de Revólver de Atirador."
   },
   "OctaviaShotgun_2": {
     "localized_name": "Espingarda de Ejeção de Núcleo",
-    "description": "[Colaboração com ULTRAKILL] Espingarda que pode ser disparada continuamente usando energia térmica, sem necessidade de recarregar. Enquanto estiver equipada, em vez de lançar esferas de captura, você lançará núcleos, que explodem quando atingidos pelo Revólver de Atirador."
+    "description": "[Colaboração com ULTRAKILL] Espingarda que pode ser disparada continuamente usando energia térmica. Enquanto estiver equipada, em vez de lançar esferas de captura, você lançará núcleos. Mantenha o comando pressionado para aumentar o alcance. Os núcleos explodem quando atingidos pelos projéteis de Revólver de Atirador."
   },
   "OctaviaShotgun_3": {
     "localized_name": "Espingarda de Ejeção de Núcleo",
-    "description": "[Colaboração com ULTRAKILL] Espingarda que pode ser disparada continuamente usando energia térmica, sem necessidade de recarregar. Enquanto estiver equipada, em vez de lançar esferas de captura, você lançará núcleos, que explodem quando atingidos pelo Revólver de Atirador."
+    "description": "[Colaboração com ULTRAKILL] Espingarda que pode ser disparada continuamente usando energia térmica. Enquanto estiver equipada, em vez de lançar esferas de captura, você lançará núcleos. Mantenha o comando pressionado para aumentar o alcance. Os núcleos explodem quando atingidos pelos projéteis de Revólver de Atirador."
   },
   "OctaviaShotgun_4": {
     "localized_name": "Espingarda de Ejeção de Núcleo",
-    "description": "[Colaboração com ULTRAKILL] Espingarda que pode ser disparada continuamente usando energia térmica, sem necessidade de recarregar. Enquanto estiver equipada, em vez de lançar esferas de captura, você lançará núcleos, que explodem quando atingidos pelo Revólver de Atirador."
+    "description": "[Colaboração com ULTRAKILL] Espingarda que pode ser disparada continuamente usando energia térmica. Enquanto estiver equipada, em vez de lançar esferas de captura, você lançará núcleos. Mantenha o comando pressionado para aumentar o alcance. Os núcleos explodem quando atingidos pelos projéteis de Revólver de Atirador."
   },
   "OctaviaShotgun_5": {
     "localized_name": "Espingarda de Ejeção de Núcleo",
-    "description": "[Colaboração com ULTRAKILL] Espingarda que pode ser disparada continuamente usando energia térmica, sem necessidade de recarregar. Enquanto estiver equipada, em vez de lançar esferas de captura, você lançará núcleos, que explodem quando atingidos pelo Revólver de Atirador."
+    "description": "[Colaboração com ULTRAKILL] Espingarda que pode ser disparada continuamente usando energia térmica. Enquanto estiver equipada, em vez de lançar esferas de captura, você lançará núcleos. Mantenha o comando pressionado para aumentar o alcance. Os núcleos explodem quando atingidos pelos projéteis de Revólver de Atirador."
   },
   "OctopusGirl_Takoyaki": {
     "localized_name": "Takoyaki de Gloopie",
@@ -6352,7 +6432,7 @@
     "description": "Quando você tem isto, pode montar num AmaterasuWolf Dark."
   },
   "SkillUnlock_BadCatgirl": {
-    "localized_name": "Espingarda de ニャニミテ",
+    "localized_name": "Espingarda de Nyafia",
     "description": "Espingarda da Nyafia. Quando a habilidade de companheiro é ativada, a Nyafia ataca os inimigos próximos disparando sem parar."
   },
   "SkillUnlock_BirdDragon": {
@@ -6512,7 +6592,7 @@
     "description": "Quando você tem isto, pode montar num Maraith."
   },
   "SkillUnlock_GoldenHorse": {
-    "localized_name": "Sela de キンガゼル",
+    "localized_name": "Sela de Gildane",
     "description": "Quando você tem isto, pode montar num Gildane."
   },
   "SkillUnlock_GrassMammoth": {
@@ -6831,6 +6911,10 @@
     "localized_name": "Lança da Lily",
     "description": "Lança adorada por Lily. É com esta arma que ela julga aqueles que menosprezam os Pals."
   },
+  "Spear_ForestBoss_5": {
+    "localized_name": "Lança da Lily",
+    "description": "Lança adorada por Lily. É com esta arma que ela julga aqueles que menosprezam os Pals."
+  },
   "Spear_QueenBee": {
     "localized_name": "Cetro da Elizabee",
     "description": "Cetro de uma Elizabee remodelado para uso por pessoas. Emana a aura ambiciosa de uma rainha."
@@ -6877,7 +6961,7 @@
   },
   "StainlessSteel": {
     "localized_name": "Exolita",
-    "description": "Liga metálica contendo Cromita, Lingote de Metal e Exoquartzo. Pode servir de material para construções ou equipamentos avançados."
+    "description": "Liga metálica contendo Cromita, Minério Metálico e Exoquartzo. Pode servir de material para construções ou equipamentos avançados."
   },
   "StatusPointResetSan": {
     "localized_name": "Limpador de Memória",
@@ -7016,6 +7100,22 @@
     "description": "Algodão-doce que pode ser extraído de Woolipop. Sua doçura se dissolve com suavidade na boca."
   },
   "Sword": {
+    "localized_name": "Espada",
+    "description": "Espada para combate à curta distância. Seu gume é excepcional! Quanto mais você se aproximar do inimigo, maior o perigo."
+  },
+  "Sword_2": {
+    "localized_name": "Espada",
+    "description": "Espada para combate à curta distância. Seu gume é excepcional! Quanto mais você se aproximar do inimigo, maior o perigo."
+  },
+  "Sword_3": {
+    "localized_name": "Espada",
+    "description": "Espada para combate à curta distância. Seu gume é excepcional! Quanto mais você se aproximar do inimigo, maior o perigo."
+  },
+  "Sword_4": {
+    "localized_name": "Espada",
+    "description": "Espada para combate à curta distância. Seu gume é excepcional! Quanto mais você se aproximar do inimigo, maior o perigo."
+  },
+  "Sword_5": {
     "localized_name": "Espada",
     "description": "Espada para combate à curta distância. Seu gume é excepcional! Quanto mais você se aproximar do inimigo, maior o perigo."
   },

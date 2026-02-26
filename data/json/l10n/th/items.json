@@ -459,6 +459,22 @@
     "localized_name": "บีมซอร์ด",
     "description": "บีมซอร์ดสำหรับสู้ระยะประชิด ใช้เลเซอร์พลังงานสูงฟันและลวกศัตรู"
   },
+  "BeamSword_2": {
+    "localized_name": "บีมซอร์ด",
+    "description": "บีมซอร์ดสำหรับสู้ระยะประชิด ใช้เลเซอร์พลังงานสูงฟันและลวกศัตรู"
+  },
+  "BeamSword_3": {
+    "localized_name": "บีมซอร์ด",
+    "description": "บีมซอร์ดสำหรับสู้ระยะประชิด ใช้เลเซอร์พลังงานสูงฟันและลวกศัตรู"
+  },
+  "BeamSword_4": {
+    "localized_name": "บีมซอร์ด",
+    "description": "บีมซอร์ดสำหรับสู้ระยะประชิด ใช้เลเซอร์พลังงานสูงฟันและลวกศัตรู"
+  },
+  "BeamSword_5": {
+    "localized_name": "บีมซอร์ด",
+    "description": "บีมซอร์ดสำหรับสู้ระยะประชิด ใช้เลเซอร์พลังงานสูงฟันและลวกศัตรู"
+  },
   "Beer": {
     "localized_name": "-",
     "description": "-"
@@ -490,6 +506,22 @@
   "Blueprint_AssaultRifle_Default5": {
     "localized_name": "แบบสร้างปืนไรเฟิลจู่โจม 4",
     "description": "ไอเทมนี้จะปลดล็อกวิธีสร้าง |AssaultRifle Default1(Legendary)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+  },
+  "Blueprint_BeamSword_2": {
+    "localized_name": "พิมพ์เขียวดาบลำแสง 1",
+    "description": "เมื่อครอบครองไว้ จะปลดล็อกสูตร|บีมซอร์ด Uncommon)| สามารถสร้างได้ที่ |WeaponFactory Dirty 03|"
+  },
+  "Blueprint_BeamSword_3": {
+    "localized_name": "พิมพ์เขียวดาบลำแสง 2",
+    "description": "เมื่อครอบครองไว้ จะปลดล็อกสูตร|บีมซอร์ด Rare)| สามารถสร้างได้ที่ |WeaponFactory Dirty 03|"
+  },
+  "Blueprint_BeamSword_4": {
+    "localized_name": "พิมพ์เขียวดาบลำแสง 3",
+    "description": "เมื่อครอบครองไว้ จะปลดล็อกสูตร|บีมซอร์ด (Epic)| สามารถสร้างได้ที่ |WeaponFactory Dirty 03|"
+  },
+  "Blueprint_BeamSword_5": {
+    "localized_name": "พิมพ์เขียวดาบลำแสง 4",
+    "description": "เมื่อครอบครองไว้ จะปลดล็อกสูตร|บีมซอร์ด (Legendary)| สามารถสร้างได้ที่ |WeaponFactory Dirty 03|"
   },
   "Blueprint_BowGun_2": {
     "localized_name": "แบบสร้างหน้าไม้ 1",
@@ -1415,6 +1447,22 @@
     "localized_name": "แบบสร้างหมวกเกราะโลหะถลุง 4",
     "description": "ไอเทมนี้จะปลดล็อกวิธีสร้าง |IronHelmet 5(Legendary)| สร้างได้ที่ |Factory Hard 02|"
   },
+  "Blueprint_Katana_2": {
+    "localized_name": "พิมพ์เขียวดาบคาตานะ 1",
+    "description": "เมื่อครอบครองไว้ จะปลดล็อกสูตร|ดาบคาตานะ (Uncommon)| สามารถสร้างได้ที่ |WeaponFactory Dirty 03|"
+  },
+  "Blueprint_Katana_3": {
+    "localized_name": "พิมพ์เขียวดาบคาตานะ 2",
+    "description": "เมื่อครอบครองไว้ จะปลดล็อกสูตร|ดาบคาตานะ (Rare)| สามารถสร้างได้ที่ |WeaponFactory Dirty 03|"
+  },
+  "Blueprint_Katana_4": {
+    "localized_name": "พิมพ์เขียวดาบคาตานะ 3",
+    "description": "เมื่อครอบครองไว้ จะปลดล็อกสูตร|ดาบคาตานะ (Epic)| สามารถสร้างได้ที่ |WeaponFactory Dirty 03|"
+  },
+  "Blueprint_Katana_5": {
+    "localized_name": "พิมพ์เขียวดาบคาตานะ 4",
+    "description": "เมื่อครอบครองไว้ จะปลดล็อกสูตร|ดาบคาตานะ (Legendary)| สามารถสร้างได้ที่ |WeaponFactory Dirty 03|"
+  },
   "Blueprint_LanternTop": {
     "localized_name": "แบบสร้างโคมกระดาษแบบแขวน",
     "description": "หากพกติดตัวไว้ หรือเก็บไว้ที่ฐาน จะสร้าง |<MapObjectName id=|LanternTop|/>| ได้"
@@ -1649,7 +1697,7 @@
   },
   "Blueprint_PalSummon_YakushimaBoss002": {
     "localized_name": "เเบบสร้าง Celestial Sigil",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|(PalSummon YakushimaBoss002)| สร้างได้ที่ |โต๊ะทำงานดึกดำบรรพ์|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|(PalSummon YakushimaBoss002)| สร้างได้ที่ |โต๊ะทำงานดึกดำบรรพ์|"
   },
   "Blueprint_PlasticArmorCold_2": {
     "localized_name": "แบบสร้างชุดเกราะพลาสตีลกันหนาว 1",
@@ -1903,6 +1951,10 @@
     "localized_name": "แบบสร้างปืนไรเฟิลบรรจุเดี่ยว 4",
     "description": "ไอเทมนี้จะปลดล็อกวิธีสร้าง |ปืนไรเฟิลบรรจุเดี่ยว(Legendary)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
+  "Blueprint_Spear_ForestBoss_5": {
+    "localized_name": "พิมพ์เขียวหอกของ Lily 4",
+    "description": "เมื่อครอบครองไว้ จะปลดล็อกสูตร|Spear ForestBoss (Legendary)| สามารถสร้างได้ที่ |WeaponFactory Dirty 02|"
+  },
   "Blueprint_StealArmorCold_2": {
     "localized_name": "แบบสร้างชุดเกราะพาลเมทัลกันหนาว 1",
     "description": "ไอเทมนี้จะปลดล็อกวิธีสร้าง |StealArmorCold 2(Uncommon)| สร้างได้ที่ |Factory Hard 03|"
@@ -1983,6 +2035,22 @@
     "localized_name": "แบบสร้างปืนกลมือ 4",
     "description": "ไอเทมนี้จะปลดล็อกวิธีสร้าง |ปืนกลมือ(Legendary)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
+  "Blueprint_Sword_2": {
+    "localized_name": "พิมพ์เขียวดาบลำแสง 1",
+    "description": "เมื่อครอบครองไว้ จะปลดล็อกสูตร|ดาบ (Uncommon)| สามารถสร้างได้ที่ |WeaponFactory Dirty 01|"
+  },
+  "Blueprint_Sword_3": {
+    "localized_name": "พิมพ์เขียวดาบลำแสง 2",
+    "description": "เมื่อครอบครองไว้ จะปลดล็อกสูตร|ดาบ (Rare)| สามารถสร้างได้ที่ |WeaponFactory Dirty 01|"
+  },
+  "Blueprint_Sword_4": {
+    "localized_name": "พิมพ์เขียวดาบลำแสง 3",
+    "description": "เมื่อครอบครองไว้ จะปลดล็อกสูตร|ดาบ (Epic)| สามารถสร้างได้ที่ |WeaponFactory Dirty 01|"
+  },
+  "Blueprint_Sword_5": {
+    "localized_name": "พิมพ์เขียวดาบลำแสง 4",
+    "description": "เมื่อครอบครองไว้ จะปลดล็อกสูตร|ดาบ (Legendary)| สามารถสร้างได้ที่ |WeaponFactory Dirty 01|"
+  },
   "Blueprint_WallTorch02": {
     "localized_name": "แบบสร้างคบเพลิงแขวนผนังน่าเกรงขาม",
     "description": "หากพกติดตัวไว้ หรือเก็บไว้ที่ฐาน จะสร้าง |<MapObjectName id=|WallTorch02|/>| ได้"
@@ -2013,207 +2081,207 @@
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "เเบบสร้าง Hallowed Plate Mail",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|(PalSummon YakushimaArmor001)| สร้างได้ที่ |Factory Hard 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|(Hallowed Plate Mail)| สร้างได้ที่ |Factory Hard 02|"
   },
   "Blueprint_YakushimaArmor001_2": {
     "localized_name": "เเบบสร้าง Hallowed Plate Mail1",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Plate Mail (Uncommon)| สร้างได้ที่ |Factory Hard 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Plate Mail (Uncommon)| สร้างได้ที่ |Factory Hard 02|"
   },
   "Blueprint_YakushimaArmor001_3": {
     "localized_name": "เเบบสร้าง Hallowed Plate Mail2",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Plate Mail (Rare)| สร้างได้ที่ |Factory Hard 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Plate Mail (Rare)| สร้างได้ที่ |Factory Hard 02|"
   },
   "Blueprint_YakushimaArmor001_4": {
     "localized_name": "เเบบสร้าง Hallowed Plate Mail3",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Plate Mail (Epic)| สร้างได้ที่ |Factory Hard 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Plate Mail (Epic)| สร้างได้ที่ |Factory Hard 02|"
   },
   "Blueprint_YakushimaArmor001_5": {
     "localized_name": "เเบบสร้าง Hallowed Plate Mail4",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Plate Mail (Legendary)| สร้างได้ที่ |Factory Hard 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Plate Mail (Legendary)| สร้างได้ที่ |Factory Hard 02|"
   },
   "Blueprint_YakushimaBlade002": {
     "localized_name": "เเบบสร้าง Terra Blade",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|(Terra Blade)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|(Terra Blade)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
   "Blueprint_YakushimaBlade002_2": {
     "localized_name": "เเบบสร้าง Terra Blade1",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Terra Blade (Uncommon)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Terra Blade (Uncommon)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
   "Blueprint_YakushimaBlade002_3": {
     "localized_name": "เเบบสร้าง Terra Blade2",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Terra Blade (Rare)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Terra Blade (Rare)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
   "Blueprint_YakushimaBlade002_4": {
     "localized_name": "เเบบสร้าง Terra Blade3",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Terra Blade (Epic)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Terra Blade (Epic)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
   "Blueprint_YakushimaBlade002_5": {
     "localized_name": "เเบบสร้าง Terra Blade4",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Terra Blade (Legendary)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Terra Blade (Legendary)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
   "Blueprint_YakushimaBlade003": {
     "localized_name": "เเบบสร้าง Terraprisma",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|(Terraprisma)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|(Terraprisma)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
   "Blueprint_YakushimaBlade003_2": {
     "localized_name": "เเบบสร้าง Terraprisma1",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Terraprisma (Uncommon)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Terraprisma (Uncommon)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
   "Blueprint_YakushimaBlade003_3": {
     "localized_name": "เเบบสร้าง Terraprisma2",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Terraprisma (Rare)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Terraprisma (Rare)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
   "Blueprint_YakushimaBlade003_4": {
     "localized_name": "เเบบสร้าง Terraprisma3",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Terraprisma (Epic)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Terraprisma (Epic)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
   "Blueprint_YakushimaBlade003_5": {
     "localized_name": "เเบบสร้าง Terraprisma4",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Terraprisma (Legendary)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Terraprisma (Legendary)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
   "Blueprint_YakushimaBlade004": {
     "localized_name": "เเบบสร้าง Excalibur",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|(Excalibur)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|(Excalibur)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
   "Blueprint_YakushimaBlade004_2": {
     "localized_name": "เเบบสร้าง Excalibur1",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Excalibur (Uncommon)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Excalibur (Uncommon)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
   "Blueprint_YakushimaBlade004_3": {
     "localized_name": "เเบบสร้าง Excalibur2",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Excalibur (Rare)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Excalibur (Rare)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
   "Blueprint_YakushimaBlade004_4": {
     "localized_name": "เเบบสร้าง Excalibur3",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Excalibur (Epic)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Excalibur (Epic)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
   "Blueprint_YakushimaBlade004_5": {
     "localized_name": "เเบบสร้าง Excalibur4",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Excalibur (Legendary)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Excalibur (Legendary)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
   "Blueprint_YakushimaBoss002_Relic": {
     "localized_name": "แบบแปลนของรูปปั้นมูนลอร์ด",
-    "description": "[อีเวนต์คอลแลบ Terraria] หากพกติดตัวหรือเก็บไว้ที่ฐาน 「<MapObjectName id=|YakushimaBoss002 Relic|/> จะสามารถใช้ในการก่อสร้างได้"
+    "description": "[คอลแลบ Terraria] หากพกติดตัวหรือเก็บไว้ที่ฐาน 「<MapObjectName id=|YakushimaBoss002 Relic|/> จะสามารถใช้ในการก่อสร้างได้"
   },
   "Blueprint_YakushimaGun001": {
     "localized_name": "เเบบสร้าง Vortex Beater",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|(Vortex Beater)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|(Vortex Beater)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
   "Blueprint_YakushimaGun001_2": {
     "localized_name": "เเบบสร้าง Vortex Beater1",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Vortex Beater (Uncommon)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Vortex Beater (Uncommon)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
   "Blueprint_YakushimaGun001_3": {
     "localized_name": "เเบบสร้าง Vortex Beater2",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Vortex Beater (Rare)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Vortex Beater (Rare)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
   "Blueprint_YakushimaGun001_4": {
     "localized_name": "เเบบสร้าง Vortex Beater3",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Vortex Beater (Epic)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Vortex Beater (Epic)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
   "Blueprint_YakushimaGun001_5": {
     "localized_name": "เเบบสร้าง Vortex Beater4",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Vortex Beater (Legendary)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Vortex Beater (Legendary)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
   "Blueprint_YakushimaHeadEquip001": {
     "localized_name": "เเบบสร้าง Hallowed Mask",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|(PalSummon YakushimaHeadEquip001)| สร้างได้ที่ |Factory Hard 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|(Hallowed Mask)| สร้างได้ที่ |Factory Hard 02|"
   },
   "Blueprint_YakushimaHeadEquip001_2": {
     "localized_name": "เเบบสร้าง Hallowed Mask1",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Mask (Uncommon)| สร้างได้ที่ |Factory Hard 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Mask (Uncommon)| สร้างได้ที่ |Factory Hard 02|"
   },
   "Blueprint_YakushimaHeadEquip001_3": {
     "localized_name": "เเบบสร้าง Hallowed Mask2",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Mask (Rare)| สร้างได้ที่ |Factory Hard 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Mask (Rare)| สร้างได้ที่ |Factory Hard 02|"
   },
   "Blueprint_YakushimaHeadEquip001_4": {
     "localized_name": "เเบบสร้าง Hallowed Mask3",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Mask (Epic)| สร้างได้ที่ |Factory Hard 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Mask (Epic)| สร้างได้ที่ |Factory Hard 02|"
   },
   "Blueprint_YakushimaHeadEquip001_5": {
     "localized_name": "เเบบสร้าง Hallowed Mask4",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Mask (Legendary)| สร้างได้ที่ |Factory Hard 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Mask (Legendary)| สร้างได้ที่ |Factory Hard 02|"
   },
   "Blueprint_YakushimaHeadEquip002": {
     "localized_name": "เเบบสร้าง Hallowed Headgear",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|(PalSummon YakushimaHeadEquip002)| สร้างได้ที่ |Factory Hard 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|(Hallowed Headgear)| สร้างได้ที่ |Factory Hard 02|"
   },
   "Blueprint_YakushimaHeadEquip002_2": {
     "localized_name": "เเบบสร้าง Hallowed Headgear1",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Headgear (Uncommon)| สร้างได้ที่ |Factory Hard 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Headgear (Uncommon)| สร้างได้ที่ |Factory Hard 02|"
   },
   "Blueprint_YakushimaHeadEquip002_3": {
     "localized_name": "เเบบสร้าง Hallowed Headgear2",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Headgear (Rare)| สร้างได้ที่ |Factory Hard 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Headgear (Rare)| สร้างได้ที่ |Factory Hard 02|"
   },
   "Blueprint_YakushimaHeadEquip002_4": {
     "localized_name": "เเบบสร้าง Hallowed Headgear3",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Headgear (Epic)| สร้างได้ที่ |Factory Hard 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Headgear (Epic)| สร้างได้ที่ |Factory Hard 02|"
   },
   "Blueprint_YakushimaHeadEquip002_5": {
     "localized_name": "เเบบสร้าง Hallowed Headgear4",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Headgear (Legendary)| สร้างได้ที่ |Factory Hard 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Headgear (Legendary)| สร้างได้ที่ |Factory Hard 02|"
   },
   "Blueprint_YakushimaHeadEquip003": {
     "localized_name": "เเบบสร้าง Hallowed Helmet",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|(PalSummon YakushimaHeadEquip003)| สร้างได้ที่ |Factory Hard 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|(Hallowed Helmet)| สร้างได้ที่ |Factory Hard 02|"
   },
   "Blueprint_YakushimaHeadEquip003_2": {
     "localized_name": "เเบบสร้าง Hallowed Helmet1",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Helmet (Uncommon)| สร้างได้ที่ |Factory Hard 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Helmet (Uncommon)| สร้างได้ที่ |Factory Hard 02|"
   },
   "Blueprint_YakushimaHeadEquip003_3": {
     "localized_name": "เเบบสร้าง Hallowed Helmet2",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Helmet (Rare)| สร้างได้ที่ |Factory Hard 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Helmet (Rare)| สร้างได้ที่ |Factory Hard 02|"
   },
   "Blueprint_YakushimaHeadEquip003_4": {
     "localized_name": "เเบบสร้าง Hallowed Helmet3",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Helmet (Epic)| สร้างได้ที่ |Factory Hard 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Helmet (Epic)| สร้างได้ที่ |Factory Hard 02|"
   },
   "Blueprint_YakushimaHeadEquip003_5": {
     "localized_name": "เเบบสร้าง Hallowed Helmet4",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Helmet (Legendary)| สร้างได้ที่ |Factory Hard 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Helmet (Legendary)| สร้างได้ที่ |Factory Hard 02|"
   },
   "Blueprint_YakushimaHeadEquip004": {
     "localized_name": "เเบบสร้าง Hallowed Hood",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|(PalSummon YakushimaHeadEquip004)| สร้างได้ที่ |Factory Hard 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|(Hallowed Hood)| สร้างได้ที่ |Factory Hard 02|"
   },
   "Blueprint_YakushimaHeadEquip004_2": {
     "localized_name": "เเบบสร้าง Hallowed Hood1",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Hood (Uncommon)| สร้างได้ที่ |Factory Hard 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Hood (Uncommon)| สร้างได้ที่ |Factory Hard 02|"
   },
   "Blueprint_YakushimaHeadEquip004_3": {
     "localized_name": "เเบบสร้าง Hallowed Hood2",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Hood (Rare)| สร้างได้ที่ |Factory Hard 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Hood (Rare)| สร้างได้ที่ |Factory Hard 02|"
   },
   "Blueprint_YakushimaHeadEquip004_4": {
     "localized_name": "เเบบสร้าง Hallowed Hood3",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Hood (Epic)| สร้างได้ที่ |Factory Hard 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Hood (Epic)| สร้างได้ที่ |Factory Hard 02|"
   },
   "Blueprint_YakushimaHeadEquip004_5": {
     "localized_name": "เเบบสร้าง Hallowed Hood4",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Hood (Legendary)| สร้างได้ที่ |Factory Hard 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Hallowed Hood (Legendary)| สร้างได้ที่ |Factory Hard 02|"
   },
   "Blueprint_YakushimaLantern001": {
     "localized_name": "เเบบสร้าง Nightglow",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|(Nightglow)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|(Nightglow)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
   "Blueprint_YakushimaLantern001_2": {
     "localized_name": "เเบบสร้าง Nightglow1",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Nightglow (Uncommon)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Nightglow (Uncommon)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
   "Blueprint_YakushimaLantern001_3": {
     "localized_name": "เเบบสร้าง Nightglow2",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Nightglow (Rare)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Nightglow (Rare)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
   "Blueprint_YakushimaLantern001_4": {
     "localized_name": "เเบบสร้าง Nightglow3",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Nightglow (Epic)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Nightglow (Epic)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
   "Blueprint_YakushimaLantern001_5": {
     "localized_name": "เเบบสร้าง Nightglow4",
-    "description": "[อีเวนต์คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Nightglow (Legendary)| สร้างได้ที่ |WeaponFactory Dirty 02|"
+    "description": "[คอลแลบ Terraria] ไอเทมนี้จะปลดล็อกวิธีสร้าง|Nightglow (Legendary)| สร้างได้ที่ |WeaponFactory Dirty 02|"
   },
   "Blueprint_Zoe_Halloweenskin_1": {
     "localized_name": "เเบบสร้างชุดฮาโลวันของ Zoe",
@@ -2961,7 +3029,7 @@
   },
   "Elixir_hp_Yakushima": {
     "localized_name": "Life Crystal",
-    "description": "[อีเวนต์คอลแลบ Terraria] เมื่อใช้แล้ว จะเพิ่มสเตตัส HP เล็กน้อยอย่างถาวร หากสถานะนั้นถึงขีดจำกัดแล้วหรือใช้กับพาลจะไม่ให้ผลใดๆ"
+    "description": "[คอลแลบ Terraria] เมื่อใช้แล้ว จะเพิ่มสเตตัส HP เล็กน้อยอย่างถาวร หากสถานะนั้นถึงขีดจำกัดแล้วหรือใช้กับพาลจะไม่ให้ผลใดๆ"
   },
   "Elixir_stamina_01": {
     "localized_name": "ยาลับชูกำลัง",
@@ -3530,10 +3598,6 @@
   "HandgunBullet": {
     "localized_name": "กระสุนปืนพก",
     "description": "กระสุนที่ใช้กับอาวุธจำพวกHandGun Default"
-  },
-  "HandgunShield": {
-    "localized_name": "โล่กันกระสุน",
-    "description": "โล่กันกระสุน"
   },
   "Head001": {
     "localized_name": "มงกฎราชา",
@@ -4163,6 +4227,22 @@
     "localized_name": "ดาบคาตานะ",
     "description": "ดาบคาตานะสำหรับสู้ระยะประชิด คมมาก ฟันดาบเดียวขาดสองท่อน"
   },
+  "Katana_2": {
+    "localized_name": "ดาบคาตานะ",
+    "description": "ดาบคาตานะสำหรับสู้ระยะประชิด คมมาก ฟันดาบเดียวขาดสองท่อน"
+  },
+  "Katana_3": {
+    "localized_name": "ดาบคาตานะ",
+    "description": "ดาบคาตานะสำหรับสู้ระยะประชิด คมมาก ฟันดาบเดียวขาดสองท่อน"
+  },
+  "Katana_4": {
+    "localized_name": "ดาบคาตานะ",
+    "description": "ดาบคาตานะสำหรับสู้ระยะประชิด คมมาก ฟันดาบเดียวขาดสองท่อน"
+  },
+  "Katana_5": {
+    "localized_name": "ดาบคาตานะ",
+    "description": "ดาบคาตานะสำหรับสู้ระยะประชิด คมมาก ฟันดาบเดียวขาดสองท่อน"
+  },
   "Lantern": {
     "localized_name": "ตะเกียงแขวนเอว",
     "description": "ตะเกียงไว้แขวนเอว พอตกดึกก็จะส่องสว่างอัตโนมัติ สามารถเปลี่ยนโหมดให้เปิดไฟค้างไว้ตลอดเวลาได้ มีแค่ดวงเดียวก็พอแล้ว"
@@ -4417,7 +4497,7 @@
   },
   "ManganeseIngot": {
     "localized_name": "ก้อนโลหะเเร่โครัม",
-    "description": "โลหะผสมจากหินแร่โครัมกับก้อนโลหะ เเละถ่านหิน มีความทนทานต่อพลังงานสูง และสามารถใช้เป็นวัสดุในการสร้างอาวุธได้"
+    "description": "หินแร่โครัมเเละหินแร่โลหะถ่านหินเป็นโลหะผสม ที่มีความทนทานต่อพลังงานสูงและสามารถใช้เป็นวัสดุสร้างอาวุธได้"
   },
   "ManganeseOre": {
     "localized_name": "หินแร่โครัม",
@@ -4629,51 +4709,51 @@
   },
   "Octavia002_Armor": {
     "localized_name": "ชุดเกราะ V2",
-    "description": "[คอลแลบ ULTRAKILL] ชุดเกราะที่อ้างอิงกลไกของหุ่นยนต์รักษาสันติภาพจากดินแดนห่างไกล ตัดระบบซ่อมแซมตัวเองออก และเสริมเกราะให้แข็งแกร่งยิ่งขึ้นแทน"
+    "description": "[คอลแลบ ULTRAKILL] ชุดเกราะที่อ้างอิงกลไกของหุ่นยนต์รักษาสันติภาพจากดินแดนห่างไกล ตัดระบบซ่อมแซมตัวเองออกและเสริมเกราะให้แข็งแกร่งยิ่งขึ้นแทน"
   },
   "Octavia002_Armor_5": {
     "localized_name": "ชุดเกราะ V2",
-    "description": "[คอลแลบ ULTRAKILL] ชุดเกราะที่อ้างอิงกลไกของหุ่นยนต์รักษาสันติภาพจากดินแดนห่างไกล ตัดระบบซ่อมแซมตัวเองออก และเสริมเกราะให้แข็งแกร่งยิ่งขึ้นแทน"
+    "description": "[คอลแลบ ULTRAKILL] ชุดเกราะที่อ้างอิงกลไกของหุ่นยนต์รักษาสันติภาพจากดินแดนห่างไกล ตัดระบบซ่อมแซมตัวเองออกและเสริมเกราะให้แข็งแกร่งยิ่งขึ้นแทน"
   },
   "OctaviaRevolver": {
     "localized_name": "ปืนลูกโม่ของนักแม่นปืน",
-    "description": "[คอลแลบ ULTRAKILL] ปืนลูกโม่พลังงานไฟฟ้า ยิงต่อเนื่องได้โดยไม่ต้องรีโหลด ขณะสวมใส่ การขว้างสเฟียร์จับพาลจะเปลี่ยนเป็นการขว้างเหรียญปืนลูกโม่ของนักแม่นปืนกระสุนที่โดนเหรียญจะสะท้อนใส่ศัตรู"
+    "description": "[คอลแลบ ULTRAKILL] ปืนลูกโม่พลังงานไฟฟ้ายิงต่อเนื่องได้โดยไม่ต้องรีโหลด ขณะสวมใส่ การขว้างสเฟียร์จับพาลจะเปลี่ยนเป็นการขว้างเหรียญ ปืนลูกโม่ของนักแม่นปืนกระสุนที่โดนเหรียญจะสะท้อนใส่ศัตรู"
   },
   "OctaviaRevolver_2": {
     "localized_name": "ปืนลูกโม่ของนักแม่นปืน",
-    "description": "[คอลแลบ ULTRAKILL] ปืนลูกโม่พลังงานไฟฟ้า ยิงต่อเนื่องได้โดยไม่ต้องรีโหลด ขณะสวมใส่ การขว้างสเฟียร์จับพาลจะเปลี่ยนเป็นการขว้างเหรียญปืนลูกโม่ของนักแม่นปืนกระสุนที่โดนเหรียญจะสะท้อนใส่ศัตรู"
+    "description": "[คอลแลบ ULTRAKILL] ปืนลูกโม่พลังงานไฟฟ้ายิงต่อเนื่องได้โดยไม่ต้องรีโหลด ขณะสวมใส่ การขว้างสเฟียร์จับพาลจะเปลี่ยนเป็นการขว้างเหรียญ ปืนลูกโม่ของนักแม่นปืนกระสุนที่โดนเหรียญจะสะท้อนใส่ศัตรู"
   },
   "OctaviaRevolver_3": {
     "localized_name": "ปืนลูกโม่ของนักแม่นปืน",
-    "description": "[คอลแลบ ULTRAKILL] ปืนลูกโม่พลังงานไฟฟ้า ยิงต่อเนื่องได้โดยไม่ต้องรีโหลด ขณะสวมใส่ การขว้างสเฟียร์จับพาลจะเปลี่ยนเป็นการขว้างเหรียญปืนลูกโม่ของนักแม่นปืนกระสุนที่โดนเหรียญจะสะท้อนใส่ศัตรู"
+    "description": "[คอลแลบ ULTRAKILL] ปืนลูกโม่พลังงานไฟฟ้ายิงต่อเนื่องได้โดยไม่ต้องรีโหลด ขณะสวมใส่ การขว้างสเฟียร์จับพาลจะเปลี่ยนเป็นการขว้างเหรียญ ปืนลูกโม่ของนักแม่นปืนกระสุนที่โดนเหรียญจะสะท้อนใส่ศัตรู"
   },
   "OctaviaRevolver_4": {
     "localized_name": "ปืนลูกโม่ของนักแม่นปืน",
-    "description": "[คอลแลบ ULTRAKILL] ปืนลูกโม่พลังงานไฟฟ้า ยิงต่อเนื่องได้โดยไม่ต้องรีโหลด ขณะสวมใส่ การขว้างสเฟียร์จับพาลจะเปลี่ยนเป็นการขว้างเหรียญปืนลูกโม่ของนักแม่นปืนกระสุนที่โดนเหรียญจะสะท้อนใส่ศัตรู"
+    "description": "[คอลแลบ ULTRAKILL] ปืนลูกโม่พลังงานไฟฟ้ายิงต่อเนื่องได้โดยไม่ต้องรีโหลด ขณะสวมใส่ การขว้างสเฟียร์จับพาลจะเปลี่ยนเป็นการขว้างเหรียญ ปืนลูกโม่ของนักแม่นปืนกระสุนที่โดนเหรียญจะสะท้อนใส่ศัตรู"
   },
   "OctaviaRevolver_5": {
     "localized_name": "ปืนลูกโม่ของนักแม่นปืน",
-    "description": "[คอลแลบ ULTRAKILL] ปืนลูกโม่พลังงานไฟฟ้า ยิงต่อเนื่องได้โดยไม่ต้องรีโหลด ขณะสวมใส่ การขว้างสเฟียร์จับพาลจะเปลี่ยนเป็นการขว้างเหรียญปืนลูกโม่ของนักแม่นปืนกระสุนที่โดนเหรียญจะสะท้อนใส่ศัตรู"
+    "description": "[คอลแลบ ULTRAKILL] ปืนลูกโม่พลังงานไฟฟ้ายิงต่อเนื่องได้โดยไม่ต้องรีโหลด ขณะสวมใส่ การขว้างสเฟียร์จับพาลจะเปลี่ยนเป็นการขว้างเหรียญ ปืนลูกโม่ของนักแม่นปืนกระสุนที่โดนเหรียญจะสะท้อนใส่ศัตรู"
   },
   "OctaviaShotgun": {
     "localized_name": "ปืนลูกซองปลดแกนพลังงาน",
-    "description": "[คอลแลบ ULTRAKILL] ปืนลูกซองปลดแกนพลังงาน ยิงต่อเนื่องได้โดยไม่ต้องรีโหลด ขณะสวมใส่ การขว้างสเฟียร์จับพาลจะเปลี่ยนเป็นการยิงแกนพลังงานปืนลูกโม่ของนักแม่นปืนกระสุนที่โดนแกนพลังงานจะระเบิด"
+    "description": "[คอลแลบ ULTRAKILL] ปืนลูกซองปลดแกนพลังงานยิงต่อเนื่องได้โดยไม่ต้องรีโหลด ขณะสวมใส่ การขว้างสเฟียร์จับพาลจะเปลี่ยนเป็นการยิงแกนพลังงาน โดยสามารถกดค้างเพื่อชาร์จและเพิ่มระยะยิงของแกนพลังงาน ปืนลูกโม่ของนักแม่นปืนแกนพลังงานที่ถูกยิงจะระเบิด"
   },
   "OctaviaShotgun_2": {
     "localized_name": "ปืนลูกซองปลดแกนพลังงาน",
-    "description": "[คอลแลบ ULTRAKILL] ปืนลูกซองปลดแกนพลังงาน ยิงต่อเนื่องได้โดยไม่ต้องรีโหลด ขณะสวมใส่ การขว้างสเฟียร์จับพาลจะเปลี่ยนเป็นการยิงแกนพลังงานปืนลูกโม่ของนักแม่นปืนกระสุนที่โดนแกนพลังงานจะระเบิด"
+    "description": "[คอลแลบ ULTRAKILL] ปืนลูกซองปลดแกนพลังงานยิงต่อเนื่องได้โดยไม่ต้องรีโหลด ขณะสวมใส่ การขว้างสเฟียร์จับพาลจะเปลี่ยนเป็นการยิงแกนพลังงาน โดยสามารถกดค้างเพื่อชาร์จและเพิ่มระยะยิงของแกนพลังงาน ปืนลูกโม่ของนักแม่นปืนแกนพลังงานที่ถูกยิงจะระเบิด"
   },
   "OctaviaShotgun_3": {
     "localized_name": "ปืนลูกซองปลดแกนพลังงาน",
-    "description": "[คอลแลบ ULTRAKILL] ปืนลูกซองปลดแกนพลังงาน ยิงต่อเนื่องได้โดยไม่ต้องรีโหลด ขณะสวมใส่ การขว้างสเฟียร์จับพาลจะเปลี่ยนเป็นการยิงแกนพลังงานปืนลูกโม่ของนักแม่นปืนกระสุนที่โดนแกนพลังงานจะระเบิด"
+    "description": "[คอลแลบ ULTRAKILL] ปืนลูกซองปลดแกนพลังงานยิงต่อเนื่องได้โดยไม่ต้องรีโหลด ขณะสวมใส่ การขว้างสเฟียร์จับพาลจะเปลี่ยนเป็นการยิงแกนพลังงาน โดยสามารถกดค้างเพื่อชาร์จและเพิ่มระยะยิงของแกนพลังงาน ปืนลูกโม่ของนักแม่นปืนแกนพลังงานที่ถูกยิงจะระเบิด"
   },
   "OctaviaShotgun_4": {
     "localized_name": "ปืนลูกซองปลดแกนพลังงาน",
-    "description": "[คอลแลบ ULTRAKILL] ปืนลูกซองปลดแกนพลังงาน ยิงต่อเนื่องได้โดยไม่ต้องรีโหลด ขณะสวมใส่ การขว้างสเฟียร์จับพาลจะเปลี่ยนเป็นการยิงแกนพลังงานปืนลูกโม่ของนักแม่นปืนกระสุนที่โดนแกนพลังงานจะระเบิด"
+    "description": "[คอลแลบ ULTRAKILL] ปืนลูกซองปลดแกนพลังงานยิงต่อเนื่องได้โดยไม่ต้องรีโหลด ขณะสวมใส่ การขว้างสเฟียร์จับพาลจะเปลี่ยนเป็นการยิงแกนพลังงาน โดยสามารถกดค้างเพื่อชาร์จและเพิ่มระยะยิงของแกนพลังงาน ปืนลูกโม่ของนักแม่นปืนแกนพลังงานที่ถูกยิงจะระเบิด"
   },
   "OctaviaShotgun_5": {
     "localized_name": "ปืนลูกซองปลดแกนพลังงาน",
-    "description": "[คอลแลบ ULTRAKILL] ปืนลูกซองปลดแกนพลังงาน ยิงต่อเนื่องได้โดยไม่ต้องรีโหลด ขณะสวมใส่ การขว้างสเฟียร์จับพาลจะเปลี่ยนเป็นการยิงแกนพลังงานปืนลูกโม่ของนักแม่นปืนกระสุนที่โดนแกนพลังงานจะระเบิด"
+    "description": "[คอลแลบ ULTRAKILL] ปืนลูกซองปลดแกนพลังงานยิงต่อเนื่องได้โดยไม่ต้องรีโหลด ขณะสวมใส่ การขว้างสเฟียร์จับพาลจะเปลี่ยนเป็นการยิงแกนพลังงาน โดยสามารถกดค้างเพื่อชาร์จและเพิ่มระยะยิงของแกนพลังงาน ปืนลูกโม่ของนักแม่นปืนแกนพลังงานที่ถูกยิงจะระเบิด"
   },
   "OctopusGirl_Takoyaki": {
     "localized_name": "ทาโกะยากิ Gloopie",
@@ -5429,7 +5509,7 @@
   },
   "PalSummon_YakushimaBoss002_2": {
     "localized_name": "ตราประทับศักดิ์สิทธิ์ [มาสเตอร์]",
-    "description": "[อีเวนต์คอลแลบ Terraria] ตราประทับที่มีลวดลายลึกลับ แท่นอัญเชิญเมื่อถวายให้ จะสามารถอัญเชิญสิ่งมีชีวิตอันทรงพลังในระดับสิ้นหวังออกมาได้"
+    "description": "[คอลแลบ Terraria] ตราประทับที่มีลวดลายลึกลับ แท่นอัญเชิญเมื่อถวายให้ จะสามารถอัญเชิญสิ่งมีชีวิตอันทรงพลังในระดับสิ้นหวังออกมาได้"
   },
   "PalUpgradeStone": {
     "localized_name": "โซลของพาลขนาดเล็ก",
@@ -6831,6 +6911,10 @@
     "localized_name": "หอกของ Lily",
     "description": "หอกเล่มโปรดของ Lily คอยพิพากษาผู้ที่ดูหมิ่นพาล"
   },
+  "Spear_ForestBoss_5": {
+    "localized_name": "หอกของ Lily",
+    "description": "หอกเล่มโปรดของ Lily คอยพิพากษาผู้ที่ดูหมิ่นพาล"
+  },
   "Spear_QueenBee": {
     "localized_name": "คทาของ Elizabee",
     "description": "คทาที่ดัดแปลงจากคทาของElizabeeให้เป็นคทาสำหรับมนุษย์ ถือแล้วมีราศีของราชินี"
@@ -6877,7 +6961,7 @@
   },
   "StainlessSteel": {
     "localized_name": "เฮ็กโซไลต์",
-    "description": "โลหะผสมระหว่างโครไมต์ ก้อนโลหะและเฮ็กโซควอตซ์ เป็นวัสดุสร้างสิ่งปลูกสร้างหรืออุปกรณ์สวมใส่ที่ทันสมัย"
+    "description": "โครไมต์และหินแร่โลหะเฮ็กโซควอตซ์เป็นโลหะผสม ซึ่งใช้เป็นวัสดุสำหรับอุปกรณ์และสิ่งปลูกสร้างขั้นสูง"
   },
   "StatusPointResetSan": {
     "localized_name": "ยารีเซ็ตความทรงจำ",
@@ -7016,6 +7100,22 @@
     "description": "ขนมสายไหมที่ได้จากWoolipop รสชาติหวานละลายในปาก"
   },
   "Sword": {
+    "localized_name": "ดาบ",
+    "description": "ดาบสำหรับสู้ระยะประชิด คมจัด! ต้องเข้าประชิดศัตรู เลยเสี่ยงมาก"
+  },
+  "Sword_2": {
+    "localized_name": "ดาบ",
+    "description": "ดาบสำหรับสู้ระยะประชิด คมจัด! ต้องเข้าประชิดศัตรู เลยเสี่ยงมาก"
+  },
+  "Sword_3": {
+    "localized_name": "ดาบ",
+    "description": "ดาบสำหรับสู้ระยะประชิด คมจัด! ต้องเข้าประชิดศัตรู เลยเสี่ยงมาก"
+  },
+  "Sword_4": {
+    "localized_name": "ดาบ",
+    "description": "ดาบสำหรับสู้ระยะประชิด คมจัด! ต้องเข้าประชิดศัตรู เลยเสี่ยงมาก"
+  },
+  "Sword_5": {
     "localized_name": "ดาบ",
     "description": "ดาบสำหรับสู้ระยะประชิด คมจัด! ต้องเข้าประชิดศัตรู เลยเสี่ยงมาก"
   },
@@ -7197,226 +7297,226 @@
   },
   "YakushimaArmor001": {
     "localized_name": "Hallowed Plate Mail",
-    "description": "[อีเวนต์คอลแลบ Terraria] เกราะที่ทำจากHallowed Bar ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ ช่วยลดความเสียหายที่ได้รับจากมอนสเตอร์ [อีเวนต์คอลแลบ Terraria]"
+    "description": "[คอลแลบ Terraria] เกราะที่ทำจากHallowed Bar ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ ช่วยลดความเสียหายที่ได้รับจากมอนสเตอร์ [คอลแลบ Terraria]"
   },
   "YakushimaArmor001_2": {
     "localized_name": "Hallowed Plate Mail",
-    "description": "[อีเวนต์คอลแลบ Terraria] เกราะที่ทำจากHallowed Bar ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ ช่วยลดความเสียหายที่ได้รับจากมอนสเตอร์ [อีเวนต์คอลแลบ Terraria]"
+    "description": "[คอลแลบ Terraria] เกราะที่ทำจากHallowed Bar ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ ช่วยลดความเสียหายที่ได้รับจากมอนสเตอร์ [คอลแลบ Terraria]"
   },
   "YakushimaArmor001_3": {
     "localized_name": "Hallowed Plate Mail",
-    "description": "[อีเวนต์คอลแลบ Terraria] เกราะที่ทำจากHallowed Bar ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ ช่วยลดความเสียหายที่ได้รับจากมอนสเตอร์ [อีเวนต์คอลแลบ Terraria]"
+    "description": "[คอลแลบ Terraria] เกราะที่ทำจากHallowed Bar ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ ช่วยลดความเสียหายที่ได้รับจากมอนสเตอร์ [คอลแลบ Terraria]"
   },
   "YakushimaArmor001_4": {
     "localized_name": "Hallowed Plate Mail",
-    "description": "[อีเวนต์คอลแลบ Terraria] เกราะที่ทำจากHallowed Bar ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ ช่วยลดความเสียหายที่ได้รับจากมอนสเตอร์ [อีเวนต์คอลแลบ Terraria]"
+    "description": "[คอลแลบ Terraria] เกราะที่ทำจากHallowed Bar ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ ช่วยลดความเสียหายที่ได้รับจากมอนสเตอร์ [คอลแลบ Terraria]"
   },
   "YakushimaArmor001_5": {
     "localized_name": "Hallowed Plate Mail",
-    "description": "[อีเวนต์คอลแลบ Terraria] เกราะที่ทำจากHallowed Bar ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ ช่วยลดความเสียหายที่ได้รับจากมอนสเตอร์ [อีเวนต์คอลแลบ Terraria]"
+    "description": "[คอลแลบ Terraria] เกราะที่ทำจากHallowed Bar ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ ช่วยลดความเสียหายที่ได้รับจากมอนสเตอร์ [คอลแลบ Terraria]"
   },
   "YakushimaBlade": {
     "localized_name": "เหมียวแมร์",
-    "description": "[อีเวนต์คอลแลบ Terraria] ตำนานเล่าว่า ดาบเล่มนี้เป็นดาบที่Croajiroนำกลับมาจากดินแดนอันไกลโพ้น แต่ไม่รู้ว่านำกลับมาทำไม... เมื่อเหวี่ยงอาวุธ จะปล่อยลูกแมวเด้งดึ๋งออกไปโจมตีศัตรู"
+    "description": "[คอลแลบ Terraria] ตำนานเล่าว่า ดาบเล่มนี้เป็นดาบที่Croajiroนำกลับมาจากดินแดนอันไกลโพ้น แต่ไม่รู้ว่านำกลับมาทำไม... เมื่อเหวี่ยงอาวุธ จะปล่อยลูกแมวเด้งดึ๋งออกไปโจมตีศัตรู"
   },
   "YakushimaBlade002": {
     "localized_name": "Terra Blade",
-    "description": "[อีเวนต์คอลแลบ Terraria] ดาบประหลาดที่ปล่อยคลื่นกระแทกสีเขียวมรกตออกมาจากตัวดาบเมื่อฟาดฟัน แม้จะเป็นอาวุธประชิด แต่ก็สามารถโจมตีศัตรูที่อยู่ระยะไกลได้"
+    "description": "[คอลแลบ Terraria] ดาบประหลาดที่ปล่อยคลื่นกระแทกสีเขียวมรกตออกมาจากตัวดาบเมื่อฟาดฟัน แม้จะเป็นอาวุธประชิด แต่ก็สามารถโจมตีศัตรูที่อยู่ระยะไกลได้"
   },
   "YakushimaBlade002_2": {
     "localized_name": "Terra Blade",
-    "description": "[อีเวนต์คอลแลบ Terraria] ดาบประหลาดที่ปล่อยคลื่นกระแทกสีเขียวมรกตออกมาจากตัวดาบเมื่อฟาดฟัน แม้จะเป็นอาวุธประชิด แต่ก็สามารถโจมตีศัตรูที่อยู่ระยะไกลได้"
+    "description": "[คอลแลบ Terraria] ดาบประหลาดที่ปล่อยคลื่นกระแทกสีเขียวมรกตออกมาจากตัวดาบเมื่อฟาดฟัน แม้จะเป็นอาวุธประชิด แต่ก็สามารถโจมตีศัตรูที่อยู่ระยะไกลได้"
   },
   "YakushimaBlade002_3": {
     "localized_name": "Terra Blade",
-    "description": "[อีเวนต์คอลแลบ Terraria] ดาบประหลาดที่ปล่อยคลื่นกระแทกสีเขียวมรกตออกมาจากตัวดาบเมื่อฟาดฟัน แม้จะเป็นอาวุธประชิด แต่ก็สามารถโจมตีศัตรูที่อยู่ระยะไกลได้"
+    "description": "[คอลแลบ Terraria] ดาบประหลาดที่ปล่อยคลื่นกระแทกสีเขียวมรกตออกมาจากตัวดาบเมื่อฟาดฟัน แม้จะเป็นอาวุธประชิด แต่ก็สามารถโจมตีศัตรูที่อยู่ระยะไกลได้"
   },
   "YakushimaBlade002_4": {
     "localized_name": "Terra Blade",
-    "description": "[อีเวนต์คอลแลบ Terraria] ดาบประหลาดที่ปล่อยคลื่นกระแทกสีเขียวมรกตออกมาจากตัวดาบเมื่อฟาดฟัน แม้จะเป็นอาวุธประชิด แต่ก็สามารถโจมตีศัตรูที่อยู่ระยะไกลได้"
+    "description": "[คอลแลบ Terraria] ดาบประหลาดที่ปล่อยคลื่นกระแทกสีเขียวมรกตออกมาจากตัวดาบเมื่อฟาดฟัน แม้จะเป็นอาวุธประชิด แต่ก็สามารถโจมตีศัตรูที่อยู่ระยะไกลได้"
   },
   "YakushimaBlade002_5": {
     "localized_name": "Terra Blade",
-    "description": "[อีเวนต์คอลแลบ Terraria] ดาบประหลาดที่ปล่อยคลื่นกระแทกสีเขียวมรกตออกมาจากตัวดาบเมื่อฟาดฟัน แม้จะเป็นอาวุธประชิด แต่ก็สามารถโจมตีศัตรูที่อยู่ระยะไกลได้"
+    "description": "[คอลแลบ Terraria] ดาบประหลาดที่ปล่อยคลื่นกระแทกสีเขียวมรกตออกมาจากตัวดาบเมื่อฟาดฟัน แม้จะเป็นอาวุธประชิด แต่ก็สามารถโจมตีศัตรูที่อยู่ระยะไกลได้"
   },
   "YakushimaBlade003": {
     "localized_name": "Terraprisma",
-    "description": "[อีเวนต์คอลแลบ Terraria] ดาบลึกลับที่มีคมดาบเป็นสีรุ้ง เมื่อฟาดฟันจะสามารถอัญเชิญดาบที่ได้รับพรออกมาต่อสู้ได้ สามารถอัญเชิญดาบได้สูงสุดถึง 9 เล่ม"
+    "description": "[คอลแลบ Terraria] ดาบลึกลับที่มีคมดาบเป็นสีรุ้ง เมื่อฟาดฟันจะสามารถอัญเชิญดาบที่ได้รับพรออกมาต่อสู้ได้ สามารถอัญเชิญดาบได้สูงสุดถึง 9 เล่ม"
   },
   "YakushimaBlade003_2": {
     "localized_name": "Terraprisma",
-    "description": "[อีเวนต์คอลแลบ Terraria] ดาบลึกลับที่มีคมดาบเป็นสีรุ้ง เมื่อฟาดฟันจะสามารถอัญเชิญดาบที่ได้รับพรออกมาต่อสู้ได้ สามารถอัญเชิญดาบได้สูงสุดถึง 9 เล่ม"
+    "description": "[คอลแลบ Terraria] ดาบลึกลับที่มีคมดาบเป็นสีรุ้ง เมื่อฟาดฟันจะสามารถอัญเชิญดาบที่ได้รับพรออกมาต่อสู้ได้ สามารถอัญเชิญดาบได้สูงสุดถึง 9 เล่ม"
   },
   "YakushimaBlade003_3": {
     "localized_name": "Terraprisma",
-    "description": "[อีเวนต์คอลแลบ Terraria] ดาบลึกลับที่มีคมดาบเป็นสีรุ้ง เมื่อฟาดฟันจะสามารถอัญเชิญดาบที่ได้รับพรออกมาต่อสู้ได้ สามารถอัญเชิญดาบได้สูงสุดถึง 9 เล่ม"
+    "description": "[คอลแลบ Terraria] ดาบลึกลับที่มีคมดาบเป็นสีรุ้ง เมื่อฟาดฟันจะสามารถอัญเชิญดาบที่ได้รับพรออกมาต่อสู้ได้ สามารถอัญเชิญดาบได้สูงสุดถึง 9 เล่ม"
   },
   "YakushimaBlade003_4": {
     "localized_name": "Terraprisma",
-    "description": "[อีเวนต์คอลแลบ Terraria] ดาบลึกลับที่มีคมดาบเป็นสีรุ้ง เมื่อฟาดฟันจะสามารถอัญเชิญดาบที่ได้รับพรออกมาต่อสู้ได้ สามารถอัญเชิญดาบได้สูงสุดถึง 9 เล่ม"
+    "description": "[คอลแลบ Terraria] ดาบลึกลับที่มีคมดาบเป็นสีรุ้ง เมื่อฟาดฟันจะสามารถอัญเชิญดาบที่ได้รับพรออกมาต่อสู้ได้ สามารถอัญเชิญดาบได้สูงสุดถึง 9 เล่ม"
   },
   "YakushimaBlade003_5": {
     "localized_name": "Terraprisma",
-    "description": "[อีเวนต์คอลแลบ Terraria] ดาบลึกลับที่มีคมดาบเป็นสีรุ้ง เมื่อฟาดฟันจะสามารถอัญเชิญดาบที่ได้รับพรออกมาต่อสู้ได้ สามารถอัญเชิญดาบได้สูงสุดถึง 9 เล่ม"
+    "description": "[คอลแลบ Terraria] ดาบลึกลับที่มีคมดาบเป็นสีรุ้ง เมื่อฟาดฟันจะสามารถอัญเชิญดาบที่ได้รับพรออกมาต่อสู้ได้ สามารถอัญเชิญดาบได้สูงสุดถึง 9 เล่ม"
   },
   "YakushimaBlade004": {
     "localized_name": "Excalibur",
-    "description": "[อีเวนต์คอลแลบ Terraria] ดาบศักดิ์สิทธิ์ที่เปล่งประกายสีทอง เมื่อฟาดฟันจะปล่อยคลื่นกระแทกรอบตัว"
+    "description": "[คอลแลบ Terraria] ดาบศักดิ์สิทธิ์ที่เปล่งประกายสีทอง เมื่อฟาดฟันจะปล่อยคลื่นกระแทกรอบตัว"
   },
   "YakushimaBlade004_2": {
     "localized_name": "Excalibur",
-    "description": "[อีเวนต์คอลแลบ Terraria] ดาบศักดิ์สิทธิ์ที่เปล่งประกายสีทอง เมื่อฟาดฟันจะปล่อยคลื่นกระแทกรอบตัว"
+    "description": "[คอลแลบ Terraria] ดาบศักดิ์สิทธิ์ที่เปล่งประกายสีทอง เมื่อฟาดฟันจะปล่อยคลื่นกระแทกรอบตัว"
   },
   "YakushimaBlade004_3": {
     "localized_name": "Excalibur",
-    "description": "[อีเวนต์คอลแลบ Terraria] ดาบศักดิ์สิทธิ์ที่เปล่งประกายสีทอง เมื่อฟาดฟันจะปล่อยคลื่นกระแทกรอบตัว"
+    "description": "[คอลแลบ Terraria] ดาบศักดิ์สิทธิ์ที่เปล่งประกายสีทอง เมื่อฟาดฟันจะปล่อยคลื่นกระแทกรอบตัว"
   },
   "YakushimaBlade004_4": {
     "localized_name": "Excalibur",
-    "description": "[อีเวนต์คอลแลบ Terraria] ดาบศักดิ์สิทธิ์ที่เปล่งประกายสีทอง เมื่อฟาดฟันจะปล่อยคลื่นกระแทกรอบตัว"
+    "description": "[คอลแลบ Terraria] ดาบศักดิ์สิทธิ์ที่เปล่งประกายสีทอง เมื่อฟาดฟันจะปล่อยคลื่นกระแทกรอบตัว"
   },
   "YakushimaBlade004_5": {
     "localized_name": "Excalibur",
-    "description": "[อีเวนต์คอลแลบ Terraria] ดาบศักดิ์สิทธิ์ที่เปล่งประกายสีทอง เมื่อฟาดฟันจะปล่อยคลื่นกระแทกรอบตัว"
+    "description": "[คอลแลบ Terraria] ดาบศักดิ์สิทธิ์ที่เปล่งประกายสีทอง เมื่อฟาดฟันจะปล่อยคลื่นกระแทกรอบตัว"
   },
   "YakushimaBlade005": {
-    "localized_name": "เหมียวแมร์ในตำนาน",
-    "description": "[อีเวนต์คอลแลบ Terraria] เหมียวแมร์ในตำนานที่ถูกสร้างโดยLuminite Bar ทุกครั้งที่เหวี่ยง จะยิงกระสุนแมวที่กระเด้งไปมาเพื่อโจมตีศัตรู"
+    "localized_name": "Legendary Meowmere",
+    "description": "[คอลแลบ Terraria] เหมียวแมร์ในตำนานที่ถูกสร้างโดยLuminite Bar ทุกครั้งที่เหวี่ยง จะยิงกระสุนแมวที่กระเด้งไปมาเพื่อโจมตีศัตรู"
   },
   "YakushimaGun001": {
     "localized_name": "Vortex Beater",
-    "description": "[อีเวนต์คอลแลบ Terraria] ปืนขนาดใหญ่ที่ใช้พลังงานลึกลับ มีโอกาส 66% ที่จะไม่ใช้กระสุน และหลังจากช่วงเวลาหนึ่งจะยิงมิสไซล์ที่ติดตามศัตรูและระเบิด"
+    "description": "[คอลแลบ Terraria] ปืนขนาดใหญ่ที่ใช้พลังงานลึกลับ มีโอกาส 66% ที่จะไม่ใช้กระสุน และหลังจากช่วงเวลาหนึ่งจะยิงมิสไซล์ที่ติดตามศัตรูและระเบิด"
   },
   "YakushimaGun001_2": {
     "localized_name": "Vortex Beater",
-    "description": "[อีเวนต์คอลแลบ Terraria] ปืนขนาดใหญ่ที่ใช้พลังงานลึกลับ มีโอกาส 66% ที่จะไม่ใช้กระสุน และหลังจากช่วงเวลาหนึ่งจะยิงมิสไซล์ที่ติดตามศัตรูและระเบิด"
+    "description": "[คอลแลบ Terraria] ปืนขนาดใหญ่ที่ใช้พลังงานลึกลับ มีโอกาส 66% ที่จะไม่ใช้กระสุน และหลังจากช่วงเวลาหนึ่งจะยิงมิสไซล์ที่ติดตามศัตรูและระเบิด"
   },
   "YakushimaGun001_3": {
     "localized_name": "Vortex Beater",
-    "description": "[อีเวนต์คอลแลบ Terraria] ปืนขนาดใหญ่ที่ใช้พลังงานลึกลับ มีโอกาส 66% ที่จะไม่ใช้กระสุน และหลังจากช่วงเวลาหนึ่งจะยิงมิสไซล์ที่ติดตามศัตรูและระเบิด"
+    "description": "[คอลแลบ Terraria] ปืนขนาดใหญ่ที่ใช้พลังงานลึกลับ มีโอกาส 66% ที่จะไม่ใช้กระสุน และหลังจากช่วงเวลาหนึ่งจะยิงมิสไซล์ที่ติดตามศัตรูและระเบิด"
   },
   "YakushimaGun001_4": {
     "localized_name": "Vortex Beater",
-    "description": "[อีเวนต์คอลแลบ Terraria] ปืนขนาดใหญ่ที่ใช้พลังงานลึกลับ มีโอกาส 66% ที่จะไม่ใช้กระสุน และหลังจากช่วงเวลาหนึ่งจะยิงมิสไซล์ที่ติดตามศัตรูและระเบิด"
+    "description": "[คอลแลบ Terraria] ปืนขนาดใหญ่ที่ใช้พลังงานลึกลับ มีโอกาส 66% ที่จะไม่ใช้กระสุน และหลังจากช่วงเวลาหนึ่งจะยิงมิสไซล์ที่ติดตามศัตรูและระเบิด"
   },
   "YakushimaGun001_5": {
     "localized_name": "Vortex Beater",
-    "description": "[อีเวนต์คอลแลบ Terraria] ปืนขนาดใหญ่ที่ใช้พลังงานลึกลับ มีโอกาส 66% ที่จะไม่ใช้กระสุน และหลังจากช่วงเวลาหนึ่งจะยิงมิสไซล์ที่ติดตามศัตรูและระเบิด"
+    "description": "[คอลแลบ Terraria] ปืนขนาดใหญ่ที่ใช้พลังงานลึกลับ มีโอกาส 66% ที่จะไม่ใช้กระสุน และหลังจากช่วงเวลาหนึ่งจะยิงมิสไซล์ที่ติดตามศัตรูและระเบิด"
   },
   "YakushimaHeadEquip001": {
     "localized_name": "Hallowed Mask",
-    "description": "[อีเวนต์คอลแลบ Terraria] อุปกรณ์ป้องกันศีรษะที่ทำจากHallowed Bar ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของเหมียวแมร์,Excalibur,Terra Blade,เหมียวแมร์ในตำนาน"
+    "description": "[คอลแลบ Terraria] อุปกรณ์ป้องกันศีรษะที่ทำจากHallowed Bar ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของเหมียวแมร์,Excalibur,Terra Blade,Legendary Meowmere"
   },
   "YakushimaHeadEquip001_2": {
     "localized_name": "Hallowed Mask",
-    "description": "[อีเวนต์คอลแลบ Terraria] อุปกรณ์ป้องกันศีรษะที่ทำจากHallowed Bar ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของเหมียวแมร์,Excalibur,Terra Blade,เหมียวแมร์ในตำนาน"
+    "description": "[คอลแลบ Terraria] อุปกรณ์ป้องกันศีรษะที่ทำจากHallowed Bar ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของเหมียวแมร์,Excalibur,Terra Blade,Legendary Meowmere"
   },
   "YakushimaHeadEquip001_3": {
     "localized_name": "Hallowed Mask",
-    "description": "[อีเวนต์คอลแลบ Terraria] อุปกรณ์ป้องกันศีรษะที่ทำจากHallowed Bar ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของเหมียวแมร์,Excalibur,Terra Blade,เหมียวแมร์ในตำนาน"
+    "description": "[คอลแลบ Terraria] อุปกรณ์ป้องกันศีรษะที่ทำจากHallowed Bar ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของเหมียวแมร์,Excalibur,Terra Blade,Legendary Meowmere"
   },
   "YakushimaHeadEquip001_4": {
     "localized_name": "Hallowed Mask",
-    "description": "[อีเวนต์คอลแลบ Terraria] อุปกรณ์ป้องกันศีรษะที่ทำจากHallowed Bar ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของเหมียวแมร์,Excalibur,Terra Blade,เหมียวแมร์ในตำนาน"
+    "description": "[คอลแลบ Terraria] อุปกรณ์ป้องกันศีรษะที่ทำจากHallowed Bar ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของเหมียวแมร์,Excalibur,Terra Blade,Legendary Meowmere"
   },
   "YakushimaHeadEquip001_5": {
     "localized_name": "Hallowed Mask",
-    "description": "[อีเวนต์คอลแลบ Terraria] อุปกรณ์ป้องกันศีรษะที่ทำจากHallowed Bar ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของเหมียวแมร์,Excalibur,Terra Blade,เหมียวแมร์ในตำนาน"
+    "description": "[คอลแลบ Terraria] อุปกรณ์ป้องกันศีรษะที่ทำจากHallowed Bar ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของเหมียวแมร์,Excalibur,Terra Blade,Legendary Meowmere"
   },
   "YakushimaHeadEquip002": {
     "localized_name": "Hallowed Headgear",
-    "description": "[อีเวนต์คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Nightglow"
+    "description": "[คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Nightglow"
   },
   "YakushimaHeadEquip002_2": {
     "localized_name": "Hallowed Headgear",
-    "description": "[อีเวนต์คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Nightglow"
+    "description": "[คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Nightglow"
   },
   "YakushimaHeadEquip002_3": {
     "localized_name": "Hallowed Headgear",
-    "description": "[อีเวนต์คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Nightglow"
+    "description": "[คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Nightglow"
   },
   "YakushimaHeadEquip002_4": {
     "localized_name": "Hallowed Headgear",
-    "description": "[อีเวนต์คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Nightglow"
+    "description": "[คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Nightglow"
   },
   "YakushimaHeadEquip002_5": {
     "localized_name": "Hallowed Headgear",
-    "description": "[อีเวนต์คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Nightglow"
+    "description": "[คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Nightglow"
   },
   "YakushimaHeadEquip003": {
     "localized_name": "Hallowed Helmet",
-    "description": "[อีเวนต์คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Vortex Beater"
+    "description": "[คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Vortex Beater"
   },
   "YakushimaHeadEquip003_2": {
     "localized_name": "Hallowed Helmet",
-    "description": "[อีเวนต์คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Vortex Beater"
+    "description": "[คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Vortex Beater"
   },
   "YakushimaHeadEquip003_3": {
     "localized_name": "Hallowed Helmet",
-    "description": "[อีเวนต์คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Vortex Beater"
+    "description": "[คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Vortex Beater"
   },
   "YakushimaHeadEquip003_4": {
     "localized_name": "Hallowed Helmet",
-    "description": "[อีเวนต์คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Vortex Beater"
+    "description": "[คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Vortex Beater"
   },
   "YakushimaHeadEquip003_5": {
     "localized_name": "Hallowed Helmet",
-    "description": "[อีเวนต์คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Vortex Beater"
+    "description": "[คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Vortex Beater"
   },
   "YakushimaHeadEquip004": {
     "localized_name": "Hallowed Hood",
-    "description": "[อีเวนต์คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Terraprisma"
+    "description": "[คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Terraprisma"
   },
   "YakushimaHeadEquip004_2": {
     "localized_name": "Hallowed Hood",
-    "description": "[อีเวนต์คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Terraprisma"
+    "description": "[คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Terraprisma"
   },
   "YakushimaHeadEquip004_3": {
     "localized_name": "Hallowed Hood",
-    "description": "[อีเวนต์คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Terraprisma"
+    "description": "[คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Terraprisma"
   },
   "YakushimaHeadEquip004_4": {
     "localized_name": "Hallowed Hood",
-    "description": "[อีเวนต์คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Terraprisma"
+    "description": "[คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Terraprisma"
   },
   "YakushimaHeadEquip004_5": {
     "localized_name": "Hallowed Hood",
-    "description": "[อีเวนต์คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Terraprisma"
+    "description": "[คอลแลบ Terraria] Hallowed Barอุปกรณ์ป้องกันศีรษะที่ทำจาก ห่อหุ้มด้วยพลังศักดิ์สิทธิ์ เสริมความรุนแรงของการโจมตีของ Terraprisma"
   },
   "YakushimaHeadEquip005": {
     "localized_name": "หน้ากากมูนลอร์ด",
-    "description": "[อีเวนต์คอลแลบ Terraria] RAID YakushimaBoss002สัมผัสได้ถึงพลังอัปมงคลของ มีเพียงไม่กี่คนที่ได้รับไอเทมนี้"
+    "description": "[คอลแลบ Terraria] RAID YakushimaBoss002สัมผัสได้ถึงพลังอัปมงคลของ มีเพียงไม่กี่คนที่ได้รับไอเทมนี้"
   },
   "YakushimaHeadEquip006": {
     "localized_name": "หน้ากากนัยน์ตาแห่งคธูลู",
-    "description": "[อีเวนต์คอลแลบ Terraria] สัมผัสได้ถึงพลังอัปมงคลของEye of Cthulhu มีเพียงไม่กี่คนที่ได้รับไอเทมนี้"
+    "description": "[คอลแลบ Terraria] สัมผัสได้ถึงพลังอัปมงคลของEye of Cthulhu มีเพียงไม่กี่คนที่ได้รับไอเทมนี้"
   },
   "YakushimaIngot001": {
     "localized_name": "Hallowed Bar",
-    "description": "[อีเวนต์คอลแลบ Terraria] วัสดุที่มีพลังศักดิ์สิทธิ์สถิตอยู่ สามารถนำไปสร้างไอเทมต่าง ๆ จากเกม Terraria ได้"
+    "description": "[คอลแลบ Terraria] วัสดุที่มีพลังศักดิ์สิทธิ์สถิตอยู่ สามารถนำไปสร้างไอเทมต่าง ๆ จากเกม Terraria ได้"
   },
   "YakushimaIngot002": {
     "localized_name": "Luminite Bar",
-    "description": "[อีเวนต์คอลแลบ Terraria] วัสดุที่ตกจากRAID YakushimaBoss002ที่ทำให้รู้สึกได้ถึงพลังอันยิ่งใหญ่ เปล่งประกายแวววาวเหมือนกับแสงจันทร์"
+    "description": "[คอลแลบ Terraria] วัสดุที่ตกจากRAID YakushimaBoss002ที่ทำให้รู้สึกได้ถึงพลังอันยิ่งใหญ่ เปล่งประกายแวววาวเหมือนกับแสงจันทร์"
   },
   "YakushimaLantern001": {
     "localized_name": "Nightglow",
-    "description": "[อีเวนต์คอลแลบ Terraria] โคมไฟลึกลับที่เปล่งประกายสีรุ้ง เมื่อชูโคมไฟนี้ขึ้น จะปล่อยลูกบอลแสงที่ติดตามศัตรูและโจมตีหลายครั้ง"
+    "description": "[คอลแลบ Terraria] โคมไฟลึกลับที่เปล่งประกายสีรุ้ง เมื่อชูโคมไฟนี้ขึ้น จะปล่อยลูกบอลแสงที่ติดตามศัตรูและโจมตีหลายครั้ง"
   },
   "YakushimaLantern001_2": {
     "localized_name": "Nightglow",
-    "description": "[อีเวนต์คอลแลบ Terraria] โคมไฟลึกลับที่เปล่งประกายสีรุ้ง เมื่อชูโคมไฟนี้ขึ้น จะปล่อยลูกบอลแสงที่ติดตามศัตรูและโจมตีหลายครั้ง"
+    "description": "[คอลแลบ Terraria] โคมไฟลึกลับที่เปล่งประกายสีรุ้ง เมื่อชูโคมไฟนี้ขึ้น จะปล่อยลูกบอลแสงที่ติดตามศัตรูและโจมตีหลายครั้ง"
   },
   "YakushimaLantern001_3": {
     "localized_name": "Nightglow",
-    "description": "[อีเวนต์คอลแลบ Terraria] โคมไฟลึกลับที่เปล่งประกายสีรุ้ง เมื่อชูโคมไฟนี้ขึ้น จะปล่อยลูกบอลแสงที่ติดตามศัตรูและโจมตีหลายครั้ง"
+    "description": "[คอลแลบ Terraria] โคมไฟลึกลับที่เปล่งประกายสีรุ้ง เมื่อชูโคมไฟนี้ขึ้น จะปล่อยลูกบอลแสงที่ติดตามศัตรูและโจมตีหลายครั้ง"
   },
   "YakushimaLantern001_4": {
     "localized_name": "Nightglow",
-    "description": "[อีเวนต์คอลแลบ Terraria] โคมไฟลึกลับที่เปล่งประกายสีรุ้ง เมื่อชูโคมไฟนี้ขึ้น จะปล่อยลูกบอลแสงที่ติดตามศัตรูและโจมตีหลายครั้ง"
+    "description": "[คอลแลบ Terraria] โคมไฟลึกลับที่เปล่งประกายสีรุ้ง เมื่อชูโคมไฟนี้ขึ้น จะปล่อยลูกบอลแสงที่ติดตามศัตรูและโจมตีหลายครั้ง"
   },
   "YakushimaLantern001_5": {
     "localized_name": "Nightglow",
-    "description": "[อีเวนต์คอลแลบ Terraria] โคมไฟลึกลับที่เปล่งประกายสีรุ้ง เมื่อชูโคมไฟนี้ขึ้น จะปล่อยลูกบอลแสงที่ติดตามศัตรูและโจมตีหลายครั้ง"
+    "description": "[คอลแลบ Terraria] โคมไฟลึกลับที่เปล่งประกายสีรุ้ง เมื่อชูโคมไฟนี้ขึ้น จะปล่อยลูกบอลแสงที่ติดตามศัตรูและโจมตีหลายครั้ง"
   }
 }

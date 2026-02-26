@@ -459,6 +459,22 @@
     "localized_name": "빔 소드",
     "description": "근접 전투용 빔 소드. 고출력 레이저로 적을 바싹 태우며 베어버린다."
   },
+  "BeamSword_2": {
+    "localized_name": "빔 소드",
+    "description": "근접 전투용 빔 소드. 고출력 레이저로 적을 바싹 태우며 베어버린다."
+  },
+  "BeamSword_3": {
+    "localized_name": "빔 소드",
+    "description": "근접 전투용 빔 소드. 고출력 레이저로 적을 바싹 태우며 베어버린다."
+  },
+  "BeamSword_4": {
+    "localized_name": "빔 소드",
+    "description": "근접 전투용 빔 소드. 고출력 레이저로 적을 바싹 태우며 베어버린다."
+  },
+  "BeamSword_5": {
+    "localized_name": "빔 소드",
+    "description": "근접 전투용 빔 소드. 고출력 레이저로 적을 바싹 태우며 베어버린다."
+  },
   "Beer": {
     "localized_name": "ko Text",
     "description": "ko Text"
@@ -490,6 +506,22 @@
   "Blueprint_AssaultRifle_Default5": {
     "localized_name": "돌격 소총 설계도 4",
     "description": "가지고 있으면 |AssaultRifle Default1 (Legendary)| 레시피가 해제된다. |WeaponFactory Dirty 02|에서 제작할 수 있다."
+  },
+  "Blueprint_BeamSword_2": {
+    "localized_name": "빔 소드 설계도 1",
+    "description": "가지고 있으면 |빔 소드 (Uncommon)| 레시피가 해제된다. |WeaponFactory Dirty 03|에서 제작할 수 있다."
+  },
+  "Blueprint_BeamSword_3": {
+    "localized_name": "빔 소드 설계도 2",
+    "description": "가지고 있으면 |빔 소드 (Rare)| 레시피가 해제된다. |WeaponFactory Dirty 03|에서 제작할 수 있다."
+  },
+  "Blueprint_BeamSword_4": {
+    "localized_name": "빔 소드 설계도 3",
+    "description": "가지고 있으면 |빔 소드 (Epic)| 레시피가 해제된다. |WeaponFactory Dirty 03|에서 제작할 수 있다."
+  },
+  "Blueprint_BeamSword_5": {
+    "localized_name": "빔 소드 설계도 4",
+    "description": "가지고 있으면 |빔 소드 (Legendary)| 레시피가 해제된다. |WeaponFactory Dirty 03|에서 제작할 수 있다."
   },
   "Blueprint_BowGun_2": {
     "localized_name": "쇠뇌 설계도 1",
@@ -1415,6 +1447,22 @@
     "localized_name": "제련 금속 투구 설계도 4",
     "description": "가지고 있으면 |IronHelmet 5 (Legendary)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
   },
+  "Blueprint_Katana_2": {
+    "localized_name": "카타나 설계도 1",
+    "description": "가지고 있으면 |카타나 (Uncommon)| 레시피가 해제된다. |WeaponFactory Dirty 03|에서 제작할 수 있다."
+  },
+  "Blueprint_Katana_3": {
+    "localized_name": "카타나 설계도 2",
+    "description": "가지고 있으면 |카타나 (Rare)| 레시피가 해제된다. |WeaponFactory Dirty 03|에서 제작할 수 있다."
+  },
+  "Blueprint_Katana_4": {
+    "localized_name": "카타나 설계도 3",
+    "description": "가지고 있으면 |카타나 (Epic)| 레시피가 해제된다. |WeaponFactory Dirty 03|에서 제작할 수 있다."
+  },
+  "Blueprint_Katana_5": {
+    "localized_name": "카타나 설계도 4",
+    "description": "가지고 있으면 |카타나 (Legendary)| 레시피가 해제된다. |WeaponFactory Dirty 03|에서 제작할 수 있다."
+  },
   "Blueprint_LanternTop": {
     "localized_name": "제등 설계도",
     "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|LanternTop|/>|을(를) 건축할 수 있게 된다."
@@ -1903,6 +1951,10 @@
     "localized_name": "단발식 소총 설계도 4",
     "description": "가지고 있으면 |단발식 소총 (Legendary)| 레시피가 해제된다. |WeaponFactory Dirty 02|에서 제작할 수 있다."
   },
+  "Blueprint_Spear_ForestBoss_5": {
+    "localized_name": "릴리의 창 설계도 4",
+    "description": "가지고 있으면 |Spear ForestBoss (Legendary)| 레시피가 해제된다. |WeaponFactory Dirty 02|에서 제작할 수 있다."
+  },
   "Blueprint_StealArmorCold_2": {
     "localized_name": "내한 팰 금속 갑옷 설계도 1",
     "description": "가지고 있으면 |StealArmorCold 2 (Uncommon)| 레시피가 해제된다. |Factory Hard 03|에서 제작할 수 있다."
@@ -1983,6 +2035,22 @@
     "localized_name": "기관단총 설계도 4",
     "description": "가지고 있으면 |기관단총 (Legendary)| 레시피가 해제된다. |WeaponFactory Dirty 02|에서 제작할 수 있다."
   },
+  "Blueprint_Sword_2": {
+    "localized_name": "검 설계도 1",
+    "description": "가지고 있으면 |검 (Uncommon)| 레시피가 해제된다. |WeaponFactory Dirty 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Sword_3": {
+    "localized_name": "검 설계도 2",
+    "description": "가지고 있으면 |검 (Rare)| 레시피가 해제된다. |WeaponFactory Dirty 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Sword_4": {
+    "localized_name": "검 설계도 3",
+    "description": "가지고 있으면 |검 (Epic)| 레시피가 해제된다. |WeaponFactory Dirty 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Sword_5": {
+    "localized_name": "검 설계도 4",
+    "description": "가지고 있으면 |검 (Legendary)| 레시피가 해제된다. |WeaponFactory Dirty 01|에서 제작할 수 있다."
+  },
   "Blueprint_WallTorch02": {
     "localized_name": "장엄한 벽걸이 횃불 설계도",
     "description": "가지고 있거나 거점에 수납하면 |<MapObjectName id=|WallTorch02|/>|을(를) 건축할 수 있게 된다."
@@ -2013,7 +2081,7 @@
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "신성한 판금 갑옷 설계도",
-    "description": "[테라리아 컬래버] 가지고 있으면 |PalSummon YakushimaArmor001| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+    "description": "[테라리아 컬래버] 가지고 있으면 |신성한 판금 갑옷| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
   },
   "Blueprint_YakushimaArmor001_2": {
     "localized_name": "신성한 판금 갑옷 설계도 1",
@@ -2117,7 +2185,7 @@
   },
   "Blueprint_YakushimaHeadEquip001": {
     "localized_name": "신성한 가면 설계도",
-    "description": "[테라리아 컬래버] 가지고 있으면 |PalSummon YakushimaHeadEquip001| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+    "description": "[테라리아 컬래버] 가지고 있으면 |신성한 가면| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
   },
   "Blueprint_YakushimaHeadEquip001_2": {
     "localized_name": "신성한 가면 설계도 1",
@@ -2137,7 +2205,7 @@
   },
   "Blueprint_YakushimaHeadEquip002": {
     "localized_name": "신성한 헤드기어 설계도",
-    "description": "[테라리아 컬래버] 가지고 있으면 |PalSummon YakushimaHeadEquip002| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+    "description": "[테라리아 컬래버] 가지고 있으면 |신성한 헤드기어| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
   },
   "Blueprint_YakushimaHeadEquip002_2": {
     "localized_name": "신성한 헤드기어 설계도 1",
@@ -2157,7 +2225,7 @@
   },
   "Blueprint_YakushimaHeadEquip003": {
     "localized_name": "신성한 투구 설계도",
-    "description": "[테라리아 컬래버] 가지고 있으면 |PalSummon YakushimaHeadEquip003| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+    "description": "[테라리아 컬래버] 가지고 있으면 |신성한 투구| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
   },
   "Blueprint_YakushimaHeadEquip003_2": {
     "localized_name": "신성한 투구 설계도 1",
@@ -2177,7 +2245,7 @@
   },
   "Blueprint_YakushimaHeadEquip004": {
     "localized_name": "신성한 후드 설계도",
-    "description": "[테라리아 컬래버] 가지고 있으면 |PalSummon YakushimaHeadEquip004| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+    "description": "[테라리아 컬래버] 가지고 있으면 |신성한 후드| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
   },
   "Blueprint_YakushimaHeadEquip004_2": {
     "localized_name": "신성한 후드 설계도 1",
@@ -3531,10 +3599,6 @@
     "localized_name": "핸드건 탄약",
     "description": "HandGun Default 등에 사용하는 탄."
   },
-  "HandgunShield": {
-    "localized_name": "전술 방패",
-    "description": "전술 방패"
-  },
   "Head001": {
     "localized_name": "왕관",
     "description": null
@@ -4017,7 +4081,7 @@
   },
   "HeadEquip046": {
     "localized_name": "구원의 왕관",
-    "description": "레전디얼[궁극]의 불길한 힘이 느껴진다. 이걸 손에 넣는 일은 극도로 드물다."
+    "description": "레젠디얼[궁극]의 불길한 힘이 느껴진다. 이걸 손에 넣는 일은 극도로 드물다."
   },
   "Herbs": {
     "localized_name": "하급 의약품",
@@ -4160,6 +4224,22 @@
     "description": "Meat JellyfishGhost, 빨간 열매을(를) 재료로 만든 신비한 디저트. 먹으면 일정 시간 동안 경험치 획득량이 조금 증가하며 방어 +10%."
   },
   "Katana": {
+    "localized_name": "카타나",
+    "description": "근접 전투용 카타나. 예리한 날로 적을 일도양단한다."
+  },
+  "Katana_2": {
+    "localized_name": "카타나",
+    "description": "근접 전투용 카타나. 예리한 날로 적을 일도양단한다."
+  },
+  "Katana_3": {
+    "localized_name": "카타나",
+    "description": "근접 전투용 카타나. 예리한 날로 적을 일도양단한다."
+  },
+  "Katana_4": {
+    "localized_name": "카타나",
+    "description": "근접 전투용 카타나. 예리한 날로 적을 일도양단한다."
+  },
+  "Katana_5": {
     "localized_name": "카타나",
     "description": "근접 전투용 카타나. 예리한 날로 적을 일도양단한다."
   },
@@ -4417,7 +4497,7 @@
   },
   "ManganeseIngot": {
     "localized_name": "코랄리움 주괴",
-    "description": "코랄리움 광석, 금속 주괴, , 석탄(으)로 구성된 합금. 에너지에 대한 강도가 높아 무기 등의 재료로 활용할 수 있다."
+    "description": "코랄리움 광석, 금속 광석, 석탄(으)로 구성된 합금. 에너지에 대한 강도가 높아 무기 등의 재료로 활용할 수 있다."
   },
   "ManganeseOre": {
     "localized_name": "코랄리움 광석",
@@ -4629,51 +4709,51 @@
   },
   "Octavia002_Armor": {
     "localized_name": "V2 갑옷",
-    "description": "[ULTRAKILL 컬래버] 먼 땅에서 제조된 평화유지용 로봇의 구조를 참고하여 제작한 갑옷. 자가수리 기능은 제거되었으나, 대신 더욱 견고한 장갑을 탑재하였다."
+    "description": "[ULTRAKILL 컬래버] 먼 땅에서 제조된 평화유지용 로봇의 구조를 참고하여 제작한 갑옷. 자가수리 기능은 제거되었으나, 대신 장갑이 더욱 강화되었다."
   },
   "Octavia002_Armor_5": {
     "localized_name": "V2 갑옷",
-    "description": "[ULTRAKILL 컬래버] 먼 땅에서 제조된 평화유지용 로봇의 구조를 참고하여 제작한 갑옷. 자가수리 기능은 제거되었으나, 대신 더욱 견고한 장갑을 탑재하였다."
+    "description": "[ULTRAKILL 컬래버] 먼 땅에서 제조된 평화유지용 로봇의 구조를 참고하여 제작한 갑옷. 자가수리 기능은 제거되었으나, 대신 장갑이 더욱 강화되었다."
   },
   "OctaviaRevolver": {
     "localized_name": "마크스맨 리볼버",
-    "description": "[ULTRAKILL 컬래버] 전력을 이용해 재장전 없이 계속 발사할 수 있는 리볼버. 장착 중에는 포획 스피어 던지기가 동전 던지기로 변경되며, 마크스맨 리볼버 사격이 코인에 명중할 경우 적을 향해 도탄된다."
+    "description": "[ULTRAKILL 컬래버] 전력을 이용해 계속 발사할 수 있는 리볼버. 장착 중에는 포획 스피어 던지기가 동전 던지기로 변경되며, 마크스맨 리볼버 사격이 코인에 명중할 경우 탄환이 적을 향해 도탄된다."
   },
   "OctaviaRevolver_2": {
     "localized_name": "마크스맨 리볼버",
-    "description": "[ULTRAKILL 컬래버] 전력을 이용해 재장전 없이 계속 발사할 수 있는 리볼버. 장착 중에는 포획 스피어 던지기가 동전 던지기로 변경되며, 마크스맨 리볼버 사격이 코인에 명중할 경우 적을 향해 도탄된다."
+    "description": "[ULTRAKILL 컬래버] 전력을 이용해 계속 발사할 수 있는 리볼버. 장착 중에는 포획 스피어 던지기가 동전 던지기로 변경되며, 마크스맨 리볼버 사격이 코인에 명중할 경우 탄환이 적을 향해 도탄된다."
   },
   "OctaviaRevolver_3": {
     "localized_name": "마크스맨 리볼버",
-    "description": "[ULTRAKILL 컬래버] 전력을 이용해 재장전 없이 계속 발사할 수 있는 리볼버. 장착 중에는 포획 스피어 던지기가 동전 던지기로 변경되며, 마크스맨 리볼버 사격이 코인에 명중할 경우 적을 향해 도탄된다."
+    "description": "[ULTRAKILL 컬래버] 전력을 이용해 계속 발사할 수 있는 리볼버. 장착 중에는 포획 스피어 던지기가 동전 던지기로 변경되며, 마크스맨 리볼버 사격이 코인에 명중할 경우 탄환이 적을 향해 도탄된다."
   },
   "OctaviaRevolver_4": {
     "localized_name": "마크스맨 리볼버",
-    "description": "[ULTRAKILL 컬래버] 전력을 이용해 재장전 없이 계속 발사할 수 있는 리볼버. 장착 중에는 포획 스피어 던지기가 동전 던지기로 변경되며, 마크스맨 리볼버 사격이 코인에 명중할 경우 적을 향해 도탄된다."
+    "description": "[ULTRAKILL 컬래버] 전력을 이용해 계속 발사할 수 있는 리볼버. 장착 중에는 포획 스피어 던지기가 동전 던지기로 변경되며, 마크스맨 리볼버 사격이 코인에 명중할 경우 탄환이 적을 향해 도탄된다."
   },
   "OctaviaRevolver_5": {
     "localized_name": "마크스맨 리볼버",
-    "description": "[ULTRAKILL 컬래버] 전력을 이용해 재장전 없이 계속 발사할 수 있는 리볼버. 장착 중에는 포획 스피어 던지기가 동전 던지기로 변경되며, 마크스맨 리볼버 사격이 코인에 명중할 경우 적을 향해 도탄된다."
+    "description": "[ULTRAKILL 컬래버] 전력을 이용해 계속 발사할 수 있는 리볼버. 장착 중에는 포획 스피어 던지기가 동전 던지기로 변경되며, 마크스맨 리볼버 사격이 코인에 명중할 경우 탄환이 적을 향해 도탄된다."
   },
   "OctaviaShotgun": {
     "localized_name": "코어 이젝트 산탄총",
-    "description": "[ULTRAKILL 컬래버] 열에너지를 이용해 재장전 없이 계속 발사할 수 있는 산탄총. 장착 중에는 포획 스피어 던지기가 코어 발사로 변경되며, 마크스맨 리볼버 사격이 코어에 명중할 경우 폭발한다."
+    "description": "[ULTRAKILL 컬래버] 열에너지를 이용해 계속 발사할 수 있는 산탄총. 장착 중에는 포획 스피어 던지기가 코어 발사로 변경되며, 길게 눌러 충전하면 코어 발사 사정거리가 증가한다. 마크스맨 리볼버 사격이 코어에 명중할 경우 폭발한다."
   },
   "OctaviaShotgun_2": {
     "localized_name": "코어 이젝트 산탄총",
-    "description": "[ULTRAKILL 컬래버] 열에너지를 이용해 재장전 없이 계속 발사할 수 있는 산탄총. 장착 중에는 포획 스피어 던지기가 코어 발사로 변경되며, 마크스맨 리볼버 사격이 코어에 명중할 경우 폭발한다."
+    "description": "[ULTRAKILL 컬래버] 열에너지를 이용해 계속 발사할 수 있는 산탄총. 장착 중에는 포획 스피어 던지기가 코어 발사로 변경되며, 길게 눌러 충전하면 코어 발사 사정거리가 증가한다. 마크스맨 리볼버 사격이 코어에 명중할 경우 폭발한다."
   },
   "OctaviaShotgun_3": {
     "localized_name": "코어 이젝트 산탄총",
-    "description": "[ULTRAKILL 컬래버] 열에너지를 이용해 재장전 없이 계속 발사할 수 있는 산탄총. 장착 중에는 포획 스피어 던지기가 코어 발사로 변경되며, 마크스맨 리볼버 사격이 코어에 명중할 경우 폭발한다."
+    "description": "[ULTRAKILL 컬래버] 열에너지를 이용해 계속 발사할 수 있는 산탄총. 장착 중에는 포획 스피어 던지기가 코어 발사로 변경되며, 길게 눌러 충전하면 코어 발사 사정거리가 증가한다. 마크스맨 리볼버 사격이 코어에 명중할 경우 폭발한다."
   },
   "OctaviaShotgun_4": {
     "localized_name": "코어 이젝트 산탄총",
-    "description": "[ULTRAKILL 컬래버] 열에너지를 이용해 재장전 없이 계속 발사할 수 있는 산탄총. 장착 중에는 포획 스피어 던지기가 코어 발사로 변경되며, 마크스맨 리볼버 사격이 코어에 명중할 경우 폭발한다."
+    "description": "[ULTRAKILL 컬래버] 열에너지를 이용해 계속 발사할 수 있는 산탄총. 장착 중에는 포획 스피어 던지기가 코어 발사로 변경되며, 길게 눌러 충전하면 코어 발사 사정거리가 증가한다. 마크스맨 리볼버 사격이 코어에 명중할 경우 폭발한다."
   },
   "OctaviaShotgun_5": {
     "localized_name": "코어 이젝트 산탄총",
-    "description": "[ULTRAKILL 컬래버] 열에너지를 이용해 재장전 없이 계속 발사할 수 있는 산탄총. 장착 중에는 포획 스피어 던지기가 코어 발사로 변경되며, 마크스맨 리볼버 사격이 코어에 명중할 경우 폭발한다."
+    "description": "[ULTRAKILL 컬래버] 열에너지를 이용해 계속 발사할 수 있는 산탄총. 장착 중에는 포획 스피어 던지기가 코어 발사로 변경되며, 길게 눌러 충전하면 코어 발사 사정거리가 증가한다. 마크스맨 리볼버 사격이 코어에 명중할 경우 폭발한다."
   },
   "OctopusGirl_Takoyaki": {
     "localized_name": "옥토비아 타코야키",
@@ -5384,19 +5464,19 @@
     "description": "KingBahamut Dragon의 힘이 흘러넘치는 석판의 파편. 모아서 조합하면 석판이 완성된다."
   },
   "PalSummon_LegendDeer": {
-    "localized_name": "레전디얼의 석판",
+    "localized_name": "레젠디얼의 석판",
     "description": "레젠디얼의 모습이 그려진 석판. 소환의 제단에 바치면 아주 강대한 레젠디얼[Lv 65]이(가) 소환된다."
   },
   "PalSummon_LegendDeer_2": {
-    "localized_name": "레전디얼[궁극]의 석판",
+    "localized_name": "레젠디얼[궁극]의 석판",
     "description": "레젠디얼의 힘이 흘러넘치는 석판. 소환의 제단에 바치면 절망적인 위력의 레젠디얼[Lv ??]이(가) 소환된다."
   },
   "PalSummon_LegendDeer_Parts": {
-    "localized_name": "레전디얼의 석편",
+    "localized_name": "레젠디얼의 석편",
     "description": "레젠디얼의 모습이 그려진 석판의 조각. 모아서 조합하면 석판이 완성된다."
   },
   "PalSummon_LegendDeer_Parts_2": {
-    "localized_name": "레전디얼[궁극]의 석편",
+    "localized_name": "레젠디얼[궁극]의 석편",
     "description": "레젠디얼의 힘이 흘러넘치는 석판의 조각. 모아서 조합하면 석판이 완성된다."
   },
   "PalSummon_NightLady": {
@@ -6632,7 +6712,7 @@
     "description": "모몽파의 하네스. 가지고 있으면 플레이어가 빈사 상태가 될 시 모몽파이(가) 치유의 힘으로 플레이어를 부활시킨다."
   },
   "SkillUnlock_LegendDeer": {
-    "localized_name": "레전디얼의 안장",
+    "localized_name": "레젠디얼의 안장",
     "description": "가지고 있으면 레젠디얼에 탑승해 공격을 막는 보호막을 생성할 수 있다."
   },
   "SkillUnlock_Manticore": {
@@ -6831,6 +6911,10 @@
     "localized_name": "릴리의 창",
     "description": "릴리가 애용하던 창. 팰을 업신여기는 자에게 심판을 내린다."
   },
+  "Spear_ForestBoss_5": {
+    "localized_name": "릴리의 창",
+    "description": "릴리가 애용하던 창. 팰을 업신여기는 자에게 심판을 내린다."
+  },
   "Spear_QueenBee": {
     "localized_name": "퀸비나의 지팡이",
     "description": "퀸비나의 지팡이를 인간용으로 개조했다. 여왕의 패기가 느껴진다."
@@ -6877,7 +6961,7 @@
   },
   "StainlessSteel": {
     "localized_name": "헥소라이트",
-    "description": "크로마이트, 금속 주괴, 헥소 석영(으)로 구성된 합금. 더욱 발전된 장비와 건축물의 재료로 활용할 수 있다."
+    "description": "크로마이트, 금속 광석, 헥소 석영(으)로 구성된 합금. 더욱 발전된 장비와 건축물의 재료로 활용할 수 있다."
   },
   "StatusPointResetSan": {
     "localized_name": "기억 삭제 약",
@@ -7016,6 +7100,22 @@
     "description": "캔디쉽에게서 얻는 솜사탕. 입안에서 눈 녹듯 사라지는 달콤함."
   },
   "Sword": {
+    "localized_name": "검",
+    "description": "휘두르는 맛이 일품인 근접 전투용 검. 적에게 접근하는 위험을 감수해야 한다."
+  },
+  "Sword_2": {
+    "localized_name": "검",
+    "description": "휘두르는 맛이 일품인 근접 전투용 검. 적에게 접근하는 위험을 감수해야 한다."
+  },
+  "Sword_3": {
+    "localized_name": "검",
+    "description": "휘두르는 맛이 일품인 근접 전투용 검. 적에게 접근하는 위험을 감수해야 한다."
+  },
+  "Sword_4": {
+    "localized_name": "검",
+    "description": "휘두르는 맛이 일품인 근접 전투용 검. 적에게 접근하는 위험을 감수해야 한다."
+  },
+  "Sword_5": {
     "localized_name": "검",
     "description": "휘두르는 맛이 일품인 근접 전투용 검. 적에게 접근하는 위험을 감수해야 한다."
   },

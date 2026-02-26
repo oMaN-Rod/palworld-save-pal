@@ -459,6 +459,22 @@
     "localized_name": "Miecz laserowy",
     "description": "Miecz laserowy przydatny do walki na bliskim dystansie. Przecina przeciwników na wskroś, rażąc ich laserem o wysokiej mocy."
   },
+  "BeamSword_2": {
+    "localized_name": "Miecz laserowy",
+    "description": "Miecz laserowy przydatny do walki na bliskim dystansie. Przecina przeciwników na wskroś, rażąc ich laserem o wysokiej mocy."
+  },
+  "BeamSword_3": {
+    "localized_name": "Miecz laserowy",
+    "description": "Miecz laserowy przydatny do walki na bliskim dystansie. Przecina przeciwników na wskroś, rażąc ich laserem o wysokiej mocy."
+  },
+  "BeamSword_4": {
+    "localized_name": "Miecz laserowy",
+    "description": "Miecz laserowy przydatny do walki na bliskim dystansie. Przecina przeciwników na wskroś, rażąc ich laserem o wysokiej mocy."
+  },
+  "BeamSword_5": {
+    "localized_name": "Miecz laserowy",
+    "description": "Miecz laserowy przydatny do walki na bliskim dystansie. Przecina przeciwników na wskroś, rażąc ich laserem o wysokiej mocy."
+  },
   "Beer": {
     "localized_name": "-",
     "description": "-"
@@ -490,6 +506,22 @@
   "Blueprint_AssaultRifle_Default5": {
     "localized_name": "Karabin szturmowy: Schemat 4",
     "description": "Będąc w ekwipunku, odblokowuje przepis na AssaultRifle Default1 (Legendary). Można wykonać przy użyciu: WeaponFactory Dirty 02."
+  },
+  "Blueprint_BeamSword_2": {
+    "localized_name": "Miecz laserowy: Schemat 1",
+    "description": "Posiadanie tego przedmiotu odblokowuje przepis na: Miecz laserowy (Uncommon). Do wytworzenia potrzeba: WeaponFactory Dirty 03."
+  },
+  "Blueprint_BeamSword_3": {
+    "localized_name": "Miecz laserowy: Schemat 2",
+    "description": "Posiadanie tego przedmiotu odblokowuje przepis na: Miecz laserowy (Rare). Do wytworzenia potrzeba: WeaponFactory Dirty 03."
+  },
+  "Blueprint_BeamSword_4": {
+    "localized_name": "Miecz laserowy: Schemat 3",
+    "description": "Posiadanie tego przedmiotu odblokowuje przepis na: Miecz laserowy (Epic). Do wytworzenia potrzeba: WeaponFactory Dirty 03."
+  },
+  "Blueprint_BeamSword_5": {
+    "localized_name": "Miecz laserowy: Schemat 4",
+    "description": "Posiadanie tego przedmiotu odblokowuje przepis na: Miecz laserowy (Legendary). Do wytworzenia potrzeba: WeaponFactory Dirty 03."
   },
   "Blueprint_BowGun_2": {
     "localized_name": "Kusza: Schemat 1",
@@ -1415,6 +1447,22 @@
     "localized_name": "Hełm z rafinowanego metalu: Schemat 4",
     "description": "Będąc w ekwipunku, odblokowuje przepis na IronHelmet 5 (Legendary). Można wykonać przy użyciu: Factory Hard 02."
   },
+  "Blueprint_Katana_2": {
+    "localized_name": "Katana: Schemat 1",
+    "description": "Posiadanie tego przedmiotu odblokowuje przepis na: Katana (Uncommon). Do wytworzenia potrzeba: WeaponFactory Dirty 03."
+  },
+  "Blueprint_Katana_3": {
+    "localized_name": "Katana: Schemat 2",
+    "description": "Posiadanie tego przedmiotu odblokowuje przepis na: Katana (Rare). Do wytworzenia potrzeba: WeaponFactory Dirty 03."
+  },
+  "Blueprint_Katana_4": {
+    "localized_name": "Katana: Schemat 3",
+    "description": "Posiadanie tego przedmiotu odblokowuje przepis na: Katana (Epic). Do wytworzenia potrzeba: WeaponFactory Dirty 03."
+  },
+  "Blueprint_Katana_5": {
+    "localized_name": "Katana: Schemat 4`1",
+    "description": "Posiadanie tego przedmiotu odblokowuje przepis na: Katana (Legendary). Do wytworzenia potrzeba: WeaponFactory Dirty 03."
+  },
   "Blueprint_LanternTop": {
     "localized_name": "Lampion: Schemat",
     "description": "Gdy posiadasz lub przechowujesz w bazie, <MapObjectName id=|LanternTop|/> może zostać postawiony."
@@ -1792,7 +1840,7 @@
     "description": "Będąc w ekwipunku, odblokowuje przepis na Lekka zbroja z heksolitu (Epic). Można wykonać przy użyciu: Factory Hard 03."
   },
   "Blueprint_SFArmorWeight_5": {
-    "localized_name": "Lekka zbroja z hksolitu: Schemat 4",
+    "localized_name": "Lekka zbroja z heksolitu: Schemat 4",
     "description": "Będąc w ekwipunku, odblokowuje przepis na Lekka zbroja z heksolitu (Legendary). Można wykonać przy użyciu: Factory Hard 03."
   },
   "Blueprint_SFArmor_2": {
@@ -1903,6 +1951,10 @@
     "localized_name": "Karabin jednostrzałowy: Schemat 4",
     "description": "Będąc w ekwipunku, odblokowuje przepis na Karabin jednostrzałowy (Legendary). Można wykonać przy użyciu: WeaponFactory Dirty 02."
   },
+  "Blueprint_Spear_ForestBoss_5": {
+    "localized_name": "Włócznia Lily: Schemat 4",
+    "description": "Posiadanie tego przedmiotu odblokowuje przepis na: Spear ForestBoss (Legendary). Do wytworzenia potrzeba: WeaponFactory Dirty 02."
+  },
   "Blueprint_StealArmorCold_2": {
     "localized_name": "Zimnoodporna zbroja z Palmetalu: Schemat 1",
     "description": "Będąc w ekwipunku, odblokowuje przepis na StealArmorCold 2 (Uncommon). Można wykonać przy użyciu: Factory Hard 03."
@@ -1983,6 +2035,22 @@
     "localized_name": "Pistolet maszynowy: Schemat 4",
     "description": "Będąc w ekwipunku, odblokowuje przepis na Pistolet maszynowy (Legendary). Można wykonać przy użyciu: WeaponFactory Dirty 02."
   },
+  "Blueprint_Sword_2": {
+    "localized_name": "Miecz: Schemat 1",
+    "description": "Posiadanie tego przedmiotu odblokowuje przepis na: Miecz (Uncommon). Do wytworzenia potrzeba: WeaponFactory Dirty 01."
+  },
+  "Blueprint_Sword_3": {
+    "localized_name": "Miecz: Schemat 2",
+    "description": "Posiadanie tego przedmiotu odblokowuje przepis na: Miecz (Rare). Do wytworzenia potrzeba: WeaponFactory Dirty 01."
+  },
+  "Blueprint_Sword_4": {
+    "localized_name": "Miecz: Schemat 3",
+    "description": "Posiadanie tego przedmiotu odblokowuje przepis na: Miecz (Epic). Do wytworzenia potrzeba: WeaponFactory Dirty 01."
+  },
+  "Blueprint_Sword_5": {
+    "localized_name": "Miecz: Schemat 4",
+    "description": "Posiadanie tego przedmiotu odblokowuje przepis na: Miecz (Legendary). Do wytworzenia potrzeba: WeaponFactory Dirty 01."
+  },
   "Blueprint_WallTorch02": {
     "localized_name": "Ozdobna pochodnia ścienna: Schemat",
     "description": "Gdy posiadasz lub przechowujesz w bazie, <MapObjectName id=|WallTorch02|/> może zostać postawiona."
@@ -2013,7 +2081,7 @@
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "Święta zbroja płytowa: Schemat",
-    "description": "[Tides of Terraria] Posiadanie tego przedmiotu odblokowuje przepis na: PalSummon YakushimaArmor001. Do wytworzenia potrzeba: Factory Hard 02."
+    "description": "[Tides of Terraria] Posiadanie tego przedmiotu odblokowuje przepis na: Bajkowa zbroja płytowa. Do wytworzenia potrzeba: Factory Hard 02."
   },
   "Blueprint_YakushimaArmor001_2": {
     "localized_name": "Święta zbroja płytowa: Schemat 1",
@@ -2117,7 +2185,7 @@
   },
   "Blueprint_YakushimaHeadEquip001": {
     "localized_name": "Święta maska: Schemat",
-    "description": "[Tides of Terraria] Posiadanie tego przedmiotu odblokowuje przepis na: PalSummon YakushimaHeadEquip001. Do wytworzenia potrzeba: Factory Hard 02."
+    "description": "[Tides of Terraria] Posiadanie tego przedmiotu odblokowuje przepis na: Bajkowa maska. Do wytworzenia potrzeba: Factory Hard 02."
   },
   "Blueprint_YakushimaHeadEquip001_2": {
     "localized_name": "Święta maska: Schemat 1",
@@ -2137,7 +2205,7 @@
   },
   "Blueprint_YakushimaHeadEquip002": {
     "localized_name": "Święte nakrycie głowy: Schemat",
-    "description": "[Tides of Terraria] Posiadanie tego przedmiotu odblokowuje przepis na: PalSummon YakushimaHeadEquip002. Do wytworzenia potrzeba: Factory Hard 02."
+    "description": "[Tides of Terraria] Posiadanie tego przedmiotu odblokowuje przepis na: Bajkowe nakrycie głowy. Do wytworzenia potrzeba: Factory Hard 02."
   },
   "Blueprint_YakushimaHeadEquip002_2": {
     "localized_name": "Święte nakrycie głowy: Schemat 1",
@@ -2157,7 +2225,7 @@
   },
   "Blueprint_YakushimaHeadEquip003": {
     "localized_name": "Święty hełm: Schemat",
-    "description": "[Tides of Terraria] Posiadanie tego przedmiotu odblokowuje przepis na: PalSummon YakushimaHeadEquip003. Do wytworzenia potrzeba: Factory Hard 02."
+    "description": "[Tides of Terraria] Posiadanie tego przedmiotu odblokowuje przepis na: Bajkowy hełm. Do wytworzenia potrzeba: Factory Hard 02."
   },
   "Blueprint_YakushimaHeadEquip003_2": {
     "localized_name": "Święty hełm: Schemat 1",
@@ -2177,7 +2245,7 @@
   },
   "Blueprint_YakushimaHeadEquip004": {
     "localized_name": "Święty kaptur: Schemat",
-    "description": "[Tides of Terraria] Posiadanie tego przedmiotu odblokowuje przepis na: PalSummon YakushimaHeadEquip004. Do wytworzenia potrzeba: Factory Hard 02."
+    "description": "[Tides of Terraria] Posiadanie tego przedmiotu odblokowuje przepis na: Bajkowy kaptur. Do wytworzenia potrzeba: Factory Hard 02."
   },
   "Blueprint_YakushimaHeadEquip004_2": {
     "localized_name": "Święty kaptur: Schemat 1",
@@ -3531,10 +3599,6 @@
     "localized_name": "Amunicja: Pistolet",
     "description": "Amunicja do HandGun Default i podobnej broni."
   },
-  "HandgunShield": {
-    "localized_name": "Tarcza balistyczna",
-    "description": "Tarcza balistyczna"
-  },
   "Head001": {
     "localized_name": "Korona monarchy",
     "description": null
@@ -4163,6 +4227,22 @@
     "localized_name": "Katana",
     "description": "Katana przydatna do walki na bliskim dystansie. Przecina z precyzją żyletki, zadając czyste cięcie jednym ciosem."
   },
+  "Katana_2": {
+    "localized_name": "Katana",
+    "description": "Katana przydatna do walki na bliskim dystansie. Przecina z precyzją żyletki, zadając czyste cięcie jednym ciosem."
+  },
+  "Katana_3": {
+    "localized_name": "Katana",
+    "description": "Katana przydatna do walki na bliskim dystansie. Przecina z precyzją żyletki, zadając czyste cięcie jednym ciosem."
+  },
+  "Katana_4": {
+    "localized_name": "Katana",
+    "description": "Katana przydatna do walki na bliskim dystansie. Przecina z precyzją żyletki, zadając czyste cięcie jednym ciosem."
+  },
+  "Katana_5": {
+    "localized_name": "Katana",
+    "description": "Katana przydatna do walki na bliskim dystansie. Przecina z precyzją żyletki, zadając czyste cięcie jednym ciosem."
+  },
   "Lantern": {
     "localized_name": "Latarnia biodrowa",
     "description": "Latarnia, którą można nosić przy biodrze. Automatycznie zapala się w nocy. Można zmienić ustawienia, by świeciła cały czas. Jedna wystarczy, by odnaleźć drogę w ciemności."
@@ -4417,7 +4497,7 @@
   },
   "ManganeseIngot": {
     "localized_name": "Sztabka koralowa",
-    "description": "Stop następujących surowców: Ruda koralowa, Sztaba, Węgiel. Odznacza się wysoką odpornością na energię i bywa wykorzystywany do produkcji broni."
+    "description": "Stop następujących surowców: Ruda koralowa, Ruda, Węgiel. Ma wysoką odporność na działanie energii i służy jako materiał do produkcji broni."
   },
   "ManganeseOre": {
     "localized_name": "Ruda koralowa",
@@ -4629,51 +4709,51 @@
   },
   "Octavia002_Armor": {
     "localized_name": "Pancerz V2",
-    "description": "[Ultrakill] Pancerz wzorowany na mechanizmach robotów pokojowych produkowanych w odległych krainach. Pozbawiony funkcji autonaprawy, lecz wyposażony w znacznie bardziej wytrzymałą powłokę ochronną."
+    "description": "[Ultrakill] Pancerz wzorowany na mechanizmach robotów pokojowych produkowanych w odległych krainach. Pozbawiony funkcji autonaprawy, lecz zamiast tego ma wzmocnione opancerzenie."
   },
   "Octavia002_Armor_5": {
     "localized_name": "Pancerz V2",
-    "description": "[Ultrakill] Pancerz wzorowany na mechanizmach robotów pokojowych produkowanych w odległych krainach. Pozbawiony funkcji autonaprawy, lecz wyposażony w znacznie bardziej wytrzymałą powłokę ochronną."
+    "description": "[Ultrakill] Pancerz wzorowany na mechanizmach robotów pokojowych produkowanych w odległych krainach. Pozbawiony funkcji autonaprawy, lecz zamiast tego ma wzmocnione opancerzenie."
   },
   "OctaviaRevolver": {
     "localized_name": "Rewolwer strzelca wyborowego",
-    "description": "[Ultrakill] Rewolwer zasilany energią elektryczną, pozwalający strzelać bez przeładowania. Po wyposażeniu rzucanie Pal-sferą zostaje zastąpione rzutem monetą, a moneta trafiona strzałem z broni Rewolwer strzelca wyborowego rykoszetuje w stronę wrogów."
+    "description": "[Ultrakill] Rewolwer zasilany energią elektryczną, pozwalający prowadzić ciągły ogień. Po wyposażeniu rzucanie Pal-sferą zostaje zastąpione rzutem monetą, a pocisk, który trafi w monetę podczas strzału z broni Rewolwer strzelca wyborowego, rykoszetuje w stronę wroga."
   },
   "OctaviaRevolver_2": {
     "localized_name": "Rewolwer strzelca wyborowego",
-    "description": "[Ultrakill] Rewolwer zasilany energią elektryczną, pozwalający strzelać bez przeładowania. Po wyposażeniu rzucanie Pal-sferą zostaje zastąpione rzutem monetą, a moneta trafiona strzałem z broni Rewolwer strzelca wyborowego rykoszetuje w stronę wrogów."
+    "description": "[Ultrakill] Rewolwer zasilany energią elektryczną, pozwalający prowadzić ciągły ogień. Po wyposażeniu rzucanie Pal-sferą zostaje zastąpione rzutem monetą, a pocisk, który trafi w monetę podczas strzału z broni Rewolwer strzelca wyborowego, rykoszetuje w stronę wroga."
   },
   "OctaviaRevolver_3": {
     "localized_name": "Rewolwer strzelca wyborowego",
-    "description": "[Ultrakill] Rewolwer zasilany energią elektryczną, pozwalający strzelać bez przeładowania. Po wyposażeniu rzucanie Pal-sferą zostaje zastąpione rzutem monetą, a moneta trafiona strzałem z broni Rewolwer strzelca wyborowego rykoszetuje w stronę wrogów."
+    "description": "[Ultrakill] Rewolwer zasilany energią elektryczną, pozwalający prowadzić ciągły ogień. Po wyposażeniu rzucanie Pal-sferą zostaje zastąpione rzutem monetą, a pocisk, który trafi w monetę podczas strzału z broni Rewolwer strzelca wyborowego, rykoszetuje w stronę wroga."
   },
   "OctaviaRevolver_4": {
     "localized_name": "Rewolwer strzelca wyborowego",
-    "description": "[Ultrakill] Rewolwer zasilany energią elektryczną, pozwalający strzelać bez przeładowania. Po wyposażeniu rzucanie Pal-sferą zostaje zastąpione rzutem monetą, a moneta trafiona strzałem z broni Rewolwer strzelca wyborowego rykoszetuje w stronę wrogów."
+    "description": "[Ultrakill] Rewolwer zasilany energią elektryczną, pozwalający prowadzić ciągły ogień. Po wyposażeniu rzucanie Pal-sferą zostaje zastąpione rzutem monetą, a pocisk, który trafi w monetę podczas strzału z broni Rewolwer strzelca wyborowego, rykoszetuje w stronę wroga."
   },
   "OctaviaRevolver_5": {
     "localized_name": "Rewolwer strzelca wyborowego",
-    "description": "[Ultrakill] Rewolwer zasilany energią elektryczną, pozwalający strzelać bez przeładowania. Po wyposażeniu rzucanie Pal-sferą zostaje zastąpione rzutem monetą, a moneta trafiona strzałem z broni Rewolwer strzelca wyborowego rykoszetuje w stronę wrogów."
+    "description": "[Ultrakill] Rewolwer zasilany energią elektryczną, pozwalający prowadzić ciągły ogień. Po wyposażeniu rzucanie Pal-sferą zostaje zastąpione rzutem monetą, a pocisk, który trafi w monetę podczas strzału z broni Rewolwer strzelca wyborowego, rykoszetuje w stronę wroga."
   },
   "OctaviaShotgun": {
     "localized_name": "Strzelba z wyrzutem rdzenia",
-    "description": "[Ultrakill] Strzelba zasilana energią cieplną, pozwalająca strzelać bez przeładowania. Po wyposażeniu rzucanie Pal-sferą zostaje zastąpione wystrzałem rdzenia, a rdzeń trafiony strzałem z broni Rewolwer strzelca wyborowego wybucha."
+    "description": "[Ultrakill] Strzelba zasilana energią cieplną, pozwalająca prowadzić ciągły ogień. Po wyposażeniu rzucanie Pal-sferą zostaje zastąpione wystrzałem rdzenia. Przytrzymaj, aby naładować i zwiększyć zasięg wystrzału rdzenia. Rdzeń trafiony strzałem z broni Rewolwer strzelca wyborowego wybucha."
   },
   "OctaviaShotgun_2": {
     "localized_name": "Strzelba z wyrzutem rdzenia",
-    "description": "[Ultrakill] Strzelba zasilana energią cieplną, pozwalająca strzelać bez przeładowania. Po wyposażeniu rzucanie Pal-sferą zostaje zastąpione wystrzałem rdzenia, a rdzeń trafiony strzałem z broni Rewolwer strzelca wyborowego wybucha."
+    "description": "[Ultrakill] Strzelba zasilana energią cieplną, pozwalająca prowadzić ciągły ogień. Po wyposażeniu rzucanie Pal-sferą zostaje zastąpione wystrzałem rdzenia. Przytrzymaj, aby naładować i zwiększyć zasięg wystrzału rdzenia. Rdzeń trafiony strzałem z broni Rewolwer strzelca wyborowego wybucha."
   },
   "OctaviaShotgun_3": {
     "localized_name": "Strzelba z wyrzutem rdzenia",
-    "description": "[Ultrakill] Strzelba zasilana energią cieplną, pozwalająca strzelać bez przeładowania. Po wyposażeniu rzucanie Pal-sferą zostaje zastąpione wystrzałem rdzenia, a rdzeń trafiony strzałem z broni Rewolwer strzelca wyborowego wybucha."
+    "description": "[Ultrakill] Strzelba zasilana energią cieplną, pozwalająca prowadzić ciągły ogień. Po wyposażeniu rzucanie Pal-sferą zostaje zastąpione wystrzałem rdzenia. Przytrzymaj, aby naładować i zwiększyć zasięg wystrzału rdzenia. Rdzeń trafiony strzałem z broni Rewolwer strzelca wyborowego wybucha."
   },
   "OctaviaShotgun_4": {
     "localized_name": "Strzelba z wyrzutem rdzenia",
-    "description": "[Ultrakill] Strzelba zasilana energią cieplną, pozwalająca strzelać bez przeładowania. Po wyposażeniu rzucanie Pal-sferą zostaje zastąpione wystrzałem rdzenia, a rdzeń trafiony strzałem z broni Rewolwer strzelca wyborowego wybucha."
+    "description": "[Ultrakill] Strzelba zasilana energią cieplną, pozwalająca prowadzić ciągły ogień. Po wyposażeniu rzucanie Pal-sferą zostaje zastąpione wystrzałem rdzenia. Przytrzymaj, aby naładować i zwiększyć zasięg wystrzału rdzenia. Rdzeń trafiony strzałem z broni Rewolwer strzelca wyborowego wybucha."
   },
   "OctaviaShotgun_5": {
     "localized_name": "Strzelba z wyrzutem rdzenia",
-    "description": "[Ultrakill] Strzelba zasilana energią cieplną, pozwalająca strzelać bez przeładowania. Po wyposażeniu rzucanie Pal-sferą zostaje zastąpione wystrzałem rdzenia, a rdzeń trafiony strzałem z broni Rewolwer strzelca wyborowego wybucha."
+    "description": "[Ultrakill] Strzelba zasilana energią cieplną, pozwalająca prowadzić ciągły ogień. Po wyposażeniu rzucanie Pal-sferą zostaje zastąpione wystrzałem rdzenia. Przytrzymaj, aby naładować i zwiększyć zasięg wystrzału rdzenia. Rdzeń trafiony strzałem z broni Rewolwer strzelca wyborowego wybucha."
   },
   "OctopusGirl_Takoyaki": {
     "localized_name": "Kulki takoyaki z Gloopie",
@@ -6831,6 +6911,10 @@
     "localized_name": "Włócznia Lily",
     "description": "Włócznia ukochana przez Lily. Wymierza karę tym, którzy zaniedbują swoje Pale."
   },
+  "Spear_ForestBoss_5": {
+    "localized_name": "Włócznia Lily",
+    "description": "Włócznia ukochana przez Lily. Wymierza karę tym, którzy zaniedbują swoje Pale."
+  },
   "Spear_QueenBee": {
     "localized_name": "Kostur Elizabee",
     "description": "Włócznia wykonana z kosturu Elizabee, dostosowana do ludzkiego użytku. Nasycona jest niezłomnym duchem Elizabee."
@@ -6877,7 +6961,7 @@
   },
   "StainlessSteel": {
     "localized_name": "Heksolit",
-    "description": "Stop z metali: Chromit, Sztaba i Kwarc heksolitu. Wykorzystywany jako materiał do zaawansowanego wyposażenia i konstrukcji."
+    "description": "Stop następujących surowców: Chromit, Ruda i Kwarc heksolitu. Materiał do wytwarzania zaawansowanego wyposażenia i konstrukcji."
   },
   "StatusPointResetSan": {
     "localized_name": "Eliksir wymazujący pamięć",
@@ -7016,6 +7100,22 @@
     "description": "Wata cukrowa zebrana z Woolipop. Jej puszysta słodycz roztapia się w ustach."
   },
   "Sword": {
+    "localized_name": "Miecz",
+    "description": "Miecz do walki na bliski dystans. Ma niezwykle ostre ostrze. Zdecydowanie potężniejszy od pióra! Do wytworzenia wymaga WeaponFactory Dirty 01."
+  },
+  "Sword_2": {
+    "localized_name": "Miecz",
+    "description": "Miecz do walki na bliski dystans. Ma niezwykle ostre ostrze. Zdecydowanie potężniejszy od pióra! Do wytworzenia wymaga WeaponFactory Dirty 01."
+  },
+  "Sword_3": {
+    "localized_name": "Miecz",
+    "description": "Miecz do walki na bliski dystans. Ma niezwykle ostre ostrze. Zdecydowanie potężniejszy od pióra! Do wytworzenia wymaga WeaponFactory Dirty 01."
+  },
+  "Sword_4": {
+    "localized_name": "Miecz",
+    "description": "Miecz do walki na bliski dystans. Ma niezwykle ostre ostrze. Zdecydowanie potężniejszy od pióra! Do wytworzenia wymaga WeaponFactory Dirty 01."
+  },
+  "Sword_5": {
     "localized_name": "Miecz",
     "description": "Miecz do walki na bliski dystans. Ma niezwykle ostre ostrze. Zdecydowanie potężniejszy od pióra! Do wytworzenia wymaga WeaponFactory Dirty 01."
   },

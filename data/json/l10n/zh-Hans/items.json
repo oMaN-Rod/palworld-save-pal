@@ -459,6 +459,22 @@
     "localized_name": "光剑",
     "description": "近战用的光剑。 高能激光可瞬间融断敌人。"
   },
+  "BeamSword_2": {
+    "localized_name": "光剑",
+    "description": "近战用的光剑。 高能激光可瞬间融断敌人。"
+  },
+  "BeamSword_3": {
+    "localized_name": "光剑",
+    "description": "近战用的光剑。 高能激光可瞬间融断敌人。"
+  },
+  "BeamSword_4": {
+    "localized_name": "光剑",
+    "description": "近战用的光剑。 高能激光可瞬间融断敌人。"
+  },
+  "BeamSword_5": {
+    "localized_name": "光剑",
+    "description": "近战用的光剑。 高能激光可瞬间融断敌人。"
+  },
   "Beer": {
     "localized_name": "zh-hans text",
     "description": "zh-hans text"
@@ -490,6 +506,22 @@
   "Blueprint_AssaultRifle_Default5": {
     "localized_name": "突击步枪设计图4",
     "description": "持有此设计图，即可解锁 「AssaultRifle Default1（Legendary）」的配方。 可在「WeaponFactory Dirty 02」制作。"
+  },
+  "Blueprint_BeamSword_2": {
+    "localized_name": "光剑设计图1",
+    "description": "持有此设计图，即可解锁 「光剑（Uncommon）」的配方。 可在「WeaponFactory Dirty 03」制作。"
+  },
+  "Blueprint_BeamSword_3": {
+    "localized_name": "光剑设计图2",
+    "description": "持有此设计图，即可解锁 「光剑（Rare）」的配方。 可在「WeaponFactory Dirty 03」制作。"
+  },
+  "Blueprint_BeamSword_4": {
+    "localized_name": "光剑设计图3",
+    "description": "持有此设计图，即可解锁 「光剑（Epic）」的配方。 可在「WeaponFactory Dirty 03」制作。"
+  },
+  "Blueprint_BeamSword_5": {
+    "localized_name": "光剑设计图4",
+    "description": "持有此设计图，即可解锁 「光剑（Legendary）」的配方。 可在「WeaponFactory Dirty 03」制作。"
   },
   "Blueprint_BowGun_2": {
     "localized_name": "十字弓设计图1",
@@ -1415,6 +1447,22 @@
     "localized_name": "精炼金属头盔设计图4",
     "description": "持有此设计图，即可解锁 「IronHelmet 5（Legendary）」的配方。 可在「Factory Hard 02」制作。"
   },
+  "Blueprint_Katana_2": {
+    "localized_name": "太刀设计图1",
+    "description": "持有此设计图，即可解锁 「太刀（Uncommon）」的配方。 可在「WeaponFactory Dirty 03」制作。"
+  },
+  "Blueprint_Katana_3": {
+    "localized_name": "太刀设计图2",
+    "description": "持有此设计图，即可解锁 「太刀（Rare）」的配方。 可在「WeaponFactory Dirty 03」制作。"
+  },
+  "Blueprint_Katana_4": {
+    "localized_name": "太刀设计图3",
+    "description": "持有此设计图，即可解锁 「太刀（Epic）」的配方。 可在「WeaponFactory Dirty 03」制作。"
+  },
+  "Blueprint_Katana_5": {
+    "localized_name": "太刀设计图4",
+    "description": "持有此设计图，即可解锁 「太刀（Legendary）」的配方。 可在「WeaponFactory Dirty 03」制作。"
+  },
   "Blueprint_LanternTop": {
     "localized_name": "日式白灯笼设计图",
     "description": "持有或存放在据点中， 即可建造「<MapObjectName id=|LanternTop|/>」。"
@@ -1903,6 +1951,10 @@
     "localized_name": "单发步枪设计图4",
     "description": "持有此设计图，即可解锁 「单发步枪（Legendary）」的配方。 可在「WeaponFactory Dirty 02」制作。"
   },
+  "Blueprint_Spear_ForestBoss_5": {
+    "localized_name": "莉莉之矛设计图4",
+    "description": "持有此设计图，即可解锁 「Spear ForestBoss（Legendary）」的配方。 可在「WeaponFactory Dirty 02」制作。"
+  },
   "Blueprint_StealArmorCold_2": {
     "localized_name": "耐寒帕鲁金属盔甲设计图1",
     "description": "持有此设计图，即可解锁 「StealArmorCold 2（Uncommon）」的配方。 可在「Factory Hard 03」制作。"
@@ -1982,6 +2034,22 @@
   "Blueprint_SubmachineGun_5": {
     "localized_name": "冲锋枪设计图4",
     "description": "持有此设计图，即可解锁 「冲锋枪（Legendary）」的配方。 可在「WeaponFactory Dirty 02」制作。"
+  },
+  "Blueprint_Sword_2": {
+    "localized_name": "剑设计图1",
+    "description": "持有此设计图，即可解锁 「剑（Uncommon）」的配方。 可在「WeaponFactory Dirty 01」制作。"
+  },
+  "Blueprint_Sword_3": {
+    "localized_name": "剑设计图2",
+    "description": "持有此设计图，即可解锁 「剑（Rare）」的配方。 可在「WeaponFactory Dirty 01」制作。"
+  },
+  "Blueprint_Sword_4": {
+    "localized_name": "剑设计图3",
+    "description": "持有此设计图，即可解锁 「剑（Epic）」的配方。 可在「WeaponFactory Dirty 01」制作。"
+  },
+  "Blueprint_Sword_5": {
+    "localized_name": "剑设计图4",
+    "description": "持有此设计图，即可解锁 「剑（Legendary）」的配方。 可在「WeaponFactory Dirty 01」制作。"
   },
   "Blueprint_WallTorch02": {
     "localized_name": "庄严壁挂火把设计图",
@@ -3531,10 +3599,6 @@
     "localized_name": "手枪子弹",
     "description": "用于HandGun Default等武器的子弹。"
   },
-  "HandgunShield": {
-    "localized_name": "防爆盾手枪",
-    "description": "防爆盾手枪"
-  },
   "Head001": {
     "localized_name": "王冠",
     "description": null
@@ -4163,6 +4227,22 @@
     "localized_name": "太刀",
     "description": "近战用的太刀。 刀锋凌厉，斩断一切。"
   },
+  "Katana_2": {
+    "localized_name": "太刀",
+    "description": "近战用的太刀。 刀锋凌厉，斩断一切。"
+  },
+  "Katana_3": {
+    "localized_name": "太刀",
+    "description": "近战用的太刀。 刀锋凌厉，斩断一切。"
+  },
+  "Katana_4": {
+    "localized_name": "太刀",
+    "description": "近战用的太刀。 刀锋凌厉，斩断一切。"
+  },
+  "Katana_5": {
+    "localized_name": "太刀",
+    "description": "近战用的太刀。 刀锋凌厉，斩断一切。"
+  },
   "Lantern": {
     "localized_name": "腰挂提灯",
     "description": "挂在腰上的提灯。 到了夜晚会自动点亮。 也可以切换照明模式使它常亮。 带1个在身上就够用了。"
@@ -4417,7 +4497,7 @@
   },
   "ManganeseIngot": {
     "localized_name": "珊瑚锭",
-    "description": "由珊瑚矿石和金属锭、 石炭加工制成的合金。 具备很高的能量耐受性，用于制作武器等物品的材料。"
+    "description": "由珊瑚矿石和金属矿石、 石炭加工制成的合金。 具备很高的能量耐受性，用于制作武器等物品的材料。"
   },
   "ManganeseOre": {
     "localized_name": "珊瑚矿石",
@@ -6548,7 +6628,7 @@
     "description": "持有此道具时， 即可骑乘疾风隼。"
   },
   "SkillUnlock_Hedgehog": {
-    "localized_name": "電棘鼠的手套",
+    "localized_name": "电棘鼠的手套",
     "description": "用来抓住電棘鼠的橡胶手套。 发动伙伴技能后，即可将電棘鼠 当作电击型手榴弹投掷出去。"
   },
   "SkillUnlock_Hedgehog_Ice": {
@@ -6831,6 +6911,10 @@
     "localized_name": "莉莉之矛",
     "description": "莉莉爱用的长矛。 她会用它来制裁蔑视帕鲁的人。"
   },
+  "Spear_ForestBoss_5": {
+    "localized_name": "莉莉之矛",
+    "description": "莉莉爱用的长矛。 她会用它来制裁蔑视帕鲁的人。"
+  },
   "Spear_QueenBee": {
     "localized_name": "女皇蜂之杖",
     "description": "经改造后的女皇蜂法杖，专供人类使用。 能感受到外露的女王霸气。"
@@ -6877,7 +6961,7 @@
   },
   "StainlessSteel": {
     "localized_name": "六棱晶锭",
-    "description": "由铬铁矿和金属锭、 六棱晶矿加工制成的合金。 用于制作先进装备或建筑的材料。"
+    "description": "由铬铁矿和金属矿石、 六棱晶矿加工制成的合金。 用于制作先进装备或建筑的材料。"
   },
   "StatusPointResetSan": {
     "localized_name": "消除记忆药",
@@ -7016,6 +7100,22 @@
     "description": "可从棉花糖身上取得的棉花糖。 吃起来轻盈甜美，入口即化。"
   },
   "Sword": {
+    "localized_name": "剑",
+    "description": "近距离战斗用的剑。 锋利无比！但需要靠近敌人攻击，相当危险。"
+  },
+  "Sword_2": {
+    "localized_name": "剑",
+    "description": "近距离战斗用的剑。 锋利无比！但需要靠近敌人攻击，相当危险。"
+  },
+  "Sword_3": {
+    "localized_name": "剑",
+    "description": "近距离战斗用的剑。 锋利无比！但需要靠近敌人攻击，相当危险。"
+  },
+  "Sword_4": {
+    "localized_name": "剑",
+    "description": "近距离战斗用的剑。 锋利无比！但需要靠近敌人攻击，相当危险。"
+  },
+  "Sword_5": {
     "localized_name": "剑",
     "description": "近距离战斗用的剑。 锋利无比！但需要靠近敌人攻击，相当危险。"
   },

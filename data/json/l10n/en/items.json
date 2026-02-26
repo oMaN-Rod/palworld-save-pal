@@ -459,6 +459,22 @@
     "localized_name": "Beam Sword",
     "description": "Beam Sword for close-range combat. Slices through opponents, burning them with a high-output laser."
   },
+  "BeamSword_2": {
+    "localized_name": "Beam Sword",
+    "description": "Beam Sword for close-range combat. Slices through opponents, burning them with a high-output laser."
+  },
+  "BeamSword_3": {
+    "localized_name": "Beam Sword",
+    "description": "Beam Sword for close-range combat. Slices through opponents, burning them with a high-output laser."
+  },
+  "BeamSword_4": {
+    "localized_name": "Beam Sword",
+    "description": "Beam Sword for close-range combat. Slices through opponents, burning them with a high-output laser."
+  },
+  "BeamSword_5": {
+    "localized_name": "Beam Sword",
+    "description": "Beam Sword for close-range combat. Slices through opponents, burning them with a high-output laser."
+  },
   "Beer": {
     "localized_name": "Beer",
     "description": "Beer"
@@ -490,6 +506,22 @@
   "Blueprint_AssaultRifle_Default5": {
     "localized_name": "Assault Rifle Schematic 4",
     "description": "When in inventory, unlocks recipe for AssaultRifle Default1 (Legendary). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_BeamSword_2": {
+    "localized_name": "Beam Sword Schematic 1",
+    "description": "When in inventory, unlocks recipe for Beam Sword (Uncommon). Can be crafted at WeaponFactory Dirty 03."
+  },
+  "Blueprint_BeamSword_3": {
+    "localized_name": "Beam Sword Schematic 2",
+    "description": "When in inventory, unlocks recipe for Beam Sword (Rare). Can be crafted at WeaponFactory Dirty 03."
+  },
+  "Blueprint_BeamSword_4": {
+    "localized_name": "Beam Sword Schematic 3",
+    "description": "When in inventory, unlocks recipe for Beam Sword (Epic). Can be crafted at WeaponFactory Dirty 03."
+  },
+  "Blueprint_BeamSword_5": {
+    "localized_name": "Beam Sword Schematic 4",
+    "description": "When in inventory, unlocks recipe for Beam Sword (Legendary). Can be crafted at WeaponFactory Dirty 03."
   },
   "Blueprint_BowGun_2": {
     "localized_name": "Crossbow Schematic 1",
@@ -1415,6 +1447,22 @@
     "localized_name": "Refined Metal Helm Schematic 4",
     "description": "When in inventory, unlocks recipe for IronHelmet 5 (Legendary). Can be crafted at Factory Hard 02."
   },
+  "Blueprint_Katana_2": {
+    "localized_name": "Katana Schematic 1",
+    "description": "When in inventory, unlocks recipe for Katana (Uncommon). Can be crafted at WeaponFactory Dirty 03."
+  },
+  "Blueprint_Katana_3": {
+    "localized_name": "Katana Schematic 2",
+    "description": "When in inventory, unlocks recipe for Katana (Rare). Can be crafted at WeaponFactory Dirty 03."
+  },
+  "Blueprint_Katana_4": {
+    "localized_name": "Katana Schematic 3",
+    "description": "When in inventory, unlocks recipe for Katana (Epic). Can be crafted at WeaponFactory Dirty 03."
+  },
+  "Blueprint_Katana_5": {
+    "localized_name": "Katana Schematic 4",
+    "description": "When in inventory, unlocks recipe for Katana (Legendary). Can be crafted at WeaponFactory Dirty 03."
+  },
   "Blueprint_LanternTop": {
     "localized_name": "Paper Lantern Schematic",
     "description": "When in inventory or stored in a base, allows you to build <MapObjectName id=|LanternTop|/>."
@@ -1903,6 +1951,10 @@
     "localized_name": "Single-Shot Rifle Schematic 4",
     "description": "When in inventory, unlocks recipe for Single-Shot Rifle (Legendary). Can be crafted at WeaponFactory Dirty 02."
   },
+  "Blueprint_Spear_ForestBoss_5": {
+    "localized_name": "Lily's Spear Schematic 4",
+    "description": "When in inventory, unlocks recipe for Spear ForestBoss (Legendary). Can be crafted at WeaponFactory Dirty 02."
+  },
   "Blueprint_StealArmorCold_2": {
     "localized_name": "Cold Resistant Pal Metal Armor Schematic 1",
     "description": "When in inventory, unlocks recipe for StealArmorCold 2 (Uncommon). Can be crafted at Factory Hard 03."
@@ -1982,6 +2034,22 @@
   "Blueprint_SubmachineGun_5": {
     "localized_name": "SMG Schematic 4",
     "description": "When in inventory, unlocks recipe for SMG (Legendary). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_Sword_2": {
+    "localized_name": "Sword Schematic 1",
+    "description": "When in inventory, unlocks recipe for Sword (Uncommon). Can be crafted at WeaponFactory Dirty 01."
+  },
+  "Blueprint_Sword_3": {
+    "localized_name": "Sword Schematic 2",
+    "description": "When in inventory, unlocks recipe for Sword (Rare). Can be crafted at WeaponFactory Dirty 01."
+  },
+  "Blueprint_Sword_4": {
+    "localized_name": "Sword Schematic 3",
+    "description": "When in inventory, unlocks recipe for Sword (Epic). Can be crafted at WeaponFactory Dirty 01."
+  },
+  "Blueprint_Sword_5": {
+    "localized_name": "Sword Schematic 4",
+    "description": "When in inventory, unlocks recipe for Sword (Legendary). Can be crafted at WeaponFactory Dirty 01."
   },
   "Blueprint_WallTorch02": {
     "localized_name": "Majestic Wall Torch Schematic",
@@ -3531,10 +3599,6 @@
     "localized_name": "Handgun Ammo",
     "description": "Ammo for HandGun Default and other similar weapons."
   },
-  "HandgunShield": {
-    "localized_name": "Ballistic Shield",
-    "description": "Ballistic Shield"
-  },
   "Head001": {
     "localized_name": "Monarch's Crown",
     "description": null
@@ -4163,6 +4227,22 @@
     "localized_name": "Katana",
     "description": "Katana for close-range combat. Slices through with razor-sharp precision, cutting cleanly in one strike."
   },
+  "Katana_2": {
+    "localized_name": "Katana",
+    "description": "Katana for close-range combat. Slices through with razor-sharp precision, cutting cleanly in one strike."
+  },
+  "Katana_3": {
+    "localized_name": "Katana",
+    "description": "Katana for close-range combat. Slices through with razor-sharp precision, cutting cleanly in one strike."
+  },
+  "Katana_4": {
+    "localized_name": "Katana",
+    "description": "Katana for close-range combat. Slices through with razor-sharp precision, cutting cleanly in one strike."
+  },
+  "Katana_5": {
+    "localized_name": "Katana",
+    "description": "Katana for close-range combat. Slices through with razor-sharp precision, cutting cleanly in one strike."
+  },
   "Lantern": {
     "localized_name": "Hip Lantern",
     "description": "A lantern that can be attached to the hip. It lights up automatically at night. You can also switch its lighting mode to keep it on at all times. Just one is enough to find your way in the dark."
@@ -4357,23 +4437,23 @@
   },
   "MakeshiftHandgun": {
     "localized_name": "Makeshift Handgun",
-    "description": "A handgun created from spare parts. Relatively well suited for close quarters combat, but can only fire one shot before needing to reload."
+    "description": "A handgun created from spare parts. Relatively well suited for close-quarters combat, but fires only one shot at a time."
   },
   "MakeshiftHandgun_2": {
     "localized_name": "Makeshift Handgun",
-    "description": "A handgun created from spare parts. Relatively well suited for close quarters combat, but can only fire one shot before needing to reload."
+    "description": "A handgun created from spare parts. Relatively well suited for close-quarters combat, but fires only one shot at a time."
   },
   "MakeshiftHandgun_3": {
     "localized_name": "Makeshift Handgun",
-    "description": "A handgun created from spare parts. Relatively well suited for close quarters combat, but can only fire one shot before needing to reload."
+    "description": "A handgun created from spare parts. Relatively well suited for close-quarters combat, but fires only one shot at a time."
   },
   "MakeshiftHandgun_4": {
     "localized_name": "Makeshift Handgun",
-    "description": "A handgun created from spare parts. Relatively well suited for close quarters combat, but can only fire one shot before needing to reload."
+    "description": "A handgun created from spare parts. Relatively well suited for close-quarters combat, but fires only one shot at a time."
   },
   "MakeshiftHandgun_5": {
     "localized_name": "Makeshift Handgun",
-    "description": "A handgun created from spare parts. Relatively well suited for close quarters combat, but can only fire one shot before needing to reload."
+    "description": "A handgun created from spare parts. Relatively well suited for close-quarters combat, but fires only one shot at a time."
   },
   "MakeshiftShotgun": {
     "localized_name": "Makeshift Shotgun",
@@ -4417,7 +4497,7 @@
   },
   "ManganeseIngot": {
     "localized_name": "Coralum Ingot",
-    "description": "An alloy of Coralum Ore, Ingot, and Coal. Highly resistant to energy, making it ideal for crafting weapons."
+    "description": "An alloy of Coralum Ore, Ore, and Coal. Highly resistant to energy, making it ideal for crafting weapons."
   },
   "ManganeseOre": {
     "localized_name": "Coralum Ore",
@@ -6612,7 +6692,7 @@
     "description": "Saddle for safely riding Univolt."
   },
   "SkillUnlock_Kitsunebi": {
-    "localized_name": "Foxparks's Harness",
+    "localized_name": "Foxparks' Harness",
     "description": "Harness for holding Foxparks. Activate its Partner Skill to hold Foxparks and attack using it as a flamethrower."
   },
   "SkillUnlock_Kitsunebi_Ice": {
@@ -6620,7 +6700,7 @@
     "description": "Harness for holding Kitsunebi Ice. Activate its Partner Skill to hold Kitsunebi Ice and release freezing air to attack."
   },
   "SkillUnlock_LazyDragon": {
-    "localized_name": "Relaxaurus's Missile Launcher",
+    "localized_name": "Relaxaurus' Missile Launcher",
     "description": "Makes Relaxaurus fire a missile launcher when ridden."
   },
   "SkillUnlock_LazyDragon_Electric": {
@@ -6831,6 +6911,10 @@
     "localized_name": "Lily's Spear",
     "description": "The spear cherished by Lily. Punishes those who neglect their Pals."
   },
+  "Spear_ForestBoss_5": {
+    "localized_name": "Lily's Spear",
+    "description": "The spear cherished by Lily. Punishes those who neglect their Pals."
+  },
   "Spear_QueenBee": {
     "localized_name": "Elizabee's Staff",
     "description": "A spear made from Elizabee's staff, altered for human use. It is imbued with Elizabee's indomitable spirit."
@@ -6877,7 +6961,7 @@
   },
   "StainlessSteel": {
     "localized_name": "Hexolite",
-    "description": "An alloy of Chromite, Ingot, and Hexolite Quartz. Used as materials for advanced equipment and structures."
+    "description": "An alloy of Chromite, Ore, and Hexolite Quartz. Used as materials for advanced equipment and structures."
   },
   "StatusPointResetSan": {
     "localized_name": "Memory Wiping Medicine",
@@ -7016,6 +7100,22 @@
     "description": "Cotton candy collected from Woolipop. Its sweetness fluffily melts away in your mouth."
   },
   "Sword": {
+    "localized_name": "Sword",
+    "description": "Sword for close-range combat. The blade is extremely sharp! Mightier than a pen, for sure. Requires WeaponFactory Dirty 01 to craft."
+  },
+  "Sword_2": {
+    "localized_name": "Sword",
+    "description": "Sword for close-range combat. The blade is extremely sharp! Mightier than a pen, for sure. Requires WeaponFactory Dirty 01 to craft."
+  },
+  "Sword_3": {
+    "localized_name": "Sword",
+    "description": "Sword for close-range combat. The blade is extremely sharp! Mightier than a pen, for sure. Requires WeaponFactory Dirty 01 to craft."
+  },
+  "Sword_4": {
+    "localized_name": "Sword",
+    "description": "Sword for close-range combat. The blade is extremely sharp! Mightier than a pen, for sure. Requires WeaponFactory Dirty 01 to craft."
+  },
+  "Sword_5": {
     "localized_name": "Sword",
     "description": "Sword for close-range combat. The blade is extremely sharp! Mightier than a pen, for sure. Requires WeaponFactory Dirty 01 to craft."
   },

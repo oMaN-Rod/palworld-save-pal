@@ -261,7 +261,7 @@
   },
   "AffectionFruit_01": {
     "localized_name": "Đào Tâm Giao",
-    "description": "Một loại quả ma thuật hiếm có khó tìm. Tương truyền, Pal ăn vào sẽ mở lòng với con người. Hãy cẩn thận khi chọn Pal để cho ăn!"
+    "description": "Một loại quả ma thuật hiếm có khó tìm. Tương truyền rằng nếu ăn nó, Pal sẽ mở lòng với con người. Hãy cẩn thận khi chọn Pal trao tặng!"
   },
   "AffectionFruit_02": {
     "localized_name": "Đào Nhỏ Tâm Giao",
@@ -459,6 +459,22 @@
     "localized_name": "Kiếm Tia Sáng",
     "description": "Kiếm Tia Sáng dùng trong cận chiến. Đốt cháy đối thủ bằng laser công suất cao."
   },
+  "BeamSword_2": {
+    "localized_name": "Kiếm Tia Sáng",
+    "description": "Kiếm Tia Sáng dùng trong cận chiến. Đốt cháy đối thủ bằng laser công suất cao."
+  },
+  "BeamSword_3": {
+    "localized_name": "Kiếm Tia Sáng",
+    "description": "Kiếm Tia Sáng dùng trong cận chiến. Đốt cháy đối thủ bằng laser công suất cao."
+  },
+  "BeamSword_4": {
+    "localized_name": "Kiếm Tia Sáng",
+    "description": "Kiếm Tia Sáng dùng trong cận chiến. Đốt cháy đối thủ bằng laser công suất cao."
+  },
+  "BeamSword_5": {
+    "localized_name": "Kiếm Tia Sáng",
+    "description": "Kiếm Tia Sáng dùng trong cận chiến. Đốt cháy đối thủ bằng laser công suất cao."
+  },
   "Beer": {
     "localized_name": "-",
     "description": "-"
@@ -490,6 +506,22 @@
   "Blueprint_AssaultRifle_Default5": {
     "localized_name": "Bản Thiết Kế Súng Trường Tấn Công 4",
     "description": "Khi sở hữu vật phẩm này, công thức của “AssaultRifle Default1 (Legendary)| sẽ được mở khóa. Bạn có thể chế tạo tại “WeaponFactory Dirty 02|."
+  },
+  "Blueprint_BeamSword_2": {
+    "localized_name": "Bản Thiết Kế Kiếm Tia Sáng 1",
+    "description": "Khi sở hữu vật phẩm này, công thức của |Kiếm Tia Sáng (Uncommon)| sẽ được mở khóa. Bạn có thể chế tạo tại |WeaponFactory Dirty 03|."
+  },
+  "Blueprint_BeamSword_3": {
+    "localized_name": "Bản Thiết Kế Kiếm Tia Sáng 2",
+    "description": "Khi sở hữu vật phẩm này, công thức của |Kiếm Tia Sáng (Rare)| sẽ được mở khóa. Bạn có thể chế tạo tại |WeaponFactory Dirty 03|."
+  },
+  "Blueprint_BeamSword_4": {
+    "localized_name": "Bản Thiết Kế Kiếm Tia Sáng 3",
+    "description": "Khi sở hữu vật phẩm này, công thức của |Kiếm Tia Sáng (Epic)| sẽ được mở khóa. Bạn có thể chế tạo tại |WeaponFactory Dirty 03|."
+  },
+  "Blueprint_BeamSword_5": {
+    "localized_name": "Bản Thiết Kế Kiếm Tia Sáng 4",
+    "description": "Khi sở hữu vật phẩm này, công thức của |Kiếm Tia Sáng (Legendary)| sẽ được mở khóa. Bạn có thể chế tạo tại |WeaponFactory Dirty 03|."
   },
   "Blueprint_BowGun_2": {
     "localized_name": "Bản Thiết Kế Nỏ Săn 1",
@@ -1415,6 +1447,22 @@
     "localized_name": "Bản Thiết Kế Mũ Kim Loại Tinh Luyện 4",
     "description": "Khi sở hữu vật phẩm này, công thức của “IronHelmet 5 (Legendary)| sẽ được mở khóa. Bạn có thể chế tạo tại “Factory Hard 02|."
   },
+  "Blueprint_Katana_2": {
+    "localized_name": "Bản Thiết Kế Thanh Katana 1",
+    "description": "Khi sở hữu vật phẩm này, công thức của |Thanh Katana (Uncommon)| sẽ được mở khóa. Bạn có thể chế tạo tại |WeaponFactory Dirty 03|."
+  },
+  "Blueprint_Katana_3": {
+    "localized_name": "Bản Thiết Kế Thanh Katana 2",
+    "description": "Khi sở hữu vật phẩm này, công thức của |Thanh Katana (Rare)| sẽ được mở khóa. Bạn có thể chế tạo tại |WeaponFactory Dirty 03|."
+  },
+  "Blueprint_Katana_4": {
+    "localized_name": "Bản Thiết Kế Thanh Katana 3",
+    "description": "Khi sở hữu vật phẩm này, công thức của |Thanh Katana (Epic)| sẽ được mở khóa. Bạn có thể chế tạo tại |WeaponFactory Dirty 03|."
+  },
+  "Blueprint_Katana_5": {
+    "localized_name": "Bản Thiết Kế Thanh Katana 4",
+    "description": "Khi sở hữu vật phẩm này, công thức của |Thanh Katana (Legendary)| sẽ được mở khóa. Bạn có thể chế tạo tại |WeaponFactory Dirty 03|."
+  },
   "Blueprint_LanternTop": {
     "localized_name": "Bản Thiết Kế Đèn Lồng Cầm Tay",
     "description": "Khi sở hữu hoặc lưu trữ tại Căn Cứ, bạn có thể xây dựng |<MapObjectName id=|LanternTop|/>|."
@@ -1903,6 +1951,10 @@
     "localized_name": "Bản Thiết Kế Súng Trường Bắn Phát Một 4",
     "description": "Khi sở hữu vật phẩm này, công thức của “Súng Trường Bắn Đơn (Legendary)| sẽ được mở khóa. Bạn có thể chế tạo tại “WeaponFactory Dirty 02|."
   },
+  "Blueprint_Spear_ForestBoss_5": {
+    "localized_name": "Bản Thiết Kế Ngọn Giáo Lily 4",
+    "description": "Khi sở hữu vật phẩm này, công thức của |Spear ForestBoss (Legendary)| sẽ được mở khóa. Bạn có thể chế tạo tại |WeaponFactory Dirty 02|."
+  },
   "Blueprint_StealArmorCold_2": {
     "localized_name": "Bản Thiết Kế Áo Giáp Pal Metal Chịu Lạnh 1",
     "description": "Khi sở hữu vật phẩm này, công thức của “StealArmorCold 2 (Uncommon)| sẽ được mở khóa. Bạn có thể chế tạo tại “Factory Hard 03|."
@@ -1983,6 +2035,22 @@
     "localized_name": "Bản Thiết Kế Súng Tiểu Liên 4",
     "description": "Khi sở hữu vật phẩm này, công thức của “Súng Tiểu Liên (Legendary)| sẽ được mở khóa. Bạn có thể chế tạo tại “WeaponFactory Dirty 02|."
   },
+  "Blueprint_Sword_2": {
+    "localized_name": "Bản Thiết Kế Kiếm 1",
+    "description": "Khi sở hữu vật phẩm này, công thức của |Kiếm (Uncommon)| sẽ được mở khóa. Bạn có thể chế tạo tại |WeaponFactory Dirty 01|."
+  },
+  "Blueprint_Sword_3": {
+    "localized_name": "Bản Thiết Kế Kiếm 2",
+    "description": "Khi sở hữu vật phẩm này, công thức của |Kiếm (Rare)| sẽ được mở khóa. Bạn có thể chế tạo tại |WeaponFactory Dirty 01|."
+  },
+  "Blueprint_Sword_4": {
+    "localized_name": "Bản Thiết Kế Kiếm 3",
+    "description": "Khi sở hữu vật phẩm này, công thức của |Kiếm (Epic)| sẽ được mở khóa. Bạn có thể chế tạo tại |WeaponFactory Dirty 01|."
+  },
+  "Blueprint_Sword_5": {
+    "localized_name": "Bản Thiết Kế Kiếm 4",
+    "description": "Khi sở hữu vật phẩm này, công thức của |Kiếm (Legendary)| sẽ được mở khóa. Bạn có thể chế tạo tại |WeaponFactory Dirty 01|."
+  },
   "Blueprint_WallTorch02": {
     "localized_name": "Bản Thiết Kế Đuốc Treo Tường Trang Nghiêm",
     "description": "Khi sở hữu hoặc lưu trữ tại Căn Cứ, bạn có thể xây dựng |<MapObjectName id=|WallTorch02|/>|."
@@ -2013,7 +2081,7 @@
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "Bản Thiết Kế Bộ Giáp Thần Thánh",
-    "description": "[Hợp tác với Terraria] Khi sở hữu vật phẩm này, công thức của |PalSummon YakushimaArmor001| sẽ được mở khóa. Bạn có thể chế tạo tại |Factory Hard 02|."
+    "description": "[Hợp tác với Terraria] Khi sở hữu vật phẩm này, công thức của |Bộ Giáp Thần Thánh| sẽ được mở khóa. Bạn có thể chế tạo tại |Factory Hard 02|."
   },
   "Blueprint_YakushimaArmor001_2": {
     "localized_name": "Bản Thiết Kế Bộ Giáp Thần Thánh 1",
@@ -2117,7 +2185,7 @@
   },
   "Blueprint_YakushimaHeadEquip001": {
     "localized_name": "Bản Thiết Kế Mặt Nạ Thần Thánh",
-    "description": "[Hợp tác với Terraria] Khi sở hữu vật phẩm này, công thức của |PalSummon YakushimaHeadEquip001| sẽ được mở khóa. Bạn có thể chế tạo tại |Factory Hard 02|."
+    "description": "[Hợp tác với Terraria] Khi sở hữu vật phẩm này, công thức của |Mặt Nạ Thần Thánh| sẽ được mở khóa. Bạn có thể chế tạo tại |Factory Hard 02|."
   },
   "Blueprint_YakushimaHeadEquip001_2": {
     "localized_name": "Bản Thiết Kế Mặt Nạ Thần Thánh 1",
@@ -2137,7 +2205,7 @@
   },
   "Blueprint_YakushimaHeadEquip002": {
     "localized_name": "Bản Thiết Kế Mũ Thần Thánh",
-    "description": "[Hợp tác với Terraria] Khi sở hữu vật phẩm này, công thức của |PalSummon YakushimaHeadEquip002| sẽ được mở khóa. Bạn có thể chế tạo tại |Factory Hard 02|."
+    "description": "[Hợp tác với Terraria] Khi sở hữu vật phẩm này, công thức của |Mũ Thần Thánh| sẽ được mở khóa. Bạn có thể chế tạo tại |Factory Hard 02|."
   },
   "Blueprint_YakushimaHeadEquip002_2": {
     "localized_name": "Bản Thiết Kế Mũ Thần Thánh 1",
@@ -2157,7 +2225,7 @@
   },
   "Blueprint_YakushimaHeadEquip003": {
     "localized_name": "Bản Thiết Kế Mũ Giáp Thần Thánh",
-    "description": "[Hợp tác với Terraria] Khi sở hữu vật phẩm này, công thức của |PalSummon YakushimaHeadEquip003| sẽ được mở khóa. Bạn có thể chế tạo tại |Factory Hard 02|."
+    "description": "[Hợp tác với Terraria] Khi sở hữu vật phẩm này, công thức của |Mũ Giáp Thần Thánh| sẽ được mở khóa. Bạn có thể chế tạo tại |Factory Hard 02|."
   },
   "Blueprint_YakushimaHeadEquip003_2": {
     "localized_name": "Bản Thiết Kế Mũ Giáp Thần Thánh 1",
@@ -2177,7 +2245,7 @@
   },
   "Blueprint_YakushimaHeadEquip004": {
     "localized_name": "Bản Thiết Kế Mũ Trùm Thần Thánh",
-    "description": "[Hợp tác với Terraria] Khi sở hữu vật phẩm này, công thức của |PalSummon YakushimaHeadEquip004| sẽ được mở khóa. Bạn có thể chế tạo tại |Factory Hard 02|."
+    "description": "[Hợp tác với Terraria] Khi sở hữu vật phẩm này, công thức của |Mũ Trùm Thần Thánh| sẽ được mở khóa. Bạn có thể chế tạo tại |Factory Hard 02|."
   },
   "Blueprint_YakushimaHeadEquip004_2": {
     "localized_name": "Bản Thiết Kế Mũ Trùm Thần Thánh 1",
@@ -3531,10 +3599,6 @@
     "localized_name": "Đạn Súng Ngắn",
     "description": "Đạn sử dụng cho HandGun Default và các vũ khí tương tự."
   },
-  "HandgunShield": {
-    "localized_name": "Khiên Đạn Đạo",
-    "description": "Khiên Đạn Đạo"
-  },
   "Head001": {
     "localized_name": "Vương Miện Hoàng Gia",
     "description": null
@@ -4163,6 +4227,22 @@
     "localized_name": "Thanh Katana",
     "description": "Thanh Katana dùng trong cận chiến. Cực kỳ sắc bén, có thể chém đôi mục tiêu trong một nhát kiếm."
   },
+  "Katana_2": {
+    "localized_name": "Thanh Katana",
+    "description": "Thanh Katana dùng trong cận chiến. Cực kỳ sắc bén, có thể chém đôi mục tiêu trong một nhát kiếm."
+  },
+  "Katana_3": {
+    "localized_name": "Thanh Katana",
+    "description": "Thanh Katana dùng trong cận chiến. Cực kỳ sắc bén, có thể chém đôi mục tiêu trong một nhát kiếm."
+  },
+  "Katana_4": {
+    "localized_name": "Thanh Katana",
+    "description": "Thanh Katana dùng trong cận chiến. Cực kỳ sắc bén, có thể chém đôi mục tiêu trong một nhát kiếm."
+  },
+  "Katana_5": {
+    "localized_name": "Thanh Katana",
+    "description": "Thanh Katana dùng trong cận chiến. Cực kỳ sắc bén, có thể chém đôi mục tiêu trong một nhát kiếm."
+  },
   "Lantern": {
     "localized_name": "Đèn Bão Đeo Hông",
     "description": "Đèn bão có thể đeo ở thắt lưng. Vào ban đêm, đèn sẽ tự động bật sáng. Cũng có thể chuyển đổi chế độ đèn để đèn luôn sáng. Chỉ cần mang một cái là đủ."
@@ -4417,7 +4497,7 @@
   },
   "ManganeseIngot": {
     "localized_name": "Thỏi Coralum",
-    "description": "Hợp kim của Quặng Coralum, Thỏi Kim Loại và Than Đá. Có độ bền cao với năng lượng, là vật liệu để chế tạo vũ khí và nhiều thứ khác."
+    "description": "Một hợp kim của Quặng Coralum, Quặng Kim Loại và Than Đá. Chịu được năng lượng cao, chuyên dùng để vũ khí và nhiều thứ khác."
   },
   "ManganeseOre": {
     "localized_name": "Quặng Coralum",
@@ -4629,51 +4709,51 @@
   },
   "Octavia002_Armor": {
     "localized_name": "Áo Giáp V2",
-    "description": "[Hợp tác với ULTRAKILL] Áo giáp được chế tạo dựa trên cơ chế của robot duy trì hòa bình đến từ vùng đất xa xôi. Chức năng Tự hồi phục được gỡ bỏ, thay vào đó là lớp giáp siêu bền."
+    "description": "[Hợp tác với ULTRAKILL] Áo giáp được chế tạo dựa trên cơ chế của robot duy trì hòa bình đến từ vùng đất xa xôi. Chức năng Tự hồi phục được gỡ bỏ, thay vào đó là lớp giáp được gia cố mạnh hơn."
   },
   "Octavia002_Armor_5": {
     "localized_name": "Áo Giáp V2",
-    "description": "[Hợp tác với ULTRAKILL] Áo giáp được chế tạo dựa trên cơ chế của robot duy trì hòa bình đến từ vùng đất xa xôi. Chức năng Tự hồi phục được gỡ bỏ, thay vào đó là lớp giáp siêu bền."
+    "description": "[Hợp tác với ULTRAKILL] Áo giáp được chế tạo dựa trên cơ chế của robot duy trì hòa bình đến từ vùng đất xa xôi. Chức năng Tự hồi phục được gỡ bỏ, thay vào đó là lớp giáp được gia cố mạnh hơn."
   },
   "OctaviaRevolver": {
     "localized_name": "Súng Lục Marksman",
-    "description": "[Hợp tác với ULTRAKILL] Khẩu súng sử dụng điện năng, có thể bắn liên tục mà không cần nạp đạn. Khi trang bị, động tác Ném Quả Cầu Bắt Giữ được thay bằng Tung Đồng Xu, đồng xu bị trúng đạn từ Súng Lục Marksman sẽ bật nảy vào kẻ địch."
+    "description": "[Hợp tác với ULTRAKILL] Khẩu súng sử dụng điện năng, có thể bắn liên tục. Khi trang bị, động tác Ném Quả Cầu Bắt Giữ được thay bằng Tung Đồng Xu, và viên đạn bắn trúng đồng xu từ Súng Lục Marksman sẽ bật nảy vào kẻ địch."
   },
   "OctaviaRevolver_2": {
     "localized_name": "Súng Lục Marksman",
-    "description": "[Hợp tác với ULTRAKILL] Khẩu súng sử dụng điện năng, có thể bắn liên tục mà không cần nạp đạn. Khi trang bị, động tác Ném Quả Cầu Bắt Giữ được thay bằng Tung Đồng Xu, đồng xu bị trúng đạn từ Súng Lục Marksman sẽ bật nảy vào kẻ địch."
+    "description": "[Hợp tác với ULTRAKILL] Khẩu súng sử dụng điện năng, có thể bắn liên tục. Khi trang bị, động tác Ném Quả Cầu Bắt Giữ được thay bằng Tung Đồng Xu, và viên đạn bắn trúng đồng xu từ Súng Lục Marksman sẽ bật nảy vào kẻ địch."
   },
   "OctaviaRevolver_3": {
     "localized_name": "Súng Lục Marksman",
-    "description": "[Hợp tác với ULTRAKILL] Khẩu súng sử dụng điện năng, có thể bắn liên tục mà không cần nạp đạn. Khi trang bị, động tác Ném Quả Cầu Bắt Giữ được thay bằng Tung Đồng Xu, đồng xu bị trúng đạn từ Súng Lục Marksman sẽ bật nảy vào kẻ địch."
+    "description": "[Hợp tác với ULTRAKILL] Khẩu súng sử dụng điện năng, có thể bắn liên tục. Khi trang bị, động tác Ném Quả Cầu Bắt Giữ được thay bằng Tung Đồng Xu, và viên đạn bắn trúng đồng xu từ Súng Lục Marksman sẽ bật nảy vào kẻ địch."
   },
   "OctaviaRevolver_4": {
     "localized_name": "Súng Lục Marksman",
-    "description": "[Hợp tác với ULTRAKILL] Khẩu súng sử dụng điện năng, có thể bắn liên tục mà không cần nạp đạn. Khi trang bị, động tác Ném Quả Cầu Bắt Giữ được thay bằng Tung Đồng Xu, đồng xu bị trúng đạn từ Súng Lục Marksman sẽ bật nảy vào kẻ địch."
+    "description": "[Hợp tác với ULTRAKILL] Khẩu súng sử dụng điện năng, có thể bắn liên tục. Khi trang bị, động tác Ném Quả Cầu Bắt Giữ được thay bằng Tung Đồng Xu, và viên đạn bắn trúng đồng xu từ Súng Lục Marksman sẽ bật nảy vào kẻ địch."
   },
   "OctaviaRevolver_5": {
     "localized_name": "Súng Lục Marksman",
-    "description": "[Hợp tác với ULTRAKILL] Khẩu súng sử dụng điện năng, có thể bắn liên tục mà không cần nạp đạn. Khi trang bị, động tác Ném Quả Cầu Bắt Giữ được thay bằng Tung Đồng Xu, đồng xu bị trúng đạn từ Súng Lục Marksman sẽ bật nảy vào kẻ địch."
+    "description": "[Hợp tác với ULTRAKILL] Khẩu súng sử dụng điện năng, có thể bắn liên tục. Khi trang bị, động tác Ném Quả Cầu Bắt Giữ được thay bằng Tung Đồng Xu, và viên đạn bắn trúng đồng xu từ Súng Lục Marksman sẽ bật nảy vào kẻ địch."
   },
   "OctaviaShotgun": {
     "localized_name": "Súng Ngắn Đẩy Lõi",
-    "description": "[Hợp tác với ULTRAKILL] Súng ngắn sử dụng nhiệt năng, có thể bắn liên tục mà không cần nạp đạn. Khi trang bị, động tác Ném Quả Cầu Bắt Giữ được thay bằng Phóng Lõi, lõi bị trúng đạn từ Súng Lục Marksman sẽ phát nổ."
+    "description": "[Hợp tác với ULTRAKILL] Súng ngắn sử dụng nhiệt năng, có thể bắn liên tục. Khi trang bị, động tác Ném Quả Cầu Bắt Giữ được thay bằng Phóng Lõi, nhấn giữ để tụ lực và tăng tầm bắn cho lõi. Lõi bắn trúng từ Súng Lục Marksman sẽ phát nổ."
   },
   "OctaviaShotgun_2": {
     "localized_name": "Súng Ngắn Đẩy Lõi",
-    "description": "[Hợp tác với ULTRAKILL] Súng ngắn sử dụng nhiệt năng, có thể bắn liên tục mà không cần nạp đạn. Khi trang bị, động tác Ném Quả Cầu Bắt Giữ được thay bằng Phóng Lõi, lõi bị trúng đạn từ Súng Lục Marksman sẽ phát nổ."
+    "description": "[Hợp tác với ULTRAKILL] Súng ngắn sử dụng nhiệt năng, có thể bắn liên tục. Khi trang bị, động tác Ném Quả Cầu Bắt Giữ được thay bằng Phóng Lõi, nhấn giữ để tụ lực và tăng tầm bắn cho lõi. Lõi bắn trúng từ Súng Lục Marksman sẽ phát nổ."
   },
   "OctaviaShotgun_3": {
     "localized_name": "Súng Ngắn Đẩy Lõi",
-    "description": "[Hợp tác với ULTRAKILL] Súng ngắn sử dụng nhiệt năng, có thể bắn liên tục mà không cần nạp đạn. Khi trang bị, động tác Ném Quả Cầu Bắt Giữ được thay bằng Phóng Lõi, lõi bị trúng đạn từ Súng Lục Marksman sẽ phát nổ."
+    "description": "[Hợp tác với ULTRAKILL] Súng ngắn sử dụng nhiệt năng, có thể bắn liên tục. Khi trang bị, động tác Ném Quả Cầu Bắt Giữ được thay bằng Phóng Lõi, nhấn giữ để tụ lực và tăng tầm bắn cho lõi. Lõi bắn trúng từ Súng Lục Marksman sẽ phát nổ."
   },
   "OctaviaShotgun_4": {
     "localized_name": "Súng Ngắn Đẩy Lõi",
-    "description": "[Hợp tác với ULTRAKILL] Súng ngắn sử dụng nhiệt năng, có thể bắn liên tục mà không cần nạp đạn. Khi trang bị, động tác Ném Quả Cầu Bắt Giữ được thay bằng Phóng Lõi, lõi bị trúng đạn từ Súng Lục Marksman sẽ phát nổ."
+    "description": "[Hợp tác với ULTRAKILL] Súng ngắn sử dụng nhiệt năng, có thể bắn liên tục. Khi trang bị, động tác Ném Quả Cầu Bắt Giữ được thay bằng Phóng Lõi, nhấn giữ để tụ lực và tăng tầm bắn cho lõi. Lõi bắn trúng từ Súng Lục Marksman sẽ phát nổ."
   },
   "OctaviaShotgun_5": {
     "localized_name": "Súng Ngắn Đẩy Lõi",
-    "description": "[Hợp tác với ULTRAKILL] Súng ngắn sử dụng nhiệt năng, có thể bắn liên tục mà không cần nạp đạn. Khi trang bị, động tác Ném Quả Cầu Bắt Giữ được thay bằng Phóng Lõi, lõi bị trúng đạn từ Súng Lục Marksman sẽ phát nổ."
+    "description": "[Hợp tác với ULTRAKILL] Súng ngắn sử dụng nhiệt năng, có thể bắn liên tục. Khi trang bị, động tác Ném Quả Cầu Bắt Giữ được thay bằng Phóng Lõi, nhấn giữ để tụ lực và tăng tầm bắn cho lõi. Lõi bắn trúng từ Súng Lục Marksman sẽ phát nổ."
   },
   "OctopusGirl_Takoyaki": {
     "localized_name": "Takoyaki Gloopie",
@@ -6831,6 +6911,10 @@
     "localized_name": "Ngọn Giáo Lily",
     "description": "Ngọn giáo được Lily trân trọng. Trừng phạt những kẻ bỏ mặc Pal."
   },
+  "Spear_ForestBoss_5": {
+    "localized_name": "Ngọn Giáo Lily",
+    "description": "Ngọn giáo được Lily trân trọng. Trừng phạt những kẻ bỏ mặc Pal."
+  },
   "Spear_QueenBee": {
     "localized_name": "Đũa Phép Elizabee",
     "description": "Cây trượng của Elizabee được cải tiến cho con người sử dụng. Toát lên khí thế của nữ hoàng."
@@ -6877,7 +6961,7 @@
   },
   "StainlessSteel": {
     "localized_name": "Hexolite",
-    "description": "Một hợp kim của Quặng Chromite, Thỏi Kim Loại, và Thạch Anh Lục Giác. Là vật liệu dùng cho các công trình và thiết bị tiên tiến."
+    "description": "Một hợp kim của Quặng Chromite, Quặng Kim Loại và Thạch Anh Lục Giác. Là vật liệu dùng cho các công trình và thiết bị tiên tiến."
   },
   "StatusPointResetSan": {
     "localized_name": "Thuốc Phục Hồi Ký Ức",
@@ -7016,6 +7100,22 @@
     "description": "Kẹo bông gòn thu được từ Woolipop. Vị ngọt tan chảy trong miệng."
   },
   "Sword": {
+    "localized_name": "Kiếm",
+    "description": "Kiếm dùng trong cận chiến. Sắc bén vô cùng! Càng tiếp cận kẻ địch thì càng nguy hiểm."
+  },
+  "Sword_2": {
+    "localized_name": "Kiếm",
+    "description": "Kiếm dùng trong cận chiến. Sắc bén vô cùng! Càng tiếp cận kẻ địch thì càng nguy hiểm."
+  },
+  "Sword_3": {
+    "localized_name": "Kiếm",
+    "description": "Kiếm dùng trong cận chiến. Sắc bén vô cùng! Càng tiếp cận kẻ địch thì càng nguy hiểm."
+  },
+  "Sword_4": {
+    "localized_name": "Kiếm",
+    "description": "Kiếm dùng trong cận chiến. Sắc bén vô cùng! Càng tiếp cận kẻ địch thì càng nguy hiểm."
+  },
+  "Sword_5": {
     "localized_name": "Kiếm",
     "description": "Kiếm dùng trong cận chiến. Sắc bén vô cùng! Càng tiếp cận kẻ địch thì càng nguy hiểm."
   },

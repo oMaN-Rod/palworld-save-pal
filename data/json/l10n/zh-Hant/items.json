@@ -459,6 +459,22 @@
     "localized_name": "光劍",
     "description": "近戰用的光劍。 高能量雷射可瞬間融斷敵人。"
   },
+  "BeamSword_2": {
+    "localized_name": "光劍",
+    "description": "近戰用的光劍。 高能量雷射可瞬間融斷敵人。"
+  },
+  "BeamSword_3": {
+    "localized_name": "光劍",
+    "description": "近戰用的光劍。 高能量雷射可瞬間融斷敵人。"
+  },
+  "BeamSword_4": {
+    "localized_name": "光劍",
+    "description": "近戰用的光劍。 高能量雷射可瞬間融斷敵人。"
+  },
+  "BeamSword_5": {
+    "localized_name": "光劍",
+    "description": "近戰用的光劍。 高能量雷射可瞬間融斷敵人。"
+  },
   "Beer": {
     "localized_name": "zh-hant text",
     "description": "zh-hant text"
@@ -490,6 +506,22 @@
   "Blueprint_AssaultRifle_Default5": {
     "localized_name": "突擊步槍設計圖4",
     "description": "持有此設計圖，即可解鎖 「AssaultRifle Default1（Legendary）」的配方。 可在「WeaponFactory Dirty 02」製作。"
+  },
+  "Blueprint_BeamSword_2": {
+    "localized_name": "光劍設計圖1",
+    "description": "持有此設計圖，即可解鎖 「光劍（Uncommon）」的配方。 可在「WeaponFactory Dirty 03」製作。"
+  },
+  "Blueprint_BeamSword_3": {
+    "localized_name": "光劍設計圖2",
+    "description": "持有此設計圖，即可解鎖 「光劍（Rare）」的配方。 可在「WeaponFactory Dirty 03」製作。"
+  },
+  "Blueprint_BeamSword_4": {
+    "localized_name": "光劍設計圖3",
+    "description": "持有此設計圖，即可解鎖 「光劍（Epic）」的配方。 可在「WeaponFactory Dirty 03」製作。"
+  },
+  "Blueprint_BeamSword_5": {
+    "localized_name": "光劍設計圖4",
+    "description": "持有此設計圖，即可解鎖 「光劍（Legendary）」的配方。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Blueprint_BowGun_2": {
     "localized_name": "十字弓設計圖1",
@@ -1415,6 +1447,22 @@
     "localized_name": "精煉金屬頭盔設計圖4",
     "description": "持有此設計圖，即可解鎖 「IronHelmet 5（Legendary）」的配方。 可在「Factory Hard 02」製作。"
   },
+  "Blueprint_Katana_2": {
+    "localized_name": "太刀設計圖1",
+    "description": "持有此設計圖，即可解鎖 「太刀（Uncommon）」的配方。 可在「WeaponFactory Dirty 03」製作。"
+  },
+  "Blueprint_Katana_3": {
+    "localized_name": "太刀設計圖2",
+    "description": "持有此設計圖，即可解鎖 「太刀（Rare）」的配方。 可在「WeaponFactory Dirty 03」製作。"
+  },
+  "Blueprint_Katana_4": {
+    "localized_name": "太刀設計圖3",
+    "description": "持有此設計圖，即可解鎖 「太刀（Epic）」的配方。 可在「WeaponFactory Dirty 03」製作。"
+  },
+  "Blueprint_Katana_5": {
+    "localized_name": "太刀設計圖4",
+    "description": "持有此設計圖，即可解鎖 「太刀（Legendary）」的配方。 可在「WeaponFactory Dirty 03」製作。"
+  },
   "Blueprint_LanternTop": {
     "localized_name": "日式白燈籠設計圖",
     "description": "持有或存放在據點中， 即可建造「<MapObjectName id=|LanternTop|/>」。"
@@ -1903,6 +1951,10 @@
     "localized_name": "單發步槍設計圖4",
     "description": "持有此設計圖，即可解鎖 「單發步槍（Legendary）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
+  "Blueprint_Spear_ForestBoss_5": {
+    "localized_name": "莉莉之矛設計圖4",
+    "description": "持有此設計圖，即可解鎖 「Spear ForestBoss（Legendary）」的配方。 可在「WeaponFactory Dirty 02」製作。"
+  },
   "Blueprint_StealArmorCold_2": {
     "localized_name": "耐寒帕魯金屬盔甲設計圖1",
     "description": "持有此設計圖，即可解鎖 「StealArmorCold 2（Uncommon）」的配方。 可在「Factory Hard 03」製作。"
@@ -1982,6 +2034,22 @@
   "Blueprint_SubmachineGun_5": {
     "localized_name": "衝鋒槍設計圖4",
     "description": "持有此設計圖，即可解鎖 「衝鋒槍（Legendary）」的配方。 可在「WeaponFactory Dirty 02」製作。"
+  },
+  "Blueprint_Sword_2": {
+    "localized_name": "劍設計圖1",
+    "description": "持有此設計圖，即可解鎖 「劍（Uncommon）」的配方。 可在「WeaponFactory Dirty 01」製作。"
+  },
+  "Blueprint_Sword_3": {
+    "localized_name": "劍設計圖2",
+    "description": "持有此設計圖，即可解鎖 「劍（Rare）」的配方。 可在「WeaponFactory Dirty 01」製作。"
+  },
+  "Blueprint_Sword_4": {
+    "localized_name": "劍設計圖3",
+    "description": "持有此設計圖，即可解鎖 「劍（Epic）」的配方。 可在「WeaponFactory Dirty 01」製作。"
+  },
+  "Blueprint_Sword_5": {
+    "localized_name": "劍設計圖4",
+    "description": "持有此設計圖，即可解鎖 「劍（Legendary）」的配方。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Blueprint_WallTorch02": {
     "localized_name": "莊嚴壁掛火把設計圖",
@@ -3531,10 +3599,6 @@
     "localized_name": "手槍子彈",
     "description": "用於HandGun Default等武器的子彈。"
   },
-  "HandgunShield": {
-    "localized_name": "防暴盾手槍",
-    "description": "防暴盾手槍"
-  },
   "Head001": {
     "localized_name": "王冠",
     "description": null
@@ -4163,6 +4227,22 @@
     "localized_name": "太刀",
     "description": "近戰用的太刀。 刀鋒凌厲，斬斷一切。"
   },
+  "Katana_2": {
+    "localized_name": "太刀",
+    "description": "近戰用的太刀。 刀鋒凌厲，斬斷一切。"
+  },
+  "Katana_3": {
+    "localized_name": "太刀",
+    "description": "近戰用的太刀。 刀鋒凌厲，斬斷一切。"
+  },
+  "Katana_4": {
+    "localized_name": "太刀",
+    "description": "近戰用的太刀。 刀鋒凌厲，斬斷一切。"
+  },
+  "Katana_5": {
+    "localized_name": "太刀",
+    "description": "近戰用的太刀。 刀鋒凌厲，斬斷一切。"
+  },
   "Lantern": {
     "localized_name": "掛腰提燈",
     "description": "掛在腰上的提燈。 到了夜晚會自動點亮。 也可以切換照明模式使它常亮。 帶1個在身上就夠用了。"
@@ -4417,7 +4497,7 @@
   },
   "ManganeseIngot": {
     "localized_name": "珊瑚錠",
-    "description": "由珊瑚礦石和金屬錠、 石炭加工後製成的合金。 具備很高的能量耐受性，用於製作武器等物品的材料。"
+    "description": "由珊瑚礦石和金屬礦石、 石炭加工製成的合金。 具備很高的能量耐受性，用於製作武器等物品的材料。"
   },
   "ManganeseOre": {
     "localized_name": "珊瑚礦石",
@@ -6831,6 +6911,10 @@
     "localized_name": "莉莉之矛",
     "description": "莉莉愛用的長矛。 她會用它來制裁蔑視帕魯的人。"
   },
+  "Spear_ForestBoss_5": {
+    "localized_name": "莉莉之矛",
+    "description": "莉莉愛用的長矛。 她會用它來制裁蔑視帕魯的人。"
+  },
   "Spear_QueenBee": {
     "localized_name": "女皇蜂之杖",
     "description": "經改造後的女皇蜂法杖，專供人類使用。 能感受到外露的女王霸氣。"
@@ -6877,7 +6961,7 @@
   },
   "StainlessSteel": {
     "localized_name": "六稜晶錠",
-    "description": "由鉻鐵礦和金屬錠、 六稜晶礦加工後製成的合金。 用於製作先進裝備或建築的材料。"
+    "description": "由鉻鐵礦和金屬礦石、 六稜晶礦加工製成的合金。 用於製作先進裝備或建築的材料。"
   },
   "StatusPointResetSan": {
     "localized_name": "消除記憶藥",
@@ -7016,6 +7100,22 @@
     "description": "可從棉花糖身上取得的棉花糖。 吃來輕盈甜美，且入口即化。"
   },
   "Sword": {
+    "localized_name": "劍",
+    "description": "近距離戰鬥用的劍。 鋒利無比！但需要靠近敵人攻擊，相當危險。"
+  },
+  "Sword_2": {
+    "localized_name": "劍",
+    "description": "近距離戰鬥用的劍。 鋒利無比！但需要靠近敵人攻擊，相當危險。"
+  },
+  "Sword_3": {
+    "localized_name": "劍",
+    "description": "近距離戰鬥用的劍。 鋒利無比！但需要靠近敵人攻擊，相當危險。"
+  },
+  "Sword_4": {
+    "localized_name": "劍",
+    "description": "近距離戰鬥用的劍。 鋒利無比！但需要靠近敵人攻擊，相當危險。"
+  },
+  "Sword_5": {
     "localized_name": "劍",
     "description": "近距離戰鬥用的劍。 鋒利無比！但需要靠近敵人攻擊，相當危險。"
   },

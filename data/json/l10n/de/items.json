@@ -459,6 +459,22 @@
     "localized_name": "Strahlenschwert",
     "description": "Strahlenschwert für den Nahkampf. Der leistungsstarke Laser fügt dem Gegner fiese Verbrennungen zu."
   },
+  "BeamSword_2": {
+    "localized_name": "Strahlenschwert",
+    "description": "Strahlenschwert für den Nahkampf. Der leistungsstarke Laser fügt dem Gegner fiese Verbrennungen zu."
+  },
+  "BeamSword_3": {
+    "localized_name": "Strahlenschwert",
+    "description": "Strahlenschwert für den Nahkampf. Der leistungsstarke Laser fügt dem Gegner fiese Verbrennungen zu."
+  },
+  "BeamSword_4": {
+    "localized_name": "Strahlenschwert",
+    "description": "Strahlenschwert für den Nahkampf. Der leistungsstarke Laser fügt dem Gegner fiese Verbrennungen zu."
+  },
+  "BeamSword_5": {
+    "localized_name": "Strahlenschwert",
+    "description": "Strahlenschwert für den Nahkampf. Der leistungsstarke Laser fügt dem Gegner fiese Verbrennungen zu."
+  },
   "Beer": {
     "localized_name": "de Text",
     "description": "de Text"
@@ -490,6 +506,22 @@
   "Blueprint_AssaultRifle_Default5": {
     "localized_name": "Sturmgewehr: Bauplan 4",
     "description": "Schaltet beim Tragen die Anleitung für „AssaultRifle Default1 (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
+  },
+  "Blueprint_BeamSword_2": {
+    "localized_name": "Strahlenschwert: Bauplan 1",
+    "description": "Schaltet beim Tragen die Anleitung für „Strahlenschwert（Uncommon）“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+  },
+  "Blueprint_BeamSword_3": {
+    "localized_name": "Strahlenschwert: Bauplan 2",
+    "description": "Schaltet beim Tragen die Anleitung für „Strahlenschwert（Rare）“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+  },
+  "Blueprint_BeamSword_4": {
+    "localized_name": "Strahlenschwert: Bauplan 3",
+    "description": "Schaltet beim Tragen die Anleitung für „Strahlenschwert（Legendary）“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+  },
+  "Blueprint_BeamSword_5": {
+    "localized_name": "Strahlenschwert: Bauplan 4",
+    "description": "Schaltet beim Tragen die Anleitung für „Strahlenschwert（Epic）“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
   },
   "Blueprint_BowGun_2": {
     "localized_name": "Armbrust: Bauplan 1",
@@ -1415,6 +1447,22 @@
     "localized_name": "Hochwertiger Metallhelm: Bauplan 4",
     "description": "Schaltet beim Tragen die Anleitung für „IronHelmet 5 (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 02“ gefertigt werden."
   },
+  "Blueprint_Katana_2": {
+    "localized_name": "Katana: Bauplan 1",
+    "description": "Schaltet beim Tragen die Anleitung für „Katana（Uncommon）“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+  },
+  "Blueprint_Katana_3": {
+    "localized_name": "Katana: Bauplan 2",
+    "description": "Schaltet beim Tragen die Anleitung für „Katana（Rare）“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+  },
+  "Blueprint_Katana_4": {
+    "localized_name": "Katana: Bauplan 3",
+    "description": "Schaltet beim Tragen die Anleitung für „Katana（Epic）“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+  },
+  "Blueprint_Katana_5": {
+    "localized_name": "Katana: Bauplan 4",
+    "description": "Schaltet beim Tragen die Anleitung für „Katana （Legendary）“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 03“ gefertigt werden."
+  },
   "Blueprint_LanternTop": {
     "localized_name": "Lampion: Bauplan",
     "description": "Dieser Bauplan ermöglicht den Bau von |<MapObjectName id=|LanternTop|/>|, solange er mitgeführt oder im Lager aufbewahrt wird."
@@ -1903,6 +1951,10 @@
     "localized_name": "Einzelschuss-Gewehr: Bauplan 4",
     "description": "Schaltet beim Tragen die Anleitung für „Einzelschuss-Gewehr (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
   },
+  "Blueprint_Spear_ForestBoss_5": {
+    "localized_name": "Lilys Speer: Bauplan 4",
+    "description": "Schaltet beim Tragen die Anleitung für „Spear ForestBoss（Legendary）“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
+  },
   "Blueprint_StealArmorCold_2": {
     "localized_name": "Kälteresistente Paluminiumrüstung: Bauplan 1",
     "description": "Schaltet beim Tragen die Anleitung für „StealArmorCold 2 (Uncommon)“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 03“ gefertigt werden."
@@ -1983,6 +2035,22 @@
     "localized_name": "Maschinenpistole: Bauplan 4",
     "description": "Schaltet beim Tragen die Anleitung für „Maschinenpistole (Legendary)“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 02“ gefertigt werden."
   },
+  "Blueprint_Sword_2": {
+    "localized_name": "Schwert: Bauplan 1",
+    "description": "Schaltet beim Tragen die Anleitung für „Schwert（Uncommon）“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
+  },
+  "Blueprint_Sword_3": {
+    "localized_name": "Schwert: Bauplan 2",
+    "description": "Schaltet beim Tragen die Anleitung für „Schwert（Rare）“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
+  },
+  "Blueprint_Sword_4": {
+    "localized_name": "Schwert: Bauplan 3",
+    "description": "Schaltet beim Tragen die Anleitung für „Schwert（Epic）“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
+  },
+  "Blueprint_Sword_5": {
+    "localized_name": "Schwert: Bauplan 4",
+    "description": "Schaltet beim Tragen die Anleitung für „Schwert（Legendary）“ frei. Der Gegenstand kann fortan mithilfe von „WeaponFactory Dirty 01“ gefertigt werden."
+  },
   "Blueprint_WallTorch02": {
     "localized_name": "Feierliche Wandfackel: Bauplan",
     "description": "Dieser Bauplan ermöglicht den Bau von |<MapObjectName id=|WallTorch02|/>|, solange er mitgeführt oder im Lager aufbewahrt wird."
@@ -2013,7 +2081,7 @@
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "Heiliger Plattenpanzer: Bauplan",
-    "description": "[Terraria-Collab] Schaltet beim Tragen das Rezept für „PalSummon YakushimaArmor001“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 02“ gefertigt werden."
+    "description": "[Terraria-Collab] Schaltet beim Tragen das Rezept für „Heiliger Plattenpanzer“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 02“ gefertigt werden."
   },
   "Blueprint_YakushimaArmor001_2": {
     "localized_name": "Heiliger Plattenpanzer: Bauplan 1",
@@ -2117,7 +2185,7 @@
   },
   "Blueprint_YakushimaHeadEquip001": {
     "localized_name": "Heilige Maske: Bauplan",
-    "description": "[Terraria-Collab] Schaltet beim Tragen das Rezept für „PalSummon YakushimaHeadEquip001“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 02“ gefertigt werden."
+    "description": "[Terraria-Collab] Schaltet beim Tragen das Rezept für „Heilige Maske“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 02“ gefertigt werden."
   },
   "Blueprint_YakushimaHeadEquip001_2": {
     "localized_name": "Heilige Maske: Bauplan 1",
@@ -2137,7 +2205,7 @@
   },
   "Blueprint_YakushimaHeadEquip002": {
     "localized_name": "Heiliger Kopfschutz: Bauplan",
-    "description": "[Terraria-Collab] Schaltet beim Tragen das Rezept für „PalSummon YakushimaHeadEquip002“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 02“ gefertigt werden."
+    "description": "[Terraria-Collab] Schaltet beim Tragen das Rezept für „Heiliger Kopfschutz“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 02“ gefertigt werden."
   },
   "Blueprint_YakushimaHeadEquip002_2": {
     "localized_name": "Heiliger Kopfschutz: Bauplan 1",
@@ -2157,7 +2225,7 @@
   },
   "Blueprint_YakushimaHeadEquip003": {
     "localized_name": "Heiliger Helm: Bauplan",
-    "description": "[Terraria-Collab] Schaltet beim Tragen das Rezept für „PalSummon YakushimaHeadEquip003“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 02“ gefertigt werden."
+    "description": "[Terraria-Collab] Schaltet beim Tragen das Rezept für „Heiliger Helm“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 02“ gefertigt werden."
   },
   "Blueprint_YakushimaHeadEquip003_2": {
     "localized_name": "Heiliger Helm: Bauplan 1",
@@ -2177,7 +2245,7 @@
   },
   "Blueprint_YakushimaHeadEquip004": {
     "localized_name": "Heilige Kapuze: Bauplan",
-    "description": "[Terraria-Collab] Schaltet beim Tragen das Rezept für „PalSummon YakushimaHeadEquip004“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 02“ gefertigt werden."
+    "description": "[Terraria-Collab] Schaltet beim Tragen das Rezept für „Heilige Kapuze“ frei. Der Gegenstand kann fortan mithilfe von „Factory Hard 02“ gefertigt werden."
   },
   "Blueprint_YakushimaHeadEquip004_2": {
     "localized_name": "Heilige Kapuze: Bauplan 1",
@@ -3531,10 +3599,6 @@
     "localized_name": "Pistolenmunition",
     "description": "Munition für Waffen vom Typ HandGun Default."
   },
-  "HandgunShield": {
-    "localized_name": "Taktischer Schild",
-    "description": "Taktischer Schild"
-  },
   "Head001": {
     "localized_name": "Königskrone",
     "description": null
@@ -4163,6 +4227,22 @@
     "localized_name": "Katana",
     "description": "Katana für den Nahkampf. Hervorragend geschärft und perfekt, um Feinde entzweizuschneiden."
   },
+  "Katana_2": {
+    "localized_name": "Katana",
+    "description": "Katana für den Nahkampf. Hervorragend geschärft und perfekt, um Feinde entzweizuschneiden."
+  },
+  "Katana_3": {
+    "localized_name": "Katana",
+    "description": "Katana für den Nahkampf. Hervorragend geschärft und perfekt, um Feinde entzweizuschneiden."
+  },
+  "Katana_4": {
+    "localized_name": "Katana",
+    "description": "Katana für den Nahkampf. Hervorragend geschärft und perfekt, um Feinde entzweizuschneiden."
+  },
+  "Katana_5": {
+    "localized_name": "Katana",
+    "description": "Katana für den Nahkampf. Hervorragend geschärft und perfekt, um Feinde entzweizuschneiden."
+  },
   "Lantern": {
     "localized_name": "Tragbare Laterne",
     "description": "Eine Laterne, die man sich an die Hüfte hängen kann. Geht bei Anbruch der Dunkelheit automatisch an. Der Beleuchtungsmodus lässt sich auch umstellen, damit sie durchgehend leuchtet. Eine reicht normalerweise völlig aus."
@@ -4417,7 +4497,7 @@
   },
   "ManganeseIngot": {
     "localized_name": "Koralliumbarren",
-    "description": "Eine Legierung aus Korallium-Erz, Metallbarren undSteinkohle. Kann Energie gut standhalten und wird unter anderem als Material für Waffen verwendet."
+    "description": "Eine Legierung aus Korallium-Erz, Erz undSteinkohle. Kann Energie gut standhalten und wird unter anderem als Material für Waffen verwendet."
   },
   "ManganeseOre": {
     "localized_name": "Korallium-Erz",
@@ -4637,43 +4717,43 @@
   },
   "OctaviaRevolver": {
     "localized_name": "Marksman-Revolver",
-    "description": "[ULTRAKILL-Collab] Ein elektrischer Revolver, der durch Wärmekraft kontinuierlich abgefeuert werden kann. Während er ausgerüstet ist, wird das Werfen von Sphären durch einen Münzwurf ersetzt. Mit dem Marksman-Revolver getroffene Münzen prallen dabei auf Gegner ab."
+    "description": "[ULTRAKILL-Collab] Ein elektrischer Revolver, der kontinuierlich abgefeuert werden kann. Während er ausgerüstet ist, wird das Werfen von Sphären durch einen Münzwurf ersetzt. Trifft man mit dem Marksman-Revolver eine Münze, prallt die Kugel auf Gegner ab."
   },
   "OctaviaRevolver_2": {
     "localized_name": "Marksman-Revolver",
-    "description": "[ULTRAKILL-Collab] Ein elektrischer Revolver, der durch Wärmekraft kontinuierlich abgefeuert werden kann. Während er ausgerüstet ist, wird das Werfen von Sphären durch einen Münzwurf ersetzt. Mit dem Marksman-Revolver getroffene Münzen prallen dabei auf Gegner ab."
+    "description": "[ULTRAKILL-Collab] Ein elektrischer Revolver, der kontinuierlich abgefeuert werden kann. Während er ausgerüstet ist, wird das Werfen von Sphären durch einen Münzwurf ersetzt. Trifft man mit dem Marksman-Revolver eine Münze, prallt die Kugel auf Gegner ab."
   },
   "OctaviaRevolver_3": {
     "localized_name": "Marksman-Revolver",
-    "description": "[ULTRAKILL-Collab] Ein elektrischer Revolver, der durch Wärmekraft kontinuierlich abgefeuert werden kann. Während er ausgerüstet ist, wird das Werfen von Sphären durch einen Münzwurf ersetzt. Mit dem Marksman-Revolver getroffene Münzen prallen dabei auf Gegner ab."
+    "description": "[ULTRAKILL-Collab] Ein elektrischer Revolver, der kontinuierlich abgefeuert werden kann. Während er ausgerüstet ist, wird das Werfen von Sphären durch einen Münzwurf ersetzt. Trifft man mit dem Marksman-Revolver eine Münze, prallt die Kugel auf Gegner ab."
   },
   "OctaviaRevolver_4": {
     "localized_name": "Marksman-Revolver",
-    "description": "[ULTRAKILL-Collab] Ein elektrischer Revolver, der durch Wärmekraft kontinuierlich abgefeuert werden kann. Während er ausgerüstet ist, wird das Werfen von Sphären durch einen Münzwurf ersetzt. Mit dem Marksman-Revolver getroffene Münzen prallen dabei auf Gegner ab."
+    "description": "[ULTRAKILL-Collab] Ein elektrischer Revolver, der kontinuierlich abgefeuert werden kann. Während er ausgerüstet ist, wird das Werfen von Sphären durch einen Münzwurf ersetzt. Trifft man mit dem Marksman-Revolver eine Münze, prallt die Kugel auf Gegner ab."
   },
   "OctaviaRevolver_5": {
     "localized_name": "Marksman-Revolver",
-    "description": "[ULTRAKILL-Collab] Ein elektrischer Revolver, der durch Wärmekraft kontinuierlich abgefeuert werden kann. Während er ausgerüstet ist, wird das Werfen von Sphären durch einen Münzwurf ersetzt. Mit dem Marksman-Revolver getroffene Münzen prallen dabei auf Gegner ab."
+    "description": "[ULTRAKILL-Collab] Ein elektrischer Revolver, der kontinuierlich abgefeuert werden kann. Während er ausgerüstet ist, wird das Werfen von Sphären durch einen Münzwurf ersetzt. Trifft man mit dem Marksman-Revolver eine Münze, prallt die Kugel auf Gegner ab."
   },
   "OctaviaShotgun": {
     "localized_name": "Core-Eject-Flinte",
-    "description": "[ULTRAKILL-Collab] Eine thermische Flinte, die durch Wärmekraft kontinuierlich abgefeuert werden kann. Während sie ausgerüstet ist, wird das Werfen von Sphären durch das Abfeuern von Kernen ersetzt. Mit der Marksman-Revolver getroffene Kerne explodieren."
+    "description": "[ULTRAKILL-Collab] Eine thermische Flinte, die kontinuierlich abgefeuert werden kann. Während sie ausgerüstet ist, wird das Werfen von Sphären durch das Abfeuern von Kernen ersetzt. Halte die Taste gedrückt, um aufzuladen und die Reichweite des Kerns zu erhöhen. Mit dem Marksman-Revolver getroffene Kerne explodieren."
   },
   "OctaviaShotgun_2": {
     "localized_name": "Core-Eject-Flinte",
-    "description": "[ULTRAKILL-Collab] Eine thermische Flinte, die durch Wärmekraft kontinuierlich abgefeuert werden kann. Während sie ausgerüstet ist, wird das Werfen von Sphären durch das Abfeuern von Kernen ersetzt. Mit der Marksman-Revolver getroffene Kerne explodieren."
+    "description": "[ULTRAKILL-Collab] Eine thermische Flinte, die kontinuierlich abgefeuert werden kann. Während sie ausgerüstet ist, wird das Werfen von Sphären durch das Abfeuern von Kernen ersetzt. Halte die Taste gedrückt, um aufzuladen und die Reichweite des Kerns zu erhöhen. Mit dem Marksman-Revolver getroffene Kerne explodieren."
   },
   "OctaviaShotgun_3": {
     "localized_name": "Core-Eject-Flinte",
-    "description": "[ULTRAKILL-Collab] Eine thermische Flinte, die durch Wärmekraft kontinuierlich abgefeuert werden kann. Während sie ausgerüstet ist, wird das Werfen von Sphären durch das Abfeuern von Kernen ersetzt. Mit der Marksman-Revolver getroffene Kerne explodieren."
+    "description": "[ULTRAKILL-Collab] Eine thermische Flinte, die kontinuierlich abgefeuert werden kann. Während sie ausgerüstet ist, wird das Werfen von Sphären durch das Abfeuern von Kernen ersetzt. Halte die Taste gedrückt, um aufzuladen und die Reichweite des Kerns zu erhöhen. Mit dem Marksman-Revolver getroffene Kerne explodieren."
   },
   "OctaviaShotgun_4": {
     "localized_name": "Core-Eject-Flinte",
-    "description": "[ULTRAKILL-Collab] Eine thermische Flinte, die durch Wärmekraft kontinuierlich abgefeuert werden kann. Während sie ausgerüstet ist, wird das Werfen von Sphären durch das Abfeuern von Kernen ersetzt. Mit der Marksman-Revolver getroffene Kerne explodieren."
+    "description": "[ULTRAKILL-Collab] Eine thermische Flinte, die kontinuierlich abgefeuert werden kann. Während sie ausgerüstet ist, wird das Werfen von Sphären durch das Abfeuern von Kernen ersetzt. Halte die Taste gedrückt, um aufzuladen und die Reichweite des Kerns zu erhöhen. Mit dem Marksman-Revolver getroffene Kerne explodieren."
   },
   "OctaviaShotgun_5": {
     "localized_name": "Core-Eject-Flinte",
-    "description": "[ULTRAKILL-Collab] Eine thermische Flinte, die durch Wärmekraft kontinuierlich abgefeuert werden kann. Während sie ausgerüstet ist, wird das Werfen von Sphären durch das Abfeuern von Kernen ersetzt. Mit der Marksman-Revolver getroffene Kerne explodieren."
+    "description": "[ULTRAKILL-Collab] Eine thermische Flinte, die kontinuierlich abgefeuert werden kann. Während sie ausgerüstet ist, wird das Werfen von Sphären durch das Abfeuern von Kernen ersetzt. Halte die Taste gedrückt, um aufzuladen und die Reichweite des Kerns zu erhöhen. Mit dem Marksman-Revolver getroffene Kerne explodieren."
   },
   "OctopusGirl_Takoyaki": {
     "localized_name": "Gloopie-Takoyaki",
@@ -5316,7 +5396,7 @@
     "description": "Ein Hilfsmittel, mit dem sich Pals fangen lassen. Ist Massenware und wirkt deshalb nur bei schwachen Pals."
   },
   "PalSphere_Exotic": {
-    "localized_name": "Infinitum-Sphäre",
+    "localized_name": "Exotische Sphäre",
     "description": "Ein Hilfsmittel, mit dem sich Pals fangen lassen. Dank der wundersamen Wirksamkeit lassen sich damit auch abnorme Pals fangen."
   },
   "PalSphere_Giga": {
@@ -5336,7 +5416,7 @@
     "description": "Ein Hilfsmittel, mit dem sich Pals fangen lassen. Die verbesserte Wirksamkeit macht den Fang von einer größeren Auswahl an Pals möglich."
   },
   "PalSphere_Robbery": {
-    "localized_name": "Raider-Sphäre",
+    "localized_name": "Radar-Sphäre",
     "description": "Ein Hilfsmittel, mit dem sich Pals fangen lassen. Damit lassen sich Pals einfangen, die bereits einen Besitzer haben, auch wenn die Erfolgsrate niedrig ist."
   },
   "PalSphere_Tera": {
@@ -6831,6 +6911,10 @@
     "localized_name": "Lilys Speer",
     "description": "Lilys treuer Speer. Richtet all jene, die Pals schlecht behandeln."
   },
+  "Spear_ForestBoss_5": {
+    "localized_name": "Lilys Speer",
+    "description": "Lilys treuer Speer. Richtet all jene, die Pals schlecht behandeln."
+  },
   "Spear_QueenBee": {
     "localized_name": "Elizabee-Zepter",
     "description": "Stab von Elizabee, der für den menschlichen Gebrauch umgebaut wurde. Die Dominanz der Königin ist darin deutlich zu spüren."
@@ -6877,7 +6961,7 @@
   },
   "StainlessSteel": {
     "localized_name": "Hexolit",
-    "description": "Eine Legierung aus Chromit, Metallbarren und Hexoquarz. Wird als Material zur Herstellung fortschrittlicher Ausrüstung oder Gebäude verwendet."
+    "description": "Eine Legierung aus Chromit, Erz und Hexoquarz. Wird als Material zur Herstellung fortschrittlicher Ausrüstung oder Gebäude verwendet."
   },
   "StatusPointResetSan": {
     "localized_name": "Tabula-Rasa-Trank",
@@ -7016,6 +7100,22 @@
     "description": "Einem Woolipop abgeschorene Zuckerwatte. Schmilzt zuckersüß im Mund."
   },
   "Sword": {
+    "localized_name": "Schwert",
+    "description": "Schwert für den Nahkampf. Die Schneide ist hervorragend geschärft, man muss aber nah an den Feind ran."
+  },
+  "Sword_2": {
+    "localized_name": "Schwert",
+    "description": "Schwert für den Nahkampf. Die Schneide ist hervorragend geschärft, man muss aber nah an den Feind ran."
+  },
+  "Sword_3": {
+    "localized_name": "Schwert",
+    "description": "Schwert für den Nahkampf. Die Schneide ist hervorragend geschärft, man muss aber nah an den Feind ran."
+  },
+  "Sword_4": {
+    "localized_name": "Schwert",
+    "description": "Schwert für den Nahkampf. Die Schneide ist hervorragend geschärft, man muss aber nah an den Feind ran."
+  },
+  "Sword_5": {
     "localized_name": "Schwert",
     "description": "Schwert für den Nahkampf. Die Schneide ist hervorragend geschärft, man muss aber nah an den Feind ran."
   },

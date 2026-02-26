@@ -260,8 +260,8 @@
     "description": "İlave eşyalar taşımana olanak tanıyan devasa bir kese. Buna sahip olmak envanter yuvalarını artırır."
   },
   "AffectionFruit_01": {
-    "localized_name": "Bağlılık Nektarı",
-    "description": "Nadiren rastlanan sihirli bir meyve. Pal’ın bunu yediğinde insanlara kalbini açtığına dair bir efsane vardır. Onu vereceğin Pal’ı dikkatle seçmelisin."
+    "localized_name": "Değerli Bağlılık Şeftalisi",
+    "description": "Nadiren rastlanan sihirli bir meyve. Rivayete göre, bir Pal bu meyveyi yediğinde insanlara kalbini açarmış. Hangi Pal’a vereceğini özenle seç."
   },
   "AffectionFruit_02": {
     "localized_name": "Bağlılık Nektarı",
@@ -459,6 +459,22 @@
     "localized_name": "Enerji Kılıcı",
     "description": "Yakın menzilli çatışmalar için Enerji Kılıcı. Rakipleri ikiye böler ve yüksek güçlü bir lazerle yakar."
   },
+  "BeamSword_2": {
+    "localized_name": "Enerji Kılıcı",
+    "description": "Yakın menzilli çatışmalar için Enerji Kılıcı. Rakipleri ikiye böler ve yüksek güçlü bir lazerle yakar."
+  },
+  "BeamSword_3": {
+    "localized_name": "Enerji Kılıcı",
+    "description": "Yakın menzilli çatışmalar için Enerji Kılıcı. Rakipleri ikiye böler ve yüksek güçlü bir lazerle yakar."
+  },
+  "BeamSword_4": {
+    "localized_name": "Enerji Kılıcı",
+    "description": "Yakın menzilli çatışmalar için Enerji Kılıcı. Rakipleri ikiye böler ve yüksek güçlü bir lazerle yakar."
+  },
+  "BeamSword_5": {
+    "localized_name": "Enerji Kılıcı",
+    "description": "Yakın menzilli çatışmalar için Enerji Kılıcı. Rakipleri ikiye böler ve yüksek güçlü bir lazerle yakar."
+  },
   "Beer": {
     "localized_name": "-",
     "description": "-"
@@ -490,6 +506,22 @@
   "Blueprint_AssaultRifle_Default5": {
     "localized_name": "Taarruz Tüfeği Şeması 4",
     "description": "Envanterdeyken AssaultRifle Default1 (Legendary) tarifini açar. WeaponFactory Dirty 02 ile üretilebilir."
+  },
+  "Blueprint_BeamSword_2": {
+    "localized_name": "Işın Kılıcı Tasarım Planı 1",
+    "description": "Sahip olunduğunda, Enerji Kılıcı (Uncommon) tarifinin kilidi açılır. WeaponFactory Dirty 03 üzerinden üretilebilir."
+  },
+  "Blueprint_BeamSword_3": {
+    "localized_name": "Işın Kılıcı Tasarım Planı 2",
+    "description": "Sahip olunduğunda, Enerji Kılıcı (Rare) tarifinin kilidi açılır. WeaponFactory Dirty 03 üzerinden üretilebilir."
+  },
+  "Blueprint_BeamSword_4": {
+    "localized_name": "Işın Kılıcı Tasarım Planı 3",
+    "description": "Sahip olunduğunda, Enerji Kılıcı (Epic) tarifinin kilidi açılır. WeaponFactory Dirty 03 üzerinden üretilebilir."
+  },
+  "Blueprint_BeamSword_5": {
+    "localized_name": "Işın Kılıcı Tasarım Planı 4",
+    "description": "Sahip olunduğunda, Enerji Kılıcı (Legendary) tarifinin kilidi açılır. WeaponFactory Dirty 03 üzerinden üretilebilir."
   },
   "Blueprint_BowGun_2": {
     "localized_name": "Arbalet Şeması 1",
@@ -540,23 +572,23 @@
     "description": "Envanterdeyken BowGun Poison (Legendary) tarifini açar. Factory Hard 01 ile üretilebilir."
   },
   "Blueprint_CandleStand": {
-    "localized_name": "Görkemli Şamdan Tasarım Taslağı",
+    "localized_name": "Görkemli Şamdan Tasarım Şeması",
     "description": "Elindeyken veya üssünde depodayken, 「<MapObjectName id=|CandleStand|/>」inşaatı yapılabilir hale gelir."
   },
   "Blueprint_ChargeLaserRifle_2": {
-    "localized_name": "Şarjlı Tüfek Taslağı 1",
+    "localized_name": "Şarjlı Tüfek Tasarım Şeması 1",
     "description": "Elde ettiğinde, 「Şarjlı Tüfek （Uncommon」 tarifinin kilidi açılır. 「WeaponFactory Dirty 04」 ile üretilebilir."
   },
   "Blueprint_ChargeLaserRifle_3": {
-    "localized_name": "Şarjlı Tüfek Taslağı 2",
+    "localized_name": "Şarjlı Tüfek Tasarım Şeması 2",
     "description": "Elde ettiğinde, 「Şarjlı Tüfek （Rare」 tarifinin kilidi açılır. 「WeaponFactory Dirty 04」 ile üretilebilir."
   },
   "Blueprint_ChargeLaserRifle_4": {
-    "localized_name": "Şarjlı TüfekTaslağı 3",
+    "localized_name": "Şarjlı Tüfek Tasarım Şeması 3",
     "description": "Elde ettiğinde, 「Şarjlı Tüfek （Epic」 tarifinin kilidi açılır. 「WeaponFactory Dirty 04」 ile üretilebilir."
   },
   "Blueprint_ChargeLaserRifle_5": {
-    "localized_name": "Şarjlı Tüfek Taslağı 4",
+    "localized_name": "Şarjlı Tüfek Tasarım Şeması 4",
     "description": "Elde ettiğinde, 「Şarjlı Tüfek （Legendary」 tarifinin kilidi açılır. 「WeaponFactory Dirty 04」 ile üretilebilir."
   },
   "Blueprint_ClothArmorCold_2": {
@@ -624,11 +656,11 @@
     "description": "Envanterdeyken Alaşım Yay (Legendary) tarifini açar. WeaponFactory Dirty 02 ile üretilebilir."
   },
   "Blueprint_ConservationGroupBannerA": {
-    "localized_name": "Pal Koruma Derneği Bayrağı Taslağı",
+    "localized_name": "Pal Koruma Derneği Bayrağı Tasarım Şeması",
     "description": "Elindeyken veya üssünde depodayken, 「<MapObjectName id=|ConservationGroupBannerA|/>」inşaatı yapılabilir hale gelir."
   },
   "Blueprint_ConservationGroupBannerB": {
-    "localized_name": "Pal Koruma Derneği Afiş Tasarımı",
+    "localized_name": "Pal Koruma Derneği Afiş Tasarım Şeması",
     "description": "Elindeyken veya üssünde depodayken, 「<MapObjectName id=|ConservationGroupBannerB|/>」inşaatı yapılabilir hale gelir."
   },
   "Blueprint_CopperArmorCold_2": {
@@ -728,23 +760,23 @@
     "description": "Envanterdeyken Plazma Topu (Legendary) tarifini açar. WeaponFactory Dirty 03 ile üretilebilir."
   },
   "Blueprint_EnergyShotgun_2": {
-    "localized_name": "Enerji Tüfeği Taslağı 1",
+    "localized_name": "Enerji Tüfeği Tasarım Şeması 1",
     "description": "Elde ettiğinde, 「Enerji Tüfeği （Uncommon」 tarifinin kilidi açılır. 「WeaponFactory Dirty 04」 ile üretilebilir."
   },
   "Blueprint_EnergyShotgun_3": {
-    "localized_name": "Enerji Tüfeği Taslağı 2",
+    "localized_name": "Enerji Tüfeği Tasarım Şeması 2",
     "description": "Elde ettiğinde, 「Enerji Tüfeği （Rare」 tarifinin kilidi açılır. 「WeaponFactory Dirty 04」 ile üretilebilir."
   },
   "Blueprint_EnergyShotgun_4": {
-    "localized_name": "Enerji Tüfeği Taslağı 3",
+    "localized_name": "Enerji Tüfeği Tasarım Şeması 3",
     "description": "Elde ettiğinde, 「Enerji Tüfeği （Epic」 tarifinin kilidi açılır. 「WeaponFactory Dirty 04」 ile üretilebilir."
   },
   "Blueprint_EnergyShotgun_5": {
-    "localized_name": "Enerji Tüfeği Taslağı 4",
+    "localized_name": "Enerji Tüfeği Tasarım Şeması 4",
     "description": "Elde ettiğinde, 「Enerji Tüfeği （Legendary」 tarifinin kilidi açılır. 「WeaponFactory Dirty 04」 ile üretilebilir."
   },
   "Blueprint_FireStand": {
-    "localized_name": "Tören Mumluğu Tasarım Taslağı",
+    "localized_name": "Tören Mumluğu Tasarım Şeması",
     "description": "Elindeyken veya üssünde depodayken, 「<MapObjectName id=|FireStand|/>」inşaatı yapılabilir hale gelir."
   },
   "Blueprint_FishingRod_01_2": {
@@ -752,11 +784,11 @@
     "description": "Sahip olunduğunda, 「FishingRod 01 2 （Common）tarifinin kilidi açılır. 「Factory Hard 01」kullanılarak üretilebilir."
   },
   "Blueprint_FishingRod_02_2": {
-    "localized_name": "Orta Seviye Olta (Bushigaeru) Tasarım Planı",
+    "localized_name": "Orta Seviye Olta (Bushigaeru) Tasarım Şeması",
     "description": "Sahip olunduğunda, 「FishingRod 02 2 （Uncommon）tarifinin kilidi açılır. 「Factory Hard 02」kullanılarak üretilebilir."
   },
   "Blueprint_FishingRod_03_2": {
-    "localized_name": "Üst Seviye Olta (Ndakoala) Tasarım Planı",
+    "localized_name": "Üst Seviye Olta (Ndakoala) Tasarım Şeması",
     "description": "Sahip olunduğunda, 「FishingRod 03 2 （Rare）tarifinin kilidi açılır. 「Factory Hard 03」kullanılarak üretilebilir."
   },
   "Blueprint_FlameThrower_2": {
@@ -872,7 +904,7 @@
     "description": "Envanterdeyken Bombaatar (Legendary) tarifini açar. WeaponFactory Dirty 03 ile üretilebilir."
   },
   "Blueprint_GuardianDogStatue": {
-    "localized_name": "Yakumo Heykeli Tasarım Taslağı",
+    "localized_name": "Yakumo Heykeli Tasarım Şeması",
     "description": "Elindeyken veya üssünde depodayken, 「<MapObjectName id=|GuardianDogStatue|/>」inşaatı yapılabilir hale gelir."
   },
   "Blueprint_GuidedMissileLauncher_2": {
@@ -1348,7 +1380,7 @@
     "description": "Envanterdeyken Dazzi Şapkası (Common) tarifini açar. İlkel Tezgâh ile üretilebilir."
   },
   "Blueprint_Hunter_GangFlag": {
-    "localized_name": "Kaçak Avcılar Bayrağı Taslağı",
+    "localized_name": "Kaçak Avcılar Bayrağı Tasarım Şeması",
     "description": "Elindeyken veya üssünde depodayken, 「<MapObjectName id=|Hunter GangFlag|/>」inşaatı yapılabilir hale gelir."
   },
   "Blueprint_IronArmorCold_2": {
@@ -1415,8 +1447,24 @@
     "localized_name": "Saf Metal Kask Şeması 4",
     "description": "Envanterdeyken IronHelmet 5 (Legendary) tarifini açar. Factory Hard 02 ile üretilebilir."
   },
+  "Blueprint_Katana_2": {
+    "localized_name": "Katana Tasarım Planı 1",
+    "description": "Sahip olunduğunda, Katana (Uncommon) tarifinin kilidi açılır. WeaponFactory Dirty 03 üzerinden üretilebilir."
+  },
+  "Blueprint_Katana_3": {
+    "localized_name": "Katana Tasarım Planı 2",
+    "description": "Sahip olunduğunda, Katana (Rare) tarifinin kilidi açılır. WeaponFactory Dirty 01 üzerinden üretilebilir."
+  },
+  "Blueprint_Katana_4": {
+    "localized_name": "Katana Tasarım Planı 3",
+    "description": "Sahip olunduğunda, Katana (Epic) tarifinin kilidi açılır. WeaponFactory Dirty 01 üzerinden üretilebilir."
+  },
+  "Blueprint_Katana_5": {
+    "localized_name": "Katana Tasarım Planı 4",
+    "description": "Sahip olunduğunda, Katana (Legendary) tarifinin kilidi açılır. WeaponFactory Dirty 01 üzerinden üretilebilir."
+  },
   "Blueprint_LanternTop": {
-    "localized_name": "Fener Lambası Tasarım Taslağı",
+    "localized_name": "Fener Lambası Tasarım Şeması",
     "description": "Elindeyken veya üssünde depodayken, 「<MapObjectName id=|LanternTop|/>」inşaatı yapılabilir hale gelir."
   },
   "Blueprint_LaserGatlingGun_2": {
@@ -1472,7 +1520,7 @@
     "description": "Üzerinde taşıdığında, “Launcher Meteor (Legendary)” tarifinin kilidi açılır. ”WeaponFactory Dirty 02” aracılığıyla üretilebilir."
   },
   "Blueprint_LilyQueenStatue": {
-    "localized_name": "Lyleen Heykeli Taslağı",
+    "localized_name": "Lyleen Heykeli Tasarım Şeması",
     "description": "Elindeyken veya üssünde depodayken, 「<MapObjectName id=|LilyQueenStatue|/>」inşaatı yapılabilir hale gelir."
   },
   "Blueprint_MakeshiftAssaultRifle_2": {
@@ -1577,43 +1625,43 @@
   },
   "Blueprint_Octavia001_Armor_5": {
     "localized_name": "V1 Zırhı Şeması 4",
-    "description": "[ULTRAKILL] Sahip olunduğunda, |Octavia001 Armor 5 (Legendary)| tarifinin kilidi açılır. |Factory Hard 02| kullanılarak üretilebilir."
+    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, |Octavia001 Armor 5 (Legendary)| tarifinin kilidi açılır. |Factory Hard 02| kullanılarak üretilebilir."
   },
   "Blueprint_Octavia002_Armor_5": {
     "localized_name": "V2 Zırhı Şeması 4",
-    "description": "[ULTRAKILL] Sahip olunduğunda, |Octavia002 Armor 5 (Legendary)| tarifinin kilidi açılır. |Factory Hard 03| kullanılarak üretilebilir."
+    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, |Octavia002 Armor 5 (Legendary)| tarifinin kilidi açılır. |Factory Hard 03| kullanılarak üretilebilir."
   },
   "Blueprint_OctaviaRevolver_2": {
     "localized_name": "Nişancı Tabancası Şeması 1",
-    "description": "[ULTRAKILL] Sahip olunduğunda, |Nişancı Tabancası (Uncommon)| tarifinin kilidi açılır. |WeaponFactory Dirty 02| kullanılarak üretilebilir."
+    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, |Nişancı Tabancası (Uncommon)| tarifinin kilidi açılır. |WeaponFactory Dirty 02| kullanılarak üretilebilir."
   },
   "Blueprint_OctaviaRevolver_3": {
     "localized_name": "Nişancı Tabancası Şeması 2",
-    "description": "[ULTRAKILL] Sahip olunduğunda, |Nişancı Tabancası (Rare)| tarifinin kilidi açılır. |WeaponFactory Dirty 02| kullanılarak üretilebilir."
+    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, |Nişancı Tabancası (Rare)| tarifinin kilidi açılır. |WeaponFactory Dirty 02| kullanılarak üretilebilir."
   },
   "Blueprint_OctaviaRevolver_4": {
     "localized_name": "Nişancı Tabancası Şeması 3",
-    "description": "[ULTRAKILL] Sahip olunduğunda, |Nişancı Tabancası (Epic)| tarifinin kilidi açılır. |WeaponFactory Dirty 02| kullanılarak üretilebilir."
+    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, |Nişancı Tabancası (Epic)| tarifinin kilidi açılır. |WeaponFactory Dirty 02| kullanılarak üretilebilir."
   },
   "Blueprint_OctaviaRevolver_5": {
     "localized_name": "Nişancı Tabancası Şeması 4",
-    "description": "[ULTRAKILL] Sahip olunduğunda, |Nişancı Tabancası (Legendary)| tarifinin kilidi açılır. |WeaponFactory Dirty 02| kullanılarak üretilebilir."
+    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, |Nişancı Tabancası (Legendary)| tarifinin kilidi açılır. |WeaponFactory Dirty 02| kullanılarak üretilebilir."
   },
   "Blueprint_OctaviaShotgun_2": {
     "localized_name": "Çekirdek Atan Pompalı Tüfek Şeması 1",
-    "description": "[ULTRAKILL] Sahip olunduğunda, |Çekirdek Atan Pompalı Tüfek (Uncommon)| tarifinin kilidi açılır. |WeaponFactory Dirty 03| kullanılarak üretilebilir."
+    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, |Çekirdek Atan Pompalı Tüfek (Uncommon)| tarifinin kilidi açılır. |WeaponFactory Dirty 03| kullanılarak üretilebilir."
   },
   "Blueprint_OctaviaShotgun_3": {
     "localized_name": "Çekirdek Atan Pompalı Tüfek Şeması 2",
-    "description": "[ULTRAKILL] Sahip olunduğunda, |Çekirdek Atan Pompalı Tüfek (Rare)| tarifinin kilidi açılır. |WeaponFactory Dirty 03| kullanılarak üretilebilir."
+    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, |Çekirdek Atan Pompalı Tüfek (Rare)| tarifinin kilidi açılır. |WeaponFactory Dirty 03| kullanılarak üretilebilir."
   },
   "Blueprint_OctaviaShotgun_4": {
     "localized_name": "Çekirdek Atan Pompalı Tüfek Şeması 3",
-    "description": "[ULTRAKILL] Sahip olunduğunda, |Çekirdek Atan Pompalı Tüfek (Epic)| tarifinin kilidi açılır. |WeaponFactory Dirty 03| kullanılarak üretilebilir."
+    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, |Çekirdek Atan Pompalı Tüfek (Epic)| tarifinin kilidi açılır. |WeaponFactory Dirty 03| kullanılarak üretilebilir."
   },
   "Blueprint_OctaviaShotgun_5": {
     "localized_name": "Çekirdek Atan Pompalı Tüfek Şeması 4",
-    "description": "[ULTRAKILL] Sahip olunduğunda, |Çekirdek Atan Pompalı Tüfek (Legendary)| tarifinin kilidi açılır. |WeaponFactory Dirty 03| kullanılarak üretilebilir."
+    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, |Çekirdek Atan Pompalı Tüfek (Legendary)| tarifinin kilidi açılır. |WeaponFactory Dirty 03| kullanılarak üretilebilir."
   },
   "Blueprint_OldRevolver_2": {
     "localized_name": "Eski Altıpatlar Şeması 1",
@@ -1632,23 +1680,23 @@
     "description": "Envanterdeyken Eski Altıpatlar (Legendary) tarifini açar. WeaponFactory Dirty 02 ile üretilebilir."
   },
   "Blueprint_OverheatRifle_2": {
-    "localized_name": "Aşırı Isınan Tüfek Taslağı 1",
+    "localized_name": "Aşırı Isınan Tüfek Tasarım Şeması 1",
     "description": "Elde ettiğinde, 「Aşırı Isınan Tüfek （Uncommon」 tarifinin kilidi açılır. 「WeaponFactory Dirty 04」 ile üretilebilir."
   },
   "Blueprint_OverheatRifle_3": {
-    "localized_name": "Aşırı Isınan Tüfek Taslağı 2",
+    "localized_name": "Aşırı Isınan Tüfek Tasarım Şeması 2",
     "description": "Elde ettiğinde, 「Aşırı Isınan Tüfek （Rare」 tarifinin kilidi açılır. 「WeaponFactory Dirty 04」 ile üretilebilir."
   },
   "Blueprint_OverheatRifle_4": {
-    "localized_name": "Aşırı Isınan Tüfek Taslağı 3",
+    "localized_name": "Aşırı Isınan Tüfek Tasarım Şeması 3",
     "description": "Elde ettiğinde, 「Aşırı Isınan Tüfek （Epic」 tarifinin kilidi açılır. 「WeaponFactory Dirty 04」 ile üretilebilir."
   },
   "Blueprint_OverheatRifle_5": {
-    "localized_name": "Aşırı Isınan Tüfek Taslağı 4",
+    "localized_name": "Aşırı Isınan Tüfek Tasarım Şeması 4",
     "description": "Elde ettiğinde, 「Aşırı Isınan Tüfek （Legendary」 tarifinin kilidi açılır. 「WeaponFactory Dirty 04」 ile üretilebilir."
   },
   "Blueprint_PalSummon_YakushimaBoss002": {
-    "localized_name": "Kutsal İşaret Tasarım Planı",
+    "localized_name": "Kutsal İşaret Tasarım Şeması",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「PalSummon YakushimaBoss002」 tarifinin kilidi açılır. 「İlkel Tezgâh」ile üretilebilir."
   },
   "Blueprint_PlasticArmorCold_2": {
@@ -1844,11 +1892,11 @@
     "description": "Envanterdeyken Heksolit Kask (Legendary) tarifini açar. Factory Hard 03 ile üretilebilir."
   },
   "Blueprint_SF_Chair": {
-    "localized_name": "Araştırma Odası Tipi Sandalye Tasarımı",
+    "localized_name": "Araştırma Odası Tipi Sandalye Tasarım Şeması",
     "description": "Üzerinde taşıyor ya da üsse depoluyorsan, ”<MapObjectName id=|SF Chair|/>” inşa edilebilir hale gelir."
   },
   "Blueprint_SF_Desk": {
-    "localized_name": "Araştırma Odası Tipi Masa Tasarımı",
+    "localized_name": "Araştırma Odası Tipi Masa Tasarım Şeması",
     "description": "Üzerinde taşıyor ya da üsse depoluyorsan, ”<MapObjectName id=|SF Desk|/>” inşa edilebilir hale gelir."
   },
   "Blueprint_SemiAutoRifle_2": {
@@ -1884,7 +1932,7 @@
     "description": "Envanterdeyken Yarı Otomatik Av Tüfeği (Legendary) tarifini açar. WeaponFactory Dirty 03 ile üretilebilir."
   },
   "Blueprint_Shrine_Lantern": {
-    "localized_name": "Taş Fener Tasarım Taslağı",
+    "localized_name": "Taş Fener Tasarım Şeması",
     "description": "Elindeyken veya üssünde depodayken, 「<MapObjectName id=|Shrine Lantern|/>」inşaatı yapılabilir hale gelir."
   },
   "Blueprint_SingleShotRifle_2": {
@@ -1902,6 +1950,10 @@
   "Blueprint_SingleShotRifle_5": {
     "localized_name": "Tek Atışlı Tüfek Şeması 4",
     "description": "Envanterdeyken Tek Atışlı Tüfek (Legendary) tarifini açar. WeaponFactory Dirty 02 ile üretilebilir."
+  },
+  "Blueprint_Spear_ForestBoss_5": {
+    "localized_name": "Lily’nin Mızrağı Tasarım Planı 4",
+    "description": "Sahip olunduğunda, Spear ForestBoss (Legendary) tarifinin kilidi açılır. WeaponFactory Dirty 02 üzerinden üretilebilir."
   },
   "Blueprint_StealArmorCold_2": {
     "localized_name": "Soğuğa Dayanıklı Pal Metali Zırh Şeması 1",
@@ -1983,8 +2035,24 @@
     "localized_name": "Hafif Makineli Tüfek Şeması 4",
     "description": "Envanterdeyken Hafif Makineli Tüfek (Legendary) tarifini açar. WeaponFactory Dirty 02 ile üretilebilir."
   },
+  "Blueprint_Sword_2": {
+    "localized_name": "Kılıç Tasarım Planı 1",
+    "description": "Sahip olunduğunda, Kılıç (Uncommon) tarifinin kilidi açılır. WeaponFactory Dirty 01 üzerinden üretilebilir."
+  },
+  "Blueprint_Sword_3": {
+    "localized_name": "Kılıç Tasarım Planı 2",
+    "description": "Sahip olunduğunda, Kılıç (Rare) tarifinin kilidi açılır. WeaponFactory Dirty 01 üzerinden üretilebilir."
+  },
+  "Blueprint_Sword_4": {
+    "localized_name": "Kılıç Tasarım Planı 3",
+    "description": "Sahip olunduğunda, Kılıç (Epic) tarifinin kilidi açılır. WeaponFactory Dirty 01 üzerinden üretilebilir."
+  },
+  "Blueprint_Sword_5": {
+    "localized_name": "Kılıç Tasarım Planı 4",
+    "description": "Sahip olunduğunda, Kılıç (Legendary) tarifinin kilidi açılır. WeaponFactory Dirty 01 üzerinden üretilebilir."
+  },
   "Blueprint_WallTorch02": {
-    "localized_name": "Görkemli Duvar Meşalesi Tasarım Taslağı",
+    "localized_name": "Görkemli Duvar Meşalesi Tasarım Şeması",
     "description": "Elindeyken veya üssünde depodayken, 「<MapObjectName id=|WallTorch02|/>」inşaatı yapılabilir hale gelir."
   },
   "Blueprint_WeakerBow_2": {
@@ -2004,215 +2072,215 @@
     "description": "Envanterdeyken Eski Yay (Legendary) tarifini açar. İlkel Tezgâh ile üretilebilir."
   },
   "Blueprint_Wire_Fence": {
-    "localized_name": "Telli Çit Tasarım Taslağı",
+    "localized_name": "Telli Çit Tasarım Şeması",
     "description": "Elindeyken veya üssünde depodayken, 「<MapObjectName id=|Wire Fence|/>」inşaatı yapılabilir hale gelir."
   },
   "Blueprint_WoodenBarricade": {
-    "localized_name": "Ahşap Barikat Tasarım Taslağı",
+    "localized_name": "Ahşap Barikat Tasarım Şeması",
     "description": "Elindeyken veya üssünde depodayken, 「<MapObjectName id=|WoodenBarricade|/>」inşaatı yapılabilir hale gelir."
   },
   "Blueprint_YakushimaArmor001": {
-    "localized_name": "Kutsal Levha Zırh Tasarım Planı",
-    "description": "[Terraria İş Birliği] Sahip olunduğunda, 「PalSummon YakushimaArmor001」 tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
+    "localized_name": "Kutsal Levha Zırh Tasarım Şeması",
+    "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Kutsal Zırh」 tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
   },
   "Blueprint_YakushimaArmor001_2": {
-    "localized_name": "Kutsal Levha Zırh Tasarım Planı 1",
+    "localized_name": "Kutsal Levha Zırh Tasarım Şeması 1",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Kutsal Zırh （Uncommon） tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
   },
   "Blueprint_YakushimaArmor001_3": {
-    "localized_name": "Kutsal Levha Zırh Tasarım Planı 2",
+    "localized_name": "Kutsal Levha Zırh Tasarım Şeması 2",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Kutsal Zırh （Rare） tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
   },
   "Blueprint_YakushimaArmor001_4": {
-    "localized_name": "Kutsal Levha Zırh Tasarım Planı 3",
+    "localized_name": "Kutsal Levha Zırh Tasarım Şeması 3",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Kutsal Zırh （Epic） tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
   },
   "Blueprint_YakushimaArmor001_5": {
-    "localized_name": "Kutsal Levha Zırh Tasarım Planı 4",
+    "localized_name": "Kutsal Levha Zırh Tasarım Şeması 4",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Kutsal Zırh （Legendary） tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
   },
   "Blueprint_YakushimaBlade002": {
-    "localized_name": "Tera Blade Tasarım Planı",
+    "localized_name": "Tera Blade Tasarım Şeması",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Terra Kılıcı」 tarifinin kilidi açılır. 「WeaponFactory Dirty 02ile üretilebilir."
   },
   "Blueprint_YakushimaBlade002_2": {
-    "localized_name": "Tera Kılıcı Tasarım Planı 1",
+    "localized_name": "Tera Kılıcı Tasarım Şeması 1",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Terra Kılıcı （Uncommon） tarifinin kilidi açılır. 「WeaponFactory Dirty 02」ile üretilebilir."
   },
   "Blueprint_YakushimaBlade002_3": {
-    "localized_name": "Tera Kılıcı Tasarım Planı 2",
+    "localized_name": "Tera Kılıcı Tasarım Şeması 2",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Terra Kılıcı （Rare） tarifinin kilidi açılır. 「WeaponFactory Dirty 02」ile üretilebilir."
   },
   "Blueprint_YakushimaBlade002_4": {
-    "localized_name": "Tera Kılıcı Tasarım Planı 3",
+    "localized_name": "Tera Kılıcı Tasarım Şeması 3",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Terra Kılıcı （Epic） tarifinin kilidi açılır. 「WeaponFactory Dirty 02」ile üretilebilir."
   },
   "Blueprint_YakushimaBlade002_5": {
-    "localized_name": "Tera Kılıcı Tasarım Planı 4",
+    "localized_name": "Tera Kılıcı Tasarım Şeması 4",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Terra Kılıcı （Legendary） tarifinin kilidi açılır. 「WeaponFactory Dirty 02」ile üretilebilir."
   },
   "Blueprint_YakushimaBlade003": {
-    "localized_name": "Tera Prizma Tasarım Planı",
+    "localized_name": "Tera Prizma Tasarım Şeması",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Terra Prizma」 tarifinin kilidi açılır. 「WeaponFactory Dirty 02ile üretilebilir."
   },
   "Blueprint_YakushimaBlade003_2": {
-    "localized_name": "Tera Prizma Tasarım Planı 1",
+    "localized_name": "Tera Prizma Tasarım Şeması 1",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Terra Prizma （Uncommon） tarifinin kilidi açılır. 「WeaponFactory Dirty 02」ile üretilebilir."
   },
   "Blueprint_YakushimaBlade003_3": {
-    "localized_name": "Tera Prizma Tasarım Planı 2",
+    "localized_name": "Tera Prizma Tasarım Şeması 2",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Terra Prizma （Rare） tarifinin kilidi açılır. 「WeaponFactory Dirty 02」ile üretilebilir."
   },
   "Blueprint_YakushimaBlade003_4": {
-    "localized_name": "Tera Prizma Tasarım Planı 3",
+    "localized_name": "Tera Prizma Tasarım Şeması 3",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Terra Prizma （Epic） tarifinin kilidi açılır. 「WeaponFactory Dirty 02」ile üretilebilir."
   },
   "Blueprint_YakushimaBlade003_5": {
-    "localized_name": "Tera Prizma Tasarım Planı 4",
+    "localized_name": "Tera Prizma Tasarım Şeması 4",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Terra Prizma （Legendary） tarifinin kilidi açılır. 「WeaponFactory Dirty 02」ile üretilebilir."
   },
   "Blueprint_YakushimaBlade004": {
-    "localized_name": "Excalibur Tasarım Planı",
+    "localized_name": "Excalibur Tasarım Şeması",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Excalibur」 tarifinin kilidi açılır. 「WeaponFactory Dirty 02ile üretilebilir."
   },
   "Blueprint_YakushimaBlade004_2": {
-    "localized_name": "Excalibur Tasarım Planı 1",
+    "localized_name": "Excalibur Tasarım Şeması 1",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Excalibur （Uncommon） tarifinin kilidi açılır. 「WeaponFactory Dirty 02」ile üretilebilir."
   },
   "Blueprint_YakushimaBlade004_3": {
-    "localized_name": "Excalibur Tasarım Planı 2",
+    "localized_name": "Excalibur Tasarım Şeması 2",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Excalibur （Rare） tarifinin kilidi açılır. 「WeaponFactory Dirty 02」ile üretilebilir."
   },
   "Blueprint_YakushimaBlade004_4": {
-    "localized_name": "Excalibur Tasarım Planı 3",
+    "localized_name": "Excalibur Tasarım Şeması 3",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Excalibur （Epic） tarifinin kilidi açılır. 「WeaponFactory Dirty 02」ile üretilebilir."
   },
   "Blueprint_YakushimaBlade004_5": {
-    "localized_name": "Excalibur Tasarım Planı 4",
+    "localized_name": "Excalibur Tasarım Şeması 4",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Excalibur （Legendary） tarifinin kilidi açılır. 「WeaponFactory Dirty 02」ile üretilebilir."
   },
   "Blueprint_YakushimaBoss002_Relic": {
     "localized_name": "Ay Efendisi Heykeli Planı",
-    "description": "[Terraria İşbirliği] Eşyayı üzerinde taşıdığında ya da üssüne yerleştirdiğinde, 「<MapObjectName id=|YakushimaBoss002 Relic|/>」inşa edilebilir hâle gelir."
+    "description": "[Terraria İş Birliği] Eşyayı üzerinde taşıdığında ya da üssüne yerleştirdiğinde, 「<MapObjectName id=|YakushimaBoss002 Relic|/>」inşa edilebilir hâle gelir."
   },
   "Blueprint_YakushimaGun001": {
-    "localized_name": "Vortex Beater Tasarım Planı",
+    "localized_name": "Vortex Beater Tasarım Şeması",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Girdap Kırıcı」 tarifinin kilidi açılır. 「WeaponFactory Dirty 02ile üretilebilir."
   },
   "Blueprint_YakushimaGun001_2": {
-    "localized_name": "Vortex Beater Tasarım Planı 1",
+    "localized_name": "Vortex Beater Tasarım Şeması 1",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Girdap Kırıcı （Uncommon） tarifinin kilidi açılır. 「WeaponFactory Dirty 02」ile üretilebilir."
   },
   "Blueprint_YakushimaGun001_3": {
-    "localized_name": "Vortex Beater Tasarım Planı 2",
+    "localized_name": "Vortex Beater Tasarım Şeması 2",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Girdap Kırıcı （Rare） tarifinin kilidi açılır. 「WeaponFactory Dirty 02」ile üretilebilir."
   },
   "Blueprint_YakushimaGun001_4": {
-    "localized_name": "Vortex Beater Tasarım Planı 3",
+    "localized_name": "Vortex Beater Tasarım Şeması 3",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Girdap Kırıcı （Epic） tarifinin kilidi açılır. 「WeaponFactory Dirty 02」ile üretilebilir."
   },
   "Blueprint_YakushimaGun001_5": {
-    "localized_name": "Vortex Beater Tasarım Planı 4",
+    "localized_name": "Vortex Beater Tasarım Şeması 4",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Girdap Kırıcı （Legendary） tarifinin kilidi açılır. 「WeaponFactory Dirty 02」ile üretilebilir."
   },
   "Blueprint_YakushimaHeadEquip001": {
-    "localized_name": "Kutsal Maske Tasarım Planı",
-    "description": "[Terraria İş Birliği] Sahip olunduğunda, 「PalSummon YakushimaHeadEquip001」 tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
+    "localized_name": "Kutsal Maske Tasarım Şeması",
+    "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Kutsal Maske」 tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
   },
   "Blueprint_YakushimaHeadEquip001_2": {
-    "localized_name": "Kutsal Maske Tasarım Planı 1",
+    "localized_name": "Kutsal Maske Tasarım Şeması 1",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Kutsal Maske （Uncommon） tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
   },
   "Blueprint_YakushimaHeadEquip001_3": {
-    "localized_name": "Kutsal Maske Tasarım Planı 2",
+    "localized_name": "Kutsal Maske Tasarım Şeması 2",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Kutsal Maske （Rare） tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
   },
   "Blueprint_YakushimaHeadEquip001_4": {
-    "localized_name": "Kutsal Maske Tasarım Planı 3",
+    "localized_name": "Kutsal Maske Tasarım Şeması 3",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Kutsal Maske （Epic） tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
   },
   "Blueprint_YakushimaHeadEquip001_5": {
-    "localized_name": "Kutsal Maske Tasarım Planı 4",
+    "localized_name": "Kutsal Maske Tasarım Şeması 4",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Kutsal Maske （Legendary） tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
   },
   "Blueprint_YakushimaHeadEquip002": {
-    "localized_name": "Kutsal Başlık Tasarım Planı",
-    "description": "[Terraria İş Birliği] Sahip olunduğunda, 「PalSummon YakushimaHeadEquip002」 tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
+    "localized_name": "Kutsal Başlık Tasarım Şeması",
+    "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Kutsal Başlık」 tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
   },
   "Blueprint_YakushimaHeadEquip002_2": {
-    "localized_name": "Kutsal Başlık Tasarım Planı 1",
+    "localized_name": "Kutsal Başlık Tasarım Şeması 1",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Kutsal Başlık （Uncommon） tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
   },
   "Blueprint_YakushimaHeadEquip002_3": {
-    "localized_name": "Kutsal Başlık Tasarım Planı 2",
+    "localized_name": "Kutsal Başlık Tasarım Şeması 2",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Kutsal Başlık （Rare） tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
   },
   "Blueprint_YakushimaHeadEquip002_4": {
-    "localized_name": "Kutsal Başlık Tasarım Planı 3",
+    "localized_name": "Kutsal Başlık Tasarım Şeması 3",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Kutsal Başlık （Epic） tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
   },
   "Blueprint_YakushimaHeadEquip002_5": {
-    "localized_name": "Kutsal Başlık Tasarım Planı 4",
+    "localized_name": "Kutsal Başlık Tasarım Şeması 4",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Kutsal Başlık （Legendary） tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
   },
   "Blueprint_YakushimaHeadEquip003": {
-    "localized_name": "Kutsal Miğfer Tasarım Planı",
-    "description": "[Terraria İş Birliği] Sahip olunduğunda, 「PalSummon YakushimaHeadEquip003」 tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
+    "localized_name": "Kutsal Miğfer Tasarım Şeması",
+    "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Kutsal Miğfer」 tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
   },
   "Blueprint_YakushimaHeadEquip003_2": {
-    "localized_name": "Kutsal Miğfer Tasarım Planı 1",
+    "localized_name": "Kutsal Miğfer Tasarım Şeması 1",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Kutsal Miğfer （Uncommon） tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
   },
   "Blueprint_YakushimaHeadEquip003_3": {
-    "localized_name": "Kutsal Miğfer Tasarım Planı 2",
+    "localized_name": "Kutsal Miğfer Tasarım Şeması 2",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Kutsal Miğfer （Rare） tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
   },
   "Blueprint_YakushimaHeadEquip003_4": {
-    "localized_name": "Kutsal Miğfer Tasarım Planı 3",
+    "localized_name": "Kutsal Miğfer Tasarım Şeması 3",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Kutsal Miğfer （Epic） tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
   },
   "Blueprint_YakushimaHeadEquip003_5": {
-    "localized_name": "Kutsal Miğfer Tasarım Planı 4",
+    "localized_name": "Kutsal Miğfer Tasarım Şeması 4",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Kutsal Miğfer （Legendary） tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
   },
   "Blueprint_YakushimaHeadEquip004": {
-    "localized_name": "Kutsal Başlık Tasarım Planı",
-    "description": "[Terraria İş Birliği] Sahip olunduğunda, 「PalSummon YakushimaHeadEquip004」 tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
+    "localized_name": "Kutsal Başlık Tasarım Şeması",
+    "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Kutsal Kapüşon」 tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
   },
   "Blueprint_YakushimaHeadEquip004_2": {
-    "localized_name": "Kutsal Başlık Tasarım Planı 1",
+    "localized_name": "Kutsal Başlık Tasarım Şeması 1",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Kutsal Kapüşon （Uncommon） tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
   },
   "Blueprint_YakushimaHeadEquip004_3": {
-    "localized_name": "Kutsal Başlık Tasarım Planı 2",
+    "localized_name": "Kutsal Başlık Tasarım Şeması 2",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Kutsal Kapüşon （Rare） tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
   },
   "Blueprint_YakushimaHeadEquip004_4": {
-    "localized_name": "Kutsal Başlık Tasarım Planı 3",
+    "localized_name": "Kutsal Başlık Tasarım Şeması 3",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Kutsal Kapüşon （Epic） tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
   },
   "Blueprint_YakushimaHeadEquip004_5": {
-    "localized_name": "Kutsal Başlık Tasarım Planı 4",
+    "localized_name": "Kutsal Başlık Tasarım Şeması 4",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Kutsal Kapüşon （Legendary） tarifinin kilidi açılır. 「Factory Hard 02」ile üretilebilir."
   },
   "Blueprint_YakushimaLantern001": {
-    "localized_name": "Night Glow Tasarım Planı",
+    "localized_name": "Night Glow Tasarım Şeması",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Gece Parıltısı」 tarifinin kilidi açılır. 「WeaponFactory Dirty 02ile üretilebilir."
   },
   "Blueprint_YakushimaLantern001_2": {
-    "localized_name": "Night Glow Tasarım Planı 1",
+    "localized_name": "Night Glow Tasarım Şeması 1",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Gece Parıltısı （Uncommon） tarifinin kilidi açılır. 「WeaponFactory Dirty 02」ile üretilebilir."
   },
   "Blueprint_YakushimaLantern001_3": {
-    "localized_name": "Night Glow Tasarım Planı 2",
+    "localized_name": "Night Glow Tasarım Şeması 2",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Gece Parıltısı （Rare） tarifinin kilidi açılır. 「WeaponFactory Dirty 02」ile üretilebilir."
   },
   "Blueprint_YakushimaLantern001_4": {
-    "localized_name": "Night Glow Tasarım Planı 3",
+    "localized_name": "Night Glow Tasarım Şeması 3",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Gece Parıltısı （Epic） tarifinin kilidi açılır. 「WeaponFactory Dirty 02」ile üretilebilir."
   },
   "Blueprint_YakushimaLantern001_5": {
-    "localized_name": "Night Glow Tasarım Planı 4",
+    "localized_name": "Night Glow Tasarım Şeması 4",
     "description": "[Terraria İş Birliği] Sahip olunduğunda, 「Gece Parıltısı （Legendary） tarifinin kilidi açılır. 「WeaponFactory Dirty 02」ile üretilebilir."
   },
   "Blueprint_Zoe_Halloweenskin_1": {
@@ -3531,10 +3599,6 @@
     "localized_name": "Tabanca Mermisi",
     "description": "HandGun Default ve benzeri diğer silahlar için cephane."
   },
-  "HandgunShield": {
-    "localized_name": "Balistik Kalkan",
-    "description": "Balistik Kalkan"
-  },
   "Head001": {
     "localized_name": "Hükümdar Tacı",
     "description": null
@@ -4017,7 +4081,7 @@
   },
   "HeadEquip046": {
     "localized_name": "Kurtuluş Tacı",
-    "description": "Hartalis [Usta Seviye]’nin uğursuz gücü hissediliyor. Bunu ele geçirebilenler son derece nadirdir."
+    "description": "Hartalis [Ultra]’nın uğursuz gücü hissediliyor. Bunu ele geçirebilenler son derece nadirdir."
   },
   "Herbs": {
     "localized_name": "Düşük Kaliteli Tıbbi Malzemeler",
@@ -4160,6 +4224,22 @@
     "description": "Meat JellyfishGhostveKırmızı Meyvelerkullanılarak yapılan gizemli bir tatlı. Yendiğinde belirli bir süre boyunca deneyim puanı kazanımı biraz artar ve, Savunma +%10 olur."
   },
   "Katana": {
+    "localized_name": "Katana",
+    "description": "Yakın menzilli çatışmalar için Katana. Jilet kadar keskin bir isabetlilikle, hedefini tek darbede ikiye ayırır."
+  },
+  "Katana_2": {
+    "localized_name": "Katana",
+    "description": "Yakın menzilli çatışmalar için Katana. Jilet kadar keskin bir isabetlilikle, hedefini tek darbede ikiye ayırır."
+  },
+  "Katana_3": {
+    "localized_name": "Katana",
+    "description": "Yakın menzilli çatışmalar için Katana. Jilet kadar keskin bir isabetlilikle, hedefini tek darbede ikiye ayırır."
+  },
+  "Katana_4": {
+    "localized_name": "Katana",
+    "description": "Yakın menzilli çatışmalar için Katana. Jilet kadar keskin bir isabetlilikle, hedefini tek darbede ikiye ayırır."
+  },
+  "Katana_5": {
     "localized_name": "Katana",
     "description": "Yakın menzilli çatışmalar için Katana. Jilet kadar keskin bir isabetlilikle, hedefini tek darbede ikiye ayırır."
   },
@@ -4417,7 +4497,7 @@
   },
   "ManganeseIngot": {
     "localized_name": "Koralum Külçesi",
-    "description": "Koralum CevheriveKülçe, Kömüralaşımı. Enerjiye karşı yüksek dayanıklılık gösterir ve silah gibi malzemelerin yapımında kullanılır."
+    "description": "Koralum CevheriveCevher,Kömürkarışımı bir alaşım. Enerjiye karşı yüksek dayanıklılık gösterir ve silah gibi eşyaların malzemesi olarak kullanılır."
   },
   "ManganeseOre": {
     "localized_name": "Koralum Cevheri",
@@ -4621,59 +4701,59 @@
   },
   "Octavia001_Armor": {
     "localized_name": "V1 Zırhı",
-    "description": "[ULTRAKILL] Uzak bir diyarda üretilmiş savaş robotlarının mekanizmalarından esinlenerek yapılmış bir zırh. Hasar verdiğinde kendini onaran bir özelliğe sahiptir."
+    "description": "[ULTRAKILL İş Birliği] Uzak bir diyarda üretilmiş savaş robotlarının mekanizmalarından esinlenerek yapılmış bir zırh. Hasar verdiğinde kendini onaran bir özelliğe sahiptir."
   },
   "Octavia001_Armor_5": {
     "localized_name": "V1 Zırhı",
-    "description": "[ULTRAKILL] Uzak bir diyarda üretilmiş savaş robotlarının mekanizmalarından esinlenerek yapılmış bir zırh. Hasar verdiğinde kendini onaran bir özelliğe sahiptir."
+    "description": "[ULTRAKILL İş Birliği] Uzak bir diyarda üretilmiş savaş robotlarının mekanizmalarından esinlenerek yapılmış bir zırh. Hasar verdiğinde kendini onaran bir özelliğe sahiptir."
   },
   "Octavia002_Armor": {
     "localized_name": "V2 Zırhı",
-    "description": "[ULTRAKILL] Uzak bir diyarda üretilmiş barışı koruma amaçlı robotların mekanizmalarından esinlenerek yapılmış bir zırh. Kendini onarma özelliği kaldırılmış, bunun yerine çok daha dayanıklı bir zırh sistemi eklenmiştir."
+    "description": "[ULTRAKILL İş Birliği] Uzak bir bölgede üretilmiş barışı koruma amaçlı robotların mekanizmalarından esinlenerek yapılmış bir zırh. Kendini onarma özelliği kaldırılmış, bunun yerine dayanıklılığı daha da arttırılmıştır."
   },
   "Octavia002_Armor_5": {
     "localized_name": "V2 Zırhı",
-    "description": "[ULTRAKILL] Uzak bir diyarda üretilmiş barışı koruma amaçlı robotların mekanizmalarından esinlenerek yapılmış bir zırh. Kendini onarma özelliği kaldırılmış, bunun yerine çok daha dayanıklı bir zırh sistemi eklenmiştir."
+    "description": "[ULTRAKILL İş Birliği] Uzak bir bölgede üretilmiş barışı koruma amaçlı robotların mekanizmalarından esinlenerek yapılmış bir zırh. Kendini onarma özelliği kaldırılmış, bunun yerine dayanıklılığı daha da arttırılmıştır."
   },
   "OctaviaRevolver": {
     "localized_name": "Nişancı Tabancası",
-    "description": "[ULTRAKILL] Elektrik gücüyle çalışan ve yeniden doldurmaya gerek kalmadan sürekli ateş edebilen bir tabanca. Ekipman olarak takıldığında, yakalama küresi fırlatma hareketi madeni para atışıyla değiştirilir;Nişancı Tabancasıatışıyla isabet eden madeni para ise sekerek düşmana yönelir."
+    "description": "[ULTRAKILL İş Birliği] Elektrik gücüyle durmaksızın ateş edebilen bir revolver. Ekipman olarak takılıyken yakalama küresi fırlatma hareketi yazı tura atışına dönüşür ve Nişancı Tabancasıatışıyla madeni paraya isabet eden mermi sekerek düşmana yönelir."
   },
   "OctaviaRevolver_2": {
     "localized_name": "Nişancı Tabancası",
-    "description": "[ULTRAKILL] Elektrik gücüyle çalışan ve yeniden doldurmaya gerek kalmadan sürekli ateş edebilen bir tabanca. Ekipman olarak takıldığında, yakalama küresi fırlatma hareketi madeni para atışıyla değiştirilir;Nişancı Tabancasıatışıyla isabet eden madeni para ise sekerek düşmana yönelir."
+    "description": "[ULTRAKILL İş Birliği] Elektrik gücüyle durmaksızın ateş edebilen bir revolver. Ekipman olarak takılıyken yakalama küresi fırlatma hareketi yazı tura atışına dönüşür ve Nişancı Tabancasıatışıyla madeni paraya isabet eden mermi sekerek düşmana yönelir."
   },
   "OctaviaRevolver_3": {
     "localized_name": "Nişancı Tabancası",
-    "description": "[ULTRAKILL] Elektrik gücüyle çalışan ve yeniden doldurmaya gerek kalmadan sürekli ateş edebilen bir tabanca. Ekipman olarak takıldığında, yakalama küresi fırlatma hareketi madeni para atışıyla değiştirilir;Nişancı Tabancasıatışıyla isabet eden madeni para ise sekerek düşmana yönelir."
+    "description": "[ULTRAKILL İş Birliği] Elektrik gücüyle durmaksızın ateş edebilen bir revolver. Ekipman olarak takılıyken yakalama küresi fırlatma hareketi yazı tura atışına dönüşür ve Nişancı Tabancasıatışıyla madeni paraya isabet eden mermi sekerek düşmana yönelir."
   },
   "OctaviaRevolver_4": {
     "localized_name": "Nişancı Tabancası",
-    "description": "[ULTRAKILL] Elektrik gücüyle çalışan ve yeniden doldurmaya gerek kalmadan sürekli ateş edebilen bir tabanca. Ekipman olarak takıldığında, yakalama küresi fırlatma hareketi madeni para atışıyla değiştirilir;Nişancı Tabancasıatışıyla isabet eden madeni para ise sekerek düşmana yönelir."
+    "description": "[ULTRAKILL İş Birliği] Elektrik gücüyle durmaksızın ateş edebilen bir revolver. Ekipman olarak takılıyken yakalama küresi fırlatma hareketi yazı tura atışına dönüşür ve Nişancı Tabancasıatışıyla madeni paraya isabet eden mermi sekerek düşmana yönelir."
   },
   "OctaviaRevolver_5": {
     "localized_name": "Nişancı Tabancası",
-    "description": "[ULTRAKILL] Elektrik gücüyle çalışan ve yeniden doldurmaya gerek kalmadan sürekli ateş edebilen bir tabanca. Ekipman olarak takıldığında, yakalama küresi fırlatma hareketi madeni para atışıyla değiştirilir;Nişancı Tabancasıatışıyla isabet eden madeni para ise sekerek düşmana yönelir."
+    "description": "[ULTRAKILL İş Birliği] Elektrik gücüyle durmaksızın ateş edebilen bir revolver. Ekipman olarak takılıyken yakalama küresi fırlatma hareketi yazı tura atışına dönüşür ve Nişancı Tabancasıatışıyla madeni paraya isabet eden mermi sekerek düşmana yönelir."
   },
   "OctaviaShotgun": {
     "localized_name": "Çekirdek Atan Pompalı Tüfek",
-    "description": "[ULTRAKILL] Isı enerjisini kullanarak yeniden doldurmaya gerek kalmadan sürekli ateş edebilen bir pompalı tüfek. Ekipman olarak takıldığında, yakalama küresi fırlatma hareketi çekirdek atışıyla değiştirilir;Nişancı Tabancasıatışıyla isabet eden çekirdek patlayarak infilak eder."
+    "description": "[ULTRAKILL İş Birliği] Isı enerjisini kullanarak durmaksızın ateş edebilen bir pompalı tüfek. Ekipman olarak takılıyken yakalama küresi fırlatma hareketi çekirdek atışına dönüşür; basılı tutularak şarj edilebilir ve böylece çekirdek atışının menzili uzar. Nişancı Tabancasıatışıyla hedefe isabet eden çekirdek patlar."
   },
   "OctaviaShotgun_2": {
     "localized_name": "Çekirdek Atan Pompalı Tüfek",
-    "description": "[ULTRAKILL] Isı enerjisini kullanarak yeniden doldurmaya gerek kalmadan sürekli ateş edebilen bir pompalı tüfek. Ekipman olarak takıldığında, yakalama küresi fırlatma hareketi çekirdek atışıyla değiştirilir;Nişancı Tabancasıatışıyla isabet eden çekirdek patlayarak infilak eder."
+    "description": "[ULTRAKILL İş Birliği] Isı enerjisini kullanarak durmaksızın ateş edebilen bir pompalı tüfek. Ekipman olarak takılıyken yakalama küresi fırlatma hareketi çekirdek atışına dönüşür; basılı tutularak şarj edilebilir ve böylece çekirdek atışının menzili uzar. Nişancı Tabancasıatışıyla hedefe isabet eden çekirdek patlar."
   },
   "OctaviaShotgun_3": {
     "localized_name": "Çekirdek Atan Pompalı Tüfek",
-    "description": "[ULTRAKILL] Isı enerjisini kullanarak yeniden doldurmaya gerek kalmadan sürekli ateş edebilen bir pompalı tüfek. Ekipman olarak takıldığında, yakalama küresi fırlatma hareketi çekirdek atışıyla değiştirilir;Nişancı Tabancasıatışıyla isabet eden çekirdek patlayarak infilak eder."
+    "description": "[ULTRAKILL İş Birliği] Isı enerjisini kullanarak durmaksızın ateş edebilen bir pompalı tüfek. Ekipman olarak takılıyken yakalama küresi fırlatma hareketi çekirdek atışına dönüşür; basılı tutularak şarj edilebilir ve böylece çekirdek atışının menzili uzar. Nişancı Tabancasıatışıyla hedefe isabet eden çekirdek patlar."
   },
   "OctaviaShotgun_4": {
     "localized_name": "Çekirdek Atan Pompalı Tüfek",
-    "description": "[ULTRAKILL] Isı enerjisini kullanarak yeniden doldurmaya gerek kalmadan sürekli ateş edebilen bir pompalı tüfek. Ekipman olarak takıldığında, yakalama küresi fırlatma hareketi çekirdek atışıyla değiştirilir;Nişancı Tabancasıatışıyla isabet eden çekirdek patlayarak infilak eder."
+    "description": "[ULTRAKILL İş Birliği] Isı enerjisini kullanarak durmaksızın ateş edebilen bir pompalı tüfek. Ekipman olarak takılıyken yakalama küresi fırlatma hareketi çekirdek atışına dönüşür; basılı tutularak şarj edilebilir ve böylece çekirdek atışının menzili uzar. Nişancı Tabancasıatışıyla hedefe isabet eden çekirdek patlar."
   },
   "OctaviaShotgun_5": {
     "localized_name": "Çekirdek Atan Pompalı Tüfek",
-    "description": "[ULTRAKILL] Isı enerjisini kullanarak yeniden doldurmaya gerek kalmadan sürekli ateş edebilen bir pompalı tüfek. Ekipman olarak takıldığında, yakalama küresi fırlatma hareketi çekirdek atışıyla değiştirilir;Nişancı Tabancasıatışıyla isabet eden çekirdek patlayarak infilak eder."
+    "description": "[ULTRAKILL İş Birliği] Isı enerjisini kullanarak durmaksızın ateş edebilen bir pompalı tüfek. Ekipman olarak takılıyken yakalama küresi fırlatma hareketi çekirdek atışına dönüşür; basılı tutularak şarj edilebilir ve böylece çekirdek atışının menzili uzar. Nişancı Tabancasıatışıyla hedefe isabet eden çekirdek patlar."
   },
   "OctopusGirl_Takoyaki": {
     "localized_name": "Gloopie’nin Takoyakisi",
@@ -5388,7 +5468,7 @@
     "description": "ÜzerindeHartalis'ın tasviri bulunan bir taş tablet. Çağırma Sunağı'a sunulduğunda, son derece güçlü birHartalis[Seviye 65] çağrılır."
   },
   "PalSummon_LegendDeer_2": {
-    "localized_name": "Hartalis [Usta Seviye] Tableti",
+    "localized_name": "Hartalis [Ultra] Tableti",
     "description": "Hartalis'ın gücünün taştığı bir taş tablet. Çağırma Sunağı'a sunulduğunda, umutsuzluk derecesinde güçlü birHartalis[Seviye ??] çağrılır."
   },
   "PalSummon_LegendDeer_Parts": {
@@ -5396,7 +5476,7 @@
     "description": "ÜzerindeHartalis'ın tasviri bulunan bir taş tablet parçası. Parçalar birleştirildiğinde tam bir tablet oluşturulabilir."
   },
   "PalSummon_LegendDeer_Parts_2": {
-    "localized_name": "Hartalis [Usta Seviye] Tablet Parçası",
+    "localized_name": "Hartalis [Ultra] Tablet Parçası",
     "description": "Hartalis'ın gücünün taştığı bir taş tablet. Parçalar birleştirildiğinde tam bir tablet oluşturulabilir."
   },
   "PalSummon_NightLady": {
@@ -5429,7 +5509,7 @@
   },
   "PalSummon_YakushimaBoss002_2": {
     "localized_name": "Kutsal Mühür [Usta]",
-    "description": "[Terraria İşbirliği] Üzerinde bilinmeyen semboller bulunan bir mühür. Çağırma Sunağı'a sunulduğunda, umutsuzluk verecek kadar güçlü bir varlık çağrılabilir."
+    "description": "[Terraria İş Birliği] Üzerinde bilinmeyen semboller bulunan bir mühür. Çağırma Sunağı'a sunulduğunda, umutsuzluk verecek kadar güçlü bir varlık çağrılabilir."
   },
   "PalUpgradeStone": {
     "localized_name": "Küçük Pal Ruhu",
@@ -6831,6 +6911,10 @@
     "localized_name": "Lily'nin Mızrağı",
     "description": "Lily'nin çok sevdiği mızrak. Pal'larını ihmal edenleri cezalandırır."
   },
+  "Spear_ForestBoss_5": {
+    "localized_name": "Lily'nin Mızrağı",
+    "description": "Lily'nin çok sevdiği mızrak. Pal'larını ihmal edenleri cezalandırır."
+  },
   "Spear_QueenBee": {
     "localized_name": "Elizabee'nin Asası",
     "description": "Elizabee'nin asasından yapılmış, insan kullanımı için tasarlanmış bir mızrak. Elizabee'nin yılmaz ruhuyla güçlendirilmiştir."
@@ -6877,7 +6961,7 @@
   },
   "StainlessSteel": {
     "localized_name": "Heksolit",
-    "description": "Kromit, Külçe ve Heksolit Kuvarsı karışımı bir alaşım. Gelişmiş ekipmanlar ve yapılar için malzeme olarak kullanılır."
+    "description": "Kromit,CevherveHeksolit Kuvarsıkarışımı bir alaşım. Gelişmiş ekipman ve yapıların malzemesi olarak kullanılır."
   },
   "StatusPointResetSan": {
     "localized_name": "Hafıza Silme İlacı",
@@ -7016,6 +7100,22 @@
     "description": "Woolipop üzerinden toplanan pamuk şeker. Şekerli içeriği tüm pofudukluğuyla ağzında erir."
   },
   "Sword": {
+    "localized_name": "Kılıç",
+    "description": "Yakın menzilli dövüşler için Kılıç. Yüzü son derece keskindir! Bir kalemden keskin olduğu açık. Üretmek için WeaponFactory Dirty 01 gerekir."
+  },
+  "Sword_2": {
+    "localized_name": "Kılıç",
+    "description": "Yakın menzilli dövüşler için Kılıç. Yüzü son derece keskindir! Bir kalemden keskin olduğu açık. Üretmek için WeaponFactory Dirty 01 gerekir."
+  },
+  "Sword_3": {
+    "localized_name": "Kılıç",
+    "description": "Yakın menzilli dövüşler için Kılıç. Yüzü son derece keskindir! Bir kalemden keskin olduğu açık. Üretmek için WeaponFactory Dirty 01 gerekir."
+  },
+  "Sword_4": {
+    "localized_name": "Kılıç",
+    "description": "Yakın menzilli dövüşler için Kılıç. Yüzü son derece keskindir! Bir kalemden keskin olduğu açık. Üretmek için WeaponFactory Dirty 01 gerekir."
+  },
+  "Sword_5": {
     "localized_name": "Kılıç",
     "description": "Yakın menzilli dövüşler için Kılıç. Yüzü son derece keskindir! Bir kalemden keskin olduğu açık. Üretmek için WeaponFactory Dirty 01 gerekir."
   },
@@ -7197,23 +7297,23 @@
   },
   "YakushimaArmor001": {
     "localized_name": "Kutsal Zırh",
-    "description": "[Terraria İşbirliği] Kutsal Külçeile yapılmış zırh. Kutsal bir güçle donatılmış olup, [Terraria İşbirliği] canavarlarından alınan hasarı azaltır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış zırh. Kutsal bir güçle donatılmış olup, [Terraria İş Birliği] canavarlarından alınan hasarı azaltır."
   },
   "YakushimaArmor001_2": {
     "localized_name": "Kutsal Zırh",
-    "description": "[Terraria İşbirliği] Kutsal Külçeile yapılmış zırh. Kutsal bir güçle donatılmış olup, [Terraria İşbirliği] canavarlarından alınan hasarı azaltır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış zırh. Kutsal bir güçle donatılmış olup, [Terraria İş Birliği] canavarlarından alınan hasarı azaltır."
   },
   "YakushimaArmor001_3": {
     "localized_name": "Kutsal Zırh",
-    "description": "[Terraria İşbirliği] Kutsal Külçeile yapılmış zırh. Kutsal bir güçle donatılmış olup, [Terraria İşbirliği] canavarlarından alınan hasarı azaltır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış zırh. Kutsal bir güçle donatılmış olup, [Terraria İş Birliği] canavarlarından alınan hasarı azaltır."
   },
   "YakushimaArmor001_4": {
     "localized_name": "Kutsal Zırh",
-    "description": "[Terraria İşbirliği] Kutsal Külçeile yapılmış zırh. Kutsal bir güçle donatılmış olup, [Terraria İşbirliği] canavarlarından alınan hasarı azaltır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış zırh. Kutsal bir güçle donatılmış olup, [Terraria İş Birliği] canavarlarından alınan hasarı azaltır."
   },
   "YakushimaArmor001_5": {
     "localized_name": "Kutsal Zırh",
-    "description": "[Terraria İşbirliği] Kutsal Külçeile yapılmış zırh. Kutsal bir güçle donatılmış olup, [Terraria İşbirliği] canavarlarından alınan hasarı azaltır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış zırh. Kutsal bir güçle donatılmış olup, [Terraria İş Birliği] canavarlarından alınan hasarı azaltır."
   },
   "YakushimaBlade": {
     "localized_name": "Meowmere",
@@ -7221,167 +7321,167 @@
   },
   "YakushimaBlade002": {
     "localized_name": "Terra Kılıcı",
-    "description": "[Terraria İşbirliği] Sallandığında yeşilimsi bir şok dalgası yayan gizemli bir kılıç. Yakın dövüş silahı olmasına rağmen uzaktaki düşmanlara da saldırabilir."
+    "description": "[Terraria İş Birliği] Sallandığında yeşilimsi bir şok dalgası yayan gizemli bir kılıç. Yakın dövüş silahı olmasına rağmen uzaktaki düşmanlara da saldırabilir."
   },
   "YakushimaBlade002_2": {
     "localized_name": "Terra Kılıcı",
-    "description": "[Terraria İşbirliği] Sallandığında yeşilimsi bir şok dalgası yayan gizemli bir kılıç. Yakın dövüş silahı olmasına rağmen uzaktaki düşmanlara da saldırabilir."
+    "description": "[Terraria İş Birliği] Sallandığında yeşilimsi bir şok dalgası yayan gizemli bir kılıç. Yakın dövüş silahı olmasına rağmen uzaktaki düşmanlara da saldırabilir."
   },
   "YakushimaBlade002_3": {
     "localized_name": "Terra Kılıcı",
-    "description": "[Terraria İşbirliği] Sallandığında yeşilimsi bir şok dalgası yayan gizemli bir kılıç. Yakın dövüş silahı olmasına rağmen uzaktaki düşmanlara da saldırabilir."
+    "description": "[Terraria İş Birliği] Sallandığında yeşilimsi bir şok dalgası yayan gizemli bir kılıç. Yakın dövüş silahı olmasına rağmen uzaktaki düşmanlara da saldırabilir."
   },
   "YakushimaBlade002_4": {
     "localized_name": "Terra Kılıcı",
-    "description": "[Terraria İşbirliği] Sallandığında yeşilimsi bir şok dalgası yayan gizemli bir kılıç. Yakın dövüş silahı olmasına rağmen uzaktaki düşmanlara da saldırabilir."
+    "description": "[Terraria İş Birliği] Sallandığında yeşilimsi bir şok dalgası yayan gizemli bir kılıç. Yakın dövüş silahı olmasına rağmen uzaktaki düşmanlara da saldırabilir."
   },
   "YakushimaBlade002_5": {
     "localized_name": "Terra Kılıcı",
-    "description": "[Terraria İşbirliği] Sallandığında yeşilimsi bir şok dalgası yayan gizemli bir kılıç. Yakın dövüş silahı olmasına rağmen uzaktaki düşmanlara da saldırabilir."
+    "description": "[Terraria İş Birliği] Sallandığında yeşilimsi bir şok dalgası yayan gizemli bir kılıç. Yakın dövüş silahı olmasına rağmen uzaktaki düşmanlara da saldırabilir."
   },
   "YakushimaBlade003": {
     "localized_name": "Terra Prizma",
-    "description": "[Terraria İşbirliği] Gökkuşağı renginde, gizemli bir kılıç. Sallandığında kutsal kılıçları çağırır ve onlar senin için savaşır. En fazla 9 kılıç çağrılabilir."
+    "description": "[Terraria İş Birliği] Gökkuşağı renginde, gizemli bir kılıç. Sallandığında kutsal kılıçları çağırır ve onlar senin için savaşır. En fazla 9 kılıç çağrılabilir."
   },
   "YakushimaBlade003_2": {
     "localized_name": "Terra Prizma",
-    "description": "[Terraria İşbirliği] Gökkuşağı renginde, gizemli bir kılıç. Sallandığında kutsal kılıçları çağırır ve onlar senin için savaşır. En fazla 9 kılıç çağrılabilir."
+    "description": "[Terraria İş Birliği] Gökkuşağı renginde, gizemli bir kılıç. Sallandığında kutsal kılıçları çağırır ve onlar senin için savaşır. En fazla 9 kılıç çağrılabilir."
   },
   "YakushimaBlade003_3": {
     "localized_name": "Terra Prizma",
-    "description": "[Terraria İşbirliği] Gökkuşağı renginde, gizemli bir kılıç. Sallandığında kutsal kılıçları çağırır ve onlar senin için savaşır. En fazla 9 kılıç çağrılabilir."
+    "description": "[Terraria İş Birliği] Gökkuşağı renginde, gizemli bir kılıç. Sallandığında kutsal kılıçları çağırır ve onlar senin için savaşır. En fazla 9 kılıç çağrılabilir."
   },
   "YakushimaBlade003_4": {
     "localized_name": "Terra Prizma",
-    "description": "[Terraria İşbirliği] Gökkuşağı renginde, gizemli bir kılıç. Sallandığında kutsal kılıçları çağırır ve onlar senin için savaşır. En fazla 9 kılıç çağrılabilir."
+    "description": "[Terraria İş Birliği] Gökkuşağı renginde, gizemli bir kılıç. Sallandığında kutsal kılıçları çağırır ve onlar senin için savaşır. En fazla 9 kılıç çağrılabilir."
   },
   "YakushimaBlade003_5": {
     "localized_name": "Terra Prizma",
-    "description": "[Terraria İşbirliği] Gökkuşağı renginde, gizemli bir kılıç. Sallandığında kutsal kılıçları çağırır ve onlar senin için savaşır. En fazla 9 kılıç çağrılabilir."
+    "description": "[Terraria İş Birliği] Gökkuşağı renginde, gizemli bir kılıç. Sallandığında kutsal kılıçları çağırır ve onlar senin için savaşır. En fazla 9 kılıç çağrılabilir."
   },
   "YakushimaBlade004": {
     "localized_name": "Excalibur",
-    "description": "[Terraria İşbirliği] Altın renginde parlayan kutsal bir kılıç. Sallandığında etrafına şok dalgaları yayar."
+    "description": "[Terraria İş Birliği] Altın renginde parlayan kutsal bir kılıç. Sallandığında etrafına şok dalgaları yayar."
   },
   "YakushimaBlade004_2": {
     "localized_name": "Excalibur",
-    "description": "[Terraria İşbirliği] Altın renginde parlayan kutsal bir kılıç. Sallandığında etrafına şok dalgaları yayar."
+    "description": "[Terraria İş Birliği] Altın renginde parlayan kutsal bir kılıç. Sallandığında etrafına şok dalgaları yayar."
   },
   "YakushimaBlade004_3": {
     "localized_name": "Excalibur",
-    "description": "[Terraria İşbirliği] Altın renginde parlayan kutsal bir kılıç. Sallandığında etrafına şok dalgaları yayar."
+    "description": "[Terraria İş Birliği] Altın renginde parlayan kutsal bir kılıç. Sallandığında etrafına şok dalgaları yayar."
   },
   "YakushimaBlade004_4": {
     "localized_name": "Excalibur",
-    "description": "[Terraria İşbirliği] Altın renginde parlayan kutsal bir kılıç. Sallandığında etrafına şok dalgaları yayar."
+    "description": "[Terraria İş Birliği] Altın renginde parlayan kutsal bir kılıç. Sallandığında etrafına şok dalgaları yayar."
   },
   "YakushimaBlade004_5": {
     "localized_name": "Excalibur",
-    "description": "[Terraria İşbirliği] Altın renginde parlayan kutsal bir kılıç. Sallandığında etrafına şok dalgaları yayar."
+    "description": "[Terraria İş Birliği] Altın renginde parlayan kutsal bir kılıç. Sallandığında etrafına şok dalgaları yayar."
   },
   "YakushimaBlade005": {
     "localized_name": "Efsanevi Myaomea",
-    "description": "[Terraria İşbirliği] Luminit Külçetarafından yaratılmış efsanevi birMeowmere. Sallandığında, zıplayan kedi mermileri fırlatarak düşmanlara saldırır."
+    "description": "[Terraria İş Birliği] Luminit Külçetarafından yaratılmış efsanevi birMeowmere. Sallandığında, zıplayan kedi mermileri fırlatarak düşmanlara saldırır."
   },
   "YakushimaGun001": {
     "localized_name": "Girdap Kırıcı",
-    "description": "[Terraria İşbirliği] Bilinmeyen bir enerjiyle çalışan, büyük bir silah. %66 ihtimalle cephane harcamaz ve belirli aralıklarla düşmanı takip eder ve hedefe patlayan füzeler fırlatır."
+    "description": "[Terraria İş Birliği] Bilinmeyen bir enerjiyle çalışan, büyük bir silah. %66 ihtimalle cephane harcamaz ve belirli aralıklarla düşmanı takip eder ve hedefe patlayan füzeler fırlatır."
   },
   "YakushimaGun001_2": {
     "localized_name": "Girdap Kırıcı",
-    "description": "[Terraria İşbirliği] Bilinmeyen bir enerjiyle çalışan, büyük bir silah. %66 ihtimalle cephane harcamaz ve belirli aralıklarla düşmanı takip eder ve hedefe patlayan füzeler fırlatır."
+    "description": "[Terraria İş Birliği] Bilinmeyen bir enerjiyle çalışan, büyük bir silah. %66 ihtimalle cephane harcamaz ve belirli aralıklarla düşmanı takip eder ve hedefe patlayan füzeler fırlatır."
   },
   "YakushimaGun001_3": {
     "localized_name": "Girdap Kırıcı",
-    "description": "[Terraria İşbirliği] Bilinmeyen bir enerjiyle çalışan, büyük bir silah. %66 ihtimalle cephane harcamaz ve belirli aralıklarla düşmanı takip eder ve hedefe patlayan füzeler fırlatır."
+    "description": "[Terraria İş Birliği] Bilinmeyen bir enerjiyle çalışan, büyük bir silah. %66 ihtimalle cephane harcamaz ve belirli aralıklarla düşmanı takip eder ve hedefe patlayan füzeler fırlatır."
   },
   "YakushimaGun001_4": {
     "localized_name": "Girdap Kırıcı",
-    "description": "[Terraria İşbirliği] Bilinmeyen bir enerjiyle çalışan, büyük bir silah. %66 ihtimalle cephane harcamaz ve belirli aralıklarla düşmanı takip eder ve hedefe patlayan füzeler fırlatır."
+    "description": "[Terraria İş Birliği] Bilinmeyen bir enerjiyle çalışan, büyük bir silah. %66 ihtimalle cephane harcamaz ve belirli aralıklarla düşmanı takip eder ve hedefe patlayan füzeler fırlatır."
   },
   "YakushimaGun001_5": {
     "localized_name": "Girdap Kırıcı",
-    "description": "[Terraria İşbirliği] Bilinmeyen bir enerjiyle çalışan, büyük bir silah. %66 ihtimalle cephane harcamaz ve belirli aralıklarla düşmanı takip eder ve hedefe patlayan füzeler fırlatır."
+    "description": "[Terraria İş Birliği] Bilinmeyen bir enerjiyle çalışan, büyük bir silah. %66 ihtimalle cephane harcamaz ve belirli aralıklarla düşmanı takip eder ve hedefe patlayan füzeler fırlatır."
   },
   "YakushimaHeadEquip001": {
     "localized_name": "Kutsal Maske",
-    "description": "[Terraria İşbirliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup, |Meowmere|, |Excalibur|, |Terra Kılıcı| ve |Efsanevi Myaomea| ile verilen hasarı artırır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup, |Meowmere|, |Excalibur|, |Terra Kılıcı| ve |Efsanevi Myaomea| ile verilen hasarı artırır."
   },
   "YakushimaHeadEquip001_2": {
     "localized_name": "Kutsal Maske",
-    "description": "[Terraria İşbirliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup, |Meowmere|, |Excalibur|, |Terra Kılıcı| ve |Efsanevi Myaomea| ile verilen hasarı artırır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup, |Meowmere|, |Excalibur|, |Terra Kılıcı| ve |Efsanevi Myaomea| ile verilen hasarı artırır."
   },
   "YakushimaHeadEquip001_3": {
     "localized_name": "Kutsal Maske",
-    "description": "[Terraria İşbirliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup, |Meowmere|, |Excalibur|, |Terra Kılıcı| ve |Efsanevi Myaomea| ile verilen hasarı artırır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup, |Meowmere|, |Excalibur|, |Terra Kılıcı| ve |Efsanevi Myaomea| ile verilen hasarı artırır."
   },
   "YakushimaHeadEquip001_4": {
     "localized_name": "Kutsal Maske",
-    "description": "[Terraria İşbirliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup, |Meowmere|, |Excalibur|, |Terra Kılıcı| ve |Efsanevi Myaomea| ile verilen hasarı artırır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup, |Meowmere|, |Excalibur|, |Terra Kılıcı| ve |Efsanevi Myaomea| ile verilen hasarı artırır."
   },
   "YakushimaHeadEquip001_5": {
     "localized_name": "Kutsal Maske",
-    "description": "[Terraria İşbirliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup, |Meowmere|, |Excalibur|, |Terra Kılıcı| ve |Efsanevi Myaomea| ile verilen hasarı artırır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup, |Meowmere|, |Excalibur|, |Terra Kılıcı| ve |Efsanevi Myaomea| ile verilen hasarı artırır."
   },
   "YakushimaHeadEquip002": {
     "localized_name": "Kutsal Başlık",
-    "description": "[Terraria İşbirliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Gece Parıltısıile verilen hasarı artırır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Gece Parıltısıile verilen hasarı artırır."
   },
   "YakushimaHeadEquip002_2": {
     "localized_name": "Kutsal Başlık",
-    "description": "[Terraria İşbirliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Gece Parıltısıile verilen hasarı artırır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Gece Parıltısıile verilen hasarı artırır."
   },
   "YakushimaHeadEquip002_3": {
     "localized_name": "Kutsal Başlık",
-    "description": "[Terraria İşbirliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Gece Parıltısıile verilen hasarı artırır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Gece Parıltısıile verilen hasarı artırır."
   },
   "YakushimaHeadEquip002_4": {
     "localized_name": "Kutsal Başlık",
-    "description": "[Terraria İşbirliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Gece Parıltısıile verilen hasarı artırır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Gece Parıltısıile verilen hasarı artırır."
   },
   "YakushimaHeadEquip002_5": {
     "localized_name": "Kutsal Başlık",
-    "description": "[Terraria İşbirliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Gece Parıltısıile verilen hasarı artırır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Gece Parıltısıile verilen hasarı artırır."
   },
   "YakushimaHeadEquip003": {
     "localized_name": "Kutsal Miğfer",
-    "description": "[Terraria İşbirliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Girdap Kırıcıile verilen hasarı artırır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Girdap Kırıcıile verilen hasarı artırır."
   },
   "YakushimaHeadEquip003_2": {
     "localized_name": "Kutsal Miğfer",
-    "description": "[Terraria İşbirliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Girdap Kırıcıile verilen hasarı artırır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Girdap Kırıcıile verilen hasarı artırır."
   },
   "YakushimaHeadEquip003_3": {
     "localized_name": "Kutsal Miğfer",
-    "description": "[Terraria İşbirliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Girdap Kırıcıile verilen hasarı artırır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Girdap Kırıcıile verilen hasarı artırır."
   },
   "YakushimaHeadEquip003_4": {
     "localized_name": "Kutsal Miğfer",
-    "description": "[Terraria İşbirliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Girdap Kırıcıile verilen hasarı artırır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Girdap Kırıcıile verilen hasarı artırır."
   },
   "YakushimaHeadEquip003_5": {
     "localized_name": "Kutsal Miğfer",
-    "description": "[Terraria İşbirliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Girdap Kırıcıile verilen hasarı artırır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Girdap Kırıcıile verilen hasarı artırır."
   },
   "YakushimaHeadEquip004": {
     "localized_name": "Kutsal Kapüşon",
-    "description": "[Terraria İşbirliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Terra Prizmaile verilen hasarı artırır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Terra Prizmaile verilen hasarı artırır."
   },
   "YakushimaHeadEquip004_2": {
     "localized_name": "Kutsal Kapüşon",
-    "description": "[Terraria İşbirliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Terra Prizmaile verilen hasarı artırır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Terra Prizmaile verilen hasarı artırır."
   },
   "YakushimaHeadEquip004_3": {
     "localized_name": "Kutsal Kapüşon",
-    "description": "[Terraria İşbirliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Terra Prizmaile verilen hasarı artırır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Terra Prizmaile verilen hasarı artırır."
   },
   "YakushimaHeadEquip004_4": {
     "localized_name": "Kutsal Kapüşon",
-    "description": "[Terraria İşbirliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Terra Prizmaile verilen hasarı artırır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Terra Prizmaile verilen hasarı artırır."
   },
   "YakushimaHeadEquip004_5": {
     "localized_name": "Kutsal Kapüşon",
-    "description": "[Terraria İşbirliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Terra Prizmaile verilen hasarı artırır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup,Terra Prizmaile verilen hasarı artırır."
   },
   "YakushimaHeadEquip005": {
     "localized_name": "Ay Efendisi Maskesi",
@@ -7401,22 +7501,22 @@
   },
   "YakushimaLantern001": {
     "localized_name": "Gece Parıltısı",
-    "description": "[Terraria İşbirliği] Gökkuşağı renklerinde parlayan gizemli bir fener. Bu feneri kaldırdığında, düşmanları takip edip birden fazla kez saldıran ışık mermileri fırlatır."
+    "description": "[Terraria İş Birliği] Gökkuşağı renklerinde parlayan gizemli bir fener. Bu feneri kaldırdığında, düşmanları takip edip birden fazla kez saldıran ışık mermileri fırlatır."
   },
   "YakushimaLantern001_2": {
     "localized_name": "Gece Parıltısı",
-    "description": "[Terraria İşbirliği] Gökkuşağı renklerinde parlayan gizemli bir fener. Bu feneri kaldırdığında, düşmanları takip edip birden fazla kez saldıran ışık mermileri fırlatır."
+    "description": "[Terraria İş Birliği] Gökkuşağı renklerinde parlayan gizemli bir fener. Bu feneri kaldırdığında, düşmanları takip edip birden fazla kez saldıran ışık mermileri fırlatır."
   },
   "YakushimaLantern001_3": {
     "localized_name": "Gece Parıltısı",
-    "description": "[Terraria İşbirliği] Gökkuşağı renklerinde parlayan gizemli bir fener. Bu feneri kaldırdığında, düşmanları takip edip birden fazla kez saldıran ışık mermileri fırlatır."
+    "description": "[Terraria İş Birliği] Gökkuşağı renklerinde parlayan gizemli bir fener. Bu feneri kaldırdığında, düşmanları takip edip birden fazla kez saldıran ışık mermileri fırlatır."
   },
   "YakushimaLantern001_4": {
     "localized_name": "Gece Parıltısı",
-    "description": "[Terraria İşbirliği] Gökkuşağı renklerinde parlayan gizemli bir fener. Bu feneri kaldırdığında, düşmanları takip edip birden fazla kez saldıran ışık mermileri fırlatır."
+    "description": "[Terraria İş Birliği] Gökkuşağı renklerinde parlayan gizemli bir fener. Bu feneri kaldırdığında, düşmanları takip edip birden fazla kez saldıran ışık mermileri fırlatır."
   },
   "YakushimaLantern001_5": {
     "localized_name": "Gece Parıltısı",
-    "description": "[Terraria İşbirliği] Gökkuşağı renklerinde parlayan gizemli bir fener. Bu feneri kaldırdığında, düşmanları takip edip birden fazla kez saldıran ışık mermileri fırlatır."
+    "description": "[Terraria İş Birliği] Gökkuşağı renklerinde parlayan gizemli bir fener. Bu feneri kaldırdığında, düşmanları takip edip birden fazla kez saldıran ışık mermileri fırlatır."
   }
 }

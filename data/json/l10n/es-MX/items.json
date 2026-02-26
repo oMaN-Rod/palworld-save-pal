@@ -188,7 +188,7 @@
     "description": "Aumenta significativamente el límite de peso que el jugador puede llevar."
   },
   "Accessory_Nonkilling": {
-    "localized_name": "Anillo de limitación",
+    "localized_name": "Anillo de clemencia",
     "description": "Anillo pacifista. El portador no puede reducir los PV del objetivo por debajo de 1."
   },
   "Accessory_NormalResist_1": {
@@ -459,6 +459,22 @@
     "localized_name": "Espada de haz",
     "description": "Espada de haz para combates a corta distancia. Su láser de alta potencia fríe al enemigo."
   },
+  "BeamSword_2": {
+    "localized_name": "Espada de haz",
+    "description": "Espada de haz para combates a corta distancia. Su láser de alta potencia fríe al enemigo."
+  },
+  "BeamSword_3": {
+    "localized_name": "Espada de haz",
+    "description": "Espada de haz para combates a corta distancia. Su láser de alta potencia fríe al enemigo."
+  },
+  "BeamSword_4": {
+    "localized_name": "Espada de haz",
+    "description": "Espada de haz para combates a corta distancia. Su láser de alta potencia fríe al enemigo."
+  },
+  "BeamSword_5": {
+    "localized_name": "Espada de haz",
+    "description": "Espada de haz para combates a corta distancia. Su láser de alta potencia fríe al enemigo."
+  },
   "Beer": {
     "localized_name": "-",
     "description": "-"
@@ -490,6 +506,22 @@
   "Blueprint_AssaultRifle_Default5": {
     "localized_name": "Plano de rifle de asalto 4",
     "description": "Si está en tu poder, se desbloqueará la receta |AssaultRifle Default1 (Legendary)|. Se puede elaborar en una |WeaponFactory Dirty 02|."
+  },
+  "Blueprint_BeamSword_2": {
+    "localized_name": "Plano de espada láser 1",
+    "description": "Si está en tu poder, se desbloqueará la receta |Espada de haz (Uncommon)|. Se puede elaborar en una |WeaponFactory Dirty 03|."
+  },
+  "Blueprint_BeamSword_3": {
+    "localized_name": "Plano de espada láser 2",
+    "description": "Si está en tu poder, se desbloqueará la receta |Espada de haz (Rare)|. Se puede elaborar en una |WeaponFactory Dirty 03|."
+  },
+  "Blueprint_BeamSword_4": {
+    "localized_name": "Plano de espada láser 3",
+    "description": "Si está en tu poder, se desbloqueará la receta |Espada de haz (Epic)|. Se puede elaborar en una |WeaponFactory Dirty 03|."
+  },
+  "Blueprint_BeamSword_5": {
+    "localized_name": "Plano de espada láser 4",
+    "description": "Si está en tu poder, se desbloqueará la receta |Espada de haz (Legendary)|. Se puede elaborar en una |WeaponFactory Dirty 03|."
   },
   "Blueprint_BowGun_2": {
     "localized_name": "Plano de ballesta 1",
@@ -1415,6 +1447,22 @@
     "localized_name": "Plano de yelmo de metal refinado 4",
     "description": "Si está en tu poder, se desbloqueará la receta |IronHelmet 5 (Legendary)|. Se puede elaborar en una |Factory Hard 02|."
   },
+  "Blueprint_Katana_2": {
+    "localized_name": "Plano de katana 1",
+    "description": "Si está en tu poder, se desbloqueará la receta |Katana (Uncommon)|. Se puede elaborar en una |WeaponFactory Dirty 03|."
+  },
+  "Blueprint_Katana_3": {
+    "localized_name": "Plano de katana 2",
+    "description": "Si está en tu poder, se desbloqueará la receta |Katana (Rare)|. Se puede elaborar en una |WeaponFactory Dirty 03|."
+  },
+  "Blueprint_Katana_4": {
+    "localized_name": "Plano de katana 3",
+    "description": "Si está en tu poder, se desbloqueará la receta |Katana (Epic)|. Se puede elaborar en una |WeaponFactory Dirty 03|."
+  },
+  "Blueprint_Katana_5": {
+    "localized_name": "Plano de katana 4",
+    "description": "Si está en tu poder, se desbloqueará la receta |Katana (Legendary)|. Se puede elaborar en una |WeaponFactory Dirty 03|."
+  },
   "Blueprint_LanternTop": {
     "localized_name": "Plano de linterna",
     "description": "Mientras lo tengas en tu inventario o almacenado en tu base, podrás construir una <MapObjectName id=|LanternTop|/>."
@@ -1903,6 +1951,10 @@
     "localized_name": "Plano de rifle de tiro único 4",
     "description": "Si está en tu poder, se desbloqueará la receta |Rifle de tiro único (Legendary)|. Se puede elaborar en una |WeaponFactory Dirty 02|."
   },
+  "Blueprint_Spear_ForestBoss_5": {
+    "localized_name": "Plano de lanza de Lily 4",
+    "description": "Si está en tu poder, se desbloqueará la receta |Spear ForestBoss (Legendary)|. Se puede elaborar en una |WeaponFactory Dirty 02|."
+  },
   "Blueprint_StealArmorCold_2": {
     "localized_name": "Plano de armadura de Paluminium resistente al frío 1",
     "description": "Si está en tu poder, se desbloqueará la receta |StealArmorCold 2 (Uncommon)|. Se puede elaborar en una |Factory Hard 03|."
@@ -1983,6 +2035,22 @@
     "localized_name": "Plano de subfusil 4",
     "description": "Si está en tu poder, se desbloqueará la receta |Subfusil (Legendary)|. Se puede elaborar en una |WeaponFactory Dirty 02|."
   },
+  "Blueprint_Sword_2": {
+    "localized_name": "Plano de espada 1",
+    "description": "Si está en tu poder, se desbloqueará la receta |Espada (Uncommon)|. Se puede elaborar en una |WeaponFactory Dirty 01|."
+  },
+  "Blueprint_Sword_3": {
+    "localized_name": "Plano de espada 2",
+    "description": "Si está en tu poder, se desbloqueará la receta |Espada (Rare)|. Se puede elaborar en una |WeaponFactory Dirty 01|."
+  },
+  "Blueprint_Sword_4": {
+    "localized_name": "Plano de espada 3",
+    "description": "Si está en tu poder, se desbloqueará la receta |Espada (Epic)|. Se puede elaborar en una |WeaponFactory Dirty 01|."
+  },
+  "Blueprint_Sword_5": {
+    "localized_name": "Plano de espada 4",
+    "description": "Si está en tu poder, se desbloqueará la receta |Espada (Legendary)|. Se puede elaborar en una |WeaponFactory Dirty 01|."
+  },
   "Blueprint_WallTorch02": {
     "localized_name": "Plano de antorcha colgante solemne",
     "description": "Mientras lo tengas en tu inventario o almacenado en tu base, podrás construir una <MapObjectName id=|WallTorch02|/>."
@@ -2013,7 +2081,7 @@
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "Plano de Cota de placas sagrada",
-    "description": "[Colaboración con Terraria] Si está en tu poder, desbloquearás la receta de |PalSummon YakushimaArmor001|. Se puede elaborar en una |Factory Hard 02|."
+    "description": "[Colaboración con Terraria] Si está en tu poder, desbloquearás la receta de |Cota de placas sagrada|. Se puede elaborar en una |Factory Hard 02|."
   },
   "Blueprint_YakushimaArmor001_2": {
     "localized_name": "Plano de Cota de placas sagrada 1",
@@ -2117,7 +2185,7 @@
   },
   "Blueprint_YakushimaHeadEquip001": {
     "localized_name": "Plano de Máscara sagrada",
-    "description": "[Colaboración con Terraria] Si está en tu poder, desbloquearás la receta de |PalSummon YakushimaHeadEquip001|. Se puede elaborar en una |Factory Hard 02|."
+    "description": "[Colaboración con Terraria] Si está en tu poder, desbloquearás la receta de |Máscara sagrada|. Se puede elaborar en una |Factory Hard 02|."
   },
   "Blueprint_YakushimaHeadEquip001_2": {
     "localized_name": "Plano de Máscara sagrada 1",
@@ -2137,7 +2205,7 @@
   },
   "Blueprint_YakushimaHeadEquip002": {
     "localized_name": "Plano de Tocado sagrado",
-    "description": "[Colaboración con Terraria] Si está en tu poder, desbloquearás la receta de |PalSummon YakushimaHeadEquip002|. Se puede elaborar en una |Factory Hard 02|."
+    "description": "[Colaboración con Terraria] Si está en tu poder, desbloquearás la receta de |Tocado sagrado|. Se puede elaborar en una |Factory Hard 02|."
   },
   "Blueprint_YakushimaHeadEquip002_2": {
     "localized_name": "Plano de Tocado sagrado 1",
@@ -2157,7 +2225,7 @@
   },
   "Blueprint_YakushimaHeadEquip003": {
     "localized_name": "Plano de Casco sagrado",
-    "description": "[Colaboración con Terraria] Si está en tu poder, desbloquearás la receta de |PalSummon YakushimaHeadEquip003|. Se puede elaborar en una |Factory Hard 02|."
+    "description": "[Colaboración con Terraria] Si está en tu poder, desbloquearás la receta de |Casco sagrado|. Se puede elaborar en una |Factory Hard 02|."
   },
   "Blueprint_YakushimaHeadEquip003_2": {
     "localized_name": "Plano de Casco sagrado 1",
@@ -2177,7 +2245,7 @@
   },
   "Blueprint_YakushimaHeadEquip004": {
     "localized_name": "Plano de Capucha sagrada",
-    "description": "[Colaboración con Terraria] Si está en tu poder, desbloquearás la receta de |PalSummon YakushimaHeadEquip004|. Se puede elaborar en una |Factory Hard 02|."
+    "description": "[Colaboración con Terraria] Si está en tu poder, desbloquearás la receta de |Capucha sagrada|. Se puede elaborar en una |Factory Hard 02|."
   },
   "Blueprint_YakushimaHeadEquip004_2": {
     "localized_name": "Plano de Capucha sagrada 1",
@@ -3531,10 +3599,6 @@
     "localized_name": "Balas para pistola",
     "description": "Munición utilizada en HandGun Default y otras armas similares."
   },
-  "HandgunShield": {
-    "localized_name": "Escudo balístico",
-    "description": "Escudo balístico"
-  },
   "Head001": {
     "localized_name": "Corona real",
     "description": null
@@ -4163,6 +4227,22 @@
     "localized_name": "Katana",
     "description": "Katana para combates a corta distancia. Está tan afilada que puede partir en dos al objetivo."
   },
+  "Katana_2": {
+    "localized_name": "Katana",
+    "description": "Katana para combates a corta distancia. Está tan afilada que puede partir en dos al objetivo."
+  },
+  "Katana_3": {
+    "localized_name": "Katana",
+    "description": "Katana para combates a corta distancia. Está tan afilada que puede partir en dos al objetivo."
+  },
+  "Katana_4": {
+    "localized_name": "Katana",
+    "description": "Katana para combates a corta distancia. Está tan afilada que puede partir en dos al objetivo."
+  },
+  "Katana_5": {
+    "localized_name": "Katana",
+    "description": "Katana para combates a corta distancia. Está tan afilada que puede partir en dos al objetivo."
+  },
   "Lantern": {
     "localized_name": "Linterna de cintura",
     "description": "Linterna de cintura. Se enciende automáticamente por la noche. También puede configurarse para que esté siempre encendida. Con una sola es suficiente."
@@ -4637,43 +4717,43 @@
   },
   "OctaviaRevolver": {
     "localized_name": "Revólver Marksman",
-    "description": "[Colaboración con ULTRAKILL] Revólver que utiliza energía eléctrica y puede disparar continuamente sin necesidad de recargar. Mientras está equipado, el lanzamiento de esferas de captura se reemplaza por un lanzamiento de moneda, y las balas disparadas con Revólver Marksman que golpean la moneda rebotan hacia los enemigos."
+    "description": "[Colaboración con ULTRAKILL] Revólver que utiliza energía eléctrica y puede disparar continuamente. Mientras está equipado, el lanzamiento de esferas de captura se reemplaza por un lanzamiento de moneda, y las balas disparadas con Revólver Marksman que golpean la moneda rebotan hacia los enemigos."
   },
   "OctaviaRevolver_2": {
     "localized_name": "Revólver Marksman",
-    "description": "[Colaboración con ULTRAKILL] Revólver que utiliza energía eléctrica y puede disparar continuamente sin necesidad de recargar. Mientras está equipado, el lanzamiento de esferas de captura se reemplaza por un lanzamiento de moneda, y las balas disparadas con Revólver Marksman que golpean la moneda rebotan hacia los enemigos."
+    "description": "[Colaboración con ULTRAKILL] Revólver que utiliza energía eléctrica y puede disparar continuamente. Mientras está equipado, el lanzamiento de esferas de captura se reemplaza por un lanzamiento de moneda, y las balas disparadas con Revólver Marksman que golpean la moneda rebotan hacia los enemigos."
   },
   "OctaviaRevolver_3": {
     "localized_name": "Revólver Marksman",
-    "description": "[Colaboración con ULTRAKILL] Revólver que utiliza energía eléctrica y puede disparar continuamente sin necesidad de recargar. Mientras está equipado, el lanzamiento de esferas de captura se reemplaza por un lanzamiento de moneda, y las balas disparadas con Revólver Marksman que golpean la moneda rebotan hacia los enemigos."
+    "description": "[Colaboración con ULTRAKILL] Revólver que utiliza energía eléctrica y puede disparar continuamente. Mientras está equipado, el lanzamiento de esferas de captura se reemplaza por un lanzamiento de moneda, y las balas disparadas con Revólver Marksman que golpean la moneda rebotan hacia los enemigos."
   },
   "OctaviaRevolver_4": {
     "localized_name": "Revólver Marksman",
-    "description": "[Colaboración con ULTRAKILL] Revólver que utiliza energía eléctrica y puede disparar continuamente sin necesidad de recargar. Mientras está equipado, el lanzamiento de esferas de captura se reemplaza por un lanzamiento de moneda, y las balas disparadas con Revólver Marksman que golpean la moneda rebotan hacia los enemigos."
+    "description": "[Colaboración con ULTRAKILL] Revólver que utiliza energía eléctrica y puede disparar continuamente. Mientras está equipado, el lanzamiento de esferas de captura se reemplaza por un lanzamiento de moneda, y las balas disparadas con Revólver Marksman que golpean la moneda rebotan hacia los enemigos."
   },
   "OctaviaRevolver_5": {
     "localized_name": "Revólver Marksman",
-    "description": "[Colaboración con ULTRAKILL] Revólver que utiliza energía eléctrica y puede disparar continuamente sin necesidad de recargar. Mientras está equipado, el lanzamiento de esferas de captura se reemplaza por un lanzamiento de moneda, y las balas disparadas con Revólver Marksman que golpean la moneda rebotan hacia los enemigos."
+    "description": "[Colaboración con ULTRAKILL] Revólver que utiliza energía eléctrica y puede disparar continuamente. Mientras está equipado, el lanzamiento de esferas de captura se reemplaza por un lanzamiento de moneda, y las balas disparadas con Revólver Marksman que golpean la moneda rebotan hacia los enemigos."
   },
   "OctaviaShotgun": {
     "localized_name": "Escopeta de Expulsión de Núcleo",
-    "description": "[Colaboración con ULTRAKILL] Escopeta que utiliza energía térmica y puede disparar continuamente sin necesidad de recargar. Mientras está equipada, el lanzamiento de esferas de captura se reemplaza por una descarga de núcleo, y las balas disparadas con Revólver Marksman que golpean el núcleo provocan una explosión."
+    "description": "[Colaboración con ULTRAKILL] Escopeta que utiliza energía térmica y puede disparar continuamente. Mientras está equipada, el lanzamiento de esferas de captura se reemplaza por una descarga de núcleo y, al mantener pulsado, se carga y aumenta el alcance del disparo de núcleo. Las balas disparadas con Revólver Marksman que golpean el núcleo provocan una explosión."
   },
   "OctaviaShotgun_2": {
     "localized_name": "Escopeta de Expulsión de Núcleo",
-    "description": "[Colaboración con ULTRAKILL] Escopeta que utiliza energía térmica y puede disparar continuamente sin necesidad de recargar. Mientras está equipada, el lanzamiento de esferas de captura se reemplaza por una descarga de núcleo, y las balas disparadas con Revólver Marksman que golpean el núcleo provocan una explosión."
+    "description": "[Colaboración con ULTRAKILL] Escopeta que utiliza energía térmica y puede disparar continuamente. Mientras está equipada, el lanzamiento de esferas de captura se reemplaza por una descarga de núcleo y, al mantener pulsado, se carga y aumenta el alcance del disparo de núcleo. Las balas disparadas con Revólver Marksman que golpean el núcleo provocan una explosión."
   },
   "OctaviaShotgun_3": {
     "localized_name": "Escopeta de Expulsión de Núcleo",
-    "description": "[Colaboración con ULTRAKILL] Escopeta que utiliza energía térmica y puede disparar continuamente sin necesidad de recargar. Mientras está equipada, el lanzamiento de esferas de captura se reemplaza por una descarga de núcleo, y las balas disparadas con Revólver Marksman que golpean el núcleo provocan una explosión."
+    "description": "[Colaboración con ULTRAKILL] Escopeta que utiliza energía térmica y puede disparar continuamente. Mientras está equipada, el lanzamiento de esferas de captura se reemplaza por una descarga de núcleo y, al mantener pulsado, se carga y aumenta el alcance del disparo de núcleo. Las balas disparadas con Revólver Marksman que golpean el núcleo provocan una explosión."
   },
   "OctaviaShotgun_4": {
     "localized_name": "Escopeta de Expulsión de Núcleo",
-    "description": "[Colaboración con ULTRAKILL] Escopeta que utiliza energía térmica y puede disparar continuamente sin necesidad de recargar. Mientras está equipada, el lanzamiento de esferas de captura se reemplaza por una descarga de núcleo, y las balas disparadas con Revólver Marksman que golpean el núcleo provocan una explosión."
+    "description": "[Colaboración con ULTRAKILL] Escopeta que utiliza energía térmica y puede disparar continuamente. Mientras está equipada, el lanzamiento de esferas de captura se reemplaza por una descarga de núcleo y, al mantener pulsado, se carga y aumenta el alcance del disparo de núcleo. Las balas disparadas con Revólver Marksman que golpean el núcleo provocan una explosión."
   },
   "OctaviaShotgun_5": {
     "localized_name": "Escopeta de Expulsión de Núcleo",
-    "description": "[Colaboración con ULTRAKILL] Escopeta que utiliza energía térmica y puede disparar continuamente sin necesidad de recargar. Mientras está equipada, el lanzamiento de esferas de captura se reemplaza por una descarga de núcleo, y las balas disparadas con Revólver Marksman que golpean el núcleo provocan una explosión."
+    "description": "[Colaboración con ULTRAKILL] Escopeta que utiliza energía térmica y puede disparar continuamente. Mientras está equipada, el lanzamiento de esferas de captura se reemplaza por una descarga de núcleo y, al mantener pulsado, se carga y aumenta el alcance del disparo de núcleo. Las balas disparadas con Revólver Marksman que golpean el núcleo provocan una explosión."
   },
   "OctopusGirl_Takoyaki": {
     "localized_name": "Takoyaki de Gloopie",
@@ -6352,7 +6432,7 @@
     "description": "Si lo llevas encima, podrás montar a AmaterasuWolf Dark."
   },
   "SkillUnlock_BadCatgirl": {
-    "localized_name": "Escopeta de Nyanimite",
+    "localized_name": "Escopeta de Nyafia",
     "description": "La escopeta de Nyafia. Al activar la habilidad de compañero, Nyafia disparará a todo trapo su escopeta contra los enemigos cercanos."
   },
   "SkillUnlock_BirdDragon": {
@@ -6831,6 +6911,10 @@
     "localized_name": "Lanza de Lily",
     "description": "Lanza que solía usar Lily. Castiga a quienes descuidan a los Pals."
   },
+  "Spear_ForestBoss_5": {
+    "localized_name": "Lanza de Lily",
+    "description": "Lanza que solía usar Lily. Castiga a quienes descuidan a los Pals."
+  },
   "Spear_QueenBee": {
     "localized_name": "Bastón de Elizabee",
     "description": "Bastón de Elizabee modificado para uso humano. Se siente el aura dominante de una reina."
@@ -7016,6 +7100,22 @@
     "description": "Algodón de azúcar que se obtiene de Woolipop. Es de dulzor breve pero intenso."
   },
   "Sword": {
+    "localized_name": "Espada",
+    "description": "Espada de combate cuerpo a cuerpo. Su filo es excelente, pero acercarse al enemigo conlleva riesgos."
+  },
+  "Sword_2": {
+    "localized_name": "Espada",
+    "description": "Espada de combate cuerpo a cuerpo. Su filo es excelente, pero acercarse al enemigo conlleva riesgos."
+  },
+  "Sword_3": {
+    "localized_name": "Espada",
+    "description": "Espada de combate cuerpo a cuerpo. Su filo es excelente, pero acercarse al enemigo conlleva riesgos."
+  },
+  "Sword_4": {
+    "localized_name": "Espada",
+    "description": "Espada de combate cuerpo a cuerpo. Su filo es excelente, pero acercarse al enemigo conlleva riesgos."
+  },
+  "Sword_5": {
     "localized_name": "Espada",
     "description": "Espada de combate cuerpo a cuerpo. Su filo es excelente, pero acercarse al enemigo conlleva riesgos."
   },

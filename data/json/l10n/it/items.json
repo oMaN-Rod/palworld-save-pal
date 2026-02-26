@@ -261,7 +261,7 @@
   },
   "AffectionFruit_01": {
     "localized_name": "Pesca del legame",
-    "description": "Un frutto magico che non si vede spesso. Si dice che, offrendolo da mangiare a un Pal, si stabilisca un legame con esso. Scegli con attenzione a chi darlo."
+    "description": "Un frutto magico che non si vede spesso. Pare che, se lo offri a un Pal, esso ti aprirà il suo cuore. Scegli con attenzione a chi darlo."
   },
   "AffectionFruit_02": {
     "localized_name": "Piccola pesca del legame",
@@ -459,6 +459,22 @@
     "localized_name": "Spada a energia",
     "description": "Spada a energia per il combattimento ravvicinato. La sua lama laser ustiona ciò che colpisce."
   },
+  "BeamSword_2": {
+    "localized_name": "Spada a energia",
+    "description": "Spada a energia per il combattimento ravvicinato. La sua lama laser ustiona ciò che colpisce."
+  },
+  "BeamSword_3": {
+    "localized_name": "Spada a energia",
+    "description": "Spada a energia per il combattimento ravvicinato. La sua lama laser ustiona ciò che colpisce."
+  },
+  "BeamSword_4": {
+    "localized_name": "Spada a energia",
+    "description": "Spada a energia per il combattimento ravvicinato. La sua lama laser ustiona ciò che colpisce."
+  },
+  "BeamSword_5": {
+    "localized_name": "Spada a energia",
+    "description": "Spada a energia per il combattimento ravvicinato. La sua lama laser ustiona ciò che colpisce."
+  },
   "Beer": {
     "localized_name": "it Text",
     "description": "it Text"
@@ -490,6 +506,22 @@
   "Blueprint_AssaultRifle_Default5": {
     "localized_name": "Progetto per fucile d'assalto 4",
     "description": "Con questo, è possibile realizzare: |AssaultRifle Default1 (Legendary)|. Per farlo, hai bisogno di: |WeaponFactory Dirty 02|."
+  },
+  "Blueprint_BeamSword_2": {
+    "localized_name": "Progetto per spada a energia 1",
+    "description": "Con questo, è possibile realizzare: Spada a energia (Uncommon). Per farlo, hai bisogno di: WeaponFactory Dirty 03."
+  },
+  "Blueprint_BeamSword_3": {
+    "localized_name": "Progetto per spada a energia 2",
+    "description": "Con questo, è possibile realizzare: Spada a energia (Rare). Per farlo, hai bisogno di: WeaponFactory Dirty 03."
+  },
+  "Blueprint_BeamSword_4": {
+    "localized_name": "Progetto per spada a energia 3",
+    "description": "Con questo, è possibile realizzare: Spada a energia (Epic). Per farlo, hai bisogno di: WeaponFactory Dirty 03."
+  },
+  "Blueprint_BeamSword_5": {
+    "localized_name": "Progetto per spada a energia 4",
+    "description": "Con questo, è possibile realizzare: Spada a energia (Legendary). Per farlo, hai bisogno di: WeaponFactory Dirty 03."
   },
   "Blueprint_BowGun_2": {
     "localized_name": "Progetto per balestra 1",
@@ -1415,6 +1447,22 @@
     "localized_name": "Progetto per elmo di metallo raffinato 4",
     "description": "Con questo, è possibile realizzare: |IronHelmet 5 (Legendary)|. Per farlo, hai bisogno di: |Factory Hard 02|."
   },
+  "Blueprint_Katana_2": {
+    "localized_name": "Progetto per katana 1",
+    "description": "Con questo, è possibile realizzare: Katana (Uncommon). Per farlo, hai bisogno di: WeaponFactory Dirty 03."
+  },
+  "Blueprint_Katana_3": {
+    "localized_name": "Progetto per katana 2",
+    "description": "Con questo, è possibile realizzare: Katana (Rare). Per farlo, hai bisogno di: WeaponFactory Dirty 03."
+  },
+  "Blueprint_Katana_4": {
+    "localized_name": "Progetto per katana 3",
+    "description": "Con questo, è possibile realizzare: Katana (Epic). Per farlo, hai bisogno di: WeaponFactory Dirty 03."
+  },
+  "Blueprint_Katana_5": {
+    "localized_name": "Progetto per katana 4",
+    "description": "Con questo, è possibile realizzare: Katana (Legendary). Per farlo, hai bisogno di: WeaponFactory Dirty 03."
+  },
   "Blueprint_LanternTop": {
     "localized_name": "Progetto per lanterna orientale",
     "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|LanternTop|/>|."
@@ -1903,6 +1951,10 @@
     "localized_name": "Progetto per fucile a colpo singolo 4",
     "description": "Con questo, è possibile realizzare: |Fucile a colpo singolo (Legendary)|. Per farlo, hai bisogno di: |WeaponFactory Dirty 02|."
   },
+  "Blueprint_Spear_ForestBoss_5": {
+    "localized_name": "Progetto per lancia di Lily 4",
+    "description": "Con questo, è possibile realizzare: Spear ForestBoss (Legendary). Per farlo, hai bisogno di: WeaponFactory Dirty 02."
+  },
   "Blueprint_StealArmorCold_2": {
     "localized_name": "Progetto per armatura di metallo Pal per il gelo 1",
     "description": "Con questo, è possibile realizzare: |StealArmorCold 2 (Uncommon)|. Per farlo, hai bisogno di: |Factory Hard 03|."
@@ -1983,6 +2035,22 @@
     "localized_name": "Progetto per mitra 4",
     "description": "Con questo, è possibile realizzare: Mitra (Legendary). Per farlo, hai bisogno di: WeaponFactory Dirty 02."
   },
+  "Blueprint_Sword_2": {
+    "localized_name": "Progetto per spada 1",
+    "description": "Con questo, è possibile realizzare: Spada (Uncommon). Per farlo, hai bisogno di: WeaponFactory Dirty 01."
+  },
+  "Blueprint_Sword_3": {
+    "localized_name": "Progetto per spada 2",
+    "description": "Con questo, è possibile realizzare: Spada (Rare). Per farlo, hai bisogno di: WeaponFactory Dirty 01."
+  },
+  "Blueprint_Sword_4": {
+    "localized_name": "Progetto per spada 3",
+    "description": "Con questo, è possibile realizzare: Spada (Epic). Per farlo, hai bisogno di: WeaponFactory Dirty 01."
+  },
+  "Blueprint_Sword_5": {
+    "localized_name": "Progetto per spada 4",
+    "description": "Con questo, è possibile realizzare: Spada (Legendary). Per farlo, hai bisogno di: WeaponFactory Dirty 01."
+  },
   "Blueprint_WallTorch02": {
     "localized_name": "Progetto per torcia a muro solenne",
     "description": "Se è nell'inventario o alla base, diventa possibile costruire |<MapObjectName id=|WallTorch02|/>|."
@@ -2013,7 +2081,7 @@
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "Progetto per armatura sacra",
-    "description": "[Collaborazione con Terraria] Con questo, è possibile realizzare: |PalSummon YakushimaArmor001|. Per farlo, hai bisogno di: |Factory Hard 02|."
+    "description": "[Collaborazione con Terraria] Con questo, è possibile realizzare: |Armatura sacra|. Per farlo, hai bisogno di: |Factory Hard 02|."
   },
   "Blueprint_YakushimaArmor001_2": {
     "localized_name": "Progetto per armatura sacra 1",
@@ -2117,7 +2185,7 @@
   },
   "Blueprint_YakushimaHeadEquip001": {
     "localized_name": "Progetto per maschera sacra",
-    "description": "[Collaborazione con Terraria] Con questo, è possibile realizzare: |PalSummon YakushimaHeadEquip001|. Per farlo, hai bisogno di: |Factory Hard 02|."
+    "description": "[Collaborazione con Terraria] Con questo, è possibile realizzare: |Maschera sacra|. Per farlo, hai bisogno di: |Factory Hard 02|."
   },
   "Blueprint_YakushimaHeadEquip001_2": {
     "localized_name": "Progetto per maschera sacra 1",
@@ -2137,7 +2205,7 @@
   },
   "Blueprint_YakushimaHeadEquip002": {
     "localized_name": "Progetto per copricapo sacro",
-    "description": "[Collaborazione con Terraria] Con questo, è possibile realizzare: |PalSummon YakushimaHeadEquip002|. Per farlo, hai bisogno di: |Factory Hard 02|."
+    "description": "[Collaborazione con Terraria] Con questo, è possibile realizzare: |Copricapo sacro|. Per farlo, hai bisogno di: |Factory Hard 02|."
   },
   "Blueprint_YakushimaHeadEquip002_2": {
     "localized_name": "Progetto per copricapo sacro 1",
@@ -2157,7 +2225,7 @@
   },
   "Blueprint_YakushimaHeadEquip003": {
     "localized_name": "Progetto per elmo sacro",
-    "description": "[Collaborazione con Terraria] Con questo, è possibile realizzare: |PalSummon YakushimaHeadEquip003|. Per farlo, hai bisogno di: |Factory Hard 02|."
+    "description": "[Collaborazione con Terraria] Con questo, è possibile realizzare: |Casco sacro|. Per farlo, hai bisogno di: |Factory Hard 02|."
   },
   "Blueprint_YakushimaHeadEquip003_2": {
     "localized_name": "Progetto per elmo sacro 1",
@@ -2177,7 +2245,7 @@
   },
   "Blueprint_YakushimaHeadEquip004": {
     "localized_name": "Progetto per cappuccio sacro",
-    "description": "[Collaborazione con Terraria] Con questo, è possibile realizzare: |PalSummon YakushimaHeadEquip004|. Per farlo, hai bisogno di: |Factory Hard 02|."
+    "description": "[Collaborazione con Terraria] Con questo, è possibile realizzare: |Cappuccio sacro|. Per farlo, hai bisogno di: |Factory Hard 02|."
   },
   "Blueprint_YakushimaHeadEquip004_2": {
     "localized_name": "Progetto per cappuccio sacro 1",
@@ -3531,10 +3599,6 @@
     "localized_name": "Proiettili per pistola",
     "description": "Proiettili per HandGun Default e armi simili."
   },
-  "HandgunShield": {
-    "localized_name": "Scudo balistico",
-    "description": "Scudo balistico"
-  },
   "Head001": {
     "localized_name": "Corona reale",
     "description": null
@@ -4163,6 +4227,22 @@
     "localized_name": "Katana",
     "description": "Katana per il combattimento ravvicinato. La sua lama affilata taglia in due qualunque cosa."
   },
+  "Katana_2": {
+    "localized_name": "Katana",
+    "description": "Katana per il combattimento ravvicinato. La sua lama affilata taglia in due qualunque cosa."
+  },
+  "Katana_3": {
+    "localized_name": "Katana",
+    "description": "Katana per il combattimento ravvicinato. La sua lama affilata taglia in due qualunque cosa."
+  },
+  "Katana_4": {
+    "localized_name": "Katana",
+    "description": "Katana per il combattimento ravvicinato. La sua lama affilata taglia in due qualunque cosa."
+  },
+  "Katana_5": {
+    "localized_name": "Katana",
+    "description": "Katana per il combattimento ravvicinato. La sua lama affilata taglia in due qualunque cosa."
+  },
   "Lantern": {
     "localized_name": "Lanterna portatile",
     "description": "Una lanterna da tenere al fianco. Quando scende la notte, si accende automaticamente. Cambiando la modalità di illuminazione, può far luce costantemente. Basta averne una con sé."
@@ -4417,7 +4497,7 @@
   },
   "ManganeseIngot": {
     "localized_name": "Lingotto di corallite",
-    "description": "Una lega di Corallite, Lingotto di metallo e Carbone. Resistente a elevate scariche d'energia, è perfetta per realizzare armi."
+    "description": "Una lega di Corallite, Minerale metallico e Carbone. Resistente a elevate scariche d'energia, è perfetta per realizzare armi."
   },
   "ManganeseOre": {
     "localized_name": "Corallite",
@@ -4629,51 +4709,51 @@
   },
   "Octavia002_Armor": {
     "localized_name": "Armatura di V2",
-    "description": "[Collaborazione con ULTRAKILL] Un'armatura ispirata ai meccanismi di un robot che ha difeso la New Peace di una terra lontana. Compensa la mancanza della capacità di autoriparazione con una corazza più resistente."
+    "description": "[Collaborazione con ULTRAKILL] Un'armatura ispirata ai meccanismi di un robot che ha difeso la New Peace di una terra lontana. Compensa la mancanza della capacità di autoriparazione con una corazza potenziata."
   },
   "Octavia002_Armor_5": {
     "localized_name": "Armatura di V2",
-    "description": "[Collaborazione con ULTRAKILL] Un'armatura ispirata ai meccanismi di un robot che ha difeso la New Peace di una terra lontana. Compensa la mancanza della capacità di autoriparazione con una corazza più resistente."
+    "description": "[Collaborazione con ULTRAKILL] Un'armatura ispirata ai meccanismi di un robot che ha difeso la New Peace di una terra lontana. Compensa la mancanza della capacità di autoriparazione con una corazza potenziata."
   },
   "OctaviaRevolver": {
     "localized_name": "Revolver del tiratore",
-    "description": "[Collaborazione con ULTRAKILL] Un revolver che continua a fare fuoco senza bisogno di ricaricare, grazie al potere dell'elettricità. Mentre è equipaggiato, lancia una sfera per lanciare una moneta, poi colpiscila col Revolver del tiratore per far rimbalzare i proiettili verso i nemici."
+    "description": "[Collaborazione con ULTRAKILL] Un revolver che continua a fare fuoco grazie al potere dell'elettricità. Mentre è equipaggiato, lancia una sfera per lanciare una moneta, poi colpiscila col Revolver del tiratore per far rimbalzare i proiettili verso i nemici."
   },
   "OctaviaRevolver_2": {
     "localized_name": "Revolver del tiratore",
-    "description": "[Collaborazione con ULTRAKILL] Un revolver che continua a fare fuoco senza bisogno di ricaricare, grazie al potere dell'elettricità. Mentre è equipaggiato, lancia una sfera per lanciare una moneta, poi colpiscila col Revolver del tiratore per far rimbalzare i proiettili verso i nemici."
+    "description": "[Collaborazione con ULTRAKILL] Un revolver che continua a fare fuoco grazie al potere dell'elettricità. Mentre è equipaggiato, lancia una sfera per lanciare una moneta, poi colpiscila col Revolver del tiratore per far rimbalzare i proiettili verso i nemici."
   },
   "OctaviaRevolver_3": {
     "localized_name": "Revolver del tiratore",
-    "description": "[Collaborazione con ULTRAKILL] Un revolver che continua a fare fuoco senza bisogno di ricaricare, grazie al potere dell'elettricità. Mentre è equipaggiato, lancia una sfera per lanciare una moneta, poi colpiscila col Revolver del tiratore per far rimbalzare i proiettili verso i nemici."
+    "description": "[Collaborazione con ULTRAKILL] Un revolver che continua a fare fuoco grazie al potere dell'elettricità. Mentre è equipaggiato, lancia una sfera per lanciare una moneta, poi colpiscila col Revolver del tiratore per far rimbalzare i proiettili verso i nemici."
   },
   "OctaviaRevolver_4": {
     "localized_name": "Revolver del tiratore",
-    "description": "[Collaborazione con ULTRAKILL] Un revolver che continua a fare fuoco senza bisogno di ricaricare, grazie al potere dell'elettricità. Mentre è equipaggiato, lancia una sfera per lanciare una moneta, poi colpiscila col Revolver del tiratore per far rimbalzare i proiettili verso i nemici."
+    "description": "[Collaborazione con ULTRAKILL] Un revolver che continua a fare fuoco grazie al potere dell'elettricità. Mentre è equipaggiato, lancia una sfera per lanciare una moneta, poi colpiscila col Revolver del tiratore per far rimbalzare i proiettili verso i nemici."
   },
   "OctaviaRevolver_5": {
     "localized_name": "Revolver del tiratore",
-    "description": "[Collaborazione con ULTRAKILL] Un revolver che continua a fare fuoco senza bisogno di ricaricare, grazie al potere dell'elettricità. Mentre è equipaggiato, lancia una sfera per lanciare una moneta, poi colpiscila col Revolver del tiratore per far rimbalzare i proiettili verso i nemici."
+    "description": "[Collaborazione con ULTRAKILL] Un revolver che continua a fare fuoco grazie al potere dell'elettricità. Mentre è equipaggiato, lancia una sfera per lanciare una moneta, poi colpiscila col Revolver del tiratore per far rimbalzare i proiettili verso i nemici."
   },
   "OctaviaShotgun": {
     "localized_name": "Fucile a canna liscia sparanuclei",
-    "description": "[Collaborazione con ULTRAKILL] Un fucila a canna liscia che continua a fare fuoco senza bisogno di ricaricare, grazie all'energia termica. Lancia una sfera mentre è equipaggiato per lanciare un nucleo, poi colpiscilo col Revolver del tiratore per farlo esplodere."
+    "description": "[Collaborazione con ULTRAKILL] Un fucila a canna liscia che continua a fare fuoco grazie all'energia termica. Lancia una sfera mentre è equipaggiato per lanciare un nucleo. Tieni premuto per scagliarlo più lontano. Colpiscilo col Revolver del tiratore per farlo esplodere."
   },
   "OctaviaShotgun_2": {
     "localized_name": "Fucile a canna liscia sparanuclei",
-    "description": "[Collaborazione con ULTRAKILL] Un fucila a canna liscia che continua a fare fuoco senza bisogno di ricaricare, grazie all'energia termica. Lancia una sfera mentre è equipaggiato per lanciare un nucleo, poi colpiscilo col Revolver del tiratore per farlo esplodere."
+    "description": "[Collaborazione con ULTRAKILL] Un fucila a canna liscia che continua a fare fuoco grazie all'energia termica. Lancia una sfera mentre è equipaggiato per lanciare un nucleo. Tieni premuto per scagliarlo più lontano. Colpiscilo col Revolver del tiratore per farlo esplodere."
   },
   "OctaviaShotgun_3": {
     "localized_name": "Fucile a canna liscia sparanuclei",
-    "description": "[Collaborazione con ULTRAKILL] Un fucila a canna liscia che continua a fare fuoco senza bisogno di ricaricare, grazie all'energia termica. Lancia una sfera mentre è equipaggiato per lanciare un nucleo, poi colpiscilo col Revolver del tiratore per farlo esplodere."
+    "description": "[Collaborazione con ULTRAKILL] Un fucila a canna liscia che continua a fare fuoco grazie all'energia termica. Lancia una sfera mentre è equipaggiato per lanciare un nucleo. Tieni premuto per scagliarlo più lontano. Colpiscilo col Revolver del tiratore per farlo esplodere."
   },
   "OctaviaShotgun_4": {
     "localized_name": "Fucile a canna liscia sparanuclei",
-    "description": "[Collaborazione con ULTRAKILL] Un fucila a canna liscia che continua a fare fuoco senza bisogno di ricaricare, grazie all'energia termica. Lancia una sfera mentre è equipaggiato per lanciare un nucleo, poi colpiscilo col Revolver del tiratore per farlo esplodere."
+    "description": "[Collaborazione con ULTRAKILL] Un fucila a canna liscia che continua a fare fuoco grazie all'energia termica. Lancia una sfera mentre è equipaggiato per lanciare un nucleo. Tieni premuto per scagliarlo più lontano. Colpiscilo col Revolver del tiratore per farlo esplodere."
   },
   "OctaviaShotgun_5": {
     "localized_name": "Fucile a canna liscia sparanuclei",
-    "description": "[Collaborazione con ULTRAKILL] Un fucila a canna liscia che continua a fare fuoco senza bisogno di ricaricare, grazie all'energia termica. Lancia una sfera mentre è equipaggiato per lanciare un nucleo, poi colpiscilo col Revolver del tiratore per farlo esplodere."
+    "description": "[Collaborazione con ULTRAKILL] Un fucila a canna liscia che continua a fare fuoco grazie all'energia termica. Lancia una sfera mentre è equipaggiato per lanciare un nucleo. Tieni premuto per scagliarlo più lontano. Colpiscilo col Revolver del tiratore per farlo esplodere."
   },
   "OctopusGirl_Takoyaki": {
     "localized_name": "Takoyaki di Gloopie",
@@ -6831,6 +6911,10 @@
     "localized_name": "Lancia di Lily",
     "description": "L'amata lancia di Lily. Forgiata per punire chi non tratta i Pal col dovuto rispetto."
   },
+  "Spear_ForestBoss_5": {
+    "localized_name": "Lancia di Lily",
+    "description": "L'amata lancia di Lily. Forgiata per punire chi non tratta i Pal col dovuto rispetto."
+  },
   "Spear_QueenBee": {
     "localized_name": "Scettro di Elizabee",
     "description": "Lo scettro di Elizabee, modificato per l'uso umano. Emana l'aura maestosa della sovrana."
@@ -6877,7 +6961,7 @@
   },
   "StainlessSteel": {
     "localized_name": "Exolite",
-    "description": "Lega composta da Cromite, Lingotto di metallo e Exoquarzo. Si può usare per costruire equipaggiamenti e strutture."
+    "description": "Lega composta da Cromite, Minerale metallico e Exoquarzo. Si può usare per costruire equipaggiamenti e strutture."
   },
   "StatusPointResetSan": {
     "localized_name": "Farmaco dell'oblio",
@@ -7016,6 +7100,22 @@
     "description": "Zucchero filato che puoi ottenere da Woolipop. Si scioglie in bocca diffondendo la sua dolcezza."
   },
   "Sword": {
+    "localized_name": "Spada",
+    "description": "Spada per il combattimento ravvicinato. Ha una capacità di taglio incredibile! Più ti avvicini al nemico, più diventa pericolosa."
+  },
+  "Sword_2": {
+    "localized_name": "Spada",
+    "description": "Spada per il combattimento ravvicinato. Ha una capacità di taglio incredibile! Più ti avvicini al nemico, più diventa pericolosa."
+  },
+  "Sword_3": {
+    "localized_name": "Spada",
+    "description": "Spada per il combattimento ravvicinato. Ha una capacità di taglio incredibile! Più ti avvicini al nemico, più diventa pericolosa."
+  },
+  "Sword_4": {
+    "localized_name": "Spada",
+    "description": "Spada per il combattimento ravvicinato. Ha una capacità di taglio incredibile! Più ti avvicini al nemico, più diventa pericolosa."
+  },
+  "Sword_5": {
     "localized_name": "Spada",
     "description": "Spada per il combattimento ravvicinato. Ha una capacità di taglio incredibile! Più ti avvicini al nemico, più diventa pericolosa."
   },
