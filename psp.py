@@ -9,6 +9,7 @@ from fastapi.responses import FileResponse, RedirectResponse
 from palworld_save_pal.db.bootstrap import create_db_and_tables
 from palworld_save_pal.ws.manager import ConnectionManager
 
+from palworld_save_pal.api.convert import router as convert_router
 from palworld_save_pal.utils.logging_config import create_logger, setup_logging
 
 PORT = 5174
@@ -18,6 +19,7 @@ logger = create_logger(__name__)
 
 # Initialize the FastAPI app
 app = FastAPI(swagger_ui_parameters={"syntaxHighlight.theme": "monokai"})
+app.include_router(convert_router)
 
 manager = ConnectionManager()
 
@@ -25,7 +27,7 @@ manager = ConnectionManager()
 @app.middleware("http")
 async def static_files_middleware(request: Request, call_next):
     path = request.url.path
-    if path.startswith("/ws"):
+    if path.startswith("/ws") or path.startswith("/api"):
         response = await call_next(request)
         return response
 

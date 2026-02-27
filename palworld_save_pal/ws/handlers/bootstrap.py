@@ -58,6 +58,7 @@ from palworld_save_pal.ws.messages import (
     HealAllPalsMessage,
     HealPalsMessage,
     ImportPresetMessage,
+    ConvertSavFileMessage,
     MessageType,
     MovePalMessage,
     NukePresetsMessage,
@@ -683,5 +684,13 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": RequestGpsMessage,
             "handler_func": gps_handler.request_gps_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.CONVERT_SAV_FILE.value,
+        {
+            "message_class": ConvertSavFileMessage,
+            "handler_func": local_file_handler.convert_sav_file,
         },
     )

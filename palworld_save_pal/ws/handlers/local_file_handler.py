@@ -1,3 +1,4 @@
+import base64
 import os
 from pathlib import Path
 import time
@@ -13,6 +14,7 @@ from palworld_save_pal.utils.gamepass.container_types import (
     ContainerIndex,
 )
 from palworld_save_pal.ws.messages import (
+    ConvertSavFileMessage,
     MessageType,
     RenameWorldMessage,
     SaveModdedSaveMessage,
@@ -385,4 +387,19 @@ async def rename_world_handler(message: RenameWorldMessage, ws: WebSocket):
         MessageType.RENAME_WORLD,
         f"World renamed from '{old_world_name}' to '{new_world_name}'",
     )
+    await ws.send_json(response)
+
+
+async def convert_sav_file(message: ConvertSavFileMessage, ws: WebSocket):
+    file_data = bytes(message.data.file_data)
+    target_type = message.data.target_type
+    logger.debug("Converting SAV file to %s", target_type)
+    if target_type == "json":
+        data = SaveFile().convert_sav_file_to_json(file_data)
+        response = build_response(MessageType.CONVERT_SAV_FILE, data)
+    else:
+        data = SaveFile().convert_json_to_sav_file(file_data)
+        encoded_data = base64.b64encode(data).decode("utf-8")
+        response = build_response(MessageType.CONVERT_SAV_FILE, encoded_data)
+
     await ws.send_json(response)

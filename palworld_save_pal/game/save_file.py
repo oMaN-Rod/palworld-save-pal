@@ -75,6 +75,12 @@ def skip_decode(reader: FArchiveReader, type_name: str, size: int, path: str):
     return value
 
 
+def _ensure_bytes(value):
+    if isinstance(value, str):
+        return bytes.fromhex(value)
+    return value
+
+
 def skip_encode(writer: FArchiveWriter, property_type: str, properties: dict) -> int:
     if "skip_type" not in properties:
         if (
@@ -92,24 +98,27 @@ def skip_encode(writer: FArchiveWriter, property_type: str, properties: dict) ->
         del properties["skip_type"]
         writer.fstring(properties["array_type"])
         writer.optional_guid(properties.get("id", None))
-        writer.write(properties["value"])
-        return len(properties["value"])
+        data = _ensure_bytes(properties["value"])
+        writer.write(data)
+        return len(data)
     elif property_type == "MapProperty":
         del properties["custom_type"]
         del properties["skip_type"]
         writer.fstring(properties["key_type"])
         writer.fstring(properties["value_type"])
         writer.optional_guid(properties.get("id", None))
-        writer.write(properties["value"])
-        return len(properties["value"])
+        data = _ensure_bytes(properties["value"])
+        writer.write(data)
+        return len(data)
     elif property_type == "StructProperty":
         del properties["custom_type"]
         del properties["skip_type"]
         writer.fstring(properties["struct_type"])
         writer.guid(properties["struct_id"])
         writer.optional_guid(properties.get("id", None))
-        writer.write(properties["value"])
-        return len(properties["value"])
+        data = _ensure_bytes(properties["value"])
+        writer.write(data)
+        return len(data)
     else:
         raise ValueError(
             f"Expected ArrayProperty or MapProperty or StructProperty, got {property_type}"
@@ -864,6 +873,26 @@ class SaveFile(BaseModel):
         self._gvas_file = gvas_file
         self._get_file_size(data)
         return self
+
+    def convert_sav_file_to_json(self, data: bytes, minify=True, allow_nan=True):
+        logger.info("Converting to JSON")
+        raw_gvas, _ = decompress_sav_to_gvas(data)
+        gvas_file = GvasFile.read(
+            raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
+        )
+        return json.dumps(
+            gvas_file.dump(),
+            indent=None if minify else "\t",
+            cls=CustomEncoder,
+            allow_nan=allow_nan,
+        )
+
+    def convert_json_to_sav_file(self, data: bytes) -> bytes:
+        logger.info("Converting JSON to SAV")
+        gvas_file = GvasFile.load(json.loads(data))
+        raw_gvas = gvas_file.write(CUSTOM_PROPERTIES)
+        sav_data = compress_gvas_to_sav(raw_gvas, 0x31)
+        return sav_data
 
     def pal_count(self):
         return len(self._pals)

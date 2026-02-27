@@ -12,6 +12,14 @@ export default defineConfig({
 		tailwindcss(),
 		sveltekit()
 	],
+	server: {
+		proxy: {
+			'/api': {
+				target: 'http://localhost:5174',
+				changeOrigin: true
+			}
+		}
+	},
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}', 'static/**/*.{png,json}']
 	}

@@ -41,6 +41,7 @@ dependencies = [
     "zstandard==0.23.0",
     "palworld-save-tools @ git+https://github.com/oMaN-Rod/palworld-save-tools.git@main",
     "PyGObject==3.52.3; sys_platform == 'linux'",
+    "python-multipart>=0.0.22",
 ]
 
 [tool.uv]

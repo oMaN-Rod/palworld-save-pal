@@ -13,6 +13,7 @@ import SectionHeader from './section-header/SectionHeader.svelte';
 import Select from './select/Select.svelte';
 import TooltipButton from './tooltip-button/TooltipButton.svelte';
 import Tooltip from './tooltip/Tooltip.svelte';
+import Monaco from './monaco/Monaco.svelte';
 
 export {
 	Card,
@@ -28,6 +29,7 @@ export {
 	Progress,
 	SectionHeader,
 	Select,
+	Monaco,
 	Tooltip,
 	TooltipButton
 };

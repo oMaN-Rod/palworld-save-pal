@@ -15,7 +15,8 @@
 		Database,
 		Globe,
 		ChevronsRight,
-		ChevronsLeft
+		ChevronsLeft,
+		NotebookPen
 	} from 'lucide-svelte';
 
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
@@ -34,6 +35,7 @@
 
 	const activeTile = $derived.by(() => {
 		if (page.url.pathname.startsWith('/edit')) return 'edit';
+		if (page.url.pathname.startsWith('/editor')) return 'editor';
 		if (page.url.pathname.startsWith('/file')) return 'file';
 		if (page.url.pathname.startsWith('/upload')) return 'upload';
 		if (page.url.pathname.startsWith('/worldmap')) return 'map';
@@ -191,6 +193,15 @@
 				<Bug />
 			</Navigation.Tile>
 		{/if}
+		<Navigation.Tile
+			labelExpanded={m.editor()}
+			title={m.editor()}
+			id="editor"
+			href="/editor"
+			active="bg-secondary-500"
+		>
+			<NotebookPen />
+		</Navigation.Tile>
 	{/snippet}
 	{#snippet footer()}
 		{#if PUBLIC_DESKTOP_MODE === 'true'}

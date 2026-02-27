@@ -133,6 +133,7 @@ class MessageType(str, Enum):
 
     # Utility
     OPEN_FOLDER = "open_folder"
+    CONVERT_SAV_FILE = "convert_sav_file"
 
 
 class AddPalData(BaseModel):
@@ -687,3 +688,13 @@ class OpenFolderData(BaseModel):
 class OpenFolderMessage(BaseMessage):
     type: str = MessageType.OPEN_FOLDER.value
     data: OpenFolderData
+
+
+class ConvertSavFileData(BaseModel):
+    file_data: List[int]
+    target_type: str  # e.g., "sav", "json"
+
+
+class ConvertSavFileMessage(BaseMessage):
+    type: str = MessageType.CONVERT_SAV_FILE.value
+    data: ConvertSavFileData

@@ -94,7 +94,8 @@ export enum MessageType {
 	GET_GPS_RESPONSE = 'get_gps_response',
 	GET_MISSIONS = 'get_missions',
 
-	OPEN_FOLDER = 'open_folder'
+	OPEN_FOLDER = 'open_folder',
+	CONVERT_SAV_FILE = 'convert_sav_file',
 }
 
 interface UpdateSaveFileData {

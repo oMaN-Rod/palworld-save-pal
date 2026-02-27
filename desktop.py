@@ -16,6 +16,7 @@ import psutil
 import argparse
 from typing import Any
 
+from palworld_save_pal.api.convert import router as convert_router
 from palworld_save_pal.db.bootstrap import create_db_and_tables
 from palworld_save_pal.server_thread import ServerThread
 from palworld_save_pal.utils.file_manager import FileManager, STEAM_ROOT, GAMEPASS_ROOT
@@ -29,6 +30,7 @@ from palworld_save_pal.state import get_app_state
 logger = create_logger(__name__)
 
 app = FastAPI(swagger_ui_parameters={"syntaxHighlight.theme": "monokai"})
+app.include_router(convert_router)
 manager = ConnectionManager()
 
 app_state = get_app_state()
@@ -37,7 +39,7 @@ app_state = get_app_state()
 @app.middleware("http")
 async def static_files_middleware(request: Request, call_next):
     path = request.url.path
-    if path.startswith("/ws"):
+    if path.startswith("/ws") or path.startswith("/api"):
         response = await call_next(request)
         return response
 
