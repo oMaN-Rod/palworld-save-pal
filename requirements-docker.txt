@@ -35,3 +35,4 @@ uvicorn==0.32.1
 websockets==15.0.1
 zstandard==0.23.0
 git+https://github.com/oMaN-Rod/palworld-save-tools.git@main
+python-multipart
