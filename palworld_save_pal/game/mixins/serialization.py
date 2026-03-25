@@ -14,6 +14,7 @@ from palworld_save_tools.paltypes import (
 )
 
 from palworld_save_pal.game.gvas_codec import CUSTOM_PROPERTIES
+from palworld_save_pal.utils.file_io import atomic_write, atomic_write_text
 from palworld_save_pal.utils.logging_config import create_logger
 
 logger = create_logger(__name__)
@@ -144,15 +145,14 @@ class SerializationMixin:
         logger.info(
             "Converting %s to JSON, saving to %s", self.level_sav_path, output_path
         )
-        with open(output_path, "w", encoding="utf8") as f:
-            indent = None if minify else "\t"
-            json.dump(
-                self._gvas_file.dump(),
-                f,
-                indent=indent,
-                cls=CustomEncoder,
-                allow_nan=allow_nan,
-            )
+        indent = None if minify else "\t"
+        text = json.dumps(
+            self._gvas_file.dump(),
+            indent=indent,
+            cls=CustomEncoder,
+            allow_nan=allow_nan,
+        )
+        atomic_write_text(output_path, text)
 
     def to_level_sav_file(self, output_path):
         logger.info(
@@ -160,8 +160,7 @@ class SerializationMixin:
         )
         gvas = copy.deepcopy(self._gvas_file)
         sav_file = compress_gvas_to_sav(gvas.write(CUSTOM_PROPERTIES), 0x31)
-        with open(output_path, "wb") as f:
-            f.write(sav_file)
+        atomic_write(output_path, sav_file)
 
     def to_level_meta_sav_file(self, output_path):
         if not self._level_meta_gvas_file:
@@ -170,8 +169,7 @@ class SerializationMixin:
         sav_file = compress_gvas_to_sav(
             self._level_meta_gvas_file.write(CUSTOM_PROPERTIES), 0x31
         )
-        with open(output_path, "wb") as f:
-            f.write(sav_file)
+        atomic_write(output_path, sav_file)
 
     def to_gps_save_file(self, output_path: str) -> None:
         if not self._gps_gvas_file:
@@ -182,8 +180,7 @@ class SerializationMixin:
             gvas.write(CUSTOM_PROPERTIES),
             0x31,
         )
-        with open(output_path, "wb") as f:
-            f.write(sav_file)
+        atomic_write(output_path, sav_file)
 
     def to_player_sav_files(self, output_path: str) -> None:
         logger.info("Converting player save files to SAV, saving to %s", output_path)
@@ -193,12 +190,10 @@ class SerializationMixin:
                 0x31,
             )
             uid = str(uid).replace("-", "")
-            with open(os.path.join(output_path, f"{uid}.sav"), "wb") as f:
-                f.write(sav_file)
+            atomic_write(os.path.join(output_path, f"{uid}.sav"), sav_file)
             if player_files.dps:
                 dps_sav_file = compress_gvas_to_sav(
                     player_files.dps.write(CUSTOM_PROPERTIES),
                     0x31,
                 )
-                with open(os.path.join(output_path, f"{uid}_dps.sav"), "wb") as f_dps:
-                    f_dps.write(dps_sav_file)
+                atomic_write(os.path.join(output_path, f"{uid}_dps.sav"), dps_sav_file)
