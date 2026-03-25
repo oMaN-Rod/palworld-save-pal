@@ -5,6 +5,7 @@
 	import { c } from '$lib/utils/commonTranslations';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { activeSkillsData, itemsData, palsData, passiveSkillsData } from '$lib/data';
+	import { isSkillAvailableForCharacter } from '$lib/utils/skillFilters';
 	import { getAppState } from '$states';
 	import { cn } from '$theme';
 	import {
@@ -100,15 +101,7 @@
 	});
 	const activeSkillOptions: SelectOption[] = $derived(
 		Object.values(activeSkillsData.activeSkills)
-			.filter((skill) => {
-				if (skill.id.toLowerCase().includes(`unique_${eggConfig.character_id.toLowerCase()}`)) {
-					return true;
-				}
-				if (!skill.id.toLowerCase().includes('unique_')) {
-					return true;
-				}
-				return false;
-			})
+			.filter((skill) => isSkillAvailableForCharacter(skill.id, eggConfig.character_id))
 			.filter(
 				(aSkill) => !Object.values(eggConfig.active_skills).some((skill) => skill === aSkill.id)
 			)
@@ -120,15 +113,7 @@
 	);
 	const learnedSkillsOptions: SelectOption[] = $derived(
 		Object.values(activeSkillsData.activeSkills)
-			.filter((skill) => {
-				if (skill.id.toLowerCase().includes(`unique_${eggConfig.character_id.toLowerCase()}`)) {
-					return true;
-				}
-				if (!skill.id.toLowerCase().includes('unique_')) {
-					return true;
-				}
-				return false;
-			})
+			.filter((skill) => isSkillAvailableForCharacter(skill.id, eggConfig.character_id))
 			.filter(
 				(aSkill) => !Object.values(eggConfig.learned_skills).some((skill) => skill === aSkill.id)
 			)

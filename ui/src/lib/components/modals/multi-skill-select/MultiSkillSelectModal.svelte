@@ -3,6 +3,7 @@
 	import { type Pal, type SelectOption, type SkillType } from '$types';
 	import { Save, X, Delete, Trash, Plus } from 'lucide-svelte';
 	import { activeSkillsData, passiveSkillsData } from '$lib/data';
+	import { isSkillAvailableForCharacter } from '$lib/utils/skillFilters';
 	import { ActiveSkillOption, PassiveSkillOption } from '$components';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
@@ -23,15 +24,7 @@
 	const selectOptions: SelectOption[] = $derived.by(() => {
 		if (type === 'Active') {
 			return Object.values(activeSkillsData.activeSkills)
-				.filter((skill) => {
-					if (skill.id.toLowerCase().includes(`unique_${pal.character_key.toLowerCase()}`)) {
-						return true;
-					}
-					if (!skill.id.toLowerCase().includes('unique_')) {
-						return true;
-					}
-					return false;
-				})
+				.filter((skill) => isSkillAvailableForCharacter(skill.id, pal.character_key))
 				.filter((aSkill) => !Object.values(pal.active_skills).some((skill) => skill === aSkill.id))
 				.filter((aSkill) => !values.some((v) => v === aSkill.id))
 				.sort((a, b) => a.details.element.localeCompare(b.details.element))

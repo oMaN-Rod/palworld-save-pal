@@ -5,6 +5,7 @@
 	import { activeSkillsData, elementsData, palsData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
+	import { isSkillAvailableForCharacter } from '$lib/utils/skillFilters';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
@@ -54,16 +55,7 @@
 		const elementSkills = activeSkills
 			.filter((skill) => {
 				const matchesElement = palData.element_types.some((type) => skill.details.element === type);
-				if (
-					matchesElement &&
-					skill.id.toLowerCase().includes(`unique_${pal.character_key.toLowerCase()}`)
-				) {
-					return true;
-				}
-				if (matchesElement && !skill.id.toLowerCase().includes('unique_')) {
-					return true;
-				}
-				return false;
+				return matchesElement && isSkillAvailableForCharacter(skill.id, pal.character_key);
 			})
 			.map((item) => item.id)
 			.filter((skillId) => !learnedSkills.some((skill) => skill.id === skillId))
