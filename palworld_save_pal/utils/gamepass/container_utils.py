@@ -6,7 +6,7 @@ import uuid
 from pathlib import Path
 from typing import Dict, List, Optional
 
-from palworld_save_pal.game.save_file import SaveFile
+from palworld_save_pal.game.save_manager import SaveManager
 from palworld_save_pal.utils.gamepass.container_types import (
     FILETIME,
     Container,
@@ -222,11 +222,11 @@ def copy_container(
     for file in source_files:
         new_file_uuid = uuid.uuid4()
         if key == "LevelMeta":
-            level_meta = SaveFile().load_level_meta(file.data)
+            level_meta = SaveManager().load_level_meta(file.data)
             level_meta.properties["SaveData"]["value"]["WorldName"]["value"] = (
                 world_name
             )
-            file.data = SaveFile().sav(level_meta)
+            file.data = SaveManager().sav(level_meta)
             logger.debug("Updated world name in LevelMeta: %s", world_name)
         elif "Player" in key and player_data:
             file.data = player_data

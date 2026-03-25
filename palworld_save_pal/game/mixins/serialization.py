@@ -1,0 +1,204 @@
+import copy
+import json
+import os
+from typing import Any, Dict, Optional
+from uuid import UUID
+
+from palworld_save_tools.gvas import GvasFile
+from palworld_save_tools.json_tools import CustomEncoder
+from palworld_save_tools.palsav import compress_gvas_to_sav, decompress_sav_to_gvas
+from palworld_save_tools.paltypes import (
+    DISABLED_PROPERTIES,
+    PALWORLD_CUSTOM_PROPERTIES,
+    PALWORLD_TYPE_HINTS,
+)
+
+from palworld_save_pal.game.gvas_codec import CUSTOM_PROPERTIES
+from palworld_save_pal.utils.logging_config import create_logger
+
+logger = create_logger(__name__)
+
+
+class SerializationMixin:
+    def get_json(self, minify=False, allow_nan=True):
+        logger.info("Converting %s to JSON", self.level_sav_path)
+        return json.dumps(
+            self._gvas_file.dump(),
+            indent=None if minify else "\t",
+            cls=CustomEncoder,
+            allow_nan=allow_nan,
+        )
+
+    def get_dict(self):
+        logger.info("Converting %s to dict", self.level_sav_path)
+        return self._gvas_file.dump()
+
+    def load_json(self, data: bytes):
+        logger.info("Loading %s as JSON", self.level_sav_path)
+        self._gvas_file = GvasFile.load(json.loads(data))
+        return self
+
+    def load_level_meta(self, data: bytes):
+        logger.info("Loading %s as GVAS", self.level_sav_path)
+        raw_gvas, _ = decompress_sav_to_gvas(data)
+        custom_properties = {
+            k: v
+            for k, v in PALWORLD_CUSTOM_PROPERTIES.items()
+            if k not in DISABLED_PROPERTIES
+        }
+        gvas_file = GvasFile.read(
+            raw_gvas, PALWORLD_TYPE_HINTS, custom_properties, allow_nan=True
+        )
+        self._level_meta_gvas_file = gvas_file
+        return self._level_meta_gvas_file
+
+    def load_level_sav(self, data: bytes):
+        import time
+
+        logger.info("Loading %s as GVAS", self.level_sav_path)
+        start_time = time.perf_counter()
+        raw_gvas, _ = decompress_sav_to_gvas(data)
+        logger.info(f"Decompressed in {time.perf_counter() - start_time} seconds")
+        gvas_start_time = time.perf_counter()
+        gvas_file = GvasFile.read(
+            raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
+        )
+        logger.info(
+            f"GvasFile read in {time.perf_counter() - gvas_start_time:.2f} seconds"
+        )
+        self._gvas_file = gvas_file
+        self._get_file_size(data)
+        return self
+
+    def convert_sav_file_to_json(self, data: bytes, minify=True, allow_nan=True):
+        logger.info("Converting to JSON")
+        raw_gvas, _ = decompress_sav_to_gvas(data)
+        gvas_file = GvasFile.read(
+            raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
+        )
+        return json.dumps(
+            gvas_file.dump(),
+            indent=None if minify else "\t",
+            cls=CustomEncoder,
+            allow_nan=allow_nan,
+        )
+
+    def convert_json_to_sav_file(self, data: bytes) -> bytes:
+        logger.info("Converting JSON to SAV")
+        gvas_file = GvasFile.load(json.loads(data))
+        raw_gvas = gvas_file.write(CUSTOM_PROPERTIES)
+        sav_data = compress_gvas_to_sav(raw_gvas, 0x31)
+        return sav_data
+
+    def sav(self, gvas_file: GvasFile = None) -> bytes:
+        logger.info("Converting %s to SAV", self.level_sav_path)
+        target_gvas = gvas_file if gvas_file else self._gvas_file
+        gvas = copy.deepcopy(target_gvas)
+        return compress_gvas_to_sav(gvas.write(CUSTOM_PROPERTIES), 0x31)
+
+    def player_savs(self) -> Dict[UUID, bytes]:
+        logger.info("Converting player save files to SAV", len(self._player_gvas_files))
+        return {
+            uid: compress_gvas_to_sav(
+                self._player_gvas_files[uid].sav.write(CUSTOM_PROPERTIES),
+                0x31,
+            )
+            for uid in self._player_gvas_files
+        }
+
+    def player_gvas_files(self) -> Dict[UUID, Dict[str, Optional[bytes]]]:
+        logger.info(
+            "Converting player save files to SAV: %s", len(self._player_gvas_files)
+        )
+        return {
+            uid: {
+                "sav": compress_gvas_to_sav(
+                    files.sav.write(CUSTOM_PROPERTIES),
+                    0x31,
+                ),
+                "dps": (
+                    compress_gvas_to_sav(
+                        files.dps.write(CUSTOM_PROPERTIES),
+                        0x31,
+                    )
+                    if files.dps
+                    else None
+                ),
+            }
+            for uid, files in self._player_gvas_files.items()
+        }
+
+    def gps_sav(self) -> Optional[bytes]:
+        if not self._gps_gvas_file:
+            return None
+        logger.info("Converting GlobalPalStorage to SAV")
+        gvas = copy.deepcopy(self._gps_gvas_file)
+        return compress_gvas_to_sav(gvas.write(CUSTOM_PROPERTIES), 0x31)
+
+    def to_json_file(
+        self,
+        output_path,
+        minify=False,
+        allow_nan=True,
+    ):
+        logger.info(
+            "Converting %s to JSON, saving to %s", self.level_sav_path, output_path
+        )
+        with open(output_path, "w", encoding="utf8") as f:
+            indent = None if minify else "\t"
+            json.dump(
+                self._gvas_file.dump(),
+                f,
+                indent=indent,
+                cls=CustomEncoder,
+                allow_nan=allow_nan,
+            )
+
+    def to_level_sav_file(self, output_path):
+        logger.info(
+            "Converting %s to SAV, saving to %s", self.level_sav_path, output_path
+        )
+        gvas = copy.deepcopy(self._gvas_file)
+        sav_file = compress_gvas_to_sav(gvas.write(CUSTOM_PROPERTIES), 0x31)
+        with open(output_path, "wb") as f:
+            f.write(sav_file)
+
+    def to_level_meta_sav_file(self, output_path):
+        if not self._level_meta_gvas_file:
+            raise ValueError("No LevelMeta GvasFile has been loaded.")
+        logger.info("Converting LevelMeta to SAV, saving to %s", output_path)
+        sav_file = compress_gvas_to_sav(
+            self._level_meta_gvas_file.write(CUSTOM_PROPERTIES), 0x31
+        )
+        with open(output_path, "wb") as f:
+            f.write(sav_file)
+
+    def to_gps_save_file(self, output_path: str) -> None:
+        if not self._gps_gvas_file:
+            raise ValueError("No GPS GvasFile has been loaded.")
+        logger.info("Converting GPS save file to SAV, saving to %s", output_path)
+        gvas = copy.deepcopy(self._gps_gvas_file)
+        sav_file = compress_gvas_to_sav(
+            gvas.write(CUSTOM_PROPERTIES),
+            0x31,
+        )
+        with open(output_path, "wb") as f:
+            f.write(sav_file)
+
+    def to_player_sav_files(self, output_path: str) -> None:
+        logger.info("Converting player save files to SAV, saving to %s", output_path)
+        for uid, player_files in self._player_gvas_files.items():
+            sav_file = compress_gvas_to_sav(
+                player_files.sav.write(CUSTOM_PROPERTIES),
+                0x31,
+            )
+            uid = str(uid).replace("-", "")
+            with open(os.path.join(output_path, f"{uid}.sav"), "wb") as f:
+                f.write(sav_file)
+            if player_files.dps:
+                dps_sav_file = compress_gvas_to_sav(
+                    player_files.dps.write(CUSTOM_PROPERTIES),
+                    0x31,
+                )
+                with open(os.path.join(output_path, f"{uid}_dps.sav"), "wb") as f_dps:
+                    f_dps.write(dps_sav_file)

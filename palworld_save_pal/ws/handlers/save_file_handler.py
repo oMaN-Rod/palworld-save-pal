@@ -9,7 +9,7 @@ import zipfile
 
 from fastapi import WebSocket
 
-from palworld_save_pal.game.save_file import SaveType
+from palworld_save_pal.game.gvas_codec import SaveType
 from palworld_save_pal.state import get_app_state
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.ws.messages import (

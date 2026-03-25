@@ -9,7 +9,8 @@ from palworld_save_pal.editor.settings import Settings
 from palworld_save_pal.game.guild import Guild
 from palworld_save_pal.game.pal import Pal
 from palworld_save_pal.game.player import Player
-from palworld_save_pal.game.save_file import SaveFile, SaveType
+from palworld_save_pal.game.save_manager import SaveManager
+from palworld_save_pal.game.gvas_codec import SaveType
 from palworld_save_pal.server_thread import ServerThread
 from palworld_save_pal.utils.file_manager import GamepassSaveData
 from palworld_save_pal.utils.logging_config import create_logger
@@ -18,7 +19,7 @@ logger = create_logger(__name__)
 
 
 class AppState(BaseModel):
-    save_file: Optional[SaveFile] = None
+    save_file: Optional[SaveManager] = None
     save_type: SaveType = SaveType.STEAM
     players: Dict[UUID, Player] = Field(default_factory=dict)
     guilds: Dict[UUID, Guild] = Field(default_factory=dict)
@@ -61,7 +62,7 @@ class AppState(BaseModel):
 
         await ws_callback("Loading Level.sav...")
 
-        self.save_file = await SaveFile(level_sav_path=sav_id).load_sav_files(
+        self.save_file = await SaveManager(level_sav_path=sav_id).load_sav_files(
             level_sav, player_file_refs, level_meta, ws_callback
         )
 

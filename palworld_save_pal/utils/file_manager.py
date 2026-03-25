@@ -8,7 +8,7 @@ from pydantic import BaseModel, ConfigDict
 import webview
 from palworld_save_pal.game.pal_objects import PalObjects
 from palworld_save_pal.game.player import PlayerGvasFiles
-from palworld_save_pal.game.save_file import SaveFile
+from palworld_save_pal.game.save_manager import SaveManager
 from palworld_save_pal.utils.gamepass.container_types import (
     Container,
     ContainerFileList,
@@ -237,7 +237,7 @@ class FileManager:
 
     @staticmethod
     def read_level_meta(data: bytes) -> Optional[str]:
-        level_meta = SaveFile().load_level_meta(data)
+        level_meta = SaveManager().load_level_meta(data)
         world_name = PalObjects.get_nested(
             level_meta.properties, "SaveData", "value", "WorldName", "value"
         )
