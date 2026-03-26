@@ -7,11 +7,19 @@
 	import { applyPalPreset, assetLoader, canBeAlpha, canBeLucky, formatNickname } from '$utils';
 	import { sendAndWait } from '$utils/websocketUtils';
 	import NumberFlow from '@number-flow/svelte';
-	import { Switch } from '@skeletonlabs/skeleton-svelte';
 	import { X, Check, Trash, Lock } from 'lucide-svelte';
-	import type { CheckedChangeDetails } from '@zag-js/switch';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
+	import PalTypeToggles from './PalTypeToggles.svelte';
+	import {
+		getNormalPals,
+		getHumanPals,
+		getPredatorPals,
+		getRaidPals,
+		getBossPals,
+		getSummonPals,
+		getOilRigPals
+	} from './palFilters';
 
 	let {
 		title,
@@ -40,7 +48,6 @@
 	let count = $state(0);
 	let selectedPresets: ExtendedPresetProfile[] = $state([]);
 
-	const specialCases = ['PREDATOR_', 'RAID_', 'GYM_', 'SUMMON_', '_OILRIG'];
 	const appState = getAppState();
 
 	const palPresets: ExtendedPresetProfile[] = $derived.by(() => {
@@ -52,6 +59,15 @@
 			}))
 			.sort((a, b) => a.name.localeCompare(b.name));
 	});
+
+	const normalPals = $derived(getNormalPals());
+	const humanPals = $derived(getHumanPals());
+	const predatorPals = $derived(getPredatorPals());
+	const raidPals = $derived(getRaidPals());
+	const bossPals = $derived(getBossPals());
+	const summonPals = $derived(getSummonPals());
+	const oilRigPals = $derived(getOilRigPals());
+
 	const palBoxPals = $derived(
 		Object.values(appState.selectedPlayer!.pals || {}).filter(
 			(p) => p.storage_id != appState.selectedPlayer!.otomo_container_id
@@ -75,80 +91,6 @@
 		}
 	});
 
-	const humanPals = $derived(
-		Object.entries(palsData.pals)
-			.filter((p) => !p[1].disabled)
-			.filter((p) => !p[1].is_pal)
-			.sort((a, b) => {
-				const indexA = (a[1] as PalData)?.pal_deck_index ?? Infinity;
-				const indexB = (b[1] as PalData)?.pal_deck_index ?? Infinity;
-				return indexA - indexB;
-			})
-	);
-	const normalPals = $derived(
-		Object.entries(palsData.pals)
-			.filter((p) => !p[1].disabled)
-			.filter((p) => {
-				return (
-					!specialCases.some((substring) => p[0].toUpperCase().includes(substring)) && p[1].is_pal
-				);
-			})
-			.sort((a, b) => {
-				const indexA = (a[1] as PalData)?.pal_deck_index ?? Infinity;
-				const indexB = (b[1] as PalData)?.pal_deck_index ?? Infinity;
-				return indexA - indexB;
-			})
-	);
-	const predatorPals = $derived(
-		Object.entries(palsData.pals)
-			.filter((p) => !p[1].disabled)
-			.filter((p) => p[0].toUpperCase().includes('PREDATOR_'))
-			.sort((a, b) => {
-				const indexA = (a[1] as PalData)?.pal_deck_index ?? Infinity;
-				const indexB = (b[1] as PalData)?.pal_deck_index ?? Infinity;
-				return indexA - indexB;
-			})
-	);
-	const raidPals = $derived(
-		Object.entries(palsData.pals)
-			.filter((p) => !p[1].disabled)
-			.filter((p) => p[0].toUpperCase().includes('RAID_'))
-			.sort((a, b) => {
-				const indexA = (a[1] as PalData)?.pal_deck_index ?? Infinity;
-				const indexB = (b[1] as PalData)?.pal_deck_index ?? Infinity;
-				return indexA - indexB;
-			})
-	);
-	const bossPals = $derived(
-		Object.entries(palsData.pals)
-			.filter((p) => !p[1].disabled)
-			.filter((p) => p[0].toUpperCase().includes('GYM_'))
-			.sort((a, b) => {
-				const indexA = (a[1] as PalData)?.pal_deck_index ?? Infinity;
-				const indexB = (b[1] as PalData)?.pal_deck_index ?? Infinity;
-				return indexA - indexB;
-			})
-	);
-	const summonPals = $derived(
-		Object.entries(palsData.pals)
-			.filter((p) => !p[1].disabled)
-			.filter((p) => p[0].toUpperCase().includes('SUMMON_'))
-			.sort((a, b) => {
-				const indexA = (a[1] as PalData)?.pal_deck_index ?? Infinity;
-				const indexB = (b[1] as PalData)?.pal_deck_index ?? Infinity;
-				return indexA - indexB;
-			})
-	);
-	const oilRigPals = $derived(
-		Object.entries(palsData.pals)
-			.filter((p) => !p[1].disabled)
-			.filter((p) => p[0].toUpperCase().includes('OILRIG_'))
-			.sort((a, b) => {
-				const indexA = (a[1] as PalData)?.pal_deck_index ?? Infinity;
-				const indexB = (b[1] as PalData)?.pal_deck_index ?? Infinity;
-				return indexA - indexB;
-			})
-	);
 	const totalRequiredSlots = $derived.by(() => {
 		let count = 0;
 		if (addNormalPals) count += normalPals.length;
@@ -163,9 +105,7 @@
 		return count;
 	});
 	const canAddPals = $derived.by(() => {
-		if (availablePalBoxSlots <= 0) {
-			return false;
-		}
+		if (availablePalBoxSlots <= 0) return false;
 		return totalRequiredSlots <= availablePalBoxSlots;
 	});
 
@@ -180,10 +120,20 @@
 		}
 	});
 
+	const toggles = $derived([
+		{ label: m.normal(), count: normalPals.length, checked: addNormalPals, onChange: (v: boolean) => (addNormalPals = v) },
+		{ label: m.lucky(), count: normalPals.length, checked: addLuckyPals, onChange: (v: boolean) => (addLuckyPals = v) },
+		{ label: m.alpha(), count: normalPals.length, checked: addAlphaPals, onChange: (v: boolean) => (addAlphaPals = v) },
+		{ label: m.boss(), count: bossPals.length, checked: addBossPals, onChange: (v: boolean) => (addBossPals = v) },
+		{ label: m.predator(), count: predatorPals.length, checked: addPredatorPals, onChange: (v: boolean) => (addPredatorPals = v) },
+		{ label: m.raid(), count: raidPals.length, checked: addRaidPals, onChange: (v: boolean) => (addRaidPals = v) },
+		{ label: m.summon(), count: summonPals.length, checked: addSummonPals, onChange: (v: boolean) => (addSummonPals = v) },
+		{ label: m.oil_rig(), count: oilRigPals.length, checked: addOilRigPals, onChange: (v: boolean) => (addOilRigPals = v) },
+		{ label: c.human, count: humanPals.length, checked: addHumanPals, onChange: (v: boolean) => (addHumanPals = v) }
+	]);
+
 	const handleApplyPalPreset = (pal: Record<string, any>) => {
-		if (!selectedPresets || selectedPresets.length === 0) {
-			return;
-		}
+		if (!selectedPresets || selectedPresets.length === 0) return;
 		const palData = palsData.getByKey(pal.character_key);
 		const palProfile =
 			selectedPresets.filter(
@@ -275,9 +225,7 @@
 				await addPal(character_id, nickname, palData.localized_name || character_id);
 			}
 			if (addLuckyPals) {
-				if (!canBeLucky(character_id)[1]) {
-					continue;
-				}
+				if (!canBeLucky(character_id)[1]) continue;
 				const pal = await addPal(character_id, nickname, palData.localized_name || character_id);
 				if (!pal) {
 					console.error(`Failed to add lucky pal for ${character_id}`);
@@ -287,9 +235,7 @@
 				pal.state = EntryState.MODIFIED;
 			}
 			if (addAlphaPals) {
-				if (!canBeAlpha(character_id)[1]) {
-					continue;
-				}
+				if (!canBeAlpha(character_id)[1]) continue;
 				const pal = await addPal(character_id, nickname, palData.localized_name || character_id);
 				if (!pal) {
 					console.error(`Failed to add alpha pal for ${character_id}`);
@@ -311,57 +257,15 @@
 		}
 	}
 
-	async function createTowerBosses() {
-		if (!addBossPals) {
-			return;
-		}
-		await createSpecialPalVariants(bossPals);
-	}
-
-	async function createPredatorPals() {
-		if (!addPredatorPals) {
-			return;
-		}
-		await createSpecialPalVariants(predatorPals);
-	}
-
-	async function createRaidPals() {
-		if (!addRaidPals) {
-			return;
-		}
-		await createSpecialPalVariants(raidPals);
-	}
-
-	async function createSummonPals() {
-		if (!addSummonPals) {
-			return;
-		}
-		await createSpecialPalVariants(summonPals);
-	}
-
-	async function createOilRigPals() {
-		if (!addOilRigPals) {
-			return;
-		}
-		await createSpecialPalVariants(oilRigPals);
-	}
-
-	async function createHumanPals() {
-		if (!addHumanPals) {
-			return;
-		}
-		await createSpecialPalVariants(humanPals);
-	}
-
 	async function handleConfirm() {
 		isBusy = true;
 		await createBasePalVariants();
-		await createPredatorPals();
-		await createRaidPals();
-		await createSummonPals();
-		await createOilRigPals();
-		await createHumanPals();
-		await createTowerBosses();
+		if (addPredatorPals) await createSpecialPalVariants(predatorPals);
+		if (addRaidPals) await createSpecialPalVariants(raidPals);
+		if (addSummonPals) await createSpecialPalVariants(summonPals);
+		if (addOilRigPals) await createSpecialPalVariants(oilRigPals);
+		if (addHumanPals) await createSpecialPalVariants(humanPals);
+		if (addBossPals) await createSpecialPalVariants(bossPals);
 		closeModal(true);
 	}
 
@@ -388,125 +292,7 @@
 		{:else}
 			<div>
 				<h6 class="h6">{m.type({ count: 2 })}</h6>
-				<div class="mt-2 grid grid-cols-2 gap-2 overflow-y-auto p-2">
-					<Tooltip
-						label={m.add_count_pals({ count: normalPals.length, type: m.normal(), pals: c.pals })}
-						baseClass="flex items-center space-x-2"
-					>
-						<Switch
-							name="Normal"
-							checked={addNormalPals}
-							onCheckedChange={(mode: CheckedChangeDetails) => {
-								addNormalPals = mode.checked;
-							}}
-						/>
-						<span>{m.normal()}</span>
-					</Tooltip>
-					<Tooltip
-						label={m.add_count_pals({ count: normalPals.length, type: m.lucky(), pals: c.pals })}
-						baseClass="flex items-center space-x-2"
-					>
-						<Switch
-							name="Normal"
-							checked={addLuckyPals}
-							onCheckedChange={(mode: CheckedChangeDetails) => {
-								addLuckyPals = mode.checked;
-							}}
-						/>
-						<span>{m.lucky()}</span>
-					</Tooltip>
-					<Tooltip
-						label={m.add_count_pals({ count: normalPals.length, type: m.alpha(), pals: c.pals })}
-						baseClass="flex items-center space-x-2"
-					>
-						<Switch
-							name="Alpha"
-							checked={addAlphaPals}
-							onCheckedChange={(mode: CheckedChangeDetails) => {
-								addAlphaPals = mode.checked;
-							}}
-						/>
-						<span>{m.alpha()}</span>
-					</Tooltip>
-					<Tooltip
-						label={m.add_count_pals({ count: bossPals.length, type: m.boss(), pals: c.pals })}
-						baseClass="flex items-center space-x-2"
-					>
-						<Switch
-							name="Boss"
-							checked={addBossPals}
-							onCheckedChange={(mode: CheckedChangeDetails) => {
-								addBossPals = mode.checked;
-							}}
-						/>
-						<span>{m.boss()}</span>
-					</Tooltip>
-					<Tooltip
-						label={m.add_count_pals({ count: predatorPals.length, type: m.predator(), pals: c.pals })}
-						baseClass="flex items-center space-x-2"
-					>
-						<Switch
-							name="Predator"
-							checked={addPredatorPals}
-							onCheckedChange={(mode: CheckedChangeDetails) => {
-								addPredatorPals = mode.checked;
-							}}
-						/>
-						<span>{m.predator()}</span>
-					</Tooltip>
-					<Tooltip
-						label={m.add_count_pals({ count: raidPals.length, type: m.raid(), pals: c.pals })}
-						baseClass="flex items-center space-x-2"
-					>
-						<Switch
-							name="Raid"
-							checked={addRaidPals}
-							onCheckedChange={(mode: CheckedChangeDetails) => {
-								addRaidPals = mode.checked;
-							}}
-						/>
-						<span>{m.raid()}</span>
-					</Tooltip>
-					<Tooltip
-						label={m.add_count_pals({ count: summonPals.length, type: m.summon(), pals: c.pals })}
-						baseClass="flex items-center space-x-2"
-					>
-						<Switch
-							name="Summon"
-							checked={addSummonPals}
-							onCheckedChange={(mode: CheckedChangeDetails) => {
-								addSummonPals = mode.checked;
-							}}
-						/>
-						<span>{m.summon()}</span>
-					</Tooltip>
-					<Tooltip
-						label={m.add_count_pals({ count: oilRigPals.length, type: m.oil_rig(), pals: c.pals })}
-						baseClass="flex items-center space-x-2"
-					>
-						<Switch
-							name="Oil Rig"
-							checked={addOilRigPals}
-							onCheckedChange={(mode: CheckedChangeDetails) => {
-								addOilRigPals = mode.checked;
-							}}
-						/>
-						<span>{m.oil_rig()}</span>
-					</Tooltip>
-					<Tooltip
-						label={m.add_count_pals({ count: humanPals.length, type: c.human, pals: c.pals })}
-						baseClass="flex items-center space-x-2"
-					>
-						<Switch
-							name="Human"
-							checked={addHumanPals}
-							onCheckedChange={(mode: CheckedChangeDetails) => {
-								addHumanPals = mode.checked;
-							}}
-						/>
-						<span>{c.human}</span>
-					</Tooltip>
-				</div>
+				<PalTypeToggles {toggles} />
 			</div>
 			<Card background="preset-filled-surface-200-800">
 				<h6 class="h6">{m.apply_presets()}</h6>
@@ -534,11 +320,17 @@
 									{@const palIcon = assetLoader.loadMenuImage(
 										preset.pal_preset.character_id as string
 									)}
-									<img src={palIcon} alt={preset.pal_preset.character_id} class="ml-2 h-8 w-8" />
+									<img
+										src={palIcon}
+										alt={preset.pal_preset.character_id}
+										class="ml-2 h-8 w-8"
+									/>
 									<Lock class="ml-2 h-4 w-4 text-red-500" />
 								{/if}
 								{#if preset.pal_preset?.lock_element}
-									{@const elementData = elementsData.getByKey(preset.pal_preset.element as string)}
+									{@const elementData = elementsData.getByKey(
+										preset.pal_preset.element as string
+									)}
 									{@const elementIcon = assetLoader.loadImage(
 										`${ASSET_DATA_PATH}/img/${elementData?.badge_icon}.webp`
 									)}
@@ -562,7 +354,9 @@
 									<Lock class="ml-2 h-4 w-4 text-red-500" />
 								{/if}
 								{#if preset.pal_preset?.lock_element}
-									{@const elementData = elementsData.getByKey(preset.pal_preset.element as string)}
+									{@const elementData = elementsData.getByKey(
+										preset.pal_preset.element as string
+									)}
 									{@const elementIcon = assetLoader.loadImage(
 										`${ASSET_DATA_PATH}/img/${elementData?.badge_icon}.webp`
 									)}
@@ -578,7 +372,9 @@
 
 	{#if canAddPals && !isBusy}
 		<div class="mt-1 flex w-full justify-end text-sm text-green-500">
-			<span class="font-bold">{m.ready_to_fill({ target, count: totalRequiredSlots, pals: c.pals })}</span>
+			<span class="font-bold"
+				>{m.ready_to_fill({ target, count: totalRequiredSlots, pals: c.pals })}</span
+			>
 		</div>
 	{:else if !canAddPals && !isBusy}
 		<div class="mt-1 flex w-full justify-end text-sm text-red-500">
