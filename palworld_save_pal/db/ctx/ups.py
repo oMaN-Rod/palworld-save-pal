@@ -355,6 +355,22 @@ class UPSService:
                 session.expunge(pal)
             return pal
 
+    _SYNCED_COLUMNS = {"character_id", "nickname", "level"}
+
+    @staticmethod
+    def _sync_pal_columns(pal: UPSPalModel, updates: Dict[str, Any]) -> None:
+        if "pal_data" in updates and isinstance(pal.pal_data, dict):
+            for col in UPSService._SYNCED_COLUMNS:
+                if col in pal.pal_data:
+                    setattr(pal, col, pal.pal_data[col])
+
+        updated_columns = UPSService._SYNCED_COLUMNS & set(updates.keys())
+        if updated_columns and "pal_data" not in updates and isinstance(pal.pal_data, dict):
+            pal_data_copy = dict(pal.pal_data)
+            for col in updated_columns:
+                pal_data_copy[col] = getattr(pal, col)
+            pal.pal_data = pal_data_copy
+
     @staticmethod
     def update_pal(pal_id: int, updates: Dict[str, Any]) -> Optional[UPSPalModel]:
         with Session(engine) as session:
@@ -366,6 +382,7 @@ class UPSService:
                 if hasattr(pal, key):
                     setattr(pal, key, value)
 
+            UPSService._sync_pal_columns(pal, updates)
             pal.updated_at = datetime.now(dt.timezone.utc)
             session.commit()
             session.refresh(pal)
