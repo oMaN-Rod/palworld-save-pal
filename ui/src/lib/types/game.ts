@@ -5,11 +5,21 @@ export interface GamePassContainer {
 	name: string;
 }
 
+export interface GamepassContainerInfo {
+	container_type: string;
+	seq: number;
+	last_modified: number;
+	size: number;
+	container_name: string;
+}
+
 export interface GamepassSave {
 	save_id: string;
 	world_name: string;
 	player_count: number;
-	containers: GamePassContainer[];
+	last_modified: number;
+	total_size: number;
+	containers: GamepassContainerInfo[];
 }
 
 export interface PlayerSummary {

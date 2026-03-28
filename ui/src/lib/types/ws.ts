@@ -96,6 +96,11 @@ export enum MessageType {
 
 	OPEN_FOLDER = 'open_folder',
 	CONVERT_SAV_FILE = 'convert_sav_file',
+	CONVERT_SAVE_FORMAT = 'convert_save_format',
+	SCAN_GAMEPASS_SAVES = 'scan_gamepass_saves',
+	DELETE_GAMEPASS_SAVE = 'delete_gamepass_save',
+	DELETE_GAMEPASS_PLAYER = 'delete_gamepass_player',
+	RENAME_GAMEPASS_WORLD = 'rename_gamepass_world',
 }
 
 interface UpdateSaveFileData {

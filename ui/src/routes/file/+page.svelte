@@ -8,7 +8,8 @@
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
 	import { cn } from '$theme';
-	import { GamepassSaveList, TextInputModal } from '$components';
+	import { GamepassBrowser, TextInputModal } from '$components';
+	import type { GamepassSave } from '$types';
 	import * as m from '$i18n/messages';
 	import { c, p } from '$lib/utils/commonTranslations';
 
@@ -61,6 +62,11 @@
 			disabled: false
 		}
 	]);
+
+	async function handleSelectGamepassSave(save: GamepassSave) {
+		await goto('/loading');
+		send(MessageType.SELECT_GAMEPASS_SAVE, save.save_id);
+	}
 
 	async function handleEditWorldName() {
 		// @ts-ignore
@@ -128,7 +134,11 @@
 				</Card>
 			</div>
 		{:else if appState.gamepassSaves && Object.keys(appState.gamepassSaves).length > 0}
-			<GamepassSaveList bind:saves={appState.gamepassSaves} />
+			<GamepassBrowser
+				saves={appState.gamepassSaves}
+				selectable={true}
+				onselect={handleSelectGamepassSave}
+			/>
 		{/if}
 	</div>
 </div>

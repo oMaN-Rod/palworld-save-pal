@@ -134,6 +134,11 @@ class MessageType(str, Enum):
     # Utility
     OPEN_FOLDER = "open_folder"
     CONVERT_SAV_FILE = "convert_sav_file"
+    CONVERT_SAVE_FORMAT = "convert_save_format"
+    SCAN_GAMEPASS_SAVES = "scan_gamepass_saves"
+    DELETE_GAMEPASS_SAVE = "delete_gamepass_save"
+    DELETE_GAMEPASS_PLAYER = "delete_gamepass_player"
+    RENAME_GAMEPASS_WORLD = "rename_gamepass_world"
 
 
 class AddPalData(BaseModel):
@@ -698,3 +703,48 @@ class ConvertSavFileData(BaseModel):
 class ConvertSavFileMessage(BaseMessage):
     type: str = MessageType.CONVERT_SAV_FILE.value
     data: ConvertSavFileData
+
+
+class ConvertSaveFormatData(BaseModel):
+    target_format: str  # "steam" or "gamepass"
+    source_path: Optional[str] = None  # For standalone conversion
+    output_path: Optional[str] = None  # For standalone conversion
+    save_id: Optional[str] = None  # For GamePass save selection
+
+
+class ConvertSaveFormatMessage(BaseMessage):
+    type: str = MessageType.CONVERT_SAVE_FORMAT.value
+    data: ConvertSaveFormatData
+
+
+class ScanGamepassSavesMessage(BaseMessage):
+    type: str = MessageType.SCAN_GAMEPASS_SAVES.value
+
+
+class DeleteGamepassSaveData(BaseModel):
+    save_id: str
+
+
+class DeleteGamepassSaveMessage(BaseMessage):
+    type: str = MessageType.DELETE_GAMEPASS_SAVE.value
+    data: DeleteGamepassSaveData
+
+
+class DeleteGamepassPlayerData(BaseModel):
+    save_id: str
+    player_id: str  # Player UUID (no dashes)
+
+
+class DeleteGamepassPlayerMessage(BaseMessage):
+    type: str = MessageType.DELETE_GAMEPASS_PLAYER.value
+    data: DeleteGamepassPlayerData
+
+
+class RenameGamepassWorldData(BaseModel):
+    save_id: str
+    new_name: str
+
+
+class RenameGamepassWorldMessage(BaseMessage):
+    type: str = MessageType.RENAME_GAMEPASS_WORLD.value
+    data: RenameGamepassWorldData

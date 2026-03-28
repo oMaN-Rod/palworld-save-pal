@@ -16,7 +16,8 @@
 		Globe,
 		ChevronsRight,
 		ChevronsLeft,
-		NotebookPen
+		NotebookPen,
+		Wrench
 	} from 'lucide-svelte';
 
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
@@ -36,6 +37,7 @@
 	const activeTile = $derived.by(() => {
 		if (page.url.pathname.startsWith('/edit')) return 'edit';
 		if (page.url.pathname.startsWith('/editor')) return 'editor';
+		if (page.url.pathname.startsWith('/tools')) return 'tools';
 		if (page.url.pathname.startsWith('/file')) return 'file';
 		if (page.url.pathname.startsWith('/upload')) return 'upload';
 		if (page.url.pathname.startsWith('/worldmap')) return 'map';
@@ -201,6 +203,15 @@
 			active="bg-secondary-500"
 		>
 			<NotebookPen />
+		</Navigation.Tile>
+		<Navigation.Tile
+			labelExpanded={m.tools()}
+			title={m.tools()}
+			id="tools"
+			href="/tools"
+			active="bg-secondary-500"
+		>
+			<Wrench />
 		</Navigation.Tile>
 	{/snippet}
 	{#snippet footer()}

@@ -4,6 +4,7 @@ from palworld_save_pal.ws.handlers import (
     active_skills_handler,
     app_state_handler,
     buildings_handler,
+    convert_handler,
     debug_handler,
     elements_handler,
     exp_handler,
@@ -59,7 +60,12 @@ from palworld_save_pal.ws.messages import (
     HealPalsMessage,
     ImportPresetMessage,
     ConvertSavFileMessage,
+    ConvertSaveFormatMessage,
+    DeleteGamepassPlayerMessage,
+    DeleteGamepassSaveMessage,
     MessageType,
+    RenameGamepassWorldMessage,
+    ScanGamepassSavesMessage,
     MovePalMessage,
     NukePresetsMessage,
     OpenInBrowserMessage,
@@ -692,5 +698,45 @@ def bootstrap(dispatcher: "MessageDispatcher"):
         {
             "message_class": ConvertSavFileMessage,
             "handler_func": local_file_handler.convert_sav_file,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.CONVERT_SAVE_FORMAT.value,
+        {
+            "message_class": ConvertSaveFormatMessage,
+            "handler_func": convert_handler.convert_save_format_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.SCAN_GAMEPASS_SAVES.value,
+        {
+            "message_class": ScanGamepassSavesMessage,
+            "handler_func": convert_handler.scan_gamepass_saves_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.DELETE_GAMEPASS_SAVE.value,
+        {
+            "message_class": DeleteGamepassSaveMessage,
+            "handler_func": convert_handler.delete_gamepass_save_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.DELETE_GAMEPASS_PLAYER.value,
+        {
+            "message_class": DeleteGamepassPlayerMessage,
+            "handler_func": convert_handler.delete_gamepass_player_handler,
+        },
+    )
+
+    dispatcher.register_handler(
+        MessageType.RENAME_GAMEPASS_WORLD.value,
+        {
+            "message_class": RenameGamepassWorldMessage,
+            "handler_func": convert_handler.rename_gamepass_world_handler,
         },
     )

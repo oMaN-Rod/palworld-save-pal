@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 import os
 from pathlib import Path
 import platform
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 import uuid
 from pydantic import BaseModel, ConfigDict
 import webview
@@ -46,10 +46,21 @@ GAMEPASS_ROOT = (
 )
 
 
+class GamepassContainerInfo(BaseModel):
+    container_type: str  # "Level", "LevelMeta", "Players-UUID", etc.
+    seq: int
+    last_modified: float  # Unix timestamp
+    size: int  # bytes
+    container_name: str
+
+
 class GamepassSaveData(BaseModel):
     save_id: str
     world_name: str
     player_count: int
+    last_modified: float = 0.0  # Unix timestamp of most recent container
+    total_size: int = 0  # Total size in bytes
+    containers: List[GamepassContainerInfo] = []  # ALL container versions
 
 
 class FileValidationResult(BaseModel):
@@ -249,21 +260,38 @@ class FileManager:
         saves: Dict[str, GamepassSaveData] = {}
 
         container_index: ContainerIndex = read_container_index(containers_path)
-        recent_containers: Dict[str, Dict[str, Container]] = {}
+        logger.info(
+            "Container index has %d containers", len(container_index.containers)
+        )
+
+        # Group ALL containers by save_id (not just latest)
+        all_containers_by_save: Dict[str, List[Container]] = {}
+        latest_containers: Dict[str, Dict[str, Container]] = {}
 
         for container in container_index.containers:
-            parts = container.container_name.split("-")
+            parts = container.container_name.split("-", 1)
             if len(parts) < 2:
+                logger.debug("Skipping container with no dash: %s", container.container_name)
                 continue
             save_id = parts[0]
-            if save_id not in recent_containers:
-                recent_containers[save_id] = container_index.get_save_containers(
+            if save_id not in all_containers_by_save:
+                all_containers_by_save[save_id] = []
+            all_containers_by_save[save_id].append(container)
+            if save_id not in latest_containers:
+                latest_containers[save_id] = container_index.get_save_containers(
                     save_id
                 )
 
-        for save_id, container in recent_containers.items():
-            level_meta_container = container.get("LevelMeta", None)
+        logger.info(
+            "Found %d unique save IDs: %s",
+            len(latest_containers),
+            list(latest_containers.keys()),
+        )
+
+        for save_id, latest in latest_containers.items():
+            level_meta_container = latest.get("LevelMeta", None)
             if level_meta_container is None:
+                logger.debug("Save %s has no LevelMeta container, skipping", save_id)
                 continue
 
             level_meta_dir = os.path.join(
@@ -274,17 +302,35 @@ class FileManager:
             world_name = "Unknown World"
 
             valid = False
-            for filename in os.listdir(level_meta_dir):
-                if filename.startswith("container."):
-                    logger.debug("Reading container file: %s", filename)
-                    with open(os.path.join(level_meta_dir, filename), "rb") as f:
-                        file_list = ContainerFileList.from_stream(f)
-                        if len(file_list.files) > 0:
-                            valid = True
-                            world_name = FileManager.read_level_meta(
-                                file_list.files[0].data
-                            )
-                    break
+            if not os.path.exists(level_meta_dir):
+                logger.warning(
+                    "LevelMeta directory not found for save %s: %s",
+                    save_id,
+                    level_meta_dir,
+                )
+                continue
+            try:
+                for filename in os.listdir(level_meta_dir):
+                    if filename.startswith("container."):
+                        logger.debug("Reading container file: %s", filename)
+                        with open(
+                            os.path.join(level_meta_dir, filename), "rb"
+                        ) as f:
+                            file_list = ContainerFileList.from_stream(f)
+                            if len(file_list.files) > 0:
+                                valid = True
+                                world_name = FileManager.read_level_meta(
+                                    file_list.files[0].data
+                                )
+                        break
+            except Exception as e:
+                logger.warning(
+                    "Failed to read LevelMeta for save %s: %s",
+                    save_id,
+                    e,
+                    exc_info=True,
+                )
+                continue
 
             if not valid:
                 continue
@@ -292,10 +338,36 @@ class FileManager:
             player_count = len(
                 [
                     c
-                    for c in container.values()
-                    if "Player" in c.container_name and "_dps" not in c.container_name
+                    for c in latest.values()
+                    if "Player" in c.container_name
+                    and "_dps" not in c.container_name
                 ]
             )
+
+            # Build container info list from ALL versions for this save
+            container_infos = []
+            all_for_save = all_containers_by_save.get(save_id, [])
+            for c in all_for_save:
+                suffix = c.container_name.split("-", 1)[1] if "-" in c.container_name else c.container_name
+                container_infos.append(
+                    GamepassContainerInfo(
+                        container_type=suffix,
+                        seq=c.seq,
+                        last_modified=c.mtime.to_timestamp(),
+                        size=c.size,
+                        container_name=c.container_name,
+                    )
+                )
+
+            # Sort by type then seq descending (newest first)
+            container_infos.sort(key=lambda x: (x.container_type, -x.seq))
+
+            # Compute aggregate stats from latest containers
+            last_modified = max(
+                (c.mtime.to_timestamp() for c in latest.values()), default=0.0
+            )
+            total_size = sum(c.size for c in latest.values())
+
             logger.debug(
                 "Found save: %s with world name: %s and %s players",
                 save_id,
@@ -306,6 +378,9 @@ class FileManager:
                 save_id=save_id,
                 world_name=world_name,
                 player_count=player_count,
+                last_modified=last_modified,
+                total_size=total_size,
+                containers=container_infos,
             )
 
         return saves

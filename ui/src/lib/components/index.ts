@@ -9,6 +9,7 @@ import StatusBadge from './badges/status-badge/StatusBadge.svelte';
 import WorkSuitabilities from './badges/work-suitabilities/WorkSuitabilities.svelte';
 import DebugButton from './debug-button/DebugButton.svelte';
 import Drawer from './drawer/Drawer.svelte';
+import GamepassBrowser from './gamepass-browser/GamepassBrowser.svelte';
 import GamepassSaveList from './gamepass-save-list/GamepassSaveList.svelte';
 import LabResearch from './guilds/LabResearch.svelte';
 import LabResearchControls from './guilds/LabResearchControls.svelte';
@@ -38,6 +39,7 @@ export {
 	ActiveSkillOption,
 	DebugButton,
 	Drawer,
+	GamepassBrowser,
 	GamepassSaveList,
 	ItemBadge,
 	LabResearch,

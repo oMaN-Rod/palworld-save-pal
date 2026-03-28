@@ -126,7 +126,8 @@ class ContainerFileList:
             # Read file data
             file_path = os.path.join(path, file_uuid.bytes_le.hex().upper())
             if not os.path.exists(file_path):
-                raise ContainerError(f"File does not exist: {file_path}")
+                logger.warning(f"File does not exist: {file_path}")
+                continue
 
             with open(file_path, "rb") as f:
                 file_data = f.read()

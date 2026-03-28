@@ -154,6 +154,14 @@ class SerializationMixin:
         )
         atomic_write_text(output_path, text)
 
+    def level_meta_sav(self) -> Optional[bytes]:
+        if not self._level_meta_gvas_file:
+            return None
+        logger.info("Converting LevelMeta to SAV bytes")
+        return compress_gvas_to_sav(
+            self._level_meta_gvas_file.write(CUSTOM_PROPERTIES), 0x31
+        )
+
     def to_level_sav_file(self, output_path):
         logger.info(
             "Converting %s to SAV, saving to %s", self.level_sav_path, output_path
