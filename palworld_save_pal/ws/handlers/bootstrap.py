@@ -30,6 +30,7 @@ from palworld_save_pal.ws.handlers import (
     work_suitability_handler,
     gps_handler,
     ups_handler,
+    server_handler,
 )
 from palworld_save_pal.ws.messages import (
     AddDpsPalMessage,
@@ -109,6 +110,20 @@ from palworld_save_pal.ws.messages import (
     RequestPlayerDetailsMessage,
     RequestGuildDetailsMessage,
     RequestGpsMessage,
+    # Server Management Messages
+    ListServersMessage,
+    GetServerMessage,
+    CreateServerMessage,
+    UpdateServerMessage,
+    DeleteServerMessage,
+    StartServerMessage,
+    StopServerMessage,
+    ServerApiCallMessage,
+    ListServerModsMessage,
+    ToggleServerModMessage,
+    InstallServerModMessage,
+    LoadServerSaveMessage,
+    GetServerStatsMessage,
 )
 
 if TYPE_CHECKING:
@@ -207,6 +222,20 @@ HANDLER_REGISTRY = [
     (MessageType.DELETE_UPS_TAG, DeleteUpsTagMessage, ups_handler.delete_ups_tag_handler),
     (MessageType.GET_UPS_STATS, GetUpsStatsMessage, ups_handler.get_ups_stats_handler),
     (MessageType.NUKE_UPS_PALS, NukeUpsPalsMessage, ups_handler.nuke_ups_pals_handler),
+    # Server Management
+    (MessageType.LIST_SERVERS, ListServersMessage, server_handler.list_servers_handler),
+    (MessageType.GET_SERVER, GetServerMessage, server_handler.get_server_handler),
+    (MessageType.CREATE_SERVER, CreateServerMessage, server_handler.create_server_handler),
+    (MessageType.UPDATE_SERVER, UpdateServerMessage, server_handler.update_server_handler),
+    (MessageType.DELETE_SERVER, DeleteServerMessage, server_handler.delete_server_handler),
+    (MessageType.START_SERVER, StartServerMessage, server_handler.start_server_handler),
+    (MessageType.STOP_SERVER, StopServerMessage, server_handler.stop_server_handler),
+    (MessageType.SERVER_API_CALL, ServerApiCallMessage, server_handler.server_api_call_handler),
+    (MessageType.LIST_SERVER_MODS, ListServerModsMessage, server_handler.list_server_mods_handler),
+    (MessageType.TOGGLE_SERVER_MOD, ToggleServerModMessage, server_handler.toggle_server_mod_handler),
+    (MessageType.INSTALL_SERVER_MOD, InstallServerModMessage, server_handler.install_server_mod_handler),
+    (MessageType.LOAD_SERVER_SAVE, LoadServerSaveMessage, server_handler.load_server_save_handler),
+    (MessageType.GET_SERVER_STATS, GetServerStatsMessage, server_handler.get_server_stats_handler),
 ]
 
 

@@ -101,6 +101,24 @@ export enum MessageType {
 	DELETE_GAMEPASS_SAVE = 'delete_gamepass_save',
 	DELETE_GAMEPASS_PLAYER = 'delete_gamepass_player',
 	RENAME_GAMEPASS_WORLD = 'rename_gamepass_world',
+
+	// Server Management
+	LIST_SERVERS = 'list_servers',
+	GET_SERVER = 'get_server',
+	CREATE_SERVER = 'create_server',
+	UPDATE_SERVER = 'update_server',
+	DELETE_SERVER = 'delete_server',
+	START_SERVER = 'start_server',
+	STOP_SERVER = 'stop_server',
+	SERVER_STATUS_UPDATE = 'server_status_update',
+	SERVER_API_CALL = 'server_api_call',
+	SERVER_API_RESPONSE = 'server_api_response',
+	SERVER_PLAYER_COUNT = 'server_player_count',
+	LIST_SERVER_MODS = 'list_server_mods',
+	TOGGLE_SERVER_MOD = 'toggle_server_mod',
+	INSTALL_SERVER_MOD = 'install_server_mod',
+	LOAD_SERVER_SAVE = 'load_server_save',
+	GET_SERVER_STATS = 'get_server_stats',
 }
 
 interface UpdateSaveFileData {

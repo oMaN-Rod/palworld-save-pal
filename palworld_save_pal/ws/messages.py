@@ -140,6 +140,24 @@ class MessageType(str, Enum):
     DELETE_GAMEPASS_PLAYER = "delete_gamepass_player"
     RENAME_GAMEPASS_WORLD = "rename_gamepass_world"
 
+    # Server Management
+    LIST_SERVERS = "list_servers"
+    GET_SERVER = "get_server"
+    CREATE_SERVER = "create_server"
+    UPDATE_SERVER = "update_server"
+    DELETE_SERVER = "delete_server"
+    START_SERVER = "start_server"
+    STOP_SERVER = "stop_server"
+    SERVER_STATUS_UPDATE = "server_status_update"
+    SERVER_API_CALL = "server_api_call"
+    SERVER_API_RESPONSE = "server_api_response"
+    SERVER_PLAYER_COUNT = "server_player_count"
+    LIST_SERVER_MODS = "list_server_mods"
+    TOGGLE_SERVER_MOD = "toggle_server_mod"
+    INSTALL_SERVER_MOD = "install_server_mod"
+    LOAD_SERVER_SAVE = "load_server_save"
+    GET_SERVER_STATS = "get_server_stats"
+
 
 class AddPalData(BaseModel):
     player_id: Optional[UUID] = None
@@ -748,3 +766,112 @@ class RenameGamepassWorldData(BaseModel):
 class RenameGamepassWorldMessage(BaseMessage):
     type: str = MessageType.RENAME_GAMEPASS_WORLD.value
     data: RenameGamepassWorldData
+
+
+# Server Management Message Classes
+class ListServersMessage(BaseMessage):
+    type: str = MessageType.LIST_SERVERS.value
+
+
+class ServerIdData(BaseModel):
+    server_id: int
+
+
+class GetServerMessage(BaseMessage):
+    type: str = MessageType.GET_SERVER.value
+    data: ServerIdData
+
+
+class CreateServerData(BaseModel):
+    name: str
+    container_name: str
+    image_name: str = "omanrod/psp-palworld-server"
+    game_port: int = 8211
+    query_port: int = 27015
+    rest_api_port: int = 8212
+    server_name: str = "PSP Palworld Server"
+    server_description: str = ""
+    server_password: str = ""
+    admin_password: str = "admin"
+    max_players: int = 16
+    env_vars: Dict[str, Any] = {}
+
+
+class CreateServerMessage(BaseMessage):
+    type: str = MessageType.CREATE_SERVER.value
+    data: CreateServerData
+
+
+class UpdateServerData(BaseModel):
+    server_id: int
+    updates: Dict[str, Any]
+
+
+class UpdateServerMessage(BaseMessage):
+    type: str = MessageType.UPDATE_SERVER.value
+    data: UpdateServerData
+
+
+class DeleteServerMessage(BaseMessage):
+    type: str = MessageType.DELETE_SERVER.value
+    data: ServerIdData
+
+
+class StartServerMessage(BaseMessage):
+    type: str = MessageType.START_SERVER.value
+    data: ServerIdData
+
+
+class StopServerMessage(BaseMessage):
+    type: str = MessageType.STOP_SERVER.value
+    data: ServerIdData
+
+
+class ServerApiCallData(BaseModel):
+    server_id: int
+    endpoint: str
+    method: str = "GET"
+    payload: Optional[Dict[str, Any]] = None
+
+
+class ServerApiCallMessage(BaseMessage):
+    type: str = MessageType.SERVER_API_CALL.value
+    data: ServerApiCallData
+
+
+class ListServerModsMessage(BaseMessage):
+    type: str = MessageType.LIST_SERVER_MODS.value
+    data: ServerIdData
+
+
+class ToggleServerModData(BaseModel):
+    server_id: int
+    mod_name: str
+    enabled: bool
+
+
+class ToggleServerModMessage(BaseMessage):
+    type: str = MessageType.TOGGLE_SERVER_MOD.value
+    data: ToggleServerModData
+
+
+class InstallServerModData(BaseModel):
+    server_id: int
+    mod_name: str
+    mod_data: str  # base64-encoded zip
+    mod_type: str = "ue4ss"
+
+
+class InstallServerModMessage(BaseMessage):
+    type: str = MessageType.INSTALL_SERVER_MOD.value
+    data: InstallServerModData
+
+
+class LoadServerSaveMessage(BaseMessage):
+    type: str = MessageType.LOAD_SERVER_SAVE.value
+    data: ServerIdData
+
+
+class GetServerStatsMessage(BaseMessage):
+    type: str = MessageType.GET_SERVER_STATS.value
+    data: ServerIdData

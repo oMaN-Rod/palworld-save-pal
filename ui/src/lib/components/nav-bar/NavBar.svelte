@@ -17,7 +17,8 @@
 		ChevronsRight,
 		ChevronsLeft,
 		NotebookPen,
-		Wrench
+		Wrench,
+		Server
 	} from 'lucide-svelte';
 
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
@@ -46,6 +47,7 @@
 		if (page.url.pathname.startsWith('/gps')) return 'gps';
 		if (page.url.pathname.startsWith('/ups')) return 'ups';
 		if (page.url.pathname.startsWith('/debug')) return 'debug';
+		if (page.url.pathname.startsWith('/servers')) return 'servers';
 		return '';
 	});
 
@@ -195,6 +197,15 @@
 				<Bug />
 			</Navigation.Tile>
 		{/if}
+		<Navigation.Tile
+			labelExpanded="Servers"
+			title="Servers"
+			id="servers"
+			href="/servers"
+			active="bg-secondary-500"
+		>
+			<Server />
+		</Navigation.Tile>
 		<Navigation.Tile
 			labelExpanded={m.editor()}
 			title={m.editor()}

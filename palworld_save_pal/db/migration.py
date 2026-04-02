@@ -64,6 +64,11 @@ def run_migrations(db_path):
         migrate_table_column(conn, cursor, "ups_stats", "oilrig_count", "INTEGER", 0)
         migrate_table_column(conn, cursor, "ups_stats", "summon_count", "INTEGER", 0)
 
+        # Server management
+        migrate_table_column(
+            conn, cursor, "servers", "nativemods_path", "TEXT", "''"
+        )
+
         cursor.close()
         conn.close()
         logger.debug("All migrations completed")
