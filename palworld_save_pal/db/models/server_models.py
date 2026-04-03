@@ -12,6 +12,9 @@ class ServerModel(SQLModel, table=True):
     container_name: str = Field(unique=True, index=True)
     image_name: str = Field(default="omanrod/psp-palworld-server")
 
+    # Deployment type: "docker" or "native"
+    server_type: str = Field(default="docker")
+
     # Networking
     game_port: int = Field(default=8211)
     query_port: int = Field(default=27015)
@@ -23,6 +26,12 @@ class ServerModel(SQLModel, table=True):
     mods_path: str = Field(default="")
     logicmods_path: str = Field(default="")
     nativemods_path: str = Field(default="")
+
+    # Native server fields
+    install_path: str = Field(default="")
+    steamcmd_path: str = Field(default="")
+    pid: Optional[int] = Field(default=None)
+    launch_args: str = Field(default="")
 
     # Server identity
     server_name: str = Field(default="PSP Palworld Server")

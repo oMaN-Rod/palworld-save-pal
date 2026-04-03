@@ -10,6 +10,7 @@ class ServerState {
 	apiResponse = $state<ServerApiResponse | null>(null);
 	containerStats = $state<ContainerStats | null>(null);
 	saving = $state(false);
+	creationProgress = $state('');
 
 	#pollInterval: ReturnType<typeof setInterval> | null = null;
 

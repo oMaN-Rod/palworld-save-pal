@@ -119,6 +119,7 @@ export enum MessageType {
 	INSTALL_SERVER_MOD = 'install_server_mod',
 	LOAD_SERVER_SAVE = 'load_server_save',
 	GET_SERVER_STATS = 'get_server_stats',
+	SERVER_CREATION_PROGRESS = 'server_creation_progress',
 }
 
 interface UpdateSaveFileData {

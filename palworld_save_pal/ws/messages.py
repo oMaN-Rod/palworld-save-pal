@@ -157,6 +157,7 @@ class MessageType(str, Enum):
     INSTALL_SERVER_MOD = "install_server_mod"
     LOAD_SERVER_SAVE = "load_server_save"
     GET_SERVER_STATS = "get_server_stats"
+    SERVER_CREATION_PROGRESS = "server_creation_progress"
 
 
 class AddPalData(BaseModel):
@@ -786,6 +787,7 @@ class CreateServerData(BaseModel):
     name: str
     container_name: str
     image_name: str = "omanrod/psp-palworld-server"
+    server_type: str = "docker"
     game_port: int = 8211
     query_port: int = 27015
     rest_api_port: int = 8212
@@ -795,6 +797,10 @@ class CreateServerData(BaseModel):
     admin_password: str = "admin"
     max_players: int = 16
     env_vars: Dict[str, Any] = {}
+    # Native server fields
+    steamcmd_path: str = ""
+    install_path: str = ""
+    launch_args: str = ""
 
 
 class CreateServerMessage(BaseMessage):

@@ -11,7 +11,7 @@ def check_column_exists(cursor, table, column):
 
 
 def migrate_table_column(
-    conn, cursor, table_name, column_name, column_type, default_value
+    conn, cursor, table_name, column_name, column_type, default_value, nullable=False
 ):
     cursor.execute(
         f"SELECT name FROM sqlite_master WHERE type='table' AND name='{table_name}'"
@@ -24,11 +24,16 @@ def migrate_table_column(
 
     if not check_column_exists(cursor, table_name, column_name):
         logger.debug(f"Adding {column_name} column to {table_name} table")
-        cursor.execute(
-            f"ALTER TABLE {table_name} ADD COLUMN {column_name} {column_type} NOT NULL DEFAULT {default_value}"
-        )
+        if nullable:
+            cursor.execute(
+                f"ALTER TABLE {table_name} ADD COLUMN {column_name} {column_type} DEFAULT {default_value}"
+            )
+        else:
+            cursor.execute(
+                f"ALTER TABLE {table_name} ADD COLUMN {column_name} {column_type} NOT NULL DEFAULT {default_value}"
+            )
         conn.commit()
-        logger.debug("element column added successfully")
+        logger.debug(f"{column_name} column added successfully")
     else:
         logger.debug(
             f"{column_name} column already exists in {table_name}, skipping migration"
@@ -67,6 +72,22 @@ def run_migrations(db_path):
         # Server management
         migrate_table_column(
             conn, cursor, "servers", "nativemods_path", "TEXT", "''"
+        )
+        # Native server support
+        migrate_table_column(
+            conn, cursor, "servers", "server_type", "TEXT", "'docker'"
+        )
+        migrate_table_column(
+            conn, cursor, "servers", "install_path", "TEXT", "''"
+        )
+        migrate_table_column(
+            conn, cursor, "servers", "steamcmd_path", "TEXT", "''"
+        )
+        migrate_table_column(
+            conn, cursor, "servers", "pid", "INTEGER", "NULL", nullable=True
+        )
+        migrate_table_column(
+            conn, cursor, "servers", "launch_args", "TEXT", "''"
         )
 
         cursor.close()

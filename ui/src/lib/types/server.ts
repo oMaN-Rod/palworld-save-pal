@@ -1,3 +1,4 @@
+export type ServerType = 'docker' | 'native';
 export type ContainerStatus = 'running' | 'exited' | 'created' | 'paused' | 'not_found';
 
 export interface ServerStatus {
@@ -12,6 +13,7 @@ export interface Server {
 	name: string;
 	container_name: string;
 	image_name: string;
+	server_type: ServerType;
 	game_port: number;
 	query_port: number;
 	rest_api_port: number;
@@ -20,6 +22,10 @@ export interface Server {
 	mods_path: string;
 	logicmods_path: string;
 	nativemods_path: string;
+	install_path: string;
+	steamcmd_path: string;
+	pid: number | null;
+	launch_args: string;
 	server_name: string;
 	server_description: string;
 	server_password: string;
@@ -43,6 +49,7 @@ export interface CreateServerData {
 	name: string;
 	container_name: string;
 	image_name?: string;
+	server_type: ServerType;
 	game_port: number;
 	query_port: number;
 	rest_api_port: number;
@@ -52,6 +59,9 @@ export interface CreateServerData {
 	admin_password?: string;
 	max_players?: number;
 	env_vars?: Record<string, any>;
+	steamcmd_path?: string;
+	install_path?: string;
+	launch_args?: string;
 }
 
 export interface ContainerStats {

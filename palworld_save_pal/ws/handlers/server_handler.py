@@ -7,6 +7,7 @@ from fastapi import WebSocket
 
 from palworld_save_pal.db.ctx.servers import ServerDBService
 from palworld_save_pal.services.docker_service import DockerService
+from palworld_save_pal.services.native_server_service import NativeServerService
 from palworld_save_pal.utils.file_manager import FileManager
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.ws.messages import (
@@ -37,6 +38,7 @@ def _server_to_dict(server) -> dict:
         "name": server.name,
         "container_name": server.container_name,
         "image_name": server.image_name,
+        "server_type": server.server_type,
         "game_port": server.game_port,
         "query_port": server.query_port,
         "rest_api_port": server.rest_api_port,
@@ -45,6 +47,10 @@ def _server_to_dict(server) -> dict:
         "mods_path": server.mods_path,
         "logicmods_path": server.logicmods_path,
         "nativemods_path": server.nativemods_path,
+        "install_path": server.install_path,
+        "steamcmd_path": server.steamcmd_path,
+        "pid": server.pid,
+        "launch_args": server.launch_args,
         "server_name": server.server_name,
         "server_description": server.server_description,
         "server_password": server.server_password,
@@ -68,14 +74,20 @@ def _count_total_players(saves_path: str) -> int:
     return 0
 
 
+def _get_server_status(server) -> dict:
+    """Get server status based on server_type."""
+    if server.server_type == "native":
+        return NativeServerService.get_process_status(server.pid)
+    return DockerService.get_container_status(server.container_name)
+
+
 async def list_servers_handler(message: ListServersMessage, ws: WebSocket):
     try:
         servers = ServerDBService.list_servers()
         server_list = []
         for s in servers:
             data = _server_to_dict(s)
-            # Merge container status
-            status = DockerService.get_container_status(s.container_name)
+            status = _get_server_status(s)
             data["status"] = status
             data["total_players"] = _count_total_players(s.saves_path)
             # Try to get online player count for running servers
@@ -85,7 +97,8 @@ async def list_servers_handler(message: ListServersMessage, ws: WebSocket):
                         "127.0.0.1", s.rest_api_port, s.admin_password
                     )
                     data["player_count"] = count
-                except Exception:
+                except Exception as player_err:
+                    logger.debug("Failed to get player count for %s: %s", s.name, player_err)
                     data["player_count"] = 0
             else:
                 data["player_count"] = 0
@@ -108,7 +121,7 @@ async def get_server_handler(message: GetServerMessage, ws: WebSocket):
             return
 
         data = _server_to_dict(server)
-        status = DockerService.get_container_status(server.container_name)
+        status = _get_server_status(server)
         data["status"] = status
         data["total_players"] = _count_total_players(server.saves_path)
 
@@ -134,6 +147,7 @@ async def get_server_handler(message: GetServerMessage, ws: WebSocket):
 async def create_server_handler(message: CreateServerMessage, ws: WebSocket):
     try:
         data = message.data
+        is_native = data.server_type == "native"
 
         # Validate port uniqueness
         allocated = ServerDBService.get_allocated_ports()
@@ -146,38 +160,115 @@ async def create_server_handler(message: CreateServerMessage, ws: WebSocket):
                 await ws.send_json(response)
                 return
 
-        # Determine base path for server data
-        app_state = get_app_state()
-        base_path = os.path.join(os.getcwd(), "servers", data.container_name)
+        if is_native:
+            install_path = data.install_path
+            if not install_path:
+                response = build_response(
+                    MessageType.ERROR,
+                    {"message": "Install path is required for native servers"},
+                )
+                await ws.send_json(response)
+                return
 
-        server_data = {
-            "name": data.name,
-            "container_name": data.container_name,
-            "image_name": data.image_name,
-            "game_port": data.game_port,
-            "query_port": data.query_port,
-            "rest_api_port": data.rest_api_port,
-            "data_volume_name": f"psp-{data.container_name}-data",
-            "saves_path": os.path.join(base_path, "saves"),
-            "mods_path": os.path.join(base_path, "mods"),
-            "logicmods_path": os.path.join(base_path, "logicmods"),
-            "nativemods_path": os.path.join(base_path, "nativemods"),
-            "server_name": data.server_name,
-            "server_description": data.server_description,
-            "server_password": data.server_password,
-            "admin_password": data.admin_password,
-            "max_players": data.max_players,
-            "env_vars": data.env_vars,
-        }
+            async def send_progress(msg: str):
+                await ws.send_json(build_response(
+                    MessageType.SERVER_CREATION_PROGRESS,
+                    {"message": msg},
+                ))
 
-        server = ServerDBService.create_server(server_data)
+            await send_progress("Validating server configuration...")
 
-        # Create and start Docker container
-        DockerService.create_server(server)
+            server_data = {
+                "name": data.name,
+                "container_name": data.container_name,
+                "image_name": "",
+                "server_type": "native",
+                "game_port": data.game_port,
+                "query_port": data.query_port,
+                "rest_api_port": data.rest_api_port,
+                "data_volume_name": "",
+                "install_path": install_path,
+                "steamcmd_path": data.steamcmd_path,
+                "launch_args": data.launch_args,
+                "saves_path": NativeServerService.get_saves_path(install_path),
+                "mods_path": NativeServerService.get_mods_path(install_path),
+                "logicmods_path": NativeServerService.get_logicmods_path(install_path),
+                "nativemods_path": NativeServerService.get_nativemods_path(install_path),
+                "server_name": data.server_name,
+                "server_description": data.server_description,
+                "server_password": data.server_password,
+                "admin_password": data.admin_password,
+                "max_players": data.max_players,
+                "env_vars": data.env_vars,
+            }
 
-        result = _server_to_dict(server)
-        result["status"] = DockerService.get_container_status(server.container_name)
-        result["player_count"] = 0
+            server = ServerDBService.create_server(server_data)
+
+            # Find existing PalServer to copy from
+            await send_progress("Searching for existing PalServer installation...")
+            source_path = NativeServerService.find_existing_server(data.steamcmd_path, install_path)
+
+            if source_path:
+                await send_progress(f"Found existing server at {source_path}, copying files...")
+            elif data.steamcmd_path:
+                # Ensure SteamCMD is available
+                await send_progress("Setting up SteamCMD...")
+                steamcmd_dir = os.path.dirname(data.steamcmd_path) if data.steamcmd_path.endswith(".exe") else data.steamcmd_path
+                await NativeServerService.ensure_steamcmd(steamcmd_dir)
+                await send_progress("Downloading Palworld Dedicated Server via SteamCMD (this may take a while)...")
+
+            success = NativeServerService.create_server(server, source_path)
+            if not success:
+                ServerDBService.delete_server(server.id)
+                await send_progress("")
+                response = build_response(
+                    MessageType.ERROR,
+                    {"message": "Failed to create native server installation"},
+                )
+                await ws.send_json(response)
+                return
+
+            await send_progress("Writing server configuration files...")
+            # Config is already written by create_server, just signaling progress
+
+            await send_progress("")  # Clear progress
+            result = _server_to_dict(server)
+            result["status"] = NativeServerService.get_process_status(server.pid)
+            result["player_count"] = 0
+
+        else:
+            # Docker path (existing logic)
+            base_path = os.path.join(os.getcwd(), "servers", data.container_name)
+
+            server_data = {
+                "name": data.name,
+                "container_name": data.container_name,
+                "image_name": data.image_name,
+                "server_type": "docker",
+                "game_port": data.game_port,
+                "query_port": data.query_port,
+                "rest_api_port": data.rest_api_port,
+                "data_volume_name": f"psp-{data.container_name}-data",
+                "saves_path": os.path.join(base_path, "saves"),
+                "mods_path": os.path.join(base_path, "mods"),
+                "logicmods_path": os.path.join(base_path, "logicmods"),
+                "nativemods_path": os.path.join(base_path, "nativemods"),
+                "server_name": data.server_name,
+                "server_description": data.server_description,
+                "server_password": data.server_password,
+                "admin_password": data.admin_password,
+                "max_players": data.max_players,
+                "env_vars": data.env_vars,
+            }
+
+            server = ServerDBService.create_server(server_data)
+
+            # Create and start Docker container
+            DockerService.create_server(server)
+
+            result = _server_to_dict(server)
+            result["status"] = DockerService.get_container_status(server.container_name)
+            result["player_count"] = 0
 
         response = build_response(MessageType.CREATE_SERVER, result)
         await ws.send_json(response)
@@ -204,7 +295,7 @@ async def update_server_handler(message: UpdateServerMessage, ws: WebSocket):
             await ws.send_json(response)
             return
 
-        # Check if env vars or ports changed — requires container recreation
+        # Check if env vars or ports changed — requires restart/recreation
         env_changed = data.updates.get("env_vars") is not None
         ports_changed = any(
             k in data.updates for k in ("game_port", "query_port", "rest_api_port")
@@ -217,15 +308,30 @@ async def update_server_handler(message: UpdateServerMessage, ws: WebSocket):
             )
         )
 
-        if env_changed or ports_changed or identity_changed:
-            # Recreate container with new settings
-            DockerService.stop_server(old_server.container_name)
-            DockerService.remove_server(old_server.container_name, remove_volumes=False)
-            DockerService.create_server(server)
-            logger.info("Recreated container %s with updated settings", server.container_name)
+        if server.server_type == "native":
+            if env_changed or ports_changed or identity_changed:
+                # Rewrite config files
+                NativeServerService.write_palworld_settings(server)
+                # If running, restart
+                if server.pid:
+                    status = NativeServerService.get_process_status(server.pid)
+                    if status.get("running"):
+                        await NativeServerService.stop_server(server)
+                        new_pid = NativeServerService.start_server(server)
+                        if new_pid:
+                            ServerDBService.update_server(server.id, {"pid": new_pid})
+                            server = ServerDBService.get_server(server.id)
+                logger.info("Updated native server %s config", server.name)
+        else:
+            if env_changed or ports_changed or identity_changed:
+                # Recreate container with new settings
+                DockerService.stop_server(old_server.container_name)
+                DockerService.remove_server(old_server.container_name, remove_volumes=False)
+                DockerService.create_server(server)
+                logger.info("Recreated container %s with updated settings", server.container_name)
 
         result = _server_to_dict(server)
-        result["status"] = DockerService.get_container_status(server.container_name)
+        result["status"] = _get_server_status(server)
         response = build_response(MessageType.UPDATE_SERVER, result)
         await ws.send_json(response)
     except Exception as e:
@@ -242,9 +348,16 @@ async def delete_server_handler(message: DeleteServerMessage, ws: WebSocket):
             await ws.send_json(response)
             return
 
-        # Stop and remove container
-        DockerService.stop_server(server.container_name)
-        DockerService.remove_server(server.container_name, remove_volumes=True)
+        if server.server_type == "native":
+            # Stop process if running
+            if server.pid:
+                await NativeServerService.stop_server(server)
+            # Don't remove server files by default for native servers
+            NativeServerService.remove_server(server.install_path, remove_data=False)
+        else:
+            # Stop and remove container
+            DockerService.stop_server(server.container_name)
+            DockerService.remove_server(server.container_name, remove_volumes=True)
 
         # Delete from DB
         ServerDBService.delete_server(server.id)
@@ -265,8 +378,15 @@ async def start_server_handler(message: StartServerMessage, ws: WebSocket):
             await ws.send_json(response)
             return
 
-        success = DockerService.start_server(server.container_name)
-        status = DockerService.get_container_status(server.container_name)
+        if server.server_type == "native":
+            pid = NativeServerService.start_server(server)
+            success = pid is not None
+            if pid:
+                ServerDBService.update_server(server.id, {"pid": pid})
+            status = NativeServerService.get_process_status(pid)
+        else:
+            success = DockerService.start_server(server.container_name)
+            status = DockerService.get_container_status(server.container_name)
 
         response = build_response(
             MessageType.SERVER_STATUS_UPDATE,
@@ -287,8 +407,14 @@ async def stop_server_handler(message: StopServerMessage, ws: WebSocket):
             await ws.send_json(response)
             return
 
-        success = DockerService.stop_server(server.container_name)
-        status = DockerService.get_container_status(server.container_name)
+        if server.server_type == "native":
+            success = await NativeServerService.stop_server(server)
+            if success:
+                ServerDBService.update_server(server.id, {"pid": None})
+            status = NativeServerService.get_process_status(None)
+        else:
+            success = DockerService.stop_server(server.container_name)
+            status = DockerService.get_container_status(server.container_name)
 
         response = build_response(
             MessageType.SERVER_STATUS_UPDATE,
@@ -430,8 +556,8 @@ async def load_server_save_handler(message: LoadServerSaveMessage, ws: WebSocket
             await ws.send_json(response)
             return
 
-        # Verify container is stopped
-        status = DockerService.get_container_status(server.container_name)
+        # Verify server is stopped
+        status = _get_server_status(server)
         if status and status.get("running"):
             response = build_response(
                 MessageType.ERROR,
@@ -547,7 +673,10 @@ async def get_server_stats_handler(message: GetServerStatsMessage, ws: WebSocket
             await ws.send_json(response)
             return
 
-        stats = DockerService.get_container_stats(server.container_name)
+        if server.server_type == "native":
+            stats = NativeServerService.get_process_stats(server.pid)
+        else:
+            stats = DockerService.get_container_stats(server.container_name)
 
         response = build_response(
             MessageType.GET_SERVER_STATS,

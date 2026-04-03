@@ -39,9 +39,18 @@ export const createServerHandler: WSMessageHandler = {
 	async handle(data: Server) {
 		const state = getServerState();
 		const toast = getToastState();
+		state.creationProgress = '';
 		state.servers = [...state.servers, data];
 		state.selectedServer = data;
 		toast.add(`Server "${data.name}" created successfully`, 'Success', 'success');
+	}
+};
+
+export const serverCreationProgressHandler: WSMessageHandler = {
+	type: MessageType.SERVER_CREATION_PROGRESS,
+	async handle(data: { message: string }) {
+		const state = getServerState();
+		state.creationProgress = data.message;
 	}
 };
 
@@ -166,5 +175,6 @@ export const serverHandlers = [
 	listServerModsHandler,
 	toggleServerModHandler,
 	installServerModHandler,
-	getServerStatsHandler
+	getServerStatsHandler,
+	serverCreationProgressHandler
 ];
