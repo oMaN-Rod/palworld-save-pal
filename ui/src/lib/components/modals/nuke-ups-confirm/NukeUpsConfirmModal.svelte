@@ -67,7 +67,7 @@
 					class="bg-error-50 dark:bg-error-900/20 border-error-200 dark:border-error-800 rounded-lg border p-4"
 				>
 					<div class="flex items-start gap-3">
-						<Trash2 class="text-error-500 mt-0.5 h-5 w-5 flex-shrink-0" />
+						<Trash2 class="text-error-500 mt-0.5 h-5 w-5 shrink-0" />
 						<div class="space-y-2">
 							<h4 class="text-error-700 dark:text-error-300 font-semibold">
 								You are about to delete ALL pals from UPS

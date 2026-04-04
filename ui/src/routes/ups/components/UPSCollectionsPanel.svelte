@@ -129,7 +129,7 @@
 									: ''}"
 							>
 								<div
-									class="h-4 w-4 flex-shrink-0 rounded"
+									class="h-4 w-4 shrink-0 rounded"
 									style="background-color: {collection.color || '#6366f1'}"
 								></div>
 								<span class="flex-1 truncate">{collection.name}</span>
@@ -193,7 +193,7 @@
 									: ''}"
 							>
 								<div
-									class="h-4 w-4 flex-shrink-0 rounded"
+									class="h-4 w-4 shrink-0 rounded"
 									style="background-color: {collection.color || '#6366f1'}"
 								></div>
 								<span class="flex-1 truncate">{collection.name}</span>

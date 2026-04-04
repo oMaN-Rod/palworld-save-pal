@@ -712,12 +712,14 @@
 								stateActive="bg-secondary-800"
 								padding="p-0"
 							>
-								{m.key_items()}
+								<div id="key-items-tab" class="w-full">
+									{m.key_items()}
+								</div>
 							</Tabs.Control>
 						{/snippet}
 						{#snippet content()}
 							<Tabs.Panel value="inventory">
-								<div class="max-h-[500px] overflow-y-auto 2xl:max-h-[800px]">
+								<div id="inventory-panel" class="max-h-125 overflow-y-auto 2xl:max-h-200">
 									<div class="m-1 grid grid-cols-6 gap-2">
 										{#each Object.values(commonContainer.slots) as _, index}
 											<ItemBadge
@@ -732,7 +734,7 @@
 								</div>
 							</Tabs.Panel>
 							<Tabs.Panel value="key_items">
-								<div class="max-h-[500px] overflow-y-auto 2xl:max-h-[800px]">
+								<div id="key-items-panel" class="max-h-125 overflow-y-auto 2xl:max-h-200">
 									<div class="m-1 grid grid-cols-6 gap-2">
 										{#each Object.values(essentialContainer.slots) as _, index}
 											<ItemBadge
@@ -750,9 +752,9 @@
 					</Tabs>
 				</div>
 				<!-- Player Equip -->
-				<div class="flex h-[600px] flex-col 2xl:grid 2xl:grid-cols-[auto_1fr_auto]">
-					<div class="flex flex-col space-y-2">
-						<div class="flex flex-col space-y-2">
+				<div class="flex h-150 flex-col 2xl:grid 2xl:grid-cols-[auto_1fr_auto]">
+					<div  class="flex flex-col space-y-2">
+						<div id="weapon-equip" class="flex flex-col space-y-2">
 							<ItemHeader text={m.weapon({ count: 1 })} />
 							<div class="flex space-x-2 2xl:flex-col 2xl:space-y-2">
 								{#each Object.values(weaponLoadOutContainer.slots) as _, index}
@@ -766,7 +768,7 @@
 								{/each}
 							</div>
 						</div>
-						<div class="flex flex-col space-y-2">
+						<div id="accessory-equip" class="flex flex-col space-y-2">
 							<ItemHeader text={m.accessory()} />
 							<div class="2xl:ml-2">
 								<div class="flex max-h-36 max-w-36 gap-2 2xl:grid 2xl:grid-cols-2">
@@ -806,7 +808,7 @@
 							{/await}
 						</span>
 					</div>
-					<div class="mt-2 flex space-x-2 space-y-2 2xl:flex-col">
+					<div id="gear-equip" class="mt-2 flex space-x-2 space-y-2 2xl:flex-col">
 						<div class="flex flex-col space-y-2">
 							<ItemHeader text={m.head()} />
 							<ItemBadge

@@ -203,7 +203,7 @@
 							<div class="flex items-center justify-between">
 								<span class="text-surface-600 dark:text-surface-400 text-sm"
 									>
-									{m.avg_pals_per_collection({pal: c.pals})}
+									{m.avg_pals_per_collection({pals: c.pals})}
 									</span
 								>
 								<span class="font-medium">{(totalPals / totalCollections).toFixed(1)}</span>

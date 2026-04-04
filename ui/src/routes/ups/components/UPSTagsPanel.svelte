@@ -150,7 +150,7 @@
 						>
 							<!-- Tag Color Indicator -->
 							<div
-								class="h-3 w-3 flex-shrink-0 rounded-full"
+								class="h-3 w-3 shrink-0 rounded-full"
 								style="background-color: {tag.color || '#6366f1'}"
 							></div>
 
@@ -161,7 +161,7 @@
 
 							<!-- Usage Count -->
 							<span
-								class="flex-shrink-0 text-xs {isSelected ? 'text-primary-100' : 'text-surface-500'}"
+								class="shrink-0 text-xs {isSelected ? 'text-primary-100' : 'text-surface-500'}"
 							>
 								{tag.usage_count}
 							</span>

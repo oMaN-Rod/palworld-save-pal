@@ -33,7 +33,7 @@
 				: 'dark:bg-surface-800 bg-white'}"
 		>
 			<!-- Pal Badge (smaller for list view) -->
-			<div class="flex-shrink-0">
+			<div class="shrink-0">
 				<div class="h-16 w-16">
 					<UPSPalBadge {upsPal} onSelect={handlePalSelect} />
 				</div>
@@ -101,7 +101,7 @@
 			</div>
 
 			<!-- Stats -->
-			<div class="flex-shrink-0 text-right">
+			<div class="shrink-0 text-right">
 				<div class="text-surface-500 dark:text-surface-400 space-y-1 text-xs">
 					{#if upsPal.transfer_count > 0}
 						<div title={m.transfer({ count: 2 })}>
