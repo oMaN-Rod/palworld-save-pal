@@ -3,7 +3,7 @@
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { Tooltip } from '$components/ui';
 	import { palsData, workSuitabilityData } from '$lib/data';
-	import { assetLoader } from '$utils';
+	import { assetLoader, suitabilityImageMap } from '$utils';
 	import { NumberSliderModal } from '$components/modals';
 	import { getModalState } from '$states';
 	import * as m from '$i18n/messages';
@@ -12,21 +12,6 @@
 
 	let { pal = $bindable() }: { pal: Pal | undefined } = $props();
 
-	const suitabilityImageMap = {
-		EmitFlame: 'kindling',
-		Watering: 'watering',
-		Seeding: 'planting',
-		GenerateElectricity: 'generating',
-		Handcraft: 'handiwork',
-		Collection: 'gathering',
-		Deforest: 'deforesting',
-		Mining: 'mining',
-		OilExtraction: 'extracting',
-		ProductMedicine: 'production',
-		Cool: 'cooling',
-		Transport: 'transporting',
-		MonsterFarm: 'farming'
-	};
 
 	let workSuitabilities = $derived.by(() => {
 		if (pal) {

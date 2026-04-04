@@ -5,7 +5,7 @@
 	import { SkillSelectModal } from '$components';
 	import { getAppState, getModalState } from '$states';
 	import { Tooltip } from '$components/ui';
-	import { assetLoader, calculateFilters } from '$utils';
+	import { assetLoader, calculateFilters, skillBorderClass, skillFilter, skillOpacity } from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';
@@ -30,47 +30,20 @@
 
 	let borderClass = $derived.by(() => {
 		if (skillData) {
-			switch (skillData.details.rank) {
-				case 1:
-					return 'border-l-surface-600';
-				case 2:
-				case 3:
-					return 'border-l-[#fcdf19]';
-				case 4:
-					return 'border-l-[#68ffd8]';
-				default:
-					return 'border-l-[#FF0000]';
-			}
+			return skillBorderClass(skillData.details.rank);
 		}
 	});
 
 	let bgOpacity = $derived.by(() => {
 		if (skillData) {
-			switch (skillData.details.rank) {
-				case 1:
-				case 2:
-				case 3:
-				case 4:
-					return 'opacity-25';
-			}
-			return 'opacity-15';
+			return skillOpacity(skillData.details.rank);
 		}
 		return 'opacity-0';
 	});
 
 	let filterStyle = $derived.by(() => {
 		if (skillData) {
-			switch (skillData.details.rank) {
-				case 1:
-					return '';
-				case 2:
-				case 3:
-					return calculateFilters('#fcdf19');
-				case 4:
-					return calculateFilters('#68ffd8');
-				default:
-					return calculateFilters('#FF0000');
-			}
+			return skillFilter(skillData.details.rank);
 		}
 	});
 
