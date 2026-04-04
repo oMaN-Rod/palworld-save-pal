@@ -21,9 +21,12 @@ async def get_buildings_handler(_: GetBuildingsMessage, ws: WebSocket):
 
     localized_data = {}
     for key, value in buildings_data.items():
-        i18n_info = buildings_data_l10n.get(key, {"localized_name": key})
+        i18n_info = buildings_data_l10n.get(
+            key, {"localized_name": key, "description": ""}
+        )
         localized_data[key] = {
             "localized_name": i18n_info["localized_name"],
+            "description": i18n_info["description"],
             **value,
         }
 

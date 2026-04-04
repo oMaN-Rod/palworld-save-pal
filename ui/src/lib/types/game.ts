@@ -846,10 +846,11 @@ export enum BuildingTypeB {
 
 export type Building = {
 	localized_name: string;
+	description: string;
 	type_a: BuildingTypeA;
 	type_b: BuildingTypeB;
 	rank: number;
-	required_work_amount: number;
+	required_build_work_amount: number;
 	required_energy_type: string;
 	consume_energy_speed: number;
 	materials: { id: string; count: number }[];
