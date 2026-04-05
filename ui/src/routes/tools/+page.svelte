@@ -7,7 +7,8 @@
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
 	import { cn } from '$theme';
-	import { GamepassBrowser, Spinner } from '$components';
+	import { GamepassBrowser } from '$components';
+	import { Spinner } from '$components/ui';
 	import * as m from '$i18n/messages';
 	import {
 		ArrowRightLeft,

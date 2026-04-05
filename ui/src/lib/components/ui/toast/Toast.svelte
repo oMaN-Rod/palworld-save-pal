@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getToastState } from '../../states/toastState.svelte';
+	import { getToastState } from '$states';
 	import ToastItem from './ToastItem.svelte';
 	import type { ToastPosition, ToastTransition } from '$types';
 

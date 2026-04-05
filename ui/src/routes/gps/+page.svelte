@@ -3,8 +3,7 @@
 	import { elementsData, palsData, presetsData } from '$lib/data';
 	import { getAppState, getModalState, getToastState, getUpsState } from '$states';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
-	import { Card, Input, Tooltip, TooltipButton } from '$components/ui';
-	import { Spinner } from '$components';
+	import { Card, Input, Spinner, Tooltip, TooltipButton } from '$components/ui';
 	import {
 		PalSelectModal,
 		FillPalsModal,

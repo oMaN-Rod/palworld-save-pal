@@ -1,8 +1,5 @@
 <script lang="ts">
-	import { Stopwatch } from '$components';
-	import Spinner from '$components/spinner/Spinner.svelte';
-	import { FileDropzone } from '$components/ui';
-	import Monaco from '$components/ui/monaco/Monaco.svelte';
+	import { FileDropzone, Monaco, Spinner, Stopwatch } from '$components/ui';
 	import { getToastState } from '$states';
 	import { Save, X, WrapText } from 'lucide-svelte';
 

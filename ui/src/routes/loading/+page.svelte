@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { Spinner } from '$components';
+	import { Spinner, Stopwatch } from '$components/ui';
 	import { getAppState } from '$states';
-	import Stopwatch from '$components/ui/stopwatch/Stopwatch.svelte';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 

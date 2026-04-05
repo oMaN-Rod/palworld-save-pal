@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { palsData, buildingsData, itemsData, presetsData } from '$lib/data';
 	import { getAppState, getModalState, getToastState } from '$states';
-	import { Input, List, Tooltip, TooltipButton } from '$components/ui';
-	import { Spinner } from '$components';
+	import { Input, List, Spinner, Tooltip, TooltipButton } from '$components/ui';
 	import {
 		type ItemContainer,
 		type Pal,
