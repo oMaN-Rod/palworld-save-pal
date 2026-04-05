@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { SectionHeader } from '$components/ui';
 	import { type Pal } from '$types';
-	import { ActiveSkillBadge, StatusBadge, PalHeader, PassiveSkillBadge } from '$components';
+	import ActiveSkillBadge from './ActiveSkillBadge.svelte';
+	import StatusBadge from './StatusBadge.svelte';
+	import PalHeader from './PalHeader.svelte';
+	import PassiveSkillBadge from './PassiveSkillBadge.svelte';
 	import { palsData } from '$lib/data';
 	import { staticIcons } from '$types/icons';
 	import { onMount } from 'svelte';

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { PalBadge } from '$components';
+	import { PalBadge } from '$components/pal';
 	import { EditTagsModal, AddToCollectionModal, ExportPalModal } from '$components/modals';
-	import ContextMenu from '$components/ui/context-menu/ContextMenu.svelte';
+	import { ContextMenu } from '$components/ui';
 	import { Copy, Trash, Upload, FolderPlus, Tag } from 'lucide-svelte';
 	import {
 		getUpsState,

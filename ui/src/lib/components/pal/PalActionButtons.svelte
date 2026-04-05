@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { PalPresetSelectModal, PresetConfigModal, TextInputModal } from '$components';
+	import { PalPresetSelectModal, PresetConfigModal, TextInputModal } from '$components/modals';
 	import { CornerDotButton, Tooltip } from '$components/ui';
 	import {
 		defaultPresetConfig,

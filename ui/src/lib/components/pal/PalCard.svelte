@@ -4,10 +4,10 @@
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { cn } from '$theme';
 	import { getAppState, getNavigationState } from '$states';
-	import { PalInfoPopup } from '$components';
-	import StatusBadge from '$components/badges/status-badge/StatusBadge.svelte';
+	import PalInfoPopup from './PalInfoPopup.svelte';
+	import StatusBadge from './StatusBadge.svelte';
 	import { palsData } from '$lib/data';
-	import ContextMenu from '$components/ui/context-menu/ContextMenu.svelte';
+	import { ContextMenu } from '$components/ui';
 	import { Plus, ArchiveRestore, Trash, Copy, Upload } from 'lucide-svelte';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { staticIcons } from '$types/icons';

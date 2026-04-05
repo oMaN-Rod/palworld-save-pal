@@ -53,7 +53,7 @@
 		Upload
 	} from 'lucide-svelte';
 	import { Card } from '$components/ui';
-	import { PalCard, PalBadge, PalContainerStats } from '$components';
+	import { PalCard, PalBadge, PalContainerStats } from '$components/pal';
 	import { send } from '$lib/utils/websocketUtils';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
 	import * as m from '$i18n/messages';

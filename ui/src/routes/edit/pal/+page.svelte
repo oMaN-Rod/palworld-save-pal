@@ -1,19 +1,17 @@
 <script lang="ts">
 	import {
 		ActiveSkillBadge,
-		LearnedSkillSelectModal,
 		PalHeader,
 		PassiveSkillBadge,
 		Souls,
 		StatsBadges,
+		StatusBadge,
 		Talents,
-		TextInputModal,
 		WorkSuitabilities
-	} from '$components';
-	import StatusBadge from '$components/badges/status-badge/StatusBadge.svelte';
-	import MultiSkillSelectModal from '$components/modals/multi-skill-select/MultiSkillSelectModal.svelte';
+	} from '$components/pal';
+	import { LearnedSkillSelectModal, MultiSkillSelectModal, TextInputModal } from '$components/modals';
 	import { SectionHeader, Tooltip } from '$components/ui';
-	import { SkillPresets } from '$lib/components';
+	import { SkillPresets } from '$components';
 	import { expData, palsData, presetsData } from '$lib/data';
 	import { getAppState, getModalState } from '$states';
 	import { EntryState, type PresetProfile, type WorkSuitability } from '$types';

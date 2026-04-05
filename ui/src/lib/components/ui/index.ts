@@ -14,6 +14,8 @@ import Select from './select/Select.svelte';
 import TooltipButton from './tooltip-button/TooltipButton.svelte';
 import Tooltip from './tooltip/Tooltip.svelte';
 import Monaco from './monaco/Monaco.svelte';
+import Nuke from './icons/Nuke.svelte';
+import Stopwatch from './stopwatch/Stopwatch.svelte';
 
 export {
 	Card,
@@ -30,6 +32,8 @@ export {
 	SectionHeader,
 	Select,
 	Monaco,
+	Nuke,
+	Stopwatch,
 	Tooltip,
 	TooltipButton
 };

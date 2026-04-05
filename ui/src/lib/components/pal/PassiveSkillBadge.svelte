@@ -2,7 +2,7 @@
 	import { passiveSkillsData } from '$lib/data';
 	import type { PassiveSkill } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { SkillSelectModal } from '$components';
+	import { SkillSelectModal } from '$components/modals';
 	import { getAppState, getModalState } from '$states';
 	import { Tooltip } from '$components/ui';
 	import { assetLoader, calculateFilters, skillBorderClass, skillFilter, skillOpacity } from '$utils';

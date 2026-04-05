@@ -14,21 +14,22 @@
 	} from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { Ambulance, X, ReplaceAll, Plus, Trash, Bandage, Play, RefreshCcw } from 'lucide-svelte';
-	import { DebugButton, ItemBadge, PalBadge, StoragePresets, LabResearch } from '$components';
+	import { PalBadge } from '$components/pal';
+	import { DebugButton, ItemBadge, StoragePresets, LabResearch } from '$components';
 	import {
 		PalSelectModal,
 		NumberInputModal,
 		PalPresetSelectModal,
-		NumberSliderModal
+		NumberSliderModal,
+		TextInputModal
 	} from '$components/modals';
 	import { assetLoader, debounce, deepCopy, formatNickname } from '$utils';
 	import { cn } from '$theme';
-	import { TextInputModal } from '$components/modals';
 	import { staticIcons } from '$types/icons';
 	import { send } from '$lib/utils/websocketUtils';
 	import { goto } from '$app/navigation';
-	import Nuke from '$components/ui/icons/Nuke.svelte';
-	import LabResearchControls from '$components/guilds/LabResearchControls.svelte';
+	import { Nuke } from '$components/ui';
+	import { LabResearchControls } from '$components/guilds';
 	import * as m from '$i18n/messages';
 	import { c, p } from '$lib/utils/commonTranslations';
 
