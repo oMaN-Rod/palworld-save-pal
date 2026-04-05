@@ -11,7 +11,7 @@
 	} from '$components/pal';
 	import { LearnedSkillSelectModal, MultiSkillSelectModal, TextInputModal } from '$components/modals';
 	import { SectionHeader, Tooltip } from '$components/ui';
-	import { SkillPresets } from '$components';
+	import { SkillPresets } from '$components/presets';
 	import { expData, palsData, presetsData } from '$lib/data';
 	import { getAppState, getModalState } from '$states';
 	import { EntryState, type PresetProfile, type WorkSuitability } from '$types';

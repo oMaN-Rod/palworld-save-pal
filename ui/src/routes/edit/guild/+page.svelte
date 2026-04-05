@@ -15,7 +15,8 @@
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { Ambulance, X, ReplaceAll, Plus, Trash, Bandage, Play, RefreshCcw } from 'lucide-svelte';
 	import { PalBadge } from '$components/pal';
-	import { DebugButton, ItemBadge, StoragePresets, LabResearch } from '$components';
+	import { DebugButton, ItemBadge, LabResearch } from '$components';
+	import { StoragePresets } from '$components/presets';
 	import {
 		PalSelectModal,
 		NumberInputModal,

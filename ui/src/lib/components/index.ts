@@ -9,15 +9,14 @@ import Map from './map/Map.svelte';
 import { MissionDetails, MissionList } from './missions';
 import Modal from './modal/Modal.svelte';
 import NavBar from './nav-bar/NavBar.svelte';
-import PlayerPresets from './player-presets/PlayerPresets.svelte';
-import SkillPresets from './skill-presets/SkillPresets.svelte';
 import Spinner from './spinner/Spinner.svelte';
-import StoragePresets from './storage-presets/StoragePresets.svelte';
 import Toast from './toast/Toast.svelte';
 import Stopwatch from './ui/stopwatch/Stopwatch.svelte';
 
 export * from './modals';
-
+export * from './pal';
+export * from './player';
+export * from './presets';
 export {
 	DebugButton,
 	Drawer,
@@ -31,10 +30,7 @@ export {
 	MissionList,
 	Modal,
 	NavBar,
-	PlayerPresets,
-	SkillPresets,
 	Spinner,
 	Stopwatch,
-	StoragePresets,
 	Toast
 };
