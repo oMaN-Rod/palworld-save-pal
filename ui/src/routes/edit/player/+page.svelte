@@ -6,15 +6,9 @@
 	import { itemsData, expData } from '$lib/data';
 	import { Tabs, Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { Tooltip } from '$components/ui';
-	import {
-		ItemBadge,
-		PlayerPresets,
-		PlayerStats,
-		PlayerHealthBadge,
-		TextInputModal,
-		NumberInputModal,
-		ItemSelectModal
-	} from '$components';
+	import { PlayerStats, PlayerHealthBadge } from '$components/player';
+	import { ItemBadge, PlayerPresets } from '$components';
+	import { TextInputModal, NumberInputModal, ItemSelectModal } from '$components/modals';
 	import {
 		Bomb,
 		ChevronsLeftRight,

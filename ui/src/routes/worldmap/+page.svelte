@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Map, PlayerList } from '$components';
+	import { Map } from '$components';
+	import { PlayerList } from '$components/player';
 	import { Combobox } from '$components/ui';
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { worldToPixel, worldToMap } from '$components/map/utils';

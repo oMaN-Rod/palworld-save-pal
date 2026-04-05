@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { DebugButton, PlayerList } from '$components';
+	import { DebugButton } from '$components';
+	import { PlayerList } from '$components/player';
 	import { getAppState, getModalState } from '$states';
 	import { goto } from '$app/navigation';
 	import { MessageType, type Player } from '$types';
-	import { KeyboardShortcut, Tooltip } from '$components/ui';
+	import { KeyboardShortcut, Nuke, Tooltip } from '$components/ui';
 	import { send } from '$utils/websocketUtils';
-	import Nuke from '$components/ui/icons/Nuke.svelte';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 

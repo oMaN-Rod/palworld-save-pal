@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { Player, PlayerSummary } from '$types';
-	import { Combobox } from '$components/ui';
-	import Stopwatch from '$components/ui/stopwatch/Stopwatch.svelte';
+	import { Combobox, Stopwatch } from '$components/ui';
 	import { getAppState, getNavigationState } from '$states';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
