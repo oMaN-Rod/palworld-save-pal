@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { DebugButton } from '$components';
+	import { DebugButton } from '$components/layout';
 	import { PlayerList } from '$components/player';
 	import { getAppState, getModalState } from '$states';
 	import { goto } from '$app/navigation';

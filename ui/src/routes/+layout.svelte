@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../app.css';
-	import { NavBar } from '$components';
+	import { NavBar } from '$components/layout';
 	import { Toast, Modal, Spinner } from '$components/ui';
 	import { bootstrap } from '$lib/data/bootstrap';
 	import { getAppState, getSocketState } from '$states';
