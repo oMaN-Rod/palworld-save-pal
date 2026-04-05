@@ -1,4 +1,5 @@
 export * from './appState.svelte';
+export * from './docsState.svelte';
 export * from './modalState.svelte';
 export * from './navigationState.svelte';
 export * from './toastState.svelte';

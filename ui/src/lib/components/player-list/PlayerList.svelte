@@ -85,7 +85,7 @@
 	});
 </script>
 
-<div class="w-full" {...rest}>
+<div id="player-list" class="w-full" {...rest}>
 	{#if appState.loadingPlayer}
 		<div class="my-2 flex items-center gap-2 px-3 py-2 text-sm text-gray-400">
 			<svg class="h-4 w-4 animate-spin" viewBox="0 0 24 24">

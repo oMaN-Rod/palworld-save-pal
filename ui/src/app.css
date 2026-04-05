@@ -162,3 +162,169 @@ body {
 	--jse-color-picker-background: #656565;
 	--jse-color-picker-border-box-shadow: #8c8c8c 0 0 0 1px;
 }
+
+/* Prose styles for markdown guides */
+.prose-psp {
+	color: var(--color-surface-50);
+
+	& h1,
+	& h2,
+	& h3,
+	& h4 {
+		color: var(--color-surface-50);
+		font-weight: 700;
+	}
+
+	& h1 {
+		font-size: 1.875rem;
+		margin-bottom: 1rem;
+	}
+
+	& h2 {
+		font-size: 1.5rem;
+		margin-top: 2rem;
+		margin-bottom: 0.75rem;
+		padding-bottom: 0.25rem;
+		border-bottom: 1px solid var(--color-surface-700);
+	}
+
+	& h3 {
+		font-size: 1.25rem;
+		margin-top: 1.5rem;
+		margin-bottom: 0.5rem;
+	}
+
+	& p {
+		margin-bottom: 1rem;
+		line-height: 1.75;
+	}
+
+	& a {
+		color: var(--color-primary-500);
+		text-decoration: underline;
+	}
+
+	& code {
+		background: var(--color-surface-800);
+		padding: 0.125rem 0.375rem;
+		border-radius: 0.25rem;
+		font-size: 0.875rem;
+	}
+
+	& pre {
+		background: var(--color-surface-900);
+		border: 1px solid var(--color-surface-700);
+		border-radius: 0.5rem;
+		padding: 1rem;
+		overflow-x: auto;
+		margin-bottom: 1rem;
+	}
+
+	& pre code {
+		background: none;
+		padding: 0;
+	}
+
+	& ul,
+	& ol {
+		margin-bottom: 1rem;
+		padding-left: 1.5rem;
+	}
+
+	& ul {
+		list-style-type: disc;
+	}
+
+	& ol {
+		list-style-type: decimal;
+	}
+
+	& li {
+		margin-bottom: 0.25rem;
+		line-height: 1.75;
+	}
+
+	& blockquote {
+		border-left: 4px solid var(--color-primary-500);
+		padding-left: 1rem;
+		margin-bottom: 1rem;
+		color: var(--color-surface-300);
+		font-style: italic;
+	}
+
+	& table {
+		width: 100%;
+		border-collapse: collapse;
+		margin-bottom: 1rem;
+	}
+
+	& th,
+	& td {
+		border: 1px solid var(--color-surface-700);
+		padding: 0.5rem 0.75rem;
+		text-align: left;
+	}
+
+	& th {
+		background: var(--color-surface-800);
+		font-weight: 600;
+	}
+
+	& img {
+		border-radius: 0.5rem;
+		max-width: 100%;
+	}
+
+	& hr {
+		border-color: var(--color-surface-700);
+		margin: 2rem 0;
+	}
+}
+
+/* Driver.js tour theme */
+.driver-popover {
+	background-color: var(--color-surface-800) !important;
+	color: var(--color-surface-50) !important;
+	border: 1px solid var(--color-surface-600) !important;
+	border-radius: 0.5rem !important;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+.driver-popover .driver-popover-title {
+	color: var(--color-surface-50) !important;
+	font-size: 1rem !important;
+	font-weight: 600 !important;
+}
+
+.driver-popover .driver-popover-description {
+	color: var(--color-surface-300) !important;
+	font-size: 0.875rem !important;
+}
+
+.driver-popover .driver-popover-progress-text {
+	color: var(--color-surface-400) !important;
+}
+
+.driver-popover button.driver-popover-prev-btn {
+	background-color: var(--color-surface-700) !important;
+	color: var(--color-surface-200) !important;
+	border: 1px solid var(--color-surface-600) !important;
+	border-radius: 0.375rem !important;
+	text-shadow: none !important;
+}
+
+.driver-popover button.driver-popover-next-btn,
+.driver-popover button.driver-popover-close-btn {
+	background-color: var(--color-primary-500) !important;
+	color: white !important;
+	border: none !important;
+	border-radius: 0.375rem !important;
+	text-shadow: none !important;
+}
+
+.driver-popover .driver-popover-arrow-side-left.driver-popover-arrow,
+.driver-popover .driver-popover-arrow-side-right.driver-popover-arrow,
+.driver-popover .driver-popover-arrow-side-top.driver-popover-arrow,
+.driver-popover .driver-popover-arrow-side-bottom.driver-popover-arrow {
+	border-color: var(--color-surface-800) !important;
+}

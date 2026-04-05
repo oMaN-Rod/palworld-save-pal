@@ -18,7 +18,8 @@
 		ChevronsLeft,
 		NotebookPen,
 		Wrench,
-		Server
+		Server,
+		BookOpen
 	} from 'lucide-svelte';
 
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
@@ -48,6 +49,7 @@
 		if (page.url.pathname.startsWith('/ups')) return 'ups';
 		if (page.url.pathname.startsWith('/debug')) return 'debug';
 		if (page.url.pathname.startsWith('/servers')) return 'servers';
+		if (page.url.pathname.startsWith('/docs')) return 'docs';
 		return '';
 	});
 
@@ -223,6 +225,15 @@
 			active="bg-secondary-500"
 		>
 			<Wrench />
+		</Navigation.Tile>
+		<Navigation.Tile
+			labelExpanded={m.docs()}
+			title={m.docs()}
+			id="docs"
+			href="/docs"
+			active="bg-secondary-500"
+		>
+			<BookOpen />
 		</Navigation.Tile>
 	{/snippet}
 	{#snippet footer()}
