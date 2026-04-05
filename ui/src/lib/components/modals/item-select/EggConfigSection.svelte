@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ActiveSkillOption, PassiveSkillOption, Talents } from '$components';
+	import { ActiveSkillOption, PassiveSkillOption, Talents } from '$components/pal';
 	import { Combobox, CornerDotButton, List } from '$components/ui';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';

@@ -4,7 +4,7 @@
 	import { Save, X, Delete, Trash, Plus } from 'lucide-svelte';
 	import { activeSkillsData, passiveSkillsData } from '$lib/data';
 	import { isSkillAvailableForCharacter } from '$lib/utils/skillFilters';
-	import { ActiveSkillOption, PassiveSkillOption } from '$components';
+	import { ActiveSkillOption, PassiveSkillOption } from '$components/pal';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
