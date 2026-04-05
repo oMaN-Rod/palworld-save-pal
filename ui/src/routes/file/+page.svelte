@@ -8,7 +8,8 @@
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
 	import { cn } from '$theme';
-	import { GamepassBrowser, TextInputModal } from '$components';
+	import { GamepassBrowser } from '$components/gamepass';
+	import { TextInputModal } from '$components/modals';
 	import type { GamepassSave } from '$types';
 	import * as m from '$i18n/messages';
 	import { c, p } from '$lib/utils/commonTranslations';
