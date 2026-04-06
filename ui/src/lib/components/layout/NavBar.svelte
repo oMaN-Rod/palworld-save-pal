@@ -151,15 +151,6 @@
 			<Map />
 		</Navigation.Tile>
 		<Navigation.Tile
-			labelExpanded={m.about()}
-			title={m.about()}
-			id="about"
-			href="/about"
-			active="bg-secondary-500"
-		>
-			<Info />
-		</Navigation.Tile>
-		<Navigation.Tile
 			labelExpanded={c.presets}
 			title={c.presets}
 			id="presets"
@@ -234,6 +225,15 @@
 			active="bg-secondary-500"
 		>
 			<BookOpen />
+		</Navigation.Tile>
+		<Navigation.Tile
+			labelExpanded={m.about()}
+			title={m.about()}
+			id="about"
+			href="/about"
+			active="bg-secondary-500"
+		>
+			<Info />
 		</Navigation.Tile>
 	{/snippet}
 	{#snippet footer()}
