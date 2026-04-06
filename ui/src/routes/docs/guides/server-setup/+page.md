@@ -195,7 +195,7 @@ Once created, your servers appear in the left panel. Each server card shows:
 - **Online player count** (when running)
 - **Play/Stop button** for quick start and stop
 
-<!-- TODO: screenshot of server list with a running server -->
+![Server List](/guides/create-server/server_list.png)
 
 ---
 
@@ -205,7 +205,7 @@ Select a server from the list to view its details. The detail panel has five tab
 
 ### Overview {.toc}
 
-<!-- TODO: screenshot of the Overview tab with stats -->
+![Overview Tab](/guides/create-server/server_overview.png)
 
 Displays server information and real-time resource stats (updated every 5 seconds while running):
 
@@ -227,7 +227,7 @@ Edit server configuration after creation. Changes to ports, environment variable
 
 ### Mods {.toc}
 
-<!-- TODO: screenshot of the Mods tab -->
+![Mods Tab](/guides/create-server/server_mods.png)
 
 Manage server mods organized by type:
 
@@ -243,7 +243,7 @@ Manage server mods organized by type:
 
 ### Console {.toc}
 
-<!-- TODO: screenshot of the Console tab -->
+![Console Tab](/guides/create-server/server_console.png)
 
 A built-in REST API console for direct server administration (only available while the server is running). Available endpoints:
 
@@ -265,6 +265,8 @@ Responses are displayed in a JSON viewer with color-coded HTTP status indicators
 
 ### Saves {.toc}
 
+![Save Tab](/guides/create-server/server_saves.png)
+
 Load the server's save files directly into the Palworld Save Pal editor for modification.
 
 - Displays the save file path
@@ -280,10 +282,12 @@ Load the server's save files directly into the Palworld Save Pal editor for modi
 Use the **Play/Stop** button on the server card or the **Start/Stop** button in the detail panel header.
 
 **Starting a server:**
+
 - **Native**: Launches `PalServer.exe` with configured ports and launch arguments. The config file (`PalWorldSettings.ini`) is rewritten before each start to ensure settings are current.
 - **Docker**: Starts the container.
 
 **Stopping a server:**
+
 - A graceful shutdown is attempted first via the REST API (with a short wait period).
 - If the server does not stop within the timeout, the process is force-killed (Native) or the container is force-stopped (Docker).
 
@@ -302,7 +306,7 @@ Click the **Delete** button in the detail panel header. A confirmation dialog wi
 
 Dedicated server saves are typically found at:
 
-```
+```plaintext
 <InstallPath>/Pal/Saved/SaveGames/0/<WorldID>/
 ```
 
@@ -320,7 +324,6 @@ Dedicated server saves are typically found at:
 
 - Always **stop the server** before editing save files
 - Keep **regular backups** of your save directory
-- Test changes on a **local copy** before applying to production
 - Use the **Console** tab to save the world before stopping for a clean shutdown
 - For native servers, the `PalWorldSettings.ini` is auto-generated from your configured settings -- edit settings through the app rather than manually editing the file
 - Port conflicts are checked automatically during creation, but ensure your firewall allows traffic on the configured ports
