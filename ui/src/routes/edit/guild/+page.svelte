@@ -15,7 +15,8 @@
 	import { Ambulance, X, ReplaceAll, Plus, Trash, Bandage, Play, RefreshCcw } from 'lucide-svelte';
 	import { PalBadge } from '$components/pal';
 	import { DebugButton } from '$components/layout';
-	import { ItemBadge, LabResearch } from '$components';
+	import { ItemBadge } from '$components/shared';
+	import { LabResearch } from '$components';
 	import { StoragePresets } from '$components/presets';
 	import {
 		PalSelectModal,

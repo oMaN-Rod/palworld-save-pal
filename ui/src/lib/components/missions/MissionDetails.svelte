@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ItemBadge } from '$components';
+	import { ItemBadge } from '$components/shared';
 	import { Card, SectionHeader } from '$components/ui';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import type { Mission } from '$types';

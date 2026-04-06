@@ -1,4 +1,3 @@
-import ItemBadge from './badges/item-badge/ItemBadge.svelte';
 import LabResearch from './guilds/LabResearch.svelte';
 import LabResearchControls from './guilds/LabResearchControls.svelte';
 import Map from './map/Map.svelte';
@@ -10,8 +9,8 @@ export * from './modals';
 export * from './pal';
 export * from './player';
 export * from './presets';
+export * from './shared';
 export {
-	ItemBadge,
 	LabResearch,
 	LabResearchControls,
 	Map,
