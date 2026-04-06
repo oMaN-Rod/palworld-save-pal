@@ -12,27 +12,70 @@
 	import type { PalData, WorkSuitability } from '$types';
 	import { staticIcons } from '$types/icons';
 	import { Tooltip } from '$components/ui';
+	import { Accordion } from '@skeletonlabs/skeleton-svelte';
+	import { cn } from '$theme';
+	import {
+		SlidersHorizontal,
+		ArrowDownAZ,
+		ArrowDownZA,
+		ArrowDownWideNarrow,
+		ArrowDownNarrowWide,
+		GalleryVerticalEnd,
+		User
+	} from 'lucide-svelte';
+	import type { ValueChangeDetails } from '@zag-js/accordion';
 
 	let search = $state('');
 	let selectedKey = $state<string | null>(null);
+	let selectedFilter = $state('All');
+	let sortBy: SortBy = $state('paldeck-index');
+	let sortOrder: SortOrder = $state('asc');
+	let filterExpand = $state(['']);
 
-	const allPals = $derived(
-		Object.entries(palsData.pals)
-			.filter(([, pal]) => pal.is_pal && !pal.disabled)
-			.sort((a, b) => a[1].pal_deck_index - b[1].pal_deck_index)
-	);
+	type SortBy = 'name' | 'paldeck-index';
+	type SortOrder = 'asc' | 'desc';
 
-	const filteredPals = $derived(
-		search
-			? allPals.filter(
-					([key, pal]) =>
-						pal.localized_name.toLowerCase().includes(search.toLowerCase()) ||
-						key.toLowerCase().includes(search.toLowerCase())
-				)
-			: allPals
-	);
+	const elementTypes = $derived(Object.keys(elementsData.elements));
+	const elementIcons = $derived.by(() => {
+		const icons: Record<string, string> = {};
+		for (const element of elementTypes) {
+			const elementData = elementsData.elements[element];
+			if (elementData) {
+				icons[element] = assetLoader.loadImage(
+					`${ASSET_DATA_PATH}/img/${elementData.icon}.webp`
+				) as string;
+			}
+		}
+		return icons;
+	});
 
-	const selectedPal = $derived(selectedKey ? palsData.pals[selectedKey] : null);
+	const filterClass = (value: string) =>
+		cn('btn btn-sm', selectedFilter === value ? 'bg-secondary-500/25' : '');
+	const sortButtonClass = (value: SortBy) =>
+		cn('btn', sortBy === value ? 'bg-secondary-500/25' : '');
+
+	const NameSortIcon = $derived.by(() => {
+		if (sortBy !== 'name') return ArrowDownAZ;
+		return sortOrder === 'asc' ? ArrowDownAZ : ArrowDownZA;
+	});
+	const PaldeckSortIcon = $derived.by(() => {
+		if (sortBy !== 'paldeck-index') return ArrowDownWideNarrow;
+		return sortOrder === 'asc' ? ArrowDownWideNarrow : ArrowDownNarrowWide;
+	});
+
+	function toggleSort(newSortBy: SortBy) {
+		if (sortBy === newSortBy) {
+			if (sortOrder === 'desc') {
+				sortBy = 'paldeck-index';
+				sortOrder = 'asc';
+			} else {
+				sortOrder = 'desc';
+			}
+		} else {
+			sortBy = newSortBy;
+			sortOrder = 'asc';
+		}
+	}
 
 	function getElementIcon(element: string): string {
 		const el = elementsData.elements[element];
@@ -45,6 +88,52 @@
 			.filter(([, val]) => val > 0)
 			.map(([key, val]) => [key, getWorkSuitabilityFormattedName(key as WorkSuitability), val]);
 	}
+
+	const allPals = $derived(
+		Object.entries(palsData.pals).filter(([, pal]) => !pal.disabled)
+	);
+
+	const filteredPals = $derived.by(() => {
+		let result = allPals;
+
+		if (selectedFilter !== 'All') {
+			if (selectedFilter === 'alpha') {
+				result = result.filter(([, pal]) => pal.is_boss || pal.is_tower_boss || pal.is_raid_boss);
+			} else if (selectedFilter === 'human') {
+				result = result.filter(([, pal]) => !pal.is_pal);
+			} else {
+				// Element filter
+				result = result.filter(([, pal]) =>
+					pal.element_types.some((e) => e.toLowerCase() === selectedFilter.toLowerCase())
+				);
+			}
+		}
+
+		if (search) {
+			const q = search.toLowerCase();
+			result = result.filter(
+				([key, pal]) =>
+					pal.localized_name.toLowerCase().includes(q) || key.toLowerCase().includes(q)
+			);
+		}
+
+		result = [...result].sort((a, b) => {
+			let cmp = 0;
+			switch (sortBy) {
+				case 'name':
+					cmp = a[1].localized_name.localeCompare(b[1].localized_name);
+					break;
+				case 'paldeck-index':
+					cmp = a[1].pal_deck_index - b[1].pal_deck_index;
+					break;
+			}
+			return sortOrder === 'asc' ? cmp : -cmp;
+		});
+
+		return result;
+	});
+
+	const selectedPal = $derived(selectedKey ? palsData.pals[selectedKey] : null);
 </script>
 
 <div class="flex h-full gap-4">
@@ -52,6 +141,58 @@
 		<div class="mb-3 flex items-center justify-between">
 			<h1 class="text-lg font-bold">{c.pal} Wiki</h1>
 			<span class="text-surface-400 text-xs">{filteredPals.length}</span>
+		</div>
+		<div class="mb-3">
+			<Accordion
+				value={filterExpand}
+				onValueChange={(e: ValueChangeDetails) => (filterExpand = e.value)}
+				collapsible
+			>
+				<Accordion.Item
+					value="filter"
+					base="rounded-sm bg-surface-900"
+					controlHover="hover:bg-secondary-500/25"
+				>
+					{#snippet lead()}<SlidersHorizontal class="h-4 w-4" />{/snippet}
+					{#snippet control()}<span class="text-sm font-bold">Filter & Sort</span>{/snippet}
+					{#snippet panel()}
+						<div class="mb-2">
+							<legend class="text-xs font-bold text-surface-400">Sort</legend>
+							<div class="mt-1 grid grid-cols-2 gap-1">
+								<button type="button" class={sortButtonClass('name')} onclick={() => toggleSort('name')} title="Name">
+									<NameSortIcon class="h-4 w-4" />
+								</button>
+								<button type="button" class={sortButtonClass('paldeck-index')} onclick={() => toggleSort('paldeck-index')} title="Paldeck #">
+									<PaldeckSortIcon class="h-4 w-4" />
+								</button>
+							</div>
+						</div>
+						<div>
+							<legend class="text-xs font-bold text-surface-400">Element & Type</legend>
+							<div class="mt-1 grid grid-cols-4 gap-1">
+								<button type="button" class={filterClass('All')} onclick={() => (selectedFilter = 'All')}>
+									<GalleryVerticalEnd class="h-4 w-4" />
+								</button>
+								{#each elementTypes as element}
+									<button type="button" class={filterClass(element)} onclick={() => (selectedFilter = element)}>
+										<img src={elementIcons[element]} alt={element} class="h-5 w-5" />
+									</button>
+								{/each}
+								<Tooltip label="Alpha / Boss">
+									<button type="button" class={filterClass('alpha')} onclick={() => (selectedFilter = 'alpha')}>
+										<img src={staticIcons.alphaIcon} alt="Alpha" class="h-5 w-5" />
+									</button>
+								</Tooltip>
+								<Tooltip label="Human">
+									<button type="button" class={filterClass('human')} onclick={() => (selectedFilter = 'human')}>
+										<User class="h-4 w-4" />
+									</button>
+								</Tooltip>
+							</div>
+						</div>
+					{/snippet}
+				</Accordion.Item>
+			</Accordion>
 		</div>
 		<div class="mb-3">
 			<WikiSearch bind:value={search} />
@@ -94,6 +235,7 @@
 					{/if}
 				{/each}
 				<span class="text-surface-400 text-sm">#{selectedPal.pal_deck_index}</span>
+				<span class="text-surface-400 text-sm">{selectedKey}</span>
 			</div>
 
 			<p class="text-surface-300 mt-3">{selectedPal.description}</p>
@@ -203,23 +345,15 @@
 								{#each Object.entries(selectedPal.skill_set) as [skill, level]}
 									{@const [_, skillId] = wazaIdFromStr(`EPalWazaID::${skill}`)}
 									{@const skillData = activeSkillsData.getByKey(skillId)}
-									{@const elementIcon = getElementIcon(skillData?.details.element || '')}
-									<Tooltip>
-										<div
-											class="bg-surface-900 flex items-center gap-2 rounded-md px-3 py-1 text-sm"
-										>
-											<img src={elementIcon} alt="Element icon" class="h-4 w-4 2xl:h-6 2xl:w-6" />
-											<div>
-												{skillData?.localized_name || skill}
-												<span class="text-surface-400">Lv.{level}</span>
-											</div>
-										</div>
-										{#snippet popup()}
-											<div class="max-w-xs rounded-md">
-												<p class="text-sm">{skillData?.description}</p>
-											</div>
-										{/snippet}
-									</Tooltip>
+									{@const skillElement = skillData?.details?.element}
+									{@const skillElementIcon = skillElement ? getElementIcon(skillElement) : ''}
+									<div class="bg-surface-900 flex items-center gap-2 rounded-md px-3 py-1 text-sm">
+										{#if skillElementIcon}
+											<img src={skillElementIcon} alt={skillElement} class="h-4 w-4" />
+										{/if}
+										<span>{skillData?.localized_name || skill}</span>
+										<span class="text-surface-400">Lv.{level}</span>
+									</div>
 								{/each}
 							</div>
 						</div>
