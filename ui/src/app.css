@@ -273,7 +273,15 @@ body {
 
 	& img {
 		border-radius: 0.5rem;
-		max-width: 100%;
+		max-width: 500px;
+		max-height: 400px;
+		cursor: zoom-in;
+		transition: opacity 0.15s;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+	}
+
+	& img:hover {
+		opacity: 0.85;
 	}
 
 	& hr {

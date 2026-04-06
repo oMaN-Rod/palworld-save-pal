@@ -1,8 +1,19 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { TableOfContents } from '$components/docs';
+	import { Lightbox, TableOfContents } from '$components/docs';
 
 	const { children } = $props();
+
+	let lightboxSrc = $state('');
+	let lightboxAlt = $state('');
+
+	function onProseClick(e: MouseEvent) {
+		const img = (e.target as HTMLElement).closest('.prose-psp img') as HTMLImageElement | null;
+		if (img) {
+			lightboxSrc = img.src;
+			lightboxAlt = img.alt || '';
+		}
+	}
 
 	const guides = [
 		{ label: 'All Guides', href: '/docs/guides', slug: '' },
@@ -32,7 +43,8 @@
 			</a>
 		{/each}
 	</aside>
-	<main class="prose-psp min-w-0 flex-1 overflow-y-auto p-6 bg-surface-900/25">
+	
+	<main class="prose-psp min-w-0 flex-1 overflow-y-auto p-6 bg-surface-900/25" onclick={onProseClick}>
 		{@render children()}
 	</main>
 	{#if showToc}
@@ -40,4 +52,5 @@
 			<TableOfContents />
 		</aside>
 	{/if}
+	<Lightbox bind:src={lightboxSrc} bind:alt={lightboxAlt} />
 </div>
