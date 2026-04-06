@@ -4,25 +4,111 @@
 	import * as m from '$i18n/messages';
 	import { assetLoader } from '$utils';
 	import { ASSET_DATA_PATH } from '$lib/constants';
+	import { Accordion } from '@skeletonlabs/skeleton-svelte';
+	import { cn } from '$theme';
+	import {
+		SlidersHorizontal,
+		ArrowDownAZ,
+		ArrowDownZA,
+		ArrowDown01,
+		ArrowDown10,
+		GalleryVerticalEnd
+	} from 'lucide-svelte';
+	import type { ValueChangeDetails } from '@zag-js/accordion';
 
 	let search = $state('');
 	let selectedKey = $state<string | null>(null);
+	let selectedFilter = $state('All');
+	let sortBy: SortBy = $state('tier');
+	let sortOrder: SortOrder = $state('asc');
+	let filterExpand = $state(['']);
+
+	type SortBy = 'name' | 'level-cap' | 'cost' | 'tier';
+	type SortOrder = 'asc' | 'desc';
+
+	const filterClass = (value: string) =>
+		cn(
+			'btn btn-sm px-2 py-1 text-xs rounded',
+			selectedFilter === value ? 'bg-secondary-500/25' : ''
+		);
+	const sortButtonClass = (value: SortBy) =>
+		cn('btn', sortBy === value ? 'bg-secondary-500/25' : '');
+
+	const NameSortIcon = $derived.by(() => {
+		if (sortBy !== 'name') return ArrowDownAZ;
+		return sortOrder === 'asc' ? ArrowDownAZ : ArrowDownZA;
+	});
+	const LevelCapSortIcon = $derived.by(() => {
+		if (sortBy !== 'level-cap') return ArrowDown01;
+		return sortOrder === 'asc' ? ArrowDown01 : ArrowDown10;
+	});
+	const CostSortIcon = $derived.by(() => {
+		if (sortBy !== 'cost') return ArrowDown01;
+		return sortOrder === 'asc' ? ArrowDown01 : ArrowDown10;
+	});
+	const TierSortIcon = $derived.by(() => {
+		if (sortBy !== 'tier') return ArrowDown01;
+		return sortOrder === 'asc' ? ArrowDown01 : ArrowDown10;
+	});
+
+	function toggleSort(newSortBy: SortBy) {
+		if (sortBy === newSortBy) {
+			if (sortOrder === 'desc') {
+				sortBy = 'tier';
+				sortOrder = 'asc';
+			} else {
+				sortOrder = 'desc';
+			}
+		} else {
+			sortBy = newSortBy;
+			sortOrder = 'asc';
+		}
+	}
 
 	const allTechs = $derived(
-		Object.entries(technologiesData.technologies).sort(
-			(a, b) => (a[1].details.tier ?? 0) - (b[1].details.tier ?? 0)
+		Object.entries(technologiesData.technologies).sort((a, b) =>
+			(a[1].details.level_cap ?? 0) - (b[1].details.level_cap ?? 0)
 		)
 	);
 
-	const filteredTechs = $derived(
-		search
-			? allTechs.filter(
-					([key, tech]) =>
-						tech.localized_name.toLowerCase().includes(search.toLowerCase()) ||
-						key.toLowerCase().includes(search.toLowerCase())
-				)
-			: allTechs
-	);
+	const filteredTechs = $derived.by(() => {
+		let result = allTechs;
+
+		if (selectedFilter === 'boss') {
+			result = result.filter(([, tech]) => tech.details.is_boss_technology);
+		} else if (selectedFilter === 'normal') {
+			result = result.filter(([, tech]) => !tech.details.is_boss_technology);
+		}
+
+		if (search) {
+			const q = search.toLowerCase();
+			result = result.filter(
+				([key, tech]) =>
+					tech.localized_name.toLowerCase().includes(q) || key.toLowerCase().includes(q)
+			);
+		}
+
+		result = [...result].sort((a, b) => {
+			let cmp = 0;
+			switch (sortBy) {
+				case 'name':
+					cmp = a[1].localized_name.localeCompare(b[1].localized_name);
+					break;
+				case 'level-cap':
+					cmp = (a[1].details.level_cap ?? 0) - (b[1].details.level_cap ?? 0);
+					break;
+				case 'cost':
+					cmp = (a[1].details.cost ?? 0) - (b[1].details.cost ?? 0);
+					break;
+				case 'tier':
+					cmp = (a[1].details.tier ?? 0) - (b[1].details.tier ?? 0);
+					break;
+			}
+			return sortOrder === 'asc' ? cmp : -cmp;
+		});
+
+		return result;
+	});
 
 	const selectedTech = $derived(selectedKey ? technologiesData.technologies[selectedKey] : null);
 </script>
@@ -32,6 +118,81 @@
 		<div class="mb-3 flex items-center justify-between">
 			<h1 class="text-lg font-bold">{m.technology({ count: 2 })}</h1>
 			<span class="text-surface-400 text-xs">{filteredTechs.length}</span>
+		</div>
+		<div class="mb-3">
+			<Accordion
+				value={filterExpand}
+				onValueChange={(e: ValueChangeDetails) => (filterExpand = e.value)}
+				collapsible
+			>
+				<Accordion.Item
+					value="filter"
+					base="rounded-sm bg-surface-900"
+					controlHover="hover:bg-secondary-500/25"
+				>
+					{#snippet lead()}<SlidersHorizontal class="h-4 w-4" />{/snippet}
+					{#snippet control()}<span class="text-sm font-bold">Filter & Sort</span>{/snippet}
+					{#snippet panel()}
+						<div class="mb-2">
+							<legend class="text-surface-400 text-xs font-bold">Sort</legend>
+							<div class="mt-1 grid grid-cols-4 gap-1">
+								<button
+									type="button"
+									class={sortButtonClass('name')}
+									onclick={() => toggleSort('name')}
+									title="Name"
+								>
+									<NameSortIcon class="h-4 w-4" />
+								</button>
+								<button
+									type="button"
+									class={sortButtonClass('tier')}
+									onclick={() => toggleSort('tier')}
+									title="Tier"
+								>
+									<TierSortIcon class="h-4 w-4" />
+								</button>
+								<button
+									type="button"
+									class={sortButtonClass('level-cap')}
+									onclick={() => toggleSort('level-cap')}
+									title="Level Cap"
+								>
+									<LevelCapSortIcon class="h-4 w-4" />
+								</button>
+								<button
+									type="button"
+									class={sortButtonClass('cost')}
+									onclick={() => toggleSort('cost')}
+									title="Cost"
+								>
+									<CostSortIcon class="h-4 w-4" />
+								</button>
+							</div>
+						</div>
+						<div>
+							<legend class="text-surface-400 text-xs font-bold">Filter</legend>
+							<div class="mt-1 grid grid-cols-3 gap-1">
+								<button
+									type="button"
+									class={filterClass('All')}
+									onclick={() => (selectedFilter = 'All')}>All</button
+								>
+								<button
+									type="button"
+									class={filterClass('normal')}
+									onclick={() => (selectedFilter = 'normal')}>Normal</button
+								>
+								<button
+									type="button"
+									class={filterClass('boss')}
+									onclick={() => (selectedFilter = 'boss')}>Ancient</button
+								>
+							</div>
+						</div>
+					{/snippet}
+				</Accordion.Item>
+			</Accordion>
 		</div>
 		<div class="mb-3">
 			<WikiSearch bind:value={search} />
@@ -52,6 +213,9 @@
 					<span class="truncate font-medium">{tech.localized_name}</span>
 					{#if tech.details.tier}
 						<span class="text-surface-500 ml-auto text-xs">T{tech.details.tier}</span>
+					{/if}
+					{#if tech.details.level_cap}
+						<span class="text-surface-500 ml-auto text-xs">Lv {tech.details.level_cap}</span>
 					{/if}
 				</button>
 			{/each}
@@ -107,12 +271,18 @@
 			{#if selectedTech.details.unlock_build_objects && selectedTech.details.unlock_build_objects.length > 0}
 				<div class="mt-5">
 					<h3 class="text-surface-400 mb-2 text-sm font-semibold">Unlocks Buildings</h3>
-					<div class="flex flex-wrap gap-2">
+					<div class="grid grid-cols-3 2xl:grid-cols-5 gap-2">
 						{#each selectedTech.details.unlock_build_objects as obj}
-							{@const buildingData = buildingsData.getByKey(obj)!} <!-- Assuming build_objects contains building data -->
-							{@const buildingIcon = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${buildingData.icon}.webp`) as string}
-							<span class="bg-surface-900 rounded-md px-3 py-1 text-sm flex items-center gap-2">
-								<img src={buildingIcon} alt={buildingData.localized_name} class="h-4 w-4 object-contain" />
+							{@const buildingData = buildingsData.getByKey(obj)!}
+							{@const buildingIcon = assetLoader.loadImage(
+								`${ASSET_DATA_PATH}/img/${buildingData.icon}.webp`
+							) as string}
+							<span class="bg-surface-900 flex items-center gap-2 rounded-md px-3 py-1 text-sm">
+								<img
+									src={buildingIcon}
+									alt={buildingData.localized_name}
+									class="h-16 w-16 object-contain"
+								/>
 								{buildingData.localized_name || obj}
 							</span>
 						{/each}
@@ -122,13 +292,19 @@
 			{#if selectedTech.details.unlock_item_recipes && selectedTech.details.unlock_item_recipes.length > 0}
 				<div class="mt-5">
 					<h3 class="text-surface-400 mb-2 text-sm font-semibold">Unlocks Item Recipes</h3>
-					<div class="flex flex-wrap gap-2">
+					<div class="grid grid-cols-3 2xl:grid-cols-5 gap-2">
 						{#each selectedTech.details.unlock_item_recipes as recipe}
 							{@const itemData = itemsData.getByKey(recipe)!}
-							{@const itemIcon = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${itemData.details.icon}.webp`) as string}
+							{@const itemIcon = assetLoader.loadImage(
+								`${ASSET_DATA_PATH}/img/${itemData.details.icon}.webp`
+							) as string}
 							<span class="bg-surface-900 rounded-md px-3 py-1 text-sm">
-								<img src={itemIcon} alt={itemData.info.localized_name || recipe} class="inline-block h-4 w-4 mr-1" />
-								{itemData.info.localized_name || recipe}						
+								<img
+									src={itemIcon}
+									alt={itemData.info.localized_name || recipe}
+									class="mr-1 inline-block h-16 w-16"
+								/>
+								{itemData.info.localized_name || recipe}
 							</span>
 						{/each}
 					</div>
