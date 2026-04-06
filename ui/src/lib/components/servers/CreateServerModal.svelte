@@ -221,9 +221,9 @@
 					{:else}
 						<!-- Native server fields -->
 						<Input
-							label="SteamCMD Path"
+							label="SteamCMD Path (optional, auto-detected)"
 							bind:value={steamcmdPath}
-							placeholder="C:\SteamCMD\steamcmd.exe"
+							placeholder="Leave empty to auto-detect or download"
 						/>
 						<Input
 							label="Install Base Path"

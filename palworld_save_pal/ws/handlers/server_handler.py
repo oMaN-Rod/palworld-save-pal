@@ -149,6 +149,12 @@ async def create_server_handler(message: CreateServerMessage, ws: WebSocket):
         data = message.data
         is_native = data.server_type == "native"
 
+        async def send_progress(msg: str):
+            await ws.send_json(build_response(
+                MessageType.SERVER_CREATION_PROGRESS,
+                {"message": msg},
+            ))
+
         # Validate port uniqueness
         allocated = ServerDBService.get_allocated_ports()
         for port in [data.game_port, data.query_port, data.rest_api_port]:
@@ -169,12 +175,6 @@ async def create_server_handler(message: CreateServerMessage, ws: WebSocket):
                 )
                 await ws.send_json(response)
                 return
-
-            async def send_progress(msg: str):
-                await ws.send_json(build_response(
-                    MessageType.SERVER_CREATION_PROGRESS,
-                    {"message": msg},
-                ))
 
             await send_progress("Validating server configuration...")
 
@@ -204,18 +204,40 @@ async def create_server_handler(message: CreateServerMessage, ws: WebSocket):
 
             server = ServerDBService.create_server(server_data)
 
+            # Resolve SteamCMD path: user-provided > auto-detect > auto-download
+            steamcmd_path = data.steamcmd_path
+            if not steamcmd_path:
+                await send_progress("Auto-detecting SteamCMD...")
+                steamcmd_path = NativeServerService.find_steamcmd()
+                if steamcmd_path:
+                    await send_progress(f"Found SteamCMD at {steamcmd_path}")
+                    # Persist to DB so future operations can use it
+                    ServerDBService.update_server(server.id, {"steamcmd_path": steamcmd_path})
+
             # Find existing PalServer to copy from
             await send_progress("Searching for existing PalServer installation...")
-            source_path = NativeServerService.find_existing_server(data.steamcmd_path, install_path)
+            source_path = NativeServerService.find_existing_server(steamcmd_path or "", install_path)
 
             if source_path:
-                await send_progress(f"Found existing server at {source_path}, copying files...")
-            elif data.steamcmd_path:
-                # Ensure SteamCMD is available
-                await send_progress("Setting up SteamCMD...")
-                steamcmd_dir = os.path.dirname(data.steamcmd_path) if data.steamcmd_path.endswith(".exe") else data.steamcmd_path
-                await NativeServerService.ensure_steamcmd(steamcmd_dir)
+                await send_progress(f"Found existing server at {source_path}, copying base files...")
+            else:
+                # Need SteamCMD to download — auto-download if not found
+                if not steamcmd_path:
+                    steamcmd_dir = NativeServerService._STEAMCMD_DEFAULT_DIR
+                    await send_progress(f"SteamCMD not found. Downloading to {steamcmd_dir}...")
+                    steamcmd_path = await NativeServerService.ensure_steamcmd(steamcmd_dir)
+                    ServerDBService.update_server(server.id, {"steamcmd_path": steamcmd_path})
+                else:
+                    steamcmd_dir = os.path.dirname(steamcmd_path) if steamcmd_path.endswith(".exe") else steamcmd_path
+                    await send_progress("Setting up SteamCMD...")
+                    await NativeServerService.ensure_steamcmd(steamcmd_dir)
+
                 await send_progress("Downloading Palworld Dedicated Server via SteamCMD (this may take a while)...")
+                # Update the server model's steamcmd_path for create_server to use
+                server = ServerDBService.get_server(server.id)
+                if not server.steamcmd_path:
+                    ServerDBService.update_server(server.id, {"steamcmd_path": steamcmd_path})
+                    server = ServerDBService.get_server(server.id)
 
             success = NativeServerService.create_server(server, source_path)
             if not success:
@@ -237,7 +259,8 @@ async def create_server_handler(message: CreateServerMessage, ws: WebSocket):
             result["player_count"] = 0
 
         else:
-            # Docker path (existing logic)
+            # Docker path
+            await send_progress("Validating server configuration...")
             base_path = os.path.join(os.getcwd(), "servers", data.container_name)
 
             server_data = {
@@ -263,8 +286,13 @@ async def create_server_handler(message: CreateServerMessage, ws: WebSocket):
 
             server = ServerDBService.create_server(server_data)
 
+            await send_progress(f"Pulling Docker image {data.image_name}...")
+
             # Create and start Docker container
             DockerService.create_server(server)
+
+            await send_progress("Container started successfully")
+            await send_progress("")  # Clear progress
 
             result = _server_to_dict(server)
             result["status"] = DockerService.get_container_status(server.container_name)
@@ -407,14 +435,26 @@ async def stop_server_handler(message: StopServerMessage, ws: WebSocket):
             await ws.send_json(response)
             return
 
+        async def send_progress(msg: str):
+            await ws.send_json(build_response(
+                MessageType.SERVER_CREATION_PROGRESS,
+                {"message": msg},
+            ))
+
+        await send_progress(f"Stopping server \"{server.name}\"...")
+
         if server.server_type == "native":
+            await send_progress("Sending shutdown command to server...")
             success = await NativeServerService.stop_server(server)
             if success:
                 ServerDBService.update_server(server.id, {"pid": None})
             status = NativeServerService.get_process_status(None)
         else:
+            await send_progress("Stopping Docker container...")
             success = DockerService.stop_server(server.container_name)
             status = DockerService.get_container_status(server.container_name)
+
+        await send_progress("")  # Clear progress
 
         response = build_response(
             MessageType.SERVER_STATUS_UPDATE,

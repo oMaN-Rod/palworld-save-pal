@@ -163,8 +163,31 @@ DOCKER_ONLY_KEYS = {
 
 
 class NativeServerService:
+    # Default install location when auto-downloading SteamCMD
+    _STEAMCMD_DEFAULT_DIR = os.path.join(os.path.expanduser("~"), "SteamCMD")
 
     # --- SteamCMD ---
+
+    @staticmethod
+    def find_steamcmd() -> Optional[str]:
+        """Auto-detect steamcmd.exe on the system. Returns path to exe or None."""
+        # Check PATH
+        path_dirs = os.environ.get("PATH", "").split(os.pathsep)
+        for path_dir in path_dirs:
+            candidate = os.path.join(path_dir, "steamcmd.exe")
+            if os.path.exists(candidate):
+                logger.info("Found SteamCMD in PATH at %s", candidate)
+                return candidate
+
+        # Check all drive roots for SteamCMD
+        for drive_letter in "CDEFGHIJKLMNOPQRSTUVWXYZ":
+            for name in ("SteamCMD", "steamcmd"):
+                candidate = os.path.join(f"{drive_letter}:\\", name, "steamcmd.exe")
+                if os.path.exists(candidate):
+                    logger.info("Found SteamCMD at %s", candidate)
+                    return candidate
+
+        return None
 
     @staticmethod
     async def ensure_steamcmd(steamcmd_dir: str) -> str:
@@ -218,12 +241,33 @@ class NativeServerService:
 
     # --- Server lifecycle ---
 
+    # Directories to exclude when copying a base server installation.
+    # These contain world-specific data, logs, or SteamCMD metadata.
+    _COPY_EXCLUDE_DIRS = {"Saved", "steamapps"}
+
+    @staticmethod
+    def _copy_server_base(source: str, dest: str) -> None:
+        """Copy only the base server files needed to run, excluding world data."""
+
+        def _ignore(directory: str, entries: list) -> set:
+            rel = os.path.relpath(directory, source)
+            ignored = set()
+            for entry in entries:
+                entry_path = os.path.join(directory, entry)
+                # Skip world-specific directories at any depth
+                if os.path.isdir(entry_path) and entry in NativeServerService._COPY_EXCLUDE_DIRS:
+                    ignored.add(entry)
+            return ignored
+
+        shutil.copytree(source, dest, ignore=_ignore, dirs_exist_ok=True)
+
     @staticmethod
     def create_server(server: ServerModel, source_server_path: Optional[str] = None) -> bool:
         """
         Create a native server installation.
-        If source_server_path is provided and exists, copy from it.
-        Otherwise, use SteamCMD to download.
+        If source_server_path is provided and exists, copy base files from it
+        (excluding world data, saves, logs, and SteamCMD metadata).
+        Otherwise, use SteamCMD to download a fresh install.
         """
         install_path = server.install_path
         if not install_path:
@@ -233,8 +277,8 @@ class NativeServerService:
         if os.path.exists(os.path.join(install_path, "PalServer.exe")):
             logger.info("Server already exists at %s, skipping copy/install", install_path)
         elif source_server_path and os.path.exists(os.path.join(source_server_path, "PalServer.exe")):
-            logger.info("Copying server from %s to %s", source_server_path, install_path)
-            shutil.copytree(source_server_path, install_path, dirs_exist_ok=True)
+            logger.info("Copying base server files from %s to %s (excluding world data)", source_server_path, install_path)
+            NativeServerService._copy_server_base(source_server_path, install_path)
         else:
             logger.info("No source server found, will use SteamCMD to install")
             if not server.steamcmd_path:

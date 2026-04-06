@@ -37,6 +37,13 @@ class DockerService:
     def create_server(server: ServerModel) -> str:
         client = DockerService.get_client()
 
+        # Pull image if not available locally
+        try:
+            client.images.get(server.image_name)
+        except Exception:
+            logger.info("Pulling image %s from Docker Hub...", server.image_name)
+            client.images.pull(server.image_name)
+
         # Create host directories
         for path in [server.saves_path, server.mods_path, server.logicmods_path, server.nativemods_path]:
             os.makedirs(path, exist_ok=True)
