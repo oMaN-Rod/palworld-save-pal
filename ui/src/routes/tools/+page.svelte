@@ -163,7 +163,7 @@
 	}
 </script>
 
-<div class="bg-surface-900 flex min-h-screen w-full flex-col items-center py-8">
+<div class="flex min-h-screen w-full flex-col items-center py-8">
 	<div class="flex w-full max-w-3xl flex-col gap-8">
 		<!-- Header -->
 		<section class="w-full">

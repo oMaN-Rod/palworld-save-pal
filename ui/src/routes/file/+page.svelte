@@ -81,7 +81,7 @@
 	}
 </script>
 
-<div class="bg-surface-900 flex min-h-screen w-full flex-col items-center justify-center py-12">
+<div class="flex min-h-screen w-full flex-col items-center justify-center py-12">
 	<div class="flex w-full max-w-3xl flex-col gap-12">
 		<section class="w-full">
 			<h1 class="text-primary-400 mb-6 text-center text-4xl font-extrabold tracking-tight">
