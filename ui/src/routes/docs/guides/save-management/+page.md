@@ -7,7 +7,7 @@ description: Understanding save file formats, backups, and conversions
 
 Palworld uses Unreal Engine's `.sav` format for storing game data. This guide covers how save files work and how to manage them effectively.
 
-## Save File Structure
+## Save File Structure {.toc}
 
 A typical Palworld save directory contains:
 
@@ -22,7 +22,7 @@ SaveGames/
             └── <PlayerUID>.sav  # Per-player data
 ```
 
-## Steam vs GamePass Saves
+## Steam vs GamePass Saves {.toc}
 
 Palworld saves differ between Steam and GamePass (Xbox) versions:
 
@@ -38,7 +38,7 @@ Palworld Save Pal includes conversion tools accessible from the **Tools** page:
 3. Select your source save file
 4. The converted file will be saved to your chosen location
 
-## Backups
+## Backups {.toc}
 
 ### Automatic Backups
 

@@ -7,7 +7,7 @@ description: Learn how to set up and use Palworld Save Pal
 
 Welcome to **Palworld Save Pal** — a save file editor for Palworld that lets you modify players, Pals, items, and more.
 
-## Installation
+## Installation {.toc}
 
 ### Desktop App (Recommended)
 
@@ -23,7 +23,7 @@ For server environments or advanced users, a Docker image is available:
 docker pull ghcr.io/oman-rod/palworld-save-pal:latest
 ```
 
-## Loading a Save File
+## Loading a Save File {.toc}
 
 ### Desktop Mode
 
@@ -37,7 +37,7 @@ docker pull ghcr.io/oman-rod/palworld-save-pal:latest
 2. Upload your `.sav` file
 3. Wait for the file to be processed
 
-## Editing Your Save
+## Editing Your Save {.toc}
 
 Once a save file is loaded, you can:
 
@@ -49,7 +49,7 @@ Once a save file is loaded, you can:
 
 Navigate between sections using the keyboard shortcuts shown in the edit toolbar, or click the tabs directly.
 
-## Saving Changes
+## Saving Changes {.toc}
 
 ### Desktop Mode
 

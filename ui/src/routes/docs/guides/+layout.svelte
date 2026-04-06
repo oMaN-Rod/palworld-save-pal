@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { TableOfContents } from '$components/docs';
 
 	const { children } = $props();
 
@@ -14,10 +15,12 @@
 		const match = guides.find((g) => g.href !== '/docs/guides' && path === g.href);
 		return match?.slug || '';
 	});
+
+	const showToc = $derived(activeGuide !== '');
 </script>
 
-<div class="flex h-full">
-	<aside class="flex w-48 shrink-0 flex-col gap-1 border-r border-surface-700 p-3">
+<div class="flex h-full overflow-hidden">
+	<aside class="flex w-48 shrink-0 flex-col gap-1 border-r border-surface-700 p-3 overflow-y-auto">
 		{#each guides as guide}
 			<a
 				href={guide.href}
@@ -29,7 +32,12 @@
 			</a>
 		{/each}
 	</aside>
-	<div class="prose-psp flex-1 overflow-y-auto p-6 bg-surface-900/25">
+	<main class="prose-psp min-w-0 flex-1 overflow-y-auto p-6 bg-surface-900/25">
 		{@render children()}
-	</div>
+	</main>
+	{#if showToc}
+		<aside class="hidden w-56 shrink-0 overflow-y-auto border-l border-surface-700 p-4 xl:block">
+			<TableOfContents />
+		</aside>
+	{/if}
 </div>

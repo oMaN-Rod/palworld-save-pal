@@ -173,6 +173,7 @@ body {
 	& h4 {
 		color: var(--color-surface-50);
 		font-weight: 700;
+		scroll-margin-top: 1rem;
 	}
 
 	& h1 {

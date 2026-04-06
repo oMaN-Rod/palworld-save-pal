@@ -9,7 +9,92 @@ Palworld Save Pal includes a built-in server manager for creating, configuring, 
 
 ---
 
-## Getting Started
+## Prerequisites {.toc}
+
+### Hardware Requirements {.toc}
+
+Running a Palworld dedicated server requires the following hardware ([source](https://docs.palworldgame.com/getting-started/requirements)):
+
+| Component   | Minimum                | Recommended              |
+|-------------|------------------------|--------------------------|
+| **CPU**     | 4 cores                | 4+ cores                 |
+| **RAM**     | 8 GB                   | 32 GB or more            |
+| **Storage** | HDD (not recommended)  | SSD                      |
+| **OS**      | Windows or Linux 64-bit| Windows or Linux 64-bit  |
+
+> 8 GB of RAM is bootable but increases the possibility of server crashes due to out-of-memory errors. SSD storage is strongly recommended — low-performance storage may corrupt saved data.
+
+### Installing Docker (Docker Deployment Only) {.toc}
+
+If you plan to run your server using the **Docker** deployment type, you need Docker installed on the host machine.
+
+#### Windows
+
+1. Download [Docker Desktop for Windows](https://www.docker.com/products/docker-desktop/) and run the installer.
+2. During installation, ensure **WSL 2 backend** is selected (recommended over Hyper-V).
+3. After installation, restart your computer if prompted.
+4. Open Docker Desktop and wait for the engine to start — the status bar should show **"Docker Desktop is running"**.
+5. Open a terminal and verify the installation:
+   ```
+   docker --version
+   ```
+
+#### Linux
+
+1. Follow the official install guide for your distribution:
+   - [Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
+   - [Debian](https://docs.docker.com/engine/install/debian/)
+   - [Fedora](https://docs.docker.com/engine/install/fedora/)
+2. After installation, add your user to the `docker` group so you can run Docker without `sudo`:
+   ```bash
+   sudo usermod -aG docker $USER
+   ```
+   Log out and back in for the group change to take effect.
+3. Start and enable the Docker service:
+   ```bash
+   sudo systemctl start docker
+   sudo systemctl enable docker
+   ```
+4. Verify the installation:
+   ```bash
+   docker --version
+   ```
+
+### Port Forwarding {.toc}
+
+For players outside your local network to connect, you must forward the server ports through your router.
+
+#### Default Ports
+
+| Port    | Protocol | Purpose                          |
+|---------|----------|----------------------------------|
+| `8211`  | UDP      | Game traffic (player connections) |
+| `27015` | UDP      | Steam query (server browser)     |
+
+> If you changed these ports during server creation, forward the ports you configured instead.
+
+#### Steps
+
+1. **Find your server's local IP address.** Open a terminal and run:
+   - **Windows**: `ipconfig` — look for the **IPv4 Address** under your active network adapter.
+   - **Linux**: `ip addr` — look for the `inet` address on your primary interface (e.g., `eth0` or `ens18`).
+2. **Open your router's admin panel.** This is usually at `192.168.0.1` or `192.168.1.1` in a browser. Check your router's manual or the sticker on the device for the exact address and login credentials.
+3. **Navigate to Port Forwarding** (may be called "Virtual Server", "NAT Forwarding", or "Applications & Gaming" depending on your router).
+4. **Create forwarding rules** for each port:
+   - **Service Name**: `Palworld Game` (or any label)
+   - **External Port**: `8211`
+   - **Internal Port**: `8211`
+   - **Internal IP**: Your server's local IP from step 1
+   - **Protocol**: `UDP`
+   - Repeat for `27015` (Steam query port).
+5. **Save and apply** the changes.
+6. **Verify** the ports are open using an online port checker (search "open port check tool") or have a friend try connecting to your external IP.
+
+> If you are behind a CGNAT (common with some ISPs), port forwarding at the router level will not work. Contact your ISP to request a public IP or consider using a VPN/tunneling service.
+
+---
+
+## Getting Started {.toc}
 
 Navigate to **Servers** in the left navigation bar to open the server manager.
 
@@ -17,14 +102,14 @@ Navigate to **Servers** in the left navigation bar to open the server manager.
 
 ---
 
-## Creating a Server
+## Creating a Server {.toc}
 
 1. Click the **+ New** button in the server list panel.
    ![New Button](/guides/create-server/new.png)
 
 2. A creation modal will open with three tabs: **General**, **Gameplay**, and **Advanced**.
 
-### General Tab
+### General Tab {.toc}
 
 ![General Tab](/guides/create-server/create_server_general.png)
 
@@ -61,7 +146,7 @@ Configure the core server settings:
 | **World Name**       | Name for the game world                                                     |
 | **Launch Args**      | Additional command-line arguments passed to `PalServer.exe`                 |
 
-### Gameplay Tab
+### Gameplay Tab {.toc}
 
 ![Gameplay Tab](/guides/create-server/create_server_gameplay.png)
 
@@ -75,7 +160,7 @@ Configure in-game rates and rules, organized into groups:
 - **Guild / Building** -- Guild size limits, base camp count, building rates, deterioration settings
 - **Items & Drops** -- Drop limits, Palbox import/export, multiplayer item settings
 
-### Advanced Tab
+### Advanced Tab {.toc}
 
 ![Advanced Tab](/guides/create-server/create_server_advanced.png)
 
@@ -99,7 +184,7 @@ Click **Create** to begin server setup.
 
 ---
 
-## Server List
+## Server List {.toc}
 
 Once created, your servers appear in the left panel. Each server card shows:
 
@@ -114,11 +199,11 @@ Once created, your servers appear in the left panel. Each server card shows:
 
 ---
 
-## Server Detail Panel
+## Server Detail Panel {.toc}
 
 Select a server from the list to view its details. The detail panel has five tabs:
 
-### Overview
+### Overview {.toc}
 
 <!-- TODO: screenshot of the Overview tab with stats -->
 
@@ -132,7 +217,7 @@ Displays server information and real-time resource stats (updated every 5 second
 - **Network I/O** (Docker only)
 - **Disk I/O** (read/write)
 
-### Settings
+### Settings {.toc}
 
 Edit server configuration after creation. Changes to ports, environment variables, or server identity settings will trigger a container recreation (Docker) or config rewrite and optional restart (Native).
 
@@ -140,7 +225,7 @@ Edit server configuration after creation. Changes to ports, environment variable
 - All environment variables grouped by category (same groups as creation)
 - Click **Save** to apply changes
 
-### Mods
+### Mods {.toc}
 
 <!-- TODO: screenshot of the Mods tab -->
 
@@ -156,7 +241,7 @@ Manage server mods organized by type:
 - **Toggle** UE4SS mods on or off using the enable/disable switch
 - View the enabled/disabled/active status for each mod
 
-### Console
+### Console {.toc}
 
 <!-- TODO: screenshot of the Console tab -->
 
@@ -178,7 +263,7 @@ A built-in REST API console for direct server administration (only available whi
 
 Responses are displayed in a JSON viewer with color-coded HTTP status indicators.
 
-### Saves
+### Saves {.toc}
 
 Load the server's save files directly into the Palworld Save Pal editor for modification.
 
@@ -190,7 +275,7 @@ Load the server's save files directly into the Palworld Save Pal editor for modi
 
 ---
 
-## Starting and Stopping Servers
+## Starting and Stopping Servers {.toc}
 
 Use the **Play/Stop** button on the server card or the **Start/Stop** button in the detail panel header.
 
@@ -204,7 +289,7 @@ Use the **Play/Stop** button on the server card or the **Start/Stop** button in 
 
 ---
 
-## Deleting a Server
+## Deleting a Server {.toc}
 
 Click the **Delete** button in the detail panel header. A confirmation dialog will appear.
 
@@ -213,7 +298,7 @@ Click the **Delete** button in the detail panel header. A confirmation dialog wi
 
 ---
 
-## Save File Locations
+## Save File Locations {.toc}
 
 Dedicated server saves are typically found at:
 
@@ -231,7 +316,7 @@ Dedicated server saves are typically found at:
 
 ---
 
-## Tips
+## Tips {.toc}
 
 - Always **stop the server** before editing save files
 - Keep **regular backups** of your save directory
