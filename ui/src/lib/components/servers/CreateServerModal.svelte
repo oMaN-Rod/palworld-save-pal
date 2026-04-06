@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { Card, Input } from '$components/ui';
+	import { Card, Input, Tooltip } from '$components/ui';
 	import { Save, X } from 'lucide-svelte';
-	import Tooltip from '$components/ui/tooltip/Tooltip.svelte';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';

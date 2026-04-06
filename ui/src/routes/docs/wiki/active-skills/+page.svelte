@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { activeSkillsData, elementsData } from '$lib/data';
-	import WikiSearch from '$components/docs/WikiSearch.svelte';
+	import { WikiSearch } from '$components/docs';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
 	import * as m from '$i18n/messages';

@@ -3,14 +3,13 @@
 	import { buildingsData, itemsData, technologiesData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
-	import { NumberInputModal } from '$components';
+	import { NumberInputModal } from '$components/modals';
 	import { Tooltip } from '$components/ui';
 	import { Lock, Unlock } from 'lucide-svelte';
 	import { EntryState, type Technology } from '$types';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';
-	import { c } from '$lib/utils/commonTranslations';
-
+	
 	const appState = getAppState();
 	const modal = getModalState();
 

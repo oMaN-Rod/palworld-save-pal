@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { presetsData } from '$lib/data';
-	import { Card, List, TooltipButton, Input, Tooltip } from '$components/ui';
+	import { List, TooltipButton, Input, Tooltip } from '$components/ui';
 	import { getModalState, getToastState } from '$states';
 	import { debounce } from '$utils';
 	import { Trash, RefreshCcw, Download, Upload } from 'lucide-svelte';
@@ -12,8 +12,8 @@
 	import PassiveSkills from './components/PassiveSkills.svelte';
 	import PlayerInventory from './components/PlayerInventory.svelte';
 	import StorageInventory from './components/StorageInventory.svelte';
-	import Nuke from '$components/ui/icons/Nuke.svelte';
-	import { send, sendAndWait } from '$utils/websocketUtils';
+	import { Nuke } from '$components/ui';
+	import { sendAndWait } from '$utils/websocketUtils';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 

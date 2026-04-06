@@ -1,15 +1,14 @@
 <script lang="ts">
 	import { MissionDetails, MissionList } from '$components';
-	import { Tooltip, TooltipButton } from '$components/ui';
+	import { ConfirmModal } from '$components/modals';
+	import { TooltipButton } from '$components/ui';
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
 	import type { ValueChangeDetails } from '@zag-js/tabs';
 	import { EntryState, type Mission, type MissionType } from '$types';
 	import { CheckCheck, Trash2, ListX } from 'lucide-svelte';
-	import { ConfirmModal } from '$components';
 	import * as m from '$i18n/messages';
-	import { c } from '$lib/utils/commonTranslations';
-
+	
 	const appState = getAppState();
 	const modal = getModalState();
 	const toast = getToastState();

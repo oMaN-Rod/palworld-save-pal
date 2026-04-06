@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { Card, Input } from '$components/ui';
-	import Tooltip from '$components/ui/tooltip/Tooltip.svelte';
+	import { Card, Input, Tooltip } from '$components/ui';
 	import { elementsData } from '$lib/data';
 	import {
 		palPresetNameDescriptionMap,

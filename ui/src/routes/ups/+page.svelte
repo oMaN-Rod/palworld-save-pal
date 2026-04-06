@@ -34,11 +34,8 @@
 		getUpsState,
 		getModalState,
 		getAppState,
-		getToastState,
-		getNavigationState
-	} from '$states';
+		getToastState	} from '$states';
 	import { elementsData, palsData } from '$lib/data';
-	import { goto } from '$app/navigation';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
 	import { staticIcons } from '$types/icons';
@@ -59,7 +56,7 @@
 	import UPSTagsPanel from './components/UPSTagsPanel.svelte';
 	import UPSStatsPanel from './components/UPSStatsPanel.svelte';
 	import UPSPalList from './components/UPSPalList.svelte';
-	import Nuke from '$components/ui/icons/Nuke.svelte';
+	import { Nuke } from '$components/ui';
 
 	const VISIBLE_PAGE_BUBBLES = 16;
 
