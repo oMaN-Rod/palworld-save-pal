@@ -140,6 +140,9 @@ class MessageType(str, Enum):
     DELETE_GAMEPASS_PLAYER = "delete_gamepass_player"
     RENAME_GAMEPASS_WORLD = "rename_gamepass_world"
 
+    # Tools
+    CONVERT_STEAM_ID = "convert_steam_id"
+
     # Server Management
     LIST_SERVERS = "list_servers"
     GET_SERVER = "get_server"
@@ -881,3 +884,13 @@ class LoadServerSaveMessage(BaseMessage):
 class GetServerStatsMessage(BaseMessage):
     type: str = MessageType.GET_SERVER_STATS.value
     data: ServerIdData
+
+
+# Tools Message Classes
+class ConvertSteamIdData(BaseModel):
+    steam_input: str
+
+
+class ConvertSteamIdMessage(BaseMessage):
+    type: str = MessageType.CONVERT_STEAM_ID.value
+    data: ConvertSteamIdData

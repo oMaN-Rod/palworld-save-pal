@@ -102,6 +102,9 @@ export enum MessageType {
 	DELETE_GAMEPASS_PLAYER = 'delete_gamepass_player',
 	RENAME_GAMEPASS_WORLD = 'rename_gamepass_world',
 
+	// Tools
+	CONVERT_STEAM_ID = 'convert_steam_id',
+
 	// Server Management
 	LIST_SERVERS = 'list_servers',
 	GET_SERVER = 'get_server',

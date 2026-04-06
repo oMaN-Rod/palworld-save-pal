@@ -24,6 +24,7 @@ from palworld_save_pal.ws.handlers import (
     save_file_handler,
     pal_handler,
     settings_handler,
+    steam_id_handler,
     ui_common_handler,
     version_handler,
     local_file_handler,
@@ -124,6 +125,7 @@ from palworld_save_pal.ws.messages import (
     InstallServerModMessage,
     LoadServerSaveMessage,
     GetServerStatsMessage,
+    ConvertSteamIdMessage,
 )
 
 if TYPE_CHECKING:
@@ -236,6 +238,8 @@ HANDLER_REGISTRY = [
     (MessageType.INSTALL_SERVER_MOD, InstallServerModMessage, server_handler.install_server_mod_handler),
     (MessageType.LOAD_SERVER_SAVE, LoadServerSaveMessage, server_handler.load_server_save_handler),
     (MessageType.GET_SERVER_STATS, GetServerStatsMessage, server_handler.get_server_stats_handler),
+    # Tools
+    (MessageType.CONVERT_STEAM_ID, ConvertSteamIdMessage, steam_id_handler.convert_steam_id_handler),
 ]
 
 
