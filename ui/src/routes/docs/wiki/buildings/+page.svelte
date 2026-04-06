@@ -3,29 +3,99 @@
 	import { WikiSearch } from '$components/docs';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
+	import { Accordion } from '@skeletonlabs/skeleton-svelte';
+	import { cn } from '$theme';
+	import {
+		SlidersHorizontal,
+		ArrowDownAZ,
+		ArrowDownZA,
+		ArrowDown01,
+		ArrowDown10,
+		GalleryVerticalEnd
+	} from 'lucide-svelte';
+	import type { ValueChangeDetails } from '@zag-js/accordion';
 
 	let search = $state('');
 	let selectedKey = $state<string | null>(null);
+	let selectedFilter = $state('All');
+	let sortBy: SortBy = $state('name');
+	let sortOrder: SortOrder = $state('asc');
+	let filterExpand = $state(['']);
 
-	const allBuildings = $derived(
-		Object.entries(buildingsData.buildings).sort((a, b) =>
-			a[1].localized_name.localeCompare(b[1].localized_name)
-		)
-	);
+	type SortBy = 'name' | 'hp' | 'rank';
+	type SortOrder = 'asc' | 'desc';
 
-	const filteredBuildings = $derived(
-		search
-			? allBuildings.filter(
-					([key, building]) =>
-						building.localized_name.toLowerCase().includes(search.toLowerCase()) ||
-						key.toLowerCase().includes(search.toLowerCase())
-				)
-			: allBuildings
-	);
+	const typeFilters = ['All', 'Product', 'Pal', 'Storage', 'Food', 'Infrastructure', 'Defense', 'Furniture', 'Other'];
 
-	const selectedBuilding = $derived(
-		selectedKey ? buildingsData.buildings[selectedKey] : null
-	);
+	const filterClass = (value: string) =>
+		cn('btn btn-sm px-2 py-1 text-xs rounded', selectedFilter === value ? 'bg-secondary-500/25' : '');
+	const sortButtonClass = (value: SortBy) =>
+		cn('btn', sortBy === value ? 'bg-secondary-500/25' : '');
+
+	const NameSortIcon = $derived.by(() => {
+		if (sortBy !== 'name') return ArrowDownAZ;
+		return sortOrder === 'asc' ? ArrowDownAZ : ArrowDownZA;
+	});
+	const HpSortIcon = $derived.by(() => {
+		if (sortBy !== 'hp') return ArrowDown01;
+		return sortOrder === 'asc' ? ArrowDown01 : ArrowDown10;
+	});
+	const RankSortIcon = $derived.by(() => {
+		if (sortBy !== 'rank') return ArrowDown01;
+		return sortOrder === 'asc' ? ArrowDown01 : ArrowDown10;
+	});
+
+	function toggleSort(newSortBy: SortBy) {
+		if (sortBy === newSortBy) {
+			if (sortOrder === 'desc') {
+				sortBy = 'name';
+				sortOrder = 'asc';
+			} else {
+				sortOrder = 'desc';
+			}
+		} else {
+			sortBy = newSortBy;
+			sortOrder = 'asc';
+		}
+	}
+
+	const allBuildings = $derived(Object.entries(buildingsData.buildings));
+
+	const filteredBuildings = $derived.by(() => {
+		let result = allBuildings;
+
+		if (selectedFilter !== 'All') {
+			result = result.filter(([, building]) => building.type_a === selectedFilter);
+		}
+
+		if (search) {
+			const q = search.toLowerCase();
+			result = result.filter(
+				([key, building]) =>
+					building.localized_name.toLowerCase().includes(q) || key.toLowerCase().includes(q)
+			);
+		}
+
+		result = [...result].sort((a, b) => {
+			let cmp = 0;
+			switch (sortBy) {
+				case 'name':
+					cmp = a[1].localized_name.localeCompare(b[1].localized_name);
+					break;
+				case 'hp':
+					cmp = a[1].hp - b[1].hp;
+					break;
+				case 'rank':
+					cmp = a[1].rank - b[1].rank;
+					break;
+			}
+			return sortOrder === 'asc' ? cmp : -cmp;
+		});
+
+		return result;
+	});
+
+	const selectedBuilding = $derived(selectedKey ? buildingsData.buildings[selectedKey] : null);
 
 	function getBuildingIcon(icon: string): string {
 		if (!icon) return '';
@@ -38,6 +108,48 @@
 		<div class="mb-3 flex items-center justify-between">
 			<h1 class="text-lg font-bold">Buildings Wiki</h1>
 			<span class="text-xs text-surface-400">{filteredBuildings.length}</span>
+		</div>
+		<div class="mb-3">
+			<Accordion
+				value={filterExpand}
+				onValueChange={(e: ValueChangeDetails) => (filterExpand = e.value)}
+				collapsible
+			>
+				<Accordion.Item
+					value="filter"
+					base="rounded-sm bg-surface-900"
+					controlHover="hover:bg-secondary-500/25"
+				>
+					{#snippet lead()}<SlidersHorizontal class="h-4 w-4" />{/snippet}
+					{#snippet control()}<span class="text-sm font-bold">Filter & Sort</span>{/snippet}
+					{#snippet panel()}
+						<div class="mb-2">
+							<legend class="text-xs font-bold text-surface-400">Sort</legend>
+							<div class="mt-1 grid grid-cols-3 gap-1">
+								<button type="button" class={sortButtonClass('name')} onclick={() => toggleSort('name')} title="Name">
+									<NameSortIcon class="h-4 w-4" />
+								</button>
+								<button type="button" class={sortButtonClass('hp')} onclick={() => toggleSort('hp')} title="HP">
+									<HpSortIcon class="h-4 w-4" />
+								</button>
+								<button type="button" class={sortButtonClass('rank')} onclick={() => toggleSort('rank')} title="Rank">
+									<RankSortIcon class="h-4 w-4" />
+								</button>
+							</div>
+						</div>
+						<div>
+							<legend class="text-xs font-bold text-surface-400">Type</legend>
+							<div class="mt-1 grid grid-cols-3 gap-1">
+								{#each typeFilters as type}
+									<button type="button" class={filterClass(type)} onclick={() => (selectedFilter = type)}>
+										{type === 'All' ? 'All' : type}
+									</button>
+								{/each}
+							</div>
+						</div>
+					{/snippet}
+				</Accordion.Item>
+			</Accordion>
 		</div>
 		<div class="mb-3">
 			<WikiSearch bind:value={search} />
@@ -57,7 +169,7 @@
 		</div>
 	</div>
 
-	<div class="flex-1 overflow-y-auto rounded-lg border border-surface-800  p-5">
+	<div class="flex-1 overflow-y-auto rounded-lg border border-surface-800 p-5">
 		{#if selectedBuilding && selectedKey}
 			<div class="flex items-center gap-3">
 				<img src={getBuildingIcon(selectedBuilding.icon)} alt="" class="h-12 w-12 object-contain" />
@@ -94,11 +206,11 @@
 				</div>
 			</div>
 
-			{#if selectedBuilding.materials && Object.keys(selectedBuilding.materials).length > 0}
+			{#if selectedBuilding.materials && selectedBuilding.materials.length > 0}
 				<div class="mt-5">
 					<h3 class="mb-2 text-sm font-semibold text-surface-400">Materials</h3>
 					<div class="flex flex-wrap gap-2">
-						{#each Object.entries(selectedBuilding.materials) as [idx, mat]}
+						{#each selectedBuilding.materials as mat}
 							{@const itemData = itemsData.getByKey(mat.id)!}
 							{@const itemIcon = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${itemData.details.icon}.webp`) as string}
 							<span class="rounded-md bg-surface-900 px-3 py-1 text-sm">
