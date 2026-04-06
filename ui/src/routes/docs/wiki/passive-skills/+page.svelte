@@ -4,42 +4,93 @@
 	import * as m from '$i18n/messages';
 	import { assetLoader, skillFilter } from '$utils';
 	import { ASSET_DATA_PATH } from '$lib/constants';
+	import { Accordion } from '@skeletonlabs/skeleton-svelte';
+	import { cn } from '$theme';
+	import {
+		SlidersHorizontal,
+		ArrowDownAZ,
+		ArrowDownZA,
+		ArrowDown01,
+		ArrowDown10,
+		GalleryVerticalEnd
+	} from 'lucide-svelte';
+	import type { ValueChangeDetails } from '@zag-js/accordion';
 
 	let search = $state('');
 	let selectedKey = $state<string | null>(null);
+	let selectedFilter = $state('All');
+	let sortBy: SortBy = $state('name');
+	let sortOrder: SortOrder = $state('asc');
+	let filterExpand = $state(['']);
 
-	const allSkills = $derived(
-		Object.entries(passiveSkillsData.passiveSkills).sort((a, b) =>
-			a[1].localized_name.localeCompare(b[1].localized_name)
-		)
-	);
+	type SortBy = 'name' | 'rank';
+	type SortOrder = 'asc' | 'desc';
 
-	const filteredSkills = $derived(
-		search
-			? allSkills.filter(
-					([key, skill]) =>
-						skill.localized_name.toLowerCase().includes(search.toLowerCase()) ||
-						key.toLowerCase().includes(search.toLowerCase())
-				)
-			: allSkills
-	);
+	const filterClass = (value: string) =>
+		cn('btn btn-sm px-2 py-1 rounded', selectedFilter === value ? 'bg-secondary-500/25' : '');
+	const sortButtonClass = (value: SortBy) =>
+		cn('btn', sortBy === value ? 'bg-secondary-500/25' : '');
 
-	const selectedSkill = $derived(selectedKey ? passiveSkillsData.passiveSkills[selectedKey] : null);
+	const NameSortIcon = $derived.by(() => {
+		if (sortBy !== 'name') return ArrowDownAZ;
+		return sortOrder === 'asc' ? ArrowDownAZ : ArrowDownZA;
+	});
+	const RankSortIcon = $derived.by(() => {
+		if (sortBy !== 'rank') return ArrowDown01;
+		return sortOrder === 'asc' ? ArrowDown01 : ArrowDown10;
+	});
 
-	function rankColor(rank: number): string {
-		switch (rank) {
-			case 1:
-				return 'text-surface-300';
-			case 2:
-				return 'text-blue-400';
-			case 3:
-				return 'text-purple-400';
-			case 4:
-				return 'text-yellow-400';
-			default:
-				return 'text-surface-400';
+	function toggleSort(newSortBy: SortBy) {
+		if (sortBy === newSortBy) {
+			if (sortOrder === 'desc') {
+				sortBy = 'name';
+				sortOrder = 'asc';
+			} else {
+				sortOrder = 'desc';
+			}
+		} else {
+			sortBy = newSortBy;
+			sortOrder = 'asc';
 		}
 	}
+
+	const allSkills = $derived(
+		Object.entries(passiveSkillsData.passiveSkills)
+	);
+
+	const filteredSkills = $derived.by(() => {
+		let result = allSkills;
+
+		if (selectedFilter !== 'All') {
+			const rank = parseInt(selectedFilter);
+			result = result.filter(([, skill]) => skill.details.rank === rank);
+		}
+
+		if (search) {
+			const q = search.toLowerCase();
+			result = result.filter(
+				([key, skill]) =>
+					skill.localized_name.toLowerCase().includes(q) || key.toLowerCase().includes(q)
+			);
+		}
+
+		result = [...result].sort((a, b) => {
+			let cmp = 0;
+			switch (sortBy) {
+				case 'name':
+					cmp = a[1].localized_name.localeCompare(b[1].localized_name);
+					break;
+				case 'rank':
+					cmp = a[1].details.rank - b[1].details.rank;
+					break;
+			}
+			return sortOrder === 'asc' ? cmp : -cmp;
+		});
+
+		return result;
+	});
+
+	const selectedSkill = $derived(selectedKey ? passiveSkillsData.passiveSkills[selectedKey] : null);
 </script>
 
 <div class="flex h-full gap-4">
@@ -47,6 +98,50 @@
 		<div class="mb-3 flex items-center justify-between">
 			<h1 class="text-lg font-bold">{m.passive_skill({ count: 2 })}</h1>
 			<span class="text-surface-400 text-xs">{filteredSkills.length}</span>
+		</div>
+		<div class="mb-3">
+			<Accordion
+				value={filterExpand}
+				onValueChange={(e: ValueChangeDetails) => (filterExpand = e.value)}
+				collapsible
+			>
+				<Accordion.Item
+					value="filter"
+					base="rounded-sm bg-surface-900"
+					controlHover="hover:bg-secondary-500/25"
+				>
+					{#snippet lead()}<SlidersHorizontal class="h-4 w-4" />{/snippet}
+					{#snippet control()}<span class="text-sm font-bold">Filter & Sort</span>{/snippet}
+					{#snippet panel()}
+						<div class="mb-2">
+							<legend class="text-xs font-bold text-surface-400">Sort</legend>
+							<div class="mt-1 grid grid-cols-2 gap-1">
+								<button type="button" class={sortButtonClass('name')} onclick={() => toggleSort('name')} title="Name">
+									<NameSortIcon class="h-4 w-4" />
+								</button>
+								<button type="button" class={sortButtonClass('rank')} onclick={() => toggleSort('rank')} title="Rank">
+									<RankSortIcon class="h-4 w-4" />
+								</button>
+							</div>
+						</div>
+						<div>
+							<legend class="text-xs font-bold text-surface-400">Rank</legend>
+							<div class="mt-1 grid grid-cols-5 gap-1">
+								<button type="button" class={filterClass('All')} onclick={() => (selectedFilter = 'All')}>
+									<GalleryVerticalEnd class="h-4 w-4" />
+								</button>
+								{#each [1, 2, 3, 4] as rank}
+									{@const rankIcon = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/rank_${rank}.webp`)}
+									{@const filterStyle = skillFilter(rank)}
+									<button type="button" class={filterClass(String(rank))} onclick={() => (selectedFilter = String(rank))}>
+										<img src={rankIcon} alt="Rank {rank}" class="h-4 w-4" style="filter: {filterStyle};" />
+									</button>
+								{/each}
+							</div>
+						</div>
+					{/snippet}
+				</Accordion.Item>
+			</Accordion>
 		</div>
 		<div class="mb-3">
 			<WikiSearch bind:value={search} />
