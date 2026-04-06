@@ -6,7 +6,7 @@
 set -e
 
 # Navigate to the script's directory
-cd "$(dirname "$0")"
+cd "$(dirname "$0")/.."
 
 # Get IP address (Linux/macOS variants)
 if [[ "$OSTYPE" == "darwin"* ]]; then

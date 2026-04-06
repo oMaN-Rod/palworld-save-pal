@@ -4,13 +4,17 @@ build_windows.py - Script to automate the Windows build process
 Creates both a standalone ZIP and MSI installer for the application
 """
 
-from palworld_save_pal.__version__ import __version__
 import os
 import sys
 import shutil
 import zipfile
 import subprocess
 from pathlib import Path
+
+# Ensure CWD is the project root when run from scripts/
+os.chdir(Path(__file__).parent.parent)
+
+from palworld_save_pal.__version__ import __version__
 
 APP_NAME = "Palworld Save Pal"
 APP_VERSION = __version__

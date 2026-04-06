@@ -15,7 +15,7 @@ if ($Help) {
     exit 0
 }
 
-Set-Location -Path $PSScriptRoot
+Set-Location -Path (Join-Path $PSScriptRoot "..")
 
 # Function to update version in a file
 function Update-Version {

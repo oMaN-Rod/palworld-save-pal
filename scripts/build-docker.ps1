@@ -1,7 +1,7 @@
 # Build and Run Script for PALWorld Save Pal
 
 # Navigate to the script's directory
-Set-Location -Path $PSScriptRoot
+Set-Location -Path (Join-Path $PSScriptRoot "..")
 
 # Function to get the most appropriate IP address
 function Get-BestIPAddress {

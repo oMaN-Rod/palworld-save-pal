@@ -8,9 +8,9 @@ build_exe_options = {
     "include_files": [
         ("ui_build", "ui"),
         ("data", "data"),
-        ("debug.bat", "debug.bat")
+        ("scripts/debug.bat", "debug.bat")
         if sys.platform == "win32"
-        else ("debug.sh", "debug.sh"),
+        else ("scripts/debug.sh", "debug.sh"),
     ],
     "packages": [
         "uvicorn",
@@ -88,7 +88,7 @@ elif sys.platform == "darwin":
 
 elif sys.platform.startswith("linux"):
     # Linux-specific settings
-    build_exe_options["include_files"].append(("linux_scripts/debug.sh", "debug.sh"))
+    build_exe_options["include_files"].append(("scripts/debug.sh", "debug.sh"))
     
     # For Ubuntu, we'll use both DEB and RPM options
     # DEB package options (Ubuntu/Debian)
