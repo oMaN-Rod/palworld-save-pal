@@ -142,6 +142,7 @@ class MessageType(str, Enum):
 
     # Tools
     CONVERT_STEAM_ID = "convert_steam_id"
+    SWAP_PLAYER_UIDS = "swap_player_uids"
 
     # Server Management
     LIST_SERVERS = "list_servers"
@@ -894,3 +895,13 @@ class ConvertSteamIdData(BaseModel):
 class ConvertSteamIdMessage(BaseMessage):
     type: str = MessageType.CONVERT_STEAM_ID.value
     data: ConvertSteamIdData
+
+
+class SwapPlayerUidsData(BaseModel):
+    old_player_uid: UUID
+    new_player_uid: UUID
+
+
+class SwapPlayerUidsMessage(BaseMessage):
+    type: str = MessageType.SWAP_PLAYER_UIDS.value
+    data: SwapPlayerUidsData

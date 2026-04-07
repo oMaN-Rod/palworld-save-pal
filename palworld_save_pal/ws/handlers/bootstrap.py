@@ -25,6 +25,7 @@ from palworld_save_pal.ws.handlers import (
     pal_handler,
     settings_handler,
     steam_id_handler,
+    uid_swap_handler,
     ui_common_handler,
     version_handler,
     local_file_handler,
@@ -126,6 +127,7 @@ from palworld_save_pal.ws.messages import (
     LoadServerSaveMessage,
     GetServerStatsMessage,
     ConvertSteamIdMessage,
+    SwapPlayerUidsMessage,
 )
 
 if TYPE_CHECKING:
@@ -240,6 +242,7 @@ HANDLER_REGISTRY = [
     (MessageType.GET_SERVER_STATS, GetServerStatsMessage, server_handler.get_server_stats_handler),
     # Tools
     (MessageType.CONVERT_STEAM_ID, ConvertSteamIdMessage, steam_id_handler.convert_steam_id_handler),
+    (MessageType.SWAP_PLAYER_UIDS, SwapPlayerUidsMessage, uid_swap_handler.swap_player_uids_handler),
 ]
 
 

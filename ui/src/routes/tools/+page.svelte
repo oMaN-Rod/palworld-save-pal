@@ -19,7 +19,8 @@
 		RefreshCw,
 		Hash,
 		Copy,
-		Check
+		Check,
+		Repeat
 	} from 'lucide-svelte';
 
 	const appState = getAppState();
@@ -29,7 +30,7 @@
 	const steamIcon = assetLoader.loadSvg(`${ASSET_DATA_PATH}/img/app/steam.svg`);
 	const xboxIcon = assetLoader.loadSvg(`${ASSET_DATA_PATH}/img/app/xbox.svg`);
 
-	type Tab = 'convert' | 'gamepass' | 'steamid';
+	type Tab = 'convert' | 'gamepass' | 'steamid' | 'uidswap';
 	let activeTab: Tab = $state('convert');
 
 	// Convert tab state
@@ -43,6 +44,13 @@
 	let browserSaves: Record<string, GamepassSave> = $state({});
 	let isBrowserScanning = $state(false);
 	let browserLoaded = $state(false);
+
+	// UID Swap tab state
+	let swapPlayerA: string = $state('');
+	let swapPlayerB: string = $state('');
+	let isSwapping = $state(false);
+	let swapResult: { success?: boolean; error?: string } | null = $state(null);
+	let showSwapConfirm = $state(false);
 
 	// Steam ID tab state
 	let steamInput = $state('');
@@ -62,7 +70,8 @@
 	const tabs: { id: Tab; label: string; icon: typeof ArrowRightLeft }[] = [
 		{ id: 'convert', label: 'Convert', icon: ArrowRightLeft },
 		{ id: 'gamepass', label: 'GamePass Browser', icon: Gamepad2 },
-		{ id: 'steamid', label: 'Steam ID', icon: Hash }
+		{ id: 'steamid', label: 'Steam ID', icon: Hash },
+		{ id: 'uidswap', label: 'UID Swap', icon: Repeat }
 	];
 
 	// --- Convert tab handlers ---
@@ -198,6 +207,32 @@
 			toast.add(`Conversion failed: ${err.message}`, 'Error', 'error');
 		} finally {
 			steamConverting = false;
+		}
+	}
+
+	// --- UID Swap tab handlers ---
+
+	async function handleSwapUids() {
+		if (!swapPlayerA || !swapPlayerB || swapPlayerA === swapPlayerB) return;
+		showSwapConfirm = false;
+		isSwapping = true;
+		swapResult = null;
+		try {
+			const result = await sendAndWait<{ success?: boolean; error?: string }>(
+				MessageType.SWAP_PLAYER_UIDS,
+				{ old_player_uid: swapPlayerA, new_player_uid: swapPlayerB }
+			);
+			swapResult = result;
+			if (result.error) {
+				toast.add(result.error, 'Error', 'error');
+			} else if (result.success) {
+				toast.add('Player UIDs swapped successfully. Save your changes to apply.');
+			}
+		} catch (err: any) {
+			swapResult = { error: err.message };
+			toast.add(`Swap failed: ${err.message}`, 'Error', 'error');
+		} finally {
+			isSwapping = false;
 		}
 	}
 
@@ -429,6 +464,130 @@
 							</div>
 						</Card>
 					{/if}
+				{/if}
+			</div>
+		{/if}
+
+		<!-- UID Swap Tab -->
+		{#if activeTab === 'uidswap'}
+			<div class="flex flex-col gap-8">
+				{#if !hasLoadedSave}
+					<Card class="mx-auto max-w-lg">
+						<div class="flex flex-col items-center gap-4 p-4">
+							<HardDrive size={48} class="text-surface-400" />
+							<p class="text-surface-300 text-center">
+								Load a save file first to swap player UIDs.
+							</p>
+						</div>
+					</Card>
+				{:else if isSwapping}
+					<div class="flex flex-col items-center gap-4">
+						<Spinner />
+						{#if appState.progressMessage}
+							<span class="text-surface-200">{appState.progressMessage}</span>
+						{/if}
+					</div>
+				{:else}
+					<section class="w-full">
+						<h2 class="text-surface-100 mb-2 text-center text-2xl font-bold">
+							Player UID Swap
+						</h2>
+						<p class="text-surface-400 mb-6 text-center text-sm">
+							Swap UIDs between two players. Useful for co-op to dedicated server migration,
+							platform changes, or UID reassignment.
+						</p>
+
+						<Card class="mx-auto max-w-lg">
+							<div class="flex flex-col gap-4 p-4">
+								<div class="flex flex-col gap-2">
+									<label for="swap-player-a" class="text-surface-300 text-sm font-medium">
+										Player A
+									</label>
+									<select
+										id="swap-player-a"
+										bind:value={swapPlayerA}
+										class="bg-surface-800 border-surface-600 text-surface-100 rounded-lg border px-3 py-2 text-sm focus:border-primary-500 focus:outline-none"
+									>
+										<option value="">Select player...</option>
+										{#each appState.playerSummariesArray as player}
+											<option value={player.uid} disabled={player.uid === swapPlayerB}>
+												{player.nickname} (Lv.{player.level ?? '?'}) — {player.uid.substring(0, 8)}
+											</option>
+										{/each}
+									</select>
+								</div>
+
+								<div class="flex items-center justify-center">
+									<Repeat size={20} class="text-primary-400" />
+								</div>
+
+								<div class="flex flex-col gap-2">
+									<label for="swap-player-b" class="text-surface-300 text-sm font-medium">
+										Player B
+									</label>
+									<select
+										id="swap-player-b"
+										bind:value={swapPlayerB}
+										class="bg-surface-800 border-surface-600 text-surface-100 rounded-lg border px-3 py-2 text-sm focus:border-primary-500 focus:outline-none"
+									>
+										<option value="">Select player...</option>
+										{#each appState.playerSummariesArray as player}
+											<option value={player.uid} disabled={player.uid === swapPlayerA}>
+												{player.nickname} (Lv.{player.level ?? '?'}) — {player.uid.substring(0, 8)}
+											</option>
+										{/each}
+									</select>
+								</div>
+
+								{#if showSwapConfirm}
+									<div class="bg-surface-900 border-yellow-600/50 rounded-lg border p-3">
+										<p class="text-yellow-400 mb-3 text-sm">
+											This will swap all UID references between these two players,
+											including ownership of pals, structures, and guild membership.
+											Are you sure?
+										</p>
+										<div class="flex justify-end gap-2">
+											<button
+												class="btn bg-surface-700 hover:bg-surface-600 text-surface-200 text-sm"
+												onclick={() => (showSwapConfirm = false)}
+											>
+												Cancel
+											</button>
+											<button
+												class="btn bg-primary-500 hover:bg-primary-600 text-sm text-white"
+												onclick={handleSwapUids}
+											>
+												Confirm Swap
+											</button>
+										</div>
+									</div>
+								{:else}
+									<button
+										class="btn bg-primary-500 hover:bg-primary-600 text-white"
+										onclick={() => (showSwapConfirm = true)}
+										disabled={!swapPlayerA || !swapPlayerB || swapPlayerA === swapPlayerB}
+									>
+										<Repeat size={16} />
+										<span>Swap UIDs</span>
+									</button>
+								{/if}
+
+								{#if swapResult?.success}
+									<div class="border-surface-700 border-t pt-3">
+										<p class="text-green-400 text-sm">
+											UIDs swapped successfully. Save your changes to apply.
+										</p>
+									</div>
+								{/if}
+
+								{#if swapResult?.error}
+									<div class="border-surface-700 border-t pt-3">
+										<p class="text-red-400 text-sm">{swapResult.error}</p>
+									</div>
+								{/if}
+							</div>
+						</Card>
+					</section>
 				{/if}
 			</div>
 		{/if}

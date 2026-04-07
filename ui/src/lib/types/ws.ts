@@ -104,6 +104,7 @@ export enum MessageType {
 
 	// Tools
 	CONVERT_STEAM_ID = 'convert_steam_id',
+	SWAP_PLAYER_UIDS = 'swap_player_uids',
 
 	// Server Management
 	LIST_SERVERS = 'list_servers',
