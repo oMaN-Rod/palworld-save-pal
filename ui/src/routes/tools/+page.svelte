@@ -369,13 +369,6 @@
 
 <div class="flex min-h-screen w-full flex-col items-center py-8">
 	<div class="flex w-full max-w-3xl flex-col gap-8">
-		<!-- Header -->
-		<section class="w-full">
-			<h1 class="text-primary-400 mb-6 text-center text-4xl font-extrabold tracking-tight">
-				{m.tools()}
-			</h1>
-		</section>
-
 		<!-- Tabs -->
 		<div class="border-surface-700 flex gap-1 border-b">
 			{#each tabs as tab}
