@@ -26,6 +26,7 @@ from palworld_save_pal.game.mixins.serialization import SerializationMixin
 from palworld_save_pal.game.mixins.pal_ops import PalOpsMixin
 from palworld_save_pal.game.mixins.player_ops import PlayerOpsMixin
 from palworld_save_pal.game.mixins.guild_ops import GuildOpsMixin
+from palworld_save_pal.game.mixins.player_swap import PlayerSwapMixin
 
 logger = create_logger(__name__)
 
@@ -38,6 +39,7 @@ class SaveManager(
     PalOpsMixin,
     PlayerOpsMixin,
     GuildOpsMixin,
+    PlayerSwapMixin,
     BaseModel,
 ):
     level_sav_path: str = ""

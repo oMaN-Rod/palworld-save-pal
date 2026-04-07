@@ -1,6 +1,5 @@
 from fastapi import WebSocket
 
-from palworld_save_pal.game.uid_swap import swap_player_uids
 from palworld_save_pal.state import get_app_state
 from palworld_save_pal.ws.messages import MessageType, SwapPlayerUidsMessage
 from palworld_save_pal.ws.utils import build_response
@@ -22,8 +21,7 @@ async def swap_player_uids_handler(message: SwapPlayerUidsMessage, ws: WebSocket
         progress = build_response(MessageType.PROGRESS_MESSAGE, msg)
         await ws.send_json(progress)
 
-    result = await swap_player_uids(
-        save_file,
+    result = await save_file.swap_player_uids(
         message.data.old_player_uid,
         message.data.new_player_uid,
         ws_callback=ws_callback,
