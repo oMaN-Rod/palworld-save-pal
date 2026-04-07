@@ -25,8 +25,7 @@ build_exe_options = {
 
 # Platform-specific configurations
 if sys.platform == "win32":
-    # Add Windows-specific files
-    build_exe_options["include_files"].append(("debug.bat", "debug.bat"))
+    pass
 
     # MSI installer options (Windows only)
     bdist_msi_options = {
