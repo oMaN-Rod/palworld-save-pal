@@ -32,6 +32,7 @@ class ServerModel(SQLModel, table=True):
     steamcmd_path: str = Field(default="")
     pid: Optional[int] = Field(default=None)
     launch_args: str = Field(default="")
+    workshop_dir: str = Field(default="")
 
     # Server identity
     server_name: str = Field(default="PSP Palworld Server")

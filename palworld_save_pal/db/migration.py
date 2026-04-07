@@ -89,6 +89,9 @@ def run_migrations(db_path):
         migrate_table_column(
             conn, cursor, "servers", "launch_args", "TEXT", "''"
         )
+        migrate_table_column(
+            conn, cursor, "servers", "workshop_dir", "TEXT", "''"
+        )
 
         cursor.close()
         conn.close()

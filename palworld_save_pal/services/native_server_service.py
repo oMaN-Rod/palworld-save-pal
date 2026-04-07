@@ -1,3 +1,5 @@
+import base64
+import json
 import os
 import shutil
 import subprocess
@@ -307,6 +309,9 @@ class NativeServerService:
 
         # Always rewrite config before starting to ensure INI matches DB
         NativeServerService.write_palworld_settings(server)
+
+        # Ensure mod directories and PalModSettings.ini exist
+        NativeServerService.ensure_mod_settings(server)
 
         args = [exe_path]
         args.append(f"-port={server.game_port}")
@@ -768,6 +773,254 @@ class NativeServerService:
             "bAllowEnhanceStat_Weight": "True",
             "bAllowEnhanceStat_WorkSpeed": "True",
         }
+
+    # --- Mod management (official PalModSettings.ini system) ---
+
+    # Palworld Steam App ID for workshop content
+    _WORKSHOP_APP_ID = "1623730"
+
+    @staticmethod
+    def find_steam_workshop_dir() -> Optional[str]:
+        """Auto-detect the Steam Workshop directory for Palworld mods."""
+        app_id = NativeServerService._WORKSHOP_APP_ID
+        # Common Steam installation patterns relative to drive root
+        steam_patterns = [
+            os.path.join("Program Files (x86)", "Steam"),
+            os.path.join("Programs", "Steam"),
+            "Steam",
+            "SteamLibrary",
+            os.path.join("Program Files", "Steam"),
+        ]
+        for drive_letter in "CDEFGHIJKLMNOPQRSTUVWXYZ":
+            for pattern in steam_patterns:
+                candidate = os.path.join(
+                    f"{drive_letter}:\\", pattern, "steamapps", "workshop", "content", app_id
+                )
+                if os.path.isdir(candidate):
+                    logger.info("Found Steam Workshop dir at %s", candidate)
+                    return candidate
+        return None
+
+    @staticmethod
+    def get_palmodsettings_path(install_path: str) -> str:
+        return os.path.join(install_path, "Mods", "PalModSettings.ini")
+
+    @staticmethod
+    def get_local_workshop_path(install_path: str) -> str:
+        return os.path.join(install_path, "Mods", "Workshop")
+
+    @staticmethod
+    def read_palmodsettings(install_path: str) -> Dict[str, Any]:
+        """Parse PalModSettings.ini. Returns {enabled, active_mods, workshop_root_dir}."""
+        result: Dict[str, Any] = {
+            "enabled": False,
+            "active_mods": [],
+            "workshop_root_dir": "",
+        }
+        ini_path = NativeServerService.get_palmodsettings_path(install_path)
+        if not os.path.exists(ini_path):
+            return result
+
+        with open(ini_path, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line or line.startswith(";") or line.startswith("#"):
+                    continue
+                if "=" not in line:
+                    continue
+                key, _, value = line.partition("=")
+                key = key.strip()
+                value = value.strip()
+                if key == "bGlobalEnableMod":
+                    result["enabled"] = value.lower() == "true"
+                elif key == "ActiveModList":
+                    if value:
+                        result["active_mods"].append(value)
+                elif key == "WorkshopRootDir":
+                    result["workshop_root_dir"] = value
+        return result
+
+    @staticmethod
+    def write_palmodsettings(
+        install_path: str,
+        enabled: bool,
+        active_mods: List[str],
+        workshop_root_dir: str = "",
+    ) -> None:
+        """Write PalModSettings.ini."""
+        mods_dir = os.path.join(install_path, "Mods")
+        os.makedirs(mods_dir, exist_ok=True)
+        ini_path = NativeServerService.get_palmodsettings_path(install_path)
+
+        lines = [f"bGlobalEnableMod={'true' if enabled else 'false'}"]
+        if workshop_root_dir:
+            lines.append(f"WorkshopRootDir={workshop_root_dir}")
+        for mod in active_mods:
+            lines.append(f"ActiveModList={mod}")
+
+        with open(ini_path, "w", encoding="utf-8") as f:
+            f.write("\n".join(lines) + "\n")
+        logger.info("Wrote PalModSettings.ini to %s", ini_path)
+
+    @staticmethod
+    def ensure_mod_settings(server: "ServerModel") -> None:
+        """Ensure Mods directory structure and PalModSettings.ini exist before server start."""
+        install_path = server.install_path
+        os.makedirs(NativeServerService.get_local_workshop_path(install_path), exist_ok=True)
+
+        ini_path = NativeServerService.get_palmodsettings_path(install_path)
+        if not os.path.exists(ini_path):
+            NativeServerService.write_palmodsettings(
+                install_path, True, [], server.workshop_dir
+            )
+        elif server.workshop_dir:
+            # Update WorkshopRootDir if it changed
+            settings = NativeServerService.read_palmodsettings(install_path)
+            if settings["workshop_root_dir"] != server.workshop_dir:
+                NativeServerService.write_palmodsettings(
+                    install_path,
+                    settings["enabled"],
+                    settings["active_mods"],
+                    server.workshop_dir,
+                )
+
+    @staticmethod
+    def _parse_info_json(mod_dir: str) -> Optional[Dict[str, Any]]:
+        """Parse Info.json from a workshop mod directory."""
+        info_path = os.path.join(mod_dir, "Info.json")
+        if not os.path.exists(info_path):
+            return None
+        try:
+            with open(info_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            # Determine mod type from InstallRules
+            mod_type = "unknown"
+            install_rules = data.get("InstallRule", [])
+            if install_rules:
+                rule_type = install_rules[0].get("Type", "").lower()
+                type_map = {
+                    "ue4ss": "ue4ss",
+                    "lua": "lua",
+                    "palschema": "palschema",
+                    "logicmods": "logic",
+                    "paks": "paks",
+                }
+                mod_type = type_map.get(rule_type, rule_type)
+            return {
+                "package_name": data.get("PackageName", ""),
+                "display_name": data.get("ModName", ""),
+                "mod_version": data.get("Version", ""),
+                "mod_author": data.get("Author", ""),
+                "mod_type": mod_type,
+                "dependencies": data.get("Dependencies") or [],
+            }
+        except Exception as e:
+            logger.warning("Failed to parse Info.json in %s: %s", mod_dir, e)
+            return None
+
+    @staticmethod
+    def list_workshop_mods(workshop_dir: str, source: str = "workshop") -> List[Dict[str, Any]]:
+        """Scan a workshop directory for mods with Info.json."""
+        mods = []
+        if not workshop_dir or not os.path.isdir(workshop_dir):
+            return mods
+        for entry in os.listdir(workshop_dir):
+            entry_path = os.path.join(workshop_dir, entry)
+            if not os.path.isdir(entry_path):
+                continue
+            info = NativeServerService._parse_info_json(entry_path)
+            if info and info["package_name"]:
+                mods.append({
+                    "mod_name": info["package_name"],
+                    "display_name": info["display_name"],
+                    "mod_type": info["mod_type"],
+                    "mod_version": info["mod_version"],
+                    "mod_author": info["mod_author"],
+                    "source": source,
+                    "enabled": False,  # will be updated by caller
+                })
+        return mods
+
+    @staticmethod
+    def list_native_server_mods(server: "ServerModel") -> List[Dict[str, Any]]:
+        """List all mods for a native server from Workshop + local sources."""
+        install_path = server.install_path
+        settings = NativeServerService.read_palmodsettings(install_path)
+        active_set = set(settings["active_mods"])
+
+        # Collect mods from Steam Workshop dir
+        all_mods: List[Dict[str, Any]] = []
+        if server.workshop_dir:
+            all_mods.extend(
+                NativeServerService.list_workshop_mods(server.workshop_dir, "workshop")
+            )
+
+        # Collect mods from local Mods/Workshop/
+        local_path = NativeServerService.get_local_workshop_path(install_path)
+        all_mods.extend(
+            NativeServerService.list_workshop_mods(local_path, "local")
+        )
+
+        # Mark enabled status
+        seen = set()
+        for mod in all_mods:
+            mod["enabled"] = mod["mod_name"] in active_set
+            seen.add(mod["mod_name"])
+
+        # Include any ActiveModList entries not found in scanned dirs
+        for pkg in settings["active_mods"]:
+            if pkg not in seen:
+                all_mods.append({
+                    "mod_name": pkg,
+                    "display_name": pkg,
+                    "mod_type": "unknown",
+                    "mod_version": "",
+                    "mod_author": "",
+                    "source": "config",
+                    "enabled": True,
+                })
+
+        return all_mods
+
+    @staticmethod
+    def toggle_native_mod(install_path: str, package_name: str, enabled: bool) -> bool:
+        """Add or remove a mod from ActiveModList in PalModSettings.ini."""
+        settings = NativeServerService.read_palmodsettings(install_path)
+        active_mods = settings["active_mods"]
+
+        if enabled and package_name not in active_mods:
+            active_mods.append(package_name)
+        elif not enabled and package_name in active_mods:
+            active_mods = [m for m in active_mods if m != package_name]
+
+        NativeServerService.write_palmodsettings(
+            install_path, settings["enabled"], active_mods, settings["workshop_root_dir"]
+        )
+        return True
+
+    @staticmethod
+    def install_native_workshop_mod(install_path: str, mod_name: str, mod_zip_b64: str) -> bool:
+        """Install a mod ZIP to Mods/Workshop/ and add to ActiveModList."""
+        try:
+            zip_bytes = base64.b64decode(mod_zip_b64)
+            workshop_path = NativeServerService.get_local_workshop_path(install_path)
+            mod_dir = os.path.join(workshop_path, mod_name)
+            os.makedirs(mod_dir, exist_ok=True)
+
+            with zipfile.ZipFile(BytesIO(zip_bytes)) as zf:
+                zf.extractall(mod_dir)
+
+            # Read PackageName from Info.json if available
+            info = NativeServerService._parse_info_json(mod_dir)
+            package_name = info["package_name"] if info else mod_name
+
+            # Add to ActiveModList
+            NativeServerService.toggle_native_mod(install_path, package_name, True)
+            logger.info("Installed native workshop mod: %s (package: %s)", mod_name, package_name)
+            return True
+        except Exception as e:
+            logger.error("Failed to install native workshop mod %s: %s", mod_name, e)
+            return False
 
     # --- Helpers ---
 

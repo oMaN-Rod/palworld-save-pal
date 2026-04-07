@@ -125,6 +125,7 @@ export enum MessageType {
 	LIST_SERVER_MODS = 'list_server_mods',
 	TOGGLE_SERVER_MOD = 'toggle_server_mod',
 	INSTALL_SERVER_MOD = 'install_server_mod',
+	DETECT_WORKSHOP_DIR = 'detect_workshop_dir',
 	LOAD_SERVER_SAVE = 'load_server_save',
 	GET_SERVER_STATS = 'get_server_stats',
 	SERVER_CREATION_PROGRESS = 'server_creation_progress',

@@ -13,6 +13,7 @@ from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.ws.messages import (
     CreateServerMessage,
     DeleteServerMessage,
+    DetectWorkshopDirMessage,
     GetServerMessage,
     GetServerStatsMessage,
     InstallServerModMessage,
@@ -56,6 +57,7 @@ def _server_to_dict(server) -> dict:
         "server_password": server.server_password,
         "admin_password": server.admin_password,
         "max_players": server.max_players,
+        "workshop_dir": server.workshop_dir,
         "env_vars": server.env_vars or {},
         "created_at": server.created_at.isoformat() if server.created_at else None,
         "updated_at": server.updated_at.isoformat() if server.updated_at else None,
@@ -178,6 +180,16 @@ async def create_server_handler(message: CreateServerMessage, ws: WebSocket):
 
             await send_progress("Validating server configuration...")
 
+            # Auto-detect Steam Workshop dir if not provided
+            workshop_dir = data.workshop_dir
+            if not workshop_dir:
+                await send_progress("Auto-detecting Steam Workshop directory...")
+                workshop_dir = NativeServerService.find_steam_workshop_dir() or ""
+                if workshop_dir:
+                    await send_progress(f"Found Steam Workshop at {workshop_dir}")
+                else:
+                    await send_progress("Steam Workshop directory not found (can be set later)")
+
             server_data = {
                 "name": data.name,
                 "container_name": data.container_name,
@@ -190,6 +202,7 @@ async def create_server_handler(message: CreateServerMessage, ws: WebSocket):
                 "install_path": install_path,
                 "steamcmd_path": data.steamcmd_path,
                 "launch_args": data.launch_args,
+                "workshop_dir": workshop_dir,
                 "saves_path": NativeServerService.get_saves_path(install_path),
                 "mods_path": NativeServerService.get_mods_path(install_path),
                 "logicmods_path": NativeServerService.get_logicmods_path(install_path),
@@ -251,7 +264,10 @@ async def create_server_handler(message: CreateServerMessage, ws: WebSocket):
                 return
 
             await send_progress("Writing server configuration files...")
-            # Config is already written by create_server, just signaling progress
+            # Config is already written by create_server, now write mod settings
+            NativeServerService.write_palmodsettings(
+                install_path, True, [], workshop_dir
+            )
 
             await send_progress("")  # Clear progress
             result = _server_to_dict(server)
@@ -507,20 +523,23 @@ async def list_server_mods_handler(message: ListServerModsMessage, ws: WebSocket
             await ws.send_json(response)
             return
 
-        mods = DockerService.list_mods(server.mods_path)
+        if server.server_type == "native":
+            mods = NativeServerService.list_native_server_mods(server)
+        else:
+            mods = DockerService.list_mods(server.mods_path)
 
-        # Also list logic mods
-        if os.path.isdir(server.logicmods_path):
-            for entry in os.listdir(server.logicmods_path):
-                if entry.endswith(".pak"):
-                    mods.append({
-                        "mod_name": entry,
-                        "mod_type": "logic",
-                        "enabled": True,
-                    })
+            # Also list logic mods
+            if os.path.isdir(server.logicmods_path):
+                for entry in os.listdir(server.logicmods_path):
+                    if entry.endswith(".pak"):
+                        mods.append({
+                            "mod_name": entry,
+                            "mod_type": "logic",
+                            "enabled": True,
+                        })
 
-        # Also list native/proxy DLL mods
-        mods.extend(DockerService.list_native_mods(server.nativemods_path))
+            # Also list native/proxy DLL mods
+            mods.extend(DockerService.list_native_mods(server.nativemods_path))
 
         response = build_response(
             MessageType.LIST_SERVER_MODS,
@@ -541,7 +560,12 @@ async def toggle_server_mod_handler(message: ToggleServerModMessage, ws: WebSock
             await ws.send_json(response)
             return
 
-        DockerService.set_mod_enabled(server.mods_path, message.data.mod_name, message.data.enabled)
+        if server.server_type == "native":
+            NativeServerService.toggle_native_mod(
+                server.install_path, message.data.mod_name, message.data.enabled
+            )
+        else:
+            DockerService.set_mod_enabled(server.mods_path, message.data.mod_name, message.data.enabled)
 
         response = build_response(
             MessageType.TOGGLE_SERVER_MOD,
@@ -566,16 +590,21 @@ async def install_server_mod_handler(message: InstallServerModMessage, ws: WebSo
             await ws.send_json(response)
             return
 
-        mod_type = message.data.mod_type
-        if mod_type == "native":
-            success = DockerService.install_native_mod(
-                server.nativemods_path, message.data.mod_name, message.data.mod_data
+        if server.server_type == "native":
+            success = NativeServerService.install_native_workshop_mod(
+                server.install_path, message.data.mod_name, message.data.mod_data
             )
         else:
-            target_path = server.mods_path if mod_type == "ue4ss" else server.logicmods_path
-            success = DockerService.install_mod(
-                target_path, message.data.mod_name, message.data.mod_data, mod_type
-            )
+            mod_type = message.data.mod_type
+            if mod_type == "native":
+                success = DockerService.install_native_mod(
+                    server.nativemods_path, message.data.mod_name, message.data.mod_data
+                )
+            else:
+                target_path = server.mods_path if mod_type == "ue4ss" else server.logicmods_path
+                success = DockerService.install_mod(
+                    target_path, message.data.mod_name, message.data.mod_data, mod_type
+                )
 
         response = build_response(
             MessageType.INSTALL_SERVER_MOD,
@@ -585,6 +614,20 @@ async def install_server_mod_handler(message: InstallServerModMessage, ws: WebSo
     except Exception as e:
         logger.exception("Error installing mod: %s", e)
         response = build_response(MessageType.ERROR, {"message": f"Failed to install mod: {e}"})
+        await ws.send_json(response)
+
+
+async def detect_workshop_dir_handler(message: DetectWorkshopDirMessage, ws: WebSocket):
+    try:
+        workshop_dir = NativeServerService.find_steam_workshop_dir() or ""
+        response = build_response(
+            MessageType.DETECT_WORKSHOP_DIR,
+            {"workshop_dir": workshop_dir},
+        )
+        await ws.send_json(response)
+    except Exception as e:
+        logger.exception("Error detecting workshop dir: %s", e)
+        response = build_response(MessageType.ERROR, {"message": f"Failed to detect workshop dir: {e}"})
         await ws.send_json(response)
 
 

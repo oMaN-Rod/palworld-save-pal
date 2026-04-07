@@ -125,6 +125,7 @@ from palworld_save_pal.ws.messages import (
     ListServerModsMessage,
     ToggleServerModMessage,
     InstallServerModMessage,
+    DetectWorkshopDirMessage,
     LoadServerSaveMessage,
     GetServerStatsMessage,
     ConvertSteamIdMessage,
@@ -243,6 +244,7 @@ HANDLER_REGISTRY = [
     (MessageType.LIST_SERVER_MODS, ListServerModsMessage, server_handler.list_server_mods_handler),
     (MessageType.TOGGLE_SERVER_MOD, ToggleServerModMessage, server_handler.toggle_server_mod_handler),
     (MessageType.INSTALL_SERVER_MOD, InstallServerModMessage, server_handler.install_server_mod_handler),
+    (MessageType.DETECT_WORKSHOP_DIR, DetectWorkshopDirMessage, server_handler.detect_workshop_dir_handler),
     (MessageType.LOAD_SERVER_SAVE, LoadServerSaveMessage, server_handler.load_server_save_handler),
     (MessageType.GET_SERVER_STATS, GetServerStatsMessage, server_handler.get_server_stats_handler),
     # Tools

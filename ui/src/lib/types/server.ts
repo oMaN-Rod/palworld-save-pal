@@ -26,6 +26,7 @@ export interface Server {
 	steamcmd_path: string;
 	pid: number | null;
 	launch_args: string;
+	workshop_dir: string;
 	server_name: string;
 	server_description: string;
 	server_password: string;
@@ -41,7 +42,11 @@ export interface Server {
 
 export interface ServerMod {
 	mod_name: string;
-	mod_type: 'ue4ss' | 'logic' | 'native';
+	display_name?: string;
+	mod_type: 'ue4ss' | 'logic' | 'native' | 'lua' | 'palschema' | 'paks' | 'unknown';
+	mod_version?: string;
+	mod_author?: string;
+	source?: 'workshop' | 'local' | 'config';
 	enabled: boolean;
 }
 
@@ -62,6 +67,7 @@ export interface CreateServerData {
 	steamcmd_path?: string;
 	install_path?: string;
 	launch_args?: string;
+	workshop_dir?: string;
 }
 
 export interface ContainerStats {

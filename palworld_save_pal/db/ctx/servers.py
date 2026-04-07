@@ -116,3 +116,4 @@ def _load_attrs(server: ServerModel):
     _ = server.env_vars
     _ = server.created_at
     _ = server.updated_at
+    _ = server.workshop_dir

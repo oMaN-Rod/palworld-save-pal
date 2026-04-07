@@ -163,6 +163,7 @@ class MessageType(str, Enum):
     LIST_SERVER_MODS = "list_server_mods"
     TOGGLE_SERVER_MOD = "toggle_server_mod"
     INSTALL_SERVER_MOD = "install_server_mod"
+    DETECT_WORKSHOP_DIR = "detect_workshop_dir"
     LOAD_SERVER_SAVE = "load_server_save"
     GET_SERVER_STATS = "get_server_stats"
     SERVER_CREATION_PROGRESS = "server_creation_progress"
@@ -809,6 +810,7 @@ class CreateServerData(BaseModel):
     steamcmd_path: str = ""
     install_path: str = ""
     launch_args: str = ""
+    workshop_dir: str = ""
 
 
 class CreateServerMessage(BaseMessage):
@@ -879,6 +881,10 @@ class InstallServerModData(BaseModel):
 class InstallServerModMessage(BaseMessage):
     type: str = MessageType.INSTALL_SERVER_MOD.value
     data: InstallServerModData
+
+
+class DetectWorkshopDirMessage(BaseMessage):
+    type: str = MessageType.DETECT_WORKSHOP_DIR.value
 
 
 class LoadServerSaveMessage(BaseMessage):

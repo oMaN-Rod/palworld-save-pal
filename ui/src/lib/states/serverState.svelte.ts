@@ -11,6 +11,7 @@ class ServerState {
 	containerStats = $state<ContainerStats | null>(null);
 	saving = $state(false);
 	creationProgress = $state('');
+	detectedWorkshopDir = $state('');
 
 	#pollInterval: ReturnType<typeof setInterval> | null = null;
 
@@ -82,6 +83,10 @@ class ServerState {
 			mod_data: modData,
 			mod_type: modType
 		});
+	}
+
+	async detectWorkshopDir(): Promise<void> {
+		send(MessageType.DETECT_WORKSHOP_DIR);
 	}
 
 	async loadServerSave(serverId: number): Promise<void> {

@@ -7,8 +7,10 @@
 	import { cn } from '$theme';
 	import { ExternalLink } from 'lucide-svelte';
 	import type { CreateServerData, ServerType } from '$types';
+	import { getServerState } from '$states';
 	import { envGroups, PALWORLD_DOCS_URL } from './envGroups';
 	import EnvField from './EnvField.svelte';
+	import { Search } from 'lucide-svelte';
 
 	let {
 		title = 'Create Server',
@@ -81,11 +83,15 @@
 		Object.fromEntries(envGroups.flatMap((g) => g.keys.map((k) => [k.key, k.default])))
 	);
 
+	const serverState = getServerState();
+
 	// Native-specific fields
 	let steamcmdPath = $state('');
 	let installBasePath = $state('');
 	let worldName = $state('');
 	let launchArgs = $state('');
+	let workshopDir = $state('');
+	let detectingWorkshop = $state(false);
 
 	const autoContainerName = $derived(
 		name
@@ -116,6 +122,25 @@
 		envVars = envVars;
 	}
 
+	async function handleDetectWorkshop() {
+		detectingWorkshop = true;
+		serverState.detectedWorkshopDir = '';
+		await serverState.detectWorkshopDir();
+		// Wait briefly for the WS response
+		const start = Date.now();
+		const check = () => {
+			if (serverState.detectedWorkshopDir || Date.now() - start > 5000) {
+				if (serverState.detectedWorkshopDir) {
+					workshopDir = serverState.detectedWorkshopDir;
+				}
+				detectingWorkshop = false;
+				return;
+			}
+			setTimeout(check, 200);
+		};
+		check();
+	}
+
 	function handleSubmit() {
 		if (!name.trim()) return;
 
@@ -138,6 +163,7 @@
 			data.steamcmd_path = steamcmdPath;
 			data.install_path = installPath;
 			data.launch_args = launchArgs;
+			data.workshop_dir = workshopDir;
 		}
 
 		closeModal(data);
@@ -245,6 +271,24 @@
 							bind:value={launchArgs}
 							placeholder="-publiclobby -NumberOfWorkerThreadsServer=8"
 						/>
+						<div class="flex items-end gap-2">
+							<div class="flex-1">
+								<Input
+									label="Steam Workshop Dir (optional)"
+									bind:value={workshopDir}
+									placeholder="Auto-detected on create, or browse to set"
+								/>
+							</div>
+							<button
+								type="button"
+								class="btn bg-surface-700 hover:bg-surface-600 mb-0.5 flex items-center gap-1 rounded-sm px-3 py-2 text-sm"
+								onclick={handleDetectWorkshop}
+								disabled={detectingWorkshop}
+							>
+								<Search size={14} />
+								{detectingWorkshop ? 'Detecting...' : 'Detect'}
+							</button>
+						</div>
 					{/if}
 
 					<Input label="Server Name (in-game)" bind:value={serverName} />

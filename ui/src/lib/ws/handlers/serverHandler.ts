@@ -154,6 +154,14 @@ export const installServerModHandler: WSMessageHandler = {
 	}
 };
 
+export const detectWorkshopDirHandler: WSMessageHandler = {
+	type: MessageType.DETECT_WORKSHOP_DIR,
+	async handle(data: { workshop_dir: string }) {
+		const state = getServerState();
+		state.detectedWorkshopDir = data.workshop_dir;
+	}
+};
+
 export const getServerStatsHandler: WSMessageHandler = {
 	type: MessageType.GET_SERVER_STATS,
 	async handle(data: { server_id: number; stats: ContainerStats | null }) {
@@ -175,6 +183,7 @@ export const serverHandlers = [
 	listServerModsHandler,
 	toggleServerModHandler,
 	installServerModHandler,
+	detectWorkshopDirHandler,
 	getServerStatsHandler,
 	serverCreationProgressHandler
 ];
