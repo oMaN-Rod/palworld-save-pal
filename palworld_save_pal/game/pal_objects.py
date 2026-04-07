@@ -680,6 +680,11 @@ class PalObjects:
 
     @staticmethod
     def DynamicItem(container_slot: ItemContainerSlotDTO) -> Dict[str, Any]:
+        if not container_slot.dynamic_item:
+            logger.warning(
+                f"Container slot {container_slot.slot_index} has no dynamic item. Returning empty dict."
+            )
+            return {}
         dynamic_item = {
             "RawData": PalObjects.ArrayProperty(
                 ArrayType.BYTE_PROPERTY,

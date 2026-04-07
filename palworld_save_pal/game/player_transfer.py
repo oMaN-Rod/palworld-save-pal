@@ -2,8 +2,11 @@ import copy
 from typing import Any, Callable, Dict, List, Optional, Set
 from uuid import UUID
 
+
 from palworld_save_pal.game.pal_objects import PalObjects
+from palworld_save_pal.game.save_manager import SaveManager
 from palworld_save_pal.utils.logging_config import create_logger
+from palworld_save_pal.game.player import PlayerGvasFiles
 
 logger = create_logger(__name__)
 
@@ -48,9 +51,7 @@ def _get_owner_uid(save_param: Dict) -> Optional[str]:
     if not owner_data:
         return None
     owner_value = (
-        PalObjects.get_value(owner_data)
-        if isinstance(owner_data, dict)
-        else owner_data
+        PalObjects.get_value(owner_data) if isinstance(owner_data, dict) else owner_data
     )
     return str(owner_value).lower() if owner_value else None
 
@@ -94,7 +95,7 @@ def _find_item_container(save_manager, container_id_str: str) -> Optional[Dict]:
     return None
 
 
-def _get_player_container_ids(save_data: Dict) -> Set[str]:
+def _get_player_container_ids(save_data: Dict[str, Any]) -> Set[str]:
     """Extract all container IDs referenced by a player's SaveData."""
     container_ids = set()
     container_paths = [
@@ -143,8 +144,8 @@ def _get_player_container_ids(save_data: Dict) -> Set[str]:
 
 
 async def transfer_player(
-    source,
-    target,
+    source: SaveManager,
+    target: SaveManager,
     source_player_uid: UUID,
     target_player_uid: Optional[UUID] = None,
     transfer_character: bool = True,
@@ -186,6 +187,10 @@ async def transfer_player(
 
     source_save_data = PalObjects.get_value(source_gvas.sav.properties["SaveData"])
 
+    if not source_save_data:
+        logger.warning("Source player SaveData is missing or invalid")
+        return {"error": "Source player SaveData is missing or invalid."}
+
     source_summary = source._player_summaries.get(source_player_uid)
     source_level = (source_summary.level or 1) if source_summary else 1
     if source_level < 2:
@@ -211,9 +216,7 @@ async def transfer_player(
             source._player_file_refs[source_player_uid]
         )
         target_gvas = target._player_gvas_files[target_player_uid]
-        target_save_data = PalObjects.get_value(
-            target_gvas.sav.properties["SaveData"]
-        )
+        target_save_data = PalObjects.get_value(target_gvas.sav.properties["SaveData"])
         target_instance_id = source_instance_id
     else:
         if target_player_uid not in target._player_gvas_files:
@@ -221,13 +224,12 @@ async def transfer_player(
         target_gvas = target._player_gvas_files.get(target_player_uid)
         if not target_gvas:
             return {"error": "Failed to load target player save file."}
-        target_save_data = PalObjects.get_value(
-            target_gvas.sav.properties["SaveData"]
-        )
+        target_save_data = PalObjects.get_value(target_gvas.sav.properties["SaveData"])
+        if not target_save_data:
+            logger.warning("Target player SaveData is missing or invalid")
+            return {"error": "Target player SaveData is missing or invalid."}
         target_instance_id = str(
-            PalObjects.get_guid(
-                target_save_data["IndividualId"]["value"]["InstanceId"]
-            )
+            PalObjects.get_guid(target_save_data["IndividualId"]["value"]["InstanceId"])
         ).lower()
 
     # --- Execute transfer steps ---
@@ -235,9 +237,12 @@ async def transfer_player(
     if transfer_character:
         await progress("Transferring character data...")
         _transfer_character_entry(
-            source, target,
-            source_uid_str, source_instance_id,
-            target_uid_str, target_instance_id,
+            source,
+            target,
+            source_uid_str,
+            source_instance_id,
+            target_uid_str,
+            target_instance_id,
         )
 
     if transfer_character:
@@ -259,9 +264,12 @@ async def transfer_player(
     if transfer_pals:
         await progress("Transferring pals...")
         _transfer_pals(
-            source, target,
-            source_uid_str, target_uid_str,
-            source_gvas, target_gvas,
+            source,
+            target,
+            source_uid_str,
+            target_uid_str,
+            source_gvas,
+            target_gvas,
         )
 
     await progress("Updating guild membership...")
@@ -291,9 +299,12 @@ async def transfer_player(
 
 
 def _transfer_character_entry(
-    source, target,
-    source_uid_str, source_instance_id,
-    target_uid_str, target_instance_id,
+    source: SaveManager,
+    target: SaveManager,
+    source_uid_str: str,
+    source_instance_id: str,
+    target_uid_str: str,
+    target_instance_id: str,
 ):
     # Find source player's character entry
     source_character = None
@@ -336,7 +347,9 @@ def _transfer_character_entry(
 # ---------------------------------------------------------------------------
 
 
-def _transfer_player_containers(source, target, source_save_data):
+def _transfer_player_containers(
+    source: SaveManager, target: SaveManager, source_save_data: Dict[str, Any]
+):
     source_container_ids = _get_player_container_ids(source_save_data)
     logger.info(
         "Source player references %d containers: %s",
@@ -382,7 +395,9 @@ def _copy_missing_containers(
 
     logger.info(
         "Copied %d containers (allowed: %d, already in target: %d)",
-        copied_count, len(allowed_ids), len(existing_target_ids),
+        copied_count,
+        len(allowed_ids),
+        len(existing_target_ids),
     )
 
 
@@ -430,7 +445,9 @@ _INVENTORY_CONTAINER_KEYS = {
 }
 
 
-def _resolve_inventory_container_id(save_data: Dict, path: tuple) -> Optional[str]:
+def _resolve_inventory_container_id(
+    save_data: Dict[str, Any], path: tuple
+) -> Optional[str]:
     try:
         node = save_data
         for key in path:
@@ -441,11 +458,20 @@ def _resolve_inventory_container_id(save_data: Dict, path: tuple) -> Optional[st
         return None
 
 
-def _transfer_inventory(source, target, source_gvas, target_gvas):
+def _transfer_inventory(
+    source: SaveManager,
+    target: SaveManager,
+    source_gvas: PlayerGvasFiles,
+    target_gvas: PlayerGvasFiles,
+):
     source_save_data = PalObjects.get_value(source_gvas.sav.properties["SaveData"])
     target_save_data = PalObjects.get_value(target_gvas.sav.properties["SaveData"])
 
-    for inv_type, path in _INVENTORY_CONTAINER_KEYS.items():
+    if not source_save_data or not target_save_data:
+        logger.warning("Cannot transfer inventory: missing SaveData")
+        return
+
+    for _, path in _INVENTORY_CONTAINER_KEYS.items():
         source_id = _resolve_inventory_container_id(source_save_data, path)
         target_id = _resolve_inventory_container_id(target_save_data, path)
         if not source_id or not target_id:
@@ -463,9 +489,12 @@ def _transfer_inventory(source, target, source_gvas, target_gvas):
 
 
 def _transfer_pals(
-    source, target,
-    source_uid_str, target_uid_str,
-    source_gvas, target_gvas,
+    source: SaveManager,
+    target: SaveManager,
+    source_uid_str: str,
+    target_uid_str: str,
+    source_gvas: PlayerGvasFiles,
+    target_gvas: PlayerGvasFiles,
 ):
     target_guild_id = _find_guild_id_for_player(
         target._group_save_data_map, target_uid_str
@@ -494,17 +523,21 @@ def _transfer_pals(
 
     logger.info(
         "Collected %d pals from source player %s",
-        len(transferred_pals), source_uid_str[:8],
+        len(transferred_pals),
+        source_uid_str[:8],
     )
 
     # Copy container slots and update pal SlotId references
-    _copy_pal_container_slots(source, target, source_gvas, target_gvas, transferred_pals)
+    _copy_pal_container_slots(
+        source, target, source_gvas, target_gvas, transferred_pals
+    )
 
     # Replace target player's existing pals with transferred ones.
     # IMPORTANT: mutate the list in-place ([:] slice assignment) to preserve
     # the reference to _gvas_file.properties. Reassignment would break serialization.
     filtered_entries = [
-        entry for entry in target._character_save_parameter_map
+        entry
+        for entry in target._character_save_parameter_map
         if _is_player_entry(entry)
         or _get_owner_uid(_get_save_parameter(entry) or {}) != target_uid_str
     ]
@@ -517,11 +550,15 @@ def _transfer_pals(
     _update_guild_pal_handles(target, target_guild_id, transferred_pals)
 
 
-def _copy_pal_container_slots(source, target, source_gvas, target_gvas, transferred_pals):
-    """Copy palbox and party slot data from source to target containers,
-    and update each pal's SlotId.ContainerId to reference the target container."""
+def _copy_pal_container_slots(
+    source, target, source_gvas, target_gvas, transferred_pals
+):
     source_save_data = PalObjects.get_value(source_gvas.sav.properties["SaveData"])
     target_save_data = PalObjects.get_value(target_gvas.sav.properties["SaveData"])
+
+    if not source_save_data or not target_save_data:
+        logger.warning("Cannot copy pal containers: missing SaveData")
+        return
 
     container_pairs = [
         ("PalStorageContainerId", "palbox"),
@@ -562,9 +599,11 @@ def _copy_pal_container_slots(source, target, source_gvas, target_gvas, transfer
                 if not pal_param or "SlotId" not in pal_param:
                     continue
                 try:
-                    slot_container_id = str(PalObjects.get_guid(
-                        pal_param["SlotId"]["value"]["ContainerId"]["value"]["ID"]
-                    )).lower()
+                    slot_container_id = str(
+                        PalObjects.get_guid(
+                            pal_param["SlotId"]["value"]["ContainerId"]["value"]["ID"]
+                        )
+                    ).lower()
                     if slot_container_id == source_container_id:
                         PalObjects.set_value(
                             pal_param["SlotId"]["value"]["ContainerId"]["value"]["ID"],
@@ -590,7 +629,8 @@ def _update_guild_pal_handles(target, target_guild_id, transferred_pals):
 
             handles = raw_data.get("individual_character_handle_ids", [])
             handles[:] = [
-                handle for handle in handles
+                handle
+                for handle in handles
                 if str(handle.get("instance_id", "")).lower() not in transferred_ids
             ]
             for instance_id in transferred_ids:
@@ -633,7 +673,8 @@ def _transfer_guild(source, target, source_uid_str, target_uid_str, target_save_
             for player_info in raw_data.get("players", []):
                 if str(player_info.get("player_uid", "")).lower() == target_uid_str:
                     raw_data["players"] = [
-                        existing for existing in raw_data["players"]
+                        existing
+                        for existing in raw_data["players"]
                         if str(existing.get("player_uid", "")).lower() != target_uid_str
                     ]
                     raw_data["players"].append(source_guild_info)
@@ -642,10 +683,14 @@ def _transfer_guild(source, target, source_uid_str, target_uid_str, target_save_
             continue
 
     # Target player has no guild — create a new guild entry from source guild structure
-    _create_guild_for_player(source, target, source_uid_str, target_uid_str, source_guild_info)
+    _create_guild_for_player(
+        source, target, source_uid_str, target_uid_str, source_guild_info
+    )
 
 
-def _create_guild_for_player(source, target, source_uid_str, target_uid_str, player_info):
+def _create_guild_for_player(
+    source, target, source_uid_str, target_uid_str, player_info
+):
     """Create a new guild in the target save for a player who has no guild."""
     import uuid as uuid_mod
 
@@ -693,15 +738,20 @@ def _create_guild_for_player(source, target, source_uid_str, target_uid_str, pla
 # ---------------------------------------------------------------------------
 
 
-def _sync_timestamps(target, target_uid_str):
+def _sync_timestamps(target: SaveManager, target_uid_str: str):
     try:
-        world_save = PalObjects.get_value(
-            target._gvas_file.properties["worldSaveData"]
-        )
+        if not target._gvas_file:
+            logger.warning("Cannot sync timestamps: target save GVAS not loaded")
+            return
+        world_save = PalObjects.get_value(target._gvas_file.properties["worldSaveData"])
+        if not world_save:
+            logger.warning("Cannot sync timestamps: missing worldSaveData")
+            return
         world_tick = PalObjects.get_value(
             world_save["GameTimeSaveData"]["value"]["RealDateTimeTicks"]
         )
         if not world_tick:
+            logger.warning("Cannot sync timestamps: missing RealDateTimeTicks")
             return
     except (KeyError, TypeError):
         return

@@ -5,7 +5,7 @@ from fastapi import WebSocket
 
 from palworld_save_pal.game.player_transfer import transfer_player
 from palworld_save_pal.game.save_manager import SaveManager
-from palworld_save_pal.state import get_app_state
+from palworld_save_pal.state import AppState, get_app_state
 from palworld_save_pal.utils.file_manager import FileManager
 from palworld_save_pal.ws.messages import (
     GetSourcePlayersMessage,
@@ -20,7 +20,9 @@ from palworld_save_pal.utils.logging_config import create_logger
 logger = create_logger(__name__)
 
 
-async def _load_steam_save(save_path: str, label: str, ws_callback) -> tuple[SaveManager, dict]:
+async def _load_steam_save(
+    save_path: str, label: str, ws_callback
+) -> tuple[SaveManager, dict]:
     """Load a Steam save and return (SaveManager, validation_info).
 
     validation_info contains level_sav, level_meta, and players_dir paths
@@ -35,6 +37,9 @@ async def _load_steam_save(save_path: str, label: str, ws_callback) -> tuple[Sav
 
     await ws_callback(f"Loading {label} Level.sav...")
 
+    if not validation.level_sav:
+        raise ValueError("level_sav path is None")
+
     with open(validation.level_sav, "rb") as f:
         level_sav = f.read()
 
@@ -43,11 +48,14 @@ async def _load_steam_save(save_path: str, label: str, ws_callback) -> tuple[Sav
         with open(validation.level_meta, "rb") as f:
             level_meta = f.read()
 
+    if not validation.players_dir:
+        raise ValueError("players_dir path is None")
+
     player_file_refs = FileManager.get_player_save_paths(validation.players_dir)
 
-    save_manager = await SaveManager(level_sav_path=validation.level_sav).load_sav_files(
-        level_sav, player_file_refs, level_meta, ws_callback
-    )
+    save_manager = await SaveManager(
+        level_sav_path=validation.level_sav
+    ).load_sav_files(level_sav, player_file_refs, level_meta, ws_callback)
 
     save_info = {
         "level_sav": validation.level_sav,
@@ -59,7 +67,7 @@ async def _load_steam_save(save_path: str, label: str, ws_callback) -> tuple[Sav
     return save_manager, save_info
 
 
-def _prompt_folder(app_state):
+def _prompt_folder(app_state: AppState):
     window = app_state.webview_window
     if not window:
         raise ValueError("Desktop mode required for file selection.")
@@ -196,8 +204,11 @@ async def transfer_player_handler(message: TransferPlayerMessage, ws: WebSocket)
                 timestamp = time.strftime("%Y-%m-%d-%H-%M-%S")
                 backup_path = os.path.join(backup_dir, f"backup_{timestamp}")
                 if not os.path.exists(backup_path):
-                    shutil.copytree(save_info["save_dir"], backup_path,
-                                    ignore=shutil.ignore_patterns("backups"))
+                    shutil.copytree(
+                        save_info["save_dir"],
+                        backup_path,
+                        ignore=shutil.ignore_patterns("backups"),
+                    )
 
                 target_save.to_level_sav_file(save_info["level_sav"])
                 if save_info.get("level_meta"):
