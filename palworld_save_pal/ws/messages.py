@@ -143,6 +143,10 @@ class MessageType(str, Enum):
     # Tools
     CONVERT_STEAM_ID = "convert_steam_id"
     SWAP_PLAYER_UIDS = "swap_player_uids"
+    LOAD_SOURCE_SAVE = "load_source_save"
+    GET_SOURCE_PLAYERS = "get_source_players"
+    TRANSFER_PLAYER = "transfer_player"
+    UNLOAD_SOURCE_SAVE = "unload_source_save"
 
     # Server Management
     LIST_SERVERS = "list_servers"
@@ -905,3 +909,36 @@ class SwapPlayerUidsData(BaseModel):
 class SwapPlayerUidsMessage(BaseMessage):
     type: str = MessageType.SWAP_PLAYER_UIDS.value
     data: SwapPlayerUidsData
+
+
+class LoadSourceSaveData(BaseModel):
+    type: str  # "steam" or "gamepass"
+    path: str
+    role: str = "source"  # "source" or "target"
+
+class LoadSourceSaveMessage(BaseMessage):
+    type: str = MessageType.LOAD_SOURCE_SAVE.value
+    data: LoadSourceSaveData
+
+
+class GetSourcePlayersMessage(BaseMessage):
+    type: str = MessageType.GET_SOURCE_PLAYERS.value
+
+
+class TransferPlayerData(BaseModel):
+    source_player_uid: UUID
+    target_player_uid: Optional[UUID] = None
+    transfer_character: bool = True
+    transfer_inventory: bool = True
+    transfer_pals: bool = True
+    transfer_tech: bool = True
+    transfer_appearance: bool = True
+
+
+class TransferPlayerMessage(BaseMessage):
+    type: str = MessageType.TRANSFER_PLAYER.value
+    data: TransferPlayerData
+
+
+class UnloadSourceSaveMessage(BaseMessage):
+    type: str = MessageType.UNLOAD_SOURCE_SAVE.value

@@ -88,6 +88,9 @@ class FileManager:
         global_pal_storage_sav = parent_dir / "GlobalPalStorage.sav"
 
         if not level_sav.exists():
+            logger.error(
+                "Level.sav file not found in the selected directory: %s", level_sav
+            )
             return FileValidationResult(
                 valid=False,
                 level_sav=None,
@@ -271,7 +274,9 @@ class FileManager:
         for container in container_index.containers:
             parts = container.container_name.split("-", 1)
             if len(parts) < 2:
-                logger.debug("Skipping container with no dash: %s", container.container_name)
+                logger.debug(
+                    "Skipping container with no dash: %s", container.container_name
+                )
                 continue
             save_id = parts[0]
             if save_id not in all_containers_by_save:
@@ -313,9 +318,7 @@ class FileManager:
                 for filename in os.listdir(level_meta_dir):
                     if filename.startswith("container."):
                         logger.debug("Reading container file: %s", filename)
-                        with open(
-                            os.path.join(level_meta_dir, filename), "rb"
-                        ) as f:
+                        with open(os.path.join(level_meta_dir, filename), "rb") as f:
                             file_list = ContainerFileList.from_stream(f)
                             if len(file_list.files) > 0:
                                 valid = True
@@ -339,8 +342,7 @@ class FileManager:
                 [
                     c
                     for c in latest.values()
-                    if "Player" in c.container_name
-                    and "_dps" not in c.container_name
+                    if "Player" in c.container_name and "_dps" not in c.container_name
                 ]
             )
 
@@ -348,7 +350,11 @@ class FileManager:
             container_infos = []
             all_for_save = all_containers_by_save.get(save_id, [])
             for c in all_for_save:
-                suffix = c.container_name.split("-", 1)[1] if "-" in c.container_name else c.container_name
+                suffix = (
+                    c.container_name.split("-", 1)[1]
+                    if "-" in c.container_name
+                    else c.container_name
+                )
                 container_infos.append(
                     GamepassContainerInfo(
                         container_type=suffix,

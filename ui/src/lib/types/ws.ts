@@ -105,6 +105,10 @@ export enum MessageType {
 	// Tools
 	CONVERT_STEAM_ID = 'convert_steam_id',
 	SWAP_PLAYER_UIDS = 'swap_player_uids',
+	LOAD_SOURCE_SAVE = 'load_source_save',
+	GET_SOURCE_PLAYERS = 'get_source_players',
+	TRANSFER_PLAYER = 'transfer_player',
+	UNLOAD_SOURCE_SAVE = 'unload_source_save',
 
 	// Server Management
 	LIST_SERVERS = 'list_servers',

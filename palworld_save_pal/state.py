@@ -38,6 +38,12 @@ class AppState(BaseModel):
     gps_file_path: Optional[str] = None
     gps_loaded: bool = False
 
+    source_save_file: Optional[SaveManager] = None
+    source_player_summaries: Dict[UUID, PlayerSummary] = Field(default_factory=dict)
+    target_transfer_save: Optional[SaveManager] = None
+    target_transfer_summaries: Dict[UUID, PlayerSummary] = Field(default_factory=dict)
+    target_transfer_save_info: Optional[Dict[str, Any]] = None
+
     model_config = ConfigDict(arbitrary_types_allowed=True)
 
     def select_gamepass_save(self, save_id: str) -> Optional[GamepassSaveData]:

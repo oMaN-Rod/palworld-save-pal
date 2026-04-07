@@ -20,7 +20,8 @@
 		Hash,
 		Copy,
 		Check,
-		Repeat
+		Repeat,
+		Upload
 	} from 'lucide-svelte';
 
 	const appState = getAppState();
@@ -30,7 +31,9 @@
 	const steamIcon = assetLoader.loadSvg(`${ASSET_DATA_PATH}/img/app/steam.svg`);
 	const xboxIcon = assetLoader.loadSvg(`${ASSET_DATA_PATH}/img/app/xbox.svg`);
 
-	type Tab = 'convert' | 'gamepass' | 'steamid' | 'uidswap';
+	import type { PlayerSummary } from '$types';
+
+	type Tab = 'convert' | 'gamepass' | 'steamid' | 'uidswap' | 'transfer';
 	let activeTab: Tab = $state('convert');
 
 	// Convert tab state
@@ -67,11 +70,43 @@
 	const targetFormat = $derived(currentFormat === 'steam' ? 'gamepass' : 'steam');
 	const hasLoadedSave = $derived(!!appState.saveFile);
 
+	// Transfer tab state
+	let transferStep: 'select' | 'players' | 'done' = $state('select');
+	let isLoadingTransfer = $state(false);
+	let sourceWorldName = $state('');
+	let targetWorldName = $state('');
+	let sourcePlayers: Record<string, PlayerSummary> = $state({});
+	let standaloneTargetPlayers: Record<string, PlayerSummary> = $state({});
+	let sourceLoaded = $state(false);
+	let standaloneTargetLoaded = $state(false);
+	let selectedSourcePlayer = $state('');
+	let selectedTargetPlayer = $state('');
+	let transferOpts = $state({
+		character: true,
+		inventory: true,
+		pals: true,
+		tech: true,
+		appearance: true
+	});
+	let isTransferring = $state(false);
+	let transferResult: { success?: boolean; error?: string } | null = $state(null);
+
+	const sourcePlayersArray = $derived(Object.values(sourcePlayers));
+	const standaloneTargetPlayersArray = $derived(Object.values(standaloneTargetPlayers));
+	const useStandaloneTarget = $derived(!hasLoadedSave);
+	const targetPlayersArray = $derived(
+		useStandaloneTarget ? standaloneTargetPlayersArray : appState.playerSummariesArray
+	);
+	const readyForPlayerSelect = $derived(
+		sourceLoaded && (!useStandaloneTarget || standaloneTargetLoaded)
+	);
+
 	const tabs: { id: Tab; label: string; icon: typeof ArrowRightLeft }[] = [
 		{ id: 'convert', label: 'Convert', icon: ArrowRightLeft },
 		{ id: 'gamepass', label: 'GamePass Browser', icon: Gamepad2 },
 		{ id: 'steamid', label: 'Steam ID', icon: Hash },
-		{ id: 'uidswap', label: 'UID Swap', icon: Repeat }
+		{ id: 'uidswap', label: 'UID Swap', icon: Repeat },
+		{ id: 'transfer', label: 'Player Transfer', icon: Upload }
 	];
 
 	// --- Convert tab handlers ---
@@ -208,6 +243,95 @@
 		} finally {
 			steamConverting = false;
 		}
+	}
+
+	// --- Transfer tab handlers ---
+
+	async function handleLoadTransferSave(role: 'source' | 'target') {
+		isLoadingTransfer = true;
+		transferResult = null;
+		try {
+			const result = await sendAndWait<{
+				success?: boolean;
+				error?: string;
+				role?: string;
+				player_count?: number;
+				world_name?: string;
+			}>(MessageType.LOAD_SOURCE_SAVE, { type: 'steam', path: '__select__', role });
+
+			if (result.error) {
+				toast.add(result.error, 'Error', 'error');
+			} else if (result.success) {
+				const playersResult = await sendAndWait<{
+					source?: Record<string, PlayerSummary>;
+					target?: Record<string, PlayerSummary>;
+				}>(MessageType.GET_SOURCE_PLAYERS, {});
+
+				if (role === 'source') {
+					sourceWorldName = result.world_name ?? 'Unknown';
+					sourcePlayers = playersResult?.source ?? {};
+					sourceLoaded = true;
+				} else {
+					targetWorldName = result.world_name ?? 'Unknown';
+					standaloneTargetPlayers = playersResult?.target ?? {};
+					standaloneTargetLoaded = true;
+				}
+
+				if (readyForPlayerSelect) {
+					transferStep = 'players';
+				}
+			}
+		} catch (err: any) {
+			toast.add(`Failed to load ${role}: ${err.message}`, 'Error', 'error');
+		} finally {
+			isLoadingTransfer = false;
+		}
+	}
+
+	async function handleTransfer() {
+		if (!selectedSourcePlayer) return;
+		isTransferring = true;
+		transferResult = null;
+		try {
+			const result = await sendAndWait<{ success?: boolean; error?: string }>(
+				MessageType.TRANSFER_PLAYER,
+				{
+					source_player_uid: selectedSourcePlayer,
+					target_player_uid: selectedTargetPlayer || null,
+					transfer_character: transferOpts.character,
+					transfer_inventory: transferOpts.inventory,
+					transfer_pals: transferOpts.pals,
+					transfer_tech: transferOpts.tech,
+					transfer_appearance: transferOpts.appearance
+				}
+			);
+			transferResult = result;
+			if (result.error) {
+				toast.add(result.error, 'Error', 'error');
+			} else if (result.success) {
+				toast.add('Player transferred successfully. Save your changes to apply.');
+				transferStep = 'done';
+			}
+		} catch (err: any) {
+			transferResult = { error: err.message };
+			toast.add(`Transfer failed: ${err.message}`, 'Error', 'error');
+		} finally {
+			isTransferring = false;
+		}
+	}
+
+	function resetTransfer() {
+		transferStep = 'select';
+		sourcePlayers = {};
+		standaloneTargetPlayers = {};
+		sourceLoaded = false;
+		standaloneTargetLoaded = false;
+		sourceWorldName = '';
+		targetWorldName = '';
+		selectedSourcePlayer = '';
+		selectedTargetPlayer = '';
+		transferResult = null;
+		sendAndWait(MessageType.UNLOAD_SOURCE_SAVE, {});
 	}
 
 	// --- UID Swap tab handlers ---
@@ -464,6 +588,235 @@
 							</div>
 						</Card>
 					{/if}
+				{/if}
+			</div>
+		{/if}
+
+		<!-- Transfer Tab -->
+		{#if activeTab === 'transfer'}
+			<div class="flex flex-col gap-8">
+				{#if !isDesktopMode}
+					<Card class="mx-auto max-w-lg">
+						<div class="flex flex-col items-center gap-4 p-4">
+							<Monitor size={48} class="text-surface-400" />
+							<p class="text-surface-300 text-center">
+								Player transfer requires the desktop app for file system access.
+							</p>
+						</div>
+					</Card>
+				{:else if isLoadingTransfer || isTransferring}
+					<div class="flex flex-col items-center gap-4">
+						<Spinner />
+						{#if appState.progressMessage}
+							<span class="text-surface-200">{appState.progressMessage}</span>
+						{/if}
+					</div>
+				{:else}
+					<section class="w-full">
+						<h2 class="text-surface-100 mb-2 text-center text-2xl font-bold">
+							Player Transfer
+						</h2>
+						<p class="text-surface-400 mb-6 text-center text-sm">
+							Transfer a player's data between saves.
+							{#if hasLoadedSave}
+								The currently loaded save will be used as the target.
+							{/if}
+						</p>
+
+						{#if transferStep === 'select'}
+							<div class="mx-auto flex max-w-2xl flex-col gap-6">
+								<div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+									<!-- Source save -->
+									<Card>
+										<div class="flex flex-col items-center gap-4 p-4">
+											<h3 class="text-surface-200 font-semibold">Source Save</h3>
+											{#if sourceLoaded}
+												<p class="text-green-400 text-sm">
+													{sourceWorldName} ({sourcePlayersArray.length} players)
+												</p>
+												<button
+													class="text-surface-400 hover:text-surface-200 text-xs"
+													onclick={() => {
+														sourceLoaded = false;
+														sourcePlayers = {};
+														sourceWorldName = '';
+													}}
+												>
+													Change
+												</button>
+											{:else}
+												<p class="text-surface-400 text-center text-sm">
+													Select the save to transfer from
+												</p>
+												<button
+													class="btn bg-primary-500 hover:bg-primary-600 text-white"
+													onclick={() => handleLoadTransferSave('source')}
+												>
+													<Upload size={16} />
+													<span>Select Source</span>
+												</button>
+											{/if}
+										</div>
+									</Card>
+
+									<!-- Target save -->
+									<Card>
+										<div class="flex flex-col items-center gap-4 p-4">
+											<h3 class="text-surface-200 font-semibold">Target Save</h3>
+											{#if hasLoadedSave}
+												<p class="text-green-400 text-sm">
+													{appState.saveFile?.world_name ?? 'Loaded save'} ({appState.playerSummariesArray.length} players)
+												</p>
+												<span class="text-surface-500 text-xs">Using loaded save</span>
+											{:else if standaloneTargetLoaded}
+												<p class="text-green-400 text-sm">
+													{targetWorldName} ({standaloneTargetPlayersArray.length} players)
+												</p>
+												<button
+													class="text-surface-400 hover:text-surface-200 text-xs"
+													onclick={() => {
+														standaloneTargetLoaded = false;
+														standaloneTargetPlayers = {};
+														targetWorldName = '';
+													}}
+												>
+													Change
+												</button>
+											{:else}
+												<p class="text-surface-400 text-center text-sm">
+													Select the save to transfer into
+												</p>
+												<button
+													class="btn bg-primary-500 hover:bg-primary-600 text-white"
+													onclick={() => handleLoadTransferSave('target')}
+												>
+													<Upload size={16} />
+													<span>Select Target</span>
+												</button>
+											{/if}
+										</div>
+									</Card>
+								</div>
+
+								{#if readyForPlayerSelect}
+									<button
+										class="btn bg-primary-500 hover:bg-primary-600 mx-auto text-white"
+										onclick={() => (transferStep = 'players')}
+									>
+										Continue to Player Selection
+									</button>
+								{/if}
+							</div>
+						{:else if transferStep === 'players'}
+							<div class="mx-auto flex max-w-2xl flex-col gap-6">
+								<div class="flex items-center justify-between">
+									<span class="text-surface-400 text-sm">
+										{sourceWorldName} → {hasLoadedSave ? (appState.saveFile?.world_name ?? 'Loaded save') : targetWorldName}
+									</span>
+									<button
+										class="text-surface-400 hover:text-surface-200 text-sm"
+										onclick={resetTransfer}
+									>
+										Start over
+									</button>
+								</div>
+
+								<div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+									<!-- Source player -->
+									<Card>
+										<div class="flex flex-col gap-3 p-4">
+											<h3 class="text-surface-200 text-sm font-semibold">Source Player</h3>
+											<select
+												bind:value={selectedSourcePlayer}
+												class="bg-surface-800 border-surface-600 text-surface-100 rounded-lg border px-3 py-2 text-sm focus:border-primary-500 focus:outline-none"
+											>
+												<option value="">Select player...</option>
+												{#each sourcePlayersArray as player}
+													<option value={player.uid}>
+														{player.nickname} (Lv.{player.level ?? '?'})
+													</option>
+												{/each}
+											</select>
+										</div>
+									</Card>
+
+									<!-- Target player -->
+									<Card>
+										<div class="flex flex-col gap-3 p-4">
+											<h3 class="text-surface-200 text-sm font-semibold">Target Player</h3>
+											<select
+												bind:value={selectedTargetPlayer}
+												class="bg-surface-800 border-surface-600 text-surface-100 rounded-lg border px-3 py-2 text-sm focus:border-primary-500 focus:outline-none"
+											>
+												<option value="">New player (spawn in)</option>
+												{#each targetPlayersArray as player}
+													<option value={player.uid}>
+														{player.nickname} (Lv.{player.level ?? '?'})
+													</option>
+												{/each}
+											</select>
+											<span class="text-surface-500 text-xs">
+												Leave as "New player" to add without overwriting
+											</span>
+										</div>
+									</Card>
+								</div>
+
+								<!-- Transfer options -->
+								<Card>
+									<div class="flex flex-col gap-3 p-4">
+										<h3 class="text-surface-200 text-sm font-semibold">Transfer Options</h3>
+										<div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+											{#each [
+												{ key: 'character', label: 'Character' },
+												{ key: 'inventory', label: 'Inventory' },
+												{ key: 'pals', label: 'Pals' },
+												{ key: 'tech', label: 'Technology' },
+												{ key: 'appearance', label: 'Appearance' }
+											] as opt}
+												<label class="text-surface-300 flex items-center gap-2 text-sm">
+													<input
+														type="checkbox"
+														bind:checked={transferOpts[opt.key as keyof typeof transferOpts]}
+														class="accent-primary-500"
+													/>
+													{opt.label}
+												</label>
+											{/each}
+										</div>
+									</div>
+								</Card>
+
+								<button
+									class="btn bg-primary-500 hover:bg-primary-600 mx-auto text-white"
+									onclick={handleTransfer}
+									disabled={!selectedSourcePlayer}
+								>
+									<Upload size={16} />
+									<span>Transfer Player</span>
+								</button>
+							</div>
+						{:else if transferStep === 'done'}
+							<Card class="mx-auto max-w-lg">
+								<div class="flex flex-col items-center gap-4 p-4">
+									{#if transferResult?.success}
+										<p class="text-green-400 text-center">
+											Player transferred successfully. Save your changes to apply.
+										</p>
+									{/if}
+									{#if transferResult?.error}
+										<p class="text-red-400 text-center">{transferResult.error}</p>
+									{/if}
+									<button
+										class="btn bg-surface-700 hover:bg-surface-600 text-surface-200"
+										onclick={resetTransfer}
+									>
+										Transfer Another
+									</button>
+								</div>
+							</Card>
+						{/if}
+					</section>
 				{/if}
 			</div>
 		{/if}

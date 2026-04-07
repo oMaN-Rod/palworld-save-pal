@@ -25,6 +25,7 @@ from palworld_save_pal.ws.handlers import (
     pal_handler,
     settings_handler,
     steam_id_handler,
+    transfer_handler,
     uid_swap_handler,
     ui_common_handler,
     version_handler,
@@ -128,6 +129,10 @@ from palworld_save_pal.ws.messages import (
     GetServerStatsMessage,
     ConvertSteamIdMessage,
     SwapPlayerUidsMessage,
+    LoadSourceSaveMessage,
+    GetSourcePlayersMessage,
+    TransferPlayerMessage,
+    UnloadSourceSaveMessage,
 )
 
 if TYPE_CHECKING:
@@ -243,6 +248,11 @@ HANDLER_REGISTRY = [
     # Tools
     (MessageType.CONVERT_STEAM_ID, ConvertSteamIdMessage, steam_id_handler.convert_steam_id_handler),
     (MessageType.SWAP_PLAYER_UIDS, SwapPlayerUidsMessage, uid_swap_handler.swap_player_uids_handler),
+    # Player Transfer
+    (MessageType.LOAD_SOURCE_SAVE, LoadSourceSaveMessage, transfer_handler.load_source_save_handler),
+    (MessageType.GET_SOURCE_PLAYERS, GetSourcePlayersMessage, transfer_handler.get_source_players_handler),
+    (MessageType.TRANSFER_PLAYER, TransferPlayerMessage, transfer_handler.transfer_player_handler),
+    (MessageType.UNLOAD_SOURCE_SAVE, UnloadSourceSaveMessage, transfer_handler.unload_source_save_handler),
 ]
 
 
