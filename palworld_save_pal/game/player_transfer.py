@@ -6,6 +6,7 @@ from uuid import UUID
 from palworld_save_pal.game.pal_objects import PalObjects
 from palworld_save_pal.game.save_manager import SaveManager
 from palworld_save_pal.utils.logging_config import create_logger
+from palworld_save_pal.utils.uuid import are_equal_uuids
 from palworld_save_pal.game.player import PlayerGvasFiles
 
 logger = create_logger(__name__)
@@ -66,8 +67,10 @@ def _find_guild_id_for_player(group_save_data_map: List, player_uid_str: str) ->
         try:
             raw_data = group_entry["value"]["RawData"]["value"]
             for player_info in raw_data.get("players", []):
-                if str(player_info.get("player_uid", "")).lower() == player_uid_str:
-                    return str(raw_data.get("group_id", EMPTY_UUID)).lower()
+                player_uid = PalObjects.as_uuid(player_info.get("player_uid"))
+                if player_uid and are_equal_uuids(player_uid, player_uid_str):
+                    group_id = PalObjects.as_uuid(raw_data.get("group_id"))
+                    return str(group_id).lower() if group_id else EMPTY_UUID
         except (KeyError, TypeError):
             continue
     return EMPTY_UUID
@@ -281,13 +284,7 @@ async def transfer_player(
     # --- Rebuild caches ---
 
     await progress("Rebuilding caches...")
-    target.invalidate_performance_caches()
-    target._players.clear()
-    target._guilds.clear()
-    target._loaded_players.clear()
-    target._loaded_guilds.clear()
-    target._extract_player_summaries()
-    target._extract_guild_summaries()
+    target.rebuild_player_caches()
 
     await progress("Transfer complete!")
     return {"success": True}
@@ -624,14 +621,21 @@ def _update_guild_pal_handles(target, target_guild_id, transferred_pals):
     for group_entry in target._group_save_data_map:
         try:
             raw_data = group_entry["value"]["RawData"]["value"]
-            if str(raw_data.get("group_id", "")).lower() != target_guild_id:
+            group_id = PalObjects.as_uuid(raw_data.get("group_id"))
+            if not group_id or not are_equal_uuids(group_id, target_guild_id):
                 continue
 
             handles = raw_data.get("individual_character_handle_ids", [])
             handles[:] = [
                 handle
                 for handle in handles
-                if str(handle.get("instance_id", "")).lower() not in transferred_ids
+                if not any(
+                    are_equal_uuids(
+                        PalObjects.as_uuid(handle.get("instance_id")), tid
+                    )
+                    for tid in transferred_ids
+                    if tid
+                )
             ]
             for instance_id in transferred_ids:
                 handles.append({"guid": EMPTY_UUID, "instance_id": instance_id})
@@ -652,7 +656,8 @@ def _transfer_guild(source, target, source_uid_str, target_uid_str, target_save_
         try:
             raw_data = group_entry["value"]["RawData"]["value"]
             for player_info in raw_data.get("players", []):
-                if str(player_info.get("player_uid", "")).lower() == source_uid_str:
+                player_uid = PalObjects.as_uuid(player_info.get("player_uid"))
+                if player_uid and are_equal_uuids(player_uid, source_uid_str):
                     source_guild_info = copy.deepcopy(player_info)
                     break
             if source_guild_info:
@@ -671,11 +676,15 @@ def _transfer_guild(source, target, source_uid_str, target_uid_str, target_save_
         try:
             raw_data = group_entry["value"]["RawData"]["value"]
             for player_info in raw_data.get("players", []):
-                if str(player_info.get("player_uid", "")).lower() == target_uid_str:
+                player_uid = PalObjects.as_uuid(player_info.get("player_uid"))
+                if player_uid and are_equal_uuids(player_uid, target_uid_str):
                     raw_data["players"] = [
                         existing
                         for existing in raw_data["players"]
-                        if str(existing.get("player_uid", "")).lower() != target_uid_str
+                        if not are_equal_uuids(
+                            PalObjects.as_uuid(existing.get("player_uid")),
+                            target_uid_str,
+                        )
                     ]
                     raw_data["players"].append(source_guild_info)
                     return
@@ -699,8 +708,9 @@ def _create_guild_for_player(
     for group_entry in source._group_save_data_map:
         try:
             raw_data = group_entry["value"]["RawData"]["value"]
-            for pi in raw_data.get("players", []):
-                if str(pi.get("player_uid", "")).lower() == source_uid_str:
+            for player_info in raw_data.get("players", []):
+                player_uid = PalObjects.as_uuid(player_info.get("player_uid"))
+                if player_uid and are_equal_uuids(player_uid, source_uid_str):
                     source_guild_entry = group_entry
                     break
             if source_guild_entry:
@@ -776,7 +786,8 @@ def _sync_timestamps(target: SaveManager, target_uid_str: str):
         try:
             raw_data = group_entry["value"]["RawData"]["value"]
             for player_info in raw_data.get("players", []):
-                if str(player_info.get("player_uid", "")).lower() == target_uid_str:
+                player_uid = PalObjects.as_uuid(player_info.get("player_uid"))
+                if player_uid and are_equal_uuids(player_uid, target_uid_str):
                     if "player_info" in player_info:
                         player_info["player_info"]["last_online_real_time"] = world_tick
         except (KeyError, TypeError):

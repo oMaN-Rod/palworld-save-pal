@@ -109,7 +109,7 @@ class PlayerSwapMixin:
         self._swap_player_file_refs(old_player_uid, new_player_uid)
 
         await progress("Rebuilding caches...")
-        self._rebuild_after_swap()
+        self.rebuild_player_caches()
 
         await progress("UID swap complete!")
         return {"success": True}
@@ -270,8 +270,8 @@ class PlayerSwapMixin:
         self._player_file_refs[old_player_uid] = new_file_ref
         self._player_file_refs[new_player_uid] = old_file_ref
 
-    def _rebuild_after_swap(self) -> None:
-        """Invalidate caches and rebuild summaries after a UID swap."""
+    def rebuild_player_caches(self) -> None:
+        """Invalidate all caches and rebuild player/guild summaries."""
         self.invalidate_performance_caches()
         self._players.clear()
         self._guilds.clear()
