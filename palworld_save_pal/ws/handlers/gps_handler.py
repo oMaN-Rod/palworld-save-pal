@@ -79,4 +79,7 @@ async def delete_gps_pals_handler(message: DeleteGpsPalsMessage, _: WebSocket):
     logger.debug(f"Deleting {len(pal_indexes)} GPS pals")
     app_state = get_app_state()
     save_file = app_state.save_file
+    if not save_file:
+        logger.warning("No save file loaded, cannot delete GPS pals")
+        return
     save_file.delete_gps_pals(pal_indexes)

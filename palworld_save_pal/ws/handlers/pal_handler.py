@@ -61,6 +61,11 @@ async def add_pal_handler(message: AddPalMessage, ws: WebSocket):
     app_state = get_app_state()
     save_file = app_state.save_file
 
+    if not save_file:
+        response = build_response(MessageType.WARNING, "No save file loaded")
+        await ws.send_json(response)
+        return
+
     if player_id:
         new_pal = save_file.add_player_pal(
             player_id, character_id, nickname, container_id, storage_slot
@@ -69,8 +74,7 @@ async def add_pal_handler(message: AddPalMessage, ws: WebSocket):
             "player_id": player_id,
             "pal": new_pal,
         }
-
-    if guild_id:
+    elif guild_id:
         new_pal = save_file.add_guild_pal(
             character_id, nickname, guild_id, base_id, storage_slot
         )
@@ -79,6 +83,13 @@ async def add_pal_handler(message: AddPalMessage, ws: WebSocket):
             "base_id": base_id,
             "pal": new_pal,
         }
+    else:
+        response = build_response(
+            MessageType.WARNING, "No player_id or guild_id provided"
+        )
+        await ws.send_json(response)
+        return
+
     response = build_response(MessageType.ADD_PAL, data)
     await ws.send_json(response)
 
