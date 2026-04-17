@@ -1,11 +1,9 @@
 import copy
-import json
 import os
 from typing import Any, Dict, Optional
 from uuid import UUID
 
 from palworld_save_tools.gvas import GvasFile
-from palworld_save_tools.json_tools import CustomEncoder
 from palworld_save_tools.palsav import compress_gvas_to_sav, decompress_sav_to_gvas
 from palworld_save_tools.paltypes import (
     DISABLED_PROPERTIES,
@@ -14,7 +12,8 @@ from palworld_save_tools.paltypes import (
 )
 
 from palworld_save_pal.game.gvas_codec import CUSTOM_PROPERTIES
-from palworld_save_pal.utils.file_io import atomic_write, atomic_write_text
+from palworld_save_pal.utils import json_io
+from palworld_save_pal.utils.file_io import atomic_write
 from palworld_save_pal.utils.logging_config import create_logger
 
 logger = create_logger(__name__)
@@ -23,10 +22,9 @@ logger = create_logger(__name__)
 class SerializationMixin:
     def get_json(self, minify=False, allow_nan=True):
         logger.info("Converting %s to JSON", self.level_sav_path)
-        return json.dumps(
+        return json_io.dumps_str(
             self._gvas_file.dump(),
-            indent=None if minify else "\t",
-            cls=CustomEncoder,
+            indent=None if minify else 2,
             allow_nan=allow_nan,
         )
 
@@ -36,7 +34,7 @@ class SerializationMixin:
 
     def load_json(self, data: bytes):
         logger.info("Loading %s as JSON", self.level_sav_path)
-        self._gvas_file = GvasFile.load(json.loads(data))
+        self._gvas_file = GvasFile.load(json_io.loads(data))
         return self
 
     def load_level_meta(self, data: bytes):
@@ -77,16 +75,15 @@ class SerializationMixin:
         gvas_file = GvasFile.read(
             raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
         )
-        return json.dumps(
+        return json_io.dumps_str(
             gvas_file.dump(),
-            indent=None if minify else "\t",
-            cls=CustomEncoder,
+            indent=None if minify else 2,
             allow_nan=allow_nan,
         )
 
     def convert_json_to_sav_file(self, data: bytes) -> bytes:
         logger.info("Converting JSON to SAV")
-        gvas_file = GvasFile.load(json.loads(data))
+        gvas_file = GvasFile.load(json_io.loads(data))
         raw_gvas = gvas_file.write(CUSTOM_PROPERTIES)
         sav_data = compress_gvas_to_sav(raw_gvas, 0x31)
         return sav_data
@@ -145,14 +142,12 @@ class SerializationMixin:
         logger.info(
             "Converting %s to JSON, saving to %s", self.level_sav_path, output_path
         )
-        indent = None if minify else "\t"
-        text = json.dumps(
+        buf = json_io.dumps(
             self._gvas_file.dump(),
-            indent=indent,
-            cls=CustomEncoder,
+            indent=None if minify else 2,
             allow_nan=allow_nan,
         )
-        atomic_write_text(output_path, text)
+        atomic_write(output_path, buf)
 
     def level_meta_sav(self) -> Optional[bytes]:
         if not self._level_meta_gvas_file:

@@ -60,8 +60,8 @@ class TestGetJson:
 
     def test_get_json_minified_has_no_indentation(self, fresh_save_manager):
         mini = fresh_save_manager.get_json(minify=True)
-        # Minified JSON should not contain tab indentation
-        assert "\t" not in mini
+        # Minified JSON has no newlines between keys
+        assert "\n" not in mini
 
     def test_get_json_contains_world_save_data(self, fresh_save_manager):
         result = fresh_save_manager.get_json()
@@ -140,13 +140,13 @@ class TestConvertSavToJson:
         with open(WORLD1_DIR / "Level.sav", "rb") as f:
             data = f.read()
         result = fresh_save_manager.convert_sav_file_to_json(data, minify=True)
-        assert "\t" not in result
+        assert "\n" not in result
 
     def test_convert_sav_to_json_not_minified(self, fresh_save_manager):
         with open(WORLD1_DIR / "Level.sav", "rb") as f:
             data = f.read()
         result = fresh_save_manager.convert_sav_file_to_json(data, minify=False)
-        assert "\t" in result
+        assert "\n" in result
 
 
 # ---------------------------------------------------------------------------
@@ -235,7 +235,7 @@ class TestToJsonFile:
             fresh_save_manager.to_json_file(output, minify=True, allow_nan=True)
             with open(output, "r", encoding="utf-8") as f:
                 content = f.read()
-            assert "\t" not in content
+            assert "\n" not in content
 
 
 # ---------------------------------------------------------------------------
