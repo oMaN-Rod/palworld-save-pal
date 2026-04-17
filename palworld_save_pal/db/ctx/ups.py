@@ -1,4 +1,3 @@
-import json
 import datetime as dt
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple, Any
@@ -16,6 +15,7 @@ from palworld_save_pal.db.models.ups_models import (
     UPSTransferLogModel,
 )
 from palworld_save_pal.dto.pal import PalDTO
+from palworld_save_pal.utils import json_io
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.utils.json_manager import JsonManager
 
@@ -135,7 +135,7 @@ class UPSService:
 
             if tags:
                 for tag in tags:
-                    tag_json = json.dumps(tag)
+                    tag_json = json_io.dumps_str(tag)
                     conditions.append(UPSPalModel.tags.like(f"%{tag_json}%"))
 
             # Filter by element types (need to look up from pals.json data)
@@ -249,7 +249,7 @@ class UPSService:
 
             if tags:
                 for tag in tags:
-                    tag_json = json.dumps(tag)
+                    tag_json = json_io.dumps_str(tag)
                     conditions.append(UPSPalModel.tags.like(f"%{tag_json}%"))
 
             # Filter by element types (need to look up from pals.json data)
@@ -741,9 +741,8 @@ class UPSService:
         all_pals = session.exec(select(UPSPalModel.pal_data)).all()
         total_bytes = 0
         for pal_data in all_pals:
-            # Convert pal_data dict to JSON string and get byte size
-            json_str = json.dumps(pal_data)
-            total_bytes += len(json_str.encode("utf-8"))
+            # Convert pal_data dict to JSON and get byte size
+            total_bytes += len(json_io.dumps(pal_data))
 
         stats.storage_size_mb = total_bytes / (1024 * 1024)  # Convert bytes to MB
 
@@ -802,7 +801,7 @@ class UPSService:
             elif "summon_" in char_id_lower:
                 summon_count += 1
 
-        stats.element_distribution = json.dumps(element_counts)
+        stats.element_distribution = json_io.dumps_str(element_counts)
         stats.alpha_count = alpha_count
         stats.lucky_count = lucky_count
         stats.human_count = human_count
@@ -913,7 +912,7 @@ class UPSService:
         """Update all pal tags when a tag is renamed."""
         pals_with_tag = session.exec(
             select(UPSPalModel).where(
-                UPSPalModel.tags.like(f"%{json.dumps(old_name)}%")
+                UPSPalModel.tags.like(f"%{json_io.dumps_str(old_name)}%")
             )
         ).all()
 
@@ -930,7 +929,7 @@ class UPSService:
         """Remove a specific tag from all pals that have it."""
         pals_with_tag = session.exec(
             select(UPSPalModel).where(
-                UPSPalModel.tags.like(f"%{json.dumps(tag_name)}%")
+                UPSPalModel.tags.like(f"%{json_io.dumps_str(tag_name)}%")
             )
         ).all()
 

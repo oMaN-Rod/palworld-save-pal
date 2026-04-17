@@ -1,4 +1,3 @@
-import json
 from fastapi import WebSocket
 from palworld_save_pal.utils.json_manager import JsonManager
 from palworld_save_pal.ws.messages import MessageType

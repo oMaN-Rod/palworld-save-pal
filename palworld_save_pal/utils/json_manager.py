@@ -1,9 +1,9 @@
-import json
 import os
 import platform
 import sys
 from typing import Any, Dict
 
+from palworld_save_pal.utils import json_io
 from palworld_save_pal.utils.logging_config import create_logger
 
 logger = create_logger(__name__)
@@ -41,16 +41,13 @@ class JsonManager:
 
     def ensure_file_exists(self):
         if not os.path.exists(self.file_path):
-            with open(self.file_path, "w", encoding="utf-8") as f:
-                json.dump({}, f)
+            json_io.dump({}, self.file_path)
 
     def read(self) -> Dict[str, Any]:
-        with open(self.file_path, "r", encoding="utf-8") as f:
-            return json.load(f)
+        return json_io.load(self.file_path)
 
     def write(self, data: Dict[str, Any]):
-        with open(self.file_path, "w", encoding="utf-8") as f:
-            json.dump(data, f, indent=2)
+        json_io.dump(data, self.file_path, indent=2)
 
     def append(self, key: str, value: Any):
         data = self.read()

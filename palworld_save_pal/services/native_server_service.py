@@ -1,5 +1,4 @@
 import base64
-import json
 import os
 import shutil
 import subprocess
@@ -12,6 +11,7 @@ import httpx
 import psutil
 
 from palworld_save_pal.db.models.server_models import ServerModel
+from palworld_save_pal.utils import json_io
 from palworld_save_pal.utils.logging_config import create_logger
 
 logger = create_logger(__name__)
@@ -891,8 +891,7 @@ class NativeServerService:
         if not os.path.exists(info_path):
             return None
         try:
-            with open(info_path, "r", encoding="utf-8") as f:
-                data = json.load(f)
+            data = json_io.load(info_path)
             # Determine mod type from InstallRules
             mod_type = "unknown"
             install_rules = data.get("InstallRule", [])
