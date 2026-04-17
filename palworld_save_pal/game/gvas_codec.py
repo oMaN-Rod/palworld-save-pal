@@ -1,3 +1,5 @@
+import base64
+import re
 from enum import Enum
 
 from palworld_save_tools.archive import (
@@ -42,10 +44,19 @@ def skip_decode(reader: FArchiveReader, type_name: str, size: int, path: str):
     return value
 
 
+_LEGACY_HEX_RE = re.compile(r"^[0-9a-f]*$")
+
+
 def _ensure_bytes(value):
+    if isinstance(value, (bytes, bytearray)):
+        return bytes(value)
     if isinstance(value, str):
-        return bytes.fromhex(value)
-    return value
+        # Legacy palworld-save-tools emitted bytes as lowercase .hex();
+        # current palworld-save-tools emits standard base64.
+        if len(value) % 2 == 0 and _LEGACY_HEX_RE.match(value):
+            return bytes.fromhex(value)
+        return base64.b64decode(value, validate=True)
+    return bytes(value)
 
 
 def skip_encode(writer: FArchiveWriter, property_type: str, properties: dict) -> int:
