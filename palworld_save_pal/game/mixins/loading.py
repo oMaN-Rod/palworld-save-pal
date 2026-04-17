@@ -13,6 +13,7 @@ from palworld_save_pal.game.pal import Pal
 from palworld_save_pal.game.pal_objects import PalObjects
 from palworld_save_pal.game.enum import GroupType
 from palworld_save_pal.utils.logging_config import create_logger
+from palworld_save_pal.utils.perf import gc_paused
 from palworld_save_pal.game.player import Player, PlayerGvasFiles
 from palworld_save_pal.utils.uuid import are_equal_uuids, is_empty_uuid
 
@@ -102,9 +103,10 @@ class LoadingMixin:
                 sav_bytes = f.read()
 
         raw_gvas, _ = decompress_sav_to_gvas(sav_bytes)
-        gvas_file = GvasFile.read(
-            raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
-        )
+        with gc_paused():
+            gvas_file = GvasFile.read(
+                raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
+            )
 
         dps_gvas = None
         dps_data = file_ref.get("dps")
@@ -115,9 +117,10 @@ class LoadingMixin:
                 with open(dps_data, "rb") as f:
                     dps_bytes = f.read()
             raw_dps, _ = decompress_sav_to_gvas(dps_bytes)
-            dps_gvas = GvasFile.read(
-                raw_dps, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
-            )
+            with gc_paused():
+                dps_gvas = GvasFile.read(
+                    raw_dps, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
+                )
 
         self._player_gvas_files[player_id] = PlayerGvasFiles(
             sav=gvas_file, dps=dps_gvas
@@ -489,9 +492,10 @@ class LoadingMixin:
                 continue
             raw_gvas, _ = decompress_sav_to_gvas(sav_files["sav"])
             await ws_callback(f"Loading player {uid}...")
-            gvas_file = GvasFile.read(
-                raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
-            )
+            with gc_paused():
+                gvas_file = GvasFile.read(
+                    raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
+                )
             player_uuid = PalObjects.get_guid(
                 PalObjects.get_nested(
                     gvas_file.properties,
@@ -516,12 +520,13 @@ class LoadingMixin:
             if "dps" in sav_files and sav_files["dps"] is not None:
                 logger.debug("Loading player DPS save for %s", player_uuid)
                 raw_dps_gvas, _ = decompress_sav_to_gvas(sav_files["dps"])
-                dps_gvas_file = GvasFile.read(
-                    raw_dps_gvas,
-                    PALWORLD_TYPE_HINTS,
-                    CUSTOM_PROPERTIES,
-                    allow_nan=True,
-                )
+                with gc_paused():
+                    dps_gvas_file = GvasFile.read(
+                        raw_dps_gvas,
+                        PALWORLD_TYPE_HINTS,
+                        CUSTOM_PROPERTIES,
+                        allow_nan=True,
+                    )
                 dps = dps_gvas_file
             loaded_sav_files[player_uuid] = PlayerGvasFiles(sav=gvas_file, dps=dps)
 

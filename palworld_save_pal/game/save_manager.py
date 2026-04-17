@@ -17,6 +17,7 @@ from palworld_save_pal.game.pal_objects import PalObjects
 from palworld_save_pal.game.player import Player, PlayerGvasFiles
 from palworld_save_pal.utils.indexed_collection import IndexedCollection
 from palworld_save_pal.utils.logging_config import create_logger
+from palworld_save_pal.utils.perf import gc_paused
 from palworld_save_pal.utils.uuid import are_equal_uuids
 
 from palworld_save_pal.game.mixins.indexing import IndexingMixin
@@ -113,9 +114,10 @@ class SaveManager(
         start_time = time.perf_counter()
 
         raw_gvas, _ = decompress_sav_to_gvas(level_sav)
-        gvas_file = GvasFile.read(
-            raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
-        )
+        with gc_paused():
+            gvas_file = GvasFile.read(
+                raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
+            )
         self._gvas_file = gvas_file
         logger.info(f"Level.sav parsed in {time.perf_counter() - start_time:.2f}s")
 

@@ -26,12 +26,14 @@ class PalOpsMixin:
         from palworld_save_tools.paltypes import PALWORLD_TYPE_HINTS
         from palworld_save_tools.gvas import GvasFile
         from palworld_save_pal.game.gvas_codec import CUSTOM_PROPERTIES
+        from palworld_save_pal.utils.perf import gc_paused
 
         logger.info("Loading global pal storage")
         raw_gvas, _ = decompress_sav_to_gvas(global_pal_storage_sav)
-        gvas_file = GvasFile.read(
-            raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
-        )
+        with gc_paused():
+            gvas_file = GvasFile.read(
+                raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
+            )
         self._gps_gvas_file = gvas_file
         self._load_gps_pals()
         return self._gps_pals
