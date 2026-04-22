@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { workSuitabilityData, palsData } from '$lib/data';
 	import type { WorkSuitability } from '$types';
-	import { assetLoader } from '$utils';
+	import { ASSET_DATA_PATH } from '$lib/constants';
+	import { assetLoader, suitabilityImageMap } from '$utils';
 
 	let selectedKey = $state<string | null>(null);
 
@@ -17,6 +18,12 @@
 		const entry = allWorkTypes.find(([key]) => key === selectedKey);
 		return entry ? entry[1] : null;
 	});
+
+	function getWorkIcon(workType: WorkSuitability): string {
+		const base = suitabilityImageMap[workType];
+		if (!base) return '';
+		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${base}.webp`) as string;
+	}
 
 	function getPalsWithWork(
 		workType: WorkSuitability
@@ -34,9 +41,8 @@
 
 <div class="flex h-full gap-4">
 	<div class="flex w-72 shrink-0 flex-col">
-		<h1 class="mb-3 text-lg font-bold">Work Suitability</h1>
 		<div class="flex-1 overflow-y-auto">
-			{#each allWorkTypes as [key, data]}
+			{#each allWorkTypes as [key, data] (key)}
 				<button
 					class="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left text-sm transition-colors {selectedKey ===
 					key
@@ -44,6 +50,7 @@
 						: 'text-surface-300 hover:bg-surface-800'}"
 					onclick={() => (selectedKey = key)}
 				>
+					<img src={getWorkIcon(key)} alt="" class="h-5 w-5 shrink-0" />
 					<span class="font-medium">{data.localized_name || key}</span>
 				</button>
 			{/each}
@@ -52,7 +59,14 @@
 
 	<div class="border-surface-800 flex-1 overflow-y-auto rounded-lg border p-5">
 		{#if selectedWork && selectedKey}
-			<h2 class="text-2xl font-bold">{selectedWork.localized_name || selectedKey}</h2>
+			<div class="flex items-center gap-3">
+				<img
+					src={getWorkIcon(selectedKey as WorkSuitability)}
+					alt=""
+					class="h-8 w-8 shrink-0"
+				/>
+				<h2 class="text-2xl font-bold">{selectedWork.localized_name || selectedKey}</h2>
+			</div>
 			{#if selectedWork.description}
 				<p class="text-surface-300 mt-2">{selectedWork.description}</p>
 			{/if}
@@ -61,7 +75,7 @@
 			<div class="mt-5">
 				<h3 class="text-surface-400 mb-2 text-sm font-semibold">Pals ({pals.length})</h3>
 				<div class="grid grid-cols-1 gap-1 sm:grid-cols-2 lg:grid-cols-3">
-					{#each pals as pal}
+					{#each pals as pal (pal.characterKey)}
 						<div
 							class="bg-surface-900 flex items-center justify-between gap-2 rounded-md px-3 py-1.5 text-sm"
 						>
@@ -71,7 +85,7 @@
 								class="h-12 w-12 shrink-0 rounded-md object-cover"
 							/>
 							<span class="flex-1 text-left">{pal.name}</span>
-							<span class="text-primary-400 font-semibold">Lv.{pal.level}</span>
+							<span class="text-surface-400 font-semibold">Lv.{pal.level}</span>
 						</div>
 					{/each}
 				</div>

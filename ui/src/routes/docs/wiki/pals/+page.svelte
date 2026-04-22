@@ -138,10 +138,7 @@
 
 <div class="flex h-full gap-4">
 	<div class="flex w-72 shrink-0 flex-col">
-		<div class="mb-3 flex items-center justify-between">
-			<h1 class="text-lg font-bold">{c.pal} Wiki</h1>
-			<span class="text-surface-400 text-xs">{filteredPals.length}</span>
-		</div>
+		<span class="text-surface-400 text-xs w-full text-end mb-2">{filteredPals.length}</span>
 		<div class="mb-3">
 			<Accordion
 				value={filterExpand}

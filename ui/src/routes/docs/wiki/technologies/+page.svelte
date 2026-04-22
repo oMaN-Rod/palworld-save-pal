@@ -115,10 +115,7 @@
 
 <div class="flex h-full gap-4">
 	<div class="flex w-72 shrink-0 flex-col">
-		<div class="mb-3 flex items-center justify-between">
-			<h1 class="text-lg font-bold">{m.technology({ count: 2 })}</h1>
-			<span class="text-surface-400 text-xs">{filteredTechs.length}</span>
-		</div>
+		<span class="text-surface-400 mb-2 w-full text-end text-xs">{filteredTechs.length}</span>
 		<div class="mb-3">
 			<Accordion
 				value={filterExpand}
