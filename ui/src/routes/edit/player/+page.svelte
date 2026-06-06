@@ -588,7 +588,7 @@
 {#if appState.selectedPlayer}
 	<div class="flex h-full flex-col overflow-auto">
 		<div class="ml-2 flex">
-			<nav class="btn-group preset-outlined-surface-200-800 mr-2 flex-col items-center rounded-sm">
+			<nav id="quick-actions" class="btn-group preset-outlined-surface-200-800 mr-2 flex-col items-center rounded-sm">
 				{#if group === 'inventory'}
 					<Tooltip label={m.sort_inventory()}>
 						<button class="hover:bg-secondary-500/50 btn rounded-sm" onclick={sortCommonContainer}>
@@ -851,7 +851,7 @@
 							/>
 						</div>
 					</div>
-					<div class="col-span-3 space-y-2 2xl:ml-12 2xl:mt-2">
+					<div id="food-equip" class="col-span-3 space-y-2 2xl:ml-12 2xl:mt-2">
 						<ItemHeader text={m.food()} />
 						<div class="2xl:ml-2">
 							<div class="flex flex-row space-x-2">
@@ -872,7 +872,7 @@
 
 			<!-- Stats -->
 			<div class="fixed right-2 w-96 flex-none" bind:this={sideBarWrapper}>
-				<div
+				<div id="player-level"
 					class="border-l-surface-600 preset-filled-surface-100-900 mb-2 mr-2 flex rounded-none border-l-2 p-4"
 				>
 					<div class="mr-4 flex flex-col items-center justify-center rounded-none">
@@ -984,6 +984,7 @@
 						<div class="flex flex-col">
 							<div class="flex space-x-2">
 								<button
+									id="player-nickname"
 									class="hover:bg-secondary-500/50 hover:ring-offset-surface-900 text-start font-bold hover:ring hover:ring-offset-4"
 									onclick={handleUpdateNickname}
 								>
@@ -1028,7 +1029,11 @@
 					</Accordion.Item>
 					<hr class="hr" />
 					<Accordion.Item value="presets" controlHover="hover:bg-secondary-500/25">
-						{#snippet control()}{c.preset}{/snippet}
+						{#snippet control()}
+							<div id="player-presets-control" class="w-full">
+								{c.preset}
+							</div>
+						{/snippet}
 						{#snippet panel()}
 							<PlayerPresets containerRef={sideBarWrapper} bind:player={appState.selectedPlayer} />
 						{/snippet}

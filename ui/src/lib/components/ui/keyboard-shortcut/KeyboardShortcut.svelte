@@ -3,19 +3,28 @@
 	import { getNavigationState } from '$states';
 
 	let {
+		id = '',
 		text,
 		key,
 		href,
 		class: _class
-	}: { text: string; class?: string; key: string; href?: string } = $props();
+	}: {
+		id?: string;
+		text: string;
+		class?: string;
+		key: string;
+		href?: string;
+	} = $props();
 
 	const nav = getNavigationState();
 </script>
 
 <button
+	{id}
 	class="hover:bg-secondary-500/50 flex items-center gap-2 rounded p-2 {page.url.pathname == href
 		? 'bg-secondary-500/25'
 		: ''} {_class}"
+
 	onclick={() => {
 		nav.saveAndNavigate(href as string);
 	}}

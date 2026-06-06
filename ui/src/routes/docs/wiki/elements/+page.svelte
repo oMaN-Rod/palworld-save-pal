@@ -52,7 +52,7 @@
 	<div class="border-surface-800 flex-1 overflow-y-auto rounded-lg border p-5">
 		{#if selectedElement && selectedKey}
 			<div class="flex items-center gap-4">
-				<img src={getIcon(selectedElement.icon)} alt="" class="h-16 w-16" />
+				<img src={getIcon(selectedElement.icon)} alt="" class="h-12 w-12" />
 				<div>
 					<h2 class="text-2xl font-bold" style="color: {selectedElement.color}">
 						{selectedElement.localized_name}

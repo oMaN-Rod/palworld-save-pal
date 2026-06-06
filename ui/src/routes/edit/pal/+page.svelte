@@ -9,7 +9,11 @@
 		Talents,
 		WorkSuitabilities
 	} from '$components/pal';
-	import { LearnedSkillSelectModal, MultiSkillSelectModal, TextInputModal } from '$components/modals';
+	import {
+		LearnedSkillSelectModal,
+		MultiSkillSelectModal,
+		TextInputModal
+	} from '$components/modals';
 	import { SectionHeader, Tooltip } from '$components/ui';
 	import { SkillPresets } from '$components/presets';
 	import { expData, palsData, presetsData } from '$lib/data';
@@ -248,7 +252,7 @@
 						<Save size={20} />
 					</button>
 				</Tooltip>
-				<Tooltip label={m.add_entity({entity: c.activeSkill})}>
+				<Tooltip label={m.add_entity({ entity: c.activeSkill })}>
 					<button
 						class="btn hover:bg-secondary-500/25 ml-2 p-2"
 						onclick={(event) => {
@@ -287,7 +291,7 @@
 						<Save size={20} />
 					</button>
 				</Tooltip>
-				<Tooltip label={m.add_entity({entity: c.passiveSkill})}>
+				<Tooltip label={m.add_entity({ entity: c.passiveSkill })}>
 					<button
 						class="btn hover:bg-secondary-500/25 ml-2 p-2"
 						onclick={(event) => {
@@ -374,21 +378,28 @@
 {#if appState.selectedPal}
 	<div class="flex h-full overflow-auto p-2">
 		<div class="flex grow flex-col">
-			<div class="w-2/3 shrink-0">
+			<div id="pal-header" class="w-2/3 shrink-0">
 				<PalHeader bind:pal={appState.selectedPal} />
 			</div>
 			<div class="flex grow">
 				<div class="hidden flex-1 overflow-auto p-2 2xl:block">
 					<div class="flex flex-col space-y-2">
-						{@render activeSkillsHeader()}
-						{@render activeSkillsBody()}
-						{@render passiveSkillsHeader()}
-						{@render passiveSkillsBody()}
-
-						<SectionHeader text={c.presets} />
-						<SkillPresets onSelect={setSkillPreset} />
-						{@render workSuitabilityHeader()}
-						<WorkSuitabilities bind:pal={appState.selectedPal} />
+						<div id="pal-active-skills">
+							{@render activeSkillsHeader()}
+							{@render activeSkillsBody()}
+						</div>
+						<div id="pal-passive-skills">
+							{@render passiveSkillsHeader()}
+							{@render passiveSkillsBody()}
+						</div>
+						<div id="pal-skill-presets">
+							<SectionHeader text={c.presets} />
+							<SkillPresets onSelect={setSkillPreset} />
+						</div>
+						<div id="pal-work-suitability">
+							{@render workSuitabilityHeader()}
+							<WorkSuitabilities bind:pal={appState.selectedPal} />
+						</div>
 					</div>
 				</div>
 				<div class="mt-4 2xl:hidden">
@@ -432,7 +443,7 @@
 						</Accordion.Item>
 					</Accordion>
 				</div>
-				<div class="flex-1 overflow-auto p-2">
+				<div id="pal-image" class="flex-1 overflow-auto p-2">
 					<div class="flex h-full flex-col items-center justify-center">
 						<div class="pal">
 							<Tooltip
@@ -451,7 +462,7 @@
 										<img
 											src={staticIcons.predatorIcon}
 											alt="Predator"
-											class="absolute bottom-0 right-0 h-12 w-12"
+											class="absolute right-0 bottom-0 h-12 w-12"
 											style="filter: {calculateFilters('#FF0000')};"
 										/>
 									{/if}
@@ -474,13 +485,21 @@
 		</div>
 		<div class="w-1/3 overflow-auto p-2">
 			<div class="hidden flex-col space-y-2 2xl:flex">
-				<StatusBadge bind:pal={appState.selectedPal} />
-				<SectionHeader text={m.stats()} />
-				<StatsBadges bind:pal={appState.selectedPal} bind:player={appState.selectedPlayer} />
-				{@render talentsHeader()}
-				<Talents bind:pal={appState.selectedPal} />
-				{@render soulsHeader()}
-				<Souls bind:pal={appState.selectedPal} />
+				<div id="pal-status">
+					<StatusBadge bind:pal={appState.selectedPal} />
+				</div>
+				<div id="pal-stats">
+					<SectionHeader text={m.stats()} />
+					<StatsBadges bind:pal={appState.selectedPal} bind:player={appState.selectedPlayer} />
+				</div>
+				<div id="pal-talents">
+					{@render talentsHeader()}
+					<Talents bind:pal={appState.selectedPal} />
+				</div>
+				<div id="pal-souls">
+					{@render soulsHeader()}
+					<Souls bind:pal={appState.selectedPal} />
+				</div>
 			</div>
 			<div class="flex flex-col space-y-2 2xl:hidden">
 				<StatusBadge bind:pal={appState.selectedPal} />

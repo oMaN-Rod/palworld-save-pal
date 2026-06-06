@@ -27,7 +27,7 @@
 <div class="flex flex-col space-y-1">
 	<div class="flex flex-row items-center">
 		<Tooltip>
-			<button onclick={handleHeal} aria-label={m.health()}>
+			<button id="player-heal-hp" onclick={handleHeal} aria-label={m.health()}>
 				<img src={staticIcons.hpIcon} alt={m.health()} class="mr-2 h-6 w-6" />
 			</button>
 
@@ -49,7 +49,7 @@
 	</div>
 	<div class="flex w-full flex-row items-center">
 		<Tooltip>
-			<button class="mr-2" onclick={handleEat} aria-label={m.food()}>
+			<button id="player-fill-stomach" class="mr-2" onclick={handleEat} aria-label={m.food()}>
 				<img src={staticIcons.foodIcon} alt={m.food()} class="h-6 w-6" />
 			</button>
 			{#snippet popup()}

@@ -703,11 +703,12 @@
 			<div class="shrink-0 space-y-2 p-4">
 				<div class="flex">
 					<div class="flex items-center">
-						<button class="btn px-0 text-start" onclick={handleEditGuildName}>
+						<button id="guild-name" class="btn px-0 text-start" onclick={handleEditGuildName}>
 							<h4 class="h4 hover:text-secondary-500">{playerGuild!.name}</h4>
 						</button>
 						<Tooltip label={m.basecamp_level()}>
 							<button
+								id="guild-level"
 								class="outline-surface-700 hover:outline-secondary-500 ml-2 flex gap-2 rounded p-1 align-bottom outline"
 								onclick={handleEditBasecampLevel}
 							>
@@ -720,7 +721,11 @@
 						<DebugButton href={`/debug?guildId=${playerGuild.id}`} />
 					{/if}
 					<Tooltip label={m.delete_entire_guild()}>
-						<button class="btn ml-4 h-8 w-8 p-2 hover:bg-red-500/50" onclick={handleDeleteGuild}>
+						<button
+							id="guild-delete"
+							class="btn ml-4 h-8 w-8 p-2 hover:bg-red-500/50"
+							onclick={handleDeleteGuild}
+						>
 							<Nuke size={24} />
 						</button>
 					</Tooltip>
@@ -737,7 +742,7 @@
 						{/if}
 					</div>
 					<div class="flex">
-						<button class="btn px-0" onclick={handleEditBaseName}>
+						<button id="guild-base-name" class="btn px-0" onclick={handleEditBaseName}>
 							<h5 class="h5 hover:text-secondary-500 font-light">
 								{currentBase?.[1]?.name || ''}
 							</h5>
@@ -746,9 +751,11 @@
 				</div>
 
 				<nav
+					id="guild-tabs"
 					class="btn-group preset-outlined-surface-200-800 w-full flex-col rounded-sm p-2 md:flex-row"
 				>
 					<button
+						id="guild-tab-pals"
 						class={cn(
 							'btn hover:bg-secondary-500/50 w-1/4 rounded-sm',
 							activeTab == 'pals' ? 'bg-secondary-800' : ''
@@ -762,6 +769,7 @@
 						<span>{c.pals}</span>
 					</button>
 					<button
+						id="guild-tab-storage"
 						class={cn(
 							'btn hover:bg-secondary-500/50 w-1/4 rounded-sm',
 							activeTab == 'storage' ? 'bg-secondary-800' : ''
@@ -775,6 +783,7 @@
 						<span>{m.storage()}</span>
 					</button>
 					<button
+						id="guild-tab-chest"
 						class={cn(
 							'btn hover:bg-secondary-500/50 w-1/4 rounded-sm',
 							activeTab == 'guildChest' ? 'bg-secondary-800' : ''
@@ -788,6 +797,7 @@
 						<span>{m.chest()}</span>
 					</button>
 					<button
+						id="guild-tab-lab"
 						class={cn(
 							'btn hover:bg-secondary-500/50 w-1/4 rounded-sm',
 							activeTab == 'lab' ? 'bg-secondary-800' : ''
@@ -802,9 +812,13 @@
 					</button>
 				</nav>
 				{#if activeTab === 'pals'}
-					<div class="btn-group bg-surface-900 w-full items-center rounded-sm p-1">
+					<div
+						id="guild-pals-toolbar"
+						class="btn-group bg-surface-900 w-full items-center rounded-sm p-1"
+					>
 						<Tooltip position="right" label={m.add_new_pal_to_entity({ entity: c.base })}>
 							<button
+								id="guild-pals-add"
 								class="btn hover:bg-secondary-500/50 p-2"
 								onclick={() => currentBase && handleAddPal(currentBase[0])}
 							>
@@ -812,12 +826,20 @@
 							</button>
 						</Tooltip>
 						<Tooltip label={m.select_all_current_base()}>
-							<button class="btn hover:bg-secondary-500/50 p-2" onclick={handleSelectAll}>
+							<button
+								id="guild-pals-select-all"
+								class="btn hover:bg-secondary-500/50 p-2"
+								onclick={handleSelectAll}
+							>
 								<ReplaceAll class="h-4 w-4" />
 							</button>
 						</Tooltip>
 						<Tooltip label={m.heal_all_in_entity({ entity: c.base })}>
-							<button class="btn hover:bg-secondary-500/50 p-2" onclick={handleHealAll}>
+							<button
+								id="guild-pals-heal-all"
+								class="btn hover:bg-secondary-500/50 p-2"
+								onclick={handleHealAll}
+							>
 								<Bandage class="h-4 w-4" />
 							</button>
 						</Tooltip>
@@ -954,7 +976,7 @@
 			<div>
 				<!-- Pager -->
 				{#if activeTab !== 'lab'}
-					<div class="mb-4 flex items-center justify-center space-x-4">
+					<div id="guild-pager" class="mb-4 flex items-center justify-center space-x-4">
 						<button class="rounded-sm px-4 py-2 font-bold" onclick={decrementPage}>
 							<img src={staticIcons.qIcon} alt={m.previous()} class="h-10 w-10" />
 						</button>
@@ -979,7 +1001,7 @@
 					</div>
 				{/if}
 				{#if activeTab == 'pals'}
-					<div class="overflow-hidden">
+					<div id="guild-pals-grid" class="overflow-hidden">
 						<div class="grid grid-cols-6 place-items-center gap-4 p-4">
 							{#each currentPageItems as item (item.pal.instance_id)}
 								{#if item.pal.character_id !== 'None' || !palSearchQuery}
@@ -998,7 +1020,7 @@
 					</div>
 				{:else if activeTab == 'storage'}
 					{#if currentBaseStorageContainers && currentBaseStorageContainers.length > 0}
-						<div class="flex space-x-4">
+						<div id="guild-storage-content" class="flex space-x-4">
 							<List
 								items={currentBaseStorageContainers}
 								baseClass="w-1/4"
@@ -1100,7 +1122,7 @@
 				{:else if activeTab == 'guildChest' && playerGuild?.guild_chest}
 					{@const building = buildingsData.getByKey('GuildChest')}
 					{@const itemGroup = building?.type_a == BuildingTypeA.Food ? 'Food' : 'Common'}
-					<div class="max-h-137.5 2xl:max-h-200 overflow-y-auto">
+					<div id="guild-chest-content" class="max-h-137.5 overflow-y-auto 2xl:max-h-200">
 						<div class="flex items-start space-x-4">
 							<div class="m-1 grid grid-cols-6 gap-2">
 								{#each Object.values(playerGuild.guild_chest.slots) as _, index}
@@ -1135,7 +1157,7 @@
 						</div>
 					</div>
 				{:else if activeTab == 'lab'}
-					<div class="h-full w-full">
+					<div id="guild-lab-content" class="h-full w-full">
 						<LabResearch
 							bind:this={labResearchComponent}
 							guild={playerGuild}

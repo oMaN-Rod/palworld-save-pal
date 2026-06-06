@@ -9,7 +9,7 @@
 	import { EntryState, type Technology } from '$types';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';
-	
+
 	const appState = getAppState();
 	const modal = getModalState();
 
@@ -139,12 +139,12 @@
 				</div>
 			</div>
 			{#if !isSelected}
-				<div class="absolute bottom-6 right-8 2xl:bottom-12 2xl:right-14">
+				<div class="absolute right-8 bottom-6 2xl:right-14 2xl:bottom-12">
 					<h2 class="h2">{technologyItem.details.cost}</h2>
 				</div>
 			{/if}
 			{#snippet popup()}
-				<div class="flex min-w-96 max-w-3xl flex-col items-start justify-items-start space-y-2">
+				<div class="flex max-w-3xl min-w-96 flex-col items-start justify-items-start space-y-2">
 					<div class="flex w-full text-start">
 						<span class="grow text-xl font-bold">{technologyItem.localized_name}</span>
 						<div class="flex items-center">
@@ -210,6 +210,7 @@
 			<div class="mb-8 flex items-center justify-between">
 				<div class="flex gap-8">
 					<button
+						id="tech-points"
 						onclick={() => handleEditTechPoints('tech')}
 						class="border-surface-400 hover:ring-tech-500 cursor-pointer rounded-lg border hover:ring-2"
 					>
@@ -221,6 +222,7 @@
 						</div>
 					</button>
 					<button
+						id="ancient-tech-points"
 						onclick={() => handleEditTechPoints('ancient')}
 						class="border-surface-400 hover:ring-ancient-tech-500 cursor-pointer rounded-lg border hover:ring-2"
 					>
@@ -232,17 +234,19 @@
 						</div>
 					</button>
 				</div>
-				<div class="flex gap-4">
+				<div id="tech-bulk-actions" class="flex gap-4">
 					<button
+						id="tech-lock-all"
 						onclick={resetAll}
-						class="btn preset-filled-primary-500 hover:ring-secondary-500 hover:preset-filled-secondary-500 rounded-lg bg-opacity-20 px-6 py-2 font-medium hover:ring-2"
+						class="btn preset-filled-primary-500 hover:ring-secondary-500 hover:preset-filled-secondary-500 bg-opacity-20 rounded-lg px-6 py-2 font-medium hover:ring-2"
 					>
 						<Lock class="inline h-4 w-4" />
 						{m.lock_all()}
 					</button>
 					<button
+						id="tech-unlock-all"
 						onclick={unlockAll}
-						class="btn preset-filled-primary-500 hover:ring-secondary-500 hover:preset-filled-secondary-500 rounded-lg bg-opacity-20 px-6 py-2 font-medium hover:ring-2"
+						class="btn preset-filled-primary-500 hover:ring-secondary-500 hover:preset-filled-secondary-500 bg-opacity-20 rounded-lg px-6 py-2 font-medium hover:ring-2"
 					>
 						<Unlock class="inline h-4 w-4" />
 						{m.unlock_all()}
@@ -250,51 +254,53 @@
 				</div>
 			</div>
 
-			{#each Object.entries(technologiesOrder) as [levelCap, levelData]}
-				{@const techIDs = levelData.regular}
-				{@const emptySlots = 8 - techIDs.length}
-				{@const ancientTechID = levelData.ancient}
-				<div class="mb-12 grid grid-cols-[auto_1fr] gap-4">
-					<div class="mb-4 flex items-center px-10">
-						<div
-							class="border-surface-500 flex h-12 w-12 items-center justify-center rounded border-2 text-xl font-bold"
-						>
-							{levelCap}
+			<div id="tech-grid">
+				{#each Object.entries(technologiesOrder) as [levelCap, levelData]}
+					{@const techIDs = levelData.regular}
+					{@const emptySlots = 8 - techIDs.length}
+					{@const ancientTechID = levelData.ancient}
+					<div class="mb-12 grid grid-cols-[auto_1fr] gap-4">
+						<div class="mb-4 flex items-center px-10">
+							<div
+								class="border-surface-500 flex h-12 w-12 items-center justify-center rounded border-2 text-xl font-bold"
+							>
+								{levelCap}
+							</div>
+							<div class="ml-4 h-0.5 flex-1"></div>
 						</div>
-						<div class="ml-4 h-0.5 flex-1"></div>
-					</div>
 
-					<div class="flex gap-4">
 						<div class="flex gap-4">
-							{#each techIDs as techID}
-								{@const technologyItem = technologiesData.getByKey(techID)}
-								{@const isSelected =
-									Number(levelCap) === 1
-										? true
-										: appState.selectedPlayer.technologies.some(
-												(t) => t.toLowerCase() === techID.toLowerCase()
-											)}
-								{#if technologyItem && !technologyItem?.details.is_boss_technology}
-									{@render technologyButton(techID, isSelected, technologyItem, 'tech')}
-								{/if}
-							{/each}
-							{#each Array(emptySlots) as _}
-								<div class="w-24 2xl:w-32"></div>
-							{/each}
+							<div class="flex gap-4">
+								{#each techIDs as techID}
+									{@const technologyItem = technologiesData.getByKey(techID)}
+									{@const isSelected =
+										Number(levelCap) === 1
+											? true
+											: appState.selectedPlayer.technologies.some(
+													(t) => t.toLowerCase() === techID.toLowerCase()
+												)}
+									{#if technologyItem && !technologyItem?.details.is_boss_technology}
+										{@render technologyButton(techID, isSelected, technologyItem, 'tech')}
+									{/if}
+								{/each}
+								{#each Array(emptySlots) as _}
+									<div class="w-24 2xl:w-32"></div>
+								{/each}
+							</div>
+
+							<div class="bg-ancient-tech-500 w-px"></div>
+
+							{#if ancientTechID}
+								{@const ancientTechItem = technologiesData.getByKey(ancientTechID) as Technology}
+								{@const isSelected = appState.selectedPlayer.technologies.includes(ancientTechID)}
+								{@render technologyButton(ancientTechID, isSelected, ancientTechItem, 'ancient')}
+							{:else}
+								<div class="w-24 bg-[#220022] 2xl:w-32"></div>
+							{/if}
 						</div>
-
-						<div class="bg-ancient-tech-500 w-px"></div>
-
-						{#if ancientTechID}
-							{@const ancientTechItem = technologiesData.getByKey(ancientTechID) as Technology}
-							{@const isSelected = appState.selectedPlayer.technologies.includes(ancientTechID)}
-							{@render technologyButton(ancientTechID, isSelected, ancientTechItem, 'ancient')}
-						{:else}
-							<div class="w-24 bg-[#220022] 2xl:w-32"></div>
-						{/if}
 					</div>
-				</div>
-			{/each}
+				{/each}
+			</div>
 		</div>
 	</main>
 {:else}

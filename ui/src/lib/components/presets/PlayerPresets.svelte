@@ -183,8 +183,8 @@
 	});
 </script>
 
-<div class="flex min-w-64 max-w-96 flex-col space-y-2">
-	<div class="btn-group bg-surface-900 items-center rounded-sm p-1">
+<div id="player-presets" class="flex min-w-64 max-w-96 flex-col space-y-2">
+	<div id="player-presets-quick-actions" class="btn-group bg-surface-900 items-center rounded-sm p-1">
 		<TooltipButton
 			onclick={handleAddPreset}
 			popupLabel={m.create_preset_from_current({ entity: m.inventory() })}
@@ -213,10 +213,10 @@
 			</TooltipButton>
 		{/if}
 	</div>
-	<div class="overflow-y-scroll" style={listWrapperStyle}>
+	<div class="overflow-y-auto" style={listWrapperStyle}>
 		<List
 			baseClass="bg-surface-800"
-			listClass="overflow-y-scroll"
+			listClass="overflow-y-auto"
 			items={filteredPresets}
 			bind:selectedItems={selectedPresets}
 			bind:selectedItem={selectedPreset}

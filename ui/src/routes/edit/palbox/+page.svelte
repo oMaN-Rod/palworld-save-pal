@@ -791,9 +791,13 @@
 		{...additionalProps}
 	>
 		<div class="shrink-0 p-4">
-			<nav class="btn-group bg-surface-900 mb-2 w-full items-center overflow-x-auto rounded-sm p-1">
+			<nav
+				id="palbox-toolbar"
+				class="btn-group bg-surface-900 mb-2 w-full items-center overflow-x-auto rounded-sm p-1"
+			>
 				<Tooltip position="right" label={m.add_new_pal_to_entity({ entity: m.palbox() })}>
 					<button
+						id="palbox-add-pal"
 						class="btn hover:preset-tonal-secondary p-2"
 						onclick={() => handleAddPal('palbox')}
 					>
@@ -804,12 +808,17 @@
 					position="right"
 					label={m.add_all_pals_to_entity({ entity: m.palbox(), pals: c.pals })}
 				>
-					<button class="btn hover:preset-tonal-secondary p-2" onclick={() => addAllPalsToBox()}>
+					<button
+						id="palbox-add-all"
+						class="btn hover:preset-tonal-secondary p-2"
+						onclick={() => addAllPalsToBox()}
+					>
 						<CircleFadingPlus class="h-4 w-4" />
 					</button>
 				</Tooltip>
 				<Tooltip>
 					<button
+						id="palbox-select-all"
 						class="btn hover:preset-tonal-secondary p-2"
 						onclick={(event) => handleSelectAll(event)}
 					>
@@ -831,7 +840,11 @@
 					{/snippet}
 				</Tooltip>
 				<Tooltip label={m.heal_all_in_entity({ entity: m.palbox() })}>
-					<button class="btn hover:preset-tonal-secondary p-2" onclick={handleHealAll}>
+					<button
+						id="palbox-heal-all"
+						class="btn hover:preset-tonal-secondary p-2"
+						onclick={handleHealAll}
+					>
 						<Bandage class="h-4 w-4" />
 					</button>
 				</Tooltip>
@@ -890,190 +903,194 @@
 					</Tooltip>
 				{/if}
 			</nav>
-			<Accordion
-				value={filterExpand}
-				onValueChange={(e: ValueChangeDetails) => (filterExpand = e.value)}
-				collapsible
-			>
-				<Accordion.Item
-					value="filter"
-					base="rounded-sm bg-surface-900"
-					controlHover="hover:bg-secondary-500/25"
+			<div id="palbox-filters">
+				<Accordion
+					value={filterExpand}
+					onValueChange={(e: ValueChangeDetails) => (filterExpand = e.value)}
+					collapsible
 				>
-					{#snippet lead()}<Search />{/snippet}
-					{#snippet control()}
-						<span class="font-bold">{m.filter_and_sort()}</span>
-					{/snippet}
-					{#snippet panel()}
-						<Input
-							type="text"
-							inputClass="w-full"
-							placeholder={m.search_by_name_nickname()}
-							bind:value={searchQuery}
-						/>
-						<div>
-							<legend class="font-bold">{m.sort()}</legend>
-							<hr />
-							<div class="grid grid-cols-6">
-								<Tooltip label={m.sort_by_entity({ entity: m.level() })}>
-									<button
-										type="button"
-										class={sortButtonClass('level')}
-										onclick={() => toggleSort('level')}
-									>
-										<LevelSortIcon />
-									</button>
-								</Tooltip>
-								<Tooltip label={m.sort_by_entity({ entity: m.name() })}>
-									<button
-										type="button"
-										class={sortButtonClass('name')}
-										onclick={() => toggleSort('name')}
-									>
-										<NameSortIcon />
-									</button>
-								</Tooltip>
-								<Tooltip label={m.sort_by_entity({ entity: `${m.paldeck()} #` })}>
-									<button
-										type="button"
-										class={sortButtonClass('paldeck-index')}
-										onclick={() => toggleSort('paldeck-index')}
-									>
-										<PaldeckSortIcon />
-									</button>
-								</Tooltip>
-							</div>
-						</div>
-						<div>
-							<legend class="font-bold">{m.element_and_type()}</legend>
-							<hr />
-							<div class="mt-2 grid grid-cols-4 2xl:grid-cols-6">
-								<Tooltip>
-									<button class={elementClass('All')} onclick={() => (selectedFilter = 'All')}>
-										<GalleryVerticalEnd />
-									</button>
-									{#snippet popup()}{m.all_entity({ entity: c.pals })}{/snippet}
-								</Tooltip>
-								{#each [...elementTypes] as element}
-									{@const localizedName = elementsData.getByKey(element)?.localized_name}
-									<Tooltip label={localizedName}>
+					<Accordion.Item
+						value="filter"
+						base="rounded-sm bg-surface-900"
+						controlHover="hover:bg-secondary-500/25"
+					>
+						{#snippet lead()}<Search />{/snippet}
+						{#snippet control()}
+							<span class="font-bold">{m.filter_and_sort()}</span>
+						{/snippet}
+						{#snippet panel()}
+							<Input
+								type="text"
+								inputClass="w-full"
+								placeholder={m.search_by_name_nickname()}
+								bind:value={searchQuery}
+							/>
+							<div>
+								<legend class="font-bold">{m.sort()}</legend>
+								<hr />
+								<div class="grid grid-cols-6">
+									<Tooltip label={m.sort_by_entity({ entity: m.level() })}>
 										<button
-											class={elementClass(element)}
-											onclick={() => (selectedFilter = element)}
-											aria-label={localizedName}
+											type="button"
+											class={sortButtonClass('level')}
+											onclick={() => toggleSort('level')}
+										>
+											<LevelSortIcon />
+										</button>
+									</Tooltip>
+									<Tooltip label={m.sort_by_entity({ entity: m.name() })}>
+										<button
+											type="button"
+											class={sortButtonClass('name')}
+											onclick={() => toggleSort('name')}
+										>
+											<NameSortIcon />
+										</button>
+									</Tooltip>
+									<Tooltip label={m.sort_by_entity({ entity: `${m.paldeck()} #` })}>
+										<button
+											type="button"
+											class={sortButtonClass('paldeck-index')}
+											onclick={() => toggleSort('paldeck-index')}
+										>
+											<PaldeckSortIcon />
+										</button>
+									</Tooltip>
+								</div>
+							</div>
+							<div>
+								<legend class="font-bold">{m.element_and_type()}</legend>
+								<hr />
+								<div class="mt-2 grid grid-cols-4 2xl:grid-cols-6">
+									<Tooltip>
+										<button class={elementClass('All')} onclick={() => (selectedFilter = 'All')}>
+											<GalleryVerticalEnd />
+										</button>
+										{#snippet popup()}{m.all_entity({ entity: c.pals })}{/snippet}
+									</Tooltip>
+									{#each [...elementTypes] as element}
+										{@const localizedName = elementsData.getByKey(element)?.localized_name}
+										<Tooltip label={localizedName}>
+											<button
+												class={elementClass(element)}
+												onclick={() => (selectedFilter = element)}
+												aria-label={localizedName}
+											>
+												<img
+													src={elementIcons[element]}
+													alt={localizedName}
+													class="pal-element-badge"
+												/>
+											</button>
+										</Tooltip>
+									{/each}
+									<Tooltip label={c.alphaPals}>
+										<button
+											type="button"
+											class={sortAlphaClass}
+											onclick={() => (selectedFilter = 'alpha')}
+										>
+											<img src={staticIcons.alphaIcon} alt="Alpha" class="pal-element-badge" />
+										</button>
+									</Tooltip>
+									<Tooltip label={c.luckyPals}>
+										<button
+											type="button"
+											class={sortLuckyClass}
+											onclick={() => (selectedFilter = 'lucky')}
+										>
+											<img src={staticIcons.luckyIcon} alt="Alpha" class="pal-element-badge" />
+										</button>
+									</Tooltip>
+									<Tooltip label={c.humans}>
+										<button
+											type="button"
+											class={sortHumanClass}
+											onclick={() => (selectedFilter = 'human')}
+										>
+											<User />
+										</button>
+									</Tooltip>
+									<Tooltip label={c.predatorPals}>
+										<button
+											type="button"
+											class={sortPredatorClass}
+											onclick={() => (selectedFilter = 'predator')}
 										>
 											<img
-												src={elementIcons[element]}
-												alt={localizedName}
+												src={staticIcons.predatorIcon}
+												alt="Predator"
 												class="pal-element-badge"
+												style="filter: {calculateFilters('#FF0000')};"
 											/>
 										</button>
 									</Tooltip>
-								{/each}
-								<Tooltip label={c.alphaPals}>
-									<button
-										type="button"
-										class={sortAlphaClass}
-										onclick={() => (selectedFilter = 'alpha')}
-									>
-										<img src={staticIcons.alphaIcon} alt="Alpha" class="pal-element-badge" />
-									</button>
-								</Tooltip>
-								<Tooltip label={c.luckyPals}>
-									<button
-										type="button"
-										class={sortLuckyClass}
-										onclick={() => (selectedFilter = 'lucky')}
-									>
-										<img src={staticIcons.luckyIcon} alt="Alpha" class="pal-element-badge" />
-									</button>
-								</Tooltip>
-								<Tooltip label={c.humans}>
-									<button
-										type="button"
-										class={sortHumanClass}
-										onclick={() => (selectedFilter = 'human')}
-									>
-										<User />
-									</button>
-								</Tooltip>
-								<Tooltip label={c.predatorPals}>
-									<button
-										type="button"
-										class={sortPredatorClass}
-										onclick={() => (selectedFilter = 'predator')}
-									>
-										<img
-											src={staticIcons.predatorIcon}
-											alt="Predator"
-											class="pal-element-badge"
-											style="filter: {calculateFilters('#FF0000')};"
-										/>
-									</button>
-								</Tooltip>
-								<Tooltip label={c.oilRigPals}>
-									<button
-										type="button"
-										class={sortOilrigClass}
-										onclick={() => (selectedFilter = 'oilrig')}
-									>
-										<img src={staticIcons.oilrigIcon} alt="Oil Rig" class="pal-element-badge" />
-									</button>
-								</Tooltip>
-								<Tooltip label={c.summonedPals}>
-									<button
-										type="button"
-										class={sortSummonClass}
-										onclick={() => (selectedFilter = 'summon')}
-									>
-										<img src={staticIcons.altarIcon} alt="Summoned" class="pal-element-badge" />
-									</button>
-								</Tooltip>
+									<Tooltip label={c.oilRigPals}>
+										<button
+											type="button"
+											class={sortOilrigClass}
+											onclick={() => (selectedFilter = 'oilrig')}
+										>
+											<img src={staticIcons.oilrigIcon} alt="Oil Rig" class="pal-element-badge" />
+										</button>
+									</Tooltip>
+									<Tooltip label={c.summonedPals}>
+										<button
+											type="button"
+											class={sortSummonClass}
+											onclick={() => (selectedFilter = 'summon')}
+										>
+											<img src={staticIcons.altarIcon} alt="Summoned" class="pal-element-badge" />
+										</button>
+									</Tooltip>
+								</div>
 							</div>
-						</div>
-					{/snippet}
-				</Accordion.Item>
-				<Accordion.Item
-					value="stats"
-					base="block 2xl:hidden rounded-sm bg-surface-900"
-					controlHover="hover:bg-secondary-500/25"
-				>
-					{#snippet lead()}<Info />{/snippet}
-					{#snippet control()}
-						<span class="font-bold">{m.stats()}</span>
-					{/snippet}
-					{#snippet panel()}
-						{#if pals && pals.length > 0}
-							<PalContainerStats {pals} {elementTypes} />
-						{:else}
-							<div>{m.no_pals_available(p.pals)}</div>
-						{/if}
-					{/snippet}
-				</Accordion.Item>
-				<Accordion.Item
-					value="party"
-					base="block 2xl:hidden rounded-sm bg-surface-900"
-					controlHover="hover:bg-secondary-500/25"
-				>
-					{#snippet lead()}<User />{/snippet}
-					{#snippet control()}
-						<span class="font-bold">{m.party()}</span>
-					{/snippet}
-					{#snippet panel()}
-						{@render party()}
-					{/snippet}
-				</Accordion.Item>
-			</Accordion>
+						{/snippet}
+					</Accordion.Item>
+					<Accordion.Item
+						value="stats"
+						base="block 2xl:hidden rounded-sm bg-surface-900"
+						controlHover="hover:bg-secondary-500/25"
+					>
+						{#snippet lead()}<Info />{/snippet}
+						{#snippet control()}
+							<span class="font-bold">{m.stats()}</span>
+						{/snippet}
+						{#snippet panel()}
+							{#if pals && pals.length > 0}
+								<PalContainerStats {pals} {elementTypes} />
+							{:else}
+								<div>{m.no_pals_available(p.pals)}</div>
+							{/if}
+						{/snippet}
+					</Accordion.Item>
+					<Accordion.Item
+						value="party"
+						base="block 2xl:hidden rounded-sm bg-surface-900"
+						controlHover="hover:bg-secondary-500/25"
+					>
+						{#snippet lead()}<User />{/snippet}
+						{#snippet control()}
+							<span class="font-bold">{m.party()}</span>
+						{/snippet}
+						{#snippet panel()}
+							{@render party()}
+						{/snippet}
+					</Accordion.Item>
+				</Accordion>
+			</div>
 
-			<Card rounded="rounded-sm" class="mt-2 hidden 2xl:block">
-				<h4 class="h4 mb-2">{m.party()}</h4>
-				{@render party()}
-			</Card>
+			<div id="palbox-party">
+				<Card rounded="rounded-sm" class="mt-2 hidden 2xl:block">
+					<h4 class="h4 mb-2">{m.party()}</h4>
+					{@render party()}
+				</Card>
+			</div>
 		</div>
 
 		<div>
 			<!-- Pager -->
-			<div class="mb-4 flex items-center justify-center space-x-4">
+			<div id="palbox-pager" class="mb-4 flex items-center justify-center space-x-4">
 				<button class="rounded-sm px-4 py-2 font-bold" onclick={decrementPage}>
 					<img src={staticIcons.qIcon} alt="Previous" class="h-10 w-10" />
 				</button>
@@ -1097,7 +1114,7 @@
 				</button>
 			</div>
 
-			<div class="overflow-hidden">
+			<div id="palbox-grid" class="overflow-hidden">
 				<div class="grid grid-cols-6 place-items-center gap-4 p-4">
 					{#each currentPageItems as item (item.pal.instance_id)}
 						{#if item.pal.character_id !== 'None' || (!searchQuery && selectedFilter === 'All' && sortBy === 'slot-index')}
@@ -1116,15 +1133,17 @@
 				</div>
 			</div>
 		</div>
-		{#if pals && pals.length > 0}
-			<Card class="h-107.5 mr-2 hidden 2xl:block">
-				<PalContainerStats {pals} {elementTypes} />
-			</Card>
-		{:else}
-			<Card class="h-107.5 mr-2 hidden 2xl:block">
-				<div>{m.no_pals_available(p.pals)}</div>
-			</Card>
-		{/if}
+		<div id="palbox-stats">
+			{#if pals && pals.length > 0}
+				<Card class="mr-2 hidden h-107.5 2xl:block">
+					<PalContainerStats {pals} {elementTypes} />
+				</Card>
+			{:else}
+				<Card class="mr-2 hidden h-107.5 2xl:block">
+					<div>{m.no_pals_available(p.pals)}</div>
+				</Card>
+			{/if}
+		</div>
 	</div>
 {:else}
 	<div class="flex w-full items-center justify-center">

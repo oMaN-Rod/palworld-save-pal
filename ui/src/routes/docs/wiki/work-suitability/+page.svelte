@@ -63,7 +63,7 @@
 				<img
 					src={getWorkIcon(selectedKey as WorkSuitability)}
 					alt=""
-					class="h-8 w-8 shrink-0"
+					class="h-12 w-12 shrink-0"
 				/>
 				<h2 class="text-2xl font-bold">{selectedWork.localized_name || selectedKey}</h2>
 			</div>

@@ -2,21 +2,24 @@
 	import { cn } from '$theme';
 
 	let {
+		id= '',
 		onClick,
 		label,
 		class: _class = '',
 		disabled = false,
 		children
-	} = $props<{
+	}: {
+		id?: string;
 		onClick: () => void;
 		label?: string;
 		class?: string;
 		disabled?: boolean;
 		children?: any;
-	}>();
+	} = $props();
 </script>
 
 <button
+	{id}
 	class={cn(
 		'bg-surface-800 text-one-surface hover:ring-secondary-500 relative h-1/2 rounded-sm px-6 py-1 font-semibold hover:ring',
 		_class

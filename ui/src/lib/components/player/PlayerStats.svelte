@@ -100,11 +100,11 @@
 	</button>
 {/snippet}
 
-<div class="flex flex-col items-end space-y-1">
+<div id="player-stats" class="flex flex-col items-end space-y-1">
 	{@render statButton('health', staticIcons.hpIcon, m.health(), health)}
 	{@render statButton('stamina', staticIcons.staminaIcon, m.stamina(), stamina)}
 	{@render statButton('attack', staticIcons.attackIcon, m.attack(), attack)}
 	{@render statButton('workSpeed', staticIcons.workSpeedIcon, m.workspeed(), workSpeed)}
 	{@render statButton('weight', staticIcons.weightIcon, m.weight(), weight)}
-	<CornerDotButton class="w-24" label={m.max()} onClick={handleMaxPlayerStats} />
+	<CornerDotButton id="max-player-stats" class="w-24" label={m.max()} onClick={handleMaxPlayerStats} />
 </div>

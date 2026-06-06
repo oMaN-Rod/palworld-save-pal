@@ -291,6 +291,16 @@ body {
 }
 
 /* Driver.js tour theme */
+
+/*
+ * Driver.js forces `overflow: hidden` on the parent of the active element,
+ * which clips absolutely-positioned child popups (e.g. Combobox dropdowns).
+ * Override so checkpoint steps relying on popups stay usable.
+ */
+.driver-active :has(> .driver-active-element) {
+	overflow: visible !important;
+}
+
 .driver-popover {
 	background-color: var(--color-surface-800) !important;
 	color: var(--color-surface-50) !important;
