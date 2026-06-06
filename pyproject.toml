@@ -1,6 +1,6 @@
 [project]
 name = "PalworldSavePal"
-version = "0.17.0-b1"
+version = "0.17.0-b4"
 description = "Palworld Save Pal"
 requires-python = ">=3.12"
 dependencies = [
@@ -13,7 +13,6 @@ dependencies = [
     "clr-loader>=0.2.7",
     "colorama==0.4.6",
     "colorlog==6.9.0",
-    "cx-freeze==8.3.0",
     "deepdiff==8.0.1",
     "fastapi==0.115.6",
     "h11==0.16.0",
@@ -47,6 +46,7 @@ dependencies = [
     "httpx>=0.27.0",
     "cityhash>=0.4.7",
     "orjson>=3.10.0",
+    "cx-freeze>=8.4.1",
 ]
 
 [tool.uv]
