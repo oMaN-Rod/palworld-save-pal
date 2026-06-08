@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Map } from '$components';
 	import { PlayerList } from '$components/player';
-	import { Combobox } from '$components/ui';
+	import { Button, Combobox } from '$components/ui';
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { worldToPixel, worldToMap } from '$components/map/utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
@@ -235,10 +235,10 @@
 				<div class="relative">
 					<Loader2
 						size={64}
-						class="animate-spin text-secondary-400"
+						class="text-secondary-400 animate-spin"
 						style="filter: drop-shadow(0 0 20px color-mix(in srgb, var(--color-secondary-400) 50%, transparent));"
 					/>
-					<MapIcon size={24} class="absolute inset-0 m-auto text-secondary-300" />
+					<MapIcon size={24} class="text-secondary-300 absolute inset-0 m-auto" />
 				</div>
 				<p class="loading-text">INITIALIZING MAP</p>
 				<div class="loading-bar-track">
@@ -255,10 +255,15 @@
 					<div class="flex items-center">
 						<SectionHeader text={m.map_options()}>
 							{#snippet action()}
-								<button class="btn btn-sm flex items-center gap-2" onclick={handleUnlockMap}>
+								<Button
+									variant="ghost"
+									size="sm"
+									class="flex items-center gap-2"
+									onclick={handleUnlockMap}
+								>
 									<Unlock class="h-4 w-4" />
 									<span>{m.unlock_map()}</span>
-								</button>
+								</Button>
 							{/snippet}
 						</SectionHeader>
 					</div>
