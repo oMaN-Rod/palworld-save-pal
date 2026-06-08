@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { TextInputModal } from '$components/modals';
-	import { List, TooltipButton } from '$components/ui';
+	import { Button, List, TooltipButton } from '$components/ui';
 	import { presetsData, itemsData } from '$lib/data';
 	import type { ItemContainerSlot, Player, PresetProfile } from '$lib/types';
 	import { getAppState, getModalState } from '$states';
@@ -184,7 +184,10 @@
 </script>
 
 <div id="player-presets" class="flex max-w-96 min-w-64 flex-col space-y-2">
-	<div id="player-presets-quick-actions" class="btn-group bg-surface-900 items-center rounded-sm p-1">
+	<div
+		id="player-presets-quick-actions"
+		class="btn-group bg-surface-900 items-center rounded-sm p-1"
+	>
 		<TooltipButton
 			onclick={handleAddPreset}
 			popupLabel={m.create_preset_from_current({ entity: m.inventory() })}
@@ -232,9 +235,9 @@
 				<span class="grow">{preset.name}</span>
 			{/snippet}
 			{#snippet listItemActions(preset)}
-				<button class="btn" onclick={() => handleEditPresetName(preset)}>
+				<Button variant="ghost" size="icon" onclick={() => handleEditPresetName(preset)}>
 					<Edit class="h-4 w-4" />
-				</button>
+				</Button>
 			{/snippet}
 			{#snippet listItemPopup(preset)}
 				{@const commonContainerString =

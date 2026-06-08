@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { getAppState, getNavigationState } from '$states';
 	import { Bug } from 'lucide-svelte';
+	import { Button } from '$components/ui';
 
 	const appState = getAppState();
 	const nav = getNavigationState();
@@ -16,11 +17,13 @@
 	}>();
 </script>
 
-<button
-	class="btn {baseClass}"
+<Button
+	variant="ghost"
+	size="icon"
+	class={baseClass}
 	onclick={async () => {
 		nav.saveAndNavigate(href);
 	}}
 >
 	<Bug class={iconClass} />
-</button>
+</Button>

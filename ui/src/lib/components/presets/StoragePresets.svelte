@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { TextInputModal } from '$components/modals';
-	import { List, TooltipButton } from '$components/ui';
+	import { Button, List, TooltipButton } from '$components/ui';
 	import { itemsData, presetsData } from '$lib/data';
 	import type { ItemContainer, ItemContainerSlot, PresetProfile } from '$lib/types';
 	import { getModalState } from '$states';
@@ -250,9 +250,9 @@
 			<span class="grow">{preset.name}</span>
 		{/snippet}
 		{#snippet listItemActions(preset)}
-			<button class="btn" onclick={() => handleEditPresetName(preset)}>
+			<Button variant="ghost" size="icon" onclick={() => handleEditPresetName(preset)}>
 				<Edit class="h-4 w-4" />
-			</button>
+			</Button>
 		{/snippet}
 		{#snippet listItemPopup(preset)}
 			<div class="flex flex-col">
