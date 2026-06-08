@@ -1,11 +1,10 @@
 <script lang="ts">
-	import { ItemHeader, Progress } from '$components/ui';
+	import { Button, ItemHeader, Progress, Tooltip } from '$components/ui';
 	import { getAppState, getToastState, getModalState } from '$states';
 	import { EntryState, type ItemContainerSlot, type ItemContainer } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { itemsData, expData } from '$lib/data';
 	import { Tabs, Accordion } from '@skeletonlabs/skeleton-svelte';
-	import { Tooltip } from '$components/ui';
 	import { PlayerStats, PlayerHealthBadge } from '$components/player';
 	import { ItemBadge } from '$components/shared';
 	import { PlayerPresets } from '$components/presets';
@@ -589,94 +588,73 @@
 {#if appState.selectedPlayer}
 	<div class="flex h-full flex-col overflow-auto">
 		<div class="ml-2 flex">
-			<nav id="quick-actions" class="btn-group preset-outlined-surface-200-800 mr-2 flex-col items-center rounded-sm">
+			<nav
+				id="quick-actions"
+				class="btn-group preset-outlined-surface-200-800 mr-2 flex-col items-center rounded-sm"
+			>
 				{#if group === 'inventory'}
 					<Tooltip label={m.sort_inventory()}>
-						<button class="hover:bg-secondary-500/50 btn rounded-sm" onclick={sortCommonContainer}>
+						<Button variant="ghost" size="icon" onclick={sortCommonContainer}>
 							<ArrowUp01 class="h-6 w-6" />
-						</button>
+						</Button>
 					</Tooltip>
 					<Tooltip label={m.fill_entity({ entity: m.inventory() })}>
-						<button class="hover:bg-secondary-500/50 btn rounded-sm" onclick={fillCommonContainer}>
+						<Button variant="ghost" size="icon" onclick={fillCommonContainer}>
 							<PaintBucket class="h-6 w-6" />
-						</button>
+						</Button>
 					</Tooltip>
 					<Tooltip label={m.set_inventory_count()}>
-						<button
-							class="hover:bg-secondary-500/50 btn rounded-sm"
-							onclick={setCommonContainerCount}
-						>
+						<Button variant="ghost" size="icon" onclick={setCommonContainerCount}>
 							<Hash class="h-6 w-6" />
-						</button>
+						</Button>
 					</Tooltip>
 					<Tooltip label={m.clear_entity({ entity: m.inventory() })}>
-						<button class="hover:bg-secondary-500/50 btn rounded-sm" onclick={clearCommonContainer}>
+						<Button variant="ghost" size="icon" onclick={clearCommonContainer}>
 							<ChevronsLeftRight class="h-6 w-6" />
-						</button>
+						</Button>
 					</Tooltip>
 				{/if}
 				{#if group === 'key_items'}
 					<Tooltip label={m.add_all_pal_gear(p.pal)}>
-						<button
-							class="hover:bg-secondary-500/50 btn rounded-sm"
-							onclick={() => setEssentialList('gear')}
-						>
+						<Button variant="ghost" size="icon" onclick={() => setEssentialList('gear')}>
 							<PawPrint class="h-6 w-6" />
-						</button>
+						</Button>
 					</Tooltip>
 					<Tooltip label={m.add_all_implants()}>
-						<button
-							class="hover:bg-secondary-500/50 btn rounded-sm"
-							onclick={() => setEssentialList('implants')}
-						>
+						<Button variant="ghost" size="icon" onclick={() => setEssentialList('implants')}>
 							<Activity class="h-6 w-6" />
-						</button>
+						</Button>
 					</Tooltip>
 					<Tooltip label={m.add_other_key_items()}>
-						<button
-							class="hover:bg-secondary-500/50 btn rounded-sm"
-							onclick={() => setEssentialList('misc')}
-						>
+						<Button variant="ghost" size="icon" onclick={() => setEssentialList('misc')}>
 							<Key class="h-6 w-6" />
-						</button>
+						</Button>
 					</Tooltip>
 					<Tooltip label={m.clear_entity({ entity: m.key_items() })}>
-						<button
-							class="hover:bg-secondary-500/50 btn rounded-sm"
-							onclick={clearEssentialContainer}
-						>
+						<Button variant="ghost" size="icon" onclick={clearEssentialContainer}>
 							<ChevronsLeftRight class="h-6 w-6" />
-						</button>
+						</Button>
 					</Tooltip>
 				{/if}
 				<Tooltip label={m.clear_entity({ entity: m.weapon({ count: 2 }) })}>
-					<button
-						class="hover:bg-secondary-500/50 btn rounded-sm"
-						onclick={clearWeaponLoadOutContainer}
-					>
+					<Button variant="ghost" size="icon" onclick={clearWeaponLoadOutContainer}>
 						<Swords class="h-6 w-6" />
-					</button>
+					</Button>
 				</Tooltip>
 				<Tooltip label={m.clear_entity({ entity: m.armor() })}>
-					<button
-						class="hover:bg-secondary-500/50 btn rounded-sm"
-						onclick={clearEquipmentArmorContainer}
-					>
+					<Button variant="ghost" size="icon" onclick={clearEquipmentArmorContainer}>
 						<Shield class="h-6 w-6" />
-					</button>
+					</Button>
 				</Tooltip>
 				<Tooltip label={m.clear_entity({ entity: m.food() })}>
-					<button
-						class="hover:bg-secondary-500/50 btn rounded-sm"
-						onclick={clearFoodEquipContainer}
-					>
+					<Button variant="ghost" size="icon" onclick={clearFoodEquipContainer}>
 						<Pizza class="h-6 w-6" />
-					</button>
+					</Button>
 				</Tooltip>
 				<Tooltip label={m.clear_all()}>
-					<button class="hover:bg-secondary-500/50 btn rounded-sm" onclick={clearAll}>
+					<Button variant="ghost" size="icon" onclick={clearAll}>
 						<Bomb class="h-6 w-6" />
-					</button>
+					</Button>
 				</Tooltip>
 			</nav>
 			<!-- Main content wrapper -->
@@ -881,13 +859,15 @@
 					<div class="mr-4 flex flex-col items-center justify-center rounded-none">
 						<div class="flex items-center">
 							<Tooltip position="bottom">
-								<button
-									oncontextmenu={(event) => event.preventDefault()}
-									class="btn hover:bg-secondary-500/25 mr-4 px-2"
-									onmousedown={(event) => handleLevelDecrement(event)}
+								<Button
+									variant="ghost"
+									size="icon"
+									class="mr-4"
+									oncontextmenu={(event: MouseEvent) => event.preventDefault()}
+									onmousedown={(event: MouseEvent) => handleLevelDecrement(event)}
 								>
 									<Minus class="text-primary-500" size={16} />
-								</button>
+								</Button>
 								{#snippet popup()}
 									<div class="flex items-center space-x-2">
 										<div class="h-6 w-6">
@@ -935,13 +915,15 @@
 							</div>
 
 							<Tooltip position="bottom">
-								<button
-									oncontextmenu={(event) => event.preventDefault()}
-									class="btn hover:bg-secondary-500/25 ml-4 px-2"
-									onmousedown={(event) => handleLevelIncrement(event)}
+								<Button
+									variant="ghost"
+									size="icon"
+									class="ml-4"
+									oncontextmenu={(event: MouseEvent) => event.preventDefault()}
+									onmousedown={(event: MouseEvent) => handleLevelIncrement(event)}
 								>
 									<Plus class="text-primary-500" size={16} />
-								</button>
+								</Button>
 								{#snippet popup()}
 									<div class="flex items-center space-x-2">
 										<div class="h-6 w-6">

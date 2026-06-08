@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { palsData, buildingsData, itemsData, presetsData } from '$lib/data';
 	import { getAppState, getModalState, getToastState } from '$states';
-	import { Input, List, Spinner, Tooltip, TooltipButton } from '$components/ui';
+	import { Button, Input, List, Spinner, Tooltip, TooltipButton } from '$components/ui';
 	import {
 		type ItemContainer,
 		type Pal,
@@ -703,9 +703,14 @@
 			<div class="shrink-0 space-y-2 p-4">
 				<div class="flex">
 					<div class="flex items-center">
-						<button id="guild-name" class="btn min-w-0 px-0 text-start" onclick={handleEditGuildName}>
+						<Button
+							id="guild-name"
+							variant="ghost"
+							class="min-w-0 px-0 text-start"
+							onclick={handleEditGuildName}
+						>
 							<h4 class="h4 hover:text-secondary-500 truncate">{playerGuild!.name}</h4>
-						</button>
+						</Button>
 						<Tooltip label={m.basecamp_level()}>
 							<button
 								id="guild-level"
@@ -742,11 +747,11 @@
 						{/if}
 					</div>
 					<div class="flex">
-						<button id="guild-base-name" class="btn px-0" onclick={handleEditBaseName}>
+						<Button id="guild-base-name" variant="ghost" class="px-0" onclick={handleEditBaseName}>
 							<h5 class="h5 hover:text-secondary-500 font-light">
 								{currentBase?.[1]?.name || ''}
 							</h5>
-						</button>
+						</Button>
 					</div>
 				</div>
 
@@ -817,55 +822,50 @@
 						class="btn-group bg-surface-900 w-full items-center rounded-sm p-1"
 					>
 						<Tooltip position="right" label={m.add_new_pal_to_entity({ entity: c.base })}>
-							<button
+							<Button
 								id="guild-pals-add"
-								class="btn hover:bg-secondary-500/50 p-2"
+								variant="ghost"
+								size="icon"
 								onclick={() => currentBase && handleAddPal(currentBase[0])}
 							>
 								<Plus class="h-4 w-4" />
-							</button>
+							</Button>
 						</Tooltip>
 						<Tooltip label={m.select_all_current_base()}>
-							<button
+							<Button
 								id="guild-pals-select-all"
-								class="btn hover:bg-secondary-500/50 p-2"
+								variant="ghost"
+								size="icon"
 								onclick={handleSelectAll}
 							>
 								<ReplaceAll class="h-4 w-4" />
-							</button>
+							</Button>
 						</Tooltip>
 						<Tooltip label={m.heal_all_in_entity({ entity: c.base })}>
-							<button
-								id="guild-pals-heal-all"
-								class="btn hover:bg-secondary-500/50 p-2"
-								onclick={handleHealAll}
-							>
+							<Button id="guild-pals-heal-all" variant="ghost" size="icon" onclick={handleHealAll}>
 								<Bandage class="h-4 w-4" />
-							</button>
+							</Button>
 						</Tooltip>
 						{#if selectedPals.length > 0}
 							<Tooltip label={m.apply_preset_to_selected(p.pals)}>
-								<button class="btn hover:bg-secondary-500/50 p-2" onclick={handleSelectPreset}>
+								<Button variant="ghost" size="icon" onclick={handleSelectPreset}>
 									<Play class="h-4 w-4" />
-								</button>
+								</Button>
 							</Tooltip>
 							<Tooltip label={m.heal_selected_pals(p.pals)}>
-								<button class="btn hover:bg-secondary-500/50 p-2" onclick={healSelectedPals}>
+								<Button variant="ghost" size="icon" onclick={healSelectedPals}>
 									<Ambulance class="h-4 w-4" />
-								</button>
+								</Button>
 							</Tooltip>
 							<Tooltip label={m.delete_selected_entity({ entity: c.pals })}>
-								<button class="btn hover:bg-secondary-500/50 p-2" onclick={deleteSelectedPals}>
+								<Button variant="ghost" size="icon" onclick={deleteSelectedPals}>
 									<Trash class="h-4 w-4" />
-								</button>
+								</Button>
 							</Tooltip>
 							<Tooltip label={m.clear_entity({ entity: m.selected() })}>
-								<button
-									class="btn hover:bg-secondary-500/50 p-2"
-									onclick={() => (selectedPals = [])}
-								>
+								<Button variant="ghost" size="icon" onclick={() => (selectedPals = [])}>
 									<X class="h-4 w-4" />
-								</button>
+								</Button>
 							</Tooltip>
 						{/if}
 					</div>
@@ -873,15 +873,15 @@
 				{#if activeTab == 'storage'}
 					<div class="flex items-center">
 						<Input bind:value={inventorySearchQuery} placeholder={m.search_inventory()} />
-						<button
-							class="btn"
+						<Button
+							variant="ghost"
 							onclick={() => {
 								inventorySearchQuery = '';
 								selectedInventoryItem = '';
 							}}
 						>
 							<RefreshCcw class="h-6 w-6" />
-						</button>
+						</Button>
 					</div>
 					<List
 						bind:items={currentBaseInventory.current}
