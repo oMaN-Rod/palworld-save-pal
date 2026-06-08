@@ -317,23 +317,6 @@ body {
 .btn:active:not(:disabled) {
 	transform: scale(0.97);
 }
-.btn-cyan {
-	background: var(--color-primary-500);
-	color: var(--color-primary-950);
-}
-.btn-cyan:hover {
-	background: var(--color-primary-400);
-	box-shadow: 0 0 12px color-mix(in srgb, var(--color-primary-300) 25%, transparent);
-}
-.btn-yellow {
-	background: var(--color-secondary-500);
-	color: var(--color-secondary-950);
-	box-shadow: 0 0 12px color-mix(in srgb, var(--color-secondary-500) 25%, transparent);
-}
-.btn-yellow:hover {
-	background: var(--color-secondary-400);
-	box-shadow: 0 0 20px color-mix(in srgb, var(--color-secondary-500) 40%, transparent);
-}
 .btn-primary {
 	background: var(--color-primary-500);
 	color: var(--color-primary-contrast-500);
