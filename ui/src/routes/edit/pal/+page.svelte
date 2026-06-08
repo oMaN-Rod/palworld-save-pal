@@ -14,7 +14,7 @@
 		MultiSkillSelectModal,
 		TextInputModal
 	} from '$components/modals';
-	import { SectionHeader, Tooltip } from '$components/ui';
+	import { Button, SectionHeader, Tooltip } from '$components/ui';
 	import { SkillPresets } from '$components/presets';
 	import { expData, palsData, presetsData } from '$lib/data';
 	import { getAppState, getModalState } from '$states';
@@ -231,37 +231,43 @@
 		{#snippet action()}
 			<div class="flex">
 				<Tooltip label={m.learned_skills()}>
-					<button
-						class="btn hover:bg-secondary-500/25 ml-2 p-2"
-						onclick={(event) => {
+					<Button
+						variant="ghost"
+						size="icon"
+						class="ml-2"
+						onclick={(event: MouseEvent) => {
 							event.stopPropagation();
 							handleEditLearnedSkills();
 						}}
 					>
 						<Brain size={20} />
-					</button>
+					</Button>
 				</Tooltip>
 				<Tooltip label={m.save_as_preset()}>
-					<button
-						class="btn hover:bg-secondary-500/25 ml-2 p-2"
-						onclick={(event) => {
+					<Button
+						variant="ghost"
+						size="icon"
+						class="ml-2"
+						onclick={(event: MouseEvent) => {
 							event.stopPropagation();
 							handleAddPreset('active');
 						}}
 					>
 						<Save size={20} />
-					</button>
+					</Button>
 				</Tooltip>
 				<Tooltip label={m.add_entity({ entity: c.activeSkill })}>
-					<button
-						class="btn hover:bg-secondary-500/25 ml-2 p-2"
-						onclick={(event) => {
+					<Button
+						variant="ghost"
+						size="icon"
+						class="ml-2"
+						onclick={(event: MouseEvent) => {
 							event.stopPropagation();
 							handleAddSkill('active');
 						}}
 					>
 						<Plus size={20} />
-					</button>
+					</Button>
 				</Tooltip>
 			</div>
 		{/snippet}
@@ -281,26 +287,30 @@
 		{#snippet action()}
 			<div class="flex">
 				<Tooltip label={m.save_as_preset()}>
-					<button
-						class="btn hover:bg-secondary-500/25 ml-2 p-2"
-						onclick={(event) => {
+					<Button
+						variant="ghost"
+						size="icon"
+						class="ml-2"
+						onclick={(event: MouseEvent) => {
 							event.stopPropagation();
 							handleAddPreset('passive');
 						}}
 					>
 						<Save size={20} />
-					</button>
+					</Button>
 				</Tooltip>
 				<Tooltip label={m.add_entity({ entity: c.passiveSkill })}>
-					<button
-						class="btn hover:bg-secondary-500/25 ml-2 p-2"
-						onclick={(event) => {
+					<Button
+						variant="ghost"
+						size="icon"
+						class="ml-2"
+						onclick={(event: MouseEvent) => {
 							event.stopPropagation();
 							handleAddSkill('passive');
 						}}
 					>
 						<Plus size={20} />
-					</button>
+					</Button>
 				</Tooltip>
 			</div>
 		{/snippet}
@@ -320,15 +330,17 @@
 		{#snippet action()}
 			<div class="flex">
 				<Tooltip label={m.max_work_suitability()}>
-					<button
-						class="btn hover:bg-secondary-500/25 ml-2 p-2"
-						onclick={(event) => {
+					<Button
+						variant="ghost"
+						size="icon"
+						class="ml-2"
+						onclick={(event: MouseEvent) => {
 							event.stopPropagation();
 							handleMaxWorkSuitability();
 						}}
 					>
 						<BicepsFlexed />
-					</button>
+					</Button>
 				</Tooltip>
 			</div>
 		{/snippet}
@@ -340,15 +352,17 @@
 		{#snippet action()}
 			<div class="flex">
 				<Tooltip label={m.max_ivs()}>
-					<button
-						class="btn hover:bg-secondary-500/25 ml-2 p-2"
-						onclick={(event) => {
+					<Button
+						variant="ghost"
+						size="icon"
+						class="ml-2"
+						onclick={(event: MouseEvent) => {
 							event.stopPropagation();
 							handleMaxIVs();
 						}}
 					>
 						<BicepsFlexed />
-					</button>
+					</Button>
 				</Tooltip>
 			</div>
 		{/snippet}
@@ -360,15 +374,17 @@
 		{#snippet action()}
 			<div class="flex">
 				<Tooltip label={m.max_souls()}>
-					<button
-						class="btn hover:bg-secondary-500/25 ml-2 p-2"
-						onclick={(event) => {
+					<Button
+						variant="ghost"
+						size="icon"
+						class="ml-2"
+						onclick={(event: MouseEvent) => {
 							event.stopPropagation();
 							handleMaxSouls();
 						}}
 					>
 						<BicepsFlexed />
-					</button>
+					</Button>
 				</Tooltip>
 			</div>
 		{/snippet}

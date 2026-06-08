@@ -4,7 +4,7 @@
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
 	import { NumberInputModal } from '$components/modals';
-	import { Tooltip } from '$components/ui';
+	import { Button, Tooltip } from '$components/ui';
 	import { Lock, Unlock } from 'lucide-svelte';
 	import { EntryState, type Technology } from '$types';
 	import { staticIcons } from '$types/icons';
@@ -235,22 +235,26 @@
 					</button>
 				</div>
 				<div id="tech-bulk-actions" class="flex gap-4">
-					<button
+					<Button
 						id="tech-lock-all"
+						variant="primary"
+						size="lg"
+						class="hover:ring-secondary-500 rounded-lg font-medium hover:ring-2"
 						onclick={resetAll}
-						class="btn preset-filled-primary-500 hover:ring-secondary-500 hover:preset-filled-secondary-500 bg-opacity-20 rounded-lg px-6 py-2 font-medium hover:ring-2"
 					>
 						<Lock class="inline h-4 w-4" />
 						{m.lock_all()}
-					</button>
-					<button
+					</Button>
+					<Button
 						id="tech-unlock-all"
+						variant="primary"
+						size="lg"
+						class="hover:ring-secondary-500 rounded-lg font-medium hover:ring-2"
 						onclick={unlockAll}
-						class="btn preset-filled-primary-500 hover:ring-secondary-500 hover:preset-filled-secondary-500 bg-opacity-20 rounded-lg px-6 py-2 font-medium hover:ring-2"
 					>
 						<Unlock class="inline h-4 w-4" />
 						{m.unlock_all()}
-					</button>
+					</Button>
 				</div>
 			</div>
 
