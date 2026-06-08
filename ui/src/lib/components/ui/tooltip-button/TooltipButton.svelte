@@ -1,28 +1,32 @@
 <script lang="ts">
-	import { Tooltip } from '$components/ui';
+	import { Tooltip, Button } from '$components/ui';
+	import type { ButtonVariant, ButtonSize } from '../button/button.styles';
 
 	let {
-		icon,
 		children,
-		buttonClass,
+		buttonClass = '',
 		popupLabel,
 		position = 'bottom',
 		baseClass = '',
+		variant = 'ghost',
+		size = 'icon',
 		...additionalProps
-	} = $props<{
+	}: {
 		children: any;
 		buttonClass?: string;
 		popupLabel: string;
 		baseClass?: string;
 		position?: 'top' | 'bottom' | 'left' | 'right';
+		variant?: ButtonVariant;
+		size?: ButtonSize;
 		[key: string]: any;
-	}>();
+	} = $props();
 </script>
 
 <Tooltip {position} {baseClass}>
-	<button class="btn p-2 {buttonClass}" {...additionalProps}>
+	<Button {variant} {size} class={buttonClass} {...additionalProps}>
 		{@render children()}
-	</button>
+	</Button>
 	{#snippet popup()}
 		{popupLabel}
 	{/snippet}
