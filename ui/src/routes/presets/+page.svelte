@@ -191,12 +191,12 @@
 </script>
 
 {#snippet tabButton(tab: PresetType, label: string)}
-	<button
+	<Button
+		variant={activeTab === tab ? 'secondary' : 'ghost'}
+		size="sm"
 		class={cn(
-			'flex-1 rounded-sm px-2 py-2 text-xs font-semibold tracking-wider uppercase transition-all 2xl:px-4 2xl:text-sm',
-			activeTab === tab
-				? 'bg-secondary-500 text-secondary-950 shadow-glow-gold'
-				: 'text-surface-400 hover:bg-surface-800 hover:text-surface-200'
+			'flex-1 tracking-wider 2xl:px-4 2xl:text-sm',
+			activeTab === tab ? '' : 'text-surface-400'
 		)}
 		onclick={() => {
 			activeTab = tab;
@@ -204,7 +204,7 @@
 		}}
 	>
 		{label}
-	</button>
+	</Button>
 {/snippet}
 
 {#snippet presetContent(index: number)}
