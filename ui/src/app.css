@@ -28,22 +28,29 @@
 	 *   cyan/paldium -> primary, gold -> secondary, ancient -> tertiary,
 	 *   toxic -> success, amber -> warning, red -> error.
 	 */
-	--shadow-glow-cyan: 0 0 8px color-mix(in srgb, var(--color-primary-300) 40%, transparent),
+	--shadow-glow-cyan:
+		0 0 8px color-mix(in srgb, var(--color-primary-300) 40%, transparent),
 		0 0 20px color-mix(in srgb, var(--color-primary-300) 15%, transparent);
-	--shadow-glow-paldium: 0 0 12px color-mix(in srgb, var(--color-primary-300) 35%, transparent),
+	--shadow-glow-paldium:
+		0 0 12px color-mix(in srgb, var(--color-primary-300) 35%, transparent),
 		0 0 30px color-mix(in srgb, var(--color-primary-300) 12%, transparent);
 	--shadow-glow-paldium-sm: 0 0 6px color-mix(in srgb, var(--color-primary-300) 30%, transparent);
-	--shadow-glow-ancient: 0 0 12px color-mix(in srgb, var(--color-tertiary-400) 35%, transparent),
+	--shadow-glow-ancient:
+		0 0 12px color-mix(in srgb, var(--color-tertiary-400) 35%, transparent),
 		0 0 30px color-mix(in srgb, var(--color-tertiary-400) 12%, transparent);
 	--shadow-glow-ancient-sm: 0 0 6px color-mix(in srgb, var(--color-tertiary-400) 30%, transparent);
-	--shadow-glow-toxic: 0 0 12px color-mix(in srgb, var(--color-success-400) 35%, transparent),
+	--shadow-glow-toxic:
+		0 0 12px color-mix(in srgb, var(--color-success-400) 35%, transparent),
 		0 0 30px color-mix(in srgb, var(--color-success-400) 12%, transparent);
 	--shadow-glow-toxic-sm: 0 0 6px color-mix(in srgb, var(--color-success-400) 30%, transparent);
-	--shadow-glow-gold: 0 0 8px color-mix(in srgb, var(--color-secondary-500) 40%, transparent),
+	--shadow-glow-gold:
+		0 0 8px color-mix(in srgb, var(--color-secondary-500) 40%, transparent),
 		0 0 20px color-mix(in srgb, var(--color-secondary-500) 15%, transparent);
-	--shadow-glow-red: 0 0 8px color-mix(in srgb, var(--color-error-500) 40%, transparent),
+	--shadow-glow-red:
+		0 0 8px color-mix(in srgb, var(--color-error-500) 40%, transparent),
 		0 0 20px color-mix(in srgb, var(--color-error-500) 15%, transparent);
-	--shadow-glow-amber: 0 0 8px color-mix(in srgb, var(--color-warning-500) 40%, transparent),
+	--shadow-glow-amber:
+		0 0 8px color-mix(in srgb, var(--color-warning-500) 40%, transparent),
 		0 0 20px color-mix(in srgb, var(--color-warning-500) 15%, transparent);
 }
 
@@ -343,6 +350,14 @@ body {
 .btn-secondary:hover {
 	background: var(--color-secondary-400);
 	box-shadow: 0 0 20px color-mix(in srgb, var(--color-secondary-500) 40%, transparent);
+}
+.btn-danger {
+	background: var(--color-error-500);
+	color: var(--color-error-contrast-500);
+}
+.btn-danger:hover {
+	background: var(--color-error-400);
+	box-shadow: 0 0 12px color-mix(in srgb, var(--color-error-500) 25%, transparent);
 }
 .btn-neutral {
 	background: var(--color-surface-700);

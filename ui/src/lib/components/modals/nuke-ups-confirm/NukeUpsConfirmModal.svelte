@@ -117,13 +117,10 @@
 				</Tooltip>
 				{#if totalPals > 0}
 					<Tooltip position="bottom">
-						<button
-							class="btn preset-filled-error hover:preset-tonal-error"
-							onclick={handleConfirm}
-						>
+						<Button variant="danger" onclick={handleConfirm}>
 							<AlertTriangle size={20} />
 							<span>Continue</span>
-						</button>
+						</Button>
 						{#snippet popup()}
 							<span>Proceed to confirmation</span>
 						{/snippet}
@@ -184,14 +181,10 @@
 						{/snippet}
 					</Tooltip>
 					<Tooltip position="bottom">
-						<button
-							class="btn preset-filled-error hover:preset-tonal-error"
-							onclick={handleConfirm}
-							disabled={!isValid}
-						>
+						<Button variant="danger" onclick={handleConfirm} disabled={!isValid}>
 							<Trash2 size={20} />
 							<span>Delete All</span>
-						</button>
+						</Button>
 						{#snippet popup()}
 							<span>{isValid ? 'Confirm deletion' : 'Enter confirmation text'}</span>
 						{/snippet}

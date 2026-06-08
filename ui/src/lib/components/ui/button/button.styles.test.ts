@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { buttonClasses } from './button.styles';
 
 describe('buttonClasses', () => {
@@ -15,6 +15,7 @@ describe('buttonClasses', () => {
 	it('maps each variant to its class', () => {
 		expect(buttonClasses({ variant: 'primary' })).toContain('btn-primary');
 		expect(buttonClasses({ variant: 'secondary' })).toContain('btn-secondary');
+		expect(buttonClasses({ variant: 'danger' })).toContain('btn-danger');
 		expect(buttonClasses({ variant: 'ghost' })).toContain('btn-ghost');
 		expect(buttonClasses({ variant: 'outline' })).toContain('btn-outline');
 	});

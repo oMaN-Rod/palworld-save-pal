@@ -1,9 +1,10 @@
-export type ButtonVariant = 'primary' | 'secondary' | 'neutral' | 'ghost' | 'outline';
+export type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'neutral' | 'ghost' | 'outline';
 export type ButtonSize = 'sm' | 'md' | 'lg' | 'icon';
 
 const VARIANT_CLASS: Record<ButtonVariant, string> = {
 	primary: 'btn-primary',
 	secondary: 'btn-secondary',
+	danger: 'btn-danger',
 	neutral: 'btn-neutral',
 	ghost: 'btn-ghost',
 	outline: 'btn-outline'
