@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, Input, Tooltip } from '$components/ui';
+	import { Button, Card, Input, Tooltip } from '$components/ui';
 	import { Save, X } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
@@ -43,21 +43,17 @@
 		<div class="mt-2 flex flex-row items-center space-x-2">
 			<Input type="number" inputClass="grow" bind:value {min} {max} />
 			<Tooltip position="bottom">
-				<button
-					class="btn hover:bg-secondary-500 px-2"
-					onclick={() => handleClose(true)}
-					data-modal-primary
-				>
+				<Button variant="ghost" size="icon" onclick={() => handleClose(true)} data-modal-primary>
 					<Save />
-				</button>
+				</Button>
 				{#snippet popup()}
 					<span>{c.save}</span>
 				{/snippet}
 			</Tooltip>
 			<Tooltip position="bottom">
-				<button class="btn hover:bg-secondary-500 px-2" onclick={() => handleClose(false)}>
+				<Button variant="ghost" size="icon" onclick={() => handleClose(false)}>
 					<X />
-				</button>
+				</Button>
 				{#snippet popup()}
 					<span>{m.cancel()}</span>
 				{/snippet}

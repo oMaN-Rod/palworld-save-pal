@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, Input, Tooltip } from '$components/ui';
+	import { Button, Card, Input, Tooltip } from '$components/ui';
 	import { elementsData } from '$lib/data';
 	import {
 		palPresetNameDescriptionMap,
@@ -91,14 +91,15 @@
 			<div class="mt-2 flex justify-end space-x-2">
 				<Tooltip position="bottom">
 					{#snippet children()}
-						<button
-							class="btn hover:bg-secondary-500 px-2"
+						<Button
+							variant="ghost"
+							size="icon"
 							onclick={() => handleClose(true)}
 							disabled={!name}
 							data-modal-primary
 						>
 							<Save />
-						</button>
+						</Button>
 					{/snippet}
 					{#snippet popup()}
 						<span>Save</span>
@@ -106,9 +107,9 @@
 				</Tooltip>
 				<Tooltip position="bottom">
 					{#snippet children()}
-						<button class="btn hover:bg-secondary-500 px-2" onclick={() => handleClose(false)}>
+						<Button variant="ghost" size="icon" onclick={() => handleClose(false)}>
 							<X />
-						</button>
+						</Button>
 					{/snippet}
 					{#snippet popup()}
 						<span>Cancel</span>

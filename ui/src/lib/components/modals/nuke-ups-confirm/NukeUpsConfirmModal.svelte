@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, Input, Tooltip } from '$components/ui';
+	import { Button, Card, Input, Tooltip } from '$components/ui';
 	import { X, AlertTriangle, Trash2 } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
@@ -107,13 +107,10 @@
 			<!-- Step 1 buttons -->
 			<div class="flex justify-end space-x-4">
 				<Tooltip position="bottom">
-					<button
-						class="btn preset-filled-secondary hover:preset-tonal-secondary"
-						onclick={handleCancel}
-					>
+					<Button variant="secondary" onclick={handleCancel}>
 						<X size={20} />
 						<span>Cancel</span>
-					</button>
+					</Button>
 					{#snippet popup()}
 						<span>Cancel operation</span>
 					{/snippet}
@@ -144,7 +141,8 @@
 					</h4>
 					<p class="text-error-600 dark:text-error-400 mb-4 text-sm">
 						To confirm deletion of {totalPals.toLocaleString()} pals, type
-						<span class="bg-error-100 text-error-900 dark:bg-error-900 dark:text-error-100 rounded px-1 font-mono font-bold"
+						<span
+							class="bg-error-100 text-error-900 dark:bg-error-900 dark:text-error-100 rounded px-1 font-mono font-bold"
 							>{REQUIRED_TEXT}</span
 						> below:
 					</p>
@@ -167,12 +165,9 @@
 			<!-- Step 2 buttons -->
 			<div class="flex justify-between">
 				<Tooltip position="bottom">
-					<button
-						class="btn preset-filled-secondary hover:preset-tonal-secondary"
-						onclick={handleBack}
-					>
+					<Button variant="secondary" onclick={handleBack}>
 						<span>Back</span>
-					</button>
+					</Button>
 					{#snippet popup()}
 						<span>Go back to previous step</span>
 					{/snippet}
@@ -180,13 +175,10 @@
 
 				<div class="flex space-x-4">
 					<Tooltip position="bottom">
-						<button
-							class="btn preset-filled-secondary hover:preset-tonal-secondary"
-							onclick={handleCancel}
-						>
+						<Button variant="secondary" onclick={handleCancel}>
 							<X size={20} />
 							<span>Cancel</span>
-						</button>
+						</Button>
 						{#snippet popup()}
 							<span>Cancel operation</span>
 						{/snippet}

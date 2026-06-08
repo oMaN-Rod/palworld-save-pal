@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, Tooltip, Combobox } from '$components/ui';
+	import { Button, Card, Tooltip, Combobox } from '$components/ui';
 	import {
 		type ActiveSkill,
 		type Pal,
@@ -138,25 +138,25 @@
 
 	<div class="mt-2 flex flex-row items-center space-x-2">
 		<Tooltip position="bottom">
-			<button class="btn hover:bg-secondary-500 px-2" onclick={handleClear}>
+			<Button variant="ghost" size="icon" onclick={handleClear}>
 				<Delete />
-			</button>
+			</Button>
 			{#snippet popup()}
 				<span>{m.clear()}</span>
 			{/snippet}
 		</Tooltip>
 		<Tooltip position="bottom">
-			<button class="btn hover:bg-secondary-500 px-2" onclick={() => handleClose(value)}>
+			<Button variant="ghost" size="icon" onclick={() => handleClose(value)}>
 				<Save />
-			</button>
+			</Button>
 			{#snippet popup()}
 				<span>{c.save}</span>
 			{/snippet}
 		</Tooltip>
 		<Tooltip position="bottom">
-			<button class="btn hover:bg-secondary-500 px-2" onclick={() => handleClose(null)}>
+			<Button variant="ghost" size="icon" onclick={() => handleClose(null)}>
 				<X />
-			</button>
+			</Button>
 			{#snippet popup()}
 				<span>{m.cancel()}</span>
 			{/snippet}

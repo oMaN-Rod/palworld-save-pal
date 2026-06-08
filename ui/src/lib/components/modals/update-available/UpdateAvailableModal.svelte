@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card } from '$components/ui';
+	import { Button, Card } from '$components/ui';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
@@ -19,13 +19,13 @@
 			<p class="my-4">{m.new_version_available()}</p>
 
 			<div class="mt-2 flex flex-row items-center justify-end space-x-2">
-				<a
+				<Button
 					href="https://github.com/oMaN-Rod/palworld-save-pal/releases"
+					variant="primary"
 					target="_blank"
-					rel="noopener noreferrer"
-					class="btn btn-primary">{m.update_now()}</a
+					rel="noopener noreferrer">{m.update_now()}</Button
 				>
-				<button class="btn hover:bg-secondary-500" onclick={handleLater}>{m.later()}</button>
+				<Button variant="ghost" onclick={handleLater}>{m.later()}</Button>
 			</div>
 		</div>
 	</Card>
