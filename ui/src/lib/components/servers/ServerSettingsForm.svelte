@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Server } from '$types';
-	import { Input } from '$components/ui';
+	import { Button, Input } from '$components/ui';
 	import { getServerState } from '$states';
 	import { Save, ExternalLink } from 'lucide-svelte';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
@@ -66,14 +66,10 @@
 				Official Docs
 			</a>
 		</div>
-		<button
-			class="btn bg-primary-500 hover:bg-secondary-600 flex items-center gap-2 rounded-sm px-3 py-1.5 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
-			onclick={handleSave}
-			disabled={saving}
-		>
+		<Button variant="primary" size="sm" onclick={handleSave} disabled={saving}>
 			<Save size={14} />
 			{saving ? 'Saving...' : 'Save Changes'}
-		</button>
+		</Button>
 	</div>
 
 	<!-- Core Settings -->

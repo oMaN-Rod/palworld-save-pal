@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, Input, Tooltip } from '$components/ui';
+	import { Button, Card, Input, Tooltip } from '$components/ui';
 	import { Save, X } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
@@ -102,9 +102,7 @@
 	);
 
 	const installPath = $derived(
-		installBasePath && worldName
-			? `${installBasePath.replace(/[\\/]+$/, '')}\\${worldName}`
-			: ''
+		installBasePath && worldName ? `${installBasePath.replace(/[\\/]+$/, '')}\\${worldName}` : ''
 	);
 
 	$effect(() => {
@@ -175,7 +173,7 @@
 </script>
 
 <div bind:this={modalContainer}>
-	<Card class="min-w-[650px] max-w-[750px]">
+	<Card class="max-w-[750px] min-w-[650px]">
 		<div class="mb-4 flex items-center gap-3">
 			<h3 class="h3">{title}</h3>
 			<a
@@ -190,7 +188,7 @@
 		</div>
 
 		<!-- Deployment Type Selector -->
-		<div class="mb-4 flex gap-1 rounded-sm bg-surface-800 p-1">
+		<div class="bg-surface-800 mb-4 flex gap-1 rounded-sm p-1">
 			<button
 				class={cn(
 					'flex-1 rounded-sm px-3 py-1.5 text-sm font-medium transition-colors',
@@ -256,11 +254,7 @@
 							bind:value={installBasePath}
 							placeholder="C:\PalworldServers"
 						/>
-						<Input
-							label="World Name (folder name)"
-							bind:value={worldName}
-							placeholder="MyWorld"
-						/>
+						<Input label="World Name (folder name)" bind:value={worldName} placeholder="MyWorld" />
 						{#if installPath}
 							<p class="text-surface-400 -mt-1 text-xs">
 								Install path: <span class="text-surface-200 font-mono">{installPath}</span>
@@ -279,15 +273,17 @@
 									placeholder="Auto-detected on create, or browse to set"
 								/>
 							</div>
-							<button
+							<Button
 								type="button"
-								class="btn bg-surface-700 hover:bg-surface-600 mb-0.5 flex items-center gap-1 rounded-sm px-3 py-2 text-sm"
+								variant="neutral"
+								size="sm"
+								class="mb-0.5"
 								onclick={handleDetectWorkshop}
 								disabled={detectingWorkshop}
 							>
 								<Search size={14} />
 								{detectingWorkshop ? 'Detecting...' : 'Detect'}
-							</button>
+							</Button>
 						</div>
 					{/if}
 
@@ -301,21 +297,11 @@
 					</div>
 
 					<div class="grid grid-cols-2 gap-3">
-						<Input
-							label="Server Password"
-							bind:value={serverPassword}
-							placeholder="(optional)"
-						/>
+						<Input label="Server Password" bind:value={serverPassword} placeholder="(optional)" />
 						<Input label="Admin Password" bind:value={adminPassword} />
 					</div>
 
-					<Input
-						label="Max Players"
-						type="number"
-						bind:value={maxPlayers}
-						min={1}
-						max={32}
-					/>
+					<Input label="Max Players" type="number" bind:value={maxPlayers} min={1} max={32} />
 
 					<!-- General ENV groups -->
 					<Accordion collapsible>
@@ -375,14 +361,15 @@
 		<div class="mt-4 flex justify-end gap-2">
 			<Tooltip position="bottom">
 				{#snippet children()}
-					<button
-						class="btn hover:bg-secondary-500 px-2"
+					<Button
+						variant="ghost"
+						size="icon"
 						onclick={handleSubmit}
 						disabled={!name.trim() || (serverType === 'native' && !installPath)}
 						data-modal-primary
 					>
 						<Save />
-					</button>
+					</Button>
 				{/snippet}
 				{#snippet popup()}
 					<span>Create</span>
@@ -390,9 +377,9 @@
 			</Tooltip>
 			<Tooltip position="bottom">
 				{#snippet children()}
-					<button class="btn hover:bg-secondary-500 px-2" onclick={() => closeModal(null)}>
+					<Button variant="ghost" size="icon" onclick={() => closeModal(null)}>
 						<X />
-					</button>
+					</Button>
 				{/snippet}
 				{#snippet popup()}
 					<span>Cancel</span>

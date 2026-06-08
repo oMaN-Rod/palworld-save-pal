@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Server } from '$types';
 	import { getServerState, getModalState } from '$states';
-	import { Card } from '$components/ui';
+	import { Button, Card } from '$components/ui';
 	import { FolderOpen, AlertTriangle } from 'lucide-svelte';
 	import { goto } from '$app/navigation';
 
@@ -16,8 +16,7 @@
 		if (isRunning) {
 			const confirmed = await modal.showConfirmModal({
 				title: 'Server is Running',
-				message:
-					'The server must be stopped before editing saves. Would you like to stop it now?',
+				message: 'The server must be stopped before editing saves. Would you like to stop it now?',
 				confirmText: 'Stop & Load',
 				cancelText: 'Cancel'
 			});
@@ -35,7 +34,7 @@
 	<h3 class="text-lg font-bold">Save Files</h3>
 
 	{#if isRunning}
-		<Card class="border-yellow-500/30 border">
+		<Card class="border border-yellow-500/30">
 			<div class="flex items-center gap-3 text-yellow-400">
 				<AlertTriangle size={20} />
 				<div>
@@ -58,13 +57,10 @@
 				</p>
 				<p class="text-surface-500 mt-1 text-xs">Save path: {server.saves_path}</p>
 			</div>
-			<button
-				class="btn bg-primary-500 hover:bg-primary-600 flex items-center gap-2 rounded-sm px-4 py-2 text-sm"
-				onclick={handleLoadSave}
-			>
+			<Button variant="primary" onclick={handleLoadSave}>
 				<FolderOpen size={14} />
 				Load in Editor
-			</button>
+			</Button>
 		</div>
 	</Card>
 </div>

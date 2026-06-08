@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Server } from '$types';
 	import { cn } from '$theme';
-	import { Card } from '$components/ui';
+	import { Button, Card } from '$components/ui';
 	import {
 		Settings,
 		Package,
@@ -104,9 +104,7 @@
 				<span
 					class={cn(
 						'rounded-sm px-1.5 py-0.5 text-[10px] font-medium uppercase',
-						isNative
-							? 'bg-blue-500/15 text-blue-400'
-							: 'bg-cyan-500/15 text-cyan-400'
+						isNative ? 'bg-blue-500/15 text-blue-400' : 'bg-cyan-500/15 text-cyan-400'
 					)}
 				>
 					{isNative ? 'Native' : 'Docker'}
@@ -115,28 +113,22 @@
 			<p class="text-surface-400 text-sm">{server.container_name}</p>
 		</div>
 		<div class="flex items-center gap-2">
-			<button
-				class='btn rounded-sm px-4 py-2 text-sm'
-				onclick={() => (isRunning ? serverState.stopServer(server.id) : serverState.startServer(server.id))}
+			<Button
+				variant="neutral"
+				onclick={() =>
+					isRunning ? serverState.stopServer(server.id) : serverState.startServer(server.id)}
 			>
 				{#if isRunning}
-					<Square size={14} class={cn("mr-2 inline",isRunning
-						? 'bg-red-500/20 text-red-400 hover:bg-red-500/30'
-						: 'bg-green-500/20 text-green-400 hover:bg-green-500/30')} />
+					<Square size={14} class={cn('mr-2 inline', 'text-red-400')} />
 					Stop
 				{:else}
-					<Play size={14} class={cn("mr-2 inline",isRunning
-						? 'bg-red-500/20 text-red-400 hover:bg-red-500/30'
-						: 'bg-green-500/20 text-green-400 hover:bg-green-500/30')} />
+					<Play size={14} class={cn('mr-2 inline', 'text-green-400')} />
 					Start
 				{/if}
-			</button>
-			<button
-				class="btn bg-red-500/10 text-red-400 hover:bg-red-500/20 rounded-sm px-3 py-2 text-sm"
-				onclick={handleDelete}
-			>
-				<Trash2 size={14} />
-			</button>
+			</Button>
+			<Button variant="ghost" size="icon" onclick={handleDelete}>
+				<Trash2 size={14} class="text-red-400" />
+			</Button>
 		</div>
 	</div>
 

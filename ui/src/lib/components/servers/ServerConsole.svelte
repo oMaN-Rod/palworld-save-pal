@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Server } from '$types';
 	import { getServerState } from '$states';
-	import { Card, Input } from '$components/ui';
+	import { Button, Card, Input } from '$components/ui';
 	import { Send, Terminal } from 'lucide-svelte';
 	import { cn } from '$theme';
 	import { JSONEditor } from 'svelte-jsoneditor';
@@ -138,13 +138,10 @@
 
 		<!-- Send button -->
 		<div class="flex items-center gap-3">
-			<button
-				class="btn bg-primary-500 hover:bg-primary-600 flex items-center gap-2 rounded-sm px-4 py-2 text-sm"
-				onclick={handleCall}
-			>
+			<Button variant="primary" onclick={handleCall}>
 				<Send size={14} />
 				Send Request
-			</button>
+			</Button>
 			{#if hasResponse}
 				<span
 					class={cn(
