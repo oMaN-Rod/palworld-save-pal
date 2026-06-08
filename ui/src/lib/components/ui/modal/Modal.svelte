@@ -3,6 +3,7 @@
 	import { getModalState } from '$states';
 	import { cn } from '$theme';
 	import { onMount, onDestroy } from 'svelte';
+	import Button from '../button/Button.svelte';
 
 	const modal = getModalState();
 
@@ -78,12 +79,14 @@
 		tabindex="-1"
 	>
 		<div class={cn('relative', contentClass, rounded)}>
-			<button
-				class="absolute top-2 right-2 z-10 text-2xl leading-none hover:opacity-75"
+			<Button
+				variant="ghost"
+				size="icon"
+				class="absolute top-2 right-2 z-10 text-2xl leading-none"
 				onclick={() => modal.closeModal()}
 			>
 				×
-			</button>
+			</Button>
 			<modal.component {...modal.props} closeModal={modal.closeModal} />
 		</div>
 	</div>

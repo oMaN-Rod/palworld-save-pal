@@ -5,6 +5,7 @@
 	import { fly, scale } from 'svelte/transition';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
+	import Button from '../button/Button.svelte';
 
 	let { toast }: { toast: ToastType } = $props();
 
@@ -30,8 +31,13 @@
 >
 	<span class="font-bold">{toast.title}</span>
 	<span>{toast.message}</span>
-	<button class="absolute top-1 right-1 size-5" onclick={() => toastState.remove(toast.id)}>
+	<Button
+		variant="ghost"
+		size="icon"
+		class="absolute top-1 right-1 size-5"
+		onclick={() => toastState.remove(toast.id)}
+	>
 		<span class="sr-only">{m.close_toast()}</span>
 		<X class="size-4" />
-	</button>
+	</Button>
 </div>
