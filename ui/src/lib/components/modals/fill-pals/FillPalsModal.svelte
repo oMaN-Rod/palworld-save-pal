@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, List, Tooltip } from '$components/ui';
+	import { Button, Card, List, Tooltip } from '$components/ui';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { elementsData, palsData, presetsData } from '$lib/data';
 	import { getAppState } from '$states';
@@ -339,13 +339,10 @@
 							</div>
 						{/snippet}
 						{#snippet listItemActions(preset)}
-							<button
-								class="btn hover:bg-error-500/25 p-2"
-								onclick={() =>
-									(selectedPresets = selectedPresets.filter((p) => p.id !== preset.id))}
-							>
+							<Button variant="ghost" size="icon" onclick={() =>
+									(selectedPresets = selectedPresets.filter((p) => p.id !== preset.id))}>
 								<Trash size={16} />
-							</button>
+							</Button>
 						{/snippet}
 						{#snippet listItemPopup(preset)}
 							<div class="flex items-center space-x-2">
@@ -388,23 +385,16 @@
 	{/if}
 	<div class="flex justify-end space-x-4">
 		<Tooltip position="bottom" label={m.cancel()}>
-			<button
-				class="btn preset-filled-secondary hover:preset-tonal-secondary"
-				onclick={handleCancel}
-			>
+			<Button variant="secondary" onclick={handleCancel}>
 				<X size={20} />
 				<span>{m.cancel()}</span>
-			</button>
+			</Button>
 		</Tooltip>
 		<Tooltip position="bottom" label={m.confirm()}>
-			<button
-				class="btn preset-filled-primary hover:preset-tonal-primary"
-				onclick={handleConfirm}
-				disabled={!canAddPals || isBusy}
-			>
+			<Button variant="primary" onclick={handleConfirm} disabled={!canAddPals || isBusy}>
 				<Check size={20} />
 				<span>{m.fill()}</span>
-			</button>
+			</Button>
 		</Tooltip>
 	</div>
 </Card>

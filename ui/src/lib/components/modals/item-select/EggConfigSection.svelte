@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { ActiveSkillOption, PassiveSkillOption, Talents } from '$components/pal';
-	import { Combobox, CornerDotButton, List } from '$components/ui';
+	import { Button, Combobox, CornerDotButton, List } from '$components/ui';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 	import { ASSET_DATA_PATH } from '$lib/constants';
@@ -158,15 +158,15 @@
 						/>
 					{/snippet}
 					{#snippet listItemActions(skill: string)}
-						<button
-							class="btn hover:bg-error-500/25 p-2"
+						<Button
+							variant="ghost" size="icon"
 							onclick={() =>
 								(eggConfig.active_skills = eggConfig.active_skills.filter(
 									(s) => s !== skill
 								))}
 						>
 							<Trash size={16} />
-						</button>
+						</Button>
 					{/snippet}
 					{#snippet listItemPopup(skill: string)}
 						{@const activeSkill = activeSkillsData.getByKey(skill)}
@@ -221,15 +221,15 @@
 						/>
 					{/snippet}
 					{#snippet listItemActions(skill: string)}
-						<button
-							class="btn hover:bg-error-500/25 p-2"
+						<Button
+							variant="ghost" size="icon"
 							onclick={() =>
 								(eggConfig.learned_skills = eggConfig.learned_skills.filter(
 									(s) => s !== skill
 								))}
 						>
 							<Trash size={16} />
-						</button>
+						</Button>
 					{/snippet}
 					{#snippet listItemPopup(skill: string)}
 						{@const activeSkill = activeSkillsData.getByKey(skill)}
@@ -284,15 +284,15 @@
 						/>
 					{/snippet}
 					{#snippet listItemActions(skill: string)}
-						<button
-							class="btn hover:bg-error-500/25 p-2"
+						<Button
+							variant="ghost" size="icon"
 							onclick={() =>
 								(eggConfig.passive_skills = eggConfig.passive_skills.filter(
 									(s) => s !== skill
 								))}
 						>
 							<Trash size={16} />
-						</button>
+						</Button>
 					{/snippet}
 					{#snippet listItemPopup(skill: string)}
 						{@const passiveSkill = passiveSkillsData.getByKey(skill)}

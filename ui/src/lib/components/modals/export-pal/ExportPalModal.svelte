@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, Combobox } from '$components/ui';
+	import { Button, Card, Combobox } from '$components/ui';
 	import { Save, X, Upload, Share, Download, AlertTriangle, CheckCircle } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
@@ -211,24 +211,24 @@
 
 		<!-- Actions -->
 		<div class="mt-6 flex justify-end gap-2">
-			<button
+			<Button
 				type="button"
+				variant="neutral"
 				onclick={() => handleClose(false)}
-				class="bg-surface-500 hover:bg-surface-600 flex items-center gap-2 rounded-md px-4 py-2 text-surface-50"
 			>
 				<X class="h-4 w-4" />
 				{m.cancel()}
-			</button>
-			<button
+			</Button>
+			<Button
 				type="button"
+				variant="primary"
 				onclick={() => handleClose(true)}
-				class="bg-primary-500 hover:bg-primary-600 flex items-center gap-2 rounded-md px-4 py-2 text-white"
 				data-modal-primary
 				disabled={!isTargetAvailable}
 			>
 				<Save class="h-4 w-4" />
 				{m.export_to_target({ target: exportTarget.toUpperCase() })}
-			</button>
+			</Button>
 		</div>
 	</Card>
 </div>

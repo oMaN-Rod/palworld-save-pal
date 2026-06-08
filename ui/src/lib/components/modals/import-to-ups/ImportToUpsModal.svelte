@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, Combobox, Input, List, TooltipButton } from '$components/ui';
+	import { Button, Card, Combobox, Input, List, TooltipButton } from '$components/ui';
 	import { Save, X, Folder, Tag, FileText, Plus, Trash, ReplaceAll } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
@@ -310,24 +310,26 @@
 								inputClass="w-full"
 							/>
 							<div class="flex gap-2">
-								<button
+								<Button
 									type="button"
+									variant="primary"
+									size="sm"
 									onclick={createCollection}
-									class="rounded bg-green-500 px-3 py-1 text-sm text-white hover:bg-green-600"
 								>
 									{m.create()}
-								</button>
-								<button
+								</Button>
+								<Button
 									type="button"
+									variant="neutral"
+									size="sm"
 									onclick={() => {
 										isCreatingCollection = false;
 										newCollectionName = '';
 										newCollectionDescription = '';
 									}}
-									class="bg-surface-700 hover:bg-surface-500 rounded px-3 py-1 text-sm text-surface-50"
 								>
 									{m.cancel()}
-								</button>
+								</Button>
 							</div>
 						</div>
 					{/if}
@@ -460,23 +462,23 @@
 
 		<!-- Actions -->
 		<div class="mt-6 flex justify-end gap-2">
-			<button
+			<Button
 				type="button"
+				variant="neutral"
 				onclick={() => handleClose(false)}
-				class="bg-surface-500 hover:bg-surface-600 flex items-center gap-2 rounded-md px-4 py-2 text-surface-50"
 			>
 				<X class="h-4 w-4" />
 				{m.cancel()}
-			</button>
-			<button
+			</Button>
+			<Button
 				type="button"
+				variant="primary"
 				onclick={() => handleClose(true)}
-				class="bg-primary-500 hover:bg-primary-600 flex items-center gap-2 rounded-md px-4 py-2 text-white"
 				data-modal-primary
 			>
 				<Save class="h-4 w-4" />
 				{m.import()}
-			</button>
+			</Button>
 		</div>
 	</Card>
 </div>

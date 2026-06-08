@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, Combobox, Input } from '$components/ui';
+	import { Button, Card, Combobox, Input } from '$components/ui';
 	import { X, Folder, Tag, Plus, Copy } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
@@ -140,13 +140,15 @@
 							placeholder={m.select_entity({ entity: m.collection({ count: 1 }) })}
 						/>
 
-						<button
+						<Button
 							type="button"
+							variant="primary"
+							size="icon"
+							class="w-10"
 							onclick={() => (isCreatingCollection = true)}
-							class="bg-primary-500 hover:bg-primary-600 flex w-10 items-center justify-center gap-1 rounded-md p-2 text-white"
 						>
 							<Plus class="h-4 w-4" />
-						</button>
+						</Button>
 					</div>
 				{:else}
 					<div class="space-y-2">
@@ -163,24 +165,26 @@
 							inputClass="w-full"
 						/>
 						<div class="flex gap-2">
-							<button
+							<Button
 								type="button"
+								variant="primary"
+								size="sm"
 								onclick={createCollection}
-								class="rounded bg-green-500 px-3 py-1 text-sm text-white hover:bg-green-600"
 							>
 								{m.create()}
-							</button>
-							<button
+							</Button>
+							<Button
 								type="button"
+								variant="neutral"
+								size="sm"
 								onclick={() => {
 									isCreatingCollection = false;
 									newCollectionName = '';
 									newCollectionDescription = '';
 								}}
-								class="bg-surface-700 hover:bg-surface-500 rounded px-3 py-1 text-sm text-surface-50"
 							>
 								{m.cancel()}
-							</button>
+							</Button>
 						</div>
 					</div>
 				{/if}
@@ -221,13 +225,15 @@
 						placeholder={m.add_new_tag()}
 						onkeydown={(e: KeyboardEvent) => e.key === 'Enter' && addNewTag()}
 					/>
-					<button
+					<Button
 						type="button"
+						variant="primary"
+						size="icon"
+						class="w-10"
 						onclick={addNewTag}
-						class="bg-primary-500 hover:bg-secondary-600 ring-surface-200-800 focus-within:ring-secondary-500 flex w-10 items-center justify-center gap-1 rounded-md px-3 py-2 text-white ring focus:outline-hidden"
 					>
 						<Plus class="h-4 w-4" />
-					</button>
+					</Button>
 				</div>
 
 				<!-- Selected Tags Display -->
@@ -265,23 +271,23 @@
 
 		<!-- Actions -->
 		<div class="mt-6 flex justify-end gap-2">
-			<button
+			<Button
 				type="button"
+				variant="neutral"
 				onclick={() => handleClose(false)}
-				class="bg-surface-500 hover:bg-surface-600 flex items-center gap-2 rounded-md px-4 py-2 text-surface-50"
 			>
 				<X class="h-4 w-4" />
 				{m.cancel()}
-			</button>
-			<button
+			</Button>
+			<Button
 				type="button"
+				variant="primary"
 				onclick={() => handleClose(true)}
-				class="bg-primary-500 hover:bg-primary-600 flex items-center gap-2 rounded-md px-4 py-2 text-white"
 				data-modal-primary
 			>
 				<Copy class="h-4 w-4" />
 				{m.clone_to_entity({ entity: m.ups() })}
-			</button>
+			</Button>
 		</div>
 	</Card>
 </div>

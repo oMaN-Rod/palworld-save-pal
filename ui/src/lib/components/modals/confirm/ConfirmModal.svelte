@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, Tooltip } from '$components/ui';
+	import { Button, Card, Tooltip } from '$components/ui';
 	import { X, Check } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
@@ -41,26 +41,19 @@
 		<p class="mb-6">{message}</p>
 		<div class="flex justify-end space-x-4">
 			<Tooltip position="bottom">
-				<button
-					class="btn preset-filled-secondary hover:preset-tonal-secondary"
-					onclick={handleCancel}
-				>
-					<X size={20} />
-					<span>{cancelText}</span>
-				</button>
+				<Button variant="secondary" onclick={handleCancel}>
+				<X size={20} />
+				<span>{cancelText}</span>
+			</Button>
 				{#snippet popup()}
 					<span>{cancelText}</span>
 				{/snippet}
 			</Tooltip>
 			<Tooltip position="bottom">
-				<button
-					class="btn preset-filled-primary hover:preset-tonal-primary"
-					onclick={handleConfirm}
-					data-modal-primary
-				>
-					<Check size={20} />
-					<span>{confirmText}</span>
-				</button>
+				<Button variant="primary" onclick={handleConfirm} data-modal-primary>
+				<Check size={20} />
+				<span>{confirmText}</span>
+			</Button>
 				{#snippet popup()}
 					<span>{confirmText}</span>
 				{/snippet}
