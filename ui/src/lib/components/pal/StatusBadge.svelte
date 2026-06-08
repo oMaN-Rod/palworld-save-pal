@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { EntryState, type Pal } from '$types';
-	import { Tooltip, Progress } from '$components/ui';
+	import { Button, Tooltip, Progress } from '$components/ui';
 	import { staticIcons } from '$types/icons';
 	import { palsData } from '$lib/data';
 	import { friendshipData } from '$lib/data';
@@ -115,9 +115,9 @@
 	<div class="mb-2 flex items-center">
 		{#if showActions}
 			<Tooltip label={m.edit_entity({ entity: m.trust_level() })}>
-				<button type="button" class="mr-2" onclick={showTrustEditModal} aria-label="Edit Trust">
+				<Button variant="ghost" size="icon" type="button" class="mr-2" onclick={showTrustEditModal} aria-label="Edit Trust">
 					<img src={staticIcons.trustIcon} alt="Trust" class="h-6 w-6" />
-				</button>
+				</Button>
 			</Tooltip>
 		{/if}
 		<Tooltip baseClass="w-full">
@@ -145,9 +145,9 @@
 	<div class="flex items-center">
 		{#if showActions}
 			<Tooltip>
-				<button onclick={handleHeal} aria-label="Health">
+				<Button variant="ghost" size="icon" onclick={handleHeal} aria-label="Health">
 					<img src={staticIcons.hpIcon} alt="Health" class="mr-2 h-6 w-6" />
-				</button>
+				</Button>
 				{#snippet popup()}
 					<span>HP</span>
 					{Math.round(pal.hp / 1000)}/{palMaxHp / 1000}
@@ -165,9 +165,9 @@
 	<div class="flex flex-row items-center">
 		{#if showActions}
 			<Tooltip>
-				<button class="mr-2" onclick={handleEat} aria-label="Food">
+				<Button variant="ghost" size="icon" class="mr-2" onclick={handleEat} aria-label="Food">
 					<img src={staticIcons.foodIcon} alt="Food" class="h-6 w-6" />
-				</button>
+				</Button>
 				{#snippet popup()}
 					<span>{m.feed()}</span>
 					{Math.round(pal.stomach)}/{maxStomach}

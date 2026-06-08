@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { Card } from '$components/ui';
-	import { Tooltip } from '$components/ui';
+	import { Button, Card, Tooltip } from '$components/ui';
 	import { Save, X } from 'lucide-svelte';
 	import { friendshipData } from '$lib/data/friendship.svelte';
 	import { type Pal } from '$types';
@@ -91,9 +90,9 @@
 	<div class="mt-6 flex justify-end gap-2">
 		<Tooltip position="bottom">
 			{#snippet children()}
-				<button class="btn hover:bg-secondary-500 rounded-md px-3 py-1.5" onclick={handleSave}>
+				<Button variant="ghost" size="icon" class="rounded-md px-3 py-1.5" onclick={handleSave}>
 					<Save />
-				</button>
+				</Button>
 			{/snippet}
 			{#snippet popup()}
 				<span>{c.save}</span>
@@ -102,9 +101,9 @@
 
 		<Tooltip position="bottom">
 			{#snippet children()}
-				<button class="btn hover:bg-secondary-500 rounded-md px-3 py-1.5" onclick={handleCancel}>
+				<Button variant="ghost" size="icon" class="rounded-md px-3 py-1.5" onclick={handleCancel}>
 					<X />
-				</button>
+				</Button>
 			{/snippet}
 			{#snippet popup()}
 				<span>{m.cancel()}</span>

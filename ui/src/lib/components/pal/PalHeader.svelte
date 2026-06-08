@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { CornerDotButton, Progress, Tooltip, Input } from '$components/ui';
+	import { Button, CornerDotButton, Progress, Tooltip, Input } from '$components/ui';
 	import { EntryState, type Pal } from '$types';
 	import { palsData, expData } from '$lib/data';
 	import { cn } from '$theme';
@@ -164,13 +164,15 @@
 			<div class="flex flex-row px-2">
 				{#if showActions}
 					<Tooltip position="bottom">
-						<button
-							oncontextmenu={(event) => event.preventDefault()}
-							class="hover:bg-secondary-500/25 mr-4"
-							onmousedown={(event) => handleLevelDecrement(event)}
+						<Button
+							variant="ghost"
+							size="icon"
+							oncontextmenu={(event: MouseEvent) => event.preventDefault()}
+							class="mr-4"
+							onmousedown={(event: MouseEvent) => handleLevelDecrement(event)}
 						>
 							<Minus class="text-primary-500" />
-						</button>
+						</Button>
 						{#snippet popup()}
 							<div class="flex gap-2">
 								<span>Lvl</span>
@@ -237,13 +239,15 @@
 
 				{#if showActions}
 					<Tooltip position="bottom">
-						<button
-							oncontextmenu={(event) => event.preventDefault()}
-							class="hover:bg-secondary-500/25 ml-4"
-							onmousedown={(event) => handleLevelIncrement(event)}
+						<Button
+							variant="ghost"
+							size="icon"
+							oncontextmenu={(event: MouseEvent) => event.preventDefault()}
+							class="ml-4"
+							onmousedown={(event: MouseEvent) => handleLevelIncrement(event)}
 						>
 							<Plus class="text-primary-500" />
-						</button>
+						</Button>
 						{#snippet popup()}
 							<div class="flex gap-2">
 								<span>Lvl</span>
