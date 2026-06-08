@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Input, TooltipButton } from '$components/ui';
+	import { Button, Input, TooltipButton } from '$components/ui';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import {
 		Search,
@@ -30,11 +30,7 @@
 		PalSelectModal
 	} from '$components/modals';
 	import { cn } from '$theme';
-	import {
-		getUpsState,
-		getModalState,
-		getAppState,
-		getToastState	} from '$states';
+	import { getUpsState, getModalState, getAppState, getToastState } from '$states';
 	import { elementsData, palsData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
@@ -544,7 +540,8 @@
 			<!-- Add Pal Button -->
 			<TooltipButton
 				onclick={handleAddPal}
-				class="btn-yellow rounded-md p-2 text-white"
+				variant="secondary"
+				size="icon"
 				popupLabel={m.add_new_pal({ pal: c.pal })}
 			>
 				<Plus class="h-4 w-4" />
@@ -554,7 +551,8 @@
 			{#if appState.saveFile}
 				<TooltipButton
 					onclick={handleImportFromSave}
-					class="bg-primary-500 hover:bg-primary-400 rounded-md p-2 text-white"
+					variant="primary"
+					size="icon"
 					popupLabel={m.import_from_save()}
 				>
 					<Upload class="h-4 w-4" />
@@ -686,14 +684,16 @@
 					{#if upsState.hasSelectedPals}
 						<TooltipButton
 							onclick={handleBulkEditTags}
-							class="bg-primary-500 hover:bg-primary-400 rounded-md p-2 text-white"
+							variant="primary"
+							size="icon"
 							popupLabel={m.edit_entity({ entity: c.tags })}
 						>
 							<Tag class="h-4 w-4" />
 						</TooltipButton>
 						<TooltipButton
 							onclick={handleBulkAddToCollection}
-							class="btn-yellow rounded-md p-2 text-white"
+							variant="secondary"
+							size="icon"
 							popupLabel={m.add_to_collection()}
 						>
 							<Folder class="h-4 w-4" />
@@ -903,13 +903,9 @@
 										count: upsState.pals.length
 									})}
 								>
-									<button
-										type="button"
-										class="btn hover:preset-tonal px-2 text-xs"
-										onclick={selectAll}
-									>
+									<Button type="button" variant="ghost" size="sm" onclick={selectAll}>
 										{m.page()}
-									</button>
+									</Button>
 								</TooltipButton>
 								{#if hasActiveFilters()}
 									<TooltipButton
@@ -918,13 +914,9 @@
 											count: upsState.pagination.totalCount
 										})}
 									>
-										<button
-											type="button"
-											class="btn hover:preset-tonal px-2 text-xs"
-											onclick={selectAllFiltered}
-										>
+										<Button type="button" variant="ghost" size="sm" onclick={selectAllFiltered}>
 											{m.filtered()}
-										</button>
+										</Button>
 									</TooltipButton>
 								{:else}
 									<TooltipButton
@@ -933,13 +925,9 @@
 											count: upsState.pagination.totalCount
 										})}
 									>
-										<button
-											type="button"
-											class="btn hover:preset-tonal px-2 text-xs"
-											onclick={selectAllFiltered}
-										>
+										<Button type="button" variant="ghost" size="sm" onclick={selectAllFiltered}>
 											{m.all_entity({ entity: m.ups() })}
-										</button>
+										</Button>
 									</TooltipButton>
 								{/if}
 							</nav>
@@ -973,15 +961,15 @@
 							{m.create_pals_or_import({ pals: c.pals })}
 						</p>
 						<div class="flex gap-3">
-							<button class="btn btn-yellow" onclick={handleAddPal}>
+							<Button variant="secondary" onclick={handleAddPal}>
 								<Plus class="h-4 w-4" />
 								{m.add_new_pal({ pal: c.pal })}
-							</button>
+							</Button>
 							{#if appState.saveFile}
-								<button class="btn btn-yellow" onclick={handleImportFromSave}>
+								<Button variant="secondary" onclick={handleImportFromSave}>
 									<Upload class="h-4 w-4" />
 									{m.import_from_save()}
-								</button>
+								</Button>
 							{/if}
 						</div>
 					</div>

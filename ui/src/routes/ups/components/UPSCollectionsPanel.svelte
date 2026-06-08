@@ -87,7 +87,8 @@
 			<h2 class="text-lg font-semibold">{c.collections}</h2>
 			<TooltipButton
 				onclick={createCollection}
-				class="btn-yellow rounded-md p-2 text-white"
+				variant="secondary"
+				size="icon"
 				popupLabel={m.create_new_collection()}
 			>
 				<Plus class="h-4 w-4" />

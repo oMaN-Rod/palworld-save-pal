@@ -88,7 +88,8 @@
 			<h2 class="text-lg font-semibold">{c.tags}</h2>
 			<TooltipButton
 				onclick={createTag}
-				class="btn-yellow rounded-md p-2 text-white"
+				variant="secondary"
+				size="icon"
 				popupLabel={m.add_entity({ entity: c.tag })}
 			>
 				<Plus class="h-4 w-4" />
@@ -160,9 +161,7 @@
 							</span>
 
 							<!-- Usage Count -->
-							<span
-								class="shrink-0 text-xs {isSelected ? 'text-primary-100' : 'text-surface-500'}"
-							>
+							<span class="shrink-0 text-xs {isSelected ? 'text-primary-100' : 'text-surface-500'}">
 								{tag.usage_count}
 							</span>
 						</button>

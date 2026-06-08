@@ -10,6 +10,7 @@
 		Upload,
 		RefreshCw
 	} from 'lucide-svelte';
+	import { Button } from '$components/ui';
 	import { getUpsState } from '$states';
 	import { elementsData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
@@ -319,8 +320,8 @@
 
 	<!-- Footer Actions -->
 	<div class="border-surface-300 dark:border-surface-700 border-t p-4">
-		<button onclick={() => upsState.loadStats()} class="btn btn-yellow w-full">
+		<Button variant="secondary" class="w-full" onclick={() => upsState.loadStats()}>
 			{m.refresh_entity({ entity: m.stats() })}
-		</button>
+		</Button>
 	</div>
 </div>
