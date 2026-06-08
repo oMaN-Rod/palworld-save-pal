@@ -3,7 +3,7 @@
 	import { elementsData, palsData, presetsData } from '$lib/data';
 	import { getAppState, getModalState, getToastState, getUpsState } from '$states';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
-	import { Card, Input, Spinner, Tooltip, TooltipButton } from '$components/ui';
+	import { Button, Card, Input, Spinner, Tooltip, TooltipButton } from '$components/ui';
 	import {
 		PalSelectModal,
 		FillPalsModal,
@@ -654,14 +654,14 @@
 					position="right"
 					label={m.add_all_pals_to_entity({ entity: m.gps(), pals: c.pals })}
 				>
-					<button class="btn hover:preset-tonal-secondary p-2" onclick={addAllPalsGps}>
+					<Button variant="ghost" size="icon" onclick={addAllPalsGps}>
 						<CircleFadingPlus />
-					</button>
+					</Button>
 				</Tooltip>
 				<Tooltip>
-					<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectAll}>
+					<Button variant="ghost" size="icon" onclick={handleSelectAll}>
 						<ReplaceAll />
-					</button>
+					</Button>
 					{#snippet popup()}
 						<div class="flex flex-col">
 							<span>{m.select_all_in()}</span>
@@ -682,31 +682,28 @@
 					<Tooltip
 						label={m.apply_preset_to_selected({ pals: m.pal({ count: selectedPals.length }) })}
 					>
-						<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectPreset}>
+						<Button variant="ghost" size="icon" onclick={handleSelectPreset}>
 							<Play />
-						</button>
+						</Button>
 					</Tooltip>
 					<Tooltip label={m.clone_selected_to_entity({ entity: m.ups(), pals: c.pals })}>
-						<button class="btn hover:preset-tonal-secondary p-2" onclick={handleBulkCloneToUps}>
+						<Button variant="ghost" size="icon" onclick={handleBulkCloneToUps}>
 							<Upload />
-						</button>
+						</Button>
 					</Tooltip>
 					<Tooltip
 						label={m.delete_selected_entity({ entity: m.pal({ count: selectedPals.length }) })}
 					>
-						<button class="btn hover:preset-tonal-secondary p-2" onclick={deleteSelectedPals}>
+						<Button variant="ghost" size="icon" onclick={deleteSelectedPals}>
 							<Trash />
-						</button>
+						</Button>
 					</Tooltip>
 					<Tooltip
 						label={m.clear_selected_entity({ entity: m.pal({ count: selectedPals.length }) })}
 					>
-						<button
-							class="btn hover:preset-tonal-secondary p-2"
-							onclick={() => (selectedPals = [])}
-						>
+						<Button variant="ghost" size="icon" onclick={() => (selectedPals = [])}>
 							<X />
-						</button>
+						</Button>
 					</Tooltip>
 				{/if}
 			</div>
