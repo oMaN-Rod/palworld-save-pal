@@ -1,3 +1,4 @@
+import Button from './button/Button.svelte';
 import Card from './card/Card.svelte';
 import Checkbox from './checkbox/Checkbox.svelte';
 import Combobox from './combobox/Combobox.svelte';
@@ -21,6 +22,7 @@ import Stopwatch from './stopwatch/Stopwatch.svelte';
 import Toast from './toast/Toast.svelte';
 
 export {
+	Button,
 	Card,
 	Checkbox,
 	Combobox,
