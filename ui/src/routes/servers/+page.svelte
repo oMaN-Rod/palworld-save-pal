@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import { getServerState, getModalState } from '$states';
-	import { Card } from '$components/ui';
+	import { Button, Card } from '$components/ui';
 	import { ServerCard, ServerDetailPanel, CreateServerModal } from '$components/servers';
 	import { Plus, Server } from 'lucide-svelte';
 	import type { CreateServerData, Server as ServerType } from '$types';
@@ -80,18 +80,17 @@
 	<div class="flex w-80 shrink-0 flex-col gap-4">
 		<div class="flex items-center justify-between">
 			<h2 class="text-primary-400 text-xl font-bold">Servers</h2>
-			<button
-				class="btn bg-primary-500 hover:bg-secondary-600 flex items-center gap-2 rounded-sm px-3 py-1.5 text-sm"
-				onclick={handleCreate}
-			>
+			<Button variant="primary" size="sm" class="flex items-center gap-2" onclick={handleCreate}>
 				<Plus size={14} />
 				New
-			</button>
+			</Button>
 		</div>
 
 		{#if creationProgress}
 			<div class="bg-surface-800 flex items-center gap-3 rounded-sm p-3">
-				<div class="border-secondary-400 h-4 w-4 animate-spin rounded-full border-2 border-t-transparent"></div>
+				<div
+					class="border-secondary-400 h-4 w-4 animate-spin rounded-full border-2 border-t-transparent"
+				></div>
 				<p class="text-surface-200 text-sm">{creationProgress}</p>
 			</div>
 		{/if}

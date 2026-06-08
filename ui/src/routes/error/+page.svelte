@@ -4,6 +4,7 @@
 	import { staticIcons } from '$types/icons';
 	import { Copy } from 'lucide-svelte';
 	import { getToastState } from '$states';
+	import { Button } from '$components/ui';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
@@ -51,13 +52,14 @@
 						<h1 class="ml-4 text-3xl font-bold text-red-500">
 							{error.message ? error.message.slice(0, 64) + '...' : '...'}
 						</h1>
-						<button
-							class="btn btn-sm variant-filled-secondary"
+						<Button
+							variant="secondary"
+							size="sm"
 							onclick={copyErrorToClipboard}
 							aria-label="Copy error details to clipboard"
 						>
 							<Copy size={20} />
-						</button>
+						</Button>
 					</div>
 				{/snippet}
 				{#snippet panel()}

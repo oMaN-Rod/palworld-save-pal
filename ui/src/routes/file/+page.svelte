@@ -2,7 +2,7 @@
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { goto } from '$app/navigation';
 	import { getAppState, getModalState } from '$states';
-	import { Card } from '$components/ui';
+	import { Button, Card } from '$components/ui';
 	import { send } from '$lib/utils/websocketUtils';
 	import { MessageType } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
@@ -108,7 +108,7 @@
 							>
 								{@html option.icon}
 							</div>
-							<span class="text-xl font-semibold text-surface-50">{option.title}</span>
+							<span class="text-surface-50 text-xl font-semibold">{option.title}</span>
 							<span class="text-surface-300 text-center text-base">{option.description}</span>
 						</div>
 					</button>
@@ -119,9 +119,9 @@
 		{#if appState.saveFile && appState.playerSaveFiles}
 			<div class="flex flex-col space-y-2">
 				<div class="flex justify-center">
-					<button class="btn hover:text-secondary-500 h4" onclick={handleEditWorldName}>
+					<Button variant="ghost" class="h4 hover:text-secondary-500" onclick={handleEditWorldName}>
 						{appState.saveFile.world_name}
-					</button>
+					</Button>
 				</div>
 				<Card class="w-full min-w-0 sm:min-w-96">
 					<div class="grid grid-cols-[auto_1fr] gap-2">

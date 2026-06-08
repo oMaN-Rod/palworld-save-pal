@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { FileDropzone, Card, Tooltip } from '$components/ui';
+	import { FileDropzone, Card, Tooltip, Button } from '$components/ui';
 	import { MessageType } from '$types';
 	import { getAppState } from '$states';
 	import { Download } from 'lucide-svelte';
@@ -47,13 +47,10 @@
 				</div>
 				<div class="flex flex-col space-y-2">
 					<Tooltip>
-						<button
-							class="btn preset-filled-primary-500 font-bold"
-							onclick={handleDownloadSaveFile}
-						>
+						<Button variant="primary" class="font-bold" onclick={handleDownloadSaveFile}>
 							<Download />
 							{m.download()}
-						</button>
+						</Button>
 						{#snippet popup()}
 							<span>{m.download_modified_save()}</span>
 						{/snippet}
@@ -74,9 +71,9 @@
 				<div class="mt-2 flex flex-col">
 					<Tooltip>
 						{#snippet children()}
-							<button class="btn preset-filled-primary-500 font-bold" onclick={handleOnUpload}>
+							<Button variant="primary" class="font-bold" onclick={handleOnUpload}>
 								{m.upload()}
-							</button>
+							</Button>
 						{/snippet}
 						{#snippet popup()}
 							<span>{m.upload()} {files ? files[0].name : ''}</span>

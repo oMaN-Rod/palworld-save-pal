@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { presetsData } from '$lib/data';
-	import { List, TooltipButton, Input, Tooltip } from '$components/ui';
+	import { Button, List, TooltipButton, Input, Tooltip } from '$components/ui';
 	import { getModalState, getToastState } from '$states';
 	import { debounce } from '$utils';
 	import { Trash, RefreshCcw, Download, Upload } from 'lucide-svelte';
@@ -302,9 +302,13 @@
 					>
 						<Download size={16} />
 					</TooltipButton>
-					<button class="btn hover:bg-error-500/25 p-2" onclick={() => handleDeletePreset(preset)}>
+					<Button
+						variant="ghost"
+						class="hover:bg-error-500/25 p-2"
+						onclick={() => handleDeletePreset(preset)}
+					>
 						<Trash size={16} />
-					</button>
+					</Button>
 				{/snippet}
 				{#snippet listItemPopup(preset)}
 					<div class="flex flex-col">
@@ -340,9 +344,9 @@
 							{m.preset_select_details()}
 						</span>
 						<Tooltip label={m.nuke_all_presets()}>
-							<button class="btn mt-2 h-48 w-48 p-2" onclick={handleNukeAll}>
+							<Button variant="ghost" class="mt-2 h-48 w-48 p-2" onclick={handleNukeAll}>
 								<Nuke size={120} />
-							</button>
+							</Button>
 						</Tooltip>
 					</div>
 				{/if}

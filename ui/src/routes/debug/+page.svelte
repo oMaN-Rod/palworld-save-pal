@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { Combobox, Tooltip, TooltipButton } from '$components/ui';
+	import { Button, Combobox, Tooltip, TooltipButton } from '$components/ui';
 	import { buildingsData } from '$lib/data';
 	import { getAppState, getModalState } from '$states';
 	import {
@@ -479,10 +479,10 @@
 
 <div class="animate-fade-in grid h-full grid-cols-[25%_1fr] gap-2 p-2">
 	<div class="flex flex-col">
-		<button class="btn preset-filled-primary-500 mb-2 flex w-full" onclick={handleReset}>
+		<Button variant="primary" class="mb-2 flex w-full" onclick={handleReset}>
 			<span class="font-medium">{m.reset()}</span>
 			<RefreshCcw size="20" />
-		</button>
+		</Button>
 
 		<div class="flex items-center gap-2">
 			<Combobox
