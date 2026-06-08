@@ -33,7 +33,7 @@
 		</div>
 
 		<div class="flex-1 overflow-y-auto p-2">
-			<p class="text-surface-300 whitespace-pre-wrap text-sm leading-relaxed">
+			<p class="text-surface-300 text-sm leading-relaxed whitespace-pre-wrap">
 				{mission.description}
 			</p>
 		</div>

@@ -81,7 +81,9 @@
 	}
 </script>
 
-<div class="flex min-h-screen w-full flex-col items-center justify-center py-12">
+<div
+	class="bg-surface-900 animate-fade-in flex min-h-screen w-full flex-col items-center justify-center py-12"
+>
 	<div class="flex w-full max-w-3xl flex-col gap-12">
 		<section class="w-full">
 			<h1 class="text-primary-400 mb-6 text-center text-4xl font-extrabold tracking-tight">
@@ -106,7 +108,7 @@
 							>
 								{@html option.icon}
 							</div>
-							<span class="text-xl font-semibold text-white">{option.title}</span>
+							<span class="text-xl font-semibold text-surface-50">{option.title}</span>
 							<span class="text-surface-300 text-center text-base">{option.description}</span>
 						</div>
 					</button>
@@ -121,7 +123,7 @@
 						{appState.saveFile.world_name}
 					</button>
 				</div>
-				<Card class="min-w-96">
+				<Card class="w-full min-w-0 sm:min-w-96">
 					<div class="grid grid-cols-[auto_1fr] gap-2">
 						<span class="font-bold">{c.players}:</span>
 						<span class="text-end">{appState.playerSaveFiles.length}</span>

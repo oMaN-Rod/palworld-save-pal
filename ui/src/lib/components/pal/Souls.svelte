@@ -41,7 +41,7 @@
 	}
 </script>
 
-<div class="grid grid-cols-[80px_1fr_auto] items-center gap-2">
+<div class="grid grid-cols-[minmax(60px,80px)_1fr_auto] items-center gap-2">
 	<span>{m.health()}</span>
 	<Slider
 		classes="grow"

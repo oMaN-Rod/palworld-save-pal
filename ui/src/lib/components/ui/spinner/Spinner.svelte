@@ -8,7 +8,11 @@
 	}>();
 </script>
 
-<figure class={cn('spinner aspect-square rounded-full', size)} {...additionalProps}>
+<figure
+	class={cn('spinner aspect-square rounded-full', size)}
+	style="filter: drop-shadow(0 0 8px rgba(0, 210, 255, 0.3));"
+	{...additionalProps}
+>
 	<img src={staticIcons.lamball} alt="Loading" class="absolute inset-0 m-auto" />
 </figure>
 

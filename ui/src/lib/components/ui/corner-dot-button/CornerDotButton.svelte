@@ -32,8 +32,8 @@
 	{:else}
 		{@render children()}
 	{/if}
-	<span class="bg-surface-600 absolute left-0 top-0 h-0.5 w-0.5"></span>
-	<span class="bg-surface-600 absolute right-0 top-0 h-0.5 w-0.5"></span>
+	<span class="bg-surface-600 absolute top-0 left-0 h-0.5 w-0.5"></span>
+	<span class="bg-surface-600 absolute top-0 right-0 h-0.5 w-0.5"></span>
 	<span class="bg-surface-600 absolute bottom-0 left-0 h-0.5 w-0.5"></span>
-	<span class="bg-surface-600 absolute bottom-0 right-0 h-0.5 w-0.5"></span>
+	<span class="bg-surface-600 absolute right-0 bottom-0 h-0.5 w-0.5"></span>
 </button>

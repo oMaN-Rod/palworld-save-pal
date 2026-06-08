@@ -28,8 +28,8 @@
 			([uid, summary]) => ({
 				value: uid,
 				label: summary.loaded
-					? `🟦 ${summary.nickname || `Player ${uid.slice(0, 8)}`} (${summary.pal_count} pals)`
-					: `🟪 ${summary.nickname || `Player ${uid.slice(0, 8)}`} (${summary.pal_count} pals)`
+					? `\u25A0 ${summary.nickname || `Player ${uid.slice(0, 8)}`} (${summary.pal_count} pals)`
+					: `\u25A1 ${summary.nickname || `Player ${uid.slice(0, 8)}`} (${summary.pal_count} pals)`
 			})
 		);
 	});
@@ -86,7 +86,7 @@
 
 <div id="player-list" class="w-full" {...rest}>
 	{#if appState.loadingPlayer}
-		<div class="my-2 flex items-center gap-2 px-3 py-2 text-sm text-gray-400">
+		<div class="text-surface-400 my-2 flex items-center gap-2 px-3 py-2 text-sm">
 			<svg class="h-4 w-4 animate-spin" viewBox="0 0 24 24">
 				<circle
 					class="opacity-25"

@@ -7,6 +7,7 @@
 	import type { CheckedChangeDetails } from '@zag-js/switch';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils';
+	import { theme, themeOptions } from '$states';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
@@ -38,6 +39,7 @@
 
 		<div class="mt-2 flex flex-col space-y-2">
 			<Combobox options={languageOptions} bind:value={settings.language} label={m.language()} />
+			<Combobox options={themeOptions} bind:value={theme.current} label={m.theme()} />
 			<Input bind:value={settings.clone_prefix} label={m.clone_prefix()} />
 			<Input bind:value={settings.new_pal_prefix} label={m.new_pal_prefix()} />
 			<div class="flex space-x-2">

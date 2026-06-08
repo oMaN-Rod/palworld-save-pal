@@ -30,7 +30,7 @@
 
 	const drawerClass = $derived(
 		cn(
-			'h-full transition-all duration-300 ease-in-out bg-surface-800 text-on-surface shadow-lg',
+			'h-full transition-all duration-300 ease-in-out bg-surface-800/80 backdrop-blur-md text-on-surface shadow-lg',
 			isOpen ? 'w-full' : 'w-0',
 			className
 		)
@@ -38,7 +38,7 @@
 
 	const tabClass = $derived(
 		cn(
-			'absolute bg-surface-800 text-on-primary cursor-pointer transition-all duration-300 ease-in-out p-2',
+			'absolute bg-surface-800/80 backdrop-blur-md text-on-primary cursor-pointer transition-all duration-300 ease-in-out p-2',
 			position === 'left' ? 'left-full' : 'right-full',
 			tabPosition === 'start' && 'top-0',
 			tabPosition === 'center' && 'top-1/2 -translate-y-1/2',

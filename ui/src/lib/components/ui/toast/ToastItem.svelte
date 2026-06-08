@@ -12,11 +12,11 @@
 
 	let colorClasses = $derived(
 		{
-			default: 'bg-primary-700 border-primary-800',
-			success: 'bg-success-700 border-success-800',
-			error: 'bg-error-700 border-error-800',
-			warning: 'bg-warning-700 border-warning-800 text-surface-800',
-			info: 'bg-secondary-700 border-secondary-800'
+			default: 'bg-primary-700/90 border-primary-600/50 shadow-glow-cyan',
+			success: 'bg-success-700/90 border-success-600/50 shadow-glow-toxic-sm',
+			error: 'bg-error-700/90 border-error-600/50 shadow-glow-red',
+			warning: 'bg-warning-700/90 border-warning-600/50 shadow-glow-amber',
+			info: 'bg-secondary-700/90 border-secondary-600/50 shadow-glow-gold'
 		}[toast.color || 'default']
 	);
 
@@ -25,12 +25,12 @@
 </script>
 
 <div
-	class="max-w-1/2 relative flex min-h-16 min-w-60 flex-col items-center justify-center rounded-md border p-4 shadow-md {colorClasses}"
+	class="relative flex min-h-16 max-w-1/2 min-w-60 flex-col items-center justify-center rounded-md border p-4 text-white shadow-md backdrop-blur-sm {colorClasses}"
 	transition:transition={transitionParams}
 >
 	<span class="font-bold">{toast.title}</span>
 	<span>{toast.message}</span>
-	<button class="absolute right-1 top-1 size-5" onclick={() => toastState.remove(toast.id)}>
+	<button class="absolute top-1 right-1 size-5" onclick={() => toastState.remove(toast.id)}>
 		<span class="sr-only">{m.close_toast()}</span>
 		<X class="size-4" />
 	</button>

@@ -102,7 +102,7 @@
 </script>
 
 <div bind:this={modalContainer}>
-	<Card class="min-w-[400px] max-w-lg">
+	<Card class="max-w-lg min-w-[400px]">
 		<div class="mb-4 flex items-center justify-between">
 			<h3 class="h3 flex items-center gap-2">
 				<Folder class="h-5 w-5" />
@@ -195,7 +195,7 @@
 							<button
 								type="button"
 								onclick={cancelCreateCollection}
-								class="rounded bg-gray-500 px-3 py-1 text-sm text-white hover:bg-gray-600"
+								class="bg-surface-700 hover:bg-surface-500 rounded px-3 py-1 text-sm text-surface-50"
 							>
 								{m.cancel()}
 							</button>
@@ -217,7 +217,10 @@
 							(c) => c.id === selectedCollectionId
 						)}
 						<p class="text-green-600 dark:text-green-400">
-							{m.move_all_to_collection({ pals: c.pals, name: targetCollection?.name || m.unknown() })}
+							{m.move_all_to_collection({
+								pals: c.pals,
+								name: targetCollection?.name || m.unknown()
+							})}
 						</p>
 					{/if}
 				</div>
@@ -229,7 +232,7 @@
 			<button
 				type="button"
 				onclick={() => handleClose(false)}
-				class="bg-surface-500 hover:bg-surface-600 flex items-center gap-2 rounded-md px-4 py-2 text-white"
+				class="bg-surface-500 hover:bg-surface-600 flex items-center gap-2 rounded-md px-4 py-2 text-surface-50"
 			>
 				<X class="h-4 w-4" />
 				{m.cancel()}

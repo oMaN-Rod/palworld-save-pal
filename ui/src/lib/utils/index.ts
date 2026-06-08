@@ -5,4 +5,5 @@ export * from './deep-copy';
 export * from './keyMapper';
 export * from './modalUtils';
 export * from './pals';
+export * from './portal';
 export * from './stats';

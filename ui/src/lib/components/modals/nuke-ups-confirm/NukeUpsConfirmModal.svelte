@@ -48,7 +48,7 @@
 </script>
 
 <div bind:this={modalContainer}>
-	<Card class="min-w-[calc(100vw/2.5)] max-w-md">
+	<Card class="max-w-md min-w-[calc(100vw/2.5)]">
 		<!-- Header with warning icon -->
 		<div class="mb-6 flex items-center gap-3">
 			<div class="bg-error-500/20 rounded-full p-2">
@@ -144,7 +144,7 @@
 					</h4>
 					<p class="text-error-600 dark:text-error-400 mb-4 text-sm">
 						To confirm deletion of {totalPals.toLocaleString()} pals, type
-						<span class="bg-error-100 dark:bg-error-900 rounded px-1 font-mono font-bold"
+						<span class="bg-error-100 text-error-900 dark:bg-error-900 dark:text-error-100 rounded px-1 font-mono font-bold"
 							>{REQUIRED_TEXT}</span
 						> below:
 					</p>

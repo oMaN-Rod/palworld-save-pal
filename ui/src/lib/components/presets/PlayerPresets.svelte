@@ -183,7 +183,7 @@
 	});
 </script>
 
-<div id="player-presets" class="flex min-w-64 max-w-96 flex-col space-y-2">
+<div id="player-presets" class="flex max-w-96 min-w-64 flex-col space-y-2">
 	<div id="player-presets-quick-actions" class="btn-group bg-surface-900 items-center rounded-sm p-1">
 		<TooltipButton
 			onclick={handleAddPreset}
@@ -240,24 +240,24 @@
 				{@const commonContainerString =
 					preset.common_container && preset.common_container.length > 0
 						? `${preset.common_container.length} ${c.items}`
-						: '⬜'}
+						: '—'}
 				{@const essentialContainerString =
 					preset.essential_container && preset.essential_container.length > 0
 						? `${preset.essential_container.length} ${c.items}`
-						: '⬜'}
+						: '—'}
 				{@const weaponLoadOutContainerString =
 					preset.weapon_load_out_container && preset.weapon_load_out_container.length > 0
 						? `${preset.weapon_load_out_container.length} ${c.items}`
-						: '⬜'}
+						: '—'}
 				{@const playerEquipmentArmorContainerString =
 					preset.player_equipment_armor_container &&
 					preset.player_equipment_armor_container.length > 0
 						? `${preset.player_equipment_armor_container.length} ${c.items}`
-						: '⬜'}
+						: '—'}
 				{@const foodEquipContainerString =
 					preset.food_equip_container && preset.food_equip_container.length > 0
 						? `${preset.food_equip_container.length} ${c.items}`
-						: '⬜'}
+						: '—'}
 				<div class="flex min-w-64 flex-col">
 					<span class="text-lg font-bold">{preset.name}</span>
 					<div class="flex flex-col space-y-2">

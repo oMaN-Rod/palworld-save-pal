@@ -8,6 +8,7 @@
 	import { assetLoader, calculateFilters, skillBorderClass, skillFilter, skillOpacity } from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
+	import { HelpCircle } from 'lucide-svelte';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
@@ -93,7 +94,7 @@
 		{#if skill === 'Empty'}
 			<img src={staticIcons.sadIcon} alt="Sad face icon" class="mr-2 h-6 w-6" />
 		{:else}
-			<span class="mr-2">❓</span>
+			<HelpCircle size={18} class="text-surface-500 mr-2" />
 		{/if}
 	</div>
 {/snippet}

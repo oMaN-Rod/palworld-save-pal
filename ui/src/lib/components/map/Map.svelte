@@ -186,6 +186,9 @@
 		return worldToPixel(worldCoords.x, worldCoords.y);
 	});
 
+	// Overlay reveal state
+	let overlaysReady = $state(false);
+
 	// Coordinate display state
 	let coordDisplayElement: HTMLDivElement | null = $state(null);
 	let coordDisplayText = $state('Coordinates: 0, 0');
@@ -246,6 +249,11 @@
 				map.addControl(baseContextMenu);
 			}
 		}, 1000);
+
+		const readyTimer = setTimeout(() => {
+			overlaysReady = true;
+		}, 400);
+		return () => clearTimeout(readyTimer);
 	});
 </script>
 
@@ -263,7 +271,7 @@
 
 			<!-- Origin marker layer -->
 			{#if showOrigin}
-				<Layer.Vector>
+				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
 					<Feature.Point coordinates={originCoords} style={originIconStyle}>
 						<Overlay.Hover {positioning} {offset} class={hoverClass}>
 							<OriginHover />
@@ -286,7 +294,7 @@
 
 			<!-- Player markers layer -->
 			{#if showPlayers}
-				<Layer.Vector>
+				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
 					{#each players as player}
 						{#if player.location}
 							<Feature.Point
@@ -308,7 +316,7 @@
 
 			<!-- Base markers layer -->
 			{#if showBases}
-				<Layer.Vector>
+				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
 					{#each bases as { base, guildName }}
 						<Feature.Point
 							coordinates={worldToPixel(base.location.x, base.location.y)}
@@ -328,7 +336,7 @@
 
 			<!-- Fast travel markers layer -->
 			{#if showFastTravel}
-				<Layer.Vector>
+				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
 					{#each fastTravelPoints as point}
 						<Feature.Point
 							coordinates={worldToPixel(point.x, point.y)}
@@ -348,7 +356,7 @@
 
 			<!-- Dungeon markers layer -->
 			{#if showDungeons}
-				<Layer.Vector>
+				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
 					{#each dungeonPoints as point}
 						<Feature.Point
 							coordinates={worldToPixel(point.x, point.y)}
@@ -368,7 +376,7 @@
 
 			<!-- Alpha Pal markers layer -->
 			{#if showAlphaPals}
-				<Layer.Vector>
+				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
 					{#each alphaPalPoints as point}
 						{@const palImage = assetLoader.loadMenuImage(point.pal)}
 						{@const palStyle = createPalIconStyle(palImage, '#ffffff', map)}
@@ -390,7 +398,7 @@
 
 			<!-- Predator Pal markers layer -->
 			{#if showPredatorPals}
-				<Layer.Vector>
+				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
 					{#each predatorPalPoints as point}
 						{@const palImage = assetLoader.loadMenuImage(point.pal)}
 						{@const palStyle = createPalIconStyle(palImage, '#ef4444', map)}
@@ -424,9 +432,11 @@
 	}
 
 	:global(.ol-tooltip) {
-		background-color: var(--color-surface-900) !important;
+		background-color: color-mix(in srgb, var(--color-surface-900) 90%, transparent) !important;
 		color: white !important;
 		border-radius: 4px;
+		backdrop-filter: blur(8px);
+		border: 1px solid color-mix(in srgb, var(--color-surface-700) 40%, transparent);
 	}
 
 	:global(.click-popup) {
@@ -437,7 +447,9 @@
 		position: absolute;
 		bottom: 8px;
 		right: 8px;
-		background-color: rgba(0, 0, 0, 0.7);
+		background: color-mix(in srgb, var(--color-surface-900) 85%, transparent);
+		backdrop-filter: blur(8px);
+		border: 1px solid color-mix(in srgb, var(--color-surface-700) 40%, transparent);
 		color: white;
 		padding: 5px 10px;
 		border-radius: 4px;

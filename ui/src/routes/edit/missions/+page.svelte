@@ -157,7 +157,7 @@
 							classes="px-6"
 							base="border-none hover:bg-secondary-500/50 rounded-sm"
 							labelBase="btn"
-							stateActive="bg-secondary-800"
+							stateActive="bg-secondary-800 text-white"
 							padding="p-0"
 						>
 							{m.main_missions()}
@@ -167,7 +167,7 @@
 							classes="px-6"
 							base="border-none hover:bg-secondary-500/50 rounded-sm"
 							labelBase="btn"
-							stateActive="bg-secondary-800"
+							stateActive="bg-secondary-800 text-white"
 							padding="p-0"
 						>
 							{m.sub_missions()}

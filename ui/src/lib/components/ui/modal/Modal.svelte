@@ -7,7 +7,7 @@
 	const modal = getModalState();
 
 	let {
-		overlayClass = 'bg-black/50',
+		overlayClass = 'bg-black/60 backdrop-blur-sm',
 		contentClass = '',
 		rounded = 'rounded-sm',
 		children
@@ -79,7 +79,7 @@
 	>
 		<div class={cn('relative', contentClass, rounded)}>
 			<button
-				class="absolute right-2 top-2 z-10 text-2xl leading-none hover:opacity-75"
+				class="absolute top-2 right-2 z-10 text-2xl leading-none hover:opacity-75"
 				onclick={() => modal.closeModal()}
 			>
 				×

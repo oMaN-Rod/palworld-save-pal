@@ -132,7 +132,7 @@
 	``;
 </script>
 
-<div class="flex w-[450px] flex-col space-y-2">
+<div class="flex w-112.5 flex-col space-y-2">
 	<PalHeader bind:pal showActions={false} popup />
 	<StatusBadge bind:pal />
 	<div class="flex justify-center space-x-2">

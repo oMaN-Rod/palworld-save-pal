@@ -24,7 +24,8 @@
 		Hash,
 		PaintBucket,
 		PawPrint,
-		Activity
+		Activity,
+		Rocket
 	} from 'lucide-svelte';
 	import { assetLoader } from '$utils';
 	import { staticIcons } from '$types/icons';
@@ -80,7 +81,7 @@
 				slotCount = foodCount > slotCount ? foodCount : slotCount;
 			}
 		});
-		return slotCount;
+		return Math.max(slotCount, 3);
 	});
 
 	let inventorySlotCount = $derived.by(() => {
@@ -679,7 +680,7 @@
 				</Tooltip>
 			</nav>
 			<!-- Main content wrapper -->
-			<div class="pr-105 grid w-full grid-cols-[auto_1fr] gap-4">
+			<div class="grid w-full grid-cols-[auto_1fr] gap-4 pr-4 lg:pr-80 xl:pr-96 2xl:pr-105">
 				<!-- Inventory -->
 				<div class="flex flex-col space-y-2">
 					<Tabs
@@ -694,7 +695,7 @@
 								classes="w-full"
 								base="border-none hover:bg-secondary-500/50 rounded-sm"
 								labelBase="btn"
-								stateActive="bg-secondary-800"
+								stateActive="bg-secondary-800 text-white"
 								padding="p-0"
 							>
 								{m.inventory()}
@@ -704,7 +705,7 @@
 								classes="w-full"
 								base="border-none hover:bg-secondary-500/50 rounded-sm"
 								labelBase="btn"
-								stateActive="bg-secondary-800"
+								stateActive="bg-secondary-800 text-white"
 								padding="p-0"
 							>
 								<div id="key-items-tab" class="w-full">
@@ -714,8 +715,8 @@
 						{/snippet}
 						{#snippet content()}
 							<Tabs.Panel value="inventory">
-								<div id="inventory-panel" class="max-h-125 overflow-y-auto 2xl:max-h-200">
-									<div class="m-1 grid grid-cols-6 gap-2">
+								<div id="inventory-panel" class="max-h-[500px] overflow-y-auto 2xl:max-h-[800px]">
+									<div class="m-1 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6">
 										{#each Object.values(commonContainer.slots) as _, index}
 											<ItemBadge
 												bind:slot={commonContainer.slots[index]}
@@ -729,8 +730,8 @@
 								</div>
 							</Tabs.Panel>
 							<Tabs.Panel value="key_items">
-								<div id="key-items-panel" class="max-h-125 overflow-y-auto 2xl:max-h-200">
-									<div class="m-1 grid grid-cols-6 gap-2">
+								<div id="key-items-panel" class="max-h-[500px] overflow-y-auto 2xl:max-h-[800px]">
+									<div class="m-1 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6">
 										{#each Object.values(essentialContainer.slots) as _, index}
 											<ItemBadge
 												bind:slot={essentialContainer.slots[index]}
@@ -747,8 +748,8 @@
 					</Tabs>
 				</div>
 				<!-- Player Equip -->
-				<div class="flex h-150 flex-col 2xl:grid 2xl:grid-cols-[auto_1fr_auto]">
-					<div  class="flex flex-col space-y-2">
+				<div class="flex min-h-0 flex-col 2xl:grid 2xl:grid-cols-[auto_1fr_auto]">
+					<div class="flex flex-col space-y-2">
 						<div id="weapon-equip" class="flex flex-col space-y-2">
 							<ItemHeader text={m.weapon({ count: 1 })} />
 							<div class="flex space-x-2 2xl:flex-col 2xl:space-y-2">
@@ -803,7 +804,7 @@
 							{/await}
 						</span>
 					</div>
-					<div id="gear-equip" class="mt-2 flex space-x-2 space-y-2 2xl:flex-col">
+					<div id="gear-equip" class="mt-2 flex space-y-2 space-x-2 2xl:flex-col">
 						<div class="flex flex-col space-y-2">
 							<ItemHeader text={m.head()} />
 							<ItemBadge
@@ -851,29 +852,31 @@
 							/>
 						</div>
 					</div>
-					<div id="food-equip" class="col-span-3 space-y-2 2xl:ml-12 2xl:mt-2">
+					<div id="food-equip" class="col-span-3 space-y-2 2xl:mt-2 2xl:ml-12">
 						<ItemHeader text={m.food()} />
-						<div class="2xl:ml-2">
-							<div class="flex flex-row space-x-2">
-								{#each Object.values(foodEquipContainer.slots) as _, index}
-									<ItemBadge
-										bind:slot={foodEquipContainer.slots[index]}
-										itemGroup="Food"
-										onCopyPaste={(event) =>
-											handleCopyPaste(event, foodEquipContainer.slots[index], false)}
-										onUpdate={onItemUpdate}
-									/>
-								{/each}
-							</div>
+						<div class="flex flex-row space-x-2">
+							{#each Object.values(foodEquipContainer.slots) as _, index}
+								<ItemBadge
+									bind:slot={foodEquipContainer.slots[index]}
+									itemGroup="Food"
+									onCopyPaste={(event) =>
+										handleCopyPaste(event, foodEquipContainer.slots[index], false)}
+									onUpdate={onItemUpdate}
+								/>
+							{/each}
 						</div>
 					</div>
 				</div>
 			</div>
 
 			<!-- Stats -->
-			<div class="fixed right-2 w-96 flex-none" bind:this={sideBarWrapper}>
-				<div id="player-level"
-					class="border-l-surface-600 preset-filled-surface-100-900 mb-2 mr-2 flex rounded-none border-l-2 p-4"
+			<div
+				class="fixed right-2 max-h-screen w-72 flex-none overflow-y-auto lg:w-80 xl:w-96"
+				bind:this={sideBarWrapper}
+			>
+				<div
+					id="player-level"
+					class="border-l-surface-600 bg-surface-800 mr-2 mb-2 flex rounded-none border-l-2 p-4"
 				>
 					<div class="mr-4 flex flex-col items-center justify-center rounded-none">
 						<div class="flex items-center">
@@ -993,7 +996,7 @@
 								<Tooltip
 									label={new Date(appState.selectedPlayer.last_online_time).toLocaleString()}
 								>
-									<span>{appState.selectedPlayer.nickname}</span>
+									<span class="truncate">{appState.selectedPlayer.nickname}</span>
 								</Tooltip>
 							</div>
 							<div class="flex flex-col space-y-2">
@@ -1044,7 +1047,10 @@
 	</div>
 {:else}
 	<div class="flex w-full items-center justify-center">
-		<h2 class="h2">{m.select_entity_to_edit({ entity: c.player })} 🚀</h2>
+		<h2 class="h2 flex items-center gap-2">
+			<Rocket class="text-secondary-400 h-6 w-6" />
+			{m.select_entity_to_edit({ entity: c.player })}
+		</h2>
 	</div>
 {/if}
 

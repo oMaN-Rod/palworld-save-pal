@@ -143,7 +143,7 @@
 			case Rarity.Legendary:
 				return 'bg-yellow-800 text-yellow-300 border-yellow-500';
 			default:
-				return 'bg-surface-900 text-gray-300 border-gray-500';
+				return 'bg-surface-900 text-surface-300 border-surface-500';
 		}
 	});
 
@@ -235,7 +235,7 @@
 </script>
 
 <button
-	class="hover:ring-secondary-500 w-12 hover:ring xl:w-16"
+	class="hover:ring-secondary-500 h-12 w-12 hover:ring xl:h-16 xl:w-16"
 	onclick={handleItemSelect}
 	oncontextmenu={(event) => event.preventDefault()}
 	onmousedown={(event) => handleMouseEvent(event)}
@@ -254,16 +254,16 @@
 						itemClass
 					)}
 				>
-					<span class="absolute left-0.5 top-0 text-xs">{slotWeight}</span>
+					<span class="absolute top-0 left-0.5 text-xs">{slotWeight}</span>
 					<img src={icon} alt={item.info.localized_name} class="h-12 w-12 xl:h-16 xl:w-16" />
 					{#if palIcon}
-						<div class="bg-surface-800 border-surface-600 absolute right-0 top-0 h-7 w-7 border">
+						<div class="bg-surface-800 border-surface-600 absolute top-0 right-0 h-7 w-7 border">
 							<img src={palIcon} alt="Pal Icon" class="h-full w-full object-cover" />
 						</div>
 					{/if}
 
 					{#if slot.count}
-						<span class="absolute bottom-0 right-0.5 text-xs">{slot.count}</span>
+						<span class="absolute right-0.5 bottom-0 text-xs">{slot.count}</span>
 					{/if}
 				</div>
 				{#if showDurability && dynamic && slot.dynamic_item}
@@ -278,7 +278,7 @@
 			</div>
 
 			{#snippet popup()}
-				<div class="flex w-96 flex-col">
+				<div class="flex w-full max-w-96 min-w-[250px] flex-col">
 					<div class={cn('flex flex-col space-y-2 border-b p-2', itemPopupHeaderClass)}>
 						<div class="flex items-center space-x-2">
 							<h4 class="h4 text-left">{item?.info.localized_name}</h4>
@@ -291,14 +291,14 @@
 							{/if}
 						</div>
 						<div class="grid grid-cols-[1fr_auto] gap-2">
-							<span class="grow text-left text-gray-300">
+							<span class="text-surface-300 grow text-left">
 								{localTranslationMap[
 									item?.details.type_a.toString() as keyof typeof localTranslationMap
 								]}
 							</span>
 							<div
 								class={cn(
-									'border-l border-r p-2 px-2 py-0.5 text-left text-sm font-bold',
+									'border-r border-l p-2 px-2 py-0.5 text-left text-sm font-bold',
 									itemPopupTierClass
 								)}
 							>
@@ -319,7 +319,7 @@
 							/>
 						</div>
 						<div
-							class="bg-surface-800 text-one-surface hover:ring-secondary-500 absolute bottom-4 right-4 rounded-sm px-3 py-1 font-semibold hover:ring"
+							class="bg-surface-800 text-one-surface hover:ring-secondary-500 absolute right-4 bottom-4 rounded-sm px-3 py-1 font-semibold hover:ring"
 							style="min-width: 80px; height: 2rem;"
 						>
 							<div class="relative z-10 flex h-full items-center justify-between">
@@ -327,10 +327,10 @@
 								<span class="font-bold">{slot.count}</span>
 							</div>
 							<span class="border-surface-700 absolute inset-0 rounded-sm border"></span>
-							<span class="bg-surface-400 absolute left-0 top-0 h-0.5 w-0.5"></span>
-							<span class="bg-surface-400 absolute right-0 top-0 h-0.5 w-0.5"></span>
+							<span class="bg-surface-400 absolute top-0 left-0 h-0.5 w-0.5"></span>
+							<span class="bg-surface-400 absolute top-0 right-0 h-0.5 w-0.5"></span>
 							<span class="bg-surface-400 absolute bottom-0 left-0 h-0.5 w-0.5"></span>
-							<span class="bg-surface-400 absolute bottom-0 right-0 h-0.5 w-0.5"></span>
+							<span class="bg-surface-400 absolute right-0 bottom-0 h-0.5 w-0.5"></span>
 						</div>
 					</div>
 					<div class="bg-surface-900 p-2 text-left">
@@ -370,7 +370,7 @@
 							</div>
 						{/if}
 						<div
-							class="bg-surface-800 text-one-surface hover:ring-secondary-500 absolute bottom-4 right-4 rounded-sm px-3 py-1 font-semibold hover:ring"
+							class="bg-surface-800 text-one-surface hover:ring-secondary-500 absolute right-4 bottom-4 rounded-sm px-3 py-1 font-semibold hover:ring"
 							style="min-width: 80px; height: 2rem;"
 						>
 							<div class="relative z-10 flex h-full items-center justify-between">
@@ -380,10 +380,10 @@
 								<span class="font-bold">{slotWeight}</span>
 							</div>
 							<span class="border-surface-700 absolute inset-0 rounded-sm border"></span>
-							<span class="bg-surface-400 absolute left-0 top-0 h-0.5 w-0.5"></span>
-							<span class="bg-surface-400 absolute right-0 top-0 h-0.5 w-0.5"></span>
+							<span class="bg-surface-400 absolute top-0 left-0 h-0.5 w-0.5"></span>
+							<span class="bg-surface-400 absolute top-0 right-0 h-0.5 w-0.5"></span>
 							<span class="bg-surface-400 absolute bottom-0 left-0 h-0.5 w-0.5"></span>
-							<span class="bg-surface-400 absolute bottom-0 right-0 h-0.5 w-0.5"></span>
+							<span class="bg-surface-400 absolute right-0 bottom-0 h-0.5 w-0.5"></span>
 						</div>
 					</div>
 				</div>
@@ -395,7 +395,7 @@
 				class="bg-surface-800 relative flex h-12 w-12 items-center justify-center xl:h-16 xl:w-16"
 			>
 				<Package size="48" />
-				<span class="absolute bottom-0 right-0 text-xs">{slot.count}</span>
+				<span class="absolute right-0 bottom-0 text-xs">{slot.count}</span>
 			</div>
 
 			{#snippet popup()}

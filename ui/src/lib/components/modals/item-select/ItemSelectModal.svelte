@@ -151,7 +151,9 @@
 		return maxStackCount === 9999 && appState.settings.cheat_mode ? 999999999 : maxStackCount;
 	});
 
-	const cardClass = $derived(isEgg ? 'w-[1200px]' : 'w-[600px]');
+	const cardClass = $derived(
+		isEgg ? 'w-full max-w-[1200px] min-w-[320px]' : 'w-full max-w-[600px] min-w-[320px]'
+	);
 	const controlsClass = $derived(isEgg ? 'grid grid-cols-[570px_1fr] gap-2' : 'flex w-full');
 
 	function handleClose(confirmed: boolean) {
@@ -285,10 +287,8 @@
 									/>
 									<div
 										class={cn(
-											'absolute -right-4 -top-1 h-6 w-6 xl:h-8 xl:w-8',
-											eggConfig.gender == PalGender.MALE
-												? 'text-primary-300'
-												: 'text-tertiary-300'
+											'absolute -top-1 -right-4 h-6 w-6 xl:h-8 xl:w-8',
+											eggConfig.gender == PalGender.MALE ? 'text-primary-300' : 'text-tertiary-300'
 										)}
 									>
 										<img

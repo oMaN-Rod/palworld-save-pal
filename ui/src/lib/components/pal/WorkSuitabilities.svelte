@@ -80,7 +80,7 @@
 	}
 </script>
 
-<div class="grid w-full grid-cols-6 gap-2">
+<div class="grid w-full grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6">
 	{#if workSuitabilities}
 		{#each Object.entries(workSuitabilities) as [ws, value]}
 			{@const suitability: WorkSuitability = ws as WorkSuitability}

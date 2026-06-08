@@ -71,7 +71,7 @@
 	<div class={cn('bg-surface-800 relative flex', height, rounded)} {...additionalProps}>
 		<div
 			class={cn(
-				'flex h-full items-center overflow-visible whitespace-nowrap pl-1 text-start align-middle text-sm font-bold transition-all',
+				'flex h-full items-center overflow-visible pl-1 text-start align-middle text-sm font-bold whitespace-nowrap transition-all',
 				progressBg,
 				rounded
 			)}
@@ -82,7 +82,7 @@
 			{/if}
 		</div>
 		{#if trailingLabel}
-			<span class="absolute right-2 top-1 text-xs font-bold text-white">{trailingLabel}</span>
+			<span class="absolute top-1 right-2 text-xs font-bold text-surface-50">{trailingLabel}</span>
 		{/if}
 	</div>
 	{#snippet popup()}

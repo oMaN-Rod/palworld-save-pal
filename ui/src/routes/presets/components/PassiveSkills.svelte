@@ -38,7 +38,7 @@
 
 <div class="grid grid-cols-[20%_1fr] gap-2 rounded-sm p-4">
 	<span class="border-r-surface-600 border-r pr-2 font-bold">{preset.name}</span>
-	<div class="ml-4 mt-1 grid grid-cols-2 gap-2">
+	<div class="mt-1 ml-4 grid grid-cols-2 gap-2">
 		{#each preset.skills as skillId}
 			{@const skill = passiveSkillsData.getByKey(skillId)}
 			{#if skill}

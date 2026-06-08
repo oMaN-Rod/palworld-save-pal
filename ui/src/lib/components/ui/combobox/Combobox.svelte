@@ -56,17 +56,17 @@
 		cn(
 			'relative p-2 focus:outline-hidden ring-surface-200-800 focus-within:ring-secondary-500 ring rounded-xs',
 			error ? 'border-error' : '',
-			disabled ? 'text-gray-400 cursor-not-allowed' : '',
+			disabled ? 'text-surface-400 cursor-not-allowed' : '',
 			_selectClass
 		)
 	);
 
 	const labelClass = $derived(
-		cn('label my-2', error ? 'text-error' : '', disabled ? 'text-gray-400' : '', _labelClass)
+		cn('label my-2', error ? 'text-error' : '', disabled ? 'text-surface-400' : '', _labelClass)
 	);
 
 	const labelTextClass = $derived(
-		cn('label-text', disabled ? 'text-gray-400' : '', _labelTextClass)
+		cn('label-text', disabled ? 'text-surface-400' : '', _labelTextClass)
 	);
 
 	function handleOptionClick(option: SelectOption) {
@@ -198,7 +198,7 @@
 		<div class="flex items-center justify-between">
 			<input
 				type="text"
-				class="focus:outline-hidden w-full bg-transparent"
+				class="w-full bg-transparent focus:outline-hidden"
 				{placeholder}
 				bind:value={searchTerm}
 				onfocus={handleFocus}
@@ -218,7 +218,7 @@
 		{#if isOpen}
 			<div
 				id={listboxId}
-				class="bg-surface-900 border-surface-600 select-popup rounded-xs absolute left-0 right-0 mt-3 max-h-60 overflow-auto border shadow-lg"
+				class="bg-surface-900 border-surface-600 select-popup absolute right-0 left-0 mt-3 max-h-60 overflow-auto rounded-xs border shadow-lg"
 				role="listbox"
 			>
 				{#each filteredOptions as option}

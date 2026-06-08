@@ -677,6 +677,7 @@
     }
   ],
   "technology_points": "Technology Points",
+  "theme": "Theme",
   "to_collection": "to Collection",
   "toggle_entity": "Toggle {entity}",
   "tools": "Tools",

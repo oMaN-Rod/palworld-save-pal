@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Card, Combobox } from '$components/ui';
-	import { Save, X, Upload, Share, Download } from 'lucide-svelte';
+	import { Save, X, Upload, Share, Download, AlertTriangle, CheckCircle } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
 	import { getAppState } from '$states';
@@ -9,7 +9,7 @@
 	import { c } from '$lib/utils/commonTranslations';
 
 	let {
-		title = m.export_pals({ count: "", pals: c.pals }),
+		title = m.export_pals({ count: '', pals: c.pals }),
 		message = '',
 		pals = [],
 		closeModal
@@ -101,7 +101,7 @@
 </script>
 
 <div bind:this={modalContainer}>
-	<Card class="min-w-[400px] max-w-lg">
+	<Card class="max-w-lg min-w-[400px]">
 		<div class="mb-4 flex items-center justify-between">
 			<h3 class="h3 flex items-center gap-2">
 				{#if exportTarget}
@@ -119,7 +119,10 @@
 		<div class="space-y-4">
 			<!-- Show pal count -->
 			<p class="text-surface-600 dark:text-surface-400 text-sm">
-				{m.exporting_count_selected_pals({ count: pals.length, pals: m.pal({count: pals.length}) })}
+				{m.exporting_count_selected_pals({
+					count: pals.length,
+					pals: m.pal({ count: pals.length })
+				})}
 			</p>
 
 			<!-- Export Target Selection -->
@@ -159,7 +162,9 @@
 			<!-- Player Selection (for Pal Box and DPS) -->
 			{#if exportTarget === 'pal_box' || exportTarget === 'dps'}
 				<div>
-					<span class="mb-2 block text-sm font-medium">{m.select_entity({ entity: m.player({ count: 1 }) })}</span>
+					<span class="mb-2 block text-sm font-medium"
+						>{m.select_entity({ entity: m.player({ count: 1 }) })}</span
+					>
 					<Combobox
 						bind:value={selectedPlayerId}
 						options={playerOptions}
@@ -177,17 +182,21 @@
 				</p>
 
 				{#if !isTargetAvailable}
-					<div class="text-red-600 dark:text-red-400">
+					<div class="flex items-center gap-1 text-red-600 dark:text-red-400">
+						<AlertTriangle size={14} />
 						{#if exportTarget === 'pal_box'}
-							⚠ {m.select_valid_player()}
+							{m.select_valid_player()}
 						{:else if exportTarget === 'dps'}
-							⚠ {m.dps_not_available()}
+							{m.dps_not_available()}
 						{:else if exportTarget === 'gps'}
-							⚠ {m.gps_not_available()}
+							{m.gps_not_available({ gps: '' })}
 						{/if}
 					</div>
 				{:else}
-					<div class="text-green-600 dark:text-green-400">✓ {m.target_available()}</div>
+					<div class="flex items-center gap-1 text-green-600 dark:text-green-400">
+						<CheckCircle size={14} />
+						{m.target_available()}
+					</div>
 				{/if}
 			</div>
 
@@ -205,7 +214,7 @@
 			<button
 				type="button"
 				onclick={() => handleClose(false)}
-				class="bg-surface-500 hover:bg-surface-600 flex items-center gap-2 rounded-md px-4 py-2 text-white"
+				class="bg-surface-500 hover:bg-surface-600 flex items-center gap-2 rounded-md px-4 py-2 text-surface-50"
 			>
 				<X class="h-4 w-4" />
 				{m.cancel()}

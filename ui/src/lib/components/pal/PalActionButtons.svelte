@@ -196,13 +196,8 @@
 	}
 </script>
 
-<div
-	class={cn(
-		'flex flex-col items-start space-y-2 2xl:flex-row 2xl:space-y-0 2xl:space-x-2',
-		popup ? '2xl:flex-col 2xl:space-y-0' : ''
-	)}
->
-	<h6 class="h6 grow">
+<div class={cn('flex flex-wrap items-start gap-2', popup ? '2xl:flex-col' : '')}>
+	<h6 class="h6 min-w-0 grow truncate">
 		{pal.nickname || pal.name}
 	</h6>
 	<div class="flex space-x-2">

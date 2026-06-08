@@ -211,7 +211,7 @@
 								<input
 									type="text"
 									bind:value={renameValue}
-									class="bg-surface-900 border-surface-600 min-w-0 grow rounded border px-2 py-1 text-sm text-white"
+									class="bg-surface-900 border-surface-600 min-w-0 grow rounded border px-2 py-1 text-sm text-surface-50"
 									autofocus
 									onkeydown={(e) => {
 										if (e.key === 'Escape') renamingSaveId = null;
@@ -242,7 +242,7 @@
 								disabled={!selectable}
 							>
 								<div class="flex min-w-0 grow flex-col">
-									<span class="truncate font-semibold text-white">
+									<span class="truncate font-semibold text-surface-50">
 										{save.world_name}
 									</span>
 									<span class="text-surface-400 truncate text-xs">

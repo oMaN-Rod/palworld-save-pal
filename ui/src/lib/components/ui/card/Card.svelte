@@ -2,7 +2,7 @@
 	import { cn } from '$theme';
 
 	let {
-		background = 'preset-filled-surface-100-900',
+		background = '',
 		rounded = 'rounded-sm',
 		padding = 'p-4',
 		class: _class = '',
@@ -16,6 +16,6 @@
 	}>();
 </script>
 
-<div class={cn('card rounded-xs', background, rounded, padding, _class)}>
+<div class={cn('card', background, rounded, padding, _class)}>
 	{@render children()}
 </div>

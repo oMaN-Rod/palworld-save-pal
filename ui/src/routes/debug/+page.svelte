@@ -477,7 +477,7 @@
 	}
 </script>
 
-<div class="grid h-full grid-cols-[25%_1fr] gap-2 p-2">
+<div class="animate-fade-in grid h-full grid-cols-[25%_1fr] gap-2 p-2">
 	<div class="flex flex-col">
 		<button class="btn preset-filled-primary-500 mb-2 flex w-full" onclick={handleReset}>
 			<span class="font-medium">{m.reset()}</span>

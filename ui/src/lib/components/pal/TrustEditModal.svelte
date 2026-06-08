@@ -53,13 +53,13 @@
 	initializeTrust();
 </script>
 
-<Card class="min-w-[min(100vw,24rem)] rounded-xl p-6 text-white shadow-lg">
+<Card class="min-w-[min(100vw,24rem)] rounded-xl p-6 text-surface-50 shadow-lg">
 	<h3 class="mb-6 text-lg font-semibold">{m.edit_entity({ entity: m.trust() })}</h3>
 
 	<div class="space-y-6">
 		<!-- Trust Level Display -->
 		<div class="flex items-center justify-between">
-			<span class="text-sm text-white/80">{m.friendship_rank()}</span>
+			<span class="text-sm text-surface-50/80">{m.friendship_rank()}</span>
 			<span class="rounded-full bg-[#db7c90] px-3 py-1 text-sm font-bold text-white">
 				Lv.{currentRank}
 			</span>
@@ -67,7 +67,7 @@
 
 		<!-- Custom Slider -->
 		<div>
-			<label for="trust-slider" class="mb-1 block text-sm font-medium text-white/80"
+			<label for="trust-slider" class="mb-1 block text-sm font-medium text-surface-50/80"
 				>{m.trust_xp()}</label
 			>
 			<input
@@ -79,9 +79,9 @@
 				value={currentTrust}
 				oninput={(e) => updateTrust(+(e.target as HTMLInputElement).value)}
 			/>
-			<div class="mt-2 flex justify-between text-sm text-white/70">
+			<div class="mt-2 flex justify-between text-sm text-surface-50/70">
 				<span>{minTrust}</span>
-				<span class="font-semibold text-white">{currentTrust}</span>
+				<span class="font-semibold text-surface-50">{currentTrust}</span>
 				<span>{maxTrust}</span>
 			</div>
 		</div>

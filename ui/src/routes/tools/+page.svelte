@@ -517,7 +517,7 @@
 												{@html xboxIcon}
 											</div>
 										</div>
-										<span class="text-lg font-semibold text-white"
+										<span class="text-lg font-semibold text-surface-50"
 											>{m.steam()} → GamePass</span
 										>
 										<span class="text-surface-300 text-center text-sm">
@@ -548,7 +548,7 @@
 												{@html steamIcon}
 											</div>
 										</div>
-										<span class="text-lg font-semibold text-white"
+										<span class="text-lg font-semibold text-surface-50"
 											>GamePass → {m.steam()}</span
 										>
 										<span class="text-surface-300 text-center text-sm">

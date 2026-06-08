@@ -35,8 +35,8 @@ export {
 	MultiSkillSelectModal,
 	NukeUpsConfirmModal,
 	NumberInputModal,
-	NumberSliderModal, 
-	OpenFolder, 
+	NumberSliderModal,
+	OpenFolder,
 	PalPresetSelectModal,
 	PalSelectModal,
 	PresetConfigModal,
@@ -45,4 +45,3 @@ export {
 	TextInputModal,
 	UpdateAvailableModal
 };
-

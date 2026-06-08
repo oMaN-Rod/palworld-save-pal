@@ -1,40 +1,10 @@
-[data-theme='psp'] {
-	--spacing: 0.25rem;
-	--text-scaling: 1;
-	--base-font-color: var(--color-surface-950);
-	--base-font-color-dark: var(--color-surface-50);
-	--base-font-family: system-ui, sans-serif;
-	--base-font-size: inherit;
-	--base-line-height: inherit;
-	--base-font-weight: normal;
-	--base-font-style: normal;
-	--base-letter-spacing: 0em;
-	--heading-font-color: var(--color-surface-950);
-	--heading-font-color-dark: var(--color-surface-50);
-	--heading-font-family: inherit;
-	--heading-font-weight: bold;
-	--heading-font-style: normal;
-	--heading-letter-spacing: inherit;
-	--anchor-font-color: var(--color-primary-500);
-	--anchor-font-color-dark: var(--color-primary-500);
-	--anchor-font-family: inherit;
-	--anchor-font-size: inherit;
-	--anchor-line-height: inherit;
-	--anchor-font-weight: normal;
-	--anchor-font-style: normal;
-	--anchor-letter-spacing: inherit;
-	--anchor-text-decoration: none;
-	--anchor-text-decoration-hover: underline;
-	--anchor-text-decoration-active: none;
-	--anchor-text-decoration-focus: none;
-	--body-background-color: var(--color-surface-50);
-	--body-background-color-dark: var(--color-surface-950);
-	--radius-base: 6px;
-	--radius-container: 12px;
-	--default-border-width: 1px;
-	--default-ring-width: 1px;
-	--outline-width-default: 1px;
-	--default-divide-width: 1px;
+/*
+ * PSP theme — color palette only (the original classic palette).
+ * All layout, typography, spacing, glows and animations are shared and live
+ * in app.css; a theme only swaps the color palette below.
+ */
+[data-theme='dark'] {
+	/* ── Primary: blue ── */
 	--color-primary-50: rgb(211, 229, 255);
 	--color-primary-100: rgb(169, 206, 253);
 	--color-primary-200: rgb(127, 182, 250);
@@ -59,6 +29,8 @@
 	--color-primary-contrast-800: var(--color-primary-contrast-light);
 	--color-primary-contrast-900: var(--color-primary-contrast-light);
 	--color-primary-contrast-950: var(--color-primary-contrast-light);
+
+	/* ── Secondary: purple ── */
 	--color-secondary-50: rgb(216, 204, 241);
 	--color-secondary-100: rgb(197, 171, 233);
 	--color-secondary-200: rgb(178, 138, 225);
@@ -83,6 +55,8 @@
 	--color-secondary-contrast-800: var(--color-secondary-contrast-light);
 	--color-secondary-contrast-900: var(--color-secondary-contrast-light);
 	--color-secondary-contrast-950: var(--color-secondary-contrast-light);
+
+	/* ── Tertiary: pink ── */
 	--color-tertiary-50: rgb(255, 206, 251);
 	--color-tertiary-100: rgb(255, 165, 226);
 	--color-tertiary-200: rgb(255, 124, 202);
@@ -107,6 +81,8 @@
 	--color-tertiary-contrast-800: var(--color-tertiary-contrast-light);
 	--color-tertiary-contrast-900: var(--color-tertiary-contrast-light);
 	--color-tertiary-contrast-950: var(--color-tertiary-contrast-light);
+
+	/* ── Success: green ── */
 	--color-success-50: rgb(193, 255, 236);
 	--color-success-100: rgb(164, 245, 211);
 	--color-success-200: rgb(134, 235, 187);
@@ -131,6 +107,8 @@
 	--color-success-contrast-800: var(--color-success-contrast-light);
 	--color-success-contrast-900: var(--color-success-contrast-light);
 	--color-success-contrast-950: var(--color-success-contrast-light);
+
+	/* ── Warning: yellow ── */
 	--color-warning-50: rgb(255, 255, 163);
 	--color-warning-100: rgb(255, 247, 130);
 	--color-warning-200: rgb(255, 239, 98);
@@ -155,6 +133,8 @@
 	--color-warning-contrast-800: var(--color-warning-contrast-light);
 	--color-warning-contrast-900: var(--color-warning-contrast-light);
 	--color-warning-contrast-950: var(--color-warning-contrast-light);
+
+	/* ── Error: red ── */
 	--color-error-50: rgb(247, 212, 214);
 	--color-error-100: rgb(246, 182, 181);
 	--color-error-200: rgb(245, 152, 149);
@@ -179,6 +159,8 @@
 	--color-error-contrast-800: var(--color-error-contrast-light);
 	--color-error-contrast-900: var(--color-error-contrast-light);
 	--color-error-contrast-950: var(--color-error-contrast-light);
+
+	/* ── Surface: neutral grays ── */
 	--color-surface-50: rgb(255, 255, 255);
 	--color-surface-100: rgb(224, 224, 224);
 	--color-surface-200: rgb(194, 194, 194);

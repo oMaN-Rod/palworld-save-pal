@@ -106,7 +106,7 @@
 			message: m.delete_count_entities_confirm({
 				count: selectedPresets.length,
 				entity: m.preset({ count: selectedPresets.length })
-			}),
+			})
 		});
 		if (!result) return;
 		const presetIds = selectedPresets.map((preset) => preset.id);
@@ -130,7 +130,7 @@
 		const result = await modal.showModal<[string, number]>(ItemSelectModal, {
 			group: 'Common',
 			itemId: '',
-			title: m.search_entity({ entity: c.item }),
+			title: m.search_entity({ entity: c.item })
 		});
 		if (!result) return;
 		let [static_id, count] = result;
@@ -185,27 +185,47 @@
 	}
 </script>
 
-<div class="flex min-w-64 max-w-96 flex-col space-y-2">
+<div class="flex w-full max-w-96 min-w-0 flex-col space-y-2">
 	<div class="btn-group bg-surface-900 items-center rounded-sm p-1">
-		<TooltipButton onclick={handleAddPreset} popupLabel={m.create_preset_from_current({ entity: c.container })}>
+		<TooltipButton
+			onclick={handleAddPreset}
+			popupLabel={m.create_preset_from_current({ entity: c.container })}
+		>
 			<Plus />
 		</TooltipButton>
-		<TooltipButton onclick={handleFillContainer} popupLabel={m.fill_current_entity({ entity: c.container })}>
+		<TooltipButton
+			onclick={handleFillContainer}
+			popupLabel={m.fill_current_entity({ entity: c.container })}
+		>
 			<PaintBucket />
 		</TooltipButton>
-		<TooltipButton onclick={handleSetContainerCount} popupLabel={m.set_entity_item_count({ entity: c.container })}>
+		<TooltipButton
+			onclick={handleSetContainerCount}
+			popupLabel={m.set_entity_item_count({ entity: c.container })}
+		>
 			<Hash />
 		</TooltipButton>
-		<TooltipButton onclick={handleClearContainer} popupLabel={m.clear_entity({ entity: c.container })}>
+		<TooltipButton
+			onclick={handleClearContainer}
+			popupLabel={m.clear_entity({ entity: c.container })}
+		>
 			<ChevronsLeftRight />
 		</TooltipButton>
 		{#if selectedPresets.length === 1}
-			<TooltipButton onclick={handleApplyPreset} popupLabel={m.apply_selected_entity({ entity: c.preset })}>
+			<TooltipButton
+				onclick={handleApplyPreset}
+				popupLabel={m.apply_selected_entity({ entity: c.preset })}
+			>
 				<Play />
 			</TooltipButton>
 		{/if}
 		{#if selectedPresets.length >= 1}
-			<TooltipButton onclick={handleDeletePresets} popupLabel={m.delete_selected_entity({ entity: m.preset({ count: selectedPresets.length }) })}>
+			<TooltipButton
+				onclick={handleDeletePresets}
+				popupLabel={m.delete_selected_entity({
+					entity: m.preset({ count: selectedPresets.length })
+				})}
+			>
 				<Trash />
 			</TooltipButton>
 			<TooltipButton onclick={() => (selectedPresets = [])} popupLabel={m.clear_selected()}>

@@ -755,7 +755,7 @@
 							<div>
 								<legend class="font-bold">{m.sort()}</legend>
 								<hr />
-								<div class="grid grid-cols-6">
+								<div class="grid grid-cols-3 sm:grid-cols-6">
 									<Tooltip label={m.sort_by_entity({ entity: m.level() })}>
 										<button
 											type="button"
@@ -788,7 +788,7 @@
 							<div>
 								<legend class="font-bold">{m.element_and_type()}</legend>
 								<hr />
-								<div class="mt-2 grid grid-cols-4 2xl:grid-cols-6">
+								<div class="mt-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 2xl:grid-cols-6">
 									<Tooltip>
 										<button class={elementClass('All')} onclick={() => (selectedFilter = 'All')}>
 											<GalleryVerticalEnd />
@@ -907,7 +907,7 @@
 						<TooltipButton
 							class="h-8 w-8 rounded-full {page === currentPage
 								? 'bg-primary-500 text-white'
-								: 'bg-surface-800 hover:bg-gray-300'}"
+								: 'bg-surface-800 hover:bg-surface-600'}"
 							onclick={() => (currentPage = page)}
 							popupLabel={`${m.box()} ${page}`}
 						>
@@ -922,7 +922,9 @@
 			</div>
 
 			<div id="dps-grid" class="overflow-hidden">
-				<div class="grid grid-cols-6 place-items-center gap-4 p-4">
+				<div
+					class="grid grid-cols-3 place-items-center gap-4 p-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6"
+				>
 					{#each currentPageItems as item (item.pal.instance_id)}
 						{#if item.pal.character_id !== 'None' || (!searchQuery && selectedFilter === 'All' && sortBy === 'slot-index')}
 							<PalBadge
@@ -943,11 +945,11 @@
 
 		<div id="dps-stats">
 			{#if pals && pals.length > 0}
-				<Card class="mr-2 hidden h-107.5 2xl:block">
+				<Card class="mr-2 hidden min-h-0 2xl:block">
 					<PalContainerStats {pals} {elementTypes} />
 				</Card>
 			{:else}
-				<Card class="mr-2 hidden h-107.5 2xl:block">
+				<Card class="mr-2 hidden min-h-0 2xl:block">
 					<div>{m.no_pals_available(p.pals)}</div>
 				</Card>
 			{/if}

@@ -48,7 +48,7 @@
 	const palLevelMessage = $derived.by(() => {
 		if (appState.selectedPlayer && pal) {
 			return appState.selectedPlayer.level < pal.level
-				? `Level sync ${pal.level} 🡆 ${appState.selectedPlayer.level}`
+				? `Level sync ${pal.level} → ${appState.selectedPlayer.level}`
 				: 'No Level Sync';
 		}
 	});
@@ -137,7 +137,7 @@
 
 {#if pal}
 	<div
-		class="border-l-surface-600 preset-filled-surface-100-900 flex flex-row rounded-none border-l-2 p-4"
+		class="border-l-surface-600 bg-surface-800 flex flex-row rounded-none border-l-2 p-4"
 	>
 		<div class="mr-4 flex flex-col items-center justify-center rounded-none">
 			{#if appState.settings.cheat_mode}
@@ -298,7 +298,7 @@
 			</div>
 		</div>
 
-		<div class="grow">
+		<div class="min-w-0 grow">
 			<div class="flex flex-col">
 				<PalActionButtons bind:pal {showActions} {popup} />
 				<hr class="hr my-1" />

@@ -127,8 +127,8 @@
 				useArrow={false}
 			>
 				<div class={cn('grid grid-cols-[1fr_auto] overflow-hidden', sickClass)}>
-					<div class="ml-4 flex flex-col">
-						<div class="flex space-x-2">
+					<div class="ml-4 flex min-w-0 flex-col">
+						<div class="flex flex-wrap items-center gap-x-2">
 							<Tooltip label={levelSyncTxt}>
 								<div class="flex items-end space-x-0.5">
 									<span class="text-xs"> LV </span>
@@ -139,7 +139,7 @@
 									</span>
 								</div>
 							</Tooltip>
-							<span class="text-lg font-bold">{pal.name}</span>
+							<span class="truncate text-lg font-bold">{pal.name}</span>
 							<div class="h-4 w-4 2xl:h-6 2xl:w-6">
 								<img src={genderIcon} alt={pal.gender} />
 							</div>
@@ -159,7 +159,7 @@
 								</div>
 							{/if}
 							{#if pal.is_lucky}
-								<div class="h-4 w-4 2xl:h-6 2xl:w-6">✨</div>
+								<img src={staticIcons.luckyIcon} alt="Lucky" class="h-4 w-4 2xl:h-6 2xl:w-6" />
 							{/if}
 						</div>
 						<StatusBadge

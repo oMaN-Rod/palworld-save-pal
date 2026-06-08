@@ -193,15 +193,17 @@
 {#snippet tabButton(tab: PresetType, label: string)}
 	<button
 		class={cn(
-			'btn hover:bg-secondary-500/50 w-1/5 rounded-sm p-2 2xl:p-4',
-			activeTab === tab ? 'bg-secondary-800' : ''
+			'flex-1 rounded-sm px-2 py-2 text-xs font-semibold tracking-wider uppercase transition-all 2xl:px-4 2xl:text-sm',
+			activeTab === tab
+				? 'bg-secondary-500 text-secondary-950 shadow-glow-gold'
+				: 'text-surface-400 hover:bg-surface-800 hover:text-surface-200'
 		)}
 		onclick={() => {
 			activeTab = tab;
 			selectedPresets = [];
 		}}
 	>
-		<span class="text-xs 2xl:text-base">{label}</span>
+		{label}
 	</button>
 {/snippet}
 
@@ -225,22 +227,23 @@
 	</div>
 {/snippet}
 
-<div class="flex h-full flex-col">
-	<div class="grid h-full w-full grid-cols-[25%_1fr]">
-		<!-- Left Controls -->
-		<div class="shrink-0 space-y-2 p-4">
-			<div class="flex items-center">
-				<nav
-					class="btn-group preset-outlined-surface-200-800 w-full flex-col rounded-sm p-2 md:flex-row"
-				>
-					{@render tabButton('pal', c.pal)}
-					{@render tabButton('inventory', m.inventory())}
-					{@render tabButton('passive', m.passive())}
-					{@render tabButton('active', m.active())}
-					{@render tabButton('storage', m.storage())}
-				</nav>
-			</div>
+<div class="animate-fade-in flex h-full flex-col">
+	<!-- Header Banner -->
+	<div class="border-surface-700 flex items-center justify-start border-b p-4">
+		<nav class="border-surface-600/50 bg-surface-900 flex gap-1 rounded-sm border p-1">
+			{@render tabButton('pal', c.pal)}
+			{@render tabButton('inventory', m.inventory())}
+			{@render tabButton('passive', m.passive())}
+			{@render tabButton('active', m.active())}
+			{@render tabButton('storage', m.storage())}
+		</nav>
+	</div>
 
+	<div
+		class="grid h-full w-full grid-cols-[minmax(200px,320px)_1fr] lg:grid-cols-[280px_1fr] xl:grid-cols-[320px_1fr]"
+	>
+		<!-- Left Controls -->
+		<div class="shrink-0 space-y-2 overflow-y-auto p-4">
 			<div class="flex items-center space-x-2">
 				<div class="grow">
 					<Input bind:value={searchQuery} placeholder={m.search_presets()} inputClass="w-full" />
@@ -256,11 +259,11 @@
 				</TooltipButton>
 			</div>
 
-			<div class="btn-group bg-surface-900 w-full items-center rounded-sm p-1">
+			<div class="border-surface-700/50 bg-surface-900 flex gap-1 rounded-sm border p-1">
 				<TooltipButton
 					popupLabel={m.import_preset()}
 					onclick={handleImportPreset}
-					buttonClass="hover:bg-success-500/50"
+					buttonClass="hover:bg-secondary-500/50"
 				>
 					<Upload size={20} />
 				</TooltipButton>
@@ -279,7 +282,7 @@
 
 			<List
 				items={filteredPresets}
-				listClass="h-[calc(100vh-250px)] overflow-y-auto"
+				listClass="h-[calc(100vh-300px)] overflow-y-auto"
 				bind:selectedItems={selectedPresets}
 				multiple={true}
 				headerClass="grid w-full grid-cols-[auto_1fr_auto] gap-2 rounded-sm"
@@ -289,7 +292,7 @@
 					<span class="font-bold">{m.actions()}</span>
 				{/snippet}
 				{#snippet listItem(preset)}
-					<span class="grow">{preset.name}</span>
+					<span class="grow truncate">{preset.name}</span>
 				{/snippet}
 				{#snippet listItemActions(preset)}
 					<TooltipButton

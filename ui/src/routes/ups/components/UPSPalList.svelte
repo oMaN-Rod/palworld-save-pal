@@ -2,6 +2,7 @@
 	import UPSPalBadge from './UPSPalBadge.svelte';
 	import { getUpsState } from '$states';
 	import type { UPSPal } from '$types';
+	import { Upload, RefreshCw, Eye } from 'lucide-svelte';
 	import * as m from '$i18n/messages';
 	import { c } from '$utils/commonTranslations';
 
@@ -66,7 +67,9 @@
 							</span>
 						{/each}
 						{#if upsPal.tags.length > 3}
-							<span class="text-surface-500 text-xs">{m.and_more_count({ count: upsPal.tags.length - 3 })}</span>
+							<span class="text-surface-500 text-xs"
+								>{m.and_more_count({ count: upsPal.tags.length - 3 })}</span
+							>
 						{/if}
 					</div>
 				{/if}
@@ -87,14 +90,16 @@
 								• {c.player}: <span class="font-medium">{upsPal.source_player_name}</span>
 							{/if}
 							{#if upsPal.source_storage_type}
-								• {m.import_from()}: <span class="font-medium uppercase">{upsPal.source_storage_type}</span>
+								• {m.import_from()}:
+								<span class="font-medium uppercase">{upsPal.source_storage_type}</span>
 							{/if}
 						</div>
 					{/if}
 					<div>
 						{m.added_label()} <span class="font-medium">{formatDate(upsPal.created_at)}</span>
 						{#if upsPal.updated_at !== upsPal.created_at}
-							• {m.modified_label()} <span class="font-medium">{formatDate(upsPal.updated_at)}</span>
+							• {m.modified_label()}
+							<span class="font-medium">{formatDate(upsPal.updated_at)}</span>
 						{/if}
 					</div>
 				</div>
@@ -105,17 +110,20 @@
 				<div class="text-surface-500 dark:text-surface-400 space-y-1 text-xs">
 					{#if upsPal.transfer_count > 0}
 						<div title={m.transfer({ count: 2 })}>
-							📤 {upsPal.transfer_count}
+							<Upload size={12} class="mr-1 inline" />
+							{upsPal.transfer_count}
 						</div>
 					{/if}
 					{#if upsPal.clone_count > 0}
 						<div title={m.clones()}>
-							🔄 {upsPal.clone_count}
+							<RefreshCw size={12} class="mr-1 inline" />
+							{upsPal.clone_count}
 						</div>
 					{/if}
 					{#if upsPal.last_accessed_at}
 						<div title={m.last_accessed()}>
-							👁️ {new Date(upsPal.last_accessed_at).toLocaleDateString()}
+							<Eye size={12} class="mr-1 inline" />
+							{new Date(upsPal.last_accessed_at).toLocaleDateString()}
 						</div>
 					{/if}
 				</div>

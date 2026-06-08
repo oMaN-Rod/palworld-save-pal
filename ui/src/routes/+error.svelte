@@ -3,13 +3,17 @@
 	import { page } from '$app/stores';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
 	import * as m from '$i18n/messages';
+	import { AlertTriangle } from 'lucide-svelte';
 
 	let error = $state(['']);
 </script>
 
 <div class="flex h-full w-full flex-col items-center justify-center">
-	<div class="max-w-2/3 flex flex-col">
-		<h1 class="text-4xl font-bold">😵‍💫 {m.oops_something_wrong()}</h1>
+	<div class="flex max-w-2/3 flex-col">
+		<h1 class="flex items-center gap-3 text-4xl font-bold">
+			<AlertTriangle size={32} class="text-error-400" />
+			{m.oops_something_wrong()}
+		</h1>
 		<Accordion
 			value={error}
 			onValueChange={(e: ValueChangeDetails) => (error = e.value)}

@@ -378,7 +378,7 @@
 {#if appState.selectedPal}
 	<div class="flex h-full overflow-auto p-2">
 		<div class="flex grow flex-col">
-			<div id="pal-header" class="w-2/3 shrink-0">
+			<div id="pal-header" class="w-full shrink-0 2xl:w-2/3">
 				<PalHeader bind:pal={appState.selectedPal} />
 			</div>
 			<div class="flex grow">
@@ -483,7 +483,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="w-1/3 overflow-auto p-2">
+		<div class="w-full overflow-auto p-2 2xl:w-1/3">
 			<div class="hidden flex-col space-y-2 2xl:flex">
 				<div id="pal-status">
 					<StatusBadge bind:pal={appState.selectedPal} />
@@ -504,7 +504,7 @@
 			<div class="flex flex-col space-y-2 2xl:hidden">
 				<StatusBadge bind:pal={appState.selectedPal} />
 				<Accordion
-					classes="min-w-96"
+					classes="w-full min-w-0 2xl:min-w-96"
 					value={rightAccordionValue}
 					onValueChange={(e: ValueChangeDetails) => (rightAccordionValue = e.value)}
 					collapsible

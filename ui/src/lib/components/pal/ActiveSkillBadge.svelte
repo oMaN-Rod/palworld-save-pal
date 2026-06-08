@@ -4,7 +4,7 @@
 	import { getAppState, getModalState } from '$states';
 	import { SkillSelectModal } from '$components/modals';
 	import { Tooltip } from '$components/ui';
-	import { TimerReset } from 'lucide-svelte';
+	import { TimerReset, HelpCircle } from 'lucide-svelte';
 	import { assetLoader } from '$utils';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';
@@ -76,16 +76,16 @@
 				</div>
 			</div>
 			<div
-				class="absolute bottom-0 right-12 top-0 w-8 origin-top-right skew-x-[-20deg] transform"
+				class="absolute top-0 right-12 bottom-0 w-8 origin-top-right skew-x-[-20deg] transform"
 				style="background-color: {element?.color}"
 			></div>
 		</div>
 		{#snippet popup()}
-			<div class="bg-surface-800 flex w-96 flex-col">
+			<div class="bg-surface-800 flex w-full max-w-96 min-w-[250px] flex-col">
 				<div class="flex flex-col space-y-2 border-b p-2">
 					<h4 class="h4 text-left">{activeSkill?.localized_name}</h4>
 					<div class="grid grid-cols-[1fr_auto] gap-2">
-						<span class="grow text-left text-gray-300">
+						<span class="text-surface-300 grow text-left">
 							<div class="flex">
 								<img src={elementIcon} alt="{element?.localized_name} icon" class="h-6 w-6" />
 								{activeSkill?.details.element}
@@ -110,7 +110,7 @@
 								>{activeSkill?.details.min_range} - {activeSkill?.details.max_range}</span
 							>
 						</div>
-						<div class="border-l border-r p-2 px-2 py-0.5 text-left text-sm font-bold">
+						<div class="border-r border-l p-2 px-2 py-0.5 text-left text-sm font-bold">
 							{activeSkill?.details.type}
 						</div>
 					</div>
@@ -129,7 +129,7 @@
 			{#if skill === 'Empty'}
 				<img src={staticIcons.sadIcon} alt="Sad face icon" class="mr-2 h-6 w-6" />
 			{:else}
-				<span class="mr-2">❓</span>
+				<HelpCircle size={18} class="text-surface-500 mr-2" />
 			{/if}
 		</div>
 	</div>

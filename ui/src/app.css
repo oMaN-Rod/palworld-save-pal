@@ -4,7 +4,16 @@
 
 @import '@skeletonlabs/skeleton';
 @import '@skeletonlabs/skeleton/optional/presets';
-@import './psp.css';
+
+/*
+ * Themes are color palettes only. All layout, typography, spacing, glows and
+ * animations are shared and defined in this file, so switching themes only
+ * swaps the color palette. To add a new theme, drop in a `[data-theme='name']`
+ * palette file, import it here, and register it in the theme selector.
+ */
+@import './dark.css';
+@import './light.css';
+@import './frontier.css';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -12,15 +21,80 @@
 	--spacing-18: 72px;
 	--color-tech-500: rgb(24, 97, 171);
 	--color-ancient-tech-500: rgb(131, 40, 201);
+
+	/*
+	 * Glow tokens are palette-driven via color-mix so every theme gets glows in
+	 * its own colors. The legacy color names map to semantic palette roles:
+	 *   cyan/paldium -> primary, gold -> secondary, ancient -> tertiary,
+	 *   toxic -> success, amber -> warning, red -> error.
+	 */
+	--shadow-glow-cyan: 0 0 8px color-mix(in srgb, var(--color-primary-300) 40%, transparent),
+		0 0 20px color-mix(in srgb, var(--color-primary-300) 15%, transparent);
+	--shadow-glow-paldium: 0 0 12px color-mix(in srgb, var(--color-primary-300) 35%, transparent),
+		0 0 30px color-mix(in srgb, var(--color-primary-300) 12%, transparent);
+	--shadow-glow-paldium-sm: 0 0 6px color-mix(in srgb, var(--color-primary-300) 30%, transparent);
+	--shadow-glow-ancient: 0 0 12px color-mix(in srgb, var(--color-tertiary-400) 35%, transparent),
+		0 0 30px color-mix(in srgb, var(--color-tertiary-400) 12%, transparent);
+	--shadow-glow-ancient-sm: 0 0 6px color-mix(in srgb, var(--color-tertiary-400) 30%, transparent);
+	--shadow-glow-toxic: 0 0 12px color-mix(in srgb, var(--color-success-400) 35%, transparent),
+		0 0 30px color-mix(in srgb, var(--color-success-400) 12%, transparent);
+	--shadow-glow-toxic-sm: 0 0 6px color-mix(in srgb, var(--color-success-400) 30%, transparent);
+	--shadow-glow-gold: 0 0 8px color-mix(in srgb, var(--color-secondary-500) 40%, transparent),
+		0 0 20px color-mix(in srgb, var(--color-secondary-500) 15%, transparent);
+	--shadow-glow-red: 0 0 8px color-mix(in srgb, var(--color-error-500) 40%, transparent),
+		0 0 20px color-mix(in srgb, var(--color-error-500) 15%, transparent);
+	--shadow-glow-amber: 0 0 8px color-mix(in srgb, var(--color-warning-500) 40%, transparent),
+		0 0 20px color-mix(in srgb, var(--color-warning-500) 15%, transparent);
+}
+
+/*
+ * Shared theme configuration (layout, typography, spacing). Identical for every
+ * theme — only the color palette differs between themes. Color references below
+ * resolve against the active palette.
+ */
+[data-theme] {
+	--spacing: 0.25rem;
+	--text-scaling: 1;
+	--base-font-color: var(--color-surface-950);
+	--base-font-color-dark: var(--color-surface-50);
+	--base-font-family: 'Inter', 'Montserrat', system-ui, sans-serif;
+	--base-font-size: inherit;
+	--base-line-height: inherit;
+	--base-font-weight: normal;
+	--base-font-style: normal;
+	--base-letter-spacing: 0em;
+	--heading-font-color: var(--color-surface-950);
+	--heading-font-color-dark: var(--color-surface-50);
+	--heading-font-family: 'Inter', 'Montserrat', system-ui, sans-serif;
+	--heading-font-weight: 700;
+	--heading-font-style: normal;
+	--heading-letter-spacing: 0.08em;
+	--anchor-font-color: var(--color-primary-400);
+	--anchor-font-color-dark: var(--color-primary-400);
+	--anchor-font-family: inherit;
+	--anchor-font-size: inherit;
+	--anchor-line-height: inherit;
+	--anchor-font-weight: normal;
+	--anchor-font-style: normal;
+	--anchor-letter-spacing: inherit;
+	--anchor-text-decoration: none;
+	--anchor-text-decoration-hover: underline;
+	--anchor-text-decoration-active: none;
+	--anchor-text-decoration-focus: none;
+	--body-background-color: var(--color-surface-50);
+	--body-background-color-dark: var(--color-surface-950);
+	--radius-base: 4px;
+	--radius-container: 6px;
+	--default-border-width: 1px;
+	--default-ring-width: 1px;
+	--outline-width-default: 1px;
+	--default-divide-width: 1px;
 }
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
   looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
 */
 @layer base {
 	*,
@@ -30,13 +104,46 @@
 	::file-selector-button {
 		border-color: var(--color-gray-200, currentColor);
 	}
+
+	::-webkit-scrollbar {
+		width: 6px;
+		height: 6px;
+	}
+	::-webkit-scrollbar-track {
+		background: var(--color-surface-950);
+	}
+	::-webkit-scrollbar-thumb {
+		background: var(--color-surface-700);
+		border-radius: 3px;
+	}
+	::-webkit-scrollbar-thumb:hover {
+		background: var(--color-primary-700);
+	}
 }
 
 body {
 	background-color: var(--color-surface-950);
 	color: var(--color-surface-50);
+	font-family: var(--base-font-family);
 	height: 100%;
 	overflow: hidden;
+	background-image:
+		radial-gradient(
+			ellipse 80% 60% at 50% -20%,
+			color-mix(in srgb, var(--color-primary-300) 3%, transparent) 0%,
+			transparent 60%
+		),
+		radial-gradient(
+			ellipse 60% 40% at 80% 100%,
+			color-mix(in srgb, var(--color-tertiary-400) 2%, transparent) 0%,
+			transparent 60%
+		);
+	background-attachment: fixed;
+}
+
+::selection {
+	background: color-mix(in srgb, var(--color-primary-300) 20%, transparent);
+	color: var(--color-surface-50);
 }
 
 .floating {
@@ -46,121 +153,320 @@ body {
 	left: 0;
 }
 
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@keyframes slideUp {
+	0% {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+@keyframes slideDown {
+	0% {
+		opacity: 0;
+		transform: translateY(-8px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+@keyframes circuit-pulse {
+	0%,
+	100% {
+		opacity: 0.6;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1.05);
+	}
+}
+@keyframes shimmer {
+	0% {
+		background-position: -200% 0;
+	}
+	100% {
+		background-position: 200% 0;
+	}
+}
+
+.animate-fade-in {
+	animation: fadeIn 0.2s ease-out;
+}
+.animate-slide-up {
+	animation: slideUp 0.25s ease-out;
+}
+.animate-slide-down {
+	animation: slideDown 0.2s ease-out;
+}
+.animate-circuit-pulse {
+	animation: circuit-pulse 2s ease-in-out infinite;
+}
+.animate-shimmer {
+	background: linear-gradient(
+		90deg,
+		transparent 25%,
+		color-mix(in srgb, var(--color-primary-300) 5%, transparent) 50%,
+		transparent 75%
+	);
+	background-size: 200% 100%;
+	animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.hover-lift {
+	transition:
+		transform 0.15s ease,
+		box-shadow 0.15s ease;
+}
+.hover-lift:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.card {
+	background: color-mix(in srgb, var(--color-surface-800) 75%, transparent);
+	border: 1px solid color-mix(in srgb, var(--color-surface-600) 35%, transparent);
+	border-radius: 6px;
+	padding: 1.25rem;
+	box-shadow:
+		0 1px 3px rgba(0, 0, 0, 0.3),
+		inset 0 1px 0 rgba(255, 255, 255, 0.03);
+	backdrop-filter: blur(8px);
+}
+
+.card-header {
+	font-size: 1rem;
+	font-weight: 700;
+	color: var(--color-surface-50);
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	margin-bottom: 0.75rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 1px solid color-mix(in srgb, var(--color-surface-700) 30%, transparent);
+	text-shadow: 0 0 20px color-mix(in srgb, var(--color-primary-300) 10%, transparent);
+}
+
+.nav-rail {
+	border-right: 1px solid color-mix(in srgb, var(--color-surface-700) 40%, transparent);
+	background: color-mix(in srgb, var(--color-surface-900) 95%, transparent);
+	backdrop-filter: blur(12px);
+}
+
+.nav-rail [data-testid='nav-tile'] {
+	border-radius: 4px;
+	transition: all 0.15s ease;
+	color: var(--color-surface-500);
+	position: relative;
+}
+
+.nav-rail [data-testid='nav-tile']:hover {
+	background: color-mix(in srgb, var(--color-surface-800) 50%, transparent) !important;
+	color: var(--color-surface-200) !important;
+}
+
+.nav-rail [data-testid='nav-tile']:hover svg {
+	filter: drop-shadow(0 0 4px color-mix(in srgb, var(--color-secondary-500) 25%, transparent));
+}
+
+.nav-rail .active-nav-tile {
+	background: color-mix(in srgb, var(--color-secondary-500) 15%, transparent) !important;
+	color: var(--color-secondary-300) !important;
+	border-left: 2px solid var(--color-secondary-400);
+	border-radius: 0 4px 4px 0;
+	box-shadow:
+		0 0 12px color-mix(in srgb, var(--color-secondary-500) 10%, transparent),
+		inset 0 0 12px color-mix(in srgb, var(--color-secondary-500) 3%, transparent);
+}
+
+.nav-rail .active-nav-tile svg {
+	filter: drop-shadow(0 0 6px color-mix(in srgb, var(--color-secondary-500) 50%, transparent));
+}
+
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 0.5rem 1rem;
+	font-size: 0.875rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	border-radius: 4px;
+	transition: all 0.15s ease;
+	cursor: pointer;
+}
+.btn:active:not(:disabled) {
+	transform: scale(0.97);
+}
+.btn-cyan {
+	background: var(--color-primary-500);
+	color: var(--color-primary-950);
+}
+.btn-cyan:hover {
+	background: var(--color-primary-400);
+	box-shadow: 0 0 12px color-mix(in srgb, var(--color-primary-300) 25%, transparent);
+}
+.btn-yellow {
+	background: var(--color-secondary-500);
+	color: var(--color-secondary-950);
+	box-shadow: 0 0 12px color-mix(in srgb, var(--color-secondary-500) 25%, transparent);
+}
+.btn-yellow:hover {
+	background: var(--color-secondary-400);
+	box-shadow: 0 0 20px color-mix(in srgb, var(--color-secondary-500) 40%, transparent);
+}
+
+.glass-panel {
+	background: color-mix(in srgb, var(--color-surface-800) 70%, transparent);
+	border: 1px solid color-mix(in srgb, var(--color-surface-600) 30%, transparent);
+	backdrop-filter: blur(12px);
+	border-radius: 6px;
+}
+
+.icon-glow-paldium svg {
+	filter: drop-shadow(0 0 6px color-mix(in srgb, var(--color-primary-300) 50%, transparent));
+}
+.icon-glow-ancient svg {
+	filter: drop-shadow(0 0 6px color-mix(in srgb, var(--color-tertiary-400) 50%, transparent));
+}
+.icon-glow-toxic svg {
+	filter: drop-shadow(0 0 6px color-mix(in srgb, var(--color-success-400) 50%, transparent));
+}
+
+.auto-save-indicator {
+	position: absolute;
+	right: 0.5rem;
+	top: 0.25rem;
+	display: flex;
+	flex-shrink: 0;
+	flex-direction: row;
+	align-items: center;
+	background: color-mix(in srgb, var(--color-surface-800) 90%, transparent);
+	border: 1px solid color-mix(in srgb, var(--color-surface-700) 50%, transparent);
+	border-radius: 999px;
+	padding: 0.5rem 1rem;
+	backdrop-filter: blur(8px);
+	gap: 0.5rem;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.auto-save-indicator span {
+	font-size: 0.875rem;
+	font-weight: 700;
+	color: var(--color-secondary-400);
+}
+
 .editor-wrapper {
 	height: calc(100vh - 72px);
 	--jse-theme: dark;
+	--jse-theme-color: var(--color-surface-900);
+	--jse-theme-color-highlight: var(--color-primary-400);
+	--jse-background-color: var(--color-surface-900);
+	--jse-text-color: var(--color-surface-100);
+	--jse-text-color-inverse: var(--color-surface-600);
 
-	/* over all fonts, sizes, and colors */
-	--jse-theme-color: #171717;
-	--jse-theme-color-highlight: #467cd2;
-	--jse-background-color: #1e1e1e;
-	--jse-text-color: #d4d4d4;
-	--jse-text-color-inverse: #4d4d4d;
+	--jse-main-border: 1px solid var(--color-surface-700);
+	--jse-menu-color: var(--color-surface-50);
+	--jse-modal-background: var(--color-surface-800);
+	--jse-modal-overlay-background: rgba(0, 0, 0, 0.6);
+	--jse-modal-code-background: var(--color-surface-800);
 
-	/* main, menu, modal */
-	--jse-main-border: 1px solid #4f4f4f;
-	--jse-menu-color: #fff;
-	--jse-modal-background: #2f2f2f;
-	--jse-modal-overlay-background: rgba(0, 0, 0, 0.5);
-	--jse-modal-code-background: #2f2f2f;
-
-	/* tooltip in text mode */
 	--jse-tooltip-color: var(--jse-text-color);
-	--jse-tooltip-background: #4b4b4b;
-	--jse-tooltip-border: 1px solid #737373;
+	--jse-tooltip-background: var(--color-surface-700);
+	--jse-tooltip-border: 1px solid var(--color-surface-600);
 	--jse-tooltip-action-button-color: inherit;
-	--jse-tooltip-action-button-background: #737373;
+	--jse-tooltip-action-button-background: var(--color-surface-600);
 
-	/* panels: navigation bar, gutter, search box */
-	--jse-panel-background: #333333;
-	--jse-panel-background-border: 1px solid #464646;
+	--jse-panel-background: var(--color-surface-800);
+	--jse-panel-background-border: 1px solid var(--color-surface-700);
 	--jse-panel-color: var(--jse-text-color);
-	--jse-panel-color-readonly: #737373;
-	--jse-panel-border: 1px solid #3c3c3c;
-	--jse-panel-button-color-highlight: #e5e5e5;
-	--jse-panel-button-background-highlight: #464646;
+	--jse-panel-color-readonly: var(--color-surface-500);
+	--jse-panel-border: 1px solid var(--color-surface-700);
+	--jse-panel-button-color-highlight: var(--color-surface-50);
+	--jse-panel-button-background-highlight: var(--color-surface-600);
 
-	/* navigation-bar */
-	--jse-navigation-bar-background: #656565;
-	--jse-navigation-bar-background-highlight: #7e7e7e;
+	--jse-navigation-bar-background: var(--color-surface-700);
+	--jse-navigation-bar-background-highlight: var(--color-surface-600);
 	--jse-navigation-bar-dropdown-color: var(--jse-text-color);
 
-	/* context menu */
-	--jse-context-menu-background: #4b4b4b;
-	--jse-context-menu-background-highlight: #595959;
-	--jse-context-menu-separator-color: #595959;
+	--jse-context-menu-background: var(--color-surface-800);
+	--jse-context-menu-background-highlight: var(--color-surface-700);
+	--jse-context-menu-separator-color: var(--color-surface-600);
 	--jse-context-menu-color: var(--jse-text-color);
-	--jse-context-menu-pointer-background: #737373;
-	--jse-context-menu-pointer-background-highlight: #818181;
+	--jse-context-menu-pointer-background: var(--color-surface-600);
+	--jse-context-menu-pointer-background-highlight: var(--color-surface-500);
 	--jse-context-menu-pointer-color: var(--jse-context-menu-color);
 
-	/* contents: json key and values */
-	--jse-key-color: #9cdcfe;
+	--jse-key-color: var(--color-primary-300);
 	--jse-value-color: var(--jse-text-color);
-	--jse-value-color-number: #b5cea8;
-	--jse-value-color-boolean: #569cd6;
-	--jse-value-color-null: #569cd6;
-	--jse-value-color-string: #ce9178;
-	--jse-value-color-url: #ce9178;
-	--jse-delimiter-color: #949494;
-	--jse-edit-outline: 2px solid var(--jse-text-color);
+	--jse-value-color-number: var(--color-tertiary-400);
+	--jse-value-color-boolean: var(--color-primary-400);
+	--jse-value-color-null: var(--color-primary-500);
+	--jse-value-color-string: var(--color-warning-400);
+	--jse-value-color-url: var(--color-warning-400);
+	--jse-delimiter-color: var(--color-surface-400);
+	--jse-edit-outline: 1px solid var(--color-primary-400);
 
-	/* contents: selected or hovered */
-	--jse-selection-background-color: #464646;
-	--jse-selection-background-inactive-color: #333333;
-	--jse-hover-background-color: #343434;
-	--jse-active-line-background-color: rgba(255, 255, 255, 0.06);
-	--jse-search-match-background-color: #343434;
+	--jse-selection-background-color: var(--color-surface-700);
+	--jse-selection-background-inactive-color: var(--color-surface-800);
+	--jse-hover-background-color: var(--color-surface-700);
+	--jse-active-line-background-color: color-mix(in srgb, var(--color-primary-300) 3%, transparent);
+	--jse-search-match-background-color: var(--color-surface-700);
 
-	/* contents: section of collapsed items in an array */
-	--jse-collapsed-items-background-color: #333333;
-	--jse-collapsed-items-selected-background-color: #565656;
-	--jse-collapsed-items-link-color: #b2b2b2;
-	--jse-collapsed-items-link-color-highlight: #ec8477;
+	--jse-collapsed-items-background-color: var(--color-surface-800);
+	--jse-collapsed-items-selected-background-color: var(--color-surface-700);
+	--jse-collapsed-items-link-color: var(--color-surface-300);
+	--jse-collapsed-items-link-color-highlight: var(--color-secondary-400);
 
-	/* contents: highlighting of search results */
-	--jse-search-match-color: #724c27;
-	--jse-search-match-outline: 1px solid #966535;
-	--jse-search-match-active-color: #9f6c39;
-	--jse-search-match-active-outline: 1px solid #bb7f43;
+	--jse-search-match-color: rgba(230, 170, 0, 0.3);
+	--jse-search-match-outline: 1px solid rgba(230, 170, 0, 0.5);
+	--jse-search-match-active-color: rgba(230, 170, 0, 0.4);
+	--jse-search-match-active-outline: 1px solid rgba(230, 170, 0, 0.6);
 
-	/* contents: inline tags inside the JSON document */
-	--jse-tag-background: #444444;
-	--jse-tag-color: #bdbdbd;
+	--jse-tag-background: var(--color-surface-700);
+	--jse-tag-color: var(--color-surface-200);
 
-	/* contents: table */
-	--jse-table-header-background: #333333;
-	--jse-table-header-background-highlight: #424242;
-	--jse-table-row-odd-background: rgba(255, 255, 255, 0.1);
+	--jse-table-header-background: var(--color-surface-800);
+	--jse-table-header-background-highlight: var(--color-surface-700);
+	--jse-table-row-odd-background: rgba(255, 255, 255, 0.03);
 
-	/* controls in modals: inputs, buttons, and `a` */
-	--jse-input-background: #3d3d3d;
+	--jse-input-background: var(--color-surface-900);
 	--jse-input-border: var(--jse-main-border);
-	--jse-button-background: #808080;
-	--jse-button-background-highlight: #7a7a7a;
-	--jse-button-color: #e0e0e0;
-	--jse-button-secondary-background: #494949;
-	--jse-button-secondary-background-highlight: #5d5d5d;
-	--jse-button-secondary-background-disabled: #9d9d9d;
+	--jse-button-background: var(--color-surface-600);
+	--jse-button-background-highlight: var(--color-surface-500);
+	--jse-button-color: var(--color-surface-50);
+	--jse-button-secondary-background: var(--color-surface-800);
+	--jse-button-secondary-background-highlight: var(--color-surface-700);
+	--jse-button-secondary-background-disabled: var(--color-surface-600);
 	--jse-button-secondary-color: var(--jse-text-color);
-	--jse-a-color: #55abff;
-	--jse-a-color-highlight: #4387c9;
+	--jse-a-color: var(--color-primary-400);
+	--jse-a-color-highlight: var(--color-primary-300);
 
-	/* svelte-select */
-	--jse-svelte-select-background: #3d3d3d;
-	--jse-svelte-select-border: 1px solid #4f4f4f;
-	--list-background: #3d3d3d;
-	--item-hover-bg: #505050;
-	--multi-item-bg: #5b5b5b;
-	--input-color: #d4d4d4;
-	--multi-clear-bg: #8a8a8a;
-	--multi-item-clear-icon-color: #d4d4d4;
-	--multi-item-outline: 1px solid #696969;
-	--list-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.4);
+	--jse-svelte-select-background: var(--color-surface-800);
+	--jse-svelte-select-border: 1px solid var(--color-surface-700);
+	--list-background: var(--color-surface-800);
+	--item-hover-bg: var(--color-surface-700);
+	--multi-item-bg: var(--color-surface-700);
+	--input-color: var(--color-surface-100);
+	--multi-clear-bg: var(--color-surface-600);
+	--multi-item-clear-icon-color: var(--color-surface-100);
+	--multi-item-outline: 1px solid var(--color-surface-600);
+	--list-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 
-	/* color picker */
-	--jse-color-picker-background: #656565;
-	--jse-color-picker-border-box-shadow: #8c8c8c 0 0 0 1px;
+	--jse-color-picker-background: var(--color-surface-700);
+	--jse-color-picker-border-box-shadow: var(--color-surface-600) 0 0 0 1px;
 }
 
 /* Prose styles for markdown guides */

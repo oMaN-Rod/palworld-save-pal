@@ -37,13 +37,11 @@
 	let expanded = persistedState('navbar.expanded', false);
 
 	const activeTile = $derived.by(() => {
-		if (page.url.pathname.startsWith('/edit')) return 'edit';
 		if (page.url.pathname.startsWith('/editor')) return 'editor';
 		if (page.url.pathname.startsWith('/tools')) return 'tools';
 		if (page.url.pathname.startsWith('/file')) return 'file';
 		if (page.url.pathname.startsWith('/upload')) return 'upload';
 		if (page.url.pathname.startsWith('/worldmap')) return 'map';
-		if (page.url.pathname.startsWith('/about')) return 'about';
 		if (page.url.pathname.startsWith('/presets')) return 'presets';
 		if (page.url.pathname.startsWith('/gps')) return 'gps';
 		if (page.url.pathname.startsWith('/ups')) return 'ups';
@@ -82,6 +80,8 @@
 	value={activeTile}
 	onValueChange={() => appState.saveState()}
 	expanded={expanded.current}
+	background="bg-surface-900"
+	classes="nav-rail"
 >
 	{#snippet header()}
 		<Navigation.Tile
@@ -112,7 +112,7 @@
 			title={m.edit()}
 			id="edit"
 			href="/edit"
-			active="bg-secondary-500"
+			active="active-nav-tile"
 		>
 			<Pencil />
 		</Navigation.Tile>
@@ -122,7 +122,7 @@
 				title={m.file({ count: 2 })}
 				id="file"
 				href="/file"
-				active="bg-secondary-500"
+				active="active-nav-tile"
 			>
 				<File />
 			</Navigation.Tile>
@@ -132,7 +132,7 @@
 				title={m.transfer({ count: 1 })}
 				id="upload"
 				href="/upload"
-				active="bg-secondary-500"
+				active="active-nav-tile"
 			>
 				{#if appState.saveFile}
 					<Download />
@@ -146,7 +146,7 @@
 			title={m.map()}
 			id="map"
 			href="/worldmap"
-			active="bg-secondary-500"
+			active="active-nav-tile"
 		>
 			<Map />
 		</Navigation.Tile>
@@ -155,7 +155,7 @@
 			title={c.presets}
 			id="presets"
 			href="/presets"
-			active="bg-secondary-500"
+			active="active-nav-tile"
 		>
 			<FileHeart />
 		</Navigation.Tile>
@@ -165,7 +165,7 @@
 				title={m.gps()}
 				id="gps"
 				href="/gps"
-				active="bg-secondary-500"
+				active="active-nav-tile"
 			>
 				<Globe />
 			</Navigation.Tile>
@@ -175,7 +175,7 @@
 			title={m.ups()}
 			id="ups"
 			href="/ups"
-			active="bg-secondary-500"
+			active="active-nav-tile"
 		>
 			<Database />
 		</Navigation.Tile>
@@ -185,7 +185,7 @@
 				title={m.debug()}
 				id="debug"
 				href="/debug"
-				active="bg-secondary-500"
+				active="active-nav-tile"
 			>
 				<Bug />
 			</Navigation.Tile>
@@ -195,7 +195,7 @@
 			title="Servers"
 			id="servers"
 			href="/servers"
-			active="bg-secondary-500"
+			active="active-nav-tile"
 		>
 			<Server />
 		</Navigation.Tile>
@@ -204,7 +204,7 @@
 			title={m.editor()}
 			id="editor"
 			href="/editor"
-			active="bg-secondary-500"
+			active="active-nav-tile"
 		>
 			<NotebookPen />
 		</Navigation.Tile>
@@ -213,7 +213,7 @@
 			title={m.tools()}
 			id="tools"
 			href="/tools"
-			active="bg-secondary-500"
+			active="active-nav-tile"
 		>
 			<Wrench />
 		</Navigation.Tile>
@@ -222,7 +222,7 @@
 			title={m.docs()}
 			id="docs"
 			href="/docs"
-			active="bg-secondary-500"
+			active="active-nav-tile"
 		>
 			<BookOpen />
 		</Navigation.Tile>
@@ -231,7 +231,7 @@
 			title={m.about()}
 			id="about"
 			href="/about"
-			active="bg-secondary-500"
+			active="active-nav-tile"
 		>
 			<Info />
 		</Navigation.Tile>
