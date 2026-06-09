@@ -1,4 +1,11 @@
 [data-theme='frontier'] {
+	--color-text-muted: color-mix(in srgb, var(--color-surface-400) 80%, var(--color-primary-300) 20%);
+	--color-text-muted-foreground: color-mix(
+		in srgb,
+		var(--color-surface-500) 72%,
+		var(--color-tertiary-400) 28%
+	);
+
 	/* ── Surface: ultra-deep teal-tinted blacks ── */
 	--color-surface-50: rgb(232, 240, 248);
 	--color-surface-100: rgb(205, 216, 233);

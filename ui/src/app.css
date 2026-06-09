@@ -241,6 +241,16 @@ body {
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
+@layer utilities {
+	.text-muted {
+		color: var(--color-text-muted);
+	}
+
+	.text-muted-foreground {
+		color: var(--color-text-muted-foreground);
+	}
+}
+
 .card {
 	background: color-mix(in srgb, var(--color-surface-800) 75%, transparent);
 	border: 1px solid color-mix(in srgb, var(--color-surface-600) 35%, transparent);

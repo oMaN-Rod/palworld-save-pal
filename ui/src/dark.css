@@ -4,6 +4,13 @@
  * in app.css; a theme only swaps the color palette below.
  */
 [data-theme='dark'] {
+	--color-text-muted: color-mix(in srgb, var(--color-surface-400) 82%, var(--color-primary-400) 18%);
+	--color-text-muted-foreground: color-mix(
+		in srgb,
+		var(--color-surface-500) 76%,
+		var(--color-secondary-400) 24%
+	);
+
 	/* ── Primary: blue ── */
 	--color-primary-50: rgb(211, 229, 255);
 	--color-primary-100: rgb(169, 206, 253);
