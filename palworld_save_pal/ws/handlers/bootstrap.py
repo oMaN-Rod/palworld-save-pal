@@ -89,6 +89,7 @@ from palworld_save_pal.ws.messages import (
     SelectSaveMessage,
     UpdateSettingsMessage,
     AddGpsPalMessage,
+    CloneGpsPalMessage,
     # UPS Messages
     GetUpsPalsMessage,
     GetUpsAllFilteredIdsMessage,
@@ -201,6 +202,7 @@ HANDLER_REGISTRY = [
     (MessageType.UPDATE_LAB_RESEARCH, UpdateLabResearchMessage, lab_research_handler.update_lab_research_handler),
     # GPS
     (MessageType.ADD_GPS_PAL, AddGpsPalMessage, gps_handler.add_gps_pal_handler),
+    (MessageType.CLONE_GPS_PAL, CloneGpsPalMessage, gps_handler.clone_gps_pal_handler),
     (MessageType.DELETE_GPS_PALS, DeleteGpsPalsMessage, gps_handler.delete_gps_pals_handler),
     (MessageType.REQUEST_GPS, RequestGpsMessage, gps_handler.request_gps_handler),
     # Lazy loading

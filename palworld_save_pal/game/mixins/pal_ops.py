@@ -243,15 +243,19 @@ class PalOpsMixin:
         self.invalidate_performance_caches()
         return new_pal
 
-    def clone_dps_pal(self, pal: PalDTO) -> Optional[Pal]:
+    def clone_dps_pal(self, pal: PalDTO) -> Optional[Tuple[int, Pal]]:
         player = self._players.get(pal.owner_uid)
         if not player:
             raise ValueError(f"Player {pal.owner_uid} not found in the save file.")
 
-        slot_idx, new_pal = player.clone_dps_pal(pal)
-        if new_pal is None:
+        res = player.clone_dps_pal(pal)
+        if not res:
             return
+        slot_idx, new_pal = res
         return slot_idx, new_pal
+
+    def clone_gps_pal(self, pal: PalDTO) -> Optional[Tuple[int, Pal]]:
+        return self.add_gps_pal_from_dto(pal)
 
     def clone_guild_pal(
         self, guild_id: UUID, base_id: UUID, pal: PalDTO

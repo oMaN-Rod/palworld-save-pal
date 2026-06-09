@@ -1,5 +1,6 @@
 """Extended integration tests for PalOpsMixin using real save data."""
 
+from unittest.mock import MagicMock
 from uuid import UUID, uuid4
 
 import pytest
@@ -143,6 +144,43 @@ class TestAddGpsPal:
                 character_id="Lambball",
                 nickname="Test",
             )
+
+
+class TestCloneGpsPal:
+    def test_clone_gps_pal_adds_new_pal(self, sm_with_gps):
+        source_idx = next(iter(sm_with_gps._gps_pals.keys()))
+        source = sm_with_gps._gps_pals[source_idx]
+        initial_count = len(sm_with_gps._gps_pals)
+
+        result = sm_with_gps.clone_gps_pal(_make_pal_dto(source))
+
+        assert result is not None
+        slot_idx, new_pal = result
+        assert isinstance(new_pal, Pal)
+        assert len(sm_with_gps._gps_pals) == initial_count + 1
+        assert sm_with_gps._gps_pals[slot_idx] is new_pal
+
+    def test_clone_gps_pal_gets_new_instance_id(self, sm_with_gps):
+        source_idx = next(iter(sm_with_gps._gps_pals.keys()))
+        source = sm_with_gps._gps_pals[source_idx]
+
+        slot_idx, new_pal = sm_with_gps.clone_gps_pal(_make_pal_dto(source))
+
+        assert new_pal.instance_id != source.instance_id
+        assert slot_idx != source_idx
+
+    def test_clone_gps_pal_preserves_character(self, sm_with_gps):
+        source_idx = next(iter(sm_with_gps._gps_pals.keys()))
+        source = sm_with_gps._gps_pals[source_idx]
+
+        _, new_pal = sm_with_gps.clone_gps_pal(_make_pal_dto(source))
+
+        assert new_pal.character_id == source.character_id
+
+    def test_clone_gps_pal_without_gps_loaded_raises(self, fresh_save_manager):
+        # The GPS-loaded guard must fire before the DTO is ever read.
+        with pytest.raises(ValueError, match="GPS Gvas file is not initialized"):
+            fresh_save_manager.clone_gps_pal(MagicMock())
 
 
 class TestDeleteGpsPals:

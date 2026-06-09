@@ -216,6 +216,15 @@ class CloneDpsPalMessage(BaseMessage):
     data: ClonePalData
 
 
+class CloneGpsPalData(BaseModel):
+    pal: PalDTO
+
+
+class CloneGpsPalMessage(BaseMessage):
+    type: str = MessageType.CLONE_GPS_PAL.value
+    data: CloneGpsPalData
+
+
 class DeletePalsData(BaseModel):
     pal_indexes: Optional[List[int]] = None
     pal_ids: Optional[List[UUID]] = None
@@ -921,6 +930,7 @@ class LoadSourceSaveData(BaseModel):
     type: str  # "steam" or "gamepass"
     path: str
     role: str = "source"  # "source" or "target"
+
 
 class LoadSourceSaveMessage(BaseMessage):
     type: str = MessageType.LOAD_SOURCE_SAVE.value

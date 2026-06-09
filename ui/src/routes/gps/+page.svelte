@@ -383,7 +383,7 @@
 				clonedPal.nickname || clonedPal.name || clonedPal.character_id,
 				appState.settings.clone_prefix
 			);
-			send(MessageType.CLONE_DPS_PAL, {
+			send(MessageType.CLONE_GPS_PAL, {
 				pal: clonedPal
 			});
 		}

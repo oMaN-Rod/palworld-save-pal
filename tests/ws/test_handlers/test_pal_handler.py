@@ -5,12 +5,40 @@ from uuid import uuid4
 
 import pytest
 
+from palworld_save_pal.dto.pal import PalDTO
+from palworld_save_pal.game.enum import PalGender
 from palworld_save_pal.ws.messages import (
     DeletePalsData,
     DeletePalsMessage,
     HealPalsMessage,
     MessageType,
 )
+
+
+def _make_pal_dto() -> PalDTO:
+    return PalDTO(
+        instance_id=uuid4(),
+        owner_uid=uuid4(),
+        character_id="Lambball",
+        is_lucky=False,
+        is_boss=False,
+        gender=PalGender.FEMALE,
+        rank_hp=0, rank_attack=0, rank_defense=0, rank_craftspeed=0,
+        talent_hp=50, talent_shot=50, talent_defense=50,
+        rank=1, level=10, exp=0,
+        nickname="TestPal",
+        is_tower=False,
+        storage_id=uuid4(),
+        stomach=300.0,
+        storage_slot=0,
+        learned_skills=[], active_skills=[], passive_skills=[],
+        hp=5000, max_hp=5000,
+        group_id=uuid4(),
+        sanity=100.0,
+        work_suitability={},
+        is_sick=False,
+        friendship_point=0,
+    )
 
 
 class MockWebSocket:
@@ -164,6 +192,30 @@ class TestAddPalHandlerEdgeCases:
 
         assert len(ws.sent) == 1
         assert ws.sent[0]["type"] == MessageType.WARNING.value
+
+
+class TestCloneDpsPalHandler:
+    @pytest.mark.asyncio
+    async def test_clone_returns_none_does_not_crash(self, ws, mock_app_state):
+        # When the player has no DPS gvas, clone_dps_pal returns None. The
+        # handler must not try to unpack it (regression: TypeError on unpack).
+        from palworld_save_pal.ws.handlers.pal_handler import clone_dps_pal_handler
+        from palworld_save_pal.ws.messages import CloneDpsPalMessage, ClonePalData
+
+        mock_app_state.save_file.clone_dps_pal.return_value = None
+
+        pal = _make_pal_dto()
+        with patch(
+            "palworld_save_pal.ws.handlers.pal_handler.get_app_state",
+            return_value=mock_app_state,
+        ):
+            msg = CloneDpsPalMessage(
+                data=ClonePalData(pal=pal, player_id=pal.owner_uid)
+            )
+            await clone_dps_pal_handler(msg, ws)
+
+        assert len(ws.sent) == 1
+        assert "error" in ws.sent[0]["data"]
 
 
 class TestHealAllPalsHandler:

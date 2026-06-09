@@ -161,7 +161,16 @@ async def clone_dps_pal_handler(message: ClonePalMessage, ws: WebSocket):
     app_state = get_app_state()
     save_file = app_state.save_file
 
-    slot_idx, new_pal = save_file.clone_dps_pal(pal)
+    res = save_file.clone_dps_pal(pal)
+    if not res:
+        # No DPS gvas for this player, or no empty DPS slots available.
+        response = build_response(
+            MessageType.ADD_DPS_PAL,
+            {"error": "Failed to clone pal. No DPS storage or available slots."},
+        )
+        await ws.send_json(response)
+        return
+    slot_idx, new_pal = res
     data = {
         "player_id": pal.owner_uid if pal.owner_uid else None,
         "pal": new_pal,

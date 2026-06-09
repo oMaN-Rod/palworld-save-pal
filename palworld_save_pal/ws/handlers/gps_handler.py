@@ -3,6 +3,7 @@ from fastapi import WebSocket
 from palworld_save_pal.state import get_app_state
 from palworld_save_pal.ws.messages import (
     AddGpsPalMessage,
+    CloneGpsPalMessage,
     DeleteGpsPalsMessage,
     RequestGpsMessage,
     MessageType,
@@ -69,6 +70,30 @@ async def add_gps_pal_handler(message: AddGpsPalMessage, ws: WebSocket):
         await ws.send_json(response)
         return
     new_pal, slot_idx = res
+    data: Dict[str, Any] = {"pal": new_pal, "index": slot_idx}
+    response = build_response(MessageType.ADD_GPS_PAL, data)
+    await ws.send_json(response)
+
+
+async def clone_gps_pal_handler(message: CloneGpsPalMessage, ws: WebSocket):
+    pal = message.data.pal
+
+    app_state = get_app_state()
+    save_file = app_state.save_file
+
+    if not save_file:
+        return
+
+    res = save_file.clone_gps_pal(pal)
+    if not res:
+        # Failed to clone, possibly due to no available slots
+        response = build_response(
+            MessageType.ADD_GPS_PAL,
+            {"error": "Failed to clone pal. No available slots."},
+        )
+        await ws.send_json(response)
+        return
+    slot_idx, new_pal = res
     data: Dict[str, Any] = {"pal": new_pal, "index": slot_idx}
     response = build_response(MessageType.ADD_GPS_PAL, data)
     await ws.send_json(response)
