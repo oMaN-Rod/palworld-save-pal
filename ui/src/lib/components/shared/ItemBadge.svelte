@@ -106,13 +106,13 @@
 	const itemClass = $derived.by(() => {
 		switch (item?.details.rarity) {
 			case Rarity.Uncommon:
-				return 'bg-linear-to-tl from-green-500/50';
+				return 'bg-linear-to-tl from-green-200/50 to-green-800/75';
 			case Rarity.Rare:
-				return 'bg-linear-to-tl from-blue-500/50';
+				return 'bg-linear-to-tl from-blue-200/50 to-blue-800/75';
 			case Rarity.Epic:
-				return 'bg-linear-to-tl from-purple-500/50';
+				return 'bg-linear-to-tl from-purple-200/50 to-purple-800/75';
 			case Rarity.Legendary:
-				return 'bg-linear-to-tl from-yellow-500/50';
+				return 'bg-linear-to-tl from-yellow-200/50 to-yellow-700/75';
 			default:
 				return '';
 		}
@@ -120,13 +120,13 @@
 	const itemPopupHeaderClass = $derived.by(() => {
 		switch (item?.details.rarity) {
 			case Rarity.Uncommon:
-				return 'bg-linear-to-tl from-green-500/50 to-green-800/50 text-green-300 border-green-500';
+				return 'bg-linear-to-tl from-green-200/50 to-green-800/75 text-green-300 border-green-500';
 			case Rarity.Rare:
-				return 'bg-linear-to-tl from-blue-500/50 to-blue-800/50 text-blue-300 border-blue-500';
+				return 'bg-linear-to-tl from-blue-200/50 to-blue-800/75 text-blue-300 border-blue-500';
 			case Rarity.Epic:
-				return 'bg-linear-to-tl from-purple-500/50 to-purple-800/50 text-purple-300 border-purple-500';
+				return 'bg-linear-to-tl from-purple-200/50 to-purple-800/75 text-purple-300 border-purple-500';
 			case Rarity.Legendary:
-				return 'bg-linear-to-tl from-yellow-500/50 to-yellow-800/50 text-yellow-300 border-yellow-500';
+				return 'bg-linear-to-tl from-yellow-200/50 to-yellow-700/75 text-yellow-300 border-yellow-500';
 			default:
 				return 'bg-surface-800';
 		}

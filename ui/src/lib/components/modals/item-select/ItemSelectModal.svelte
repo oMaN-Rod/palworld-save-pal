@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button, Card, Combobox, Input, Tooltip } from '$components/ui';
+	import { Button, Card, VirtualCombobox, Input, Tooltip } from '$components/ui';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 	import { ASSET_DATA_PATH } from '$lib/constants';
@@ -152,7 +152,7 @@
 	});
 
 	const cardClass = $derived(
-		isEgg ? 'w-full max-w-[1200px] min-w-[320px]' : 'w-full max-w-[600px] min-w-[320px]'
+		isEgg ? 'w-full max-w-[1200px] min-w-[600px]' : 'w-full w-[600px]'
 	);
 	const controlsClass = $derived(isEgg ? 'grid grid-cols-[570px_1fr] gap-2' : 'flex w-full');
 
@@ -182,19 +182,19 @@
 
 {#snippet noIcon(typeA: ItemTypeA, typeB: ItemTypeB)}
 	{#if typeA === ItemTypeA.Weapon}
-		<Sword class="h-8 w-8"></Sword>
+		<Sword class="h-12 w-12"></Sword>
 	{:else if typeA === ItemTypeA.Armor && typeB === ItemTypeB.Shield}
-		<Shield class="h-8 w-8"></Shield>
+		<Shield class="h-12 w-12"></Shield>
 	{:else if typeA === ItemTypeA.Blueprint}
-		<Scroll class="h-8 w-8"></Scroll>
+		<Scroll class="h-12 w-12"></Scroll>
 	{:else if typeA === ItemTypeA.Accessory}
-		<Gem class="h-8 w-8"></Gem>
+		<Gem class="h-12 w-12"></Gem>
 	{:else if typeA === ItemTypeA.Material}
-		<Cuboid class="h-8 w-8"></Cuboid>
+		<Cuboid class="h-12 w-12"></Cuboid>
 	{:else if typeA === ItemTypeA.Food}
-		<Apple class="h-8 w-8"></Apple>
+		<Apple class="h-12 w-12"></Apple>
 	{:else}
-		<Cuboid class="h-8 w-8"></Cuboid>
+		<Cuboid class="h-12 w-12"></Cuboid>
 	{/if}
 {/snippet}
 
@@ -204,7 +204,7 @@
 		<div class={controlsClass}>
 			<div class="w-full">
 				<div class="flex flex-row items-center">
-					<Combobox options={selectOptions} bind:value={itemId}>
+					<VirtualCombobox options={selectOptions} bind:value={itemId}>
 						{#snippet selectOption(option)}
 							{@const item = itemsData.getByKey(option.value as string)}
 							{#await getItemIcon(option.value as string) then icon}
@@ -212,16 +212,16 @@
 									{#if icon}
 										<div
 											class={cn(
-												'mr-2 flex items-center justify-center',
+												'flex items-center justify-center',
 												getBackgroundColor(option.value as string, items)
 											)}
 										>
-											<img src={icon} alt={option.label} class="h-8 w-8" />
+											<img src={icon} alt={option.label} class="h-12 w-12" />
 										</div>
 									{:else}
 										<div
 											class={cn(
-												'mr-2 flex items-center justify-center',
+												'flex items-center justify-center',
 												getBackgroundColor(option.value as string, items)
 											)}
 										>
@@ -229,13 +229,11 @@
 										</div>
 									{/if}
 									<div class="flex flex-col">
-										<div class="flex space-x-4">
-											<span class="grow items-center">{option.label}</span>
-											<span class="text-xs">{getItemTier(option.value as string, items)}</span>
-										</div>
+										<span class="font-bold">{option.label}</span>
 
-										<span class="text-xs">{item?.info.description}</span>
+										<span class="text-xs text-muted">{item?.info.description}</span>
 									</div>
+									<span class="text-xs self-start">{getItemTier(option.value as string, items)}</span>
 								</div>
 							{:catch}
 								<div class="grid grid-cols-[auto_1fr_auto]">
@@ -252,7 +250,7 @@
 								</div>
 							{/await}
 						{/snippet}
-					</Combobox>
+					</VirtualCombobox>
 					{#if !isEgg && selectedItemMaxStackCount && selectedItemMaxStackCount > 1}
 						<Input
 							labelClass="w-1/4 ml-1"

@@ -20,6 +20,7 @@ import Nuke from './icons/Nuke.svelte';
 import Spinner from './spinner/Spinner.svelte';
 import Stopwatch from './stopwatch/Stopwatch.svelte';
 import Toast from './toast/Toast.svelte';
+import VirtualCombobox from './virtual-combobox/VirtualCombobox.svelte';
 
 export {
 	Button,
@@ -43,5 +44,6 @@ export {
 	Stopwatch,
 	Toast,
 	Tooltip,
-	TooltipButton
+	TooltipButton,
+	VirtualCombobox
 };
