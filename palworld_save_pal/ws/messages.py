@@ -494,12 +494,12 @@ class RequestGpsMessage(BaseModel):
 
 
 class AddGpsPalMessage(BaseMessage):
-    type: str = MessageType.ADD_DPS_PAL.value
+    type: str = MessageType.ADD_GPS_PAL.value
     data: AddPalData
 
 
 class DeleteGpsPalsMessage(BaseMessage):
-    type: str = MessageType.DELETE_DPS_PALS.value
+    type: str = MessageType.DELETE_GPS_PALS.value
     data: DeletePalsData
 
 

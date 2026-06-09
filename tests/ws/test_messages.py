@@ -3,11 +3,13 @@ from uuid import UUID, uuid4
 import pytest
 
 from palworld_save_pal.ws.messages import (
+    AddGpsPalMessage,
     AddPalData,
     AddPalMessage,
     BaseMessage,
     ClonePalData,
     ClonePalMessage,
+    DeleteGpsPalsMessage,
     DeletePalsData,
     DeletePalsMessage,
     MessageType,
@@ -122,3 +124,15 @@ class TestClonePalData:
         )
         data = ClonePalData(pal=pal)
         assert data.pal.character_id == "Lambball"
+
+
+class TestGpsMessageDefaults:
+    def test_add_gps_pal_message_default_type(self):
+        msg = AddGpsPalMessage(
+            data=AddPalData(character_id="Lambball", nickname="Test")
+        )
+        assert msg.type == MessageType.ADD_GPS_PAL.value
+
+    def test_delete_gps_pals_message_default_type(self):
+        msg = DeleteGpsPalsMessage(data=DeletePalsData(pal_indexes=[0]))
+        assert msg.type == MessageType.DELETE_GPS_PALS.value
