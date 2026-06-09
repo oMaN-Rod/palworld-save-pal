@@ -977,27 +977,39 @@
 				<!-- Pager -->
 				{#if activeTab !== 'lab'}
 					<div id="guild-pager" class="mb-4 flex items-center justify-center space-x-4">
-						<button class="rounded-sm px-4 py-2 font-bold" onclick={decrementPage}>
-							<img src={staticIcons.qIcon} alt={m.previous()} class="h-10 w-10" />
-						</button>
+						<Button
+							class="rounded-full p-0! font-bold"
+							variant="ghost"
+							size="md"
+							onclick={decrementPage}
+						>
+							<img src={staticIcons.qIcon} alt="Previous" class="h-10 w-10" />
+						</Button>
 
 						<div class="flex space-x-2">
 							{#each visiblePages as page}
 								<TooltipButton
-									class="h-8 w-8 rounded-full {page === currentPage
-										? 'bg-primary-500 text-white'
+									buttonClass="h-8 w-8 rounded-full {page === currentPage
+										? 'bg-primary-500! text-white'
 										: 'bg-surface-800 hover:bg-surface-600'}"
 									onclick={() => (currentPage = page)}
-									popupLabel={`${c.base} ${Object.entries(guildBases!)[page - 1]?.[0]}`}
+									popupLabel={`Box ${page}`}
+									variant="ghost"
+									size="md"
 								>
-									{page}
+									{Math.floor(page)}
 								</TooltipButton>
 							{/each}
 						</div>
 
-						<button class="rounded-sm px-4 py-2 font-bold" onclick={incrementPage}>
-							<img src={staticIcons.eIcon} alt={m.next()} class="h-10 w-10" />
-						</button>
+						<Button
+							class="rounded-sm p-0! font-bold"
+							variant="ghost"
+							size="md"
+							onclick={incrementPage}
+						>
+							<img src={staticIcons.eIcon} alt="Next" class="h-10 w-10" />
+						</Button>
 					</div>
 				{/if}
 				{#if activeTab == 'pals'}
