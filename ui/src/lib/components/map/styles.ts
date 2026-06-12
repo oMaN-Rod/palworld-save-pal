@@ -1,6 +1,12 @@
+import type { Base } from '$types';
 import { assetLoader } from '$utils';
 import type { Map } from 'ol';
-import { Icon, Style } from 'ol/style';
+import type { FeatureLike } from 'ol/Feature';
+import { Fill, Icon, Stroke, Style } from 'ol/style';
+import CircleStyle from 'ol/style/Circle';
+import { createIconStyle, createStyle } from 'svelte-openlayers';
+import { SCALE, TRANSFORM_A } from './utils';
+import compass from '$lib/assets/img/compass.webp';
 
 const ASSET_DATA_PATH = '/src/lib/assets';
 
@@ -24,6 +30,7 @@ export const mapImg = {
 	meteor: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_16.webp`),
 	baseCamp: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_camp.webp`),
 	dungeonLarge: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_dungeon.webp`),
+	effigy: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_relic.webp`),
 	fastTravel: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_fttower.webp`),
 	oilRig: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_oilrig.webp`),
 	tower: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_tower.webp`),
@@ -98,3 +105,102 @@ export function createPalIconStyle(
 		})
 	});
 }
+
+// Icon styles
+export const playerIconStyle = createIconStyle({
+	src: mapImg.player,
+	scale: 1,
+	anchor: [0.5, 0.5],
+	anchorXUnits: 'fraction',
+	anchorYUnits: 'fraction'
+});
+
+export const baseIconStyle = (feature: FeatureLike, resolution: number) => {
+	const props = feature.getProperties();
+	const base = props.data as Base;
+	const areaRange = base.area_range || 3500;
+	const mapPixelRadius = (areaRange / SCALE) * Math.abs(TRANSFORM_A);
+	const screenRadius = mapPixelRadius / resolution;
+	return [
+		createIconStyle({
+			src: mapImg.baseCamp,
+			scale: 0.83,
+			anchor: [0.5, 0.5],
+			anchorXUnits: 'fraction',
+			anchorYUnits: 'fraction'
+		}),
+		new Style({
+			image: new CircleStyle({
+				radius: screenRadius,
+				stroke: new Stroke({ color: 'rgba(0, 0, 255, 1)', width: 2, lineDash: [4, 8] }),
+				fill: new Fill({ color: 'rgba(0, 0, 255, 0.1)' })
+			})
+		})
+	];
+};
+
+export const fastTravelIconStyle = createIconStyle({
+	src: mapImg.fastTravel,
+	scale: 0.75,
+	anchor: [0.5, 0.5],
+	anchorXUnits: 'fraction',
+	anchorYUnits: 'fraction',
+	opacity: 1
+});
+
+export const fastTravelLockedIconStyle = createIconStyle({
+	src: mapImg.fastTravel,
+	scale: 0.75,
+	anchor: [0.5, 0.5],
+	anchorXUnits: 'fraction',
+	anchorYUnits: 'fraction',
+	opacity: 0.6
+});
+
+export const effigyIconStyle = new Style({
+	image: new Icon({
+		src: mapImg.effigy,
+		scale: 0.1,
+		anchor: [0.5, 0.5]
+	})
+});
+
+export const effigyLockedIconStyle = new Style({
+	image: new Icon({
+		src: mapImg.effigy,
+		scale: 0.1,
+		anchor: [0.5, 0.5],
+		opacity: 0.60
+	})
+});
+
+export const fastTravelStyle = (feature: FeatureLike) => {
+	const data = feature.get('data');
+	return data?.unlocked === false ? fastTravelLockedIconStyle : fastTravelIconStyle;
+};
+
+export const effigyStyle = (feature: FeatureLike) => {
+	const data = feature.get('data');
+	return data?.unlocked === false ? effigyLockedIconStyle : effigyIconStyle;
+};
+
+export const dungeonIconStyle = createIconStyle({
+	src: mapImg.dungeon,
+	scale: 1,
+	anchor: [0.5, 0.5],
+	anchorXUnits: 'fraction',
+	anchorYUnits: 'fraction'
+});
+
+export const originIconStyle = createStyle({
+	image: {
+		src: compass,
+		scale: 1,
+		anchor: [0.5, 0.5],
+		anchorXUnits: 'fraction',
+		anchorYUnits: 'fraction'
+	}
+});
+export const originLineStyle = createStyle({
+	stroke: { color: '#ffffff', width: 0.5, lineDash: [4, 8] }
+});

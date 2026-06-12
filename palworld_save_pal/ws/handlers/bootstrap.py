@@ -51,6 +51,8 @@ from palworld_save_pal.ws.messages import (
     GetBuildingsMessage,
     GetElementsMessage,
     GetItemsMessage,
+    GetEffigiesMessage,
+    GetFastTravelPointsMessage,
     GetLabResearchMessage,
     GetMapObjectsMessage,
     GetMissionsMessage,
@@ -196,6 +198,8 @@ HANDLER_REGISTRY = [
     (MessageType.GET_BUILDINGS, GetBuildingsMessage, buildings_handler.get_buildings_handler),
     (MessageType.GET_RAW_DATA, GetRawDataMessage, debug_handler.get_raw_data_handler),
     (MessageType.GET_MAP_OBJECTS, GetMapObjectsMessage, map_objects_handler.get_map_objects_handler),
+    (MessageType.GET_FAST_TRAVEL_POINTS, GetFastTravelPointsMessage, map_objects_handler.get_fast_travel_points_handler),
+    (MessageType.GET_EFFIGIES, GetEffigiesMessage, map_objects_handler.get_effigies_handler),
     (MessageType.UNLOCK_MAP, UnlockMapMessage, map_unlock_handler.unlock_map_handler),
     # Lab research
     (MessageType.GET_LAB_RESEARCH, GetLabResearchMessage, lab_research_handler.get_lab_research_handler),

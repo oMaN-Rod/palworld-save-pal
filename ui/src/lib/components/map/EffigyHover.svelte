@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { MapUnlockPoint } from '$types';
 	import { worldToMap } from './utils';
-	import { Globe, Map, Lock, LockOpen } from 'lucide-svelte';
+	import { Globe, Map, Check, X } from 'lucide-svelte';
 	import * as m from '$i18n/messages';
 
 	let {
@@ -14,16 +14,16 @@
 </script>
 
 <div class="popup-content">
-	<h3 class="text-lg font-bold">{point.localized_name}</h3>
+	<h3 class="text-lg font-bold">{m.effigy()}</h3>
 	<div class="mt-2 space-y-1">
 		{#if point.unlocked !== undefined}
 			<div class="flex items-center gap-2">
 				{#if point.unlocked}
-					<LockOpen class="mt-0.5 h-3.5 w-3.5 shrink-0 text-green-400" />
-					<span class="text-xs text-green-400">{m.unlocked()}</span>
+					<Check class="mt-0.5 h-3.5 w-3.5 shrink-0 text-green-400" />
+					<span class="text-xs text-green-400">{m.collected()}</span>
 				{:else}
-					<Lock class="mt-0.5 h-3.5 w-3.5 shrink-0 text-red-400" />
-					<span class="text-xs text-red-400">{m.locked()}</span>
+					<X class="mt-0.5 h-3.5 w-3.5 shrink-0 text-red-400" />
+					<span class="text-xs text-red-400">{m.not_collected()}</span>
 				{/if}
 			</div>
 		{/if}

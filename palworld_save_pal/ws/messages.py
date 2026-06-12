@@ -77,6 +77,8 @@ class MessageType(str, Enum):
     GET_ELEMENTS = "get_elements"
     GET_EXP_DATA = "get_exp_data"
     GET_MAP_OBJECTS = "get_map_objects"
+    GET_FAST_TRAVEL_POINTS = "get_fast_travel_points"
+    GET_EFFIGIES = "get_effigies"
     GET_GUILDS = "get_guilds"
     GET_ITEMS = "get_items"
     GET_MISSIONS = "get_missions"
@@ -428,6 +430,14 @@ class SetTechnologyDataMessage(BaseModel):
 
 class GetMapObjectsMessage(BaseModel):
     type: str = MessageType.GET_MAP_OBJECTS.value
+
+
+class GetFastTravelPointsMessage(BaseModel):
+    type: str = MessageType.GET_FAST_TRAVEL_POINTS.value
+
+
+class GetEffigiesMessage(BaseModel):
+    type: str = MessageType.GET_EFFIGIES.value
 
 
 class DeleteGuildData(BaseModel):

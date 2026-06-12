@@ -162,6 +162,8 @@ export type Player = {
 	last_online_time: string;
 	current_missions: string[];
 	completed_missions: string[];
+	unlocked_fast_travel_points: string[];
+	collected_effigies: string[];
 };
 
 export type GuildLabResearchInfo = {
@@ -201,6 +203,28 @@ export type MapObject = {
 	type: string;
 	localized_name: string;
 	pal: string;
+};
+
+export type FastTravelPoint = {
+	x: number;
+	y: number;
+	z: number;
+	id: string;
+	localized_name?: string;
+};
+
+export type Effigy = {
+	x: number;
+	y: number;
+	z: number;
+};
+
+export type MapUnlockPoint = {
+	guid: string;
+	x: number;
+	y: number;
+	localized_name: string;
+	unlocked?: boolean;
 };
 
 export type BaseDTO = {

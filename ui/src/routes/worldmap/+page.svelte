@@ -7,9 +7,9 @@
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { mapImg } from '$components/map/styles';
 	import { Target, Unlock, Users, Building, Loader2, Map as MapIcon } from 'lucide-svelte';
-	import { mapObjects } from '$lib/data';
+	import { mapObjects, fastTravelPoints, effigies } from '$lib/data';
 	import type { Map as OLMap } from 'ol';
-	import type { Base, GuildSummary, Player } from '$types';
+	import type { Base, GuildSummary, MapUnlockPoint, Player } from '$types';
 	import { assetLoader } from '$utils';
 	import { EditBaseModal } from '$components/modals';
 	import { EntryState, MessageType } from '$types';
@@ -31,6 +31,7 @@
 		showPlayers: boolean;
 		showBases: boolean;
 		showFastTravel: boolean;
+		showEffigies: boolean;
 		showDungeons: boolean;
 		showAlphaPals: boolean;
 		showPredatorPals: boolean;
@@ -41,6 +42,7 @@
 		showPlayers: true,
 		showBases: true,
 		showFastTravel: true,
+		showEffigies: true,
 		showDungeons: true,
 		showAlphaPals: true,
 		showPredatorPals: true
@@ -88,11 +90,12 @@
 			})
 		);
 	});
-	const fastTravelCount = $derived.by(() => {
-		return (
-			Object.values(mapObjects.points).filter((point) => point.type === 'fast_travel').length || 0
-		);
-	});
+	const fastTravelCount = $derived(Object.keys(fastTravelPoints.points).length);
+	const fastTravelUnlockedCount = $derived(
+		appState.selectedPlayer?.unlocked_fast_travel_points?.length
+	);
+	const effigyCount = $derived(Object.keys(effigies.points).length);
+	const effigyCollectedCount = $derived(appState.selectedPlayer?.collected_effigies?.length);
 	const dungeonCount = $derived.by(() => {
 		return Object.values(mapObjects.points).filter((point) => point.type === 'dungeon').length || 0;
 	});
@@ -167,6 +170,93 @@
 				guild.state = EntryState.MODIFIED;
 			}
 		}
+	}
+
+	function updateRelicCount(player: Player, delta: number) {
+		const container = player.essential_container;
+		if (!container) return;
+		const slot = container.slots.find((s) => s.static_id === 'Relic');
+		if (slot) {
+			slot.count += delta;
+			if (slot.count <= 0) {
+				slot.static_id = 'None';
+				slot.count = 0;
+				slot.dynamic_item = undefined;
+			}
+		} else if (delta > 0) {
+			const usedIndexes = new Set(
+				container.slots.filter((s) => s.static_id !== 'None').map((s) => s.slot_index)
+			);
+			let slotIndex = 0;
+			while (usedIndexes.has(slotIndex)) slotIndex++;
+			const emptySlot = container.slots.find((s) => s.slot_index === slotIndex);
+			if (emptySlot) {
+				emptySlot.static_id = 'Relic';
+				emptySlot.count = delta;
+				emptySlot.dynamic_item = undefined;
+			} else {
+				container.slots.push({
+					static_id: 'Relic',
+					slot_index: slotIndex,
+					count: delta,
+					dynamic_item: undefined
+				});
+			}
+		}
+	}
+
+	function handleToggleFastTravel(point: MapUnlockPoint) {
+		const player = appState.selectedPlayer;
+		if (!player) return;
+		const unlocks = player.unlocked_fast_travel_points ?? [];
+		const index = unlocks.findIndex((guid) => guid.toUpperCase() === point.guid.toUpperCase());
+		if (index >= 0) {
+			player.unlocked_fast_travel_points.splice(index, 1);
+		} else {
+			player.unlocked_fast_travel_points.push(point.guid);
+		}
+		player.state = EntryState.MODIFIED;
+	}
+
+	function handleToggleEffigy(point: MapUnlockPoint) {
+		const player = appState.selectedPlayer;
+		if (!player) return;
+		const collected = player.collected_effigies ?? [];
+		const index = collected.findIndex((guid) => guid.toUpperCase() === point.guid.toUpperCase());
+		if (index >= 0) {
+			collected.splice(index, 1);
+			updateRelicCount(player, -1);
+		} else {
+			collected.push(point.guid);
+			updateRelicCount(player, 1);
+		}
+		player.collected_effigies = collected;
+		player.state = EntryState.MODIFIED;
+	}
+
+	function handleUnlockAllFastTravel() {
+		const player = appState.selectedPlayer;
+		if (!player) return;
+		const unlocked = player.unlocked_fast_travel_points ?? [];
+		const existing = new Set(unlocked.map((guid) => guid.toUpperCase()));
+		const toAdd = Object.keys(fastTravelPoints.points).filter(
+			(guid) => !existing.has(guid.toUpperCase())
+		);
+		if (toAdd.length === 0) return;
+		player.unlocked_fast_travel_points = [...unlocked, ...toAdd];
+		player.state = EntryState.MODIFIED;
+	}
+
+	function handleCollectAllEffigies() {
+		const player = appState.selectedPlayer;
+		if (!player) return;
+		const collected = player.collected_effigies ?? [];
+		const existing = new Set(collected.map((guid) => guid.toUpperCase()));
+		const toAdd = Object.keys(effigies.points).filter((guid) => !existing.has(guid.toUpperCase()));
+		if (toAdd.length === 0) return;
+		player.collected_effigies = [...collected, ...toAdd];
+		updateRelicCount(player, toAdd.length);
+		player.state = EntryState.MODIFIED;
 	}
 
 	async function handleUnlockMap() {
@@ -248,7 +338,7 @@
 		</div>
 	{/if}
 
-	<div class="grid h-full grid-cols-[20%_1fr] gap-2" class:page-blurred={!loadingComplete}>
+	<div class="grid h-full grid-cols-[420px_1fr] gap-2" class:page-blurred={!loadingComplete}>
 		<div class="flex flex-col gap-4 p-4">
 			<div class="flex flex-col gap-4">
 				<div class="flex flex-col gap-2">
@@ -281,7 +371,25 @@
 						>
 							<img src={mapImg.fastTravel} alt={m.fast_travel()} class="mr-2 h-6 w-6" />
 							<span>{m.fast_travel()}</span>
-							<span class="text-surface-500 text-xs">{fastTravelCount}</span>
+							<span class="text-surface-500 text-xs">
+								{fastTravelUnlockedCount !== undefined
+									? `${fastTravelUnlockedCount}/${fastTravelCount}`
+									: fastTravelCount}
+							</span>
+						</button>
+						<button
+							class="flex items-center space-x-2 {(mapOptions.showEffigies ?? true)
+								? ''
+								: 'opacity-25'} "
+							onclick={() => (mapOptions.showEffigies = !(mapOptions.showEffigies ?? true))}
+						>
+							<img src={mapImg.effigy} alt={m.effigies()} class="mr-2 h-6 w-6" />
+							<span>{m.effigy()}</span>
+							<span class="text-surface-500 text-xs">
+								{effigyCollectedCount !== undefined
+									? `${effigyCollectedCount}/${effigyCount}`
+									: effigyCount}
+							</span>
 						</button>
 						{#if appState.saveFile}
 							<button
@@ -382,83 +490,89 @@
 						onValueChange={(e: ValueChangeDetails) => (section = e.value)}
 						collapsible
 					>
-						<Accordion.Item value="players" controlHover="hover:bg-secondary-500/25">
-							{#snippet control()}
-								<h2 class="text-lg font-bold">
-									{m.loaded_entity({ entity: m.player({ count: 2 }) })}
-								</h2>
-							{/snippet}
-							{#snippet panel()}
-								{#if mapOptions.showPlayers && loadedPlayerCount > 0}
-									<div class="max-h-64 space-y-2 overflow-y-auto">
-										{#each players as player}
-											{#if player.location}
-												{@const mapCoords = worldToMap(player.location.x, player.location.y)}
-												<button
-													class="bg-surface-800 hover:bg-secondary-500/25 w-full rounded-sm p-2 text-start"
-													onclick={() => handlePlayerFocus(player)}
-												>
-													<div class="truncate font-bold">{player.nickname}</div>
-													<div class="text-xs">
-														{m.level()}: {player.level} | {m.hp()}: {player.hp}
-													</div>
-													<div class="text-surface-400 text-xs">
-														{m.location()}: {Math.round(mapCoords.x)}, {Math.round(mapCoords.y)}
-													</div>
-													<div class="text-surface-400 text-xs">
-														{m.last_online()}: {new Date(player.last_online_time).toLocaleString()}
-													</div>
-												</button>
-											{/if}
-										{/each}
-									</div>
-								{:else}
-									<p class="text-surface-500 text-sm">
-										{m.no_players_loaded()}
-									</p>
-								{/if}
-							{/snippet}
-						</Accordion.Item>
-						<Accordion.Item value="bases" controlHover="hover:bg-secondary-500/25">
-							{#snippet control()}
-								<h2 class="text-lg font-bold">
-									{m.loaded_entity({ entity: m.base({ count: 2 }) })}
-								</h2>
-							{/snippet}
-							{#snippet panel()}
-								{#if mapOptions.showBases && loadedBaseCount > 0}
-									<div class="max-h-64 space-y-2 overflow-y-auto">
-										{#each Object.values(bases) as base}
-											{#if base.location}
-												<button
-													class="bg-surface-800 hover:bg-secondary-500/25 mb-2 w-full rounded-sm p-2 text-start"
-													onclick={() => handleBaseFocus(base)}
-													oncontextmenu={(e) => {
-														e.preventDefault();
-														handleEditBase(base);
-													}}
-												>
-													<div class="truncate font-bold">{base.name}</div>
-													<div class="text-surface-400 text-xs">
-														{m.id()}: {base.id}
-													</div>
-													<div class="text-surface-400 text-xs">
-														{m.location()}: {worldToMap(base.location.x, base.location.y).x}, {worldToMap(
-															base.location.x,
-															base.location.y
-														).y}
-													</div>
-												</button>
-											{/if}
-										{/each}
-									</div>
-								{:else}
-									<p class="text-surface-500 text-sm">
-										{m.no_bases_loaded()}
-									</p>
-								{/if}
-							{/snippet}
-						</Accordion.Item>
+						{#if mapOptions.showPlayers}
+							<Accordion.Item value="players" controlHover="hover:bg-secondary-500/25">
+								{#snippet control()}
+									<h2 class="text-lg font-bold">
+										{m.loaded_entity({ entity: m.player({ count: 2 }) })}
+									</h2>
+								{/snippet}
+								{#snippet panel()}
+									{#if loadedPlayerCount > 0}
+										<div class="max-h-64 space-y-2 overflow-y-auto">
+											{#each players as player}
+												{#if player.location}
+													{@const mapCoords = worldToMap(player.location.x, player.location.y)}
+													<button
+														class="bg-surface-800 hover:bg-secondary-500/25 w-full rounded-sm p-2 text-start"
+														onclick={() => handlePlayerFocus(player)}
+													>
+														<div class="truncate font-bold">{player.nickname}</div>
+														<div class="text-xs">
+															{m.level()}: {player.level} | {m.hp()}: {player.hp}
+														</div>
+														<div class="text-surface-400 text-xs">
+															{m.location()}: {Math.round(mapCoords.x)}, {Math.round(mapCoords.y)}
+														</div>
+														<div class="text-surface-400 text-xs">
+															{m.last_online()}: {new Date(
+																player.last_online_time
+															).toLocaleString()}
+														</div>
+													</button>
+												{/if}
+											{/each}
+										</div>
+									{:else}
+										<p class="text-surface-500 text-sm">
+											{m.no_players_loaded()}
+										</p>
+									{/if}
+								{/snippet}
+							</Accordion.Item>
+						{/if}
+						{#if mapOptions.showBases}
+							<Accordion.Item value="bases" controlHover="hover:bg-secondary-500/25">
+								{#snippet control()}
+									<h2 class="text-lg font-bold">
+										{m.loaded_entity({ entity: m.base({ count: 2 }) })}
+									</h2>
+								{/snippet}
+								{#snippet panel()}
+									{#if loadedBaseCount > 0}
+										<div class="max-h-64 space-y-2 overflow-y-auto">
+											{#each Object.values(bases) as base}
+												{#if base.location}
+													<button
+														class="bg-surface-800 hover:bg-secondary-500/25 mb-2 w-full rounded-sm p-2 text-start"
+														onclick={() => handleBaseFocus(base)}
+														oncontextmenu={(e) => {
+															e.preventDefault();
+															handleEditBase(base);
+														}}
+													>
+														<div class="truncate font-bold">{base.name}</div>
+														<div class="text-surface-400 text-xs">
+															{m.id()}: {base.id}
+														</div>
+														<div class="text-surface-400 text-xs">
+															{m.location()}: {worldToMap(base.location.x, base.location.y).x}, {worldToMap(
+																base.location.x,
+																base.location.y
+															).y}
+														</div>
+													</button>
+												{/if}
+											{/each}
+										</div>
+									{:else}
+										<p class="text-surface-500 text-sm">
+											{m.no_bases_loaded()}
+										</p>
+									{/if}
+								{/snippet}
+							</Accordion.Item>
+						{/if}
 					</Accordion>
 				{/if}
 
@@ -468,6 +582,10 @@
 						<div class="flex items-center gap-2">
 							<img src={staticIcons.leftClickIcon} alt="Left Click" class=" h-6 w-6" />
 							<span class="text-surface-500 text-xs">{m.left_click_focus()}</span>
+						</div>
+						<div class="flex items-center gap-2">
+							<img src={staticIcons.leftClickIcon} alt="Left Click" class=" h-6 w-6" />
+							<span class="text-surface-500 text-xs">{m.click_toggle_point()}</span>
 						</div>
 						<div class="flex items-center gap-2">
 							<img src={staticIcons.rightClickIcon} alt="Right Click" class=" h-6 w-6" />
@@ -485,10 +603,15 @@
 					showPlayers={mapOptions.showPlayers}
 					showBases={mapOptions.showBases}
 					showFastTravel={mapOptions.showFastTravel}
+					showEffigies={mapOptions.showEffigies ?? true}
 					showDungeons={mapOptions.showDungeons}
 					showAlphaPals={mapOptions.showAlphaPals}
 					showPredatorPals={mapOptions.showPredatorPals}
 					onEditBase={handleEditBase}
+					onToggleFastTravel={handleToggleFastTravel}
+					onToggleEffigy={handleToggleEffigy}
+					onUnlockAllFastTravel={handleUnlockAllFastTravel}
+					onCollectAllEffigies={handleCollectAllEffigies}
 				/>
 			{/if}
 		</div>

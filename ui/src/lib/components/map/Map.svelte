@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { View, Map, Layer, Feature, Overlay } from 'svelte-openlayers';
-	import { createIconStyle, createStyle } from 'svelte-openlayers/utils';
 	import { Projection } from 'ol/proj.js';
 	import type { Map as OLMap, MapBrowserEvent } from 'ol';
 	import { getAppState } from '$states';
@@ -11,12 +10,20 @@
 		mapToWorld,
 		ORIGIN_GAME_X,
 		ORIGIN_GAME_Y,
-		worldToPixel,
-		SCALE,
-		TRANSFORM_A
+		worldToPixel
 	} from './utils';
-	import { createPalIconStyle, mapImg } from './styles';
-	import { mapObjects } from '$lib/data';
+	import {
+		createPalIconStyle,
+		mapImg,
+		baseIconStyle,
+		fastTravelStyle,
+		effigyStyle,
+		dungeonIconStyle,
+		originIconStyle,
+		originLineStyle,
+		playerIconStyle
+	} from './styles';
+	import { mapObjects, fastTravelPoints, effigies } from '$lib/data';
 	import { assetLoader } from '$utils';
 	import 'svelte-openlayers/styles.css';
 	import PlayerPopup from './PlayerPopup.svelte';
@@ -27,17 +34,16 @@
 	import BasePopup from './BasePopup.svelte';
 	import FastTravelHover from './FastTravelHover.svelte';
 	import FastTravelPopup from './FastTravelPopup.svelte';
+	import EffigyHover from './EffigyHover.svelte';
+	import EffigyPopup from './EffigyPopup.svelte';
 	import DungeonHover from './DungeonHover.svelte';
 	import DungeonPopup from './DungeonPopup.svelte';
 	import PalHover from './PalHover.svelte';
 	import PalPopup from './PalPopup.svelte';
-	import compass from '$lib/assets/img/compass.webp';
 	import { onMount } from 'svelte';
 	import ContextMenu from 'ol-contextmenu';
-	import { Fill, Stroke, Style } from 'ol/style';
-	import CircleStyle from 'ol/style/Circle';
-	import type { FeatureLike } from 'ol/Feature';
-	import type { Base } from '$types';
+	import type { MapUnlockPoint } from '$types';
+	import * as m from '$i18n/messages';
 
 	// Props to control which markers to display
 	let {
@@ -46,20 +52,30 @@
 		showPlayers = true,
 		showBases = true,
 		showFastTravel = true,
+		showEffigies = true,
 		showDungeons = true,
 		showAlphaPals = true,
 		showPredatorPals = true,
-		onEditBase
+		onEditBase,
+		onToggleFastTravel,
+		onToggleEffigy,
+		onUnlockAllFastTravel,
+		onCollectAllEffigies
 	}: {
 		map?: OLMap | null;
 		showOrigin?: boolean;
 		showPlayers?: boolean;
 		showBases?: boolean;
 		showFastTravel?: boolean;
+		showEffigies?: boolean;
 		showDungeons?: boolean;
 		showAlphaPals?: boolean;
 		showPredatorPals?: boolean;
 		onEditBase?: (base: any) => void;
+		onToggleFastTravel?: (point: MapUnlockPoint) => void;
+		onToggleEffigy?: (point: MapUnlockPoint) => void;
+		onUnlockAllFastTravel?: () => void;
+		onCollectAllEffigies?: () => void;
 	} = $props();
 
 	const appState = getAppState();
@@ -71,76 +87,15 @@
 		units: 'pixels',
 		extent
 	});
-	const offset = [20, 0] as [number, number];
+	const offset = [10, 0] as [number, number];
 	const positioning = 'center-left';
-	const hoverClass = 'bg-transparent! p-8';
+	const hoverClass = 'bg-transparent! p-0 shadow-none!';
 
 	const defaultCenter = () => {
 		const worldCoords = mapToWorld(ORIGIN_GAME_X, ORIGIN_GAME_Y);
 		return worldToPixel(worldCoords.x, worldCoords.y);
 	};
 
-	// Icon styles
-	const playerIconStyle = createIconStyle({
-		src: mapImg.player,
-		scale: 1,
-		anchor: [0.5, 0.5],
-		anchorXUnits: 'fraction',
-		anchorYUnits: 'fraction'
-	});
-
-	const baseIconStyle = (feature: FeatureLike, resolution: number) => {
-		const props = feature.getProperties();
-		const base = props.data as Base;
-		const areaRange = base.area_range || 3500;
-		const mapPixelRadius = (areaRange / SCALE) * Math.abs(TRANSFORM_A);
-		const screenRadius = mapPixelRadius / resolution;
-		return [
-			createIconStyle({
-				src: mapImg.baseCamp,
-				scale: 0.83,
-				anchor: [0.5, 0.5],
-				anchorXUnits: 'fraction',
-				anchorYUnits: 'fraction'
-			}),
-			new Style({
-				image: new CircleStyle({
-					radius: screenRadius,
-					stroke: new Stroke({ color: 'rgba(0, 0, 255, 1)', width: 2, lineDash: [4, 8] }),
-					fill: new Fill({ color: 'rgba(0, 0, 255, 0.1)' })
-				})
-			})
-		];
-	};
-
-	const fastTravelIconStyle = createIconStyle({
-		src: mapImg.fastTravel,
-		scale: 1,
-		anchor: [0.5, 0.5],
-		anchorXUnits: 'fraction',
-		anchorYUnits: 'fraction'
-	});
-
-	const dungeonIconStyle = createIconStyle({
-		src: mapImg.dungeon,
-		scale: 1,
-		anchor: [0.5, 0.5],
-		anchorXUnits: 'fraction',
-		anchorYUnits: 'fraction'
-	});
-
-	const originIconStyle = createStyle({
-		image: {
-			src: compass,
-			scale: 1,
-			anchor: [0.5, 0.5],
-			anchorXUnits: 'fraction',
-			anchorYUnits: 'fraction'
-		}
-	});
-	const originLineStyle = createStyle({
-		stroke: { color: '#ffffff', width: 0.5, lineDash: [4, 8] }
-	});
 	const originPixelCoords = $derived.by(() => {
 		const worldCoords = mapToWorld(ORIGIN_GAME_X, ORIGIN_GAME_Y);
 		return worldToPixel(worldCoords.x, worldCoords.y);
@@ -160,9 +115,33 @@
 		}, [] as any[]);
 	});
 
-	const fastTravelPoints = $derived.by(() => {
-		if (!mapObjects) return [];
-		return mapObjects.points.filter((p) => p.type === 'fast_travel');
+	const selectedPlayer = $derived(appState.selectedPlayer);
+
+	const fastTravelPointList = $derived.by(() => {
+		const unlocked = new Set(
+			(selectedPlayer?.unlocked_fast_travel_points ?? []).map((guid) => guid.toUpperCase())
+		);
+		return Object.entries(fastTravelPoints.points).map(([guid, point]) => ({
+			guid,
+			x: point.x,
+			y: point.y,
+			localized_name: point.localized_name ?? point.id,
+			unlocked: selectedPlayer ? unlocked.has(guid.toUpperCase()) : undefined
+		}));
+	});
+	$inspect(fastTravelPointList);
+
+	const effigyPointList = $derived.by(() => {
+		const collected = new Set(
+			(selectedPlayer?.collected_effigies ?? []).map((guid) => guid.toUpperCase())
+		);
+		return Object.entries(effigies.points).map(([guid, point]) => ({
+			guid,
+			x: point.x,
+			y: point.y,
+			localized_name: m.effigy(),
+			unlocked: selectedPlayer ? collected.has(guid.toUpperCase()) : undefined
+		}));
 	});
 
 	const dungeonPoints = $derived.by(() => {
@@ -201,15 +180,18 @@
 	}
 
 	function handleMapClick(evt: MapBrowserEvent<PointerEvent | KeyboardEvent | WheelEvent>) {
-		const [pixelX, pixelY] = evt.coordinate;
-		const { worldX, worldY } = pixelToWorld(pixelX, pixelY);
-		const { gameX, gameY } = pixelToGameCoords(pixelX, pixelY);
-		const zoom = map?.getView().getZoom();
-
-		console.log(`Zoom level: ${zoom}`);
-		console.log(`Pixel coords: [${pixelX.toFixed(2)}, ${pixelY.toFixed(2)}]`);
-		console.log(`World coords: [${worldX.toFixed(2)}, ${worldY.toFixed(2)}]`);
-		console.log(`Game Map coords: [${gameX}, ${gameY}]`);
+		const feature = map?.forEachFeatureAtPixel(evt.pixel, (ft) => ft);
+		if (feature && selectedPlayer) {
+			const featureType = feature.get('type');
+			if (featureType === 'fast_travel') {
+				onToggleFastTravel?.(feature.get('data') as MapUnlockPoint);
+				return;
+			}
+			if (featureType === 'effigy') {
+				onToggleEffigy?.(feature.get('data') as MapUnlockPoint);
+				return;
+			}
+		}
 	}
 
 	function getHorizontalOriginLineStrings(): number[][] {
@@ -337,10 +319,10 @@
 			<!-- Fast travel markers layer -->
 			{#if showFastTravel}
 				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
-					{#each fastTravelPoints as point}
+					{#each fastTravelPointList as point (point.guid)}
 						<Feature.Point
 							coordinates={worldToPixel(point.x, point.y)}
-							style={fastTravelIconStyle}
+							style={fastTravelStyle}
 							properties={{ type: 'fast_travel', data: point }}
 						>
 							<Overlay.Hover {positioning} {offset} class={hoverClass}>
@@ -348,6 +330,26 @@
 							</Overlay.Hover>
 							<Overlay.Popup {positioning} {offset}>
 								<FastTravelPopup {point} />
+							</Overlay.Popup>
+						</Feature.Point>
+					{/each}
+				</Layer.Vector>
+			{/if}
+
+			<!-- Lifmunk Effigy markers layer -->
+			{#if showEffigies}
+				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
+					{#each effigyPointList as point (point.guid)}
+						<Feature.Point
+							coordinates={worldToPixel(point.x, point.y)}
+							style={effigyStyle}
+							properties={{ type: 'effigy', data: point }}
+						>
+							<Overlay.Hover {positioning} {offset} class={hoverClass}>
+								<EffigyHover {point} />
+							</Overlay.Hover>
+							<Overlay.Popup {positioning} {offset}>
+								<EffigyPopup {point} />
 							</Overlay.Popup>
 						</Feature.Point>
 					{/each}
@@ -420,6 +422,30 @@
 		</Map>
 	</View>
 
+	<!-- Player bulk actions -->
+	{#if selectedPlayer}
+		<div class="map-actions">
+			<button
+				type="button"
+				class="map-action-btn"
+				title={m.unlock_all_fast_travel()}
+				aria-label={m.unlock_all_fast_travel()}
+				onclick={() => onUnlockAllFastTravel?.()}
+			>
+				<img src={mapImg.fastTravel} alt={m.fast_travel()} />
+			</button>
+			<button
+				type="button"
+				class="map-action-btn"
+				title={m.collect_all_effigies()}
+				aria-label={m.collect_all_effigies()}
+				onclick={() => onCollectAllEffigies?.()}
+			>
+				<img src={mapImg.effigy} alt={m.effigies()} />
+			</button>
+		</div>
+	{/if}
+
 	<!-- Coordinate display overlay -->
 	<div class="coordinate-display" bind:this={coordDisplayElement}>
 		{@html coordDisplayText}
@@ -435,12 +461,51 @@
 		background-color: color-mix(in srgb, var(--color-surface-900) 90%, transparent) !important;
 		color: white !important;
 		border-radius: 4px;
-		backdrop-filter: blur(8px);
+		backdrop-filter: blur(4px);
+		margin: 0 0 0 12px;
 		border: 1px solid color-mix(in srgb, var(--color-surface-700) 40%, transparent);
 	}
 
 	:global(.click-popup) {
 		z-index: 100;
+	}
+
+	.map-actions {
+		position: absolute;
+		bottom: 56px;
+		right: 8px;
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		z-index: 1000;
+	}
+
+	.map-action-btn {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		padding: 6px;
+		background: color-mix(in srgb, var(--color-surface-900) 85%, transparent);
+		backdrop-filter: blur(8px);
+		border: 1px solid color-mix(in srgb, var(--color-surface-700) 40%, transparent);
+		border-radius: 4px;
+		cursor: pointer;
+		transition:
+			background-color 0.15s ease-out,
+			border-color 0.15s ease-out;
+	}
+
+	.map-action-btn:hover {
+		background: color-mix(in srgb, var(--color-secondary-500) 25%, transparent);
+		border-color: color-mix(in srgb, var(--color-secondary-400) 50%, transparent);
+	}
+
+	.map-action-btn img {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
 	}
 
 	.coordinate-display {
