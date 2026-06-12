@@ -94,6 +94,6 @@
 
 <style>
 	.modal-content {
-		z-index: 2147483647;
+		z-index: 50000;
 	}
 </style>
