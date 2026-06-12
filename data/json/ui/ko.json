@@ -605,7 +605,7 @@
   "select_player_view_entity": "{entity} 를 보려면 플레이어를 선택하세요.",
   "select_valid_player": "유효한 플레이어를 선택하십시오.",
   "selected": "선택된",
-  "selected_of_total": "{ {total} 개 중 {selected} }개가 선택됨",
+  "selected_of_total": "{total} 개 중 {selected} 개가 선택됨",
   "selected_tags": "선택된 태그",
   "set_entity_item_count": "{entity} 항목 개수 설정",
   "set_inventory_count": "재고 수량 설정",
