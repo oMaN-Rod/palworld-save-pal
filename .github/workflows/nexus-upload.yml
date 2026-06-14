@@ -1,0 +1,83 @@
+name: Upload to Nexus Mods
+
+# Runs after a GitHub Release is published so the release assets are available
+# to download. Because release.yml creates the release as a draft by default,
+# this only fires once the draft is actually published.
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to upload to Nexus (e.g. v0.17.0)"
+        required: true
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - variant: win_standalone
+            asset: PalworldSavePal-{tag}-windows-standalone.zip
+            group_id: "2308165"
+          - variant: win_installer
+            asset: PalworldSavePal-{tag}-windows-installer.msi
+            group_id: "2308168"
+          - variant: macos
+            asset: PalworldSavePal-{tag}-macos-installer.dmg
+            group_id: "2308174"
+          - variant: linux_standalone
+            asset: PalworldSavePal-{tag}-linux-standalone.zip
+            group_id: "2308171"
+    steps:
+      - name: Resolve tag and version
+        id: meta
+        run: |
+          tag="${{ github.event.release.tag_name || github.event.inputs.tag }}"
+          if [ -z "$tag" ]; then
+            echo "No release tag available" >&2
+            exit 1
+          fi
+          # Nexus expects a plain semver (e.g. 0.17.0), tags look like v0.17.0
+          version="${tag#v}"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "asset=${{ matrix.asset }}" | sed "s/{tag}/$tag/" >> "$GITHUB_OUTPUT"
+
+      - name: Download release asset
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release download "${{ steps.meta.outputs.tag }}" \
+            --repo "${{ github.repository }}" \
+            --pattern "${{ steps.meta.outputs.asset }}" \
+            --dir .
+
+      - name: Ensure upload is a zip
+        id: package
+        run: |
+          asset="${{ steps.meta.outputs.asset }}"
+          case "$asset" in
+            *.zip)
+              # Already a zip, upload as-is
+              echo "upload_file=$asset" >> "$GITHUB_OUTPUT"
+              ;;
+            *)
+              # Nexus requires a zip; wrap the installer/dmg
+              zip_name="${asset%.*}.zip"
+              zip -j "$zip_name" "$asset"
+              echo "upload_file=$zip_name" >> "$GITHUB_OUTPUT"
+              ;;
+          esac
+
+      - name: Upload to Nexus Mods
+        uses: Nexus-Mods/upload-action@v1.0.0-beta.7
+        with:
+          api_key: ${{ secrets.NEXUSMODS_API_KEY }}
+          file_group_id: ${{ matrix.group_id }}
+          filename: ${{ steps.package.outputs.upload_file }}
+          version: ${{ steps.meta.outputs.version }}
+          display_name: ${{ steps.meta.outputs.tag }}_${{ matrix.variant }}
+          archive_existing_file: true
