@@ -24,6 +24,9 @@ Palworld Save Pal is a tool for managing and analyzing save files.
     - [Pals](#pals)
     - [Players](#players)
     - [Guilds](#guilds)
+    - [Map](#map)
+    - [Tools](#tools)
+    - [Servers](#servers)
     - [Extras](#extras)
   - [📜 License](#-license)
   - [➡️ Related Projects](#️-related-projects)
@@ -195,6 +198,7 @@ or
 - [x] Gamepass & Steam support (solo/coop/dedicated)
 - [x] Localization; supports Deutsch, English, Español, Français, Italiano, 한국어, Português, Русский, 简体中文, and 繁體中文, Español (México), Bahasa Indonesia, Polski, ไทย, Türkçe, and Tiếng Việt
 - [x] Supports Desktop for Windows/Mac/Linux, Docker (web), or running from source (web)
+- [x] Theme support - Dark, Frontier (Thanks to @CyrixJD115), and Light themes (preference persisted between sessions)
 
 ### Pals
 
@@ -238,13 +242,37 @@ or
 - [x] Edit Lab Research
 - [x] Delete Guilds (Deletes all players, map objects, items, and pals)
 
+### Map
+
+- [x] Interactive world map - See players, bases, fast travel points, dungeons, effigies, and alpha/predator pals
+- [x] Toggle individual fast travel points, or unlock all fast travel points for a player
+- [x] Toggle individual effigies, or collect all effigies for a player (with collected/total count)
+- [x] Unlock Map (remove fog)
+
+### Tools
+
+- [x] Convert save format between Steam and GamePass - convert the loaded save, or convert standalone saves without loading them into the editor
+- [x] GamePass save browser - view, inspect, rename, and delete GamePass saves
+- [x] Steam ID converter - convert a Steam ID or profile URL to a Palworld UID and NoSteam UID
+- [x] Player UID Swap - swap UIDs between two players (useful for co-op to dedicated server migration, platform changes, or UID reassignment)
+- [x] Player Transfer - transfer a player between saves, choosing which data to move (character, inventory, pals, technology, appearance) and whether to overwrite an existing player or spawn in a new one
+- [x] Raw editor - load a `.sav` file and edit it directly as JSON in a code editor (with syntax highlighting and format/minify toggle), then save it back to `.sav`
+
+### Servers
+
+- [x] Manage Palworld dedicated servers directly from the app (Windows, native) or with Docker (Windows/Linux/Mac)
+- [x] Create and install servers with automatic SteamCMD detection/download and port suggestions
+- [x] Start/stop servers, live console output, and player count monitoring
+- [x] Edit server settings (PalWorldSettings.ini), including RCON and REST API configuration
+- [x] Mod management - install, list, and toggle Steam Workshop mods, including the official PalModSettings.ini mod system for native servers
+- [x] Load and manage a server's save file directly in the editor
+
 ### Extras
 
-- [x] Data Explorer / Debug Mode (Read Only)
-- [x] Map integration - See players, bases, fast travels, dungeons, and alpha/predator pals on the map
+- [x] Data Explorer / Debug Mode (Read Only) - browse and filter/sort Pals, Items, Active/Passive Skills, Buildings, and Technologies
+- [x] In-app guides and wiki with table of contents and image lightbox
 - [x] Preset management - Create and manage Player (Inventory), Pal, Active/Passive Skills, Storage presets.
 - [x] Universal Pal Storage (UPS) lets you organize Pals into collections with customizable tags and instantly transfer one, many, or all Pals across any player and any save in a single action.
-- [x] Unlock Map (remove fog)
 
 ## 📜 License
 
