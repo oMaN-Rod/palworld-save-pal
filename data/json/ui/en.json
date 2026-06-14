@@ -588,6 +588,7 @@
   "search_by_name_nickname": "Search by name or nickname",
   "search_entity": "Search {entity}",
   "search_pals": "Search {pals} by name, character ID, or notes...",
+  "search_presets": "Search presets",
   "search_placeholder": "Search {entity}...",
   "select": "Select",
   "select_a_entity": "Select a {entity}",

@@ -74,6 +74,6 @@
 	</Card>
 {:else}
 	<div class=" text-surface-400 flex h-full items-center justify-center p-4">
-		<p>{m.select_a_mission_to_view()}</p>
+		<p>{m.select_a_entity_to_view({ entity: m.mission() })}</p>
 	</div>
 {/if}
