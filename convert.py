@@ -7,10 +7,10 @@ from typing import Dict, Any, Set
 from deepdiff import DeepDiff
 
 
-from palworld_save_pal.game.save_file import SaveFile
+from palworld_save_pal.game.save_manager import SaveManager
 from palworld_save_pal.utils.logging_config import create_logger, setup_logging
 
-save_file = SaveFile()
+save_file = SaveManager()
 logger = create_logger(__name__)
 
 
@@ -268,7 +268,7 @@ def validate_character_save_parameter_map(
 def process_save_file(
     filename: str, output_path: str, minify: bool = False, convert_nan: bool = False
 ) -> Dict:
-    save = SaveFile()
+    save = SaveManager()
     save.level_sav_path = filename
 
     with open(filename, "rb") as f:

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, Combobox, Input, List, TooltipButton } from '$components/ui';
+	import { Button, Card, Combobox, Input, List, TooltipButton } from '$components/ui';
 	import { Save, X, Folder, Tag, FileText, Plus, Trash, ReplaceAll } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
@@ -214,7 +214,7 @@
 </script>
 
 <div bind:this={modalContainer}>
-	<Card class="min-w-[calc(100vw/2)] max-w-2xl">
+	<Card class="max-w-2xl min-w-[calc(100vw/2)]">
 		<div class="mb-4 flex items-center justify-between">
 			<h3 class="h3 flex items-center gap-2">
 				<FileText class="h-5 w-5" />
@@ -310,24 +310,26 @@
 								inputClass="w-full"
 							/>
 							<div class="flex gap-2">
-								<button
+								<Button
 									type="button"
+									variant="primary"
+									size="sm"
 									onclick={createCollection}
-									class="rounded bg-green-500 px-3 py-1 text-sm text-white hover:bg-green-600"
 								>
 									{m.create()}
-								</button>
-								<button
+								</Button>
+								<Button
 									type="button"
+									variant="neutral"
+									size="sm"
 									onclick={() => {
 										isCreatingCollection = false;
 										newCollectionName = '';
 										newCollectionDescription = '';
 									}}
-									class="rounded bg-gray-500 px-3 py-1 text-sm text-white hover:bg-gray-600"
 								>
 									{m.cancel()}
-								</button>
+								</Button>
 							</div>
 						</div>
 					{/if}
@@ -406,14 +408,18 @@
 						bind:value={notes}
 						placeholder={m.add_notes_about_imported_pals(p.pals)}
 						rows="3"
-						class="focus:outline-hidden ring-surface-200-800 focus-within:ring-secondary-500 rounded-xs resize-vertical border-surface-700 bg-surface-900 w-full border p-2 ring"
+						class="ring-surface-200-800 focus-within:ring-secondary-500 resize-vertical border-surface-700 bg-surface-900 w-full rounded-xs border p-2 ring focus:outline-hidden"
 					></textarea>
 				</div>
 			</div>
 			{#if selectedPlayerId}
 				<div class="flex h-full flex-col">
 					<div class="flex items-center gap-2">
-						<Combobox options={palOptions} bind:value={selectedPalId} placeholder={m.select_entity({ entity: c.pal })}>
+						<Combobox
+							options={palOptions}
+							bind:value={selectedPalId}
+							placeholder={m.select_entity({ entity: c.pal })}
+						>
 							{#snippet selectOption(option)}
 								<span class="truncate">{option.label}</span>
 							{/snippet}
@@ -456,23 +462,23 @@
 
 		<!-- Actions -->
 		<div class="mt-6 flex justify-end gap-2">
-			<button
+			<Button
 				type="button"
+				variant="neutral"
 				onclick={() => handleClose(false)}
-				class="bg-surface-500 hover:bg-surface-600 flex items-center gap-2 rounded-md px-4 py-2 text-white"
 			>
 				<X class="h-4 w-4" />
 				{m.cancel()}
-			</button>
-			<button
+			</Button>
+			<Button
 				type="button"
+				variant="primary"
 				onclick={() => handleClose(true)}
-				class="bg-primary-500 hover:bg-primary-600 flex items-center gap-2 rounded-md px-4 py-2 text-white"
 				data-modal-primary
 			>
 				<Save class="h-4 w-4" />
 				{m.import()}
-			</button>
+			</Button>
 		</div>
 	</Card>
 </div>

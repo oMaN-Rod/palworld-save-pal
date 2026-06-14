@@ -70,3 +70,42 @@ function componentToHex(c: number) {
 	const hex = c.toString(16);
 	return hex.length === 1 ? '0' + hex : hex;
 }
+
+export function skillBorderClass(rank: number) {
+	switch (rank) {
+		case 1:
+			return 'border-l-surface-600';
+		case 2:
+		case 3:
+			return 'border-l-[#fcdf19]';
+		case 4:
+			return 'border-l-[#68ffd8]';
+		default:
+			return 'border-l-[#FF0000]';
+	}
+}
+
+export function skillOpacity(rank: number) {
+	switch (rank) {
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+			return 'opacity-25';
+	}
+	return 'opacity-15';
+}
+
+export function skillFilter(rank: number) {
+	switch (rank) {
+		case 1:
+			return '';
+		case 2:
+		case 3:
+			return calculateFilters('#fcdf19');
+		case 4:
+			return calculateFilters('#68ffd8');
+		default:
+			return calculateFilters('#FF0000');
+	}
+}

@@ -3,7 +3,7 @@
 	import { elementsData, palsData, presetsData } from '$lib/data';
 	import { getAppState, getModalState, getToastState, getUpsState } from '$states';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
-	import { Card, Input, Tooltip, TooltipButton } from '$components/ui';
+	import { Button, Card, Input, Tooltip, TooltipButton } from '$components/ui';
 	import {
 		PalSelectModal,
 		FillPalsModal,
@@ -46,7 +46,7 @@
 		Play,
 		Upload
 	} from 'lucide-svelte';
-	import { PalBadge, PalContainerStats } from '$components';
+	import { PalBadge, PalContainerStats } from '$components/pal';
 	import { send } from '$lib/utils/websocketUtils';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
 	import * as m from '$i18n/messages';
@@ -652,19 +652,22 @@
 		{...additionalProps}
 	>
 		<div class="shrink-0 p-4">
-			<div class="btn-group bg-surface-900 mb-2 w-full items-center rounded-sm p-1">
+			<div
+				id="dps-toolbar"
+				class="btn-group bg-surface-900 mb-2 w-full items-center rounded-sm p-1"
+			>
 				<Tooltip
 					position="right"
 					label={m.add_all_pals_to_entity({ pals: c.pals, entity: m.dps() })}
 				>
-					<button class="btn hover:preset-tonal-secondary p-2" onclick={addAllPalsDps}>
+					<Button id="dps-add-all" variant="ghost" size="icon" onclick={addAllPalsDps}>
 						<CircleFadingPlus class="h-4 w-4" />
-					</button>
+					</Button>
 				</Tooltip>
 				<Tooltip>
-					<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectAll}>
+					<Button id="dps-select-all" variant="ghost" size="icon" onclick={handleSelectAll}>
 						<ReplaceAll class="h-4 w-4" />
-					</button>
+					</Button>
 					{#snippet popup()}
 						<div class="flex flex-col">
 							<span>{m.select_all_in()}</span>
@@ -685,9 +688,9 @@
 					<Tooltip
 						label={m.apply_preset_to_selected({ pals: m.pal({ count: selectedPals.length }) })}
 					>
-						<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectPreset}>
+						<Button variant="ghost" size="icon" onclick={handleSelectPreset}>
 							<Play class="h-4 w-4" />
-						</button>
+						</Button>
 					</Tooltip>
 					<Tooltip
 						label={m.clone_pals_to_entity({
@@ -696,220 +699,223 @@
 							entity: m.ups()
 						})}
 					>
-						<button class="btn hover:preset-tonal-secondary p-2" onclick={handleBulkCloneToUps}>
+						<Button variant="ghost" size="icon" onclick={handleBulkCloneToUps}>
 							<Upload class="h-4 w-4" />
-						</button>
+						</Button>
 					</Tooltip>
 					<Tooltip
 						label={m.delete_selected_entity({ entity: m.pal({ count: selectedPals.length }) })}
 					>
-						<button class="btn hover:preset-tonal-secondary p-2" onclick={deleteSelectedPals}>
+						<Button variant="ghost" size="icon" onclick={deleteSelectedPals}>
 							<Trash class="h-4 w-4" />
-						</button>
+						</Button>
 					</Tooltip>
 					<Tooltip
 						label={m.clear_selected_entity({ entity: m.pal({ count: selectedPals.length }) })}
 					>
-						<button
-							class="btn hover:preset-tonal-secondary p-2"
-							onclick={() => (selectedPals = [])}
-						>
+						<Button variant="ghost" size="icon" onclick={() => (selectedPals = [])}>
 							<X class="h-4 w-4" />
-						</button>
+						</Button>
 					</Tooltip>
 				{/if}
 			</div>
-			<Accordion
-				value={filterExpand}
-				onValueChange={(e: ValueChangeDetails) => (filterExpand = e.value)}
-				collapsible
-			>
-				<Accordion.Item
-					value="filter"
-					base="rounded-sm bg-surface-900"
-					controlHover="hover:bg-secondary-500/25"
+			<div id="dps-filters">
+				<Accordion
+					value={filterExpand}
+					onValueChange={(e: ValueChangeDetails) => (filterExpand = e.value)}
+					collapsible
 				>
-					{#snippet lead()}<Search />{/snippet}
-					{#snippet control()}
-						<span class="font-bold">{m.filter_and_sort()}</span>
-					{/snippet}
-					{#snippet panel()}
-						<Input
-							type="text"
-							inputClass="w-full"
-							placeholder={m.search_by_name_nickname()}
-							bind:value={searchQuery}
-						/>
-						<div>
-							<legend class="font-bold">{m.sort()}</legend>
-							<hr />
-							<div class="grid grid-cols-6">
-								<Tooltip label={m.sort_by_entity({ entity: m.level() })}>
-									<button
-										type="button"
-										class={sortButtonClass('level')}
-										onclick={() => toggleSort('level')}
-									>
-										<LevelSortIcon />
-									</button>
-								</Tooltip>
-								<Tooltip label={m.sort_by_entity({ entity: m.name() })}>
-									<button
-										type="button"
-										class={sortButtonClass('name')}
-										onclick={() => toggleSort('name')}
-									>
-										<NameSortIcon />
-									</button>
-								</Tooltip>
-								<Tooltip label={m.sort_by_paldeck()}>
-									<button
-										type="button"
-										class={sortButtonClass('paldeck-index')}
-										onclick={() => toggleSort('paldeck-index')}
-									>
-										<PaldeckSortIcon />
-									</button>
-								</Tooltip>
-							</div>
-						</div>
-						<div>
-							<legend class="font-bold">{m.element_and_type()}</legend>
-							<hr />
-							<div class="mt-2 grid grid-cols-4 2xl:grid-cols-6">
-								<Tooltip>
-									<button class={elementClass('All')} onclick={() => (selectedFilter = 'All')}>
-										<GalleryVerticalEnd />
-									</button>
-									{#snippet popup()}{m.all_entity({ entity: c.pals })}{/snippet}
-								</Tooltip>
-								{#each [...elementTypes] as element}
-									{@const localizedName = elementsData.getByKey(element)?.localized_name}
-									<Tooltip label={localizedName}>
+					<Accordion.Item
+						value="filter"
+						base="rounded-sm bg-surface-900"
+						controlHover="hover:bg-secondary-500/25"
+					>
+						{#snippet lead()}<Search />{/snippet}
+						{#snippet control()}
+							<span class="font-bold">{m.filter_and_sort()}</span>
+						{/snippet}
+						{#snippet panel()}
+							<Input
+								type="text"
+								inputClass="w-full"
+								placeholder={m.search_by_name_nickname()}
+								bind:value={searchQuery}
+							/>
+							<div>
+								<legend class="font-bold">{m.sort()}</legend>
+								<hr />
+								<div class="grid grid-cols-3 sm:grid-cols-6">
+									<Tooltip label={m.sort_by_entity({ entity: m.level() })}>
 										<button
-											class={elementClass(element)}
-											onclick={() => (selectedFilter = element)}
-											aria-label={localizedName}
+											type="button"
+											class={sortButtonClass('level')}
+											onclick={() => toggleSort('level')}
+										>
+											<LevelSortIcon />
+										</button>
+									</Tooltip>
+									<Tooltip label={m.sort_by_entity({ entity: m.name() })}>
+										<button
+											type="button"
+											class={sortButtonClass('name')}
+											onclick={() => toggleSort('name')}
+										>
+											<NameSortIcon />
+										</button>
+									</Tooltip>
+									<Tooltip label={m.sort_by_paldeck()}>
+										<button
+											type="button"
+											class={sortButtonClass('paldeck-index')}
+											onclick={() => toggleSort('paldeck-index')}
+										>
+											<PaldeckSortIcon />
+										</button>
+									</Tooltip>
+								</div>
+							</div>
+							<div>
+								<legend class="font-bold">{m.element_and_type()}</legend>
+								<hr />
+								<div class="mt-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 2xl:grid-cols-6">
+									<Tooltip>
+										<button class={elementClass('All')} onclick={() => (selectedFilter = 'All')}>
+											<GalleryVerticalEnd />
+										</button>
+										{#snippet popup()}{m.all_entity({ entity: c.pals })}{/snippet}
+									</Tooltip>
+									{#each [...elementTypes] as element}
+										{@const localizedName = elementsData.getByKey(element)?.localized_name}
+										<Tooltip label={localizedName}>
+											<button
+												class={elementClass(element)}
+												onclick={() => (selectedFilter = element)}
+												aria-label={localizedName}
+											>
+												<img
+													src={elementIcons[element]}
+													alt={localizedName}
+													class="pal-element-badge"
+												/>
+											</button>
+										</Tooltip>
+									{/each}
+									<Tooltip label={c.alphaPals}>
+										<button
+											type="button"
+											class={sortAlphaClass}
+											onclick={() => (selectedFilter = 'alpha')}
+										>
+											<img src={staticIcons.alphaIcon} alt="Alpha" class="pal-element-badge" />
+										</button>
+									</Tooltip>
+									<Tooltip label={c.luckyPals}>
+										<button
+											type="button"
+											class={sortLuckyClass}
+											onclick={() => (selectedFilter = 'lucky')}
+										>
+											<img src={staticIcons.luckyIcon} alt="Alpha" class="pal-element-badge" />
+										</button>
+									</Tooltip>
+									<Tooltip label={c.humans}>
+										<button
+											type="button"
+											class={sortHumanClass}
+											onclick={() => (selectedFilter = 'human')}
+										>
+											<User />
+										</button>
+									</Tooltip>
+									<Tooltip label={c.predatorPals}>
+										<button
+											type="button"
+											class={sortPredatorClass}
+											onclick={() => (selectedFilter = 'predator')}
 										>
 											<img
-												src={elementIcons[element]}
-												alt={localizedName}
+												src={staticIcons.predatorIcon}
+												alt="Predator"
 												class="pal-element-badge"
+												style="filter: {calculateFilters('#FF0000')};"
 											/>
 										</button>
 									</Tooltip>
-								{/each}
-								<Tooltip label={c.alphaPals}>
-									<button
-										type="button"
-										class={sortAlphaClass}
-										onclick={() => (selectedFilter = 'alpha')}
-									>
-										<img src={staticIcons.alphaIcon} alt="Alpha" class="pal-element-badge" />
-									</button>
-								</Tooltip>
-								<Tooltip label={c.luckyPals}>
-									<button
-										type="button"
-										class={sortLuckyClass}
-										onclick={() => (selectedFilter = 'lucky')}
-									>
-										<img src={staticIcons.luckyIcon} alt="Alpha" class="pal-element-badge" />
-									</button>
-								</Tooltip>
-								<Tooltip label={c.humans}>
-									<button
-										type="button"
-										class={sortHumanClass}
-										onclick={() => (selectedFilter = 'human')}
-									>
-										<User />
-									</button>
-								</Tooltip>
-								<Tooltip label={c.predatorPals}>
-									<button
-										type="button"
-										class={sortPredatorClass}
-										onclick={() => (selectedFilter = 'predator')}
-									>
-										<img
-											src={staticIcons.predatorIcon}
-											alt="Predator"
-											class="pal-element-badge"
-											style="filter: {calculateFilters('#FF0000')};"
-										/>
-									</button>
-								</Tooltip>
-								<Tooltip label={c.oilRigPals}>
-									<button
-										type="button"
-										class={sortOilrigClass}
-										onclick={() => (selectedFilter = 'oilrig')}
-									>
-										<img src={staticIcons.oilrigIcon} alt="Oil Rig" class="pal-element-badge" />
-									</button>
-								</Tooltip>
-								<Tooltip label={c.summonedPals}>
-									<button
-										type="button"
-										class={sortSummonClass}
-										onclick={() => (selectedFilter = 'summon')}
-									>
-										<img src={staticIcons.altarIcon} alt="Summoned" class="pal-element-badge" />
-									</button>
-								</Tooltip>
+									<Tooltip label={c.oilRigPals}>
+										<button
+											type="button"
+											class={sortOilrigClass}
+											onclick={() => (selectedFilter = 'oilrig')}
+										>
+											<img src={staticIcons.oilrigIcon} alt="Oil Rig" class="pal-element-badge" />
+										</button>
+									</Tooltip>
+									<Tooltip label={c.summonedPals}>
+										<button
+											type="button"
+											class={sortSummonClass}
+											onclick={() => (selectedFilter = 'summon')}
+										>
+											<img src={staticIcons.altarIcon} alt="Summoned" class="pal-element-badge" />
+										</button>
+									</Tooltip>
+								</div>
 							</div>
-						</div>
-					{/snippet}
-				</Accordion.Item>
-				<Accordion.Item
-					value="stats"
-					base="block 2xl:hidden rounded-sm bg-surface-900"
-					controlHover="hover:bg-secondary-500/25"
-				>
-					{#snippet lead()}<Info />{/snippet}
-					{#snippet control()}
-						<span class="font-bold">{m.stats()}</span>
-					{/snippet}
-					{#snippet panel()}
-						{#if pals && pals.length > 0}
-							<PalContainerStats {pals} {elementTypes} />
-						{:else}
-							<div>{m.no_pals_available(p.pals)}</div>
-						{/if}
-					{/snippet}
-				</Accordion.Item>
-			</Accordion>
+						{/snippet}
+					</Accordion.Item>
+					<Accordion.Item
+						value="stats"
+						base="block 2xl:hidden rounded-sm bg-surface-900"
+						controlHover="hover:bg-secondary-500/25"
+					>
+						{#snippet lead()}<Info />{/snippet}
+						{#snippet control()}
+							<span class="font-bold">{m.stats()}</span>
+						{/snippet}
+						{#snippet panel()}
+							{#if pals && pals.length > 0}
+								<PalContainerStats {pals} {elementTypes} />
+							{:else}
+								<div>{m.no_pals_available(p.pals)}</div>
+							{/if}
+						{/snippet}
+					</Accordion.Item>
+				</Accordion>
+			</div>
 		</div>
 
 		<div>
 			<!-- Pager -->
-			<div class="mb-4 flex items-center justify-center space-x-4">
-				<button class="rounded-sm px-4 py-2 font-bold" onclick={decrementPage}>
+			<div id="dps-pager" class="mb-4 flex items-center justify-center space-x-4">
+				<Button  class="rounded-full font-bold p-0!" variant="ghost" size="md" onclick={decrementPage}>
 					<img src={staticIcons.qIcon} alt={m.previous()} class="h-10 w-10" />
-				</button>
+				</Button>
 
 				<div class="flex space-x-2">
 					{#each visiblePages as page}
 						<TooltipButton
-							class="h-8 w-8 rounded-full {page === currentPage
-								? 'bg-primary-500 text-white'
-								: 'bg-surface-800 hover:bg-gray-300'}"
+							buttonClass="h-8 w-8 rounded-full {page === currentPage
+								? 'bg-primary-500! text-white'
+								: 'bg-surface-800 hover:bg-surface-600'}"
 							onclick={() => (currentPage = page)}
-							popupLabel={`${m.box()} ${page}`}
+							popupLabel={`Box ${page}`}
+							variant="ghost"
+							size="md"
 						>
 							{Math.floor(page)}
 						</TooltipButton>
 					{/each}
 				</div>
 
-				<button class="rounded-sm px-4 py-2 font-bold" onclick={incrementPage}>
+				<Button class="rounded-sm font-bold p-0!" variant="ghost" size="md" onclick={incrementPage}>
 					<img src={staticIcons.eIcon} alt={m.next()} class="h-10 w-10" />
-				</button>
+				</Button>
 			</div>
 
-			<div class="overflow-hidden">
-				<div class="grid grid-cols-6 place-items-center gap-4 p-4">
+			<div id="dps-grid" class="overflow-hidden">
+				<div
+					class="grid grid-cols-3 place-items-center gap-4 p-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6"
+				>
 					{#each currentPageItems as item (item.pal.instance_id)}
 						{#if item.pal.character_id !== 'None' || (!searchQuery && selectedFilter === 'All' && sortBy === 'slot-index')}
 							<PalBadge
@@ -928,15 +934,17 @@
 			</div>
 		</div>
 
-		{#if pals && pals.length > 0}
-			<Card class="h-107.5 mr-2 hidden 2xl:block">
-				<PalContainerStats {pals} {elementTypes} />
-			</Card>
-		{:else}
-			<Card class="h-107.5 mr-2 hidden 2xl:block">
-				<div>{m.no_pals_available(p.pals)}</div>
-			</Card>
-		{/if}
+		<div id="dps-stats">
+			{#if pals && pals.length > 0}
+				<Card class="mr-2 hidden min-h-0 2xl:block">
+					<PalContainerStats {pals} {elementTypes} />
+				</Card>
+			{:else}
+				<Card class="mr-2 hidden min-h-0 2xl:block">
+					<div>{m.no_pals_available(p.pals)}</div>
+				</Card>
+			{/if}
+		</div>
 	</div>
 {:else}
 	<div class="flex w-full items-center justify-center">

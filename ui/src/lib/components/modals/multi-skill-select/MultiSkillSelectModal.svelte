@@ -1,9 +1,10 @@
 <script lang="ts">
-	import { Card, Tooltip, Combobox, List, TooltipButton } from '$components/ui';
+	import { Button, Card, Tooltip, Combobox, List, TooltipButton } from '$components/ui';
 	import { type Pal, type SelectOption, type SkillType } from '$types';
 	import { Save, X, Delete, Trash, Plus } from 'lucide-svelte';
 	import { activeSkillsData, passiveSkillsData } from '$lib/data';
-	import { ActiveSkillOption, PassiveSkillOption } from '$components';
+	import { isSkillAvailableForCharacter } from '$lib/utils/skillFilters';
+	import { ActiveSkillOption, PassiveSkillOption } from '$components/pal';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
@@ -23,15 +24,7 @@
 	const selectOptions: SelectOption[] = $derived.by(() => {
 		if (type === 'Active') {
 			return Object.values(activeSkillsData.activeSkills)
-				.filter((skill) => {
-					if (skill.id.toLowerCase().includes(`unique_${pal.character_key.toLowerCase()}`)) {
-						return true;
-					}
-					if (!skill.id.toLowerCase().includes('unique_')) {
-						return true;
-					}
-					return false;
-				})
+				.filter((skill) => isSkillAvailableForCharacter(skill.id, pal.character_key))
 				.filter((aSkill) => !Object.values(pal.active_skills).some((skill) => skill === aSkill.id))
 				.filter((aSkill) => !values.some((v) => v === aSkill.id))
 				.sort((a, b) => a.details.element.localeCompare(b.details.element))
@@ -106,12 +99,13 @@
 				{/if}
 			{/snippet}
 			{#snippet listItemActions(skill)}
-				<button
-					class="btn hover:bg-error-500/25 p-2"
+				<Button
+					variant="ghost"
+					size="icon"
 					onclick={() => (values = values.filter((s) => s !== skill))}
 				>
 					<Trash size={16} />
-				</button>
+				</Button>
 			{/snippet}
 			{#snippet listItemPopup(skill)}
 				{#if type === 'Passive'}
@@ -133,25 +127,25 @@
 
 	<div class="mt-2 flex flex-row items-center space-x-2">
 		<Tooltip position="bottom">
-			<button class="btn hover:bg-secondary-500 px-2" onclick={handleClear}>
+			<Button variant="ghost" size="icon" onclick={handleClear}>
 				<Delete />
-			</button>
+			</Button>
 			{#snippet popup()}
 				<span>{m.clear()}</span>
 			{/snippet}
 		</Tooltip>
 		<Tooltip position="bottom">
-			<button class="btn hover:bg-secondary-500 px-2" onclick={() => handleClose(values)}>
+			<Button variant="ghost" size="icon" onclick={() => handleClose(values)}>
 				<Save />
-			</button>
+			</Button>
 			{#snippet popup()}
 				<span>{c.save}</span>
 			{/snippet}
 		</Tooltip>
 		<Tooltip position="bottom">
-			<button class="btn hover:bg-secondary-500 px-2" onclick={() => handleClose(null)}>
+			<Button variant="ghost" size="icon" onclick={() => handleClose(null)}>
 				<X />
-			</button>
+			</Button>
 			{#snippet popup()}
 				<span>{m.cancel()}</span>
 			{/snippet}

@@ -88,7 +88,8 @@
 			<h2 class="text-lg font-semibold">{c.tags}</h2>
 			<TooltipButton
 				onclick={createTag}
-				class="bg-primary-500 hover:bg-primary-600 rounded-md p-2 text-white"
+				variant="secondary"
+				size="icon"
 				popupLabel={m.add_entity({ entity: c.tag })}
 			>
 				<Plus class="h-4 w-4" />
@@ -101,9 +102,9 @@
 				type="text"
 				bind:value={searchTags}
 				placeholder={m.search_placeholder({ entity: c.tags })}
-				class="border-surface-300 dark:border-surface-600 dark:bg-surface-800 w-full rounded-md border bg-white py-2 pl-8 pr-3 text-sm"
+				class="border-surface-300 dark:border-surface-600 dark:bg-surface-800 w-full rounded-md border bg-white py-2 pr-3 pl-8 text-sm"
 			/>
-			<Tag class="text-surface-500 absolute left-2.5 top-1/2 h-3 w-3 -translate-y-1/2" />
+			<Tag class="text-surface-500 absolute top-1/2 left-2.5 h-3 w-3 -translate-y-1/2" />
 		</div>
 
 		<!-- Active Filter Summary -->
@@ -111,7 +112,7 @@
 			<div class="mt-3">
 				<div class="mb-2 flex items-center justify-between">
 					<span
-						class="text-surface-600 dark:text-surface-400 text-xs font-medium uppercase tracking-wide"
+						class="text-surface-600 dark:text-surface-400 text-xs font-medium tracking-wide uppercase"
 					>
 						{m.active_filters_count({ count: upsState.filters.tags.length })}
 					</span>
@@ -150,7 +151,7 @@
 						>
 							<!-- Tag Color Indicator -->
 							<div
-								class="h-3 w-3 flex-shrink-0 rounded-full"
+								class="h-3 w-3 shrink-0 rounded-full"
 								style="background-color: {tag.color || '#6366f1'}"
 							></div>
 
@@ -160,16 +161,14 @@
 							</span>
 
 							<!-- Usage Count -->
-							<span
-								class="flex-shrink-0 text-xs {isSelected ? 'text-primary-100' : 'text-surface-500'}"
-							>
+							<span class="shrink-0 text-xs {isSelected ? 'text-primary-100' : 'text-surface-500'}">
 								{tag.usage_count}
 							</span>
 						</button>
 
 						<!-- Action buttons (show on hover) -->
 						<div
-							class="absolute right-1 top-1 flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100"
+							class="absolute top-1 right-1 flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100"
 						>
 							<TooltipButton
 								onclick={(e: MouseEvent) => {
@@ -224,7 +223,10 @@
 	{#if upsState.availableTags.length > 0}
 		<div class="border-surface-300 dark:border-surface-700 border-t p-4">
 			<p class="text-surface-500 text-center text-xs">
-				{m.entity_count_available({ count: upsState.availableTags.length, entity: m.tag({ count: upsState.availableTags.length }) })}
+				{m.entity_count_available({
+					count: upsState.availableTags.length,
+					entity: m.tag({ count: upsState.availableTags.length })
+				})}
 			</p>
 		</div>
 	{/if}

@@ -2,13 +2,15 @@
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { goto } from '$app/navigation';
 	import { getAppState, getModalState } from '$states';
-	import { Card } from '$components/ui';
+	import { Button, Card } from '$components/ui';
 	import { send } from '$lib/utils/websocketUtils';
 	import { MessageType } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
 	import { cn } from '$theme';
-	import { GamepassSaveList, TextInputModal } from '$components';
+	import { GamepassBrowser } from '$components/gamepass';
+	import { TextInputModal } from '$components/modals';
+	import type { GamepassSave } from '$types';
 	import * as m from '$i18n/messages';
 	import { c, p } from '$lib/utils/commonTranslations';
 
@@ -62,6 +64,11 @@
 		}
 	]);
 
+	async function handleSelectGamepassSave(save: GamepassSave) {
+		await goto('/loading');
+		send(MessageType.SELECT_GAMEPASS_SAVE, save.save_id);
+	}
+
 	async function handleEditWorldName() {
 		// @ts-ignore
 		const result = await modal.showModal<string>(TextInputModal, {
@@ -74,7 +81,9 @@
 	}
 </script>
 
-<div class="bg-surface-900 flex min-h-screen w-full flex-col items-center justify-center py-12">
+<div
+	class="bg-surface-900 animate-fade-in flex min-h-screen w-full flex-col items-center justify-center py-12"
+>
 	<div class="flex w-full max-w-3xl flex-col gap-12">
 		<section class="w-full">
 			<h1 class="text-primary-400 mb-6 text-center text-4xl font-extrabold tracking-tight">
@@ -99,7 +108,7 @@
 							>
 								{@html option.icon}
 							</div>
-							<span class="text-xl font-semibold text-white">{option.title}</span>
+							<span class="text-surface-50 text-xl font-semibold">{option.title}</span>
 							<span class="text-surface-300 text-center text-base">{option.description}</span>
 						</div>
 					</button>
@@ -110,11 +119,11 @@
 		{#if appState.saveFile && appState.playerSaveFiles}
 			<div class="flex flex-col space-y-2">
 				<div class="flex justify-center">
-					<button class="btn hover:text-secondary-500 h4" onclick={handleEditWorldName}>
+					<Button variant="ghost" class="h4 hover:text-secondary-500" onclick={handleEditWorldName}>
 						{appState.saveFile.world_name}
-					</button>
+					</Button>
 				</div>
-				<Card class="min-w-96">
+				<Card class="w-full min-w-0 sm:min-w-96">
 					<div class="grid grid-cols-[auto_1fr] gap-2">
 						<span class="font-bold">{c.players}:</span>
 						<span class="text-end">{appState.playerSaveFiles.length}</span>
@@ -128,7 +137,11 @@
 				</Card>
 			</div>
 		{:else if appState.gamepassSaves && Object.keys(appState.gamepassSaves).length > 0}
-			<GamepassSaveList bind:saves={appState.gamepassSaves} />
+			<GamepassBrowser
+				saves={appState.gamepassSaves}
+				selectable={true}
+				onselect={handleSelectGamepassSave}
+			/>
 		{/if}
 	</div>
 </div>

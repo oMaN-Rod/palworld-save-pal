@@ -48,6 +48,8 @@ export enum MessageType {
 	GET_BUILDINGS = 'get_buildings',
 	GET_RAW_DATA = 'get_raw_data',
 	GET_MAP_OBJECTS = 'get_map_objects',
+	GET_FAST_TRAVEL_POINTS = 'get_fast_travel_points',
+	GET_EFFIGIES = 'get_effigies',
 	DELETE_GUILD = 'delete_guild',
 	DELETE_PLAYER = 'delete_player',
 	NUKE_PRESETS = 'nuke_presets',
@@ -57,6 +59,7 @@ export enum MessageType {
 	UPDATE_LAB_RESEARCH = 'update_lab_research',
 	RENAME_WORLD = 'rename_world',
 	ADD_GPS_PAL = 'add_gps_pal',
+	CLONE_GPS_PAL = 'clone_gps_pal',
 	DELETE_GPS_PALS = 'delete_gps_pals',
 	UPDATE_GPS_PAL = 'update_gps_pal',
 	GET_GPS_PALS = 'get_gps_pals',
@@ -96,6 +99,39 @@ export enum MessageType {
 
 	OPEN_FOLDER = 'open_folder',
 	CONVERT_SAV_FILE = 'convert_sav_file',
+	CONVERT_SAVE_FORMAT = 'convert_save_format',
+	SCAN_GAMEPASS_SAVES = 'scan_gamepass_saves',
+	DELETE_GAMEPASS_SAVE = 'delete_gamepass_save',
+	DELETE_GAMEPASS_PLAYER = 'delete_gamepass_player',
+	RENAME_GAMEPASS_WORLD = 'rename_gamepass_world',
+
+	// Tools
+	CONVERT_STEAM_ID = 'convert_steam_id',
+	SWAP_PLAYER_UIDS = 'swap_player_uids',
+	LOAD_SOURCE_SAVE = 'load_source_save',
+	GET_SOURCE_PLAYERS = 'get_source_players',
+	TRANSFER_PLAYER = 'transfer_player',
+	UNLOAD_SOURCE_SAVE = 'unload_source_save',
+
+	// Server Management
+	LIST_SERVERS = 'list_servers',
+	GET_SERVER = 'get_server',
+	CREATE_SERVER = 'create_server',
+	UPDATE_SERVER = 'update_server',
+	DELETE_SERVER = 'delete_server',
+	START_SERVER = 'start_server',
+	STOP_SERVER = 'stop_server',
+	SERVER_STATUS_UPDATE = 'server_status_update',
+	SERVER_API_CALL = 'server_api_call',
+	SERVER_API_RESPONSE = 'server_api_response',
+	SERVER_PLAYER_COUNT = 'server_player_count',
+	LIST_SERVER_MODS = 'list_server_mods',
+	TOGGLE_SERVER_MOD = 'toggle_server_mod',
+	INSTALL_SERVER_MOD = 'install_server_mod',
+	DETECT_WORKSHOP_DIR = 'detect_workshop_dir',
+	LOAD_SERVER_SAVE = 'load_server_save',
+	GET_SERVER_STATS = 'get_server_stats',
+	SERVER_CREATION_PROGRESS = 'server_creation_progress'
 }
 
 interface UpdateSaveFileData {

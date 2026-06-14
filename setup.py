@@ -8,9 +8,9 @@ build_exe_options = {
     "include_files": [
         ("ui_build", "ui"),
         ("data", "data"),
-        ("debug.bat", "debug.bat")
+        ("scripts/debug.bat", "debug.bat")
         if sys.platform == "win32"
-        else ("debug.sh", "debug.sh"),
+        else ("scripts/debug.sh", "debug.sh"),
     ],
     "packages": [
         "uvicorn",
@@ -25,9 +25,8 @@ build_exe_options = {
 
 # Platform-specific configurations
 if sys.platform == "win32":
-    # Add Windows-specific files
-    build_exe_options["include_files"].append(("debug.bat", "debug.bat"))
-    
+    pass
+
     # MSI installer options (Windows only)
     bdist_msi_options = {
         "add_to_path": True,
@@ -45,12 +44,12 @@ if sys.platform == "win32":
             ]
         },
     }
-    
+
     # Windows-specific executable settings
     base = "Win32GUI"
     target_name = "PSP.exe"
     icon = "ui/static/favicon.ico"
-    
+
 elif sys.platform == "darwin":
     bdist_mac_options = {
         "bundle_name": "Palworld Save Pal",
@@ -88,8 +87,8 @@ elif sys.platform == "darwin":
 
 elif sys.platform.startswith("linux"):
     # Linux-specific settings
-    build_exe_options["include_files"].append(("linux_scripts/debug.sh", "debug.sh"))
-    
+    build_exe_options["include_files"].append(("scripts/debug.sh", "debug.sh"))
+
     # For Ubuntu, we'll use both DEB and RPM options
     # DEB package options (Ubuntu/Debian)
     bdist_deb_options = {
@@ -98,7 +97,7 @@ elif sys.platform.startswith("linux"):
         "maintainer": "PalworldSavePal",
         "icon": "ui/static/favicon.png",  # Ensure you have a .png version for Linux
     }
-    
+
     # RPM package options (for other Linux distros)
     bdist_rpm_options = {
         "requires": ["python3", "gtk3", "webkit2gtk3"],
@@ -106,20 +105,22 @@ elif sys.platform.startswith("linux"):
         "vendor": "PalworldSavePal",
         "icon": "ui/static/favicon.png",
     }
-    
+
     # Linux-specific executable settings
     base = None
     target_name = "psp"
     icon = "ui/static/favicon.png"  # Use .png for Linux
-    
+
     # Ensure executable permissions are set properly
     build_exe_options["bin_includes"] = []
     build_exe_options["bin_path_includes"] = ["/usr/bin"]
-    
+
     # Additional Ubuntu 24.04-specific settings
     build_exe_options["includes"] = ["gi"]  # For GTK applications
-    build_exe_options["include_files"].append(("/usr/lib/python3/dist-packages/gi", "lib/gi"))
-    
+    build_exe_options["include_files"].append(
+        ("/usr/lib/python3/dist-packages/gi", "lib/gi")
+    )
+
     # Add desktop file for Ubuntu
     desktop_file = """[Desktop Entry]
 Type=Application
@@ -132,13 +133,15 @@ Terminal=false
 """
     with open("palworldsavepal.desktop", "w") as f:
         f.write(desktop_file)
-    build_exe_options["include_files"].append(("palworldsavepal.desktop", "palworldsavepal.desktop"))
+    build_exe_options["include_files"].append(
+        ("palworldsavepal.desktop", "palworldsavepal.desktop")
+    )
 else:
     # Default for other platforms
     base = None
     target_name = "psp"
     icon = None
-    
+
 # Determine which installer options to include based on platform
 installer_options = {}
 if sys.platform == "win32":
@@ -150,11 +153,12 @@ elif sys.platform.startswith("linux"):
     # For Ubuntu, prioritize DEB packages but support RPM too
     try:
         import stdeb
+
         installer_options["bdist_deb"] = bdist_deb_options
         print("stdeb found - DEB package support enabled")
     except ImportError:
         print("stdeb not found - install python3-stdeb package for DEB support")
-    
+
     try:
         # Check if RPM build tools are available
         installer_options["bdist_rpm"] = bdist_rpm_options

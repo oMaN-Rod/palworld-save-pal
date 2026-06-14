@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { palsData, buildingsData, itemsData, presetsData } from '$lib/data';
 	import { getAppState, getModalState, getToastState } from '$states';
-	import { Input, List, Tooltip, TooltipButton } from '$components/ui';
-	import { Spinner } from '$components';
+	import { Button, Input, List, Spinner, Tooltip, TooltipButton } from '$components/ui';
 	import {
 		type ItemContainer,
 		type Pal,
@@ -14,21 +13,25 @@
 	} from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { Ambulance, X, ReplaceAll, Plus, Trash, Bandage, Play, RefreshCcw } from 'lucide-svelte';
-	import { DebugButton, ItemBadge, PalBadge, StoragePresets, LabResearch } from '$components';
+	import { PalBadge } from '$components/pal';
+	import { DebugButton } from '$components/layout';
+	import { ItemBadge } from '$components/shared';
+	import { LabResearch } from '$components';
+	import { StoragePresets } from '$components/presets';
 	import {
 		PalSelectModal,
 		NumberInputModal,
 		PalPresetSelectModal,
-		NumberSliderModal
+		NumberSliderModal,
+		TextInputModal
 	} from '$components/modals';
 	import { assetLoader, debounce, deepCopy, formatNickname } from '$utils';
 	import { cn } from '$theme';
-	import { TextInputModal } from '$components/modals';
 	import { staticIcons } from '$types/icons';
 	import { send } from '$lib/utils/websocketUtils';
 	import { goto } from '$app/navigation';
-	import Nuke from '$components/ui/icons/Nuke.svelte';
-	import LabResearchControls from '$components/guilds/LabResearchControls.svelte';
+	import { Nuke } from '$components/ui';
+	import { LabResearchControls } from '$components/guilds';
 	import * as m from '$i18n/messages';
 	import { c, p } from '$lib/utils/commonTranslations';
 
@@ -695,16 +698,22 @@
 			<img src={staticIcons.sadIcon} alt="Sad" class="h-18 w-18" />
 		</div>
 	{:else}
-		<div class="grid h-full w-full grid-cols-[25%_1fr]">
+		<div class="grid h-full w-full grid-cols-[minmax(200px,25%)_1fr] xl:grid-cols-[25%_1fr]">
 			<!-- Left Controls -->
 			<div class="shrink-0 space-y-2 p-4">
 				<div class="flex">
 					<div class="flex items-center">
-						<button class="btn px-0 text-start" onclick={handleEditGuildName}>
-							<h4 class="h4 hover:text-secondary-500">{playerGuild!.name}</h4>
-						</button>
+						<Button
+							id="guild-name"
+							variant="ghost"
+							class="min-w-0 px-0 text-start"
+							onclick={handleEditGuildName}
+						>
+							<h4 class="h4 hover:text-secondary-500 truncate">{playerGuild!.name}</h4>
+						</Button>
 						<Tooltip label={m.basecamp_level()}>
 							<button
+								id="guild-level"
 								class="outline-surface-700 hover:outline-secondary-500 ml-2 flex gap-2 rounded p-1 align-bottom outline"
 								onclick={handleEditBasecampLevel}
 							>
@@ -717,7 +726,11 @@
 						<DebugButton href={`/debug?guildId=${playerGuild.id}`} />
 					{/if}
 					<Tooltip label={m.delete_entire_guild()}>
-						<button class="btn ml-4 h-8 w-8 p-2 hover:bg-red-500/50" onclick={handleDeleteGuild}>
+						<button
+							id="guild-delete"
+							class="btn ml-4 h-8 w-8 p-2 hover:bg-red-500/50"
+							onclick={handleDeleteGuild}
+						>
 							<Nuke size={24} />
 						</button>
 					</Tooltip>
@@ -734,21 +747,23 @@
 						{/if}
 					</div>
 					<div class="flex">
-						<button class="btn px-0" onclick={handleEditBaseName}>
+						<Button id="guild-base-name" variant="ghost" class="px-0" onclick={handleEditBaseName}>
 							<h5 class="h5 hover:text-secondary-500 font-light">
 								{currentBase?.[1]?.name || ''}
 							</h5>
-						</button>
+						</Button>
 					</div>
 				</div>
 
 				<nav
+					id="guild-tabs"
 					class="btn-group preset-outlined-surface-200-800 w-full flex-col rounded-sm p-2 md:flex-row"
 				>
 					<button
+						id="guild-tab-pals"
 						class={cn(
 							'btn hover:bg-secondary-500/50 w-1/4 rounded-sm',
-							activeTab == 'pals' ? 'bg-secondary-800' : ''
+							activeTab == 'pals' ? 'bg-secondary-800 text-white' : ''
 						)}
 						onclick={() => {
 							activeTab = 'pals';
@@ -759,9 +774,10 @@
 						<span>{c.pals}</span>
 					</button>
 					<button
+						id="guild-tab-storage"
 						class={cn(
 							'btn hover:bg-secondary-500/50 w-1/4 rounded-sm',
-							activeTab == 'storage' ? 'bg-secondary-800' : ''
+							activeTab == 'storage' ? 'bg-secondary-800 text-white' : ''
 						)}
 						onclick={() => {
 							activeTab = 'storage';
@@ -772,9 +788,10 @@
 						<span>{m.storage()}</span>
 					</button>
 					<button
+						id="guild-tab-chest"
 						class={cn(
 							'btn hover:bg-secondary-500/50 w-1/4 rounded-sm',
-							activeTab == 'guildChest' ? 'bg-secondary-800' : ''
+							activeTab == 'guildChest' ? 'bg-secondary-800 text-white' : ''
 						)}
 						onclick={() => {
 							inventorySearchQuery = '';
@@ -785,9 +802,10 @@
 						<span>{m.chest()}</span>
 					</button>
 					<button
+						id="guild-tab-lab"
 						class={cn(
 							'btn hover:bg-secondary-500/50 w-1/4 rounded-sm',
-							activeTab == 'lab' ? 'bg-secondary-800' : ''
+							activeTab == 'lab' ? 'bg-secondary-800 text-white' : ''
 						)}
 						onclick={() => {
 							inventorySearchQuery = '';
@@ -799,48 +817,55 @@
 					</button>
 				</nav>
 				{#if activeTab === 'pals'}
-					<div class="btn-group bg-surface-900 w-full items-center rounded-sm p-1">
+					<div
+						id="guild-pals-toolbar"
+						class="btn-group bg-surface-900 w-full items-center rounded-sm p-1"
+					>
 						<Tooltip position="right" label={m.add_new_pal_to_entity({ entity: c.base })}>
-							<button
-								class="btn hover:bg-secondary-500/50 p-2"
+							<Button
+								id="guild-pals-add"
+								variant="ghost"
+								size="icon"
 								onclick={() => currentBase && handleAddPal(currentBase[0])}
 							>
 								<Plus class="h-4 w-4" />
-							</button>
+							</Button>
 						</Tooltip>
 						<Tooltip label={m.select_all_current_base()}>
-							<button class="btn hover:bg-secondary-500/50 p-2" onclick={handleSelectAll}>
+							<Button
+								id="guild-pals-select-all"
+								variant="ghost"
+								size="icon"
+								onclick={handleSelectAll}
+							>
 								<ReplaceAll class="h-4 w-4" />
-							</button>
+							</Button>
 						</Tooltip>
 						<Tooltip label={m.heal_all_in_entity({ entity: c.base })}>
-							<button class="btn hover:bg-secondary-500/50 p-2" onclick={handleHealAll}>
+							<Button id="guild-pals-heal-all" variant="ghost" size="icon" onclick={handleHealAll}>
 								<Bandage class="h-4 w-4" />
-							</button>
+							</Button>
 						</Tooltip>
 						{#if selectedPals.length > 0}
 							<Tooltip label={m.apply_preset_to_selected(p.pals)}>
-								<button class="btn hover:bg-secondary-500/50 p-2" onclick={handleSelectPreset}>
+								<Button variant="ghost" size="icon" onclick={handleSelectPreset}>
 									<Play class="h-4 w-4" />
-								</button>
+								</Button>
 							</Tooltip>
 							<Tooltip label={m.heal_selected_pals(p.pals)}>
-								<button class="btn hover:bg-secondary-500/50 p-2" onclick={healSelectedPals}>
+								<Button variant="ghost" size="icon" onclick={healSelectedPals}>
 									<Ambulance class="h-4 w-4" />
-								</button>
+								</Button>
 							</Tooltip>
 							<Tooltip label={m.delete_selected_entity({ entity: c.pals })}>
-								<button class="btn hover:bg-secondary-500/50 p-2" onclick={deleteSelectedPals}>
+								<Button variant="ghost" size="icon" onclick={deleteSelectedPals}>
 									<Trash class="h-4 w-4" />
-								</button>
+								</Button>
 							</Tooltip>
 							<Tooltip label={m.clear_entity({ entity: m.selected() })}>
-								<button
-									class="btn hover:bg-secondary-500/50 p-2"
-									onclick={() => (selectedPals = [])}
-								>
+								<Button variant="ghost" size="icon" onclick={() => (selectedPals = [])}>
 									<X class="h-4 w-4" />
-								</button>
+								</Button>
 							</Tooltip>
 						{/if}
 					</div>
@@ -848,15 +873,15 @@
 				{#if activeTab == 'storage'}
 					<div class="flex items-center">
 						<Input bind:value={inventorySearchQuery} placeholder={m.search_inventory()} />
-						<button
-							class="btn"
+						<Button
+							variant="ghost"
 							onclick={() => {
 								inventorySearchQuery = '';
 								selectedInventoryItem = '';
 							}}
 						>
 							<RefreshCcw class="h-6 w-6" />
-						</button>
+						</Button>
 					</div>
 					<List
 						bind:items={currentBaseInventory.current}
@@ -890,13 +915,13 @@
 											class="h-8 w-8"
 										/>
 									</div>
-									<span>{itemData.info.localized_name}</span>
+									<span class="truncate">{itemData.info.localized_name}</span>
 									<span>{item.total_count.toLocaleString()}</span>
 								</div>
 							{:else}
 								<div class="grid w-full grid-cols-[auto_1fr_auto] gap-2">
 									<img src={staticIcons.unknownIcon} alt={item.static_id} class="h-8 w-8" />
-									<span>{item.static_id}</span>
+									<span class="truncate">{item.static_id}</span>
 									<span>{item.total_count.toLocaleString()}</span>
 								</div>
 							{/if}
@@ -915,13 +940,13 @@
 											{@const buildingIcon = assetLoader.loadImage(
 												`${ASSET_DATA_PATH}/img/${building.icon}.webp`
 											)}
-											<div class="grid w-full grid-cols-[auto_1fr_auto] gap-2">
+											<div class="grid w-full min-w-0 grid-cols-[auto_1fr_auto] gap-2">
 												<img
 													src={buildingIcon || staticIcons.unknownIcon}
 													alt={building.localized_name}
-													class="h-8 w-8"
+													class="h-8 w-8 shrink-0"
 												/>
-												<span>{building.localized_name}</span>
+												<span class="truncate">{building.localized_name}</span>
 												<span>{count.toLocaleString()}</span>
 											</div>
 										{:else if !ignoreKeys.some((key) => containerId.includes(key))}
@@ -951,33 +976,47 @@
 			<div>
 				<!-- Pager -->
 				{#if activeTab !== 'lab'}
-					<div class="mb-4 flex items-center justify-center space-x-4">
-						<button class="rounded-sm px-4 py-2 font-bold" onclick={decrementPage}>
-							<img src={staticIcons.qIcon} alt={m.previous()} class="h-10 w-10" />
-						</button>
+					<div id="guild-pager" class="mb-4 flex items-center justify-center space-x-4">
+						<Button
+							class="rounded-full p-0! font-bold"
+							variant="ghost"
+							size="md"
+							onclick={decrementPage}
+						>
+							<img src={staticIcons.qIcon} alt="Previous" class="h-10 w-10" />
+						</Button>
 
 						<div class="flex space-x-2">
 							{#each visiblePages as page}
 								<TooltipButton
-									class="h-8 w-8 rounded-full {page === currentPage
-										? 'bg-primary-500 text-white'
-										: 'bg-surface-800 hover:bg-gray-300'}"
+									buttonClass="h-8 w-8 rounded-full {page === currentPage
+										? 'bg-primary-500! text-white'
+										: 'bg-surface-800 hover:bg-surface-600'}"
 									onclick={() => (currentPage = page)}
-									popupLabel={`${c.base} ${Object.entries(guildBases!)[page - 1]?.[0]}`}
+									popupLabel={`Box ${page}`}
+									variant="ghost"
+									size="md"
 								>
-									{page}
+									{Math.floor(page)}
 								</TooltipButton>
 							{/each}
 						</div>
 
-						<button class="rounded-sm px-4 py-2 font-bold" onclick={incrementPage}>
-							<img src={staticIcons.eIcon} alt={m.next()} class="h-10 w-10" />
-						</button>
+						<Button
+							class="rounded-sm p-0! font-bold"
+							variant="ghost"
+							size="md"
+							onclick={incrementPage}
+						>
+							<img src={staticIcons.eIcon} alt="Next" class="h-10 w-10" />
+						</Button>
 					</div>
 				{/if}
 				{#if activeTab == 'pals'}
-					<div class="overflow-hidden">
-						<div class="grid grid-cols-6 place-items-center gap-4 p-4">
+					<div id="guild-pals-grid" class="overflow-hidden">
+						<div
+							class="grid grid-cols-3 place-items-center gap-4 p-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6"
+						>
 							{#each currentPageItems as item (item.pal.instance_id)}
 								{#if item.pal.character_id !== 'None' || !palSearchQuery}
 									<PalBadge
@@ -995,7 +1034,7 @@
 					</div>
 				{:else if activeTab == 'storage'}
 					{#if currentBaseStorageContainers && currentBaseStorageContainers.length > 0}
-						<div class="flex space-x-4">
+						<div id="guild-storage-content" class="flex space-x-4">
 							<List
 								items={currentBaseStorageContainers}
 								baseClass="w-1/4"
@@ -1010,18 +1049,18 @@
 										{@const buildingIcon = assetLoader.loadImage(
 											`${ASSET_DATA_PATH}/img/${building.icon}.webp`
 										)}
-										<div class="grid grid-cols-[auto_1fr] gap-2">
+										<div class="grid min-w-0 grid-cols-[auto_1fr] gap-2">
 											<img
 												src={buildingIcon || staticIcons.unknownIcon}
 												alt={building.localized_name}
-												class="h-8 w-8"
+												class="h-8 w-8 shrink-0"
 											/>
-											<span>{building.localized_name}</span>
+											<span class="truncate">{building.localized_name}</span>
 										</div>
 									{:else}
-										<div class="grid grid-cols-[auto_1fr] gap-2">
-											<img src={staticIcons.unknownIcon} alt={item.key} class="h-8 w-8" />
-											<span>{item.key}</span>
+										<div class="grid min-w-0 grid-cols-[auto_1fr] gap-2">
+											<img src={staticIcons.unknownIcon} alt={item.key} class="h-8 w-8 shrink-0" />
+											<span class="truncate">{item.key}</span>
 										</div>
 									{/if}
 								{/snippet}
@@ -1046,12 +1085,12 @@
 									{/if}
 								{/snippet}
 							</List>
-							<div class="max-h-[550px] overflow-y-auto 2xl:max-h-[800px]">
+							<div class="max-h-[calc(100vh-450px)] overflow-y-auto 2xl:max-h-[calc(100vh-200px)]">
 								{#if currentStorageContainer}
 									{@const building = buildingsData.getByKey(currentStorageContainer.key)}
 									{@const itemGroup = building?.type_a == BuildingTypeA.Food ? 'Food' : 'Common'}
 									<div class="flex items-start space-x-4">
-										<div class="m-1 grid grid-cols-6 gap-2">
+										<div class="m-1 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6">
 											{#each Object.values(currentStorageContainer.slots) as _, index}
 												<ItemBadge
 													bind:slot={currentStorageContainer.slots[index]}
@@ -1071,7 +1110,7 @@
 												<img
 													src={currentStorageContainerIcon}
 													alt="Storage Container Icon"
-													class="h-48 w-48 2xl:h-64 2xl:w-64"
+													class="max-h-48 w-full max-w-48 object-contain 2xl:max-h-64 2xl:max-w-64"
 												/>
 												<StoragePresets
 													container={currentStorageContainer}
@@ -1097,9 +1136,12 @@
 				{:else if activeTab == 'guildChest' && playerGuild?.guild_chest}
 					{@const building = buildingsData.getByKey('GuildChest')}
 					{@const itemGroup = building?.type_a == BuildingTypeA.Food ? 'Food' : 'Common'}
-					<div class="max-h-137.5 2xl:max-h-200 overflow-y-auto">
+					<div
+						id="guild-chest-content"
+						class="max-h-[calc(100vh-450px)] overflow-y-auto 2xl:max-h-[calc(100vh-200px)]"
+					>
 						<div class="flex items-start space-x-4">
-							<div class="m-1 grid grid-cols-6 gap-2">
+							<div class="m-1 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6">
 								{#each Object.values(playerGuild.guild_chest.slots) as _, index}
 									<ItemBadge
 										bind:slot={playerGuild.guild_chest.slots[index]}
@@ -1119,7 +1161,7 @@
 									<img
 										src={guildChestIcon}
 										alt="Storage Container Icon"
-										class="ml-8 h-48 w-48 2xl:h-64 2xl:w-64"
+										class="ml-8 max-h-48 max-w-48 2xl:max-h-64 2xl:max-w-64"
 									/>
 									<StoragePresets
 										container={playerGuild.guild_chest}
@@ -1132,7 +1174,7 @@
 						</div>
 					</div>
 				{:else if activeTab == 'lab'}
-					<div class="h-full w-full">
+					<div id="guild-lab-content" class="h-full w-full">
 						<LabResearch
 							bind:this={labResearchComponent}
 							guild={playerGuild}

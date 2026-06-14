@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { Card, Tooltip, Combobox, List } from '$components/ui';
+	import { Button, Card, Tooltip, Combobox, List } from '$components/ui';
 	import type { ActiveSkill } from '$types';
 	import { Plus, Save, X, Trash, TimerReset, Delete, BicepsFlexed, Brain } from 'lucide-svelte';
 	import { activeSkillsData, elementsData, palsData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
+	import { isSkillAvailableForCharacter } from '$lib/utils/skillFilters';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
@@ -54,16 +55,7 @@
 		const elementSkills = activeSkills
 			.filter((skill) => {
 				const matchesElement = palData.element_types.some((type) => skill.details.element === type);
-				if (
-					matchesElement &&
-					skill.id.toLowerCase().includes(`unique_${pal.character_key.toLowerCase()}`)
-				) {
-					return true;
-				}
-				if (matchesElement && !skill.id.toLowerCase().includes('unique_')) {
-					return true;
-				}
-				return false;
+				return matchesElement && isSkillAvailableForCharacter(skill.id, pal.character_key);
 			})
 			.map((item) => item.id)
 			.filter((skillId) => !learnedSkills.some((skill) => skill.id === skillId))
@@ -121,12 +113,9 @@
 			{/snippet}
 		</Combobox>
 		<Tooltip position="right">
-			<button
-				class="btn preset-filled-primary-500 hover:preset-tonal-secondary p-2"
-				onclick={handleAddSkill}
-			>
+			<Button variant="primary" size="icon" onclick={handleAddSkill}>
 				<Plus />
-			</button>
+			</Button>
 			{#snippet popup()}
 				<span>{m.add_skill()}</span>
 			{/snippet}
@@ -160,9 +149,9 @@
 					{/await}
 				{/snippet}
 				{#snippet listItemActions(skill)}
-					<button class="btn hover:bg-error-500/25 p-2" onclick={() => handleRemoveSkill(skill)}>
+					<Button variant="ghost" size="icon" onclick={() => handleRemoveSkill(skill)}>
 						<Trash size={16} />
-					</button>
+					</Button>
 				{/snippet}
 				{#snippet listItemPopup(skill)}
 					{@const activeSkill = activeSkills.find((s) => s.id === skill.id)}
@@ -184,41 +173,41 @@
 
 	<div class="mt-4 flex justify-end space-x-2">
 		<Tooltip position="bottom">
-			<button class="btn hover:bg-secondary-500/25 px-2" onclick={handleLearnType}>
+			<Button variant="ghost" size="icon" onclick={handleLearnType}>
 				<Brain />
-			</button>
+			</Button>
 			{#snippet popup()}
 				<span>{m.learn_skills_matching_type()}</span>
 			{/snippet}
 		</Tooltip>
 		<Tooltip position="bottom">
-			<button class="btn hover:bg-secondary-500/25 px-2" onclick={handleLearnAll}>
+			<Button variant="ghost" size="icon" onclick={handleLearnAll}>
 				<BicepsFlexed />
-			</button>
+			</Button>
 			{#snippet popup()}
 				<span>{m.learn_all_skills()}</span>
 			{/snippet}
 		</Tooltip>
 		<Tooltip position="bottom">
-			<button class="btn hover:bg-secondary-500/25 px-2" onclick={handleClear}>
+			<Button variant="ghost" size="icon" onclick={handleClear}>
 				<Delete />
-			</button>
+			</Button>
 			{#snippet popup()}
 				<span>{m.clear()}</span>
 			{/snippet}
 		</Tooltip>
 		<Tooltip position="bottom">
-			<button class="btn hover:bg-secondary-500/25 px-2" onclick={handleSave}>
+			<Button variant="ghost" size="icon" onclick={handleSave}>
 				<Save />
-			</button>
+			</Button>
 			{#snippet popup()}
 				<span>{c.save}</span>
 			{/snippet}
 		</Tooltip>
 		<Tooltip position="bottom">
-			<button class="btn hover:bg-secondary-500/25 px-2" onclick={() => closeModal(null)}>
+			<Button variant="ghost" size="icon" onclick={() => closeModal(null)}>
 				<X />
-			</button>
+			</Button>
 			{#snippet popup()}
 				<span>{m.cancel()}</span>
 			{/snippet}

@@ -7,11 +7,12 @@ from palworld_save_pal.editor.preset_profile import PalPreset, PresetProfile
 from palworld_save_pal.db.models.settings_model import SettingsModel
 from palworld_save_pal.db.models.ups_models import (
     UPSPalModel,
-    UPSCollectionModel, 
+    UPSCollectionModel,
     UPSTagModel,
     UPSStatsModel,
     UPSTransferLogModel
 )
+from palworld_save_pal.db.models.server_models import ServerModel
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.db.migration import run_migrations
 

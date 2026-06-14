@@ -52,13 +52,13 @@ To run Palworld Save Pal using Docker:
    > Linux
 
    ```bash
-   ./build-docker.sh
+   ./scripts/build-docker.sh
    ```
 
    > Windows
 
    ```powershell
-   .\build-docker.ps1
+   .\scripts\build-docker.ps1
    ```
 
 3. Or you can follow these steps:
@@ -149,7 +149,7 @@ uv sync
 #### Using build script
 
 ```powershell
-.\build-desktop.ps1
+.\scripts\build-desktop.ps1
 ```
 
 #### Manual build

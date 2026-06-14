@@ -1,13 +1,15 @@
 <script lang="ts">
 	import '../app.css';
-	import { NavBar, Toast, Modal, Spinner } from '$components';
+	import { NavBar } from '$components/layout';
+	import { Toast, Modal, Spinner } from '$components/ui';
 	import { bootstrap } from '$lib/data/bootstrap';
-	import { getAppState, getSocketState } from '$states';
+	import { getAppState, getSocketState, theme } from '$states';
 	import { goto } from '$app/navigation';
 	import { getDispatcher } from '$lib/ws/dispatcher';
 	import { handlers } from '$lib/ws/handlers';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
+	import { page } from '$app/state';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
@@ -18,6 +20,12 @@
 
 	handlers.forEach((handler) => {
 		dispatcher.register(handler);
+	});
+
+	// Keep the <body data-theme> attribute in sync with the persisted theme so
+	// switching themes swaps the active color palette (client-side only).
+	$effect(() => {
+		document.body.dataset.theme = theme.current;
 	});
 
 	onMount(async () => {
@@ -32,15 +40,17 @@
 	<div class="flex h-screen w-full overflow-hidden">
 		<NavBar />
 		{#if appState.autoSave}
-			<div class="absolute right-2 top-1 flex shrink-0 flex-row" transition:fade>
-				<div class="flex items-center space-x-2 rounded-full p-3">
-					<span class="text-lg font-bold">{m.syncing()}</span>
-					<Spinner size="size-6" />
-				</div>
+			<div class="auto-save-indicator" transition:fade>
+				<span class="text-primary-400 text-sm font-bold">{m.syncing()}</span>
+				<Spinner size="size-5" />
 			</div>
 		{/if}
-		<main class="flex-1 overflow-hidden">
-			{@render children()}
-		</main>
+		<div class="relative flex-1 overflow-hidden">
+			{#key page.url.pathname}
+				<main class="absolute inset-0 overflow-y-auto" transition:fade={{ duration: 150 }}>
+					{@render children()}
+				</main>
+			{/key}
+		</div>
 	</div>
 </Modal>

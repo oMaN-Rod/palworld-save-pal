@@ -63,7 +63,7 @@
 		<div class="flex flex-col gap-2">
 			<SectionHeader text={m.current_missions()} />
 			<ul
-				class="divide-surface-700 border-surface-700 max-h-[300px] divide-y overflow-y-auto border"
+				class="divide-surface-700 border-surface-700 max-h-[200px] divide-y overflow-y-auto border md:max-h-[300px]"
 			>
 				{#each filteredCurrentMissions as mission, index (index)}
 					<li>

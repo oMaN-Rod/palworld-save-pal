@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { Card } from '$components/ui';
-	import type { MapObject } from '$types';
+	import type { MapUnlockPoint } from '$types';
 	import { worldToMap } from './utils';
-	import { Navigation, Globe, Map } from 'lucide-svelte';
+	import { Navigation, Globe, Map, Lock, LockOpen } from 'lucide-svelte';
+	import * as m from '$i18n/messages';
 
 	let {
 		point
 	}: {
-		point: MapObject;
+		point: MapUnlockPoint;
 	} = $props();
 
 	const mapCoords = $derived(worldToMap(point.x, point.y));
@@ -26,6 +27,17 @@
 		</div>
 
 		<div class="space-y-2">
+			{#if point.unlocked !== undefined}
+				<div class="flex items-center gap-2">
+					{#if point.unlocked}
+						<LockOpen class="h-4 w-4 shrink-0 text-green-400" />
+						<span class="text-sm text-green-400">{m.unlocked()}</span>
+					{:else}
+						<Lock class="h-4 w-4 shrink-0 text-red-400" />
+						<span class="text-sm text-red-400">{m.locked()}</span>
+					{/if}
+				</div>
+			{/if}
 			<div class="flex items-start gap-2">
 				<Globe class="text-primary mt-0.5 h-4 w-4 shrink-0" />
 				<div class="min-w-0 flex-1">

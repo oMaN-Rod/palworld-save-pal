@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { DebugButton, PlayerList } from '$components';
+	import { DebugButton } from '$components/layout';
+	import { PlayerList } from '$components/player';
 	import { getAppState, getModalState } from '$states';
 	import { goto } from '$app/navigation';
 	import { MessageType, type Player } from '$types';
-	import { KeyboardShortcut, Tooltip } from '$components/ui';
+	import { KeyboardShortcut, Nuke, Tooltip } from '$components/ui';
 	import { send } from '$utils/websocketUtils';
-	import Nuke from '$components/ui/icons/Nuke.svelte';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
@@ -103,21 +103,21 @@
 		{:else}
 			<div></div>
 		{/if}
-		<div class="flex gap-4">
+		<div id="player-tabs" class="flex gap-4">
 			{#if appState.saveFile && appState.selectedPlayer}
-				<KeyboardShortcut text={m.loadout()} key="L" href="/edit/player" />
-				<KeyboardShortcut text={m.technology({ count: 2 })} key="T" href="/edit/technologies" />
-				<KeyboardShortcut text={m.palbox()} key="B" href="/edit/palbox" />
+				<KeyboardShortcut id="loadout-tab" text={m.loadout()} key="L" href="/edit/player" />
+				<KeyboardShortcut id="technology-tab" text={m.technology({ count: 2 })} key="T" href="/edit/technologies" />
+				<KeyboardShortcut id="palbox-tab" text={m.palbox()} key="B" href="/edit/palbox" />
 			{/if}
 			{#if appState.selectedPlayer?.dps}
-				<KeyboardShortcut text={m.dps()} key="D" href="/edit/dps" />
+				<KeyboardShortcut id="dps-tab" text={m.dps()} key="D" href="/edit/dps" />
 			{/if}
 			{#if appState.selectedPlayer}
-				<KeyboardShortcut text={m.guild({ count: 1 })} key="G" href="/edit/guild" />
-				<KeyboardShortcut text={m.missions()} key="M" href="/edit/missions" />
+				<KeyboardShortcut id="guild-tab" text={m.guild({ count: 1 })} key="G" href="/edit/guild" />
+				<KeyboardShortcut id="missions-tab" text={m.missions()} key="M" href="/edit/missions" />
 			{/if}
 			{#if appState.selectedPal}
-				<KeyboardShortcut text={c.pal} key="P" href="/edit/pal" />
+				<KeyboardShortcut id="pal-tab" text={c.pal} key="P" href="/edit/pal" />
 			{/if}
 		</div>
 		<a

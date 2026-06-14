@@ -2,6 +2,7 @@
 	import UPSPalBadge from './UPSPalBadge.svelte';
 	import { getUpsState } from '$states';
 	import type { UPSPal } from '$types';
+	import { Tag, Upload, RefreshCw } from 'lucide-svelte';
 	import * as m from '$i18n/messages';
 
 	const upsState = getUpsState();
@@ -26,23 +27,27 @@
 				</div>
 
 				<!-- UPS-specific overlay info -->
-				<div class="absolute bottom-2 right-2">
+				<div class="absolute right-2 bottom-2">
 					{#if upsPal.tags && upsPal.tags.length > 0}
 						<div class="rounded bg-black/70 px-2 py-1 text-xs text-white">
-							{upsPal.tags.length}🏷️
+							{upsPal.tags.length}<Tag size={10} class="ml-0.5 inline" />
 						</div>
 					{/if}
 				</div>
 
 				<!-- Additional stats overlay -->
-				<div class="absolute right-2 top-2 text-right">
+				<div class="absolute top-2 right-2 text-right">
 					{#if upsPal.transfer_count > 0 || upsPal.clone_count > 0}
 						<div class="space-y-1 rounded bg-black/70 px-2 py-1 text-xs text-white">
 							{#if upsPal.transfer_count > 0}
-								<div title={m.transfer({ count: 2 })}>📤{upsPal.transfer_count}</div>
+								<div title={m.transfer({ count: 2 })}>
+									<Upload size={10} class="mr-0.5 inline" />{upsPal.transfer_count}
+								</div>
 							{/if}
 							{#if upsPal.clone_count > 0}
-								<div title={m.clones()}>🔄{upsPal.clone_count}</div>
+								<div title={m.clones()}>
+									<RefreshCw size={10} class="mr-0.5 inline" />{upsPal.clone_count}
+								</div>
 							{/if}
 						</div>
 					{/if}

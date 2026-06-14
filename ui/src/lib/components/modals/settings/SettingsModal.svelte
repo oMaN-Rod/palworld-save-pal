@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, Combobox, Input, Tooltip } from '$components/ui';
+	import { Button, Card, Combobox, Input, Tooltip } from '$components/ui';
 	import { X, Save } from 'lucide-svelte';
 	import { languages } from '$types';
 	import type { AppSettings, SelectOption } from '$types';
@@ -7,6 +7,7 @@
 	import type { CheckedChangeDetails } from '@zag-js/switch';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils';
+	import { theme, themeOptions } from '$states';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
@@ -38,6 +39,7 @@
 
 		<div class="mt-2 flex flex-col space-y-2">
 			<Combobox options={languageOptions} bind:value={settings.language} label={m.language()} />
+			<Combobox options={themeOptions} bind:value={theme.current} label={m.theme()} />
 			<Input bind:value={settings.clone_prefix} label={m.clone_prefix()} />
 			<Input bind:value={settings.new_pal_prefix} label={m.new_pal_prefix()} />
 			<div class="flex space-x-2">
@@ -66,19 +68,15 @@
 
 		<div class="mt-2 flex justify-end space-x-2">
 			<Tooltip position="bottom" label={c.save}>
-				<button
-					class="btn hover:bg-secondary-500/25 px-2"
-					onclick={() => closeModal(settings)}
-					data-modal-primary
-				>
+				<Button variant="ghost" size="icon" onclick={() => closeModal(settings)} data-modal-primary>
 					<Save />
-				</button>
+				</Button>
 			</Tooltip>
 
 			<Tooltip position="bottom" label={m.cancel()}>
-				<button class="btn hover:bg-secondary-500/25 px-2" onclick={() => closeModal(null)}>
+				<Button variant="ghost" size="icon" onclick={() => closeModal(null)}>
 					<X />
-				</button>
+				</Button>
 			</Tooltip>
 		</div>
 	</Card>

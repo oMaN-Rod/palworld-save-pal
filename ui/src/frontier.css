@@ -1,0 +1,190 @@
+[data-theme='frontier'] {
+	--color-text-muted: color-mix(in srgb, var(--color-surface-400) 80%, var(--color-primary-300) 20%);
+	--color-text-muted-foreground: color-mix(
+		in srgb,
+		var(--color-surface-500) 72%,
+		var(--color-tertiary-400) 28%
+	);
+
+	/* ── Surface: ultra-deep teal-tinted blacks ── */
+	--color-surface-50: rgb(232, 240, 248);
+	--color-surface-100: rgb(205, 216, 233);
+	--color-surface-200: rgb(165, 183, 210);
+	--color-surface-300: rgb(130, 152, 184);
+	--color-surface-400: rgb(86, 110, 146);
+	--color-surface-500: rgb(54, 76, 106);
+	--color-surface-600: rgb(40, 58, 82);
+	--color-surface-700: rgb(28, 42, 62);
+	--color-surface-800: rgb(18, 28, 42);
+	--color-surface-900: rgb(11, 19, 26);
+	--color-surface-950: rgb(6, 11, 17);
+	--color-surface-contrast-dark: var(--color-surface-950);
+	--color-surface-contrast-light: var(--color-surface-50);
+	--color-surface-contrast-50: var(--color-surface-contrast-dark);
+	--color-surface-contrast-100: var(--color-surface-contrast-dark);
+	--color-surface-contrast-200: var(--color-surface-contrast-dark);
+	--color-surface-contrast-300: var(--color-surface-contrast-dark);
+	--color-surface-contrast-400: var(--color-surface-contrast-dark);
+	--color-surface-contrast-500: var(--color-surface-contrast-light);
+	--color-surface-contrast-600: var(--color-surface-contrast-light);
+	--color-surface-contrast-700: var(--color-surface-contrast-light);
+	--color-surface-contrast-800: var(--color-surface-contrast-light);
+	--color-surface-contrast-900: var(--color-surface-contrast-light);
+	--color-surface-contrast-950: var(--color-surface-contrast-light);
+
+	/* ── Primary: Paldium Cyan ── */
+	--color-primary-50: rgb(224, 248, 255);
+	--color-primary-100: rgb(179, 238, 255);
+	--color-primary-200: rgb(102, 222, 255);
+	--color-primary-300: rgb(0, 210, 255);
+	--color-primary-400: rgb(0, 180, 220);
+	--color-primary-500: rgb(0, 150, 185);
+	--color-primary-600: rgb(0, 118, 148);
+	--color-primary-700: rgb(0, 88, 112);
+	--color-primary-800: rgb(0, 60, 78);
+	--color-primary-900: rgb(0, 34, 46);
+	--color-primary-950: rgb(0, 16, 24);
+	--color-primary-contrast-dark: var(--color-primary-950);
+	--color-primary-contrast-light: var(--color-primary-50);
+	--color-primary-contrast-50: var(--color-primary-contrast-dark);
+	--color-primary-contrast-100: var(--color-primary-contrast-dark);
+	--color-primary-contrast-200: var(--color-primary-contrast-dark);
+	--color-primary-contrast-300: var(--color-primary-contrast-dark);
+	--color-primary-contrast-400: var(--color-primary-contrast-dark);
+	--color-primary-contrast-500: var(--color-primary-contrast-dark);
+	--color-primary-contrast-600: var(--color-primary-contrast-dark);
+	--color-primary-contrast-700: var(--color-primary-contrast-light);
+	--color-primary-contrast-800: var(--color-primary-contrast-light);
+	--color-primary-contrast-900: var(--color-primary-contrast-light);
+	--color-primary-contrast-950: var(--color-primary-contrast-light);
+
+	/* ── Secondary: Palworld Gold ── */
+	--color-secondary-50: rgb(255, 252, 235);
+	--color-secondary-100: rgb(255, 247, 204);
+	--color-secondary-200: rgb(255, 240, 153);
+	--color-secondary-300: rgb(255, 230, 102);
+	--color-secondary-400: rgb(255, 220, 50);
+	--color-secondary-500: rgb(255, 200, 0);
+	--color-secondary-600: rgb(220, 170, 0);
+	--color-secondary-700: rgb(170, 130, 0);
+	--color-secondary-800: rgb(120, 90, 0);
+	--color-secondary-900: rgb(70, 50, 0);
+	--color-secondary-950: rgb(30, 20, 0);
+	--color-secondary-contrast-dark: var(--color-secondary-950);
+	--color-secondary-contrast-light: var(--color-secondary-50);
+	--color-secondary-contrast-50: var(--color-secondary-contrast-dark);
+	--color-secondary-contrast-100: var(--color-secondary-contrast-dark);
+	--color-secondary-contrast-200: var(--color-secondary-contrast-dark);
+	--color-secondary-contrast-300: var(--color-secondary-contrast-dark);
+	--color-secondary-contrast-400: var(--color-secondary-contrast-dark);
+	--color-secondary-contrast-500: var(--color-secondary-contrast-dark);
+	--color-secondary-contrast-600: var(--color-secondary-contrast-dark);
+	--color-secondary-contrast-700: var(--color-secondary-contrast-light);
+	--color-secondary-contrast-800: var(--color-secondary-contrast-light);
+	--color-secondary-contrast-900: var(--color-secondary-contrast-light);
+	--color-secondary-contrast-950: var(--color-secondary-contrast-light);
+
+	/* ── Tertiary: Ancient Technology Magenta ── */
+	--color-tertiary-50: rgb(245, 235, 255);
+	--color-tertiary-100: rgb(230, 210, 255);
+	--color-tertiary-200: rgb(210, 170, 255);
+	--color-tertiary-300: rgb(190, 130, 255);
+	--color-tertiary-400: rgb(180, 77, 255);
+	--color-tertiary-500: rgb(140, 50, 220);
+	--color-tertiary-600: rgb(110, 38, 180);
+	--color-tertiary-700: rgb(80, 26, 140);
+	--color-tertiary-800: rgb(55, 18, 100);
+	--color-tertiary-900: rgb(30, 10, 55);
+	--color-tertiary-950: rgb(14, 5, 28);
+	--color-tertiary-contrast-dark: var(--color-tertiary-950);
+	--color-tertiary-contrast-light: var(--color-tertiary-50);
+	--color-tertiary-contrast-50: var(--color-tertiary-contrast-dark);
+	--color-tertiary-contrast-100: var(--color-tertiary-contrast-dark);
+	--color-tertiary-contrast-200: var(--color-tertiary-contrast-dark);
+	--color-tertiary-contrast-300: var(--color-tertiary-contrast-dark);
+	--color-tertiary-contrast-400: var(--color-tertiary-contrast-light);
+	--color-tertiary-contrast-500: var(--color-tertiary-contrast-light);
+	--color-tertiary-contrast-600: var(--color-tertiary-contrast-light);
+	--color-tertiary-contrast-700: var(--color-tertiary-contrast-light);
+	--color-tertiary-contrast-800: var(--color-tertiary-contrast-light);
+	--color-tertiary-contrast-900: var(--color-tertiary-contrast-light);
+	--color-tertiary-contrast-950: var(--color-tertiary-contrast-light);
+
+	/* ── Success: Toxic Green ── */
+	--color-success-50: rgb(230, 255, 240);
+	--color-success-100: rgb(180, 255, 210);
+	--color-success-200: rgb(120, 255, 175);
+	--color-success-300: rgb(70, 255, 140);
+	--color-success-400: rgb(57, 255, 20);
+	--color-success-500: rgb(0, 220, 100);
+	--color-success-600: rgb(0, 175, 80);
+	--color-success-700: rgb(0, 132, 60);
+	--color-success-800: rgb(0, 88, 40);
+	--color-success-900: rgb(0, 44, 20);
+	--color-success-950: rgb(0, 22, 10);
+	--color-success-contrast-dark: var(--color-success-950);
+	--color-success-contrast-light: var(--color-success-50);
+	--color-success-contrast-50: var(--color-success-contrast-dark);
+	--color-success-contrast-100: var(--color-success-contrast-dark);
+	--color-success-contrast-200: var(--color-success-contrast-dark);
+	--color-success-contrast-300: var(--color-success-contrast-dark);
+	--color-success-contrast-400: var(--color-success-contrast-dark);
+	--color-success-contrast-500: var(--color-success-contrast-dark);
+	--color-success-contrast-600: var(--color-success-contrast-dark);
+	--color-success-contrast-700: var(--color-success-contrast-light);
+	--color-success-contrast-800: var(--color-success-contrast-light);
+	--color-success-contrast-900: var(--color-success-contrast-light);
+	--color-success-contrast-950: var(--color-success-contrast-light);
+
+	/* ── Warning: amber / gold ── */
+	--color-warning-50: rgb(255, 248, 230);
+	--color-warning-100: rgb(255, 238, 194);
+	--color-warning-200: rgb(255, 224, 138);
+	--color-warning-300: rgb(255, 210, 87);
+	--color-warning-400: rgb(255, 196, 36);
+	--color-warning-500: rgb(230, 170, 0);
+	--color-warning-600: rgb(184, 136, 0);
+	--color-warning-700: rgb(138, 102, 0);
+	--color-warning-800: rgb(92, 68, 0);
+	--color-warning-900: rgb(46, 34, 0);
+	--color-warning-950: rgb(23, 17, 0);
+	--color-warning-contrast-dark: var(--color-warning-950);
+	--color-warning-contrast-light: var(--color-warning-50);
+	--color-warning-contrast-50: var(--color-warning-contrast-dark);
+	--color-warning-contrast-100: var(--color-warning-contrast-dark);
+	--color-warning-contrast-200: var(--color-warning-contrast-dark);
+	--color-warning-contrast-300: var(--color-warning-contrast-dark);
+	--color-warning-contrast-400: var(--color-warning-contrast-dark);
+	--color-warning-contrast-500: var(--color-warning-contrast-dark);
+	--color-warning-contrast-600: var(--color-warning-contrast-dark);
+	--color-warning-contrast-700: var(--color-warning-contrast-dark);
+	--color-warning-contrast-800: var(--color-warning-contrast-light);
+	--color-warning-contrast-900: var(--color-warning-contrast-light);
+	--color-warning-contrast-950: var(--color-warning-contrast-light);
+
+	/* ── Error: crimson ── */
+	--color-error-50: rgb(255, 235, 235);
+	--color-error-100: rgb(255, 204, 204);
+	--color-error-200: rgb(255, 158, 158);
+	--color-error-300: rgb(255, 112, 112);
+	--color-error-400: rgb(255, 66, 66);
+	--color-error-500: rgb(235, 30, 30);
+	--color-error-600: rgb(188, 24, 24);
+	--color-error-700: rgb(141, 18, 18);
+	--color-error-800: rgb(94, 12, 12);
+	--color-error-900: rgb(47, 6, 6);
+	--color-error-950: rgb(23, 3, 3);
+	--color-error-contrast-dark: var(--color-error-950);
+	--color-error-contrast-light: var(--color-error-50);
+	--color-error-contrast-50: var(--color-error-contrast-dark);
+	--color-error-contrast-100: var(--color-error-contrast-dark);
+	--color-error-contrast-200: var(--color-error-contrast-dark);
+	--color-error-contrast-300: var(--color-error-contrast-dark);
+	--color-error-contrast-400: var(--color-error-contrast-dark);
+	--color-error-contrast-500: var(--color-error-contrast-light);
+	--color-error-contrast-600: var(--color-error-contrast-light);
+	--color-error-contrast-700: var(--color-error-contrast-light);
+	--color-error-contrast-800: var(--color-error-contrast-light);
+	--color-error-contrast-900: var(--color-error-contrast-light);
+	--color-error-contrast-950: var(--color-error-contrast-light);
+}

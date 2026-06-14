@@ -4,7 +4,7 @@ from palworld_save_pal.utils.json_manager import JsonManager
 PAL_DATA = JsonManager("data/json/pals.json").read()
 
 
-def format_character_key(character_id: str) -> tuple[str, str]:
+def format_character_key(character_id: str) -> str:
     character_id_lower = character_id.lower()
 
     if character_id_lower.startswith("boss_") and character_id not in PAL_DATA:

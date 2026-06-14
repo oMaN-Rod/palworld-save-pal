@@ -8,6 +8,7 @@ from palworld_save_pal.dto.pal import PalDTO
 from palworld_save_pal.game.utils import format_character_key, get_pal_data
 from palworld_save_pal.utils.dict import safe_remove
 from palworld_save_pal.utils.logging_config import create_logger
+from palworld_save_pal.utils.uuid import parse_optional_uuid
 from palworld_save_pal.game.pal_objects import (
     PalObjects,
     ArrayType,
@@ -548,10 +549,10 @@ class Pal(BaseModel):
         logger.debug(f"Updating pal from {other_pal}")
 
         type_converters = {
-            "instance_id": lambda x: UUID(str(x)) if x else None,
-            "owner_uid": lambda x: UUID(str(x)) if x else None,
-            "group_id": lambda x: UUID(str(x)) if x else None,
-            "storage_id": lambda x: UUID(str(x)) if x else None,
+            "instance_id": parse_optional_uuid,
+            "owner_uid": parse_optional_uuid,
+            "group_id": parse_optional_uuid,
+            "storage_id": parse_optional_uuid,
             "gender": lambda x: PalGender.from_value(x) if x else None,
             "stomach": float,
             "sanity": float,

@@ -19,6 +19,7 @@ import PalSelectModal from './pal-select/PalSelectModal.svelte';
 import SettingsModal from './settings/SettingsModal.svelte';
 import SkillSelectModal from './skill-select/SkillSelectModal.svelte';
 import TextInputModal from './text-input/TextInputModal.svelte';
+import UpdateAvailableModal from './update-available/UpdateAvailableModal.svelte';
 
 export {
 	AddToCollectionModal,
@@ -34,13 +35,13 @@ export {
 	MultiSkillSelectModal,
 	NukeUpsConfirmModal,
 	NumberInputModal,
-	NumberSliderModal, 
-	OpenFolder, 
+	NumberSliderModal,
+	OpenFolder,
 	PalPresetSelectModal,
 	PalSelectModal,
 	PresetConfigModal,
 	SettingsModal,
 	SkillSelectModal,
-	TextInputModal
+	TextInputModal,
+	UpdateAvailableModal
 };
-

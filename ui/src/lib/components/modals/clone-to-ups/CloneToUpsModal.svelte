@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, Combobox, Input } from '$components/ui';
+	import { Button, Card, Combobox, Input } from '$components/ui';
 	import { X, Folder, Tag, Plus, Copy } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
@@ -80,7 +80,7 @@
 </script>
 
 <div bind:this={modalContainer}>
-	<Card class="min-w-[calc(100vw/2)] max-w-lg">
+	<Card class="max-w-lg min-w-[calc(100vw/2)]">
 		<div class="mb-4 flex items-center justify-between">
 			<h3 class="h3 flex items-center gap-2">
 				<Copy class="h-5 w-5" />
@@ -101,15 +101,21 @@
 				<div class="space-y-1">
 					{#each pals as pal}
 						<div class="text-surface-600 dark:text-surface-400 text-sm">
-							• {pal.nickname || pal.name || pal.character_id} ({m.level_value({ level: pal.level })})
+							• {pal.nickname || pal.name || pal.character_id} ({m.level_value({
+								level: pal.level
+							})})
 						</div>
 					{/each}
 				</div>
 			{:else}
 				<div class="text-surface-600 dark:text-surface-400 text-sm">
-					• {pals[0].nickname || pals[0].name || pals[0].character_id} ({m.level_value({ level: pals[0].level })})
+					• {pals[0].nickname || pals[0].name || pals[0].character_id} ({m.level_value({
+						level: pals[0].level
+					})})
 					<br />
-					• {pals[1].nickname || pals[1].name || pals[1].character_id} ({m.level_value({ level: pals[1].level })})
+					• {pals[1].nickname || pals[1].name || pals[1].character_id} ({m.level_value({
+						level: pals[1].level
+					})})
 					<br />
 					• {m.and_more_count({ count: pals.length - 2 })}
 				</div>
@@ -134,13 +140,15 @@
 							placeholder={m.select_entity({ entity: m.collection({ count: 1 }) })}
 						/>
 
-						<button
+						<Button
 							type="button"
+							variant="primary"
+							size="icon"
+							class="w-10"
 							onclick={() => (isCreatingCollection = true)}
-							class="bg-primary-500 hover:bg-primary-600 flex w-10 items-center justify-center gap-1 rounded-md p-2 text-white"
 						>
 							<Plus class="h-4 w-4" />
-						</button>
+						</Button>
 					</div>
 				{:else}
 					<div class="space-y-2">
@@ -157,24 +165,26 @@
 							inputClass="w-full"
 						/>
 						<div class="flex gap-2">
-							<button
+							<Button
 								type="button"
+								variant="primary"
+								size="sm"
 								onclick={createCollection}
-								class="rounded bg-green-500 px-3 py-1 text-sm text-white hover:bg-green-600"
 							>
 								{m.create()}
-							</button>
-							<button
+							</Button>
+							<Button
 								type="button"
+								variant="neutral"
+								size="sm"
 								onclick={() => {
 									isCreatingCollection = false;
 									newCollectionName = '';
 									newCollectionDescription = '';
 								}}
-								class="rounded bg-gray-500 px-3 py-1 text-sm text-white hover:bg-gray-600"
 							>
 								{m.cancel()}
-							</button>
+							</Button>
 						</div>
 					</div>
 				{/if}
@@ -215,13 +225,15 @@
 						placeholder={m.add_new_tag()}
 						onkeydown={(e: KeyboardEvent) => e.key === 'Enter' && addNewTag()}
 					/>
-					<button
+					<Button
 						type="button"
+						variant="primary"
+						size="icon"
+						class="w-10"
 						onclick={addNewTag}
-						class="bg-primary-500 hover:bg-secondary-600 focus:outline-hidden ring-surface-200-800 focus-within:ring-secondary-500 flex w-10 items-center justify-center gap-1 rounded-md px-3 py-2 text-white ring"
 					>
 						<Plus class="h-4 w-4" />
-					</button>
+					</Button>
 				</div>
 
 				<!-- Selected Tags Display -->
@@ -252,30 +264,30 @@
 					bind:value={notes}
 					placeholder={m.add_notes_about_cloned_pals({ pals: c.pals })}
 					rows="3"
-					class="bg-surface-900 resize-vertical border-surface-800 focus:outline-hidden ring-surface-200-800 focus-within:ring-secondary-500 w-full rounded-md border p-2 ring"
+					class="bg-surface-900 resize-vertical border-surface-800 ring-surface-200-800 focus-within:ring-secondary-500 w-full rounded-md border p-2 ring focus:outline-hidden"
 				></textarea>
 			</div>
 		</div>
 
 		<!-- Actions -->
 		<div class="mt-6 flex justify-end gap-2">
-			<button
+			<Button
 				type="button"
+				variant="neutral"
 				onclick={() => handleClose(false)}
-				class="bg-surface-500 hover:bg-surface-600 flex items-center gap-2 rounded-md px-4 py-2 text-white"
 			>
 				<X class="h-4 w-4" />
 				{m.cancel()}
-			</button>
-			<button
+			</Button>
+			<Button
 				type="button"
+				variant="primary"
 				onclick={() => handleClose(true)}
-				class="bg-primary-500 hover:bg-primary-600 flex items-center gap-2 rounded-md px-4 py-2 text-white"
 				data-modal-primary
 			>
 				<Copy class="h-4 w-4" />
 				{m.clone_to_entity({ entity: m.ups() })}
-			</button>
+			</Button>
 		</div>
 	</Card>
 </div>

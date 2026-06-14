@@ -1,14 +1,13 @@
 <script lang="ts">
 	import { MissionDetails, MissionList } from '$components';
-	import { Tooltip, TooltipButton } from '$components/ui';
+	import { ConfirmModal } from '$components/modals';
+	import { TooltipButton } from '$components/ui';
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
 	import type { ValueChangeDetails } from '@zag-js/tabs';
 	import { EntryState, type Mission, type MissionType } from '$types';
 	import { CheckCheck, Trash2, ListX } from 'lucide-svelte';
-	import { ConfirmModal } from '$components';
 	import * as m from '$i18n/messages';
-	import { c } from '$lib/utils/commonTranslations';
 
 	const appState = getAppState();
 	const modal = getModalState();
@@ -145,74 +144,76 @@
 
 {#if appState.selectedPlayer}
 	<div class="relative flex h-full flex-col p-4">
-		<div class="mb-4 flex items-center justify-between">
-			<Tabs
-				listBorder="border-none"
-				listClasses="btn-group preset-outlined-surface-200-800 w-auto flex-col md:flex-row rounded-sm"
-				value={activeTab}
-				onValueChange={handleTabChange}
-			>
-				{#snippet list()}
-					<Tabs.Control
-						value="Main"
-						classes="px-6"
-						base="border-none hover:bg-secondary-500/50 rounded-sm"
-						labelBase="btn"
-						stateActive="bg-secondary-800"
-						padding="p-0"
-					>
-						{m.main_missions()}
-					</Tabs.Control>
-					<Tabs.Control
-						value="Sub"
-						classes="px-6"
-						base="border-none hover:bg-secondary-500/50 rounded-sm"
-						labelBase="btn"
-						stateActive="bg-secondary-800"
-						padding="p-0"
-					>
-						{m.sub_missions()}
-					</Tabs.Control>
-				{/snippet}
-				{#snippet content()}
-					<Tabs.Panel value="Main">
-						<div class="mt-4 grid h-[calc(100vh-200px)] grid-cols-[25%_1fr] gap-4">
-							<div class="overflow-y-auto">
-								<MissionList
-									currentMissions={appState.selectedPlayer?.current_missions ?? []}
-									completedMissions={appState.selectedPlayer?.completed_missions ?? []}
-									bind:selectedMission
-									missionType="Main"
-									onClearMission={handleClearMission}
-									onMarkComplete={handleMarkComplete}
-								/>
+		<div id="missions-tabs">
+				<Tabs
+					listBorder="border-none"
+					listClasses="btn-group preset-outlined-surface-200-800 w-auto flex-col md:flex-row rounded-sm"
+					value={activeTab}
+					onValueChange={handleTabChange}
+				>
+					{#snippet list()}
+						<Tabs.Control
+							value="Main"
+							classes="px-6"
+							base="border-none hover:bg-secondary-500/50 rounded-sm"
+							labelBase="btn"
+							stateActive="bg-secondary-800 text-white"
+							padding="p-0"
+						>
+							{m.main_missions()}
+						</Tabs.Control>
+						<Tabs.Control
+							value="Sub"
+							classes="px-6"
+							base="border-none hover:bg-secondary-500/50 rounded-sm"
+							labelBase="btn"
+							stateActive="bg-secondary-800 text-white"
+							padding="p-0"
+						>
+							{m.sub_missions()}
+						</Tabs.Control>
+					{/snippet}
+					{#snippet content()}
+						<Tabs.Panel value="Main">
+							<div class="mt-4 grid h-[calc(100vh-200px)] grid-cols-[25%_1fr] gap-4">
+								<div id="missions-list" class="overflow-y-auto">
+									<MissionList
+										currentMissions={appState.selectedPlayer?.current_missions ?? []}
+										completedMissions={appState.selectedPlayer?.completed_missions ?? []}
+										bind:selectedMission
+										missionType="Main"
+										onClearMission={handleClearMission}
+										onMarkComplete={handleMarkComplete}
+									/>
+								</div>
+								<div id="missions-details" class="overflow-y-auto">
+									<MissionDetails mission={selectedMission} />
+								</div>
 							</div>
-							<div class="overflow-y-auto">
-								<MissionDetails mission={selectedMission} />
+						</Tabs.Panel>
+						<Tabs.Panel value="Sub">
+							<div class="mt-4 grid h-[calc(100vh-200px)] grid-cols-[25%_1fr] gap-4">
+								<div class="overflow-y-auto">
+									<MissionList
+										currentMissions={appState.selectedPlayer?.current_missions ?? []}
+										completedMissions={appState.selectedPlayer?.completed_missions ?? []}
+										bind:selectedMission
+										missionType="Sub"
+										onClearMission={handleClearMission}
+										onMarkComplete={handleMarkComplete}
+									/>
+								</div>
+								<div class="overflow-y-auto">
+									<MissionDetails mission={selectedMission} />
+								</div>
 							</div>
-						</div>
-					</Tabs.Panel>
-					<Tabs.Panel value="Sub">
-						<div class="mt-4 grid h-[calc(100vh-200px)] grid-cols-[25%_1fr] gap-4">
-							<div class="overflow-y-auto">
-								<MissionList
-									currentMissions={appState.selectedPlayer?.current_missions ?? []}
-									completedMissions={appState.selectedPlayer?.completed_missions ?? []}
-									bind:selectedMission
-									missionType="Sub"
-									onClearMission={handleClearMission}
-									onMarkComplete={handleMarkComplete}
-								/>
-							</div>
-							<div class="overflow-y-auto">
-								<MissionDetails mission={selectedMission} />
-							</div>
-						</div>
-					</Tabs.Panel>
-				{/snippet}
-			</Tabs>
-			<div class="absolute right-4 top-4 flex items-center gap-2">
+						</Tabs.Panel>
+					{/snippet}
+				</Tabs>
+			</div>
+			<div id="missions-actions" class="absolute top-4 right-4 flex items-center gap-2">
 				<TooltipButton
+					id="missions-mark-current-complete"
 					buttonClass="preset-outlined-surface-200-800 rounded-sm p-2 hover:bg-secondary-500/50"
 					popupLabel={m.mark_all_current_complete()}
 					position="bottom"
@@ -221,6 +222,7 @@
 					<CheckCheck class="h-5 w-5" />
 				</TooltipButton>
 				<TooltipButton
+					id="missions-clear-current"
 					buttonClass="preset-outlined-surface-200-800 rounded-sm p-2 hover:bg-secondary-500/50"
 					popupLabel={m.clear_all_entity({ entity: m.current_missions() })}
 					position="bottom"
@@ -229,6 +231,7 @@
 					<ListX class="h-5 w-5" />
 				</TooltipButton>
 				<TooltipButton
+					id="missions-clear-completed"
 					buttonClass="preset-outlined-surface-200-800 rounded-sm p-2 hover:bg-secondary-500/50"
 					popupLabel={m.clear_all_entity({ entity: m.completed_missions() })}
 					position="bottom"
@@ -237,7 +240,6 @@
 					<Trash2 class="h-5 w-5" />
 				</TooltipButton>
 			</div>
-		</div>
 	</div>
 {:else}
 	<div class="flex h-full w-full items-center justify-center">

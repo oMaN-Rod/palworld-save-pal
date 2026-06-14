@@ -3,8 +3,7 @@
 	import { elementsData, palsData, presetsData } from '$lib/data';
 	import { getAppState, getModalState, getToastState, getUpsState } from '$states';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
-	import { Card, Input, Tooltip, TooltipButton } from '$components/ui';
-	import { Spinner } from '$components';
+	import { Button, Card, Input, Spinner, Tooltip, TooltipButton } from '$components/ui';
 	import {
 		PalSelectModal,
 		FillPalsModal,
@@ -47,7 +46,7 @@
 		Play,
 		Upload
 	} from 'lucide-svelte';
-	import { PalBadge, PalContainerStats } from '$components';
+	import { PalBadge, PalContainerStats } from '$components/pal';
 	import { send } from '$lib/utils/websocketUtils';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
 	import * as m from '$i18n/messages';
@@ -384,7 +383,7 @@
 				clonedPal.nickname || clonedPal.name || clonedPal.character_id,
 				appState.settings.clone_prefix
 			);
-			send(MessageType.CLONE_DPS_PAL, {
+			send(MessageType.CLONE_GPS_PAL, {
 				pal: clonedPal
 			});
 		}
@@ -632,21 +631,21 @@
 </script>
 
 {#if appState.loadingGps}
-	<div class="flex h-full w-full items-center justify-center">
+	<div class="animate-fade-in flex h-full w-full items-center justify-center">
 		<div class="flex flex-col items-center gap-4">
 			<Spinner size="size-16" />
 			<p class="text-surface-400">{m.loading_entity({ entity: m.gps() })}</p>
 		</div>
 	</div>
 {:else if !appState.hasGpsAvailable && !appState.gpsLoaded}
-	<div class="flex h-full w-full items-center justify-center">
+	<div class="animate-fade-in flex h-full w-full items-center justify-center">
 		<div class="flex flex-col items-center gap-4">
 			<p class="text-surface-400">{m.entity_not_available({ entity: c.globalPalStorage })}</p>
 		</div>
 	</div>
 {:else}
 	<div
-		class="grid h-full w-full grid-cols-[25%_1fr] 2xl:grid-cols-[25%_1fr_20%]"
+		class="animate-fade-in grid h-full w-full grid-cols-[25%_1fr] 2xl:grid-cols-[25%_1fr_20%]"
 		{...additionalProps}
 	>
 		<div class="shrink-0 p-4">
@@ -655,14 +654,14 @@
 					position="right"
 					label={m.add_all_pals_to_entity({ entity: m.gps(), pals: c.pals })}
 				>
-					<button class="btn hover:preset-tonal-secondary p-2" onclick={addAllPalsGps}>
+					<Button variant="ghost" size="icon" onclick={addAllPalsGps}>
 						<CircleFadingPlus />
-					</button>
+					</Button>
 				</Tooltip>
 				<Tooltip>
-					<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectAll}>
+					<Button variant="ghost" size="icon" onclick={handleSelectAll}>
 						<ReplaceAll />
-					</button>
+					</Button>
 					{#snippet popup()}
 						<div class="flex flex-col">
 							<span>{m.select_all_in()}</span>
@@ -683,31 +682,28 @@
 					<Tooltip
 						label={m.apply_preset_to_selected({ pals: m.pal({ count: selectedPals.length }) })}
 					>
-						<button class="btn hover:preset-tonal-secondary p-2" onclick={handleSelectPreset}>
+						<Button variant="ghost" size="icon" onclick={handleSelectPreset}>
 							<Play />
-						</button>
+						</Button>
 					</Tooltip>
 					<Tooltip label={m.clone_selected_to_entity({ entity: m.ups(), pals: c.pals })}>
-						<button class="btn hover:preset-tonal-secondary p-2" onclick={handleBulkCloneToUps}>
+						<Button variant="ghost" size="icon" onclick={handleBulkCloneToUps}>
 							<Upload />
-						</button>
+						</Button>
 					</Tooltip>
 					<Tooltip
 						label={m.delete_selected_entity({ entity: m.pal({ count: selectedPals.length }) })}
 					>
-						<button class="btn hover:preset-tonal-secondary p-2" onclick={deleteSelectedPals}>
+						<Button variant="ghost" size="icon" onclick={deleteSelectedPals}>
 							<Trash />
-						</button>
+						</Button>
 					</Tooltip>
 					<Tooltip
 						label={m.clear_selected_entity({ entity: m.pal({ count: selectedPals.length }) })}
 					>
-						<button
-							class="btn hover:preset-tonal-secondary p-2"
-							onclick={() => (selectedPals = [])}
-						>
+						<Button variant="ghost" size="icon" onclick={() => (selectedPals = [])}>
 							<X />
-						</button>
+						</Button>
 					</Tooltip>
 				{/if}
 			</div>
@@ -735,7 +731,7 @@
 						<div>
 							<legend class="font-bold">{m.sort()}</legend>
 							<hr />
-							<div class="grid grid-cols-6">
+							<div class="grid grid-cols-3 sm:grid-cols-6">
 								<Tooltip label={m.sort_by_entity({ entity: m.level() })}>
 									<button
 										type="button"
@@ -768,7 +764,7 @@
 						<div>
 							<legend class="font-bold">{m.element_and_type()}</legend>
 							<hr />
-							<div class="mt-2 grid grid-cols-4 2xl:grid-cols-6">
+							<div class="mt-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 2xl:grid-cols-6">
 								<Tooltip>
 									<button class={elementClass('All')} onclick={() => (selectedFilter = 'All')}>
 										<GalleryVerticalEnd />
@@ -877,31 +873,35 @@
 		<div>
 			<!-- Pager -->
 			<div class="mb-4 flex items-center justify-center space-x-4">
-				<button class="rounded-sm px-4 py-2 font-bold" onclick={decrementPage}>
-					<img src={staticIcons.qIcon} alt={m.previous()} class="h-10 w-10" />
-				</button>
+				<Button  class="rounded-full font-bold p-0!" variant="ghost" size="md" onclick={decrementPage}>
+					<img src={staticIcons.qIcon} alt="Previous" class="h-10 w-10" />
+				</Button>
 
 				<div class="flex space-x-2">
 					{#each visiblePages as page}
 						<TooltipButton
-							class="h-8 w-8 rounded-full {page === currentPage
-								? 'bg-primary-500 text-white'
-								: 'bg-surface-800 hover:bg-gray-300'}"
+							buttonClass="h-8 w-8 rounded-full {page === currentPage
+								? 'bg-primary-500! text-white'
+								: 'bg-surface-800 hover:bg-surface-600'}"
 							onclick={() => (currentPage = page)}
-							popupLabel={`${m.box()} ${page}`}
+							popupLabel={`Box ${page}`}
+							variant="ghost"
+							size="md"
 						>
 							{Math.floor(page)}
 						</TooltipButton>
 					{/each}
 				</div>
 
-				<button class="rounded-sm px-4 py-2 font-bold" onclick={incrementPage}>
-					<img src={staticIcons.eIcon} alt={m.next()} class="h-10 w-10" />
-				</button>
+				<Button class="rounded-sm font-bold p-0!" variant="ghost" size="md" onclick={incrementPage}>
+					<img src={staticIcons.eIcon} alt="Next" class="h-10 w-10" />
+				</Button>
 			</div>
 
 			<div class="overflow-hidden">
-				<div class="grid grid-cols-6 place-items-center gap-4 p-4">
+				<div
+					class="grid grid-cols-3 place-items-center gap-4 p-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6"
+				>
 					{#each currentPageItems as item (item.pal.instance_id)}
 						{#if item.pal.character_id !== 'None' || (!searchQuery && selectedFilter === 'All' && sortBy === 'slot-index')}
 							<PalBadge
@@ -921,11 +921,11 @@
 		</div>
 
 		{#if pals && pals.length > 0}
-			<Card class="h-107.5 mr-2 hidden 2xl:block">
+			<Card class="mr-2 hidden min-h-0 2xl:block">
 				<PalContainerStats {pals} {elementTypes} />
 			</Card>
 		{:else}
-			<Card class="h-107.5 mr-2 hidden 2xl:block">
+			<Card class="mr-2 hidden min-h-0 2xl:block">
 				<div>{m.no_pals_available(p.pals)}</div>
 			</Card>
 		{/if}

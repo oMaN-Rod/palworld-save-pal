@@ -7,7 +7,8 @@ from typing import Dict
 import uuid
 
 from fastapi import WebSocket
-from palworld_save_pal.game.save_file import SaveFile, SaveType
+from palworld_save_pal.game.save_manager import SaveManager
+from palworld_save_pal.game.gvas_codec import SaveType
 from palworld_save_pal.utils.file_manager import FileManager
 from palworld_save_pal.utils.gamepass.container_types import (
     ContainerFileList,
@@ -139,7 +140,7 @@ async def save_modded_gamepass_save(world_name: str, ws: WebSocket, ws_callback)
         raise
 
 
-async def save_modded_steam_save(ws: WebSocket, ws_callback, save_file: SaveFile):
+async def save_modded_steam_save(ws: WebSocket, ws_callback, save_file: SaveManager):
     await backup_dir(app_state.settings.save_dir, "steam", ws_callback)
     await ws_callback("Writing new save file... 🚀")
     save_file.to_level_sav_file(save_file.level_sav_path)
@@ -395,10 +396,10 @@ async def convert_sav_file(message: ConvertSavFileMessage, ws: WebSocket):
     target_type = message.data.target_type
     logger.debug("Converting SAV file to %s", target_type)
     if target_type == "json":
-        data = SaveFile().convert_sav_file_to_json(file_data)
+        data = SaveManager().convert_sav_file_to_json(file_data)
         response = build_response(MessageType.CONVERT_SAV_FILE, data)
     else:
-        data = SaveFile().convert_json_to_sav_file(file_data)
+        data = SaveManager().convert_json_to_sav_file(file_data)
         encoded_data = base64.b64encode(data).decode("utf-8")
         response = build_response(MessageType.CONVERT_SAV_FILE, encoded_data)
 

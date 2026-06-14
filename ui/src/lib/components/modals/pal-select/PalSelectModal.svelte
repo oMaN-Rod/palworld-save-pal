@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, Tooltip, Combobox, Input } from '$components/ui';
+	import { Button, Card, Tooltip, Combobox, Input } from '$components/ui';
 	import { type SelectOption } from '$types';
 	import { Save, X } from 'lucide-svelte';
 	import { palsData, elementsData } from '$lib/data';
@@ -104,21 +104,17 @@
 
 		<div class="mt-2 flex flex-row items-center space-x-2">
 			<Tooltip position="bottom">
-				<button
-					class="btn hover:bg-secondary-500 px-2"
-					onclick={() => handleClose(true)}
-					data-modal-primary
-				>
+				<Button variant="ghost" size="icon" onclick={() => handleClose(true)} data-modal-primary>
 					<Save />
-				</button>
+				</Button>
 				{#snippet popup()}
 					<span>{c.save}</span>
 				{/snippet}
 			</Tooltip>
 			<Tooltip position="bottom">
-				<button class="btn hover:bg-secondary-500 px-2" onclick={() => handleClose(false)}>
+				<Button variant="ghost" size="icon" onclick={() => handleClose(false)}>
 					<X />
-				</button>
+				</Button>
 				{#snippet popup()}
 					<span>{m.cancel()}</span>
 				{/snippet}

@@ -1,5 +1,6 @@
-from typing import Any
+from typing import Any, Optional
 import uuid
+from uuid import UUID
 
 
 def is_valid_uuid(uuid_test: Any) -> bool:
@@ -16,3 +17,7 @@ def is_empty_uuid(uuid_test: Any) -> bool:
 
 def are_equal_uuids(uuid1: Any, uuid2: Any) -> bool:
     return str(uuid1).lower() == str(uuid2).lower()
+
+
+def parse_optional_uuid(value: Any) -> Optional[UUID]:
+    return UUID(str(value)) if value else None

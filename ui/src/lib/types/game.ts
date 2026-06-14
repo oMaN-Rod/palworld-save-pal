@@ -5,11 +5,21 @@ export interface GamePassContainer {
 	name: string;
 }
 
+export interface GamepassContainerInfo {
+	container_type: string;
+	seq: number;
+	last_modified: number;
+	size: number;
+	container_name: string;
+}
+
 export interface GamepassSave {
 	save_id: string;
 	world_name: string;
 	player_count: number;
-	containers: GamePassContainer[];
+	last_modified: number;
+	total_size: number;
+	containers: GamepassContainerInfo[];
 }
 
 export interface PlayerSummary {
@@ -152,6 +162,8 @@ export type Player = {
 	last_online_time: string;
 	current_missions: string[];
 	completed_missions: string[];
+	unlocked_fast_travel_points: string[];
+	collected_effigies: string[];
 };
 
 export type GuildLabResearchInfo = {
@@ -191,6 +203,28 @@ export type MapObject = {
 	type: string;
 	localized_name: string;
 	pal: string;
+};
+
+export type FastTravelPoint = {
+	x: number;
+	y: number;
+	z: number;
+	id: string;
+	localized_name?: string;
+};
+
+export type Effigy = {
+	x: number;
+	y: number;
+	z: number;
+};
+
+export type MapUnlockPoint = {
+	guid: string;
+	x: number;
+	y: number;
+	localized_name: string;
+	unlocked?: boolean;
 };
 
 export type BaseDTO = {
@@ -836,10 +870,11 @@ export enum BuildingTypeB {
 
 export type Building = {
 	localized_name: string;
+	description: string;
 	type_a: BuildingTypeA;
 	type_b: BuildingTypeB;
 	rank: number;
-	required_work_amount: number;
+	required_build_work_amount: number;
 	required_energy_type: string;
 	consume_energy_speed: number;
 	materials: { id: string; count: number }[];

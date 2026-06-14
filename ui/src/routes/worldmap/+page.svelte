@@ -1,14 +1,15 @@
 <script lang="ts">
-	import { Map, PlayerList } from '$components';
-	import { Combobox } from '$components/ui';
+	import { Map } from '$components';
+	import { PlayerList } from '$components/player';
+	import { Button, Combobox } from '$components/ui';
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { worldToPixel, worldToMap } from '$components/map/utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { mapImg } from '$components/map/styles';
-	import { Target, Unlock, Users, Building } from 'lucide-svelte';
-	import { mapObjects } from '$lib/data';
+	import { Target, Unlock, Users, Building, Loader2, Map as MapIcon } from 'lucide-svelte';
+	import { mapObjects, fastTravelPoints, effigies } from '$lib/data';
 	import type { Map as OLMap } from 'ol';
-	import type { Base, GuildSummary, Player } from '$types';
+	import type { Base, GuildSummary, MapUnlockPoint, Player } from '$types';
 	import { assetLoader } from '$utils';
 	import { EditBaseModal } from '$components/modals';
 	import { EntryState, MessageType } from '$types';
@@ -30,6 +31,7 @@
 		showPlayers: boolean;
 		showBases: boolean;
 		showFastTravel: boolean;
+		showEffigies: boolean;
 		showDungeons: boolean;
 		showAlphaPals: boolean;
 		showPredatorPals: boolean;
@@ -40,6 +42,7 @@
 		showPlayers: true,
 		showBases: true,
 		showFastTravel: true,
+		showEffigies: true,
 		showDungeons: true,
 		showAlphaPals: true,
 		showPredatorPals: true
@@ -48,6 +51,8 @@
 	const toast = getToastState();
 	let section = $state(['players']);
 	let map: OLMap | null = $state(null);
+
+	const mapLoader = import('$components/map/Map.svelte');
 
 	const players = $derived(Object.values(appState.players || {}));
 	const loadedPlayerCount = $derived(players.length);
@@ -80,16 +85,17 @@
 			([id, summary]) => ({
 				value: id,
 				label: summary.loaded
-					? `🟦 ${summary.name} (${summary.base_count} bases)`
-					: `🟪 ${summary.name} (${summary.base_count} bases)`
+					? `\u25A0 ${summary.name} (${summary.base_count} bases)`
+					: `\u25A1 ${summary.name} (${summary.base_count} bases)`
 			})
 		);
 	});
-	const fastTravelCount = $derived.by(() => {
-		return (
-			Object.values(mapObjects.points).filter((point) => point.type === 'fast_travel').length || 0
-		);
-	});
+	const fastTravelCount = $derived(Object.keys(fastTravelPoints.points).length);
+	const fastTravelUnlockedCount = $derived(
+		appState.selectedPlayer?.unlocked_fast_travel_points?.length
+	);
+	const effigyCount = $derived(Object.keys(effigies.points).length);
+	const effigyCollectedCount = $derived(appState.selectedPlayer?.collected_effigies?.length);
 	const dungeonCount = $derived.by(() => {
 		return Object.values(mapObjects.points).filter((point) => point.type === 'dungeon').length || 0;
 	});
@@ -166,6 +172,93 @@
 		}
 	}
 
+	function updateRelicCount(player: Player, delta: number) {
+		const container = player.essential_container;
+		if (!container) return;
+		const slot = container.slots.find((s) => s.static_id === 'Relic');
+		if (slot) {
+			slot.count += delta;
+			if (slot.count <= 0) {
+				slot.static_id = 'None';
+				slot.count = 0;
+				slot.dynamic_item = undefined;
+			}
+		} else if (delta > 0) {
+			const usedIndexes = new Set(
+				container.slots.filter((s) => s.static_id !== 'None').map((s) => s.slot_index)
+			);
+			let slotIndex = 0;
+			while (usedIndexes.has(slotIndex)) slotIndex++;
+			const emptySlot = container.slots.find((s) => s.slot_index === slotIndex);
+			if (emptySlot) {
+				emptySlot.static_id = 'Relic';
+				emptySlot.count = delta;
+				emptySlot.dynamic_item = undefined;
+			} else {
+				container.slots.push({
+					static_id: 'Relic',
+					slot_index: slotIndex,
+					count: delta,
+					dynamic_item: undefined
+				});
+			}
+		}
+	}
+
+	function handleToggleFastTravel(point: MapUnlockPoint) {
+		const player = appState.selectedPlayer;
+		if (!player) return;
+		const unlocks = player.unlocked_fast_travel_points ?? [];
+		const index = unlocks.findIndex((guid) => guid.toUpperCase() === point.guid.toUpperCase());
+		if (index >= 0) {
+			player.unlocked_fast_travel_points.splice(index, 1);
+		} else {
+			player.unlocked_fast_travel_points.push(point.guid);
+		}
+		player.state = EntryState.MODIFIED;
+	}
+
+	function handleToggleEffigy(point: MapUnlockPoint) {
+		const player = appState.selectedPlayer;
+		if (!player) return;
+		const collected = player.collected_effigies ?? [];
+		const index = collected.findIndex((guid) => guid.toUpperCase() === point.guid.toUpperCase());
+		if (index >= 0) {
+			collected.splice(index, 1);
+			updateRelicCount(player, -1);
+		} else {
+			collected.push(point.guid);
+			updateRelicCount(player, 1);
+		}
+		player.collected_effigies = collected;
+		player.state = EntryState.MODIFIED;
+	}
+
+	function handleUnlockAllFastTravel() {
+		const player = appState.selectedPlayer;
+		if (!player) return;
+		const unlocked = player.unlocked_fast_travel_points ?? [];
+		const existing = new Set(unlocked.map((guid) => guid.toUpperCase()));
+		const toAdd = Object.keys(fastTravelPoints.points).filter(
+			(guid) => !existing.has(guid.toUpperCase())
+		);
+		if (toAdd.length === 0) return;
+		player.unlocked_fast_travel_points = [...unlocked, ...toAdd];
+		player.state = EntryState.MODIFIED;
+	}
+
+	function handleCollectAllEffigies() {
+		const player = appState.selectedPlayer;
+		if (!player) return;
+		const collected = player.collected_effigies ?? [];
+		const existing = new Set(collected.map((guid) => guid.toUpperCase()));
+		const toAdd = Object.keys(effigies.points).filter((guid) => !existing.has(guid.toUpperCase()));
+		if (toAdd.length === 0) return;
+		player.collected_effigies = [...collected, ...toAdd];
+		updateRelicCount(player, toAdd.length);
+		player.state = EntryState.MODIFIED;
+	}
+
 	async function handleUnlockMap() {
 		// @ts-ignore
 		const confirmed = await modal.showConfirmModal({
@@ -187,240 +280,453 @@
 		}
 	}
 
+	let loadingComplete = $state(false);
+	let dismissLoading = $state(false);
+	let MapComponent: typeof import('$components/map/Map.svelte').default | undefined = $state();
+
+	const LOADING_MIN_MS = 1200;
+
 	$effect(() => {
-		if (appState.selectedPlayer && mapOptionsState.current.showPlayers) {
+		if (loadingComplete && appState.selectedPlayer && mapOptionsState.current.showPlayers) {
 			handlePlayerLoaded(appState.selectedPlayer);
 		}
 	});
+
+	$effect(() => {
+		if (loadingComplete) return;
+		let cancelled = false;
+		const start = performance.now();
+
+		mapLoader.then((module) => {
+			MapComponent = module.default;
+			const elapsed = performance.now() - start;
+			const remaining = Math.max(0, LOADING_MIN_MS - elapsed);
+			setTimeout(() => {
+				if (!cancelled) {
+					loadingComplete = true;
+					dismissLoading = true;
+					setTimeout(() => {
+						dismissLoading = false;
+					}, 1000);
+				}
+			}, remaining);
+		});
+
+		return () => {
+			cancelled = true;
+		};
+	});
 </script>
 
-<div class="grid h-full grid-cols-[20%_1fr] gap-2">
-	<div class="flex flex-col gap-4 p-4">
-		<div class="flex flex-col gap-4">
-			<div class="flex flex-col gap-2">
-				<div class="flex items-center">
-					<SectionHeader text={m.map_options()}>
-						{#snippet action()}
-							<button class="btn btn-sm flex items-center gap-2" onclick={handleUnlockMap}>
-								<Unlock class="h-4 w-4" />
-								<span>{m.unlock_map()}</span>
-							</button>
-						{/snippet}
-					</SectionHeader>
+<div class="relative h-full overflow-hidden">
+	{#if dismissLoading || !loadingComplete}
+		<div class="loading-overlay" class:loading-dismiss={loadingComplete}>
+			<div class="loading-content">
+				<div class="relative">
+					<Loader2
+						size={64}
+						class="text-secondary-400 animate-spin"
+						style="filter: drop-shadow(0 0 20px color-mix(in srgb, var(--color-secondary-400) 50%, transparent));"
+					/>
+					<MapIcon size={24} class="text-secondary-300 absolute inset-0 m-auto" />
 				</div>
-				<div class="grid grid-cols-2 gap-2">
-					<button
-						class="flex items-center space-x-2 {mapOptions.showOrigin ? '' : 'opacity-25'}"
-						onclick={() => (mapOptions.showOrigin = !mapOptions.showOrigin)}
-					>
-						<Target class="mr-2 h-6 w-6" />
-						<span>{m.origin()}</span>
-					</button>
-					<button
-						class="flex items-center space-x-2 {mapOptions.showFastTravel ? '' : 'opacity-25'} "
-						onclick={() => (mapOptions.showFastTravel = !mapOptions.showFastTravel)}
-					>
-						<img src={mapImg.fastTravel} alt={m.fast_travel()} class="mr-2 h-6 w-6" />
-						<span>{m.fast_travel()}</span>
-						<span class="text-surface-500 text-xs">{fastTravelCount}</span>
-					</button>
-					{#if appState.saveFile}
-						<button
-							class="flex items-center space-x-2 {mapOptions.showPlayers ? '' : 'opacity-25'}"
-							onclick={() => (mapOptions.showPlayers = !mapOptions.showPlayers)}
-						>
-							<img src={mapImg.player} alt={m.player({ count: 2 })} class="mr-2 h-6 w-6" />
-							<span>{m.player({ count: 1 })}</span>
-							<span class="text-surface-500 text-xs">{loadedPlayerCount}/{totalPlayerCount}</span>
-						</button>
-						<button
-							class="flex items-center space-x-2 {mapOptions.showBases ? '' : 'opacity-25'}"
-							onclick={() => (mapOptions.showBases = !mapOptions.showBases)}
-						>
-							<img src={mapImg.baseCamp} alt={m.base({ count: 2 })} class="mr-2 h-6 w-6" />
-							<span>{m.base({ count: 2 })}</span>
-							<span class="text-surface-500 text-xs">{loadedBaseCount}/{totalBaseCount}</span>
-						</button>
-					{/if}
-
-					<button
-						class="flex items-center space-x-2 {mapOptions.showDungeons ? '' : 'opacity-25'}"
-						onclick={() => (mapOptions.showDungeons = !mapOptions.showDungeons)}
-					>
-						<img src={mapImg.dungeon} alt={m.dungeons()} class="mr-2 h-6 w-6" />
-						<span>{m.dungeons()}</span>
-						<span class="text-surface-500 text-xs">{dungeonCount}</span>
-					</button>
-					<button
-						class="flex items-center space-x-2 {mapOptions.showAlphaPals ? '' : 'opacity-25'}"
-						onclick={() => (mapOptions.showAlphaPals = !mapOptions.showAlphaPals)}
-					>
-						<img src={anubisImg} alt={m.alpha_pal(p.pals)} class="mr-2 h-6 w-6" />
-						<span>{m.alpha_pal(p.pals)}</span>
-						<span class="text-surface-500 text-xs">{alphaPalCount}</span>
-					</button>
-					<button
-						class="flex items-center space-x-2 {mapOptions.showPredatorPals ? '' : 'opacity-25'}"
-						onclick={() => (mapOptions.showPredatorPals = !mapOptions.showPredatorPals)}
-					>
-						<img src={starryonImg} alt={m.predator_pals(p.pals)} class="mr-2 h-6 w-6" />
-						<span>{m.predator_pals(p.pals)}</span>
-						<span class="text-surface-500 text-xs">{predatorPalCount}</span>
-					</button>
+				<p class="loading-text">INITIALIZING MAP</p>
+				<div class="loading-bar-track">
+					<div class="loading-bar-fill" class:loading-bar-done={loadingComplete}></div>
 				</div>
 			</div>
-			{#if appState.saveFile}
+		</div>
+	{/if}
+
+	<div class="grid h-full grid-cols-[420px_1fr] gap-2" class:page-blurred={!loadingComplete}>
+		<div class="flex flex-col gap-4 p-4">
+			<div class="flex flex-col gap-4">
 				<div class="flex flex-col gap-2">
-					<div class="flex items-center gap-2">
-						<Users class="h-4 w-4" />
-						<span class="text-sm font-medium">{m.load_player()}</span>
+					<div class="flex items-center">
+						<SectionHeader text={m.map_options()}>
+							{#snippet action()}
+								<Button
+									variant="ghost"
+									size="sm"
+									class="flex items-center gap-2"
+									onclick={handleUnlockMap}
+								>
+									<Unlock class="h-4 w-4" />
+									<span>{m.unlock_map()}</span>
+								</Button>
+							{/snippet}
+						</SectionHeader>
 					</div>
-					<PlayerList selected={selectedPlayerUid} onselect={handlePlayerLoaded} redirect={false} />
+					<div class="grid grid-cols-2 gap-2">
+						<button
+							class="flex items-center space-x-2 {mapOptions.showOrigin ? '' : 'opacity-25'}"
+							onclick={() => (mapOptions.showOrigin = !mapOptions.showOrigin)}
+						>
+							<Target class="mr-2 h-6 w-6" />
+							<span>{m.origin()}</span>
+						</button>
+						<button
+							class="flex items-center space-x-2 {mapOptions.showFastTravel ? '' : 'opacity-25'} "
+							onclick={() => (mapOptions.showFastTravel = !mapOptions.showFastTravel)}
+						>
+							<img src={mapImg.fastTravel} alt={m.fast_travel()} class="mr-2 h-6 w-6" />
+							<span>{m.fast_travel()}</span>
+							<span class="text-surface-500 text-xs">
+								{fastTravelUnlockedCount !== undefined
+									? `${fastTravelUnlockedCount}/${fastTravelCount}`
+									: fastTravelCount}
+							</span>
+						</button>
+						<button
+							class="flex items-center space-x-2 {(mapOptions.showEffigies ?? true)
+								? ''
+								: 'opacity-25'} "
+							onclick={() => (mapOptions.showEffigies = !(mapOptions.showEffigies ?? true))}
+						>
+							<img src={mapImg.effigy} alt={m.effigies()} class="mr-2 h-6 w-6" />
+							<span>{m.effigy()}</span>
+							<span class="text-surface-500 text-xs">
+								{effigyCollectedCount !== undefined
+									? `${effigyCollectedCount}/${effigyCount}`
+									: effigyCount}
+							</span>
+						</button>
+						{#if appState.saveFile}
+							<button
+								class="flex items-center space-x-2 {mapOptions.showPlayers ? '' : 'opacity-25'}"
+								onclick={() => (mapOptions.showPlayers = !mapOptions.showPlayers)}
+							>
+								<img src={mapImg.player} alt={m.player({ count: 2 })} class="mr-2 h-6 w-6" />
+								<span>{m.player({ count: 1 })}</span>
+								<span class="text-surface-500 text-xs">{loadedPlayerCount}/{totalPlayerCount}</span>
+							</button>
+							<button
+								class="flex items-center space-x-2 {mapOptions.showBases ? '' : 'opacity-25'}"
+								onclick={() => (mapOptions.showBases = !mapOptions.showBases)}
+							>
+								<img src={mapImg.baseCamp} alt={m.base({ count: 2 })} class="mr-2 h-6 w-6" />
+								<span>{m.base({ count: 2 })}</span>
+								<span class="text-surface-500 text-xs">{loadedBaseCount}/{totalBaseCount}</span>
+							</button>
+						{/if}
+
+						<button
+							class="flex items-center space-x-2 {mapOptions.showDungeons ? '' : 'opacity-25'}"
+							onclick={() => (mapOptions.showDungeons = !mapOptions.showDungeons)}
+						>
+							<img src={mapImg.dungeon} alt={m.dungeons()} class="mr-2 h-6 w-6" />
+							<span>{m.dungeons()}</span>
+							<span class="text-surface-500 text-xs">{dungeonCount}</span>
+						</button>
+						<button
+							class="flex items-center space-x-2 {mapOptions.showAlphaPals ? '' : 'opacity-25'}"
+							onclick={() => (mapOptions.showAlphaPals = !mapOptions.showAlphaPals)}
+						>
+							<img src={anubisImg} alt={m.alpha_pal(p.pals)} class="mr-2 h-6 w-6" />
+							<span>{m.alpha_pal(p.pals)}</span>
+							<span class="text-surface-500 text-xs">{alphaPalCount}</span>
+						</button>
+						<button
+							class="flex items-center space-x-2 {mapOptions.showPredatorPals ? '' : 'opacity-25'}"
+							onclick={() => (mapOptions.showPredatorPals = !mapOptions.showPredatorPals)}
+						>
+							<img src={starryonImg} alt={m.predator_pals(p.pals)} class="mr-2 h-6 w-6" />
+							<span>{m.predator_pals(p.pals)}</span>
+							<span class="text-surface-500 text-xs">{predatorPalCount}</span>
+						</button>
+					</div>
 				</div>
-				<div class="flex flex-col gap-2">
-					<div class="flex items-center gap-2">
-						<Building class="h-4 w-4" />
-						<span class="text-sm font-medium">{m.load_guild_bases()}</span>
-					</div>
-					{#if appState.loadingGuild}
-						<div class="my-2 flex items-center gap-2 px-3 py-2 text-sm text-gray-400">
-							<svg class="h-4 w-4 animate-spin" viewBox="0 0 24 24">
-								<circle
-									class="opacity-25"
-									cx="12"
-									cy="12"
-									r="10"
-									stroke="currentColor"
-									stroke-width="4"
-									fill="none"
-								></circle>
-								<path
-									class="opacity-75"
-									fill="currentColor"
-									d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-								></path>
-							</svg>
-							{m.loading_entity({ entity: m.guild({ count: 1 }) })}
+				{#if appState.saveFile}
+					<div class="flex flex-col gap-2">
+						<div class="flex items-center gap-2">
+							<Users class="h-4 w-4" />
+							<span class="text-sm font-medium">{m.load_player()}</span>
 						</div>
-					{:else}
-						<Combobox
-							value={selectedGuildId}
-							options={guildSelectOptions}
-							placeholder={m.select_entity({ entity: m.guild({ count: 1 }) })}
-							onChange={(value) => handleGuildSelect(value as string)}
-							selectClass="w-full"
+						<PlayerList
+							selected={selectedPlayerUid}
+							onselect={handlePlayerLoaded}
+							redirect={false}
 						/>
-					{/if}
-					<p class="text-xs text-gray-500">{m.select_guild_to_load_bases()}</p>
-				</div>
-
-				<Accordion
-					value={section}
-					onValueChange={(e: ValueChangeDetails) => (section = e.value)}
-					collapsible
-				>
-					<Accordion.Item value="players" controlHover="hover:bg-secondary-500/25">
-						{#snippet control()}
-							<h2 class="text-lg font-bold">
-								{m.loaded_entity({ entity: m.player({ count: 2 }) })}
-							</h2>
-						{/snippet}
-						{#snippet panel()}
-							{#if mapOptions.showPlayers && loadedPlayerCount > 0}
-								<div class="max-h-64 space-y-2 overflow-y-auto">
-									{#each players as player}
-										{#if player.location}
-											{@const mapCoords = worldToMap(player.location.x, player.location.y)}
-											<button
-												class="bg-surface-800 hover:bg-secondary-500/25 w-full rounded-sm p-2 text-start"
-												onclick={() => handlePlayerFocus(player)}
-											>
-												<div class="font-bold">{player.nickname}</div>
-												<div class="text-xs">
-													{m.level()}: {player.level} | {m.hp()}: {player.hp}
-												</div>
-												<div class="text-xs text-gray-400">
-													{m.location()}: {Math.round(mapCoords.x)}, {Math.round(mapCoords.y)}
-												</div>
-												<div class="text-xs text-gray-400">
-													{m.last_online()}: {new Date(player.last_online_time).toLocaleString()}
-												</div>
-											</button>
-										{/if}
-									{/each}
-								</div>
-							{:else}
-								<p class="text-sm text-gray-500">
-									{m.no_players_loaded()}
-								</p>
-							{/if}
-						{/snippet}
-					</Accordion.Item>
-					<Accordion.Item value="bases" controlHover="hover:bg-secondary-500/25">
-						{#snippet control()}
-							<h2 class="text-lg font-bold">{m.loaded_entity({ entity: m.base({ count: 2 }) })}</h2>
-						{/snippet}
-						{#snippet panel()}
-							{#if mapOptions.showBases && loadedBaseCount > 0}
-								<div class="max-h-64 space-y-2 overflow-y-auto">
-									{#each Object.values(bases) as base}
-										{#if base.location}
-											<button
-												class="bg-surface-800 hover:bg-secondary-500/25 mb-2 w-full rounded-sm p-2 text-start"
-												onclick={() => handleBaseFocus(base)}
-												oncontextmenu={(e) => {
-													e.preventDefault();
-													handleEditBase(base);
-												}}
-											>
-												<div class="font-bold">{base.name}</div>
-												<div class="text-xs text-gray-400">
-													{m.id()}: {base.id}
-												</div>
-												<div class="text-xs text-gray-400">
-													{m.location()}: {worldToMap(base.location.x, base.location.y).x}, {worldToMap(
-														base.location.x,
-														base.location.y
-													).y}
-												</div>
-											</button>
-										{/if}
-									{/each}
-								</div>
-							{:else}
-								<p class="text-sm text-gray-500">
-									{m.no_bases_loaded()}
-								</p>
-							{/if}
-						{/snippet}
-					</Accordion.Item>
-				</Accordion>
-			{/if}
-
-			<div class="mt-auto flex flex-col gap-2">
-				<p class="text-sm text-gray-500">{m.click_map_coordinates()}</p>
-				<div class="flex flex-col">
-					<div class="flex items-center gap-2">
-						<img src={staticIcons.leftClickIcon} alt="Left Click" class=" h-6 w-6" />
-						<span class="text-xs text-gray-500">{m.left_click_focus()}</span>
 					</div>
-					<div class="flex items-center gap-2">
-						<img src={staticIcons.rightClickIcon} alt="Right Click" class=" h-6 w-6" />
-						<span class="text-xs text-gray-500">{m.right_click_edit_base()}</span>
+					<div class="flex flex-col gap-2">
+						<div class="flex items-center gap-2">
+							<Building class="h-4 w-4" />
+							<span class="text-sm font-medium">{m.load_guild_bases()}</span>
+						</div>
+						{#if appState.loadingGuild}
+							<div class="text-surface-400 my-2 flex items-center gap-2 px-3 py-2 text-sm">
+								<svg class="h-4 w-4 animate-spin" viewBox="0 0 24 24">
+									<circle
+										class="opacity-25"
+										cx="12"
+										cy="12"
+										r="10"
+										stroke="currentColor"
+										stroke-width="4"
+										fill="none"
+									></circle>
+									<path
+										class="opacity-75"
+										fill="currentColor"
+										d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+									></path>
+								</svg>
+								{m.loading_entity({ entity: m.guild({ count: 1 }) })}
+							</div>
+						{:else}
+							<Combobox
+								value={selectedGuildId}
+								options={guildSelectOptions}
+								placeholder={m.select_entity({ entity: m.guild({ count: 1 }) })}
+								onChange={(value) => handleGuildSelect(value as string)}
+								selectClass="w-full"
+							/>
+						{/if}
+						<p class="text-surface-500 text-xs">{m.select_guild_to_load_bases()}</p>
+					</div>
+
+					<Accordion
+						value={section}
+						onValueChange={(e: ValueChangeDetails) => (section = e.value)}
+						collapsible
+					>
+						{#if mapOptions.showPlayers}
+							<Accordion.Item value="players" controlHover="hover:bg-secondary-500/25">
+								{#snippet control()}
+									<h2 class="text-lg font-bold">
+										{m.loaded_entity({ entity: m.player({ count: 2 }) })}
+									</h2>
+								{/snippet}
+								{#snippet panel()}
+									{#if loadedPlayerCount > 0}
+										<div class="max-h-64 space-y-2 overflow-y-auto">
+											{#each players as player}
+												{#if player.location}
+													{@const mapCoords = worldToMap(player.location.x, player.location.y)}
+													<button
+														class="bg-surface-800 hover:bg-secondary-500/25 w-full rounded-sm p-2 text-start"
+														onclick={() => handlePlayerFocus(player)}
+													>
+														<div class="truncate font-bold">{player.nickname}</div>
+														<div class="text-xs">
+															{m.level()}: {player.level} | {m.hp()}: {player.hp}
+														</div>
+														<div class="text-surface-400 text-xs">
+															{m.location()}: {Math.round(mapCoords.x)}, {Math.round(mapCoords.y)}
+														</div>
+														<div class="text-surface-400 text-xs">
+															{m.last_online()}: {new Date(
+																player.last_online_time
+															).toLocaleString()}
+														</div>
+													</button>
+												{/if}
+											{/each}
+										</div>
+									{:else}
+										<p class="text-surface-500 text-sm">
+											{m.no_players_loaded()}
+										</p>
+									{/if}
+								{/snippet}
+							</Accordion.Item>
+						{/if}
+						{#if mapOptions.showBases}
+							<Accordion.Item value="bases" controlHover="hover:bg-secondary-500/25">
+								{#snippet control()}
+									<h2 class="text-lg font-bold">
+										{m.loaded_entity({ entity: m.base({ count: 2 }) })}
+									</h2>
+								{/snippet}
+								{#snippet panel()}
+									{#if loadedBaseCount > 0}
+										<div class="max-h-64 space-y-2 overflow-y-auto">
+											{#each Object.values(bases) as base}
+												{#if base.location}
+													<button
+														class="bg-surface-800 hover:bg-secondary-500/25 mb-2 w-full rounded-sm p-2 text-start"
+														onclick={() => handleBaseFocus(base)}
+														oncontextmenu={(e) => {
+															e.preventDefault();
+															handleEditBase(base);
+														}}
+													>
+														<div class="truncate font-bold">{base.name}</div>
+														<div class="text-surface-400 text-xs">
+															{m.id()}: {base.id}
+														</div>
+														<div class="text-surface-400 text-xs">
+															{m.location()}: {worldToMap(base.location.x, base.location.y).x}, {worldToMap(
+																base.location.x,
+																base.location.y
+															).y}
+														</div>
+													</button>
+												{/if}
+											{/each}
+										</div>
+									{:else}
+										<p class="text-surface-500 text-sm">
+											{m.no_bases_loaded()}
+										</p>
+									{/if}
+								{/snippet}
+							</Accordion.Item>
+						{/if}
+					</Accordion>
+				{/if}
+
+				<div class="mt-auto flex flex-col gap-2">
+					<p class="text-surface-500 text-sm">{m.click_map_coordinates()}</p>
+					<div class="flex flex-col">
+						<div class="flex items-center gap-2">
+							<img src={staticIcons.leftClickIcon} alt="Left Click" class=" h-6 w-6" />
+							<span class="text-surface-500 text-xs">{m.left_click_focus()}</span>
+						</div>
+						<div class="flex items-center gap-2">
+							<img src={staticIcons.leftClickIcon} alt="Left Click" class=" h-6 w-6" />
+							<span class="text-surface-500 text-xs">{m.click_toggle_point()}</span>
+						</div>
+						<div class="flex items-center gap-2">
+							<img src={staticIcons.rightClickIcon} alt="Right Click" class=" h-6 w-6" />
+							<span class="text-surface-500 text-xs">{m.right_click_edit_base()}</span>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		<div class="relative h-full w-full overflow-hidden">
+			{#if MapComponent}
+				<MapComponent
+					bind:map
+					showOrigin={mapOptions.showOrigin}
+					showPlayers={mapOptions.showPlayers}
+					showBases={mapOptions.showBases}
+					showFastTravel={mapOptions.showFastTravel}
+					showEffigies={mapOptions.showEffigies ?? true}
+					showDungeons={mapOptions.showDungeons}
+					showAlphaPals={mapOptions.showAlphaPals}
+					showPredatorPals={mapOptions.showPredatorPals}
+					onEditBase={handleEditBase}
+					onToggleFastTravel={handleToggleFastTravel}
+					onToggleEffigy={handleToggleEffigy}
+					onUnlockAllFastTravel={handleUnlockAllFastTravel}
+					onCollectAllEffigies={handleCollectAllEffigies}
+				/>
+			{/if}
+		</div>
 	</div>
-	<Map
-		bind:map
-		showOrigin={mapOptions.showOrigin}
-		showPlayers={mapOptions.showPlayers}
-		showBases={mapOptions.showBases}
-		showFastTravel={mapOptions.showFastTravel}
-		showDungeons={mapOptions.showDungeons}
-		showAlphaPals={mapOptions.showAlphaPals}
-		showPredatorPals={mapOptions.showPredatorPals}
-		onEditBase={handleEditBase}
-	/>
 </div>
+
+<style>
+	.loading-overlay {
+		position: absolute;
+		inset: 0;
+		z-index: 100;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: color-mix(in srgb, var(--color-surface-950) 95%, transparent);
+		backdrop-filter: blur(4px);
+		transition:
+			opacity 0.5s ease-out,
+			transform 0.5s ease-out,
+			filter 0.3s ease-out;
+	}
+
+	.loading-overlay.loading-dismiss {
+		opacity: 0;
+		transform: scale(1.05);
+		filter: blur(2px);
+		pointer-events: none;
+	}
+
+	.loading-content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1.5rem;
+		animation: loading-float 2s ease-in-out infinite;
+	}
+
+	@keyframes loading-float {
+		0%,
+		100% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-8px);
+		}
+	}
+
+	.loading-text {
+		color: color-mix(in srgb, var(--color-secondary-400) 70%, transparent);
+		font-size: 0.75rem;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		animation: loading-pulse 1.5s ease-in-out infinite;
+		position: relative;
+	}
+
+	.loading-text::after {
+		content: '';
+		position: absolute;
+		bottom: -4px;
+		left: 0;
+		width: 100%;
+		height: 1px;
+		background: linear-gradient(90deg, transparent, var(--color-secondary-400), transparent);
+		animation: loading-scan 2s ease-in-out infinite;
+	}
+
+	@keyframes loading-pulse {
+		0%,
+		100% {
+			opacity: 0.6;
+		}
+		50% {
+			opacity: 1;
+		}
+	}
+
+	@keyframes loading-scan {
+		0% {
+			transform: scaleX(0.3);
+			opacity: 0;
+		}
+		50% {
+			transform: scaleX(1);
+			opacity: 1;
+		}
+		100% {
+			transform: scaleX(0.3);
+			opacity: 0;
+		}
+	}
+
+	.loading-bar-track {
+		width: 200px;
+		height: 2px;
+		background: color-mix(in srgb, var(--color-secondary-400) 15%, transparent);
+		border-radius: 1px;
+		overflow: hidden;
+	}
+
+	.loading-bar-fill {
+		height: 100%;
+		width: 0%;
+		background: var(--color-secondary-400);
+		border-radius: 1px;
+		transition: width 0.3s ease-out;
+	}
+
+	.loading-bar-fill.loading-bar-done {
+		width: 100%;
+	}
+
+	.page-blurred {
+		filter: blur(2px);
+		transition: filter 0.5s ease-out;
+		pointer-events: none;
+	}
+</style>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, Input, Tooltip } from '$components/ui';
+	import { Button, Card, Input, Tooltip } from '$components/ui';
 	import { Save, X } from 'lucide-svelte';
 	import { Slider } from '@skeletonlabs/skeleton-svelte';
 	import type { ValueChangeDetails } from '@zag-js/slider';
@@ -60,21 +60,17 @@
 			</div>
 			<div class="flex w-full justify-end">
 				<Tooltip position="bottom">
-					<button
-						class="btn hover:bg-secondary-500 px-2"
-						onclick={() => handleClose(true)}
-						data-modal-primary
-					>
+					<Button variant="ghost" size="icon" onclick={() => handleClose(true)} data-modal-primary>
 						<Save />
-					</button>
+					</Button>
 					{#snippet popup()}
 						<span>{c.save}</span>
 					{/snippet}
 				</Tooltip>
 				<Tooltip position="bottom">
-					<button class="btn hover:bg-secondary-500 px-2" onclick={() => handleClose(false)}>
+					<Button variant="ghost" size="icon" onclick={() => handleClose(false)}>
 						<X />
-					</button>
+					</Button>
 					{#snippet popup()}
 						<span>{m.cancel()}</span>
 					{/snippet}

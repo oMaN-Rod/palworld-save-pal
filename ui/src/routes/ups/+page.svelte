@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Input, TooltipButton } from '$components/ui';
+	import { Button, Input, TooltipButton } from '$components/ui';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import {
 		Search,
@@ -30,15 +30,8 @@
 		PalSelectModal
 	} from '$components/modals';
 	import { cn } from '$theme';
-	import {
-		getUpsState,
-		getModalState,
-		getAppState,
-		getToastState,
-		getNavigationState
-	} from '$states';
+	import { getUpsState, getModalState, getAppState, getToastState } from '$states';
 	import { elementsData, palsData } from '$lib/data';
-	import { goto } from '$app/navigation';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
 	import { staticIcons } from '$types/icons';
@@ -59,7 +52,7 @@
 	import UPSTagsPanel from './components/UPSTagsPanel.svelte';
 	import UPSStatsPanel from './components/UPSStatsPanel.svelte';
 	import UPSPalList from './components/UPSPalList.svelte';
-	import Nuke from '$components/ui/icons/Nuke.svelte';
+	import { Nuke } from '$components/ui';
 
 	const VISIBLE_PAGE_BUBBLES = 16;
 
@@ -522,7 +515,7 @@
 	});
 </script>
 
-<div class="ups-container flex h-full flex-col">
+<div class="ups-container animate-fade-in flex h-full flex-col">
 	<!-- Header -->
 	<div
 		class="border-surface-300 dark:border-surface-700 flex items-center justify-between border-b p-4"
@@ -547,7 +540,8 @@
 			<!-- Add Pal Button -->
 			<TooltipButton
 				onclick={handleAddPal}
-				class="rounded-md bg-green-500 p-2 text-white hover:bg-green-600"
+				variant="secondary"
+				size="icon"
 				popupLabel={m.add_new_pal({ pal: c.pal })}
 			>
 				<Plus class="h-4 w-4" />
@@ -557,7 +551,8 @@
 			{#if appState.saveFile}
 				<TooltipButton
 					onclick={handleImportFromSave}
-					class="rounded-md bg-blue-500 p-2 text-white hover:bg-blue-600"
+					variant="primary"
+					size="icon"
 					popupLabel={m.import_from_save()}
 				>
 					<Upload class="h-4 w-4" />
@@ -644,7 +639,7 @@
 		<!-- Side Panels -->
 		{#if upsState.showCollectionsPanel || upsState.showTagsPanel || upsState.showStatsPanel}
 			<div
-				class="border-surface-300 dark:border-surface-700 bg-surface-50 dark:bg-surface-900 w-80 border-r"
+				class="border-surface-300 dark:border-surface-700 bg-surface-50 dark:bg-surface-900 animate-slide-down w-full max-w-80 border-r sm:max-w-72 md:max-w-80"
 			>
 				{#if upsState.showCollectionsPanel}
 					<UPSCollectionsPanel />
@@ -666,7 +661,7 @@
 				<div class="flex items-center gap-2">
 					<div class="relative flex-1">
 						<Search
-							class="text-surface-500 absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 focus:border-none"
+							class="text-surface-500 absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 focus:border-none"
 						/>
 						<Input
 							bind:value={searchInput}
@@ -689,14 +684,16 @@
 					{#if upsState.hasSelectedPals}
 						<TooltipButton
 							onclick={handleBulkEditTags}
-							class="rounded-md bg-blue-500 p-2 text-white hover:bg-blue-600"
+							variant="primary"
+							size="icon"
 							popupLabel={m.edit_entity({ entity: c.tags })}
 						>
 							<Tag class="h-4 w-4" />
 						</TooltipButton>
 						<TooltipButton
 							onclick={handleBulkAddToCollection}
-							class="rounded-md bg-green-500 p-2 text-white hover:bg-green-600"
+							variant="secondary"
+							size="icon"
 							popupLabel={m.add_to_collection()}
 						>
 							<Folder class="h-4 w-4" />
@@ -753,7 +750,7 @@
 													</button>
 												{/if}
 											</div>
-											<div class="grid grid-cols-6 gap-1">
+											<div class="grid grid-cols-3 gap-1 sm:grid-cols-4 md:grid-cols-6">
 												{#each elementTypes as element}
 													{@const elementData = elementsData.getByKey(element)}
 													{@const localizedName = elementData?.localized_name || element}
@@ -789,7 +786,7 @@
 													</button>
 												{/if}
 											</div>
-											<div class="grid grid-cols-6 gap-1">
+											<div class="grid grid-cols-3 gap-1 sm:grid-cols-4 md:grid-cols-6">
 												<TooltipButton popupLabel={m.alpha_pal({ pals: c.pals })}>
 													<button
 														class={getPalTypeButtonClass('alpha')}
@@ -906,13 +903,9 @@
 										count: upsState.pals.length
 									})}
 								>
-									<button
-										type="button"
-										class="btn hover:preset-tonal px-2 text-xs"
-										onclick={selectAll}
-									>
+									<Button type="button" variant="ghost" size="sm" onclick={selectAll}>
 										{m.page()}
-									</button>
+									</Button>
 								</TooltipButton>
 								{#if hasActiveFilters()}
 									<TooltipButton
@@ -921,13 +914,9 @@
 											count: upsState.pagination.totalCount
 										})}
 									>
-										<button
-											type="button"
-											class="btn hover:preset-tonal px-2 text-xs"
-											onclick={selectAllFiltered}
-										>
+										<Button type="button" variant="ghost" size="sm" onclick={selectAllFiltered}>
 											{m.filtered()}
-										</button>
+										</Button>
 									</TooltipButton>
 								{:else}
 									<TooltipButton
@@ -936,13 +925,9 @@
 											count: upsState.pagination.totalCount
 										})}
 									>
-										<button
-											type="button"
-											class="btn hover:preset-tonal px-2 text-xs"
-											onclick={selectAllFiltered}
-										>
+										<Button type="button" variant="ghost" size="sm" onclick={selectAllFiltered}>
 											{m.all_entity({ entity: m.ups() })}
-										</button>
+										</Button>
 									</TooltipButton>
 								{/if}
 							</nav>
@@ -976,21 +961,15 @@
 							{m.create_pals_or_import({ pals: c.pals })}
 						</p>
 						<div class="flex gap-3">
-							<button
-								class="flex items-center gap-2 rounded-md bg-green-500 px-4 py-2 text-white hover:bg-green-600"
-								onclick={handleAddPal}
-							>
+							<Button variant="secondary" onclick={handleAddPal}>
 								<Plus class="h-4 w-4" />
 								{m.add_new_pal({ pal: c.pal })}
-							</button>
+							</Button>
 							{#if appState.saveFile}
-								<button
-									class="flex items-center gap-2 rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-									onclick={handleImportFromSave}
-								>
+								<Button variant="secondary" onclick={handleImportFromSave}>
 									<Upload class="h-4 w-4" />
 									{m.import_from_save()}
-								</button>
+								</Button>
 							{/if}
 						</div>
 					</div>

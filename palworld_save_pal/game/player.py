@@ -36,6 +36,7 @@ class Player(BaseModel):
     _guild: Optional[Guild] = PrivateAttr(default=None)
     _player_gvas_files: PlayerGvasFiles
     _save_data: Dict[str, Any]
+    _record_data: Dict[str, Any]
     _inventory_info: Dict[str, Any]
     _character_save: Dict[str, Any]
     _save_parameter: Dict[str, Any]
@@ -76,6 +77,7 @@ class Player(BaseModel):
             self._save_data = PalObjects.get_value(
                 self._player_gvas_files.sav.properties["SaveData"]
             )
+            self._record_data = PalObjects.get_value(self._save_data["RecordData"])
             self._guild = guild
 
             if item_container_index is not None and dynamic_items is not None:
@@ -328,6 +330,37 @@ class Player(BaseModel):
         self._save_data["OrderedQuestArray"] = PalObjects.OrderedQuestArray(
             quests=value
         )
+
+    @computed_field
+    def unlocked_fast_travel_points(self) -> List[str]:
+        return self._get_unlock_flags("FastTravelPointUnlockFlag")
+
+    @unlocked_fast_travel_points.setter
+    def unlocked_fast_travel_points(self, value: List[str]):
+        self._set_unlock_flags("FastTravelPointUnlockFlag", value)
+
+    @computed_field
+    def collected_effigies(self) -> List[str]:
+        return self._get_unlock_flags("RelicObtainForInstanceFlag")
+
+    @collected_effigies.setter
+    def collected_effigies(self, value: List[str]):
+        self._set_unlock_flags("RelicObtainForInstanceFlag", value)
+
+    def _get_unlock_flags(self, flag_name: str) -> List[str]:
+        if flag_name not in self._record_data:
+            return []
+        entries = PalObjects.get_map_property(self._record_data[flag_name]) or []
+        return [entry["key"] for entry in entries if entry.get("value")]
+
+    def _set_unlock_flags(self, flag_name: str, value: List[str]):
+        if flag_name not in self._record_data:
+            self._record_data[flag_name] = PalObjects.MapProperty(
+                "NameProperty", "BoolProperty"
+            )
+        self._record_data[flag_name]["value"] = [
+            {"key": key, "value": True} for key in value
+        ]
 
     @computed_field
     def location(self) -> Optional[WorldMapPoint]:
@@ -602,6 +635,9 @@ class Player(BaseModel):
                     | "current_missions"
                 ):
                     setattr(self, key, value)
+                case "unlocked_fast_travel_points" | "collected_effigies":
+                    if value is not None:
+                        setattr(self, key, value)
                 case "common_container":
                     self.common_container.update_from(value)
                 case "essential_container":

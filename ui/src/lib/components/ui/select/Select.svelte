@@ -51,17 +51,17 @@
 		cn(
 			'relative p-2 focus:outline-hidden ring-surface-200-800 focus-within:ring-secondary-500 ring rounded-xs',
 			error ? 'border-error' : '',
-			disabled ? 'text-gray-400 cursor-not-allowed' : '',
+			disabled ? 'text-surface-400 cursor-not-allowed' : '',
 			_selectClass
 		)
 	);
 
 	const labelClass = $derived(
-		cn('label my-2', error ? 'text-error' : '', disabled ? 'text-gray-400' : '', _labelClass)
+		cn('label my-2', error ? 'text-error' : '', disabled ? 'text-surface-400' : '', _labelClass)
 	);
 
 	const labelTextClass = $derived(
-		cn('label-text', disabled ? 'text-gray-400' : '', _labelTextClass)
+		cn('label-text', disabled ? 'text-surface-400' : '', _labelTextClass)
 	);
 
 	function handleOptionClick(option: SelectOption) {
@@ -163,7 +163,7 @@
 		{#if isOpen}
 			<div
 				id={listboxId}
-				class="bg-surface-800 border-surface-600 rounded-xs absolute left-0 right-0 z-50 mt-1 max-h-[600px] overflow-y-scroll border shadow-lg"
+				class="bg-surface-800 border-surface-600 absolute right-0 left-0 z-50 mt-1 max-h-[600px] overflow-y-scroll rounded-xs border shadow-lg"
 				role="listbox"
 			>
 				{#each options as option}

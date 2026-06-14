@@ -5,6 +5,7 @@
 	import { onMount, type Snippet } from 'svelte';
 	import { ChevronDown } from 'lucide-svelte';
 	import { debounce } from '$utils';
+	import SvelteVirtualList from '@humanspeak/svelte-virtual-list'
 	import * as m from '$i18n/messages';
 
 	let {
@@ -12,6 +13,7 @@
 		selectClass: _selectClass = 'bg-surface-900',
 		labelClass: _labelClass = '',
 		labelTextClass: _labelTextClass = '',
+		viewportClass: _viewportClass = '',
 		label = '',
 		name = nanoid(),
 		value = $bindable(),
@@ -218,33 +220,37 @@
 		{#if isOpen}
 			<div
 				id={listboxId}
-				class="bg-surface-900 border-surface-600 select-popup rounded-xs absolute left-0 right-0 mt-3 max-h-60 overflow-auto border shadow-lg"
+				class={cn("bg-surface-900 border-surface-600 select-popup rounded-xs absolute left-0 right-0 mt-3 border shadow-lg h-50 z-50", _viewportClass)}
 				role="listbox"
 			>
-				{#each filteredOptions as option}
-					<div
-						class={cn(
-							'hover:bg-surface-700 cursor-pointer p-2',
-							option.value.toString() === value && 'bg-primary-500'
-						)}
-						role="option"
-						tabindex={0}
-						aria-selected={option.value.toString() === value}
-						onclick={() => handleOptionClick(option)}
-						onkeydown={(e) => {
-							if (e.key === 'Enter' || e.key === ' ') {
-								e.preventDefault();
-								handleOptionClick(option);
-							}
-						}}
-					>
-						{#if selectOption}
-							{@render selectOption(option)}
-						{:else}
-							{option.label}
-						{/if}
-					</div>
-				{/each}
+				<SvelteVirtualList
+					items={filteredOptions}
+				>
+					{#snippet renderItem(item)}
+						<div
+							class={cn(
+								'hover:bg-surface-700 cursor-pointer p-2',
+								item.value.toString() === value && 'bg-primary-500'
+							)}
+							role="option"
+							tabindex={0}
+							aria-selected={item.value.toString() === value}
+							onclick={() => handleOptionClick(item)}
+							onkeydown={(e) => {
+								if (e.key === 'Enter' || e.key === ' ') {
+									e.preventDefault();
+									handleOptionClick(item);
+								}
+							}}
+						>
+							{#if selectOption}
+								{@render selectOption(item)}
+							{:else}
+								{item.label}
+							{/if}
+						</div>
+					{/snippet}
+				</SvelteVirtualList>
 			</div>
 		{/if}
 	</div>

@@ -4,6 +4,7 @@
 	import { staticIcons } from '$types/icons';
 	import { Copy } from 'lucide-svelte';
 	import { getToastState } from '$states';
+	import { Button } from '$components/ui';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
@@ -33,7 +34,7 @@
 </script>
 
 <div class="flex h-full w-full flex-col items-center justify-center">
-	<div class="flex w-[1080px] flex-col">
+	<div class="flex w-full max-w-[1080px] flex-col px-4">
 		<div class="flex items-center">
 			<img src={staticIcons.sadIcon} alt="Sad face icon" class="mr-2 h-14 w-14" />
 			<h1 class="text-4xl font-bold">{m.oops_something_wrong()}</h1>
@@ -49,15 +50,16 @@
 				{#snippet control()}
 					<div class="flex w-full items-center justify-between">
 						<h1 class="ml-4 text-3xl font-bold text-red-500">
-							{error.message ? error.message.slice(0, 64) : '🤷‍♂️'}...
+							{error.message ? error.message.slice(0, 64) + '...' : '...'}
 						</h1>
-						<button
-							class="btn btn-sm variant-filled-secondary"
+						<Button
+							variant="secondary"
+							size="sm"
 							onclick={copyErrorToClipboard}
 							aria-label="Copy error details to clipboard"
 						>
 							<Copy size={20} />
-						</button>
+						</Button>
 					</div>
 				{/snippet}
 				{#snippet panel()}

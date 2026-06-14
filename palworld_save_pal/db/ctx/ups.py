@@ -1,4 +1,3 @@
-import json
 import datetime as dt
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple, Any
@@ -16,6 +15,7 @@ from palworld_save_pal.db.models.ups_models import (
     UPSTransferLogModel,
 )
 from palworld_save_pal.dto.pal import PalDTO
+from palworld_save_pal.utils import json_io
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.utils.json_manager import JsonManager
 
@@ -135,7 +135,7 @@ class UPSService:
 
             if tags:
                 for tag in tags:
-                    tag_json = json.dumps(tag)
+                    tag_json = json_io.dumps_str(tag)
                     conditions.append(UPSPalModel.tags.like(f"%{tag_json}%"))
 
             # Filter by element types (need to look up from pals.json data)
@@ -249,7 +249,7 @@ class UPSService:
 
             if tags:
                 for tag in tags:
-                    tag_json = json.dumps(tag)
+                    tag_json = json_io.dumps_str(tag)
                     conditions.append(UPSPalModel.tags.like(f"%{tag_json}%"))
 
             # Filter by element types (need to look up from pals.json data)
@@ -355,6 +355,22 @@ class UPSService:
                 session.expunge(pal)
             return pal
 
+    _SYNCED_COLUMNS = {"character_id", "nickname", "level"}
+
+    @staticmethod
+    def _sync_pal_columns(pal: UPSPalModel, updates: Dict[str, Any]) -> None:
+        if "pal_data" in updates and isinstance(pal.pal_data, dict):
+            for col in UPSService._SYNCED_COLUMNS:
+                if col in pal.pal_data:
+                    setattr(pal, col, pal.pal_data[col])
+
+        updated_columns = UPSService._SYNCED_COLUMNS & set(updates.keys())
+        if updated_columns and "pal_data" not in updates and isinstance(pal.pal_data, dict):
+            pal_data_copy = dict(pal.pal_data)
+            for col in updated_columns:
+                pal_data_copy[col] = getattr(pal, col)
+            pal.pal_data = pal_data_copy
+
     @staticmethod
     def update_pal(pal_id: int, updates: Dict[str, Any]) -> Optional[UPSPalModel]:
         with Session(engine) as session:
@@ -366,6 +382,7 @@ class UPSService:
                 if hasattr(pal, key):
                     setattr(pal, key, value)
 
+            UPSService._sync_pal_columns(pal, updates)
             pal.updated_at = datetime.now(dt.timezone.utc)
             session.commit()
             session.refresh(pal)
@@ -724,9 +741,8 @@ class UPSService:
         all_pals = session.exec(select(UPSPalModel.pal_data)).all()
         total_bytes = 0
         for pal_data in all_pals:
-            # Convert pal_data dict to JSON string and get byte size
-            json_str = json.dumps(pal_data)
-            total_bytes += len(json_str.encode("utf-8"))
+            # Convert pal_data dict to JSON and get byte size
+            total_bytes += len(json_io.dumps(pal_data))
 
         stats.storage_size_mb = total_bytes / (1024 * 1024)  # Convert bytes to MB
 
@@ -785,7 +801,7 @@ class UPSService:
             elif "summon_" in char_id_lower:
                 summon_count += 1
 
-        stats.element_distribution = json.dumps(element_counts)
+        stats.element_distribution = json_io.dumps_str(element_counts)
         stats.alpha_count = alpha_count
         stats.lucky_count = lucky_count
         stats.human_count = human_count
@@ -896,7 +912,7 @@ class UPSService:
         """Update all pal tags when a tag is renamed."""
         pals_with_tag = session.exec(
             select(UPSPalModel).where(
-                UPSPalModel.tags.like(f"%{json.dumps(old_name)}%")
+                UPSPalModel.tags.like(f"%{json_io.dumps_str(old_name)}%")
             )
         ).all()
 
@@ -913,7 +929,7 @@ class UPSService:
         """Remove a specific tag from all pals that have it."""
         pals_with_tag = session.exec(
             select(UPSPalModel).where(
-                UPSPalModel.tags.like(f"%{json.dumps(tag_name)}%")
+                UPSPalModel.tags.like(f"%{json_io.dumps_str(tag_name)}%")
             )
         ).all()
 

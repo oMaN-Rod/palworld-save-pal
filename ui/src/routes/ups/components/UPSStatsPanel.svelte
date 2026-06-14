@@ -1,5 +1,16 @@
 <script lang="ts">
-	import { BarChart3, TrendingUp, Database, Calendar, User } from 'lucide-svelte';
+	import {
+		BarChart3,
+		TrendingUp,
+		Database,
+		Calendar,
+		User,
+		Save,
+		Tag,
+		Upload,
+		RefreshCw
+	} from 'lucide-svelte';
+	import { Button } from '$components/ui';
 	import { getUpsState } from '$states';
 	import { elementsData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
@@ -83,7 +94,7 @@
 			<div class="grid grid-cols-2 gap-3">
 				<!-- Total Pals -->
 				<div
-					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border bg-white p-3"
+					class="hover-lift dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border bg-white p-3"
 				>
 					<div class="mb-1 flex items-center justify-between">
 						<span class="text-surface-600 dark:text-surface-400 text-sm">{c.pals}</span>
@@ -113,7 +124,7 @@
 				>
 					<div class="mb-1 flex items-center justify-between">
 						<span class="text-surface-600 dark:text-surface-400 text-sm">{c.tags}</span>
-						<span class="text-xl">🏷️</span>
+						<Tag size={18} class="text-surface-500" />
 					</div>
 					<div class="text-surface-900 dark:text-surface-100 text-2xl font-bold">
 						{totalTags}
@@ -126,7 +137,7 @@
 				>
 					<div class="mb-1 flex items-center justify-between">
 						<span class="text-surface-600 dark:text-surface-400 text-sm">{c.storage}</span>
-						<span class="text-xl">💾</span>
+						<Save class="text-primary-400 h-5 w-5" />
 					</div>
 					<div class="text-surface-900 dark:text-surface-100 text-lg font-bold">
 						{formatBytes(storageSize * 1024 * 1024)}
@@ -138,18 +149,21 @@
 			<div
 				class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border bg-white p-4"
 			>
-				<h3 class="text-surface-900 dark:text-surface-100 mb-3 text-sm font-medium">{m.activity()}</h3>
+				<h3 class="text-surface-900 dark:text-surface-100 mb-3 text-sm font-medium">
+					{m.activity()}
+				</h3>
 				<div class="space-y-3">
 					<div class="flex items-center justify-between">
 						<div class="flex items-center gap-2">
-							<span class="text-xl">📤</span>
-							<span class="text-surface-600 dark:text-surface-400 text-sm">{m.total_exports()}</span>
+							<Upload size={18} class="text-surface-500" />
+							<span class="text-surface-600 dark:text-surface-400 text-sm">{m.total_exports()}</span
+							>
 						</div>
 						<span class="font-medium">{totalTransfers.toLocaleString()}</span>
 					</div>
 					<div class="flex items-center justify-between">
 						<div class="flex items-center gap-2">
-							<span class="text-xl">🔄</span>
+							<RefreshCw size={18} class="text-surface-500" />
 							<span class="text-surface-600 dark:text-surface-400 text-sm">{m.total_clones()}</span>
 						</div>
 						<span class="font-medium">{totalClones.toLocaleString()}</span>
@@ -184,28 +198,22 @@
 					</h3>
 					<div class="space-y-2">
 						<div class="flex items-center justify-between">
-							<span class="text-surface-600 dark:text-surface-400 text-sm"
-								>
-								{m.avg_transfers_per_pal({pal: c.pal})}
-								</span
-							>
+							<span class="text-surface-600 dark:text-surface-400 text-sm">
+								{m.avg_transfers_per_pal({ pal: c.pal })}
+							</span>
 							<span class="font-medium">{(totalTransfers / totalPals).toFixed(1)}</span>
 						</div>
 						<div class="flex items-center justify-between">
-							<span class="text-surface-600 dark:text-surface-400 text-sm"
-								>
-								{m.avg_clones_per_pal({pal: c.pal})}
-								</span
-							>
+							<span class="text-surface-600 dark:text-surface-400 text-sm">
+								{m.avg_clones_per_pal({ pal: c.pal })}
+							</span>
 							<span class="font-medium">{(totalClones / totalPals).toFixed(1)}</span>
 						</div>
 						{#if totalCollections > 0}
 							<div class="flex items-center justify-between">
-								<span class="text-surface-600 dark:text-surface-400 text-sm"
-									>
-									{m.avg_pals_per_collection({pal: c.pals})}
-									</span
-								>
+								<span class="text-surface-600 dark:text-surface-400 text-sm">
+									{m.avg_pals_per_collection({ pals: c.pals })}
+								</span>
 								<span class="font-medium">{(totalPals / totalCollections).toFixed(1)}</span>
 							</div>
 						{/if}
@@ -298,7 +306,7 @@
 				<div class="bg-surface-100 dark:bg-surface-700 rounded-lg p-3">
 					<div class="text-surface-600 dark:text-surface-400 flex items-center gap-2 text-xs">
 						<Calendar class="h-3 w-3" />
-						<span>{m.last_updated_date({date: formatDate(lastUpdated)})}</span>
+						<span>{m.last_updated_date({ date: formatDate(lastUpdated) })}</span>
 					</div>
 				</div>
 			{/if}
@@ -312,11 +320,8 @@
 
 	<!-- Footer Actions -->
 	<div class="border-surface-300 dark:border-surface-700 border-t p-4">
-		<button
-			onclick={() => upsState.loadStats()}
-			class="bg-primary-500 hover:bg-primary-600 w-full rounded-md px-3 py-2 text-sm text-white transition-colors"
-		>
-			{m.refresh_entity({entity: m.stats()})}
-		</button>
+		<Button variant="secondary" class="w-full" onclick={() => upsState.loadStats()}>
+			{m.refresh_entity({ entity: m.stats() })}
+		</Button>
 	</div>
 </div>

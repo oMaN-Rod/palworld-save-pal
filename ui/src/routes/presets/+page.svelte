@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { presetsData } from '$lib/data';
-	import { Card, List, TooltipButton, Input, Tooltip } from '$components/ui';
+	import { Button, List, TooltipButton, Input, Tooltip } from '$components/ui';
 	import { getModalState, getToastState } from '$states';
 	import { debounce } from '$utils';
 	import { Trash, RefreshCcw, Download, Upload } from 'lucide-svelte';
@@ -12,8 +12,8 @@
 	import PassiveSkills from './components/PassiveSkills.svelte';
 	import PlayerInventory from './components/PlayerInventory.svelte';
 	import StorageInventory from './components/StorageInventory.svelte';
-	import Nuke from '$components/ui/icons/Nuke.svelte';
-	import { send, sendAndWait } from '$utils/websocketUtils';
+	import { Nuke } from '$components/ui';
+	import { sendAndWait } from '$utils/websocketUtils';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
@@ -191,18 +191,20 @@
 </script>
 
 {#snippet tabButton(tab: PresetType, label: string)}
-	<button
+	<Button
+		variant={activeTab === tab ? 'secondary' : 'ghost'}
+		size="sm"
 		class={cn(
-			'btn hover:bg-secondary-500/50 w-1/5 rounded-sm p-2 2xl:p-4',
-			activeTab === tab ? 'bg-secondary-800' : ''
+			'flex-1 tracking-wider 2xl:px-4 2xl:text-sm',
+			activeTab === tab ? '' : 'text-surface-400'
 		)}
 		onclick={() => {
 			activeTab = tab;
 			selectedPresets = [];
 		}}
 	>
-		<span class="text-xs 2xl:text-base">{label}</span>
-	</button>
+		{label}
+	</Button>
 {/snippet}
 
 {#snippet presetContent(index: number)}
@@ -225,22 +227,23 @@
 	</div>
 {/snippet}
 
-<div class="flex h-full flex-col">
-	<div class="grid h-full w-full grid-cols-[25%_1fr]">
-		<!-- Left Controls -->
-		<div class="shrink-0 space-y-2 p-4">
-			<div class="flex items-center">
-				<nav
-					class="btn-group preset-outlined-surface-200-800 w-full flex-col rounded-sm p-2 md:flex-row"
-				>
-					{@render tabButton('pal', c.pal)}
-					{@render tabButton('inventory', m.inventory())}
-					{@render tabButton('passive', m.passive())}
-					{@render tabButton('active', m.active())}
-					{@render tabButton('storage', m.storage())}
-				</nav>
-			</div>
+<div class="animate-fade-in flex h-full flex-col">
+	<!-- Header Banner -->
+	<div class="border-surface-700 flex items-center justify-start border-b p-4">
+		<nav class="border-surface-600/50 bg-surface-900 flex gap-1 rounded-sm border p-1">
+			{@render tabButton('pal', c.pal)}
+			{@render tabButton('inventory', m.inventory())}
+			{@render tabButton('passive', m.passive())}
+			{@render tabButton('active', m.active())}
+			{@render tabButton('storage', m.storage())}
+		</nav>
+	</div>
 
+	<div
+		class="grid h-full w-full grid-cols-[minmax(200px,320px)_1fr] lg:grid-cols-[280px_1fr] xl:grid-cols-[320px_1fr]"
+	>
+		<!-- Left Controls -->
+		<div class="shrink-0 space-y-2 overflow-y-auto p-4">
 			<div class="flex items-center space-x-2">
 				<div class="grow">
 					<Input bind:value={searchQuery} placeholder={m.search_presets()} inputClass="w-full" />
@@ -256,11 +259,11 @@
 				</TooltipButton>
 			</div>
 
-			<div class="btn-group bg-surface-900 w-full items-center rounded-sm p-1">
+			<div class="border-surface-700/50 bg-surface-900 flex gap-1 rounded-sm border p-1">
 				<TooltipButton
 					popupLabel={m.import_preset()}
 					onclick={handleImportPreset}
-					buttonClass="hover:bg-success-500/50"
+					buttonClass="hover:bg-secondary-500/50"
 				>
 					<Upload size={20} />
 				</TooltipButton>
@@ -279,7 +282,7 @@
 
 			<List
 				items={filteredPresets}
-				listClass="h-[calc(100vh-250px)] overflow-y-auto"
+				listClass="h-[calc(100vh-300px)] overflow-y-auto"
 				bind:selectedItems={selectedPresets}
 				multiple={true}
 				headerClass="grid w-full grid-cols-[auto_1fr_auto] gap-2 rounded-sm"
@@ -289,7 +292,7 @@
 					<span class="font-bold">{m.actions()}</span>
 				{/snippet}
 				{#snippet listItem(preset)}
-					<span class="grow">{preset.name}</span>
+					<span class="grow truncate">{preset.name}</span>
 				{/snippet}
 				{#snippet listItemActions(preset)}
 					<TooltipButton
@@ -299,9 +302,13 @@
 					>
 						<Download size={16} />
 					</TooltipButton>
-					<button class="btn hover:bg-error-500/25 p-2" onclick={() => handleDeletePreset(preset)}>
+					<Button
+						variant="ghost"
+						class="hover:bg-error-500/25 p-2"
+						onclick={() => handleDeletePreset(preset)}
+					>
 						<Trash size={16} />
-					</button>
+					</Button>
 				{/snippet}
 				{#snippet listItemPopup(preset)}
 					<div class="flex flex-col">
@@ -337,9 +344,9 @@
 							{m.preset_select_details()}
 						</span>
 						<Tooltip label={m.nuke_all_presets()}>
-							<button class="btn mt-2 h-48 w-48 p-2" onclick={handleNukeAll}>
+							<Button variant="ghost" class="mt-2 h-48 w-48 p-2" onclick={handleNukeAll}>
 								<Nuke size={120} />
-							</button>
+							</Button>
 						</Tooltip>
 					</div>
 				{/if}

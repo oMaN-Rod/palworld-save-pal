@@ -8,10 +8,7 @@
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { MessageType } from '$types';
 
-	let {
-		title = m.open_folder(),
-		closeModal
-	} = $props<{
+	let { title = m.open_folder(), closeModal } = $props<{
 		title?: string;
 		closeModal: () => void;
 	}>();

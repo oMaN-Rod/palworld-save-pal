@@ -2,7 +2,7 @@
 	import { fade } from 'svelte/transition';
 	import { computePosition, flip, shift, offset, arrow, type Placement } from '@floating-ui/dom';
 	import { cn } from '$theme';
-	import { getComputedColorHex } from '$utils';
+	import { getComputedColorHex, portal } from '$utils';
 	import type { Snippet } from 'svelte';
 
 	let {
@@ -96,6 +96,7 @@
 {#if open && !disabled}
 	<div
 		bind:this={floatingEl}
+		{@attach portal()}
 		class={cn('floating tooltip-popup', background, popupClass, rounded)}
 		transition:fade={{ duration: 100 }}
 	>

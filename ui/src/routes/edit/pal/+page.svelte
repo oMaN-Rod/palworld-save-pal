@@ -1,19 +1,21 @@
 <script lang="ts">
 	import {
 		ActiveSkillBadge,
-		LearnedSkillSelectModal,
 		PalHeader,
 		PassiveSkillBadge,
 		Souls,
 		StatsBadges,
+		StatusBadge,
 		Talents,
-		TextInputModal,
 		WorkSuitabilities
-	} from '$components';
-	import StatusBadge from '$components/badges/status-badge/StatusBadge.svelte';
-	import MultiSkillSelectModal from '$components/modals/multi-skill-select/MultiSkillSelectModal.svelte';
-	import { SectionHeader, Tooltip } from '$components/ui';
-	import { SkillPresets } from '$lib/components';
+	} from '$components/pal';
+	import {
+		LearnedSkillSelectModal,
+		MultiSkillSelectModal,
+		TextInputModal
+	} from '$components/modals';
+	import { Button, SectionHeader, Tooltip } from '$components/ui';
+	import { SkillPresets } from '$components/presets';
 	import { expData, palsData, presetsData } from '$lib/data';
 	import { getAppState, getModalState } from '$states';
 	import { EntryState, type PresetProfile, type WorkSuitability } from '$types';
@@ -229,37 +231,43 @@
 		{#snippet action()}
 			<div class="flex">
 				<Tooltip label={m.learned_skills()}>
-					<button
-						class="btn hover:bg-secondary-500/25 ml-2 p-2"
-						onclick={(event) => {
+					<Button
+						variant="ghost"
+						size="icon"
+						class="ml-2"
+						onclick={(event: MouseEvent) => {
 							event.stopPropagation();
 							handleEditLearnedSkills();
 						}}
 					>
 						<Brain size={20} />
-					</button>
+					</Button>
 				</Tooltip>
 				<Tooltip label={m.save_as_preset()}>
-					<button
-						class="btn hover:bg-secondary-500/25 ml-2 p-2"
-						onclick={(event) => {
+					<Button
+						variant="ghost"
+						size="icon"
+						class="ml-2"
+						onclick={(event: MouseEvent) => {
 							event.stopPropagation();
 							handleAddPreset('active');
 						}}
 					>
 						<Save size={20} />
-					</button>
+					</Button>
 				</Tooltip>
-				<Tooltip label={m.add_entity({entity: c.activeSkill})}>
-					<button
-						class="btn hover:bg-secondary-500/25 ml-2 p-2"
-						onclick={(event) => {
+				<Tooltip label={m.add_entity({ entity: c.activeSkill })}>
+					<Button
+						variant="ghost"
+						size="icon"
+						class="ml-2"
+						onclick={(event: MouseEvent) => {
 							event.stopPropagation();
 							handleAddSkill('active');
 						}}
 					>
 						<Plus size={20} />
-					</button>
+					</Button>
 				</Tooltip>
 			</div>
 		{/snippet}
@@ -279,26 +287,30 @@
 		{#snippet action()}
 			<div class="flex">
 				<Tooltip label={m.save_as_preset()}>
-					<button
-						class="btn hover:bg-secondary-500/25 ml-2 p-2"
-						onclick={(event) => {
+					<Button
+						variant="ghost"
+						size="icon"
+						class="ml-2"
+						onclick={(event: MouseEvent) => {
 							event.stopPropagation();
 							handleAddPreset('passive');
 						}}
 					>
 						<Save size={20} />
-					</button>
+					</Button>
 				</Tooltip>
-				<Tooltip label={m.add_entity({entity: c.passiveSkill})}>
-					<button
-						class="btn hover:bg-secondary-500/25 ml-2 p-2"
-						onclick={(event) => {
+				<Tooltip label={m.add_entity({ entity: c.passiveSkill })}>
+					<Button
+						variant="ghost"
+						size="icon"
+						class="ml-2"
+						onclick={(event: MouseEvent) => {
 							event.stopPropagation();
 							handleAddSkill('passive');
 						}}
 					>
 						<Plus size={20} />
-					</button>
+					</Button>
 				</Tooltip>
 			</div>
 		{/snippet}
@@ -318,15 +330,17 @@
 		{#snippet action()}
 			<div class="flex">
 				<Tooltip label={m.max_work_suitability()}>
-					<button
-						class="btn hover:bg-secondary-500/25 ml-2 p-2"
-						onclick={(event) => {
+					<Button
+						variant="ghost"
+						size="icon"
+						class="ml-2"
+						onclick={(event: MouseEvent) => {
 							event.stopPropagation();
 							handleMaxWorkSuitability();
 						}}
 					>
 						<BicepsFlexed />
-					</button>
+					</Button>
 				</Tooltip>
 			</div>
 		{/snippet}
@@ -338,15 +352,17 @@
 		{#snippet action()}
 			<div class="flex">
 				<Tooltip label={m.max_ivs()}>
-					<button
-						class="btn hover:bg-secondary-500/25 ml-2 p-2"
-						onclick={(event) => {
+					<Button
+						variant="ghost"
+						size="icon"
+						class="ml-2"
+						onclick={(event: MouseEvent) => {
 							event.stopPropagation();
 							handleMaxIVs();
 						}}
 					>
 						<BicepsFlexed />
-					</button>
+					</Button>
 				</Tooltip>
 			</div>
 		{/snippet}
@@ -358,15 +374,17 @@
 		{#snippet action()}
 			<div class="flex">
 				<Tooltip label={m.max_souls()}>
-					<button
-						class="btn hover:bg-secondary-500/25 ml-2 p-2"
-						onclick={(event) => {
+					<Button
+						variant="ghost"
+						size="icon"
+						class="ml-2"
+						onclick={(event: MouseEvent) => {
 							event.stopPropagation();
 							handleMaxSouls();
 						}}
 					>
 						<BicepsFlexed />
-					</button>
+					</Button>
 				</Tooltip>
 			</div>
 		{/snippet}
@@ -376,21 +394,28 @@
 {#if appState.selectedPal}
 	<div class="flex h-full overflow-auto p-2">
 		<div class="flex grow flex-col">
-			<div class="w-2/3 shrink-0">
+			<div id="pal-header" class="w-full shrink-0 2xl:w-2/3">
 				<PalHeader bind:pal={appState.selectedPal} />
 			</div>
 			<div class="flex grow">
 				<div class="hidden flex-1 overflow-auto p-2 2xl:block">
 					<div class="flex flex-col space-y-2">
-						{@render activeSkillsHeader()}
-						{@render activeSkillsBody()}
-						{@render passiveSkillsHeader()}
-						{@render passiveSkillsBody()}
-
-						<SectionHeader text={c.presets} />
-						<SkillPresets onSelect={setSkillPreset} />
-						{@render workSuitabilityHeader()}
-						<WorkSuitabilities bind:pal={appState.selectedPal} />
+						<div id="pal-active-skills">
+							{@render activeSkillsHeader()}
+							{@render activeSkillsBody()}
+						</div>
+						<div id="pal-passive-skills">
+							{@render passiveSkillsHeader()}
+							{@render passiveSkillsBody()}
+						</div>
+						<div id="pal-skill-presets">
+							<SectionHeader text={c.presets} />
+							<SkillPresets onSelect={setSkillPreset} />
+						</div>
+						<div id="pal-work-suitability">
+							{@render workSuitabilityHeader()}
+							<WorkSuitabilities bind:pal={appState.selectedPal} />
+						</div>
 					</div>
 				</div>
 				<div class="mt-4 2xl:hidden">
@@ -434,7 +459,7 @@
 						</Accordion.Item>
 					</Accordion>
 				</div>
-				<div class="flex-1 overflow-auto p-2">
+				<div id="pal-image" class="flex-1 overflow-auto p-2">
 					<div class="flex h-full flex-col items-center justify-center">
 						<div class="pal">
 							<Tooltip
@@ -453,7 +478,7 @@
 										<img
 											src={staticIcons.predatorIcon}
 											alt="Predator"
-											class="absolute bottom-0 right-0 h-12 w-12"
+											class="absolute right-0 bottom-0 h-12 w-12"
 											style="filter: {calculateFilters('#FF0000')};"
 										/>
 									{/if}
@@ -474,20 +499,28 @@
 				</div>
 			</div>
 		</div>
-		<div class="w-1/3 overflow-auto p-2">
+		<div class="w-full overflow-auto p-2 2xl:w-1/3">
 			<div class="hidden flex-col space-y-2 2xl:flex">
-				<StatusBadge bind:pal={appState.selectedPal} />
-				<SectionHeader text={m.stats()} />
-				<StatsBadges bind:pal={appState.selectedPal} bind:player={appState.selectedPlayer} />
-				{@render talentsHeader()}
-				<Talents bind:pal={appState.selectedPal} />
-				{@render soulsHeader()}
-				<Souls bind:pal={appState.selectedPal} />
+				<div id="pal-status">
+					<StatusBadge bind:pal={appState.selectedPal} />
+				</div>
+				<div id="pal-stats">
+					<SectionHeader text={m.stats()} />
+					<StatsBadges bind:pal={appState.selectedPal} bind:player={appState.selectedPlayer} />
+				</div>
+				<div id="pal-talents">
+					{@render talentsHeader()}
+					<Talents bind:pal={appState.selectedPal} />
+				</div>
+				<div id="pal-souls">
+					{@render soulsHeader()}
+					<Souls bind:pal={appState.selectedPal} />
+				</div>
 			</div>
 			<div class="flex flex-col space-y-2 2xl:hidden">
 				<StatusBadge bind:pal={appState.selectedPal} />
 				<Accordion
-					classes="min-w-96"
+					classes="w-full min-w-0 2xl:min-w-96"
 					value={rightAccordionValue}
 					onValueChange={(e: ValueChangeDetails) => (rightAccordionValue = e.value)}
 					collapsible

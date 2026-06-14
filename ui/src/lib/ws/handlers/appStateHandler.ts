@@ -1,5 +1,5 @@
 import { goto } from '$app/navigation';
-import UpdateAvailableModal from '$components/modals/update-available/UpdateAvailableModal.svelte';
+import { UpdateAvailableModal } from '$components/modals';
 import { setLocale } from '$i18n/runtime';
 import { getAppState, getModalState } from '$states';
 import { MessageType } from '$types';

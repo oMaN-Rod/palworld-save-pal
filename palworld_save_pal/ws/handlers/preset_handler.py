@@ -1,5 +1,3 @@
-import json
-
 import webview
 from fastapi import WebSocket
 
@@ -13,6 +11,7 @@ from palworld_save_pal.ws.messages import (
     MessageType,
 )
 from palworld_save_pal.ws.utils import build_response
+from palworld_save_pal.utils import json_io
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.state import get_app_state
 from palworld_save_pal.db.ctx.presets import (
@@ -133,8 +132,7 @@ async def export_preset_handler(message: ExportPresetMessage, ws: WebSocket):
                 save_path = save_path.strip().strip("'\"")
 
                 # Save the preset data to JSON file
-                with open(save_path, "w", encoding="utf-8") as f:
-                    json.dump(preset_data, f, indent=2, ensure_ascii=False)
+                json_io.dump(preset_data, save_path, indent=2)
 
                 response = build_response(
                     MessageType.EXPORT_PRESET,
@@ -184,8 +182,7 @@ async def import_preset_handler(message: ImportPresetMessage, ws: WebSocket):
 
                 logger.debug(f"Importing preset from {load_path}")
                 # Load and validate the preset data
-                with open(load_path, "r", encoding="utf-8") as f:
-                    preset_data = json.load(f)
+                preset_data = json_io.load(load_path)
 
                 # Validate that it's a valid preset structure
                 required_fields = ["name", "type"]

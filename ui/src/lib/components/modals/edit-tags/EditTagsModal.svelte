@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, Input, TooltipButton } from '$components/ui';
+	import { Button, Card, Input, TooltipButton } from '$components/ui';
 	import { Save, X, Tag, Plus } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
@@ -82,7 +82,7 @@
 </script>
 
 <div bind:this={modalContainer}>
-	<Card class="min-w-[400px] max-w-lg">
+	<Card class="max-w-lg min-w-[400px]">
 		<div class="mb-4 flex items-center justify-between">
 			<h3 class="h3 flex items-center gap-2">
 				<Tag class="h-5 w-5" />
@@ -195,23 +195,23 @@
 
 		<!-- Actions -->
 		<div class="mt-6 flex justify-end gap-2">
-			<button
+			<Button
 				type="button"
+				variant="neutral"
 				onclick={() => handleClose(false)}
-				class="bg-surface-500 hover:bg-surface-600 flex items-center gap-2 rounded-md px-4 py-2 text-white"
 			>
 				<X class="h-4 w-4" />
 				{m.cancel()}
-			</button>
-			<button
+			</Button>
+			<Button
 				type="button"
+				variant="primary"
 				onclick={() => handleClose(true)}
-				class="bg-primary-500 hover:bg-primary-600 flex items-center gap-2 rounded-md px-4 py-2 text-white"
 				data-modal-primary
 			>
 				<Save class="h-4 w-4" />
 				{m.save_changes()}
-			</button>
+			</Button>
 		</div>
 	</Card>
 </div>

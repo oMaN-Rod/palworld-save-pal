@@ -7,6 +7,7 @@
 	import type { Guild, GuildLabResearchInfo, WorkSuitability } from '$types';
 	import NumberFlow from '@number-flow/svelte';
 	import { Unlock } from 'lucide-svelte';
+	import { Button } from '$components/ui';
 	import * as m from '$i18n/messages';
 
 	let {
@@ -99,15 +100,17 @@
 					<span class="text-sm"> / {categoryProgress.total}</span>
 				</div>
 			</button>
-			<button
-				class="btn hover:ring-secondary-500 border-surface-800 flex items-center justify-center border p-2 text-sm hover:ring-2 hover:ring-inset"
+			<Button
+				variant="ghost"
+				size="icon"
+				class="border-surface-800 hover:ring-secondary-500 border hover:ring-2 hover:ring-inset"
 				onclick={() => unlockAllForCategory(category)}
 				title={m.unlock_all_category_research({
 					category: workSuitability.localized_name || category
 				})}
 			>
 				<Unlock class="h-4 w-4" />
-			</button>
+			</Button>
 		</div>
 	{/each}
 </div>

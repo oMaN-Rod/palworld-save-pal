@@ -1,528 +1,789 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "about": "Tentang",
-  "about_built_by": "Dibangun oleh <s>seorang pengembang</s> beberapa orang yang merupakan pengembang untuk bersenang-senang.",
+  "about_built_by": "Dibuat oleh <s>seorang pengembang dan</s> beberapa pengembang lainnya sebagai hobi.",
   "about_check_out": "Memeriksa",
-  "about_for_more_info": "untuk informasi lebih lanjut.",
-  "about_github_repo": "repo Github",
+  "about_for_more_info": "untuk info selengkapnya.",
+  "about_github_repo": "Repositori Github",
   "accessory": "Aksesori",
   "actions": "Tindakan",
   "active": "Aktif",
+  "active_filters_count": "Filter Aktif ( {count} )",
+  "active_skill": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Keterampilan Aktif",
+        "countPlural=other": "Keterampilan Aktif"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "activity": "Aktivitas",
   "add": "Menambahkan",
   "add_all_implants": "Tambahkan Semua Implan",
   "add_all_pal_gear": "Tambahkan Semua Perlengkapan {pal}",
+  "add_all_pals_to_entity": "Tambahkan semua {pals} ke {entity}",
   "add_all_skills": "Tambahkan semua Keterampilan",
   "add_count_pals": "Tambahkan {count} {type} {pals}",
   "add_entity": "Tambahkan {entity}",
-  "add_new_pal": "Tambahkan {pal} Baru",
-  "add_new_pal_to_entity": "Tambahkan Teman baru ke {entity} Anda",
+  "add_new_pal": "Tambahkan {pal} baru",
+  "add_new_pal_to_entity": "Tambahkan teman baru ke {entity} Anda",
   "add_new_tag": "Tambahkan Tag Baru",
-  "add_notes_about_imported_pals": "Tambahkan catatan tentang {pals} yang diimpor ini...",
-  "add_other_key_items": "Tambahkan Item Penting Lainnya",
-  "add_pal_to_base": "Tambahkan {pal} baru ke Basis {base}",
-  "add_pal_to_base_tooltip": "Tambahkan {pal} ke Basis",
+  "add_notes_about_cloned_pals": "Tambahkan catatan tentang {pals} hasil kloning ini...",
+  "add_notes_about_imported_pals": "Tambahkan catatan tentang {pals} impor ini...",
+  "add_other_key_items": "Tambahkan Item Kunci Lainnya",
+  "add_pal_to_base": "Tambahkan {pal} baru ke Base {base}",
+  "add_preset_entity": "Tambahkan preset {entity}",
   "add_skill": "Tambahkan Keterampilan",
   "add_skills_preset": "Tambahkan preset keterampilan {type}",
-  "add_tag": "Tambahkan Tanda",
+  "add_tag": "Tambahkan Tag",
   "add_to_collection": "Tambahkan ke Koleksi",
+  "add_to_favorites": "Tambahkan ke favorit",
+  "added_label": "Ditambahkan:",
   "all": "Semua",
-  "all_pals": "Semua {pals}",
-  "all_ups": "Semua UPS",
+  "all_entity": "Semua {entity}",
   "alpha": "Alfa",
-  "alpha_pals": "Alfa {pals}",
+  "alpha_pal": "{pals} Alpha",
+  "ammo": "Amunisi",
   "ancient_technology_points": "Poin Teknologi Kuno",
+  "and_more_count": "+ {count} lagi",
   "apply_preset": "Terapkan preset",
   "apply_preset_to_selected": "Terapkan preset ke {pals} yang dipilih",
   "apply_presets": "Terapkan Preset",
+  "apply_selected_entity": "Terapkan {entity} yang dipilih",
+  "archive_entity": "Arsip {entity}",
   "armor": "Baja",
   "attack": "Menyerang",
-  "available_saves": "Simpanan yang Tersedia",
+  "available_entity": "{entity} tersedia",
+  "available_saves": "Penghematan yang Tersedia",
   "available_slots": "Slot yang Tersedia",
   "available_tags": "Tag yang Tersedia",
-  "avg_level": "Tingkat Rata-Rata",
-  "base_container": "Wadah Dasar",
+  "avg_clones_per_pal": "Rata-rata klon per {pal} :",
+  "avg_level": "Tingkat Rata-rata",
+  "avg_pals_per_collection": "Rata-rata {pals} per koleksi:",
+  "avg_transfers_per_pal": "Rata-rata transfer per {pal} :",
+  "base": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Basis",
+        "countPlural=other": "Pangkalan"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "base_container": "Kontainer Dasar",
   "base_name": "Nama Dasar",
-  "basecamp_level": "Tingkat Kamp Pangkalan",
+  "base_range": "Rentang Dasar",
+  "basecamp_level": "Tingkat Basecamp",
+  "blueprint": "Cetak Biru",
   "body": "Tubuh",
   "boss": "Bos",
   "box": "Kotak",
-  "bulk_clone_to_ups_failed": "Kloning massal ke UPS gagal. Silakan coba lagi.",
+  "bulk_clone_to_ups_failed": "Pengkloningan massal ke UPS gagal. Silakan coba lagi.",
   "cancel": "Membatalkan",
-  "cannot_fill": "Anda tidak dapat mengisi {target} Anda, Anda memerlukan {count} slot lagi.",
-  "cannot_paste_here": "Tidak dapat menempel di sini (belum™)",
+  "cannot_fill": "Anda tidak dapat memenuhi {target} Anda, Anda membutuhkan {count} slot lagi.",
+  "cannot_paste_here": "Tidak bisa menempelkan teks di sini (belum™)",
+  "category": "Kategori",
   "change_player_name": "Ubah Nama Pemain",
   "changes": "Perubahan",
   "character": "Karakter",
   "character_container": "Wadah Karakter",
-  "cheat_mode": "Modus Curang",
+  "cheat_mode": "Mode Curang",
   "chest": "Dada",
-  "choose_a_pal": "Pilih {pal}...",
+  "choose_a_entity": "Pilih sebuah {entity}",
   "choose_entity": "Pilih Entitas",
   "clear": "Jernih",
   "clear_all": "Hapus Semua",
   "clear_all_entity": "Hapus semua {entity}",
-  "clear_completed_missions_confirm": "Apakah Anda yakin ingin menyelesaikan semua misi {count} yang diselesaikan {type}?",
-  "clear_current_missions_confirm": "Apakah Anda yakin ingin menyelesaikan semua misi {count} saat ini {type}?",
+  "clear_completed_missions_confirm": "Apakah Anda yakin ingin menghapus semua {count} misi {type} yang telah diselesaikan?",
+  "clear_current_missions_confirm": "Apakah Anda yakin ingin menyelesaikan semua {count} misi {type} yang sedang berjalan?",
   "clear_entity": "Hapus {entity}",
+  "clear_selected": "Hapus yang dipilih",
   "clear_selected_entity": "Hapus {entity} yang dipilih",
-  "clear_selection": "Hapus Seleksi",
-  "cleared_completed_missions": "Menyelesaikan {count} menyelesaikan misi {type}",
-  "cleared_current_missions": "Menyelesaikan {count} misi {type} saat ini",
-  "click_map_coordinates": "Klik pada peta untuk melihat koordinat detailnya.",
-  "clipboard_cleared": "Papan klip dibersihkan",
+  "clear_selection": "Hapus Pilihan",
+  "cleared_completed_missions": "Telah menyelesaikan {count} misi {type} .",
+  "cleared_current_missions": "Telah menyelesaikan {count} misi {type} saat ini",
+  "click_map_coordinates": "Klik pada peta untuk melihat koordinat detail.",
+  "click_to_complete": "Klik untuk menyelesaikan",
+  "click_toggle_point": "Klik titik perjalanan cepat atau patung untuk mengaktifkan atau menonaktifkannya untuk pemain yang dipilih.",
+  "clipboard_cleared": "Papan klip telah dibersihkan.",
+  "clone_pal_to_entity": "Kloning {pal} ke {entity}",
   "clone_pals_to_entity": "Kloning {count} {pals} ke {entity}",
   "clone_prefix": "Awalan Klon",
-  "clone_selected_pal": "Klon dipilih {pal}",
-  "clone_selected_pals_to_entity": "Klon {count} memilih {pals} ke {entity}.",
-  "clone_selected_to_entity": "Klon yang dipilih {pals} ke {entity}",
-  "clone_to_entity": "Klon ke {entity}",
-  "clone_to_entity_failed": "Kloning ke {entity} gagal. Silakan coba lagi.",
+  "clone_selected_pal": "Klon terpilih {pal}",
+  "clone_to_entity": "Kloning ke {entity}",
+  "clone_to_entity_failed": "Pengkloningan ke {entity} gagal. Silakan coba lagi.",
   "clones": "Klon",
+  "cloning_count_pals": "Mengkloning {count} {pals}",
+  "close_drawer": "Tutup laci",
   "close_toast": "Tutup roti panggang",
+  "collect_all_effigies": "Kumpulkan semua Patung",
+  "collected": "Dikumpulkan",
+  "collection": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Koleksi",
+        "countPlural=other": "Koleksi"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "collection_delete_warning": "Teman-teman dalam koleksi ini tidak akan dihapus, tetapi mereka tidak akan lagi dikaitkan dengan koleksi ini.",
   "collection_name": "Nama koleksi",
   "collection_optional": "Koleksi (Opsional)",
   "collections": "Koleksi",
   "common": "Umum",
-  "completed_missions": "Misi Selesai",
+  "completed": "Selesai",
+  "completed_missions": "Misi yang Selesai",
   "confirm": "Mengonfirmasi",
+  "consume": "Barang habis pakai",
+  "container_entity": "{entity} Kontainer",
   "copy": "Menyalin",
   "create": "Membuat",
+  "create_entity_name": "Buat \" {name} \" {entity}",
+  "create_first_entity": "Buat {entity} pertama Anda",
   "create_new_collection": "Buat Koleksi Baru",
-  "create_pals_or_import": "Buat {pals} baru atau impor dari file simpanan Anda untuk memulai.",
+  "create_pals_or_import": "Buat {pals} baru atau impor teman dari file penyimpanan Anda untuk memulai.",
+  "create_preset_from_container": "Buat preset dari kontainer",
+  "create_preset_from_current": "Buat preset dari {entity} saat ini",
   "created": "Dibuat",
   "current_collection": "Koleksi Saat Ini",
   "current_missions": "Misi Saat Ini",
-  "current_save_file": "File Simpan Saat Ini",
-  "debug": "Men-debug",
-  "debug_mode": "Modus Debug",
+  "current_save_file": "File Tersimpan Saat Ini",
+  "debug": "Debug",
+  "docs": "Dokumen",
+  "docs_wiki": "Wiki",
+  "docs_guides": "Pemandu",
+  "docs_tours": "Tur",
+  "docs_wiki_description": "Telusuri semua data game termasuk Teman, Item, Bangunan, Keterampilan, dan lainnya.",
+  "docs_guides_description": "Panduan tertulis untuk menggunakan aplikasi.",
+  "docs_tours_description": "Panduan interaktif tentang fitur-fitur aplikasi.",
+  "docs_search_placeholder": "Mencari...",
+  "docs_no_results": "Tidak ada hasil yang ditemukan.",
+  "docs_start_tour": "Mulai Tur",
+  "docs_tour_requires_save": "Membutuhkan file penyimpanan untuk dimuat.",
+  "debug_mode": "Mode Debug",
   "defense": "Pertahanan",
   "delete": "Menghapus",
   "delete_count_entities_confirm": "Apakah Anda yakin ingin menghapus {count} {entity} yang dipilih?",
   "delete_entire_guild": "Hapus seluruh guild",
   "delete_entity": "Hapus {entity}",
-  "delete_entity_by_name_confirm": "Apakah Anda yakin ingin menghapus {name}? Tindakan ini tidak dapat dibatalkan.",
+  "delete_entity_by_name_confirm": "Apakah Anda yakin ingin menghapus {name} ? Tindakan ini tidak dapat dibatalkan.",
   "delete_entity_confirm": "Apakah Anda yakin ingin menghapus {entity} ini? Tindakan ini tidak dapat dibatalkan.",
+  "delete_entity_warning": "Apakah Anda yakin ingin menghapus \" {name} \"? {warning}",
   "delete_selected_entity": "Hapus {entity} yang dipilih",
-  "deleted_entity": "Dihapus {count} {entity}",
+  "delete_selected_entity_confirm": "Apakah Anda yakin ingin menghapus {entity} yang dipilih?",
+  "deleted_entity": "{entity} {count} dihapus",
   "description_optional": "Deskripsi (opsional)",
-  "dimensional_pal_storage": "Penyimpanan Pal Dimensi",
+  "dimensional_pal_storage": "Penyimpanan Dimensi {pal}",
+  "distribution": "Distribusi",
   "download": "Unduh",
-  "download_modified_save": "Unduh file Level.sav yang dimodifikasi",
+  "download_modified_save": "Unduh file Level.sav yang telah dimodifikasi",
   "dps": "DPS",
-  "drag_drop_zip": "atau seret dan letakkan file zip Anda di sini",
-  "dungeons": "ruang bawah tanah",
-  "edit": "Sunting",
-  "edit_entity": "Sunting {entity}",
+  "dps_not_available": "Pemain yang terpilih tidak memiliki DPS",
+  "drag_drop_zip": "atau seret dan lepas file zip Anda di sini",
+  "dungeons": "Ruang bawah tanah",
+  "edit": "Edit",
+  "edit_entity": "Edit {entity}",
+  "edit_entity_name": "Edit nama {entity}",
   "edit_tags_for_pals": "Edit Tag untuk {count} {pals}",
+  "editor": "Editor",
+  "effect": "Memengaruhi",
+  "effigies": "Patung-patung Lifmunk",
+  "effigy": "Patung Lifmunk",
   "egg": "Telur",
   "element_and_type": "Elemen & Tipe",
   "element_types": "Jenis Elemen",
   "elemental_distribution": "Distribusi Unsur",
   "empty": "Kosong",
   "enter_item_count": "Masukkan Jumlah Barang",
+  "enter_name_for_entity": "Masukkan nama untuk {entity} baru:",
+  "enter_new_name_for_entity": "Masukkan nama baru untuk {entity} :",
   "enter_tag_name": "Masukkan nama tag",
+  "entity_count_available": "{count} {entity} tersedia",
+  "entity_not_available": "{entity} tidak tersedia.",
+  "epic": "Epik",
   "error": "Kesalahan",
-  "error_copied": "Detail kesalahan disalin ke papan klip",
+  "error_copied": "Detail kesalahan disalin ke papan klip.",
   "error_copy_failed": "Gagal menyalin detail kesalahan",
-  "error_nuke_operation": "Terjadi kesalahan selama operasi nuklir. Silakan coba lagi.",
+  "error_nuke_operation": "Terjadi kesalahan selama operasi penghapusan data nuklir. Silakan coba lagi.",
+  "essential": "Penting",
   "export": "Ekspor",
+  "export_note_message": "File yang diekspor akan disalin ke lokasi tujuan. File aslinya akan tetap berada di UPS.",
   "export_pals": "Ekspor {count} {pals}",
   "export_preset": "Ekspor preset ke file",
   "export_selected": "Ekspor yang Dipilih",
   "export_target": "Target Ekspor",
-  "export_to": "Ekspor Ke",
+  "export_to": "Ekspor ke",
+  "export_to_target": "Ekspor ke {target}",
+  "exporting_count_selected_pals": "Mengekspor {count} {pals} terpilih",
   "failed_create_pal": "Gagal membuat teman baru. Silakan coba lagi.",
   "failed_export_pals": "Gagal mengekspor {count} {pals}",
-  "failed_get_pal_data": "Gagal mendapatkan data sobat",
-  "failed_nuke_ups": "Gagal melakukan nuklir pada UPS. Silakan coba lagi.",
+  "failed_get_pal_data": "Gagal mendapatkan data teman",
+  "failed_nuke_ups": "Gagal untuk menghapus data di UPS. Silakan coba lagi.",
   "fast_travel": "Perjalanan Cepat",
+  "favorites": "Favorit",
   "feed": "Memberi makan",
+  "file": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Mengajukan",
+        "countPlural=other": "Berkas"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
   "fill": "Mengisi",
+  "fill_container": "Isi Wadah",
+  "fill_current_entity": "Isi {entity} saat ini",
   "fill_entity": "Isi {entity}",
-  "filter_and_sort": "Saring & Sortir",
+  "filter": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Menyaring",
+        "countPlural=other": "Filter"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "filter_and_sort": "Filter & Urutkan",
   "filtered": "Tersaring",
   "food": "Makanan",
+  "for": "untuk",
   "friendship_rank": "Peringkat Persahabatan",
   "gender": "Jenis kelamin",
   "glider": "Pesawat peluncur",
-  "global_pal_storage": "Penyimpanan {pal} Global",
+  "global_pal_storage": "Penyimpanan Global {pal}",
   "gps": "GPS",
-  "gps_not_available": "{gps} tidak tersedia untuk penyimpanan ini.",
-  "grid_view": "Tampilan Kotak",
+  "gps_not_available": "GPS tidak tersedia dalam file penyimpanan ini.",
+  "grid_view": "Tampilan Kisi",
+  "guild": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Persekutuan",
+        "countPlural=other": "Serikat pekerja"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
   "guild_name": "Nama Serikat",
   "head": "Kepala",
-  "heal_all_in_entity": "Sembuhkan semuanya di {entity}",
-  "heal_selected_pals": "Sembuhkan {pals} yang dipilih",
+  "heal_all_in_entity": "Sembuhkan semua yang ada di {entity}",
+  "heal_selected_pals": "Sembuhkan {pals} terpilih",
   "health": "Kesehatan",
   "how_many_clones": "Berapa banyak klon?",
   "hp": "HP",
+  "human": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Manusia",
+        "countPlural=other": "Manusia"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
   "id": "PENGENAL",
   "import": "Impor",
   "import_failed": "Impor gagal. Silakan coba lagi.",
   "import_from": "Impor Dari",
   "import_from_save": "Impor dari Simpan",
-  "import_preset": "Impor preset dari file",
+  "import_preset": "Impor preset dari file.",
   "import_to_ups_message": "Pilih sumber dan opsi untuk mengimpor {pals} ke UPS.",
-  "import_to_ups_title": "Simpan Berkas ke UPS",
-  "in_inventory": "dalam inventaris",
+  "import_to_ups_title": "Simpan File ke UPS",
+  "in_inventory": "dalam persediaan",
   "info": "Informasi",
-  "invalid_option_selected": "Opsi yang dipilih tidak valid",
+  "invalid_option_selected": "Opsi yang dipilih tidak valid.",
   "inventory": "Inventaris",
+  "item": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Barang",
+        "countPlural=other": "Barang-barang"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
   "item_container": "Wadah Barang",
   "item_copied": "{name} disalin ke papan klip",
-  "items": "Barang",
-  "key_items": "Item Utama",
+  "ivs": "IV",
+  "key_items": "Poin-Poin Penting",
   "lab": "Laboratorium",
   "language": "Bahasa",
-  "last_online": "Terakhir Daring",
+  "last_accessed": "Terakhir diakses",
+  "last_online": "Terakhir Online",
+  "last_updated_date": "Terakhir diperbarui: {date}",
   "later": "Nanti",
   "learn_all_skills": "Pelajari Semua Keterampilan",
-  "learn_skills_matching_type": "Pelajari Semua Keterampilan yang Cocok dengan Tipe Sobat",
+  "learn_skills_matching_type": "Pelajari Semua Keterampilan Mencocokkan Tipe Teman",
   "learned_skills": "Keterampilan yang Dipelajari",
-  "left_click_focus": "Klik kiri pada pemain atau basis untuk fokus.",
+  "left_click_focus": "Klik kiri pada pemain atau markas untuk memfokuskan kursor.",
+  "legendary": "Legendaris",
   "level": "Tingkat",
-  "level_abbr": "Lvl",
-  "level_distribution": "Distribusi Tingkat",
-  "level_value": "Tingkat {level}",
+  "level_abbr": "Level",
+  "level_abbr_value": "Level {value}",
+  "level_distribution": "Distribusi Level",
+  "level_sync_display": "Sinkronisasi level {from} → {to}",
+  "level_value": "Level {level}",
   "list_view": "Tampilan Daftar",
-  "load_guild_bases": "Muat Serikat/Pangkalan",
-  "load_player": "Memuat Pemain",
-  "loaded_entity": "Dimuat {entity}",
+  "load_guild_bases": "Muat Guild/Basis",
+  "load_player": "Muat Pemutar",
+  "loaded_entity": "{entity} dimuat",
   "loading_data": "Memuat data...",
   "loading_entity": "Memuat {entity}",
-  "loadout": "Pemuatan",
+  "loadout": "Perlengkapan",
   "location": "Lokasi",
   "lock_all": "Kunci Semua",
+  "locked": "Terkunci",
   "lucky": "Beruntung",
-  "lucky_pals": "Beruntung {pals}",
+  "lucky_pals": "Teman {pals} beruntung",
   "main_missions": "Misi Utama",
   "manage_collection_for_pals": "Kelola Koleksi untuk {count} {pals}",
   "map": "Peta",
+  "map_coordinate_origin_point": "Titik asal koordinat peta",
+  "map_coordinates": "Koordinat Peta",
   "map_options": "Opsi Peta",
-  "mark_all_current_complete": "Tandai Semua Saat Ini sebagai Selesai",
+  "mark_all_current_complete": "Tandai Semua yang Sedang Berjalan sebagai Selesai",
   "mark_complete": "Tandai Selesai",
-  "mark_complete_confirm": "Apakah Anda yakin ingin menandai semua misi {count} saat ini {type} sebagai selesai?",
-  "marked_missions_complete": "Menandai misi {count} {type} sebagai selesai",
-  "max": "Maks",
-  "max_ivs": "Maksimal infus",
-  "max_level": "Tingkat Maks",
-  "max_level_pals": "Tingkat Maks {pals}",
+  "mark_complete_confirm": "Apakah Anda yakin ingin menandai semua {count} misi {type} yang sedang berjalan sebagai selesai?",
+  "marked_missions_complete": "Misi {count} {type} ditandai sebagai selesai.",
+  "material": "Bahan",
+  "max": "Maksimum",
+  "max_ivs": "Maksimalkan IV",
+  "max_level": "Level Maksimum",
+  "max_level_pals": "Level Maksimum {pals}",
   "max_out_pal_stats": "Maksimalkan statistik {pal} 💉💪",
-  "max_out_selected_pals": "Maksimal {pals} yang dipilih",
+  "max_out_selected_pals": "Maksimalkan {pals} yang dipilih",
   "max_souls": "Maksimalkan Jiwa",
-  "max_work_suitability": "Memaksimalkan Kesesuaian Kerja",
-  "min_level": "Tingkat Minimal",
+  "max_work_suitability": "Maksimalkan Kesesuaian Kerja",
+  "menu": "Menu",
+  "min_level": "Tingkat Minimum",
   "mission": "Misi",
-  "mission_cleared": "Misi selesai",
+  "mission_cleared": "Misi selesai.",
   "mission_marked_complete": "Misi ditandai sebagai selesai",
   "missions": "Misi",
   "mixed_collections": "Koleksi Campuran",
-  "mixed_collections_message": "{pals} yang dipilih berada dalam koleksi berbeda atau ada pula yang tidak memiliki koleksi",
+  "mixed_collections_message": "{pals} terpilih berada di koleksi yang berbeda atau beberapa di antaranya tidak memiliki koleksi.",
   "modified": "Dimodifikasi",
+  "modified_label": "Dimodifikasi:",
   "module": "Modul",
+  "monster_equip_weapon": "Monster Perlengkapan Senjata",
+  "most_popular": "Paling Populer",
   "move": "Bergerak",
-  "move_all_to_collection": "Pindahkan semua {pals} yang dipilih ke \"{name}\"",
+  "move_all_to_collection": "Pindahkan semua {pals} yang dipilih ke \" {name} \"",
+  "move_to_entity": "Pindah ke {entity}",
   "moved_pals_to_collection": "Memindahkan {count} {pals} ke koleksi",
   "name": "Nama",
   "new_pal_prefix": "Awalan Pal Baru",
   "new_version_available": "Versi baru Palworld Save Pal tersedia di GitHub.",
   "next": "Berikutnya",
   "nickname": "Nama panggilan",
-  "no_bases_loaded": "Belum ada pangkalan yang dimuat. Gunakan pemilih serikat di atas untuk memuat basis.",
+  "no_archived_entity": "Tidak ada {entity} yang diarsipkan",
+  "no_bases_loaded": "Belum ada markas yang dimuat. Gunakan pemilih guild di atas untuk memuat markas.",
   "no_changes": "Tidak ada perubahan",
-  "no_collection": "Tidak Ada Koleksi",
-  "no_completed_missions_to_clear": "Tidak ada misi yang selesai untuk diselesaikan",
-  "no_current_missions_to_clear": "Tidak ada misi saat ini yang harus diselesaikan",
-  "no_current_missions_to_complete": "Tidak ada misi saat ini yang harus diselesaikan",
-  "no_detailed_info": "Tidak ada informasi rinci yang tersedia",
+  "no_collection": "Tidak ada pengambilan",
+  "no_completed_missions_to_clear": "Tidak ada misi yang diselesaikan untuk dibersihkan.",
+  "no_current_missions_to_clear": "Tidak ada misi yang perlu diselesaikan saat ini.",
+  "no_current_missions_to_complete": "Tidak ada misi yang perlu diselesaikan saat ini.",
+  "no_detailed_info": "Tidak ada informasi detail yang tersedia.",
+  "no_entity_matching": "Tidak ditemukan {entity} yang cocok dengan \" {query} \"",
   "no_entity_selected": "Tidak ada {entity} yang dipilih",
-  "no_guild_bases_found": "Tidak ada Pangkalan Serikat yang ditemukan",
-  "no_guild_found": "Tidak ada Serikat yang ditemukan",
-  "no_missions_found": "Tidak ada misi {type} yang ditemukan",
+  "no_entity_yet": "Belum ada {entity}",
+  "no_guild_bases_found": "Tidak ditemukan Markas Guild.",
+  "no_guild_found": "Tidak ditemukan Guild.",
+  "no_level_sync": "Tidak Ada Sinkronisasi Level",
+  "no_missions_found": "Tidak ditemukan misi {type}",
   "no_pals_available": "Tidak ada data {pals} yang tersedia",
-  "no_pals_in_storage": "Tidak ada {pals} di Penyimpanan",
+  "no_pals_in_storage": "Tidak ada {pals} di Gudang",
   "no_players_loaded": "Belum ada pemain yang dimuat. Gunakan pemilih di atas untuk memuat pemain.",
-  "no_save_loaded": "Tidak ada file simpanan yang dimuat",
+  "no_save_loaded": "Tidak ada file penyimpanan yang dimuat.",
   "no_skills_learned": "Tidak ada keterampilan yang dipelajari",
   "no_slots_available_in_entity": "Tidak ada slot yang tersedia di {entity} ini.",
-  "no_storage_containers": "Tidak Ada Wadah Penyimpanan",
+  "no_storage_containers": "Tidak Ada Kontainer Penyimpanan",
+  "none": "Tidak ada",
+  "not_collected": "Tidak Terkumpul",
   "normal": "Normal",
+  "note": "Catatan",
   "notes_optional": "Catatan (opsional)",
-  "nuke_all_presets": "Nuke semua sudah diatur sebelumnya",
-  "nuke_presets_confirm": "Apakah Anda yakin ingin menghapus semua preset? Tindakan ini akan memulihkan default & tidak dapat dibatalkan.",
+  "nuke_all_presets": "Hapus semua preset",
+  "nuke_presets_confirm": "Apakah Anda yakin ingin menghapus semua preset? Tindakan ini akan mengembalikan pengaturan default & tidak dapat dibatalkan.",
   "nuke_ups": "Nuke UPS - Hapus SEMUA {pals}",
   "of": "dari",
-  "oil_rig": "Rig Minyak",
+  "oil_rig": "Anjungan Minyak",
   "oil_rig_pals": "Rig Minyak {pals}",
-  "oops_something_wrong": "Ups... Ada yang tidak beres",
+  "oops_something_wrong": "Ups... Terjadi kesalahan.",
+  "open_drawer": "Buka laci",
+  "open_folder": "Buka Folder",
   "or_drag_and_drop": "atau seret dan lepas",
   "origin": "Asal",
+  "origin_label": "Sumber:",
+  "origin_point": "Asal (0,0)",
   "page": "Halaman",
   "page_of_pages": "Halaman {current} dari {total}",
+  "pal": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Sahabat",
+        "countPlural=other": "Teman-teman"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
   "pal_box_party": "Palbox + pesta",
-  "pal_cannot_be_trait": "{type} Sobat tidak boleh {trait}",
-  "pal_types": "Tipe Sahabat",
-  "palbox": "kotak pal",
-  "pals_in_storage": "{pals} dalam penyimpanan",
+  "pal_cannot_be_trait": "{type} Pal tidak bisa menjadi {trait}",
+  "pal_types": "Jenis Teman",
+  "palbox": "Palbox",
+  "paldeck": "Paldeck",
+  "pals_in_storage": "{pals} di penyimpanan",
   "party": "Berpesta",
   "passive": "Pasif",
+  "passive_skill": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Keterampilan Pasif",
+        "countPlural=other": "Keterampilan Pasif"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
   "paste": "Pasta",
-  "predator": "Pemangsa",
-  "predator_pals": "Pemangsa {pals}",
-  "preset_name": "Nama yang telah ditetapkan",
-  "preset_select_details": "Pilih preset dari daftar untuk melihat detailnya",
-  "presets": "Preset",
-  "presets_precedence": "Prioritas preset adalah: kunci sobat ➡️ kunci elemen ➡️ default. Hanya pilih satu preset per teman, elemen, atau default.",
+  "player": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Pemain",
+        "countPlural=other": "Pemain"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "predator": "Predator",
+  "predator_pals": "Predator {pals}",
+  "preset": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Pengaturan Awal",
+        "countPlural=other": "Pengaturan Awal"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "preset_name": "Nama preset",
+  "preset_select_details": "Pilih preset dari daftar untuk melihat detailnya.",
+  "presets_precedence": "Urutan prioritas preset adalah: penguncian pal ➡️ penguncian elemen ➡️ default. Pilih hanya satu preset per pal, elemen, atau default.",
   "previous": "Sebelumnya",
   "progress": "Kemajuan",
-  "pwr": "Pwr",
+  "pwr": "Kekuatan",
   "raid": "Serangan",
   "range": "Jangkauan",
+  "rare": "Langka",
   "raw": "Mentah",
-  "read_only": "HANYA BACA",
-  "ready_to_fill": "Siap untuk mengisi {target} dengan {count} {pals}.",
-  "refresh": "Segarkan (Bersihkan perubahan yang belum disimpan)",
+  "read_only": "HANYA UNTUK DIBACA",
+  "ready_to_fill": "Siap mengisi {target} dengan {count} {pals} .",
+  "refresh": "Segarkan (Hapus perubahan yang belum disimpan)",
+  "refresh_entity": "Segarkan {entity}",
   "remove": "Menghapus",
-  "remove_all_from_collections": "Hapus semua {pals} yang dipilih dari koleksinya",
+  "remove_all_from_collections": "Hapus semua {pals} yang dipilih dari koleksi mereka",
   "remove_from_collection": "Hapus dari koleksi",
-  "remove_pal": "Hapus Sobat",
+  "remove_from_favorites": "Hapus dari favorit",
+  "remove_pal": "Hapus Teman",
   "removed_pals_from_collections": "Menghapus {count} {pals} dari koleksi",
+  "research_cost": "Biaya Penelitian",
+  "research_node": "Simpul Penelitian",
   "reset": "Mengatur ulang",
+  "restore_hp": "Pulihkan HP",
   "rewards": "Hadiah",
-  "right_click_edit_base": "Klik kanan pada basis untuk mengedit namanya.",
-  "save": "Menyimpan",
+  "right_click_edit_base": "Klik kanan pada pangkalan untuk mengedit namanya.",
+  "save": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Menyimpan",
+        "countPlural=other": "Simpanan"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
   "save_as_preset": "Simpan sebagai preset",
   "save_changes": "Simpan Perubahan",
   "save_file_to_ups": "Simpan File 🡆 UPS",
-  "save_id": "Simpan tanda pengenal",
+  "save_id": "Simpan ID",
   "save_platform": "Simpan Platform",
+  "search": "Mencari",
   "search_by_name_nickname": "Cari berdasarkan nama atau nama panggilan",
-  "search_inventory": "Inventaris Pencarian",
+  "search_entity": "Cari {entity}",
   "search_pals": "Cari {pals} berdasarkan nama, ID karakter, atau catatan...",
-  "search_presets": "Cari preset...",
+  "search_placeholder": "Cari {entity} ...",
   "select": "Memilih",
-  "select_a_mission_to_view": "Pilih misi untuk melihat detailnya",
-  "select_a_pal_preset": "Pilih Prasetel {pal}",
+  "select_a_entity": "Pilih sebuah {entity}",
+  "select_a_entity_to_view": "Pilih {entity} untuk melihat detailnya",
   "select_all_current_base": "Pilih semua di basis saat ini",
-  "select_all_filtered_pals": "Pilih semua {pals} ({count}) yang difilter",
-  "select_all_in": "Pilih semua masuk",
-  "select_all_page_pals": "Pilih semua {pals} di halaman saat ini ({count})",
-  "select_all_ups_pals": "Pilih semua {pals} di UPS ({count})",
+  "select_all_filtered_pals": "Pilih semua {pals} yang difilter ( {count} )",
+  "select_all_in": "Pilih semua di",
+  "select_all_page_pals": "Pilih semua {pals} di halaman saat ini ( {count} )",
+  "select_all_ups_pals": "Pilih semua {pals} di UPS ( {count} )",
   "select_entity": "Pilih {entity}",
-  "select_entity_to_edit": "Pilih {entity} untuk diedit",
-  "select_entity_to_load": "Pilih {entity} untuk dimuat dan ditampilkan di peta",
-  "select_guild_to_load_bases": "Pilih guild untuk memuat markasnya di peta",
-  "select_pal_edit_description": "{pals} dapat dipilih di Players Palbox, Guild Bases, Global Pal Storage, Dimensional Pal Storage, atau Universal Pal Storage",
+  "select_entity_to_edit": "Pilih {entity} yang ingin diedit",
+  "select_entity_to_load": "Pilih {entity} yang ingin dimuat dan ditampilkan di peta.",
+  "select_guild_to_load_bases": "Pilih guild untuk memuat markasnya di peta.",
+  "select_pal_edit_description": "{pals} dapat dipilih di Kotak Teman Pemain, Markas Guild, Penyimpanan Teman Global, Penyimpanan Teman Dimensi, atau Penyimpanan Teman Universal.",
   "select_player_view_entity": "Pilih Pemain untuk melihat {entity}",
+  "select_valid_player": "Silakan pilih pemain yang valid.",
   "selected": "Terpilih",
-  "selected_of_total": "{selected} dari {total} dipilih",
+  "selected_of_total": "{selected} dari {total} yang dipilih",
   "selected_tags": "Tag yang Dipilih",
+  "set_entity_item_count": "Atur jumlah item {entity}",
   "set_inventory_count": "Tetapkan Jumlah Inventaris",
+  "set_item_count": "Jumlah Item yang Diatur",
   "settings": "Pengaturan",
   "shield": "Tameng",
   "shortcuts": "Jalan pintas",
+  "show_archived": "Tampilkan arsip",
   "showing_pals": "Menampilkan {start} hingga {end} dari {total} {pals}",
   "size": "Ukuran",
   "skills": "Keterampilan",
-  "slots_available_in_entity": "Ada slot {count} yang tersedia di {entity} ini.",
+  "slots_available_in_entity": "Terdapat {count} slot yang tersedia di {entity} ini.",
   "sort": "Menyortir",
   "sort_by": "Urutkan Berdasarkan",
   "sort_by_entity": "Urutkan berdasarkan {entity}",
-  "sort_by_paldeck": "Urutkan berdasarkan Paldeck #",
   "sort_inventory": "Urutkan Inventaris",
   "souls": "Jiwa",
   "special_categories": "Kategori Khusus",
+  "special_weapon": "Senjata Khusus",
   "sphere_module": "Modul Bola",
   "stamina": "Daya tahan",
   "statistics": "Statistik",
   "stats": "Statistik",
   "steam": "Uap",
-  "steam_description": "Steam/Mac: Level.sav menyimpan file",
+  "steam_description": "Steam/Mac: File penyimpanan Level.sav",
+  "stomach": "Perut",
   "storage": "Penyimpanan",
-  "storage_container": "Wadah Penyimpanan",
+  "storage_container": "Kontainer Penyimpanan",
   "structures": "Struktur",
   "sub_missions": "Sub Misi",
   "success": "Kesuksesan",
+  "successfully_cloned_pal_to_entity": "Berhasil mengkloning {pal} ke {entity}",
   "successfully_cloned_pals_to_entity": "Berhasil mengkloning {count} {pals} ke {entity}",
   "successfully_deleted_entity": "Berhasil menghapus {count} {pals} dari {entity}",
   "successfully_exported_pals": "Berhasil mengekspor {count} dari {total} {pals}",
   "summon": "Memanggil",
   "summoned": "Dipanggil",
-  "summoned_pals": "Dipanggil {pals}",
+  "summoned_pals": "Teman {pals} yang dipanggil",
   "support": "Mendukung",
   "syncing": "Sinkronisasi",
+  "tag": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Menandai",
+        "countPlural=other": "Tag"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
   "tag_changes": "Perubahan Tag",
+  "tag_delete_warning": "Tag ini akan dihapus dari semua Teman yang memilikinya.",
   "tags_for_pals": "Tag untuk {count} {pals}",
   "tags_optional": "Tag (opsional)",
-  "talents_ivs": "Bakat (IV)",
-  "technologies": "Teknologi",
+  "talents_ivs": "Talenta (IV)",
+  "target_available": "Target tersedia",
+  "technology": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Teknologi",
+        "countPlural=other": "Teknologi"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
   "technology_points": "Poin Teknologi",
+  "theme": "Tema",
   "to_collection": "ke Koleksi",
   "toggle_entity": "Alihkan {entity}",
+  "tools": "Peralatan",
+  "tools_convert_save": "Konversi Simpan Format",
+  "tools_convert_save_description": "Mengonversi file penyimpanan antara format Steam dan Xbox GamePass",
+  "tools_convert_loaded": "Konversi Dimuat Simpan",
+  "tools_convert_standalone": "Konversi File Tersimpan",
+  "tools_select_source": "Pilih Sumber",
+  "tools_select_output": "Pilih Output",
+  "tools_source_format": "Format Sumber",
+  "tools_target_format": "Format Target",
   "total": "Total",
+  "total_clones": "Klon Total",
   "total_count": "Jumlah Total",
-  "total_pals": "Jumlah {pals}",
-  "transfer_all_pals": "Transfer semua {pals}",
+  "total_exports": "Total Ekspor",
+  "total_pals": "Total {pals}",
+  "transfer": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Transfer",
+        "countPlural=other": "Transfer"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "transfer_all_pals": "Pindahkan semua {pals}",
   "transfer_pal": "Transfer {pal}",
   "trust": "Memercayai",
   "trust_level": "Tingkat Kepercayaan",
-  "trust_xp": "Percayai XP",
-  "type_label": "Jenis: {type}",
-  "universal_pal_storage": "Penyimpanan {pal} Universal",
+  "trust_xp": "Trust XP",
+  "type": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Jenis",
+        "countPlural=other": "Jenis"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
+  "type_label": "Tipe: {type}",
+  "unarchive_entity": "Buka arsip {entity}",
+  "uncommon": "Luar biasa",
+  "universal_pal_storage": "Penyimpanan Universal {pal}",
   "unknown": "Tidak dikenal",
   "unknown_collection": "Koleksi Tidak Dikenal",
-  "unlock_all": "Buka Kunci Semua",
-  "unlock_full_map": "Buka Kunci Peta Penuh",
-  "unlock_map": "Buka Kunci Peta",
-  "unlock_map_confirm": "Ini akan membuka kunci seluruh peta dengan memodifikasi file LocalData.sav Anda. Anda harus memilih file LocalData.sav Anda. Melanjutkan?",
+  "unlock_all": "Buka Semua",
+  "unlock_all_category_research": "Buka Semua {category} Penelitian",
+  "unlock_all_fast_travel": "Buka semua titik Fast Travel.",
+  "unlock_full_map": "Buka Peta Lengkap",
+  "unlock_map": "Buka Peta",
+  "unlock_map_confirm": "Ini akan membuka seluruh peta dengan memodifikasi file LocalData.sav Anda. Anda perlu memilih file LocalData.sav Anda. Lanjutkan?",
+  "unlock_prerequisite_entity": "Buka prasyarat terlebih dahulu {entity}",
+  "unlocked": "Terbuka",
   "unlocks": "Membuka kunci",
   "update_available": "Pembaruan Tersedia!",
   "update_now": "Perbarui Sekarang",
   "updated_tags_for_pals": "Tag yang diperbarui untuk {count} {pals}",
   "upload": "Mengunggah",
   "upload_a_file": "Unggah file",
-  "upload_zip_files": "Klik untuk mengunggah file simpanan zip Anda",
+  "upload_zip_files": "Klik untuk mengunggah file simpanan Anda yang sudah di-zip.",
   "ups": "UPS",
-  "ups_already_empty": "UPS sudah kosong",
+  "ups_already_empty": "UPS sudah kosong.",
   "used_slots": "Slot Bekas",
   "warning": "Peringatan",
-  "weapon": "Senjata",
+  "weapon": [
+    {
+      "declarations": [
+        "input count",
+        "local countPlural = count: plural"
+      ],
+      "match": {
+        "countPlural=one": "Senjata",
+        "countPlural=other": "Senjata"
+      },
+      "selectors": [
+        "countPlural"
+      ]
+    }
+  ],
   "weight": "Berat",
+  "work_speed": "Kecepatan Kerja",
   "work_suitability": "Kesesuaian Kerja",
-  "working_on_it": "Bip Boop, sedang mengerjakannya!",
+  "working_on_it": "Beep Boop, sedang dikerjakan!",
+  "workload": "Beban kerja",
   "workspeed": "Kecepatan kerja",
+  "world_coordinates": "Koordinat Dunia",
   "world_name": "Nama Dunia",
-  "xbox_game_pass": "Tiket Permainan Xbox",
-  "xbox_game_pass_description": "Xbox Game Pass: file kontainer.index",
-  "zoom_in_out": "Perbesar/Perkecil",
-  "active_skill": [
-    {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "match": {
-        "countPlural=one": "Keterampilan Aktif",
-        "countPlural=other": "Keterampilan Aktif"
-      },
-      "selectors": ["countPlural"]
-    }
-  ],
-  "base": [
-    {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "match": {
-        "countPlural=one": "Basis",
-        "countPlural=other": "Pangkalan"
-      },
-      "selectors": ["countPlural"]
-    }
-  ],
-  "collection": [
-    {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "match": {
-        "countPlural=one": "Koleksi",
-        "countPlural=other": "Koleksi"
-      },
-      "selectors": ["countPlural"]
-    }
-  ],
-  "file": [
-    {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "match": {
-        "countPlural=one": "Mengajukan",
-        "countPlural=other": "File"
-      },
-      "selectors": ["countPlural"]
-    }
-  ],
-  "filter": [
-    {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "match": {
-        "countPlural=one": "Menyaring",
-        "countPlural=other": "Filter"
-      },
-      "selectors": ["countPlural"]
-    }
-  ],
-  "guild": [
-    {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "match": {
-        "countPlural=one": "Persekutuan",
-        "countPlural=other": "Persekutuan"
-      },
-      "selectors": ["countPlural"]
-    }
-  ],
-  "human": [
-    {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "match": {
-        "countPlural=one": "Manusia",
-        "countPlural=other": "Manusia"
-      },
-      "selectors": ["countPlural"]
-    }
-  ],
-  "pal": [
-    {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "match": {
-        "countPlural=one": "Sahabat",
-        "countPlural=other": "Teman"
-      },
-      "selectors": ["countPlural"]
-    }
-  ],
-  "passive_skill": [
-    {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "match": {
-        "countPlural=one": "Keterampilan Pasif",
-        "countPlural=other": "Keterampilan Pasif"
-      },
-      "selectors": ["countPlural"]
-    }
-  ],
-  "player": [
-    {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "match": {
-        "countPlural=one": "Pemain",
-        "countPlural=other": "Pemain"
-      },
-      "selectors": ["countPlural"]
-    }
-  ],
-  "tag": [
-    {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "match": {
-        "countPlural=one": "Menandai",
-        "countPlural=other": "Tag"
-      },
-      "selectors": ["countPlural"]
-    }
-  ],
-  "transfer": [
-    {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "match": {
-        "countPlural=one": "Transfer",
-        "countPlural=other": "Transfer"
-      },
-      "selectors": ["countPlural"]
-    }
-  ],
-  "type": [
-    {
-      "declarations": ["input count", "local countPlural = count: plural"],
-      "match": {
-        "countPlural=one": "Jenis",
-        "countPlural=other": "Jenis"
-      },
-      "selectors": ["countPlural"]
-    }
-  ]
+  "xbox_game_pass": "Xbox Game Pass",
+  "xbox_game_pass_description": "Xbox Game Pass: file container.index",
+  "zoom_in_out": "Perbesar/Perkecil"
 }

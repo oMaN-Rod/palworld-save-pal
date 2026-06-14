@@ -18,6 +18,11 @@ async def delete_player_handler(message: DeletePlayerMessage, ws: WebSocket):
     app_state = get_app_state()
     save_file = app_state.save_file
 
+    if not save_file:
+        response = build_response(MessageType.WARNING, "No save file loaded")
+        await ws.send_json(response)
+        return
+
     async def ws_callback(message: str):
         response = build_response(MessageType.PROGRESS_MESSAGE, message)
         await ws.send_json(response)

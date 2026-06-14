@@ -77,6 +77,8 @@ class MessageType(str, Enum):
     GET_ELEMENTS = "get_elements"
     GET_EXP_DATA = "get_exp_data"
     GET_MAP_OBJECTS = "get_map_objects"
+    GET_FAST_TRAVEL_POINTS = "get_fast_travel_points"
+    GET_EFFIGIES = "get_effigies"
     GET_GUILDS = "get_guilds"
     GET_ITEMS = "get_items"
     GET_MISSIONS = "get_missions"
@@ -134,6 +136,39 @@ class MessageType(str, Enum):
     # Utility
     OPEN_FOLDER = "open_folder"
     CONVERT_SAV_FILE = "convert_sav_file"
+    CONVERT_SAVE_FORMAT = "convert_save_format"
+    SCAN_GAMEPASS_SAVES = "scan_gamepass_saves"
+    DELETE_GAMEPASS_SAVE = "delete_gamepass_save"
+    DELETE_GAMEPASS_PLAYER = "delete_gamepass_player"
+    RENAME_GAMEPASS_WORLD = "rename_gamepass_world"
+
+    # Tools
+    CONVERT_STEAM_ID = "convert_steam_id"
+    SWAP_PLAYER_UIDS = "swap_player_uids"
+    LOAD_SOURCE_SAVE = "load_source_save"
+    GET_SOURCE_PLAYERS = "get_source_players"
+    TRANSFER_PLAYER = "transfer_player"
+    UNLOAD_SOURCE_SAVE = "unload_source_save"
+
+    # Server Management
+    LIST_SERVERS = "list_servers"
+    GET_SERVER = "get_server"
+    CREATE_SERVER = "create_server"
+    UPDATE_SERVER = "update_server"
+    DELETE_SERVER = "delete_server"
+    START_SERVER = "start_server"
+    STOP_SERVER = "stop_server"
+    SERVER_STATUS_UPDATE = "server_status_update"
+    SERVER_API_CALL = "server_api_call"
+    SERVER_API_RESPONSE = "server_api_response"
+    SERVER_PLAYER_COUNT = "server_player_count"
+    LIST_SERVER_MODS = "list_server_mods"
+    TOGGLE_SERVER_MOD = "toggle_server_mod"
+    INSTALL_SERVER_MOD = "install_server_mod"
+    DETECT_WORKSHOP_DIR = "detect_workshop_dir"
+    LOAD_SERVER_SAVE = "load_server_save"
+    GET_SERVER_STATS = "get_server_stats"
+    SERVER_CREATION_PROGRESS = "server_creation_progress"
 
 
 class AddPalData(BaseModel):
@@ -181,6 +216,15 @@ class ClonePalMessage(BaseMessage):
 class CloneDpsPalMessage(BaseMessage):
     type: str = MessageType.CLONE_DPS_PAL.value
     data: ClonePalData
+
+
+class CloneGpsPalData(BaseModel):
+    pal: PalDTO
+
+
+class CloneGpsPalMessage(BaseMessage):
+    type: str = MessageType.CLONE_GPS_PAL.value
+    data: CloneGpsPalData
 
 
 class DeletePalsData(BaseModel):
@@ -388,6 +432,14 @@ class GetMapObjectsMessage(BaseModel):
     type: str = MessageType.GET_MAP_OBJECTS.value
 
 
+class GetFastTravelPointsMessage(BaseModel):
+    type: str = MessageType.GET_FAST_TRAVEL_POINTS.value
+
+
+class GetEffigiesMessage(BaseModel):
+    type: str = MessageType.GET_EFFIGIES.value
+
+
 class DeleteGuildData(BaseModel):
     guild_id: UUID
     origin: str
@@ -452,12 +504,12 @@ class RequestGpsMessage(BaseModel):
 
 
 class AddGpsPalMessage(BaseMessage):
-    type: str = MessageType.ADD_DPS_PAL.value
+    type: str = MessageType.ADD_GPS_PAL.value
     data: AddPalData
 
 
 class DeleteGpsPalsMessage(BaseMessage):
-    type: str = MessageType.DELETE_DPS_PALS.value
+    type: str = MessageType.DELETE_GPS_PALS.value
     data: DeletePalsData
 
 
@@ -698,3 +750,221 @@ class ConvertSavFileData(BaseModel):
 class ConvertSavFileMessage(BaseMessage):
     type: str = MessageType.CONVERT_SAV_FILE.value
     data: ConvertSavFileData
+
+
+class ConvertSaveFormatData(BaseModel):
+    target_format: str  # "steam" or "gamepass"
+    source_path: Optional[str] = None  # For standalone conversion
+    output_path: Optional[str] = None  # For standalone conversion
+    save_id: Optional[str] = None  # For GamePass save selection
+
+
+class ConvertSaveFormatMessage(BaseMessage):
+    type: str = MessageType.CONVERT_SAVE_FORMAT.value
+    data: ConvertSaveFormatData
+
+
+class ScanGamepassSavesMessage(BaseMessage):
+    type: str = MessageType.SCAN_GAMEPASS_SAVES.value
+
+
+class DeleteGamepassSaveData(BaseModel):
+    save_id: str
+
+
+class DeleteGamepassSaveMessage(BaseMessage):
+    type: str = MessageType.DELETE_GAMEPASS_SAVE.value
+    data: DeleteGamepassSaveData
+
+
+class DeleteGamepassPlayerData(BaseModel):
+    save_id: str
+    player_id: str  # Player UUID (no dashes)
+
+
+class DeleteGamepassPlayerMessage(BaseMessage):
+    type: str = MessageType.DELETE_GAMEPASS_PLAYER.value
+    data: DeleteGamepassPlayerData
+
+
+class RenameGamepassWorldData(BaseModel):
+    save_id: str
+    new_name: str
+
+
+class RenameGamepassWorldMessage(BaseMessage):
+    type: str = MessageType.RENAME_GAMEPASS_WORLD.value
+    data: RenameGamepassWorldData
+
+
+# Server Management Message Classes
+class ListServersMessage(BaseMessage):
+    type: str = MessageType.LIST_SERVERS.value
+
+
+class ServerIdData(BaseModel):
+    server_id: int
+
+
+class GetServerMessage(BaseMessage):
+    type: str = MessageType.GET_SERVER.value
+    data: ServerIdData
+
+
+class CreateServerData(BaseModel):
+    name: str
+    container_name: str
+    image_name: str = "omanrod/psp-palworld-server"
+    server_type: str = "docker"
+    game_port: int = 8211
+    query_port: int = 27015
+    rest_api_port: int = 8212
+    server_name: str = "PSP Palworld Server"
+    server_description: str = ""
+    server_password: str = ""
+    admin_password: str = "admin"
+    max_players: int = 16
+    env_vars: Dict[str, Any] = {}
+    # Native server fields
+    steamcmd_path: str = ""
+    install_path: str = ""
+    launch_args: str = ""
+    workshop_dir: str = ""
+
+
+class CreateServerMessage(BaseMessage):
+    type: str = MessageType.CREATE_SERVER.value
+    data: CreateServerData
+
+
+class UpdateServerData(BaseModel):
+    server_id: int
+    updates: Dict[str, Any]
+
+
+class UpdateServerMessage(BaseMessage):
+    type: str = MessageType.UPDATE_SERVER.value
+    data: UpdateServerData
+
+
+class DeleteServerMessage(BaseMessage):
+    type: str = MessageType.DELETE_SERVER.value
+    data: ServerIdData
+
+
+class StartServerMessage(BaseMessage):
+    type: str = MessageType.START_SERVER.value
+    data: ServerIdData
+
+
+class StopServerMessage(BaseMessage):
+    type: str = MessageType.STOP_SERVER.value
+    data: ServerIdData
+
+
+class ServerApiCallData(BaseModel):
+    server_id: int
+    endpoint: str
+    method: str = "GET"
+    payload: Optional[Dict[str, Any]] = None
+
+
+class ServerApiCallMessage(BaseMessage):
+    type: str = MessageType.SERVER_API_CALL.value
+    data: ServerApiCallData
+
+
+class ListServerModsMessage(BaseMessage):
+    type: str = MessageType.LIST_SERVER_MODS.value
+    data: ServerIdData
+
+
+class ToggleServerModData(BaseModel):
+    server_id: int
+    mod_name: str
+    enabled: bool
+
+
+class ToggleServerModMessage(BaseMessage):
+    type: str = MessageType.TOGGLE_SERVER_MOD.value
+    data: ToggleServerModData
+
+
+class InstallServerModData(BaseModel):
+    server_id: int
+    mod_name: str
+    mod_data: str  # base64-encoded zip
+    mod_type: str = "ue4ss"
+
+
+class InstallServerModMessage(BaseMessage):
+    type: str = MessageType.INSTALL_SERVER_MOD.value
+    data: InstallServerModData
+
+
+class DetectWorkshopDirMessage(BaseMessage):
+    type: str = MessageType.DETECT_WORKSHOP_DIR.value
+
+
+class LoadServerSaveMessage(BaseMessage):
+    type: str = MessageType.LOAD_SERVER_SAVE.value
+    data: ServerIdData
+
+
+class GetServerStatsMessage(BaseMessage):
+    type: str = MessageType.GET_SERVER_STATS.value
+    data: ServerIdData
+
+
+# Tools Message Classes
+class ConvertSteamIdData(BaseModel):
+    steam_input: str
+
+
+class ConvertSteamIdMessage(BaseMessage):
+    type: str = MessageType.CONVERT_STEAM_ID.value
+    data: ConvertSteamIdData
+
+
+class SwapPlayerUidsData(BaseModel):
+    old_player_uid: UUID
+    new_player_uid: UUID
+
+
+class SwapPlayerUidsMessage(BaseMessage):
+    type: str = MessageType.SWAP_PLAYER_UIDS.value
+    data: SwapPlayerUidsData
+
+
+class LoadSourceSaveData(BaseModel):
+    type: str  # "steam" or "gamepass"
+    path: str
+    role: str = "source"  # "source" or "target"
+
+
+class LoadSourceSaveMessage(BaseMessage):
+    type: str = MessageType.LOAD_SOURCE_SAVE.value
+    data: LoadSourceSaveData
+
+
+class GetSourcePlayersMessage(BaseMessage):
+    type: str = MessageType.GET_SOURCE_PLAYERS.value
+
+
+class TransferPlayerData(BaseModel):
+    source_player_uid: UUID
+    target_player_uid: Optional[UUID] = None
+    transfer_character: bool = True
+    transfer_inventory: bool = True
+    transfer_pals: bool = True
+    transfer_tech: bool = True
+    transfer_appearance: bool = True
+
+
+class TransferPlayerMessage(BaseMessage):
+    type: str = MessageType.TRANSFER_PLAYER.value
+    data: TransferPlayerData
+
+
+class UnloadSourceSaveMessage(BaseMessage):
+    type: str = MessageType.UNLOAD_SOURCE_SAVE.value

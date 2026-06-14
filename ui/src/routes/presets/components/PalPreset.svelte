@@ -88,12 +88,12 @@
 					<div class="flex flex-col">
 						<div class="relative flex items-center justify-center">
 							{#if preset.pal_preset.is_boss}
-								<div class="absolute -left-4 -top-1 h-6 w-6 xl:h-8 xl:w-8">
+								<div class="absolute -top-1 -left-4 h-6 w-6 xl:h-8 xl:w-8">
 									<img src={staticIcons.alphaIcon} alt="Alpha" class="pal-element-badge" />
 								</div>
 							{/if}
 							{#if preset.pal_preset.is_lucky}
-								<div class="absolute -left-4 -top-1 h-6 w-6 xl:h-8 xl:w-8">
+								<div class="absolute -top-1 -left-4 h-6 w-6 xl:h-8 xl:w-8">
 									<img src={staticIcons.luckyIcon} alt="Lucky" class="pal-element-badge" />
 								</div>
 							{/if}
@@ -106,7 +106,7 @@
 							{#if preset.pal_preset.gender}
 								<div
 									class={cn(
-										'absolute -right-4 -top-1 h-6 w-6 xl:h-8 xl:w-8',
+										'absolute -top-1 -right-4 h-6 w-6 xl:h-8 xl:w-8',
 										preset.pal_preset.gender == PalGender.MALE
 											? 'text-primary-300'
 											: 'text-tertiary-300'
@@ -120,7 +120,7 @@
 									/>
 								</div>
 							{/if}
-							<div class="absolute -bottom-4 -right-6 h-6 w-6 xl:h-8 xl:w-8">
+							<div class="absolute -right-6 -bottom-4 h-6 w-6 xl:h-8 xl:w-8">
 								{#if preset.pal_preset.lock}
 									<Lock class="h-4 w-4" />
 								{:else}
@@ -224,7 +224,7 @@
 						<span class="border-r-surface-600 border-r pr-2">
 							{preset.pal_preset.active_skills.length}
 						</span>
-						<div class="ml-4 mt-1">
+						<div class="mt-1 ml-4">
 							{#each preset.pal_preset.active_skills as skillId}
 								{@const skill = activeSkillsData.getByKey(skillId)}
 								{#if skill}
@@ -255,7 +255,7 @@
 						<span class="border-r-surface-600 border-r pr-2">
 							{preset.pal_preset.passive_skills.length}
 						</span>
-						<div class="ml-4 mt-1 grid grid-cols-2 gap-2">
+						<div class="mt-1 ml-4 grid grid-cols-2 gap-2">
 							{#each preset.pal_preset.passive_skills as skillId}
 								{@const skill = passiveSkillsData.getByKey(skillId)}
 								{#if skill}

@@ -29,3 +29,5 @@ class PlayerDTO(BaseModel):
     boss_technology_points: int = 0
     current_missions: List[str] = Field(default_factory=list)
     completed_missions: List[str] = Field(default_factory=list)
+    unlocked_fast_travel_points: Optional[List[str]] = None
+    collected_effigies: Optional[List[str]] = None

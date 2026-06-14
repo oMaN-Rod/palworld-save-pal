@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, Combobox, Input, TooltipButton } from '$components/ui';
+	import { Button, Card, Combobox, Input, TooltipButton } from '$components/ui';
 	import { Save, X, Folder, Plus } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
@@ -102,7 +102,7 @@
 </script>
 
 <div bind:this={modalContainer}>
-	<Card class="min-w-[400px] max-w-lg">
+	<Card class="max-w-lg min-w-[400px]">
 		<div class="mb-4 flex items-center justify-between">
 			<h3 class="h3 flex items-center gap-2">
 				<Folder class="h-5 w-5" />
@@ -184,21 +184,23 @@
 							inputClass="w-full"
 						/>
 						<div class="flex gap-2">
-							<button
+							<Button
 								type="button"
+								variant="primary"
+								size="sm"
 								onclick={createCollection}
-								class="rounded bg-green-500 px-3 py-1 text-sm text-white hover:bg-green-600"
 								disabled={!newCollectionName.trim()}
 							>
 								{m.create()}
-							</button>
-							<button
+							</Button>
+							<Button
 								type="button"
+								variant="neutral"
+								size="sm"
 								onclick={cancelCreateCollection}
-								class="rounded bg-gray-500 px-3 py-1 text-sm text-white hover:bg-gray-600"
 							>
 								{m.cancel()}
-							</button>
+							</Button>
 						</div>
 					</div>
 				{/if}
@@ -217,7 +219,10 @@
 							(c) => c.id === selectedCollectionId
 						)}
 						<p class="text-green-600 dark:text-green-400">
-							{m.move_all_to_collection({ pals: c.pals, name: targetCollection?.name || m.unknown() })}
+							{m.move_all_to_collection({
+								pals: c.pals,
+								name: targetCollection?.name || m.unknown()
+							})}
 						</p>
 					{/if}
 				</div>
@@ -226,25 +231,25 @@
 
 		<!-- Actions -->
 		<div class="mt-6 flex justify-end gap-2">
-			<button
+			<Button
 				type="button"
+				variant="neutral"
 				onclick={() => handleClose(false)}
-				class="bg-surface-500 hover:bg-surface-600 flex items-center gap-2 rounded-md px-4 py-2 text-white"
 			>
 				<X class="h-4 w-4" />
 				{m.cancel()}
-			</button>
-			<button
+			</Button>
+			<Button
 				type="button"
+				variant="primary"
 				onclick={() => handleClose(true)}
-				class="bg-primary-500 hover:bg-primary-600 flex items-center gap-2 rounded-md px-4 py-2 text-white"
 				data-modal-primary
 				disabled={isCreatingCollection}
 			>
 				<Save class="h-4 w-4" />
 				{selectedCollectionId === undefined ? m.remove() : m.move()}
 				{m.to_collection()}
-			</button>
+			</Button>
 		</div>
 	</Card>
 </div>

@@ -57,7 +57,10 @@
 	async function deleteCollection(collection: UPSCollection) {
 		const confirmed = await modal.showConfirmModal({
 			title: m.delete_entity({ entity: c.collection }),
-			message: m.delete_entity_warning({ name: collection.name, warning: m.collection_delete_warning() }),
+			message: m.delete_entity_warning({
+				name: collection.name,
+				warning: m.collection_delete_warning()
+			}),
 			confirmText: m.delete(),
 			cancelText: m.cancel()
 		});
@@ -84,7 +87,8 @@
 			<h2 class="text-lg font-semibold">{c.collections}</h2>
 			<TooltipButton
 				onclick={createCollection}
-				class="bg-primary-500 hover:bg-primary-600 rounded-md p-2 text-white"
+				variant="secondary"
+				size="icon"
 				popupLabel={m.create_new_collection()}
 			>
 				<Plus class="h-4 w-4" />
@@ -113,7 +117,7 @@
 		{#if favoriteCollections.length > 0}
 			<div class="mb-4">
 				<h3
-					class="text-surface-600 dark:text-surface-400 mb-2 text-sm font-medium uppercase tracking-wide"
+					class="text-surface-600 dark:text-surface-400 mb-2 text-sm font-medium tracking-wide uppercase"
 				>
 					{m.favorites()}
 				</h3>
@@ -129,7 +133,7 @@
 									: ''}"
 							>
 								<div
-									class="h-4 w-4 flex-shrink-0 rounded"
+									class="h-4 w-4 shrink-0 rounded"
 									style="background-color: {collection.color || '#6366f1'}"
 								></div>
 								<span class="flex-1 truncate">{collection.name}</span>
@@ -140,7 +144,7 @@
 
 							<!-- Action buttons (show on hover) -->
 							<div
-								class="absolute right-1 top-1 flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100"
+								class="absolute top-1 right-1 flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100"
 							>
 								<TooltipButton
 									onclick={(e: MouseEvent) => {
@@ -176,7 +180,7 @@
 			<div class="mb-4">
 				{#if favoriteCollections.length > 0}
 					<h3
-						class="text-surface-600 dark:text-surface-400 mb-2 text-sm font-medium uppercase tracking-wide"
+						class="text-surface-600 dark:text-surface-400 mb-2 text-sm font-medium tracking-wide uppercase"
 					>
 						{c.collections}
 					</h3>
@@ -193,7 +197,7 @@
 									: ''}"
 							>
 								<div
-									class="h-4 w-4 flex-shrink-0 rounded"
+									class="h-4 w-4 shrink-0 rounded"
 									style="background-color: {collection.color || '#6366f1'}"
 								></div>
 								<span class="flex-1 truncate">{collection.name}</span>
@@ -204,7 +208,7 @@
 
 							<!-- Action buttons (show on hover) -->
 							<div
-								class="absolute right-1 top-1 flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100"
+								class="absolute top-1 right-1 flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100"
 							>
 								<TooltipButton
 									onclick={(e: MouseEvent) => {
@@ -262,7 +266,9 @@
 			<div class="py-8 text-center">
 				<Folder class="text-surface-400 mx-auto mb-3 h-12 w-12" />
 				<p class="text-surface-500 text-sm">
-					{showArchived ? m.no_archived_entity({ entity: c.collections }) : m.no_entity_yet({ entity: c.collections })}
+					{showArchived
+						? m.no_archived_entity({ entity: c.collections })
+						: m.no_entity_yet({ entity: c.collections })}
 				</p>
 				{#if !showArchived}
 					<button

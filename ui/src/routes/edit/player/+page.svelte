@@ -1,20 +1,14 @@
 <script lang="ts">
-	import { ItemHeader, Progress } from '$components/ui';
+	import { Button, ItemHeader, Progress, Tooltip } from '$components/ui';
 	import { getAppState, getToastState, getModalState } from '$states';
 	import { EntryState, type ItemContainerSlot, type ItemContainer } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { itemsData, expData } from '$lib/data';
 	import { Tabs, Accordion } from '@skeletonlabs/skeleton-svelte';
-	import { Tooltip } from '$components/ui';
-	import {
-		ItemBadge,
-		PlayerPresets,
-		PlayerStats,
-		PlayerHealthBadge,
-		TextInputModal,
-		NumberInputModal,
-		ItemSelectModal
-	} from '$components';
+	import { PlayerStats, PlayerHealthBadge } from '$components/player';
+	import { ItemBadge } from '$components/shared';
+	import { PlayerPresets } from '$components/presets';
+	import { TextInputModal, NumberInputModal, ItemSelectModal } from '$components/modals';
 	import {
 		Bomb,
 		ChevronsLeftRight,
@@ -29,7 +23,8 @@
 		Hash,
 		PaintBucket,
 		PawPrint,
-		Activity
+		Activity,
+		Rocket
 	} from 'lucide-svelte';
 	import { assetLoader } from '$utils';
 	import { staticIcons } from '$types/icons';
@@ -85,7 +80,7 @@
 				slotCount = foodCount > slotCount ? foodCount : slotCount;
 			}
 		});
-		return slotCount;
+		return Math.max(slotCount, 3);
 	});
 
 	let inventorySlotCount = $derived.by(() => {
@@ -593,98 +588,77 @@
 {#if appState.selectedPlayer}
 	<div class="flex h-full flex-col overflow-auto">
 		<div class="ml-2 flex">
-			<nav class="btn-group preset-outlined-surface-200-800 mr-2 flex-col items-center rounded-sm">
+			<nav
+				id="quick-actions"
+				class="btn-group preset-outlined-surface-200-800 mr-2 flex-col items-center rounded-sm"
+			>
 				{#if group === 'inventory'}
 					<Tooltip label={m.sort_inventory()}>
-						<button class="hover:bg-secondary-500/50 btn rounded-sm" onclick={sortCommonContainer}>
+						<Button variant="ghost" size="icon" onclick={sortCommonContainer}>
 							<ArrowUp01 class="h-6 w-6" />
-						</button>
+						</Button>
 					</Tooltip>
 					<Tooltip label={m.fill_entity({ entity: m.inventory() })}>
-						<button class="hover:bg-secondary-500/50 btn rounded-sm" onclick={fillCommonContainer}>
+						<Button variant="ghost" size="icon" onclick={fillCommonContainer}>
 							<PaintBucket class="h-6 w-6" />
-						</button>
+						</Button>
 					</Tooltip>
 					<Tooltip label={m.set_inventory_count()}>
-						<button
-							class="hover:bg-secondary-500/50 btn rounded-sm"
-							onclick={setCommonContainerCount}
-						>
+						<Button variant="ghost" size="icon" onclick={setCommonContainerCount}>
 							<Hash class="h-6 w-6" />
-						</button>
+						</Button>
 					</Tooltip>
 					<Tooltip label={m.clear_entity({ entity: m.inventory() })}>
-						<button class="hover:bg-secondary-500/50 btn rounded-sm" onclick={clearCommonContainer}>
+						<Button variant="ghost" size="icon" onclick={clearCommonContainer}>
 							<ChevronsLeftRight class="h-6 w-6" />
-						</button>
+						</Button>
 					</Tooltip>
 				{/if}
 				{#if group === 'key_items'}
 					<Tooltip label={m.add_all_pal_gear(p.pal)}>
-						<button
-							class="hover:bg-secondary-500/50 btn rounded-sm"
-							onclick={() => setEssentialList('gear')}
-						>
+						<Button variant="ghost" size="icon" onclick={() => setEssentialList('gear')}>
 							<PawPrint class="h-6 w-6" />
-						</button>
+						</Button>
 					</Tooltip>
 					<Tooltip label={m.add_all_implants()}>
-						<button
-							class="hover:bg-secondary-500/50 btn rounded-sm"
-							onclick={() => setEssentialList('implants')}
-						>
+						<Button variant="ghost" size="icon" onclick={() => setEssentialList('implants')}>
 							<Activity class="h-6 w-6" />
-						</button>
+						</Button>
 					</Tooltip>
 					<Tooltip label={m.add_other_key_items()}>
-						<button
-							class="hover:bg-secondary-500/50 btn rounded-sm"
-							onclick={() => setEssentialList('misc')}
-						>
+						<Button variant="ghost" size="icon" onclick={() => setEssentialList('misc')}>
 							<Key class="h-6 w-6" />
-						</button>
+						</Button>
 					</Tooltip>
 					<Tooltip label={m.clear_entity({ entity: m.key_items() })}>
-						<button
-							class="hover:bg-secondary-500/50 btn rounded-sm"
-							onclick={clearEssentialContainer}
-						>
+						<Button variant="ghost" size="icon" onclick={clearEssentialContainer}>
 							<ChevronsLeftRight class="h-6 w-6" />
-						</button>
+						</Button>
 					</Tooltip>
 				{/if}
 				<Tooltip label={m.clear_entity({ entity: m.weapon({ count: 2 }) })}>
-					<button
-						class="hover:bg-secondary-500/50 btn rounded-sm"
-						onclick={clearWeaponLoadOutContainer}
-					>
+					<Button variant="ghost" size="icon" onclick={clearWeaponLoadOutContainer}>
 						<Swords class="h-6 w-6" />
-					</button>
+					</Button>
 				</Tooltip>
 				<Tooltip label={m.clear_entity({ entity: m.armor() })}>
-					<button
-						class="hover:bg-secondary-500/50 btn rounded-sm"
-						onclick={clearEquipmentArmorContainer}
-					>
+					<Button variant="ghost" size="icon" onclick={clearEquipmentArmorContainer}>
 						<Shield class="h-6 w-6" />
-					</button>
+					</Button>
 				</Tooltip>
 				<Tooltip label={m.clear_entity({ entity: m.food() })}>
-					<button
-						class="hover:bg-secondary-500/50 btn rounded-sm"
-						onclick={clearFoodEquipContainer}
-					>
+					<Button variant="ghost" size="icon" onclick={clearFoodEquipContainer}>
 						<Pizza class="h-6 w-6" />
-					</button>
+					</Button>
 				</Tooltip>
 				<Tooltip label={m.clear_all()}>
-					<button class="hover:bg-secondary-500/50 btn rounded-sm" onclick={clearAll}>
+					<Button variant="ghost" size="icon" onclick={clearAll}>
 						<Bomb class="h-6 w-6" />
-					</button>
+					</Button>
 				</Tooltip>
 			</nav>
 			<!-- Main content wrapper -->
-			<div class="pr-105 grid w-full grid-cols-[auto_1fr] gap-4">
+			<div class="grid w-full grid-cols-[auto_1fr] gap-4 pr-4 lg:pr-80 xl:pr-96 2xl:pr-105">
 				<!-- Inventory -->
 				<div class="flex flex-col space-y-2">
 					<Tabs
@@ -699,7 +673,7 @@
 								classes="w-full"
 								base="border-none hover:bg-secondary-500/50 rounded-sm"
 								labelBase="btn"
-								stateActive="bg-secondary-800"
+								stateActive="bg-secondary-800 text-white"
 								padding="p-0"
 							>
 								{m.inventory()}
@@ -709,16 +683,18 @@
 								classes="w-full"
 								base="border-none hover:bg-secondary-500/50 rounded-sm"
 								labelBase="btn"
-								stateActive="bg-secondary-800"
+								stateActive="bg-secondary-800 text-white"
 								padding="p-0"
 							>
-								{m.key_items()}
+								<div id="key-items-tab" class="w-full">
+									{m.key_items()}
+								</div>
 							</Tabs.Control>
 						{/snippet}
 						{#snippet content()}
 							<Tabs.Panel value="inventory">
-								<div class="max-h-[500px] overflow-y-auto 2xl:max-h-[800px]">
-									<div class="m-1 grid grid-cols-6 gap-2">
+								<div id="inventory-panel" class="max-h-[500px] overflow-y-auto 2xl:max-h-[800px]">
+									<div class="m-1 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6">
 										{#each Object.values(commonContainer.slots) as _, index}
 											<ItemBadge
 												bind:slot={commonContainer.slots[index]}
@@ -732,8 +708,8 @@
 								</div>
 							</Tabs.Panel>
 							<Tabs.Panel value="key_items">
-								<div class="max-h-[500px] overflow-y-auto 2xl:max-h-[800px]">
-									<div class="m-1 grid grid-cols-6 gap-2">
+								<div id="key-items-panel" class="max-h-[500px] overflow-y-auto 2xl:max-h-[800px]">
+									<div class="m-1 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6">
 										{#each Object.values(essentialContainer.slots) as _, index}
 											<ItemBadge
 												bind:slot={essentialContainer.slots[index]}
@@ -750,9 +726,9 @@
 					</Tabs>
 				</div>
 				<!-- Player Equip -->
-				<div class="flex h-[600px] flex-col 2xl:grid 2xl:grid-cols-[auto_1fr_auto]">
+				<div class="flex min-h-0 flex-col 2xl:grid 2xl:grid-cols-[auto_1fr_auto]">
 					<div class="flex flex-col space-y-2">
-						<div class="flex flex-col space-y-2">
+						<div id="weapon-equip" class="flex flex-col space-y-2">
 							<ItemHeader text={m.weapon({ count: 1 })} />
 							<div class="flex space-x-2 2xl:flex-col 2xl:space-y-2">
 								{#each Object.values(weaponLoadOutContainer.slots) as _, index}
@@ -766,7 +742,7 @@
 								{/each}
 							</div>
 						</div>
-						<div class="flex flex-col space-y-2">
+						<div id="accessory-equip" class="flex flex-col space-y-2">
 							<ItemHeader text={m.accessory()} />
 							<div class="2xl:ml-2">
 								<div class="flex max-h-36 max-w-36 gap-2 2xl:grid 2xl:grid-cols-2">
@@ -806,7 +782,7 @@
 							{/await}
 						</span>
 					</div>
-					<div class="mt-2 flex space-x-2 space-y-2 2xl:flex-col">
+					<div id="gear-equip" class="mt-2 flex space-y-2 space-x-2 2xl:flex-col">
 						<div class="flex flex-col space-y-2">
 							<ItemHeader text={m.head()} />
 							<ItemBadge
@@ -854,40 +830,44 @@
 							/>
 						</div>
 					</div>
-					<div class="col-span-3 space-y-2 2xl:ml-12 2xl:mt-2">
+					<div id="food-equip" class="col-span-3 space-y-2 2xl:mt-2 2xl:ml-12">
 						<ItemHeader text={m.food()} />
-						<div class="2xl:ml-2">
-							<div class="flex flex-row space-x-2">
-								{#each Object.values(foodEquipContainer.slots) as _, index}
-									<ItemBadge
-										bind:slot={foodEquipContainer.slots[index]}
-										itemGroup="Food"
-										onCopyPaste={(event) =>
-											handleCopyPaste(event, foodEquipContainer.slots[index], false)}
-										onUpdate={onItemUpdate}
-									/>
-								{/each}
-							</div>
+						<div class="flex flex-row space-x-2">
+							{#each Object.values(foodEquipContainer.slots) as _, index}
+								<ItemBadge
+									bind:slot={foodEquipContainer.slots[index]}
+									itemGroup="Food"
+									onCopyPaste={(event) =>
+										handleCopyPaste(event, foodEquipContainer.slots[index], false)}
+									onUpdate={onItemUpdate}
+								/>
+							{/each}
 						</div>
 					</div>
 				</div>
 			</div>
 
 			<!-- Stats -->
-			<div class="fixed right-2 w-96 flex-none" bind:this={sideBarWrapper}>
+			<div
+				class="fixed right-2 max-h-screen w-72 flex-none overflow-y-auto lg:w-80 xl:w-96"
+				bind:this={sideBarWrapper}
+			>
 				<div
-					class="border-l-surface-600 preset-filled-surface-100-900 mb-2 mr-2 flex rounded-none border-l-2 p-4"
+					id="player-level"
+					class="border-l-surface-600 bg-surface-800 mr-2 mb-2 flex rounded-none border-l-2 p-4"
 				>
 					<div class="mr-4 flex flex-col items-center justify-center rounded-none">
 						<div class="flex items-center">
 							<Tooltip position="bottom">
-								<button
-									oncontextmenu={(event) => event.preventDefault()}
-									class="btn hover:bg-secondary-500/25 mr-4 px-2"
-									onmousedown={(event) => handleLevelDecrement(event)}
+								<Button
+									variant="ghost"
+									size="icon"
+									class="mr-4"
+									oncontextmenu={(event: MouseEvent) => event.preventDefault()}
+									onmousedown={(event: MouseEvent) => handleLevelDecrement(event)}
 								>
 									<Minus class="text-primary-500" size={16} />
-								</button>
+								</Button>
 								{#snippet popup()}
 									<div class="flex items-center space-x-2">
 										<div class="h-6 w-6">
@@ -935,13 +915,15 @@
 							</div>
 
 							<Tooltip position="bottom">
-								<button
-									oncontextmenu={(event) => event.preventDefault()}
-									class="btn hover:bg-secondary-500/25 ml-4 px-2"
-									onmousedown={(event) => handleLevelIncrement(event)}
+								<Button
+									variant="ghost"
+									size="icon"
+									class="ml-4"
+									oncontextmenu={(event: MouseEvent) => event.preventDefault()}
+									onmousedown={(event: MouseEvent) => handleLevelIncrement(event)}
 								>
 									<Plus class="text-primary-500" size={16} />
-								</button>
+								</Button>
 								{#snippet popup()}
 									<div class="flex items-center space-x-2">
 										<div class="h-6 w-6">
@@ -987,6 +969,7 @@
 						<div class="flex flex-col">
 							<div class="flex space-x-2">
 								<button
+									id="player-nickname"
 									class="hover:bg-secondary-500/50 hover:ring-offset-surface-900 text-start font-bold hover:ring hover:ring-offset-4"
 									onclick={handleUpdateNickname}
 								>
@@ -995,7 +978,7 @@
 								<Tooltip
 									label={new Date(appState.selectedPlayer.last_online_time).toLocaleString()}
 								>
-									<span>{appState.selectedPlayer.nickname}</span>
+									<span class="truncate">{appState.selectedPlayer.nickname}</span>
 								</Tooltip>
 							</div>
 							<div class="flex flex-col space-y-2">
@@ -1031,7 +1014,11 @@
 					</Accordion.Item>
 					<hr class="hr" />
 					<Accordion.Item value="presets" controlHover="hover:bg-secondary-500/25">
-						{#snippet control()}{c.preset}{/snippet}
+						{#snippet control()}
+							<div id="player-presets-control" class="w-full">
+								{c.preset}
+							</div>
+						{/snippet}
 						{#snippet panel()}
 							<PlayerPresets containerRef={sideBarWrapper} bind:player={appState.selectedPlayer} />
 						{/snippet}
@@ -1042,7 +1029,10 @@
 	</div>
 {:else}
 	<div class="flex w-full items-center justify-center">
-		<h2 class="h2">{m.select_entity_to_edit({ entity: c.player })} 🚀</h2>
+		<h2 class="h2 flex items-center gap-2">
+			<Rocket class="text-secondary-400 h-6 w-6" />
+			{m.select_entity_to_edit({ entity: c.player })}
+		</h2>
 	</div>
 {/if}
 

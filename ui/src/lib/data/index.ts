@@ -1,7 +1,9 @@
 import { activeSkillsData } from './activeSkills.svelte';
 import { buildingsData } from './buildings.svelte';
+import { effigies } from './effigies.svelte';
 import { elementsData } from './elements.svelte';
 import { expData } from './exp.svelte';
+import { fastTravelPoints } from './fastTravelPoints.svelte';
 import { friendshipData } from './friendship.svelte';
 import { itemsData } from './items.svelte';
 import { labResearchData } from './labResearch.svelte';
@@ -17,8 +19,10 @@ import { workSuitabilityData } from './workSuitability.svelte';
 export {
 	activeSkillsData,
 	buildingsData,
+	effigies,
 	elementsData,
 	expData,
+	fastTravelPoints,
 	friendshipData,
 	itemsData,
 	labResearchData,
