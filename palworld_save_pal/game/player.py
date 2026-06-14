@@ -347,6 +347,17 @@ class Player(BaseModel):
     def collected_effigies(self, value: List[str]):
         self._set_unlock_flags("RelicObtainForInstanceFlag", value)
 
+    @computed_field
+    def relic_possess_num(self) -> int:
+        if "RelicPossessNum" not in self._record_data:
+            return 0
+        value = PalObjects.get_value(self._record_data["RelicPossessNum"])
+        return int(value) if value is not None else 0
+
+    @relic_possess_num.setter
+    def relic_possess_num(self, value: int):
+        self._record_data["RelicPossessNum"] = PalObjects.IntProperty(value)
+
     def _get_unlock_flags(self, flag_name: str) -> List[str]:
         if flag_name not in self._record_data:
             return []
@@ -361,6 +372,7 @@ class Player(BaseModel):
         self._record_data[flag_name]["value"] = [
             {"key": key, "value": True} for key in value
         ]
+        self.relic_possess_num = self.relic_possess_num + len(value)
 
     @computed_field
     def location(self) -> Optional[WorldMapPoint]:
