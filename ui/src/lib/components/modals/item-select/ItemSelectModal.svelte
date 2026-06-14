@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button, Card, VirtualCombobox, Input, Tooltip } from '$components/ui';
+	import { Button, Card, Combobox, Input, Tooltip } from '$components/ui';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 	import { ASSET_DATA_PATH } from '$lib/constants';
@@ -204,7 +204,7 @@
 		<div class={controlsClass}>
 			<div class="w-full">
 				<div class="flex flex-row items-center">
-					<VirtualCombobox options={selectOptions} bind:value={itemId}>
+					<Combobox options={selectOptions} bind:value={itemId} viewportClass="h-50 2xl:h-100">
 						{#snippet selectOption(option)}
 							{@const item = itemsData.getByKey(option.value as string)}
 							{#await getItemIcon(option.value as string) then icon}
@@ -250,7 +250,7 @@
 								</div>
 							{/await}
 						{/snippet}
-					</VirtualCombobox>
+					</Combobox>
 					{#if !isEgg && selectedItemMaxStackCount && selectedItemMaxStackCount > 1}
 						<Input
 							labelClass="w-1/4 ml-1"

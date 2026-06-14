@@ -5,6 +5,7 @@
 	import { onMount, type Snippet } from 'svelte';
 	import { ChevronDown } from 'lucide-svelte';
 	import { debounce } from '$utils';
+	import SvelteVirtualList from '@humanspeak/svelte-virtual-list'
 	import * as m from '$i18n/messages';
 
 	let {
@@ -12,6 +13,7 @@
 		selectClass: _selectClass = 'bg-surface-900',
 		labelClass: _labelClass = '',
 		labelTextClass: _labelTextClass = '',
+		viewportClass: _viewportClass = '',
 		label = '',
 		name = nanoid(),
 		value = $bindable(),
@@ -56,17 +58,17 @@
 		cn(
 			'relative p-2 focus:outline-hidden ring-surface-200-800 focus-within:ring-secondary-500 ring rounded-xs',
 			error ? 'border-error' : '',
-			disabled ? 'text-surface-400 cursor-not-allowed' : '',
+			disabled ? 'text-gray-400 cursor-not-allowed' : '',
 			_selectClass
 		)
 	);
 
 	const labelClass = $derived(
-		cn('label my-2', error ? 'text-error' : '', disabled ? 'text-surface-400' : '', _labelClass)
+		cn('label my-2', error ? 'text-error' : '', disabled ? 'text-gray-400' : '', _labelClass)
 	);
 
 	const labelTextClass = $derived(
-		cn('label-text', disabled ? 'text-surface-400' : '', _labelTextClass)
+		cn('label-text', disabled ? 'text-gray-400' : '', _labelTextClass)
 	);
 
 	function handleOptionClick(option: SelectOption) {
@@ -198,7 +200,7 @@
 		<div class="flex items-center justify-between">
 			<input
 				type="text"
-				class="w-full bg-transparent focus:outline-hidden"
+				class="focus:outline-hidden w-full bg-transparent"
 				{placeholder}
 				bind:value={searchTerm}
 				onfocus={handleFocus}
@@ -218,33 +220,37 @@
 		{#if isOpen}
 			<div
 				id={listboxId}
-				class="bg-surface-900 border-surface-600 select-popup absolute right-0 left-0 mt-3 max-h-60 overflow-auto rounded-xs border shadow-lg"
+				class={cn("bg-surface-900 border-surface-600 select-popup rounded-xs absolute left-0 right-0 mt-3 border shadow-lg h-50 z-50", _viewportClass)}
 				role="listbox"
 			>
-				{#each filteredOptions as option}
-					<div
-						class={cn(
-							'hover:bg-surface-700 cursor-pointer p-2',
-							option.value.toString() === value && 'bg-primary-500'
-						)}
-						role="option"
-						tabindex={0}
-						aria-selected={option.value.toString() === value}
-						onclick={() => handleOptionClick(option)}
-						onkeydown={(e) => {
-							if (e.key === 'Enter' || e.key === ' ') {
-								e.preventDefault();
-								handleOptionClick(option);
-							}
-						}}
-					>
-						{#if selectOption}
-							{@render selectOption(option)}
-						{:else}
-							{option.label}
-						{/if}
-					</div>
-				{/each}
+				<SvelteVirtualList
+					items={filteredOptions}
+				>
+					{#snippet renderItem(item)}
+						<div
+							class={cn(
+								'hover:bg-surface-700 cursor-pointer p-2',
+								item.value.toString() === value && 'bg-primary-500'
+							)}
+							role="option"
+							tabindex={0}
+							aria-selected={item.value.toString() === value}
+							onclick={() => handleOptionClick(item)}
+							onkeydown={(e) => {
+								if (e.key === 'Enter' || e.key === ' ') {
+									e.preventDefault();
+									handleOptionClick(item);
+								}
+							}}
+						>
+							{#if selectOption}
+								{@render selectOption(item)}
+							{:else}
+								{item.label}
+							{/if}
+						</div>
+					{/snippet}
+				</SvelteVirtualList>
 			</div>
 		{/if}
 	</div>
