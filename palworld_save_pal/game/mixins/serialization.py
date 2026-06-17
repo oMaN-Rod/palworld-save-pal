@@ -208,7 +208,10 @@ class SerializationMixin:
                     player_files.sav.write(CUSTOM_PROPERTIES),
                     0x31,
                 )
-                uid = str(uid).replace("-", "")
+                # GUID hex must be uppercase: Palworld reads player saves by
+                # the uppercase filename, so a lowercase name orphans the record
+                # on case-sensitive filesystems (Linux dedicated servers).
+                uid = str(uid).replace("-", "").upper()
                 atomic_write(os.path.join(output_path, f"{uid}.sav"), sav_file)
                 if player_files.dps:
                     dps_sav_file = compress_gvas_to_sav(
