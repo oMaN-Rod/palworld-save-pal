@@ -872,7 +872,7 @@
 				{/if}
 				{#if activeTab == 'storage'}
 					<div class="flex items-center">
-						<Input bind:value={inventorySearchQuery} placeholder={m.search_inventory()} />
+						<Input bind:value={inventorySearchQuery} placeholder={m.search()} />
 						<Button
 							variant="ghost"
 							onclick={() => {
@@ -1040,6 +1040,7 @@
 								baseClass="w-1/4"
 								listClass="h-[calc(100vh-175px)]"
 								canSelect={false}
+							idKey="id"
 								onselect={(itemContainer) => handleSelectStorageContainer(itemContainer)}
 								multiple={false}
 							>
