@@ -35,30 +35,85 @@
 	let selectAll: boolean = $state(false);
 
 	let filteredPresets: ExtendedPresetProfile[] = $derived.by(() => {
+		const containerSlotCount = container.slots.length;
 		return Object.entries(presetsData.presetProfiles)
 			.filter(
 				([_, preset]) =>
-					preset.type === 'storage' && preset.storage_container?.key === container.key
+					preset.type === 'storage' &&
+					preset.storage_container &&
+					(preset.storage_container.slots?.length ?? 0) <= containerSlotCount &&
+					(preset.storage_container.key === container.key ||
+						preset.storage_container.key === '*')
 			)
 			.map(([id, preset]) => ({ ...preset, id }));
 	});
 
 	async function handleApplyPreset() {
 		if (!selectedPresets.length || !container) return;
-		const preset = selectedPresets[0];
-		if (!preset.storage_container) return;
 
-		const updatedSlots = container.slots.map((slot: ItemContainerSlot) => {
-			const presetSlot = preset.storage_container!.slots.find(
-				(ps) => ps.slot_index === slot.slot_index
-			);
-			if (presetSlot) {
-				return { ...slot, ...presetSlot };
+		// 合并所有选中预设的物品
+		const allPresetSlots: ItemContainerSlot[] = [];
+		for (const preset of selectedPresets) {
+			if (preset.storage_container) {
+				for (const ps of preset.storage_container.slots) {
+					if (ps.static_id !== 'None') {
+						allPresetSlots.push(ps as ItemContainerSlot);
+					}
+				}
+			}
+		}
+
+		// 覆盖模式：先清空容器，再按顺序填入预设物品
+		const updatedSlots = container.slots.map((slot: ItemContainerSlot, idx: number) => {
+			if (idx < allPresetSlots.length) {
+				return { ...slot, ...allPresetSlots[idx] };
 			}
 			return { ...slot, static_id: 'None', count: 0, dynamic_item: undefined };
 		});
 
 		container.slots = updatedSlots;
+		container.state = EntryState.MODIFIED;
+		onUpdate();
+		selectedPresets = [];
+	}
+
+	async function handleAppendPreset() {
+		if (!selectedPresets.length || !container) return;
+
+		// 合并所有选中预设的物品
+		const allPresetSlots: ItemContainerSlot[] = [];
+		for (const preset of selectedPresets) {
+			if (preset.storage_container) {
+				for (const ps of preset.storage_container.slots) {
+					if (ps.static_id !== 'None') {
+						allPresetSlots.push(ps as ItemContainerSlot);
+					}
+				}
+			}
+		}
+
+		// 找到当前容器中所有空格子（static_id 为 None 的 slot）
+		const emptySlots = container.slots.filter(
+			(s: ItemContainerSlot) => s.static_id === 'None'
+		);
+
+		// 将合并后的物品依次填入空格子，超出容器容量的丢弃
+		let emptyIdx = 0;
+		for (const presetSlot of allPresetSlots) {
+			if (emptyIdx >= emptySlots.length) break;
+
+			const targetSlot = emptySlots[emptyIdx];
+			targetSlot.static_id = presetSlot.static_id;
+			targetSlot.count = presetSlot.count;
+			if (presetSlot.dynamic_item) {
+				targetSlot.dynamic_item = deepCopy(presetSlot.dynamic_item);
+				targetSlot.dynamic_item.local_id = '00000000-0000-0000-0000-000000000000';
+			} else {
+				targetSlot.dynamic_item = undefined;
+			}
+			emptyIdx++;
+		}
+
 		container.state = EntryState.MODIFIED;
 		onUpdate();
 		selectedPresets = [];
@@ -211,12 +266,18 @@
 		>
 			<ChevronsLeftRight />
 		</TooltipButton>
-		{#if selectedPresets.length === 1}
+		{#if selectedPresets.length >= 1}
 			<TooltipButton
 				onclick={handleApplyPreset}
 				popupLabel={m.apply_selected_entity({ entity: c.preset })}
 			>
 				<Play />
+			</TooltipButton>
+			<TooltipButton
+				onclick={handleAppendPreset}
+				popupLabel={'Append preset items to empty slots'}
+			>
+				<PackagePlus />
 			</TooltipButton>
 		{/if}
 		{#if selectedPresets.length >= 1}
