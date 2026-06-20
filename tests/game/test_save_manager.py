@@ -135,3 +135,32 @@ class TestSaveManagerWorldName:
         sm = SaveManager()
         with pytest.raises(ValueError, match="No LevelMeta"):
             sm.set_world_name("Test")
+
+
+class TestSaveManagerPlayerSavOutput:
+    def test_player_sav_filenames_are_uppercase(
+        self, event_loop, fresh_save_manager, tmp_path
+    ):
+        # Load a player so its GVAS files are populated for serialization.
+        event_loop.run_until_complete(
+            fresh_save_manager.load_player_on_demand(PLAYER_O_UID, ws_callback=_noop)
+        )
+        players_dir = tmp_path / "Players"
+        players_dir.mkdir()
+        fresh_save_manager.to_player_sav_files(str(players_dir))
+
+        written = sorted(p.name for p in players_dir.glob("*.sav"))
+        assert written, "no player .sav files were written"
+
+        # Palworld stores player saves with the GUID hex in UPPERCASE. On a
+        # case-sensitive filesystem (Linux dedicated server) a lowercase name
+        # orphans the player record, so the game loads a blank character.
+        for name in written:
+            hex_part = name[: -len(".sav")].replace("_dps", "")
+            assert hex_part == hex_part.upper(), (
+                f"player save filename must be uppercase, got {name!r}"
+            )
+
+        # The loaded player's file must exist under its canonical uppercase name.
+        expected = PLAYER_O_UID.hex.upper() + ".sav"
+        assert expected in written, f"expected {expected} in {written}"
