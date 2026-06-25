@@ -872,7 +872,7 @@
 				{/if}
 				{#if activeTab == 'storage'}
 					<div class="flex items-center">
-						<Input bind:value={inventorySearchQuery} placeholder={m.search()} />
+						<Input bind:value={inventorySearchQuery} placeholder={m.search_entity({ entity: m.inventory() })} />
 						<Button
 							variant="ghost"
 							onclick={() => {
