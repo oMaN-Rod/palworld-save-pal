@@ -6,7 +6,7 @@
 	import { cn } from '$theme';
 	import { getAppState, getNavigationState } from '$states';
 	import { palsData } from '$lib/data';
-	import { Plus, ArchiveRestore, Trash, Copy, Upload } from 'lucide-svelte';
+	import { Plus, ArchiveRestore, Trash, Copy, Upload, Users } from 'lucide-svelte';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';
@@ -18,10 +18,12 @@
 		onAdd,
 		onClone,
 		onCloneToUps,
+		onCloneToPlayer,
 		onDelete,
 		selected = $bindable([]),
 		onSelect,
 		showCloneToUps = true,
+		showCloneToPlayer = true,
 		disabled = false
 	} = $props<{
 		pal: Pal;
@@ -29,10 +31,12 @@
 		onAdd: () => void;
 		onClone: () => void;
 		onCloneToUps?: () => void;
+		onCloneToPlayer?: () => void;
 		onDelete: () => void;
 		selected?: string[];
 		onSelect?: (pal: Pal, event: MouseEvent) => void;
 		showCloneToUps?: boolean;
+		showCloneToPlayer?: boolean;
 		disabled?: boolean;
 	}>();
 
@@ -77,6 +81,14 @@
 				label: m.clone_to_entity({ entity: m.ups() }),
 				onClick: onCloneToUps,
 				icon: Upload
+			});
+		}
+
+		if (onCloneToPlayer && showCloneToPlayer) {
+			items.push({
+				label: m.clone_to_entity({ entity: m.player({ count: 1 }) }),
+				onClick: onCloneToPlayer,
+				icon: Users
 			});
 		}
 

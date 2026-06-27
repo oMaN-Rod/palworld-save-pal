@@ -73,6 +73,7 @@ export enum MessageType {
 	CLONE_UPS_PAL = 'clone_ups_pal',
 	CLONE_TO_UPS = 'clone_to_ups',
 	EXPORT_UPS_PAL = 'export_ups_pal',
+	CLONE_GPS_PAL_TO_PLAYER = 'clone_gps_pal_to_player',
 	IMPORT_TO_UPS = 'import_to_ups',
 	GET_UPS_COLLECTIONS = 'get_ups_collections',
 	CREATE_UPS_COLLECTION = 'create_ups_collection',

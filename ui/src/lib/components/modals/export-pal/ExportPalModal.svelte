@@ -4,7 +4,7 @@
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
 	import { getAppState } from '$states';
-	import type { UPSPal, Player } from '$types';
+	import type { UPSPal, Player, Pal } from '$types';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
@@ -12,11 +12,13 @@
 		title = m.export_pals({ count: '', pals: c.pals }),
 		message = '',
 		pals = [],
+		hideGps = false,
 		closeModal
 	}: {
 		title?: string;
 		message?: string;
-		pals: UPSPal[];
+		pals: UPSPal[] | Pal[];
+		hideGps?: boolean;
 		closeModal: (value: any) => void;
 	} = $props();
 
@@ -147,15 +149,17 @@
 						<Download class="h-4 w-4" />
 						<span class="text-sm">{m.dps()}</span>
 					</label>
-					<label
-						class="hover:bg-surface-100 dark:hover:bg-surface-800 border-surface-700 flex cursor-pointer items-center justify-center space-x-2 rounded border p-3"
-						class:bg-primary-500={exportTarget === 'gps'}
-						class:text-white={exportTarget === 'gps'}
-					>
-						<input type="radio" bind:group={exportTarget} value="gps" class="sr-only" />
-						<Share class="h-4 w-4" />
-						<span class="text-sm">{m.gps()}</span>
-					</label>
+					{#if !hideGps}
+						<label
+							class="hover:bg-surface-100 dark:hover:bg-surface-800 border-surface-700 flex cursor-pointer items-center justify-center space-x-2 rounded border p-3"
+							class:bg-primary-500={exportTarget === 'gps'}
+							class:text-white={exportTarget === 'gps'}
+						>
+							<input type="radio" bind:group={exportTarget} value="gps" class="sr-only" />
+							<Share class="h-4 w-4" />
+							<span class="text-sm">{m.gps()}</span>
+						</label>
+					{/if}
 				</div>
 			</div>
 
