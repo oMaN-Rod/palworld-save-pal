@@ -205,8 +205,8 @@
 			</div>
 
 			<!-- Warning about export -->
-			<div class="rounded bg-yellow-100 p-3 text-sm dark:bg-yellow-900/20">
-				<p class="mb-1 font-medium text-yellow-800 dark:text-yellow-200">{m.note()}:</p>
+			<div class="rounded bg-surface-100 dark:bg-surface-800 p-3 text-sm ">
+				<p class="mb-1 font-medium ">{m.note()}:</p>
 				<p class="text-yellow-700 dark:text-yellow-300">
 					{m.export_note_message()}
 				</p>

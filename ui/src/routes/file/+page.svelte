@@ -82,7 +82,7 @@
 </script>
 
 <div
-	class="bg-surface-900 animate-fade-in flex min-h-screen w-full flex-col items-center justify-center py-12"
+	class="bg-surface-950 animate-fade-in flex min-h-screen w-full flex-col items-center justify-center py-12"
 >
 	<div class="flex w-full max-w-3xl flex-col gap-12">
 		<section class="w-full">
