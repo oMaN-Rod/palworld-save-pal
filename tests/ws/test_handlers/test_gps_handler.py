@@ -13,6 +13,8 @@ from palworld_save_pal.ws.messages import (
     BaseMessage,
     CloneGpsPalData,
     CloneGpsPalMessage,
+    CloneGpsPalToPlayerData,
+    CloneGpsPalToPlayerMessage,
     DeletePalsData,
     DeletePalsMessage,
     MessageType,
@@ -195,3 +197,145 @@ class TestRequestGpsHandler:
 
         assert len(ws.sent) == 1
         assert ws.sent[0]["type"] == MessageType.GET_GPS_RESPONSE.value
+
+
+class TestCloneGpsPalToPlayerHandler:
+    def _setup(self, mock_app_state, destination_type, add_return):
+        player_uid = uuid4()
+        pal_uuid = uuid4()
+
+        player = MagicMock()
+        player.uid = player_uid
+        player.pal_box_id = uuid4()
+
+        gps_pal = MagicMock()
+        gps_pal.instance_id = pal_uuid
+
+        save_file = mock_app_state.save_file
+        save_file.get_players.return_value = {player_uid: player}
+        save_file.get_gps.return_value = {0: gps_pal}
+        if destination_type == "pal_box":
+            save_file.add_player_pal_from_dto.return_value = add_return
+        else:
+            save_file.add_player_dps_pal_from_dto.return_value = add_return
+        return player_uid, pal_uuid
+
+    @pytest.mark.asyncio
+    async def test_clones_to_pal_box(self, ws, mock_app_state):
+        from palworld_save_pal.ws.handlers.gps_handler import (
+            clone_gps_pal_to_player_handler,
+        )
+
+        new_pal = MagicMock()
+        new_pal.model_dump.return_value = {"instance_id": "new-id"}
+        player_uid, pal_uuid = self._setup(mock_app_state, "pal_box", new_pal)
+
+        with patch(
+            "palworld_save_pal.ws.handlers.gps_handler.get_app_state",
+            return_value=mock_app_state,
+        ), patch(
+            "palworld_save_pal.ws.handlers.gps_handler.PalDTO"
+        ) as mock_dto:
+            mock_dto.from_dict.return_value = MagicMock()
+            msg = CloneGpsPalToPlayerMessage(
+                data=CloneGpsPalToPlayerData(
+                    pal_ids=[str(pal_uuid)],
+                    destination_type="pal_box",
+                    destination_player_uid=str(player_uid),
+                )
+            )
+            await clone_gps_pal_to_player_handler(msg, ws)
+
+        mock_app_state.save_file.add_player_pal_from_dto.assert_called_once()
+        assert ws.sent[0]["type"] == MessageType.ADD_PAL.value
+        assert ws.sent[0]["data"]["player_id"] == str(player_uid)
+        assert ws.sent[-1]["type"] == MessageType.CLONE_GPS_PAL_TO_PLAYER.value
+        assert ws.sent[-1]["data"]["cloned_count"] == 1
+        assert ws.sent[-1]["data"]["success"] is True
+
+    @pytest.mark.asyncio
+    async def test_clones_to_dps(self, ws, mock_app_state):
+        from palworld_save_pal.ws.handlers.gps_handler import (
+            clone_gps_pal_to_player_handler,
+        )
+
+        new_pal = MagicMock()
+        new_pal.model_dump.return_value = {"instance_id": "new-id"}
+        player_uid, pal_uuid = self._setup(mock_app_state, "dps", (5, new_pal))
+
+        with patch(
+            "palworld_save_pal.ws.handlers.gps_handler.get_app_state",
+            return_value=mock_app_state,
+        ), patch(
+            "palworld_save_pal.ws.handlers.gps_handler.PalDTO"
+        ) as mock_dto:
+            mock_dto.from_dict.return_value = MagicMock()
+            msg = CloneGpsPalToPlayerMessage(
+                data=CloneGpsPalToPlayerData(
+                    pal_ids=[str(pal_uuid)],
+                    destination_type="dps",
+                    destination_player_uid=str(player_uid),
+                )
+            )
+            await clone_gps_pal_to_player_handler(msg, ws)
+
+        mock_app_state.save_file.add_player_dps_pal_from_dto.assert_called_once()
+        assert ws.sent[0]["type"] == MessageType.ADD_DPS_PAL.value
+        assert ws.sent[0]["data"]["index"] == 5
+        assert ws.sent[-1]["data"]["cloned_count"] == 1
+
+    @pytest.mark.asyncio
+    async def test_add_failure_recorded_as_error(self, ws, mock_app_state):
+        from palworld_save_pal.ws.handlers.gps_handler import (
+            clone_gps_pal_to_player_handler,
+        )
+
+        player_uid, pal_uuid = self._setup(mock_app_state, "pal_box", None)
+
+        with patch(
+            "palworld_save_pal.ws.handlers.gps_handler.get_app_state",
+            return_value=mock_app_state,
+        ), patch(
+            "palworld_save_pal.ws.handlers.gps_handler.PalDTO"
+        ) as mock_dto:
+            mock_dto.from_dict.return_value = MagicMock()
+            msg = CloneGpsPalToPlayerMessage(
+                data=CloneGpsPalToPlayerData(
+                    pal_ids=[str(pal_uuid)],
+                    destination_type="pal_box",
+                    destination_player_uid=str(player_uid),
+                )
+            )
+            await clone_gps_pal_to_player_handler(msg, ws)
+
+        # No ADD_PAL emitted; only the summary
+        assert all(s["type"] != MessageType.ADD_PAL.value for s in ws.sent)
+        assert ws.sent[-1]["type"] == MessageType.CLONE_GPS_PAL_TO_PLAYER.value
+        assert ws.sent[-1]["data"]["cloned_count"] == 0
+        assert ws.sent[-1]["data"]["success"] is False
+        assert len(ws.sent[-1]["data"]["errors"]) == 1
+
+    @pytest.mark.asyncio
+    async def test_no_save_file_sends_error(self, ws):
+        from palworld_save_pal.ws.handlers.gps_handler import (
+            clone_gps_pal_to_player_handler,
+        )
+
+        mock_state = MagicMock()
+        mock_state.save_file = None
+
+        with patch(
+            "palworld_save_pal.ws.handlers.gps_handler.get_app_state",
+            return_value=mock_state,
+        ):
+            msg = CloneGpsPalToPlayerMessage(
+                data=CloneGpsPalToPlayerData(
+                    pal_ids=[str(uuid4())],
+                    destination_type="pal_box",
+                    destination_player_uid=str(uuid4()),
+                )
+            )
+            await clone_gps_pal_to_player_handler(msg, ws)
+
+        assert len(ws.sent) == 1
+        assert ws.sent[0]["type"] == MessageType.ERROR.value

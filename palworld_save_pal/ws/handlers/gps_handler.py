@@ -4,10 +4,14 @@ from palworld_save_pal.state import get_app_state
 from palworld_save_pal.ws.messages import (
     AddGpsPalMessage,
     CloneGpsPalMessage,
+    CloneGpsPalToPlayerMessage,
     DeleteGpsPalsMessage,
     RequestGpsMessage,
     MessageType,
 )
+from palworld_save_pal.dto.pal import PalDTO
+from palworld_save_pal.utils.uuid import are_equal_uuids
+from uuid import UUID
 from palworld_save_pal.ws.utils import build_response
 from palworld_save_pal.utils.logging_config import create_logger
 
@@ -108,3 +112,107 @@ async def delete_gps_pals_handler(message: DeleteGpsPalsMessage, _: WebSocket):
         logger.warning("No save file loaded, cannot delete GPS pals")
         return
     save_file.delete_gps_pals(pal_indexes)
+
+
+async def clone_gps_pal_to_player_handler(
+    message: CloneGpsPalToPlayerMessage, ws: WebSocket
+):
+    data = message.data
+    app_state = get_app_state()
+    save_file = app_state.save_file
+
+    if not save_file:
+        await ws.send_json(
+            build_response(MessageType.ERROR, {"message": "No save file loaded"})
+        )
+        return
+
+    if data.destination_type not in ("pal_box", "dps"):
+        await ws.send_json(
+            build_response(
+                MessageType.ERROR,
+                {"message": f"Invalid destination type: {data.destination_type}"},
+            )
+        )
+        return
+
+    player = save_file.get_players().get(UUID(data.destination_player_uid))
+    if not player:
+        await ws.send_json(
+            build_response(MessageType.ERROR, {"message": "Player not found"})
+        )
+        return
+
+    gps_pals = save_file.get_gps()
+    if not gps_pals:
+        await ws.send_json(
+            build_response(MessageType.ERROR, {"message": "GPS not available"})
+        )
+        return
+
+    cloned_count = 0
+    errors = []
+
+    for pal_id in data.pal_ids:
+        source_pal = None
+        for _, gps_pal in gps_pals.items():
+            if are_equal_uuids(gps_pal.instance_id, pal_id):
+                source_pal = gps_pal
+                break
+
+        if not source_pal:
+            errors.append(f"Pal not found in GPS: {pal_id}")
+            continue
+
+        pal_dto = PalDTO.from_dict(source_pal.model_dump())
+
+        if data.destination_type == "pal_box":
+            new_pal = save_file.add_player_pal_from_dto(
+                player_id=UUID(data.destination_player_uid),
+                pal_dto=pal_dto,
+                container_id=player.pal_box_id,
+            )
+            if not new_pal:
+                errors.append(f"Failed to add pal to pal box: {pal_id}")
+                continue
+            await ws.send_json(
+                build_response(
+                    MessageType.ADD_PAL,
+                    {
+                        "player_id": str(player.uid),
+                        "pal": new_pal.model_dump(),
+                    },
+                )
+            )
+            cloned_count += 1
+        else:  # dps
+            result = save_file.add_player_dps_pal_from_dto(
+                player_id=UUID(data.destination_player_uid),
+                pal_dto=pal_dto,
+            )
+            if not result:
+                errors.append(f"Failed to add pal to DPS: {pal_id}")
+                continue
+            slot_idx, new_pal = result
+            await ws.send_json(
+                build_response(
+                    MessageType.ADD_DPS_PAL,
+                    {
+                        "player_id": str(player.uid),
+                        "pal": new_pal.model_dump(),
+                        "index": slot_idx,
+                    },
+                )
+            )
+            cloned_count += 1
+
+    await ws.send_json(
+        build_response(
+            MessageType.CLONE_GPS_PAL_TO_PLAYER,
+            {
+                "success": cloned_count > 0,
+                "cloned_count": cloned_count,
+                "errors": errors,
+            },
+        )
+    )
