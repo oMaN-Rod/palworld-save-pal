@@ -28,7 +28,7 @@ logger = create_logger(__name__)
 
 async def add_preset_handler(message: AddPresetMessage, ws: WebSocket):
     preset = message.data
-    preset_id = add_preset(preset.model_dump())
+    preset_id = add_preset(preset.model_dump(mode="json"))
 
     response = build_response(
         MessageType.ADD_PRESET,

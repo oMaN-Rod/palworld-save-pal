@@ -289,6 +289,63 @@ class TestPresetsCtx:
         assert presets[preset_id]["name"] == "NewName"
 
 
+class TestAddPresetHandler:
+    """Regression tests for the add_preset websocket handler."""
+
+    class _MockWebSocket:
+        def __init__(self):
+            self.sent = []
+
+        async def send_json(self, data):
+            self.sent.append(data)
+
+    @pytest.mark.asyncio
+    async def test_storage_preset_with_dynamic_item_persists(self):
+        """A storage preset containing a dynamic item (UUID local_id) must
+        serialize into the JSON column without raising. Regression for
+        'Object of type UUID is not JSON serializable'."""
+        from palworld_save_pal.ws.handlers.preset_handler import add_preset_handler
+        from palworld_save_pal.ws.messages import AddPresetMessage
+        from palworld_save_pal.db.ctx.presets import get_all_presets
+
+        # data is coerced into a PresetProfileDTO, which parses the local_id
+        # string into a uuid.UUID object — exactly what the real handler sees.
+        message = AddPresetMessage(
+            data={
+                "name": "StorageWithEgg",
+                "type": "storage",
+                "storage_container": {
+                    "key": "ItemChest_04",
+                    "slots": [
+                        {
+                            "slot_index": 4,
+                            "count": 1,
+                            "static_id": "PalEgg_Earth_05",
+                            "dynamic_item": {
+                                "local_id": "00000000-0000-0000-0000-000000000000",
+                                "type": "egg",
+                            },
+                        }
+                    ],
+                },
+            }
+        )
+        ws = self._MockWebSocket()
+
+        await add_preset_handler(message, ws)
+
+        assert len(ws.sent) == 1
+        preset_id = ws.sent[0]["data"]["id"]
+
+        presets = get_all_presets()
+        assert preset_id in presets
+        stored_local_id = presets[preset_id]["storage_container"]["slots"][0][
+            "dynamic_item"
+        ]["local_id"]
+        assert stored_local_id == "00000000-0000-0000-0000-000000000000"
+        assert isinstance(stored_local_id, str)
+
+
 # ===========================================================================
 # UPS Model creation tests (direct model, not full service)
 # ===========================================================================
