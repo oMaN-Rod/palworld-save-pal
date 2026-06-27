@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button, Input, TooltipButton } from '$components/ui';
+	import { Button, Input, Tooltip, TooltipButton } from '$components/ui';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import {
 		Search,
@@ -53,6 +53,7 @@
 	import UPSStatsPanel from './components/UPSStatsPanel.svelte';
 	import UPSPalList from './components/UPSPalList.svelte';
 	import { Nuke } from '$components/ui';
+	import { ReplaceAll, StickyNote } from '@lucide/svelte';
 
 	const VISIBLE_PAGE_BUBBLES = 16;
 
@@ -639,82 +640,15 @@
 		<!-- Side Panels -->
 		{#if upsState.showCollectionsPanel || upsState.showTagsPanel || upsState.showStatsPanel}
 			<div
-				class="border-surface-300 dark:border-surface-700 bg-surface-50 dark:bg-surface-900 animate-slide-down w-full max-w-80 border-r sm:max-w-72 md:max-w-80"
+				class="border-surface-300 dark:border-surface-700 bg-surface-50 dark:bg-surface-900 animate-slide-down flex w-full max-w-80 flex-col border-r sm:max-w-72 md:max-w-80"
 			>
-				{#if upsState.showCollectionsPanel}
-					<UPSCollectionsPanel />
-				{/if}
-				{#if upsState.showTagsPanel}
-					<UPSTagsPanel />
-				{/if}
-				{#if upsState.showStatsPanel}
-					<UPSStatsPanel />
-				{/if}
-			</div>
-		{/if}
-
-		<!-- Main Panel -->
-		<div class="flex flex-1 flex-col">
-			<!-- Filters and Search -->
-			<div class="border-surface-700 space-y-3 border-b p-4">
-				<!-- Search Bar -->
-				<div class="flex items-center gap-2">
-					<div class="relative flex-1">
-						<Search
-							class="text-surface-500 absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 focus:border-none"
-						/>
-						<Input
-							bind:value={searchInput}
-							oninput={handleSearchInput}
-							placeholder={m.search_pals({ pals: c.pals })}
-							inputClass="pl-10"
-						/>
-					</div>
-					{#if upsState.pagination.totalCount > 0}
-						<TooltipButton popupLabel={m.nuke_ups({ pals: c.pals })}>
-							<button
-								class="text-error-500 hover:bg-error-500/20 hover:text-error-600 h-8 w-8 rounded-md p-2 transition-colors"
-								onclick={handleNukeUps}
-								disabled={upsState.loading}
-							>
-								<Nuke size={16} />
-							</button>
-						</TooltipButton>
-					{/if}
-					{#if upsState.hasSelectedPals}
-						<TooltipButton
-							onclick={handleBulkEditTags}
-							variant="primary"
-							size="icon"
-							popupLabel={m.edit_entity({ entity: c.tags })}
-						>
-							<Tag class="h-4 w-4" />
-						</TooltipButton>
-						<TooltipButton
-							onclick={handleBulkAddToCollection}
-							variant="secondary"
-							size="icon"
-							popupLabel={m.add_to_collection()}
-						>
-							<Folder class="h-4 w-4" />
-						</TooltipButton>
-						<TooltipButton
-							onclick={handleBulkExport}
-							class="rounded-md bg-purple-500 p-2 text-white hover:bg-purple-600"
-							popupLabel={m.export_selected()}
-						>
-							<Upload class="h-4 w-4" />
-						</TooltipButton>
-						<TooltipButton
-							onclick={deleteSelected}
-							class="rounded-md bg-red-500 p-2 text-white hover:bg-red-600"
-							popupLabel={m.delete_entity({ entity: m.selected() })}
-						>
-							<Trash class="h-4 w-4" />
-						</TooltipButton>
-					{/if}
+				<div class="mx-2">
+					<Input
+						bind:value={searchInput}
+						oninput={handleSearchInput}
+						placeholder={m.search_entity({ entity: c.pals })}
+					/>
 				</div>
-
 				<!-- Filter Controls -->
 				<Accordion base="w-full" collapsible>
 					<Accordion.Item value="filters">
@@ -730,7 +664,7 @@
 							</div>
 						{/snippet}
 						{#snippet panel()}
-							<div class="grid grid-cols-2 gap-4 p-4">
+							<div class="felx flex-col gap-4 p-4">
 								<!-- Left Column: Elements & Types Filter -->
 								<div class="space-y-4">
 									<span class="block text-sm font-medium">{m.element_and_type()}</span>
@@ -738,9 +672,9 @@
 										<!-- Element Types -->
 										<div>
 											<div class="mb-1 flex items-center justify-between">
-												<span class="text-surface-600 dark:text-surface-400 text-xs font-medium"
-													>{m.element_types()}</span
-												>
+												<span class="text-surface-600 dark:text-surface-400 text-xs font-medium">
+													{m.element_types()}
+												</span>
 												{#if upsState.filters.elementTypes.length > 0}
 													<button
 														class="text-primary-600 hover:text-primary-700 text-xs"
@@ -750,11 +684,11 @@
 													</button>
 												{/if}
 											</div>
-											<div class="grid grid-cols-3 gap-1 sm:grid-cols-4 md:grid-cols-6">
+											<div class="grid grid-cols-3 gap-1 sm:grid-cols-4 md:grid-cols-5">
 												{#each elementTypes as element}
 													{@const elementData = elementsData.getByKey(element)}
 													{@const localizedName = elementData?.localized_name || element}
-													<TooltipButton popupLabel={localizedName}>
+													<Tooltip label={localizedName}>
 														<button
 															class={getElementButtonClass(element)}
 															onclick={() => handleElementTypeFilter(element)}
@@ -763,10 +697,10 @@
 															<img
 																src={elementIcons[element]}
 																alt={localizedName}
-																class="h-6 w-6"
+																class="pal-element-badge"
 															/>
 														</button>
-													</TooltipButton>
+													</Tooltip>
 												{/each}
 											</div>
 										</div>
@@ -774,9 +708,9 @@
 										<!-- Pal Types -->
 										<div>
 											<div class="mb-1 flex items-center justify-between">
-												<span class="text-surface-600 dark:text-surface-400 text-xs font-medium"
-													>{m.pal_types()}</span
-												>
+												<span class="text-surface-600 dark:text-surface-400 text-xs font-medium">
+													{m.pal_types()}
+												</span>
 												{#if upsState.filters.palTypes.length > 0}
 													<button
 														class="text-primary-600 hover:text-primary-700 text-xs"
@@ -787,53 +721,47 @@
 												{/if}
 											</div>
 											<div class="grid grid-cols-3 gap-1 sm:grid-cols-4 md:grid-cols-6">
-												<TooltipButton popupLabel={m.alpha_pal({ pals: c.pals })}>
-													<button
-														class={getPalTypeButtonClass('alpha')}
-														onclick={() => handlePalTypeFilter('alpha')}
-													>
-														<img src={staticIcons.alphaIcon} alt="Alpha" class="h-6 w-6" />
-													</button>
+												<TooltipButton
+													popupLabel={m.alpha_pal({ pals: c.pals })}
+													onclick={() => handlePalTypeFilter('alpha')}
+													buttonClass={getPalTypeButtonClass('alpha')}
+												>
+													<img src={staticIcons.alphaIcon} alt="Alpha" />
 												</TooltipButton>
-												<TooltipButton popupLabel={m.lucky_pals({ pals: c.pals })}>
-													<button
-														class={getPalTypeButtonClass('lucky')}
-														onclick={() => handlePalTypeFilter('lucky')}
-													>
-														<img src={staticIcons.luckyIcon} alt="Lucky" class="h-6 w-6" />
-													</button>
+												<TooltipButton
+													popupLabel={m.lucky_pals({ pals: c.pals })}
+													onclick={() => handlePalTypeFilter('lucky')}
+													buttonClass={getPalTypeButtonClass('lucky')}
+												>
+													<img src={staticIcons.luckyIcon} alt="Lucky" />
 												</TooltipButton>
-												<TooltipButton popupLabel={m.human({ count: 2 })}>
-													<button
-														class={getPalTypeButtonClass('human')}
-														onclick={() => handlePalTypeFilter('human')}
-													>
-														<User class="h-6 w-6" />
-													</button>
+												<TooltipButton
+													popupLabel={m.human({ count: 2 })}
+													buttonClass={getPalTypeButtonClass('human')}
+													onclick={() => handlePalTypeFilter('human')}
+												>
+													<User />
 												</TooltipButton>
-												<TooltipButton popupLabel={m.predator_pals({ pals: c.pals })}>
-													<button
-														class={getPalTypeButtonClass('predator')}
-														onclick={() => handlePalTypeFilter('predator')}
-													>
-														<img src={staticIcons.predatorIcon} alt="Predator" class="h-6 w-6" />
-													</button>
+												<TooltipButton
+													popupLabel={m.predator_pals({ pals: c.pals })}
+													buttonClass={getPalTypeButtonClass('predator')}
+													onclick={() => handlePalTypeFilter('predator')}
+												>
+													<img src={staticIcons.predatorIcon} alt="Predator" />
 												</TooltipButton>
-												<TooltipButton popupLabel={m.oil_rig_pals({ pals: c.pals })}>
-													<button
-														class={getPalTypeButtonClass('oilrig')}
-														onclick={() => handlePalTypeFilter('oilrig')}
-													>
-														<img src={staticIcons.oilrigIcon} alt="Oil Rig" class="h-6 w-6" />
-													</button>
+												<TooltipButton
+													popupLabel={m.oil_rig_pals({ pals: c.pals })}
+													buttonClass={getPalTypeButtonClass('oilrig')}
+													onclick={() => handlePalTypeFilter('oilrig')}
+												>
+													<img src={staticIcons.oilrigIcon} alt="Oil Rig" />
 												</TooltipButton>
-												<TooltipButton popupLabel={m.summoned_pals({ pals: c.pals })}>
-													<button
-														class={getPalTypeButtonClass('summon')}
-														onclick={() => handlePalTypeFilter('summon')}
-													>
-														<img src={staticIcons.altarIcon} alt="Summoned" class="h-6 w-6" />
-													</button>
+												<TooltipButton
+													popupLabel={m.summoned_pals({ pals: c.pals })}
+													buttonClass={getPalTypeButtonClass('summon')}
+													onclick={() => handlePalTypeFilter('summon')}
+												>
+													<img src={staticIcons.altarIcon} alt="Summoned" />
 												</TooltipButton>
 											</div>
 										</div>
@@ -878,14 +806,26 @@
 						{/snippet}
 					</Accordion.Item>
 				</Accordion>
+				{#if upsState.showCollectionsPanel}
+					<UPSCollectionsPanel />
+				{/if}
+				{#if upsState.showTagsPanel}
+					<UPSTagsPanel />
+				{/if}
+				{#if upsState.showStatsPanel}
+					<UPSStatsPanel />
+				{/if}
 			</div>
+		{/if}
 
+		<!-- Main Panel -->
+		<div class="flex flex-1 flex-col">
 			<!-- Selection Controls -->
 			{#if upsState.pals.length > 0}
 				<div
-					class="bg-surface-100 dark:bg-surface-800 flex items-center justify-between px-4 text-sm"
+					class="bg-surface-100 dark:bg-surface-900 grid grid-cols-[auto_1fr_auto] items-center px-4 text-sm h-12"
 				>
-					<div class="flex items-center gap-4">
+					<div class="flex w-full items-center gap-4">
 						<span>
 							{m.selected_of_total({
 								selected: upsState.selectedPals.size,
@@ -895,50 +835,89 @@
 										: upsState.pagination.totalCount
 							})}
 						</span>
-						<div class="flex items-center">
-							<nav class="btn-group flex-row p-0">
+						<nav class="flex p-0">
+							<TooltipButton
+								popupLabel={m.select_all_page_pals({
+									pals: c.pals,
+									count: upsState.pals.length
+								})}
+								onclick={selectAll}
+							>
+								<StickyNote class="h-4 w-4" />
+							</TooltipButton>
+							{#if hasActiveFilters()}
 								<TooltipButton
-									popupLabel={m.select_all_page_pals({
+									popupLabel={m.select_all_filtered_pals({
 										pals: c.pals,
-										count: upsState.pals.length
+										count: upsState.pagination.totalCount
 									})}
+									onclick={selectAllFiltered}
 								>
-									<Button type="button" variant="ghost" size="sm" onclick={selectAll}>
-										{m.page()}
-									</Button>
+									<ReplaceAll />
 								</TooltipButton>
-								{#if hasActiveFilters()}
-									<TooltipButton
-										popupLabel={m.select_all_filtered_pals({
-											pals: c.pals,
-											count: upsState.pagination.totalCount
-										})}
-									>
-										<Button type="button" variant="ghost" size="sm" onclick={selectAllFiltered}>
-											{m.filtered()}
-										</Button>
-									</TooltipButton>
-								{:else}
-									<TooltipButton
-										popupLabel={m.select_all_ups_pals({
-											pals: c.pals,
-											count: upsState.pagination.totalCount
-										})}
-									>
-										<Button type="button" variant="ghost" size="sm" onclick={selectAllFiltered}>
-											{m.all_entity({ entity: m.ups() })}
-										</Button>
-									</TooltipButton>
-								{/if}
-							</nav>
-							{#if upsState.hasSelectedPals}
-								<span class="text-surface-400">•</span>
-								<button onclick={clearSelection} class="text-primary-600 hover:text-primary-700">
-									{m.clear_selection()}
-								</button>
+							{:else}
+								<TooltipButton
+									popupLabel={m.select_all_ups_pals({
+										pals: c.pals,
+										count: upsState.pagination.totalCount
+									})}
+									onclick={selectAllFiltered}
+								>
+									<ReplaceAll />
+								</TooltipButton>
 							{/if}
-						</div>
+							{#if upsState.hasSelectedPals}
+								<TooltipButton popupLabel={m.clear_selection()} onclick={clearSelection}>
+									<X class="h-4 w-4" />
+								</TooltipButton>
+							{/if}
+						</nav>
 					</div>
+					<div class="flex items-center gap-2">
+					{#if upsState.hasSelectedPals}
+						<TooltipButton
+							onclick={handleBulkEditTags}
+							variant="primary"
+							size="icon"
+							popupLabel={m.edit_entity({ entity: c.tags })}
+						>
+							<Tag class="h-4 w-4" />
+						</TooltipButton>
+						<TooltipButton
+							onclick={handleBulkAddToCollection}
+							variant="secondary"
+							size="icon"
+							popupLabel={m.add_to_collection()}
+						>
+							<Folder class="h-4 w-4" />
+						</TooltipButton>
+						<TooltipButton
+							onclick={handleBulkExport}
+							class="rounded-md bg-purple-500 p-2 text-white hover:bg-purple-600"
+							popupLabel={m.export_selected()}
+						>
+							<Upload class="h-4 w-4" />
+						</TooltipButton>
+						<TooltipButton
+							onclick={deleteSelected}
+							class="rounded-md bg-red-500 p-2 text-white hover:bg-red-600"
+							popupLabel={m.delete_entity({ entity: m.selected() })}
+						>
+							<Trash class="h-4 w-4" />
+						</TooltipButton>
+					{/if}
+					{#if upsState.pagination.totalCount > 0}
+						<TooltipButton popupLabel={m.nuke_ups({ pals: c.pals })}>
+							<button
+								class="text-error-500 hover:bg-error-500/20 hover:text-error-600 h-8 w-8 rounded-md p-2 transition-colors"
+								onclick={handleNukeUps}
+								disabled={upsState.loading}
+							>
+								<Nuke size={16} />
+							</button>
+						</TooltipButton>
+					{/if}
+				</div>
 					<div class="text-surface-600 dark:text-surface-400">
 						{m.page_of_pages({ current: currentPage, total: totalPages })}
 					</div>
