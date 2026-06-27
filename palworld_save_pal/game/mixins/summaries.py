@@ -1,7 +1,16 @@
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import time
-from typing import Any, Dict, List, Optional, Tuple
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple
 from uuid import UUID
+
+if TYPE_CHECKING:
+    from palworld_save_pal.game.mixins._save_manager_protocol import (
+        SaveManagerProtocol,
+    )
+
+    _Base = SaveManagerProtocol
+else:
+    _Base = object
 
 from palworld_save_pal.dto.summary import PlayerSummary, GuildSummary
 from palworld_save_pal.game.pal_objects import PalObjects
@@ -13,7 +22,7 @@ from palworld_save_pal.utils.json_manager import sanitize_string
 logger = create_logger(__name__)
 
 
-class SummariesMixin:
+class SummariesMixin(_Base):
     def get_player_summaries(self) -> Dict[UUID, PlayerSummary]:
         valid_summaries = {}
         filtered_count = 0

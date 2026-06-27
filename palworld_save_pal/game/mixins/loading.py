@@ -1,6 +1,15 @@
 import time
-from typing import Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any, Dict, List, Optional
 from uuid import UUID
+
+if TYPE_CHECKING:
+    from palworld_save_pal.game.mixins._save_manager_protocol import (
+        SaveManagerProtocol,
+    )
+
+    _Base = SaveManagerProtocol
+else:
+    _Base = object
 
 from palworld_save_tools.gvas import GvasFile
 from palworld_save_tools.palsav import decompress_sav_to_gvas
@@ -20,7 +29,7 @@ from palworld_save_pal.utils.uuid import are_equal_uuids, is_empty_uuid
 logger = create_logger(__name__)
 
 
-class LoadingMixin:
+class LoadingMixin(_Base):
     def is_player_loaded(self, player_id: UUID) -> bool:
         return player_id in self._loaded_players
 

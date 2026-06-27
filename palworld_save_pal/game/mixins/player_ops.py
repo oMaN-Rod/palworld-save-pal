@@ -1,5 +1,14 @@
-from typing import Dict, List, Optional, Tuple
+from typing import TYPE_CHECKING, Dict, List, Optional, Tuple
 from uuid import UUID
+
+if TYPE_CHECKING:
+    from palworld_save_pal.game.mixins._save_manager_protocol import (
+        SaveManagerProtocol,
+    )
+
+    _Base = SaveManagerProtocol
+else:
+    _Base = object
 
 from palworld_save_pal.dto.player import PlayerDTO
 from palworld_save_pal.game.pal_objects import PalObjects
@@ -9,7 +18,7 @@ from palworld_save_pal.utils.uuid import are_equal_uuids
 logger = create_logger(__name__)
 
 
-class PlayerOpsMixin:
+class PlayerOpsMixin(_Base):
     def get_players(self):
         return self._players
 

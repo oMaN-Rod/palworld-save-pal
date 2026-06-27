@@ -1,5 +1,14 @@
-from typing import Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any, Dict, List, Optional
 from uuid import UUID
+
+if TYPE_CHECKING:
+    from palworld_save_pal.game.mixins._save_manager_protocol import (
+        SaveManagerProtocol,
+    )
+
+    _Base = SaveManagerProtocol
+else:
+    _Base = object
 
 from palworld_save_pal.dto.guild import GuildDTO
 from palworld_save_pal.game.guild import Guild
@@ -10,7 +19,7 @@ from palworld_save_pal.utils.uuid import are_equal_uuids, is_empty_uuid
 logger = create_logger(__name__)
 
 
-class GuildOpsMixin:
+class GuildOpsMixin(_Base):
     def get_guild(self, guild_id: UUID) -> Optional[Guild]:
         return self._guilds.get(guild_id, None)
 

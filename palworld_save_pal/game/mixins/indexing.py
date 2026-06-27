@@ -1,5 +1,14 @@
-from typing import Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any, Dict, List, Optional
 from uuid import UUID
+
+if TYPE_CHECKING:
+    from palworld_save_pal.game.mixins._save_manager_protocol import (
+        SaveManagerProtocol,
+    )
+
+    _Base = SaveManagerProtocol
+else:
+    _Base = object
 
 from palworld_save_pal.game.pal_objects import PalObjects
 from palworld_save_pal.utils.indexed_collection import IndexedCollection
@@ -8,7 +17,7 @@ from palworld_save_pal.utils.logging_config import create_logger
 logger = create_logger(__name__)
 
 
-class IndexingMixin:
+class IndexingMixin(_Base):
     def invalidate_performance_caches(self) -> None:
         self._pal_owner_counts_cache = None
         self._player_guild_map_cache = None

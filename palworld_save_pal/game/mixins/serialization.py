@@ -1,7 +1,16 @@
 import copy
 import os
-from typing import Any, Dict, Optional
+from typing import TYPE_CHECKING, Any, Dict, Optional
 from uuid import UUID
+
+if TYPE_CHECKING:
+    from palworld_save_pal.game.mixins._save_manager_protocol import (
+        SaveManagerProtocol,
+    )
+
+    _Base = SaveManagerProtocol
+else:
+    _Base = object
 
 from palworld_save_tools.gvas import GvasFile
 from palworld_save_tools.palsav import compress_gvas_to_sav, decompress_sav_to_gvas
@@ -20,7 +29,7 @@ from palworld_save_pal.utils.perf import gc_paused
 logger = create_logger(__name__)
 
 
-class SerializationMixin:
+class SerializationMixin(_Base):
     def get_json(self, minify=False, allow_nan=True):
         logger.info("Converting %s to JSON", self.level_sav_path)
         with gc_paused():

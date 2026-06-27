@@ -1,5 +1,14 @@
-from typing import Any, Callable, Dict, Optional
+from typing import TYPE_CHECKING, Any, Callable, Dict, Optional
 from uuid import UUID
+
+if TYPE_CHECKING:
+    from palworld_save_pal.game.mixins._save_manager_protocol import (
+        SaveManagerProtocol,
+    )
+
+    _Base = SaveManagerProtocol
+else:
+    _Base = object
 
 from palworld_save_pal.game.pal_objects import PalObjects
 from palworld_save_pal.utils.logging_config import create_logger
@@ -49,7 +58,7 @@ def _deep_swap_uids(data: Any, old_uid: str, new_uid: str) -> None:
             _deep_swap_uids(item, old_uid, new_uid)
 
 
-class PlayerSwapMixin:
+class PlayerSwapMixin(_Base):
     async def swap_player_uids(
         self,
         old_player_uid: UUID,
