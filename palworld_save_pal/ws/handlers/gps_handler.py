@@ -1,4 +1,5 @@
 from typing import Any, Dict
+from uuid import UUID
 from fastapi import WebSocket
 from palworld_save_pal.state import get_app_state
 from palworld_save_pal.ws.messages import (
@@ -11,7 +12,6 @@ from palworld_save_pal.ws.messages import (
 )
 from palworld_save_pal.dto.pal import PalDTO
 from palworld_save_pal.utils.uuid import are_equal_uuids
-from uuid import UUID
 from palworld_save_pal.ws.utils import build_response
 from palworld_save_pal.utils.logging_config import create_logger
 

@@ -281,8 +281,11 @@ class TestCloneGpsPalToPlayerHandler:
 
         mock_app_state.save_file.add_player_dps_pal_from_dto.assert_called_once()
         assert ws.sent[0]["type"] == MessageType.ADD_DPS_PAL.value
+        assert ws.sent[0]["data"]["player_id"] == str(player_uid)
         assert ws.sent[0]["data"]["index"] == 5
+        assert ws.sent[-1]["type"] == MessageType.CLONE_GPS_PAL_TO_PLAYER.value
         assert ws.sent[-1]["data"]["cloned_count"] == 1
+        assert ws.sent[-1]["data"]["success"] is True
 
     @pytest.mark.asyncio
     async def test_add_failure_recorded_as_error(self, ws, mock_app_state):
