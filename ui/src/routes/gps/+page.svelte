@@ -346,7 +346,7 @@
 		if (!appState.gps) return;
 		// @ts-ignore
 		const result = await modal.showModal<[string, string] | undefined>(PalSelectModal, {
-			title: m.add_new_pal_to_entity({ entity: m.global_pal_storage({ pal: m.pal({ count: 1 }) }) })
+			title: m.add_new_pal_to_entity({ entity: m.global_pal_storage({ pal: c.pal }) })
 		});
 		if (!result) return;
 		const [selectedPal, nickname] = result;
@@ -371,7 +371,7 @@
 		const result = await modal.showModal<number>(NumberInputModal, {
 			title: m.how_many_clones(),
 			message: m.slots_available_in_entity({
-				entity: m.global_pal_storage({ pal: m.pal({ count: 1 }) }),
+				entity: m.global_pal_storage({ pal: c.pal }),
 				count: maxClones
 			}),
 			value: 1,
@@ -471,9 +471,9 @@
 		selectedPals = [];
 	}
 
-	async function handleDeletePal(pal: Pal) {
+	async function handleDeletePal(pal: Pal) {		
 		const confirmed = await modal.showConfirmModal({
-			title: m.delete_entity({ entity: m.pal({ count: 1 }) }),
+			title: m.delete_entity({ entity: c.pal }),
 			message: m.delete_entity_by_name_confirm({ name: pal.nickname || pal.name }),
 			confirmText: m.delete(),
 			cancelText: m.cancel()
@@ -534,9 +534,9 @@
 		// @ts-ignore
 		const result = await modal.showModal<CloneToUpsModalProps>(CloneToUpsModal, {
 			title: m.clone_to_entity({ entity: m.ups() }),
-			message: m.clone_selected_to_entity({
-				pals: m.pal({ count: 1 }),
-				entity: m.universal_pal_storage({ pal: m.pal({ count: 1 }) })
+			message: m.clone_pal_to_entity({
+				pal: c.pal,
+				entity: m.universal_pal_storage({ pal: c.pal })
 			}),
 			pals: [pal]
 		});
@@ -691,7 +691,7 @@
 		if (!appState.gps) return;
 		// @ts-ignore
 		await modal.showModal<string>(FillPalsModal, {
-			title: m.fill_entity({ entity: m.global_pal_storage({ pal: m.pal({ count: 1 }) }) }),
+			title: m.fill_entity({ entity: m.global_pal_storage({ pal: c.pal }) }),
 			player: appState.selectedPlayer,
 			target: 'gps'
 		});
@@ -754,7 +754,7 @@
 							<Play />
 						</Button>
 					</Tooltip>
-					<Tooltip label={m.clone_selected_to_entity({ entity: m.ups(), pals: c.pals })}>
+					<Tooltip label={m.clone_pal_to_entity({ entity: m.ups(), pal: c.pal })}>
 						<Button variant="ghost" size="icon" onclick={handleBulkCloneToUps}>
 							<Upload />
 						</Button>
@@ -823,7 +823,7 @@
 										<NameSortIcon />
 									</button>
 								</Tooltip>
-								<Tooltip label={m.sort_by_paldeck()}>
+								<Tooltip label={m.sort_by_entity({ entity: m.paldeck() })}>
 									<button
 										type="button"
 										class={sortButtonClass('paldeck-index')}

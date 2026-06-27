@@ -470,7 +470,7 @@
 		// @ts-ignore
 		const result = await modal.showModal<CloneToUpsModalProps>(CloneToUpsModal, {
 			title: m.clone_to_entity({ entity: m.ups() }),
-			message: m.clone_selected_to_entity({ pals: c.pals, entity: c.universalPalStorage }),
+			message: m.clone_pal_to_entity({ pal: c.pal, entity: c.universalPalStorage }),
 			pals: [pal]
 		});
 
@@ -514,9 +514,8 @@
 		// @ts-ignore
 		const result = await modal.showModal<CloneToUpsModalProps>(CloneToUpsModal, {
 			title: m.clone_to_entity({ entity: c.universalPalStorage }),
-			message: m.clone_selected_pals_to_entity({
-				count: palsToClone.length,
-				pals: m.pal({ count: palsToClone.length }),
+			message: m.clone_pal_to_entity({
+				pal: m.pal({ count: palsToClone.length }),
 				entity: c.universalPalStorage
 			}),
 			pals: palsToClone

@@ -763,7 +763,7 @@
 											<NameSortIcon />
 										</button>
 									</Tooltip>
-									<Tooltip label={m.sort_by_paldeck()}>
+									<Tooltip label={m.sort_by_entity({ entity: m.paldeck() })}>
 										<button
 											type="button"
 											class={sortButtonClass('paldeck-index')}
