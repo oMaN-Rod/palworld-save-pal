@@ -43,6 +43,7 @@ class MessageType(str, Enum):
     CLONE_UPS_PAL = "clone_ups_pal"
     CLONE_TO_UPS = "clone_to_ups"
     EXPORT_UPS_PAL = "export_ups_pal"
+    CLONE_GPS_PAL_TO_PLAYER = "clone_gps_pal_to_player"
     IMPORT_TO_UPS = "import_to_ups"
     GET_UPS_COLLECTIONS = "get_ups_collections"
     CREATE_UPS_COLLECTION = "create_ups_collection"
@@ -225,6 +226,17 @@ class CloneGpsPalData(BaseModel):
 class CloneGpsPalMessage(BaseMessage):
     type: str = MessageType.CLONE_GPS_PAL.value
     data: CloneGpsPalData
+
+
+class CloneGpsPalToPlayerData(BaseModel):
+    pal_ids: List[str]  # Instance IDs of GPS pals to clone
+    destination_type: str  # "pal_box" or "dps"
+    destination_player_uid: str
+
+
+class CloneGpsPalToPlayerMessage(BaseMessage):
+    type: str = MessageType.CLONE_GPS_PAL_TO_PLAYER.value
+    data: CloneGpsPalToPlayerData
 
 
 class DeletePalsData(BaseModel):

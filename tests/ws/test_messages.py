@@ -136,3 +136,25 @@ class TestGpsMessageDefaults:
     def test_delete_gps_pals_message_default_type(self):
         msg = DeleteGpsPalsMessage(data=DeletePalsData(pal_indexes=[0]))
         assert msg.type == MessageType.DELETE_GPS_PALS.value
+
+
+def test_clone_gps_pal_to_player_message_schema():
+    from palworld_save_pal.ws.messages import (
+        CloneGpsPalToPlayerData,
+        CloneGpsPalToPlayerMessage,
+        MessageType,
+    )
+
+    msg = CloneGpsPalToPlayerMessage(
+        data=CloneGpsPalToPlayerData(
+            pal_ids=["abc"],
+            destination_type="pal_box",
+            destination_player_uid="def",
+        )
+    )
+
+    assert msg.type == MessageType.CLONE_GPS_PAL_TO_PLAYER.value
+    assert MessageType.CLONE_GPS_PAL_TO_PLAYER.value == "clone_gps_pal_to_player"
+    assert msg.data.pal_ids == ["abc"]
+    assert msg.data.destination_type == "pal_box"
+    assert msg.data.destination_player_uid == "def"
