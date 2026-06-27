@@ -53,6 +53,7 @@
   "ammo": "Ammo",
   "ancient_technology_points": "Ancient Technology Points",
   "and_more_count": "+{count} more",
+  "append_to_empty_slots": "Append preset items to empty slots",
   "apply_preset": "Apply a preset",
   "apply_preset_to_selected": "Apply preset to selected {pals}",
   "apply_presets": "Apply Presets",
