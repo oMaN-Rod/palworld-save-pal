@@ -9,7 +9,8 @@
 		FillPalsModal,
 		NumberInputModal,
 		PalPresetSelectModal,
-		CloneToUpsModal
+		CloneToUpsModal,
+		ExportPalModal
 	} from '$components/modals';
 	import {
 		type ElementType,
@@ -44,7 +45,8 @@
 		CircleFadingPlus,
 		Info,
 		Play,
-		Upload
+		Upload,
+		Users
 	} from 'lucide-svelte';
 	import { PalBadge, PalContainerStats } from '$components/pal';
 	import { send } from '$lib/utils/websocketUtils';
@@ -619,6 +621,72 @@
 		}
 	}
 
+	async function handleCloneToPlayer(pal: Pal) {
+		// @ts-ignore
+		const result = await modal.showModal<{ target: string; playerId?: string }>(ExportPalModal, {
+			title: m.clone_to_entity({ entity: m.player({ count: 1 }) }),
+			message: m.clone_pal_to_entity({ pal: c.pal, entity: m.player({ count: 1 }) }),
+			pals: [pal],
+			hideGps: true
+		});
+
+		if (!result || result.target === 'gps' || !result.playerId) return;
+
+		send(MessageType.CLONE_GPS_PAL_TO_PLAYER, {
+			pal_ids: [pal.instance_id],
+			destination_type: result.target,
+			destination_player_uid: result.playerId
+		});
+
+		toast.add(
+			m.successfully_cloned_pals_to_entity({
+				count: 1,
+				pals: c.pals,
+				entity: m.player({ count: 1 })
+			}),
+			m.success(),
+			'success'
+		);
+	}
+
+	async function handleBulkCloneToPlayer() {
+		if (selectedPals.length === 0) return;
+
+		const palsToClone = selectedPals
+			.map((id) => pals?.find((p) => p.id === id)?.pal)
+			.filter(Boolean) as Pal[];
+
+		if (palsToClone.length === 0) return;
+
+		// @ts-ignore
+		const result = await modal.showModal<{ target: string; playerId?: string }>(ExportPalModal, {
+			title: m.clone_to_entity({ entity: m.player({ count: 1 }) }),
+			message: m.clone_pal_to_entity({ pal: c.pals, entity: m.player({ count: 1 }) }),
+			pals: palsToClone,
+			hideGps: true
+		});
+
+		if (!result || result.target === 'gps' || !result.playerId) return;
+
+		send(MessageType.CLONE_GPS_PAL_TO_PLAYER, {
+			pal_ids: palsToClone.map((p) => p.instance_id),
+			destination_type: result.target,
+			destination_player_uid: result.playerId
+		});
+
+		toast.add(
+			m.successfully_cloned_pals_to_entity({
+				count: palsToClone.length,
+				pals: c.pals,
+				entity: m.player({ count: 1 })
+			}),
+			m.success(),
+			'success'
+		);
+
+		selectedPals = [];
+	}
+
 	async function addAllPalsGps() {
 		if (!appState.gps) return;
 		// @ts-ignore
@@ -689,6 +757,11 @@
 					<Tooltip label={m.clone_selected_to_entity({ entity: m.ups(), pals: c.pals })}>
 						<Button variant="ghost" size="icon" onclick={handleBulkCloneToUps}>
 							<Upload />
+						</Button>
+					</Tooltip>
+					<Tooltip label={m.clone_to_entity({ entity: m.player({ count: 1 }) })}>
+						<Button variant="ghost" size="icon" onclick={handleBulkCloneToPlayer}>
+							<Users />
 						</Button>
 					</Tooltip>
 					<Tooltip
@@ -913,6 +986,7 @@
 								onAdd={() => handleAddPal(item.index)}
 								onClone={() => handleClonePal(item.pal)}
 								onCloneToUps={() => handleCloneToUps(item.pal)}
+								onCloneToPlayer={() => handleCloneToPlayer(item.pal)}
 							/>
 						{/if}
 					{/each}
