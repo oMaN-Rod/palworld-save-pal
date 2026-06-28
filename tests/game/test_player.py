@@ -5,7 +5,8 @@ from uuid import UUID
 
 import pytest
 
-from palworld_save_pal.game.player import Player
+from palworld_save_pal.game.pal_objects import PalObjects
+from palworld_save_pal.game.player import Player, PlayerGvasFiles
 from tests.game.conftest import PLAYER_O_UID, PLAYER_SKY_UID, _noop
 
 
@@ -53,6 +54,42 @@ class TestPlayerSky:
 
     def test_level(self, player_sky):
         assert player_sky.level == 2
+
+
+class TestPlayerWithoutRecordData:
+    """Some player saves have no RecordData property; loading must not crash."""
+
+    def test_loads_without_record_data(self, player_o):
+        save_data = PalObjects.get_value(
+            player_o._player_gvas_files.sav.properties["SaveData"]
+        )
+        save_data.pop("RecordData", None)
+
+        gvas_files = PlayerGvasFiles(sav=player_o._player_gvas_files.sav, dps=None)
+        player = Player(
+            gvas_files=gvas_files,
+            character_save_parameter=player_o._character_save,
+        )
+
+        assert player._record_data == {}
+
+    def test_setters_persist_without_record_data(self, player_o):
+        save_data = PalObjects.get_value(
+            player_o._player_gvas_files.sav.properties["SaveData"]
+        )
+        save_data.pop("RecordData", None)
+
+        gvas_files = PlayerGvasFiles(sav=player_o._player_gvas_files.sav, dps=None)
+        player = Player(
+            gvas_files=gvas_files,
+            character_save_parameter=player_o._character_save,
+        )
+
+        player.collected_effigies = ["TestFlag"]
+
+        # The created RecordData must be wired into SaveData so writes persist.
+        assert "RecordData" in save_data
+        assert player.collected_effigies == ["TestFlag"]
 
 
 class TestPlayerContainers:

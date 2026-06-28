@@ -77,6 +77,10 @@ class Player(BaseModel):
             self._save_data = PalObjects.get_value(
                 self._player_gvas_files.sav.properties["SaveData"]
             )
+            if "RecordData" not in self._save_data:
+                self._save_data["RecordData"] = (
+                    PalObjects.PalLoggedinPlayerSaveDataRecordData({})
+                )
             self._record_data = PalObjects.get_value(self._save_data["RecordData"])
             self._guild = guild
 
