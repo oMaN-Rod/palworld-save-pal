@@ -605,7 +605,7 @@ dependencies = [
 
 [[package]]
 name = "palworldsavepal"
-version = "0.17.0b4"
+version = "0.17.2"
 source = { virtual = "." }
 dependencies = [
     { name = "altgraph" },
