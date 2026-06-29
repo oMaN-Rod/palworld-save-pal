@@ -20,6 +20,8 @@ class GuildSummary(BaseModel):
     admin_player_uid: Optional[UUID] = None
     player_count: int = 0
     base_count: int = 0
+    level: Optional[int] = None
+    pal_count: int = 0
     loaded: bool = False
 
 

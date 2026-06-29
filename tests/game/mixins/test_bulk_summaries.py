@@ -45,3 +45,21 @@ def test_player_summaries_include_last_online_time(fresh_save_manager):
         isinstance(s.last_online_time, datetime)
         for s in injected_summaries.values()
     )
+
+
+def test_guild_summaries_include_level_and_pal_count(fresh_save_manager):
+    summaries = fresh_save_manager.get_guild_summaries()
+    assert len(summaries) > 0
+    for summary in summaries.values():
+        assert hasattr(summary, "level")
+        assert hasattr(summary, "pal_count")
+        assert isinstance(summary.pal_count, int)
+        assert summary.pal_count >= 0
+
+    # The world1 guild that has at least one base should report a level.
+    guild_with_base = next(
+        (s for s in summaries.values() if s.base_count > 0), None
+    )
+    assert guild_with_base is not None
+    assert guild_with_base.level is not None
+    assert guild_with_base.pal_count >= 0

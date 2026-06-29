@@ -234,6 +234,55 @@ class SummariesMixin(_Base):
 
         return summaries
 
+    def _count_guild_base_pals(self, guild_id: UUID) -> int:
+        """Count base/work pals across a guild's bases, using container slot
+        lists already present in the save data (no full base load)."""
+        if not self._base_camp_save_data_map or not self._character_save_parameter_map:
+            return 0
+
+        # Collect container IDs for bases belonging to this guild
+        guild_base_container_ids = set()
+        for base in self._base_camp_save_data_map:
+            base_guild_id = PalObjects.as_uuid(
+                PalObjects.get_nested(
+                    base, "value", "RawData", "value", "group_id_belong_to"
+                )
+            )
+            if not are_equal_uuids(base_guild_id, guild_id):
+                continue
+            container_id = PalObjects.as_uuid(
+                PalObjects.get_nested(
+                    base, "value", "WorkerDirector", "value", "RawData", "value", "container_id"
+                )
+            )
+            if container_id:
+                guild_base_container_ids.add(container_id)
+
+        # Count pals that belong to guild base containers
+        total = 0
+        for entry in self._character_save_parameter_map:
+            if self._is_player(entry):
+                continue
+
+            save_parameter = PalObjects.get_nested(
+                entry, "value", "RawData", "value", "object", "SaveParameter", "value"
+            )
+            if not save_parameter:
+                continue
+
+            slot_id = save_parameter.get("SlotId")
+            if not slot_id:
+                continue
+
+            pal_container_id = PalObjects.get_guid(
+                PalObjects.get_nested(slot_id, "value", "ContainerId", "value", "ID")
+            )
+
+            if pal_container_id in guild_base_container_ids:
+                total += 1
+
+        return total
+
     def _extract_guild_summaries(self) -> Dict[UUID, GuildSummary]:
         summaries = {}
 
@@ -277,12 +326,17 @@ class SummariesMixin(_Base):
                     )
                 )
 
+            level = raw_data.get("base_camp_level")
+            pal_count = self._count_guild_base_pals(guild_id)
+
             summaries[guild_id] = GuildSummary(
                 id=guild_id,
                 name=name,
                 admin_player_uid=admin_player_uid,
                 player_count=len(players),
                 base_count=base_count,
+                level=level,
+                pal_count=pal_count,
                 loaded=False,
             )
 
