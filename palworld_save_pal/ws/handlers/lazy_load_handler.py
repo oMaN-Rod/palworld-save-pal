@@ -23,7 +23,8 @@ async def request_player_details_handler(
     message: RequestPlayerDetailsMessage, ws: WebSocket
 ) -> None:
     app_state = get_app_state()
-    player_id = message.data
+    player_id = message.data.player_id
+    origin = message.data.origin
 
     logger.info(f"Request player details for {player_id}")
 
@@ -32,7 +33,7 @@ async def request_player_details_handler(
         await ws.send_json(
             build_response(
                 MessageType.GET_PLAYER_DETAILS_RESPONSE,
-                {"error": "No save file loaded"},
+                {"error": "No save file loaded", "origin": origin},
             )
         )
         return
@@ -49,6 +50,7 @@ async def request_player_details_handler(
                 {
                     "player": player,
                     "player_id": str(player_id),
+                    "origin": origin,
                 },
             )
         )
@@ -57,7 +59,7 @@ async def request_player_details_handler(
         await ws.send_json(
             build_response(
                 MessageType.GET_PLAYER_DETAILS_RESPONSE,
-                {"error": f"Player {player_id} not found"},
+                {"error": f"Player {player_id} not found", "origin": origin},
             )
         )
 

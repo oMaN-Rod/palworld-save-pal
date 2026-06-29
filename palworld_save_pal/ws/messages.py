@@ -735,9 +735,14 @@ class UnlockMapMessage(BaseMessage):
 
 
 # Lazy Loading Message Classes
+class RequestPlayerDetailsData(BaseModel):
+    player_id: UUID
+    origin: str = "edit"
+
+
 class RequestPlayerDetailsMessage(BaseMessage):
     type: str = MessageType.REQUEST_PLAYER_DETAILS.value
-    data: UUID  # Player UID to load
+    data: RequestPlayerDetailsData
 
 
 class RequestGuildDetailsMessage(BaseMessage):
