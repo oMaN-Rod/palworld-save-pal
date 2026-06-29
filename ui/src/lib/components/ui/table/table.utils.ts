@@ -86,3 +86,36 @@ export function paginateRows<T>(rows: T[], state: PageState): T[] {
 	const info = computePageInfo(state, rows.length);
 	return rows.slice(info.startIndex, info.endIndex + 1);
 }
+
+/** Toggle a single key, returning a new set (never mutates the input). */
+export function toggleSelection(selected: Set<string>, key: string): Set<string> {
+	const next = new Set(selected);
+	if (next.has(key)) {
+		next.delete(key);
+	} else {
+		next.add(key);
+	}
+	return next;
+}
+
+/** Add or remove a batch of keys (used by the header select-all checkbox). */
+export function setPageSelection(
+	selected: Set<string>,
+	keys: string[],
+	shouldSelect: boolean
+): Set<string> {
+	const next = new Set(selected);
+	for (const key of keys) {
+		if (shouldSelect) {
+			next.add(key);
+		} else {
+			next.delete(key);
+		}
+	}
+	return next;
+}
+
+/** Whether every provided key is currently selected. Empty key list is never "all selected". */
+export function areAllSelected(selected: Set<string>, keys: string[]): boolean {
+	return keys.length > 0 && keys.every((key) => selected.has(key));
+}

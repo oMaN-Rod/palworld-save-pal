@@ -143,3 +143,44 @@ describe('paginateRows', () => {
 		expect(paginateRows([], { page: 1, pageSize: 10 })).toEqual([]);
 	});
 });
+
+import { areAllSelected, setPageSelection, toggleSelection } from './table.utils';
+
+describe('toggleSelection', () => {
+	it('adds a key when absent and returns a new set', () => {
+		const original = new Set<string>(['a']);
+		const result = toggleSelection(original, 'b');
+		expect(result).not.toBe(original);
+		expect([...result].sort()).toEqual(['a', 'b']);
+	});
+
+	it('removes a key when present', () => {
+		expect([...toggleSelection(new Set(['a', 'b']), 'a')]).toEqual(['b']);
+	});
+});
+
+describe('setPageSelection', () => {
+	it('adds all keys when selecting', () => {
+		const result = setPageSelection(new Set(['x']), ['a', 'b'], true);
+		expect([...result].sort()).toEqual(['a', 'b', 'x']);
+	});
+
+	it('removes all keys when deselecting', () => {
+		const result = setPageSelection(new Set(['a', 'b', 'x']), ['a', 'b'], false);
+		expect([...result]).toEqual(['x']);
+	});
+});
+
+describe('areAllSelected', () => {
+	it('is true when every key is selected', () => {
+		expect(areAllSelected(new Set(['a', 'b', 'c']), ['a', 'b'])).toBe(true);
+	});
+
+	it('is false when any key is missing', () => {
+		expect(areAllSelected(new Set(['a']), ['a', 'b'])).toBe(false);
+	});
+
+	it('is false for an empty key list', () => {
+		expect(areAllSelected(new Set(['a']), [])).toBe(false);
+	});
+});
