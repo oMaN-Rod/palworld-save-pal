@@ -19,7 +19,8 @@
 		NotebookPen,
 		Wrench,
 		Server,
-		BookOpen
+		BookOpen,
+		Layers
 	} from 'lucide-svelte';
 
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
@@ -48,6 +49,7 @@
 		if (page.url.pathname.startsWith('/debug')) return 'debug';
 		if (page.url.pathname.startsWith('/servers')) return 'servers';
 		if (page.url.pathname.startsWith('/docs')) return 'docs';
+		if (page.url.pathname.startsWith('/bulk')) return 'bulk';
 		return '';
 	});
 
@@ -216,6 +218,15 @@
 			active="active-nav-tile"
 		>
 			<Wrench />
+		</Navigation.Tile>
+		<Navigation.Tile
+			labelExpanded={m.bulk_actions()}
+			title={m.bulk_actions()}
+			id="bulk"
+			href="/bulk"
+			active="active-nav-tile"
+		>
+			<Layers />
 		</Navigation.Tile>
 		<Navigation.Tile
 			labelExpanded={m.docs()}
