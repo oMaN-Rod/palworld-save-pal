@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Optional
 from uuid import UUID
 from pydantic import BaseModel
@@ -9,6 +10,7 @@ class PlayerSummary(BaseModel):
     level: Optional[int] = None
     guild_id: Optional[UUID] = None
     pal_count: int = 0
+    last_online_time: Optional[datetime] = None
     loaded: bool = False
 
 

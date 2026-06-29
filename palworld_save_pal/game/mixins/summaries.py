@@ -1,5 +1,6 @@
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import time
+from datetime import datetime, timedelta
 from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple
 from uuid import UUID
 
@@ -20,6 +21,14 @@ from palworld_save_pal.utils.uuid import are_equal_uuids, is_empty_uuid
 from palworld_save_pal.utils.json_manager import sanitize_string
 
 logger = create_logger(__name__)
+
+
+def ticks_to_datetime(ticks: int) -> datetime:
+    """Convert .NET-style ticks (100ns since 0001-01-01) to a datetime."""
+    seconds = ticks / 10_000_000
+    days = int(seconds // 86400)
+    seconds_remainder = seconds % 86400
+    return datetime(1, 1, 1) + timedelta(days=days, seconds=seconds_remainder)
 
 
 class SummariesMixin(_Base):
@@ -158,12 +167,20 @@ class SummariesMixin(_Base):
         if "Level" in save_parameter:
             level = PalObjects.get_byte_property(save_parameter["Level"])
 
+        last_online_time = None
+        last_online_raw = save_parameter.get("LastOnlineRealTime")
+        if last_online_raw is not None:
+            ticks = PalObjects.get_value(last_online_raw)
+            if ticks:
+                last_online_time = ticks_to_datetime(ticks)
+
         return PlayerSummary(
             uid=uid,
             nickname=nickname,
             level=level,
             guild_id=player_guild_map.get(uid),
             pal_count=pal_owner_counts.get(uid, 0),
+            last_online_time=last_online_time,
             loaded=False,
         )
 
