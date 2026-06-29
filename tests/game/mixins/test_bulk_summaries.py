@@ -1,6 +1,8 @@
 from datetime import datetime
 
 from palworld_save_pal.game.mixins.summaries import ticks_to_datetime
+from palworld_save_pal.game.pal_objects import PalObjects
+from palworld_save_pal.utils.uuid import are_equal_uuids
 from tests.game.conftest import _load_save_manager, WORLD1_DIR
 
 
@@ -62,4 +64,76 @@ def test_guild_summaries_include_level_and_pal_count(fresh_save_manager):
     )
     assert guild_with_base is not None
     assert guild_with_base.level is not None
-    assert guild_with_base.pal_count >= 0
+    # Meaningful counting is verified by test_guild_pal_count_increases_with_injected_base_pal.
+
+
+def test_guild_pal_count_increases_with_injected_base_pal():
+    """Injection test: _count_guild_base_pals must increment pal_count by exactly 1
+    when one synthetic non-player entry whose SlotId matches a guild base container
+    is added to _character_save_parameter_map."""
+    sm = _load_save_manager(WORLD1_DIR)
+    summaries = sm.get_guild_summaries()
+
+    # Find a guild that has at least one base.
+    guild_id = None
+    for gid, summary in summaries.items():
+        if summary.base_count > 0:
+            guild_id = gid
+            break
+    assert guild_id is not None, "world1 must contain a guild with at least one base"
+
+    # Replicate step (1) of _count_guild_base_pals: find the base container_id.
+    base_container_id = None
+    for base in sm._base_camp_save_data_map:
+        base_guild_id = PalObjects.as_uuid(
+            PalObjects.get_nested(base, "value", "RawData", "value", "group_id_belong_to")
+        )
+        if are_equal_uuids(base_guild_id, guild_id):
+            candidate = PalObjects.as_uuid(
+                PalObjects.get_nested(
+                    base,
+                    "value",
+                    "WorkerDirector",
+                    "value",
+                    "RawData",
+                    "value",
+                    "container_id",
+                )
+            )
+            if candidate:
+                base_container_id = candidate
+                break
+    assert base_container_id is not None, "Guild base must expose a WorkerDirector container_id"
+
+    initial_pal_count = summaries[guild_id].pal_count
+
+    # Build a minimal synthetic non-player entry whose SlotId matches the base container.
+    # Omitting "IsPlayer" causes _is_player() to return False for this entry.
+    synthetic_entry = {
+        "key": {
+            "PlayerUId": PalObjects.Guid("00000000-0000-0000-0000-000000000000"),
+            "InstanceId": PalObjects.Guid("ffffffff-ffff-ffff-ffff-ffffffffffff"),
+        },
+        "value": {
+            "RawData": {
+                "value": {
+                    "object": {
+                        "SaveParameter": {
+                            "value": {
+                                "SlotId": PalObjects.PalCharacterSlotId(base_container_id, 99),
+                            }
+                        }
+                    }
+                }
+            }
+        },
+    }
+
+    sm._character_save_parameter_map.append(synthetic_entry)
+    sm._extract_guild_summaries()
+    updated_summaries = sm.get_guild_summaries()
+
+    assert updated_summaries[guild_id].pal_count == initial_pal_count + 1, (
+        f"pal_count should have increased by exactly 1: "
+        f"expected {initial_pal_count + 1}, got {updated_summaries[guild_id].pal_count}"
+    )
