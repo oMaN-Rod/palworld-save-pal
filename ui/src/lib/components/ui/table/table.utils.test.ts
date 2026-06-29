@@ -92,3 +92,54 @@ describe('nextSortState', () => {
 		expect(nextSortState({ key: 'level', direction: 'desc' }, 'level')).toEqual({ key: 'level', direction: 'asc' });
 	});
 });
+
+import { computePageInfo, paginateRows } from './table.utils';
+import type { PageState } from './table.types';
+
+describe('computePageInfo', () => {
+	it('computes ranges for a middle page', () => {
+		const info = computePageInfo({ page: 2, pageSize: 10 }, 25);
+		expect(info).toMatchObject({
+			page: 2,
+			totalPages: 3,
+			startIndex: 10,
+			endIndex: 19,
+			hasPrev: true,
+			hasNext: true
+		});
+	});
+
+	it('clamps a too-large page down to the last page', () => {
+		const info = computePageInfo({ page: 99, pageSize: 10 }, 25);
+		expect(info.page).toBe(3);
+		expect(info.hasNext).toBe(false);
+	});
+
+	it('handles an empty data set', () => {
+		const info = computePageInfo({ page: 1, pageSize: 10 }, 0);
+		expect(info).toMatchObject({ page: 1, totalPages: 1, startIndex: 0, endIndex: 0, hasPrev: false, hasNext: false });
+	});
+
+	it('clamps the last partial page end index to total', () => {
+		const info = computePageInfo({ page: 3, pageSize: 10 }, 25);
+		expect(info.startIndex).toBe(20);
+		expect(info.endIndex).toBe(24);
+	});
+});
+
+describe('paginateRows', () => {
+	const rows = Array.from({ length: 25 }, (_, index) => ({ id: String(index) }));
+
+	it('returns the rows for the requested page', () => {
+		const state: PageState = { page: 2, pageSize: 10 };
+		expect(paginateRows(rows, state).map((r) => r.id)).toEqual(['10', '11', '12', '13', '14', '15', '16', '17', '18', '19']);
+	});
+
+	it('returns the partial final page', () => {
+		expect(paginateRows(rows, { page: 3, pageSize: 10 })).toHaveLength(5);
+	});
+
+	it('returns an empty array for no rows', () => {
+		expect(paginateRows([], { page: 1, pageSize: 10 })).toEqual([]);
+	});
+});

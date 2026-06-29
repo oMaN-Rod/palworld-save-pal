@@ -1,4 +1,4 @@
-import type { ColumnDef, SortDirection, SortState } from './table.types';
+import type { ColumnDef, PageInfo, PageState, SortDirection, SortState } from './table.types';
 
 /** Resolve the comparable value for a row in a given column. */
 export function getSortValue<T>(row: T, column: ColumnDef<T>): string | number | null | undefined {
@@ -57,4 +57,32 @@ export function nextSortState(current: SortState, key: string): SortState {
 		return { key, direction: 'asc' };
 	}
 	return { key, direction: current.direction === 'asc' ? 'desc' : 'asc' };
+}
+
+/** Compute clamped page metadata for the given total row count. */
+export function computePageInfo(state: PageState, total: number): PageInfo {
+	const pageSize = Math.max(1, state.pageSize);
+	const totalPages = Math.max(1, Math.ceil(total / pageSize));
+	const page = Math.min(Math.max(1, state.page), totalPages);
+	const startIndex = total === 0 ? 0 : (page - 1) * pageSize;
+	const endIndex = total === 0 ? 0 : Math.min(startIndex + pageSize, total) - 1;
+	return {
+		page,
+		pageSize,
+		total,
+		totalPages,
+		startIndex,
+		endIndex,
+		hasPrev: page > 1,
+		hasNext: page < totalPages
+	};
+}
+
+/** Slice rows for the current page (client-side pagination). */
+export function paginateRows<T>(rows: T[], state: PageState): T[] {
+	if (rows.length === 0) {
+		return [];
+	}
+	const info = computePageInfo(state, rows.length);
+	return rows.slice(info.startIndex, info.endIndex + 1);
 }
