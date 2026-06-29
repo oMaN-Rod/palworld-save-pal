@@ -26,7 +26,7 @@ export const getGuildSummariesHandler: WSMessageHandler = {
 
 export const getPlayerDetailsResponseHandler: WSMessageHandler = {
 	type: MessageType.GET_PLAYER_DETAILS_RESPONSE,
-	async handle(data: { player: Player; player_id: string } | { error: string }) {
+	async handle(data: { player: Player; player_id: string; origin?: string } | { error: string }) {
 		const appState = getAppState();
 
 		if ('error' in data) {
@@ -35,7 +35,7 @@ export const getPlayerDetailsResponseHandler: WSMessageHandler = {
 			return;
 		}
 
-		const { player, player_id } = data;
+		const { player, player_id, origin } = data;
 		console.log('Received player details for', player.nickname);
 
 		// Process pals to add localized names
@@ -57,10 +57,16 @@ export const getPlayerDetailsResponseHandler: WSMessageHandler = {
 			appState.playerSummaries[player_id].loaded = true;
 		}
 
-		// Set as selected player
+		appState.loadingPlayer = false;
+
+		if (origin === 'bulk') {
+			appState.bulkDetailPlayer = player;
+			return;
+		}
+
+		// Default (edit) path: set as selected player and navigate
 		appState.selectedPlayer = player;
 		appState.selectedPlayerUid = player_id;
-		appState.loadingPlayer = false;
 		goto('/edit/player');
 	}
 };
@@ -88,6 +94,7 @@ export const getGuildDetailsResponseHandler: WSMessageHandler = {
 		}
 
 		appState.loadingGuild = false;
+		appState.bulkDetailGuild = guild;
 	}
 };
 

@@ -28,6 +28,7 @@ export interface PlayerSummary {
 	level?: number;
 	guild_id?: string;
 	pal_count: number;
+	last_online_time?: string;
 	loaded: boolean;
 }
 
@@ -37,6 +38,8 @@ export interface GuildSummary {
 	admin_player_uid?: string;
 	player_count: number;
 	base_count: number;
+	level?: number;
+	pal_count: number;
 	loaded: boolean;
 }
 

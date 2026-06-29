@@ -40,6 +40,8 @@ export class AppState {
 	loadingGps: boolean = $state(false);
 	gpsLoaded: boolean = $state(false);
 	hasGpsAvailable: boolean = $state(false);
+	bulkDetailPlayer: Player | undefined = $state(undefined);
+	bulkDetailGuild: Guild | undefined = $state(undefined);
 
 	resetState() {
 		this.players = {};
@@ -57,6 +59,8 @@ export class AppState {
 		this.loadingGps = false;
 		this.gpsLoaded = false;
 		this.hasGpsAvailable = false;
+		this.bulkDetailPlayer = undefined;
+		this.bulkDetailGuild = undefined;
 	}
 
 	async selectPlayerLazy(playerId: string) {
@@ -67,7 +71,27 @@ export class AppState {
 		}
 
 		this.loadingPlayer = true;
-		send(MessageType.REQUEST_PLAYER_DETAILS, playerId);
+		send(MessageType.REQUEST_PLAYER_DETAILS, { player_id: playerId, origin: 'edit' });
+	}
+
+	loadPlayerDetailsForBulk(playerId: string) {
+		const cached = this.players?.[playerId];
+		if (cached) {
+			this.bulkDetailPlayer = cached;
+			return;
+		}
+		this.loadingPlayer = true;
+		send(MessageType.REQUEST_PLAYER_DETAILS, { player_id: playerId, origin: 'bulk' });
+	}
+
+	loadGuildDetailsForBulk(guildId: string) {
+		const cached = this.guilds?.[guildId];
+		if (cached) {
+			this.bulkDetailGuild = cached;
+			return;
+		}
+		this.loadingGuild = true;
+		send(MessageType.REQUEST_GUILD_DETAILS, guildId);
 	}
 
 	async loadGuildLazy(guildId: string) {
