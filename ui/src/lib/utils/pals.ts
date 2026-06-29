@@ -27,6 +27,29 @@ export function canBeLucky(character_id: string): [string, boolean] {
 	return ['', true];
 }
 
+export function formatBossCharacterId(pal: Pal): void {
+	pal.character_id = pal.character_id.replace('Boss_', 'BOSS_');
+	if (pal && (pal.is_boss || pal.is_lucky) && !pal.character_id.startsWith('BOSS_')) {
+		pal.character_id = `BOSS_${pal.character_id}`;
+	} else if (pal && !pal.is_boss && !pal.is_lucky && pal.character_id.startsWith('BOSS_')) {
+		pal.character_id = pal.character_id.replace('BOSS_', '');
+	}
+}
+
+export function editLucky(pal: Pal): [string, boolean] {
+	const [type, valid] = canBeLucky(pal.character_id);
+	if (!valid) {
+		return [type, false];
+	}
+	if (pal) {
+		pal.is_lucky = !pal.is_lucky;
+		pal.is_boss = pal.is_lucky ? false : pal.is_boss;
+		formatBossCharacterId(pal);
+		pal.state = EntryState.MODIFIED;
+	}
+	return [type, true];
+}
+
 export function canBeAlpha(character_id: string): [string, boolean] {
 	const lowerCaseId = character_id.toLowerCase();
 	const excludedPrefixes = [
@@ -45,6 +68,21 @@ export function canBeAlpha(character_id: string): [string, boolean] {
 	return ['', true];
 }
 
+export function editAlpha(pal: Pal, force: boolean = false): [string, boolean] {
+		const [type, valid] = canBeAlpha(pal.character_id);
+		if (!valid) {
+			pal.is_boss = false;
+			pal.is_lucky = false;
+			pal.state = EntryState.MODIFIED;
+			return [type, false];
+		}
+		pal.is_boss = force ? true : !pal.is_boss;
+		pal.is_lucky = pal.is_boss ? false : pal.is_lucky;
+		formatBossCharacterId(pal);
+		pal.state = EntryState.MODIFIED;
+		return [type, true];
+	}
+
 export function formatNickname(nickname: string, prefix: string | undefined) {
 	if (prefix && !nickname.startsWith(prefix)) {
 		return `${prefix} ${nickname}`;
@@ -58,9 +96,7 @@ export async function handleMaxOutPal(pal: Pal, player: Player): Promise<void> {
 	pal.level = appState.settings.cheat_mode ? 255 : 65;
 	const maxLevelData = expData.expData[appState.settings.cheat_mode ? '100' : '66'];
 	pal.exp = maxLevelData.PalTotalEXP - maxLevelData.PalNextEXP;
-	const [_, valid] = canBeLucky(pal.character_id);
-	pal.is_boss = valid;
-	pal.is_lucky = false;
+	editAlpha(pal, true);
 	pal.talent_hp = appState.settings.cheat_mode ? 255 : 100;
 	pal.talent_shot = appState.settings.cheat_mode ? 255 : 100;
 	pal.talent_defense = appState.settings.cheat_mode ? 255 : 100;
