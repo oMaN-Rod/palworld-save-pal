@@ -19,6 +19,7 @@ import Monaco from './monaco/Monaco.svelte';
 import Nuke from './icons/Nuke.svelte';
 import Spinner from './spinner/Spinner.svelte';
 import Stopwatch from './stopwatch/Stopwatch.svelte';
+import Table from './table/Table.svelte';
 import Toast from './toast/Toast.svelte';
 
 export {
@@ -41,6 +42,7 @@ export {
 	Nuke,
 	Spinner,
 	Stopwatch,
+	Table,
 	Toast,
 	Tooltip,
 	TooltipButton
