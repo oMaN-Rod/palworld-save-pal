@@ -14,6 +14,15 @@
 		toggleSelection
 	} from './table.utils';
 
+	// Contract notes for downstream consumers:
+	// - `onrowclick` is a POINTER-ONLY convenience. Detail-panel opening should be
+	//   SELECTION-DRIVEN (keyboard-accessible checkboxes). Do NOT rely on row click
+	//   for keyboard users.
+	// - `pageSize` is a fixed value owned by the PARENT/toolbar. Table has no built-in
+	//   page-size selector by design; the toolbar renders one and passes the value down.
+	// - Server-side mode (`serverSide: true`): changing the sort does NOT reset `page`
+	//   to 1. A server-side consumer that wants to return to page 1 on sort must do so
+	//   in its `onsort` handler.
 	let {
 		rows,
 		columns,
@@ -105,11 +114,13 @@
 						<th
 							scope="col"
 							class={cn('p-2 font-semibold', alignClass(column), column.class)}
-							aria-sort={sort.key === column.key
-								? sort.direction === 'asc'
-									? 'ascending'
-									: 'descending'
-								: 'none'}
+							aria-sort={column.sortable
+								? sort.key === column.key
+									? sort.direction === 'asc'
+										? 'ascending'
+										: 'descending'
+									: 'none'
+								: undefined}
 						>
 							{#if column.sortable}
 								<button

@@ -42,6 +42,16 @@ describe('compareValues', () => {
 		expect(compareValues('item2', 'item10', 'asc')).toBeLessThan(0);
 		expect(compareValues('apple', 'Banana', 'asc')).toBeLessThan(0);
 	});
+
+	it('sorts undefined last, same as null', () => {
+		expect(compareValues(undefined, 5, 'asc')).toBeGreaterThan(0);
+		expect(compareValues(5, undefined, 'asc')).toBeLessThan(0);
+	});
+
+	it('handles mixed number/string via String() coercion without throwing', () => {
+		const result = compareValues(2, 'apple', 'asc');
+		expect(typeof result).toBe('number');
+	});
 });
 
 describe('sortRows', () => {
@@ -76,6 +86,12 @@ describe('sortRows', () => {
 		];
 		const result = sortRows(tied, columns, { key: 'name', direction: 'asc' });
 		expect(result.map((r) => r.id)).toEqual(['x', 'y']);
+	});
+
+	it('returns a copy in original order when sort key is not in the columns array', () => {
+		const result = sortRows(rows, columns, { key: 'nonexistent', direction: 'asc' });
+		expect(result).not.toBe(rows);
+		expect(result.map((r) => r.id)).toEqual(['a', 'b', 'c']);
 	});
 });
 
