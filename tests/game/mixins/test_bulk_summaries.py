@@ -1,6 +1,7 @@
 from datetime import datetime
+from pathlib import Path
 
-from palworld_save_pal.game.mixins.summaries import ticks_to_datetime
+from palworld_save_pal.game.mixins.summaries import _extract_gvas_timestamp, ticks_to_datetime
 from palworld_save_pal.game.pal_objects import PalObjects
 from palworld_save_pal.utils.uuid import are_equal_uuids
 from tests.game.conftest import _load_save_manager, WORLD1_DIR
@@ -15,8 +16,9 @@ def test_ticks_to_datetime_one_day():
     assert ticks_to_datetime(86400 * 10_000_000) == datetime(1, 1, 2)
 
 
-def test_player_summaries_include_last_online_time(fresh_save_manager):
-    summaries = fresh_save_manager.get_player_summaries()
+def test_player_summaries_include_last_online_time():
+    sm = _load_save_manager(WORLD1_DIR)
+    summaries = sm.get_player_summaries()
     assert len(summaries) > 0
     for summary in summaries.values():
         # Field exists and is either a datetime or None
@@ -24,28 +26,24 @@ def test_player_summaries_include_last_online_time(fresh_save_manager):
         assert summary.last_online_time is None or isinstance(
             summary.last_online_time, datetime
         )
-
-    # Build a separate local manager (not the shared fixture) to prove the
-    # extraction path populates a real datetime when data IS present.
-    sm = _load_save_manager(WORLD1_DIR)
-    injected_count = 0
-    for entry in sm._character_save_parameter_map:
-        try:
-            save_parameter = entry["value"]["RawData"]["value"]["object"]["SaveParameter"]["value"]
-            if sm._is_player(entry) and injected_count == 0:
-                save_parameter["LastOnlineRealTime"] = {
-                    "type": "UInt64Property",
-                    "value": 1_000_000_000_000,  # 1 trillion ticks
-                    "id": None,
-                }
-                injected_count += 1
-        except (KeyError, TypeError):
-            continue
-    sm._extract_player_summaries()
-    injected_summaries = sm.get_player_summaries()
+    # world1 player .sav files contain a real GVAS Timestamp; at least one
+    # summary must reflect a real datetime (proves the GVAS extraction path).
     assert any(
-        isinstance(s.last_online_time, datetime)
-        for s in injected_summaries.values()
+        isinstance(s.last_online_time, datetime) for s in summaries.values()
+    ), "Expected at least one world1 player to expose a datetime last_online_time from GVAS Timestamp"
+
+
+def test_extract_gvas_timestamp_returns_datetime_for_real_sav():
+    """Direct unit test: _extract_gvas_timestamp must parse a real player .sav
+    and return a datetime (not None) when a GVAS Timestamp property is present."""
+    players_dir = WORLD1_DIR / "Players"
+    sav_files = sorted(players_dir.glob("*.sav"))
+    assert sav_files, "world1 Players/ must contain at least one .sav file"
+    with open(sav_files[0], "rb") as f:
+        sav_bytes = f.read()
+    result = _extract_gvas_timestamp(sav_bytes)
+    assert isinstance(result, datetime), (
+        f"Expected a datetime from {sav_files[0].name}, got {result!r}"
     )
 
 

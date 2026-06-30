@@ -16,7 +16,6 @@
 	import { MessageType } from '$types';
 	import BulkSelectionBanner from './BulkSelectionBanner.svelte';
 	import { ClockAlert, Trash } from '@lucide/svelte';
-	import { Segment } from '@skeletonlabs/skeleton-svelte';
 
 	let { selected = $bindable(new Set<string>()) }: { selected?: Set<string> } = $props();
 
