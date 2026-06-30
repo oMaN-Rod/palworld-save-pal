@@ -1,27 +1,6 @@
 <script lang="ts">
 	import { getAppState, getModalState } from '$states';
 	import { Navigation } from '@skeletonlabs/skeleton-svelte';
-	import {
-		File,
-		Pencil,
-		Info,
-		Upload,
-		Settings,
-		Save,
-		Bug,
-		Map,
-		FileHeart,
-		Download,
-		Database,
-		Globe,
-		ChevronsRight,
-		ChevronsLeft,
-		NotebookPen,
-		Wrench,
-		Server,
-		BookOpen,
-		Layers
-	} from 'lucide-svelte';
 
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { OpenFolder, SettingsModal } from '$components/modals';
@@ -29,29 +8,45 @@
 	import { send } from '$lib/utils/websocketUtils';
 	import { page } from '$app/state';
 	import * as m from '$i18n/messages';
-	import { c } from '$lib/utils/commonTranslations';
 	import { persistedState } from 'svelte-persisted-state';
-	import { Folder } from '@lucide/svelte';
+	import {
+		activeNavId,
+		navItems,
+		type NavAction,
+		type NavContext,
+		type NavItem,
+		type NavSection
+	} from './navItems';
 
 	let appState = getAppState();
 	let modal = getModalState();
 	let expanded = persistedState('navbar.expanded', false);
 
-	const activeTile = $derived.by(() => {
-		if (page.url.pathname.startsWith('/editor')) return 'editor';
-		if (page.url.pathname.startsWith('/tools')) return 'tools';
-		if (page.url.pathname.startsWith('/file')) return 'file';
-		if (page.url.pathname.startsWith('/upload')) return 'upload';
-		if (page.url.pathname.startsWith('/worldmap')) return 'map';
-		if (page.url.pathname.startsWith('/presets')) return 'presets';
-		if (page.url.pathname.startsWith('/gps')) return 'gps';
-		if (page.url.pathname.startsWith('/ups')) return 'ups';
-		if (page.url.pathname.startsWith('/debug')) return 'debug';
-		if (page.url.pathname.startsWith('/servers')) return 'servers';
-		if (page.url.pathname.startsWith('/docs')) return 'docs';
-		if (page.url.pathname.startsWith('/bulk')) return 'bulk';
-		return '';
-	});
+	const desktop = PUBLIC_DESKTOP_MODE === 'true';
+	const ctx = $derived<NavContext>({ appState, desktop, expanded: expanded.current });
+
+	function itemsFor(section: NavSection): NavItem[] {
+		return navItems.filter((item) => item.section === section && (item.visible?.(ctx) ?? true));
+	}
+
+	function runAction(action: NavAction): void {
+		switch (action) {
+			case 'toggle-expanded':
+				expanded.current = !expanded.current;
+				break;
+			case 'save':
+				appState.writeSave();
+				break;
+			case 'open-folder':
+				handleOpenFolder();
+				break;
+			case 'settings':
+				handleLanguageSelect();
+				break;
+		}
+	}
+
+	const activeTile = $derived(activeNavId(page.url.pathname));
 
 	async function handleLanguageSelect(): Promise<void> {
 		// @ts-ignore
@@ -76,6 +71,21 @@
 	}
 </script>
 
+{#snippet tile(item: NavItem)}
+	{@const Icon = item.icon(ctx)}
+	<Navigation.Tile
+		id={item.id}
+		labelExpanded={item.label?.()}
+		expandedClasses="text-xs 2xl:text-base"
+		title={(item.title ?? item.label)?.()}
+		href={item.href}
+		onclick={item.action ? () => runAction(item.action!) : undefined}
+		active={item.href ? 'active-nav-tile' : undefined}
+	>
+		<Icon class="h-4 w-4 2xl:h-6 2xl:w-6"/>
+	</Navigation.Tile>
+{/snippet}
+
 <Navigation.Rail
 	width="48px"
 	widthExpanded="w-auto"
@@ -86,185 +96,18 @@
 	classes="nav-rail"
 >
 	{#snippet header()}
-		<Navigation.Tile
-			title={m.toggle_entity({ entity: '' })}
-			id="menu"
-			onclick={() => (expanded.current = !expanded.current)}
-		>
-			{#if expanded.current}
-				<ChevronsLeft />
-			{:else}
-				<ChevronsRight />
-			{/if}
-		</Navigation.Tile>
-		{#if appState.saveFile && PUBLIC_DESKTOP_MODE === 'true'}
-			<Navigation.Tile
-				labelExpanded={c.save}
-				title={c.save}
-				id="save"
-				onclick={() => appState.writeSave()}
-			>
-				<Save />
-			</Navigation.Tile>
-		{/if}
+		{#each itemsFor('header') as item (item.id)}
+			{@render tile(item)}
+		{/each}
 	{/snippet}
 	{#snippet tiles()}
-		<Navigation.Tile
-			labelExpanded={m.edit()}
-			title={m.edit()}
-			id="edit"
-			href="/edit"
-			active="active-nav-tile"
-		>
-			<Pencil />
-		</Navigation.Tile>
-		{#if PUBLIC_DESKTOP_MODE === 'true'}
-			<Navigation.Tile
-				labelExpanded={m.file({ count: 2 })}
-				title={m.file({ count: 2 })}
-				id="file"
-				href="/file"
-				active="active-nav-tile"
-			>
-				<File />
-			</Navigation.Tile>
-		{:else}
-			<Navigation.Tile
-				labelExpanded={m.transfer({ count: 1 })}
-				title={m.transfer({ count: 1 })}
-				id="upload"
-				href="/upload"
-				active="active-nav-tile"
-			>
-				{#if appState.saveFile}
-					<Download />
-				{:else}
-					<Upload />
-				{/if}
-			</Navigation.Tile>
-		{/if}
-		<Navigation.Tile
-			labelExpanded={m.map()}
-			title={m.map()}
-			id="map"
-			href="/worldmap"
-			active="active-nav-tile"
-		>
-			<Map />
-		</Navigation.Tile>
-		<Navigation.Tile
-			labelExpanded={c.presets}
-			title={c.presets}
-			id="presets"
-			href="/presets"
-			active="active-nav-tile"
-		>
-			<FileHeart />
-		</Navigation.Tile>
-		{#if appState.hasGpsAvailable}
-			<Navigation.Tile
-				labelExpanded={m.gps()}
-				title={m.gps()}
-				id="gps"
-				href="/gps"
-				active="active-nav-tile"
-			>
-				<Globe />
-			</Navigation.Tile>
-		{/if}
-		<Navigation.Tile
-			labelExpanded={m.ups()}
-			title={m.ups()}
-			id="ups"
-			href="/ups"
-			active="active-nav-tile"
-		>
-			<Database />
-		</Navigation.Tile>
-		{#if appState.settings.debug_mode}
-			<Navigation.Tile
-				labelExpanded={m.debug()}
-				title={m.debug()}
-				id="debug"
-				href="/debug"
-				active="active-nav-tile"
-			>
-				<Bug />
-			</Navigation.Tile>
-		{/if}
-		<Navigation.Tile
-			labelExpanded="Servers"
-			title="Servers"
-			id="servers"
-			href="/servers"
-			active="active-nav-tile"
-		>
-			<Server />
-		</Navigation.Tile>
-		<Navigation.Tile
-			labelExpanded={m.editor()}
-			title={m.editor()}
-			id="editor"
-			href="/editor"
-			active="active-nav-tile"
-		>
-			<NotebookPen />
-		</Navigation.Tile>
-		<Navigation.Tile
-			labelExpanded={m.tools()}
-			title={m.tools()}
-			id="tools"
-			href="/tools"
-			active="active-nav-tile"
-		>
-			<Wrench />
-		</Navigation.Tile>
-		<Navigation.Tile
-			labelExpanded={m.bulk_actions()}
-			title={m.bulk_actions()}
-			id="bulk"
-			href="/bulk"
-			active="active-nav-tile"
-		>
-			<Layers />
-		</Navigation.Tile>
-		<Navigation.Tile
-			labelExpanded={m.docs()}
-			title={m.docs()}
-			id="docs"
-			href="/docs"
-			active="active-nav-tile"
-		>
-			<BookOpen />
-		</Navigation.Tile>
-		<Navigation.Tile
-			labelExpanded={m.about()}
-			title={m.about()}
-			id="about"
-			href="/about"
-			active="active-nav-tile"
-		>
-			<Info />
-		</Navigation.Tile>
+		{#each itemsFor('tiles') as item (item.id)}
+			{@render tile(item)}
+		{/each}
 	{/snippet}
 	{#snippet footer()}
-		{#if PUBLIC_DESKTOP_MODE === 'true'}
-			<Navigation.Tile
-				labelExpanded={m.open_folder()}
-				title={m.open_folder()}
-				id="open-folder"
-				onclick={handleOpenFolder}
-			>
-				<Folder />
-			</Navigation.Tile>
-		{/if}
-		<Navigation.Tile
-			labelExpanded={m.settings()}
-			title={m.settings()}
-			id="settings"
-			onclick={handleLanguageSelect}
-		>
-			<Settings />
-		</Navigation.Tile>
+		{#each itemsFor('footer') as item (item.id)}
+			{@render tile(item)}
+		{/each}
 	{/snippet}
 </Navigation.Rail>
