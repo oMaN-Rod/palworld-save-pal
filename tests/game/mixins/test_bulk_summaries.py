@@ -1,7 +1,7 @@
 from datetime import datetime
 from pathlib import Path
 
-from palworld_save_pal.game.mixins.summaries import _extract_gvas_timestamp, ticks_to_datetime
+from palworld_save_pal.game.mixins.summaries import _parse_player_gvas_and_timestamp, ticks_to_datetime
 from palworld_save_pal.game.pal_objects import PalObjects
 from palworld_save_pal.utils.uuid import are_equal_uuids
 from tests.game.conftest import _load_save_manager, WORLD1_DIR
@@ -33,17 +33,23 @@ def test_player_summaries_include_last_online_time():
     ), "Expected at least one world1 player to expose a datetime last_online_time from GVAS Timestamp"
 
 
-def test_extract_gvas_timestamp_returns_datetime_for_real_sav():
-    """Direct unit test: _extract_gvas_timestamp must parse a real player .sav
-    and return a datetime (not None) when a GVAS Timestamp property is present."""
+def test_parse_player_gvas_and_timestamp_returns_gvas_and_datetime_for_real_sav():
+    """Direct unit test: _parse_player_gvas_and_timestamp must parse a real player
+    .sav and return both a GvasFile and a datetime (not None) when a GVAS Timestamp
+    property is present."""
+    from palworld_save_tools.gvas import GvasFile
+
     players_dir = WORLD1_DIR / "Players"
     sav_files = sorted(players_dir.glob("*.sav"))
     assert sav_files, "world1 Players/ must contain at least one .sav file"
     with open(sav_files[0], "rb") as f:
         sav_bytes = f.read()
-    result = _extract_gvas_timestamp(sav_bytes)
-    assert isinstance(result, datetime), (
-        f"Expected a datetime from {sav_files[0].name}, got {result!r}"
+    gvas_file, timestamp = _parse_player_gvas_and_timestamp(sav_bytes)
+    assert isinstance(gvas_file, GvasFile), (
+        f"Expected a GvasFile from {sav_files[0].name}, got {gvas_file!r}"
+    )
+    assert isinstance(timestamp, datetime), (
+        f"Expected a datetime from {sav_files[0].name}, got {timestamp!r}"
     )
 
 

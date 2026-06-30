@@ -89,6 +89,7 @@ class SaveManager(
     _loaded_guilds: set = PrivateAttr(default_factory=set)
 
     _player_file_refs: Dict[UUID, Dict[str, Any]] = PrivateAttr(default_factory=dict)
+    _player_gvas_sav_cache: Dict[UUID, GvasFile] = PrivateAttr(default_factory=dict)
 
     _pal_owner_counts_cache: Optional[Dict[UUID, int]] = PrivateAttr(default=None)
     _player_guild_map_cache: Optional[Dict[UUID, UUID]] = PrivateAttr(default=None)

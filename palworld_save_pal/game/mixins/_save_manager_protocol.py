@@ -79,6 +79,7 @@ class SaveManagerProtocol(Protocol):
     _loaded_players: set
     _loaded_guilds: set
     _player_file_refs: Dict[UUID, Dict[str, Any]]
+    _player_gvas_sav_cache: Dict[UUID, "GvasFile"]
 
     _pal_owner_counts_cache: Optional[Dict[UUID, int]]
     _player_guild_map_cache: Optional[Dict[UUID, UUID]]

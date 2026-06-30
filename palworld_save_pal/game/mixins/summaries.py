@@ -17,7 +17,7 @@ from palworld_save_tools.gvas import GvasFile
 from palworld_save_tools.palsav import decompress_sav_to_gvas
 from palworld_save_tools.paltypes import PALWORLD_TYPE_HINTS
 
-from palworld_save_pal.dto.summary import PlayerSummary, GuildSummary
+from palworld_save_pal.dto.summary import GuildSummary, PlayerSummary
 from palworld_save_pal.game.gvas_codec import CUSTOM_PROPERTIES
 from palworld_save_pal.game.pal_objects import PalObjects
 from palworld_save_pal.game.enum import GroupType
@@ -36,10 +36,19 @@ def ticks_to_datetime(ticks: int) -> datetime:
     return datetime(1, 1, 1) + timedelta(days=days, seconds=seconds_remainder)
 
 
-def _extract_gvas_timestamp(sav_data: Any) -> Optional[datetime]:
+def _parse_player_gvas_and_timestamp(
+    sav_data: Any,
+) -> Tuple[Optional[GvasFile], Optional[datetime]]:
     """
-    Parse a player .sav file (bytes or file path string) and return the
-    Timestamp property as a datetime, or None if unavailable.
+    Parse a player .sav file (bytes or file path string) and return both the
+    parsed GvasFile (for caching) and the Timestamp property as a datetime.
+    Returns (None, None) on failure.
+
+    NOTE: Do NOT wrap the GvasFile.read call in gc_paused(). This helper runs
+    once per player file during summary extraction, and gc_paused()'s
+    gc.collect() on exit would walk the entire (already-resident,
+    multi-million-object) Level.sav heap every time — turning ~0.3s of parsing
+    into ~80s for a large save.
     """
     try:
         if isinstance(sav_data, bytes):
@@ -49,25 +58,21 @@ def _extract_gvas_timestamp(sav_data: Any) -> Optional[datetime]:
                 sav_bytes = f.read()
 
         raw_gvas, _ = decompress_sav_to_gvas(sav_bytes)
-        # NOTE: Do NOT wrap this in gc_paused(). This helper runs once per
-        # player file, and gc_paused()'s gc.collect() on exit would walk the
-        # entire (already-resident, multi-million-object) Level.sav heap every
-        # time -- turning ~0.3s of parsing into ~80s for a large save.
         gvas_file = GvasFile.read(
             raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
         )
 
         timestamp_data = gvas_file.properties.get("Timestamp")
         if timestamp_data is None:
-            return None
+            return gvas_file, None
 
         ticks = PalObjects.get_value(timestamp_data)
         if not ticks:
-            return None
+            return gvas_file, None
 
-        return ticks_to_datetime(ticks)
+        return gvas_file, ticks_to_datetime(ticks)
     except Exception:
-        return None
+        return None, None
 
 
 class SummariesMixin(_Base):
@@ -210,7 +215,13 @@ class SummariesMixin(_Base):
         file_ref = self._player_file_refs.get(uid, {})
         sav_data = file_ref.get("sav")
         if sav_data is not None:
-            last_online_time = _extract_gvas_timestamp(sav_data)
+            parsed_gvas, last_online_time = _parse_player_gvas_and_timestamp(sav_data)
+            if parsed_gvas is not None and uid not in self._player_gvas_sav_cache:
+                # Cache the parsed GvasFile so load_player_on_demand can reuse it
+                # without reading and decompressing the .sav file a second time.
+                # Dict writes for distinct keys are GIL-safe when called from the
+                # parallel summary extraction threads.
+                self._player_gvas_sav_cache[uid] = parsed_gvas
 
         return PlayerSummary(
             uid=uid,

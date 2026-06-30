@@ -105,17 +105,22 @@ class LoadingMixin(_Base):
             logger.warning(f"No save data for player {player_id}")
             return None
 
-        if isinstance(sav_data, bytes):
-            sav_bytes = sav_data
+        cached_sav_gvas = self._player_gvas_sav_cache.pop(player_id, None)
+        if cached_sav_gvas is not None:
+            logger.debug(f"Reusing cached GvasFile for player {player_id}")
+            gvas_file = cached_sav_gvas
         else:
-            with open(sav_data, "rb") as f:
-                sav_bytes = f.read()
+            if isinstance(sav_data, bytes):
+                sav_bytes = sav_data
+            else:
+                with open(sav_data, "rb") as f:
+                    sav_bytes = f.read()
 
-        raw_gvas, _ = decompress_sav_to_gvas(sav_bytes)
-        with gc_paused():
-            gvas_file = GvasFile.read(
-                raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
-            )
+            raw_gvas, _ = decompress_sav_to_gvas(sav_bytes)
+            with gc_paused():
+                gvas_file = GvasFile.read(
+                    raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
+                )
 
         dps_gvas = None
         dps_data = file_ref.get("dps")
