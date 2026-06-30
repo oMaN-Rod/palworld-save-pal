@@ -15,11 +15,23 @@
 	import { send } from '$lib/utils/websocketUtils';
 	import { MessageType } from '$types';
 	import BulkSelectionBanner from './BulkSelectionBanner.svelte';
+	import PlayerDetailPanel from './PlayerDetailPanel.svelte';
 	import { ClockAlert, Trash } from '@lucide/svelte';
 
 	let { selected = $bindable(new Set<string>()) }: { selected?: Set<string> } = $props();
 
 	const appState = getAppState();
+	let detailOpen = $state(false);
+
+	function openDetail(row: PlayerRow) {
+		detailOpen = true;
+		appState.loadPlayerDetailsForBulk(row.uid);
+	}
+
+	function closeDetail() {
+		detailOpen = false;
+		appState.bulkDetailPlayer = undefined;
+	}
 	const modal = getModalState();
 	const toast = getToastState();
 	const nav = getNavigationState();
@@ -111,84 +123,87 @@
 	}
 </script>
 
-<div class="flex flex-col gap-2">
-	<Input bind:value={query} placeholder={m.bulk_search_placeholder({ entity: c.players })} />
-	<div class="bg-surface-900 flex items-center gap-2 rounded-sm p-1">
-		<Popover position="bottom-end">
-			<Tooltip label={m.delete_inactive_players()}>
-				<Button variant="ghost">
-					<ClockAlert class="h-4 w-4" />
-				</Button>
-			</Tooltip>
-			{#snippet content({ close })}
-				<div class="flex flex-col gap-3">
-					<label class="flex flex-col gap-1">
-						<span class="text-sm font-medium">{m.inactivity_days_label()}</span>
-						<Input
-							type="number"
-							min={1}
-							bind:value={inactiveDays}
-							class="input bg-surface-900 w-40"
-						/>
-					</label>
+<div class="flex h-full min-h-0">
+	<div class="flex min-w-0 flex-1 flex-col gap-2 overflow-y-auto mr-2">
+		<Input bind:value={query} placeholder={m.bulk_search_placeholder({ entity: c.players })} />
+		<div class="bg-surface-900 flex items-center gap-2 rounded-sm p-1">
+			<Popover position="bottom-end">
+				<Tooltip label={m.delete_inactive_players()}>
+					<Button variant="ghost">
+						<ClockAlert class="h-4 w-4" />
+					</Button>
+				</Tooltip>
+				{#snippet content({ close })}
+					<div class="flex flex-col gap-3">
+						<label class="flex flex-col gap-1">
+							<span class="text-sm font-medium">{m.inactivity_days_label()}</span>
+							<Input
+								type="number"
+								min={1}
+								bind:value={inactiveDays}
+								class="input bg-surface-900 w-40"
+							/>
+						</label>
+						<Button
+							variant="danger"
+							type="submit"
+							onclick={(e: Event) => {
+								e.preventDefault();
+								close();
+								deleteInactive();
+							}}
+						>
+							{m.delete_inactive_players()}
+						</Button>
+					</div>
+				{/snippet}
+			</Popover>
+			{#if selected.size > 0}
+				<Tooltip label={m.delete_selected_entity({ entity: c.players })}>
+					<Button variant="ghost" class="hover:bg-error-500" onclick={bulkDelete}>
+						<Trash class="h-4 w-4" />
+					</Button>
+				</Tooltip>
+			{/if}
+		</div>
+		<BulkSelectionBanner
+			selectedCount={selected.size}
+			matchingCount={rows.length}
+			onSelectAll={selectAllMatching}
+			onClear={clearSelection}
+		/>
+		<Table {rows} {columns} rowKey={(row) => row.uid} pageSize={10} bind:selected onrowclick={openDetail}>
+			{#snippet cell({ row, column })}
+				{#if column.key === 'lastOnline'}
+					{lastActiveLabel(row)}
+				{:else if column.key === 'level'}
+					{row.level ?? '—'}
+				{:else}
+					{row[column.key as keyof PlayerRow]}
+				{/if}
+			{/snippet}
+			{#snippet rowActions(row)}
+				<div class="flex gap-1">
 					<Button
-						variant="danger"
-						type="submit"
-						onclick={(e: Event) => {
-							e.preventDefault();
-							close();
-							deleteInactive();
-						}}
+						variant="ghost"
+						onclick={() => editPlayer(row.uid)}
+						title={m.edit_entity({ entity: c.player })}
 					>
-						{m.delete_inactive_players()}
+						<Pencil class="h-4 w-4" />
+					</Button>
+					<Button
+						variant="ghost"
+						onclick={() => deleteOne(row)}
+						title={m.delete_entity({ entity: c.player })}
+					>
+						<Trash2 class="h-4 w-4" />
 					</Button>
 				</div>
 			{/snippet}
-		</Popover>
-		{#if selected.size > 0}
-			<Tooltip label={m.delete_selected_entity({ entity: c.players })}>
-				<Button variant="ghost" class="hover:bg-error-500" onclick={bulkDelete}>
-					<Trash class="h-4 w-4" />
-				</Button>
-			</Tooltip>
-		{/if}
+			{#snippet empty()}
+				{m.no_players_match()}
+			{/snippet}
+		</Table>
 	</div>
-	<BulkSelectionBanner
-		selectedCount={selected.size}
-		matchingCount={rows.length}
-		onSelectAll={selectAllMatching}
-		onClear={clearSelection}
-	/>
-	<Table {rows} {columns} rowKey={(row) => row.uid} pageSize={15} bind:selected>
-		{#snippet cell({ row, column })}
-			{#if column.key === 'lastOnline'}
-				{lastActiveLabel(row)}
-			{:else if column.key === 'level'}
-				{row.level ?? '—'}
-			{:else}
-				{row[column.key as keyof PlayerRow]}
-			{/if}
-		{/snippet}
-		{#snippet rowActions(row)}
-			<div class="flex gap-1">
-				<Button
-					variant="ghost"
-					onclick={() => editPlayer(row.uid)}
-					title={m.edit_entity({ entity: c.player })}
-				>
-					<Pencil class="h-4 w-4" />
-				</Button>
-				<Button
-					variant="ghost"
-					onclick={() => deleteOne(row)}
-					title={m.delete_entity({ entity: c.player })}
-				>
-					<Trash2 class="h-4 w-4" />
-				</Button>
-			</div>
-		{/snippet}
-		{#snippet empty()}
-			{m.no_players_match()}
-		{/snippet}
-	</Table>
+	<PlayerDetailPanel expanded={detailOpen} onclose={closeDetail} />
 </div>
