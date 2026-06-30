@@ -41,7 +41,7 @@ class TestRequestPlayerDetailsHandler:
         ):
             msg = RequestPlayerDetailsMessage(
                 type=MessageType.REQUEST_PLAYER_DETAILS.value,
-                data=str(uuid4()),
+                data={"player_id": str(uuid4()), "origin": "edit"},
             )
             await request_player_details_handler(msg, ws)
 
@@ -67,7 +67,7 @@ class TestRequestPlayerDetailsHandler:
         ):
             msg = RequestPlayerDetailsMessage(
                 type=MessageType.REQUEST_PLAYER_DETAILS.value,
-                data=str(uuid4()),
+                data={"player_id": str(uuid4()), "origin": "edit"},
             )
             await request_player_details_handler(msg, ws)
 
@@ -92,7 +92,7 @@ class TestRequestPlayerDetailsHandler:
         ):
             msg = RequestPlayerDetailsMessage(
                 type=MessageType.REQUEST_PLAYER_DETAILS.value,
-                data=str(uuid4()),
+                data={"player_id": str(uuid4()), "origin": "edit"},
             )
             await request_player_details_handler(msg, ws)
 
