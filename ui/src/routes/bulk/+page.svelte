@@ -3,8 +3,10 @@
 	import type { ValueChangeDetails } from '@zag-js/tabs';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
+	import PlayersTable from '$lib/components/bulk/PlayersTable.svelte';
 
 	let selectedTab = $state('players');
+	let playerSelection = $state(new Set<string>());
 </script>
 
 <div class="flex h-full flex-col gap-4 p-4">
@@ -17,7 +19,7 @@
 		{/snippet}
 		{#snippet content()}
 			<Tabs.Panel value="players">
-				<p class="text-surface-300">{c.players}</p>
+				<PlayersTable bind:selected={playerSelection} />
 			</Tabs.Panel>
 			<Tabs.Panel value="pals">
 				<p class="text-surface-300">{c.pals}</p>
