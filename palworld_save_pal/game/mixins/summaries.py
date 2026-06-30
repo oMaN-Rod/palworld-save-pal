@@ -13,7 +13,12 @@ if TYPE_CHECKING:
 else:
     _Base = object
 
+from palworld_save_tools.gvas import GvasFile
+from palworld_save_tools.palsav import decompress_sav_to_gvas
+from palworld_save_tools.paltypes import PALWORLD_TYPE_HINTS
+
 from palworld_save_pal.dto.summary import PlayerSummary, GuildSummary
+from palworld_save_pal.game.gvas_codec import CUSTOM_PROPERTIES
 from palworld_save_pal.game.pal_objects import PalObjects
 from palworld_save_pal.game.enum import GroupType
 from palworld_save_pal.utils.logging_config import create_logger
@@ -29,6 +34,40 @@ def ticks_to_datetime(ticks: int) -> datetime:
     days = int(seconds // 86400)
     seconds_remainder = seconds % 86400
     return datetime(1, 1, 1) + timedelta(days=days, seconds=seconds_remainder)
+
+
+def _extract_gvas_timestamp(sav_data: Any) -> Optional[datetime]:
+    """
+    Parse a player .sav file (bytes or file path string) and return the
+    Timestamp property as a datetime, or None if unavailable.
+    """
+    try:
+        if isinstance(sav_data, bytes):
+            sav_bytes = sav_data
+        else:
+            with open(sav_data, "rb") as f:
+                sav_bytes = f.read()
+
+        raw_gvas, _ = decompress_sav_to_gvas(sav_bytes)
+        # NOTE: Do NOT wrap this in gc_paused(). This helper runs once per
+        # player file, and gc_paused()'s gc.collect() on exit would walk the
+        # entire (already-resident, multi-million-object) Level.sav heap every
+        # time -- turning ~0.3s of parsing into ~80s for a large save.
+        gvas_file = GvasFile.read(
+            raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
+        )
+
+        timestamp_data = gvas_file.properties.get("Timestamp")
+        if timestamp_data is None:
+            return None
+
+        ticks = PalObjects.get_value(timestamp_data)
+        if not ticks:
+            return None
+
+        return ticks_to_datetime(ticks)
+    except Exception:
+        return None
 
 
 class SummariesMixin(_Base):
@@ -167,12 +206,11 @@ class SummariesMixin(_Base):
         if "Level" in save_parameter:
             level = PalObjects.get_byte_property(save_parameter["Level"])
 
-        last_online_time = None
-        last_online_raw = save_parameter.get("LastOnlineRealTime")
-        if last_online_raw is not None:
-            ticks = PalObjects.get_value(last_online_raw)
-            if ticks:
-                last_online_time = ticks_to_datetime(ticks)
+        last_online_time: Optional[datetime] = None
+        file_ref = self._player_file_refs.get(uid, {})
+        sav_data = file_ref.get("sav")
+        if sav_data is not None:
+            last_online_time = _extract_gvas_timestamp(sav_data)
 
         return PlayerSummary(
             uid=uid,

@@ -9,6 +9,7 @@ import Input from './input/Input.svelte';
 import ItemHeader from './item-header/ItemHeader.svelte';
 import KeyboardShortcut from './keyboard-shortcut/KeyboardShortcut.svelte';
 import List from './list/List.svelte';
+import Popover from './popover/Popover.svelte';
 import Progress from './progress/Progress.svelte';
 import SectionHeader from './section-header/SectionHeader.svelte';
 import Select from './select/Select.svelte';
@@ -40,6 +41,7 @@ export {
 	Modal,
 	Monaco,
 	Nuke,
+	Popover,
 	Spinner,
 	Stopwatch,
 	Table,
