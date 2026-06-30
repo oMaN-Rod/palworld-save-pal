@@ -10,7 +10,6 @@
 </script>
 
 <div class="flex h-full flex-col gap-4 p-4">
-	<h1 class="h3">{m.bulk_actions()}</h1>
 	<Tabs value={selectedTab} onValueChange={(e: ValueChangeDetails) => (selectedTab = e.value)}>
 		{#snippet list()}
 			<Tabs.Control value="players">{c.players}</Tabs.Control>
