@@ -104,7 +104,7 @@
 				></path>
 			</svg>
 			{m.loading_entity({ entity: c.player })}...
-			<Stopwatch bind:seconds={stopwatchSeconds} size="text-sm" />
+			<Stopwatch bind:seconds={stopwatchSeconds} class="text-sm" />
 		</div>
 	{:else}
 		<Combobox
