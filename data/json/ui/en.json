@@ -244,6 +244,7 @@
   "failed_create_pal": "Failed to create new pal. Please try again.",
   "failed_export_pals": "Failed to export {count} {pals}",
   "failed_get_pal_data": "Failed to get pal data",
+  "failed_load_entity": "Failed to load {entity}. Please try again.",
   "failed_nuke_ups": "Failed to nuke UPS. Please try again.",
   "fast_travel": "Fast Travel",
   "favorites": "Favorites",

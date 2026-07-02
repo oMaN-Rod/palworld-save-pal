@@ -15,9 +15,8 @@
 	} from './table.utils';
 
 	// Contract notes for downstream consumers:
-	// - `onrowclick` is a POINTER-ONLY convenience. Detail-panel opening should be
-	//   SELECTION-DRIVEN (keyboard-accessible checkboxes). Do NOT rely on row click
-	//   for keyboard users.
+	// - When `onrowclick` is set, data rows are keyboard-activatable (Enter/Space)
+	//   in addition to being clickable with a pointer.
 	// - `pageSize` is a fixed value owned by the PARENT/toolbar. Table has no built-in
 	//   page-size selector by design; the toolbar renders one and passes the value down.
 	// - Server-side mode (`serverSide: true`): changing the sort does NOT reset `page`
@@ -39,7 +38,7 @@
 		empty,
 		onsort = () => {},
 		onpagechange = () => {},
-		onrowclick = () => {}
+		onrowclick
 	}: {
 		rows: T[];
 		columns: ColumnDef<T>[];
@@ -97,6 +96,16 @@
 		if (column.align === 'center') return 'text-center';
 		if (column.align === 'right') return 'text-right';
 		return 'text-left';
+	}
+
+	function handleRowKeydown(event: KeyboardEvent, row: T) {
+		if (!onrowclick) return;
+		if (event.key === 'Enter') {
+			onrowclick(row);
+		} else if (event.key === ' ') {
+			event.preventDefault();
+			onrowclick(row);
+		}
 	}
 </script>
 
@@ -156,7 +165,10 @@
 							'border-surface-900 hover:bg-secondary-500/25 cursor-pointer border-t',
 							selected.has(rowKey(row)) ? 'bg-secondary-500/25' : ''
 						)}
-						onclick={() => onrowclick(row)}
+						onclick={() => onrowclick?.(row)}
+						tabindex={onrowclick ? 0 : undefined}
+						role={onrowclick ? 'button' : undefined}
+						onkeydown={onrowclick ? (event: KeyboardEvent) => handleRowKeydown(event, row) : undefined}
 					>
 						{#if selectable}
 							<td class="p-2" onclick={(event) => event.stopPropagation()}>

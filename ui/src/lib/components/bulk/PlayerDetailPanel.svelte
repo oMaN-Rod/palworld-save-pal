@@ -128,6 +128,12 @@
 					</div>
 				{/if}
 			</div>
+		{:else}
+			<div class="flex flex-1 items-center justify-center">
+				<p class="text-surface-400 text-sm">
+					{m.failed_load_entity({ entity: c.player })}
+				</p>
+			</div>
 		{/if}
 	</div>
 </div>
