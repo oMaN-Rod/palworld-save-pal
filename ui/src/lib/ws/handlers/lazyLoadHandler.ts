@@ -80,6 +80,7 @@ export const getGuildDetailsResponseHandler: WSMessageHandler = {
 		if ('error' in data) {
 			console.error('Failed to load guild details:', data.error);
 			appState.loadingGuild = false;
+			appState.bulkGuildRequestPending = false;
 			return;
 		}
 
@@ -95,7 +96,10 @@ export const getGuildDetailsResponseHandler: WSMessageHandler = {
 		}
 
 		appState.loadingGuild = false;
-		appState.bulkDetailGuild = guild;
+		if (appState.bulkGuildRequestPending) {
+			appState.bulkDetailGuild = guild;
+			appState.bulkGuildRequestPending = false;
+		}
 	}
 };
 

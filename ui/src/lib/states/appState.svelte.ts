@@ -42,6 +42,10 @@ export class AppState {
 	hasGpsAvailable: boolean = $state(false);
 	bulkDetailPlayer: Player | undefined = $state(undefined);
 	bulkDetailGuild: Guild | undefined = $state(undefined);
+	/** Set while a guild-details request originated from the bulk panel is in flight, so the
+	 *  response handler knows whether to populate bulkDetailGuild instead of other guild loads
+	 *  (e.g. /edit/guild, worldmap) stomping on it. */
+	bulkGuildRequestPending: boolean = $state(false);
 
 	resetState() {
 		this.players = {};
@@ -61,6 +65,7 @@ export class AppState {
 		this.hasGpsAvailable = false;
 		this.bulkDetailPlayer = undefined;
 		this.bulkDetailGuild = undefined;
+		this.bulkGuildRequestPending = false;
 	}
 
 	async selectPlayerLazy(playerId: string, origin: string = 'edit') {
@@ -91,6 +96,7 @@ export class AppState {
 			return;
 		}
 		this.loadingGuild = true;
+		this.bulkGuildRequestPending = true;
 		send(MessageType.REQUEST_GUILD_DETAILS, guildId);
 	}
 
