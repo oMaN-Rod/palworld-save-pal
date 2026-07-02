@@ -25,6 +25,7 @@
 
 	function openDetail(row: PlayerRow) {
 		detailOpen = true;
+		appState.bulkDetailPlayer = undefined;
 		appState.loadPlayerDetailsForBulk(row.uid);
 	}
 
