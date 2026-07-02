@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { List, Loading } from '$components/ui';
-	import { getAppState } from '$states';
+	import { getAppState, getNavigationState } from '$states';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 	import { X } from 'lucide-svelte';
@@ -10,27 +10,37 @@
 	let { expanded = false, onclose }: { expanded?: boolean; onclose?: () => void } = $props();
 
 	const appState = getAppState();
+	const nav = getNavigationState();
 	const guild = $derived(appState.bulkDetailGuild);
-	const guildPlayers = $derived(guild ? Object.entries(appState.playerSummaries).filter(([uid]) => guild.players?.includes(uid)) : undefined);
-
-	let query = $state('');
-	const filteredPlayers = $derived.by(() => {
-		if (!guildPlayers) return [];
-		return guildPlayers.filter(([uid, player]) => {
-			const search = query.toLowerCase();
-			return (
-				player.nickname?.toLowerCase().includes(search) ||
-				uid.toLowerCase().includes(search)
-			);
-		});
-	});
 
 	function memberName(uid: string): string {
 		return appState.playerSummaries[uid]?.nickname ?? uid;
 	}
 
+	const guildPlayers = $derived(
+		guild
+			? guild.players?.map((uid) => ({
+					uid,
+					name: memberName(uid),
+					level: appState.playerSummaries[uid]?.level
+				})) ?? []
+			: undefined
+	);
+
+	let query = $state('');
+	const filteredPlayers = $derived.by(() => {
+		if (!guildPlayers) return [];
+		const search = query.toLowerCase();
+		return guildPlayers.filter((member) => member.name.toLowerCase().includes(search));
+	});
+
 	function editPlayer(uid: string) {
-		appState.selectPlayerLazy(uid); // navigates to /edit/player
+		if (appState.players[uid]) {
+			appState.selectedPlayer = appState.players[uid];
+			nav.saveAndNavigate('/edit/player');
+		} else {
+			appState.selectPlayerLazy(uid);
+		}
 	}
 </script>
 
@@ -70,7 +80,7 @@
 				</dl>
 				<div class="flex flex-col gap-1">
 					<h4 class="text-sm font-semibold">{c.players}</h4>
-					<List items={filteredPlayers} canSelect={false} class="flex flex-col gap-1" headerClass="flex p-0">
+					<List items={filteredPlayers} idKey="uid" canSelect={false} class="flex flex-col gap-1" headerClass="flex p-0">
 						{#snippet listHeader()}
 							{#if filteredPlayers.length > 5}
 								<Input bind:value={query} inputClass="my-0" placeholder={m.search_entity({ entity: c.players })} />
@@ -78,17 +88,17 @@
 								<div></div>
 							{/if}
 						{/snippet}
-						{#snippet listItem([playerUid, player])}
+						{#snippet listItem(member)}
 							<div class="flex gap-2">
-								<span class="font-bold">Lvl {player?.level ?? '—'}</span>
-								<span class="truncate">{player?.nickname ?? playerUid}</span>
+								<span class="font-bold">Lvl {member?.level ?? '—'}</span>
+								<span class="truncate">{member?.name}</span>
 							</div>
-							
+
 						{/snippet}
-						{#snippet listItemActions([playerUid, player])}
+						{#snippet listItemActions(member)}
 							<button
 								class="ml-2 text-left text-sm hover:underline"
-								onclick={() => editPlayer(playerUid)}
+								onclick={() => editPlayer(member.uid)}
 							>
 								<Pencil class="h-4 w-4" />
 							</button>
