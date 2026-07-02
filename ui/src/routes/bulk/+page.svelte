@@ -4,9 +4,11 @@
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 	import PlayersTable from '$lib/components/bulk/PlayersTable.svelte';
+	import GuildsTable from '$lib/components/bulk/GuildsTable.svelte';
 
 	let selectedTab = $state('players');
 	let playerSelection = $state(new Set<string>());
+	let guildSelection = $state(new Set<string>());
 </script>
 
 <div class="flex h-full flex-col gap-4 p-4">
@@ -24,7 +26,7 @@
 				<p class="text-surface-300">{c.pals}</p>
 			</Tabs.Panel>
 			<Tabs.Panel value="guilds">
-				<p class="text-surface-300">{c.guilds}</p>
+				<GuildsTable bind:selected={guildSelection} />
 			</Tabs.Panel>
 		{/snippet}
 	</Tabs>
