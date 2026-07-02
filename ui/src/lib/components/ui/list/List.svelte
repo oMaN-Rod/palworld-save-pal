@@ -61,6 +61,9 @@
 		if (typeof item === 'string') {
 			return item;
 		}
+		if (Array.isArray(item) && item.length === 2) {
+			return item[0];
+		}
 		const key = (item as Record<string, any>)[idKey];
 		return key as string | number;
 	}
@@ -149,11 +152,28 @@
 						class="mr-2"
 					/>
 				{/if}
-				<Tooltip
-					background="bg-surface-900"
-					baseClass="flex w-full items-center text-left"
-					position="right"
-				>
+				{#if listItemPopup}
+					<Tooltip
+						background="bg-surface-900"
+						baseClass="flex w-full items-center text-left"
+						position="right"
+					>
+						<div class="flex w-full flex-row">
+							<button
+								class="flex w-full items-center text-left"
+								onclick={(event) => handleItemSelect(event, item)}
+								onkeydown={(event) => handleKeyDown(event, item)}
+								aria-label={`Select item ${typeof item === 'string' ? item : ((item as Record<string, any>)[idKey] ?? '')}`}
+							>
+								{@render listItem(item)}
+							</button>
+							{@render listItemActions?.(item)}
+						</div>
+						{#snippet popup()}
+							{@render listItemPopup(item)}
+						{/snippet}
+					</Tooltip>
+				{:else}
 					<div class="flex w-full flex-row">
 						<button
 							class="flex w-full items-center text-left"
@@ -165,10 +185,7 @@
 						</button>
 						{@render listItemActions?.(item)}
 					</div>
-					{#snippet popup()}
-						{@render listItemPopup(item)}
-					{/snippet}
-				</Tooltip>
+				{/if}
 			</li>
 		{/each}
 	</ul>
