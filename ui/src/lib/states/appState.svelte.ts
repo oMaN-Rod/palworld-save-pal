@@ -63,7 +63,7 @@ export class AppState {
 		this.bulkDetailGuild = undefined;
 	}
 
-	async selectPlayerLazy(playerId: string) {
+	async selectPlayerLazy(playerId: string, origin: string = 'edit') {
 		if (this.players?.[playerId]) {
 			this.selectedPlayer = this.players[playerId];
 			this.selectedPlayerUid = playerId;
@@ -71,7 +71,7 @@ export class AppState {
 		}
 
 		this.loadingPlayer = true;
-		send(MessageType.REQUEST_PLAYER_DETAILS, { player_id: playerId, origin: 'edit' });
+		send(MessageType.REQUEST_PLAYER_DETAILS, { player_id: playerId, origin });
 	}
 
 	loadPlayerDetailsForBulk(playerId: string) {

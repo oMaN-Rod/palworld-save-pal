@@ -4,6 +4,7 @@ import { getAppState } from '$states';
 import type { Guild, GuildSummary, Player, PlayerSummary } from '$types';
 import { MessageType } from '$types';
 import type { WSMessageHandler } from '../types';
+import { resolvePlayerDetailsRouting } from './lazyLoad.utils';
 
 export const getPlayerSummariesHandler: WSMessageHandler = {
 	type: MessageType.GET_PLAYER_SUMMARIES,
@@ -59,15 +60,15 @@ export const getPlayerDetailsResponseHandler: WSMessageHandler = {
 
 		appState.loadingPlayer = false;
 
-		if (origin === 'bulk') {
+		const routing = resolvePlayerDetailsRouting(origin);
+		if (routing.target === 'bulkDetail') {
 			appState.bulkDetailPlayer = player;
 			return;
 		}
 
-		// Default (edit) path: set as selected player and navigate
 		appState.selectedPlayer = player;
 		appState.selectedPlayerUid = player_id;
-		goto('/edit/player');
+		if (routing.navigateTo) goto(routing.navigateTo);
 	}
 };
 

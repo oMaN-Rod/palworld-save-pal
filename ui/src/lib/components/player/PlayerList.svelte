@@ -40,7 +40,7 @@
 			appState.selectedPlayer = appState.players[playerId];
 			if (redirect) nav.saveAndNavigate('/edit/player');
 		} else {
-			appState.selectPlayerLazy(playerId);
+			appState.selectPlayerLazy(playerId, redirect ? 'edit' : undefined);
 		}
 	}
 
