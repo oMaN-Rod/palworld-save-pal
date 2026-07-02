@@ -124,47 +124,49 @@
 </script>
 
 <div class="flex h-full min-h-0">
-	<div class="flex min-w-0 flex-1 flex-col gap-2 overflow-y-auto mr-2">
-		<Input bind:value={query} placeholder={m.bulk_search_placeholder({ entity: c.players })} />
-		<div class="bg-surface-900 flex items-center gap-2 rounded-sm p-1">
-			<Popover position="bottom-end">
-				<Tooltip label={m.delete_inactive_players()}>
-					<Button variant="ghost">
-						<ClockAlert class="h-4 w-4" />
-					</Button>
-				</Tooltip>
-				{#snippet content({ close })}
-					<div class="flex flex-col gap-3">
-						<label class="flex flex-col gap-1">
-							<span class="text-sm font-medium">{m.inactivity_days_label()}</span>
-							<Input
-								type="number"
-								min={1}
-								bind:value={inactiveDays}
-								class="input bg-surface-900 w-40"
-							/>
-						</label>
-						<Button
-							variant="danger"
-							type="submit"
-							onclick={(e: Event) => {
-								e.preventDefault();
-								close();
-								deleteInactive();
-							}}
-						>
-							{m.delete_inactive_players()}
+	<div class="mr-2 flex min-w-0 flex-1 flex-col gap-2 overflow-y-auto">
+		<div class="flex items-center gap-2">
+			<Input bind:value={query} placeholder={m.bulk_search_placeholder({ entity: c.players })} />
+			<div class="bg-surface-900 flex items-center gap-2 rounded-sm p-1">
+				<Popover position="bottom-end">
+					<Tooltip label={m.delete_inactive_players()}>
+						<Button variant="ghost">
+							<ClockAlert class="h-4 w-4" />
 						</Button>
-					</div>
-				{/snippet}
-			</Popover>
-			{#if selected.size > 0}
-				<Tooltip label={m.delete_selected_entity({ entity: c.players })}>
-					<Button variant="ghost" class="hover:bg-error-500" onclick={bulkDelete}>
-						<Trash class="h-4 w-4" />
-					</Button>
-				</Tooltip>
-			{/if}
+					</Tooltip>
+					{#snippet content({ close })}
+						<div class="flex flex-col gap-3">
+							<label class="flex flex-col gap-1">
+								<span class="text-sm font-medium">{m.inactivity_days_label()}</span>
+								<Input
+									type="number"
+									min={1}
+									bind:value={inactiveDays}
+									class="input bg-surface-900 w-40"
+								/>
+							</label>
+							<Button
+								variant="danger"
+								type="submit"
+								onclick={(e: Event) => {
+									e.preventDefault();
+									close();
+									deleteInactive();
+								}}
+							>
+								{m.delete_inactive_players()}
+							</Button>
+						</div>
+					{/snippet}
+				</Popover>
+				{#if selected.size > 0}
+					<Tooltip label={m.delete_selected_entity({ entity: c.players })}>
+						<Button variant="ghost" class="hover:bg-error-500" onclick={bulkDelete}>
+							<Trash class="h-4 w-4" />
+						</Button>
+					</Tooltip>
+				{/if}
+			</div>
 		</div>
 		<BulkSelectionBanner
 			selectedCount={selected.size}
@@ -172,7 +174,14 @@
 			onSelectAll={selectAllMatching}
 			onClear={clearSelection}
 		/>
-		<Table {rows} {columns} rowKey={(row) => row.uid} pageSize={10} bind:selected onrowclick={openDetail}>
+		<Table
+			{rows}
+			{columns}
+			rowKey={(row) => row.uid}
+			pageSize={15}
+			bind:selected
+			onrowclick={openDetail}
+		>
 			{#snippet cell({ row, column })}
 				{#if column.key === 'lastOnline'}
 					{lastActiveLabel(row)}

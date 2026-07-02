@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { List, Spinner } from '$components/ui';
+	import { List, Loading, Spinner, Tooltip } from '$components/ui';
 	import { getAppState } from '$states';
 	import { goto } from '$app/navigation';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 	import { X } from 'lucide-svelte';
-	import { Pencil } from '@lucide/svelte';
+	import { Pencil, User } from '@lucide/svelte';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
@@ -13,11 +13,13 @@
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { PalInfoPopup } from '$components/pal';
 	import { palsData } from '$lib/data';
+	import { PlayerHealthBadge, PlayerStats } from '$components/player';
 
 	let { expanded = false, onclose }: { expanded?: boolean; onclose?: () => void } = $props();
 
 	const appState = getAppState();
 	const player = $derived(appState.bulkDetailPlayer);
+	const maxHp = $derived(player ? 500 + player.status_point_list.max_hp * 100 : 0);
 
 	function editPal(palId: string) {
 		const targetPal = player?.pals?.[palId];
@@ -28,7 +30,7 @@
 </script>
 
 <div
-	class="bg-surface-800/80 text-on-surface max-h-218 shrink-0 overflow-hidden shadow-lg backdrop-blur-md transition-all duration-300 ease-in-out"
+	class="bg-surface-800/80 text-on-surface h-[calc(100vh-84px)] shrink-0 overflow-hidden shadow-lg backdrop-blur-md transition-all duration-300 ease-in-out"
 	style:width={expanded ? '420px' : '0px'}
 >
 	<div class="flex h-full w-105 flex-col overflow-y-auto p-4">
@@ -44,22 +46,20 @@
 		</div>
 		{#if appState.loadingPlayer}
 			<div class="flex flex-1 items-center justify-center">
-				<Spinner />
+				<Loading label={m.loading_entity({ entity: m.player({count: 1}) })} loadingComplete={!appState.loadingPlayer} icon={User}/>
 			</div>
 		{:else if player}
 			<div class="flex flex-col gap-3">
 				<h3 class="h4">{player.nickname}</h3>
-				<dl class="grid grid-cols-2 gap-1 text-sm">
-					<dt class="font-medium">{m.level()}</dt>
-					<dd>{player.level}</dd>
-					<dt class="font-medium">HP</dt>
-					<dd>{player.hp}</dd>
-				</dl>
+				<PlayerHealthBadge {player} {maxHp} />
+				<PlayerStats {player} />
 				{#if player.pals}
 					<div class="flex flex-col gap-1">
-						<div class="flex gap-1 items-center">
+						<div class="flex items-center gap-1">
 							<h4 class="text-sm font-semibold">{c.pals}</h4>
-							<dd class="text-xs font-semibold">({player.pals ? Object.keys(player.pals).length : 0})</dd>
+							<span class="text-xs font-semibold">
+								({player.pals ? Object.keys(player.pals).length : 0})
+							</span>
 						</div>
 						<List
 							items={Object.values(player.pals)}
