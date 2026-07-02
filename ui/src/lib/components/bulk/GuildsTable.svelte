@@ -47,6 +47,7 @@
 		for (const id of ids) {
 			send(MessageType.DELETE_GUILD, { guild_id: id, origin: 'bulk' });
 		}
+		toast.add(m.deleted_entity({ entity: c.guilds, count: ids.length }), m.success(), 'success');
 		selected = new Set<string>();
 	}
 

@@ -73,6 +73,7 @@
 		for (const uid of uids) {
 			send(MessageType.DELETE_PLAYER, { player_id: uid, origin: 'bulk' });
 		}
+		toast.add(m.deleted_entity({ entity: c.players, count: uids.length }), m.success(), 'success');
 		selected = new Set<string>();
 	}
 

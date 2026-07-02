@@ -61,11 +61,19 @@ export const deleteGuildHandler: WSMessageHandler = {
 		const guild = appState.guilds[guild_id];
 		const guildName = guild?.name || 'Unknown Guild';
 		appState.players = Object.fromEntries(
-			Object.entries(appState.players).filter(([key]) => guild.players?.includes(key) !== true)
+			Object.entries(appState.players).filter(([key]) => guild?.players?.includes(key) !== true)
 		);
 		delete appState.guilds[guild_id];
-		toast.add(`Guild ${guildName} deleted`, undefined, 'success');
-		await goto(`/${origin}`);
+		delete appState.guildSummaries[guild_id];
+		Object.entries(appState.playerSummaries).forEach(([playerId, summary]) => {
+			if (summary.guild_id === guild_id) {
+				delete appState.playerSummaries[playerId];
+			}
+		});
+		if (origin !== 'bulk') {
+			toast.add(`Guild ${guildName} deleted`, undefined, 'success');
+			await goto(`/${origin}`);
+		}
 	}
 };
 

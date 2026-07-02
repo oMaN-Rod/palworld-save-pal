@@ -57,8 +57,13 @@ export const deletePlayerHandler: WSMessageHandler = {
 		Object.values(appState.guilds).forEach((guild) => {
 			guild.players = guild.players.filter((player) => player !== player_id);
 		});
-		toast.add(`Player ${nickname} deleted`, undefined, 'success');
-		goto(`/${origin}`);
+		if (player_id) {
+			delete appState.playerSummaries[player_id];
+		}
+		if (origin !== 'bulk') {
+			toast.add(`Player ${nickname} deleted`, undefined, 'success');
+			goto(`/${origin}`);
+		}
 	}
 };
 
