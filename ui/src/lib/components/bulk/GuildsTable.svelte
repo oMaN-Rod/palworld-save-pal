@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Table, Input, Button } from '$components/ui';
+	import { Table, Input, Button, Tooltip } from '$components/ui';
 	import type { ColumnDef } from '$components/ui/table/table.types';
 	import { Trash2 } from 'lucide-svelte';
 	import * as m from '$i18n/messages';
@@ -9,6 +9,8 @@
 	import { MessageType } from '$types';
 	import { buildGuildRows, filterBySearch, emptyGuildIds, type GuildRow } from './bulk.utils';
 	import BulkSelectionBanner from './BulkSelectionBanner.svelte';
+	import GuildDetailPanel from './GuildDetailPanel.svelte';
+	import { Trash } from '@lucide/svelte';
 
 	let { selected = $bindable(new Set<string>()) }: { selected?: Set<string> } = $props();
 
@@ -16,6 +18,18 @@
 	const modal = getModalState();
 	const toast = getToastState();
 	let query = $state('');
+	let detailOpen = $state(false);
+
+	function openDetail(row: GuildRow) {
+		detailOpen = true;
+		appState.bulkDetailGuild = undefined;
+		appState.loadGuildDetailsForBulk(row.id);
+	}
+
+	function closeDetail() {
+		detailOpen = false;
+		appState.bulkDetailGuild = undefined;
+	}
 
 	const allRows = $derived(buildGuildRows(appState.guildSummariesArray));
 	const rows = $derived(filterBySearch(allRows, query, ['name', 'id']));
@@ -85,39 +99,61 @@
 	}
 </script>
 
-<div class="flex min-h-0 flex-1 flex-col gap-2">
-	<div class="flex flex-wrap items-center gap-2">
-		<Input bind:value={query} placeholder={m.bulk_search_placeholder({ entity: c.guilds })} />
-		<Button variant="danger" disabled={selected.size === 0} onclick={bulkDelete}>
-			{m.delete_selected_entity({ entity: c.guilds })}
-		</Button>
-		<Button variant="danger" onclick={deleteEmpty}>{m.delete_empty_guilds()}</Button>
+<div class="flex h-full min-h-0">
+	<div class="mr-2 flex min-w-0 flex-1 flex-col gap-2 overflow-y-auto">
+		<div class="flex items-center gap-2">
+			<Input bind:value={query} placeholder={m.bulk_search_placeholder({ entity: c.guilds })} />
+			<div class="bg-surface-900 flex items-center gap-2 rounded-sm p-1">
+				<Tooltip
+					label={m.delete_selected_entity({ entity: c.guilds })}
+					disabled={selected.size === 0}
+				>
+					<Button variant="ghost" disabled={selected.size === 0} onclick={bulkDelete}>
+						<Trash class="h-4 w-4" />
+					</Button>
+				</Tooltip>
+
+				<Tooltip label={m.delete_empty_guilds()}>
+					<Button variant="ghost" onclick={deleteEmpty}>
+						<Trash2 class="h-4 w-4" />
+					</Button>
+				</Tooltip>
+			</div>
+		</div>
+		<BulkSelectionBanner
+			selectedCount={selected.size}
+			matchingCount={rows.length}
+			onSelectAll={selectAllMatching}
+			onClear={clearSelection}
+		/>
+		<Table
+			{rows}
+			{columns}
+			rowKey={(row) => row.id}
+			pageSize={15}
+			bind:selected
+			onrowclick={openDetail}
+		>
+			{#snippet cell({ row, column })}
+				{#if column.key === 'level'}
+					{row.level ?? '—'}
+				{:else}
+					{row[column.key as keyof GuildRow]}
+				{/if}
+			{/snippet}
+			{#snippet rowActions(row)}
+				<Button
+					variant="ghost"
+					onclick={() => deleteOne(row)}
+					title={m.delete_entity({ entity: c.guild })}
+				>
+					<Trash2 class="h-4 w-4" />
+				</Button>
+			{/snippet}
+			{#snippet empty()}
+				{m.no_guilds_match()}
+			{/snippet}
+		</Table>
 	</div>
-	<BulkSelectionBanner
-		selectedCount={selected.size}
-		matchingCount={rows.length}
-		onSelectAll={selectAllMatching}
-		onClear={clearSelection}
-	/>
-	<Table {rows} {columns} rowKey={(row) => row.id} pageSize={15} bind:selected>
-		{#snippet cell({ row, column })}
-			{#if column.key === 'level'}
-				{row.level ?? '—'}
-			{:else}
-				{row[column.key as keyof GuildRow]}
-			{/if}
-		{/snippet}
-		{#snippet rowActions(row)}
-			<Button
-				variant="ghost"
-				onclick={() => deleteOne(row)}
-				title={m.delete_entity({ entity: c.guild })}
-			>
-				<Trash2 class="h-4 w-4" />
-			</Button>
-		{/snippet}
-		{#snippet empty()}
-			{m.no_guilds_match()}
-		{/snippet}
-	</Table>
+	<GuildDetailPanel expanded={detailOpen} onclose={closeDetail} />
 </div>
