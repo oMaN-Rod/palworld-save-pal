@@ -22,6 +22,7 @@ import Spinner from './spinner/Spinner.svelte';
 import Stopwatch from './stopwatch/Stopwatch.svelte';
 import Table from './table/Table.svelte';
 import Toast from './toast/Toast.svelte';
+import Loading from './loading/Loading.svelte';
 
 export {
 	Button,
@@ -47,5 +48,6 @@ export {
 	Table,
 	Toast,
 	Tooltip,
-	TooltipButton
+	TooltipButton,
+	Loading
 };

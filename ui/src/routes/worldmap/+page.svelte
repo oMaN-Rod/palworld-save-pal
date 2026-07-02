@@ -1,12 +1,15 @@
 <script lang="ts">
-	import { Map } from '$components';
 	import { PlayerList } from '$components/player';
-	import { Button, Combobox } from '$components/ui';
+	import { Button, Combobox, Loading } from '$components/ui';
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { worldToPixel, worldToMap } from '$components/map/utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { mapImg } from '$components/map/styles';
-	import { Target, Unlock, Users, Building, Loader2, Map as MapIcon } from 'lucide-svelte';
+	import Target from '@lucide/svelte/icons/target';
+	import Unlock from '@lucide/svelte/icons/unlock';
+	import Users from '@lucide/svelte/icons/users';
+	import MapIcon from '@lucide/svelte/icons/map';
+	import Building from '@lucide/svelte/icons/building';
 	import { mapObjects, fastTravelPoints, effigies } from '$lib/data';
 	import type { Map as OLMap } from 'ol';
 	import type { Base, GuildSummary, MapUnlockPoint, Player } from '$types';
@@ -320,22 +323,11 @@
 
 <div class="relative h-full overflow-hidden">
 	{#if dismissLoading || !loadingComplete}
-		<div class="loading-overlay" class:loading-dismiss={loadingComplete}>
-			<div class="loading-content">
-				<div class="relative">
-					<Loader2
-						size={64}
-						class="text-secondary-400 animate-spin"
-						style="filter: drop-shadow(0 0 20px color-mix(in srgb, var(--color-secondary-400) 50%, transparent));"
-					/>
-					<MapIcon size={24} class="text-secondary-300 absolute inset-0 m-auto" />
-				</div>
-				<p class="loading-text">INITIALIZING MAP</p>
-				<div class="loading-bar-track">
-					<div class="loading-bar-fill" class:loading-bar-done={loadingComplete}></div>
-				</div>
-			</div>
-		</div>
+		<Loading
+			loadingComplete={loadingComplete}
+			label={m.initializing_entity({entity: m.map()})}
+			icon={MapIcon}
+			iconSize={24} />
 	{/if}
 
 	<div class="grid h-full grid-cols-[420px_1fr] gap-2" class:page-blurred={!loadingComplete}>
@@ -617,116 +609,3 @@
 		</div>
 	</div>
 </div>
-
-<style>
-	.loading-overlay {
-		position: absolute;
-		inset: 0;
-		z-index: 100;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background: color-mix(in srgb, var(--color-surface-950) 95%, transparent);
-		backdrop-filter: blur(4px);
-		transition:
-			opacity 0.5s ease-out,
-			transform 0.5s ease-out,
-			filter 0.3s ease-out;
-	}
-
-	.loading-overlay.loading-dismiss {
-		opacity: 0;
-		transform: scale(1.05);
-		filter: blur(2px);
-		pointer-events: none;
-	}
-
-	.loading-content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 1.5rem;
-		animation: loading-float 2s ease-in-out infinite;
-	}
-
-	@keyframes loading-float {
-		0%,
-		100% {
-			transform: translateY(0);
-		}
-		50% {
-			transform: translateY(-8px);
-		}
-	}
-
-	.loading-text {
-		color: color-mix(in srgb, var(--color-secondary-400) 70%, transparent);
-		font-size: 0.75rem;
-		letter-spacing: 0.2em;
-		text-transform: uppercase;
-		animation: loading-pulse 1.5s ease-in-out infinite;
-		position: relative;
-	}
-
-	.loading-text::after {
-		content: '';
-		position: absolute;
-		bottom: -4px;
-		left: 0;
-		width: 100%;
-		height: 1px;
-		background: linear-gradient(90deg, transparent, var(--color-secondary-400), transparent);
-		animation: loading-scan 2s ease-in-out infinite;
-	}
-
-	@keyframes loading-pulse {
-		0%,
-		100% {
-			opacity: 0.6;
-		}
-		50% {
-			opacity: 1;
-		}
-	}
-
-	@keyframes loading-scan {
-		0% {
-			transform: scaleX(0.3);
-			opacity: 0;
-		}
-		50% {
-			transform: scaleX(1);
-			opacity: 1;
-		}
-		100% {
-			transform: scaleX(0.3);
-			opacity: 0;
-		}
-	}
-
-	.loading-bar-track {
-		width: 200px;
-		height: 2px;
-		background: color-mix(in srgb, var(--color-secondary-400) 15%, transparent);
-		border-radius: 1px;
-		overflow: hidden;
-	}
-
-	.loading-bar-fill {
-		height: 100%;
-		width: 0%;
-		background: var(--color-secondary-400);
-		border-radius: 1px;
-		transition: width 0.3s ease-out;
-	}
-
-	.loading-bar-fill.loading-bar-done {
-		width: 100%;
-	}
-
-	.page-blurred {
-		filter: blur(2px);
-		transition: filter 0.5s ease-out;
-		pointer-events: none;
-	}
-</style>

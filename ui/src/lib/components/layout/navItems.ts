@@ -79,6 +79,13 @@ export const navItems: NavItem[] = [
 		href: '/edit'
 	},
 	{
+		id: 'bulk',
+		section: 'tiles',
+		icon: () => Layers,
+		label: () => m.bulk_actions(),
+		href: '/bulk'
+	},
+	{
 		id: 'file',
 		section: 'tiles',
 		icon: () => File,
@@ -151,13 +158,6 @@ export const navItems: NavItem[] = [
 		icon: () => Wrench,
 		label: () => m.tools(),
 		href: '/tools'
-	},
-	{
-		id: 'bulk',
-		section: 'tiles',
-		icon: () => Layers,
-		label: () => m.bulk_actions(),
-		href: '/bulk'
 	},
 	{
 		id: 'docs',

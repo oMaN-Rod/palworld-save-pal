@@ -40,7 +40,7 @@
 		onsort = () => {},
 		onpagechange = () => {},
 		onrowclick = () => {}
-	} = $props<{
+	}: {
 		rows: T[];
 		columns: ColumnDef<T>[];
 		rowKey: (row: T) => string;
@@ -57,7 +57,7 @@
 		onsort?: (sort: SortState) => void;
 		onpagechange?: (page: number) => void;
 		onrowclick?: (row: T) => void;
-	}>();
+	} = $props();
 
 	// In client mode the component sorts + paginates internally.
 	// In server mode it renders `rows` as the already-fetched current page.
