@@ -20,7 +20,9 @@
 	const modal = getModalState();
 	const toast = getToastState();
 
-	let summaries: PalSummary[] = $state([]);
+	// $state.raw: rows are read-only display data, reassigned wholesale on refetch.
+	// Deep-proxying 1700+ rows makes the allRows map take seconds in dev.
+	let summaries: PalSummary[] = $state.raw([]);
 	let loadingRows = $state(false);
 	let query = $state('');
 
