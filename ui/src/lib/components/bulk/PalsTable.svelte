@@ -1,19 +1,24 @@
 <script lang="ts">
-	import { Table, Input, Loading } from '$components/ui';
+	import { Table, Input, Loading, Button, Tooltip } from '$components/ui';
 	import type { ColumnDef } from '$components/ui/table/table.types';
-	import { PawPrint } from '@lucide/svelte';
+	import { PawPrint, Trash2, Trash } from '@lucide/svelte';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
-	import { sendAndWait } from '$lib/utils/websocketUtils';
+	import { getModalState, getToastState } from '$states';
+	import { send, sendAndWait } from '$lib/utils/websocketUtils';
 	import { MessageType, type PalSummary } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { palsData, elementsData } from '$lib/data';
 	import { assetLoader } from '$utils';
 	import { filterBySearch } from './bulk.utils';
+	import BulkSelectionBanner from './BulkSelectionBanner.svelte';
 
 	let { selected = $bindable(new Set<string>()) }: { selected?: Set<string> } = $props();
 
 	type PalRow = PalSummary & { species_name: string };
+
+	const modal = getModalState();
+	const toast = getToastState();
 
 	let summaries: PalSummary[] = $state([]);
 	let loadingRows = $state(false);
@@ -42,6 +47,68 @@
 	const rows = $derived(
 		filterBySearch(allRows, query, ['nickname', 'species_name', 'character_id', 'owner_name'])
 	);
+
+	function groupPalIds(ids: string[]) {
+		const rowById = new Map(allRows.map((row) => [row.instance_id, row]));
+		const byOwner = new Map<string, string[]>();
+		const byBase = new Map<string, { guildId: string; baseId: string; palIds: string[] }>();
+		for (const id of ids) {
+			const row = rowById.get(id);
+			if (!row) continue;
+			if (row.owner_uid) {
+				const group = byOwner.get(row.owner_uid) ?? [];
+				group.push(id);
+				byOwner.set(row.owner_uid, group);
+			} else if (row.guild_id && row.base_id) {
+				const key = `${row.guild_id}:${row.base_id}`;
+				const group = byBase.get(key) ?? { guildId: row.guild_id, baseId: row.base_id, palIds: [] };
+				group.palIds.push(id);
+				byBase.set(key, group);
+			}
+		}
+		return { byOwner, byBase };
+	}
+
+	async function deletePalIds(ids: string[]) {
+		const { byOwner, byBase } = groupPalIds(ids);
+		for (const [ownerUid, palIds] of byOwner) {
+			send(MessageType.DELETE_PALS, { player_id: ownerUid, pal_ids: palIds });
+		}
+		for (const group of byBase.values()) {
+			send(MessageType.DELETE_PALS, {
+				guild_id: group.guildId,
+				base_id: group.baseId,
+				pal_ids: group.palIds
+			});
+		}
+		toast.add(m.deleted_entity({ entity: c.pals, count: ids.length }), m.success(), 'success');
+		selected = new Set<string>();
+		await loadSummaries();
+	}
+
+	async function deleteOne(row: PalRow) {
+		// @ts-ignore
+		const confirmed = await modal.showConfirmModal({
+			title: m.delete_entity({ entity: c.pal }),
+			message: m.delete_entity_by_name_confirm({ name: row.nickname || row.species_name }),
+			confirmText: m.delete(),
+			cancelText: m.cancel()
+		});
+		if (confirmed) await deletePalIds([row.instance_id]);
+	}
+
+	async function bulkDelete() {
+		const ids = [...selected];
+		if (ids.length === 0) return;
+		// @ts-ignore
+		const confirmed = await modal.showConfirmModal({
+			title: m.delete_selected_entity({ entity: c.pals }),
+			message: m.delete_count_entities_confirm({ count: ids.length, entity: c.pals }),
+			confirmText: m.delete(),
+			cancelText: m.cancel()
+		});
+		if (confirmed) await deletePalIds(ids);
+	}
 
 	const columns: ColumnDef<PalRow>[] = [
 		{ key: 'nickname', header: 'Nickname', sortable: true },
@@ -73,7 +140,23 @@
 	<div class="mr-2 flex min-w-0 flex-1 flex-col gap-2 overflow-y-auto">
 		<div class="flex items-center gap-2">
 			<Input bind:value={query} placeholder={m.bulk_search_placeholder({ entity: c.pals })} />
+			<div class="bg-surface-900 flex items-center gap-2 rounded-sm p-1">
+				<Tooltip
+					label={m.delete_selected_entity({ entity: c.pals })}
+					disabled={selected.size === 0}
+				>
+					<Button variant="ghost" disabled={selected.size === 0} onclick={bulkDelete}>
+						<Trash class="h-4 w-4" />
+					</Button>
+				</Tooltip>
+			</div>
 		</div>
+		<BulkSelectionBanner
+			selectedCount={selected.size}
+			matchingCount={rows.length}
+			onSelectAll={() => (selected = new Set(rows.map((row) => row.instance_id)))}
+			onClear={() => (selected = new Set<string>())}
+		/>
 		{#if loadingRows && summaries.length === 0}
 			<div class="relative flex flex-1 items-center justify-center">
 				<Loading
@@ -108,6 +191,15 @@
 					{:else}
 						{row[column.key as keyof PalRow]}
 					{/if}
+				{/snippet}
+				{#snippet rowActions(row)}
+					<Button
+						variant="ghost"
+						onclick={() => deleteOne(row)}
+						title={m.delete_entity({ entity: c.pal })}
+					>
+						<Trash2 class="h-4 w-4" />
+					</Button>
 				{/snippet}
 				{#snippet empty()}
 					{m.no_pals_match()}

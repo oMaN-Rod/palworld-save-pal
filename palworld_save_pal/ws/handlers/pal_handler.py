@@ -196,7 +196,7 @@ async def clone_dps_pal_handler(message: ClonePalMessage, ws: WebSocket):
     await ws.send_json(response)
 
 
-async def delete_pals_handler(message: DeletePalsMessage, _: WebSocket):
+async def delete_pals_handler(message: DeletePalsMessage, ws: WebSocket):
     player_id = message.data.player_id
     guild_id = message.data.guild_id
     base_id = message.data.base_id
@@ -207,6 +207,19 @@ async def delete_pals_handler(message: DeletePalsMessage, _: WebSocket):
         save_file.delete_player_pals(player_id, pal_ids)
     if guild_id:
         save_file.delete_guild_pals(guild_id, base_id, pal_ids)
+
+    app_state.player_summaries = save_file.get_player_summaries()
+    app_state.guild_summaries = save_file.get_guild_summaries()
+
+    response = build_response(
+        MessageType.GET_PLAYER_SUMMARIES, app_state.player_summaries
+    )
+    await ws.send_json(response)
+
+    response = build_response(
+        MessageType.GET_GUILD_SUMMARIES, app_state.guild_summaries
+    )
+    await ws.send_json(response)
 
 
 async def delete_dps_pals_handler(message: DeleteDpsPalsMessage, _: WebSocket):
