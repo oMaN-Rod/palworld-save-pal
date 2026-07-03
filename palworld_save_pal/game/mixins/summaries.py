@@ -17,10 +17,11 @@ from palworld_save_tools.gvas import GvasFile
 from palworld_save_tools.palsav import decompress_sav_to_gvas
 from palworld_save_tools.paltypes import PALWORLD_TYPE_HINTS
 
-from palworld_save_pal.dto.summary import GuildSummary, PlayerSummary
+from palworld_save_pal.dto.summary import GuildSummary, PalSummary, PlayerSummary
 from palworld_save_pal.game.gvas_codec import CUSTOM_PROPERTIES
-from palworld_save_pal.game.pal_objects import PalObjects
+from palworld_save_pal.game.pal_objects import PalGender, PalObjects
 from palworld_save_pal.game.enum import GroupType
+from palworld_save_pal.game.utils import format_character_key
 from palworld_save_pal.utils.logging_config import create_logger
 from palworld_save_pal.utils.uuid import are_equal_uuids, is_empty_uuid
 from palworld_save_pal.utils.json_manager import sanitize_string
@@ -391,4 +392,114 @@ class SummariesMixin(_Base):
 
         self._guild_summaries = summaries
         logger.info(f"Extracted {len(summaries)} guild summaries")
+        return summaries
+
+    def _build_base_container_map(self) -> Dict[UUID, Tuple[UUID, UUID]]:
+        """Map base worker-container id -> (guild_id, base_id)."""
+        container_map: Dict[UUID, Tuple[UUID, UUID]] = {}
+        for base in self._base_camp_save_data_map or []:
+            guild_id = PalObjects.as_uuid(
+                PalObjects.get_nested(
+                    base, "value", "RawData", "value", "group_id_belong_to"
+                )
+            )
+            base_id = PalObjects.as_uuid(PalObjects.get_nested(base, "key"))
+            container_id = PalObjects.as_uuid(
+                PalObjects.get_nested(
+                    base, "value", "WorkerDirector", "value", "RawData", "value", "container_id"
+                )
+            )
+            if guild_id and base_id and container_id:
+                container_map[container_id] = (guild_id, base_id)
+        return container_map
+
+    @staticmethod
+    def _sp_value(save_parameter: Dict[str, Any], key: str, default=None):
+        if key not in save_parameter:
+            return default
+        value = PalObjects.get_value(save_parameter[key], default)
+        return default if value is None else value
+
+    @staticmethod
+    def _sp_byte(save_parameter: Dict[str, Any], key: str, default: int = 0) -> int:
+        if key not in save_parameter:
+            return default
+        value = PalObjects.get_byte_property(save_parameter[key])
+        return default if value is None else int(value)
+
+    def get_pal_summaries(self) -> List[PalSummary]:
+        """Build lightweight pal rows from the raw character map (rebuilt per call)."""
+        summaries: List[PalSummary] = []
+        container_map = self._build_base_container_map()
+
+        for entry in self._character_save_parameter_map:
+            if self._is_player(entry):
+                continue
+            save_parameter = PalObjects.get_nested(
+                entry, "value", "RawData", "value", "object", "SaveParameter", "value"
+            )
+            if not save_parameter:
+                continue
+            instance_id = PalObjects.get_guid(
+                PalObjects.get_nested(entry, "key", "InstanceId")
+            )
+            if not instance_id:
+                continue
+
+            character_id = self._sp_value(save_parameter, "CharacterID", "") or ""
+            owner_uid = None
+            if "OwnerPlayerUId" in save_parameter:
+                owner_uid = PalObjects.get_guid(save_parameter["OwnerPlayerUId"])
+
+            owner_name = None
+            if owner_uid and owner_uid in self._player_summaries:
+                owner_name = self._player_summaries[owner_uid].nickname
+
+            guild_id = None
+            base_id = None
+            slot_id = save_parameter.get("SlotId")
+            if slot_id:
+                pal_container_id = PalObjects.get_guid(
+                    PalObjects.get_nested(slot_id, "value", "ContainerId", "value", "ID")
+                )
+                if pal_container_id in container_map:
+                    guild_id, base_id = container_map[pal_container_id]
+
+            gender = None
+            if "Gender" in save_parameter:
+                raw_gender = PalObjects.get_enum_property(save_parameter["Gender"])
+                if raw_gender:
+                    gender = PalGender.from_value(raw_gender).value
+
+            hp = 0
+            for hp_key in ("Hp", "HP"):
+                if hp_key in save_parameter:
+                    hp = int(PalObjects.get_fixed_point64(save_parameter[hp_key]) or 0)
+                    break
+
+            summaries.append(
+                PalSummary(
+                    instance_id=instance_id,
+                    character_id=character_id,
+                    character_key=format_character_key(character_id),
+                    nickname=self._sp_value(save_parameter, "NickName"),
+                    owner_uid=owner_uid,
+                    owner_name=owner_name,
+                    guild_id=guild_id,
+                    base_id=base_id,
+                    gender=gender,
+                    level=self._sp_byte(save_parameter, "Level", 1),
+                    hp=hp,
+                    stomach=float(self._sp_value(save_parameter, "FullStomach", 150.0)),
+                    rank=self._sp_byte(save_parameter, "Rank", 1),
+                    exp=int(self._sp_value(save_parameter, "Exp", 0) or 0),
+                    talent_hp=self._sp_byte(save_parameter, "Talent_HP"),
+                    talent_shot=self._sp_byte(save_parameter, "Talent_Shot"),
+                    talent_defense=self._sp_byte(save_parameter, "Talent_Defense"),
+                    rank_hp=self._sp_byte(save_parameter, "Rank_HP"),
+                    rank_attack=self._sp_byte(save_parameter, "Rank_Attack"),
+                    rank_defense=self._sp_byte(save_parameter, "Rank_Defence"),
+                    rank_craftspeed=self._sp_byte(save_parameter, "Rank_CraftSpeed"),
+                )
+            )
         return summaries
