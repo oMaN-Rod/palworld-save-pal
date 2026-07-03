@@ -83,6 +83,7 @@ class MessageType(str, Enum):
     GET_GUILDS = "get_guilds"
     GET_ITEMS = "get_items"
     GET_MISSIONS = "get_missions"
+    GET_PAL_SUMMARIES = "get_pal_summaries"
     GET_PASSIVE_SKILLS = "get_passive_skills"
     GET_PLAYERS = "get_players"
     GET_TECHNOLOGIES = "get_technologies"
@@ -341,6 +342,10 @@ class GetItemsMessage(BaseModel):
 
 class GetPalsMessage(BaseModel):
     type: str = MessageType.GET_PALS.value
+
+
+class GetPalSummariesMessage(BaseModel):
+    type: str = MessageType.GET_PAL_SUMMARIES.value
 
 
 class OpenInBrowserMessage(BaseMessage):

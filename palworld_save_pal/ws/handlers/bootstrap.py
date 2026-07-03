@@ -57,6 +57,7 @@ from palworld_save_pal.ws.messages import (
     GetMapObjectsMessage,
     GetMissionsMessage,
     GetPalsMessage,
+    GetPalSummariesMessage,
     GetPassiveSkillsMessage,
     GetRawDataMessage,
     GetSettingsMessage,
@@ -168,6 +169,11 @@ HANDLER_REGISTRY = [
     ),
     # Pals
     (MessageType.GET_PALS, GetPalsMessage, pal_handler.get_pals_handler),
+    (
+        MessageType.GET_PAL_SUMMARIES,
+        GetPalSummariesMessage,
+        pal_handler.get_pal_summaries_handler,
+    ),
     (MessageType.DELETE_PALS, DeletePalsMessage, pal_handler.delete_pals_handler),
     (
         MessageType.DELETE_DPS_PALS,

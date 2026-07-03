@@ -8,6 +8,7 @@ from palworld_save_pal.ws.messages import (
     AddDpsPalMessage,
     DeleteDpsPalsMessage,
     GetPalsMessage,
+    GetPalSummariesMessage,
     AddPalMessage,
     HealAllPalsMessage,
     MovePalMessage,
@@ -47,6 +48,20 @@ async def get_pals_handler(_: GetPalsMessage, ws: WebSocket):
 
     response = build_response(MessageType.GET_PALS, localized_data)
     await ws.send_json(response)
+
+
+async def get_pal_summaries_handler(message: GetPalSummariesMessage, ws: WebSocket):
+    app_state = get_app_state()
+    save_file = app_state.save_file
+    if not save_file:
+        response = build_response(
+            MessageType.GET_PAL_SUMMARIES, {"error": "No save file loaded"}
+        )
+        await ws.send_json(response)
+        return
+
+    response_data = {"pals": save_file.get_pal_summaries()}
+    await ws.send_json(build_response(MessageType.GET_PAL_SUMMARIES, response_data))
 
 
 async def add_pal_handler(message: AddPalMessage, ws: WebSocket):
