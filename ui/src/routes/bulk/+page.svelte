@@ -5,10 +5,12 @@
 	import { c } from '$lib/utils/commonTranslations';
 	import PlayersTable from '$lib/components/bulk/PlayersTable.svelte';
 	import GuildsTable from '$lib/components/bulk/GuildsTable.svelte';
+	import PalsTable from '$lib/components/bulk/PalsTable.svelte';
 
 	let selectedTab = $state('players');
 	let playerSelection = $state(new Set<string>());
 	let guildSelection = $state(new Set<string>());
+	let palSelection = $state(new Set<string>());
 </script>
 
 <div class="flex h-full flex-col gap-4 p-4">
@@ -23,7 +25,7 @@
 				<PlayersTable bind:selected={playerSelection} />
 			</Tabs.Panel>
 			<Tabs.Panel value="pals">
-				<p class="text-surface-300">{c.pals}</p>
+				<PalsTable bind:selected={palSelection} />
 			</Tabs.Panel>
 			<Tabs.Panel value="guilds">
 				<GuildsTable bind:selected={guildSelection} />

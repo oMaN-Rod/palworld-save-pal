@@ -43,6 +43,30 @@ export interface GuildSummary {
 	loaded: boolean;
 }
 
+export interface PalSummary {
+	instance_id: string;
+	character_id: string;
+	character_key: string;
+	nickname?: string;
+	owner_uid?: string;
+	owner_name?: string;
+	guild_id?: string;
+	base_id?: string;
+	gender?: string;
+	level: number;
+	hp: number;
+	stomach: number;
+	rank: number;
+	exp: number;
+	talent_hp: number;
+	talent_shot: number;
+	talent_defense: number;
+	rank_hp: number;
+	rank_attack: number;
+	rank_defense: number;
+	rank_craftspeed: number;
+}
+
 export type EggConfig = {
 	character_id: string;
 	gender: PalGender;

@@ -90,6 +90,7 @@ export enum MessageType {
 	UNLOCK_MAP = 'unlock_map',
 	GET_PLAYER_SUMMARIES = 'get_player_summaries',
 	GET_GUILD_SUMMARIES = 'get_guild_summaries',
+	GET_PAL_SUMMARIES = 'get_pal_summaries',
 	REQUEST_PLAYER_DETAILS = 'request_player_details',
 	GET_PLAYER_DETAILS_RESPONSE = 'get_player_details_response',
 	REQUEST_GUILD_DETAILS = 'request_guild_details',

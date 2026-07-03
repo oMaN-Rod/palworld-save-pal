@@ -455,6 +455,7 @@
   "no_missions_found": "No {type} missions found",
   "no_pals_available": "No {pals} data available",
   "no_pals_in_storage": "No {pals} in Storage",
+  "no_pals_match": "No pals match.",
   "no_players_loaded": "No players loaded yet. Use the selector above to load players.",
   "no_players_match": "No players match.",
   "no_save_loaded": "No save file loaded",
