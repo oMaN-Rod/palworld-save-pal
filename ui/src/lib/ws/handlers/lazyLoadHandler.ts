@@ -1,4 +1,5 @@
 import { goto } from '$app/navigation';
+import { page } from '$app/state';
 import { palsData } from '$lib/data';
 import { getAppState } from '$states';
 import type { Guild, GuildSummary, Player, PlayerSummary } from '$types';
@@ -12,7 +13,10 @@ export const getPlayerSummariesHandler: WSMessageHandler = {
 		const appState = getAppState();
 		console.log('Received player summaries', Object.keys(data).length);
 		appState.playerSummaries = data;
-		goto('/edit');
+		// Only navigate to /edit if not already on /bulk page
+		if (!page.url.pathname.startsWith('/bulk')) {
+			goto('/edit');
+		}
 	}
 };
 
