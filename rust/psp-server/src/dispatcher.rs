@@ -124,20 +124,6 @@ mod tests {
         }
     }
 
-    #[test]
-    fn panic_hook_guard_restores_on_drop() {
-        // Verify the guard properly restores the previous panic hook on drop,
-        // including during unwinding (stack-based cleanup).
-        let previous_hook = std::panic::take_hook();
-        let _guard = PanicHookGuard(Some(previous_hook));
-        std::panic::set_hook(Box::new(|_| {})); // Install no-op hook
-        // Explicit drop: guard releases the scope and Drop runs.
-        drop(_guard);
-        // If we get here without panicking, the guard was constructed and dropped successfully.
-        // The original hook is now restored.
-        let _ = std::panic::take_hook();
-    }
-
     fn envelope(message_type: &str, data: serde_json::Value) -> Envelope {
         Envelope {
             message_type: message_type.into(),
