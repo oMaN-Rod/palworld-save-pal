@@ -45,9 +45,13 @@ pub async fn get_settings(pool: &SqlitePool) -> Result<SettingsRow, DbError> {
         debug_mode: false,
         cheat_mode: false,
     };
+    // ON CONFLICT DO NOTHING makes this race-safe: if another connection wins
+    // the insert first, this call simply falls through to the re-select below
+    // and returns the winner's row instead of erroring on the PRIMARY KEY
+    // CHECK (id = 1) constraint.
     sqlx::query(
         "INSERT INTO settings (id, language, save_dir, clone_prefix, new_pal_prefix, debug_mode, cheat_mode) \
-         VALUES (1, ?, ?, ?, ?, ?, ?)",
+         VALUES (1, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO NOTHING",
     )
     .bind(&defaults.language)
     .bind(&defaults.save_dir)
@@ -57,7 +61,16 @@ pub async fn get_settings(pool: &SqlitePool) -> Result<SettingsRow, DbError> {
     .bind(defaults.cheat_mode)
     .execute(pool)
     .await?;
-    Ok(defaults)
+
+    // Re-select rather than returning `defaults` locally: this reflects
+    // whichever row actually got committed (ours or a concurrent racer's).
+    // If the row is somehow still missing here, that's a genuine error —
+    // fetch_one surfaces it as sqlx::Error::RowNotFound via DbError's
+    // existing #[from] conversion, rather than silently returning `defaults`.
+    let row = sqlx::query_as::<_, SettingsRow>(SELECT_SETTINGS)
+        .fetch_one(pool)
+        .await?;
+    Ok(row)
 }
 
 /// Upserts everything except save_dir (which only gets its default on fresh insert) —

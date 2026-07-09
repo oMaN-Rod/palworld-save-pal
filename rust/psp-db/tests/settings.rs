@@ -21,6 +21,37 @@ async fn first_get_inserts_python_default_row() {
 }
 
 #[tokio::test]
+async fn concurrent_first_calls_all_return_ok_with_same_default_row() {
+    let temp_dir = tempfile::tempdir().unwrap();
+    let pool = psp_db::open(&temp_dir.path().join("test.db"))
+        .await
+        .unwrap();
+
+    let mut handles = Vec::new();
+    for _ in 0..8 {
+        let pool = pool.clone();
+        handles.push(tokio::spawn(async move { get_settings(&pool).await }));
+    }
+
+    for handle in handles {
+        let settings = handle
+            .await
+            .expect("task panicked")
+            .expect("get_settings must not error on a concurrent first call");
+
+        assert_eq!(settings.language, "en");
+        assert_eq!(settings.clone_prefix, "©️");
+        assert_eq!(settings.new_pal_prefix, "🆕");
+        assert!(!settings.debug_mode);
+        assert!(!settings.cheat_mode);
+        assert_eq!(
+            settings.save_dir,
+            psp_db::settings::default_steam_save_dir()
+        );
+    }
+}
+
+#[tokio::test]
 async fn update_persists_everything_except_save_dir() {
     let temp_dir = tempfile::tempdir().unwrap();
     let db_path = temp_dir.path().join("test.db");
