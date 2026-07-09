@@ -166,14 +166,22 @@ pub(crate) mod test_support {
         }
 
         pub fn next_frame_json(&mut self) -> serde_json::Value {
-            match self.frames.try_recv().expect("expected an emitted frame") {
-                Message::Text(text) => serde_json::from_str(text.as_str()).unwrap(),
-                other => panic!("expected text frame, got {other:?}"),
-            }
+            next_frame_json_from(&mut self.frames)
         }
 
         pub fn assert_no_more_frames(&mut self) {
             assert!(self.frames.try_recv().is_err(), "unexpected extra frame");
+        }
+    }
+
+    /// Shared by `TestContext::next_frame_json` (which owns its receiver behind
+    /// `&mut self`) and any test that needs to drive a raw `UnboundedReceiver`
+    /// directly (e.g. dispatcher tests that build an `Emitter` without a full
+    /// `TestContext`) — one implementation instead of two copies drifting apart.
+    pub fn next_frame_json_from(receiver: &mut UnboundedReceiver<Message>) -> serde_json::Value {
+        match receiver.try_recv().expect("expected an emitted frame") {
+            Message::Text(text) => serde_json::from_str(text.as_str()).unwrap(),
+            other => panic!("expected text frame, got {other:?}"),
         }
     }
 }

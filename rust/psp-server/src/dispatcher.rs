@@ -27,8 +27,7 @@ pub struct HandlerCtx<'a> {
 /// - handler panic → contained, reported as an `error` message.
 ///
 /// Never returns an error: the connection loop and socket always survive.
-pub async fn dispatch(envelope: Envelope, ctx: HandlerCtx<'_>) {
-    let mut ctx = ctx;
+pub async fn dispatch(envelope: Envelope, mut ctx: HandlerCtx<'_>) {
     let Some(message_type) = MessageType::from_wire(&envelope.message_type) else {
         tracing::warn!(message_type = %envelope.message_type, "invalid message type");
         return;
@@ -244,15 +243,6 @@ mod tests {
         assert_eq!(test.next_frame_json()["type"], "get_settings");
     }
 
-    fn next_frame(
-        receiver: &mut tokio::sync::mpsc::UnboundedReceiver<axum::extract::ws::Message>,
-    ) -> serde_json::Value {
-        match receiver.try_recv().expect("expected an emitted frame") {
-            axum::extract::ws::Message::Text(text) => serde_json::from_str(text.as_str()).unwrap(),
-            other => panic!("expected text frame, got {other:?}"),
-        }
-    }
-
     // The dispatch table (`route`'s `match`) is fixed, so `dispatch` itself can
     // never be driven through a panicking handler from a test. `catch_handler_panic`
     // is the extracted seam: exercise it directly with futures that panic in the
@@ -274,7 +264,7 @@ mod tests {
             result.is_ok(),
             "a caught panic must not propagate out of catch_handler_panic"
         );
-        let frame = next_frame(&mut receiver);
+        let frame = crate::test_support::next_frame_json_from(&mut receiver);
         assert_eq!(frame["type"], "error");
         assert!(
             frame["data"]["message"].as_str().unwrap().contains("boom"),
@@ -286,7 +276,7 @@ mod tests {
         let result =
             catch_handler_panic(async { panic!("boom-{}", 42) }, "get_settings", &emitter).await;
         assert!(result.is_ok());
-        let frame = next_frame(&mut receiver);
+        let frame = crate::test_support::next_frame_json_from(&mut receiver);
         assert_eq!(frame["type"], "error");
         assert!(
             frame["data"]["message"]
@@ -305,7 +295,7 @@ mod tests {
         )
         .await;
         assert!(result.is_ok());
-        let frame = next_frame(&mut receiver);
+        let frame = crate::test_support::next_frame_json_from(&mut receiver);
         assert_eq!(frame["type"], "error");
         assert_eq!(frame["data"]["message"], "handler panicked");
 

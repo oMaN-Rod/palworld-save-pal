@@ -30,11 +30,22 @@ pub async fn ws_upgrade(
         .on_upgrade(move |socket| connection_loop(socket, client_id, app))
 }
 
-/// Decrements `AppState::live_connections` when dropped — fires on the normal
-/// loop exit below, but also on an early `return` or a panic unwinding through
-/// `connection_loop`, which a plain "decrement after the loop" statement would
-/// miss.
+/// Increments `AppState::live_connections` on construction and decrements it
+/// when dropped — fires on the normal loop exit below, but also on an early
+/// `return` or a panic unwinding through `connection_loop`, which a plain
+/// "decrement after the loop" statement would miss. Folding the increment
+/// into `new` (rather than leaving it as a separate statement next to
+/// construction) makes the 1:1 pairing structural instead of merely
+/// positional: a future edit can no longer insert a fallible call between
+/// "increment" and "build the guard" and silently break the gauge.
 struct LiveConnectionGuard(tokio::sync::watch::Sender<usize>);
+
+impl LiveConnectionGuard {
+    fn new(sender: tokio::sync::watch::Sender<usize>) -> Self {
+        sender.send_modify(|count| *count += 1);
+        Self(sender)
+    }
+}
 
 impl Drop for LiveConnectionGuard {
     fn drop(&mut self) {
@@ -47,8 +58,7 @@ impl Drop for LiveConnectionGuard {
 /// process-wide session, two browser tabs never clobber each other here.
 async fn connection_loop(socket: WebSocket, client_id: String, app: Arc<AppState>) {
     tracing::info!(%client_id, "client connected");
-    app.live_connections.send_modify(|count| *count += 1);
-    let _live_connection_guard = LiveConnectionGuard(app.live_connections.clone());
+    let _live_connection_guard = LiveConnectionGuard::new(app.live_connections.clone());
 
     let (mut outgoing_sink, mut incoming_stream) = socket.split();
     let (frame_sender, mut frame_receiver) = tokio::sync::mpsc::unbounded_channel::<Message>();
