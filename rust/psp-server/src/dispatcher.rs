@@ -114,7 +114,9 @@ async fn route(
         MessageType::GetVersion => handlers::game_data::handle_get_version(ctx).await,
         MessageType::GetPals => handlers::game_data::handle_get_pals(ctx).await,
         MessageType::GetLabResearch => handlers::game_data::handle_get_lab_research(ctx).await,
-        // Remaining arms are added by Task 10 and by Phases 1-6.
+        MessageType::SyncAppState => handlers::system::handle_sync_app_state(ctx).await,
+        MessageType::GetPresets => handlers::presets::handle_get_presets(ctx).await,
+        // Remaining arms are added by Phases 1-6.
         other => {
             tracing::warn!(
                 message_type = other.as_wire(),
@@ -208,6 +210,22 @@ mod tests {
             .unwrap()
             .contains("invalid payload"));
         assert!(frame["data"]["trace"].is_string());
+        test.assert_no_more_frames();
+    }
+
+    #[tokio::test]
+    async fn sync_app_state_routes_and_emits_settings() {
+        let mut test = TestContext::new(|_| {}).await;
+        dispatch(
+            envelope("sync_app_state", serde_json::Value::Null),
+            HandlerCtx {
+                session: &mut test.session,
+                app: &test.app,
+                emitter: &test.emitter,
+            },
+        )
+        .await;
+        assert_eq!(test.next_frame_json()["type"], "get_settings");
         test.assert_no_more_frames();
     }
 
