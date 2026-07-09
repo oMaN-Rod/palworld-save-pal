@@ -48,11 +48,29 @@ mod tests {
     #[test]
     fn update_dto_ignores_extra_keys_like_save_dir() {
         // The NavBar sends {...appState.settings} which includes save_dir;
-        // Python's SettingsDTO silently drops it. serde does too by default.
+        // Python's SettingsUpdateDto silently drops it. serde does too by default.
         let payload = r#"{"language":"fr","clone_prefix":"c","new_pal_prefix":"n",
                           "debug_mode":true,"cheat_mode":false,"save_dir":"/tmp"}"#;
         let update: SettingsUpdateDto = serde_json::from_str(payload).unwrap();
+
+        // Verify all five fields round-trip correctly.
         assert_eq!(update.language, "fr");
+        assert_eq!(update.clone_prefix, "c");
+        assert_eq!(update.new_pal_prefix, "n");
         assert!(update.debug_mode);
+        assert!(!update.cheat_mode);
+
+        // Verify save_dir is structurally absent: serialize back and check the JSON.
+        let reserialized = serde_json::to_value(&update).unwrap();
+        let obj = reserialized.as_object().unwrap();
+        assert_eq!(
+            obj.len(),
+            5,
+            "SettingsUpdateDto should have exactly 5 fields"
+        );
+        assert!(
+            !obj.contains_key("save_dir"),
+            "save_dir should not be present in serialized output"
+        );
     }
 }
