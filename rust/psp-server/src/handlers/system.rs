@@ -25,6 +25,15 @@ mod tests {
 
     #[tokio::test]
     async fn sync_app_state_without_save_emits_only_settings() {
+        // sync_app_state is the ONLY path by which settings reach the UI during
+        // bootstrap() — so this asserts the full six-field payload, not just
+        // `language`. `save_dir` is the most delicate field in it: Python emits
+        // `null` on a fresh DB (a deterministic import-order bug — see
+        // rust/parity/README.md), Rust correctly emits
+        // `default_steam_save_dir()`, and that divergence is deliberately left
+        // unmasked (PARITY_IGNORED_PATHS stays empty). Pinning the real default
+        // here, rather than merely `is_string()`, is what would catch a
+        // regression back to `null`/an empty string.
         let mut test = TestContext::new(|_| {}).await;
         let mut ctx = HandlerCtx {
             session: &mut test.session,
@@ -35,6 +44,14 @@ mod tests {
         let frame = test.next_frame_json();
         assert_eq!(frame["type"], "get_settings");
         assert_eq!(frame["data"]["language"], "en");
+        assert_eq!(
+            frame["data"]["save_dir"],
+            psp_db::settings::default_steam_save_dir()
+        );
+        assert_eq!(frame["data"]["clone_prefix"], "©️");
+        assert_eq!(frame["data"]["new_pal_prefix"], "🆕");
+        assert_eq!(frame["data"]["debug_mode"], false);
+        assert_eq!(frame["data"]["cheat_mode"], false);
         test.assert_no_more_frames();
     }
 }
