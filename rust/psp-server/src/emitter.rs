@@ -19,17 +19,23 @@ impl Emitter {
     }
 
     pub fn emit<T: serde::Serialize>(&self, message_type: MessageType, data: &T) {
-        let payload = serde_json::json!({ "type": message_type.as_wire(), "data": data });
-        match serde_json::to_string(&payload) {
-            Ok(text) => {
-                // Send failure just means the client disconnected — drop silently.
-                let _ = self.sender.send(Message::Text(text.into()));
-            }
+        // Serialize the payload on its own first. If a `Serialize` impl fails we
+        // must not panic the connection — log and drop the frame instead.
+        let payload = match serde_json::to_value(data) {
+            Ok(value) => value,
             Err(serialize_error) => {
                 tracing::error!(%serialize_error, message_type = message_type.as_wire(),
                     "failed to serialize outgoing message");
+                return;
             }
-        }
+        };
+        // `payload` is already a valid Value, so wrapping it in the envelope and
+        // stringifying it cannot fail.
+        let frame = serde_json::json!({ "type": message_type.as_wire(), "data": payload });
+        let text =
+            serde_json::to_string(&frame).expect("envelope of a Value cannot fail to serialize");
+        // Send failure just means the client disconnected — drop silently.
+        let _ = self.sender.send(Message::Text(text.into()));
     }
 
     /// {"type": "error", "data": {"message": ..., "trace": ...}} — ws/manager.py:46-49.
@@ -82,6 +88,39 @@ mod tests {
         assert_eq!(
             value,
             serde_json::json!({"type": "error", "data": {"message": "boom", "trace": "trace-lines"}})
+        );
+    }
+
+    /// A payload whose `Serialize` impl always fails. Note that a bare
+    /// `f64::NAN`/`INFINITY` does *not* exercise this path: serde_json encodes
+    /// non-finite floats as JSON `null` rather than erroring, so it would not
+    /// discriminate the fix. This type deterministically returns `Err`.
+    struct AlwaysFailsToSerialize;
+
+    impl serde::Serialize for AlwaysFailsToSerialize {
+        fn serialize<S: serde::Serializer>(&self, _serializer: S) -> Result<S::Ok, S::Error> {
+            Err(serde::ser::Error::custom("simulated serialization failure"))
+        }
+    }
+
+    #[test]
+    fn emit_drops_unserializable_payload_without_panicking_and_survives() {
+        let (sender, mut receiver) = tokio::sync::mpsc::unbounded_channel();
+        let emitter = Emitter::new(sender);
+
+        // Must be logged and dropped, not panic the connection.
+        emitter.emit(MessageType::GetVersion, &AlwaysFailsToSerialize);
+        assert!(matches!(
+            receiver.try_recv(),
+            Err(tokio::sync::mpsc::error::TryRecvError::Empty)
+        ));
+
+        // The emitter must still be usable afterwards — the connection survives.
+        emitter.emit(MessageType::GetVersion, &"0.17.3");
+        let value = text_frame_as_json(receiver.try_recv().unwrap());
+        assert_eq!(
+            value,
+            serde_json::json!({"type": "get_version", "data": "0.17.3"})
         );
     }
 
