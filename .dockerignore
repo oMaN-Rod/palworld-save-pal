@@ -1,0 +1,10 @@
+.git
+.venv
+node_modules
+ui/node_modules
+ui_build
+rust/target
+*.db
+*.db-shm
+*.db-wal
+__pycache__
