@@ -11,11 +11,16 @@ pub fn null_progress() -> ProgressSink {
 
 #[cfg(test)]
 mod tests {
-    use super::null_progress;
+    use super::{null_progress, ProgressSink};
+    use std::sync::Arc;
 
     #[test]
-    fn null_progress_accepts_messages() {
-        let sink = null_progress();
-        sink("Loading Level.sav...");
+    fn null_progress_discards_messages_and_is_shareable() {
+        let sink: ProgressSink = null_progress();
+        let clone = Arc::clone(&sink);
+        std::thread::spawn(move || clone("from another thread"))
+            .join()
+            .expect("ProgressSink must be Send + Sync");
+        assert_eq!(Arc::strong_count(&sink), 1);
     }
 }
