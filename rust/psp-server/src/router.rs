@@ -13,6 +13,7 @@ pub fn build_router(state: Arc<AppState>) -> Router {
     let serve_ui = ServeDir::new(&state.config.ui_dir).append_index_html_on_directories(false);
 
     Router::new()
+        .route("/ws/{client_id}", axum::routing::get(crate::ws::ws_upgrade))
         .fallback_service(serve_ui)
         .layer(middleware::from_fn_with_state(
             state.clone(),

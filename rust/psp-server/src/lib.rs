@@ -6,6 +6,7 @@ pub mod handlers;
 pub mod messages;
 pub mod router;
 pub mod static_files;
+pub mod ws;
 
 use std::net::{IpAddr, SocketAddr};
 use std::path::PathBuf;
