@@ -14,6 +14,7 @@ pub fn build_router(state: Arc<AppState>) -> Router {
 
     Router::new()
         .route("/ws/{client_id}", axum::routing::get(crate::ws::ws_upgrade))
+        .nest("/api/convert", crate::api_convert::routes())
         .fallback_service(serve_ui)
         .layer(middleware::from_fn_with_state(
             state.clone(),

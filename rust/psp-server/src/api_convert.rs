@@ -1,0 +1,120 @@
+//! POST /api/convert/* — port of palworld_save_pal/api/convert.py.
+//! Reading accepts GVAS/PlM (PlZ/CNK decompression are Phase 1 uesave items);
+//! writing emits PlM/Oodle save_type 0x31 — identical to Python's
+//! compress_gvas_to_sav(raw, 0x31) (0x31 = SaveType.PLM).
+
+use std::io::Cursor;
+use std::sync::Arc;
+
+use axum::body::Bytes;
+use axum::extract::{DefaultBodyLimit, Multipart};
+use axum::http::{header, StatusCode};
+use axum::response::{IntoResponse, Response};
+use axum::routing::post;
+use axum::Router;
+use uesave::compression::CompressionFormat;
+use uesave::games::palworld::palworld_types;
+use uesave::{Save, SaveReader};
+
+use crate::AppState;
+
+/// Same ceiling as the WS channel — real Level.sav files are 100s of MB.
+const MAX_CONVERT_BODY_BYTES: usize = 1 << 30;
+
+pub fn routes() -> Router<Arc<AppState>> {
+    Router::new()
+        .route("/sav-to-json", post(sav_to_json))
+        .route("/json-to-sav", post(json_to_sav))
+        .layer(DefaultBodyLimit::max(MAX_CONVERT_BODY_BYTES))
+}
+
+// Mirrors palworld_save_pal/api/convert.py:sav_to_json (`file: UploadFile = File(...)`),
+// which reads the whole upload, calls SaveManager().convert_sav_file_to_json, and
+// streams the result back as `application/json`.
+async fn sav_to_json(mut multipart: Multipart) -> Response {
+    let mut file_bytes: Option<Bytes> = None;
+    while let Ok(Some(field)) = multipart.next_field().await {
+        if field.name() == Some("file") {
+            match field.bytes().await {
+                Ok(bytes) => file_bytes = Some(bytes),
+                Err(read_error) => {
+                    return (StatusCode::BAD_REQUEST, read_error.to_string()).into_response()
+                }
+            }
+            break;
+        }
+    }
+    let Some(file_bytes) = file_bytes else {
+        // FastAPI returns 422 for a missing required File(...) field.
+        return (
+            StatusCode::UNPROCESSABLE_ENTITY,
+            "missing multipart field 'file'",
+        )
+            .into_response();
+    };
+
+    // Blocking parse of a potentially huge save — keep it off the async workers.
+    let conversion = tokio::task::spawn_blocking(move || -> Result<String, String> {
+        let save = SaveReader::new()
+            .types(palworld_types())
+            .read(Cursor::new(file_bytes.as_ref()))
+            .map_err(|parse_error| parse_error.to_string())?;
+        // Python sends minified JSON (indent=None) — serde_json::to_string is minified.
+        serde_json::to_string(&save).map_err(|serialize_error| serialize_error.to_string())
+    })
+    .await;
+
+    match conversion {
+        Ok(Ok(json_text)) => (
+            StatusCode::OK,
+            [(header::CONTENT_TYPE, "application/json")],
+            json_text,
+        )
+            .into_response(),
+        Ok(Err(conversion_error)) => {
+            tracing::error!(%conversion_error, "sav-to-json failed");
+            (StatusCode::INTERNAL_SERVER_ERROR, conversion_error).into_response()
+        }
+        Err(join_error) => {
+            (StatusCode::INTERNAL_SERVER_ERROR, join_error.to_string()).into_response()
+        }
+    }
+}
+
+// Mirrors palworld_save_pal/api/convert.py:json_to_sav, which reads the raw
+// request body, calls SaveManager().convert_json_to_sav_file (internally
+// compress_gvas_to_sav(raw, 0x31) — SaveType.PLM, i.e. Oodle), and returns it
+// as `application/octet-stream` with a `converted.sav` attachment filename.
+async fn json_to_sav(body: Bytes) -> Response {
+    let conversion = tokio::task::spawn_blocking(move || -> Result<Vec<u8>, String> {
+        let save: Save =
+            serde_json::from_slice(&body).map_err(|parse_error| parse_error.to_string())?;
+        let mut sav_bytes = Vec::new();
+        save.write_compressed(&mut sav_bytes, CompressionFormat::Oodle)
+            .map_err(|write_error| write_error.to_string())?;
+        Ok(sav_bytes)
+    })
+    .await;
+
+    match conversion {
+        Ok(Ok(sav_bytes)) => (
+            StatusCode::OK,
+            [
+                (header::CONTENT_TYPE, "application/octet-stream"),
+                (
+                    header::CONTENT_DISPOSITION,
+                    "attachment; filename=converted.sav",
+                ),
+            ],
+            sav_bytes,
+        )
+            .into_response(),
+        Ok(Err(conversion_error)) => {
+            tracing::error!(%conversion_error, "json-to-sav failed");
+            (StatusCode::INTERNAL_SERVER_ERROR, conversion_error).into_response()
+        }
+        Err(join_error) => {
+            (StatusCode::INTERNAL_SERVER_ERROR, join_error.to_string()).into_response()
+        }
+    }
+}
