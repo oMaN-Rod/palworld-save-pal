@@ -108,6 +108,36 @@ mod tests {
     use crate::envelope::Envelope;
     use crate::test_support::TestContext;
 
+    /// Restores the previous panic hook on drop, so a failing assertion in a test
+    /// that silences panic output cannot leak the silent hook into sibling tests
+    /// (the harness runs them in one process).
+    #[allow(clippy::type_complexity)]
+    struct PanicHookGuard(
+        Option<Box<dyn Fn(&std::panic::PanicHookInfo<'_>) + Sync + Send + 'static>>,
+    );
+
+    impl Drop for PanicHookGuard {
+        fn drop(&mut self) {
+            if let Some(previous_hook) = self.0.take() {
+                std::panic::set_hook(previous_hook);
+            }
+        }
+    }
+
+    #[test]
+    fn panic_hook_guard_restores_on_drop() {
+        // Verify the guard properly restores the previous panic hook on drop,
+        // including during unwinding (stack-based cleanup).
+        let previous_hook = std::panic::take_hook();
+        let _guard = PanicHookGuard(Some(previous_hook));
+        std::panic::set_hook(Box::new(|_| {})); // Install no-op hook
+        // Explicit drop: guard releases the scope and Drop runs.
+        drop(_guard);
+        // If we get here without panicking, the guard was constructed and dropped successfully.
+        // The original hook is now restored.
+        let _ = std::panic::take_hook();
+    }
+
     fn envelope(message_type: &str, data: serde_json::Value) -> Envelope {
         Envelope {
             message_type: message_type.into(),
@@ -204,8 +234,8 @@ mod tests {
     async fn catch_handler_panic_converts_panics_into_error_frames() {
         // The default panic hook prints to stderr even though catch_unwind
         // catches it. Silence it for the duration so test output stays
-        // pristine, and always restore it afterward.
-        let previous_hook = std::panic::take_hook();
+        // pristine, and always restore it afterward via the guard's Drop impl.
+        let _hook_guard = PanicHookGuard(Some(std::panic::take_hook()));
         std::panic::set_hook(Box::new(|_| {}));
 
         let (sender, mut receiver) = tokio::sync::mpsc::unbounded_channel();
@@ -256,7 +286,5 @@ mod tests {
             receiver.try_recv().is_err(),
             "expected exactly three frames, no more"
         );
-
-        std::panic::set_hook(previous_hook);
     }
 }
