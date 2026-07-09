@@ -91,7 +91,30 @@ async fn route(
         MessageType::UpdateSettings => {
             handlers::settings::handle_update_settings(serde_json::from_value(data)?, ctx).await
         }
-        // Remaining arms are added by Tasks 9-10 and by Phases 1-6.
+        MessageType::GetActiveSkills => handlers::game_data::handle_get_active_skills(ctx).await,
+        MessageType::GetPassiveSkills => handlers::game_data::handle_get_passive_skills(ctx).await,
+        MessageType::GetTechnologies => handlers::game_data::handle_get_technologies(ctx).await,
+        MessageType::GetElements => handlers::game_data::handle_get_elements(ctx).await,
+        MessageType::GetItems => handlers::game_data::handle_get_items(ctx).await,
+        MessageType::GetMissions => handlers::game_data::handle_get_missions(ctx).await,
+        MessageType::GetBuildings => handlers::game_data::handle_get_buildings(ctx).await,
+        MessageType::GetWorkSuitability => {
+            handlers::game_data::handle_get_work_suitability(ctx).await
+        }
+        MessageType::GetExpData => handlers::game_data::handle_get_exp_data(ctx).await,
+        MessageType::GetFriendshipData => {
+            handlers::game_data::handle_get_friendship_data(ctx).await
+        }
+        MessageType::GetMapObjects => handlers::game_data::handle_get_map_objects(ctx).await,
+        MessageType::GetFastTravelPoints => {
+            handlers::game_data::handle_get_fast_travel_points(ctx).await
+        }
+        MessageType::GetEffigies => handlers::game_data::handle_get_effigies(ctx).await,
+        MessageType::GetUiCommon => handlers::game_data::handle_get_ui_common(ctx).await,
+        MessageType::GetVersion => handlers::game_data::handle_get_version(ctx).await,
+        MessageType::GetPals => handlers::game_data::handle_get_pals(ctx).await,
+        MessageType::GetLabResearch => handlers::game_data::handle_get_lab_research(ctx).await,
+        // Remaining arms are added by Task 10 and by Phases 1-6.
         other => {
             tracing::warn!(
                 message_type = other.as_wire(),
