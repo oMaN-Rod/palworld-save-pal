@@ -43,6 +43,53 @@ fn compare_responses(
     ))
 }
 
+/// How long `assert_no_surplus_frame` waits for a frame that should NOT
+/// arrive before declaring the burst well and truly over. Mirrors the
+/// purpose of `scripts/capture_parity.py`'s `IDLE_SECONDS` (2.0) — "this much
+/// silence means the response burst ended" — but is much shorter: capture's
+/// timeout has to tolerate Python doing real work (game-data loads, DB I/O)
+/// before each frame it emits, whereas this check races an in-process Rust
+/// server over a loopback socket that has, by construction, ALREADY finished
+/// emitting every frame the fixture expects (they were read out one `send`
+/// ahead of this check running). 250ms is generous slack for a surplus frame
+/// already in flight without materially slowing the suite down per fixture.
+const SURPLUS_FRAME_IDLE_TIMEOUT: Duration = Duration::from_millis(250);
+
+/// The other half of `compare_responses`: after a fixture's expected frames
+/// have been read, confirms NO further frame arrives within `idle_timeout`.
+/// Reading exactly `expected_frame_count` frames and declaring victory (what
+/// `replay_all_fixtures` used to do, unconditionally) is blind to a Rust
+/// handler that emits MORE frames than Python recorded: mid-corpus, the
+/// surplus frame sits in the socket buffer and corrupts the NEXT fixture's
+/// comparison (caught, but misattributed to the wrong fixture); on a
+/// corpus's LAST fixture, `socket.close`/`handle.shutdown` simply discard it
+/// and nothing ever notices.
+///
+/// Generic over the stream type — rather than the concrete
+/// `tokio_tungstenite::WebSocketStream` `replay_all_fixtures` uses — purely so
+/// this can be unit-tested against a `futures::stream::iter` with a surplus
+/// frame already queued, with no live socket or server required. See
+/// `assert_no_surplus_frame_errs_when_a_frame_is_already_queued` below.
+async fn assert_no_surplus_frame<S>(
+    socket: &mut S,
+    fixture_name: &str,
+    request_type: &str,
+    expected_frame_count: usize,
+    idle_timeout: Duration,
+) -> Result<(), String>
+where
+    S: futures::Stream<Item = Result<Message, tokio_tungstenite::tungstenite::Error>> + Unpin,
+{
+    match tokio::time::timeout(idle_timeout, socket.next()).await {
+        Ok(Some(Ok(frame))) => Err(format!(
+            "fixture {fixture_name} (request type {request_type:?}) — Rust emitted a SURPLUS \
+             frame beyond the {expected_frame_count} frame(s) the fixture recorded (Rust sent \
+             MORE frames than Python did for this request)\n--- surplus frame ---\n{frame:?}"
+        )),
+        _ => Ok(()),
+    }
+}
+
 /// Justified, documented parity divergences, as `"<message_type>:<json_pointer>"`
 /// masks (e.g. `"loaded_save_files:/data/save_dir"`). MUST stay empty unless a
 /// divergence is reviewed and each entry carries a one-line "why" comment.
@@ -136,6 +183,18 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
                     value["type"].as_str().unwrap_or(&request_type).to_string();
                 strip_ignored_paths(&response_message_type, &mut value);
                 actual_responses.push(value);
+            }
+
+            if let Err(message) = assert_no_surplus_frame(
+                &mut socket,
+                &fixture_path.display().to_string(),
+                &request_type,
+                expected_responses.len(),
+                SURPLUS_FRAME_IDLE_TIMEOUT,
+            )
+            .await
+            {
+                panic!("{message}");
             }
 
             let mut expected = expected_responses;
@@ -331,4 +390,65 @@ fn compare_responses_errs_on_swapped_order() {
         "error must explain why the fixture failed, not just that it did; \
          got: {error_message}"
     );
+}
+
+/// Proves `assert_no_surplus_frame` actually discriminates: a stream with one
+/// more frame already queued past what the fixture expected must be reported
+/// as an error, and the error must name the fixture (so a developer can find
+/// it without extra flags) and include the surplus frame's own content — not
+/// a vacuous "something extra arrived".
+///
+/// This is the direct unit-test seam for the parity-harness hole described in
+/// `replay_all_fixtures`'s doc comment: before `assert_no_surplus_frame`
+/// existed, `replay_all_fixtures` read exactly `expected_responses.len()`
+/// frames and moved on, so a Rust handler emitting one extra frame for the
+/// LAST fixture of a corpus was silently discarded by
+/// `socket.close`/`handle.shutdown` and never failed any test. There is no
+/// live Phase-0 handler that emits a surplus frame to drive that scenario
+/// through a real socket, which is why this test constructs the surplus
+/// directly with `futures::stream::iter` instead.
+#[tokio::test]
+async fn assert_no_surplus_frame_errs_when_a_frame_is_already_queued() {
+    let surplus = Message::Text(r#"{"type":"get_settings","data":{}}"#.into());
+    let mut stream = futures::stream::iter(vec![Ok(surplus)]);
+
+    let error_message = assert_no_surplus_frame(
+        &mut stream,
+        "fixtures/demo/00_get_settings.json",
+        "get_settings",
+        0,
+        Duration::from_millis(50),
+    )
+    .await
+    .expect_err("a queued surplus frame must be reported, not silently drained");
+
+    assert!(
+        error_message.contains("fixtures/demo/00_get_settings.json"),
+        "error must name the offending fixture; got: {error_message}"
+    );
+    assert!(
+        error_message.contains("get_settings"),
+        "error must include the surplus frame's own content, not just a \
+         generic message; got: {error_message}"
+    );
+}
+
+/// Companion to the test above: an exhausted stream (nothing queued beyond
+/// what was already read) must be reported clean — proves the check isn't
+/// just failing unconditionally on any stream it's handed.
+#[tokio::test]
+async fn assert_no_surplus_frame_oks_an_exhausted_stream() {
+    let mut stream =
+        futures::stream::iter(Vec::<Result<Message, tokio_tungstenite::tungstenite::Error>>::new());
+
+    let result = assert_no_surplus_frame(
+        &mut stream,
+        "fixtures/demo/00_get_settings.json",
+        "get_settings",
+        1,
+        Duration::from_millis(50),
+    )
+    .await;
+
+    assert_eq!(result, Ok(()));
 }
