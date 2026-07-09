@@ -96,7 +96,15 @@ mod tests {
         assert_eq!(frame["type"], "get_settings");
         assert_eq!(frame["data"]["language"], "fr");
         assert_eq!(frame["data"]["debug_mode"], true);
-        assert_ne!(frame["data"]["save_dir"], "ignored-extra-key");
+        // Proves more than "not the literal request value": save_dir in the
+        // response is exactly the row's persisted save_dir, which for a fresh
+        // test database is the computed default (SettingsUpdateDto has no
+        // save_dir field at all, so update_settings can never have written
+        // "ignored-extra-key" into the row in the first place).
+        assert_eq!(
+            frame["data"]["save_dir"],
+            psp_db::settings::default_steam_save_dir()
+        );
         test.assert_no_more_frames();
     }
 }

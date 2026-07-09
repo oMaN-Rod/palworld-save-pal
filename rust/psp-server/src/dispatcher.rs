@@ -34,24 +34,49 @@ pub async fn dispatch(envelope: Envelope, ctx: HandlerCtx<'_>) {
         return;
     };
 
-    let routed = AssertUnwindSafe(route(message_type, envelope.data, &mut ctx))
-        .catch_unwind()
-        .await;
-    match routed {
-        Ok(Ok(())) => {}
-        Ok(Err(handler_error)) => {
-            tracing::error!(message_type = message_type.as_wire(), %handler_error, "handler failed");
-            ctx.emitter
-                .emit_error(&handler_error.to_string(), &format!("{handler_error:?}"));
-        }
+    let emitter = ctx.emitter;
+    let routed = catch_handler_panic(
+        route(message_type, envelope.data, &mut ctx),
+        message_type.as_wire(),
+        emitter,
+    )
+    .await;
+    if let Err(handler_error) = routed {
+        tracing::error!(message_type = message_type.as_wire(), %handler_error, "handler failed");
+        ctx.emitter
+            .emit_error(&handler_error.to_string(), &format!("{handler_error:?}"));
+    }
+}
+
+/// Runs `handler` to completion, catching any panic it raises and converting it
+/// into an `error` frame via `emitter.emit_error` (spec §5: a handler panic must
+/// be contained, not tear down the connection). On a non-panicking completion the
+/// handler's own `Result` is passed straight through unchanged.
+///
+/// Extracted out of `dispatch` as its own function so the panic-containment path
+/// is directly unit-testable: `route`'s dispatch table is a fixed `match` over
+/// `MessageType`, so no test can register an arbitrary panicking handler through
+/// `dispatch` itself. `message_type` is only used for the log line — it plays no
+/// part in what gets emitted.
+async fn catch_handler_panic<F>(
+    handler: F,
+    message_type: &str,
+    emitter: &Emitter,
+) -> Result<(), HandlerError>
+where
+    F: std::future::Future<Output = Result<(), HandlerError>>,
+{
+    match AssertUnwindSafe(handler).catch_unwind().await {
+        Ok(result) => result,
         Err(panic_payload) => {
             let panic_text = panic_payload
                 .downcast_ref::<&str>()
                 .map(|s| s.to_string())
                 .or_else(|| panic_payload.downcast_ref::<String>().cloned())
                 .unwrap_or_else(|| "handler panicked".to_string());
-            tracing::error!(message_type = message_type.as_wire(), %panic_text, "handler panicked");
-            ctx.emitter.emit_error(&panic_text, "handler panicked");
+            tracing::error!(message_type, %panic_text, "handler panicked");
+            emitter.emit_error(&panic_text, "handler panicked");
+            Ok(())
         }
     }
 }
@@ -160,5 +185,78 @@ mod tests {
         )
         .await;
         assert_eq!(test.next_frame_json()["type"], "get_settings");
+    }
+
+    fn next_frame(
+        receiver: &mut tokio::sync::mpsc::UnboundedReceiver<axum::extract::ws::Message>,
+    ) -> serde_json::Value {
+        match receiver.try_recv().expect("expected an emitted frame") {
+            axum::extract::ws::Message::Text(text) => serde_json::from_str(text.as_str()).unwrap(),
+            other => panic!("expected text frame, got {other:?}"),
+        }
+    }
+
+    // The dispatch table (`route`'s `match`) is fixed, so `dispatch` itself can
+    // never be driven through a panicking handler from a test. `catch_handler_panic`
+    // is the extracted seam: exercise it directly with futures that panic in the
+    // exact ways a real handler could.
+    #[tokio::test]
+    async fn catch_handler_panic_converts_panics_into_error_frames() {
+        // The default panic hook prints to stderr even though catch_unwind
+        // catches it. Silence it for the duration so test output stays
+        // pristine, and always restore it afterward.
+        let previous_hook = std::panic::take_hook();
+        std::panic::set_hook(Box::new(|_| {}));
+
+        let (sender, mut receiver) = tokio::sync::mpsc::unbounded_channel();
+        let emitter = Emitter::new(sender);
+
+        // `panic!("literal")` with no format args panics with a `&'static str` payload.
+        let result = catch_handler_panic(async { panic!("boom") }, "get_settings", &emitter).await;
+        assert!(
+            result.is_ok(),
+            "a caught panic must not propagate out of catch_handler_panic"
+        );
+        let frame = next_frame(&mut receiver);
+        assert_eq!(frame["type"], "error");
+        assert!(
+            frame["data"]["message"].as_str().unwrap().contains("boom"),
+            "expected the panic's own text in the error frame, got {frame:?}"
+        );
+
+        // `panic!("{}", ...)` goes through the formatting path and panics with an
+        // owned `String` payload instead.
+        let result =
+            catch_handler_panic(async { panic!("boom-{}", 42) }, "get_settings", &emitter).await;
+        assert!(result.is_ok());
+        let frame = next_frame(&mut receiver);
+        assert_eq!(frame["type"], "error");
+        assert!(
+            frame["data"]["message"]
+                .as_str()
+                .unwrap()
+                .contains("boom-42"),
+            "expected the formatted panic text in the error frame, got {frame:?}"
+        );
+
+        // A payload that is neither `&str` nor `String` must still produce an
+        // `error` frame carrying the generic fallback text, not panic again.
+        let result = catch_handler_panic(
+            async { std::panic::panic_any(42i32) },
+            "get_settings",
+            &emitter,
+        )
+        .await;
+        assert!(result.is_ok());
+        let frame = next_frame(&mut receiver);
+        assert_eq!(frame["type"], "error");
+        assert_eq!(frame["data"]["message"], "handler panicked");
+
+        assert!(
+            receiver.try_recv().is_err(),
+            "expected exactly three frames, no more"
+        );
+
+        std::panic::set_hook(previous_hook);
     }
 }
