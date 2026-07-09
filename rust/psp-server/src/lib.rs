@@ -34,10 +34,22 @@ pub struct AppState {
     pub config: ServerConfig,
     pub game_data: Arc<GameData>,
     pub db: sqlx::SqlitePool,
+    /// Count of currently-open `/ws/{client_id}` connections. `ws::connection_loop`
+    /// increments on start and decrements (via a `Drop` guard, so it also fires on
+    /// panic or early return) when it exits. Exists so termination of the reader
+    /// loop / writer task is independently observable in tests — `ServerHandle::shutdown`
+    /// alone cannot prove it (axum hands the upgraded socket to its own
+    /// `tokio::spawn`ed task, decoupled from the HTTP connection future that
+    /// graceful shutdown actually waits on).
+    pub live_connections: tokio::sync::watch::Sender<usize>,
 }
 
 pub struct ServerHandle {
     pub addr: SocketAddr,
+    /// Subscriber on `AppState::live_connections`, seeded at 0 before any
+    /// connection is accepted. Tests can `.borrow()` the current count or
+    /// `.changed().await` to observe connection teardown without sleeping.
+    pub live_connections: tokio::sync::watch::Receiver<usize>,
     shutdown_sender: tokio::sync::oneshot::Sender<()>,
     serve_task: tokio::task::JoinHandle<std::io::Result<()>>,
 }
@@ -60,10 +72,12 @@ impl ServerHandle {
 pub async fn start_server(config: ServerConfig) -> anyhow::Result<ServerHandle> {
     let game_data = Arc::new(GameData::load(&config.data_dir.join("json"))?);
     let db = psp_db::open(&config.db_path).await?;
+    let (live_connections, live_connections_rx) = tokio::sync::watch::channel(0usize);
     let state = Arc::new(AppState {
         config: config.clone(),
         game_data,
         db,
+        live_connections,
     });
 
     let listener = tokio::net::TcpListener::bind((config.host, config.port)).await?;
@@ -82,6 +96,7 @@ pub async fn start_server(config: ServerConfig) -> anyhow::Result<ServerHandle> 
 
     Ok(ServerHandle {
         addr,
+        live_connections: live_connections_rx,
         shutdown_sender,
         serve_task,
     })
@@ -132,10 +147,12 @@ pub(crate) mod test_support {
             };
             let db = psp_db::open(&config.db_path).await.unwrap();
             let game_data = Arc::new(GameData::load(&json_dir).unwrap());
+            let (live_connections, _live_connections_rx) = tokio::sync::watch::channel(0usize);
             let app = Arc::new(AppState {
                 config,
                 game_data,
                 db,
+                live_connections,
             });
             let (sender, frames) = tokio::sync::mpsc::unbounded_channel();
             Self {

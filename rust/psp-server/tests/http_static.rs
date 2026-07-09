@@ -27,10 +27,12 @@ async fn test_router(temp_dir: &tempfile::TempDir) -> axum::Router {
     let db = psp_db::open(&config.db_path).await.unwrap();
     let game_data =
         Arc::new(psp_core::gamedata::GameData::load(&config.data_dir.join("json")).unwrap());
+    let (live_connections, _live_connections_rx) = tokio::sync::watch::channel(0usize);
     build_router(Arc::new(AppState {
         config,
         game_data,
         db,
+        live_connections,
     }))
 }
 

@@ -30,11 +30,26 @@ pub async fn ws_upgrade(
         .on_upgrade(move |socket| connection_loop(socket, client_id, app))
 }
 
+/// Decrements `AppState::live_connections` when dropped — fires on the normal
+/// loop exit below, but also on an early `return` or a panic unwinding through
+/// `connection_loop`, which a plain "decrement after the loop" statement would
+/// miss.
+struct LiveConnectionGuard(tokio::sync::watch::Sender<usize>);
+
+impl Drop for LiveConnectionGuard {
+    fn drop(&mut self) {
+        self.0.send_modify(|count| *count = count.saturating_sub(1));
+    }
+}
+
 /// psp.py:51-60 websocket_endpoint: accept, loop receiving text frames until
 /// disconnect. Each connection owns its own `Session` — unlike Python's single
 /// process-wide session, two browser tabs never clobber each other here.
 async fn connection_loop(socket: WebSocket, client_id: String, app: Arc<AppState>) {
     tracing::info!(%client_id, "client connected");
+    app.live_connections.send_modify(|count| *count += 1);
+    let _live_connection_guard = LiveConnectionGuard(app.live_connections.clone());
+
     let (mut outgoing_sink, mut incoming_stream) = socket.split();
     let (frame_sender, mut frame_receiver) = tokio::sync::mpsc::unbounded_channel::<Message>();
 
@@ -54,17 +69,24 @@ async fn connection_loop(socket: WebSocket, client_id: String, app: Arc<AppState
     let mut session = Session::new();
 
     // ws/manager.py's `while True: await websocket.receive_text()` loop.
-    // `incoming_stream.next()` returns `None` on disconnect and handlers run
-    // serially (each `process_text_frame` call is awaited before the next
-    // frame is read), so this loop always terminates too.
-    while let Some(Ok(frame)) = incoming_stream.next().await {
-        match frame {
-            Message::Text(text) => {
+    // `incoming_stream.next()` returns `None` on a clean disconnect, `Some(Err(_))`
+    // on a protocol-level error (e.g. the client vanishing mid-frame without a
+    // Close handshake), and handlers run serially (each `process_text_frame` call
+    // is awaited before the next frame is read) — so this loop always terminates,
+    // on any of the three exit arms below.
+    loop {
+        match incoming_stream.next().await {
+            Some(Ok(Message::Text(text))) => {
                 process_text_frame(text.as_str(), &mut session, &app, &emitter).await;
             }
-            Message::Close(_) => break,
+            Some(Ok(Message::Close(_))) => break,
             // Ping/pong handled by axum; binary frames are not part of the protocol.
-            _ => {}
+            Some(Ok(_)) => {}
+            Some(Err(protocol_error)) => {
+                tracing::warn!(%client_id, %protocol_error, "websocket protocol error; closing connection");
+                break;
+            }
+            None => break,
         }
     }
 
@@ -117,4 +139,19 @@ async fn process_text_frame(
         },
     )
     .await;
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn max_ws_message_bytes_is_one_gibibyte() {
+        // psp.py:95 configures uvicorn with ws_max_size=2**30; `ws_upgrade` wires
+        // this same constant to both `.max_message_size(...)` and
+        // `.max_frame_size(...)`. Actually sending a >1GB frame in a test is not
+        // reachable at reasonable cost, so this pins the value the upgrade call
+        // above uses rather than exercising the limit end-to-end.
+        assert_eq!(MAX_WS_MESSAGE_BYTES, 1 << 30);
+    }
 }
