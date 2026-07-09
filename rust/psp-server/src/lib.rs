@@ -4,8 +4,10 @@ pub mod envelope;
 pub mod handler_error;
 pub mod handlers;
 pub mod messages;
+pub mod router;
+pub mod static_files;
 
-use std::net::IpAddr;
+use std::net::{IpAddr, SocketAddr};
 use std::path::PathBuf;
 use std::sync::Arc;
 
@@ -31,6 +33,57 @@ pub struct AppState {
     pub config: ServerConfig,
     pub game_data: Arc<GameData>,
     pub db: sqlx::SqlitePool,
+}
+
+pub struct ServerHandle {
+    pub addr: SocketAddr,
+    shutdown_sender: tokio::sync::oneshot::Sender<()>,
+    serve_task: tokio::task::JoinHandle<std::io::Result<()>>,
+}
+
+impl ServerHandle {
+    /// Signals the serve loop to stop and waits for it to exit.
+    pub async fn shutdown(self) {
+        let _ = self.shutdown_sender.send(());
+        let _ = self.serve_task.await;
+    }
+
+    /// Blocks until the server exits on its own.
+    pub async fn wait(self) {
+        let _ = self.serve_task.await;
+    }
+}
+
+/// Binds the listener before returning, so the port is already accepting
+/// connections by the time the caller sees a `ServerHandle`.
+pub async fn start_server(config: ServerConfig) -> anyhow::Result<ServerHandle> {
+    let game_data = Arc::new(GameData::load(&config.data_dir.join("json"))?);
+    let db = psp_db::open(&config.db_path).await?;
+    let state = Arc::new(AppState {
+        config: config.clone(),
+        game_data,
+        db,
+    });
+
+    let listener = tokio::net::TcpListener::bind((config.host, config.port)).await?;
+    let addr = listener.local_addr()?;
+    tracing::info!(%addr, desktop_mode = config.desktop_mode, "psp-server listening");
+
+    let (shutdown_sender, shutdown_receiver) = tokio::sync::oneshot::channel::<()>();
+    let application = router::build_router(state);
+    let serve_task = tokio::spawn(async move {
+        axum::serve(listener, application)
+            .with_graceful_shutdown(async {
+                let _ = shutdown_receiver.await;
+            })
+            .await
+    });
+
+    Ok(ServerHandle {
+        addr,
+        shutdown_sender,
+        serve_task,
+    })
 }
 
 #[cfg(test)]
