@@ -15,6 +15,7 @@ import asyncio
 import json
 import pathlib
 import sys
+from typing import Optional
 
 import websockets
 
@@ -48,6 +49,20 @@ SCENARIOS = {"static-data": STATIC_DATA_SCENARIO}
 IDLE_SECONDS = 2.0
 
 
+def _null_save_dir_response_type(responses: list) -> Optional[str]:
+    """Return the wire `type` of the first response carrying `data.save_dir:
+    null`, or None if none do. Narrow, cheap scan for one known-bad capture
+    symptom (see 'Known Python quirks affecting capture' in
+    rust/parity/README.md) — not a general fixture validator."""
+    for response in responses:
+        if not isinstance(response, dict):
+            continue
+        data = response.get("data")
+        if isinstance(data, dict) and "save_dir" in data and data["save_dir"] is None:
+            return response.get("type", "<unknown>")
+    return None
+
+
 async def capture_corpus(url: str, corpus: str, output_root: pathlib.Path) -> None:
     corpus_dir = output_root / corpus
     corpus_dir.mkdir(parents=True, exist_ok=True)
@@ -63,7 +78,32 @@ async def capture_corpus(url: str, corpus: str, output_root: pathlib.Path) -> No
                     except asyncio.TimeoutError:
                         break
                     responses.append(json.loads(frame))
-                fixture_path = corpus_dir / f"{request_index:02d}_{request['type']}.json"
+
+                offending_type = _null_save_dir_response_type(responses)
+                if offending_type is not None:
+                    # A truly fresh psp.db makes Python's settings loader hit
+                    # a missing table, swallow the error, and report
+                    # save_dir: null forever for that process's life. This is
+                    # a known, 100%-reproducible capture-time artifact, not a
+                    # legitimate Rust/Python divergence — recording it would
+                    # be a trap for whoever replays this fixture next. Refuse
+                    # to write it; see rust/parity/README.md, "Known Python
+                    # quirks affecting capture", for the fix (warm the DB
+                    # first) and why this must NOT become a
+                    # PARITY_IGNORED_PATHS mask.
+                    print(
+                        f"error: response type {offending_type!r} (for request "
+                        f"{request['type']!r}) has save_dir: null — the Python "
+                        "backend's settings table did not exist when it started. "
+                        "See 'Known Python quirks affecting capture' in "
+                        "rust/parity/README.md: stop the backend, then start it "
+                        "again (a warmed psp.db) before capturing. Refusing to "
+                        "write this fixture.",
+                        file=sys.stderr,
+                    )
+                    sys.exit(1)
+
+                fixture_path = corpus_dir / f"{request_index:03d}_{request['type']}.json"
                 fixture_path.write_text(
                     json.dumps(
                         {"request": request, "responses": responses},
@@ -73,11 +113,14 @@ async def capture_corpus(url: str, corpus: str, output_root: pathlib.Path) -> No
                     encoding="utf-8",
                 )
                 print(f"wrote {fixture_path} ({len(responses)} responses)")
-    except OSError as connect_error:
+    except (OSError, websockets.exceptions.InvalidHandshake) as connect_error:
         # websockets raises a plain OSError (e.g. ConnectionRefusedError) when
-        # nothing is listening at --url. Fail loudly instead of silently
-        # writing zero fixtures and exiting 0 — a developer running this
-        # against a stopped backend must see a clear error, not a quiet no-op.
+        # nothing is listening at --url, and InvalidHandshake/InvalidStatus
+        # (a subclass) when something IS listening but rejects the WS
+        # handshake (e.g. a non-numeric client_id path segment — see the
+        # --url comment below). Fail loudly instead of letting either surface
+        # as a raw traceback, or — worse — silently writing zero fixtures and
+        # exiting 0.
         print(
             f"error: could not connect to {url}: {connect_error}\n"
             "Is the Python backend running? (uv run python psp.py --port 5174)",

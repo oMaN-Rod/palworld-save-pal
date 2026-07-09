@@ -13,6 +13,36 @@ use tokio_tungstenite::tungstenite::Message;
 
 use psp_server::{start_server, ServerConfig};
 
+/// The load-bearing comparison at the heart of the parity harness (see
+/// `rust/parity/README.md`): are `actual` and `expected` the SAME sequence,
+/// in the SAME order? `replay_all_fixtures` below calls this — and nothing
+/// else decides pass/fail for a fixture — so a regression that made this
+/// function set-based (sorted/deduped before comparing) instead of
+/// order-based would fail the `compare_responses_*` unit tests even with no
+/// live multi-frame fixture to exercise it end-to-end.
+///
+/// `[Value]`/`Vec<Value>` equality is already index-wise (order- and
+/// length-sensitive) — this function doesn't add that property, it just
+/// makes it a named, directly-testable one rather than an inline
+/// `assert_eq!` that only a live replay could ever reach.
+fn compare_responses(
+    fixture_name: &str,
+    request_type: &str,
+    actual: &[Value],
+    expected: &[Value],
+) -> Result<(), String> {
+    if actual == expected {
+        return Ok(());
+    }
+    Err(format!(
+        "fixture {fixture_name} (request type {request_type:?}) — response sequence \
+         mismatch (order and count both matter: this compares ordered arrays, not sets)\n\
+         --- actual ---\n{}\n--- expected ---\n{}",
+        serde_json::to_string_pretty(actual).unwrap_or_else(|_| format!("{actual:?}")),
+        serde_json::to_string_pretty(expected).unwrap_or_else(|_| format!("{expected:?}")),
+    ))
+}
+
 /// Justified, documented parity divergences, as `"<message_type>:<json_pointer>"`
 /// masks (e.g. `"loaded_save_files:/data/save_dir"`). MUST stay empty unless a
 /// divergence is reviewed and each entry carries a one-line "why" comment.
@@ -114,14 +144,14 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
                     value["type"].as_str().unwrap_or(&request_type).to_string();
                 strip_ignored_paths(&response_message_type, value);
             }
-            pretty_assertions::assert_eq!(
-                actual_responses,
-                expected,
-                "fixture {} (request type {:?}) — response sequence mismatch \
-                 (order and count both matter: this compares ordered arrays, not sets)",
-                fixture_path.display(),
-                request_type,
-            );
+            if let Err(message) = compare_responses(
+                &fixture_path.display().to_string(),
+                &request_type,
+                &actual_responses,
+                &expected,
+            ) {
+                panic!("{message}");
+            }
             fixtures_replayed += 1;
         }
         socket.close(None).await.ok();
@@ -237,24 +267,68 @@ async fn replay_reads_fixtures_in_filename_order() {
     assert_eq!(fixtures_replayed, 2);
 }
 
-/// Pins the specific property the whole harness leans on for the
-/// load-bearing multi-response ordering rule described in
-/// rust/parity/README.md: `Vec<Value>` equality (what `assert_eq!` uses on
-/// `actual_responses`/`expected` in `replay_all_fixtures`) is index-wise,
-/// not multiset/order-insensitive. If this assumption ever silently broke
-/// (e.g. a refactor swapped the comparison to something that sorts or
-/// dedupes first), two responses recorded in one order but emitted in
-/// another — the exact class of regression a `progress_message` /
-/// final-result reordering would produce — would stop being caught.
+/// Pins the load-bearing multi-response ordering rule described in
+/// rust/parity/README.md by calling `compare_responses` directly — the exact
+/// function `replay_all_fixtures` uses to decide pass/fail — rather than
+/// re-deriving the `Vec<T>: PartialEq` guarantee in isolation. Identical
+/// order must report success.
+///
+/// No live Phase-0 handler emits more than one frame per request (so there's
+/// no live multi-frame fixture to replay yet), which is why this test calls
+/// the extracted comparison function directly instead of driving it through
+/// a real WebSocket round-trip: it pins the same property a live multi-frame
+/// test would, against the same code path, without fabricating a handler
+/// that doesn't exist.
 #[test]
-fn response_vector_equality_is_order_sensitive_not_set_based() {
-    let recorded = vec![
-        serde_json::json!({"type": "progress_message", "data": "step 1"}),
-        serde_json::json!({"type": "loaded_save_files", "data": {}}),
-    ];
-    let same_frames_reordered = vec![recorded[1].clone(), recorded[0].clone()];
-    assert_ne!(
-        recorded, same_frames_reordered,
-        "same two frames in swapped order must NOT compare equal"
+fn compare_responses_oks_identical_order() {
+    let progress = serde_json::json!({"type": "progress_message", "data": "step 1"});
+    let result = serde_json::json!({"type": "loaded_save_files", "data": {}});
+    let recorded = vec![progress.clone(), result.clone()];
+    let replayed = vec![progress, result];
+
+    assert_eq!(
+        compare_responses(
+            "fixtures/demo/00_select_save.json",
+            "select_save",
+            &replayed,
+            &recorded
+        ),
+        Ok(())
+    );
+}
+
+/// Companion to the test above: the identical two frames, swapped in the
+/// REPLAYED sequence, must be reported as a mismatch — not silently accepted
+/// because both frames are individually present. Asserts on the error
+/// content, not merely that an `Err` came back: the message must name the
+/// offending fixture (so a developer can find it without `--nocapture`) and
+/// explain that this is an ordering/count mismatch, not a vacuous "something
+/// differs". If a future refactor made the comparison sort or dedupe before
+/// comparing, this test goes red — proved by temporarily inserting a `.sort()`
+/// into `compare_responses` during development (see task-14-report.md).
+#[test]
+fn compare_responses_errs_on_swapped_order() {
+    let progress = serde_json::json!({"type": "progress_message", "data": "step 1"});
+    let result = serde_json::json!({"type": "loaded_save_files", "data": {}});
+    let recorded = vec![progress.clone(), result.clone()];
+    let replayed_but_swapped = vec![result, progress];
+
+    let error_message = compare_responses(
+        "fixtures/demo/00_select_save.json",
+        "select_save",
+        &replayed_but_swapped,
+        &recorded,
+    )
+    .expect_err("same two frames in swapped order must NOT compare equal");
+
+    assert!(
+        error_message.contains("fixtures/demo/00_select_save.json"),
+        "error must name the offending fixture so a developer can find it \
+         without re-running with extra flags; got: {error_message}"
+    );
+    assert!(
+        error_message.contains("response sequence mismatch"),
+        "error must explain why the fixture failed, not just that it did; \
+         got: {error_message}"
     );
 }
