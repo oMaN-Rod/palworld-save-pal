@@ -1153,11 +1153,17 @@ pub fn new_pal_entry(
 /// lib.rs`, and the reverse `into_full` maps `Other(BoolProperty)` back to a
 /// real `Bool(value)` at write time), so that's the correct shape here.
 ///
-/// Does NOT cover every property `new_pal_entry` introduces (`OwnedTime`,
-/// `SlotID`, `GotStatusPointList`, `LastJumpedLocation`, ...) -- those only
-/// need a registered schema once a newly built entry is actually inserted
-/// into the world tree and serialized, which is Task 9's concern; this task
-/// never inserts a `new_pal_entry` result into any map.
+/// Also registers the all-caps `SlotID` schema `new_pal_entry` introduces
+/// (Task 14b). `new_pal_entry` writes the new pal's slot struct under the key
+/// `SlotID` (Python's `PalObjects.PalCharacterSlotId`), but every pal already
+/// on disk spells it `SlotId`, so `uesave` recorded a write-schema only for
+/// the `SlotId` paths -- and its writer refuses a property whose exact path
+/// has no recorded schema. The four `SlotID` tags are CLONED from the
+/// corresponding recorded `SlotId` tags (see the `SlotID` block below) rather
+/// than hand-constructed, so the exact struct-type tags `uesave` itself
+/// recorded are reused verbatim. `OwnedTime`/`GotStatusPointList`/
+/// `LastJumpedLocation`/... need no new registration: existing, identically
+/// spelled pals already carry their schemas.
 pub fn ensure_pal_property_schemas(level: &mut uesave::Save) {
     use uesave::{PropertyTagDataPartial, PropertyTagPartial, PropertyType, StructType};
 
@@ -1226,6 +1232,27 @@ pub fn ensure_pal_property_schemas(level: &mut uesave::Save) {
         path("GotWorkSuitabilityAddRankList.Rank"),
         tag(PropertyTagDataPartial::Other(PropertyType::IntProperty)),
     );
+
+    // `SlotID` (all-caps, from `new_pal_entry`). Clone each recorded `SlotId`
+    // tag onto its `SlotID` sibling so `uesave`'s writer accepts the newly
+    // added pal's slot struct. Cloning reuses the exact struct-type tags
+    // `uesave` itself recorded for the real pals' `SlotId`, avoiding any
+    // hand-built `StructType` guess. Degrades to a silent no-op (never a
+    // panic) if a `SlotId` schema is somehow absent -- same posture as the
+    // early return above; the writer would then surface the same clear
+    // `MissingPropertySchema` error. Byte-parity: the WRITTEN key stays the
+    // all-caps `SlotID` `new_pal_entry` produces; only the schema is copied.
+    let slot_id_paths = [
+        ("SlotID", "SlotId"),
+        ("SlotID.ContainerId", "SlotId.ContainerId"),
+        ("SlotID.ContainerId.ID", "SlotId.ContainerId.ID"),
+        ("SlotID.SlotIndex", "SlotId.SlotIndex"),
+    ];
+    for (dest, source) in slot_id_paths {
+        if let Some(recorded) = level.schemas.get(&path(source)).cloned() {
+            props::ensure_schema(level, path(dest), recorded);
+        }
+    }
 }
 
 // ============================================================================

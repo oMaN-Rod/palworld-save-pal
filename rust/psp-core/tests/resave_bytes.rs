@@ -327,6 +327,116 @@ fn edited_player_save_out_succeeds_after_boss_technology_point_fix() {
     psp_core::savio::read_sav_bytes(sav_bytes).expect("edited player .sav re-reads cleanly");
 }
 
+/// Pins the `SlotID` write-schema fix (Task 14b). `new_pal_entry` inserts the
+/// new pal's slot struct under the all-caps key `SlotID` (Python's
+/// `PalObjects.PalCharacterSlotId`), but every pal already on disk spells it
+/// `SlotId`, so uesave recorded a write-schema only for the `SlotId` paths.
+/// Before the fix, adding a pal then re-serializing `Level.sav` failed with
+/// `missing property schema for path: worldSaveData.CharacterSaveParameterMap.
+/// RawData.SaveParameter.SlotID`. This adds a pal via `add_player_pal`, asserts
+/// `level_sav_bytes()` succeeds, and confirms the new pal survives a read-back
+/// (its `InstanceId` is present in the reloaded `CharacterSaveParameterMap`).
+#[test]
+fn add_player_pal_then_resave_succeeds_and_pal_round_trips() {
+    let mut session = common::load_fixture_session("world1");
+    let data = game_data();
+
+    // Find a player whose pal box exists and has room for one more pal.
+    let (player_id, pal_box_id) = {
+        let mut found = None;
+        for candidate in session.player_summaries.keys().copied().collect::<Vec<_>>() {
+            player::get_player_details(&mut session, &data, candidate, &null_progress())
+                .unwrap()
+                .unwrap();
+            let details = player::build_player_dto(&session, &data, candidate)
+                .unwrap()
+                .unwrap();
+            if let Some(pal_box_id) = details.pal_box_id {
+                found = Some((candidate, pal_box_id));
+                break;
+            }
+        }
+        found.expect("world1 has a player with a pal box")
+    };
+
+    let new_pal = pal::add_player_pal(
+        &mut session,
+        &data,
+        player_id,
+        "SheepBall",
+        "slotid-fix",
+        pal_box_id,
+        None,
+    )
+    .unwrap()
+    .expect("world1's pal box has room for one more pal");
+
+    let sav_bytes = session
+        .level_sav_bytes()
+        .expect("re-serializing Level.sav after adding a pal must succeed (SlotID schema)");
+
+    let reloaded = psp_core::savio::read_sav_bytes(&sav_bytes).expect("re-read level sav");
+    let survived = psp_core::domain::world::character_map(&reloaded)
+        .unwrap()
+        .iter()
+        .any(|entry| {
+            psp_core::domain::world::entry_instance_id(entry) == Some(new_pal.instance_id)
+        });
+    assert!(
+        survived,
+        "the added pal's InstanceId must be present after the write→read round trip"
+    );
+}
+
+/// The guild-add sibling of the above, on world1's real founding guild + base
+/// (see `pal_crud.rs`'s `WORLD1_GUILD_WITH_BASE`/`WORLD1_BASE_ID`). A base pal
+/// built by `add_guild_pal` also carries the all-caps `SlotID`, so the same
+/// schema gap broke `level_sav_bytes()` for guild adds until Task 14b.
+#[test]
+fn add_guild_pal_then_resave_succeeds_and_pal_round_trips() {
+    // world1's founding guild + its one real base (empty worker container).
+    const WORLD1_GUILD_WITH_BASE: &str = "54491484-4e6c-7327-70b2-868f350929f6";
+    const WORLD1_BASE_ID: &str = "4bb24de8-4965-af19-f596-e296089e8ab0";
+
+    let mut session = common::load_fixture_session("world1");
+    let data = game_data();
+    let guild_id: uuid::Uuid = WORLD1_GUILD_WITH_BASE.parse().unwrap();
+    let base_id: uuid::Uuid = WORLD1_BASE_ID.parse().unwrap();
+
+    // add_guild_pal requires the guild to be loaded this session.
+    psp_core::domain::guild::get_guild_details(&mut session, &data, guild_id)
+        .unwrap()
+        .expect("guild loads");
+
+    let new_pal = pal::add_guild_pal(
+        &mut session,
+        &data,
+        guild_id,
+        base_id,
+        "SheepBall",
+        "slotid-fix-guild",
+        None,
+    )
+    .unwrap()
+    .expect("world1's base worker container has room");
+
+    let sav_bytes = session
+        .level_sav_bytes()
+        .expect("re-serializing Level.sav after adding a guild pal must succeed (SlotID schema)");
+
+    let reloaded = psp_core::savio::read_sav_bytes(&sav_bytes).expect("re-read level sav");
+    let survived = psp_core::domain::world::character_map(&reloaded)
+        .unwrap()
+        .iter()
+        .any(|entry| {
+            psp_core::domain::world::entry_instance_id(entry) == Some(new_pal.instance_id)
+        });
+    assert!(
+        survived,
+        "the added guild pal's InstanceId must be present after the write→read round trip"
+    );
+}
+
 /// Builds a `SaveSession` from just `world1/Level.sav`, with no LevelMeta —
 /// the state `set_world_name` must reject.
 fn read_level_only() -> uesave::Save {
