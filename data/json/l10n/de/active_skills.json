@@ -51,9 +51,9 @@
     "localized_name": "Meteoregen",
     "description": "Lässt zahllose Meteoriten vom Himmel fallen und Schockwellen auslösen."
   },
-  "EPalWazaID::CrossThunder": {
-    "localized_name": "X-Blitz",
-    "description": "Erzeugt zwei Blitze, die den Gegner in die Zange nehmen."
+  "EPalWazaID::CreepingBubble": {
+    "localized_name": "Blasenmarsch",
+    "description": "Einzigartige Fähigkeit von Panthalus. Erzeugt zahlreiche Blasen um den Gegner, die ihn einkreisen und angreifen."
   },
   "EPalWazaID::CrossWind": {
     "localized_name": "Kreuzwind",
@@ -154,10 +154,6 @@
   "EPalWazaID::FlareTornado": {
     "localized_name": "Lohesturm",
     "description": "Erzeugt rechts und links von sich je einen glühend heißen Tornado und hetzt sie auf den Gegner."
-  },
-  "EPalWazaID::FlareTwister": {
-    "localized_name": "Brandwirbel",
-    "description": "de_Text"
   },
   "EPalWazaID::FrostBreath": {
     "localized_name": "Eishauch",
@@ -277,7 +273,7 @@
   },
   "EPalWazaID::Psychokinesis": {
     "localized_name": "Psychogravitation",
-    "description": "Bemächtigt sich mithilfe von Psychokinese Gegnern in der Umgebung und lässt sie aus großer Höhe zu Boden prallen."
+    "description": "Manipuliert die Schwerkraft, um Gegner zu packen und sie aus großer Höhe gegen den Boden zu schmettern."
   },
   "EPalWazaID::RadiantBarrage": {
     "localized_name": "Glanzhagel",
@@ -324,7 +320,7 @@
     "description": "Erzeugt rechts und links von sich je einen Sandtornado und hetzt sie auf den Gegner."
   },
   "EPalWazaID::SandTwister": {
-    "localized_name": "Sandwirbel",
+    "localized_name": "Dünenwirbel",
     "description": "Erzeugt mehrere Sandtornados, die sich auf einer kreisförmigen Bahn bewegen."
   },
   "EPalWazaID::SeaGush": {
@@ -427,6 +423,22 @@
     "localized_name": "Flufftackling",
     "description": "Einzigartige Fähigkeit von Melpaca. Stürmt auf den Gegner zu und bleibt dabei extrem niedlich."
   },
+  "EPalWazaID::Unique_AmaterasuWolf_Bite": {
+    "localized_name": "Alphazahn (Feuer)",
+    "description": "Greift den Gegner an, indem es sich schnell auf ihn stürzt und zubeißt."
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_BiteV2": {
+    "localized_name": "Doppelbiss (Feuer)",
+    "description": "Führt mehrere schnelle Bissangriffe in Folge aus."
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_Dark_Bite": {
+    "localized_name": "Alphazahn (Schatten)",
+    "description": "Greift den Gegner an, indem es sich schnell auf ihn stürzt und zubeißt."
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_Dark_BiteV2": {
+    "localized_name": "Doppelbiss (Schatten)",
+    "description": "Führt mehrere schnelle Bissangriffe in Folge aus."
+  },
   "EPalWazaID::Unique_AmaterasuWolf_Dark_DarkCharge": {
     "localized_name": "Schattenfeuerblitz",
     "description": "Einzigartige Fähigkeit von Kitsun Noct. Hüllt seinen gesamten Körper in violette Flammen und stürmt voller Entschlossenheit auf den Gegner zu."
@@ -446,6 +458,10 @@
   "EPalWazaID::Unique_Anubis_Tackle": {
     "localized_name": "Powertackling",
     "description": "Einzigartige Fähigkeit von Anubis. Setzt seinem Gegner in rasendem Tempo nach und versetzt diesem einen kräftigen Schlag, der Energie freisetzt."
+  },
+  "EPalWazaID::Unique_Baphomet_Dark_DarkKite": {
+    "localized_name": "Albtraumkralle",
+    "description": "Einzigartige Fähigkeit von Incineram Noct. Führt einen gesprungenen Schatten-Aufwärtshieb mit seiner linken Klaue aus und setzt mit einem blitzschnellen rechten Schatten-Abwärtshieb nach."
   },
   "EPalWazaID::Unique_Baphomet_SwallowKite": {
     "localized_name": "Infernokralle",
@@ -475,6 +491,14 @@
     "localized_name": "Drachenhieb",
     "description": "Einzigartige Fähigkeit von Astegon. Schlägt zwei Mal nach vorne und greift danach mit seinem Drachenatem nach unten an."
   },
+  "EPalWazaID::Unique_BlackPuppy_Bite": {
+    "localized_name": "Alphazahn (Schatten)",
+    "description": "Greift den Gegner an, indem es sich schnell auf ihn stürzt und zubeißt."
+  },
+  "EPalWazaID::Unique_BlackPuppy_BiteV2": {
+    "localized_name": "Doppelbiss (Schatten)",
+    "description": "Führt mehrere schnelle Bissangriffe in Folge aus."
+  },
   "EPalWazaID::Unique_BluePlatypus_Toboggan": {
     "localized_name": "Surftackling",
     "description": null
@@ -483,9 +507,25 @@
     "localized_name": "Feuertackling",
     "description": null
   },
+  "EPalWazaID::Unique_BlueSkyDragon_DrainStorm": {
+    "localized_name": "Kataklysmischer Strudel",
+    "description": "Einzigartige Fähigkeit von Shaolong. Erzeugt einen gewaltigen Strudel, der bis in den Himmel reicht. Der Strudel reißt Gegner in der Umgebung mit sich und eliminiert sie auf einen Schlag."
+  },
+  "EPalWazaID::Unique_BlueSkyDragon_SweepBreath": {
+    "localized_name": "Azurodem",
+    "description": "Einzigartige Fähigkeit von Shaolong. Speit Drachenflammen in einem weiten Schwung und versengt alles ringsum."
+  },
+  "EPalWazaID::Unique_BlueSkyDragon_Tossin": {
+    "localized_name": "Hydrasturm",
+    "description": "Einzigartige Fähigkeit von Shaolong. Hüllt seinen gesamten Körper in Wasser und stürmt nach vorne."
+  },
   "EPalWazaID::Unique_BlueThunderHorse_FlashDash": {
     "localized_name": "Blitzgalopp",
     "description": "Einzigartige Fähigkeit von Azurmane. Galoppiert schnell wie der Blitz und fegt alles in seiner Bahn um."
+  },
+  "EPalWazaID::Unique_BlueThunderHorse_Tossin": {
+    "localized_name": "Blitztackling",
+    "description": "Einzigartige Fähigkeit von Azurmane. Stürmt in Blitze gehüllt mit hohem Tempo auf den Gegner zu."
   },
   "EPalWazaID::Unique_Boar_Tackle": {
     "localized_name": "Schweinsgalopp",
@@ -502,6 +542,14 @@
   "EPalWazaID::Unique_ChickenPal_ChickenPeck": {
     "localized_name": "Hackordnung",
     "description": "Einzigartige Fähigkeit von Chikipi. Stürzt sich todesmutig auf den Gegner und hackt mit dem Schnabel auf diesen ein."
+  },
+  "EPalWazaID::Unique_ClownRabbit_TrickShow": {
+    "localized_name": "Gaukelspiel",
+    "description": "Einzigartige Fähigkeit von Dupin. Erschafft zwei Schattenklone, um den Gegner zu verwirren, während das Original Feuervögel aus seinem Zylinder beschwört."
+  },
+  "EPalWazaID::Unique_CuteMole_DiggingAttack": {
+    "localized_name": "Maulwurfstunnel",
+    "description": "Einzigartige Fähigkeit von Fuddler. Verschwindet unter der Erde und bricht plötzlich unter dem Gegner hervor."
   },
   "EPalWazaID::Unique_DarkAlien_JumpScractch": {
     "localized_name": "Übelkralle",
@@ -535,9 +583,17 @@
     "localized_name": "Überfallstachel",
     "description": "Einzigartige Fähigkeit der Menasting-Spezies. Springt hoch in die Luft und durchbohrt das Ziel mit seinem giftigen Stachel."
   },
+  "EPalWazaID::Unique_Deer_Ground_DirtyHorn": {
+    "localized_name": "Schlammhorn",
+    "description": "Einzigartige Fähigkeit von Eikthyrdeer Terra. Stürmt auf den Gegner zu und wirbelt mit den Hörnern Schlamm auf. Beim Reiten lässt sich die Angriffsrichtung steuern."
+  },
   "EPalWazaID::Unique_Deer_PushupHorn": {
     "localized_name": "Hornschleuder",
     "description": "Einzigartige Fähigkeit der Eikthyrdeer-Spezies. Stürmt auf den Gegner zu und nimmt diesen auf die Hörner. Beim Reiten lässt sich die Angriffsrichtung steuern."
+  },
+  "EPalWazaID::Unique_DomeArmorDragon_ExplosiveMissile": {
+    "localized_name": "Raketenhagel",
+    "description": "Einzigartige Fähigkeit von Aegidron. Feuert aus seinen Flügeln eine Salve explosiver Raketen ab."
   },
   "EPalWazaID::Unique_DrillGame_ShellAttack": {
     "localized_name": "Panzerwirbler",
@@ -554,6 +610,18 @@
   "EPalWazaID::Unique_ElecPanda_GatlingAttack": {
     "localized_name": "Teslapanzer",
     "description": "Einzigartige Fähigkeit der Grizzbolt-Spezies. Packt die Minigun aus und lässt es krachen. Das Finale bildet ein besonders starker Schuss."
+  },
+  "EPalWazaID::Unique_ElecPomeranian_Bite": {
+    "localized_name": "Alphazahn (Elektro)",
+    "description": "Greift den Gegner an, indem es sich schnell auf ihn stürzt und zubeißt."
+  },
+  "EPalWazaID::Unique_ElecPomeranian_BiteV2": {
+    "localized_name": "Doppelbiss (Elektro)",
+    "description": "Führt mehrere schnelle Bissangriffe in Folge aus."
+  },
+  "EPalWazaID::Unique_ElecSnail_ShellCharge": {
+    "localized_name": "Voltverkriecher",
+    "description": "Einzigartige Fähigkeit der Snock-Spezies. Zieht sich in sein Gehäuse zurück, um genommenen Schaden zu reduzieren und lädt sich elektrisch auf. Hat es sich voll aufgeladen, entlädt es die Energie auf einen Schlag wieder und fügt Gegnern in der Nähe Schaden zu. Nach der Entladung steigt vorübergehend der Angriff von Elektrofähigkeiten dieses Pals."
   },
   "EPalWazaID::Unique_FairyDragon_FairyTornado": {
     "localized_name": "Mystischer Tornado",
@@ -583,13 +651,29 @@
     "localized_name": "Flammenhorn",
     "description": "Einzigartige Fähigkeit von Arsox. Nimmt einen Gegner ins Visier, stürmt wild drauflos und nimmt sein Ziel auf die Hörner."
   },
+  "EPalWazaID::Unique_FlowerDinosaur_Electric_ThunderWhip": {
+    "localized_name": "Blitzpeitsche",
+    "description": "Einzigartige Fähigkeit von Dinossom Lux. Schlägt mit seiner langen Rute auf den Boden und verursacht Blitze, die sich in gerader Linie ausbreiten."
+  },
   "EPalWazaID::Unique_FlowerDinosaur_Whip": {
     "localized_name": "Florapeitsche",
     "description": "Einzigartige Fähigkeit der Dinossom-Spezies. Schlägt mit seiner langen Rute auf den Boden und verursacht Erschütterungen, die sich in gerader Linie ausbreiten."
   },
+  "EPalWazaID::Unique_FlowerPrince_PoisonGasDance": {
+    "localized_name": "Toxintanz",
+    "description": "Einzigartige Fähigkeit von Dandilord. Versprüht tanzend seinen Fäulnisnebel, der vorübergehend bestehen bleibt."
+  },
+  "EPalWazaID::Unique_FlowerPrince_PoisonGasTackle": {
+    "localized_name": "Toxintour",
+    "description": "Einzigartige Fähigkeit von Dandilord. Stürmt in einer gleitenden Bewegung nach vorn und versprüht seinen Fäulnisnebel, der vorübergehend bestehen bleibt."
+  },
   "EPalWazaID::Unique_Garm_Bite": {
     "localized_name": "Alphazahn",
-    "description": "Einzigartige Fähigkeit von Direhowl. Springt den Gegner blitzschnell an und beißt zu."
+    "description": "Greift den Gegner an, indem es sich schnell auf ihn stürzt und zubeißt."
+  },
+  "EPalWazaID::Unique_Garm_BiteV2": {
+    "localized_name": "Doppelbiss",
+    "description": "Führt mehrere schnelle Bissangriffe in Folge aus."
   },
   "EPalWazaID::Unique_GhostAnglerfish_Fire_SweepBait_Fire": {
     "localized_name": "Glutheiße Laternenpeitsche",
@@ -603,6 +687,22 @@
     "localized_name": "Seelensturm",
     "description": "Einzigartige Fähigkeit von Maraith. Trabt langsam los und lässt dabei flackernde Feuerbälle auf den Gegner zufliegen."
   },
+  "EPalWazaID::Unique_GhostDragon_PhosphorousBeam": {
+    "localized_name": "Glutlanze",
+    "description": "Einzigartige Fähigkeit der Eidrolon-Spezies. Feuert einen langanhaltenden, glutheißen Lichtstrahl aus seinem Maul. Bevor der Strahl versiegt, kommt es an der Stelle, auf die er gerichtet war, zu einer gewaltigen Explosion."
+  },
+  "EPalWazaID::Unique_GhostDragon_TailSlash": {
+    "localized_name": "Rutenhieb",
+    "description": "Einzigartige Fähigkeit der Eidrolon-Spezies. Stürzt sich blitzschnell auf den Gegner und versetzt ihm einen messerscharfen Schwanzhieb."
+  },
+  "EPalWazaID::Unique_GoldenHorse_Bite": {
+    "localized_name": "Alphazahn (Erde)",
+    "description": "Greift den Gegner an, indem es sich schnell auf ihn stürzt und zubeißt."
+  },
+  "EPalWazaID::Unique_GoldenHorse_BiteV2": {
+    "localized_name": "Doppelbiss (Erde)",
+    "description": "Führt mehrere schnelle Bissangriffe in Folge aus."
+  },
   "EPalWazaID::Unique_GoldenHorse_StoneDash": {
     "localized_name": "Felsgalopp",
     "description": "Einzigartige Fähigkeit von Gildane. Stürmt vorwärts und schleudert dabei Felsen zu beiden Seiten."
@@ -610,6 +710,38 @@
   "EPalWazaID::Unique_Gorilla_GroundPunch": {
     "localized_name": "Georillakombo",
     "description": "Einzigartige Fähigkeit von Gorirat. Hämmert zwei Mal auf den Boden, springt hoch in die Luft und rundet das Ganze mit einem wohlplatzierten, kraftvollen Schlag ab."
+  },
+  "EPalWazaID::Unique_Gorilla_Ground_EarthPunch": {
+    "localized_name": "Georillabeben",
+    "description": "Einzigartige Fähigkeit von Gorirat Terra. Hämmert zwei Mal auf den Boden, springt hoch in die Luft und rundet das Ganze mit einem erderschütternden Schlag ab."
+  },
+  "EPalWazaID::Unique_GrassGolem_ArmCannon": {
+    "localized_name": "Wurzelkanone",
+    "description": "Einzigartige Fähigkeit von Dualith. Feuert aus seinem Arm eine mit Grasenergie versetzte Kugel ab. An der Einschlagstelle sprießen Wurzeln, die Gegnern hartnäckig nachsetzen und sie von unten durchbohren."
+  },
+  "EPalWazaID::Unique_GrassGolem_Dark_DarkArmCannon": {
+    "localized_name": "Schattenwurzel",
+    "description": "Einzigartige Fähigkeit von Dualith Noct. Feuert aus seinem Arm eine mit Schattenenergie versetzte Kugel ab. An der Einschlagstelle sprießen Wurzeln, die Gegnern hartnäckig nachsetzen und sie von unten durchbohren."
+  },
+  "EPalWazaID::Unique_GrassGolem_RocketPunch": {
+    "localized_name": "Raketenarm",
+    "description": "Einzigartige Fähigkeit der Dualith-Spezies. Trennt seinen linken Arm vom Körper, um damit seine Gegner hinwegzufegen, und feuert danach seinen rechten Arm ab."
+  },
+  "EPalWazaID::Unique_GrassMinotaur_BullRush": {
+    "localized_name": "Wilde Stierhatz",
+    "description": "Einzigartige Fähigkeit von Elgrove. Versetzt sich in Rage und führt vier wilde Sturmangriffe des Typs Gras in Folge aus."
+  },
+  "EPalWazaID::Unique_GrassMinotaur_BullRush_Lower": {
+    "localized_name": "Stierhatz",
+    "description": "Einzigartige Fähigkeit von Elgrove. Peitscht sich auf und führt zwei Sturmangriffe des Typs Gras in Folge aus."
+  },
+  "EPalWazaID::Unique_GrassMinotaur_Ice_BullRush": {
+    "localized_name": "Wilde Eisstierhatz",
+    "description": "Einzigartige Fähigkeit von Elgrove Cryst. Versetzt sich in Rage und führt vier wilde Sturmangriffe des Typs Eis in Folge aus."
+  },
+  "EPalWazaID::Unique_GrassMinotaur_Ice_BullRush_Lower": {
+    "localized_name": "Eisstierhatz",
+    "description": "Einzigartige Fähigkeit von Elgrove Cryst. Peitscht sich auf und führt zwei Sturmangriffe des Typs Eis in Folge aus."
   },
   "EPalWazaID::Unique_GrassPanda_Electric_ElectricPunch": {
     "localized_name": "Elektro-Punch",
@@ -631,13 +763,21 @@
     "localized_name": "Grollklinge",
     "description": "Einzigartige Fähigkeit von Splatterina. Teleportiert sich und führt einen scharfen Hieb aus. Teleportiert sich danach direkt über den Gegner, stößt ihre Waffe nach unten und erzeugt eine Welle dunkler Energie."
   },
+  "EPalWazaID::Unique_GuardianDog_Bite": {
+    "localized_name": "Alphazahn",
+    "description": "Greift den Gegner an, indem es sich schnell auf ihn stürzt und zubeißt."
+  },
+  "EPalWazaID::Unique_GuardianDog_BiteV2": {
+    "localized_name": "Doppelbiss",
+    "description": "Führt mehrere schnelle Bissangriffe in Folge aus."
+  },
   "EPalWazaID::Unique_HawkBird_Storm": {
     "localized_name": "Wirbelsturm",
     "description": "Einzigartige Fähigkeit von Nitewing. Erzeugt einen Tornado und greift den Gegner dann im Gleitflug an."
   },
   "EPalWazaID::Unique_HerculesBeetle_BeetleTackle": {
     "localized_name": "Gigahorn",
-    "description": "Einzigartige Fähigkeit von Warsect . Spießt Gegner mit seinen vier stahlharten Hörnern auf."
+    "description": "Einzigartige Fähigkeit von Warsect. Spießt Gegner mit seinen vier stahlharten Hörnern auf."
   },
   "EPalWazaID::Unique_Horus_FlareBird": {
     "localized_name": "Phönixwirbel",
@@ -659,6 +799,10 @@
     "localized_name": "Eiskronentackling",
     "description": "Einzigartige Fähigkeit von Reindrix. Prescht vor und nimmt unglückselige Gegner auf sein majestätisches Eisgeweih."
   },
+  "EPalWazaID::Unique_IceHorse_Dark_DarkBladeAttack": {
+    "localized_name": "Düsterflügel",
+    "description": "Einzigartige Fähigkeit von Frostallion Noct. Hüllt seine Flügel in Schattenenergie, stürmt dann auf den Gegner zu und schlitzt ihn mit seinen Flügeln auf. Danach verdichtet sich die Schattenenergie zu einer Kugel, die ihr Ziel verfolgt."
+  },
   "EPalWazaID::Unique_IceHorse_IceBladeAttack": {
     "localized_name": "Kristallflügel",
     "description": "Einzigartige Fähigkeit der Frostallion-Spezies. Kühlt die Luft ab und hüllt so seine Flügel in Eis. Stürmt dann auf den Gegner zu und schlitzt ihn mit seinen vereisten Flügeln auf."
@@ -675,6 +819,10 @@
     "localized_name": "King Press",
     "description": "Einzigartige Fähigkeit der Kingpaca-Spezies. Macht einen hohen Satz und begräbt den Gegner unter seinem riesigen Leib."
   },
+  "EPalWazaID::Unique_KingAlpaca_Ice_IcePress": {
+    "localized_name": "Ice Press",
+    "description": "Einzigartige Fähigkeit von Kingpaca Cryst. Macht einen hohen Satz und begräbt den Gegner unter Eismassen und seinem riesigen Leib."
+  },
   "EPalWazaID::Unique_KingBahamut_AirCrash": {
     "localized_name": "Magna-Crush",
     "description": "Einzigartige Fähigkeit von Blazamut Ryu. Hebt ab, beschleunigt in der Luft und versetzt dem Gegner einen mächtigen Schlag."
@@ -683,9 +831,41 @@
     "localized_name": "Schmetterarm",
     "description": "Einzigartige Fähigkeit der Blazamut-Spezies. Hebt die Pranken, schmettert sie mächtig zusammen und löst eine Explosion aus."
   },
+  "EPalWazaID::Unique_KingWhale_AquaBlade": {
+    "localized_name": "Aquaklinge",
+    "description": "Einzigartige Fähigkeit von Panthalus. Schleudert rasiermesserscharfe Wasserklingen auf den Gegner."
+  },
+  "EPalWazaID::Unique_KingWhale_AquaTornado": {
+    "localized_name": "Aquatornado",
+    "description": "Einzigartige Fähigkeit von Panthalus. Steigt hoch empor und beschwört mehrere gewaltige Tornados, die den Gegner langsam verfolgen."
+  },
+  "EPalWazaID::Unique_KingWhale_Breaching": {
+    "localized_name": "Titanensprung",
+    "description": "Einzigartige Fähigkeit von Panthalus. Taucht unter Wasser und bricht kurz darauf hervor. Die Wucht des Sprungs erzeugt Wellen, die sich ausbreiten."
+  },
+  "EPalWazaID::Unique_KingWhale_HomingBubble": {
+    "localized_name": "Blasenregen",
+    "description": "Einzigartige Fähigkeit von Panthalus. Feuert zahlreiche zielsuchende Blasen ab, die auch nach dem Aufprall an Ort und Stelle verbleiben. Die Blasen explodieren bei Berührung oder nach kurzer Zeit von selbst und verursachen Schaden."
+  },
+  "EPalWazaID::Unique_KingWhale_Maelstrom": {
+    "localized_name": "Mahlstrom",
+    "description": "Einzigartige Fähigkeit von Panthalus. Erzeugt einen Wasserstrudel um den Gegner. Der Strudel saugt das Ziel ein und verengt sich, bevor er als gewaltige Wassersäule explodiert."
+  },
+  "EPalWazaID::Unique_KingWhale_WaveTackle": {
+    "localized_name": "Tsunamitackling",
+    "description": "Einzigartige Fähigkeit von Panthalus. Rammt den Gegner mit seinem Körper und löst dabei eine gewaltige Welle aus."
+  },
+  "EPalWazaID::Unique_Kirin_Ice_IceTackle": {
+    "localized_name": "Eissturm",
+    "description": "Einzigartige Fähigkeit von Univolt Cryst. Erzeugt um sich herum Säulen aus Eis und stürmt auf den Gegner zu."
+  },
   "EPalWazaID::Unique_Kirin_LightningTackle": {
     "localized_name": "Blitzsturm",
     "description": "Einzigartige Fähigkeit von Univolt. Erzeugt um sich herum Blitze und stürmt auf den Gegner zu."
+  },
+  "EPalWazaID::Unique_LanternButler_LanternFlame": {
+    "localized_name": "Seelenflackern",
+    "description": "Einzigartige Fähigkeit von Loomen. Hebt seine Laterne und ruft mehrere rastlose Seelen herbei, die Gegner unerbittlich verfolgen."
   },
   "EPalWazaID::Unique_LeafMomonga_SomerSault": {
     "localized_name": "Wendeblatt",
@@ -711,9 +891,17 @@
     "localized_name": "Windbarriere",
     "description": "de_Text"
   },
+  "EPalWazaID::Unique_LotusDragon_LotusBloom": {
+    "localized_name": "Lotosblüte",
+    "description": "Einzigartige Fähigkeit von Ophydia. Verschwindet unter der Erde und sprießt als Knospe wieder hervor. Die Knospe blüht schließlich auf und fügt Gegnern im Umkreis Schaden zu."
+  },
   "EPalWazaID::Unique_Manticore_InfernoStrike": {
     "localized_name": "Infernozahn",
     "description": "Einzigartige Fähigkeit der Blazehowl-Spezies. Springt erbarmungslos auf den Gegner und erzeugt bei der Landung eine Flammenexplosion."
+  },
+  "EPalWazaID::Unique_MonochromeQueen_BalletJump": {
+    "localized_name": "Nachtfedertanz",
+    "description": "Einzigartige Fähigkeit von Solenne. Macht einen Satz schräg nach vorn und wirft schwarze, messerscharfe Federn."
   },
   "EPalWazaID::Unique_MoonQueen_IceMoonBlade": {
     "localized_name": "Halbmondblitz",
@@ -727,6 +915,18 @@
     "localized_name": "Halbmondsichel",
     "description": "Einzigartige Fähigkeit der Selyne-Spezies. Feuert zwei blitzschnelle Mondsicheln ab."
   },
+  "EPalWazaID::Unique_Mothman_GiantSpore": {
+    "localized_name": "Riesenspore",
+    "description": "Einzigartige Fähigkeit von Silvance. Verschießt eine riesige Spore, die den Gegner verfolgt. Die Spore explodiert beim Aufprall und erzeugt dabei eine Druckwelle im Umkreis."
+  },
+  "EPalWazaID::Unique_Mothman_SporeScatter": {
+    "localized_name": "Sprengsporen",
+    "description": "Einzigartige Fähigkeit von Silvance. Streut explosive Sporen im Umkreis aus, die nach kurzer Zeit gleichzeitig detonieren."
+  },
+  "EPalWazaID::Unique_MummyPal_MummyAttack": {
+    "localized_name": "Sarkophagsturm",
+    "description": "Einzigartige Fähigkeit von Gildra. Lässt Bandagen aus seinen Händen hervorschnellen und führt mit ihnen mehrere Angriffe in Folge aus."
+  },
   "EPalWazaID::Unique_MysteryMask_LifeSteal": {
     "localized_name": "Seelenraub",
     "description": "Einzigartige Fähigkeit von Omascul. Erscheint plötzlich in der Nähe seines Gegners, umschlingt ihn fest mit beiden Armen und absorbiert seine LP."
@@ -737,7 +937,19 @@
   },
   "EPalWazaID::Unique_NightBlueHorse_DeathStep": {
     "localized_name": "Todeshufe",
-    "description": "Einzigartige Fähigkeit von Starryon. Verwirrt den Gegner mit seinen flinken Hufen und nimmt ihn auf sein messerscharfes Horn."
+    "description": "Einzigartige Fähigkeit von Starryon. Verwirrt den Gegner mit seinen flinken Hufen und schleudert messerscharfe Klingen mit seinem Horn."
+  },
+  "EPalWazaID::Unique_NightBlueHorse_Neutral_AirStep": {
+    "localized_name": "Nobelhufe",
+    "description": "Einzigartige Fähigkeit von Starryon Primo. Verwirrt den Gegner mit seinen eleganten Hufen und schleudert messerscharfe Klingen mit seinem Horn."
+  },
+  "EPalWazaID::Unique_NightBlueHorse_Neutral_Tossin": {
+    "localized_name": "Silberross",
+    "description": "Einzigartige Fähigkeit von Starryon Primo. Stürmt in gleißende Flammen gehüllt auf den Gegner zu."
+  },
+  "EPalWazaID::Unique_NightBlueHorse_Tossin": {
+    "localized_name": "Geisterross",
+    "description": "Einzigartige Fähigkeit von Starryon. Stürmt in flackernde Flammen gehüllt auf den Gegner zu."
   },
   "EPalWazaID::Unique_NightLady_FlameNightmare": {
     "localized_name": "Flammenwalzer",
@@ -754,6 +966,10 @@
   "EPalWazaID::Unique_OctopursGirl_InkJet": {
     "localized_name": "Rauchmantel",
     "description": "Einzigartige Fähigkeit von Gloopie. Hüllt sich in eine Rauchwolke und greift den Gegner daraufhin mit einem Überraschungs-Kopfstoß an."
+  },
+  "EPalWazaID::Unique_PandaGirl_RapidKick": {
+    "localized_name": "Tai-Chi-Kick",
+    "description": "Einzigartige Fähigkeit von Leafan. Führt mehrere schnelle Drehkicks in Folge aus und verschießt abschließend eine Chi-Welle."
   },
   "EPalWazaID::Unique_PinkCat_CatPunch": {
     "localized_name": "Samtpfoten",
@@ -779,11 +995,27 @@
     "localized_name": "Schnabelflammen",
     "description": "Einzigartige Fähigkeit von Ragnahawk. Fliegt vorwärts, stößt mit dem Schnabel nach vorne und zu den Seiten und erzeugt dadurch kleine Explosionen."
   },
+  "EPalWazaID::Unique_RedFlowerBird_JumpKick": {
+    "localized_name": "Blütenstempel",
+    "description": "Einzigartige Fähigkeit von Tropicaw. Schwingt sich sanft in die Luft und rammt seine scharfen Klauen mit voller Wucht in den Boden."
+  },
   "EPalWazaID::Unique_RobinHood_BowSnipe": {
     "localized_name": "Blattschuss",
     "description": "Einzigartige Fähigkeit der Robinquill-Spezies. Spannt seinen Bogen, nimmt den Gegner ins Visier und setzt einen Schuss ab."
   },
+  "EPalWazaID::Unique_RockBeast_Ice_IceHorn": {
+    "localized_name": "Gletscherhorn",
+    "description": "Einzigartige Fähigkeit von Pierdon Cryst. Reißt den Boden mit seinem Horn auf und schleudert einen Schneeklumpen auf den Gegner."
+  },
+  "EPalWazaID::Unique_RockBeast_RockHorn": {
+    "localized_name": "Felshorn",
+    "description": "Einzigartige Fähigkeit von Pierdon. Reißt den Boden mit seinem Horn auf und schleudert einen Felsbrocken auf den Gegner."
+  },
   "EPalWazaID::Unique_Ronin_Iai": {
+    "localized_name": "Iaido",
+    "description": "Einzigartige Fähigkeit der Bushi-Spezies. Zieht das Schwert, taucht plötzlich vor dem Gegner auf und führt einen blitzschnellen Angriff aus."
+  },
+  "EPalWazaID::Unique_Ronin_Iai_PartnerSkill": {
     "localized_name": "Iaido",
     "description": "Einzigartige Fähigkeit der Bushi-Spezies. Zieht das Schwert, taucht plötzlich vor dem Gegner auf und führt einen blitzschnellen Angriff aus."
   },
@@ -795,9 +1027,37 @@
     "localized_name": "Seitenhieb",
     "description": "Einzigartige Fähigkeit der Broncherry-Spezies. Dreht seinen Körper seitwärts und fegt den Gegner mit einem wuchtigen Bodycheck weg."
   },
+  "EPalWazaID::Unique_SakuraSaurus_Water_SplashTackle": {
+    "localized_name": "Gischttackling",
+    "description": "Einzigartige Fähigkeit von Broncherry Aqua. Dreht seinen Körper seitwärts und fegt den Gegner mit einem Gischt aufwirbelnden Bodycheck weg."
+  },
+  "EPalWazaID::Unique_SamuraiDog_Bite": {
+    "localized_name": "Alphazahn (Erde)",
+    "description": "Greift den Gegner an, indem es sich schnell auf ihn stürzt und zubeißt."
+  },
+  "EPalWazaID::Unique_SamuraiDog_BiteV2": {
+    "localized_name": "Doppelbiss (Erde)",
+    "description": "Führt mehrere schnelle Bissangriffe in Folge aus."
+  },
+  "EPalWazaID::Unique_SamuraiDog_DashSlash": {
+    "localized_name": "Eiferhieb",
+    "description": "Einzigartige Fähigkeit von Pupperai. Spurtet los und führt mit dem Stock in seinem Maul zwei blitzschnelle Sturmhiebe in Folge aus."
+  },
+  "EPalWazaID::Unique_ScorpionMan_Erectric_UpperThunder": {
+    "localized_name": "Donneröffner",
+    "description": "Einzigartige Fähigkeit von Prixter Lux. Nutzt seine supraleitenden Eigenschaften, um schnell zum Gegner aufzuschließen, und verpasst ihm einen Hieb mit der Schere."
+  },
   "EPalWazaID::Unique_ScorpionMan_Uppercut": {
     "localized_name": "Dosenöffner",
     "description": "Einzigartige Fähigkeit der Prixter-Spezies. Flitzt auf den Gegner zu und verpasst ihm einen Hieb mit der Schere."
+  },
+  "EPalWazaID::Unique_Sekhmet_RollingScratch": {
+    "localized_name": "Wirbelkralle",
+    "description": "Einzigartige Fähigkeit von Sekhmet. Wirbelt nach vorn, um schnell zum Gegner aufzuschließen, und kratzt diesen mit den Krallen."
+  },
+  "EPalWazaID::Unique_Sekhmet_SomersaultScratch": {
+    "localized_name": "Saltokralle",
+    "description": "Einzigartige Fähigkeit von Sekhmet. Kratzt den Gegner mit den Krallen und schlägt danach einen Rückwärtssalto, um wieder Abstand zu gewinnen."
   },
   "EPalWazaID::Unique_SheepBall_Roll": {
     "localized_name": "Wollerolle",
@@ -806,6 +1066,10 @@
   "EPalWazaID::Unique_SifuDog_Counter": {
     "localized_name": "Konterstellung",
     "description": "Einzigartige Fähigkeit der Dogen-Spezies. Nimmt eine Stellung ein, in der es jeden Angriff abwehrt und mit einem Schlag erwidert."
+  },
+  "EPalWazaID::Unique_SnakeGirl_SnakeShot": {
+    "localized_name": "Giftschauer",
+    "description": "Einzigartige Fähigkeit von Venusa. Die Schlangen an seinem Kopf speien giftige Kugeln in hohem Bogen aus. Wo sie aufschlagen, entstehen Giftlachen, die Gegner bei Berührung vergiften."
   },
   "EPalWazaID::Unique_SnowTigerBeastman_SnowImpact": {
     "localized_name": "Eisdetonation",
@@ -823,13 +1087,41 @@
     "localized_name": "Trigger Happy",
     "description": "Einzigartige Fähigkeit der Finsider-Spezies. Zieht zwei Wasserpistolen aus dem Maul, feuert damit abwechselnd sechs Wasserkugeln und entlädt zum Schluss einen mächtigen Doppelschuss."
   },
+  "EPalWazaID::Unique_SumoDog_SumoStomp": {
+    "localized_name": "Sumostampfer",
+    "description": "Einzigartige Fähigkeit von Bulldosu. Stampft mit der rechten Hinterpfote mit voller Wucht auf den Boden und löst eine Schockwelle aus, die sich fächerförmig nach vorne ausbreitet."
+  },
   "EPalWazaID::Unique_TentacleTurtle_HydroSpin": {
     "localized_name": "Hydrospin",
     "description": "Einzigartige Fähigkeit der Turtacle-Spezies. Erzeugt Schub mit Wasserdüsen und fliegt rotierend auf den Gegner zu."
   },
+  "EPalWazaID::Unique_ThunderBird_Ice_SnowStrom": {
+    "localized_name": "Eissturzflug",
+    "description": "Einzigartige Fähigkeit von Beakon Cryst. Lässt einen Eiszapfen unter dem Gegner hervorbrechen. Geht dann zum Sturzangriff über und lässt rechts und links weitere Eiszapfen emporschießen."
+  },
   "EPalWazaID::Unique_ThunderBird_ThunderStorm": {
     "localized_name": "Donnersturzflug",
     "description": "Einzigartige Fähigkeit von Beakon. Lässt einen Blitz auf die gegnerische Position einschlagen. Geht dann zum Sturzangriff über und lässt rechts und links weitere Blitze herabregnen."
+  },
+  "EPalWazaID::Unique_ThunderDog_Bite": {
+    "localized_name": "Alphazahn (Elektro)",
+    "description": "Greift den Gegner an, indem es sich schnell auf ihn stürzt und zubeißt."
+  },
+  "EPalWazaID::Unique_ThunderDog_BiteV2": {
+    "localized_name": "Doppelbiss (Elektro)",
+    "description": "Führt mehrere schnelle Bissangriffe in Folge aus."
+  },
+  "EPalWazaID::Unique_ThunderDog_Ice_Bite": {
+    "localized_name": "Alphazahn (Eis)",
+    "description": "Greift den Gegner an, indem es sich schnell auf ihn stürzt und zubeißt."
+  },
+  "EPalWazaID::Unique_ThunderDog_Ice_BiteV2": {
+    "localized_name": "Doppelbiss (Eis)",
+    "description": "Führt mehrere schnelle Bissangriffe in Folge aus."
+  },
+  "EPalWazaID::Unique_ThunderDog_Ice_KoriShorai": {
+    "localized_name": "Winterruf",
+    "description": "Einzigartige Fähigkeit von Rayhound Cryst. Erzeugt vor sich eine Reihe von Eissäulen und stürmt dann zwischen ihnen hindurch nach vorn."
   },
   "EPalWazaID::Unique_ThunderDog_InazumaShorai": {
     "localized_name": "Donnerruf",
@@ -837,7 +1129,7 @@
   },
   "EPalWazaID::Unique_ThunderDragonMan_NumerousSwordAttack": {
     "localized_name": "Polykeraunos",
-    "description": "Einzigartige Fähigkeit der Orserk-Spezies. Schleudert mehrere Blitzspeere auf den Gegner. Der letzte explodiert nach einigen Sekunden."
+    "description": "Einzigartige Fähigkeit der Orserk-Spezies. Schleudert mehrere Blitzspeere auf den Gegner. Der erste Speer lädt sich mit Blitzenergie auf und explodiert nach einigen Sekunden."
   },
   "EPalWazaID::Unique_ThunderDragonMan_ThunderSwordAttack": {
     "localized_name": "Keraunos",
@@ -863,9 +1155,25 @@
     "localized_name": "Vulkanischer Ausbruch",
     "description": "Einzigartige Fähigkeit von Reptyro. Stampft mit seinen Vorderläufen auf den Boden und verursacht an der Stelle, an der sich der Gegner befindet, einen Vulkanausbruch, in dessen Umkreis Lavabomben herabregnen."
   },
+  "EPalWazaID::Unique_VolcanoDragon_Ice_IceLaser": {
+    "localized_name": "Eislaser",
+    "description": "Einzigartige Fähigkeit von Moldron Cryst. Verschießt einen Froststrahl aus seinem Maul, der die Erde gefrieren lässt. Auf dem eisigen Boden bilden sich Raureifpfützen, die Gegner bei Berührung einfrieren und ihnen Schaden zufügen."
+  },
+  "EPalWazaID::Unique_VolcanoDragon_Ice_IcicleSpit": {
+    "localized_name": "Eisspucke",
+    "description": "Einzigartige Fähigkeit von Moldron Cryst. Spuckt Eisbrocken aus seinem Maul. Auf dem eisigen Boden bilden sich Raureifpfützen, die Gegner bei Berührung einfrieren und ihnen Schaden zufügen."
+  },
+  "EPalWazaID::Unique_VolcanoDragon_MagmaSpit": {
+    "localized_name": "Magmaspucke",
+    "description": "Einzigartige Fähigkeit von Moldron. Spuckt glühende Magmaklumpen aus seinem Maul. Beim Aufschlag bilden sich Magmapfützen, die Gegnern bei Berührung Schaden zufügen."
+  },
+  "EPalWazaID::Unique_VolcanoDragon_VolcanicLaser": {
+    "localized_name": "Magmalaser",
+    "description": "Einzigartige Fähigkeit von Moldron. Verschießt einen Hitzestrahl aus seinem Maul, der die Erde versengt. Auf dem glutheißen Boden bilden sich Magmapfützen, die Gegnern bei Berührung Schaden zufügen."
+  },
   "EPalWazaID::Unique_WeaselDragon_FlyingTackle": {
     "localized_name": "Raketentackling",
-    "description": "Einzigartige Fähigkeit der Chillet-Spezies. Wirft sich mit aller Kraft gegen den Gegner. Beim Aufprall kneift es immer die Augen zu ..."
+    "description": "Einzigartige Fähigkeit der Chillet-Spezies. Sammelt kurz Kraft und macht einen Satz nach vorn. Beim Aufprall kneift es immer die Augen zu ..."
   },
   "EPalWazaID::Unique_Werewolf_Ice_SnowScratch": {
     "localized_name": "Schneeklaue",
@@ -874,6 +1182,10 @@
   "EPalWazaID::Unique_Werewolf_Scratch": {
     "localized_name": "Werkralle",
     "description": "Einzigartige Fähigkeit von WereWolf. Macht einen Satz nach vorne und führt zwei blitzschnelle, mit Schattenkraft versetzte Krallenhiebe aus."
+  },
+  "EPalWazaID::Unique_WhiteDeer_Dark_DarkPillar": {
+    "localized_name": "Dunkle Nova",
+    "description": "Einzigartige Fähigkeit von Celesdir Noct. Verursacht in einem weiten Umkreis vor sich eine Schattenexplosion und lässt danach beim Laufen Schattensäulen um sich herum emporschießen."
   },
   "EPalWazaID::Unique_WhiteDeer_HolyPillar": {
     "localized_name": "Heilige Nova",
@@ -890,6 +1202,10 @@
   "EPalWazaID::Unique_WhiteTiger_IceScratch": {
     "localized_name": "Blizzardkralle",
     "description": "Einzigartige Fähigkeit von Cryolinx. Führt zwei Hiebe mit seinen scharfen Krallen aus und schlitzt den Gegner zum Schluss mit voller Wucht auf. Bei jedem Krallenschwung erzeugt er drei Eissäulen, die sich nach vorne auffächern."
+  },
+  "EPalWazaID::Unique_WingGolem_Fire_FlameCutter": {
+    "localized_name": "Feuerschneider",
+    "description": "Einzigartige Fähigkeit von Knocklem Ignis. Holt aus und schleudert den flammenden Ring auf seinem Rücken, der eine kreisförmige Flugbahn beschreibt."
   },
   "EPalWazaID::Unique_WingGolem_RoundCutter": {
     "localized_name": "Erdschneider",
@@ -966,6 +1282,10 @@
   "EPalWazaID::Weapon_Use": {
     "localized_name": "Waffengebrauch",
     "description": "Greift mit seiner Waffe an."
+  },
+  "EPalWazaID::WindBurst": {
+    "localized_name": "Windschlag",
+    "description": "Erzeugt eine gewaltige Windhose um sich herum und entfesselt einen mächtigen Angriff."
   },
   "EPalWazaID::WindCutter": {
     "localized_name": "Windschneider",

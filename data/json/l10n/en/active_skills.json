@@ -21,7 +21,7 @@
   },
   "EPalWazaID::BeamSlicer": {
     "localized_name": "Beam Slicer",
-    "description": "Mows down the frontal area with a beam imbued with dragon power. The area strucked by the beam will also explode after short delay."
+    "description": "Mows down the area in front with a beam imbued with dragon power. The area struck by the beam will also explode after a short delay."
   },
   "EPalWazaID::BlastCanon": {
     "localized_name": "Blast Cannon",
@@ -51,9 +51,9 @@
     "localized_name": "Meteorain",
     "description": "Drops countless meteorites, generating an array of shock waves."
   },
-  "EPalWazaID::CrossThunder": {
-    "localized_name": "Cross Lightning",
-    "description": "Generates two lightning bolts that advance left and right, blocking either direction."
+  "EPalWazaID::CreepingBubble": {
+    "localized_name": "Creeping Bubbles",
+    "description": "Panthalus's exclusive skill. Generates a multitude of bubbles around the enemy to surround and attack them."
   },
   "EPalWazaID::CrossWind": {
     "localized_name": "Crosswind",
@@ -100,7 +100,7 @@
     "description": "Creates two huge ice blocks and fires them at the enemy one after another. On impact, it also shocks those close by."
   },
   "EPalWazaID::DragonBreath": {
-    "localized_name": "Draconic Breath",
+    "localized_name": "Dragon Breath",
     "description": "Exhales breath imbued with draconic energy, dealing continuous damage to those in front of it."
   },
   "EPalWazaID::DragonCanon": {
@@ -154,10 +154,6 @@
   "EPalWazaID::FlareTornado": {
     "localized_name": "Flare Storm",
     "description": "Generates two flaming tornadoes on either side before launching them at an enemy."
-  },
-  "EPalWazaID::FlareTwister": {
-    "localized_name": "Flare Twister",
-    "description": "Creates multiple flame tornadoes. The tornado continues to spin in circles."
   },
   "EPalWazaID::FrostBreath": {
     "localized_name": "Crystal Breath",
@@ -277,7 +273,7 @@
   },
   "EPalWazaID::Psychokinesis": {
     "localized_name": "Psycho Gravity",
-    "description": "Utilizes psychokinesis to grab enemies before flinging them to the ground from above."
+    "description": "Utilizes gravity to deprive enemies of their freedom, then slams them into the ground from high above."
   },
   "EPalWazaID::RadiantBarrage": {
     "localized_name": "Radiant Barrage",
@@ -304,7 +300,7 @@
     "description": "Generates waves that surge around the enemy from all sides. They converge and explode at the center, erupting into a column of water."
   },
   "EPalWazaID::RockBeat": {
-    "localized_name": "Stone Beat",
+    "localized_name": "Rocky Impact",
     "description": "Shakes the ground and lifts a massive boulder into the air."
   },
   "EPalWazaID::RockLance": {
@@ -427,6 +423,22 @@
     "localized_name": "Fluffy Tackle",
     "description": "Melpaca's exclusive skill. Charges forward while surrounded by an adorable aura."
   },
+  "EPalWazaID::Unique_AmaterasuWolf_Bite": {
+    "localized_name": "Fierce Fang (Fire)",
+    "description": "Quickly lunges at the enemy and bites to deal damage."
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_BiteV2": {
+    "localized_name": "Double Fang (Fire)",
+    "description": "Bites rapidly in succession to attack enemies."
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_Dark_Bite": {
+    "localized_name": "Fierce Fang (Dark)",
+    "description": "Quickly lunges at the enemy and bites to deal damage."
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_Dark_BiteV2": {
+    "localized_name": "Double Fang (Dark)",
+    "description": "Bites rapidly in succession to attack enemies."
+  },
   "EPalWazaID::Unique_AmaterasuWolf_Dark_DarkCharge": {
     "localized_name": "Daring Shadowstorm",
     "description": "Kitsun Noct's exclusive skill. Charges forward with great speed while enveloped in intense purple flames."
@@ -446,6 +458,10 @@
   "EPalWazaID::Unique_Anubis_Tackle": {
     "localized_name": "Forceful Charge",
     "description": "Anubis' exclusive skill. Rapidly pursues its foes while releasing energy and unleashing a powerful punch."
+  },
+  "EPalWazaID::Unique_Baphomet_Dark_DarkKite": {
+    "localized_name": "Nightmare Claw",
+    "description": "Incineram Noct's exclusive skill. Draws near enemies using its left dark claw to slash them into the air before cutting them down with its right dark claw."
   },
   "EPalWazaID::Unique_Baphomet_SwallowKite": {
     "localized_name": "Hellfire Claw",
@@ -475,6 +491,14 @@
     "localized_name": "Firefist Breathstorm",
     "description": "Astegon's exclusive skill. After throwing two punches forward, it exhales a dragon breath downward."
   },
+  "EPalWazaID::Unique_BlackPuppy_Bite": {
+    "localized_name": "Fierce Fang (Dark)",
+    "description": "Quickly lunges at the enemy and bites to deal damage."
+  },
+  "EPalWazaID::Unique_BlackPuppy_BiteV2": {
+    "localized_name": "Double Fang (Dark)",
+    "description": "Bites rapidly in succession to attack enemies."
+  },
   "EPalWazaID::Unique_BluePlatypus_Toboggan": {
     "localized_name": "Surfing Slam",
     "description": null
@@ -483,9 +507,25 @@
     "localized_name": "Fire Tackle",
     "description": null
   },
+  "EPalWazaID::Unique_BlueSkyDragon_DrainStorm": {
+    "localized_name": "Celestial Vortex",
+    "description": "Shaolong's exclusive skill. Summons a massive vortex reaching into the heavens. The vortex draws in and eliminates all surrounding enemies at once."
+  },
+  "EPalWazaID::Unique_BlueSkyDragon_SweepBreath": {
+    "localized_name": "Azure Dracoflare",
+    "description": "Shaolong's exclusive skill. Breathes Dragon-elemental flames in a sweeping motion, scorching the surrounding area."
+  },
+  "EPalWazaID::Unique_BlueSkyDragon_Tossin": {
+    "localized_name": "Hydra Charge",
+    "description": "Shaolong's exclusive skill. Cloaks the body in water and charges straight forward."
+  },
   "EPalWazaID::Unique_BlueThunderHorse_FlashDash": {
     "localized_name": "Bolt Blink",
     "description": "Azurmane's exclusive skill. Moves with the speed of lightning, engulfing everything in its path."
+  },
+  "EPalWazaID::Unique_BlueThunderHorse_Tossin": {
+    "localized_name": "Flash Charge",
+    "description": "Azurmane's exclusive skill. Cloaks the body in lightning and performs a high-speed charge toward the enemy."
   },
   "EPalWazaID::Unique_Boar_Tackle": {
     "localized_name": "Reckless Charge",
@@ -503,6 +543,14 @@
     "localized_name": "Chicken Rush",
     "description": "Chikipi's exclusive skill. Flies at enemies in its sights, attacking them with its sharp beak."
   },
+  "EPalWazaID::Unique_ClownRabbit_TrickShow": {
+    "localized_name": "Trickster Show",
+    "description": "Dupin's exclusive skill. Creates two illusions to distract enemies, then launches fire birds from its top hat."
+  },
+  "EPalWazaID::Unique_CuteMole_DiggingAttack": {
+    "localized_name": "Fuddler Tunneler",
+    "description": "Fuddler's exclusive skill. Burrows underground and bursts out from beneath enemies."
+  },
   "EPalWazaID::Unique_DarkAlien_JumpScractch": {
     "localized_name": "Evil Slash",
     "description": "Xenovader's exclusive skill. Swiftly pounces and slashes with its left hand."
@@ -513,31 +561,39 @@
   },
   "EPalWazaID::Unique_DarkMechaDragon_BeamSlash": {
     "localized_name": "Beam Slash",
-    "description": "Xenolord 's exclusive skill. Generates a high-output beam sword with the right hand and delivers two powerful slashes while moving at high speed."
+    "description": "Xenolord's exclusive skill. Generates a high-output beam sword with the right hand and delivers two powerful slashes while moving at high speed."
   },
   "EPalWazaID::Unique_DarkMechaDragon_ConvergentBeam": {
     "localized_name": "Astral Ray",
-    "description": "Xenolord 's exclusive skill. Concentrates energy filled with darkness and releases it all at once in a straight line."
+    "description": "Xenolord's exclusive skill. Concentrates energy filled with darkness and releases it all at once in a straight line."
   },
   "EPalWazaID::Unique_DarkMechaDragon_FunnelLaser": {
     "localized_name": "Omega Laser",
-    "description": "Xenolord 's exclusive skill. Summons the light of destruction from subspace and continuously fires it in all directions, burning everything in its sight to ashes."
+    "description": "Xenolord's exclusive skill. Summons the light of destruction from subspace and continuously fires it in all directions, burning everything in its sight to ashes."
   },
   "EPalWazaID::Unique_DarkMechaDragon_SetFunnel": {
     "localized_name": "Satellite Bit",
-    "description": "Xenolord 's exclusive skill. Generates four satellite-like wings with auto-attack functionality. These wings will automatically track and attack the enemy when the next attack is launched."
+    "description": "Xenolord's exclusive skill. Generates four satellite-like wings with auto-attack functionality. These wings will automatically track and attack the enemy when the next attack is launched."
   },
   "EPalWazaID::Unique_DarkMechaDragon_WarpComet": {
     "localized_name": "Cosmic Meteor",
-    "description": "Xenolord 's exclusive skill. Soars into the air at the speed of light and releases countless meteor projectiles. Afterwards, transforms into a comet and charges forward, causing a massive explosion upon impact."
+    "description": "Xenolord's exclusive skill. Soars into the air at the speed of light and releases countless meteor projectiles. Afterwards, transforms into a comet and charges forward, causing a massive explosion upon impact."
   },
   "EPalWazaID::Unique_DarkScorpion_Pierce": {
     "localized_name": "Jumping Stinger",
     "description": "Menasting's exclusive skill. Jumps high and forcefully stabs its prey with its tail. The poison from the tail is deadly."
   },
+  "EPalWazaID::Unique_Deer_Ground_DirtyHorn": {
+    "localized_name": "Mud Horn",
+    "description": "Eikthyrdeer Terra's exclusive skill. Charges at foes and uses its antlers to whip mud at them. When used while riding, the direction of the charge can be controlled."
+  },
   "EPalWazaID::Unique_Deer_PushupHorn": {
     "localized_name": "Antler Uppercut",
     "description": "Eikthyrdeer's exclusive skill. Charges at foes and uses antlers to launch them into the air. When used while riding, the direction of the charge can be controlled."
+  },
+  "EPalWazaID::Unique_DomeArmorDragon_ExplosiveMissile": {
+    "localized_name": "Missile Burst",
+    "description": "Aegidron's exclusive skill. Launches countless explosive missiles from its wings."
   },
   "EPalWazaID::Unique_DrillGame_ShellAttack": {
     "localized_name": "Shell Spin",
@@ -554,6 +610,18 @@
   "EPalWazaID::Unique_ElecPanda_GatlingAttack": {
     "localized_name": "Heavy Thunder Tank",
     "description": "Grizzbolt's exclusive skill. Pulls out a minigun out of nowhere and starts blasting. Finishes with a single, charged power shot."
+  },
+  "EPalWazaID::Unique_ElecPomeranian_Bite": {
+    "localized_name": "Fierce Fang (Electric)",
+    "description": "Quickly lunges at the enemy and bites to deal damage."
+  },
+  "EPalWazaID::Unique_ElecPomeranian_BiteV2": {
+    "localized_name": "Double Fang (Electric)",
+    "description": "Bites rapidly in succession to attack enemies."
+  },
+  "EPalWazaID::Unique_ElecSnail_ShellCharge": {
+    "localized_name": "Shell Charge",
+    "description": "Snock's exclusive skill. Withdraws into its shell to reduce damage taken while building electric charge. Once fully charged, it discharges, damaging nearby enemies. After discharging, the Attack of this Pal's Electric skills is increased for a limited time."
   },
   "EPalWazaID::Unique_FairyDragon_FairyTornado": {
     "localized_name": "Mystic Whirlwind",
@@ -583,13 +651,29 @@
     "localized_name": "Blazing Horn",
     "description": "Arsox's exclusive skill. Takes aim and charges with fierce momentum while raising its horn."
   },
+  "EPalWazaID::Unique_FlowerDinosaur_Electric_ThunderWhip": {
+    "localized_name": "Lightning Smash",
+    "description": "Dinossom Lux's exclusive skill. Uses its large tail to strike the ground in front of it, delivering a bolt of lightning in a straight line."
+  },
   "EPalWazaID::Unique_FlowerDinosaur_Whip": {
     "localized_name": "Botanical Smash",
     "description": "Dinossom's exclusive skill. Uses its large tail to strike the ground in front of it, delivering a shockwave in a straight line."
   },
+  "EPalWazaID::Unique_FlowerPrince_PoisonGasDance": {
+    "localized_name": "Toxic Dance",
+    "description": "Dandilord's exclusive skill. Performs a dance while releasing corrosive mist. The mist remains in the area for a limited time."
+  },
+  "EPalWazaID::Unique_FlowerPrince_PoisonGasTackle": {
+    "localized_name": "Poison Promenade",
+    "description": "Dandilord's exclusive skill. Charges forward while sliding along the ground, spraying corrosive mist. The mist remains in the area for a limited time."
+  },
   "EPalWazaID::Unique_Garm_Bite": {
     "localized_name": "Fierce Fang",
-    "description": "Direhowl's exclusive skill. Swiftly leaps at an enemy and bites into them."
+    "description": "Swiftly leaps at an enemy and bites into them."
+  },
+  "EPalWazaID::Unique_Garm_BiteV2": {
+    "localized_name": "Double Fang",
+    "description": "Launches a rapid succession of bites at the enemy."
   },
   "EPalWazaID::Unique_GhostAnglerfish_Fire_SweepBait_Fire": {
     "localized_name": "Scorching Lantern Sweep",
@@ -603,6 +687,22 @@
     "localized_name": "Spirit Dash",
     "description": "Maraith's exclusive skill. While running slowly, it continuously launches flickering fireballs toward the enemy."
   },
+  "EPalWazaID::Unique_GhostDragon_PhosphorousBeam": {
+    "localized_name": "Blazing Beam",
+    "description": "Eidrolon's exclusive skill. Emits a superheated light beam for a short time. At the final moment, the targeted area is engulfed in a massive explosion."
+  },
+  "EPalWazaID::Unique_GhostDragon_TailSlash": {
+    "localized_name": "Tail Slash",
+    "description": "Eidrolon's exclusive skill. Closes in on the enemy at high speed to deliver a cleaving swipe with its tail."
+  },
+  "EPalWazaID::Unique_GoldenHorse_Bite": {
+    "localized_name": "Fierce Fang (Ground)",
+    "description": "Quickly lunges at the enemy and bites to deal damage."
+  },
+  "EPalWazaID::Unique_GoldenHorse_BiteV2": {
+    "localized_name": "Double Fang (Ground)",
+    "description": "Bites rapidly in succession to attack enemies."
+  },
   "EPalWazaID::Unique_GoldenHorse_StoneDash": {
     "localized_name": "Crash Dash",
     "description": "Gildane's exclusive skill. Charges forward, hurling rocks to the left and right with great force."
@@ -610,6 +710,38 @@
   "EPalWazaID::Unique_Gorilla_GroundPunch": {
     "localized_name": "Ground Pound",
     "description": "Gorirat's exclusive skill. Pounds the ground twice before leaping into the air and delivers a powerful punch."
+  },
+  "EPalWazaID::Unique_Gorilla_Ground_EarthPunch": {
+    "localized_name": "Rumble Combo",
+    "description": "Gorirat Terra's exclusive skill. Pounds the ground twice before leaping into the air and delivers a powerful punch infused with the Power of Gaia."
+  },
+  "EPalWazaID::Unique_GrassGolem_ArmCannon": {
+    "localized_name": "Root Cannon",
+    "description": "Dualiths exclusive skill. Fires a Grass-elemental energy projectile from its arm. Upon impact, the blast transforms into persistent roots that track and pierce the enemy from below."
+  },
+  "EPalWazaID::Unique_GrassGolem_Dark_DarkArmCannon": {
+    "localized_name": "Dark Root",
+    "description": "Dualith Nocts exclusive skill. Fires a Dark-elemental energy projectile from its arm. Upon impact, the blast transforms into persistent roots that track and pierce the enemy from below."
+  },
+  "EPalWazaID::Unique_GrassGolem_RocketPunch": {
+    "localized_name": "Rocket Arm",
+    "description": "Dualiths exclusive skill. Detaches its left arm to sweep enemies, then launches its right arm."
+  },
+  "EPalWazaID::Unique_GrassMinotaur_BullRush": {
+    "localized_name": "Raging Bull Rush",
+    "description": "Elgrove's exclusive skill. Enters a violent frenzy and unleashes four consecutive rage-fueled Grass-element charge attacks."
+  },
+  "EPalWazaID::Unique_GrassMinotaur_BullRush_Lower": {
+    "localized_name": "Bull Rush",
+    "description": "Elgrove's exclusive skill. Enters a wild frenzy and unleashes two consecutive Grass-element charge attacks."
+  },
+  "EPalWazaID::Unique_GrassMinotaur_Ice_BullRush": {
+    "localized_name": "Raging Snow Rush",
+    "description": "Elgrove Cryst's exclusive skill. Enters a violent frenzy and unleashes four consecutive rage-fueled Ice-element charge attacks."
+  },
+  "EPalWazaID::Unique_GrassMinotaur_Ice_BullRush_Lower": {
+    "localized_name": "Snow Rush",
+    "description": "Elgrove Cryst's exclusive skill. Enters a wild frenzy and unleashes two consecutive Ice-element charge attacks."
   },
   "EPalWazaID::Unique_GrassPanda_Electric_ElectricPunch": {
     "localized_name": "Blast Punch",
@@ -631,13 +763,21 @@
     "localized_name": "Grudge Barrage",
     "description": "Splatterina's exclusive skill. Teleports instantly and launches a slash. It then teleports above the enemy, drives its weapon into them, and unleashes a wave of dark energy."
   },
+  "EPalWazaID::Unique_GuardianDog_Bite": {
+    "localized_name": "Fierce Fang",
+    "description": "Quickly lunges at the enemy and bites to deal damage."
+  },
+  "EPalWazaID::Unique_GuardianDog_BiteV2": {
+    "localized_name": "Double Fang",
+    "description": "Bites rapidly in succession to attack enemies."
+  },
   "EPalWazaID::Unique_HawkBird_Storm": {
     "localized_name": "Tornado Attack",
     "description": "Nitewing's exclusive skill. Generates a tornado ahead before soaring towards its target."
   },
   "EPalWazaID::Unique_HerculesBeetle_BeetleTackle": {
     "localized_name": "Giga Horn",
-    "description": "Warsect 's exclusive skill. Skewers enemies with its four sturdy horns."
+    "description": "Warsect's exclusive skill. Skewers enemies with its four sturdy horns."
   },
   "EPalWazaID::Unique_Horus_FlareBird": {
     "localized_name": "Phoenix Flare",
@@ -659,6 +799,10 @@
     "localized_name": "Freezing Charge",
     "description": "Reindrix's exclusive skill. Charges at an enemy with antlers adorned in ice."
   },
+  "EPalWazaID::Unique_IceHorse_Dark_DarkBladeAttack": {
+    "localized_name": "Dark Wing",
+    "description": "Frostallion Noct's exclusive skill. Dashes forward while concentrating dark energy around its wings, using them to slash enemies, then converting that energy into homing shots"
+  },
   "EPalWazaID::Unique_IceHorse_IceBladeAttack": {
     "localized_name": "Crystal Wing",
     "description": "Frostallion's exclusive skill. Dashes forward while concentrating frigid air around its wings, using them to slash enemies with icy blade."
@@ -675,6 +819,10 @@
     "localized_name": "Kingly Slam",
     "description": "Kingpaca's exclusive skill. Leaps high into the air before smashing into an enemy with its chubby, massive body."
   },
+  "EPalWazaID::Unique_KingAlpaca_Ice_IcePress": {
+    "localized_name": "Frozen Press",
+    "description": "Kingpaca Cryst's exclusive skill. Leaps high into the air before smashing into an enemy with ice and its chubby, massive body."
+  },
   "EPalWazaID::Unique_KingBahamut_AirCrash": {
     "localized_name": "Magna Crush",
     "description": "Blazamut Ryu's exclusive skill. After a big jump, moves at high speed in the air, gathering strength to unleash a powerful punch."
@@ -683,9 +831,41 @@
     "localized_name": "Brawn Impact",
     "description": "Blazamut's exclusive skill. Raises and inflates its arms, then slams them together, causing a massive explosion in the surrounding area."
   },
+  "EPalWazaID::Unique_KingWhale_AquaBlade": {
+    "localized_name": "Aqua Blade",
+    "description": "Panthalus's exclusive skill. Launches sharp water blades at enemies."
+  },
+  "EPalWazaID::Unique_KingWhale_AquaTornado": {
+    "localized_name": "Aqua Tornado",
+    "description": "Panthalus's exclusive skill. Soars into the sky and generates multiple massive tornadoes that slowly track enemies."
+  },
+  "EPalWazaID::Unique_KingWhale_Breaching": {
+    "localized_name": "Grand Breach",
+    "description": "Panthalus's exclusive skill. Dives underwater and leaps out after a short delay. The momentum of the leap creates ripples that damage the surrounding area."
+  },
+  "EPalWazaID::Unique_KingWhale_HomingBubble": {
+    "localized_name": "Bubble Rain",
+    "description": "Panthalus's exclusive skill. Fires a large cluster of homing bubbles that remain in place upon landing. Bubbles burst and deal damage upon contact or after several seconds."
+  },
+  "EPalWazaID::Unique_KingWhale_Maelstrom": {
+    "localized_name": "Maelstrom",
+    "description": "Panthalus's exclusive skill. Creates a vortex around the enemy. The vortex pulls targets toward its center while shrinking, ending in a high-pressure water pillar explosion."
+  },
+  "EPalWazaID::Unique_KingWhale_WaveTackle": {
+    "localized_name": "Tidal Charge",
+    "description": "Panthalus's exclusive skill. Slams the body into the enemy, generating a massive wave on impact."
+  },
+  "EPalWazaID::Unique_Kirin_Ice_IceTackle": {
+    "localized_name": "Ice Gale Strike",
+    "description": "Univolt Cryst's exclusive skill. Generates ice pillars around itself while charging toward enemies."
+  },
   "EPalWazaID::Unique_Kirin_LightningTackle": {
     "localized_name": "Lightning Gale",
     "description": "Univolt's exclusive skill. Generates bolts of lightning all around while charging at its target."
+  },
+  "EPalWazaID::Unique_LanternButler_LanternFlame": {
+    "localized_name": "Lantern Flame",
+    "description": "Loomen's exclusive skill. Raises a lantern and summons multiple spirits that relentlessly pursue enemies."
   },
   "EPalWazaID::Unique_LeafMomonga_SomerSault": {
     "localized_name": "Konoha Flip",
@@ -711,9 +891,17 @@
     "localized_name": "Wind Barrier",
     "description": "A skill exclusive to the Lilikin species. Surround yourself with a wind barrier, Returns the blade of wind to the attacking opponent."
   },
+  "EPalWazaID::Unique_LotusDragon_LotusBloom": {
+    "localized_name": "Lotus Bloom",
+    "description": "Ophydia's exclusive skill. Burrows into the ground and vanishes. It then emerges at the surface as a flower bud, blooms, and unleashes a wide-area attack."
+  },
   "EPalWazaID::Unique_Manticore_InfernoStrike": {
     "localized_name": "Volcanic Fang",
     "description": "Blazehowl's exclusive skill. With momentum, it pounces mercilessly on the enemy and causes an explosion of fire at the point of impact."
+  },
+  "EPalWazaID::Unique_MonochromeQueen_BalletJump": {
+    "localized_name": "Black Quilled Ballet",
+    "description": "Solenne's exclusive skill. Jumps diagonally and throws sharp black feathers at enemies."
   },
   "EPalWazaID::Unique_MoonQueen_IceMoonBlade": {
     "localized_name": "Seigetsu Flash",
@@ -727,6 +915,18 @@
     "localized_name": "Seigetsu Blade",
     "description": "Selyne's exclusive skill. Fires two consecutive high-speed blades imbued with the power of moonlight."
   },
+  "EPalWazaID::Unique_Mothman_GiantSpore": {
+    "localized_name": "Giant Spore",
+    "description": "Silvance's exclusive skill. Fires a massive tracking spore that pursues enemies. It explodes on impact, releasing a wide-area blast."
+  },
+  "EPalWazaID::Unique_Mothman_SporeScatter": {
+    "localized_name": "Spore Burst",
+    "description": "Silvance's exclusive skill. Scatters explosive spores over a wide area, then triggers a mass explosion after a set period of time."
+  },
+  "EPalWazaID::Unique_MummyPal_MummyAttack": {
+    "localized_name": "Mummy Rush",
+    "description": "Gildra's exclusive skill. Extends bandages from its hands to deliver a series of attacks."
+  },
   "EPalWazaID::Unique_MysteryMask_LifeSteal": {
     "localized_name": "Soul Drain",
     "description": "Omasculs exclusive skill. Suddenly appears near the enemy, firmly restraining them with its arms, and absorbs the HP of the restrained enemy."
@@ -738,6 +938,18 @@
   "EPalWazaID::Unique_NightBlueHorse_DeathStep": {
     "localized_name": "Lethal Step",
     "description": "Starryon's exclusive skill. Confuses enemies with flickering steps and launches slashing attack with its sharp horn."
+  },
+  "EPalWazaID::Unique_NightBlueHorse_Neutral_AirStep": {
+    "localized_name": "Royal Step",
+    "description": "Starryon Primo's exclusive skill. Confuses enemies with an elegant stride and launches slashing attack with its sharp horn."
+  },
+  "EPalWazaID::Unique_NightBlueHorse_Neutral_Tossin": {
+    "localized_name": "Silver Steed",
+    "description": "Starryon Primo's exclusive skill. Cloaks the body in radiant flames and charges toward the enemy."
+  },
+  "EPalWazaID::Unique_NightBlueHorse_Tossin": {
+    "localized_name": "Spectral Steed",
+    "description": "Starryon's exclusive skill. Cloaks the body in flickering flames and charges toward the enemy."
   },
   "EPalWazaID::Unique_NightLady_FlameNightmare": {
     "localized_name": "Flame Waltz",
@@ -754,6 +966,10 @@
   "EPalWazaID::Unique_OctopursGirl_InkJet": {
     "localized_name": "Smoke Jet",
     "description": "Gloopie's exclusive skill. Releases smoke to conceal itself, then launches a surprise headbutt from the shadows."
+  },
+  "EPalWazaID::Unique_PandaGirl_RapidKick": {
+    "localized_name": "Rapid Kick",
+    "description": "Leafan's exclusive skill. Rapidly delivers a series of consecutive roundhouse kicks, finishing with an engery blast."
   },
   "EPalWazaID::Unique_PinkCat_CatPunch": {
     "localized_name": "Punch Flurry",
@@ -779,11 +995,27 @@
     "localized_name": "Rush Beak",
     "description": "Ragnahawk's exclusive skill. While flapping forward, it strikes with its beak to ignite fires in front, right, and left, causing a small explosion."
   },
+  "EPalWazaID::Unique_RedFlowerBird_JumpKick": {
+    "localized_name": "Flower Stomp",
+    "description": "Tropicaw's exclusive skill. Leaps lightly into the air, then forcefully slams its sharp claws into the ground."
+  },
   "EPalWazaID::Unique_RobinHood_BowSnipe": {
     "localized_name": "Focus Shot",
     "description": "Robinquill's exclusive skill. Takes aim while drawing its bow before releasing a powerful shot at an enemy."
   },
+  "EPalWazaID::Unique_RockBeast_Ice_IceHorn": {
+    "localized_name": "Ice Burst",
+    "description": "Pierdon Cryst's exclusive skill. Rakes the ground with its horn, then hurls a snow chunk at enemies."
+  },
+  "EPalWazaID::Unique_RockBeast_RockHorn": {
+    "localized_name": "Horn Burst",
+    "description": "Pierdon's exclusive skill. Rakes the ground with its horn, then hurls a rock projectile at enemies."
+  },
   "EPalWazaID::Unique_Ronin_Iai": {
+    "localized_name": "Iaigiri",
+    "description": "Bushi's exclusive skill. Taking hold of the sword, it appears in front of an enemy in an instant and unleashes an ultra-fast sword draw attack."
+  },
+  "EPalWazaID::Unique_Ronin_Iai_PartnerSkill": {
     "localized_name": "Iaigiri",
     "description": "Bushi's exclusive skill. Taking hold of the sword, it appears in front of an enemy in an instant and unleashes an ultra-fast sword draw attack."
   },
@@ -795,9 +1027,37 @@
     "localized_name": "Muscle Slam",
     "description": "Broncherry's exclusive skill. Turns sideways before tackling enemies in front of it, sending them flying into the air."
   },
+  "EPalWazaID::Unique_SakuraSaurus_Water_SplashTackle": {
+    "localized_name": "Splash Tackle",
+    "description": "Broncherry Aqua's exclusive skill. Turns sideways before tackling enemies in front of it, sending them flying with a burst of water."
+  },
+  "EPalWazaID::Unique_SamuraiDog_Bite": {
+    "localized_name": "Fierce Fang (Ground)",
+    "description": "Quickly lunges at the enemy and bites to deal damage."
+  },
+  "EPalWazaID::Unique_SamuraiDog_BiteV2": {
+    "localized_name": "Double Fang (Ground)",
+    "description": "Bites rapidly in succession to attack enemies."
+  },
+  "EPalWazaID::Unique_SamuraiDog_DashSlash": {
+    "localized_name": "Persistent Slash",
+    "description": "Pupperai's exclusive skill. Charges at full speed, delivering two consecutive slashes with the wooden stick held in its mouth."
+  },
+  "EPalWazaID::Unique_ScorpionMan_Erectric_UpperThunder": {
+    "localized_name": "Thunder Uppercut",
+    "description": "ScorpionMan_Erectric's exclusive skill. Uses superconductivity to closes the distance to the enemy at high speed, then swings its pincers upward with full force."
+  },
   "EPalWazaID::Unique_ScorpionMan_Uppercut": {
     "localized_name": "Upper Smash",
     "description": "Prixter's exclusive skill. Closes the distance to the enemy at high speed, then swings its pincers upward with full force."
+  },
+  "EPalWazaID::Unique_Sekhmet_RollingScratch": {
+    "localized_name": "Rolling Scratch",
+    "description": "Sekhmets exclusive skill. Spins forward to quickly close the distance and scratch the enemy."
+  },
+  "EPalWazaID::Unique_Sekhmet_SomersaultScratch": {
+    "localized_name": "Somersault Scratch",
+    "description": "Sekhmets exclusive skill. Scratches the enemy while performing a backward somersault to create distance."
   },
   "EPalWazaID::Unique_SheepBall_Roll": {
     "localized_name": "Roly Poly",
@@ -806,6 +1066,10 @@
   "EPalWazaID::Unique_SifuDog_Counter": {
     "localized_name": "Wholehearted Stance",
     "description": "Dogen's exclusive skill. Adopts an aiki stance. While in this stance, nulify any incoming attack, instantly close in on the enemy, and counter with a full-forced palm strike."
+  },
+  "EPalWazaID::Unique_SnakeGirl_SnakeShot": {
+    "localized_name": "Poison Scatter",
+    "description": "Venusa's exclusive skill. The snakes on her head spit toxic globs in a wide arc. The poisonous pool left at the impact point inflicts Poison on anyone who touches it."
   },
   "EPalWazaID::Unique_SnowTigerBeastman_SnowImpact": {
     "localized_name": "Glacial Impact",
@@ -823,13 +1087,41 @@
     "localized_name": "Trigger Happy",
     "description": "Finsider's exclusive skill. Draws twin water blasters from its mouth, firing six shots alternately left and right, then finishes by combining both blasters to unleash one powerful shot."
   },
+  "EPalWazaID::Unique_SumoDog_SumoStomp": {
+    "localized_name": "Sumo Stomp",
+    "description": "Bulldosu's exclusive skill. Raises its right hind leg high and stomps the ground, creating a shockwave that strikes enemies in a fan-shaped area ahead."
+  },
   "EPalWazaID::Unique_TentacleTurtle_HydroSpin": {
     "localized_name": "Hydro Spin",
     "description": "Turtacle's exclusive skill. Uses jet-powered propulsion to spin rapidly and launch itself at the enemy."
   },
+  "EPalWazaID::Unique_ThunderBird_Ice_SnowStrom": {
+    "localized_name": "Glacial Plunge",
+    "description": "Beakon Cryst's exclusive skill Ice first erupts from the ground at the target's location. Then glides forward in a rushing charge, causing ice to burst from the ground on both sides along its path."
+  },
   "EPalWazaID::Unique_ThunderBird_ThunderStorm": {
     "localized_name": "Lightning Dive",
     "description": "Beakon's exclusive skill. First, it strikes the enemy's location with lightning. Then, while gliding forward, it drops lightning to the left and right."
+  },
+  "EPalWazaID::Unique_ThunderDog_Bite": {
+    "localized_name": "Fierce Fang (Electric)",
+    "description": "Quickly lunges at the enemy and bites to deal damage."
+  },
+  "EPalWazaID::Unique_ThunderDog_BiteV2": {
+    "localized_name": "Double Fang (Electric)",
+    "description": "Bites rapidly in succession to attack enemies."
+  },
+  "EPalWazaID::Unique_ThunderDog_Ice_Bite": {
+    "localized_name": "Fierce Fang (Ice)",
+    "description": "Quickly lunges at the enemy and bites to deal damage."
+  },
+  "EPalWazaID::Unique_ThunderDog_Ice_BiteV2": {
+    "localized_name": "Double Fang (Ice)",
+    "description": "Bites rapidly in succession to attack enemies."
+  },
+  "EPalWazaID::Unique_ThunderDog_Ice_KoriShorai": {
+    "localized_name": "Frostcall",
+    "description": "Rayhound Cryst's exclusive skill. Generates ice pillars ahead and charges forward at high speed through the gaps between them."
   },
   "EPalWazaID::Unique_ThunderDog_InazumaShorai": {
     "localized_name": "Beckon Lightning",
@@ -863,6 +1155,22 @@
     "localized_name": "Volcanic Burst",
     "description": "Reptyro's exclusive skill. Raises its front legs and slams them into the ground, causing a volcanic eruptions under its enemies. It simultaneously bombards them with volcanic bombs from above."
   },
+  "EPalWazaID::Unique_VolcanoDragon_Ice_IceLaser": {
+    "localized_name": "Ice Laser",
+    "description": "Moldron Cryst's exclusive skill. Fires a freezing beam from the mouth that coats the ground in ice. Frozen ground forms frost pools that freeze and damage enemies on contact."
+  },
+  "EPalWazaID::Unique_VolcanoDragon_Ice_IcicleSpit": {
+    "localized_name": "Ice Spit",
+    "description": "Moldron Cryst's exclusive skill. Spits a chunk of ice from its mouth. The impact creates frost pools that freeze and damage enemies on contact."
+  },
+  "EPalWazaID::Unique_VolcanoDragon_MagmaSpit": {
+    "localized_name": "Magma Spit",
+    "description": "Moldron's exclusive skill. Spits a mass of magma from its mouth. The impact creates magma pools that damage enemies on contact."
+  },
+  "EPalWazaID::Unique_VolcanoDragon_VolcanicLaser": {
+    "localized_name": "Magma Laser",
+    "description": "Moldron's exclusive skill. Emits a thermal beam from its mouth that scorches the ground. Heated ground forms magma pools that damage enemies on contact."
+  },
   "EPalWazaID::Unique_WeaselDragon_FlyingTackle": {
     "localized_name": "Rocket Slam",
     "description": "Chillet's exclusive skill. Gathers a bit of strength and leaps forward. Always shuts its eyes tight in fear when landing."
@@ -874,6 +1182,10 @@
   "EPalWazaID::Unique_Werewolf_Scratch": {
     "localized_name": "Jumping Claw",
     "description": "WereWolf's exclusive skill. Leaps forward and attacks twice with vicious claws imbued with dark energy."
+  },
+  "EPalWazaID::Unique_WhiteDeer_Dark_DarkPillar": {
+    "localized_name": "Dark Nova",
+    "description": "Celesdir Noct's exclusive skill. After igniting a burst of darkness across a vast area ahead, it strides forward, generating pillars of darkness around itself."
   },
   "EPalWazaID::Unique_WhiteDeer_HolyPillar": {
     "localized_name": "Holy Nova",
@@ -890,6 +1202,10 @@
   "EPalWazaID::Unique_WhiteTiger_IceScratch": {
     "localized_name": "Blizzard Claw",
     "description": "Cryolinx's exclusive skill. First, it strikes with its claws, followed by a second slash, and culminates with a powerful slash using its entire body. When swinging the claws, ice pillars are launched forward in a fan shape."
+  },
+  "EPalWazaID::Unique_WingGolem_Fire_FlameCutter": {
+    "localized_name": "Flame Cutter",
+    "description": "Knocklem Ignis's exclusive skill. Takes a big swing and throws the flaming ring from its back. The ring flies in a circular trajectory."
   },
   "EPalWazaID::Unique_WingGolem_RoundCutter": {
     "localized_name": "Ground Cutter",
@@ -966,6 +1282,10 @@
   "EPalWazaID::Weapon_Use": {
     "localized_name": "Use Weapon",
     "description": "Attack with held weapon."
+  },
+  "EPalWazaID::WindBurst": {
+    "localized_name": "Wind Burst",
+    "description": "Summons a massive wind vortex around itself and unleashes a powerful attack."
   },
   "EPalWazaID::WindCutter": {
     "localized_name": "Wind Cutter",

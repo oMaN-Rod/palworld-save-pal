@@ -51,9 +51,9 @@
     "localized_name": "메테오 레인",
     "description": "운석을 무수히 떨어뜨려 주위에 충격파를 발생시킨다."
   },
-  "EPalWazaID::CrossThunder": {
-    "localized_name": "크로스 썬더",
-    "description": "적의 좌우를 가로막듯이 2방향으로 나아가는 뇌격을 일으킨다."
+  "EPalWazaID::CreepingBubble": {
+    "localized_name": "버블 마치",
+    "description": "그랜웰 전용 스킬. 적 주변에 거품을 대량 생성해 포위 공격을 수행한다."
   },
   "EPalWazaID::CrossWind": {
     "localized_name": "크로스 윈드",
@@ -136,7 +136,7 @@
     "description": "적을 향해 불 구슬을 발사한다. 조금 나아간 뒤 갈라지며 작은 불구슬이 전방으로 퍼진다."
   },
   "EPalWazaID::FlameFunnel": {
-    "localized_name": "플레임 토네이도",
+    "localized_name": "플레임 판넬",
     "description": "화염 에너지를 품은 구체를 여러 개 만들어 적을 향해 날아가는 불덩이를 무수히 발사한다."
   },
   "EPalWazaID::FlameWall": {
@@ -154,10 +154,6 @@
   "EPalWazaID::FlareTornado": {
     "localized_name": "화염 폭풍",
     "description": "좌우에 작열하는 회오리를 일으켜 적에게 날린다."
-  },
-  "EPalWazaID::FlareTwister": {
-    "localized_name": "플레어 트위스터",
-    "description": "ko_Text"
   },
   "EPalWazaID::FrostBreath": {
     "localized_name": "서리 낀 입김",
@@ -192,7 +188,7 @@
     "description": "압축한 물줄기로 전방을 휩쓴다. 휩쓸린 지점에서 시간차로 물이 뿜어져 나온다."
   },
   "EPalWazaID::HyperBeam": {
-    "localized_name": "팰 폭발",
+    "localized_name": "팰 블래스트",
     "description": "파괴 에너지를 모아 전방에 광범위하게 초강력 광선을 발사한다."
   },
   "EPalWazaID::IceAge": {
@@ -209,7 +205,7 @@
   },
   "EPalWazaID::IceWall": {
     "localized_name": "프리즈 월",
-    "description": "지면에 얼음 벽을 생성한다. 얼음 벽은 생성 후 일정 시간이 지나거나 일정 피해를 입으면 부서진다."
+    "description": "지면에 얼음 벽을 생성한다. 얼음 벽은 생성 후 일정 피해를 입으면 부서진다."
   },
   "EPalWazaID::IcicleLine": {
     "localized_name": "아이시클 라인",
@@ -277,7 +273,7 @@
   },
   "EPalWazaID::Psychokinesis": {
     "localized_name": "사이코 그래비티",
-    "description": "염력으로 주변 적의 자유를 빼앗아 높은 곳에서 땅으로 내던진다."
+    "description": "중력을 조종해 적의 자유를 빼앗아 높은 곳에서 땅으로 내던진다."
   },
   "EPalWazaID::RadiantBarrage": {
     "localized_name": "레이디언트 배리지",
@@ -396,7 +392,7 @@
     "description": "적을 천천히 추적하는 번개 덩어리를 발사한다."
   },
   "EPalWazaID::ThunderFunnel": {
-    "localized_name": "플라즈마 토네이도",
+    "localized_name": "플라즈마 판넬",
     "description": "번개 에너지를 품은 덩어리 2개를 만들고 적을 향해 번개 덩어리를 무수히 발사한다."
   },
   "EPalWazaID::ThunderRain": {
@@ -427,6 +423,22 @@
     "localized_name": "푹신 태클",
     "description": "멜파카 전용 스킬. 귀여운 오라를 몸에 두른 채 돌진한다."
   },
+  "EPalWazaID::Unique_AmaterasuWolf_Bite": {
+    "localized_name": "와일드 팽(화염)",
+    "description": "적을 향해 날쌔게 달려들어 물고 늘어진다."
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_BiteV2": {
+    "localized_name": "더블 팽(화염)",
+    "description": "적을 향해 날렵한 연속 깨물기로 공격한다."
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_Dark_Bite": {
+    "localized_name": "와일드 팽(어둠)",
+    "description": "적을 향해 날쌔게 달려들어 물고 늘어진다."
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_Dark_BiteV2": {
+    "localized_name": "더블 팽(어둠)",
+    "description": "적을 향해 날렵한 연속 깨물기로 공격한다."
+  },
   "EPalWazaID::Unique_AmaterasuWolf_Dark_DarkCharge": {
     "localized_name": "화음산뢰",
     "description": "음이리 전용 스킬. 전신에 보랏빛 불꽃을 휘감은 채 맹렬한 기세로 돌격한다."
@@ -440,12 +452,16 @@
     "description": "아누비스 전용 스킬. 하늘 높이 뛰어올라 지면을 향해 펀치를 날린다. 지면에 충격이 퍼지며 넓은 범위에 피해를 준다."
   },
   "EPalWazaID::Unique_Anubis_LowRoundKick": {
-    "localized_name": "스핀 레그 러쉬",
+    "localized_name": "스핀 레그 슬래시",
     "description": "아누비스 전용 스킬. 튼튼한 다리로 돌려차서 광범위한 주변의 상대를 쓰러뜨린다."
   },
   "EPalWazaID::Unique_Anubis_Tackle": {
     "localized_name": "포스 드라이브",
     "description": "아누비스 전용 스킬. 적을 추격하듯 빠르게 이동해 에너지를 방출하며 강력한 펀치를 퍼붓는다."
+  },
+  "EPalWazaID::Unique_Baphomet_Dark_DarkKite": {
+    "localized_name": "악몽의 발톱",
+    "description": "아비스고트 전용 스킬. 접근하며 어둠이 깃든 왼쪽 손톱으로 올려친 후 뛰어올라 오른쪽 손톱으로 물 흐르듯 날렵하게 내리친다."
   },
   "EPalWazaID::Unique_Baphomet_SwallowKite": {
     "localized_name": "지옥불 할퀴기",
@@ -457,7 +473,7 @@
   },
   "EPalWazaID::Unique_BirdDragon_Ice_IceBreath": {
     "localized_name": "플라잉 블리자드",
-    "description": "시로카바네 전용 스킬. 입에서 냉기를 뿜어내며 전진한다."
+    "description": "버드아이스 전용 스킬. 입에서 냉기를 뿜어내며 전진한다."
   },
   "EPalWazaID::Unique_BlackCentaur_TwoSpearRushes": {
     "localized_name": "쌍창 돌격",
@@ -465,15 +481,23 @@
   },
   "EPalWazaID::Unique_BlackGriffon_TackleLaser": {
     "localized_name": "신이 내린 재앙",
-    "description": "제노그리프 전용 스킬. 돌진하면서 빛의 구체를 내보낸다. 빛의 구체는 적을 자동으로 포착하여 무적의 광선을 발사한다."
+    "description": "제노그리프 전용 스킬. 돌진하면서 빛의 구체를 내보낸다. 빛의 구체는 적을 자동으로 포착하여 무수한 광선을 발사한다."
   },
   "EPalWazaID::Unique_BlackGriffon_TackleLaser2": {
     "localized_name": "신이 내린 재앙 Ⅱ",
-    "description": "제노그리프 종의 전용 스킬. 몸에 있는 광륜으로 푸른 광선을 난사하며 돌진한다. 광선은 적을 자동으로 포착하여 추적한다."
+    "description": "제노그리프 전용 스킬. 몸에 있는 광륜으로 푸른 광선을 난사하며 돌진한다. 광선은 적을 자동으로 포착하여 추적한다."
   },
   "EPalWazaID::Unique_BlackMetalDragon_FirePunch": {
     "localized_name": "펀치 브레스",
     "description": "라바드래곤 전용 스킬. 전방에 펀치를 2회 날린 후에 아래쪽으로 용 속성 브레스를 뿜어낸다."
+  },
+  "EPalWazaID::Unique_BlackPuppy_Bite": {
+    "localized_name": "와일드 팽(어둠)",
+    "description": "적을 향해 날쌔게 달려들어 물고 늘어진다."
+  },
+  "EPalWazaID::Unique_BlackPuppy_BiteV2": {
+    "localized_name": "더블 팽(어둠)",
+    "description": "적을 향해 날렵한 연속 깨물기로 공격한다."
   },
   "EPalWazaID::Unique_BluePlatypus_Toboggan": {
     "localized_name": "서핑 태클",
@@ -483,9 +507,25 @@
     "localized_name": "파이어 태클",
     "description": null
   },
+  "EPalWazaID::Unique_BlueSkyDragon_DrainStorm": {
+    "localized_name": "천변지와",
+    "description": "샤오롱 전용 스킬. 하늘까지 닿을 거대한 소용돌이를 일으킨다. 소용돌이는 주변의 적을 삼키며 일망타진한다."
+  },
+  "EPalWazaID::Unique_BlueSkyDragon_SweepBreath": {
+    "localized_name": "창룡염",
+    "description": "샤오롱 전용 스킬. 용 속성 화염을 휘몰아치듯 뿜어대 주변 일대를 황무지로 만든다."
+  },
+  "EPalWazaID::Unique_BlueSkyDragon_Tossin": {
+    "localized_name": "수룡 돌진",
+    "description": "샤오롱 전용 스킬. 온몸에 물을 휘감고 정면으로 돌진한다."
+  },
   "EPalWazaID::Unique_BlueThunderHorse_FlashDash": {
     "localized_name": "볼트 블링크",
     "description": "썬더호스 전용 스킬. 번개와도 같은 속도로 이동하여 궤도상에 존재하는 모든 것을 휩쓴다."
+  },
+  "EPalWazaID::Unique_BlueThunderHorse_Tossin": {
+    "localized_name": "플래시 차지",
+    "description": "썬더호스 전용 스킬. 번개를 몸에 휘감은 채로 적을 향해 고속으로 돌진한다."
   },
   "EPalWazaID::Unique_Boar_Tackle": {
     "localized_name": "멧돼지 돌진",
@@ -493,7 +533,7 @@
   },
   "EPalWazaID::Unique_CaptainPenguin_Black_BodySlide_Electric": {
     "localized_name": "썬더 슬라이딩",
-    "description": "펭키드 종의 전용 스킬. 배를 땅에 붙인 후 온몸으로 전기를 발산하며 적에게 미끄러지듯 돌진한다."
+    "description": "뎅킹 종의 전용 스킬. 배를 땅에 붙인 후 온몸으로 전기를 발산하며 적에게 미끄러지듯 돌진한다."
   },
   "EPalWazaID::Unique_CaptainPenguin_BodySlide": {
     "localized_name": "캡틴 슬라이딩",
@@ -503,9 +543,17 @@
     "localized_name": "치킨 태클",
     "description": "꼬꼬닭 전용 스킬. 적을 노리고 달려들어 뾰족한 부리로 돌격한다."
   },
+  "EPalWazaID::Unique_ClownRabbit_TrickShow": {
+    "localized_name": "트릭 쇼",
+    "description": "라피에르 전용 스킬. 2개의 환영을 만들어 적을 농락하고 본체가 비단 모자에서 불새를 날려 공격한다."
+  },
+  "EPalWazaID::Unique_CuteMole_DiggingAttack": {
+    "localized_name": "두더지 리프트",
+    "description": "두더비 전용 스킬. 땅속에 파고들어 적의 발밑에서부터 기세 좋게 뛰어오른다."
+  },
   "EPalWazaID::Unique_DarkAlien_JumpScractch": {
     "localized_name": "악마의 발톱",
-    "description": "제노베이더 종의 전용 스킬. 적에게 잽싸게 뛰어들어 왼손으로 벤다."
+    "description": "제노베이더 전용 스킬. 적에게 잽싸게 뛰어들어 왼손으로 벤다."
   },
   "EPalWazaID::Unique_DarkCrow_TelePoke": {
     "localized_name": "팬텀의 공격",
@@ -533,11 +581,19 @@
   },
   "EPalWazaID::Unique_DarkScorpion_Pierce": {
     "localized_name": "점프 찌르기",
-    "description": "데스 스팅 종의 전용 스킬. 힘을 싣고 높이 뛰어올라 독 발린 꼬리로 사냥감을 힘껏 꿰뚫는다."
+    "description": "데스스팅 종의 전용 스킬. 힘을 싣고 높이 뛰어올라 독 발린 꼬리로 사냥감을 힘껏 꿰뚫는다."
+  },
+  "EPalWazaID::Unique_Deer_Ground_DirtyHorn": {
+    "localized_name": "광란의 뿔",
+    "description": "산령사슴 전용 스킬. 적을 향해 돌진하여 뿔로 진흙을 흩뿌리며 공격한다. 탑승 중 발동하면 진행 방향을 바꿀 수 있다."
   },
   "EPalWazaID::Unique_Deer_PushupHorn": {
     "localized_name": "들이받기",
     "description": "신령사슴 종의 전용 스킬. 적을 향해 돌진하여 뿔로 들이받으며 공격한다. 탑승 중 발동하면 진행 방향을 바꿀 수 있다."
+  },
+  "EPalWazaID::Unique_DomeArmorDragon_ExplosiveMissile": {
+    "localized_name": "작열 미사일",
+    "description": "셸가드라 전용 스킬. 날개에서 무수한 작열 미사일을 발사해 공격한다."
   },
   "EPalWazaID::Unique_DrillGame_ShellAttack": {
     "localized_name": "쉘 스핀",
@@ -553,7 +609,19 @@
   },
   "EPalWazaID::Unique_ElecPanda_GatlingAttack": {
     "localized_name": "뇌격의 중전차",
-    "description": "일렉판다 종의 전용 스킬. 어디서 꺼냈는지 모를 미니건을 난사한다. 마지막 한 발에 힘을 모아 강력한 차지 샷으로 마무리한다."
+    "description": "일렉판다 전용 스킬. 어디서 꺼냈는지 모를 미니건을 난사한다. 마지막 한 발에 힘을 모아 강력한 차지 샷으로 마무리한다."
+  },
+  "EPalWazaID::Unique_ElecPomeranian_Bite": {
+    "localized_name": "와일드 팽(번개)",
+    "description": "적을 향해 날쌔게 달려들어 물고 늘어진다."
+  },
+  "EPalWazaID::Unique_ElecPomeranian_BiteV2": {
+    "localized_name": "더블 팽(번개)",
+    "description": "적을 향해 날렵한 연속 깨물기로 공격한다."
+  },
+  "EPalWazaID::Unique_ElecSnail_ShellCharge": {
+    "localized_name": "셸 차지",
+    "description": "전팽이 종의 전용 스킬. 껍데기에 들어가 피해를 경감하며 전기 에너지를 충전한다. 충전이 끝나면 방전해 주변 적에게 피해를 준다. 방전 후 일정 시간 동안 이 팰이 사용하는 번개 속성 스킬의 공격력이 증가한다."
   },
   "EPalWazaID::Unique_FairyDragon_FairyTornado": {
     "localized_name": "신비의 허리케인",
@@ -561,7 +629,7 @@
   },
   "EPalWazaID::Unique_FeatherOstrich_Tossin": {
     "localized_name": "어스 대시",
-    "description": "페더치프 종의 전용 스킬. 단숨에 속도를 올려 그 기세로 전방에 고속 돌진한다."
+    "description": "페더치프 전용 스킬. 단숨에 속도를 올려 그 기세로 전방에 고속 돌진한다."
   },
   "EPalWazaID::Unique_FengyunDeeper_CloudTempest": {
     "localized_name": "구름 폭풍",
@@ -573,7 +641,7 @@
   },
   "EPalWazaID::Unique_FireKirin_Dark_DarkTossin": {
     "localized_name": "어둠의 돌격",
-    "description": "사라블랙 전용 스킬. 암흑의 화염을 몸에 두른 채 돌진한다. 지나간 자리엔 잔불이 타오른다."
+    "description": "베이린 전용 스킬. 암흑의 화염을 몸에 두른 채 돌진한다. 지나간 자리엔 잔불이 타오른다."
   },
   "EPalWazaID::Unique_FireKirin_Tackle": {
     "localized_name": "화염 돌격",
@@ -583,13 +651,29 @@
     "localized_name": "불타는 뿔",
     "description": "불페르노 전용 스킬. 표적을 정한 뒤 맹렬한 기세로 돌진하면서 뿔로 들이받는다."
   },
+  "EPalWazaID::Unique_FlowerDinosaur_Electric_ThunderWhip": {
+    "localized_name": "전기 채찍",
+    "description": "찌르르디노 전용 스킬. 큰 꼬리를 사용해 전방의 지면을 내려치며 직선상으로 전격을 가한다."
+  },
   "EPalWazaID::Unique_FlowerDinosaur_Whip": {
     "localized_name": "꼬리 채찍",
     "description": "플로라디노 종의 전용 스킬. 큰 꼬리를 사용해 전방의 지면을 내려치며 직선상으로 충격을 가한다."
   },
+  "EPalWazaID::Unique_FlowerPrince_PoisonGasDance": {
+    "localized_name": "포이즌 댄스",
+    "description": "녹사주 전용 스킬. 춤을 추며 부식 안개를 분사한다. 분사된 부식 안개는 일정 시간 동안 제자리에 잔류한다."
+  },
+  "EPalWazaID::Unique_FlowerPrince_PoisonGasTackle": {
+    "localized_name": "포이즌 프롬나드",
+    "description": "녹사주 전용 스킬. 부식 안개를 분사하며 지면에 미끄러지듯 돌진한다. 분사된 부식 안개는 일정 시간 동안 제자리에 잔류한다."
+  },
   "EPalWazaID::Unique_Garm_Bite": {
     "localized_name": "와일드 팽",
     "description": "다크울프 전용 스킬. 적을 향해 날쌔게 달려들어 물고 늘어진다."
+  },
+  "EPalWazaID::Unique_Garm_BiteV2": {
+    "localized_name": "더블 팽",
+    "description": "적을 향해 날쌔게 달려들어 물고 늘어진다."
   },
   "EPalWazaID::Unique_GhostAnglerfish_Fire_SweepBait_Fire": {
     "localized_name": "작열 제등 휩쓸기",
@@ -603,6 +687,22 @@
     "localized_name": "유령의 질주",
     "description": "고스호스 전용 스킬. 천천히 달려 나가며 적을 향해 흔들리는 화염구를 계속해서 날린다."
   },
+  "EPalWazaID::Unique_GhostDragon_PhosphorousBeam": {
+    "localized_name": "블레이즈 빔",
+    "description": "레이번 종의 전용 스킬. 고열 광선을 일정 시간 동안 뿜어낸다. 그 후 광선이 뿜어진 마지막 지점에 대폭발이 일어난다."
+  },
+  "EPalWazaID::Unique_GhostDragon_TailSlash": {
+    "localized_name": "테일 슬래시",
+    "description": "레이번 종의 전용 스킬. 적에게 고속으로 접근해 꼬리로 가르듯 공격한다."
+  },
+  "EPalWazaID::Unique_GoldenHorse_Bite": {
+    "localized_name": "와일드 팽(땅)",
+    "description": "적을 향해 날쌔게 달려들어 물고 늘어진다."
+  },
+  "EPalWazaID::Unique_GoldenHorse_BiteV2": {
+    "localized_name": "더블 팽(땅)",
+    "description": "적을 향해 날렵한 연속 깨물기로 공격한다."
+  },
   "EPalWazaID::Unique_GoldenHorse_StoneDash": {
     "localized_name": "크러시 대시",
     "description": "러시골드 전용 스킬. 암석을 좌우로 날리며 맹렬한 기세로 돌진한다."
@@ -611,13 +711,45 @@
     "localized_name": "고릴라운드 콤보",
     "description": "고릴레이지 전용 스킬. 지면을 2번 내리친 뒤 번쩍 뛰어올라 마지막에 강력한 펀치를 날린다."
   },
+  "EPalWazaID::Unique_Gorilla_Ground_EarthPunch": {
+    "localized_name": "고릴럼블 콤보",
+    "description": "고릴가이아 전용 스킬. 지면을 2번 내리친 뒤 번쩍 뛰어올라 대지의 힘이 깃든 펀치를 날린다."
+  },
+  "EPalWazaID::Unique_GrassGolem_ArmCannon": {
+    "localized_name": "루트 캐넌",
+    "description": "스태초 전용 스킬. 팔에서 풀 속성 에너지탄을 발사한다. 에너지탄은 착탄 후 적을 집요하게 쫓는 뿌리가 되며, 발밑에서부터 꿰뚫는다."
+  },
+  "EPalWazaID::Unique_GrassGolem_Dark_DarkArmCannon": {
+    "localized_name": "다크 루트",
+    "description": "스태그림 전용 스킬. 팔에서 어둠 속성 에너지탄을 발사한다. 에너지탄은 착탄 후 적을 집요하게 쫓는 뿌리가 되며, 발밑에서부터 꿰뚫는다."
+  },
+  "EPalWazaID::Unique_GrassGolem_RocketPunch": {
+    "localized_name": "로켓 암",
+    "description": "스태초 종의 전용 스킬. 왼팔을 본체로부터 분리해 적을 휩쓴다. 그 후 오른팔을 사출한다."
+  },
+  "EPalWazaID::Unique_GrassMinotaur_BullRush": {
+    "localized_name": "불 러시 레이지",
+    "description": "그루타우 전용 스킬. 온몸의 기운을 과격하게 끌어내 4연속으로 분노의 풀 속성 돌진을 감행한다."
+  },
+  "EPalWazaID::Unique_GrassMinotaur_BullRush_Lower": {
+    "localized_name": "불 러시",
+    "description": "그루타우 전용 스킬. 온몸의 기운을 난폭하게 끌어내 2연속으로 풀 속성 돌진을 감행한다."
+  },
+  "EPalWazaID::Unique_GrassMinotaur_Ice_BullRush": {
+    "localized_name": "스노 러시 레이지",
+    "description": "블랑타우 전용 스킬. 온몸의 기운을 과격하게 끌어내 4연속으로 분노의 얼음 속성 돌진을 감행한다."
+  },
+  "EPalWazaID::Unique_GrassMinotaur_Ice_BullRush_Lower": {
+    "localized_name": "스노 러시",
+    "description": "블랑타우 전용 스킬. 온몸의 기운을 난폭하게 끌어내 2연속으로 얼음 속성 돌진을 감행한다."
+  },
   "EPalWazaID::Unique_GrassPanda_Electric_ElectricPunch": {
     "localized_name": "폭발 펀치",
-    "description": "썬더판다 전용 스킬. 오른팔을 빙빙 휘두르며 전방에 강렬한 펀치를 퍼붓는다."
+    "description": "라이바오 전용 스킬. 오른팔을 빙빙 휘두르며 전방에 번개 속성의 펀치를 퍼붓는다."
   },
   "EPalWazaID::Unique_GrassPanda_MusclePunch": {
     "localized_name": "근육 펀치",
-    "description": "초판다 전용 스킬. 오른팔을 빙빙 휘두르며 전방에 강렬한 펀치를 퍼붓는다."
+    "description": "풀바오 전용 스킬. 오른팔을 빙빙 휘두르며 전방에 강렬한 펀치를 퍼붓는다."
   },
   "EPalWazaID::Unique_GrassRabbitMan_GrassRoundKick": {
     "localized_name": "스핀 레그 러시",
@@ -631,13 +763,21 @@
     "localized_name": "원망 서린 연타",
     "description": "얀데리나 전용 스킬. 사용한 자리에서 순간이동하여 참격을 날린다. 이어서 적의 머리 위로 순간이동한 후 무기로 찌르며 어둠의 파동을 일으킨다."
   },
+  "EPalWazaID::Unique_GuardianDog_Bite": {
+    "localized_name": "와일드 팽",
+    "description": "적을 향해 날쌔게 달려들어 물고 늘어진다."
+  },
+  "EPalWazaID::Unique_GuardianDog_BiteV2": {
+    "localized_name": "더블 팽",
+    "description": "적을 향해 날렵한 연속 깨물기로 공격한다."
+  },
   "EPalWazaID::Unique_HawkBird_Storm": {
     "localized_name": "토네이도 어택",
     "description": "나이트윙 전용 스킬. 전방에 맹렬한 회오리를 만든 뒤 활공하면서 적에게 돌진한다."
   },
   "EPalWazaID::Unique_HerculesBeetle_BeetleTackle": {
     "localized_name": "거대한 뿔",
-    "description": "장수벌레 전용 스킬. 4개의 단단한 뿔로 적을 꿰뚫어 버린다."
+    "description": "장수벌레 종의 전용 스킬. 4개의 단단한 뿔로 적을 꿰뚫어 버린다."
   },
   "EPalWazaID::Unique_Horus_FlareBird": {
     "localized_name": "봉황의 비행",
@@ -659,6 +799,10 @@
     "localized_name": "얼음뿔 돌진",
     "description": "얼음사슴 전용 스킬. 돌진하며 장엄한 얼음 뿔로 적을 들이받는다."
   },
+  "EPalWazaID::Unique_IceHorse_Dark_DarkBladeAttack": {
+    "localized_name": "다크 윙",
+    "description": "흑천마 전용 스킬. 어둠 에너지를 날개에 휘감은 후 질주하며 날개로 적을 베어버린다. 마무리로 어둠 에너지를 적을 추적하는 탄환으로 바꾸어 발사한다."
+  },
   "EPalWazaID::Unique_IceHorse_IceBladeAttack": {
     "localized_name": "크리스탈 윙",
     "description": "빙천마 종의 전용 스킬. 냉기를 응축하여 날개에 얼음을 휘감은 후 얼음 날개로 질주하며 적을 베어버린다."
@@ -675,17 +819,53 @@
     "localized_name": "킹 프레스",
     "description": "킹파카 종의 전용 스킬. 힘차게 뛰어오른 뒤 푹신거리는 거대한 몸으로 적을 짓눌러 버린다."
   },
+  "EPalWazaID::Unique_KingAlpaca_Ice_IcePress": {
+    "localized_name": "꽁꽁 프레스",
+    "description": "블루파카 전용 스킬. 힘차게 뛰어오른 뒤 거대한 몸과 얼음으로 적을 짓눌러 버린다."
+  },
   "EPalWazaID::Unique_KingBahamut_AirCrash": {
     "localized_name": "마그나 크러시",
-    "description": "마그마 드라고 전용 스킬. 힘차게 뛰어올라 공중에서 빠르게 이동하여 온 힘을 담은 강력한 펀치로 공격한다."
+    "description": "마그마드라고 전용 스킬. 힘차게 뛰어올라 공중에서 빠르게 이동하여 온 힘을 담은 강력한 펀치로 공격한다."
   },
   "EPalWazaID::Unique_KingBahamut_ArmSmash": {
     "localized_name": "완력 강타",
-    "description": "마그마 카이저 종의 전용 스킬. 팔을 휘두르며 크게 부풀린 후 거세게 부딪혀 주변에 대폭발을 일으킨다."
+    "description": "마그마카이저 종의 전용 스킬. 팔을 휘두르며 크게 부풀린 후 거세게 부딪혀 주변에 대폭발을 일으킨다."
+  },
+  "EPalWazaID::Unique_KingWhale_AquaBlade": {
+    "localized_name": "마린 블레이드",
+    "description": "그랜웰 전용 스킬. 날카로운 물의 칼날을 날려 공격한다."
+  },
+  "EPalWazaID::Unique_KingWhale_AquaTornado": {
+    "localized_name": "아쿠아 토네이도",
+    "description": "그랜웰 전용 스킬. 하늘을 향해 비상해 거대한 회오리를 여러 개 일으킨다. 회오리는 느린 속도로 적을 추적한다."
+  },
+  "EPalWazaID::Unique_KingWhale_Breaching": {
+    "localized_name": "그랜드 브리치",
+    "description": "그랜웰 전용 스킬. 물속으로 파고들어 잠시 후 크게 뛰어오른다. 뛰어오르는 기세로 주변에 파문이 일어나 퍼져나간다."
+  },
+  "EPalWazaID::Unique_KingWhale_HomingBubble": {
+    "localized_name": "버블 레인",
+    "description": "그랜웰 전용 스킬. 적을 추적하는 거품을 대량으로 발사한다. 거품은 착탄 후에도 잠시 그 지점에 머문다. 거품은 닿거나 몇 초 경과 후 터져 피해를 준다."
+  },
+  "EPalWazaID::Unique_KingWhale_Maelstrom": {
+    "localized_name": "멜스트롬",
+    "description": "그랜웰 전용 스킬. 적 주위에 소용돌이를 만든다. 소용돌이는 적을 끌어들이며 중간 지점으로 수축한 후 마지막에 폭발하여 물기둥을 일으킨다."
+  },
+  "EPalWazaID::Unique_KingWhale_WaveTackle": {
+    "localized_name": "타이달 차지",
+    "description": "그랜웰 전용 스킬. 온몸으로 적에게 부딪혀 파도를 일으킨다."
+  },
+  "EPalWazaID::Unique_Kirin_Ice_IceTackle": {
+    "localized_name": "질풍 빙격",
+    "description": "레이콘 전용 스킬. 자신 주변에 얼음 기둥을 일으키며 적을 향해 돌진한다."
   },
   "EPalWazaID::Unique_Kirin_LightningTackle": {
     "localized_name": "질풍뇌격",
     "description": "썬더콘 전용 스킬. 자신의 주위에 낙뢰를 떨어뜨리면서 적을 향해 돌진한다."
+  },
+  "EPalWazaID::Unique_LanternButler_LanternFlame": {
+    "localized_name": "랜턴 플레임",
+    "description": "뷔랜턴 전용 스킬. 랜턴을 들고 집요하게 적을 뒤쫓는 원념들을 여러 개 소환한다."
   },
   "EPalWazaID::Unique_LeafMomonga_SomerSault": {
     "localized_name": "나뭇잎 뒤집기",
@@ -711,21 +891,41 @@
     "localized_name": "윈드 배리어",
     "description": "ko_Text"
   },
+  "EPalWazaID::Unique_LotusDragon_LotusBloom": {
+    "localized_name": "피어나는 연꽃",
+    "description": "연미르 전용 스킬. 땅속으로 파고들어 모습을 감춘다. 꽃봉오리 형태로 다시 나타난 후, 개화해 넓은 범위를 공격한다."
+  },
   "EPalWazaID::Unique_Manticore_InfernoStrike": {
     "localized_name": "화산의 일격",
     "description": "만티파이어 종의 전용 스킬. 적을 향해 기세 좋게 나아가다 뛰어들어 마지막 위치에 불꽃을 가차 없이 터뜨려 버린다."
   },
+  "EPalWazaID::Unique_MonochromeQueen_BalletJump": {
+    "localized_name": "검은 날개의 춤",
+    "description": "모노크로나 전용 스킬. 대각선 방향으로 점프해 검고 날카로운 깃털을 날린다."
+  },
   "EPalWazaID::Unique_MoonQueen_IceMoonBlade": {
     "localized_name": "청월섬",
-    "description": "셀레문 종의 전용 스킬. 달빛의 힘이 깃든 고속 칼날을 3발 연속으로 발사한다."
+    "description": "셀레문 전용 스킬. 달빛의 힘이 깃든 고속 칼날을 3발 연속으로 발사한다."
   },
   "EPalWazaID::Unique_MoonQueen_MoonBeam": {
     "localized_name": "월광선",
-    "description": "셀레문 종의 전용 스킬. 등에 있는 달 쪽으로 에너지를 모은 후 전방에 초승달 모양의 빔을 발사한다."
+    "description": "셀레문 전용 스킬. 등에 있는 달 쪽으로 에너지를 모은 후 전방에 초승달 모양의 빔을 발사한다."
   },
   "EPalWazaID::Unique_MoonQueen_MoonBlade": {
     "localized_name": "청월의 칼날",
-    "description": "셀레문 종의 전용 스킬. 달빛의 힘이 깃든 고속 칼날을 2발 연속으로 발사한다."
+    "description": "셀레문 전용 스킬. 달빛의 힘이 깃든 고속 칼날을 2발 연속으로 발사한다."
+  },
+  "EPalWazaID::Unique_Mothman_GiantSpore": {
+    "localized_name": "자이언트 스포어",
+    "description": "모슬론 전용 스킬. 적을 추적하는 거대한 포자를 발사한다. 착탄 시 폭발하며 폭풍이 일어나 넓게 퍼진다."
+  },
+  "EPalWazaID::Unique_Mothman_SporeScatter": {
+    "localized_name": "스포어 버스트",
+    "description": "모슬론 전용 스킬. 넓은 범위에 폭발성 포자를 흩뿌린다. 포자는 일정 시간 후 한꺼번에 폭발한다."
+  },
+  "EPalWazaID::Unique_MummyPal_MummyAttack": {
+    "localized_name": "미이라 러시",
+    "description": "요미이라 전용 스킬. 손에 있는 붕대를 늘어뜨려 연속으로 공격한다."
   },
   "EPalWazaID::Unique_MysteryMask_LifeSteal": {
     "localized_name": "영혼 강탈",
@@ -738,6 +938,18 @@
   "EPalWazaID::Unique_NightBlueHorse_DeathStep": {
     "localized_name": "리썰 스텝",
     "description": "나이트롯 전용 스킬. 일렁이는 발놀림으로 적을 농락하며 예리한 뿔로 참격을 날린다."
+  },
+  "EPalWazaID::Unique_NightBlueHorse_Neutral_AirStep": {
+    "localized_name": "로열 스텝",
+    "description": "라이트롯 전용 스킬. 화려한 스텝으로 적을 농락하며 예리한 뿔로 참격을 날린다."
+  },
+  "EPalWazaID::Unique_NightBlueHorse_Neutral_Tossin": {
+    "localized_name": "은빛 말의 질주",
+    "description": "라이트롯 전용 스킬. 빛나는 불꽃을 몸에 두르고 적에게 돌진한다."
+  },
+  "EPalWazaID::Unique_NightBlueHorse_Tossin": {
+    "localized_name": "검은 말의 질주",
+    "description": "나이트롯 전용 스킬. 흔들리는 불꽃을 몸에 두르고 적에게 돌진한다."
   },
   "EPalWazaID::Unique_NightLady_FlameNightmare": {
     "localized_name": "화염 왈츠",
@@ -755,9 +967,13 @@
     "localized_name": "제트 스모크",
     "description": "옥토비아 종의 전용 스킬. 전방에 연막을 깔아 모습을 감춘 후 은신 중에 박치기로 기습한다."
   },
+  "EPalWazaID::Unique_PandaGirl_RapidKick": {
+    "localized_name": "연속 돌려차기",
+    "description": "리팡 전용 스킬. 날렵한 연속 돌려차기로 공격한 후 마무리로 기공 파동을 발사한다."
+  },
   "EPalWazaID::Unique_PinkCat_CatPunch": {
     "localized_name": "냥냥 펀치",
-    "description": "아누비스 전용 스킬. 적을 쫓아가며 양팔을 휘둘러 연속으로 펀치를 퍼붓는다."
+    "description": "까부냥 전용 스킬. 적을 쫓아가며 양팔을 휘둘러 연속으로 펀치를 퍼붓는다."
   },
   "EPalWazaID::Unique_Plesiosaur_LongBreath": {
     "localized_name": "롱 브레스",
@@ -779,11 +995,27 @@
     "localized_name": "러시 비크",
     "description": "적토조 종의 전용 스킬. 전방으로 날갯짓하며 정면, 우측, 좌측 방향으로 부리를 쪼아 착화한 후에 소규모 폭발을 일으킨다."
   },
+  "EPalWazaID::Unique_RedFlowerBird_JumpKick": {
+    "localized_name": "플라워 스톰프",
+    "description": "플라페크 전용 스킬. 하늘에 두둥실 떠오른 후, 발톱을 날카롭게 세워 땅에 힘껏 내려찍는다."
+  },
   "EPalWazaID::Unique_RobinHood_BowSnipe": {
     "localized_name": "스나이핑 샷",
     "description": "로빈몽 종의 전용 스킬. 활시위를 당겨 목표를 정한 뒤 적에게 사격을 감행한다."
   },
+  "EPalWazaID::Unique_RockBeast_Ice_IceHorn": {
+    "localized_name": "아이스 버스트",
+    "description": "프로스돈 전용 스킬. 뿔로 땅을 도려내며 위로 휘둘러 적을 향해 눈덩이를 날린다."
+  },
+  "EPalWazaID::Unique_RockBeast_RockHorn": {
+    "localized_name": "혼 버스트",
+    "description": "지오르돈 전용 스킬. 뿔로 땅을 도려내며 위로 휘둘러 적을 향해 암석탄을 날린다."
+  },
   "EPalWazaID::Unique_Ronin_Iai": {
+    "localized_name": "발도술",
+    "description": "불무사 종의 전용 스킬. 베기 자세를 취한 후 순식간에 적 앞에 나타나 번개 같은 발도술로 공격한다."
+  },
+  "EPalWazaID::Unique_Ronin_Iai_PartnerSkill": {
     "localized_name": "발도술",
     "description": "불무사 종의 전용 스킬. 베기 자세를 취한 후 순식간에 적 앞에 나타나 번개 같은 발도술로 공격한다."
   },
@@ -795,9 +1027,37 @@
     "localized_name": "몸통 박치기",
     "description": "라브라돈 종의 전용 스킬. 몸을 옆으로 돌려 자세를 잡고 전방으로 태클하여 적을 날려 버린다."
   },
+  "EPalWazaID::Unique_SakuraSaurus_Water_SplashTackle": {
+    "localized_name": "스플래시 태클",
+    "description": "스프라돈 전용 스킬. 몸을 옆으로 돌려 자세를 잡고 전방으로 태클해 물보라를 일으키며 적을 날려 버린다."
+  },
+  "EPalWazaID::Unique_SamuraiDog_Bite": {
+    "localized_name": "와일드 팽(땅)",
+    "description": "적을 향해 날쌔게 달려들어 물고 늘어진다."
+  },
+  "EPalWazaID::Unique_SamuraiDog_BiteV2": {
+    "localized_name": "더블 팽(땅)",
+    "description": "적을 향해 날렵한 연속 깨물기로 공격한다."
+  },
+  "EPalWazaID::Unique_SamuraiDog_DashSlash": {
+    "localized_name": "파이팅 슬래시",
+    "description": "솔바둑 전용 스킬. 전력으로 달리며 입에 문 봉으로 적을 베어 버린다. 이 공격을 2연속으로 수행한다."
+  },
+  "EPalWazaID::Unique_ScorpionMan_Erectric_UpperThunder": {
+    "localized_name": "어퍼 썬더",
+    "description": "썬더피어스 전용 스킬. 초전도를 이용해 거리를 단숨에 좁히고 집게발을 힘껏 휘두른다."
+  },
   "EPalWazaID::Unique_ScorpionMan_Uppercut": {
     "localized_name": "어퍼 스매시",
-    "description": "스콜피어스 종의 전용 스킬. 순식간에 적과의 거리를 좁혀 집게발을 시원하게 내지른다."
+    "description": "스콜피어스 전용 스킬. 순식간에 적과의 거리를 좁혀 집게발로 시원하게 어퍼컷을 먹인다."
+  },
+  "EPalWazaID::Unique_Sekhmet_RollingScratch": {
+    "localized_name": "롤링 스크래치",
+    "description": "세크메트 전용 스킬. 회전하며 적과의 거리를 단숨에 좁히고, 할퀸다."
+  },
+  "EPalWazaID::Unique_Sekhmet_SomersaultScratch": {
+    "localized_name": "서머솔트 스크래치",
+    "description": "세크메트 전용 스킬. 적을 할퀴며 뒤를 향해 공중제비를 해 거리를 벌린다."
   },
   "EPalWazaID::Unique_SheepBall_Roll": {
     "localized_name": "데굴데굴 솜사탕",
@@ -805,7 +1065,11 @@
   },
   "EPalWazaID::Unique_SifuDog_Counter": {
     "localized_name": "혼신의 자세",
-    "description": "시푸도그 종의 전용 스킬. 합기의 자세를 취하여 적의 공격을 무효화한다. 그 후 눈 깜짝할 사이에 혼신의 장타로 반격한다."
+    "description": "시푸도그 전용 스킬. 합기의 자세를 취하여 적의 공격을 무효화한다. 그 후 눈 깜짝할 사이에 혼신의 장타로 반격한다."
+  },
+  "EPalWazaID::Unique_SnakeGirl_SnakeShot": {
+    "localized_name": "포이즌 스캐터",
+    "description": "메두나 전용 스킬. 머리의 뱀이 포물선으로 날아가는 독 덩어리를 토해낸다. 착탄 지점에 독늪이 생겨 퍼져나가며, 닿은 적을 중독시킨다."
   },
   "EPalWazaID::Unique_SnowTigerBeastman_SnowImpact": {
     "localized_name": "빙상 격쇄",
@@ -823,13 +1087,41 @@
     "localized_name": "트리거 해피",
     "description": "무상이 종의 전용 스킬. 입속에서 물총 2자루를 꺼내고 좌우로 번갈아가며 물 속성탄을 6발 발사한다. 그 후 물총을 맞대고 강력한 1발로 마무리한다."
   },
+  "EPalWazaID::Unique_SumoDog_SumoStomp": {
+    "localized_name": "으랏차차 스톰프",
+    "description": "와르차차 전용 스킬. 오른쪽 뒷다리를 크게 움직인 후 내려찍어 전방 부채꼴 모양으로 퍼지는 충격파를 일으킨다."
+  },
   "EPalWazaID::Unique_TentacleTurtle_HydroSpin": {
     "localized_name": "하이드로 스핀",
     "description": "헬터클 종의 전용 스킬. 제트 분사를 통한 추진력을 이용하여 적을 향해 고속 회전하며 날아간다."
   },
+  "EPalWazaID::Unique_ThunderBird_Ice_SnowStrom": {
+    "localized_name": "아이스 다이브",
+    "description": "칠버드 전용 스킬. 먼저 적이 있는 지점에 얼음을 만들어 솟구치게 한다. 그리고 활공 돌진하며 좌우로 얼음을 솟구치게 한다."
+  },
   "EPalWazaID::Unique_ThunderBird_ThunderStorm": {
     "localized_name": "급강하 번개 강타",
     "description": "라이버드 전용 스킬. 적이 있는 지점에 낙뢰를 떨어뜨린 다음 활공한 채로 좌우에 낙뢰를 떨어뜨리며 돌진한다."
+  },
+  "EPalWazaID::Unique_ThunderDog_Bite": {
+    "localized_name": "와일드 팽(번개)",
+    "description": "적을 향해 날쌔게 달려들어 물고 늘어진다."
+  },
+  "EPalWazaID::Unique_ThunderDog_BiteV2": {
+    "localized_name": "더블 팽(번개)",
+    "description": "적을 향해 날렵한 연속 깨물기로 공격한다."
+  },
+  "EPalWazaID::Unique_ThunderDog_Ice_Bite": {
+    "localized_name": "와일드 팽(얼음)",
+    "description": "적을 향해 날쌔게 달려들어 물고 늘어진다."
+  },
+  "EPalWazaID::Unique_ThunderDog_Ice_BiteV2": {
+    "localized_name": "더블 팽(얼음)",
+    "description": "적을 향해 날렵한 연속 깨물기로 공격한다."
+  },
+  "EPalWazaID::Unique_ThunderDog_Ice_KoriShorai": {
+    "localized_name": "눈 소환",
+    "description": "프리도그 전용 스킬. 전방에 얼음 기둥을 여러 차례 만들어 내고 얼음 기둥 사이로 고속 돌진한다."
   },
   "EPalWazaID::Unique_ThunderDog_InazumaShorai": {
     "localized_name": "천둥 소환",
@@ -837,11 +1129,11 @@
   },
   "EPalWazaID::Unique_ThunderDragonMan_NumerousSwordAttack": {
     "localized_name": "폴리케라우노스",
-    "description": "전룡맨 종의 전용 스킬. 다수의 번개 창을 소환하여 적에게 던진다. 처음 한 자루는 번개의 힘을 축적시켜 몇 초 후에 폭발시킨다."
+    "description": "볼젝스 전용 스킬. 다수의 번개 창을 소환하여 적에게 던진다. 처음 한 자루는 번개의 힘을 축적시켜 몇 초 후에 폭발시킨다."
   },
   "EPalWazaID::Unique_ThunderDragonMan_ThunderSwordAttack": {
     "localized_name": "케라노우스",
-    "description": "전룡맨 전용 스킬. 뛰어오르며 번개 창을 소환해 적을 향해 던진다."
+    "description": "볼젝스 전용 스킬. 뛰어오르며 번개 창을 소환해 적을 향해 던진다."
   },
   "EPalWazaID::Unique_TropicalOstrich_DashKick": {
     "localized_name": "대시 킥",
@@ -863,6 +1155,22 @@
     "localized_name": "화산 폭발",
     "description": "볼카노 전용 스킬. 앞발을 치켜든 뒤 지면을 내리치면서 적이 있는 지점에 분화를 일으킨다. 분화 시에는 주위에 화산탄이 떨어진다."
   },
+  "EPalWazaID::Unique_VolcanoDragon_Ice_IceLaser": {
+    "localized_name": "아이스 레이저",
+    "description": "블리잰더 전용 스킬. 입에서 뿜어져 나오는 동결 광선으로 대지를 얼린다. 얼어붙은 땅에는 서리가 맺혀 닿은 적을 얼리고 피해를 준다."
+  },
+  "EPalWazaID::Unique_VolcanoDragon_Ice_IcicleSpit": {
+    "localized_name": "아이스 스핏",
+    "description": "블리잰더 전용 스킬. 입에서 얼음 덩어리를 토해내 발사한다. 착탄 지점은 얼어붙어 서리가 맺히며 닿은 적을 얼리고 피해를 준다."
+  },
+  "EPalWazaID::Unique_VolcanoDragon_MagmaSpit": {
+    "localized_name": "마그마 스핏",
+    "description": "마그맨더 전용 스킬. 입에서 마그마 덩어리를 토해내 발사한다. 착탄 지점에는 마그마 웅덩이가 생겨 닿은 적에게 피해를 준다."
+  },
+  "EPalWazaID::Unique_VolcanoDragon_VolcanicLaser": {
+    "localized_name": "마그마 레이저",
+    "description": "마그맨더 전용 스킬. 입에서 뿜어져 나오는 열선으로 대지를 불태운다. 열선이 닿은 땅에는 마그마 웅덩이가 생겨 닿은 적에게 피해를 준다."
+  },
   "EPalWazaID::Unique_WeaselDragon_FlyingTackle": {
     "localized_name": "로켓 태클",
     "description": "베비뇽 종의 전용 스킬. 잠시 힘을 모은 후 전방으로 돌진한다. 부딪힐 때마다 무서워서 눈을 감게 된다고 한다."
@@ -874,6 +1182,10 @@
   "EPalWazaID::Unique_Werewolf_Scratch": {
     "localized_name": "점프 할퀴기",
     "description": "WereWolf 전용 스킬. 전방으로 뛰어오르며 재빨리 2회 할퀸다. 이 참격엔 어둠 속성의 힘이 깃들어 있다."
+  },
+  "EPalWazaID::Unique_WhiteDeer_Dark_DarkPillar": {
+    "localized_name": "다크 노바",
+    "description": "코스모디얼 전용 스킬. 전방에 어둠 속성의 광범위 폭발을 일으킨 후 걸어가며 자신 주변에 어둠 기둥을 일으킨다."
   },
   "EPalWazaID::Unique_WhiteDeer_HolyPillar": {
     "localized_name": "홀리 노바",
@@ -891,9 +1203,13 @@
     "localized_name": "눈보라 할퀴기",
     "description": "백랑이 전용 스킬. 발톱으로 2번 휘두른 후 마무리로 온 몸에 힘을 실어 크게 베어버린다. 발톱을 휘두르며 전방에 얼음 기둥을 부채꼴 모양으로 3개 날린다."
   },
+  "EPalWazaID::Unique_WingGolem_Fire_FlameCutter": {
+    "localized_name": "플레임 커터",
+    "description": "마그나이트 전용 스킬. 크게 몸을 휘둘러 등에 있는 불꽃 고리를 던진다. 불꽃 고리는 원을 그리는 궤적으로 날아간다."
+  },
   "EPalWazaID::Unique_WingGolem_RoundCutter": {
     "localized_name": "대지의 칼날",
-    "description": "테라나이트 종의 전용 스킬. 등에 있는 고리를 있는 힘껏 휘둘러 던진다. 고리는 마치 원을 그리는 궤도로 날아간다."
+    "description": "테라나이트 전용 스킬. 등에 있는 고리를 있는 힘껏 휘둘러 던진다. 고리는 마치 원을 그리는 궤도로 날아간다."
   },
   "EPalWazaID::Unique_YakushimaBoss001_Small_DemonEyeCharge": {
     "localized_name": "돌진하는 눈",
@@ -945,7 +1261,7 @@
   },
   "EPalWazaID::Unique_Yeti_Grass_GrassBall": {
     "localized_name": "풀덩이 굴리기",
-    "description": "트로피티 전용 스킬. 풀로 만든 공을 굴리며 전진하다가 공이 제일 커졌을 때 던져 터뜨려 버린다."
+    "description": "움피티 전용 스킬. 풀로 만든 공을 굴리며 전진하다가 공이 제일 커졌을 때 던져 터뜨려 버린다."
   },
   "EPalWazaID::Unique_Yeti_SnowBall": {
     "localized_name": "눈덩이 굴리기",
@@ -966,6 +1282,10 @@
   "EPalWazaID::Weapon_Use": {
     "localized_name": "무기 사용",
     "description": "가지고 있는 무기를 사용해 공격한다."
+  },
+  "EPalWazaID::WindBurst": {
+    "localized_name": "윈드 블래스트",
+    "description": "자신 주위에 높은 위력의 거대한 회오리바람을 일으켜 공격한다."
   },
   "EPalWazaID::WindCutter": {
     "localized_name": "바람의 칼날",

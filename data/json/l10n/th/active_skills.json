@@ -51,9 +51,9 @@
     "localized_name": "มีทีออร์เรน",
     "description": "เรียกอุกกาบาตจำนวนมากให้ตกลงมา สร้างคลื่นกระแทกเป็นวงกว้าง"
   },
-  "EPalWazaID::CrossThunder": {
-    "localized_name": "ครอสธันเดอร์",
-    "description": "สร้างการโจมตีสายฟ้าจาก 2 ทาง ขนาบข้างศัตรู"
+  "EPalWazaID::CreepingBubble": {
+    "localized_name": "ขบวนฟองสบู่",
+    "description": "สกิลเฉพาะตัวของPanthalusสร้างฟองออกมารอบๆศัตรู ในปริมาณมหาศาล ล้อมรอบเเละโจมตี"
   },
   "EPalWazaID::CrossWind": {
     "localized_name": "ครอสวินด์",
@@ -89,7 +89,7 @@
   },
   "EPalWazaID::DiamondFall": {
     "localized_name": "ไดมอนด์ฟอลล์",
-    "description": "สร้างก้อนน้ำแข็งขึ้นเหนือศีรษะ ให้โปรยปรายลงมาต่อเนื่อง"
+    "description": "สร้างก้อนน้ำแข็งขึ้นเหนือศีรษะของศัตรู แล้วโปรยลงมาอย่างต่อเนื่อง"
   },
   "EPalWazaID::DiversionLaser": {
     "localized_name": "ปืนฉีดน้ำแรงดันสูง",
@@ -154,10 +154,6 @@
   "EPalWazaID::FlareTornado": {
     "localized_name": "เฟลมสตอร์ม",
     "description": "สร้างพายุหมุนไฟขึ้นทางซ้ายและขวา พัดเข้าใส่ศัตรู"
-  },
-  "EPalWazaID::FlareTwister": {
-    "localized_name": "-",
-    "description": "-"
   },
   "EPalWazaID::FrostBreath": {
     "localized_name": "โคลด์เบรธ",
@@ -277,11 +273,11 @@
   },
   "EPalWazaID::Psychokinesis": {
     "localized_name": "ไซโคกราวิตี้",
-    "description": "ใช้พลังจิตชิงอิสระของศัตรูรอบตัว แล้วฟาดศัตรูลงกับพื้น"
+    "description": "ช่วงชิงการเคลื่อนไหวที่อิสระของศัตรู ควบคุมด้วยพลังจิต เหวี่ยงกระทบจากที่สูงมายังพื้นผิวโลก"
   },
   "EPalWazaID::RadiantBarrage": {
     "localized_name": "เรเดียนต์บาราจ",
-    "description": "ปล่อยลูกบอลมืด ค่อย ๆ ไล่ล่าศัตรู พอลูกไฟเข้าใกล้เป้าหมายเเล้วจะเเยกเป็นกระสุนเเสงที่นับไม่ถ้วน เเละโจมตี"
+    "description": "ปล่อยลูกบอลแสงค่อย ๆ ไล่ล่าศัตรู เมื่อลูกบอลแสงเข้าใกล้เป้าหมายจะแตกตัวเป็นกระสุนแสงจำนวนมากและโจมตีศัตรู"
   },
   "EPalWazaID::RaidCutter": {
     "localized_name": "เรดคัตเตอร์",
@@ -427,6 +423,22 @@
     "localized_name": "นุ่มฟูพุ่งชน",
     "description": "สกิลเฉพาะตัวของ Melpaca พุ่งกระแทกดโดยมีออร่าน่ารักปกคลุมร่าง"
   },
+  "EPalWazaID::Unique_AmaterasuWolf_Bite": {
+    "localized_name": "เขี้ยวอำมหิต(เพลิง)",
+    "description": "โจมตีโดยกระโจนหาศัตรูอย่างรวดเร็ว แล้วกัดศัตรู"
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_BiteV2": {
+    "localized_name": "เขี้ยวคู่(เพลิง)",
+    "description": "พุ่งเข้าหาศัตรูแล้วกัดต่อเนื่องอย่างรวดเร็ว"
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_Dark_Bite": {
+    "localized_name": "เขี้ยวอำมหิต(มืด)",
+    "description": "โจมตีโดยกระโจนหาศัตรูอย่างรวดเร็ว แล้วกัดศัตรู"
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_Dark_BiteV2": {
+    "localized_name": "เขี้ยวคู่(มืด)",
+    "description": "พุ่งเข้าหาศัตรูแล้วกัดต่อเนื่องอย่างรวดเร็ว"
+  },
   "EPalWazaID::Unique_AmaterasuWolf_Dark_DarkCharge": {
     "localized_name": "เงาอัคคีอัสนีสิงขร",
     "description": "สกิลเฉพาะตัวของ Kitsun Noct ใช้ร่างที่มีไฟสีม่วงปกคลุมพุ่งชนศัตรูเต็มแรง"
@@ -447,9 +459,13 @@
     "localized_name": "ฟอร์ซไดรฟ์",
     "description": "สกิลเฉพาะตัวของ Anubis เคลื่อนที่ด้วยความเร็วสูงไล่ตามศัตรู แล้วปล่อยพลังงาน พลางออกหมัดทรงพลัง"
   },
+  "EPalWazaID::Unique_Baphomet_Dark_DarkKite": {
+    "localized_name": "ไนต์แมร์คลอว์",
+    "description": "สกิลเฉพาะตัวของ Incineram Noct ดีดตัวขึ้นพร้อมกับฟันกรงเล็บเเห่งความมืดที่อยู่ที่มือซ้ายขึ้น ฟันกรงเล็บเเห่งความมืดที่อยู่ด้วยมือขวาลงอย่างต่อเนื่องเเละไวเเสง"
+  },
   "EPalWazaID::Unique_Baphomet_SwallowKite": {
     "localized_name": "เฮลไฟร์คลอว์",
-    "description": "สกิลเฉพาะตัวของ Incineram เข้าใกล้ศัตรู ใช้เล็บมือซ้ายตวัดขึ้นแล้วกระโดดเตะ ตามด้วยใช้เล็บมือขวาตวัดลงอย่างรวดเร็ว"
+    "description": "สกิลเฉพาะตัวของ Incineram เข้าใกล้ศัตรู ใช้กรงเล็บมือซ้ายตวัดขึ้นพร้อมกระโดด จากนั้นใช้กรงเล็บมือขวาฟันลงอย่างรวดเร็ว"
   },
   "EPalWazaID::Unique_BirdDragon_FireBreath": {
     "localized_name": "ฟลายอิ้งเบรธ",
@@ -475,6 +491,14 @@
     "localized_name": "พันช์เบรธ",
     "description": "สกิลเฉพาะตัวของAstegon หลังต่อยหมัดตรง 2 ครั้ง จะพ่นลมหายใจธาตุมังกรลงไปด้านล่าง"
   },
+  "EPalWazaID::Unique_BlackPuppy_Bite": {
+    "localized_name": "เขี้ยวอำมหิต(มืด)",
+    "description": "โจมตีโดยกระโจนหาศัตรูอย่างรวดเร็ว แล้วกัดศัตรู"
+  },
+  "EPalWazaID::Unique_BlackPuppy_BiteV2": {
+    "localized_name": "เขี้ยวคู่(มืด)",
+    "description": "พุ่งเข้าหาศัตรูแล้วกัดต่อเนื่องอย่างรวดเร็ว"
+  },
   "EPalWazaID::Unique_BluePlatypus_Toboggan": {
     "localized_name": "เซิร์ฟฟิงแท็กเคิล",
     "description": null
@@ -483,9 +507,25 @@
     "localized_name": "ไฟร์แท็กเคิล",
     "description": null
   },
+  "EPalWazaID::Unique_BlueSkyDragon_DrainStorm": {
+    "localized_name": "น้ำพุวนเเห่งการเปลี่ยนแลงของสวรรค์",
+    "description": "สกิลเฉพาะตัวของShaolongปลุกเรียกน้ำวนขนาดยักษ์ไปจนถึงสวรรค์ พลังน้ำวนสามารกลืนกินและกวาดล้างศัตรูได้ในคราวเดียว"
+  },
+  "EPalWazaID::Unique_BlueSkyDragon_SweepBreath": {
+    "localized_name": "เพลิงมังกรคราม",
+    "description": "สกิลเฉพาะตัวของShaolongคายออกมาเหมือนตวัดกวาดเปลวเพลิงธาตุมังกร เผาราบเป็นหน้ากลอง"
+  },
+  "EPalWazaID::Unique_BlueSkyDragon_Tossin": {
+    "localized_name": "มังกรวารีพุ่งทะลวง",
+    "description": "สกิลเฉพาะตัวของShaolong รวบรวมน้ำไว้รอบตัวแล้วพุ่งชนไปข้างหน้า"
+  },
   "EPalWazaID::Unique_BlueThunderHorse_FlashDash": {
     "localized_name": "โวลต์บลิงก์",
     "description": "สกิลเฉพาะตัวของ Azurmane เคลื่อนที่ไวปานสายฟ้า ดึงดูดทุกสิ่งบนเส้นทางเข้าด้วยกัน"
+  },
+  "EPalWazaID::Unique_BlueThunderHorse_Tossin": {
+    "localized_name": "พุ่งชาร์จสายฟ้า",
+    "description": "สกิลเฉพาะตัวของAzurmane ห่อหุ้มร่างด้วยสายฟ้า แล้วพุ่งเข้าหาศัตรูด้วยความเร็วสูง"
   },
   "EPalWazaID::Unique_Boar_Tackle": {
     "localized_name": "พุ่งชนเต็มแรง",
@@ -501,11 +541,19 @@
   },
   "EPalWazaID::Unique_ChickenPal_ChickenPeck": {
     "localized_name": "ชิกเกนแท็กเคิล",
-    "description": "สกิลเฉพาะตัวของ Chikipi กระโจนใส่ดวงตาศัตรูแล้วใช้จะงอยปากแหลมจิกเต็มแรง"
+    "description": "สกิลเฉพาะตัวของ Chikipi กระโจนเข้าใส่ศัตรู แล้วพุ่งโจมตีด้วยจะงอยปากอันแหลมคม"
+  },
+  "EPalWazaID::Unique_ClownRabbit_TrickShow": {
+    "localized_name": "การแสดงกลลวง",
+    "description": "สกิลเฉพาะตัวของDupin สร้างภาพลวง 2 ร่างเพื่อหลอกล่อศัตรู ขณะเดียวกัน ร่างจริงจะปล่อยนกเพลิงออกมาจากหมวกทรงสูงเพื่อโจมตี"
+  },
+  "EPalWazaID::Unique_CuteMole_DiggingAttack": {
+    "localized_name": "ยกพื้นจากใต้ดิน",
+    "description": "สกิลเฉพาะตัวของFuddler มุดลงใต้ดิน แล้วพุ่งทะลุขึ้นมาจากใต้เท้าศัตรูอย่างรวดเร็ว"
   },
   "EPalWazaID::Unique_DarkAlien_JumpScractch": {
     "localized_name": "อีวิลคลอว์",
-    "description": "สกิลเฉพาะตัวของ Xenovader กระโจนด้วยความไว แล้วข่วนด้วยมือซ้าย"
+    "description": "สกิลเฉพาะตัวของ Xenovader กระโจนเข้าใส่อย่างรวดเร็ว แล้วกรีดศัตรูด้วยมือซ้าย"
   },
   "EPalWazaID::Unique_DarkCrow_TelePoke": {
     "localized_name": "แฟนธอมแอสซัลต์",
@@ -535,9 +583,17 @@
     "localized_name": "จัมปิงสติงเกอร์",
     "description": "สกิลเฉพาะตัวของ Menasting กระโดดสูงแล้วใช้หางแทงเหยื่ออย่างแรง ที่หางมีพิษ"
   },
+  "EPalWazaID::Unique_Deer_Ground_DirtyHorn": {
+    "localized_name": "แมดฮอร์น",
+    "description": "สกิลเฉพาะตัวของ Eikthyrdeer Terra มุ่งหน้าพุ่งชนศัตรู หมุนโคลนเป็นวงกลมเเละโจมตี เมื่อต้องการโจมตีระหว่างการแปลงร่าง สามารถกำหนดทิศทางการมุ่งหน้าของตัวละครได้"
+  },
   "EPalWazaID::Unique_Deer_PushupHorn": {
     "localized_name": "ฮอร์นอัปเปอร์",
     "description": "สกิลเฉพาะตัวของ Eikthyrdeer โจมตีโดยพุ่งกระแทกศัตรู แล้วใช้เขางัด ถ้าใช้งานขณะขี่จะควบคุมทิศทางได้"
+  },
+  "EPalWazaID::Unique_DomeArmorDragon_ExplosiveMissile": {
+    "localized_name": "มิสไซล์แตกกระจาย",
+    "description": "สกิลเฉพาะตัวของAegidron ยิงมิสไซล์ระเบิดจำนวนมหาศาลออกจากปีกเพื่อโจมตีศัตรู"
   },
   "EPalWazaID::Unique_DrillGame_ShellAttack": {
     "localized_name": "เชลสปิน",
@@ -555,13 +611,25 @@
     "localized_name": "รถถังอสนีบาต",
     "description": "สกิลเฉพาะตัวของ Grizzbolt ยิงมินิกันที่หยิบออกมาจากไหนไม่รู้ หลังชาร์จเล็กน้อย จะยิงกระสุนด้วยพลังรุนแรง 1 นัดเป็นการตบท้าย"
   },
+  "EPalWazaID::Unique_ElecPomeranian_Bite": {
+    "localized_name": "เขี้ยวอำมหิต(สายฟ้า)",
+    "description": "โจมตีโดยกระโจนหาศัตรูอย่างรวดเร็ว แล้วกัดศัตรู"
+  },
+  "EPalWazaID::Unique_ElecPomeranian_BiteV2": {
+    "localized_name": "เขี้ยวคู่(สายฟ้า)",
+    "description": "พุ่งเข้าหาศัตรูแล้วกัดต่อเนื่องอย่างรวดเร็ว"
+  },
+  "EPalWazaID::Unique_ElecSnail_ShellCharge": {
+    "localized_name": "พุ่งชนเกราะ",
+    "description": "สกิลเฉพาะตัวของSnock หดตัวเข้าไปในเปลือกเพื่อลดความเสียหาย พร้อมชาร์จพลังไฟฟ้า เมื่อชาร์จเต็ม จะ ปล่อยประจุไฟฟ้า สร้างความเสียหายแก่ศัตรูรอบตัว หลังปล่อยประจุ จะทำให้ พลังโจมตีของสกิลธาตุสายฟ้าเพิ่มขึ้นชั่วคราว"
+  },
   "EPalWazaID::Unique_FairyDragon_FairyTornado": {
     "localized_name": "มิสติกเฮอร์ริเคน",
     "description": "สกิลเฉพาะตัวของ Elphidran ยิงพายุหมุนมหัศจรรย์ออกไป 2 ครั้ง ให้พายุไล่ตามศัตรู"
   },
   "EPalWazaID::Unique_FeatherOstrich_Tossin": {
     "localized_name": "เอิร์ธแดช",
-    "description": "สกิลเฉพาะตัวของ Dazemu เร่งความเร็วในอึดใจ แล้วพุ่งชนไปด้านหน้าด้วยความเร็วสูง"
+    "description": "สกิลเฉพาะตัวของ Dazemu เร่งความเร็วในอึดใจ แล้วพุ่งอย่างรวดเร็วไปข้างหน้า"
   },
   "EPalWazaID::Unique_FengyunDeeper_CloudTempest": {
     "localized_name": "กราวด์เทมเพสต์",
@@ -583,13 +651,29 @@
     "localized_name": "เบลซิงฮอร์น",
     "description": "สกิลเฉพาะตัวของ Arsox เล็งศัตรูแล้วพุ่งเข้าใส่อย่างแรง พลางใช้เขางัด"
   },
+  "EPalWazaID::Unique_FlowerDinosaur_Electric_ThunderWhip": {
+    "localized_name": "ไลท์นิ่งสแมช",
+    "description": "สกิลเฉพาะตัวของ Dinossom Lux สามารถใช้หางตวีดตีพื้นข้างหน้าได้ สามารถรับการโจมตีด้วยสายไฟในเเนวตรง"
+  },
   "EPalWazaID::Unique_FlowerDinosaur_Whip": {
     "localized_name": "โบทานิเคิลสแมช",
     "description": "สกิลเฉพาะตัวของ Dinossom ใช้หางขนาดใหญ่ฟาดพื้นด้านหน้า สร้างแรงกระแทกเป็นเส้นตรง"
   },
+  "EPalWazaID::Unique_FlowerPrince_PoisonGasDance": {
+    "localized_name": "ระบำพิษ",
+    "description": "สกิลเฉพาะตัวของ Dandilord ร่ายรำพร้อมพ่นหมอกกัดกร่อนออกมา หมอกกัดกร่อนที่ปล่อยออกมาจะยังคงตกค้างอยู่ในบริเวณนั้นเป็นระยะเวลาหนึ่ง"
+  },
+  "EPalWazaID::Unique_FlowerPrince_PoisonGasTackle": {
+    "localized_name": "ทางเดินแห่งอิซัน",
+    "description": "สกิลเฉพาะตัวของ Dandilord พ่นหมอกกัดกร่อนออกมาพร้อมกับพุ่งไถลไปบนพื้น หมอกกัดกร่อนที่ปล่อยออกมาจะยังคงตกค้างอยู่ในบริเวณนั้นเป็นระยะเวลาหนึ่ง"
+  },
   "EPalWazaID::Unique_Garm_Bite": {
     "localized_name": "ไวลด์แฟงก์",
     "description": "สกิลเฉพาะตัวของ Direhowl โจมตีโดยกระโจนหาศัตรูอย่างรวดเร็ว แล้วกัดศัตรู"
+  },
+  "EPalWazaID::Unique_Garm_BiteV2": {
+    "localized_name": "เขี้ยวคู่",
+    "description": "โจมตีโดยกระโจนหาศัตรูอย่างรวดเร็ว แล้วกัดศัตรู"
   },
   "EPalWazaID::Unique_GhostAnglerfish_Fire_SweepBait_Fire": {
     "localized_name": "แกว่งโคมแผดเผา",
@@ -603,6 +687,22 @@
     "localized_name": "สปิริตแดช",
     "description": "สกิลเฉพาะตัวของ Maraith เดินช้า ๆ พลางปล่อยลูกไฟสว่างไสว เข้าใส่ศัตรูอย่างต่อเนื่อง"
   },
+  "EPalWazaID::Unique_GhostDragon_PhosphorousBeam": {
+    "localized_name": "ลำแสงเพลิง",
+    "description": "สกิลเฉพาะตัวของEidrolon พ่นลำแสงความร้อนสูงอย่างต่อเนื่องเป็นระยะเวลาหนึ่ง เมื่อสิ้นสุด จะเกิดการระเบิดครั้งใหญ่ ณ จุดที่ลำแสงพุ่งไป"
+  },
+  "EPalWazaID::Unique_GhostDragon_TailSlash": {
+    "localized_name": "ตวัดหางฟัน",
+    "description": "สกิลเฉพาะตัวของ Eidrolon พุ่งเข้าประชิดศัตรูด้วยความเร็วสูง แล้วใช้หางฟาดเฉือนโจมตี"
+  },
+  "EPalWazaID::Unique_GoldenHorse_Bite": {
+    "localized_name": "เขี้ยวอำมหิต(ดิน)",
+    "description": "โจมตีโดยกระโจนหาศัตรูอย่างรวดเร็ว แล้วกัดศัตรู"
+  },
+  "EPalWazaID::Unique_GoldenHorse_BiteV2": {
+    "localized_name": "เขี้ยวคู่(ดิน)",
+    "description": "พุ่งเข้าหาศัตรูแล้วกัดต่อเนื่องอย่างรวดเร็ว"
+  },
   "EPalWazaID::Unique_GoldenHorse_StoneDash": {
     "localized_name": "ครัชแดช",
     "description": "สกิลเฉพาะตัวของ Gildane ขว้างหินอย่างแรงไปทางซ้ายและขวา พลางพุ่งเข้าหาศัตรู"
@@ -610,6 +710,38 @@
   "EPalWazaID::Unique_Gorilla_GroundPunch": {
     "localized_name": "กอริราวด์คอมโบ",
     "description": "สกิลเฉพาะตัวของ Gorirat หลังฟาดพื้น 2 ครั้ง จะกระโดด แล้วส่งหมัดอันทรงพลังอัดใส่หน้าศัตรูส่งท้าย"
+  },
+  "EPalWazaID::Unique_Gorilla_Ground_EarthPunch": {
+    "localized_name": "โกริลลัมเบิลคอมโบ",
+    "description": "Gorirat Terraสกิลเฉพาะตัว หลังจากที่ฟาดพื้น 2 ครั้งเเล้วจะกระโดดยกตัวขึ้น ปล่อยหมัดที่อัดแน่นด้วยพลังแห่งผืนดินเข้าใส่ศัตรู"
+  },
+  "EPalWazaID::Unique_GrassGolem_ArmCannon": {
+    "localized_name": "ปืนใหญ่รากไม้",
+    "description": "สกิลเฉพาะตัวของDualith ปล่อยกระสุนพลังธาตุพืชจากแขน เมื่อกระทบจะกลายเป็น รากไม้ที่ไล่ตามศัตรูอย่างต่อเนื่อง และพุ่งแทงขึ้นมาจากใต้เท้า"
+  },
+  "EPalWazaID::Unique_GrassGolem_Dark_DarkArmCannon": {
+    "localized_name": "รากทมิฬ",
+    "description": "สกิลเฉพาะตัวของDualith Noct ปล่อยกระสุนพลังธาตุความมืดจากแขน เมื่อกระทบจะกลายเป็น รากเงาที่ไล่ตามศัตรูอย่างต่อเนื่อง และพุ่งแทงขึ้นมาจากใต้เท้า"
+  },
+  "EPalWazaID::Unique_GrassGolem_RocketPunch": {
+    "localized_name": "แขนจรวด",
+    "description": "สกิลเฉพาะตัวของDualith แยกแขนซ้ายออกจากร่างหลัก แล้วกวาดโจมตีศัตรูจากนั้นจะยิงแขนขวา ออกไปโจมตีต่อ"
+  },
+  "EPalWazaID::Unique_GrassMinotaur_BullRush": {
+    "localized_name": "พุ่งชน・คลั่ง",
+    "description": "สกิลเฉพาะตัวของElgrove ปลุกเร้าพลังอย่างรุนแรง แล้วพุ่งชนธาตุพืชด้วยความโกรธ 4 ครั้งติดต่อกัน"
+  },
+  "EPalWazaID::Unique_GrassMinotaur_BullRush_Lower": {
+    "localized_name": "พุ่งกระแทก",
+    "description": "สกิลเฉพาะตัวของElgrove ปลุกเร้าพลังอย่างดุดัน แล้วพุ่งชนธาตุพืชใส่ศัตรู 2 ครั้งติดต่อกัน"
+  },
+  "EPalWazaID::Unique_GrassMinotaur_Ice_BullRush": {
+    "localized_name": "พายุหิมะพุ่งคลั่ง",
+    "description": "สกิลเฉพาะตัวของElgrove Cryst ปลุกเร้าพลังอย่างรุนแรง แล้วพุ่งชนธาตุน้ำแข็งด้วยความโกรธ 4 ครั้งติดต่อกัน"
+  },
+  "EPalWazaID::Unique_GrassMinotaur_Ice_BullRush_Lower": {
+    "localized_name": "พายุหิมะพุ่ง",
+    "description": "สกิลเฉพาะตัวของElgrove Cryst ปลุกเร้าพลังอย่างดุดัน แล้วพุ่งชนธาตุน้ำแข็งใส่ศัตรู 2 ครั้งติดต่อกัน"
   },
   "EPalWazaID::Unique_GrassPanda_Electric_ElectricPunch": {
     "localized_name": "เบิสต์พันช์",
@@ -631,13 +763,21 @@
     "localized_name": "กระหน่ำยิ่งด้วยแรงแค้น",
     "description": "สกิลเฉพาะตัวของ Splatterina เคลื่อนที่พริบตาไปฟันศัตรู และเคลื่อที่พริบตาไปอยู่เหนือศีรษะศัตรู ยื่นอาวุธออกไปแล้วยิงคลื่นพลังความมืด"
   },
+  "EPalWazaID::Unique_GuardianDog_Bite": {
+    "localized_name": "เขี้ยวอำมหิต",
+    "description": "โจมตีโดยกระโจนหาศัตรูอย่างรวดเร็ว แล้วกัดศัตรู"
+  },
+  "EPalWazaID::Unique_GuardianDog_BiteV2": {
+    "localized_name": "เขี้ยวคู่",
+    "description": "พุ่งเข้าหาศัตรูแล้วกัดต่อเนื่องอย่างรวดเร็ว"
+  },
   "EPalWazaID::Unique_HawkBird_Storm": {
     "localized_name": "ทอร์นาโดแอตแทก",
     "description": "สกิลเฉพาะตัวของ Nitewing หลังสร้างพายุหมุนตรงด้านหน้า จะถลาลมพุ่งใส่ศัตรู"
   },
   "EPalWazaID::Unique_HerculesBeetle_BeetleTackle": {
     "localized_name": "กิกาฮอร์น",
-    "description": "สกิลเฉพาะตัวของ Warsect ใช้เขาอันแข็งแกร่งทั้ง 4 เขาเสียบทะลุร่างศัตรู"
+    "description": "สกิลเฉพาะตัวของสายพันธุ์ Warsect ใช้เขาอันแข็งแกร่งทั้ง 4 เขาเสียบทะลุร่างศัตรู"
   },
   "EPalWazaID::Unique_Horus_FlareBird": {
     "localized_name": "ฟินิกซ์เริงลม",
@@ -659,6 +799,10 @@
     "localized_name": "ไอซ์ฮอร์นรัช",
     "description": "สกิลเฉพาะตัวของ Reindrix พุ่งชนศัตรูพลางใช้เขาน้ำแข็งอันงามสง่างัดร่างศัตรูขึ้น"
   },
+  "EPalWazaID::Unique_IceHorse_Dark_DarkBladeAttack": {
+    "localized_name": "เบลดดาร์กวิงก์",
+    "description": "สกิลเฉพาะตัวของ Frostallion Noct ห่อคลุมปีกด้วยพลังงานเเห่งความมืด ฟันศัตรูขณะวิ่งอย่างรวดเร็ว แล้วท้ายที่สุด พลังความมืดนั้นจะเปลี่ยนเป็นกระสุนที่ติดตามศัตรู"
+  },
   "EPalWazaID::Unique_IceHorse_IceBladeAttack": {
     "localized_name": "คริสตัลวิงก์",
     "description": "สกิลเฉพาะตัวของ Frostallion สร้างปีกที่กลั่นจากไอเย็นมาล้อมกาย แล้ววิ่งพลางใช้ปีกน้ำแข็งกรีดเฉือนศัตรู"
@@ -675,6 +819,10 @@
     "localized_name": "คิงเพรส",
     "description": "สกิลเฉพาะตัวของ Kingpaca กระโดดสูง แล้วใช้ร่างนุ่มฟูทับศัตรู"
   },
+  "EPalWazaID::Unique_KingAlpaca_Ice_IcePress": {
+    "localized_name": "คินคินเพรส",
+    "description": "สกิลเฉพาะของ Kingpaca Cryst หลังจากที่กระโจนขึ้นอย่างสูงเเล้ว จะใช้ร่างใหญ่เเละน้ำเเข็งบดขยี้ศัตรูให้แหลก"
+  },
   "EPalWazaID::Unique_KingBahamut_AirCrash": {
     "localized_name": "แม็กนาครัช",
     "description": "สกิลเฉพาะตัวของ Blazamut Ryu หลังกระโดดสูง จะเคลื่อนที่กลางอากาศด้วยความเร็วสูง พลางสะสมพลังแล้วทุ่มตัวต่อย"
@@ -683,9 +831,41 @@
     "localized_name": "อาร์มอิมแพค",
     "description": "สกิลเฉพาะตัวของ Blazamut ควงแขนให้พองโต และเมื่อประกบมือเข้าด้วยกันจะทำให้เกิดระเบิดขึ้นโดยรอบ"
   },
+  "EPalWazaID::Unique_KingWhale_AquaBlade": {
+    "localized_name": "ดาบแห่งท้องทะเล",
+    "description": "สกิลเฉพาะตัวของPanthalus โจมตีด้วยดาบน้ำเเหลมคม"
+  },
+  "EPalWazaID::Unique_KingWhale_AquaTornado": {
+    "localized_name": "พายุหมุนวารี",
+    "description": "สกิลเฉพาะตัวของPanthalus สร้างพายุทอร์นาโดขนาดมหึมาหลายลูก พายุทอร์นาโดจะค่อย ๆ ติดตามศัตรู"
+  },
+  "EPalWazaID::Unique_KingWhale_Breaching": {
+    "localized_name": "การทำลายล้างผืนดิน",
+    "description": "สกิลเฉพาะตัวของPanthalus ดำลงใต้น้ำ และหลังจากผ่านไปครู่หนึ่งจะพุ่งขึ้นมาอย่างรุนแรง พร้อมสร้างระลอกคลื่นแผ่กระจายออกไปรอบด้าน"
+  },
+  "EPalWazaID::Unique_KingWhale_HomingBubble": {
+    "localized_name": "ฝนฟองสบู่",
+    "description": "สกิลเฉพาะตัวของPanthalusล็อกเป้าออกมาเเล้วปล่อยฟองมาปริมาณมาก ฟองจะติดอยู่ตรงนั้่นหลังจากกระทบเป้าหมายแล้ว"
+  },
+  "EPalWazaID::Unique_KingWhale_Maelstrom": {
+    "localized_name": "มหาสมุทรคลั่ง",
+    "description": "สกิลเฉพาะตัวของPanthalus สร้างน้ำวนรอบศัตรู ศัตรูจะถูกลากไปในน้ำวนพร้อมกับถูกบีบอัด ท้ายสุดจะระเบิดเเละกายเป็นเสาน้ำ"
+  },
+  "EPalWazaID::Unique_KingWhale_WaveTackle": {
+    "localized_name": "พุ่งทะเลคลั่ง",
+    "description": "สกิลเฉพาะตัวของPanthalusพุ่งชน ทำให้เกิดคลื่น"
+  },
+  "EPalWazaID::Unique_Kirin_Ice_IceTackle": {
+    "localized_name": "พายุลมน้ำแข็งฟาดฟัน",
+    "description": "ทักษะเฉพาะตัวของUnivolt Cryst สร้างเสาน้ำแข็งรองคัวเเละ มุ่งหน้าโจมตีเข้าหาศัตรู"
+  },
   "EPalWazaID::Unique_Kirin_LightningTackle": {
     "localized_name": "วายุอสนีบาต",
     "description": "สกิลเฉพาะตัวของ Univolt สร้างฟ้าผ่าขึ้นรอบตัว ขณะพุ่งชนศัตรู"
+  },
+  "EPalWazaID::Unique_LanternButler_LanternFlame": {
+    "localized_name": "เปลวเพลิงโคมไฟ",
+    "description": "ทักษะเฉพาะของ Loomenชูโคมไฟขึ้นเพื่อเรียกวิญญาณแห่งพยาบาทออกมาหลายดวง ซึ่งจะคอยไล่ตามศัตรูไปอย่างไม่ลดละ"
   },
   "EPalWazaID::Unique_LeafMomonga_SomerSault": {
     "localized_name": "ใบไม้ตีลังกา",
@@ -711,9 +891,17 @@
     "localized_name": "-",
     "description": "-"
   },
+  "EPalWazaID::Unique_LotusDragon_LotusBloom": {
+    "localized_name": "ดอกบัวบานสะพรั่ง",
+    "description": "สกิลเฉพาะตัวของOphydia มุดลงใต้ดินเพื่อหายตัวไป จากนั้นโผล่ขึ้นมาเป็น ดอกตูม บนพื้น ก่อนจะ เบ่งบานและโจมตีเป็นวงกว้าง"
+  },
   "EPalWazaID::Unique_Manticore_InfernoStrike": {
     "localized_name": "โวลคานิกแฟงก์",
     "description": "สกิลเฉพาะตัวของ Blazehowl กระโจนใส่ศัตรูด้วยแรงส่ง และจุดระเบิดเพลิงใส่ปลายทาง"
+  },
+  "EPalWazaID::Unique_MonochromeQueen_BalletJump": {
+    "localized_name": "ขนนกสีดำเริงระบำ",
+    "description": "สกิลเฉพาะตัวของSolenne กระโดดเฉียงหลบ แล้วขว้างขนนกสีดำคมกริบใส่ศัตรู"
   },
   "EPalWazaID::Unique_MoonQueen_IceMoonBlade": {
     "localized_name": "ประกายดาบจันทร์น้ำเงิน",
@@ -727,6 +915,18 @@
     "localized_name": "ดาบจันทร์น้ำเงิน",
     "description": "สกิลเฉพาะตัวของ Selyne ซัดใบมีดความเร็วสูงที่แฝงพลังแสงจันทร์ออกไป 2 ครั้งต่อเนื่อง"
   },
+  "EPalWazaID::Unique_Mothman_GiantSpore": {
+    "localized_name": "สปอร์ยักษ์",
+    "description": "ทักษะเฉพาะตัวของSilvance ยิงสปอร์ขนาดยักษ์ที่ติดตามศัตรูได้ เมื่อกระทบจะ ระเบิด และกระจายแรงระเบิดเป็นวงกว้าง"
+  },
+  "EPalWazaID::Unique_Mothman_SporeScatter": {
+    "localized_name": "หมอกสปอร์พิษ",
+    "description": "สกิลเฉพาะตัวของSilvance กระจายสปอร์ระเบิดออกไปเป็นวงกว้าง แล้วจึงจุดระเบิดขึ้นพร้อมกันในคราวเดียวหลังจากผ่านไปครู่หนึ่ง"
+  },
+  "EPalWazaID::Unique_MummyPal_MummyAttack": {
+    "localized_name": "มัมมี่คลั่ง",
+    "description": "สกิลเฉพาะตัวของGildra ยืดผ้าพันแผลออกจากมือ เพื่อโจมตีศัตรูอย่างต่อเนื่อง"
+  },
   "EPalWazaID::Unique_MysteryMask_LifeSteal": {
     "localized_name": "โซลสตีล",
     "description": "สกิลเฉพาะตัวของ Omascul โผล่เข้าประชิดศัตรูในพริบตา แล้วใช้แขนทั้งสองรัดศัตรูจนแน่น ดูด HP ของศัตรูที่โดนรัด"
@@ -737,7 +937,19 @@
   },
   "EPalWazaID::Unique_NightBlueHorse_DeathStep": {
     "localized_name": "ลีธัลสเต็ป",
-    "description": "สกิลเฉพาะตัวของ Starryon ก้าวเท้าพลิ้วไหวหลอกล่อศัตรู แล้วใช้เขาอันแหลมคมขวิดศัตรูให้กระเด็น"
+    "description": "สกิลเฉพาะตัวของ Starryon ก้าวเท้าพลิ้วไหวหลอกล่อศัตรู พร้อมปล่อยคลื่นคมตัดจากเขาอันแหลมคมเข้าโจมตี"
+  },
+  "EPalWazaID::Unique_NightBlueHorse_Neutral_AirStep": {
+    "localized_name": "ก้าวย่างราชัน",
+    "description": "ทักษะเฉพาะตัวของStarryon Primo ใช้สเต็ปสวยงามในการปั่นหัวศัตรู ปลดปล่อยคลื่นดาบจากเขาที่คมกริบ"
+  },
+  "EPalWazaID::Unique_NightBlueHorse_Neutral_Tossin": {
+    "localized_name": "การพุ่งทะยานของม้าสีเงิน",
+    "description": "สกิลเฉพาะตัวของStarryon Primo ห่อหุ้มร่างด้วยเปลวเพลิงส่องประกาย แล้วพุ่งเข้าชนศัตรู"
+  },
+  "EPalWazaID::Unique_NightBlueHorse_Tossin": {
+    "localized_name": "การพุ่งทะยานของม้าผี",
+    "description": "สกิลเฉพาะตัวของStarryon ห่อหุ้มร่างด้วยเปลวเพลิงที่ลุกไหว แล้วพุ่งเข้าชนศัตรู"
   },
   "EPalWazaID::Unique_NightLady_FlameNightmare": {
     "localized_name": "เฟลมวอลซ์",
@@ -753,7 +965,11 @@
   },
   "EPalWazaID::Unique_OctopursGirl_InkJet": {
     "localized_name": "เจ็ตสโมก",
-    "description": "สกิลเฉพาะตัวของ Gloopie สร้างควันที่ด้านหน้า เพื่อซ่อนตัว ก่อนจะโจมตีอย่างแรงเข้าที่หัวศัตรูโดยที่อีกฝ่ายมองไม่เห็น"
+    "description": "สกิลเฉพาะตัวของสายพันธุ์ Gloopie สร้างควันที่ด้านหน้า เพื่อซ่อนตัว ก่อนจะโจมตีอย่างแรงเข้าที่หัวศัตรูโดยที่อีกฝ่ายมองไม่เห็น"
+  },
+  "EPalWazaID::Unique_PandaGirl_RapidKick": {
+    "localized_name": "เตะหมุนต่อเนื่อง",
+    "description": "สกิลเฉพาะตัวของLeafan เตะหมุนอย่างรวดเร็วต่อเนื่องหลายครั้ง แล้วปล่อยคลื่นพลังปราณโจมตีปิดท้าย"
   },
   "EPalWazaID::Unique_PinkCat_CatPunch": {
     "localized_name": "หมัดแมว",
@@ -779,13 +995,29 @@
     "localized_name": "รัชบีก",
     "description": "สกิลเฉพาะตัวของ Ragnahawk กระพือปีกไปด้านหน้า พลางใช้จะงอยปากพุ่งไปข้างหน้า ซ้าย และขวา เพื่อจุดระเบิดขนาดย่อม"
   },
+  "EPalWazaID::Unique_RedFlowerBird_JumpKick": {
+    "localized_name": "กระทืบดอกไม้",
+    "description": "Tropicawสกิลเฉพาะตัวของ ที่่สามารถยกลอยขึ้นไปในอากาศอย่างนุ่มนวล แล้วใช้กรงเล็บแหลมคมจับกระแทกลงบนพื้นอย่างแรง"
+  },
   "EPalWazaID::Unique_RobinHood_BowSnipe": {
     "localized_name": "สไนป์ช็อต",
     "description": "สกิลเฉพาะตัวของ Robinquill ง้างธนูเล็งเป้า แล้วยิงธนูใส่ศัตรู"
   },
+  "EPalWazaID::Unique_RockBeast_Ice_IceHorn": {
+    "localized_name": "น้ำแข็งพิฆาต",
+    "description": "สกิลเฉพาะตัวของKuprok Cryst ใช้เขาทั้งสองข้างขุดเซาะพื้นดินแล้วเสยขึ้น เพื่อส่งก้อนน้ำแข็งพุ่งเข้าใส่ศัตรู"
+  },
+  "EPalWazaID::Unique_RockBeast_RockHorn": {
+    "localized_name": "พุ่งเขาพิฆาต",
+    "description": "ทักษะเฉพาะตัวของKuprok ใช้เขาขุดคุ้ย ขุดเซาะพื้นดิน และปลดปล้อยกระดแปถสุนกินใส่ศัตรู"
+  },
   "EPalWazaID::Unique_Ronin_Iai": {
     "localized_name": "ดาบอิไอกิริ",
     "description": "สกิลเฉพาะตัวของพาลประเภท Bushi หลังจับดาบ จะมาปรากฏตัวต่อหน้าศัตรูในพริบตา แล้วชักดาบโจมตีศัตรูด้วยความเร็วสูง"
+  },
+  "EPalWazaID::Unique_Ronin_Iai_PartnerSkill": {
+    "localized_name": "ดาบอิไอกิริ",
+    "description": "Bushiทักษะการโจมตีของ หลังจากการตั้งท่าโจมตีดาบเเล้ว จะปรากฎตัวให้เห็นต่อศัตรูในชั่วพริบตา และปล่อยท่าชักดาบโจมตีความเร็วสูงสุด"
   },
   "EPalWazaID::Unique_SaintCentaur_OneSpearRushes": {
     "localized_name": "หอกเดี่ยวโถมแทง",
@@ -795,9 +1027,37 @@
     "localized_name": "บอดี้สแมช",
     "description": "สกิลเฉพาะตัวของ Broncherry ตั้งท่าหันข้าง กระแทกใส่ศัตรูด้านหน้า ผลักศัตรูให้กระเด็น"
   },
+  "EPalWazaID::Unique_SakuraSaurus_Water_SplashTackle": {
+    "localized_name": "สแปลชแท็กเคิล",
+    "description": "สกิลเฉพาะตัวของ Broncherry Aqua ตั้งท่าในเเนวนอนเตรียมสู้เเละ เป่าศัตรูให้กระเด็นพร้อมกับยกละอองน้ำขึ้น"
+  },
+  "EPalWazaID::Unique_SamuraiDog_Bite": {
+    "localized_name": "เขี้ยวอำมหิต(ดิน)",
+    "description": "โจมตีโดยกระโจนหาศัตรูอย่างรวดเร็ว แล้วกัดศัตรู"
+  },
+  "EPalWazaID::Unique_SamuraiDog_BiteV2": {
+    "localized_name": "เขี้ยวคู่(ดิน)",
+    "description": "พุ่งเข้าหาศัตรูแล้วกัดต่อเนื่องอย่างรวดเร็ว"
+  },
+  "EPalWazaID::Unique_SamuraiDog_DashSlash": {
+    "localized_name": "สแลชแห่งความพยายาม",
+    "description": "สกิลเฉพาะตัวของPupperai พุ่งวิ่งเต็มกำลัง พร้อมฟันศัตรูด้วยไม้ที่คาบไว้ในปาก ทำการโจมตีนี้ ติดต่อกัน 2 ครั้ง"
+  },
+  "EPalWazaID::Unique_ScorpionMan_Erectric_UpperThunder": {
+    "localized_name": "หมัดอัปเปอร์สายฟ้า",
+    "description": "ทักษะเฉพาะตัวของPrixter Lux ใช้พลังซูเปอร์คอนดักเตอร์พุ่งเข้าประชิดศัตรูอย่างรวดเร็ว แล้วเหวี่ยงก้ามขึ้นฟาดอย่างแรง"
+  },
   "EPalWazaID::Unique_ScorpionMan_Uppercut": {
     "localized_name": "อัปเปอร์สแมช",
-    "description": "สกิลเฉพาะตัวของ Prixter เข้าประชิดศัตรูด้วยความเร็วสูง แล้วซัดกรรไกรขึ้นด้านบนเต็มแรง"
+    "description": "สกิลเฉพาะตัวของ Prixter เข้าประชิดศัตรูด้วยความเร็วสูง แล้วเหวี่ยงก้ามขึ้นฟาดอย่างแรง"
+  },
+  "EPalWazaID::Unique_Sekhmet_RollingScratch": {
+    "localized_name": "ข่วนหมุนตัว",
+    "description": "สกิลเฉพาะตัวของSekhmet หมุนตัวพุ่งเข้าหาศัตรูอย่างรวดเร็ว แล้วโจมตีด้วยการข่วน"
+  },
+  "EPalWazaID::Unique_Sekhmet_SomersaultScratch": {
+    "localized_name": "ตะปบตีลังกา",
+    "description": "สกิลเฉพาะตัวของSekhmetสกิลเฉพาะตัวของโจมตีด้วยการข่วนศัตรู พร้อมตีลังกาถอยหลังเพื่อเว้นระยะ"
   },
   "EPalWazaID::Unique_SheepBall_Roll": {
     "localized_name": "ขนแกะกลมกลิ้ง",
@@ -805,7 +1065,11 @@
   },
   "EPalWazaID::Unique_SifuDog_Counter": {
     "localized_name": "ตั้งรับสุดตัว",
-    "description": "สกิลเฉพาะตัวของ Dogen ตั้งท่าแบบไอคิโด ระหว่างตั้งท่า ศัตรูจะโจมตีไม่ได้ผล และเข้าประชิดตัวศัตรูในพริบตา ปล่อยส้นมือกระแทกเต็มแรง"
+    "description": "สกิลเฉพาะตัวของ Dogen ตั้งท่าแบบไอคิโด ระหว่างตั้งท่า ศัตรูจะโจมตีไม่ได้ผล และเข้าประชิดตัวศัตรูในพริบตา ก่อนปล่อยฝ่ามืออัดกระแทกสุดกำลัง"
+  },
+  "EPalWazaID::Unique_SnakeGirl_SnakeShot": {
+    "localized_name": "ลำแสงกระจายพยุหะ",
+    "description": "Venusaสกิลเฉพาะตัวของ งูบนหัวของมันพ่นลูกบอลพิษออกมาเป็นวิถีโค้งคล้ายพาราโบลา แอ่งพิษที่กระจายตัว ณ จุดที่กระทบจะทำให้ใครก็ตามที่สัมผัสได้รับพิษ"
   },
   "EPalWazaID::Unique_SnowTigerBeastman_SnowImpact": {
     "localized_name": "ทลายธารน้ำแข็ง",
@@ -823,13 +1087,41 @@
     "localized_name": "ทริกเกอร์แฮปปี้",
     "description": "สกิลเฉพาะสายพันธ์ของ Finsider หยิบปืนฉีดน้ำสองกระบอกออกมาจากในปาก ยิงกระสุนน้ำสลับซ้ายขวารวม 6 นัด ปิดท้ายด้วยรวมปืนสองกระบอกเข้าด้วยกัน และยิงกระสุนด้วยความรุนแรง 1 นัด"
   },
+  "EPalWazaID::Unique_SumoDog_SumoStomp": {
+    "localized_name": "กระทืบซูโม่",
+    "description": "สกิลเฉพาะตัวของBulldosu เหวี่ยงขาหลังขวาอย่างแรงแล้วกระแทกลงพื้นปล่อย คลื่นกระแทกโจมตีเป็นวงกว้างด้านหน้า (รูปพัด)"
+  },
   "EPalWazaID::Unique_TentacleTurtle_HydroSpin": {
     "localized_name": "ไฮโดรสปิน",
     "description": "สกิลเฉพาะตัวของ Turtacle ใช้แรงไถลจากไอพ่นเจ็ต บินควงสว่านไปหาศัตรู"
   },
+  "EPalWazaID::Unique_ThunderBird_Ice_SnowStrom": {
+    "localized_name": "พุ่งดิ่งน้ำแข็ง",
+    "description": "ทักษะเฉพาะตัวของBeakon Cryst แทงน้ำแข็งพุ่งขึ้นจากใต้ตำแหน่งศัตรูก่อน จากนั้นจะ พุ่งไถลเข้าประชิด พร้อมทำให้แท่งน้ำแข็งผุดขึ้นสลับซ้าย-ขวาตลอดทาง"
+  },
   "EPalWazaID::Unique_ThunderBird_ThunderStorm": {
     "localized_name": "ไลต์นิงไดฟ์",
     "description": "สกิลเฉพาะตัวของ Beakon เริ่มจากเรียกสายฟ้าโจมตีใส่จุดที่ศัตรูอยู่ และบินโฉบโจมตีพลางเรียกฟ้าผ่าขนาบซ้ายขวา"
+  },
+  "EPalWazaID::Unique_ThunderDog_Bite": {
+    "localized_name": "เขี้ยวอำมหิต(สายฟ้า)",
+    "description": "โจมตีโดยกระโจนหาศัตรูอย่างรวดเร็ว แล้วกัดศัตรู"
+  },
+  "EPalWazaID::Unique_ThunderDog_BiteV2": {
+    "localized_name": "เขี้ยวคู่(สายฟ้า)",
+    "description": "พุ่งเข้าหาศัตรูแล้วกัดต่อเนื่องอย่างรวดเร็ว"
+  },
+  "EPalWazaID::Unique_ThunderDog_Ice_Bite": {
+    "localized_name": "เขี้ยวอำมหิต(น้ำแข็ง)",
+    "description": "โจมตีโดยกระโจนหาศัตรูอย่างรวดเร็ว แล้วกัดศัตรู"
+  },
+  "EPalWazaID::Unique_ThunderDog_Ice_BiteV2": {
+    "localized_name": "เขี้ยวคู่(น้ำแข็ง)",
+    "description": "พุ่งเข้าหาศัตรูแล้วกัดต่อเนื่องอย่างรวดเร็ว"
+  },
+  "EPalWazaID::Unique_ThunderDog_Ice_KoriShorai": {
+    "localized_name": "อัญเชิญหิมะ",
+    "description": "ทักษะเฉพาะตัวของRayhound Cryst สร้างแท่งน้ำแข็งเรียงต่อกันด้านหน้าอย่างต่อเนื่อง แล้วพุ่งทะลุผ่านช่องระหว่างแท่งด้วยความเร็วสูง"
   },
   "EPalWazaID::Unique_ThunderDog_InazumaShorai": {
     "localized_name": "อัญเชิญอัสนี",
@@ -863,6 +1155,22 @@
     "localized_name": "โวลคานิกเบิสต์",
     "description": "สกิลเฉพาะตัวของ Reptyro เงื้อขาหน้าขึ้นกระทืบพื้น สร้างไฟปะทุขึ้นตรงจุดที่ศัตรูอยู่ ตอนที่ไฟปะทุจะเกิดสะเก็ดลาวาโปรยปราย"
   },
+  "EPalWazaID::Unique_VolcanoDragon_Ice_IceLaser": {
+    "localized_name": "เลเซอร์น้ำแข็ง",
+    "description": "สกิลเฉพาะตัวของMoldron Cryst พ่นลำแสงเยือกแข็งจากปาก ทำให้พื้นดินกลายเป็นน้ำแข็ง บริเวณที่ถูกแช่แข็งจะเกิด แอ่งน้ำแข็ง ศัตรูที่สัมผัสจะถูก แช่แข็งและได้รับดาเมจ"
+  },
+  "EPalWazaID::Unique_VolcanoDragon_Ice_IcicleSpit": {
+    "localized_name": "ลมหายใจน้ำแข็ง",
+    "description": "สกิลเฉพาะตัวของMoldron Cryst พ่นก้อนน้ำแข็งจากปากแล้วยิงออกไป จุดที่กระทบจะเกิด แอ่งน้ำค้างแข็ง ศัตรูที่สัมผัสจะถูก แช่แข็งและได้รับความเสียหาย"
+  },
+  "EPalWazaID::Unique_VolcanoDragon_MagmaSpit": {
+    "localized_name": "ลำแสงแมกมา",
+    "description": "สกิลเฉพาะตัวของMoldron พ่นก้อนแมกมาจากปากแล้วยิงออกไป เมื่อกระทบพื้นจะเกิด แอ่งแมกมา และสร้างดาเมจแก่ศัตรูที่สัมผัส"
+  },
+  "EPalWazaID::Unique_VolcanoDragon_VolcanicLaser": {
+    "localized_name": "สายฝนฟองน้ำ",
+    "description": "สกิลเฉพาะตัวของMoldron ปล่อยลำแสงความร้อนจากปากเผาผลาญพื้นดินจนราบเป็นหน้ากลอง พื้นดินที่ถูกเผาจะเกิด แอ่งแมกมา และสร้างความเสียหายแก่ศัตรูที่สัมผัส"
+  },
   "EPalWazaID::Unique_WeaselDragon_FlyingTackle": {
     "localized_name": "ร็อกเก็ตแท็กเคิล",
     "description": "สกิลเฉพาะตัวของ Chillet หลังสะสมพลังเล็กน้อย จะกระโจนไปด้านหน้า พริบตาที่ถึงที่หมายจะกลัวจนหลับตาปี๋เสมอ"
@@ -874,6 +1182,10 @@
   "EPalWazaID::Unique_Werewolf_Scratch": {
     "localized_name": "จัมปิงคลอว์",
     "description": "สกิลเฉพาะตัวของ WereWolf กระโจนไปด้านหน้า ข่วนศัตรู 2 ครั้งอย่างรวดเร็ว การโจมตีนี้มีพลังธาตุความมืดแฝงอยู่"
+  },
+  "EPalWazaID::Unique_WhiteDeer_Dark_DarkPillar": {
+    "localized_name": "โนวาแห่งความมืด",
+    "description": "ทักษะเฉพาะตัวของCelesdir Noct ก่อให้เกิดการระเบิดธาตุความมืดในพื้นที่กว้างด้านหน้า จากนั้นจะเคลื่อนที่ไปข้างหน้า พร้อมเรียก เสามืด ผุดขึ้นรอบตัวต่อเนื่องหรือแบบกระชับใน"
   },
   "EPalWazaID::Unique_WhiteDeer_HolyPillar": {
     "localized_name": "โฮลีโนวา",
@@ -891,9 +1203,13 @@
     "localized_name": "บลิซซาร์ดคลอว์",
     "description": "สกิลเฉพาะตัวของ Cryolinx โจมตีครั้งแรกและครั้งที่ 2 ด้วยกรงเล็บ และใช้แรงทั้งหมดตะปบศัตรูอย่างแรงในครั้งสุดท้าย ตอนที่ตวัดกรงเล็บจะซัดเสาน้ำแข็ง 3 ต้นออกไปด้านหน้าเป็นรูปพัด"
   },
+  "EPalWazaID::Unique_WingGolem_Fire_FlameCutter": {
+    "localized_name": "คัตเตอร์เพลิง",
+    "description": "ทักษะเฉพาะตัวของKnocklem Ignis ง้างแขนสุดแรงแล้วขว้าง |วงเพลิง| จากแผ่นหลังออกไป วงเพลิงจะบินเป็นวิถีโค้งคล้ายการวาดวงกลม"
+  },
   "EPalWazaID::Unique_WingGolem_RoundCutter": {
     "localized_name": "กราวด์คัตเตอร์",
-    "description": "สกิลเฉพาะตัวของ Knocklem เหวี่ยงแขนเป็นวงกว้าง ขว้างวงแหวนบนหลัง วงแหวนจะเคลื่อนที่เป็นรูปวงกลม"
+    "description": "สกิลเฉพาะตัวของ Knocklem เงื้อแขนขึ้นอย่างแรงแล้วขว้างวงแหวนบนหลังออกไป วงแหวนจะบินเป็นวิถีโค้งคล้ายวาดวงกลม"
   },
   "EPalWazaID::Unique_YakushimaBoss001_Small_DemonEyeCharge": {
     "localized_name": "พุ่งชนด้วยลูกตา",
@@ -966,6 +1282,10 @@
   "EPalWazaID::Weapon_Use": {
     "localized_name": "การใช้งานอาวุธ",
     "description": "ใช้อาวุธที่ถืออยู่โจมตี"
+  },
+  "EPalWazaID::WindBurst": {
+    "localized_name": "คลื่นลมกระแทก",
+    "description": "เรียกพายุลมขนาดยักษ์ขึ้นรอบตัว เพื่อโจมตีด้วยพลังมหาศาล"
   },
   "EPalWazaID::WindCutter": {
     "localized_name": "วินด์คัตเตอร์",
