@@ -37,23 +37,19 @@ impl serde::Serialize for IsoDateTime {
 ///     return datetime(1, 1, 1) + timedelta(days=days, seconds=seconds_remainder)
 /// ```
 ///
-/// `ticks == 0` returns `None`. In the Python source this guard does not
-/// live inside `ticks_to_datetime` itself — it lives in the sole caller,
+/// `ticks == 0` is a perfectly valid input here and returns
+/// `Some(0001-01-01T00:00:00)` (the epoch itself), matching the Python
+/// function exactly -- Python's `ticks_to_datetime` has no zero-guard either.
+/// The zero-guard lives only in the sole production caller,
 /// `_parse_player_gvas_and_timestamp` (`if not ticks: return gvas, None`),
-/// so a raw ticks value of `0` is never actually passed to
-/// `ticks_to_datetime` in the running system. Folding the same guard in here
-/// reproduces that end-to-end behavior (zero ticks -> null on the wire) in a
-/// single call, so downstream summary-extraction code (Task 8) can write
-/// `ticks_to_datetime(ticks).map(IsoDateTime)` without re-deriving the
-/// check itself.
+/// *before* it calls `ticks_to_datetime`. Callers here must do the same: a
+/// raw `ticks` value of `0` from the wire means "no timestamp" and should be
+/// filtered out with `.filter(|&ticks| ticks != 0)` before calling this
+/// function, not by relying on this function to return `None` for it.
 ///
 /// Returns `None` (rather than panicking) if the resulting date falls
 /// outside the range `chrono::NaiveDate` can represent.
 pub fn ticks_to_datetime(ticks: u64) -> Option<chrono::NaiveDateTime> {
-    if ticks == 0 {
-        return None;
-    }
-
     let total_seconds = ticks as f64 / 10_000_000.0;
     let day_count = (total_seconds / 86_400.0).floor() as i64;
     let seconds_remainder = total_seconds % 86_400.0;
@@ -133,13 +129,19 @@ mod tests {
     }
 
     #[test]
-    fn test_zero_ticks_means_no_timestamp() {
-        // The mixin's caller (_parse_player_gvas_and_timestamp) never invokes
-        // ticks_to_datetime when `not ticks`, so the effective end-to-end
-        // behavior for a zero-tick field is "no timestamp" -> null on the
-        // wire. ticks_to_datetime folds that guard in so callers can just
-        // `.map(IsoDateTime)` without re-deriving the check.
-        assert_eq!(None, ticks_to_datetime(0));
+    fn test_zero_ticks_is_year_one_epoch() {
+        // Mirrors the Python source of truth: mixins/summaries.py has no
+        // zero-guard inside ticks_to_datetime itself, and
+        // tests/game/mixins/test_bulk_summaries.py::test_ticks_to_datetime_epoch_is_year_one
+        // asserts exactly this -- ticks_to_datetime(0) == datetime(1, 1, 1).
+        // The "0 ticks means no timestamp" guard belongs to the caller
+        // (_parse_player_gvas_and_timestamp), not to this function.
+        assert_eq!(
+            chrono::NaiveDate::from_ymd_opt(1, 1, 1)
+                .unwrap()
+                .and_hms_opt(0, 0, 0),
+            ticks_to_datetime(0)
+        );
     }
 
     #[test]
