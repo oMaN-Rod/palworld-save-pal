@@ -611,15 +611,24 @@ pub fn update_player_technologies(
 }
 
 /// Port of `PlayerOpsMixin.update_players` (`player_ops.py`).
+///
+/// `_game_data` is currently unused by this call chain (`apply_player_dto`'s
+/// own internals need no `GameData` -- see
+/// `containers::apply_item_container_dto`'s doc comment on why that's true
+/// all the way down). Kept, not removed: this port's whole `update_*` family
+/// (`pal::update_pals`/`update_dps_pals`, `guild::update_guilds`, this
+/// function) shares one uniform `(session, game_data, modified, progress)`
+/// public signature -- `update_pals` genuinely needs it. See this task's
+/// report.
 pub fn update_players(
     session: &mut SaveSession,
-    game_data: &GameData,
+    _game_data: &GameData,
     modified_players: &OrderedMap<uuid::Uuid, PlayerDto>,
     progress: &crate::progress::ProgressSink,
 ) -> Result<(), CoreError> {
     for (player_id, dto) in modified_players.iter() {
         progress(&format!("Updating player {}", dto.nickname));
-        apply_player_dto(session, game_data, *player_id, dto)?;
+        apply_player_dto(session, *player_id, dto)?;
     }
     Ok(())
 }
@@ -670,9 +679,11 @@ fn player_inventory_container_id(save_data: &Properties, id_key: &str) -> Option
 /// server-trusted source `build_player_dto` already reads them from) and
 /// passing that resolved id into `apply_item_container_dto` explicitly,
 /// which never reads `dto.id` for routing at all -- see this task's report.
+///
+/// No `game_data: &GameData` parameter -- see
+/// `containers::apply_item_container_dto`'s doc comment.
 fn apply_player_dto(
     session: &mut SaveSession,
-    game_data: &GameData,
     player_id: uuid::Uuid,
     dto: &PlayerDto,
 ) -> Result<(), CoreError> {
@@ -736,52 +747,58 @@ fn apply_player_dto(
     // --- player .sav SaveData fields ---
     {
         let loaded = session.loaded_players.get_mut(&player_id).expect("checked");
-        let save_data = save_data_props_mut(&mut loaded.sav)?;
-        save_data.insert(
-            "UnlockedRecipeTechnologyNames",
-            props::name_array_property(dto.technologies.clone()),
-        );
-        save_data.insert(
-            "TechnologyPoint",
-            props::int_property(
-                dto.technology_points
-                    .clamp(i32::MIN as i64, i32::MAX as i64) as i32,
-            ),
-        );
-        save_data.insert(
-            "bossTechnologyPoint",
-            props::int_property(
-                dto.boss_technology_points
-                    .clamp(i32::MIN as i64, i32::MAX as i64) as i32,
-            ),
-        );
-        save_data.insert(
-            "CompletedQuestArray",
-            props::name_array_property(dto.completed_missions.clone()),
-        );
-        // OrderedQuestArray rebuild (pal_objects.py's `PalObjects.
-        // OrderedQuestArray`/`OrderedQuest`): one {QuestName, BlockIndex: 0,
-        // IntegerMap: {}, StringMap: {}} struct per current mission.
-        let mut quest_structs = Vec::new();
-        for quest_name in &dto.current_missions {
-            let mut quest_props = Properties::default();
-            quest_props.insert("QuestName", props::name_property(quest_name));
-            quest_props.insert("BlockIndex", props::int_property(0));
-            quest_props.insert("IntegerMap", Property::Map(vec![]));
-            quest_props.insert("StringMap", Property::Map(vec![]));
-            quest_structs.push(StructValue::Struct(quest_props));
+        {
+            let save_data = save_data_props_mut(&mut loaded.sav)?;
+            save_data.insert(
+                "UnlockedRecipeTechnologyNames",
+                props::name_array_property(dto.technologies.clone()),
+            );
+            save_data.insert(
+                "TechnologyPoint",
+                props::int_property(
+                    dto.technology_points
+                        .clamp(i32::MIN as i64, i32::MAX as i64) as i32,
+                ),
+            );
+            save_data.insert(
+                "bossTechnologyPoint",
+                props::int_property(
+                    dto.boss_technology_points
+                        .clamp(i32::MIN as i64, i32::MAX as i64) as i32,
+                ),
+            );
+            save_data.insert(
+                "CompletedQuestArray",
+                props::name_array_property(dto.completed_missions.clone()),
+            );
+            // OrderedQuestArray rebuild (pal_objects.py's `PalObjects.
+            // OrderedQuestArray`/`OrderedQuest`): one {QuestName, BlockIndex: 0,
+            // IntegerMap: {}, StringMap: {}} struct per current mission.
+            let mut quest_structs = Vec::new();
+            for quest_name in &dto.current_missions {
+                let mut quest_props = Properties::default();
+                quest_props.insert("QuestName", props::name_property(quest_name));
+                quest_props.insert("BlockIndex", props::int_property(0));
+                quest_props.insert("IntegerMap", Property::Map(vec![]));
+                quest_props.insert("StringMap", Property::Map(vec![]));
+                quest_structs.push(StructValue::Struct(quest_props));
+            }
+            save_data.insert(
+                "OrderedQuestArray",
+                Property::Array(ValueVec::Struct(quest_structs)),
+            );
         }
-        save_data.insert(
-            "OrderedQuestArray",
-            Property::Array(ValueVec::Struct(quest_structs)),
-        );
         // unlock flags: only when the caller actually supplied a value
         // (player.py's `case ... : if value is not None: setattr(...)`).
+        // Needs `&mut loaded.sav` (not just its `SaveData` `Properties`) so it
+        // can register a schema for a brand-new flag Map -- see
+        // `apply_unlock_flags`'s own doc comment; the `save_data` borrow
+        // above must therefore already have ended.
         if let Some(points) = &dto.unlocked_fast_travel_points {
-            apply_unlock_flags(save_data, "FastTravelPointUnlockFlag", points);
+            apply_unlock_flags(&mut loaded.sav, "FastTravelPointUnlockFlag", points);
         }
         if let Some(effigies) = &dto.collected_effigies {
-            apply_unlock_flags(save_data, "RelicObtainForInstanceFlag", effigies);
+            apply_unlock_flags(&mut loaded.sav, "RelicObtainForInstanceFlag", effigies);
         }
     }
     // --- containers: resolve every real id from the player's OWN save data
@@ -802,26 +819,20 @@ fn apply_player_dto(
         )
     };
     if let (Some(container_id), Some(container)) = (common_id, &dto.common_container) {
-        containers::apply_item_container_dto(session, game_data, container_id, container, None)?;
+        containers::apply_item_container_dto(session, container_id, container, None)?;
     }
     if let (Some(container_id), Some(container)) = (essential_id, &dto.essential_container) {
-        containers::apply_item_container_dto(
-            session,
-            game_data,
-            container_id,
-            container,
-            common_id,
-        )?;
+        containers::apply_item_container_dto(session, container_id, container, common_id)?;
     }
     if let (Some(container_id), Some(container)) = (weapon_id, &dto.weapon_load_out_container) {
-        containers::apply_item_container_dto(session, game_data, container_id, container, None)?;
+        containers::apply_item_container_dto(session, container_id, container, None)?;
     }
     if let (Some(container_id), Some(container)) = (armor_id, &dto.player_equipment_armor_container)
     {
-        containers::apply_item_container_dto(session, game_data, container_id, container, None)?;
+        containers::apply_item_container_dto(session, container_id, container, None)?;
     }
     if let (Some(container_id), Some(container)) = (food_id, &dto.food_equip_container) {
-        containers::apply_item_container_dto(session, game_data, container_id, container, None)?;
+        containers::apply_item_container_dto(session, container_id, container, None)?;
     }
     Ok(())
 }
@@ -836,6 +847,24 @@ fn apply_player_dto(
 /// names is skipped (real Python's `reverse_status_map[status_name]` would
 /// raise `KeyError` -- a malformed/adversarial DTO input this port declines
 /// to crash on, per its established "skip untrusted input" policy).
+///
+/// **A genuine, newly-found Python bug, reproduced deliberately for save-file
+/// byte parity, not on the known list:** `status_point_list`'s setter
+/// (`player.py`) drops "None"/unrecognized rows with `for item in
+/// status_point_list: ... status_point_list.remove(item)` -- a classic
+/// mutate-while-iterating bug. `list.remove(item)` shifts every later
+/// element left by one, but the `for` loop's own internal position counter
+/// still advances by one on the NEXT step regardless, so the element that
+/// just shifted into the just-vacated slot is silently skipped. With two or
+/// more *consecutive* matching rows, only every OTHER one actually gets
+/// removed. Verified against real `.venv` CPython (see this task's report
+/// for the exact script and output) with this exact shape: four rows
+/// `[real, "None", "None", real]` reduce to THREE rows
+/// `[real, "None", real]`, not two -- one "None" row survives. The block
+/// below reproduces that exact index-advances-regardless-of-removal
+/// semantics (not `Vec::retain`, which would correctly remove ALL matching
+/// rows in one pass and would disagree, byte-for-byte, with what real
+/// Python actually writes for this input).
 fn apply_status_points(
     save_parameter: &mut Properties,
     list_name: &str,
@@ -851,17 +880,27 @@ fn apply_status_points(
         return;
     };
     if drop_none_rows {
-        values.retain(|value| {
-            let StructValue::Struct(status_props) = value else {
-                return true;
+        // Python: `for item in status_point_list: if <predicate>:
+        // status_point_list.remove(item)`. `index` here plays the role of
+        // Python's own internal for-loop position counter: it advances by
+        // exactly one on every step, REGARDLESS of whether a removal just
+        // happened -- reproducing the skip, not avoiding it.
+        let mut index = 0;
+        while index < values.len() {
+            let should_remove = match &values[index] {
+                StructValue::Struct(status_props) => status_props
+                    .0
+                    .get(&PropertyKey::from("StatusName"))
+                    .and_then(props::as_str)
+                    .map(|name| name == "None")
+                    .unwrap_or(true), // "StatusName" not in item
+                _ => false,
             };
-            status_props
-                .0
-                .get(&PropertyKey::from("StatusName"))
-                .and_then(props::as_str)
-                .map(|name| name != "None")
-                .unwrap_or(true)
-        });
+            if should_remove {
+                values.remove(index);
+            }
+            index += 1;
+        }
     }
     for (english_name, point_value) in points.iter() {
         let Some((japanese_name, _)) = name_map
@@ -899,45 +938,229 @@ fn apply_status_points(
 /// bug on the known list; see `player.py`'s own `relic_possess_num =
 /// relic_possess_num + len(value)`).
 ///
-/// Deviation from Python: when `RecordData` doesn't yet carry `flag_name` at
-/// all (Python creates a fresh `PalObjects.MapProperty("NameProperty",
-/// "BoolProperty")` in that case), this port skips writing the entries
-/// rather than fabricating a brand-new `Map` property from scratch --
-/// `uesave`'s writer needs a recorded key/value-type schema for a `Map`
-/// property before it can serialize one (see `props::ensure_schema`'s own
-/// doc comment), and `props.rs` has no `Map`-shaped constructor/schema
-/// helper yet (Phase 2 has never needed one). Every real save this port has
-/// tested against already carries both `FastTravelPointUnlockFlag` and
-/// `RelicObtainForInstanceFlag` (a player who has never fast-traveled
-/// anywhere is not realistic test data), so this narrow gap has no observed
-/// real-save impact; flagged here rather than silently assumed away -- see
-/// this task's report. `RelicPossessNum` still increments unconditionally,
-/// matching Python's own unconditional increment regardless of whether the
-/// flag map itself could be written.
-fn apply_unlock_flags(save_data: &mut Properties, flag_name: &str, keys: &[String]) {
-    if let Some(record_data) = save_data
-        .0
-        .get_mut(&PropertyKey::from("RecordData"))
-        .and_then(props::struct_props_mut)
-    {
-        if record_data.0.contains_key(&PropertyKey::from(flag_name)) {
-            let entries: Vec<uesave::MapEntry> = keys
-                .iter()
-                .map(|key| uesave::MapEntry {
-                    key: props::name_property(key),
-                    value: props::bool_property(true),
-                })
-                .collect();
-            record_data.insert(flag_name, Property::Map(entries));
+/// **Fixed to match Python, not narrowed:** when `RecordData` doesn't yet
+/// carry `flag_name` at all, Python creates a fresh
+/// `PalObjects.MapProperty("NameProperty", "BoolProperty")` rather than
+/// no-op'ing -- and this IS a real, reachable shape, not a hypothetical:
+/// `tests/fixtures/saves/world1`'s own real player `8C2F1930` has NO
+/// `RelicObtainForInstanceFlag` key under `RecordData` at all (verified
+/// empirically -- see this task's report), i.e. a legitimately key-less
+/// save, not merely a theoretical edge case. `props::ensure_schema`
+/// registers the `Map<NameProperty, BoolProperty>` schema `uesave`'s writer
+/// needs before it can serialize a brand-new `Map` property (see that
+/// function's own doc comment) at the SAME dotted path pattern this same
+/// player's own sibling `RecordData` fields already carry
+/// (`SaveData.RecordData.<name>`, confirmed against the real, already-parsed
+/// schema table for this exact fixture player -- see this task's report),
+/// derived via `schema_prefix_ending_with` off `RecordData` itself (which,
+/// unlike the specific flag, is always present here -- this function already
+/// returns early otherwise). The unconditional `insert` below then creates
+/// (or overwrites) the property either way, matching Python's own
+/// unconditional `self._record_data[flag_name]["value"] = [...]` regardless
+/// of whether the property was just freshly created. `RelicPossessNum` still
+/// increments unconditionally, matching Python's own unconditional
+/// increment -- and gets the exact same "register a schema for a brand-new
+/// property before writing it" treatment when IT is the one that's missing
+/// (this fixture's own real player `8C2F1930` has a
+/// `RelicObtainForInstanceFlag`-less RecordData that ALSO has no
+/// `RelicPossessNum` yet -- caught empirically with a temporary
+/// `uesave::Save::write` round trip during this task's own verification,
+/// which failed with `MissingPropertySchema("...RelicPossessNum")` before
+/// this second `ensure_schema` call was added; see this task's report).
+fn apply_unlock_flags(player_sav: &mut uesave::Save, flag_name: &str, keys: &[String]) {
+    let record_data_key = PropertyKey::from("RecordData");
+    let flag_key = PropertyKey::from(flag_name);
+    let relic_key = PropertyKey::from("RelicPossessNum");
+
+    let has_record_data = save_data_props(player_sav)
+        .ok()
+        .and_then(|save_data| save_data.0.get(&record_data_key))
+        .and_then(props::struct_props)
+        .is_some();
+    if !has_record_data {
+        return;
+    }
+
+    let record_data_contains = |key: &PropertyKey| {
+        save_data_props(player_sav)
+            .ok()
+            .and_then(|save_data| save_data.0.get(&record_data_key))
+            .and_then(props::struct_props)
+            .map(|record_data| record_data.0.contains_key(key))
+            .unwrap_or(false)
+    };
+    let flag_already_present = record_data_contains(&flag_key);
+    let relic_already_present = record_data_contains(&relic_key);
+
+    if !flag_already_present || !relic_already_present {
+        if let Some(prefix) = props::schema_prefix_ending_with(player_sav, "RecordData") {
+            if !flag_already_present {
+                props::ensure_schema(
+                    player_sav,
+                    format!("{prefix}RecordData.{flag_name}"),
+                    uesave::PropertyTagPartial {
+                        id: None,
+                        data: uesave::PropertyTagDataPartial::Map {
+                            key_type: Box::new(uesave::PropertyTagDataPartial::Other(
+                                uesave::PropertyType::NameProperty,
+                            )),
+                            value_type: Box::new(uesave::PropertyTagDataPartial::Other(
+                                uesave::PropertyType::BoolProperty,
+                            )),
+                        },
+                    },
+                );
+            }
+            if !relic_already_present {
+                props::ensure_schema(
+                    player_sav,
+                    format!("{prefix}RecordData.RelicPossessNum"),
+                    uesave::PropertyTagPartial {
+                        id: None,
+                        data: uesave::PropertyTagDataPartial::Other(
+                            uesave::PropertyType::IntProperty,
+                        ),
+                    },
+                );
+            }
         }
-        let current = record_data
-            .0
-            .get(&PropertyKey::from("RelicPossessNum"))
-            .and_then(props::as_i32)
-            .unwrap_or(0);
-        record_data.insert(
-            "RelicPossessNum",
-            props::int_property(current.saturating_add(keys.len() as i32)),
+    }
+
+    let Ok(save_data) = save_data_props_mut(player_sav) else {
+        return;
+    };
+    let Some(record_data) = save_data
+        .0
+        .get_mut(&record_data_key)
+        .and_then(props::struct_props_mut)
+    else {
+        return;
+    };
+    let entries: Vec<uesave::MapEntry> = keys
+        .iter()
+        .map(|key| uesave::MapEntry {
+            key: props::name_property(key),
+            value: props::bool_property(true),
+        })
+        .collect();
+    record_data.insert(flag_name, Property::Map(entries));
+    let current = record_data
+        .0
+        .get(&PropertyKey::from("RelicPossessNum"))
+        .and_then(props::as_i32)
+        .unwrap_or(0);
+    record_data.insert(
+        "RelicPossessNum",
+        props::int_property(current.saturating_add(keys.len() as i32)),
+    );
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn status_point_struct(name: &str, point: i32) -> StructValue {
+        let mut status_props = Properties::default();
+        status_props.insert("StatusName", props::name_property(name));
+        status_props.insert("StatusPoint", props::int_property(point));
+        StructValue::Struct(status_props)
+    }
+
+    fn names_of(save_parameter: &Properties, list_name: &str) -> Vec<String> {
+        props::struct_values(save_parameter.0.get(&PropertyKey::from(list_name)).unwrap())
+            .unwrap()
+            .iter()
+            .map(|value| {
+                let StructValue::Struct(status_props) = value else {
+                    panic!("expected a struct row");
+                };
+                status_props
+                    .0
+                    .get(&PropertyKey::from("StatusName"))
+                    .and_then(props::as_str)
+                    .unwrap()
+                    .to_string()
+            })
+            .collect()
+    }
+
+    /// A newly-found Python bug (not on the PARITY-BUG-1/2 list -- see this
+    /// task's report): `Player.status_point_list`'s setter mutates the list
+    /// while iterating it, which skips every OTHER row among a run of
+    /// consecutive "None"/unrecognized-name matches. Reproduced deliberately
+    /// (not fixed with `Vec::retain`) for save-file byte parity. This exact
+    /// four-row shape (`real, "None", "None", real`) was independently
+    /// verified against real `.venv` CPython to reduce to THREE rows, not
+    /// two -- see this task's report for the script and its output.
+    #[test]
+    fn apply_status_points_reproduces_pythons_consecutive_none_row_skip() {
+        let mut save_parameter = Properties::default();
+        save_parameter.insert(
+            "GotStatusPointList",
+            Property::Array(ValueVec::Struct(vec![
+                status_point_struct("最大HP", 0),
+                status_point_struct("None", 0),
+                status_point_struct("None", 0),
+                status_point_struct("攻撃力", 0),
+            ])),
+        );
+
+        apply_status_points(
+            &mut save_parameter,
+            "GotStatusPointList",
+            &OrderedMap::new(),
+            &STATUS_NAME_MAP,
+            true,
+        );
+
+        assert_eq!(
+            names_of(&save_parameter, "GotStatusPointList"),
+            vec![
+                "最大HP".to_string(),
+                "None".to_string(),
+                "攻撃力".to_string(),
+            ],
+            "PYTHON BUG (reproduced deliberately, see this task's report): \
+             of two CONSECUTIVE \"None\" rows, only the first is removed -- \
+             `list.remove(item)` while iterating skips the row that shifts \
+             into the just-vacated position, matching real CPython's \
+             observed output for this exact input"
+        );
+    }
+
+    /// Contrast case: non-consecutive "None" rows are NOT protected by the
+    /// skip (there's no shift to hide behind) -- both are correctly removed,
+    /// same as `Vec::retain` would produce. Proves the reproduction is
+    /// exactly the skip, not an over-broad "keep more None rows" bug.
+    #[test]
+    fn apply_status_points_removes_non_consecutive_none_rows_normally() {
+        let mut save_parameter = Properties::default();
+        save_parameter.insert(
+            "GotStatusPointList",
+            Property::Array(ValueVec::Struct(vec![
+                status_point_struct("最大HP", 0),
+                status_point_struct("None", 0),
+                status_point_struct("攻撃力", 0),
+                status_point_struct("None", 0),
+                status_point_struct("所持重量", 0),
+            ])),
+        );
+
+        apply_status_points(
+            &mut save_parameter,
+            "GotStatusPointList",
+            &OrderedMap::new(),
+            &STATUS_NAME_MAP,
+            true,
+        );
+
+        assert_eq!(
+            names_of(&save_parameter, "GotStatusPointList"),
+            vec![
+                "最大HP".to_string(),
+                "攻撃力".to_string(),
+                "所持重量".to_string(),
+            ]
         );
     }
 }
