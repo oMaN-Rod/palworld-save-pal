@@ -667,23 +667,34 @@ pub(crate) fn guild_chest_id(session: &SaveSession, guild_id: uuid::Uuid) -> Opt
 
 /// Port of `GuildOpsMixin.update_guilds` (`guild_ops.py`): progress message
 /// names the guild's UUID (`guild_ops.py:113-114`), not its name.
+///
+/// `_game_data` is currently unused by this call chain (`apply_guild_dto`'s
+/// own internals need no `GameData` -- see `apply_item_container_dto`'s doc
+/// comment on why that's true all the way down). Kept, not removed: this
+/// port's whole `update_*` family (`pal::update_pals`/`update_dps_pals`,
+/// this function, `player::update_players`) shares one uniform
+/// `(session, game_data, modified, progress)` public signature, matching
+/// this task's own established convention -- `update_pals` genuinely needs
+/// it. Changing only this one public entry point's shape for an internal
+/// implementation detail would be a bigger, less obviously safe edit than
+/// this task's review asked for.
 pub fn update_guilds(
     session: &mut SaveSession,
-    game_data: &GameData,
+    _game_data: &GameData,
     modified_guilds: &crate::dto::ordered_map::OrderedMap<uuid::Uuid, GuildDto>,
     progress: &crate::progress::ProgressSink,
 ) -> Result<(), CoreError> {
     for (guild_id, dto) in modified_guilds.iter() {
         progress(&format!("Updating guild {guild_id}"));
-        apply_guild_dto(session, game_data, *guild_id, dto)?;
+        apply_guild_dto(session, *guild_id, dto)?;
     }
     Ok(())
 }
 
-/// Port of `Guild.update_from` (`guild.py:221-241`).
+/// Port of `Guild.update_from` (`guild.py:221-241`). No `game_data:
+/// &GameData` parameter -- see `apply_item_container_dto`'s doc comment.
 pub fn apply_guild_dto(
     session: &mut SaveSession,
-    game_data: &GameData,
     guild_id: uuid::Uuid,
     dto: &GuildDto,
 ) -> Result<(), CoreError> {
@@ -712,7 +723,7 @@ pub fn apply_guild_dto(
     }
     if let Some(bases) = &dto.bases {
         for (base_id, base_dto) in bases.iter() {
-            super::containers::apply_base_dto(session, game_data, *base_id, base_dto)?;
+            super::containers::apply_base_dto(session, *base_id, base_dto)?;
         }
     }
     // `if guildDTO.guild_chest and self.guild_chest is not None:` -- both
@@ -721,9 +732,7 @@ pub fn apply_guild_dto(
     if dto.guild_chest.is_some() {
         if let Some(chest_id) = guild_chest_id(session, guild_id) {
             if let Some(chest_dto) = &dto.guild_chest {
-                super::containers::apply_item_container_dto(
-                    session, game_data, chest_id, chest_dto, None,
-                )?;
+                super::containers::apply_item_container_dto(session, chest_id, chest_dto, None)?;
             }
         }
     }

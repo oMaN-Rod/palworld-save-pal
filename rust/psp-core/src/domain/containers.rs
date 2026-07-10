@@ -912,6 +912,13 @@ pub fn upsert_dynamic_item(
 /// `player::apply_player_dto`'s own doc comment on why `dto.id` is never used
 /// for routing) -- `dto` supplies only `type`/`slots` content.
 ///
+/// No `game_data: &GameData` parameter: an earlier revision carried one
+/// (`_game_data`, prefixed to suppress the unused-parameter warning) on the
+/// mistaken assumption a future egg-schema step would need it here -- it
+/// never did (every helper this function calls, including the egg branch of
+/// `upsert_dynamic_item`/`build_dynamic_item_type`, needs no `GameData` at
+/// all). Removed rather than kept-and-justified, per this task's review.
+///
 /// **A genuine, newly-found Python bug, reproduced deliberately for save-file
 /// byte parity, not on the known list (legacy `"HP"` write /
 /// `ext_status_point_list`'s missing guard / `Guild.players`'
@@ -938,7 +945,6 @@ pub fn upsert_dynamic_item(
 /// proactively cleared. See this task's report.
 pub fn apply_item_container_dto(
     session: &mut SaveSession,
-    _game_data: &GameData,
     container_id: uuid::Uuid,
     dto: &ItemContainerDto,
     paired_common_container_id: Option<uuid::Uuid>,
@@ -1048,9 +1054,12 @@ pub fn apply_item_container_dto(
 /// unrelated container anywhere in the world (a different base's storage, a
 /// player's inventory, ...) -- the same cross-entity class of hole Task 9's
 /// review flagged Critical for `delete_player_pals`. See this task's report.
+///
+/// No `game_data: &GameData` parameter, for the same reason
+/// `apply_item_container_dto` (the only function this one ever needed it
+/// for) no longer has one -- see that function's own doc comment.
 pub fn apply_base_dto(
     session: &mut SaveSession,
-    game_data: &GameData,
     base_id: uuid::Uuid,
     dto: &BaseDto,
 ) -> Result<(), CoreError> {
@@ -1059,7 +1068,7 @@ pub fn apply_base_dto(
         if !real_container_ids.contains(container_id) {
             continue;
         }
-        apply_item_container_dto(session, game_data, *container_id, container_dto, None)?;
+        apply_item_container_dto(session, *container_id, container_dto, None)?;
     }
 
     let Some(entries) = world::base_camp_map_mut(&mut session.level)? else {
@@ -1429,8 +1438,8 @@ mod tests {
     fn read_item_container_reads_slot_num_type_and_key() {
         let container_id = uuid::Uuid::parse_str("11111111-2222-3333-4444-555555555555").unwrap();
         let save = save_with_item_container(container_id, 42, vec![], vec![]);
-        let data = game_data();
         let mut caches = WorldCaches::default();
+        let data = game_data();
 
         let dto = read_item_container(
             &save,
@@ -1452,8 +1461,8 @@ mod tests {
     #[test]
     fn read_item_container_returns_none_for_an_unknown_container_id() {
         let save = save_with_item_container(uuid::Uuid::nil(), 1, vec![], vec![]);
-        let data = game_data();
         let mut caches = WorldCaches::default();
+        let data = game_data();
 
         assert!(read_item_container(
             &save,
@@ -1471,8 +1480,8 @@ mod tests {
         let container_id = uuid::Uuid::nil();
         let slot = item_container_slot(0, 5, "Wood", props::EMPTY_UUID);
         let save = save_with_item_container(container_id, 10, vec![slot], vec![]);
-        let data = game_data();
         let mut caches = WorldCaches::default();
+        let data = game_data();
 
         let dto = read_item_container(
             &save,
@@ -1502,8 +1511,8 @@ mod tests {
             uuid::Uuid::parse_str("dddddddd-0000-0000-0000-000000000000").unwrap();
         let slot = item_container_slot(0, 1, "SomeWeapon", dangling_local_id);
         let save = save_with_item_container(container_id, 10, vec![slot], vec![]);
-        let data = game_data();
         let mut caches = WorldCaches::default();
+        let data = game_data();
 
         let dto = read_item_container(
             &save,
@@ -1538,8 +1547,8 @@ mod tests {
             },
         );
         let save = save_with_item_container(container_id, 10, vec![slot], vec![weapon]);
-        let data = game_data();
         let mut caches = WorldCaches::default();
+        let data = game_data();
 
         let dto = read_item_container(
             &save,
@@ -1579,8 +1588,8 @@ mod tests {
             },
         );
         let save = save_with_item_container(container_id, 10, vec![slot], vec![armor]);
-        let data = game_data();
         let mut caches = WorldCaches::default();
+        let data = game_data();
 
         let dto = read_item_container(
             &save,
@@ -1612,8 +1621,8 @@ mod tests {
             },
         );
         let save = save_with_item_container(container_id, 10, vec![slot], vec![unknown]);
-        let data = game_data();
         let mut caches = WorldCaches::default();
+        let data = game_data();
 
         let dto = read_item_container(
             &save,
@@ -1670,8 +1679,8 @@ mod tests {
             },
         );
         let save = save_with_item_container(container_id, 10, vec![slot], vec![egg]);
-        let data = game_data();
         let mut caches = WorldCaches::default();
+        let data = game_data();
 
         let dto = read_item_container(
             &save,
@@ -1721,8 +1730,8 @@ mod tests {
             },
         );
         let save = save_with_item_container(container_id, 10, vec![slot], vec![egg]);
-        let data = game_data();
         let mut caches = WorldCaches::default();
+        let data = game_data();
 
         let dto = read_item_container(
             &save,
@@ -1826,8 +1835,7 @@ mod tests {
             key: None,
             slot_num: 0,
         };
-        let data = game_data();
-        apply_item_container_dto(&mut session, &data, container_id, &dto, None).unwrap();
+        apply_item_container_dto(&mut session, container_id, &dto, None).unwrap();
 
         assert!(
             session.caches.dynamic_item_index.is_none(),
@@ -1884,8 +1892,7 @@ mod tests {
             key: None,
             slot_num: 0,
         };
-        let data = game_data();
-        apply_item_container_dto(&mut session, &data, container_id, &dto, None).unwrap();
+        apply_item_container_dto(&mut session, container_id, &dto, None).unwrap();
 
         assert!(
             session.caches.dynamic_item_index.is_none(),
@@ -1960,8 +1967,7 @@ mod tests {
             key: None,
             slot_num: 5,
         };
-        let data = game_data();
-        apply_item_container_dto(&mut session, &data, essential_id, &dto, Some(common_id)).unwrap();
+        apply_item_container_dto(&mut session, essential_id, &dto, Some(common_id)).unwrap();
 
         let entries = world::item_container_map(&session.level).unwrap();
         let common_entry = entries
@@ -2036,8 +2042,7 @@ mod tests {
             key: None,
             slot_num: 0,
         };
-        let data = game_data();
-        apply_item_container_dto(&mut session, &data, essential_id, &dto, Some(common_id)).unwrap();
+        apply_item_container_dto(&mut session, essential_id, &dto, Some(common_id)).unwrap();
 
         let entries = world::item_container_map(&session.level).unwrap();
         let common_entry = entries
@@ -2070,8 +2075,7 @@ mod tests {
             key: None,
             slot_num: 10,
         };
-        let data = game_data();
-        apply_item_container_dto(&mut session, &data, container_id, &dto, None).unwrap();
+        apply_item_container_dto(&mut session, container_id, &dto, None).unwrap();
 
         let entries = world::item_container_map(&session.level).unwrap();
         let value_props = props::struct_props(&entries[0].value).unwrap();
@@ -2095,8 +2099,7 @@ mod tests {
             key: None,
             slot_num: 5,
         };
-        let data = game_data();
-        apply_item_container_dto(&mut session, &data, unknown, &dto, None).unwrap();
+        apply_item_container_dto(&mut session, unknown, &dto, None).unwrap();
         // The real (nil-id) container must be completely untouched.
         let entries = world::item_container_map(&session.level).unwrap();
         let value_props = props::struct_props(&entries[0].value).unwrap();
@@ -2141,11 +2144,11 @@ mod tests {
             key: None,
             slot_num: 10,
         };
-        let data = game_data();
-        apply_item_container_dto(&mut session, &data, container_id, &dto, None).unwrap();
+        apply_item_container_dto(&mut session, container_id, &dto, None).unwrap();
         let _ = local_id; // not the minted id; kept for readability of intent
 
         let mut caches = WorldCaches::default();
+        let data = game_data();
         let reread = read_item_container(
             &session.level,
             &mut caches,
@@ -2222,10 +2225,10 @@ mod tests {
             key: None,
             slot_num: 10,
         };
-        let data = game_data();
-        apply_item_container_dto(&mut session, &data, container_id, &dto, None).unwrap();
+        apply_item_container_dto(&mut session, container_id, &dto, None).unwrap();
 
         let mut caches = WorldCaches::default();
+        let data = game_data();
         let reread = read_item_container(
             &session.level,
             &mut caches,
@@ -2244,28 +2247,185 @@ mod tests {
         assert_eq!(item.talent_hp, Some(30));
     }
 
-    /// `apply_base_dto` must reject a `storage_containers` map key that
-    /// isn't actually one of THIS base's own item containers -- see
-    /// `apply_base_dto`'s own doc comment for why this membership check
-    /// exists (a Critical-class fix over the brief's unconditional-apply
-    /// reference code). A forged container id must be silently skipped,
-    /// leaving the unrelated container completely untouched.
+    /// `PalTransform` zeroed out -- `PalMapModel.initial_transform_cache`
+    /// needs a value but this test never inspects it.
+    fn zero_map_transform() -> uesave::games::palworld::PalTransform {
+        uesave::games::palworld::PalTransform {
+            rotation: uesave::Quat {
+                x: uesave::Double(0.0),
+                y: uesave::Double(0.0),
+                z: uesave::Double(0.0),
+                w: uesave::Double(1.0),
+            },
+            translation: uesave::Vector {
+                x: uesave::Double(0.0),
+                y: uesave::Double(0.0),
+                z: uesave::Double(0.0),
+            },
+            scale: uesave::Vector {
+                x: uesave::Double(1.0),
+                y: uesave::Double(1.0),
+                z: uesave::Double(1.0),
+            },
+        }
+    }
+
+    /// One `MapObjectSaveData` element genuinely linking `base_id` to
+    /// `container_id` via an `ItemContainer` module -- the exact real-save
+    /// shape `guild::base_storage_container_ids` (and `guild::
+    /// map_object_properties_by_base_id`/`module_target_container_id`)
+    /// enumerates (`base.py:196-228`). Used to build a session where a base
+    /// GENUINELY owns a storage container, so `apply_base_dto`'s membership
+    /// check can be proven to ACCEPT the owned container in the same
+    /// fixture it REJECTS a foreign one in.
+    fn map_object_owning_container(base_id: uuid::Uuid, container_id: uuid::Uuid) -> StructValue {
+        let model = uesave::games::palworld::PalMapModel {
+            instance_id: uesave::FGuid::nil(),
+            concrete_model_instance_id: uesave::FGuid::nil(),
+            base_camp_id_belong_to: props::uuid_to_guid(base_id),
+            group_id_belong_to: uesave::FGuid::nil(),
+            hp: uesave::games::palworld::PalMapObjectHp { current: 0, max: 0 },
+            initial_transform_cache: zero_map_transform(),
+            repair_work_id: uesave::FGuid::nil(),
+            owner_spawner_level_object_instance_id: uesave::FGuid::nil(),
+            owner_instance_id: uesave::FGuid::nil(),
+            build_player_uid: uesave::FGuid::nil(),
+            interact_restrict_type: 0,
+            deterioration_damage: 0.0,
+            stage_instance_id_belong_to: uesave::games::palworld::PalStageInstanceId {
+                id: uesave::FGuid::nil(),
+                valid: 0,
+            },
+            unknown_bytes: vec![],
+        };
+        let mut model_props = Properties::default();
+        model_props.insert(
+            "RawData",
+            Property::Struct(StructValue::PalMapModel(Box::new(model))),
+        );
+
+        let module = uesave::games::palworld::PalMapConcreteModelModule {
+            module_type: "EPalMapObjectConcreteModelModuleType::ItemContainer".to_string(),
+            data: uesave::games::palworld::PalMapConcreteModelModuleData::ItemContainer {
+                target_container_id: props::uuid_to_guid(container_id),
+                slot_attribute_indexes: vec![],
+                all_slot_attribute: vec![],
+                drop_item_at_disposed: false,
+                usage_type: 0,
+                trailing_bytes: [0; 4],
+            },
+            custom_version_data: vec![],
+        };
+        let mut module_value_props = Properties::default();
+        module_value_props.insert(
+            "RawData",
+            Property::Struct(StructValue::PalMapConcreteModelModule(module)),
+        );
+        let module_entries = vec![uesave::MapEntry {
+            key: Property::Enum("EPalMapObjectConcreteModelModuleType::ItemContainer".to_string()),
+            value: Property::Struct(StructValue::Struct(module_value_props)),
+        }];
+        let mut concrete_props = Properties::default();
+        concrete_props.insert("ModuleMap", Property::Map(module_entries));
+
+        let mut object_props = Properties::default();
+        object_props.insert("Model", Property::Struct(StructValue::Struct(model_props)));
+        object_props.insert(
+            "ConcreteModel",
+            Property::Struct(StructValue::Struct(concrete_props)),
+        );
+        StructValue::Struct(object_props)
+    }
+
+    /// A session with TWO item containers -- `owned_container_id` (linked to
+    /// `base_id` via a real `MapObjectSaveData` `ItemContainer` module) and
+    /// `foreign_container_id` (present in `ItemContainerSaveData` but with
+    /// NO `MapObjectSaveData` link to `base_id` at all) -- so
+    /// `apply_base_dto`'s membership check has both a genuine positive and a
+    /// genuine negative to discriminate between in the same fixture.
+    fn session_with_base_owning_one_of_two_containers(
+        base_id: uuid::Uuid,
+        owned_container_id: uuid::Uuid,
+        foreign_container_id: uuid::Uuid,
+    ) -> SaveSession {
+        let mut key_owned = Properties::default();
+        key_owned.insert("ID", guid_property(owned_container_id));
+        let mut value_owned = Properties::default();
+        value_owned.insert("SlotNum", props::int_property(5));
+        value_owned.insert("Slots", Property::Array(ValueVec::Struct(vec![])));
+
+        let mut key_foreign = Properties::default();
+        key_foreign.insert("ID", guid_property(foreign_container_id));
+        let mut value_foreign = Properties::default();
+        value_foreign.insert("SlotNum", props::int_property(5));
+        value_foreign.insert("Slots", Property::Array(ValueVec::Struct(vec![])));
+
+        let mut world_save_data = Properties::default();
+        world_save_data.insert(
+            "ItemContainerSaveData",
+            Property::Map(vec![
+                uesave::MapEntry {
+                    key: struct_property(key_owned),
+                    value: struct_property(value_owned),
+                },
+                uesave::MapEntry {
+                    key: struct_property(key_foreign),
+                    value: struct_property(value_foreign),
+                },
+            ]),
+        );
+        world_save_data.insert(
+            "DynamicItemSaveData",
+            Property::Array(ValueVec::Struct(vec![])),
+        );
+        world_save_data.insert(
+            "MapObjectSaveData",
+            Property::Array(ValueVec::Struct(vec![map_object_owning_container(
+                base_id,
+                owned_container_id,
+            )])),
+        );
+        let mut root_properties = Properties::default();
+        root_properties.insert("worldSaveData", struct_property(world_save_data));
+        SaveSession::new_for_tests(SaveKind::InMemory, minimal_save(root_properties))
+    }
+
+    /// `apply_base_dto` must ACCEPT a `storage_containers` entry the base
+    /// genuinely owns and REJECT one it doesn't, in the SAME fixture -- see
+    /// `apply_base_dto`'s own doc comment for why the membership check is
+    /// load-bearing (a Critical-class fix over the brief's unconditional-
+    /// apply reference code), and this task's review, which asked whether
+    /// the check over-restricts: it doesn't -- the owned container's real
+    /// edit lands, proving the check isn't just an always-reject bug that
+    /// happens to also pass the negative case.
     #[test]
-    fn apply_base_dto_rejects_a_container_id_that_does_not_belong_to_this_base() {
+    fn apply_base_dto_accepts_the_owned_container_and_rejects_the_foreign_one() {
         let base_id = uuid::Uuid::parse_str("bbbbbbbb-0000-0000-0000-000000000000").unwrap();
-        let unrelated_container_id =
+        let owned_container_id =
+            uuid::Uuid::parse_str("dddddddd-0000-0000-0000-000000000000").unwrap();
+        let foreign_container_id =
             uuid::Uuid::parse_str("cccccccc-0000-0000-0000-000000000000").unwrap();
-        // A container that exists in the save but is NOT registered as one
-        // of base_id's own storage containers (no MapObjectSaveData entry
-        // links them) -- base_storage_container_ids(session, base_id) must
-        // therefore come back empty, and apply_base_dto must not touch it.
-        let mut session = session_with_item_container(unrelated_container_id, 5, vec![], vec![]);
+        let mut session = session_with_base_owning_one_of_two_containers(
+            base_id,
+            owned_container_id,
+            foreign_container_id,
+        );
 
         let mut storage_containers = crate::dto::ordered_map::OrderedMap::new();
         storage_containers.insert(
-            unrelated_container_id,
+            owned_container_id,
             ItemContainerDto {
-                id: unrelated_container_id,
+                id: owned_container_id,
+                r#type: "BaseContainer".to_string(),
+                slots: vec![slot_dto(0, 5, "Wood", None)],
+                key: None,
+                slot_num: 5,
+            },
+        );
+        storage_containers.insert(
+            foreign_container_id,
+            ItemContainerDto {
+                id: foreign_container_id,
                 r#type: "BaseContainer".to_string(),
                 slots: vec![slot_dto(0, 1, "Wood", None)],
                 key: None,
@@ -2283,17 +2443,46 @@ mod tests {
             location: None,
             area_range: None,
         };
-        let data = game_data();
-        apply_base_dto(&mut session, &data, base_id, &base_dto).unwrap();
+        apply_base_dto(&mut session, base_id, &base_dto).unwrap();
 
         let entries = world::item_container_map(&session.level).unwrap();
-        let value_props = props::struct_props(&entries[0].value).unwrap();
-        let slots = props::get(value_props, &["Slots"])
+        let owned_slots = entries
+            .iter()
+            .find(|entry| {
+                props::struct_props(&entry.key)
+                    .and_then(|key| props::get(key, &["ID"]))
+                    .and_then(props::as_uuid)
+                    == Some(owned_container_id)
+            })
+            .and_then(|entry| props::struct_props(&entry.value))
+            .and_then(|value_props| props::get(value_props, &["Slots"]))
+            .and_then(props::struct_values)
+            .unwrap();
+        assert_eq!(
+            owned_slots.len(),
+            1,
+            "the container this base genuinely owns must actually be mutated"
+        );
+        let raw = raw_container_slot(&owned_slots[0], 0).expect("real slot written");
+        assert_eq!(raw.count, 5, "the real edit's content must have landed");
+        assert_eq!(raw.item.static_id, "Wood");
+
+        let foreign_slots = entries
+            .iter()
+            .find(|entry| {
+                props::struct_props(&entry.key)
+                    .and_then(|key| props::get(key, &["ID"]))
+                    .and_then(props::as_uuid)
+                    == Some(foreign_container_id)
+            })
+            .and_then(|entry| props::struct_props(&entry.value))
+            .and_then(|value_props| props::get(value_props, &["Slots"]))
             .and_then(props::struct_values)
             .unwrap();
         assert!(
-            slots.is_empty(),
-            "a container id outside this base's real storage set must never be mutated"
+            foreign_slots.is_empty(),
+            "a container id outside this base's real storage set must never be mutated, \
+             even when a genuinely-owned container is edited in the SAME call"
         );
     }
 }
