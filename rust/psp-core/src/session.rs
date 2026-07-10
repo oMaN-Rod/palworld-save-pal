@@ -397,14 +397,182 @@ mod load_tests {
         assert!(result.is_err());
     }
 
+    /// Python's `_load_world_name`: `world_name if world_name else "Unknown"`
+    /// (`palworld_save_pal/game/save_manager.py`). Four distinct shapes of
+    /// `LevelMeta.sav`'s property tree, each asserted separately so a
+    /// regression in any one branch fails on its own name.
     #[test]
-    fn test_world_name_fallbacks() {
-        // No meta bytes → constant string (checked inside load; here we check
-        // the pure helper used for present-but-empty names).
+    fn test_world_name_falls_back_to_unknown_when_save_data_absent() {
         assert_eq!(
             "Unknown",
             world_name_from_meta_properties(&uesave::Properties::default())
         );
+    }
+
+    #[test]
+    fn test_world_name_falls_back_to_unknown_when_world_name_absent() {
+        let mut properties = uesave::Properties::default();
+        properties.insert("SaveData", struct_property(uesave::Properties::default()));
+
+        assert_eq!("Unknown", world_name_from_meta_properties(&properties));
+    }
+
+    #[test]
+    fn test_world_name_falls_back_to_unknown_when_world_name_empty() {
+        let mut save_data = uesave::Properties::default();
+        save_data.insert("WorldName", uesave::Property::Str(String::new()));
+        let mut properties = uesave::Properties::default();
+        properties.insert("SaveData", struct_property(save_data));
+
+        assert_eq!("Unknown", world_name_from_meta_properties(&properties));
+    }
+
+    #[test]
+    fn test_world_name_uses_present_non_empty_value() {
+        let mut save_data = uesave::Properties::default();
+        save_data.insert("WorldName", uesave::Property::Str("My World".to_string()));
+        let mut properties = uesave::Properties::default();
+        properties.insert("SaveData", struct_property(save_data));
+
+        assert_eq!("My World", world_name_from_meta_properties(&properties));
+    }
+
+    /// Builds a `uesave::Save` whose only content that matters to
+    /// `world_properties`/`required_map`/`optional_map` is `properties` at
+    /// the property-tree root; the header/schema fields only matter to the
+    /// (de)serializer, which these tests never touch.
+    fn minimal_uesave_save(properties: uesave::Properties) -> uesave::Save {
+        uesave::Save {
+            header: uesave::Header {
+                magic: 0,
+                save_game_version: 0,
+                package_version: uesave::PackageVersion { ue4: 0, ue5: None },
+                engine_version_major: 0,
+                engine_version_minor: 0,
+                engine_version_patch: 0,
+                engine_version_build: 0,
+                engine_version: String::new(),
+                custom_version: None,
+            },
+            schemas: uesave::PropertySchemas::default(),
+            root: uesave::Root {
+                save_game_type: String::new(),
+                properties,
+            },
+            extra: Vec::new(),
+        }
+    }
+
+    /// A `SaveSession` whose `level` is built from `root_properties` and
+    /// every other field is a harmless placeholder — enough to exercise
+    /// `world_properties`/`required_map`/`optional_map`, the only methods
+    /// these tests call.
+    fn session_with_level_properties(root_properties: uesave::Properties) -> SaveSession {
+        SaveSession {
+            kind: SaveKind::InMemory,
+            world_name: "Test".to_string(),
+            level: minimal_uesave_save(root_properties),
+            save_id: "test".to_string(),
+            save_type_label: "steam",
+            size: 0,
+            level_meta: None,
+            player_file_refs: std::collections::BTreeMap::new(),
+            player_sav_cache: std::collections::HashMap::new(),
+            player_summaries: std::collections::BTreeMap::new(),
+            guild_summaries: std::collections::BTreeMap::new(),
+            character_index: std::collections::HashMap::new(),
+            item_container_index: std::collections::HashMap::new(),
+            character_container_index: std::collections::HashMap::new(),
+            group_index: std::collections::HashMap::new(),
+            guild_extra_index: std::collections::HashMap::new(),
+            gps_file_path: None,
+            gps_loaded: false,
+        }
+    }
+
+    fn struct_property(properties: uesave::Properties) -> uesave::Property {
+        uesave::Property::Struct(uesave::StructValue::Struct(properties))
+    }
+
+    fn empty_map_property() -> uesave::Property {
+        uesave::Property::Map(Vec::new())
+    }
+
+    #[test]
+    fn test_world_properties_missing_from_level_returns_parse_error() {
+        let session = session_with_level_properties(uesave::Properties::default());
+
+        match session.world_properties().unwrap_err() {
+            CoreError::Parse(message) => {
+                assert_eq!("worldSaveData missing from Level.sav", message)
+            }
+            other => panic!("expected CoreError::Parse, got {other:?}"),
+        }
+    }
+
+    /// Python raises on absence for these four maps (`_set_data`'s
+    /// unconditional `["..."]` indexing); each must fail with a message
+    /// naming the missing map, not panic.
+    #[test]
+    fn test_required_maps_missing_from_world_save_data_return_named_parse_errors() {
+        let mut root_properties = uesave::Properties::default();
+        root_properties.insert(
+            "worldSaveData",
+            struct_property(uesave::Properties::default()),
+        );
+        let session = session_with_level_properties(root_properties);
+
+        let cases: [(Result<&[uesave::MapEntry], CoreError>, &str); 4] = [
+            (session.character_map(), "CharacterSaveParameterMap"),
+            (session.item_container_map(), "ItemContainerSaveData"),
+            (
+                session.character_container_map(),
+                "CharacterContainerSaveData",
+            ),
+            (session.group_map(), "GroupSaveDataMap"),
+        ];
+
+        for (result, name) in cases {
+            match result.unwrap_err() {
+                CoreError::Parse(message) => {
+                    assert_eq!(format!("{name} missing from worldSaveData"), message)
+                }
+                other => panic!("expected CoreError::Parse for {name}, got {other:?}"),
+            }
+        }
+    }
+
+    /// `BaseCampSaveData` and `GuildExtraSaveDataMap` are optional (Python
+    /// guards both with `"... in world_save_data"`): their absence must
+    /// come back `None`, never an `Err`.
+    #[test]
+    fn test_optional_maps_absent_from_world_save_data_return_none_not_error() {
+        let mut root_properties = uesave::Properties::default();
+        root_properties.insert(
+            "worldSaveData",
+            struct_property(uesave::Properties::default()),
+        );
+        let session = session_with_level_properties(root_properties);
+
+        assert!(session.base_camp_map().is_none());
+        assert!(session.guild_extra_map().is_none());
+    }
+
+    #[test]
+    fn test_optional_maps_present_in_world_save_data_return_their_entries() {
+        let mut world_save_data = uesave::Properties::default();
+        world_save_data.insert("BaseCampSaveData", empty_map_property());
+        world_save_data.insert("GuildExtraSaveDataMap", empty_map_property());
+        let mut root_properties = uesave::Properties::default();
+        root_properties.insert("worldSaveData", struct_property(world_save_data));
+        let session = session_with_level_properties(root_properties);
+
+        assert!(session
+            .base_camp_map()
+            .is_some_and(|entries| entries.is_empty()));
+        assert!(session
+            .guild_extra_map()
+            .is_some_and(|entries| entries.is_empty()));
     }
 
     /// `test_load_rejects_garbage_bytes` only proves *some* error comes back;
