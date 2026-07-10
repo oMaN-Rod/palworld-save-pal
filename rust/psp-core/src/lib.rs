@@ -3,4 +3,5 @@ pub mod dto;
 pub mod error;
 pub mod gamedata;
 pub mod progress;
+pub mod props;
 pub mod session;
