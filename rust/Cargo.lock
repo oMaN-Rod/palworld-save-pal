@@ -1362,6 +1362,8 @@ version = "0.17.3"
 dependencies = [
  "anyhow",
  "axum",
+ "base64",
+ "chrono",
  "clap",
  "futures",
  "http-body-util",

@@ -171,6 +171,18 @@ async fn route(
         MessageType::DeleteGuild => {
             handlers::guilds::handle_delete_guild(serde_json::from_value(data)?, ctx).await
         }
+        // Phase 2 (Task 14): save-file handlers. None of these four was
+        // previously registered — they all fell through to the catch-all.
+        MessageType::UpdateSaveFile => {
+            handlers::save_file::handle_update_save_file(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::DownloadSaveFile => handlers::save_file::handle_download_save_file(ctx).await,
+        MessageType::SaveModdedSave => {
+            handlers::save_file::handle_save_modded_save(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::RenameWorld => {
+            handlers::save_file::handle_rename_world(serde_json::from_value(data)?, ctx).await
+        }
         // Remaining arms are added by Phases 1-6.
         other => {
             tracing::warn!(

@@ -80,6 +80,25 @@ async fn recv_until(socket: &mut WsClient, stop_type: &str) -> Vec<Value> {
     frames
 }
 
+/// Like `recv_until` but also stops (with a panic dumping the payload) on an
+/// `error` frame — so a handler failure surfaces its message instead of
+/// hanging the test until the receive timeout.
+async fn recv_until_type_or_error(socket: &mut WsClient, stop_type: &str) -> Vec<Value> {
+    let mut frames = Vec::new();
+    loop {
+        let frame = recv(socket).await;
+        let message_type = frame["type"].as_str().unwrap_or_default().to_string();
+        frames.push(frame.clone());
+        if message_type == "error" && stop_type != "error" {
+            panic!("unexpected error frame while awaiting {stop_type}: {frame}");
+        }
+        if message_type == stop_type {
+            break;
+        }
+    }
+    frames
+}
+
 /// select_save the committed world1 fixture and drain to get_guild_summaries.
 /// Returns the collected frames.
 async fn load_world1(socket: &mut WsClient) -> Vec<Value> {
@@ -287,6 +306,228 @@ async fn player_details_then_add_then_delete_flow() {
     // the next request's answer must arrive immediately.
     send(&mut socket, json!({"type": "get_version"})).await;
     assert_eq!(recv(&mut socket).await["type"], "get_version");
+
+    server.shutdown().await;
+}
+
+// ---------------------------------------------------------------------------
+// Task 14 — save-file handlers.
+// ---------------------------------------------------------------------------
+
+#[tokio::test]
+async fn update_save_file_without_save_errors_with_object_payload() {
+    let (server, _scratch) = start_test_server().await;
+    let mut socket = connect(server.addr).await;
+
+    // Python `raise ValueError("No save file loaded")` → dispatcher `error`
+    // frame with the {message, trace} object shape.
+    send(
+        &mut socket,
+        json!({"type": "update_save_file", "data": {"modified_pals": {}}}),
+    )
+    .await;
+    let frame = recv(&mut socket).await;
+    assert_eq!(frame["type"], "error");
+    assert_eq!(frame["data"]["message"], "No save file loaded");
+    assert!(frame["data"]["trace"].is_string());
+    server.shutdown().await;
+}
+
+#[tokio::test]
+async fn download_save_file_without_save_errors() {
+    let (server, _scratch) = start_test_server().await;
+    let mut socket = connect(server.addr).await;
+
+    send(&mut socket, json!({"type": "download_save_file"})).await;
+    let frame = recv(&mut socket).await;
+    assert_eq!(frame["type"], "error");
+    assert_eq!(frame["data"]["message"], "No save file loaded");
+    server.shutdown().await;
+}
+
+#[tokio::test]
+async fn rename_world_without_save_errors() {
+    let (server, _scratch) = start_test_server().await;
+    let mut socket = connect(server.addr).await;
+
+    // data is a BARE string.
+    send(
+        &mut socket,
+        json!({"type": "rename_world", "data": "Whatever"}),
+    )
+    .await;
+    let frame = recv(&mut socket).await;
+    assert_eq!(frame["type"], "error");
+    assert_eq!(frame["data"]["message"], "No save file loaded");
+    server.shutdown().await;
+}
+
+#[tokio::test]
+async fn save_modded_save_without_save_errors() {
+    let (server, _scratch) = start_test_server().await;
+    let mut socket = connect(server.addr).await;
+
+    // data is a BARE world-name string. No save loaded → error frame; this
+    // NEVER reaches the disk-write path, so it cannot touch any real save.
+    send(
+        &mut socket,
+        json!({"type": "save_modded_save", "data": "MyWorld"}),
+    )
+    .await;
+    let frame = recv(&mut socket).await;
+    assert_eq!(frame["type"], "error");
+    assert_eq!(frame["data"]["message"], "No save file loaded");
+    server.shutdown().await;
+}
+
+#[tokio::test]
+async fn rename_world_renames_and_reports_old_and_new_name() {
+    let (server, _scratch) = start_test_server().await;
+    let mut socket = connect(server.addr).await;
+
+    let load_frames = load_world1(&mut socket).await;
+    let loaded = load_frames
+        .iter()
+        .find(|f| f["type"] == "loaded_save_files")
+        .expect("select_save emits loaded_save_files");
+    let old_world_name = loaded["data"]["world_name"].as_str().unwrap().to_string();
+
+    send(
+        &mut socket,
+        json!({"type": "rename_world", "data": "RenamedByTest"}),
+    )
+    .await;
+    let frame = recv(&mut socket).await;
+    assert_eq!(frame["type"], "rename_world");
+    assert_eq!(
+        frame["data"],
+        format!("World renamed from '{old_world_name}' to 'RenamedByTest'")
+    );
+    server.shutdown().await;
+}
+
+#[tokio::test]
+async fn update_then_download_save_file_round_trip() {
+    let (server, _scratch) = start_test_server().await;
+    let mut socket = connect(server.addr).await;
+
+    let load_frames = load_world1(&mut socket).await;
+    let player_summaries = load_frames
+        .iter()
+        .find(|f| f["type"] == "get_player_summaries")
+        .expect("select_save emits get_player_summaries");
+    let player_ids: Vec<String> = player_summaries["data"]
+        .as_object()
+        .expect("player summaries is an object")
+        .keys()
+        .cloned()
+        .collect();
+
+    // Lazily load players until we find one carrying at least one existing
+    // pal, then edit THAT pal (an already-serializable, save-resident pal —
+    // editing it keeps Level.sav byte-valid, unlike a freshly-added pal). The
+    // loaded player is also what puts an entry in `player_sav_bytes` for the
+    // download step.
+    let mut chosen: Option<(String, String, Value)> = None;
+    let mut loaded_player_count: usize = 0;
+    for player_id in &player_ids {
+        send(
+            &mut socket,
+            json!({"type": "request_player_details",
+                   "data": {"player_id": player_id, "origin": "edit"}}),
+        )
+        .await;
+        let detail_frames =
+            recv_until_type_or_error(&mut socket, "get_player_details_response").await;
+        loaded_player_count += 1;
+        let details = detail_frames.last().unwrap();
+        if let Some((pal_id, pal_dto)) = details["data"]["player"]["pals"]
+            .as_object()
+            .and_then(|pals| pals.iter().next())
+        {
+            chosen = Some((player_id.clone(), pal_id.clone(), pal_dto.clone()));
+            break;
+        }
+    }
+    let (player_id, pal_id, pal_dto) =
+        chosen.expect("at least one world1 player carries an editable pal");
+    let mut edited_pal = pal_dto.clone();
+    edited_pal["nickname"] = json!("RoundTripRenamed");
+
+    // update_save_file with a single modified pal. Progress messages
+    // ("Updating pal ...", "Saving changes to file") must precede the
+    // update_save_file frame, whose data is the exact string "Changes saved".
+    send(
+        &mut socket,
+        json!({"type": "update_save_file",
+               "data": {"modified_pals": {pal_id: edited_pal}}}),
+    )
+    .await;
+    let update_frames = recv_until_type_or_error(&mut socket, "update_save_file").await;
+    let update_response = update_frames.last().unwrap();
+    let update_index = update_frames.len() - 1;
+    assert!(
+        update_frames[..update_index]
+            .iter()
+            .any(|f| f["type"] == "progress_message"),
+        "a progress_message must precede update_save_file, got {update_frames:?}"
+    );
+    assert_eq!(update_response["data"], "Changes saved");
+
+    // download_save_file: the four progress strings in order, then a
+    // download_save_file frame carrying a one-element array whose zip decodes
+    // and contains Level.sav plus the loaded player's LOWERCASE-named .sav.
+    send(&mut socket, json!({"type": "download_save_file"})).await;
+    let download_frames = recv_until_type_or_error(&mut socket, "download_save_file").await;
+    let progress_texts: Vec<String> = download_frames
+        .iter()
+        .filter(|f| f["type"] == "progress_message")
+        .map(|f| f["data"].as_str().unwrap_or_default().to_string())
+        .collect();
+    assert_eq!(
+        vec![
+            "Generating save files in memory... 💾".to_string(),
+            "Creating ZIP archive... 🤏".to_string(),
+            format!(
+                "Archive created with Level.sav and {loaded_player_count} player(s) data. Encoding..."
+            ),
+            "Sending ZIP file to client... 🚀".to_string(),
+        ],
+        progress_texts,
+        "download progress strings and order must match Python byte-for-byte"
+    );
+
+    let download_response = download_frames.last().unwrap();
+    let entries = download_response["data"]
+        .as_array()
+        .expect("download data is an ARRAY");
+    assert_eq!(1, entries.len());
+    let name = entries[0]["name"].as_str().unwrap();
+    assert!(
+        name.ends_with(".zip"),
+        "download name must end .zip, got {name}"
+    );
+    let content_b64 = entries[0]["content"].as_str().unwrap();
+
+    use base64::Engine as _;
+    let zip_bytes = base64::engine::general_purpose::STANDARD
+        .decode(content_b64)
+        .expect("content is valid base64");
+    let mut archive = zip::ZipArchive::new(std::io::Cursor::new(zip_bytes)).expect("valid zip");
+    let names: Vec<String> = (0..archive.len())
+        .map(|i| archive.by_index(i).unwrap().name().to_string())
+        .collect();
+    assert!(
+        names.iter().any(|n| n == "Level.sav"),
+        "zip must contain Level.sav, got {names:?}"
+    );
+    let lower_stem = player_id.replace('-', "").to_lowercase();
+    assert!(
+        names
+            .iter()
+            .any(|n| n == &format!("Players/{lower_stem}.sav")),
+        "zip must contain the loaded player's lowercase-named .sav, got {names:?}"
+    );
 
     server.shutdown().await;
 }

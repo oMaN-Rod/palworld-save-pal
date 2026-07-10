@@ -14,11 +14,19 @@
 //! `handle_select_save` below is deliberately ignorant of desktop mode.
 
 use std::collections::BTreeMap;
-use std::io::Read;
+use std::io::{Read, Write};
 use std::path::{Path, PathBuf};
 
+use base64::Engine as _;
+use psp_core::domain::{guild, pal, player};
+use psp_core::dto::guild::GuildDto;
+use psp_core::dto::ordered_map::OrderedMap;
+use psp_core::dto::pal::PalDto;
+use psp_core::dto::player::PlayerDto;
 use psp_core::error::CoreError;
+use psp_core::progress::ProgressSink;
 use psp_core::session::{PlayerFileData, SaveKind, SaveSession};
+use serde_json::json;
 use uuid::Uuid;
 
 use crate::dispatcher::HandlerCtx;
@@ -501,6 +509,374 @@ pub async fn handle_load_zip_file(
     Ok(())
 }
 
+// ---------------------------------------------------------------------------
+// update_save_file — port of save_file_handler.py::update_save_file_handler.
+// ---------------------------------------------------------------------------
+
+/// ws/messages.py:270-275 `UpdateSaveFileData`. Every field is `Optional`
+/// (defaults to `None`); Python then treats an EMPTY dict as falsy
+/// (`data.modified_x if data.modified_x else None`), so both a missing key
+/// and a present-but-empty object skip that update section.
+///
+/// The int-keyed maps (`modified_dps_pals`, `modified_gps_pals`) deserialize
+/// from a JSON object whose keys are strings — `OrderedMap`'s `Deserialize`
+/// routes each key through `serde_json`'s map-key handling, which parses
+/// `"0"` → `0i32` (proven in `int_keyed_ordered_map_deserializes_from_string_keys`).
+///
+/// Deviation from the brief: the brief typed these as `IndexMap<...>`;
+/// `indexmap` is forbidden in this port, so they are the project's own
+/// `psp_core::dto::ordered_map::OrderedMap<K, V>` instead — the exact type
+/// the `pal`/`player`/`guild` `update_*` entry points already take.
+#[derive(Debug, serde::Deserialize)]
+pub struct UpdateSaveFileData {
+    #[serde(default)]
+    pub modified_pals: Option<OrderedMap<Uuid, PalDto>>,
+    #[serde(default)]
+    pub modified_dps_pals: Option<OrderedMap<i32, PalDto>>,
+    #[serde(default)]
+    pub modified_players: Option<OrderedMap<Uuid, PlayerDto>>,
+    #[serde(default)]
+    pub modified_guilds: Option<OrderedMap<Uuid, GuildDto>>,
+    #[serde(default)]
+    pub modified_gps_pals: Option<OrderedMap<i32, PalDto>>,
+}
+
+/// Port of `update_save_file_handler`. Apply order is load-bearing (pals →
+/// players → guilds → dps → gps), matching Python; each section is skipped
+/// when its map is absent or empty (`if data.modified_x else None`). On
+/// success emits `update_save_file` with the exact Python string
+/// `"Changes saved"`.
+///
+/// No-save path: Python `raise ValueError("No save file loaded")`, which the
+/// ws manager turns into an `error` frame `{message, trace}` whose `message`
+/// is that exact string — reproduced here as `HandlerError::Other` (NOT
+/// `save_mut()?`, whose `CoreError::SaveNotLoaded` displays the different
+/// string `"no save loaded"`).
+///
+/// GPS path: Phase 3 doesn't load GPS, and Python's `update_gps_pals`
+/// (`pal_ops.py:358-362`) `raise ValueError("No GPS pals to update.")` the
+/// moment `self._gps_pals` is empty — before emitting any per-pal progress.
+/// With no `update_gps_pals` in this port yet, a non-empty `modified_gps_pals`
+/// reproduces that exact error string via the same `error`-frame path, and
+/// only AFTER the earlier sections have applied (matching Python's ordering,
+/// where gps is the last section reached).
+pub async fn handle_update_save_file(
+    data: UpdateSaveFileData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let progress = ctx.emitter.progress_sink();
+    let game_data = &ctx.app.game_data;
+    let Some(session) = ctx.session.save.as_mut() else {
+        return Err(HandlerError::Other("No save file loaded".to_string()));
+    };
+
+    if let Some(modified_pals) = data.modified_pals.filter(|map| !map.is_empty()) {
+        pal::update_pals(session, game_data, &modified_pals, &progress)?;
+    }
+    if let Some(modified_players) = data.modified_players.filter(|map| !map.is_empty()) {
+        player::update_players(session, game_data, &modified_players, &progress)?;
+    }
+    if let Some(modified_guilds) = data.modified_guilds.filter(|map| !map.is_empty()) {
+        guild::update_guilds(session, game_data, &modified_guilds, &progress)?;
+    }
+    if let Some(modified_dps_pals) = data.modified_dps_pals.filter(|map| !map.is_empty()) {
+        pal::update_dps_pals(session, game_data, &modified_dps_pals, &progress)?;
+    }
+    if data.modified_gps_pals.is_some_and(|map| !map.is_empty()) {
+        // GPS storage is Phase 3; matches Python's immediate raise.
+        return Err(HandlerError::Other("No GPS pals to update.".to_string()));
+    }
+
+    ctx.emitter
+        .emit(MessageType::UpdateSaveFile, &"Changes saved");
+    Ok(())
+}
+
+// ---------------------------------------------------------------------------
+// download_save_file — port of save_file_handler.py::download_save_file_handler.
+// ---------------------------------------------------------------------------
+
+/// A player's uuid as it appears inside the DOWNLOAD zip: `str(uuid).replace(
+/// "-", "")` — LOWERCASE hex, no dashes (Python's `uuid.UUID` stringifies
+/// lowercase and the download handler does not `.upper()` it, unlike the
+/// on-disk `save_modded` write path). See `download_player_stem_is_lowercase`.
+fn download_player_stem(player_id: &Uuid) -> String {
+    player_id.simple().to_string()
+}
+
+/// Port of `download_save_file_handler`. Builds an in-memory DEFLATE zip
+/// (`Level.sav`, then `Players/<lower-hex>.sav` and its `_dps.sav` companion
+/// for every lazily-loaded player) and emits it as a one-element ARRAY
+/// `[{"name": "<world|PSP>_<ts>.zip", "content": <base64>}]`. The four
+/// progress strings (with their emoji) and their ORDER are wire-visible and
+/// copied byte-for-byte from Python. GPS is Phase 3 and never present here,
+/// so `gps_msg` is always empty.
+pub async fn handle_download_save_file(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
+    let progress = ctx.emitter.progress_sink();
+    let Some(session) = ctx.session.save.as_ref() else {
+        return Err(HandlerError::Other("No save file loaded".to_string()));
+    };
+
+    progress("Generating save files in memory... 💾");
+    let level_sav_bytes = session.level_sav_bytes()?;
+    let player_files = session.player_sav_bytes()?;
+
+    progress("Creating ZIP archive... 🤏");
+    let mut zip_cursor = std::io::Cursor::new(Vec::new());
+    let mut player_count: usize = 0;
+    {
+        let mut zip_writer = zip::ZipWriter::new(&mut zip_cursor);
+        let options = zip::write::SimpleFileOptions::default()
+            .compression_method(zip::CompressionMethod::Deflated);
+        zip_writer
+            .start_file("Level.sav", options)
+            .map_err(|zip_error| HandlerError::Other(zip_error.to_string()))?;
+        zip_writer
+            .write_all(&level_sav_bytes)
+            .map_err(CoreError::Io)?;
+        for (player_id, (sav_bytes, dps_bytes)) in &player_files {
+            let stem = download_player_stem(player_id);
+            zip_writer
+                .start_file(format!("Players/{stem}.sav"), options)
+                .map_err(|zip_error| HandlerError::Other(zip_error.to_string()))?;
+            zip_writer.write_all(sav_bytes).map_err(CoreError::Io)?;
+            player_count += 1;
+            if let Some(dps_bytes) = dps_bytes {
+                zip_writer
+                    .start_file(format!("Players/{stem}_dps.sav"), options)
+                    .map_err(|zip_error| HandlerError::Other(zip_error.to_string()))?;
+                zip_writer.write_all(dps_bytes).map_err(CoreError::Io)?;
+            }
+        }
+        zip_writer
+            .finish()
+            .map_err(|zip_error| HandlerError::Other(zip_error.to_string()))?;
+    }
+    let zip_bytes = zip_cursor.into_inner();
+
+    progress(&format!(
+        "Archive created with Level.sav and {player_count} player(s) data. Encoding..."
+    ));
+    let encoded_zip = base64::engine::general_purpose::STANDARD.encode(&zip_bytes);
+
+    let timestamp = chrono::Local::now().format("%Y%m%d_%H%M%S").to_string();
+    let world_name = if session.world_name.is_empty() {
+        "PSP"
+    } else {
+        session.world_name.as_str()
+    };
+    let filename = format!("{world_name}_{timestamp}.zip");
+
+    progress("Sending ZIP file to client... 🚀");
+    ctx.emitter.emit(
+        MessageType::DownloadSaveFile,
+        &json!([{ "name": filename, "content": encoded_zip }]),
+    );
+    Ok(())
+}
+
+// ---------------------------------------------------------------------------
+// save_modded_save — port of local_file_handler.py::save_modded_save_handler
+// (Steam branch only; GamePass is Phase 4).
+// ---------------------------------------------------------------------------
+
+/// A player's uuid as it appears in the ON-DISK Steam write: `str(uuid).
+/// replace("-", "").upper()` — UPPERCASE hex, no dashes (serialization.py:218,
+/// so Palworld's case-sensitive-filesystem read path finds the record). This
+/// is deliberately DIFFERENT from `download_player_stem` (lowercase). See
+/// `save_modded_player_stem_is_uppercase`.
+fn save_modded_player_stem(player_id: &Uuid) -> String {
+    player_id.simple().to_string().to_uppercase()
+}
+
+/// Recursive directory copy, standing in for Python's `shutil.copytree`
+/// (`backup_dir`). Creates `dst` and mirrors every file/subdirectory under
+/// `src` into it.
+fn copy_dir_recursive(src: &Path, dst: &Path) -> std::io::Result<()> {
+    std::fs::create_dir_all(dst)?;
+    for dir_entry in std::fs::read_dir(src)? {
+        let dir_entry = dir_entry?;
+        let entry_path = dir_entry.path();
+        let dest_path = dst.join(dir_entry.file_name());
+        if entry_path.is_dir() {
+            copy_dir_recursive(&entry_path, &dest_path)?;
+        } else {
+            std::fs::copy(&entry_path, &dest_path)?;
+        }
+    }
+    Ok(())
+}
+
+/// Port of `local_file_handler.py::backup_dir`. `backup_base` is Python's
+/// `f"backups/{save_type}"` — a CWD-RELATIVE `backups/steam` (verified: the
+/// brief's claim that this path is "almost certainly wrong" is itself wrong;
+/// Python really does root the backup at the process CWD). Kept relative to
+/// match, but injected as a parameter so tests can point it at a `TempDir`.
+///
+/// Backup dir name is `{basename(save_dir)}_{%Y-%m-%d-%H-%M}`, with a
+/// `_{%S}` suffix appended if that already exists (Python's collision guard).
+/// A missing `save_dir` emits the exact "skipping backup" progress string
+/// instead of copying. After copy, a nested `backup/` subdir (if any) is
+/// removed, matching Python.
+fn backup_save_directory(
+    save_dir: &Path,
+    backup_base: &Path,
+    progress: &ProgressSink,
+) -> Result<(), HandlerError> {
+    std::fs::create_dir_all(backup_base).map_err(CoreError::Io)?;
+    let dir_basename = save_dir
+        .file_name()
+        .map(|name| name.to_string_lossy().into_owned())
+        .unwrap_or_default();
+    let timestamp = chrono::Local::now().format("%Y-%m-%d-%H-%M").to_string();
+    let mut backup_path = backup_base.join(format!("{dir_basename}_{timestamp}"));
+    if backup_path.exists() {
+        let seconds = chrono::Local::now().format("%S").to_string();
+        backup_path = backup_base.join(format!("{dir_basename}_{timestamp}_{seconds}"));
+    }
+
+    progress("Backing up save directory... 🤓");
+    if save_dir.exists() {
+        copy_dir_recursive(save_dir, &backup_path).map_err(CoreError::Io)?;
+    } else {
+        progress(&format!(
+            "Save directory {} not found, skipping backup",
+            save_dir.display()
+        ));
+    }
+
+    let nested_backup_dir = backup_path.join("backup");
+    if nested_backup_dir.exists() {
+        std::fs::remove_dir_all(&nested_backup_dir).map_err(CoreError::Io)?;
+    }
+    Ok(())
+}
+
+/// Pure write half of `save_modded_steam_save`, factored out so the full
+/// backup+overwrite path is hermetically testable against a `TempDir`
+/// without touching the owner's real save_dir, the committed fixtures, or the
+/// process CWD. Writes `Level.sav` to `level_path` (the session's own level
+/// path, which may differ from `save_dir`), then `LevelMeta.sav` and every
+/// loaded player's `.sav`/`_dps.sav` (UPPERCASE-hex names) under `save_dir`.
+/// Progress strings and their order match Python exactly.
+fn write_steam_modded_save(
+    session: &SaveSession,
+    level_path: &Path,
+    save_dir: &Path,
+    backup_base: &Path,
+    progress: &ProgressSink,
+) -> Result<(), HandlerError> {
+    backup_save_directory(save_dir, backup_base, progress)?;
+
+    progress("Writing new save file... 🚀");
+    let level_sav_bytes = session.level_sav_bytes()?;
+    if let Some(parent) = level_path.parent() {
+        std::fs::create_dir_all(parent).map_err(CoreError::Io)?;
+    }
+    std::fs::write(level_path, &level_sav_bytes).map_err(CoreError::Io)?;
+
+    progress("Writing Level Meta file");
+    let level_meta_bytes = session
+        .level_meta_sav_bytes()?
+        .ok_or_else(|| HandlerError::Other("No LevelMeta GvasFile has been loaded.".to_string()))?;
+    std::fs::write(save_dir.join("LevelMeta.sav"), &level_meta_bytes).map_err(CoreError::Io)?;
+
+    progress("Writing player files");
+    let players_dir = save_dir.join("Players");
+    std::fs::create_dir_all(&players_dir).map_err(CoreError::Io)?;
+    for (player_id, (sav_bytes, dps_bytes)) in session.player_sav_bytes()? {
+        let stem = save_modded_player_stem(&player_id);
+        std::fs::write(players_dir.join(format!("{stem}.sav")), &sav_bytes)
+            .map_err(CoreError::Io)?;
+        if let Some(dps_bytes) = dps_bytes {
+            std::fs::write(players_dir.join(format!("{stem}_dps.sav")), &dps_bytes)
+                .map_err(CoreError::Io)?;
+        }
+    }
+    Ok(())
+}
+
+/// CWD-relative backup root for Steam saves, matching Python's
+/// `f"backups/{save_type}"` = `backups/steam`.
+const STEAM_BACKUP_BASE: &str = "backups/steam";
+
+/// Port of `save_modded_save_handler`. `data` is a bare world-name STRING
+/// (used only by the GamePass branch; the Steam write path ignores it, as
+/// Python does). No save → the "No save file loaded" `error` frame. GamePass
+/// / non-Steam sessions are Phase 4 and rejected with the same "not supported
+/// yet" string `handle_select_save` already uses. On success emits
+/// `save_modded_save` with the exact Python string
+/// `"Modded save file saved successfully"`.
+pub async fn handle_save_modded_save(
+    _world_name: String,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let save_dir = psp_db::settings::get_settings(&ctx.app.db).await?.save_dir;
+    let progress = ctx.emitter.progress_sink();
+
+    let Some(session) = ctx.session.save.as_ref() else {
+        return Err(HandlerError::Other("No save file loaded".to_string()));
+    };
+    if session.save_type_label != "steam" {
+        return Err(HandlerError::Other(
+            "GamePass saves are not supported yet".to_string(),
+        ));
+    }
+    let SaveKind::Steam { level_path } = &session.kind else {
+        // A zip-uploaded (InMemory) session has no on-disk level path to
+        // overwrite; disk write-back is only defined for real Steam loads.
+        return Err(HandlerError::Other(
+            "Only on-disk Steam saves can be written back yet".to_string(),
+        ));
+    };
+    let level_path = level_path.clone();
+
+    write_steam_modded_save(
+        session,
+        &level_path,
+        Path::new(&save_dir),
+        Path::new(STEAM_BACKUP_BASE),
+        &progress,
+    )?;
+
+    ctx.emitter.emit(
+        MessageType::SaveModdedSave,
+        &"Modded save file saved successfully",
+    );
+    Ok(())
+}
+
+// ---------------------------------------------------------------------------
+// rename_world — port of local_file_handler.py::rename_world_handler.
+// ---------------------------------------------------------------------------
+
+/// Port of `rename_world_handler`. `data` is a bare new-name STRING. The
+/// old-name is read BEFORE the no-save guard, falling back to `"Unknown"`
+/// only when no save is loaded (an empty world_name on a loaded save is NOT
+/// replaced). Calls `set_world_name` (which itself errors if no LevelMeta is
+/// loaded), then emits `rename_world` with the exact Python string
+/// `World renamed from '<old>' to '<new>'` (single quotes included).
+pub async fn handle_rename_world(
+    new_world_name: String,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let old_world_name = ctx
+        .session
+        .save
+        .as_ref()
+        .map(|session| session.world_name.clone())
+        .unwrap_or_else(|| "Unknown".to_string());
+    let Some(session) = ctx.session.save.as_mut() else {
+        return Err(HandlerError::Other("No save file loaded".to_string()));
+    };
+    session.set_world_name(&new_world_name)?;
+    ctx.emitter.emit(
+        MessageType::RenameWorld,
+        &format!("World renamed from '{old_world_name}' to '{new_world_name}'"),
+    );
+    Ok(())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -769,5 +1145,176 @@ mod tests {
             let path = zip_gps_temp_path(save_id);
             assert_eq!(std::env::temp_dir(), path.parent().unwrap());
         }
+    }
+
+    // -----------------------------------------------------------------------
+    // Task 14 — save-file handler helpers.
+    // -----------------------------------------------------------------------
+
+    /// The download zip uses LOWERCASE hex (no dashes): Python's
+    /// `str(uuid).replace("-", "")`, which never `.upper()`s.
+    #[test]
+    fn download_player_stem_is_lowercase() {
+        let uid: Uuid = "ABCDEF12-3456-7890-ABCD-EF1234567890".parse().unwrap();
+        assert_eq!(
+            "abcdef1234567890abcdef1234567890",
+            download_player_stem(&uid)
+        );
+    }
+
+    /// The on-disk Steam write uses UPPERCASE hex (no dashes):
+    /// serialization.py:218 `str(uid).replace("-", "").upper()`. This is the
+    /// exact opposite casing from `download_player_stem` — the two must never
+    /// be collapsed into one helper.
+    #[test]
+    fn save_modded_player_stem_is_uppercase() {
+        let uid: Uuid = "abcdef12-3456-7890-abcd-ef1234567890".parse().unwrap();
+        assert_eq!(
+            "ABCDEF1234567890ABCDEF1234567890",
+            save_modded_player_stem(&uid)
+        );
+        // Guard the divergence directly: same uuid, opposite case.
+        assert_ne!(save_modded_player_stem(&uid), download_player_stem(&uid));
+    }
+
+    /// `OrderedMap<i32, _>` must round-trip the string-keyed JSON objects the
+    /// wire uses for `modified_dps_pals`/`modified_gps_pals` — parsed straight
+    /// from raw text so the integer key genuinely flows through serde_json's
+    /// map-key handling (not the `json!` macro, which would pre-build a
+    /// `Value` and hide key coercion). Would fail if `OrderedMap`'s
+    /// `Deserialize` couldn't coerce `"7"` → `7i32`.
+    #[test]
+    fn int_keyed_ordered_map_deserializes_from_string_keys() {
+        let map: OrderedMap<i32, i64> = serde_json::from_str(r#"{"7": 70, "3": 30}"#).unwrap();
+        let entries: Vec<(i32, i64)> = map.into_iter().collect();
+        assert_eq!(vec![(7, 70), (3, 30)], entries);
+    }
+
+    #[test]
+    fn copy_dir_recursive_mirrors_nested_tree() {
+        let temp_dir = tempfile::tempdir().unwrap();
+        let src = temp_dir.path().join("src");
+        let nested = src.join("Players");
+        std::fs::create_dir_all(&nested).unwrap();
+        std::fs::write(src.join("Level.sav"), b"level-bytes").unwrap();
+        std::fs::write(nested.join("PLAYER.sav"), b"player-bytes").unwrap();
+
+        let dst = temp_dir.path().join("dst");
+        copy_dir_recursive(&src, &dst).unwrap();
+
+        assert_eq!(
+            b"level-bytes".to_vec(),
+            std::fs::read(dst.join("Level.sav")).unwrap()
+        );
+        assert_eq!(
+            b"player-bytes".to_vec(),
+            std::fs::read(dst.join("Players/PLAYER.sav")).unwrap()
+        );
+    }
+
+    /// A missing `save_dir` must NOT copy anything and must emit the exact
+    /// Python "skipping backup" progress string (and no backup dir contents).
+    #[test]
+    fn backup_save_directory_skips_and_reports_a_missing_directory() {
+        let temp_dir = tempfile::tempdir().unwrap();
+        let backup_base = temp_dir.path().join("backups/steam");
+        let absent_save_dir = temp_dir.path().join("does_not_exist");
+
+        let recorded: std::sync::Arc<std::sync::Mutex<Vec<String>>> =
+            std::sync::Arc::new(std::sync::Mutex::new(Vec::new()));
+        let recorded_for_sink = recorded.clone();
+        let progress: ProgressSink = std::sync::Arc::new(move |message: &str| {
+            recorded_for_sink.lock().unwrap().push(message.to_string());
+        });
+
+        backup_save_directory(&absent_save_dir, &backup_base, &progress).unwrap();
+
+        let messages = recorded.lock().unwrap();
+        assert!(messages
+            .iter()
+            .any(|m| m == "Backing up save directory... 🤓"));
+        assert!(messages.iter().any(|m| m
+            == &format!(
+                "Save directory {} not found, skipping backup",
+                absent_save_dir.display()
+            )));
+        // Nothing was copied: backup_base holds no per-save subdirectory.
+        let created: Vec<_> = std::fs::read_dir(&backup_base).unwrap().collect();
+        assert!(created.is_empty(), "no backup dir should be created");
+    }
+
+    /// HERMETIC full write-path test. Copies the committed `world1` fixture
+    /// into a `TempDir`, points BOTH the session level_path AND save_dir at
+    /// that copy, and directs the backup at a `TempDir` subfolder — so nothing
+    /// can touch the owner's real save_dir, the committed fixtures, or the
+    /// process CWD. Proves the backup ran (a timestamped copy of the save dir
+    /// exists) and that `Level.sav`/`LevelMeta.sav` were (re)written.
+    #[test]
+    fn write_steam_modded_save_backs_up_and_writes_into_a_temp_dir() {
+        let fixture = fixture_world1_dir();
+        let temp_dir = tempfile::tempdir().unwrap();
+        let save_dir = temp_dir.path().join("world");
+        copy_dir_recursive(&fixture, &save_dir).unwrap();
+
+        let level_path = save_dir.join("Level.sav");
+        let level_bytes = std::fs::read(&level_path).unwrap();
+        let meta_bytes = std::fs::read(save_dir.join("LevelMeta.sav")).unwrap();
+
+        let session = SaveSession::load(
+            SaveKind::Steam {
+                level_path: level_path.clone(),
+            },
+            level_path.to_string_lossy().into_owned(),
+            "steam",
+            &level_bytes,
+            Some(&meta_bytes),
+            BTreeMap::new(),
+            None,
+            &psp_core::progress::null_progress(),
+        )
+        .unwrap();
+
+        // Overwrite Level.sav/LevelMeta.sav with sentinels first, so a
+        // successful write is observable as their disappearance.
+        std::fs::write(&level_path, b"STALE").unwrap();
+        std::fs::write(save_dir.join("LevelMeta.sav"), b"STALE").unwrap();
+
+        let backup_base = temp_dir.path().join("backups/steam");
+        write_steam_modded_save(
+            &session,
+            &level_path,
+            &save_dir,
+            &backup_base,
+            &psp_core::progress::null_progress(),
+        )
+        .unwrap();
+
+        // Level.sav and LevelMeta.sav were re-serialized (no longer STALE).
+        let written_level = std::fs::read(&level_path).unwrap();
+        let written_meta = std::fs::read(save_dir.join("LevelMeta.sav")).unwrap();
+        assert_ne!(b"STALE".to_vec(), written_level);
+        assert_ne!(b"STALE".to_vec(), written_meta);
+        assert!(!written_level.is_empty());
+        assert!(!written_meta.is_empty());
+
+        // Exactly one timestamped backup dir, and it captured the pre-write
+        // (STALE) Level.sav — proving the backup ran BEFORE the overwrite.
+        let backup_dirs: Vec<PathBuf> = std::fs::read_dir(&backup_base)
+            .unwrap()
+            .filter_map(|entry| entry.ok())
+            .map(|entry| entry.path())
+            .collect();
+        assert_eq!(1, backup_dirs.len(), "one backup dir expected");
+        assert_eq!(
+            b"STALE".to_vec(),
+            std::fs::read(backup_dirs[0].join("Level.sav")).unwrap(),
+            "backup must contain the pre-overwrite Level.sav"
+        );
+    }
+
+    /// world1 lives at `<repo>/tests/fixtures/saves/world1` (psp-server's
+    /// manifest dir is `<repo>/rust/psp-server`).
+    fn fixture_world1_dir() -> PathBuf {
+        PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../tests/fixtures/saves/world1")
     }
 }
