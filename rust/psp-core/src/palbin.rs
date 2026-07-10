@@ -26,6 +26,14 @@ impl<'a> BlobReader<'a> {
         self.position == self.bytes.len()
     }
 
+    /// Bytes already consumed. Lets a caller outside this module (e.g.
+    /// `domain::guild_tail`) build its own "blob has unread trailing bytes"
+    /// error naming the exact offset, the same way this module's own
+    /// `parse_guild_raw_tail` does with the private `position` field.
+    pub fn position(&self) -> usize {
+        self.position
+    }
+
     /// Bounds-checked slice of the next `count` bytes. `position + count`
     /// is computed with `checked_add` so an attacker-controlled `count`
     /// (e.g. a length prefix read straight from the blob) can never wrap
