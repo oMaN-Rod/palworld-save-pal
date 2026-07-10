@@ -382,12 +382,31 @@ async fn test_no_file_selected_produces_no_response() {
     server.shutdown().await;
 }
 
+/// Prints a highly visible skip notice for a `PSP_TEST_SAVE_DIR`-gated test.
+/// Rust's test harness captures `eprintln!`/`println!` output and only shows
+/// it for FAILED tests unless the caller passes `--nocapture` -- and these
+/// tests pass on purpose when the fixture directory is unset. Writing
+/// straight to `std::io::stderr()` bypasses the `eprint!` macro's capture
+/// hook entirely, so the notice shows up in a plain `cargo test` run too.
+/// Same technique as `psp-server/tests/parity.rs`'s
+/// `replay_recorded_python_fixtures`.
+fn print_save_dir_skip_notice(test_name: &str) {
+    use std::io::Write;
+    let _ = writeln!(
+        std::io::stderr(),
+        "SKIPPED: {test_name} -- PSP_TEST_SAVE_DIR is not set, so the \
+         load-path frame-ORDER assertions in this test did not run. Set \
+         PSP_TEST_SAVE_DIR to a real Steam save directory (Level.sav + \
+         Players/) to exercise them."
+    );
+}
+
 /// Full flow against a real save. Set PSP_TEST_SAVE_DIR to a Steam save
 /// directory (contains Level.sav + Players/). Skipped when unset.
 #[tokio::test]
 async fn test_select_save_full_emission_order() {
     let Some(save_dir) = std::env::var_os("PSP_TEST_SAVE_DIR") else {
-        eprintln!("PSP_TEST_SAVE_DIR not set, skipping");
+        print_save_dir_skip_notice("test_select_save_full_emission_order");
         return;
     };
     let level_sav_path = std::path::Path::new(&save_dir).join("Level.sav");
@@ -460,7 +479,7 @@ async fn test_select_save_full_emission_order() {
 #[tokio::test]
 async fn test_load_zip_file_full_emission_order() {
     let Some(save_dir) = std::env::var_os("PSP_TEST_SAVE_DIR") else {
-        eprintln!("PSP_TEST_SAVE_DIR not set, skipping");
+        print_save_dir_skip_notice("test_load_zip_file_full_emission_order");
         return;
     };
     let save_dir = std::path::PathBuf::from(save_dir);
@@ -515,6 +534,14 @@ async fn test_load_zip_file_full_emission_order() {
     // zip-specific completion string (load_zip_file_handler's ws_callback
     // call right before it assembles `data`).
     assert_eq!("progress_message", received_types[type_count - 4]);
+
+    // Prove no surplus frame follows get_guild_summaries: the receive loop
+    // above stops as soon as it sees get_guild_summaries, so a leaked extra
+    // frame emitted after the sequence would otherwise go undetected (this
+    // is the same follow-up-request technique
+    // test_select_save_full_emission_order uses).
+    send_request(&mut socket, serde_json::json!({"type": "sync_app_state"})).await;
+    assert_eq!("get_settings", receive_json(&mut socket).await["type"]);
 
     server.shutdown().await;
 }

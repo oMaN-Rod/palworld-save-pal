@@ -29,6 +29,30 @@ pub async fn handle_sync_app_state(ctx: &mut HandlerCtx<'_>) -> Result<(), Handl
         return Ok(());
     };
 
+    // Unlike select_save's/load_zip_file's `players` array (filesystem/zip
+    // *discovery* order, see save_file.rs), these two fields intentionally
+    // keep the BTreeMap's sorted order rather than chasing Python's.
+    // Python's `sync_app_state_handler` emits
+    // `[str(p) for p in app_state.player_summaries.keys()]` /
+    // `.guild_summaries.keys()`, and those dicts' insertion order is not a
+    // filesystem-discovery order at all:
+    //   - `player_summaries` is built by `_extract_player_summaries`, which
+    //     for saves with more than two players dispatches to
+    //     `_extract_players_parallel` -- a `ThreadPoolExecutor` whose results
+    //     are inserted via `as_completed()`, i.e. whichever worker thread
+    //     finishes first. That insertion order is genuinely
+    //     non-deterministic across runs of the same save file, so there is
+    //     no stable Python order to port here (psp-core's own
+    //     `domain/summaries.rs` already documents this same fact and is why
+    //     Task 10's parity harness restricts itself to <=2-player saves).
+    //   - `guild_summaries` is deterministic per save file, but its order is
+    //     `_group_save_data_map`'s (Level.sav's internal GroupSaveDataMap)
+    //     iteration order, filtered to guild-type entries -- an artifact of
+    //     the save's binary layout, not anything this port currently
+    //     threads through as a separate ordered list anywhere.
+    // Sorted-by-UUID is therefore not a parity gap here the way it was for
+    // select_save's `players` array; it is a reasonable, stable choice where
+    // Python itself has no fixed answer.
     let payload = SyncLoadedSaveFilesData {
         level: session.save_id.clone(),
         players: session

@@ -134,18 +134,42 @@ fn validate_steam_save_directory(save_path: &str) -> Result<SteamSaveLayout, Han
 
 /// Port of `FileManager.get_player_save_paths`: every `Players/*.sav`, its
 /// "_dps" companion folded into the same map entry, invalid names skipped
-/// (logged, matching Python's blanket `except:` continue). The output is a
-/// `BTreeMap`, so it always iterates in UUID order regardless of filesystem
-/// enumeration order -- unlike Python's dict (which preserves `glob()`
-/// encounter order), this is a deliberate, deterministic simplification
-/// already baked into `SaveSession::player_file_refs`'s type (Task 7).
+/// (logged, matching Python's blanket `except:` continue). Returns both the
+/// pairing map -- a `BTreeMap`, kept because `SaveSession::player_file_refs`
+/// is contract-bound to that type and Phases 2-4 depend on it -- and the
+/// order in which players were first encountered while scanning the
+/// directory. Python's `player_save_paths` is a plain dict built by
+/// iterating `players_path.glob("*.sav")`, and
+/// `process_steam_save`'s `[str(p) for p in player_file_refs]` reflects that
+/// glob/filesystem *encounter* order, not a UUID sort. The discovery order
+/// returned here is what `handle_select_save` uses to build the wire
+/// `players` array to match it -- the sorted map is additional information
+/// layered on top, not a substitute for it.
 fn discover_player_file_refs(
     players_dir: &Path,
-) -> Result<BTreeMap<Uuid, PlayerFileData>, HandlerError> {
+) -> Result<(BTreeMap<Uuid, PlayerFileData>, Vec<Uuid>), HandlerError> {
+    let dir_entries = std::fs::read_dir(players_dir).map_err(CoreError::Io)?;
+    let paths = dir_entries
+        .filter_map(|dir_entry| dir_entry.ok())
+        .map(|dir_entry| dir_entry.path());
+    Ok(collect_player_file_refs(paths))
+}
+
+/// Pure core of `discover_player_file_refs`, factored out so the
+/// discovery-order guarantee can be unit-tested against a hand-constructed,
+/// deliberately non-UUID-ascending sequence of paths -- `std::fs::read_dir`'s
+/// enumeration order is platform-specific (on NTFS it is typically
+/// name-sorted, which for UUID-named files coincides with UUID-ascending
+/// order and so cannot be relied on to expose a regression to sorted order;
+/// see `test_collect_player_file_refs_preserves_a_non_sorted_discovery_order`
+/// below, which does not depend on filesystem behavior at all).
+fn collect_player_file_refs<I>(paths: I) -> (BTreeMap<Uuid, PlayerFileData>, Vec<Uuid>)
+where
+    I: IntoIterator<Item = PathBuf>,
+{
     let mut player_file_refs: BTreeMap<Uuid, PlayerFileData> = BTreeMap::new();
-    for dir_entry in std::fs::read_dir(players_dir).map_err(CoreError::Io)? {
-        let Ok(dir_entry) = dir_entry else { continue };
-        let path = dir_entry.path();
+    let mut discovery_order: Vec<Uuid> = Vec::new();
+    for path in paths {
         if path.extension().is_none_or(|extension| extension != "sav") {
             continue;
         }
@@ -159,6 +183,9 @@ fn discover_player_file_refs(
             tracing::error!("Failed to parse player save path: {}", path.display());
             continue;
         };
+        if !player_file_refs.contains_key(&uid) {
+            discovery_order.push(uid);
+        }
         let file_ref = player_file_refs
             .entry(uid)
             .or_insert(PlayerFileData::Paths {
@@ -173,7 +200,7 @@ fn discover_player_file_refs(
             }
         }
     }
-    Ok(player_file_refs)
+    (player_file_refs, discovery_order)
 }
 
 pub async fn handle_select_save(
@@ -194,7 +221,8 @@ pub async fn handle_select_save(
         Some(meta_path) => Some(std::fs::read(meta_path).map_err(CoreError::Io)?),
         None => None,
     };
-    let player_file_refs = discover_player_file_refs(&layout.players_dir)?;
+    let (player_file_refs, player_discovery_order) =
+        discover_player_file_refs(&layout.players_dir)?;
 
     let progress = ctx.emitter.progress_sink();
     let session = SaveSession::load(
@@ -212,9 +240,8 @@ pub async fn handle_select_save(
 
     let payload = LoadedSaveFilesData {
         level: layout.level_sav.to_string_lossy().into_owned(),
-        players: session
-            .player_file_refs
-            .keys()
+        players: player_discovery_order
+            .iter()
             .map(|uid| uid.to_string())
             .collect(),
         world_name: session.world_name.clone(),
@@ -583,9 +610,10 @@ mod tests {
         std::fs::write(temp_dir.path().join("not-a-uuid.sav"), b"z").unwrap();
         std::fs::write(temp_dir.path().join("ignored.txt"), b"w").unwrap();
 
-        let refs = discover_player_file_refs(temp_dir.path()).unwrap();
+        let (refs, discovery_order) = discover_player_file_refs(temp_dir.path()).unwrap();
         assert_eq!(1, refs.len());
         let uid: Uuid = PLAYER_ONE.parse().unwrap();
+        assert_eq!(vec![uid], discovery_order);
         match &refs[&uid] {
             PlayerFileData::Paths { sav, dps } => {
                 assert!(sav.is_some());
@@ -593,6 +621,76 @@ mod tests {
             }
             other => panic!("expected Paths variant, got {other:?}"),
         }
+    }
+
+    /// Real-filesystem companion to the synthetic test below: whatever order
+    /// `std::fs::read_dir` actually hands back on this platform, the
+    /// discovery order returned must match it exactly (not the sorted map
+    /// order). This does NOT prove the function discriminates from the old
+    /// (always-sorted) behavior -- on NTFS, `read_dir` enumerates these
+    /// UUID-named files in name-sorted order, which for a UUID string is the
+    /// same ordering as `Uuid`'s `Ord` impl, so a regression back to
+    /// `player_file_refs.keys()` would pass this test too. See
+    /// `test_collect_player_file_refs_preserves_a_non_sorted_discovery_order`
+    /// for the test that actually discriminates.
+    #[test]
+    fn test_discover_player_file_refs_discovery_order_matches_raw_read_dir_order() {
+        let temp_dir = tempfile::tempdir().unwrap();
+        let uuids = [
+            "33333333-3333-3333-3333-333333333333",
+            "11111111-1111-1111-1111-111111111111",
+            "22222222-2222-2222-2222-222222222222",
+        ];
+        for uuid in uuids {
+            std::fs::write(temp_dir.path().join(format!("{uuid}.sav")), b"x").unwrap();
+        }
+
+        let expected_order: Vec<Uuid> = std::fs::read_dir(temp_dir.path())
+            .unwrap()
+            .filter_map(|dir_entry| dir_entry.ok())
+            .filter_map(|dir_entry| {
+                dir_entry
+                    .path()
+                    .file_stem()
+                    .and_then(|stem| stem.to_string_lossy().parse::<Uuid>().ok())
+            })
+            .collect();
+
+        let (_, discovery_order) = discover_player_file_refs(temp_dir.path()).unwrap();
+        assert_eq!(expected_order, discovery_order);
+    }
+
+    /// The test that actually discriminates Finding 1's fix from the old
+    /// always-sorted behavior: feeds `collect_player_file_refs` a
+    /// hand-constructed path sequence whose UUIDs are deliberately NOT
+    /// ascending, bypassing `std::fs::read_dir` (and its platform-specific,
+    /// on-NTFS-usually-sorted enumeration order) entirely. If
+    /// `handle_select_save` ever regresses to emitting
+    /// `player_file_refs.keys()` (UUID-sorted) instead of this discovery
+    /// order, this assertion -- which checks first-encounter order, not
+    /// sorted order -- fails.
+    #[test]
+    fn test_collect_player_file_refs_preserves_a_non_sorted_discovery_order() {
+        let highest: Uuid = "ffffffff-ffff-ffff-ffff-ffffffffffff".parse().unwrap();
+        let lowest: Uuid = "00000000-0000-0000-0000-000000000000".parse().unwrap();
+        let middle: Uuid = "77777777-7777-7777-7777-777777777777".parse().unwrap();
+        // Deliberately descending -- the opposite of BTreeMap<Uuid, _>'s
+        // iteration order, so a resort anywhere in the pipeline is visible.
+        let paths = vec![
+            PathBuf::from(format!("{highest}.sav")),
+            PathBuf::from(format!("{middle}.sav")),
+            PathBuf::from(format!("{lowest}.sav")),
+        ];
+
+        let (refs, discovery_order) = collect_player_file_refs(paths);
+
+        assert_eq!(vec![highest, middle, lowest], discovery_order);
+        // Sanity: the map itself is still UUID-sorted, proving the two are
+        // genuinely different orderings and this isn't a vacuous check.
+        assert_eq!(
+            vec![lowest, middle, highest],
+            refs.keys().copied().collect::<Vec<_>>()
+        );
     }
 
     #[test]
