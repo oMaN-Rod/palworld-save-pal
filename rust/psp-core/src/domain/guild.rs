@@ -43,6 +43,52 @@ pub fn base_guild_and_container(entry: &uesave::MapEntry) -> Option<(uuid::Uuid,
     Some((guild_id, container_id))
 }
 
+/// `_find_player_guild_id` / the player-guild lookup (`game/mixins/loading.py`).
+/// Python branches on whether `self._player_guild_map_cache` happens to
+/// already be populated (a fast cached path that yields a single result) vs.
+/// a full fallback scan of every `EPalGroupType::Guild` group's `players`
+/// list -- but both branches converge on the exact same answer (the guild
+/// whose player list contains `player_id`), since the cache itself is only
+/// ever built BY that same fallback scan (`_build_player_guild_index`). This
+/// function reproduces that converged answer directly: build the full
+/// `player uid -> guild id` map once (caching it in `session.caches.
+/// player_guild_map`, mirroring the Python cache's role), then look up
+/// `player_id` in it. A guild-type group whose tail fails to parse
+/// contributes no entries rather than aborting the whole scan, matching this
+/// port's "skip malformed, don't panic" policy for untrusted save data.
+pub fn find_player_guild_id(
+    session: &mut crate::session::SaveSession,
+    player_id: uuid::Uuid,
+) -> Result<Option<uuid::Uuid>, crate::error::CoreError> {
+    if session.caches.player_guild_map.is_none() {
+        let mut player_guild_map = std::collections::HashMap::new();
+        for entry in super::world::group_map(&session.level)? {
+            if super::guild_tail::entry_group_type(entry).as_deref() != Some("EPalGroupType::Guild")
+            {
+                continue;
+            }
+            let Some(guild_id) = crate::props::as_uuid(&entry.key) else {
+                continue;
+            };
+            let Some(group_data) = super::guild_tail::entry_group_data(entry) else {
+                continue;
+            };
+            let Ok(tail) = super::guild_tail::GuildTail::parse(&group_data.remaining_data) else {
+                continue;
+            };
+            for player in &tail.players {
+                player_guild_map.insert(player.player_uid, guild_id);
+            }
+        }
+        session.caches.player_guild_map = Some(player_guild_map);
+    }
+    Ok(session
+        .caches
+        .player_guild_map
+        .as_ref()
+        .and_then(|map| map.get(&player_id).copied()))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -181,5 +227,142 @@ mod tests {
         };
 
         assert!(base_guild_and_container(&entry).is_none());
+    }
+
+    // ---- find_player_guild_id ----
+
+    use crate::session::{SaveKind, SaveSession};
+    use uesave::games::palworld::PalGroupData;
+    use uesave::{Header, MapEntry as UMapEntry, PackageVersion, PropertySchemas, Root, Save};
+
+    fn minimal_save(properties: Properties) -> Save {
+        Save {
+            header: Header {
+                magic: 0,
+                save_game_version: 0,
+                package_version: PackageVersion { ue4: 0, ue5: None },
+                engine_version_major: 0,
+                engine_version_minor: 0,
+                engine_version_patch: 0,
+                engine_version_build: 0,
+                engine_version: String::new(),
+                custom_version: None,
+            },
+            schemas: PropertySchemas::default(),
+            root: Root {
+                save_game_type: String::new(),
+                properties,
+            },
+            extra: Vec::new(),
+        }
+    }
+
+    fn guild_group_entry(guild_id: &str, tail: Vec<u8>) -> UMapEntry {
+        let mut value_properties = Properties::default();
+        value_properties.insert(
+            "GroupType",
+            Property::Enum("EPalGroupType::Guild".to_string()),
+        );
+        let group_data = PalGroupData {
+            group_id: fguid(guild_id),
+            group_name: String::new(),
+            individual_character_handle_ids: vec![],
+            remaining_data: tail,
+        };
+        value_properties.insert(
+            "RawData",
+            Property::Struct(StructValue::PalGroupData(group_data)),
+        );
+        UMapEntry {
+            key: guid_property(guild_id),
+            value: Property::Struct(StructValue::Struct(value_properties)),
+        }
+    }
+
+    fn session_with_group_map(entries: Vec<UMapEntry>) -> SaveSession {
+        let mut world_save_data = Properties::default();
+        world_save_data.insert("GroupSaveDataMap", Property::Map(entries));
+        let mut root_properties = Properties::default();
+        root_properties.insert(
+            "worldSaveData",
+            Property::Struct(StructValue::Struct(world_save_data)),
+        );
+        SaveSession::new_for_tests(SaveKind::InMemory, minimal_save(root_properties))
+    }
+
+    const PLAYER_ID: &str = "66666666-6666-6666-6666-666666666666";
+
+    #[test]
+    fn find_player_guild_id_locates_the_guild_owning_the_player() {
+        let tail = crate::palbin::test_bytes::guild_tail(
+            3,
+            "The Guild",
+            "77777777-7777-7777-7777-777777777777",
+            &[(PLAYER_ID, 0, "Tester")],
+        );
+        let mut session = session_with_group_map(vec![guild_group_entry(GUILD_ID, tail)]);
+
+        let guild_id = find_player_guild_id(&mut session, PLAYER_ID.parse().unwrap()).unwrap();
+
+        assert_eq!(guild_id, Some(GUILD_ID.parse().unwrap()));
+        // The cache is now warm; a second lookup must return the same answer
+        // without needing to re-scan (this only proves the answer stays
+        // correct across calls -- the "no re-scan" half is a performance
+        // claim this test does not attempt to measure).
+        let guild_id_again =
+            find_player_guild_id(&mut session, PLAYER_ID.parse().unwrap()).unwrap();
+        assert_eq!(guild_id_again, Some(GUILD_ID.parse().unwrap()));
+    }
+
+    #[test]
+    fn find_player_guild_id_returns_none_for_a_player_in_no_guild() {
+        let tail = crate::palbin::test_bytes::guild_tail(
+            1,
+            "Other Guild",
+            "77777777-7777-7777-7777-777777777777",
+            &[("88888888-8888-8888-8888-888888888888", 0, "Someone Else")],
+        );
+        let mut session = session_with_group_map(vec![guild_group_entry(GUILD_ID, tail)]);
+
+        let guild_id = find_player_guild_id(&mut session, PLAYER_ID.parse().unwrap()).unwrap();
+
+        assert_eq!(guild_id, None);
+    }
+
+    /// A `GroupSaveDataMap` entry whose `GroupType` isn't `Guild` (an alliance,
+    /// say) must never be scanned for a player match -- matching Python's own
+    /// `if GroupType.from_value(group_type) != GroupType.GUILD: continue`.
+    #[test]
+    fn find_player_guild_id_ignores_non_guild_groups() {
+        let mut value_properties = Properties::default();
+        value_properties.insert(
+            "GroupType",
+            Property::Enum("EPalGroupType::Alliance".to_string()),
+        );
+        let tail = crate::palbin::test_bytes::guild_tail(
+            1,
+            "Alliance",
+            "77777777-7777-7777-7777-777777777777",
+            &[(PLAYER_ID, 0, "Tester")],
+        );
+        let group_data = PalGroupData {
+            group_id: fguid(GUILD_ID),
+            group_name: String::new(),
+            individual_character_handle_ids: vec![],
+            remaining_data: tail,
+        };
+        value_properties.insert(
+            "RawData",
+            Property::Struct(StructValue::PalGroupData(group_data)),
+        );
+        let entry = UMapEntry {
+            key: guid_property(GUILD_ID),
+            value: Property::Struct(StructValue::Struct(value_properties)),
+        };
+        let mut session = session_with_group_map(vec![entry]);
+
+        let guild_id = find_player_guild_id(&mut session, PLAYER_ID.parse().unwrap()).unwrap();
+
+        assert_eq!(guild_id, None);
     }
 }

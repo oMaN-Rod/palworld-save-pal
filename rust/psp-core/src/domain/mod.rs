@@ -3,5 +3,6 @@ pub mod containers;
 pub mod guild;
 pub mod guild_tail;
 pub mod pal;
+pub mod player;
 pub mod summaries;
 pub mod world;
