@@ -363,13 +363,26 @@ fn add_player_pal_then_resave_succeeds_and_pal_round_trips() {
         &mut session,
         &data,
         player_id,
-        "SheepBall",
+        "Sheepball",
         "slotid-fix",
         pal_box_id,
         None,
     )
     .unwrap()
     .expect("world1's pal box has room for one more pal");
+
+    // Task-15 pin: a freshly added pal reports Python's placeholder `HP`
+    // (545000, NOT the computed max_hp). `Pal.__init__(new_pal=True)` sets
+    // `new_pal.hp = new_pal.max_hp`, but the `hp` getter's later `"HP"→"Hp"`
+    // migration clobbers it back to the `PalObjects.PalSaveParameter`
+    // placeholder, so every freshly added pal's wire `hp` is that fixed value.
+    // Without this the resave test would still pass if the fix regressed to
+    // emitting the computed max_hp. (The species-`max_full_stomach` half of the
+    // same fix is pinned by `pal_write.rs::max_stomach_for_uses_pals_json_*`.)
+    assert_eq!(
+        new_pal.hp, 545_000,
+        "a newly added pal must report Python's placeholder HP, not the computed max_hp"
+    );
 
     let sav_bytes = session
         .level_sav_bytes()
@@ -413,12 +426,18 @@ fn add_guild_pal_then_resave_succeeds_and_pal_round_trips() {
         &data,
         guild_id,
         base_id,
-        "SheepBall",
+        "Sheepball",
         "slotid-fix-guild",
         None,
     )
     .unwrap()
     .expect("world1's base worker container has room");
+
+    // Same Task-15 pin as the player-add test: the placeholder HP (545000).
+    assert_eq!(
+        new_pal.hp, 545_000,
+        "a newly added guild pal must report Python's placeholder HP, not the computed max_hp"
+    );
 
     let sav_bytes = session
         .level_sav_bytes()

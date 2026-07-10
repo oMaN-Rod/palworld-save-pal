@@ -210,6 +210,13 @@ fn decompress_sav_container(sav_bytes: &[u8]) -> Vec<u8> {
 /// `GotWorkSuitabilityAddRankList` reordering fix is covered here), the
 /// guild's `GuildExtraSaveDataMap` lab research, and every `Players/*.sav`
 /// (which carry no `worldSaveData`, so the removal is a no-op there).
+///
+/// Caveat: because BOTH sides are re-serialised through uesave's writer here,
+/// a hypothetical Python↔Rust divergence that uesave canonicalises to the same
+/// bytes would be invisible to this check. That risk is low and deliberately
+/// accepted: Task 12 proves uesave's writer is order-preserving and
+/// byte-faithful (unedited `read -> write` reproduces the game file exactly),
+/// so it does not silently absorb real content differences.
 fn normalized_member_gvas(compressed_sav: &[u8]) -> Vec<u8> {
     use uesave::{Property, PropertyKey, StructValue};
     let mut save = psp_core::savio::read_sav_bytes(compressed_sav).expect("parse sav container");
