@@ -87,9 +87,14 @@ fn update_pals_edit_then_reread() {
 /// PARITY-BUG-1 preserved end to end through `update_pals` -- pinned here
 /// (not just at `apply_pal_dto`'s own unit-test level, Task 6) to prove the
 /// bug survives the whole Task 10 write-back path a real WS edit takes.
-/// Editing `storage_slot` alone (a real client always echoes `storage_id`
-/// back unchanged) must move the slot index while leaving `ContainerId`
-/// completely untouched.
+///
+/// The DTO's `storage_id` is set to a DIFFERENT value than the pal's real
+/// container id (not just echoed back unchanged) -- PARITY-BUG-1 only
+/// manifests when the incoming DTO actually TRIES to move the pal to a
+/// different container. Echoing `storage_id` back unchanged (as an earlier
+/// version of this test did) can't discriminate the bug from a hypothetical
+/// fix, since `ContainerId` staying equal to `original_container_id` would
+/// be true either way when the DTO never asked for a different one.
 #[test]
 fn update_pals_preserves_parity_bug_1_container_id_never_moves() {
     let mut session = common::load_fixture_session("world1");
@@ -103,7 +108,14 @@ fn update_pals_preserves_parity_bug_1_container_id_never_moves() {
         .unwrap();
     let (pal_id, source) = details.pals.iter().next().expect("player owns pals");
     let original_container_id = source.storage_id;
+    let different_container_id = Uuid::parse_str("11111111-2222-3333-4444-555555555555").unwrap();
+    assert_ne!(
+        different_container_id, original_container_id,
+        "fixture sanity: the DTO's requested storage_id must genuinely differ \
+         from the pal's real container id for this test to mean anything"
+    );
     let mut edited = source.clone();
+    edited.storage_id = different_container_id;
     edited.storage_slot = source.storage_slot + 1;
     let mut modified: OrderedMap<Uuid, _> = OrderedMap::new();
     modified.insert(*pal_id, edited);
@@ -117,7 +129,7 @@ fn update_pals_preserves_parity_bug_1_container_id_never_moves() {
     assert_eq!(
         updated.storage_id, original_container_id,
         "PARITY-BUG-1: ContainerId must never change, even when the DTO's \
-         storage_id field is echoed back unchanged"
+         storage_id field asks for a genuinely DIFFERENT container"
     );
     assert_eq!(updated.storage_slot, source.storage_slot + 1);
 }
@@ -223,10 +235,15 @@ fn update_players_full_dto() {
 /// mutates `self.common_container` (the player's own, already-server-
 /// resolved `ItemContainer` object), never looking at the dumped dict's
 /// `id` field at all. Proven here by forging a bogus `id` on the outgoing
-/// common-container DTO: the edit must still land on the player's REAL
-/// common container (found via the player's own `InventoryInfo`), not
-/// silently no-op and not corrupt an unrelated container elsewhere in the
-/// save.
+/// common-container DTO AND making a REAL content edit (a brand-new slot):
+/// the edit must land on the player's REAL common container (found via the
+/// player's own `InventoryInfo`), not silently no-op and not corrupt an
+/// unrelated container elsewhere in the save. A content edit is essential
+/// here -- against the brief's `dto.id`-based routing, this forged,
+/// unresolvable id would make `apply_item_container_dto` silently no-op
+/// (see `apply_item_container_dto_unknown_container_id_is_a_no_op`), which
+/// would leave `common_after.id` unchanged too; asserting `id` alone cannot
+/// tell "routed correctly" apart from "routing broken, did nothing".
 #[test]
 fn update_players_common_container_edit_ignores_forged_dto_id() {
     let mut session = common::load_fixture_session("world1");
@@ -241,6 +258,17 @@ fn update_players_common_container_edit_ignores_forged_dto_id() {
     let common = dto.common_container.as_mut().expect("player has one");
     let real_id = common.id;
     common.id = Uuid::new_v4(); // forged -- must be ignored for routing
+                                // A real content edit: a brand-new slot at an index unlikely to already
+                                // be occupied by this fixture player's real inventory.
+    common
+        .slots
+        .push(psp_core::dto::container::ItemContainerSlotDto {
+            dynamic_item: None,
+            slot_index: 9000,
+            count: 3,
+            static_id: Some("Wood".to_string()),
+            local_id: None,
+        });
     let mut modified = OrderedMap::new();
     modified.insert(player_id, dto);
     player::update_players(&mut session, &data, &modified, &null_progress()).unwrap();
@@ -253,6 +281,16 @@ fn update_players_common_container_edit_ignores_forged_dto_id() {
         common_after.id, real_id,
         "the container actually mutated must still be the player's real one"
     );
+    let added = common_after
+        .slots
+        .iter()
+        .find(|slot| slot.slot_index == 9000)
+        .expect(
+            "the real content edit must have landed in the player's REAL common container -- \
+             it would be silently absent if routing had instead gone through the forged id",
+        );
+    assert_eq!(added.static_id.as_deref(), Some("Wood"));
+    assert_eq!(added.count, 3);
 }
 
 /// Real-save coverage for a WEAPON dynamic item update: player
@@ -341,6 +379,46 @@ fn update_players_removing_a_dynamic_item_leaves_the_slot_dangling_on_next_read(
         "the slot whose dynamic item was removed must vanish on the next \
          read (dangling local_id -> read_item_container drops it), not \
          survive as a bare slot with dynamic_item: None"
+    );
+}
+
+/// `apply_unlock_flags`'s "create the Map property when missing" fix (see
+/// this task's report): world1's real player `8C2F1930` genuinely has NO
+/// `RelicObtainForInstanceFlag` key under `RecordData` at all yet (verified
+/// empirically -- see this task's report), the exact "legitimately key-less
+/// save" scenario Python's `Player._set_unlock_flags` handles by creating a
+/// fresh `MapProperty("NameProperty", "BoolProperty")` rather than
+/// no-op'ing. Setting `collected_effigies` on this player must not silently
+/// no-op.
+#[test]
+fn update_players_creates_missing_unlock_flag_map_and_it_round_trips() {
+    let mut session = common::load_fixture_session("world1");
+    let data = game_data();
+    let player_id: Uuid = WORLD1_PLAYER_O.parse().unwrap();
+    player::get_player_details(&mut session, &data, player_id, &null_progress())
+        .unwrap()
+        .unwrap();
+    let mut dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    assert_eq!(
+        dto.collected_effigies,
+        Some(vec![]),
+        "fixture sanity: this player has no RelicObtainForInstanceFlag key at all yet"
+    );
+    dto.collected_effigies = Some(vec!["SomeRelicInstanceId".to_string()]);
+    let mut modified = OrderedMap::new();
+    modified.insert(player_id, dto);
+    player::update_players(&mut session, &data, &modified, &null_progress()).unwrap();
+
+    let reread = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    assert_eq!(
+        reread.collected_effigies,
+        Some(vec!["SomeRelicInstanceId".to_string()]),
+        "the freshly created Map property must round-trip through this port's own \
+         reader, not silently no-op"
     );
 }
 
