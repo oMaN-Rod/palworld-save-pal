@@ -73,6 +73,25 @@ impl ServerHandle {
 pub async fn start_server(config: ServerConfig) -> anyhow::Result<ServerHandle> {
     let game_data = Arc::new(GameData::load(&config.data_dir.join("json"))?);
     let db = psp_db::open(&config.db_path).await?;
+    let legacy_db_path = config
+        .db_path
+        .parent()
+        .map(|dir| dir.join("psp.db"))
+        .unwrap_or_else(|| std::path::PathBuf::from("psp.db"));
+    let pal_data_validator = |value: &serde_json::Value| -> Result<serde_json::Value, String> {
+        let dto =
+            psp_core::dto::pal::PalDto::from_json_lenient(value).map_err(|e| e.to_string())?;
+        serde_json::to_value(&dto).map_err(|e| e.to_string())
+    };
+    match psp_db::import_legacy::import_legacy_if_needed(&db, &legacy_db_path, &pal_data_validator)
+        .await
+    {
+        Ok(Some(report)) => tracing::info!(?report, "legacy psp.db imported"),
+        Ok(None) => {}
+        Err(error) => {
+            tracing::error!(%error, "legacy psp.db import failed; continuing with new DB")
+        }
+    }
     let (live_connections, live_connections_rx) = tokio::sync::watch::channel(0usize);
     let state = Arc::new(AppState {
         config: config.clone(),

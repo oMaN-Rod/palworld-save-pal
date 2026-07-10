@@ -147,6 +147,58 @@ pub struct PalDto {
     pub friendship_point: i64,
 }
 
+impl PalDto {
+    /// Port of Python PalDTO.from_dict: tolerant conversion + defaults
+    /// (dto/pal.py:99-126). Unknown keys ignored; unconvertible values dropped
+    /// then defaulted; character_id must end up a string.
+    pub fn from_json_lenient(value: &serde_json::Value) -> Result<Self, crate::error::CoreError> {
+        let source = value
+            .as_object()
+            .ok_or_else(|| crate::error::CoreError::Other("pal_data is not an object".into()))?;
+        let mut normalized = serde_json::Map::new();
+        // Start from the defaults table (dto/pal.py:99-126)
+        let defaults = serde_json::json!({
+            "instance_id": "00000000-0000-0000-0000-000000000000",
+            "owner_uid": null,
+            "character_id": "",
+            "is_lucky": null,
+            "is_boss": null,
+            "gender": "Male",
+            "rank_hp": 0, "rank_attack": 0, "rank_defense": 0, "rank_craftspeed": 0,
+            "talent_hp": 0, "talent_shot": 0, "talent_defense": 0,
+            "rank": 0, "level": 1, "exp": 0,
+            "nickname": null,
+            "is_tower": false,
+            "storage_id": "00000000-0000-0000-0000-000000000000",
+            "stomach": 0.0,
+            "storage_slot": 0,
+            "learned_skills": [], "active_skills": [], "passive_skills": [],
+            "hp": 1, "max_hp": 1,
+            "group_id": null,
+            "sanity": 1.0,
+            "work_suitability": {},
+            "is_sick": false,
+            "friendship_point": 0
+        });
+        for (key, default_value) in defaults.as_object().unwrap() {
+            let candidate = source.get(key).cloned().unwrap_or(serde_json::Value::Null);
+            let accepted = match candidate {
+                serde_json::Value::Null => default_value.clone(),
+                other => other,
+            };
+            normalized.insert(key.clone(), accepted);
+        }
+        // character_id must be a string (the fixture's broken row fails here)
+        if !normalized["character_id"].is_string() {
+            return Err(crate::error::CoreError::Other(
+                "character_id is not a string".into(),
+            ));
+        }
+        serde_json::from_value(serde_json::Value::Object(normalized))
+            .map_err(|e| crate::error::CoreError::Other(format!("invalid pal_data: {e}")))
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
