@@ -129,6 +129,18 @@ pub(crate) fn collect_player_entries(
     players
 }
 
+/// Player-facing nickname: `NickName` if present and non-empty, otherwise
+/// `"Player (<uid8>)"`. Shared by `build_player_summary` and the
+/// no-`.sav`-file diagnostic in `extract_summaries` so both derive the same
+/// name Python's `_create_player_summary` computes.
+fn player_nickname(uid: Uuid, save_parameter: &uesave::Properties) -> String {
+    props::get(save_parameter, &["NickName"])
+        .and_then(props::as_str)
+        .filter(|name| !name.is_empty())
+        .map(str::to_owned)
+        .unwrap_or_else(|| format!("Player ({})", &uid.to_string()[..8]))
+}
+
 /// Port of `_create_player_summary`'s pure part: nickname fallback, level,
 /// guild link, pal count. The caller supplies `last_online_time` because
 /// parsing the player's own `.sav` is I/O this function has no business
@@ -142,11 +154,7 @@ pub(crate) fn build_player_summary(
     pal_owner_counts: &HashMap<Uuid, i64>,
     last_online_time: Option<chrono::NaiveDateTime>,
 ) -> PlayerSummary {
-    let nickname = props::get(save_parameter, &["NickName"])
-        .and_then(props::as_str)
-        .filter(|name| !name.is_empty())
-        .map(str::to_owned)
-        .unwrap_or_else(|| format!("Player ({})", &uid.to_string()[..8]));
+    let nickname = player_nickname(uid, save_parameter);
 
     let level = props::get(save_parameter, &["Level"])
         .and_then(props::as_byte)
@@ -324,61 +332,78 @@ pub fn extract_summaries(
 ) -> Result<(), CoreError> {
     progress("Extracting player summaries...");
 
-    let (player_summaries, parsed_player_saves) = {
-        let character_entries = session.character_map()?;
-        let group_entries = session.group_map()?;
+    // `character_entries` and `group_entries` are resolved once and shared by
+    // both the player- and guild-summary passes below; both passes only ever
+    // borrow `session` immutably (`player_file_refs`, `base_camp_map`), so
+    // `session`'s fields are assigned once, together, at the very end.
+    let character_entries = session.character_map()?;
+    let group_entries = session.group_map()?;
 
-        let pal_owner_counts = build_pal_owner_counts(character_entries);
-        let player_guild_map = build_player_guild_map(group_entries);
+    let pal_owner_counts = build_pal_owner_counts(character_entries);
+    let player_guild_map = build_player_guild_map(group_entries);
 
-        let mut summaries = BTreeMap::new();
-        let mut parsed_saves = Vec::new();
-        for (uid, parameters) in collect_player_entries(character_entries) {
-            // Mirrors `get_player_summaries`'s filter: in this port, a
-            // player entry with no `.sav` file reference never gets a
-            // summary at all (the reconciled `SaveSession.player_summaries`
-            // holds only the filtered map Python's `AppState` ends up with).
-            let Some(file_ref) = session.player_file_refs.get(&uid) else {
-                continue;
-            };
-
-            let mut last_online_time = None;
-            if let Ok(Some(sav_bytes)) = file_ref.sav_bytes() {
-                let (parsed_save, timestamp) = parse_player_save_and_timestamp(&sav_bytes);
-                last_online_time = timestamp;
-                if let Some(parsed_save) = parsed_save {
-                    parsed_saves.push((uid, parsed_save));
-                }
-            }
-
-            summaries.insert(
-                uid,
-                build_player_summary(
-                    uid,
-                    parameters,
-                    &player_guild_map,
-                    &pal_owner_counts,
-                    last_online_time,
-                ),
+    let mut player_summaries = BTreeMap::new();
+    let mut parsed_player_saves = Vec::new();
+    let mut filtered_without_sav_count: usize = 0;
+    for (uid, parameters) in collect_player_entries(character_entries) {
+        // Mirrors `get_player_summaries`'s filter: in this port, a player
+        // entry with no `.sav` file reference never gets a summary at all
+        // (the reconciled `SaveSession.player_summaries` holds only the
+        // filtered map Python's `AppState` ends up with). Python logs a
+        // per-player warning plus an aggregate count for this same filter
+        // (`SummariesMixin.get_player_summaries`); this port emits the
+        // equivalent diagnostics here, at the point the filter is actually
+        // applied.
+        let Some(file_ref) = session.player_file_refs.get(&uid) else {
+            filtered_without_sav_count += 1;
+            tracing::warn!(
+                player_id = %uid,
+                nickname = player_nickname(uid, parameters),
+                "filtering out player - no .sav file reference"
             );
+            continue;
+        };
+
+        let mut last_online_time = None;
+        if let Ok(Some(sav_bytes)) = file_ref.sav_bytes() {
+            let (parsed_save, timestamp) = parse_player_save_and_timestamp(&sav_bytes);
+            last_online_time = timestamp;
+            if let Some(parsed_save) = parsed_save {
+                parsed_player_saves.push((uid, parsed_save));
+            }
         }
-        (summaries, parsed_saves)
-    };
+
+        player_summaries.insert(
+            uid,
+            build_player_summary(
+                uid,
+                parameters,
+                &player_guild_map,
+                &pal_owner_counts,
+                last_online_time,
+            ),
+        );
+    }
+    if filtered_without_sav_count > 0 {
+        tracing::info!(
+            filtered_count = filtered_without_sav_count,
+            valid_count = player_summaries.len(),
+            "filtered players without .sav files"
+        );
+    }
+
+    progress("Extracting guild summaries...");
+    let guild_summaries =
+        build_guild_summaries(group_entries, session.base_camp_map(), character_entries);
 
     session.player_summaries = player_summaries;
+    session.guild_summaries = guild_summaries;
     for (uid, parsed_save) in parsed_player_saves {
         // Python: `if parsed_gvas is not None and uid not in
         // self._player_gvas_sav_cache: self._player_gvas_sav_cache[uid] =
         // parsed_gvas` — first parse wins, matched by `or_insert`.
         session.player_sav_cache.entry(uid).or_insert(parsed_save);
     }
-
-    progress("Extracting guild summaries...");
-    session.guild_summaries = {
-        let group_entries = session.group_map()?;
-        let character_entries = session.character_map()?;
-        build_guild_summaries(group_entries, session.base_camp_map(), character_entries)
-    };
 
     Ok(())
 }
