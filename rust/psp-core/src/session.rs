@@ -532,6 +532,76 @@ mod load_tests {
         assert!(result.is_err());
     }
 
+    /// Synthetic (no corpus save required) proof that
+    /// `invalidate_performance_caches` actually clears every field --
+    /// `world_index.rs`'s corpus-gated tests cover the same contract against
+    /// real save data, but skip silently when `PSP_TEST_SAVE_DIR` is unset,
+    /// so this unit test is the one that always runs.
+    #[test]
+    fn test_invalidate_performance_caches_clears_every_field() {
+        let level = minimal_uesave_save(uesave::Properties::default());
+        let mut session = SaveSession::new_for_tests(SaveKind::InMemory, level);
+        session.caches = WorldCaches {
+            character_index: Some(std::collections::HashMap::from([(Uuid::nil(), 0)])),
+            item_container_index: Some(std::collections::HashMap::from([(Uuid::nil(), 0)])),
+            character_container_index: Some(std::collections::HashMap::from([(Uuid::nil(), 0)])),
+            dynamic_item_index: Some(std::collections::HashMap::from([(Uuid::nil(), 0)])),
+            pal_owner_counts: Some(std::collections::HashMap::from([(Uuid::nil(), 1)])),
+            player_guild_map: Some(std::collections::HashMap::from([(
+                Uuid::nil(),
+                Uuid::nil(),
+            )])),
+        };
+
+        session.invalidate_performance_caches();
+
+        assert!(session.caches.character_index.is_none());
+        assert!(session.caches.item_container_index.is_none());
+        assert!(session.caches.character_container_index.is_none());
+        assert!(session.caches.dynamic_item_index.is_none());
+        assert!(session.caches.pal_owner_counts.is_none());
+        assert!(session.caches.player_guild_map.is_none());
+    }
+
+    /// `new_for_tests` is now the sole construction path for every
+    /// hand-built `SaveSession` in this workspace (including `load` itself),
+    /// so its defaults matter beyond just this test file. Pins every field
+    /// it's responsible for defaulting, not just the two it takes as
+    /// arguments.
+    #[test]
+    fn test_new_for_tests_sets_kind_and_level_and_defaults_everything_else() {
+        let level = minimal_uesave_save(uesave::Properties::default());
+        let session = SaveSession::new_for_tests(SaveKind::InMemory, level);
+
+        assert!(matches!(session.kind, SaveKind::InMemory));
+        assert_eq!("", session.world_name);
+        assert_eq!("", session.save_id);
+        assert_eq!("steam", session.save_type_label);
+        assert_eq!(0, session.size);
+        assert!(session.level_meta.is_none());
+        assert!(session.player_file_refs.is_empty());
+        assert!(session.player_sav_cache.is_empty());
+        assert!(session.player_summaries.is_empty());
+        assert!(session.guild_summaries.is_empty());
+        assert!(session.player_summary_order.is_empty());
+        assert!(session.guild_summary_order.is_empty());
+        assert!(session.character_index.is_empty());
+        assert!(session.item_container_index.is_empty());
+        assert!(session.character_container_index.is_empty());
+        assert!(session.group_index.is_empty());
+        assert!(session.guild_extra_index.is_empty());
+        assert!(session.gps_file_path.is_none());
+        assert!(!session.gps_loaded);
+        assert!(session.loaded_players.is_empty());
+        assert!(session.loaded_guilds.is_empty());
+        assert!(session.caches.character_index.is_none());
+        assert!(session.caches.item_container_index.is_none());
+        assert!(session.caches.character_container_index.is_none());
+        assert!(session.caches.dynamic_item_index.is_none());
+        assert!(session.caches.pal_owner_counts.is_none());
+        assert!(session.caches.player_guild_map.is_none());
+    }
+
     /// Python's `_load_world_name`: `world_name if world_name else "Unknown"`
     /// (`palworld_save_pal/game/save_manager.py`). Four distinct shapes of
     /// `LevelMeta.sav`'s property tree, each asserted separately so a
