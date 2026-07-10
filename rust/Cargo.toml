@@ -27,8 +27,7 @@ clap = { version = "4", features = ["derive"] }
 futures = "0.3"            # contract addition: WS split + panic containment
 percent-encoding = "2"     # contract addition: SPA redirect encoding
 base64 = "0.22"
-zip = "2"
-flate2 = "1"
+zip = { version = "2", default-features = false, features = ["deflate"] }
 chrono = "0.4"
 # dev-dependencies
 tokio-tungstenite = "0.24"
