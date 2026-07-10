@@ -1,15 +1,19 @@
 {
+  "AIcore": {
+    "localized_name": "AI核心",
+    "description": "能夠執行複雜決策及自主控制， 是尖端設備不可或缺的核心部件。 可在「Factory Hard 04」製作。"
+  },
   "Accessory_AT_1": {
     "localized_name": "攻擊吊墜",
-    "description": "能夠稍微提升攻擊力的飾品。"
+    "description": "能夠提升攻擊力的飾品。"
   },
   "Accessory_AT_2": {
-    "localized_name": "攻擊吊墜+1",
+    "localized_name": "攻擊吊墜",
     "description": "能夠提升攻擊力的飾品。"
   },
   "Accessory_AT_3": {
-    "localized_name": "攻擊吊墜+2",
-    "description": "能夠大幅提升攻擊力的飾品。"
+    "localized_name": "攻擊吊墜",
+    "description": "能夠提升攻擊力的飾品。"
   },
   "Accessory_AirDash1": {
     "localized_name": "空中衝刺靴",
@@ -29,123 +33,159 @@
   },
   "Accessory_AquaResist_1": {
     "localized_name": "抗水屬性戒指",
-    "description": "可稍微減輕水屬性傷害的飾品。"
+    "description": "可減輕水屬性傷害的飾品。"
   },
   "Accessory_AquaResist_2": {
-    "localized_name": "抗水屬性戒指+1",
+    "localized_name": "抗水屬性戒指",
     "description": "可減輕水屬性傷害的飾品。"
   },
   "Accessory_AquaResist_3": {
-    "localized_name": "抗水屬性戒指+2",
-    "description": "可大幅減輕水屬性傷害的飾品。"
+    "localized_name": "抗水屬性戒指",
+    "description": "可減輕水屬性傷害的飾品。"
+  },
+  "Accessory_Avoid_1": {
+    "localized_name": "幻影戒指",
+    "description": "可延長翻滾及滑步時無敵時間的飾品。"
+  },
+  "Accessory_ColdIce_1": {
+    "localized_name": "白絨雪怪護身符",
+    "description": "擁有強烈耐寒效果的飾品。 也可大幅減輕冰屬性傷害。"
   },
   "Accessory_CoolResist_1": {
     "localized_name": "防寒內衣",
-    "description": "具有少許耐寒效果的飾品。"
+    "description": "具有耐寒效果的飾品。"
   },
   "Accessory_CoolResist_2": {
-    "localized_name": "防寒內衣+1",
+    "localized_name": "防寒內衣",
     "description": "具有耐寒效果的飾品。"
   },
   "Accessory_CoolResist_3": {
-    "localized_name": "防寒內衣+2",
-    "description": "具有極高耐寒效果的飾品。"
+    "localized_name": "防寒內衣",
+    "description": "具有耐寒效果的飾品。"
+  },
+  "Accessory_DFHP_1": {
+    "localized_name": "格魯力斯腰帶",
+    "description": "可大幅提升防禦力和生命值的飾品。"
   },
   "Accessory_DarkResist_1": {
     "localized_name": "抗暗屬性戒指",
-    "description": "可稍微減輕暗屬性傷害的飾品。"
+    "description": "可減輕暗屬性傷害的飾品。"
   },
   "Accessory_DarkResist_2": {
-    "localized_name": "抗暗屬性戒指+1",
+    "localized_name": "抗暗屬性戒指",
     "description": "可減輕暗屬性傷害的飾品。"
   },
   "Accessory_DarkResist_3": {
-    "localized_name": "抗暗屬性戒指+2",
-    "description": "可大幅減輕暗屬性傷害的飾品。"
+    "localized_name": "抗暗屬性戒指",
+    "description": "可減輕暗屬性傷害的飾品。"
   },
   "Accessory_DragonResist_1": {
     "localized_name": "抗龍屬性戒指",
-    "description": "可稍微減輕龍屬性傷害的飾品。"
+    "description": "可減輕龍屬性傷害的飾品。"
   },
   "Accessory_DragonResist_2": {
-    "localized_name": "抗龍屬性戒指+1",
+    "localized_name": "抗龍屬性戒指",
     "description": "可減輕龍屬性傷害的飾品。"
   },
   "Accessory_DragonResist_3": {
-    "localized_name": "抗龍屬性戒指+2",
-    "description": "可大幅減輕龍屬性傷害的飾品。"
+    "localized_name": "抗龍屬性戒指",
+    "description": "可減輕龍屬性傷害的飾品。"
   },
   "Accessory_EarthResist_1": {
     "localized_name": "抗地屬性戒指",
-    "description": "可稍微減輕地屬性傷害的飾品。"
+    "description": "可減輕地屬性傷害的飾品。"
   },
   "Accessory_EarthResist_2": {
-    "localized_name": "抗地屬性戒指+1",
+    "localized_name": "抗地屬性戒指",
     "description": "可減輕地屬性傷害的飾品。"
   },
   "Accessory_EarthResist_3": {
-    "localized_name": "抗地屬性戒指+2",
-    "description": "可大幅減輕地屬性傷害的飾品。"
+    "localized_name": "抗地屬性戒指",
+    "description": "可減輕地屬性傷害的飾品。"
+  },
+  "Accessory_ExplosionResist": {
+    "localized_name": "防爆內衣",
+    "description": "用特殊纖維製作，輕盈而結實的內衣。 穿上後可以免受爆炸傷害。"
   },
   "Accessory_FireResist_1": {
     "localized_name": "抗火屬性戒指",
-    "description": "可稍微減輕火屬性傷害的飾品。"
+    "description": "可減輕火屬性傷害的飾品。"
   },
   "Accessory_FireResist_2": {
-    "localized_name": "抗火屬性戒指+1",
+    "localized_name": "抗火屬性戒指",
     "description": "可減輕火屬性傷害的飾品。"
   },
   "Accessory_FireResist_3": {
-    "localized_name": "抗火屬性戒指+2",
-    "description": "可大幅減輕火屬性傷害的飾品。"
+    "localized_name": "抗火屬性戒指",
+    "description": "可減輕火屬性傷害的飾品。"
+  },
+  "Accessory_HCHP_1": {
+    "localized_name": "先遣隊護身符",
+    "description": "同時擁有很強耐熱、耐寒效果的飾品。 還可以大幅提升生命值。"
+  },
+  "Accessory_HCMW_1": {
+    "localized_name": "流浪商人護身符",
+    "description": "同時擁有很強耐熱、耐寒效果的飾品。 還可以大幅提升玩家的負重上限。"
   },
   "Accessory_HP_1": {
     "localized_name": "生命吊墜",
-    "description": "能夠稍微提升生命值的飾品。"
+    "description": "能夠提升生命值的飾品。"
   },
   "Accessory_HP_2": {
-    "localized_name": "生命吊墜+1",
+    "localized_name": "生命吊墜",
     "description": "能夠提升生命值的飾品。"
   },
   "Accessory_HP_3": {
-    "localized_name": "生命吊墜+2",
-    "description": "能夠大幅提升生命值的飾品。"
+    "localized_name": "生命吊墜",
+    "description": "能夠提升生命值的飾品。"
   },
   "Accessory_HeatColdResist_1": {
     "localized_name": "防暑防寒內衣",
-    "description": "同時具有少許耐熱、耐寒效果的飾品。"
+    "description": "同時具有耐熱、耐寒效果的飾品。"
   },
   "Accessory_HeatColdResist_2": {
-    "localized_name": "防暑防寒內衣+1",
+    "localized_name": "防暑防寒內衣",
     "description": "同時具有耐熱、耐寒效果的飾品。"
   },
   "Accessory_HeatColdResist_3": {
-    "localized_name": "防暑防寒內衣+2",
-    "description": "同時具有極高耐熱、耐寒效果的飾品。"
+    "localized_name": "防暑防寒內衣",
+    "description": "同時具有耐熱、耐寒效果的飾品。"
+  },
+  "Accessory_HeatFire_1": {
+    "localized_name": "熔岩獸護身符",
+    "description": "擁有很強耐熱效果的飾品。 也可大幅減輕火屬性傷害。"
   },
   "Accessory_HeatResist_1": {
     "localized_name": "防暑內衣",
-    "description": "具有少許耐熱效果的飾品。"
+    "description": "具有耐熱效果的飾品。"
   },
   "Accessory_HeatResist_2": {
-    "localized_name": "防暑內衣+1",
+    "localized_name": "防暑內衣",
     "description": "具有耐熱效果的飾品。"
   },
   "Accessory_HeatResist_3": {
-    "localized_name": "防暑內衣+2",
-    "description": "具有極高耐熱效果的飾品。"
+    "localized_name": "防暑內衣",
+    "description": "具有耐熱效果的飾品。"
   },
   "Accessory_IceResist_1": {
     "localized_name": "抗冰屬性戒指",
-    "description": "可稍微減輕冰屬性傷害的飾品。"
+    "description": "可減輕冰屬性傷害的飾品。"
   },
   "Accessory_IceResist_2": {
-    "localized_name": "抗冰屬性戒指+1",
+    "localized_name": "抗冰屬性戒指",
     "description": "可減輕冰屬性傷害的飾品。"
   },
   "Accessory_IceResist_3": {
-    "localized_name": "抗冰屬性戒指+2",
-    "description": "可大幅減輕冰屬性傷害的飾品。"
+    "localized_name": "抗冰屬性戒指",
+    "description": "可減輕冰屬性傷害的飾品。"
+  },
+  "Accessory_JumpAir_1": {
+    "localized_name": "空中漫步者 Mk-Ⅰ",
+    "description": "裝備後可使玩家獲得2段跳躍能力的飾品。 並且允許進行1次空中衝刺。"
+  },
+  "Accessory_JumpAir_2": {
+    "localized_name": "空中漫步者 Mk-Ⅱ",
+    "description": "裝備後可使玩家獲得2段跳躍能力的飾品。 並且允許進行2次空中衝刺。"
   },
   "Accessory_JumpCount_Increase1": {
     "localized_name": "二段跳靴",
@@ -165,27 +205,31 @@
   },
   "Accessory_LeafResist_1": {
     "localized_name": "抗草屬性戒指",
-    "description": "可稍微減輕草屬性傷害的飾品。"
+    "description": "可減輕草屬性傷害的飾品。"
   },
   "Accessory_LeafResist_2": {
-    "localized_name": "抗草屬性戒指+1",
+    "localized_name": "抗草屬性戒指",
     "description": "可減輕草屬性傷害的飾品。"
   },
   "Accessory_LeafResist_3": {
-    "localized_name": "抗草屬性戒指+2",
-    "description": "可大幅減輕草屬性傷害的飾品。"
+    "localized_name": "抗草屬性戒指",
+    "description": "可減輕草屬性傷害的飾品。"
   },
   "Accessory_MaxWeightUp_01": {
     "localized_name": "搬運工戒指",
-    "description": "可以略微增加玩家的負重上限。"
+    "description": "可以增加玩家的負重上限。"
   },
   "Accessory_MaxWeightUp_02": {
-    "localized_name": "搬運工戒指+1",
+    "localized_name": "搬運工戒指",
     "description": "可以增加玩家的負重上限。"
   },
   "Accessory_MaxWeightUp_03": {
-    "localized_name": "搬運工戒指+2",
-    "description": "可以大幅增加玩家的負重上限。"
+    "localized_name": "搬運工戒指",
+    "description": "可以增加玩家的負重上限。"
+  },
+  "Accessory_NonkChecker_1": {
+    "localized_name": "帕魯馴養師眼鏡",
+    "description": "帕魯馴養師的眼鏡。 裝備者無法將攻擊對象的生命值降到1以下。 戴上可以確認帕魯的隱藏才能。"
   },
   "Accessory_Nonkilling": {
     "localized_name": "慈悲戒指",
@@ -193,15 +237,67 @@
   },
   "Accessory_NormalResist_1": {
     "localized_name": "抗無屬性戒指",
-    "description": "可稍微減輕無屬性傷害的飾品。"
+    "description": "可減輕無屬性傷害的飾品。"
   },
   "Accessory_NormalResist_2": {
-    "localized_name": "抗無屬性戒指+1",
+    "localized_name": "抗無屬性戒指",
     "description": "可減輕無屬性傷害的飾品。"
   },
   "Accessory_NormalResist_3": {
-    "localized_name": "抗無屬性戒指+2",
-    "description": "可大幅減輕無屬性傷害的飾品。"
+    "localized_name": "抗無屬性戒指",
+    "description": "可減輕無屬性傷害的飾品。"
+  },
+  "Accessory_Otomo_Dargon_1": {
+    "localized_name": "精靈龍指環",
+    "description": "可大幅減輕暗屬性傷害的飾品。 還可大幅提升參戰帕魯的龍屬性傷害。"
+  },
+  "Accessory_Otomo_Dark_1": {
+    "localized_name": "闇巫貓指環",
+    "description": "可大幅減輕無屬性傷害的飾品。 還可大幅提升參戰帕魯的暗屬性傷害。"
+  },
+  "Accessory_Otomo_Earth_1": {
+    "localized_name": "金鎧蠍指環",
+    "description": "可大幅減輕雷屬性傷害的飾品。 還可大幅提升參戰帕魯的地屬性傷害。"
+  },
+  "Accessory_Otomo_Electricity_1": {
+    "localized_name": "雷隱鹿指環",
+    "description": "可大幅減輕水屬性傷害的飾品。 還可大幅提升參戰帕魯的雷屬性傷害。"
+  },
+  "Accessory_Otomo_Fire_1": {
+    "localized_name": "獄焰王指環",
+    "description": "可大幅減輕草屬性傷害的飾品。 還可大幅提升參戰帕魯的火屬性傷害。"
+  },
+  "Accessory_Otomo_Fire_2": {
+    "localized_name": "荷魯斯指環",
+    "description": "可大幅減輕冰屬性傷害的飾品。 還可大幅提升參戰帕魯的火屬性傷害。"
+  },
+  "Accessory_Otomo_Ice_1": {
+    "localized_name": "冰棘獸指環",
+    "description": "可大幅減輕龍屬性傷害的飾品。 還可大幅提升參戰帕魯的冰屬性傷害。"
+  },
+  "Accessory_Otomo_Leaf_1": {
+    "localized_name": "薇莉塔指環",
+    "description": "可大幅減輕地屬性傷害的飾品。 還可大幅提升參戰帕魯的草屬性傷害。"
+  },
+  "Accessory_Otomo_Water_1": {
+    "localized_name": "伊西斯指環",
+    "description": "可大幅減輕火屬性傷害的飾品。 還可大幅提升參戰帕魯的水屬性傷害。"
+  },
+  "Accessory_PPAT_1": {
+    "localized_name": "汪宗師徽章",
+    "description": "可大幅提升玩家攻擊力的飾品。 帕魯的攻擊力也會提升。"
+  },
+  "Accessory_PPDF_1": {
+    "localized_name": "艾基魯迦徽章",
+    "description": "可大幅提升玩家防禦力的飾品。 帕魯的防禦力也會提升。"
+  },
+  "Accessory_SuperJumpAir_1": {
+    "localized_name": "空中漫步者 Mk-Ⅲ",
+    "description": "裝備後可使玩家獲得3段跳躍能力的飾品。 並且允許進行1次空中衝刺。"
+  },
+  "Accessory_SuperJumpAir_2": {
+    "localized_name": "空中漫步者 Mk-EX",
+    "description": "裝備後可使玩家獲得3段跳躍能力的飾品。 並且允許進行2次空中衝刺。"
   },
   "Accessory_TalentChecker": {
     "localized_name": "伯樂眼鏡",
@@ -209,55 +305,59 @@
   },
   "Accessory_ThunderResist_1": {
     "localized_name": "抗雷屬性戒指",
-    "description": "可稍微減輕雷屬性傷害的飾品。"
+    "description": "可減輕雷屬性傷害的飾品。"
   },
   "Accessory_ThunderResist_2": {
-    "localized_name": "抗雷屬性戒指+1",
+    "localized_name": "抗雷屬性戒指",
     "description": "可減輕雷屬性傷害的飾品。"
   },
   "Accessory_ThunderResist_3": {
-    "localized_name": "抗雷屬性戒指+2",
-    "description": "可大幅減輕雷屬性傷害的飾品。"
+    "localized_name": "抗雷屬性戒指",
+    "description": "可減輕雷屬性傷害的飾品。"
+  },
+  "Accessory_WKMC_1": {
+    "localized_name": "島民的工具腰帶",
+    "description": "可以大幅增加玩家負重上限的飾品。 還可以大幅提升工作速度。"
   },
   "Accessory_WorkSpeed_1": {
     "localized_name": "勤奮吊墜",
-    "description": "能夠稍微提升工作速度的飾品。"
+    "description": "能夠提升工作速度的飾品。"
   },
   "Accessory_WorkSpeed_2": {
-    "localized_name": "勤奮吊墜+1",
+    "localized_name": "勤奮吊墜",
     "description": "能夠提升工作速度的飾品。"
   },
   "Accessory_WorkSpeed_3": {
-    "localized_name": "勤奮吊墜+2",
-    "description": "能夠大幅提升工作速度的飾品。"
+    "localized_name": "勤奮吊墜",
+    "description": "能夠提升工作速度的飾品。"
   },
   "Accessory_defense_1": {
     "localized_name": "防禦吊墜",
-    "description": "能夠稍微提升防禦力的飾品。"
+    "description": "能夠提升防禦力的飾品。"
   },
   "Accessory_defense_2": {
-    "localized_name": "防禦吊墜+1",
+    "localized_name": "防禦吊墜",
     "description": "能夠提升防禦力的飾品。"
   },
   "Accessory_defense_3": {
-    "localized_name": "防禦吊墜+2",
-    "description": "能夠大幅提升防禦力的飾品。"
+    "localized_name": "防禦吊墜",
+    "description": "能夠提升防禦力的飾品。"
   },
   "AdditionalInventory_001": {
     "localized_name": "小型擴展背包",
-    "description": "可攜帶額外行李的小型背包。 持有此物品，即可增加背包空間。"
+    "description": "能夠額外攜帶物品的小型背包。 持有此道具時，可增加背包欄位。 只需攜帶一個就足夠了。"
   },
   "AdditionalInventory_002": {
-    "localized_name": "中等擴展背包",
-    "description": "可攜帶額外行李的普通背包。 持有此物品，即可增加背包空間。"
+    "localized_name": "中型擴展背包",
+    "description": "能夠額外攜帶物品的普通背包。 持有此道具時，可增加背包欄位。 只需攜帶一個就足夠了。"
   },
   "AdditionalInventory_003": {
     "localized_name": "大型擴展背包",
-    "description": "可攜帶額外行李的大背包。 持有此物品，即可增加背包空間。"
+    "description": "能夠額外攜帶物品的大型背包。 持有此道具時，可增加背包欄位。 只需攜帶一個就足夠了。"
   },
   "AdditionalInventory_004": {
     "localized_name": "巨大擴展背包",
-    "description": "可攜帶額外行李的巨大背包。 持有此物品，即可增加背包空間。"
+    "description": "能夠額外攜帶物品的巨大背包。 持有此道具時，可增加背包欄位。 只需攜帶一個就足夠了。"
   },
   "AffectionFruit_01": {
     "localized_name": "羈絆寶桃",
@@ -266,6 +366,106 @@
   "AffectionFruit_02": {
     "localized_name": "羈絆小桃",
     "description": "飽含溫情的小小果實。 據說帕魯吃下後會對人類敞開心扉。 務必謹慎選擇贈送對象。"
+  },
+  "AncientArmor": {
+    "localized_name": "遠古盔甲",
+    "description": "用烈陽金屬錠打造的古代盔甲。 失落文明的精髓毫無保留地傾注其中，具備壓倒性的防禦力。 即使是導致世界末日的威脅，也能坦然面對的究極防具。"
+  },
+  "AncientArmorCold": {
+    "localized_name": "耐寒遠古盔甲",
+    "description": "經過改良的遠古盔甲。 利用古代技術進一步提高了防寒性能，在嚴寒環境下也能保存體力。"
+  },
+  "AncientArmorCold_2": {
+    "localized_name": "耐寒遠古盔甲",
+    "description": "經過改良的遠古盔甲。 利用古代技術進一步提高了防寒性能，在嚴寒環境下也能保存體力。"
+  },
+  "AncientArmorCold_3": {
+    "localized_name": "耐寒遠古盔甲",
+    "description": "經過改良的遠古盔甲。 利用古代技術進一步提高了防寒性能，在嚴寒環境下也能保存體力。"
+  },
+  "AncientArmorCold_4": {
+    "localized_name": "耐寒遠古盔甲",
+    "description": "經過改良的遠古盔甲。 利用古代技術進一步提高了防寒性能，在嚴寒環境下也能保存體力。"
+  },
+  "AncientArmorCold_5": {
+    "localized_name": "耐寒遠古盔甲",
+    "description": "經過改良的遠古盔甲。 利用古代技術進一步提高了防寒性能，在嚴寒環境下也能保存體力。"
+  },
+  "AncientArmorHeat": {
+    "localized_name": "耐熱遠古盔甲",
+    "description": "經過改良的遠古盔甲。 利用古代技術進一步提高了耐熱性能，在炎熱環境中也能自如活動。"
+  },
+  "AncientArmorHeat_2": {
+    "localized_name": "耐熱遠古盔甲",
+    "description": "經過改良的遠古盔甲。 利用古代技術進一步提高了耐熱性能，在炎熱環境中也能自如活動。"
+  },
+  "AncientArmorHeat_3": {
+    "localized_name": "耐熱遠古盔甲",
+    "description": "經過改良的遠古盔甲。 利用古代技術進一步提高了耐熱性能，在炎熱環境中也能自如活動。"
+  },
+  "AncientArmorHeat_4": {
+    "localized_name": "耐熱遠古盔甲",
+    "description": "經過改良的遠古盔甲。 利用古代技術進一步提高了耐熱性能，在炎熱環境中也能自如活動。"
+  },
+  "AncientArmorHeat_5": {
+    "localized_name": "耐熱遠古盔甲",
+    "description": "經過改良的遠古盔甲。 利用古代技術進一步提高了耐熱性能，在炎熱環境中也能自如活動。"
+  },
+  "AncientArmorWeight": {
+    "localized_name": "輕便遠古盔甲",
+    "description": "經過改良的遠古盔甲。 其中嵌入了古代的輔助機械，使穿戴者能夠攜帶更多物資。"
+  },
+  "AncientArmorWeight_2": {
+    "localized_name": "輕便遠古盔甲",
+    "description": "經過改良的遠古盔甲。 其中嵌入了古代的輔助機械，使穿戴者能夠攜帶更多物資。"
+  },
+  "AncientArmorWeight_3": {
+    "localized_name": "輕便遠古盔甲",
+    "description": "經過改良的遠古盔甲。 其中嵌入了古代的輔助機械，使穿戴者能夠攜帶更多物資。"
+  },
+  "AncientArmorWeight_4": {
+    "localized_name": "輕便遠古盔甲",
+    "description": "經過改良的遠古盔甲。 其中嵌入了古代的輔助機械，使穿戴者能夠攜帶更多物資。"
+  },
+  "AncientArmorWeight_5": {
+    "localized_name": "輕便遠古盔甲",
+    "description": "經過改良的遠古盔甲。 其中嵌入了古代的輔助機械，使穿戴者能夠攜帶更多物資。"
+  },
+  "AncientArmor_2": {
+    "localized_name": "遠古盔甲",
+    "description": "用烈陽金屬錠打造的古代盔甲。 失落文明的精髓毫無保留地傾注其中，具備壓倒性的防禦力。 即使是導致世界末日的威脅，也能坦然面對的究極防具。"
+  },
+  "AncientArmor_3": {
+    "localized_name": "遠古盔甲",
+    "description": "用烈陽金屬錠打造的古代盔甲。 失落文明的精髓毫無保留地傾注其中，具備壓倒性的防禦力。 即使是導致世界末日的威脅，也能坦然面對的究極防具。"
+  },
+  "AncientArmor_4": {
+    "localized_name": "遠古盔甲",
+    "description": "用烈陽金屬錠打造的古代盔甲。 失落文明的精髓毫無保留地傾注其中，具備壓倒性的防禦力。 即使是導致世界末日的威脅，也能坦然面對的究極防具。"
+  },
+  "AncientArmor_5": {
+    "localized_name": "遠古盔甲",
+    "description": "用烈陽金屬錠打造的古代盔甲。 失落文明的精髓毫無保留地傾注其中，具備壓倒性的防禦力。 即使是導致世界末日的威脅，也能坦然面對的究極防具。"
+  },
+  "AncientHelmet": {
+    "localized_name": "遠古頭盔",
+    "description": "用烈陽金屬錠打造的古代頭盔。 其中凝聚著歷經歲月錘煉的智慧，能為穿戴者提供堅不可摧的保護。 防禦性能遠遠凌駕於現代的裝備。"
+  },
+  "AncientHelmet_2": {
+    "localized_name": "遠古頭盔",
+    "description": "用烈陽金屬錠打造的古代頭盔。 其中凝聚著歷經歲月錘煉的智慧，能為穿戴者提供堅不可摧的保護。 防禦性能遠遠凌駕於現代的裝備。"
+  },
+  "AncientHelmet_3": {
+    "localized_name": "遠古頭盔",
+    "description": "用烈陽金屬錠打造的古代頭盔。 其中凝聚著歷經歲月錘煉的智慧，能為穿戴者提供堅不可摧的保護。 防禦性能遠遠凌駕於現代的裝備。"
+  },
+  "AncientHelmet_4": {
+    "localized_name": "遠古頭盔",
+    "description": "用烈陽金屬錠打造的古代頭盔。 其中凝聚著歷經歲月錘煉的智慧，能為穿戴者提供堅不可摧的保護。 防禦性能遠遠凌駕於現代的裝備。"
+  },
+  "AncientHelmet_5": {
+    "localized_name": "遠古頭盔",
+    "description": "用烈陽金屬錠打造的古代頭盔。 其中凝聚著歷經歲月錘煉的智慧，能為穿戴者提供堅不可摧的保護。 防禦性能遠遠凌駕於現代的裝備。"
   },
   "AncientParts2": {
     "localized_name": "古代文明核心",
@@ -301,19 +501,19 @@
   },
   "Arrow": {
     "localized_name": "箭矢",
-    "description": "弓專用的箭矢。"
+    "description": "弓射擊時用的箭矢。 可在「初階工作台」製作。"
   },
   "Arrow_Fire": {
     "localized_name": "火箭矢",
-    "description": "「Bow Fire」與「BowGun Fire」等用的箭矢。 可對目標造成火屬性傷害。"
+    "description": "弓射擊時用的Arrow Fire。 可以對敵人造成<img id=|ElemIcon Fire|/><uiCommon id=|COMMON ELEMENT NAME Fire| style=|Elem Fire|/>傷害。 可在「初階工作台」製作。"
   },
   "Arrow_Poison": {
     "localized_name": "毒箭矢",
-    "description": "「Bow Poison」與「BowGun Poison」等用的箭矢。 可以讓被射中的目標中毒。"
+    "description": "弓射擊時用的Arrow Poison。 可以對敵人造成<uiCommon id=|ADDITIONAL EFFECT Poison| style=|Effect Poison|/>傷害。 可在「初階工作台」製作。"
   },
   "AssaultRifleBullet": {
     "localized_name": "突擊步槍子彈",
-    "description": "用於AssaultRifle Default1等武器的子彈。"
+    "description": "AssaultRifle Default1等使用的彈藥。 可在「WeaponFactory Dirty 02」製作。"
   },
   "AssaultRifle_Default1": {
     "localized_name": "突擊步槍",
@@ -337,27 +537,27 @@
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "小型飼料袋",
-    "description": "用來裝食物的小型袋子。 可解鎖一個自動進食專用的裝備欄位。 肚子餓了就會自動吃掉該欄位內的食物。"
+    "description": "用來裝食物的小型袋子。 會開放1個自動進食專用的食物欄位。 飢餓時會自動消耗欄位內的食物。 只需攜帶一個就足夠了。"
   },
   "AutoMealPouch_Tier2": {
     "localized_name": "中等飼料袋",
-    "description": "用來裝食物的中型袋子。 可解鎖兩個自動進食專用的裝備欄位。 肚子餓了就會自動吃掉該欄位內的食物。"
+    "description": "用來裝食物的中型袋子。 自動進食專用的食物欄位會開放到2個。 飢餓時會自動消耗欄位內的食物。 只需攜帶一個就足夠了。"
   },
   "AutoMealPouch_Tier3": {
     "localized_name": "大型飼料袋",
-    "description": "用來裝食物的大型袋子。 可解鎖三個自動進食專用的裝備欄位。 肚子餓了就會自動吃掉該欄位內的食物。"
+    "description": "用來裝食物的大型袋子。 自動進食專用的食物欄位會開放到3個。 飢餓時會自動消耗欄位內的食物。 只需攜帶一個就足夠了。"
   },
   "AutoMealPouch_Tier4": {
     "localized_name": "巨大飼料袋",
-    "description": "用來裝食物的特大型袋子。 可解鎖四個自動進食專用的裝備欄位。 肚子餓了就會自動吃掉該欄位內的食物。"
+    "description": "用來裝食物的特大袋子。 自動進食專用的食物欄位會開放到4個。 飢餓時會自動消耗欄位內的食物。 只需攜帶一個就足夠了。"
   },
   "AutoMealPouch_Tier5": {
     "localized_name": "特大飼料袋",
-    "description": "用來裝食物的最大號袋子。 可解鎖五個自動進食專用的裝備欄位。 肚子餓了就會自動吃掉該欄位內的食物。"
+    "description": "用來裝食物的最大號袋子。 自動進食專用的食物欄位會開放到5個。 飢餓時會自動消耗欄位內的食物。 只需攜帶一個就足夠了。"
   },
   "Axe_Steal": {
     "localized_name": "帕魯金屬斧",
-    "description": "用於劈砍木材的斧頭。 以帕魯金屬打造，擁有驚人的鋒利度。"
+    "description": "用於劈砍木材的斧頭。 以帕魯金屬打造，擁有驚人的鋒利度。 即使是在極限環境下生長的優質硬木也能輕鬆砍伐。"
   },
   "Axe_Tier_00": {
     "localized_name": "石斧",
@@ -365,11 +565,11 @@
   },
   "Axe_Tier_01": {
     "localized_name": "金屬斧",
-    "description": "用於劈砍木材的斧頭。 以金屬製成，耐久度與鋒利度都得到了提升。"
+    "description": "用於劈砍木材的斧頭。 以金屬製成，砍起較硬的木頭時‌順手很多。 砍伐生長在大陸深處的粗壯樹木也不在話下。"
   },
   "Axe_Tier_02": {
     "localized_name": "精煉金屬斧",
-    "description": "用於劈砍木材的斧頭。 耐久度與鋒利度均有更進一步的提升。"
+    "description": "用於劈砍木材的斧頭。 耐久度與鋒利度均有更進一步的提升。 可用於砍伐生長在嚴苛環境中的良木，取得堅硬的木材。"
   },
   "Axe_Tier_03": {
     "localized_name": "zh-hant text",
@@ -425,7 +625,7 @@
   },
   "BakedMeat_LazyCatfish": {
     "localized_name": "蒲燒趴趴鯰",
-    "description": "塗上秘製醬汁的烤魚， 美味可口，甚至能療癒身心。 非常適合疲憊的帕魯訓練家食用。"
+    "description": "塗上秘製醬汁的烤魚， 美味可口，甚至能療癒身心。 非常適合疲憊的帕魯馴養師食用。"
   },
   "BakedMeat_SakuraSaurus": {
     "localized_name": "炙烤帶骨連理龍肉",
@@ -451,9 +651,53 @@
     "localized_name": "棒球棒",
     "description": "也能用於近距離戰鬥的棒球棒。 但拿帕魯當球可能有點太大了。"
   },
+  "Bat3": {
+    "localized_name": "金屬球棒",
+    "description": "可以近距離攻擊的金屬球棒。 看誰不順眼，上去就是扁一頓。"
+  },
+  "Bat3_2": {
+    "localized_name": "金屬球棒",
+    "description": "可以近距離攻擊的金屬球棒。 看誰不順眼，上去就是扁一頓。"
+  },
+  "Bat3_3": {
+    "localized_name": "金屬球棒",
+    "description": "可以近距離攻擊的金屬球棒。 看誰不順眼，上去就是扁一頓。"
+  },
+  "Bat3_4": {
+    "localized_name": "金屬球棒",
+    "description": "可以近距離攻擊的金屬球棒。 看誰不順眼，上去就是扁一頓。"
+  },
+  "Bat3_5": {
+    "localized_name": "金屬球棒",
+    "description": "可以近距離攻擊的金屬球棒。 看誰不順眼，上去就是扁一頓。"
+  },
   "BattleTicket": {
     "localized_name": "戰鬥券",
     "description": "單人挑戰競技場並獲勝後即可獲得。 收集一定數量後可兌換豪華獎品。"
+  },
+  "BeamLauncher": {
+    "localized_name": "光束炮發射器",
+    "description": "能發射高精度光束，引發大範圍連鎖爆炸的發射器。 連射時要注意防止槍體過熱。"
+  },
+  "BeamLauncherBullet": {
+    "localized_name": "光束炮發射器彈藥",
+    "description": "光束炮發射器使用的彈藥。 可在「古代文明工作台」製作。"
+  },
+  "BeamLauncher_2": {
+    "localized_name": "光束炮發射器",
+    "description": "能發射高精度光束，引發大範圍連鎖爆炸的發射器。 連射時要注意防止槍體過熱。"
+  },
+  "BeamLauncher_3": {
+    "localized_name": "光束炮發射器",
+    "description": "能發射高精度光束，引發大範圍連鎖爆炸的發射器。 連射時要注意防止槍體過熱。"
+  },
+  "BeamLauncher_4": {
+    "localized_name": "光束炮發射器",
+    "description": "能發射高精度光束，引發大範圍連鎖爆炸的發射器。 連射時要注意防止槍體過熱。"
+  },
+  "BeamLauncher_5": {
+    "localized_name": "光束炮發射器",
+    "description": "能發射高精度光束，引發大範圍連鎖爆炸的發射器。 連射時要注意防止槍體過熱。"
   },
   "BeamSword": {
     "localized_name": "光劍",
@@ -475,6 +719,10 @@
     "localized_name": "光劍",
     "description": "近戰用的光劍。 高能量雷射可瞬間融斷敵人。"
   },
+  "BeastBone_Ancient": {
+    "localized_name": "古代獸骨",
+    "description": "在極限環境下經過歲月洗禮的風化獸骨。 即使失去了肉體，仍放射出強大的存在感。"
+  },
   "Beer": {
     "localized_name": "zh-hant text",
     "description": "zh-hant text"
@@ -491,6 +739,258 @@
     "localized_name": "莓果種子",
     "description": "可種出紅色莓果的種子。 建造農園時會用到這些種子。 可於採集紅色莓果時取得。"
   },
+  "Bio_Battery": {
+    "localized_name": "生化電池",
+    "description": "可將生物能源轉化為電力並儲存的裝置。 用於驅動需要較高能量密度的機器。 可在「Factory Hard 03」製作。"
+  },
+  "Bio_Coolant": {
+    "localized_name": "極低溫冷卻介質",
+    "description": "用帕魯身上提取的特殊成分製作的高效能冷卻介質。 用於控制高功率設備的溫度。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Accessory_AT_1_2": {
+    "localized_name": "攻擊吊墜設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory AT 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Accessory_AquaResist_1_2": {
+    "localized_name": "水屬性抵抗戒指設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory AquaResist 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Accessory_Avoid_1": {
+    "localized_name": "幻影戒指設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory Avoid 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Accessory_Avoid_1_fix": {
+    "localized_name": "幻影戒指設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory Avoid 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Accessory_ColdIce_1": {
+    "localized_name": "白絨雪怪護身符設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory ColdIce 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Accessory_CoolResist_1_2": {
+    "localized_name": "防寒內衣設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory CoolResist 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Accessory_DFHP_1": {
+    "localized_name": "格魯力斯腰帶設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory DFHP 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Accessory_DarkResist_1_2": {
+    "localized_name": "暗屬性抵抗戒指設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory DarkResist 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Accessory_DragonResist_1_2": {
+    "localized_name": "龍屬性抵抗戒指設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory DragonResist 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Accessory_EarthResist_1_2": {
+    "localized_name": "地屬性抵抗戒指設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory EarthResist 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Accessory_FireResist_1_2": {
+    "localized_name": "火屬性抵抗戒指設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory FireResist 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Accessory_HCHP_1": {
+    "localized_name": "先遣隊護身符設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory HCHP 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Accessory_HCMW_1": {
+    "localized_name": "流浪商人護身符設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory HCMW 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Accessory_HP_1_2": {
+    "localized_name": "生命吊墜設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory HP 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Accessory_HeatColdResist_1_2": {
+    "localized_name": "耐熱防寒內衣設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory HeatColdResist 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Accessory_HeatFire_1": {
+    "localized_name": "熔岩獸護身符設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory HeatFire 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Accessory_HeatResist_1_2": {
+    "localized_name": "耐熱內衣設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory HeatResist 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Accessory_IceResist_1_2": {
+    "localized_name": "冰屬性抵抗戒指設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory IceResist 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Accessory_JumpAir_1": {
+    "localized_name": "空中漫步者 Mk-Ⅰ設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory JumpAir 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Accessory_JumpAir_2": {
+    "localized_name": "空中漫步者 Mk-Ⅱ設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory JumpAir 2 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Accessory_LeafResist_1_2": {
+    "localized_name": "草屬性抵抗戒指設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory LeafResist 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Accessory_MaxWeightUp_01_2": {
+    "localized_name": "搬運工戒指設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory MaxWeightUp 01 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Accessory_NonkChecker_1": {
+    "localized_name": "帕魯馴養師眼鏡設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory NonkChecker 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Accessory_NormalResist_1_2": {
+    "localized_name": "無屬性抵抗戒指設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory NormalResist 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Accessory_Otomo_Dargon_1": {
+    "localized_name": "精靈龍指環設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory Otomo Dargon 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Accessory_Otomo_Dark_1": {
+    "localized_name": "闇巫貓指環設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory Otomo Dark 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Accessory_Otomo_Earth_1": {
+    "localized_name": "金鎧蠍指環設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory Otomo Earth 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Accessory_Otomo_Electricity_1": {
+    "localized_name": "雷隱鹿指環設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory Otomo Electricity 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Accessory_Otomo_Fire_1": {
+    "localized_name": "獄焰王指環設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory Otomo Fire 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Accessory_Otomo_Fire_2": {
+    "localized_name": "荷魯斯指環設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory Otomo Fire 2 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Accessory_Otomo_Ice_1": {
+    "localized_name": "冰棘獸指環設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory Otomo Ice 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Accessory_Otomo_Leaf_1": {
+    "localized_name": "薇莉塔指環設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory Otomo Leaf 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Accessory_Otomo_Water_1": {
+    "localized_name": "伊西斯指環設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory Otomo Water 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Accessory_PPAT_1": {
+    "localized_name": "汪宗師徽章設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory PPAT 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Accessory_PPDF_1": {
+    "localized_name": "艾基魯迦徽章設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory PPDF 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Accessory_SuperJumpAir_1": {
+    "localized_name": "空中漫步者 Mk-Ⅲ設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory SuperJumpAir 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Accessory_SuperJumpAir_2": {
+    "localized_name": "空中漫步者 Mk-EX設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory SuperJumpAir 2 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Accessory_ThunderResist_1_2": {
+    "localized_name": "雷屬性抵抗戒指設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory ThunderResist 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Accessory_WKMC_1": {
+    "localized_name": "島民的工具腰帶設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory WKMC 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Accessory_WorkSpeed_1_2": {
+    "localized_name": "勤勞吊墜設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory WorkSpeed 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Accessory_defense_1_2": {
+    "localized_name": "防禦吊飾設計圖",
+    "description": "持有此設計圖，即可解鎖「Accessory defense 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_AncientArmorCold_2": {
+    "localized_name": "耐寒遠古盔甲設計圖1",
+    "description": "持有此設計圖，即可解鎖「AncientArmorCold 2 （Uncommon）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_AncientArmorCold_3": {
+    "localized_name": "耐寒遠古盔甲設計圖2",
+    "description": "持有此設計圖，即可解鎖「AncientArmorCold 3 （Rare）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_AncientArmorCold_4": {
+    "localized_name": "耐寒遠古盔甲設計圖3",
+    "description": "持有此設計圖，即可解鎖「AncientArmorCold 4 （Epic）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_AncientArmorCold_5": {
+    "localized_name": "耐寒遠古盔甲設計圖4",
+    "description": "持有此設計圖，即可解鎖「AncientArmorCold 5 （Legendary）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_AncientArmorHeat_2": {
+    "localized_name": "耐熱遠古盔甲設計圖1",
+    "description": "持有此設計圖，即可解鎖「AncientArmorHeat 2 （Uncommon）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_AncientArmorHeat_3": {
+    "localized_name": "耐熱遠古盔甲設計圖2",
+    "description": "持有此設計圖，即可解鎖「AncientArmorHeat 3 （Rare）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_AncientArmorHeat_4": {
+    "localized_name": "耐熱遠古盔甲設計圖3",
+    "description": "持有此設計圖，即可解鎖「AncientArmorHeat 4 （Epic）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_AncientArmorHeat_5": {
+    "localized_name": "耐熱遠古盔甲設計圖4",
+    "description": "持有此設計圖，即可解鎖「AncientArmorHeat 5 （Legendary）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_AncientArmorWeight_2": {
+    "localized_name": "輕便遠古盔甲設計圖1",
+    "description": "持有此設計圖，即可解鎖「AncientArmorWeight 2 （Uncommon）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_AncientArmorWeight_3": {
+    "localized_name": "輕便遠古盔甲設計圖2",
+    "description": "持有此設計圖，即可解鎖「AncientArmorWeight 3 （Rare）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_AncientArmorWeight_4": {
+    "localized_name": "輕便遠古盔甲設計圖3",
+    "description": "持有此設計圖，即可解鎖「AncientArmorWeight 4 （Epic）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_AncientArmorWeight_5": {
+    "localized_name": "輕便遠古盔甲設計圖4",
+    "description": "持有此設計圖，即可解鎖「AncientArmorWeight 5 （Legendary）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_AncientArmor_2": {
+    "localized_name": "遠古盔甲設計圖1",
+    "description": "持有此設計圖，即可解鎖「AncientArmor 2 （Uncommon）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_AncientArmor_3": {
+    "localized_name": "遠古盔甲設計圖2",
+    "description": "持有此設計圖，即可解鎖「AncientArmor 3 （Rare）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_AncientArmor_4": {
+    "localized_name": "遠古盔甲設計圖3",
+    "description": "持有此設計圖，即可解鎖「AncientArmor 4 （Epic）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_AncientArmor_5": {
+    "localized_name": "遠古盔甲設計圖4",
+    "description": "持有此設計圖，即可解鎖「AncientArmor 5 （Legendary）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_AncientHelmet_2": {
+    "localized_name": "遠古頭盔設計圖1",
+    "description": "持有此設計圖，即可解鎖「AncientHelmet 2 （Uncommon）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_AncientHelmet_3": {
+    "localized_name": "遠古頭盔設計圖2",
+    "description": "持有此設計圖，即可解鎖「AncientHelmet 3 （Rare）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_AncientHelmet_4": {
+    "localized_name": "遠古頭盔設計圖3",
+    "description": "持有此設計圖，即可解鎖「AncientHelmet 4 （Epic）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_AncientHelmet_5": {
+    "localized_name": "遠古頭盔設計圖4",
+    "description": "持有此設計圖，即可解鎖「AncientHelmet 5 （Legendary）」的配方。 可在「古代文明工作台」製作。"
+  },
   "Blueprint_AssaultRifle_Default2": {
     "localized_name": "突擊步槍設計圖1",
     "description": "持有此設計圖，即可解鎖 「AssaultRifle Default1（Uncommon）」的配方。 可在「WeaponFactory Dirty 02」製作。"
@@ -506,6 +1006,38 @@
   "Blueprint_AssaultRifle_Default5": {
     "localized_name": "突擊步槍設計圖4",
     "description": "持有此設計圖，即可解鎖 「AssaultRifle Default1（Legendary）」的配方。 可在「WeaponFactory Dirty 02」製作。"
+  },
+  "Blueprint_Bat3_2": {
+    "localized_name": "金屬球棒設計圖1",
+    "description": "持有此設計圖，即可解鎖「金屬球棒 （Uncommon）」的配方。 可在「WeaponFactory Dirty 02」製作。"
+  },
+  "Blueprint_Bat3_3": {
+    "localized_name": "金屬球棒設計圖2",
+    "description": "持有此設計圖，即可解鎖「金屬球棒 （Rare）」的配方。 可在「WeaponFactory Dirty 02」製作。"
+  },
+  "Blueprint_Bat3_4": {
+    "localized_name": "金屬球棒設計圖3",
+    "description": "持有此設計圖，即可解鎖「金屬球棒 （Epic）」的配方。 可在「WeaponFactory Dirty 02」製作。"
+  },
+  "Blueprint_Bat3_5": {
+    "localized_name": "金屬球棒設計圖4",
+    "description": "持有此設計圖，即可解鎖「金屬球棒 （Legendary）」的配方。 可在「WeaponFactory Dirty 02」製作。"
+  },
+  "Blueprint_BeamLauncher_2": {
+    "localized_name": "光束炮發射器設計圖1",
+    "description": "持有此設計圖，即可解鎖「光束炮發射器 （Uncommon）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_BeamLauncher_3": {
+    "localized_name": "光束炮發射器設計圖2",
+    "description": "持有此設計圖，即可解鎖「光束炮發射器 （Rare）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_BeamLauncher_4": {
+    "localized_name": "光束炮發射器設計圖3",
+    "description": "持有此設計圖，即可解鎖「光束炮發射器 （Epic）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_BeamLauncher_5": {
+    "localized_name": "光束炮發射器設計圖4",
+    "description": "持有此設計圖，即可解鎖「光束炮發射器 （Legendary）」的配方。 可在「古代文明工作台」製作。"
   },
   "Blueprint_BeamSword_2": {
     "localized_name": "光劍設計圖1",
@@ -743,6 +1275,38 @@
     "localized_name": "雙管散彈槍設計圖4",
     "description": "持有此設計圖，即可解鎖 「雙管散彈槍（Legendary）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
+  "Blueprint_DroneLauncher_2": {
+    "localized_name": "無人機發射器設計圖1",
+    "description": "持有此設計圖，即可解鎖「無人機發射器 （Uncommon）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_DroneLauncher_3": {
+    "localized_name": "無人機發射器設計圖2",
+    "description": "持有此設計圖，即可解鎖「無人機發射器 （Rare）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_DroneLauncher_4": {
+    "localized_name": "無人機發射器設計圖3",
+    "description": "持有此設計圖，即可解鎖「無人機發射器 （Epic）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_DroneLauncher_5": {
+    "localized_name": "無人機發射器設計圖4",
+    "description": "持有此設計圖，即可解鎖「無人機發射器 （Legendary）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_ElectricArcAssaultRifle_2": {
+    "localized_name": "等離子步槍設計圖1",
+    "description": "持有此設計圖，即可解鎖「等離子步槍 （Uncommon）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_ElectricArcAssaultRifle_3": {
+    "localized_name": "等離子步槍設計圖2",
+    "description": "持有此設計圖，即可解鎖「等離子步槍 （Rare）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_ElectricArcAssaultRifle_4": {
+    "localized_name": "等離子步槍設計圖3",
+    "description": "持有此設計圖，即可解鎖「等離子步槍 （Epic）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_ElectricArcAssaultRifle_5": {
+    "localized_name": "等離子步槍設計圖4",
+    "description": "持有此設計圖，即可解鎖「等離子步槍 （Legendary）」的配方。 可在「古代文明工作台」製作。"
+  },
   "Blueprint_EnergyRocketLauncher_2": {
     "localized_name": "等離子砲設計圖1",
     "description": "持有此設計圖，即可解鎖 「等離子砲（Uncommon）」的配方。 可在「WeaponFactory Dirty 03」製作。"
@@ -785,11 +1349,11 @@
   },
   "Blueprint_FishingRod_02_2": {
     "localized_name": "中級釣竿（武道蛙）設計圖",
-    "description": "持有此設計圖，即可解鎖 「FishingRod 02 2（Uncommon）」的配方。 可在「Factory Hard 02」製作。"
+    "description": "持有此設計圖，即可解鎖 「FishingRod 02 2（Rare）」的配方。 可在「Factory Hard 02」製作。"
   },
   "Blueprint_FishingRod_03_2": {
     "localized_name": "高級釣竿（瞅什魔）設計圖",
-    "description": "持有此設計圖，即可解鎖 「FishingRod 03 2（Rare）」的配方。 可在「Factory Hard 03」製作。"
+    "description": "持有此設計圖，即可解鎖 「FishingRod 03 2（Legendary）」的配方。 可在「Factory Hard 03」製作。"
   },
   "Blueprint_FlameThrower_2": {
     "localized_name": "火焰噴射器設計圖1",
@@ -1679,6 +2243,130 @@
     "localized_name": "古舊左輪手槍設計圖4",
     "description": "持有此設計圖，即可解鎖 「古舊左輪手槍（Legendary）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
+  "Blueprint_Otomo_ATDark_ElementBoost_1": {
+    "localized_name": "冥王指揮棒設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo ATDark ElementBoost 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Otomo_ATDragon_ElementBoost_1": {
+    "localized_name": "神龍指揮棒設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo ATDragon ElementBoost 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Otomo_ATEarth_ElementBoost_1": {
+    "localized_name": "岩帝指揮棒設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo ATEarth ElementBoost 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Otomo_ATElectricity_ElementBoost_1": {
+    "localized_name": "雷帝指揮棒設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo ATElectricity ElementBoost 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Otomo_ATFire_ElementBoost_1": {
+    "localized_name": "炎帝指揮棒設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo ATFire ElementBoost 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Otomo_ATIce_ElementBoost_1": {
+    "localized_name": "冰帝指揮棒設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo ATIce ElementBoost 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Otomo_ATLeaf_ElementBoost_1": {
+    "localized_name": "精靈王指揮棒設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo ATLeaf ElementBoost 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Otomo_ATNormal_ElementBoost_1": {
+    "localized_name": "聖天指揮棒設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo ATNormal ElementBoost 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Otomo_ATWater_ElementBoost_1": {
+    "localized_name": "海皇指揮棒設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo ATWater ElementBoost 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Otomo_Attack_up1_2": {
+    "localized_name": "攻擊支援哨子設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo Attack up1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Otomo_DFDark_ElementBoost_1": {
+    "localized_name": "黑月女王神符設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo DFDark ElementBoost 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Otomo_DFDragon_ElementBoost_1": {
+    "localized_name": "空渦龍神符設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo DFDragon ElementBoost 1（Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Otomo_DFEarth_ElementBoost_1": {
+    "localized_name": "阿努比斯神符設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo DFEarth ElementBoost 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Otomo_DFElectricity_ElementBoost_1": {
+    "localized_name": "波魯傑克斯神符設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo DFElectricity ElementBoost 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Otomo_DFFire_ElementBoost_1": {
+    "localized_name": "焰煌神符設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo DFFire ElementBoost 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Otomo_DFIce_ElementBoost_1": {
+    "localized_name": "喚冬獸神符設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo DFIce ElementBoost 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Otomo_DFLeaf_ElementBoost_1": {
+    "localized_name": "百合女王神符設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo DFLeaf ElementBoost 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Otomo_DFNormal_ElementBoost_1": {
+    "localized_name": "默世鹿神符設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo DFNormal ElementBoost 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Otomo_DFWater_ElementBoost_1": {
+    "localized_name": "海皇鯨神符設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo DFWater ElementBoost 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Otomo_Defense_up1_2": {
+    "localized_name": "防禦支援哨子設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo Defense up1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Otomo_ElementBoost_Dark_1_2": {
+    "localized_name": "暗屬性應援哨子設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo ElementBoost Dark 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Otomo_ElementBoost_Dragon_1_2": {
+    "localized_name": "龍屬性應援哨子設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo ElementBoost Dragon 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Otomo_ElementBoost_Earth_1_2": {
+    "localized_name": "地屬性應援哨子設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo ElementBoost Earth 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Otomo_ElementBoost_Electricity_1_2": {
+    "localized_name": "雷屬性應援哨子設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo ElementBoost Electricity 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Otomo_ElementBoost_Fire_1_2": {
+    "localized_name": "火屬性應援哨子設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo ElementBoost Fire 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Otomo_ElementBoost_Ice_1_2": {
+    "localized_name": "冰屬性應援哨子設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo ElementBoost Ice 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Otomo_ElementBoost_Leaf_1_2": {
+    "localized_name": "草屬性應援哨子設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo ElementBoost Leaf 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Otomo_ElementBoost_Normal_1_2": {
+    "localized_name": "無屬性應援哨子設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo ElementBoost Normal 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Otomo_ElementBoost_Water_1_2": {
+    "localized_name": "水屬性應援哨子設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo ElementBoost Water 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
+  "Blueprint_Otomo_PalConfidence_Increase_1_fix": {
+    "localized_name": "信賴戒指設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo PalConfidence Increase 1 （Epic）」的配方。 可在「Factory Hard 02」製作。"
+  },
+  "Blueprint_Otomo_PalExp_Increase_1_2": {
+    "localized_name": "成長促進鈴設計圖",
+    "description": "持有此設計圖，即可解鎖「Otomo PalExp Increase 1 （Rare）」的配方。 可在「Factory Hard 01」製作。"
+  },
   "Blueprint_OverheatRifle_2": {
     "localized_name": "過熱步槍設計圖1",
     "description": "持有此設計圖，即可解鎖 「過熱步槍（Uncommon）」的配方。 可在「WeaponFactory Dirty 04」製作。"
@@ -1951,6 +2639,106 @@
     "localized_name": "單發步槍設計圖4",
     "description": "持有此設計圖，即可解鎖 「單發步槍（Legendary）」的配方。 可在「WeaponFactory Dirty 02」製作。"
   },
+  "Blueprint_SkyAssaultRifle_2": {
+    "localized_name": "重型突擊步槍設計圖1",
+    "description": "持有此設計圖，即可解鎖「重型突擊步槍 （Uncommon）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_SkyAssaultRifle_3": {
+    "localized_name": "重型突擊步槍設計圖2",
+    "description": "持有此設計圖，即可解鎖「重型突擊步槍 （Rare）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_SkyAssaultRifle_4": {
+    "localized_name": "重型突擊步槍設計圖3",
+    "description": "持有此設計圖，即可解鎖「重型突擊步槍 （Epic）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_SkyAssaultRifle_5": {
+    "localized_name": "重型突擊步槍設計圖4",
+    "description": "持有此設計圖，即可解鎖「重型突擊步槍 （Legendary）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_SkyBeamSword_2": {
+    "localized_name": "高出力光劍設計圖1",
+    "description": "持有此設計圖，即可解鎖「高出力光劍 （Uncommon）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_SkyBeamSword_3": {
+    "localized_name": "高出力光劍設計圖2",
+    "description": "持有此設計圖，即可解鎖「高出力光劍 （Rare）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_SkyBeamSword_4": {
+    "localized_name": "高出力光劍設計圖3",
+    "description": "持有此設計圖，即可解鎖「高出力光劍 （Epic）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_SkyBeamSword_5": {
+    "localized_name": "高出力光劍設計圖4",
+    "description": "持有此設計圖，即可解鎖「高出力光劍 （Legendary）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_SkyBow_2": {
+    "localized_name": "機械弓設計圖1",
+    "description": "持有此設計圖，即可解鎖「機械弓 （Uncommon）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_SkyBow_3": {
+    "localized_name": "機械弓設計圖2",
+    "description": "持有此設計圖，即可解鎖「機械弓 （Rare）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_SkyBow_4": {
+    "localized_name": "機械弓設計圖3",
+    "description": "持有此設計圖，即可解鎖「機械弓 （Epic）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_SkyBow_5": {
+    "localized_name": "機械弓設計圖4",
+    "description": "持有此設計圖，即可解鎖「機械弓 （Legendary）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_SkyGrenadeLauncher_2": {
+    "localized_name": "戰術榴彈發射器設計圖1",
+    "description": "持有此設計圖，即可解鎖「戰術榴彈發射器 （Uncommon）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_SkyGrenadeLauncher_3": {
+    "localized_name": "戰術榴彈發射器設計圖2",
+    "description": "持有此設計圖，即可解鎖「戰術榴彈發射器 （Rare）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_SkyGrenadeLauncher_4": {
+    "localized_name": "戰術榴彈發射器設計圖3",
+    "description": "持有此設計圖，即可解鎖「戰術榴彈發射器 （Epic）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_SkyGrenadeLauncher_5": {
+    "localized_name": "戰術榴彈發射器設計圖4",
+    "description": "持有此設計圖，即可解鎖「戰術榴彈發射器 （Legendary）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_SkyShotgun_2": {
+    "localized_name": "原型散彈槍設計圖1",
+    "description": "持有此設計圖，即可解鎖「原型散彈槍 （Uncommon）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_SkyShotgun_3": {
+    "localized_name": "原型散彈槍設計圖2",
+    "description": "持有此設計圖，即可解鎖「原型散彈槍 （Rare）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_SkyShotgun_4": {
+    "localized_name": "原型散彈槍設計圖3",
+    "description": "持有此設計圖，即可解鎖「原型散彈槍 （Epic）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_SkyShotgun_5": {
+    "localized_name": "原型散彈槍設計圖4",
+    "description": "持有此設計圖，即可解鎖「原型散彈槍 （Legendary）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_SkySubmachineGun_2": {
+    "localized_name": "戰鬥衝鋒槍設計圖1",
+    "description": "持有此設計圖，即可解鎖「戰鬥衝鋒槍 （Uncommon）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_SkySubmachineGun_3": {
+    "localized_name": "戰鬥衝鋒槍設計圖2",
+    "description": "持有此設計圖，即可解鎖「戰鬥衝鋒槍 （Rare）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_SkySubmachineGun_4": {
+    "localized_name": "戰鬥衝鋒槍設計圖3",
+    "description": "持有此設計圖，即可解鎖「戰鬥衝鋒槍 （Epic）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_SkySubmachineGun_5": {
+    "localized_name": "戰鬥衝鋒槍設計圖4",
+    "description": "持有此設計圖，即可解鎖「戰鬥衝鋒槍 （Legendary）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_Spear_ForestBoss2_5": {
+    "localized_name": "強化莉莉之矛設計圖4",
+    "description": "持有此設計圖，即可解鎖「Spear ForestBoss2 （Legendary）」的配方。 可在「WeaponFactory Dirty 04」製作。"
+  },
   "Blueprint_Spear_ForestBoss_5": {
     "localized_name": "莉莉之矛設計圖4",
     "description": "持有此設計圖，即可解鎖 「Spear ForestBoss（Legendary）」的配方。 可在「WeaponFactory Dirty 02」製作。"
@@ -2070,6 +2858,26 @@
   "Blueprint_WeakerBow_5": {
     "localized_name": "老舊的弓設計圖4",
     "description": "持有此設計圖，即可解鎖 「老舊的弓（Legendary）」的配方。 可在「初階工作台」製作。"
+  },
+  "Blueprint_WhaleWhistle": {
+    "localized_name": "磨損的設計圖",
+    "description": "持有此設計圖，即可解鎖「殘響之笛」的配方。 可在「初階工作台」製作。"
+  },
+  "Blueprint_WidePenetrateShotgun_2": {
+    "localized_name": "散射光束槍設計圖1",
+    "description": "持有此設計圖，即可解鎖「散射光束槍 （Uncommon）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_WidePenetrateShotgun_3": {
+    "localized_name": "散射光束槍設計圖2",
+    "description": "持有此設計圖，即可解鎖「散射光束槍 （Rare）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_WidePenetrateShotgun_4": {
+    "localized_name": "散射光束槍設計圖3",
+    "description": "持有此設計圖，即可解鎖「散射光束槍 （Epic）」的配方。 可在「古代文明工作台」製作。"
+  },
+  "Blueprint_WidePenetrateShotgun_5": {
+    "localized_name": "散射光束槍設計圖4",
+    "description": "持有此設計圖，即可解鎖「散射光束槍 （Legendary）」的配方。 可在「古代文明工作台」製作。"
   },
   "Blueprint_Wire_Fence": {
     "localized_name": "鐵絲網圍籬設計圖",
@@ -2327,6 +3135,14 @@
     "localized_name": "梅莉姆的討伐證明",
     "description": "｢靛青的侍女 梅莉姆｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
   },
+  "BossDefeatReward_BossRush": {
+    "localized_name": "改造帕魯的污染核心",
+    "description": "成功討伐被改造的帕魯們的證明。 可用於解除世界樹最深處封印之室的屏障。"
+  },
+  "BossDefeatReward_CactusDoll": {
+    "localized_name": "球抱苞的討伐證明",
+    "description": "｢千根針的歡迎 球抱苞｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
   "BossDefeatReward_CaptainPenguin": {
     "localized_name": "企丸王的討伐證明",
     "description": "｢冰海拓荒者 企丸王｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
@@ -2339,6 +3155,14 @@
     "localized_name": "夜幕魔蝠的討伐證明",
     "description": "｢薄暮吸血鬼 夜幕魔蝠｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
   },
+  "BossDefeatReward_CubeTurtle": {
+    "localized_name": "重岩龜的討伐證明",
+    "description": "｢沙海的巨岩 重岩龜｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
+  "BossDefeatReward_CubeTurtle_Neutral": {
+    "localized_name": "淨岩龜的討伐證明",
+    "description": "｢沙海的守護岩 淨岩龜｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
   "BossDefeatReward_DarkScorpion": {
     "localized_name": "冥鎧蠍的討伐證明",
     "description": "｢貫穿星辰之槍 冥鎧蠍｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
@@ -2346,6 +3170,22 @@
   "BossDefeatReward_DarkScorpion_Ground": {
     "localized_name": "金鎧蠍的討伐證明",
     "description": "｢鍍金重矛 金鎧蠍｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
+  "BossDefeatReward_DomeArmorDragon": {
+    "localized_name": "磐甲龍的討伐證明",
+    "description": "｢編織光痕的守護龍 磐甲龍｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
+  "BossDefeatReward_ElecLizard": {
+    "localized_name": "電懶懶的討伐證明",
+    "description": "｢隨心所電 電懶懶｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
+  "BossDefeatReward_ElecPanda": {
+    "localized_name": "暴電熊的討伐證明",
+    "description": "｢雷鳴雙爪 暴電熊｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
+  "BossDefeatReward_ElecSnail": {
+    "localized_name": "電渦蝸的討伐證明",
+    "description": "｢慢吞吞的蒼電 電渦蝸｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
   },
   "BossDefeatReward_FairyDragon": {
     "localized_name": "精靈龍的討伐證明",
@@ -2359,6 +3199,14 @@
     "localized_name": "雷隱鹿的討伐證明",
     "description": "｢滾雷 雷隱鹿｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
   },
+  "BossDefeatReward_FireKirin": {
+    "localized_name": "火麒麟的討伐證明",
+    "description": "｢馳騁熱砂的駿馬 火麒麟｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
+  "BossDefeatReward_FlameBuffalo": {
+    "localized_name": "熾焰牛的討伐證明",
+    "description": "｢熾烈燃燒的角獸 熾焰牛｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
   "BossDefeatReward_FlowerDinosaur_Electric": {
     "localized_name": "雷冠龍的討伐證明",
     "description": "｢雷電守護龍 雷冠龍｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
@@ -2367,6 +3215,22 @@
     "localized_name": "花麗娜的討伐證明",
     "description": "｢花園公主 花麗娜｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
   },
+  "BossDefeatReward_FlowerPrince": {
+    "localized_name": "夜蔓爵的花瓣",
+    "description": "成功討伐「夜蔓爵」的證明。 可用於解除世界樹最深處封印之室的屏障。"
+  },
+  "BossDefeatReward_FoxExorcist": {
+    "localized_name": "昭炎狐的討伐證明",
+    "description": "｢刷首抽的未來預測 昭炎狐｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
+  "BossDefeatReward_FoxMage": {
+    "localized_name": "焰巫狐的討伐證明",
+    "description": "｢炎狐魔導士 焰巫狐｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
+  "BossDefeatReward_GhostDragon": {
+    "localized_name": "靈曦龍的討伐證明",
+    "description": "｢自由之翼 靈曦龍｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
   "BossDefeatReward_GhostRabbit": {
     "localized_name": "魅愛莉的討伐證明",
     "description": "｢獵魂的黑兔 魅愛莉｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
@@ -2374,6 +3238,14 @@
   "BossDefeatReward_GoldenHorse": {
     "localized_name": "金馳獸的討伐證明",
     "description": "｢黃昏的守護獸 金馳獸｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
+  "BossDefeatReward_GrassGolem": {
+    "localized_name": "雙心岩傀的討伐證明",
+    "description": "｢蒼脈的異心同體 雙心岩傀｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
+  "BossDefeatReward_GrassGolem_Dark": {
+    "localized_name": "咒心岩傀的討伐證明",
+    "description": "｢紫脈的異心同體 咒心岩傀｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
   },
   "BossDefeatReward_GrassMammoth": {
     "localized_name": "森猛獁的討伐證明",
@@ -2407,6 +3279,10 @@
     "localized_name": "伊西斯的討伐證明",
     "description": "｢水天霸者 伊西斯｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
   },
+  "BossDefeatReward_IceFox": {
+    "localized_name": "吹雪狐的討伐證明",
+    "description": "｢冰結白狐 吹雪狐｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
   "BossDefeatReward_IceHorse": {
     "localized_name": "喚冬獸的討伐證明",
     "description": "｢傳說中的冰天馬 喚冬獸｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
@@ -2426,6 +3302,10 @@
   "BossDefeatReward_JetDragon": {
     "localized_name": "空渦龍的討伐證明",
     "description": "｢傳說中的流星龍 空渦龍｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
+  "BossDefeatReward_KabukiMan": {
+    "localized_name": "燎火舞伶的討伐證明",
+    "description": "｢燃盡喝彩的狂徒 燎火舞伶｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
   },
   "BossDefeatReward_KingAlpaca": {
     "localized_name": "君王美露帕的討伐證明",
@@ -2455,13 +3335,37 @@
     "localized_name": "派克龍的討伐證明",
     "description": "｢雷鳴的暴食龍 派克龍｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
   },
+  "BossDefeatReward_LilyQueen": {
+    "localized_name": "百合女王的討伐證明",
+    "description": "｢百合花女帝 百合女王｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
   "BossDefeatReward_LilyQueen_Dark": {
     "localized_name": "黑月女王的討伐證明",
     "description": "｢深淵女帝 黑月女王 ｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
   },
+  "BossDefeatReward_LotusDragon": {
+    "localized_name": "沁蓮龍的討伐證明",
+    "description": "｢清漣不染之龍 沁蓮龍｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
+  "BossDefeatReward_Manticore": {
+    "localized_name": "獄焰王的討伐證明",
+    "description": "｢百焰之王 獄焰王｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
+  "BossDefeatReward_MoonChild": {
+    "localized_name": "綴夜星的討伐證明",
+    "description": "｢星夜羽織 綴夜星｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
   "BossDefeatReward_MopKing": {
     "localized_name": "毛老爹的討伐證明",
     "description": "｢神秘的毛茸茸之王 毛老爹｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
+  "BossDefeatReward_Mothman": {
+    "localized_name": "暮塵蛾的羽毛",
+    "description": "成功討伐「暮塵蛾」的證明。 可用於解除世界樹最深處封印之室的屏障。"
+  },
+  "BossDefeatReward_MushroomLady": {
+    "localized_name": "紅菇娘的討伐證明",
+    "description": "｢可愛的菇 紅菇娘｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
   },
   "BossDefeatReward_Mutant": {
     "localized_name": "秘斯媞雅的討伐證明",
@@ -2503,6 +3407,14 @@
     "localized_name": "天陰童子的討伐證明",
     "description": "｢陰雲末裔 天陰童子｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
   },
+  "BossDefeatReward_RockBeast": {
+    "localized_name": "磐峰獸的討伐證明",
+    "description": "｢會走路的大礦脈 磐峰獸｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
+  "BossDefeatReward_RockBeast_Ice": {
+    "localized_name": "寒峰獸的討伐證明",
+    "description": "｢會走路的大冰礦 寒峰獸｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
   "BossDefeatReward_Ronin": {
     "localized_name": "浪刃武士的討伐證明",
     "description": "｢流浪武士 浪刃武士｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
@@ -2519,6 +3431,10 @@
     "localized_name": "海誓龍的討伐證明",
     "description": "｢告夏之波 海誓龍｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
   },
+  "BossDefeatReward_ScorpionMan_Electric": {
+    "localized_name": "電針妖的討伐證明",
+    "description": "｢電針小子 電針妖｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
   "BossDefeatReward_SkyDragon": {
     "localized_name": "天羽龍的討伐證明",
     "description": "｢純白之翼 天羽龍｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
@@ -2531,6 +3447,10 @@
     "localized_name": "迅雷鳥的討伐證明",
     "description": "｢雷霆之翼 迅雷鳥｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
   },
+  "BossDefeatReward_ThunderFluffyBird": {
+    "localized_name": "雷雲鷲的討伐證明",
+    "description": "｢雷擊的蓬鬆鬆 雷雲鷲｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
   "BossDefeatReward_Umihebi": {
     "localized_name": "覆海龍的討伐證明",
     "description": "｢海上霸者 覆海龍｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
@@ -2538,6 +3458,18 @@
   "BossDefeatReward_VioletFairy": {
     "localized_name": "薇莉塔的討伐證明",
     "description": "｢紫羅蘭之夢 薇莉塔｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
+  "BossDefeatReward_VolcanicMonster": {
+    "localized_name": "熔岩獸的討伐證明",
+    "description": "｢吞食熔岩之獸 熔岩獸｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
+  "BossDefeatReward_VolcanoDragon": {
+    "localized_name": "流焰龍的討伐證明",
+    "description": "｢焦土漫步 流焰龍｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
+  "BossDefeatReward_VolcanoDragon_Ice": {
+    "localized_name": "川霜龍的討伐證明",
+    "description": "｢凍土漫步 川霜龍｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
   },
   "BossDefeatReward_WeaselDragon": {
     "localized_name": "疾旋鼬的討伐證明",
@@ -2550,6 +3482,10 @@
   "BossDefeatReward_WhiteDeer": {
     "localized_name": "淨世鹿的討伐證明",
     "description": "｢救贖之獸 淨世鹿｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
+  },
+  "BossDefeatReward_WhiteDeer_Dark": {
+    "localized_name": "織夜鹿的討伐證明",
+    "description": "｢混沌之獸 織夜鹿｣的討伐證明。 只要持有此道具， 就能永久提升隊伍帕魯的能力值。"
   },
   "BossDefeatReward_WhiteMoth": {
     "localized_name": "綢笠蛾的討伐證明",
@@ -2651,13 +3587,33 @@
     "localized_name": "三連弓",
     "description": "經過改良，可同時射出3支箭矢的弓。 具有不可思議的力量，每次射擊只會消耗1支箭矢。"
   },
+  "BronzeSword": {
+    "localized_name": "原始的劍",
+    "description": "近距離戰鬥用的劍。鋒利程度不可小覷！ 但需要靠近敵人攻擊，相當危險。"
+  },
   "Cake": {
     "localized_name": "蛋糕",
-    "description": "在值得慶祝的日子享用的料理。 將它放到配種牧場的箱子裡， 吃了它的帕魯會變得精力充沛，並產下帕魯蛋。"
+    "description": "慶祝時會食用的料理。 如果將它放入配種牧場的箱子裡， 吃了它的帕魯會充滿活力並產下帕魯蛋。"
+  },
+  "Cake02": {
+    "localized_name": "蘑菇蛋糕",
+    "description": "如果將它放入配種牧場的箱子裡， 吃了它後的帕魯會充滿活力並產下帕魯蛋。 由此誕生的帕魯的潛力值會更容易稍微上升。"
+  },
+  "Cake03": {
+    "localized_name": "蔬菜蛋糕",
+    "description": "如果將它放入配種牧場的箱子裡， 吃了它後的帕魯會充滿活力並產下帕魯蛋， 並且一次可以產下2顆蛋。"
+  },
+  "Cake04": {
+    "localized_name": "豪華蔬菜蛋糕",
+    "description": "如果將它放入配種牧場的箱子裡， 吃了它後的帕魯會充滿活力並產下帕魯蛋。 由此誕生的帕魯更容易發生突然變異，潛力值也更容易上升。"
+  },
+  "Cake05": {
+    "localized_name": "特製蛋糕",
+    "description": "如果將它放入配種牧場的箱子裡， 吃了它後的帕魯會充滿活力並產下帕魯蛋。 藉此誕生的帕魯更容易繼承親代的被動技能。"
   },
   "CarbonFiber": {
     "localized_name": "碳纖維",
-    "description": "輕盈堅硬的優質素材。 可用於製作防具等。"
+    "description": "輕盈堅硬的優質素材。 可用於製作防具等。 可在「Factory Hard 02」製作。"
   },
   "Carbonara": {
     "localized_name": "義式培根蛋黃麵",
@@ -2689,7 +3645,7 @@
   },
   "ChargeLaserRifleBullet": {
     "localized_name": "充能步槍子彈",
-    "description": "用於充能步槍等武器的彈藥。"
+    "description": "充能步槍等使用的彈藥。 可在「WeaponFactory Dirty 04」製作。"
   },
   "ChargeLaserRifle_2": {
     "localized_name": "充能步槍",
@@ -2737,11 +3693,11 @@
   },
   "Cloth": {
     "localized_name": "布",
-    "description": "編織羊毛製成的布。 是製作防具時會用到的素材。"
+    "description": "編織羊毛製成的布。 是製作防具時會用到的素材。 可在「初階工作台」製作。"
   },
   "Cloth2": {
     "localized_name": "優質布",
-    "description": "編織大量羊毛製成的優質布。 是製作優質防具時會用到的素材。"
+    "description": "編織大量羊毛製成的優質布。 是製作優質防具時不可或缺的素材。 可在「Factory Hard 01」製作。"
   },
   "ClothArmor": {
     "localized_name": "布衣",
@@ -2828,8 +3784,8 @@
     "description": "經過現代化改良的弓。 能夠射出威力更強大的箭矢。"
   },
   "Computer": {
-    "localized_name": "zh-hant text",
-    "description": "zh-hant text"
+    "localized_name": "電腦",
+    "description": "用於控制自動化設備和精密機械的零件， 是現代科技的基石。 可在「Factory Hard 03」製作。"
   },
   "CopperArmor": {
     "localized_name": "金屬盔甲",
@@ -2917,11 +3873,15 @@
   },
   "CopperOre": {
     "localized_name": "金屬礦石",
-    "description": "以熔爐冶煉後會成為金屬錠。 可在洞窟等地找到。 有些帕魯似乎能探查礦石的位置。"
+    "description": "以熔爐冶煉後會成為金屬錠。 可在洞窟等處找到。"
   },
   "CornSoup": {
     "localized_name": "zh-hant text",
     "description": "zh-hant text"
+  },
+  "Corrosive_Solvent": {
+    "localized_name": "腐蝕溶劑",
+    "description": "具有強效分解作用的危險化學溶劑， 用於精密加工及特殊處理。 可在「Factory Hard 02」製作。"
   },
   "CrudeOil": {
     "localized_name": "原油",
@@ -2991,6 +3951,26 @@
     "localized_name": "雙管散彈槍",
     "description": "近距離時威力驚人的散彈槍，可以連射2發。 子彈容納量較少，但火力強大。"
   },
+  "DroneLauncher": {
+    "localized_name": "無人機發射器",
+    "description": "用於發射能自主攻擊的無人機的發射器。 最多可以發射9架，持續壓制敵方。"
+  },
+  "DroneLauncher_2": {
+    "localized_name": "無人機發射器",
+    "description": "用於發射能自主攻擊的無人機的發射器。 最多可以發射9架，持續壓制敵方。"
+  },
+  "DroneLauncher_3": {
+    "localized_name": "無人機發射器",
+    "description": "用於發射能自主攻擊的無人機的發射器。 最多可以發射9架，持續壓制敵方。"
+  },
+  "DroneLauncher_4": {
+    "localized_name": "無人機發射器",
+    "description": "用於發射能自主攻擊的無人機的發射器。 最多可以發射9架，持續壓制敵方。"
+  },
+  "DroneLauncher_5": {
+    "localized_name": "無人機發射器",
+    "description": "用於發射能自主攻擊的無人機的發射器。 最多可以發射9架，持續壓制敵方。"
+  },
   "Eaglestew": {
     "localized_name": "燉煮天擒鳥肉",
     "description": "以慢火燉煮，帶出了濃郁鮮味及野性十足的滋味。 食用後的一段時間內，稍微減緩SAN值的下降速度。"
@@ -3006,6 +3986,30 @@
   "ElecBaton": {
     "localized_name": "電擊棒",
     "description": "敲下去就會觸電的近戰武器。 帕魯在觸電時會比較容易捕獲。"
+  },
+  "ElectricArcAssaultRifle": {
+    "localized_name": "等離子步槍",
+    "description": "著彈點會放出雷電的步槍，可連鎖攻擊多個敵人。"
+  },
+  "ElectricArcAssaultRifleBullet": {
+    "localized_name": "等離子步槍彈藥",
+    "description": "等離子步槍使用的彈藥。 可在「古代文明工作台」製作。"
+  },
+  "ElectricArcAssaultRifle_2": {
+    "localized_name": "等離子步槍",
+    "description": "著彈點會放出雷電的步槍，可連鎖攻擊多個敵人。"
+  },
+  "ElectricArcAssaultRifle_3": {
+    "localized_name": "等離子步槍",
+    "description": "著彈點會放出雷電的步槍，可連鎖攻擊多個敵人。"
+  },
+  "ElectricArcAssaultRifle_4": {
+    "localized_name": "等離子步槍",
+    "description": "著彈點會放出雷電的步槍，可連鎖攻擊多個敵人。"
+  },
+  "ElectricArcAssaultRifle_5": {
+    "localized_name": "等離子步槍",
+    "description": "著彈點會放出雷電的步槍，可連鎖攻擊多個敵人。"
   },
   "ElectricOrgan": {
     "localized_name": "發電器官",
@@ -3057,7 +4061,7 @@
   },
   "EnergyLauncherBullet": {
     "localized_name": "電漿能量盒",
-    "description": "用於等離子砲等武器的彈藥。"
+    "description": "等離子砲等使用的彈藥。 可在「WeaponFactory Dirty 03」製作。"
   },
   "EnergyRocketLauncher": {
     "localized_name": "等離子砲",
@@ -3085,7 +4089,7 @@
   },
   "EnergyShotgunBullet": {
     "localized_name": "能量散彈槍子彈",
-    "description": "用於能量散彈槍等武器的彈藥。"
+    "description": "能量散彈槍等使用的彈藥。 可在「WeaponFactory Dirty 04」製作。"
   },
   "EnergyShotgun_2": {
     "localized_name": "能量散彈槍",
@@ -3121,7 +4125,7 @@
   },
   "ExplosiveBullet": {
     "localized_name": "火箭彈",
-    "description": "用於Launcher Default等武器的彈藥。"
+    "description": "Launcher Default等使用的彈藥。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Fang": {
     "localized_name": "zh-hant text",
@@ -3237,7 +4241,7 @@
   },
   "FlamethrowerBullet": {
     "localized_name": "火焰噴射器燃料",
-    "description": "用於Flamethrower等武器的燃料。"
+    "description": "火焰噴射器的燃料， 也是Flamethrower等使用的彈藥。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Flour": {
     "localized_name": "麵粉",
@@ -3420,12 +4424,12 @@
     "description": "能扮成比約恩的帽子。"
   },
   "GasMask": {
-    "localized_name": "zh-hant text",
-    "description": "zh-hant text"
+    "localized_name": "防腐霧面具",
+    "description": "附有特殊過濾裝置的面具。 能讓腐霧的傷害無效化。"
   },
   "GatlingBullet": {
     "localized_name": "加特林子彈",
-    "description": "用於加特林機槍等武器的彈藥。"
+    "description": "加特林機槍等使用的彈藥。 可在「WeaponFactory Dirty 03」製作。"
   },
   "GatlingGun": {
     "localized_name": "加特林機槍",
@@ -3501,7 +4505,7 @@
   },
   "GrenadeBullet": {
     "localized_name": "榴彈",
-    "description": "用於榴彈發射器等武器的彈藥。"
+    "description": "榴彈發射器等使用的彈藥。 可在「WeaponFactory Dirty 03」製作。"
   },
   "GrenadeLauncher": {
     "localized_name": "榴彈發射器",
@@ -3534,6 +4538,10 @@
   "GrilledSheepHerbs": {
     "localized_name": "香草烤棉悠悠",
     "description": "使用大量新鮮莓果增添香氣， 藉此帶出羊肉的獨特風味。 食用後的一段時間內，防禦+10%。"
+  },
+  "GrilledSwordCutlassFish": {
+    "localized_name": "鹽烤鞘刀魚",
+    "description": "豪邁地在新鮮的鞘刀魚排上撒鹽烤熟製成的菜餚。 食用後的一段時間內，不會受到擊退和後仰影響。"
   },
   "GuidedMissileLauncher": {
     "localized_name": "追蹤導彈發射器",
@@ -3597,7 +4605,11 @@
   },
   "HandgunBullet": {
     "localized_name": "手槍子彈",
-    "description": "用於HandGun Default等武器的子彈。"
+    "description": "HandGun Default等使用的彈藥。 可在「WeaponFactory Dirty 01」製作。"
+  },
+  "HandgunShield": {
+    "localized_name": "防暴盾手槍",
+    "description": "防暴盾手槍"
   },
   "Head001": {
     "localized_name": "王冠",
@@ -4083,9 +5095,73 @@
     "localized_name": "救贖王冠",
     "description": "可以感受到【極】默世鹿不祥的力量。 能取得這件道具的人極為少見。"
   },
+  "HeadEquip048": {
+    "localized_name": "蒼璃的帽子",
+    "description": "能扮成蒼璃的帽子。"
+  },
+  "HeadEquip049": {
+    "localized_name": "澤娜拉的帽子",
+    "description": "能扮成澤娜拉的帽子。 相當稀少之物，擁有之人少之又少。"
+  },
+  "HeadEquip050": {
+    "localized_name": "達鼠泥的髮飾",
+    "description": "模仿達鼠泥的髮飾。"
+  },
+  "HeadEquip051": {
+    "localized_name": "君王美露帕的髮飾",
+    "description": "模仿君王美露帕的髮飾。"
+  },
+  "HeadEquip052": {
+    "localized_name": "墨沫姬帽",
+    "description": "模仿墨沫姬製作的帽子。"
+  },
+  "HeadEquip053": {
+    "localized_name": "海月仙帽",
+    "description": "模仿海月仙製作的帽子。"
+  },
+  "HeadEquip054": {
+    "localized_name": "盔盔仔帽",
+    "description": "模仿盔盔仔製作的帽子。"
+  },
+  "HeadEquip055": {
+    "localized_name": "武道蛙帽",
+    "description": "模仿武道蛙製作的帽子。"
+  },
+  "HeadEquip056": {
+    "localized_name": "皮皮雞帽",
+    "description": "模仿皮皮雞製作的帽子。"
+  },
+  "HeadEquip057": {
+    "localized_name": "夜蔓爵帽",
+    "description": "模仿夜蔓爵製作的帽子。"
+  },
+  "HeadEquip058": {
+    "localized_name": "菇咚帽",
+    "description": "模仿菇咚製作的帽子。"
+  },
+  "HeadEquip059": {
+    "localized_name": "冥燈魚的髮飾",
+    "description": "模仿冥燈魚的髮飾。"
+  },
+  "HeadEquip060": {
+    "localized_name": "冰姬靈帽",
+    "description": "模仿冰姬靈製作的帽子。"
+  },
+  "HeadEquip061": {
+    "localized_name": "幽戀娜帽",
+    "description": "模仿幽戀娜製作的帽子。"
+  },
+  "HeadEquip062": {
+    "localized_name": "桃蛛娘帽",
+    "description": "模仿桃蛛娘製作的帽子。"
+  },
   "Herbs": {
     "localized_name": "劣質藥品",
     "description": "對感冒和扭傷、暴食症有效的劣質藥品。 服用後並不會回復生命值。"
+  },
+  "HighGrade_Processed_Wood": {
+    "localized_name": "優質木板",
+    "description": "精心切割Wood Fine所得到的板材。 擁有美麗的木紋，在建築中常用於營造高級奢華的感覺。 可在「Factory Hard 03」製作。"
   },
   "Homeward": {
     "localized_name": "歸途雷雲",
@@ -4125,7 +5201,7 @@
   },
   "InkBullet": {
     "localized_name": "噴漆顏料彈",
-    "description": "噴漆槍用的子彈。 可用顏料畫出帕魯的圖案。"
+    "description": "噴漆槍使用的彈藥。 可用顏料畫出帕魯的圖案。 可在「WeaponFactory Dirty 01」製作。"
   },
   "IronArmor": {
     "localized_name": "精煉金屬盔甲",
@@ -4217,7 +5293,7 @@
   },
   "JellyfishFairy_jelly": {
     "localized_name": "海月仙的晶仙果凍",
-    "description": "用Meat JellyfishFairy和帕魯體液製作的奇妙甜點。 食用後的一段時間內，所獲得的經驗值會少量提升， 攻擊 +10%。"
+    "description": "用Meat JellyfishFairy和水棲帕魯的黏液製作的奇妙甜點。 食用後的一段時間內，所獲得的經驗值會少量提升， 攻擊 +10%。"
   },
   "JellyfishGhost_jelly": {
     "localized_name": "海月靈的水靈果凍",
@@ -4243,6 +5319,38 @@
     "localized_name": "太刀",
     "description": "近戰用的太刀。 刀鋒凌厲，斬斷一切。"
   },
+  "KeySphere_01": {
+    "localized_name": "嫉妒之密鑰球",
+    "description": "曾在這片土地上繁榮發展的古代文明的遺物。 儘管目前還未能了解它的全貌，但近年來的研究 結果顯示，它可能是某種巨大裝置的一部分。 「嫉妒他人之繁榮，帶來破滅之罪。」"
+  },
+  "KeySphere_02": {
+    "localized_name": "傲慢之密鑰球",
+    "description": "曾在這片土地上繁榮發展的古代文明的遺物。 儘管目前還未能了解它的全貌，但近年來的研究 結果顯示，它可能是某種巨大裝置的一部分。 「與傲慢尋求共生，招來災厄之罪。」"
+  },
+  "KeySphere_03": {
+    "localized_name": "貪婪之密鑰球",
+    "description": "曾在這片土地上繁榮發展的古代文明的遺物。 儘管目前還未能了解它的全貌，但近年來的研究 結果顯示，它可能是某種巨大裝置的一部分。 「不願接受自身宿命，強求緣分之罪。」"
+  },
+  "KeySphere_04": {
+    "localized_name": "怠惰之密鑰球",
+    "description": "曾在這片土地上繁榮發展的古代文明的遺物。 儘管目前還未能了解它的全貌，但近年來的研究 結果顯示，它可能是某種巨大裝置的一部分。 「捨棄人性，墮入毀滅之罪。」"
+  },
+  "KeySphere_05": {
+    "localized_name": "暴食之密鑰球",
+    "description": "曾在這片土地上繁榮發展的古代文明的遺物。 儘管目前還未能了解它的全貌，但近年來的研究 結果顯示，它可能是某種巨大裝置的一部分。 「吞食星球命脈，仍不知滿足之罪。」"
+  },
+  "KeySphere_06": {
+    "localized_name": "色欲之密鑰球",
+    "description": "曾在這片土地上繁榮發展的古代文明的遺物。 儘管目前還未能了解它的全貌，但近年來的研究 結果顯示，它可能是某種巨大裝置的一部分。 「尋求天外禁忌，踐踏人理之罪。」"
+  },
+  "KeySphere_07": {
+    "localized_name": "憤怒之密鑰球",
+    "description": "曾在這片土地上繁榮發展的古代文明的遺物。 儘管目前還未能了解它的全貌，但近年來的研究 結果顯示，它可能是某種巨大裝置的一部分。 「任憑怒火燎燒，散播死亡之罪。」"
+  },
+  "KeySphere_08": {
+    "localized_name": "原罪之密鑰球",
+    "description": "曾在這片土地上繁榮發展的古代文明的遺物。 儘管目前還未能了解它的全貌，但近年來的研究 結果顯示，它可能是某種巨大裝置的一部分。 「否定萬物萬象之生，卻仍誕生之罪。」"
+  },
   "Lantern": {
     "localized_name": "掛腰提燈",
     "description": "掛在腰上的提燈。 到了夜晚會自動點亮。 也可以切換照明模式使它常亮。 帶1個在身上就夠用了。"
@@ -4253,11 +5361,11 @@
   },
   "LaserBullet": {
     "localized_name": "能量盒",
-    "description": "用於雷射步槍等武器的彈藥。"
+    "description": "雷射步槍等使用的彈藥。 可在「WeaponFactory Dirty 03」製作。"
   },
   "LaserGatlingBullet": {
     "localized_name": "加特林雷射能量盒",
-    "description": "用於雷射加特林等武器的彈藥。"
+    "description": "雷射加特林等使用的彈藥。 可在「WeaponFactory Dirty 03」製作。"
   },
   "LaserGatlingGun": {
     "localized_name": "雷射加特林",
@@ -4278,6 +5386,10 @@
   "LaserGatlingGun_5": {
     "localized_name": "雷射加特林",
     "description": "能夠高速連射雷射光束。 猛烈的火力能瞬間壓制複數敵人。"
+  },
+  "LaserMiningTool": {
+    "localized_name": "多功能等離子切割器",
+    "description": "能夠匯聚並發射等離子能量的便攜式等離子切割器。 從挖礦到伐木皆可勝任，用途廣泛。 利用它發出的高能量射線，甚至可以挖掘特殊的礦石。"
   },
   "LaserRifle": {
     "localized_name": "雷射步槍",
@@ -4326,6 +5438,10 @@
   "Launcher_Meteor_5": {
     "localized_name": "隕石發射器",
     "description": "加工隕石製作而成的發射器。 命中時會像隕石一樣引發爆炸。"
+  },
+  "Lava_Ancient": {
+    "localized_name": "古代熔岩塊",
+    "description": "在極限環境下經年累月形成的熔岩塊。 其中封存的藍色熔岩至今仍在散發熱度。"
   },
   "Leather": {
     "localized_name": "皮革",
@@ -4497,7 +5613,7 @@
   },
   "ManganeseIngot": {
     "localized_name": "珊瑚錠",
-    "description": "由珊瑚礦石和金屬礦石、 石炭加工製成的合金。 具備很高的能量耐受性，用於製作武器等物品的材料。"
+    "description": "沉睡在海底的珊瑚礦石的合金。 具備很高的能量耐受性，用於製作武器等物品。 可在「巨大熔爐」冶煉。"
   },
   "ManganeseOre": {
     "localized_name": "珊瑚礦石",
@@ -4595,17 +5711,21 @@
     "localized_name": "棉悠悠羊肉",
     "description": "SheepBall的肉。 這種紅肉的魅力在於其獨特風味。 稍有騷味，但相當鮮美。"
   },
+  "Meat_SwordCutlassFish": {
+    "localized_name": "鞘刀魚排",
+    "description": "切割好的SwordCutlassFish肉排。 柔韌而飽滿的肉質是它的特徵。 背骨像刀劍一樣鋒利，烹調時要當心。"
+  },
   "Medicines": {
     "localized_name": "藥品",
     "description": "對胃潰瘍和骨折有效的奇妙藥品。 無法用來回復生命值。"
   },
   "MetalDetector": {
     "localized_name": "金屬探測器",
-    "description": "拿在手上即可探測附近隱藏的礦石。 靠近礦石時，即標記金屬位置。 一旦遠離標記就會消失。"
+    "description": "使用後可探測隱藏在地下城中的鉻鐵礦，並標記其位置。 一旦遠離，標記就會消失。"
   },
   "MeteorBullet": {
     "localized_name": "隕石彈",
-    "description": "用於Launcher Meteor等武器的彈藥。"
+    "description": "Launcher Meteor等使用的彈藥。 可在「WeaponFactory Dirty 02」製作。"
   },
   "MeteorDrop": {
     "localized_name": "隕石碎片",
@@ -4625,7 +5745,7 @@
   },
   "MissileBullet": {
     "localized_name": "導彈",
-    "description": "用於追蹤導彈發射器等武器的彈藥。"
+    "description": "追蹤導彈發射器等使用的彈藥。 可在「WeaponFactory Dirty 03」製作。"
   },
   "Money": {
     "localized_name": "金幣",
@@ -4759,6 +5879,10 @@
     "localized_name": "墨沫姬的章魚燒",
     "description": "將Meat OctopusGirl放進麵粉所做的麵糊中烤製而成的圓球形小點心。 食用後的一段時間內，所獲得的經驗值會少量提升。"
   },
+  "OctopusGirl_Takoyaki2": {
+    "localized_name": "海鮮義大利麵",
+    "description": "大量使用墨沫姬的章魚腿，與新鮮義大利麵一同烹調的海味大餐。 食用後的一段時間內，可令受到的爆炸傷害無效。"
+  },
   "OldRevolver": {
     "localized_name": "古舊左輪手槍",
     "description": "略顯老舊的左輪手槍。 單發威力優於Handgun default。"
@@ -4795,149 +5919,225 @@
     "localized_name": "可疑果汁",
     "description": "飲用這種果汁能讓心情舒爽。 飲用後的一段時間內會略微提高工作速度， 但SAN值也會略微下降。"
   },
+  "Otomo_ATDark_ElementBoost_1": {
+    "localized_name": "冥王指揮棒",
+    "description": "可提升參戰帕魯的攻擊力的飾品。 還可大幅提升參戰帕魯的暗屬性傷害。"
+  },
+  "Otomo_ATDragon_ElementBoost_1": {
+    "localized_name": "神龍指揮棒",
+    "description": "可提升參戰帕魯的攻擊力的飾品。 還可大幅提升參戰帕魯的龍屬性傷害。"
+  },
+  "Otomo_ATEarth_ElementBoost_1": {
+    "localized_name": "岩帝指揮棒",
+    "description": "可提升參戰帕魯的攻擊力的飾品。 還可大幅提升參戰帕魯的地屬性傷害。"
+  },
+  "Otomo_ATElectricity_ElementBoost_1": {
+    "localized_name": "雷帝指揮棒",
+    "description": "可提升參戰帕魯的攻擊力的飾品。 還可大幅提升參戰帕魯的雷屬性傷害。"
+  },
+  "Otomo_ATFire_ElementBoost_1": {
+    "localized_name": "炎帝指揮棒",
+    "description": "可提升參戰帕魯的攻擊力的飾品。 還可大幅提升參戰帕魯的火屬性傷害。"
+  },
+  "Otomo_ATIce_ElementBoost_1": {
+    "localized_name": "冰帝指揮棒",
+    "description": "可提升參戰帕魯的攻擊力的飾品。 還可大幅提升參戰帕魯的冰屬性傷害。"
+  },
+  "Otomo_ATLeaf_ElementBoost_1": {
+    "localized_name": "精靈王指揮棒",
+    "description": "可提升參戰帕魯的攻擊力的飾品。 還可大幅提升參戰帕魯的草屬性傷害。"
+  },
+  "Otomo_ATNormal_ElementBoost_1": {
+    "localized_name": "聖天指揮棒",
+    "description": "可提升參戰帕魯的攻擊力的飾品。 還可大幅提升參戰帕魯的無屬性傷害。"
+  },
+  "Otomo_ATWater_ElementBoost_1": {
+    "localized_name": "海皇指揮棒",
+    "description": "可提升參戰帕魯的攻擊力的飾品。 還可大幅提升參戰帕魯的水屬性傷害。"
+  },
   "Otomo_Attack_up1": {
     "localized_name": "攻擊支援哨子",
-    "description": "可少量提升參戰帕魯的攻擊力的飾品。"
+    "description": "可提升參戰帕魯的攻擊力的飾品。"
   },
   "Otomo_Attack_up2": {
-    "localized_name": "攻擊支援哨子+1",
+    "localized_name": "攻擊支援哨子",
     "description": "可提升參戰帕魯的攻擊力的飾品。"
   },
   "Otomo_Attack_up3": {
-    "localized_name": "攻擊支援哨子+2",
-    "description": "可大幅提升參戰帕魯的攻擊力的飾品。"
+    "localized_name": "攻擊支援哨子",
+    "description": "可提升參戰帕魯的攻擊力的飾品。"
+  },
+  "Otomo_DFDark_ElementBoost_1": {
+    "localized_name": "黑月女王神符",
+    "description": "可提升參戰帕魯的防禦力的飾品。 還可大幅提升參戰帕魯的暗屬性傷害。"
+  },
+  "Otomo_DFDragon_ElementBoost_1": {
+    "localized_name": "空渦龍神符",
+    "description": "可提升參戰帕魯的防禦力的飾品。 還可大幅提升參戰帕魯的龍屬性傷害。"
+  },
+  "Otomo_DFEarth_ElementBoost_1": {
+    "localized_name": "阿努比斯神符",
+    "description": "可提升參戰帕魯的防禦力的飾品。 還可大幅提升參戰帕魯的地屬性傷害。"
+  },
+  "Otomo_DFElectricity_ElementBoost_1": {
+    "localized_name": "波魯傑克斯神符",
+    "description": "可提升參戰帕魯的防禦力的飾品。 還可大幅提升參戰帕魯的雷屬性傷害。"
+  },
+  "Otomo_DFFire_ElementBoost_1": {
+    "localized_name": "焰煌神符",
+    "description": "可提升參戰帕魯的防禦力的飾品。 還可大幅提升參戰帕魯的火屬性傷害。"
+  },
+  "Otomo_DFIce_ElementBoost_1": {
+    "localized_name": "喚冬獸神符",
+    "description": "可提升參戰帕魯的防禦力的飾品。 還可大幅提升參戰帕魯的冰屬性傷害。"
+  },
+  "Otomo_DFLeaf_ElementBoost_1": {
+    "localized_name": "百合女王神符",
+    "description": "可提升參戰帕魯的防禦力的飾品。 還可大幅提升參戰帕魯的草屬性傷害。"
+  },
+  "Otomo_DFNormal_ElementBoost_1": {
+    "localized_name": "默世鹿神符",
+    "description": "可提升參戰帕魯的防禦力的飾品。 還可大幅提升參戰帕魯的無屬性傷害。"
+  },
+  "Otomo_DFWater_ElementBoost_1": {
+    "localized_name": "海皇鯨神符",
+    "description": "可提升參戰帕魯的防禦力的飾品。 還可大幅提升參戰帕魯的水屬性傷害。"
   },
   "Otomo_Defense_up1": {
     "localized_name": "防禦支援哨子",
-    "description": "可少量提升參戰帕魯的防禦力的飾品。"
+    "description": "可提升參戰帕魯的防禦力的飾品。"
   },
   "Otomo_Defense_up2": {
-    "localized_name": "防禦支援哨子+1",
+    "localized_name": "防禦支援哨子",
     "description": "可提升參戰帕魯的防禦力的飾品。"
   },
   "Otomo_Defense_up3": {
-    "localized_name": "防禦支援哨子+2",
-    "description": "可大幅提升參戰帕魯的防禦力的飾品。"
+    "localized_name": "防禦支援哨子",
+    "description": "可提升參戰帕魯的防禦力的飾品。"
   },
   "Otomo_ElementBoost_Dark_1": {
     "localized_name": "暗屬性應援哨子",
-    "description": "可稍微提升參戰帕魯的暗屬性傷害的飾品。"
+    "description": "可提升參戰帕魯的暗屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Dark_2": {
-    "localized_name": "暗屬性應援哨子+1",
+    "localized_name": "暗屬性應援哨子",
     "description": "可提升參戰帕魯的暗屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Dark_3": {
-    "localized_name": "暗屬性應援哨子+2",
-    "description": "可大幅提升參戰帕魯的暗屬性傷害的飾品。"
+    "localized_name": "暗屬性應援哨子",
+    "description": "可提升參戰帕魯的暗屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Dragon_1": {
     "localized_name": "龍屬性應援哨子",
-    "description": "可稍微提升參戰帕魯的龍屬性傷害的飾品。"
+    "description": "可提升參戰帕魯的龍屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Dragon_2": {
-    "localized_name": "龍屬性應援哨子+1",
+    "localized_name": "龍屬性應援哨子",
     "description": "可提升參戰帕魯的龍屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Dragon_3": {
-    "localized_name": "龍屬性應援哨子+2",
-    "description": "可大幅提升參戰帕魯的龍屬性傷害的飾品。"
+    "localized_name": "龍屬性應援哨子",
+    "description": "可提升參戰帕魯的龍屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Earth_1": {
     "localized_name": "地屬性應援哨子",
-    "description": "可稍微提升參戰帕魯的地屬性傷害的飾品。"
+    "description": "可提升參戰帕魯的地屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Earth_2": {
-    "localized_name": "地屬性應援哨子+1",
+    "localized_name": "地屬性應援哨子",
     "description": "可提升參戰帕魯的地屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Earth_3": {
-    "localized_name": "地屬性應援哨子+2",
-    "description": "可大幅提升參戰帕魯的地屬性傷害的飾品。"
+    "localized_name": "地屬性應援哨子",
+    "description": "可提升參戰帕魯的地屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Electricity_1": {
     "localized_name": "雷屬性應援哨子",
-    "description": "可稍微提升參戰帕魯的雷屬性傷害的飾品。"
+    "description": "可提升參戰帕魯的雷屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Electricity_2": {
-    "localized_name": "雷屬性應援哨子+1",
+    "localized_name": "雷屬性應援哨子",
     "description": "可提升參戰帕魯的雷屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Electricity_3": {
-    "localized_name": "雷屬性應援哨子+2",
-    "description": "可大幅提升參戰帕魯的雷屬性傷害的飾品。"
+    "localized_name": "雷屬性應援哨子",
+    "description": "可提升參戰帕魯的雷屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Fire_1": {
     "localized_name": "火屬性應援哨子",
-    "description": "可稍微提升參戰帕魯的火屬性傷害的飾品。"
+    "description": "可提升參戰帕魯的火屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Fire_2": {
-    "localized_name": "火屬性應援哨子+1",
+    "localized_name": "火屬性應援哨子",
     "description": "可提升參戰帕魯的火屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Fire_3": {
-    "localized_name": "火屬性應援哨子+2",
-    "description": "可大幅提升參戰帕魯的火屬性傷害的飾品。"
+    "localized_name": "火屬性應援哨子",
+    "description": "可提升參戰帕魯的火屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Ice_1": {
     "localized_name": "冰屬性應援哨子",
-    "description": "可稍微提升參戰帕魯的冰屬性傷害的飾品。"
+    "description": "可提升參戰帕魯的冰屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Ice_2": {
-    "localized_name": "冰屬性應援哨子+1",
+    "localized_name": "冰屬性應援哨子",
     "description": "可提升參戰帕魯的冰屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Ice_3": {
-    "localized_name": "冰屬性應援哨子+2",
-    "description": "可大幅提升參戰帕魯的冰屬性傷害的飾品。"
+    "localized_name": "冰屬性應援哨子",
+    "description": "可提升參戰帕魯的冰屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Leaf_1": {
     "localized_name": "草屬性應援哨子",
-    "description": "可稍微提升參戰帕魯的草屬性傷害的飾品。"
+    "description": "可提升參戰帕魯的草屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Leaf_2": {
-    "localized_name": "草屬性應援哨子+1",
+    "localized_name": "草屬性應援哨子",
     "description": "可提升參戰帕魯的草屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Leaf_3": {
-    "localized_name": "草屬性應援哨子+2",
-    "description": "可大幅提升參戰帕魯的草屬性傷害的飾品。"
+    "localized_name": "草屬性應援哨子",
+    "description": "可提升參戰帕魯的草屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Normal_1": {
     "localized_name": "無屬性應援哨子",
-    "description": "可稍微提升參戰帕魯的無屬性傷害的飾品。"
+    "description": "可提升參戰帕魯的無屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Normal_2": {
-    "localized_name": "無屬性應援哨子+1",
+    "localized_name": "無屬性應援哨子",
     "description": "可提升參戰帕魯的無屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Normal_3": {
-    "localized_name": "無屬性應援哨子+2",
-    "description": "可大幅提升參戰帕魯的無屬性傷害的飾品。"
+    "localized_name": "無屬性應援哨子",
+    "description": "可提升參戰帕魯的無屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Water_1": {
     "localized_name": "水屬性應援哨子",
-    "description": "可稍微提升參戰帕魯的水屬性傷害的飾品。"
+    "description": "可提升參戰帕魯的水屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Water_2": {
-    "localized_name": "水屬性應援哨子+1",
+    "localized_name": "水屬性應援哨子",
     "description": "可提升參戰帕魯的水屬性傷害的飾品。"
   },
   "Otomo_ElementBoost_Water_3": {
-    "localized_name": "水屬性應援哨子+2",
-    "description": "可大幅提升參戰帕魯的水屬性傷害的飾品。"
+    "localized_name": "水屬性應援哨子",
+    "description": "可提升參戰帕魯的水屬性傷害的飾品。"
+  },
+  "Otomo_PalConfidence_Increase_1": {
+    "localized_name": "信賴戒指",
+    "description": "裝備後，更容易受到帕魯信賴。"
   },
   "Otomo_PalExp_Increase_1": {
     "localized_name": "成長促進鈴",
-    "description": "可稍微提升帕魯所獲得的經驗值的飾品。"
+    "description": "可提升帕魯所獲得的經驗值的飾品。"
   },
   "Otomo_PalExp_Increase_2": {
-    "localized_name": "成長促進鈴+1",
+    "localized_name": "成長促進鈴",
     "description": "可提升帕魯所獲得的經驗值的飾品。"
   },
   "Otomo_PalExp_Increase_3": {
-    "localized_name": "成長促進鈴+2",
-    "description": "可大幅提升帕魯所獲得的經驗值的飾品。"
+    "localized_name": "成長促進鈴",
+    "description": "可提升帕魯所獲得的經驗值的飾品。"
   },
   "OverheatRifle": {
     "localized_name": "過熱步槍",
@@ -4945,7 +6145,7 @@
   },
   "OverheatRifleBullet": {
     "localized_name": "過熱步槍子彈",
-    "description": "用於過熱步槍等武器的彈藥。"
+    "description": "過熱步槍等使用的彈藥。 可在「WeaponFactory Dirty 04」製作。"
   },
   "OverheatRifle_2": {
     "localized_name": "過熱步槍",
@@ -4963,6 +6163,78 @@
     "localized_name": "過熱步槍",
     "description": "無需重複裝填即可實現連續射擊的突擊步槍。 但長時間連射容易引發過熱， 導致巨大破綻，請務必注意。"
   },
+  "PalAwakening_Dark": {
+    "localized_name": "暗之覺醒晶石",
+    "description": "濃縮了世界樹能量的結晶。 可以讓<img id=|ElemIcon Dark|/><uiCommon id=|COMMON ELEMENT NAME Dark| style=|Elem Dark|/>的帕魯覺醒，解放其隱藏的能力。"
+  },
+  "PalAwakening_Dragon": {
+    "localized_name": "龍之覺醒晶石",
+    "description": "濃縮了世界樹能量的結晶。 可以讓<img id=|ElemIcon Dragon|/><uiCommon id=|COMMON ELEMENT NAME Dragon| style=|Elem Dragon|/>的帕魯覺醒，解放其隱藏的能力。"
+  },
+  "PalAwakening_Electric": {
+    "localized_name": "雷之覺醒晶石",
+    "description": "濃縮了世界樹能量的結晶。 可以讓<img id=|ElemIcon Electric|/><uiCommon id=|COMMON ELEMENT NAME Electricity| style=|Elem Electric|/>的帕魯覺醒，解放其隱藏的能力。"
+  },
+  "PalAwakening_Fire": {
+    "localized_name": "火之覺醒晶石",
+    "description": "濃縮了世界樹能量的結晶。 可以讓<img id=|ElemIcon Fire|/><uiCommon id=|COMMON ELEMENT NAME Fire| style=|Elem Fire|/>的帕魯覺醒，解放其隱藏的能力。"
+  },
+  "PalAwakening_Grass": {
+    "localized_name": "草之覺醒晶石",
+    "description": "濃縮了世界樹能量的結晶。 可以讓<img id=|ElemIcon Grass|/><uiCommon id=|COMMON ELEMENT NAME Leaf| style=|Elem Grass|/>的帕魯覺醒，解放其隱藏的能力。"
+  },
+  "PalAwakening_Ground": {
+    "localized_name": "地之覺醒晶石",
+    "description": "濃縮了世界樹能量的結晶。 可以讓<img id=|ElemIcon Ground|/><uiCommon id=|COMMON ELEMENT NAME Earth| style=|Elem Ground|/>的帕魯覺醒，解放其隱藏的能力。"
+  },
+  "PalAwakening_Ice": {
+    "localized_name": "冰之覺醒晶石",
+    "description": "濃縮了世界樹能量的結晶。 可以讓<img id=|ElemIcon Ice|/><uiCommon id=|COMMON ELEMENT NAME Ice| style=|Elem Ice|/>的帕魯覺醒，解放其隱藏的能力。"
+  },
+  "PalAwakening_Material_Dark": {
+    "localized_name": "暗之輝石",
+    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放<img id=|ElemIcon Dark|/><uiCommon id=|COMMON ELEMENT NAME Dark| style=|Elem Dark|/>帕魯體內隱藏的能力。"
+  },
+  "PalAwakening_Material_Dragon": {
+    "localized_name": "龍之輝石",
+    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放<img id=|ElemIcon Dragon|/><uiCommon id=|COMMON ELEMENT NAME Dragon| style=|Elem Dragon|/>帕魯體內隱藏的能力。"
+  },
+  "PalAwakening_Material_Electric": {
+    "localized_name": "雷之輝石",
+    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放<img id=|ElemIcon Electric|/><uiCommon id=|COMMON ELEMENT NAME Electricity| style=|Elem Electric|/>帕魯體內隱藏的能力。"
+  },
+  "PalAwakening_Material_Fire": {
+    "localized_name": "火之輝石",
+    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放<img id=|ElemIcon Fire|/><uiCommon id=|COMMON ELEMENT NAME Fire| style=|Elem Fire|/>帕魯體內隱藏的能力。"
+  },
+  "PalAwakening_Material_Grass": {
+    "localized_name": "草之輝石",
+    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放<img id=|ElemIcon Grass|/><uiCommon id=|COMMON ELEMENT NAME Leaf| style=|Elem Grass|/>帕魯體內隱藏的能力。"
+  },
+  "PalAwakening_Material_Ground": {
+    "localized_name": "地之輝石",
+    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放<img id=|ElemIcon Ground|/><uiCommon id=|COMMON ELEMENT NAME Earth| style=|Elem Ground|/>帕魯體內隱藏的能力。"
+  },
+  "PalAwakening_Material_Ice": {
+    "localized_name": "冰之輝石",
+    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放<img id=|ElemIcon Ice|/><uiCommon id=|COMMON ELEMENT NAME Ice| style=|Elem Ice|/>帕魯體內隱藏的能力。"
+  },
+  "PalAwakening_Material_Neutral": {
+    "localized_name": "無之輝石",
+    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放<img id=|ElemIcon Neutral|/><uiCommon id=|COMMON ELEMENT NAME Normal| style=|Elem Neutral|/>帕魯體內隱藏的能力。"
+  },
+  "PalAwakening_Material_Water": {
+    "localized_name": "水之輝石",
+    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放<img id=|ElemIcon Water|/><uiCommon id=|COMMON ELEMENT NAME Water| style=|Elem Water|/>帕魯體內隱藏的能力。"
+  },
+  "PalAwakening_Neutral": {
+    "localized_name": "無之覺醒晶石",
+    "description": "濃縮了世界樹能量的結晶。 可以讓<img id=|ElemIcon Neutral|/><uiCommon id=|COMMON ELEMENT NAME Normal| style=|Elem Neutral|/>的帕魯覺醒，解放其隱藏的能力。"
+  },
+  "PalAwakening_Water": {
+    "localized_name": "水之覺醒晶石",
+    "description": "濃縮了世界樹能量的結晶。 可以讓<img id=|ElemIcon Water|/><uiCommon id=|COMMON ELEMENT NAME Water| style=|Elem Water|/>的帕魯覺醒，解放其隱藏的能力。"
+  },
   "PalCrystal_Ex": {
     "localized_name": "古代文明部件",
     "description": "從古代遺跡裡挖出的廢品。 其中蘊藏了許多失傳技術的資訊。 此物品極具價值，相當炙手可熱。"
@@ -4977,7 +6249,7 @@
   },
   "PalDopingShotBullet": {
     "localized_name": "強化槍子彈",
-    "description": "用於強化槍等武器的彈藥。"
+    "description": "強化槍等使用的彈藥。 可在「WeaponFactory Dirty 01」製作。"
   },
   "PalDopingShot_2": {
     "localized_name": "高級強化槍",
@@ -5127,6 +6399,30 @@
     "localized_name": "巨大新綠帕魯蛋",
     "description": "PalEgg Leaf 05。 能感受到深綠靈魂的蓬勃生氣，彷彿某種奇特生物即將破殼而出。 把它放進帕魯蛋孵化器裡孵化吧。"
   },
+  "PalEgg_MutationPal": {
+    "localized_name": "zh Hant Text",
+    "description": "zh-hant text"
+  },
+  "PalEgg_MutationPal_01": {
+    "localized_name": "突變帕魯蛋",
+    "description": "PalEgg MutationPal 01。 發生了非常罕見的特殊變異。 放進帕魯蛋孵化器孵化它吧。"
+  },
+  "PalEgg_MutationPal_02": {
+    "localized_name": "突變帕魯蛋",
+    "description": "PalEgg MutationPal 02。 發生了非常罕見的特殊變異。 放進帕魯蛋孵化器孵化它吧。"
+  },
+  "PalEgg_MutationPal_03": {
+    "localized_name": "大型突變帕魯蛋",
+    "description": "PalEgg MutationPal 03。 發生了非常罕見的特殊變異。 放進帕魯蛋孵化器孵化它吧。"
+  },
+  "PalEgg_MutationPal_04": {
+    "localized_name": "大型突變帕魯蛋",
+    "description": "PalEgg MutationPal 04。 發生了非常罕見的特殊變異。 放進帕魯蛋孵化器孵化它吧。"
+  },
+  "PalEgg_MutationPal_05": {
+    "localized_name": "巨大突變帕魯蛋",
+    "description": "PalEgg MutationPal 05。 發生了非常罕見的特殊變異。 放進帕魯蛋孵化器孵化它吧。"
+  },
   "PalEgg_Normal_01": {
     "localized_name": "平凡帕魯蛋",
     "description": "PalEgg Normal 01。 能感受到溫柔的胎動。 把它放進帕魯蛋孵化器孵化吧。"
@@ -5167,9 +6463,29 @@
     "localized_name": "巨大潤澤帕魯蛋",
     "description": "PalEgg Water 05。 能感受到澄澈靈魂的蓬勃生氣，彷彿某種奇特生物即將破殼而出。 把它放進帕魯蛋孵化器裡孵化吧。"
   },
+  "PalEgg_WorldTree_01": {
+    "localized_name": "不祥帕魯蛋",
+    "description": "神秘的PalEgg WorldTree 01， 裡面蘊含著世界樹的能量。 放進帕魯蛋孵化器孵化它吧。"
+  },
+  "PalEgg_WorldTree_02": {
+    "localized_name": "不祥帕魯蛋",
+    "description": "神秘的PalEgg WorldTree 02， 裡面蘊含著世界樹的能量。 放進帕魯蛋孵化器孵化它吧。"
+  },
+  "PalEgg_WorldTree_03": {
+    "localized_name": "大型不祥帕魯蛋",
+    "description": "神秘的PalEgg WorldTree 03， 裡面蘊含著世界樹的能量。 放進帕魯蛋孵化器孵化它吧。"
+  },
+  "PalEgg_WorldTree_04": {
+    "localized_name": "大型不祥帕魯蛋",
+    "description": "神秘的PalEgg WorldTree 04， 裡面蘊含著世界樹的能量。 放進帕魯蛋孵化器孵化它吧。"
+  },
+  "PalEgg_WorldTree_05": {
+    "localized_name": "巨大不祥帕魯蛋",
+    "description": "神秘的PalEgg WorldTree 05， 裡面蘊含著世界樹的能量。 放進帕魯蛋孵化器孵化它吧。"
+  },
   "PalFluid": {
-    "localized_name": "帕魯體液",
-    "description": "可從帕魯身上取得的體液。 黏度很高，相當有用。"
+    "localized_name": "水棲帕魯的黏液",
+    "description": "可從水屬性帕魯身上取得的液體。 粘度很高，相當有用。"
   },
   "PalGenderReverse": {
     "localized_name": "帕魯性轉藥",
@@ -5239,6 +6555,122 @@
     "localized_name": "優質帕魯油",
     "description": "可從帕魯身上取得的優質油脂。 是製作聚合物時會用到的素材。"
   },
+  "PalPassiveSkillChange_AutoHPRegeneRate_Passive": {
+    "localized_name": "植入體：療癒教練",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_CraftSpeed_up3": {
+    "localized_name": "耗材植入體：卓絕技藝",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_Deffence_up3": {
+    "localized_name": "耗材植入體：金剛之軀",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_EternalFlame": {
+    "localized_name": "耗材植入體：永炎",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_Invader": {
+    "localized_name": "耗材植入體：侵略者",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_Legend": {
+    "localized_name": "耗材植入體：傳說",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_MoveSpeed_up_3": {
+    "localized_name": "耗材植入體：神速",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_MutationPal_Babysitter": {
+    "localized_name": "耗材植入體：寶寶保母",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_MutationPal_ExplosionResist": {
+    "localized_name": "耗材植入體：重裝甲",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_MutationPal_Immortal": {
+    "localized_name": "耗材植入體：不死之身",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_MutationPal_Mutant": {
+    "localized_name": "耗材植入體：特殊體質",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_Nushi": {
+    "localized_name": "耗材植入體：湖之主",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_PAL_ALLAttack_up3": {
+    "localized_name": "耗材植入體：鬼神",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_PAL_FullStomach_Down_3": {
+    "localized_name": "耗材植入體：極限絕食",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_PAL_Sanity_Down_3": {
+    "localized_name": "耗材植入體：明鏡止水",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_Rare": {
+    "localized_name": "耗材植入體：稀有",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_RideJumpCount_Increase2": {
+    "localized_name": "耗材植入體：凌空微步",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_Salvation": {
+    "localized_name": "耗材植入體：救世主",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_Stamina_Up_3": {
+    "localized_name": "耗材植入體：永動機",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_SwimSpeed_up_3": {
+    "localized_name": "耗材植入體：破浪王者",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_Vampire": {
+    "localized_name": "耗材植入體：吸血鬼",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_Witch": {
+    "localized_name": "耗材植入體：魔女",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_ATK": {
+    "localized_name": "耗材植入體：雙面刃",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_ATK_DEF": {
+    "localized_name": "耗材植入體：破壞神",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_CraftSpeed": {
+    "localized_name": "耗材植入體：惡魔之手",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_DEF": {
+    "localized_name": "耗材植入體：守護聖盾",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_FullStomach": {
+    "localized_name": "耗材植入體：神樹苗床",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_MoveSpeed": {
+    "localized_name": "耗材植入體：次元跳躍",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_Sanity": {
+    "localized_name": "耗材植入體：仙人",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
   "PalPassiveSkillChange_CoolTimeReduction_Up_1": {
     "localized_name": "植入體：沉著冷靜",
     "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
@@ -5288,7 +6720,7 @@
     "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_Nocturnal": {
-    "localized_name": "植入體：夜行性",
+    "localized_name": "植入體：不眠",
     "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_NonKilling": {
@@ -5337,6 +6769,14 @@
   },
   "PalPassiveSkillChange_PAL_Sanity_Down_3": {
     "localized_name": "植入體：明鏡止水",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_PlayerSP_DecreaseRate_Passive": {
+    "localized_name": "植入體：防過勞幫手",
+    "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
+  },
+  "PalPassiveSkillChange_ReloadSpeedUp_Passive": {
+    "localized_name": "植入體：裝填大師",
     "description": "植入帕魯體內、用來改變其被動技能的植入體。 持有此道具時，可在帕魯手術台選擇對應的被動技能。"
   },
   "PalPassiveSkillChange_SalePrice_Up_1": {
@@ -5395,6 +6835,14 @@
     "localized_name": "帕魯球",
     "description": "投擲這種道具便能捕捉帕魯。 此為量產款式，只對低等級的帕魯有效。"
   },
+  "PalSphere_Ancient_1": {
+    "localized_name": "烈陽帕魯球",
+    "description": "投擲這種道具便能捕捉帕魯。 在古代文明中，這種高階帕魯球的存在確立了與帕魯的共存關係。"
+  },
+  "PalSphere_Ancient_2": {
+    "localized_name": "遠古帕魯球",
+    "description": "投擲這種道具便能捕捉帕魯。 集古代文明技術之大成打造，含有世界樹之力的終極帕魯球。"
+  },
   "PalSphere_Exotic": {
     "localized_name": "超限帕魯球",
     "description": "投擲這種道具便能捕捉帕魯。 擁有超凡絕倫的性能，連超規格的帕魯也能捕獲。"
@@ -5433,7 +6881,7 @@
   },
   "PalSummon_DarkMechaDragon": {
     "localized_name": "傑諾多蘭的石板",
-    "description": "畫著傑諾多蘭的石板。 只要將其獻給召喚的祭壇， 就能召喚非常強大的傑諾多蘭[Lv 60]。"
+    "description": "畫著傑諾多蘭的石板。 只要將其獻給召喚的祭壇， 就能召喚非常強大的傑諾多蘭[Lv 65]。"
   },
   "PalSummon_DarkMechaDragon_2": {
     "localized_name": "【極】傑諾多蘭的石板",
@@ -5465,7 +6913,7 @@
   },
   "PalSummon_LegendDeer": {
     "localized_name": "默世鹿的石板",
-    "description": "畫著默世鹿的石板。 只要將其獻給召喚的祭壇， 就能召喚非常強大的默世鹿[Lv 65]。"
+    "description": "畫著默世鹿的石板。 只要將其獻給召喚的祭壇， 就能召喚非常強大的默世鹿[Lv 70]。"
   },
   "PalSummon_LegendDeer_2": {
     "localized_name": "【極】默世鹿的石板",
@@ -5481,11 +6929,11 @@
   },
   "PalSummon_NightLady": {
     "localized_name": "貝菈諾娃的石板",
-    "description": "畫著貝菈諾娃的石板。 只要將其獻給召喚的祭壇， 就能召喚強大的貝菈諾娃[Lv 30]。"
+    "description": "畫著貝菈諾娃的石板。 只要將其獻給召喚的祭壇， 就能召喚強大的貝菈諾娃[Lv 35]。"
   },
   "PalSummon_NightLady_Dark": {
     "localized_name": "貝菈露潔的石板",
-    "description": "畫著NightLady Dark的石板。 只要將其獻給召喚的祭壇， 就能召喚非常強大的NightLady Dark[Lv 50]。"
+    "description": "畫著NightLady Dark的石板。 只要將其獻給召喚的祭壇， 就能召喚非常強大的NightLady Dark[Lv 45]。"
   },
   "PalSummon_NightLady_Dark_2": {
     "localized_name": "【極】貝菈露潔的石板",
@@ -5681,7 +7129,7 @@
   },
   "Polymer": {
     "localized_name": "聚合物",
-    "description": "加工油脂後製成的聚合物。 是製作槍枝等會用到的素材。"
+    "description": "加工油脂後製成的聚合物。 是製作槍枝時必需的素材。 可在「Factory Hard 02」製作。"
   },
   "Poppy": {
     "localized_name": "美麗花朵",
@@ -5726,6 +7174,14 @@
   "PredatorCrystal": {
     "localized_name": "捕食者核心",
     "description": "捕食者帕魯掉落的核心。 充滿神秘能量。"
+  },
+  "Premium_Processed_Wood": {
+    "localized_name": "神秘木板",
+    "description": "切割神秘原木得到的板材，會發出微光。 其中寄宿著超越人類智慧的力量，是頂級的木材。"
+  },
+  "Processed_Wood": {
+    "localized_name": "木板",
+    "description": "為了易於使用，切割原木得到的板材。 泛用性比整根原木更高，應用範圍更廣。 可在「初階工作台」製作。"
   },
   "PumpActionShotgun": {
     "localized_name": "泵動式散彈槍",
@@ -5776,44 +7232,92 @@
     "description": "只能在天墜之地發現的珍貴結晶。 帕魯礦歷經漫長歲月凝結變質而成， 呈現出彩虹般的光芒。"
   },
   "Rankup_1": {
-    "localized_name": "覺醒星果☆1",
+    "localized_name": "升段蘋果☆1",
     "description": "極為罕見的魔法果實。 可以使帕魯的階級從☆0升到☆1。"
   },
   "Rankup_2": {
-    "localized_name": "覺醒星果☆2",
+    "localized_name": "升段蘋果☆2",
     "description": "極為罕見的魔法果實。 可以使帕魯的階級從☆1升到☆2。"
   },
   "Rankup_3": {
-    "localized_name": "覺醒星果☆3",
+    "localized_name": "升段蘋果☆3",
     "description": "極為罕見的魔法果實。 可以使帕魯的階級從☆2升到☆3。"
   },
   "Rankup_4": {
-    "localized_name": "覺醒星果☆4",
+    "localized_name": "升段蘋果☆4",
     "description": "極為罕見的魔法果實。 可以使帕魯的階級從☆3升到☆4。"
   },
   "Rankup_Arbitrary": {
-    "localized_name": "成熟覺醒星果",
+    "localized_name": "成熟的升段蘋果",
     "description": "極為罕見的魔法果實。 可以使帕魯的階級提升1階。"
   },
   "ReinforcedArrow": {
     "localized_name": "強化箭矢",
-    "description": "複合弓專用的強化箭矢。"
+    "description": "複合弓專用的強化箭矢。 可在「初階工作台」製作。"
   },
   "Relic": {
     "localized_name": "翠葉鼠雕像",
-    "description": "不可思議的帕魯雕像，可在帕洛斯群島各處見到。 將之獻給某座雕像，就能強化玩家的能力。"
+    "description": "不可思議的帕魯雕像，可在帕洛斯群島各處找到。 將雕像獻給某座石像，就能強化玩家的能力。"
+  },
+  "Relic_01": {
+    "localized_name": "棉悠悠雕像",
+    "description": "不可思議的帕魯雕像，可在帕洛斯群島各處找到。 將雕像獻給某座石像，就能強化玩家的能力。"
+  },
+  "Relic_02": {
+    "localized_name": "企丸丸雕像",
+    "description": "不可思議的帕魯雕像，可在帕洛斯群島各處找到。 將雕像獻給某座石像，就能強化玩家的能力。"
+  },
+  "Relic_03": {
+    "localized_name": "肚肚鱷雕像",
+    "description": "不可思議的帕魯雕像，可在帕洛斯群島各處找到。 將雕像獻給某座石像，就能強化玩家的能力。"
+  },
+  "Relic_04": {
+    "localized_name": "燎火鹿雕像",
+    "description": "不可思議的帕魯雕像，可在帕洛斯群島各處找到。 將雕像獻給某座石像，就能強化玩家的能力。"
+  },
+  "Relic_05": {
+    "localized_name": "達鼠泥雕像",
+    "description": "不可思議的帕魯雕像，可在帕洛斯群島各處找到。 將雕像獻給某座石像，就能強化玩家的能力。"
+  },
+  "Relic_06": {
+    "localized_name": "新葉猿雕像",
+    "description": "不可思議的帕魯雕像，可在帕洛斯群島各處找到。 將雕像獻給某座石像，就能強化玩家的能力。"
+  },
+  "Relic_07": {
+    "localized_name": "瞅什魔雕像",
+    "description": "不可思議的帕魯雕像，可在帕洛斯群島各處找到。 將雕像獻給某座石像，就能強化玩家的能力。"
+  },
+  "Relic_08": {
+    "localized_name": "搗蛋貓雕像",
+    "description": "不可思議的帕魯雕像，可在帕洛斯群島各處找到。 將雕像獻給某座石像，就能強化玩家的能力。"
+  },
+  "Relic_09": {
+    "localized_name": "秘斯媞雅雕像",
+    "description": "不可思議的帕魯雕像，可在帕洛斯群島各處找到。 將雕像獻給某座石像，就能強化玩家的能力。"
+  },
+  "Relic_10": {
+    "localized_name": "佩克龍雕像",
+    "description": "不可思議的帕魯雕像，可在帕洛斯群島各處找到。 將雕像獻給某座石像，就能強化玩家的能力。"
+  },
+  "Relic_11": {
+    "localized_name": "八雲犬雕像",
+    "description": "不可思議的帕魯雕像，可在帕洛斯群島各處找到。 將雕像獻給某座石像，就能強化玩家的能力。"
+  },
+  "Relic_12": {
+    "localized_name": "旺財雕像",
+    "description": "捕捉大量帕魯後，突然出現在身上的神秘帕魯雕像。 將雕像獻給某座石像，就能強化玩家的能力。"
   },
   "RepairKit": {
-    "localized_name": "修理工具組",
+    "localized_name": "建築修理套組",
     "description": "用以修理建築的道具。 可用於修理損壞的建築。"
   },
   "RifleBullet": {
     "localized_name": "步槍子彈",
-    "description": "用於步槍等武器的子彈。"
+    "description": "步槍等使用的彈藥。 可在「WeaponFactory Dirty 01」製作。"
   },
   "RoughBullet": {
     "localized_name": "劣質彈藥",
-    "description": "用於鳥槍及劣質手槍等武器的子彈。"
+    "description": "鳥槍和劣質手槍等使用的彈藥。 可在「WeaponFactory Dirty 01」製作。"
   },
   "Ruby": {
     "localized_name": "紅寶石",
@@ -5901,7 +7405,7 @@
   },
   "SFArrow": {
     "localized_name": "卓越箭矢",
-    "description": "卓越弓專用的六稜晶素材箭矢。"
+    "description": "卓越弓專用的強化箭矢。 可在「初階工作台」製作。"
   },
   "SFBow": {
     "localized_name": "卓越弓",
@@ -6027,6 +7531,10 @@
     "localized_name": "特級護盾",
     "description": "以帕魯礦技術打造的神奇護盾。 只要一段時間沒受到攻擊，就會自我修復。 歷經無數試驗，達到最高峰的品質。"
   },
+  "Shield_07": {
+    "localized_name": "遠古護盾",
+    "description": "以失傳的古代文明技術打造的神奇護盾。 只要一段時間沒受到攻擊，就會自我修復。 其性能之高，普遍認為就算是現代技術也無法重現。"
+  },
   "Shield_SF": {
     "localized_name": "卓越護盾",
     "description": "以超高科技打造的神奇護盾。 一定時間不受攻擊時可自動修復。 品質達到完美無缺的境界。"
@@ -6037,7 +7545,7 @@
   },
   "ShotgunBullet": {
     "localized_name": "散彈槍子彈",
-    "description": "用於散彈槍等武器的子彈。"
+    "description": "散彈槍等使用的彈藥。 可在「WeaponFactory Dirty 01」製作。"
   },
   "SingleShotRifle": {
     "localized_name": "單發步槍",
@@ -6094,6 +7602,10 @@
   "SkillCard_BubbleShot": {
     "localized_name": "水之技能果實：泡泡射擊",
     "description": "用在帕魯身上， 便可讓該帕魯學會BubbleShot。"
+  },
+  "SkillCard_BubbleShower": {
+    "localized_name": "暗之技能果實：毒雨",
+    "description": "用在帕魯身上， 便可讓該帕魯學會BubbleShower。"
   },
   "SkillCard_ChargeCanon": {
     "localized_name": "龍之技能果實：龍息砲",
@@ -6331,6 +7843,10 @@
     "localized_name": "地之技能果實：沙塵暴",
     "description": "用在帕魯身上， 便可讓該帕魯學會SandTwister。"
   },
+  "SkillCard_SeaGush": {
+    "localized_name": "水之技能果實：潮湧迸發",
+    "description": "用在帕魯身上， 便可讓該帕魯學會SeaGush。"
+  },
   "SkillCard_SeedMachinegun": {
     "localized_name": "草之技能果實：種子機關槍",
     "description": "用在帕魯身上， 便可讓該帕魯學會SeedMachinegun。"
@@ -6415,6 +7931,10 @@
     "localized_name": "水之技能果實：水槍",
     "description": "用在帕魯身上， 便可讓該帕魯學會WaterGun。"
   },
+  "SkillCard_WindBurst": {
+    "localized_name": "草之技能果實：翠耀罡風",
+    "description": "用在帕魯身上， 便可讓該帕魯學會WindBurst。"
+  },
   "SkillCard_WindCutter": {
     "localized_name": "草之技能果實：風刃",
     "description": "用在帕魯身上， 便可讓該帕魯學會WindCutter。"
@@ -6463,6 +7983,10 @@
     "localized_name": "墨丸專用背帶",
     "description": "墨丸的背帶。 夥伴技能發動後，牠會探測附近的鉻鐵礦位置。"
   },
+  "SkillUnlock_BlackPuppy_Ice": {
+    "localized_name": "冬丸的背帶",
+    "description": "BlackPuppy Ice的背帶。 發動夥伴技能後，它會偵測附近的鉻鐵礦位置。"
+  },
   "SkillUnlock_BlueDragon": {
     "localized_name": "碧海龍專用鞍具",
     "description": "持有此道具即可騎乘碧海龍。"
@@ -6470,6 +7994,10 @@
   "SkillUnlock_BlueDragon_Ice": {
     "localized_name": "碧月龍的鞍具",
     "description": "持有此道具即可騎乘BlueDragon Ice。"
+  },
+  "SkillUnlock_BlueSkyDragon": {
+    "localized_name": "霄龍的鞍具",
+    "description": "持有此道具時， 即可騎乘霄龍。"
   },
   "SkillUnlock_BlueThunderHorse": {
     "localized_name": "馭雷馬專用鞍具",
@@ -6487,6 +8015,14 @@
     "localized_name": "炸蛋鳥專用手套",
     "description": "用來輕輕抓住炸蛋鳥的手套。 夥伴技能發動後，便可抱著炸蛋鳥， 發射爆炸蛋來攻擊敵人。"
   },
+  "SkillUnlock_CubeTurtle": {
+    "localized_name": "重岩龜的鞍具",
+    "description": "持有此道具時， 即可騎乘重岩龜。"
+  },
+  "SkillUnlock_CubeTurtle_Neutral": {
+    "localized_name": "淨岩龜的鞍具",
+    "description": "持有此道具時， 即可騎乘CubeTurtle Neutral。"
+  },
   "SkillUnlock_DarkMechaDragon": {
     "localized_name": "傑諾多蘭專用鞍具",
     "description": "持有此道具即可騎乘傑諾多蘭。"
@@ -6502,6 +8038,10 @@
   "SkillUnlock_Deer_Ground": {
     "localized_name": "祇岳鹿專用鞍具",
     "description": "持有此道具即可騎乘Deer Ground。"
+  },
+  "SkillUnlock_DomeArmorDragon": {
+    "localized_name": "磐甲龍的鞍具",
+    "description": "持有此道具時， 即可騎乘磐甲龍。"
   },
   "SkillUnlock_DreamDemon": {
     "localized_name": "寐魔專用項圈",
@@ -6591,9 +8131,25 @@
     "localized_name": "噬魂獸專用鞍具",
     "description": "持有此道具即可騎乘噬魂獸。"
   },
+  "SkillUnlock_GhostDragon": {
+    "localized_name": "靈曦龍的鞍具",
+    "description": "持有此道具時， 即可騎乘靈曦龍。"
+  },
+  "SkillUnlock_GhostDragon_Fire": {
+    "localized_name": "獄熙龍的鞍具",
+    "description": "持有此道具時， 即可騎乘GhostDragon Fire。"
+  },
   "SkillUnlock_GoldenHorse": {
     "localized_name": "金馳獸專用鞍具",
     "description": "持有此道具即可騎乘金馳獸。"
+  },
+  "SkillUnlock_GrassGolem": {
+    "localized_name": "雙心岩傀的鞍具",
+    "description": "持有此道具即可騎乘雙心岩傀， 並發射強力的草屬性雷射。"
+  },
+  "SkillUnlock_GrassGolem_Dark": {
+    "localized_name": "咒心岩傀的鞍具",
+    "description": "持有此道具即可騎乘GrassGolem Dark， 並發射強力的暗屬性雷射。"
   },
   "SkillUnlock_GrassMammoth": {
     "localized_name": "森猛獁專用鞍具",
@@ -6667,6 +8223,10 @@
     "localized_name": "香草豹冰的鞍具",
     "description": "持有此道具即可騎乘香草豹冰。"
   },
+  "SkillUnlock_IceSeal_Ground": {
+    "localized_name": "巧克力豹冰的鞍具",
+    "description": "持有此道具時， 即可騎乘IceSeal Ground。"
+  },
   "SkillUnlock_JetDragon": {
     "localized_name": "空渦龍專用飛彈發射器",
     "description": "持有此道具即可騎乘空渦龍， 並以飛彈發動猛烈轟炸。"
@@ -6687,9 +8247,21 @@
     "localized_name": "歿殃專用鞍具",
     "description": "持有此道具即可騎乘KingBahamut Dragon。"
   },
+  "SkillUnlock_KingSunfish": {
+    "localized_name": "曼波王的鞍具",
+    "description": "持有此道具時， 即可騎乘曼波王。"
+  },
+  "SkillUnlock_KingSunfish_Thunder": {
+    "localized_name": "曼波皇的鞍具",
+    "description": "持有此道具時， 即可騎乘KingSunfish Thunder。"
+  },
   "SkillUnlock_Kirin": {
     "localized_name": "雷角馬專用鞍具",
     "description": "持有此道具即可騎乘雷角馬。"
+  },
+  "SkillUnlock_Kirin_Ice": {
+    "localized_name": "凌角馬的鞍具",
+    "description": "持有此道具時， 即可騎乘Kirin Ice。"
   },
   "SkillUnlock_Kitsunebi": {
     "localized_name": "火絨狐專用背帶",
@@ -6715,6 +8287,10 @@
     "localized_name": "默世鹿的鞍具",
     "description": "持有此道具即可騎乘默世鹿並產生護盾，抵禦攻擊。"
   },
+  "SkillUnlock_LotusDragon": {
+    "localized_name": "沁蓮龍的鞍具",
+    "description": "持有此道具時， 即可騎乘沁蓮龍。"
+  },
   "SkillUnlock_Manticore": {
     "localized_name": "獄焰王專用鞍具",
     "description": "持有此道具即可騎乘獄焰王。"
@@ -6726,6 +8302,10 @@
   "SkillUnlock_Monkey": {
     "localized_name": "新葉猿專用突擊步槍",
     "description": "新葉猿專用的小型突擊步槍。 夥伴技能發動後，新葉猿會進入射擊模式， 猛烈掃射周圍的敵人。"
+  },
+  "SkillUnlock_Monkey_Fire": {
+    "localized_name": "秋葉猿的突擊步槍",
+    "description": "Monkey Fire專用的小型突擊步槍。 發動夥伴技能後，Monkey Fire會進入射擊模式，猛烈掃射周圍的敵人。"
   },
   "SkillUnlock_MoonQueen": {
     "localized_name": "輝月伊專用鞍具",
@@ -6758,6 +8338,10 @@
   "SkillUnlock_NightBlueHorse": {
     "localized_name": "夜冥駒專用鞍具",
     "description": "持有此道具即可騎乘夜冥駒。"
+  },
+  "SkillUnlock_NightBlueHorse_Neutral": {
+    "localized_name": "日耀駒的鞍具",
+    "description": "持有此道具時， 即可騎乘NightBlueHorse Neutral。"
   },
   "SkillUnlock_Penguin": {
     "localized_name": "企丸丸專用火箭發射器",
@@ -6823,6 +8407,10 @@
     "localized_name": "霜牙王專用巨錘",
     "description": "持有此道具即可騎乘霜牙王。"
   },
+  "SkillUnlock_SumoDog": {
+    "localized_name": "力士獒的鞍具",
+    "description": "持有此道具時， 即可騎乘力士獒。"
+  },
   "SkillUnlock_Suzaku": {
     "localized_name": "朱雀專用鞍具",
     "description": "持有此道具即可騎乘朱雀。"
@@ -6831,13 +8419,29 @@
     "localized_name": "清雀專用鞍具",
     "description": "持有此道具即可騎乘Suzaku Water。"
   },
+  "SkillUnlock_ThiefBird": {
+    "localized_name": "盜影鴉的鞍具",
+    "description": "持有此道具時， 即可騎乘盜影鴉。"
+  },
   "SkillUnlock_ThunderBird": {
     "localized_name": "迅雷鳥專用鞍具",
     "description": "持有此道具即可騎乘迅雷鳥。"
   },
+  "SkillUnlock_ThunderBird_Ice": {
+    "localized_name": "疾霜鳥的鞍具",
+    "description": "持有此道具時， 即可騎乘ThunderBird Ice。"
+  },
   "SkillUnlock_ThunderDog": {
     "localized_name": "霹靂犬專用鞍具",
     "description": "持有此道具即可騎乘霹靂犬。"
+  },
+  "SkillUnlock_ThunderFluffyBird": {
+    "localized_name": "雷雲鷲的鞍具",
+    "description": "持有此道具時， 即可騎乘雷雲鷲。"
+  },
+  "SkillUnlock_Thunderdog_Ice": {
+    "localized_name": "凜光犬的鞍具",
+    "description": "持有此道具時， 即可騎乘Thunderdog Ice。"
   },
   "SkillUnlock_TropicalOstrich": {
     "localized_name": "咕咕桑葩的鞍具",
@@ -6859,6 +8463,14 @@
     "localized_name": "寒霜獸專用鞍具",
     "description": "持有此道具即可騎乘VolcanicMonster Ice。"
   },
+  "SkillUnlock_VolcanoDragon": {
+    "localized_name": "流焰龍的鞍具",
+    "description": "持有此道具時， 即可騎乘流焰龍。"
+  },
+  "SkillUnlock_VolcanoDragon_Ice": {
+    "localized_name": "川霜龍的鞍具",
+    "description": "持有此道具時， 即可騎乘VolcanoDragon Ice。"
+  },
   "SkillUnlock_WeaselDragon": {
     "localized_name": "疾旋鼬專用鞍具",
     "description": "持有此道具即可騎乘疾旋鼬。"
@@ -6874,6 +8486,10 @@
   "SkillUnlock_WhiteDeer": {
     "localized_name": "淨世鹿專用鞍具",
     "description": "持有此道具即可騎乘淨世鹿。"
+  },
+  "SkillUnlock_WhiteDeer_Dark": {
+    "localized_name": "織夜鹿的鞍具",
+    "description": "持有此道具時， 即可騎乘WhiteDeer Dark。"
   },
   "SkillUnlock_WhiteShieldDragon": {
     "localized_name": "艾基魯迦專用鞍具",
@@ -6895,6 +8511,162 @@
     "localized_name": "綠苔絨怪專用鞍具",
     "description": "持有此道具即可騎乘Yeti Grass。"
   },
+  "SkyAssaultRifle": {
+    "localized_name": "重型突擊步槍",
+    "description": "用烈陽金屬錠製造的突擊步槍。 在維持泛用性的前提下，能夠裝填威力更大的彈藥。"
+  },
+  "SkyAssaultRifleBullet": {
+    "localized_name": "重型突擊步槍子彈",
+    "description": "重型突擊步槍使用的彈藥。 可在「古代文明工作台」製作。"
+  },
+  "SkyAssaultRifle_2": {
+    "localized_name": "重型突擊步槍",
+    "description": "用烈陽金屬錠製造的突擊步槍。 在維持泛用性的前提下，能夠裝填威力更大的彈藥。"
+  },
+  "SkyAssaultRifle_3": {
+    "localized_name": "重型突擊步槍",
+    "description": "用烈陽金屬錠製造的突擊步槍。 在維持泛用性的前提下，能夠裝填威力更大的彈藥。"
+  },
+  "SkyAssaultRifle_4": {
+    "localized_name": "重型突擊步槍",
+    "description": "用烈陽金屬錠製造的突擊步槍。 在維持泛用性的前提下，能夠裝填威力更大的彈藥。"
+  },
+  "SkyAssaultRifle_5": {
+    "localized_name": "重型突擊步槍",
+    "description": "用烈陽金屬錠製造的突擊步槍。 在維持泛用性的前提下，能夠裝填威力更大的彈藥。"
+  },
+  "SkyBeamSword": {
+    "localized_name": "高出力光劍",
+    "description": "用烈陽金屬錠製造的光劍。 高能量光刃能夠瞬間將眼前的對手一刀兩斷。"
+  },
+  "SkyBeamSword_2": {
+    "localized_name": "高出力光劍",
+    "description": "用烈陽金屬錠製造的光劍。 高能量光刃能夠瞬間將眼前的對手一刀兩斷。"
+  },
+  "SkyBeamSword_3": {
+    "localized_name": "高出力光劍",
+    "description": "用烈陽金屬錠製造的光劍。 高能量光刃能夠瞬間將眼前的對手一刀兩斷。"
+  },
+  "SkyBeamSword_4": {
+    "localized_name": "高出力光劍",
+    "description": "用烈陽金屬錠製造的光劍。 高能量光刃能夠瞬間將眼前的對手一刀兩斷。"
+  },
+  "SkyBeamSword_5": {
+    "localized_name": "高出力光劍",
+    "description": "用烈陽金屬錠製造的光劍。 高能量光刃能夠瞬間將眼前的對手一刀兩斷。"
+  },
+  "SkyBow": {
+    "localized_name": "機械弓",
+    "description": "用烈陽金屬錠打造的弓。 射擊初速和貫通力得到大幅提升，可實現高精度遠程射擊。"
+  },
+  "SkyBowArrow": {
+    "localized_name": "機械弓箭矢",
+    "description": "機械弓專用的強化箭矢。 可在「古代文明工作台」製作。"
+  },
+  "SkyBow_2": {
+    "localized_name": "機械弓",
+    "description": "用烈陽金屬錠打造的弓。 射擊初速和貫通力得到大幅提升，可實現高精度遠程射擊。"
+  },
+  "SkyBow_3": {
+    "localized_name": "機械弓",
+    "description": "用烈陽金屬錠打造的弓。 射擊初速和貫通力得到大幅提升，可實現高精度遠程射擊。"
+  },
+  "SkyBow_4": {
+    "localized_name": "機械弓",
+    "description": "用烈陽金屬錠打造的弓。 射擊初速和貫通力得到大幅提升，可實現高精度遠程射擊。"
+  },
+  "SkyBow_5": {
+    "localized_name": "機械弓",
+    "description": "用烈陽金屬錠打造的弓。 射擊初速和貫通力得到大幅提升，可實現高精度遠程射擊。"
+  },
+  "SkyGrenadeLauncher": {
+    "localized_name": "戰術榴彈發射器",
+    "description": "用烈陽金屬錠製造的榴彈發射器。 提升了彈道穩定性，可實現高精度遠程轟炸。"
+  },
+  "SkyGrenadeLauncherBullet": {
+    "localized_name": "戰術榴彈發射器子彈",
+    "description": "戰術榴彈發射器使用的彈藥。 可在「古代文明工作台」製作。"
+  },
+  "SkyGrenadeLauncher_2": {
+    "localized_name": "戰術榴彈發射器",
+    "description": "用烈陽金屬錠製造的榴彈發射器。 提升了彈道穩定性，可實現高精度遠程轟炸。"
+  },
+  "SkyGrenadeLauncher_3": {
+    "localized_name": "戰術榴彈發射器",
+    "description": "用烈陽金屬錠製造的榴彈發射器。 提升了彈道穩定性，可實現高精度遠程轟炸。"
+  },
+  "SkyGrenadeLauncher_4": {
+    "localized_name": "戰術榴彈發射器",
+    "description": "用烈陽金屬錠製造的榴彈發射器。 提升了彈道穩定性，可實現高精度遠程轟炸。"
+  },
+  "SkyGrenadeLauncher_5": {
+    "localized_name": "戰術榴彈發射器",
+    "description": "用烈陽金屬錠製造的榴彈發射器。 提升了彈道穩定性，可實現高精度遠程轟炸。"
+  },
+  "SkyHeavyBullet": {
+    "localized_name": "zh Hant Text",
+    "description": "zh-hant text"
+  },
+  "SkyIslandOre": {
+    "localized_name": "烈陽金屬",
+    "description": "只有在天陽鄉才能開採到的稀有礦石。 密度極高的母岩有著神秘的花紋，其中蘊含著光輝。"
+  },
+  "SkyLightBullet": {
+    "localized_name": "zh Hant Text",
+    "description": "zh-hant text"
+  },
+  "SkyShotgun": {
+    "localized_name": "原型散彈槍",
+    "description": "用烈陽金屬錠製造的散彈槍。 極近距離下能發揮霸道的火力，特殊的彈匣還增強了其持久作戰能力。"
+  },
+  "SkyShotgunBullet": {
+    "localized_name": "原型散彈槍子彈",
+    "description": "原型散彈槍使用的彈藥。 可在「古代文明工作台」製作。"
+  },
+  "SkyShotgun_2": {
+    "localized_name": "原型散彈槍",
+    "description": "用烈陽金屬錠製造的散彈槍。 極近距離下能發揮霸道的火力，特殊的彈匣還增強了其持久作戰能力。"
+  },
+  "SkyShotgun_3": {
+    "localized_name": "原型散彈槍",
+    "description": "用烈陽金屬錠製造的散彈槍。 極近距離下能發揮霸道的火力，特殊的彈匣還增強了其持久作戰能力。"
+  },
+  "SkyShotgun_4": {
+    "localized_name": "原型散彈槍",
+    "description": "用烈陽金屬錠製造的散彈槍。 極近距離下能發揮霸道的火力，特殊的彈匣還增強了其持久作戰能力。"
+  },
+  "SkyShotgun_5": {
+    "localized_name": "原型散彈槍",
+    "description": "用烈陽金屬錠製造的散彈槍。 極近距離下能發揮霸道的火力，特殊的彈匣還增強了其持久作戰能力。"
+  },
+  "SkySubmachineGun": {
+    "localized_name": "戰鬥衝鋒槍",
+    "description": "用烈陽金屬錠製造的衝鋒槍。 經過改良的彈匣和彈藥強化了其壓制力。"
+  },
+  "SkySubmachineGunBullet": {
+    "localized_name": "戰鬥衝鋒槍子彈",
+    "description": "戰鬥衝鋒槍使用的彈藥。 可在「古代文明工作台」製作。"
+  },
+  "SkySubmachineGun_2": {
+    "localized_name": "戰鬥衝鋒槍",
+    "description": "用烈陽金屬錠製造的衝鋒槍。 經過改良的彈匣和彈藥強化了其壓制力。"
+  },
+  "SkySubmachineGun_3": {
+    "localized_name": "戰鬥衝鋒槍",
+    "description": "用烈陽金屬錠製造的衝鋒槍。 經過改良的彈匣和彈藥強化了其壓制力。"
+  },
+  "SkySubmachineGun_4": {
+    "localized_name": "戰鬥衝鋒槍",
+    "description": "用烈陽金屬錠製造的衝鋒槍。 經過改良的彈匣和彈藥強化了其壓制力。"
+  },
+  "SkySubmachineGun_5": {
+    "localized_name": "戰鬥衝鋒槍",
+    "description": "用烈陽金屬錠製造的衝鋒槍。 經過改良的彈匣和彈藥強化了其壓制力。"
+  },
+  "SkyislandIngot": {
+    "localized_name": "烈陽金屬錠",
+    "description": "從沉睡在天陽鄉的礦石中提取出的古代文明金屬材料。 是打造高級裝備和建築物時不可或缺的罕見加工素材。 可在「古代文明熔爐」冶煉。"
+  },
   "Spear": {
     "localized_name": "石矛",
     "description": "利於近距離戰鬥的矛。 攻擊距離較長，可在戰鬥時與敵人保持一定距離。"
@@ -6910,6 +8682,14 @@
   "Spear_ForestBoss": {
     "localized_name": "莉莉之矛",
     "description": "莉莉愛用的長矛。 她會用它來制裁蔑視帕魯的人。"
+  },
+  "Spear_ForestBoss2": {
+    "localized_name": "強化莉莉之矛",
+    "description": "莉莉愛用的長矛，經過了強化。 她會用它把蔑視帕魯的人捅成篩子。"
+  },
+  "Spear_ForestBoss2_5": {
+    "localized_name": "強化莉莉之矛",
+    "description": "莉莉愛用的長矛，經過了強化。 她會用它把蔑視帕魯的人捅成篩子。"
   },
   "Spear_ForestBoss_5": {
     "localized_name": "莉莉之矛",
@@ -6961,7 +8741,7 @@
   },
   "StainlessSteel": {
     "localized_name": "六稜晶錠",
-    "description": "由鉻鐵礦和金屬礦石、 六稜晶礦加工製成的合金。 用於製作先進裝備或建築的材料。"
+    "description": "由鉻鐵礦和六稜晶礦加工製成的合金。 是用於製作先進裝備或建築的材料。 可在「巨大熔爐」冶煉。"
   },
   "StatusPointResetSan": {
     "localized_name": "消除記憶藥",
@@ -7049,7 +8829,7 @@
   },
   "StealIngot": {
     "localized_name": "帕魯金屬錠",
-    "description": "用於製作帕魯金屬製武器或防具的素材。 此素材為金屬與帕魯礦之合金，強度更高。"
+    "description": "用於製作帕魯金屬製武器或防具的素材。 將帕魯礦成分用於鑄造合金，因此強度更高。"
   },
   "Stew": {
     "localized_name": "zh-hant text",
@@ -7093,11 +8873,15 @@
   },
   "Supplement": {
     "localized_name": "營養劑",
-    "description": "飲用後能在一段時間內抑制飢餓感的營養劑。 此飲品濃縮了多種營養成分、風味濃郁，能防止遠征途中感到飢餓。"
+    "description": "飲用後能在一段時間內抑制飢餓感的營養劑。 濃縮了多種營養成分、風味濃郁，能防止在冒險途中感到飢餓。"
   },
   "Sweet": {
     "localized_name": "棉花糖",
     "description": "可從棉花糖身上取得的棉花糖。 吃來輕盈甜美，且入口即化。"
+  },
+  "Sweet_Caramel": {
+    "localized_name": "焦糖棉花糖",
+    "description": "可從SweetsSheep Ground身上取得的焦糖口味棉花糖。 吃起來甜美柔順，入口即化。"
   },
   "Sword": {
     "localized_name": "劍",
@@ -7130,6 +8914,10 @@
   "TechnologyBook_G3": {
     "localized_name": "未來技術書籍",
     "description": "這本書上寫著這個時代沒有的技術。 使用它即可取得大量科技點。"
+  },
+  "Thermal_Core": {
+    "localized_name": "超高熱核心",
+    "description": "含有巨大熱能的高溫反應核心， 用於尖端設備的動力機關。 可在「Factory Hard 03」製作。"
   },
   "Tomato": {
     "localized_name": "蕃茄",
@@ -7175,6 +8963,14 @@
     "localized_name": "藏寶圖",
     "description": "記載著寶藏位置的老舊地圖。 使用後可在地圖上標記出藏寶地點。"
   },
+  "UniqueMaterial_FlowerPrince": {
+    "localized_name": "腐毒過濾膜",
+    "description": "夜蔓爵的器官， 能夠保護自身不受自己放出的腐霧傷害。 它能過濾腐霧，防止毒素進入體內。"
+  },
+  "UniqueMaterial_Mothman": {
+    "localized_name": "防爆纖維",
+    "description": "從暮塵蛾的體表採集到的纖維。 能減緩爆炸時所受到的衝擊。"
+  },
   "Unko_L": {
     "localized_name": "大坨糞便",
     "description": "它的存在本身便是一種威懾力。 不論氣味還是形狀皆堪稱巨作。"
@@ -7185,11 +8981,19 @@
   },
   "UnlockEquipmentSlot_Accessory_01": {
     "localized_name": "不可思議的飾品箱",
-    "description": "內部會與持有者身體產生共鳴的不可思議的箱子。 飾品欄位增加1格。"
+    "description": "內部會與持有者身體產生共鳴的不可思議的箱子。 帶在身上，飾品欄位就會增加1格。 只需攜帶一個就足夠了。"
   },
   "UnlockEquipmentSlot_Accessory_02": {
     "localized_name": "神秘的飾品箱",
-    "description": "內部會與持有者身體產生共鳴的不可思議的箱子。 飾品欄位進一步增加1格。"
+    "description": "內部會與持有者身體產生共鳴的不可思議的箱子。 帶在身上，能讓飾品欄位進一步增加1格。 只需攜帶一個就足夠了。"
+  },
+  "UnlockEquipmentSlot_Weapon_01": {
+    "localized_name": "額外武器套",
+    "description": "能讓人多裝備一件武器的掛套。 帶在身上，武器欄位就會增加1格。 只需攜帶一個就足夠了。"
+  },
+  "UnlockEquipmentSlot_Weapon_02": {
+    "localized_name": "額外武器套2",
+    "description": "能讓人多裝備一件武器的掛套。 帶在身上，能讓武器欄位進一步增加1格。 只需攜帶一個就足夠了。"
   },
   "Unlock_Picking_Tier1": {
     "localized_name": "簡易開鎖工具",
@@ -7206,6 +9010,10 @@
   "Venom": {
     "localized_name": "毒腺",
     "description": "可從有毒的帕魯身上取得的素材。 可用來製作Arrow Poison等。"
+  },
+  "WaterBuildKit": {
+    "localized_name": "水上建築套組",
+    "description": "用於水上建造的工具。 可以在水面上放置地基。"
   },
   "WeakerBow": {
     "localized_name": "老舊的弓",
@@ -7227,6 +9035,26 @@
     "localized_name": "老舊的弓",
     "description": "原始的遠距離攻擊武器。 因為是東拼西湊而成的，威力較弱。"
   },
+  "WhaleWhistle": {
+    "localized_name": "殘響之笛",
+    "description": "解讀磨損的設計圖後，重現出來的骨笛。 彷彿能傳至天涯海角的澄澈音色，將會喚醒牠吧。 守護盟約的，汪洋之主。"
+  },
+  "WhaleWhistleFragment_01": {
+    "localized_name": "濤聲響骨",
+    "description": "能感受到不可思議的力量的骨片。 集中精神傾聽，能隱約聽到一絲聲音。 溫柔地周而復始的波浪之聲。"
+  },
+  "WhaleWhistleFragment_02": {
+    "localized_name": "靜寂響骨",
+    "description": "能感受到不可思議的力量的骨片。 集中精神傾聽，能隱約聽到一絲聲音。 曾經造訪過的靜寂之聲。"
+  },
+  "WhaleWhistleFragment_03": {
+    "localized_name": "泡沫響骨",
+    "description": "能感受到不可思議的力量的骨片。 集中精神傾聽，能隱約聽到一絲聲音。 轉瞬即逝的水泡破裂之聲。"
+  },
+  "WhaleWhistleFragment_04": {
+    "localized_name": "海風響骨",
+    "description": "能感受到不可思議的力量的骨片。 集中精神傾聽，能隱約聽到一絲聲音。 安穩平靜的海風之聲。"
+  },
   "Wheat": {
     "localized_name": "小麥",
     "description": "這種食材是許多料理的基礎。 小麥也是最為基本的農作物。"
@@ -7235,13 +9063,57 @@
     "localized_name": "小麥種子",
     "description": "可種出小麥的種子。 建造農園時會用到這些種子。 可從商人購買。"
   },
+  "WidePenetrateShotgun": {
+    "localized_name": "散射光束槍",
+    "description": "強化了近戰性能的光束武器。能將壓縮的能量以擴散光束的形式發射出去。"
+  },
+  "WidePenetrateShotgunBullet": {
+    "localized_name": "散射光束槍彈藥",
+    "description": "散射光束槍使用的彈藥。 可在「古代文明工作台」製作。"
+  },
+  "WidePenetrateShotgun_2": {
+    "localized_name": "散射光束槍",
+    "description": "強化了近戰性能的光束武器。能將壓縮的能量以擴散光束的形式發射出去。"
+  },
+  "WidePenetrateShotgun_3": {
+    "localized_name": "散射光束槍",
+    "description": "強化了近戰性能的光束武器。能將壓縮的能量以擴散光束的形式發射出去。"
+  },
+  "WidePenetrateShotgun_4": {
+    "localized_name": "散射光束槍",
+    "description": "強化了近戰性能的光束武器。能將壓縮的能量以擴散光束的形式發射出去。"
+  },
+  "WidePenetrateShotgun_5": {
+    "localized_name": "散射光束槍",
+    "description": "強化了近戰性能的光束武器。能將壓縮的能量以擴散光束的形式發射出去。"
+  },
   "Wine": {
     "localized_name": "zh-hant text",
     "description": "zh-hant text"
   },
+  "WingGlider": {
+    "localized_name": "飛翼背包",
+    "description": "背在背上即可飛行的翼型裝置。 消耗WingGlider Fuel獲得推進力。"
+  },
+  "WingGlider_Fuel": {
+    "localized_name": "飛翼能量單元",
+    "description": "飛翼背包飛行所需的能源。"
+  },
   "Wood": {
     "localized_name": "木材",
     "description": "建造建築及製作道具的材料。 主要可透過採伐樹木取得。"
+  },
+  "Wood_Ancient": {
+    "localized_name": "古代樹皮",
+    "description": "在極限環境下活過漫長歲月的樹木的皮。 即使只有薄薄一層，也能從中感受到無限的生命力。"
+  },
+  "Wood_Fine": {
+    "localized_name": "硬木材",
+    "description": "精挑細選的優質木材。 砍伐生長在沙漠、火山、雪山等 極端環境下的樹木可以獲得。"
+  },
+  "Wood_WorldTree": {
+    "localized_name": "神秘木材",
+    "description": "含有世界樹力量的稀有木材。 如果不是技術熟練的工匠甚至無法加工它。"
   },
   "Wool": {
     "localized_name": "羊毛",
@@ -7275,6 +9147,10 @@
     "localized_name": "挖礦學Ⅰ",
     "description": "寫有挖掘祕訣的珍貴書籍。 讓帕魯閱讀後可永久提升挖掘適應性1級。"
   },
+  "WorkSuitability_AddTicket_MonsterFarm": {
+    "localized_name": "牧場學Ⅰ",
+    "description": "寫有牧場祕訣的珍貴書籍。 讓帕魯閱讀後可永久提升牧場適應性1級。"
+  },
   "WorkSuitability_AddTicket_ProductMedicine": {
     "localized_name": "製藥學Ⅰ",
     "description": "寫有製藥祕訣的珍貴書籍。 讓帕魯閱讀後可永久提升製藥適應性1級。"
@@ -7290,6 +9166,38 @@
   "WorkSuitability_AddTicket_Watering": {
     "localized_name": "灌溉學Ⅰ",
     "description": "寫有澆水祕訣的珍貴書籍。 讓帕魯閱讀後可永久提升澆水適應性1級。"
+  },
+  "WorldTreeHolyWater": {
+    "localized_name": "世界樹聖水",
+    "description": "充滿世界樹能量的聖水。 它能淨化萬物，並喚醒潛藏的力量。 喝下後一定時間內，世界樹區域的樹木和礦石不會在接近時消失。"
+  },
+  "WorldTreeIngot": {
+    "localized_name": "帕魯樹晶錠",
+    "description": "烈陽金屬和帕魯樹晶礦熔煉而成的至高合金。 是古代文明技術和世界樹之力的結晶，極為珍貴。 打造最高階的裝備和建築時不可或缺的材料。"
+  },
+  "WorldTreeOre": {
+    "localized_name": "帕魯樹晶礦",
+    "description": "長年以來從世界樹逸出的能量一點一滴凝成的結晶。 一旦被未受加護者觸碰，一瞬間就會化為塵埃。 能成功駕馭這種脆弱，才能登上古代科技的最高峰。"
+  },
+  "WorldTreeRelic_01": {
+    "localized_name": "腐朽的古代文明遺物",
+    "description": "古代文明建築或物品的碎片。 已經徹底朽壞，沒有任何能量殘留。"
+  },
+  "WorldTreeRelic_02": {
+    "localized_name": "沉眠的古代文明遺物",
+    "description": "古代文明建築或物品的碎片。 儘管保存狀態不差，但幾乎沒有能量殘留。"
+  },
+  "WorldTreeRelic_03": {
+    "localized_name": "漂亮的古代文明遺物",
+    "description": "古代文明建築或物品的碎片。 保存狀態良好，能夠感受到其中的能量流動。"
+  },
+  "WorldTreeRelic_04": {
+    "localized_name": "發光的古代文明遺物",
+    "description": "古代文明建築或物品的碎片。 保存狀態極佳，內部透出微微的光。"
+  },
+  "WorldTreeRelic_05": {
+    "localized_name": "閃耀的古代文明遺物",
+    "description": "古代文明建築或物品的碎片。 整體充滿能量，散發光輝。"
   },
   "Yakisoba": {
     "localized_name": "連理炒麵",

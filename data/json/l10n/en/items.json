@@ -1,15 +1,19 @@
 {
+  "AIcore": {
+    "localized_name": "AI Core",
+    "description": "A core component essential to cutting-edge devices, enabling complex decision-making and autonomous control. Can be crafted at Factory Hard 04."
+  },
   "Accessory_AT_1": {
     "localized_name": "Attack Pendant",
-    "description": "An accessory that slightly raises Attack."
+    "description": "An accessory that raises Attack."
   },
   "Accessory_AT_2": {
-    "localized_name": "Attack Pendant +1",
+    "localized_name": "Attack Pendant",
     "description": "An accessory that raises Attack."
   },
   "Accessory_AT_3": {
-    "localized_name": "Attack Pendant +2",
-    "description": "An accessory that greatly raises Attack."
+    "localized_name": "Attack Pendant",
+    "description": "An accessory that raises Attack."
   },
   "Accessory_AirDash1": {
     "localized_name": "Air Dash Boots",
@@ -29,123 +33,159 @@
   },
   "Accessory_AquaResist_1": {
     "localized_name": "Ring of Water Resistance",
-    "description": "An accessory that slightly lowers Water damage."
+    "description": "An accessory that reduces incoming Water damage."
   },
   "Accessory_AquaResist_2": {
-    "localized_name": "Ring of Water Resistance +1",
-    "description": "An accessory that lowers Water damage."
+    "localized_name": "Ring of Water Resistance",
+    "description": "An accessory that reduces incoming Water damage."
   },
   "Accessory_AquaResist_3": {
-    "localized_name": "Ring of Water Resistance +2",
-    "description": "An accessory that greatly lowers Water damage."
+    "localized_name": "Ring of Water Resistance",
+    "description": "An accessory that reduces incoming Water damage."
+  },
+  "Accessory_Avoid_1": {
+    "localized_name": "Phantom Ring",
+    "description": "An accessory that extends the invincibility period of rolls and sidesteps."
+  },
+  "Accessory_ColdIce_1": {
+    "localized_name": "Wumpo Charm",
+    "description": "An accessory with incredible resistance to cold. Greatly reduces incoming Ice damage."
   },
   "Accessory_CoolResist_1": {
     "localized_name": "Thermal Undershirt",
-    "description": "An accessory that slightly raises Cold Resistance."
+    "description": "An accessory that raises Cold Resistance."
   },
   "Accessory_CoolResist_2": {
-    "localized_name": "Thermal Undershirt +1",
+    "localized_name": "Thermal Undershirt",
     "description": "An accessory that raises Cold Resistance."
   },
   "Accessory_CoolResist_3": {
-    "localized_name": "Thermal Undershirt +2",
-    "description": "An accessory that greatly raises Cold Resistance."
+    "localized_name": "Thermal Undershirt",
+    "description": "An accessory that raises Cold Resistance."
+  },
+  "Accessory_DFHP_1": {
+    "localized_name": "Warsect Terra's Belt",
+    "description": "An accessory that greatly raises Defense and Health."
   },
   "Accessory_DarkResist_1": {
     "localized_name": "Ring of Dark Resistance",
-    "description": "An accessory that slightly lowers Dark damage."
+    "description": "An accessory that reduces incoming Dark damage."
   },
   "Accessory_DarkResist_2": {
-    "localized_name": "Ring of Dark Resistance +1",
-    "description": "An accessory that lowers Dark damage."
+    "localized_name": "Ring of Dark Resistance",
+    "description": "An accessory that reduces incoming Dark damage."
   },
   "Accessory_DarkResist_3": {
-    "localized_name": "Ring of Dark Resistance +2",
-    "description": "An accessory that greatly lowers Dark damage."
+    "localized_name": "Ring of Dark Resistance",
+    "description": "An accessory that reduces incoming Dark damage."
   },
   "Accessory_DragonResist_1": {
     "localized_name": "Ring of Dragon Resistance",
-    "description": "An accessory that slightly lowers Dragon damage."
+    "description": "An accessory that reduces incoming Dragon damage."
   },
   "Accessory_DragonResist_2": {
-    "localized_name": "Ring of Dragon Resistance +1",
-    "description": "An accessory that lowers Dragon damage."
+    "localized_name": "Ring of Dragon Resistance",
+    "description": "An accessory that reduces incoming Dragon damage."
   },
   "Accessory_DragonResist_3": {
-    "localized_name": "Ring of Dragon Resistance +2",
-    "description": "An accessory that greatly lowers Dragon damage."
+    "localized_name": "Ring of Dragon Resistance",
+    "description": "An accessory that reduces incoming Dragon damage."
   },
   "Accessory_EarthResist_1": {
-    "localized_name": "Ring of Earth Resistance",
-    "description": "An accessory that slightly lowers Earth damage."
+    "localized_name": "Ring of Ground Resistance",
+    "description": "An accessory that reduces incoming Ground damage."
   },
   "Accessory_EarthResist_2": {
-    "localized_name": "Ring of Earth Resistance +1",
-    "description": "An accessory that lowers Earth damage."
+    "localized_name": "Ring of Ground Resistance",
+    "description": "An accessory that reduces incoming Ground damage."
   },
   "Accessory_EarthResist_3": {
-    "localized_name": "Ring of Earth Resistance +2",
-    "description": "An accessory that greatly lowers Earth damage."
+    "localized_name": "Ring of Ground Resistance",
+    "description": "An accessory that reduces incoming Ground damage."
+  },
+  "Accessory_ExplosionResist": {
+    "localized_name": "Explosion-Resistant Undershirt",
+    "description": "A lightweight yet durable undergarment made from special fibers. It nullifies damage from explosions."
   },
   "Accessory_FireResist_1": {
     "localized_name": "Ring of Fire Resistance",
-    "description": "An accessory that slightly lowers Fire damage."
+    "description": "An accessory that reduces incoming Fire damage."
   },
   "Accessory_FireResist_2": {
-    "localized_name": "Ring of Fire Resistance +1",
-    "description": "An accessory that lowers Fire damage."
+    "localized_name": "Ring of Fire Resistance",
+    "description": "An accessory that reduces incoming Fire damage."
   },
   "Accessory_FireResist_3": {
-    "localized_name": "Ring of Fire Resistance +2",
-    "description": "An accessory that greatly lowers Fire damage."
+    "localized_name": "Ring of Fire Resistance",
+    "description": "An accessory that reduces incoming Fire damage."
+  },
+  "Accessory_HCHP_1": {
+    "localized_name": "Vanguard Charm",
+    "description": "An accessory that greatly raises Heat and Cold Resistance. It also significantly increases Health."
+  },
+  "Accessory_HCMW_1": {
+    "localized_name": "Wandering Merchant Charm",
+    "description": "An accessory that greatly raises Heat and Cold Resistance. It also significantly increases carrying capacity."
   },
   "Accessory_HP_1": {
     "localized_name": "Life Pendant",
-    "description": "An accessory that slightly raises Health."
+    "description": "An accessory that raises Health."
   },
   "Accessory_HP_2": {
-    "localized_name": "Life Pendant +1",
+    "localized_name": "Life Pendant",
     "description": "An accessory that raises Health."
   },
   "Accessory_HP_3": {
-    "localized_name": "Life Pendant +2",
-    "description": "An accessory that greatly raises Health."
+    "localized_name": "Life Pendant",
+    "description": "An accessory that raises Health."
   },
   "Accessory_HeatColdResist_1": {
     "localized_name": "Multiclimate Undershirt",
-    "description": "An accessory that slightly raises Heat and Cold Resistance."
+    "description": "An accessory that raises Heat and Cold Resistance."
   },
   "Accessory_HeatColdResist_2": {
-    "localized_name": "Multiclimate Undershirt +1",
+    "localized_name": "Multiclimate Undershirt",
     "description": "An accessory that raises Heat and Cold Resistance."
   },
   "Accessory_HeatColdResist_3": {
-    "localized_name": "Multiclimate Undershirt +2",
-    "description": "An accessory that greatly raises Heat and Cold Resistance."
+    "localized_name": "Multiclimate Undershirt",
+    "description": "An accessory that raises Heat and Cold Resistance."
+  },
+  "Accessory_HeatFire_1": {
+    "localized_name": "Reptyro Charm",
+    "description": "An accessory with incredible resistance to heat. Greatly reduces incoming Fire damage."
   },
   "Accessory_HeatResist_1": {
     "localized_name": "Heat Resistant Undershirt",
-    "description": "An accessory that slightly raises Heat Resistance."
+    "description": "An accessory that raises Heat Resistance."
   },
   "Accessory_HeatResist_2": {
-    "localized_name": "Heat Resistant Undershirt +1",
+    "localized_name": "Heat Resistant Undershirt",
     "description": "An accessory that raises Heat Resistance."
   },
   "Accessory_HeatResist_3": {
-    "localized_name": "Heat Resistant Undershirt +2",
-    "description": "An accessory that greatly raises Heat Resistance."
+    "localized_name": "Heat Resistant Undershirt",
+    "description": "An accessory that raises Heat Resistance."
   },
   "Accessory_IceResist_1": {
     "localized_name": "Ring of Ice Resistance",
-    "description": "An accessory that slightly lowers Ice damage."
+    "description": "An accessory that reduces incoming Ice damage."
   },
   "Accessory_IceResist_2": {
-    "localized_name": "Ring of Ice Resistance +1",
-    "description": "An accessory that lowers Ice damage."
+    "localized_name": "Ring of Ice Resistance",
+    "description": "An accessory that reduces incoming Ice damage."
   },
   "Accessory_IceResist_3": {
-    "localized_name": "Ring of Ice Resistance +2",
-    "description": "An accessory that greatly lowers Ice damage."
+    "localized_name": "Ring of Ice Resistance",
+    "description": "An accessory that reduces incoming Ice damage."
+  },
+  "Accessory_JumpAir_1": {
+    "localized_name": "Air Walker Mk I",
+    "description": "An accessory that allows the player to jump in mid-air when equipped. Also grants a mid-air dash."
+  },
+  "Accessory_JumpAir_2": {
+    "localized_name": "Air Walker Mk II",
+    "description": "An accessory that allows the player to jump in mid-air when equipped. Also grants a double mid-air dash."
   },
   "Accessory_JumpCount_Increase1": {
     "localized_name": "Double Jump Boots",
@@ -165,27 +205,31 @@
   },
   "Accessory_LeafResist_1": {
     "localized_name": "Ring of Grass Resistance",
-    "description": "An accessory that slightly lowers Grass damage."
+    "description": "An accessory that reduces incoming Grass damage."
   },
   "Accessory_LeafResist_2": {
-    "localized_name": "Ring of Grass Resistance +1",
-    "description": "An accessory that lowers Grass damage."
+    "localized_name": "Ring of Grass Resistance",
+    "description": "An accessory that reduces incoming Grass damage."
   },
   "Accessory_LeafResist_3": {
-    "localized_name": "Ring of Grass Resistance +2",
-    "description": "An accessory that greatly lowers Grass damage."
+    "localized_name": "Ring of Grass Resistance",
+    "description": "An accessory that reduces incoming Grass damage."
   },
   "Accessory_MaxWeightUp_01": {
     "localized_name": "Ring of Freight",
-    "description": "An accessory that slightly raises carrying capacity."
+    "description": "An accessory that raises carrying capacity."
   },
   "Accessory_MaxWeightUp_02": {
-    "localized_name": "Ring of Freight +1",
+    "localized_name": "Ring of Freight",
     "description": "An accessory that raises carrying capacity."
   },
   "Accessory_MaxWeightUp_03": {
-    "localized_name": "Ring of Freight +2",
-    "description": "An accessory that greatly raises carrying capacity."
+    "localized_name": "Ring of Freight",
+    "description": "An accessory that raises carrying capacity."
+  },
+  "Accessory_NonkChecker_1": {
+    "localized_name": "Pal Tamer's Glasses",
+    "description": "Eyewear for Pal Tamers. The wearer's attacks will not reduce the target's Health below 1. Reveals hidden Pal potentials."
   },
   "Accessory_Nonkilling": {
     "localized_name": "Ring of Mercy",
@@ -193,71 +237,127 @@
   },
   "Accessory_NormalResist_1": {
     "localized_name": "Ring of Neutral Resistance",
-    "description": "Accessory that slightly lowers Neutral damage."
+    "description": "Accessory that lowers Neutral damage."
   },
   "Accessory_NormalResist_2": {
-    "localized_name": "Ring of Neutral Resistance +1",
+    "localized_name": "Ring of Neutral Resistance",
     "description": "Accessory that lowers Neutral damage."
   },
   "Accessory_NormalResist_3": {
-    "localized_name": "Ring of Neutral Resistance +2",
-    "description": "Accessory that greatly lowers Neutral damage."
+    "localized_name": "Ring of Neutral Resistance",
+    "description": "Accessory that lowers Neutral damage."
+  },
+  "Accessory_Otomo_Dargon_1": {
+    "localized_name": "Elphidran Ring",
+    "description": "An accessory that greatly reduces incoming Dark damage of the Pal fighting alongside you. It also significantly increases the Dragon damage of the Pal fighting alongside you."
+  },
+  "Accessory_Otomo_Dark_1": {
+    "localized_name": "Katress Ring",
+    "description": "An accessory that greatly reduces incoming Neutral damage of the Pal fighting alongside you. It also significantly increases the Dark damage of the Pal fighting alongside you."
+  },
+  "Accessory_Otomo_Earth_1": {
+    "localized_name": "Menasting Terra Ring",
+    "description": "An accessory that greatly reduces incoming Electric damage of the Pal fighting alongside you. It also significantly increases the Ground damage of the Pal fighting alongside you."
+  },
+  "Accessory_Otomo_Electricity_1": {
+    "localized_name": "Fenglope Lux Ring",
+    "description": "An accessory that greatly reduces incoming Water damage of the Pal fighting alongside you. It also significantly increases the Electric damage of the Pal fighting alongside you."
+  },
+  "Accessory_Otomo_Fire_1": {
+    "localized_name": "Blazehowl Ring",
+    "description": "An accessory that greatly reduces incoming Grass damage of the Pal fighting alongside you. It also significantly increases the Fire damage of the Pal fighting alongside you."
+  },
+  "Accessory_Otomo_Fire_2": {
+    "localized_name": "Faleris Ring",
+    "description": "An accessory that greatly reduces incoming Ice damage of the Pal fighting alongside you. It also significantly increases the Fire damage of the Pal fighting alongside you."
+  },
+  "Accessory_Otomo_Ice_1": {
+    "localized_name": "Cryolinx Ring",
+    "description": "An accessory that greatly reduces incoming Dragon damage of the Pal fighting alongside you. It also significantly increases the Ice damage of the Pal fighting alongside you."
+  },
+  "Accessory_Otomo_Leaf_1": {
+    "localized_name": "Vaelet Ring",
+    "description": "An accessory that greatly reduces incoming Ground damage of the Pal fighting alongside you. It also significantly increases the Grass damage of the Pal fighting alongside you."
+  },
+  "Accessory_Otomo_Water_1": {
+    "localized_name": "Faleris Aqua Ring",
+    "description": "An accessory that greatly reduces incoming Fire damage of the Pal fighting alongside you. It also significantly increases the Water damage of the Pal fighting alongside you."
+  },
+  "Accessory_PPAT_1": {
+    "localized_name": "Dogen Emblem",
+    "description": "An accessory that greatly raises your Attack, and that of the Pal fighting alongside you."
+  },
+  "Accessory_PPDF_1": {
+    "localized_name": "Silvegis Emblem",
+    "description": "An accessory that greatly raises your Defense, and that of the Pal fighting alongside you."
+  },
+  "Accessory_SuperJumpAir_1": {
+    "localized_name": "Air Walker Mk III",
+    "description": "An accessory that allows the player to perform double jumps in mid-air when equipped. Also grants a mid-air dash."
+  },
+  "Accessory_SuperJumpAir_2": {
+    "localized_name": "Air Walker EX",
+    "description": "An accessory that allows the player to perform double jumps in mid-air when equipped. Also grants a double mid-air dash."
   },
   "Accessory_TalentChecker": {
     "localized_name": "Ability Glasses",
-    "description": "Glasses used to discern hidden Pal abilities. Displays Health, Attack and Defense stats on a scale of 0 to 100."
+    "description": "Glasses used to discern hidden Pal potentials. Displays Health, Attack and Defense stats on a scale of 0 to 100."
   },
   "Accessory_ThunderResist_1": {
-    "localized_name": "Ring of Lightning Resistance",
-    "description": "An accessory that slightly lowers Electric damage."
+    "localized_name": "Ring of Electric Resistance",
+    "description": "An accessory that reduces incoming Electric damage."
   },
   "Accessory_ThunderResist_2": {
-    "localized_name": "Ring of Lightning Resistance +1",
-    "description": "An accessory that lowers Electric damage."
+    "localized_name": "Ring of Electric Resistance",
+    "description": "An accessory that reduces incoming Electric damage."
   },
   "Accessory_ThunderResist_3": {
-    "localized_name": "Ring of Lightning Resistance +2",
-    "description": "An accessory that greatly lowers Electric damage."
+    "localized_name": "Ring of Electric Resistance",
+    "description": "An accessory that reduces incoming Electric damage."
+  },
+  "Accessory_WKMC_1": {
+    "localized_name": "Islander's Tool Belt",
+    "description": "An accessory that greatly raises carrying capacity. It also significantly increases work speed."
   },
   "Accessory_WorkSpeed_1": {
     "localized_name": "Pendant of Diligence",
-    "description": "An accessory that slightly raises Work Speed."
+    "description": "An accessory that raises Work Speed."
   },
   "Accessory_WorkSpeed_2": {
-    "localized_name": "Pendant of Diligence +1",
+    "localized_name": "Pendant of Diligence",
     "description": "An accessory that raises Work Speed."
   },
   "Accessory_WorkSpeed_3": {
-    "localized_name": "Pendant of Diligence +2",
-    "description": "An accessory that greatly raises Work Speed."
+    "localized_name": "Pendant of Diligence",
+    "description": "An accessory that raises Work Speed."
   },
   "Accessory_defense_1": {
     "localized_name": "Defense Pendant",
-    "description": "An accessory that slightly raises Defense."
+    "description": "An accessory that raises Defense."
   },
   "Accessory_defense_2": {
-    "localized_name": "Defense Pendant +1",
+    "localized_name": "Defense Pendant",
     "description": "An accessory that raises Defense."
   },
   "Accessory_defense_3": {
-    "localized_name": "Defense Pendant +2",
-    "description": "An accessory that greatly raises Defense."
+    "localized_name": "Defense Pendant",
+    "description": "An accessory that raises Defense."
   },
   "AdditionalInventory_001": {
     "localized_name": "Small Pouch",
-    "description": "A small pouch that allows you to carry additional items. Holding it increases your inventory slots."
+    "description": "A small pouch that allows you to carry additional items. Holding it increases your inventory slots. Carrying one is enough."
   },
   "AdditionalInventory_002": {
     "localized_name": "Medium Pouch",
-    "description": "A modest pouch that allows you to carry additional items. Holding it increases your inventory slots."
+    "description": "A modest pouch that allows you to carry additional items. Holding it increases your inventory slots. Carrying one is enough."
   },
   "AdditionalInventory_003": {
     "localized_name": "Large Pouch",
-    "description": "A large pouch that allows you to carry additional items. Holding it increases your inventory slots."
+    "description": "A large pouch that allows you to carry additional items. Holding it increases your inventory slots. Carrying one is enough."
   },
   "AdditionalInventory_004": {
     "localized_name": "Giant Pouch",
-    "description": "A massive pouch that allows you to carry additional items. Holding it increases your inventory slots."
+    "description": "A massive pouch that allows you to carry additional items. Holding it increases your inventory slots. Carrying one is enough."
   },
   "AffectionFruit_01": {
     "localized_name": "Kinship Peach",
@@ -266,6 +366,106 @@
   "AffectionFruit_02": {
     "localized_name": "Little Kinship Peach",
     "description": "A small fruit filled with kindness. It is said that a Pal who eats it will open its heart to humans. Choose carefully which Pal you give it to."
+  },
+  "AncientArmor": {
+    "localized_name": "Ancient Armor",
+    "description": "Ancient armor forged from Soralite Ingot. Crafted with the essence of a lost civilization, it boasts overwhelming defensive power and is capable of withstanding cataclysmic threats."
+  },
+  "AncientArmorCold": {
+    "localized_name": "Cold-Resistant Ancient Armor",
+    "description": "Refined Ancient Armor. Its cold resistance has been further enhanced using ancient technology, allowing the wearer to maintain their strength even in extreme cold regions."
+  },
+  "AncientArmorCold_2": {
+    "localized_name": "Cold-Resistant Ancient Armor",
+    "description": "Refined Ancient Armor. Its cold resistance has been further enhanced using ancient technology, allowing the wearer to maintain their strength even in extreme cold regions."
+  },
+  "AncientArmorCold_3": {
+    "localized_name": "Cold-Resistant Ancient Armor",
+    "description": "Refined Ancient Armor. Its cold resistance has been further enhanced using ancient technology, allowing the wearer to maintain their strength even in extreme cold regions."
+  },
+  "AncientArmorCold_4": {
+    "localized_name": "Cold-Resistant Ancient Armor",
+    "description": "Refined Ancient Armor. Its cold resistance has been further enhanced using ancient technology, allowing the wearer to maintain their strength even in extreme cold regions."
+  },
+  "AncientArmorCold_5": {
+    "localized_name": "Cold-Resistant Ancient Armor",
+    "description": "Refined Ancient Armor. Its cold resistance has been further enhanced using ancient technology, allowing the wearer to maintain their strength even in extreme cold regions."
+  },
+  "AncientArmorHeat": {
+    "localized_name": "Heat-Resistant Ancient Armor",
+    "description": "Refined Ancient Armor. Its heat resistance has been further enhanced using ancient technology, allowing it to endure scorching environments"
+  },
+  "AncientArmorHeat_2": {
+    "localized_name": "Heat-Resistant Ancient Armor",
+    "description": "Refined Ancient Armor. Its heat resistance has been further enhanced using ancient technology, allowing it to endure scorching environments"
+  },
+  "AncientArmorHeat_3": {
+    "localized_name": "Heat-Resistant Ancient Armor",
+    "description": "Refined Ancient Armor. Its heat resistance has been further enhanced using ancient technology, allowing it to endure scorching environments"
+  },
+  "AncientArmorHeat_4": {
+    "localized_name": "Heat-Resistant Ancient Armor",
+    "description": "Refined Ancient Armor. Its heat resistance has been further enhanced using ancient technology, allowing it to endure scorching environments"
+  },
+  "AncientArmorHeat_5": {
+    "localized_name": "Heat-Resistant Ancient Armor",
+    "description": "Refined Ancient Armor. Its heat resistance has been further enhanced using ancient technology, allowing it to endure scorching environments"
+  },
+  "AncientArmorWeight": {
+    "localized_name": "Lightweight Ancient Armor",
+    "description": "Refined Ancient Armor. It is equipped with ancient auxiliary mechanisms, allowing the wearer to carry more supplies."
+  },
+  "AncientArmorWeight_2": {
+    "localized_name": "Lightweight Ancient Armor",
+    "description": "Refined Ancient Armor. It is equipped with ancient auxiliary mechanisms, allowing the wearer to carry more supplies."
+  },
+  "AncientArmorWeight_3": {
+    "localized_name": "Lightweight Ancient Armor",
+    "description": "Refined Ancient Armor. It is equipped with ancient auxiliary mechanisms, allowing the wearer to carry more supplies."
+  },
+  "AncientArmorWeight_4": {
+    "localized_name": "Lightweight Ancient Armor",
+    "description": "Refined Ancient Armor. It is equipped with ancient auxiliary mechanisms, allowing the wearer to carry more supplies."
+  },
+  "AncientArmorWeight_5": {
+    "localized_name": "Lightweight Ancient Armor",
+    "description": "Refined Ancient Armor. It is equipped with ancient auxiliary mechanisms, allowing the wearer to carry more supplies."
+  },
+  "AncientArmor_2": {
+    "localized_name": "Ancient Armor",
+    "description": "Ancient armor forged from Soralite Ingot. Crafted with the essence of a lost civilization, it boasts overwhelming defensive power and is capable of withstanding cataclysmic threats."
+  },
+  "AncientArmor_3": {
+    "localized_name": "Ancient Armor",
+    "description": "Ancient armor forged from Soralite Ingot. Crafted with the essence of a lost civilization, it boasts overwhelming defensive power and is capable of withstanding cataclysmic threats."
+  },
+  "AncientArmor_4": {
+    "localized_name": "Ancient Armor",
+    "description": "Ancient armor forged from Soralite Ingot. Crafted with the essence of a lost civilization, it boasts overwhelming defensive power and is capable of withstanding cataclysmic threats."
+  },
+  "AncientArmor_5": {
+    "localized_name": "Ancient Armor",
+    "description": "Ancient armor forged from Soralite Ingot. Crafted with the essence of a lost civilization, it boasts overwhelming defensive power and is capable of withstanding cataclysmic threats."
+  },
+  "AncientHelmet": {
+    "localized_name": "Ancient Helm",
+    "description": "An ancient helmet forged from Soralite Ingot. It is imbued with wisdom passed down through the ages, protecting its wearer with unwavering strength. Its defensive capabilities far surpass those of modern equipment."
+  },
+  "AncientHelmet_2": {
+    "localized_name": "Ancient Helm",
+    "description": "An ancient helmet forged from Soralite Ingot. It is imbued with wisdom passed down through the ages, protecting its wearer with unwavering strength. Its defensive capabilities far surpass those of modern equipment."
+  },
+  "AncientHelmet_3": {
+    "localized_name": "Ancient Helm",
+    "description": "An ancient helmet forged from Soralite Ingot. It is imbued with wisdom passed down through the ages, protecting its wearer with unwavering strength. Its defensive capabilities far surpass those of modern equipment."
+  },
+  "AncientHelmet_4": {
+    "localized_name": "Ancient Helm",
+    "description": "An ancient helmet forged from Soralite Ingot. It is imbued with wisdom passed down through the ages, protecting its wearer with unwavering strength. Its defensive capabilities far surpass those of modern equipment."
+  },
+  "AncientHelmet_5": {
+    "localized_name": "Ancient Helm",
+    "description": "An ancient helmet forged from Soralite Ingot. It is imbued with wisdom passed down through the ages, protecting its wearer with unwavering strength. Its defensive capabilities far surpass those of modern equipment."
   },
   "AncientParts2": {
     "localized_name": "Ancient Civilization Core",
@@ -301,63 +501,63 @@
   },
   "Arrow": {
     "localized_name": "Arrow",
-    "description": "An Arrow for use with a bow."
+    "description": "Arrows for use with bows. Can be crafted at Primitive Workbench."
   },
   "Arrow_Fire": {
     "localized_name": "Fire Arrow",
-    "description": "Arrows for shooting with Bow Fire and BowGun Fire. Deals Fire damage."
+    "description": "Arrow Fires for use with bows. Deals <img id=|ElemIcon Fire|/><uiCommon id=|COMMON ELEMENT NAME Fire| style=|Elem Fire|/> damage on contact. Can be crafted at Primitive Workbench."
   },
   "Arrow_Poison": {
     "localized_name": "Poison Arrow",
-    "description": "Arrows for shooting with Bow Poison and BowGun Poison. It poisons any target it hits."
+    "description": "Arrow Poisons for use with bows. Afflicts target with <uiCommon id=|ADDITIONAL EFFECT Poison| style=|Effect Poison|/> on contact. Can be crafted at Primitive Workbench."
   },
   "AssaultRifleBullet": {
     "localized_name": "Assault Rifle Ammo",
-    "description": "Ammo for AssaultRifle Default1 and other similar weapons."
+    "description": "Ammo for the AssaultRifle Default1 and similar weapons. Can be crafted at WeaponFactory Dirty 02."
   },
   "AssaultRifle_Default1": {
     "localized_name": "Assault Rifle",
-    "description": "Mows down enemies with overwhelming force. It excels at rapid-fire and is well suited to taking down powerful foes."
+    "description": "An AssaultRifle Default1 that mows down enemies with overwhelming force. It excels at rapid-fire and is well suited to taking down powerful foes."
   },
   "AssaultRifle_Default2": {
     "localized_name": "Assault Rifle",
-    "description": "Mows down enemies with overwhelming force. It excels at rapid-fire and is well suited to taking down powerful foes."
+    "description": "An AssaultRifle Default1 that mows down enemies with overwhelming force. It excels at rapid-fire and is well suited to taking down powerful foes."
   },
   "AssaultRifle_Default3": {
     "localized_name": "Assault Rifle",
-    "description": "Mows down enemies with overwhelming force. It excels at rapid-fire and is well suited to taking down powerful foes."
+    "description": "An AssaultRifle Default1 that mows down enemies with overwhelming force. It excels at rapid-fire and is well suited to taking down powerful foes."
   },
   "AssaultRifle_Default4": {
     "localized_name": "Assault Rifle",
-    "description": "Mows down enemies with overwhelming force. It excels at rapid-fire and is well suited to taking down powerful foes."
+    "description": "An AssaultRifle Default1 that mows down enemies with overwhelming force. It excels at rapid-fire and is well suited to taking down powerful foes."
   },
   "AssaultRifle_Default5": {
     "localized_name": "Assault Rifle",
-    "description": "Mows down enemies with overwhelming force. It excels at rapid-fire and is well suited to taking down powerful foes."
+    "description": "An AssaultRifle Default1 that mows down enemies with overwhelming force. It excels at rapid-fire and is well suited to taking down powerful foes."
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "Small Feed Bag",
-    "description": "Unlocks a food slot in your inventory. Players and Pals automatically consume food when hungry."
+    "description": "A small pouch for holding food. Unlocks a food slot in your inventory. Players and Pals automatically consume food when hungry. Carrying one is enough."
   },
   "AutoMealPouch_Tier2": {
     "localized_name": "Average Feed Bag",
-    "description": "A decently sized pouch for holding food. Unlocks 2 food slots in your inventory. Players and Pals automatically consume food when hungry."
+    "description": "A decently sized pouch for holding food. Unlocks 2 food slots in your inventory. Players and Pals automatically consume food when hungry. Carrying one is enough."
   },
   "AutoMealPouch_Tier3": {
     "localized_name": "Large Feed Bag",
-    "description": "A large pouch for holding food. Unlocks 3 food slots in your inventory. Players and Pals automatically consume food when hungry."
+    "description": "A large pouch for holding food. Unlocks 3 food slots in your inventory. Players and Pals automatically consume food when hungry. Carrying one is enough."
   },
   "AutoMealPouch_Tier4": {
     "localized_name": "Huge Feed Bag",
-    "description": "An extremely large pouch for holding food. Unlocks 4 food slots in your inventory. Players and Pals automatically consume food when hungry."
+    "description": "A extra-large pouch for holding food. Unlocks 4 food slots in your inventory. Players and Pals automatically consume food when hungry. Carrying one is enough."
   },
   "AutoMealPouch_Tier5": {
     "localized_name": "Giant Feed Bag",
-    "description": "An extraordinarily large sack for storing food. Unlocks 5 food slots in your inventory. Players and Pals automatically consume food when hungry."
+    "description": "An enormous pouch for holding food. Unlocks 5 food slots in your inventory. Players and Pals automatically consume food when hungry. Carrying one is enough."
   },
   "Axe_Steal": {
     "localized_name": "Pal Metal Axe",
-    "description": "An axe for chopping wood. It has achieved extraordinary sharpness thanks to Pal Metal."
+    "description": "An axe for chopping wood. It has achieved extraordinary sharpness thanks to Pal Metal. It can slice through high-grade trees from the harshest regions without trouble."
   },
   "Axe_Tier_00": {
     "localized_name": "Stone Axe",
@@ -365,11 +565,11 @@
   },
   "Axe_Tier_01": {
     "localized_name": "Metal Axe",
-    "description": "An axe for cutting wood. Made from metal, its sharpness has improved."
+    "description": "An axe for cutting wood. Made from metal, it chops through Hardwood with ease, making it useful for harvesting sturdy trees that grow deep within the continent."
   },
   "Axe_Tier_02": {
     "localized_name": "Refined Metal Axe",
-    "description": "An axe for cutting wood. Made from high quality metal, its sharpness has improved even further."
+    "description": "An axe for cutting wood. Made from high quality metal, its sharpness and durability has improved even further. It can harvest Hardwood from sturdy trees that grow in unforgiving lands."
   },
   "Axe_Tier_03": {
     "localized_name": "Axe4",
@@ -451,9 +651,53 @@
     "localized_name": "Bat",
     "description": "Baseball bat for close-range combat. Might be tough to get a home run with a Pal."
   },
+  "Bat3": {
+    "localized_name": "Metal Bat",
+    "description": "A Metal Bat that works well in close combat. Use it to beat down anyone you don't like."
+  },
+  "Bat3_2": {
+    "localized_name": "Metal Bat",
+    "description": "A Metal Bat that works well in close combat. Use it to beat down anyone you don't like."
+  },
+  "Bat3_3": {
+    "localized_name": "Metal Bat",
+    "description": "A Metal Bat that works well in close combat. Use it to beat down anyone you don't like."
+  },
+  "Bat3_4": {
+    "localized_name": "Metal Bat",
+    "description": "A Metal Bat that works well in close combat. Use it to beat down anyone you don't like."
+  },
+  "Bat3_5": {
+    "localized_name": "Metal Bat",
+    "description": "A Metal Bat that works well in close combat. Use it to beat down anyone you don't like."
+  },
   "BattleTicket": {
     "localized_name": "Battle Ticket",
     "description": "Earned by winning solo matches in the arena. Collect enough and you can trade them for special rewards."
+  },
+  "BeamLauncher": {
+    "localized_name": "Beam Launcher",
+    "description": "Fires a high-density beam that causes explosions over a wide area. Caution is required to prevent overheating during rapid fire."
+  },
+  "BeamLauncherBullet": {
+    "localized_name": "Beam Launcher Ammo",
+    "description": "Ammo for the Beam Launcher. Can be crafted at Ancient Workbench."
+  },
+  "BeamLauncher_2": {
+    "localized_name": "Beam Launcher",
+    "description": "Fires a high-density beam that causes explosions over a wide area. Caution is required to prevent overheating during rapid fire."
+  },
+  "BeamLauncher_3": {
+    "localized_name": "Beam Launcher",
+    "description": "Fires a high-density beam that causes explosions over a wide area. Caution is required to prevent overheating during rapid fire."
+  },
+  "BeamLauncher_4": {
+    "localized_name": "Beam Launcher",
+    "description": "Fires a high-density beam that causes explosions over a wide area. Caution is required to prevent overheating during rapid fire."
+  },
+  "BeamLauncher_5": {
+    "localized_name": "Beam Launcher",
+    "description": "Fires a high-density beam that causes explosions over a wide area. Caution is required to prevent overheating during rapid fire."
   },
   "BeamSword": {
     "localized_name": "Beam Sword",
@@ -475,6 +719,10 @@
     "localized_name": "Beam Sword",
     "description": "Beam Sword for close-range combat. Slices through opponents, burning them with a high-output laser."
   },
+  "BeastBone_Ancient": {
+    "localized_name": "Ancient Bone",
+    "description": "A beast bone weathered over many years in extreme environments. Even after losing its flesh, it still gives off a strong presence."
+  },
   "Beer": {
     "localized_name": "Beer",
     "description": "Beer"
@@ -491,6 +739,258 @@
     "localized_name": "Berry Seeds",
     "description": "Seeds that produce Red Berries. Necessary for starting a farm. Can be obtained when picking Red Berries."
   },
+  "Bio_Battery": {
+    "localized_name": "Bio Battery",
+    "description": "A device that stores bio-energy as electrical power. Used for equipment requiring high energy density. Can be crafted at Factory Hard 03."
+  },
+  "Bio_Coolant": {
+    "localized_name": "Cryogenic Coolant",
+    "description": "A high-efficiency cooling medium made from special components derived from Pals. Used to regulate temperature in high-output devices. Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Accessory_AT_1_2": {
+    "localized_name": "Attack Pendant Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory AT 1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Accessory_AquaResist_1_2": {
+    "localized_name": "Ring of Water Resistance Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory AquaResist 1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Accessory_Avoid_1": {
+    "localized_name": "Phantom Ring Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory Avoid 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Accessory_Avoid_1_fix": {
+    "localized_name": "Phantom Ring Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory Avoid 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Accessory_ColdIce_1": {
+    "localized_name": "Wumpo Charm Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory ColdIce 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Accessory_CoolResist_1_2": {
+    "localized_name": "Thermal Undershirt Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory CoolResist 1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Accessory_DFHP_1": {
+    "localized_name": "Warsect Terra's Belt Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory DFHP 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Accessory_DarkResist_1_2": {
+    "localized_name": "Ring of Dark Resistance Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory DarkResist 1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Accessory_DragonResist_1_2": {
+    "localized_name": "Ring of Dragon Resistance Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory DragonResist 1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Accessory_EarthResist_1_2": {
+    "localized_name": "Ring of Ground Resistance Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory EarthResist 1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Accessory_FireResist_1_2": {
+    "localized_name": "Ring of Fire Resistance Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory FireResist 1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Accessory_HCHP_1": {
+    "localized_name": "Vanguard Charm Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory HCHP 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Accessory_HCMW_1": {
+    "localized_name": "Wandering Merchant Charm Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory HCMW 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Accessory_HP_1_2": {
+    "localized_name": "Life Pendant Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory HP 1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Accessory_HeatColdResist_1_2": {
+    "localized_name": "Multiclimate Undershirt Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory HeatColdResist 1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Accessory_HeatFire_1": {
+    "localized_name": "Reptyro Charm Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory HeatFire 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Accessory_HeatResist_1_2": {
+    "localized_name": "Heat-Resistant Undershirt Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory HeatResist 1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Accessory_IceResist_1_2": {
+    "localized_name": "Ring of Ice Resistance Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory IceResist 1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Accessory_JumpAir_1": {
+    "localized_name": "Air Walker Mk I Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory JumpAir 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Accessory_JumpAir_2": {
+    "localized_name": "Air Walker Mk II Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory JumpAir 2 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Accessory_LeafResist_1_2": {
+    "localized_name": "Ring of Grass Resistance Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory LeafResist 1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Accessory_MaxWeightUp_01_2": {
+    "localized_name": "Ring of Freight Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory MaxWeightUp 01 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Accessory_NonkChecker_1": {
+    "localized_name": "Pal Tamer's Glasses Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory NonkChecker 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Accessory_NormalResist_1_2": {
+    "localized_name": "Ring of Neutral Resistance Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory NormalResist 1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Accessory_Otomo_Dargon_1": {
+    "localized_name": "Elphidran Ring Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory Otomo Dargon 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Accessory_Otomo_Dark_1": {
+    "localized_name": "Katress Ring Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory Otomo Dark 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Accessory_Otomo_Earth_1": {
+    "localized_name": "Menasting Terra Ring Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory Otomo Earth 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Accessory_Otomo_Electricity_1": {
+    "localized_name": "Fenglope Lux Ring Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory Otomo Electricity 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Accessory_Otomo_Fire_1": {
+    "localized_name": "Blazehowl Ring Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory Otomo Fire 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Accessory_Otomo_Fire_2": {
+    "localized_name": "Faleris Ring Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory Otomo Fire 2 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Accessory_Otomo_Ice_1": {
+    "localized_name": "Cryolinx Ring Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory Otomo Ice 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Accessory_Otomo_Leaf_1": {
+    "localized_name": "Vaelet Ring Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory Otomo Leaf 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Accessory_Otomo_Water_1": {
+    "localized_name": "Faleris Aqua Ring Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory Otomo Water 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Accessory_PPAT_1": {
+    "localized_name": "Dogen Emblem Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory PPAT 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Accessory_PPDF_1": {
+    "localized_name": "Silvegis Emblem Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory PPDF 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Accessory_SuperJumpAir_1": {
+    "localized_name": "Air Walker Mk III Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory SuperJumpAir 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Accessory_SuperJumpAir_2": {
+    "localized_name": "Air Walker EX Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory SuperJumpAir 2 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Accessory_ThunderResist_1_2": {
+    "localized_name": "Ring of Electric Resistance Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory ThunderResist 1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Accessory_WKMC_1": {
+    "localized_name": "Islander's Tool Belt Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory WKMC 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Accessory_WorkSpeed_1_2": {
+    "localized_name": "Pendant of Diligence Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory WorkSpeed 1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Accessory_defense_1_2": {
+    "localized_name": "Defense Pendant Schematic",
+    "description": "When in inventory, unlocks recipe for Accessory defense 1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_AncientArmorCold_2": {
+    "localized_name": "Cold-Resistant Ancient Armor Schematic 1",
+    "description": "When in inventory, unlocks recipe for AncientArmorCold 2 (Uncommon). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_AncientArmorCold_3": {
+    "localized_name": "Cold-Resistant Ancient Armor Schematic 2",
+    "description": "When in inventory, unlocks recipe for AncientArmorCold 3 (Rare). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_AncientArmorCold_4": {
+    "localized_name": "Cold-Resistant Ancient Armor Schematic 3",
+    "description": "When in inventory, unlocks recipe for AncientArmorCold 4 (Epic). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_AncientArmorCold_5": {
+    "localized_name": "Cold-Resistant Ancient Armor Schematic 4",
+    "description": "When in inventory, unlocks recipe for AncientArmorCold 5 (Legendary). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_AncientArmorHeat_2": {
+    "localized_name": "Heat-Resistant Ancient Armor Schematic 1",
+    "description": "When in inventory, unlocks recipe for AncientArmorHeat 2 (Uncommon). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_AncientArmorHeat_3": {
+    "localized_name": "Heat-Resistant Ancient Armor Schematic 2",
+    "description": "When in inventory, unlocks recipe for AncientArmorHeat 3 (Rare). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_AncientArmorHeat_4": {
+    "localized_name": "Heat-Resistant Ancient Armor Schematic 3",
+    "description": "When in inventory, unlocks recipe for AncientArmorHeat 4 (Epic). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_AncientArmorHeat_5": {
+    "localized_name": "Heat-Resistant Ancient Armor Schematic 4",
+    "description": "When in inventory, unlocks recipe for AncientArmorHeat 5 (Legendary). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_AncientArmorWeight_2": {
+    "localized_name": "Lightweight Ancient Armor Schematic 1",
+    "description": "When in inventory, unlocks recipe for AncientArmorWeight 2 (Uncommon). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_AncientArmorWeight_3": {
+    "localized_name": "Lightweight Ancient Armor Schematic 2",
+    "description": "When in inventory, unlocks recipe for AncientArmorWeight 3 (Rare). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_AncientArmorWeight_4": {
+    "localized_name": "Lightweight Ancient Armor Schematic 3",
+    "description": "When in inventory, unlocks recipe for AncientArmorWeight 4 (Epic). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_AncientArmorWeight_5": {
+    "localized_name": "Lightweight Ancient Armor Schematic 4",
+    "description": "When in inventory, unlocks recipe for AncientArmorWeight 5 (Legendary). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_AncientArmor_2": {
+    "localized_name": "Ancient Armor Schematic 1",
+    "description": "When in inventory, unlocks recipe for AncientArmor 2 (Uncommon). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_AncientArmor_3": {
+    "localized_name": "Ancient Armor Schematic 2",
+    "description": "When in inventory, unlocks recipe for AncientArmor 3 (Rare). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_AncientArmor_4": {
+    "localized_name": "Ancient Armor Schematic 3",
+    "description": "When in inventory, unlocks recipe for AncientArmor 4 (Epic). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_AncientArmor_5": {
+    "localized_name": "Ancient Armor Schematic 4",
+    "description": "When in inventory, unlocks recipe for AncientArmor 5 (Legendary). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_AncientHelmet_2": {
+    "localized_name": "Ancient Helm Schematic 1",
+    "description": "When in inventory, unlocks recipe for AncientHelmet 2 (Uncommon). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_AncientHelmet_3": {
+    "localized_name": "Ancient Helm Schematic 2",
+    "description": "When in inventory, unlocks recipe for AncientHelmet 3 (Rare). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_AncientHelmet_4": {
+    "localized_name": "Ancient Helm Schematic 3",
+    "description": "When in inventory, unlocks recipe for AncientHelmet 4 (Epic). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_AncientHelmet_5": {
+    "localized_name": "Ancient Helm Schematic 4",
+    "description": "When in inventory, unlocks recipe for AncientHelmet 5 (Legendary). Can be crafted at Ancient Workbench."
+  },
   "Blueprint_AssaultRifle_Default2": {
     "localized_name": "Assault Rifle Schematic 1",
     "description": "When in inventory, unlocks recipe for AssaultRifle Default1 (Uncommon). Can be crafted at WeaponFactory Dirty 02."
@@ -506,6 +1006,38 @@
   "Blueprint_AssaultRifle_Default5": {
     "localized_name": "Assault Rifle Schematic 4",
     "description": "When in inventory, unlocks recipe for AssaultRifle Default1 (Legendary). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_Bat3_2": {
+    "localized_name": "Metal Bat Schematic 1",
+    "description": "When in inventory, unlocks recipe for Metal Bat (Uncommon). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_Bat3_3": {
+    "localized_name": "Metal Bat Schematic 2",
+    "description": "When in inventory, unlocks recipe for Metal Bat (Rare). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_Bat3_4": {
+    "localized_name": "Metal Bat Schematic 3",
+    "description": "When in inventory, unlocks recipe for Metal Bat (Epic). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_Bat3_5": {
+    "localized_name": "Metal Bat Schematic 4",
+    "description": "When in inventory, unlocks recipe for Metal Bat (Legendary). Can be crafted at WeaponFactory Dirty 02."
+  },
+  "Blueprint_BeamLauncher_2": {
+    "localized_name": "Beam Launcher Schematic 1",
+    "description": "When in inventory, unlocks recipe for Beam Launcher (Uncommon). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_BeamLauncher_3": {
+    "localized_name": "Beam Launcher Schematic 2",
+    "description": "When in inventory, unlocks recipe for Beam Launcher (Rare). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_BeamLauncher_4": {
+    "localized_name": "Beam Launcher Schematic 3",
+    "description": "When in inventory, unlocks recipe for Beam Launcher (Epic). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_BeamLauncher_5": {
+    "localized_name": "Beam Launcher Schematic 4",
+    "description": "When in inventory, unlocks recipe for Beam Launcher (Legendary). Can be crafted at Ancient Workbench."
   },
   "Blueprint_BeamSword_2": {
     "localized_name": "Beam Sword Schematic 1",
@@ -743,6 +1275,38 @@
     "localized_name": "Double-Barreled Shotgun Schematic 4",
     "description": "When in inventory, unlocks recipe for Double-Barreled Shotgun (Legendary). Can be crafted at WeaponFactory Dirty 02."
   },
+  "Blueprint_DroneLauncher_2": {
+    "localized_name": "Drone Launcher Schematic 1",
+    "description": "When in inventory, unlocks recipe for Drone Launcher (Uncommon). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_DroneLauncher_3": {
+    "localized_name": "Drone Launcher Schematic 2",
+    "description": "When in inventory, unlocks recipe for Drone Launcher (Rare). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_DroneLauncher_4": {
+    "localized_name": "Drone Launcher Schematic 3",
+    "description": "When in inventory, unlocks recipe for Drone Launcher (Epic). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_DroneLauncher_5": {
+    "localized_name": "Drone Launcher Schematic 4",
+    "description": "When in inventory, unlocks recipe for Drone Launcher (Legendary). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_ElectricArcAssaultRifle_2": {
+    "localized_name": "Plasma Rifle Schematic 1",
+    "description": "When in inventory, unlocks recipe for Plasma Rifle (Uncommon). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_ElectricArcAssaultRifle_3": {
+    "localized_name": "Plasma Rifle Schematic 2",
+    "description": "When in inventory, unlocks recipe for Plasma Rifle (Rare). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_ElectricArcAssaultRifle_4": {
+    "localized_name": "Plasma Rifle Schematic 3",
+    "description": "When in inventory, unlocks recipe for Plasma Rifle (Epic). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_ElectricArcAssaultRifle_5": {
+    "localized_name": "Plasma Rifle Schematic 4",
+    "description": "When in inventory, unlocks recipe for Plasma Rifle (Legendary). Can be crafted at Ancient Workbench."
+  },
   "Blueprint_EnergyRocketLauncher_2": {
     "localized_name": "Plasma Cannon Schematic 1",
     "description": "When in inventory, unlocks recipe for Plasma Cannon (Uncommon). Can be crafted at WeaponFactory Dirty 03."
@@ -785,11 +1349,11 @@
   },
   "Blueprint_FishingRod_02_2": {
     "localized_name": "Intermediate Fishing Rod (Croajiro) Schematic",
-    "description": "When in inventory, unlocks recipe for FishingRod 02 2 (Uncommon). Can be crafted at Factory Hard 02."
+    "description": "When in inventory, unlocks recipe for FishingRod 02 2 (Rare). Can be crafted at Factory Hard 02."
   },
   "Blueprint_FishingRod_03_2": {
     "localized_name": "Advanced Fishing Rod (Depresso) Schematic",
-    "description": "When in inventory, unlocks recipe for FishingRod 03 2 (Rare). Can be crafted at Factory Hard 03."
+    "description": "When in inventory, unlocks recipe for FishingRod 03 2 (Legendary). Can be crafted at Factory Hard 03."
   },
   "Blueprint_FlameThrower_2": {
     "localized_name": "Flamethrower Schematic 1",
@@ -1679,6 +2243,130 @@
     "localized_name": "Old Revolver Schematic 4",
     "description": "When in inventory, unlocks recipe for Old Revolver (Legendary). Can be crafted at WeaponFactory Dirty 02."
   },
+  "Blueprint_Otomo_ATDark_ElementBoost_1": {
+    "localized_name": "Lord of the Underworld's Baton Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo ATDark ElementBoost 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Otomo_ATDragon_ElementBoost_1": {
+    "localized_name": "Divine Dragon's Baton Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo ATDragon ElementBoost 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Otomo_ATEarth_ElementBoost_1": {
+    "localized_name": "Earth Emperor's Baton Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo ATEarth ElementBoost 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Otomo_ATElectricity_ElementBoost_1": {
+    "localized_name": "Lord of Lightning's Baton Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo ATElectricity ElementBoost 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Otomo_ATFire_ElementBoost_1": {
+    "localized_name": "Flame Emperor's Baton Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo ATFire ElementBoost 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Otomo_ATIce_ElementBoost_1": {
+    "localized_name": "Ice Emperor's Baton Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo ATIce ElementBoost 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Otomo_ATLeaf_ElementBoost_1": {
+    "localized_name": "Spirit Emperor's Baton Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo ATLeaf ElementBoost 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Otomo_ATNormal_ElementBoost_1": {
+    "localized_name": "Celestial Emperor's Baton Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo ATNormal ElementBoost 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Otomo_ATWater_ElementBoost_1": {
+    "localized_name": "Lord of the Sea's Baton Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo ATWater ElementBoost 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Otomo_Attack_up1_2": {
+    "localized_name": "Attack Support Whistle Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo Attack up1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Otomo_DFDark_ElementBoost_1": {
+    "localized_name": "Lyleen Noct's Talisman Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo DFDark ElementBoost 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Otomo_DFDragon_ElementBoost_1": {
+    "localized_name": "Jetragon's Talisman Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo DFDragon ElementBoost 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Otomo_DFEarth_ElementBoost_1": {
+    "localized_name": "Anubis's Talisman Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo DFEarth ElementBoost 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Otomo_DFElectricity_ElementBoost_1": {
+    "localized_name": "Orserk's Talisman Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo DFElectricity ElementBoost 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Otomo_DFFire_ElementBoost_1": {
+    "localized_name": "Blazamut's Talisman Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo DFFire ElementBoost 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Otomo_DFIce_ElementBoost_1": {
+    "localized_name": "Frostallion's Talisman Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo DFIce ElementBoost 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Otomo_DFLeaf_ElementBoost_1": {
+    "localized_name": "Lyleen's Talisman Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo DFLeaf ElementBoost 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Otomo_DFNormal_ElementBoost_1": {
+    "localized_name": "Hartalis's Talisman Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo DFNormal ElementBoost 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Otomo_DFWater_ElementBoost_1": {
+    "localized_name": "Neptilius's Talisman Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo DFWater ElementBoost 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Otomo_Defense_up1_2": {
+    "localized_name": "Defense Support Whistle Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo Defense up1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Otomo_ElementBoost_Dark_1_2": {
+    "localized_name": "Dark Support Whistle Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo ElementBoost Dark 1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Otomo_ElementBoost_Dragon_1_2": {
+    "localized_name": "Dragon Support Whistle Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo ElementBoost Dragon 1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Otomo_ElementBoost_Earth_1_2": {
+    "localized_name": "Ground Support Whistle Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo ElementBoost Earth 1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Otomo_ElementBoost_Electricity_1_2": {
+    "localized_name": "Electric Support Whistle Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo ElementBoost Electricity 1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Otomo_ElementBoost_Fire_1_2": {
+    "localized_name": "Fire Support Whistle Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo ElementBoost Fire 1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Otomo_ElementBoost_Ice_1_2": {
+    "localized_name": "Ice Support Whistle Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo ElementBoost Ice 1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Otomo_ElementBoost_Leaf_1_2": {
+    "localized_name": "Grass Support Whistle Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo ElementBoost Leaf 1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Otomo_ElementBoost_Normal_1_2": {
+    "localized_name": "Neutral Support Whistle Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo ElementBoost Normal 1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Otomo_ElementBoost_Water_1_2": {
+    "localized_name": "Water Support Whistle Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo ElementBoost Water 1 (Rare). Can be crafted at Factory Hard 01."
+  },
+  "Blueprint_Otomo_PalConfidence_Increase_1_fix": {
+    "localized_name": "Ring of Trust Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo PalConfidence Increase 1 (Epic). Can be crafted at Factory Hard 02."
+  },
+  "Blueprint_Otomo_PalExp_Increase_1_2": {
+    "localized_name": "Growth Acceleration Bell Schematic",
+    "description": "When in inventory, unlocks recipe for Otomo PalExp Increase 1 (Rare). Can be crafted at Factory Hard 01."
+  },
   "Blueprint_OverheatRifle_2": {
     "localized_name": "Overheat Rifle Schematic 1",
     "description": "When in inventory, unlocks recipe for Overheat Rifle (Uncommon). Can be crafted at WeaponFactory Dirty 04."
@@ -1951,6 +2639,106 @@
     "localized_name": "Single-Shot Rifle Schematic 4",
     "description": "When in inventory, unlocks recipe for Single-Shot Rifle (Legendary). Can be crafted at WeaponFactory Dirty 02."
   },
+  "Blueprint_SkyAssaultRifle_2": {
+    "localized_name": "Heavy Assault Rifle Schematic 1",
+    "description": "When in inventory, unlocks recipe for Heavy Assault Rifle (Uncommon). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_SkyAssaultRifle_3": {
+    "localized_name": "Heavy Assault Rifle Schematic 2",
+    "description": "When in inventory, unlocks recipe for Heavy Assault Rifle (Rare). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_SkyAssaultRifle_4": {
+    "localized_name": "Heavy Assault Rifle Schematic 3",
+    "description": "When in inventory, unlocks recipe for Heavy Assault Rifle (Epic). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_SkyAssaultRifle_5": {
+    "localized_name": "Heavy Assault Rifle Schematic 4",
+    "description": "When in inventory, unlocks recipe for Heavy Assault Rifle (Legendary). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_SkyBeamSword_2": {
+    "localized_name": "Laser Sword Schematic 1",
+    "description": "When in inventory, unlocks recipe for Laser Sword (Uncommon). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_SkyBeamSword_3": {
+    "localized_name": "Laser Sword Schematic 2",
+    "description": "When in inventory, unlocks recipe for Laser Sword (Rare). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_SkyBeamSword_4": {
+    "localized_name": "Laser Sword Schematic 3",
+    "description": "When in inventory, unlocks recipe for Laser Sword (Epic). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_SkyBeamSword_5": {
+    "localized_name": "Laser Sword Schematic 4",
+    "description": "When in inventory, unlocks recipe for Laser Sword (Legendary). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_SkyBow_2": {
+    "localized_name": "Mechanical Bow Schematic 1",
+    "description": "When in inventory, unlocks recipe for Mechanical Bow (Uncommon). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_SkyBow_3": {
+    "localized_name": "Mechanical Bow Schematic 2",
+    "description": "When in inventory, unlocks recipe for Mechanical Bow (Rare). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_SkyBow_4": {
+    "localized_name": "Mechanical Bow Schematic 3",
+    "description": "When in inventory, unlocks recipe for Mechanical Bow (Epic). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_SkyBow_5": {
+    "localized_name": "Mechanical Bow Schematic 4",
+    "description": "When in inventory, unlocks recipe for Mechanical Bow (Legendary). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_SkyGrenadeLauncher_2": {
+    "localized_name": "Tactical Grenade Launcher Schematic 1",
+    "description": "When in inventory, unlocks recipe for Tactical Grenade Launcher (Uncommon). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_SkyGrenadeLauncher_3": {
+    "localized_name": "Tactical Grenade Launcher Schematic 2",
+    "description": "When in inventory, unlocks recipe for Tactical Grenade Launcher (Rare). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_SkyGrenadeLauncher_4": {
+    "localized_name": "Tactical Grenade Launcher Schematic 3",
+    "description": "When in inventory, unlocks recipe for Tactical Grenade Launcher (Epic). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_SkyGrenadeLauncher_5": {
+    "localized_name": "Tactical Grenade Launcher Schematic 4",
+    "description": "When in inventory, unlocks recipe for Tactical Grenade Launcher (Legendary). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_SkyShotgun_2": {
+    "localized_name": "Prototype Shotgun Schematic 1",
+    "description": "When in inventory, unlocks recipe for Prototype Shotgun (Uncommon). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_SkyShotgun_3": {
+    "localized_name": "Prototype Shotgun Schematic 2",
+    "description": "When in inventory, unlocks recipe for Prototype Shotgun (Rare). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_SkyShotgun_4": {
+    "localized_name": "Prototype Shotgun Schematic 3",
+    "description": "When in inventory, unlocks recipe for Prototype Shotgun (Epic). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_SkyShotgun_5": {
+    "localized_name": "Prototype Shotgun Schematic 4",
+    "description": "When in inventory, unlocks recipe for Prototype Shotgun (Legendary). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_SkySubmachineGun_2": {
+    "localized_name": "Combat SMG Schematic 1",
+    "description": "When in inventory, unlocks recipe for Combat SMG (Uncommon). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_SkySubmachineGun_3": {
+    "localized_name": "Combat SMG Schematic 2",
+    "description": "When in inventory, unlocks recipe for Combat SMG (Rare). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_SkySubmachineGun_4": {
+    "localized_name": "Combat SMG Schematic 3",
+    "description": "When in inventory, unlocks recipe for Combat SMG (Epic). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_SkySubmachineGun_5": {
+    "localized_name": "Combat SMG Schematic 4",
+    "description": "When in inventory, unlocks recipe for Combat SMG (Legendary). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_Spear_ForestBoss2_5": {
+    "localized_name": "Enhanced Lily's Spear Schematic 4",
+    "description": "When in inventory, unlocks recipe for Spear ForestBoss2 (Legendary). Can be crafted at WeaponFactory Dirty 04."
+  },
   "Blueprint_Spear_ForestBoss_5": {
     "localized_name": "Lily's Spear Schematic 4",
     "description": "When in inventory, unlocks recipe for Spear ForestBoss (Legendary). Can be crafted at WeaponFactory Dirty 02."
@@ -2070,6 +2858,26 @@
   "Blueprint_WeakerBow_5": {
     "localized_name": "Old Bow Schematic 4",
     "description": "When in inventory, unlocks recipe for Old Bow (Legendary). Can be crafted at Primitive Workbench."
+  },
+  "Blueprint_WhaleWhistle": {
+    "localized_name": "Faded Schematic",
+    "description": "When in inventory, unlocks recipe for Echoing Flute. Can be crafted at Primitive Workbench."
+  },
+  "Blueprint_WidePenetrateShotgun_2": {
+    "localized_name": "Beam Scatter Schematic 1",
+    "description": "When in inventory, unlocks recipe for Beam Scatter (Uncommon). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_WidePenetrateShotgun_3": {
+    "localized_name": "Beam Scatter Schematic 2",
+    "description": "When in inventory, unlocks recipe for Beam Scatter (Rare). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_WidePenetrateShotgun_4": {
+    "localized_name": "Beam Scatter Schematic 3",
+    "description": "When in inventory, unlocks recipe for Beam Scatter (Epic). Can be crafted at Ancient Workbench."
+  },
+  "Blueprint_WidePenetrateShotgun_5": {
+    "localized_name": "Beam Scatter Schematic 4",
+    "description": "When in inventory, unlocks recipe for Beam Scatter (Legendary). Can be crafted at Ancient Workbench."
   },
   "Blueprint_Wire_Fence": {
     "localized_name": "Wire Fence Schematic",
@@ -2309,7 +3117,7 @@
   },
   "BossDefeatReward_BlackMetalDragon": {
     "localized_name": "Astegon Bounty Token",
-    "description": "Proof of defeating [Astegon, Ravager of Stars]. Simply possessing it permanently increases the stats of the Pals in your team."
+    "description": "Proof of defeating [Astegon, Draconic Monarch of Steel]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
   "BossDefeatReward_BlackPuppy": {
     "localized_name": "Smokie Bounty Token",
@@ -2327,6 +3135,14 @@
     "localized_name": "Prunelia Bounty Token",
     "description": "Proof of defeating [Prunelia, Indigo Handmaiden]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
+  "BossDefeatReward_BossRush": {
+    "localized_name": "Modified Pal's Contaminated Core",
+    "description": "Proof of defeating Highly Modified Pals. One of the keys used to remove the barrier of the sealed chamber located in the deepest part of the World Tree."
+  },
+  "BossDefeatReward_CactusDoll": {
+    "localized_name": "Needoll Bounty Token",
+    "description": "Proof of defeating [Needoll, Prickly Welcome]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
   "BossDefeatReward_CaptainPenguin": {
     "localized_name": "Penking Bounty Token",
     "description": "Proof of defeating Penking, Pioneer of the Frozen Sea]. Simply possessing it permanently increases the stats of the Pals in your team."
@@ -2339,6 +3155,14 @@
     "localized_name": "Felbat Bounty Token",
     "description": "Proof of defeating [Felbat, Gloom-shrouded Bloodsucker]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
+  "BossDefeatReward_CubeTurtle": {
+    "localized_name": "Tetroise Bounty Token",
+    "description": "Proof of defeating [Tetroise, Sandsea Monolith]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
+  "BossDefeatReward_CubeTurtle_Neutral": {
+    "localized_name": "Tetroise Primo Bounty Token",
+    "description": "Proof of defeating [Tetroise Primo, Sandsea Wardenstone]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
   "BossDefeatReward_DarkScorpion": {
     "localized_name": "Menasting Bounty Token",
     "description": "Proof of defeating [Menasting, Unstoppable Stinger]. Simply possessing it permanently increases the stats of the Pals in your team."
@@ -2346,6 +3170,22 @@
   "BossDefeatReward_DarkScorpion_Ground": {
     "localized_name": "Menasting Terra Bounty Token",
     "description": "Proof of defeating [Menasting Terra, Gold-Piercing Spear]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
+  "BossDefeatReward_DomeArmorDragon": {
+    "localized_name": "Aegidron Bounty Token",
+    "description": "Proof of defeating [Aegidron, Guardian of Luminous Trails]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
+  "BossDefeatReward_ElecLizard": {
+    "localized_name": "Slowatt Bounty Token",
+    "description": "Proof of defeating [Slowatt, Shockingly Laid-Back]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
+  "BossDefeatReward_ElecPanda": {
+    "localized_name": "Grizzbolt Bounty Token",
+    "description": "Proof of defeating [Grizzbolt, Claws of Lightning]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
+  "BossDefeatReward_ElecSnail": {
+    "localized_name": "Snock Bounty Token",
+    "description": "Proof of defeating [Snock, Sluggish Blue Bolt]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
   "BossDefeatReward_FairyDragon": {
     "localized_name": "Elphidran Bounty Token",
@@ -2359,6 +3199,14 @@
     "localized_name": "Fenglope Lux Bounty Token",
     "description": "Proof of defeating [Fenglope Lux, Drifting Thundercloud]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
+  "BossDefeatReward_FireKirin": {
+    "localized_name": "Pyrin Bounty Token",
+    "description": "Proof of defeating [Pyrin, Steed of Flames]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
+  "BossDefeatReward_FlameBuffalo": {
+    "localized_name": "Arsox Bounty Token",
+    "description": "Proof of defeating [Arsox, Blazing Brute]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
   "BossDefeatReward_FlowerDinosaur_Electric": {
     "localized_name": "Dinossom Lux Bounty Token",
     "description": "Proof of defeating [Dinossom Lux, Guardian of Lightning]. Simply possessing it permanently increases the stats of the Pals in your team."
@@ -2367,6 +3215,22 @@
     "localized_name": "Petallia Bounty Token",
     "description": "Proof of defeating [Petallia, Lady of the Garden]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
+  "BossDefeatReward_FlowerPrince": {
+    "localized_name": "Dandilord's Petal",
+    "description": "Proof of defeating Dandilord. One of the keys used to remove the barrier of the sealed chamber located in the deepest part of the World Tree."
+  },
+  "BossDefeatReward_FoxExorcist": {
+    "localized_name": "Flaracle Bounty Token",
+    "description": "Proof of defeating [Flaracle, Self-Serving Seer]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
+  "BossDefeatReward_FoxMage": {
+    "localized_name": "Wixen Bounty Token",
+    "description": "Proof of defeating [Wixen, Fire-Licked Furball]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
+  "BossDefeatReward_GhostDragon": {
+    "localized_name": "Eidrolon Bounty Token",
+    "description": "Proof of defeating [Eidrolon, Wings of Freedom]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
   "BossDefeatReward_GhostRabbit": {
     "localized_name": "Nitemary Bounty Token",
     "description": "Proof of defeating [Nitemary, Soul of the Dark Rabbit]. Simply possessing it permanently increases the stats of the Pals in your team."
@@ -2374,6 +3238,14 @@
   "BossDefeatReward_GoldenHorse": {
     "localized_name": "Gildane Bounty Token",
     "description": "Proof of defeating [Gildane, Guardian Beast of Twilight]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
+  "BossDefeatReward_GrassGolem": {
+    "localized_name": "Dualith Bounty Token",
+    "description": "Proof of defeating [Dualith, Twinhearted Azure Construct]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
+  "BossDefeatReward_GrassGolem_Dark": {
+    "localized_name": "Dualith Noct Bounty Token",
+    "description": "Proof of defeating [Dualith Noct, Twinhearted Violet Construct]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
   "BossDefeatReward_GrassMammoth": {
     "localized_name": "Mammorest Bounty Token",
@@ -2401,11 +3273,15 @@
   },
   "BossDefeatReward_HerculesBeetle_Ground": {
     "localized_name": "Warsect Terra Bounty Token",
-    "description": "Proof of defeating [Warsect Terra, Golden Armor Warrior]. Simply possessing it permanently increases the stats of the Pals in your team."
+    "description": "Proof of defeating [Warsect Terra, Gold-Armored Warrior]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
   "BossDefeatReward_Horus_Water": {
     "localized_name": "Faleris Aqua Bounty Token",
     "description": "Proof of defeating [Faleris Aqua, Sentinel of the Tides]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
+  "BossDefeatReward_IceFox": {
+    "localized_name": "Foxicle Bounty Token",
+    "description": "Proof of defeating [Foxicle, Frostbound Fox]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
   "BossDefeatReward_IceHorse": {
     "localized_name": "Frostallion Bounty Token",
@@ -2417,15 +3293,19 @@
   },
   "BossDefeatReward_IceNarwhal": {
     "localized_name": "Whalaska Bounty Token",
-    "description": "Proof of defeating [Whalaska, Nice Ice Lance]. Simply possessing it permanently increases the stats of the Pals in your team."
+    "description": "Proof of defeating [Whalaska, Gentle Ice Lance]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
   "BossDefeatReward_IceNarwhal_Fire": {
     "localized_name": "Whalaska Ignis Bounty Token",
-    "description": "Proof of defeating [Whalaska Ignis, Nice Crimson Lance]. Simply possessing it permanently increases the stats of the Pals in your team."
+    "description": "Proof of defeating [Whalaska Ignis, Gentle Crimson Lance]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
   "BossDefeatReward_JetDragon": {
     "localized_name": "Jetragon Bounty Token",
     "description": "Proof of defeating [Jetragon, Legendary Celestial Dragon]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
+  "BossDefeatReward_KabukiMan": {
+    "localized_name": "Renjishi Bounty Token",
+    "description": "Proof of defeating [Renjishi, Scorching Ovation]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
   "BossDefeatReward_KingAlpaca": {
     "localized_name": "Kingpaca Bounty Token",
@@ -2455,13 +3335,37 @@
     "localized_name": "Relaxaurus Bounty Token",
     "description": "Proof of defeating [Relaxaurus Lux, Gluttonous Thunder Dragon]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
+  "BossDefeatReward_LilyQueen": {
+    "localized_name": "Lyleen Bounty Token",
+    "description": "Proof of defeating [Lyleen, Empress of Lilies]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
   "BossDefeatReward_LilyQueen_Dark": {
     "localized_name": "Lyleen Noct Bounty Token",
     "description": "Proof of defeating [Lyleen Noct, Empress of the Abyss]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
+  "BossDefeatReward_LotusDragon": {
+    "localized_name": "Ophydia Bounty Token",
+    "description": "Proof of defeating [Ophydia, Pure Bloom Dragon]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
+  "BossDefeatReward_Manticore": {
+    "localized_name": "Blazehowl Bounty Token",
+    "description": "Proof of defeating [Blazehowl, Crimson Goliath]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
+  "BossDefeatReward_MoonChild": {
+    "localized_name": "Wistella Bounty Token",
+    "description": "Proof of defeating [Wistella, Mantle of the Night Sky]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
   "BossDefeatReward_MopKing": {
     "localized_name": "Sweepa Bounty Token",
     "description": "Proof of defeating [Sweepa, Majesty of Fuzz]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
+  "BossDefeatReward_Mothman": {
+    "localized_name": "Silvance's Plume",
+    "description": "Proof of defeating Silvance. One of the keys used to remove the barrier of the sealed chamber located in the deepest part of the World Tree."
+  },
+  "BossDefeatReward_MushroomLady": {
+    "localized_name": "Shroomly Bounty Token",
+    "description": "Proof of defeating [Shroomly, Cute as a Button]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
   "BossDefeatReward_Mutant": {
     "localized_name": "Lunaris Bounty Token",
@@ -2503,6 +3407,14 @@
     "localized_name": "Dazzi Noct Bounty Token",
     "description": "Proof of defeating [Dazzi Noct, Born of the Thunderclouds]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
+  "BossDefeatReward_RockBeast": {
+    "localized_name": "Kuprok Bounty Token",
+    "description": "Proof of defeating [Kuprok, Shambling Vein]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
+  "BossDefeatReward_RockBeast_Ice": {
+    "localized_name": "Kuprok Cryst Bounty Token",
+    "description": "Proof of defeating [Kuprok Cryst, Shuffling Glacier]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
   "BossDefeatReward_Ronin": {
     "localized_name": "Bushi Bounty Token",
     "description": "Proof of defeating [Bushi, Vagrant Warrior]. Simply possessing it permanently increases the stats of the Pals in your team."
@@ -2519,6 +3431,10 @@
     "localized_name": "Broncherry Aqua Bounty Token",
     "description": "Proof of defeating [Broncherry Aqua, Waves of Summer]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
+  "BossDefeatReward_ScorpionMan_Electric": {
+    "localized_name": "Prixter Lux Bounty Token",
+    "description": "Proof of defeating [Prixter Lux, Thunderlad]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
   "BossDefeatReward_SkyDragon": {
     "localized_name": "Quivern Bounty Token",
     "description": "Proof of defeating [Quivern, Wings of White]. Simply possessing it permanently increases the stats of the Pals in your team."
@@ -2531,6 +3447,10 @@
     "localized_name": "Beakon Bounty Token",
     "description": "Proof of defeating [Beakon, Wings of Thunderbolt]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
+  "BossDefeatReward_ThunderFluffyBird": {
+    "localized_name": "Dynamoff Bounty Token",
+    "description": "Proof of defeating [Dynamoff, Buzzy Bundle]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
   "BossDefeatReward_Umihebi": {
     "localized_name": "Jormuntide Bounty Token",
     "description": "Proof of defeating [Jormuntide, Emperor of the Sea]. Simply possessing it permanently increases the stats of the Pals in your team."
@@ -2538,6 +3458,18 @@
   "BossDefeatReward_VioletFairy": {
     "localized_name": "Vaelet Bounty Token",
     "description": "Proof of defeating [Vaelet, Voice of the Violets]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
+  "BossDefeatReward_VolcanicMonster": {
+    "localized_name": "Reptyro Bounty Token",
+    "description": "Proof of defeating [Reptyro, Lava-Devouring Juggernaut]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
+  "BossDefeatReward_VolcanoDragon": {
+    "localized_name": "Moldron Bounty Token",
+    "description": "Proof of defeating [Moldron, Scorched Wanderer]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
+  "BossDefeatReward_VolcanoDragon_Ice": {
+    "localized_name": "Moldron Cryst Bounty Token",
+    "description": "Proof of defeating [Moldron Cryst, Frigid Voyager]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
   "BossDefeatReward_WeaselDragon": {
     "localized_name": "Chillet Bounty Token",
@@ -2550,6 +3482,10 @@
   "BossDefeatReward_WhiteDeer": {
     "localized_name": "Celesdir Bounty Token",
     "description": "Proof of defeating [Celesdir, Beast of Salvation]. Simply possessing it permanently increases the stats of the Pals in your team."
+  },
+  "BossDefeatReward_WhiteDeer_Dark": {
+    "localized_name": "Celesdir Noct Bounty Token",
+    "description": "Proof of defeating [Celesdir Noct, Beast of Chaos]. Simply possessing it permanently increases the stats of the Pals in your team."
   },
   "BossDefeatReward_WhiteMoth": {
     "localized_name": "Sibelyx Bounty Token",
@@ -2651,13 +3587,33 @@
     "localized_name": "Three Shot Bow",
     "description": "An enhanced bow that allows three arrows to be fired simultaneously. By some strange mechanism, it only consumes a single Arrow when fired."
   },
+  "BronzeSword": {
+    "localized_name": "Primitive Sword",
+    "description": "A sword for close-range combat. Not bad for a battered sword. Perfect for getting up close and personal."
+  },
   "Cake": {
     "localized_name": "Cake",
-    "description": "A dish that is eaten during celebrations. Put it in the chest at your breeding farm to have a Pal lay a particularly healthy egg."
+    "description": "A dish eaten during celebrations. Put it in the chest at a Breeding Farm to make Pals lay a particularly healthy egg."
+  },
+  "Cake02": {
+    "localized_name": "Mushroom Cake",
+    "description": "Place it in the chest at a Breeding Farm to make Pals lay a particularly healthy egg. The talents of the resulting Pals will grow slightly more easily."
+  },
+  "Cake03": {
+    "localized_name": "Vegetable Cake",
+    "description": "Place it in the chest at a Breeding Farm to make Pals lay a particularly healthy egg. Lay eggs twice at once."
+  },
+  "Cake04": {
+    "localized_name": "Extravagant Vegetable Cake",
+    "description": "Place it in the chest at a Breeding Farm to make Pals lay a particularly healthy egg. Mutations are more likely to occur, and talents will grow more easily."
+  },
+  "Cake05": {
+    "localized_name": "Special Cake",
+    "description": "Place it in the chest at a Breeding Farm to make Pals lay a particularly healthy egg. More likely inherit multiple passive skills from their parents."
   },
   "CarbonFiber": {
     "localized_name": "Carbon Fiber",
-    "description": "A lightweight yet sturdy material. Used to create armor among other equipment."
+    "description": "A lightweight yet sturdy material. Used to create armor and other equipment. Can be crafted at Factory Hard 02."
   },
   "Carbonara": {
     "localized_name": "Carbonara",
@@ -2689,7 +3645,7 @@
   },
   "ChargeLaserRifleBullet": {
     "localized_name": "Charge Rifle Ammo",
-    "description": "Ammo for the Charge Rifle and similar weapons."
+    "description": "Ammo for the Charge Rifle and similar weapons. Can be crafted at WeaponFactory Dirty 04."
   },
   "ChargeLaserRifle_2": {
     "localized_name": "Charge Rifle",
@@ -2737,11 +3693,11 @@
   },
   "Cloth": {
     "localized_name": "Cloth",
-    "description": "Cloth woven from Wool. Required to create armor."
+    "description": "Cloth woven from Wool. Required to create armor. Can be crafted at Primitive Workbench."
   },
   "Cloth2": {
     "localized_name": "High Quality Cloth",
-    "description": "High Quality Cloth woven from a large amount of Wool. Required to create high quality armor."
+    "description": "High Quality Cloth woven from a large amount of Wool. Required to create high quality armor. Can be crafted at Factory Hard 01."
   },
   "ClothArmor": {
     "localized_name": "Cloth Outfit",
@@ -2829,7 +3785,7 @@
   },
   "Computer": {
     "localized_name": "Computer",
-    "description": "Computer"
+    "description": "A component used in the control of automated equipment and precision machinery. It's a key component forming the foundation of modern technology. Can be crafted at Factory Hard 03."
   },
   "CopperArmor": {
     "localized_name": "Metal Armor",
@@ -2917,11 +3873,15 @@
   },
   "CopperOre": {
     "localized_name": "Ore",
-    "description": "Becomes an ingot when refined using a furnace. Can be found in caves and other places. There are rumors of Pals capable of detecting ore."
+    "description": "Becomes an ingot when refined using a furnace. Can be found in caves and other places."
   },
   "CornSoup": {
     "localized_name": "Corn Soup",
     "description": "Corn Soup"
+  },
+  "Corrosive_Solvent": {
+    "localized_name": "Corrosive Solvent",
+    "description": "A dangerous chemical solvent with strong decomposing properties. Used for precision processing and special treatments. Can be crafted at Factory Hard 02."
   },
   "CrudeOil": {
     "localized_name": "Crude Oil",
@@ -2991,6 +3951,26 @@
     "localized_name": "Double-Barreled Shotgun",
     "description": "Wreaks havoc at close range. Can fire twice before reloading. Despite the limited load capacity, it still packs a punch."
   },
+  "DroneLauncher": {
+    "localized_name": "Drone Launcher",
+    "description": "A launcher that fires drones which perform autonomous attacks. Capable of deploying up to 9 units, enabling sustained suppression."
+  },
+  "DroneLauncher_2": {
+    "localized_name": "Drone Launcher",
+    "description": "A launcher that fires drones which perform autonomous attacks. Capable of deploying up to 9 units, enabling sustained suppression."
+  },
+  "DroneLauncher_3": {
+    "localized_name": "Drone Launcher",
+    "description": "A launcher that fires drones which perform autonomous attacks. Capable of deploying up to 9 units, enabling sustained suppression."
+  },
+  "DroneLauncher_4": {
+    "localized_name": "Drone Launcher",
+    "description": "A launcher that fires drones which perform autonomous attacks. Capable of deploying up to 9 units, enabling sustained suppression."
+  },
+  "DroneLauncher_5": {
+    "localized_name": "Drone Launcher",
+    "description": "A launcher that fires drones which perform autonomous attacks. Capable of deploying up to 9 units, enabling sustained suppression."
+  },
   "Eaglestew": {
     "localized_name": "Stewed Galeclaw",
     "description": "Slow-cooked dish that exudes a burst of rich, wild flavors. Eating it will make SAN decrease slightly slower for a period of time."
@@ -3006,6 +3986,30 @@
   "ElecBaton": {
     "localized_name": "Stun Baton",
     "description": "Close range weapon that sends out an electric jolt upon contact. Pals are easier to capture when electrocuted."
+  },
+  "ElectricArcAssaultRifle": {
+    "localized_name": "Plasma Rifle",
+    "description": "A rifle that releases an electrical discharge from the point of impact, which chains to multiple enemies."
+  },
+  "ElectricArcAssaultRifleBullet": {
+    "localized_name": "Plasma Rifle Ammo",
+    "description": "Ammo for the Plasma Rifle. Can be crafted at Ancient Workbench."
+  },
+  "ElectricArcAssaultRifle_2": {
+    "localized_name": "Plasma Rifle",
+    "description": "A rifle that releases an electrical discharge from the point of impact, which chains to multiple enemies."
+  },
+  "ElectricArcAssaultRifle_3": {
+    "localized_name": "Plasma Rifle",
+    "description": "A rifle that releases an electrical discharge from the point of impact, which chains to multiple enemies."
+  },
+  "ElectricArcAssaultRifle_4": {
+    "localized_name": "Plasma Rifle",
+    "description": "A rifle that releases an electrical discharge from the point of impact, which chains to multiple enemies."
+  },
+  "ElectricArcAssaultRifle_5": {
+    "localized_name": "Plasma Rifle",
+    "description": "A rifle that releases an electrical discharge from the point of impact, which chains to multiple enemies."
   },
   "ElectricOrgan": {
     "localized_name": "Electric Organ",
@@ -3057,7 +4061,7 @@
   },
   "EnergyLauncherBullet": {
     "localized_name": "Plasma Cartridge",
-    "description": "Ammo for the Plasma Cannon and any similar weapon."
+    "description": "Ammo for the Plasma Cannon and similar weapons. Can be crafted at WeaponFactory Dirty 03."
   },
   "EnergyRocketLauncher": {
     "localized_name": "Plasma Cannon",
@@ -3085,7 +4089,7 @@
   },
   "EnergyShotgunBullet": {
     "localized_name": "Energy Shotgun Ammo",
-    "description": "Ammo for the Energy Shotgun and similar weapons."
+    "description": "Ammo for the Energy Shotgun and similar weapons. Can be crafted at WeaponFactory Dirty 04."
   },
   "EnergyShotgun_2": {
     "localized_name": "Energy Shotgun",
@@ -3121,7 +4125,7 @@
   },
   "ExplosiveBullet": {
     "localized_name": "Rocket Ammo",
-    "description": "Ammo for the Launcher Default and other similar weapons."
+    "description": "Ammo for the Launcher Default and similar weapons. Can be crafted at WeaponFactory Dirty 03."
   },
   "Fang": {
     "localized_name": "Fang",
@@ -3237,7 +4241,7 @@
   },
   "FlamethrowerBullet": {
     "localized_name": "Flamethrower Fuel",
-    "description": "Flamethrower fuel. Ammo for the Flamethrower and similar weapons."
+    "description": "Ammo for the Flamethrower and similar weapons. Can be crafted at WeaponFactory Dirty 03."
   },
   "Flour": {
     "localized_name": "Flour",
@@ -3420,12 +4424,12 @@
     "description": "Dress up like Bjorn using this special headpiece!"
   },
   "GasMask": {
-    "localized_name": "Gas Mask",
-    "description": "Gas Mask"
+    "localized_name": "Corrosive Mist Mask",
+    "description": "A mask with a special filtration system. Negates damage taken from corrosive mist."
   },
   "GatlingBullet": {
     "localized_name": "Gatling Gun Ammo",
-    "description": "Ammo for the Gatling Gun and similar weapons."
+    "description": "Ammo for the Gatling Gun and similar weapons. Can be crafted at WeaponFactory Dirty 03."
   },
   "GatlingGun": {
     "localized_name": "Gatling Gun",
@@ -3501,7 +4505,7 @@
   },
   "GrenadeBullet": {
     "localized_name": "Grenade Ammo",
-    "description": "Ammo for the Grenade Launcher and similar weapons."
+    "description": "Ammo for the Grenade Launcher and similar weapons. Can be crafted at WeaponFactory Dirty 03."
   },
   "GrenadeLauncher": {
     "localized_name": "Grenade Launcher",
@@ -3534,6 +4538,10 @@
   "GrilledSheepHerbs": {
     "localized_name": "Herb Roasted Lamball",
     "description": "Indulging in an abundance of fresh berries creates a tantalizing aroma that accentuates the unique flavor of mutton. Eating it will increase Defense by +10% for a period of time."
+  },
+  "GrilledSwordCutlassFish": {
+    "localized_name": "Salt-Grilled Skutlass",
+    "description": "Fresh fillets of SwordCutlassFish salted and grilled into a simple dish. When eaten, it nullifies knockback and flinching for a certain period of time."
   },
   "GuidedMissileLauncher": {
     "localized_name": "Guided Missile Launcher",
@@ -3597,7 +4605,11 @@
   },
   "HandgunBullet": {
     "localized_name": "Handgun Ammo",
-    "description": "Ammo for HandGun Default and other similar weapons."
+    "description": "Ammo for the HandGun Default and similar weapons. Can be crafted at WeaponFactory Dirty 01."
+  },
+  "HandgunShield": {
+    "localized_name": "Ballistic Shield",
+    "description": "[WIP] This item is under development."
   },
   "Head001": {
     "localized_name": "Monarch's Crown",
@@ -3941,11 +4953,11 @@
   },
   "HeadEquip001_purple": {
     "localized_name": "Witch's Crown",
-    "description": "Imbued with the ominous power of Bellanoir Libero (Ultra). Extremely difficult to obtain."
+    "description": "Imbued with the ominous power of Bellanoir Libero (Ultra). A rarity only the most fortunate may obtain."
   },
   "HeadEquip023": {
-    "localized_name": "Lyleen Floral Cap",
-    "description": "Floral cap shaped like a Lyleen."
+    "localized_name": "Lyleen Accessory",
+    "description": "Floral hair accessory inspired by Lyleen."
   },
   "HeadEquip024": {
     "localized_name": "Sibelyx Hat",
@@ -4069,11 +5081,11 @@
   },
   "HeadEquip041": {
     "localized_name": "Horns of Supremacy",
-    "description": "Imbued with the ominous power of Blazamut Ryu (Ultra). Extremely difficult to obtain."
+    "description": "Imbued with the ominous power of Blazamut Ryu (Ultra). A rarity only the most fortunate may obtain."
   },
   "HeadEquip044": {
     "localized_name": "Xenolord's head",
-    "description": "A headgear designed to resemble a Xenolord ."
+    "description": "A headgear designed to resemble a Xenolord."
   },
   "HeadEquip045": {
     "localized_name": "Depresso Helmet",
@@ -4081,11 +5093,75 @@
   },
   "HeadEquip046": {
     "localized_name": "Crown of Salvation",
-    "description": "Imbued with the ominous power of Hartalis (Ultra). Extremely difficult to obtain."
+    "description": "Imbued with the ominous power of Hartalis (Ultra). A rarity only the most fortunate may obtain."
+  },
+  "HeadEquip048": {
+    "localized_name": "Auri Hat",
+    "description": "Dress up like Auri using this special headpiece!"
+  },
+  "HeadEquip049": {
+    "localized_name": "Zenara Hat",
+    "description": "Dress up like Zenara using this special headpiece! A rarity only the most fortunate may obtain."
+  },
+  "HeadEquip050": {
+    "localized_name": "Herbil Headband",
+    "description": "Headband shaped like a Herbil."
+  },
+  "HeadEquip051": {
+    "localized_name": "Kingpaca Headband",
+    "description": "Headband shaped like a Kingpaca."
+  },
+  "HeadEquip052": {
+    "localized_name": "Gloopie Hat",
+    "description": "Hat shaped like a Gloopie."
+  },
+  "HeadEquip053": {
+    "localized_name": "Jelliette Hat",
+    "description": "Hat shaped like a Jelliette."
+  },
+  "HeadEquip054": {
+    "localized_name": "Turtacle Cap",
+    "description": "Hat shaped like a Turtacle."
+  },
+  "HeadEquip055": {
+    "localized_name": "Croajiro Cap",
+    "description": "Hat shaped like a Croajiro."
+  },
+  "HeadEquip056": {
+    "localized_name": "Chikipi Cap",
+    "description": "Hat shaped like a Chikipi."
+  },
+  "HeadEquip057": {
+    "localized_name": "Dandilord Hat",
+    "description": "Hat shaped like a Dandilord."
+  },
+  "HeadEquip058": {
+    "localized_name": "Shroomer Hat",
+    "description": "Hat shaped like a Shroomer."
+  },
+  "HeadEquip059": {
+    "localized_name": "Ghangler Accessory",
+    "description": "Hair accessory modeled after a Ghangler."
+  },
+  "HeadEquip060": {
+    "localized_name": "Icelyn Hat",
+    "description": "Hat shaped like a Icelyn."
+  },
+  "HeadEquip061": {
+    "localized_name": "Splatterina Hat",
+    "description": "Hat shaped like a Splatterina."
+  },
+  "HeadEquip062": {
+    "localized_name": "Tarantriss Hat",
+    "description": "Hat shaped like a Tarantriss."
   },
   "Herbs": {
     "localized_name": "Low Grade Medical Supplies",
     "description": "Low Grade Medical Supplies good for Sick, Sprain, and Overfull. They don't heal Health when eaten, however."
+  },
+  "HighGrade_Processed_Wood": {
+    "localized_name": "High Quality Wooden Board",
+    "description": "Fine planks carefully carved from Wood Fine. They have beautiful wood grain and are used for structures with a luxurious feel. Can be crafted at Factory Hard 03."
   },
   "Homeward": {
     "localized_name": "Homeward Thundercloud",
@@ -4125,7 +5201,7 @@
   },
   "InkBullet": {
     "localized_name": "Decal Ink",
-    "description": "Ammo for Decal Guns. Uses ink to paint a picture of a Pal."
+    "description": "Ammo for Decal Guns. Uses ink to paint a picture of a Pal. Can be crafted at WeaponFactory Dirty 01."
   },
   "IronArmor": {
     "localized_name": "Refined Metal Armor",
@@ -4217,7 +5293,7 @@
   },
   "JellyfishFairy_jelly": {
     "localized_name": "Jelliette's Jiggly Jelly",
-    "description": "An unusual treat crafted from Meat JellyfishFairy and Pal Fluids. Eating it will slightly increase EXP gain and increase Attack by +10% for a period of time."
+    "description": "An unusual treat crafted from Meat JellyfishFairy and Aquatic Pal Fluids. Eating it will slightly increase EXP gain and increase Attack by +10% for a period of time."
   },
   "JellyfishGhost_jelly": {
     "localized_name": "Jellroy's Jolly Jelly",
@@ -4243,6 +5319,38 @@
     "localized_name": "Katana",
     "description": "Katana for close-range combat. Slices through with razor-sharp precision, cutting cleanly in one strike."
   },
+  "KeySphere_01": {
+    "localized_name": "Key Sphere of Envy",
+    "description": "A relic of an ancient civilization that once flourished in this land. Although its true nature remains unknown, recent research suggests that it may have been part of a massive device. |The sin of envying humanity's prosperity and bringing about its downfall.|"
+  },
+  "KeySphere_02": {
+    "localized_name": "Key Sphere of Pride",
+    "description": "A relic of an ancient civilization that once flourished in this land. Although its true nature remains unknown, recent research suggests that it may have been part of a massive device. |The sin of arrogantly seeking coexistence, and bringing forth the Calamity.|"
+  },
+  "KeySphere_03": {
+    "localized_name": "Key Sphere of Greed",
+    "description": "A relic of an ancient civilization that once flourished in this land. Although its true nature remains unknown, recent research suggests that it may have been part of a massive device. |The sin of rejecting one's fate, seeking the bonds of another.|"
+  },
+  "KeySphere_04": {
+    "localized_name": "Key Sphere of Sloth",
+    "description": "A relic of an ancient civilization that once flourished in this land. Although its true nature remains unknown, recent research suggests that it may have been part of a massive device. |The sin of abandoning one's humanity, descending the path to ruin.|"
+  },
+  "KeySphere_05": {
+    "localized_name": "Key Sphere of Gluttony",
+    "description": "A relic of an ancient civilization that once flourished in this land. Although its true nature remains unknown, recent research suggests that it may have been part of a massive device. |The sin of devouring the lifeblood of the stars, yet never knowing satiety.|"
+  },
+  "KeySphere_06": {
+    "localized_name": "Key Sphere of Lust",
+    "description": "A relic of an ancient civilization that once flourished in this land. Although its true nature remains unknown, recent research suggests that it may have been part of a massive device. |The sin of seeking forbidden truth beyond the veil, transcending the bounds of human reason.|"
+  },
+  "KeySphere_07": {
+    "localized_name": "Key Sphere of Wrath",
+    "description": "A relic of an ancient civilization that once flourished in this land. Although its true nature remains unknown, recent research suggests that it may have been part of a massive device. |The sin of surrendering oneself to wrath, spreading death without end.|"
+  },
+  "KeySphere_08": {
+    "localized_name": "Key Sphere of Original Sin",
+    "description": "A relic of an ancient civilization that once flourished in this land. Although its true nature remains unknown, recent research suggests that it may have been part of a massive device. |The sin of being born while denying all life in creation.|"
+  },
   "Lantern": {
     "localized_name": "Hip Lantern",
     "description": "A lantern that can be attached to the hip. It lights up automatically at night. You can also switch its lighting mode to keep it on at all times. Just one is enough to find your way in the dark."
@@ -4253,11 +5361,11 @@
   },
   "LaserBullet": {
     "localized_name": "Energy Cartridge",
-    "description": "Ammo used by the Laser Rifle and similar weapons."
+    "description": "Ammo for the Laser Rifle and similar weapons. Can be crafted at WeaponFactory Dirty 03."
   },
   "LaserGatlingBullet": {
     "localized_name": "Laser Gatling Cartridge",
-    "description": "Ammo for the Laser Gatling Gun and any similar weapon."
+    "description": "Ammo for the Laser Gatling Gun and similar weapons. Can be crafted at WeaponFactory Dirty 03."
   },
   "LaserGatlingGun": {
     "localized_name": "Laser Gatling Gun",
@@ -4278,6 +5386,10 @@
   "LaserGatlingGun_5": {
     "localized_name": "Laser Gatling Gun",
     "description": "Fires beam-like energy blasts at high speed. Its overwhelming firepower can take down multiple enemies at once."
+  },
+  "LaserMiningTool": {
+    "localized_name": "Plasma Multicutter",
+    "description": "A portable plasma cutter that concentrates and emits plasma energy. It supports a wide range of uses, from ore excavation to tree cutting. Its high-output energy also allows for the mining of special ores."
   },
   "LaserRifle": {
     "localized_name": "Laser Rifle",
@@ -4326,6 +5438,10 @@
   "Launcher_Meteor_5": {
     "localized_name": "Meteor Launcher",
     "description": "A phenomenal weapon that fires a meteor. Upon striking its target, it creates an explosion similar to a meteorite impact."
+  },
+  "Lava_Ancient": {
+    "localized_name": "Ancient Lava",
+    "description": "A mass of lava formed over long years in extreme environments. The sealed-in blue lava is still emitting heat."
   },
   "Leather": {
     "localized_name": "Leather",
@@ -4497,7 +5613,7 @@
   },
   "ManganeseIngot": {
     "localized_name": "Coralum Ingot",
-    "description": "An alloy of Coralum Ore, Ore, and Coal. Highly resistant to energy, making it ideal for crafting weapons."
+    "description": "An alloy made from Coralum Ore found on the ocean floor. Highly resistant to energy, making it ideal for crafting weapons. Can be refined at Gigantic Furnace."
   },
   "ManganeseOre": {
     "localized_name": "Coralum Ore",
@@ -4595,17 +5711,21 @@
     "localized_name": "Lamball Mutton",
     "description": "SheepBall meat. Red meat with a unique flavor. Delicious, but takes some getting used to."
   },
+  "Meat_SwordCutlassFish": {
+    "localized_name": "Skutlass Sashimi",
+    "description": "Raw slices of SwordCutlassFish. Characterized by its supple, plump flesh. Caution is required when preparing it due to its sword-like spine."
+  },
   "Medicines": {
     "localized_name": "Medical Supplies",
     "description": "Strange Medical Supplies that are effective at treating Ulcer and Fracture. Unfortunately, they have no healing effect."
   },
   "MetalDetector": {
     "localized_name": "Metal Detector",
-    "description": "Holding it allows you to detect hidden ores nearby. It marks the metal when close to the ore, but the mark disappears if you move away."
+    "description": "Using this reveals hidden Chromite deposits in dungeons, marking them for easier mining. Deposits will become unmarked if you move too far away."
   },
   "MeteorBullet": {
     "localized_name": "Meteorite Ammo",
-    "description": "Ammo for the Launcher Meteor and any similar weapon."
+    "description": "Ammo for the Launcher Meteor and similar weapons. Can be crafted at WeaponFactory Dirty 02."
   },
   "MeteorDrop": {
     "localized_name": "Meteorite Fragment",
@@ -4625,7 +5745,7 @@
   },
   "MissileBullet": {
     "localized_name": "Missile Ammo",
-    "description": "Ammo for the Guided Missile Launcher and similar weapons."
+    "description": "Ammo for the Guided Missile Launcher and similar weapons. Can be crafted at WeaponFactory Dirty 03."
   },
   "Money": {
     "localized_name": "Gold Coin",
@@ -4759,6 +5879,10 @@
     "localized_name": "Fried Gloopie Balls",
     "description": "Meat OctopusGirl encased in a Flour dough and grilled into round bites. Eating it will slightly increase EXP gain for a period of time."
   },
+  "OctopusGirl_Takoyaki2": {
+    "localized_name": "Seafood Pasta",
+    "description": "Fresh pasta is tossed with fragrant seafood in this exceptional dish, using Gloopie tentacles to elevate it even further. When eaten, it nullifies damage from explosions for a certain period of time."
+  },
   "OldRevolver": {
     "localized_name": "Old Revolver",
     "description": "A slightly outdated revolving handgun. Compared to Handgun default, it excels in single-shot power."
@@ -4795,149 +5919,225 @@
     "localized_name": "Suspicious Juice",
     "description": "Juice that improves mood when consumed. Drinking it increases work speed for a period of time, but lowers SAN."
   },
+  "Otomo_ATDark_ElementBoost_1": {
+    "localized_name": "Lord of the Underworld's Baton",
+    "description": "An accessory that raises the Attack of the Pal fighting alongside you. It also significantly increases their Dark damage."
+  },
+  "Otomo_ATDragon_ElementBoost_1": {
+    "localized_name": "Divine Dragon's Baton",
+    "description": "An accessory that raises the Attack of the Pal fighting alongside you. It also significantly increases their Dragon damage."
+  },
+  "Otomo_ATEarth_ElementBoost_1": {
+    "localized_name": "Earth Emperor's Baton",
+    "description": "An accessory that raises the Attack of the Pal fighting alongside you. It also significantly increases their Ground damage."
+  },
+  "Otomo_ATElectricity_ElementBoost_1": {
+    "localized_name": "Lord of Lightning's Baton",
+    "description": "An accessory that raises the Attack of the Pal fighting alongside you. It also significantly increases their Electric damage."
+  },
+  "Otomo_ATFire_ElementBoost_1": {
+    "localized_name": "Flame Emperor's Baton",
+    "description": "An accessory that raises the Attack of the Pal fighting alongside you. It also significantly increases their Fire damage."
+  },
+  "Otomo_ATIce_ElementBoost_1": {
+    "localized_name": "Ice Emperor's Baton",
+    "description": "An accessory that raises the Attack of the Pal fighting alongside you. It also significantly increases their Ice damage."
+  },
+  "Otomo_ATLeaf_ElementBoost_1": {
+    "localized_name": "Spirit Emperor's Baton",
+    "description": "An accessory that raises the Attack of the Pal fighting alongside you. It also significantly increases their Grass damage."
+  },
+  "Otomo_ATNormal_ElementBoost_1": {
+    "localized_name": "Celestial Emperor's Baton",
+    "description": "An accessory that raises the Attack of the Pal fighting alongside you. It also significantly increases their Neutral damage."
+  },
+  "Otomo_ATWater_ElementBoost_1": {
+    "localized_name": "Lord of the Sea's Baton",
+    "description": "An accessory that raises the Attack of the Pal fighting alongside you. It also significantly increases their Water damage."
+  },
   "Otomo_Attack_up1": {
     "localized_name": "Attack Support Whistle",
-    "description": "An accessory that slightly raises the Attack of the Pal fighting alongside you."
+    "description": "An accessory that raises the Attack of the Pal fighting alongside you."
   },
   "Otomo_Attack_up2": {
-    "localized_name": "Attack Support Whistle +1",
+    "localized_name": "Attack Support Whistle",
     "description": "An accessory that raises the Attack of the Pal fighting alongside you."
   },
   "Otomo_Attack_up3": {
-    "localized_name": "Attack Support Whistle +2",
-    "description": "An accessory that greatly raises the Attack of the Pal fighting alongside you."
+    "localized_name": "Attack Support Whistle",
+    "description": "An accessory that raises the Attack of the Pal fighting alongside you."
+  },
+  "Otomo_DFDark_ElementBoost_1": {
+    "localized_name": "Lyleen Noct's Talisman",
+    "description": "An accessory that raises the Defense of the Pal fighting alongside you. It also significantly increases their Dark damage."
+  },
+  "Otomo_DFDragon_ElementBoost_1": {
+    "localized_name": "Jetragon's Talisman",
+    "description": "An accessory that raises the Defense of the Pal fighting alongside you. It also significantly increases their Dragon damage."
+  },
+  "Otomo_DFEarth_ElementBoost_1": {
+    "localized_name": "Anubis's Talisman",
+    "description": "An accessory that raises the Defense of the Pal fighting alongside you. It also significantly increases their Ground damage."
+  },
+  "Otomo_DFElectricity_ElementBoost_1": {
+    "localized_name": "Orserk's Talisman",
+    "description": "An accessory that raises the Defense of the Pal fighting alongside you. It also significantly increases their Electric damage."
+  },
+  "Otomo_DFFire_ElementBoost_1": {
+    "localized_name": "Blazamut's Talisman",
+    "description": "An accessory that raises the Defense of the Pal fighting alongside you. It also significantly increases their Fire damage."
+  },
+  "Otomo_DFIce_ElementBoost_1": {
+    "localized_name": "Frostallion's Talisman",
+    "description": "An accessory that raises the Defense of the Pal fighting alongside you. It also significantly increases their Ice damage."
+  },
+  "Otomo_DFLeaf_ElementBoost_1": {
+    "localized_name": "Lyleen's Talisman",
+    "description": "An accessory that raises the Defense of the Pal fighting alongside you. It also significantly increases their Grass damage."
+  },
+  "Otomo_DFNormal_ElementBoost_1": {
+    "localized_name": "Hartalis's Talisman",
+    "description": "An accessory that raises the Defense of the Pal fighting alongside you. It also significantly increases their Neutral damage."
+  },
+  "Otomo_DFWater_ElementBoost_1": {
+    "localized_name": "Neptilius's Talisman",
+    "description": "An accessory that raises the Defense of the Pal fighting alongside you. It also significantly increases their Water damage."
   },
   "Otomo_Defense_up1": {
     "localized_name": "Defense Support Whistle",
-    "description": "An accessory that slightly raises the Defense of the Pal fighting alongside you."
+    "description": "An accessory that raises the Defense of the Pal fighting alongside you."
   },
   "Otomo_Defense_up2": {
-    "localized_name": "Defense Support Whistle +1",
+    "localized_name": "Defense Support Whistle",
     "description": "An accessory that raises the Defense of the Pal fighting alongside you."
   },
   "Otomo_Defense_up3": {
-    "localized_name": "Defense Support Whistle +2",
-    "description": "An accessory that greatly raises the Defense of the Pal fighting alongside you."
+    "localized_name": "Defense Support Whistle",
+    "description": "An accessory that raises the Defense of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Dark_1": {
     "localized_name": "Dark Support Whistle",
-    "description": "An accessory that slightly raises the Dark damage of the Pal fighting alongside you."
+    "description": "An accessory that raises the Dark damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Dark_2": {
-    "localized_name": "Dark Support Whistle +1",
+    "localized_name": "Dark Support Whistle",
     "description": "An accessory that raises the Dark damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Dark_3": {
-    "localized_name": "Dark Support Whistle +2",
-    "description": "An accessory that greatly raises the Dark damage of the Pal fighting alongside you."
+    "localized_name": "Dark Support Whistle",
+    "description": "An accessory that raises the Dark damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Dragon_1": {
     "localized_name": "Dragon Support Whistle",
-    "description": "An accessory that slightly raises the Dragon damage of the Pal fighting alongside you."
+    "description": "An accessory that raises the Dragon damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Dragon_2": {
-    "localized_name": "Dragon Support Whistle +1",
+    "localized_name": "Dragon Support Whistle",
     "description": "An accessory that raises the Dragon damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Dragon_3": {
-    "localized_name": "Dragon Support Whistle +2",
-    "description": "An accessory that greatly raises the Dragon damage of the Pal fighting alongside you."
+    "localized_name": "Dragon Support Whistle",
+    "description": "An accessory that raises the Dragon damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Earth_1": {
     "localized_name": "Ground Support Whistle",
-    "description": "An accessory that slightly raises the Ground damage of the Pal fighting alongside you."
+    "description": "An accessory that raises the Ground damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Earth_2": {
-    "localized_name": "Ground Support Whistle +1",
+    "localized_name": "Ground Support Whistle",
     "description": "An accessory that raises the Ground damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Earth_3": {
-    "localized_name": "Ground Support Whistle +2",
-    "description": "An accessory that greatly raises the Ground damage of the Pal fighting alongside you."
+    "localized_name": "Ground Support Whistle",
+    "description": "An accessory that raises the Ground damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Electricity_1": {
     "localized_name": "Electric Support Whistle",
-    "description": "An accessory that slightly raises the Electric damage of the Pal fighting alongside you."
+    "description": "An accessory that raises the Electric damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Electricity_2": {
-    "localized_name": "Electric Support Whistle +1",
+    "localized_name": "Electric Support Whistle",
     "description": "An accessory that raises the Electric damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Electricity_3": {
-    "localized_name": "Electric Support Whistle +2",
-    "description": "An accessory that greatly raises the Electric damage of the Pal fighting alongside you."
+    "localized_name": "Electric Support Whistle",
+    "description": "An accessory that raises the Electric damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Fire_1": {
     "localized_name": "Fire Support Whistle",
-    "description": "An accessory that slightly raises the Fire damage of the Pal fighting alongside you."
+    "description": "An accessory that raises the Fire damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Fire_2": {
-    "localized_name": "Fire Support Whistle +1",
+    "localized_name": "Fire Support Whistle",
     "description": "An accessory that raises the Fire damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Fire_3": {
-    "localized_name": "Fire Support Whistle +2",
-    "description": "An accessory that greatly raises the Fire damage of the Pal fighting alongside you."
+    "localized_name": "Fire Support Whistle",
+    "description": "An accessory that raises the Fire damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Ice_1": {
     "localized_name": "Ice Support Whistle",
-    "description": "An accessory that slightly raises the Ice damage of the Pal fighting alongside you."
+    "description": "An accessory that raises the Ice damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Ice_2": {
-    "localized_name": "Ice Support Whistle +1",
+    "localized_name": "Ice Support Whistle",
     "description": "An accessory that raises the Ice damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Ice_3": {
-    "localized_name": "Ice Support Whistle +2",
-    "description": "An accessory that greatly raises the Ice damage of the Pal fighting alongside you."
+    "localized_name": "Ice Support Whistle",
+    "description": "An accessory that raises the Ice damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Leaf_1": {
     "localized_name": "Grass Support Whistle",
-    "description": "An accessory that slightly raises the Grass damage of the Pal fighting alongside you."
+    "description": "An accessory that raises the Grass damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Leaf_2": {
-    "localized_name": "Grass Support Whistle +1",
+    "localized_name": "Grass Support Whistle",
     "description": "An accessory that raises the Grass damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Leaf_3": {
-    "localized_name": "Grass Support Whistle +2",
-    "description": "An accessory that greatly raises the Grass damage of the Pal fighting alongside you."
+    "localized_name": "Grass Support Whistle",
+    "description": "An accessory that raises the Grass damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Normal_1": {
     "localized_name": "Neutral Support Whistle",
-    "description": "An accessory that slightly raises the Neutral damage of the Pal fighting alongside you."
+    "description": "An accessory that raises the Neutral damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Normal_2": {
-    "localized_name": "Neutral Support Whistle +1",
+    "localized_name": "Neutral Support Whistle",
     "description": "An accessory that raises the Neutral damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Normal_3": {
-    "localized_name": "Neutral Support Whistle +2",
-    "description": "An accessory that greatly raises the Neutral damage of the Pal fighting alongside you."
+    "localized_name": "Neutral Support Whistle",
+    "description": "An accessory that raises the Neutral damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Water_1": {
     "localized_name": "Water Support Whistle",
-    "description": "An accessory that slightly raises the Water damage of the Pal fighting alongside you."
+    "description": "An accessory that raises the Water damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Water_2": {
-    "localized_name": "Water Support Whistle +1",
+    "localized_name": "Water Support Whistle",
     "description": "An accessory that raises the Water damage of the Pal fighting alongside you."
   },
   "Otomo_ElementBoost_Water_3": {
-    "localized_name": "Water Support Whistle +2",
-    "description": "An accessory that greatly raises the Water damage of the Pal fighting alongside you."
+    "localized_name": "Water Support Whistle",
+    "description": "An accessory that raises the Water damage of the Pal fighting alongside you."
+  },
+  "Otomo_PalConfidence_Increase_1": {
+    "localized_name": "Ring of Trust",
+    "description": "Equipping this makes it easier to increase your Trust with your Pals."
   },
   "Otomo_PalExp_Increase_1": {
     "localized_name": "Growth Acceleration Bell",
-    "description": "An accessory that slightly raises Pal EXP."
+    "description": "An accessory that raises Pal EXP."
   },
   "Otomo_PalExp_Increase_2": {
-    "localized_name": "Growth Acceleration Bell +1",
+    "localized_name": "Growth Acceleration Bell",
     "description": "An accessory that raises Pal EXP."
   },
   "Otomo_PalExp_Increase_3": {
-    "localized_name": "Growth Acceleration Bell +2",
-    "description": "An accessory that greatly raises Pal EXP."
+    "localized_name": "Growth Acceleration Bell",
+    "description": "An accessory that raises Pal EXP."
   },
   "OverheatRifle": {
     "localized_name": "Overheat Rifle",
@@ -4945,7 +6145,7 @@
   },
   "OverheatRifleBullet": {
     "localized_name": "Overheat Rifle Ammo",
-    "description": "Ammo for the Overheat Rifle and similar weapons."
+    "description": "Ammo for the Overheat Rifle and similar weapons. Can be crafted at WeaponFactory Dirty 04."
   },
   "OverheatRifle_2": {
     "localized_name": "Overheat Rifle",
@@ -4963,6 +6163,78 @@
     "localized_name": "Overheat Rifle",
     "description": "An assault rifle capable of firing endlessly without reloading. Prolonged bursts cause overheating, leaving you exposed. Use with caution."
   },
+  "PalAwakening_Dark": {
+    "localized_name": "Dark Awakening Crystal",
+    "description": "A crystal formed from condensed World Tree energy. It awakens <img id=|ElemIcon Dark|/><uiCommon id=|COMMON ELEMENT NAME Dark| style=|Elem Dark|/> Pals, releasing their hidden power."
+  },
+  "PalAwakening_Dragon": {
+    "localized_name": "Dragon Awakening Crystal",
+    "description": "A crystal formed from condensed World Tree energy. It awakens <img id=|ElemIcon Dragon|/><uiCommon id=|COMMON ELEMENT NAME Dragon| style=|Elem Dragon|/> Pals, releasing their hidden power."
+  },
+  "PalAwakening_Electric": {
+    "localized_name": "Electric Awakening Crystal",
+    "description": "A crystal formed from condensed World Tree energy. It awakens <img id=|ElemIcon Electric|/><uiCommon id=|COMMON ELEMENT NAME Electricity| style=|Elem Electric|/> Pals, releasing their hidden power."
+  },
+  "PalAwakening_Fire": {
+    "localized_name": "Fire Awakening Crystal",
+    "description": "A crystal formed from condensed World Tree energy. It awakens <img id=|ElemIcon Fire|/><uiCommon id=|COMMON ELEMENT NAME Fire| style=|Elem Fire|/> Pals, releasing their hidden power."
+  },
+  "PalAwakening_Grass": {
+    "localized_name": "Grass Awakening Crystal",
+    "description": "A crystal formed from condensed World Tree energy. It awakens <img id=|ElemIcon Grass|/><uiCommon id=|COMMON ELEMENT NAME Leaf| style=|Elem Grass|/> Pals, releasing their hidden power."
+  },
+  "PalAwakening_Ground": {
+    "localized_name": "Ground Awakening Crystal",
+    "description": "A crystal formed from condensed World Tree energy. It awakens <img id=|ElemIcon Ground|/><uiCommon id=|COMMON ELEMENT NAME Earth| style=|Elem Ground|/> Pals, releasing their hidden power."
+  },
+  "PalAwakening_Ice": {
+    "localized_name": "Ice Awakening Crystal",
+    "description": "A crystal formed from condensed World Tree energy. It awakens <img id=|ElemIcon Ice|/><uiCommon id=|COMMON ELEMENT NAME Ice| style=|Elem Ice|/> Pals, releasing their hidden power."
+  },
+  "PalAwakening_Material_Dark": {
+    "localized_name": "Dark Radiant Gem",
+    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of <img id=|ElemIcon Dark|/><uiCommon id=|COMMON ELEMENT NAME Dark| style=|Elem Dark|/> Pals."
+  },
+  "PalAwakening_Material_Dragon": {
+    "localized_name": "Dragon Radiant Gem",
+    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of <img id=|ElemIcon Dragon|/><uiCommon id=|COMMON ELEMENT NAME Dragon| style=|Elem Dragon|/> Pals."
+  },
+  "PalAwakening_Material_Electric": {
+    "localized_name": "Electric Radiant Gem",
+    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of <img id=|ElemIcon Electric|/><uiCommon id=|COMMON ELEMENT NAME Electricity| style=|Elem Electric|/> Pals."
+  },
+  "PalAwakening_Material_Fire": {
+    "localized_name": "Fire Radiant Gem",
+    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of <img id=|ElemIcon Fire|/><uiCommon id=|COMMON ELEMENT NAME Fire| style=|Elem Fire|/> Pals."
+  },
+  "PalAwakening_Material_Grass": {
+    "localized_name": "Grass Radiant Gem",
+    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of <img id=|ElemIcon Grass|/><uiCommon id=|COMMON ELEMENT NAME Leaf| style=|Elem Grass|/> Pals."
+  },
+  "PalAwakening_Material_Ground": {
+    "localized_name": "Ground Radiant Gem",
+    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of <img id=|ElemIcon Ground|/><uiCommon id=|COMMON ELEMENT NAME Earth| style=|Elem Ground|/> Pals."
+  },
+  "PalAwakening_Material_Ice": {
+    "localized_name": "Ice Radiant Gem",
+    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of <img id=|ElemIcon Ice|/><uiCommon id=|COMMON ELEMENT NAME Ice| style=|Elem Ice|/> Pals."
+  },
+  "PalAwakening_Material_Neutral": {
+    "localized_name": "Neutral Radiant Gem",
+    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of <img id=|ElemIcon Neutral|/><uiCommon id=|COMMON ELEMENT NAME Normal| style=|Elem Neutral|/> Pals."
+  },
+  "PalAwakening_Material_Water": {
+    "localized_name": "Water Radiant Gem",
+    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of <img id=|ElemIcon Water|/><uiCommon id=|COMMON ELEMENT NAME Water| style=|Elem Water|/> Pals."
+  },
+  "PalAwakening_Neutral": {
+    "localized_name": "Neutral Awakening Crystal",
+    "description": "A crystal formed from condensed World Tree energy. It awakens <img id=|ElemIcon Neutral|/><uiCommon id=|COMMON ELEMENT NAME Normal| style=|Elem Neutral|/> Pals, releasing their hidden power."
+  },
+  "PalAwakening_Water": {
+    "localized_name": "Water Awakening Crystal",
+    "description": "A crystal formed from condensed World Tree energy. It awakens <img id=|ElemIcon Water|/><uiCommon id=|COMMON ELEMENT NAME Water| style=|Elem Water|/> Pals, releasing their hidden power."
+  },
   "PalCrystal_Ex": {
     "localized_name": "Ancient Civilization Parts",
     "description": "Debris excavated from ancient ruins. Contains abundant information on lost technology. Extremely valuable, people from all walks of life are now seeking such crystals."
@@ -4977,7 +6249,7 @@
   },
   "PalDopingShotBullet": {
     "localized_name": "Boost Gun Ammo",
-    "description": "Ammo for the Boost Gun and similar weapons."
+    "description": "Ammo for the Boost Gun and similar weapons. Can be crafted at WeaponFactory Dirty 01."
   },
   "PalDopingShot_2": {
     "localized_name": "Megaboost Gun",
@@ -5127,6 +6399,30 @@
     "localized_name": "Huge Verdant Egg",
     "description": "A PalEgg Leaf 05. A verdant spirit grows within—as if a monster is about to be born. Place in a Egg Incubator to incubate it."
   },
+  "PalEgg_MutationPal": {
+    "localized_name": "Huge Mutated Egg",
+    "description": "[WIP] Description not finalized. A PalEgg MutationPal. You can feel the restless aura of a strange soul, as if a monster is about to be born. Place it in a Egg Incubator to hatch it."
+  },
+  "PalEgg_MutationPal_01": {
+    "localized_name": "Mutated Egg",
+    "description": "A PalEgg MutationPal 01. An egg that is extremely rarely obtained, having undergone a special mutation. Place it in a Egg Incubator to incubate it."
+  },
+  "PalEgg_MutationPal_02": {
+    "localized_name": "Mutated Egg",
+    "description": "A PalEgg MutationPal 02. An egg that is extremely rarely obtained, having undergone a special mutation. Place it in a Egg Incubator to incubate it."
+  },
+  "PalEgg_MutationPal_03": {
+    "localized_name": "Large Mutated Egg",
+    "description": "A PalEgg MutationPal 03. An egg that is extremely rarely obtained, having undergone a special mutation. Place it in a Egg Incubator to incubate it."
+  },
+  "PalEgg_MutationPal_04": {
+    "localized_name": "Large Mutated Egg",
+    "description": "A PalEgg MutationPal 04. An egg that is extremely rarely obtained, having undergone a special mutation. Place it in a Egg Incubator to incubate it."
+  },
+  "PalEgg_MutationPal_05": {
+    "localized_name": "Huge Mutated Egg",
+    "description": "A PalEgg MutationPal 05. An egg that is extremely rarely obtained, having undergone a special mutation. Place it in a Egg Incubator to incubate it."
+  },
   "PalEgg_Normal_01": {
     "localized_name": "Common Egg",
     "description": "A PalEgg Normal 01. Something gentle moves within. Place in a Egg Incubator to incubate it."
@@ -5167,9 +6463,29 @@
     "localized_name": "Huge Damp Egg",
     "description": "A PalEgg Water 05. A tranquil spirit sways within—as if a monster is about to be born. Place in a Egg Incubator to incubate it."
   },
+  "PalEgg_WorldTree_01": {
+    "localized_name": "Ominous Egg",
+    "description": "An PalEgg WorldTree 01. A mysterious egg imbued with the energy of the World Tree. Place it in a Egg Incubator to incubate it."
+  },
+  "PalEgg_WorldTree_02": {
+    "localized_name": "Ominous Egg",
+    "description": "An PalEgg WorldTree 02. A mysterious egg imbued with the energy of the World Tree. Place it in a Egg Incubator to incubate it."
+  },
+  "PalEgg_WorldTree_03": {
+    "localized_name": "Large Ominous Egg",
+    "description": "An PalEgg WorldTree 03. A mysterious egg imbued with the energy of the World Tree. Place it in a Egg Incubator to incubate it."
+  },
+  "PalEgg_WorldTree_04": {
+    "localized_name": "Large Ominous Egg",
+    "description": "An PalEgg WorldTree 04. A mysterious egg imbued with the energy of the World Tree. Place it in a Egg Incubator to incubate it."
+  },
+  "PalEgg_WorldTree_05": {
+    "localized_name": "Huge Ominous Egg",
+    "description": "An PalEgg WorldTree 05. A mysterious egg imbued with the energy of the World Tree. Place it in a Egg Incubator to incubate it."
+  },
   "PalFluid": {
-    "localized_name": "Pal Fluids",
-    "description": "Body fluids taken from a Pal. Useful for its high viscosity."
+    "localized_name": "Aquatic Pal Fluids",
+    "description": "Bodily fluids taken from a Water Pal. Their high viscosity makes them a handy material."
   },
   "PalGenderReverse": {
     "localized_name": "Pal Reverser",
@@ -5239,6 +6555,122 @@
     "localized_name": "High Quality Pal Oil",
     "description": "High-quality oil that can be extracted from Pal. Necessary for making Polymer."
   },
+  "PalPassiveSkillChange_AutoHPRegeneRate_Passive": {
+    "localized_name": "Implant: Healing Coach",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_CraftSpeed_up3": {
+    "localized_name": "Disposable Implant: Remarkable Craftsmanship",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_Deffence_up3": {
+    "localized_name": "Disposable Implant: Diamond Body",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_EternalFlame": {
+    "localized_name": "Disposable Implant: Eternal Flame",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_Invader": {
+    "localized_name": "Disposable Implant: Invader",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_Legend": {
+    "localized_name": "Disposable Implant: Legend",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_MoveSpeed_up_3": {
+    "localized_name": "Disposable Implant: Swift",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_MutationPal_Babysitter": {
+    "localized_name": "Disposable Implant: Babysitter",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_MutationPal_ExplosionResist": {
+    "localized_name": "Disposable Implant: Heavily Armored",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_MutationPal_Immortal": {
+    "localized_name": "Disposable Implant: Immortality",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_MutationPal_Mutant": {
+    "localized_name": "Disposable Implant: Idiosyncratic",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_Nushi": {
+    "localized_name": "Disposable Implant: Lunker",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_PAL_ALLAttack_up3": {
+    "localized_name": "Disposable Implant: Demon God",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_PAL_FullStomach_Down_3": {
+    "localized_name": "Disposable Implant: Mastery of Fasting",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_PAL_Sanity_Down_3": {
+    "localized_name": "Disposable Implant: Heart of the Immovable King",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_Rare": {
+    "localized_name": "Disposable Implant: Lucky",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_RideJumpCount_Increase2": {
+    "localized_name": "Disposable Implant: Skymarcher",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_Salvation": {
+    "localized_name": "Disposable Implant: Savior",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_Stamina_Up_3": {
+    "localized_name": "Disposable Implant: Eternal Engine",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_SwimSpeed_up_3": {
+    "localized_name": "Disposable Implant: King of the Waves",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_Vampire": {
+    "localized_name": "Disposable Implant: Vampiric",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_Witch": {
+    "localized_name": "Disposable Implant: Siren of the Void",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_ATK": {
+    "localized_name": "Disposable Implant: Double-Edged Holy Sword",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_ATK_DEF": {
+    "localized_name": "Disposable Implant: God of Destruction",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_CraftSpeed": {
+    "localized_name": "Disposable Implant: Demonic Grasp",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_DEF": {
+    "localized_name": "Disposable Implant: Sacred Flesh",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_FullStomach": {
+    "localized_name": "Disposable Implant: World Tree's Bounty",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_MoveSpeed": {
+    "localized_name": "Disposable Implant: Dimensional Leap",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_Sanity": {
+    "localized_name": "Disposable Implant: Hermit",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
   "PalPassiveSkillChange_CoolTimeReduction_Up_1": {
     "localized_name": "Implant: Serenity",
     "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
@@ -5288,7 +6720,7 @@
     "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_Nocturnal": {
-    "localized_name": "Implant: Nocturnal",
+    "localized_name": "Implant: Insomnia",
     "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_NonKilling": {
@@ -5337,6 +6769,14 @@
   },
   "PalPassiveSkillChange_PAL_Sanity_Down_3": {
     "localized_name": "Implant: Heart of the Immovable King",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_PlayerSP_DecreaseRate_Passive": {
+    "localized_name": "Implant: Wellness Watcher",
+    "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
+  },
+  "PalPassiveSkillChange_ReloadSpeedUp_Passive": {
+    "localized_name": "Implant: Reload Master",
     "description": "An implant embedded into a Pal's body to change its passive skill. When stored in Key Items, it allows you to select the corresponding passive skill at a Pal Surgery Table."
   },
   "PalPassiveSkillChange_SalePrice_Up_1": {
@@ -5395,6 +6835,14 @@
     "localized_name": "Pal Sphere",
     "description": "An item that captures Pals when thrown. This basic model is only effective on low level Pals."
   },
+  "PalSphere_Ancient_1": {
+    "localized_name": "Sol Sphere",
+    "description": "An item that captures Pals when thrown. A high-grade Sphere from an ancient civilization that secured coexistence with Pals."
+  },
+  "PalSphere_Ancient_2": {
+    "localized_name": "Ancient Sphere",
+    "description": "A tool that captures Pals when thrown. An ultimate Sphere created as the pinnacle of an ancient civilization, imbued with the power of the World Tree."
+  },
   "PalSphere_Exotic": {
     "localized_name": "Exotic Sphere",
     "description": "An item that captures Pals when thrown. Boasting incredible performance, it can capture Pals that fall outside regular standards."
@@ -5433,19 +6881,19 @@
   },
   "PalSummon_DarkMechaDragon": {
     "localized_name": "Xenolord Slab",
-    "description": "Slab depicting Xenolord . Offer to a Summoning Altar to summon an exceptionally powerful Lv 60 Xenolord ."
+    "description": "Slab depicting Xenolord. Offer to a Summoning Altar to summon an exceptionally powerful Lv 65 Xenolord."
   },
   "PalSummon_DarkMechaDragon_2": {
     "localized_name": "Xenolord (Ultra) Slab",
-    "description": "Slab depicting Xenolord . Offer to a Summoning Altar to summon an inconceivably powerful Lv ?? Xenolord ."
+    "description": "Slab depicting Xenolord. Offer to a Summoning Altar to summon an inconceivably powerful Lv ?? Xenolord."
   },
   "PalSummon_DarkMechaDragon_Parts": {
     "localized_name": "Xenolord Slab Fragment",
-    "description": "Fragment depicting Xenolord . Combine all of them to create a Slab."
+    "description": "Fragment depicting Xenolord. Combine all of them to create a Slab."
   },
   "PalSummon_DarkMechaDragon_Parts_2": {
     "localized_name": "Xenolord (Ultra) Slab Fragment",
-    "description": "Fragment overflowing with Xenolord 's energy. Combine all of them to create a Slab."
+    "description": "Fragment overflowing with Xenolord's energy. Combine all of them to create a Slab."
   },
   "PalSummon_KingBahamut_Dragon": {
     "localized_name": "Blazamut Ryu Slab",
@@ -5465,7 +6913,7 @@
   },
   "PalSummon_LegendDeer": {
     "localized_name": "Hartalis Slab",
-    "description": "Slab depicting Hartalis. Offer to a Summoning Altar to summon an exceptionally powerful Lv 65 Hartalis."
+    "description": "Slab depicting Hartalis. Offer to a Summoning Altar to summon an exceptionally powerful Lv 70 Hartalis."
   },
   "PalSummon_LegendDeer_2": {
     "localized_name": "Hartalis (Ultra) Slab",
@@ -5481,11 +6929,11 @@
   },
   "PalSummon_NightLady": {
     "localized_name": "Bellanoir's Slab",
-    "description": "Slab depicting Bellanoir. Offer to a Summoning Altar to summon a powerful Lv 30 Bellanoir."
+    "description": "Slab depicting Bellanoir. Offer to a Summoning Altar to summon a powerful Lv 35 Bellanoir."
   },
   "PalSummon_NightLady_Dark": {
     "localized_name": "Bellanoir Libero's Slab",
-    "description": "Slab depicting NightLady Dark. Offer to a Summoning Altar to summon an exceptionally powerful Lv 50 NightLady Dark."
+    "description": "Slab depicting NightLady Dark. Offer to a Summoning Altar to summon an exceptionally powerful Lv 45 NightLady Dark."
   },
   "PalSummon_NightLady_Dark_2": {
     "localized_name": "Bellanoir Libero (Ultra) Slab",
@@ -5528,7 +6976,7 @@
     "description": "The soul left behind by a highly trained Pal. It can draw out hidden abilities if offered to a Statue of Power."
   },
   "Pal_crystal_L": {
-    "localized_name": "Paldium Clump",
+    "localized_name": "Paldium Chunk",
     "description": "Crystals of PAL crystal"
   },
   "Pal_crystal_S": {
@@ -5681,7 +7129,7 @@
   },
   "Polymer": {
     "localized_name": "Polymer",
-    "description": "Made from refined oil. Required for producing various advanced items such as rifles."
+    "description": "Polymer made from refined oil. Required for producing various advanced items such as firearms. Can be crafted at Factory Hard 02."
   },
   "Poppy": {
     "localized_name": "Beautiful Flower",
@@ -5726,6 +7174,14 @@
   "PredatorCrystal": {
     "localized_name": "Predator Core",
     "description": "Core dropped by Predator Pals. It is filled with mysterious energy."
+  },
+  "Premium_Processed_Wood": {
+    "localized_name": "Mythical Wooden Board",
+    "description": "Planks made by processing mystical wood, emitting a faint light. They contain power beyond human understanding and make an ideal core material."
+  },
+  "Processed_Wood": {
+    "localized_name": "Wooden Board",
+    "description": "Planks made from processed wood for easier use. More versatile than raw logs, with a wide variety of uses. Can be crafted at Primitive Workbench."
   },
   "PumpActionShotgun": {
     "localized_name": "Pump-Action Shotgun",
@@ -5776,44 +7232,92 @@
     "description": "A rare crystal found only in Feybreak. Over many years, Paladium has condensed and transformed, now shining with a rainbow-like glow."
   },
   "Rankup_1": {
-    "localized_name": "Awakening Starfruit ☆1",
+    "localized_name": "Starfruit ☆1",
     "description": "A magical fruit, said to be seen only on the rarest of occasions. Raises a Pal’s rank from ☆0 to ☆1."
   },
   "Rankup_2": {
-    "localized_name": "Awakening Starfruit ☆2",
+    "localized_name": "Starfruit ☆2",
     "description": "A magical fruit, said to be seen only on the rarest of occasions. Raises a Pal’s rank from ☆1 to ☆2."
   },
   "Rankup_3": {
-    "localized_name": "Awakening Starfruit ☆3",
+    "localized_name": "Starfruit ☆3",
     "description": "A magical fruit, said to be seen only on the rarest of occasions. Raises a Pal’s rank from ☆2 to ☆3."
   },
   "Rankup_4": {
-    "localized_name": "Awakening Starfruit ☆4",
+    "localized_name": "Starfruit ☆4",
     "description": "A magical fruit, said to be seen only on the rarest of occasions. Raises a Pal’s rank from ☆3 to ☆4."
   },
   "Rankup_Arbitrary": {
-    "localized_name": "Ripe Awakening Starfruit",
+    "localized_name": "Ripe Starfruit",
     "description": "A magical fruit, said to be seen only on the rarest of occasions. Raises a Pal’s rank by one."
   },
   "ReinforcedArrow": {
     "localized_name": "Reinforced Arrow",
-    "description": "Enhanced arrows designed for use with the Compound Bow."
+    "description": "Enhanced arrows for shooting with Compound Bow. Can be crafted at Primitive Workbench."
   },
   "Relic": {
     "localized_name": "Lifmunk Effigy",
-    "description": "A mysterious Pal statue that can be found all around Palpagos Island. Players can enhance their abilities by making offerings to certain statues."
+    "description": "A mysterious Pal effigy that can be found all around the Palpagos Islands. Players can enhance their abilities by offering them to a certain statue."
+  },
+  "Relic_01": {
+    "localized_name": "Lamball Effigy",
+    "description": "A mysterious Pal effigy that can be found all around the Palpagos Islands. Players can enhance their abilities by offering them to a certain statue."
+  },
+  "Relic_02": {
+    "localized_name": "Pengullet Effigy",
+    "description": "A mysterious Pal effigy that can be found all around the Palpagos Islands. Players can enhance their abilities by offering them to a certain statue."
+  },
+  "Relic_03": {
+    "localized_name": "Munchill Effigy",
+    "description": "A mysterious Pal effigy that can be found all around the Palpagos Islands. Players can enhance their abilities by offering them to a certain statue."
+  },
+  "Relic_04": {
+    "localized_name": "Rooby Effigy",
+    "description": "A mysterious Pal effigy that can be found all around the Palpagos Islands. Players can enhance their abilities by offering them to a certain statue."
+  },
+  "Relic_05": {
+    "localized_name": "Herbil Effigy",
+    "description": "A mysterious Pal effigy that can be found all around the Palpagos Islands. Players can enhance their abilities by offering them to a certain statue."
+  },
+  "Relic_06": {
+    "localized_name": "Tanzee Effigy",
+    "description": "A mysterious Pal effigy that can be found all around the Palpagos Islands. Players can enhance their abilities by offering them to a certain statue."
+  },
+  "Relic_07": {
+    "localized_name": "Depresso Effigy",
+    "description": "A mysterious Pal effigy that can be found all around the Palpagos Islands. Players can enhance their abilities by offering them to a certain statue."
+  },
+  "Relic_08": {
+    "localized_name": "Cattiva Effigy",
+    "description": "A mysterious Pal effigy that can be found all around the Palpagos Islands. Players can enhance their abilities by offering them to a certain statue."
+  },
+  "Relic_09": {
+    "localized_name": "Lunaris Effigy",
+    "description": "A mysterious Pal effigy that can be found all around the Palpagos Islands. Players can enhance their abilities by offering them to a certain statue."
+  },
+  "Relic_10": {
+    "localized_name": "Relaxaurus Effigy",
+    "description": "A mysterious Pal effigy that can be found all around the Palpagos Islands. Players can enhance their abilities by offering them to a certain statue."
+  },
+  "Relic_11": {
+    "localized_name": "Yakumo Effigy",
+    "description": "A mysterious Pal effigy that can be found all around the Palpagos Islands. Players can enhance their abilities by offering them to a certain statue."
+  },
+  "Relic_12": {
+    "localized_name": "Mimog Effigy",
+    "description": "A mysterious Pal Effigy that suddenly comes into your possession when you capture many Pals. Players can enhance their abilities by offering them to a certain statue."
   },
   "RepairKit": {
-    "localized_name": "Repair Kit",
+    "localized_name": "Building Repair Kit",
     "description": "Tools for repairing structures. Use it on destroyed structures to repair them."
   },
   "RifleBullet": {
     "localized_name": "Rifle Ammo",
-    "description": "Ammo for Single-Shot Rifle and other similar weapons."
+    "description": "Ammo for the Single-Shot Rifle and similar weapons. Can be crafted at WeaponFactory Dirty 01."
   },
   "RoughBullet": {
     "localized_name": "Coarse Ammo",
-    "description": "Ammo for Musket, Makeshift Handgun, and other similar weapons."
+    "description": "Ammo for the Musket, Makeshift Handgun, and similar weapons. Can be crafted at WeaponFactory Dirty 01."
   },
   "Ruby": {
     "localized_name": "Ruby",
@@ -5901,7 +7405,7 @@
   },
   "SFArrow": {
     "localized_name": "Advanced Arrow",
-    "description": "Arrows made of Hexolite material, designed for use with the Advanced Bow."
+    "description": "Enhanced arrows for shooting with Advanced Bow. Can be crafted at Primitive Workbench."
   },
   "SFBow": {
     "localized_name": "Advanced Bow",
@@ -6027,6 +7531,10 @@
     "localized_name": "Hyper Shield",
     "description": "Strange shield made with Paldium technology. It automatically repairs itself after not taking damage for a while. Through repeated testing, the highest quality has been achieved."
   },
+  "Shield_07": {
+    "localized_name": "Ancient Shield",
+    "description": "A shield created using lost ancient technology. It automatically repairs itself after not taking damage for a while. Its performance is said to be impossible to reproduce in the modern era."
+  },
   "Shield_SF": {
     "localized_name": "Advanced Shield",
     "description": "Strange shield made with advanced technology. It automatically repairs itself after not taking damage for a while."
@@ -6037,7 +7545,7 @@
   },
   "ShotgunBullet": {
     "localized_name": "Shotgun Shell",
-    "description": "Ammo for shotguns and other similar weapons."
+    "description": "Ammo for shotgun and similar weapons. Can be crafted at WeaponFactory Dirty 01."
   },
   "SingleShotRifle": {
     "localized_name": "Single-Shot Rifle",
@@ -6095,6 +7603,10 @@
     "localized_name": "Water Skill Fruit: Bubble Blast",
     "description": "Use on a Pal to teach BubbleShot."
   },
+  "SkillCard_BubbleShower": {
+    "localized_name": "Dark Skill Fruit: Poison Shower",
+    "description": "Use on a Pal to teach BubbleShower."
+  },
   "SkillCard_ChargeCanon": {
     "localized_name": "Dragon Skill Fruit: Charge Cannon",
     "description": "Use on a Pal to teach ChargeCanon."
@@ -6140,7 +7652,7 @@
     "description": "Use on a Pal to teach DiversionLaser."
   },
   "SkillCard_DragonBreath": {
-    "localized_name": "Dragon Skill Fruit: Draconic Breath",
+    "localized_name": "Dragon Skill Fruit: Dragon Breath",
     "description": "Use on a Pal to teach DragonBreath."
   },
   "SkillCard_DragonCanon": {
@@ -6276,7 +7788,7 @@
     "description": "Use on a Pal to teach LockonLaser."
   },
   "SkillCard_MudShot": {
-    "localized_name": "Earth Skill Fruit: Bog Blast",
+    "localized_name": "Ground Skill Fruit: Bog Blast",
     "description": "Use on a Pal to teach MudShot."
   },
   "SkillCard_PoisonShot": {
@@ -6308,11 +7820,11 @@
     "description": "Use on a Pal to teach RipTide."
   },
   "SkillCard_RockBeat": {
-    "localized_name": "Earth Skill Fruit: Stone Beat",
+    "localized_name": "Ground Skill Fruit: Rocky Impact",
     "description": "Use on a Pal to teach RockBeat."
   },
   "SkillCard_RockLance": {
-    "localized_name": "Earth Skill Fruit: Rock Lance",
+    "localized_name": "Ground Skill Fruit: Rock Lance",
     "description": "Use on a Pal to teach RockLance."
   },
   "SkillCard_RootAttack": {
@@ -6324,12 +7836,16 @@
     "description": "Use on a Pal to teach RootLance."
   },
   "SkillCard_SandTornado": {
-    "localized_name": "Earth Skill Fruit: Sand Tornado",
+    "localized_name": "Ground Skill Fruit: Sand Tornado",
     "description": "Use on a Pal to teach SandTornado."
   },
   "SkillCard_SandTwister": {
-    "localized_name": "Earth Skill Fruit: Sand Twister",
+    "localized_name": "Ground Skill Fruit: Sand Twister",
     "description": "Use on a Pal to teach SandTwister."
+  },
+  "SkillCard_SeaGush": {
+    "localized_name": "Water Skill Fruit: Geyser Gush",
+    "description": "Use on a Pal to teach SeaGush."
   },
   "SkillCard_SeedMachinegun": {
     "localized_name": "Grass Skill Fruit: Seed Machine Gun",
@@ -6360,7 +7876,7 @@
     "description": "Use on a Pal to teach SpreadPulse."
   },
   "SkillCard_StoneShotgun": {
-    "localized_name": "Earth Skill Fruit: Stone Blast",
+    "localized_name": "Ground Skill Fruit: Stone Blast",
     "description": "Use on a Pal to teach StoneShotgun."
   },
   "SkillCard_ThreeThunder": {
@@ -6368,7 +7884,7 @@
     "description": "Use on a Pal to teach ThreeThunder."
   },
   "SkillCard_ThrowRock": {
-    "localized_name": "Earth Skill Fruit: Stone Cannon",
+    "localized_name": "Ground Skill Fruit: Stone Cannon",
     "description": "Use on a Pal to teach ThrowRock."
   },
   "SkillCard_ThunderBall": {
@@ -6396,7 +7912,7 @@
     "description": "Use on a Pal to teach Thunderbolt."
   },
   "SkillCard_Tremor": {
-    "localized_name": "Earth Skill Fruit: Rockburst",
+    "localized_name": "Ground Skill Fruit: Rockburst",
     "description": "Use on a Pal to teach Tremor."
   },
   "SkillCard_TriSpark": {
@@ -6414,6 +7930,10 @@
   "SkillCard_WaterGun": {
     "localized_name": "Water Skill Fruit: Aqua Gun",
     "description": "Use on a Pal to teach WaterGun."
+  },
+  "SkillCard_WindBurst": {
+    "localized_name": "Grass Skill Fruit: Wind Blast",
+    "description": "Use on a Pal to teach WindBurst."
   },
   "SkillCard_WindCutter": {
     "localized_name": "Grass Skill Fruit: Wind Cutter",
@@ -6463,6 +7983,10 @@
     "localized_name": "Smokie's Harness",
     "description": "Harness for Smokie. Activate its Partner Skill to detect the location of nearby Chromite."
   },
+  "SkillUnlock_BlackPuppy_Ice": {
+    "localized_name": "Smokie Cryst's Harness",
+    "description": "Harness for BlackPuppy Ice. Activate its Partner Skill to detect the location of nearby Chromite."
+  },
   "SkillUnlock_BlueDragon": {
     "localized_name": "Azurobe Saddle",
     "description": "Saddle for safely riding Azurobe."
@@ -6470,6 +7994,10 @@
   "SkillUnlock_BlueDragon_Ice": {
     "localized_name": "Azurobe Cryst Saddle",
     "description": "Saddle for safely riding BlueDragon Ice."
+  },
+  "SkillUnlock_BlueSkyDragon": {
+    "localized_name": "Shaolong Saddle",
+    "description": "Saddle for safely riding Shaolong."
   },
   "SkillUnlock_BlueThunderHorse": {
     "localized_name": "Azurmane Saddle",
@@ -6487,9 +8015,17 @@
     "localized_name": "Tocotoco's Gloves",
     "description": "Gloves for gently holding Tocotoco. Activate its Partner Skill to hold Tocotoco and use it to fire explosive eggs."
   },
+  "SkillUnlock_CubeTurtle": {
+    "localized_name": "Tetroise Saddle",
+    "description": "Saddle for safely riding Tetroise ."
+  },
+  "SkillUnlock_CubeTurtle_Neutral": {
+    "localized_name": "Tetroise Primo Saddle",
+    "description": "Saddle for safely riding CubeTurtle Neutral."
+  },
   "SkillUnlock_DarkMechaDragon": {
     "localized_name": "Xenolord Saddle",
-    "description": "Saddle for safely riding Xenolord ."
+    "description": "Saddle for safely riding Xenolord."
   },
   "SkillUnlock_DarkMutant": {
     "localized_name": "en text's Power Converter",
@@ -6502,6 +8038,10 @@
   "SkillUnlock_Deer_Ground": {
     "localized_name": "Eikthyrdeer Terra Saddle",
     "description": "Saddle for safely riding Deer Ground."
+  },
+  "SkillUnlock_DomeArmorDragon": {
+    "localized_name": "Aegidron Saddle",
+    "description": "Saddle for safely riding Aegidron."
   },
   "SkillUnlock_DreamDemon": {
     "localized_name": "Daedream's Necklace",
@@ -6591,9 +8131,25 @@
     "localized_name": "Maraith Saddle",
     "description": "Saddle for safely riding Maraith."
   },
+  "SkillUnlock_GhostDragon": {
+    "localized_name": "Eidrolon Saddle",
+    "description": "Saddle for safely riding Eidrolon."
+  },
+  "SkillUnlock_GhostDragon_Fire": {
+    "localized_name": "Eidrolon Ignis Saddle",
+    "description": "Saddle for safely riding GhostDragon Fire."
+  },
   "SkillUnlock_GoldenHorse": {
     "localized_name": "Gildane Saddle",
     "description": "Saddle for safely riding Gildane."
+  },
+  "SkillUnlock_GrassGolem": {
+    "localized_name": "Dualith Saddle",
+    "description": "Saddle for safely riding Dualith. Grants the ability to fire a powerful Grass-element laser while mounted."
+  },
+  "SkillUnlock_GrassGolem_Dark": {
+    "localized_name": "Dualith Noct Saddle",
+    "description": "Saddle for safely riding GrassGolem Dark. Grants the ability to fire a powerful Dark-element laser while mounted."
   },
   "SkillUnlock_GrassMammoth": {
     "localized_name": "Mammorest Saddle",
@@ -6667,6 +8223,10 @@
     "localized_name": "Polapup Saddle",
     "description": "Saddle for safely riding Polapup."
   },
+  "SkillUnlock_IceSeal_Ground": {
+    "localized_name": "Polapup Terra Saddle",
+    "description": "Saddle for safely riding IceSeal Ground."
+  },
   "SkillUnlock_JetDragon": {
     "localized_name": "Jetragon's Missile Launcher",
     "description": "Makes Jetragon fire missiles when ridden."
@@ -6687,9 +8247,21 @@
     "localized_name": "Blazamut Ryu Saddle",
     "description": "Saddle for safely riding KingBahamut Dragon."
   },
+  "SkillUnlock_KingSunfish": {
+    "localized_name": "Solmora Saddle",
+    "description": "Saddle for safely riding Solmora."
+  },
+  "SkillUnlock_KingSunfish_Thunder": {
+    "localized_name": "Solmora Lux Saddle",
+    "description": "Saddle for safely riding KingSunfish Thunder."
+  },
   "SkillUnlock_Kirin": {
     "localized_name": "Univolt Saddle",
     "description": "Saddle for safely riding Univolt."
+  },
+  "SkillUnlock_Kirin_Ice": {
+    "localized_name": "Univolt Cryst Saddle",
+    "description": "Saddle for safely riding Kirin Ice."
   },
   "SkillUnlock_Kitsunebi": {
     "localized_name": "Foxparks' Harness",
@@ -6715,6 +8287,10 @@
     "localized_name": "Hartalis Saddle",
     "description": "Saddle for safely riding Hartalis. Grants the ability to generate a barrier that blocks incoming attacks."
   },
+  "SkillUnlock_LotusDragon": {
+    "localized_name": "Ophydia Saddle",
+    "description": "Saddle for safely riding Ophydia."
+  },
   "SkillUnlock_Manticore": {
     "localized_name": "Blazehowl Saddle",
     "description": "Saddle for safely riding Blazehowl."
@@ -6726,6 +8302,10 @@
   "SkillUnlock_Monkey": {
     "localized_name": "Tanzee's Assault Rifle",
     "description": "Assault rifle made specifically for Tanzee. Activate its Partner Skill, and Tanzee will enter gunner mode and begin shooting at nearby enemies."
+  },
+  "SkillUnlock_Monkey_Fire": {
+    "localized_name": "Tanzee Ignis's Assault Rifle",
+    "description": "Assault rifle made specifically for Monkey Fire. Activate its Partner Skill, and Monkey Fire will enter gunner mode and begin shooting at nearby enemies."
   },
   "SkillUnlock_MoonQueen": {
     "localized_name": "Selyne Saddle",
@@ -6758,6 +8338,10 @@
   "SkillUnlock_NightBlueHorse": {
     "localized_name": "Starryon Saddle",
     "description": "Saddle for safely riding Starryon."
+  },
+  "SkillUnlock_NightBlueHorse_Neutral": {
+    "localized_name": "Starryon Primo Saddle",
+    "description": "Saddle for safely riding NightBlueHorse Neutral."
   },
   "SkillUnlock_Penguin": {
     "localized_name": "Pengullet Rocket Launcher",
@@ -6823,6 +8407,10 @@
     "localized_name": "Bastigor's Hammer",
     "description": "Saddle for safely riding Bastigor."
   },
+  "SkillUnlock_SumoDog": {
+    "localized_name": "Bulldosu Saddle",
+    "description": "Saddle for safely riding Bulldosu."
+  },
   "SkillUnlock_Suzaku": {
     "localized_name": "Suzaku Saddle",
     "description": "Saddle for safely riding Suzaku."
@@ -6831,13 +8419,29 @@
     "localized_name": "Suzaku Aqua Saddle",
     "description": "Saddle for safely riding Suzaku Water."
   },
+  "SkillUnlock_ThiefBird": {
+    "localized_name": "Roujay Saddle",
+    "description": "Saddle for safely riding Roujay."
+  },
   "SkillUnlock_ThunderBird": {
     "localized_name": "Beakon Saddle",
     "description": "Saddle for safely riding Beakon."
   },
+  "SkillUnlock_ThunderBird_Ice": {
+    "localized_name": "Beakon Cryst Saddle",
+    "description": "Saddle for safely riding ThunderBird Ice."
+  },
   "SkillUnlock_ThunderDog": {
     "localized_name": "Rayhound Saddle",
     "description": "Saddle for safely riding Rayhound."
+  },
+  "SkillUnlock_ThunderFluffyBird": {
+    "localized_name": "Dynamoff Saddle",
+    "description": "Saddle for safely riding Dynamoff."
+  },
+  "SkillUnlock_Thunderdog_Ice": {
+    "localized_name": "Rayhound Cryst Saddle",
+    "description": "Saddle for safely riding Thunderdog Ice."
   },
   "SkillUnlock_TropicalOstrich": {
     "localized_name": "Palumba Saddle",
@@ -6859,6 +8463,14 @@
     "localized_name": "Reptyro Cryst Saddle",
     "description": "Saddle for safely riding VolcanicMonster Ice."
   },
+  "SkillUnlock_VolcanoDragon": {
+    "localized_name": "Moldron Saddle",
+    "description": "Saddle for safely riding Moldron."
+  },
+  "SkillUnlock_VolcanoDragon_Ice": {
+    "localized_name": "Moldron Cryst Saddle",
+    "description": "Saddle for safely riding VolcanoDragon Ice."
+  },
   "SkillUnlock_WeaselDragon": {
     "localized_name": "Chillet Saddle",
     "description": "Saddle for safely riding Chillet."
@@ -6874,6 +8486,10 @@
   "SkillUnlock_WhiteDeer": {
     "localized_name": "Celesdir Saddle",
     "description": "Saddle for safely riding Celesdir."
+  },
+  "SkillUnlock_WhiteDeer_Dark": {
+    "localized_name": "Celesdir Noct Saddle",
+    "description": "Saddle for safely riding WhiteDeer Dark."
   },
   "SkillUnlock_WhiteShieldDragon": {
     "localized_name": "Silvegis Saddle",
@@ -6895,6 +8511,162 @@
     "localized_name": "Wumpo Botan Saddle",
     "description": "Saddle for safely riding Yeti Grass."
   },
+  "SkyAssaultRifle": {
+    "localized_name": "Heavy Assault Rifle",
+    "description": "An assault rifle made from Soralite Ingots. It has been enhanced to handle powerful ammo while maintaining its versatility."
+  },
+  "SkyAssaultRifleBullet": {
+    "localized_name": "Heavy Assault Rifle Ammo",
+    "description": "Ammo for the Heavy Assault Rifle. Can be crafted at Ancient Workbench."
+  },
+  "SkyAssaultRifle_2": {
+    "localized_name": "Heavy Assault Rifle",
+    "description": "An assault rifle made from Soralite Ingots. It has been enhanced to handle powerful ammo while maintaining its versatility."
+  },
+  "SkyAssaultRifle_3": {
+    "localized_name": "Heavy Assault Rifle",
+    "description": "An assault rifle made from Soralite Ingots. It has been enhanced to handle powerful ammo while maintaining its versatility."
+  },
+  "SkyAssaultRifle_4": {
+    "localized_name": "Heavy Assault Rifle",
+    "description": "An assault rifle made from Soralite Ingots. It has been enhanced to handle powerful ammo while maintaining its versatility."
+  },
+  "SkyAssaultRifle_5": {
+    "localized_name": "Heavy Assault Rifle",
+    "description": "An assault rifle made from Soralite Ingots. It has been enhanced to handle powerful ammo while maintaining its versatility."
+  },
+  "SkyBeamSword": {
+    "localized_name": "Laser Sword",
+    "description": "A Beam Sword made from Soralite Ingots. A close-range weapon that instantly cuts targets using its high-output energy blade."
+  },
+  "SkyBeamSword_2": {
+    "localized_name": "Laser Sword",
+    "description": "A Beam Sword made from Soralite Ingots. A close-range weapon that instantly cuts targets using its high-output energy blade."
+  },
+  "SkyBeamSword_3": {
+    "localized_name": "Laser Sword",
+    "description": "A Beam Sword made from Soralite Ingots. A close-range weapon that instantly cuts targets using its high-output energy blade."
+  },
+  "SkyBeamSword_4": {
+    "localized_name": "Laser Sword",
+    "description": "A Beam Sword made from Soralite Ingots. A close-range weapon that instantly cuts targets using its high-output energy blade."
+  },
+  "SkyBeamSword_5": {
+    "localized_name": "Laser Sword",
+    "description": "A Beam Sword made from Soralite Ingots. A close-range weapon that instantly cuts targets using its high-output energy blade."
+  },
+  "SkyBow": {
+    "localized_name": "Mechanical Bow",
+    "description": "A bow crafted from Soralite Ingots. With greatly enhanced initial velocity and piercing power, this high-precision weapon excels at ranged combat."
+  },
+  "SkyBowArrow": {
+    "localized_name": "Mechanical Bow Ammo",
+    "description": "Enhanced arrows for shooting with Mechanical Bow. Can be crafted at Ancient Workbench."
+  },
+  "SkyBow_2": {
+    "localized_name": "Mechanical Bow",
+    "description": "A bow crafted from Soralite Ingots. With greatly enhanced initial velocity and piercing power, this high-precision weapon excels at ranged combat."
+  },
+  "SkyBow_3": {
+    "localized_name": "Mechanical Bow",
+    "description": "A bow crafted from Soralite Ingots. With greatly enhanced initial velocity and piercing power, this high-precision weapon excels at ranged combat."
+  },
+  "SkyBow_4": {
+    "localized_name": "Mechanical Bow",
+    "description": "A bow crafted from Soralite Ingots. With greatly enhanced initial velocity and piercing power, this high-precision weapon excels at ranged combat."
+  },
+  "SkyBow_5": {
+    "localized_name": "Mechanical Bow",
+    "description": "A bow crafted from Soralite Ingots. With greatly enhanced initial velocity and piercing power, this high-precision weapon excels at ranged combat."
+  },
+  "SkyGrenadeLauncher": {
+    "localized_name": "Tactical Grenade Launcher",
+    "description": "A grenade launcher made from Soralite Ingots. Improved trajectory stability allows for precise long-range bombings."
+  },
+  "SkyGrenadeLauncherBullet": {
+    "localized_name": "Tactical Grenade Launcher Ammo",
+    "description": "Ammo for the Tactical Grenade Launcher. Can be crafted at Ancient Workbench."
+  },
+  "SkyGrenadeLauncher_2": {
+    "localized_name": "Tactical Grenade Launcher",
+    "description": "A grenade launcher made from Soralite Ingots. Improved trajectory stability allows for precise long-range bombings."
+  },
+  "SkyGrenadeLauncher_3": {
+    "localized_name": "Tactical Grenade Launcher",
+    "description": "A grenade launcher made from Soralite Ingots. Improved trajectory stability allows for precise long-range bombings."
+  },
+  "SkyGrenadeLauncher_4": {
+    "localized_name": "Tactical Grenade Launcher",
+    "description": "A grenade launcher made from Soralite Ingots. Improved trajectory stability allows for precise long-range bombings."
+  },
+  "SkyGrenadeLauncher_5": {
+    "localized_name": "Tactical Grenade Launcher",
+    "description": "A grenade launcher made from Soralite Ingots. Improved trajectory stability allows for precise long-range bombings."
+  },
+  "SkyHeavyBullet": {
+    "localized_name": "Sunreach Single-Shot Ammo",
+    "description": "[WIP] Description not finalized. Ammo for the Prototype Shotgun, Tactical Grenade Launcher, and similar weapons."
+  },
+  "SkyIslandOre": {
+    "localized_name": "Soralite",
+    "description": "A rare ore produced only in Sunreach. Within its host rock of overwhelming density resides a mysterious pattern and radiance."
+  },
+  "SkyLightBullet": {
+    "localized_name": "Sunreach Rapid-Fire Ammo",
+    "description": "[WIP] Description not finalized. Ammo for the Combat SMG, Heavy Assault Rifle, and similar weapons."
+  },
+  "SkyShotgun": {
+    "localized_name": "Prototype Shotgun",
+    "description": "A shotgun made from Soralite Ingots. It delivers overwhelming firepower at close range, and its special magazine also provides high sustained combat capability."
+  },
+  "SkyShotgunBullet": {
+    "localized_name": "Prototype Shotgun Ammo",
+    "description": "Ammo for the Prototype Shotgun. Can be crafted at Ancient Workbench."
+  },
+  "SkyShotgun_2": {
+    "localized_name": "Prototype Shotgun",
+    "description": "A shotgun made from Soralite Ingots. It delivers overwhelming firepower at close range, and its special magazine also provides high sustained combat capability."
+  },
+  "SkyShotgun_3": {
+    "localized_name": "Prototype Shotgun",
+    "description": "A shotgun made from Soralite Ingots. It delivers overwhelming firepower at close range, and its special magazine also provides high sustained combat capability."
+  },
+  "SkyShotgun_4": {
+    "localized_name": "Prototype Shotgun",
+    "description": "A shotgun made from Soralite Ingots. It delivers overwhelming firepower at close range, and its special magazine also provides high sustained combat capability."
+  },
+  "SkyShotgun_5": {
+    "localized_name": "Prototype Shotgun",
+    "description": "A shotgun made from Soralite Ingots. It delivers overwhelming firepower at close range, and its special magazine also provides high sustained combat capability."
+  },
+  "SkySubmachineGun": {
+    "localized_name": "Combat SMG",
+    "description": "A submachine gun made from Soralite Ingots. Its improved magazine and ammunition enhance its suppression power."
+  },
+  "SkySubmachineGunBullet": {
+    "localized_name": "Combat SMG Ammo",
+    "description": "Ammo for the Combat SMG. Can be crafted at Ancient Workbench."
+  },
+  "SkySubmachineGun_2": {
+    "localized_name": "Combat SMG",
+    "description": "A submachine gun made from Soralite Ingots. Its improved magazine and ammunition enhance its suppression power."
+  },
+  "SkySubmachineGun_3": {
+    "localized_name": "Combat SMG",
+    "description": "A submachine gun made from Soralite Ingots. Its improved magazine and ammunition enhance its suppression power."
+  },
+  "SkySubmachineGun_4": {
+    "localized_name": "Combat SMG",
+    "description": "A submachine gun made from Soralite Ingots. Its improved magazine and ammunition enhance its suppression power."
+  },
+  "SkySubmachineGun_5": {
+    "localized_name": "Combat SMG",
+    "description": "A submachine gun made from Soralite Ingots. Its improved magazine and ammunition enhance its suppression power."
+  },
+  "SkyislandIngot": {
+    "localized_name": "Soralite Ingot",
+    "description": "An ancient metal refined from ore that slumbers in Sunreach. A rare processed material, forming the foundation of high-grade equipment and structures. Can be refined at Ancient Furnace."
+  },
   "Spear": {
     "localized_name": "Stone Spear",
     "description": "Useful for close-range combat. Its length allows you to stand further away when attacking."
@@ -6910,6 +8682,14 @@
   "Spear_ForestBoss": {
     "localized_name": "Lily's Spear",
     "description": "The spear cherished by Lily. Punishes those who neglect their Pals."
+  },
+  "Spear_ForestBoss2": {
+    "localized_name": "Enhanced Lily's Spear",
+    "description": "An enhanced version of Lily's beloved spear. Pierces those who neglect their Pals."
+  },
+  "Spear_ForestBoss2_5": {
+    "localized_name": "Enhanced Lily's Spear",
+    "description": "An enhanced version of Lily's beloved spear. Pierces those who neglect their Pals."
   },
   "Spear_ForestBoss_5": {
     "localized_name": "Lily's Spear",
@@ -6929,7 +8709,7 @@
   },
   "SphereLauncher_Once": {
     "localized_name": "Single-Shot Sphere Launcher",
-    "description": "A launcher that fires spheres. It can capture Pals fom a greater distance."
+    "description": "A launcher that fires spheres. It can capture Pals from a greater distance."
   },
   "SphereModule_Curve": {
     "localized_name": "Curve Module",
@@ -6952,7 +8732,7 @@
     "description": "Equipping it increases the sphere's range, allowing it to sharply capture Pals and enhancing capture power."
   },
   "SphereModule_Sniper2": {
-    "localized_name": "Sniper Module Ⅱ",
+    "localized_name": "Sniper Module II",
     "description": "Equipping it significantly increases the sphere's range, allowing it to sharply capture Pals and enhancing capture power."
   },
   "SpringRolls": {
@@ -6961,7 +8741,7 @@
   },
   "StainlessSteel": {
     "localized_name": "Hexolite",
-    "description": "An alloy of Chromite, Ore, and Hexolite Quartz. Used as materials for advanced equipment and structures."
+    "description": "An alloy of Chromite and Hexolite Quartz. Used for building advanced equipment and structures. Can be refined at Gigantic Furnace."
   },
   "StatusPointResetSan": {
     "localized_name": "Memory Wiping Medicine",
@@ -7049,7 +8829,7 @@
   },
   "StealIngot": {
     "localized_name": "Pal Metal Ingot",
-    "description": "Material required to create weapons and armor using Pal Metal. Made stronger by creating an alloy from metal and Paldium."
+    "description": "A material required to create Pal Metal weapons and armor. Strengthened by creating an alloy incorporating Paldium."
   },
   "Stew": {
     "localized_name": "Stew",
@@ -7099,6 +8879,10 @@
     "localized_name": "Cotton Candy",
     "description": "Cotton candy collected from Woolipop. Its sweetness fluffily melts away in your mouth."
   },
+  "Sweet_Caramel": {
+    "localized_name": "Caramel Cotton Candy",
+    "description": "Caramel cotton candy collected from SweetsSheep Ground. Its fluffy sweetness melts away in your mouth."
+  },
   "Sword": {
     "localized_name": "Sword",
     "description": "Sword for close-range combat. The blade is extremely sharp! Mightier than a pen, for sure. Requires WeaponFactory Dirty 01 to craft."
@@ -7120,7 +8904,7 @@
     "description": "Sword for close-range combat. The blade is extremely sharp! Mightier than a pen, for sure. Requires WeaponFactory Dirty 01 to craft."
   },
   "TechnologyBook_G1": {
-    "localized_name": "High Grade Technical Manual",
+    "localized_name": "Advanced Technical Manual",
     "description": "A book that contains secrets of amazing technology. Use it to obtain a few Technology Points."
   },
   "TechnologyBook_G2": {
@@ -7128,8 +8912,12 @@
     "description": "A book that contains secrets of cutting-edge technology. Use it to obtain Technology Points."
   },
   "TechnologyBook_G3": {
-    "localized_name": "Future Technical Manual",
+    "localized_name": "Futuristic Technical Manual",
     "description": "A book that contains secrets of technology beyond current day comprehension. Use it to obtain lots of Technology Points."
+  },
+  "Thermal_Core": {
+    "localized_name": "Thermal Core",
+    "description": "A high-temperature reaction core containing vast thermal energy. Used as a power component in advanced devices. Can be crafted at Factory Hard 03."
   },
   "Tomato": {
     "localized_name": "Tomato",
@@ -7175,6 +8963,14 @@
     "localized_name": "Treasure Map",
     "description": "A weathered map showing where treasure lies. Using it places a marker on your map."
   },
+  "UniqueMaterial_FlowerPrince": {
+    "localized_name": "Toxin Filtering Membrane",
+    "description": "An organ that protects Dandilord from the corrosive mist it emits. It filters and neutralizes the corrosive mist."
+  },
+  "UniqueMaterial_Mothman": {
+    "localized_name": "Explosion-Resistant Fiber",
+    "description": "Fibers taken from the surface of a Silvance’s body. It can reduce the impact of explosions."
+  },
   "Unko_L": {
     "localized_name": "Huge Dung",
     "description": "It has an intimidating presence. Whether it's the scent or the shape, this is the mark of a heavyweight."
@@ -7185,11 +8981,19 @@
   },
   "UnlockEquipmentSlot_Accessory_01": {
     "localized_name": "Mysterious Accessory Box",
-    "description": "A mysterious box whose insides synchronize with the owner's body. Accessory equipment slots increase by 1."
+    "description": "A mysterious box whose interior synchronizes with the owner's body. Accessory equipment slots increase by 1. Carrying one is enough."
   },
   "UnlockEquipmentSlot_Accessory_02": {
-    "localized_name": "Box of Mystery Accessories",
-    "description": "A mysterious box whose insides synchronize with the owner's body. Accessory equipment slots increase further by 1."
+    "localized_name": "Mystic Accessory Box",
+    "description": "A mysterious box whose interior synchronizes with the owner's body. Accessory equipment slots further increase by 1. Carrying one is enough."
+  },
+  "UnlockEquipmentSlot_Weapon_01": {
+    "localized_name": "Extra Weapon Holster",
+    "description": "A holster that allows an additional weapon to be equipped. While in possession, it increases weapon equip slots by 1. Carrying one is enough."
+  },
+  "UnlockEquipmentSlot_Weapon_02": {
+    "localized_name": "Extra Weapon Holster 2",
+    "description": "A holster that lets you equip additional weapons. When in inventory, adds an extra weapon slot. Carrying one is enough."
   },
   "Unlock_Picking_Tier1": {
     "localized_name": "Lockpicking Tool v1",
@@ -7206,6 +9010,10 @@
   "Venom": {
     "localized_name": "Venom Gland",
     "description": "Material obtainable from poisonous Pals. Can be used to make Arrow Poison and more."
+  },
+  "WaterBuildKit": {
+    "localized_name": "Aquatic Construction Kit",
+    "description": "Construction kit that allows foundations to be placed on water."
   },
   "WeakerBow": {
     "localized_name": "Old Bow",
@@ -7227,6 +9035,26 @@
     "localized_name": "Old Bow",
     "description": "Primitive long range weapon. Hastily put together, it isn't very powerful."
   },
+  "WhaleWhistle": {
+    "localized_name": "Echoing Flute",
+    "description": "A bone flute recreated by deciphering a Faded Schematic. Its clear tone, echoing endlessly beyond the horizon, will likely call forth the oath-keeper, the Legendary Ocean King."
+  },
+  "WhaleWhistleFragment_01": {
+    "localized_name": "Marine Echobone",
+    "description": "A mysterious bone fragment. If you listen closely, a faint sound can be heard. A sound of gentle, rhythmic waves."
+  },
+  "WhaleWhistleFragment_02": {
+    "localized_name": "Silent Echobone",
+    "description": "A mysterious bone fragment. If you listen closely, a faint sound can be heard. A sound of silence once encountered."
+  },
+  "WhaleWhistleFragment_03": {
+    "localized_name": "Seafoam Echobone",
+    "description": "A mysterious bone fragment. If you listen closely, a faint sound can be heard. A sound of fleeting water bubbles popping."
+  },
+  "WhaleWhistleFragment_04": {
+    "localized_name": "Tidewind Echobone",
+    "description": "A mysterious bone fragment. If you listen closely, a faint sound can be heard. The sound of a gentle sea breeze."
+  },
   "Wheat": {
     "localized_name": "Wheat",
     "description": "An ingredient that forms the base of various dishes. Wheat is a common crop in many parts of the world."
@@ -7235,61 +9063,141 @@
     "localized_name": "Wheat Seeds",
     "description": "Seeds that produce Wheat. Necessary for starting a farm. Can be purchased from a merchant."
   },
+  "WidePenetrateShotgun": {
+    "localized_name": "Beam Scatter",
+    "description": "A specialized beam weapon for close-range combat. It fires compressed energy in a wide, scattering blast."
+  },
+  "WidePenetrateShotgunBullet": {
+    "localized_name": "Beam Scatter Ammo",
+    "description": "Ammo for the Beam Scatter. Can be crafted at Ancient Workbench."
+  },
+  "WidePenetrateShotgun_2": {
+    "localized_name": "Beam Scatter",
+    "description": "A specialized beam weapon for close-range combat. It fires compressed energy in a wide, scattering blast."
+  },
+  "WidePenetrateShotgun_3": {
+    "localized_name": "Beam Scatter",
+    "description": "A specialized beam weapon for close-range combat. It fires compressed energy in a wide, scattering blast."
+  },
+  "WidePenetrateShotgun_4": {
+    "localized_name": "Beam Scatter",
+    "description": "A specialized beam weapon for close-range combat. It fires compressed energy in a wide, scattering blast."
+  },
+  "WidePenetrateShotgun_5": {
+    "localized_name": "Beam Scatter",
+    "description": "A specialized beam weapon for close-range combat. It fires compressed energy in a wide, scattering blast."
+  },
   "Wine": {
     "localized_name": "Wine",
     "description": "Wine"
   },
+  "WingGlider": {
+    "localized_name": "Wing Pack",
+    "description": "A portable glider that enables flight. Consumes WingGlider Fuel to propel the user through the skies."
+  },
+  "WingGlider_Fuel": {
+    "localized_name": "Wing Cell",
+    "description": "The fuel required to power the Wing Pack."
+  },
   "Wood": {
     "localized_name": "Wood",
     "description": "Material for structures and items. Can be obtained by cutting trees."
+  },
+  "Wood_Ancient": {
+    "localized_name": "Ancient Bark",
+    "description": "The bark of a tree that has lived for many years in extreme environments. Even the thin bark evokes a sense of boundless vitality."
+  },
+  "Wood_Fine": {
+    "localized_name": "Hardwood",
+    "description": "High-quality wood carefully selected from sturdy trees grown in harsh environments such as deserts, volcanic regions, and snowy mountains."
+  },
+  "Wood_WorldTree": {
+    "localized_name": "Mythical Wood",
+    "description": "Rare wood imbued with the power of the World Tree. Only skilled craftsmen are able to process it."
   },
   "Wool": {
     "localized_name": "Wool",
     "description": "Material sheared from sheep Pals. A necessity for creating bedding, Cloth and more."
   },
   "WorkSuitability_AddTicket_Collection": {
-    "localized_name": "Applied Gathering Technique Ⅰ",
+    "localized_name": "Applied Gathering Handbook I",
     "description": "A rare book written about the secrets of Gathering. Allowing a Pal to read it permanently increases their Gathering affinity by +1."
   },
   "WorkSuitability_AddTicket_Cool": {
-    "localized_name": "Applied Cooling Technique Ⅰ",
+    "localized_name": "Applied Cooling Handbook I",
     "description": "A rare book written about the secrets of Cooling. Allowing a Pal to read it permanently increases their Cooling affinity by +1."
   },
   "WorkSuitability_AddTicket_Deforest": {
-    "localized_name": "Applied Lumbering Technique Ⅰ",
+    "localized_name": "Applied Lumbering Handbook I",
     "description": "A rare book written about the secrets of Lumbering. Allowing a Pal to read it permanently increases their Lumbering affinity by +1."
   },
   "WorkSuitability_AddTicket_EmitFlame": {
-    "localized_name": "Applied Kindling Technique Ⅰ",
+    "localized_name": "Applied Kindling Handbook I",
     "description": "A rare book written about the secrets of Kindling. Allowing a Pal to read it permanently increases their Kindling affinity by +1."
   },
   "WorkSuitability_AddTicket_GenerateElectricity": {
-    "localized_name": "Applied Generating Electricity Technique Ⅰ",
+    "localized_name": "Applied Generating Electricity Handbook I",
     "description": "A rare book written about the secrets of Generating Electricity. Allowing a Pal to read it permanently increases their Generating Electricity affinity by +1."
   },
   "WorkSuitability_AddTicket_Handcraft": {
-    "localized_name": "Applied Handiwork Technique Ⅰ",
+    "localized_name": "Applied Handiwork Handbook I",
     "description": "A rare book written about the secrets of Handiwork. Allowing a Pal to read it permanently increases their Handiwork affinity by +1."
   },
   "WorkSuitability_AddTicket_Mining": {
-    "localized_name": "Applied Mining Technique Ⅰ",
+    "localized_name": "Applied Mining Handbook I",
     "description": "A rare book written about the secrets of Mining. Allowing a Pal to read it permanently increases their Mining affinity by +1."
   },
+  "WorkSuitability_AddTicket_MonsterFarm": {
+    "localized_name": "Applied Ranching Handbook I",
+    "description": "A rare book written about the secrets of Farming. Allowing a Pal to read it permanently increases their Farming affinity by +1."
+  },
   "WorkSuitability_AddTicket_ProductMedicine": {
-    "localized_name": "Applied Medicine Production Technique Ⅰ",
+    "localized_name": "Applied Medicine Production Handbook I",
     "description": "A rare book written about the secrets of Medicine Production. Allowing a Pal to read it permanently increases their Medicine Production affinity by +1."
   },
   "WorkSuitability_AddTicket_Seeding": {
-    "localized_name": "Applied Planting Technique Ⅰ",
+    "localized_name": "Applied Planting Handbook I",
     "description": "A rare book written about the secrets of Planting. Allowing a Pal to read it permanently increases their Planting affinity by +1."
   },
   "WorkSuitability_AddTicket_Transport": {
-    "localized_name": "Applied Transporting Technique Ⅰ",
+    "localized_name": "Applied Transporting Handbook I",
     "description": "A rare book written about the secrets of Transporting. Allowing a Pal to read it permanently increases their Transporting affinity by +1."
   },
   "WorkSuitability_AddTicket_Watering": {
-    "localized_name": "Applied Watering Technique Ⅰ",
+    "localized_name": "Applied Watering Handbook I",
     "description": "A rare book written about the secrets of Watering. Allowing a Pal to read it permanently increases their Watering affinity by +1."
+  },
+  "WorldTreeHolyWater": {
+    "localized_name": "World Tree Holy Water",
+    "description": "Sacred water brimming with the energy of the World Tree. It purifies all things and awakens latent powers. When consumed, World Tree resources will not vanish when approached for a period of time."
+  },
+  "WorldTreeIngot": {
+    "localized_name": "Paloxite Ingot",
+    "description": "An indomitable alloy created by fusing Soralite and Paloxite. A highly rare material, crystallizing the technology of ancient civilization and the power of the World Tree. It is vital for crafting the highest-grade equipment and structures."
+  },
+  "WorldTreeOre": {
+    "localized_name": "Paloxite",
+    "description": "Energy leaking from the World Tree that has crystallized after many years. Those without protection who touch it will instantly rust and decay. Only those who can master its delicacy can reach the pinnacle of ancient technology."
+  },
+  "WorldTreeRelic_01": {
+    "localized_name": "Decayed Ancient Relic",
+    "description": "Fragments of structures and tools from an ancient civilization. Completely decayed, with no energy remaining."
+  },
+  "WorldTreeRelic_02": {
+    "localized_name": "Dormant Ancient Relic",
+    "description": "Fragments of structures and tools from an ancient civilization. In decent condition, but almost no energy remains."
+  },
+  "WorldTreeRelic_03": {
+    "localized_name": "Gorgeous Ancient Relic",
+    "description": "Fragments of structures and tools from an ancient civilization. In good condition, and you can feel the energy flowing."
+  },
+  "WorldTreeRelic_04": {
+    "localized_name": "Glowing Ancient Relic",
+    "description": "Fragments of structures and tools from an ancient civilization. In very good condition, light is leaking from within."
+  },
+  "WorldTreeRelic_05": {
+    "localized_name": "Glistening Ancient Relic",
+    "description": "Fragments of structures and tools from an ancient civilization. In very good condition, light is leaking from within. It is overflowing with energy and emitting a glow."
   },
   "Yakisoba": {
     "localized_name": "Broncherry Fried Noodles",
