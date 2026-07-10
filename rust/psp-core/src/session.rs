@@ -103,6 +103,21 @@ pub struct LoadedPlayer {
 /// `invalidate_performance_caches`, and `world_index.rs`'s
 /// `stale_character_index_after_removal_would_resolve_the_wrong_entry` test
 /// demonstrates concretely what breaks if a future task forgets.
+/// `HashMap`-vs-`BTreeMap` audit for every field below (each is a pure
+/// uuid-keyed lookup table, verified against how Python's own equivalent
+/// cache is consumed — `.get(uid, default)` throughout `mixins/summaries.py`/
+/// `mixins/loading.py`, never iterated to build an ordered collection):
+/// `character_index`/`item_container_index`/`character_container_index`/
+/// `dynamic_item_index` resolve a single uuid to a single position, on
+/// demand, exactly like the unchanged Phase-1 eager indexes of the same
+/// shape (`SaveSession::character_index` etc.) they mirror; `pal_owner_counts`/
+/// `player_guild_map` are looked up per-player one uuid at a time when
+/// building a `PlayerSummary`/`GuildSummary` (`domain::summaries`), never
+/// walked start-to-end for wire output. None of the six has an iteration
+/// order that could reach the wire, so all six stay `HashMap` — unlike
+/// `SaveSession::loaded_players` (see its own doc comment), which the
+/// project's cross-phase reconciliation specifically calls out for
+/// `BTreeMap`.
 #[derive(Default)]
 pub struct WorldCaches {
     /// InstanceId → `CharacterSaveParameterMap` position.
@@ -113,8 +128,12 @@ pub struct WorldCaches {
     pub character_container_index: Option<HashMap<Uuid, usize>>,
     /// `RawData.id.local_id_in_created_world` → `DynamicItemSaveData` position.
     pub dynamic_item_index: Option<HashMap<Uuid, usize>>,
-    /// player uid → number of pals that player owns.
-    pub pal_owner_counts: Option<HashMap<Uuid, u32>>,
+    /// player uid → number of pals that player owns. `i64`, matching
+    /// `domain::summaries::build_pal_owner_counts`'s own return type
+    /// (Phase 1) — this field is a cache of that function's output, so its
+    /// type follows the producer rather than inventing a narrower one a
+    /// later task would have to cast into.
+    pub pal_owner_counts: Option<HashMap<Uuid, i64>>,
     /// player uid → guild id.
     pub player_guild_map: Option<HashMap<Uuid, Uuid>>,
 }
@@ -173,14 +192,29 @@ pub struct SaveSession {
     /// this task is told not to become) a direct dependency of `psp-core` —
     /// it only reaches this crate transitively, through `uesave`, and Rust
     /// does not let a crate name a transitive dependency's types without
-    /// declaring that dependency itself. Nothing in this task's own tests
-    /// needs `loaded_players` to iterate in insertion order (the established
-    /// pattern for anything that DOES need wire-visible insertion order in
-    /// this codebase is a separate `Vec<Uuid>` `*_order` field alongside a
-    /// plain map — see `player_summary_order` above — not an ordered map
-    /// type), so `HashMap` is a safe, dependency-free substitute here.
-    pub loaded_players: HashMap<Uuid, LoadedPlayer>,
+    /// declaring that dependency itself. The project's own cross-phase
+    /// reconciliation already resolved this exact substitution project-wide:
+    /// Phase 2's `IndexMap` → `BTreeMap`, specifically to keep deterministic
+    /// iteration order with zero new dependencies (`Uuid: Ord`, so
+    /// `BTreeMap<Uuid, LoadedPlayer>` needs nothing beyond `std`). `HashMap`
+    /// was used in an earlier revision of this field on "nothing iterates it
+    /// yet" grounds — true today, but `HashMap` iteration order is
+    /// nondeterministic per process, the exact bug class the parity harness
+    /// caught twice in Phase 1 (`sync_app_state`'s `players`/`guilds`
+    /// arrays). Fixing it now, before any Task 7+ code iterates this map, is
+    /// free; fixing it after is a parity hunt. See `player_summary_order`
+    /// above for this codebase's actual pattern when a map's WIRE order
+    /// needs to be something other than sorted-by-key: a separate `Vec<Uuid>`
+    /// alongside the map, not an ordered map type — if a later task needs
+    /// `loaded_players` in original-discovery order rather than sorted-by-
+    /// uuid order, that's the pattern to reach for, not reverting this to
+    /// `HashMap`.
+    pub loaded_players: BTreeMap<Uuid, LoadedPlayer>,
     /// Guild ids whose full `GuildDto` detail has been lazily loaded (Task 8).
+    /// Not a map, so outside the `HashMap`/`BTreeMap` audit above by
+    /// definition, but the same question applies to any collection: this is
+    /// a pure membership set (`.contains(&uid)`), never iterated to produce
+    /// ordered output, so `HashSet` stays as-is.
     pub loaded_guilds: HashSet<Uuid>,
     /// Invalidatable lookup caches — see `WorldCaches`'s own doc comment for
     /// the invalidation contract.
@@ -277,7 +311,7 @@ impl SaveSession {
             guild_extra_index: HashMap::new(),
             gps_file_path: None,
             gps_loaded: false,
-            loaded_players: HashMap::new(),
+            loaded_players: BTreeMap::new(),
             loaded_guilds: HashSet::new(),
             caches: WorldCaches::default(),
         }
