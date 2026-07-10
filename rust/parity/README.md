@@ -295,9 +295,69 @@ it is not a wire-field mask.
 ## `PARITY_IGNORED_PATHS`
 
 Was empty through Phase 1; Phase 2 added exactly the four masks enumerated
-under "Determinism policy" above. Any FUTURE entry must be a narrow,
-enumerated `(message_type, json_pointer)` mask, never a whole-payload
+under "Determinism policy" above. Phase 3 (Task 3B-3) adds exactly one more:
+`add_preset:/data/id` — the response echoes the server-generated preset uuid,
+minted INDEPENDENTLY by Python (capture) and Rust (replay), same rationale as
+the `add_pal`/`add_dps_pal` `instance_id` masks. Any FUTURE entry must be a
+narrow, enumerated `(message_type, json_pointer)` mask, never a whole-payload
 wildcard, and must carry a one-line comment in `parity.rs` explaining why the
 Python and Rust values are expected to legitimately differ (timestamps,
 generated uuids, Python-serializer quirks). A mask that swallows more than
 the specific field it names turns a passing test into a lie.
+
+## db-presets scenario (Phase 3, Task 3B-3)
+
+Exercises the presets CRUD surface against a FRESH presets table:
+`get_presets` (seeds from `data/json/presets.json`) → `add_preset` →
+`get_presets` → `nuke_presets` → `get_presets` → `export_preset` (an unknown
+id, to capture the pre-dialog validation error).
+
+**Why `get_presets` needs its own comparator, not a `PARITY_IGNORED_PATHS`
+mask.** `get_presets`' `data` is a DICT keyed by server-generated uuids
+(`psp_db::presets::get_all` / `db/ctx/presets.py::get_all_presets`), and each
+preset's own `id`, `pal_preset_id`, and (when present) nested `pal_preset.id`
+are those same random uuids. A `PARITY_IGNORED_PATHS` entry masks one FIXED
+JSON pointer — it cannot reach into a map whose *keys themselves* differ
+between the two captures. `parity.rs`'s `compare_get_presets_equivalent`
+handles this instead: it extracts the preset VALUES from `data` in insertion
+order (both backends insert `ORDER BY rowid` — seed presets from
+`presets.json` in array order, then any added preset appended), masks each
+preset's `id`/`pal_preset_id`/`pal_preset.id` to a shared sentinel, and
+compares the two ordered lists for equality — the dict KEYS are intentionally
+never compared. `add_preset`'s own uuid (echoed directly in that response,
+not nested in a dict) still uses the ordinary `add_preset:/data/id`
+`PARITY_IGNORED_PATHS` mask above.
+
+### Safe capture procedure
+
+**The backend's `psp.db` lives at the repo root and is whatever the
+developer running this is currently using — it may hold real, hand-curated
+presets and settings. This scenario needs an EMPTY presets table, which means
+Python must start from a FRESH `psp.db`. Never delete the real one to get
+there.**
+
+1. From the repo root, back up and move the existing `psp.db` ASIDE (don't
+   delete it):
+   `mv psp.db psp.db.presets-parity-backup` (or, on Windows PowerShell,
+   `Move-Item psp.db psp.db.presets-parity-backup`).
+2. Start the Python backend on a port your real client isn't using — the
+   default 5174 may already be held by a running desktop build
+   (`PSP.exe`)/dev server. For example:
+   `uv run python psp.py --port 5199`
+   This creates a brand-new, empty `psp.db` at the repo root and its
+   `presets` table starts with zero rows.
+3. From the repo root, capture against that same port:
+   `uv run --with websockets scripts/capture_parity.py --scenario db-presets --url ws://127.0.0.1:5199/ws/999999999`
+   Fixtures land in `rust/parity/fixtures/db-presets/`.
+4. Stop the Python backend (Ctrl+C).
+5. Delete the FRESH `psp.db` this capture run created, then restore the
+   developer's original:
+   `rm psp.db` then `mv psp.db.presets-parity-backup psp.db`
+   (PowerShell: `Remove-Item psp.db` then
+   `Move-Item psp.db.presets-parity-backup psp.db`).
+6. From `rust/`: `cargo test -p psp-server --test parity` — replays
+   `db-presets` (and every other captured corpus) against a fresh Rust temp
+   DB, same as the capture run.
+
+Fixtures are gitignored (`rust/.gitignore`'s `/parity/fixtures/`); this
+corpus, like every other, is local-only — regenerate, never commit.

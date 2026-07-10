@@ -119,6 +119,14 @@ const PARITY_IGNORED_PATHS: &[(&str, &str)] = &[
     // (see `compare_download_equivalent`).
     ("download_save_file", "/data/0/name"),
     ("download_save_file", "/data/0/content"),
+    // add_preset: the response echoes the server-generated uuid4 preset id —
+    // minted INDEPENDENTLY by Python (capture) and Rust (replay), so it can
+    // never match. get_presets (the dict-keyed listing that also carries
+    // these ids, as both the dict KEYS and each preset's `id`/`pal_preset_id`/
+    // `pal_preset.id`) is NOT handled here: a static JSON pointer can't mask
+    // a dynamic dict key, so it gets its own comparator — see
+    // `compare_get_presets_equivalent` below.
+    ("add_preset", "/data/id"),
 ];
 
 /// Replaces every masked pointer for `message_type` with a fixed sentinel, in
@@ -314,6 +322,99 @@ fn compare_download_equivalent(
     Ok(())
 }
 
+/// Sentinel value substituted for a server-generated preset uuid, matching
+/// `mask_ignored_paths`'s convention.
+const MASKED_PRESET_ID: &str = "<masked>";
+
+/// Masks the server-generated uuid fields inside ONE preset object, in place:
+/// the preset's own `id`, its `pal_preset_id`, and (when present) the nested
+/// `pal_preset.id`. These are the only uuid-shaped fields
+/// `psp_db::presets::add` mints independently on each backend (see
+/// `rust/psp-db/src/presets.rs`) — everything else in a preset (`name`,
+/// `type`, every container, every other `pal_preset` field) is real content
+/// and must still compare strictly.
+fn mask_preset_ids(preset: &mut Value) {
+    let Some(object) = preset.as_object_mut() else {
+        return;
+    };
+    if object.contains_key("id") {
+        object.insert(
+            "id".to_string(),
+            Value::String(MASKED_PRESET_ID.to_string()),
+        );
+    }
+    if object.contains_key("pal_preset_id") {
+        object.insert(
+            "pal_preset_id".to_string(),
+            Value::String(MASKED_PRESET_ID.to_string()),
+        );
+    }
+    if let Some(pal_preset) = object.get_mut("pal_preset").and_then(Value::as_object_mut) {
+        if pal_preset.contains_key("id") {
+            pal_preset.insert(
+                "id".to_string(),
+                Value::String(MASKED_PRESET_ID.to_string()),
+            );
+        }
+    }
+}
+
+/// Ordered, id-masked preset VALUES extracted from a `get_presets` frame's
+/// `data` (an object keyed by server-generated uuid). The dict KEYS
+/// themselves are intentionally dropped here — they are just as
+/// nondeterministic as the ids inside each preset, and only the masked
+/// VALUES, in order, are what `compare_get_presets_equivalent` compares.
+/// `serde_json::Map` (built with the `preserve_order` feature — see
+/// `rust/Cargo.toml`) preserves insertion order, and both backends insert in
+/// the same logical order: `ORDER BY rowid` — seed presets from
+/// `presets.json` in array order, then any added preset appended
+/// (`psp_db::presets::get_all`, `db/ctx/presets.py::get_all_presets`).
+fn masked_preset_values(frame: &Value) -> Result<Vec<Value>, String> {
+    let object = frame["data"]
+        .as_object()
+        .ok_or_else(|| "get_presets frame has no object `data`".to_string())?;
+    Ok(object
+        .values()
+        .cloned()
+        .map(|mut preset| {
+            mask_preset_ids(&mut preset);
+            preset
+        })
+        .collect())
+}
+
+/// Custom equivalence comparator for `get_presets` frames, mirroring the
+/// `compare_download_equivalent` pattern: `get_presets`' `data` is a DICT
+/// keyed by server-generated uuids, with each preset's own `id`/
+/// `pal_preset_id`/`pal_preset.id` also being those same random uuids. A
+/// static `PARITY_IGNORED_PATHS` JSON pointer can only mask a fixed path, not
+/// a dynamic dict key, so `get_presets` gets its own comparator instead:
+/// mask every preset's ids, then compare the two ORDERED lists of masked
+/// preset objects (dict keys ignored, insertion order preserved).
+fn compare_get_presets_equivalent(
+    fixture_name: &str,
+    expected: &Value,
+    actual: &Value,
+) -> Result<(), String> {
+    let expected_presets = masked_preset_values(expected)
+        .map_err(|message| format!("{fixture_name}: expected {message}"))?;
+    let actual_presets = masked_preset_values(actual)
+        .map_err(|message| format!("{fixture_name}: actual {message}"))?;
+    if expected_presets == actual_presets {
+        return Ok(());
+    }
+    Err(format!(
+        "fixture {fixture_name} (request type \"get_presets\") — preset list mismatch after \
+         masking server-generated ids (dict keys are ignored by design; only the ordered, \
+         id-masked preset values are compared)\n\
+         --- actual ---\n{}\n--- expected ---\n{}",
+        serde_json::to_string_pretty(&actual_presets)
+            .unwrap_or_else(|_| format!("{actual_presets:?}")),
+        serde_json::to_string_pretty(&expected_presets)
+            .unwrap_or_else(|_| format!("{expected_presets:?}")),
+    ))
+}
+
 /// Replays every fixture found under `fixtures_root` against a fresh server
 /// instance and returns the number of fixtures replayed. Returns 0 (without
 /// starting a server) if `fixtures_root` doesn't exist or has no corpus
@@ -400,6 +501,23 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
                     ) {
                         panic!("{message}");
                     }
+                } else if response_message_type == "get_presets" {
+                    // get_presets' `data` dict is keyed by server-generated
+                    // uuids that no static PARITY_IGNORED_PATHS pointer can
+                    // mask (see compare_get_presets_equivalent). Run the real
+                    // check on the UNMASKED pair now, then blank the whole
+                    // `data` field on both sides to a shared sentinel so the
+                    // aggregate compare_responses below — which only knows
+                    // how to do plain equality — doesn't re-fail on the
+                    // (necessarily different) raw dict.
+                    if let Err(message) = compare_get_presets_equivalent(
+                        &fixture_path.display().to_string(),
+                        expected_frame,
+                        &value,
+                    ) {
+                        panic!("{message}");
+                    }
+                    value["data"] = Value::String(MASKED_PRESET_ID.to_string());
                 }
                 mask_ignored_paths(&response_message_type, &mut value);
                 actual_responses.push(value);
@@ -421,6 +539,9 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
             for value in expected.iter_mut() {
                 let response_message_type =
                     value["type"].as_str().unwrap_or(&request_type).to_string();
+                if response_message_type == "get_presets" {
+                    value["data"] = Value::String(MASKED_PRESET_ID.to_string());
+                }
                 mask_ignored_paths(&response_message_type, value);
             }
             if let Err(message) = compare_responses(
@@ -895,4 +1016,257 @@ fn download_world_prefix_parses_the_timestamped_shape() {
     assert_eq!(download_world_prefix("World_2026_143012.zip"), None); // 4-digit date
     assert_eq!(download_world_prefix("World_20260710_1430.zip"), None); // 4-digit time
     assert_eq!(download_world_prefix("_20260710_143012.zip"), None); // empty world
+}
+
+// ---------------------------------------------------------------------------
+// get_presets custom comparator (Task 3B-3): the dict is keyed by
+// server-generated uuids, and each preset's own `id`/`pal_preset_id`/
+// `pal_preset.id` are those same random uuids — no static
+// PARITY_IGNORED_PATHS pointer can mask a dynamic dict key, so this gets its
+// own equivalence check.
+// ---------------------------------------------------------------------------
+
+/// Builds a `get_presets`-shaped frame from `(dict key, preset object)`
+/// pairs, preserving the given order (the `preserve_order` `serde_json`
+/// feature keeps `Map` insertion order, mirroring both backends' real
+/// `ORDER BY rowid` insertion order).
+#[cfg(test)]
+fn make_get_presets_frame(entries: &[(&str, Value)]) -> Value {
+    let mut data = serde_json::Map::new();
+    for (key, preset) in entries {
+        data.insert((*key).to_string(), preset.clone());
+    }
+    serde_json::json!({ "type": "get_presets", "data": Value::Object(data) })
+}
+
+/// `mask_preset_ids` replaces EXACTLY `id`, `pal_preset_id`, and (nested)
+/// `pal_preset.id` and touches nothing else — mirrors
+/// `mask_ignored_paths_masks_only_the_listed_pointers`'s shape for the same
+/// reason: a future edit that widened the mask (e.g. blanked `pal_preset`
+/// wholesale, or masked `name`) must turn this red.
+#[test]
+fn mask_preset_ids_masks_only_id_fields() {
+    let mut preset = serde_json::json!({
+        "id": "11111111-1111-1111-1111-111111111111",
+        "name": "Melee Kit",
+        "type": "inventory",
+        "common_container": [{"static_id": "Wood", "count": 999, "slot_index": 0}],
+        "pal_preset_id": "22222222-2222-2222-2222-222222222222",
+        "pal_preset": {
+            "id": "22222222-2222-2222-2222-222222222222",
+            "lock": true,
+            "character_id": "SheepBall"
+        }
+    });
+    mask_preset_ids(&mut preset);
+    assert_eq!(preset["id"], MASKED_PRESET_ID);
+    assert_eq!(preset["pal_preset_id"], MASKED_PRESET_ID);
+    assert_eq!(preset["pal_preset"]["id"], MASKED_PRESET_ID);
+    assert_eq!(preset["name"], "Melee Kit");
+    assert_eq!(preset["type"], "inventory");
+    assert_eq!(
+        preset["common_container"],
+        serde_json::json!([{"static_id": "Wood", "count": 999, "slot_index": 0}])
+    );
+    assert_eq!(preset["pal_preset"]["lock"], true);
+    assert_eq!(preset["pal_preset"]["character_id"], "SheepBall");
+
+    // A preset with no pal_preset relationship at all must be untouched
+    // beyond its own id/pal_preset_id.
+    let mut bare = serde_json::json!({
+        "id": "33333333-3333-3333-3333-333333333333",
+        "name": "Bare",
+        "type": "inventory",
+        "pal_preset_id": Value::Null
+    });
+    mask_preset_ids(&mut bare);
+    assert_eq!(bare["id"], MASKED_PRESET_ID);
+    assert_eq!(bare["pal_preset_id"], MASKED_PRESET_ID);
+    assert_eq!(bare["name"], "Bare");
+}
+
+/// (a) Two `get_presets` dicts with COMPLETELY DIFFERENT uuid dict keys and
+/// different `id`/`pal_preset_id`/`pal_preset.id` values, but otherwise
+/// identical preset content in the same order, must compare EQUAL. This is
+/// the whole point of the custom comparator: a naive `actual == expected` on
+/// the raw dicts (as `compare_responses` does for every other message type)
+/// would fail here on the keys alone — proving that path is NOT what decides
+/// `get_presets` fixtures.
+#[test]
+fn compare_get_presets_equivalent_oks_different_uuids_same_content() {
+    let expected = make_get_presets_frame(&[
+        (
+            "aaaaaaaa-0000-0000-0000-000000000000",
+            serde_json::json!({
+                "id": "aaaaaaaa-0000-0000-0000-000000000000",
+                "name": "Kit",
+                "type": "inventory",
+                "pal_preset_id": Value::Null
+            }),
+        ),
+        (
+            "bbbbbbbb-0000-0000-0000-000000000000",
+            serde_json::json!({
+                "id": "bbbbbbbb-0000-0000-0000-000000000000",
+                "name": "Melee",
+                "type": "pal",
+                "pal_preset_id": "cccccccc-0000-0000-0000-000000000000",
+                "pal_preset": {
+                    "id": "cccccccc-0000-0000-0000-000000000000",
+                    "lock": true,
+                    "character_id": "SheepBall"
+                }
+            }),
+        ),
+    ]);
+    // Same logical presets, same order, but every uuid (dict key, `id`,
+    // `pal_preset_id`, nested `pal_preset.id`) is a DIFFERENT random value —
+    // exactly what independently-minted uuid4s from two separate backend
+    // runs look like.
+    let actual = make_get_presets_frame(&[
+        (
+            "11111111-9999-9999-9999-999999999999",
+            serde_json::json!({
+                "id": "11111111-9999-9999-9999-999999999999",
+                "name": "Kit",
+                "type": "inventory",
+                "pal_preset_id": Value::Null
+            }),
+        ),
+        (
+            "22222222-9999-9999-9999-999999999999",
+            serde_json::json!({
+                "id": "22222222-9999-9999-9999-999999999999",
+                "name": "Melee",
+                "type": "pal",
+                "pal_preset_id": "33333333-9999-9999-9999-999999999999",
+                "pal_preset": {
+                    "id": "33333333-9999-9999-9999-999999999999",
+                    "lock": true,
+                    "character_id": "SheepBall"
+                }
+            }),
+        ),
+    ]);
+
+    assert_eq!(
+        compare_get_presets_equivalent(
+            "fixtures/db-presets/002_get_presets.json",
+            &expected,
+            &actual
+        ),
+        Ok(())
+    );
+}
+
+/// Mutation check for the NESTED mask specifically: two presets whose ONLY
+/// difference is `pal_preset.id` (every other field, including the outer
+/// `id`/`pal_preset_id`, is IDENTICAL) must still compare equal. If
+/// `mask_preset_ids` ever forgot the `pal_preset.id` masking step, this is
+/// the test that goes red — `compare_get_presets_equivalent_errs_on_a_real_field_difference`
+/// below would NOT catch that regression, since it exercises a different
+/// (non-id) field.
+#[test]
+fn compare_get_presets_equivalent_oks_when_only_nested_pal_preset_id_differs() {
+    let expected = make_get_presets_frame(&[(
+        "shared-key",
+        serde_json::json!({
+            "id": "shared-key",
+            "name": "Melee",
+            "type": "pal",
+            "pal_preset_id": "pp-expected",
+            "pal_preset": {"id": "pp-expected", "lock": true, "character_id": "SheepBall"}
+        }),
+    )]);
+    let actual = make_get_presets_frame(&[(
+        "shared-key",
+        serde_json::json!({
+            "id": "shared-key",
+            "name": "Melee",
+            "type": "pal",
+            "pal_preset_id": "pp-actual",
+            "pal_preset": {"id": "pp-actual", "lock": true, "character_id": "SheepBall"}
+        }),
+    )]);
+
+    assert_eq!(
+        compare_get_presets_equivalent(
+            "fixtures/db-presets/002_get_presets.json",
+            &expected,
+            &actual
+        ),
+        Ok(())
+    );
+}
+
+/// (b) Two `get_presets` dicts that differ in a REAL field (not an id) — here
+/// a container's item count — must NOT compare equal, even with matching
+/// (masked) ids. Proves the comparator isn't vacuously permissive: it can
+/// still fail on genuine content divergence, not just report success no
+/// matter what.
+#[test]
+fn compare_get_presets_equivalent_errs_on_a_real_field_difference() {
+    let expected = make_get_presets_frame(&[(
+        "shared-key",
+        serde_json::json!({
+            "id": "shared-key",
+            "name": "Kit",
+            "type": "inventory",
+            "pal_preset_id": Value::Null,
+            "common_container": [{"static_id": "Wood", "count": 999, "slot_index": 0}]
+        }),
+    )]);
+    let actual = make_get_presets_frame(&[(
+        "shared-key",
+        serde_json::json!({
+            "id": "shared-key",
+            "name": "Kit",
+            "type": "inventory",
+            "pal_preset_id": Value::Null,
+            // Real divergence: 998 vs 999.
+            "common_container": [{"static_id": "Wood", "count": 998, "slot_index": 0}]
+        }),
+    )]);
+
+    let error = compare_get_presets_equivalent(
+        "fixtures/db-presets/002_get_presets.json",
+        &expected,
+        &actual,
+    )
+    .expect_err("a real (non-id) content divergence must be reported, not tolerated");
+    assert!(
+        error.contains("fixtures/db-presets/002_get_presets.json"),
+        "error must name the offending fixture; got: {error}"
+    );
+    assert!(
+        error.contains("preset list mismatch"),
+        "error must explain the mismatch; got: {error}"
+    );
+}
+
+/// A preset list mismatch in COUNT (one backend returned an extra preset)
+/// must also fail — not silently truncate to the shorter list.
+#[test]
+fn compare_get_presets_equivalent_errs_on_a_count_mismatch() {
+    let one_preset = make_get_presets_frame(&[(
+        "key-a",
+        serde_json::json!({"id": "key-a", "name": "Kit", "type": "inventory", "pal_preset_id": Value::Null}),
+    )]);
+    let two_presets = make_get_presets_frame(&[
+        (
+            "key-a",
+            serde_json::json!({"id": "key-a", "name": "Kit", "type": "inventory", "pal_preset_id": Value::Null}),
+        ),
+        (
+            "key-b",
+            serde_json::json!({"id": "key-b", "name": "Extra", "type": "inventory", "pal_preset_id": Value::Null}),
+        ),
+    ]);
+
+    assert!(compare_get_presets_equivalent(
+        "fixtures/db-presets/002_get_presets.json",
+        &one_preset,
+        &two_presets,
+    )
+    .is_err());
 }

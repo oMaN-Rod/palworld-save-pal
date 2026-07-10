@@ -87,6 +87,48 @@ pub async fn handle_nuke_presets(ctx: &mut HandlerCtx<'_>) -> Result<(), Handler
     Ok(())
 }
 
+#[derive(Debug, serde::Deserialize)]
+pub struct ExportPresetData {
+    pub preset_id: String,
+    pub preset_type: String,
+    pub preset_name: String,
+}
+
+/// Mirrors preset_handler.py:91-147: both export/import require a native file
+/// dialog (`app_state.webview_window`), which only exists in desktop mode. In
+/// web mode Python always answers `error` with the plain string
+/// "File dialog not available". Phase 3 implements exactly that non-desktop
+/// path; Phase 5 wires the native dialog behind `desktop_mode`.
+pub async fn handle_export_preset(
+    data: ExportPresetData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let presets = psp_db::presets::get_all(&ctx.app.db).await?;
+    if !presets.contains_key(&data.preset_id) {
+        ctx.emitter.emit(
+            MessageType::Error,
+            &format!("Preset {} not found", data.preset_id),
+        );
+        return Ok(());
+    }
+    if ctx.app.config.desktop_mode {
+        // Phase 5 wires the native save dialog here (preset_handler.py:117-147).
+    }
+    ctx.emitter
+        .emit(MessageType::Error, &"File dialog not available");
+    Ok(())
+}
+
+pub async fn handle_import_preset(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
+    if ctx.app.config.desktop_mode {
+        // Phase 5 wires the native open dialog + id-stripping import here
+        // (preset_handler.py:166-237).
+    }
+    ctx.emitter
+        .emit(MessageType::Error, &"File dialog not available");
+    Ok(())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

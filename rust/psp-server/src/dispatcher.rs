@@ -123,6 +123,10 @@ async fn route(
             handlers::presets::handle_delete_presets(serde_json::from_value(data)?, ctx).await
         }
         MessageType::NukePresets => handlers::presets::handle_nuke_presets(ctx).await,
+        MessageType::ExportPreset => {
+            handlers::presets::handle_export_preset(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::ImportPreset => handlers::presets::handle_import_preset(ctx).await,
         MessageType::SelectSave => {
             handlers::save_file::handle_select_save(serde_json::from_value(data)?, ctx).await
         }

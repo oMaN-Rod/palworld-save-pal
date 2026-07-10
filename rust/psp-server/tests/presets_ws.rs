@@ -71,3 +71,49 @@ async fn preset_crud_over_websocket() {
 
     server.handle.shutdown().await;
 }
+
+#[tokio::test]
+async fn export_and_import_preset_require_desktop_dialog() {
+    let server = common::start_test_server().await;
+    let mut ws = common::connect(&server).await;
+
+    // Unknown preset id validated before the dialog check (preset_handler.py:100-106)
+    common::send_json(
+        &mut ws,
+        serde_json::json!({"type": "export_preset",
+            "data": {"preset_id": "missing", "preset_type": "inventory", "preset_name": "X"}}),
+    )
+    .await;
+    let missing = common::next_json(&mut ws).await;
+    assert_eq!(missing["type"], "error");
+    assert_eq!(missing["data"], "Preset missing not found");
+
+    common::send_json(
+        &mut ws,
+        serde_json::json!({"type": "add_preset", "data": {"name": "Kit", "type": "inventory"}}),
+    )
+    .await;
+    let added = common::next_json(&mut ws).await;
+    let preset_id = added["data"]["id"].as_str().unwrap().to_string();
+
+    common::send_json(
+        &mut ws,
+        serde_json::json!({"type": "export_preset",
+            "data": {"preset_id": preset_id, "preset_type": "inventory", "preset_name": "Kit"}}),
+    )
+    .await;
+    let export_response = common::next_json(&mut ws).await;
+    assert_eq!(export_response["type"], "error");
+    assert_eq!(export_response["data"], "File dialog not available");
+
+    common::send_json(
+        &mut ws,
+        serde_json::json!({"type": "import_preset", "data": null}),
+    )
+    .await;
+    let import_response = common::next_json(&mut ws).await;
+    assert_eq!(import_response["type"], "error");
+    assert_eq!(import_response["data"], "File dialog not available");
+
+    server.handle.shutdown().await;
+}

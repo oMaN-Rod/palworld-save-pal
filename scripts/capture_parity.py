@@ -23,7 +23,10 @@ from typing import Optional
 import websockets
 
 # Requests for a fresh backend with no save loaded. One fixture per request.
-# get_presets is EXCLUDED until Phase 3 (the Rust side is a stopgap).
+# get_presets is EXCLUDED here — it has its own DB_PRESETS_SCENARIO below,
+# since its dict-of-uuid-keyed response needs a dedicated capture flow (a
+# fresh presets table) and a custom Rust-side comparator, not the plain
+# masked strict-equality path every other static-data request uses.
 STATIC_DATA_SCENARIO = [
     {"type": "get_version"},
     {"type": "get_settings"},
@@ -79,8 +82,52 @@ def load_path_requests(save_dir: str) -> list[dict]:
     ]
 
 
+# Task 3B-3: exercises the presets CRUD surface (get/add/get/nuke/get) plus
+# export_preset's pre-dialog validation error, against a FRESH presets table.
+# get_presets responses are DICT-keyed by server-generated uuids (also
+# embedded as each preset's own `id`/`pal_preset_id`), so parity.rs replays
+# this corpus with a custom comparator (compare_get_presets_equivalent)
+# instead of the usual masked strict-equality path — see
+# rust/parity/README.md, "db-presets scenario", for the safe capture
+# procedure (this backend's psp.db must NOT be the developer's real one).
+DB_PRESETS_SCENARIO = (
+    "db-presets",
+    [
+        {"type": "get_presets", "data": None},
+        {
+            "type": "add_preset",
+            "data": {
+                "name": "Parity Kit",
+                "type": "inventory",
+                "skills": None,
+                "common_container": [{"static_id": "Wood", "count": 999, "slot_index": 0}],
+                "essential_container": None,
+                "weapon_load_out_container": None,
+                "player_equipment_armor_container": None,
+                "food_equip_container": None,
+                "storage_container": None,
+                "pal_preset": None,
+            },
+        },
+        {"type": "get_presets", "data": None},
+        {"type": "nuke_presets", "data": None},
+        {"type": "get_presets", "data": None},
+        {
+            "type": "export_preset",
+            "data": {
+                "preset_id": "does-not-exist",
+                "preset_type": "inventory",
+                "preset_name": "X",
+            },
+        },
+    ],
+)
+
 # Scenarios with a fixed request list, independent of any on-disk save.
-FIXED_SCENARIOS = {"static-data": STATIC_DATA_SCENARIO}
+FIXED_SCENARIOS = {
+    "static-data": STATIC_DATA_SCENARIO,
+    DB_PRESETS_SCENARIO[0]: DB_PRESETS_SCENARIO[1],
+}
 
 # Scenarios that build their request list from a corpus save directory
 # (--save-dir), keyed by scenario name.
