@@ -43,7 +43,7 @@ pub async fn connect(server: &TestServer) -> WsClient {
 
 pub async fn send_json(socket: &mut WsClient, value: serde_json::Value) {
     socket
-        .send(Message::Text(value.to_string().into()))
+        .send(Message::Text(value.to_string()))
         .await
         .unwrap();
 }
