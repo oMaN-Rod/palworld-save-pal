@@ -3,17 +3,25 @@
     "localized_name": "Rahat bir üs",
     "description": "Pal'ların verimli bir şekilde çalışabilmesi için üssün genişletilmesi şarttır. Öncelikle üs seviyesini 7'ye çıkar ve Pal’lar için rahat bir alan hedefle. Hazır olduğunda, o kuleyi alt edecek güce de sahip olursun."
   },
+  "Main_BeginAdventure": {
+    "localized_name": "Maceranın Başlangıcı",
+    "description": "Terminalde görüntülenen tüm maddeleri uyguladın ve öğrendin. — Haydi, bir kez daha onun yanına dönelim."
+  },
   "Main_BuildHatchingMachine": {
     "localized_name": "Pal Yumurtası",
-    "description": "Pal'ların yumurtadan çıktığı bilinmektedir. Yumurtalar adanın her yerinde bulunabilir, bu yüzden keşfederken çevreni dikkatlice gözlemlediğinden emin ol. Yumurtalardan Pal yetiştirerek çeşitli türlerle tanışabilirsin. Sonunda, kendi Pal'ını aradığın gün gelecektir. ÖncelikleKuluçka Makinesiteknolojisinin kilidini aç ve üssüne kur. Kuluçka MakinesiYumurtayı yerleştirdikten sonra, yumurtanın çatlaması için bir süre beklemen gerekecektir."
+    "description": "Pal'ların yumurtadan çıktığı bilinmektedir. Yumurtalar adanın her yerinde bulunabilir, bu yüzden keşfederken çevreni dikkatlice gözlemlediğinden emin ol. Yumurtalardan Pal yetiştirerek çeşitli türlerle tanışabilirsin. Sonunda, kendi Pal'ını aradığın gün gelecektir. ÖncelikleKuluçka Makinesiteknolojisinin kilidini aç ve üssüne kur. Kuluçka Makinesi Yumurtayı yerleştirdikten sonra, yumurtanın çatlaması için bir süre beklemen gerekecektir."
   },
   "Main_BuildPalBox": {
     "localized_name": "Başlangıç Üssü",
     "description": "<keyGuideIcon id=|OpenConstructionMenu| iconScale=|0.7|/>ile inşa menüsünü aç vePal Kutusuöğesini büyük bir arazi parçasına yerleştir. Bu senin ve Pal'ın ilk üssü olacak ve eğer onu seferinin başlangıç noktası olarak hazırlarsan, sonunda kuleye doğru yola çıktığında sana çok yardımcı olacaktır. Konumu dikkatlice seç."
   },
-  "Main_BuildWorkBench": {
+  "Main_BuildWorkBench_Old": {
     "localized_name": "Çalışmanın başlangıç noktası",
     "description": "Malzemeler sadece kaynaklardır. Bir çalışma tezgahı inşa ederek, daha karmaşık şeyler yaratma gücüne sahip olacaksın. İnşa menüsünü aç,İlkel Tezgâhöğesini seç ve bir inşaat alanı seç. İlk tesisini kendi ellerinle inşa et."
+  },
+  "Main_BuildWorkbench": {
+    "localized_name": "Eşya Üretim Tezgahı Kurulumu",
+    "description": "Odun Temini ve Çalışma Tezgâhının Kurulumu: Bu ada; odun, taş gibi çeşitli kaynaklar açısından oldukça zengindir. Sınırlı malzemeleri dikkatli kullanarak uzun vadeli bir araştırma yürütmek için bunu değerlendirmemek olmaz. Önce odunla başlayalım. Yerde bulduğun parçaları topla ya da yakınlardaki ağaçlara saldırarak odun elde et. Ardından yeterli alanı ve güvenliği sağlayabileceğin bir arazi bulduğunda, çalışma tezgâhını kurmak için bir yer belirle ve oraya yerleştir."
   },
   "Main_Capture30Pal": {
     "localized_name": "Herhangi bir Pal'dan 30 tane yakala",
@@ -29,19 +37,31 @@
   },
   "Main_CaptureSheepBall": {
     "localized_name": "En Zayıf Pal",
+    "description": "SheepBallKullanımı: SheepBallsavaş gücü düşüktür ve kolayca yakalanabilirler ancak elleri beceriklidir; normalde insanların yapması gereken çeşitli el işlerinde yardımcı olurlar. Üssü büyütmek için ilk yoldaşlar olarak oldukça güvenilir olacaklardır. AyrıcaYünveyaLamball Etigibi yaşam için gerekli malzemeleri de onlardan elde edebilirsiniz. Öncelikle bu Paldan birkaç tane yakalamak, üssün genişlemesini daha sorunsuz hale getirecektir."
+  },
+  "Main_CaptureSheepBall_Old": {
+    "localized_name": "En Zayıf Pal",
     "description": "Palpagos Adası, en güçlü olanın hayatta kaldığı bir dünyadır. SheepBall, besin zincirinin en altında bulunan Pal’lardır ve çok kolay bir şekilde yakalanabilirler. Ancak, senin için çeşitli görevleri yerine getirmek için el becerilerini kullanacaklardır. İlk olarak 5 taneSheepBallyakalamayı dene. Üssünü genişletmek için ilk yoldaşların olarak yeterince güvenilir olmalılar. Ayrıca,YünveLamball Etigibi yaşam için gerekli malzemeleriSheepBall'den elde edebilirsin. Bu zorlu dünyada hayatta kalmak için, elinden gelen her şeyi kullanman önemlidir."
+  },
+  "Main_CatchPal": {
+    "localized_name": "Pal'ın Lütfu",
+    "description": "Pal KüresiÜretimi ve Pal Yakalama: Muhtemelen fark etmişsindir ama bu adada çok sayıda bilinmeyen canlı yaşıyor. |Pal| olarak adlandırılan bu varlıkların, kendilerine özgü zengin ekolojik özelliklere ve yüksek zekaya sahip oldukları, araştırma faaliyetlerimizde bize büyük ölçüde yardımcı olabilecekleri anlaşıldı. Pallar, |Pal Küresi| adı verilen bir araç kullanılarak yakalanabilir. Hangi prensiple çalıştığı bilinmiyor ama... yakalanan Pallar, temel olarak insanlara itaatkar varlıklar haline gelir. Pal KüresiMenüden Teknoloji ekranını açıpüretim yöntemini kontrol ettikten sonra, materyal olarak gerekenPaldiyum Kırığıcevherini elde et. Bu mavi parlayan gizemli cevherler, genellikle su kenarlarında oluşuyor gibi görünüyor. ardından,İlkel TezgâhüzerindePal Küresiüretirsen, yakalama hazırlığın tamamlanmış olur. Yakalama esnasında, hedefin canını mümkün olduğunca azaltmak dirençlerini zayıflatır ve başarı oranını artırır. Ayrıca çoğu Pal karşı saldırıya geçeceği için, ekipmanların tam değilken düşük savaş gücüne sahip küçük Palları hedeflemelisin."
   },
   "Main_CollectCrystal": {
     "localized_name": "Paldiyum",
     "description": "Bu adada paldium adı verilen doğaüstü güçlere sahip bir cevher vardır. Uzaklarda görülebilen dev ağaçla yakın bir akrabalığı var gibi görünüyor, ancak detayları bilinmiyor. Bu gizemli cevherin çeşitli kullanımları vardır vePal Küresiiçin olmazsa olmaz bir malzemedir. Paldiumun suya yakın yerlerde bulunduğu bilinmektedir. Nehir kenarı gibi su kenarlarını keşfet ve parlayan mavi taş benzeri bir nesne bulursan, ona kazmayla vurmayı dene. AyrıcaTaşveOdun'iİlkel Tezgâhile birleştirerek bir kazma yapabilirsin."
   },
-  "Main_CraftKitsunebiGear": {
-    "localized_name": "Partner Yetenekleri",
-    "description": "Tüm Pal'ların türlerine bağlı olarak farklı özelliklere sahip bir partner yeteneği vardır. Ayrıca ekipman olarak doğrudan kontrol edebileceğin veya ulaşım aracı olarak kullanmak için sırtlarına binebileceğin Pal'lar da vardır. İlk olarak,Pal Teçhizatı Tezgâhıteknolojisinin kilidini aç ve üssüne kur. Sonra,Foxparks'ın Koşum Takımıteknolojisinin kilidini aç vePal Teçhizatı Tezgâhıile üret. Normal ekipman ve öğelerin aksine Pal teçhizatları, envanterinin yanındaki önemli şeylerde saklanır."
+  "Main_CollectKeySpheres": {
+    "localized_name": "Ana Küre Toplamak",
+    "description": "Zoe'ye göre, bu adada toplam 8 kule var ve her birinde bir Key Sphere mühürlenmiş durumda. Tüm Key Sphere'ları toplarsan, bir şeyler açığa çıkabilir."
   },
   "Main_CraftMealPouch": {
     "localized_name": "Açlık en büyük düşmanındır",
-    "description": "Açlık en büyük düşmanınızdır. Hiçbir zaman yemek yemeyi unutmamalısın. Küçük Yem Çantasısenin ve Pal'larının yiyecek bulmasını kolaylaştıracaktır. Bunlar gibi küçük fikirler, keşif ve savaşta büyük yardım sağlayacaktır. Ayrıca,Küçük Yem Çantasıtıpkı Pal teçhizatı gibi envanterinin yanındaki önemli şeylerde saklanacaktır."
+    "description": "Açlık en büyük düşmanınızdır. Hiçbir zaman yemek yemeyi unutmamalısın. Küçük Yem Çantası senin ve Pal'larının yiyecek bulmasını kolaylaştıracaktır. Bunlar gibi küçük fikirler, keşif ve savaşta büyük yardım sağlayacaktır. Ayrıca, Küçük Yem Çantası tıpkı Pal teçhizatı gibi envanterinin yanındaki önemli şeylerde saklanacaktır."
+  },
+  "Main_CraftPalGear": {
+    "localized_name": "Pal Teçhizatı Üretimi",
+    "description": "Küçük yerleşkenin liderinden, Palpagos Adası'nın geçmişi hakkında bilgi edinmek istiyorsan Kaçakçı Grubu liderinin tek kızı olan |Zoe|yi ziyaret etmen önerildi. Ancak önce liderin dediği gibi,Foxparksyakalayıp |Pal Gear| (Pal Ekipmanı) yaparak kuleye gitme hazırlıklarını tamamlamalısın."
   },
   "Main_CraftPalSphere": {
     "localized_name": "Tuzak",
@@ -51,9 +71,17 @@
     "localized_name": "Paldiyum Koruması",
     "description": "Bir savaş çıktığında, saldırılardan sonsuza dek kaçınmak imkansızdır. Paldium'un gücünü kullanan bir savunma aracı edin. Yaygın Kalkanteknolojisinin kilidini aç veİlkel Tezgâhile üretim yap. Günlük olarak hazırlık yaparsan beklenmedik saldırılara karşılık verebilirsin."
   },
+  "Main_CraftTools": {
+    "localized_name": "Balta ve kazma üretimi.",
+    "description": "Balta ve Kazma Üretimi: OdunOdun veTaşTaş gibi temel malzemelere bundan sonra da büyük miktarlarda ihtiyaç duyulacak. Yerdekileri toplamanın yanı sıra, ağaçlara veya kayalara çıplak elle vurarak da bunları elde edebilirsin ama... Verimli bir şekilde toplamak için balta ve kazma gibi uygun araçlar hazırlaman gerekir. Öncelikle çalışma masasında tarifleri kontrol ederek OdunOdun veTaşTaş malzemelerini gerekli miktarda topla ve Taş KazmaTaş Balta ileTaş BaltaTaş Kazma üret."
+  },
+  "Main_Craft_PalGear": {
+    "localized_name": "Partner Yetenekleri",
+    "description": "Tüm Pal'ların türlerine bağlı olarak farklı özelliklere sahip bir partner yeteneği vardır. Ayrıca ekipman olarak doğrudan kontrol edebileceğin veya ulaşım aracı olarak kullanmak için sırtlarına binebileceğin Pal'lar da vardır. İlk olarak, Pal Teçhizatı Tezgâhı teknolojisinin kilidini aç ve üssüne kur. Sonra, Foxparks'ın Koşum Takımı teknolojisinin kilidini aç ve Pal Teçhizatı Tezgâhı ile üret. Normal ekipman ve öğelerin aksine Pal teçhizatları, envanterinin yanındaki önemli şeylerde saklanır."
+  },
   "Main_DefeatDesertBoss": {
     "localized_name": "Kum Havuzunun Hükümdarı",
-    "description": "Bu toprakları kurtarması gereken tetikçi grup artık yolsuzluğun kökü haline geldi. Her şeyin merkezinde grubun lideri Marcus Dryden adında bir adam var. Baskı altında olmak adına uyuşturucu dağıtıyor, kendi ceplerini dolduruyor ve adadaki kaosu manipüle ediyorlar. Hükmettiği kum havuzu bugün sessiz, yeni hükümdarı olan senin geri dönmeni bekliyor. Kupkuru Kumullar Kulesi'ne git ve bu yolsuzluğu kendi ellerinle ortadan kaldır."
+    "description": "Sen, Axel Travers'ı yendin veBir sonraki hedefin Özsavunma Güçleri'nin kulesi Bir sonraki hedefin Özsavunma Güçleri'nin kulesi. Bir sonraki hedefin Özsavunma Güçleri'nin kulesi."
   },
   "Main_DefeatDungeonBoss": {
     "localized_name": "Mühürlü Pal",
@@ -61,31 +89,51 @@
   },
   "Main_DefeatForestBoss": {
     "localized_name": "Sen, Pal'a zarar vermeyeceksin",
-    "description": "Lily Everhart, sadece Pal'ı ile bir arada yaşadığını iddia etse de, Pal'ını anormal derecede seviyor. Aşkı o kadar derin ki, insanların günahkâr varlıklar olduğuna hükmeden bir doktrine dönüşmüş durumda. Onun çok ileri gitmesini engellemenin tek yolu senin öne çıkman. Buzlu Dağ Kulesi'ne git ve onunla doğrudan yüzleş."
+    "description": "Sen, Zoe Rayne'i yendin ve |Kıskançlık Anahtar Küresi|ni ele geçirdin. Bir sonraki hedefin Pal Koruma Birliği'nin kulesi."
   },
   "Main_DefeatGrassBoss": {
     "localized_name": "Kız ve Kule",
     "description": "Adanın dört bir yanına dağılmış kulelerden birine meydan okuma zamanı geldi. Zoe Rayne adında bir kız, bu adadaki kulenin koruyucularından biridir. Ancak, gerçek görevinin ne olduğunu bilmiyor. Yine de, kendisine verilen rolü kabul ediyor ve bugün kulede duruyor. Bu kulenin ötesinde ne var? Cevabı bulmak, oraya ulaşan sana kalmış."
   },
+  "Main_DefeatKingWhale": {
+    "localized_name": "Panthalus",
+    "description": "Dünya Ağacı'na girmek içinPanthalus'nın yardımını alman gerekiyor. Panthalus'yı bul ve gücünü kanıtla."
+  },
   "Main_DefeatSakurajimaBoss": {
     "localized_name": "Bu gece sake çok lezzetli",
-    "description": "Saya Kurosaki, Sakurajima kulesini koruyan kişidir. Değişmeyen ayın altında, değişmeyen zamanı sessizce korumuştur. Görünüşe göre yakın zamanda Hilal Kılıcı olarak bilinen Pal'la tanışmış ve sonunda sessizliği bozmaya karar vermiş. Sakurajima'daki Ay Çiçeği Kulesi’nde onun gerçek niyetini öğren."
+    "description": "Sen, Victor Ashford'u yendin ve |Oburluk Anahtar Küresi|ni ele geçirdin. Bir sonraki hedefin Ay Çiçeği Müritleri'nin kulesi."
+  },
+  "Main_DefeatSkyIslandBoss": {
+    "localized_name": "Bin yıl gibi gelen bir gün, bahar geldiğinde",
+    "description": "Sen, Bjorn Seligson'u yendin ve |Öfke Anahtar Küresi|ni ele geçirdin. Bir sonraki hedefin Ahit Kulesi."
   },
   "Main_DefeatSnowyMountainBoss": {
     "localized_name": "Pal Bağlama Deneyi",
-    "description": "Belirli bir tesiste son derece tehlikeli deneylerin tekrarlandığına dair işaretler var. Kayıtlarda yeni türlerin yaratılması ve yeteneklerin geliştirilmesi gibi kelimeler yer alıyor. Kayıtlarda görünen kişi Victor Ashford. Bir tür cevap bulmuş olmalı. Orada ne olduğunu ve sonucunu kendin görmelisin. Astral Dağları zirvesindeki kuleyi hedefle ve tehlikeli deneylerini hemen durdur."
+    "description": "Sen, Marcus Dryden'ı yendin ve Açgözlülük Anahtar Küresi|ni ele geçirdin. Bir sonraki hedefin Genetik Araştırma Birimi'nin kulesi."
   },
   "Main_DefeatVikingBoss": {
     "localized_name": "Tüm sorumluluğu üstlenen kişi",
-    "description": "Bir zamanlar felaketle boğuşan Feybreak. Merkezinde, Bjorn Seligson halkı yönetiyor ve kuleyi korumaya devam ediyor. Bahsettiği |o zaman|ın ne anlama geldiği belirsiz. Söyleyebileceğimiz tek şey, bu noktaya ulaşanların gücünün değişimin katalizörü olacağıdır. Feybreak'in en arkasındaki kuleye git ve insanları kendi ellerinle kurtar. Felaketin suçunu yalnızca sen ortadan kaldırabilirsin."
+    "description": "Sen, Saya Kurosaki'yi yendin ve |Şehvet Anahtar Küresi|ni ele geçirdin. Bir sonraki hedefin Feybreak Kulesi."
   },
   "Main_DefeatVolcanoBoss": {
-    "localized_name": "Zaferin tamamlanmasına bağlılık",
-    "description": "Bir zamanlar, hiçbir rakibinin yaklaşmasına izin vermeyen ve mutlak zafere takıntılı bir adam varmış. Dövüşmek için hiçbir nedeni yokmuş. Kendisinden daha güçlü bir şeyle karşılaşmak. Tek istediği bu. Ölümsüz Ateş Kardeşliği Kulesi’nde duran adam Axel Travers. Obsidian Dağı kraterindeki kulede, senin meydan okumanı bekliyor."
+    "localized_name": "Mutlak Zafer Saplantısı",
+    "description": "Sen, Lily Everhart'ı yendin ve |Kibir Anahtar Küresi|ni ele geçirdin. Bir sonraki hedefin Ebedi Ateş Yoldaşlığı'nın kulesi."
   },
   "Main_DefeatWildBoss": {
     "localized_name": "İlk Boss İmhası",
     "description": "Güçlü Pal’ların Palpagos Adası'nın çeşitli yerlerinde bölgeleri vardır. Bazen bir tehdit olabilirler, ancak onları yenmek sana harika bir deneyim kazandıracak ve onları yakalamak onları güvenilir yoldaşlar yapacaktır. Onlarla nasıl başa çıkacağın sana kalmış. Bu adanın bir yerinde {targetpal} adında bir Pal var gibi görünüyor. {targetpal}'ı bul ve onu yenmeyi veya yakalamayı dene."
+  },
+  "Main_DefeatWorldTreeDragon": {
+    "localized_name": "Uyanış",
+    "description": "Beyaz Felaket Ejderhası ve sahibi, ebedi uykularından uyanıyor. Seninle onlar arasında konuşulacak hiçbir kelime yoktu. Şimdi, her şeyi bitirme zamanı."
+  },
+  "Main_DefeatWorldTreeMiddleBoss": {
+    "localized_name": "Derinliklere Giden Yol",
+    "description": "Dünya Ağacı'nın en derin kısımlarına yakın bir yerde, bir koruyucunun geride bıraktığı ses kaydını dinledin. Ekli olan koordinat verilerini temel alarak ipuçlarını aramaya koyulalım."
+  },
+  "Main_EatFood": {
+    "localized_name": "Açlığını gider",
+    "description": "Gıda Tedariki: Uzun süreli faaliyetler yürütmek için istikrarlı bir gıda tedariki olmazsa olmazdır. Neyse ki, çeşitli yerlerde bulunanKırmızı Meyvelerşlenmeden yenebilir ve bazı Pallar da yiyecek olarak kullanılabilir. Kalbimiz sızlasa da... bu hayatta kalmak için kaçınılmaz bir fedakarlıktır."
   },
   "Main_EquipClothArmor": {
     "localized_name": "Kendini koru",
@@ -101,15 +149,59 @@
   },
   "Main_OpenSurvivalGuide": {
     "localized_name": "Yazılı hayatta kalma bilgisi",
-    "description": "Birçok öncü ve kaşif bu adayı keşfetmeye çalışmış ve hayatını kaybetmiştir. Bilgelikleri ve hayatta kalma kayıtları cihazınla senkronize edilmiştir. Bu zorlu dünyada hayatta kalmak için önce<keyGuideIcon id=|UIEscape|/>içindeki seçenekler menüsünü aç ve Hayatta Kalma Rehberiöğesini işaretle."
+    "description": "Giriş: Hayatta Kalma Rehberi, öncü ekibimizin Palpagos Adası'nda edindiği deneyimlere dayanarak hazırlanmış bir belgedir. Bu adada gerçekleşen hiçbir şeyde bizim genelgeçer mantığımız geçerli değildir. Bir konuda tereddüte düşersen, lütfen bu rehbere göz at."
   },
   "Main_PickupWood": {
     "localized_name": "İlk malzeme koleksiyonu",
     "description": "Doğadan elde edilen kaynaklar arasındaOdun, tüm tesis ve araçların temel malzemesidir. Odun’i toplamak için düşen ağaç dallarını topla veya yakındaki ağaçlara saldır."
   },
+  "Main_PrepareEquipment": {
+    "localized_name": "Ekipmanları hazırla",
+    "description": "Ekipman Üretimi: Biz ilk olarak, Lamball 'den elde ettiğimiz yünleri çalışma masasında Kumaş 'e dönüştürdük ve Kumaş Kıyafet ürettik. Sonrasında, Paldium'un sahip olduğu kendini onarma yeteneğini uygulayarakYaygın Kalkangeliştirdik. Son olarak, engebeli arazileri keşfetmek içinNormal Paraşüt. Buraya kadar hazırlıkları tamamladığınızda, araştırmalarınızı nispeten daha verimli bir şekilde ilerletebileceksiniz."
+  },
+  "Main_RayneSyndicate": {
+    "localized_name": "Rayne Örgütü",
+    "description": "eterli hazırlıkları yaptın. Kaçakçı Grubu'nun kulesine yönel ve |Zoe| ile görüşmeye git."
+  },
+  "Main_ReachWorldTree": {
+    "localized_name": "Dünya Ağacı'na",
+    "description": "SenPanthalus'ya gücünü gösterdin ve onun desteğini kazandın. Panthalus, Dünya Ağacı'na girmenin anahtarı olacak. Dünya Ağacı'na doğru ilerle ve içeri girmenin bir yolunu bulalım."
+  },
+  "Main_ReturnSmallVillage": {
+    "localized_name": "Ana Küre",
+    "description": "Zoe olduğunu düşündüğün genç kızı püskürttün ve yanında düşmüş olan Pal Küresi'ne benzer bir şeyi alıp dışarı çıktın. Bir kez daha küçük yerleşkeye geri dönüp liderle konuşalım."
+  },
+  "Main_SmallVillage": {
+    "localized_name": "Küçük Yerleşim",
+    "description": "Cihazda görüntülenen tüm maddeleri uyguladın ve ustalaştın. Öncü birliğin hayatta kalanlarından alınan bilgilere göre, kaçak avcı çetesinin kulesi civarında bir yerleşim yeri varmış. Eğer onu bulursan, yerleşimin liderini bulup onunla konuşmak iyi bir fikir olabilir."
+  },
+  "Main_StatusUp": {
+    "localized_name": "İstatistik Güçlendirme",
+    "description": "statistiklerin Güçlendirilmesi: Deneyim kazanmak ve yeteneklerini geliştirmek zorlukların üstesinden gelmene yardımcı olacaktır. Seviye atladığında envanterini aç ve statülerinden birini güçlendirmeyi dene çok daha verimli bir araştırma faaliyeti yürütmen mümkün olacaktır."
+  },
+  "Main_TalkGrassBoss": {
+    "localized_name": "Zoe-Rayne",
+    "description": "Liderden, detaylı bilgiyi Zoe'den alman gerektiğini duydun. Bir kez daha Rayne Kaçakçı Grubu'nun kulesine doğru yola koyulalım."
+  },
+  "Main_TalkSkyBoss": {
+    "localized_name": "Gökleri Bilen",
+    "description": "Auri'yi mağlup ettin ama hâlâ gücü varmış gibi görünüyordu. Diğer kulelerdeki liderlerden farklı bir tarafı var gibi. Bir kez olsun, onunla konuşmayı denemek iyi olabilir."
+  },
+  "Main_TalkSkyBossAgain": {
+    "localized_name": "Felaket",
+    "description": "Auri, sana Dünya Ağacı hakkında bilgi vermek istiyor gibi görünüyor. Anlatacakları oldukça uzun olacak gibi. Vaktin olduğunda onunla tekrar konuş."
+  },
+  "Main_TalkWorldTreeNPC": {
+    "localized_name": "Günah",
+    "description": "Sonunda Dünya Ağacı'na ayak bastın. İçeride gizemli bir alan uzanıyor ancak bir yerlerde uğursuz bir sezi hissediliyor. Bir süre etrafa bakındıktan sonra bir insan silüeti fark ettin."
+  },
+  "Main_TutorialStart": {
+    "localized_name": "İlk Ada Sakini",
+    "description": "Bilinmedik bir sahilde gözlerini açtın ama zihnin paramparça. Burası neresi, sen kimsin?...... Bir ipucu ararken, biraz ötede bir karaltı fark ettin."
+  },
   "Main_UnlockFastTravel": {
     "localized_name": "Büyük Kartal Heykeli'ni Etkinleştir",
-    "description": "Bu alanda, Büyük Kartal Heykeli adı verilen eski bir medeniyetin geride bıraktığı bir ışınlanma cihazı bulunmaktadır. Cihazı aktif hale getirebilirsen, yolculuğun çok daha kolay hale gelecektir. İlk olarak, yolculuğunun temellerini atmak için yakındaki Büyük Kartal Heykeli'ne dokun. Bir gün, uzakta duran o kuleye doğru yola çıkma zamanı gelebilir."
+    "description": "Keşif Ekibi Üyelerine: Palpagos Adası hâlâ gizemlerle dolu ancak mevcut bilgilere göre adanın dört bir yanında kuş benzeri canlıları simgeleyen taş heykeller bulunuyor. Bu taş heykeller bilinmeyen bir teknolojiyle birbirine bağlı ve diğer heykellere anında ışınlanmayı sağlıyor. İlk olarak bu heykellerin çevresini merkez alarak araştırmaya devam etmek en iyisi olacaktır."
   },
   "Main_UnlockPalBox": {
     "localized_name": "Pal Kutusu",
@@ -123,9 +215,17 @@
     "localized_name": "Güvenlik Önlemleri",
     "description": "Bu adada birçok tehlike var. Bunlardan biri de uçurum. Yanlış adım attın ve sonunda muhtemelen sadece bir yaralanmayla kurtulamazsın. Normal Paraşütteknolojisinin kilidini aç veİlkel Tezgâhile üret. Bununla, yüksek uçurumlardan güvenli bir şekilde aşağı inebilirsin."
   },
+  "Main_WorkPal": {
+    "localized_name": "Pal’ı çalıştır",
+    "description": "İş Gücü Olarak Pal Kullanımı: Yakalamayı başardığınız ve Pal Küresi içine yerleşen Pallar, Palbox adı verilen bir tesis kullanılarak verimli bir şekilde yönetilebilir ve çalıştırılabilir. Öncelikle Teknoloji ekranından Palbox'ın nasıl yapıldığını kontrol edin ve istediğiniz bir yere kurun. Palbox'ta, yanınızdaki Palları depolayabilir veya Palbox çevresine çağırabilirsiniz. Ayrıca, Palbox'tan çağrılan Pallar kutu merkezli belirli bir alan içinde hareket ederler, bu da aslında bizim üs alanımız olur. Kurulum yerini dikkatlice seçin. Palbox'tan çağrılan Pallar, kendi özelliklerine göre yapabilecekleri işleri bulup çalışırlar. Gelecekte çeşitli Pallar toplayarak, çok daha verimli bir üs yönetimi mümkün olacaktır."
+  },
   "Main_WorkerPal": {
     "localized_name": "Pal’ı çalıştır",
     "description": "Pal seninle birlikte çalışacak ve üssünü destekleyen bir arkadaş olacak. Pal Kutusu'ye erişerek yönetim menüsünden yakaladığın Pal’lardan birini seç ve onu üssüne gönder."
+  },
+  "Main_WorldTreeAbyss": {
+    "localized_name": "Dünya Ağacı'nın en derin noktasına ulaş",
+    "description": "Dünya Ağacı'nın koruyucusundan, şu an Dünya Ağacı'nda neler olup bittiğini ve en derinlerde uyuyan Felaket'in gerçek kimliğini öğrendin. Son saat yaklaşıyor."
   },
   "Sub_Angler01": {
     "localized_name": "Balık tutmak için mükemmel bir gün",
@@ -151,6 +251,26 @@
     "localized_name": "Splatterina Üreme Taslağı",
     "description": "Benim Splatterinalar toplandı mı? Üreme için 10 tane kafi. Sana güveniyorum!"
   },
+  "Sub_DeliveryQuartz": {
+    "localized_name": "Saf Kuvars'i topla.",
+    "description": "Saf Kuvars10 tane toplayıp, müşteriye teslim edelim."
+  },
+  "Sub_DeliveryRainbowCrystal": {
+    "localized_name": "Heksolit Kuvarsı'i topla.",
+    "description": "Heksolit Kuvarsı10 tane toplayıp, müşteriye teslim edelim."
+  },
+  "Sub_DeliverySkyIslandOre": {
+    "localized_name": "Güneş Taşı'i topla.",
+    "description": "Güneş Taşı10 tane toplayıp, müşteriye teslim edelim."
+  },
+  "Sub_DeliverySulfur": {
+    "localized_name": "Kükürt'i topla.",
+    "description": "Kükürt10 tane toplayıp, müşteriye teslim edelim."
+  },
+  "Sub_DeliveryWood_Fine": {
+    "localized_name": "Kalın kereste'i topla.",
+    "description": "Kalın kereste10 tane toplayıp, müşteriye teslim edelim."
+  },
   "Sub_Farmer01": {
     "localized_name": "Pal'ın Lütfu",
     "description": "Eğer su vermede yetenekli bir Pal’cığın varsa, onu bana verir misin? Elbette nehirden su getirip dökebilirim ama, Pal’ların taşıdığı suyun içinde sanki özel bir şeyler var gibi geliyor bana, çünkü sebzeler her zamankinden daha canlı ve sağlıklı büyüyorlar. Ne olur, bana yardım et!"
@@ -171,6 +291,10 @@
     "localized_name": "Kibirli bir gurmenin talebi",
     "description": "Evet, evet... Ben saygın bir gurme eleştirmen ve Palpagos Gurmeler Topluluğu'nun baş danışmanıyım. Ayrıcalıklı damağımla yemeğini şereflendireceğim, genç zıpçıktı. Hoş, senin gibi başıboş birinin seçici damak tadımı tatmin edebileceğinden şüpheliyim ama olsun."
   },
+  "Sub_HowSurviveWorldTree": {
+    "localized_name": "Dünya Ağacı'nda hayatta kalma sanatı",
+    "description": "Gizemli OdunvePal-kalsitden 1 er tane toplayıp müşteriye rapor verelim."
+  },
   "Sub_Kigurumi01": {
     "localized_name": "Sen de Depresso ol!",
     "description": "Bekle! Ben bir Pal değilim! Bana Pal Küresi fırlatma! …Aa, meğer senmişsin! Kostüm yapma sözümüz vardı ya! Haha! Gerekli malzemeleri topladın mı? 20 adet yüksek kaliteli kumaş ve 100 adet zehir bezi lazım. Depresso’nun o güzelim tüy rengini yansıtmak için bir sürü Zehir Bezi gerekiyor."
@@ -178,6 +302,18 @@
   "Sub_Kigurumi01_Replay": {
     "localized_name": "Sen de Depresso ol!",
     "description": "Bekle! Ben bir Pal değilim! Bana Pal Küresi fırlatma! …Aa, meğer senmişsin! Kostüm yapma sözümüz vardı ya! Haha! Gerekli malzemeleri topladın mı? 20 adet yüksek kaliteli kumaş ve 100 adet zehir bezi lazım. Depresso’nun o güzelim tüy rengini yansıtmak için bir sürü Zehir Bezi gerekiyor."
+  },
+  "Sub_LoneWolf01": {
+    "localized_name": "Kara yalnız kurt",
+    "description": "Yaralı ve yere yığılmış biriniKitsun Noctbuldun."
+  },
+  "Sub_LoneWolf02": {
+    "localized_name": "Geçmişin İzinde",
+    "description": "Kitsun NoctOnun sahibine giden ipucunu bul."
+  },
+  "Sub_LoneWolf03": {
+    "localized_name": "Kınsız Kılıç",
+    "description": "Sen, köydeki vahşi Pal’ların ortadan kaldırılması görevini üstlendin."
   },
   "Sub_Nomad01": {
     "localized_name": "Dağcılık İnişe Kadar Devam Eder",
@@ -189,7 +325,7 @@
   },
   "Sub_Nomad03": {
     "localized_name": "Zindan Arayışı",
-    "description": "Leezpunk ya da Leezpunk Ignis’i bulabildin mi? Benim özel sakladığım eşyamla takas edelim, ne dersin!"
+    "description": "Tombat'ı bulabildin mi? Benim özel sakladığım eşyamla takas edelim, ne dersin!"
   },
   "Sub_Nomad04": {
     "localized_name": "Rahat bir tempoda seyahat",
@@ -248,16 +384,32 @@
     "description": "O herif ileride. Gerçekten affedemiyorum onu. Lütfen, sen onu perişan edip güzelce cezalandır!"
   },
   "Sub_Ranger03": {
-    "localized_name": "Büyük Tarantriss",
-    "description": "O devasa Tarantriss oldukça tehlikeli. Ona meydan okumadan önce ekipmanını gözden geçirmeni tavsiye ederim."
+    "localized_name": "Büyük Faleris Aqua",
+    "description": "O devasa Faleris Aqua oldukça tehlikeli. Ona meydan okumadan önce ekipmanını gözden geçirmeni tavsiye ederim."
   },
   "Sub_Ranger04": {
     "localized_name": "Çiçek Bahçesinde Bal Toplama",
     "description": "Beegarde ya da Elizabee’yi bulabildin mi? 3 tane yeterli olur!"
   },
+  "Sub_RookieExpeditionTeam01": {
+    "localized_name": "Acemi Araştırma Ekibi.",
+    "description": "Tesadüfen, Pal’ların saldırısına uğramış ve bitkin düşmüş 3 kişilik bir grupla karşılaştın. Onlara yardım edelim."
+  },
+  "Sub_RookieExpeditionTeam02": {
+    "localized_name": "Filizlenme",
+    "description": "Daha önce yardım ettiğin araştırma ekibiyle tekrar karşılaştın. Ancak, Carla ortalıklarda görünmüyor..."
+  },
+  "Sub_RookieExpeditionTeam03": {
+    "localized_name": "Büyüme",
+    "description": "Fia ile tekrar karşılaştın. Görünüşe göre o, güç arayışı içinde."
+  },
+  "Sub_RookieExpeditionTeam04": {
+    "localized_name": "Boşa açan çiçek",
+    "description": "Tekrar karşılaştığın Fia, boş gözlerle sana saldırdı. Hayatta kalmak için savaşmaktan başka çaren yok."
+  },
   "Sub_Scholar01": {
     "localized_name": "Efsaneyi Kanıtla!",
-    "description": "Hadi, efsanevi Pal’ı bulup getirin! Batıdaki Obsidyen Volkanı, kuzeydeki Beyaz Gümüş Ruh Dağı, doğudaki Kurak Kum Tepeleri ve son olarak Cennet Düşüşü olarak bilinen uçsuz bucaksız yerlerde, her birinde en az 1 tane efsanevi Pal bulunduğu biliniyor. O büyük kaya alanına tırmanırsan, çok uzağa kadar görebilirsin. Bekliyorum, başarabileceğini umuyorum!"
+    "description": "Hadi, git de efsanevi Pal’ları bulup getir! Kuzeydeki Gümüş Zirvede, doğudaki Kurak Kumullar ve son olarak “Gökgüneş Diyarı” olarak bilinen en uç topraklarda, en az birer efsanevi Pal’ın bulunduğunu biliyoruz. Şuradaki büyük kaya oluşumuna çıkarsan uzakları daha iyi görebilirsin. Senden umutluyum!"
   },
   "Sub_Scholar02": {
     "localized_name": "Motivasyon Düğmesi",
@@ -271,9 +423,29 @@
     "localized_name": "Metal Tespit Etme",
     "description": "Ne oldu? Krom Cevher toplandı mı? Eğer bir metal dedektörün olsaydı, bu adanın bir yerlerinde gömülü olan Krom Cevherini bulabilirdin belki."
   },
+  "Sub_StrongOldMan01": {
+    "localized_name": "Esir alınmış maceracı",
+    "description": "Kafese hapsedilmiş, ada sakini olduğunu düşündüğün birini kurtardın ama bunu fark eden kaçakçı çetesi üyeleri etrafınızda toplanmış gibi görünüyor. Şimdilik önce onları geri püskürtüp güvenliği sağlayalım."
+  },
+  "Sub_StrongOldMan02": {
+    "localized_name": "Aranan suçluyu/ödüllü hedefi devir",
+    "description": "Tekrar karşılaştığın Maceracı Harold, güçlü bir düşman karşısında çaresiz kalmış gibi görünüyordu. Seninle omuz omuza savaşacak olmanın heyecanını yaşıyor. Harold ile iş birliği yaparak aranan suçluyu alt et."
+  },
+  "Sub_StrongOldMan03": {
+    "localized_name": "Temsilci",
+    "description": "Harold ile tekrar karşılaştın ancak her zamanki neşesinden eser yok. Yakındaki bir köyden aldığı görev, kontrolden çıkmış bir Pal'ın etkisiz hale getirilmesi üzerine. Karanlık bir ifadeyle görevin detaylarını anlatan Harold, bir teklifte bulundu. |Bu görevi sen üstlenmez misin?| Sen teklifi kabul edince Harold bir anlığına rahatlamış gibi göründü ama... Başını hafifçe öne eğdiğinde, yüzündeki gölge daha da derinleşmişti."
+  },
+  "Sub_StrongOldMan04": {
+    "localized_name": "Geçmiş",
+    "description": "Dünya Ağacı'nın eteklerinde duran Harold'un sana itiraf etmek istediği bir şeyler var gibi. Geçmişiyle yüzleşip tövbe mi etmek istiyor? Yoksa geride bıraktığı izleri birinin hafızasına mı kazımak istiyor? Kararlılık sızan o yüz hatlarından tam olarak ne düşündüğünü okumak mümkün değildi."
+  },
+  "Sub_StrongOldMan05": {
+    "localized_name": "Şövalyenin sonu",
+    "description": "Onların sonuna şahitlik edeceksin."
+  },
   "Sub_Zoe01": {
     "localized_name": "Kazandın diye kendini bir şey sanma",
-    "description": "Grizzbolt’u yakalayabildin mi? No:1 Yaban Hayatı Koruma Alanı’nda başka güçlü Pal'lar da varmış, senin için biraz zor olabilir. Eğer benim onayımı almak istiyorsan, elinden gelenin en iyisini yapmaya bak."
+    "description": "Grizzbolt’u yakalayabildin mi? Birinci Av Yasağı Bölgesi’nde başka güçlü Pal’lar da çok varmış; belki de senin için fazla zordur. Beni kendine hayran bırakmak istiyorsan, elinden geldiğince çabala bakalım."
   },
   "Sub_Zoe02": {
     "localized_name": "Sana güvenmiş değilim ama",

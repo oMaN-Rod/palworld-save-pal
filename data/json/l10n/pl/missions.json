@@ -3,6 +3,10 @@
     "localized_name": "Wygodna baza",
     "description": "Aby Pale mogły pracować wydajnie, niezbędna jest rozbudowa bazy. Najpierw zwiększ poziom bazy do 7 i zadbaj o stworzenie przestrzeni przyjaznej twoim towarzyszom. Gdy wszystko będzie gotowe, zyskasz siłę, by stawić czoła przeciwnikom w wieży."
   },
+  "Main_BeginAdventure": {
+    "localized_name": "Początek przygody",
+    "description": "Udało ci się wykonać i opanować wszystkie zadania wyświetlane na urządzeniu. Pora wrócić do badaczki."
+  },
   "Main_BuildHatchingMachine": {
     "localized_name": "Jajo Pala",
     "description": "Jak wiadomo, Pale wykluwają się z jaj. Jaja można znaleźć w różnych miejscach na wyspie, dlatego podczas eksploracji warto uważnie obserwować otoczenie. Hodując Pale od jaja, możesz trafić na bardzo zróżnicowane osobniki. Być może pewnego dnia wyruszysz na poszukiwanie swojego jedynego, wymarzonego Pala. Najpierw odblokuj technologię Inkubator jaj i zainstaluj ją w swojej bazie. Wystarczy umieścić jajo, a Inkubator jaj zajmie się resztą, ale trzeba uzbroić się w cierpliwość."
@@ -11,9 +15,13 @@
     "localized_name": "Punkt startowy",
     "description": "Otwórz menu budowania przez <keyGuideIcon id=|OpenConstructionMenu| iconScale=|0.7|/> i spróbuj postawić Palbox na otwartym terenie. To będzie twoja pierwsza baza — wspólna przestrzeń dla ciebie i twoich Pali. Jeśli dobrze ją przygotujesz, stanie się ważnym punktem wypadowym w drodze ku wieży. Wybierz miejsce rozważnie."
   },
-  "Main_BuildWorkBench": {
+  "Main_BuildWorkBench_Old": {
     "localized_name": "Start pracy",
     "description": "Surowce to tylko zwykłe materiały. Dopiero po zbudowaniu warsztatu zyskasz możliwość tworzenia bardziej złożonych przedmiotów. Otwórz menu budowania, wybierz Prymitywny stół warsztatowy i wskaż miejsce, w którym chcesz go postawić. Zbuduj swoje pierwsze stanowisko własnymi rękami."
+  },
+  "Main_BuildWorkbench": {
+    "localized_name": "Postaw stół warsztatowy",
+    "description": "Pozyskanie drewna i budowa stołu warsztatowego: Ta wyspa obfituje w różnorodne zasoby, takie jak drewno czy kamień. Aby prowadzić długofalowe badania przy jednoczesnym oszczędzaniu ograniczonych zasobów, należy z nich w pełni skorzystać. Na początek zajmij się drewnem. Możesz je podnieść prosto z ziemi lub pozyskać, atakując rosnące w pobliżu drzewa. Gdy znajdziesz już bezpieczne miejsce z odpowiednią ilością wolnej przestrzeni, wyznacz teren pod budowę stołu warsztatowego i ustaw go."
   },
   "Main_Capture30Pal": {
     "localized_name": "Złap 30 dowolnych Pali.",
@@ -29,19 +37,31 @@
   },
   "Main_CaptureSheepBall": {
     "localized_name": "Najsłabszy Pal",
-    "description": "Wyspa Palpagos to świat rządzony przez prawo silniejszego. SheepBall znajduje się na samym dole łańcucha pokarmowego i można go schwytać bez większego trudu. Jednak dzięki zręcznym łapkom SheepBall może wykonywać za ciebie wiele prac. Spróbuj złapać pięć takich Pali — będą to twoi pierwsi, całkiem użyteczni pomocnicy w rozbudowie bazy. Oprócz tego SheepBall mogą dostarczyć ci surowców potrzebnych do przetrwania, takich jak Wełna czy Baranina z Lamballa. W tym brutalnym świecie przetrwa tylko ten, kto nauczy się wykorzystywać wszystko, co ma pod ręką."
+    "description": "SheepBall — wykorzystanie: SheepBall ma niską siłę bojową i łatwo go schwytać, ale jest zręczny i pomaga przy różnych pracach, które zwykle wykonują ludzie. Jako jeden z pierwszych towarzyszy przy rozbudowie bazy powinien okazać się naprawdę pomocny. Można z niego również pozyskać materiały potrzebne do codziennego życia, takie jak Wełna czy Baranina z Lamballa . Na początek warto schwytać kilka Pali tego typu, bo dzięki nim rozbudowa bazy będzie przebiegać sprawniej."
+  },
+  "Main_CaptureSheepBall_Old": {
+    "localized_name": "Najsłabszy Pal",
+    "description": "Wyspa Palpagos to świat rządzony przez prawo silniejszego. SheepBall znajduje się na samym dole łańcucha pokarmowego i można go schwytać bez większego trudu. Jednak dzięki zręcznym łapkom SheepBall może wykonywać za ciebie wiele prac. Spróbuj złapać pięć takich Pali — będą to twoi pierwsi, całkiem użyteczni pomocnicy w rozbudowie bazy. Oprócz tego Lamball mogą dostarczyć ci surowców potrzebnych do przetrwania, takich jak Wełna czy Baranina z Lamballa . W tym brutalnym świecie przetrwa tylko ten, kto nauczy się wykorzystywać wszystko, co ma pod ręką."
+  },
+  "Main_CatchPal": {
+    "localized_name": "Schwytanie Pala",
+    "description": "Pal Sfera i łapanie Pali: Ta wyspa jest domem dla ogromnej liczby nieznanych stworzeń, co zapewne już udało ci się zauważyć. Istoty te, zwane „Palami”, wyróżniają się bogatą różnorodnością cech biologicznych oraz wysoką inteligencją, a przy tym, jak się okazało, mogą bardzo pomóc w naszych badaniach. Do łapania Pali służy Pal Sfera. Nie wiadomo, na jakiej zasadzie to działa, ale schwytane Pale z reguły stają się posłuszne ludziom. Otwórz w menu ekran technologii i znajdź Pal Sfera. Następnie zdobądź potrzebny surowiec: rudę Fragment Paldium. Ten zagadkowy minerał, emitujący niebieski blask, często można znaleźć w pobliżu wody. Gdy już to zrobisz, wytwórz: Pal Sfera przy użyciu: Prymitywny stół warsztatowy , a przygotowania do łapania będą zakończone. Podczas próby schwytania warto wcześniej osłabić cel, bo mniejsza odporność zwiększa szanse powodzenia. Trzeba jednak pamiętać, że wiele Pali kontratakuje, więc dopóki twój ekwipunek nie będzie wystarczająco dobrej jakości, najlepiej wybierać małe Pale o niskiej sile bojowej."
   },
   "Main_CollectCrystal": {
     "localized_name": "Paldium",
     "description": "Na tej wyspie występuje rzadki minerał o nazwie Paldium, który skrywa w sobie nadprzyrodzoną moc. Podobno ma związek z tym ogromnym drzewem, które widać gdzieś daleko na horyzoncie, choć szczegóły pozostają nieznane. Ten tajemniczy minerał ma wiele zastosowań — Pal Sfera to jeden z przedmiotów, do których jego użycie jest niezbędne. Wiadomo, że Paldium można znaleźć w pobliżu wody. Przeszukuj brzegi rzek i inne tereny podmokłe — jeśli zauważysz niebiesko połyskujący kamień, uderz go kilofem. Prymitywny stół warsztatowy umożliwia stworzenia kilofa, jeśli posiadaszKamień i Drewno."
   },
-  "Main_CraftKitsunebiGear": {
-    "localized_name": "Umiejętność Partnera",
-    "description": "Każdy Pal posiada Umiejętność Partnera, która różni się w zależności od gatunku. Niektóre Pale można wyposażyć i bezpośrednio nimi sterować lub dosiąść ich, by służyły jako środek transportu. Najpierw odblokuj Stół warsztatowy do Pal Sprzętu i zainstaluj go w swojej bazie. Następnie odblokuj technologię Uprząż dla Foxparksa i postaw Stół warsztatowy do Pal Sprzętu, by ją wytworzyć. Pal-sprzęt, w przeciwieństwie do zwykłego ekwipunku i przedmiotów, przechowywany jest w sekcji „ważne rzeczy” obok ekwipunku."
+  "Main_CollectKeySpheres": {
+    "localized_name": "Zbieranie Kluczowych Sfer",
+    "description": "Zoe twierdzi, że na tej wyspie jest osiem wież, a w każdej z nich zapieczętowano Kluczową Sferę. Jeśli uda się zebrać je wszystkie, może w końcu wyjaśni się, czym tak naprawdę są."
   },
   "Main_CraftMealPouch": {
     "localized_name": "Głód to największy wróg",
     "description": "Głód to największy wróg. Niezależnie od sytuacji, nigdy nie zapominaj o jedzeniu. Mała torba z paszą ułatwia spożywanie posiłków tobie i twoim Palom. Takie drobne udogodnienia mogą okazać się ogromnym wsparciem podczas eksploracji i walki. Mała torba z paszą, tak jak Pal-sprzęt, znajduje się w sekcji „ważne rzeczy” obok ekwipunku."
+  },
+  "Main_CraftPalGear": {
+    "localized_name": "Wytwarzanie Pal Sprzętu",
+    "description": "Przywódca małej osady zasugerował, że jeśli chcesz dowiedzieć się czegoś o przeszłości Palpagos, warto odwiedzić Zoe, jedyną córkę jednego z przywódców gangu kłusowników. Najpierw jednak, zgodnie z jego radą, najlepiej schwytać Pala Foxparks i stworzyć „Pal Sprzęt”, aby przygotować się do drogi ku wieży."
   },
   "Main_CraftPalSphere": {
     "localized_name": "Narzędzie do łapania",
@@ -51,9 +71,17 @@
     "localized_name": "Tarcza Paldium",
     "description": "W czasie walki nie sposób unikać ciosów w nieskończoność. Zdobądź środki obrony, wykorzystując moc Paldium. Odblokuj technologię Zwykła tarcza i postaw Prymitywny stół warsztatowy, by ją wytworzyć. Jeśli przygotujesz się zawczasu, poradzisz sobie nawet z niespodziewanym atakiem."
   },
+  "Main_CraftTools": {
+    "localized_name": "Wytworzenie siekiery i kilofa",
+    "description": "Wytwarzanie siekiery i kilofa: Podstawowe surowce, takie jak Drewno i Kamień, będą potrzebne w dużych ilościach. Można je zbierać z ziemi lub pozyskiwać, uderzając gołymi rękami w drzewa i skały. Jednak aby robić to wydajniej, niezbędne są odpowiednie narzędzia. Najpierw sprawdź przepisy na stole warsztatowym, zgromadź wymaganą ilość materiałów Drewno oraz Kamień, a następnie wytwórz przedmioty Kilof z kamienia i Kamienny topór."
+  },
+  "Main_Craft_PalGear": {
+    "localized_name": "Umiejętność Partnera",
+    "description": "Każdy Pal posiada Umiejętność Partnera, która różni się w zależności od gatunku. Niektóre Pale można wyposażyć i bezpośrednio nimi sterować lub dosiąść ich, by służyły jako środek transportu. Najpierw odblokuj Stół warsztatowy do Pal Sprzętu i zainstaluj go w swojej bazie. Następnie odblokuj technologię Uprząż dla Foxparksa i wytwórz ją, używając Stół warsztatowy do Pal Sprzętu. Pal-sprzęt, w przeciwieństwie do zwykłego ekwipunku i przedmiotów, przechowywany jest w sekcji „ważne rzeczy” obok ekwipunku."
+  },
   "Main_DefeatDesertBoss": {
     "localized_name": "Władca piasków",
-    "description": "Straż obywatelska, która miała ocalić tę krainę, stała się dziś źródłem zepsucia. Na jej czele stoi przywódca o imieniu Marcus Dryden. Pod pozorem utrzymywania porządku rozprowadza narkotyki, gromadzi bogactwa i manipuluje chaosem na wyspie. Piaszczyste ziemie, które niegdyś kontrolował, dziś milcząco wyczekują powrotu swojego nowego władcy — ciebie. Udaj się do Wieży Wyschniętych Wydm i własnoręcznie połóż kres tej przeklętej korupcji."
+    "description": "Udało ci się pokonać Axela Traversa i zdobyć Kluczową Sferę Lenistwa. Następnym celem jest Wieża SOWP."
   },
   "Main_DefeatDungeonBoss": {
     "localized_name": "Zapieczętowany Pal",
@@ -61,35 +89,55 @@
   },
   "Main_DefeatForestBoss": {
     "localized_name": "Nie będziesz krzywdził Pali",
-    "description": "Lily Everhart, głosząc współistnienie z Palami, obdarzyła je wręcz obsesyjną miłością. Jej uczucia z czasem przekształciły się w doktrynę, która potępia ludzi jako istoty winne z natury. Aby powstrzymać jej szaleństwo, musisz ruszyć naprzód. Udaj się do Wieży na Górze Skutej Lodem i stań z nią twarzą w twarz."
+    "description": "Udało ci się pokonać Zoe Rayne i zdobyć Kluczową Sferę Zazdrości. Następnym celem jest Wieża Związku Wolnych Pali."
   },
   "Main_DefeatGrassBoss": {
     "localized_name": "Dziewczyna i wieża",
     "description": "Nadszedł czas, by rzucić wyzwanie jednej z wież rozsianych po wyspie. Dziewczyna imieniem Zoe Rayne jest jedną z osób strzegących tych wież. Jednak sama nie zna jeszcze swojego prawdziwego przeznaczenia. Mimo to przyjęła powierzoną jej rolę i dziś znów stoi na straży wieży. Co znajduje się dalej, za wieżą? Odpowiedź na to pytanie może znaleźć tylko ten, kto zdoła tam dotrzeć."
   },
+  "Main_DefeatKingWhale": {
+    "localized_name": "Panthalus",
+    "description": "Aby dostać się do Drzewa Świata, potrzebne będzie wsparcie. Kluczem do dalszej drogi jest Panthalus . Najpierw trzeba udowodnić swoją siłę — wtedy Panthalus otworzy drogę dalej."
+  },
   "Main_DefeatSakurajimaBoss": {
     "localized_name": "Dzisiejsza sake smakuje wybornie",
-    "description": "Strażniczką Wieży Księżycowego Kwiatu na Sakurajimie jest Saya Kurosaki. Pod niezmiennym księżycem czuwała nad światem, w którym czas zdawał się nie płynąć. Wygląda jednak na to, że niedawno spotkała Pala zwanego Ostrzem Półksiężyca — i postanowiła w końcu przerwać ciszę. Udaj się do Wieży Księżycowego Kwiatu na Sakurajimie i poznaj prawdziwe intencje Sayi."
+    "description": "Udało ci się pokonać Victora Ashforda i zdobyć Kluczową Sferę Łakomstwa. Następnym celem jest Wieża Księżycowego Kwiatu."
+  },
+  "Main_DefeatSkyIslandBoss": {
+    "localized_name": "Dzień jak tysiąc lat",
+    "description": "Udało ci się pokonać Bjorna Seligssona i zdobyć Kluczową Sferę Gniewu. Następnym celem jest Wieża Przymierza."
   },
   "Main_DefeatSnowyMountainBoss": {
     "localized_name": "Eksperyment krzyżowania Pali",
-    "description": "Istnieją ślady wskazujące, że w pewnym ośrodku prowadzono niezwykle niebezpieczne eksperymenty. W zachowanych zapiskach pojawiają się wzmianki o tworzeniu nowych gatunków i sztucznym udoskonalaniu zdolności. W dokumentach pojawia się też nazwisko: Victor Ashford. Wygląda na to, że zdołał znaleźć jakąś odpowiedź. To, co wydarzyło się w tamtym miejscu — i jak się zakończyło — trzeba zobaczyć na własne oczy. Udaj się do wieży na szczycie Góry Astralnej i niezwłocznie przerwij jego niebezpieczne eksperymenty."
+    "description": "Udało ci się pokonać Marcusa Drydena i zdobyć Kluczową Sferę Chciwości. Następnym celem jest Wieża Jednostki Badań Genetycznych PAL."
   },
   "Main_DefeatVikingBoss": {
     "localized_name": "Ten, kto ponosi całą odpowiedzialność",
-    "description": "Kraina Faybreak została niegdyś dotknięta katastrofą. W samym jej sercu Bjorn Seligsson poprowadził swój lud i do dziś strzeże tamtejszej wieży. Nie wiadomo dokładnie, czym jest „tamten moment”, o którym wspomina. Jedno jest jednak pewne: siła tych, którzy dotrą aż tutaj, może stać się początkiem wielkiej zmiany. Udaj się do wieży położonej w najdalszym zakątku Faybreak i wyciągnij rękę po wybawienie dla jej mieszkańców. Tylko ty jesteś w stanie zapobiec katastrofie."
+    "description": "Udało ci się pokonać Sayę Kurosaki i zdobyć Kluczową Sferę Pożądania. Następnym celem jest Wieża Feybreak."
   },
   "Main_DefeatVolcanoBoss": {
-    "localized_name": "Obsesja na punkcie całkowitego zwycięstwa",
-    "description": "Żył kiedyś człowiek, który nie uznawał żadnych przeciwników i dążył wyłącznie do absolutnego zwycięstwa. Nie kierował się żadnym konkretnym celem — pragnął tylko spotkać kogoś silniejszego od siebie. Mężczyzna stojący na czele Wieży Bractwa Wiecznego Płomienia to Axel Travers. W tej wieży, położonej u wylotu Obsydianowego Wulkanu, czeka na twoje wyzwanie."
+    "localized_name": "Obsesja na punkcie absolutnego zwycięstwa",
+    "description": "Udało ci się pokonać Lily Everhart i zdobyć Kluczową Sferę Pychy. Następnym celem jest Wieża Bractwa Wiecznego Płomienia."
   },
   "Main_DefeatWildBoss": {
     "localized_name": "Wygrana z pierwszym bossem",
     "description": "W różnych zakątkach wyspy Palpagos potężne Pale mają swoje terytoria. Choć mogą stanowić zagrożenie, ich pokonanie da ci ogromne doświadczenie, a schwytanie — niezawodnego towarzysza. To, jak sobie z nimi poradzisz, zależy wyłącznie od ciebie. Gdzieś na tej wyspie widziano Pala zwanego {targetpal}. Odszukaj go i spróbuj pokonać lub schwytać."
   },
+  "Main_DefeatWorldTreeDragon": {
+    "localized_name": "Przebudzenie",
+    "description": "Biały Smok Kataklizmu i jego pani budzą się z długiego snu. Między tobą a nimi nie pada ani jedno słowo. Nadszedł czas, by raz na zawsze położyć temu kres."
+  },
+  "Main_DefeatWorldTreeMiddleBoss": {
+    "localized_name": "Droga do otchłani",
+    "description": "W pobliżu najgłębszych otchłani Drzewa Świata udało ci się odnaleźć zapis głosowy pozostawiony przez jednego z obrońców tego miejsca. Warto poszukać dalszych wskazówek, korzystając z dołączonych danych o współrzędnych."
+  },
+  "Main_EatFood": {
+    "localized_name": "Zaspokój głód",
+    "description": "Zapewnianie pożywienia: Stały dostęp do żywności to podstawa, jeśli planuje się dłuższe działania. Na szczęście, Czerwone jagody rosną w wielu miejscach i nadają się do jedzenia bez żadnej obróbki. Niektóre Pale również mogą posłużyć za pożywienie. To przykre, ale czasami przetrwanie wymaga ofiar."
+  },
   "Main_EquipClothArmor": {
     "localized_name": "Chroń się",
-    "description": "Przyroda na wyspie Palpagos bywa surowai bezlitosna. Dla ochrony przed zimnem i obrażeniami warto najpierw przygotować coś do ubrania. Odblokuj technologię: Odzież z sukna i wytwórz ją przy użyciu: Prymitywny stół warsztatowy. Do produkcji potrzebne jest Sukno, które wytwarza się z materiału takiego jak Wełna pochodząca od Pali. Rozejrzyj się za czymś puszystym!"
+    "description": "Przyroda na wyspie Palpagos bywa surowai bezlitosna. Dla ochrony przed zimnem i obrażeniami warto najpierw przygotować coś do ubrania. Odblokuj technologię: Odzież z sukna i wytwórz ją przy użyciu: Prymitywny stół warsztatowy. Do produkcji potrzebne jest Sukno , które wytwarza się z materiału takiego jak Wełna pochodząca od Pali. Rozejrzyj się za czymś puszystym!"
   },
   "Main_GainStatus": {
     "localized_name": "Wzmocnienie statystyk",
@@ -101,15 +149,59 @@
   },
   "Main_OpenSurvivalGuide": {
     "localized_name": "Zapiski wiedzy o przetrwaniu",
-    "description": "Wielu pionierów i odkrywców próbowało już przemierzyć tę wyspę. Niejeden stracił przy tym życie. Ich wiedza została zebrana w formie zapisków o przetrwaniu, które zsynchronizowano z twoim urządzeniem. Aby przetrwać w tym surowym świecie, najpierw otwórz menu opcji za pomocą <keyGuideIcon id=|UIEscape|/> i sprawdź Poradnik przetrwania."
+    "description": "Wstęp: Niniejszy poradnik przetrwania powstał w oparciu o doświadczenia, jakie nasza ekspedycja zdobyła na wyspach Palpagos. Na nic się zda tu zdrowy rozsądek – nic w tym regionie nie działa tak, jak w znanym nam świecie. W razie jakichkolwiek wątpliwości, zajrzyj do tego poradnika."
   },
   "Main_PickupWood": {
     "localized_name": "Pierwsze zbieranie surowców",
     "description": "Spośród wszystkich zasobów pochodzących z natury to właśnie Drewno stanowi podstawowy materiał do tworzenia wszelkich konstrukcji i narzędzi. Aby zdobyć Drewno, zbierz gałęzie leżące na ziemi lub uderz pobliskie drzewa."
   },
+  "Main_PrepareEquipment": {
+    "localized_name": "Przygotuj wyposażenie",
+    "description": "Tworzenie wyposażenia: Najpierw przy stole warsztatowym z wełny pozyskanej od Pala Lamball powstaje Sukno , a następnie Odzież z sukna . Kolejny element to Zwykła tarcza, wykorzystująca zdolność samoregeneracji Paldium. Na koniec Zwykły spadochron — pomoże ci w przemierzaniu terenu o dużych różnicach wysokości. Gdy wszystko to będzie już gotowe, dalsze badania powinny przebiegać znacznie sprawniej."
+  },
+  "Main_RayneSyndicate": {
+    "localized_name": "Syndykat Rayne",
+    "description": "Masz już wszystko, czego potrzeba. Czas ruszyć do wieży gangu kłusowników i spotkać się z Zoe."
+  },
+  "Main_ReachWorldTree": {
+    "localized_name": "Do Drzewa Świata",
+    "description": "Udało ci się udowodnić swoją siłę i zyskać wsparcie, którym jest Panthalus. Panthalusto kluczem do Drzewa Świata . Udaj się do tam i poszukaj sposobu, by dostać się do środka."
+  },
+  "Main_ReturnSmallVillage": {
+    "localized_name": "Kluczowa Sfera",
+    "description": "Udało ci się pokonać dziewczynę, która chyba była Zoe, i zabrać przedmiot przypominający Pal Sferę, leżący tuż obok niej. Wróć do małej osady i porozmawiaj z jej przywódcą."
+  },
+  "Main_SmallVillage": {
+    "localized_name": "Mała osada",
+    "description": "Udało ci się opanować wszystkie wskazówki wyświetlone na urządzeniu. Z informacji uzyskanych od ocalałej członkini ekipy zwiadowczej wynika, że w pobliżu wieży gangu kłusowników znajduje się osada. Po jej odnalezieniu warto poszukać tamtejszego przywódcy i porozmawiać z nim, by dowiedzieć się czegoś więcej."
+  },
+  "Main_StatusUp": {
+    "localized_name": "Wzmocnienie statystyk",
+    "description": "Zwiększanie statystyk: Zdobywanie doświadczenia i rozwijanie własnych umiejętności daje siłę do stawienia czoła wyzwaniom. Gdy awansujesz na wyższy poziom, otwórz ekwipunek i zwiększ wybraną statystykę. Dzięki temu dalsza eksploracja będzie przebiegać sprawniej."
+  },
+  "Main_TalkGrassBoss": {
+    "localized_name": "Zoe Rayne",
+    "description": "Przywódca osady powiedział, że po dokładniejsze informacje najlepiej zwrócić się do Zoe. Ruszaj z powrotem do Wieży Syndykatu Rayne i sprawdź, co ma do powiedzenia."
+  },
+  "Main_TalkSkyBoss": {
+    "localized_name": "Ta, która zna niebo",
+    "description": "Udało ci się pokonać Auri, ale wciąż wygląda na pełną sił. Jest w niej coś, co odróżnia ją od przywódców pozostałych wież. Może warto posłuchać, co ma do powiedzenia."
+  },
+  "Main_TalkSkyBossAgain": {
+    "localized_name": "Kataklizm",
+    "description": "Auri chce przekazać ci informacje na temat Drzewa Świata. Zanosi się na dłuższą rozmowę. Wróć do niej, gdy znajdziesz czas, ."
+  },
+  "Main_TalkWorldTreeNPC": {
+    "localized_name": "Brzemię win",
+    "description": "Wreszcie udało ci się wkroczyć do Drzewa Świata. W jego wnętrzu rozciąga się tajemnicza przestrzeń, ale czuć tu też coś niepokojącego. Po chwili rozglądania się dostrzegasz w oddali czyjąś sylwetkę."
+  },
+  "Main_TutorialStart": {
+    "localized_name": "Pierwszy mieszkaniec wyspy",
+    "description": "Budzisz się na nieznanej ci plaży, a twoje wspomnienia są zamglone. Gdzie się właściwie znajdujesz? I kim jesteś...? Szukając jakichkolwiek wskazówek, dostrzegasz w oddali czyjąś sylwetkę."
+  },
   "Main_UnlockFastTravel": {
     "localized_name": "Aktywuj Posąg Wielkiego Orła",
-    "description": "W tym regionie znajdują się tak zwane Posągi Wielkiego Orła — urządzenia do teleportacji pozostawione przez starożytną cywilizację. Ich aktywacja znacznie ułatwia podróżowanie. Najpierw dotknij najbliższego posągu, by stworzyć podstawę swojej wędrówki. Być może pewnego dnia wyruszysz ku wieży, która wznosi się daleko na horyzoncie."
+    "description": "Do wszystkich członków ekipy badawczej: Wyspa Palpagos wciąż skrywa wiele tajemnic, ale z dotychczas zebranych informacji wynika, że w różnych jej częściach rozsiane są kamienne posągi przedstawiające istoty przypominające ptaki. Wygląda na to, że posągi te są połączone ze sobą przy użyciu nieznanej technologii i pozwalają na natychmowanowe przemieszczanie się do innych posągów. Najlepiej będzie rozpocząć badania od założenia bazy w pobliżu jednego z nich."
   },
   "Main_UnlockPalBox": {
     "localized_name": "Palbox",
@@ -123,9 +215,17 @@
     "localized_name": "Środki bezpieczeństwa",
     "description": "Ta wyspa pełna jest zagrożeń — jednym z nich są strome urwiska. Jeśli postawisz krok w złym miejscu, na poobijaniu się nie skończy. Odblokuj Zwykły spadochron i postaw Prymitywny stół warsztatowy, by go wytworzyć. Dzięki temu będziesz mógł bezpiecznie zejść nawet z najwyższych klifów."
   },
+  "Main_WorkPal": {
+    "localized_name": "Nakłoń Pala do pracy",
+    "description": "Wykorzystywanie Pali jako siły roboczej: Pal schwytany i zamknięty w narzędziu o nazwie Pal Sfera może być sprawnie zarządzany i wykorzystywany przy pomocy tak zwanego Palboxa. Najpierw otwórz ekran technologii, sprawdź Palbox, a następnie ustaw go w wybranym miejscu. Palbox pozwala przechowywać Pale z drużyny oraz przyzywać je w jego pobliże. Pale przywołane z Palboxa poruszają się w określonym obszarze wokół niego, dlatego to właśnie ten zasięg w praktyce wyznacza teren bazy. Miejsce ustawienia warto więc dobrze przemyśleć. Pale przywołane z Palboxa same podejmują pracę zgodnie ze swoimi cechami i umiejętnościami. Z czasem, gdy zbierzesz więcej różnych Pali, zarządzanie bazą stanie się jeszcze sprawniejsze."
+  },
   "Main_WorkerPal": {
     "localized_name": "Nakłoń Pala do pracy",
-    "description": "Pale mogą pracować razem z tobą i stać się ważnym wsparciem dla twojej bazy. Otwórz Palbox, a następnie wybierz jednego ze złapanych Pali w menu zarządzania , by przywołać go do bazy."
+    "description": "Pale mogą pracować razem z tobą i stać się ważnym wsparciem dla twojej bazy. Otwórz Palbox , a następnie wybierz jednego ze złapanych Pali w menu zarządzania , by przywołać go do bazy."
+  },
+  "Main_WorldTreeAbyss": {
+    "localized_name": "Zapieczętowany kataklizm",
+    "description": "Udało ci się dowiedzieć, co naprawdę dzieje się teraz we wnętrzu Drzewa Świata i czym jest Kataklizm spoczywający w jego najgłębszych otchłaniach. Koniec jest już bardzo bliski."
   },
   "Sub_Angler01": {
     "localized_name": "Idealny dzień na wędkowanie",
@@ -151,6 +251,26 @@
     "localized_name": "Plan hodowli Splatterin",
     "description": "Udało ci się złapać dla mnie Splatteriny? Dziesięć w zupełności wystarczy do hodowli. Czekam!"
   },
+  "Sub_DeliveryQuartz": {
+    "localized_name": "Zbierz: Czysty kwarc",
+    "description": "Zbierz: Czysty kwarc × 10, a następnie dostarcz je zleceniodawcy."
+  },
+  "Sub_DeliveryRainbowCrystal": {
+    "localized_name": "Zbierz: Kwarc heksolitu",
+    "description": "Zbierz: Kwarc heksolitu x10, a następnie dostarcz je zleceniodawcy."
+  },
+  "Sub_DeliverySkyIslandOre": {
+    "localized_name": "Zbierz: Solit",
+    "description": "Zbierz: Solit × 10, a następnie dostarcz je zleceniodawcy."
+  },
+  "Sub_DeliverySulfur": {
+    "localized_name": "Zbierz: Siarka",
+    "description": "Zbierz: Siarka × 10, a następnie dostarcz je zleceniodawcy."
+  },
+  "Sub_DeliveryWood_Fine": {
+    "localized_name": "Zbierz: Twarde drewno",
+    "description": "Zbierz: Twarde drewno × 10, a następnie dostarcz je zleceniodawcy."
+  },
   "Sub_Farmer01": {
     "localized_name": "Hydro-pomocnik",
     "description": "Masz może Pala, który umie podlewać? Myślisz, że mógłby mi podlać tamte grządki? Niby mogę przynieść wodę z rzeki, ale mam wrażenie, że ta pochodząca od Pali, ma w sobie coś wyjątkowego. Warzywa rosną po niej jak na drożdżach. Proszę, pomóż mi!"
@@ -171,6 +291,10 @@
     "localized_name": "Zlecenie aroganckiego smakosza",
     "description": "Oho... to ja — słynny krytyk kulinarny i główny doradca Stowarzyszenia Smakoszy Palpagos. Pozwól, że spróbuję twojego dania i ocenię je przy pomocy mojego szlachetnego podniebienia, młody parweniuszu. Choć szczerze wątpię, by ktoś taki jak ty zdołał zadowolić moje wyrafinowane gusta."
   },
+  "Sub_HowSurviveWorldTree": {
+    "localized_name": "Sztuka przetrwania w Drzewie Świata",
+    "description": "Zbierz: Mistyczne drewno × 1 oraz Paloksyt × 1, a następnie zgłoś się do zleceniodawcy."
+  },
   "Sub_Kigurumi01": {
     "localized_name": "Ty też możesz stać się Depresso!",
     "description": "Stój, czekaj! Ja nie jestem Palem! Nie rzucaj we mnie Pal-sferą! A, to ty... Umawialiśmy się, że zrobię ci kostium, prawda? Ha ha! Masz już potrzebne materiały? To 20 sztuk wysokiej jakości sukna i 100 gruczołów jadowych. Żeby oddać ten piękny kolor futra Depresso, trzeba naprawdę sporo gruczołów!"
@@ -178,6 +302,18 @@
   "Sub_Kigurumi01_Replay": {
     "localized_name": "Ty też możesz stać się Depresso!",
     "description": "Stój, czekaj! Ja nie jestem Palem! Nie rzucaj we mnie Pal-sferą! A, to ty... Umawialiśmy się, że zrobię ci kostium, prawda? Ha ha! Masz już potrzebne materiały? To 20 sztuk wysokiej jakości sukna i 100 gruczołów jadowych. Żeby oddać ten piękny kolor futra Depresso, trzeba naprawdę sporo gruczołów!"
+  },
+  "Sub_LoneWolf01": {
+    "localized_name": "Samotny wilk w czerni",
+    "description": "Udało ci się odnaleźć rannego i wycieńczonego Pala Kitsun Noct."
+  },
+  "Sub_LoneWolf02": {
+    "localized_name": "Błądzenie we wspomnieniach",
+    "description": "Znajdź ślady prowadzące do opiekuna Pala Kitsun Noct."
+  },
+  "Sub_LoneWolf03": {
+    "localized_name": "Miecz bez pochwy",
+    "description": "W wiosce powierzono ci zadanie rozprawienia się z agresywnym Palem."
   },
   "Sub_Nomad01": {
     "localized_name": "Wspinaczka kończy się na dole",
@@ -189,7 +325,7 @@
   },
   "Sub_Nomad03": {
     "localized_name": "Poszukiwania lochu",
-    "description": "Udało ci się znaleźć Leezpunka albo Leezpunka Ignis? Chcesz go wymienić na mój wyjątkowy przedmiot?"
+    "description": "Udało ci się znaleźć Tombata? Chcesz go wymienić na mój wyjątkowy przedmiot?"
   },
   "Sub_Nomad04": {
     "localized_name": "Spokojna podróż",
@@ -248,16 +384,32 @@
     "description": "Jest tuż przed nami. Nie daruję mu tego! Daj mu nauczkę w moim imieniu!"
   },
   "Sub_Ranger03": {
-    "localized_name": "Wielka Tarantriss",
-    "description": "Ta wielka Tarantriss jest naprawdę niebezpieczna. Zanim się z nią zmierzysz, radzę ci dokładnie sprawdzić ekwipunek."
+    "localized_name": "Wielki Faleris Aqua",
+    "description": "Ten wielki Faleris Aqua jest naprawdę niebezpieczny. Zanim się z nim zmierzysz, radzę ci dokładnie sprawdzić ekwipunek."
   },
   "Sub_Ranger04": {
     "localized_name": "Kwietny nektar",
     "description": "Udało ci się znaleźć Beegarde albo Elizabee? Trzy w zupełności wystarczą!"
   },
+  "Sub_RookieExpeditionTeam01": {
+    "localized_name": "Ekipa badawcza nowicjuszy",
+    "description": "Przypadkiem natrafiasz na trzyosobową grupę wycieńczoną po ataku Pali. Pomóż im."
+  },
+  "Sub_RookieExpeditionTeam02": {
+    "localized_name": "Pierwsze pędy",
+    "description": "Ponownie spotykasz ekipę badawczą, której wcześniej udało ci się pomóc. Wygląda jednak na to, że Carli nie ma wśród nich..."
+  },
+  "Sub_RookieExpeditionTeam03": {
+    "localized_name": "Rozwój",
+    "description": "Ponownie spotykasz Fię. Wygląda na to, że za wszelką cenę pragnie stać się silniejsza."
+  },
+  "Sub_RookieExpeditionTeam04": {
+    "localized_name": "Jałowy kwiat",
+    "description": "Fia, którą spotykasz ponownie, patrzy na ciebie pustym, nieobecnym wzrokiem i rzuca się do ataku. Jeśli chcesz przeżyć, nie masz wyboru – musisz walczyć."
+  },
   "Sub_Scholar01": {
     "localized_name": "Łowca legend",
-    "description": "No dalej, ruszaj i znajdź legendarnego Pala! Z dotychczasowych badań wiem, że co najmniej po jeden zamieszkuje Obsydianowy Wulkan na zachodzie, Góry Astralne na północy, Wyschnięte Wydmy na wschodzie oraz tajemnicze odludzie zwane Feybreak. Widzisz tamte ogromne skały? Jak się na nie wdrapiesz, będziesz mieć naprawdę rozległy widok. Wieszę, że dokonasz wielkich czynów!"
+    "description": "Dalej, ruszaj odszukać te legendarne Pale! Udało mi się ustalić, że przynajmniej jeden osobnik zamieszkuje Góry Astralne na północy, Wyschnięte Wydmy na wschodzie oraz kraniec świata zwany Niebiańską Krainą Słońca. Jeśli wejdziesz na tamte wielkie skały, będziesz mieć naprawdę świetny widok. Liczę na ciebie!"
   },
   "Sub_Scholar02": {
     "localized_name": "W poszukiwaniu motywacji",
@@ -271,9 +423,29 @@
     "localized_name": "Wykrywacz metali",
     "description": "I jak? Udało ci się zebrać chromit? Jeśli masz wykrywacz metalu, ułatwi ci to znalezienie ukrytych złóż na tej wyspie."
   },
+  "Sub_StrongOldMan01": {
+    "localized_name": "Uwięziony poszukiwacz przygód",
+    "description": "Udało ci się uratować osobę, która wyglądała na mieszkańca wyspy przetrzymywanego w klatce, ale członkowie gangu kłusowników najwyraźniej to zauważyli i zaczęli się zbierać. Na razie trzeba ich odeprzeć i zadbać o bezpieczeństwo."
+  },
+  "Sub_StrongOldMan02": {
+    "localized_name": "Pokonaj poszukiwanego bandytę",
+    "description": "Ponownie spotkany poszukiwacz przygód Harold najwyraźniej stanął w martwym punkcie w obliczu potężnego przeciwnika. Na myśl o wspólnej walce z tobą aż go rozpiera entuzjazm. Połącz siły z Haroldem i pokonaj poszukiwanego."
+  },
+  "Sub_StrongOldMan03": {
+    "localized_name": "Pełnomocnik",
+    "description": "Harold, którego spotykasz ponownie, nie jest dziś sobą — wyraźnie brakuje mu jego zwykłej pogody ducha. Zlecenie, które przyjął w pobliskiej wiosce, dotyczy rozprawienia się z Palem, który wpadł w szał. Opowiadając o nim z posępnym wyrazem twarzy, Harold składa ci pewną propozycję. „Może ty się tego podejmiesz?” Kiedy się zgadzasz, na twarzy Harolda na moment pojawia się ulga... Ale gdy spuszcza wzrok, jego twarz staje się jeszcze smutniejsza."
+  },
+  "Sub_StrongOldMan04": {
+    "localized_name": "Przeszłość",
+    "description": "Harold, stojący u stóp Drzewa Świata, wygląda, jakby chciał ci powiedzieć coś ważnego. Czy pragnie zmierzyć się ze swoją przeszłością i wyznać winy? A może chce pozostawić po sobie ślad w czyjejś pamięci? Z wyrazu jego twarzy, naznaczonej determinacją, nie dało się nic wyczytać."
+  },
+  "Sub_StrongOldMan05": {
+    "localized_name": "Ostatni bój rycerza",
+    "description": "Będziesz świadkiem ich końca."
+  },
   "Sub_Zoe01": {
     "localized_name": "To tylko jedna wygrana",
-    "description": "Udało ci się złapać Grizzbolta? W Rezerwacie przyrody nr 1 podobno kręci się sporo naprawdę silnych Pali. Chociaż może postawiłam poprzeczkę za wysoko jak na ciebie. Tylko wiesz, jeśli chcesz, żebym cię doceniła, musisz się bardziej postarać."
+    "description": "Udało ci się złapać Grizzbolta? W Rezerwacie przyrody nr 1 podobno kręci się sporo naprawdę silnych Pali. Chociaż może postawiłam poprzeczkę za wysoko jak na ciebie. Tylko wiesz, jeśli chcesz, żebym cię doceniła, musisz dać z siebie absolutnie wszystko."
   },
   "Sub_Zoe02": {
     "localized_name": "Nie myśl, że ci ufam",
