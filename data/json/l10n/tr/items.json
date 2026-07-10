@@ -1,15 +1,19 @@
 {
+  "AIcore": {
+    "localized_name": "AI Çekirdeği",
+    "description": "Karmaşık karar verme ve otonom kontrolü mümkün kılan, en ileri teknoloji cihazlar için vazgeçilmez bir ana bileşen. Factory Hard 04 kullanılarak üretilebilir."
+  },
   "Accessory_AT_1": {
     "localized_name": "Saldırı Kolyesi",
-    "description": "Saldırıyı biraz artıran bir aksesuar."
+    "description": "Saldırıyı artıran bir aksesuar."
   },
   "Accessory_AT_2": {
-    "localized_name": "Saldırı Kolyesi +1",
+    "localized_name": "Saldırı Kolyesi",
     "description": "Saldırıyı artıran bir aksesuar."
   },
   "Accessory_AT_3": {
-    "localized_name": "Saldırı Kolyesi +2",
-    "description": "Saldırıyı büyük oranda artıran bir aksesuar."
+    "localized_name": "Saldırı Kolyesi",
+    "description": "Saldırıyı artıran bir aksesuar."
   },
   "Accessory_AirDash1": {
     "localized_name": "Havada İleri Atılma Botları",
@@ -29,123 +33,159 @@
   },
   "Accessory_AquaResist_1": {
     "localized_name": "Su Hasarı Direnci Yüzüğü",
-    "description": "Su hasarını biraz azaltan bir aksesuar."
+    "description": "Su hasarını azaltan bir aksesuar."
   },
   "Accessory_AquaResist_2": {
-    "localized_name": "Su Hasarı Direnci Yüzüğü +1",
+    "localized_name": "Su Hasarı Direnci Yüzüğü",
     "description": "Su hasarını azaltan bir aksesuar."
   },
   "Accessory_AquaResist_3": {
-    "localized_name": "Su Hasarı Direnci Yüzüğü +2",
-    "description": "Su hasarını büyük oranda azaltan bir aksesuar."
+    "localized_name": "Su Hasarı Direnci Yüzüğü",
+    "description": "Su hasarını azaltan bir aksesuar."
+  },
+  "Accessory_Avoid_1": {
+    "localized_name": "Hayalet Yüzüğü",
+    "description": "Yuvarlanma ve adım (step) hareketlerinin dokunulmazlık süresini uzatan bir aksesuar."
+  },
+  "Accessory_ColdIce_1": {
+    "localized_name": "Wumpo Tılsımı",
+    "description": "Çok yüksek ısı dayanımına sahip bir aksesuar. Buz elementli hasarı da oldukça azaltır."
   },
   "Accessory_CoolResist_1": {
     "localized_name": "Termal Fanila",
-    "description": "Soğuğa Direnci biraz artıran bir aksesuar."
+    "description": "Soğuğa Direnci artıran bir aksesuar."
   },
   "Accessory_CoolResist_2": {
-    "localized_name": "Termal Fanila +1",
+    "localized_name": "Termal Fanila",
     "description": "Soğuğa Direnci artıran bir aksesuar."
   },
   "Accessory_CoolResist_3": {
-    "localized_name": "Termal Fanila +2",
-    "description": "Soğuğa Direnci büyük oranda artıran bir aksesuar."
+    "localized_name": "Termal Fanila",
+    "description": "Soğuğa Direnci artıran bir aksesuar."
+  },
+  "Accessory_DFHP_1": {
+    "localized_name": "Guardian’s Rosary",
+    "description": "Savunma gücünü ve HP’yi oldukça artırabilen bir aksesuar."
   },
   "Accessory_DarkResist_1": {
     "localized_name": "Karanlık Hasarı Direnci Yüzüğü",
-    "description": "Karanlık hasarını biraz azaltan bir aksesuar."
+    "description": "Karanlık hasarını azaltan bir aksesuar."
   },
   "Accessory_DarkResist_2": {
-    "localized_name": "Karanlık Hasarı Direnci Yüzüğü +1",
+    "localized_name": "Karanlık Hasarı Direnci Yüzüğü",
     "description": "Karanlık hasarını azaltan bir aksesuar."
   },
   "Accessory_DarkResist_3": {
-    "localized_name": "Karanlık Hasarı Direnci Yüzüğü +2",
-    "description": "Karanlık hasarını büyük oranda azaltan bir aksesuar."
+    "localized_name": "Karanlık Hasarı Direnci Yüzüğü",
+    "description": "Karanlık hasarını azaltan bir aksesuar."
   },
   "Accessory_DragonResist_1": {
     "localized_name": "Ejderha Hasarı Direnci Yüzüğü",
-    "description": "Ejderha hasarını biraz azaltan bir aksesuar."
+    "description": "Ejderha hasarını azaltan bir aksesuar."
   },
   "Accessory_DragonResist_2": {
-    "localized_name": "Ejderha Hasarı Direnci Yüzüğü +1",
+    "localized_name": "Ejderha Hasarı Direnci Yüzüğü",
     "description": "Ejderha hasarını azaltan bir aksesuar."
   },
   "Accessory_DragonResist_3": {
-    "localized_name": "Ejderha Hasarı Direnci Yüzüğü +2",
-    "description": "Ejderha hasarını büyük oranda azaltan bir aksesuar."
+    "localized_name": "Ejderha Hasarı Direnci Yüzüğü",
+    "description": "Ejderha hasarını azaltan bir aksesuar."
   },
   "Accessory_EarthResist_1": {
     "localized_name": "Toprak Hasarı Direnci Yüzüğü",
-    "description": "Toprak hasarını biraz azaltan bir aksesuar."
+    "description": "Toprak hasarını azaltan bir aksesuar."
   },
   "Accessory_EarthResist_2": {
-    "localized_name": "Toprak Hasarı Direnci Yüzüğü +1",
+    "localized_name": "Toprak Hasarı Direnci Yüzüğü",
     "description": "Toprak hasarını azaltan bir aksesuar."
   },
   "Accessory_EarthResist_3": {
-    "localized_name": "Toprak Hasarı Direnci Yüzüğü +2",
-    "description": "Toprak hasarını büyük oranda azaltan bir aksesuar."
+    "localized_name": "Toprak Hasarı Direnci Yüzüğü",
+    "description": "Toprak hasarını azaltan bir aksesuar."
+  },
+  "Accessory_ExplosionResist": {
+    "localized_name": "Patlama Önleyici İç Çamaşırı",
+    "description": "Özel liflerden yapılmış, hafif ama dayanıklı bir içlik. Patlamalardan alınan hasarı geçersiz kılar."
   },
   "Accessory_FireResist_1": {
     "localized_name": "Ateş Hasarı Direnci Yüzüğü",
-    "description": "Ateş hasarını biraz azaltan bir aksesuar."
+    "description": "Ateş hasarını azaltan bir aksesuar."
   },
   "Accessory_FireResist_2": {
-    "localized_name": "Ateş Hasarı Direnci Yüzüğü +1",
+    "localized_name": "Ateş Hasarı Direnci Yüzüğü",
     "description": "Ateş hasarını azaltan bir aksesuar."
   },
   "Accessory_FireResist_3": {
-    "localized_name": "Ateş Hasarı Direnci Yüzüğü +2",
-    "description": "Ateş hasarını büyük oranda azaltan bir aksesuar."
+    "localized_name": "Ateş Hasarı Direnci Yüzüğü",
+    "description": "Ateş hasarını azaltan bir aksesuar."
+  },
+  "Accessory_HCHP_1": {
+    "localized_name": "Öncü Birliği Tılsımı",
+    "description": "Çok yüksek ısı ve soğuk direncine sahip bir aksesuar. Ayrıca HP’yi de oldukça artırır."
+  },
+  "Accessory_HCMW_1": {
+    "localized_name": "Gezgin Tüccarın Tılsımı",
+    "description": "Çok yüksek ısı ve soğuk direncine sahip bir aksesuar. Oyuncunun taşıma kapasitesini de oldukça artırır."
   },
   "Accessory_HP_1": {
     "localized_name": "Can Kolyesi",
-    "description": "Canı biraz artıran bir aksesuar."
+    "description": "Canı artıran bir aksesuar."
   },
   "Accessory_HP_2": {
-    "localized_name": "Can Kolyesi +1",
+    "localized_name": "Can Kolyesi",
     "description": "Canı artıran bir aksesuar."
   },
   "Accessory_HP_3": {
-    "localized_name": "Can Kolyesi +2",
-    "description": "Canı büyük oranda artıran bir aksesuar."
+    "localized_name": "Can Kolyesi",
+    "description": "Canı artıran bir aksesuar."
   },
   "Accessory_HeatColdResist_1": {
     "localized_name": "Çok Mevsimlik Fanila",
-    "description": "Sıcağa ve Soğuğa Direnci biraz artıran bir aksesuar."
+    "description": "Sıcağa ve Soğuğa Direnci artıran bir aksesuar."
   },
   "Accessory_HeatColdResist_2": {
-    "localized_name": "Çok Mevsimlik Fanila +1",
+    "localized_name": "Çok Mevsimlik Fanila",
     "description": "Sıcağa ve Soğuğa Direnci artıran bir aksesuar."
   },
   "Accessory_HeatColdResist_3": {
-    "localized_name": "Çok Mevsimlik Fanila +2",
-    "description": "Sıcağa ve Soğuğa Direnci büyük oranda artıran bir aksesuar."
+    "localized_name": "Çok Mevsimlik Fanila",
+    "description": "Sıcağa ve Soğuğa Direnci artıran bir aksesuar."
+  },
+  "Accessory_HeatFire_1": {
+    "localized_name": "Reptyro Tılsımı",
+    "description": "Çok yüksek ısı dayanımına sahip bir aksesuar. Ateş elementli hasarı da oldukça azaltır."
   },
   "Accessory_HeatResist_1": {
     "localized_name": "Sıcağa Dayanıklı Fanila",
-    "description": "Sıcağa Direnci biraz artıran bir aksesuar."
+    "description": "Sıcağa Direnci artıran bir aksesuar."
   },
   "Accessory_HeatResist_2": {
-    "localized_name": "Sıcağa Dayanıklı Fanila +1",
+    "localized_name": "Sıcağa Dayanıklı Fanila",
     "description": "Sıcağa Direnci artıran bir aksesuar."
   },
   "Accessory_HeatResist_3": {
-    "localized_name": "Sıcağa Dayanıklı Fanila +2",
-    "description": "Sıcağa Direnci büyük oranda artıran bir aksesuar."
+    "localized_name": "Sıcağa Dayanıklı Fanila",
+    "description": "Sıcağa Direnci artıran bir aksesuar."
   },
   "Accessory_IceResist_1": {
     "localized_name": "Buz Hasarı Direnci Yüzüğü",
-    "description": "Buz hasarını biraz azaltan bir aksesuar."
+    "description": "Buz hasarını azaltan bir aksesuar."
   },
   "Accessory_IceResist_2": {
-    "localized_name": "Buz Hasarı Direnci Yüzüğü +1",
+    "localized_name": "Buz Hasarı Direnci Yüzüğü",
     "description": "Buz hasarını azaltan bir aksesuar."
   },
   "Accessory_IceResist_3": {
-    "localized_name": "Buz Hasarı Direnci Yüzüğü +2",
-    "description": "Buz hasarını büyük oranda azaltan bir aksesuar."
+    "localized_name": "Buz Hasarı Direnci Yüzüğü",
+    "description": "Buz hasarını azaltan bir aksesuar."
+  },
+  "Accessory_JumpAir_1": {
+    "localized_name": "Akrobatik Ayakkabılar-I",
+    "description": "Ekipman takıldığında oyuncunun havada zıplamasını sağlayan bir aksesuar. Ayrıca havada 1 kez hızla ileri atılma (hava dash) yapmaya izin verir."
+  },
+  "Accessory_JumpAir_2": {
+    "localized_name": "Akrobatik Ayakkabılar-II",
+    "description": "Ekipman takıldığında oyuncunun havada zıplamasını sağlayan bir aksesuar. Ayrıca havada 2 kez hızla ileri atılma (hava dash) yapmaya izin verir."
   },
   "Accessory_JumpCount_Increase1": {
     "localized_name": "Çifte Zıplama Botları",
@@ -165,27 +205,31 @@
   },
   "Accessory_LeafResist_1": {
     "localized_name": "Çimen Hasarı Direnci Yüzüğü",
-    "description": "Çimen hasarını biraz azaltan bir aksesuar."
+    "description": "Çimen hasarını azaltan bir aksesuar."
   },
   "Accessory_LeafResist_2": {
-    "localized_name": "Çimen Hasarı Direnci Yüzüğü +1",
+    "localized_name": "Çimen Hasarı Direnci Yüzüğü",
     "description": "Çimen hasarını azaltan bir aksesuar."
   },
   "Accessory_LeafResist_3": {
-    "localized_name": "Çimen Hasarı Direnci Yüzüğü +2",
-    "description": "Çimen hasarını büyük oranda azaltan bir aksesuar."
+    "localized_name": "Çimen Hasarı Direnci Yüzüğü",
+    "description": "Çimen hasarını azaltan bir aksesuar."
   },
   "Accessory_MaxWeightUp_01": {
     "localized_name": "Taşımacılık Yüzüğü",
-    "description": "Taşıma kapasitesini biraz artıran bir aksesuar."
+    "description": "Taşıma kapasitesini artıran bir aksesuar."
   },
   "Accessory_MaxWeightUp_02": {
-    "localized_name": "Taşımacılık Yüzüğü +1",
+    "localized_name": "Taşımacılık Yüzüğü",
     "description": "Taşıma kapasitesini artıran bir aksesuar."
   },
   "Accessory_MaxWeightUp_03": {
-    "localized_name": "Taşımacılık Yüzüğü +2",
-    "description": "Taşıma kapasitesini büyük oranda artıran bir aksesuar."
+    "localized_name": "Taşımacılık Yüzüğü",
+    "description": "Taşıma kapasitesini artıran bir aksesuar."
+  },
+  "Accessory_NonkChecker_1": {
+    "localized_name": "Pal Eğitmeni’nin Gözlüğü",
+    "description": "Pal eğitmeninin gözlüğü. Ekipmanı kullanan kişi, hedefin HP’sini 1’in altına düşüremez. Ayrıca Pal’lerin gizli yeteneklerini görmeyi sağlar."
   },
   "Accessory_Nonkilling": {
     "localized_name": "Merhamet Yüzüğü",
@@ -193,15 +237,67 @@
   },
   "Accessory_NormalResist_1": {
     "localized_name": "Nötr Hasar Direnci Yüzüğü",
-    "description": "Nötr hasarı biraz azaltan bir aksesuar."
+    "description": "Nötr hasarı azaltan bir aksesuar."
   },
   "Accessory_NormalResist_2": {
-    "localized_name": "Nötr Hasar Direnci Yüzüğü +1",
+    "localized_name": "Nötr Hasar Direnci Yüzüğü",
     "description": "Nötr hasarı azaltan bir aksesuar."
   },
   "Accessory_NormalResist_3": {
-    "localized_name": "Nötr Hasar Direnci Yüzüğü +2",
-    "description": "Nötr hasarı büyük oranda azaltan bir aksesuar."
+    "localized_name": "Nötr Hasar Direnci Yüzüğü",
+    "description": "Nötr hasarı azaltan bir aksesuar."
+  },
+  "Accessory_Otomo_Dargon_1": {
+    "localized_name": "Elphidran'ın Yüzüğü",
+    "description": "Karanlık elementli hasarı oldukça azaltan bir aksesuar. Ayrıca birlikte savaşan Pal’lerin toprak elementli hasarını da oldukça güçlendirir."
+  },
+  "Accessory_Otomo_Dark_1": {
+    "localized_name": "Katress'in Yüzüğü",
+    "description": "Toprak elementli hasarı oldukça azaltan bir aksesuar. Ayrıca birlikte savaşan Pal’lerin toprak elementli hasarını da oldukça güçlendirir."
+  },
+  "Accessory_Otomo_Earth_1": {
+    "localized_name": "Menasting Terra'nın Yüzüğü",
+    "description": "Elektrik elementli hasarı oldukça azaltan bir aksesuar. Ayrıca birlikte savaşan Pal’lerin toprak elementli hasarını da oldukça güçlendirir."
+  },
+  "Accessory_Otomo_Electricity_1": {
+    "localized_name": "Fenglope Lux'un Yüzüğü",
+    "description": "Su elementli hasarı oldukça azaltan bir aksesuar. Ayrıca birlikte savaşan Pal’lerin elektrik elementli hasarını da oldukça güçlendirir."
+  },
+  "Accessory_Otomo_Fire_1": {
+    "localized_name": "Blazehowl'un Yüzüğü",
+    "description": "Bitki elementli hasarı oldukça azaltan bir aksesuar. Ayrıca birlikte savaşan Pal’lerin ateş elementli hasarını da oldukça güçlendirir."
+  },
+  "Accessory_Otomo_Fire_2": {
+    "localized_name": "Faleris'in Yüzüğü",
+    "description": "Buz elementli hasarı oldukça azaltan bir aksesuar. Ayrıca birlikte savaşan Pal’lerin toprak elementli hasarını da oldukça güçlendirir."
+  },
+  "Accessory_Otomo_Ice_1": {
+    "localized_name": "Cryolinx'in Yüzüğü",
+    "description": "Ejderha elementli hasarı oldukça azaltan bir aksesuar. Ayrıca birlikte savaşan Pal’lerin toprak elementli hasarını da oldukça güçlendirir."
+  },
+  "Accessory_Otomo_Leaf_1": {
+    "localized_name": "Vaelet'in Yüzüğü",
+    "description": "Toprak elementli hasarı oldukça azaltan bir aksesuar. Ayrıca birlikte savaşan Pal’lerin toprak elementli hasarını da oldukça güçlendirir."
+  },
+  "Accessory_Otomo_Water_1": {
+    "localized_name": "Faleris Aqua'nın Yüzüğü",
+    "description": "Ateş elementli hasarı oldukça azaltan bir aksesuar. Ayrıca birlikte savaşan Pal’lerin su elementli hasarını da oldukça güçlendirir."
+  },
+  "Accessory_PPAT_1": {
+    "localized_name": "Wanfu'nun Amblemi",
+    "description": "Oyuncunun saldırı gücünü oldukça artırabilen bir aksesuar. Pal’lerin saldırı gücünü de yükseltir."
+  },
+  "Accessory_PPDF_1": {
+    "localized_name": "Silvegis Amblemi",
+    "description": "Oyuncunun savunma gücünü oldukça artırabilen bir aksesuar. Pal’lerin savunma gücünü de yükseltir."
+  },
+  "Accessory_SuperJumpAir_1": {
+    "localized_name": "Akrobatik Ayakkabılar-III",
+    "description": "Ekipman takıldığında oyuncunun havada 2 kez zıplamasını sağlayan bir aksesuar. Ayrıca havada 1 kez hızla ileri atılma (hava dash) yapmaya izin verir."
+  },
+  "Accessory_SuperJumpAir_2": {
+    "localized_name": "Akrobatik Ayakkabılar-III",
+    "description": "Ekipman takıldığında oyuncunun havada 2 kez zıplamasını sağlayan bir aksesuar. Ayrıca havada 2 kez hızla ileri atılma (hava dash) yapmaya izin verir."
   },
   "Accessory_TalentChecker": {
     "localized_name": "Beceri Gözlüğü",
@@ -209,55 +305,59 @@
   },
   "Accessory_ThunderResist_1": {
     "localized_name": "Şimşek Hasarı Direnci Yüzüğü",
-    "description": "Elektrik hasarını biraz azaltan bir aksesuar."
+    "description": "Elektrik hasarını azaltan bir aksesuar."
   },
   "Accessory_ThunderResist_2": {
-    "localized_name": "Şimşek Hasarı Direnci Yüzüğü +1",
+    "localized_name": "Şimşek Hasarı Direnci Yüzüğü",
     "description": "Elektrik hasarını azaltan bir aksesuar."
   },
   "Accessory_ThunderResist_3": {
-    "localized_name": "Şimşek Hasarı Direnci Yüzüğü +2",
-    "description": "Elektrik hasarını büyük oranda azaltan bir aksesuar."
+    "localized_name": "Şimşek Hasarı Direnci Yüzüğü",
+    "description": "Elektrik hasarını azaltan bir aksesuar."
+  },
+  "Accessory_WKMC_1": {
+    "localized_name": "Settler’s Tool Belt",
+    "description": "Oyuncunun taşıma kapasitesini oldukça artıran bir aksesuar. Ayrıca çalışma hızını da oldukça yükseltir."
   },
   "Accessory_WorkSpeed_1": {
     "localized_name": "Çalışkanlık Kolyesi",
-    "description": "Çalışma Hızını biraz artıran bir aksesuar."
+    "description": "Çalışma Hızını artıran bir aksesuar."
   },
   "Accessory_WorkSpeed_2": {
-    "localized_name": "Çalışkanlık Kolyesi +1",
+    "localized_name": "Çalışkanlık Kolyesi",
     "description": "Çalışma Hızını artıran bir aksesuar."
   },
   "Accessory_WorkSpeed_3": {
-    "localized_name": "Çalışkanlık Kolyesi +2",
-    "description": "Çalışma Hızını büyük oranda artıran bir aksesuar."
+    "localized_name": "Çalışkanlık Kolyesi",
+    "description": "Çalışma Hızını artıran bir aksesuar."
   },
   "Accessory_defense_1": {
     "localized_name": "Savunma Kolyesi",
-    "description": "Savunmayı biraz artıran bir aksesuar."
+    "description": "Savunmayı artıran bir aksesuar."
   },
   "Accessory_defense_2": {
-    "localized_name": "Savunma Kolyesi +1",
+    "localized_name": "Savunma Kolyesi",
     "description": "Savunmayı artıran bir aksesuar."
   },
   "Accessory_defense_3": {
-    "localized_name": "Savunma Kolyesi +2",
-    "description": "Savunmayı büyük oranda artıran bir aksesuar."
+    "localized_name": "Savunma Kolyesi",
+    "description": "Savunmayı artıran bir aksesuar."
   },
   "AdditionalInventory_001": {
     "localized_name": "Küçük Kese",
-    "description": "İlave eşyalar taşımana olanak tanıyan küçük bir kese. Buna sahip olmak envanter yuvalarını artırır."
+    "description": "Ek eşya taşımanıza olanak sağlayan küçük bir kese. Yanınızda bulundurduğunuzda envanter yuvası sayısı artar. 1 tane bulundurmanız yeterlidir."
   },
   "AdditionalInventory_002": {
     "localized_name": "Orta Kese",
-    "description": "İlave eşyalar taşımana olanak tanıyan sıradan bir kese. Buna sahip olmak envanter yuvalarını artırır."
+    "description": "Ek eşya taşımanıza olanak sağlayan orta boy bir kese. Yanınızda bulundurduğunuzda envanter yuvası sayısı artar. 1 tane bulundurmanız yeterlidir."
   },
   "AdditionalInventory_003": {
     "localized_name": "Büyük Kese",
-    "description": "İlave eşyalar taşımana olanak tanıyan büyük bir kese. Buna sahip olmak envanter yuvalarını artırır."
+    "description": "Ek eşya taşımanıza olanak sağlayan büyük bir kese. Yanınızda bulundurduğunuzda envanter yuvası sayısı artar. 1 tane bulundurmanız yeterlidir."
   },
   "AdditionalInventory_004": {
     "localized_name": "Kocaman Kese",
-    "description": "İlave eşyalar taşımana olanak tanıyan devasa bir kese. Buna sahip olmak envanter yuvalarını artırır."
+    "description": "Ek eşya taşımanıza olanak sağlayan devasa bir kese. Yanınızda bulundurduğunuzda envanter yuvası sayısı artar. 1 tane bulundurmanız yeterlidir."
   },
   "AffectionFruit_01": {
     "localized_name": "Değerli Bağlılık Şeftalisi",
@@ -266,6 +366,106 @@
   "AffectionFruit_02": {
     "localized_name": "Bağlılık Nektarı",
     "description": "Şefkatle dolu küçük bir meyve. Rivayete göre, bir Pal bu meyveyi yediğinde insanlara kalbini açarmış. Hangi Pal’a vereceğini özenle seç."
+  },
+  "AncientArmor": {
+    "localized_name": "Kadim Zırh",
+    "description": "Solrayt Külçesi’dan dövülmüş kadim bir zırh. Kaybolmuş medeniyetin özleri cömertçe işlenmiş ve olağanüstü savunma gücü kazandırılmıştır. Kıyamet seviyesindeki tehditlere bile karşı durabilecek, nihai düzeyde bir koruyucu ekipmandır."
+  },
+  "AncientArmorCold": {
+    "localized_name": "Soğuğa Dayanıklı Kadim Zırh",
+    "description": "GeliştirilmişKadim Zırh. Kadim teknolojiler sayesinde soğuk dayanımı artırılmış ve aşırı soğuk bölgelerde bile gücünü koruyabilir."
+  },
+  "AncientArmorCold_2": {
+    "localized_name": "Soğuğa Dayanıklı Kadim Zırh",
+    "description": "GeliştirilmişKadim Zırh. Kadim teknolojiler sayesinde soğuk dayanımı artırılmış ve aşırı soğuk bölgelerde bile gücünü koruyabilir."
+  },
+  "AncientArmorCold_3": {
+    "localized_name": "Soğuğa Dayanıklı Kadim Zırh",
+    "description": "GeliştirilmişKadim Zırh. Kadim teknolojiler sayesinde soğuk dayanımı artırılmış ve aşırı soğuk bölgelerde bile gücünü koruyabilir."
+  },
+  "AncientArmorCold_4": {
+    "localized_name": "Soğuğa Dayanıklı Kadim Zırh",
+    "description": "GeliştirilmişKadim Zırh. Kadim teknolojiler sayesinde soğuk dayanımı artırılmış ve aşırı soğuk bölgelerde bile gücünü koruyabilir."
+  },
+  "AncientArmorCold_5": {
+    "localized_name": "Soğuğa Dayanıklı Kadim Zırh",
+    "description": "GeliştirilmişKadim Zırh. Kadim teknolojiler sayesinde soğuk dayanımı artırılmış ve aşırı soğuk bölgelerde bile gücünü koruyabilir."
+  },
+  "AncientArmorHeat": {
+    "localized_name": "Isıya Dayanıklı Kadim Zırh",
+    "description": "GeliştirilmişKadim Zırh. Kadim teknolojiler sayesinde ısı dayanımı artırılmış ve kavurucu sıcaklıklara karşı direnç kazanmıştır."
+  },
+  "AncientArmorHeat_2": {
+    "localized_name": "Isıya Dayanıklı Kadim Zırh",
+    "description": "GeliştirilmişKadim Zırh. Kadim teknolojiler sayesinde ısı dayanımı artırılmış ve kavurucu sıcaklıklara karşı direnç kazanmıştır."
+  },
+  "AncientArmorHeat_3": {
+    "localized_name": "Isıya Dayanıklı Kadim Zırh",
+    "description": "GeliştirilmişKadim Zırh. Kadim teknolojiler sayesinde ısı dayanımı artırılmış ve kavurucu sıcaklıklara karşı direnç kazanmıştır."
+  },
+  "AncientArmorHeat_4": {
+    "localized_name": "Isıya Dayanıklı Kadim Zırh",
+    "description": "GeliştirilmişKadim Zırh. Kadim teknolojiler sayesinde ısı dayanımı artırılmış ve kavurucu sıcaklıklara karşı direnç kazanmıştır."
+  },
+  "AncientArmorHeat_5": {
+    "localized_name": "Isıya Dayanıklı Kadim Zırh",
+    "description": "GeliştirilmişKadim Zırh. Kadim teknolojiler sayesinde ısı dayanımı artırılmış ve kavurucu sıcaklıklara karşı direnç kazanmıştır."
+  },
+  "AncientArmorWeight": {
+    "localized_name": "Hafif Kadim Zırh",
+    "description": "GeliştirilmişKadim Zırh. Kadim destek mekanizmaları entegre edilmiş ve daha fazla malzeme taşımayı sağlar."
+  },
+  "AncientArmorWeight_2": {
+    "localized_name": "Hafif Kadim Zırh",
+    "description": "GeliştirilmişKadim Zırh. Kadim destek mekanizmaları entegre edilmiş ve daha fazla malzeme taşımayı sağlar."
+  },
+  "AncientArmorWeight_3": {
+    "localized_name": "Hafif Kadim Zırh",
+    "description": "GeliştirilmişKadim Zırh. Kadim destek mekanizmaları entegre edilmiş ve daha fazla malzeme taşımayı sağlar."
+  },
+  "AncientArmorWeight_4": {
+    "localized_name": "Hafif Kadim Zırh",
+    "description": "GeliştirilmişKadim Zırh. Kadim destek mekanizmaları entegre edilmiş ve daha fazla malzeme taşımayı sağlar."
+  },
+  "AncientArmorWeight_5": {
+    "localized_name": "Hafif Kadim Zırh",
+    "description": "GeliştirilmişKadim Zırh. Kadim destek mekanizmaları entegre edilmiş ve daha fazla malzeme taşımayı sağlar."
+  },
+  "AncientArmor_2": {
+    "localized_name": "Kadim Zırh",
+    "description": "Solrayt Külçesi’dan dövülmüş kadim bir zırh. Kaybolmuş medeniyetin özleri cömertçe işlenmiş ve olağanüstü savunma gücü kazandırılmıştır. Kıyamet seviyesindeki tehditlere bile karşı durabilecek, nihai düzeyde bir koruyucu ekipmandır."
+  },
+  "AncientArmor_3": {
+    "localized_name": "Kadim Zırh",
+    "description": "Solrayt Külçesi’dan dövülmüş kadim bir zırh. Kaybolmuş medeniyetin özleri cömertçe işlenmiş ve olağanüstü savunma gücü kazandırılmıştır. Kıyamet seviyesindeki tehditlere bile karşı durabilecek, nihai düzeyde bir koruyucu ekipmandır."
+  },
+  "AncientArmor_4": {
+    "localized_name": "Kadim Zırh",
+    "description": "Solrayt Külçesi’dan dövülmüş kadim bir zırh. Kaybolmuş medeniyetin özleri cömertçe işlenmiş ve olağanüstü savunma gücü kazandırılmıştır. Kıyamet seviyesindeki tehditlere bile karşı durabilecek, nihai düzeyde bir koruyucu ekipmandır."
+  },
+  "AncientArmor_5": {
+    "localized_name": "Kadim Zırh",
+    "description": "Solrayt Külçesi’dan dövülmüş kadim bir zırh. Kaybolmuş medeniyetin özleri cömertçe işlenmiş ve olağanüstü savunma gücü kazandırılmıştır. Kıyamet seviyesindeki tehditlere bile karşı durabilecek, nihai düzeyde bir koruyucu ekipmandır."
+  },
+  "AncientHelmet": {
+    "localized_name": "Kadim Miğfer",
+    "description": "Solrayt Külçesi’dan dövülmüş kadim bir miğfer. Sonsuz zamanları aşarak aktarılan bilgelik ona sinmiş ve takanı sağlam şekilde korur. Savunma gücü, modern ekipmanları çok aşar."
+  },
+  "AncientHelmet_2": {
+    "localized_name": "Kadim Miğfer",
+    "description": "Solrayt Külçesi’dan dövülmüş kadim bir miğfer. Sonsuz zamanları aşarak aktarılan bilgelik ona sinmiş ve takanı sağlam şekilde korur. Savunma gücü, modern ekipmanları çok aşar."
+  },
+  "AncientHelmet_3": {
+    "localized_name": "Kadim Miğfer",
+    "description": "Solrayt Külçesi’dan dövülmüş kadim bir miğfer. Sonsuz zamanları aşarak aktarılan bilgelik ona sinmiş ve takanı sağlam şekilde korur. Savunma gücü, modern ekipmanları çok aşar."
+  },
+  "AncientHelmet_4": {
+    "localized_name": "Kadim Miğfer",
+    "description": "Solrayt Külçesi’dan dövülmüş kadim bir miğfer. Sonsuz zamanları aşarak aktarılan bilgelik ona sinmiş ve takanı sağlam şekilde korur. Savunma gücü, modern ekipmanları çok aşar."
+  },
+  "AncientHelmet_5": {
+    "localized_name": "Kadim Miğfer",
+    "description": "Solrayt Külçesi’dan dövülmüş kadim bir miğfer. Sonsuz zamanları aşarak aktarılan bilgelik ona sinmiş ve takanı sağlam şekilde korur. Savunma gücü, modern ekipmanları çok aşar."
   },
   "AncientParts2": {
     "localized_name": "Kadim Medeniyet Çekirdeği",
@@ -301,19 +501,19 @@
   },
   "Arrow": {
     "localized_name": "Ok",
-    "description": "Bir yayla kullanılabilecek bir Ok."
+    "description": "Yayla fırlatmak için kullanılan bir Ok. İlkel Tezgâh kullanılarak üretilebilir."
   },
   "Arrow_Fire": {
     "localized_name": "Ateş Oku",
-    "description": "Bow Fire ve BowGun Fire ile atış yapmak için bir dizi Ok. Ateş hasarı verir."
+    "description": "Yayla fırlatmak için kullanılan bir Arrow Fire. İsabet ettiği hedefe <img id=|ElemIcon Fire|/><uiCommon id=|COMMON ELEMENT NAME Fire| style=|Elem Fire|/> hasarı verir. İlkel Tezgâh kullanılarak üretilebilir."
   },
   "Arrow_Poison": {
     "localized_name": "Zehirli Ok",
-    "description": "Bow Poison ve BowGun Poison ile atış yapmak için bir dizi Ok. Vurduğu hedefi zehirler."
+    "description": "Yayla fırlatmak için kullanılan birArrow Poison. İsabet ettiği hedefe <uiCommon id=|ADDITIONAL EFFECT Poison| style=|Effect Poison|/> verir. İlkel Tezgâh kullanılarak üretilebilir."
   },
   "AssaultRifleBullet": {
     "localized_name": "Taarruz Tüfeği Mermisi",
-    "description": "AssaultRifle Default1 ve benzeri diğer silahlar için cephane."
+    "description": "AssaultRifle Default1 ve benzeri silahlarda kullanılan mühimmat. WeaponFactory Dirty 02 kullanılarak üretilebilir."
   },
   "AssaultRifle_Default1": {
     "localized_name": "Taarruz Tüfeği",
@@ -337,27 +537,27 @@
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "Küçük Yem Çantası",
-    "description": "Envanterinde bir yiyecek yuvasını açar. Oyuncular ve Pal'lar, acıktıklarında otomatik olarak yiyecek tüketir."
+    "description": "Yiyecek saklamak için kullanılan küçük bir kese. Otomatik yemek tüketimi için 1 ekipman yuvasının kilidini açar. Açlık durumunda bu yuvadaki yiyecekler otomatik olarak tüketilir. 1 tane bulundurmanız yeterlidir."
   },
   "AutoMealPouch_Tier2": {
     "localized_name": "Orta Yem Çantası",
-    "description": "Yiyecek saklamak için yeterli büyüklükte bir kese. Envanterinde 2 yiyecek yuvası açar. Oyuncular ve Pal'lar, acıktıklarında otomatik olarak yiyecek tüketir."
+    "description": "Yiyecek saklamak için kullanılan orta boy bir kese. Otomatik yemek tüketimi için en fazla 2 ekipman yuvasının kilidini açar. Açlık durumunda bu yuvalardaki yiyecekler otomatik olarak tüketilir. 1 tane bulundurmanız yeterlidir."
   },
   "AutoMealPouch_Tier3": {
     "localized_name": "Büyük Yem Çantası",
-    "description": "Yiyecek saklamak için büyük bir kese. Envanterinde 3 yiyecek yuvası açar. Oyuncular ve Pal'lar, acıktıklarında otomatik olarak yiyecek tüketir."
+    "description": "Yiyecek saklamak için kullanılan büyük bir kese. Otomatik yemek tüketimi için en fazla 3 ekipman yuvasının kilidini açar. Açlık durumunda bu yuvalardaki yiyecekler otomatik olarak tüketilir. 1 tane bulundurmanız yeterlidir."
   },
   "AutoMealPouch_Tier4": {
     "localized_name": "Kocaman Yem Çantası",
-    "description": "Yiyecek saklamak için son derece büyük bir kese. Envanterinde 4 yiyecek yuvası açar. Oyuncular ve Pal'lar, acıktıklarında otomatik olarak yiyecek tüketir."
+    "description": "Yiyecek saklamak için kullanılan ekstra büyük bir kese. Otomatik yemek tüketimi için en fazla 4 ekipman yuvasının kilidini açar. Açlık durumunda bu yuvalardaki yiyecekler otomatik olarak tüketilir. 1 tane bulundurmanız yeterlidir."
   },
   "AutoMealPouch_Tier5": {
     "localized_name": "Devasa Yem Çantası",
-    "description": "Yiyecek saklamak için sıra dışı büyüklükte bir kese. Envanterinde 5 yiyecek yuvası açar. Oyuncular ve Pal'lar, acıktıklarında otomatik olarak yiyecek tüketir."
+    "description": "Yiyecek saklamak için kullanılan ekstra büyük bir kese. Otomatik yemek tüketimi için en fazla 5 ekipman yuvasının kilidini açar. Açlık durumunda bu yuvalardaki yiyecekler otomatik olarak tüketilir. 1 tane bulundurmanız yeterlidir."
   },
   "Axe_Steal": {
     "localized_name": "Pal Metali Balta",
-    "description": "Odun kesmek için bir balta. Pal Metali sayesinde sıra dışı bir keskinliğe ulaşmıştır."
+    "description": "Ağaç kesmek için kullanılan bir balta. Palmetalin sağladığı olağanüstü keskinliğe sahiptir. En zorlu koşullarda yetişen yüksek kaliteli sert ağaçları bile kolayca kesebilir."
   },
   "Axe_Tier_00": {
     "localized_name": "Taş Balta",
@@ -365,11 +565,11 @@
   },
   "Axe_Tier_01": {
     "localized_name": "Metal Balta",
-    "description": "Odun kesmek için bir balta. Metalden yapılmıştır, keskinliği daha iyidir."
+    "description": "Ağaç kesmek için kullanılan bir balta. Metalden yapıldığı için sert ağaçları kesmek daha kolaydır. Ayrıca kıtanın derinliklerinde yetişen dayanıklı ağaçların kesiminde de etkilidir."
   },
   "Axe_Tier_02": {
     "localized_name": "Saf Metal Balta",
-    "description": "Odun kesmek için bir balta. Yüksek kaliteli metalden yapılmıştır, keskinliği çok daha iyidir."
+    "description": "Ağaç kesmek için kullanılan bir balta. Dayanıklılığı ve keskinliği daha da artırılmıştır. Zorlu bölgelerde yetişen kaliteli ağaçlardan sert kereste elde edebilir."
   },
   "Axe_Tier_03": {
     "localized_name": "-",
@@ -451,9 +651,53 @@
     "localized_name": "Beyzbol Sopası",
     "description": "Yakın menzilli dövüşler için bir beyzbol sopası. Bir Pal'la sayı vuruşu yapmak biraz zor olabilir."
   },
+  "Bat3": {
+    "localized_name": "Metal Beyzbol Sopası",
+    "description": "Yakın dövüşte de kullanılabilirMetal Beyzbol Sopası. Hoşuna gitmeyen rakipleri bununla acımasızca döverek etkisiz hâle getirirsin."
+  },
+  "Bat3_2": {
+    "localized_name": "Metal Beyzbol Sopası",
+    "description": "Yakın dövüşte de kullanılabilirMetal Beyzbol Sopası. Hoşuna gitmeyen rakipleri bununla acımasızca döverek etkisiz hâle getirirsin."
+  },
+  "Bat3_3": {
+    "localized_name": "Metal Beyzbol Sopası",
+    "description": "Yakın dövüşte de kullanılabilirMetal Beyzbol Sopası. Hoşuna gitmeyen rakipleri bununla acımasızca döverek etkisiz hâle getirirsin."
+  },
+  "Bat3_4": {
+    "localized_name": "Metal Beyzbol Sopası",
+    "description": "Yakın dövüşte de kullanılabilirMetal Beyzbol Sopası. Hoşuna gitmeyen rakipleri bununla acımasızca döverek etkisiz hâle getirirsin."
+  },
+  "Bat3_5": {
+    "localized_name": "Metal Beyzbol Sopası",
+    "description": "Yakın dövüşte de kullanılabilirMetal Beyzbol Sopası. Hoşuna gitmeyen rakipleri bununla acımasızca döverek etkisiz hâle getirirsin."
+  },
   "BattleTicket": {
     "localized_name": "Savaş Bileti",
     "description": "Arenaya tek başına meydan okuyup kazandığında elde edilir. Biriktirildiğinde, gösterişli ödüllerle takas edilebilir."
+  },
+  "BeamLauncher": {
+    "localized_name": "Işın Fırlatıcı",
+    "description": "Yüksek yoğunluklu ışınlar ateşleyerek geniş bir alanda patlama oluşturan bir lançerdir. Seri atış sırasında aşırı ısınmaya dikkat edilmelidir."
+  },
+  "BeamLauncherBullet": {
+    "localized_name": "Işın Fırlatıcı Mermisi",
+    "description": "Işın Fırlatıcı ile kullanılan mühimmat. Antik Medeniyet Tezgahı kullanılarak üretilebilir."
+  },
+  "BeamLauncher_2": {
+    "localized_name": "Işın Fırlatıcı",
+    "description": "Yüksek yoğunluklu ışınlar ateşleyerek geniş bir alanda patlama oluşturan bir lançerdir. Seri atış sırasında aşırı ısınmaya dikkat edilmelidir."
+  },
+  "BeamLauncher_3": {
+    "localized_name": "Işın Fırlatıcı",
+    "description": "Yüksek yoğunluklu ışınlar ateşleyerek geniş bir alanda patlama oluşturan bir lançerdir. Seri atış sırasında aşırı ısınmaya dikkat edilmelidir."
+  },
+  "BeamLauncher_4": {
+    "localized_name": "Işın Fırlatıcı",
+    "description": "Yüksek yoğunluklu ışınlar ateşleyerek geniş bir alanda patlama oluşturan bir lançerdir. Seri atış sırasında aşırı ısınmaya dikkat edilmelidir."
+  },
+  "BeamLauncher_5": {
+    "localized_name": "Işın Fırlatıcı",
+    "description": "Yüksek yoğunluklu ışınlar ateşleyerek geniş bir alanda patlama oluşturan bir lançerdir. Seri atış sırasında aşırı ısınmaya dikkat edilmelidir."
   },
   "BeamSword": {
     "localized_name": "Enerji Kılıcı",
@@ -475,6 +719,10 @@
     "localized_name": "Enerji Kılıcı",
     "description": "Yakın menzilli çatışmalar için Enerji Kılıcı. Rakipleri ikiye böler ve yüksek güçlü bir lazerle yakar."
   },
+  "BeastBone_Ancient": {
+    "localized_name": "Antik Kalıntılar",
+    "description": "Aşırı çevre koşullarında uzun yıllar boyunca aşınarak fosilleşmiş hayvan kemiği. Etini kaybetmiş olsa bile hâlâ güçlü bir varlık hissi yayar."
+  },
   "Beer": {
     "localized_name": "-",
     "description": "-"
@@ -491,6 +739,258 @@
     "localized_name": "Meyve Tohumları",
     "description": "Büyüyüp Kırmızı Meyveler veren tohumlar. Ekim yapmaya başlamak için olmazsa olmazdır. Kırmızı Meyveler toplayarak elde edilir."
   },
+  "Bio_Battery": {
+    "localized_name": "Biyobatteri",
+    "description": "Biyoenerjiyi elektrik enerjisi olarak depolayan bir cihaz. Yüksek enerji yoğunluğu gerektiren ekipmanlarda kullanılır. Factory Hard 03 kullanılarak üretilebilir."
+  },
+  "Bio_Coolant": {
+    "localized_name": "Kriyojenik Soğutucu",
+    "description": "Pal kaynaklı özel bileşenlerden yararlanan yüksek verimli bir soğutucu. Yüksek çıkışlı cihazların sıcaklık kontrolünde kullanılır. Factory Hard 02 kullanılarak üretilebilir."
+  },
+  "Blueprint_Accessory_AT_1_2": {
+    "localized_name": "Saldırı Kolyesi Şeması",
+    "description": "Sahip olunduğunda, “Accessory AT 1 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_AquaResist_1_2": {
+    "localized_name": "Su Mühürleme Yüzüğü",
+    "description": "Sahip olunduğunda, “Accessory AquaResist 1 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_Avoid_1": {
+    "localized_name": "Hayalet Yüzüğü Şeması",
+    "description": "Sahip olunduğunda, “Accessory Avoid 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_Avoid_1_fix": {
+    "localized_name": "Hayalet Yüzüğü Şeması",
+    "description": "Sahip olunduğunda, “Accessory Avoid 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_ColdIce_1": {
+    "localized_name": "Wumpo Tılsımı Şeması",
+    "description": "Sahip olunduğunda, “Accessory ColdIce 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_CoolResist_1_2": {
+    "localized_name": "Soğuk Dirençli İç Çamaşırı Şeması",
+    "description": "Sahip olunduğunda, “Accessory CoolResist 1 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_DFHP_1": {
+    "localized_name": "Guardian’s Rosary Schematic",
+    "description": "Sahip olunduğunda, “Accessory DFHP 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_DarkResist_1_2": {
+    "localized_name": "Karanlık Mühürleme Yüzüğü Şeması",
+    "description": "Sahip olunduğunda, “Accessory DarkResist 1 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_DragonResist_1_2": {
+    "localized_name": "Ejderha Mühürleme Yüzüğü Şeması",
+    "description": "Sahip olunduğunda, “Accessory DragonResist 1 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_EarthResist_1_2": {
+    "localized_name": "Toprak Mühürleme Yüzüğü Şeması",
+    "description": "Sahip olunduğunda, “Accessory EarthResist 1 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_FireResist_1_2": {
+    "localized_name": "Ateş Mühürleme Yüzüğü",
+    "description": "Sahip olunduğunda, “Accessory FireResist 1 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_HCHP_1": {
+    "localized_name": "Öncü Birliği Tılsımı Şeması",
+    "description": "Sahip olunduğunda, “Accessory HCHP 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_HCMW_1": {
+    "localized_name": "Gezgin Tüccarın Tılsımı Şeması",
+    "description": "Sahip olunduğunda, “Accessory HCMW 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_HP_1_2": {
+    "localized_name": "Yaşam Kolyesi Şeması",
+    "description": "Sahip olunduğunda, “Accessory HP 1 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_HeatColdResist_1_2": {
+    "localized_name": "Isı ve Soğuk Dirençli İç Çamaşırı Şeması",
+    "description": "Sahip olunduğunda, “Accessory HeatColdResist 1 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_HeatFire_1": {
+    "localized_name": "Reptyro Tılsımı Şeması",
+    "description": "Sahip olunduğunda, “Accessory HeatFire 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_HeatResist_1_2": {
+    "localized_name": "Isı Dirençli İç Çamaşırı Şeması",
+    "description": "Sahip olunduğunda, “Accessory HeatResist 1 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_IceResist_1_2": {
+    "localized_name": "Buz Mühürleme Yüzüğü",
+    "description": "Sahip olunduğunda, “Accessory IceResist 1 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_JumpAir_1": {
+    "localized_name": "Akrobatik Ayakkabılar I Şeması",
+    "description": "Sahip olunduğunda, “Accessory JumpAir 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_JumpAir_2": {
+    "localized_name": "Akrobatik Ayakkabılar-II Şeması",
+    "description": "Sahip olunduğunda, “Accessory JumpAir 2 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_LeafResist_1_2": {
+    "localized_name": "Çim Mühürleme Yüzüğü",
+    "description": "Sahip olunduğunda, “Accessory LeafResist 1 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_MaxWeightUp_01_2": {
+    "localized_name": "Taşıyıcının Yüzüğü Şeması",
+    "description": "Sahip olunduğunda, “Accessory MaxWeightUp 01 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_NonkChecker_1": {
+    "localized_name": "Pal Eğitmeni’nin Gözlüğü Şeması",
+    "description": "Sahip olunduğunda, “Accessory NonkChecker 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_NormalResist_1_2": {
+    "localized_name": "Nötr Mühürleme Yüzüğü Şeması",
+    "description": "Sahip olunduğunda, “Accessory NormalResist 1 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_Otomo_Dargon_1": {
+    "localized_name": "Elphidran'ın Yüzüğü Şeması",
+    "description": "Sahip olunduğunda, “Accessory Otomo Dargon 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_Otomo_Dark_1": {
+    "localized_name": "Katress'in Yüzüğü Şeması",
+    "description": "Sahip olunduğunda, “Accessory Otomo Dark 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_Otomo_Earth_1": {
+    "localized_name": "Menasting Terra'nın Yüzüğü Şeması",
+    "description": "Sahip olunduğunda, “Accessory Otomo Earth 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_Otomo_Electricity_1": {
+    "localized_name": "Fenglope Lux'un Yüzüğü Şeması",
+    "description": "Sahip olunduğunda, “Accessory Otomo Electricity 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_Otomo_Fire_1": {
+    "localized_name": "Blazehowl'un Yüzüğü Şeması",
+    "description": "Sahip olunduğunda, “Accessory Otomo Fire 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_Otomo_Fire_2": {
+    "localized_name": "Faleris'in Yüzüğü Şeması",
+    "description": "Sahip olunduğunda, “Accessory Otomo Fire 2 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_Otomo_Ice_1": {
+    "localized_name": "Cryolinx'in Yüzüğü Şeması",
+    "description": "Sahip olunduğunda, “Accessory Otomo Ice 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_Otomo_Leaf_1": {
+    "localized_name": "Vaelet'in Yüzüğü Şeması",
+    "description": "Sahip olunduğunda, “Accessory Otomo Leaf 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_Otomo_Water_1": {
+    "localized_name": "Faleris Aqua'nın Yüzüğü Şeması",
+    "description": "Sahip olunduğunda, “Accessory Otomo Water 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_PPAT_1": {
+    "localized_name": "Wanfu'nun Amblemi Şeması",
+    "description": "Sahip olunduğunda, “Accessory PPAT 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_PPDF_1": {
+    "localized_name": "Silvegis Amblemi Taslağı",
+    "description": "Sahip olunduğunda, “Accessory PPDF 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_SuperJumpAir_1": {
+    "localized_name": "Akrobatik Ayakkabılar-III Şeması",
+    "description": "Sahip olunduğunda, “Accessory SuperJumpAir 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_SuperJumpAir_2": {
+    "localized_name": "Akrobatik Ayakkabılar-III Şeması",
+    "description": "Sahip olunduğunda, “Accessory SuperJumpAir 2 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_ThunderResist_1_2": {
+    "localized_name": "Yıldırım Mühürleme Yüzüğü",
+    "description": "Sahip olunduğunda, “Accessory ThunderResist 1 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_WKMC_1": {
+    "localized_name": "Settler’s Tool Belt Şeması",
+    "description": "Sahip olunduğunda, “Accessory WKMC 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_WorkSpeed_1_2": {
+    "localized_name": "Çalışkanlık Kolyesi Şeması",
+    "description": "Sahip olunduğunda, “Accessory WorkSpeed 1 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
+  "Blueprint_Accessory_defense_1_2": {
+    "localized_name": "Savunma Kolyesi Şeması",
+    "description": "Sahip olunduğunda, “Accessory defense 1 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
+  "Blueprint_AncientArmorCold_2": {
+    "localized_name": "Soğuğa Dayanıklı Kadim Zırh Şeması 1",
+    "description": "Sahip olunduğunda, “AncientArmorCold 2 (Uncommon)” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_AncientArmorCold_3": {
+    "localized_name": "Soğuğa Dayanıklı Kadim Zırh Şeması 2",
+    "description": "Sahip olunduğunda, “AncientArmorCold 3 (Rare)” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_AncientArmorCold_4": {
+    "localized_name": "Soğuğa Dayanıklı Kadim Zırh Şeması 3",
+    "description": "Sahip olunduğunda, “AncientArmorCold 4 (Epic)” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_AncientArmorCold_5": {
+    "localized_name": "Soğuğa Dayanıklı Kadim Zırh Şeması 4",
+    "description": "Sahip olunduğunda, “AncientArmorCold 5 (Legendary)” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_AncientArmorHeat_2": {
+    "localized_name": "Isıya Dayanıklı Kadim Zırh Şeması 1",
+    "description": "Sahip olunduğunda, “AncientArmorHeat 2 (Uncommon)” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_AncientArmorHeat_3": {
+    "localized_name": "Isıya Dayanıklı Kadim Zırh Şeması 2",
+    "description": "Sahip olunduğunda, “AncientArmorHeat 3 (Rare)” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_AncientArmorHeat_4": {
+    "localized_name": "Isıya Dayanıklı Kadim Zırh Şeması 3",
+    "description": "Sahip olunduğunda, “AncientArmorHeat 4 (Epic)” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_AncientArmorHeat_5": {
+    "localized_name": "Isıya Dayanıklı Kadim Zırh Şeması 4",
+    "description": "Sahip olunduğunda, “AncientArmorHeat 5 (Legendary)” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_AncientArmorWeight_2": {
+    "localized_name": "Hafif Kadim Zırh Şeması 1",
+    "description": "Sahip olunduğunda, “AncientArmorWeight 2 (Uncommon)” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_AncientArmorWeight_3": {
+    "localized_name": "Hafif Kadim Zırh Şeması 2",
+    "description": "Sahip olunduğunda, “AncientArmorWeight 3 (Rare)” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_AncientArmorWeight_4": {
+    "localized_name": "Hafif Kadim Zırh Şeması 3",
+    "description": "Sahip olunduğunda, “AncientArmorWeight 4 (Epic)” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_AncientArmorWeight_5": {
+    "localized_name": "Hafif Kadim Zırh Şeması 4",
+    "description": "Sahip olunduğunda, “AncientArmorWeight 5 (Legendary)” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_AncientArmor_2": {
+    "localized_name": "Kadim Zırh Şeması 1",
+    "description": "Sahip olunduğunda, “AncientArmor 2 (Uncommon)” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_AncientArmor_3": {
+    "localized_name": "Kadim Zırh Şeması 2",
+    "description": "Sahip olunduğunda, “AncientArmor 3 (Rare)” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_AncientArmor_4": {
+    "localized_name": "Kadim Zırh Şeması 3",
+    "description": "Sahip olunduğunda, “AncientArmor 4 (Epic)” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_AncientArmor_5": {
+    "localized_name": "Kadim Zırh Şeması 4",
+    "description": "Sahip olunduğunda, “AncientArmor 5 (Legendary)” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_AncientHelmet_2": {
+    "localized_name": "Kadim Miğfer Şeması 1",
+    "description": "Sahip olunduğunda, “AncientHelmet 2 (Uncommon)” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_AncientHelmet_3": {
+    "localized_name": "Kadim Miğfer Şeması 2",
+    "description": "Sahip olunduğunda, “AncientHelmet 3 (Rare)” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_AncientHelmet_4": {
+    "localized_name": "Kadim Miğfer Şeması 3",
+    "description": "Sahip olunduğunda, “AncientHelmet 4 (Epic)” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_AncientHelmet_5": {
+    "localized_name": "Kadim Miğfer Şeması 4",
+    "description": "Sahip olunduğunda, “AncientHelmet 5 (Legendary)” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
   "Blueprint_AssaultRifle_Default2": {
     "localized_name": "Taarruz Tüfeği Şeması 1",
     "description": "Envanterdeyken AssaultRifle Default1 (Uncommon) tarifini açar. WeaponFactory Dirty 02 ile üretilebilir."
@@ -506,6 +1006,38 @@
   "Blueprint_AssaultRifle_Default5": {
     "localized_name": "Taarruz Tüfeği Şeması 4",
     "description": "Envanterdeyken AssaultRifle Default1 (Legendary) tarifini açar. WeaponFactory Dirty 02 ile üretilebilir."
+  },
+  "Blueprint_Bat3_2": {
+    "localized_name": "Metal Beyzbol Sopası Şeması 1",
+    "description": "Sahip olunduğunda, “Metal Beyzbol Sopası (Uncommon)” tarifi açılır. “WeaponFactory Dirty 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Bat3_3": {
+    "localized_name": "Metal Beyzbol Sopası Şeması 2",
+    "description": "Sahip olunduğunda, “Metal Beyzbol Sopası (Rare)” tarifi açılır. “WeaponFactory Dirty 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Bat3_4": {
+    "localized_name": "Metal Beyzbol Sopası Şeması 3",
+    "description": "Sahip olunduğunda, “Metal Beyzbol Sopası (Epic)” tarifi açılır. “WeaponFactory Dirty 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Bat3_5": {
+    "localized_name": "Metal Beyzbol Sopası Şeması 4",
+    "description": "Sahip olunduğunda, “Metal Beyzbol Sopası (Legendary)” tarifi açılır. “WeaponFactory Dirty 02” ile üretim yapılabilir."
+  },
+  "Blueprint_BeamLauncher_2": {
+    "localized_name": "Işın Fırlatıcı Şeması 1",
+    "description": "Sahip olunduğunda, “Işın Fırlatıcı （Uncommon）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_BeamLauncher_3": {
+    "localized_name": "Işın Fırlatıcı Şeması 2",
+    "description": "Sahip olunduğunda, “Işın Fırlatıcı （Rare）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_BeamLauncher_4": {
+    "localized_name": "Işın Fırlatıcı Şeması 3",
+    "description": "Sahip olunduğunda, “Işın Fırlatıcı （Epic）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_BeamLauncher_5": {
+    "localized_name": "Işın Fırlatıcı Şeması 4",
+    "description": "Sahip olunduğunda, “Işın Fırlatıcı （Legendary）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
   },
   "Blueprint_BeamSword_2": {
     "localized_name": "Işın Kılıcı Tasarım Planı 1",
@@ -743,6 +1275,38 @@
     "localized_name": "Çifte Av Tüfeği Şeması 4",
     "description": "Envanterdeyken Çifte Av Tüfeği (Legendary) tarifini açar. WeaponFactory Dirty 02 ile üretilebilir."
   },
+  "Blueprint_DroneLauncher_2": {
+    "localized_name": "Dron Fırlatıcı Şeması 1",
+    "description": "Sahip olunduğunda, “Dron Fırlatıcı （Uncommon）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_DroneLauncher_3": {
+    "localized_name": "Dron Fırlatıcı Şeması 2",
+    "description": "Sahip olunduğunda, “Dron Fırlatıcı （Rare）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_DroneLauncher_4": {
+    "localized_name": "Dron Fırlatıcı Şeması 3",
+    "description": "Sahip olunduğunda, “Dron Fırlatıcı （Epic）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_DroneLauncher_5": {
+    "localized_name": "Dron Fırlatıcı Şeması 4",
+    "description": "Sahip olunduğunda, “Dron Fırlatıcı （Legendary）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_ElectricArcAssaultRifle_2": {
+    "localized_name": "Plazma Tüfeği Şeması 1",
+    "description": "Sahip olunduğunda, “Plazma Tüfeği （Uncommon）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_ElectricArcAssaultRifle_3": {
+    "localized_name": "Plazma Tüfeği Şeması 2",
+    "description": "Sahip olunduğunda, “Plazma Tüfeği （Rare）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_ElectricArcAssaultRifle_4": {
+    "localized_name": "Plazma Tüfeği Şeması 3",
+    "description": "Sahip olunduğunda, “Plazma Tüfeği （Epic）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_ElectricArcAssaultRifle_5": {
+    "localized_name": "Plazma Tüfeği Şeması 4",
+    "description": "Sahip olunduğunda, “Plazma Tüfeği （Legendary）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
   "Blueprint_EnergyRocketLauncher_2": {
     "localized_name": "Plazma Topu Şeması 1",
     "description": "Envanterdeyken Plazma Topu (Uncommon) tarifini açar. WeaponFactory Dirty 03 ile üretilebilir."
@@ -785,11 +1349,11 @@
   },
   "Blueprint_FishingRod_02_2": {
     "localized_name": "Orta Seviye Olta (Bushigaeru) Tasarım Şeması",
-    "description": "Sahip olunduğunda, 「FishingRod 02 2 （Uncommon）tarifinin kilidi açılır. 「Factory Hard 02」kullanılarak üretilebilir."
+    "description": "Sahip olunduğunda, 「FishingRod 02 2 （Rare）tarifinin kilidi açılır. 「Factory Hard 02」kullanılarak üretilebilir."
   },
   "Blueprint_FishingRod_03_2": {
     "localized_name": "Üst Seviye Olta (Ndakoala) Tasarım Şeması",
-    "description": "Sahip olunduğunda, 「FishingRod 03 2 （Rare）tarifinin kilidi açılır. 「Factory Hard 03」kullanılarak üretilebilir."
+    "description": "Sahip olunduğunda, 「FishingRod 03 2 （Legendary）tarifinin kilidi açılır. 「Factory Hard 03」kullanılarak üretilebilir."
   },
   "Blueprint_FlameThrower_2": {
     "localized_name": "Alev Makinesi Şeması 1",
@@ -1679,6 +2243,130 @@
     "localized_name": "Eski Altıpatlar Şeması 4",
     "description": "Envanterdeyken Eski Altıpatlar (Legendary) tarifini açar. WeaponFactory Dirty 02 ile üretilebilir."
   },
+  "Blueprint_Otomo_ATDark_ElementBoost_1": {
+    "localized_name": "Yeraltı Dünyasının Hüküm Asası Şeması",
+    "description": "Sahip olunduğunda, “Otomo ATDark ElementBoost 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_ATDragon_ElementBoost_1": {
+    "localized_name": "Kutsal Ejderhanın Hüküm Asası Şeması",
+    "description": "Sahip olunduğunda, “Otomo ATDragon ElementBoost 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_ATEarth_ElementBoost_1": {
+    "localized_name": "Toprak İmparatoru Hüküm Asası Şeması",
+    "description": "Sahip olunduğunda, “Otomo ATEarth ElementBoost 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_ATElectricity_ElementBoost_1": {
+    "localized_name": "Yıldırım İmparatoru’nun Hüküm Asası",
+    "description": "Sahip olunduğunda, “Otomo ATElectricity ElementBoost 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_ATFire_ElementBoost_1": {
+    "localized_name": "Gokuen'o Hüküm Asası Şeması",
+    "description": "Sahip olunduğunda, “Otomo ATFire ElementBoost 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_ATIce_ElementBoost_1": {
+    "localized_name": "Buz İmparatorunun Hüküm Asası Şeması",
+    "description": "Sahip olunduğunda, “Otomo ATIce ElementBoost 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_ATLeaf_ElementBoost_1": {
+    "localized_name": "Ruh İmparatoru’nun Hüküm Asası Şeması",
+    "description": "Sahip olunduğunda, “Otomo ATLeaf ElementBoost 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_ATNormal_ElementBoost_1": {
+    "localized_name": "Kutsal Gökyüzü’nün Mühürlü Asası Şeması",
+    "description": "Sahip olunduğunda, “Otomo ATNormal ElementBoost 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_ATWater_ElementBoost_1": {
+    "localized_name": "Deniz İmparatoru’nun Hüküm Asası Şeması",
+    "description": "Sahip olunduğunda, “Otomo ATWater ElementBoost 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_Attack_up1_2": {
+    "localized_name": "Saldırı Destek Düdüğü",
+    "description": "Sahip olunduğunda, Otomo Attack up1 (Rare) tarifinin kilidi açılır. Factory Hard 01 kullanılarak üretilebilir."
+  },
+  "Blueprint_Otomo_DFDark_ElementBoost_1": {
+    "localized_name": "Lyleen Noct’un Koruyucu Tılsımı Şeması",
+    "description": "Sahip olunduğunda, “Otomo DFDark ElementBoost 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_DFDragon_ElementBoost_1": {
+    "localized_name": "Jetragon Koruma Tılsımı Şeması",
+    "description": "Sahip olunduğunda, Otomo DFDragon ElementBoost 1 (Epic) tarifinin kilidi açılır. Factory Hard 02 kullanılarak üretilebilir."
+  },
+  "Blueprint_Otomo_DFEarth_ElementBoost_1": {
+    "localized_name": "Anubis’in Koruyucu Tılsımı Şeması",
+    "description": "Sahip olunduğunda, “Otomo DFEarth ElementBoost 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_DFElectricity_ElementBoost_1": {
+    "localized_name": "Orserk'ün Koruyucu Tılsımı Şeması",
+    "description": "Sahip olunduğunda, “Otomo DFElectricity ElementBoost 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_DFFire_ElementBoost_1": {
+    "localized_name": "Blazamut'un Koruyucu Tılsımı Şeması",
+    "description": "Sahip olunduğunda, “Otomo DFFire ElementBoost 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_DFIce_ElementBoost_1": {
+    "localized_name": "Frostallion'un Koruyucu Tılsımı Şeması",
+    "description": "Sahip olunduğunda, “Otomo DFIce ElementBoost 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_DFLeaf_ElementBoost_1": {
+    "localized_name": "Lyleen’in Koruyucu Tılsımı Şeması",
+    "description": "Sahip olunduğunda, “Otomo DFLeaf ElementBoost 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_DFNormal_ElementBoost_1": {
+    "localized_name": "Hartalis’in Koruyucu Tılsımı Şeması",
+    "description": "Sahip olunduğunda, “Otomo DFNormal ElementBoost 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_DFWater_ElementBoost_1": {
+    "localized_name": "Neptilius’un Koruyucu Tılsımı Şeması",
+    "description": "Sahip olunduğunda, “Otomo DFWater ElementBoost 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_Defense_up1_2": {
+    "localized_name": "Savunma Destek Düdüğü Şeması",
+    "description": "Sahip olunduğunda, Otomo Defense up1 (Rare) tarifinin kilidi açılır. Factory Hard 01 kullanılarak üretilebilir."
+  },
+  "Blueprint_Otomo_ElementBoost_Dark_1_2": {
+    "localized_name": "Destek Düdüğü Şeması",
+    "description": "Sahip olunduğunda, “Otomo ElementBoost Dark 1 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_ElementBoost_Dragon_1_2": {
+    "localized_name": "Ejderha Destek Düdüğü Şeması",
+    "description": "Sahip olunduğunda, “Otomo ElementBoost Dragon 1 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_ElementBoost_Earth_1_2": {
+    "localized_name": "Toprak Destek Düdüğü Şeması",
+    "description": "Sahip olunduğunda, “Otomo ElementBoost Earth 1 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_ElementBoost_Electricity_1_2": {
+    "localized_name": "Yıldırım Destek Düdüğü Şeması",
+    "description": "Sahip olunduğunda, “Otomo ElementBoost Electricity 1 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_ElementBoost_Fire_1_2": {
+    "localized_name": "Ateş Destek Düdüğü Şeması",
+    "description": "Sahip olunduğunda, “Otomo ElementBoost Fire 1 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_ElementBoost_Ice_1_2": {
+    "localized_name": "Buz Destek Düdüğü Şeması",
+    "description": "Sahip olunduğunda, “Otomo ElementBoost Ice 1 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_ElementBoost_Leaf_1_2": {
+    "localized_name": "Çim Destek Düdüğü Şeması",
+    "description": "Sahip olunduğunda, “Otomo ElementBoost Leaf 1 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_ElementBoost_Normal_1_2": {
+    "localized_name": "Nötr Destek Düdüğü Şeması",
+    "description": "Sahip olunduğunda, “Otomo ElementBoost Normal 1 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_ElementBoost_Water_1_2": {
+    "localized_name": "Su Destek Düdüğü Şeması",
+    "description": "Sahip olunduğunda, Otomo ElementBoost Water 1 (Rare) tarifinin kilidi açılır. Factory Hard 01 kullanılarak üretilebilir."
+  },
+  "Blueprint_Otomo_PalConfidence_Increase_1_fix": {
+    "localized_name": "Güven Yüzüğü Şeması",
+    "description": "Sahip olunduğunda, “Otomo PalConfidence Increase 1 (Epic)” tarifi açılır. “Factory Hard 02” ile üretim yapılabilir."
+  },
+  "Blueprint_Otomo_PalExp_Increase_1_2": {
+    "localized_name": "Büyüme Teşvik Çanı Şeması",
+    "description": "Sahip olunduğunda, “Otomo PalExp Increase 1 (Rare)” tarifi açılır. “Factory Hard 01” ile üretim yapılabilir."
+  },
   "Blueprint_OverheatRifle_2": {
     "localized_name": "Aşırı Isınan Tüfek Tasarım Şeması 1",
     "description": "Elde ettiğinde, 「Aşırı Isınan Tüfek （Uncommon」 tarifinin kilidi açılır. 「WeaponFactory Dirty 04」 ile üretilebilir."
@@ -1951,6 +2639,106 @@
     "localized_name": "Tek Atışlı Tüfek Şeması 4",
     "description": "Envanterdeyken Tek Atışlı Tüfek (Legendary) tarifini açar. WeaponFactory Dirty 02 ile üretilebilir."
   },
+  "Blueprint_SkyAssaultRifle_2": {
+    "localized_name": "Ağır Taarruz Tüfeği Şeması 1",
+    "description": "Sahip olunduğunda, “Ağır Taarruz Tüfeği （Uncommon）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_SkyAssaultRifle_3": {
+    "localized_name": "Ağır Taarruz Tüfeği Şeması 2",
+    "description": "Sahip olunduğunda, “Ağır Taarruz Tüfeği （Rare）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_SkyAssaultRifle_4": {
+    "localized_name": "Ağır Taarruz Tüfeği Şeması 3",
+    "description": "Sahip olunduğunda, “Ağır Taarruz Tüfeği （Epic）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_SkyAssaultRifle_5": {
+    "localized_name": "Ağır Taarruz Tüfeği Şeması 4",
+    "description": "Sahip olunduğunda, “Ağır Taarruz Tüfeği （Legendary）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_SkyBeamSword_2": {
+    "localized_name": "Lazer Kılıç Şeması 1",
+    "description": "Sahip olunduğunda, “Lazer Kılıç （Uncommon）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_SkyBeamSword_3": {
+    "localized_name": "Lazer Kılıç Şeması 2",
+    "description": "Sahip olunduğunda, “Lazer Kılıç （Rare）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_SkyBeamSword_4": {
+    "localized_name": "Lazer Kılıç Şeması 3",
+    "description": "Sahip olunduğunda, “Lazer Kılıç （Epic）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_SkyBeamSword_5": {
+    "localized_name": "Lazer Kılıç Şeması 4",
+    "description": "Sahip olunduğunda, “Lazer Kılıç （Legendary）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_SkyBow_2": {
+    "localized_name": "Mekanik Yay Şeması 1",
+    "description": "Sahip olunduğunda, “Mekanik Yay （Uncommon）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_SkyBow_3": {
+    "localized_name": "Mekanik Yay Şeması 2",
+    "description": "Sahip olunduğunda, “Mekanik Yay （Rare）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_SkyBow_4": {
+    "localized_name": "Mekanik Yay Şeması 3",
+    "description": "Sahip olunduğunda, “Mekanik Yay （Epic）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_SkyBow_5": {
+    "localized_name": "Mekanik Yay Şeması 4",
+    "description": "Sahip olunduğunda, “Mekanik Yay （Legendary）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_SkyGrenadeLauncher_2": {
+    "localized_name": "Taktiksel Bomba Atar Şeması 1",
+    "description": "Sahip olunduğunda, “Taktiksel Bomba Atar （Uncommon）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_SkyGrenadeLauncher_3": {
+    "localized_name": "Taktiksel Bomba Atar Şeması 2",
+    "description": "Sahip olunduğunda, “Taktiksel Bomba Atar （Rare）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_SkyGrenadeLauncher_4": {
+    "localized_name": "Taktiksel Bomba Atar Şeması 3",
+    "description": "Sahip olunduğunda, “Taktiksel Bomba Atar （Epic）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_SkyGrenadeLauncher_5": {
+    "localized_name": "Taktiksel Bomba Atar Şeması 4",
+    "description": "Sahip olunduğunda, “Taktiksel Bomba Atar （Legendary）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_SkyShotgun_2": {
+    "localized_name": "Prototip Pompalı Tüfek Şeması 1",
+    "description": "Sahip olunduğunda, “Prototip Pompalı Tüfek （Uncommon）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_SkyShotgun_3": {
+    "localized_name": "Prototip Pompalı Tüfek Şeması 2",
+    "description": "Sahip olunduğunda, “Prototip Pompalı Tüfek （Rare）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_SkyShotgun_4": {
+    "localized_name": "Prototip Pompalı Tüfek Şeması 3",
+    "description": "Sahip olunduğunda, “Prototip Pompalı Tüfek （Epic）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_SkyShotgun_5": {
+    "localized_name": "Prototip Pompalı Tüfek Şeması 4",
+    "description": "Sahip olunduğunda, “Prototip Pompalı Tüfek （Legendary）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_SkySubmachineGun_2": {
+    "localized_name": "Muharebe Hafif Makineli Tüfek Şeması 1",
+    "description": "Sahip olunduğunda, “Muharebe Hafif Makineli Tüfek （Uncommon）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_SkySubmachineGun_3": {
+    "localized_name": "Muharebe Hafif Makineli Tüfek Şeması 2",
+    "description": "Sahip olunduğunda, “Muharebe Hafif Makineli Tüfek （Rare）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_SkySubmachineGun_4": {
+    "localized_name": "Muharebe Hafif Makineli Tüfek Şeması 3",
+    "description": "Sahip olunduğunda, “Muharebe Hafif Makineli Tüfek （Epic）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_SkySubmachineGun_5": {
+    "localized_name": "Muharebe Hafif Makineli Tüfek Şeması 4",
+    "description": "Sahip olunduğunda, “Muharebe Hafif Makineli Tüfek （Legendary）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_Spear_ForestBoss2_5": {
+    "localized_name": "Geliştirilmiş Lily'nin Mızrağı Şeması 4",
+    "description": "Sahip olunduğunda, “Spear ForestBoss2 (Legendary)” tarifi açılır. “WeaponFactory Dirty 04” ile üretim yapılabilir."
+  },
   "Blueprint_Spear_ForestBoss_5": {
     "localized_name": "Lily’nin Mızrağı Tasarım Planı 4",
     "description": "Sahip olunduğunda, Spear ForestBoss (Legendary) tarifinin kilidi açılır. WeaponFactory Dirty 02 üzerinden üretilebilir."
@@ -2070,6 +2858,26 @@
   "Blueprint_WeakerBow_5": {
     "localized_name": "Eski Yay Şeması 4",
     "description": "Envanterdeyken Eski Yay (Legendary) tarifini açar. İlkel Tezgâh ile üretilebilir."
+  },
+  "Blueprint_WhaleWhistle": {
+    "localized_name": "Yıpranmış Tasarım Şeması",
+    "description": "Sahip olunduğunda, “Yankı Flütü” tarifi açılır. “İlkel Tezgâh” ile üretim yapılabilir."
+  },
+  "Blueprint_WidePenetrateShotgun_2": {
+    "localized_name": "Işın Saçıcı Şeması 1",
+    "description": "Sahip olunduğunda, “Işın Saçıcı （Uncommon）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_WidePenetrateShotgun_3": {
+    "localized_name": "Işın Saçıcı Şeması 2",
+    "description": "Sahip olunduğunda, “Işın Saçıcı （Rare）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_WidePenetrateShotgun_4": {
+    "localized_name": "Işın Saçıcı Şeması 3",
+    "description": "Sahip olunduğunda, “Işın Saçıcı （Epic）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
+  },
+  "Blueprint_WidePenetrateShotgun_5": {
+    "localized_name": "Işın Saçıcı Şeması 4",
+    "description": "Sahip olunduğunda, “Işın Saçıcı （Legendary）” tarifi açılır. “Antik Medeniyet Tezgahı” ile üretim yapılabilir."
   },
   "Blueprint_Wire_Fence": {
     "localized_name": "Telli Çit Tasarım Şeması",
@@ -2327,6 +3135,14 @@
     "localized_name": "Prunelia Kelle Avı Nişanı",
     "description": "[Çivit Mavisi Hizmetçi Prunelia]'yı yendiğinin kanıtı. Buna sahip olmak bile takımındaki Pal'ların istatistiklerini kalıcı olarak artırır."
   },
+  "BossDefeatReward_BossRush": {
+    "localized_name": "Modifiye Pal'ın Kontamine Çekirdeği",
+    "description": "Modifiye edilmiş Pal’leri yenmenin kanıtı. Dünya Ağacı’nın en derinlerinde bulunan mühürlü odanın bariyerini kaldırmak için kullanılan anahtarlardan biridir."
+  },
+  "BossDefeatReward_CactusDoll": {
+    "localized_name": "Needoll Alt Etme Ödülü",
+    "description": "[Bin İğneli Karşılama Needoll]'u alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal'ların özelliklerini kalıcı olarak arttırır."
+  },
   "BossDefeatReward_CaptainPenguin": {
     "localized_name": "Penking Kelle Avı Nişanı",
     "description": "[Donmuş Denizin Öncüsü Penking]'i yendiğinin kanıtı. Buna sahip olmak bile takımındaki Pal'ların istatistiklerini kalıcı olarak artırır."
@@ -2339,6 +3155,14 @@
     "localized_name": "Felbat Kelle Avı Nişanı",
     "description": "[Kasvetli Kan Emici Felbat]'ı yendiğinin kanıtı. Buna sahip olmak bile takımındaki Pal'ların istatistiklerini kalıcı olarak artırır."
   },
+  "BossDefeatReward_CubeTurtle": {
+    "localized_name": "Tetroise Alt Etme Ödülü",
+    "description": "“Kum Denizi Dev Kayası Tetroise”yi alt etmenin ödülü. Buna sahip olmak bile, yanındaki Pal'ların özelliklerini kalıcı olarak arttırır."
+  },
+  "BossDefeatReward_CubeTurtle_Neutral": {
+    "localized_name": "Tetroise Primo Alt Etme Ödülü",
+    "description": "[Kum Denizi Koruyucu Kayası Tetroise Primo]'yu alt etmenin ödülü. Buna sahip olmak bile, yanındaki Pal’ların özelliklerini kalıcı olarak arttırır."
+  },
   "BossDefeatReward_DarkScorpion": {
     "localized_name": "Menasting Kelle Avı Nişanı",
     "description": "[Durmak Bilmeyen İğne Menasting]'i yendiğinin kanıtı. Buna sahip olmak bile takımındaki Pal'ların istatistiklerini kalıcı olarak artırır."
@@ -2346,6 +3170,22 @@
   "BossDefeatReward_DarkScorpion_Ground": {
     "localized_name": "Menasting Terra Kelle Avı Nişanı",
     "description": "[Altınları Delen Mızrak Menasting Terra]'yı yendiğinin kanıtı. Buna sahip olmak bile takımındaki Pal'ların istatistiklerini kalıcı olarak artırır."
+  },
+  "BossDefeatReward_DomeArmorDragon": {
+    "localized_name": "Aegidron Alt Etme Ödülü",
+    "description": "“Işık İzlerini Ören Koruyucu Ejderha Aegidron”u alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal'ların özelliklerini kalıcı olarak arttırır."
+  },
+  "BossDefeatReward_ElecLizard": {
+    "localized_name": "Slowatt Alt Etme Ödülü",
+    "description": "[Elektrik Yüklü Rahatına Düşkün Slowatt]'ı alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal'ların özelliklerini kalıcı olarak arttırır."
+  },
+  "BossDefeatReward_ElecPanda": {
+    "localized_name": "Grizzbolt Alt Etme Ödülü",
+    "description": "[Şimşek Pençe Grizzbolt]'u alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal'ların özelliklerini kalıcı olarak arttırır."
+  },
+  "BossDefeatReward_ElecSnail": {
+    "localized_name": "Snock Alt Etme Ödülü",
+    "description": "[Mavi Şimşeğin Ağır Adımlısı Snock]'u alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal'ların özelliklerini kalıcı olarak arttırır."
   },
   "BossDefeatReward_FairyDragon": {
     "localized_name": "Elphidran Kelle Avı Nişanı",
@@ -2359,6 +3199,14 @@
     "localized_name": "Fenglope Lux Kelle Avı Nişanı",
     "description": "[Serseri Fırtına Bulutu Fenglope Lux]'ı yendiğinin kanıtı. Buna sahip olmak bile takımındaki Pal'ların istatistiklerini kalıcı olarak artırır."
   },
+  "BossDefeatReward_FireKirin": {
+    "localized_name": "Pyrin Alt Etme Ödülü",
+    "description": "[Yakıcı Kumların Cins Atı Pyrin]'i alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal’ların özelliklerini kalıcı olarak arttırır."
+  },
+  "BossDefeatReward_FlameBuffalo": {
+    "localized_name": "Arsox Alt Etme Ödülü",
+    "description": "[Alev Boynuzlu Arsox]'u alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal'ların özelliklerini kalıcı olarak arttırır."
+  },
   "BossDefeatReward_FlowerDinosaur_Electric": {
     "localized_name": "Dinossom Lux Kelle Avı Nişanı",
     "description": "[Şimşeğin Koruyucusu Dinossom Lux]'ı yendiğinin kanıtı. Buna sahip olmak bile takımındaki Pal'ların istatistiklerini kalıcı olarak artırır."
@@ -2367,6 +3215,22 @@
     "localized_name": "Petallia Kelle Avı Nişanı",
     "description": "[Bahçenin Leydisi Petallia]'yı yendiğinin kanıtı. Buna sahip olmak bile takımındaki Pal'ların istatistiklerini kalıcı olarak artırır."
   },
+  "BossDefeatReward_FlowerPrince": {
+    "localized_name": "DandilordTaç Yaprağı",
+    "description": "“Dandilord”yi yenmenin kanıtı. Dünya Ağacı’nın en derinlerinde bulunan mühürlü odanın bariyerini kaldırmak için kullanılan anahtarlardan biridir."
+  },
+  "BossDefeatReward_FoxExorcist": {
+    "localized_name": "Flaracle Alt Etme Ödülü",
+    "description": "[İşine Geldiği Gibi Geleceği Öngören Flaracle]'ı alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal'ların özelliklerini kalıcı olarak arttırır."
+  },
+  "BossDefeatReward_FoxMage": {
+    "localized_name": "Wixen Alt Etme Ödülü",
+    "description": "[Alev Tilkisi Büyücüsü Wixen]'ı alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal'ların özelliklerini kalıcı olarak arttırır."
+  },
+  "BossDefeatReward_GhostDragon": {
+    "localized_name": "Eidrolon Alt Etme Ödülü",
+    "description": "[Özgürlüğün Kanatları Eidrolon]'u alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal'ların özelliklerini kalıcı olarak arttırır."
+  },
   "BossDefeatReward_GhostRabbit": {
     "localized_name": "Nitemary Kelle Avı Nişanı",
     "description": "[Karanlık Tavşanın Ruhu Nitemary]'yi yendiğinin kanıtı. Buna sahip olmak bile takımındaki Pal'ların istatistiklerini kalıcı olarak artırır."
@@ -2374,6 +3238,14 @@
   "BossDefeatReward_GoldenHorse": {
     "localized_name": "Gildane Kelle Avı Nişanı",
     "description": "[Alaca Karanlığın Koruyucu Yaratığı Gildane]'i yendiğinin kanıtı. Buna sahip olmak bile takımındaki Pal'ların istatistiklerini kalıcı olarak artırır."
+  },
+  "BossDefeatReward_GrassGolem": {
+    "localized_name": "Dualith Alt Etme Ödülü",
+    "description": "[Mavi Damarların Tek Vücut İki Ruhu Dualith]'i alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal'ların özelliklerini kalıcı olarak arttırır."
+  },
+  "BossDefeatReward_GrassGolem_Dark": {
+    "localized_name": "Dualith Noct Alt Etme Ödülü",
+    "description": "[Mor Damarın Tek Vücut İki Ruhu Dualith Noct]'u alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal'ların özelliklerini kalıcı olarak arttırır."
   },
   "BossDefeatReward_GrassMammoth": {
     "localized_name": "Mammorest Kelle Avı Nişanı",
@@ -2407,6 +3279,10 @@
     "localized_name": "Faleris Aqua Kelle Avı Nişanı",
     "description": "[Gelgitlerin Gözcüsü Faleris Aqua]'yı yendiğinin kanıtı. Buna sahip olmak bile takımındaki Pal'ların istatistiklerini kalıcı olarak artırır."
   },
+  "BossDefeatReward_IceFox": {
+    "localized_name": "Foxcicle Alt Etme Ödülü",
+    "description": "[Buz Tilkisi Foxcicle]'ı alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal'ların özelliklerini kalıcı olarak arttırır."
+  },
   "BossDefeatReward_IceHorse": {
     "localized_name": "Frostallion Kelle Avı Nişanı",
     "description": "[Efsanevi Buz Küheylanı Frostallion]'u yendiğinin kanıtı. Buna sahip olmak bile takımındaki Pal'ların istatistiklerini kalıcı olarak artırır."
@@ -2426,6 +3302,10 @@
   "BossDefeatReward_JetDragon": {
     "localized_name": "Jetragon Kelle Avı Nişanı",
     "description": "[Efsanevi Göksel Ejderha Jetragon]'u yendiğinin kanıtı. Buna sahip olmak bile takımındaki Pal'ların istatistiklerini kalıcı olarak artırır."
+  },
+  "BossDefeatReward_KabukiMan": {
+    "localized_name": "Renjishi Alt Etme Ödülü",
+    "description": "[Alkışları Coşturan Gösterişçi Savaşçı Renjishi]'yi alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal’ların özelliklerini kalıcı olarak arttırır."
   },
   "BossDefeatReward_KingAlpaca": {
     "localized_name": "Kingpaca Kelle Avı Nişanı",
@@ -2455,13 +3335,37 @@
     "localized_name": "Relaxaurus Lux Kelle Avı Nişanı",
     "description": "[Obur Yıldırım Ejderhası Relaxaurus Lux]'ı yendiğinin kanıtı. Buna sahip olmak bile takımındaki Pal'ların istatistiklerini kalıcı olarak artırır."
   },
+  "BossDefeatReward_LilyQueen": {
+    "localized_name": "Lyleen Alt Etme Ödülü",
+    "description": "[Zambakların İmparatoriçesi Lyleen]'i alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal'ların özelliklerini kalıcı olarak arttırır."
+  },
   "BossDefeatReward_LilyQueen_Dark": {
     "localized_name": "Lyleen Noct Kelle Avı Nişanı",
     "description": "[Sonsuz Boşluğun İmparatoriçesi Lyleen Noct]'u yendiğinin kanıtı. Buna sahip olmak bile takımındaki Pal'ların istatistiklerini kalıcı olarak artırır."
   },
+  "BossDefeatReward_LotusDragon": {
+    "localized_name": "Ophydia Alt Etme Ödülü",
+    "description": "[Saf Su Çiçeği Ejderi Ophydia]'yı alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal'ların özelliklerini kalıcı olarak arttırır."
+  },
+  "BossDefeatReward_Manticore": {
+    "localized_name": "Blazehowl Alt Etme Ödülü",
+    "description": "[Yüz Alevin Kralı Blazehowl]'u alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal'ların özelliklerini kalıcı olarak arttırır."
+  },
+  "BossDefeatReward_MoonChild": {
+    "localized_name": "Wistella Alt Etme Ödülü",
+    "description": "[Gece Göğünü Kuşanan Wistella]'yı alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal'ların özelliklerini kalıcı olarak arttırır."
+  },
   "BossDefeatReward_MopKing": {
     "localized_name": "Sweepa Kelle Avı Nişanı",
     "description": "[Tüylü Majesteleri Sweepa]'yı yendiğinin kanıtı. Buna sahip olmak bile takımındaki Pal'ların istatistiklerini kalıcı olarak artırır."
+  },
+  "BossDefeatReward_Mothman": {
+    "localized_name": "SilvanceTüy",
+    "description": "“Silvance”yi yenmenin kanıtı. Dünya Ağacı’nın en derinlerinde bulunan mühürlü odanın bariyerini kaldırmak için kullanılan anahtarlardan biridir."
+  },
+  "BossDefeatReward_MushroomLady": {
+    "localized_name": "Mycora Alt Etme Ödülü",
+    "description": "[Sevimli Mantar Mycora]'yı alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal'ların özelliklerini kalıcı olarak arttırır."
   },
   "BossDefeatReward_Mutant": {
     "localized_name": "Lunaris Kelle Avı Nişanı",
@@ -2503,6 +3407,14 @@
     "localized_name": "Dazzi Noct Kelle Avı Nişanı",
     "description": "[Fırtına Bulutlarından Doğan Dazzi Noct]'u yendiğinin kanıtı. Buna sahip olmak bile takımındaki Pal'ların istatistiklerini kalıcı olarak artırır."
   },
+  "BossDefeatReward_RockBeast": {
+    "localized_name": "Kuprok Alt Etme Ödülü",
+    "description": "[Yürüyen Dev Maden Kuprok]'u alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal'ların özelliklerini kalıcı olarak arttırır."
+  },
+  "BossDefeatReward_RockBeast_Ice": {
+    "localized_name": "Kuprok Cryst Alt Etme Ödülü",
+    "description": "[Yürüyen Dev Buzul Kuprok Cryst]'i alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal'ların özelliklerini kalıcı olarak arttırır."
+  },
   "BossDefeatReward_Ronin": {
     "localized_name": "Bushi Kelle Avı Nişanı",
     "description": "[Serseri Savaşçı Bushi]'yi yendiğinin kanıtı. Buna sahip olmak bile takımındaki Pal'ların istatistiklerini kalıcı olarak artırır."
@@ -2519,6 +3431,10 @@
     "localized_name": "Broncherry Aqua Kelle Avı Nişanı",
     "description": "[Yaz Dalgaları Broncherry Aqua]'yı yendiğinin kanıtı. Buna sahip olmak bile takımındaki Pal'ların istatistiklerini kalıcı olarak artırır."
   },
+  "BossDefeatReward_ScorpionMan_Electric": {
+    "localized_name": "Prixter Lux Alt Etme Ödülü",
+    "description": "[Yıldırım Çocuk Prixter Lux]'ı alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal'ların özelliklerini kalıcı olarak arttırır."
+  },
   "BossDefeatReward_SkyDragon": {
     "localized_name": "Quivern Kelle Avı Nişanı",
     "description": "[Beyazlığın Kanatları Quivern]'i yendiğinin kanıtı. Buna sahip olmak bile takımındaki Pal'ların istatistiklerini kalıcı olarak artırır."
@@ -2531,6 +3447,10 @@
     "localized_name": "Beakon Kelle Avı Nişanı",
     "description": "[Yıldırım Kanatlı Beakon]'u alt ettiğinin kanıtı. Buna sahip olmak bile takımındaki Pal'ların istatistiklerini kalıcı olarak arttırır."
   },
+  "BossDefeatReward_ThunderFluffyBird": {
+    "localized_name": "Dynamoff Alt Etme Ödülü",
+    "description": "[Elektrik Yüklü Pofuduk Dynamoff]'u alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal'ların özelliklerini kalıcı olarak arttırır."
+  },
   "BossDefeatReward_Umihebi": {
     "localized_name": "Jormuntide Kelle Avı Nişanı",
     "description": "[Denizlerin İmparatoru Jormuntide]'ı yendiğinin kanıtı. Buna sahip olmak bile takımındaki Pal'ların istatistiklerini kalıcı olarak artırır."
@@ -2538,6 +3458,18 @@
   "BossDefeatReward_VioletFairy": {
     "localized_name": "Vaelet Kelle Avı Nişanı",
     "description": "[Menekşelerin Sesi Vaelet]'i yendiğinin kanıtı. Buna sahip olmak bile takımındaki Pal'ların istatistiklerini kalıcı olarak artırır."
+  },
+  "BossDefeatReward_VolcanicMonster": {
+    "localized_name": "Reptyro Alt Etme Ödülü",
+    "description": "[Lav Yutan Canavar Reptyro]'yu alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal’ların özelliklerini kalıcı olarak arttırır."
+  },
+  "BossDefeatReward_VolcanoDragon": {
+    "localized_name": "Moldron Alt Etme Ödülü",
+    "description": "[Kavrulmuş Topraklarda Yürüyen Moldron]'u alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal'ların özelliklerini kalıcı olarak arttırır."
+  },
+  "BossDefeatReward_VolcanoDragon_Ice": {
+    "localized_name": "Moldron Cryst Alt Etme Ödülü",
+    "description": "[Donmuş Topraklarda Yürüyen Moldron Cryst]'i alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal'ların özelliklerini kalıcı olarak arttırır."
   },
   "BossDefeatReward_WeaselDragon": {
     "localized_name": "Chillet Kelle Avı Nişanı",
@@ -2550,6 +3482,10 @@
   "BossDefeatReward_WhiteDeer": {
     "localized_name": "Celesdir Kelle Avı Nişanı",
     "description": "[Kurtuluşun Yaratığı Celesdir]'i yendiğinin kanıtı. Buna sahip olmak bile takımındaki Pal'ların istatistiklerini kalıcı olarak artırır."
+  },
+  "BossDefeatReward_WhiteDeer_Dark": {
+    "localized_name": "Celesdir Noct Alt Etme Ödülü",
+    "description": "[Kaos Canavarı Celesdir Noct]'u alt etmenin ödülü. Yalnızca sahip olmak bile, yanındaki Pal'ların özelliklerini kalıcı olarak arttırır."
   },
   "BossDefeatReward_WhiteMoth": {
     "localized_name": "Sibelyx Kelle Avı Nişanı",
@@ -2651,13 +3587,33 @@
     "localized_name": "Üç Oklu Yay",
     "description": "Aynı anda üç okun atılmasına olanak tanıyan geliştirilmiş bir yay. Tuhaf bir mekanizma sayesinde, atış yapıldığında sadece tek bir Ok harcar."
   },
+  "BronzeSword": {
+    "localized_name": "İlkel Kılıç",
+    "description": "Yakın dövüş için tasarlanmış bir kılıç. Hafife alınmayacak keskinliğe sahiptir! Ancak düşmana yaklaşmak gerektiği için oldukça tehlikelidir."
+  },
   "Cake": {
     "localized_name": "Pasta",
     "description": "Kutlamalarda yenen bir yemek. Bir Pal'ın sıra dışı derece sağlıklı bir yumurta vermesi için üretim çiftliğindeki sandığa koy."
   },
+  "Cake02": {
+    "localized_name": "Mantar Keki",
+    "description": "Üretim Çiftliğisandığına yerleştirildiğinde, bunu yiyerek güç kazanan Pal’ler yumurta üretir. Doğacak Pal’lerin yeteneklerinin biraz daha gelişmiş olma ihtimali artar."
+  },
+  "Cake03": {
+    "localized_name": "Sebzeli Kek",
+    "description": "Üretim Çiftliğisandığına yerleştirildiğinde, bunu yiyerek güç kazanan Pal’ler yumurta üretir. Aynı anda 2 yumurta bırakır."
+  },
+  "Cake04": {
+    "localized_name": "Lüks Sebze Pastası",
+    "description": "Üretim Çiftliğisandığına yerleştirildiğinde, bunu yiyerek güç kazanan Pal’ler yumurta üretir. Mutasyonların meydana gelme olasılığı artar ve yeteneklerin gelişimi daha kolay hâle gelir."
+  },
+  "Cake05": {
+    "localized_name": "Özel Kek",
+    "description": "Üretim Çiftliği sandığına konulduğunda, bunu yiyen Pal canlılık kazanarak yumurta üretir. Ayrıca ebeveynlerinden pasif becerileri miras alma olasılığı artar."
+  },
   "CarbonFiber": {
     "localized_name": "Karbon Fiber",
-    "description": "Hafif ancak sağlam bir malzeme. Başka ekipmanların yanı sıra zırh yapımında kullanılır."
+    "description": "Hafif ve sert, yüksek kaliteli bir malzeme. Zırh gibi savunma ekipmanlarının malzemesi olarak kullanılır. Factory Hard 02 kullanılarak üretilebilir."
   },
   "Carbonara": {
     "localized_name": "Carbonara Soslu Makarna",
@@ -2689,7 +3645,7 @@
   },
   "ChargeLaserRifleBullet": {
     "localized_name": "Şarjlı Tüfek Mermisi",
-    "description": "Şarjlı Tüfekgibi silahlarda kullanılan mermi."
+    "description": "Şarjlı Tüfek ve benzeri silahlarda kullanılan mühimmat. WeaponFactory Dirty 04 kullanılarak üretilebilir."
   },
   "ChargeLaserRifle_2": {
     "localized_name": "Şarjlı Tüfek",
@@ -2737,11 +3693,11 @@
   },
   "Cloth": {
     "localized_name": "Kumaş",
-    "description": "Yün ile dokunmuş Kumaş. Zırh yapmak için gereklidir."
+    "description": "Yün dokunarak elde edilmiş bir Kumaş. Zırh üretmek için gereklidir. İlkel Tezgâh kullanılarak üretilebilir."
   },
   "Cloth2": {
     "localized_name": "Yüksek Kaliteli Kumaş",
-    "description": "Büyük miktarda Yün ile dokunmuş Yüksek Kaliteli Kumaş. Yüksek kaliteli zırh yapmak için gereklidir."
+    "description": "Bol miktarda Yün dokunarak yapılmış bir Yüksek Kaliteli Kumaş. Yüksek kaliteli zırh yapmak için gereklidir. Factory Hard 01 kullanılarak üretilebilir."
   },
   "ClothArmor": {
     "localized_name": "Kumaş Kıyafet",
@@ -2828,8 +3784,8 @@
     "description": "Modernleştirilmiş bir yay. Daha güçlü okları atabilir."
   },
   "Computer": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Bilgisayar",
+    "description": "Otomasyon ekipmanları ve hassas makinelerin kontrolünde kullanılan, modern teknolojinin temelini oluşturan bir parça. Factory Hard 03 kullanılarak üretilebilir."
   },
   "CopperArmor": {
     "localized_name": "Metal Zırh",
@@ -2917,11 +3873,15 @@
   },
   "CopperOre": {
     "localized_name": "Cevher",
-    "description": "Bir ocakta saflaştırıldığında külçe hâline gelir. Mağaralarda ve diğer yerlerde bulunabilir. Bazı Pal'ların cevherleri tespit edebilme yeteneğine sahip olduğuna dair söylentiler vardır."
+    "description": "Bir ocakta saflaştırıldığında külçe hâline gelir. Mağaralarda ve diğer yerlerde bulunabilir."
   },
   "CornSoup": {
     "localized_name": "-",
     "description": "-"
+  },
+  "Corrosive_Solvent": {
+    "localized_name": "Korozyon Çözücü",
+    "description": "Güçlü ayrıştırıcı etkiye sahip tehlikeli bir kimyasal çözücü. Hassas işleme ve özel işlemlerde kullanılır. Factory Hard 02 kullanılarak üretilebilir."
   },
   "CrudeOil": {
     "localized_name": "Ham Petrol",
@@ -2991,6 +3951,26 @@
     "localized_name": "Çifte Av Tüfeği",
     "description": "Yakın menzilde büyük tahribat yaratır. İki kez ateşlendikten sonra yeniden doldurulması gerekir. Sınırlı mermi kapasitesine rağmen etkisi güçlüdür."
   },
+  "DroneLauncher": {
+    "localized_name": "Dron Fırlatıcı",
+    "description": "Otonom saldırı gerçekleştiren dronlar fırlatan bir lançerdir. En fazla 8 birim konuşlandırabilir ve sürekli baskı sağlar."
+  },
+  "DroneLauncher_2": {
+    "localized_name": "Dron Fırlatıcı",
+    "description": "Otonom saldırı gerçekleştiren dronlar fırlatan bir lançerdir. En fazla 8 birim konuşlandırabilir ve sürekli baskı sağlar."
+  },
+  "DroneLauncher_3": {
+    "localized_name": "Dron Fırlatıcı",
+    "description": "Otonom saldırı gerçekleştiren dronlar fırlatan bir lançerdir. En fazla 8 birim konuşlandırabilir ve sürekli baskı sağlar."
+  },
+  "DroneLauncher_4": {
+    "localized_name": "Dron Fırlatıcı",
+    "description": "Otonom saldırı gerçekleştiren dronlar fırlatan bir lançerdir. En fazla 8 birim konuşlandırabilir ve sürekli baskı sağlar."
+  },
+  "DroneLauncher_5": {
+    "localized_name": "Dron Fırlatıcı",
+    "description": "Otonom saldırı gerçekleştiren dronlar fırlatan bir lançerdir. En fazla 8 birim konuşlandırabilir ve sürekli baskı sağlar."
+  },
   "Eaglestew": {
     "localized_name": "Galeclaw Yahnisi",
     "description": "Yoğun ve yabani lezzetler patlaması sunan, ağır ağır pişmiş bir yemek. Yediğinde AKL değerin bir süreliğine biraz daha yavaş azalır."
@@ -3006,6 +3986,30 @@
   "ElecBaton": {
     "localized_name": "Elektroşok Sopası",
     "description": "Temas anında bir elektrik şoku veren yakın menzilli silah. Elektriğin çarptığı Pal'ları yakalamak daha kolaydır."
+  },
+  "ElectricArcAssaultRifle": {
+    "localized_name": "Plazma Tüfeği",
+    "description": "İsabet noktasından elektrik yayarak birden fazla düşmana zincirleme etki yapan bir tüfektir."
+  },
+  "ElectricArcAssaultRifleBullet": {
+    "localized_name": "Plazma Tüfeği Mermisi",
+    "description": "Plazma Tüfeği ile kullanılan mühimmat. Antik Medeniyet Tezgahı kullanılarak üretilebilir."
+  },
+  "ElectricArcAssaultRifle_2": {
+    "localized_name": "Plazma Tüfeği",
+    "description": "İsabet noktasından elektrik yayarak birden fazla düşmana zincirleme etki yapan bir tüfektir."
+  },
+  "ElectricArcAssaultRifle_3": {
+    "localized_name": "Plazma Tüfeği",
+    "description": "İsabet noktasından elektrik yayarak birden fazla düşmana zincirleme etki yapan bir tüfektir."
+  },
+  "ElectricArcAssaultRifle_4": {
+    "localized_name": "Plazma Tüfeği",
+    "description": "İsabet noktasından elektrik yayarak birden fazla düşmana zincirleme etki yapan bir tüfektir."
+  },
+  "ElectricArcAssaultRifle_5": {
+    "localized_name": "Plazma Tüfeği",
+    "description": "İsabet noktasından elektrik yayarak birden fazla düşmana zincirleme etki yapan bir tüfektir."
   },
   "ElectricOrgan": {
     "localized_name": "Elektrik Organı",
@@ -3057,7 +4061,7 @@
   },
   "EnergyLauncherBullet": {
     "localized_name": "Plazma Kartuşu",
-    "description": "Plazma Topu ve benzeri diğer silahlar için cephane."
+    "description": "Plazma Topu ve benzeri silahlarda kullanılan mühimmat. WeaponFactory Dirty 03 kullanılarak üretilebilir."
   },
   "EnergyRocketLauncher": {
     "localized_name": "Plazma Topu",
@@ -3085,7 +4089,7 @@
   },
   "EnergyShotgunBullet": {
     "localized_name": "Enerji Tüfeği Mermisi",
-    "description": "Enerji Tüfeğigibi silahlarda kullanılan mermi."
+    "description": "Enerji Tüfeği ve benzeri silahlarda kullanılan mühimmat. WeaponFactory Dirty 04 kullanılarak üretilebilir."
   },
   "EnergyShotgun_2": {
     "localized_name": "Enerji Tüfeği",
@@ -3121,7 +4125,7 @@
   },
   "ExplosiveBullet": {
     "localized_name": "Roket Mermisi",
-    "description": "Launcher Default ve benzeri diğer silahlar için cephane."
+    "description": "Launcher Default ve benzeri silahlarda kullanılan mühimmat. WeaponFactory Dirty 03 kullanılarak üretilebilir."
   },
   "Fang": {
     "localized_name": "-",
@@ -3237,7 +4241,7 @@
   },
   "FlamethrowerBullet": {
     "localized_name": "Alev Makinesi Yakıtı",
-    "description": "Alev Makinesi yakıtı. Flamethrower ve benzeri diğer silahlar için cephane."
+    "description": "Alev makinesinin yakıtı. Flamethrower ve benzeri silahlarda kullanılan mühimmat. WeaponFactory Dirty 03 kullanılarak üretilebilir."
   },
   "Flour": {
     "localized_name": "Un",
@@ -3420,12 +4424,12 @@
     "description": "Bu özel başlıkla Bjorn gibi giyin!"
   },
   "GasMask": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Aşındırıcı Sis Maskesi",
+    "description": "Özel bir filtreleme cihazına sahip maske. Zehirli sis kaynaklı hasarı etkisiz hale getirir."
   },
   "GatlingBullet": {
     "localized_name": "Gatling Tüfeği Mermisi",
-    "description": "Gatling Tüfeği ve benzeri diğer silahlar için cephane."
+    "description": "Gatling Tüfeği ve benzeri silahlarda kullanılan mühimmat. WeaponFactory Dirty 03 kullanılarak üretilebilir."
   },
   "GatlingGun": {
     "localized_name": "Gatling Tüfeği",
@@ -3501,7 +4505,7 @@
   },
   "GrenadeBullet": {
     "localized_name": "Bomba Mermisi",
-    "description": "Bombaatar ve benzeri diğer silahlar için cephane."
+    "description": "Bombaatar ve benzeri silahlarda kullanılan mühimmat. WeaponFactory Dirty 03 kullanılarak üretilebilir."
   },
   "GrenadeLauncher": {
     "localized_name": "Bombaatar",
@@ -3534,6 +4538,10 @@
   "GrilledSheepHerbs": {
     "localized_name": "Baharatlı Lamball Rosto",
     "description": "Bol taze meyveyle yapılan bu yemek, koyun etinin benzersiz lezzetini vurgulayan çekici bir aroma katar. Yediğinde Savunma değerin bir süreliğine +%10 artar."
+  },
+  "GrilledSwordCutlassFish": {
+    "localized_name": "Tuzda Pişmiş Skutlass",
+    "description": "Taze Skutlass filetosuna bolca tuz serpilerek ızgarada pişirilmiş bir yemektir. Yendiğinde belirli bir süre boyunca savrulma ve geri tepme (knockback) etkilerine karşı bağışıklık sağlar."
   },
   "GuidedMissileLauncher": {
     "localized_name": "Güdümlü Füzeatar",
@@ -3597,7 +4605,11 @@
   },
   "HandgunBullet": {
     "localized_name": "Tabanca Mermisi",
-    "description": "HandGun Default ve benzeri diğer silahlar için cephane."
+    "description": "HandGun Default ve benzeri silahlarda kullanılan mühimmat. WeaponFactory Dirty 01 kullanılarak üretilebilir."
+  },
+  "HandgunShield": {
+    "localized_name": "Balistik Kalkan",
+    "description": "Balistik Kalkan"
   },
   "Head001": {
     "localized_name": "Hükümdar Tacı",
@@ -4083,9 +5095,73 @@
     "localized_name": "Kurtuluş Tacı",
     "description": "Hartalis [Ultra]’nın uğursuz gücü hissediliyor. Bunu ele geçirebilenler son derece nadirdir."
   },
+  "HeadEquip048": {
+    "localized_name": "Auri’nin Kostüm Şapkası",
+    "description": "Auri gibi görünebilmeyi sağlayan bir kulaklık seti."
+  },
+  "HeadEquip049": {
+    "localized_name": "Zenara’nın Kostüm Şapkası",
+    "description": "Zenara gibi görünebilmeyi sağlayan bir kulaklık seti. Buna sahip olmak son derece nadirdir."
+  },
+  "HeadEquip050": {
+    "localized_name": "Herbil Saç Tokası",
+    "description": "Herbil’yı taklit eden bir saç bandı."
+  },
+  "HeadEquip051": {
+    "localized_name": "Kingpaca Saç Tokası",
+    "description": "Kingpaca’yı taklit eden bir saç bandı."
+  },
+  "HeadEquip052": {
+    "localized_name": "Himendako Şapkası",
+    "description": "Gloopie’yı taklit eden bir şapka."
+  },
+  "HeadEquip053": {
+    "localized_name": "Klaran Şapkas",
+    "description": "Jelliette’yı taklit eden bir şapka."
+  },
+  "HeadEquip054": {
+    "localized_name": "Herumekko Şapkası",
+    "description": "Turtacle’yı taklit eden bir şapka."
+  },
+  "HeadEquip055": {
+    "localized_name": "Croajiro Şapkası",
+    "description": "Croajiro şeklindeki şapka."
+  },
+  "HeadEquip056": {
+    "localized_name": "Chikipi Şapkası",
+    "description": "Chikipi şeklindeki şapka."
+  },
+  "HeadEquip057": {
+    "localized_name": "Dandilord Şapkası",
+    "description": "Dandilord şeklindeki şapka."
+  },
+  "HeadEquip058": {
+    "localized_name": "Shroomer Şapkası",
+    "description": "MushroomDragon Dark şeklindeki şapka."
+  },
+  "HeadEquip059": {
+    "localized_name": "Ghangler Saç Aksesuarı",
+    "description": "Ghangler şeklindeki saç aksesuarı."
+  },
+  "HeadEquip060": {
+    "localized_name": "Icelyn Şapkası",
+    "description": "Icelyn şeklindeki şapka."
+  },
+  "HeadEquip061": {
+    "localized_name": "Splatterina Şapkası",
+    "description": "Splatterina şeklindeki şapka."
+  },
+  "HeadEquip062": {
+    "localized_name": "Tarantriss Şapkası",
+    "description": "Tarantriss şeklindeki şapka."
+  },
   "Herbs": {
     "localized_name": "Düşük Kaliteli Tıbbi Malzemeler",
     "description": "Hastaya daBurkma,Fazla Toküzerinde etkili olanDüşük Kaliteli Tıbbi Malzemeler. yense bile HP (can) geri kazanılmaz."
+  },
+  "HighGrade_Processed_Wood": {
+    "localized_name": "Yüksek Kaliteli Ahşap Levha",
+    "description": "Wood Fine özenle yontularak elde edilmiş ahşap malzeme. Güzel bir ahşap damarına sahiptir ve lüks görünümlü yapılarda kullanılır. Factory Hard 03 kullanılarak üretilebilir."
   },
   "Homeward": {
     "localized_name": "Eve Götüren Yıldırım Bulutu",
@@ -4125,7 +5201,7 @@
   },
   "InkBullet": {
     "localized_name": "Çıkartma Mürekkebi",
-    "description": "Çıkartma Tabancaları için cephane. Bir Pal'ın resmini çizmek için mürekkep kullanır."
+    "description": "Çıkartma tabancalarında kullanılan mühimmat. Mürekkeple Pal resimleri çizilebilir. WeaponFactory Dirty 01 kullanılarak üretilebilir."
   },
   "IronArmor": {
     "localized_name": "Saf Metal Zırh",
@@ -4217,7 +5293,7 @@
   },
   "JellyfishFairy_jelly": {
     "localized_name": "Jelliette’nin Baş Döndürücü Jölesi",
-    "description": "Meat JellyfishFairyvePal Sıvılarıkullanılarak yapılan gizemli bir tatlı. Yendiğinde belirli bir süre boyunca deneyim puanı kazanımı biraz artar ve, Saldırı +%10 olur."
+    "description": "Meat JellyfishFairyveSu Pal'ı Salgısıkullanılarak yapılan gizemli bir tatlı. Yendiğinde belirli bir süre boyunca deneyim puanı kazanımı biraz artar ve, Saldırı +%10 olur."
   },
   "JellyfishGhost_jelly": {
     "localized_name": "Jellroy’ın Titreyen Jölesi",
@@ -4243,6 +5319,38 @@
     "localized_name": "Katana",
     "description": "Yakın menzilli çatışmalar için Katana. Jilet kadar keskin bir isabetlilikle, hedefini tek darbede ikiye ayırır."
   },
+  "KeySphere_01": {
+    "localized_name": "Kıskançlık Anahtar Küresi",
+    "description": "Çok eski zamanlarda bu bölgede hüküm süren kadim medeniyete ait bir kalıntı. Henüz tüm detayları çözülmemiş olsa da, son araştırmalar bunun devasa bir cihazın parçası olabileceğini öne sürüyor. “İnsanların refahını kıskanarak, yıkımı getiren günah.”"
+  },
+  "KeySphere_02": {
+    "localized_name": "Kibir Ana Küre",
+    "description": "Çok eski zamanlarda bu bölgede hüküm süren kadim medeniyete ait bir kalıntı. Henüz tüm detayları çözülememiş olsa da, son araştırmalar bunun devasa bir cihazın parçası olabileceğini öne sürüyor. “Kibirle ortak yaşamı arzulayıp, felaketi davet eden günah.”"
+  },
+  "KeySphere_03": {
+    "localized_name": "Açgözlülük Ana Küre",
+    "description": "Çok eski zamanlarda bu bölgede hüküm süren kadim medeniyete ait bir kalıntı. Henüz tüm detayları çözülememiş olsa da, son araştırmalar bunun devasa bir cihazın parçası olabileceğini öne sürüyor. “Kendi kaderini kabul etmeyip, bağlılık ve ilişki arzulayan günah.”"
+  },
+  "KeySphere_04": {
+    "localized_name": "Tembellik Ana Küre",
+    "description": "Çok eski zamanlarda bu bölgede hüküm süren kadim medeniyete ait bir kalıntı. Henüz tüm detayları çözülememiş olsa da, son araştırmalar bunun devasa bir cihazın parçası olabileceğini öne sürüyor. “İnsanlığı terk ederek, yıkım yoluna saplanmış günah.”"
+  },
+  "KeySphere_05": {
+    "localized_name": "Oburluk Ana Küresi",
+    "description": "Çok eski zamanlarda bu bölgede hüküm süren kadim medeniyete ait bir kalıntı. Henüz tüm detayları çözülememiş olsa da, son araştırmalar bunun devasa bir cihazın parçası olabileceğini öne sürüyor. “Yıldızların yaşam damarlarını tüketen ve hâlâ doymayan günah.”"
+  },
+  "KeySphere_06": {
+    "localized_name": "Şehvet Ana Küre",
+    "description": "Çok eski zamanlarda bu bölgede hüküm süren kadim medeniyete ait bir kalıntı. Henüz tüm detayları çözülememiş olsa da, son araştırmalar bunun devasa bir cihazın parçası olabileceğini öne sürüyor. “Dış yasakları arayarak, insan aklının sınırlarını aşan günah.”"
+  },
+  "KeySphere_07": {
+    "localized_name": "Öfke Ana Küre",
+    "description": "Çok eski zamanlarda bu bölgede hüküm süren kadim medeniyete ait bir kalıntı. Henüz tüm detayları çözülememiş olsa da, son araştırmalar bunun devasa bir cihazın parçası olabileceğini öne sürüyor. “Öfkeye kendini kaptırarak, ölümü etrafa saçan günah.”"
+  },
+  "KeySphere_08": {
+    "localized_name": "İlk Günah Ana Küresi",
+    "description": "Çok eski zamanlarda bu bölgede hüküm süren kadim medeniyete ait bir kalıntı. Henüz tüm detayları çözülememiş olsa da, son araştırmalar bunun devasa bir cihazın parçası olabileceğini öne sürüyor. “Tüm varlıkların yaşamını reddederken doğmuş günah.”"
+  },
   "Lantern": {
     "localized_name": "Bel Feneri",
     "description": "Bele takılabilen bir fener. Geceleri otomatik olarak yanar. Karanlıkta yolunu bulabilmen için sadece 1 tanesi yeterlidir."
@@ -4253,11 +5361,11 @@
   },
   "LaserBullet": {
     "localized_name": "Enerji Kartuşu",
-    "description": "Lazer Tüfeği ve benzeri diğer silahlar için cephane."
+    "description": "Lazer Tüfeği ve benzeri silahlarda kullanılan mühimmat. WeaponFactory Dirty 03 kullanılarak üretilebilir."
   },
   "LaserGatlingBullet": {
     "localized_name": "Lazer Gatling Kartuşu",
-    "description": "Lazer Gatling Tüfeği ve benzeri diğer silahlar için cephane."
+    "description": "Lazer Gatling Tüfeği ve benzeri silahlarda kullanılan mühimmat. WeaponFactory Dirty 03 kullanılarak üretilebilir."
   },
   "LaserGatlingGun": {
     "localized_name": "Lazer Gatling Tüfeği",
@@ -4278,6 +5386,10 @@
   "LaserGatlingGun_5": {
     "localized_name": "Lazer Gatling Tüfeği",
     "description": "Işın benzeri, yüksek hızlı enerji patlamaları ateşler. Yüksek silah gücüyle tek seferde birden fazla düşmanı alt edebilir."
+  },
+  "LaserMiningTool": {
+    "localized_name": "Çoklu Plazma Kesici",
+    "description": "Plazma enerjisini yoğunlaştırıp ışın halinde yayabilen taşınabilir bir plazma kesici. Cevher çıkarmaktan ağaç kesmeye kadar geniş bir kullanım alanına sahiptir. Yüksek çıkış gücüne sahip enerjisi sayesinde özel cevherlerin madenciliğinde de kullanılabilir."
   },
   "LaserRifle": {
     "localized_name": "Lazer Tüfeği",
@@ -4326,6 +5438,10 @@
   "Launcher_Meteor_5": {
     "localized_name": "Meteoratar",
     "description": "Bir meteor ateşleyen harikulade bir silah. Hedefine saldırdığında meteorit çarpmasına benzer bir patlamaya sebep olur."
+  },
+  "Lava_Ancient": {
+    "localized_name": "Kadim Lav Parçası",
+    "description": "Aşırı çevre koşullarında uzun yıllar boyunca oluşmuş lav kütlesi. İçine hapsolmuş mavi lav, hâlâ ısı yaymaktadır."
   },
   "Leather": {
     "localized_name": "Deri",
@@ -4497,7 +5613,7 @@
   },
   "ManganeseIngot": {
     "localized_name": "Koralum Külçesi",
-    "description": "Koralum CevheriveCevher,Kömürkarışımı bir alaşım. Enerjiye karşı yüksek dayanıklılık gösterir ve silah gibi eşyaların malzemesi olarak kullanılır."
+    "description": "Deniz tabanında saklı Koralum Cevheri alaşımı. Enerjiye karşı dayanımı yüksek olup silah gibi eşyaların malzemesi olarak kullanılır. Devasa Ocak kullanılarak işlenebilir."
   },
   "ManganeseOre": {
     "localized_name": "Koralum Cevheri",
@@ -4595,6 +5711,10 @@
     "localized_name": "Lamball Eti",
     "description": "SheepBall eti. Benzersiz bir lezzete sahip kırmızı et. Lezzetlidir ama alışmak zaman alır."
   },
+  "Meat_SwordCutlassFish": {
+    "localized_name": "Skutlass Filetosu",
+    "description": "SwordCutlassFishbalığının filetosu. Yumuşak ve dolgun etiyle dikkat çeker. Kılıç benzeri bir omurgaya sahip olduğu için pişirirken dikkat edilmesi gerekir."
+  },
   "Medicines": {
     "localized_name": "Tıbbi Malzemeler",
     "description": "Ülser ve Kırık tedavisinde etkili, tuhaf Tıbbi Malzemeler. Ne yazık ki iyileştirici bir etkileri bulunmuyor."
@@ -4605,7 +5725,7 @@
   },
   "MeteorBullet": {
     "localized_name": "Meteorit Mermisi",
-    "description": "Launcher Meteor ve benzeri diğer silahlar için cephane."
+    "description": "Launcher Meteor ve benzeri silahlarda kullanılan mühimmat. WeaponFactory Dirty 02 kullanılarak üretilebilir."
   },
   "MeteorDrop": {
     "localized_name": "Meteorit Kırığı",
@@ -4625,7 +5745,7 @@
   },
   "MissileBullet": {
     "localized_name": "Füze Mermisi",
-    "description": "Güdümlü Füzeatar ve benzeri diğer silahlar için cephane."
+    "description": "Güdümlü Füzeatar ve benzeri silahlarda kullanılan mühimmat. WeaponFactory Dirty 03 kullanılarak üretilebilir."
   },
   "Money": {
     "localized_name": "Altın Para",
@@ -4759,6 +5879,10 @@
     "localized_name": "Gloopie’nin Takoyakisi",
     "description": "Meat OctopusGirliUnhamuruna konup yuvarlak şekilde pişirilen bir yemek. Yendiğinde belirli bir süre boyunca deneyim puanı kazanımı biraz artar."
   },
+  "OctopusGirl_Takoyaki2": {
+    "localized_name": "Deniz Ürünlü Makarna",
+    "description": "Gloopie kolları bolca kullanılarak taze makarna ile harmanlanmış, deniz lezzeti taşıyan lüks bir yemektir. Yendiğinde belirli bir süre boyunca patlama hasarına karşı bağışıklık sağlar."
+  },
   "OldRevolver": {
     "localized_name": "Eski Altıpatlar",
     "description": "Modası biraz geçmiş bir toplu tapanca. Handgun default ile kıyaslandığında tek atış gücü bakımından öne çıkar."
@@ -4795,149 +5919,225 @@
     "localized_name": "Şüpheli Özüt",
     "description": "Tüketildiğinde ruh hâlini iyileştiren özüt. İçtiğinde çalışma hızın bir süreliğine artar ancak AKL değerin düşer."
   },
+  "Otomo_ATDark_ElementBoost_1": {
+    "localized_name": "Yeraltı Dünyasının Hüküm Asası",
+    "description": "Birlikte savaşan Pal’lerin saldırı gücünü artıran bir aksesuar. Pal’lerin nötr (elementsiz) hasarını da oldukça güçlendirir."
+  },
+  "Otomo_ATDragon_ElementBoost_1": {
+    "localized_name": "Kutsal Ejderhanın Hüküm Asası",
+    "description": "Birlikte savaşan Pal’lerin saldırı gücünü artıran bir aksesuar. Pal’lerin nötr (elementsiz) hasarını da oldukça güçlendirir."
+  },
+  "Otomo_ATEarth_ElementBoost_1": {
+    "localized_name": "Toprak İmparatoru Hüküm Asası",
+    "description": "Birlikte savaşan Pal’lerin saldırı gücünü artıran bir aksesuar. Pal’lerin nötr (elementsiz) hasarını da oldukça güçlendirir."
+  },
+  "Otomo_ATElectricity_ElementBoost_1": {
+    "localized_name": "Yıldırım İmparatoru’nun Hüküm Asası",
+    "description": "Birlikte savaşan Pal’lerin saldırı gücünü artıran bir aksesuar. Pal’lerin nötr (elementsiz) hasarını da oldukça güçlendirir."
+  },
+  "Otomo_ATFire_ElementBoost_1": {
+    "localized_name": "Gokuen'o Hüküm Asası",
+    "description": "Birlikte savaşan Pal’lerin saldırı gücünü artıran bir aksesuar. Pal’lerin nötr (elementsiz) hasarını da oldukça güçlendirir."
+  },
+  "Otomo_ATIce_ElementBoost_1": {
+    "localized_name": "Buz İmparatorunun Hüküm Asası",
+    "description": "Birlikte savaşan Pal’lerin saldırı gücünü artıran bir aksesuar. Pal’lerin nötr (elementsiz) hasarını da oldukça güçlendirir."
+  },
+  "Otomo_ATLeaf_ElementBoost_1": {
+    "localized_name": "Ruh İmparatoru’nun Hüküm Asası",
+    "description": "Birlikte savaşan Pal’lerin saldırı gücünü artıran bir aksesuar. Pal’lerin nötr (elementsiz) hasarını da oldukça güçlendirir."
+  },
+  "Otomo_ATNormal_ElementBoost_1": {
+    "localized_name": "Kutsal Gökyüzü’nün Mühürlü Asası",
+    "description": "Birlikte savaşan Pal’lerin saldırı gücünü artıran bir aksesuar. Pal’lerin nötr (elementsiz) hasarını da oldukça güçlendirir."
+  },
+  "Otomo_ATWater_ElementBoost_1": {
+    "localized_name": "Deniz İmparatoru’nun Hüküm Asası",
+    "description": "Birlikte savaşan Pal’lerin saldırı gücünü artıran bir aksesuar. Pal’lerin nötr (elementsiz) hasarını da oldukça güçlendirir."
+  },
   "Otomo_Attack_up1": {
     "localized_name": "Saldırı Destek Düdüğü",
-    "description": "Birlikte savaştığın Pal’ın saldırı gücünü az miktarda arttırabilen bir aksesuar."
+    "description": "Birlikte savaştığın Pal’ın saldırı gücünü arttırabilen bir aksesuar."
   },
   "Otomo_Attack_up2": {
-    "localized_name": "Saldırı Destek Düdüğü+1",
+    "localized_name": "Saldırı Destek Düdüğü",
     "description": "Birlikte savaştığın Pal’ın saldırı gücünü arttırabilen bir aksesuar."
   },
   "Otomo_Attack_up3": {
-    "localized_name": "Saldırı Destek Düdüğü+2",
-    "description": "Birlikte savaştığın Pal’ın saldırı gücünü büyük oranda arttırabilen bir aksesuar."
+    "localized_name": "Saldırı Destek Düdüğü",
+    "description": "Birlikte savaştığın Pal’ın saldırı gücünü arttırabilen bir aksesuar."
+  },
+  "Otomo_DFDark_ElementBoost_1": {
+    "localized_name": "Lyleen Noct’un Koruyucu Tılsımı",
+    "description": "Birlikte savaşan Pal’lerin savunma gücünü artıran bir aksesuar. Pal’lerin karanlık elementli hasarını da oldukça güçlendirir."
+  },
+  "Otomo_DFDragon_ElementBoost_1": {
+    "localized_name": "Jetragon Koruma Tılsımı",
+    "description": "Birlikte savaştığın Pal’ın savunma gücünü arttıran bir aksesuar. Pal’ın ejderha hasarını da büyük ölçüde güçlendirir."
+  },
+  "Otomo_DFEarth_ElementBoost_1": {
+    "localized_name": "Anubis’in Koruyucu Tılsımı",
+    "description": "Birlikte savaşan Pal’lerin savunma gücünü artıran bir aksesuar. Pal’lerin toprak elementli hasarını da oldukça güçlendirir."
+  },
+  "Otomo_DFElectricity_ElementBoost_1": {
+    "localized_name": "Orserk'ün Koruyucu Tılsımı Şeması",
+    "description": "Birlikte savaşan Pal’lerin savunma gücünü artıran bir aksesuar. Pal’lerin elektrik elementli hasarını da oldukça güçlendirir."
+  },
+  "Otomo_DFFire_ElementBoost_1": {
+    "localized_name": "Blazamut'un Koruyucu Tılsımı",
+    "description": "Birlikte savaşan Pal’lerin savunma gücünü artıran bir aksesuar. Pal’lerin ateş elementli hasarını da oldukça güçlendirir."
+  },
+  "Otomo_DFIce_ElementBoost_1": {
+    "localized_name": "Frostallion'un Koruyucu Tılsımı",
+    "description": "Birlikte savaşan Pal’lerin savunma gücünü artıran bir aksesuar. Pal’lerin buz elementli hasarını da oldukça güçlendirir."
+  },
+  "Otomo_DFLeaf_ElementBoost_1": {
+    "localized_name": "Lyleen’in Koruyucu Tılsımı",
+    "description": "Birlikte savaşan Pal’lerin savunma gücünü artıran bir aksesuar. Pal’lerin bitki elementli hasarını da oldukça güçlendirir."
+  },
+  "Otomo_DFNormal_ElementBoost_1": {
+    "localized_name": "Hartalis’in Koruyucu Tılsımı",
+    "description": "Birlikte savaşan Pal’lerin savunma gücünü artıran bir aksesuar. Pal’lerin nötr hasarını da oldukça güçlendirir."
+  },
+  "Otomo_DFWater_ElementBoost_1": {
+    "localized_name": "Neptilius’un Koruyucu Tılsımı",
+    "description": "Birlikte savaşan Pal’lerin savunma gücünü artıran bir aksesuar. Pal’lerin su elementli hasarını da oldukça güçlendirir."
   },
   "Otomo_Defense_up1": {
     "localized_name": "Savunma Destek Düdüğü",
-    "description": "Birlikte savaştığın Pal’ın savunma gücünü az miktarda arttırabilen bir aksesuar."
+    "description": "Birlikte savaştığın Pal’ın savunma gücünü arttırabilen bir aksesuar."
   },
   "Otomo_Defense_up2": {
-    "localized_name": "Savunma Destek Düdüğü+1",
+    "localized_name": "Savunma Destek Düdüğü",
     "description": "Birlikte savaştığın Pal’ın savunma gücünü arttırabilen bir aksesuar."
   },
   "Otomo_Defense_up3": {
-    "localized_name": "Savunma Destek Düdüğü+2",
-    "description": "Birlikte savaştığın Pal’ın savunma gücünü büyük oranda arttırabilen bir aksesuar."
+    "localized_name": "Savunma Destek Düdüğü",
+    "description": "Birlikte savaştığın Pal’ın savunma gücünü arttırabilen bir aksesuar."
   },
   "Otomo_ElementBoost_Dark_1": {
     "localized_name": "Karanlık Destek Düdüğü",
-    "description": "Birlikte savaştığın Pal’ın karanlık hasarını az miktarda arttıran bir aksesuar."
+    "description": "Birlikte savaştığın Pal’ın karanlık hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Dark_2": {
-    "localized_name": "Karanlık Destek Düdüğü+1",
+    "localized_name": "Karanlık Destek Düdüğü",
     "description": "Birlikte savaştığın Pal’ın karanlık hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Dark_3": {
-    "localized_name": "Karanlık Destek Düdüğü+2",
-    "description": "Birlikte savaştığın Pal’ın karanlık hasarını büyük oranda arttıran bir aksesuar."
+    "localized_name": "Karanlık Destek Düdüğü",
+    "description": "Birlikte savaştığın Pal’ın karanlık hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Dragon_1": {
     "localized_name": "Ejderha Destek Düdüğü",
-    "description": "Birlikte savaştığın Pal’ın ejderha hasarını az miktarda arttıran bir aksesuar."
+    "description": "Birlikte savaştığın Pal’ın ejderha hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Dragon_2": {
-    "localized_name": "Ejderha Destek Düdüğü+1",
+    "localized_name": "Ejderha Destek Düdüğü",
     "description": "Birlikte savaştığın Pal’ın ejderha hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Dragon_3": {
-    "localized_name": "Ejderha Destek Düdüğü+2",
-    "description": "Birlikte savaştığın Pal’ın yıldırım hasarını büyük oranda arttıran bir aksesuar."
+    "localized_name": "Ejderha Destek Düdüğü",
+    "description": "Birlikte savaştığın Pal’ın ejderha hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Earth_1": {
     "localized_name": "Toprak Destek Düdüğü",
-    "description": "Birlikte savaştığın Pal’ın toprak hasarını az miktarda arttıran bir aksesuar."
+    "description": "Birlikte savaştığın Pal’ın toprak hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Earth_2": {
-    "localized_name": "Toprak Destek Düdüğü+1",
+    "localized_name": "Toprak Destek Düdüğü",
     "description": "Birlikte savaştığın Pal’ın toprak hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Earth_3": {
-    "localized_name": "Toprak Destek Düdüğü+2",
-    "description": "Birlikte savaştığın Pal’ın toprak hasarını büyük oranda arttıran bir aksesuar."
+    "localized_name": "Toprak Destek Düdüğü",
+    "description": "Birlikte savaştığın Pal’ın toprak hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Electricity_1": {
     "localized_name": "Yıldırım Destek Düdüğü",
-    "description": "Birlikte savaştığın Pal’ın yıldırım hasarını az miktarda arttıran bir aksesuar."
+    "description": "Birlikte savaştığın Pal’ın yıldırım hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Electricity_2": {
-    "localized_name": "Yıldırım Destek Düdüğü+1",
+    "localized_name": "Yıldırım Destek Düdüğü",
     "description": "Birlikte savaştığın Pal’ın yıldırım hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Electricity_3": {
-    "localized_name": "Yıldırım Destek Düdüğü+2",
-    "description": "Birlikte savaştığın Pal’ın yıldırım hasarını büyük oranda arttıran bir aksesuar."
+    "localized_name": "Yıldırım Destek Düdüğü",
+    "description": "Birlikte savaştığın Pal’ın yıldırım hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Fire_1": {
     "localized_name": "Ateş Destek Düdüğü",
-    "description": "Birlikte savaştığın Pal’ın ateş hasarını az miktarda arttıran bir aksesuar."
+    "description": "Birlikte savaştığın Pal’ın ateş hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Fire_2": {
-    "localized_name": "Ateş Destek Düdüğü+1",
+    "localized_name": "Ateş Destek Düdüğü",
     "description": "Birlikte savaştığın Pal’ın ateş hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Fire_3": {
-    "localized_name": "Ateş Destek Düdüğü+2",
-    "description": "Birlikte savaştığın Pal’ın ateş hasarını büyük oranda arttıran bir aksesuar."
+    "localized_name": "Ateş Destek Düdüğü",
+    "description": "Birlikte savaştığın Pal’ın ateş hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Ice_1": {
     "localized_name": "Buz Destek Düdüğü",
-    "description": "Birlikte savaştığın Pal’ın buz hasarını az miktarda arttıran bir aksesuar."
+    "description": "Birlikte savaştığın Pal’ın buz hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Ice_2": {
-    "localized_name": "Buz Destek Düdüğü+1",
+    "localized_name": "Buz Destek Düdüğü",
     "description": "Birlikte savaştığın Pal’ın buz hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Ice_3": {
-    "localized_name": "Buz Destek Düdüğü+2",
-    "description": "Birlikte savaştığın Pal’ın buz hasarını büyük oranda arttıran bir aksesuar."
+    "localized_name": "Buz Destek Düdüğü",
+    "description": "Birlikte savaştığın Pal’ın buz hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Leaf_1": {
     "localized_name": "Bitki Destek Düdüğü",
-    "description": "Birlikte savaştığın Pal’ın bitki hasarını az miktarda arttıran bir aksesuar."
+    "description": "Birlikte savaştığın Pal’ın bitki hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Leaf_2": {
-    "localized_name": "Bitki Destek Düdüğü+1",
+    "localized_name": "Bitki Destek Düdüğü",
     "description": "Birlikte savaştığın Pal’ın bitki hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Leaf_3": {
-    "localized_name": "Bitki Destek Düdüğü+2",
-    "description": "Birlikte savaştığın Pal’ın bitki hasarını büyük oranda arttıran bir aksesuar."
+    "localized_name": "Bitki Destek Düdüğü",
+    "description": "Birlikte savaştığın Pal’ın bitki hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Normal_1": {
     "localized_name": "Desteksiz Düdük",
-    "description": "Birlikte savaştığın Pal’ın nötr hasarını az miktarda arttıran bir aksesuar."
+    "description": "Birlikte savaştığın Pal’ın nötr hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Normal_2": {
-    "localized_name": "Desteksiz Düdük+1",
+    "localized_name": "Desteksiz Düdük",
     "description": "Birlikte savaştığın Pal’ın nötr hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Normal_3": {
-    "localized_name": "Desteksiz Düdük+2",
-    "description": "Birlikte savaştığın Pal’ın nötr hasarını büyük oranda arttıran bir aksesuar."
+    "localized_name": "Desteksiz Düdük",
+    "description": "Birlikte savaştığın Pal’ın nötr hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Water_1": {
     "localized_name": "Su Destek Düdüğü",
-    "description": "Birlikte savaştığın Pal’ın su hasarını az miktarda arttıran bir aksesuar."
+    "description": "Birlikte savaştığın Pal’ın su hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Water_2": {
-    "localized_name": "Su Destek Düdüğü+1",
+    "localized_name": "Su Destek Düdüğü",
     "description": "Birlikte savaştığın Pal’ın su hasarını arttıran bir aksesuar."
   },
   "Otomo_ElementBoost_Water_3": {
-    "localized_name": "Su Destek Düdüğü+2",
-    "description": "Birlikte savaştığın Pal’ın su hasarını büyük oranda arttıran bir aksesuar."
+    "localized_name": "Su Destek Düdüğü",
+    "description": "Birlikte savaştığın Pal’ın su hasarını arttıran bir aksesuar."
+  },
+  "Otomo_PalConfidence_Increase_1": {
+    "localized_name": "Güven Yüzüğü",
+    "description": "Takılıyken Pal’lerin sana daha kolay güven duymasını sağlar."
   },
   "Otomo_PalExp_Increase_1": {
     "localized_name": "Büyüme Hızlandırma Çanı",
-    "description": "Pal’in kazandığı deneyim puanını az miktarda arttıran bir aksesuar."
+    "description": "Pal’in kazandığı deneyim puanını arttıran bir aksesuar."
   },
   "Otomo_PalExp_Increase_2": {
-    "localized_name": "Büyüme Hızlandırma Çanı+1",
+    "localized_name": "Büyüme Hızlandırma Çanı",
     "description": "Pal’in kazandığı deneyim puanını arttıran bir aksesuar."
   },
   "Otomo_PalExp_Increase_3": {
-    "localized_name": "Büyüme Hızlandırma Çanı+2",
-    "description": "Pal’in kazandığı deneyim puanını büyük oranda arttıran bir aksesuar."
+    "localized_name": "Büyüme Hızlandırma Çanı",
+    "description": "Pal’in kazandığı deneyim puanını arttıran bir aksesuar."
   },
   "OverheatRifle": {
     "localized_name": "Aşırı Isınan Tüfek",
@@ -4945,7 +6145,7 @@
   },
   "OverheatRifleBullet": {
     "localized_name": "Aşırı Isınan Tüfek Mermisi",
-    "description": "Aşırı Isınan Tüfekgibi silahlarda kullanılan mermi."
+    "description": "Aşırı Isınan Tüfek ve benzeri silahlarda kullanılan mühimmat. WeaponFactory Dirty 04 kullanılarak üretilebilir."
   },
   "OverheatRifle_2": {
     "localized_name": "Aşırı Isınan Tüfek",
@@ -4963,6 +6163,78 @@
     "localized_name": "Aşırı Isınan Tüfek",
     "description": "Şarjör değiştirmeden sürekli ateş edilebilen bir saldırı tüfeği. Ancak sürekli seri atış yapıldığında aşırı ısınma meydana gelir ve büyük bir açık oluşabileceğinden dikkatli olunmalıdır."
   },
+  "PalAwakening_Dark": {
+    "localized_name": "Karanlık Uyandırış Kristali",
+    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. <img id=|ElemIcon Dark|/><uiCommon id=|COMMON ELEMENT NAME Dark| style=|Elem Dark|/> İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
+  },
+  "PalAwakening_Dragon": {
+    "localized_name": "Ejder Uyandırış Kristali",
+    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. <img id=|ElemIcon Dragon|/><uiCommon id=|COMMON ELEMENT NAME Dragon| style=|Elem Dragon|/> İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
+  },
+  "PalAwakening_Electric": {
+    "localized_name": "Yıldırım Uyandırış Kristali",
+    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. <img id=|ElemIcon Electric|/><uiCommon id=|COMMON ELEMENT NAME Electricity| style=|Elem Electric|/> İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
+  },
+  "PalAwakening_Fire": {
+    "localized_name": "Ateş Uyandırış Kristali",
+    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. <img id=|ElemIcon Fire|/><uiCommon id=|COMMON ELEMENT NAME Fire| style=|Elem Fire|/> İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
+  },
+  "PalAwakening_Grass": {
+    "localized_name": "Doğa Uyandırış Kristali",
+    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. <img id=|ElemIcon Grass|/><uiCommon id=|COMMON ELEMENT NAME Leaf| style=|Elem Grass|/> İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
+  },
+  "PalAwakening_Ground": {
+    "localized_name": "Toprak Uyandırış Kristali",
+    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. <img id=|ElemIcon Ground|/><uiCommon id=|COMMON ELEMENT NAME Earth| style=|Elem Ground|/> İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
+  },
+  "PalAwakening_Ice": {
+    "localized_name": "Buz Uyandırış Kristali",
+    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. <img id=|ElemIcon Ice|/><uiCommon id=|COMMON ELEMENT NAME Ice| style=|Elem Ice|/> İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
+  },
+  "PalAwakening_Material_Dark": {
+    "localized_name": "Karanlık Parlaktaş",
+    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, <img id=|ElemIcon Dark|/><uiCommon id=|COMMON ELEMENT NAME Dark| style=|Elem Dark|/> Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
+  },
+  "PalAwakening_Material_Dragon": {
+    "localized_name": "Ejderha Parlaktaş",
+    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, <img id=|ElemIcon Dragon|/><uiCommon id=|COMMON ELEMENT NAME Dragon| style=|Elem Dragon|/> Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
+  },
+  "PalAwakening_Material_Electric": {
+    "localized_name": "Elektrik Parlaktaş",
+    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, <img id=|ElemIcon Electric|/><uiCommon id=|COMMON ELEMENT NAME Electricity| style=|Elem Electric|/> Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
+  },
+  "PalAwakening_Material_Fire": {
+    "localized_name": "Alev Parlaktaş",
+    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, <img id=|ElemIcon Fire|/><uiCommon id=|COMMON ELEMENT NAME Fire| style=|Elem Fire|/> Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
+  },
+  "PalAwakening_Material_Grass": {
+    "localized_name": "Bitki Parlaktaş",
+    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, <img id=|ElemIcon Grass|/><uiCommon id=|COMMON ELEMENT NAME Leaf| style=|Elem Grass|/> Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
+  },
+  "PalAwakening_Material_Ground": {
+    "localized_name": "Toprak Parlaktaş",
+    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, <img id=|ElemIcon Ground|/><uiCommon id=|COMMON ELEMENT NAME Earth| style=|Elem Ground|/> Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
+  },
+  "PalAwakening_Material_Ice": {
+    "localized_name": "Buz Parlaktaş",
+    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, <img id=|ElemIcon Ice|/><uiCommon id=|COMMON ELEMENT NAME Ice| style=|Elem Ice|/> Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
+  },
+  "PalAwakening_Material_Neutral": {
+    "localized_name": "Özelliksiz Parlaktaş",
+    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, <img id=|ElemIcon Neutral|/><uiCommon id=|COMMON ELEMENT NAME Normal| style=|Elem Neutral|/> Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
+  },
+  "PalAwakening_Material_Water": {
+    "localized_name": "Su Parlaktaş",
+    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, <img id=|ElemIcon Water|/><uiCommon id=|COMMON ELEMENT NAME Water| style=|Elem Water|/> Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
+  },
+  "PalAwakening_Neutral": {
+    "localized_name": "Nötr Uyandırış Kristali",
+    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. <img id=|ElemIcon Neutral|/><uiCommon id=|COMMON ELEMENT NAME Normal| style=|Elem Neutral|/> İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
+  },
+  "PalAwakening_Water": {
+    "localized_name": "Su Uyandırış Kristali",
+    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. <img id=|ElemIcon Water|/><uiCommon id=|COMMON ELEMENT NAME Water| style=|Elem Water|/> İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
+  },
   "PalCrystal_Ex": {
     "localized_name": "Kadim Medeniyet Parçaları",
     "description": "Kadim kalıntılardan çıkarılan yıkıntılar. Kayıp teknolojiler hakkında bol bol bilgi içerir. Son derece değerlidir, her kesimden insan bu tarz kristalleri aramaktadır."
@@ -4977,7 +6249,7 @@
   },
   "PalDopingShotBullet": {
     "localized_name": "Takviye Tabancası Mermisi",
-    "description": "Hız Artırıcı Silahgibi silahlarda kullanılan mermi."
+    "description": "Hız Artırıcı Silah ve benzeri silahlarda kullanılan mühimmat. WeaponFactory Dirty 01 kullanılarak üretilebilir."
   },
   "PalDopingShot_2": {
     "localized_name": "Takviye Silahı",
@@ -5127,6 +6399,30 @@
     "localized_name": "Kocaman Yemyeşil Yumurta",
     "description": "Bir PalEgg Leaf 05. İçinde yemyeşil bir ruh büyüyor. Sanki bir canavar doğmak üzere. Kuluçkaya sokmak için bir Kuluçka Makinesi içine yerleştir."
   },
+  "PalEgg_MutationPal": {
+    "localized_name": "en text",
+    "description": "-"
+  },
+  "PalEgg_MutationPal_01": {
+    "localized_name": "Aniden Dönüşmüş",
+    "description": "PalEgg MutationPal 01. Çok nadir olarak ortaya çıkan, özel bir mutasyona uğramış yumurta. Kuluçka Makinesiüzerine yerleştirip kuluçkaya bırak."
+  },
+  "PalEgg_MutationPal_02": {
+    "localized_name": "Aniden Dönüşmüş",
+    "description": "PalEgg MutationPal 02. Çok nadir olarak ortaya çıkan, özel bir mutasyona uğramış yumurta. Kuluçka Makinesiüzerine yerleştirip kuluçkaya bırak."
+  },
+  "PalEgg_MutationPal_03": {
+    "localized_name": "Aniden Dönüşmüş",
+    "description": "PalEgg MutationPal 03. Çok nadir olarak ortaya çıkan, özel bir mutasyona uğramış yumurta. Kuluçka Makinesiüzerine yerleştirip kuluçkaya bırak."
+  },
+  "PalEgg_MutationPal_04": {
+    "localized_name": "Aniden Dönüşmüş",
+    "description": "PalEgg MutationPal 04. Çok nadir olarak ortaya çıkan, özel bir mutasyona uğramış yumurta. Kuluçka Makinesiüzerine yerleştirip kuluçkaya bırak."
+  },
+  "PalEgg_MutationPal_05": {
+    "localized_name": "Kocaman Ejderha Yumurtası",
+    "description": "PalEgg MutationPal 05. Çok nadir olarak ortaya çıkan, özel bir mutasyona uğramış yumurta. Kuluçka Makinesiüzerine yerleştirip kuluçkaya bırak."
+  },
   "PalEgg_Normal_01": {
     "localized_name": "Sıradan Yumurta",
     "description": "Bir PalEgg Normal 01. İçinde yumuşak bir hareketlilik var. Kuluçkaya sokmak için bir Kuluçka Makinesi içine yerleştir."
@@ -5167,9 +6463,29 @@
     "localized_name": "Kocaman Nemli Yumurta",
     "description": "Bir PalEgg Water 05. İçinde huzurlu bir ruh salınıyor. Sanki bir canavar doğmak üzere. Kuluçkaya sokmak için bir Kuluçka Makinesi içine yerleştir."
   },
+  "PalEgg_WorldTree_01": {
+    "localized_name": "Uğursuz Yumurta",
+    "description": "PalEgg WorldTree 01 Dünya Ağacı’nın enerjisini barındıran gizemli bir yumurta. Kuluçka Makinesiüzerine yerleştirip kuluçkaya bırak."
+  },
+  "PalEgg_WorldTree_02": {
+    "localized_name": "Uğursuz Yumurta",
+    "description": "PalEgg WorldTree 02 Dünya Ağacı’nın enerjisini barındıran gizemli bir yumurta. Kuluçka Makinesiüzerine yerleştirip kuluçkaya bırak."
+  },
+  "PalEgg_WorldTree_03": {
+    "localized_name": "Uğursuz Dev Yumurta",
+    "description": "PalEgg WorldTree 03 Dünya Ağacı’nın enerjisini barındıran gizemli bir yumurta. Kuluçka Makinesiüzerine yerleştirip kuluçkaya bırak."
+  },
+  "PalEgg_WorldTree_04": {
+    "localized_name": "Uğursuz Dev Yumurta",
+    "description": "PalEgg WorldTree 04 Dünya Ağacı’nın enerjisini barındıran gizemli bir yumurta. Kuluçka Makinesiüzerine yerleştirip kuluçkaya bırak."
+  },
+  "PalEgg_WorldTree_05": {
+    "localized_name": "Uğursuz Devasa Yumurta",
+    "description": "PalEgg WorldTree 05 Dünya Ağacı’nın enerjisini barındıran gizemli bir yumurta. Kuluçka Makinesiüzerine yerleştirip kuluçkaya bırak."
+  },
   "PalFluid": {
-    "localized_name": "Pal Sıvıları",
-    "description": "Bir Pal'dan alınmış vücut sıvıları. Yüksek akma direnci için kullanılır."
+    "localized_name": "Su Pal'ı Salgısı",
+    "description": "Su elementine sahip Pal’lardan elde edilen, yüksek viskoziteye sahip faydalı bir sıvıdır."
   },
   "PalGenderReverse": {
     "localized_name": "Pal Ters Çevirici",
@@ -5239,6 +6555,122 @@
     "localized_name": "Yüksek Kaliteli Pal Yağı",
     "description": "Bir Pal'dan çıkarılabilecek yüksek kaliteli yağ. Polimer yapmak için gereklidir."
   },
+  "PalPassiveSkillChange_AutoHPRegeneRate_Passive": {
+    "localized_name": "İmplant: Şifa Koçu",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_CraftSpeed_up3": {
+    "localized_name": "Tek Kullanımlık İmplant: Olağanüstü Teknik",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_Deffence_up3": {
+    "localized_name": "Tek Kullanımlık İmplant: Elmas Vücut",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_EternalFlame": {
+    "localized_name": "Tek Kullanımlık İmplant: Ebedi Alev",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_Invader": {
+    "localized_name": "Tek Kullanımlık İmplant: İstilacı",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_Legend": {
+    "localized_name": "Tek Kullanımlık İmplant: Efsanevi",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_MoveSpeed_up_3": {
+    "localized_name": "Tek Kullanımlık İmplant: Tanrısal Hız",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_MutationPal_Babysitter": {
+    "localized_name": "Tek Kullanımlık İmplant: Bebek Bakıcısı",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_MutationPal_ExplosionResist": {
+    "localized_name": "Tek Kullanımlık İmplant: Ağır Zırh",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_MutationPal_Immortal": {
+    "localized_name": "Tek Kullanımlık İmplant: Ölümsüzlük",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_MutationPal_Mutant": {
+    "localized_name": "Tek Kullanımlık İmplant: Özel Bünye",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_Nushi": {
+    "localized_name": "Tek Kullanımlık İmplant: Reis",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_PAL_ALLAttack_up3": {
+    "localized_name": "Tek Kullanımlık İmplant: Savaş Tanrısı",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_PAL_FullStomach_Down_3": {
+    "localized_name": "Tek Kullanımlık İmplant: Mutlak Oruç",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_PAL_Sanity_Down_3": {
+    "localized_name": "Tek Kullanımlık İmplant: Sarsılmaz Kalp",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_Rare": {
+    "localized_name": "Tek Kullanımlık İmplant: Nadir",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_RideJumpCount_Increase2": {
+    "localized_name": "Tek Kullanımlık İmplant: Gökyüzü Gezgini",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_Salvation": {
+    "localized_name": "Tek Kullanımlık İmplant: Reis",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_Stamina_Up_3": {
+    "localized_name": "Tek Kullanımlık İmplant: Ebedi Devirdaim",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_SwimSpeed_up_3": {
+    "localized_name": "Tek Kullanımlık İmplant: Reis",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_Vampire": {
+    "localized_name": "Tek Kullanımlık İmplant: Vampir",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_Witch": {
+    "localized_name": "Tek Kullanımlık İmplant: Cadı",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_ATK": {
+    "localized_name": "Tüketilebilir İmplant: Tüm Kılıçların Kutsal Kılıcı",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_ATK_DEF": {
+    "localized_name": "Tüketilebilir İmplant: Yıkım Tanrısı",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_CraftSpeed": {
+    "localized_name": "Tüketilebilir İmplant: Şeytanın Eli",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_DEF": {
+    "localized_name": "Tüketilebilir İmplant: Kutsal Alanın Et Duvarı",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_FullStomach": {
+    "localized_name": "Tüketilebilir İmplant: Kutsal Ağacın Fidanlığı",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_MoveSpeed": {
+    "localized_name": "Tüketilebilir İmplant: Boyutsal Sıçrama",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_Sanity": {
+    "localized_name": "Tüketilebilir İmplant: Ermiş",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
   "PalPassiveSkillChange_CoolTimeReduction_Up_1": {
     "localized_name": "İmplant: Soğukkanlı",
     "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
@@ -5288,7 +6720,7 @@
     "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
   },
   "PalPassiveSkillChange_Nocturnal": {
-    "localized_name": "İmplant: Gece Hayvanı",
+    "localized_name": "İmplant: Uykusuzluk",
     "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
   },
   "PalPassiveSkillChange_NonKilling": {
@@ -5337,6 +6769,14 @@
   },
   "PalPassiveSkillChange_PAL_Sanity_Down_3": {
     "localized_name": "İmplant: Fudō Myō-ō'nun Kalb",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_PlayerSP_DecreaseRate_Passive": {
+    "localized_name": "İmplant: Yorgunluk Önleme",
+    "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
+  },
+  "PalPassiveSkillChange_ReloadSpeedUp_Passive": {
+    "localized_name": "İmplant: Yeniden Doldurma Ustası",
     "description": "Pal’in bedenine yerleştirilen, pasif becerileri değiştirmek için bir implant. Bu öğeye sahip olduğunda,Pal Ameliyat Masasıbölümünde ilgili pasif beceriyi seçebilirsin."
   },
   "PalPassiveSkillChange_SalePrice_Up_1": {
@@ -5395,6 +6835,14 @@
     "localized_name": "Pal Küresi",
     "description": "Fırlatıldığında Pal'ları yakalayan bir eşya. Bu temel model yalnızca düşük seviyeli Pal'larda etkilidir."
   },
+  "PalSphere_Ancient_1": {
+    "localized_name": "Sol-Küre",
+    "description": "Fırlatıldığında Pal'ları yakalayan bir eşya. Antik medeniyette Pal'lar ile bir arada yaşamayı sağlamlaştıran üst düzey bir küre."
+  },
+  "PalSphere_Ancient_2": {
+    "localized_name": "Kadim Küre",
+    "description": "Fırlatıldığında Pal'ları yakalayan bir eşya. Dünya Ağacı'nın gücünü emen ve antik medeniyetin zirve noktası olarak yaratılan nihai küre."
+  },
   "PalSphere_Exotic": {
     "localized_name": "Egzotik Küre",
     "description": "Fırlatıldığında Pal'ları yakalayan bir eşya. İnanılmaz performansıyla öne çıkarak normal standartların dışında kalan Pal'ları yakalayabilir."
@@ -5433,7 +6881,7 @@
   },
   "PalSummon_DarkMechaDragon": {
     "localized_name": "Xenolord Levhası",
-    "description": "Xenolord figürlü levha. Güçlü bir Sv. 60 Xenolord çağırmak için Çağırma Sunağı huzurunda sun."
+    "description": "Xenolord figürlü levha. Güçlü bir Sv. 65 Xenolord çağırmak için Çağırma Sunağı huzurunda sun."
   },
   "PalSummon_DarkMechaDragon_2": {
     "localized_name": "Xenolord (Ultra) Levhası",
@@ -5465,7 +6913,7 @@
   },
   "PalSummon_LegendDeer": {
     "localized_name": "Hartalis Tableti",
-    "description": "ÜzerindeHartalis'ın tasviri bulunan bir taş tablet. Çağırma Sunağı'a sunulduğunda, son derece güçlü birHartalis[Seviye 65] çağrılır."
+    "description": "ÜzerindeHartalis'ın tasviri bulunan bir taş tablet. Çağırma Sunağı'a sunulduğunda, son derece güçlü birHartalis[Seviye 70] çağrılır."
   },
   "PalSummon_LegendDeer_2": {
     "localized_name": "Hartalis [Ultra] Tableti",
@@ -5481,11 +6929,11 @@
   },
   "PalSummon_NightLady": {
     "localized_name": "Bellanoir Levhası",
-    "description": "Bellanoirfigürlü levha. Çağırma Sunağı'a adandığında, güçlü bir Bellanoir[Seviye 30] çağrılır."
+    "description": "Bellanoirfigürlü levha. Çağırma Sunağı'a adandığında, güçlü bir Bellanoir[Seviye 35] çağrılır."
   },
   "PalSummon_NightLady_Dark": {
     "localized_name": "Bellanoir Libero Levhası",
-    "description": "NightLady Dark figürlü levha. Güçlü bir Sv. 50 NightLady Dark çağırmak için Çağırma Sunağı huzurunda sun."
+    "description": "NightLady Dark figürlü levha. Güçlü bir Sv. 45 NightLady Dark çağırmak için Çağırma Sunağı huzurunda sun."
   },
   "PalSummon_NightLady_Dark_2": {
     "localized_name": "Bellanoir Libero (Ultra) Levhası",
@@ -5681,7 +7129,7 @@
   },
   "Polymer": {
     "localized_name": "Polimer",
-    "description": "Saflaştırılmış petrolden yapılır. Tüfekler gibi çeşitli gelişmiş eşyalar üretmek için gereklidir."
+    "description": "Yağ işlenerek yapılan bir Polimer. Silah üretimi gibi işlemler için gereklidir. Factory Hard 02 kullanılarak üretilebilir."
   },
   "Poppy": {
     "localized_name": "Güzel Çiçek",
@@ -5726,6 +7174,14 @@
   "PredatorCrystal": {
     "localized_name": "Yırtıcılık Çekirdeği",
     "description": "Yırtıcı Pal'ların düşürdüğü çekirdek. Gizemli bir enerjiyle doludur."
+  },
+  "Premium_Processed_Wood": {
+    "localized_name": "Gizemli Ahşap Levha",
+    "description": "Gizemli bir odunun işlenmesiyle yapılmış, hafifçe ışık yayan levha. İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
+  },
+  "Processed_Wood": {
+    "localized_name": "Ahşap Levha",
+    "description": "Kerestenin daha kolay kullanılacak şekilde işlenmesiyle elde edilen ahşap malzeme. Ham kütüğe kıyasla daha çok yönlüdür ve geniş bir kullanım alanına sahiptir. İlkel Tezgâh kullanılarak üretilebilir."
   },
   "PumpActionShotgun": {
     "localized_name": "Pompalı Av Tüfeği",
@@ -5776,44 +7232,92 @@
     "description": "Sadece Feybreak'te bulunan nadir bir kristal. Uzun yıllar boyunca, Paldiyum yoğunlaştı ve dönüştü. Bu hâliyle gökkuşağına benzeyen bir parıltı saçıyor."
   },
   "Rankup_1": {
-    "localized_name": "Uyanış Yıldızı Meyvesi☆1",
+    "localized_name": "Yıldız Uyanış Meyvesi ☆ 1",
     "description": "Nadiren görülen sihirli bir meyve. Bir Pal’in derecesini ☆0’dan ☆1’e yükseltebilir."
   },
   "Rankup_2": {
-    "localized_name": "Uyanış Yıldızı Meyvesi☆2",
+    "localized_name": "Yıldız Uyanış Meyvesi ☆ 2",
     "description": "Nadiren görülen sihirli bir meyve. Pal'ın derecesini ☆1'den ☆2'ye çıkarır."
   },
   "Rankup_3": {
-    "localized_name": "Uyanış Yıldızı Meyvesi☆3",
+    "localized_name": "Yıldız Uyanış Meyvesi ☆ 3",
     "description": "Nadiren görülen sihirli bir meyve. Pal'ın derecesini ☆2'den ☆3'e çıkarır."
   },
   "Rankup_4": {
-    "localized_name": "Uyanış Yıldızı Meyvesi☆4",
+    "localized_name": "Yıldız Uyanış Meyvesi ☆ 4",
     "description": "Nadiren görülen sihirli bir meyve. Pal'ın derecesini ☆3'ten ☆4'e çıkarır."
   },
   "Rankup_Arbitrary": {
-    "localized_name": "Konsantre Uyanış Yıldızı Meyvesi",
+    "localized_name": "Olgun Yıldız Uyanış Meyvesi",
     "description": "Nadiren görülen sihirli bir meyve. Pal'ın derecesini 1 artırır."
   },
   "ReinforcedArrow": {
     "localized_name": "Güçlendirilmiş Ok",
-    "description": "Alaşım Yay ile kullanılmak üzere tasarlanmış geliştirilmiş oklar."
+    "description": "Alaşım Yay ile fırlatmak için kullanılan güçlendirilmiş bir ok. İlkel Tezgâh kullanılarak üretilebilir."
   },
   "Relic": {
     "localized_name": "Lifmunk Figürü",
+    "description": "Çok sayıda Pal yakalandığında aniden envantere giren gizemli bir Pal heykeli. Belirli bir heykele sunularak oyuncunun gücü artırılabilir."
+  },
+  "Relic_01": {
+    "localized_name": "Lamball Heykeli",
     "description": "Palpagos Adası'nın her yerinde bulunabilecek gizemli bir Pal heykeli. Belirli heykellere adak sunan oyuncular, becerilerini geliştirebilir."
   },
+  "Relic_02": {
+    "localized_name": "Pengullet Heykeli",
+    "description": "Palpagos Adası'nın her yerinde bulunabilecek gizemli bir Pal heykeli. Belirli heykellere adak sunan oyuncular, becerilerini geliştirebilir."
+  },
+  "Relic_03": {
+    "localized_name": "Munchill Heykeli",
+    "description": "Palpagos Adası'nın her yerinde bulunabilecek gizemli bir Pal heykeli. Belirli heykellere adak sunan oyuncular, becerilerini geliştirebilir."
+  },
+  "Relic_04": {
+    "localized_name": "Rooby Heykeli",
+    "description": "Palpagos Adası'nın her yerinde bulunabilecek gizemli bir Pal heykeli. Belirli heykellere adak sunan oyuncular, becerilerini geliştirebilir."
+  },
+  "Relic_05": {
+    "localized_name": "Herbil Heykeli",
+    "description": "Palpagos Adası'nın her yerinde bulunabilecek gizemli bir Pal heykeli. Belirli heykellere adak sunan oyuncular, becerilerini geliştirebilir."
+  },
+  "Relic_06": {
+    "localized_name": "Tanzee Heykeli",
+    "description": "Palpagos Adası'nın her yerinde bulunabilecek gizemli bir Pal heykeli. Belirli heykellere adak sunan oyuncular, becerilerini geliştirebilir."
+  },
+  "Relic_07": {
+    "localized_name": "Depresso Heykeli",
+    "description": "Palpagos Adası'nın her yerinde bulunabilecek gizemli bir Pal heykeli. Belirli heykellere adak sunan oyuncular, becerilerini geliştirebilir."
+  },
+  "Relic_08": {
+    "localized_name": "Cattiva Heykeli",
+    "description": "Palpagos Adası'nın her yerinde bulunabilecek gizemli bir Pal heykeli. Belirli heykellere adak sunan oyuncular, becerilerini geliştirebilir."
+  },
+  "Relic_09": {
+    "localized_name": "Lunaris Heykeli",
+    "description": "Palpagos Adası'nın her yerinde bulunabilecek gizemli bir Pal heykeli. Belirli heykellere adak sunan oyuncular, becerilerini geliştirebilir."
+  },
+  "Relic_10": {
+    "localized_name": "Relaxaurus Heykeli",
+    "description": "Palpagos Adası'nın her yerinde bulunabilecek gizemli bir Pal heykeli. Belirli heykellere adak sunan oyuncular, becerilerini geliştirebilir."
+  },
+  "Relic_11": {
+    "localized_name": "Yakumo Heykeli",
+    "description": "Palpagos Adası'nın her yerinde bulunabilecek gizemli bir Pal heykeli. Belirli heykellere adak sunan oyuncular, becerilerini geliştirebilir."
+  },
+  "Relic_12": {
+    "localized_name": "Mimdog Heykeli",
+    "description": "Palpagos Adası’nın çeşitli yerlerinde bulunan gizemli Pal rölik heykelleridir. Belirli heykellere sunu yapılarak oyuncu güçlendirilebilir."
+  },
   "RepairKit": {
-    "localized_name": "Tamir Kiti",
+    "localized_name": "Yapı Onarım Kiti",
     "description": "Yapıları onarmak için araçlar. Yıkılan yapılar üzerinde kullanarak onları onarabilirsin."
   },
   "RifleBullet": {
     "localized_name": "Tüfek Mermisi",
-    "description": "Tek Atışlı Tüfek ve benzeri diğer silahlar için cephane."
+    "description": "Tüfek ve benzeri silahlarda kullanılan mühimmat. WeaponFactory Dirty 01 kullanılarak üretilebilir."
   },
   "RoughBullet": {
     "localized_name": "Kaba Mermi",
-    "description": "Misket Tüfeği, Eğreti Tabanca ve benzeri diğer silahlar için cephane."
+    "description": "Misket Tüfeği veya Eğreti Tabanca gibi silahlarda kullanılan mühimmat. WeaponFactory Dirty 01 kullanılarak üretilebilir."
   },
   "Ruby": {
     "localized_name": "Yakut",
@@ -5901,7 +7405,7 @@
   },
   "SFArrow": {
     "localized_name": "Gelişmiş Ok",
-    "description": "Heksolit malzemeden yapılmış, Gelişmiş Yay ile kullanılmak üzere tasarlanmış oklar."
+    "description": "Gelişmiş Yay ile fırlatmak için kullanılan güçlendirilmiş bir ok. İlkel Tezgâh kullanılarak üretilebilir."
   },
   "SFBow": {
     "localized_name": "Gelişmiş Yay",
@@ -6027,6 +7531,10 @@
     "localized_name": "Hiper Kalkan",
     "description": "Paldiyum teknolojisiyle üretilmiş tuhaf bir kalkan. Bir süre hasar almadığında otomatik olarak kendini onarır. Tekrar tekrar yapılan testler sayesinde en yüksek kaliteye erişildi."
   },
+  "Shield_07": {
+    "localized_name": "Kadim Kalkan",
+    "description": "Kayıp kadim bir teknolojiyle üretilmiş bir kalkandır. Bir süre saldırı almadığında kendini otomatik olarak onarır. Sahip olduğu performansın günümüz teknolojisiyle yeniden üretilmesi mümkün değildir."
+  },
   "Shield_SF": {
     "localized_name": "Gelişmiş Kalkan",
     "description": "Gelişmiş teknolojiyle üretilmiş tuhaf bir kalkan. Bir süre hasar almadıktan sonra otomatik olarak kendini onarır."
@@ -6037,7 +7545,7 @@
   },
   "ShotgunBullet": {
     "localized_name": "Av Tüfeği Fişeği",
-    "description": "Av tüfekleri ve benzeri diğer silahlar için cephane."
+    "description": "Pompalı tüfek ve benzeri silahlarda kullanılan mühimmat. WeaponFactory Dirty 01 kullanılarak üretilebilir."
   },
   "SingleShotRifle": {
     "localized_name": "Tek Atışlı Tüfek",
@@ -6094,6 +7602,10 @@
   "SkillCard_BubbleShot": {
     "localized_name": "Su Yetenek Meyvesi: Baloncuk Atışı",
     "description": "Bunu Pal üzerinde kullanarak ona BubbleShotöğretebilirsin."
+  },
+  "SkillCard_BubbleShower": {
+    "localized_name": "Karanlık Teknik Meyvesi: Zehir Yağmuru",
+    "description": "Pal’a kullanıldığında, BubbleShoweryeteneğini öğretmeye yarar."
   },
   "SkillCard_ChargeCanon": {
     "localized_name": "Ejderha Tekniği Meyvesi: Hücum topu.",
@@ -6331,6 +7843,10 @@
     "localized_name": "Toprak Yetenek Meyvesi: Kum Kasırgası",
     "description": "Bir Pal'ın üzerinde kullanarak SandTwister öğret."
   },
+  "SkillCard_SeaGush": {
+    "localized_name": "Su Tekniği Meyvesi: Su Sütunu Fışkırması",
+    "description": "Pal’a kullanıldığında, SeaGushyeteneğini öğretmeye yarar."
+  },
   "SkillCard_SeedMachinegun": {
     "localized_name": "Bitki Yetenek Meyvesi: Tohum Makineli Tüfeği",
     "description": "Bunu Pal üzerinde kullanarak ona SeedMachinegunöğretebilirsin."
@@ -6415,6 +7931,10 @@
     "localized_name": "Su Yetenek Meyvesi: Su Fırlatışı",
     "description": "Bunu Pal üzerinde kullanarak ona WaterGunöğretebilirsin."
   },
+  "SkillCard_WindBurst": {
+    "localized_name": "Çim Yeteneği Meyvesi: Wind Blast",
+    "description": "Pal’a kullanıldığında, WindBurstyeteneğini öğretmeye yarar."
+  },
   "SkillCard_WindCutter": {
     "localized_name": "Bitki Yetenek Meyvesi: Rüzgar Kesici",
     "description": "Bunu Pal üzerinde kullanarak ona WindCutteröğretebilirsin."
@@ -6463,6 +7983,10 @@
     "localized_name": "Smokie'nin Koşum Takımı",
     "description": "Smokie için koşum takımı. Çevredeki Kromit yataklarının konumunu tespit edebilmek için Partner Yeteneğini etkinleştir."
   },
+  "SkillUnlock_BlackPuppy_Ice": {
+    "localized_name": "Smokie Cryst Koşumu",
+    "description": "BlackPuppy Iceiçin koşum takımı. Partner yeteneği etkinleştirildiğinde, yakındakiKromitkonumlarını tespit edebilir."
+  },
   "SkillUnlock_BlueDragon": {
     "localized_name": "Azurobe Eyeri",
     "description": "Güvenle Azurobe sürebilmek için bir eyer."
@@ -6470,6 +7994,10 @@
   "SkillUnlock_BlueDragon_Ice": {
     "localized_name": "Azurobe Cryst’in eyeri",
     "description": "Üzerinde taşıdığında,BlueDragon Ice’e binebilmeni sağlar."
+  },
+  "SkillUnlock_BlueSkyDragon": {
+    "localized_name": "Shaolong Eyeri",
+    "description": "Sahip olunduğunda, Shaolong üzerine binmeyi sağlar."
   },
   "SkillUnlock_BlueThunderHorse": {
     "localized_name": "Azurmane Eyeri",
@@ -6487,6 +8015,14 @@
     "localized_name": "Tocotoco'nun Eldivenleri",
     "description": "Tocotoco'yu nazikçe tutabilmek için eldivenler. Partner Yeteneğini etkinleştirerek Tocotoco'yu tut ve patlayıcı yumurtalar fırlatmak için kullan."
   },
+  "SkillUnlock_CubeTurtle": {
+    "localized_name": "Tetroise Eyeri",
+    "description": "Sahip olunduğunda, Tetroise üzerine binmeyi sağlar."
+  },
+  "SkillUnlock_CubeTurtle_Neutral": {
+    "localized_name": "Tetroise Primo Eyeri",
+    "description": "Sahip olunduğunda, CubeTurtle Neutral üzerine binmeyi sağlar."
+  },
   "SkillUnlock_DarkMechaDragon": {
     "localized_name": "Xenolord Eyeri",
     "description": "Güvenle Xenolord sürebilmek için bir eyer."
@@ -6502,6 +8038,10 @@
   "SkillUnlock_Deer_Ground": {
     "localized_name": "Eikthyrdeer Terra Eyeri",
     "description": "Güvenle Deer Ground sürebilmek için bir eyer."
+  },
+  "SkillUnlock_DomeArmorDragon": {
+    "localized_name": "Aegidron Eyeri",
+    "description": "Sahip olunduğunda, Aegidron üzerine binmeyi sağlar."
   },
   "SkillUnlock_DreamDemon": {
     "localized_name": "Daedream'in Kolyesi",
@@ -6591,9 +8131,25 @@
     "localized_name": "Maraith Eyeri",
     "description": "Güvenle Maraith sürebilmek için bir eyer."
   },
+  "SkillUnlock_GhostDragon": {
+    "localized_name": "Eidrolon Eyeri",
+    "description": "Sahip olunduğunda,Eidrolone binilebilir hale gelir."
+  },
+  "SkillUnlock_GhostDragon_Fire": {
+    "localized_name": "Eidrolon Ignis Eyeri",
+    "description": "Sahip olunduğunda,GhostDragon Firee binilebilir hale gelir."
+  },
   "SkillUnlock_GoldenHorse": {
     "localized_name": "Gildane Eyeri",
     "description": "Güvenle Gildane sürebilmek için bir eyer."
+  },
+  "SkillUnlock_GrassGolem": {
+    "localized_name": "Dualith Eyeri",
+    "description": "Sahip olunduğunda,Dualithe binilebilir ve bitki elementli güçlü bir lazer ışını gönderebilir."
+  },
+  "SkillUnlock_GrassGolem_Dark": {
+    "localized_name": "Dualith Noct Eyeri",
+    "description": "Sahip olunduğunda,GrassGolem Darke binerek karanlık elementli güçlü bir lazer ışını gönderir."
   },
   "SkillUnlock_GrassMammoth": {
     "localized_name": "Mammorest Eyeri",
@@ -6667,6 +8223,10 @@
     "localized_name": "Polapup’un Eyeri",
     "description": "Üzerinde taşıdığında,Polapup’e binebilmeni sağlar."
   },
+  "SkillUnlock_IceSeal_Ground": {
+    "localized_name": "Polapup Terra Eyeri",
+    "description": "Sahip olunduğunda, IceSeal Ground üzerine binmeyi sağlar."
+  },
   "SkillUnlock_JetDragon": {
     "localized_name": "Jetragon'un Füzeatarı",
     "description": "Üzerine binilen Jetragon'un füzeler atmasını sağlar."
@@ -6687,9 +8247,21 @@
     "localized_name": "Blazamut Ryu Eyeri",
     "description": "Güvenle KingBahamut Dragon sürebilmek için bir eyer."
   },
+  "SkillUnlock_KingSunfish": {
+    "localized_name": "Solmora Eyeri",
+    "description": "Sahip olunduğunda,Solmorae binilebilir hale gelir."
+  },
+  "SkillUnlock_KingSunfish_Thunder": {
+    "localized_name": "Solmora Lux Eyeri",
+    "description": "Sahip olunduğunda,KingSunfish Thundere binilebilir hale gelir."
+  },
   "SkillUnlock_Kirin": {
     "localized_name": "Univolt Eyeri",
     "description": "Güvenle Univolt sürebilmek için bir eyer."
+  },
+  "SkillUnlock_Kirin_Ice": {
+    "localized_name": "Univolt Cryst Eyeri",
+    "description": "Sahip olunduğunda, Kirin Ice üzerine binmeyi sağlar."
   },
   "SkillUnlock_Kitsunebi": {
     "localized_name": "Foxparks'ın Koşum Takımı",
@@ -6715,6 +8287,10 @@
     "localized_name": "Hartalis Eyeri",
     "description": "Sahip olunduğunda,Hartalis’e binilebilir ve saldırıları engelleyen bir kalkan oluşturulabilir."
   },
+  "SkillUnlock_LotusDragon": {
+    "localized_name": "Ophydia Eyeri",
+    "description": "Sahip olunduğunda, Ophydia üzerine binmeyi sağlar."
+  },
   "SkillUnlock_Manticore": {
     "localized_name": "Blazehowl Eyeri",
     "description": "Güvenle Blazehowl sürebilmek için bir eyer."
@@ -6726,6 +8302,10 @@
   "SkillUnlock_Monkey": {
     "localized_name": "Tanzee'nin Taarruz Tüfeği",
     "description": "Tanzee için özel olarak üretilmiş bir taarruz tüfeği. Partner Yeteneğini etkinleştirdiğinde Tanzee, nişancı moduna girerek yakındaki düşmanlara ateş açmaya başlar."
+  },
+  "SkillUnlock_Monkey_Fire": {
+    "localized_name": "Tanzee Ignis'in Taarruz Tüfeği",
+    "description": "Monkey FireÖzel bir küçük saldırı tüfeği. Partner yeteneği etkinleştirildiğinde,Monkey Fire, tüfek ateş moduna geçer ve çevredeki düşmanlara ateş eder."
   },
   "SkillUnlock_MoonQueen": {
     "localized_name": "Selyne Eyeri",
@@ -6758,6 +8338,10 @@
   "SkillUnlock_NightBlueHorse": {
     "localized_name": "Starryon Eyeri",
     "description": "Güvenle Starryon sürebilmek için bir eyer."
+  },
+  "SkillUnlock_NightBlueHorse_Neutral": {
+    "localized_name": "Starryon Primo Eyeri",
+    "description": "Sahip olunduğunda,NightBlueHorse Neutrale binilebilir hale gelir."
   },
   "SkillUnlock_Penguin": {
     "localized_name": "Pengullet Roketatarı",
@@ -6823,6 +8407,10 @@
     "localized_name": "Bastigor'un Çekici",
     "description": "Güvenle Bastigor sürebilmek için bir eyer."
   },
+  "SkillUnlock_SumoDog": {
+    "localized_name": "Bulldosu Eyeri",
+    "description": "Sahip olunduğunda, Bulldosu üzerine binmeyi sağlar."
+  },
   "SkillUnlock_Suzaku": {
     "localized_name": "Suzaku Eyeri",
     "description": "Güvenle Suzaku sürebilmek için bir eyer."
@@ -6831,13 +8419,29 @@
     "localized_name": "Suzaku Aqua Eyeri",
     "description": "Güvenle Suzaku Water sürebilmek için bir eyer."
   },
+  "SkillUnlock_ThiefBird": {
+    "localized_name": "Roujay Eyeri",
+    "description": "Sahip olunduğunda, Roujay üzerine binmeyi sağlar."
+  },
   "SkillUnlock_ThunderBird": {
     "localized_name": "Beakon Eyeri",
     "description": "Güvenle Beakon sürebilmek için bir eyer."
   },
+  "SkillUnlock_ThunderBird_Ice": {
+    "localized_name": "Beakon Cryst Eyeri",
+    "description": "Sahip olunduğunda,ThunderBird Icee binilebilir hale gelir."
+  },
   "SkillUnlock_ThunderDog": {
     "localized_name": "Rayhound Eyeri",
     "description": "Güvenle Rayhound sürebilmek için bir eyer."
+  },
+  "SkillUnlock_ThunderFluffyBird": {
+    "localized_name": "Dynamoff Eyeri",
+    "description": "Sahip olunduğunda,Dynamoffe binilebilir hale gelir."
+  },
+  "SkillUnlock_Thunderdog_Ice": {
+    "localized_name": "Rayhound Cryst Eyeri",
+    "description": "Sahip olunduğunda, Thunderdog Ice üzerine binmeyi sağlar."
   },
   "SkillUnlock_TropicalOstrich": {
     "localized_name": "Palumba’nın eyeri",
@@ -6859,6 +8463,14 @@
     "localized_name": "Reptyro Cryst Eyeri",
     "description": "Güvenle VolcanicMonster Ice sürebilmek için bir eyer."
   },
+  "SkillUnlock_VolcanoDragon": {
+    "localized_name": "Moldron Eyeri",
+    "description": "Sahip olunduğunda, Moldron üzerine binmeyi sağlar."
+  },
+  "SkillUnlock_VolcanoDragon_Ice": {
+    "localized_name": "Moldron Cryst Eyeri",
+    "description": "Sahip olunduğunda,VolcanoDragon Ice üzerine binmeyi sağlar."
+  },
   "SkillUnlock_WeaselDragon": {
     "localized_name": "Chillet Eyeri",
     "description": "Güvenle Chillet sürebilmek için bir eyer."
@@ -6874,6 +8486,10 @@
   "SkillUnlock_WhiteDeer": {
     "localized_name": "Celesdir Eyeri",
     "description": "Güvenle Celesdir sürebilmek için bir eyer."
+  },
+  "SkillUnlock_WhiteDeer_Dark": {
+    "localized_name": "Celesdir Noct Eyeri",
+    "description": "Sahip olunduğunda,WhiteDeer Darke binilebilir hale gelir."
   },
   "SkillUnlock_WhiteShieldDragon": {
     "localized_name": "Silvegis Eyeri",
@@ -6895,6 +8511,162 @@
     "localized_name": "Wumpo Botan Eyeri",
     "description": "Güvenle Yeti Grass sürebilmek için bir eyer."
   },
+  "SkyAssaultRifle": {
+    "localized_name": "Ağır Taarruz Tüfeği",
+    "description": "Solight külçesinden üretilmiş bir taarruz tüfeğidir. Çok yönlülüğünü korurken daha yüksek güçlü mühimmat kullanabilecek şekilde geliştirilmiştir."
+  },
+  "SkyAssaultRifleBullet": {
+    "localized_name": "Ağır Taarruz Tüfeği Mermisi",
+    "description": "Ağır Taarruz Tüfeği ile kullanılan mühimmat. Antik Medeniyet Tezgahı kullanılarak üretilebilir."
+  },
+  "SkyAssaultRifle_2": {
+    "localized_name": "Ağır Taarruz Tüfeği",
+    "description": "Solight külçesinden üretilmiş bir taarruz tüfeğidir. Çok yönlülüğünü korurken daha yüksek güçlü mühimmat kullanabilecek şekilde geliştirilmiştir."
+  },
+  "SkyAssaultRifle_3": {
+    "localized_name": "Ağır Taarruz Tüfeği",
+    "description": "Solight külçesinden üretilmiş bir taarruz tüfeğidir. Çok yönlülüğünü korurken daha yüksek güçlü mühimmat kullanabilecek şekilde geliştirilmiştir."
+  },
+  "SkyAssaultRifle_4": {
+    "localized_name": "Ağır Taarruz Tüfeği",
+    "description": "Solight külçesinden üretilmiş bir taarruz tüfeğidir. Çok yönlülüğünü korurken daha yüksek güçlü mühimmat kullanabilecek şekilde geliştirilmiştir."
+  },
+  "SkyAssaultRifle_5": {
+    "localized_name": "Ağır Taarruz Tüfeği",
+    "description": "Solight külçesinden üretilmiş bir taarruz tüfeğidir. Çok yönlülüğünü korurken daha yüksek güçlü mühimmat kullanabilecek şekilde geliştirilmiştir."
+  },
+  "SkyBeamSword": {
+    "localized_name": "Lazer Kılıç",
+    "description": "Solight külçesinden üretilmiş bir yakın dövüş silahıdırEnerji Kılıcı. Yüksek güçlü enerji bıçağı sayesinde hedefleri anında keser."
+  },
+  "SkyBeamSword_2": {
+    "localized_name": "Lazer Kılıç",
+    "description": "Solight külçesinden üretilmiş bir yakın dövüş silahıdırEnerji Kılıcı. Yüksek güçlü enerji bıçağı sayesinde hedefleri anında keser."
+  },
+  "SkyBeamSword_3": {
+    "localized_name": "Lazer Kılıç",
+    "description": "Solight külçesinden üretilmiş bir yakın dövüş silahıdırEnerji Kılıcı. Yüksek güçlü enerji bıçağı sayesinde hedefleri anında keser."
+  },
+  "SkyBeamSword_4": {
+    "localized_name": "Lazer Kılıç",
+    "description": "Solight külçesinden üretilmiş bir yakın dövüş silahıdırEnerji Kılıcı. Yüksek güçlü enerji bıçağı sayesinde hedefleri anında keser."
+  },
+  "SkyBeamSword_5": {
+    "localized_name": "Lazer Kılıç",
+    "description": "Solight külçesinden üretilmiş bir yakın dövüş silahıdırEnerji Kılıcı. Yüksek güçlü enerji bıçağı sayesinde hedefleri anında keser."
+  },
+  "SkyBow": {
+    "localized_name": "Mekanik Yay",
+    "description": "Solight külçesinden yapılmış bir yaydır. İlk hız ve delme gücü büyük ölçüde artırılmış olup, yüksek hassasiyetli uzun menzilli atışlar yapılmasını sağlar."
+  },
+  "SkyBowArrow": {
+    "localized_name": "Mekanik Yay Oku",
+    "description": "Mekanik Yay ile fırlatmak için kullanılan güçlendirilmiş bir ok. Antik Medeniyet Tezgahı kullanılarak üretilebilir."
+  },
+  "SkyBow_2": {
+    "localized_name": "Mekanik Yay",
+    "description": "Solight külçesinden yapılmış bir yaydır. İlk hız ve delme gücü büyük ölçüde artırılmış olup, yüksek hassasiyetli uzun menzilli atışlar yapılmasını sağlar."
+  },
+  "SkyBow_3": {
+    "localized_name": "Mekanik Yay",
+    "description": "Solight külçesinden yapılmış bir yaydır. İlk hız ve delme gücü büyük ölçüde artırılmış olup, yüksek hassasiyetli uzun menzilli atışlar yapılmasını sağlar."
+  },
+  "SkyBow_4": {
+    "localized_name": "Mekanik Yay",
+    "description": "Solight külçesinden yapılmış bir yaydır. İlk hız ve delme gücü büyük ölçüde artırılmış olup, yüksek hassasiyetli uzun menzilli atışlar yapılmasını sağlar."
+  },
+  "SkyBow_5": {
+    "localized_name": "Mekanik Yay",
+    "description": "Solight külçesinden yapılmış bir yaydır. İlk hız ve delme gücü büyük ölçüde artırılmış olup, yüksek hassasiyetli uzun menzilli atışlar yapılmasını sağlar."
+  },
+  "SkyGrenadeLauncher": {
+    "localized_name": "Taktiksel Bomba Atar",
+    "description": "Solight külçesinden üretilmiş bir bombaatardır. Mermi balistiği iyileştirilmiş olup, uzun mesafeden hassas bombardıman yapılmasını sağlar."
+  },
+  "SkyGrenadeLauncherBullet": {
+    "localized_name": "Taktik El Bombası Atar Mermisi",
+    "description": "Taktiksel Bomba Atar ile kullanılan mühimmat. Antik Medeniyet Tezgahı kullanılarak üretilebilir."
+  },
+  "SkyGrenadeLauncher_2": {
+    "localized_name": "Taktiksel Bomba Atar",
+    "description": "Solight külçesinden üretilmiş bir bombaatardır. Mermi balistiği iyileştirilmiş olup, uzun mesafeden hassas bombardıman yapılmasını sağlar."
+  },
+  "SkyGrenadeLauncher_3": {
+    "localized_name": "Taktiksel Bomba Atar",
+    "description": "Solight külçesinden üretilmiş bir bombaatardır. Mermi balistiği iyileştirilmiş olup, uzun mesafeden hassas bombardıman yapılmasını sağlar."
+  },
+  "SkyGrenadeLauncher_4": {
+    "localized_name": "Taktiksel Bomba Atar",
+    "description": "Solight külçesinden üretilmiş bir bombaatardır. Mermi balistiği iyileştirilmiş olup, uzun mesafeden hassas bombardıman yapılmasını sağlar."
+  },
+  "SkyGrenadeLauncher_5": {
+    "localized_name": "Taktiksel Bomba Atar",
+    "description": "Solight külçesinden üretilmiş bir bombaatardır. Mermi balistiği iyileştirilmiş olup, uzun mesafeden hassas bombardıman yapılmasını sağlar."
+  },
+  "SkyHeavyBullet": {
+    "localized_name": "en text",
+    "description": "-"
+  },
+  "SkyIslandOre": {
+    "localized_name": "Güneş Taşı",
+    "description": "Sadece Gökgüneş Diyarı'nda bulunan nadir bir maden. Olağanüstü yoğunluğa sahip ana kayasında, gizemli desenler ve parıltılar taşır."
+  },
+  "SkyLightBullet": {
+    "localized_name": "en text",
+    "description": "-"
+  },
+  "SkyShotgun": {
+    "localized_name": "Prototip Pompalı Tüfek",
+    "description": "Solight külçesinden üretilmiş bir pompalı tüfektir. Yakın mesafede ezici bir ateş gücü sergiler ve özel şarjörü sayesinde yüksek süreklilik kapasitesine sahiptir."
+  },
+  "SkyShotgunBullet": {
+    "localized_name": "Prototip Pompalı Tüfek Mermisi",
+    "description": "Prototip Pompalı Tüfek ile kullanılan mühimmat. Antik Medeniyet Tezgahı kullanılarak üretilebilir."
+  },
+  "SkyShotgun_2": {
+    "localized_name": "Prototip Pompalı Tüfek",
+    "description": "Solight külçesinden üretilmiş bir pompalı tüfektir. Yakın mesafede ezici bir ateş gücü sergiler ve özel şarjörü sayesinde yüksek süreklilik kapasitesine sahiptir."
+  },
+  "SkyShotgun_3": {
+    "localized_name": "Prototip Pompalı Tüfek",
+    "description": "Solight külçesinden üretilmiş bir pompalı tüfektir. Yakın mesafede ezici bir ateş gücü sergiler ve özel şarjörü sayesinde yüksek süreklilik kapasitesine sahiptir."
+  },
+  "SkyShotgun_4": {
+    "localized_name": "Prototip Pompalı Tüfek",
+    "description": "Solight külçesinden üretilmiş bir pompalı tüfektir. Yakın mesafede ezici bir ateş gücü sergiler ve özel şarjörü sayesinde yüksek süreklilik kapasitesine sahiptir."
+  },
+  "SkyShotgun_5": {
+    "localized_name": "Prototip Pompalı Tüfek",
+    "description": "Solight külçesinden üretilmiş bir pompalı tüfektir. Yakın mesafede ezici bir ateş gücü sergiler ve özel şarjörü sayesinde yüksek süreklilik kapasitesine sahiptir."
+  },
+  "SkySubmachineGun": {
+    "localized_name": "Muharebe Hafif Makineli Tüfek",
+    "description": "Solight külçesinden üretilmiş bir hafif makineli tüfektir. Geliştirilmiş şarjör ve mühimmat sayesinde baskı gücü artırılmıştır."
+  },
+  "SkySubmachineGunBullet": {
+    "localized_name": "Hafif Makineli Tüfek Mermisi",
+    "description": "Muharebe Hafif Makineli Tüfek ile kullanılan mühimmat. Antik Medeniyet Tezgahı kullanılarak üretilebilir."
+  },
+  "SkySubmachineGun_2": {
+    "localized_name": "Muharebe Hafif Makineli Tüfek",
+    "description": "Solight külçesinden üretilmiş bir hafif makineli tüfektir. Geliştirilmiş şarjör ve mühimmat sayesinde baskı gücü artırılmıştır."
+  },
+  "SkySubmachineGun_3": {
+    "localized_name": "Muharebe Hafif Makineli Tüfek",
+    "description": "Solight külçesinden üretilmiş bir hafif makineli tüfektir. Geliştirilmiş şarjör ve mühimmat sayesinde baskı gücü artırılmıştır."
+  },
+  "SkySubmachineGun_4": {
+    "localized_name": "Muharebe Hafif Makineli Tüfek",
+    "description": "Solight külçesinden üretilmiş bir hafif makineli tüfektir. Geliştirilmiş şarjör ve mühimmat sayesinde baskı gücü artırılmıştır."
+  },
+  "SkySubmachineGun_5": {
+    "localized_name": "Muharebe Hafif Makineli Tüfek",
+    "description": "Solight külçesinden üretilmiş bir hafif makineli tüfektir. Geliştirilmiş şarjör ve mühimmat sayesinde baskı gücü artırılmıştır."
+  },
+  "SkyislandIngot": {
+    "localized_name": "Solrayt Külçesi",
+    "description": "Gökgüneş Diyarı'nda saklı cevherlerden rafine edilen, kadim uygarlığa ait bir metal malzeme. Üst seviye ekipman ve yapıların temelini oluşturan nadir bir işlenmiş malzemedir. Antik Medeniyet Ocağı kullanılarak işlenebilir."
+  },
   "Spear": {
     "localized_name": "Taş Mızrak",
     "description": "Yakın menzilli çatışmalar için kullanışlıdır. Uzunluğu sayesinde saldırırken düşmanından uzakta durabilirsin."
@@ -6910,6 +8682,14 @@
   "Spear_ForestBoss": {
     "localized_name": "Lily'nin Mızrağı",
     "description": "Lily'nin çok sevdiği mızrak. Pal'larını ihmal edenleri cezalandırır."
+  },
+  "Spear_ForestBoss2": {
+    "localized_name": "Lily'nin Mızrağı",
+    "description": "Lily’nin sevdiği mızrağın güçlendirilmiş hâli. Pal’ları hiçe sayanların içinden delik açar."
+  },
+  "Spear_ForestBoss2_5": {
+    "localized_name": "Lily'nin Mızrağı",
+    "description": "Lily’nin sevdiği mızrağın güçlendirilmiş hâli. Pal’ları hiçe sayanların içinden delik açar."
   },
   "Spear_ForestBoss_5": {
     "localized_name": "Lily'nin Mızrağı",
@@ -6961,7 +8741,7 @@
   },
   "StainlessSteel": {
     "localized_name": "Heksolit",
-    "description": "Kromit,CevherveHeksolit Kuvarsıkarışımı bir alaşım. Gelişmiş ekipman ve yapıların malzemesi olarak kullanılır."
+    "description": "Kromit ve Heksolit Kuvarsı alaşımı. Gelişmiş ekipman ve yapıların malzemesi olarak kullanılır. Devasa Ocak kullanılarak işlenebilir."
   },
   "StatusPointResetSan": {
     "localized_name": "Hafıza Silme İlacı",
@@ -7049,7 +8829,7 @@
   },
   "StealIngot": {
     "localized_name": "Pal Metali Külçe",
-    "description": "Pal Metali kullanarak silah ve zırh yapmak için gerekli malzeme. Metal ve Paldiyumdan bir alaşım elde edilerek daha güçlü hâle getirilmiştir."
+    "description": "Pal Metali kullanarak silah ve zırh yapmak için gerekli malzeme. Palziumun alaşıma eklenmesiyle daha güçlü hâle getirilmiştir."
   },
   "Stew": {
     "localized_name": "-",
@@ -7099,6 +8879,10 @@
     "localized_name": "Pamuk Şeker",
     "description": "Woolipop üzerinden toplanan pamuk şeker. Şekerli içeriği tüm pofudukluğuyla ağzında erir."
   },
+  "Sweet_Caramel": {
+    "localized_name": "Karamelli Pamuk Şeker",
+    "description": "SweetsSheep Groundüzerinden toplanan karamelli pamuk şeker. Ağızda yumuşacık eriyen bir tat."
+  },
   "Sword": {
     "localized_name": "Kılıç",
     "description": "Yakın menzilli dövüşler için Kılıç. Yüzü son derece keskindir! Bir kalemden keskin olduğu açık. Üretmek için WeaponFactory Dirty 01 gerekir."
@@ -7130,6 +8914,10 @@
   "TechnologyBook_G3": {
     "localized_name": "Gelecek Teknik El Kitabı",
     "description": "Günümüzde anlaşılabilenin ötesindeki teknolojilerin sırlarını barındıran bir kitap. Kullanarak çok miktarda Teknoloji Puanı elde edebilirsin."
+  },
+  "Thermal_Core": {
+    "localized_name": "Ultra Yüksek Isı Çekirdeği",
+    "description": "Muazzam miktarda ısı enerjisi barındıran yüksek sıcaklıklı bir reaksiyon çekirdeği. Gelişmiş cihazların güç ünitelerinde kullanılır. Factory Hard 03 kullanılarak üretilebilir."
   },
   "Tomato": {
     "localized_name": "Domates",
@@ -7175,6 +8963,14 @@
     "localized_name": "Hazine Haritası",
     "description": "Hazinelerin yerinin işaretlendiği eski bir harita. Kullanıldığında, harita üzerinde işaret koymak mümkündür."
   },
+  "UniqueMaterial_FlowerPrince": {
+    "localized_name": "Çürüme Filtre Zarı",
+    "description": "Dandilord, kendinin yaydığı korozif sisten korunmak için geliştirilmiş bir organ. Korozif sisi filtreleyerek zehirsiz hâle getirebilir."
+  },
+  "UniqueMaterial_Mothman": {
+    "localized_name": "Patlama Önleyici Lif",
+    "description": "Silvancein vücudunun yüzeyinden elde edilen lif. Patlamaların şok etkisini azaltabilir."
+  },
   "Unko_L": {
     "localized_name": "Kocaman Pislik",
     "description": "Ürkütücü bir görüntüsü vardır. Kokusundan mı, şeklinden mi bilinmez, ağır sıklet birilerine ait olduğu açık."
@@ -7185,11 +8981,19 @@
   },
   "UnlockEquipmentSlot_Accessory_01": {
     "localized_name": "Gizemli Aksesuar Kutusu",
-    "description": "İçindekileri sahibinin bedeniyle senkronize eden gizemli bir kutu. Aksesuar ekipman yuvaları 1 artar."
+    "description": "İç kısmı sahibinin bedeniyle senkronize olan gizemli bir kutu. Yanınızda bulundurduğunuzda aksesuar ekipman yuvası sayısını 1 arttırır. 1 tane bulundurmanız yeterlidir."
   },
   "UnlockEquipmentSlot_Accessory_02": {
     "localized_name": "Gizemli Aksesuarlar Kutusu",
-    "description": "İçindekileri sahibinin bedeniyle senkronize eden gizemli bir kutu. Aksesuar ekipman yuvaları 1 daha artar."
+    "description": "İç kısmı sahibinin bedeniyle senkronize olan gizemli bir kutu. Yanınızda bulundurduğunuzda aksesuar ekipman yuvası sayısını 1 daha artırır. 1 tane bulundurmanız yeterlidir."
+  },
+  "UnlockEquipmentSlot_Weapon_01": {
+    "localized_name": "Ek Silah Yuvası",
+    "description": "Ek bir silah kuşanmanıza olanak sağlayan bir kılıf. Yanınızda bulundurduğunuzda silah ekipman yuvası sayısı 1 artar. 1 tane bulundurmanız yeterlidir."
+  },
+  "UnlockEquipmentSlot_Weapon_02": {
+    "localized_name": "Ek Silah Yuvası 2",
+    "description": "Ek bir silah daha kuşanmanıza olanak sağlayan bir kılıf. Yanınızda bulundurduğunuzda silah ekipman yuvası sayısı 1 daha artar. 1 tane bulundurmanız yeterlidir."
   },
   "Unlock_Picking_Tier1": {
     "localized_name": "Kilit Açma Aracı v1",
@@ -7206,6 +9010,10 @@
   "Venom": {
     "localized_name": "Zehir Bezi",
     "description": "Zehirli Pal'lardan elde edilebilen malzeme. Arrow Poison ve diğer eşyaların yapımında kullanılabilir."
+  },
+  "WaterBuildKit": {
+    "localized_name": "Su üstü yapı kiti",
+    "description": "Su üstünde yapı inşa etmek için kullanılan bir araç. Temelin suyun üzerine yerleştirilebilmesini sağlar."
   },
   "WeakerBow": {
     "localized_name": "Eski Yay",
@@ -7227,6 +9035,26 @@
     "localized_name": "Eski Yay",
     "description": "İlkel uzun menzilli silah. Aceleyle yapıldığı için fazla güçlü değildir."
   },
+  "WhaleWhistle": {
+    "localized_name": "Yankı Flütü",
+    "description": "Soluklaşmış bir taslağı çözümleyerek yeniden yapılmış kemik düdük. Uzaklara kadar yankılanan berrak sesi, muhtemelen birini çağıracaktır. Ahdi koruyan, engin denizlerin efendisini."
+  },
+  "WhaleWhistleFragment_01": {
+    "localized_name": "Dalga Sesli Yankı Kemiği",
+    "description": "Gizemli bir güç hissettiren kemik parçası. Kulak verildiğinde, hafif bir ses duyulur. yumuşakça tekrar eden dalga sesi."
+  },
+  "WhaleWhistleFragment_02": {
+    "localized_name": "Sessiz Yankı Kemiği",
+    "description": "Gizemli bir güç hissettiren kemik parçası. Kulak verildiğinde, hafif bir ses duyulur. Bir zamanlar uğranmış olan sessizliğin sesi."
+  },
+  "WhaleWhistleFragment_03": {
+    "localized_name": "Su Kabarcığı Yankı Kemiği",
+    "description": "Gizemli bir güç hissettiren kemik parçası. Kulak verildiğinde, hafif bir ses duyulur. Kırılgan bir şekilde patlayan su kabarcıklarının sesi."
+  },
+  "WhaleWhistleFragment_04": {
+    "localized_name": "Deniz Esintisi Yankı Kemiği",
+    "description": "Gizemli bir güç hissettiren kemik parçası. Kulak verildiğinde, hafif bir ses duyulur. Sakin bir şekilde esen deniz rüzgârının sesi."
+  },
   "Wheat": {
     "localized_name": "Buğday",
     "description": "Pek çok yemeğin asıl içeriği olan bir gıda malzemesi. Buğday, dünyanın pek çok yerinde yaygın görülen bir ekindir."
@@ -7235,13 +9063,57 @@
     "localized_name": "Buğday Tohumları",
     "description": "Büyüyüp Buğday veren tohumlar. Ekim yapmaya başlamak için olmazsa olmazdır. Bir tüccardan satın alınabilir."
   },
+  "WidePenetrateShotgun": {
+    "localized_name": "Işın Saçıcı",
+    "description": "Yakın dövüşe özel bir ışın silahıdır. Sıkıştırılmış enerjiyi yayılma ışını olarak ateşler."
+  },
+  "WidePenetrateShotgunBullet": {
+    "localized_name": "Işın Saçıcı Mermisi",
+    "description": "Işın Saçıcı ile kullanılan mühimmat. Antik Medeniyet Tezgahı kullanılarak üretilebilir."
+  },
+  "WidePenetrateShotgun_2": {
+    "localized_name": "Işın Saçıcı",
+    "description": "Yakın dövüşe özel bir ışın silahıdır. Sıkıştırılmış enerjiyi yayılma ışını olarak ateşler."
+  },
+  "WidePenetrateShotgun_3": {
+    "localized_name": "Işın Saçıcı",
+    "description": "Yakın dövüşe özel bir ışın silahıdır. Sıkıştırılmış enerjiyi yayılma ışını olarak ateşler."
+  },
+  "WidePenetrateShotgun_4": {
+    "localized_name": "Işın Saçıcı",
+    "description": "Yakın dövüşe özel bir ışın silahıdır. Sıkıştırılmış enerjiyi yayılma ışını olarak ateşler."
+  },
+  "WidePenetrateShotgun_5": {
+    "localized_name": "Işın Saçıcı",
+    "description": "Yakın dövüşe özel bir ışın silahıdır. Sıkıştırılmış enerjiyi yayılma ışını olarak ateşler."
+  },
   "Wine": {
     "localized_name": "-",
     "description": "-"
   },
+  "WingGlider": {
+    "localized_name": "Kanat Paketi",
+    "description": "Sırta takılıp uçmayı sağlayan kanat şeklinde bir cihaz. WingGlider Fueltüketerek itiş gücü sağlar."
+  },
+  "WingGlider_Fuel": {
+    "localized_name": "Wing Cell",
+    "description": "Kanat Paketiuçuşu için kullanılan enerji."
+  },
   "Wood": {
     "localized_name": "Odun",
     "description": "Yapılar ve eşyalar için gerekli malzeme. Ağaç keserek elde edilir."
+  },
+  "Wood_Ancient": {
+    "localized_name": "Kadim Ağaç Kabuğu",
+    "description": "Aşırı çevre koşullarında uzun yıllar yaşamış bir ağacın kabuğu. İnce bir tabakası bile sonsuz bir yaşam gücü hissi verir."
+  },
+  "Wood_Fine": {
+    "localized_name": "Kalın kereste",
+    "description": "Özenle seçilmiş yüksek kaliteli kereste. Çöl, volkanik bölge ve karlı dağlar gibi zorlu ortamlarda yetişen sağlam ağaçlardan elde edilir."
+  },
+  "Wood_WorldTree": {
+    "localized_name": "Gizemli Odun",
+    "description": "Dünya Ağacı’nın gücünü taşıyan nadir bir odun. Usta bir zanaatkâr olmadıkça işlenmesi bile zordur."
   },
   "Wool": {
     "localized_name": "Yün",
@@ -7275,6 +9147,10 @@
     "localized_name": "Uygulamalı Madencilik Tekniği I",
     "description": "Madencilik ve sırları hakkında yazılmış nadir bir kitap. Bir Pal'a okutarak Madencilik yatkınlığını kalıcı olarak 1 artır."
   },
+  "WorkSuitability_AddTicket_MonsterFarm": {
+    "localized_name": "Uygulamalı Çiftlik Teknolojisi I",
+    "description": "ÇiftçilikBir ustalığın özüne dair yazılmış, son derece değerli bir kitap. Bir Pal’a okutulduğunda uygunluğunu kalıcı olarakÇiftçilik+1 artırır."
+  },
   "WorkSuitability_AddTicket_ProductMedicine": {
     "localized_name": "Uygulamalı İlaç Üretim Tekniği I",
     "description": "İlaç Üretimi ve sırları hakkında yazılmış nadir bir kitap. Bir Pal'a okutarak İlaç Üretimi yatkınlığını kalıcı olarak 1 artır."
@@ -7290,6 +9166,38 @@
   "WorkSuitability_AddTicket_Watering": {
     "localized_name": "Uygulamalı Sulama Tekniği I",
     "description": "Sulama ve sırları hakkında yazılmış nadir bir kitap. Bir Pal'a okutarak Sulama yatkınlığını kalıcı olarak 1 artır."
+  },
+  "WorldTreeHolyWater": {
+    "localized_name": "Dünya Ağacı'nın Kutsal Suyu",
+    "description": "Dünya Ağacı'nın enerjisiyle dolu kutsal su. Her şeyi arındırır ve gizli güçleri açığa çıkarır. İçildiğinde, belirli bir süre boyunca Dünya Ağacı'nın kütüklerine veya kayalarına yaklaşıldığında yok olmayı engeller."
+  },
+  "WorldTreeIngot": {
+    "localized_name": "Pal kalsit külçe",
+    "description": "Güneş TaşıilePal-kalsit’nin eritilerek birleştirilmesiyle elde edilen en yüksek kalite alaşım. Kadim medeniyetin teknolojisi ile Dünya Ağacı’nın gücünün kristalleşmesiyle oluşmuş, son derece nadir bir malzemedir. En üst düzey ekipmanlar ve yapılar oluşturmak için vazgeçilmezdir."
+  },
+  "WorldTreeOre": {
+    "localized_name": "Pal-kalsit",
+    "description": "Dünya Ağacı’ndan sızan enerjinin, sayısız çağ boyunca kristalleşmesiyle oluşmuş bir madde. Korumaya sahip olmayan biri dokunursa anında paslanıp çürüyerek yok olur. Bu hassasiyeti kontrol edebilenler, yalnızca kadim teknolojinin zirvesine ulaşabilir."
+  },
+  "WorldTreeRelic_01": {
+    "localized_name": "Kadim Uygarlığın Çürümüş Kalıntısı",
+    "description": "Kadim medeniyete ait yapı ve aletlerin parçaları. Çürüyüp yok olmuş durumdadır ve içinde hiç enerji kalmamıştır."
+  },
+  "WorldTreeRelic_02": {
+    "localized_name": "Kadim Uygarlığın Çürümüş Kalıntısı",
+    "description": "Kadim medeniyete ait yapı ve aletlerin parçaları. Durumu fena değil, ancak içinde neredeyse hiç enerji kalmamış."
+  },
+  "WorldTreeRelic_03": {
+    "localized_name": "Kadim Uygarlığın Çürümüş Kalıntısı",
+    "description": "Durumu fena değil, ancak içinde neredeyse hiç enerji kalmamış. İyi durumda ve içindeki enerji akışını hissetmek mümkün."
+  },
+  "WorldTreeRelic_04": {
+    "localized_name": "Kadim Uygarlığın Çürümüş Kalıntısı",
+    "description": "İyi durumda ve içindeki enerji akışını hissetmek mümkün. Çok iyi durumda ve içinden ışık sızıyor."
+  },
+  "WorldTreeRelic_05": {
+    "localized_name": "Kadim Uygarlığın Çürümüş Kalıntısı",
+    "description": "İyi durumda ve içindeki enerji akışını hissetmek mümkün. Enerjiyle dolup taşar ve ışık saçar."
   },
   "Yakisoba": {
     "localized_name": "Broncherry'li Kızarmış Erişte",

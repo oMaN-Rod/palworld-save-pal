@@ -1,15 +1,19 @@
 {
+  "AIcore": {
+    "localized_name": "Núcleo de IA",
+    "description": "Como possibilita tomar decisões complexas e automatizar funções de controle, é um componente central e indispensável para dispositivos de ponta. Você pode fazê-lo na Factory Hard 04."
+  },
   "Accessory_AT_1": {
     "localized_name": "Pingente de Ataque",
-    "description": "Acessório que aumenta o ataque apenas um pouco."
+    "description": "Acessório que aumenta o ataque."
   },
   "Accessory_AT_2": {
-    "localized_name": "Pingente de Ataque +1",
+    "localized_name": "Pingente de Ataque",
     "description": "Acessório que aumenta o ataque."
   },
   "Accessory_AT_3": {
-    "localized_name": "Pingente de Ataque +2",
-    "description": "Acessório que aumenta bastante o ataque."
+    "localized_name": "Pingente de Ataque",
+    "description": "Acessório que aumenta o ataque."
   },
   "Accessory_AirDash1": {
     "localized_name": "Botas de Corrida Aérea",
@@ -29,123 +33,159 @@
   },
   "Accessory_AquaResist_1": {
     "localized_name": "Anel de Selo de Água",
-    "description": "Acessório que reduz ligeiramente o dano por água."
+    "description": "Acessório que reduz o dano por água."
   },
   "Accessory_AquaResist_2": {
-    "localized_name": "Anel de Selo de Água +1",
+    "localized_name": "Anel de Selo de Água",
     "description": "Acessório que reduz o dano por água."
   },
   "Accessory_AquaResist_3": {
-    "localized_name": "Anel de Selo de Água +2",
-    "description": "Acessório que reduz bastante o dano por água."
+    "localized_name": "Anel de Selo de Água",
+    "description": "Acessório que reduz o dano por água."
+  },
+  "Accessory_Avoid_1": {
+    "localized_name": "Anel da Ilusão",
+    "description": "Acessório que aumenta o tempo de invencibilidade ao rolar ou se esquivar."
+  },
+  "Accessory_ColdIce_1": {
+    "localized_name": "Amuleto de Wumpo",
+    "description": "Acessório que oferece bastante resistência ao frio. Também reduz bastante o dano por gelo."
   },
   "Accessory_CoolResist_1": {
     "localized_name": "Roupa de Baixo Quente",
-    "description": "Acessório que oferece resistência ao frio apenas um pouco."
+    "description": "Acessório que oferece resistência ao frio."
   },
   "Accessory_CoolResist_2": {
-    "localized_name": "Roupa de Baixo Quente +1",
+    "localized_name": "Roupa de Baixo Quente",
     "description": "Acessório que oferece resistência ao frio."
   },
   "Accessory_CoolResist_3": {
-    "localized_name": "Roupa de Baixo Quente +2",
-    "description": "Acessório que oferece bastante resistência ao frio."
+    "localized_name": "Roupa de Baixo Quente",
+    "description": "Acessório que oferece resistência ao frio."
+  },
+  "Accessory_DFHP_1": {
+    "localized_name": "Cinto de Warsect Terra",
+    "description": "Acessório que aumenta bastante a defesa e o PV."
   },
   "Accessory_DarkResist_1": {
     "localized_name": "Anel de Selo de Escuridão",
-    "description": "Acessório que reduz ligeiramente o dano por escuridão."
+    "description": "Acessório que reduz o dano por escuridão."
   },
   "Accessory_DarkResist_2": {
-    "localized_name": "Anel de Selo de Escuridão +1",
+    "localized_name": "Anel de Selo de Escuridão",
     "description": "Acessório que reduz o dano por escuridão."
   },
   "Accessory_DarkResist_3": {
-    "localized_name": "Anel de Selo de Escuridão +2",
-    "description": "Acessório que reduz bastante o dano por escuridão."
+    "localized_name": "Anel de Selo de Escuridão",
+    "description": "Acessório que reduz o dano por escuridão."
   },
   "Accessory_DragonResist_1": {
     "localized_name": "Anel de Selo de Dragão",
-    "description": "Acessório que reduz ligeiramente o dano por dragões."
+    "description": "Acessório que reduz o dano por dragões."
   },
   "Accessory_DragonResist_2": {
-    "localized_name": "Anel de Selo de Dragão +1",
+    "localized_name": "Anel de Selo de Dragão",
     "description": "Acessório que reduz o dano por dragões."
   },
   "Accessory_DragonResist_3": {
-    "localized_name": "Anel de Selo de Dragão +2",
-    "description": "Acessório que reduz bastante o dano por dragões."
+    "localized_name": "Anel de Selo de Dragão",
+    "description": "Acessório que reduz o dano por dragões."
   },
   "Accessory_EarthResist_1": {
     "localized_name": "Anel de Selo de Terra",
-    "description": "Acessório que reduz ligeiramente o dano por terra."
+    "description": "Acessório que reduz o dano por terra."
   },
   "Accessory_EarthResist_2": {
-    "localized_name": "Anel de Selo de Terra +1",
+    "localized_name": "Anel de Selo de Terra",
     "description": "Acessório que reduz o dano por terra."
   },
   "Accessory_EarthResist_3": {
-    "localized_name": "Anel de Selo de Terra +2",
-    "description": "Acessório que reduz bastante o dano por terra."
+    "localized_name": "Anel de Selo de Terra",
+    "description": "Acessório que reduz o dano por terra."
+  },
+  "Accessory_ExplosionResist": {
+    "localized_name": "Roupa de Baixo Antiexplosão",
+    "description": "Roupa de baixo feita com fibras especiais que são leves, porém resistentes. Anula o dano sofrido por explosões."
   },
   "Accessory_FireResist_1": {
-    "localized_name": "Roupa de Baixo Refrescante",
-    "description": "Acessório que reduz ligeiramente o dano por fogo."
+    "localized_name": "Anel de Selo de Fogo",
+    "description": "Acessório que reduz o dano por fogo."
   },
   "Accessory_FireResist_2": {
-    "localized_name": "Roupa de Baixo Refrescante +1",
+    "localized_name": "Anel de Selo de Fogo",
     "description": "Acessório que reduz o dano por fogo."
   },
   "Accessory_FireResist_3": {
-    "localized_name": "Roupa de Baixo Refrescante +2",
-    "description": "Acessório que reduz bastante o dano por fogo."
+    "localized_name": "Anel de Selo de Fogo",
+    "description": "Acessório que reduz o dano por fogo."
+  },
+  "Accessory_HCHP_1": {
+    "localized_name": "Amuleto da Equipe de Reconhecimento",
+    "description": "Acessório que oferece bastante resistência ao frio e ao calor. Também aumenta bastante seu PV."
+  },
+  "Accessory_HCMW_1": {
+    "localized_name": "Amuleto de Comerciante Itinerante",
+    "description": "Acessório que oferece bastante resistência ao frio e ao calor. Também aumenta bastante sua capacidade de carga."
   },
   "Accessory_HP_1": {
     "localized_name": "Pingente da Vida",
-    "description": "Acessório que aumenta o PV apenas um pouco."
+    "description": "Acessório que aumenta o PV."
   },
   "Accessory_HP_2": {
-    "localized_name": "Pingente da Vida +1",
+    "localized_name": "Pingente da Vida",
     "description": "Acessório que aumenta o PV."
   },
   "Accessory_HP_3": {
-    "localized_name": "Pingente da Vida +2",
-    "description": "Acessório que aumenta bastante o PV."
+    "localized_name": "Pingente da Vida",
+    "description": "Acessório que aumenta o PV."
   },
   "Accessory_HeatColdResist_1": {
     "localized_name": "Roupa de Baixo Quente e Refrescante",
-    "description": "Acessório que oferece resistência ao frio e ao calor apenas um pouco."
+    "description": "Acessório que oferece resistência ao frio e ao calor."
   },
   "Accessory_HeatColdResist_2": {
-    "localized_name": "Roupa de Baixo Quente e Refrescante +1",
+    "localized_name": "Roupa de Baixo Quente e Refrescante",
     "description": "Acessório que oferece resistência ao frio e ao calor."
   },
   "Accessory_HeatColdResist_3": {
-    "localized_name": "Roupa de Baixo Quente e Refrescante +2",
-    "description": "Acessório que oferece bastante resistência ao frio e ao calor."
+    "localized_name": "Roupa de Baixo Quente e Refrescante",
+    "description": "Acessório que oferece resistência ao frio e ao calor."
+  },
+  "Accessory_HeatFire_1": {
+    "localized_name": "Amuleto de Reptyro",
+    "description": "Acessório que oferece bastante resistência ao calor. Também reduz bastante o dano por fogo."
   },
   "Accessory_HeatResist_1": {
-    "localized_name": "Pingente Anticalor",
-    "description": "Acessório que oferece resistência ao calor apenas um pouco."
+    "localized_name": "Roupa de Baixo Refrescante",
+    "description": "Acessório que oferece resistência ao calor."
   },
   "Accessory_HeatResist_2": {
-    "localized_name": "Colar Refrescante",
+    "localized_name": "Roupa de Baixo Refrescante",
     "description": "Acessório que oferece resistência ao calor."
   },
   "Accessory_HeatResist_3": {
-    "localized_name": "Anel Super-refrescante",
-    "description": "Acessório que oferece bastante resistência ao calor."
+    "localized_name": "Roupa de Baixo Refrescante",
+    "description": "Acessório que oferece resistência ao calor."
   },
   "Accessory_IceResist_1": {
     "localized_name": "Anel de Selo de Gelo",
-    "description": "Acessório que reduz ligeiramente o dano por gelo."
+    "description": "Acessório que reduz o dano por gelo."
   },
   "Accessory_IceResist_2": {
-    "localized_name": "Anel de Selo de Gelo +1",
+    "localized_name": "Anel de Selo de Gelo",
     "description": "Acessório que reduz o dano por gelo."
   },
   "Accessory_IceResist_3": {
-    "localized_name": "Anel de Selo de Gelo +2",
-    "description": "Acessório que reduz bastante o dano por gelo."
+    "localized_name": "Anel de Selo de Gelo",
+    "description": "Acessório que reduz o dano por gelo."
+  },
+  "Accessory_JumpAir_1": {
+    "localized_name": "Air Walker v1.0",
+    "description": "Acessório que lhe confere a capacidade de saltar em pleno ar quando equipado. Também possibilita correr uma vez no ar."
+  },
+  "Accessory_JumpAir_2": {
+    "localized_name": "Air Walker v2.0",
+    "description": "Acessório que lhe confere a capacidade de saltar em pleno ar quando equipado. Também possibilita correr duas vezes no ar."
   },
   "Accessory_JumpCount_Increase1": {
     "localized_name": "Botas de Pulo Duplo",
@@ -165,27 +205,31 @@
   },
   "Accessory_LeafResist_1": {
     "localized_name": "Anel de Selo de Grama",
-    "description": "Acessório que reduz ligeiramente o dano por grama."
+    "description": "Acessório que reduz o dano por grama."
   },
   "Accessory_LeafResist_2": {
-    "localized_name": "Anel de Selo de Grama +1",
+    "localized_name": "Anel de Selo de Grama",
     "description": "Acessório que reduz o dano por grama."
   },
   "Accessory_LeafResist_3": {
-    "localized_name": "Anel de Selo de Grama +2",
-    "description": "Acessório que reduz bastante o dano por grama."
+    "localized_name": "Anel de Selo de Grama",
+    "description": "Acessório que reduz o dano por grama."
   },
   "Accessory_MaxWeightUp_01": {
     "localized_name": "Anel de Transportador",
-    "description": "Aumenta ligeiramente sua capacidade de carga."
+    "description": "Aumenta sua capacidade de carga."
   },
   "Accessory_MaxWeightUp_02": {
-    "localized_name": "Anel de Transportador +1",
+    "localized_name": "Anel de Transportador",
     "description": "Aumenta sua capacidade de carga."
   },
   "Accessory_MaxWeightUp_03": {
-    "localized_name": "Anel de Transportador +2",
-    "description": "Aumenta bastante sua capacidade de carga."
+    "localized_name": "Anel de Transportador",
+    "description": "Aumenta sua capacidade de carga."
+  },
+  "Accessory_NonkChecker_1": {
+    "localized_name": "Óculos de Domador",
+    "description": "Óculos de domador de Pal. Quem os equipa não pode deixar os alvos de seus ataques com vida inferior a 1. Permite identificar os talentos ocultos dos Pals."
   },
   "Accessory_Nonkilling": {
     "localized_name": "Anel de Clemência",
@@ -193,15 +237,67 @@
   },
   "Accessory_NormalResist_1": {
     "localized_name": "Anel de Selo Vazio",
-    "description": "Acessório que reduz ligeiramente o dano não elemental."
+    "description": "Acessório que reduz o dano não elemental."
   },
   "Accessory_NormalResist_2": {
-    "localized_name": "Anel de Selo Vazio +1",
+    "localized_name": "Anel de Selo Vazio",
     "description": "Acessório que reduz o dano não elemental."
   },
   "Accessory_NormalResist_3": {
-    "localized_name": "Anel de Selo Vazio +2",
-    "description": "Acessório que reduz bastante o dano não elemental."
+    "localized_name": "Anel de Selo Vazio",
+    "description": "Acessório que reduz o dano não elemental."
+  },
+  "Accessory_Otomo_Dargon_1": {
+    "localized_name": "Anel de Elphidran",
+    "description": "Acessório que reduz bastante o dano por escuridão. Também fortalece bastante o dano dracônico de Pals lutando ao seu lado."
+  },
+  "Accessory_Otomo_Dark_1": {
+    "localized_name": "Anel de Katress",
+    "description": "Acessório que reduz bastante o dano não elemental. Também fortalece bastante o dano de escuridão de Pals lutando ao seu lado."
+  },
+  "Accessory_Otomo_Earth_1": {
+    "localized_name": "Anel de Menasting Terra",
+    "description": "Acessório que reduz bastante o dano elétrico. Também fortalece bastante o dano de terra de Pals lutando ao seu lado."
+  },
+  "Accessory_Otomo_Electricity_1": {
+    "localized_name": "Anel de Fenglope Lux",
+    "description": "Acessório que reduz bastante o dano por água. Também fortalece bastante o dano elétrico de Pals lutando ao seu lado."
+  },
+  "Accessory_Otomo_Fire_1": {
+    "localized_name": "Anel de Blazehowl",
+    "description": "Acessório que reduz bastante o dano por grama. Também fortalece bastante o dano de fogo de Pals lutando ao seu lado."
+  },
+  "Accessory_Otomo_Fire_2": {
+    "localized_name": "Anel de Faleris",
+    "description": "Acessório que reduz bastante o dano por gelo. Também fortalece bastante o dano de fogo de Pals lutando ao seu lado."
+  },
+  "Accessory_Otomo_Ice_1": {
+    "localized_name": "Anel de Cryolinx",
+    "description": "Acessório que reduz bastante o dano dracônico. Também fortalece bastante o dano de gelo de Pals lutando ao seu lado."
+  },
+  "Accessory_Otomo_Leaf_1": {
+    "localized_name": "Anel de Vaelet",
+    "description": "Acessório que reduz bastante o dano por terra. Também fortalece bastante o dano de grama de Pals lutando ao seu lado."
+  },
+  "Accessory_Otomo_Water_1": {
+    "localized_name": "Anel de Faleris Aqua",
+    "description": "Acessório que reduz bastante o dano por fogo. Também fortalece bastante o dano de água de Pals lutando ao seu lado."
+  },
+  "Accessory_PPAT_1": {
+    "localized_name": "Emblema de Dogen",
+    "description": "Acessório que aumenta bastante o poder de ataque do seu personagem. Também aumenta o poder de ataque dos Pals."
+  },
+  "Accessory_PPDF_1": {
+    "localized_name": "Emblema de Silvegis",
+    "description": "Acessório que aumenta bastante a defesa do seu personagem. Também aumenta a defesa dos Pals."
+  },
+  "Accessory_SuperJumpAir_1": {
+    "localized_name": "Air Walker v3.0",
+    "description": "Acessório que lhe confere a capacidade de saltar duas vezes em pleno ar quando equipado. Também possibilita correr uma vez no ar."
+  },
+  "Accessory_SuperJumpAir_2": {
+    "localized_name": "Air Walker EX",
+    "description": "Acessório que lhe confere a capacidade de saltar duas vezes em pleno ar quando equipado. Também possibilita correr duas vezes no ar."
   },
   "Accessory_TalentChecker": {
     "localized_name": "Óculos de Talento",
@@ -209,55 +305,59 @@
   },
   "Accessory_ThunderResist_1": {
     "localized_name": "Anel de Selo de Raio",
-    "description": "Acessório que reduz ligeiramente o dano por eletricidade."
+    "description": "Acessório que reduz o dano por eletricidade."
   },
   "Accessory_ThunderResist_2": {
-    "localized_name": "Anel de Selo de Raio +1",
+    "localized_name": "Anel de Selo de Raio",
     "description": "Acessório que reduz o dano por eletricidade."
   },
   "Accessory_ThunderResist_3": {
-    "localized_name": "Anel de Selo de Raio +2",
-    "description": "Acessório que reduz bastante o dano por eletricidade."
+    "localized_name": "Anel de Selo de Raio",
+    "description": "Acessório que reduz o dano por eletricidade."
+  },
+  "Accessory_WKMC_1": {
+    "localized_name": "Cinto de Ferramentas dos Habitantes da Ilha",
+    "description": "Acessório que aumenta bastante sua capacidade de carga. Também aumenta bastante a velocidade de trabalho."
   },
   "Accessory_WorkSpeed_1": {
     "localized_name": "Pingente da Diligência",
-    "description": "Acessório que aumenta a velocidade de trabalho apenas um pouco."
+    "description": "Acessório que aumenta a velocidade de trabalho."
   },
   "Accessory_WorkSpeed_2": {
-    "localized_name": "Pingente da Diligência +1",
+    "localized_name": "Pingente da Diligência",
     "description": "Acessório que aumenta a velocidade de trabalho."
   },
   "Accessory_WorkSpeed_3": {
-    "localized_name": "Pingente da Diligência +2",
-    "description": "Acessório que aumenta bastante a velocidade de trabalho."
+    "localized_name": "Pingente da Diligência",
+    "description": "Acessório que aumenta a velocidade de trabalho."
   },
   "Accessory_defense_1": {
     "localized_name": "Pingente de Defesa",
-    "description": "Acessório que aumenta a defesa apenas um pouco."
+    "description": "Acessório que aumenta a defesa."
   },
   "Accessory_defense_2": {
-    "localized_name": "Pingente de Defesa +1",
+    "localized_name": "Pingente de Defesa",
     "description": "Acessório que aumenta a defesa."
   },
   "Accessory_defense_3": {
-    "localized_name": "Pingente de Defesa +2",
-    "description": "Acessório que aumenta bastante a defesa."
+    "localized_name": "Pingente de Defesa",
+    "description": "Acessório que aumenta a defesa."
   },
   "AdditionalInventory_001": {
     "localized_name": "Bolsa de Expansão Pequena",
-    "description": "Pequena bolsa que permite carregar bagagem adicional. Com isto em mãos, são adicionados mais slots ao inventário."
+    "description": "Pequena bolsa que permite carregar bagagem adicional. Com isto em mãos, são adicionados mais slots ao inventário. Carregar uma só já é o suficiente."
   },
   "AdditionalInventory_002": {
     "localized_name": "Bolsa de Expansão Mediana",
-    "description": "Bolsa de tamanho razoável que permite carregar bagagem adicional. Com isto em mãos, são adicionados mais slots ao inventário."
+    "description": "Bolsa de tamanho razoável que permite carregar bagagem adicional. Com isto em mãos, são adicionados mais slots ao inventário. Carregar uma só já é o suficiente."
   },
   "AdditionalInventory_003": {
     "localized_name": "Bolsa de Expansão Grande",
-    "description": "Grande bolsa que permite carregar bagagem adicional. Com isto em mãos, são adicionados mais slots ao inventário."
+    "description": "Grande bolsa que permite carregar bagagem adicional. Com isto em mãos, são adicionados mais slots ao inventário. Carregar uma só já é o suficiente."
   },
   "AdditionalInventory_004": {
     "localized_name": "Bolsa de Expansão Gigantesca",
-    "description": "Bolsa gigantesca que permite carregar bagagem adicional. Com isto em mãos, são adicionados mais slots ao inventário."
+    "description": "Bolsa gigantesca que permite carregar bagagem adicional. Com isto em mãos, são adicionados mais slots ao inventário. Carregar uma só já é o suficiente."
   },
   "AffectionFruit_01": {
     "localized_name": "Fruta do Vínculo Precioso",
@@ -266,6 +366,106 @@
   "AffectionFruit_02": {
     "localized_name": "Fruta do Vínculo Modesto",
     "description": "Pequeno fruto carregado de afeto. Dizem que, quando um Pal ingere esse fruto, ele passa a confiar mais nos humanos. Escolha bem para qual Pal vai oferecê-lo."
+  },
+  "AncientArmor": {
+    "localized_name": "Armadura Antiga",
+    "description": "Armadura antiga feita a partir de Lingote de Soralite. Apresenta uma defesa esmagadora graças ao esmero sem limites da civilização perdida. É a armadura suprema, capaz de enfrentar até mesmo ameaças apocalípticas."
+  },
+  "AncientArmorCold": {
+    "localized_name": "Armadura Antiga Acalentadora",
+    "description": "Armadura Antiga melhorada. Com uma resistência ao frio aprimorada ainda mais pela tecnologia antiga, mantém suas capacidades até em ambientes de frio intenso."
+  },
+  "AncientArmorCold_2": {
+    "localized_name": "Armadura Antiga Acalentadora",
+    "description": "Armadura Antiga melhorada. Com uma resistência ao frio aprimorada ainda mais pela tecnologia antiga, mantém suas capacidades até em ambientes de frio intenso."
+  },
+  "AncientArmorCold_3": {
+    "localized_name": "Armadura Antiga Acalentadora",
+    "description": "Armadura Antiga melhorada. Com uma resistência ao frio aprimorada ainda mais pela tecnologia antiga, mantém suas capacidades até em ambientes de frio intenso."
+  },
+  "AncientArmorCold_4": {
+    "localized_name": "Armadura Antiga Acalentadora",
+    "description": "Armadura Antiga melhorada. Com uma resistência ao frio aprimorada ainda mais pela tecnologia antiga, mantém suas capacidades até em ambientes de frio intenso."
+  },
+  "AncientArmorCold_5": {
+    "localized_name": "Armadura Antiga Acalentadora",
+    "description": "Armadura Antiga melhorada. Com uma resistência ao frio aprimorada ainda mais pela tecnologia antiga, mantém suas capacidades até em ambientes de frio intenso."
+  },
+  "AncientArmorHeat": {
+    "localized_name": "Armadura Antiga Refrescante",
+    "description": "Armadura Antiga melhorada. Com uma resistência ao calor aprimorada ainda mais pela tecnologia antiga, resiste até a ambientes escaldantes."
+  },
+  "AncientArmorHeat_2": {
+    "localized_name": "Armadura Antiga Refrescante",
+    "description": "Armadura Antiga melhorada. Com uma resistência ao calor aprimorada ainda mais pela tecnologia antiga, resiste até a ambientes escaldantes."
+  },
+  "AncientArmorHeat_3": {
+    "localized_name": "Armadura Antiga Refrescante",
+    "description": "Armadura Antiga melhorada. Com uma resistência ao calor aprimorada ainda mais pela tecnologia antiga, resiste até a ambientes escaldantes."
+  },
+  "AncientArmorHeat_4": {
+    "localized_name": "Armadura Antiga Refrescante",
+    "description": "Armadura Antiga melhorada. Com uma resistência ao calor aprimorada ainda mais pela tecnologia antiga, resiste até a ambientes escaldantes."
+  },
+  "AncientArmorHeat_5": {
+    "localized_name": "Armadura Antiga Refrescante",
+    "description": "Armadura Antiga melhorada. Com uma resistência ao calor aprimorada ainda mais pela tecnologia antiga, resiste até a ambientes escaldantes."
+  },
+  "AncientArmorWeight": {
+    "localized_name": "Armadura Antiga Leve",
+    "description": "Armadura Antiga melhorada. Graças a mecanismos de suporte antigos, pode carregar muito mais materiais."
+  },
+  "AncientArmorWeight_2": {
+    "localized_name": "Armadura Antiga Leve",
+    "description": "Armadura Antiga melhorada. Graças a mecanismos de suporte antigos, pode carregar muito mais materiais."
+  },
+  "AncientArmorWeight_3": {
+    "localized_name": "Armadura Antiga Leve",
+    "description": "Armadura Antiga melhorada. Graças a mecanismos de suporte antigos, pode carregar muito mais materiais."
+  },
+  "AncientArmorWeight_4": {
+    "localized_name": "Armadura Antiga Leve",
+    "description": "Armadura Antiga melhorada. Graças a mecanismos de suporte antigos, pode carregar muito mais materiais."
+  },
+  "AncientArmorWeight_5": {
+    "localized_name": "Armadura Antiga Leve",
+    "description": "Armadura Antiga melhorada. Graças a mecanismos de suporte antigos, pode carregar muito mais materiais."
+  },
+  "AncientArmor_2": {
+    "localized_name": "Armadura Antiga",
+    "description": "Armadura antiga feita a partir de Lingote de Soralite. Apresenta uma defesa esmagadora graças ao esmero sem limites da civilização perdida. É a armadura suprema, capaz de enfrentar até mesmo ameaças apocalípticas."
+  },
+  "AncientArmor_3": {
+    "localized_name": "Armadura Antiga",
+    "description": "Armadura antiga feita a partir de Lingote de Soralite. Apresenta uma defesa esmagadora graças ao esmero sem limites da civilização perdida. É a armadura suprema, capaz de enfrentar até mesmo ameaças apocalípticas."
+  },
+  "AncientArmor_4": {
+    "localized_name": "Armadura Antiga",
+    "description": "Armadura antiga feita a partir de Lingote de Soralite. Apresenta uma defesa esmagadora graças ao esmero sem limites da civilização perdida. É a armadura suprema, capaz de enfrentar até mesmo ameaças apocalípticas."
+  },
+  "AncientArmor_5": {
+    "localized_name": "Armadura Antiga",
+    "description": "Armadura antiga feita a partir de Lingote de Soralite. Apresenta uma defesa esmagadora graças ao esmero sem limites da civilização perdida. É a armadura suprema, capaz de enfrentar até mesmo ameaças apocalípticas."
+  },
+  "AncientHelmet": {
+    "localized_name": "Elmo Antigo",
+    "description": "Capacete antigo feito a partir de Lingote de Soralite. Protege seu usuário com a sabedoria herdada de tempos imemoriais. Sua capacidade defensiva é muito superior à de equipamentos modernos."
+  },
+  "AncientHelmet_2": {
+    "localized_name": "Elmo Antigo",
+    "description": "Capacete antigo feito a partir de Lingote de Soralite. Protege seu usuário com a sabedoria herdada de tempos imemoriais. Sua capacidade defensiva é muito superior à de equipamentos modernos."
+  },
+  "AncientHelmet_3": {
+    "localized_name": "Elmo Antigo",
+    "description": "Capacete antigo feito a partir de Lingote de Soralite. Protege seu usuário com a sabedoria herdada de tempos imemoriais. Sua capacidade defensiva é muito superior à de equipamentos modernos."
+  },
+  "AncientHelmet_4": {
+    "localized_name": "Elmo Antigo",
+    "description": "Capacete antigo feito a partir de Lingote de Soralite. Protege seu usuário com a sabedoria herdada de tempos imemoriais. Sua capacidade defensiva é muito superior à de equipamentos modernos."
+  },
+  "AncientHelmet_5": {
+    "localized_name": "Elmo Antigo",
+    "description": "Capacete antigo feito a partir de Lingote de Soralite. Protege seu usuário com a sabedoria herdada de tempos imemoriais. Sua capacidade defensiva é muito superior à de equipamentos modernos."
   },
   "AncientParts2": {
     "localized_name": "Núcleo da Civilização Antiga",
@@ -301,19 +501,19 @@
   },
   "Arrow": {
     "localized_name": "Flecha",
-    "description": "Flecha que pode ser disparada com um arco."
+    "description": "Flecha que pode ser disparada com arcos. Você pode fazê-la na Bancada Primitiva."
   },
   "Arrow_Fire": {
     "localized_name": "Flecha de Fogo",
-    "description": "Flecha que pode ser disparada com Bow Fire ou BowGun Fire. Causa dano de Fogo."
+    "description": "Arrow Fire que pode ser disparada com arcos. Causa dano do elemento <img id=|ElemIcon Fire|/><uiCommon id=|COMMON ELEMENT NAME Fire| style=|Elem Fire|/> no alvo atingido. Você pode fazê-la na Bancada Primitiva."
   },
   "Arrow_Poison": {
     "localized_name": "Flecha de Veneno",
-    "description": "Flecha que pode ser disparada com Bow Poison ou BowGun Poison. Envenena o alvo ao atingi-lo."
+    "description": "Arrow Poison que pode ser disparada com arcos. Causa <uiCommon id=|ADDITIONAL EFFECT Poison| style=|Effect Poison|/> no alvo atingido. Você pode fazê-la na Bancada Primitiva."
   },
   "AssaultRifleBullet": {
     "localized_name": "Bala de Fuzil de Assalto",
-    "description": "Projétil usado com AssaultRifle Default1 e armas similares."
+    "description": "Projétil usado com AssaultRifle Default1 e armas similares. Você pode fazê-lo na WeaponFactory Dirty 02."
   },
   "AssaultRifle_Default1": {
     "localized_name": "Fuzil de Assalto",
@@ -337,27 +537,27 @@
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "Saco de Ração Pequeno",
-    "description": "Saco pequeno para colocar comida. Desbloqueia 1 slot para refeição automática. Quando a fome aperta, a comida no slot é consumida automaticamente."
+    "description": "Saco pequeno para guardar comida. Desbloqueia 1 slot para refeição automática. Quando a fome aperta, a comida no slot é consumida automaticamente. Carregar um só já é o suficiente."
   },
   "AutoMealPouch_Tier2": {
     "localized_name": "Saco de Ração Razoável",
-    "description": "Saco de tamanho razoável para colocar comida. Desbloqueia 2 slots para refeição automática. Quando a fome aperta, a comida nos slots é consumida automaticamente."
+    "description": "Saco de tamanho razoável para guardar comida. Desbloqueia 2 slots para refeição automática. Quando a fome aperta, a comida nos slots é consumida automaticamente. Carregar um só já é o suficiente."
   },
   "AutoMealPouch_Tier3": {
     "localized_name": "Saco de Ração Grande",
-    "description": "Saco grande para colocar comida. Desbloqueia 3 slots para refeição automática. Quando a fome aperta, a comida nos slots é consumida automaticamente."
+    "description": "Saco grande para guardar comida. Desbloqueia 3 slots para refeição automática. Quando a fome aperta, a comida nos slots é consumida automaticamente. Carregar um só já é o suficiente."
   },
   "AutoMealPouch_Tier4": {
     "localized_name": "Saco de Ração Gigante",
-    "description": "Saco extragrande para colocar comida. Desbloqueia 4 slots para refeição automática. Quando a fome aperta, a comida nos slots é consumida automaticamente."
+    "description": "Saco extragrande para guardar comida. Desbloqueia 4 slots para refeição automática. Quando a fome aperta, a comida nos slots é consumida automaticamente. Carregar um só já é o suficiente."
   },
   "AutoMealPouch_Tier5": {
     "localized_name": "Saco de Ração Colossal",
-    "description": "Saco colossal para colocar comida. Desbloqueia 5 slots para refeição automática. Quando a fome aperta, a comida nos slots é consumida automaticamente."
+    "description": "Saco colossal para guardar comida. Desbloqueia 5 slots para refeição automática. Quando a fome aperta, a comida nos slots é consumida automaticamente. Carregar um só já é o suficiente."
   },
   "Axe_Steal": {
     "localized_name": "Machado de Metal Pal",
-    "description": "Machado para cortar lenha. Graças ao Metal Pal, adquiriu um gume aterrador."
+    "description": "Machado para cortar lenha. Graças ao Metal Pal, adquiriu um gume aterrador. É capaz de cortar facilmente até a dura madeira requintada que cresce em condições extremas."
   },
   "Axe_Tier_00": {
     "localized_name": "Machado de Pedra",
@@ -365,11 +565,11 @@
   },
   "Axe_Tier_01": {
     "localized_name": "Machado de Metal",
-    "description": "Machado para cortar lenha. É feito de metal, com um fio melhorado."
+    "description": "Machado para cortar lenha. Por ser de metal, torna mais fácil cortar madeiras duras. Também serve para cortar as árvores resistentes que crescem nos confins da terra."
   },
   "Axe_Tier_02": {
     "localized_name": "Machado de Metal Refinado",
-    "description": "Machado para cortar lenha. É feito de metal de qualidade, com um fio ainda melhor."
+    "description": "Machado para cortar lenha. Agora tem mais durabilidade e um fio ainda melhor. Consegue cortar a madeira dura e de qualidade das árvores de regiões inóspitas."
   },
   "Axe_Tier_03": {
     "localized_name": "pt-BR Text",
@@ -451,9 +651,53 @@
     "localized_name": "Bastão",
     "description": "Bastão de beisebol que também pode ser usado para combate à curta distância. Os Pals são grandes demais para servirem de bola."
   },
+  "Bat3": {
+    "localized_name": "Bastão de Metal",
+    "description": "Bastão de Metal útil também em combate à curta distância. Se encontrar alguém de quem não goste, é só dar uma surra com isto."
+  },
+  "Bat3_2": {
+    "localized_name": "Bastão de Metal",
+    "description": "Bastão de Metal útil também em combate à curta distância. Se encontrar alguém de quem não goste, é só dar uma surra com isto."
+  },
+  "Bat3_3": {
+    "localized_name": "Bastão de Metal",
+    "description": "Bastão de Metal útil também em combate à curta distância. Se encontrar alguém de quem não goste, é só dar uma surra com isto."
+  },
+  "Bat3_4": {
+    "localized_name": "Bastão de Metal",
+    "description": "Bastão de Metal útil também em combate à curta distância. Se encontrar alguém de quem não goste, é só dar uma surra com isto."
+  },
+  "Bat3_5": {
+    "localized_name": "Bastão de Metal",
+    "description": "Bastão de Metal útil também em combate à curta distância. Se encontrar alguém de quem não goste, é só dar uma surra com isto."
+  },
   "BattleTicket": {
     "localized_name": "Bilhete de Batalha",
     "description": "Item obtido ao vencer o Coliseu sozinho. Junte vários para poder trocar por prêmios esplêndidos."
+  },
+  "BeamLauncher": {
+    "localized_name": "Lança-Raios",
+    "description": "Lançador que dispara raios altamente concentrados para causar explosões em grande área. É preciso tomar cuidado para não deixar que ele se sobreaqueça quando disparado continuamente."
+  },
+  "BeamLauncherBullet": {
+    "localized_name": "Carga de Lança-Raios",
+    "description": "Projétil usado com Lança-Raios. Você pode fazê-lo na Bancada da Civilização Antiga."
+  },
+  "BeamLauncher_2": {
+    "localized_name": "Lança-Raios",
+    "description": "Lançador que dispara raios altamente concentrados para causar explosões em grande área. É preciso tomar cuidado para não deixar que ele se sobreaqueça quando disparado continuamente."
+  },
+  "BeamLauncher_3": {
+    "localized_name": "Lança-Raios",
+    "description": "Lançador que dispara raios altamente concentrados para causar explosões em grande área. É preciso tomar cuidado para não deixar que ele se sobreaqueça quando disparado continuamente."
+  },
+  "BeamLauncher_4": {
+    "localized_name": "Lança-Raios",
+    "description": "Lançador que dispara raios altamente concentrados para causar explosões em grande área. É preciso tomar cuidado para não deixar que ele se sobreaqueça quando disparado continuamente."
+  },
+  "BeamLauncher_5": {
+    "localized_name": "Lança-Raios",
+    "description": "Lançador que dispara raios altamente concentrados para causar explosões em grande área. É preciso tomar cuidado para não deixar que ele se sobreaqueça quando disparado continuamente."
   },
   "BeamSword": {
     "localized_name": "Espada de Raio",
@@ -475,6 +719,10 @@
     "localized_name": "Espada de Raio",
     "description": "Espada de Raio para combate à curta distância. Corta o alvo com um laser de alta potência."
   },
+  "BeastBone_Ancient": {
+    "localized_name": "Osso de Criatura Antiga",
+    "description": "Osso de uma criatura que acabou se deteriorando após um longo tempo sob condições extremas. Ele continua a exalar sua imponência, mesmo desprovido de carne."
+  },
   "Beer": {
     "localized_name": "pt-BR Text",
     "description": "pt-BR Text"
@@ -491,6 +739,258 @@
     "localized_name": "Semente de Frutinha",
     "description": "Sementes que permitem cultivar Frutinha Vermelha. São necessárias para criar uma plantação. Obtidas ao coletar Frutinha Vermelha."
   },
+  "Bio_Battery": {
+    "localized_name": "Biobateria",
+    "description": "Dispositivo que armazena energia biológica na forma de energia elétrica. É usado em máquinas que exigem uma densidade de energia elevada. Você pode fazê-lo na Factory Hard 03."
+  },
+  "Bio_Coolant": {
+    "localized_name": "Material de Refrigeração Absoluta",
+    "description": "Material de refrigeração altamente eficiente que emprega substâncias especiais provenientes dos Pals. É usado para controlar a temperatura de dispositivos de alta potência. Você pode fazê-lo na Factory Hard 02."
+  },
+  "Blueprint_Accessory_AT_1_2": {
+    "localized_name": "Esquema de Pingente de Ataque",
+    "description": "Com isto em mãos, a receita de [Accessory AT 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Accessory_AquaResist_1_2": {
+    "localized_name": "Esquema de Anel de Selo de Água",
+    "description": "Com isto em mãos, a receita de [Accessory AquaResist 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Accessory_Avoid_1": {
+    "localized_name": "Esquema de Anel da Ilusão",
+    "description": "Com isto em mãos, a receita de [Accessory Avoid 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Accessory_Avoid_1_fix": {
+    "localized_name": "Esquema de Anel da Ilusão",
+    "description": "Com isto em mãos, a receita de [Accessory Avoid 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Accessory_ColdIce_1": {
+    "localized_name": "Esquema de Amuleto de Wumpo",
+    "description": "Com isto em mãos, a receita de [Accessory ColdIce 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Accessory_CoolResist_1_2": {
+    "localized_name": "Esquema de Roupa de Baixo Quente",
+    "description": "Com isto em mãos, a receita de [Accessory CoolResist 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Accessory_DFHP_1": {
+    "localized_name": "Esquema de Cinto de Warsect Terra",
+    "description": "Com isto em mãos, a receita de [Accessory DFHP 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Accessory_DarkResist_1_2": {
+    "localized_name": "Esquema de Anel de Selo de Escuridão",
+    "description": "Com isto em mãos, a receita de [Accessory DarkResist 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Accessory_DragonResist_1_2": {
+    "localized_name": "Esquema de Anel de Selo de Dragão",
+    "description": "Com isto em mãos, a receita de [Accessory DragonResist 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Accessory_EarthResist_1_2": {
+    "localized_name": "Esquema de Anel de Selo de Terra",
+    "description": "Com isto em mãos, a receita de [Accessory EarthResist 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Accessory_FireResist_1_2": {
+    "localized_name": "Esquema de Anel de Selo de Fogo",
+    "description": "Com isto em mãos, a receita de [Accessory FireResist 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Accessory_HCHP_1": {
+    "localized_name": "Esquema de Amuleto da Equipe de Reconhecimento",
+    "description": "Com isto em mãos, a receita de [Accessory HCHP 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Accessory_HCMW_1": {
+    "localized_name": "Esquema de Amuleto de Comerciante Itinerante",
+    "description": "Com isto em mãos, a receita de [Accessory HCMW 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Accessory_HP_1_2": {
+    "localized_name": "Esquema de Pingente da Vida",
+    "description": "Com isto em mãos, a receita de [Accessory HP 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Accessory_HeatColdResist_1_2": {
+    "localized_name": "Esquema de Roupa de Baixo Quente e Refrescante",
+    "description": "Com isto em mãos, a receita de [Accessory HeatColdResist 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Accessory_HeatFire_1": {
+    "localized_name": "Esquema de Amuleto de Reptyro",
+    "description": "Com isto em mãos, a receita de [Accessory HeatFire 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Accessory_HeatResist_1_2": {
+    "localized_name": "Esquema de Roupa de Baixo Refrescante",
+    "description": "Com isto em mãos, a receita de [Accessory HeatResist 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Accessory_IceResist_1_2": {
+    "localized_name": "Esquema de Anel de Selo de Gelo",
+    "description": "Com isto em mãos, a receita de [Accessory IceResist 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Accessory_JumpAir_1": {
+    "localized_name": "Esquema de Air Walker v1.0",
+    "description": "Com isto em mãos, a receita de [Accessory JumpAir 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Accessory_JumpAir_2": {
+    "localized_name": "Esquema de Air Walker v2.0",
+    "description": "Com isto em mãos, a receita de [Accessory JumpAir 2 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Accessory_LeafResist_1_2": {
+    "localized_name": "Esquema de Anel de Selo de Grama",
+    "description": "Com isto em mãos, a receita de [Accessory LeafResist 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Accessory_MaxWeightUp_01_2": {
+    "localized_name": "Esquema de Anel de Transportador",
+    "description": "Com isto em mãos, a receita de [Accessory MaxWeightUp 01 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Accessory_NonkChecker_1": {
+    "localized_name": "Esquema de Óculos de Domador",
+    "description": "Com isto em mãos, a receita de [Accessory NonkChecker 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Accessory_NormalResist_1_2": {
+    "localized_name": "Esquema de Anel de Selo Não Elemental",
+    "description": "Com isto em mãos, a receita de [Accessory NormalResist 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Accessory_Otomo_Dargon_1": {
+    "localized_name": "Esquema de Anel de Elphidran",
+    "description": "Com isto em mãos, a receita de [Accessory Otomo Dargon 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Accessory_Otomo_Dark_1": {
+    "localized_name": "Esquema de Anel de Katress",
+    "description": "Com isto em mãos, a receita de [Accessory Otomo Dark 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Accessory_Otomo_Earth_1": {
+    "localized_name": "Esquema de Anel de Menasting Terra",
+    "description": "Com isto em mãos, a receita de [Accessory Otomo Earth 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Accessory_Otomo_Electricity_1": {
+    "localized_name": "Esquema de Anel de Fenglope Lux",
+    "description": "Com isto em mãos, a receita de [Accessory Otomo Electricity 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Accessory_Otomo_Fire_1": {
+    "localized_name": "Esquema de Anel de Blazehowl",
+    "description": "Com isto em mãos, a receita de [Accessory Otomo Fire 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Accessory_Otomo_Fire_2": {
+    "localized_name": "Esquema de Anel de Faleris",
+    "description": "Com isto em mãos, a receita de [Accessory Otomo Fire 2 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Accessory_Otomo_Ice_1": {
+    "localized_name": "Esquema de Anel de Cryolinx",
+    "description": "Com isto em mãos, a receita de [Accessory Otomo Ice 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Accessory_Otomo_Leaf_1": {
+    "localized_name": "Esquema de Anel de Vaelet",
+    "description": "Com isto em mãos, a receita de [Accessory Otomo Leaf 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Accessory_Otomo_Water_1": {
+    "localized_name": "Esquema de Anel de Faleris Aqua",
+    "description": "Com isto em mãos, a receita de [Accessory Otomo Water 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Accessory_PPAT_1": {
+    "localized_name": "Esquema de Emblema de Dogen",
+    "description": "Com isto em mãos, a receita de [Accessory PPAT 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Accessory_PPDF_1": {
+    "localized_name": "Esquema de Emblema de Silvegis",
+    "description": "Com isto em mãos, a receita de [Accessory PPDF 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Accessory_SuperJumpAir_1": {
+    "localized_name": "Esquema de Air Walker v3.0",
+    "description": "Com isto em mãos, a receita de [Accessory SuperJumpAir 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Accessory_SuperJumpAir_2": {
+    "localized_name": "Esquema de Air Walker EX",
+    "description": "Com isto em mãos, a receita de [Accessory SuperJumpAir 2 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Accessory_ThunderResist_1_2": {
+    "localized_name": "Esquema de Anel de Selo de Raio",
+    "description": "Com isto em mãos, a receita de [Accessory ThunderResist 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Accessory_WKMC_1": {
+    "localized_name": "Esquema de Cinto de Ferramentas dos Habitantes da Ilha",
+    "description": "Com isto em mãos, a receita de [Accessory WKMC 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Accessory_WorkSpeed_1_2": {
+    "localized_name": "Esquema de Pingente da Diligência",
+    "description": "Com isto em mãos, a receita de [Accessory WorkSpeed 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Accessory_defense_1_2": {
+    "localized_name": "Esquema de Pingente de Defesa",
+    "description": "Com isto em mãos, a receita de [Accessory defense 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_AncientArmorCold_2": {
+    "localized_name": "Esquema de Armadura Antiga Acalentadora 1",
+    "description": "Com isto em mãos, a receita de [AncientArmorCold 2 (Uncommon)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_AncientArmorCold_3": {
+    "localized_name": "Esquema de Armadura Antiga Acalentadora 2",
+    "description": "Com isto em mãos, a receita de [AncientArmorCold 3 (Rare)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_AncientArmorCold_4": {
+    "localized_name": "Esquema de Armadura Antiga Acalentadora 3",
+    "description": "Com isto em mãos, a receita de [AncientArmorCold 4 (Epic)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_AncientArmorCold_5": {
+    "localized_name": "Esquema de Armadura Antiga Acalentadora 4",
+    "description": "Com isto em mãos, a receita de [AncientArmorCold 5 (Legendary)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_AncientArmorHeat_2": {
+    "localized_name": "Esquema de Armadura Antiga Refrescante 1",
+    "description": "Com isto em mãos, a receita de [AncientArmorHeat 2 (Uncommon)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_AncientArmorHeat_3": {
+    "localized_name": "Esquema de Armadura Antiga Refrescante 2",
+    "description": "Com isto em mãos, a receita de [AncientArmorHeat 3 (Rare)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_AncientArmorHeat_4": {
+    "localized_name": "Esquema de Armadura Antiga Refrescante 3",
+    "description": "Com isto em mãos, a receita de [AncientArmorHeat 4 (Epic)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_AncientArmorHeat_5": {
+    "localized_name": "Esquema de Armadura Antiga Refrescante 4",
+    "description": "Com isto em mãos, a receita de [AncientArmorHeat 5 (Legendary)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_AncientArmorWeight_2": {
+    "localized_name": "Esquema de Armadura Antiga Leve 1",
+    "description": "Com isto em mãos, a receita de [AncientArmorWeight 2 (Uncommon)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_AncientArmorWeight_3": {
+    "localized_name": "Esquema de Armadura Antiga Leve 2",
+    "description": "Com isto em mãos, a receita de [AncientArmorWeight 3 (Rare)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_AncientArmorWeight_4": {
+    "localized_name": "Esquema de Armadura Antiga Leve 3",
+    "description": "Com isto em mãos, a receita de [AncientArmorWeight 4 (Epic)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_AncientArmorWeight_5": {
+    "localized_name": "Esquema de Armadura Antiga Leve 4",
+    "description": "Com isto em mãos, a receita de [AncientArmorWeight 5 (Legendary)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_AncientArmor_2": {
+    "localized_name": "Esquema de Armadura Antiga 1",
+    "description": "Com isto em mãos, a receita de [AncientArmor 2 (Uncommon)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_AncientArmor_3": {
+    "localized_name": "Esquema de Armadura Antiga 2",
+    "description": "Com isto em mãos, a receita de [AncientArmor 3 (Rare)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_AncientArmor_4": {
+    "localized_name": "Esquema de Armadura Antiga 3",
+    "description": "Com isto em mãos, a receita de [AncientArmor 4 (Epic)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_AncientArmor_5": {
+    "localized_name": "Esquema de Armadura Antiga 4",
+    "description": "Com isto em mãos, a receita de [AncientArmor 5 (Legendary)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_AncientHelmet_2": {
+    "localized_name": "Esquema de Elmo Antigo 1",
+    "description": "Com isto em mãos, a receita de [AncientHelmet 2 (Uncommon)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_AncientHelmet_3": {
+    "localized_name": "Esquema de Elmo Antigo 2",
+    "description": "Com isto em mãos, a receita de [AncientHelmet 3 (Rare)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_AncientHelmet_4": {
+    "localized_name": "Esquema de Elmo Antigo 3",
+    "description": "Com isto em mãos, a receita de [AncientHelmet 4 (Epic)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_AncientHelmet_5": {
+    "localized_name": "Esquema de Elmo Antigo 4",
+    "description": "Com isto em mãos, a receita de [AncientHelmet 5 (Legendary)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
   "Blueprint_AssaultRifle_Default2": {
     "localized_name": "Esquema de Fuzil de Assalto 1",
     "description": "Com isto em mãos, é desbloqueada a receita de [AssaultRifle Default1 (Uncommon)], que você pode criar em [WeaponFactory Dirty 02]."
@@ -506,6 +1006,38 @@
   "Blueprint_AssaultRifle_Default5": {
     "localized_name": "Esquema de Fuzil de Assalto 4",
     "description": "Com isto em mãos, é desbloqueada a receita de [AssaultRifle Default1 (Legendary)], que você pode criar em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_Bat3_2": {
+    "localized_name": "Esquema de Bastão de Metal 1",
+    "description": "Com isto em mãos, a receita de [Bastão de Metal (Uncommon)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_Bat3_3": {
+    "localized_name": "Esquema de Bastão de Metal 2",
+    "description": "Com isto em mãos, a receita de [Bastão de Metal (Rare)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_Bat3_4": {
+    "localized_name": "Esquema de Bastão de Metal 3",
+    "description": "Com isto em mãos, a receita de [Bastão de Metal (Epic)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_Bat3_5": {
+    "localized_name": "Esquema de Bastão de Metal 4",
+    "description": "Com isto em mãos, a receita de [Bastão de Metal (Legendary)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 02]."
+  },
+  "Blueprint_BeamLauncher_2": {
+    "localized_name": "Esquema de Lança-Raios 1",
+    "description": "Com isto em mãos, a receita de [Lança-Raios (Uncommon)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_BeamLauncher_3": {
+    "localized_name": "Esquema de Lança-Raios 2",
+    "description": "Com isto em mãos, a receita de [Lança-Raios (Rare)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_BeamLauncher_4": {
+    "localized_name": "Esquema de Lança-Raios 3",
+    "description": "Com isto em mãos, a receita de [Lança-Raios (Epic)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_BeamLauncher_5": {
+    "localized_name": "Esquema de Lança-Raios 4",
+    "description": "Com isto em mãos, a receita de [Lança-Raios (Legendary)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
   },
   "Blueprint_BeamSword_2": {
     "localized_name": "Esquema de Espada de Raio 1",
@@ -743,6 +1275,38 @@
     "localized_name": "Esquema de Espingarda de Cano Duplo 4",
     "description": "Com isto em mãos, é desbloqueada a receita de [Espingarda de Cano Duplo (Legendary)], que você pode criar em [WeaponFactory Dirty 02]."
   },
+  "Blueprint_DroneLauncher_2": {
+    "localized_name": "Esquema de Lança-Drones 1",
+    "description": "Com isto em mãos, a receita de [Lança-Drones (Uncommon)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_DroneLauncher_3": {
+    "localized_name": "Esquema de Lança-Drones 2",
+    "description": "Com isto em mãos, a receita de [Lança-Drones (Rare)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_DroneLauncher_4": {
+    "localized_name": "Esquema de Lança-Drones 3",
+    "description": "Com isto em mãos, a receita de [Lança-Drones (Epic)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_DroneLauncher_5": {
+    "localized_name": "Esquema de Lança-Drones 4",
+    "description": "Com isto em mãos, a receita de [Lança-Drones (Legendary)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_ElectricArcAssaultRifle_2": {
+    "localized_name": "Esquema de Fuzil de Plasma 1",
+    "description": "Com isto em mãos, a receita de [Fuzil de Plasma (Uncommon)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_ElectricArcAssaultRifle_3": {
+    "localized_name": "Esquema de Fuzil de Plasma 2",
+    "description": "Com isto em mãos, a receita de [Fuzil de Plasma (Rare)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_ElectricArcAssaultRifle_4": {
+    "localized_name": "Esquema de Fuzil de Plasma 3",
+    "description": "Com isto em mãos, a receita de [Fuzil de Plasma (Epic)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_ElectricArcAssaultRifle_5": {
+    "localized_name": "Esquema de Fuzil de Plasma 4",
+    "description": "Com isto em mãos, a receita de [Fuzil de Plasma (Legendary)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
   "Blueprint_EnergyRocketLauncher_2": {
     "localized_name": "Esquema de Canhão de Plasma 1",
     "description": "Com isto em mãos, a receita de [Canhão de Plasma (Uncommon)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 03]."
@@ -785,11 +1349,11 @@
   },
   "Blueprint_FishingRod_02_2": {
     "localized_name": "Esquema de Vara de Pesca Intermediária (Croajiro)",
-    "description": "Com isto em mãos, a receita de [FishingRod 02 2 (Uncommon)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+    "description": "Com isto em mãos, a receita de [FishingRod 02 2 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
   },
   "Blueprint_FishingRod_03_2": {
     "localized_name": "Esquema de Vara de Pesca Avançada (Depresso)",
-    "description": "Com isto em mãos, a receita de [FishingRod 03 2 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 03]."
+    "description": "Com isto em mãos, a receita de [FishingRod 03 2 (Legendary)] é desbloqueada. Você pode fazê-la em [Factory Hard 03]."
   },
   "Blueprint_FlameThrower_2": {
     "localized_name": "Esquema de Lança-Chamas 1",
@@ -1679,6 +2243,130 @@
     "localized_name": "Esquema de Revólver Deteriorado 4",
     "description": "Com isto em mãos, a receita de [Revólver Deteriorado (Legendary)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 02]."
   },
+  "Blueprint_Otomo_ATDark_ElementBoost_1": {
+    "localized_name": "Esquema de Bastão de Comando do Monarca do Breu",
+    "description": "Com isto em mãos, a receita de [Otomo ATDark ElementBoost 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Otomo_ATDragon_ElementBoost_1": {
+    "localized_name": "Esquema de Bastão de Comando do Dragão Divino",
+    "description": "Com isto em mãos, a receita de [Otomo ATDragon ElementBoost 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Otomo_ATEarth_ElementBoost_1": {
+    "localized_name": "Esquema de Bastão de Comando do Regente da Terra",
+    "description": "Com isto em mãos, a receita de [Otomo ATEarth ElementBoost 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Otomo_ATElectricity_ElementBoost_1": {
+    "localized_name": "Esquema de Bastão de Comando do Regente dos Raios",
+    "description": "Com isto em mãos, a receita de [Otomo ATElectricity ElementBoost 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Otomo_ATFire_ElementBoost_1": {
+    "localized_name": "Esquema de Bastão de Comando do Regente do Fogo",
+    "description": "Com isto em mãos, a receita de [Otomo ATFire ElementBoost 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Otomo_ATIce_ElementBoost_1": {
+    "localized_name": "Esquema de Bastão de Comando do Regente do Gelo",
+    "description": "Com isto em mãos, a receita de [Otomo ATIce ElementBoost 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Otomo_ATLeaf_ElementBoost_1": {
+    "localized_name": "Esquema de Bastão de Comando do Monarca dos Espíritos",
+    "description": "Com isto em mãos, a receita de [Otomo ATLeaf ElementBoost 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Otomo_ATNormal_ElementBoost_1": {
+    "localized_name": "Esquema de Bastão de Comando da Ascensão",
+    "description": "Com isto em mãos, a receita de [Otomo ATNormal ElementBoost 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Otomo_ATWater_ElementBoost_1": {
+    "localized_name": "Esquema de Bastão de Comando da Realeza Marinha",
+    "description": "Com isto em mãos, a receita de [Otomo ATWater ElementBoost 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Otomo_Attack_up1_2": {
+    "localized_name": "Esquema de Apito do Apoio de Ataque",
+    "description": "Com isto em mãos, a receita de [Otomo Attack up1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Otomo_DFDark_ElementBoost_1": {
+    "localized_name": "Esquema de Proteção de Lyleen Noct",
+    "description": "Com isto em mãos, a receita de [Otomo DFDark ElementBoost 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Otomo_DFDragon_ElementBoost_1": {
+    "localized_name": "Esquema de Proteção de Jetragon",
+    "description": "Com isto em mãos, a receita de [Otomo DFDragon ElementBoost 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Otomo_DFEarth_ElementBoost_1": {
+    "localized_name": "Esquema de Proteção de Anubis",
+    "description": "Com isto em mãos, a receita de [Otomo DFEarth ElementBoost 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Otomo_DFElectricity_ElementBoost_1": {
+    "localized_name": "Esquema de Proteção de Orserk",
+    "description": "Com isto em mãos, a receita de [Otomo DFElectricity ElementBoost 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Otomo_DFFire_ElementBoost_1": {
+    "localized_name": "Esquema de Proteção de Blazamut",
+    "description": "Com isto em mãos, a receita de [Otomo DFFire ElementBoost 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Otomo_DFIce_ElementBoost_1": {
+    "localized_name": "Esquema de Proteção de Frostallion",
+    "description": "Com isto em mãos, a receita de [Otomo DFIce ElementBoost 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Otomo_DFLeaf_ElementBoost_1": {
+    "localized_name": "Esquema de Proteção de Lyleen",
+    "description": "Com isto em mãos, a receita de [Otomo DFLeaf ElementBoost 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Otomo_DFNormal_ElementBoost_1": {
+    "localized_name": "Esquema de Proteção de Hartalis",
+    "description": "Com isto em mãos, a receita de [Otomo DFNormal ElementBoost 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Otomo_DFWater_ElementBoost_1": {
+    "localized_name": "Esquema de Proteção de Neptilius",
+    "description": "Com isto em mãos, a receita de [Otomo DFWater ElementBoost 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Otomo_Defense_up1_2": {
+    "localized_name": "Esquema de Apito do Apoio de Defesa",
+    "description": "Com isto em mãos, a receita de [Otomo Defense up1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Otomo_ElementBoost_Dark_1_2": {
+    "localized_name": "Esquema de Apito do Apoio de Escuridão",
+    "description": "Com isto em mãos, a receita de [Otomo ElementBoost Dark 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Otomo_ElementBoost_Dragon_1_2": {
+    "localized_name": "Esquema de Apito do Apoio Dracônico",
+    "description": "Com isto em mãos, a receita de [Otomo ElementBoost Dragon 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Otomo_ElementBoost_Earth_1_2": {
+    "localized_name": "Esquema de Apito do Apoio de Terra",
+    "description": "Com isto em mãos, a receita de [Otomo ElementBoost Earth 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Otomo_ElementBoost_Electricity_1_2": {
+    "localized_name": "Esquema de Apito do Apoio Elétrico",
+    "description": "Com isto em mãos, a receita de [Otomo ElementBoost Electricity 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Otomo_ElementBoost_Fire_1_2": {
+    "localized_name": "Esquema de Apito do Apoio de Fogo",
+    "description": "Com isto em mãos, a receita de [Otomo ElementBoost Fire 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Otomo_ElementBoost_Ice_1_2": {
+    "localized_name": "Esquema de Apito do Apoio de Gelo",
+    "description": "Com isto em mãos, a receita de [Otomo ElementBoost Ice 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Otomo_ElementBoost_Leaf_1_2": {
+    "localized_name": "Esquema de Apito do Apoio de Grama",
+    "description": "Com isto em mãos, a receita de [Otomo ElementBoost Leaf 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Otomo_ElementBoost_Normal_1_2": {
+    "localized_name": "Esquema de Apito do Apoio Não Elemental",
+    "description": "Com isto em mãos, a receita de [Otomo ElementBoost Normal 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Otomo_ElementBoost_Water_1_2": {
+    "localized_name": "Esquema de Apito do Apoio de Água",
+    "description": "Com isto em mãos, a receita de [Otomo ElementBoost Water 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
+  "Blueprint_Otomo_PalConfidence_Increase_1_fix": {
+    "localized_name": "Esquema de Anel da Confiança",
+    "description": "Com isto em mãos, a receita de [Otomo PalConfidence Increase 1 (Epic)] é desbloqueada. Você pode fazê-la em [Factory Hard 02]."
+  },
+  "Blueprint_Otomo_PalExp_Increase_1_2": {
+    "localized_name": "Esquema de Sino de Promoção de Crescimento",
+    "description": "Com isto em mãos, a receita de [Otomo PalExp Increase 1 (Rare)] é desbloqueada. Você pode fazê-la em [Factory Hard 01]."
+  },
   "Blueprint_OverheatRifle_2": {
     "localized_name": "Esquema de Fuzil de Superaquecimento 1",
     "description": "Com isto em mãos, a receita de [Fuzil de Superaquecimento (Uncommon)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 04]."
@@ -1951,6 +2639,106 @@
     "localized_name": "Esquema de Fuzil de Tiro Único 4",
     "description": "Com isto em mãos, é desbloqueada a receita de [Fuzil de Tiro Único (Legendary)], que você pode criar em [WeaponFactory Dirty 02]."
   },
+  "Blueprint_SkyAssaultRifle_2": {
+    "localized_name": "Esquema de Fuzil de Assalto Pesado 1",
+    "description": "Com isto em mãos, a receita de [Fuzil de Assalto Pesado (Uncommon)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_SkyAssaultRifle_3": {
+    "localized_name": "Esquema de Fuzil de Assalto Pesado 2",
+    "description": "Com isto em mãos, a receita de [Fuzil de Assalto Pesado (Rare)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_SkyAssaultRifle_4": {
+    "localized_name": "Esquema de Fuzil de Assalto Pesado 3",
+    "description": "Com isto em mãos, a receita de [Fuzil de Assalto Pesado (Epic)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_SkyAssaultRifle_5": {
+    "localized_name": "Esquema de Fuzil de Assalto Pesado 4",
+    "description": "Com isto em mãos, a receita de [Fuzil de Assalto Pesado (Legendary)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_SkyBeamSword_2": {
+    "localized_name": "Esquema de Espada de Laser 1",
+    "description": "Com isto em mãos, a receita de [Espada de Laser (Uncommon)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_SkyBeamSword_3": {
+    "localized_name": "Esquema de Espada de Laser 2",
+    "description": "Com isto em mãos, a receita de [Espada de Laser (Rare)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_SkyBeamSword_4": {
+    "localized_name": "Esquema de Espada de Laser 3",
+    "description": "Com isto em mãos, a receita de [Espada de Laser (Epic)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_SkyBeamSword_5": {
+    "localized_name": "Esquema de Espada de Laser 4",
+    "description": "Com isto em mãos, a receita de [Espada de Laser (Legendary)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_SkyBow_2": {
+    "localized_name": "Esquema de Arco Mecânico 1",
+    "description": "Com isto em mãos, a receita de [Arco Mecânico (Uncommon)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_SkyBow_3": {
+    "localized_name": "Esquema de Arco Mecânico 2",
+    "description": "Com isto em mãos, a receita de [Arco Mecânico (Rare)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_SkyBow_4": {
+    "localized_name": "Esquema de Arco Mecânico 3",
+    "description": "Com isto em mãos, a receita de [Arco Mecânico (Epic)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_SkyBow_5": {
+    "localized_name": "Esquema de Arco Mecânico 4",
+    "description": "Com isto em mãos, a receita de [Arco Mecânico (Legendary)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_SkyGrenadeLauncher_2": {
+    "localized_name": "Esquema de Lança-Granadas Tático 1",
+    "description": "Com isto em mãos, a receita de [Lança-Granadas Tático (Uncommon)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_SkyGrenadeLauncher_3": {
+    "localized_name": "Esquema de Lança-Granadas Tático 2",
+    "description": "Com isto em mãos, a receita de [Lança-Granadas Tático (Rare)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_SkyGrenadeLauncher_4": {
+    "localized_name": "Esquema de Lança-Granadas Tático 3",
+    "description": "Com isto em mãos, a receita de [Lança-Granadas Tático (Epic)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_SkyGrenadeLauncher_5": {
+    "localized_name": "Esquema de Lança-Granadas Tático 4",
+    "description": "Com isto em mãos, a receita de [Lança-Granadas Tático (Legendary)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_SkyShotgun_2": {
+    "localized_name": "Esquema de Espingarda-Protótipo 1",
+    "description": "Com isto em mãos, a receita de [Espingarda-Protótipo (Uncommon)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_SkyShotgun_3": {
+    "localized_name": "Esquema de Espingarda-Protótipo 2",
+    "description": "Com isto em mãos, a receita de [Espingarda-Protótipo (Rare)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_SkyShotgun_4": {
+    "localized_name": "Esquema de Espingarda-Protótipo 3",
+    "description": "Com isto em mãos, a receita de [Espingarda-Protótipo (Epic)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_SkyShotgun_5": {
+    "localized_name": "Esquema de Espingarda-Protótipo 4",
+    "description": "Com isto em mãos, a receita de [Espingarda-Protótipo (Legendary)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_SkySubmachineGun_2": {
+    "localized_name": "Esquema de Submetralhadora de Combate 1",
+    "description": "Com isto em mãos, a receita de [Submetralhadora de Combate (Uncommon)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_SkySubmachineGun_3": {
+    "localized_name": "Esquema de Submetralhadora de Combate 2",
+    "description": "Com isto em mãos, a receita de [Submetralhadora de Combate (Rare)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_SkySubmachineGun_4": {
+    "localized_name": "Esquema de Submetralhadora de Combate 3",
+    "description": "Com isto em mãos, a receita de [Submetralhadora de Combate (Epic)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_SkySubmachineGun_5": {
+    "localized_name": "Esquema de Submetralhadora de Combate 4",
+    "description": "Com isto em mãos, a receita de [Submetralhadora de Combate (Legendary)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_Spear_ForestBoss2_5": {
+    "localized_name": "Esquema da Lança da Lily Fortalecida 4",
+    "description": "Com isto em mãos, a receita de [Spear ForestBoss2 (Legendary)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 04]."
+  },
   "Blueprint_Spear_ForestBoss_5": {
     "localized_name": "Esquema da Lança da Lily 4",
     "description": "Com isto em mãos, a receita de [Spear ForestBoss (Legendary)] é desbloqueada. Você pode fazê-la em [WeaponFactory Dirty 02]."
@@ -2070,6 +2858,26 @@
   "Blueprint_WeakerBow_5": {
     "localized_name": "Esquema de Arco Deteriorado 4",
     "description": "Com isto em mãos, é desbloqueada a receita de [Arco Deteriorado (Legendary)], que você pode criar em [Bancada Primitiva]."
+  },
+  "Blueprint_WhaleWhistle": {
+    "localized_name": "Esquema Borrado",
+    "description": "Com isto em mãos, a receita de [Flauta Ecoante] é desbloqueada. Você pode fazê-la em [Bancada Primitiva]."
+  },
+  "Blueprint_WidePenetrateShotgun_2": {
+    "localized_name": "Esquema de Dispersora de Raios 1",
+    "description": "Com isto em mãos, a receita de [Dispersora de Raios (Uncommon)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_WidePenetrateShotgun_3": {
+    "localized_name": "Esquema de Dispersora de Raios 2",
+    "description": "Com isto em mãos, a receita de [Dispersora de Raios (Rare)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_WidePenetrateShotgun_4": {
+    "localized_name": "Esquema de Dispersora de Raios 3",
+    "description": "Com isto em mãos, a receita de [Dispersora de Raios (Epic)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
+  },
+  "Blueprint_WidePenetrateShotgun_5": {
+    "localized_name": "Esquema de Dispersora de Raios 4",
+    "description": "Com isto em mãos, a receita de [Dispersora de Raios (Legendary)] é desbloqueada. Você pode fazê-la em [Bancada da Civilização Antiga]."
   },
   "Blueprint_Wire_Fence": {
     "localized_name": "Esquema de Cerca de Arame",
@@ -2327,6 +3135,14 @@
     "localized_name": "Prova de Eliminação de Prunelia",
     "description": "Prova de haver eliminado |Prunelia: Aia Tingida de Anil|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
+  "BossDefeatReward_BossRush": {
+    "localized_name": "Essência Impura de Pal Modificado",
+    "description": "Prova de haver eliminado os Pals modificados. É uma das chaves para anular a barreira da Sala do Selo na parte mais profunda da Árvore Mundial."
+  },
+  "BossDefeatReward_CactusDoll": {
+    "localized_name": "Prova de Eliminação de Needoll",
+    "description": "Prova de haver eliminado |Needoll: Acolhida dos Mil Espinhos|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
   "BossDefeatReward_CaptainPenguin": {
     "localized_name": "Prova de Eliminação de Penking",
     "description": "Prova de haver eliminado |Penking: Desbravador do Mar Gelado|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
@@ -2339,6 +3155,14 @@
     "localized_name": "Prova de Eliminação de Felbat",
     "description": "Prova de haver eliminado |Felbat: Vampiro da Sonoite|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
+  "BossDefeatReward_CubeTurtle": {
+    "localized_name": "Prova de Eliminação de Tetroise",
+    "description": "Prova de haver eliminado |Tetroise: Grande Rocha do Deserto|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
+  "BossDefeatReward_CubeTurtle_Neutral": {
+    "localized_name": "Prova de Eliminação de Tetroise Primo",
+    "description": "Prova de haver eliminado |Tetroise Primo: Rocha Guardiã do Deserto|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
   "BossDefeatReward_DarkScorpion": {
     "localized_name": "Prova de Eliminação de Menasting",
     "description": "Prova de haver eliminado |Menasting: Lança que Tudo Perfura|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
@@ -2346,6 +3170,22 @@
   "BossDefeatReward_DarkScorpion_Ground": {
     "localized_name": "Prova de Eliminação de Menasting Terra",
     "description": "Prova de haver eliminado |Menasting Terra: Lança Perfuradora de Ouro|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
+  "BossDefeatReward_DomeArmorDragon": {
+    "localized_name": "Prova de Eliminação de Aegidron",
+    "description": "Prova de haver eliminado |Aegidron: Dragão Guardião que Tece Rastros de Luz|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
+  "BossDefeatReward_ElecLizard": {
+    "localized_name": "Prova de Eliminação de Slowatt",
+    "description": "Prova de haver eliminado |Slowatt: Sossego Eletrificado|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
+  "BossDefeatReward_ElecPanda": {
+    "localized_name": "Prova de Eliminação de Grizzbolt",
+    "description": "Prova de haver eliminado |Grizzbolt: Garras Trovejantes|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
+  "BossDefeatReward_ElecSnail": {
+    "localized_name": "Prova de Eliminação de Snock",
+    "description": "Prova de haver eliminado |Snock: Lerdeza do Relâmpago Azul|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_FairyDragon": {
     "localized_name": "Prova de Eliminação de Elphidran",
@@ -2359,6 +3199,14 @@
     "localized_name": "Prova de Eliminação de Fenglope Lux",
     "description": "Prova de haver eliminado |Fenglope Lux: Relâmpago Flutuante|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
+  "BossDefeatReward_FireKirin": {
+    "localized_name": "Prova de Eliminação de Pyrin",
+    "description": "Prova de haver eliminado |Pyrin: Corcel das Areias Escaldantes|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
+  "BossDefeatReward_FlameBuffalo": {
+    "localized_name": "Prova de Eliminação de Arsox",
+    "description": "Prova de haver eliminado |Arsox: Ignicórnio|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
   "BossDefeatReward_FlowerDinosaur_Electric": {
     "localized_name": "Prova de Eliminação de Dinossom Lux",
     "description": "Prova de haver eliminado |Dinossom Lux: Dragão Protetor dos Relâmpagos|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
@@ -2367,6 +3215,22 @@
     "localized_name": "Prova de Eliminação de Petallia",
     "description": "Prova de haver eliminado |Petallia: Princesa dos Jardins|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
+  "BossDefeatReward_FlowerPrince": {
+    "localized_name": "Pétala de Dandilord",
+    "description": "Prova de haver eliminado |Dandilord|. É uma das chaves para anular a barreira da Sala do Selo na parte mais profunda da Árvore Mundial."
+  },
+  "BossDefeatReward_FoxExorcist": {
+    "localized_name": "Prova de Eliminação de Flaracle",
+    "description": "Prova de haver eliminado |Flaracle: Vidência da Conveniência|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
+  "BossDefeatReward_FoxMage": {
+    "localized_name": "Prova de Eliminação de Wixen",
+    "description": "Prova de haver eliminado |Wixen: Maga-Raposa de Fogo|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
+  "BossDefeatReward_GhostDragon": {
+    "localized_name": "Prova de Eliminação de Eidrolon",
+    "description": "Prova de haver eliminado |Eidrolon: Asas da Liberdade|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
   "BossDefeatReward_GhostRabbit": {
     "localized_name": "Prova de Eliminação de Nitemary",
     "description": "Prova de haver eliminado |Nitemary: Coelho Negro das Almas|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
@@ -2374,6 +3238,14 @@
   "BossDefeatReward_GoldenHorse": {
     "localized_name": "Prova de Eliminação de Gildane",
     "description": "Prova de haver eliminado |Gildane: Criatura Protetora do Ocaso|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
+  "BossDefeatReward_GrassGolem": {
+    "localized_name": "Prova de Eliminação de Dualith",
+    "description": "Prova de haver eliminado |Dualith: Dois Corações de Veios Azuis|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
+  "BossDefeatReward_GrassGolem_Dark": {
+    "localized_name": "Prova de Eliminação de Dualith Noct",
+    "description": "Prova de haver eliminado |Dualith Noct: Dois Corações de Veios Violetas|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_GrassMammoth": {
     "localized_name": "Prova de Eliminação de Mammorest",
@@ -2407,6 +3279,10 @@
     "localized_name": "Prova de Eliminação de Faleris Aqua",
     "description": "Prova de haver eliminado |Faleris Aqua: Conquistador do Céu de Água|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
+  "BossDefeatReward_IceFox": {
+    "localized_name": "Prova de Eliminação de Foxcicle",
+    "description": "Prova de haver eliminado |Foxcicle: Raposa de Gelo Congelante|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
   "BossDefeatReward_IceHorse": {
     "localized_name": "Prova de Eliminação de Frostallion",
     "description": "Prova de haver eliminado |Frostallion: Lendário Cavalo do Céu Congelado|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
@@ -2426,6 +3302,10 @@
   "BossDefeatReward_JetDragon": {
     "localized_name": "Prova de Eliminação de Jetragon",
     "description": "Prova de haver eliminado |Jetragon: Lendário Dragão do Meteoro|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
+  "BossDefeatReward_KabukiMan": {
+    "localized_name": "Prova de Eliminação de Renjishi",
+    "description": "Prova de haver eliminado |Renjishi: Guerreiro Excêntrico Ansioso por Aplausos|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_KingAlpaca": {
     "localized_name": "Prova de Eliminação de Kingpaca",
@@ -2455,13 +3335,37 @@
     "localized_name": "Prova de Eliminação de Relaxaurus Lux",
     "description": "Prova de haver eliminado |Relaxaurus Lux: Dragão Voraz Trovejante|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
+  "BossDefeatReward_LilyQueen": {
+    "localized_name": "Prova de Eliminação de Lyleen",
+    "description": "Prova de haver eliminado |Lyleen: Imperadora dos Lírios|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
   "BossDefeatReward_LilyQueen_Dark": {
     "localized_name": "Prova de Eliminação de Lyleen Noct",
     "description": "Prova de haver eliminado |Lyleen Noct: Imperadora do Abismo|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
+  "BossDefeatReward_LotusDragon": {
+    "localized_name": "Prova de Eliminação de Ophydia",
+    "description": "Prova de haver eliminado |Ophydia: Dragão Imaculado das Flores d'Água|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
+  "BossDefeatReward_Manticore": {
+    "localized_name": "Prova de Eliminação de Blazehowl",
+    "description": "Prova de haver eliminado |Blazehowl: Rei das Cem Labaredas|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
+  "BossDefeatReward_MoonChild": {
+    "localized_name": "Prova de Eliminação de Wistella",
+    "description": "Prova de haver eliminado |Wistella: Aquela que Traja o Céu Noturno|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
   "BossDefeatReward_MopKing": {
     "localized_name": "Prova de Eliminação de Sweepa",
     "description": "Prova de haver eliminado |Sweepa: Maciez Misteriosa|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
+  "BossDefeatReward_Mothman": {
+    "localized_name": "Asa de Silvance",
+    "description": "Prova de haver eliminado |Silvance|. É uma das chaves para anular a barreira da Sala do Selo na parte mais profunda da Árvore Mundial."
+  },
+  "BossDefeatReward_MushroomLady": {
+    "localized_name": "Prova de Eliminação de Mycora",
+    "description": "Prova de haver eliminado |Mycora: Cogumelo Meigo|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_Mutant": {
     "localized_name": "Prova de Eliminação de Lunaris",
@@ -2503,6 +3407,14 @@
     "localized_name": "Prova de Eliminação de Dazzi Noct",
     "description": "Prova de haver eliminado |Dazzi Noct: Descendente das Nuvens Negras|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
+  "BossDefeatReward_RockBeast": {
+    "localized_name": "Prova de Eliminação de Kuprok",
+    "description": "Prova de haver eliminado |Kuprok: Grande Veio Ambulante|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
+  "BossDefeatReward_RockBeast_Ice": {
+    "localized_name": "Prova de Eliminação de Kuprok Cryst",
+    "description": "Prova de haver eliminado |Kuprok Cryst: Grande Geleira Ambulante|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
   "BossDefeatReward_Ronin": {
     "localized_name": "Prova de Eliminação de Bushi",
     "description": "Prova de haver eliminado |Bushi: Samurai Andarilho|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
@@ -2519,6 +3431,10 @@
     "localized_name": "Prova de Eliminação de Water Broncherry",
     "description": "Prova de haver eliminado |Water Broncherry: Onda Anunciadora do Verão|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
+  "BossDefeatReward_ScorpionMan_Electric": {
+    "localized_name": "Prova de Eliminação de Prixter Lux",
+    "description": "Prova de haver eliminado |Prixter Lux: Garoto do Trovão|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
   "BossDefeatReward_SkyDragon": {
     "localized_name": "Prova de Eliminação de Quivern",
     "description": "Prova de haver eliminado |Quivern: Voador Imaculado|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
@@ -2531,6 +3447,10 @@
     "localized_name": "Prova de Eliminação de Beakon",
     "description": "Prova de haver eliminado |Beakon: Asas Fulminantes|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
+  "BossDefeatReward_ThunderFluffyBird": {
+    "localized_name": "Prova de Eliminação de Dynamoff",
+    "description": "Prova de haver eliminado |Dynamoff: Fofura Eletrizante|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
   "BossDefeatReward_Umihebi": {
     "localized_name": "Prova de Eliminação de Jormuntide",
     "description": "Prova de haver eliminado |Jormuntide: Conquistador dos Mares|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
@@ -2538,6 +3458,18 @@
   "BossDefeatReward_VioletFairy": {
     "localized_name": "Prova de Eliminação de Vaelet",
     "description": "Prova de haver eliminado |Vaelet: Erva Mística de Negro Púrpura|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
+  "BossDefeatReward_VolcanicMonster": {
+    "localized_name": "Prova de Eliminação de Reptyro",
+    "description": "Prova de haver eliminado |Reptyro: Besta que Cobiça a Lava|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
+  "BossDefeatReward_VolcanoDragon": {
+    "localized_name": "Prova de Eliminação de Moldron",
+    "description": "Prova de haver eliminado |Moldron: Trilhador da Terra Ardente|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
+  "BossDefeatReward_VolcanoDragon_Ice": {
+    "localized_name": "Prova de Eliminação de Moldron Cryst",
+    "description": "Prova de haver eliminado |Moldron Cryst: Trilhador da Terra Regelante|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_WeaselDragon": {
     "localized_name": "Prova de Eliminação de Chillet",
@@ -2550,6 +3482,10 @@
   "BossDefeatReward_WhiteDeer": {
     "localized_name": "Prova de Eliminação de Celesdir",
     "description": "Prova de haver eliminado |Celesdir: Criatura da Salvação|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+  },
+  "BossDefeatReward_WhiteDeer_Dark": {
+    "localized_name": "Prova de Eliminação de Celesdir Noct",
+    "description": "Prova de haver eliminado |Celesdir Noct: Criatura do Caos|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_WhiteMoth": {
     "localized_name": "Prova de Eliminação de Sibelyx",
@@ -2651,13 +3587,33 @@
     "localized_name": "Arco de Três Disparos",
     "description": "Arco modificado para disparar 3 flechas ao mesmo tempo. Graças a um poder misterioso, consome apenas 1 Flecha em cada disparo."
   },
+  "BronzeSword": {
+    "localized_name": "Espada Primitiva",
+    "description": "Espada para combate à curta distância. Seu gume não pode ser subestimado! Quanto mais você se aproximar do inimigo, maior o perigo."
+  },
   "Cake": {
     "localized_name": "Bolo",
     "description": "Prato consumido em ocasiões festivas. Coloque no baú da fazenda de acasalamento para deixar os Pals animados e fazer com que produzam um ovo."
   },
+  "Cake02": {
+    "localized_name": "Bolo de Cogumelos",
+    "description": "Coloque no baú da Fazenda de Acasalamento para deixar os Pals animados e fazer com que produzam um ovo. O Pal que nascer poderá aumentar suas capacidades um pouco mais facilmente."
+  },
+  "Cake03": {
+    "localized_name": "Bolo de Verduras",
+    "description": "Coloque no baú da Fazenda de Acasalamento para deixar os Pals animados e fazer com que produzam ovos. Eles produzirão dois ovos por vez."
+  },
+  "Cake04": {
+    "localized_name": "Bolo de Verduras Extravagante",
+    "description": "Coloque no baú da Fazenda de Acasalamento para deixar os Pals animados e fazer com que produzam um ovo. O Pal que nascer poderá aumentar suas capacidades um pouco mais facilmente e terá maior chance de passar por mutação."
+  },
+  "Cake05": {
+    "localized_name": "Bolo Especial",
+    "description": "Coloque no baú da Fazenda de Acasalamento e os Pals que comerem isto ficarão animados e produzirão um ovo. Torna mais fácil para os filhotes herdarem várias habilidades passivas dos pais."
+  },
   "CarbonFiber": {
     "localized_name": "Fibra de Carbono",
-    "description": "Material superior que é tanto leve quanto resistente. Pode ser usado para fazer armaduras."
+    "description": "Material superior que é tanto leve quanto resistente. Pode ser usado para fazer armaduras. Você pode fazê-lo na Factory Hard 02."
   },
   "Carbonara": {
     "localized_name": "Macarrão à Carbonara",
@@ -2689,7 +3645,7 @@
   },
   "ChargeLaserRifleBullet": {
     "localized_name": "Bala de Fuzil de Carga",
-    "description": "Projétil usado com Fuzil de Carga e armas similares."
+    "description": "Projétil usado com Fuzil de Carga e armas similares. Você pode fazê-lo na WeaponFactory Dirty 04."
   },
   "ChargeLaserRifle_2": {
     "localized_name": "Fuzil de Carga",
@@ -2737,11 +3693,11 @@
   },
   "Cloth": {
     "localized_name": "Pano",
-    "description": "Pano feito ao tecer Lã. Necessário para produzir armaduras."
+    "description": "Pano feito ao tecer Lã. Necessário para produzir armaduras. Você pode fazê-lo na Bancada Primitiva."
   },
   "Cloth2": {
     "localized_name": "Pano Requintado",
-    "description": "Pano Requintado feito ao tecer grande quantidade de Lã. Necessário para produzir armaduras de qualidade."
+    "description": "Pano Requintado feito ao tecer grande quantidade de Lã. Necessário para produzir armaduras de qualidade. Você pode fazê-lo na Factory Hard 01."
   },
   "ClothArmor": {
     "localized_name": "Roupas de Pano",
@@ -2828,8 +3784,8 @@
     "description": "Arco modernizado. É capaz de disparar flechas ainda mais poderosas."
   },
   "Computer": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Computador",
+    "description": "Um componente fundamental em tecnologias modernas, sendo usado para controlar recursos automatizados e maquinário avançado. Você pode fazê-lo na Factory Hard 03."
   },
   "CopperArmor": {
     "localized_name": "Armadura de Metal",
@@ -2917,11 +3873,15 @@
   },
   "CopperOre": {
     "localized_name": "Minério Metálico",
-    "description": "Converte-se em um lingote ao ser refinado no forno. Encontrado em cavernas e outros lugares. Dizem existir Pals capazes de detectar minérios."
+    "description": "Converte-se em um lingote ao ser refinado no forno. Encontrado em cavernas e outros lugares."
   },
   "CornSoup": {
     "localized_name": "pt-BR Text",
     "description": "pt-BR Text"
+  },
+  "Corrosive_Solvent": {
+    "localized_name": "Corrosivo",
+    "description": "Perigoso solvente químico com capacidade de decomposição poderosa. É empregado em processos de alta precisão e tratamento especial de materiais. Você pode fazê-lo na Factory Hard 02."
   },
   "CrudeOil": {
     "localized_name": "Óleo cru",
@@ -2991,6 +3951,26 @@
     "localized_name": "Espingarda de Cano Duplo",
     "description": "Espingarda de poder devastador à curta distância e que permite dois disparos consecutivos. Tem baixa capacidade de munição, mas alto poder de fogo."
   },
+  "DroneLauncher": {
+    "localized_name": "Lança-Drones",
+    "description": "Lançador que dispara drones de ataque automatizado. É possível manter até oito drones ativos, garantindo dominação contínua do território."
+  },
+  "DroneLauncher_2": {
+    "localized_name": "Lança-Drones",
+    "description": "Lançador que dispara drones de ataque automatizado. É possível manter até oito drones ativos, garantindo dominação contínua do território."
+  },
+  "DroneLauncher_3": {
+    "localized_name": "Lança-Drones",
+    "description": "Lançador que dispara drones de ataque automatizado. É possível manter até oito drones ativos, garantindo dominação contínua do território."
+  },
+  "DroneLauncher_4": {
+    "localized_name": "Lança-Drones",
+    "description": "Lançador que dispara drones de ataque automatizado. É possível manter até oito drones ativos, garantindo dominação contínua do território."
+  },
+  "DroneLauncher_5": {
+    "localized_name": "Lança-Drones",
+    "description": "Lançador que dispara drones de ataque automatizado. É possível manter até oito drones ativos, garantindo dominação contínua do território."
+  },
   "Eaglestew": {
     "localized_name": "Refogado de Galeclaw",
     "description": "Iguaria bem cozida que contém um delicioso e encorpado sabor selvagem. Quando ingerida, torna um pouco mais difícil perder SAN por tempo limitado."
@@ -3006,6 +3986,30 @@
   "ElecBaton": {
     "localized_name": "Bastão de Choque",
     "description": "Arma de curto alcance que eletriza o alvo ao atingi-lo. Pals eletrizados são mais fáceis de capturar."
+  },
+  "ElectricArcAssaultRifle": {
+    "localized_name": "Fuzil de Plasma",
+    "description": "Fuzil cujo projétil emite um choque elétrico a partir do ponto de impacto, atingindo vários inimigos em cadeia."
+  },
+  "ElectricArcAssaultRifleBullet": {
+    "localized_name": "Munição de Fuzil de Plasma",
+    "description": "Projétil usado com Fuzil de Plasma. Você pode fazê-lo na Bancada da Civilização Antiga."
+  },
+  "ElectricArcAssaultRifle_2": {
+    "localized_name": "Fuzil de Plasma",
+    "description": "Fuzil cujo projétil emite um choque elétrico a partir do ponto de impacto, atingindo vários inimigos em cadeia."
+  },
+  "ElectricArcAssaultRifle_3": {
+    "localized_name": "Fuzil de Plasma",
+    "description": "Fuzil cujo projétil emite um choque elétrico a partir do ponto de impacto, atingindo vários inimigos em cadeia."
+  },
+  "ElectricArcAssaultRifle_4": {
+    "localized_name": "Fuzil de Plasma",
+    "description": "Fuzil cujo projétil emite um choque elétrico a partir do ponto de impacto, atingindo vários inimigos em cadeia."
+  },
+  "ElectricArcAssaultRifle_5": {
+    "localized_name": "Fuzil de Plasma",
+    "description": "Fuzil cujo projétil emite um choque elétrico a partir do ponto de impacto, atingindo vários inimigos em cadeia."
   },
   "ElectricOrgan": {
     "localized_name": "Órgão Elétrico",
@@ -3057,7 +4061,7 @@
   },
   "EnergyLauncherBullet": {
     "localized_name": "Cartucho de Plasma",
-    "description": "Projétil usado com Canhão de Plasma e armas similares."
+    "description": "Projétil usado com Canhão de Plasma e armas similares. Você pode fazê-lo na WeaponFactory Dirty 03."
   },
   "EnergyRocketLauncher": {
     "localized_name": "Canhão de Plasma",
@@ -3085,7 +4089,7 @@
   },
   "EnergyShotgunBullet": {
     "localized_name": "Cartucho de Espingarda de Energia",
-    "description": "Projétil usado com Espingarda de Energia e armas similares."
+    "description": "Projétil usado com Espingarda de Energia e armas similares. Você pode fazê-lo na WeaponFactory Dirty 04."
   },
   "EnergyShotgun_2": {
     "localized_name": "Espingarda de Energia",
@@ -3121,7 +4125,7 @@
   },
   "ExplosiveBullet": {
     "localized_name": "Foguete",
-    "description": "Projétil usado com Launcher Default e armas similares."
+    "description": "Projétil usado com Launcher Default e armas similares. Você pode fazê-lo na WeaponFactory Dirty 03."
   },
   "Fang": {
     "localized_name": "pt-BR Text",
@@ -3237,7 +4241,7 @@
   },
   "FlamethrowerBullet": {
     "localized_name": "Combustível de Lança-Chamas",
-    "description": "Combustível de lança-chamas. Munição usada com Flamethrower e armas similares."
+    "description": "Combustível de lança-chamas. Projétil usado com Flamethrower e armas similares. Você pode fazê-lo na WeaponFactory Dirty 03."
   },
   "Flour": {
     "localized_name": "Farinha de Trigo",
@@ -3420,12 +4424,12 @@
     "description": "Equipamento de cabeça para disfarçar-se de Björn."
   },
   "GasMask": {
-    "localized_name": "pt-BR Text",
-    "description": "pt-BR Text"
+    "localized_name": "Máscara de Névoa Corrosiva",
+    "description": "Máscara com um mecanismo de filtragem especial. Anula o dano causado por névoa corrosiva."
   },
   "GatlingBullet": {
     "localized_name": "Bala de Gatling",
-    "description": "Projétil usado com Gatling Gun e armas similares."
+    "description": "Projétil usado com Gatling Gun e armas similares. Você pode fazê-lo na WeaponFactory Dirty 03."
   },
   "GatlingGun": {
     "localized_name": "Gatling Gun",
@@ -3501,7 +4505,7 @@
   },
   "GrenadeBullet": {
     "localized_name": "Granada",
-    "description": "Projétil usado com Lança-Granadas e armas similares."
+    "description": "Projétil usado com Lança-Granadas e armas similares. Você pode fazê-lo na WeaponFactory Dirty 03."
   },
   "GrenadeLauncher": {
     "localized_name": "Lança-Granadas",
@@ -3534,6 +4538,10 @@
   "GrilledSheepHerbs": {
     "localized_name": "Lamball grelhado com ervas",
     "description": "Utilizando frutinhas frescas em abundância, este prato cria um aroma que realça o sabor único da carne de ovelha. Quando ingerido, confere Defesa +10% por tempo limitado."
+  },
+  "GrilledSwordCutlassFish": {
+    "localized_name": "Skutlass Grelhado com Sal",
+    "description": "Prato preparado grelhando um filé de Skutlass fresco temperado com bastante sal. Quando ingerido, impede que você sofra empurrões para trás ou atordoamento por tempo limitado."
   },
   "GuidedMissileLauncher": {
     "localized_name": "Lança-Mísseis",
@@ -3597,7 +4605,11 @@
   },
   "HandgunBullet": {
     "localized_name": "Bala de Pistola",
-    "description": "Projétil usado com HandGun Default e armas similares."
+    "description": "Projétil usado com HandGun Default e armas similares. Você pode fazê-lo na WeaponFactory Dirty 01."
+  },
+  "HandgunShield": {
+    "localized_name": "Escudo Balístico",
+    "description": "Escudo Balístico"
   },
   "Head001": {
     "localized_name": "Coroa Real",
@@ -4083,9 +5095,73 @@
     "localized_name": "Coroa da Salvação",
     "description": "Permite sentir a força sinistra do Hartalis [Supremo]. São pouquíssimos os que conseguem obter isto."
   },
+  "HeadEquip048": {
+    "localized_name": "Chapéu de Fantasia de Auri",
+    "description": "Equipamento de cabeça para se vestir como a Auri."
+  },
+  "HeadEquip049": {
+    "localized_name": "Chapéu de Fantasia de Zenara",
+    "description": "Equipamento de cabeça para se vestir como a Zenara. São pouquíssimos os que conseguem obter isto."
+  },
+  "HeadEquip050": {
+    "localized_name": "Tiara de Herbil",
+    "description": "Tiara inspirada em um Herbil."
+  },
+  "HeadEquip051": {
+    "localized_name": "Tiara de Kingpaca",
+    "description": "Tiara inspirada em um Kingpaca."
+  },
+  "HeadEquip052": {
+    "localized_name": "Chapéu de Gloopie",
+    "description": "Chapéu inspirado em uma Gloopie."
+  },
+  "HeadEquip053": {
+    "localized_name": "Chapéu de Jelliette",
+    "description": "Chapéu inspirado em uma Jelliette."
+  },
+  "HeadEquip054": {
+    "localized_name": "Chapéu de Turtacle",
+    "description": "Chapéu inspirado em um Turtacle."
+  },
+  "HeadEquip055": {
+    "localized_name": "Chapéu de Croajiro",
+    "description": "Chapéu inspirado em um Croajiro."
+  },
+  "HeadEquip056": {
+    "localized_name": "Chapéu de Chikipi",
+    "description": "Chapéu inspirado em um Chikipi."
+  },
+  "HeadEquip057": {
+    "localized_name": "Chapéu de Dandilord",
+    "description": "Chapéu inspirado em um Dandilord."
+  },
+  "HeadEquip058": {
+    "localized_name": "Chapéu de Shroomer",
+    "description": "Chapéu inspirado em um MushroomDragon Dark."
+  },
+  "HeadEquip059": {
+    "localized_name": "Adorno de Ghangler",
+    "description": "Adorno para cabelo inspirado em um Ghangler."
+  },
+  "HeadEquip060": {
+    "localized_name": "Chapéu de Icelyn",
+    "description": "Chapéu inspirado em uma Icelyn."
+  },
+  "HeadEquip061": {
+    "localized_name": "Chapéu de Splatterina",
+    "description": "Chapéu inspirado em uma Splatterina."
+  },
+  "HeadEquip062": {
+    "localized_name": "Chapéu de Tarantriss",
+    "description": "Chapéu inspirado em uma Tarantriss."
+  },
   "Herbs": {
     "localized_name": "Remédio Inferior",
     "description": "Remédio Inferior ótimas para Gripe, Distensão e Indigestão. Não recuperam PV ao serem ingeridas."
+  },
+  "HighGrade_Processed_Wood": {
+    "localized_name": "Tábua de Madeira Requintada",
+    "description": "Tábua criada ao polir com esmero Wood Fine. Com uma linda textura, é usada em trabalhos de luxo. Você pode fazê-la na Factory Hard 03."
   },
   "Homeward": {
     "localized_name": "Nuvens de Trovão do Regresso",
@@ -4125,7 +5201,7 @@
   },
   "InkBullet": {
     "localized_name": "Tinta de Decalque",
-    "description": "Projétil usado com uma arma de decalque. Usa tinta para fazer desenhos de Pals."
+    "description": "Projétil usado com uma arma de decalque. Usa tinta para fazer desenhos de Pals. Você pode fazê-lo na WeaponFactory Dirty 01."
   },
   "IronArmor": {
     "localized_name": "Armadura de Metal Refinado",
@@ -4217,7 +5293,7 @@
   },
   "JellyfishFairy_jelly": {
     "localized_name": "Gelatina Atordoante de Jelliette",
-    "description": "Sobremesa fantástica que utiliza Meat JellyfishFairy e Fluido de Pal. Quando ingerida, aumenta um pouco a experiência obtida e confere Ataque +10% por tempo limitado."
+    "description": "Sobremesa fantástica que utiliza Meat JellyfishFairy e Muco de Pal Aquático. Quando ingerida, aumenta um pouco a experiência obtida e confere Ataque +10% por tempo limitado."
   },
   "JellyfishGhost_jelly": {
     "localized_name": "Gelatina Vacilante de Jellroy",
@@ -4243,6 +5319,38 @@
     "localized_name": "Katana",
     "description": "Katana para combate à curta distância. Seu gume afiado permite fatiar o alvo com um só golpe."
   },
+  "KeySphere_01": {
+    "localized_name": "Esfera-Chave da Inveja",
+    "description": "Relíquia da civilização antiga que costumava prosperar nesta terra em um passado distante. Embora não tenha sido completamente decifrada, estudos recentes sugerem que ela é parte de algum dispositivo gigantesco. |O pecado que trouxe a ruína pela cobiça da fortuna alheia.|"
+  },
+  "KeySphere_02": {
+    "localized_name": "Esfera-Chave da Soberba",
+    "description": "Relíquia da civilização antiga que costumava prosperar nesta terra em um passado distante. Embora não tenha sido completamente decifrada, estudos recentes sugerem que ela é parte de algum dispositivo gigantesco. |O pecado que trouxe a desgraça por um desejo insolente pela convivência.|"
+  },
+  "KeySphere_03": {
+    "localized_name": "Esfera-Chave da Avareza",
+    "description": "Relíquia da civilização antiga que costumava prosperar nesta terra em um passado distante. Embora não tenha sido completamente decifrada, estudos recentes sugerem que ela é parte de algum dispositivo gigantesco. |O pecado de ansiar pela união sem aceitar o próprio destino.|"
+  },
+  "KeySphere_04": {
+    "localized_name": "Esfera-Chave da Preguiça",
+    "description": "Relíquia da civilização antiga que costumava prosperar nesta terra em um passado distante. Embora não tenha sido completamente decifrada, estudos recentes sugerem que ela é parte de algum dispositivo gigantesco. |O pecado de cair no caminho da ruína por abandonar a compaixão.|"
+  },
+  "KeySphere_05": {
+    "localized_name": "Esfera-Chave da Gula",
+    "description": "Relíquia da civilização antiga que costumava prosperar nesta terra em um passado distante. Embora não tenha sido completamente decifrada, estudos recentes sugerem que ela é parte de algum dispositivo gigantesco. |O pecado de devorar a vida do planeta, sem jamais se saciar.|"
+  },
+  "KeySphere_06": {
+    "localized_name": "Esfera-Chave da Luxúria",
+    "description": "Relíquia da civilização antiga que costumava prosperar nesta terra em um passado distante. Embora não tenha sido completamente decifrada, estudos recentes sugerem que ela é parte de algum dispositivo gigantesco. |O pecado de buscar tabus exteriores e transgredir as leis humanas.|"
+  },
+  "KeySphere_07": {
+    "localized_name": "Esfera-Chave da Ira",
+    "description": "Relíquia da civilização antiga que costumava prosperar nesta terra em um passado distante. Embora não tenha sido completamente decifrada, estudos recentes sugerem que ela é parte de algum dispositivo gigantesco. |O pecado de espalhar morte por entregar-se à cólera.|"
+  },
+  "KeySphere_08": {
+    "localized_name": "Esfera-Chave do Pecado Original",
+    "description": "Relíquia da civilização antiga que costumava prosperar nesta terra em um passado distante. Embora não tenha sido completamente decifrada, estudos recentes sugerem que ela é parte de algum dispositivo gigantesco. |O pecado de haver nascido e negar a vida de todos os seres.|"
+  },
   "Lantern": {
     "localized_name": "Lampião de Cintura",
     "description": "Lampião para prender à cintura. Acende sozinho ao anoitecer. É possível alterar o modo de iluminação para que permaneça sempre aceso. Um só já basta para iluminar o ambiente."
@@ -4253,11 +5361,11 @@
   },
   "LaserBullet": {
     "localized_name": "Cartucho de Energia",
-    "description": "Projétil usado com Fuzil Laser e armas similares."
+    "description": "Projétil usado com Fuzil Laser e armas similares. Você pode fazê-lo na WeaponFactory Dirty 03."
   },
   "LaserGatlingBullet": {
     "localized_name": "Cartucho de Laser para Gatling Gun",
-    "description": "Projétil usado com Gatling Gun Laser e armas similares."
+    "description": "Projétil usado com Gatling Gun Laser e armas similares. Você pode fazê-lo na WeaponFactory Dirty 03."
   },
   "LaserGatlingGun": {
     "localized_name": "Gatling Gun Laser",
@@ -4278,6 +5386,10 @@
   "LaserGatlingGun_5": {
     "localized_name": "Gatling Gun Laser",
     "description": "Arma a laser de alta cadência de disparo. Seu poder de fogo elevado é capaz de subjugar vários inimigos ao mesmo tempo."
+  },
+  "LaserMiningTool": {
+    "localized_name": "Cortador a Plasma Múltiplo",
+    "description": "Cortador a plasma portátil capaz de focar a energia do plasma e dispará-la. É empregado em diversas áreas, desde a lapidação de minérios até o corte de árvores. Sua potência elevada também possibilita garimpar minérios especiais."
   },
   "LaserRifle": {
     "localized_name": "Fuzil Laser",
@@ -4326,6 +5438,10 @@
   "Launcher_Meteor_5": {
     "localized_name": "Lança-Meteoros",
     "description": "Arma absurda criada pelo processamento de meteoritos. Ao atingir o alvo, causa uma explosão semelhante à de um meteorito."
+  },
+  "Lava_Ancient": {
+    "localized_name": "Rocha de Lava Antiga",
+    "description": "Rocha de lava formada ao longo de muito tempo sob condições extremas. A lava azul nela contida continua a emitir calor ainda hoje."
   },
   "Leather": {
     "localized_name": "Couro",
@@ -4497,7 +5613,7 @@
   },
   "ManganeseIngot": {
     "localized_name": "Lingote de Marganês",
-    "description": "Liga feita de Minério de Marganês, Minério Metálico e Carvão Mineral. Com elevada resistência a energia, serve de material para armas."
+    "description": "Liga metálica feita de Minério de Marganês que repousa no fundo do mar. Com elevada resistência a energia, serve de material para armas. Você pode refiná-la na Forno Gigantesco."
   },
   "ManganeseOre": {
     "localized_name": "Minério de Marganês",
@@ -4595,6 +5711,10 @@
     "localized_name": "Carne de Lamball",
     "description": "Carne de SheepBall. Carne vermelha atraente por seu sabor peculiar que, apesar de bastante acentuado, é delicioso."
   },
+  "Meat_SwordCutlassFish": {
+    "localized_name": "Filé de Skutlass",
+    "description": "Filé de SwordCutlassFish. Caracteriza-se por uma carne maleável e volumosa. Devido à espinha semelhante a uma katana, é preciso ter muito cuidado no momento do preparo."
+  },
   "Medicines": {
     "localized_name": "Remédio",
     "description": "Remédio fantástico que é ótimo contra Úlcera gástrica e Fratura. Não recupera PV."
@@ -4605,7 +5725,7 @@
   },
   "MeteorBullet": {
     "localized_name": "Meteorito",
-    "description": "Projétil usado com Launcher Meteor e armas similares."
+    "description": "Projétil usado com Launcher Meteor e armas similares. Você pode fazê-lo na WeaponFactory Dirty 02."
   },
   "MeteorDrop": {
     "localized_name": "Fragmento de Meteorito",
@@ -4625,7 +5745,7 @@
   },
   "MissileBullet": {
     "localized_name": "Míssil",
-    "description": "Projétil usado com Lança-Mísseis e armas similares."
+    "description": "Projétil usado com Lança-Mísseis e armas similares. Você pode fazê-lo na WeaponFactory Dirty 03."
   },
   "Money": {
     "localized_name": "Moeda de Ouro",
@@ -4759,6 +5879,10 @@
     "localized_name": "Takoyaki de Gloopie",
     "description": "Prato preparado assando bolas de massa de Farinha de Trigo com recheio de Meat OctopusGirl. Quando ingerido, aumenta um pouco a experiência obtida por tempo limitado."
   },
+  "OctopusGirl_Takoyaki2": {
+    "localized_name": "Macarrão de Frutos do Mar",
+    "description": "Prato de macarrão fresco combinado com o aroma de frutos do mar, utilizando uma porção generosa de tentáculos de Gloopie. Quando ingerido, anula o dano sofrido por explosões por tempo limitado."
+  },
   "OldRevolver": {
     "localized_name": "Revólver Deteriorado",
     "description": "Pequena arma de fogo com tambor e um pouco deteriorada. Supera a Handgun default em potência com cada tiro."
@@ -4795,149 +5919,225 @@
     "localized_name": "Suco Suspeito",
     "description": "Suco que dá uma boa sensação. Quando bebido, aumenta um pouco a velocidade de trabalho por tempo limitado, embora também faça cair um pouco a SAN."
   },
+  "Otomo_ATDark_ElementBoost_1": {
+    "localized_name": "Bastão de Comando do Monarca do Breu",
+    "description": "Acessório que aumenta bastante o poder de ataque de Pals lutando ao seu lado. Também fortalece bastante o dano de escuridão dos Pals."
+  },
+  "Otomo_ATDragon_ElementBoost_1": {
+    "localized_name": "Bastão de Comando do Dragão Divino",
+    "description": "Acessório que aumenta bastante o poder de ataque de Pals lutando ao seu lado. Também fortalece bastante o dano dracônico dos Pals."
+  },
+  "Otomo_ATEarth_ElementBoost_1": {
+    "localized_name": "Bastão de Comando do Regente da Terra",
+    "description": "Acessório que aumenta bastante o poder de ataque de Pals lutando ao seu lado. Também fortalece bastante o dano de terra dos Pals."
+  },
+  "Otomo_ATElectricity_ElementBoost_1": {
+    "localized_name": "Bastão de Comando do Regente dos Raios",
+    "description": "Acessório que aumenta bastante o poder de ataque de Pals lutando ao seu lado. Também fortalece bastante o dano elétrico dos Pals."
+  },
+  "Otomo_ATFire_ElementBoost_1": {
+    "localized_name": "Bastão de Comando do Regente do Fogo",
+    "description": "Acessório que aumenta bastante o poder de ataque de Pals lutando ao seu lado. Também fortalece bastante o dano de fogo dos Pals."
+  },
+  "Otomo_ATIce_ElementBoost_1": {
+    "localized_name": "Bastão de Comando do Regente do Gelo",
+    "description": "Acessório que aumenta bastante o poder de ataque de Pals lutando ao seu lado. Também fortalece bastante o dano de gelo dos Pals."
+  },
+  "Otomo_ATLeaf_ElementBoost_1": {
+    "localized_name": "Bastão de Comando do Monarca dos Espíritos",
+    "description": "Acessório que aumenta bastante o poder de ataque de Pals lutando ao seu lado. Também fortalece bastante o dano de grama dos Pals."
+  },
+  "Otomo_ATNormal_ElementBoost_1": {
+    "localized_name": "Bastão de Comando da Ascensão",
+    "description": "Acessório que aumenta bastante o poder de ataque de Pals lutando ao seu lado. Também fortalece bastante o dano não elemental dos Pals."
+  },
+  "Otomo_ATWater_ElementBoost_1": {
+    "localized_name": "Bastão de Comando da Realeza Marinha",
+    "description": "Acessório que aumenta bastante o poder de ataque de Pals lutando ao seu lado. Também fortalece bastante o dano de água dos Pals."
+  },
   "Otomo_Attack_up1": {
     "localized_name": "Apito do Apoio de Ataque",
-    "description": "Acessório que aumenta apenas um pouco o poder de ataque de Pals lutando ao seu lado."
+    "description": "Acessório que aumenta o poder de ataque de Pals lutando ao seu lado."
   },
   "Otomo_Attack_up2": {
-    "localized_name": "Apito do Apoio de Ataque +1",
+    "localized_name": "Apito do Apoio de Ataque",
     "description": "Acessório que aumenta o poder de ataque de Pals lutando ao seu lado."
   },
   "Otomo_Attack_up3": {
-    "localized_name": "Apito do Apoio de Ataque +2",
-    "description": "Acessório que aumenta bastante o poder de ataque de Pals lutando ao seu lado."
+    "localized_name": "Apito do Apoio de Ataque",
+    "description": "Acessório que aumenta o poder de ataque de Pals lutando ao seu lado."
+  },
+  "Otomo_DFDark_ElementBoost_1": {
+    "localized_name": "Proteção de Lyleen Noct",
+    "description": "Acessório que aumenta bastante a defesa de Pals lutando ao seu lado. Também fortalece bastante o dano de escuridão dos Pals."
+  },
+  "Otomo_DFDragon_ElementBoost_1": {
+    "localized_name": "Proteção de Jetragon",
+    "description": "Acessório que aumenta bastante a defesa de Pals lutando ao seu lado. Também fortalece bastante o dano dracônico dos Pals."
+  },
+  "Otomo_DFEarth_ElementBoost_1": {
+    "localized_name": "Proteção de Anubis",
+    "description": "Acessório que aumenta bastante a defesa de Pals lutando ao seu lado. Também fortalece bastante o dano de terra dos Pals."
+  },
+  "Otomo_DFElectricity_ElementBoost_1": {
+    "localized_name": "Proteção de Orserk",
+    "description": "Acessório que aumenta bastante a defesa de Pals lutando ao seu lado. Também fortalece bastante o dano elétrico dos Pals."
+  },
+  "Otomo_DFFire_ElementBoost_1": {
+    "localized_name": "Proteção de Blazamut",
+    "description": "Acessório que aumenta bastante a defesa de Pals lutando ao seu lado. Também fortalece bastante o dano de fogo dos Pals."
+  },
+  "Otomo_DFIce_ElementBoost_1": {
+    "localized_name": "Proteção de Frostallion",
+    "description": "Acessório que aumenta bastante a defesa de Pals lutando ao seu lado. Também fortalece bastante o dano de gelo dos Pals."
+  },
+  "Otomo_DFLeaf_ElementBoost_1": {
+    "localized_name": "Proteção de Lyleen",
+    "description": "Acessório que aumenta bastante a defesa de Pals lutando ao seu lado. Também fortalece bastante o dano de grama dos Pals."
+  },
+  "Otomo_DFNormal_ElementBoost_1": {
+    "localized_name": "Proteção de Hartalis",
+    "description": "Acessório que aumenta bastante a defesa de Pals lutando ao seu lado. Também fortalece bastante o dano não elemental dos Pals."
+  },
+  "Otomo_DFWater_ElementBoost_1": {
+    "localized_name": "Proteção de Neptilius",
+    "description": "Acessório que aumenta bastante a defesa de Pals lutando ao seu lado. Também fortalece bastante o dano de água dos Pals."
   },
   "Otomo_Defense_up1": {
     "localized_name": "Apito do Apoio de Defesa",
-    "description": "Acessório que aumenta apenas um pouco a defesa de Pals lutando ao seu lado."
+    "description": "Acessório que aumenta a defesa de Pals lutando ao seu lado."
   },
   "Otomo_Defense_up2": {
-    "localized_name": "Apito do Apoio de Defesa +1",
+    "localized_name": "Apito do Apoio de Defesa",
     "description": "Acessório que aumenta a defesa de Pals lutando ao seu lado."
   },
   "Otomo_Defense_up3": {
-    "localized_name": "Apito do Apoio de Defesa +2",
-    "description": "Acessório que aumenta bastante a defesa de Pals lutando ao seu lado."
+    "localized_name": "Apito do Apoio de Defesa",
+    "description": "Acessório que aumenta a defesa de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Dark_1": {
     "localized_name": "Apito do Apoio de Escuridão",
-    "description": "Acessório que fortalece ligeiramente o dano de escuridão de Pals lutando ao seu lado."
+    "description": "Acessório que fortalece o dano de escuridão de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Dark_2": {
-    "localized_name": "Apito do Apoio de Escuridão +1",
+    "localized_name": "Apito do Apoio de Escuridão",
     "description": "Acessório que fortalece o dano de escuridão de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Dark_3": {
-    "localized_name": "Apito do Apoio de Escuridão +2",
-    "description": "Acessório que fortalece bastante o dano de escuridão de Pals lutando ao seu lado."
+    "localized_name": "Apito do Apoio de Escuridão",
+    "description": "Acessório que fortalece o dano de escuridão de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Dragon_1": {
     "localized_name": "Apito do Apoio Dracônico",
-    "description": "Acessório que fortalece ligeiramente o dano dracônico de Pals lutando ao seu lado."
+    "description": "Acessório que fortalece o dano dracônico de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Dragon_2": {
-    "localized_name": "Apito do Apoio Dracônico +1",
+    "localized_name": "Apito do Apoio Dracônico",
     "description": "Acessório que fortalece o dano dracônico de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Dragon_3": {
-    "localized_name": "Apito do Apoio Dracônico +2",
-    "description": "Acessório que fortalece bastante o dano dracônico de Pals lutando ao seu lado."
+    "localized_name": "Apito do Apoio Dracônico",
+    "description": "Acessório que fortalece o dano dracônico de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Earth_1": {
     "localized_name": "Apito do Apoio de Terra",
-    "description": "Acessório que fortalece ligeiramente o dano de terra de Pals lutando ao seu lado."
+    "description": "Acessório que fortalece o dano de terra de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Earth_2": {
-    "localized_name": "Apito do Apoio de Terra +1",
+    "localized_name": "Apito do Apoio de Terra",
     "description": "Acessório que fortalece o dano de terra de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Earth_3": {
-    "localized_name": "Apito do Apoio de Terra +2",
-    "description": "Acessório que fortalece bastante o dano de terra de Pals lutando ao seu lado."
+    "localized_name": "Apito do Apoio de Terra",
+    "description": "Acessório que fortalece o dano de terra de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Electricity_1": {
     "localized_name": "Apito do Apoio Elétrico",
-    "description": "Acessório que fortalece ligeiramente o dano elétrico de Pals lutando ao seu lado."
+    "description": "Acessório que fortalece o dano elétrico de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Electricity_2": {
-    "localized_name": "Apito do Apoio Elétrico +1",
+    "localized_name": "Apito do Apoio Elétrico",
     "description": "Acessório que fortalece o dano elétrico de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Electricity_3": {
-    "localized_name": "Apito do Apoio Elétrico +2",
-    "description": "Acessório que fortalece bastante o dano elétrico de Pals lutando ao seu lado."
+    "localized_name": "Apito do Apoio Elétrico",
+    "description": "Acessório que fortalece o dano elétrico de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Fire_1": {
     "localized_name": "Apito do Apoio de Fogo",
-    "description": "Acessório que fortalece ligeiramente o dano de fogo de Pals lutando ao seu lado."
+    "description": "Acessório que fortalece o dano de fogo de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Fire_2": {
-    "localized_name": "Apito do Apoio de Fogo +1",
+    "localized_name": "Apito do Apoio de Fogo",
     "description": "Acessório que fortalece o dano de fogo de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Fire_3": {
-    "localized_name": "Apito do Apoio de Fogo +2",
-    "description": "Acessório que fortalece bastante o dano de fogo de Pals lutando ao seu lado."
+    "localized_name": "Apito do Apoio de Fogo",
+    "description": "Acessório que fortalece o dano de fogo de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Ice_1": {
     "localized_name": "Apito do Apoio de Gelo",
-    "description": "Acessório que fortalece ligeiramente o dano de gelo de Pals lutando ao seu lado."
+    "description": "Acessório que fortalece o dano de gelo de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Ice_2": {
-    "localized_name": "Apito do Apoio de Gelo +1",
+    "localized_name": "Apito do Apoio de Gelo",
     "description": "Acessório que fortalece o dano de gelo de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Ice_3": {
-    "localized_name": "Apito do Apoio de Gelo +2",
-    "description": "Acessório que fortalece bastante o dano de gelo de Pals lutando ao seu lado."
+    "localized_name": "Apito do Apoio de Gelo",
+    "description": "Acessório que fortalece o dano de gelo de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Leaf_1": {
     "localized_name": "Apito do Apoio de Grama",
-    "description": "Acessório que fortalece ligeiramente o dano de grama de Pals lutando ao seu lado."
+    "description": "Acessório que fortalece o dano de grama de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Leaf_2": {
-    "localized_name": "Apito do Apoio de Grama +1",
+    "localized_name": "Apito do Apoio de Grama",
     "description": "Acessório que fortalece o dano de grama de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Leaf_3": {
-    "localized_name": "Apito do Apoio de Grama +2",
-    "description": "Acessório que fortalece bastante o dano de grama de Pals lutando ao seu lado."
+    "localized_name": "Apito do Apoio de Grama",
+    "description": "Acessório que fortalece o dano de grama de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Normal_1": {
     "localized_name": "Apito do Apoio Não Elemental",
-    "description": "Acessório que fortalece ligeiramente o dano não elemental de Pals lutando ao seu lado."
+    "description": "Acessório que fortalece o dano não elemental de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Normal_2": {
-    "localized_name": "Apito do Apoio Não Elemental +1",
+    "localized_name": "Apito do Apoio Não Elemental",
     "description": "Acessório que fortalece o dano não elemental de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Normal_3": {
-    "localized_name": "Apito do Apoio Não Elemental +2",
-    "description": "Acessório que fortalece bastante o dano não elemental de Pals lutando ao seu lado."
+    "localized_name": "Apito do Apoio Não Elemental",
+    "description": "Acessório que fortalece o dano não elemental de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Water_1": {
     "localized_name": "Apito do Apoio de Água",
-    "description": "Acessório que fortalece ligeiramente o dano de água de Pals lutando ao seu lado."
+    "description": "Acessório que fortalece o dano de água de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Water_2": {
-    "localized_name": "Apito do Apoio de Água +1",
+    "localized_name": "Apito do Apoio de Água",
     "description": "Acessório que fortalece o dano de água de Pals lutando ao seu lado."
   },
   "Otomo_ElementBoost_Water_3": {
-    "localized_name": "Apito do Apoio de Água +2",
-    "description": "Acessório que fortalece bastante o dano de água de Pals lutando ao seu lado."
+    "localized_name": "Apito do Apoio de Água",
+    "description": "Acessório que fortalece o dano de água de Pals lutando ao seu lado."
+  },
+  "Otomo_PalConfidence_Increase_1": {
+    "localized_name": "Anel da Confiança",
+    "description": "Quando equipado, torna mais fácil ganhar a confiança dos Pals."
   },
   "Otomo_PalExp_Increase_1": {
     "localized_name": "Sino de Promoção de Crescimento",
-    "description": "Acessório que aumenta ligeiramente a experiência obtida pelos Pals."
+    "description": "Acessório que aumenta a experiência obtida pelos Pals."
   },
   "Otomo_PalExp_Increase_2": {
-    "localized_name": "Sino de Promoção de Crescimento +1",
+    "localized_name": "Sino de Promoção de Crescimento",
     "description": "Acessório que aumenta a experiência obtida pelos Pals."
   },
   "Otomo_PalExp_Increase_3": {
-    "localized_name": "Sino de Promoção de Crescimento +2",
-    "description": "Acessório que aumenta bastante a experiência obtida pelos Pals."
+    "localized_name": "Sino de Promoção de Crescimento",
+    "description": "Acessório que aumenta a experiência obtida pelos Pals."
   },
   "OverheatRifle": {
     "localized_name": "Fuzil de Superaquecimento",
@@ -4945,7 +6145,7 @@
   },
   "OverheatRifleBullet": {
     "localized_name": "Bala de Fuzil de Superaquecimento",
-    "description": "Projétil usado com Fuzil de Superaquecimento e armas similares."
+    "description": "Projétil usado com Fuzil de Superaquecimento e armas similares. Você pode fazê-lo na WeaponFactory Dirty 04."
   },
   "OverheatRifle_2": {
     "localized_name": "Fuzil de Superaquecimento",
@@ -4963,6 +6163,78 @@
     "localized_name": "Fuzil de Superaquecimento",
     "description": "Fuzil de assalto que pode disparar continuamente sem ser recarregado. Mas é preciso ter cuidado, pois ele acaba superaquecendo e assim cria uma brecha enorme para o adversário retaliar."
   },
+  "PalAwakening_Dark": {
+    "localized_name": "Cristal do Despertar da Escuridão",
+    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento <img id=|ElemIcon Dark|/><uiCommon id=|COMMON ELEMENT NAME Dark| style=|Elem Dark|/> para liberar sua força oculta."
+  },
+  "PalAwakening_Dragon": {
+    "localized_name": "Cristal do Despertar Dracônico",
+    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento <img id=|ElemIcon Dragon|/><uiCommon id=|COMMON ELEMENT NAME Dragon| style=|Elem Dragon|/> para liberar sua força oculta."
+  },
+  "PalAwakening_Electric": {
+    "localized_name": "Cristal do Despertar Elétrico",
+    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento <img id=|ElemIcon Electric|/><uiCommon id=|COMMON ELEMENT NAME Electricity| style=|Elem Electric|/> para liberar sua força oculta."
+  },
+  "PalAwakening_Fire": {
+    "localized_name": "Cristal do Despertar do Fogo",
+    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento <img id=|ElemIcon Fire|/><uiCommon id=|COMMON ELEMENT NAME Fire| style=|Elem Fire|/> para liberar sua força oculta."
+  },
+  "PalAwakening_Grass": {
+    "localized_name": "Cristal do Despertar da Grama",
+    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento <img id=|ElemIcon Grass|/><uiCommon id=|COMMON ELEMENT NAME Leaf| style=|Elem Grass|/> para liberar sua força oculta."
+  },
+  "PalAwakening_Ground": {
+    "localized_name": "Cristal do Despertar da Terra",
+    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento <img id=|ElemIcon Ground|/><uiCommon id=|COMMON ELEMENT NAME Earth| style=|Elem Ground|/> para liberar sua força oculta."
+  },
+  "PalAwakening_Ice": {
+    "localized_name": "Cristal do Despertar do Gelo",
+    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento <img id=|ElemIcon Ice|/><uiCommon id=|COMMON ELEMENT NAME Ice| style=|Elem Ice|/> para liberar sua força oculta."
+  },
+  "PalAwakening_Material_Dark": {
+    "localized_name": "Fulgorita da Escuridão",
+    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento <img id=|ElemIcon Dark|/><uiCommon id=|COMMON ELEMENT NAME Dark| style=|Elem Dark|/> para liberar sua força oculta."
+  },
+  "PalAwakening_Material_Dragon": {
+    "localized_name": "Fulgorita do Dragão",
+    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento <img id=|ElemIcon Dragon|/><uiCommon id=|COMMON ELEMENT NAME Dragon| style=|Elem Dragon|/> para liberar sua força oculta."
+  },
+  "PalAwakening_Material_Electric": {
+    "localized_name": "Fulgorita do Raio",
+    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento <img id=|ElemIcon Electric|/><uiCommon id=|COMMON ELEMENT NAME Electricity| style=|Elem Electric|/> para liberar sua força oculta."
+  },
+  "PalAwakening_Material_Fire": {
+    "localized_name": "Fulgorita do Fogo",
+    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento <img id=|ElemIcon Fire|/><uiCommon id=|COMMON ELEMENT NAME Fire| style=|Elem Fire|/> para liberar sua força oculta."
+  },
+  "PalAwakening_Material_Grass": {
+    "localized_name": "Fulgorita da Grama",
+    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento <img id=|ElemIcon Grass|/><uiCommon id=|COMMON ELEMENT NAME Leaf| style=|Elem Grass|/> para liberar sua força oculta."
+  },
+  "PalAwakening_Material_Ground": {
+    "localized_name": "Fulgorita da Terra",
+    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento <img id=|ElemIcon Ground|/><uiCommon id=|COMMON ELEMENT NAME Earth| style=|Elem Ground|/> para liberar sua força oculta."
+  },
+  "PalAwakening_Material_Ice": {
+    "localized_name": "Fulgorita do Gelo",
+    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento <img id=|ElemIcon Ice|/><uiCommon id=|COMMON ELEMENT NAME Ice| style=|Elem Ice|/> para liberar sua força oculta."
+  },
+  "PalAwakening_Material_Neutral": {
+    "localized_name": "Fulgorita Não Elemental",
+    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento <img id=|ElemIcon Neutral|/><uiCommon id=|COMMON ELEMENT NAME Normal| style=|Elem Neutral|/> para liberar sua força oculta."
+  },
+  "PalAwakening_Material_Water": {
+    "localized_name": "Fulgorita da Água",
+    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento <img id=|ElemIcon Water|/><uiCommon id=|COMMON ELEMENT NAME Water| style=|Elem Water|/> para liberar sua força oculta."
+  },
+  "PalAwakening_Neutral": {
+    "localized_name": "Cristal do Despertar Não Elemental",
+    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento <img id=|ElemIcon Neutral|/><uiCommon id=|COMMON ELEMENT NAME Normal| style=|Elem Neutral|/> para liberar sua força oculta."
+  },
+  "PalAwakening_Water": {
+    "localized_name": "Cristal do Despertar da Água",
+    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento <img id=|ElemIcon Water|/><uiCommon id=|COMMON ELEMENT NAME Water| style=|Elem Water|/> para liberar sua força oculta."
+  },
   "PalCrystal_Ex": {
     "localized_name": "Peça da Civilização Antiga",
     "description": "Item defeituoso escavado de ruínas antigas. Contém muitas informações sobre tecnologias perdidas. De valor extremamente elevado, é procurado por todas as pessoas."
@@ -4977,7 +6249,7 @@
   },
   "PalDopingShotBullet": {
     "localized_name": "Bala de Arma Estimulante",
-    "description": "Projétil usado com Arma Estimulante e armas similares."
+    "description": "Projétil usado com Arma Estimulante e armas similares. Você pode fazê-lo na WeaponFactory Dirty 01."
   },
   "PalDopingShot_2": {
     "localized_name": "Arma Estimulante Mega",
@@ -5127,6 +6399,30 @@
     "localized_name": "Ovo Verdejante Colossal",
     "description": "PalEgg Leaf 05. É possível sentir a pulsação de um espírito verdejante, como se algo monstruoso estivesse para nascer. Coloque na Incubadora de Ovos para fazê-lo chocar."
   },
+  "PalEgg_MutationPal": {
+    "localized_name": "en text",
+    "description": "-"
+  },
+  "PalEgg_MutationPal_01": {
+    "localized_name": "Ovo Mutante",
+    "description": "PalEgg MutationPal 01. Um ovo extremamente raro que passou por uma mutação especial. Coloque na Incubadora de Ovos para fazê-lo chocar."
+  },
+  "PalEgg_MutationPal_02": {
+    "localized_name": "Ovo Mutante",
+    "description": "PalEgg MutationPal 02. Um ovo extremamente raro que passou por uma mutação especial. Coloque na Incubadora de Ovos para fazê-lo chocar."
+  },
+  "PalEgg_MutationPal_03": {
+    "localized_name": "Ovo Imenso Mutante",
+    "description": "PalEgg MutationPal 03. Um ovo extremamente raro que passou por uma mutação especial. Coloque na Incubadora de Ovos para fazê-lo chocar."
+  },
+  "PalEgg_MutationPal_04": {
+    "localized_name": "Ovo Imenso Mutante",
+    "description": "PalEgg MutationPal 04. Um ovo extremamente raro que passou por uma mutação especial. Coloque na Incubadora de Ovos para fazê-lo chocar."
+  },
+  "PalEgg_MutationPal_05": {
+    "localized_name": "Ovo Colossal Mutante",
+    "description": "PalEgg MutationPal 05. Um ovo extremamente raro que passou por uma mutação especial. Coloque na Incubadora de Ovos para fazê-lo chocar."
+  },
   "PalEgg_Normal_01": {
     "localized_name": "Ovo Comum",
     "description": "PalEgg Normal 01. É possível sentir os leves movimentos do filhotinho. Coloque na Incubadora de Ovos para fazê-lo chocar."
@@ -5167,9 +6463,29 @@
     "localized_name": "Ovo Úmido Colossal",
     "description": "PalEgg Water 05. É possível sentir a pulsação de um espírito límpido, como se algo monstruoso estivesse para nascer. Coloque na Incubadora de Ovos para fazê-lo chocar."
   },
+  "PalEgg_WorldTree_01": {
+    "localized_name": "Ovo Sinistro",
+    "description": "PalEgg WorldTree 01. Um ovo fantástico que abriga a energia da Árvore Mundial. Coloque na Incubadora de Ovos para fazê-lo chocar."
+  },
+  "PalEgg_WorldTree_02": {
+    "localized_name": "Ovo Sinistro",
+    "description": "PalEgg WorldTree 02. Um ovo fantástico que abriga a energia da Árvore Mundial. Coloque na Incubadora de Ovos para fazê-lo chocar."
+  },
+  "PalEgg_WorldTree_03": {
+    "localized_name": "Ovo Imenso Sinistro",
+    "description": "PalEgg WorldTree 03. Um ovo fantástico que abriga a energia da Árvore Mundial. Coloque na Incubadora de Ovos para fazê-lo chocar."
+  },
+  "PalEgg_WorldTree_04": {
+    "localized_name": "Ovo Imenso Sinistro",
+    "description": "PalEgg WorldTree 04. Um ovo fantástico que abriga a energia da Árvore Mundial. Coloque na Incubadora de Ovos para fazê-lo chocar."
+  },
+  "PalEgg_WorldTree_05": {
+    "localized_name": "Ovo Colossal Sinistro",
+    "description": "PalEgg WorldTree 05. Um ovo fantástico que abriga a energia da Árvore Mundial. Coloque na Incubadora de Ovos para fazê-lo chocar."
+  },
   "PalFluid": {
-    "localized_name": "Fluido de Pal",
-    "description": "Fluido extraído de Pals. De alta viscosidade, é bastante útil."
+    "localized_name": "Muco de Pal Aquático",
+    "description": "Fluido extraído de Pals de água. É bastante útil graças à sua viscosidade."
   },
   "PalGenderReverse": {
     "localized_name": "Inversor de Pal",
@@ -5239,6 +6555,122 @@
     "localized_name": "Óleo de Pal Requintado",
     "description": "Óleo de boa qualidade extraído de Pals. Necessário para produzir Polímero."
   },
+  "PalPassiveSkillChange_AutoHPRegeneRate_Passive": {
+    "localized_name": "Implante: Terapeuta",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_CraftSpeed_up3": {
+    "localized_name": "Implante de Uso Único: Artesão Transcendental",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_Deffence_up3": {
+    "localized_name": "Implante de Uso Único: Corpo de Diamante",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_EternalFlame": {
+    "localized_name": "Implante de Uso Único: Chama Eterna",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_Invader": {
+    "localized_name": "Implante de Uso Único: Invasor",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_Legend": {
+    "localized_name": "Implante de Uso Único: Lendário",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_MoveSpeed_up_3": {
+    "localized_name": "Implante de Uso Único: Desenfreado",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_MutationPal_Babysitter": {
+    "localized_name": "Implante de Uso Único: Babá",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_MutationPal_ExplosionResist": {
+    "localized_name": "Implante de Uso Único: Blindagem Pesada",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_MutationPal_Immortal": {
+    "localized_name": "Implante de Uso Único: Imortalidade",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_MutationPal_Mutant": {
+    "localized_name": "Implante de Uso Único: Constituição Peculiar",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_Nushi": {
+    "localized_name": "Implante de Uso Único: Senhor das Águas",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_PAL_ALLAttack_up3": {
+    "localized_name": "Implante de Uso Único: Deus Inclemente",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_PAL_FullStomach_Down_3": {
+    "localized_name": "Implante de Uso Único: Jejuador Supremo",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_PAL_Sanity_Down_3": {
+    "localized_name": "Implante de Uso Único: Espírito Inabalável",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_Rare": {
+    "localized_name": "Implante de Uso Único: Raridade",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_RideJumpCount_Increase2": {
+    "localized_name": "Implante de Uso Único: Cruza-Céus",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_Salvation": {
+    "localized_name": "Implante de Uso Único: Salvação",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_Stamina_Up_3": {
+    "localized_name": "Implante de Uso Único: Movimento Perpétuo",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_SwimSpeed_up_3": {
+    "localized_name": "Implante de Uso Único: Rei dos Surfistas",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_Vampire": {
+    "localized_name": "Implante de Uso Único: Vampiro",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_Witch": {
+    "localized_name": "Implante de Uso Único: Bruxa",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_ATK": {
+    "localized_name": "Implante de Uso Único: Espada Sagrada de Dois Gumes",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_ATK_DEF": {
+    "localized_name": "Implante de Uso Único: Deus da Destruição",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_CraftSpeed": {
+    "localized_name": "Implante de Uso Único: Mão Demoníaca",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_DEF": {
+    "localized_name": "Implante de Uso Único: Muralha de Músculos da Terra Santa",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_FullStomach": {
+    "localized_name": "Implante de Uso Único: Viveiro da Árvore Divina",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_MoveSpeed": {
+    "localized_name": "Implante de Uso Único: Salto Dimensional",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_Sanity": {
+    "localized_name": "Implante de Uso Único: Sábio Ermitão",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
   "PalPassiveSkillChange_CoolTimeReduction_Up_1": {
     "localized_name": "Implante: Sossegado",
     "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
@@ -5288,7 +6720,7 @@
     "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_Nocturnal": {
-    "localized_name": "Implante: Noturno",
+    "localized_name": "Implante: Insônia",
     "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_NonKilling": {
@@ -5337,6 +6769,14 @@
   },
   "PalPassiveSkillChange_PAL_Sanity_Down_3": {
     "localized_name": "Implante: Espírito Inabalável",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_PlayerSP_DecreaseRate_Passive": {
+    "localized_name": "Implante: Prevenção de Exaustão",
+    "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
+  },
+  "PalPassiveSkillChange_ReloadSpeedUp_Passive": {
+    "localized_name": "Implante: Mestre da Recarga",
     "description": "Implante inserido no corpo dos Pals para alterar suas habilidades passivas. Quando você tem isto, pode selecionar as habilidades passivas disponíveis em [Mesa de Operação de Pals]."
   },
   "PalPassiveSkillChange_SalePrice_Up_1": {
@@ -5395,6 +6835,14 @@
     "localized_name": "Esfera de Pal",
     "description": "Utensílio que pode ser arremessado para capturar Pals. Um modelo de produção em massa que só serve para Pals de nível baixo."
   },
+  "PalSphere_Ancient_1": {
+    "localized_name": "Esfera Soralítica",
+    "description": "Utensílio que pode ser arremessado para capturar Pals. Uma esfera de nível elevado usada pela civilização antiga para facilitar o convívio com os Pals."
+  },
+  "PalSphere_Ancient_2": {
+    "localized_name": "Esfera Antiga",
+    "description": "Utensílio que pode ser arremessado para capturar Pals. A esfera suprema, criada como a obra máxima da civilização antiga a partir da força da Árvore Mundial."
+  },
   "PalSphere_Exotic": {
     "localized_name": "Esfera da Infinidade",
     "description": "Utensílio que pode ser arremessado para capturar Pals. De funcionalidade aterradora, permite capturar até Pals fora dos padrões."
@@ -5433,7 +6881,7 @@
   },
   "PalSummon_DarkMechaDragon": {
     "localized_name": "Tabuleta de Xenolord",
-    "description": "Tabuleta com uma gravura de Xenolord. Ofereça a um Altar de Invocação para chamar um Xenolord de [Lv 60] extremamente poderoso."
+    "description": "Tabuleta com uma gravura de Xenolord. Ofereça a um Altar de Invocação para chamar um Xenolord de [Lv 65] extremamente poderoso."
   },
   "PalSummon_DarkMechaDragon_2": {
     "localized_name": "Tabuleta de Xenolord [Supremo]",
@@ -5465,7 +6913,7 @@
   },
   "PalSummon_LegendDeer": {
     "localized_name": "Tabuleta de Hartalis",
-    "description": "Tabuleta com uma gravura de Hartalis. Ofereça a um Altar de Invocação para chamar um Hartalis de [Nv. 65] extremamente poderoso."
+    "description": "Tabuleta com uma gravura de Hartalis. Ofereça a um Altar de Invocação para chamar um Hartalis de [Nv. 70] extremamente poderoso."
   },
   "PalSummon_LegendDeer_2": {
     "localized_name": "Tabuleta de Hartalis [Supremo]",
@@ -5481,11 +6929,11 @@
   },
   "PalSummon_NightLady": {
     "localized_name": "Tabuleta de Bellanoir",
-    "description": "Tabuleta com uma gravura de Bellanoir. Ofereça a um Altar de Invocação para chamar uma Bellanoir de [Nv. 30] poderosa."
+    "description": "Tabuleta com uma gravura de Bellanoir. Ofereça a um Altar de Invocação para chamar uma Bellanoir de [Nv. 35] poderosa."
   },
   "PalSummon_NightLady_Dark": {
     "localized_name": "Tabuleta de Bellanoir Libero",
-    "description": "Tabuleta com uma gravura de NightLady Dark. Ofereça a um Altar de Invocação para chamar uma NightLady Dark de [Nv. 50] extremamente poderosa."
+    "description": "Tabuleta com uma gravura de NightLady Dark. Ofereça a um Altar de Invocação para chamar uma NightLady Dark de [Nv. 45] extremamente poderosa."
   },
   "PalSummon_NightLady_Dark_2": {
     "localized_name": "Tabuleta de Bellanoir Libero [Suprema]",
@@ -5681,7 +7129,7 @@
   },
   "Polymer": {
     "localized_name": "Polímero",
-    "description": "Polímero criado por meio do processamento de óleo. Necessário para produzir armas de fogo, por exemplo."
+    "description": "Polímero criado por meio do processamento de óleo. Necessário para produzir armas de fogo, por exemplo. Você pode fazê-lo na Factory Hard 02."
   },
   "Poppy": {
     "localized_name": "Bela Flor",
@@ -5726,6 +7174,14 @@
   "PredatorCrystal": {
     "localized_name": "Núcleo de Predador",
     "description": "Núcleo deixado por Pals predadores. Repleto de uma energia misteriosa."
+  },
+  "Premium_Processed_Wood": {
+    "localized_name": "Tábua de Madeira Milagrosa",
+    "description": "Tábua que emite um leve brilho, criada pelo processamento de uma madeira milagrosa. Abrigando um poder que supera a compreensão humana, serve como o material de base supremo."
+  },
+  "Processed_Wood": {
+    "localized_name": "Tábua de Madeira",
+    "description": "Madeira processada para facilitar o uso. É muito mais versátil que lenha virgem, podendo ser usada em diversas aplicações. Você pode fazê-la na Bancada Primitiva."
   },
   "PumpActionShotgun": {
     "localized_name": "Espingarda de Bombeamento",
@@ -5776,44 +7232,92 @@
     "description": "Cristal valioso que só pode ser encontrado na Terra Decaída. É formado por palúdio concentrado que mudou de forma após um longo período, passando a brilhar com as cores do arco-íris."
   },
   "Rankup_1": {
-    "localized_name": "Fruto-Astral do Despertar ☆1",
+    "localized_name": "Promaçã ☆1",
     "description": "Fruto mágico que é raramente avistado. Permite elevar um Pal da classe ☆0 para a ☆1."
   },
   "Rankup_2": {
-    "localized_name": "Fruto-Astral do Despertar ☆2",
+    "localized_name": "Promaçã ☆2",
     "description": "Fruto mágico que é raramente avistado. Permite elevar um Pal da classe ☆1 para a ☆2."
   },
   "Rankup_3": {
-    "localized_name": "Fruto-Astral do Despertar ☆3",
+    "localized_name": "Promaçã ☆3",
     "description": "Fruto mágico que é raramente avistado. Permite elevar um Pal da classe ☆2 para a ☆3."
   },
   "Rankup_4": {
-    "localized_name": "Fruto-Astral do Despertar ☆4",
+    "localized_name": "Promaçã ☆4",
     "description": "Fruto mágico que é raramente avistado. Permite elevar um Pal da classe ☆3 para a ☆4."
   },
   "Rankup_Arbitrary": {
-    "localized_name": "Fruto-Astral do Despertar Maduro",
+    "localized_name": "Promaçã Madura",
     "description": "Fruto mágico que é raramente avistado. Permite elevar um Pal para uma classe acima."
   },
   "ReinforcedArrow": {
     "localized_name": "Flecha Reforçada",
-    "description": "Flecha fortalecida que pode ser disparada com Arco Composto."
+    "description": "Flecha fortalecida que pode ser disparada com Arco Composto. Você pode fazê-la na Bancada Primitiva."
   },
   "Relic": {
     "localized_name": "Estátua de Lifmunk",
-    "description": "Estátuas de Pal misteriosas encontradas em vários pontos da ilha de Palpagos. Oferecê-las a certo monumento permite que você se fortaleça."
+    "description": "Estátua de Pal fantástica que aparece misteriosamente em seu bolso quando você captura muitos Pals. Ofereça-a a certas estátuas para fortalecer seu personagem."
+  },
+  "Relic_01": {
+    "localized_name": "Estátua de Lamball",
+    "description": "Estátua de Pal fantástica encontrada em várias partes de Palpagos. Ofereça-a a certas estátuas para fortalecer seu personagem."
+  },
+  "Relic_02": {
+    "localized_name": "Estátua de Pengullet",
+    "description": "Estátua de Pal fantástica encontrada em várias partes de Palpagos. Ofereça-a a certas estátuas para fortalecer seu personagem."
+  },
+  "Relic_03": {
+    "localized_name": "Estátua de Munchill",
+    "description": "Estátua de Pal fantástica encontrada em várias partes de Palpagos. Ofereça-a a certas estátuas para fortalecer seu personagem."
+  },
+  "Relic_04": {
+    "localized_name": "Estátua de Rooby",
+    "description": "Estátua de Pal fantástica encontrada em várias partes de Palpagos. Ofereça-a a certas estátuas para fortalecer seu personagem."
+  },
+  "Relic_05": {
+    "localized_name": "Estátua de Herbil",
+    "description": "Estátua de Pal fantástica encontrada em várias partes de Palpagos. Ofereça-a a certas estátuas para fortalecer seu personagem."
+  },
+  "Relic_06": {
+    "localized_name": "Estátua de Tanzee",
+    "description": "Estátua de Pal fantástica encontrada em várias partes de Palpagos. Ofereça-a a certas estátuas para fortalecer seu personagem."
+  },
+  "Relic_07": {
+    "localized_name": "Estátua de Depresso",
+    "description": "Estátua de Pal fantástica encontrada em várias partes de Palpagos. Ofereça-a a certas estátuas para fortalecer seu personagem."
+  },
+  "Relic_08": {
+    "localized_name": "Estátua de Cattiva",
+    "description": "Estátua de Pal fantástica encontrada em várias partes de Palpagos. Ofereça-a a certas estátuas para fortalecer seu personagem."
+  },
+  "Relic_09": {
+    "localized_name": "Estátua de Lunaris",
+    "description": "Estátua de Pal fantástica encontrada em várias partes de Palpagos. Ofereça-a a certas estátuas para fortalecer seu personagem."
+  },
+  "Relic_10": {
+    "localized_name": "Estátua de Relaxaurus",
+    "description": "Estátua de Pal fantástica encontrada em várias partes de Palpagos. Ofereça-a a certas estátuas para fortalecer seu personagem."
+  },
+  "Relic_11": {
+    "localized_name": "Estátua de Yakumo",
+    "description": "Estátua de Pal fantástica encontrada em várias partes de Palpagos. Ofereça-a a certas estátuas para fortalecer seu personagem."
+  },
+  "Relic_12": {
+    "localized_name": "Estátua de Mimog",
+    "description": "Ídolo de Pal fantástico que aparece misteriosamente em seu bolso quando você captura muitos Pals. Ofereça-o a certas estátuas para fortalecer seu personagem."
   },
   "RepairKit": {
-    "localized_name": "Kit de Conserto",
+    "localized_name": "Kit de Conserto de Construções",
     "description": "Ferramentas para consertar construções. Utilizadas em construções danificadas."
   },
   "RifleBullet": {
     "localized_name": "Bala de Fuzil",
-    "description": "Projétil usado com fuzil e armas similares."
+    "description": "Projétil usado com fuzil e armas similares. Você pode fazê-lo na WeaponFactory Dirty 01."
   },
   "RoughBullet": {
     "localized_name": "Munição Inferior",
-    "description": "Projétil usado com Mosquete, Pistola de Sucata e armas similares."
+    "description": "Projétil usado com Mosquete, Pistola de Sucata e armas similares. Você pode fazê-lo na WeaponFactory Dirty 01."
   },
   "Ruby": {
     "localized_name": "Rubi",
@@ -5901,7 +7405,7 @@
   },
   "SFArrow": {
     "localized_name": "Flecha Avançada",
-    "description": "Flecha de exolita que pode ser disparada com Arco Avançado."
+    "description": "Flecha fortalecida que pode ser disparada com Arco Avançado. Você pode fazê-la na Bancada Primitiva."
   },
   "SFBow": {
     "localized_name": "Arco Avançado",
@@ -6027,6 +7531,10 @@
     "localized_name": "Escudo Tera",
     "description": "Escudo fantástico criado com a tecnologia do palúdio. Ele se conserta automaticamente após algum tempo sem sofrer ataques. Como resultado de várias experiências, atingiu-se a máxima qualidade possível."
   },
+  "Shield_07": {
+    "localized_name": "Escudo Antigo",
+    "description": "Escudo criado com uma antiga tecnologia perdida. Ele se conserta automaticamente após algum tempo sem sofrer ataques. Dizem que essa função não pode ser reproduzida nos tempos modernos."
+  },
   "Shield_SF": {
     "localized_name": "Escudo Avançado",
     "description": "Escudo fantástico criado com tecnologia extremamente avançada. Ele se conserta automaticamente após algum tempo sem sofrer ataques. É um artigo de qualidade indefectível."
@@ -6037,7 +7545,7 @@
   },
   "ShotgunBullet": {
     "localized_name": "Cartucho de Espingarda",
-    "description": "Projétil usado com espingarda e armas similares."
+    "description": "Projétil usado com espingarda e armas similares. Você pode fazê-lo na WeaponFactory Dirty 01."
   },
   "SingleShotRifle": {
     "localized_name": "Fuzil de Tiro Único",
@@ -6094,6 +7602,10 @@
   "SkillCard_BubbleShot": {
     "localized_name": "Fruto de Técnica de Água: Tiro de Bolha",
     "description": "Use num Pal para ensinar a ele BubbleShot."
+  },
+  "SkillCard_BubbleShower": {
+    "localized_name": "Fruto de Técnica de Escuridão: Chuva de Veneno",
+    "description": "Use num Pal para ensinar a ele BubbleShower."
   },
   "SkillCard_ChargeCanon": {
     "localized_name": "Fruto de Técnica de Dragão: Canhão Carregado",
@@ -6331,6 +7843,10 @@
     "localized_name": "Fruto de Técnica de Terra: Furacão de Areia",
     "description": "Use num Pal para ensinar a ele SandTwister."
   },
+  "SkillCard_SeaGush": {
+    "localized_name": "Fruto de Técnica de Água: Erupção de Colunas de Água",
+    "description": "Use num Pal para ensinar a ele SeaGush."
+  },
   "SkillCard_SeedMachinegun": {
     "localized_name": "Fruto de Técnica de Grama: Metralhadora de Sementes",
     "description": "Use num Pal para ensinar a ele SeedMachinegun."
@@ -6415,6 +7931,10 @@
     "localized_name": "Fruto de Técnica de Água: Tiro Aquático",
     "description": "Use num Pal para ensinar a ele WaterGun."
   },
+  "SkillCard_WindBurst": {
+    "localized_name": "Fruto de Técnica de Grama: Rajada de Vento",
+    "description": "Use num Pal para ensinar a ele WindBurst."
+  },
   "SkillCard_WindCutter": {
     "localized_name": "Fruto de Técnica de Grama: Cortador de Vento",
     "description": "Use num Pal para ensinar a ele WindCutter."
@@ -6463,6 +7983,10 @@
     "localized_name": "Arreios de Smokie",
     "description": "Arreios de Smokie. Quando a habilidade de companheiro é ativada, detecta a localização de Cromita nas proximidades."
   },
+  "SkillUnlock_BlackPuppy_Ice": {
+    "localized_name": "Arreios de Smokie Cryst",
+    "description": "Arreios de BlackPuppy Ice. Quando a habilidade de companheiro é ativada, detecta a localização de Cromita nas proximidades."
+  },
   "SkillUnlock_BlueDragon": {
     "localized_name": "Sela de Azurobe",
     "description": "Quando você tem isto, pode montar num Azurobe."
@@ -6470,6 +7994,10 @@
   "SkillUnlock_BlueDragon_Ice": {
     "localized_name": "Sela de Azurobe Cryst",
     "description": "Quando você tem isto, pode montar num BlueDragon Ice."
+  },
+  "SkillUnlock_BlueSkyDragon": {
+    "localized_name": "Sela de Shaolong",
+    "description": "Quando você tem isto, pode montar num Shaolong."
   },
   "SkillUnlock_BlueThunderHorse": {
     "localized_name": "Sela de Azurmane",
@@ -6487,6 +8015,14 @@
     "localized_name": "Luvas de Tocotoco",
     "description": "Luvas para agarrar um Tocotoco com delicadeza. Quando a habilidade de companheiro é ativada, você pode agarrar um Tocotoco para atacar disparando ovos explosivos."
   },
+  "SkillUnlock_CubeTurtle": {
+    "localized_name": "Sela de Tetroise",
+    "description": "Quando você tem isto, pode montar num Tetroise ."
+  },
+  "SkillUnlock_CubeTurtle_Neutral": {
+    "localized_name": "Sela de Tetroise Primo",
+    "description": "Quando você tem isto, pode montar num CubeTurtle Neutral."
+  },
   "SkillUnlock_DarkMechaDragon": {
     "localized_name": "Sela de Xenolord",
     "description": "Quando você tem isto, pode montar num Xenolord."
@@ -6502,6 +8038,10 @@
   "SkillUnlock_Deer_Ground": {
     "localized_name": "Sela de Eikthyrdeer Terra",
     "description": "Quando você tem isto, pode montar num Deer Ground."
+  },
+  "SkillUnlock_DomeArmorDragon": {
+    "localized_name": "Sela de Aegidron",
+    "description": "Quando você tem isto, pode montar num Aegidron."
   },
   "SkillUnlock_DreamDemon": {
     "localized_name": "Colar de Daedream",
@@ -6591,9 +8131,25 @@
     "localized_name": "Sela de Maraith",
     "description": "Quando você tem isto, pode montar num Maraith."
   },
+  "SkillUnlock_GhostDragon": {
+    "localized_name": "Sela de Eidrolon",
+    "description": "Quando você tem isto, pode montar num Eidrolon."
+  },
+  "SkillUnlock_GhostDragon_Fire": {
+    "localized_name": "Sela de Eidrolon Ignis",
+    "description": "Quando você tem isto, pode montar num GhostDragon Fire."
+  },
   "SkillUnlock_GoldenHorse": {
     "localized_name": "Sela de Gildane",
     "description": "Quando você tem isto, pode montar num Gildane."
+  },
+  "SkillUnlock_GrassGolem": {
+    "localized_name": "Sela de Dualith",
+    "description": "Quando você tem isto, pode montar num Dualith e disparar um laser de grama poderoso."
+  },
+  "SkillUnlock_GrassGolem_Dark": {
+    "localized_name": "Sela de Dualith Noct",
+    "description": "Quando você tem isto, pode montar num GrassGolem Dark e disparar um laser de escuridão poderoso."
   },
   "SkillUnlock_GrassMammoth": {
     "localized_name": "Sela de Mammorest",
@@ -6667,6 +8223,10 @@
     "localized_name": "Sela de Polapup",
     "description": "Quando você tem isto, pode montar num Polapup."
   },
+  "SkillUnlock_IceSeal_Ground": {
+    "localized_name": "Sela de Polapup Terra",
+    "description": "Quando você tem isto, pode montar num IceSeal Ground."
+  },
   "SkillUnlock_JetDragon": {
     "localized_name": "Lança-mísseis de Jetragon",
     "description": "Quando você tem isto, pode montar num Jetragon e disparar mísseis à vontade."
@@ -6687,9 +8247,21 @@
     "localized_name": "Sela de Blazamut Ryu",
     "description": "Quando você tem isto, pode montar num KingBahamut Dragon."
   },
+  "SkillUnlock_KingSunfish": {
+    "localized_name": "Sela de Solmora",
+    "description": "Quando você tem isto, pode montar num Solmora."
+  },
+  "SkillUnlock_KingSunfish_Thunder": {
+    "localized_name": "Sela de Solmora Lux",
+    "description": "Quando você tem isto, pode montar num KingSunfish Thunder."
+  },
   "SkillUnlock_Kirin": {
     "localized_name": "Sela de Univolt",
     "description": "Quando você tem isto, pode montar num Univolt."
+  },
+  "SkillUnlock_Kirin_Ice": {
+    "localized_name": "Sela de Univolt Cryst",
+    "description": "Quando você tem isto, pode montar num Kirin Ice."
   },
   "SkillUnlock_Kitsunebi": {
     "localized_name": "Arreios de Foxparks",
@@ -6715,6 +8287,10 @@
     "localized_name": "Sela de Hartalis",
     "description": "Quando você tem isto, pode montar num Hartalis e gerar uma barreira que protege contra ataques."
   },
+  "SkillUnlock_LotusDragon": {
+    "localized_name": "Sela de Ophydia",
+    "description": "Quando você tem isto, pode montar numa Ophydia."
+  },
   "SkillUnlock_Manticore": {
     "localized_name": "Sela de Blazehowl",
     "description": "Quando você tem isto, pode montar num Blazehowl."
@@ -6726,6 +8302,10 @@
   "SkillUnlock_Monkey": {
     "localized_name": "Fuzil de assalto de Tanzee",
     "description": "Pequeno fuzil de assalto para Tanzee. Quando a habilidade de companheiro é ativada, Tanzee entra no modo de disparo e atira contra os inimigos nos arredores."
+  },
+  "SkillUnlock_Monkey_Fire": {
+    "localized_name": "Fuzil de Assalto de Tanzee Ignis",
+    "description": "Pequeno fuzil de assalto para Monkey Fire. Quando a habilidade de companheiro é ativada, Monkey Fire entra no modo de disparo e atira contra os inimigos nos arredores."
   },
   "SkillUnlock_MoonQueen": {
     "localized_name": "Sela de Selyne",
@@ -6758,6 +8338,10 @@
   "SkillUnlock_NightBlueHorse": {
     "localized_name": "Sela de Starryon",
     "description": "Quando você tem isto, pode montar num Starryon."
+  },
+  "SkillUnlock_NightBlueHorse_Neutral": {
+    "localized_name": "Sela de Starryon Primo",
+    "description": "Quando você tem isto, pode montar num NightBlueHorse Neutral."
   },
   "SkillUnlock_Penguin": {
     "localized_name": "Lança-foguetes de Pengullet",
@@ -6823,6 +8407,10 @@
     "localized_name": "Martelo de Bastigor",
     "description": "Quando você tem isto, pode montar num Bastigor."
   },
+  "SkillUnlock_SumoDog": {
+    "localized_name": "Sela de Bulldosu",
+    "description": "Quando você tem isto, pode montar num Bulldosu."
+  },
   "SkillUnlock_Suzaku": {
     "localized_name": "Sela de Suzaku",
     "description": "Quando você tem isto, pode montar num Suzaku."
@@ -6831,13 +8419,29 @@
     "localized_name": "Sela de Suzaku Aqua",
     "description": "Quando você tem isto, pode montar num Suzaku Water."
   },
+  "SkillUnlock_ThiefBird": {
+    "localized_name": "Sela de Roujay",
+    "description": "Quando você tem isto, pode montar num Roujay."
+  },
   "SkillUnlock_ThunderBird": {
     "localized_name": "Sela de Beakon",
     "description": "Quando você tem isto, pode montar num Beakon."
   },
+  "SkillUnlock_ThunderBird_Ice": {
+    "localized_name": "Sela de Beakon Cryst",
+    "description": "Quando você tem isto, pode montar num ThunderBird Ice."
+  },
   "SkillUnlock_ThunderDog": {
     "localized_name": "Sela de Rayhound",
     "description": "Quando você tem isto, pode montar num Rayhound."
+  },
+  "SkillUnlock_ThunderFluffyBird": {
+    "localized_name": "Sela de Dynamoff",
+    "description": "Quando você tem isto, pode montar num Dynamoff."
+  },
+  "SkillUnlock_Thunderdog_Ice": {
+    "localized_name": "Sela de Rayhound Cryst",
+    "description": "Quando você tem isto, pode montar num Thunderdog Ice."
   },
   "SkillUnlock_TropicalOstrich": {
     "localized_name": "Sela de Palumba",
@@ -6859,6 +8463,14 @@
     "localized_name": "Sela de Reptyro Cryst",
     "description": "Quando você tem isto, pode montar num VolcanicMonster Ice."
   },
+  "SkillUnlock_VolcanoDragon": {
+    "localized_name": "Sela de Moldron",
+    "description": "Quando você tem isto, pode montar num Moldron."
+  },
+  "SkillUnlock_VolcanoDragon_Ice": {
+    "localized_name": "Sela de Moldron Cryst",
+    "description": "Quando você tem isto, pode montar num VolcanoDragon Ice."
+  },
   "SkillUnlock_WeaselDragon": {
     "localized_name": "Sela de Chillet",
     "description": "Quando você tem isto, pode montar num Chillet."
@@ -6874,6 +8486,10 @@
   "SkillUnlock_WhiteDeer": {
     "localized_name": "Sela de Celesdir",
     "description": "Quando você tem isto, pode montar num Celesdir."
+  },
+  "SkillUnlock_WhiteDeer_Dark": {
+    "localized_name": "Sela de Celesdir Noct",
+    "description": "Quando você tem isto, pode montar num WhiteDeer Dark."
   },
   "SkillUnlock_WhiteShieldDragon": {
     "localized_name": "Sela de Silvegis",
@@ -6895,6 +8511,162 @@
     "localized_name": "Sela de Wumpo Botan",
     "description": "Quando você tem isto, pode montar num Yeti Grass."
   },
+  "SkyAssaultRifle": {
+    "localized_name": "Fuzil de Assalto Pesado",
+    "description": "Fuzil de assalto criado usando lingotes de soralite. Fortalecido para possibilitar o uso de munição mais potente enquanto mantém sua versatilidade."
+  },
+  "SkyAssaultRifleBullet": {
+    "localized_name": "Munição de Fuzil de Assalto Pesado",
+    "description": "Projétil usado com Fuzil de Assalto Pesado. Você pode fazê-lo na Bancada da Civilização Antiga."
+  },
+  "SkyAssaultRifle_2": {
+    "localized_name": "Fuzil de Assalto Pesado",
+    "description": "Fuzil de assalto criado usando lingotes de soralite. Fortalecido para possibilitar o uso de munição mais potente enquanto mantém sua versatilidade."
+  },
+  "SkyAssaultRifle_3": {
+    "localized_name": "Fuzil de Assalto Pesado",
+    "description": "Fuzil de assalto criado usando lingotes de soralite. Fortalecido para possibilitar o uso de munição mais potente enquanto mantém sua versatilidade."
+  },
+  "SkyAssaultRifle_4": {
+    "localized_name": "Fuzil de Assalto Pesado",
+    "description": "Fuzil de assalto criado usando lingotes de soralite. Fortalecido para possibilitar o uso de munição mais potente enquanto mantém sua versatilidade."
+  },
+  "SkyAssaultRifle_5": {
+    "localized_name": "Fuzil de Assalto Pesado",
+    "description": "Fuzil de assalto criado usando lingotes de soralite. Fortalecido para possibilitar o uso de munição mais potente enquanto mantém sua versatilidade."
+  },
+  "SkyBeamSword": {
+    "localized_name": "Espada de Laser",
+    "description": "Espada de Raio criada usando lingotes de soralite. Arma de curto alcance que converte energia de alta potência em uma lâmina capaz de fatiar o alvo instantaneamente."
+  },
+  "SkyBeamSword_2": {
+    "localized_name": "Espada de Laser",
+    "description": "Espada de Raio criada usando lingotes de soralite. Arma de curto alcance que converte energia de alta potência em uma lâmina capaz de fatiar o alvo instantaneamente."
+  },
+  "SkyBeamSword_3": {
+    "localized_name": "Espada de Laser",
+    "description": "Espada de Raio criada usando lingotes de soralite. Arma de curto alcance que converte energia de alta potência em uma lâmina capaz de fatiar o alvo instantaneamente."
+  },
+  "SkyBeamSword_4": {
+    "localized_name": "Espada de Laser",
+    "description": "Espada de Raio criada usando lingotes de soralite. Arma de curto alcance que converte energia de alta potência em uma lâmina capaz de fatiar o alvo instantaneamente."
+  },
+  "SkyBeamSword_5": {
+    "localized_name": "Espada de Laser",
+    "description": "Espada de Raio criada usando lingotes de soralite. Arma de curto alcance que converte energia de alta potência em uma lâmina capaz de fatiar o alvo instantaneamente."
+  },
+  "SkyBow": {
+    "localized_name": "Arco Mecânico",
+    "description": "Arco criado usando lingotes de soralite. Com velocidade inicial e poder de penetração muito melhorados, torna possível realizar ataques à longa distância de alta precisão."
+  },
+  "SkyBowArrow": {
+    "localized_name": "Flecha de Arco Mecânico",
+    "description": "Flecha fortalecida que pode ser disparada com Arco Mecânico. Você pode fazê-la na Bancada da Civilização Antiga."
+  },
+  "SkyBow_2": {
+    "localized_name": "Arco Mecânico",
+    "description": "Arco criado usando lingotes de soralite. Com velocidade inicial e poder de penetração muito melhorados, torna possível realizar ataques à longa distância de alta precisão."
+  },
+  "SkyBow_3": {
+    "localized_name": "Arco Mecânico",
+    "description": "Arco criado usando lingotes de soralite. Com velocidade inicial e poder de penetração muito melhorados, torna possível realizar ataques à longa distância de alta precisão."
+  },
+  "SkyBow_4": {
+    "localized_name": "Arco Mecânico",
+    "description": "Arco criado usando lingotes de soralite. Com velocidade inicial e poder de penetração muito melhorados, torna possível realizar ataques à longa distância de alta precisão."
+  },
+  "SkyBow_5": {
+    "localized_name": "Arco Mecânico",
+    "description": "Arco criado usando lingotes de soralite. Com velocidade inicial e poder de penetração muito melhorados, torna possível realizar ataques à longa distância de alta precisão."
+  },
+  "SkyGrenadeLauncher": {
+    "localized_name": "Lança-Granadas Tático",
+    "description": "Lança-granadas criado usando lingotes de soralite. Com maior estabilidade na trajetória dos projéteis, possibilita ataques explosivos precisos à longa distância."
+  },
+  "SkyGrenadeLauncherBullet": {
+    "localized_name": "Carga de Lança-Granadas Tático",
+    "description": "Projétil usado com Lança-Granadas Tático. Você pode fazê-lo na Bancada da Civilização Antiga."
+  },
+  "SkyGrenadeLauncher_2": {
+    "localized_name": "Lança-Granadas Tático",
+    "description": "Lança-granadas criado usando lingotes de soralite. Com maior estabilidade na trajetória dos projéteis, possibilita ataques explosivos precisos à longa distância."
+  },
+  "SkyGrenadeLauncher_3": {
+    "localized_name": "Lança-Granadas Tático",
+    "description": "Lança-granadas criado usando lingotes de soralite. Com maior estabilidade na trajetória dos projéteis, possibilita ataques explosivos precisos à longa distância."
+  },
+  "SkyGrenadeLauncher_4": {
+    "localized_name": "Lança-Granadas Tático",
+    "description": "Lança-granadas criado usando lingotes de soralite. Com maior estabilidade na trajetória dos projéteis, possibilita ataques explosivos precisos à longa distância."
+  },
+  "SkyGrenadeLauncher_5": {
+    "localized_name": "Lança-Granadas Tático",
+    "description": "Lança-granadas criado usando lingotes de soralite. Com maior estabilidade na trajetória dos projéteis, possibilita ataques explosivos precisos à longa distância."
+  },
+  "SkyHeavyBullet": {
+    "localized_name": "en text",
+    "description": "-"
+  },
+  "SkyIslandOre": {
+    "localized_name": "Soralite",
+    "description": "Minério raro encontrado apenas na Terra do Esplendor Celeste. Sua rocha matriz, de densidade assombrosa, contém um brilho e padrões misteriosos."
+  },
+  "SkyLightBullet": {
+    "localized_name": "en text",
+    "description": "-"
+  },
+  "SkyShotgun": {
+    "localized_name": "Espingarda-Protótipo",
+    "description": "Espingarda criada usando lingotes de soralite. Apresenta um poder de fogo esmagador em combates a distâncias extremamente reduzidas e também se adapta bem a combates prolongados graças a seu carregador especial."
+  },
+  "SkyShotgunBullet": {
+    "localized_name": "Cartucho de Espingarda-Protótipo",
+    "description": "Projétil usado com Espingarda-Protótipo. Você pode fazê-lo na Bancada da Civilização Antiga."
+  },
+  "SkyShotgun_2": {
+    "localized_name": "Espingarda-Protótipo",
+    "description": "Espingarda criada usando lingotes de soralite. Apresenta um poder de fogo esmagador em combates a distâncias extremamente reduzidas e também se adapta bem a combates prolongados graças a seu carregador especial."
+  },
+  "SkyShotgun_3": {
+    "localized_name": "Espingarda-Protótipo",
+    "description": "Espingarda criada usando lingotes de soralite. Apresenta um poder de fogo esmagador em combates a distâncias extremamente reduzidas e também se adapta bem a combates prolongados graças a seu carregador especial."
+  },
+  "SkyShotgun_4": {
+    "localized_name": "Espingarda-Protótipo",
+    "description": "Espingarda criada usando lingotes de soralite. Apresenta um poder de fogo esmagador em combates a distâncias extremamente reduzidas e também se adapta bem a combates prolongados graças a seu carregador especial."
+  },
+  "SkyShotgun_5": {
+    "localized_name": "Espingarda-Protótipo",
+    "description": "Espingarda criada usando lingotes de soralite. Apresenta um poder de fogo esmagador em combates a distâncias extremamente reduzidas e também se adapta bem a combates prolongados graças a seu carregador especial."
+  },
+  "SkySubmachineGun": {
+    "localized_name": "Submetralhadora de Combate",
+    "description": "Submetralhadora criada usando lingotes de soralite. Tem maior poder de supressão graças ao carregador e à munição melhorados."
+  },
+  "SkySubmachineGunBullet": {
+    "localized_name": "Munição de Submetralhadora de Combate",
+    "description": "Projétil usado com Submetralhadora de Combate. Você pode fazê-lo na Bancada da Civilização Antiga."
+  },
+  "SkySubmachineGun_2": {
+    "localized_name": "Submetralhadora de Combate",
+    "description": "Submetralhadora criada usando lingotes de soralite. Tem maior poder de supressão graças ao carregador e à munição melhorados."
+  },
+  "SkySubmachineGun_3": {
+    "localized_name": "Submetralhadora de Combate",
+    "description": "Submetralhadora criada usando lingotes de soralite. Tem maior poder de supressão graças ao carregador e à munição melhorados."
+  },
+  "SkySubmachineGun_4": {
+    "localized_name": "Submetralhadora de Combate",
+    "description": "Submetralhadora criada usando lingotes de soralite. Tem maior poder de supressão graças ao carregador e à munição melhorados."
+  },
+  "SkySubmachineGun_5": {
+    "localized_name": "Submetralhadora de Combate",
+    "description": "Submetralhadora criada usando lingotes de soralite. Tem maior poder de supressão graças ao carregador e à munição melhorados."
+  },
+  "SkyislandIngot": {
+    "localized_name": "Lingote de Soralite",
+    "description": "Material metálico da civilização antiga refinado a partir de um minério adormecido na Terra do Esplendor Celeste. Este raríssimo material processado serve de base para construções e equipamentos de alto padrão. Você pode refiná-lo na Forno da Civilização Antiga."
+  },
   "Spear": {
     "localized_name": "Lança de Pedra",
     "description": "Lança útil em combates à curta distância. De longo alcance, permite lutar mantendo-se um pouco distante."
@@ -6910,6 +8682,14 @@
   "Spear_ForestBoss": {
     "localized_name": "Lança da Lily",
     "description": "Lança adorada por Lily. É com esta arma que ela julga aqueles que menosprezam os Pals."
+  },
+  "Spear_ForestBoss2": {
+    "localized_name": "Lança da Lily Fortalecida",
+    "description": "Versão reforçada da lança adorada por Lily. É com esta arma que ela transforma em peneira aqueles que menosprezam Pals."
+  },
+  "Spear_ForestBoss2_5": {
+    "localized_name": "Lança da Lily Fortalecida",
+    "description": "Versão reforçada da lança adorada por Lily. É com esta arma que ela transforma em peneira aqueles que menosprezam Pals."
   },
   "Spear_ForestBoss_5": {
     "localized_name": "Lança da Lily",
@@ -6961,7 +8741,7 @@
   },
   "StainlessSteel": {
     "localized_name": "Exolita",
-    "description": "Liga metálica contendo Cromita, Minério Metálico e Exoquartzo. Pode servir de material para construções ou equipamentos avançados."
+    "description": "Liga metálica contendo Cromita e Exoquartzo. Pode servir de material para construções ou equipamentos avançados. Você pode refiná-la na Forno Gigantesco."
   },
   "StatusPointResetSan": {
     "localized_name": "Limpador de Memória",
@@ -7049,7 +8829,7 @@
   },
   "StealIngot": {
     "localized_name": "Lingote de Metal Pal",
-    "description": "Material para criar armas e armaduras de Metal Pal. Essa liga de palúdio e outros metais garante uma resistência aumentada."
+    "description": "Material para criar armas e armaduras de Metal Pal. Por conter palúdio, esta liga garante uma resistência aumentada."
   },
   "Stew": {
     "localized_name": "pt-BR Text",
@@ -7099,6 +8879,10 @@
     "localized_name": "Algodão-Doce",
     "description": "Algodão-doce que pode ser extraído de Woolipop. Sua doçura se dissolve com suavidade na boca."
   },
+  "Sweet_Caramel": {
+    "localized_name": "Algodão-Doce de Caramelo",
+    "description": "Algodão-doce sabor caramelo que pode ser extraído de SweetsSheep Ground. Sua doçura se dissolve com suavidade na boca."
+  },
   "Sword": {
     "localized_name": "Espada",
     "description": "Espada para combate à curta distância. Seu gume é excepcional! Quanto mais você se aproximar do inimigo, maior o perigo."
@@ -7130,6 +8914,10 @@
   "TechnologyBook_G3": {
     "localized_name": "Manual Técnico Futurista",
     "description": "Livro que versa sobre assuntos técnicos de outra era. Use-o para obter muitos pontos de tecnologia."
+  },
+  "Thermal_Core": {
+    "localized_name": "Núcleo Hipertérmico",
+    "description": "Núcleo reativo de alta temperatura que contém uma vasta energia térmica. É empregado na unidade motora de dispositivos de ponta. Você pode fazê-lo na Factory Hard 03."
   },
   "Tomato": {
     "localized_name": "Tomate",
@@ -7175,6 +8963,14 @@
     "localized_name": "Mapa do Tesouro",
     "description": "Mapa antigo que indica o local de um tesouro. Use-o para adicionar uma marca no seu próprio mapa."
   },
+  "UniqueMaterial_FlowerPrince": {
+    "localized_name": "Membrana Miásmica",
+    "description": "Órgão que protege o Dandilord da névoa corrosiva que ele mesmo libera. É capaz de filtrar a névoa para eliminar seu veneno."
+  },
+  "UniqueMaterial_Mothman": {
+    "localized_name": "Fibra Antiexplosão",
+    "description": "Fibra extraída da superfície do corpo do Silvance. É capaz de atenuar o impacto de explosões."
+  },
   "Unko_L": {
     "localized_name": "Esterco Gigante",
     "description": "Sua presença causa uma sensação um tanto intimidadora. Tanto o cheiro quanto a forma são símbolos da sua imponência."
@@ -7185,11 +8981,19 @@
   },
   "UnlockEquipmentSlot_Accessory_01": {
     "localized_name": "Caixa de Acessórios Fantástica",
-    "description": "Caixa fantástica cujo interior permanece sincronizado com o corpo de quem a possui. Adiciona um slot para equipar acessórios."
+    "description": "Caixa fantástica cujo interior permanece sincronizado com o corpo de quem a possui. Com isto em mãos, é adicionado um slot para equipar acessórios. Carregar uma só já é suficiente."
   },
   "UnlockEquipmentSlot_Accessory_02": {
     "localized_name": "Caixa de Acessórios Milagrosa",
-    "description": "Caixa fantástica cujo interior permanece sincronizado com o corpo de quem a possui. Adiciona ainda mais um slot para equipar acessórios."
+    "description": "Caixa fantástica cujo interior permanece sincronizado com o corpo de quem a possui. Com isto em mãos, é adicionado ainda mais um slot para equipar acessórios. Carregar uma só já é o suficiente."
+  },
+  "UnlockEquipmentSlot_Weapon_01": {
+    "localized_name": "Suporte Adicional para Arma",
+    "description": "Suporte que possibilita equipar uma arma adicional. Com isto em mãos, é adicionado 1 slot de arma extra. Carregar um só já é o suficiente."
+  },
+  "UnlockEquipmentSlot_Weapon_02": {
+    "localized_name": "Suporte Adicional para Arma 2",
+    "description": "Suporte que possibilita equipar uma arma adicional. Com isto em mãos, é adicionado ainda mais 1 slot de arma extra. Carregar um só já é o suficiente."
   },
   "Unlock_Picking_Tier1": {
     "localized_name": "Ferramenta de Destravar Simples",
@@ -7206,6 +9010,10 @@
   "Venom": {
     "localized_name": "Glândula de Veneno",
     "description": "Material obtido de um Pal venenoso. Pode ser usado para fazer Arrow Poison."
+  },
+  "WaterBuildKit": {
+    "localized_name": "Kit de Construção na Água",
+    "description": "Ferramentas para criar construções em cima da água. Com isto, você pode colocar uma fundação sobre a água."
   },
   "WeakerBow": {
     "localized_name": "Arco Deteriorado",
@@ -7227,6 +9035,26 @@
     "localized_name": "Arco Deteriorado",
     "description": "Arma primitiva de longo alcance. Como está toda remendada, tem baixa potência."
   },
+  "WhaleWhistle": {
+    "localized_name": "Flauta Ecoante",
+    "description": "Flauta de osso feita a partir das instruções decifradas de um esquema um tanto borrado. Seu timbre límpido, que ecoa até ao longe, serve como um chamado. Ele há de despertar o senhor dos oceanos, guardião da aliança."
+  },
+  "WhaleWhistleFragment_01": {
+    "localized_name": "Fragmento das Ondas",
+    "description": "Fragmento ósseo que parece conter uma força fantástica. Apurando os ouvidos, é possível escutar um leve ruído. É o som suave e compassado das ondas."
+  },
+  "WhaleWhistleFragment_02": {
+    "localized_name": "Fragmento do Silêncio",
+    "description": "Fragmento ósseo que parece conter uma força fantástica. Apurando os ouvidos, é possível escutar um leve ruído. É o som da paz que um dia houve."
+  },
+  "WhaleWhistleFragment_03": {
+    "localized_name": "Fragmento da Espuma",
+    "description": "Fragmento ósseo que parece conter uma força fantástica. Apurando os ouvidos, é possível escutar um leve ruído. É o som da espuma que se esvai efêmera."
+  },
+  "WhaleWhistleFragment_04": {
+    "localized_name": "Fragmento da Maresia",
+    "description": "Fragmento ósseo que parece conter uma força fantástica. Apurando os ouvidos, é possível escutar um leve ruído. É o som da brisa marítima que sopra suave."
+  },
   "Wheat": {
     "localized_name": "Trigo",
     "description": "Alimento que serve de base para várias receitas. Trigo é o produto agrícola mais fundamental."
@@ -7235,13 +9063,57 @@
     "localized_name": "Semente de Trigo",
     "description": "Sementes que permitem cultivar Trigo. São necessárias para criar uma plantação. Podem ser compradas de comerciantes."
   },
+  "WidePenetrateShotgun": {
+    "localized_name": "Dispersora de Raios",
+    "description": "Arma de raio especializada em combates à curta distância. Dispara energia concentrada na forma de um feixe de dispersão."
+  },
+  "WidePenetrateShotgunBullet": {
+    "localized_name": "Cartucho de Dispersora de Raios",
+    "description": "Projétil usado com Dispersora de Raios. Você pode fazê-lo na Bancada da Civilização Antiga."
+  },
+  "WidePenetrateShotgun_2": {
+    "localized_name": "Dispersora de Raios",
+    "description": "Arma de raio especializada em combates à curta distância. Dispara energia concentrada na forma de um feixe de dispersão."
+  },
+  "WidePenetrateShotgun_3": {
+    "localized_name": "Dispersora de Raios",
+    "description": "Arma de raio especializada em combates à curta distância. Dispara energia concentrada na forma de um feixe de dispersão."
+  },
+  "WidePenetrateShotgun_4": {
+    "localized_name": "Dispersora de Raios",
+    "description": "Arma de raio especializada em combates à curta distância. Dispara energia concentrada na forma de um feixe de dispersão."
+  },
+  "WidePenetrateShotgun_5": {
+    "localized_name": "Dispersora de Raios",
+    "description": "Arma de raio especializada em combates à curta distância. Dispara energia concentrada na forma de um feixe de dispersão."
+  },
   "Wine": {
     "localized_name": "pt-BR Text",
     "description": "pt-BR Text"
   },
+  "WingGlider": {
+    "localized_name": "Mochila Alada",
+    "description": "Dispositivo com asas que pode ser acoplado às costas para possibilitar o voo. Consome WingGlider Fuel para se propulsionar."
+  },
+  "WingGlider_Fuel": {
+    "localized_name": "Célula Alada",
+    "description": "Energia usada para voar com Mochila Alada."
+  },
   "Wood": {
     "localized_name": "Madeira",
     "description": "Pode servir de material para construções ou itens. Obtida sobretudo ao cortar árvores."
+  },
+  "Wood_Ancient": {
+    "localized_name": "Casca de Árvore Antiga",
+    "description": "Casca de uma árvore que já viveu por um longo tempo sob condições extremas. Até os pedaços mais finos emanam uma força vital imensurável."
+  },
+  "Wood_Fine": {
+    "localized_name": "Madeira Dura",
+    "description": "Madeira de ótima qualidade escolhida a dedo. Pode ser extraída das árvores resistentes que crescem nas condições inóspitas de regiões como desertos, vulcões e montanhas nevadas."
+  },
+  "Wood_WorldTree": {
+    "localized_name": "Madeira Milagrosa",
+    "description": "Madeira rara que contém o poder da Árvore Mundial. Apenas artesãos experientes são capazes de processá-la."
   },
   "Wool": {
     "localized_name": "Lã",
@@ -7275,6 +9147,10 @@
     "localized_name": "Ciência do Garimpo Aplicada I",
     "description": "Texto valioso que versa sobre os segredos de Garimpo. Faça um Pal ler isto e sua aptidão para Garimpo aumentará em 1 de forma permanente."
   },
+  "WorkSuitability_AddTicket_MonsterFarm": {
+    "localized_name": "Ciência Agrônomica Aplicada I",
+    "description": "Texto valioso que versa sobre os segredos de Fazenda. Faça um Pal ler isto e sua aptidão para Fazenda aumentará em 1 de forma permanente."
+  },
   "WorkSuitability_AddTicket_ProductMedicine": {
     "localized_name": "Ciência da Manipulação Aplicada I",
     "description": "Texto valioso que versa sobre os segredos de Manipulação. Faça um Pal ler isto e sua aptidão para Manipulação aumentará em 1 de forma permanente."
@@ -7290,6 +9166,38 @@
   "WorkSuitability_AddTicket_Watering": {
     "localized_name": "Ciência da Rega Aplicada I",
     "description": "Texto valioso que versa sobre os segredos de Rega. Faça um Pal ler isto e sua aptidão para Rega aumentará em 1 de forma permanente."
+  },
+  "WorldTreeHolyWater": {
+    "localized_name": "Água Benta da Árvore Mundial",
+    "description": "Água sagrada repleta com a energia da Árvore Mundial. Purifica tudo aquilo que toca, trazendo à tona sua força oculta. Quando bebida, por tempo limitado, evita que madeira ou rochas da Árvore Mundial desapareçam ao se aproximar."
+  },
+  "WorldTreeIngot": {
+    "localized_name": "Lingote de Paloxita",
+    "description": "Liga metálica insuperável que funde Soralite e Paloxita. Um material raríssimo formado pela perfeita combinação da tecnologia da civilização antiga e do poder da Árvore Mundial. Imprescindível para atingir o ápice dos equipamentos e construções."
+  },
+  "WorldTreeOre": {
+    "localized_name": "Paloxita",
+    "description": "Energia que escapou da Árvore Mundial e se cristalizou ao longo de muitas eras. Quem tocar nisto sem nenhuma proteção acabará se ressequindo e morrendo em um único instante. Apenas aqueles capazes de controlar seu poder delicado poderão atingir o ápice da tecnologia antiga."
+  },
+  "WorldTreeRelic_01": {
+    "localized_name": "Relíquia Deteriorada da Civilização Antiga",
+    "description": "Fragmento de alguma construção ou mobília da civilização antiga. Está completamente deteriorado e já não contém nenhuma energia."
+  },
+  "WorldTreeRelic_02": {
+    "localized_name": "Relíquia Adormecida da Civilização Antiga",
+    "description": "Fragmento de alguma construção ou mobília da civilização antiga. Seu estado não é ruim, mas já não contém quase nenhuma energia."
+  },
+  "WorldTreeRelic_03": {
+    "localized_name": "Relíquia Deslumbrante da Civilização Antiga",
+    "description": "Fragmento de alguma construção ou mobília da civilização antiga. Está em bom estado, sendo possível sentir ainda alguma energia."
+  },
+  "WorldTreeRelic_04": {
+    "localized_name": "Relíquia Brilhante da Civilização Antiga",
+    "description": "Fragmento de alguma construção ou mobília da civilização antiga. Está em ótimo estado, sendo possível ver uma luz em seu interior."
+  },
+  "WorldTreeRelic_05": {
+    "localized_name": "Relíquia Reluzente da Civilização Antiga",
+    "description": "Fragmento de alguma construção ou mobília da civilização antiga. Repleto de energia, emite um brilho intenso."
   },
   "Yakisoba": {
     "localized_name": "Yakissoba de Broncherry",

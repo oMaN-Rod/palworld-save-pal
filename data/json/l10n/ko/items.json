@@ -1,15 +1,19 @@
 {
+  "AIcore": {
+    "localized_name": "AI 코어",
+    "description": "복잡한 판단과 자율 제어가 가능하여 최첨단 장치의 필수적 중추 역할을 수행하는 부품. |Factory Hard 04|에서 제작할 수 있다."
+  },
   "Accessory_AT_1": {
     "localized_name": "공격의 펜던트",
-    "description": "공격력을 조금 올려주는 장신구."
+    "description": "공격력을 올려주는 장신구."
   },
   "Accessory_AT_2": {
-    "localized_name": "공격의 펜던트+1",
+    "localized_name": "공격의 펜던트",
     "description": "공격력을 올려주는 장신구."
   },
   "Accessory_AT_3": {
-    "localized_name": "공격의 펜던트+2",
-    "description": "공격력을 상당히 올려주는 장신구."
+    "localized_name": "공격의 펜던트",
+    "description": "공격력을 올려주는 장신구."
   },
   "Accessory_AirDash1": {
     "localized_name": "에어 대시 부츠",
@@ -29,123 +33,159 @@
   },
   "Accessory_AquaResist_1": {
     "localized_name": "물 저항 반지",
-    "description": "물 속성 피해를 미미하게 경감해 주는 장신구."
+    "description": "물 속성 피해를 경감해 주는 장신구."
   },
   "Accessory_AquaResist_2": {
-    "localized_name": "물 저항 반지+1",
+    "localized_name": "물 저항 반지",
     "description": "물 속성 피해를 경감해 주는 장신구."
   },
   "Accessory_AquaResist_3": {
-    "localized_name": "물 저항 반지+2",
-    "description": "물 속성 피해를 상당히 경감해 주는 장신구."
+    "localized_name": "물 저항 반지",
+    "description": "물 속성 피해를 경감해 주는 장신구."
+  },
+  "Accessory_Avoid_1": {
+    "localized_name": "환영의 반지",
+    "description": "구르기와 스텝의 무적 시간을 연장하는 장신구."
+  },
+  "Accessory_ColdIce_1": {
+    "localized_name": "움포의 부적",
+    "description": "아주 높은 방한 효과가 있는 장신구. 얼음 속성 피해도 상당히 경감해 준다."
   },
   "Accessory_CoolResist_1": {
     "localized_name": "방한 속옷",
-    "description": "약간의 방한 효과가 있는 장신구."
+    "description": "방한 효과가 있는 장신구."
   },
   "Accessory_CoolResist_2": {
-    "localized_name": "방한 속옷+1",
+    "localized_name": "방한 속옷",
     "description": "방한 효과가 있는 장신구."
   },
   "Accessory_CoolResist_3": {
-    "localized_name": "방한 속옷+2",
-    "description": "상당한 방한 효과가 있는 장신구."
+    "localized_name": "방한 속옷",
+    "description": "방한 효과가 있는 장신구."
+  },
+  "Accessory_DFHP_1": {
+    "localized_name": "금강벌레의 벨트",
+    "description": "방어력과 HP를 크게 올려주는 장신구."
   },
   "Accessory_DarkResist_1": {
     "localized_name": "어둠 저항 반지",
-    "description": "어둠 속성 피해를 미미하게 경감해 주는 장신구."
+    "description": "어둠 속성 피해를 경감해 주는 장신구."
   },
   "Accessory_DarkResist_2": {
-    "localized_name": "어둠 저항 반지+1",
+    "localized_name": "어둠 저항 반지",
     "description": "어둠 속성 피해를 경감해 주는 장신구."
   },
   "Accessory_DarkResist_3": {
-    "localized_name": "어둠 저항 반지+2",
-    "description": "어둠 속성 피해를 상당히 경감해 주는 장신구."
+    "localized_name": "어둠 저항 반지",
+    "description": "어둠 속성 피해를 경감해 주는 장신구."
   },
   "Accessory_DragonResist_1": {
     "localized_name": "용 저항 반지",
-    "description": "용 속성 피해를 미미하게 경감해 주는 장신구."
+    "description": "용 속성 피해를 경감해 주는 장신구."
   },
   "Accessory_DragonResist_2": {
-    "localized_name": "용 저항 반지+1",
+    "localized_name": "용 저항 반지",
     "description": "용 속성 피해를 경감해 주는 장신구."
   },
   "Accessory_DragonResist_3": {
-    "localized_name": "용 저항 반지+2",
-    "description": "용 속성 피해를 상당히 경감해 주는 장신구."
+    "localized_name": "용 저항 반지",
+    "description": "용 속성 피해를 경감해 주는 장신구."
   },
   "Accessory_EarthResist_1": {
     "localized_name": "땅 저항 반지",
-    "description": "땅 속성 피해를 미미하게 경감해 주는 장신구."
+    "description": "땅 속성 피해를 경감해 주는 장신구."
   },
   "Accessory_EarthResist_2": {
-    "localized_name": "땅 저항 반지+1",
+    "localized_name": "땅 저항 반지",
     "description": "땅 속성 피해를 경감해 주는 장신구."
   },
   "Accessory_EarthResist_3": {
-    "localized_name": "땅 저항 반지+2",
-    "description": "땅 속성 피해를 상당히 경감해 주는 장신구."
+    "localized_name": "땅 저항 반지",
+    "description": "땅 속성 피해를 경감해 주는 장신구."
+  },
+  "Accessory_ExplosionResist": {
+    "localized_name": "방폭 속옷",
+    "description": "특수 섬유로 제작된 가볍고도 튼튼한 속옷. 폭발 피해를 무효화한다."
   },
   "Accessory_FireResist_1": {
     "localized_name": "화염 저항 반지",
-    "description": "화염 속성 피해를 미미하게 경감해 주는 장신구."
+    "description": "화염 속성 피해를 경감해 주는 장신구."
   },
   "Accessory_FireResist_2": {
-    "localized_name": "화염 저항 반지+1",
+    "localized_name": "화염 저항 반지",
     "description": "화염 속성 피해를 경감해 주는 장신구."
   },
   "Accessory_FireResist_3": {
-    "localized_name": "화염 저항 반지+2",
-    "description": "화염 속성 피해를 상당히 경감해 주는 장신구."
+    "localized_name": "화염 저항 반지",
+    "description": "화염 속성 피해를 경감해 주는 장신구."
+  },
+  "Accessory_HCHP_1": {
+    "localized_name": "선발대의 부적",
+    "description": "상당한 내열 및 방한 효과가 있는 장신구. HP도 크게 증가한다."
+  },
+  "Accessory_HCMW_1": {
+    "localized_name": "방랑 상인의 부적",
+    "description": "상당한 내열 및 방한 효과가 있는 장신구. 플레이어의 소지 중량 제한도 크게 증가한다."
   },
   "Accessory_HP_1": {
     "localized_name": "생명의 펜던트",
-    "description": "HP를 조금 올려주는 장신구."
+    "description": "HP를 올려주는 장신구."
   },
   "Accessory_HP_2": {
-    "localized_name": "생명의 펜던트+1",
+    "localized_name": "생명의 펜던트",
     "description": "HP를 올려주는 장신구."
   },
   "Accessory_HP_3": {
-    "localized_name": "생명의 펜던트+2",
-    "description": "HP를 상당히 올려주는 장신구."
+    "localized_name": "생명의 펜던트",
+    "description": "HP를 올려주는 장신구."
   },
   "Accessory_HeatColdResist_1": {
     "localized_name": "내열 방한 속옷",
-    "description": "약간의 내열 및 방한 효과가 있는 장신구."
+    "description": "내열 및 방한 효과가 있는 장신구."
   },
   "Accessory_HeatColdResist_2": {
-    "localized_name": "내열 방한 속옷+1",
+    "localized_name": "내열 방한 속옷",
     "description": "내열 및 방한 효과가 있는 장신구."
   },
   "Accessory_HeatColdResist_3": {
-    "localized_name": "내열 방한 속옷+2",
-    "description": "상당한 내열 및 방한 효과가 있는 장신구."
+    "localized_name": "내열 방한 속옷",
+    "description": "내열 및 방한 효과가 있는 장신구."
+  },
+  "Accessory_HeatFire_1": {
+    "localized_name": "볼카노의 부적",
+    "description": "아주 높은 내열 효과가 있는 장신구. 화염 속성 피해도 상당히 경감해 준다."
   },
   "Accessory_HeatResist_1": {
     "localized_name": "내열 속옷",
-    "description": "약간의 내열 효과가 있는 장신구."
+    "description": "내열 효과가 있는 장신구."
   },
   "Accessory_HeatResist_2": {
-    "localized_name": "내열 속옷+1",
+    "localized_name": "내열 속옷",
     "description": "내열 효과가 있는 장신구."
   },
   "Accessory_HeatResist_3": {
-    "localized_name": "내열 속옷+2",
-    "description": "상당한 내열 효과가 있는 장신구."
+    "localized_name": "내열 속옷",
+    "description": "내열 효과가 있는 장신구."
   },
   "Accessory_IceResist_1": {
     "localized_name": "얼음 저항 반지",
-    "description": "얼음 속성 피해를 미미하게 경감해 주는 장신구."
+    "description": "얼음 속성 피해를 경감해 주는 장신구."
   },
   "Accessory_IceResist_2": {
-    "localized_name": "얼음 저항 반지+1",
+    "localized_name": "얼음 저항 반지",
     "description": "얼음 속성 피해를 경감해 주는 장신구."
   },
   "Accessory_IceResist_3": {
-    "localized_name": "얼음 저항 반지+2",
-    "description": "얼음 속성 피해를 상당히 경감해 주는 장신구."
+    "localized_name": "얼음 저항 반지",
+    "description": "얼음 속성 피해를 경감해 주는 장신구."
+  },
+  "Accessory_JumpAir_1": {
+    "localized_name": "에어 워커 Mk-Ⅰ",
+    "description": "장착하면 플레이어가 공중에서 추가 점프를 1회 할 수 있도록 보조하는 장신구. 공중 대시 횟수도 1회 추가된다."
+  },
+  "Accessory_JumpAir_2": {
+    "localized_name": "에어 워커 Mk-Ⅱ",
+    "description": "장착하면 플레이어가 공중에서 추가 점프를 1회 할 수 있도록 보조하는 장신구. 공중 대시 횟수도 2회 추가된다."
   },
   "Accessory_JumpCount_Increase1": {
     "localized_name": "더블 점프 부츠",
@@ -165,27 +205,31 @@
   },
   "Accessory_LeafResist_1": {
     "localized_name": "풀 저항 반지",
-    "description": "풀 속성 피해를 미미하게 경감해 주는 장신구."
+    "description": "풀 속성 피해를 경감해 주는 장신구."
   },
   "Accessory_LeafResist_2": {
-    "localized_name": "풀 저항 반지+1",
+    "localized_name": "풀 저항 반지",
     "description": "풀 속성 피해를 경감해 주는 장신구."
   },
   "Accessory_LeafResist_3": {
-    "localized_name": "풀 저항 반지+2",
-    "description": "풀 속성 피해를 상당히 경감해 주는 장신구."
+    "localized_name": "풀 저항 반지",
+    "description": "풀 속성 피해를 경감해 주는 장신구."
   },
   "Accessory_MaxWeightUp_01": {
     "localized_name": "운반책의 반지",
-    "description": "플레이어의 소지 중량 제한이 조금 증가한다."
+    "description": "플레이어의 소지 중량 제한이 증가한다."
   },
   "Accessory_MaxWeightUp_02": {
-    "localized_name": "운반책의 반지+1",
+    "localized_name": "운반책의 반지",
     "description": "플레이어의 소지 중량 제한이 증가한다."
   },
   "Accessory_MaxWeightUp_03": {
-    "localized_name": "운반책의 반지+2",
-    "description": "플레이어의 소지 중량 제한이 크게 증가한다."
+    "localized_name": "운반책의 반지",
+    "description": "플레이어의 소지 중량 제한이 증가한다."
+  },
+  "Accessory_NonkChecker_1": {
+    "localized_name": "팰 조련사의 안경",
+    "description": "팰 조련사의 안경. 장착할 시 공격 대상의 HP를 1 미만으로 깎을 수 없게 된다. 또한 팰의 숨겨진 재능을 볼 수 있게 된다."
   },
   "Accessory_Nonkilling": {
     "localized_name": "힘 조절의 반지",
@@ -193,15 +237,67 @@
   },
   "Accessory_NormalResist_1": {
     "localized_name": "무저항 반지",
-    "description": "무속성 피해를 미미하게 경감해 주는 장신구."
+    "description": "무속성 피해를 경감해 주는 장신구."
   },
   "Accessory_NormalResist_2": {
-    "localized_name": "무저항 반지+1",
+    "localized_name": "무저항 반지",
     "description": "무속성 피해를 경감해 주는 장신구."
   },
   "Accessory_NormalResist_3": {
-    "localized_name": "무저항 반지+2",
-    "description": "무속성 피해를 상당히 경감해 주는 장신구."
+    "localized_name": "무저항 반지",
+    "description": "무속성 피해를 경감해 주는 장신구."
+  },
+  "Accessory_Otomo_Dargon_1": {
+    "localized_name": "실피아의 반지",
+    "description": "어둠 속성 피해를 상당히 경감해 주는 장신구. 함께 싸우는 팰의 용 속성 피해도 상당히 강화시켜 준다."
+  },
+  "Accessory_Otomo_Dark_1": {
+    "localized_name": "캐티메이지의 반지",
+    "description": "무속성 피해를 상당히 경감해 주는 장신구. 함께 싸우는 팰의 어둠 속성 피해도 상당히 강화시켜 준다."
+  },
+  "Accessory_Otomo_Earth_1": {
+    "localized_name": "골드스팅의 반지",
+    "description": "번개 속성 피해를 상당히 경감해 주는 장신구. 함께 싸우는 팰의 땅 속성 피해도 상당히 강화시켜 준다."
+  },
+  "Accessory_Otomo_Electricity_1": {
+    "localized_name": "볼트디어의 반지",
+    "description": "물 속성 피해를 상당히 경감해 주는 장신구. 함께 싸우는 팰의 번개 속성 피해도 상당히 강화시켜 준다."
+  },
+  "Accessory_Otomo_Fire_1": {
+    "localized_name": "만티파이어의 반지",
+    "description": "풀 속성 피해를 상당히 경감해 주는 장신구. 함께 싸우는 팰의 화염 속성 피해도 상당히 강화시켜 준다."
+  },
+  "Accessory_Otomo_Fire_2": {
+    "localized_name": "호루스의 반지",
+    "description": "얼음 속성 피해를 상당히 경감해 주는 장신구. 함께 싸우는 팰의 화염 속성 피해도 상당히 강화시켜 준다."
+  },
+  "Accessory_Otomo_Ice_1": {
+    "localized_name": "백랑이의 반지",
+    "description": "용 속성 피해를 상당히 경감해 주는 장신구. 함께 싸우는 팰의 얼음 속성 피해도 상당히 강화시켜 준다."
+  },
+  "Accessory_Otomo_Leaf_1": {
+    "localized_name": "비오레타의 반지",
+    "description": "땅 속성 피해를 상당히 경감해 주는 장신구. 함께 싸우는 팰의 풀 속성 피해도 상당히 강화시켜 준다."
+  },
+  "Accessory_Otomo_Water_1": {
+    "localized_name": "이시스의 반지",
+    "description": "화염 속성 피해를 상당히 경감해 주는 장신구. 함께 싸우는 팰의 물 속성 피해도 상당히 강화시켜 준다."
+  },
+  "Accessory_PPAT_1": {
+    "localized_name": "시푸도그의 엠블럼",
+    "description": "플레이어의 공격력을 상당히 증가시켜 주는 장신구. 팰의 공격력도 증가한다."
+  },
+  "Accessory_PPDF_1": {
+    "localized_name": "드라이지스의 엠블럼",
+    "description": "플레이어의 방어력을 상당히 증가시켜 주는 장신구. 팰의 방어력도 증가한다."
+  },
+  "Accessory_SuperJumpAir_1": {
+    "localized_name": "에어 워커 Mk-Ⅲ",
+    "description": "장착하면 플레이어가 공중에서 추가 점프를 2회 할 수 있도록 보조하는 장신구. 공중 대시 횟수도 1회 추가된다."
+  },
+  "Accessory_SuperJumpAir_2": {
+    "localized_name": "에어 워커 Mk-EX",
+    "description": "장착하면 플레이어가 공중에서 추가 점프를 2회 할 수 있도록 보조하는 장신구. 공중 대시 횟수도 2회 추가된다."
   },
   "Accessory_TalentChecker": {
     "localized_name": "재능 안경",
@@ -209,63 +305,167 @@
   },
   "Accessory_ThunderResist_1": {
     "localized_name": "번개 저항 반지",
-    "description": "번개 속성 피해를 미미하게 경감해 주는 장신구."
+    "description": "번개 속성 피해를 경감해 주는 장신구."
   },
   "Accessory_ThunderResist_2": {
-    "localized_name": "번개 저항 반지+1",
+    "localized_name": "번개 저항 반지",
     "description": "번개 속성 피해를 경감해 주는 장신구."
   },
   "Accessory_ThunderResist_3": {
-    "localized_name": "번개 저항 반지+2",
-    "description": "번개 속성 피해를 상당히 경감해 주는 장신구."
+    "localized_name": "번개 저항 반지",
+    "description": "번개 속성 피해를 경감해 주는 장신구."
+  },
+  "Accessory_WKMC_1": {
+    "localized_name": "섬 주민의 유틸리티 벨트",
+    "description": "플레이어의 소지 중량 제한이 크게 증가하는 장신구. 작업 속도도 크게 올려준다."
   },
   "Accessory_WorkSpeed_1": {
     "localized_name": "노동의 펜던트",
-    "description": "작업 속도를 조금 빠르게 올려주는 장신구."
+    "description": "작업 속도를 빠르게 올려주는 장신구."
   },
   "Accessory_WorkSpeed_2": {
-    "localized_name": "노동의 펜던트+1",
+    "localized_name": "노동의 펜던트",
     "description": "작업 속도를 빠르게 올려주는 장신구."
   },
   "Accessory_WorkSpeed_3": {
-    "localized_name": "노동의 펜던트+2",
-    "description": "작업 속도를 상당히 빠르게 올려주는 장신구."
+    "localized_name": "노동의 펜던트",
+    "description": "작업 속도를 빠르게 올려주는 장신구."
   },
   "Accessory_defense_1": {
     "localized_name": "방어의 펜던트",
-    "description": "방어력을 조금 올려주는 장신구."
+    "description": "방어력을 올려주는 장신구."
   },
   "Accessory_defense_2": {
-    "localized_name": "방어의 펜던트+1",
+    "localized_name": "방어의 펜던트",
     "description": "방어력을 올려주는 장신구."
   },
   "Accessory_defense_3": {
-    "localized_name": "방어의 펜던트+2",
-    "description": "방어력을 상당히 올려주는 장신구."
+    "localized_name": "방어의 펜던트",
+    "description": "방어력을 올려주는 장신구."
   },
   "AdditionalInventory_001": {
     "localized_name": "소형 확장 파우치",
-    "description": "물건을 더 많이 휴대할 수 있는 소형 파우치. 가지고 있으면 인벤토리 슬롯이 추가된다."
+    "description": "물건을 더 많이 휴대할 수 있는 소형 파우치. 가지고 있으면 인벤토리 슬롯이 추가된다. 하나만 갖고 있어도 충분하다."
   },
   "AdditionalInventory_002": {
     "localized_name": "중형 확장 파우치",
-    "description": "물건을 더 많이 휴대할 수 있는 중형 파우치. 가지고 있으면 인벤토리 슬롯이 추가된다."
+    "description": "물건을 더 많이 휴대할 수 있는 중형 파우치. 가지고 있으면 인벤토리 슬롯이 추가된다. 하나만 갖고 있어도 충분하다."
   },
   "AdditionalInventory_003": {
     "localized_name": "대형 확장 파우치",
-    "description": "물건을 더 많이 휴대할 수 있는 대형 파우치. 가지고 있으면 인벤토리 슬롯이 추가된다."
+    "description": "물건을 더 많이 휴대할 수 있는 대형 파우치. 가지고 있으면 인벤토리 슬롯이 추가된다. 하나만 갖고 있어도 충분하다."
   },
   "AdditionalInventory_004": {
     "localized_name": "거대 확장 파우치",
-    "description": "물건을 더 많이 휴대할 수 있는 거대 파우치. 가지고 있으면 인벤토리 슬롯이 추가된다."
+    "description": "물건을 더 많이 휴대할 수 있는 거대 파우치. 가지고 있으면 인벤토리 슬롯이 추가된다. 하나만 갖고 있어도 충분하다."
   },
   "AffectionFruit_01": {
-    "localized_name": "유대의 보도",
+    "localized_name": "유대의 보배복숭아",
     "description": "좀처럼 보기 드문 마법의 열매. 팰에게 먹이면 마음을 연다는 소문이 있다. 어떤 팰에게 먹일지 신중하게 고려하자."
   },
   "AffectionFruit_02": {
-    "localized_name": "유대의 소도",
+    "localized_name": "유대의 작은 복숭아",
     "description": "상냥한 마음이 담긴 작은 열매. 팰에게 먹이면 마음을 연다는 소문이 있다. 어떤 팰에게 먹일지 신중하게 고려하자."
+  },
+  "AncientArmor": {
+    "localized_name": "고대 갑옷",
+    "description": "솔라이트 주괴(으)로 제작한 고대 갑옷. 잃어버린 문명의 정수가 아낌없이 담겨 있다. 종말급 위협에도 굴하지 않는, 압도적인 방어력을 자랑하는 궁극의 방어구."
+  },
+  "AncientArmorCold": {
+    "localized_name": "내한 고대 갑옷",
+    "description": "개량형 고대 갑옷. 고대 기술로 방한 성능이 더욱 강화되어, 모든 것이 얼어붙는 추위도 견뎌낼 수 있다."
+  },
+  "AncientArmorCold_2": {
+    "localized_name": "내한 고대 갑옷",
+    "description": "개량형 고대 갑옷. 고대 기술로 방한 성능이 더욱 강화되어, 모든 것이 얼어붙는 추위도 견뎌낼 수 있다."
+  },
+  "AncientArmorCold_3": {
+    "localized_name": "내한 고대 갑옷",
+    "description": "개량형 고대 갑옷. 고대 기술로 방한 성능이 더욱 강화되어, 모든 것이 얼어붙는 추위도 견뎌낼 수 있다."
+  },
+  "AncientArmorCold_4": {
+    "localized_name": "내한 고대 갑옷",
+    "description": "개량형 고대 갑옷. 고대 기술로 방한 성능이 더욱 강화되어, 모든 것이 얼어붙는 추위도 견뎌낼 수 있다."
+  },
+  "AncientArmorCold_5": {
+    "localized_name": "내한 고대 갑옷",
+    "description": "개량형 고대 갑옷. 고대 기술로 방한 성능이 더욱 강화되어, 모든 것이 얼어붙는 추위도 견뎌낼 수 있다."
+  },
+  "AncientArmorHeat": {
+    "localized_name": "내열 고대 갑옷",
+    "description": "개량형 고대 갑옷. 고대 기술로 내열 성능이 더욱 강화되어, 타오를 듯 뜨거운 환경도 견뎌낼 수 있다."
+  },
+  "AncientArmorHeat_2": {
+    "localized_name": "내열 고대 갑옷",
+    "description": "개량형 고대 갑옷. 고대 기술로 내열 성능이 더욱 강화되어, 타오를 듯 뜨거운 환경도 견뎌낼 수 있다."
+  },
+  "AncientArmorHeat_3": {
+    "localized_name": "내열 고대 갑옷",
+    "description": "개량형 고대 갑옷. 고대 기술로 내열 성능이 더욱 강화되어, 타오를 듯 뜨거운 환경도 견뎌낼 수 있다."
+  },
+  "AncientArmorHeat_4": {
+    "localized_name": "내열 고대 갑옷",
+    "description": "개량형 고대 갑옷. 고대 기술로 내열 성능이 더욱 강화되어, 타오를 듯 뜨거운 환경도 견뎌낼 수 있다."
+  },
+  "AncientArmorHeat_5": {
+    "localized_name": "내열 고대 갑옷",
+    "description": "개량형 고대 갑옷. 고대 기술로 내열 성능이 더욱 강화되어, 타오를 듯 뜨거운 환경도 견뎌낼 수 있다."
+  },
+  "AncientArmorWeight": {
+    "localized_name": "경량 고대 갑옷",
+    "description": "개량형 고대 갑옷. 고대 보조 기구가 내장되어 더 많은 물자를 휴대할 수 있다."
+  },
+  "AncientArmorWeight_2": {
+    "localized_name": "경량 고대 갑옷",
+    "description": "개량형 고대 갑옷. 고대 보조 기구가 내장되어 더 많은 물자를 휴대할 수 있다."
+  },
+  "AncientArmorWeight_3": {
+    "localized_name": "경량 고대 갑옷",
+    "description": "개량형 고대 갑옷. 고대 보조 기구가 내장되어 더 많은 물자를 휴대할 수 있다."
+  },
+  "AncientArmorWeight_4": {
+    "localized_name": "경량 고대 갑옷",
+    "description": "개량형 고대 갑옷. 고대 보조 기구가 내장되어 더 많은 물자를 휴대할 수 있다."
+  },
+  "AncientArmorWeight_5": {
+    "localized_name": "경량 고대 갑옷",
+    "description": "개량형 고대 갑옷. 고대 보조 기구가 내장되어 더 많은 물자를 휴대할 수 있다."
+  },
+  "AncientArmor_2": {
+    "localized_name": "고대 갑옷",
+    "description": "솔라이트 주괴(으)로 제작한 고대 갑옷. 잃어버린 문명의 정수가 아낌없이 담겨 있다. 종말급 위협에도 굴하지 않는, 압도적인 방어력을 자랑하는 궁극의 방어구."
+  },
+  "AncientArmor_3": {
+    "localized_name": "고대 갑옷",
+    "description": "솔라이트 주괴(으)로 제작한 고대 갑옷. 잃어버린 문명의 정수가 아낌없이 담겨 있다. 종말급 위협에도 굴하지 않는, 압도적인 방어력을 자랑하는 궁극의 방어구."
+  },
+  "AncientArmor_4": {
+    "localized_name": "고대 갑옷",
+    "description": "솔라이트 주괴(으)로 제작한 고대 갑옷. 잃어버린 문명의 정수가 아낌없이 담겨 있다. 종말급 위협에도 굴하지 않는, 압도적인 방어력을 자랑하는 궁극의 방어구."
+  },
+  "AncientArmor_5": {
+    "localized_name": "고대 갑옷",
+    "description": "솔라이트 주괴(으)로 제작한 고대 갑옷. 잃어버린 문명의 정수가 아낌없이 담겨 있다. 종말급 위협에도 굴하지 않는, 압도적인 방어력을 자랑하는 궁극의 방어구."
+  },
+  "AncientHelmet": {
+    "localized_name": "고대 투구",
+    "description": "솔라이트 주괴(으)로 제작한 고대 투구. 영겁의 시간을 넘어 전해 내려온 예지가 담겨 있다. 현대 장비를 아득히 능가하는 방어 성능으로, 사용자를 견고히 지켜낸다."
+  },
+  "AncientHelmet_2": {
+    "localized_name": "고대 투구",
+    "description": "솔라이트 주괴(으)로 제작한 고대 투구. 영겁의 시간을 넘어 전해 내려온 예지가 담겨 있다. 현대 장비를 아득히 능가하는 방어 성능으로, 사용자를 견고히 지켜낸다."
+  },
+  "AncientHelmet_3": {
+    "localized_name": "고대 투구",
+    "description": "솔라이트 주괴(으)로 제작한 고대 투구. 영겁의 시간을 넘어 전해 내려온 예지가 담겨 있다. 현대 장비를 아득히 능가하는 방어 성능으로, 사용자를 견고히 지켜낸다."
+  },
+  "AncientHelmet_4": {
+    "localized_name": "고대 투구",
+    "description": "솔라이트 주괴(으)로 제작한 고대 투구. 영겁의 시간을 넘어 전해 내려온 예지가 담겨 있다. 현대 장비를 아득히 능가하는 방어 성능으로, 사용자를 견고히 지켜낸다."
+  },
+  "AncientHelmet_5": {
+    "localized_name": "고대 투구",
+    "description": "솔라이트 주괴(으)로 제작한 고대 투구. 영겁의 시간을 넘어 전해 내려온 예지가 담겨 있다. 현대 장비를 아득히 능가하는 방어 성능으로, 사용자를 견고히 지켜낸다."
   },
   "AncientParts2": {
     "localized_name": "고대 문명의 코어",
@@ -301,19 +501,19 @@
   },
   "Arrow": {
     "localized_name": "화살",
-    "description": "활로 발사하는 화살."
+    "description": "활로 발사하는 화살. |원시적인 작업대|에서 제작할 수 있다."
   },
   "Arrow_Fire": {
     "localized_name": "불화살",
-    "description": "|Bow Fire| 및 |BowGun Fire|으(로) 발사할 수 있는 화살. 화염 속성 피해를 준다."
+    "description": "활로 발사하는 Arrow Fire. 적중한 상대에게 <img id=|ElemIcon Fire|/><uiCommon id=|COMMON ELEMENT NAME Fire| style=|Elem Fire|/> 피해를 준다. |원시적인 작업대|에서 제작할 수 있다."
   },
   "Arrow_Poison": {
     "localized_name": "독화살",
-    "description": "|Bow Poison| 및 |BowGun Poison|으(로) 발사할 수 있는 화살. 적중한 상대를 중독시킨다."
+    "description": "활로 발사하는 Arrow Poison. 적중한 상대에게 <uiCommon id=|ADDITIONAL EFFECT Poison| style=|Effect Poison|/> 상태 이상을 부여한다. |원시적인 작업대|에서 제작할 수 있다."
   },
   "AssaultRifleBullet": {
     "localized_name": "돌격 소총 탄약",
-    "description": "AssaultRifle Default1 등에 사용하는 탄."
+    "description": "AssaultRifle Default1 등에 사용하는 탄. |WeaponFactory Dirty 02|에서 제작할 수 있다."
   },
   "AssaultRifle_Default1": {
     "localized_name": "돌격 소총",
@@ -337,27 +537,27 @@
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "소형 먹이 주머니",
-    "description": "음식을 넣어두는 작은 주머니. 자동 식사용 장비 슬롯이 1개까지 해제된다. 배가 고프면 슬롯 내 음식을 자동으로 소비한다."
+    "description": "음식을 넣어두는 작은 주머니. 자동 식사용 장비 슬롯이 1개까지 해제된다. 배가 고프면 슬롯 내 음식을 자동으로 소비한다. 하나만 갖고 있어도 충분하다."
   },
   "AutoMealPouch_Tier2": {
     "localized_name": "중형 먹이 주머니",
-    "description": "음식을 넣어두는 넉넉한 주머니. 자동 식사용 장비 슬롯이 2개까지 해제된다. 배가 고프면 슬롯 내 음식을 자동으로 소비한다."
+    "description": "음식을 넣어두는 넉넉한 주머니. 자동 식사용 장비 슬롯이 2개까지 해제된다. 배가 고프면 슬롯 내 음식을 자동으로 소비한다. 하나만 갖고 있어도 충분하다."
   },
   "AutoMealPouch_Tier3": {
     "localized_name": "대형 먹이 주머니",
-    "description": "음식을 넣어두는 대형 주머니. 자동 식사용 장비 슬롯이 3개까지 해제된다. 배가 고프면 슬롯 내 음식을 자동으로 소비한다."
+    "description": "음식을 넣어두는 대형 주머니. 자동 식사용 장비 슬롯이 3개까지 해제된다. 배가 고프면 슬롯 내 음식을 자동으로 소비한다. 하나만 갖고 있어도 충분하다."
   },
   "AutoMealPouch_Tier4": {
     "localized_name": "거대 먹이 주머니",
-    "description": "음식을 넣어두는 특대형 주머니. 자동 식사용 장비 슬롯이 4개까지 해제된다. 배가 고프면 슬롯 내 음식을 자동으로 소비한다."
+    "description": "음식을 넣어두는 특대형 주머니. 자동 식사용 장비 슬롯이 4개까지 해제된다. 배가 고프면 슬롯 내 음식을 자동으로 소비한다. 하나만 갖고 있어도 충분하다."
   },
   "AutoMealPouch_Tier5": {
     "localized_name": "초거대 먹이 주머니",
-    "description": "음식을 넣어두는 초특대형 주머니. 자동 식사용 장비 슬롯이 5개까지 해제된다. 배가 고프면 슬롯 내 음식을 자동으로 소비한다."
+    "description": "음식을 넣어두는 초특대형 주머니. 자동 식사용 장비 슬롯이 5개까지 해제된다. 배가 고프면 슬롯 내 음식을 자동으로 소비한다. 하나만 갖고 있어도 충분하다."
   },
   "Axe_Steal": {
     "localized_name": "팰 금속 도끼",
-    "description": "벌목용 도끼. 팰 금속으로 만들어 경이로운 절삭력을 자랑한다."
+    "description": "벌목용 도끼. 팰 금속으로 만들어 경이로운 절삭력을 자랑한다. 극한의 환경 속에서 자란 상급 견목도 무리 없이 베어낼 수 있다."
   },
   "Axe_Tier_00": {
     "localized_name": "돌 도끼",
@@ -365,11 +565,11 @@
   },
   "Axe_Tier_01": {
     "localized_name": "금속 도끼",
-    "description": "나무를 베는 용도의 도끼. 금속으로 만들어서 절삭력이 향상됐다."
+    "description": "벌목용 도끼. 금속으로 만들어 단단한 나무도 벌목할 수 있다. 대륙 안쪽에서 자라는 튼튼한 나무 또한 베는 것이 가능하다."
   },
   "Axe_Tier_02": {
     "localized_name": "제련 금속 도끼",
-    "description": "나무를 베는 용도의 도끼. 고품질 금속으로 만들어서 절삭력이 더욱 향상됐다."
+    "description": "벌목용 도끼. 내구도와 절삭력이 더욱 향상됐다. 가혹한 지역에서 자라는 질 좋은 나무로부터 단단한 목재를 채취할 수 있다."
   },
   "Axe_Tier_03": {
     "localized_name": "ko Text",
@@ -451,9 +651,53 @@
     "localized_name": "야구 방망이",
     "description": "근접 전투도 가능한 야구 방망이. 팰은 공보다 훨씬 크다는 사실을 기억하자."
   },
+  "Bat3": {
+    "localized_name": "금속 방망이",
+    "description": "근접 전투도 가능한 금속 방망이. 마음에 안 드는 상대를 두들겨 패 주자."
+  },
+  "Bat3_2": {
+    "localized_name": "금속 방망이",
+    "description": "근접 전투도 가능한 금속 방망이. 마음에 안 드는 상대를 두들겨 패 주자."
+  },
+  "Bat3_3": {
+    "localized_name": "금속 방망이",
+    "description": "근접 전투도 가능한 금속 방망이. 마음에 안 드는 상대를 두들겨 패 주자."
+  },
+  "Bat3_4": {
+    "localized_name": "금속 방망이",
+    "description": "근접 전투도 가능한 금속 방망이. 마음에 안 드는 상대를 두들겨 패 주자."
+  },
+  "Bat3_5": {
+    "localized_name": "금속 방망이",
+    "description": "근접 전투도 가능한 금속 방망이. 마음에 안 드는 상대를 두들겨 패 주자."
+  },
   "BattleTicket": {
     "localized_name": "배틀 티켓",
     "description": "투기장에 혼자 도전하여 승리하면 얻을 수 있는 티켓. 이것을 모으면 호화로운 상품과 교환할 수 있다."
+  },
+  "BeamLauncher": {
+    "localized_name": "빔 발사기",
+    "description": "고밀도 빔을 사출하여 광범위 폭발을 일으키는 발사기. 연사 시에는 과열을 일으킬 수 있으니 주의가 필요하다."
+  },
+  "BeamLauncherBullet": {
+    "localized_name": "빔 발사기 탄약",
+    "description": "빔 발사기에 사용하는 탄. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "BeamLauncher_2": {
+    "localized_name": "빔 발사기",
+    "description": "고밀도 빔을 사출하여 광범위 폭발을 일으키는 발사기. 연사 시에는 과열을 일으킬 수 있으니 주의가 필요하다."
+  },
+  "BeamLauncher_3": {
+    "localized_name": "빔 발사기",
+    "description": "고밀도 빔을 사출하여 광범위 폭발을 일으키는 발사기. 연사 시에는 과열을 일으킬 수 있으니 주의가 필요하다."
+  },
+  "BeamLauncher_4": {
+    "localized_name": "빔 발사기",
+    "description": "고밀도 빔을 사출하여 광범위 폭발을 일으키는 발사기. 연사 시에는 과열을 일으킬 수 있으니 주의가 필요하다."
+  },
+  "BeamLauncher_5": {
+    "localized_name": "빔 발사기",
+    "description": "고밀도 빔을 사출하여 광범위 폭발을 일으키는 발사기. 연사 시에는 과열을 일으킬 수 있으니 주의가 필요하다."
   },
   "BeamSword": {
     "localized_name": "빔 소드",
@@ -475,6 +719,10 @@
     "localized_name": "빔 소드",
     "description": "근접 전투용 빔 소드. 고출력 레이저로 적을 바싹 태우며 베어버린다."
   },
+  "BeastBone_Ancient": {
+    "localized_name": "고대 짐승 뼈",
+    "description": "극한의 환경 속에서 오랜 세월에 걸쳐 풍화된 짐승의 뼈. 육체를 잃었음에도 강력한 존재감을 과시하고 있다."
+  },
   "Beer": {
     "localized_name": "ko Text",
     "description": "ko Text"
@@ -491,6 +739,258 @@
     "localized_name": "열매 씨",
     "description": "빨간 열매을(를) 재배할 수 있는 씨. 농원을 만들 때 필요하다. 빨간 열매을(를) 채취할 때 얻을 수 있다."
   },
+  "Bio_Battery": {
+    "localized_name": "바이오 배터리",
+    "description": "생체 에너지를 전력으로 바꿔 축적하는 특수 전지. 높은 에너지 밀도가 필요한 기기에 활용된다. |Factory Hard 03|에서 제작할 수 있다."
+  },
+  "Bio_Coolant": {
+    "localized_name": "극저온 냉각 매체",
+    "description": "팰에서 유래한 특수 성분을 이용해 만든 고효율 냉각 매체. 고출력 기기의 온도 제어를 가능케 한다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_AT_1_2": {
+    "localized_name": "공격의 펜던트 설계도",
+    "description": "가지고 있으면 |Accessory AT 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_AquaResist_1_2": {
+    "localized_name": "물 저항 반지 설계도",
+    "description": "가지고 있으면 |Accessory AquaResist 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_Avoid_1": {
+    "localized_name": "환영의 반지 설계도",
+    "description": "가지고 있으면 |Accessory Avoid 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_Avoid_1_fix": {
+    "localized_name": "환영의 반지 설계도",
+    "description": "가지고 있으면 |Accessory Avoid 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_ColdIce_1": {
+    "localized_name": "움포의 부적 설계도",
+    "description": "가지고 있으면 |Accessory ColdIce 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_CoolResist_1_2": {
+    "localized_name": "방한 속옷 설계도",
+    "description": "가지고 있으면 |Accessory CoolResist 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_DFHP_1": {
+    "localized_name": "금강벌레의 벨트 설계도",
+    "description": "가지고 있으면 |Accessory DFHP 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_DarkResist_1_2": {
+    "localized_name": "어둠 저항 반지 설계도",
+    "description": "가지고 있으면 |Accessory DarkResist 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_DragonResist_1_2": {
+    "localized_name": "용 저항 반지 설계도",
+    "description": "가지고 있으면 |Accessory DragonResist 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_EarthResist_1_2": {
+    "localized_name": "땅 저항 반지 설계도",
+    "description": "가지고 있으면 |Accessory EarthResist 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_FireResist_1_2": {
+    "localized_name": "화염 저항 반지 설계도",
+    "description": "가지고 있으면 |Accessory FireResist 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_HCHP_1": {
+    "localized_name": "선발대의 부적 설계도",
+    "description": "가지고 있으면 |Accessory HCHP 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_HCMW_1": {
+    "localized_name": "방랑 상인의 부적 설계도",
+    "description": "가지고 있으면 |Accessory HCMW 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_HP_1_2": {
+    "localized_name": "생명의 펜던트 설계도",
+    "description": "가지고 있으면 |Accessory HP 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_HeatColdResist_1_2": {
+    "localized_name": "내열 방한 속옷 설계도",
+    "description": "가지고 있으면 |Accessory HeatColdResist 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_HeatFire_1": {
+    "localized_name": "볼카노의 부적 설계도",
+    "description": "가지고 있으면 |Accessory HeatFire 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_HeatResist_1_2": {
+    "localized_name": "내열 속옷 설계도",
+    "description": "가지고 있으면 |Accessory HeatResist 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_IceResist_1_2": {
+    "localized_name": "얼음 저항 반지 설계도",
+    "description": "가지고 있으면 |Accessory IceResist 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_JumpAir_1": {
+    "localized_name": "에어 워커 Mk-Ⅰ 설계도",
+    "description": "가지고 있으면 |Accessory JumpAir 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_JumpAir_2": {
+    "localized_name": "에어 워커 Mk-Ⅱ 설계도",
+    "description": "가지고 있으면 |Accessory JumpAir 2 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_LeafResist_1_2": {
+    "localized_name": "풀 저항 반지 설계도",
+    "description": "가지고 있으면 |Accessory LeafResist 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_MaxWeightUp_01_2": {
+    "localized_name": "운반책의 반지 설계도",
+    "description": "가지고 있으면 |Accessory MaxWeightUp 01 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_NonkChecker_1": {
+    "localized_name": "팰 조련사의 안경 설계도",
+    "description": "가지고 있으면 |Accessory NonkChecker 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_NormalResist_1_2": {
+    "localized_name": "무저항 반지 설계도",
+    "description": "가지고 있으면 |Accessory NormalResist 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_Otomo_Dargon_1": {
+    "localized_name": "실피아의 반지 설계도",
+    "description": "가지고 있으면 |Accessory Otomo Dargon 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_Otomo_Dark_1": {
+    "localized_name": "캐티메이지의 반지 설계도",
+    "description": "가지고 있으면 |Accessory Otomo Dark 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_Otomo_Earth_1": {
+    "localized_name": "골드스팅의 반지 설계도",
+    "description": "가지고 있으면 |Accessory Otomo Earth 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_Otomo_Electricity_1": {
+    "localized_name": "볼트디어의 반지 설계도",
+    "description": "가지고 있으면 |Accessory Otomo Electricity 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_Otomo_Fire_1": {
+    "localized_name": "만티파이어의 반지 설계도",
+    "description": "가지고 있으면 |Accessory Otomo Fire 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_Otomo_Fire_2": {
+    "localized_name": "호루스의 반지 설계도",
+    "description": "가지고 있으면 |Accessory Otomo Fire 2 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_Otomo_Ice_1": {
+    "localized_name": "백랑이의 반지 설계도",
+    "description": "가지고 있으면 |Accessory Otomo Ice 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_Otomo_Leaf_1": {
+    "localized_name": "비오레타의 반지 설계도",
+    "description": "가지고 있으면 |Accessory Otomo Leaf 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_Otomo_Water_1": {
+    "localized_name": "이시스의 반지 설계도",
+    "description": "가지고 있으면 |Accessory Otomo Water 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_PPAT_1": {
+    "localized_name": "시푸도그의 엠블럼 설계도",
+    "description": "가지고 있으면 |Accessory PPAT 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_PPDF_1": {
+    "localized_name": "드라이지스의 엠블럼 설계도",
+    "description": "가지고 있으면 |Accessory PPDF 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_SuperJumpAir_1": {
+    "localized_name": "에어 워커 Mk-Ⅲ 설계도",
+    "description": "가지고 있으면 |Accessory SuperJumpAir 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_SuperJumpAir_2": {
+    "localized_name": "에어 워커 Mk-EX 설계도",
+    "description": "가지고 있으면 |Accessory SuperJumpAir 2 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_ThunderResist_1_2": {
+    "localized_name": "번개 저항 반지 설계도",
+    "description": "가지고 있으면 |Accessory ThunderResist 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_WKMC_1": {
+    "localized_name": "섬 주민의 유틸리티 벨트 설계도",
+    "description": "가지고 있으면 |Accessory WKMC 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_WorkSpeed_1_2": {
+    "localized_name": "노동의 펜던트 설계도",
+    "description": "가지고 있으면 |Accessory WorkSpeed 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Accessory_defense_1_2": {
+    "localized_name": "방어의 펜던트 설계도",
+    "description": "가지고 있으면 |Accessory defense 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_AncientArmorCold_2": {
+    "localized_name": "내한 고대 갑옷 설계도 1",
+    "description": "가지고 있으면 |AncientArmorCold 2 (Uncommon)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_AncientArmorCold_3": {
+    "localized_name": "내한 고대 갑옷 설계도 2",
+    "description": "가지고 있으면 |AncientArmorCold 3 (Rare)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_AncientArmorCold_4": {
+    "localized_name": "내한 고대 갑옷 설계도 3",
+    "description": "가지고 있으면 |AncientArmorCold 4 (Epic)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_AncientArmorCold_5": {
+    "localized_name": "내한 고대 갑옷 설계도 4",
+    "description": "가지고 있으면 |AncientArmorCold 5 (Legendary)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_AncientArmorHeat_2": {
+    "localized_name": "내열 고대 갑옷 설계도 1",
+    "description": "가지고 있으면 |AncientArmorHeat 2 (Uncommon)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_AncientArmorHeat_3": {
+    "localized_name": "내열 고대 갑옷 설계도 2",
+    "description": "가지고 있으면 |AncientArmorHeat 3 (Rare)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_AncientArmorHeat_4": {
+    "localized_name": "내열 고대 갑옷 설계도 3",
+    "description": "가지고 있으면 |AncientArmorHeat 4 (Epic)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_AncientArmorHeat_5": {
+    "localized_name": "내열 고대 갑옷 설계도 4",
+    "description": "가지고 있으면 |AncientArmorHeat 5 (Legendary)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_AncientArmorWeight_2": {
+    "localized_name": "경량 고대 갑옷 설계도 1",
+    "description": "가지고 있으면 |AncientArmorWeight 2 (Uncommon)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_AncientArmorWeight_3": {
+    "localized_name": "경량 고대 갑옷 설계도 2",
+    "description": "가지고 있으면 |AncientArmorWeight 3 (Rare)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_AncientArmorWeight_4": {
+    "localized_name": "경량 고대 갑옷 설계도 3",
+    "description": "가지고 있으면 |AncientArmorWeight 4 (Epic)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_AncientArmorWeight_5": {
+    "localized_name": "경량 고대 갑옷 설계도 4",
+    "description": "가지고 있으면 |AncientArmorWeight 5 (Legendary)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_AncientArmor_2": {
+    "localized_name": "고대 갑옷 설계도 1",
+    "description": "가지고 있으면 |AncientArmor 2 (Uncommon)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_AncientArmor_3": {
+    "localized_name": "고대 갑옷 설계도 2",
+    "description": "가지고 있으면 |AncientArmor 3 (Rare)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_AncientArmor_4": {
+    "localized_name": "고대 갑옷 설계도 3",
+    "description": "가지고 있으면 |AncientArmor 4 (Epic)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_AncientArmor_5": {
+    "localized_name": "고대 갑옷 설계도 4",
+    "description": "가지고 있으면 |AncientArmor 5 (Legendary)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_AncientHelmet_2": {
+    "localized_name": "고대 투구 설계도 1",
+    "description": "가지고 있으면 |AncientHelmet 2 (Uncommon)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_AncientHelmet_3": {
+    "localized_name": "고대 투구 설계도 2",
+    "description": "가지고 있으면 |AncientHelmet 3 (Rare)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_AncientHelmet_4": {
+    "localized_name": "고대 투구 설계도 3",
+    "description": "가지고 있으면 |AncientHelmet 4 (Epic)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_AncientHelmet_5": {
+    "localized_name": "고대 투구 설계도 4",
+    "description": "가지고 있으면 |AncientHelmet 5 (Legendary)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
   "Blueprint_AssaultRifle_Default2": {
     "localized_name": "돌격 소총 설계도 1",
     "description": "가지고 있으면 |AssaultRifle Default1 (Uncommon)| 레시피가 해제된다. |WeaponFactory Dirty 02|에서 제작할 수 있다."
@@ -506,6 +1006,38 @@
   "Blueprint_AssaultRifle_Default5": {
     "localized_name": "돌격 소총 설계도 4",
     "description": "가지고 있으면 |AssaultRifle Default1 (Legendary)| 레시피가 해제된다. |WeaponFactory Dirty 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Bat3_2": {
+    "localized_name": "금속 방망이 설계도 1",
+    "description": "가지고 있으면 |금속 방망이 (Uncommon)| 레시피가 해제된다. |WeaponFactory Dirty 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Bat3_3": {
+    "localized_name": "금속 방망이 설계도 2",
+    "description": "가지고 있으면 |금속 방망이 (Rare)| 레시피가 해제된다. |WeaponFactory Dirty 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Bat3_4": {
+    "localized_name": "금속 방망이 설계도 3",
+    "description": "가지고 있으면 |금속 방망이 (Epic)| 레시피가 해제된다. |WeaponFactory Dirty 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Bat3_5": {
+    "localized_name": "금속 방망이 설계도 4",
+    "description": "가지고 있으면 |금속 방망이 (Legendary)| 레시피가 해제된다. |WeaponFactory Dirty 02|에서 제작할 수 있다."
+  },
+  "Blueprint_BeamLauncher_2": {
+    "localized_name": "빔 발사기 설계도 1",
+    "description": "가지고 있으면 |빔 발사기 (Uncommon)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_BeamLauncher_3": {
+    "localized_name": "빔 발사기 설계도 2",
+    "description": "가지고 있으면 |빔 발사기 (Rare)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_BeamLauncher_4": {
+    "localized_name": "빔 발사기 설계도 3",
+    "description": "가지고 있으면 |빔 발사기 (Epic)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_BeamLauncher_5": {
+    "localized_name": "빔 발사기 설계도 4",
+    "description": "가지고 있으면 |빔 발사기 (Legendary)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
   },
   "Blueprint_BeamSword_2": {
     "localized_name": "빔 소드 설계도 1",
@@ -624,19 +1156,19 @@
     "description": "가지고 있으면 |ClothArmorHeat 5 (Legendary)| 레시피가 해제된다. |원시적인 작업대|에서 제작할 수 있다."
   },
   "Blueprint_ClothArmor_2": {
-    "localized_name": "직물 옷 설계도 1",
+    "localized_name": "천 옷 설계도 1",
     "description": "가지고 있으면 |천 옷 (Uncommon)| 레시피가 해제된다. |원시적인 작업대|에서 제작할 수 있다."
   },
   "Blueprint_ClothArmor_3": {
-    "localized_name": "직물 옷 설계도 2",
+    "localized_name": "천 옷 설계도 2",
     "description": "가지고 있으면 |천 옷 (Rare)| 레시피가 해제된다. |원시적인 작업대|에서 제작할 수 있다."
   },
   "Blueprint_ClothArmor_4": {
-    "localized_name": "직물 옷 설계도 3",
+    "localized_name": "천 옷 설계도 3",
     "description": "가지고 있으면 |천 옷 (Epic)| 레시피가 해제된다. |원시적인 작업대|에서 제작할 수 있다."
   },
   "Blueprint_ClothArmor_5": {
-    "localized_name": "직물 옷 설계도 4",
+    "localized_name": "천 옷 설계도 4",
     "description": "가지고 있으면 |천 옷 (Legendary)| 레시피가 해제된다. |원시적인 작업대|에서 제작할 수 있다."
   },
   "Blueprint_CompoundBow_2": {
@@ -743,6 +1275,38 @@
     "localized_name": "쌍발 산탄총 설계도 4",
     "description": "가지고 있으면 |쌍발 산탄총 (Legendary)| 레시피가 해제된다. |WeaponFactory Dirty 02|에서 제작할 수 있다."
   },
+  "Blueprint_DroneLauncher_2": {
+    "localized_name": "드론 발사기 설계도 1",
+    "description": "가지고 있으면 |드론 발사기 (Uncommon)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_DroneLauncher_3": {
+    "localized_name": "드론 발사기 설계도 2",
+    "description": "가지고 있으면 |드론 발사기 (Rare)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_DroneLauncher_4": {
+    "localized_name": "드론 발사기 설계도 3",
+    "description": "가지고 있으면 |드론 발사기 (Epic)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_DroneLauncher_5": {
+    "localized_name": "드론 발사기 설계도 4",
+    "description": "가지고 있으면 |드론 발사기 (Legendary)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_ElectricArcAssaultRifle_2": {
+    "localized_name": "플라즈마 소총 설계도 1",
+    "description": "가지고 있으면 |플라즈마 소총 (Uncommon)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_ElectricArcAssaultRifle_3": {
+    "localized_name": "플라즈마 소총 설계도 2",
+    "description": "가지고 있으면 |플라즈마 소총 (Rare)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_ElectricArcAssaultRifle_4": {
+    "localized_name": "플라즈마 소총 설계도 3",
+    "description": "가지고 있으면 |플라즈마 소총 (Epic)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_ElectricArcAssaultRifle_5": {
+    "localized_name": "플라즈마 소총 설계도 4",
+    "description": "가지고 있으면 |플라즈마 소총 (Legendary)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
   "Blueprint_EnergyRocketLauncher_2": {
     "localized_name": "플라즈마 대포 설계도 1",
     "description": "가지고 있으면 |플라즈마 대포 (Uncommon)| 레시피가 해제된다. |WeaponFactory Dirty 03|에서 제작할 수 있다."
@@ -785,11 +1349,11 @@
   },
   "Blueprint_FishingRod_02_2": {
     "localized_name": "중급 낚싯대 (칼구리) 설계도",
-    "description": "가지고 있으면 |FishingRod 02 2 (Uncommon)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+    "description": "가지고 있으면 |FishingRod 02 2 (Rare)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
   },
   "Blueprint_FishingRod_03_2": {
     "localized_name": "고급 낚싯대 (뚱코알라) 설계도",
-    "description": "가지고 있으면 |FishingRod 03 2 (Rare)| 레시피가 해제된다. |Factory Hard 03|에서 제작할 수 있다."
+    "description": "가지고 있으면 |FishingRod 03 2 (Legendary)| 레시피가 해제된다. |Factory Hard 03|에서 제작할 수 있다."
   },
   "Blueprint_FlameThrower_2": {
     "localized_name": "화염방사기 설계도 1",
@@ -840,19 +1404,19 @@
     "description": "가지고 있으면 |FurArmorHeat 5 (Legendary)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
   },
   "Blueprint_FurArmor_2": {
-    "localized_name": "모피 갑옷 설계도 1",
+    "localized_name": "가죽 갑옷 설계도 1",
     "description": "가지고 있으면 |가죽 갑옷 (Uncommon)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
   },
   "Blueprint_FurArmor_3": {
-    "localized_name": "모피 갑옷 설계도 2",
+    "localized_name": "가죽 갑옷 설계도 2",
     "description": "가지고 있으면 |가죽 갑옷 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
   },
   "Blueprint_FurArmor_4": {
-    "localized_name": "모피 갑옷 설계도 3",
+    "localized_name": "가죽 갑옷 설계도 3",
     "description": "가지고 있으면 |가죽 갑옷 (Epic)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
   },
   "Blueprint_FurArmor_5": {
-    "localized_name": "모피 갑옷 설계도 4",
+    "localized_name": "가죽 갑옷 설계도 4",
     "description": "가지고 있으면 |가죽 갑옷 (Legendary)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
   },
   "Blueprint_FurHelmet_2": {
@@ -1360,24 +1924,24 @@
     "description": "가지고 있으면 |모프링 모자 (Common)| 레시피가 해제된다. |원시적인 작업대|에서 제작할 수 있다."
   },
   "Blueprint_HeadEquip032_1": {
-    "localized_name": "썬더 키드 모자 설계도 1",
-    "description": "가지고 있으면 |썬더 키드 모자 (Common)| 레시피가 해제된다. |원시적인 작업대|에서 제작할 수 있다."
+    "localized_name": "썬더키드 모자 설계도 1",
+    "description": "가지고 있으면 |썬더키드 모자 (Common)| 레시피가 해제된다. |원시적인 작업대|에서 제작할 수 있다."
   },
   "Blueprint_HeadEquip032_2": {
-    "localized_name": "썬더 키드 모자 설계도 2",
-    "description": "가지고 있으면 |썬더 키드 모자 (Uncommon)| 레시피가 해제된다. |원시적인 작업대|에서 제작할 수 있다."
+    "localized_name": "썬더키드 모자 설계도 2",
+    "description": "가지고 있으면 |썬더키드 모자 (Uncommon)| 레시피가 해제된다. |원시적인 작업대|에서 제작할 수 있다."
   },
   "Blueprint_HeadEquip032_3": {
-    "localized_name": "썬더 키드 모자 설계도 3",
+    "localized_name": "썬더키드 모자 설계도 3",
     "description": "가지고 있으면 |HeadEquip032 2 (Rare)| 레시피가 해제된다. |원시적인 작업대|에서 제작할 수 있다."
   },
   "Blueprint_HeadEquip032_4": {
-    "localized_name": "썬더 키드 모자 설계도 4",
+    "localized_name": "썬더키드 모자 설계도 4",
     "description": "가지고 있으면 |HeadEquip032 3 (Epic)| 레시피가 해제된다. |원시적인 작업대|에서 제작할 수 있다."
   },
   "Blueprint_HeadEquip032_5": {
-    "localized_name": "썬더 키드 모자 설계도 1",
-    "description": "가지고 있으면 |썬더 키드 모자 (Common)| 레시피가 해제된다. |원시적인 작업대|에서 제작할 수 있다."
+    "localized_name": "썬더키드 모자 설계도 1",
+    "description": "가지고 있으면 |썬더키드 모자 (Common)| 레시피가 해제된다. |원시적인 작업대|에서 제작할 수 있다."
   },
   "Blueprint_Hunter_GangFlag": {
     "localized_name": "밀렵단 깃발 설계도",
@@ -1679,6 +2243,130 @@
     "localized_name": "낡은 리볼버 설계도 4",
     "description": "가지고 있으면 |낡은 리볼버 (Legendary)| 레시피가 해제된다. |WeaponFactory Dirty 02|에서 제작할 수 있다."
   },
+  "Blueprint_Otomo_ATDark_ElementBoost_1": {
+    "localized_name": "명왕의 지휘봉 설계도",
+    "description": "가지고 있으면 |Otomo ATDark ElementBoost 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_ATDragon_ElementBoost_1": {
+    "localized_name": "신룡의 지휘봉 설계도",
+    "description": "가지고 있으면 |Otomo ATDragon ElementBoost 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_ATEarth_ElementBoost_1": {
+    "localized_name": "지제의 지휘봉 설계도",
+    "description": "가지고 있으면 |Otomo ATEarth ElementBoost 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_ATElectricity_ElementBoost_1": {
+    "localized_name": "뇌제의 지휘봉 설계도",
+    "description": "가지고 있으면 |Otomo ATElectricity ElementBoost 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_ATFire_ElementBoost_1": {
+    "localized_name": "염제의 지휘봉 설계도",
+    "description": "가지고 있으면 |Otomo ATFire ElementBoost 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_ATIce_ElementBoost_1": {
+    "localized_name": "빙제의 지휘봉 설계도",
+    "description": "가지고 있으면 |Otomo ATIce ElementBoost 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_ATLeaf_ElementBoost_1": {
+    "localized_name": "정령왕의 지휘봉 설계도",
+    "description": "가지고 있으면 |Otomo ATLeaf ElementBoost 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_ATNormal_ElementBoost_1": {
+    "localized_name": "성천의 지휘봉 설계도",
+    "description": "가지고 있으면 |Otomo ATNormal ElementBoost 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_ATWater_ElementBoost_1": {
+    "localized_name": "해황의 지휘봉 설계도",
+    "description": "가지고 있으면 |Otomo ATWater ElementBoost 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_Attack_up1_2": {
+    "localized_name": "공격 지원 호루라기 설계도",
+    "description": "가지고 있으면 |Otomo Attack up1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_DFDark_ElementBoost_1": {
+    "localized_name": "루나린의 수호 부적 설계도",
+    "description": "가지고 있으면 |Otomo DFDark ElementBoost 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_DFDragon_ElementBoost_1": {
+    "localized_name": "제트래곤 수호 부적 설계도",
+    "description": "가지고 있으면 |Otomo DFDragon ElementBoost 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_DFEarth_ElementBoost_1": {
+    "localized_name": "아누비스의 수호 부적 설계도",
+    "description": "가지고 있으면 |Otomo DFEarth ElementBoost 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_DFElectricity_ElementBoost_1": {
+    "localized_name": "볼젝스의 수호 부적 설계도",
+    "description": "가지고 있으면 |Otomo DFElectricity ElementBoost 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_DFFire_ElementBoost_1": {
+    "localized_name": "마그마카이저의 수호 부적 설계도",
+    "description": "가지고 있으면 |Otomo DFFire ElementBoost 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_DFIce_ElementBoost_1": {
+    "localized_name": "빙천마의 수호 부적 설계도",
+    "description": "가지고 있으면 |Otomo DFIce ElementBoost 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_DFLeaf_ElementBoost_1": {
+    "localized_name": "릴린의 수호 부적 설계도",
+    "description": "가지고 있으면 |Otomo DFLeaf ElementBoost 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_DFNormal_ElementBoost_1": {
+    "localized_name": "레젠디얼의 수호 부적 설계도",
+    "description": "가지고 있으면 |Otomo DFNormal ElementBoost 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_DFWater_ElementBoost_1": {
+    "localized_name": "넵티오스의 수호 부적 설계도",
+    "description": "가지고 있으면 |Otomo DFWater ElementBoost 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_Defense_up1_2": {
+    "localized_name": "방어 지원 호루라기 설계도",
+    "description": "가지고 있으면 |Otomo Defense up1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_ElementBoost_Dark_1_2": {
+    "localized_name": "어둠 속성 응원 호루라기 설계도",
+    "description": "가지고 있으면 |Otomo ElementBoost Dark 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_ElementBoost_Dragon_1_2": {
+    "localized_name": "용 속성 응원 호루라기 설계도",
+    "description": "가지고 있으면 |Otomo ElementBoost Dragon 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_ElementBoost_Earth_1_2": {
+    "localized_name": "땅 속성 응원 호루라기 설계도",
+    "description": "가지고 있으면 |Otomo ElementBoost Earth 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_ElementBoost_Electricity_1_2": {
+    "localized_name": "번개 속성 응원 호루라기 설계도",
+    "description": "가지고 있으면 |Otomo ElementBoost Electricity 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_ElementBoost_Fire_1_2": {
+    "localized_name": "화염 속성 응원 호루라기 설계도",
+    "description": "가지고 있으면 |Otomo ElementBoost Fire 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_ElementBoost_Ice_1_2": {
+    "localized_name": "얼음 속성 응원 호루라기 설계도",
+    "description": "가지고 있으면 |Otomo ElementBoost Ice 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_ElementBoost_Leaf_1_2": {
+    "localized_name": "풀 속성 응원 호루라기 설계도",
+    "description": "가지고 있으면 |Otomo ElementBoost Leaf 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_ElementBoost_Normal_1_2": {
+    "localized_name": "무속성 응원 호루라기 설계도",
+    "description": "가지고 있으면 |Otomo ElementBoost Normal 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_ElementBoost_Water_1_2": {
+    "localized_name": "물 속성 응원 호루라기 설계도",
+    "description": "가지고 있으면 |Otomo ElementBoost Water 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_PalConfidence_Increase_1_fix": {
+    "localized_name": "신뢰의 반지 설계도",
+    "description": "가지고 있으면 |Otomo PalConfidence Increase 1 (Epic)| 레시피가 해제된다. |Factory Hard 02|에서 제작할 수 있다."
+  },
+  "Blueprint_Otomo_PalExp_Increase_1_2": {
+    "localized_name": "성장 촉진 종 설계도",
+    "description": "가지고 있으면 |Otomo PalExp Increase 1 (Rare)| 레시피가 해제된다. |Factory Hard 01|에서 제작할 수 있다."
+  },
   "Blueprint_OverheatRifle_2": {
     "localized_name": "전자동 소총 설계도 1",
     "description": "가지고 있으면 |전자동 소총 (Uncommon)| 레시피가 해제된다. |WeaponFactory Dirty 04|에서 제작할 수 있다."
@@ -1951,6 +2639,106 @@
     "localized_name": "단발식 소총 설계도 4",
     "description": "가지고 있으면 |단발식 소총 (Legendary)| 레시피가 해제된다. |WeaponFactory Dirty 02|에서 제작할 수 있다."
   },
+  "Blueprint_SkyAssaultRifle_2": {
+    "localized_name": "중형 돌격 소총 설계도 1",
+    "description": "가지고 있으면 |중형 돌격 소총 (Uncommon)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_SkyAssaultRifle_3": {
+    "localized_name": "중형 돌격 소총 설계도 2",
+    "description": "가지고 있으면 |중형 돌격 소총 (Rare)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_SkyAssaultRifle_4": {
+    "localized_name": "중형 돌격 소총 설계도 3",
+    "description": "가지고 있으면 |중형 돌격 소총 (Epic)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_SkyAssaultRifle_5": {
+    "localized_name": "중형 돌격 소총 설계도 4",
+    "description": "가지고 있으면 |중형 돌격 소총 (Legendary)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_SkyBeamSword_2": {
+    "localized_name": "레이저 소드 설계도 1",
+    "description": "가지고 있으면 |레이저 소드 (Uncommon)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_SkyBeamSword_3": {
+    "localized_name": "레이저 소드 설계도 2",
+    "description": "가지고 있으면 |레이저 소드 (Rare)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_SkyBeamSword_4": {
+    "localized_name": "레이저 소드 설계도 3",
+    "description": "가지고 있으면 |레이저 소드 (Epic)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_SkyBeamSword_5": {
+    "localized_name": "레이저 소드 설계도 4",
+    "description": "가지고 있으면 |레이저 소드 (Legendary)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_SkyBow_2": {
+    "localized_name": "정밀 기계식 활 설계도 1",
+    "description": "가지고 있으면 |정밀 기계식 활 (Uncommon)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_SkyBow_3": {
+    "localized_name": "정밀 기계식 활 설계도 2",
+    "description": "가지고 있으면 |정밀 기계식 활 (Rare)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_SkyBow_4": {
+    "localized_name": "정밀 기계식 활 설계도 3",
+    "description": "가지고 있으면 |정밀 기계식 활 (Epic)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_SkyBow_5": {
+    "localized_name": "정밀 기계식 활 설계도 4",
+    "description": "가지고 있으면 |정밀 기계식 활 (Legendary)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_SkyGrenadeLauncher_2": {
+    "localized_name": "전술 유탄 발사기 설계도 1",
+    "description": "가지고 있으면 |전술 유탄 발사기 (Uncommon)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_SkyGrenadeLauncher_3": {
+    "localized_name": "전술 유탄 발사기 설계도 2",
+    "description": "가지고 있으면 |전술 유탄 발사기 (Rare)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_SkyGrenadeLauncher_4": {
+    "localized_name": "전술 유탄 발사기 설계도 3",
+    "description": "가지고 있으면 |전술 유탄 발사기 (Epic)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_SkyGrenadeLauncher_5": {
+    "localized_name": "전술 유탄 발사기 설계도 4",
+    "description": "가지고 있으면 |전술 유탄 발사기 (Legendary)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_SkyShotgun_2": {
+    "localized_name": "시작형 산탄총 설계도 1",
+    "description": "가지고 있으면 |시작형 산탄총 (Uncommon)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_SkyShotgun_3": {
+    "localized_name": "시작형 산탄총 설계도 2",
+    "description": "가지고 있으면 |시작형 산탄총 (Rare)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_SkyShotgun_4": {
+    "localized_name": "시작형 산탄총 설계도 3",
+    "description": "가지고 있으면 |시작형 산탄총 (Epic)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_SkyShotgun_5": {
+    "localized_name": "시작형 산탄총 설계도 4",
+    "description": "가지고 있으면 |시작형 산탄총 (Legendary)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_SkySubmachineGun_2": {
+    "localized_name": "야전 기관단총 설계도 1",
+    "description": "가지고 있으면 |야전 기관단총 (Uncommon)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_SkySubmachineGun_3": {
+    "localized_name": "야전 기관단총 설계도 2",
+    "description": "가지고 있으면 |야전 기관단총 (Rare)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_SkySubmachineGun_4": {
+    "localized_name": "야전 기관단총 설계도 3",
+    "description": "가지고 있으면 |야전 기관단총 (Epic)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_SkySubmachineGun_5": {
+    "localized_name": "야전 기관단총 설계도 4",
+    "description": "가지고 있으면 |야전 기관단총 (Legendary)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_Spear_ForestBoss2_5": {
+    "localized_name": "강화된 릴리의 창 설계도 4",
+    "description": "가지고 있으면 |Spear ForestBoss2 (Legendary)| 레시피가 해제된다. |WeaponFactory Dirty 04|에서 제작할 수 있다."
+  },
   "Blueprint_Spear_ForestBoss_5": {
     "localized_name": "릴리의 창 설계도 4",
     "description": "가지고 있으면 |Spear ForestBoss (Legendary)| 레시피가 해제된다. |WeaponFactory Dirty 02|에서 제작할 수 있다."
@@ -2070,6 +2858,26 @@
   "Blueprint_WeakerBow_5": {
     "localized_name": "오래된 활 설계도 4",
     "description": "가지고 있으면 |오래된 활 (Legendary)| 레시피가 해제된다. |원시적인 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_WhaleWhistle": {
+    "localized_name": "흐릿해진 설계도",
+    "description": "가지고 있으면 |잔향의 피리| 레시피가 해제된다. |원시적인 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_WidePenetrateShotgun_2": {
+    "localized_name": "빔 스캐터 설계도 1",
+    "description": "가지고 있으면 |빔 스캐터 (Uncommon)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_WidePenetrateShotgun_3": {
+    "localized_name": "빔 스캐터 설계도 2",
+    "description": "가지고 있으면 |빔 스캐터 (Rare)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_WidePenetrateShotgun_4": {
+    "localized_name": "빔 스캐터 설계도 3",
+    "description": "가지고 있으면 |빔 스캐터 (Epic)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "Blueprint_WidePenetrateShotgun_5": {
+    "localized_name": "빔 스캐터 설계도 4",
+    "description": "가지고 있으면 |빔 스캐터 (Legendary)| 레시피가 해제된다. |고대 문명 작업대|에서 제작할 수 있다."
   },
   "Blueprint_Wire_Fence": {
     "localized_name": "와이어 울타리 설계도",
@@ -2327,6 +3135,14 @@
     "localized_name": "플럼린 토벌 증표",
     "description": "|쪽빛으로 물든 시녀 플럼린|을 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
+  "BossDefeatReward_BossRush": {
+    "localized_name": "개조 팰의 오염된 핵",
+    "description": "개조된 팰을 토벌한 증표. 세계수 최심부에 있는 봉인의 전당에 전개된 보호막을 해제하는 열쇠 중 하나."
+  },
+  "BossDefeatReward_CactusDoll": {
+    "localized_name": "허그미 토벌 증표",
+    "description": "|무수한 환영의 가시 허그미|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
   "BossDefeatReward_CaptainPenguin": {
     "localized_name": "펭킹 토벌 증표",
     "description": "|얼어붙은 바다의 개척자 펭킹|을 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
@@ -2339,13 +3155,37 @@
     "localized_name": "블러드캐티 토벌 증표",
     "description": "|어스름의 흡혈귀 블러드캐티|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
+  "BossDefeatReward_CubeTurtle": {
+    "localized_name": "누름북 토벌 증표",
+    "description": "|모래 바다의 거대 바위 누름북|을 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
+  "BossDefeatReward_CubeTurtle_Neutral": {
+    "localized_name": "성채북 토벌 증표",
+    "description": "|모래 바다의 수호 바위 성채북|을 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
   "BossDefeatReward_DarkScorpion": {
-    "localized_name": "데스 스팅 토벌 증표",
-    "description": "|뭐든지 꿰뚫는 창 데스 스팅|을 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+    "localized_name": "데스스팅 토벌 증표",
+    "description": "|뭐든지 꿰뚫는 창 데스스팅|을 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
   "BossDefeatReward_DarkScorpion_Ground": {
-    "localized_name": "골드 스팅 토벌 증표",
-    "description": "|황금을 꿰뚫는 창 골드 스팅|을 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+    "localized_name": "골드스팅 토벌 증표",
+    "description": "|황금을 꿰뚫는 창 골드스팅|을 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
+  "BossDefeatReward_DomeArmorDragon": {
+    "localized_name": "셸가드라 토벌 증표",
+    "description": "|빛의 흔적을 새기는 수호룡 셸가드라|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
+  "BossDefeatReward_ElecLizard": {
+    "localized_name": "밍기저드 토벌 증표",
+    "description": "|밍기적대는 전류 밍기저드|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
+  "BossDefeatReward_ElecPanda": {
+    "localized_name": "일렉판다 토벌 증표",
+    "description": "|천둥의 쌍발톱 일렉판다|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
+  "BossDefeatReward_ElecSnail": {
+    "localized_name": "전팽이 토벌 증표",
+    "description": "|느릿느릿 파란 번개 전팽이|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
   "BossDefeatReward_FairyDragon": {
     "localized_name": "실피아 토벌 증표",
@@ -2359,6 +3199,14 @@
     "localized_name": "볼트디어 토벌 증표",
     "description": "|유유자적하는 번개 볼트디어|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
+  "BossDefeatReward_FireKirin": {
+    "localized_name": "파이린 토벌 증표",
+    "description": "|뜨거운 사막을 질주하는 준마 파이린|을 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
+  "BossDefeatReward_FlameBuffalo": {
+    "localized_name": "불페르노 토벌 증표",
+    "description": "|활활 타오르는 뿔 달린 야수 불페르노|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
   "BossDefeatReward_FlowerDinosaur_Electric": {
     "localized_name": "찌르르디노 토벌 증표",
     "description": "|번개의 수호룡 찌르르디노|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
@@ -2366,6 +3214,22 @@
   "BossDefeatReward_FlowerDoll": {
     "localized_name": "플로리나 토벌 증표",
     "description": "|화원의 아가씨 플로리나|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
+  "BossDefeatReward_FlowerPrince": {
+    "localized_name": "녹사주의 꽃잎",
+    "description": "|녹사주|를 토벌한 증표. 세계수 최심부에 있는 봉인의 전당에 전개된 보호막을 해제하는 열쇠 중 하나."
+  },
+  "BossDefeatReward_FoxExorcist": {
+    "localized_name": "센코 토벌 증표",
+    "description": "|입맛대로 미래 예측 센코|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
+  "BossDefeatReward_FoxMage": {
+    "localized_name": "마호 토벌 증표",
+    "description": "|화염 여우 마도사 마호|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
+  "BossDefeatReward_GhostDragon": {
+    "localized_name": "레이번 토벌 증표",
+    "description": "|자유의 날개 레이번|을 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
   "BossDefeatReward_GhostRabbit": {
     "localized_name": "코쉬마리 토벌 증표",
@@ -2375,13 +3239,21 @@
     "localized_name": "러시골드 토벌 증표",
     "description": "|황혼의 수호자 러시골드|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
+  "BossDefeatReward_GrassGolem": {
+    "localized_name": "스태초 토벌 증표",
+    "description": "|맥동하는 푸른빛의 이심동체 스태초|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
+  "BossDefeatReward_GrassGolem_Dark": {
+    "localized_name": "스태그림 토벌 증표",
+    "description": "|맥동하는 보랏빛의 이심동체 스태그림|을 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
   "BossDefeatReward_GrassMammoth": {
     "localized_name": "그린모스 토벌 증표",
     "description": "|난폭한 쌍 어금니 그린모스|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
   "BossDefeatReward_GrassPanda_Electric": {
-    "localized_name": "썬더판다 토벌 증표",
-    "description": "|번개에 맞은 괴짜 썬더판다|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+    "localized_name": "라이바오 토벌 증표",
+    "description": "|번개에 맞은 괴짜 라이바오|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
   "BossDefeatReward_GrassRabbitMan": {
     "localized_name": "초토리 토벌 증표",
@@ -2407,13 +3279,17 @@
     "localized_name": "이시스 토벌 증표",
     "description": "|물빛 하늘의 패자 이시스|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
+  "BossDefeatReward_IceFox": {
+    "localized_name": "빙호 토벌 증표",
+    "description": "|얼어붙은 얼음 여우 빙호|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
   "BossDefeatReward_IceHorse": {
     "localized_name": "빙천마 토벌 증표",
     "description": "|전설의 얼음 천마 빙천마|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
   "BossDefeatReward_IceHorse_Dark": {
-    "localized_name": "그레이섀도우 토벌 증표",
-    "description": "|전설의 어둠 천마 그레이섀도우|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+    "localized_name": "흑천마 토벌 증표",
+    "description": "|전설의 어둠 천마 흑천마|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
   "BossDefeatReward_IceNarwhal": {
     "localized_name": "빙등고래 토벌 증표",
@@ -2427,6 +3303,10 @@
     "localized_name": "제트래곤 토벌 증표",
     "description": "|전설 속 유성의 용 제트래곤|을 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
+  "BossDefeatReward_KabukiMan": {
+    "localized_name": "업화무 토벌 증표",
+    "description": "|뜨거운 갈채에 목마른 멋쟁이 업화무|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
   "BossDefeatReward_KingAlpaca": {
     "localized_name": "킹파카 토벌 증표",
     "description": "|복슬복슬한 패자 킹파카|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
@@ -2436,8 +3316,8 @@
     "description": "|푸르고 복슬복슬한 패자 블루파카|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
   "BossDefeatReward_KingBahamut": {
-    "localized_name": "마그마 카이저 토벌 증표",
-    "description": "|연옥의 폭군 마그마 카이저|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+    "localized_name": "마그마카이저 토벌 증표",
+    "description": "|연옥의 폭군 마그마카이저|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
   "BossDefeatReward_Kirin": {
     "localized_name": "썬더콘 토벌 증표",
@@ -2455,13 +3335,37 @@
     "localized_name": "핑피롱 토벌 증표",
     "description": "|천둥의 폭식룡 핑피롱|을 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
+  "BossDefeatReward_LilyQueen": {
+    "localized_name": "릴린 토벌 증표",
+    "description": "|백합의 여제 릴린|을 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
   "BossDefeatReward_LilyQueen_Dark": {
-    "localized_name": "루나퀸 토벌 증표",
-    "description": "|심연의 여제 루나퀸|을 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+    "localized_name": "루나린 토벌 증표",
+    "description": "|심연의 여제 루나린|을 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
+  "BossDefeatReward_LotusDragon": {
+    "localized_name": "연미르 토벌 증표",
+    "description": "|무구한 물꽃의 용 연미르|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
+  "BossDefeatReward_Manticore": {
+    "localized_name": "만티파이어 토벌 증표",
+    "description": "|백염의 왕 만티파이어|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
+  "BossDefeatReward_MoonChild": {
+    "localized_name": "달보미 토벌 증표",
+    "description": "|밤하늘을 수놓는 아이 달보미|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
   "BossDefeatReward_MopKing": {
     "localized_name": "모프킹 토벌 증표",
     "description": "|수수께끼 복슬복슬 왕 모프킹|을 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
+  "BossDefeatReward_Mothman": {
+    "localized_name": "모슬론의 날개",
+    "description": "|모슬론|을 토벌한 증표. 세계수 최심부에 있는 봉인의 전당에 전개된 보호막을 해제하는 열쇠 중 하나."
+  },
+  "BossDefeatReward_MushroomLady": {
+    "localized_name": "머슐리 토벌 증표",
+    "description": "|귀여운 버섯 머슐리|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
   "BossDefeatReward_Mutant": {
     "localized_name": "루나리스 토벌 증표",
@@ -2500,8 +3404,16 @@
     "description": "|대군의 여왕 퀸비나|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
   "BossDefeatReward_RaijinDaughter_Water": {
-    "localized_name": "다크 키드 토벌 증표",
-    "description": "|검은 구름의 후예 다크 키드|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+    "localized_name": "다크키드 토벌 증표",
+    "description": "|검은 구름의 후예 다크키드|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
+  "BossDefeatReward_RockBeast": {
+    "localized_name": "지오르돈 토벌 증표",
+    "description": "|걸어 다니는 대광맥 지오르돈|을 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
+  "BossDefeatReward_RockBeast_Ice": {
+    "localized_name": "프로스돈 토벌 증표",
+    "description": "|걸어 다니는 대빙맥 프로스돈|을 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
   "BossDefeatReward_Ronin": {
     "localized_name": "불무사 토벌 증표",
@@ -2519,6 +3431,10 @@
     "localized_name": "스프라돈 토벌 증표",
     "description": "|여름을 알리는 파도 스프라돈|을 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
+  "BossDefeatReward_ScorpionMan_Electric": {
+    "localized_name": "썬더피어스 토벌 증표",
+    "description": "|썬더 보이 썬더피어스|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
   "BossDefeatReward_SkyDragon": {
     "localized_name": "페스키 토벌 증표",
     "description": "|순백의 비행자 페스키|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
@@ -2531,6 +3447,10 @@
     "localized_name": "라이버드 토벌 증표",
     "description": "|천둥 번개의 날개 라이버드|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
+  "BossDefeatReward_ThunderFluffyBird": {
+    "localized_name": "뇌운조 토벌 증표",
+    "description": "|복실복실한 번개 구름 뇌운조|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
   "BossDefeatReward_Umihebi": {
     "localized_name": "레비드라 토벌 증표",
     "description": "|해상의 패자 레비드라|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
@@ -2538,6 +3458,18 @@
   "BossDefeatReward_VioletFairy": {
     "localized_name": "비오레타 토벌 증표",
     "description": "|자줏빛 감색 풀의 환영 비오레타|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
+  "BossDefeatReward_VolcanicMonster": {
+    "localized_name": "볼카노 토벌 증표",
+    "description": "|용암에 굶주린 야수 볼카노|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
+  "BossDefeatReward_VolcanoDragon": {
+    "localized_name": "마그맨더 토벌 증표",
+    "description": "|초토를 걷는 자 마그맨더|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
+  "BossDefeatReward_VolcanoDragon_Ice": {
+    "localized_name": "블리잰더 토벌 증표",
+    "description": "|동토를 걷는 자 블리잰더|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
   "BossDefeatReward_WeaselDragon": {
     "localized_name": "베비뇽 토벌 증표",
@@ -2550,6 +3482,10 @@
   "BossDefeatReward_WhiteDeer": {
     "localized_name": "셀레스디얼 토벌 증표",
     "description": "|구원의 짐승 셀레스디얼|을 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+  },
+  "BossDefeatReward_WhiteDeer_Dark": {
+    "localized_name": "코스모디얼 토벌 증표",
+    "description": "|혼돈의 짐승 코스모디얼|을 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
   "BossDefeatReward_WhiteMoth": {
     "localized_name": "실키누 토벌 증표",
@@ -2568,8 +3504,8 @@
     "description": "|움직이는 거대 갑옷 테라나이트|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
   "BossDefeatReward_Yeti_Grass": {
-    "localized_name": "트로피티 토벌 증표",
-    "description": "|남국의 거인 트로피티|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
+    "localized_name": "움피티 토벌 증표",
+    "description": "|남국의 거인 움피티|를 토벌한 증표. 가지고 있기만 해도 영구적으로 보유한 팰의 스테이터스를 올려준다."
   },
   "BountyProof_1": {
     "localized_name": "현상범 토벌 증표",
@@ -2651,13 +3587,33 @@
     "localized_name": "삼연궁",
     "description": "3발의 화살을 동시에 발사하는 개량형 활. 신비한 힘 덕분에 한 번 쏠 때 1발의 화살만 소비된다."
   },
+  "BronzeSword": {
+    "localized_name": "원시적인 검",
+    "description": "휘두르는 맛이 끝내주는 근접 전투용 검. 적에게 접근하는 위험을 감수해야 한다."
+  },
   "Cake": {
     "localized_name": "케이크",
     "description": "축하할 일이 있을 때 먹는 요리. 교배 목장에 있는 상자에 넣어두면 이 요리를 먹고 활력이 솟은 팰이 알을 낳는다."
   },
+  "Cake02": {
+    "localized_name": "버섯 케이크",
+    "description": "배합 목장에 있는 상자에 넣어두면 이 요리를 먹고 활력이 솟은 팰이 알을 낳는다. 태어나는 팰의 재능치를 조금 증가시킨다."
+  },
+  "Cake03": {
+    "localized_name": "야채 케이크",
+    "description": "배합 목장에 있는 상자에 넣어두면 이 요리를 먹고 활력이 솟은 팰이 알을 낳는다. 한번에 알을 2개 낳을 수 있게 된다."
+  },
+  "Cake04": {
+    "localized_name": "호화 야채 케이크",
+    "description": "배합 목장에 있는 상자에 넣어두면 이 요리를 먹고 활력이 솟은 팰이 알을 낳는다. 돌연변이가 발생할 확률이 증가하며, 재능도 증가시킨다."
+  },
+  "Cake05": {
+    "localized_name": "스페셜 케이크",
+    "description": "배합 목장에 있는 상자에 넣어두면 이 요리를 먹고 활력이 솟은 팰이 알을 낳는다. 부모로부터 패시브 스킬을 더 많이 이어받을 확률을 증가시킨다."
+  },
   "CarbonFiber": {
     "localized_name": "카본 섬유",
-    "description": "가볍고 단단한 양질의 소재. 방어구 등의 소재가 된다."
+    "description": "가볍고 단단한 양질의 소재. 방어구 등의 소재가 된다. |Factory Hard 02|에서 제작할 수 있다."
   },
   "Carbonara": {
     "localized_name": "카르보나라",
@@ -2689,7 +3645,7 @@
   },
   "ChargeLaserRifleBullet": {
     "localized_name": "충전식 소총 탄약",
-    "description": "충전식 소총 등에 사용하는 탄."
+    "description": "충전식 소총 등에 사용하는 탄. |WeaponFactory Dirty 04|에서 제작할 수 있다."
   },
   "ChargeLaserRifle_2": {
     "localized_name": "충전식 소총",
@@ -2737,11 +3693,11 @@
   },
   "Cloth": {
     "localized_name": "천",
-    "description": "양털을 짜서 만든 천. 방어구를 만들 때 필요하다."
+    "description": "양털을(를) 짜서 만든 천. 방어구를 만들 때 필요하다. |원시적인 작업대|에서 제작할 수 있다."
   },
   "Cloth2": {
     "localized_name": "상급 천",
-    "description": "많은 양의 양털을 짜서 만든 상급 천. 고급 방어구를 만들 때 필요하다."
+    "description": "많은 양의 양털을(를) 짜서 만든 상급 천. 고급 방어구를 만들 때 필요하다. |Factory Hard 01|에서 제작할 수 있다."
   },
   "ClothArmor": {
     "localized_name": "천 옷",
@@ -2828,8 +3784,8 @@
     "description": "근대화를 거친 활. 더욱 강력한 화살을 발사할 수 있다."
   },
   "Computer": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "컴퓨터",
+    "description": "자동화 설비와 정밀 기계 제어에 사용되는 장치. 현대 기술의 기반이 되는 부품이다. |Factory Hard 03|에서 제작할 수 있다."
   },
   "CopperArmor": {
     "localized_name": "금속 갑옷",
@@ -2917,11 +3873,15 @@
   },
   "CopperOre": {
     "localized_name": "금속 광석",
-    "description": "화로에서 제련하면 주괴가 된다. 동굴 같은 곳에서 발견할 수 있다. 광석을 탐지할 수 있는 팰도 있는 듯하다."
+    "description": "화로에서 제련하면 주괴가 된다. 동굴 같은 곳에서 발견할 수 있다."
   },
   "CornSoup": {
     "localized_name": "ko Text",
     "description": "ko Text"
+  },
+  "Corrosive_Solvent": {
+    "localized_name": "부식성 용액",
+    "description": "강력한 분해 작용을 일으키는 위험한 화학 용액. 정밀 가공과 특수 처리에 활용된다. |Factory Hard 02|에서 제작할 수 있다."
   },
   "CrudeOil": {
     "localized_name": "원유",
@@ -2991,6 +3951,26 @@
     "localized_name": "쌍발 산탄총",
     "description": "근거리에서 맹위를 떨치는 산탄총. 2발을 연사할 수 있다. 장전 수는 적지만 고화력이다."
   },
+  "DroneLauncher": {
+    "localized_name": "드론 발사기",
+    "description": "자율 공격을 수행하는 드론을 사출하는 발사기. 최대 8기까지 전개할 수 있으며, 지속적인 제압 능력을 발휘한다."
+  },
+  "DroneLauncher_2": {
+    "localized_name": "드론 발사기",
+    "description": "자율 공격을 수행하는 드론을 사출하는 발사기. 최대 8기까지 전개할 수 있으며, 지속적인 제압 능력을 발휘한다."
+  },
+  "DroneLauncher_3": {
+    "localized_name": "드론 발사기",
+    "description": "자율 공격을 수행하는 드론을 사출하는 발사기. 최대 8기까지 전개할 수 있으며, 지속적인 제압 능력을 발휘한다."
+  },
+  "DroneLauncher_4": {
+    "localized_name": "드론 발사기",
+    "description": "자율 공격을 수행하는 드론을 사출하는 발사기. 최대 8기까지 전개할 수 있으며, 지속적인 제압 능력을 발휘한다."
+  },
+  "DroneLauncher_5": {
+    "localized_name": "드론 발사기",
+    "description": "자율 공격을 수행하는 드론을 사출하는 발사기. 최대 8기까지 전개할 수 있으며, 지속적인 제압 능력을 발휘한다."
+  },
   "Eaglestew": {
     "localized_name": "질풍수리 조림",
     "description": "오랫동안 끓여 진한 감칠맛과 야성미 넘치는 풍미를 이끌어낸 요리. 먹으면 일정 시간 동안 SAN 수치 하락 속도가 조금 감소한다."
@@ -3006,6 +3986,30 @@
   "ElecBaton": {
     "localized_name": "기절 배턴",
     "description": "때려서 감전 상태에 빠뜨리는 근접 무기. 감전된 팰은 포획하기 수월해진다."
+  },
+  "ElectricArcAssaultRifle": {
+    "localized_name": "플라즈마 소총",
+    "description": "착탄점에 전격을 일으켜 여러 적을 동시에 공격하는 소총."
+  },
+  "ElectricArcAssaultRifleBullet": {
+    "localized_name": "플라즈마 소총 탄약",
+    "description": "플라즈마 소총에 사용하는 탄. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "ElectricArcAssaultRifle_2": {
+    "localized_name": "플라즈마 소총",
+    "description": "착탄점에 전격을 일으켜 여러 적을 동시에 공격하는 소총."
+  },
+  "ElectricArcAssaultRifle_3": {
+    "localized_name": "플라즈마 소총",
+    "description": "착탄점에 전격을 일으켜 여러 적을 동시에 공격하는 소총."
+  },
+  "ElectricArcAssaultRifle_4": {
+    "localized_name": "플라즈마 소총",
+    "description": "착탄점에 전격을 일으켜 여러 적을 동시에 공격하는 소총."
+  },
+  "ElectricArcAssaultRifle_5": {
+    "localized_name": "플라즈마 소총",
+    "description": "착탄점에 전격을 일으켜 여러 적을 동시에 공격하는 소총."
   },
   "ElectricOrgan": {
     "localized_name": "발전 기관",
@@ -3057,7 +4061,7 @@
   },
   "EnergyLauncherBullet": {
     "localized_name": "플라즈마 카트리지",
-    "description": "플라즈마 대포 등에 사용하는 탄."
+    "description": "플라즈마 대포 등에 사용하는 탄. |WeaponFactory Dirty 03|에서 제작할 수 있다."
   },
   "EnergyRocketLauncher": {
     "localized_name": "플라즈마 대포",
@@ -3085,7 +4089,7 @@
   },
   "EnergyShotgunBullet": {
     "localized_name": "에너지 산탄총 탄약",
-    "description": "에너지 산탄총 등에 사용하는 탄."
+    "description": "에너지 산탄총 등에 사용하는 탄. |WeaponFactory Dirty 04|에서 제작할 수 있다."
   },
   "EnergyShotgun_2": {
     "localized_name": "에너지 산탄총",
@@ -3121,7 +4125,7 @@
   },
   "ExplosiveBullet": {
     "localized_name": "로켓탄",
-    "description": "Launcher Default 등에 사용하는 탄."
+    "description": "Launcher Default 등에 사용하는 탄. |WeaponFactory Dirty 03|에서 제작할 수 있다."
   },
   "Fang": {
     "localized_name": "ko Text",
@@ -3237,7 +4241,7 @@
   },
   "FlamethrowerBullet": {
     "localized_name": "화염방사기 연료",
-    "description": "화염방사기의 연료. Flamethrower 등에 사용할 수 있는 탄."
+    "description": "화염방사기의 연료. Flamethrower 등에 사용하는 탄. |WeaponFactory Dirty 03|에서 제작할 수 있다."
   },
   "Flour": {
     "localized_name": "밀가루",
@@ -3420,12 +4424,12 @@
     "description": "비에른으로 변할 수 있는 모자."
   },
   "GasMask": {
-    "localized_name": "ko Text",
-    "description": "ko Text"
+    "localized_name": "부식 안개 마스크",
+    "description": "특수한 여과 장치가 포함된 마스크. 부식 안개로부터 받는 피해를 무효화한다."
   },
   "GatlingBullet": {
     "localized_name": "개틀링탄",
-    "description": "개틀링 건 등에 사용하는 탄."
+    "description": "개틀링 건 등에 사용하는 탄. |WeaponFactory Dirty 03|에서 제작할 수 있다."
   },
   "GatlingGun": {
     "localized_name": "개틀링 건",
@@ -3501,7 +4505,7 @@
   },
   "GrenadeBullet": {
     "localized_name": "유탄",
-    "description": "유탄 발사기 등에 사용하는 탄."
+    "description": "유탄 발사기 등에 사용하는 탄. |WeaponFactory Dirty 03|에서 제작할 수 있다."
   },
   "GrenadeLauncher": {
     "localized_name": "유탄 발사기",
@@ -3534,6 +4538,10 @@
   "GrilledSheepHerbs": {
     "localized_name": "도로롱 향초구이",
     "description": "신선한 열매를 아낌없이 사용하여, 양고기 특유의 맛을 끌어내는 향이 퍼져 나온다. 먹으면 일정 시간 동안 방어 +10%"
+  },
+  "GrilledSwordCutlassFish": {
+    "localized_name": "날검치 소금구이",
+    "description": "신선한 날검치 토막에 소금을 호쾌하게 뿌려 구워낸 요리. 먹으면 일정 시간 동안 넉백과 피격 경직을 무효화한다."
   },
   "GuidedMissileLauncher": {
     "localized_name": "미사일 발사기",
@@ -3597,7 +4605,11 @@
   },
   "HandgunBullet": {
     "localized_name": "핸드건 탄약",
-    "description": "HandGun Default 등에 사용하는 탄."
+    "description": "HandGun Default 등에 사용하는 탄. |WeaponFactory Dirty 01|에서 제작할 수 있다."
+  },
+  "HandgunShield": {
+    "localized_name": "전술 방패",
+    "description": "전술 방패"
   },
   "Head001": {
     "localized_name": "왕관",
@@ -4044,24 +5056,24 @@
     "description": "모프링의 모습을 본뜬 모자."
   },
   "HeadEquip032": {
-    "localized_name": "썬더 키드 모자",
-    "description": "썬더 키드의 모습을 본뜬 모자."
+    "localized_name": "썬더키드 모자",
+    "description": "썬더키드의 모습을 본뜬 모자."
   },
   "HeadEquip032_2": {
-    "localized_name": "썬더 키드 모자",
-    "description": "썬더 키드의 모습을 본뜬 모자."
+    "localized_name": "썬더키드 모자",
+    "description": "썬더키드의 모습을 본뜬 모자."
   },
   "HeadEquip032_3": {
-    "localized_name": "썬더 키드 모자",
-    "description": "썬더 키드의 모습을 본뜬 모자."
+    "localized_name": "썬더키드 모자",
+    "description": "썬더키드의 모습을 본뜬 모자."
   },
   "HeadEquip032_4": {
-    "localized_name": "썬더 키드 모자",
-    "description": "썬더 키드의 모습을 본뜬 모자."
+    "localized_name": "썬더키드 모자",
+    "description": "썬더키드의 모습을 본뜬 모자."
   },
   "HeadEquip032_5": {
-    "localized_name": "썬더 키드 모자",
-    "description": "썬더 키드의 모습을 본뜬 모자."
+    "localized_name": "썬더키드 모자",
+    "description": "썬더키드의 모습을 본뜬 모자."
   },
   "HeadEquip033": {
     "localized_name": "까부냥 모자",
@@ -4069,7 +5081,7 @@
   },
   "HeadEquip041": {
     "localized_name": "패왕의 뿔",
-    "description": "마그마 드라고[궁극]의 불길한 힘이 느껴진다. 이걸 손에 넣는 일은 극도로 드물다."
+    "description": "마그마드라고[궁극]의 불길한 힘이 느껴진다. 이걸 손에 넣는 일은 극도로 드물다."
   },
   "HeadEquip044": {
     "localized_name": "제노드란 헤드",
@@ -4083,16 +5095,80 @@
     "localized_name": "구원의 왕관",
     "description": "레젠디얼[궁극]의 불길한 힘이 느껴진다. 이걸 손에 넣는 일은 극도로 드물다."
   },
+  "HeadEquip048": {
+    "localized_name": "아우리 흉내 모자",
+    "description": "아우리로 변할 수 있는 모자."
+  },
+  "HeadEquip049": {
+    "localized_name": "제날라 흉내 모자",
+    "description": "제날라로 변할 수 있는 모자. 이걸 손에 넣는 일은 극도로 드물다."
+  },
+  "HeadEquip050": {
+    "localized_name": "모몽파 머리띠",
+    "description": "모몽파의 모습을 본뜬 머리띠."
+  },
+  "HeadEquip051": {
+    "localized_name": "킹파카 머리띠",
+    "description": "킹파카의 모습을 본뜬 머리띠."
+  },
+  "HeadEquip052": {
+    "localized_name": "옥토비아 모자",
+    "description": "옥토비아의 모습을 본뜬 모자."
+  },
+  "HeadEquip053": {
+    "localized_name": "플루미 모자",
+    "description": "플루미의 모습을 본뜬 모자."
+  },
+  "HeadEquip054": {
+    "localized_name": "헬터클 모자",
+    "description": "헬터클의 모습을 본뜬 모자."
+  },
+  "HeadEquip055": {
+    "localized_name": "칼구리 모자",
+    "description": "칼구리의 모습을 본뜬 모자."
+  },
+  "HeadEquip056": {
+    "localized_name": "꼬꼬닭 모자",
+    "description": "꼬꼬닭의 모습을 본뜬 모자."
+  },
+  "HeadEquip057": {
+    "localized_name": "녹사주 모자",
+    "description": "녹사주의 모습을 본뜬 모자."
+  },
+  "HeadEquip058": {
+    "localized_name": "머쉬드래곤 모자",
+    "description": "MushroomDragon Dark의 모습을 본뜬 모자."
+  },
+  "HeadEquip059": {
+    "localized_name": "빛초롱 머리 장식",
+    "description": "빛초롱의 모습을 본뜬 머리 장식."
+  },
+  "HeadEquip060": {
+    "localized_name": "칠위치 모자",
+    "description": "칠위치의 모습을 본뜬 모자."
+  },
+  "HeadEquip061": {
+    "localized_name": "얀데리나 모자",
+    "description": "얀데리나의 모습을 본뜬 모자."
+  },
+  "HeadEquip062": {
+    "localized_name": "스틱툴라 모자",
+    "description": "스틱툴라의 모습을 본뜬 모자."
+  },
   "Herbs": {
     "localized_name": "하급 의약품",
     "description": "감기, 염좌, 과식증에 잘 듣는 하급 의약품. 먹어도 HP는 회복되지 않는다."
+  },
+  "HighGrade_Processed_Wood": {
+    "localized_name": "상급 나무 판자",
+    "description": "Wood Fine를 정성스레 깎아 만든 판자. 나뭇결이 아름다워 고급 느낌의 건축물에 사용된다. |Factory Hard 03|에서 제작할 수 있다."
   },
   "Homeward": {
     "localized_name": "귀환의 뇌운",
     "description": "가장 가까운 거점으로 이동하는 기능이 있다. 던전 내부 등의 위치에선 사용할 수 없다."
   },
   "HomingSphereLauncher": {
-    "localized_name": "귀환형 스피어 발사기",
+    "localized_name": "유도형 스피어 발사기",
     "description": "스피어 발사용 발사기. 발사한 스피어는 팰을 추적한다."
   },
   "Honey": {
@@ -4125,7 +5201,7 @@
   },
   "InkBullet": {
     "localized_name": "데칼 잉크",
-    "description": "데칼 총에 사용하는 탄. 잉크로 팰 그림을 그릴 수 있다."
+    "description": "데칼 총에 사용하는 탄. 잉크로 팰 그림을 그릴 수 있다. |WeaponFactory Dirty 01|에서 제작할 수 있다."
   },
   "IronArmor": {
     "localized_name": "제련 금속 갑옷",
@@ -4217,7 +5293,7 @@
   },
   "JellyfishFairy_jelly": {
     "localized_name": "플루미 흔들흔들 젤리",
-    "description": "Meat JellyfishFairy, 팰의 체액을(를) 재료로 만든 신비한 디저트. 먹으면 일정 시간 동안 경험치 획득량이 조금 증가하며 공격 +10%."
+    "description": "Meat JellyfishFairy, 수생 팰의 점액을(를) 재료로 만든 신비한 디저트. 먹으면 일정 시간 동안 경험치 획득량이 조금 증가하며 공격 +10%."
   },
   "JellyfishGhost_jelly": {
     "localized_name": "흘루미 흐물흐물 젤리",
@@ -4243,6 +5319,38 @@
     "localized_name": "카타나",
     "description": "근접 전투용 카타나. 예리한 날로 적을 일도양단한다."
   },
+  "KeySphere_01": {
+    "localized_name": "질투의 키 스피어",
+    "description": "머나먼 옛날, 이 땅에 번영하던 고대 문명의 유물. 전모는 여전히 밝혀지지 않았지만, 최근 연구 결과를 통해 거대한 장치의 일부였을 가능성이 있음을 시사하고 있다. |인간의 번영을 질투하여, 파멸을 초래한 죄.|"
+  },
+  "KeySphere_02": {
+    "localized_name": "오만의 키 스피어",
+    "description": "머나먼 옛날, 이 땅에 번영하던 고대 문명의 유물. 전모는 여전히 밝혀지지 않았지만, 최근 연구 결과를 통해 거대한 장치의 일부였을 가능성이 있음을 시사하고 있다. |공생이라는 오만을 바라며, 재앙을 불러온 죄.|"
+  },
+  "KeySphere_03": {
+    "localized_name": "탐욕의 키 스피어",
+    "description": "머나먼 옛날, 이 땅에 번영하던 고대 문명의 유물. 전모는 여전히 밝혀지지 않았지만, 최근 연구 결과를 통해 거대한 장치의 일부였을 가능성이 있음을 시사하고 있다. |자신의 숙명을 거부하고, 인연을 탐욕한 죄.|"
+  },
+  "KeySphere_04": {
+    "localized_name": "나태의 키 스피어",
+    "description": "머나먼 옛날, 이 땅에 번영하던 고대 문명의 유물. 전모는 여전히 밝혀지지 않았지만, 최근 연구 결과를 통해 거대한 장치의 일부였을 가능성이 있음을 시사하고 있다. |인간의 마음을 버리고, 멸망의 길로 타락한 죄.|"
+  },
+  "KeySphere_05": {
+    "localized_name": "식탐의 키 스피어",
+    "description": "머나먼 옛날, 이 땅에 번영하던 고대 문명의 유물. 전모는 여전히 밝혀지지 않았지만, 최근 연구 결과를 통해 거대한 장치의 일부였을 가능성이 있음을 시사하고 있다. |별의 명맥을 탐식하고도, 만족이라는 것을 모르는 죄.|"
+  },
+  "KeySphere_06": {
+    "localized_name": "색욕의 키 스피어",
+    "description": "머나먼 옛날, 이 땅에 번영하던 고대 문명의 유물. 전모는 여전히 밝혀지지 않았지만, 최근 연구 결과를 통해 거대한 장치의 일부였을 가능성이 있음을 시사하고 있다. |외부의 금기를 탐하고, 인간의 이치에서 벗어난 죄.|"
+  },
+  "KeySphere_07": {
+    "localized_name": "분노의 키 스피어",
+    "description": "머나먼 옛날, 이 땅에 번영하던 고대 문명의 유물. 전모는 여전히 밝혀지지 않았지만, 최근 연구 결과를 통해 거대한 장치의 일부였을 가능성이 있음을 시사하고 있다. |분노에 몸을 맡기고, 죽음을 퍼뜨린 죄.|"
+  },
+  "KeySphere_08": {
+    "localized_name": "원죄의 키 스피어",
+    "description": "머나먼 옛날, 이 땅에 번영하던 고대 문명의 유물. 전모는 여전히 밝혀지지 않았지만, 최근 연구 결과를 통해 거대한 장치의 일부였을 가능성이 있음을 시사하고 있다. |만물의 생명을 부정하면서도, 생명으로서 태어난 죄.|"
+  },
   "Lantern": {
     "localized_name": "허리 휴대형 랜턴",
     "description": "허리에 차고 다니는 랜턴. 밤이 되면 자동으로 환해진다. 점등 모드를 바꿔 항상 끄거나 켜지게 할 수도 있다. 1개만으로도 충분하다."
@@ -4253,11 +5361,11 @@
   },
   "LaserBullet": {
     "localized_name": "에너지 카트리지",
-    "description": "레이저 소총 등에 사용하는 탄."
+    "description": "레이저 소총 등에 사용하는 탄. |WeaponFactory Dirty 03|에서 제작할 수 있다."
   },
   "LaserGatlingBullet": {
     "localized_name": "개틀링 레이저 카트리지",
-    "description": "레이저 개틀링 건 등에 사용하는 탄."
+    "description": "레이저 개틀링 건 등에 사용하는 탄. |WeaponFactory Dirty 03|에서 제작할 수 있다."
   },
   "LaserGatlingGun": {
     "localized_name": "레이저 개틀링 건",
@@ -4278,6 +5386,10 @@
   "LaserGatlingGun_5": {
     "localized_name": "레이저 개틀링 건",
     "description": "고속으로 빔 형태의 광선을 연사하는 개틀링 건. 높은 화력으로 여러 적들을 한꺼번에 제압할 수 있다."
+  },
+  "LaserMiningTool": {
+    "localized_name": "멀티 플라즈마 커터",
+    "description": "플라즈마 에너지를 한데 모아 발사할 수 있는 휴대용 플라즈마 커터. 광석 채굴 및 벌목 등, 다양한 용도로 활용할 수 있다. 고출력 에너지를 사용하는 덕분에 특수 광석 채굴도 가능하다."
   },
   "LaserRifle": {
     "localized_name": "레이저 소총",
@@ -4326,6 +5438,10 @@
   "Launcher_Meteor_5": {
     "localized_name": "메테오 발사기",
     "description": "운석을 가공하여 만든 아주 유별난 무기. 착탄 시 운석과도 같은 폭발을 일으킨다."
+  },
+  "Lava_Ancient": {
+    "localized_name": "고대 용암 덩어리",
+    "description": "극한의 환경 속에서 오랜 세월 동안 형성된 용암 덩어리. 갇혀 있는 푸른 용암이 여전히 뜨거운 열을 발산하고 있다."
   },
   "Leather": {
     "localized_name": "가죽",
@@ -4497,7 +5613,7 @@
   },
   "ManganeseIngot": {
     "localized_name": "코랄리움 주괴",
-    "description": "코랄리움 광석, 금속 광석, 석탄(으)로 구성된 합금. 에너지에 대한 강도가 높아 무기 등의 재료로 활용할 수 있다."
+    "description": "심해에 잠든 코랄리움 광석(으)로 구성된 합금. 에너지에 대한 강도가 높아 무기 등의 재료로 활용할 수 있다. |거대한 화로|에서 제련할 수 있다."
   },
   "ManganeseOre": {
     "localized_name": "코랄리움 광석",
@@ -4595,17 +5711,21 @@
     "localized_name": "도로롱의 양고기",
     "description": "SheepBall의 고기. 독특한 풍미가 매력적인 붉은 살코기. 잡내가 있지만 맛이 좋다."
   },
+  "Meat_SwordCutlassFish": {
+    "localized_name": "날검치 토막",
+    "description": "SwordCutlassFish의 토막. 부드럽고 통통한 살이 특징이다. 도검처럼 날카로운 등뼈를 갖고 있어 조리할 때 조심해야 한다."
+  },
   "Medicines": {
     "localized_name": "의약품",
     "description": "위궤양(이)나 골절에 잘 듣는 신비한 의약품. HP는 회복되지 않는다."
   },
   "MetalDetector": {
     "localized_name": "금속 탐지기",
-    "description": "손으로 들고 주변에 숨겨진 광석을 탐지하는 도구. 광석 근처에서 탐지하면 그 금속에 표식을 찍는다. 거리가 멀어지면 찍었던 표식이 사라진다."
+    "description": "손으로 들고 주변에 숨겨진 크로마이트 광석을 탐지하는 도구. 광석 근처에서 탐지하면 그 금속에 표식을 찍는다. 거리가 멀어지면 찍었던 표식이 사라진다."
   },
   "MeteorBullet": {
     "localized_name": "운석탄",
-    "description": "Launcher Meteor 등에 사용하는 탄."
+    "description": "Launcher Meteor 등에 사용하는 탄. |WeaponFactory Dirty 02|에서 제작할 수 있다."
   },
   "MeteorDrop": {
     "localized_name": "운석 파편",
@@ -4625,7 +5745,7 @@
   },
   "MissileBullet": {
     "localized_name": "미사일탄",
-    "description": "미사일 발사기 등에 사용하는 탄."
+    "description": "미사일 발사기 등에 사용하는 탄. |WeaponFactory Dirty 03|에서 제작할 수 있다."
   },
   "Money": {
     "localized_name": "금화",
@@ -4759,6 +5879,10 @@
     "localized_name": "옥토비아 타코야키",
     "description": "Meat OctopusGirl을(를) 밀가루 생지에 넣어 둥글게 구운 요리. 먹으면 일정 시간 동안 경험치 획득량이 조금 증가한다."
   },
+  "OctopusGirl_Takoyaki2": {
+    "localized_name": "해물 파스타",
+    "description": "옥토비아의 문어 다리를 아낌없이 넣고 생파스타와 조리한, 바다 내음이 물씬 풍기는 요리. 먹으면 일정 시간 동안 폭발 피해를 무효화한다."
+  },
   "OldRevolver": {
     "localized_name": "낡은 리볼버",
     "description": "조금 낡은 회전식 리볼버. Handgun default보다 한 발당 위력이 높다."
@@ -4795,149 +5919,225 @@
     "localized_name": "수상한 주스",
     "description": "마시면 기분이 좋아지는 주스. 마시면 일정 시간 동안 작업 속도가 조금 올라가지만 SAN 수치가 조금 내려간다."
   },
+  "Otomo_ATDark_ElementBoost_1": {
+    "localized_name": "명왕의 지휘봉",
+    "description": "함께 싸우는 팰의 공격력을 올려주는 장신구. 팰의 어둠 속성 피해도 크게 강화한다."
+  },
+  "Otomo_ATDragon_ElementBoost_1": {
+    "localized_name": "신룡의 지휘봉",
+    "description": "함께 싸우는 팰의 공격력을 올려주는 장신구. 팰의 용 속성 피해도 크게 강화한다."
+  },
+  "Otomo_ATEarth_ElementBoost_1": {
+    "localized_name": "지제의 지휘봉",
+    "description": "함께 싸우는 팰의 공격력을 올려주는 장신구. 팰의 땅 속성 피해도 크게 강화한다."
+  },
+  "Otomo_ATElectricity_ElementBoost_1": {
+    "localized_name": "뇌제의 지휘봉",
+    "description": "함께 싸우는 팰의 공격력을 올려주는 장신구. 팰의 번개 속성 피해도 크게 강화한다."
+  },
+  "Otomo_ATFire_ElementBoost_1": {
+    "localized_name": "염제의 지휘봉",
+    "description": "함께 싸우는 팰의 공격력을 올려주는 장신구. 팰의 화염 속성 피해도 크게 강화한다."
+  },
+  "Otomo_ATIce_ElementBoost_1": {
+    "localized_name": "빙제의 지휘봉",
+    "description": "함께 싸우는 팰의 공격력을 올려주는 장신구. 팰의 얼음 속성 피해도 크게 강화한다."
+  },
+  "Otomo_ATLeaf_ElementBoost_1": {
+    "localized_name": "정령왕의 지휘봉",
+    "description": "함께 싸우는 팰의 공격력을 올려주는 장신구. 팰의 풀 속성 피해도 크게 강화한다."
+  },
+  "Otomo_ATNormal_ElementBoost_1": {
+    "localized_name": "성천의 지휘봉",
+    "description": "함께 싸우는 팰의 공격력을 올려주는 장신구. 팰의 무속성 피해도 크게 강화한다."
+  },
+  "Otomo_ATWater_ElementBoost_1": {
+    "localized_name": "해황의 지휘봉",
+    "description": "함께 싸우는 팰의 공격력을 올려주는 장신구. 팰의 물 속성 피해도 크게 강화한다."
+  },
   "Otomo_Attack_up1": {
     "localized_name": "공격 지원 호루라기",
-    "description": "함께 싸우는 팰의 공격력을 조금 증가시켜 주는 장신구."
+    "description": "함께 싸우는 팰의 공격력을 증가시켜 주는 장신구."
   },
   "Otomo_Attack_up2": {
-    "localized_name": "공격 지원 호루라기 +1",
+    "localized_name": "공격 지원 호루라기",
     "description": "함께 싸우는 팰의 공격력을 증가시켜 주는 장신구."
   },
   "Otomo_Attack_up3": {
-    "localized_name": "공격 지원 호루라기 +2",
-    "description": "함께 싸우는 팰의 공격력을 상당히 증가시켜 주는 장신구."
+    "localized_name": "공격 지원 호루라기",
+    "description": "함께 싸우는 팰의 공격력을 증가시켜 주는 장신구."
+  },
+  "Otomo_DFDark_ElementBoost_1": {
+    "localized_name": "루나린의 수호 부적",
+    "description": "함께 싸우는 팰의 방어력을 올려주는 장신구. 팰의 어둠 속성 피해도 상당히 강화시켜 준다."
+  },
+  "Otomo_DFDragon_ElementBoost_1": {
+    "localized_name": "제트래곤 수호 부적",
+    "description": "함께 싸우는 팰의 방어력을 올려주는 장신구. 팰의 용 속성 피해도 상당히 강화시켜 준다."
+  },
+  "Otomo_DFEarth_ElementBoost_1": {
+    "localized_name": "아누비스의 수호 부적",
+    "description": "함께 싸우는 팰의 방어력을 올려주는 장신구. 팰의 땅 속성 피해도 상당히 강화시켜 준다."
+  },
+  "Otomo_DFElectricity_ElementBoost_1": {
+    "localized_name": "볼젝스의 수호 부적",
+    "description": "함께 싸우는 팰의 방어력을 올려주는 장신구. 팰의 번개 속성 피해도 상당히 강화시켜 준다."
+  },
+  "Otomo_DFFire_ElementBoost_1": {
+    "localized_name": "마그마카이저의 수호 부적",
+    "description": "함께 싸우는 팰의 방어력을 올려주는 장신구. 팰의 화염 속성 피해도 상당히 강화시켜 준다."
+  },
+  "Otomo_DFIce_ElementBoost_1": {
+    "localized_name": "빙천마의 수호 부적",
+    "description": "함께 싸우는 팰의 방어력을 올려주는 장신구. 팰의 얼음 속성 피해도 상당히 강화시켜 준다."
+  },
+  "Otomo_DFLeaf_ElementBoost_1": {
+    "localized_name": "릴린의 수호 부적",
+    "description": "함께 싸우는 팰의 방어력을 올려주는 장신구. 팰의 풀 속성 피해도 상당히 강화시켜 준다."
+  },
+  "Otomo_DFNormal_ElementBoost_1": {
+    "localized_name": "레젠디얼의 수호 부적",
+    "description": "함께 싸우는 팰의 방어력을 올려주는 장신구. 팰의 무속성 피해도 상당히 강화시켜 준다."
+  },
+  "Otomo_DFWater_ElementBoost_1": {
+    "localized_name": "넵티오스의 수호 부적",
+    "description": "함께 싸우는 팰의 방어력을 올려주는 장신구. 팰의 물 속성 피해도 상당히 강화시켜 준다."
   },
   "Otomo_Defense_up1": {
     "localized_name": "방어 지원 호루라기",
-    "description": "함께 싸우는 팰의 방어력을 조금 증가시켜 주는 장신구."
+    "description": "함께 싸우는 팰의 방어력을 증가시켜 주는 장신구."
   },
   "Otomo_Defense_up2": {
-    "localized_name": "방어 지원 호루라기 +1",
+    "localized_name": "방어 지원 호루라기",
     "description": "함께 싸우는 팰의 방어력을 증가시켜 주는 장신구."
   },
   "Otomo_Defense_up3": {
-    "localized_name": "방어 지원 호루라기 +2",
-    "description": "함께 싸우는 팰의 방어력을 상당히 증가시켜 주는 장신구."
+    "localized_name": "방어 지원 호루라기",
+    "description": "함께 싸우는 팰의 방어력을 증가시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Dark_1": {
     "localized_name": "어둠 속성 응원 호루라기",
-    "description": "함께 싸우는 팰의 어둠 속성 피해를 조금 강화시켜 주는 장신구."
+    "description": "함께 싸우는 팰의 어둠 속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Dark_2": {
-    "localized_name": "어둠 속성 응원 호루라기 +1",
+    "localized_name": "어둠 속성 응원 호루라기",
     "description": "함께 싸우는 팰의 어둠 속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Dark_3": {
-    "localized_name": "어둠 속성 응원 호루라기 +2",
-    "description": "함께 싸우는 팰의 어둠 속성 피해를 상당히 강화시켜 주는 장신구."
+    "localized_name": "어둠 속성 응원 호루라기",
+    "description": "함께 싸우는 팰의 어둠 속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Dragon_1": {
     "localized_name": "용 속성 응원 호루라기",
-    "description": "함께 싸우는 팰의 용 속성 피해를 조금 강화시켜 주는 장신구."
+    "description": "함께 싸우는 팰의 용 속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Dragon_2": {
-    "localized_name": "용 속성 응원 호루라기 +1",
+    "localized_name": "용 속성 응원 호루라기",
     "description": "함께 싸우는 팰의 용 속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Dragon_3": {
-    "localized_name": "용 속성 응원 호루라기 +2",
-    "description": "함께 싸우는 팰의 용 속성 피해를 상당히 강화시켜 주는 장신구."
+    "localized_name": "용 속성 응원 호루라기",
+    "description": "함께 싸우는 팰의 용 속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Earth_1": {
     "localized_name": "땅 속성 응원 호루라기",
-    "description": "함께 싸우는 팰의 땅 속성 피해를 조금 강화시켜 주는 장신구."
+    "description": "함께 싸우는 팰의 땅 속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Earth_2": {
-    "localized_name": "땅 속성 응원 호루라기 +1",
+    "localized_name": "땅 속성 응원 호루라기",
     "description": "함께 싸우는 팰의 땅 속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Earth_3": {
-    "localized_name": "땅 속성 응원 호루라기 +2",
-    "description": "함께 싸우는 팰의 땅 속성 피해를 상당히 강화시켜 주는 장신구."
+    "localized_name": "땅 속성 응원 호루라기",
+    "description": "함께 싸우는 팰의 땅 속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Electricity_1": {
     "localized_name": "번개 속성 응원 호루라기",
-    "description": "함께 싸우는 팰의 번개 속성 피해를 조금 강화시켜 주는 장신구."
+    "description": "함께 싸우는 팰의 번개 속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Electricity_2": {
-    "localized_name": "번개 속성 응원 호루라기 +1",
+    "localized_name": "번개 속성 응원 호루라기",
     "description": "함께 싸우는 팰의 번개 속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Electricity_3": {
-    "localized_name": "번개 속성 응원 호루라기 +2",
-    "description": "함께 싸우는 팰의 번개 속성 피해를 상당히 강화시켜 주는 장신구."
+    "localized_name": "번개 속성 응원 호루라기",
+    "description": "함께 싸우는 팰의 번개 속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Fire_1": {
     "localized_name": "화염 속성 응원 호루라기",
-    "description": "함께 싸우는 팰의 화염 속성 피해를 조금 강화시켜 주는 장신구."
+    "description": "함께 싸우는 팰의 화염 속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Fire_2": {
-    "localized_name": "화염 속성 응원 호루라기 +1",
+    "localized_name": "화염 속성 응원 호루라기",
     "description": "함께 싸우는 팰의 화염 속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Fire_3": {
-    "localized_name": "화염 속성 응원 호루라기 +2",
-    "description": "함께 싸우는 팰의 화염 속성 피해를 상당히 강화시켜 주는 장신구."
+    "localized_name": "화염 속성 응원 호루라기",
+    "description": "함께 싸우는 팰의 화염 속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Ice_1": {
     "localized_name": "얼음 속성 응원 호루라기",
-    "description": "함께 싸우는 팰의 얼음 속성 피해를 조금 강화시켜 주는 장신구."
+    "description": "함께 싸우는 팰의 얼음 속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Ice_2": {
-    "localized_name": "얼음 속성 응원 호루라기 +1",
+    "localized_name": "얼음 속성 응원 호루라기",
     "description": "함께 싸우는 팰의 얼음 속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Ice_3": {
-    "localized_name": "얼음 속성 응원 호루라기 +2",
-    "description": "함께 싸우는 팰의 얼음 속성 피해를 상당히 강화시켜 주는 장신구."
+    "localized_name": "얼음 속성 응원 호루라기",
+    "description": "함께 싸우는 팰의 얼음 속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Leaf_1": {
     "localized_name": "풀 속성 응원 호루라기",
-    "description": "함께 싸우는 팰의 풀 속성 피해를 조금 강화시켜 주는 장신구."
+    "description": "함께 싸우는 팰의 풀 속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Leaf_2": {
-    "localized_name": "풀 속성 응원 호루라기 +1",
+    "localized_name": "풀 속성 응원 호루라기",
     "description": "함께 싸우는 팰의 풀 속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Leaf_3": {
-    "localized_name": "풀 속성 응원 호루라기 +2",
-    "description": "함께 싸우는 팰의 풀 속성 피해를 상당히 강화시켜 주는 장신구."
+    "localized_name": "풀 속성 응원 호루라기",
+    "description": "함께 싸우는 팰의 풀 속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Normal_1": {
     "localized_name": "무속성 응원 호루라기",
-    "description": "함께 싸우는 팰의 무속성 피해를 조금 강화시켜 주는 장신구."
+    "description": "함께 싸우는 팰의 무속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Normal_2": {
-    "localized_name": "무속성 응원 호루라기 +1",
+    "localized_name": "무속성 응원 호루라기",
     "description": "함께 싸우는 팰의 무속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Normal_3": {
-    "localized_name": "무속성 응원 호루라기 +2",
-    "description": "함께 싸우는 팰의 무속성 피해를 상당히 강화시켜 주는 장신구."
+    "localized_name": "무속성 응원 호루라기",
+    "description": "함께 싸우는 팰의 무속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Water_1": {
     "localized_name": "물 속성 응원 호루라기",
-    "description": "함께 싸우는 팰의 물 속성 피해를 조금 강화시켜 주는 장신구."
+    "description": "함께 싸우는 팰의 물 속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Water_2": {
-    "localized_name": "물 속성 응원 호루라기 +1",
+    "localized_name": "물 속성 응원 호루라기",
     "description": "함께 싸우는 팰의 물 속성 피해를 강화시켜 주는 장신구."
   },
   "Otomo_ElementBoost_Water_3": {
-    "localized_name": "물 속성 응원 호루라기 +2",
-    "description": "함께 싸우는 팰의 물 속성 피해를 상당히 강화시켜 주는 장신구."
+    "localized_name": "물 속성 응원 호루라기",
+    "description": "함께 싸우는 팰의 물 속성 피해를 강화시켜 주는 장신구."
+  },
+  "Otomo_PalConfidence_Increase_1": {
+    "localized_name": "신뢰의 반지",
+    "description": "장착하고 있는 동안 팰의 신뢰도 상승률이 증가한다."
   },
   "Otomo_PalExp_Increase_1": {
     "localized_name": "성장 촉진 종",
-    "description": "팰이 획득하는 경험치를 미미하게 증가시켜 주는 장신구."
+    "description": "팰이 획득하는 경험치를 증가시켜 주는 장신구."
   },
   "Otomo_PalExp_Increase_2": {
-    "localized_name": "성장 촉진 종 +1",
+    "localized_name": "성장 촉진 종",
     "description": "팰이 획득하는 경험치를 증가시켜 주는 장신구."
   },
   "Otomo_PalExp_Increase_3": {
-    "localized_name": "성장 촉진 종 +2",
-    "description": "팰이 획득하는 경험치를 상당히 증가시켜 주는 장신구."
+    "localized_name": "성장 촉진 종",
+    "description": "팰이 획득하는 경험치를 증가시켜 주는 장신구."
   },
   "OverheatRifle": {
     "localized_name": "전자동 소총",
@@ -4945,7 +6145,7 @@
   },
   "OverheatRifleBullet": {
     "localized_name": "전자동 소총 탄약",
-    "description": "전자동 소총 등에 사용하는 탄."
+    "description": "전자동 소총 등에 사용하는 탄. |WeaponFactory Dirty 04|에서 제작할 수 있다."
   },
   "OverheatRifle_2": {
     "localized_name": "전자동 소총",
@@ -4963,6 +6163,78 @@
     "localized_name": "전자동 소총",
     "description": "재장전 없이 계속 발사할 수 있는 돌격 소총. 대신 너무 오랫동안 연사할 시 과열을 일으켜 긴 시간 동안 빈틈이 생기니 조심해야 한다."
   },
+  "PalAwakening_Dark": {
+    "localized_name": "어둠의 각성 결정",
+    "description": "세계수의 에너지가 응축된 결정. <img id=|ElemIcon Dark|/><uiCommon id=|COMMON ELEMENT NAME Dark| style=|Elem Dark|/> 팰을 각성시켜 숨겨진 힘을 해방한다."
+  },
+  "PalAwakening_Dragon": {
+    "localized_name": "용의 각성 결정",
+    "description": "세계수의 에너지가 응축된 결정. <img id=|ElemIcon Dragon|/><uiCommon id=|COMMON ELEMENT NAME Dragon| style=|Elem Dragon|/> 팰을 각성시켜 숨겨진 힘을 해방한다."
+  },
+  "PalAwakening_Electric": {
+    "localized_name": "번개의 각성 결정",
+    "description": "세계수의 에너지가 응축된 결정. <img id=|ElemIcon Electric|/><uiCommon id=|COMMON ELEMENT NAME Electricity| style=|Elem Electric|/> 팰을 각성시켜 숨겨진 힘을 해방한다."
+  },
+  "PalAwakening_Fire": {
+    "localized_name": "화염의 각성 결정",
+    "description": "세계수의 에너지가 응축된 결정. <img id=|ElemIcon Fire|/><uiCommon id=|COMMON ELEMENT NAME Fire| style=|Elem Fire|/> 팰을 각성시켜 숨겨진 힘을 해방한다."
+  },
+  "PalAwakening_Grass": {
+    "localized_name": "풀의 각성 결정",
+    "description": "세계수의 에너지가 응축된 결정. <img id=|ElemIcon Grass|/><uiCommon id=|COMMON ELEMENT NAME Leaf| style=|Elem Grass|/> 팰을 각성시켜 숨겨진 힘을 해방한다."
+  },
+  "PalAwakening_Ground": {
+    "localized_name": "땅의 각성 결정",
+    "description": "세계수의 에너지가 응축된 결정. <img id=|ElemIcon Ground|/><uiCommon id=|COMMON ELEMENT NAME Earth| style=|Elem Ground|/> 팰을 각성시켜 숨겨진 힘을 해방한다."
+  },
+  "PalAwakening_Ice": {
+    "localized_name": "얼음의 각성 결정",
+    "description": "세계수의 에너지가 응축된 결정. <img id=|ElemIcon Ice|/><uiCommon id=|COMMON ELEMENT NAME Ice| style=|Elem Ice|/> 팰을 각성시켜 숨겨진 힘을 해방한다."
+  },
+  "PalAwakening_Material_Dark": {
+    "localized_name": "어둠의 휘석",
+    "description": "세계수의 에너지가 팰의 몸속에 쌓여 형성된 돌. 가공하여 <img id=|ElemIcon Dark|/><uiCommon id=|COMMON ELEMENT NAME Dark| style=|Elem Dark|/> 팰의 숨겨진 힘을 해방하는 아이템을 만들 수 있다.세계수"
+  },
+  "PalAwakening_Material_Dragon": {
+    "localized_name": "용의 휘석",
+    "description": "세계수의 에너지가 팰의 몸속에 쌓여 형성된 돌. 가공하여 <img id=|ElemIcon Dragon|/><uiCommon id=|COMMON ELEMENT NAME Dragon| style=|Elem Dragon|/> 팰의 숨겨진 힘을 해방하는 아이템을 만들 수 있다."
+  },
+  "PalAwakening_Material_Electric": {
+    "localized_name": "번개의 휘석",
+    "description": "세계수의 에너지가 팰의 몸속에 쌓여 형성된 돌. 가공하여 <img id=|ElemIcon Electric|/><uiCommon id=|COMMON ELEMENT NAME Electricity| style=|Elem Electric|/> 팰의 숨겨진 힘을 해방하는 아이템을 만들 수 있다."
+  },
+  "PalAwakening_Material_Fire": {
+    "localized_name": "화염의 휘석",
+    "description": "세계수의 에너지가 팰의 몸속에 쌓여 형성된 돌. 가공하여 <img id=|ElemIcon Fire|/><uiCommon id=|COMMON ELEMENT NAME Fire| style=|Elem Fire|/> 팰의 숨겨진 힘을 해방하는 아이템을 만들 수 있다."
+  },
+  "PalAwakening_Material_Grass": {
+    "localized_name": "풀의 휘석",
+    "description": "세계수의 에너지가 팰의 몸속에 쌓여 형성된 돌. 가공하여 <img id=|ElemIcon Grass|/><uiCommon id=|COMMON ELEMENT NAME Leaf| style=|Elem Grass|/> 팰의 숨겨진 힘을 해방하는 아이템을 만들 수 있다."
+  },
+  "PalAwakening_Material_Ground": {
+    "localized_name": "땅의 휘석",
+    "description": "세계수의 에너지가 팰의 몸속에 쌓여 형성된 돌. 가공하여 <img id=|ElemIcon Ground|/><uiCommon id=|COMMON ELEMENT NAME Earth| style=|Elem Ground|/> 팰의 숨겨진 힘을 해방하는 아이템을 만들 수 있다."
+  },
+  "PalAwakening_Material_Ice": {
+    "localized_name": "얼음의 휘석",
+    "description": "세계수의 에너지가 팰의 몸속에 쌓여 형성된 돌. 가공하여 <img id=|ElemIcon Ice|/><uiCommon id=|COMMON ELEMENT NAME Ice| style=|Elem Ice|/> 팰의 숨겨진 힘을 해방하는 아이템을 만들 수 있다."
+  },
+  "PalAwakening_Material_Neutral": {
+    "localized_name": "무의 휘석",
+    "description": "세계수의 에너지가 팰의 몸속에 쌓여 형성된 돌. 가공하여 <img id=|ElemIcon Neutral|/><uiCommon id=|COMMON ELEMENT NAME Normal| style=|Elem Neutral|/> 팰의 숨겨진 힘을 해방하는 아이템을 만들 수 있다."
+  },
+  "PalAwakening_Material_Water": {
+    "localized_name": "물의 휘석",
+    "description": "세계수의 에너지가 팰의 몸속에 쌓여 형성된 돌. 가공하여 <img id=|ElemIcon Water|/><uiCommon id=|COMMON ELEMENT NAME Water| style=|Elem Water|/> 팰의 숨겨진 힘을 해방하는 아이템을 만들 수 있다."
+  },
+  "PalAwakening_Neutral": {
+    "localized_name": "무의 각성 결정",
+    "description": "세계수의 에너지가 응축된 결정. <img id=|ElemIcon Neutral|/><uiCommon id=|COMMON ELEMENT NAME Normal| style=|Elem Neutral|/> 팰을 각성시켜 숨겨진 힘을 해방한다."
+  },
+  "PalAwakening_Water": {
+    "localized_name": "물의 각성 결정",
+    "description": "세계수의 에너지가 응축된 결정. <img id=|ElemIcon Water|/><uiCommon id=|COMMON ELEMENT NAME Water| style=|Elem Water|/> 팰을 각성시켜 숨겨진 힘을 해방한다."
+  },
   "PalCrystal_Ex": {
     "localized_name": "고대 문명의 부품",
     "description": "고대 유적에서 발굴한 저급한 물건. 잃어버린 기술의 정보가 빼곡하게 차 있다. 엄청난 가치 덕분에 어지간한 인간이라면 전부 이것을 노리고 있다."
@@ -4977,7 +6249,7 @@
   },
   "PalDopingShotBullet": {
     "localized_name": "부스트 건 탄약",
-    "description": "부스트 건 등에 사용하는 탄."
+    "description": "부스트 건 등에 사용하는 탄. |WeaponFactory Dirty 01|에서 제작할 수 있다."
   },
   "PalDopingShot_2": {
     "localized_name": "메가 부스트 건",
@@ -5127,6 +6399,30 @@
     "localized_name": "신록의 거대한 알",
     "description": "PalEgg Leaf 05. 괴물이 태어날 듯 짙푸른 영혼의 약동이 느껴진다. 알 부화기에 넣어 부화시키자."
   },
+  "PalEgg_MutationPal": {
+    "localized_name": "ko Text",
+    "description": "-"
+  },
+  "PalEgg_MutationPal_01": {
+    "localized_name": "돌연변이 알",
+    "description": "아주 드물게 특별한 변이를 거쳐 생겨난 알. 알 부화기에 넣어 부화시키자."
+  },
+  "PalEgg_MutationPal_02": {
+    "localized_name": "돌연변이 알",
+    "description": "아주 드물게 특별한 변이를 거쳐 생겨난 알. 알 부화기에 넣어 부화시키자."
+  },
+  "PalEgg_MutationPal_03": {
+    "localized_name": "돌연변이 대형 알",
+    "description": "아주 드물게 특별한 변이를 거쳐 생겨난 알. 알 부화기에 넣어 부화시키자."
+  },
+  "PalEgg_MutationPal_04": {
+    "localized_name": "돌연변이 대형 알",
+    "description": "아주 드물게 특별한 변이를 거쳐 생겨난 알. 알 부화기에 넣어 부화시키자."
+  },
+  "PalEgg_MutationPal_05": {
+    "localized_name": "돌연변이 거대한 알",
+    "description": "아주 드물게 특별한 변이를 거쳐 생겨난 알. 알 부화기에 넣어 부화시키자."
+  },
   "PalEgg_Normal_01": {
     "localized_name": "평범한 알",
     "description": "PalEgg Normal 01. 연약한 태동이 느껴진다. 알 부화기에 넣어 부화시키자."
@@ -5167,9 +6463,29 @@
     "localized_name": "축축하고 거대한 알",
     "description": "PalEgg Fire 05. 괴물이 태어날 듯 맑은 영혼의 약동이 느껴진다. 알 부화기에 넣어 부화시키자."
   },
+  "PalEgg_WorldTree_01": {
+    "localized_name": "불길한 알",
+    "description": "세계수의 에너지가 깃든 신기한 알. 알 부화기에 넣어 부화시키자."
+  },
+  "PalEgg_WorldTree_02": {
+    "localized_name": "불길한 알",
+    "description": "세계수의 에너지가 깃든 신기한 알. 알 부화기에 넣어 부화시키자."
+  },
+  "PalEgg_WorldTree_03": {
+    "localized_name": "불길한 대형 알",
+    "description": "세계수의 에너지가 깃든 신기한 알. 알 부화기에 넣어 부화시키자."
+  },
+  "PalEgg_WorldTree_04": {
+    "localized_name": "불길한 대형 알",
+    "description": "세계수의 에너지가 깃든 신기한 알. 알 부화기에 넣어 부화시키자."
+  },
+  "PalEgg_WorldTree_05": {
+    "localized_name": "불길한 거대한 알",
+    "description": "세계수의 에너지가 깃든 신기한 알. 알 부화기에 넣어 부화시키자."
+  },
   "PalFluid": {
-    "localized_name": "팰의 체액",
-    "description": "팰에게서 채취하는 체액. 점성이 뛰어나 유용하다."
+    "localized_name": "수생 팰의 점액",
+    "description": "물 속성 팰에게서 채취할 수 있는 액체. 점성이 높으며 활용 가치가 있다."
   },
   "PalGenderReverse": {
     "localized_name": "팰 리버서",
@@ -5213,7 +6529,7 @@
   },
   "PalItem_RaijinDaughter": {
     "localized_name": "썬더키드의 구름",
-    "description": "썬더 키드이(가) 떨어뜨린 구름. 만지면 복슬복슬하며, 의류 제작 등에 활용된다."
+    "description": "썬더키드이(가) 떨어뜨린 구름. 만지면 복슬복슬하며, 의류 제작 등에 활용된다."
   },
   "PalItem_ToSell_01": {
     "localized_name": "귀중한 용옥",
@@ -5238,6 +6554,122 @@
   "PalOil": {
     "localized_name": "고급 팰 기름",
     "description": "팰에게서 채취하는 고품질 기름. 폴리머 제작에 필요."
+  },
+  "PalPassiveSkillChange_AutoHPRegeneRate_Passive": {
+    "localized_name": "임플란트: 힐링 코치",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_CraftSpeed_up3": {
+    "localized_name": "일회용 임플란트: 초절기교",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_Deffence_up3": {
+    "localized_name": "일회용 임플란트: 다이아몬드 보디",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_EternalFlame": {
+    "localized_name": "일회용 임플란트: 영원한 불꽃",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_Invader": {
+    "localized_name": "일회용 임플란트: 침략자",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_Legend": {
+    "localized_name": "일회용 임플란트: 전설",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_MoveSpeed_up_3": {
+    "localized_name": "일회용 임플란트: 신속",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_MutationPal_Babysitter": {
+    "localized_name": "일회용 임플란트: 베이비시터",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_MutationPal_ExplosionResist": {
+    "localized_name": "일회용 임플란트: 중장갑",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_MutationPal_Immortal": {
+    "localized_name": "일회용 임플란트: 불사신",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_MutationPal_Mutant": {
+    "localized_name": "일회용 임플란트: 특이 체질",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_Nushi": {
+    "localized_name": "일회용 임플란트: 터주",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_PAL_ALLAttack_up3": {
+    "localized_name": "일회용 임플란트: 귀신",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_PAL_FullStomach_Down_3": {
+    "localized_name": "일회용 임플란트: 절식의 극의",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_PAL_Sanity_Down_3": {
+    "localized_name": "일회용 임플란트: 부동명왕의 마음",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_Rare": {
+    "localized_name": "일회용 임플란트: 희귀",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_RideJumpCount_Increase2": {
+    "localized_name": "일회용 임플란트: 하늘 뛰기",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_Salvation": {
+    "localized_name": "일회용 임플란트: 구세주",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_Stamina_Up_3": {
+    "localized_name": "일회용 임플란트: 영구기관",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_SwimSpeed_up_3": {
+    "localized_name": "일회용 임플란트: 파도타기 왕",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_Vampire": {
+    "localized_name": "일회용 임플란트: 흡혈귀",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_Witch": {
+    "localized_name": "일회용 임플란트: 마녀",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_ATK": {
+    "localized_name": "일회용 임플란트: 양날의 성검",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_ATK_DEF": {
+    "localized_name": "일회용 임플란트: 파괴신",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_CraftSpeed": {
+    "localized_name": "일회용 임플란트: 악마의 손",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_DEF": {
+    "localized_name": "일회용 임플란트: 성역의 육벽",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_FullStomach": {
+    "localized_name": "일회용 임플란트: 신수의 못자리",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_MoveSpeed": {
+    "localized_name": "일회용 임플란트: 차원 도약",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_Consumable_WorldTree_Sanity": {
+    "localized_name": "일회용 임플란트: 선인",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_CoolTimeReduction_Up_1": {
     "localized_name": "임플란트: 냉철함",
@@ -5288,7 +6720,7 @@
     "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_Nocturnal": {
-    "localized_name": "임플란트: 야행성",
+    "localized_name": "임플란트: 불면",
     "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_NonKilling": {
@@ -5312,7 +6744,7 @@
     "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_PAL_CorporateSlave": {
-    "localized_name": "임플란트: 일의 노예",
+    "localized_name": "임플란트: 일 노예",
     "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_PAL_FullStomach_Down_1": {
@@ -5337,6 +6769,14 @@
   },
   "PalPassiveSkillChange_PAL_Sanity_Down_3": {
     "localized_name": "임플란트: 부동명왕의 마음",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_PlayerSP_DecreaseRate_Passive": {
+    "localized_name": "임플란트: 피로 관리사",
+    "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
+  },
+  "PalPassiveSkillChange_ReloadSpeedUp_Passive": {
+    "localized_name": "임플란트: 재장전의 달인",
     "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_SalePrice_Up_1": {
@@ -5384,7 +6824,7 @@
     "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalPassiveSkillChange_TrainerWorkSpeed_UP_1": {
-    "localized_name": "임플란트: 동기 부여가",
+    "localized_name": "임플란트: 동기 부여",
     "description": "팰의 신체에 이식하여 패시브 스킬을 변경할 수 있는 임플란트. 가지고 있으면 팰 수술대에서 해당하는 패시브 스킬을 선택할 수 있게 된다."
   },
   "PalRevive": {
@@ -5394,6 +6834,14 @@
   "PalSphere": {
     "localized_name": "팰 스피어",
     "description": "던져서 팰을 포획하는 도구. 양산형이라 레벨이 낮은 팰에게만 유효하다."
+  },
+  "PalSphere_Ancient_1": {
+    "localized_name": "솔 스피어",
+    "description": "던져서 팰을 포획하는 도구. 고대 문명에서 팰과의 공존을 확실한 것이라 여기게 만든 높은 등급의 스피어."
+  },
+  "PalSphere_Ancient_2": {
+    "localized_name": "고대 스피어",
+    "description": "던져서 팰을 포획하는 도구. 세계수의 힘을 흡수해, 고대 문명의 도달점으로써 탄생한 궁극의 스피어."
   },
   "PalSphere_Exotic": {
     "localized_name": "인피니티 스피어",
@@ -5433,7 +6881,7 @@
   },
   "PalSummon_DarkMechaDragon": {
     "localized_name": "제노드란의 석판",
-    "description": "제노드란의 모습이 그려진 석판. 소환의 제단에 바치면 아주 강대한 제노드란[Lv 60]이(가) 소환된다."
+    "description": "제노드란의 모습이 그려진 석판. 소환의 제단에 바치면 아주 강대한 제노드란[Lv 65]이(가) 소환된다."
   },
   "PalSummon_DarkMechaDragon_2": {
     "localized_name": "제노드란[궁극]의 석판",
@@ -5448,24 +6896,24 @@
     "description": "제노드란의 힘이 흘러넘치는 석판의 파편. 모아서 조합하면 석판이 완성된다."
   },
   "PalSummon_KingBahamut_Dragon": {
-    "localized_name": "마그마 드라고의 석판",
+    "localized_name": "마그마드라고의 석판",
     "description": "KingBahamut Dragon의 모습이 그려진 석판. 소환의 제단에 바치면 아주 강대한 KingBahamut Dragon[Lv 55]이(가) 소환된다."
   },
   "PalSummon_KingBahamut_Dragon_2": {
-    "localized_name": "마그마 드라고[궁극]의 석판",
+    "localized_name": "마그마드라고[궁극]의 석판",
     "description": "KingBahamut Dragon의 힘이 흘러넘치는 석판. 소환의 제단에 바치면 절망적인 위력의 KingBahamut Dragon[Lv ??]이(가) 소환된다."
   },
   "PalSummon_KingBahamut_Dragon_Parts": {
-    "localized_name": "마그마 드라고의 석편",
+    "localized_name": "마그마드라고의 석편",
     "description": "KingBahamut Dragon의 모습이 그려진 석판의 파편. 모아서 조합하면 석판이 완성된다."
   },
   "PalSummon_KingBahamut_Dragon_Parts_2": {
-    "localized_name": "마그마 드라고[궁극]의 석편",
+    "localized_name": "마그마드라고[궁극]의 석편",
     "description": "KingBahamut Dragon의 힘이 흘러넘치는 석판의 파편. 모아서 조합하면 석판이 완성된다."
   },
   "PalSummon_LegendDeer": {
     "localized_name": "레젠디얼의 석판",
-    "description": "레젠디얼의 모습이 그려진 석판. 소환의 제단에 바치면 아주 강대한 레젠디얼[Lv 65]이(가) 소환된다."
+    "description": "레젠디얼의 모습이 그려진 석판. 소환의 제단에 바치면 아주 강대한 레젠디얼[Lv 70]이(가) 소환된다."
   },
   "PalSummon_LegendDeer_2": {
     "localized_name": "레젠디얼[궁극]의 석판",
@@ -5473,19 +6921,19 @@
   },
   "PalSummon_LegendDeer_Parts": {
     "localized_name": "레젠디얼의 석편",
-    "description": "레젠디얼의 모습이 그려진 석판의 조각. 모아서 조합하면 석판이 완성된다."
+    "description": "레젠디얼의 모습이 그려진 석판의 파편. 모아서 조합하면 석판이 완성된다."
   },
   "PalSummon_LegendDeer_Parts_2": {
     "localized_name": "레젠디얼[궁극]의 석편",
-    "description": "레젠디얼의 힘이 흘러넘치는 석판의 조각. 모아서 조합하면 석판이 완성된다."
+    "description": "레젠디얼의 힘이 흘러넘치는 석판의 파편. 모아서 조합하면 석판이 완성된다."
   },
   "PalSummon_NightLady": {
     "localized_name": "벨라누아르의 석판",
-    "description": "벨라누아르의 모습이 그려진 석판. 소환의 제단에 바치면 강대한 [Lv 30] 벨라누아르이(가) 소환된다."
+    "description": "벨라누아르의 모습이 그려진 석판. 소환의 제단에 바치면 강대한 [Lv 35] 벨라누아르이(가) 소환된다."
   },
   "PalSummon_NightLady_Dark": {
     "localized_name": "벨라루주의 석판",
-    "description": "NightLady Dark의 모습이 그려진 석판. 소환의 제단에 바치면 아주 강대한 [Lv 50] NightLady Dark이(가) 소환된다."
+    "description": "NightLady Dark의 모습이 그려진 석판. 소환의 제단에 바치면 아주 강대한 [Lv 45] NightLady Dark이(가) 소환된다."
   },
   "PalSummon_NightLady_Dark_2": {
     "localized_name": "벨라루주[궁극]의 석판",
@@ -5493,7 +6941,7 @@
   },
   "PalSummon_NightLady_Dark_Parts": {
     "localized_name": "벨라루주의 석편",
-    "description": "NightLady Dark의 모습이 그려진 석판의 조각. 모아서 조합하면 석판이 완성된다."
+    "description": "NightLady Dark의 모습이 그려진 석판의 파편. 모아서 조합하면 석판이 완성된다."
   },
   "PalSummon_NightLady_Dark_Parts_2": {
     "localized_name": "벨라루주[궁극]의 석편",
@@ -5501,7 +6949,7 @@
   },
   "PalSummon_NightLady_Parts": {
     "localized_name": "벨라누아르의 석편",
-    "description": "벨라누아르의 모습이 그려진 석판의 조각. 모아서 조합하면 석판이 완성된다."
+    "description": "벨라누아르의 모습이 그려진 석판의 파편. 모아서 조합하면 석판이 완성된다."
   },
   "PalSummon_YakushimaBoss002": {
     "localized_name": "천상의 인장",
@@ -5681,7 +7129,7 @@
   },
   "Polymer": {
     "localized_name": "폴리머",
-    "description": "기름을 가공해 만든 폴리머. 총 등을 만들 때 필요."
+    "description": "기름을 가공해 만든 폴리머. 총기류 등을 생산할 때 필요하다. |Factory Hard 02|에서 제작할 수 있다."
   },
   "Poppy": {
     "localized_name": "예쁜 꽃",
@@ -5709,23 +7157,31 @@
   },
   "Potion": {
     "localized_name": "회복약",
-    "description": "천천히 몸의 상처를 치료하는 음용약. HP를 그럭저럭 회복시켜 준다."
+    "description": "천천히 몸의 상처를 치료하는 내복약. HP를 그럭저럭 회복시켜 준다."
   },
   "Potion_Extreme": {
     "localized_name": "지고의 회복약",
-    "description": "천천히 몸의 상처를 치료하는 음용약. 품질이 매우 좋아, 아주 빠르게 HP를 회복시켜 준다."
+    "description": "천천히 몸의 상처를 치료하는 내복약. 품질이 매우 좋아, 아주 빠르게 HP를 회복시켜 준다."
   },
   "Potion_High": {
     "localized_name": "고품질 회복약",
-    "description": "천천히 몸의 상처를 치료하는 음용약. 품질이 뛰어나 HP를 제대로 회복시켜 준다."
+    "description": "천천히 몸의 상처를 치료하는 내복약. 품질이 뛰어나 HP를 제대로 회복시켜 준다."
   },
   "Potion_Low": {
     "localized_name": "저급 회복약",
-    "description": "천천히 몸의 상처를 치료하는 음용약. 품질이 낮지만 그래도 HP 회복 효과는 있다."
+    "description": "천천히 몸의 상처를 치료하는 내복약. 품질이 낮지만 그래도 HP 회복 효과는 있다."
   },
   "PredatorCrystal": {
     "localized_name": "프레데터 코어",
     "description": "프레데터 팰이 떨어뜨리는 코어. 알 수 없는 에너지로 가득 차 있다."
+  },
+  "Premium_Processed_Wood": {
+    "localized_name": "신비한 나무 판자",
+    "description": "신비로운 목재를 가공해 만든, 미약한 빛을 내뿜는 판자. 인지를 초월한 힘이 깃들어 있어 최고의 심재로 쓰인다."
+  },
+  "Processed_Wood": {
+    "localized_name": "나무 판자",
+    "description": "목재를 쓰기 편하게 가공한 판자. 통나무를 그대로 쓰는 것보다 범용성이 높아 다양한 활용이 가능하다. |원시적인 작업대|에서 제작할 수 있다."
   },
   "PumpActionShotgun": {
     "localized_name": "펌프식 산탄총",
@@ -5776,44 +7232,92 @@
     "description": "천락의 땅에서만 발견되는 귀중한 결정. 오랜 세월을 거쳐 응축된 팰지움이 변질하여 무지갯빛으로 빛나게 되었다."
   },
   "Rankup_1": {
-    "localized_name": "각성의 별 열매 ☆1",
+    "localized_name": "랭크 애플 ☆1",
     "description": "좀처럼 보기 드문 마법의 열매. 팰의 랭크를 ☆0에서 ☆1로 올릴 수 있다."
   },
   "Rankup_2": {
-    "localized_name": "각성의 별 열매 ☆2",
+    "localized_name": "랭크 애플 ☆2",
     "description": "좀처럼 보기 드문 마법의 열매. 팰의 랭크를 ☆1에서 ☆2로 올릴 수 있다."
   },
   "Rankup_3": {
-    "localized_name": "각성의 별 열매 ☆3",
+    "localized_name": "랭크 애플 ☆3",
     "description": "좀처럼 보기 드문 마법의 열매. 팰의 랭크를 ☆2에서 ☆3으로 올릴 수 있다."
   },
   "Rankup_4": {
-    "localized_name": "각성의 별 열매 ☆4",
+    "localized_name": "랭크 애플 ☆4",
     "description": "좀처럼 보기 드문 마법의 열매. 팰의 랭크를 ☆3에서 ☆4로 올릴 수 있다."
   },
   "Rankup_Arbitrary": {
-    "localized_name": "잘 익은 각성의 별 열매",
+    "localized_name": "완숙 랭크 애플",
     "description": "좀처럼 보기 드문 마법의 열매. 팰의 랭크를 한 단계 올릴 수 있다."
   },
   "ReinforcedArrow": {
     "localized_name": "강화 화살",
-    "description": "기계식 활(으)로 발사하는 강화된 화살."
+    "description": "기계식 활(으)로 발사하는 강화된 화살. |원시적인 작업대|에서 제작할 수 있다."
   },
   "Relic": {
     "localized_name": "쿠룰리스 상",
-    "description": "팰파고스섬 각지에서 발견되는 신비한 팰 모양의 상. 어떤 상에 제물을 바치면 플레이어를 강화할 수 있다."
+    "description": "많은 팰을 잡다 보면 갑작스레 주머니에 들어오는 신비한 팰 상. 어떤 상에 바치면 플레이어의 능력을 강화할 수 있다."
+  },
+  "Relic_01": {
+    "localized_name": "도로롱 상",
+    "description": "팰파고스섬 각지에서 발견되는 신비한 팰 상. 어떤 상에 바치면 플레이어의 능력을 강화할 수 있다."
+  },
+  "Relic_02": {
+    "localized_name": "펭키 상",
+    "description": "팰파고스섬 각지에서 발견되는 신비한 팰 상. 어떤 상에 바치면 플레이어의 능력을 강화할 수 있다."
+  },
+  "Relic_03": {
+    "localized_name": "크로꽁 상",
+    "description": "팰파고스섬 각지에서 발견되는 신비한 팰 상. 어떤 상에 바치면 플레이어의 능력을 강화할 수 있다."
+  },
+  "Relic_04": {
+    "localized_name": "불꽃밤비 상",
+    "description": "팰파고스섬 각지에서 발견되는 신비한 팰 상. 어떤 상에 바치면 플레이어의 능력을 강화할 수 있다."
+  },
+  "Relic_05": {
+    "localized_name": "모몽파 상",
+    "description": "팰파고스섬 각지에서 발견되는 신비한 팰 상. 어떤 상에 바치면 플레이어의 능력을 강화할 수 있다."
+  },
+  "Relic_06": {
+    "localized_name": "몽지 상",
+    "description": "팰파고스섬 각지에서 발견되는 신비한 팰 상. 어떤 상에 바치면 플레이어의 능력을 강화할 수 있다."
+  },
+  "Relic_07": {
+    "localized_name": "뚱코알라 상",
+    "description": "팰파고스섬 각지에서 발견되는 신비한 팰 상. 어떤 상에 바치면 플레이어의 능력을 강화할 수 있다."
+  },
+  "Relic_08": {
+    "localized_name": "까부냥 상",
+    "description": "팰파고스섬 각지에서 발견되는 신비한 팰 상. 어떤 상에 바치면 플레이어의 능력을 강화할 수 있다."
+  },
+  "Relic_09": {
+    "localized_name": "루나리스 상",
+    "description": "팰파고스섬 각지에서 발견되는 신비한 팰 상. 어떤 상에 바치면 플레이어의 능력을 강화할 수 있다."
+  },
+  "Relic_10": {
+    "localized_name": "헤로롱 상",
+    "description": "팰파고스섬 각지에서 발견되는 신비한 팰 상. 어떤 상에 바치면 플레이어의 능력을 강화할 수 있다."
+  },
+  "Relic_11": {
+    "localized_name": "둥실해치 상",
+    "description": "팰파고스섬 각지에서 발견되는 신비한 팰 상. 어떤 상에 바치면 플레이어의 능력을 강화할 수 있다."
+  },
+  "Relic_12": {
+    "localized_name": "따라하개 상",
+    "description": "많은 팰을 잡다 보면 갑작스레 주머니에 들어오는 신비한 팰 상. 어떤 상에 바치면 플레이어의 능력을 강화할 수 있다."
   },
   "RepairKit": {
-    "localized_name": "수리 키트",
+    "localized_name": "건축물 수리 키트",
     "description": "건축물을 수리할 때 쓰는 도구. 파괴된 건축물에 사용한다."
   },
   "RifleBullet": {
     "localized_name": "소총 탄약",
-    "description": "소총 등에 사용하는 탄."
+    "description": "소총 등에 사용하는 탄. |WeaponFactory Dirty 01|에서 제작할 수 있다."
   },
   "RoughBullet": {
     "localized_name": "조악한 탄약",
-    "description": "머스킷 혹은 즉석 핸드건 등에 사용하는 탄."
+    "description": "머스킷혹은 즉석 핸드건 등에 사용하는 탄. |WeaponFactory Dirty 01|에서 제작할 수 있다."
   },
   "Ruby": {
     "localized_name": "루비",
@@ -5901,7 +7405,7 @@
   },
   "SFArrow": {
     "localized_name": "발전형 화살",
-    "description": "발전형 활(으)로 발사하는 헥소라이트 소재 화살."
+    "description": "발전형 활(으)로 발사하는 강화된 화살. |원시적인 작업대|에서 제작할 수 있다."
   },
   "SFBow": {
     "localized_name": "발전형 활",
@@ -6027,6 +7531,10 @@
     "localized_name": "테라 방패",
     "description": "팰지움 기술로 탄생한 신비한 방패. 한동안 공격받지 않으면 자동으로 수리된다. 실험을 거듭한 결과 품질 면에서 최고봉에 도달했다."
   },
+  "Shield_07": {
+    "localized_name": "고대 방패",
+    "description": "소실된 고대 기술로 탄생한 방패. 한동안 공격받지 않으면 자동으로 수리된다. 현대에선 재현이 불가능하다고 여겨지는 성능을 보유했다."
+  },
   "Shield_SF": {
     "localized_name": "발전형 방패",
     "description": "초고도 기술로 탄생한 신비한 방패. 한동안 공격받지 않으면 자동으로 수리된다. 품질 면에서 완전무결의 성과를 실현했다."
@@ -6037,7 +7545,7 @@
   },
   "ShotgunBullet": {
     "localized_name": "산탄총 탄약",
-    "description": "산탄총 등에 사용하는 탄."
+    "description": "산탄총 등에 사용하는 탄. |WeaponFactory Dirty 01|에서 제작할 수 있다."
   },
   "SingleShotRifle": {
     "localized_name": "단발식 소총",
@@ -6094,6 +7602,10 @@
   "SkillCard_BubbleShot": {
     "localized_name": "물 기술 열매: 버블 샷",
     "description": "팰에게 사용하여 BubbleShot을(를) 가르칠 수 있다."
+  },
+  "SkillCard_BubbleShower": {
+    "localized_name": "어둠 기술 열매: 포이즌 샤워",
+    "description": "팰에게 사용하여 BubbleShower을(를) 가르칠 수 있다."
   },
   "SkillCard_ChargeCanon": {
     "localized_name": "용 기술 열매: 축적 대포",
@@ -6176,7 +7688,7 @@
     "description": "팰에게 사용하여 FireSeed을(를) 가르칠 수 있다."
   },
   "SkillCard_FlameFunnel": {
-    "localized_name": "화염 기술 열매: 플레임 토네이도",
+    "localized_name": "화염 기술 열매: 플레임 판넬",
     "description": "팰에게 사용하여 FlameFunnel을(를) 가르칠 수 있다."
   },
   "SkillCard_FlameWall": {
@@ -6224,7 +7736,7 @@
     "description": "팰에게 사용하여 HydroSlicer을(를) 가르칠 수 있다."
   },
   "SkillCard_HyperBeam": {
-    "localized_name": "기술 열매: 팰 폭발",
+    "localized_name": "기술 열매: 팰 블래스트",
     "description": "팰에게 사용하여 HyperBeam을(를) 가르칠 수 있다."
   },
   "SkillCard_IceAge": {
@@ -6240,7 +7752,7 @@
     "description": "팰에게 사용하여 IceMissile을(를) 가르칠 수 있다."
   },
   "SkillCard_IceWall": {
-    "localized_name": "얼음 기술 열매: 프리즈 폴",
+    "localized_name": "얼음 기술 열매: 프리즈 월",
     "description": "팰에게 사용하여 IceWall을(를) 가르칠 수 있다."
   },
   "SkillCard_IcicleLine": {
@@ -6268,7 +7780,7 @@
     "description": "팰에게 사용하여 LineGeyser을(를) 가르칠 수 있다."
   },
   "SkillCard_LineThunder": {
-    "localized_name": "번개 기술 열매: 번갯불",
+    "localized_name": "번개 기술 열매: 라인 썬더",
     "description": "팰에게 사용하여 LineThunder을(를) 가르칠 수 있다."
   },
   "SkillCard_LockonLaser": {
@@ -6331,6 +7843,10 @@
     "localized_name": "땅 기술 열매: 샌드 트위스터",
     "description": "팰에게 사용하여 SandTwister을(를) 가르칠 수 있다."
   },
+  "SkillCard_SeaGush": {
+    "localized_name": "물 기술 열매: 물기둥 분출",
+    "description": "팰에게 사용하여 SeaGush을(를) 가르칠 수 있다."
+  },
   "SkillCard_SeedMachinegun": {
     "localized_name": "풀 기술 열매: 씨앗 기관총",
     "description": "팰에게 사용하여 SeedMachinegun을(를) 가르칠 수 있다."
@@ -6376,7 +7892,7 @@
     "description": "팰에게 사용하여 ThunderBall을(를) 가르칠 수 있다."
   },
   "SkillCard_ThunderFunnel": {
-    "localized_name": "번개 기술 열매: 플라즈마 토네이도",
+    "localized_name": "번개 기술 열매: 플라즈마 판넬",
     "description": "팰에게 사용하여 ThunderFunnel을(를) 가르칠 수 있다."
   },
   "SkillCard_ThunderRain": {
@@ -6415,6 +7931,10 @@
     "localized_name": "물 기술 열매: 아쿠아 샷",
     "description": "팰에게 사용하여 WaterGun을(를) 가르칠 수 있다."
   },
+  "SkillCard_WindBurst": {
+    "localized_name": "풀 기술 열매: 윈드 블래스트",
+    "description": "팰에게 사용하여 WindBurst을(를) 가르칠 수 있다."
+  },
   "SkillCard_WindCutter": {
     "localized_name": "풀 기술 열매: 바람의 칼날",
     "description": "팰에게 사용하여 WindCutter을(를) 가르칠 수 있다."
@@ -6432,7 +7952,7 @@
     "description": "가지고 있으면 AmaterasuWolf Dark에 탑승할 수 있다."
   },
   "SkillUnlock_BadCatgirl": {
-    "localized_name": "뭘보냥의 산탄총",
+    "localized_name": "멀보냥의 산탄총",
     "description": "멀보냥 전용 산탄총. 파트너 스킬을 발동하면 멀보냥이(가) 근처 적에게 산탄총을 난사한다."
   },
   "SkillUnlock_BirdDragon": {
@@ -6440,7 +7960,7 @@
     "description": "가지고 있으면 버드래곤에 탑승할 수 있다."
   },
   "SkillUnlock_BirdDragon_Ice": {
-    "localized_name": "시로카바네의 안장",
+    "localized_name": "버드아이스의 안장",
     "description": "가지고 있으면 BirdDragon Ice에 탑승할 수 있다."
   },
   "SkillUnlock_BlackCentaur": {
@@ -6463,6 +7983,10 @@
     "localized_name": "껌댕이의 하네스",
     "description": "껌댕이 전용 하네스. 파트너 스킬을 발동하면 가까이 있는 크로마이트의 위치를 탐지할 수 있다."
   },
+  "SkillUnlock_BlackPuppy_Ice": {
+    "localized_name": "눈댕이의 하네스",
+    "description": "BlackPuppy Ice 전용 하네스. 파트너 스킬을 발동하면 가까이 있는 크로마이트의 위치를 탐지할 수 있다."
+  },
   "SkillUnlock_BlueDragon": {
     "localized_name": "아주리비의 안장",
     "description": "가지고 있으면 아주리비에 탑승할 수 있다."
@@ -6470,6 +7994,10 @@
   "SkillUnlock_BlueDragon_Ice": {
     "localized_name": "아주리나의 안장",
     "description": "가지고 있으면 BlueDragon Ice에 탑승할 수 있다."
+  },
+  "SkillUnlock_BlueSkyDragon": {
+    "localized_name": "샤오롱의 안장",
+    "description": "가지고 있으면 샤오롱에 탑승할 수 있다."
   },
   "SkillUnlock_BlueThunderHorse": {
     "localized_name": "썬더호스의 안장",
@@ -6487,6 +8015,14 @@
     "localized_name": "알록새의 장갑",
     "description": "알록새을(를) 조심스럽게 잡는 장갑. 파트너 스킬을 발동하면 알록새을(를) 잡은 채 폭탄 알을 발사하여 공격할 수 있다."
   },
+  "SkillUnlock_CubeTurtle": {
+    "localized_name": "누름북의 안장",
+    "description": "가지고 있으면 누름북에 탑승할 수 있다."
+  },
+  "SkillUnlock_CubeTurtle_Neutral": {
+    "localized_name": "성채북의 안장",
+    "description": "가지고 있으면 CubeTurtle Neutral에 탑승할 수 있다."
+  },
   "SkillUnlock_DarkMechaDragon": {
     "localized_name": "제노드란의 안장",
     "description": "가지고 있으면 제노드란에 탑승할 수 있다."
@@ -6502,6 +8038,10 @@
   "SkillUnlock_Deer_Ground": {
     "localized_name": "산령사슴의 안장",
     "description": "가지고 있으면 Deer Ground에 탑승할 수 있다."
+  },
+  "SkillUnlock_DomeArmorDragon": {
+    "localized_name": "셸가드라의 안장",
+    "description": "가지고 있으면 셸가드라에 탑승할 수 있다."
   },
   "SkillUnlock_DreamDemon": {
     "localized_name": "몽마둥이의 목걸이",
@@ -6548,7 +8088,7 @@
     "description": "가지고 있으면 파이린에 탑승할 수 있다."
   },
   "SkillUnlock_FireKirin_Dark": {
-    "localized_name": "사라블랙의 안장",
+    "localized_name": "베이린의 안장",
     "description": "가지고 있으면 FireKirin Dark에 탑승할 수 있다."
   },
   "SkillUnlock_FlameBuffalo": {
@@ -6576,7 +8116,7 @@
     "description": "소지한 상태로 FlyingManta Thunder을(를) 보유하고 있으면 글라이더 성능이 변화한다."
   },
   "SkillUnlock_Garm": {
-    "localized_name": "다크울프의 안장 부착 마구",
+    "localized_name": "다크울프의 안장과 하네스",
     "description": "가지고 있으면 다크울프에 탑승할 수 있다."
   },
   "SkillUnlock_GhostAnglerfish": {
@@ -6591,9 +8131,25 @@
     "localized_name": "고스호스의 안장",
     "description": "가지고 있으면 고스호스에 탑승할 수 있다."
   },
+  "SkillUnlock_GhostDragon": {
+    "localized_name": "레이번의 안장",
+    "description": "가지고 있으면 레이번에 탑승할 수 있다."
+  },
+  "SkillUnlock_GhostDragon_Fire": {
+    "localized_name": "헬번의 안장",
+    "description": "가지고 있으면 GhostDragon Fire에 탑승할 수 있다."
+  },
   "SkillUnlock_GoldenHorse": {
     "localized_name": "러시골드의 안장",
     "description": "가지고 있으면 러시골드에 탑승할 수 있다."
+  },
+  "SkillUnlock_GrassGolem": {
+    "localized_name": "스태초의 안장",
+    "description": "가지고 있으면 스태초에 탑승해 강력한 풀 속성 레이저를 발사할 수 있다."
+  },
+  "SkillUnlock_GrassGolem_Dark": {
+    "localized_name": "스태그림의 안장",
+    "description": "가지고 있으면 GrassGolem Dark에 탑승해 강력한 어둠 속성 레이저를 발사할 수 있다."
   },
   "SkillUnlock_GrassMammoth": {
     "localized_name": "그린모스의 안장",
@@ -6604,11 +8160,11 @@
     "description": "가지고 있으면 GrassMammoth Ice에 탑승할 수 있다."
   },
   "SkillUnlock_GrassPanda": {
-    "localized_name": "초판다의 수류탄 발사기",
-    "description": "가지고 있으면 초판다에 탑승해 유탄 발사기를 난사할 수 있다."
+    "localized_name": "풀바오의 수류탄 발사기",
+    "description": "가지고 있으면 풀바오에 탑승해 유탄 발사기를 난사할 수 있다."
   },
   "SkillUnlock_GrassPanda_Electric": {
-    "localized_name": "썬더판다의 수류탄 발사기",
+    "localized_name": "라이바오의 수류탄 발사기",
     "description": "가지고 있으면 GrassPanda Electric에 탑승해 유탄 발사기를 난사할 수 있다."
   },
   "SkillUnlock_GuardianDog": {
@@ -6652,7 +8208,7 @@
     "description": "가지고 있으면 빙천마에 탑승할 수 있다."
   },
   "SkillUnlock_IceHorse_Dark": {
-    "localized_name": "그레이섀도우의 안장",
+    "localized_name": "흑천마의 안장",
     "description": "가지고 있으면 IceHorse Dark에 탑승할 수 있다."
   },
   "SkillUnlock_IceNarwhal": {
@@ -6667,6 +8223,10 @@
     "localized_name": "크리범의 안장",
     "description": "가지고 있으면 크리범에 탑승할 수 있다."
   },
+  "SkillUnlock_IceSeal_Ground": {
+    "localized_name": "초코범의 안장",
+    "description": "가지고 있으면 IceSeal Ground에 탑승할 수 있다."
+  },
   "SkillUnlock_JetDragon": {
     "localized_name": "제트래곤의 미사일 발사기",
     "description": "가지고 있으면 제트래곤에 탑승해 미사일을 난사할 수 있다."
@@ -6680,20 +8240,32 @@
     "description": "가지고 있으면 KingAlpaca Ice에 탑승할 수 있다."
   },
   "SkillUnlock_KingBahamut": {
-    "localized_name": "볼카이저의 안장",
-    "description": "가지고 있으면 마그마 카이저에 탑승할 수 있다."
+    "localized_name": "마그마카이저의 안장",
+    "description": "가지고 있으면 마그마카이저에 탑승할 수 있다."
   },
   "SkillUnlock_KingBahamut_Dragon": {
-    "localized_name": "마그마 드라고의 안장",
+    "localized_name": "마그마드라고의 안장",
     "description": "가지고 있으면 KingBahamut Dragon에 탑승할 수 있다."
+  },
+  "SkillUnlock_KingSunfish": {
+    "localized_name": "킹복치의 안장",
+    "description": "가지고 있으면 킹복치에 탑승할 수 있다."
+  },
+  "SkillUnlock_KingSunfish_Thunder": {
+    "localized_name": "쇼군복치의 안장",
+    "description": "가지고 있으면 KingSunfish Thunder에 탑승할 수 있다."
   },
   "SkillUnlock_Kirin": {
     "localized_name": "썬더콘의 안장",
     "description": "가지고 있으면 썬더콘에 탑승할 수 있다."
   },
+  "SkillUnlock_Kirin_Ice": {
+    "localized_name": "레이콘의 안장",
+    "description": "가지고 있으면 Kirin Ice에 탑승할 수 있다."
+  },
   "SkillUnlock_Kitsunebi": {
-    "localized_name": "파이호의 마구",
-    "description": "파이호을(를) 안을 때 쓰는 하니스. 파트너 스킬을 발동하면 파이호을(를) 안은 채 화염방사기 삼아 공격할 수 있다."
+    "localized_name": "파이호의 하네스",
+    "description": "파이호을(를) 안을 때 쓰는 하네스. 파트너 스킬을 발동하면 파이호을(를) 안은 채 화염방사기 삼아 공격할 수 있다."
   },
   "SkillUnlock_Kitsunebi_Ice": {
     "localized_name": "아이호의 하네스",
@@ -6715,17 +8287,25 @@
     "localized_name": "레젠디얼의 안장",
     "description": "가지고 있으면 레젠디얼에 탑승해 공격을 막는 보호막을 생성할 수 있다."
   },
+  "SkillUnlock_LotusDragon": {
+    "localized_name": "연미르의 안장",
+    "description": "가지고 있으면 연미르에 탑승할 수 있다."
+  },
   "SkillUnlock_Manticore": {
     "localized_name": "만티파이어의 안장",
     "description": "가지고 있으면 만티파이어에 탑승할 수 있다."
   },
   "SkillUnlock_Manticore_Dark": {
-    "localized_name": "시니에노의 안장",
+    "localized_name": "만티녹턴의 안장",
     "description": "가지고 있으면 Manticore Dark에 탑승할 수 있다."
   },
   "SkillUnlock_Monkey": {
     "localized_name": "몽지의 돌격 소총",
     "description": "몽지 전용 소형 돌격 소총. 파트너 스킬을 발동하면 몽지이(가) 총격 모드로 전환, 주변 적에게 난사한다."
+  },
+  "SkillUnlock_Monkey_Fire": {
+    "localized_name": "몽화의 돌격 소총",
+    "description": "Monkey Fire 전용 소형 돌격 소총. 파트너 스킬을 발동하면 Monkey Fire이(가) 총격 모드로 전환, 주변 적에게 난사한다."
   },
   "SkillUnlock_MoonQueen": {
     "localized_name": "셀레문의 안장",
@@ -6759,6 +8339,10 @@
     "localized_name": "나이트롯의 안장",
     "description": "가지고 있으면 나이트롯에 탑승할 수 있다."
   },
+  "SkillUnlock_NightBlueHorse_Neutral": {
+    "localized_name": "라이트롯의 안장",
+    "description": "가지고 있으면 NightBlueHorse Neutral에 탑승할 수 있다."
+  },
   "SkillUnlock_Penguin": {
     "localized_name": "펭키의 로켓 발사기",
     "description": "펭키을(를) 발사하는 포신. 파트너 스킬을 발동하면 펭키을(를) 발사하여 적을 공격할 수 있다. 발사 후에는 펭키이(가) 빈사 상태가 된다."
@@ -6780,11 +8364,11 @@
     "description": "가지고 있으면 스틱툴라에 탑승할 수 있다."
   },
   "SkillUnlock_RaijinDaughter": {
-    "localized_name": "썬더 키드의 목걸이",
-    "description": "썬더 키드의 목걸이. 소지하고 있으면 보유 중인 썬더 키드이(가) 항상 등장하여 플레이어의 공격에 맞춰 추가 공격으로 지원한다."
+    "localized_name": "썬더키드의 목걸이",
+    "description": "썬더키드의 목걸이. 소지하고 있으면 보유 중인 썬더키드이(가) 항상 등장하여 플레이어의 공격에 맞춰 추가 공격으로 지원한다."
   },
   "SkillUnlock_RaijinDaughter_Water": {
-    "localized_name": "다크 키드의 목걸이",
+    "localized_name": "다크키드의 목걸이",
     "description": "RaijinDaughter Water의 목걸이. 소지하고 있으면 보유 중인 RaijinDaughter Water이(가) 항상 등장하여 플레이어의 공격에 맞춰 추가 공격으로 지원한다."
   },
   "SkillUnlock_RedArmorBird": {
@@ -6808,7 +8392,7 @@
     "description": "가지고 있으면 씨무기에 탑승할 수 있다."
   },
   "SkillUnlock_Serpent_Ground": {
-    "localized_name": "스너펜트의 안장",
+    "localized_name": "샌무기의 안장",
     "description": "가지고 있으면 Serpent Ground에 탑승할 수 있다."
   },
   "SkillUnlock_SkyDragon": {
@@ -6823,6 +8407,10 @@
     "localized_name": "빙호우거의 해머",
     "description": "가지고 있으면 빙호우거에 탑승할 수 있다."
   },
+  "SkillUnlock_SumoDog": {
+    "localized_name": "와르차차의 안장",
+    "description": "가지고 있으면 와르차차에 탑승할 수 있다."
+  },
   "SkillUnlock_Suzaku": {
     "localized_name": "주작의 안장",
     "description": "가지고 있으면 주작에 탑승할 수 있다."
@@ -6831,13 +8419,29 @@
     "localized_name": "시바의 안장",
     "description": "가지고 있으면 Suzaku Water에 탑승할 수 있다."
   },
+  "SkillUnlock_ThiefBird": {
+    "localized_name": "아르셉의 안장",
+    "description": "가지고 있으면 아르셉에 탑승할 수 있다."
+  },
   "SkillUnlock_ThunderBird": {
     "localized_name": "라이버드의 안장",
     "description": "가지고 있으면 라이버드에 탑승할 수 있다."
   },
+  "SkillUnlock_ThunderBird_Ice": {
+    "localized_name": "칠버드의 안장",
+    "description": "가지고 있으면 ThunderBird Ice에 탑승할 수 있다."
+  },
   "SkillUnlock_ThunderDog": {
     "localized_name": "썬도그의 안장",
     "description": "가지고 있으면 썬도그에 탑승할 수 있다."
+  },
+  "SkillUnlock_ThunderFluffyBird": {
+    "localized_name": "뇌운조의 안장",
+    "description": "가지고 있으면 뇌운조에 탑승할 수 있다."
+  },
+  "SkillUnlock_Thunderdog_Ice": {
+    "localized_name": "프리도그의 안장",
+    "description": "가지고 있으면 Thunderdog Ice에 탑승할 수 있다."
   },
   "SkillUnlock_TropicalOstrich": {
     "localized_name": "트로조크의 안장",
@@ -6859,6 +8463,14 @@
     "localized_name": "프로스카노의 안장",
     "description": "가지고 있으면 VolcanicMonster Ice에 탑승할 수 있다."
   },
+  "SkillUnlock_VolcanoDragon": {
+    "localized_name": "마그맨더의 안장",
+    "description": "가지고 있으면 마그맨더에 탑승할 수 있다."
+  },
+  "SkillUnlock_VolcanoDragon_Ice": {
+    "localized_name": "블리잰더의 안장",
+    "description": "가지고 있으면 VolcanoDragon Ice에 탑승할 수 있다."
+  },
   "SkillUnlock_WeaselDragon": {
     "localized_name": "베비뇽의 안장",
     "description": "가지고 있으면 베비뇽에 탑승할 수 있다."
@@ -6874,6 +8486,10 @@
   "SkillUnlock_WhiteDeer": {
     "localized_name": "셀레스디얼의 안장",
     "description": "가지고 있으면 셀레스디얼에 탑승할 수 있다."
+  },
+  "SkillUnlock_WhiteDeer_Dark": {
+    "localized_name": "코스모디얼의 안장",
+    "description": "가지고 있으면 WhiteDeer Dark에 탑승할 수 있다."
   },
   "SkillUnlock_WhiteShieldDragon": {
     "localized_name": "드라이지스의 안장",
@@ -6892,8 +8508,164 @@
     "description": "가지고 있으면 움포에 탑승할 수 있다."
   },
   "SkillUnlock_Yeti_Grass": {
-    "localized_name": "트로피티의 안장",
+    "localized_name": "움피티의 안장",
     "description": "가지고 있으면 Yeti Grass에 탑승할 수 있다."
+  },
+  "SkyAssaultRifle": {
+    "localized_name": "중형 돌격 소총",
+    "description": "솔라이트 주괴를 사용해 제작한 돌격 소총. 높은 범용성을 유지하면서도 더욱 높은 위력의 탄약을 사용할 수 있도록 강화되었다."
+  },
+  "SkyAssaultRifleBullet": {
+    "localized_name": "중형 돌격 소총 탄약",
+    "description": "중형 돌격 소총에 사용하는 탄. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "SkyAssaultRifle_2": {
+    "localized_name": "중형 돌격 소총",
+    "description": "솔라이트 주괴를 사용해 제작한 돌격 소총. 높은 범용성을 유지하면서도 더욱 높은 위력의 탄약을 사용할 수 있도록 강화되었다."
+  },
+  "SkyAssaultRifle_3": {
+    "localized_name": "중형 돌격 소총",
+    "description": "솔라이트 주괴를 사용해 제작한 돌격 소총. 높은 범용성을 유지하면서도 더욱 높은 위력의 탄약을 사용할 수 있도록 강화되었다."
+  },
+  "SkyAssaultRifle_4": {
+    "localized_name": "중형 돌격 소총",
+    "description": "솔라이트 주괴를 사용해 제작한 돌격 소총. 높은 범용성을 유지하면서도 더욱 높은 위력의 탄약을 사용할 수 있도록 강화되었다."
+  },
+  "SkyAssaultRifle_5": {
+    "localized_name": "중형 돌격 소총",
+    "description": "솔라이트 주괴를 사용해 제작한 돌격 소총. 높은 범용성을 유지하면서도 더욱 높은 위력의 탄약을 사용할 수 있도록 강화되었다."
+  },
+  "SkyBeamSword": {
+    "localized_name": "레이저 소드",
+    "description": "솔라이트 주괴를 사용해 제작한 빔 소드. 고출력 에너지를 방출하는 칼날로 대상을 순식간에 절단하는 근접 무기."
+  },
+  "SkyBeamSword_2": {
+    "localized_name": "레이저 소드",
+    "description": "솔라이트 주괴를 사용해 제작한 빔 소드. 고출력 에너지를 방출하는 칼날로 대상을 순식간에 절단하는 근접 무기."
+  },
+  "SkyBeamSword_3": {
+    "localized_name": "레이저 소드",
+    "description": "솔라이트 주괴를 사용해 제작한 빔 소드. 고출력 에너지를 방출하는 칼날로 대상을 순식간에 절단하는 근접 무기."
+  },
+  "SkyBeamSword_4": {
+    "localized_name": "레이저 소드",
+    "description": "솔라이트 주괴를 사용해 제작한 빔 소드. 고출력 에너지를 방출하는 칼날로 대상을 순식간에 절단하는 근접 무기."
+  },
+  "SkyBeamSword_5": {
+    "localized_name": "레이저 소드",
+    "description": "솔라이트 주괴를 사용해 제작한 빔 소드. 고출력 에너지를 방출하는 칼날로 대상을 순식간에 절단하는 근접 무기."
+  },
+  "SkyBow": {
+    "localized_name": "정밀 기계식 활",
+    "description": "솔라이트 주괴를 사용해 제작한 활. 초속과 관통력이 대폭 향상되어, 고밀도 원거리 사격이 가능해졌다."
+  },
+  "SkyBowArrow": {
+    "localized_name": "정밀 기계식 활 전용 화살",
+    "description": "정밀 기계식 활(으)로 발사하는 강화된 화살. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "SkyBow_2": {
+    "localized_name": "정밀 기계식 활",
+    "description": "솔라이트 주괴를 사용해 제작한 활. 초속과 관통력이 대폭 향상되어, 고밀도 원거리 사격이 가능해졌다."
+  },
+  "SkyBow_3": {
+    "localized_name": "정밀 기계식 활",
+    "description": "솔라이트 주괴를 사용해 제작한 활. 초속과 관통력이 대폭 향상되어, 고밀도 원거리 사격이 가능해졌다."
+  },
+  "SkyBow_4": {
+    "localized_name": "정밀 기계식 활",
+    "description": "솔라이트 주괴를 사용해 제작한 활. 초속과 관통력이 대폭 향상되어, 고밀도 원거리 사격이 가능해졌다."
+  },
+  "SkyBow_5": {
+    "localized_name": "정밀 기계식 활",
+    "description": "솔라이트 주괴를 사용해 제작한 활. 초속과 관통력이 대폭 향상되어, 고밀도 원거리 사격이 가능해졌다."
+  },
+  "SkyGrenadeLauncher": {
+    "localized_name": "전술 유탄 발사기",
+    "description": "솔라이트 주괴를 사용해 제작한 유탄 발사기. 탄도 안정성이 향상되어, 장거리 정밀 폭격이 가능해졌다."
+  },
+  "SkyGrenadeLauncherBullet": {
+    "localized_name": "전술 유탄 발사기 탄약",
+    "description": "전술 유탄 발사기에 사용하는 탄. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "SkyGrenadeLauncher_2": {
+    "localized_name": "전술 유탄 발사기",
+    "description": "솔라이트 주괴를 사용해 제작한 유탄 발사기. 탄도 안정성이 향상되어, 장거리 정밀 폭격이 가능해졌다."
+  },
+  "SkyGrenadeLauncher_3": {
+    "localized_name": "전술 유탄 발사기",
+    "description": "솔라이트 주괴를 사용해 제작한 유탄 발사기. 탄도 안정성이 향상되어, 장거리 정밀 폭격이 가능해졌다."
+  },
+  "SkyGrenadeLauncher_4": {
+    "localized_name": "전술 유탄 발사기",
+    "description": "솔라이트 주괴를 사용해 제작한 유탄 발사기. 탄도 안정성이 향상되어, 장거리 정밀 폭격이 가능해졌다."
+  },
+  "SkyGrenadeLauncher_5": {
+    "localized_name": "전술 유탄 발사기",
+    "description": "솔라이트 주괴를 사용해 제작한 유탄 발사기. 탄도 안정성이 향상되어, 장거리 정밀 폭격이 가능해졌다."
+  },
+  "SkyHeavyBullet": {
+    "localized_name": "ko Text",
+    "description": "-"
+  },
+  "SkyIslandOre": {
+    "localized_name": "솔라이트",
+    "description": "천양향에서만 산출되는 희귀한 광석. 압도적인 밀도를 자랑하는 모암에는 신비로운 문양과 광채가 깃들어 있다."
+  },
+  "SkyLightBullet": {
+    "localized_name": "ko Text",
+    "description": "-"
+  },
+  "SkyShotgun": {
+    "localized_name": "시작형 산탄총",
+    "description": "솔라이트 주괴를 사용해 제작한 산탄총. 지근거리에서 압도적인 화력을 발휘하며, 특수 탄창 덕분에 전투 지속성도 높다."
+  },
+  "SkyShotgunBullet": {
+    "localized_name": "시작형 산탄총 탄약",
+    "description": "시작형 산탄총에 사용하는 탄. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "SkyShotgun_2": {
+    "localized_name": "시작형 산탄총",
+    "description": "솔라이트 주괴를 사용해 제작한 산탄총. 지근거리에서 압도적인 화력을 발휘하며, 특수 탄창 덕분에 전투 지속성도 높다."
+  },
+  "SkyShotgun_3": {
+    "localized_name": "시작형 산탄총",
+    "description": "솔라이트 주괴를 사용해 제작한 산탄총. 지근거리에서 압도적인 화력을 발휘하며, 특수 탄창 덕분에 전투 지속성도 높다."
+  },
+  "SkyShotgun_4": {
+    "localized_name": "시작형 산탄총",
+    "description": "솔라이트 주괴를 사용해 제작한 산탄총. 지근거리에서 압도적인 화력을 발휘하며, 특수 탄창 덕분에 전투 지속성도 높다."
+  },
+  "SkyShotgun_5": {
+    "localized_name": "시작형 산탄총",
+    "description": "솔라이트 주괴를 사용해 제작한 산탄총. 지근거리에서 압도적인 화력을 발휘하며, 특수 탄창 덕분에 전투 지속성도 높다."
+  },
+  "SkySubmachineGun": {
+    "localized_name": "야전 기관단총",
+    "description": "솔라이트 주괴를 사용해 제작한 기관단총. 개량형 탄창과 탄약을 활용해 제압력이 강화되었다."
+  },
+  "SkySubmachineGunBullet": {
+    "localized_name": "야전 기관단총 탄약",
+    "description": "야전 기관단총에 사용하는 탄. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "SkySubmachineGun_2": {
+    "localized_name": "야전 기관단총",
+    "description": "솔라이트 주괴를 사용해 제작한 기관단총. 개량형 탄창과 탄약을 활용해 제압력이 강화되었다."
+  },
+  "SkySubmachineGun_3": {
+    "localized_name": "야전 기관단총",
+    "description": "솔라이트 주괴를 사용해 제작한 기관단총. 개량형 탄창과 탄약을 활용해 제압력이 강화되었다."
+  },
+  "SkySubmachineGun_4": {
+    "localized_name": "야전 기관단총",
+    "description": "솔라이트 주괴를 사용해 제작한 기관단총. 개량형 탄창과 탄약을 활용해 제압력이 강화되었다."
+  },
+  "SkySubmachineGun_5": {
+    "localized_name": "야전 기관단총",
+    "description": "솔라이트 주괴를 사용해 제작한 기관단총. 개량형 탄창과 탄약을 활용해 제압력이 강화되었다."
+  },
+  "SkyislandIngot": {
+    "localized_name": "솔라이트 주괴",
+    "description": "천양향에 잠든 광석을 제련해 얻을 수 있는 희귀한 고대 문명 금속 소재. 매우 높은 등급의 장비와 건축물 제작에 활용된다. |고대 문명 화로|에서 제련할 수 있다."
   },
   "Spear": {
     "localized_name": "돌 창",
@@ -6911,6 +8683,14 @@
     "localized_name": "릴리의 창",
     "description": "릴리가 애용하던 창. 팰을 업신여기는 자에게 심판을 내린다."
   },
+  "Spear_ForestBoss2": {
+    "localized_name": "강화된 릴리의 창",
+    "description": "릴리가 애용하던 창을 강화한 무기. 팰을 업신여기는 자의 몸에 바람구멍을 낸다."
+  },
+  "Spear_ForestBoss2_5": {
+    "localized_name": "강화된 릴리의 창",
+    "description": "릴리가 애용하던 창을 강화한 무기. 팰을 업신여기는 자의 몸에 바람구멍을 낸다."
+  },
   "Spear_ForestBoss_5": {
     "localized_name": "릴리의 창",
     "description": "릴리가 애용하던 창. 팰을 업신여기는 자에게 심판을 내린다."
@@ -6920,7 +8700,7 @@
     "description": "퀸비나의 지팡이를 인간용으로 개조했다. 여왕의 패기가 느껴진다."
   },
   "Spear_SoldierBee": {
-    "localized_name": "비 나이트의 창",
+    "localized_name": "비나이트의 창",
     "description": "비나이트의 창을 인간용으로 개조했다. 변함없는 충성심이 느껴진다."
   },
   "SphereLauncher": {
@@ -6961,7 +8741,7 @@
   },
   "StainlessSteel": {
     "localized_name": "헥소라이트",
-    "description": "크로마이트, 금속 광석, 헥소 석영(으)로 구성된 합금. 더욱 발전된 장비와 건축물의 재료로 활용할 수 있다."
+    "description": "크로마이트, 헥소 석영(으)로 구성된 합금. 더욱 발전된 장비와 건축물의 재료로 활용할 수 있다. |거대한 화로|에서 제련할 수 있다."
   },
   "StatusPointResetSan": {
     "localized_name": "기억 삭제 약",
@@ -7049,7 +8829,7 @@
   },
   "StealIngot": {
     "localized_name": "팰 금속 주괴",
-    "description": "팰 금속제 무기나 방어구를 만들 때 필요한 소재. 금속과 팰지움을 합금화하여 강도가 훨씬 높아졌다."
+    "description": "팰 금속제 무기나 방어구를 만들 때 필요한 소재. 팰지움을 합금화하여 강도가 훨씬 높아졌다."
   },
   "Stew": {
     "localized_name": "ko Text",
@@ -7099,6 +8879,10 @@
     "localized_name": "솜사탕",
     "description": "캔디쉽에게서 얻는 솜사탕. 입안에서 눈 녹듯 사라지는 달콤함."
   },
+  "Sweet_Caramel": {
+    "localized_name": "캐러멜 솜사탕",
+    "description": "SweetsSheep Ground에게서 얻는 캐러멜 맛 솜사탕. 입안에서 눈 녹듯 사라지는 달콤함."
+  },
   "Sword": {
     "localized_name": "검",
     "description": "휘두르는 맛이 일품인 근접 전투용 검. 적에게 접근하는 위험을 감수해야 한다."
@@ -7130,6 +8914,10 @@
   "TechnologyBook_G3": {
     "localized_name": "미래의 기술서",
     "description": "이 시대에 존재하지 않는 기술이 적힌 책. 사용하면 기술 포인트를 대량으로 획득한다."
+  },
+  "Thermal_Core": {
+    "localized_name": "초고열 코어",
+    "description": "막대한 열에너지를 내포한 고온 반응핵. 첨단 장비의 동력부에 에너지를 공급한다. |Factory Hard 03|에서 제작할 수 있다."
   },
   "Tomato": {
     "localized_name": "토마토",
@@ -7175,6 +8963,14 @@
     "localized_name": "보물 지도",
     "description": "보물의 위치가 표시된 낡은 지도. 사용하면 보물의 위치를 나타내는 표식을 지도에 새길 수 있다."
   },
+  "UniqueMaterial_FlowerPrince": {
+    "localized_name": "부패 독 여과막",
+    "description": "녹사주이(가) 자신이 내뿜는 부식 안개로부터 몸을 지키기 위해 발달된 기관. 부식 안개를 여과해 무력화시킬 수 있다."
+  },
+  "UniqueMaterial_Mothman": {
+    "localized_name": "방폭 섬유",
+    "description": "모슬론의 신체 표면에서 얻을 수 있는 섬유. 폭발로 일어나는 충격을 완화할 수 있다."
+  },
   "Unko_L": {
     "localized_name": "커다란 대변",
     "description": "존재감에서 일종의 위압감마저 느껴진다. 냄새로 보나 형태로 보나 거대한 녀석의 변이다."
@@ -7185,11 +8981,19 @@
   },
   "UnlockEquipmentSlot_Accessory_01": {
     "localized_name": "신기한 장신구 상자",
-    "description": "안쪽이 소유자와 몸과 일체화하는 신기한 상자. 장신구 장착 슬롯이 1개 증가한다."
+    "description": "안쪽이 소유자의 몸과 일체화하는 신기한 상자. 가지고 있으면 장신구 장착 슬롯이 1개 증가한다. 하나만 갖고 있어도 충분하다."
   },
   "UnlockEquipmentSlot_Accessory_02": {
     "localized_name": "신비한 장신구 상자",
-    "description": "안쪽이 소유자와 몸과 일체화하는 신기한 상자. 장신구 장착 슬롯이 1개 더 증가한다."
+    "description": "안쪽이 소유자의 몸과 일체화하는 신기한 상자. 가지고 있으면 장신구 장착 슬롯이 1개 더 증가한다. 하나만 갖고 있어도 충분하다."
+  },
+  "UnlockEquipmentSlot_Weapon_01": {
+    "localized_name": "무기 추가 홀더",
+    "description": "무기를 추가로 장착할 수 있게 해 주는 홀더. 가지고 있으면 무기 장착 칸이 1개 추가된다. 하나만 갖고 있어도 충분하다."
+  },
+  "UnlockEquipmentSlot_Weapon_02": {
+    "localized_name": "무기 추가 홀더 2",
+    "description": "무기를 추가로 장착할 수 있게 해 주는 홀더. 가지고 있으면 무기 장착 칸이 1개 더 추가된다. 하나만 갖고 있어도 충분하다."
   },
   "Unlock_Picking_Tier1": {
     "localized_name": "간소한 락픽 도구",
@@ -7206,6 +9010,10 @@
   "Venom": {
     "localized_name": "독샘",
     "description": "독을 품은 팰에게서 얻는 소재. Arrow Poison 등을 제작하는 소재가 된다."
+  },
+  "WaterBuildKit": {
+    "localized_name": "수상 건축 키트",
+    "description": "물 위에서 건축할 때 필요한 도구. 토대를 물 위에 건축할 수 있게 된다."
   },
   "WeakerBow": {
     "localized_name": "오래된 활",
@@ -7227,6 +9035,26 @@
     "localized_name": "오래된 활",
     "description": "원시적인 원거리 공격 무기. 이것저것 긁어모아 만든 탓에 위력은 떨어진다."
   },
+  "WhaleWhistle": {
+    "localized_name": "잔향의 피리",
+    "description": "흐릿해진 설계도를 해독해 재현한 뼈 피리. 한없이 퍼져나갈 듯 맑은 음색이, 그를 깨울 것이다. 맹약을 수호하는 대해의 주인을."
+  },
+  "WhaleWhistleFragment_01": {
+    "localized_name": "파도 소리를 간직한 뼈",
+    "description": "신기한 힘이 느껴지는 뼛조각. 귀를 기울이면 희미하게 소리가 들린다. 반복되는 부드러운 파도 소리다."
+  },
+  "WhaleWhistleFragment_02": {
+    "localized_name": "정적을 간직한 뼈",
+    "description": "신기한 힘이 느껴지는 뼛조각. 귀를 기울이면 희미하게 소리가 들린다. 언젠가 찾아왔던 정적의 소리다."
+  },
+  "WhaleWhistleFragment_03": {
+    "localized_name": "물거품을 간직한 뼈",
+    "description": "신기한 힘이 느껴지는 뼛조각. 귀를 기울이면 희미하게 소리가 들린다. 덧없이 터져 나가는 물거품의 소리다."
+  },
+  "WhaleWhistleFragment_04": {
+    "localized_name": "바닷바람을 간직한 뼈",
+    "description": "신기한 힘이 느껴지는 뼛조각. 귀를 기울이면 희미하게 소리가 들린다. 평온히 불어오는 바닷바람의 소리다."
+  },
   "Wheat": {
     "localized_name": "밀",
     "description": "다양한 요리의 베이스가 되는 식재. 농작물에서도 기본 중의 기본이 되는 것이 바로 밀이다."
@@ -7235,13 +9063,57 @@
     "localized_name": "밀 씨",
     "description": "밀을(를) 재배할 수 있는 씨. 농원을 만들 때 필요하다. 상인에게서 구입할 수 있다."
   },
+  "WidePenetrateShotgun": {
+    "localized_name": "빔 스캐터",
+    "description": "근거리전에 특화된 빔 병기. 압축된 에너지를 확산형 빔으로 사출해 공격한다."
+  },
+  "WidePenetrateShotgunBullet": {
+    "localized_name": "빔 스캐터 탄약",
+    "description": "빔 스캐터에 사용하는 탄. |고대 문명 작업대|에서 제작할 수 있다."
+  },
+  "WidePenetrateShotgun_2": {
+    "localized_name": "빔 스캐터",
+    "description": "근거리전에 특화된 빔 병기. 압축된 에너지를 확산형 빔으로 사출해 공격한다."
+  },
+  "WidePenetrateShotgun_3": {
+    "localized_name": "빔 스캐터",
+    "description": "근거리전에 특화된 빔 병기. 압축된 에너지를 확산형 빔으로 사출해 공격한다."
+  },
+  "WidePenetrateShotgun_4": {
+    "localized_name": "빔 스캐터",
+    "description": "근거리전에 특화된 빔 병기. 압축된 에너지를 확산형 빔으로 사출해 공격한다."
+  },
+  "WidePenetrateShotgun_5": {
+    "localized_name": "빔 스캐터",
+    "description": "근거리전에 특화된 빔 병기. 압축된 에너지를 확산형 빔으로 사출해 공격한다."
+  },
   "Wine": {
     "localized_name": "ko Text",
     "description": "ko Text"
   },
+  "WingGlider": {
+    "localized_name": "윙 팩",
+    "description": "등에 장착해 비행할 수 있는 날개형 장비. WingGlider Fuel을(를) 소비해 추진력을 얻는다."
+  },
+  "WingGlider_Fuel": {
+    "localized_name": "윙 셀",
+    "description": "윙 팩에 사용해 추진력을 얻을 수 있는 에너지."
+  },
   "Wood": {
     "localized_name": "목재",
     "description": "건축물이나 아이템의 재료로 쓴다. 주로 나무를 벌목하여 획득한다."
+  },
+  "Wood_Ancient": {
+    "localized_name": "고대 나무 껍질",
+    "description": "극한의 환경 속에서 오랜 세월을 살아온 나무의 껍질. 얇은 껍질임에도 끝없는 생명력이 느껴진다."
+  },
+  "Wood_Fine": {
+    "localized_name": "단단한 목재",
+    "description": "엄선된 질 좋은 목재. 사막, 화산, 설산 등 가혹한 환경에서 자란 견고한 나무에서 채취할 수 있다."
+  },
+  "Wood_WorldTree": {
+    "localized_name": "신비한 목재",
+    "description": "세계수의 힘이 깃든 희귀한 목재. 숙련된 장인이 아니라면 감히 가공할 수 없다."
   },
   "Wool": {
     "localized_name": "양털",
@@ -7275,6 +9147,10 @@
     "localized_name": "채굴 응용학 Ⅰ",
     "description": "채굴의 극의를 다루는 귀중한 서적. 팰이 읽도록 하여 영구적으로 채굴 적성을 한 단계 올릴 수 있다."
   },
+  "WorkSuitability_AddTicket_MonsterFarm": {
+    "localized_name": "목장 응용학 Ⅰ",
+    "description": "목장의 극의를 다루는 귀중한 서적. 팰이 읽도록 하여 영구적으로 목장 적성을 한 단계 올릴 수 있다."
+  },
   "WorkSuitability_AddTicket_ProductMedicine": {
     "localized_name": "제약 응용학 Ⅰ",
     "description": "제약의 극의를 다루는 귀중한 서적. 팰이 읽도록 하여 영구적으로 제약 적성을 한 단계 올릴 수 있다."
@@ -7290,6 +9166,38 @@
   "WorkSuitability_AddTicket_Watering": {
     "localized_name": "관개 응용학 Ⅰ",
     "description": "관개의 극의를 다루는 귀중한 서적. 팰이 읽도록 하여 영구적으로 관개 적성을 한 단계 올릴 수 있다."
+  },
+  "WorldTreeHolyWater": {
+    "localized_name": "세계수의 성수",
+    "description": "세계수의 에너지로 가득한 성스러운 물. 모든 것을 정화하며, 숨겨진 힘을 발현시킨다. 마시면 일정 시간 동안 세계수의 나무나 바위에 접근해도 소멸되지 않는다."
+  },
+  "WorldTreeIngot": {
+    "localized_name": "팰키사이트 주괴",
+    "description": "솔라이트 및 팰키사이트을(를) 섞어 만들어, 지고의 경지에 다다른 합금. 고대 문명 기술과 세계수의 힘이 결정화한 지극히 희귀한 소재로 최고봉 장비와 건축물을 제작하는 데 반드시 필요하다."
+  },
+  "WorldTreeOre": {
+    "localized_name": "팰키사이트",
+    "description": "세계수에서 흘러나온 에너지가 기나긴 세월을 거쳐 결정화된 물질. 가호 없는 자가 건드리면 순식간에 녹슬고 썩어 문드러진다. 그만큼 섬세한 물질을 다룰 수 있는 존재만이, 고대 기술의 최고봉에 도달할 자격을 얻는다."
+  },
+  "WorldTreeRelic_01": {
+    "localized_name": "고대 문명의 낡은 유물",
+    "description": "고대 문명의 건조물 혹은 도구의 파편. 완전히 낡아 에너지가 하나도 남아 있지 않다."
+  },
+  "WorldTreeRelic_02": {
+    "localized_name": "고대 문명의 잠자는 유물",
+    "description": "고대 문명의 건조물 혹은 도구의 파편. 상태는 나쁘지 않지만 남은 에너지는 거의 없다."
+  },
+  "WorldTreeRelic_03": {
+    "localized_name": "고대 문명의 아름다운 유물",
+    "description": "고대 문명의 건조물 혹은 도구의 파편. 상태가 양호해 에너지의 흐름을 느낄 수 있다."
+  },
+  "WorldTreeRelic_04": {
+    "localized_name": "고대 문명의 빛나는 유물",
+    "description": "고대 문명의 건조물 혹은 도구의 파편. 상태가 매우 양호하며 내부에서 빛이 흘러나온다."
+  },
+  "WorldTreeRelic_05": {
+    "localized_name": "고대 문명의 찬란한 유물",
+    "description": "고대 문명의 건조물 혹은 도구의 파편. 에너지로 가득 차 있어 찬란한 빛을 뿜어낸다."
   },
   "Yakisoba": {
     "localized_name": "라브라돈 야키소바",
