@@ -115,6 +115,14 @@ async fn route(
         MessageType::GetLabResearch => handlers::game_data::handle_get_lab_research(ctx).await,
         MessageType::SyncAppState => handlers::system::handle_sync_app_state(ctx).await,
         MessageType::GetPresets => handlers::presets::handle_get_presets(ctx).await,
+        MessageType::AddPreset => handlers::presets::handle_add_preset(data, ctx).await,
+        MessageType::UpdatePreset => {
+            handlers::presets::handle_update_preset(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::DeletePreset => {
+            handlers::presets::handle_delete_presets(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::NukePresets => handlers::presets::handle_nuke_presets(ctx).await,
         MessageType::SelectSave => {
             handlers::save_file::handle_select_save(serde_json::from_value(data)?, ctx).await
         }
