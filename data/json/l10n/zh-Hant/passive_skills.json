@@ -23,12 +23,20 @@
     "localized_name": "提升攻擊Lv1",
     "description": null
   },
+  "Attack_ACC_up1_Armor": {
+    "localized_name": "提升攻擊(小) Lv1",
+    "description": null
+  },
   "Attack_ACC_up1_Otomo_Only_Equip": {
     "localized_name": "帕魯攻擊力增加Lv1",
     "description": null
   },
   "Attack_ACC_up2": {
     "localized_name": "提升攻擊Lv2",
+    "description": null
+  },
+  "Attack_ACC_up2_Armor": {
+    "localized_name": "提升攻擊(小) Lv2",
     "description": null
   },
   "Attack_ACC_up2_Otomo_Only_Equip": {
@@ -39,8 +47,32 @@
     "localized_name": "提升攻擊Lv3",
     "description": null
   },
+  "Attack_ACC_up3_Armor": {
+    "localized_name": "提升攻擊(小) Lv3",
+    "description": null
+  },
   "Attack_ACC_up3_Otomo_Only_Equip": {
     "localized_name": "帕魯攻擊力增加Lv3",
+    "description": null
+  },
+  "Attack_ACC_up4": {
+    "localized_name": "提升攻擊Lv4",
+    "description": null
+  },
+  "Attack_ACC_up4_Armor": {
+    "localized_name": "提升攻擊(小) Lv4",
+    "description": null
+  },
+  "Attack_ACC_up4_Otomo_Only_Equip": {
+    "localized_name": "帕魯攻擊力增加Lv4",
+    "description": null
+  },
+  "AutoHPRegeneRate_Passive": {
+    "localized_name": "療癒教練",
+    "description": null
+  },
+  "AvoidDurationUp_EquipSkill_2": {
+    "localized_name": "閃避無敵時間增加",
     "description": null
   },
   "BossDefeatReward_AmaterasuWolf_Dark": {
@@ -79,6 +111,10 @@
     "localized_name": "增強草屬性傷害 中",
     "description": null
   },
+  "BossDefeatReward_CactusDoll": {
+    "localized_name": "增強草屬性傷害 小",
+    "description": null
+  },
   "BossDefeatReward_CaptainPenguin": {
     "localized_name": "增強水屬性傷害 小",
     "description": null
@@ -91,12 +127,36 @@
     "localized_name": "增強暗屬性傷害 小",
     "description": null
   },
+  "BossDefeatReward_CubeTurtle": {
+    "localized_name": "增強地屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_CubeTurtle_Neutral": {
+    "localized_name": "增強無屬性傷害 中",
+    "description": null
+  },
   "BossDefeatReward_DarkScorpion": {
     "localized_name": "增強暗屬性傷害 小",
     "description": null
   },
   "BossDefeatReward_DarkScorpion_Ground": {
     "localized_name": "增強地屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_DomeArmorDragon": {
+    "localized_name": "增強龍屬性傷害 大",
+    "description": null
+  },
+  "BossDefeatReward_ElecLizard": {
+    "localized_name": "增強雷屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_ElecPanda": {
+    "localized_name": "增強雷屬性傷害 中",
+    "description": null
+  },
+  "BossDefeatReward_ElecSnail": {
+    "localized_name": "增強雷屬性傷害 小",
     "description": null
   },
   "BossDefeatReward_FairyDragon": {
@@ -111,6 +171,14 @@
     "localized_name": "增強雷屬性傷害 中",
     "description": null
   },
+  "BossDefeatReward_FireKirin": {
+    "localized_name": "增強火屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_FlameBuffalo": {
+    "localized_name": "增強火屬性傷害 小",
+    "description": null
+  },
   "BossDefeatReward_FlowerDinosaur_Electric": {
     "localized_name": "增強雷屬性傷害 小",
     "description": null
@@ -119,12 +187,32 @@
     "localized_name": "增強草屬性傷害 小",
     "description": null
   },
+  "BossDefeatReward_FoxExorcist": {
+    "localized_name": "增強火屬性傷害 中",
+    "description": null
+  },
+  "BossDefeatReward_FoxMage": {
+    "localized_name": "增強火屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_GhostDragon": {
+    "localized_name": "增強龍屬性傷害 中",
+    "description": null
+  },
   "BossDefeatReward_GhostRabbit": {
     "localized_name": "增強暗屬性傷害 小",
     "description": null
   },
   "BossDefeatReward_GoldenHorse": {
     "localized_name": "增強地屬性傷害 中",
+    "description": null
+  },
+  "BossDefeatReward_GrassGolem": {
+    "localized_name": "增強草屬性傷害 中",
+    "description": null
+  },
+  "BossDefeatReward_GrassGolem_Dark": {
+    "localized_name": "增強暗屬性傷害 中",
     "description": null
   },
   "BossDefeatReward_GrassMammoth": {
@@ -159,6 +247,10 @@
     "localized_name": "增強水屬性傷害 中",
     "description": null
   },
+  "BossDefeatReward_IceFox": {
+    "localized_name": "增強冰屬性傷害 小",
+    "description": null
+  },
   "BossDefeatReward_IceHorse": {
     "localized_name": "增強冰屬性傷害 大",
     "description": null
@@ -177,6 +269,10 @@
   },
   "BossDefeatReward_JetDragon": {
     "localized_name": "增強龍屬性傷害 大",
+    "description": null
+  },
+  "BossDefeatReward_KabukiMan": {
+    "localized_name": "增強火屬性傷害 中",
     "description": null
   },
   "BossDefeatReward_KingAlpaca": {
@@ -207,12 +303,32 @@
     "localized_name": "增強龍屬性傷害 小",
     "description": null
   },
+  "BossDefeatReward_LilyQueen": {
+    "localized_name": "增強草屬性傷害 大",
+    "description": null
+  },
   "BossDefeatReward_LilyQueen_Dark": {
     "localized_name": "增強暗屬性傷害 小",
     "description": null
   },
+  "BossDefeatReward_LotusDragon": {
+    "localized_name": "增強水屬性傷害 中",
+    "description": null
+  },
+  "BossDefeatReward_Manticore": {
+    "localized_name": "增強火屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_MoonChild": {
+    "localized_name": "增強暗屬性傷害 中",
+    "description": null
+  },
   "BossDefeatReward_MopKing": {
     "localized_name": "增強冰屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_MushroomLady": {
+    "localized_name": "增強草屬性傷害 小",
     "description": null
   },
   "BossDefeatReward_Mutant": {
@@ -255,6 +371,14 @@
     "localized_name": "增強暗屬性傷害 小",
     "description": null
   },
+  "BossDefeatReward_RockBeast": {
+    "localized_name": "增強地屬性傷害 中",
+    "description": null
+  },
+  "BossDefeatReward_RockBeast_Ice": {
+    "localized_name": "增強冰屬性傷害 中",
+    "description": null
+  },
   "BossDefeatReward_Ronin": {
     "localized_name": "增強火屬性傷害 中",
     "description": null
@@ -275,6 +399,10 @@
     "localized_name": "增強水屬性傷害 小",
     "description": null
   },
+  "BossDefeatReward_ScorpionMan_Electric": {
+    "localized_name": "增強雷屬性傷害 小",
+    "description": null
+  },
   "BossDefeatReward_SkyDragon": {
     "localized_name": "增強龍屬性傷害 小",
     "description": null
@@ -287,12 +415,28 @@
     "localized_name": "增強雷屬性傷害 小",
     "description": null
   },
+  "BossDefeatReward_ThunderFluffyBird": {
+    "localized_name": "增強雷屬性傷害 小",
+    "description": null
+  },
   "BossDefeatReward_Umihebi": {
     "localized_name": "增強水屬性傷害 中",
     "description": null
   },
   "BossDefeatReward_VioletFairy": {
     "localized_name": "增強草屬性傷害 中",
+    "description": null
+  },
+  "BossDefeatReward_VolcanicMonster": {
+    "localized_name": "增強地屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_VolcanoDragon": {
+    "localized_name": "增強火屬性傷害 小",
+    "description": null
+  },
+  "BossDefeatReward_VolcanoDragon_Ice": {
+    "localized_name": "增強冰屬性傷害 中",
     "description": null
   },
   "BossDefeatReward_WeaselDragon": {
@@ -305,6 +449,10 @@
   },
   "BossDefeatReward_WhiteDeer": {
     "localized_name": "增強無屬性傷害 中",
+    "description": null
+  },
+  "BossDefeatReward_WhiteDeer_Dark": {
+    "localized_name": "增強暗屬性傷害 中",
     "description": null
   },
   "BossDefeatReward_WhiteMoth": {
@@ -431,6 +579,10 @@
     "localized_name": "帕魯防禦力增加Lv3",
     "description": null
   },
+  "Defense_ACC_up4_Otomo_Only_Equip": {
+    "localized_name": "帕魯防禦力增加Lv4",
+    "description": null
+  },
   "Deffence_down1": {
     "localized_name": "弱不禁風",
     "description": null
@@ -445,10 +597,18 @@
   },
   "Deffence_up2": {
     "localized_name": "頑強肉體",
-    "description": null
+    "description": "防禦力+20.0% 免疫硬直"
+  },
+  "Deffence_up2_2": {
+    "localized_name": "重量級",
+    "description": "防禦力+20.0% 免疫擊退"
   },
   "Deffence_up3": {
     "localized_name": "金剛之軀",
+    "description": "防禦力+30.0% 免疫硬直 免疫擊退"
+  },
+  "Defuser_ExplosiveSpore_EquipSkill": {
+    "localized_name": "爆炸傷害無效",
     "description": null
   },
   "ElementBoost_Aqua_1_PAL": {
@@ -491,6 +651,10 @@
     "localized_name": "增強帕魯暗屬性傷害 Lv3",
     "description": null
   },
+  "ElementBoost_Dark_4_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯暗屬性傷害 Lv4",
+    "description": null
+  },
   "ElementBoost_Dragon_1_BossDefeat": {
     "localized_name": "增強龍屬性傷害 小",
     "description": null
@@ -521,6 +685,10 @@
   },
   "ElementBoost_Dragon_3_Otomo_Only_Equip": {
     "localized_name": "增強帕魯龍屬性傷害 Lv3",
+    "description": null
+  },
+  "ElementBoost_Dragon_4_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯龍屬性傷害 Lv4",
     "description": null
   },
   "ElementBoost_Earth_1_BossDefeat": {
@@ -555,6 +723,10 @@
     "localized_name": "增強帕魯地屬性傷害 Lv3",
     "description": null
   },
+  "ElementBoost_Earth_4_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯地屬性傷害 Lv4",
+    "description": null
+  },
   "ElementBoost_Electricity_1_BossDefeat": {
     "localized_name": "增強雷屬性傷害 小",
     "description": null
@@ -577,6 +749,10 @@
   },
   "ElementBoost_Electricity_3_Otomo_Only_Equip": {
     "localized_name": "增強帕魯雷屬性傷害 Lv3",
+    "description": null
+  },
+  "ElementBoost_Electricity_4_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯雷屬性傷害 Lv4",
     "description": null
   },
   "ElementBoost_Fire_1_BossDefeat": {
@@ -611,6 +787,10 @@
     "localized_name": "增強帕魯火屬性傷害 Lv3",
     "description": null
   },
+  "ElementBoost_Fire_4_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯火屬性傷害 Lv4",
+    "description": null
+  },
   "ElementBoost_Ice_1_BossDefeat": {
     "localized_name": "增強冰屬性傷害 小",
     "description": null
@@ -641,6 +821,10 @@
   },
   "ElementBoost_Ice_3_Otomo_Only_Equip": {
     "localized_name": "增強帕魯冰屬性傷害 Lv3",
+    "description": null
+  },
+  "ElementBoost_Ice_4_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯冰屬性傷害 Lv4",
     "description": null
   },
   "ElementBoost_Leaf_1_BossDefeat": {
@@ -675,6 +859,10 @@
     "localized_name": "增強帕魯草屬性傷害 Lv3",
     "description": null
   },
+  "ElementBoost_Leaf_4_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯草屬性傷害 Lv4",
+    "description": null
+  },
   "ElementBoost_Normal_1_BossDefeat": {
     "localized_name": "增強無屬性傷害 小",
     "description": null
@@ -705,6 +893,10 @@
   },
   "ElementBoost_Normal_3_Otomo_Only_Equip": {
     "localized_name": "增強帕魯無屬性傷害 Lv3",
+    "description": null
+  },
+  "ElementBoost_Normal_4_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯無屬性傷害 Lv4",
     "description": null
   },
   "ElementBoost_Thunder_1_PAL": {
@@ -739,6 +931,10 @@
     "localized_name": "增強帕魯水屬性傷害 Lv3",
     "description": null
   },
+  "ElementBoost_Water_4_Otomo_Only_Equip": {
+    "localized_name": "增強帕魯水屬性傷害 Lv4",
+    "description": null
+  },
   "ElementResist_Aqua_1": {
     "localized_name": "減輕水屬性傷害Lv1",
     "description": null
@@ -753,6 +949,10 @@
   },
   "ElementResist_Aqua_3": {
     "localized_name": "減輕水屬性傷害Lv3",
+    "description": null
+  },
+  "ElementResist_Aqua_4": {
+    "localized_name": "減輕水屬性傷害Lv4",
     "description": null
   },
   "ElementResist_Dark_1": {
@@ -771,6 +971,10 @@
     "localized_name": "減輕暗屬性傷害Lv3",
     "description": null
   },
+  "ElementResist_Dark_4": {
+    "localized_name": "減輕暗屬性傷害Lv4",
+    "description": null
+  },
   "ElementResist_Dragon_1": {
     "localized_name": "減輕龍屬性傷害Lv1",
     "description": null
@@ -785,6 +989,10 @@
   },
   "ElementResist_Dragon_3": {
     "localized_name": "減輕龍屬性傷害Lv3",
+    "description": null
+  },
+  "ElementResist_Dragon_4": {
+    "localized_name": "減輕龍屬性傷害Lv4",
     "description": null
   },
   "ElementResist_Earth_1": {
@@ -803,6 +1011,10 @@
     "localized_name": "減輕地屬性傷害Lv3",
     "description": null
   },
+  "ElementResist_Earth_4": {
+    "localized_name": "減輕地屬性傷害Lv4",
+    "description": null
+  },
   "ElementResist_Fire_1": {
     "localized_name": "減輕火屬性傷害Lv1",
     "description": null
@@ -817,6 +1029,10 @@
   },
   "ElementResist_Fire_3": {
     "localized_name": "減輕火屬性傷害Lv3",
+    "description": null
+  },
+  "ElementResist_Fire_4": {
+    "localized_name": "減輕火屬性傷害Lv4",
     "description": null
   },
   "ElementResist_Ice_1": {
@@ -835,6 +1051,10 @@
     "localized_name": "減輕冰屬性傷害Lv3",
     "description": null
   },
+  "ElementResist_Ice_4": {
+    "localized_name": "減輕冰屬性傷害Lv4",
+    "description": null
+  },
   "ElementResist_Leaf_1": {
     "localized_name": "減輕草屬性傷害Lv1",
     "description": null
@@ -849,6 +1069,10 @@
   },
   "ElementResist_Leaf_3": {
     "localized_name": "減輕草屬性傷害Lv3",
+    "description": null
+  },
+  "ElementResist_Leaf_4": {
+    "localized_name": "減輕草屬性傷害Lv4",
     "description": null
   },
   "ElementResist_Normal_1": {
@@ -867,6 +1091,10 @@
     "localized_name": "減輕無屬性傷害Lv3",
     "description": null
   },
+  "ElementResist_Normal_4": {
+    "localized_name": "減輕無屬性傷害Lv4",
+    "description": null
+  },
   "ElementResist_Thunder_1": {
     "localized_name": "減輕雷屬性傷害Lv1",
     "description": null
@@ -883,8 +1111,16 @@
     "localized_name": "減輕雷屬性傷害Lv3",
     "description": null
   },
+  "ElementResist_Thunder_4": {
+    "localized_name": "減輕雷屬性傷害Lv4",
+    "description": null
+  },
   "EternalFlame": {
     "localized_name": "永炎",
+    "description": null
+  },
+  "FriendshipPoint_Increase_EquipSkill": {
+    "localized_name": "隊伍帕魯信賴度的上升量增加",
     "description": null
   },
   "GYM_NAME_Desert": {
@@ -916,19 +1152,27 @@
     "description": null
   },
   "HP_ACC_up1": {
-    "localized_name": "提升體力Lv1",
+    "localized_name": "提升生命值Lv1",
     "description": null
   },
   "HP_ACC_up2": {
-    "localized_name": "提升體力Lv2",
+    "localized_name": "提升生命值Lv2",
     "description": null
   },
   "HP_ACC_up3": {
-    "localized_name": "提升體力Lv3",
+    "localized_name": "提升生命值Lv3",
+    "description": null
+  },
+  "HP_ACC_up4": {
+    "localized_name": "提升生命值Lv4",
     "description": null
   },
   "Invader": {
     "localized_name": "侵略者",
+    "description": null
+  },
+  "Invalid_ToxicGas_EquipSkill": {
+    "localized_name": "腐霧傷害無效",
     "description": null
   },
   "JumpCount_Increase1": {
@@ -949,7 +1193,7 @@
   },
   "Legend": {
     "localized_name": "傳說",
-    "description": "攻擊+20.0% 防禦+20.0% 提升移動速度15.0%"
+    "description": "攻擊+20.0% 防禦+20.0% 提升移動速度20.0%"
   },
   "MaxInventoryWeight_up": {
     "localized_name": "提升負重上限Lv1",
@@ -975,6 +1219,14 @@
     "localized_name": "提升負重上限Lv3",
     "description": null
   },
+  "MaxInventoryWeight_up_Equip_4": {
+    "localized_name": "提升負重上限Lv4",
+    "description": null
+  },
+  "MiniNushi": {
+    "localized_name": "大獵物",
+    "description": null
+  },
   "MoveSpeed_up_1": {
     "localized_name": "俐落",
     "description": "提升移動速度10.0%"
@@ -987,8 +1239,28 @@
     "localized_name": "神速",
     "description": "提升移動速度30.0%"
   },
+  "MutationPal_Babysitter": {
+    "localized_name": "寶寶保母",
+    "description": "在據點內時，分派到配種牧場的帕魯的 產蛋速度+30.0%，孵化速度+30.0%"
+  },
+  "MutationPal_ExplosionResist": {
+    "localized_name": "重裝甲",
+    "description": "<Status_Up>免疫</>爆破傷害"
+  },
+  "MutationPal_Immortal": {
+    "localized_name": "不死之身",
+    "description": "竊取生命+5.0% 帕魯生命值自然恢復量+100.0% 攻擊力+15.0%"
+  },
+  "MutationPal_Mutant": {
+    "localized_name": "特殊體質",
+    "description": "帕魯和玩家的生命值自然恢復量+50.0% 防禦力+{EffectValue4}% <Status_Up>免疫</>中毒傷害 <Status_Up>免疫</>灼熱傷害"
+  },
+  "NightOwl": {
+    "localized_name": "夜貓子",
+    "description": "因為總是熬夜，白天常常睡午覺。"
+  },
   "Nocturnal": {
-    "localized_name": "夜行性",
+    "localized_name": "不眠",
     "description": "即使到夜晚也不會睡覺，會一直工作。"
   },
   "NonKilling": {
@@ -1107,9 +1379,25 @@
     "localized_name": "帕魯經驗獲取增加Lv3",
     "description": null
   },
+  "PlayerSP_DecreaseRate_Passive": {
+    "localized_name": "防過勞幫手",
+    "description": null
+  },
   "Rare": {
     "localized_name": "稀有",
     "description": null
+  },
+  "ReloadSpeedUp_Passive": {
+    "localized_name": "裝填大師",
+    "description": null
+  },
+  "RideJumpCount_Increase1": {
+    "localized_name": "身輕如燕",
+    "description": "騎乘期間連續跳躍次數+1"
+  },
+  "RideJumpCount_Increase2": {
+    "localized_name": "凌空微步",
+    "description": "騎乘期間連續跳躍次數+2"
   },
   "SalePrice_Down_1": {
     "localized_name": "寒酸",
@@ -1126,6 +1414,18 @@
   "Salvation": {
     "localized_name": "救世主",
     "description": null
+  },
+  "SelfDeathAddItemDrop_up_1": {
+    "localized_name": "小小心意",
+    "description": "自身道具掉落量+15.0%"
+  },
+  "SelfDeathAddItemDrop_up_2": {
+    "localized_name": "奉獻精神",
+    "description": "自身道具掉落量+50.0%"
+  },
+  "SelfDeathAddItemDrop_up_3": {
+    "localized_name": "慷慨就義",
+    "description": "自身道具掉落量+100.0%"
   },
   "SphereModule_Curve": {
     "localized_name": "投擲曲線+1",
@@ -1166,6 +1466,30 @@
   "Stamina_Up_3": {
     "localized_name": "永動機",
     "description": "最大耐力+75.0% ※此效果僅對可騎乘的帕魯有效。"
+  },
+  "StonDrop_Boost_1": {
+    "localized_name": "提升採礦量Lv1",
+    "description": "石材/礦石掉落量稍微增加"
+  },
+  "StonDrop_Boost_2": {
+    "localized_name": "提升採礦量Lv2",
+    "description": "石材/礦石掉落量增加"
+  },
+  "StonDrop_Boost_3": {
+    "localized_name": "提升採礦量Lv3",
+    "description": "石材/礦石掉落量顯著增加"
+  },
+  "StonDrop_Boost_4": {
+    "localized_name": "提升採礦量Lv4",
+    "description": "石材/礦石掉落量大量增加"
+  },
+  "StonDrop_Boost_5": {
+    "localized_name": "提升採礦量Lv5",
+    "description": "石材/礦石掉落量極大量增加"
+  },
+  "StonWoodDrop_Boost": {
+    "localized_name": "挖掘/採伐量增加",
+    "description": "木材/石材/礦石掉落量大量增加"
   },
   "SwimSpeed_up_1": {
     "localized_name": "悠然泳姿",
@@ -1247,6 +1571,26 @@
     "localized_name": "魔女",
     "description": null
   },
+  "WoodDrop_Boost_1": {
+    "localized_name": "提升採伐量Lv1",
+    "description": "木材掉落量稍微增加"
+  },
+  "WoodDrop_Boost_2": {
+    "localized_name": "提升採伐量Lv2",
+    "description": "木材掉落量增加"
+  },
+  "WoodDrop_Boost_3": {
+    "localized_name": "提升採伐量Lv3",
+    "description": "木材掉落量顯著增加"
+  },
+  "WoodDrop_Boost_4": {
+    "localized_name": "提升採伐量Lv4",
+    "description": "木材掉落量大量增加"
+  },
+  "WoodDrop_Boost_5": {
+    "localized_name": "提升採伐量Lv5",
+    "description": "木材掉落量極大量增加"
+  },
   "WorkSpeed_ACC_up1": {
     "localized_name": "高速作業Lv1",
     "description": null
@@ -1258,6 +1602,46 @@
   "WorkSpeed_ACC_up3": {
     "localized_name": "高速作業Lv3",
     "description": null
+  },
+  "WorkSpeed_ACC_up4": {
+    "localized_name": "高速作業Lv4",
+    "description": null
+  },
+  "WorkSuitabilityAddRank_MonsterFarm_1": {
+    "localized_name": "牧場之子",
+    "description": "牧場的工作適應性+1"
+  },
+  "WorkSuitabilityAddRank_MonsterFarm_2": {
+    "localized_name": "牧場之主",
+    "description": "牧場的工作適應性+2"
+  },
+  "WorldTree_ATK": {
+    "localized_name": "雙刃聖劍",
+    "description": "攻擊<NumBlue_13>+</>50.0% 防禦-30.0% 世界樹區域的樹木/礦石不會因接近而消失"
+  },
+  "WorldTree_ATK_DEF": {
+    "localized_name": "破壞神",
+    "description": "攻擊<NumBlue_13>+</>40.0% 防禦<NumBlue_13>+</>20.0% 最大HP-50.0% 世界樹區域的樹木/礦石不會因接近而消失"
+  },
+  "WorldTree_CraftSpeed": {
+    "localized_name": "惡魔之手",
+    "description": "工作速度<NumBlue_13>+</>90.0<NumBlue_13>%</> SAN值下降速度加快<NumRed_13>+15.0%</> 世界樹區域的樹木/礦石不會因接近而消失"
+  },
+  "WorldTree_DEF": {
+    "localized_name": "守護聖盾",
+    "description": "防禦<NumBlue_13>+</>50.0% 攻擊-30.0% 世界樹區域的樹木/礦石不會因接近而消失"
+  },
+  "WorldTree_FullStomach": {
+    "localized_name": "神樹苗床",
+    "description": "減少飽足度下降速度<NumBlue_13>+50.0%</> 生命值-20.0<NumRed_13>%</> 世界樹區域的樹木/礦石不會因接近而消失"
+  },
+  "WorldTree_MoveSpeed": {
+    "localized_name": "次元跳躍",
+    "description": "移動速度提升<NumBlue_13>+</>50.0<NumBlue_13>%</> 飽足度下降速度加速<NumRed_13>+15.0%</> 世界樹區域的樹木/礦石不會因接近而消失"
+  },
+  "WorldTree_Sanity": {
+    "localized_name": "仙人",
+    "description": "減少SAN值下降速度<NumBlue_13>+50.0%</> 工作速度-20.0<NumRed_13>%</> 世界樹區域的樹木/礦石不會因接近而消失"
   },
   "YakushimaDagameBoost_Magic_Equip": {
     "localized_name": "神聖之力 魔法",
@@ -1289,6 +1673,10 @@
   },
   "defense_ACC_up3": {
     "localized_name": "提升防禦Lv3",
+    "description": null
+  },
+  "defense_ACC_up4": {
+    "localized_name": "提升防禦Lv4",
     "description": null
   }
 }

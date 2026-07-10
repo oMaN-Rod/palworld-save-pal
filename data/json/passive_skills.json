@@ -153,6 +153,30 @@
     "add_accessory": false,
     "disabled": false
   },
+  "Attack_ACC_up1_Armor": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ShotAttack",
+        "value": 3.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "Attack_ACC_up1_Otomo_Only_Equip": {
     "rank": 1,
     "effects": [
@@ -183,6 +207,30 @@
       {
         "type": "ShotAttack",
         "value": 10.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "Attack_ACC_up2_Armor": {
+    "rank": 2,
+    "effects": [
+      {
+        "type": "ShotAttack",
+        "value": 6.0,
         "target": "ToSelf"
       }
     ],
@@ -249,6 +297,30 @@
     "add_accessory": false,
     "disabled": false
   },
+  "Attack_ACC_up3_Armor": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "ShotAttack",
+        "value": 9.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "Attack_ACC_up3_Otomo_Only_Equip": {
     "rank": 3,
     "effects": [
@@ -256,6 +328,126 @@
         "type": "ShotAttack",
         "value": 12.0,
         "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "Attack_ACC_up4": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "ShotAttack",
+        "value": 20.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "Attack_ACC_up4_Armor": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "ShotAttack",
+        "value": 12.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "Attack_ACC_up4_Otomo_Only_Equip": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "ShotAttack",
+        "value": 16.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "AutoHPRegeneRate_Passive": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "None",
+        "value": 5.0,
+        "target": "ToTrainer"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": true,
+    "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": true,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "AvoidDurationUp_EquipSkill_2": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "None",
+        "value": 20.0,
+        "target": "ToSelf"
       }
     ],
     "invoke_active_party": false,
@@ -489,6 +681,30 @@
     "add_accessory": true,
     "disabled": false
   },
+  "BossDefeatReward_CactusDoll": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Leaf",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
   "BossDefeatReward_CaptainPenguin": {
     "rank": 1,
     "effects": [
@@ -561,6 +777,54 @@
     "add_accessory": true,
     "disabled": false
   },
+  "BossDefeatReward_CubeTurtle": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Earth",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_CubeTurtle_Neutral": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Normal",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
   "BossDefeatReward_DarkScorpion": {
     "rank": 1,
     "effects": [
@@ -590,6 +854,102 @@
     "effects": [
       {
         "type": "ElementBoost_Earth",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_DomeArmorDragon": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dragon",
+        "value": 3.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_ElecLizard": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Electricity",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_ElecPanda": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Electricity",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_ElecSnail": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Electricity",
         "value": 1.0,
         "target": "None"
       }
@@ -681,6 +1041,54 @@
     "add_accessory": true,
     "disabled": false
   },
+  "BossDefeatReward_FireKirin": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Fire",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_FlameBuffalo": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Fire",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
   "BossDefeatReward_FlowerDinosaur_Electric": {
     "rank": 1,
     "effects": [
@@ -729,6 +1137,78 @@
     "add_accessory": true,
     "disabled": false
   },
+  "BossDefeatReward_FoxExorcist": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Fire",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_FoxMage": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Fire",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_GhostDragon": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dragon",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
   "BossDefeatReward_GhostRabbit": {
     "rank": 1,
     "effects": [
@@ -758,6 +1238,54 @@
     "effects": [
       {
         "type": "ElementBoost_Earth",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_GrassGolem": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Leaf",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_GrassGolem_Dark": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dark",
         "value": 2.0,
         "target": "None"
       }
@@ -969,6 +1497,30 @@
     "add_accessory": true,
     "disabled": false
   },
+  "BossDefeatReward_IceFox": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Ice",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
   "BossDefeatReward_IceHorse": {
     "rank": 1,
     "effects": [
@@ -1071,6 +1623,30 @@
       {
         "type": "ElementBoost_Dragon",
         "value": 3.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_KabukiMan": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Fire",
+        "value": 2.0,
         "target": "None"
       }
     ],
@@ -1257,6 +1833,30 @@
     "add_accessory": true,
     "disabled": false
   },
+  "BossDefeatReward_LilyQueen": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Leaf",
+        "value": 3.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
   "BossDefeatReward_LilyQueen_Dark": {
     "rank": 1,
     "effects": [
@@ -1281,11 +1881,107 @@
     "add_accessory": true,
     "disabled": false
   },
+  "BossDefeatReward_LotusDragon": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Water",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_Manticore": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Fire",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_MoonChild": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dark",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
   "BossDefeatReward_MopKing": {
     "rank": 1,
     "effects": [
       {
         "type": "ElementBoost_Ice",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_MushroomLady": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Leaf",
         "value": 1.0,
         "target": "None"
       }
@@ -1545,6 +2241,54 @@
     "add_accessory": true,
     "disabled": false
   },
+  "BossDefeatReward_RockBeast": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Earth",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_RockBeast_Ice": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Ice",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
   "BossDefeatReward_Ronin": {
     "rank": 1,
     "effects": [
@@ -1665,6 +2409,30 @@
     "add_accessory": true,
     "disabled": false
   },
+  "BossDefeatReward_ScorpionMan_Electric": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Electricity",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
   "BossDefeatReward_SkyDragon": {
     "rank": 1,
     "effects": [
@@ -1737,6 +2505,30 @@
     "add_accessory": true,
     "disabled": false
   },
+  "BossDefeatReward_ThunderFluffyBird": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Electricity",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
   "BossDefeatReward_Umihebi": {
     "rank": 1,
     "effects": [
@@ -1766,6 +2558,78 @@
     "effects": [
       {
         "type": "ElementBoost_Leaf",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_VolcanicMonster": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Earth",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_VolcanoDragon": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Fire",
+        "value": 1.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_VolcanoDragon_Ice": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Ice",
         "value": 2.0,
         "target": "None"
       }
@@ -1838,6 +2702,30 @@
     "effects": [
       {
         "type": "ElementBoost_Normal",
+        "value": 2.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": true,
+    "add_accessory": true,
+    "disabled": false
+  },
+  "BossDefeatReward_WhiteDeer_Dark": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "ElementBoost_Dark",
         "value": 2.0,
         "target": "None"
       }
@@ -2611,6 +3499,30 @@
     "add_accessory": false,
     "disabled": false
   },
+  "Defense_ACC_up4_Otomo_Only_Equip": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "Defense",
+        "value": 20.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "Deffence_down1": {
     "rank": -1,
     "effects": [
@@ -2690,6 +3602,40 @@
         "type": "Defense",
         "value": 20.0,
         "target": "ToSelf"
+      },
+      {
+        "type": "None",
+        "value": 0.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": true,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "Deffence_up2_2": {
+    "rank": 2,
+    "effects": [
+      {
+        "type": "Defense",
+        "value": 20.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "None",
+        "value": 0.0,
+        "target": "ToSelf"
       }
     ],
     "invoke_active_party": false,
@@ -2714,6 +3660,16 @@
         "type": "Defense",
         "value": 30.0,
         "target": "ToSelf"
+      },
+      {
+        "type": "None",
+        "value": 0.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "None",
+        "value": 0.0,
+        "target": "ToSelf"
       }
     ],
     "invoke_active_party": false,
@@ -2724,6 +3680,40 @@
     "invoke_always": true,
     "invoke_in_base": false,
     "add_pal": true,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "Defuser_ExplosiveSpore_EquipSkill": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "None",
+        "value": 1.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "None",
+        "value": 1.0,
+        "target": "None"
+      },
+      {
+        "type": "None",
+        "value": 100.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
     "add_rare_pal": false,
     "add_shot_weapon": false,
     "add_melee_weapon": false,
@@ -2760,7 +3750,7 @@
     "effects": [
       {
         "type": "ElementBoost_Water",
-        "value": 20.0,
+        "value": 30.0,
         "target": "ToSelf"
       }
     ],
@@ -2904,7 +3894,7 @@
     "effects": [
       {
         "type": "ElementBoost_Dark",
-        "value": 20.0,
+        "value": 30.0,
         "target": "ToSelf"
       }
     ],
@@ -2953,6 +3943,30 @@
       {
         "type": "ElementBoost_Dark",
         "value": 18.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "ElementBoost_Dark_4_Otomo_Only_Equip": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "ElementBoost_Dark",
+        "value": 20.0,
         "target": "None"
       }
     ],
@@ -3096,7 +4110,7 @@
     "effects": [
       {
         "type": "ElementBoost_Dragon",
-        "value": 20.0,
+        "value": 30.0,
         "target": "ToSelf"
       }
     ],
@@ -3145,6 +4159,30 @@
       {
         "type": "ElementBoost_Dragon",
         "value": 18.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "ElementBoost_Dragon_4_Otomo_Only_Equip": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "ElementBoost_Dragon",
+        "value": 20.0,
         "target": "None"
       }
     ],
@@ -3288,7 +4326,7 @@
     "effects": [
       {
         "type": "ElementBoost_Earth",
-        "value": 20.0,
+        "value": 30.0,
         "target": "ToSelf"
       }
     ],
@@ -3337,6 +4375,30 @@
       {
         "type": "ElementBoost_Earth",
         "value": 18.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "ElementBoost_Earth_4_Otomo_Only_Equip": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "ElementBoost_Earth",
+        "value": 20.0,
         "target": "None"
       }
     ],
@@ -3499,6 +4561,30 @@
     "add_accessory": false,
     "disabled": false
   },
+  "ElementBoost_Electricity_4_Otomo_Only_Equip": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "ElementBoost_Electricity",
+        "value": 20.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "ElementBoost_Fire_1_BossDefeat": {
     "rank": 1,
     "effects": [
@@ -3624,7 +4710,7 @@
     "effects": [
       {
         "type": "ElementBoost_Fire",
-        "value": 20.0,
+        "value": 30.0,
         "target": "ToSelf"
       }
     ],
@@ -3673,6 +4759,30 @@
       {
         "type": "ElementBoost_Fire",
         "value": 18.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "ElementBoost_Fire_4_Otomo_Only_Equip": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "ElementBoost_Fire",
+        "value": 20.0,
         "target": "None"
       }
     ],
@@ -3816,7 +4926,7 @@
     "effects": [
       {
         "type": "ElementBoost_Ice",
-        "value": 20.0,
+        "value": 30.0,
         "target": "ToSelf"
       }
     ],
@@ -3865,6 +4975,30 @@
       {
         "type": "ElementBoost_Ice",
         "value": 18.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "ElementBoost_Ice_4_Otomo_Only_Equip": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "ElementBoost_Ice",
+        "value": 20.0,
         "target": "None"
       }
     ],
@@ -4008,7 +5142,7 @@
     "effects": [
       {
         "type": "ElementBoost_Leaf",
-        "value": 20.0,
+        "value": 30.0,
         "target": "ToSelf"
       }
     ],
@@ -4057,6 +5191,30 @@
       {
         "type": "ElementBoost_Leaf",
         "value": 18.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "ElementBoost_Leaf_4_Otomo_Only_Equip": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "ElementBoost_Leaf",
+        "value": 20.0,
         "target": "None"
       }
     ],
@@ -4200,7 +5358,7 @@
     "effects": [
       {
         "type": "ElementBoost_Normal",
-        "value": 20.0,
+        "value": 30.0,
         "target": "ToSelf"
       }
     ],
@@ -4267,6 +5425,30 @@
     "add_accessory": false,
     "disabled": false
   },
+  "ElementBoost_Normal_4_Otomo_Only_Equip": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "ElementBoost_Normal",
+        "value": 20.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "ElementBoost_Thunder_1_PAL": {
     "rank": 1,
     "effects": [
@@ -4296,7 +5478,7 @@
     "effects": [
       {
         "type": "ElementBoost_Electricity",
-        "value": 20.0,
+        "value": 30.0,
         "target": "ToSelf"
       }
     ],
@@ -4459,6 +5641,30 @@
     "add_accessory": false,
     "disabled": false
   },
+  "ElementBoost_Water_4_Otomo_Only_Equip": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "ElementBoost_Water",
+        "value": 20.0,
+        "target": "None"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "ElementResist_Aqua_1": {
     "rank": 1,
     "effects": [
@@ -4533,6 +5739,30 @@
   },
   "ElementResist_Aqua_3": {
     "rank": 3,
+    "effects": [
+      {
+        "type": "ElementResist_Water",
+        "value": 30.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "ElementResist_Aqua_4": {
+    "rank": 4,
     "effects": [
       {
         "type": "ElementResist_Water",
@@ -4632,6 +5862,30 @@
     "effects": [
       {
         "type": "ElementResist_Dark",
+        "value": 30.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "ElementResist_Dark_4": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "ElementResist_Dark",
         "value": 35.0,
         "target": "ToSelf"
       }
@@ -4725,6 +5979,30 @@
   },
   "ElementResist_Dragon_3": {
     "rank": 3,
+    "effects": [
+      {
+        "type": "ElementResist_Dragon",
+        "value": 30.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "ElementResist_Dragon_4": {
+    "rank": 4,
     "effects": [
       {
         "type": "ElementResist_Dragon",
@@ -4824,6 +6102,30 @@
     "effects": [
       {
         "type": "ElementResist_Earth",
+        "value": 30.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "ElementResist_Earth_4": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "ElementResist_Earth",
         "value": 35.0,
         "target": "ToSelf"
       }
@@ -4917,6 +6219,30 @@
   },
   "ElementResist_Fire_3": {
     "rank": 3,
+    "effects": [
+      {
+        "type": "ElementResist_Fire",
+        "value": 30.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "ElementResist_Fire_4": {
+    "rank": 4,
     "effects": [
       {
         "type": "ElementResist_Fire",
@@ -5016,6 +6342,30 @@
     "effects": [
       {
         "type": "ElementResist_Ice",
+        "value": 30.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "ElementResist_Ice_4": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "ElementResist_Ice",
         "value": 35.0,
         "target": "ToSelf"
       }
@@ -5109,6 +6459,30 @@
   },
   "ElementResist_Leaf_3": {
     "rank": 3,
+    "effects": [
+      {
+        "type": "ElementResist_Leaf",
+        "value": 30.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "ElementResist_Leaf_4": {
+    "rank": 4,
     "effects": [
       {
         "type": "ElementResist_Leaf",
@@ -5208,6 +6582,30 @@
     "effects": [
       {
         "type": "ElementResist_Normal",
+        "value": 30.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "ElementResist_Normal_4": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "ElementResist_Normal",
         "value": 35.0,
         "target": "ToSelf"
       }
@@ -5304,6 +6702,30 @@
     "effects": [
       {
         "type": "ElementResist_Electricity",
+        "value": 30.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "ElementResist_Thunder_4": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "ElementResist_Electricity",
         "value": 35.0,
         "target": "ToSelf"
       }
@@ -5335,6 +6757,30 @@
         "type": "ElementBoost_Electricity",
         "value": 30.0,
         "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "FriendshipPoint_Increase_EquipSkill": {
+    "rank": -1,
+    "effects": [
+      {
+        "type": "None",
+        "value": 50.0,
+        "target": "None"
       }
     ],
     "invoke_active_party": false,
@@ -5584,7 +7030,7 @@
     "effects": [
       {
         "type": "MaxHP",
-        "value": 20.0,
+        "value": 15.0,
         "target": "ToSelf"
       }
     ],
@@ -5608,7 +7054,31 @@
     "effects": [
       {
         "type": "MaxHP",
-        "value": 30.0,
+        "value": 20.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "HP_ACC_up4": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "MaxHP",
+        "value": 25.0,
         "target": "ToSelf"
       }
     ],
@@ -5639,6 +7109,35 @@
         "type": "ElementBoost_Dragon",
         "value": 30.0,
         "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "Invalid_ToxicGas_EquipSkill": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "None",
+        "value": 0.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "None",
+        "value": 0.0,
+        "target": "None"
       }
     ],
     "invoke_active_party": false,
@@ -5767,7 +7266,7 @@
       },
       {
         "type": "MoveSpeed",
-        "value": 15.0,
+        "value": 20.0,
         "target": "ToSelf"
       }
     ],
@@ -5930,6 +7429,64 @@
     "add_accessory": false,
     "disabled": false
   },
+  "MaxInventoryWeight_up_Equip_4": {
+    "rank": -1,
+    "effects": [
+      {
+        "type": "MaxInventoryWeight",
+        "value": 300.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "MiniNushi": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "ElementBoost_Water",
+        "value": 5.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "ElementBoost_Ice",
+        "value": 5.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "Defense",
+        "value": 5.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "MoveSpeed_up_1": {
     "rank": 1,
     "effects": [
@@ -6002,6 +7559,151 @@
     "add_accessory": false,
     "disabled": false
   },
+  "MutationPal_Babysitter": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "PalEggHatchingSpeed",
+        "value": 30.0,
+        "target": "ToBuildObject"
+      },
+      {
+        "type": "None",
+        "value": 30.0,
+        "target": "ToBuildObject"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": false,
+    "invoke_in_base": true,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "MutationPal_ExplosionResist": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "None",
+        "value": 100.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "MutationPal_Immortal": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "LifeSteal",
+        "value": 5.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "None",
+        "value": 100.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "ShotAttack",
+        "value": 15.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "MutationPal_Mutant": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "None",
+        "value": 50.0,
+        "target": "ToSelfAndTrainer"
+      },
+      {
+        "type": "None",
+        "value": 100.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "None",
+        "value": 100.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": true,
+    "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "NightOwl": {
+    "rank": -1,
+    "effects": [
+      {
+        "type": "None",
+        "value": 0.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": true,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "Nocturnal": {
     "rank": 1,
     "effects": [
@@ -6039,8 +7741,8 @@
     "invoke_worker": false,
     "invoke_riding": false,
     "invoke_reserve": false,
-    "invoke_in_party": true,
-    "invoke_always": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
     "invoke_in_base": false,
     "add_pal": true,
     "add_rare_pal": false,
@@ -6116,11 +7818,6 @@
   "OctaviaArmorVampire": {
     "rank": 4,
     "effects": [
-      {
-        "type": "Nocturnal",
-        "value": 0.0,
-        "target": "ToSelf"
-      },
       {
         "type": "LifeSteal",
         "value": 1.0,
@@ -6782,17 +8479,46 @@
     "add_accessory": false,
     "disabled": false
   },
+  "PlayerSP_DecreaseRate_Passive": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "None",
+        "value": -5.0,
+        "target": "ToTrainer"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": true,
+    "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": true,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "Rare": {
     "rank": 4,
     "effects": [
       {
-        "type": "CraftSpeed",
+        "type": "ShotAttack",
         "value": 15.0,
         "target": "ToSelf"
       },
       {
-        "type": "ShotAttack",
+        "type": "Defense",
         "value": 15.0,
+        "target": "None"
+      },
+      {
+        "type": "CraftSpeed",
+        "value": 20.0,
         "target": "ToSelf"
       }
     ],
@@ -6805,6 +8531,78 @@
     "invoke_in_base": false,
     "add_pal": false,
     "add_rare_pal": true,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "ReloadSpeedUp_Passive": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "None",
+        "value": 4.0,
+        "target": "ToTrainer"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": true,
+    "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": true,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "RideJumpCount_Increase1": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "None",
+        "value": 1.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": true,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": true,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "RideJumpCount_Increase2": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "None",
+        "value": 2.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": true,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
     "add_shot_weapon": false,
     "add_melee_weapon": false,
     "add_armor": false,
@@ -6920,6 +8718,78 @@
     "invoke_always": true,
     "invoke_in_base": false,
     "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "SelfDeathAddItemDrop_up_1": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "None",
+        "value": 15.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "SelfDeathAddItemDrop_up_2": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "None",
+        "value": 50.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": true,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "SelfDeathAddItemDrop_up_3": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "None",
+        "value": 100.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": true,
     "add_rare_pal": false,
     "add_shot_weapon": false,
     "add_melee_weapon": false,
@@ -7160,6 +9030,150 @@
     "invoke_always": false,
     "invoke_in_base": false,
     "add_pal": true,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "StonDrop_Boost_1": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "None",
+        "value": 50.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "StonDrop_Boost_2": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "None",
+        "value": 80.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "StonDrop_Boost_3": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "None",
+        "value": 120.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "StonDrop_Boost_4": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "None",
+        "value": 160.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "StonDrop_Boost_5": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "None",
+        "value": 200.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "StonWoodDrop_Boost": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "None",
+        "value": 160.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": false,
     "add_rare_pal": false,
     "add_shot_weapon": false,
     "add_melee_weapon": false,
@@ -7672,6 +9686,126 @@
     "add_accessory": false,
     "disabled": false
   },
+  "WoodDrop_Boost_1": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "None",
+        "value": 50.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "WoodDrop_Boost_2": {
+    "rank": 1,
+    "effects": [
+      {
+        "type": "None",
+        "value": 80.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "WoodDrop_Boost_3": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "None",
+        "value": 120.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "WoodDrop_Boost_4": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "None",
+        "value": 160.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "WoodDrop_Boost_5": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "None",
+        "value": 200.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
   "WorkSpeed_ACC_up1": {
     "rank": 1,
     "effects": [
@@ -7735,6 +9869,316 @@
     "invoke_reserve": false,
     "invoke_in_party": false,
     "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "WorkSpeed_ACC_up4": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "CraftSpeed",
+        "value": 25.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": true,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "WorkSuitabilityAddRank_MonsterFarm_1": {
+    "rank": 3,
+    "effects": [
+      {
+        "type": "None",
+        "value": 1.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": true,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "WorkSuitabilityAddRank_MonsterFarm_2": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "None",
+        "value": 2.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": true,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "WorldTree_ATK": {
+    "rank": 5,
+    "effects": [
+      {
+        "type": "ShotAttack",
+        "value": 50.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "Defense",
+        "value": -30.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "None",
+        "value": 0.0,
+        "target": "ToSelfAndTrainer"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "WorldTree_ATK_DEF": {
+    "rank": 5,
+    "effects": [
+      {
+        "type": "ShotAttack",
+        "value": 40.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "Defense",
+        "value": 20.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "MaxHP",
+        "value": -50.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "WorldTree_CraftSpeed": {
+    "rank": 5,
+    "effects": [
+      {
+        "type": "CraftSpeed",
+        "value": 90.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "Sanity_Decrease",
+        "value": 15.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "None",
+        "value": 0.0,
+        "target": "ToSelfAndTrainer"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "WorldTree_DEF": {
+    "rank": 5,
+    "effects": [
+      {
+        "type": "Defense",
+        "value": 50.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "ShotAttack",
+        "value": -30.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "None",
+        "value": 0.0,
+        "target": "ToSelfAndTrainer"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "WorldTree_FullStomach": {
+    "rank": 5,
+    "effects": [
+      {
+        "type": "FullStomatch_Decrease",
+        "value": -50.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "MaxHP",
+        "value": -20.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "None",
+        "value": 0.0,
+        "target": "ToSelfAndTrainer"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "WorldTree_MoveSpeed": {
+    "rank": 5,
+    "effects": [
+      {
+        "type": "MoveSpeed",
+        "value": 50.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "FullStomatch_Decrease",
+        "value": 15.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "None",
+        "value": 0.0,
+        "target": "ToSelfAndTrainer"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "WorldTree_Sanity": {
+    "rank": 5,
+    "effects": [
+      {
+        "type": "Sanity_Decrease",
+        "value": -50.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "CraftSpeed",
+        "value": -20.0,
+        "target": "ToSelf"
+      },
+      {
+        "type": "None",
+        "value": 0.0,
+        "target": "ToSelfAndTrainer"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": true,
     "invoke_in_base": false,
     "add_pal": false,
     "add_rare_pal": false,
@@ -7893,7 +10337,7 @@
     "effects": [
       {
         "type": "Defense",
-        "value": 20.0,
+        "value": 15.0,
         "target": "ToSelf"
       }
     ],
@@ -7917,7 +10361,31 @@
     "effects": [
       {
         "type": "Defense",
-        "value": 30.0,
+        "value": 20.0,
+        "target": "ToSelf"
+      }
+    ],
+    "invoke_active_party": false,
+    "invoke_worker": false,
+    "invoke_riding": false,
+    "invoke_reserve": false,
+    "invoke_in_party": false,
+    "invoke_always": false,
+    "invoke_in_base": false,
+    "add_pal": false,
+    "add_rare_pal": false,
+    "add_shot_weapon": false,
+    "add_melee_weapon": false,
+    "add_armor": false,
+    "add_accessory": false,
+    "disabled": false
+  },
+  "defense_ACC_up4": {
+    "rank": 4,
+    "effects": [
+      {
+        "type": "Defense",
+        "value": 25.0,
         "target": "ToSelf"
       }
     ],

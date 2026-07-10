@@ -23,12 +23,20 @@
     "localized_name": "Wzmocnienie Ataku poziom 1",
     "description": null
   },
+  "Attack_ACC_up1_Armor": {
+    "localized_name": "Wzmocnienie ataku (małe) poziom 1",
+    "description": null
+  },
   "Attack_ACC_up1_Otomo_Only_Equip": {
     "localized_name": "Wzmocnienie ataku Pala poziom 1",
     "description": null
   },
   "Attack_ACC_up2": {
     "localized_name": "Wzmocnienie Ataku poziom 2",
+    "description": null
+  },
+  "Attack_ACC_up2_Armor": {
+    "localized_name": "Wzmocnienie ataku (małe) poziom 2",
     "description": null
   },
   "Attack_ACC_up2_Otomo_Only_Equip": {
@@ -39,8 +47,32 @@
     "localized_name": "Wzmocnienie Ataku poziom 3",
     "description": null
   },
+  "Attack_ACC_up3_Armor": {
+    "localized_name": "Wzmocnienie ataku (małe) poziom 3",
+    "description": null
+  },
   "Attack_ACC_up3_Otomo_Only_Equip": {
     "localized_name": "Wzmocnienie ataku Pala poziom 3",
+    "description": null
+  },
+  "Attack_ACC_up4": {
+    "localized_name": "Wzmocnienie ataku poziom 4",
+    "description": null
+  },
+  "Attack_ACC_up4_Armor": {
+    "localized_name": "Wzmocnienie ataku (małe) poziom 4",
+    "description": null
+  },
+  "Attack_ACC_up4_Otomo_Only_Equip": {
+    "localized_name": "Wzmocnienie ataku Pala poziom 4",
+    "description": null
+  },
+  "AutoHPRegeneRate_Passive": {
+    "localized_name": "Regenerator zdrowia",
+    "description": null
+  },
+  "AvoidDurationUp_EquipSkill_2": {
+    "localized_name": "Wydłużenie czasu niewrażliwości podczas uniku",
     "description": null
   },
   "BossDefeatReward_AmaterasuWolf_Dark": {
@@ -79,6 +111,10 @@
     "localized_name": "Zwiększenie obrażeń roślinnych (średnie)",
     "description": null
   },
+  "BossDefeatReward_CactusDoll": {
+    "localized_name": "Zwiększenie obrażeń roślinnych (małe)",
+    "description": null
+  },
   "BossDefeatReward_CaptainPenguin": {
     "localized_name": "Zwiększenie obrażeń wodnych (małe)",
     "description": null
@@ -91,12 +127,36 @@
     "localized_name": "Zwiększenie obrażeń mrocznych (małe)",
     "description": null
   },
+  "BossDefeatReward_CubeTurtle": {
+    "localized_name": "Zwiększenie obrażeń ziemnych (małe)",
+    "description": null
+  },
+  "BossDefeatReward_CubeTurtle_Neutral": {
+    "localized_name": "Zwiększenie obrażeń neutralnych (średnie)",
+    "description": null
+  },
   "BossDefeatReward_DarkScorpion": {
     "localized_name": "Zwiększenie obrażeń mrocznych (małe)",
     "description": null
   },
   "BossDefeatReward_DarkScorpion_Ground": {
     "localized_name": "Zwiększenie obrażeń ziemnych (małe)",
+    "description": null
+  },
+  "BossDefeatReward_DomeArmorDragon": {
+    "localized_name": "Zwiększenie obrażeń ziemnych (duże)",
+    "description": null
+  },
+  "BossDefeatReward_ElecLizard": {
+    "localized_name": "Zwiększenie obrażeń elektrycznych (małe)",
+    "description": null
+  },
+  "BossDefeatReward_ElecPanda": {
+    "localized_name": "Zwiększenie obrażeń elektrycznych (średnie)",
+    "description": null
+  },
+  "BossDefeatReward_ElecSnail": {
+    "localized_name": "Zwiększenie obrażeń elektrycznych (małe)",
     "description": null
   },
   "BossDefeatReward_FairyDragon": {
@@ -111,6 +171,14 @@
     "localized_name": "Zwiększenie obrażeń elektrycznych (średnie)",
     "description": null
   },
+  "BossDefeatReward_FireKirin": {
+    "localized_name": "Zwiększenie obrażeń ognistych (małe)",
+    "description": null
+  },
+  "BossDefeatReward_FlameBuffalo": {
+    "localized_name": "Zwiększenie obrażeń ognistych (małe)",
+    "description": null
+  },
   "BossDefeatReward_FlowerDinosaur_Electric": {
     "localized_name": "Zwiększenie obrażeń elektrycznych (małe)",
     "description": null
@@ -119,12 +187,32 @@
     "localized_name": "Zwiększenie obrażeń roślinnych (małe)",
     "description": null
   },
+  "BossDefeatReward_FoxExorcist": {
+    "localized_name": "Zwiększenie obrażeń ognistych (średnie)",
+    "description": null
+  },
+  "BossDefeatReward_FoxMage": {
+    "localized_name": "Zwiększenie obrażeń ognistych (małe)",
+    "description": null
+  },
+  "BossDefeatReward_GhostDragon": {
+    "localized_name": "Zwiększenie obrażeń smoczych (średnie)",
+    "description": null
+  },
   "BossDefeatReward_GhostRabbit": {
     "localized_name": "Zwiększenie obrażeń mrocznych (małe)",
     "description": null
   },
   "BossDefeatReward_GoldenHorse": {
     "localized_name": "Zwiększenie obrażeń ziemnych (średnie)",
+    "description": null
+  },
+  "BossDefeatReward_GrassGolem": {
+    "localized_name": "Zwiększenie obrażeń roślinnych (średnie)",
+    "description": null
+  },
+  "BossDefeatReward_GrassGolem_Dark": {
+    "localized_name": "Zwiększenie obrażeń mrocznych (średnie)",
     "description": null
   },
   "BossDefeatReward_GrassMammoth": {
@@ -159,6 +247,10 @@
     "localized_name": "Zwiększenie obrażeń wodnych (średnie)",
     "description": null
   },
+  "BossDefeatReward_IceFox": {
+    "localized_name": "Zwiększenie obrażeń lodowych (małe)",
+    "description": null
+  },
   "BossDefeatReward_IceHorse": {
     "localized_name": "Zwiększenie obrażeń lodowych (duże)",
     "description": null
@@ -177,6 +269,10 @@
   },
   "BossDefeatReward_JetDragon": {
     "localized_name": "Zwiększenie obrażeń smoczych (duże)",
+    "description": null
+  },
+  "BossDefeatReward_KabukiMan": {
+    "localized_name": "Zwiększenie obrażeń ognistych (średnie)",
     "description": null
   },
   "BossDefeatReward_KingAlpaca": {
@@ -207,12 +303,32 @@
     "localized_name": "Zwiększenie obrażeń smoczych (małe)",
     "description": null
   },
+  "BossDefeatReward_LilyQueen": {
+    "localized_name": "Zwiększenie obrażeń roślinnych (duże)",
+    "description": null
+  },
   "BossDefeatReward_LilyQueen_Dark": {
     "localized_name": "Zwiększenie obrażeń mrocznych (małe)",
     "description": null
   },
+  "BossDefeatReward_LotusDragon": {
+    "localized_name": "Zwiększenie obrażeń wodnych (średnie)",
+    "description": null
+  },
+  "BossDefeatReward_Manticore": {
+    "localized_name": "Zwiększenie obrażeń ognistych (małe)",
+    "description": null
+  },
+  "BossDefeatReward_MoonChild": {
+    "localized_name": "Zwiększenie obrażeń mrocznych (średnie)",
+    "description": null
+  },
   "BossDefeatReward_MopKing": {
     "localized_name": "Zwiększenie obrażeń lodowych (małe)",
+    "description": null
+  },
+  "BossDefeatReward_MushroomLady": {
+    "localized_name": "Zwiększenie obrażeń roślinnych (małe)",
     "description": null
   },
   "BossDefeatReward_Mutant": {
@@ -255,6 +371,14 @@
     "localized_name": "Zwiększenie obrażeń mrocznych (małe)",
     "description": null
   },
+  "BossDefeatReward_RockBeast": {
+    "localized_name": "Zwiększenie obrażeń ziemnych (średnie)",
+    "description": null
+  },
+  "BossDefeatReward_RockBeast_Ice": {
+    "localized_name": "Zwiększenie obrażeń lodowych (średnie)",
+    "description": null
+  },
   "BossDefeatReward_Ronin": {
     "localized_name": "Zwiększenie obrażeń od ognia (średnie)",
     "description": null
@@ -275,6 +399,10 @@
     "localized_name": "Zwiększenie obrażeń wodnych (małe)",
     "description": null
   },
+  "BossDefeatReward_ScorpionMan_Electric": {
+    "localized_name": "Zwiększenie obrażeń elektrycznych (małe)",
+    "description": null
+  },
   "BossDefeatReward_SkyDragon": {
     "localized_name": "Zwiększenie obrażeń smoczych (małe)",
     "description": null
@@ -287,12 +415,28 @@
     "localized_name": "Zwiększenie obrażeń elektrycznych (małe)",
     "description": null
   },
+  "BossDefeatReward_ThunderFluffyBird": {
+    "localized_name": "Zwiększenie obrażeń elektrycznych (małe)",
+    "description": null
+  },
   "BossDefeatReward_Umihebi": {
     "localized_name": "Zwiększenie obrażeń wodnych (średnie)",
     "description": null
   },
   "BossDefeatReward_VioletFairy": {
     "localized_name": "Zwiększenie obrażeń roślinnych (średnie)",
+    "description": null
+  },
+  "BossDefeatReward_VolcanicMonster": {
+    "localized_name": "Zwiększenie obrażeń ziemnych (małe)",
+    "description": null
+  },
+  "BossDefeatReward_VolcanoDragon": {
+    "localized_name": "Zwiększenie obrażeń ognistych (małe)",
+    "description": null
+  },
+  "BossDefeatReward_VolcanoDragon_Ice": {
+    "localized_name": "Zwiększenie obrażeń lodowych (średnie)",
     "description": null
   },
   "BossDefeatReward_WeaselDragon": {
@@ -305,6 +449,10 @@
   },
   "BossDefeatReward_WhiteDeer": {
     "localized_name": "Zwiększenie obrażeń neutralnych (średnie)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteDeer_Dark": {
+    "localized_name": "Zwiększenie obrażeń mrocznych (średnie)",
     "description": null
   },
   "BossDefeatReward_WhiteMoth": {
@@ -431,6 +579,10 @@
     "localized_name": "Wzmocnienie obrony Pala poziom 3",
     "description": null
   },
+  "Defense_ACC_up4_Otomo_Only_Equip": {
+    "localized_name": "Wzmocnienie obrony Pala poziom 4",
+    "description": null
+  },
   "Deffence_down1": {
     "localized_name": "Przygnębiony",
     "description": null
@@ -445,10 +597,18 @@
   },
   "Deffence_up2": {
     "localized_name": "Krzepkie ciało",
-    "description": null
+    "description": "Obrona +20.0% Niewrażliwość na zachwianie"
+  },
+  "Deffence_up2_2": {
+    "localized_name": "Waga ciężka",
+    "description": "Obrona+20.0% Niewrażliwość na odrzut"
   },
   "Deffence_up3": {
     "localized_name": "Diamentowe ciało",
+    "description": "Obrona +30.0% Niewrażliwość na zachwianie Niewrażliwość na odrzut"
+  },
+  "Defuser_ExplosiveSpore_EquipSkill": {
+    "localized_name": "Zmniejszenie obrażeń od wybuchów",
     "description": null
   },
   "ElementBoost_Aqua_1_PAL": {
@@ -491,6 +651,10 @@
     "localized_name": "Zwiększenie obrażeń mrocznych Pala poziom 3",
     "description": null
   },
+  "ElementBoost_Dark_4_Otomo_Only_Equip": {
+    "localized_name": "Zwiększenie obrażeń mrocznych Pala poziom 4",
+    "description": null
+  },
   "ElementBoost_Dragon_1_BossDefeat": {
     "localized_name": "Zwiększenie obrażeń smoczych (małe)",
     "description": null
@@ -521,6 +685,10 @@
   },
   "ElementBoost_Dragon_3_Otomo_Only_Equip": {
     "localized_name": "Zwiększenie obrażeń smoczych Pala poziom 3",
+    "description": null
+  },
+  "ElementBoost_Dragon_4_Otomo_Only_Equip": {
+    "localized_name": "Zwiększenie obrażeń smoczych Pala poziom 4",
     "description": null
   },
   "ElementBoost_Earth_1_BossDefeat": {
@@ -555,6 +723,10 @@
     "localized_name": "Zwiększenie obrażeń ziemnych Pala poziom 3",
     "description": null
   },
+  "ElementBoost_Earth_4_Otomo_Only_Equip": {
+    "localized_name": "Zwiększenie obrażeń ziemnych Pala poziom 4",
+    "description": null
+  },
   "ElementBoost_Electricity_1_BossDefeat": {
     "localized_name": "Zwiększenie obrażeń elektrycznych (małe)",
     "description": null
@@ -577,6 +749,10 @@
   },
   "ElementBoost_Electricity_3_Otomo_Only_Equip": {
     "localized_name": "Zwiększenie obrażeń elektrycznych Pala poziom 3",
+    "description": null
+  },
+  "ElementBoost_Electricity_4_Otomo_Only_Equip": {
+    "localized_name": "Zwiększenie obrażeń elektrycznych Pala poziom 4",
     "description": null
   },
   "ElementBoost_Fire_1_BossDefeat": {
@@ -611,6 +787,10 @@
     "localized_name": "Zwiększenie obrażeń od ognia Pala poziom 3",
     "description": null
   },
+  "ElementBoost_Fire_4_Otomo_Only_Equip": {
+    "localized_name": "Zwiększenie obrażeń ognistych Pala poziom 4",
+    "description": null
+  },
   "ElementBoost_Ice_1_BossDefeat": {
     "localized_name": "Zwiększenie obrażeń lodowych (małe)",
     "description": null
@@ -641,6 +821,10 @@
   },
   "ElementBoost_Ice_3_Otomo_Only_Equip": {
     "localized_name": "Zwiększenie obrażeń lodowych Pala poziom 3",
+    "description": null
+  },
+  "ElementBoost_Ice_4_Otomo_Only_Equip": {
+    "localized_name": "Zwiększenie obrażeń lodowych Pala poziom 4",
     "description": null
   },
   "ElementBoost_Leaf_1_BossDefeat": {
@@ -675,6 +859,10 @@
     "localized_name": "Zwiększenie obrażeń roślinnych Pala poziom 3",
     "description": null
   },
+  "ElementBoost_Leaf_4_Otomo_Only_Equip": {
+    "localized_name": "Zwiększenie obrażeń roślinnych Pala poziom 4",
+    "description": null
+  },
   "ElementBoost_Normal_1_BossDefeat": {
     "localized_name": "Zwiększenie obrażeń neutralnych (małe)",
     "description": null
@@ -705,6 +893,10 @@
   },
   "ElementBoost_Normal_3_Otomo_Only_Equip": {
     "localized_name": "Zwiększenie obrażeń neutralnych Pala poziom 3",
+    "description": null
+  },
+  "ElementBoost_Normal_4_Otomo_Only_Equip": {
+    "localized_name": "Zwiększenie obrażeń neutralnych Pala poziom 4",
     "description": null
   },
   "ElementBoost_Thunder_1_PAL": {
@@ -739,6 +931,10 @@
     "localized_name": "Zwiększenie obrażeń wodnych Pala poziom 3",
     "description": null
   },
+  "ElementBoost_Water_4_Otomo_Only_Equip": {
+    "localized_name": "Zwiększenie obrażeń wodnych Pala poziom 4",
+    "description": null
+  },
   "ElementResist_Aqua_1": {
     "localized_name": "Redukcja obrażeń wodnych poziom 1",
     "description": null
@@ -753,6 +949,10 @@
   },
   "ElementResist_Aqua_3": {
     "localized_name": "Redukcja obrażeń wodnych poziom 3",
+    "description": null
+  },
+  "ElementResist_Aqua_4": {
+    "localized_name": "Redukcja obrażeń wodnych poziom 4",
     "description": null
   },
   "ElementResist_Dark_1": {
@@ -771,6 +971,10 @@
     "localized_name": "Redukcja obrażeń mrocznych poziom 3",
     "description": null
   },
+  "ElementResist_Dark_4": {
+    "localized_name": "Redukcja obrażeń mrocznych poziom 4",
+    "description": null
+  },
   "ElementResist_Dragon_1": {
     "localized_name": "Redukcja obrażeń smoczych poziom 1",
     "description": null
@@ -785,6 +989,10 @@
   },
   "ElementResist_Dragon_3": {
     "localized_name": "Redukcja obrażeń smoczych poziom 3",
+    "description": null
+  },
+  "ElementResist_Dragon_4": {
+    "localized_name": "Redukcja obrażeń smoczych poziom 4",
     "description": null
   },
   "ElementResist_Earth_1": {
@@ -803,6 +1011,10 @@
     "localized_name": "Redukcja obrażeń ziemnych poziom 3",
     "description": null
   },
+  "ElementResist_Earth_4": {
+    "localized_name": "Redukcja obrażeń ziemnych poziom 4",
+    "description": null
+  },
   "ElementResist_Fire_1": {
     "localized_name": "Redukcja obrażeń od ognia poziom 1",
     "description": null
@@ -817,6 +1029,10 @@
   },
   "ElementResist_Fire_3": {
     "localized_name": "Redukcja obrażeń od ognia poziom 3",
+    "description": null
+  },
+  "ElementResist_Fire_4": {
+    "localized_name": "Redukcja obrażeń ognistych poziom 4",
     "description": null
   },
   "ElementResist_Ice_1": {
@@ -835,6 +1051,10 @@
     "localized_name": "Redukcja obrażeń lodowych poziom 3",
     "description": null
   },
+  "ElementResist_Ice_4": {
+    "localized_name": "Redukcja obrażeń lodowych poziom 4",
+    "description": null
+  },
   "ElementResist_Leaf_1": {
     "localized_name": "Redukcja obrażeń roślinnych poziom 1",
     "description": null
@@ -849,6 +1069,10 @@
   },
   "ElementResist_Leaf_3": {
     "localized_name": "Redukcja obrażeń roślinnych poziom 3",
+    "description": null
+  },
+  "ElementResist_Leaf_4": {
+    "localized_name": "Redukcja obrażeń roślinnych poziom 4",
     "description": null
   },
   "ElementResist_Normal_1": {
@@ -867,6 +1091,10 @@
     "localized_name": "Redukcja obrażeń neutralnych poziom 3",
     "description": null
   },
+  "ElementResist_Normal_4": {
+    "localized_name": "Redukcja obrażeń neutralnych poziom 4",
+    "description": null
+  },
   "ElementResist_Thunder_1": {
     "localized_name": "Redukcja obrażeń elektrycznych poziom 1",
     "description": null
@@ -883,8 +1111,16 @@
     "localized_name": "Redukcja obrażeń elektrycznych poziom 3",
     "description": null
   },
+  "ElementResist_Thunder_4": {
+    "localized_name": "Redukcja obrażeń elektrycznych poziom 4",
+    "description": null
+  },
   "EternalFlame": {
     "localized_name": "Wieczny płomień",
+    "description": null
+  },
+  "FriendshipPoint_Increase_EquipSkill": {
+    "localized_name": "Zwiększenie przyrostu zaufania Pali w drużynie",
     "description": null
   },
   "GYM_NAME_Desert": {
@@ -916,19 +1152,27 @@
     "description": null
   },
   "HP_ACC_up1": {
-    "localized_name": "Wzmocnienie HP poziom 1",
+    "localized_name": "Zwiększenie HP poziom 1",
     "description": null
   },
   "HP_ACC_up2": {
-    "localized_name": "Wzmocnienie HP poziom 2",
+    "localized_name": "Zwiększenie HP poziom 2",
     "description": null
   },
   "HP_ACC_up3": {
-    "localized_name": "Wzmocnienie HP poziom 3",
+    "localized_name": "Zwiększenie HP poziom 3",
+    "description": null
+  },
+  "HP_ACC_up4": {
+    "localized_name": "Zwiększenie HP poziom 4",
     "description": null
   },
   "Invader": {
     "localized_name": "Najeźdźca",
+    "description": null
+  },
+  "Invalid_ToxicGas_EquipSkill": {
+    "localized_name": "Neutralizacja obrażeń od trującego gazu",
     "description": null
   },
   "JumpCount_Increase1": {
@@ -949,7 +1193,7 @@
   },
   "Legend": {
     "localized_name": "Legenda",
-    "description": "Atak +20.0% Obrona +20.0% Prędkość ruchu wzrasta o 15.0%"
+    "description": "Atak +20.0% Obrona +20.0% Prędkość ruchu wzrasta o 20.0%"
   },
   "MaxInventoryWeight_up": {
     "localized_name": "Maksymalna nośność poziom 1",
@@ -975,6 +1219,14 @@
     "localized_name": "Maksymalna nośność poziom 3",
     "description": null
   },
+  "MaxInventoryWeight_up_Equip_4": {
+    "localized_name": "Maksymalna nośność poziom 4",
+    "description": null
+  },
+  "MiniNushi": {
+    "localized_name": "Wielki okaz",
+    "description": null
+  },
   "MoveSpeed_up_1": {
     "localized_name": "Zwinny",
     "description": "10.0% wzrost prędkości ruchu."
@@ -987,8 +1239,28 @@
     "localized_name": "Szybki",
     "description": "30.0% wzrost prędkości ruchu."
   },
+  "MutationPal_Babysitter": {
+    "localized_name": "Niania",
+    "description": "Podczas pobytu w bazie: tempo produkcji jaj Pali przypisanych do farmy hodowlanej +30.0%, tempo inkubacji +30.0%"
+  },
+  "MutationPal_ExplosionResist": {
+    "localized_name": "Ciężki pancerz",
+    "description": "Obrażenia od wybuchów: <Status_Up>Niewrażliwość</>"
+  },
+  "MutationPal_Immortal": {
+    "localized_name": "Nieśmiertelność",
+    "description": "Kradzież życia +5.0% Naturalna regeneracja HP Pala +100.0% Atak +15.0%"
+  },
+  "MutationPal_Mutant": {
+    "localized_name": "Osobliwa natura",
+    "description": "Naturalna regeneracja HP Pala i gracza +50.0% Obrona +{EffectValue4}% Obrażenia od trucizny: <Status_Up>Niewrażliwość</> Obrażenia od podpalenia: <Status_Up>Niewrażliwość</>"
+  },
+  "NightOwl": {
+    "localized_name": "Nocny marek",
+    "description": "Prawdopodobnie przez zarywanie nocy ma tendencję do ucinania sobie drzemek w ciągu dnia."
+  },
   "Nocturnal": {
-    "localized_name": "Nocna zmiana",
+    "localized_name": "Bezsenność",
     "description": "Nie śpi i kontynuuje pracę również nocą."
   },
   "NonKilling": {
@@ -1107,9 +1379,25 @@
     "localized_name": "Zwiększenie EXP Pala poziom 3",
     "description": null
   },
+  "PlayerSP_DecreaseRate_Passive": {
+    "localized_name": "Reduktor zmęczenia",
+    "description": null
+  },
   "Rare": {
     "localized_name": "Szczęściarz",
     "description": null
+  },
+  "ReloadSpeedUp_Passive": {
+    "localized_name": "Mistrz przeładowania",
+    "description": null
+  },
+  "RideJumpCount_Increase1": {
+    "localized_name": "Lekki skok",
+    "description": "Liczba skoków podczas jazdy +1"
+  },
+  "RideJumpCount_Increase2": {
+    "localized_name": "Podniebny krok",
+    "description": "Liczba skoków podczas jazdy +2"
   },
   "SalePrice_Down_1": {
     "localized_name": "Tandetny",
@@ -1126,6 +1414,18 @@
   "Salvation": {
     "localized_name": "Wybawca",
     "description": null
+  },
+  "SelfDeathAddItemDrop_up_1": {
+    "localized_name": "Ostatni podarek",
+    "description": "Liczba własnych upuszczanych przedmiotów +15.0%"
+  },
+  "SelfDeathAddItemDrop_up_2": {
+    "localized_name": "Duch hojności",
+    "description": "Liczba własnych upuszczanych przedmiotów +50.0%"
+  },
+  "SelfDeathAddItemDrop_up_3": {
+    "localized_name": "Królewska szczodrość",
+    "description": "Liczba własnych upuszczanych przedmiotów +100.0%"
   },
   "SphereModule_Curve": {
     "localized_name": "Krzywa sfery +1",
@@ -1153,19 +1453,43 @@
   },
   "Stamina_Down_1": {
     "localized_name": "Chorobliwy",
-    "description": "Maks. wytrzymałość -25.0% *Ten efekt dotyczy wyłącznie Pali, na których można jeździć lub latać."
+    "description": "Maks. wytrzymałość -25.0% *Ten efekt dotyczy wyłącznie Pali, na których można jeździć."
   },
   "Stamina_Up_1": {
     "localized_name": "Nieskończona kondycja",
-    "description": "Maks. wytrzymałość +50.0% *Ten efekt dotyczy wyłącznie Pali, na których można jeździć lub latać."
+    "description": "Maks. wytrzymałość +50.0% *Ten efekt dotyczy wyłącznie Pali, na których można jeździć."
   },
   "Stamina_Up_2": {
     "localized_name": "Zdrowy jak byk",
-    "description": "Maks. wytrzymałość +25.0% *Ten efekt dotyczy wyłącznie Pali, na których można jeździć lub latać."
+    "description": "Maks. wytrzymałość +25.0% *Ten efekt dotyczy wyłącznie Pali, na których można jeździć."
   },
   "Stamina_Up_3": {
     "localized_name": "Wieczny silnik",
-    "description": "Maks. wytrzymałość +75.0% *Ten efekt dotyczy wyłącznie Pali, na których można jeździć lub latać."
+    "description": "Maks. wytrzymałość +75.0% *Ten efekt dotyczy wyłącznie Pali, na których można jeździć."
+  },
+  "StonDrop_Boost_1": {
+    "localized_name": "Zwiększone wydobycie poz. 1",
+    "description": "Nieznacznie zwiększa ilość upuszczanego kamienia i rudy"
+  },
+  "StonDrop_Boost_2": {
+    "localized_name": "Zwiększone wydobycie poz. 2",
+    "description": "Zwiększa ilość upuszczanego kamienia i rudy"
+  },
+  "StonDrop_Boost_3": {
+    "localized_name": "Zwiększone wydobycie poz. 3",
+    "description": "Znacznie zwiększa ilość upuszczanego kamienia i rudy"
+  },
+  "StonDrop_Boost_4": {
+    "localized_name": "Zwiększone wydobycie poz. 4",
+    "description": "Bardzo mocno zwiększa ilość upuszczanego kamienia i rudy"
+  },
+  "StonDrop_Boost_5": {
+    "localized_name": "Zwiększone wydobycie poz. 5",
+    "description": "Drastycznie zwiększa ilość upuszczanego kamienia i rudy"
+  },
+  "StonWoodDrop_Boost": {
+    "localized_name": "Zwiększone wydobycie i wyrąb",
+    "description": "Znacznie zwiększa ilość upuszczanego drewna, kamienia i rudy"
   },
   "SwimSpeed_up_1": {
     "localized_name": "Elastyczny pływak",
@@ -1217,7 +1541,7 @@
   },
   "Test_PalEgg_HatchingSpeed_Up": {
     "localized_name": "Filantrop",
-    "description": "Po przypisaniu do Farmy Hodowlanej prędkość hodowli wzrasta o 100.0%."
+    "description": "Po przypisaniu do Farmy Hodowlanej prędkość produkcji jaj wzrasta o 100.0%."
   },
   "TrainerATK_UP_1": {
     "localized_name": "Straż przednia",
@@ -1247,6 +1571,26 @@
     "localized_name": "Syrena otchłani",
     "description": null
   },
+  "WoodDrop_Boost_1": {
+    "localized_name": "Zwiększony wyrąb poz. 1",
+    "description": "Nieznacznie zwiększa ilość upuszczanego drewna"
+  },
+  "WoodDrop_Boost_2": {
+    "localized_name": "Zwiększony wyrąb poz. 2",
+    "description": "Zwiększa ilość upuszczanego drewna"
+  },
+  "WoodDrop_Boost_3": {
+    "localized_name": "Zwiększony wyrąb poz. 3",
+    "description": "Znacznie zwiększa ilość upuszczanego drewna"
+  },
+  "WoodDrop_Boost_4": {
+    "localized_name": "Zwiększony wyrąb poz. 4",
+    "description": "Bardzo mocno zwiększa ilość upuszczanego drewna"
+  },
+  "WoodDrop_Boost_5": {
+    "localized_name": "Zwiększony wyrąb poz. 5",
+    "description": "Drastycznie zwiększa ilość upuszczanego drewna"
+  },
   "WorkSpeed_ACC_up1": {
     "localized_name": "Szybkie rzemiosło poziom 1",
     "description": null
@@ -1258,6 +1602,46 @@
   "WorkSpeed_ACC_up3": {
     "localized_name": "Szybkie rzemiosło poziom 3",
     "description": null
+  },
+  "WorkSpeed_ACC_up4": {
+    "localized_name": "Szybkie rzemiosło poziom 4",
+    "description": null
+  },
+  "WorkSuitabilityAddRank_MonsterFarm_1": {
+    "localized_name": "Wychowanek zagrody",
+    "description": "Rolnictwo: Przydatność do pracy+1"
+  },
+  "WorkSuitabilityAddRank_MonsterFarm_2": {
+    "localized_name": "Gospodarz zagrody",
+    "description": "Rolnictwo: Przydatność do pracy+2"
+  },
+  "WorldTree_ATK": {
+    "localized_name": "Obosieczny święty miecz",
+    "description": "Atak <NumBlue_13>+</>50.0% Obrona -30.0% Nie znika nawet po zbliżeniu się do drzew i skał Drzewa Świata."
+  },
+  "WorldTree_ATK_DEF": {
+    "localized_name": "Bóg zniszczenia",
+    "description": "Atak <NumBlue_13>+</>40.0% Obrona <NumBlue_13>+</>20.0% Maks. HP -50.0% Nie znika nawet zbliżeniu się do drzew i skał Drzewa Świata."
+  },
+  "WorldTree_CraftSpeed": {
+    "localized_name": "Diabelskie dłonie",
+    "description": "Prędkość pracy <NumBlue_13>+</>90.0<NumBlue_13>%</> Szybszy spadek wartości SAN +15% Nie znika nawet po zbliżeniu się do drzew i skał Drzewa Świata."
+  },
+  "WorldTree_DEF": {
+    "localized_name": "Żywa tarcza sanktuarium",
+    "description": "Obrona <NumBlue_13>+</>50.0% Atak -30.0% Nie znika nawet po zbliżeniu się do drzew i skał Drzewa Świata."
+  },
+  "WorldTree_FullStomach": {
+    "localized_name": "Kolebka Boskiego Drzewa",
+    "description": "Odporność na głód +50% HP -20.0<NumRed_13>%</> Nie znika nawet po zbliżeniu się do drzew i skał Drzewa Świata."
+  },
+  "WorldTree_MoveSpeed": {
+    "localized_name": "Skok wymiarowy",
+    "description": "Prędkość ruchu <NumBlue_13>+</>50.0<NumBlue_13>%</> Szybszy wzrost głodu +15% Nie znika nawet po zbliżeniu się do drzew i skał Drzewa Świata."
+  },
+  "WorldTree_Sanity": {
+    "localized_name": "Pustelnik",
+    "description": "Odporność na utratę wartości SAN +50% Prędkość pracy -20.0<NumRed_13>%</> Nie znika nawet po zbliżeniu się do drzew i skał Drzewa Świata."
   },
   "YakushimaDagameBoost_Magic_Equip": {
     "localized_name": "Boska moc: Magia",
@@ -1289,6 +1673,10 @@
   },
   "defense_ACC_up3": {
     "localized_name": "Wzmocnienie Obrony poziom 3",
+    "description": null
+  },
+  "defense_ACC_up4": {
+    "localized_name": "Wzmocnienie obrony poziom 4",
     "description": null
   }
 }

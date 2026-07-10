@@ -23,12 +23,20 @@
     "localized_name": "Aumento de ataque Nv. 1",
     "description": null
   },
+  "Attack_ACC_up1_Armor": {
+    "localized_name": "Aumento de ataque (menor) Nv. 1",
+    "description": null
+  },
   "Attack_ACC_up1_Otomo_Only_Equip": {
     "localized_name": "Aumento de ataque de los Pals Nv. 1",
     "description": null
   },
   "Attack_ACC_up2": {
     "localized_name": "Aumento de ataque Nv. 2",
+    "description": null
+  },
+  "Attack_ACC_up2_Armor": {
+    "localized_name": "Aumento de ataque (menor) Nv. 2",
     "description": null
   },
   "Attack_ACC_up2_Otomo_Only_Equip": {
@@ -39,8 +47,32 @@
     "localized_name": "Aumento de ataque Nv. 3",
     "description": null
   },
+  "Attack_ACC_up3_Armor": {
+    "localized_name": "Aumento de ataque (menor) Nv. 3",
+    "description": null
+  },
   "Attack_ACC_up3_Otomo_Only_Equip": {
     "localized_name": "Aumento de ataque de los Pals Nv. 3",
+    "description": null
+  },
+  "Attack_ACC_up4": {
+    "localized_name": "Aumento de ataque Nv. 4",
+    "description": null
+  },
+  "Attack_ACC_up4_Armor": {
+    "localized_name": "Aumento de ataque (menor) Nv. 4",
+    "description": null
+  },
+  "Attack_ACC_up4_Otomo_Only_Equip": {
+    "localized_name": "Aumento de ataque de los Pals Nv. 4",
+    "description": null
+  },
+  "AutoHPRegeneRate_Passive": {
+    "localized_name": "Instructor de curación",
+    "description": null
+  },
+  "AvoidDurationUp_EquipSkill_2": {
+    "localized_name": "Extensión de invulnerabilidad al esquivar",
     "description": null
   },
   "BossDefeatReward_AmaterasuWolf_Dark": {
@@ -79,6 +111,10 @@
     "localized_name": "Aumenta el daño tipo planta",
     "description": null
   },
+  "BossDefeatReward_CactusDoll": {
+    "localized_name": "Aumenta un poco el daño tipo planta",
+    "description": null
+  },
   "BossDefeatReward_CaptainPenguin": {
     "localized_name": "Aumenta un poco el daño tipo agua",
     "description": null
@@ -91,12 +127,36 @@
     "localized_name": "Aumenta un poco el daño tipo oscuridad",
     "description": null
   },
+  "BossDefeatReward_CubeTurtle": {
+    "localized_name": "Aumenta un poco el daño tipo tierra",
+    "description": null
+  },
+  "BossDefeatReward_CubeTurtle_Neutral": {
+    "localized_name": "Aumenta el daño no elemental",
+    "description": null
+  },
   "BossDefeatReward_DarkScorpion": {
     "localized_name": "Aumenta un poco el daño tipo oscuridad",
     "description": null
   },
   "BossDefeatReward_DarkScorpion_Ground": {
     "localized_name": "Aumenta un poco el daño tipo tierra",
+    "description": null
+  },
+  "BossDefeatReward_DomeArmorDragon": {
+    "localized_name": "Aumenta mucho el daño tipo tierra",
+    "description": null
+  },
+  "BossDefeatReward_ElecLizard": {
+    "localized_name": "Aumenta un poco el daño tipo rayo",
+    "description": null
+  },
+  "BossDefeatReward_ElecPanda": {
+    "localized_name": "Aumenta el daño tipo rayo",
+    "description": null
+  },
+  "BossDefeatReward_ElecSnail": {
+    "localized_name": "Aumenta un poco el daño tipo rayo",
     "description": null
   },
   "BossDefeatReward_FairyDragon": {
@@ -111,6 +171,14 @@
     "localized_name": "Aumenta el daño tipo rayo",
     "description": null
   },
+  "BossDefeatReward_FireKirin": {
+    "localized_name": "Aumenta un poco el daño tipo fuego",
+    "description": null
+  },
+  "BossDefeatReward_FlameBuffalo": {
+    "localized_name": "Aumenta un poco el daño tipo fuego",
+    "description": null
+  },
   "BossDefeatReward_FlowerDinosaur_Electric": {
     "localized_name": "Aumenta un poco el daño tipo rayo",
     "description": null
@@ -119,12 +187,32 @@
     "localized_name": "Aumenta un poco el daño tipo planta",
     "description": null
   },
+  "BossDefeatReward_FoxExorcist": {
+    "localized_name": "Aumenta el daño tipo fuego",
+    "description": null
+  },
+  "BossDefeatReward_FoxMage": {
+    "localized_name": "Aumenta un poco el daño tipo fuego",
+    "description": null
+  },
+  "BossDefeatReward_GhostDragon": {
+    "localized_name": "Aumenta el daño tipo dragón",
+    "description": null
+  },
   "BossDefeatReward_GhostRabbit": {
     "localized_name": "Aumenta un poco el daño tipo oscuridad",
     "description": null
   },
   "BossDefeatReward_GoldenHorse": {
     "localized_name": "Aumenta el daño tipo tierra",
+    "description": null
+  },
+  "BossDefeatReward_GrassGolem": {
+    "localized_name": "Aumenta el daño tipo planta",
+    "description": null
+  },
+  "BossDefeatReward_GrassGolem_Dark": {
+    "localized_name": "Aumenta el daño tipo oscuridad",
     "description": null
   },
   "BossDefeatReward_GrassMammoth": {
@@ -159,6 +247,10 @@
     "localized_name": "Aumenta el daño tipo agua",
     "description": null
   },
+  "BossDefeatReward_IceFox": {
+    "localized_name": "Aumenta un poco el daño tipo hielo",
+    "description": null
+  },
   "BossDefeatReward_IceHorse": {
     "localized_name": "Aumenta mucho el daño tipo hielo",
     "description": null
@@ -177,6 +269,10 @@
   },
   "BossDefeatReward_JetDragon": {
     "localized_name": "Aumenta mucho el daño tipo dragón",
+    "description": null
+  },
+  "BossDefeatReward_KabukiMan": {
+    "localized_name": "Aumenta el daño tipo fuego",
     "description": null
   },
   "BossDefeatReward_KingAlpaca": {
@@ -207,12 +303,32 @@
     "localized_name": "Aumenta un poco el daño tipo dragón",
     "description": null
   },
+  "BossDefeatReward_LilyQueen": {
+    "localized_name": "Aumenta mucho el daño tipo planta",
+    "description": null
+  },
   "BossDefeatReward_LilyQueen_Dark": {
     "localized_name": "Aumenta un poco el daño tipo oscuridad",
     "description": null
   },
+  "BossDefeatReward_LotusDragon": {
+    "localized_name": "Aumenta el daño tipo agua",
+    "description": null
+  },
+  "BossDefeatReward_Manticore": {
+    "localized_name": "Aumenta un poco el daño tipo fuego",
+    "description": null
+  },
+  "BossDefeatReward_MoonChild": {
+    "localized_name": "Aumenta el daño tipo oscuridad",
+    "description": null
+  },
   "BossDefeatReward_MopKing": {
     "localized_name": "Aumenta un poco el daño tipo hielo",
+    "description": null
+  },
+  "BossDefeatReward_MushroomLady": {
+    "localized_name": "Aumenta un poco el daño tipo planta",
     "description": null
   },
   "BossDefeatReward_Mutant": {
@@ -255,6 +371,14 @@
     "localized_name": "Aumenta un poco el daño tipo oscuridad",
     "description": null
   },
+  "BossDefeatReward_RockBeast": {
+    "localized_name": "Aumenta el daño tipo tierra",
+    "description": null
+  },
+  "BossDefeatReward_RockBeast_Ice": {
+    "localized_name": "Aumenta el daño tipo hielo",
+    "description": null
+  },
   "BossDefeatReward_Ronin": {
     "localized_name": "Aumenta el daño tipo fuego",
     "description": null
@@ -275,6 +399,10 @@
     "localized_name": "Aumenta un poco el daño tipo agua",
     "description": null
   },
+  "BossDefeatReward_ScorpionMan_Electric": {
+    "localized_name": "Aumenta un poco el daño tipo rayo",
+    "description": null
+  },
   "BossDefeatReward_SkyDragon": {
     "localized_name": "Aumenta un poco el daño tipo dragón",
     "description": null
@@ -287,12 +415,28 @@
     "localized_name": "Aumenta un poco el daño tipo rayo",
     "description": null
   },
+  "BossDefeatReward_ThunderFluffyBird": {
+    "localized_name": "Aumenta un poco el daño tipo rayo",
+    "description": null
+  },
   "BossDefeatReward_Umihebi": {
     "localized_name": "Aumenta el daño tipo agua",
     "description": null
   },
   "BossDefeatReward_VioletFairy": {
     "localized_name": "Aumenta el daño tipo planta",
+    "description": null
+  },
+  "BossDefeatReward_VolcanicMonster": {
+    "localized_name": "Aumenta un poco el daño tipo tierra",
+    "description": null
+  },
+  "BossDefeatReward_VolcanoDragon": {
+    "localized_name": "Aumenta un poco el daño tipo fuego",
+    "description": null
+  },
+  "BossDefeatReward_VolcanoDragon_Ice": {
+    "localized_name": "Aumenta el daño tipo hielo",
     "description": null
   },
   "BossDefeatReward_WeaselDragon": {
@@ -305,6 +449,10 @@
   },
   "BossDefeatReward_WhiteDeer": {
     "localized_name": "Aumenta el daño no elemental",
+    "description": null
+  },
+  "BossDefeatReward_WhiteDeer_Dark": {
+    "localized_name": "Aumenta el daño tipo oscuridad",
     "description": null
   },
   "BossDefeatReward_WhiteMoth": {
@@ -431,6 +579,10 @@
     "localized_name": "Aumento de defensa de los Pals Nv. 3",
     "description": null
   },
+  "Defense_ACC_up4_Otomo_Only_Equip": {
+    "localized_name": "Aumento de defensa de los Pals Nv. 4",
+    "description": null
+  },
   "Deffence_down1": {
     "localized_name": "Vulnerable",
     "description": null
@@ -445,10 +597,18 @@
   },
   "Deffence_up2": {
     "localized_name": "Cuerpo pétreo",
-    "description": null
+    "description": "Defensa +20.0% e Inmunidad al tambaleo"
+  },
+  "Deffence_up2_2": {
+    "localized_name": "Peso pesado",
+    "description": "Defensa +20.0% inmune al retroceso"
   },
   "Deffence_up3": {
     "localized_name": "Cuerpo adamantino",
+    "description": "Defensa +30.0% e Inmunidad al tambaleo y al retroceso"
+  },
+  "Defuser_ExplosiveSpore_EquipSkill": {
+    "localized_name": "Reducción de daño por explosión",
     "description": null
   },
   "ElementBoost_Aqua_1_PAL": {
@@ -491,6 +651,10 @@
     "localized_name": "Aumenta mucho el daño de tipo oscuridad de los Pals Nv. 3",
     "description": null
   },
+  "ElementBoost_Dark_4_Otomo_Only_Equip": {
+    "localized_name": "Aumenta mucho el daño de tipo oscuridad de los Pals Nv. 4",
+    "description": null
+  },
   "ElementBoost_Dragon_1_BossDefeat": {
     "localized_name": "Aumenta un poco el daño tipo dragón",
     "description": null
@@ -521,6 +685,10 @@
   },
   "ElementBoost_Dragon_3_Otomo_Only_Equip": {
     "localized_name": "Aumenta mucho el daño tipo dragón de los Pals Nv. 3",
+    "description": null
+  },
+  "ElementBoost_Dragon_4_Otomo_Only_Equip": {
+    "localized_name": "Aumenta mucho el daño tipo dragón de los Pals Nv. 4",
     "description": null
   },
   "ElementBoost_Earth_1_BossDefeat": {
@@ -555,6 +723,10 @@
     "localized_name": "Aumenta mucho el daño tipo tierra de los Pals Nv. 3",
     "description": null
   },
+  "ElementBoost_Earth_4_Otomo_Only_Equip": {
+    "localized_name": "Aumenta mucho el daño tipo tierra de los Pals Nv. 4",
+    "description": null
+  },
   "ElementBoost_Electricity_1_BossDefeat": {
     "localized_name": "Aumenta un poco el daño tipo rayo",
     "description": null
@@ -577,6 +749,10 @@
   },
   "ElementBoost_Electricity_3_Otomo_Only_Equip": {
     "localized_name": "Aumenta mucho el daño tipo rayo de los Pals Nv. 3",
+    "description": null
+  },
+  "ElementBoost_Electricity_4_Otomo_Only_Equip": {
+    "localized_name": "Aumenta mucho el daño tipo rayo de los Pals Nv. 4",
     "description": null
   },
   "ElementBoost_Fire_1_BossDefeat": {
@@ -611,6 +787,10 @@
     "localized_name": "Aumenta mucho el daño de tipo fuego de los Pals Nv. 3",
     "description": null
   },
+  "ElementBoost_Fire_4_Otomo_Only_Equip": {
+    "localized_name": "Aumenta mucho el daño de tipo fuego de los Pals Nv. 4",
+    "description": null
+  },
   "ElementBoost_Ice_1_BossDefeat": {
     "localized_name": "Aumenta un poco el daño tipo hielo",
     "description": null
@@ -641,6 +821,10 @@
   },
   "ElementBoost_Ice_3_Otomo_Only_Equip": {
     "localized_name": "Aumenta mucho el daño tipo hielo de los Pals Nv. 3",
+    "description": null
+  },
+  "ElementBoost_Ice_4_Otomo_Only_Equip": {
+    "localized_name": "Aumenta mucho el daño tipo hielo de los Pals Nv. 4",
     "description": null
   },
   "ElementBoost_Leaf_1_BossDefeat": {
@@ -675,6 +859,10 @@
     "localized_name": "Aumenta mucho el daño de tipo planta de los Pals Nv. 3",
     "description": null
   },
+  "ElementBoost_Leaf_4_Otomo_Only_Equip": {
+    "localized_name": "Aumenta mucho el daño de tipo planta de los Pals Nv. 4",
+    "description": null
+  },
   "ElementBoost_Normal_1_BossDefeat": {
     "localized_name": "Aumenta un poco el daño no elemental",
     "description": null
@@ -705,6 +893,10 @@
   },
   "ElementBoost_Normal_3_Otomo_Only_Equip": {
     "localized_name": "Aumenta mucho el daño no elemental de los Pals Nv. 3",
+    "description": null
+  },
+  "ElementBoost_Normal_4_Otomo_Only_Equip": {
+    "localized_name": "Aumenta mucho el daño no elemental de los Pals Nv. 4",
     "description": null
   },
   "ElementBoost_Thunder_1_PAL": {
@@ -739,6 +931,10 @@
     "localized_name": "Aumenta mucho el daño de tipo agua de los Pals Nv. 3",
     "description": null
   },
+  "ElementBoost_Water_4_Otomo_Only_Equip": {
+    "localized_name": "Aumenta mucho el daño de tipo agua de los Pals Nv. 4",
+    "description": null
+  },
   "ElementResist_Aqua_1": {
     "localized_name": "Reducción del daño tipo agua Nv. 1",
     "description": null
@@ -753,6 +949,10 @@
   },
   "ElementResist_Aqua_3": {
     "localized_name": "Reducción del daño tipo agua Nv. 3",
+    "description": null
+  },
+  "ElementResist_Aqua_4": {
+    "localized_name": "Reducción de daño tipo agua Nv. 4",
     "description": null
   },
   "ElementResist_Dark_1": {
@@ -771,6 +971,10 @@
     "localized_name": "Reducción del daño tipo oscuridad Nv. 3",
     "description": null
   },
+  "ElementResist_Dark_4": {
+    "localized_name": "Reducción de daño tipo oscuridad Nv. 4",
+    "description": null
+  },
   "ElementResist_Dragon_1": {
     "localized_name": "Reducción del daño tipo dragón Nv. 1",
     "description": null
@@ -785,6 +989,10 @@
   },
   "ElementResist_Dragon_3": {
     "localized_name": "Reducción del daño tipo dragón Nv. 3",
+    "description": null
+  },
+  "ElementResist_Dragon_4": {
+    "localized_name": "Reducción de daño tipo dragón Nv. 4",
     "description": null
   },
   "ElementResist_Earth_1": {
@@ -803,6 +1011,10 @@
     "localized_name": "Reducción del daño tipo tierra Nv. 3",
     "description": null
   },
+  "ElementResist_Earth_4": {
+    "localized_name": "Reducción de daño tipo tierra Nv. 4",
+    "description": null
+  },
   "ElementResist_Fire_1": {
     "localized_name": "Reducción del daño tipo fuego Nv. 1",
     "description": null
@@ -817,6 +1029,10 @@
   },
   "ElementResist_Fire_3": {
     "localized_name": "Reducción del daño tipo fuego Nv. 3",
+    "description": null
+  },
+  "ElementResist_Fire_4": {
+    "localized_name": "Reducción de daño tipo fuego Nv. 4",
     "description": null
   },
   "ElementResist_Ice_1": {
@@ -835,6 +1051,10 @@
     "localized_name": "Reducción del daño tipo hielo Nv. 3",
     "description": null
   },
+  "ElementResist_Ice_4": {
+    "localized_name": "Reducción de daño tipo hielo Nv. 4",
+    "description": null
+  },
   "ElementResist_Leaf_1": {
     "localized_name": "Reducción del daño tipo planta Nv. 1",
     "description": null
@@ -849,6 +1069,10 @@
   },
   "ElementResist_Leaf_3": {
     "localized_name": "Reducción del daño tipo planta Nv. 3",
+    "description": null
+  },
+  "ElementResist_Leaf_4": {
+    "localized_name": "Reducción de daño tipo planta Nv. 4",
     "description": null
   },
   "ElementResist_Normal_1": {
@@ -867,6 +1091,10 @@
     "localized_name": "Reducción del daño no elemental Nv. 3",
     "description": null
   },
+  "ElementResist_Normal_4": {
+    "localized_name": "Reducción del daño no elemental Nv. 4",
+    "description": null
+  },
   "ElementResist_Thunder_1": {
     "localized_name": "Reducción del daño tipo rayo Nv. 1",
     "description": null
@@ -883,8 +1111,16 @@
     "localized_name": "Reducción del daño tipo rayo Nv. 3",
     "description": null
   },
+  "ElementResist_Thunder_4": {
+    "localized_name": "Reducción de daño tipo rayo Nv. 4",
+    "description": null
+  },
   "EternalFlame": {
     "localized_name": "Llama eterna",
+    "description": null
+  },
+  "FriendshipPoint_Increase_EquipSkill": {
+    "localized_name": "Aumento de nivel de confianza ganada por los Pals del equipo",
     "description": null
   },
   "GYM_NAME_Desert": {
@@ -916,19 +1152,27 @@
     "description": null
   },
   "HP_ACC_up1": {
-    "localized_name": "Aumento de vida Nv. 1",
+    "localized_name": "Aumento de PV Nv. 1",
     "description": null
   },
   "HP_ACC_up2": {
-    "localized_name": "Aumento de vida Nv. 2",
+    "localized_name": "Aumento de PV Nv. 2",
     "description": null
   },
   "HP_ACC_up3": {
-    "localized_name": "Aumento de vida Nv. 3",
+    "localized_name": "Aumento de PV Nv. 3",
+    "description": null
+  },
+  "HP_ACC_up4": {
+    "localized_name": "Aumento de PV Nv. 4",
     "description": null
   },
   "Invader": {
     "localized_name": "Invasor",
+    "description": null
+  },
+  "Invalid_ToxicGas_EquipSkill": {
+    "localized_name": "Inmunidad al daño por gas tóxico",
     "description": null
   },
   "JumpCount_Increase1": {
@@ -949,7 +1193,7 @@
   },
   "Legend": {
     "localized_name": "Leyenda",
-    "description": "Aumenta el ataque en un 20.0 %, la defensa en un 20.0 % y la velocidad de movimiento en un 15.0 %."
+    "description": "Aumenta el ataque en un 20.0 %, la defensa en un 20.0 % y la velocidad de movimiento en un 20.0 %."
   },
   "MaxInventoryWeight_up": {
     "localized_name": "Aumento del peso máximo de carga Nv. 1",
@@ -975,6 +1219,14 @@
     "localized_name": "Aumento del peso máximo de carga Nv. 3",
     "description": null
   },
+  "MaxInventoryWeight_up_Equip_4": {
+    "localized_name": "Aumento del peso máximo de carga Nv. 4",
+    "description": null
+  },
+  "MiniNushi": {
+    "localized_name": "Gran captura",
+    "description": null
+  },
   "MoveSpeed_up_1": {
     "localized_name": "Trotador",
     "description": "Aumenta la velocidad de movimiento en un 10.0 %"
@@ -987,8 +1239,28 @@
     "localized_name": "Imparable",
     "description": "Aumenta la velocidad de movimiento en un 30.0 %"
   },
+  "MutationPal_Babysitter": {
+    "localized_name": "Niñera",
+    "description": "Mientras está en la base, los Pals asignados al criadero obtienen: Velocidad de generación de huevos +30.0% y Velocidad de incubación +30.0%"
+  },
+  "MutationPal_ExplosionResist": {
+    "localized_name": "Blindaje pesado",
+    "description": "<Status_Up>Inmune</> al daño por explosión"
+  },
+  "MutationPal_Immortal": {
+    "localized_name": "Inmortal",
+    "description": "Robo de vida +5.0% , Recuperación natural de PV del Pal +100.0% y Ataque +15.0%"
+  },
+  "MutationPal_Mutant": {
+    "localized_name": "Constitución especial",
+    "description": "Recuperación natural de PV de Pals y jugador +50.0% , Defensa +{EffectValue4}% e <Status_Up>Inmunidad</> a daño por veneno y quemadura"
+  },
+  "NightOwl": {
+    "localized_name": "Noctámbulo",
+    "description": "Parece que suele dormir siesta porque se queda despierto hasta tarde."
+  },
   "Nocturnal": {
-    "localized_name": "Nocturno",
+    "localized_name": "Insomnio",
     "description": "Seguirá trabajando por la noche sin descanso."
   },
   "NonKilling": {
@@ -1107,9 +1379,25 @@
     "localized_name": "Aumento de los puntos de EXP de los Pals Nv. 3",
     "description": null
   },
+  "PlayerSP_DecreaseRate_Passive": {
+    "localized_name": "Control de fatiga",
+    "description": null
+  },
   "Rare": {
     "localized_name": "Suertudo",
     "description": null
+  },
+  "ReloadSpeedUp_Passive": {
+    "localized_name": "Maestro de recarga",
+    "description": null
+  },
+  "RideJumpCount_Increase1": {
+    "localized_name": "Ligereza corporal",
+    "description": "Saltos al montar +1"
+  },
+  "RideJumpCount_Increase2": {
+    "localized_name": "Caminar por el aire",
+    "description": "Saltos al montar +2"
   },
   "SalePrice_Down_1": {
     "localized_name": "Andrajoso",
@@ -1126,6 +1414,18 @@
   "Salvation": {
     "localized_name": "Salvador",
     "description": null
+  },
+  "SelfDeathAddItemDrop_up_1": {
+    "localized_name": "Reparto",
+    "description": "Objetos obtenidos +15.0%"
+  },
+  "SelfDeathAddItemDrop_up_2": {
+    "localized_name": "Espíritu de servicio",
+    "description": "Objetos obtenidos +50.0%"
+  },
+  "SelfDeathAddItemDrop_up_3": {
+    "localized_name": "Generosidad desbordante",
+    "description": "Objetos obtenidos +100.0%"
   },
   "SphereModule_Curve": {
     "localized_name": "Curva esfera +1",
@@ -1166,6 +1466,30 @@
   "Stamina_Up_3": {
     "localized_name": "Máquina imparable",
     "description": "Energía máxima + 75.0% *Solo efectivo en Pals que se puedan montar."
+  },
+  "StonDrop_Boost_1": {
+    "localized_name": "Aumento de minería Nv. 1",
+    "description": "La cantidad de piedra/mineral obtenida aumenta ligeramente"
+  },
+  "StonDrop_Boost_2": {
+    "localized_name": "Aumento de minería Nv. 2",
+    "description": "La cantidad de piedra/mineral obtenida aumenta"
+  },
+  "StonDrop_Boost_3": {
+    "localized_name": "Aumento de minería Nv. 3",
+    "description": "La cantidad de piedra/mineral obtenida aumenta mucho"
+  },
+  "StonDrop_Boost_4": {
+    "localized_name": "Aumento de minería Nv. 4",
+    "description": "La cantidad de piedra/mineral obtenida aumenta considerablemente"
+  },
+  "StonDrop_Boost_5": {
+    "localized_name": "Aumento de minería Nv. 5",
+    "description": "La cantidad de piedra/mineral obtenida aumenta enormemente"
+  },
+  "StonWoodDrop_Boost": {
+    "localized_name": "Aumento de minería y tala",
+    "description": "La cantidad de piedra, madera y mineral obtenida aumenta considerablemente"
   },
   "SwimSpeed_up_1": {
     "localized_name": "Nado ágil",
@@ -1247,6 +1571,26 @@
     "localized_name": "Bruja",
     "description": null
   },
+  "WoodDrop_Boost_1": {
+    "localized_name": "Aumento de tala Nv. 1",
+    "description": "La cantidad de madera obtenida aumenta ligeramente"
+  },
+  "WoodDrop_Boost_2": {
+    "localized_name": "Aumento de tala Nv. 2",
+    "description": "La cantidad de madera obtenida aumenta"
+  },
+  "WoodDrop_Boost_3": {
+    "localized_name": "Aumento de tala Nv. 3",
+    "description": "La cantidad de madera obtenida aumenta mucho"
+  },
+  "WoodDrop_Boost_4": {
+    "localized_name": "Aumento de tala Nv. 4",
+    "description": "La cantidad de madera obtenida aumenta considerablemente"
+  },
+  "WoodDrop_Boost_5": {
+    "localized_name": "Aumento de tala Nv. 5",
+    "description": "La cantidad de madera obtenida aumenta enormemente"
+  },
   "WorkSpeed_ACC_up1": {
     "localized_name": "Velocidad de trabajo Nv. 1",
     "description": null
@@ -1258,6 +1602,46 @@
   "WorkSpeed_ACC_up3": {
     "localized_name": "Velocidad de trabajo Nv. 3",
     "description": null
+  },
+  "WorkSpeed_ACC_up4": {
+    "localized_name": "Velocidad de trabajo Nv. 4",
+    "description": null
+  },
+  "WorkSuitabilityAddRank_MonsterFarm_1": {
+    "localized_name": "Chico de granja",
+    "description": "Granja de Aptitud de trabajo+1"
+  },
+  "WorkSuitabilityAddRank_MonsterFarm_2": {
+    "localized_name": "Dueño de la granja",
+    "description": "Granja de Aptitud de trabajo+2"
+  },
+  "WorldTree_ATK": {
+    "localized_name": "Espada sagrada de doble filo",
+    "description": "Ataque <NumBlue_13>+</>50.0% Defensa -30.0% No desaparece aunque se acerque a los árboles o rocas del Árbol del Mundo"
+  },
+  "WorldTree_ATK_DEF": {
+    "localized_name": "Dios de la destrucción",
+    "description": "Ataque <NumBlue_13>+</>40.0% Defensa <NumBlue_13>+</>20.0% HP máximo -50.0% No desaparece aunque se acerque a los árboles o rocas del Árbol del Mundo"
+  },
+  "WorldTree_CraftSpeed": {
+    "localized_name": "Mano demoníaca",
+    "description": "Velocidad de trabajo <NumBlue_13>+</>90.0<NumBlue_13>%</> La COR disminuye más fácilmente <NumRed_13>+15.0%</> No desaparece aunque se acerque a los árboles o rocas del Árbol del Mundo"
+  },
+  "WorldTree_DEF": {
+    "localized_name": "Muralla sagrada",
+    "description": "Defensa <NumBlue_13>+</>50.0% Ataque -30.0% No desaparece aunque se acerque a los árboles o rocas del Árbol del Mundo"
+  },
+  "WorldTree_FullStomach": {
+    "localized_name": "Semillero del árbol sagrado",
+    "description": "La saciedad disminuye más lentamente <NumBlue_13>+50.0%</> PV-20.0<NumRed_13>%</> No desaparece aunque se acerque a los árboles o rocas del Árbol del Mundo"
+  },
+  "WorldTree_MoveSpeed": {
+    "localized_name": "Salto dimensional",
+    "description": "Velocidad de movimiento aumentada <NumBlue_13>+</>50.0<NumBlue_13>%</> La saciedad disminuye más fácilmente <NumRed_13>+15.0%</> No desaparece aunque se acerque a los árboles o rocas del Árbol del Mundo"
+  },
+  "WorldTree_Sanity": {
+    "localized_name": "Ermitaño",
+    "description": "La COR disminuye más lentamente <NumBlue_13>+50.0%</> Velocidad de trabajo -20.0<NumRed_13>%</> No desaparece aunque se acerque a los árboles o rocas del Árbol del Mundo"
   },
   "YakushimaDagameBoost_Magic_Equip": {
     "localized_name": "Poder sagrado (magia)",
@@ -1289,6 +1673,10 @@
   },
   "defense_ACC_up3": {
     "localized_name": "Aumento de defensa Nv. 3",
+    "description": null
+  },
+  "defense_ACC_up4": {
+    "localized_name": "Aumento de defensa Nv. 4",
     "description": null
   }
 }

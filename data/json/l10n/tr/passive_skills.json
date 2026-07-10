@@ -23,12 +23,20 @@
     "localized_name": "Saldırı Artışı Sv. 1",
     "description": null
   },
+  "Attack_ACC_up1_Armor": {
+    "localized_name": "Saldırı Arttırma (Küçük) Sv1",
+    "description": null
+  },
   "Attack_ACC_up1_Otomo_Only_Equip": {
     "localized_name": "Pal’ın Saldırı Artışı Sv.1",
     "description": null
   },
   "Attack_ACC_up2": {
     "localized_name": "Saldırı Artışı Sv. 2",
+    "description": null
+  },
+  "Attack_ACC_up2_Armor": {
+    "localized_name": "Saldırı Arttırma (Küçük) Sv2",
     "description": null
   },
   "Attack_ACC_up2_Otomo_Only_Equip": {
@@ -39,8 +47,32 @@
     "localized_name": "Saldırı Artışı Sv. 3",
     "description": null
   },
+  "Attack_ACC_up3_Armor": {
+    "localized_name": "Saldırı Arttırma (Küçük) Sv3",
+    "description": null
+  },
   "Attack_ACC_up3_Otomo_Only_Equip": {
     "localized_name": "Pal’ın Saldırı Artışı Sv.3",
+    "description": null
+  },
+  "Attack_ACC_up4": {
+    "localized_name": "Saldırı Arttırma Sv4",
+    "description": null
+  },
+  "Attack_ACC_up4_Armor": {
+    "localized_name": "Saldırı Arttırma (Küçük) Sv4",
+    "description": null
+  },
+  "Attack_ACC_up4_Otomo_Only_Equip": {
+    "localized_name": "Pal Saldırı Arttırma Sv4",
+    "description": null
+  },
+  "AutoHPRegeneRate_Passive": {
+    "localized_name": "Şifa Koçu",
+    "description": null
+  },
+  "AvoidDurationUp_EquipSkill_2": {
+    "localized_name": "Kaçınma Sırasındaki Yenilmezlik Süresinin Uzatılması",
     "description": null
   },
   "BossDefeatReward_AmaterasuWolf_Dark": {
@@ -79,6 +111,10 @@
     "localized_name": "Çimen Hasarı Geliştirmesi (Orta)",
     "description": null
   },
+  "BossDefeatReward_CactusDoll": {
+    "localized_name": "Bitki Hasarı Güçlendirme (Küçük)",
+    "description": null
+  },
   "BossDefeatReward_CaptainPenguin": {
     "localized_name": "Su Hasarı Geliştirmesi (Küçük)",
     "description": null
@@ -91,12 +127,36 @@
     "localized_name": "Karanlık Hasar Geliştirmesi (Küçük)",
     "description": null
   },
+  "BossDefeatReward_CubeTurtle": {
+    "localized_name": "Toprak Hasarı Güçlendirme (Küçük)",
+    "description": null
+  },
+  "BossDefeatReward_CubeTurtle_Neutral": {
+    "localized_name": "Nötr Hasar Güçlendirme (Orta)",
+    "description": null
+  },
   "BossDefeatReward_DarkScorpion": {
     "localized_name": "Karanlık Hasar Geliştirmesi (Küçük)",
     "description": null
   },
   "BossDefeatReward_DarkScorpion_Ground": {
     "localized_name": "Toprak Hasarı Geliştirmesi (Küçük)",
+    "description": null
+  },
+  "BossDefeatReward_DomeArmorDragon": {
+    "localized_name": "Toprak Hasarı Güçlendirmesi (Büyük)",
+    "description": null
+  },
+  "BossDefeatReward_ElecLizard": {
+    "localized_name": "Yıldırım Hasarı Güçlendirme (Küçük)",
+    "description": null
+  },
+  "BossDefeatReward_ElecPanda": {
+    "localized_name": "Yıldırım Hasarı Güçlendirme (Orta)",
+    "description": null
+  },
+  "BossDefeatReward_ElecSnail": {
+    "localized_name": "Yıldırım Hasarı Güçlendirme (Küçük)",
     "description": null
   },
   "BossDefeatReward_FairyDragon": {
@@ -111,6 +171,14 @@
     "localized_name": "Elektrik Hasarı Geliştirmesi (Orta)",
     "description": null
   },
+  "BossDefeatReward_FireKirin": {
+    "localized_name": "Ateş Hasarı Güçlendirme (Küçük)",
+    "description": null
+  },
+  "BossDefeatReward_FlameBuffalo": {
+    "localized_name": "Ateş Hasarı Güçlendirme (Küçük)",
+    "description": null
+  },
   "BossDefeatReward_FlowerDinosaur_Electric": {
     "localized_name": "Elektrik Hasarı Geliştirmesi (Küçük)",
     "description": null
@@ -119,12 +187,32 @@
     "localized_name": "Çimen Hasarı Geliştirmesi (Küçük)",
     "description": null
   },
+  "BossDefeatReward_FoxExorcist": {
+    "localized_name": "Ateş Hasarı Güçlendirme (Orta)",
+    "description": null
+  },
+  "BossDefeatReward_FoxMage": {
+    "localized_name": "Ateş Hasarı Güçlendirme (Küçük)",
+    "description": null
+  },
+  "BossDefeatReward_GhostDragon": {
+    "localized_name": "Yıldırım Hasarı Güçlendirme (Orta)",
+    "description": null
+  },
   "BossDefeatReward_GhostRabbit": {
     "localized_name": "Karanlık Hasar Geliştirmesi (Küçük)",
     "description": null
   },
   "BossDefeatReward_GoldenHorse": {
     "localized_name": "Toprak Hasarı Geliştirmesi (Orta)",
+    "description": null
+  },
+  "BossDefeatReward_GrassGolem": {
+    "localized_name": "Bitki Hasarı Güçlendirme (Orta)",
+    "description": null
+  },
+  "BossDefeatReward_GrassGolem_Dark": {
+    "localized_name": "Karanlık Hasarı Güçlendirme (Orta)",
     "description": null
   },
   "BossDefeatReward_GrassMammoth": {
@@ -159,6 +247,10 @@
     "localized_name": "Su Hasarı Geliştirmesi (Orta)",
     "description": null
   },
+  "BossDefeatReward_IceFox": {
+    "localized_name": "Buz Hasarı Güçlendirme (Küçük)",
+    "description": null
+  },
   "BossDefeatReward_IceHorse": {
     "localized_name": "Buz Hasarı Geliştirmesi (Geniş)",
     "description": null
@@ -177,6 +269,10 @@
   },
   "BossDefeatReward_JetDragon": {
     "localized_name": "Ejderha Hasarı Geliştirmesi (Geniş)",
+    "description": null
+  },
+  "BossDefeatReward_KabukiMan": {
+    "localized_name": "Ateş Hasarı Güçlendirme (Orta)",
     "description": null
   },
   "BossDefeatReward_KingAlpaca": {
@@ -207,12 +303,32 @@
     "localized_name": "Ejderha Hasarı Geliştirmesi (Küçük)",
     "description": null
   },
+  "BossDefeatReward_LilyQueen": {
+    "localized_name": "Bitki Hasarı Güçlendirme (Büyük)",
+    "description": null
+  },
   "BossDefeatReward_LilyQueen_Dark": {
     "localized_name": "Karanlık Hasar Geliştirmesi (Küçük)",
     "description": null
   },
+  "BossDefeatReward_LotusDragon": {
+    "localized_name": "Su Hasarı Güçlendirme (Orta)",
+    "description": null
+  },
+  "BossDefeatReward_Manticore": {
+    "localized_name": "Ateş Hasarı Güçlendirme (Küçük)",
+    "description": null
+  },
+  "BossDefeatReward_MoonChild": {
+    "localized_name": "Karanlık Hasarı Güçlendirme (Orta)",
+    "description": null
+  },
   "BossDefeatReward_MopKing": {
     "localized_name": "Buz Hasarı Geliştirmesi (Küçük)",
+    "description": null
+  },
+  "BossDefeatReward_MushroomLady": {
+    "localized_name": "Bitki Hasarı Güçlendirme (Küçük)",
     "description": null
   },
   "BossDefeatReward_Mutant": {
@@ -255,6 +371,14 @@
     "localized_name": "Karanlık Hasar Geliştirmesi (Küçük)",
     "description": null
   },
+  "BossDefeatReward_RockBeast": {
+    "localized_name": "Toprak Hasarı Güçlendirme (Orta)",
+    "description": null
+  },
+  "BossDefeatReward_RockBeast_Ice": {
+    "localized_name": "Buz Hasarı Güçlendirme (Orta)",
+    "description": null
+  },
   "BossDefeatReward_Ronin": {
     "localized_name": "Ateş Hasarı Geliştirmesi (Orta)",
     "description": null
@@ -275,6 +399,10 @@
     "localized_name": "Su Hasarı Geliştirmesi (Küçük)",
     "description": null
   },
+  "BossDefeatReward_ScorpionMan_Electric": {
+    "localized_name": "Yıldırım Hasarı Güçlendirme (Küçük)",
+    "description": null
+  },
   "BossDefeatReward_SkyDragon": {
     "localized_name": "Ejderha Hasarı Geliştirmesi (Küçük)",
     "description": null
@@ -287,12 +415,28 @@
     "localized_name": "Elektrik Hasarı Geliştirmesi (Küçük)",
     "description": null
   },
+  "BossDefeatReward_ThunderFluffyBird": {
+    "localized_name": "Yıldırım Hasarı Güçlendirme (Küçük)",
+    "description": null
+  },
   "BossDefeatReward_Umihebi": {
     "localized_name": "Su Hasarı Geliştirmesi (Orta)",
     "description": null
   },
   "BossDefeatReward_VioletFairy": {
     "localized_name": "Çimen Hasarı Geliştirmesi (Orta)",
+    "description": null
+  },
+  "BossDefeatReward_VolcanicMonster": {
+    "localized_name": "Toprak Hasarı Güçlendirme (Küçük)",
+    "description": null
+  },
+  "BossDefeatReward_VolcanoDragon": {
+    "localized_name": "Ateş Hasarı Güçlendirme (Küçük)",
+    "description": null
+  },
+  "BossDefeatReward_VolcanoDragon_Ice": {
+    "localized_name": "Buz Hasarı Güçlendirme (Orta)",
     "description": null
   },
   "BossDefeatReward_WeaselDragon": {
@@ -305,6 +449,10 @@
   },
   "BossDefeatReward_WhiteDeer": {
     "localized_name": "Nötr Hasar Geliştirmesi (Orta)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteDeer_Dark": {
+    "localized_name": "Karanlık Hasarı Güçlendirme (Orta)",
     "description": null
   },
   "BossDefeatReward_WhiteMoth": {
@@ -431,6 +579,10 @@
     "localized_name": "Pal’ın Savunma Artışı Sv.3",
     "description": null
   },
+  "Defense_ACC_up4_Otomo_Only_Equip": {
+    "localized_name": "Pal Savunma Arttırma Sv4",
+    "description": null
+  },
   "Deffence_down1": {
     "localized_name": "Mağdur",
     "description": null
@@ -445,10 +597,18 @@
   },
   "Deffence_up2": {
     "localized_name": "Kuvvetli Gövde",
-    "description": null
+    "description": "Savunma +20.0% sersemlik etkisine karşı bağışıklık."
+  },
+  "Deffence_up2_2": {
+    "localized_name": "Sadık Köpek Kuromaru",
+    "description": "Savunma +20.0% ve savrulma (uçurulma) etkisine karşı bağışıklık."
   },
   "Deffence_up3": {
     "localized_name": "Elmas Gövde",
+    "description": "Savunma +30.0% sersemlik etkisine karşı bağışıklık savrulma etkisine karşı bağışıklık."
+  },
+  "Defuser_ExplosiveSpore_EquipSkill": {
+    "localized_name": "Patlama Hasarının Azaltılması",
     "description": null
   },
   "ElementBoost_Aqua_1_PAL": {
@@ -491,6 +651,10 @@
     "localized_name": "Pal’ın Karanlık Özellikli Hasar Güçlendirmesi Sv.3",
     "description": null
   },
+  "ElementBoost_Dark_4_Otomo_Only_Equip": {
+    "localized_name": "Pal Karanlık Hasarı Güçlendirme Sv4",
+    "description": null
+  },
   "ElementBoost_Dragon_1_BossDefeat": {
     "localized_name": "Ejderha Hasarı Geliştirmesi (Küçük)",
     "description": null
@@ -521,6 +685,10 @@
   },
   "ElementBoost_Dragon_3_Otomo_Only_Equip": {
     "localized_name": "Pal’ın Ejderha Özellikli Hasar Güçlendirmesi Sv.3",
+    "description": null
+  },
+  "ElementBoost_Dragon_4_Otomo_Only_Equip": {
+    "localized_name": "Pal Ejderha Hasarı Güçlendirme Sv4",
     "description": null
   },
   "ElementBoost_Earth_1_BossDefeat": {
@@ -555,6 +723,10 @@
     "localized_name": "Pal’ın Toprak Özellikli Hasar Güçlendirmesi Sv.3",
     "description": null
   },
+  "ElementBoost_Earth_4_Otomo_Only_Equip": {
+    "localized_name": "Pal Toprak Hasarı Güçlendirme Sv4",
+    "description": null
+  },
   "ElementBoost_Electricity_1_BossDefeat": {
     "localized_name": "Elektrik Hasarı Geliştirmesi (Küçük)",
     "description": null
@@ -577,6 +749,10 @@
   },
   "ElementBoost_Electricity_3_Otomo_Only_Equip": {
     "localized_name": "Pal’ın Yıldırım Özellikli Hasar Güçlendirmesi Sv.3",
+    "description": null
+  },
+  "ElementBoost_Electricity_4_Otomo_Only_Equip": {
+    "localized_name": "Pal Yıldırım Hasarı Güçlendirme Sv4",
     "description": null
   },
   "ElementBoost_Fire_1_BossDefeat": {
@@ -611,6 +787,10 @@
     "localized_name": "Pal’ın Ateş Özellikli Hasar Güçlendirmesi Sv.3",
     "description": null
   },
+  "ElementBoost_Fire_4_Otomo_Only_Equip": {
+    "localized_name": "Pal Ateş Hasarı Güçlendirme Sv4",
+    "description": null
+  },
   "ElementBoost_Ice_1_BossDefeat": {
     "localized_name": "Buz Hasarı Geliştirmesi (Küçük)",
     "description": null
@@ -641,6 +821,10 @@
   },
   "ElementBoost_Ice_3_Otomo_Only_Equip": {
     "localized_name": "Pal’ın Buz Özellikli Hasar Güçlendirmesi Sv.3",
+    "description": null
+  },
+  "ElementBoost_Ice_4_Otomo_Only_Equip": {
+    "localized_name": "Pal Buz Hasarı Güçlendirme Sv4",
     "description": null
   },
   "ElementBoost_Leaf_1_BossDefeat": {
@@ -675,6 +859,10 @@
     "localized_name": "Pal’ın Bitki Özellikli Hasar Güçlendirmesi Sv.3",
     "description": null
   },
+  "ElementBoost_Leaf_4_Otomo_Only_Equip": {
+    "localized_name": "Pal Bitki Hasarı Güçlendirme Sv4",
+    "description": null
+  },
   "ElementBoost_Normal_1_BossDefeat": {
     "localized_name": "Nötr Hasar Geliştirmesi (Küçük)",
     "description": null
@@ -705,6 +893,10 @@
   },
   "ElementBoost_Normal_3_Otomo_Only_Equip": {
     "localized_name": "Pal’ın Özellik Taşımayan Hasar Güçlendirmesi Sv.3",
+    "description": null
+  },
+  "ElementBoost_Normal_4_Otomo_Only_Equip": {
+    "localized_name": "Pal Nötr Hasar Güçlendirme Sv4",
     "description": null
   },
   "ElementBoost_Thunder_1_PAL": {
@@ -739,6 +931,10 @@
     "localized_name": "Pal’ın Su Özellikli Hasar Güçlendirmesi Sv.3",
     "description": null
   },
+  "ElementBoost_Water_4_Otomo_Only_Equip": {
+    "localized_name": "Pal Su Hasarı Güçlendirme Sv4",
+    "description": null
+  },
   "ElementResist_Aqua_1": {
     "localized_name": "Su Hasarı Azaltma Sv. 1",
     "description": null
@@ -753,6 +949,10 @@
   },
   "ElementResist_Aqua_3": {
     "localized_name": "Su Hasarı Azaltma Sv. 3",
+    "description": null
+  },
+  "ElementResist_Aqua_4": {
+    "localized_name": "Su Hasarı Azaltma Sv4",
     "description": null
   },
   "ElementResist_Dark_1": {
@@ -771,6 +971,10 @@
     "localized_name": "Karanlık Hasar Azaltma Sv. 3",
     "description": null
   },
+  "ElementResist_Dark_4": {
+    "localized_name": "Karanlık Hasarı Azaltma Sv4",
+    "description": null
+  },
   "ElementResist_Dragon_1": {
     "localized_name": "Ejderha Hasarı Azaltma Sv. 1",
     "description": null
@@ -785,6 +989,10 @@
   },
   "ElementResist_Dragon_3": {
     "localized_name": "Ejderha Hasarı Azaltma Sv. 3",
+    "description": null
+  },
+  "ElementResist_Dragon_4": {
+    "localized_name": "Ejderha Hasarı Azaltma Sv4",
     "description": null
   },
   "ElementResist_Earth_1": {
@@ -803,6 +1011,10 @@
     "localized_name": "Toprak Hasarı Azaltma Sv. 3",
     "description": null
   },
+  "ElementResist_Earth_4": {
+    "localized_name": "Toprak Hasarı Azaltma Sv4",
+    "description": null
+  },
   "ElementResist_Fire_1": {
     "localized_name": "Ateş Hasarı Azaltma Sv. 1",
     "description": null
@@ -817,6 +1029,10 @@
   },
   "ElementResist_Fire_3": {
     "localized_name": "Ateş Hasarı Azaltma Sv. 3",
+    "description": null
+  },
+  "ElementResist_Fire_4": {
+    "localized_name": "Ateş Hasarı Azaltma Sv4",
     "description": null
   },
   "ElementResist_Ice_1": {
@@ -835,6 +1051,10 @@
     "localized_name": "Buz Hasarı Azaltma Sv. 3",
     "description": null
   },
+  "ElementResist_Ice_4": {
+    "localized_name": "Buz Hasarı Azaltma Sv4",
+    "description": null
+  },
   "ElementResist_Leaf_1": {
     "localized_name": "Çimen Hasarı Azaltma Sv. 1",
     "description": null
@@ -849,6 +1069,10 @@
   },
   "ElementResist_Leaf_3": {
     "localized_name": "Çimen Hasarı Azaltma Sv. 3",
+    "description": null
+  },
+  "ElementResist_Leaf_4": {
+    "localized_name": "Bitki Hasarı Azaltma Sv4",
     "description": null
   },
   "ElementResist_Normal_1": {
@@ -867,6 +1091,10 @@
     "localized_name": "Nötr Hasar Azaltma Sv. 3",
     "description": null
   },
+  "ElementResist_Normal_4": {
+    "localized_name": "Nötr Hasar Azaltma Sv4",
+    "description": null
+  },
   "ElementResist_Thunder_1": {
     "localized_name": "Elektrik Hasarı Azaltma Sv. 1",
     "description": null
@@ -883,8 +1111,16 @@
     "localized_name": "Elektrik Hasarı Azaltma Sv. 3",
     "description": null
   },
+  "ElementResist_Thunder_4": {
+    "localized_name": "Yıldırım Hasarı Azaltma Sv4",
+    "description": null
+  },
   "EternalFlame": {
     "localized_name": "Sonsuz Yangın",
+    "description": null
+  },
+  "FriendshipPoint_Increase_EquipSkill": {
+    "localized_name": "Takımdaki Pal'lerin Güven Artış Oranında Artış",
     "description": null
   },
   "GYM_NAME_Desert": {
@@ -916,19 +1152,27 @@
     "description": null
   },
   "HP_ACC_up1": {
-    "localized_name": "Can Artışı Sv. 1",
+    "localized_name": "Can Arttırma Sv1",
     "description": null
   },
   "HP_ACC_up2": {
-    "localized_name": "Can Artışı Sv. 2",
+    "localized_name": "Can Arttırma Sv2",
     "description": null
   },
   "HP_ACC_up3": {
-    "localized_name": "Can Artışı Sv. 3",
+    "localized_name": "Can Arttırma Sv3",
+    "description": null
+  },
+  "HP_ACC_up4": {
+    "localized_name": "Can Arttırma Sv4",
     "description": null
   },
   "Invader": {
     "localized_name": "İşgalci",
+    "description": null
+  },
+  "Invalid_ToxicGas_EquipSkill": {
+    "localized_name": "Zehirli Gaz Hasarı Bağışıklığı",
     "description": null
   },
   "JumpCount_Increase1": {
@@ -949,7 +1193,7 @@
   },
   "Legend": {
     "localized_name": "Efsane",
-    "description": "Saldırı +%20.0 Savunma +%20.0 Hareket Hızı %15.0 artar"
+    "description": "Saldırı +%20.0 Savunma +%20.0 Hareket Hızı %20.0 artar"
   },
   "MaxInventoryWeight_up": {
     "localized_name": "Maks. Taşıma Kapasitesi Sv. 1",
@@ -975,6 +1219,14 @@
     "localized_name": "Maks. Taşıma Kapasitesi Sv. 3",
     "description": null
   },
+  "MaxInventoryWeight_up_Equip_4": {
+    "localized_name": "Maksimum Taşıma Kapasitesi Arttırma Sv4",
+    "description": null
+  },
+  "MiniNushi": {
+    "localized_name": "Büyük obje",
+    "description": null
+  },
   "MoveSpeed_up_1": {
     "localized_name": "Çabuk",
     "description": "%10.0 hareket hızı artışı."
@@ -987,8 +1239,28 @@
     "localized_name": "Çevik",
     "description": "%30.0 hareket hızı artışı."
   },
+  "MutationPal_Babysitter": {
+    "localized_name": "Bebek Bakıcısı",
+    "description": "Üssünüzde bulunduğu sürece, çiftlikte atanan Pal'ın yumurta üretim hızı +30.0%, kuluçka hızı +30.0%."
+  },
+  "MutationPal_ExplosionResist": {
+    "localized_name": "Ağır Zırh",
+    "description": "Patlama hasarı<Status_Up>etkisiz</>"
+  },
+  "MutationPal_Immortal": {
+    "localized_name": "Ölümsüz",
+    "description": "Can çalma +5.0% Pal'ın doğal HP iyileşme miktarı +100.0% Saldırı +15.0%"
+  },
+  "MutationPal_Mutant": {
+    "localized_name": "Özel Yetenekli Vücut",
+    "description": "Pal ve oyuncunun HP doğal iyileşme miktarı +50.0% Savunma +{EffectValue4}% Zehir durumundaki hasar.<Status_Up>etkisiz</> Yanma durumundaki hasar.<Status_Up>etkisiz</>"
+  },
+  "NightOwl": {
+    "localized_name": "Gece Kuşu",
+    "description": "Gece geç saatlere kadar uyanık kaldığından olsa gerek, gündüzleri sık sık şekerleme yapar."
+  },
   "Nocturnal": {
-    "localized_name": "Gececi",
+    "localized_name": "Uykusuzluk",
     "description": "Uyumaz ve geceleri bile çalışmaya devam eder."
   },
   "NonKilling": {
@@ -1107,9 +1379,25 @@
     "localized_name": "Pal’ın Kazandığı Deneyim Artışı Sv.3",
     "description": null
   },
+  "PlayerSP_DecreaseRate_Passive": {
+    "localized_name": "Yorgunluk Önleyici",
+    "description": null
+  },
   "Rare": {
     "localized_name": "Şanslı",
     "description": null
+  },
+  "ReloadSpeedUp_Passive": {
+    "localized_name": "Yeniden Doldurma Ustası",
+    "description": null
+  },
+  "RideJumpCount_Increase1": {
+    "localized_name": "Hafiflik",
+    "description": "Binek üzerindeyken zıplama sayısı+1"
+  },
+  "RideJumpCount_Increase2": {
+    "localized_name": "Havada Yürüme",
+    "description": "Binek üzerindeyken zıplama sayısı+2"
   },
   "SalePrice_Down_1": {
     "localized_name": "Kılıksız",
@@ -1126,6 +1414,18 @@
   "Salvation": {
     "localized_name": "Kurtarıcı",
     "description": null
+  },
+  "SelfDeathAddItemDrop_up_1": {
+    "localized_name": "Paylaşma Nezaketi",
+    "description": "Kendi düşen eşya miktarı +15.0%."
+  },
+  "SelfDeathAddItemDrop_up_2": {
+    "localized_name": "Hizmet ruhu",
+    "description": "Kendi düşen eşya miktarı +50.0%."
+  },
+  "SelfDeathAddItemDrop_up_3": {
+    "localized_name": "Cömertlik",
+    "description": "Kendi düşen eşya miktarı +100.0%."
   },
   "SphereModule_Curve": {
     "localized_name": "Küre Eğimi +1",
@@ -1166,6 +1466,30 @@
   "Stamina_Up_3": {
     "localized_name": "Ölümsüz Motor",
     "description": "Maks. dayanıklılık +%75.0 *Bu etki sadece binilebilir Pal'lar için geçerlidir."
+  },
+  "StonDrop_Boost_1": {
+    "localized_name": "Maden çıkarma miktarı artışı Lv1",
+    "description": "Taş ve maden düşüş miktarı biraz artar."
+  },
+  "StonDrop_Boost_2": {
+    "localized_name": "Maden çıkarma miktarı artışı Lv2",
+    "description": "Taş ve maden düşüş miktarı artar."
+  },
+  "StonDrop_Boost_3": {
+    "localized_name": "Maden çıkarma miktarı artışı Lv3",
+    "description": "Taş ve maden düşüş miktarı büyük ölçüde artar."
+  },
+  "StonDrop_Boost_4": {
+    "localized_name": "Maden çıkarma miktarı artışı Lv4",
+    "description": "Taş ve maden düşüş miktarı oldukça artar."
+  },
+  "StonDrop_Boost_5": {
+    "localized_name": "Maden çıkarma miktarı artışı Lv5",
+    "description": "Taş ve maden düşüş miktarı son derece artar."
+  },
+  "StonWoodDrop_Boost": {
+    "localized_name": "Madencilik ve Odunculuk Arttırma",
+    "description": "Kereste, taş ve cevherlerin düşme miktarı büyük ölçüde artar."
   },
   "SwimSpeed_up_1": {
     "localized_name": "Esnek Yüzüş",
@@ -1217,7 +1541,7 @@
   },
   "Test_PalEgg_HatchingSpeed_Up": {
     "localized_name": "Sevecen",
-    "description": "Bir Üretim Çiftliğine atandığında, üreme hızı %100.0 artar."
+    "description": "Bir Üretim Çiftliğine atandığında yumurta üretim hızı %100.0 artar."
   },
   "TrainerATK_UP_1": {
     "localized_name": "Öncü",
@@ -1247,6 +1571,26 @@
     "localized_name": "Boşluğun Sireni",
     "description": null
   },
+  "WoodDrop_Boost_1": {
+    "localized_name": "Odun toplama miktarı artışı Lv1",
+    "description": "Odun düşüş miktarı biraz artar."
+  },
+  "WoodDrop_Boost_2": {
+    "localized_name": "Odun toplama miktarı artışı Lv2",
+    "description": "Odun düşüş miktarı artar."
+  },
+  "WoodDrop_Boost_3": {
+    "localized_name": "Odun toplama miktarı artışı Lv3",
+    "description": "Odun düşüş miktarı büyük ölçüde artar."
+  },
+  "WoodDrop_Boost_4": {
+    "localized_name": "Odun toplama miktarı artışı Lv4",
+    "description": "Odun düşüş miktarı oldukça artar."
+  },
+  "WoodDrop_Boost_5": {
+    "localized_name": "Odun toplama miktarı artışı Lv5",
+    "description": "Odun düşüş miktarı son derece artar."
+  },
   "WorkSpeed_ACC_up1": {
     "localized_name": "Hızlı İşçi Sv. 1",
     "description": null
@@ -1258,6 +1602,46 @@
   "WorkSpeed_ACC_up3": {
     "localized_name": "Hızlı İşçi Sv. 3",
     "description": null
+  },
+  "WorkSpeed_ACC_up4": {
+    "localized_name": "Hızlı Çalışma Sv4",
+    "description": null
+  },
+  "WorkSuitabilityAddRank_MonsterFarm_1": {
+    "localized_name": "Çiftlik Çocuğu",
+    "description": "Çiftçiliknınİş Uygunluğu+1"
+  },
+  "WorkSuitabilityAddRank_MonsterFarm_2": {
+    "localized_name": "Çiftlik Sahibi",
+    "description": "Çiftçiliknınİş Uygunluğu+2"
+  },
+  "WorldTree_ATK": {
+    "localized_name": "Ağır Sıklet",
+    "description": "Saldırı <NumBlue_13>+</>50.0% Savunma -30.0% Dünya Ağacı'nın ağaçlarına veya kayalarına yaklaşsa bile yok olmaz."
+  },
+  "WorldTree_ATK_DEF": {
+    "localized_name": "Boyut Sıçrayışı",
+    "description": "Saldırı <NumBlue_13>+</>40.0% Savunma <NumBlue_13>+</>20.0% Maksimum HP -50.0% Dünya Ağacı'nın ağaçlarına veya kayalarına yaklaşsa bile yok olmaz."
+  },
+  "WorldTree_CraftSpeed": {
+    "localized_name": "Kutsal Alanın Et Duvarı",
+    "description": "İş Hızı <NumBlue_13>+</>90.0<NumBlue_13>%</> SAN değeri daha hızlı düşer <NumRed_13>%+15.0</> Dünya Ağacı'nın kütüklerine veya kayalarına yaklaşıldığında yok olmaz"
+  },
+  "WorldTree_DEF": {
+    "localized_name": "İki Ucu Keskin Kutsal Kılıç",
+    "description": "Savunma <NumBlue_13>+</>50.0% Saldırı -30.0% Dünya Ağacı'nın ağaçlarına veya kayalarına yaklaşsa bile yok olmaz."
+  },
+  "WorldTree_FullStomach": {
+    "localized_name": "Şeytanın Eli",
+    "description": "Tokluk değeri daha yavaş düşer <NumBlue_13>+%50.0</> HP -20.0<NumRed_13>%</> Dünya Ağacı'nın kütüklerine veya kayalarına yaklaşıldığında yok olmaz"
+  },
+  "WorldTree_MoveSpeed": {
+    "localized_name": "Ermiş",
+    "description": "Hareket hızı artışı: <NumBlue_13>+</>50.0<NumBlue_13>%</> Açlık seviyesinin daha hızlı düşmesi <NumRed_13>+%15</> Dünya Ağacı'nın ağaçlarına veya kayalarına yaklaşıldığında yok olmama"
+  },
+  "WorldTree_Sanity": {
+    "localized_name": "Kutsal Ağacın Fidan Yatağı",
+    "description": "SAN değeri daha yavaş düşer <NumBlue_13>+%50.0</> İş Hızı -20.0<NumRed_13>%</> Dünya Ağacı'nın kütüklerine veya kayalarına yaklaşıldığında yok olmaz"
   },
   "YakushimaDagameBoost_Magic_Equip": {
     "localized_name": "Kutsal Güç – Büyü",
@@ -1289,6 +1673,10 @@
   },
   "defense_ACC_up3": {
     "localized_name": "Savunma Artışı Sv. 3",
+    "description": null
+  },
+  "defense_ACC_up4": {
+    "localized_name": "Savunma Arttırma Sv4",
     "description": null
   }
 }
