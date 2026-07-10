@@ -81,3 +81,69 @@ pub fn load_corpus_session() -> Option<SaveSession> {
 
     Some(session)
 }
+
+/// Loads a fixture save checked into the repo at
+/// `tests/fixtures/saves/<name>/` -- unlike `load_corpus_session`, NOT gated
+/// by `PSP_TEST_SAVE_DIR`, since these fixtures are committed (`git log --
+/// tests/fixtures/saves/world1/Level.sav` has history) and always present, so
+/// a test built on this helper always runs rather than silently skipping.
+/// Panics loudly on any load failure: a missing/broken checked-in fixture is
+/// a repo problem, not a "skip and move on" condition. Duplicates
+/// `load_corpus_session`'s small `Players/` directory walk rather than
+/// factoring it out, so that function's already-verified behavior stays
+/// untouched.
+pub fn load_fixture_session(name: &str) -> SaveSession {
+    let save_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("../../tests/fixtures/saves")
+        .join(name);
+    let level_sav_bytes =
+        std::fs::read(save_dir.join("Level.sav")).expect("read fixture Level.sav");
+    let level_meta_bytes = std::fs::read(save_dir.join("LevelMeta.sav")).ok();
+
+    let mut player_file_refs: BTreeMap<Uuid, PlayerFileData> = BTreeMap::new();
+    if let Ok(entries) = std::fs::read_dir(save_dir.join("Players")) {
+        for entry in entries.flatten() {
+            let path = entry.path();
+            if path.extension().is_none_or(|ext| ext != "sav") {
+                continue;
+            }
+            let Some(stem) = path.file_stem().and_then(|s| s.to_str()) else {
+                continue;
+            };
+            let (uid_part, is_dps) = match stem.strip_suffix("_dps") {
+                Some(base) => (base, true),
+                None => (stem, false),
+            };
+            let Ok(uid) = uid_part.parse::<Uuid>() else {
+                continue;
+            };
+            let file_ref = player_file_refs
+                .entry(uid)
+                .or_insert(PlayerFileData::Paths {
+                    sav: None,
+                    dps: None,
+                });
+            if let PlayerFileData::Paths { sav, dps } = file_ref {
+                if is_dps {
+                    *dps = Some(path);
+                } else {
+                    *sav = Some(path);
+                }
+            }
+        }
+    }
+
+    SaveSession::load(
+        SaveKind::Steam {
+            level_path: save_dir.join("Level.sav"),
+        },
+        save_dir.to_string_lossy().into_owned(),
+        "steam",
+        &level_sav_bytes,
+        level_meta_bytes.as_deref(),
+        player_file_refs,
+        None,
+        &psp_core::progress::null_progress(),
+    )
+    .expect("load fixture session")
+}
