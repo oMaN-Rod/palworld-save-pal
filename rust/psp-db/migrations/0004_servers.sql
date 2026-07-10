@@ -1,0 +1,30 @@
+-- Column-for-column mirror of palworld_save_pal/db/models/server_models.py (handlers land in Phase 6).
+CREATE TABLE servers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    container_name TEXT NOT NULL UNIQUE,
+    image_name TEXT NOT NULL DEFAULT 'omanrod/psp-palworld-server',
+    server_type TEXT NOT NULL DEFAULT 'docker',
+    game_port INTEGER NOT NULL DEFAULT 8211,
+    query_port INTEGER NOT NULL DEFAULT 27015,
+    rest_api_port INTEGER NOT NULL DEFAULT 8212,
+    data_volume_name TEXT NOT NULL DEFAULT '',
+    saves_path TEXT NOT NULL DEFAULT '',
+    mods_path TEXT NOT NULL DEFAULT '',
+    logicmods_path TEXT NOT NULL DEFAULT '',
+    nativemods_path TEXT NOT NULL DEFAULT '',
+    install_path TEXT NOT NULL DEFAULT '',
+    steamcmd_path TEXT NOT NULL DEFAULT '',
+    pid INTEGER,
+    launch_args TEXT NOT NULL DEFAULT '',
+    workshop_dir TEXT NOT NULL DEFAULT '',
+    server_name TEXT NOT NULL DEFAULT 'PSP Palworld Server',
+    server_description TEXT NOT NULL DEFAULT '',
+    server_password TEXT NOT NULL DEFAULT '',
+    admin_password TEXT NOT NULL DEFAULT 'admin',
+    max_players INTEGER NOT NULL DEFAULT 16,
+    env_vars TEXT NOT NULL DEFAULT '{}',
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL
+);
+CREATE INDEX idx_servers_name ON servers(name);
