@@ -1055,6 +1055,217 @@ fn apply_unlock_flags(player_sav: &mut uesave::Save, flag_name: &str, keys: &[St
     );
 }
 
+// ============================================================================
+// delete_player (Task 11) -- port of `PlayerOpsMixin.delete_player`/
+// `_delete_player_and_pals` (`player_ops.py`) and `Guild.delete_player`
+// (`guild.py:159-170`).
+// ============================================================================
+
+/// Port of `delete_player` (`player_ops.py`). `Ok(false)` when the player is
+/// their guild's admin (nothing deleted, matching Python's early `return
+/// False`); `Err` when `player_id` was never loaded (matching Python's
+/// `raise ValueError` before any mutation, `player_ops.py:29-31`).
+///
+/// **Guild lookup is scoped to already-LOADED guilds, not the brief's
+/// unscoped `find_player_guild_id`.** Python's `player_guild =
+/// self._player_guild(player_id)` (`save_manager.py`) iterates
+/// `self._guilds.values()` ONLY -- guilds already lazily loaded this
+/// session -- not every guild the raw save records (that broader scan is a
+/// DIFFERENT method, `_find_player_guild_id`, used only by the loading
+/// path to auto-load a player's guild on demand). A player whose guild was
+/// never loaded this session is therefore treated as guildless by
+/// `delete_player` itself: no admin check, no guild-handle removal, even if
+/// the raw save data says the player belongs to a guild. Reproduced here by
+/// filtering `find_player_guild_id`'s (unscoped) answer through
+/// `session.loaded_guilds`. The brief's own reference code used
+/// `find_player_guild_id` unfiltered, which would run the admin check
+/// against ANY guild the raw save happens to record for this player,
+/// loaded or not this session -- a real, observable behavioral difference
+/// from Python (an admin deletion the brief's version would refuse, real
+/// Python would actually allow, if that guild was never separately loaded
+/// first). See this task's report.
+pub fn delete_player(
+    session: &mut SaveSession,
+    game_data: &GameData,
+    player_id: uuid::Uuid,
+    progress: &ProgressSink,
+) -> Result<bool, CoreError> {
+    if !session.loaded_players.contains_key(&player_id) {
+        return Err(CoreError::Other(format!(
+            "Player {player_id} not found in the save file."
+        )));
+    }
+    let details = build_player_dto(session, game_data, player_id)?.ok_or_else(|| {
+        CoreError::Other(format!("Player {player_id} not found in the save file."))
+    })?;
+    let nickname = details.nickname.clone();
+
+    let player_guild_id = super::guild::find_player_guild_id(session, player_id)?
+        .filter(|guild_id| session.loaded_guilds.contains(guild_id));
+
+    if let Some(guild_id) = player_guild_id {
+        let entry_index = super::guild::guild_entry_index(session, guild_id)?
+            .ok_or(CoreError::GuildNotFound(guild_id))?;
+        let (guild_name, admin_uid) = {
+            let entries = world::group_map(&session.level)?;
+            let group_data = super::guild_tail::entry_group_data(&entries[entry_index])
+                .ok_or_else(|| CoreError::Parse("guild group data untyped".into()))?;
+            let tail = super::guild_tail::GuildTail::parse(&group_data.remaining_data)?;
+            (
+                tail.guild_name.clone(),
+                tail.players.first().map(|player| player.player_uid),
+            )
+        };
+        if admin_uid == Some(player_id) {
+            return Ok(false); // player_ops.py:34-40
+        }
+        progress(&format!(
+            "Deleting player {nickname} from guild {guild_name}"
+        ));
+        // `Guild.delete_player` (guild.py:159-170): drop the player's own
+        // character handle and their `players` row.
+        let entries = world::group_map_mut(&mut session.level)?;
+        if let Some(group_data) = super::guild_tail::entry_group_data_mut(&mut entries[entry_index])
+        {
+            group_data.individual_character_handle_ids.retain(|handle| {
+                props::guid_to_uuid(&handle.instance_id) != player_id
+                    && props::guid_to_uuid(&handle.guid) != player_id
+            });
+            if let Ok(mut tail) = super::guild_tail::GuildTail::parse(&group_data.remaining_data) {
+                tail.players.retain(|player| player.player_uid != player_id);
+                group_data.remaining_data = tail.to_bytes();
+            }
+        }
+    }
+
+    let (item_container_ids, character_container_ids) =
+        delete_player_and_pals_for_guild(session, game_data, player_id, &details, progress)?;
+
+    progress(&format!("Deleting map objects of player {nickname}"));
+    if let Some(values) = world::map_object_values_mut(&mut session.level)? {
+        values.retain(|map_object| {
+            !super::guild::should_delete_map_object(map_object, None, &[player_id])
+        });
+    }
+
+    progress(&format!("Deleting item containers of player {nickname}"));
+    super::containers::delete_item_containers(session, &item_container_ids)?;
+
+    progress(&format!(
+        "Deleting character containers of player {nickname}"
+    ));
+    super::containers::delete_character_containers(session, &character_container_ids)?;
+    Ok(true)
+}
+
+/// Port of `_delete_player_and_pals` (`player_ops.py`). Deletes every pal
+/// this player's OWN pal box + party containers reference, directly by
+/// instance id, then the player's own character-map entry, file ref, and
+/// `LoadedPlayer`. Returns the five item-container ids and two
+/// character-container ids (pal box + party) the caller still needs to
+/// delete afterward -- matching Python's own return value.
+///
+/// Named `..._for_guild` (not just `delete_player_and_pals`) because both
+/// `delete_player` above and `guild::delete_guild_and_players` call this
+/// same function -- exactly like Python's single `_delete_player_and_pals`
+/// is shared by `delete_player` and `delete_guild_and_players`
+/// (`guild_ops.py:57-65`).
+///
+/// **Deliberately does NOT remove any per-pal guild character handle -- a
+/// newly-found Python gap, not on the known list, reproduced for byte
+/// parity (required: a dangling `individual_character_handle_ids` entry is
+/// a real, observable difference in the written save's guild tail).**
+/// `_delete_player_and_pals` calls `self._delete_pal_by_id(pal_id)` directly
+/// for every box/party pal (`pal_ops.py`'s `_delete_pal_by_id`, which only
+/// pops `self._pals`/`CharacterSaveParameterMap`) -- NEVER `Player.
+/// delete_pal` (which DOES call `self._guild.delete_character_handle
+/// (pal_id)`, `player.py:614-619`, and IS what `PalOpsMixin.
+/// delete_player_pals` -- Task 9's own single-pal-delete op -- uses
+/// instead). So deleting a player through `delete_player`/
+/// `delete_guild_and_players` leaves that player's own pals'
+/// `individual_character_handle_ids` entries dangling in the guild's raw
+/// tail bytes. Contrast: base pals deleted via `delete_guild_and_players`
+/// DO get their handle cleaned up, because that path calls `PalOpsMixin.
+/// delete_guild_pals` -> `Guild.delete_base_pal`, which DOES call
+/// `delete_character_handle` (`guild.py:143-146`) -- this asymmetry
+/// (player pals: dangling handle; base pals: cleaned up) is a real Python
+/// behavior, not a port artifact. See this task's report.
+pub(crate) fn delete_player_and_pals_for_guild(
+    session: &mut SaveSession,
+    _game_data: &GameData,
+    player_id: uuid::Uuid,
+    details: &PlayerDto,
+    progress: &crate::progress::ProgressSink,
+) -> Result<(Vec<uuid::Uuid>, Vec<uuid::Uuid>), CoreError> {
+    let nickname = &details.nickname;
+    progress(&format!(
+        "Deleting player {nickname} with {} pals",
+        details.pals.len()
+    ));
+
+    let item_container_ids: Vec<uuid::Uuid> = [
+        &details.common_container,
+        &details.essential_container,
+        &details.weapon_load_out_container,
+        &details.player_equipment_armor_container,
+        &details.food_equip_container,
+    ]
+    .into_iter()
+    .flatten()
+    .map(|container| container.id)
+    .collect();
+    let character_container_ids: Vec<uuid::Uuid> = [details.otomo_container_id, details.pal_box_id]
+        .into_iter()
+        .flatten()
+        .collect();
+
+    let box_pal_ids: Vec<uuid::Uuid> = details
+        .pal_box
+        .as_ref()
+        .map(|container| {
+            container
+                .slots
+                .iter()
+                .filter_map(|slot| slot.pal_id)
+                .collect()
+        })
+        .unwrap_or_default();
+    progress(&format!(
+        "Deleting {} pals of player {nickname} from PalBox",
+        box_pal_ids.len()
+    ));
+    for pal_id in box_pal_ids {
+        super::pal::delete_pal_entry(session, pal_id);
+    }
+
+    let party_pal_ids: Vec<uuid::Uuid> = details
+        .party
+        .as_ref()
+        .map(|container| {
+            container
+                .slots
+                .iter()
+                .filter_map(|slot| slot.pal_id)
+                .collect()
+        })
+        .unwrap_or_default();
+    progress(&format!(
+        "Deleting {} pals of player {nickname} from Party",
+        party_pal_ids.len()
+    ));
+    for pal_id in party_pal_ids {
+        super::pal::delete_pal_entry(session, pal_id);
+    }
+
+    session.loaded_players.remove(&player_id);
+    world::character_map_mut(&mut session.level)?.retain(|entry| {
+        !(world::entry_is_player(entry) && world::entry_player_uid(entry) == Some(player_id))
+    });
+    session.invalidate_performance_caches();
+    session.player_file_refs.remove(&player_id);
+    Ok((item_container_ids, character_container_ids))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

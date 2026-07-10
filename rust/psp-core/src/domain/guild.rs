@@ -739,6 +739,247 @@ pub fn apply_guild_dto(
     Ok(())
 }
 
+// ============================================================================
+// delete_player / delete_guild (Task 11) -- port of
+// `GuildOpsMixin.delete_guild_and_players`/`_should_delete_map_object`
+// (`guild_ops.py`) and `Guild.delete_player` (`guild.py:159-170`, wired up
+// in `domain::player::delete_player`).
+// ============================================================================
+
+/// `_should_delete_map_object` (`guild_ops.py`): delete a `MapObjectSaveData`
+/// element when `Model.RawData.group_id_belong_to == guild_id`, OR
+/// `Model.RawData.build_player_uid` is one of `player_ids`, OR (ItemBooth
+/// concrete models only) `private_lock_player_uid` or any
+/// `trade_infos[].seller_player_uid` is one of `player_ids`.
+///
+/// **The `ConcreteModel`'s `ModuleMap`/`PasswordLock` branch is deliberately
+/// NOT implemented here -- a newly-found Python bug, not on the known list,
+/// reproduced by omission (required for byte parity: whether a given map
+/// object survives a delete is directly observable in the written save).**
+/// Python's own check reads `concrete_model_raw_data.get("ModuleMap", {})
+/// .get("value", [])`, where `concrete_model_raw_data =
+/// map_object["ConcreteModel"]["value"]["RawData"]["value"]` -- i.e. it
+/// looks for a `"ModuleMap"` key INSIDE the decoded, per-object-type
+/// `RawData` dict. But `palworld_save_tools/rawdata/map_object.py::decode`
+/// populates `ModuleMap` as a SIBLING of `RawData`
+/// (`map_object["ConcreteModel"]["value"]["ModuleMap"]["value"]`, walked in
+/// its own separate loop right after `RawData` is decoded), never nested
+/// inside it -- verified against every per-object-type decoder in
+/// `rawdata/map_concrete_model.py` (`PalMapObjectItemBoothModel` et al.),
+/// none of which ever produce a `"ModuleMap"` key of their own. Real
+/// Python's `.get("ModuleMap", {})` therefore ALWAYS returns the
+/// empty-dict default, and the PasswordLock loop body never executes for
+/// any real save -- dead code. Reproduced here by never implementing that
+/// branch at all (an unconditional non-match), rather than "fixing" it into
+/// a functional check, which is what the brief's own reference code did:
+/// it read `ModuleMap` from the CORRECT sibling location under this port's
+/// own `uesave-rs`-typed shape (`concrete_props.0.get("ModuleMap")`,
+/// alongside `RawData`, not nested inside it) -- accidentally MORE correct
+/// than Python, and therefore byte-divergent from what real Python actually
+/// deletes. See this task's report.
+pub(crate) fn should_delete_map_object(
+    map_object: &StructValue,
+    guild_id: Option<uuid::Uuid>,
+    player_ids: &[uuid::Uuid],
+) -> bool {
+    let StructValue::Struct(object_props) = map_object else {
+        return false;
+    };
+    let Some(model_props) = object_props
+        .0
+        .get(&PropertyKey::from("Model"))
+        .and_then(props::struct_props)
+    else {
+        return false;
+    };
+    let Some(Property::Struct(StructValue::PalMapModel(model))) =
+        model_props.0.get(&PropertyKey::from("RawData"))
+    else {
+        return false;
+    };
+    if let Some(target_guild) = guild_id {
+        if props::guid_to_uuid(&model.group_id_belong_to) == target_guild {
+            return true;
+        }
+    }
+    if player_ids.contains(&props::guid_to_uuid(&model.build_player_uid)) {
+        return true;
+    }
+
+    // ItemBooth edge cases (guild_ops.py:141-162): private lock owner, or
+    // any trade-info seller.
+    let Some(concrete_props) = object_props
+        .0
+        .get(&PropertyKey::from("ConcreteModel"))
+        .and_then(props::struct_props)
+    else {
+        return false;
+    };
+    let Some(Property::Struct(StructValue::PalMapConcreteModel(concrete))) =
+        concrete_props.0.get(&PropertyKey::from("RawData"))
+    else {
+        return false;
+    };
+    if let uesave::games::palworld::PalMapConcreteModelVariant::ItemBooth(booth) =
+        &concrete.model_data
+    {
+        if player_ids.contains(&props::guid_to_uuid(&booth.private_lock_player_uid)) {
+            return true;
+        }
+        if booth
+            .trade_infos
+            .iter()
+            .any(|trade| player_ids.contains(&props::guid_to_uuid(&trade.seller_player_uid)))
+        {
+            return true;
+        }
+    }
+    false
+}
+
+/// Port of `delete_guild_and_players` (`guild_ops.py`). `Err` when
+/// `guild_id` was never loaded (matching Python's `guild =
+/// self._guilds.get(guild_id); if not guild: raise ValueError(...)`, before
+/// any mutation) -- checked directly via `session.loaded_guilds`, NOT by
+/// calling `get_guild_details` first, which would lazily LOAD an unloaded
+/// guild as a side effect that real Python's plain dict `.get` here never
+/// has. Once confirmed loaded, `get_guild_details` is safe to call for its
+/// `GuildDto` (its `loaded_guilds.insert`/`guild_summaries[..].loaded = true`
+/// side effects are no-ops on an already-loaded guild).
+///
+/// **Never deletes the guild's own item-storage container (the "chest") --
+/// a newly-found Python bug, not on the known list, reproduced for byte
+/// parity, and a deliberate divergence from the brief.** The brief's own
+/// reference code added an explicit extra `delete_item_containers(session,
+/// &[chest_id])` call, justified as approximating a described Python
+/// fallback. That justification does not hold up against
+/// `_delete_item_containers`'s actual fallback condition (`guild_ops.py`):
+/// the fallback only fires PER CONTAINER ID ALREADY IN THE CALLER'S OWN
+/// LIST, when that specific id isn't found by direct lookup -- and
+/// `container_ids_to_delete` here is built ONLY from player containers and
+/// base storage containers (`base.storage_containers.keys()`); the guild's
+/// own `container_id` (the chest) is NEVER added to that list at all, so
+/// neither the primary lookup nor the fallback ever considers it. Real
+/// Python therefore leaves the guild chest as a permanently orphaned
+/// `ItemContainerSaveData` entry after `delete_guild_and_players` runs --
+/// not fixed here. See this task's report.
+///
+/// **The second, buggy `_delete_item_containers(player_id,
+/// container_ids_to_delete)` call in `guild_ops.py` is a THIRD newly-found
+/// Python bug, NOT reproduced.** After the guild's players/bases are fully
+/// processed, real Python calls `_delete_item_containers` TWICE: once with
+/// `target_id=guild_id` (the real, correct pass), then AGAIN with
+/// `target_id=player_id` -- a name that, at that point in the function, is
+/// whatever value survives from the earlier `for player_id in
+/// guild.players:` loop (the LAST guild member processed; an
+/// `UnboundLocalError` if `guild.players` was ever empty). By the second
+/// call, every id in `container_ids_to_delete` has ALREADY been removed by
+/// the first call, so every one of them takes the FALLBACK branch this
+/// time: a linear scan for any container whose `BelongInfo.GroupId` equals
+/// that stale, unrelated player id, deleted on a match. This does nothing
+/// to help delete the guild's own correct containers (already done by the
+/// first call) and risks an unpredictable extra deletion this port declines
+/// to gamble on reproducing; not implemented. See this task's report.
+pub fn delete_guild_and_players(
+    session: &mut SaveSession,
+    game_data: &GameData,
+    guild_id: uuid::Uuid,
+    progress: &crate::progress::ProgressSink,
+) -> Result<(), CoreError> {
+    if !session.loaded_guilds.contains(&guild_id) {
+        return Err(CoreError::Other(format!(
+            "Guild {guild_id} not found in the save file."
+        )));
+    }
+    let details = get_guild_details(session, game_data, guild_id)?
+        .ok_or_else(|| CoreError::Other(format!("Guild {guild_id} not found in the save file.")))?;
+    let guild_name = details.name.clone().unwrap_or_default();
+    let guild_players = details.players.clone();
+    progress(&format!(
+        "Deleting guild {guild_name} with {} players",
+        guild_players.len()
+    ));
+
+    // Map objects owned by the guild or its players (guild_ops.py:50-55).
+    if let Some(values) = world::map_object_values_mut(&mut session.level)? {
+        values.retain(|map_object| {
+            !should_delete_map_object(map_object, Some(guild_id), &guild_players)
+        });
+    }
+
+    let mut item_container_ids: Vec<uuid::Uuid> = Vec::new();
+    let mut character_container_ids: Vec<uuid::Uuid> = Vec::new();
+
+    // Every loaded guild player (guild_ops.py:57-65): an unloaded member is
+    // skipped entirely, matching Python's `if player_id not in self._players:
+    // continue`.
+    for player_uid in &guild_players {
+        if !session.loaded_players.contains_key(player_uid) {
+            continue;
+        }
+        let Some(player_details) =
+            super::player::build_player_dto(session, game_data, *player_uid)?
+        else {
+            continue;
+        };
+        let (player_items, player_characters) = super::player::delete_player_and_pals_for_guild(
+            session,
+            game_data,
+            *player_uid,
+            &player_details,
+            progress,
+        )?;
+        item_container_ids.extend(player_items);
+        character_container_ids.extend(player_characters);
+    }
+
+    // GuildExtraSaveDataMap entry (guild_ops.py:67-72).
+    if let Some(entries) = world::guild_extra_map_mut(&mut session.level)? {
+        entries.retain(|entry| props::as_uuid(&entry.key) != Some(guild_id));
+    }
+
+    // Every base (guild_ops.py:74-87).
+    if let Some(bases) = &details.bases {
+        for (base_id, base) in bases.iter() {
+            progress(&format!("Deleting base {base_id}"));
+            item_container_ids.extend(base.storage_containers.iter().map(|(id, _)| *id));
+            if let Some(worker_container) = base.container_id {
+                character_container_ids.push(worker_container);
+            }
+            let base_pal_ids: Vec<uuid::Uuid> = base.pals.iter().map(|(id, _)| *id).collect();
+            // `Guild.delete_base_pal` (guild.py:143-146), via
+            // `PalOpsMixin.delete_guild_pals` -- unlike the brief's own
+            // reference code (a raw `delete_pal_entry` per id, which skips
+            // the guild-handle cleanup `delete_base_pal` actually does),
+            // this reuses the existing, already-reviewed Task 9 op so a
+            // base pal's `individual_character_handle_ids` entry is removed
+            // too, matching Python's real behavior for base pals exactly
+            // (contrast with player pals -- see
+            // `delete_player_and_pals_for_guild`'s own doc comment on why
+            // THOSE are deliberately left dangling instead).
+            super::pal::delete_guild_pals(session, guild_id, *base_id, &base_pal_ids)?;
+            if let Some(entries) = world::base_camp_map_mut(&mut session.level)? {
+                entries.retain(|entry| props::as_uuid(&entry.key) != Some(*base_id));
+            }
+        }
+    }
+
+    progress(&format!("Deleting item containers of guild {guild_name}"));
+    super::containers::delete_item_containers(session, &item_container_ids)?;
+
+    progress(&format!(
+        "Deleting character containers of guild {guild_name}"
+    ));
+    super::containers::delete_character_containers(session, &character_container_ids)?;
+
+    // The group entry itself (guild_ops.py:98-104).
+    world::group_map_mut(&mut session.level)?
+        .retain(|entry| props::as_uuid(&entry.key) != Some(guild_id));
+    session.loaded_guilds.remove(&guild_id);
+    session.invalidate_performance_caches();
+    Ok(())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -1130,5 +1371,232 @@ mod tests {
 
         assert!(module_target_container_id(&raw_data).is_none());
         assert!(module_target_container_id(&Property::Bool(true)).is_none());
+    }
+
+    // ---- should_delete_map_object ----
+
+    fn zero_map_model(
+        group_id_belong_to: &str,
+        build_player_uid: &str,
+    ) -> uesave::games::palworld::PalMapModel {
+        uesave::games::palworld::PalMapModel {
+            instance_id: fguid("00000000-0000-0000-0000-000000000000"),
+            concrete_model_instance_id: fguid("00000000-0000-0000-0000-000000000000"),
+            base_camp_id_belong_to: fguid("00000000-0000-0000-0000-000000000000"),
+            group_id_belong_to: fguid(group_id_belong_to),
+            hp: uesave::games::palworld::PalMapObjectHp { current: 0, max: 0 },
+            initial_transform_cache: zero_transform(),
+            repair_work_id: fguid("00000000-0000-0000-0000-000000000000"),
+            owner_spawner_level_object_instance_id: fguid("00000000-0000-0000-0000-000000000000"),
+            owner_instance_id: fguid("00000000-0000-0000-0000-000000000000"),
+            build_player_uid: fguid(build_player_uid),
+            interact_restrict_type: 0,
+            deterioration_damage: 0.0,
+            stage_instance_id_belong_to: uesave::games::palworld::PalStageInstanceId {
+                id: fguid("00000000-0000-0000-0000-000000000000"),
+                valid: 0,
+            },
+            unknown_bytes: vec![],
+        }
+    }
+
+    /// A `MapObjectSaveData` element with a real typed `Model.RawData`, and
+    /// an optional `ConcreteModel.RawData` for the ItemBooth/PasswordLock
+    /// cases.
+    fn map_object_with_model(
+        group_id_belong_to: &str,
+        build_player_uid: &str,
+        concrete_raw_data: Option<Property>,
+        module_map: Option<Vec<MapEntry>>,
+    ) -> StructValue {
+        let mut model_props = Properties::default();
+        model_props.insert(
+            "RawData",
+            Property::Struct(StructValue::PalMapModel(Box::new(zero_map_model(
+                group_id_belong_to,
+                build_player_uid,
+            )))),
+        );
+        let mut object_props = Properties::default();
+        object_props.insert("Model", Property::Struct(StructValue::Struct(model_props)));
+        if concrete_raw_data.is_some() || module_map.is_some() {
+            let mut concrete_props = Properties::default();
+            // Every real `MapObjectSaveData` element decodes `ConcreteModel.
+            // RawData` unconditionally (`map_object.py::decode`), whatever
+            // the object type -- an `Unknown`/`BaseModel` fallback when the
+            // module_map-only caller doesn't care which concrete type this
+            // is. Omitting `RawData` entirely (as an earlier revision of
+            // this helper did) is not a shape any real save produces.
+            let raw_data = concrete_raw_data.unwrap_or_else(|| {
+                Property::Struct(StructValue::PalMapConcreteModel(Box::new(
+                    uesave::games::palworld::PalMapConcreteModel {
+                        instance_id: fguid(SDM_NIL),
+                        model_instance_id: fguid(SDM_NIL),
+                        concrete_model_type: "BaseModel".to_string(),
+                        model_data: uesave::games::palworld::PalMapConcreteModelVariant::Unknown(
+                            uesave::games::palworld::BaseModel {
+                                trailing_bytes: vec![],
+                            },
+                        ),
+                    },
+                )))
+            });
+            concrete_props.insert("RawData", raw_data);
+            if let Some(modules) = module_map {
+                concrete_props.insert("ModuleMap", Property::Map(modules));
+            }
+            object_props.insert(
+                "ConcreteModel",
+                Property::Struct(StructValue::Struct(concrete_props)),
+            );
+        }
+        StructValue::Struct(object_props)
+    }
+
+    fn zero_item_and_num() -> uesave::games::palworld::PalItemAndNum {
+        uesave::games::palworld::PalItemAndNum {
+            item_id: uesave::games::palworld::PalItemId {
+                static_id: String::new(),
+                dynamic_id: uesave::games::palworld::PalDynamicId {
+                    created_world_id: uesave::FGuid::nil(),
+                    local_id_in_created_world: uesave::FGuid::nil(),
+                },
+            },
+            num: 0,
+        }
+    }
+
+    fn item_booth_concrete_model(private_lock_player_uid: &str, seller_uids: &[&str]) -> Property {
+        use uesave::games::palworld::{
+            PalMapConcreteModelVariant, PalMapObjectItemBoothModel, PalMapObjectItemBoothTradeInfo,
+        };
+        let trade_infos = seller_uids
+            .iter()
+            .map(|seller| PalMapObjectItemBoothTradeInfo {
+                product: zero_item_and_num(),
+                cost: zero_item_and_num(),
+                seller_player_uid: fguid(seller),
+            })
+            .collect();
+        Property::Struct(StructValue::PalMapConcreteModel(Box::new(
+            uesave::games::palworld::PalMapConcreteModel {
+                instance_id: fguid("00000000-0000-0000-0000-000000000000"),
+                model_instance_id: fguid("00000000-0000-0000-0000-000000000000"),
+                concrete_model_type: "PalMapObjectItemBoothModel".to_string(),
+                model_data: PalMapConcreteModelVariant::ItemBooth(PalMapObjectItemBoothModel {
+                    leading_bytes: [0; 4],
+                    private_lock_player_uid: fguid(private_lock_player_uid),
+                    trade_infos,
+                    trailing_bytes: [0; 20],
+                }),
+            },
+        )))
+    }
+
+    const SDM_GUILD: &str = "10101010-0000-0000-0000-000000000000";
+    const SDM_OTHER_GUILD: &str = "20202020-0000-0000-0000-000000000000";
+    const SDM_PLAYER: &str = "30303030-0000-0000-0000-000000000000";
+    const SDM_OTHER_PLAYER: &str = "40404040-0000-0000-0000-000000000000";
+    const SDM_NIL: &str = "00000000-0000-0000-0000-000000000000";
+
+    #[test]
+    fn should_delete_map_object_matches_on_group_id_belong_to() {
+        let guild_id: uuid::Uuid = SDM_GUILD.parse().unwrap();
+        let object = map_object_with_model(SDM_GUILD, SDM_NIL, None, None);
+        assert!(should_delete_map_object(&object, Some(guild_id), &[]));
+        // A different target guild must not match.
+        let other: uuid::Uuid = SDM_OTHER_GUILD.parse().unwrap();
+        assert!(!should_delete_map_object(&object, Some(other), &[]));
+        // No guild_id argument at all (player-only delete) must not match on
+        // group ownership, regardless of the object's own group.
+        assert!(!should_delete_map_object(&object, None, &[]));
+    }
+
+    #[test]
+    fn should_delete_map_object_matches_on_build_player_uid() {
+        let player: uuid::Uuid = SDM_PLAYER.parse().unwrap();
+        let object = map_object_with_model(SDM_NIL, SDM_PLAYER, None, None);
+        assert!(should_delete_map_object(&object, None, &[player]));
+        let other: uuid::Uuid = SDM_OTHER_PLAYER.parse().unwrap();
+        assert!(!should_delete_map_object(&object, None, &[other]));
+    }
+
+    #[test]
+    fn should_delete_map_object_matches_on_item_booth_private_lock_owner() {
+        let player: uuid::Uuid = SDM_PLAYER.parse().unwrap();
+        let concrete = item_booth_concrete_model(SDM_PLAYER, &[]);
+        let object = map_object_with_model(SDM_NIL, SDM_NIL, Some(concrete), None);
+        assert!(should_delete_map_object(&object, None, &[player]));
+    }
+
+    #[test]
+    fn should_delete_map_object_matches_on_item_booth_trade_seller() {
+        let player: uuid::Uuid = SDM_PLAYER.parse().unwrap();
+        let concrete = item_booth_concrete_model(SDM_NIL, &[SDM_OTHER_PLAYER, SDM_PLAYER]);
+        let object = map_object_with_model(SDM_NIL, SDM_NIL, Some(concrete), None);
+        assert!(should_delete_map_object(&object, None, &[player]));
+    }
+
+    /// **The dead-code reproduction, pinned.** A map object with NO group/
+    /// builder/item-booth match, but whose `ConcreteModel.ModuleMap` (the
+    /// SIBLING location -- not nested inside `RawData`, matching the real
+    /// property tree shape) carries a `PasswordLock` module recording the
+    /// target player's uid, must NOT be deleted. If a "fixed" (functional)
+    /// PasswordLock check were implemented instead of this reproduction,
+    /// this assertion would flip to `true` and this test would fail --
+    /// proving the omission is load-bearing, not a no-op no one would
+    /// notice. See `should_delete_map_object`'s own doc comment for the
+    /// Python-source citation this reproduces.
+    #[test]
+    fn should_delete_map_object_never_matches_via_password_lock_module_dead_code() {
+        use uesave::games::palworld::{
+            PalMapConcreteModelModule, PalMapConcreteModelModuleData, PalPlayerLockInfo,
+        };
+        let player: uuid::Uuid = SDM_PLAYER.parse().unwrap();
+        let password_lock_module = PalMapConcreteModelModule {
+            module_type: "EPalMapObjectConcreteModelModuleType::PasswordLock".to_string(),
+            data: PalMapConcreteModelModuleData::PasswordLock {
+                lock_state: 0,
+                password: String::new(),
+                player_infos: vec![PalPlayerLockInfo {
+                    player_uid: fguid(SDM_PLAYER),
+                    try_failed_count: 0,
+                    try_success_cache: false,
+                }],
+                trailing_bytes: [0; 4],
+            },
+            custom_version_data: vec![],
+        };
+        let module_entry = MapEntry {
+            key: Property::Enum("EPalMapObjectConcreteModelModuleType::PasswordLock".to_string()),
+            value: Property::Struct(StructValue::Struct({
+                let mut properties = Properties::default();
+                properties.insert(
+                    "RawData",
+                    Property::Struct(StructValue::PalMapConcreteModelModule(password_lock_module)),
+                );
+                properties
+            })),
+        };
+        let object = map_object_with_model(SDM_NIL, SDM_NIL, None, Some(vec![module_entry]));
+
+        assert!(
+            !should_delete_map_object(&object, None, &[player]),
+            "PasswordLock's player_infos must never be consulted -- real Python's \
+             equivalent lookup targets the wrong (nested-in-RawData) location and \
+             is unreachable dead code; a functional check here would diverge from \
+             Python's actual byte-visible output"
+        );
+    }
+
+    #[test]
+    fn should_delete_map_object_returns_false_for_an_untyped_map_object() {
+        assert!(!should_delete_map_object(
+            &StructValue::Guid(uesave::FGuid::nil()),
+            None,
+            &[]
+        ));
+        let empty = StructValue::Struct(Properties::default());
+        assert!(!should_delete_map_object(&empty, None, &[]));
     }
 }

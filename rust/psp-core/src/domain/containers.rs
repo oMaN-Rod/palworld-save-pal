@@ -1098,6 +1098,117 @@ pub fn apply_base_dto(
     Ok(())
 }
 
+// ============================================================================
+// Player/guild deletion (Task 11) -- port of `GuildOpsMixin._delete_item_
+// containers`/`_delete_dynamic_items`/`_delete_character_containers`
+// (`guild_ops.py`).
+// ============================================================================
+
+/// `_delete_item_containers` + `_delete_dynamic_items` (`guild_ops.py`): for
+/// each container id, removes its slots' dynamic items, then the
+/// `ItemContainerSaveData` entry itself. An id that doesn't resolve to a
+/// real container is a silent no-op.
+///
+/// Deviation from Python: real `_delete_item_containers` also has a
+/// fallback branch that, for a `container_id` NOT found by direct lookup,
+/// searches for ANY container whose `BelongInfo.GroupId` equals the
+/// caller's own `target_id` argument and deletes that one instead. Every
+/// caller in this port (`player::delete_player_and_pals_for_guild`,
+/// `guild::delete_guild_and_players`) only ever passes container ids it
+/// already resolved from the session's OWN loaded player/base data, so that
+/// fallback path is never reachable for any id this port's own callers
+/// pass -- not reproduced here. See this task's report for the SEPARATE,
+/// genuinely reachable fallback bug in `guild_ops.py`'s second (buggy)
+/// `_delete_item_containers` call, which this port does not reproduce
+/// either.
+pub fn delete_item_containers(
+    session: &mut SaveSession,
+    container_ids: &[uuid::Uuid],
+) -> Result<(), CoreError> {
+    for &container_id in container_ids {
+        if session.caches.item_container_index.is_none() {
+            session.caches.item_container_index =
+                Some(world::build_item_container_index(&session.level));
+        }
+        let Some(entry_index) = session
+            .caches
+            .item_container_index
+            .as_ref()
+            .expect("just built")
+            .get(&container_id)
+            .copied()
+        else {
+            continue;
+        };
+
+        // Collect this container's dynamic-item local ids before removing
+        // it -- mirrors `read_item_container`'s own slot traversal.
+        let local_ids: Vec<uuid::Uuid> = {
+            let entries = world::item_container_map(&session.level)?;
+            let mut ids = Vec::new();
+            if let Some(value_props) = entries
+                .get(entry_index)
+                .and_then(|entry| props::struct_props(&entry.value))
+            {
+                if let Some(slot_values) =
+                    props::get(value_props, &["Slots"]).and_then(props::struct_values)
+                {
+                    for slot_value in slot_values {
+                        let StructValue::Struct(slot_props) = slot_value else {
+                            continue;
+                        };
+                        if let Some(Property::Struct(StructValue::PalItemContainerSlots(raw))) =
+                            slot_props.0.get(&PropertyKey::from("RawData"))
+                        {
+                            let local_id =
+                                props::guid_to_uuid(&raw.item.dynamic_id.local_id_in_created_world);
+                            if local_id != props::EMPTY_UUID {
+                                ids.push(local_id);
+                            }
+                        }
+                    }
+                }
+            }
+            ids
+        };
+        for local_id in local_ids {
+            // Invalidates `dynamic_item_index` itself -- see its own doc
+            // comment on why that must happen immediately, not deferred.
+            remove_dynamic_item(session, local_id)?;
+        }
+
+        let entries = world::item_container_map_mut(&mut session.level)?;
+        if entry_index < entries.len() {
+            entries.remove(entry_index);
+        }
+        // The removal above shifts every later entry's position; the next
+        // loop iteration (or any later caller) must rebuild fresh.
+        session.caches.item_container_index = None;
+    }
+    Ok(())
+}
+
+/// `_delete_character_containers` (`guild_ops.py`): removes every
+/// `CharacterContainerSaveData` entry whose key matches one of
+/// `container_ids`. An id that isn't present is a silent no-op, matching
+/// `IndexedCollection.remove_by_key`'s own tolerant behavior.
+pub fn delete_character_containers(
+    session: &mut SaveSession,
+    container_ids: &[uuid::Uuid],
+) -> Result<(), CoreError> {
+    let targets: std::collections::HashSet<uuid::Uuid> = container_ids.iter().copied().collect();
+    let entries = world::character_container_map_mut(&mut session.level)?;
+    entries.retain(|entry| {
+        props::struct_props(&entry.key)
+            .and_then(|key| key.0.get(&PropertyKey::from("ID")))
+            .and_then(props::as_uuid)
+            .map(|id| !targets.contains(&id))
+            .unwrap_or(true)
+    });
+    session.caches.character_container_index = None;
+    Ok(())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
