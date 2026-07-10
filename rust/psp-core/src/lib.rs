@@ -6,4 +6,5 @@ pub mod gamedata;
 pub mod palbin;
 pub mod progress;
 pub mod props;
+pub mod savio;
 pub mod session;

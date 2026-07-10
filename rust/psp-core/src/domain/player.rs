@@ -788,6 +788,14 @@ fn apply_player_dto(
                 Property::Array(ValueVec::Struct(quest_structs)),
             );
         }
+        // `bossTechnologyPoint` is written unconditionally above, but saves
+        // generated before that field existed carry no schema for it, and
+        // uesave's writer refuses to serialize a schema-less property
+        // (`MissingPropertySchema`). Register one now -- see this function's
+        // own note above and `ensure_boss_technology_point_schema`. Must run
+        // after the `save_data` borrow of `loaded.sav` ends (this call needs
+        // `&mut loaded.sav` for its `.schemas` table).
+        ensure_boss_technology_point_schema(&mut loaded.sav);
         // unlock flags: only when the caller actually supplied a value
         // (player.py's `case ... : if value is not None: setattr(...)`).
         // Needs `&mut loaded.sav` (not just its `SaveData` `Properties`) so it
@@ -1053,6 +1061,49 @@ fn apply_unlock_flags(player_sav: &mut uesave::Save, flag_name: &str, keys: &[St
         "RelicPossessNum",
         props::int_property(current.saturating_add(keys.len() as i32)),
     );
+}
+
+/// Registers the `SaveData.bossTechnologyPoint` schema when the player's
+/// `.sav` doesn't already carry one, so `apply_player_dto`'s unconditional
+/// `bossTechnologyPoint` write survives a real `uesave::Save::write`.
+///
+/// **Why this exists (Task 10 → Task 12 carry-forward).** `apply_player_dto`
+/// always writes `SaveData.bossTechnologyPoint` (an `IntProperty`, mirroring
+/// Python `Player.technologies`'s setter, which sets both `TechnologyPoint`
+/// and `bossTechnologyPoint`). Every value edit in this port stays in memory
+/// until Task 12's save-out compresses the tree back through
+/// `uesave::Save::write`, and uesave's writer looks a property's schema up by
+/// its exact dotted scope path and returns `MissingPropertySchema` when none
+/// was recorded (see `props::ensure_schema`'s own doc comment). A save
+/// generated before `bossTechnologyPoint` existed -- e.g. the committed
+/// fixture `tests/fixtures/saves/world1`'s real player `8C2F1930`, which
+/// carries `SaveData.TechnologyPoint` but NO `SaveData.bossTechnologyPoint`
+/// schema (verified empirically) -- would therefore fail the resave with
+/// `missing property schema for path: SaveData.bossTechnologyPoint`. This was
+/// invisible before Task 12 because Task 10 was the first code to insert the
+/// property but nothing yet round-tripped an edited player `.sav` through the
+/// writer.
+///
+/// The schema is copied from the always-present sibling `TechnologyPoint`
+/// (same `IntProperty` shape, same `SaveData` scope): `schema_prefix_ending_
+/// with(".TechnologyPoint")` yields the `SaveData` prefix (`bossTechnology
+/// Point` does NOT end with `.TechnologyPoint` -- the char before is `s`, not
+/// `.` -- so the match is unambiguous), and `ensure_schema` records
+/// `SaveData.bossTechnologyPoint` only when it's genuinely absent (a no-op on
+/// a newer save that already has it). Silent no-op when a malformed `.sav`
+/// has no `TechnologyPoint` schema at all -- the writer would then surface
+/// the same clear error, never a panic.
+fn ensure_boss_technology_point_schema(player_sav: &mut uesave::Save) {
+    if let Some(prefix) = props::schema_prefix_ending_with(player_sav, ".TechnologyPoint") {
+        props::ensure_schema(
+            player_sav,
+            format!("{prefix}.bossTechnologyPoint"),
+            uesave::PropertyTagPartial {
+                id: None,
+                data: uesave::PropertyTagDataPartial::Other(uesave::PropertyType::IntProperty),
+            },
+        );
+    }
 }
 
 // ============================================================================

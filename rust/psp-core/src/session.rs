@@ -63,6 +63,11 @@ impl PlayerFileData {
     }
 }
 
+/// One lazily-loaded player's compressed save-out: the `.sav` bytes and, when
+/// the player has a `_dps.sav` companion, its bytes too. Mirrors Python
+/// `player_gvas_files`'s `{"sav": bytes, "dps": Optional[bytes]}` per uid.
+pub type PlayerSaveBytes = (Vec<u8>, Option<Vec<u8>>);
+
 /// A lazily loaded player `.sav` (and, when present, its `_dps.sav`
 /// companion), cached once parsed so a later edit doesn't re-read/re-parse
 /// the file. Task 7 populates this on first detail load.
@@ -441,6 +446,76 @@ impl SaveSession {
 
     pub fn has_gps_available(&self) -> bool {
         self.gps_loaded || self.gps_file_path.is_some()
+    }
+
+    /// Compresses the current (possibly edited) `Level.sav` tree back to its
+    /// PlM/Oodle `.sav` bytes. Port of `SerializationMixin.sav`
+    /// (`serialization.py:106-111`), which does `compress_gvas_to_sav(self.
+    /// _gvas_file.write(CUSTOM_PROPERTIES), 0x31)` — the save-type `0x31` and
+    /// `PlM` magic are emitted by `savio::write_sav_bytes`.
+    pub fn level_sav_bytes(&self) -> Result<Vec<u8>, CoreError> {
+        crate::savio::write_sav_bytes(&self.level)
+    }
+
+    /// Compresses the loaded `LevelMeta.sav` tree back to its `.sav` bytes, or
+    /// `None` when no LevelMeta was loaded. Port of
+    /// `SerializationMixin.level_meta_sav` (`serialization.py:172-178`), which
+    /// returns `None` when `self._level_meta_gvas_file` is falsy.
+    pub fn level_meta_sav_bytes(&self) -> Result<Option<Vec<u8>>, CoreError> {
+        match &self.level_meta {
+            Some(meta) => Ok(Some(crate::savio::write_sav_bytes(meta)?)),
+            None => Ok(None),
+        }
+    }
+
+    /// Compresses every lazily-loaded player's `.sav` (and its `_dps.sav`
+    /// companion, when present) back to `.sav` bytes. Port of
+    /// `SerializationMixin.player_gvas_files` (`serialization.py:124-145`),
+    /// which iterates `self._player_gvas_files` — ONLY the players lazily
+    /// loaded so far (Task 7 populates `loaded_players` on first detail
+    /// load), NOT every player the save records.
+    ///
+    /// Deviation from the brief: the brief's signature returns
+    /// `indexmap::IndexMap<Uuid, ..>`. `indexmap` is deliberately not a
+    /// dependency of this port (`session.rs`'s `loaded_players` doc comment
+    /// records the project-wide `IndexMap → BTreeMap` reconciliation). The
+    /// return is a `BTreeMap<Uuid, (Vec<u8>, Option<Vec<u8>>)>` instead. This
+    /// is faithful, not a compromise: Python's dict maps each uid to its OWN
+    /// independent pair of files, so the map's iteration order affects no
+    /// file's contents and reaches no wire array — only the per-uid `.sav`/
+    /// `_dps.sav` bytes matter, and those are `BTreeMap`-order-independent.
+    pub fn player_sav_bytes(&self) -> Result<BTreeMap<Uuid, PlayerSaveBytes>, CoreError> {
+        let mut player_files = BTreeMap::new();
+        for (player_id, loaded) in &self.loaded_players {
+            let sav_bytes = crate::savio::write_sav_bytes(&loaded.sav)?;
+            let dps_bytes = match &loaded.dps {
+                Some(dps_save) => Some(crate::savio::write_sav_bytes(dps_save)?),
+                None => None,
+            };
+            player_files.insert(*player_id, (sav_bytes, dps_bytes));
+        }
+        Ok(player_files)
+    }
+
+    /// Renames the world: updates the loaded `LevelMeta.sav`'s
+    /// `SaveData.WorldName` property AND the session's own `world_name`. Port
+    /// of `SaveManager.set_world_name` (`save_manager.py:191-204`), which
+    /// raises `ValueError("No LevelMeta GvasFile has been loaded.")` when no
+    /// LevelMeta is loaded — reproduced here as `CoreError::Other` carrying
+    /// that exact string (it reaches the UI as an error frame). Sets
+    /// `self.world_name` first (as Python does), then writes the property.
+    pub fn set_world_name(&mut self, new_name: &str) -> Result<(), CoreError> {
+        let Some(meta) = self.level_meta.as_mut() else {
+            return Err(CoreError::Other(
+                "No LevelMeta GvasFile has been loaded.".to_string(),
+            ));
+        };
+        let save_data = props::get_mut(&mut meta.root.properties, &["SaveData"])
+            .and_then(props::struct_props_mut)
+            .ok_or_else(|| CoreError::Parse("LevelMeta SaveData missing".into()))?;
+        save_data.insert("WorldName", props::str_property(new_name));
+        self.world_name = new_name.to_string();
+        Ok(())
     }
 }
 
