@@ -51,6 +51,30 @@ pub fn known_pal_keys(game_data: &GameData) -> HashSet<String> {
 /// pals.
 const SICK_MARKERS: [&str; 3] = ["PalReviveTimer", "PhysicalHealth", "WorkerSick"];
 
+/// Port of `game/utils.py::get_pal_data`: resolves a pal's static
+/// `pals.json` entry from an already-computed `character_key`
+/// (case-insensitive against the real key casing, matching Python's
+/// `PALS_KEY_MAP = {k.lower(): k for k in PAL_DATA.keys()}` lookup table).
+/// `None` for an empty key (`if not character_key: return None`) or an
+/// unrecognized one (`if not key: return None`). Shared by `max_hp_for`
+/// (`Pal.max_hp`'s `self.pal_data`) and `read_save_parameter_dto`'s
+/// `stomach` NaN/Infinity guard (`Pal.stomach`'s `_set_max_stomach`), both
+/// of which port a Python property that reads `self.pal_data` the same way.
+fn pal_data_for<'a>(character_key: &str, game_data: &'a GameData) -> Option<&'a serde_json::Value> {
+    if character_key.is_empty() {
+        return None;
+    }
+    game_data
+        .get("pals")
+        .and_then(|value| value.as_object())
+        .and_then(|pals_json| {
+            pals_json
+                .iter()
+                .find(|(key, _)| key.to_lowercase() == character_key)
+                .map(|(_, value)| value)
+        })
+}
+
 /// Port of `Pal`'s full computed-field dump (`game/pal.py`), applied to an
 /// already-resolved `SaveParameter` property bag. Shared by both call sites
 /// that own such a bag: `pal_dto_from_entry` (Level.sav pals, `is_dps:
@@ -133,6 +157,16 @@ pub fn read_save_parameter_dto(
                 continue;
             };
             let bare = work_name.trim_start_matches("EPalWorkSuitability::");
+            // Deliberate divergence from Python: `WorkSuitability.from_value`
+            // (game/enum.py) returns `None` (no fallback variant) for an
+            // unrecognized bare name, and `Pal.work_suitability`'s
+            // pydantic-validated return type is `Dict[WorkSuitability, int]`
+            // -- assigning a `None` key there fails model validation, i.e.
+            // an unrecognized WorkSuitability name would crash Python's read
+            // path outright rather than silently drop the entry. This port
+            // skips just that one entry instead (never panics on untrusted
+            // save data), matching the "malformed input is skipped, not
+            // fatal" rule documented at the top of this file.
             if !WORK_SUITABILITIES.contains(&bare) {
                 continue;
             }
@@ -169,10 +203,41 @@ pub fn read_save_parameter_dto(
         None
     };
 
+    // `character_key` (Pal.character_key / Pal.pal_data): computed once up
+    // front because `stomach`'s NaN/Infinity guard below needs it to resolve
+    // `pal_data["max_full_stomach"]`, the same `self.pal_data` lookup
+    // (`get_pal_data(self.character_key)`) Python's `_set_max_stomach` uses.
+    let character_key = format_character_key(&character_id, &known_pal_keys(game_data));
+
+    // `stomach` (Pal.stomach): 150.0 when FullStomach is absent. Python has
+    // an explicit "artifact bug fix" (game/pal.py Pal.stomach) for corrupted
+    // saves seen in the wild: `if not isinstance(stomach, float) or
+    // math.isnan(stomach): return self._set_max_stomach()`. A present
+    // FullStomach that decodes to a non-finite f32 (NaN observed in
+    // practice; Infinity guarded for the same reason) must not leak onto the
+    // wire -- `serde_json` has no NaN/Infinity literal and would silently
+    // downgrade it to JSON `null` -- so it falls back through the same chain
+    // `_set_max_stomach()` does: the pal's own `pals.json` `max_full_stomach`
+    // if it has one, else a flat 300.0. A missing/wrong-typed FullStomach
+    // property (as_f32 -> None) is a different Python branch ("FullStomach"
+    // not in save_parameter) and keeps the existing 150.0 default, not this
+    // fallback.
+    let raw_stomach = param(save_parameter, "FullStomach")
+        .and_then(props::as_f32)
+        .unwrap_or(150.0) as f64;
+    let stomach = if raw_stomach.is_finite() {
+        raw_stomach
+    } else {
+        pal_data_for(&character_key, game_data)
+            .and_then(|pal_data| pal_data.pointer("/max_full_stomach"))
+            .and_then(|value| value.as_f64())
+            .unwrap_or(300.0)
+    };
+
     let mut dto = PalDto {
         instance_id,
         owner_uid: param(save_parameter, "OwnerPlayerUId").and_then(props::as_uuid),
-        character_key: format_character_key(&character_id, &known_pal_keys(game_data)),
+        character_key,
         is_lucky: Some(is_lucky),
         is_boss: Some(is_boss),
         // `is_predator` (Pal.is_predator): startswith("PREDATOR_") if character_id else False.
@@ -220,10 +285,7 @@ pub fn read_save_parameter_dto(
         // is_tower (Pal.is_tower): startswith("GYM_") if character_id else False.
         is_tower: character_id.starts_with("GYM_"),
         storage_id,
-        // FullStomach (Pal.stomach): 150.0 when absent.
-        stomach: param(save_parameter, "FullStomach")
-            .and_then(props::as_f32)
-            .unwrap_or(150.0) as f64,
+        stomach,
         storage_slot,
         // MasteredWaza (Pal.learned_skills): [] when absent.
         learned_skills: param(save_parameter, "MasteredWaza")
@@ -271,17 +333,7 @@ pub fn read_save_parameter_dto(
 pub fn max_hp_for(dto: &PalDto, game_data: &GameData) -> i64 {
     let keys = known_pal_keys(game_data);
     let pal_key = format_character_key(&dto.character_id, &keys);
-    if pal_key.is_empty() {
-        return dto.hp;
-    }
-    let Some(pals_json) = game_data.get("pals").and_then(|v| v.as_object()) else {
-        return dto.hp;
-    };
-    let Some(pal_data) = pals_json
-        .iter()
-        .find(|(key, _)| key.to_lowercase() == pal_key)
-        .map(|(_, value)| value)
-    else {
+    let Some(pal_data) = pal_data_for(&pal_key, game_data) else {
         return dto.hp;
     };
     let Some(hp_scaling) = pal_data.pointer("/scaling/hp").and_then(|v| v.as_f64()) else {
@@ -413,8 +465,17 @@ pub fn pal_summaries(
             .map(|(guild, base)| (Some(guild), Some(base)))
             .unwrap_or((None, None));
 
+        // `gender` (summaries.py get_pal_summaries): `None` unless "Gender"
+        // is present AND its decoded value is truthy -- `gender = None;
+        // if "Gender" in save_parameter: raw_gender = ...; if raw_gender:
+        // gender = PalGender.from_value(raw_gender).value`. An empty
+        // decoded string is falsy in Python and leaves gender `None`; unlike
+        // the full `Pal.gender` dump (which always runs a present value
+        // through `from_value`, defaulting even an empty string to Female),
+        // summaries treat an empty string the same as an absent property.
         let gender = param(save_parameter, "Gender")
             .and_then(props::as_str)
+            .filter(|raw| !raw.is_empty())
             .map(|raw| match PalGender::from_prefixed(raw) {
                 PalGender::None => "None".to_string(),
                 PalGender::Male => "Male".to_string(),
@@ -781,5 +842,77 @@ mod tests {
             friendship_point: 0,
         };
         assert_eq!(max_hp_for(&dto, &data), 12345);
+    }
+
+    #[test]
+    fn read_save_parameter_dto_stomach_guards_against_nan_using_pal_data_fallback() {
+        // Python's "artifact bug fix" (game/pal.py Pal.stomach): a present
+        // but NaN FullStomach falls back through `_set_max_stomach()` --
+        // `pal_data["max_full_stomach"]` when the pal is recognized, else
+        // 300.0. "Alpaca" has `max_full_stomach: 225` in the real
+        // data/json/pals.json (verified via `.venv` Python).
+        let data = game_data();
+        let mut save_parameter = Properties::default();
+        save_parameter.insert("CharacterID", Property::Name("Alpaca".to_string()));
+        save_parameter.insert("FullStomach", Property::Float(uesave::Float(f32::NAN)));
+        let instance_id = uuid::Uuid::nil();
+
+        let dto = read_save_parameter_dto(&save_parameter, instance_id, false, &data);
+
+        assert_eq!(
+            dto.stomach, 225.0,
+            "NaN FullStomach on a recognized pal must fall back to pals.json's max_full_stomach"
+        );
+
+        // The wire-visible consequence: serde_json has no NaN literal and
+        // would otherwise silently downgrade this field to JSON `null`.
+        let serialized = serde_json::to_value(&dto).unwrap();
+        assert_eq!(
+            serialized["stomach"],
+            serde_json::json!(225.0),
+            "a NaN FullStomach must never reach the wire as null"
+        );
+    }
+
+    #[test]
+    fn read_save_parameter_dto_stomach_guards_against_infinity_using_flat_default_for_an_unrecognized_pal(
+    ) {
+        // Same guard, but for an unrecognized character_key (no pals.json
+        // entry at all) and Infinity rather than NaN -- both are non-finite,
+        // and Python's `math.isnan` alone would miss Infinity, so the Rust
+        // guard checks `is_finite()` instead of a NaN-only check.
+        let data = game_data();
+        let mut save_parameter = Properties::default();
+        save_parameter.insert(
+            "CharacterID",
+            Property::Name("TotallyMadeUpCreature".to_string()),
+        );
+        save_parameter.insert("FullStomach", Property::Float(uesave::Float(f32::INFINITY)));
+        let instance_id = uuid::Uuid::nil();
+
+        let dto = read_save_parameter_dto(&save_parameter, instance_id, false, &data);
+
+        assert_eq!(
+            dto.stomach, 300.0,
+            "non-finite FullStomach on an unrecognized pal must fall back to the flat 300.0 default"
+        );
+    }
+
+    #[test]
+    fn read_save_parameter_dto_stomach_missing_key_still_defaults_to_150_not_the_pal_data_fallback()
+    {
+        // A missing FullStomach key is a *different* Python branch ("FullStomach"
+        // not in save_parameter -> 150.0 directly) from a present-but-invalid
+        // value (-> _set_max_stomach()). Recognized pal ("Alpaca", whose
+        // max_full_stomach is 225, not 150) proves the two branches aren't
+        // conflated.
+        let data = game_data();
+        let mut save_parameter = Properties::default();
+        save_parameter.insert("CharacterID", Property::Name("Alpaca".to_string()));
+        let instance_id = uuid::Uuid::nil();
+
+        let dto = read_save_parameter_dto(&save_parameter, instance_id, false, &data);
+
+        assert_eq!(dto.stomach, 150.0);
     }
 }
