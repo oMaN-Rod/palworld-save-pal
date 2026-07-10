@@ -34,6 +34,43 @@ pub fn get_in<'a>(property: &'a uesave::Property, path: &[&str]) -> Option<&'a u
     Some(current)
 }
 
+/// Mutable counterpart of `get`. Phase 2's edit core navigates to a node and
+/// mutates it in place (a pal's stats, a container's slot list, ...), so
+/// every read path through the property tree needs a mutable mirror. Walks
+/// the same way `get` does: found by name only (the leading `u32` half of a
+/// `PropertyKey` disambiguates same-named sibling properties, a case this
+/// port has not needed to distinguish on any read path so far, `get`
+/// included) — so `get_mut` stays consistent with `get` rather than
+/// introducing a second, stricter lookup rule that could resolve a
+/// differently-keyed node than the immutable accessor would.
+pub fn get_mut<'a>(
+    properties: &'a mut uesave::Properties,
+    path: &[&str],
+) -> Option<&'a mut uesave::Property> {
+    let (segment, rest) = path.split_first()?;
+    let property = properties
+        .0
+        .iter_mut()
+        .find_map(|(key, value)| (key.1 == *segment).then_some(value))?;
+    if rest.is_empty() {
+        Some(property)
+    } else {
+        get_in_mut(property, rest)
+    }
+}
+
+/// Mutable counterpart of `get_in`.
+pub fn get_in_mut<'a>(
+    property: &'a mut uesave::Property,
+    path: &[&str],
+) -> Option<&'a mut uesave::Property> {
+    let mut current = property;
+    for segment in path {
+        current = get_mut(struct_props_mut(current)?, &[segment])?;
+    }
+    Some(current)
+}
+
 /// The nested `Properties` map of a user-struct property (e.g. a struct
 /// field like `ContainerId` whose value is itself a bag of properties).
 pub fn struct_properties(property: &uesave::Property) -> Option<&uesave::Properties> {
@@ -674,6 +711,32 @@ mod phase2_tests {
         assert_eq!(fixed_point64(&wrong_type_property), None);
 
         assert_eq!(fixed_point64(&Property::Bool(true)), None);
+    }
+
+    #[test]
+    fn get_mut_navigates_mutates_and_is_visible_through_get() {
+        let mut inner = Properties::default();
+        inner.insert("Value", Property::Str("before".to_string()));
+        let mut outer = Properties::default();
+        outer.insert("Inner", Property::Struct(StructValue::Struct(inner)));
+
+        // Navigate to the nested node and mutate it in place.
+        let found = get_mut(&mut outer, &["Inner", "Value"]).expect("get_mut finds nested node");
+        *found = Property::Str("after".to_string());
+
+        // Read the change back through the immutable accessor.
+        let read_back = get(&outer, &["Inner", "Value"]).expect("get finds the mutated node");
+        assert_eq!(Some("after"), as_str(read_back));
+    }
+
+    #[test]
+    fn get_mut_returns_none_for_missing_or_wrong_typed_path() {
+        let mut properties = Properties::default();
+        properties.insert("Present", Property::Bool(true));
+
+        assert!(get_mut(&mut properties, &["Missing"]).is_none());
+        // "Present" exists but isn't a struct, so descending into it fails.
+        assert!(get_mut(&mut properties, &["Present", "Nested"]).is_none());
     }
 
     #[test]

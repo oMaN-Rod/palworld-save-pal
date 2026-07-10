@@ -134,7 +134,7 @@ mod tests {
     fn fake_loaded_session() -> psp_core::session::SaveSession {
         use psp_core::dto::summary::{GuildSummary, PlayerSummary};
         use psp_core::session::{SaveKind, SaveSession};
-        use std::collections::{BTreeMap, HashMap};
+        use std::collections::BTreeMap;
 
         let low_player: uuid::Uuid = "11111111-1111-1111-1111-111111111111".parse().unwrap();
         let high_player: uuid::Uuid = "ffffffff-ffff-ffff-ffff-ffffffffffff".parse().unwrap();
@@ -194,46 +194,35 @@ mod tests {
             },
         );
 
-        SaveSession {
-            kind: SaveKind::InMemory,
-            world_name: "My World".to_string(),
-            level: uesave::Save {
-                header: uesave::Header {
-                    magic: 0,
-                    save_game_version: 0,
-                    package_version: uesave::PackageVersion { ue4: 0, ue5: None },
-                    engine_version_major: 0,
-                    engine_version_minor: 0,
-                    engine_version_patch: 0,
-                    engine_version_build: 0,
-                    engine_version: String::new(),
-                    custom_version: None,
-                },
-                schemas: uesave::PropertySchemas::default(),
-                root: uesave::Root {
-                    save_game_type: String::new(),
-                    properties: uesave::Properties::default(),
-                },
-                extra: Vec::new(),
+        let level = uesave::Save {
+            header: uesave::Header {
+                magic: 0,
+                save_game_version: 0,
+                package_version: uesave::PackageVersion { ue4: 0, ue5: None },
+                engine_version_major: 0,
+                engine_version_minor: 0,
+                engine_version_patch: 0,
+                engine_version_build: 0,
+                engine_version: String::new(),
+                custom_version: None,
             },
-            save_id: "C:/saves/world/Level.sav".to_string(),
-            save_type_label: "steam",
-            size: 12345,
-            level_meta: None,
-            player_file_refs: BTreeMap::new(),
-            player_sav_cache: HashMap::new(),
-            player_summaries,
-            guild_summaries,
-            player_summary_order: vec![high_player, low_player],
-            guild_summary_order: vec![high_guild, low_guild],
-            character_index: HashMap::new(),
-            item_container_index: HashMap::new(),
-            character_container_index: HashMap::new(),
-            group_index: HashMap::new(),
-            guild_extra_index: HashMap::new(),
-            gps_file_path: None,
-            gps_loaded: false,
-        }
+            schemas: uesave::PropertySchemas::default(),
+            root: uesave::Root {
+                save_game_type: String::new(),
+                properties: uesave::Properties::default(),
+            },
+            extra: Vec::new(),
+        };
+
+        let mut session = SaveSession::new_for_tests(SaveKind::InMemory, level);
+        session.world_name = "My World".to_string();
+        session.save_id = "C:/saves/world/Level.sav".to_string();
+        session.size = 12345;
+        session.player_summaries = player_summaries;
+        session.guild_summaries = guild_summaries;
+        session.player_summary_order = vec![high_player, low_player];
+        session.guild_summary_order = vec![high_guild, low_guild];
+        session
     }
 
     #[tokio::test]

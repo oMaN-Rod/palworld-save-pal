@@ -165,6 +165,45 @@ fn build_position_index(
 }
 
 impl SaveSession {
+    /// Builds a `SaveSession` with only `kind` and `level` set; every other
+    /// field defaults to an empty/harmless placeholder (`world_name:
+    /// String::new()`, empty maps, `size: 0`, `save_type_label: "steam"`).
+    ///
+    /// Named for its primary external caller — Phase 2's
+    /// `tests/common/mod.rs` and every test-only `SaveSession` builder in
+    /// this workspace construct a session through this one function instead
+    /// of re-declaring `SaveSession`'s full (and still growing) field list
+    /// at each call site. `load` below is built on it too, for the same
+    /// reason: one place to update when a field is added, not N
+    /// independently hand-written struct literals that silently go stale
+    /// (see the whole-branch Phase-1 review this constructor was raised
+    /// against: four such literals already existed before Phase 2's first
+    /// commit).
+    pub fn new_for_tests(kind: SaveKind, level: uesave::Save) -> Self {
+        SaveSession {
+            kind,
+            world_name: String::new(),
+            level,
+            save_id: String::new(),
+            save_type_label: "steam",
+            size: 0,
+            level_meta: None,
+            player_file_refs: BTreeMap::new(),
+            player_sav_cache: HashMap::new(),
+            player_summaries: BTreeMap::new(),
+            guild_summaries: BTreeMap::new(),
+            player_summary_order: Vec::new(),
+            guild_summary_order: Vec::new(),
+            character_index: HashMap::new(),
+            item_container_index: HashMap::new(),
+            character_container_index: HashMap::new(),
+            group_index: HashMap::new(),
+            guild_extra_index: HashMap::new(),
+            gps_file_path: None,
+            gps_loaded: false,
+        }
+    }
+
     /// Parses `Level.sav` (and `LevelMeta.sav`, when present) and builds the
     /// typed indexes Task 8/9 rely on. Mirrors the combination of Python's
     /// `AppState.process_save_files` (the `"Loading Level.sav..."` progress
@@ -204,28 +243,14 @@ impl SaveSession {
         // case for level_sav here.
         let size = level_sav_bytes.len() as u64 + 33;
 
-        let mut session = SaveSession {
-            kind,
-            world_name,
-            level,
-            save_id,
-            save_type_label,
-            size,
-            level_meta,
-            player_file_refs,
-            player_sav_cache: HashMap::new(),
-            player_summaries: BTreeMap::new(),
-            guild_summaries: BTreeMap::new(),
-            player_summary_order: Vec::new(),
-            guild_summary_order: Vec::new(),
-            character_index: HashMap::new(),
-            item_container_index: HashMap::new(),
-            character_container_index: HashMap::new(),
-            group_index: HashMap::new(),
-            guild_extra_index: HashMap::new(),
-            gps_file_path,
-            gps_loaded: false,
-        };
+        let mut session = SaveSession::new_for_tests(kind, level);
+        session.world_name = world_name;
+        session.save_id = save_id;
+        session.save_type_label = save_type_label;
+        session.size = size;
+        session.level_meta = level_meta;
+        session.player_file_refs = player_file_refs;
+        session.gps_file_path = gps_file_path;
 
         session.character_index =
             build_position_index(session.character_map()?, Some("InstanceId"));
@@ -488,28 +513,11 @@ mod load_tests {
     /// `world_properties`/`required_map`/`optional_map`, the only methods
     /// these tests call.
     fn session_with_level_properties(root_properties: uesave::Properties) -> SaveSession {
-        SaveSession {
-            kind: SaveKind::InMemory,
-            world_name: "Test".to_string(),
-            level: minimal_uesave_save(root_properties),
-            save_id: "test".to_string(),
-            save_type_label: "steam",
-            size: 0,
-            level_meta: None,
-            player_file_refs: std::collections::BTreeMap::new(),
-            player_sav_cache: std::collections::HashMap::new(),
-            player_summaries: std::collections::BTreeMap::new(),
-            guild_summaries: std::collections::BTreeMap::new(),
-            player_summary_order: Vec::new(),
-            guild_summary_order: Vec::new(),
-            character_index: std::collections::HashMap::new(),
-            item_container_index: std::collections::HashMap::new(),
-            character_container_index: std::collections::HashMap::new(),
-            group_index: std::collections::HashMap::new(),
-            guild_extra_index: std::collections::HashMap::new(),
-            gps_file_path: None,
-            gps_loaded: false,
-        }
+        let mut session =
+            SaveSession::new_for_tests(SaveKind::InMemory, minimal_uesave_save(root_properties));
+        session.world_name = "Test".to_string();
+        session.save_id = "test".to_string();
+        session
     }
 
     fn struct_property(properties: uesave::Properties) -> uesave::Property {

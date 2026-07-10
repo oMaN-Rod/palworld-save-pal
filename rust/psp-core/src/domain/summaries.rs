@@ -851,28 +851,13 @@ mod extraction_tests {
             Property::Struct(StructValue::Struct(world_save_data)),
         );
 
-        SaveSession {
-            kind: crate::session::SaveKind::InMemory,
-            world_name: "Test".to_string(),
-            level: minimal_uesave_save(root_properties),
-            save_id: "test".to_string(),
-            save_type_label: "steam",
-            size: 0,
-            level_meta: None,
-            player_file_refs: BTreeMap::new(),
-            player_sav_cache: HashMap::new(),
-            player_summaries: BTreeMap::new(),
-            guild_summaries: BTreeMap::new(),
-            player_summary_order: Vec::new(),
-            guild_summary_order: Vec::new(),
-            character_index: HashMap::new(),
-            item_container_index: HashMap::new(),
-            character_container_index: HashMap::new(),
-            group_index: HashMap::new(),
-            guild_extra_index: HashMap::new(),
-            gps_file_path: None,
-            gps_loaded: false,
-        }
+        let mut session = SaveSession::new_for_tests(
+            crate::session::SaveKind::InMemory,
+            minimal_uesave_save(root_properties),
+        );
+        session.world_name = "Test".to_string();
+        session.save_id = "test".to_string();
+        session
     }
 
     #[test]
