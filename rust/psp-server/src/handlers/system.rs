@@ -71,7 +71,7 @@ pub async fn handle_sync_app_state(ctx: &mut HandlerCtx<'_>) -> Result<(), Handl
         world_name: session.world_name.clone(),
         r#type: session.save_type_label,
         size: session.size,
-        has_gps: session.has_gps_available(),
+        has_gps: session.gps_available(),
     };
     ctx.emitter.emit(MessageType::LoadedSaveFiles, &payload);
     emit_summary_messages(session, ctx.emitter);

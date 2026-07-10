@@ -971,7 +971,13 @@ pub const EX_STATUS_NAMES: [&str; 5] = ["最大HP", "最大SP", "攻撃力", "�
 
 /// `PalObjects.GetStatusPointList` (`pal_objects.py`): one `{StatusName,
 /// StatusPoint: 0}` struct per status name.
-fn status_point_structs(names: &[&str]) -> Property {
+///
+/// `pub(crate)`, not private: `domain::gps`'s `add_gps_pal`/
+/// `add_gps_pal_from_dto` reuse this verbatim for `GlobalPalStorage.sav`
+/// slots, which share the exact same per-slot `SaveParameter` layout as a
+/// player's `_dps.sav` array (`Pal(data=..., dps=True)` in Python covers
+/// both).
+pub(crate) fn status_point_structs(names: &[&str]) -> Property {
     let mut values = Vec::new();
     for status_name in names {
         let mut status_props = Properties::default();
@@ -2236,7 +2242,12 @@ fn first_empty_dps_slot(slots: &[StructValue]) -> Option<usize> {
 ///   elements to infer a schema from) avoids any risk of the freshly built
 ///   property disagreeing with whatever tag/shape metadata the original,
 ///   already-successfully-parsed property carried.
-fn reset_dps_save_parameter(save_parameter: &mut Properties) {
+///
+/// `pub(crate)`: `domain::gps`'s `add_gps_pal`/`delete_gps_pals` reuse this
+/// directly for `GlobalPalStorage.sav` slots -- same `SaveParameter` shape,
+/// same reset semantics (`Pal(data=..., dps=True).reset()` in Python is one
+/// method shared by both DPS-array kinds).
+pub(crate) fn reset_dps_save_parameter(save_parameter: &mut Properties) {
     save_parameter.insert("CharacterID", props::name_property("None"));
     save_parameter.insert("NickName", props::str_property(""));
     save_parameter.insert("FilteredNickName", props::str_property(""));

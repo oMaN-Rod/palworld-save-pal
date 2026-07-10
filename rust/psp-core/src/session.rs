@@ -187,8 +187,12 @@ pub struct SaveSession {
     pub group_index: HashMap<Uuid, usize>,
     /// key → GuildExtraSaveDataMap position.
     pub guild_extra_index: HashMap<Uuid, usize>,
-    pub gps_file_path: Option<PathBuf>,
-    pub gps_loaded: bool,
+    /// GPS (Global Pal Storage) session state -- Task 3D-1's `GpsState`
+    /// (`domain::gps`). Kept as a single sub-struct, not flattened, so every
+    /// GPS field (`file_path`/`save`/`slot_count`/`pals`/`loaded`) lives next
+    /// to the methods that mutate it (`domain::gps`'s `impl SaveSession`
+    /// block) rather than growing this struct's own top-level field list.
+    pub gps: crate::domain::gps::GpsState,
     /// Lazily loaded/parsed player `.sav` files (Task 7). Keyed by player
     /// uid, same as `player_file_refs`/`player_sav_cache`.
     ///
@@ -314,8 +318,7 @@ impl SaveSession {
             character_container_index: HashMap::new(),
             group_index: HashMap::new(),
             guild_extra_index: HashMap::new(),
-            gps_file_path: None,
-            gps_loaded: false,
+            gps: crate::domain::gps::GpsState::default(),
             loaded_players: BTreeMap::new(),
             loaded_guilds: HashSet::new(),
             caches: WorldCaches::default(),
@@ -379,7 +382,7 @@ impl SaveSession {
         session.size = size;
         session.level_meta = level_meta;
         session.player_file_refs = player_file_refs;
-        session.gps_file_path = gps_file_path;
+        session.gps.file_path = gps_file_path;
 
         session.character_index =
             build_position_index(session.character_map()?, Some("InstanceId"));
@@ -442,10 +445,6 @@ impl SaveSession {
     /// `GuildExtraSaveDataMap` — same optionality as `base_camp_map`.
     pub fn guild_extra_map(&self) -> Option<&[uesave::MapEntry]> {
         self.optional_map("GuildExtraSaveDataMap")
-    }
-
-    pub fn has_gps_available(&self) -> bool {
-        self.gps_loaded || self.gps_file_path.is_some()
     }
 
     /// Compresses the current (possibly edited) `Level.sav` tree back to its
@@ -703,8 +702,8 @@ mod load_tests {
         assert!(session.character_container_index.is_empty());
         assert!(session.group_index.is_empty());
         assert!(session.guild_extra_index.is_empty());
-        assert!(session.gps_file_path.is_none());
-        assert!(!session.gps_loaded);
+        assert!(session.gps.file_path.is_none());
+        assert!(!session.gps.loaded);
         assert!(session.loaded_players.is_empty());
         assert!(session.loaded_guilds.is_empty());
         assert!(session.caches.character_index.is_none());
