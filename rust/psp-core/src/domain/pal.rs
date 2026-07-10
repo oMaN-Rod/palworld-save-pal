@@ -322,7 +322,11 @@ pub fn read_save_parameter_dto(
             .unwrap_or(0) as i64,
         character_id,
     };
-    dto.max_hp = max_hp_for(&dto, game_data);
+    // `is_boss`/`is_lucky` here are the same local variables computed above
+    // (lines 104-108) that `dto.is_boss`/`dto.is_lucky` were just set from --
+    // never stale on this read path, unlike `apply_pal_dto`'s caller-supplied
+    // DTO (see `max_hp_for`'s doc comment).
+    dto.max_hp = max_hp_for(&dto, is_boss || is_lucky, game_data);
     dto
 }
 
@@ -330,7 +334,23 @@ pub fn read_save_parameter_dto(
 /// isn't recognized or has no `scaling.hp` entry in `pals.json` -- the same
 /// fallback Python's `if not self.character_key or not self.pal_data:
 /// return self.hp` / `if not hp_scaling: return self.hp` apply.
-pub fn max_hp_for(dto: &PalDto, game_data: &GameData) -> i64 {
+///
+/// `boosted` is the caller-computed `self.is_boss or self.is_lucky`
+/// (`game/pal.py` `Pal.max_hp`'s `alpha_scaling` condition). By boolean
+/// absorption (`is_boss = character_id.upper().startswith("BOSS_") and not
+/// is_lucky`), `is_boss or is_lucky` simplifies to `character_id.upper().
+/// startswith("BOSS_") or is_lucky` -- see this module's `apply_pal_dto` doc
+/// comment. This function deliberately does NOT read `dto.is_boss`/
+/// `dto.is_lucky` itself: on the write path (`apply_pal_dto`), `dto.is_boss`
+/// is caller-supplied DTO input that can be stale (echoed back by a client
+/// after `character_id` changed -- the exact hazard `apply_pal_dto`'s own
+/// boss-prefix fix addresses two lines away), and `dto.is_lucky` can be
+/// `None` (meaning "leave `IsRarePal` untouched", not "false"), so neither
+/// field reflects the save's actual current state at the point `Hp` is
+/// computed. Making the caller pass the already-resolved `boosted` boolean,
+/// rather than accepting an `is_boss`/`is_lucky` the caller could get wrong,
+/// makes a stale value structurally impossible to feed into this function.
+pub fn max_hp_for(dto: &PalDto, boosted: bool, game_data: &GameData) -> i64 {
     let keys = known_pal_keys(game_data);
     let pal_key = format_character_key(&dto.character_id, &keys);
     let Some(pal_data) = pal_data_for(&pal_key, game_data) else {
@@ -342,11 +362,7 @@ pub fn max_hp_for(dto: &PalDto, game_data: &GameData) -> i64 {
     let condenser_bonus = (dto.rank as f64 - 1.0) * 0.05;
     let hp_iv = dto.talent_hp as f64 * 0.3 / 100.0;
     let hp_soul_bonus = dto.rank_hp as f64 * 0.03;
-    let alpha_scaling = if dto.is_boss.unwrap_or(false) || dto.is_lucky.unwrap_or(false) {
-        1.2
-    } else {
-        1.0
-    };
+    let alpha_scaling = if boosted { 1.2 } else { 1.0 };
     let base = (500.0
         + 5.0 * dto.level as f64
         + hp_scaling * 0.5 * dto.level as f64 * (1.0 + hp_iv) * alpha_scaling)
@@ -642,7 +658,13 @@ pub fn heal_save_parameter(
 /// byte-serialization time. This port saturates instead, matching the
 /// project's "never panic on malformed/adversarial input" policy (this is
 /// about untrusted DTO input from the API, not save-file bytes, but the same
-/// policy applies).
+/// policy applies). `FriendshipPoint` and `storage_slot`'s `SlotIndex` are
+/// saturated to `i32::MIN..=i32::MAX` for the identical reason -- both are
+/// plain UE `IntProperty`s built from a `PalDto` `i64` field, so a bare
+/// `as i32` would silently wrap instead of matching Python's would-be crash.
+/// `exp`'s `Int64Property` needs no such clamp: `PalDto::exp` is already
+/// `i64`, the exact width `Int64Property` stores, so no narrowing cast (and
+/// therefore no overflow) is possible there at all.
 pub fn apply_pal_dto(
     save_parameter: &mut Properties,
     dto: &crate::dto::pal::PalDto,
@@ -781,7 +803,17 @@ pub fn apply_pal_dto(
         .get_mut(&PropertyKey::from(slot_key))
         .and_then(props::struct_props_mut)
     {
-        slot_struct.insert("SlotIndex", props::int_property(dto.storage_slot as i32));
+        // Saturate rather than wrap: `SlotIndex` is a plain UE `IntProperty`
+        // (i32); Python's `PalObjects.PalCharacterSlotId` would raise an
+        // unhandled `struct.error` on an out-of-i32-range value rather than
+        // silently wrapping it, so a bare `as i32` here would produce a
+        // *different* wrong value than Python's crash -- matching the same
+        // "saturate untrusted DTO input rather than wrap" policy already
+        // applied to `Rank`/`Level`/`Talent_*`/`Rank_*` above.
+        slot_struct.insert(
+            "SlotIndex",
+            props::int_property(dto.storage_slot.clamp(i32::MIN as i64, i32::MAX as i64) as i32),
+        );
     }
 
     // MasteredWaza (Pal.learned_skills setter): remove when empty.
@@ -844,10 +876,13 @@ pub fn apply_pal_dto(
         );
     }
 
-    // FriendshipPoint (Pal.friendship_point setter): always applied.
+    // FriendshipPoint (Pal.friendship_point setter): always applied. Saturate
+    // rather than wrap -- same rationale as `storage_slot` above: a plain UE
+    // `IntProperty` (i32), and Python's `PalObjects.IntProperty` would raise
+    // on an out-of-range value rather than wrap.
     save_parameter.insert(
         "FriendshipPoint",
-        props::int_property(dto.friendship_point as i32),
+        props::int_property(dto.friendship_point.clamp(i32::MIN as i64, i32::MAX as i64) as i32),
     );
 
     // Tail of update_from (game/pal.py): `self.hp = self.max_hp` -- recomputed
@@ -856,7 +891,29 @@ pub fn apply_pal_dto(
     // redundant write-then-overwrite via the "hp" key in the generic
     // setattr loop) never survives. Then heal() for non-DPS pals, then
     // boss-prefix formatting.
-    let max_hp = max_hp_for(dto, game_data);
+    //
+    // `self.max_hp`'s `alpha_scaling` reads `self.is_boss or self.is_lucky`
+    // (game/pal.py), and BOTH are live computed properties re-read from the
+    // save's ACTUAL current state at this exact point in `update_from`, not
+    // from the incoming DTO: `self.is_lucky` reads directly off whatever
+    // "IsRarePal" now holds in `_save_parameter` -- set moments ago if
+    // `dto.is_lucky` was `Some`, or left exactly as it already was if `None`
+    // (the is_lucky-None-skip fix above) -- and `self.is_boss` reads
+    // `self.character_id`, just set to `dto.character_id`. Reading
+    // `dto.is_boss`/`dto.is_lucky` directly here instead (as the brief's
+    // reference code did) is wrong on two counts: `dto.is_boss` is
+    // caller-supplied and can be stale (the same hazard the boss-prefix fix
+    // below addresses for `CharacterID`, missed here for `Hp`), and
+    // `dto.is_lucky` can be `None` -- which means "leave `IsRarePal`
+    // untouched", not "false" -- so `dto.is_lucky.unwrap_or(false)` would
+    // silently disagree with a pal that is actually still lucky from before
+    // this call. Reading `IsRarePal` back off `save_parameter` (post-write)
+    // is the only way to match Python's live-getter re-read exactly.
+    let current_is_lucky = param(save_parameter, "IsRarePal")
+        .and_then(props::as_bool)
+        .unwrap_or(false);
+    let boosted = dto.character_id.to_uppercase().starts_with("BOSS_") || current_is_lucky;
+    let max_hp = max_hp_for(dto, boosted, game_data);
     save_parameter.insert("Hp", props::fixed_point64_property(max_hp));
     // Legacy spelling cleanup: proactively removes a stale "HP" key whenever
     // "Hp" is rewritten. Python only ever migrates "HP" -> "Hp" as a side
@@ -916,6 +973,14 @@ fn status_point_structs(names: &[&str]) -> Property {
     }
     Property::Array(ValueVec::Struct(values))
 }
+
+/// `PalObjects.TIME` (`pal_objects.py`): a fixed UE tick count (not "now"),
+/// used verbatim by `PalObjects.PalSaveParameter` for a freshly created pal's
+/// `OwnedTime`. `uesave`'s `StructValue::DateTime` is a bare tick-count
+/// `u64` alias, so a wrong value here (this port previously wrote a literal
+/// `0`, which decodes to `0001-01-01`) compiles silently but writes a wrong
+/// "owned since" timestamp into the save for every freshly created pal.
+const PAL_OWNED_TIME_TICKS: u64 = 638_486_453_957_560_000;
 
 /// `PalObjects.PalSaveParameter`'s literal `CustomVersionData` byte payload
 /// (`pal_objects.py`) -- opaque UE custom-version-guid metadata, unrelated to
@@ -981,7 +1046,10 @@ pub fn new_pal_entry(
     save_parameter.insert("Talent_Defense", props::byte_property(50));
     save_parameter.insert("FullStomach", props::float_property(300.0));
     save_parameter.insert("PassiveSkillList", props::name_array_property(vec![]));
-    save_parameter.insert("OwnedTime", Property::Struct(StructValue::DateTime(0)));
+    save_parameter.insert(
+        "OwnedTime",
+        Property::Struct(StructValue::DateTime(PAL_OWNED_TIME_TICKS)),
+    );
     save_parameter.insert("OwnerPlayerUId", props::guid_property(owner_uid));
     save_parameter.insert(
         "OldOwnerPlayerUIds",
@@ -1463,7 +1531,7 @@ mod tests {
             is_sick: false,
             friendship_point: 0,
         };
-        assert_eq!(max_hp_for(&dto, &data), 12345);
+        assert_eq!(max_hp_for(&dto, false, &data), 12345);
     }
 
     #[test]
