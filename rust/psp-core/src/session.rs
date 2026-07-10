@@ -502,8 +502,12 @@ impl SaveSession {
     /// of `SaveManager.set_world_name` (`save_manager.py:191-204`), which
     /// raises `ValueError("No LevelMeta GvasFile has been loaded.")` when no
     /// LevelMeta is loaded — reproduced here as `CoreError::Other` carrying
-    /// that exact string (it reaches the UI as an error frame). Sets
-    /// `self.world_name` first (as Python does), then writes the property.
+    /// that exact string (it reaches the UI as an error frame). Python sets
+    /// `self.world_name` before writing the property; here the `SaveData`
+    /// borrow is live while we write `WorldName`, so `self.world_name` is set
+    /// immediately after. Both run only once the LevelMeta guard and the
+    /// `SaveData` lookup have succeeded, so the observable result is identical:
+    /// neither is touched unless a LevelMeta is loaded.
     pub fn set_world_name(&mut self, new_name: &str) -> Result<(), CoreError> {
         let Some(meta) = self.level_meta.as_mut() else {
             return Err(CoreError::Other(
