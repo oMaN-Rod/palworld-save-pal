@@ -115,6 +115,12 @@ async fn route(
         MessageType::GetLabResearch => handlers::game_data::handle_get_lab_research(ctx).await,
         MessageType::SyncAppState => handlers::system::handle_sync_app_state(ctx).await,
         MessageType::GetPresets => handlers::presets::handle_get_presets(ctx).await,
+        MessageType::SelectSave => {
+            handlers::save_file::handle_select_save(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::LoadZipFile => {
+            handlers::save_file::handle_load_zip_file(serde_json::from_value(data)?, ctx).await
+        }
         // Remaining arms are added by Phases 1-6.
         other => {
             tracing::warn!(
