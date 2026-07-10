@@ -1,5 +1,6 @@
 // SQLite persistence. Settings table only in Phase 0; full schema lands in Phase 3.
 pub mod error;
+pub mod import_legacy;
 pub mod meta;
 pub mod settings;
 pub mod time;

@@ -4,4 +4,6 @@ pub enum DbError {
     Sqlx(#[from] sqlx::Error),
     #[error(transparent)]
     Migrate(#[from] sqlx::migrate::MigrateError),
+    #[error(transparent)]
+    Io(#[from] std::io::Error),
 }
