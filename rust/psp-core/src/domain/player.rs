@@ -74,7 +74,7 @@ pub fn ticks_to_isoformat(ticks: u64) -> String {
     }
 }
 
-fn save_data_props(player_sav: &uesave::Save) -> Result<&Properties, CoreError> {
+pub(crate) fn save_data_props(player_sav: &uesave::Save) -> Result<&Properties, CoreError> {
     props::struct_props(
         player_sav
             .root
@@ -88,7 +88,7 @@ fn save_data_props(player_sav: &uesave::Save) -> Result<&Properties, CoreError> 
 
 /// `PalObjects.get_nested(self._save_data, name, "value", "ID")`
 /// (`Player.pal_box_id`/`Player.otomo_container_id`).
-fn container_id_from(save_data: &Properties, name: &str) -> Option<uuid::Uuid> {
+pub(crate) fn container_id_from(save_data: &Properties, name: &str) -> Option<uuid::Uuid> {
     props::struct_props(save_data.0.get(&PropertyKey::from(name))?)
         .and_then(|inner| inner.0.get(&PropertyKey::from("ID")))
         .and_then(props::as_uuid)

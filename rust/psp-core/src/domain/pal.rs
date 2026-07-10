@@ -1228,6 +1228,1132 @@ pub fn ensure_pal_property_schemas(level: &mut uesave::Save) {
     );
 }
 
+// ============================================================================
+// Pal CRUD operations (Task 9) -- port of `PalOpsMixin` (`game/mixins/
+// pal_ops.py`) plus the `Player`/`Guild`/`Base` add/clone/move/delete methods
+// (`game/player.py`, `game/guild.py`, `game/base.py`). See this task's report
+// for the full Python-source citations and every place this diverges from
+// the brief.
+// ============================================================================
+
+/// `self._players.get(player_id)` truthiness check, shared by every op that
+/// requires a LOADED player (`pal_ops.py`'s `if not player: raise
+/// ValueError(...)`). The exact Python message text is part of the wire
+/// contract (handler failures surface it verbatim) -- `CoreError::Other`,
+/// never `CoreError::PlayerNotFound` (whose `Display` differs).
+fn require_loaded_player(session: &SaveSession, player_id: uuid::Uuid) -> Result<(), CoreError> {
+    if session.loaded_players.contains_key(&player_id) {
+        Ok(())
+    } else {
+        Err(CoreError::Other(format!(
+            "Player {player_id} not found in the save file."
+        )))
+    }
+}
+
+/// `Player.pal_box_id`/`Player.otomo_container_id` (`game/player.py`): both
+/// read `PalObjects.get_nested(self._save_data, name, "value", "ID")` off
+/// the loaded player's OWN `.sav` (`_save_data`), not `Level.sav`.
+fn player_container_ids(
+    session: &SaveSession,
+    player_id: uuid::Uuid,
+) -> Result<(uuid::Uuid, uuid::Uuid), CoreError> {
+    let loaded = session.loaded_players.get(&player_id).ok_or_else(|| {
+        CoreError::Other(format!("Player {player_id} not found in the save file."))
+    })?;
+    let save_data = super::player::save_data_props(&loaded.sav)?;
+    let pal_box_id = super::player::container_id_from(save_data, "PalStorageContainerId")
+        .ok_or_else(|| CoreError::Parse("PalStorageContainerId missing".into()))?;
+    let party_id = super::player::container_id_from(save_data, "OtomoCharacterContainerId")
+        .ok_or_else(|| CoreError::Parse("OtomoCharacterContainerId missing".into()))?;
+    Ok((pal_box_id, party_id))
+}
+
+/// `CharacterContainerSaveData` key.ID -> entry position, cached the same
+/// way `containers::read_item_container` caches `item_container_index`/
+/// `dynamic_item_index` in `WorldCaches` -- two-step (check-then-build) to
+/// avoid borrowing `session.level` inside a `&mut session.caches` closure.
+fn container_entry_index(
+    session: &mut SaveSession,
+    container_id: uuid::Uuid,
+) -> Result<Option<usize>, CoreError> {
+    if session.caches.character_container_index.is_none() {
+        session.caches.character_container_index =
+            Some(world::build_character_container_index(&session.level));
+    }
+    Ok(session
+        .caches
+        .character_container_index
+        .as_ref()
+        .expect("just built")
+        .get(&container_id)
+        .copied())
+}
+
+/// `Guild.add_pal` (`guild.py`): appends `{guid: EMPTY, instance_id}`
+/// (`PalObjects.individual_character_handle_ids`, verified in
+/// `pal_objects.py`) to the guild's `individual_character_handle_ids` --
+/// `PalGroupData`'s own typed field (decoded natively by `uesave`, NOT part
+/// of `GuildTail::parse`'s `remaining_data` blob), so no raw-tail
+/// re-encoding is needed here.
+fn append_guild_handle(
+    session: &mut SaveSession,
+    guild_id: uuid::Uuid,
+    instance_id: uuid::Uuid,
+) -> Result<(), CoreError> {
+    let Some(entry_index) = super::guild::guild_entry_index(session, guild_id)? else {
+        return Ok(());
+    };
+    let entries = world::group_map_mut(&mut session.level)?;
+    if let Some(group_data) = super::guild_tail::entry_group_data_mut(&mut entries[entry_index]) {
+        group_data
+            .individual_character_handle_ids
+            .push(uesave::games::palworld::PalInstanceId {
+                guid: props::uuid_to_guid(props::EMPTY_UUID),
+                instance_id: props::uuid_to_guid(instance_id),
+            });
+    }
+    Ok(())
+}
+
+/// `Guild.delete_character_handle` (`guild.py`): removes every handle
+/// matching `target_id` on EITHER `instance_id` OR `guid` (Python's own
+/// `are_equal_uuids(instance_id, target_id) or are_equal_uuids(guid,
+/// target_id)`), not just `instance_id`.
+fn remove_guild_handle(
+    session: &mut SaveSession,
+    guild_id: uuid::Uuid,
+    target_id: uuid::Uuid,
+) -> Result<(), CoreError> {
+    let Some(entry_index) = super::guild::guild_entry_index(session, guild_id)? else {
+        return Ok(());
+    };
+    let entries = world::group_map_mut(&mut session.level)?;
+    if let Some(group_data) = super::guild_tail::entry_group_data_mut(&mut entries[entry_index]) {
+        group_data.individual_character_handle_ids.retain(|handle| {
+            props::guid_to_uuid(&handle.instance_id) != target_id
+                && props::guid_to_uuid(&handle.guid) != target_id
+        });
+    }
+    Ok(())
+}
+
+/// `PalOpsMixin._delete_pal_by_id` (`pal_ops.py`): removes the
+/// `CharacterSaveParameterMap` entry whose InstanceId matches `pal_id`,
+/// invalidating caches only when an entry actually moved/vanished (matching
+/// Python's own `if character_params.remove_by_key(pal_id): ...
+/// invalidate_performance_caches()` -- no-op, no invalidation, for a
+/// `pal_id` that was never present). Used directly by Task 11
+/// (`delete_player`/`delete_guild`) as well as this task's own delete ops.
+pub fn delete_pal_entry(session: &mut SaveSession, pal_id: uuid::Uuid) {
+    if let Ok(entries) = world::character_map_mut(&mut session.level) {
+        if let Some(position) = entries
+            .iter()
+            .position(|entry| world::entry_instance_id(entry) == Some(pal_id))
+        {
+            entries.remove(position);
+            session.invalidate_performance_caches();
+        }
+    }
+}
+
+/// Port of `Player.add_pal` (`game/player.py`), reached via
+/// `PalOpsMixin.add_player_pal` (`pal_ops.py`).
+///
+/// Deviation from the brief: the brief's reference code looked `container_id`
+/// up in `CharacterContainerSaveData` DIRECTLY, whatever the caller passed.
+/// Python's `Player.add_pal` never does that -- it always resolves the
+/// MUTATION target to `self.pal_box` when `container_id == self.pal_box_id`,
+/// ELSE ALWAYS `self.party` (no validation of a third id at all), while
+/// still writing the CALLER'S raw `container_id` verbatim into the new pal's
+/// `SlotID.ContainerId` (`PalObjects.PalSaveParameter(container_id=
+/// container_id, ...)`). The two can disagree (a bogus `container_id`
+/// resolves to `self.party` for the mutation, but gets written as the
+/// pal's own `ContainerId`) -- a real, narrow Python inconsistency this port
+/// reproduces exactly (`target_container_id` for the mutation,
+/// `container_id` for the write), not "fixed" into always matching.
+pub fn add_player_pal(
+    session: &mut SaveSession,
+    game_data: &GameData,
+    player_id: uuid::Uuid,
+    character_id: &str,
+    nickname: &str,
+    container_id: uuid::Uuid,
+    storage_slot: Option<i32>,
+) -> Result<Option<PalDto>, CoreError> {
+    require_loaded_player(session, player_id)?;
+    let (pal_box_id, party_id) = player_container_ids(session, player_id)?;
+    let target_container_id = if container_id == pal_box_id {
+        pal_box_id
+    } else {
+        party_id
+    };
+    let Some(entry_index) = container_entry_index(session, target_container_id)? else {
+        return Ok(None);
+    };
+    let new_pal_id = uuid::Uuid::new_v4();
+    let Some(slot_index) = super::containers::character_container_add_pal(
+        &mut session.level,
+        entry_index,
+        new_pal_id,
+        storage_slot,
+    )?
+    else {
+        return Ok(None); // container full (character_container.py's available_slots)
+    };
+    let guild_id = super::guild::find_player_guild_id(session, player_id)?;
+    let mut entry = new_pal_entry(
+        character_id,
+        new_pal_id,
+        player_id,
+        container_id,
+        slot_index,
+        guild_id,
+        nickname,
+    );
+    // `new_pal.hp = new_pal.max_hp` (player.py) -- boosted is re-derived from
+    // the entry just built (fresh, never stale; see `max_hp_for`'s own doc
+    // comment on why a caller-supplied is_boss/is_lucky would be wrong here).
+    if let Some(save_parameter) = world::entry_save_parameter_mut(&mut entry) {
+        let dto = read_save_parameter_dto(save_parameter, new_pal_id, false, game_data);
+        let boosted = dto.is_boss.unwrap_or(false) || dto.is_lucky.unwrap_or(false);
+        save_parameter.insert(
+            "Hp",
+            props::fixed_point64_property(max_hp_for(&dto, boosted, game_data)),
+        );
+    }
+    ensure_pal_property_schemas(&mut session.level);
+    world::character_map_mut(&mut session.level)?.push(entry);
+    if let Some(guild) = guild_id {
+        append_guild_handle(session, guild, new_pal_id)?;
+    }
+    session.invalidate_performance_caches();
+    let entries = world::character_map(&session.level)?;
+    Ok(entries
+        .last()
+        .and_then(|e| pal_dto_from_entry(e, game_data)))
+}
+
+/// Port of `Base.add_pal` (`game/base.py`), reached via `Guild.add_base_pal`
+/// / `PalOpsMixin.add_guild_pal` (`guild.py`/`pal_ops.py`).
+///
+/// Deviation from the brief: the brief's `world::base_camp_map(&session.
+/// level)?.iter()...` does not compile -- `base_camp_map` returns
+/// `Result<Option<&Vec<MapEntry>>, CoreError>` (Task 2's optional-map
+/// treatment; see `world.rs`'s own doc comment), not `Result<&Vec<MapEntry>,
+/// CoreError>`. Fixed the same way `guild.rs`'s `build_guild_dto` already
+/// does: `.map(|entries| entries.as_slice()).unwrap_or(&[])`.
+///
+/// Also a genuine, newly-found Python bug (NOT on the PARITY-BUG-1/2 list,
+/// not one of the four previously-found bugs -- see this task's report):
+/// `Base.add_pal` passes `owner_uid=PalObjects.EMPTY_UUID` into
+/// `PalObjects.PalSaveParameter` (so `OwnerPlayerUId` IS written, as the nil
+/// guid), then attempts `safe_remove(new_pal.character_save,
+/// "OwnerPlayerUId")` to strip it back out. `character_save` is the entry's
+/// TOP-LEVEL `{"key": ..., "value": ...}` dict -- `OwnerPlayerUId` lives four
+/// levels deeper, inside `_save_parameter` -- so `safe_remove`'s single-key
+/// branch (`d.pop(keys[0], None)`, `utils/dict.py`) is a silent no-op against
+/// the wrong dict. Every base pal Python actually creates therefore carries
+/// `OwnerPlayerUId: <nil guid>` on disk, not "absent" as the code visibly
+/// intends. Reproduced here deliberately (never `shift_remove`d) for byte
+/// parity with what Python actually writes -- "fixing" it would mean this
+/// port's freshly created base pals disagree, byte-for-byte, with what the
+/// real Python backend produces for the identical operation.
+pub fn add_guild_pal(
+    session: &mut SaveSession,
+    game_data: &GameData,
+    guild_id: uuid::Uuid,
+    base_id: uuid::Uuid,
+    character_id: &str,
+    nickname: &str,
+    storage_slot: Option<i32>,
+) -> Result<Option<PalDto>, CoreError> {
+    if !session.loaded_guilds.contains(&guild_id) {
+        return Err(CoreError::Other(format!(
+            "Guild {guild_id} not found in the save file."
+        )));
+    }
+    let base_camp_entries = world::base_camp_map(&session.level)?
+        .map(|entries| entries.as_slice())
+        .unwrap_or(&[]);
+    let Some((base_guild, worker_container_id)) = base_camp_entries
+        .iter()
+        .find(|entry| props::as_uuid(&entry.key) == Some(base_id))
+        .and_then(super::guild::base_guild_and_container)
+    else {
+        return Err(CoreError::Other(format!(
+            "Base {base_id} not found in the guild {guild_id}."
+        )));
+    };
+    let Some(entry_index) = container_entry_index(session, worker_container_id)? else {
+        return Ok(None);
+    };
+    let new_pal_id = uuid::Uuid::new_v4();
+    let Some(slot_index) = super::containers::character_container_add_pal(
+        &mut session.level,
+        entry_index,
+        new_pal_id,
+        storage_slot,
+    )?
+    else {
+        return Ok(None);
+    };
+    let mut entry = new_pal_entry(
+        character_id,
+        new_pal_id,
+        props::EMPTY_UUID,
+        worker_container_id,
+        slot_index,
+        Some(base_guild),
+        nickname,
+    );
+    if let Some(save_parameter) = world::entry_save_parameter_mut(&mut entry) {
+        let dto = read_save_parameter_dto(save_parameter, new_pal_id, false, game_data);
+        let boosted = dto.is_boss.unwrap_or(false) || dto.is_lucky.unwrap_or(false);
+        save_parameter.insert(
+            "Hp",
+            props::fixed_point64_property(max_hp_for(&dto, boosted, game_data)),
+        );
+    }
+    ensure_pal_property_schemas(&mut session.level);
+    world::character_map_mut(&mut session.level)?.push(entry);
+    append_guild_handle(session, guild_id, new_pal_id)?;
+    session.invalidate_performance_caches();
+    let entries = world::character_map(&session.level)?;
+    Ok(entries
+        .last()
+        .and_then(|e| pal_dto_from_entry(e, game_data)))
+}
+
+/// Port of `Player.clone_pal` (`game/player.py`) via `Pal.clone`
+/// (`game/pal.py`), reached through `PalOpsMixin.clone_pal` (`pal_ops.py`).
+///
+/// **PARITY-BUG-2**, exact location: `player.py`'s `clone_pal`,
+/// `storage_slot = self.pal_box.add_pal(new_pal_id); if not storage_slot:
+/// return`. `CharacterContainer.add_pal` (`character_container.py`) returns
+/// the assigned slot INDEX (an `int`, legitimately `0`), and `if not
+/// storage_slot` treats `0` as falsy -- so a pal box whose first genuinely
+/// FREE slot happens to be index 0 is wrongly reported as "full". This is a
+/// real, deliberately preserved bug, not fixed here.
+///
+/// Precise reproduction, including the mutation Python leaves behind:
+/// `self.pal_box.add_pal(new_pal_id)` already appended a real `Slots` entry
+/// for `new_pal_id` BEFORE the falsy check runs, and Python's early `return`
+/// never undoes it -- the pal box is left with an orphaned slot referencing a
+/// pal id that is never actually created (no `CharacterSaveParameterMap`
+/// entry ever gets added for it). This port does NOT clean that slot up
+/// before returning `None` (the brief's reference code did, via an extra
+/// `character_container_remove_pal` call) -- undoing it would be a real fix
+/// to a bug this task is explicitly told to reproduce, not repair; see this
+/// task's report for the pinning test that proves the orphan survives.
+///
+/// The same mutate-before-check order applies to `existing_pal =
+/// self.pals[pal.instance_id]` (a `KeyError` in real Python when
+/// `dto.instance_id` isn't one of THIS player's own pals -- scoped exactly
+/// like `Player.pals`, i.e. owned by `owner_id`, matched here rather than
+/// searching the whole character map unscoped as the brief's reference code
+/// did): that lookup also runs AFTER the pal_box mutation, so a missing/
+/// unowned source pal leaves the same orphaned slot behind. This port
+/// declines to panic (its own "never panic on malformed input" policy) and
+/// returns `None` instead of Python's crash, but likewise does not clean up
+/// the slot -- matching the actual state Python leaves on disk right up to
+/// the point it would raise.
+pub fn clone_pal(
+    session: &mut SaveSession,
+    game_data: &GameData,
+    dto: &PalDto,
+) -> Result<Option<PalDto>, CoreError> {
+    // `self._players.get(pal.owner_uid)` (pal_ops.py): a `None` owner_uid
+    // resolves to Python's `dict.get(None)` -> `None` -> `f"Player
+    // {pal.owner_uid} not found..."`, which interpolates Python's literal
+    // `str(None)` ("None"), NOT a nil-UUID string -- the brief's reference
+    // code formatted `props::EMPTY_UUID` here, which is a different string.
+    let owner_id = match dto.owner_uid {
+        Some(id) => id,
+        None => {
+            return Err(CoreError::Other(
+                "Player None not found in the save file.".to_string(),
+            ))
+        }
+    };
+    require_loaded_player(session, owner_id)?;
+    let (pal_box_id, _) = player_container_ids(session, owner_id)?;
+    let Some(container_index) = container_entry_index(session, pal_box_id)? else {
+        return Ok(None);
+    };
+    let new_pal_id = uuid::Uuid::new_v4();
+    let Some(slot_index) = super::containers::character_container_add_pal(
+        &mut session.level,
+        container_index,
+        new_pal_id,
+        None,
+    )?
+    else {
+        return Ok(None); // pal box has no free slot at all
+    };
+    if slot_index == 0 {
+        return Ok(None); // PARITY-BUG-2 -- see this function's doc comment
+    }
+    let source_entry = {
+        let entries = world::character_map(&session.level)?;
+        entries
+            .iter()
+            .find(|entry| {
+                world::entry_instance_id(entry) == Some(dto.instance_id)
+                    && world::entry_save_parameter(entry)
+                        .and_then(|params| param(params, "OwnerPlayerUId").and_then(props::as_uuid))
+                        == Some(owner_id)
+            })
+            .cloned()
+    };
+    let Some(mut cloned_entry) = source_entry else {
+        return Ok(None);
+    };
+    // `Pal.clone` (pal.py): new instance id, `key.PlayerUId = EMPTY`.
+    if let Some(key_props) = props::struct_props_mut(&mut cloned_entry.key) {
+        key_props.insert("InstanceId", props::guid_property(new_pal_id));
+        key_props.insert("PlayerUId", props::guid_property(props::EMPTY_UUID));
+    }
+    let nickname = dto
+        .nickname
+        .clone()
+        .unwrap_or_else(|| dto.character_id.clone());
+    if let Some(save_parameter) = world::entry_save_parameter_mut(&mut cloned_entry) {
+        save_parameter.insert("NickName", props::str_property(&nickname));
+        // `new_pal.storage_slot = storage_slot` (pal.py's `clone`):
+        // PARITY-BUG-1 mechanism -- ContainerId untouched, only SlotIndex
+        // moves (see `apply_pal_dto`'s own doc comment for the full
+        // mechanism writeup this reproduces).
+        let slot_key = if save_parameter.0.contains_key(&PropertyKey::from("SlotID")) {
+            "SlotID"
+        } else {
+            "SlotId"
+        };
+        if let Some(slot_struct) = save_parameter
+            .0
+            .get_mut(&PropertyKey::from(slot_key))
+            .and_then(props::struct_props_mut)
+        {
+            slot_struct.insert("SlotIndex", props::int_property(slot_index));
+        }
+    }
+    world::character_map_mut(&mut session.level)?.push(cloned_entry);
+    if let Some(guild_id) = super::guild::find_player_guild_id(session, owner_id)? {
+        append_guild_handle(session, guild_id, new_pal_id)?;
+    }
+    session.invalidate_performance_caches();
+    let entries = world::character_map(&session.level)?;
+    Ok(entries
+        .last()
+        .and_then(|e| pal_dto_from_entry(e, game_data)))
+}
+
+/// Port of `Base.clone_pal` (`game/base.py`), reached via
+/// `Guild.clone_base_pal` / `PalOpsMixin.clone_guild_pal`
+/// (`guild.py`/`pal_ops.py`).
+///
+/// `Base.clone_pal` checks `if slot_idx is None: return` (NOT `Player.
+/// clone_pal`'s `if not storage_slot`) -- PARITY-BUG-2 does **not** apply
+/// here; slot index 0 is a perfectly valid assignment for a base pal clone.
+/// `existing_pal = self.pals[pal.instance_id]` is scoped to THIS base's own
+/// pals (`_load_pals_for_container`'s SlotId-only membership,
+/// `guild::base_container_membership`), matched here the same way, rather
+/// than an unscoped whole-map search.
+pub fn clone_guild_pal(
+    session: &mut SaveSession,
+    game_data: &GameData,
+    guild_id: uuid::Uuid,
+    base_id: uuid::Uuid,
+    dto: &PalDto,
+) -> Result<Option<PalDto>, CoreError> {
+    if !session.loaded_guilds.contains(&guild_id) {
+        return Err(CoreError::Other(format!(
+            "Base {base_id} not found in the guild {guild_id}."
+        )));
+    }
+    let base_camp_entries = world::base_camp_map(&session.level)?
+        .map(|entries| entries.as_slice())
+        .unwrap_or(&[]);
+    let Some((_, worker_container_id)) = base_camp_entries
+        .iter()
+        .find(|entry| props::as_uuid(&entry.key) == Some(base_id))
+        .and_then(super::guild::base_guild_and_container)
+    else {
+        return Err(CoreError::Other(format!(
+            "Base {base_id} not found in the guild {guild_id}."
+        )));
+    };
+    let Some(container_index) = container_entry_index(session, worker_container_id)? else {
+        return Ok(None);
+    };
+    let new_pal_id = uuid::Uuid::new_v4();
+    let Some(slot_index) = super::containers::character_container_add_pal(
+        &mut session.level,
+        container_index,
+        new_pal_id,
+        None,
+    )?
+    else {
+        return Ok(None);
+    };
+    let source_entry = {
+        let entries = world::character_map(&session.level)?;
+        entries
+            .iter()
+            .find(|entry| {
+                world::entry_instance_id(entry) == Some(dto.instance_id)
+                    && world::entry_save_parameter(entry)
+                        .map(super::guild::base_container_membership)
+                        == Some(Some(worker_container_id))
+            })
+            .cloned()
+    };
+    let Some(mut cloned_entry) = source_entry else {
+        return Ok(None);
+    };
+    if let Some(key_props) = props::struct_props_mut(&mut cloned_entry.key) {
+        key_props.insert("InstanceId", props::guid_property(new_pal_id));
+        key_props.insert("PlayerUId", props::guid_property(props::EMPTY_UUID));
+    }
+    let nickname = dto
+        .nickname
+        .clone()
+        .unwrap_or_else(|| dto.character_id.clone());
+    if let Some(save_parameter) = world::entry_save_parameter_mut(&mut cloned_entry) {
+        save_parameter.insert("NickName", props::str_property(&nickname));
+        // base.py's `safe_remove(new_pal.character_save, "OwnerPlayerUId")`
+        // is the same wrong-dict no-op as `add_guild_pal` -- NOT
+        // shift_removed here either, for the same byte-parity reason (see
+        // `add_guild_pal`'s doc comment).
+        let slot_key = if save_parameter.0.contains_key(&PropertyKey::from("SlotID")) {
+            "SlotID"
+        } else {
+            "SlotId"
+        };
+        if let Some(slot_struct) = save_parameter
+            .0
+            .get_mut(&PropertyKey::from(slot_key))
+            .and_then(props::struct_props_mut)
+        {
+            slot_struct.insert("SlotIndex", props::int_property(slot_index));
+        }
+    }
+    world::character_map_mut(&mut session.level)?.push(cloned_entry);
+    append_guild_handle(session, guild_id, new_pal_id)?;
+    session.invalidate_performance_caches();
+    let entries = world::character_map(&session.level)?;
+    Ok(entries
+        .last()
+        .and_then(|e| pal_dto_from_entry(e, game_data)))
+}
+
+/// Port of `Player.move_pal` (`game/player.py`), reached via
+/// `PalOpsMixin.move_pal` (`pal_ops.py`).
+///
+/// Deviation from the brief: Python's `pal = self.pals[pal_id]` is the FIRST
+/// line of `move_pal` -- a `KeyError`, before either container is ever
+/// touched, when `pal_id` isn't one of this player's own pals. The brief's
+/// reference code skipped this check entirely and mutated the target
+/// container FIRST, which -- for a bogus `pal_id` -- would leave a phantom
+/// `Slots` entry referencing a pal that was never actually there, then
+/// silently return `Ok(None)` (indistinguishable from "container full" to
+/// the caller). Reproducing Python's check-BEFORE-mutate order (never
+/// panicking on the failure itself, per this port's policy) closes that
+/// hole: `Err(CoreError::PalNotFound(pal_id))` before any container is
+/// touched.
+pub fn move_pal(
+    session: &mut SaveSession,
+    game_data: &GameData,
+    player_id: uuid::Uuid,
+    pal_id: uuid::Uuid,
+    container_id: uuid::Uuid,
+) -> Result<Option<PalDto>, CoreError> {
+    require_loaded_player(session, player_id)?;
+    let owns_pal = world::character_map(&session.level)?.iter().any(|entry| {
+        !world::entry_is_player(entry)
+            && world::entry_instance_id(entry) == Some(pal_id)
+            && world::entry_save_parameter(entry)
+                .and_then(|params| param(params, "OwnerPlayerUId").and_then(props::as_uuid))
+                == Some(player_id)
+    });
+    if !owns_pal {
+        return Err(CoreError::PalNotFound(pal_id));
+    }
+    let (pal_box_id, party_id) = player_container_ids(session, player_id)?;
+    let (source_id, target_id) = if container_id == pal_box_id {
+        (party_id, pal_box_id)
+    } else if container_id == party_id {
+        (pal_box_id, party_id)
+    } else {
+        return Ok(None); // invalid container id (player.py logs and returns None)
+    };
+    let Some(target_index) = container_entry_index(session, target_id)? else {
+        return Ok(None);
+    };
+    let Some(source_index) = container_entry_index(session, source_id)? else {
+        return Ok(None);
+    };
+    let Some(slot_index) = super::containers::character_container_add_pal(
+        &mut session.level,
+        target_index,
+        pal_id,
+        None,
+    )?
+    else {
+        return Ok(None); // target full -> handler warning "Pal container is full"
+    };
+    super::containers::character_container_remove_pal(&mut session.level, source_index, pal_id)?;
+    // `pal.storage_slot = slot_idx` only (PARITY-BUG-1: ContainerId
+    // untouched, matching `pal.storage_id = container_id`'s own setter
+    // mechanism -- see `apply_pal_dto`'s doc comment).
+    let entries = world::character_map_mut(&mut session.level)?;
+    if let Some(entry) = entries
+        .iter_mut()
+        .find(|entry| world::entry_instance_id(entry) == Some(pal_id))
+    {
+        if let Some(save_parameter) = world::entry_save_parameter_mut(entry) {
+            let slot_key = if save_parameter.0.contains_key(&PropertyKey::from("SlotID")) {
+                "SlotID"
+            } else {
+                "SlotId"
+            };
+            if let Some(slot_struct) = save_parameter
+                .0
+                .get_mut(&PropertyKey::from(slot_key))
+                .and_then(props::struct_props_mut)
+            {
+                slot_struct.insert("SlotIndex", props::int_property(slot_index));
+            }
+        }
+    }
+    let entries = world::character_map(&session.level)?;
+    Ok(entries
+        .iter()
+        .find(|entry| world::entry_instance_id(entry) == Some(pal_id))
+        .and_then(|entry| pal_dto_from_entry(entry, game_data)))
+}
+
+/// Port of `PalOpsMixin.delete_player_pals` (`pal_ops.py`) via `Player.
+/// delete_pal` (`player.py`): removes the pal from both the pal box and the
+/// party (whichever one actually holds it -- `CharacterContainer.remove_pal`
+/// is a silent no-op for a container that never had the pal), the guild
+/// handle if the player has a guild, then the `CharacterSaveParameterMap`
+/// entry itself.
+pub fn delete_player_pals(
+    session: &mut SaveSession,
+    player_id: uuid::Uuid,
+    pal_ids: &[uuid::Uuid],
+) -> Result<(), CoreError> {
+    require_loaded_player(session, player_id)?;
+    let (pal_box_id, party_id) = player_container_ids(session, player_id)?;
+    let guild_id = super::guild::find_player_guild_id(session, player_id)?;
+    for pal_id in pal_ids {
+        for container_id in [pal_box_id, party_id] {
+            if let Some(container_index) = container_entry_index(session, container_id)? {
+                super::containers::character_container_remove_pal(
+                    &mut session.level,
+                    container_index,
+                    *pal_id,
+                )?;
+            }
+        }
+        if let Some(guild) = guild_id {
+            remove_guild_handle(session, guild, *pal_id)?;
+        }
+        delete_pal_entry(session, *pal_id);
+    }
+    Ok(())
+}
+
+/// Port of `PalOpsMixin.delete_guild_pals` (`pal_ops.py`) via `Guild.
+/// delete_base_pal` (`guild.py`). The `"Base {base_id} not found in the
+/// guild {guild_id}."` message fires on `guild_id` not resolving (Python's
+/// `if not guild: raise ValueError(f"Base {base_id} not found in the guild
+/// {guild_id}.")`, `pal_ops.py`) -- a real, if misleadingly-worded, exact
+/// Python message; a `base_id` that doesn't exist WITHIN an otherwise-loaded
+/// guild is a separate, unhandled Python `KeyError`
+/// (`self.bases[base_id]`), reproduced here as a tolerant no-op (skip the
+/// container-removal step, still remove the guild handle and character-map
+/// entry) rather than a second crash-equivalent -- see this task's report.
+pub fn delete_guild_pals(
+    session: &mut SaveSession,
+    guild_id: uuid::Uuid,
+    base_id: uuid::Uuid,
+    pal_ids: &[uuid::Uuid],
+) -> Result<(), CoreError> {
+    if !session.loaded_guilds.contains(&guild_id) {
+        return Err(CoreError::Other(format!(
+            "Base {base_id} not found in the guild {guild_id}."
+        )));
+    }
+    let worker_container_id = world::base_camp_map(&session.level)?
+        .map(|entries| entries.as_slice())
+        .unwrap_or(&[])
+        .iter()
+        .find(|entry| props::as_uuid(&entry.key) == Some(base_id))
+        .and_then(super::guild::base_guild_and_container)
+        .map(|(_, container)| container);
+    for pal_id in pal_ids {
+        if let Some(container_id) = worker_container_id {
+            if let Some(container_index) = container_entry_index(session, container_id)? {
+                super::containers::character_container_remove_pal(
+                    &mut session.level,
+                    container_index,
+                    *pal_id,
+                )?;
+            }
+        }
+        remove_guild_handle(session, guild_id, *pal_id)?;
+        delete_pal_entry(session, *pal_id);
+    }
+    Ok(())
+}
+
+/// Port of `PalOpsMixin.heal_pals` (`pal_ops.py`): a missing pal id is
+/// SKIPPED (Python logs an error and `continue`s), not an error -- matches
+/// `pal_ops.py`'s `if not pal: logger.error(...); continue`. Never touches
+/// player entries (`self._pals` never contains one).
+pub fn heal_pals(
+    session: &mut SaveSession,
+    game_data: &GameData,
+    pal_ids: &[uuid::Uuid],
+) -> Result<(), CoreError> {
+    let target_ids: HashSet<uuid::Uuid> = pal_ids.iter().copied().collect();
+    let entries = world::character_map_mut(&mut session.level)?;
+    for entry in entries.iter_mut() {
+        if world::entry_is_player(entry) {
+            continue;
+        }
+        let Some(instance_id) = world::entry_instance_id(entry) else {
+            continue;
+        };
+        if !target_ids.contains(&instance_id) {
+            continue;
+        }
+        let character_id = world::entry_save_parameter(entry)
+            .and_then(|params| param(params, "CharacterID").and_then(props::as_str))
+            .unwrap_or("")
+            .to_string();
+        if let Some(save_parameter) = world::entry_save_parameter_mut(entry) {
+            heal_save_parameter(save_parameter, &character_id, game_data);
+        }
+    }
+    Ok(())
+}
+
+/// Port of `PalOpsMixin.heal_all_player_pals` (`pal_ops.py`): every pal this
+/// player owns (`player.pals.values()`, i.e. `OwnerPlayerUId == player_id`,
+/// the exact scoping Task 7's `build_player_dto` already established).
+pub fn heal_all_player_pals(
+    session: &mut SaveSession,
+    game_data: &GameData,
+    player_id: uuid::Uuid,
+) -> Result<(), CoreError> {
+    require_loaded_player(session, player_id)?;
+    let owned_ids: Vec<uuid::Uuid> = world::character_map(&session.level)?
+        .iter()
+        .filter(|entry| !world::entry_is_player(entry))
+        .filter(|entry| {
+            world::entry_save_parameter(entry)
+                .and_then(|params| param(params, "OwnerPlayerUId").and_then(props::as_uuid))
+                == Some(player_id)
+        })
+        .filter_map(world::entry_instance_id)
+        .collect();
+    heal_pals(session, game_data, &owned_ids)
+}
+
+/// Port of `PalOpsMixin.heal_all_base_pals` (`pal_ops.py`): every pal
+/// `base.pals` holds -- reuses `guild::base_container_membership`'s
+/// SlotId-only (no SlotID fallback) rule directly, the exact scoping
+/// `_load_pals_for_container` builds `Base.pals` from (`guild.py`'s
+/// `heal_all_base_pals` iterates `base.pals.values()`, not a fresh
+/// recompute). The brief's reference code re-derived membership via a
+/// `SlotId`-or-`SlotID` fallback, which is `Pal.storage_id`'s rule, not
+/// `_load_pals_for_container`'s -- fixed to reuse the already Python-
+/// verified helper instead of a second, subtly different reimplementation
+/// (see `guild.rs`'s own tests pinning the real-save spelling).
+pub fn heal_all_base_pals(
+    session: &mut SaveSession,
+    game_data: &GameData,
+    guild_id: uuid::Uuid,
+    base_id: uuid::Uuid,
+) -> Result<(), CoreError> {
+    if !session.loaded_guilds.contains(&guild_id) {
+        return Err(CoreError::Other(format!(
+            "Base {base_id} not found in the guild {guild_id}."
+        )));
+    }
+    let base_camp_entries = world::base_camp_map(&session.level)?
+        .map(|entries| entries.as_slice())
+        .unwrap_or(&[]);
+    let Some((_, worker_container_id)) = base_camp_entries
+        .iter()
+        .find(|entry| props::as_uuid(&entry.key) == Some(base_id))
+        .and_then(super::guild::base_guild_and_container)
+    else {
+        return Err(CoreError::Other(format!(
+            "Base {base_id} not found in the guild {guild_id}."
+        )));
+    };
+    let base_pal_ids: Vec<uuid::Uuid> = world::character_map(&session.level)?
+        .iter()
+        .filter(|entry| !world::entry_is_player(entry))
+        .filter_map(|entry| {
+            let save_parameter = world::entry_save_parameter(entry)?;
+            if super::guild::base_container_membership(save_parameter) == Some(worker_container_id)
+            {
+                world::entry_instance_id(entry)
+            } else {
+                None
+            }
+        })
+        .collect();
+    heal_pals(session, game_data, &base_pal_ids)
+}
+
+// ============================================================================
+// DPS ops (`player.py:add_dps_pal`/`add_dps_pal_from_dto`/`clone_dps_pal`/
+// `delete_dps_pals`, `pal.py`'s `Pal.reset`/`populate_status_point_lists`).
+// Operate on `session.loaded_players[player_id].dps`'s `SaveParameterArray`
+// -- a separate `_dps.sav` file, never `Level.sav` -- so NONE of these
+// invalidate `session.caches` (nothing in `WorldCaches` indexes DPS data).
+// ============================================================================
+
+fn dps_slots_mut(loaded: &mut crate::session::LoadedPlayer) -> Option<&mut Vec<StructValue>> {
+    let dps_save = loaded.dps.as_mut()?;
+    props::struct_values_mut(
+        dps_save
+            .root
+            .properties
+            .0
+            .get_mut(&PropertyKey::from("SaveParameterArray"))?,
+    )
+}
+
+/// `Player._find_first_empty_dps_slot` (`player.py`): the first slot whose
+/// `CharacterID` is absent or `"None"`.
+fn first_empty_dps_slot(slots: &[StructValue]) -> Option<usize> {
+    slots.iter().position(|slot| {
+        let StructValue::Struct(slot_props) = slot else {
+            return false;
+        };
+        let Some(save_parameter) = slot_props
+            .0
+            .get(&PropertyKey::from("SaveParameter"))
+            .and_then(props::struct_props)
+        else {
+            return true;
+        };
+        match param(save_parameter, "CharacterID").and_then(props::as_str) {
+            None => true,
+            Some("None") => true,
+            Some(_) => false,
+        }
+    })
+}
+
+/// Port of `Pal.reset` (`game/pal.py`) over a DPS slot's `SaveParameter`
+/// bag. Every field below cites the exact Python setter it ports, and every
+/// removal-vs-write choice was verified against that setter's real
+/// behavior, not assumed from the brief's reference code (which got three
+/// of these wrong -- see this task's report):
+///
+/// - `Exp` is `shift_remove`d (the brief unconditionally wrote `Exp: 0`):
+///   `Pal.exp`'s setter is `if value == 0: safe_remove(...); return` --
+///   `self.exp = 0` in `reset()` removes the property, it never writes a
+///   literal `0`.
+/// - `IsRarePal` is left UNTOUCHED (the brief `shift_remove`d it): `reset()`
+///   never assigns `self.is_lucky` at all. This is a genuine, if narrow,
+///   Python quirk -- reported, not silently "corrected" -- a DPS slot
+///   recycled from a previously-lucky pal keeps its `IsRarePal` flag through
+///   `reset()`, so a client immediately reusing that same slot index (via an
+///   explicit `storage_slot`) can inherit stale luck; see this task's report.
+/// - `GotStatusPointList`/`GotExStatusPointList` are cleared IN PLACE
+///   (`Vec::clear`) rather than replaced with a freshly constructed empty
+///   `Property::Array` (the brief's approach): `Pal.
+///   remove_status_point_lists` mutates the existing `"values"` array in
+///   place and requires both properties to already exist -- matching that
+///   exactly (rather than re-inserting a brand new `Property::Array` with no
+///   elements to infer a schema from) avoids any risk of the freshly built
+///   property disagreeing with whatever tag/shape metadata the original,
+///   already-successfully-parsed property carried.
+fn reset_dps_save_parameter(save_parameter: &mut Properties) {
+    save_parameter.insert("CharacterID", props::name_property("None"));
+    save_parameter.insert("NickName", props::str_property(""));
+    save_parameter.insert("FilteredNickName", props::str_property(""));
+    save_parameter.insert("OwnerPlayerUId", props::guid_property(props::EMPTY_UUID));
+    save_parameter.insert("Hp", props::fixed_point64_property(0));
+    for name in [
+        "Exp",
+        "Level",
+        "Rank",
+        "Rank_HP",
+        "Rank_Attack",
+        "Rank_Defence",
+        "Rank_CraftSpeed",
+        "MasteredWaza",
+        "GotWorkSuitabilityAddRankList",
+    ] {
+        save_parameter.0.shift_remove(&PropertyKey::from(name));
+    }
+    save_parameter.insert("Talent_HP", props::byte_property(0));
+    save_parameter.insert("Talent_Shot", props::byte_property(0));
+    save_parameter.insert("Talent_Defense", props::byte_property(0));
+    save_parameter.insert("EquipWaza", props::enum_array_property(vec![]));
+    save_parameter.insert("PassiveSkillList", props::name_array_property(vec![]));
+    // storage: SlotIndex -1, ContainerId untouched -- PARITY-BUG-1 mechanism
+    // applies transitively through `self.storage_id = EMPTY_UUID` THEN
+    // `self.storage_slot = -1` (both setters rebuild the slot struct from
+    // the CURRENT, still-unchanged ContainerId; see `apply_pal_dto`'s own
+    // doc comment for the full mechanism). Net effect: ContainerId is never
+    // actually cleared to EMPTY by `reset()`, despite `self.storage_id =
+    // PalObjects.EMPTY_UUID` visibly attempting exactly that.
+    let slot_key = if save_parameter.0.contains_key(&PropertyKey::from("SlotID")) {
+        "SlotID"
+    } else {
+        "SlotId"
+    };
+    if let Some(slot_struct) = save_parameter
+        .0
+        .get_mut(&PropertyKey::from(slot_key))
+        .and_then(props::struct_props_mut)
+    {
+        slot_struct.insert("SlotIndex", props::int_property(-1));
+    }
+    for list_name in ["GotStatusPointList", "GotExStatusPointList"] {
+        if let Some(values) = save_parameter
+            .0
+            .get_mut(&PropertyKey::from(list_name))
+            .and_then(props::struct_values_mut)
+        {
+            values.clear();
+        }
+    }
+}
+
+/// Port of `Player.add_dps_pal` (`game/player.py`), reached via
+/// `PalOpsMixin.add_player_dps_pal` (`pal_ops.py`).
+///
+/// Deviation from the brief: when no empty DPS slot exists and no
+/// `storage_slot` was given, real Python indexes `[...][slot_idx]` with
+/// `slot_idx = None` -- an unhandled `TypeError` (unlike the analogous GPS
+/// path, `add_gps_pal`, which DOES have an explicit `if slot_idx is None:
+/// return None` guard). NOT reproduced (this port never panics on
+/// "container full", a legitimate, common condition, not adversarial
+/// input) -- returns `Ok(None)`, matching this port's `add_gps_pal`-style
+/// graceful behavior instead. Reported, not silently reproduced; see this
+/// task's report.
+pub fn add_player_dps_pal(
+    session: &mut SaveSession,
+    game_data: &GameData,
+    player_id: uuid::Uuid,
+    character_id: &str,
+    nickname: &str,
+    storage_slot: Option<i32>,
+) -> Result<Option<(i32, PalDto)>, CoreError> {
+    require_loaded_player(session, player_id)?;
+    let loaded = session.loaded_players.get_mut(&player_id).expect("checked");
+    let Some(slots) = dps_slots_mut(loaded) else {
+        return Ok(None);
+    };
+    let slot_index = match storage_slot {
+        Some(requested) if requested >= 0 && (requested as usize) < slots.len() => {
+            requested as usize
+        }
+        Some(_) => return Ok(None),
+        None => match first_empty_dps_slot(slots) {
+            Some(found) => found,
+            None => return Ok(None),
+        },
+    };
+    let new_instance_id = uuid::Uuid::new_v4();
+    {
+        let StructValue::Struct(slot_props) = &mut slots[slot_index] else {
+            return Ok(None);
+        };
+        if let Some(id_struct) = slot_props
+            .0
+            .get_mut(&PropertyKey::from("InstanceId"))
+            .and_then(props::struct_props_mut)
+        {
+            id_struct.insert("InstanceId", props::guid_property(new_instance_id));
+        }
+        let Some(save_parameter) = slot_props
+            .0
+            .get_mut(&PropertyKey::from("SaveParameter"))
+            .and_then(props::struct_props_mut)
+        else {
+            return Ok(None);
+        };
+        reset_dps_save_parameter(save_parameter);
+        save_parameter.insert("OwnerPlayerUId", props::guid_property(player_id));
+        save_parameter.insert("CharacterID", props::name_property(character_id));
+        save_parameter.insert("NickName", props::str_property(nickname));
+        save_parameter.insert("FilteredNickName", props::str_property(nickname));
+        save_parameter.insert("Gender", props::enum_property("EPalGenderType::Female"));
+        let slot_key = if save_parameter.0.contains_key(&PropertyKey::from("SlotID")) {
+            "SlotID"
+        } else {
+            "SlotId"
+        };
+        if let Some(slot_struct) = save_parameter
+            .0
+            .get_mut(&PropertyKey::from(slot_key))
+            .and_then(props::struct_props_mut)
+        {
+            slot_struct.insert("SlotIndex", props::int_property(0));
+        }
+        // `pal.storage_id = self.pal_box_id` (player.py): PARITY-BUG-1
+        // applies here too (see `reset_dps_save_parameter`'s doc comment) --
+        // ContainerId is never actually touched by either the reset above or
+        // this call, regardless of `self.pal_box_id`'s value.
+        save_parameter.insert("GotStatusPointList", status_point_structs(&STATUS_NAMES));
+        save_parameter.insert(
+            "GotExStatusPointList",
+            status_point_structs(&EX_STATUS_NAMES),
+        );
+        let dto = read_save_parameter_dto(save_parameter, new_instance_id, true, game_data);
+        let boosted = dto.is_boss.unwrap_or(false) || dto.is_lucky.unwrap_or(false);
+        save_parameter.insert(
+            "Hp",
+            props::fixed_point64_property(max_hp_for(&dto, boosted, game_data)),
+        );
+    }
+    let loaded = session.loaded_players.get(&player_id).expect("checked");
+    let dps_save = loaded.dps.as_ref().expect("checked");
+    let slots = props::struct_values(
+        dps_save
+            .root
+            .properties
+            .0
+            .get(&PropertyKey::from("SaveParameterArray"))
+            .unwrap(),
+    )
+    .unwrap();
+    Ok(pal_dto_from_dps_slot(&slots[slot_index], game_data).map(|dto| (slot_index as i32, dto)))
+}
+
+/// Port of `Player.clone_dps_pal` (`game/player.py`), reached via
+/// `PalOpsMixin.clone_dps_pal` (`pal_ops.py`).
+pub fn clone_dps_pal(
+    session: &mut SaveSession,
+    game_data: &GameData,
+    dto: &PalDto,
+) -> Result<Option<(i32, PalDto)>, CoreError> {
+    let owner_id = match dto.owner_uid {
+        Some(id) => id,
+        None => {
+            return Err(CoreError::Other(
+                "Player None not found in the save file.".to_string(),
+            ))
+        }
+    };
+    require_loaded_player(session, owner_id)?;
+    let loaded = session.loaded_players.get_mut(&owner_id).expect("checked");
+    let Some(slots) = dps_slots_mut(loaded) else {
+        return Ok(None);
+    };
+    let Some(slot_index) = first_empty_dps_slot(slots) else {
+        return Ok(None);
+    };
+    let new_instance_id = uuid::Uuid::new_v4();
+    {
+        let StructValue::Struct(slot_props) = &mut slots[slot_index] else {
+            return Ok(None);
+        };
+        if let Some(id_struct) = slot_props
+            .0
+            .get_mut(&PropertyKey::from("InstanceId"))
+            .and_then(props::struct_props_mut)
+        {
+            id_struct.insert("InstanceId", props::guid_property(new_instance_id));
+        }
+        let Some(save_parameter) = slot_props
+            .0
+            .get_mut(&PropertyKey::from("SaveParameter"))
+            .and_then(props::struct_props_mut)
+        else {
+            return Ok(None);
+        };
+        apply_pal_dto(save_parameter, dto, true, game_data);
+        save_parameter.insert("GotStatusPointList", status_point_structs(&STATUS_NAMES));
+        save_parameter.insert(
+            "GotExStatusPointList",
+            status_point_structs(&EX_STATUS_NAMES),
+        );
+        let reread = read_save_parameter_dto(save_parameter, new_instance_id, true, game_data);
+        let boosted = reread.is_boss.unwrap_or(false) || reread.is_lucky.unwrap_or(false);
+        save_parameter.insert(
+            "Hp",
+            props::fixed_point64_property(max_hp_for(&reread, boosted, game_data)),
+        );
+    }
+    let loaded = session.loaded_players.get(&owner_id).expect("checked");
+    let dps_save = loaded.dps.as_ref().expect("checked");
+    let slots = props::struct_values(
+        dps_save
+            .root
+            .properties
+            .0
+            .get(&PropertyKey::from("SaveParameterArray"))
+            .unwrap(),
+    )
+    .unwrap();
+    Ok(pal_dto_from_dps_slot(&slots[slot_index], game_data).map(|dto| (slot_index as i32, dto)))
+}
+
+/// Port of `Player.delete_dps_pals` (`game/player.py`), reached via
+/// `PalOpsMixin.delete_player_dps_pals` (`pal_ops.py`): `reset()`s each
+/// slot, descending index order (Python's `sorted(pal_indexes,
+/// reverse=True)` -- order doesn't change the OUTCOME here since each index
+/// is independent, but is reproduced anyway for fidelity).
+///
+/// Deviation from the brief: the brief's version only called
+/// `reset_dps_save_parameter` (the nested `SaveParameter` bag) and never
+/// touched the slot's OUTER `InstanceId.InstanceId` field. Python's
+/// `reset()` also sets `self.instance_id = PalObjects.EMPTY_UUID`, which --
+/// for a DPS pal -- writes into that outer field, not `_save_parameter`
+/// (see `Pal.instance_id`'s setter, `pal.py`). Added here so a deleted DPS
+/// slot's outer instance id is actually cleared, matching Python.
+pub fn delete_player_dps_pals(
+    session: &mut SaveSession,
+    _game_data: &GameData,
+    player_id: uuid::Uuid,
+    pal_indexes: &[i32],
+) -> Result<(), CoreError> {
+    require_loaded_player(session, player_id)?;
+    let loaded = session.loaded_players.get_mut(&player_id).expect("checked");
+    let Some(slots) = dps_slots_mut(loaded) else {
+        return Ok(());
+    };
+    let mut sorted_indexes: Vec<i32> = pal_indexes.to_vec();
+    sorted_indexes.sort_unstable_by(|a, b| b.cmp(a));
+    for index in sorted_indexes {
+        if index < 0 {
+            continue;
+        }
+        let Some(StructValue::Struct(slot_props)) = slots.get_mut(index as usize) else {
+            continue;
+        };
+        if let Some(id_struct) = slot_props
+            .0
+            .get_mut(&PropertyKey::from("InstanceId"))
+            .and_then(props::struct_props_mut)
+        {
+            id_struct.insert("InstanceId", props::guid_property(props::EMPTY_UUID));
+        }
+        if let Some(save_parameter) = slot_props
+            .0
+            .get_mut(&PropertyKey::from("SaveParameter"))
+            .and_then(props::struct_props_mut)
+        {
+            reset_dps_save_parameter(save_parameter);
+        }
+    }
+    Ok(())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

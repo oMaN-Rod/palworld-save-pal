@@ -192,7 +192,7 @@ fn guild_chest_container_id(session: &SaveSession, extra_index: usize) -> Option
 /// the two approaches happen to agree on this port's real-save fixtures; see
 /// this task's report for why the narrower, Python-literal check is used
 /// anyway.
-fn base_container_membership(save_parameter: &Properties) -> Option<uuid::Uuid> {
+pub(crate) fn base_container_membership(save_parameter: &Properties) -> Option<uuid::Uuid> {
     let slot = pal::param(save_parameter, "SlotId").and_then(props::struct_props)?;
     slot.0
         .get(&PropertyKey::from("ContainerId"))
