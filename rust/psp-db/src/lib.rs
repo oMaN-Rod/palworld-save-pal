@@ -5,6 +5,7 @@ pub mod meta;
 pub mod presets;
 pub mod settings;
 pub mod time;
+pub mod ups;
 
 use std::path::Path;
 
