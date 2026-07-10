@@ -138,6 +138,55 @@ multi-frame response (no Phase-0 handler emits more than one frame per
 request, so there is currently no live fixture that could catch this any
 other way).
 
+## load_path scenario (Phase 1)
+
+Captures: `select_save` (steam) -> `sync_app_state` -> `load_zip_file`, against
+a real corpus save directory (`Level.sav`, optional `LevelMeta.sav`,
+`Players/*.sav`).
+
+`scripts/capture_parity.py` now distinguishes the *scenario* (which request
+sequence to send -- `--scenario`) from the *corpus* (the output subdirectory
+under `rust/parity/fixtures/` -- `--corpus`, defaults to the scenario name).
+`load_path` also needs `--save-dir <path>`, the save's directory (i.e.
+`Level.sav`'s parent) -- pass an **absolute** path, since it is embedded
+verbatim in the captured `select_save` request and read from disk again by
+the Rust replay test, which may run from a different working directory than
+this script.
+
+1. Start the Python backend against a warmed `psp.db` (see "Known Python
+   quirks affecting capture" above -- the two-start procedure applies here
+   too, since `sync_app_state` also emits `get_settings`).
+2. `uv run --with websockets scripts/capture_parity.py --scenario load_path --save-dir <absolute-path-to-corpus-save-dir> --corpus <corpus-name>`
+3. Stop the Python backend.
+4. `cd rust` then `cargo test -p psp-server --test parity`
+
+Example, from a checkout with `tests/fixtures/saves/world2/` present:
+
+    uv run --with websockets scripts/capture_parity.py \
+        --scenario load_path \
+        --save-dir "$(pwd)/tests/fixtures/saves/world2" \
+        --corpus steam-1p
+
+- **Use a SMALL corpus save with AT MOST 2 players.** With more than 2
+  players, `_extract_players_parallel` (`palworld_save_pal/game/...`,
+  dispatched from `_extract_player_summaries`) runs on a `ThreadPoolExecutor`
+  and inserts results via `as_completed()` -- so the key/array order of
+  `player_summaries`, and therefore `sync_app_state`'s and
+  `load_zip_file`'s wire `players`-shaped arrays derived from it, is
+  genuinely nondeterministic run-to-run in Python itself. A fixture captured
+  from such a save can fail replay even against a second run of the SAME
+  Python backend, independent of anything Rust does. `tests/fixtures/saves/world2/`
+  (exactly 1 player) is the primary corpus for this reason; `world1` (2
+  players) sits exactly at the documented threshold and was not used, to
+  keep the corpus unambiguous.
+- Do not capture error flows: Python `error` messages carry a `trace` string
+  (a formatted traceback) that can never match Rust's. If an error fixture
+  is ever genuinely needed, the fix is a narrow
+  `"error:/data/trace"`-style `PARITY_IGNORED_PATHS` entry with a one-line
+  justification -- not a blanket mask.
+- Fixtures derived from personal saves stay untracked (do not commit) --
+  same rule as every other corpus.
+
 ## `PARITY_IGNORED_PATHS`
 
 Starts empty. Any future entry must be a narrow, enumerated

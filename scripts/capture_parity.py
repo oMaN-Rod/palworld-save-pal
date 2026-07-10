@@ -12,9 +12,12 @@ static-data corpus):
 
 import argparse
 import asyncio
+import io
 import json
+import os
 import pathlib
 import sys
+import zipfile
 from typing import Optional
 
 import websockets
@@ -43,7 +46,45 @@ STATIC_DATA_SCENARIO = [
     {"type": "get_lab_research"},
 ]
 
-SCENARIOS = {"static-data": STATIC_DATA_SCENARIO}
+
+def build_save_zip_bytes(save_dir: str) -> bytes:
+    """Zip the corpus save the same way the UI would upload it:
+    Level.sav, optional LevelMeta.sav, Players/*.sav at the archive root."""
+    buffer = io.BytesIO()
+    with zipfile.ZipFile(buffer, "w", zipfile.ZIP_DEFLATED) as archive:
+        archive.write(os.path.join(save_dir, "Level.sav"), "Level.sav")
+        level_meta = os.path.join(save_dir, "LevelMeta.sav")
+        if os.path.exists(level_meta):
+            archive.write(level_meta, "LevelMeta.sav")
+        players_dir = os.path.join(save_dir, "Players")
+        for file_name in sorted(os.listdir(players_dir)):
+            if file_name.endswith(".sav"):
+                archive.write(
+                    os.path.join(players_dir, file_name), f"Players/{file_name}"
+                )
+    return buffer.getvalue()
+
+
+def load_path_requests(save_dir: str) -> list[dict]:
+    """Ordered request sequence for the Phase 1 load-path fixtures:
+    select_save (steam) -> sync_app_state -> load_zip_file."""
+    level_sav_path = os.path.join(save_dir, "Level.sav")
+    return [
+        {
+            "type": "select_save",
+            "data": {"type": "steam", "path": level_sav_path, "local": False},
+        },
+        {"type": "sync_app_state", "data": None},
+        {"type": "load_zip_file", "data": list(build_save_zip_bytes(save_dir))},
+    ]
+
+
+# Scenarios with a fixed request list, independent of any on-disk save.
+FIXED_SCENARIOS = {"static-data": STATIC_DATA_SCENARIO}
+
+# Scenarios that build their request list from a corpus save directory
+# (--save-dir), keyed by scenario name.
+SAVE_DIR_SCENARIOS = {"load_path": load_path_requests}
 
 # A request's response burst is considered complete after this much silence.
 IDLE_SECONDS = 2.0
@@ -63,13 +104,37 @@ def _null_save_dir_response_type(responses: list) -> Optional[str]:
     return None
 
 
-async def capture_corpus(url: str, corpus: str, output_root: pathlib.Path) -> None:
+def _resolve_requests(scenario: str, save_dir: Optional[str]) -> list[dict]:
+    """Build the ordered request list for `scenario`. `FIXED_SCENARIOS`
+    entries are used as-is; `SAVE_DIR_SCENARIOS` entries need `--save-dir`
+    (a corpus save's directory, i.e. Level.sav's parent) to build requests
+    that reference real on-disk paths."""
+    if scenario in FIXED_SCENARIOS:
+        return FIXED_SCENARIOS[scenario]
+    if save_dir is None:
+        print(
+            f"error: scenario {scenario!r} requires --save-dir (the corpus "
+            "save's directory, i.e. Level.sav's parent)",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    return SAVE_DIR_SCENARIOS[scenario](save_dir)
+
+
+async def capture_corpus(
+    url: str,
+    scenario: str,
+    corpus: str,
+    save_dir: Optional[str],
+    output_root: pathlib.Path,
+) -> None:
+    requests = _resolve_requests(scenario, save_dir)
     corpus_dir = output_root / corpus
     corpus_dir.mkdir(parents=True, exist_ok=True)
     try:
         socket_context = websockets.connect(url, max_size=2**30)
         async with socket_context as socket:
-            for request_index, request in enumerate(SCENARIOS[corpus]):
+            for request_index, request in enumerate(requests):
                 await socket.send(json.dumps(request))
                 responses = []
                 while True:
@@ -131,7 +196,28 @@ async def capture_corpus(url: str, corpus: str, output_root: pathlib.Path) -> No
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--corpus", choices=sorted(SCENARIOS), default="static-data")
+    parser.add_argument(
+        "--scenario",
+        choices=sorted(set(FIXED_SCENARIOS) | set(SAVE_DIR_SCENARIOS)),
+        default="static-data",
+        help="which request sequence to send",
+    )
+    parser.add_argument(
+        "--corpus",
+        default=None,
+        help="output subdirectory name under --output; defaults to --scenario "
+        "(set this explicitly to capture the same scenario against multiple "
+        "corpus saves, e.g. --scenario load_path --corpus steam-1p)",
+    )
+    parser.add_argument(
+        "--save-dir",
+        default=None,
+        help="corpus save's directory (Level.sav's parent) -- required for "
+        "SAVE_DIR_SCENARIOS scenarios such as load_path. Pass an ABSOLUTE "
+        "path: it is embedded verbatim in the captured select_save request "
+        "and read from disk again during Rust replay, which may run from a "
+        "different working directory than this script.",
+    )
     # psp.py:51 declares `client_id: int` on the WS route, so a non-numeric
     # path segment (e.g. "parity-capture") fails the Starlette route
     # converter and the handshake is rejected with HTTP 403 before this
@@ -143,7 +229,16 @@ def main() -> None:
         default=str(pathlib.Path(__file__).resolve().parents[1] / "rust/parity/fixtures"),
     )
     arguments = parser.parse_args()
-    asyncio.run(capture_corpus(arguments.url, arguments.corpus, pathlib.Path(arguments.output)))
+    corpus = arguments.corpus or arguments.scenario
+    asyncio.run(
+        capture_corpus(
+            arguments.url,
+            arguments.scenario,
+            corpus,
+            arguments.save_dir,
+            pathlib.Path(arguments.output),
+        )
+    )
 
 
 if __name__ == "__main__":
