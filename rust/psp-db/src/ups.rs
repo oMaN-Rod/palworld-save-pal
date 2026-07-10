@@ -420,8 +420,10 @@ pub async fn recompute_stats(
     )
     .fetch_optional(pool)
     .await?;
+    // CAST to BLOB so LENGTH() returns UTF-8 byte count (Python sums len(orjson.dumps),
+    // which is bytes); a bare LENGTH() on TEXT counts characters and reads too low.
     let total_bytes: i64 =
-        sqlx::query_scalar("SELECT COALESCE(SUM(LENGTH(pal_data)), 0) FROM ups_pals")
+        sqlx::query_scalar("SELECT COALESCE(SUM(LENGTH(CAST(pal_data AS BLOB))), 0) FROM ups_pals")
             .fetch_one(pool)
             .await?;
     let storage_size_mb = total_bytes as f64 / (1024.0 * 1024.0);

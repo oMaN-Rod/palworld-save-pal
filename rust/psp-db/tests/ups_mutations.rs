@@ -92,6 +92,34 @@ async fn stats_count_special_categories_exclusively() {
 }
 
 #[tokio::test]
+async fn storage_size_mb_counts_bytes_not_chars() {
+    let pool = test_pool().await;
+    let game_data = pals_game_data();
+    // Multi-byte nickname (ふわふわ = 4 chars, 12 UTF-8 bytes) makes byte count
+    // diverge from char count, so a char-based LENGTH() reads too low.
+    let mut pal = new_pal("SheepBall", false);
+    pal.nickname = Some("ふわふわ".to_string());
+    pal.pal_data = serde_json::json!({"character_id": "SheepBall", "is_boss": false,
+        "is_lucky": false, "level": 12, "nickname": "ふわふわ"});
+    psp_db::ups::add_pal(&pool, pal, &game_data).await.unwrap();
+
+    let expected_bytes: i64 =
+        sqlx::query_scalar("SELECT SUM(LENGTH(CAST(pal_data AS BLOB))) FROM ups_pals")
+            .fetch_one(&pool)
+            .await
+            .unwrap();
+    let expected_mb = expected_bytes as f64 / (1024.0 * 1024.0);
+
+    let stats = psp_db::ups::get_stats(&pool, &game_data).await.unwrap();
+    assert!(
+        (stats.storage_size_mb - expected_mb).abs() < 1e-12,
+        "storage_size_mb {} should equal byte-based {}",
+        stats.storage_size_mb,
+        expected_mb
+    );
+}
+
+#[tokio::test]
 async fn collection_counts_follow_membership() {
     let pool = test_pool().await;
     let game_data = pals_game_data();
