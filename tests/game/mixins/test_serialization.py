@@ -49,3 +49,36 @@ class TestRoundtrip:
                 raw_gvas, PALWORLD_TYPE_HINTS, CUSTOM_PROPERTIES, allow_nan=True
             )
             assert gvas_file is not None
+
+
+class TestRepeatedSerialization:
+    """SaveManager caches GvasFile objects, so serializing must not consume them.
+
+    These guard the contract that lets sav() skip a deepcopy of the whole Level
+    GVAS. They require a palworld-save-tools whose rawdata encoders do not
+    mutate their `properties` argument.
+    """
+
+    def test_sav_twice_produces_identical_bytes(self, fresh_save_manager):
+        first = fresh_save_manager.sav()
+        second = fresh_save_manager.sav()
+        assert first == second
+
+    def test_sav_preserves_decoded_custom_properties(self, fresh_save_manager):
+        world = fresh_save_manager._gvas_file.properties["worldSaveData"]["value"]
+        group_map = world["GroupSaveDataMap"]
+        foliage = world["FoliageGridSaveDataMap"]
+        map_objects = world["MapObjectSaveData"]
+
+        fresh_save_manager.sav()
+
+        # Library encoder (group.encode)
+        assert "custom_type" in group_map
+        assert "group_id" in group_map["value"][0]["value"]["RawData"]["value"]
+        # skip_encode path
+        assert "custom_type" in foliage
+        assert "skip_type" in foliage
+        # Deeply nested encoder (map_object.encode)
+        assert "custom_type" in map_objects
+        first_object = map_objects["value"]["values"][0]
+        assert "values" not in first_object["Model"]["value"]["RawData"]["value"]
