@@ -486,6 +486,7 @@ fn two_player_guild_session(guild_loaded: bool) -> TwoPlayerGuild {
         0,
         Some(guild_id),
         "Wooly",
+        &data,
     );
     let admin_entry = player_character_entry(admin_id);
     let member_entry = player_character_entry(member_id);

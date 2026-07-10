@@ -228,18 +228,27 @@ pub fn read_item_container(
             let slot_index = raw_slot.slot_index;
             let count = raw_slot.count;
             let static_id = Some(raw_slot.item.static_id.clone());
-            let local_id = {
-                let id = props::guid_to_uuid(&raw_slot.item.dynamic_id.local_id_in_created_world);
-                (id != props::EMPTY_UUID).then_some(id)
-            };
-            let dynamic_item = local_id.and_then(|dynamic_local_id| {
+            // Python's `ItemContainerSlot.local_id` computed field is
+            // `as_uuid(local_id_in_created_world)` = the RAW guid, emitted
+            // verbatim: the nil UUID (serialized `"00000000-…"`) for a plain
+            // stackable item, a real uuid for a dynamic-backed item. It is NOT
+            // filtered to `null` — only a slot that structurally lacks the raw
+            // field (never, for a typed uesave slot) would be `None`.
+            let raw_local_id =
+                props::guid_to_uuid(&raw_slot.item.dynamic_id.local_id_in_created_world);
+            // The non-empty id gates ONLY the dynamic-item lookup and the
+            // drop-on-missing decision (item_container.py `_get_items`:
+            // `if slot.local_id and not is_empty_uuid(slot.local_id):`) — the
+            // nil UUID is truthy in Python but excluded here by is_empty_uuid.
+            let dynamic_local_id = (raw_local_id != props::EMPTY_UUID).then_some(raw_local_id);
+            let dynamic_item = dynamic_local_id.and_then(|dynamic_local_id| {
                 let dynamic_entry_index = *dynamic_index.get(&dynamic_local_id)?;
                 read_dynamic_item(level, dynamic_entry_index, dynamic_local_id, game_data)
             });
-            // Python drops slots whose dynamic item is missing
-            // (item_container.py's `_get_items`: `if not dynamic_item: ...
-            // continue`).
-            if local_id.is_some() && dynamic_item.is_none() {
+            // Python drops a slot whose NON-EMPTY local_id has no matching
+            // dynamic item (`_get_items` logs then `_remove_container_slot`); a
+            // nil local_id (plain item) is kept unconditionally.
+            if dynamic_local_id.is_some() && dynamic_item.is_none() {
                 continue;
             }
             slots.push(ItemContainerSlotDto {
@@ -247,7 +256,9 @@ pub fn read_item_container(
                 slot_index,
                 count,
                 static_id,
-                local_id,
+                // Raw `as_uuid` value — nil included, never `null` for a real
+                // slot (matches Python's computed field byte-for-byte).
+                local_id: Some(raw_local_id),
             });
         }
     }
@@ -1607,7 +1618,19 @@ mod tests {
         assert_eq!(dto.slots.len(), 1);
         assert_eq!(dto.slots[0].static_id, Some("Wood".to_string()));
         assert_eq!(dto.slots[0].count, 5);
-        assert_eq!(dto.slots[0].local_id, None);
+        // A plain stackable item's `local_id` is the RAW nil UUID, NOT null:
+        // Python's `ItemContainerSlot.local_id` computed field is
+        // `as_uuid(local_id_in_created_world)`, and `toUUID` of the nil guid is
+        // the (truthy) nil UUID, which serializes as the string
+        // "00000000-0000-0000-0000-000000000000". Regression pin for the
+        // Task-15 parity fix (Rust previously filtered nil → null, diverging
+        // from every plain item slot Python emits).
+        assert_eq!(dto.slots[0].local_id, Some(props::EMPTY_UUID));
+        assert_eq!(
+            serde_json::to_value(&dto.slots[0]).unwrap()["local_id"],
+            serde_json::json!("00000000-0000-0000-0000-000000000000"),
+            "a plain slot's local_id must serialize as the nil UUID string, not null"
+        );
         assert!(dto.slots[0].dynamic_item.is_none());
     }
 

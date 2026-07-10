@@ -903,6 +903,7 @@ fn clone_bug_fixture() -> (SaveSession, GameData, Uuid, PalDto) {
         0,
         None,
         "Wooly",
+        &data,
     );
     let pal_box_entry = empty_character_container_entry(pal_box_id, 1);
 

@@ -855,11 +855,19 @@ pub fn apply_pal_dto(
         .iter()
         .filter(|(name, rank)| **rank != 0 && WORK_SUITABILITIES.contains(&name.as_str()))
         .collect();
-    if non_zero_known.is_empty() {
-        save_parameter
-            .0
-            .shift_remove(&PropertyKey::from("GotWorkSuitabilityAddRankList"));
-    } else {
+    // Python's setter (game/pal.py:504-511) ALWAYS `safe_remove`s the property
+    // first, then re-adds it only when non-empty. Because re-inserting a key
+    // into a Python dict appends it at the end, even an UNCHANGED non-empty
+    // work-suitability list moves `GotWorkSuitabilityAddRankList` to the END of
+    // the property bag. Reproduce that remove-then-append exactly: an in-place
+    // `insert` (IndexMap keeps an existing key's position) diverges by property
+    // ORDER on resave -- caught byte-for-byte by the Task-15 download deep-check
+    // (Python emits `...FriendshipPoint, GotWorkSuitabilityAddRankList,
+    // SanityValue`; the in-place version left GWSARL before FriendshipPoint).
+    save_parameter
+        .0
+        .shift_remove(&PropertyKey::from("GotWorkSuitabilityAddRankList"));
+    if !non_zero_known.is_empty() {
         let mut rank_structs = Vec::new();
         for (work_name, rank) in non_zero_known {
             let mut rank_props = Properties::default();
@@ -1009,6 +1017,10 @@ const CUSTOM_VERSION_DATA: [u8; 24] = [
 /// comment) -- both are Task 9's responsibility (the actual pal-creation
 /// CRUD operation, which owns the `SaveSession`/`uesave::Save` this entry
 /// gets inserted into).
+// Faithful port of `PalObjects.PalSaveParameter`, whose Python signature has
+// the same set of required inputs; grouping them into a struct would just move
+// the same 8 fields elsewhere for no readability gain at the two call sites.
+#[allow(clippy::too_many_arguments)]
 pub fn new_pal_entry(
     character_id: &str,
     instance_id: uuid::Uuid,
@@ -1017,6 +1029,7 @@ pub fn new_pal_entry(
     slot_index: i32,
     group_id: Option<uuid::Uuid>,
     nickname: &str,
+    game_data: &GameData,
 ) -> MapEntry {
     let mut save_parameter = Properties::default();
     save_parameter.insert("CharacterID", props::name_property(character_id));
@@ -1044,7 +1057,16 @@ pub fn new_pal_entry(
     save_parameter.insert("Talent_HP", props::byte_property(50));
     save_parameter.insert("Talent_Shot", props::byte_property(50));
     save_parameter.insert("Talent_Defense", props::byte_property(50));
-    save_parameter.insert("FullStomach", props::float_property(300.0));
+    // `Pal.__init__(new_pal=True)` runs `_set_max_stomach()` (game/pal.py:660),
+    // which writes `FullStomach = pal_data["max_full_stomach"]` (150 for
+    // SheepBall, etc.), falling back to a flat 300.0 only when the species has
+    // no `max_full_stomach`. `max_stomach_for` is exactly that lookup — the
+    // previous hardcoded 300.0 diverged from Python for every species with a
+    // real max_full_stomach (surfaced by the Task-15 add_pal fixture).
+    save_parameter.insert(
+        "FullStomach",
+        props::float_property(max_stomach_for(character_id, game_data) as f32),
+    );
     save_parameter.insert("PassiveSkillList", props::name_array_property(vec![]));
     save_parameter.insert(
         "OwnedTime",
@@ -1429,7 +1451,7 @@ pub fn add_player_pal(
         return Ok(None); // container full (character_container.py's available_slots)
     };
     let guild_id = super::guild::find_player_guild_id(session, player_id)?;
-    let mut entry = new_pal_entry(
+    let entry = new_pal_entry(
         character_id,
         new_pal_id,
         player_id,
@@ -1437,18 +1459,23 @@ pub fn add_player_pal(
         slot_index,
         guild_id,
         nickname,
+        game_data,
     );
-    // `new_pal.hp = new_pal.max_hp` (player.py) -- boosted is re-derived from
-    // the entry just built (fresh, never stale; see `max_hp_for`'s own doc
-    // comment on why a caller-supplied is_boss/is_lucky would be wrong here).
-    if let Some(save_parameter) = world::entry_save_parameter_mut(&mut entry) {
-        let dto = read_save_parameter_dto(save_parameter, new_pal_id, false, game_data);
-        let boosted = dto.is_boss.unwrap_or(false) || dto.is_lucky.unwrap_or(false);
-        save_parameter.insert(
-            "Hp",
-            props::fixed_point64_property(max_hp_for(&dto, boosted, game_data)),
-        );
-    }
+    // NOTE: Python's `new_pal.hp = new_pal.max_hp` (player.py:454) is a
+    // NO-OP in practice and is deliberately NOT ported. `PalObjects.
+    // PalSaveParameter` writes the placeholder under the legacy key `"HP"`
+    // (pal_objects.py:536), and `Pal.hp`'s GETTER migrates `"HP" -> "Hp"`
+    // via `pop`+re-insert every time it runs (game/pal.py:224). That getter
+    // fires during response serialization AFTER the `hp = max_hp` setter, so
+    // it OVERWRITES the computed max_hp (`"Hp"`) with the stale placeholder
+    // it just popped out of `"HP"` (545000) -- so every freshly ADDED pal's
+    // wire `hp` is that fixed placeholder, never its real max_hp. This port
+    // writes `"Hp"` directly (never `"HP"`, see new_pal_entry's own note), so
+    // there is no stale key to clobber; leaving the placeholder in place is
+    // what reproduces Python's observable result. Surfaced by the Task-15
+    // add_pal fixture (Python `hp=545000`, the placeholder, vs a computed
+    // 517000). Applies only to `new_pal_entry`-built pals (add_player/guild_
+    // pal); clone/dps deep-copy an existing `"Hp"` with no `"HP"` to clobber.
     ensure_pal_property_schemas(&mut session.level);
     world::character_map_mut(&mut session.level)?.push(entry);
     if let Some(guild) = guild_id {
@@ -1525,7 +1552,7 @@ pub fn add_guild_pal(
     else {
         return Ok(None);
     };
-    let mut entry = new_pal_entry(
+    let entry = new_pal_entry(
         character_id,
         new_pal_id,
         props::EMPTY_UUID,
@@ -1533,15 +1560,12 @@ pub fn add_guild_pal(
         slot_index,
         Some(base_guild),
         nickname,
+        game_data,
     );
-    if let Some(save_parameter) = world::entry_save_parameter_mut(&mut entry) {
-        let dto = read_save_parameter_dto(save_parameter, new_pal_id, false, game_data);
-        let boosted = dto.is_boss.unwrap_or(false) || dto.is_lucky.unwrap_or(false);
-        save_parameter.insert(
-            "Hp",
-            props::fixed_point64_property(max_hp_for(&dto, boosted, game_data)),
-        );
-    }
+    // Python's `new_pal.hp = new_pal.max_hp` is a no-op here for the same
+    // reason as `add_player_pal` (the `"HP"`->`"Hp"` getter clobber) -- the
+    // placeholder from `new_pal_entry` is the wire-observable value. See
+    // `add_player_pal`'s note.
     ensure_pal_property_schemas(&mut session.level);
     world::character_map_mut(&mut session.level)?.push(entry);
     append_guild_handle(session, guild_id, new_pal_id)?;

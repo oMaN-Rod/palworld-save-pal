@@ -601,11 +601,25 @@ pub fn update_player_technologies(
             props::int_property(points.clamp(i32::MIN as i64, i32::MAX as i64) as i32),
         );
     }
+    let wrote_boss_points = boss_technology_points.is_some();
     if let Some(boss_points) = boss_technology_points {
         save_data.insert(
             "bossTechnologyPoint",
             props::int_property(boss_points.clamp(i32::MIN as i64, i32::MAX as i64) as i32),
         );
+    }
+    // Same schema gap Task 12 closed for the `update_players`/`apply_player_dto`
+    // path: `bossTechnologyPoint` (an IntProperty) is absent from older player
+    // saves' `PropertySchemas`, so inserting it here without registering a
+    // schema makes a later `player_sav_bytes()`/`download`/`save_modded` resave
+    // fail `missing property schema for path: SaveData.bossTechnologyPoint`.
+    // `set_technology_data` reaches this fn WITHOUT going through
+    // `apply_player_dto`, so it must register the schema itself. Idempotent
+    // no-op when the schema already exists; guarded on actually having written
+    // the property. Surfaced by the Task-15 parity sequence's
+    // set_technology_data -> download_save_file.
+    if wrote_boss_points {
+        ensure_boss_technology_point_schema(&mut loaded.sav);
     }
     Ok(())
 }

@@ -90,21 +90,221 @@ where
     }
 }
 
-/// Justified, documented parity divergences, as `"<message_type>:<json_pointer>"`
-/// masks (e.g. `"loaded_save_files:/data/save_dir"`). MUST stay empty unless a
-/// divergence is reviewed and each entry carries a one-line "why" comment.
-const PARITY_IGNORED_PATHS: &[&str] = &[];
+/// Justified, documented parity divergences as `(message_type, json_pointer)`
+/// pairs whose value is IRREDUCIBLY nondeterministic (generated independently by
+/// Python at capture time and Rust at replay time). Each is masked in BOTH the
+/// expected and the actual frame before the equality check. See
+/// `rust/parity/README.md` ("Determinism policy") for the per-entry
+/// justification. This is the ONLY divergence mechanism: any other field that
+/// differs is a REAL bug to fix in domain code, never to add here.
+///
+/// Phases 0–1 kept this EMPTY. Phase 2 is the first phase with genuinely
+/// nondeterministic outputs, and adds exactly these four masks and no more.
+const PARITY_IGNORED_PATHS: &[(&str, &str)] = &[
+    // A freshly-created pal's InstanceId is a `uuid4` minted INDEPENDENTLY by
+    // Python (capture) and Rust (replay) — it can never match. ONLY this one
+    // field is masked; every other field of the new pal (character_id,
+    // nickname, container id, storage_slot, every stat) is still compared
+    // strictly. `clone_pal`/`clone_dps_pal` answer on the `add_pal`/
+    // `add_dps_pal` response types, so these two entries cover them too.
+    ("add_pal", "/data/pal/instance_id"),
+    ("add_dps_pal", "/data/pal/instance_id"),
+    // download_save_file: `name` embeds a `Local::now()` timestamp, and
+    // `content` is a base64 zip whose CONTAINER (per-entry DOS timestamps +
+    // Python `zipfile` vs Rust `zip` deflate streams) differs even when the
+    // saves inside are byte-identical. Neither is a blind skip: the replay
+    // loop additionally (a) shape-checks `name` and asserts its world-name
+    // prefix matches, and (b) decodes BOTH zips and asserts the DECOMPRESSED
+    // GVAS of `Level.sav` and every `Players/*.sav` member is byte-identical
+    // (see `compare_download_equivalent`).
+    ("download_save_file", "/data/0/name"),
+    ("download_save_file", "/data/0/content"),
+];
 
-// clippy(const_is_empty) correctly notices PARITY_IGNORED_PATHS is empty right
-// now — that IS the point of this guard: it must keep failing loudly the
-// moment someone appends a mask without also implementing the stripping logic.
-#[allow(clippy::const_is_empty)]
-fn strip_ignored_paths(_message_type: &str, _value: &mut Value) {
-    // Populated when PARITY_IGNORED_PATHS gains its first entry.
-    assert!(
-        PARITY_IGNORED_PATHS.is_empty(),
-        "implement path stripping before allowlisting"
-    );
+/// Replaces every masked pointer for `message_type` with a fixed sentinel, in
+/// place. A pointer that isn't present in `value` is left alone (the frame may
+/// legitimately not carry it, e.g. a `warning` instead of an `add_pal`).
+fn mask_ignored_paths(message_type: &str, value: &mut Value) {
+    for (masked_type, pointer) in PARITY_IGNORED_PATHS {
+        if *masked_type == message_type {
+            if let Some(target) = value.pointer_mut(pointer) {
+                *target = Value::String("<masked>".to_string());
+            }
+        }
+    }
+}
+
+/// Splits a `download_save_file` filename `<world>_<YYYYMMDD>_<HHMMSS>.zip`
+/// into its world-name prefix, or `None` if it doesn't match that shape. The
+/// world name itself may contain `_` or spaces (e.g. `"Parity World"`), so we
+/// anchor on the trailing `_<8 digits>_<6 digits>.zip` rather than splitting
+/// on the first `_`.
+fn download_world_prefix(name: &str) -> Option<String> {
+    let stem = name.strip_suffix(".zip")?;
+    let (rest, hms) = stem.rsplit_once('_')?;
+    if hms.len() != 6 || !hms.bytes().all(|b| b.is_ascii_digit()) {
+        return None;
+    }
+    let (world, ymd) = rest.rsplit_once('_')?;
+    if ymd.len() != 8 || !ymd.bytes().all(|b| b.is_ascii_digit()) {
+        return None;
+    }
+    if world.is_empty() {
+        return None;
+    }
+    Some(world.to_string())
+}
+
+/// Decodes a `download_save_file` frame's base64 zip into `{member name -> raw
+/// (still-compressed) sav bytes}`. A `BTreeMap` so member order (which differs
+/// between Python's insertion order and Rust's `BTreeMap` iteration) never
+/// affects the comparison.
+fn decode_download_zip_members(response: &Value) -> std::collections::BTreeMap<String, Vec<u8>> {
+    use base64::Engine as _;
+    let content = response["data"][0]["content"]
+        .as_str()
+        .expect("download_save_file content is a base64 string");
+    let zip_bytes = base64::engine::general_purpose::STANDARD
+        .decode(content)
+        .expect("download_save_file content is valid base64");
+    let mut archive =
+        zip::ZipArchive::new(std::io::Cursor::new(zip_bytes)).expect("download content is a zip");
+    let mut members = std::collections::BTreeMap::new();
+    for index in 0..archive.len() {
+        let mut entry = archive.by_index(index).unwrap();
+        let name = entry.name().to_string();
+        let mut bytes = Vec::new();
+        std::io::Read::read_to_end(&mut entry, &mut bytes).unwrap();
+        members.insert(name, bytes);
+    }
+    members
+}
+
+/// Decompresses one `.sav` CONTAINER (PlM/Oodle) to its raw GVAS payload. The
+/// container framing is exactly what legitimately differs between the two
+/// backends' zips; the GVAS INSIDE is what must match.
+fn decompress_sav_container(sav_bytes: &[u8]) -> Vec<u8> {
+    uesave::compression::decompress_save(&mut std::io::Cursor::new(sav_bytes))
+        .expect("sav container decompresses to GVAS")
+}
+
+/// Decompresses a `.sav` CONTAINER, parses its GVAS with uesave, drops
+/// `worldSaveData.MapObjectSaveData`, then re-serialises canonically and
+/// returns the resulting GVAS bytes.
+///
+/// Why drop `MapObjectSaveData`: Python's `palworld_save_tools` re-encodes that
+/// one map's opaque `RawData` blobs NON-byte-faithfully. Proven empirically:
+/// an UNEDITED `world1/Level.sav` downloaded from the real Python backend
+/// differs from the on-disk original by 356 bytes with ZERO edits, and EVERY
+/// differing byte lies inside `MapObjectSaveData` — remove that one map from
+/// both and the entire rest of the GVAS is byte-identical. Rust (uesave) keeps
+/// those blobs opaque and byte-faithful to the game file (Phase-1 Task 12's
+/// resave gate proves `read -> write` is byte-identical), so this is a Python
+/// serializer quirk we must normalise away to compare the parts both backends
+/// DO agree on — it is NOT a wire-field mask, and Rust is the correct side.
+/// See `rust/parity/README.md`, "download_save_file deep check".
+///
+/// Everything else the edit sequence touches is preserved and still compared
+/// byte-for-byte: the pals' `CharacterSaveParameterMap` (property ORDER
+/// included — uesave parses into an order-preserving `IndexMap`, so the Task-15
+/// `GotWorkSuitabilityAddRankList` reordering fix is covered here), the
+/// guild's `GuildExtraSaveDataMap` lab research, and every `Players/*.sav`
+/// (which carry no `worldSaveData`, so the removal is a no-op there).
+fn normalized_member_gvas(compressed_sav: &[u8]) -> Vec<u8> {
+    use uesave::{Property, PropertyKey, StructValue};
+    let mut save = psp_core::savio::read_sav_bytes(compressed_sav).expect("parse sav container");
+    if let Some(Property::Struct(StructValue::Struct(world_save_data))) = save
+        .root
+        .properties
+        .0
+        .get_mut(&PropertyKey::from("worldSaveData"))
+    {
+        world_save_data
+            .0
+            .shift_remove(&PropertyKey::from("MapObjectSaveData"));
+    }
+    let recompressed = psp_core::savio::write_sav_bytes(&save).expect("re-serialize sav container");
+    uesave::compression::decompress_save(&mut std::io::Cursor::new(recompressed))
+        .expect("decompress re-serialized sav container")
+}
+
+/// The deep, non-masked half of the `download_save_file` check (the `content`
+/// mask is only for the strict-equality pass; the real assertion lives here).
+/// Verifies, for the captured (`expected`) vs replayed (`actual`) download
+/// frames:
+///  1. both filenames have the `<world>_<YYYYMMDD>_<HHMMSS>.zip` shape and the
+///     SAME world-name prefix (only the timestamp may differ);
+///  2. both zips carry the same set of member names; and
+///  3. every member's DECOMPRESSED GVAS payload is byte-identical.
+///
+/// Returns `Err` (rather than panicking) so both the pass and the fail branch
+/// are directly unit-testable, mirroring `compare_responses`. The replay loop
+/// turns an `Err` into a panic.
+fn compare_download_equivalent(
+    fixture_name: &str,
+    expected: &Value,
+    actual: &Value,
+) -> Result<(), String> {
+    let expected_name = expected["data"][0]["name"]
+        .as_str()
+        .ok_or_else(|| format!("{fixture_name}: expected download frame has no data[0].name"))?;
+    let actual_name = actual["data"][0]["name"]
+        .as_str()
+        .ok_or_else(|| format!("{fixture_name}: actual download frame has no data[0].name"))?;
+    let expected_world = download_world_prefix(expected_name).ok_or_else(|| {
+        format!(
+            "{fixture_name}: expected download name {expected_name:?} is not \
+             <world>_<YYYYMMDD>_<HHMMSS>.zip"
+        )
+    })?;
+    let actual_world = download_world_prefix(actual_name).ok_or_else(|| {
+        format!(
+            "{fixture_name}: actual download name {actual_name:?} is not \
+             <world>_<YYYYMMDD>_<HHMMSS>.zip"
+        )
+    })?;
+    if expected_world != actual_world {
+        return Err(format!(
+            "{fixture_name}: download filename world-name prefix differs \
+             (only the timestamp may): expected {expected_world:?}, got {actual_world:?}"
+        ));
+    }
+
+    let expected_members = decode_download_zip_members(expected);
+    let actual_members = decode_download_zip_members(actual);
+    let expected_names: Vec<&String> = expected_members.keys().collect();
+    let actual_names: Vec<&String> = actual_members.keys().collect();
+    if expected_names != actual_names {
+        return Err(format!(
+            "{fixture_name}: download zip members differ: expected {expected_names:?}, \
+             got {actual_names:?}"
+        ));
+    }
+
+    for (name, expected_sav) in &expected_members {
+        let actual_sav = actual_members
+            .get(name)
+            .expect("member key present in both (checked above)");
+        let expected_gvas = normalized_member_gvas(expected_sav);
+        let actual_gvas = normalized_member_gvas(actual_sav);
+        if expected_gvas != actual_gvas {
+            let first_diff = expected_gvas
+                .iter()
+                .zip(actual_gvas.iter())
+                .position(|(a, b)| a != b);
+            return Err(format!(
+                "{fixture_name}: normalised GVAS of zip member {name:?} differs between \
+                 Python (capture) and Rust (replay) — expected {} bytes, got {} bytes, first \
+                 differing byte at offset {:?}. (MapObjectSaveData is already excluded — see \
+                 normalized_member_gvas.) This is a REAL edit-parity divergence, NOT a \
+                 maskable field.",
+                expected_gvas.len(),
+                actual_gvas.len(),
+                first_diff,
+            ));
+        }
+    }
+    Ok(())
 }
 
 /// Replays every fixture found under `fixtures_root` against a fresh server
@@ -164,7 +364,7 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
             socket.send(Message::Text(request_text)).await.unwrap();
 
             let mut actual_responses = Vec::with_capacity(expected_responses.len());
-            for response_index in 0..expected_responses.len() {
+            for (response_index, expected_frame) in expected_responses.iter().enumerate() {
                 let frame = tokio::time::timeout(Duration::from_secs(60), socket.next())
                     .await
                     .unwrap_or_else(|_| {
@@ -181,7 +381,20 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
                 let mut value: Value = serde_json::from_str(frame.to_text().unwrap()).unwrap();
                 let response_message_type =
                     value["type"].as_str().unwrap_or(&request_type).to_string();
-                strip_ignored_paths(&response_message_type, &mut value);
+                // download_save_file's `content`/`name` masks hide only the
+                // nondeterministic zip container + timestamp; the REAL check is
+                // this deep comparison of the decompressed inner saves, run on
+                // the UNMASKED pair before masking blanks those fields out.
+                if response_message_type == "download_save_file" {
+                    if let Err(message) = compare_download_equivalent(
+                        &fixture_path.display().to_string(),
+                        expected_frame,
+                        &value,
+                    ) {
+                        panic!("{message}");
+                    }
+                }
+                mask_ignored_paths(&response_message_type, &mut value);
                 actual_responses.push(value);
             }
 
@@ -201,7 +414,7 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
             for value in expected.iter_mut() {
                 let response_message_type =
                     value["type"].as_str().unwrap_or(&request_type).to_string();
-                strip_ignored_paths(&response_message_type, value);
+                mask_ignored_paths(&response_message_type, value);
             }
             if let Err(message) = compare_responses(
                 &fixture_path.display().to_string(),
@@ -451,4 +664,228 @@ async fn assert_no_surplus_frame_oks_an_exhausted_stream() {
     .await;
 
     assert_eq!(result, Ok(()));
+}
+
+// ---------------------------------------------------------------------------
+// Phase-2 masking + download deep-comparator unit tests.
+// ---------------------------------------------------------------------------
+
+/// Proves `mask_ignored_paths` replaces EXACTLY the listed pointers for a
+/// message type and touches nothing else. If a future edit widened a mask
+/// (e.g. blanked the whole `pal` object, or masked `character_id`), the
+/// "unchanged" assertions here go red — the mask must never swallow more than
+/// the single nondeterministic field it names.
+#[test]
+fn mask_ignored_paths_masks_only_the_listed_pointers() {
+    // add_pal: only /data/pal/instance_id is masked; every sibling stays.
+    let mut add_pal = serde_json::json!({
+        "type": "add_pal",
+        "data": {
+            "player_id": "11111111-1111-1111-1111-111111111111",
+            "pal": {
+                "instance_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+                "character_id": "SheepBall",
+                "nickname": "parity",
+                "storage_slot": 3,
+                "hp": 12345,
+                "owner_uid": "11111111-1111-1111-1111-111111111111"
+            }
+        }
+    });
+    mask_ignored_paths("add_pal", &mut add_pal);
+    assert_eq!(add_pal["data"]["pal"]["instance_id"], "<masked>");
+    assert_eq!(add_pal["data"]["pal"]["character_id"], "SheepBall");
+    assert_eq!(add_pal["data"]["pal"]["nickname"], "parity");
+    assert_eq!(add_pal["data"]["pal"]["storage_slot"], 3);
+    assert_eq!(add_pal["data"]["pal"]["hp"], 12345);
+    assert_eq!(
+        add_pal["data"]["pal"]["owner_uid"],
+        "11111111-1111-1111-1111-111111111111"
+    );
+    assert_eq!(
+        add_pal["data"]["player_id"], "11111111-1111-1111-1111-111111111111",
+        "player_id is deterministic and must NOT be masked"
+    );
+
+    // A message type with no mask entry is left completely untouched.
+    let original_get_pals = serde_json::json!({
+        "type": "get_pals",
+        "data": {"instance_id": "should-not-be-masked"}
+    });
+    let mut get_pals = original_get_pals.clone();
+    mask_ignored_paths("get_pals", &mut get_pals);
+    assert_eq!(
+        get_pals, original_get_pals,
+        "a type with no mask entry must be untouched"
+    );
+
+    // download_save_file: only name + content in data[0] are masked.
+    let mut download = serde_json::json!({
+        "type": "download_save_file",
+        "data": [{"name": "Parity World_20260101_000000.zip",
+                  "content": "QUJD",
+                  "extra": "keep-me"}]
+    });
+    mask_ignored_paths("download_save_file", &mut download);
+    assert_eq!(download["data"][0]["name"], "<masked>");
+    assert_eq!(download["data"][0]["content"], "<masked>");
+    assert_eq!(
+        download["data"][0]["extra"], "keep-me",
+        "download mask must touch only name + content"
+    );
+}
+
+/// Builds a `download_save_file`-shaped frame from `(member name, raw sav
+/// bytes)` pairs, with a chosen filename and compression method — so the deep
+/// comparator can be exercised against zips that legitimately differ in
+/// container framing (compression) and filename timestamp while carrying
+/// identical inner saves.
+#[cfg(test)]
+fn make_download_frame(
+    filename: &str,
+    members: &[(&str, &[u8])],
+    compression: zip::CompressionMethod,
+) -> Value {
+    use base64::Engine as _;
+    use std::io::Write as _;
+    let mut cursor = std::io::Cursor::new(Vec::new());
+    {
+        let mut writer = zip::ZipWriter::new(&mut cursor);
+        let options = zip::write::SimpleFileOptions::default().compression_method(compression);
+        for (name, bytes) in members {
+            writer.start_file(*name, options).unwrap();
+            writer.write_all(bytes).unwrap();
+        }
+        writer.finish().unwrap();
+    }
+    let content = base64::engine::general_purpose::STANDARD.encode(cursor.into_inner());
+    serde_json::json!({
+        "type": "download_save_file",
+        "data": [{"name": filename, "content": content}]
+    })
+}
+
+#[cfg(test)]
+fn world1_sav(file_name: &str) -> Vec<u8> {
+    let path = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("../../tests/fixtures/saves/world1")
+        .join(file_name);
+    std::fs::read(&path).unwrap_or_else(|error| panic!("read {}: {error}", path.display()))
+}
+
+/// The deep download check PASSES when the inner saves are identical even
+/// though the zip container (compression method) AND the filename timestamp
+/// both differ — proving `content`/`name` are legitimately masked while the
+/// decompressed GVAS is what actually gets compared. Uses the real committed
+/// `world1/Level.sav` container so `decompress_save` runs a genuine PlM/Oodle
+/// decode, not a synthetic stand-in.
+#[test]
+fn compare_download_equivalent_oks_identical_inner_saves() {
+    let level = world1_sav("Level.sav");
+    let expected = make_download_frame(
+        "Parity World_20260101_000000.zip",
+        &[("Level.sav", &level)],
+        zip::CompressionMethod::Deflated,
+    );
+    // Different timestamp AND a different (Stored) container — nothing about the
+    // inner Level.sav changed.
+    let actual = make_download_frame(
+        "Parity World_20991231_235959.zip",
+        &[("Level.sav", &level)],
+        zip::CompressionMethod::Stored,
+    );
+
+    assert_eq!(
+        compare_download_equivalent("fixtures/phase2/00_download.json", &expected, &actual),
+        Ok(())
+    );
+}
+
+/// The deep download check FAILS when a zip member's DECOMPRESSED GVAS differs
+/// by even one byte. Realised here by giving the two zips a same-named
+/// `Level.sav` member backed by two genuinely different sav containers
+/// (`world1/Level.sav` vs `world1/LevelMeta.sav`) — both decode successfully,
+/// so the failure is proven to come from the GVAS byte comparison, not from a
+/// decode error or a member-name mismatch. The error must name the differing
+/// member and flag it as a real divergence (not a maskable field).
+#[test]
+fn compare_download_equivalent_errs_on_a_differing_inner_save() {
+    let level = world1_sav("Level.sav");
+    let level_meta = world1_sav("LevelMeta.sav");
+    // Sanity: the two containers really do decompress to different GVAS, so
+    // this test can't pass vacuously.
+    assert_ne!(
+        decompress_sav_container(&level),
+        decompress_sav_container(&level_meta),
+        "fixture precondition: Level.sav and LevelMeta.sav must differ"
+    );
+
+    let expected = make_download_frame(
+        "Parity World_20260101_000000.zip",
+        &[("Level.sav", &level)],
+        zip::CompressionMethod::Deflated,
+    );
+    let actual = make_download_frame(
+        "Parity World_20260101_000000.zip",
+        &[("Level.sav", &level_meta)],
+        zip::CompressionMethod::Deflated,
+    );
+
+    let error = compare_download_equivalent("fixtures/phase2/00_download.json", &expected, &actual)
+        .expect_err("differing inner Level.sav GVAS must be reported, not tolerated");
+    assert!(
+        error.contains("Level.sav"),
+        "error must name the differing member; got: {error}"
+    );
+    assert!(
+        error.contains("REAL"),
+        "error must flag the divergence as real (not maskable); got: {error}"
+    );
+}
+
+/// A zip whose member SET differs (an extra `Players/*.sav` on one side) is
+/// also a failure — the download must carry the same members on both backends.
+#[test]
+fn compare_download_equivalent_errs_on_a_member_set_mismatch() {
+    let level = world1_sav("Level.sav");
+    let expected = make_download_frame(
+        "Parity World_20260101_000000.zip",
+        &[("Level.sav", &level)],
+        zip::CompressionMethod::Deflated,
+    );
+    let actual = make_download_frame(
+        "Parity World_20260101_000000.zip",
+        &[("Level.sav", &level), ("Players/abc.sav", &level)],
+        zip::CompressionMethod::Deflated,
+    );
+
+    let error = compare_download_equivalent("fixtures/phase2/00_download.json", &expected, &actual)
+        .expect_err("a differing member set must be reported");
+    assert!(
+        error.contains("members differ"),
+        "error must explain the member-set mismatch; got: {error}"
+    );
+}
+
+/// `download_world_prefix` must accept a world name containing spaces/
+/// underscores and reject anything not ending in `_<8 digits>_<6 digits>.zip`.
+#[test]
+fn download_world_prefix_parses_the_timestamped_shape() {
+    assert_eq!(
+        download_world_prefix("Parity World_20260710_143012.zip").as_deref(),
+        Some("Parity World")
+    );
+    assert_eq!(
+        download_world_prefix("My_Cool_World_20260710_143012.zip").as_deref(),
+        Some("My_Cool_World")
+    );
+    assert_eq!(
+        download_world_prefix("PSP_20260710_143012.zip").as_deref(),
+        Some("PSP")
+    );
+    // Bad shapes.
+    assert_eq!(download_world_prefix("noextension_20260710_143012"), None);
+    assert_eq!(download_world_prefix("World_2026_143012.zip"), None); // 4-digit date
+    assert_eq!(download_world_prefix("World_20260710_1430.zip"), None); // 4-digit time
+    assert_eq!(download_world_prefix("_20260710_143012.zip"), None); // empty world
 }

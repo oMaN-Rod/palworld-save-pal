@@ -437,7 +437,16 @@ fn new_pal_entry_reads_back() {
     let instance_id = uuid::Uuid::new_v4();
     let owner = uuid::Uuid::new_v4();
     let container = uuid::Uuid::new_v4();
-    let entry = pal::new_pal_entry("Sheepball", instance_id, owner, container, 4, None, "wooly");
+    let entry = pal::new_pal_entry(
+        "Sheepball",
+        instance_id,
+        owner,
+        container,
+        4,
+        None,
+        "wooly",
+        &data,
+    );
 
     let dto = pal::pal_dto_from_entry(&entry, &data).expect("readable");
     assert_eq!(dto.instance_id, instance_id);
@@ -451,7 +460,9 @@ fn new_pal_entry_reads_back() {
     assert_eq!(dto.talent_hp, 50);
     assert_eq!(dto.talent_shot, 50);
     assert_eq!(dto.talent_defense, 50);
-    assert_eq!(dto.stomach, 300.0);
+    // `_set_max_stomach` (game/pal.py) writes Sheepball's `max_full_stomach`
+    // (150), NOT the flat 300 fallback -- matches Python's fresh-pal value.
+    assert_eq!(dto.stomach, 150.0);
     assert!(dto.learned_skills.is_empty());
     assert!(dto.active_skills.is_empty());
     assert!(dto.passive_skills.is_empty());
@@ -476,6 +487,7 @@ fn new_pal_entry_surfaces_a_real_group_id() {
         0,
         Some(group_id),
         "wooly",
+        &data,
     );
 
     let dto = pal::pal_dto_from_entry(&entry, &data).expect("readable");
@@ -489,6 +501,7 @@ fn new_pal_entry_surfaces_a_real_group_id() {
 /// reading the raw `OwnedTime` property directly off the built entry.
 #[test]
 fn new_pal_entry_writes_the_real_owned_time_tick_constant() {
+    let data = game_data();
     let entry = pal::new_pal_entry(
         "Sheepball",
         uuid::Uuid::new_v4(),
@@ -497,6 +510,7 @@ fn new_pal_entry_writes_the_real_owned_time_tick_constant() {
         0,
         None,
         "wooly",
+        &data,
     );
     let save_parameter = world::entry_save_parameter(&entry).expect("SaveParameter present");
     let owned_time = psp_core::props::get(save_parameter, &["OwnedTime"])

@@ -187,12 +187,117 @@ Example, from a checkout with `tests/fixtures/saves/world2/` present:
 - Fixtures derived from personal saves stay untracked (do not commit) --
   same rule as every other corpus.
 
+## phase2 scenario (Phase 2 — edit core)
+
+A single deterministic edit sequence driven over ONE connection against a
+FRESH backend. Unlike the fixed/load_path scenarios, it is DYNAMIC: it reads
+ids out of the live responses (a non-admin-if-possible player, a guild, an
+editable pal's `instance_id`, the player's container ids) and builds each
+later request from them — all in `capture_parity.py::capture_phase2`.
+
+Fixture order (000..018), all on one socket:
+`select_save` → `get_pals` → `get_pal_summaries` →
+`request_player_details` (probes players until one has a pal; the first
+with-a-pal player is chosen) → `request_guild_details` → `get_lab_research` →
+`heal_pals` → `heal_all_pals` → `set_technology_data` → `update_lab_research`
+→ `update_save_file` (edit an EXISTING pal) → `request_player_details`
+(edit-then-reread) → `move_pal` → `rename_world` → `download_save_file` →
+`add_pal` → `delete_player` → `delete_guild` (deletes LAST).
+
+`download_save_file` is captured BEFORE `add_pal` on purpose: `add_pal` mints
+a fresh `uuid4` `InstanceId` independently in Python and Rust, which would
+diverge the Level.sav bytes and defeat the download deep-check (below).
+Downloading first captures the maximal DETERMINISTIC edited state.
+
+    # Backend must be FRESH (no save/player pre-loaded in Python's GLOBAL
+    # app_state) — request_player_details is a lazy first-load whose
+    # progress frames must match Rust's per-connection first-load.
+    uv run --with websockets scripts/capture_parity.py \
+        --scenario phase2 \
+        --save-dir "D:\...\tests\fixtures\saves\world1" \
+        --corpus phase2
+
+Pass a **native** absolute path (backslashes on Windows). A mixed-separator
+`--save-dir` (e.g. from `$(pwd)` in Git Bash) makes Python echo the input
+path style in `loaded_save_files.level` while Rust normalises to backslashes
+— a spurious `level` mismatch. This is a capture-input hygiene issue, NOT a
+mask.
+
+**psp.db safety.** The backend opens the CWD-relative `psp.db` (repo root) at
+startup. Before capturing, BACK IT UP (copy `psp.db` → `psp.db.parity-backup`,
+record its hash) and RESTORE it byte-identical afterward — a developer's real
+`psp.db` (custom `save_dir`) would otherwise be touched. The phase2 sequence
+emits NO `get_settings`/`sync_app_state` frame, so the "`save_dir: null` on a
+fresh/unwarmed `psp.db`" quirk (see "Known Python quirks affecting capture"
+above) does NOT affect phase2 fixtures — no warming is needed for this
+scenario, but the backup/restore discipline still is. **The phase2 capture is
+READ-ONLY w.r.t. save files** (no `save_modded_save`; `update_save_file`/
+`download_save_file`/deletes mutate only in memory), so the committed
+`world1` fixture and any real `save_dir` are never written.
+
+### Determinism policy — the ONLY sanctioned masks
+
+Phases 0–1 kept `PARITY_IGNORED_PATHS` EMPTY. Phase 2 introduces the first
+irreducibly nondeterministic outputs. `parity.rs` masks EXACTLY these
+`(message_type, json_pointer)` pairs and no more (each masked in BOTH the
+captured and the replayed frame before the equality check):
+
+- `add_pal:/data/pal/instance_id` and `add_dps_pal:/data/pal/instance_id` —
+  a newly-created pal's `InstanceId` is a `uuid4` generated INDEPENDENTLY by
+  Python (capture) and Rust (replay); it can never match. ONLY this one field
+  is masked; every other field of the new pal (`character_id`, `nickname`,
+  container id, `storage_slot`, every stat incl. `hp`/`stomach`) is compared
+  strictly. `clone_pal`/`clone_dps_pal` answer on the `add_pal`/`add_dps_pal`
+  types, so these two entries cover them too.
+- `download_save_file:/data/0/name` — the filename embeds a `Local::now()`
+  timestamp. NOT a blind skip: the replay ALSO asserts `name` matches
+  `^<world>_\d{8}_\d{6}\.zip$` and that its world-name PREFIX equals the
+  capture's (only the timestamp may differ).
+- `download_save_file:/data/0/content` — the base64 zip CONTAINER (per-entry
+  DOS timestamps + Python `zipfile` vs Rust `zip` deflate streams) differs
+  even when the saves inside are identical. NOT a blind skip: see the deep
+  check below.
+
+Any OTHER field that differs is a REAL bug, fixed in domain code — never by
+widening a mask. The Task-15 live replay caught four such bugs this way
+(container-slot `local_id` nil-uuid-vs-null; a `bossTechnologyPoint` write
+schema gap in `set_technology_data`; a `GotWorkSuitabilityAddRankList`
+property-reorder in `apply_pal_dto`; and a new-pal `hp`/`stomach` divergence).
+
+### download_save_file deep check
+
+For the masked `content`, the replay decodes BOTH base64 zips, confirms the
+same member set, and for EVERY member (`Level.sav` + each `Players/*.sav`)
+asserts the DECOMPRESSED GVAS is byte-identical — after one normalisation:
+`worldSaveData.MapObjectSaveData` is removed from both sides first
+(`normalized_member_gvas`).
+
+**Why `MapObjectSaveData` is excluded (a documented allowance beyond the
+mask set, per the Task-15 policy).** Python's `palworld_save_tools`
+re-encodes that one map's opaque `RawData` blobs NON-byte-faithfully. Proven
+empirically: an UNEDITED `world1/Level.sav` downloaded from the real Python
+backend differs from the on-disk original by 356 bytes with ZERO edits, and
+EVERY differing byte lies inside `MapObjectSaveData`; remove that map from
+both and the entire rest of the GVAS is byte-identical. Rust (uesave) keeps
+those blobs opaque and byte-faithful to the game file (Phase-1 Task 12's
+resave gate proves `read → write` is byte-identical). So this is a Python
+serializer quirk that Rust is CORRECT not to reproduce (reproducing it would
+mean corrupting the save), and byte-identity of a full Level.sav against
+Python is impossible for any corpus containing such a map — world1 has a
+`DamagableRock`. Normalising both sides through uesave (parse → drop that map
+→ re-serialise) leaves EVERY edited structure still compared byte-for-byte:
+the pals' `CharacterSaveParameterMap` (property ORDER included — uesave uses
+an order-preserving `IndexMap`), the guild's `GuildExtraSaveDataMap` lab
+research, and every `Players/*.sav` (which have no `worldSaveData`, so the
+removal is a no-op there). This is the ONE allowance beyond the four masks;
+it is not a wire-field mask.
+
 ## `PARITY_IGNORED_PATHS`
 
-Starts empty. Any future entry must be a narrow, enumerated
-`"<message_type>:<json_pointer>"` mask (e.g. `"loaded_save_files:/data/save_dir"`),
-never a whole-payload wildcard, and must carry a one-line comment in
-`parity.rs` explaining why the Python and Rust values are expected to
-legitimately differ (timestamps, absolute paths, generated uuids). A mask
-that swallows more than the specific field it names turns a passing test
-into a lie.
+Was empty through Phase 1; Phase 2 added exactly the four masks enumerated
+under "Determinism policy" above. Any FUTURE entry must be a narrow,
+enumerated `(message_type, json_pointer)` mask, never a whole-payload
+wildcard, and must carry a one-line comment in `parity.rs` explaining why the
+Python and Rust values are expected to legitimately differ (timestamps,
+generated uuids, Python-serializer quirks). A mask that swallows more than
+the specific field it names turns a passing test into a lie.
