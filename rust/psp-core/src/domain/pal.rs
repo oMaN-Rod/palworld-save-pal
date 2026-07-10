@@ -1833,12 +1833,96 @@ pub fn move_pal(
         .and_then(|entry| pal_dto_from_entry(entry, game_data)))
 }
 
+/// `_pal_belongs_to_player` (`game/mixins/loading.py`): `OwnerPlayerUId ==
+/// player_id`, the exact scoping `Player.pals` is built from, hence the
+/// exact predicate `self.pals.pop(pal_id)` (`Player.delete_pal`,
+/// `player.py`) fails a `KeyError` against for a pal this player doesn't
+/// own. Same check `move_pal`'s own inline `owns_pal` already uses --
+/// factored out here for `delete_player_pals` rather than refactoring
+/// `move_pal`'s already-reviewed, unchanged code to call it.
+fn pal_owned_by_player(
+    session: &SaveSession,
+    pal_id: uuid::Uuid,
+    player_id: uuid::Uuid,
+) -> Result<bool, CoreError> {
+    Ok(world::character_map(&session.level)?.iter().any(|entry| {
+        !world::entry_is_player(entry)
+            && world::entry_instance_id(entry) == Some(pal_id)
+            && world::entry_save_parameter(entry)
+                .and_then(|params| param(params, "OwnerPlayerUId").and_then(props::as_uuid))
+                == Some(player_id)
+    }))
+}
+
+/// Whether `pal_id` currently occupies a slot in the worker container at
+/// `container_index` -- this port's own `Slots` array bookkeeping
+/// (`containers::read_character_container`, kept in sync by
+/// `character_container_add_pal`/`remove_pal`), matching `del
+/// self.pals[pal_id]`'s (`Base.delete_pal`, `base.py`) real, net effect:
+/// nothing happens for a pal that never occupied a slot in THIS base's
+/// worker container.
+///
+/// Deliberate divergence from `guild::base_container_membership`
+/// (`_load_pals_for_container`'s `SlotId`-only pal-PROPERTY check, the rule
+/// Task 8 established for LOAD-time `Base.pals` scoping, and what
+/// `clone_guild_pal`'s own already-reviewed source-pal lookup uses): a pal
+/// freshly created THIS session by `add_guild_pal`/`clone_guild_pal` is
+/// always written "SlotID" (uppercase -- `PalObjects.PalCharacterSlotId`'s
+/// own literal spelling, see `new_pal_entry`'s doc comment), which
+/// `base_container_membership`'s strict "SlotId"-only rule does NOT
+/// recognize. Using that check here would incorrectly reject deleting a pal
+/// immediately after adding it in the same session -- breaking
+/// `add_guild_pal_at_slot_zero_succeeds_and_leaves_owner_player_uid_present`'s
+/// own add-then-delete round trip (an already-verified test this fix must
+/// not break). Real Python does not have this problem: `Base.add_pal`
+/// inserts the new pal directly into the in-memory `self.pals` dict
+/// (`self.pals[new_pal.instance_id] = new_pal`), bypassing
+/// `_load_pals_for_container`'s load-time `SlotId`-only filter entirely --
+/// so a freshly added pal is ALWAYS deletable in the same session
+/// regardless of its own property's key spelling. This port has no
+/// persistent `Base.pals` set to mirror that (membership is always
+/// re-derived from the save tree on demand); the container's own already
+/// self-consistent `Slots` bookkeeping is the closest faithful
+/// approximation of "is this pal currently a member of this container" for
+/// authorizing a delete, and -- unlike the pal-property check -- still
+/// correctly rejects a pal belonging to a genuinely different base's
+/// container (this fix's actual Critical-bug target), since that pal never
+/// appears in THIS container's `Slots` array at all. See this task's
+/// report.
+fn pal_in_character_container(
+    level: &uesave::Save,
+    container_index: usize,
+    pal_id: uuid::Uuid,
+) -> bool {
+    super::containers::read_character_container(level, container_index)
+        .map(|view| view.slots.iter().any(|slot| slot.pal_id == Some(pal_id)))
+        .unwrap_or(false)
+}
+
 /// Port of `PalOpsMixin.delete_player_pals` (`pal_ops.py`) via `Player.
 /// delete_pal` (`player.py`): removes the pal from both the pal box and the
 /// party (whichever one actually holds it -- `CharacterContainer.remove_pal`
 /// is a silent no-op for a container that never had the pal), the guild
 /// handle if the player has a guild, then the `CharacterSaveParameterMap`
 /// entry itself.
+///
+/// Deviation from the brief (this task's review flagged this as a Critical
+/// fix): the brief attempted `character_container_remove_pal` (a safe no-op
+/// for a container that never had the pal) and then unconditionally called
+/// `remove_guild_handle`/`delete_pal_entry` -- but `delete_pal_entry`
+/// searches the ENTIRE `CharacterSaveParameterMap` by `instance_id` alone
+/// and deletes whatever it finds, with no ownership check at all. That would
+/// let `delete_player_pals(player_a, [pal_owned_by_player_b])` delete player
+/// B's pal from the save. Real Python cannot do this:
+/// `Player.delete_pal`'s literal first statement is `self.pals.pop(pal_id)`
+/// -- `self.pals` is scoped to `OwnerPlayerUId == player_id`
+/// (`_pal_belongs_to_player`, `loading.py`), so an unowned `pal_id` raises
+/// `KeyError` BEFORE any container is touched. Reproducing that check-
+/// before-mutate order (never panicking on the failure itself, per this
+/// port's policy) closes the hole: `Err(CoreError::PalNotFound(pal_id))`,
+/// nothing mutated, for a `pal_id` this player doesn't own -- see this
+/// task's report for why this is a hard error (matching Python's raise)
+/// rather than a silent skip.
 pub fn delete_player_pals(
     session: &mut SaveSession,
     player_id: uuid::Uuid,
@@ -1848,6 +1932,9 @@ pub fn delete_player_pals(
     let (pal_box_id, party_id) = player_container_ids(session, player_id)?;
     let guild_id = super::guild::find_player_guild_id(session, player_id)?;
     for pal_id in pal_ids {
+        if !pal_owned_by_player(session, *pal_id, player_id)? {
+            return Err(CoreError::PalNotFound(*pal_id));
+        }
         for container_id in [pal_box_id, party_id] {
             if let Some(container_index) = container_entry_index(session, container_id)? {
                 super::containers::character_container_remove_pal(
@@ -1873,8 +1960,25 @@ pub fn delete_player_pals(
 /// Python message; a `base_id` that doesn't exist WITHIN an otherwise-loaded
 /// guild is a separate, unhandled Python `KeyError`
 /// (`self.bases[base_id]`), reproduced here as a tolerant no-op (skip the
-/// container-removal step, still remove the guild handle and character-map
-/// entry) rather than a second crash-equivalent -- see this task's report.
+/// container-removal/membership-check step, still remove the guild handle
+/// and character-map entry) rather than a second crash-equivalent -- see
+/// this task's report. Unchanged by this fix -- the membership check below
+/// only ever runs once the base itself has resolved to a real container.
+///
+/// Deviation from the brief (this task's review flagged this as the same
+/// Critical fix as `delete_player_pals`, applied here too): the same
+/// unconditional `remove_guild_handle`/`delete_pal_entry` call, with no
+/// membership check, would let `delete_guild_pals(guild_a, base_a,
+/// [pal_from_guild_b])` delete a pal belonging to an entirely different
+/// guild/base. Real Python's `Base.delete_pal`'s literal first statement is
+/// `del self.pals[pal_id]` -- `self.pals` is scoped to this base's worker
+/// container membership, so a `pal_id` that isn't a member raises
+/// `KeyError` BEFORE the container is touched. Reproduced the same way as
+/// `delete_player_pals`: `Err(CoreError::PalNotFound(pal_id))`, nothing
+/// mutated, before any container/guild-handle/character-map write for that
+/// pal -- via `pal_in_character_container` rather than
+/// `guild::base_container_membership`; see that function's own doc comment
+/// for exactly why.
 pub fn delete_guild_pals(
     session: &mut SaveSession,
     guild_id: uuid::Uuid,
@@ -1896,6 +2000,9 @@ pub fn delete_guild_pals(
     for pal_id in pal_ids {
         if let Some(container_id) = worker_container_id {
             if let Some(container_index) = container_entry_index(session, container_id)? {
+                if !pal_in_character_container(&session.level, container_index, *pal_id) {
+                    return Err(CoreError::PalNotFound(*pal_id));
+                }
                 super::containers::character_container_remove_pal(
                     &mut session.level,
                     container_index,
@@ -2186,7 +2293,31 @@ pub fn add_player_dps_pal(
         else {
             return Ok(None);
         };
+        // `_set_max_stomach()` (pal.py): `Pal.__init__`'s `new_pal=True`
+        // branch calls it UNCONDITIONALLY, BEFORE `reset()` or `character_id
+        // = character_id` ever run -- so it reads whatever `CharacterID` this
+        // slot held immediately prior to this call (the PREVIOUS occupant's
+        // species for a recycled slot, or absent/"None" for a never-used
+        // one), never the NEW species this call is actually creating. Its
+        // setter (`self.stomach = ...`) always writes `FullStomach`
+        // (`pal_data["max_full_stomach"]` if the previous species is
+        // recognized, else the flat 300.0 fallback -- the exact
+        // `max_stomach_for` lookup `heal_save_parameter` already shares).
+        // `reset()` below never touches stomach (ported by
+        // `reset_dps_save_parameter`, which likewise leaves `FullStomach`
+        // alone), so this write is never overwritten again -- unlike a
+        // recycled slot's stale `FullStomach`/`IsRarePal`, this one is
+        // ALWAYS freshly (if not always correctly-for-the-new-species)
+        // written, matching Python exactly. See this task's report.
+        let previous_character_id = param(save_parameter, "CharacterID")
+            .and_then(props::as_str)
+            .unwrap_or("")
+            .to_string();
         reset_dps_save_parameter(save_parameter);
+        save_parameter.insert(
+            "FullStomach",
+            props::float_property(max_stomach_for(&previous_character_id, game_data) as f32),
+        );
         save_parameter.insert("OwnerPlayerUId", props::guid_property(player_id));
         save_parameter.insert("CharacterID", props::name_property(character_id));
         save_parameter.insert("NickName", props::str_property(nickname));
