@@ -41,6 +41,10 @@ impl<K, V> OrderedMap<K, V> {
         OrderedMap(Vec::new())
     }
 
+    fn with_capacity(capacity: usize) -> Self {
+        OrderedMap(Vec::with_capacity(capacity))
+    }
+
     pub fn len(&self) -> usize {
         self.0.len()
     }
@@ -110,11 +114,15 @@ impl<K: Serialize, V: Serialize> Serialize for OrderedMap<K, V> {
     }
 }
 
-impl<'de, K: Deserialize<'de>, V: Deserialize<'de>> Deserialize<'de> for OrderedMap<K, V> {
+impl<'de, K: Deserialize<'de> + PartialEq, V: Deserialize<'de>> Deserialize<'de>
+    for OrderedMap<K, V>
+{
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
         struct OrderedMapVisitor<K, V>(PhantomData<(K, V)>);
 
-        impl<'de, K: Deserialize<'de>, V: Deserialize<'de>> Visitor<'de> for OrderedMapVisitor<K, V> {
+        impl<'de, K: Deserialize<'de> + PartialEq, V: Deserialize<'de>> Visitor<'de>
+            for OrderedMapVisitor<K, V>
+        {
             type Value = OrderedMap<K, V>;
 
             fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
@@ -122,11 +130,18 @@ impl<'de, K: Deserialize<'de>, V: Deserialize<'de>> Deserialize<'de> for Ordered
             }
 
             fn visit_map<A: MapAccess<'de>>(self, mut access: A) -> Result<Self::Value, A::Error> {
-                let mut entries = Vec::with_capacity(access.size_hint().unwrap_or(0));
-                while let Some(entry) = access.next_entry()? {
-                    entries.push(entry);
+                // Mirrors Python `json.loads`/`dict` and `indexmap::IndexMap`'s
+                // `insert`-based `Deserialize`: a repeated key is last-value-wins
+                // *at the original key's position*, not appended as a second
+                // entry. Route every entry through `insert()` (the same method
+                // the rest of this type's mutation API uses) rather than
+                // pushing directly onto the backing `Vec`, so both entry points
+                // share one dedupe path.
+                let mut map = OrderedMap::with_capacity(access.size_hint().unwrap_or(0));
+                while let Some((key, value)) = access.next_entry()? {
+                    map.insert(key, value);
                 }
-                Ok(OrderedMap(entries))
+                Ok(map)
             }
         }
 
@@ -174,6 +189,39 @@ mod tests {
         let map: OrderedMap<String, i64> = serde_json::from_value(value).unwrap();
         let keys: Vec<&String> = map.iter().map(|(k, _)| k).collect();
         assert_eq!(vec!["c", "a", "b"], keys);
+    }
+
+    #[test]
+    fn deserialize_dedupes_repeated_keys_last_value_wins_at_first_position() {
+        // Matches Python `json.loads`/`dict` and `indexmap::IndexMap`'s
+        // `insert`-based `Deserialize`: a duplicated key keeps its *first*
+        // position but takes its *last* value, rather than producing two
+        // entries for the same key.
+        //
+        // Deliberately parsed via `from_str` on a raw JSON literal, not
+        // `serde_json::json!{...}` + `from_value`: the `json!` macro builds a
+        // `serde_json::Value::Object` first, which *already* dedupes
+        // duplicate keys (last-value-wins) while constructing the `Value` —
+        // so a test built that way would never actually drive a duplicate
+        // key through `visit_map` at all. `from_str` parses the raw text
+        // directly through this type's `Deserialize` impl, which is the only
+        // path that genuinely exercises repeated-key handling.
+        let map: OrderedMap<String, i64> =
+            serde_json::from_str(r#"{"a": 1, "b": 2, "a": 3}"#).unwrap();
+        assert_eq!(2, map.len(), "duplicate key must not produce two entries");
+        let entries: Vec<(&String, &i64)> = map.iter().collect();
+        assert_eq!(
+            vec![(&"a".to_string(), &3), (&"b".to_string(), &2)],
+            entries
+        );
+    }
+
+    #[test]
+    fn deserialize_then_serialize_round_trip_preserves_order_after_dedup() {
+        let map: OrderedMap<String, i64> =
+            serde_json::from_str(r#"{"c": 1, "a": 2, "c": 3, "b": 4}"#).unwrap();
+        let serialized = serde_json::to_string(&map).unwrap();
+        assert_eq!(r#"{"c":3,"a":2,"b":4}"#, serialized);
     }
 
     #[test]

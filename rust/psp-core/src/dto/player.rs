@@ -102,6 +102,19 @@ pub struct PlayerDto {
     pub location: Option<WorldMapPointDto>, // output-only
     #[serde(default)]
     pub last_online_time: Option<IsoDateTime>, // output-only
+    /// `Option` is deliberate, not an oversight: `game/player.py::Player.dps`
+    /// is a `@computed_field` returning `self._dps`, a `PrivateAttr` that
+    /// defaults to `None` and is only populated by `_load_dps()`, which
+    /// `Player.__init__` calls **only when `self._player_gvas_files.dps` is
+    /// present** (i.e. only when the save actually has a separate per-player
+    /// DPS-arena `.sav` file — not guaranteed). When that file is absent,
+    /// `_dps` stays `None` and pydantic serializes `"dps": null`, despite the
+    /// computed field's `-> Dict[int, Pal]` annotation claiming otherwise.
+    /// Verified empirically: a pydantic `computed_field` with a non-`Optional`
+    /// return annotation that actually returns `None` serializes `null`
+    /// without warning or error (checked under `python -W error`). So `null`
+    /// is a real wire shape here, unlike `PlayerDto::pals`, which is a plain
+    /// `Field(default_factory=dict)` with no such nullable code path.
     #[serde(default)]
     pub dps: Option<OrderedMap<i32, PalDto>>, // output-only
 }
@@ -277,6 +290,27 @@ mod tests {
         // A couple of value spot-checks alongside the key-order pin.
         assert_eq!(value["nickname"], "Tester");
         assert_eq!(value["status_point_list"]["HP"], 3);
+    }
+
+    #[test]
+    fn dps_none_and_empty_map_are_both_legitimate_and_distinct_wire_shapes() {
+        // `dps: None` must serialize as JSON `null`: this is the real shape
+        // Python emits for a player with no DPS-arena save file (see the
+        // doc comment on `PlayerDto::dps`), not a defect to be normalized
+        // away.
+        let none_payload = minimal_player_dto_request_payload();
+        let dto: PlayerDto = serde_json::from_value(none_payload).unwrap();
+        assert!(dto.dps.is_none());
+        let value = serde_json::to_value(&dto).unwrap();
+        assert!(value["dps"].is_null());
+
+        // `dps: Some({})` must serialize as an empty object, distinct from
+        // `null` — the case where the DPS-arena file exists but currently
+        // holds no pals.
+        let mut with_empty_dps = dto;
+        with_empty_dps.dps = Some(OrderedMap::new());
+        let value = serde_json::to_value(&with_empty_dps).unwrap();
+        assert_eq!(value["dps"], serde_json::json!({}));
     }
 
     #[test]
