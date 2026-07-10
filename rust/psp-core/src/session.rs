@@ -1,4 +1,4 @@
-use std::collections::{BTreeMap, HashMap};
+use std::collections::{BTreeMap, HashMap, HashSet};
 use std::io::Cursor;
 use std::path::PathBuf;
 
@@ -63,6 +63,62 @@ impl PlayerFileData {
     }
 }
 
+/// A lazily loaded player `.sav` (and, when present, its `_dps.sav`
+/// companion), cached once parsed so a later edit doesn't re-read/re-parse
+/// the file. Task 7 populates this on first detail load.
+pub struct LoadedPlayer {
+    pub uid: Uuid,
+    pub sav: uesave::Save,
+    pub dps: Option<uesave::Save>,
+}
+
+/// Lazily built, invalidatable lookup caches over `SaveSession::level`'s
+/// world tree — port of the six `None`-able caches
+/// `IndexingMixin.invalidate_performance_caches` clears
+/// (`game/mixins/indexing.py:21-33`). Every field starts `None` and is only
+/// ever populated by the domain code that actually needs it (see
+/// `domain::world::build_*_index`); nothing in this task's own scope reads
+/// or writes them except `invalidate_performance_caches` itself and this
+/// crate's tests.
+///
+/// Cache-invalidation strategy: `WorldCaches` is deliberately a SEPARATE
+/// struct from `SaveSession`'s own Phase-1 index fields
+/// (`character_index`/`item_container_index`/`character_container_index`/
+/// `group_index`/`guild_extra_index`), which stay eager, non-`Option`, and
+/// built exactly once in `SaveSession::load` (see below) — those are kept
+/// unchanged because the brief that introduced this struct says to keep
+/// every existing Phase-1 field, and changing an already-`pub`,
+/// already-server-consumed field's shape is the one kind of edit this task
+/// is explicitly told never to make unasked. `WorldCaches` is the
+/// InvalidateOnWrite layer Tasks 9/11 (pal/player/guild CRUD) actually
+/// build on: every mutating operation that inserts or removes a
+/// character-map/container-map entry MUST call
+/// `SaveSession::invalidate_performance_caches` before returning (see the
+/// invalidation matrix in this task's brief) — a mutation that forgets to
+/// call it leaves a `Some(stale_index)` behind that resolves the wrong pal
+/// on the next lookup, silently. There is no compiler-enforced guarantee here
+/// (Rust can't tie "this Vec of MapEntry was mutated" to "clear this
+/// Option"); the mitigation is procedural + tested: every mutation call
+/// site is required by this contract to call
+/// `invalidate_performance_caches`, and `world_index.rs`'s
+/// `stale_character_index_after_removal_would_resolve_the_wrong_entry` test
+/// demonstrates concretely what breaks if a future task forgets.
+#[derive(Default)]
+pub struct WorldCaches {
+    /// InstanceId → `CharacterSaveParameterMap` position.
+    pub character_index: Option<HashMap<Uuid, usize>>,
+    /// key.ID → `ItemContainerSaveData` position.
+    pub item_container_index: Option<HashMap<Uuid, usize>>,
+    /// key.ID → `CharacterContainerSaveData` position.
+    pub character_container_index: Option<HashMap<Uuid, usize>>,
+    /// `RawData.id.local_id_in_created_world` → `DynamicItemSaveData` position.
+    pub dynamic_item_index: Option<HashMap<Uuid, usize>>,
+    /// player uid → number of pals that player owns.
+    pub pal_owner_counts: Option<HashMap<Uuid, u32>>,
+    /// player uid → guild id.
+    pub player_guild_map: Option<HashMap<Uuid, Uuid>>,
+}
+
 /// A loaded world save: `Level.sav` plus everything Task 8/9 need to derive
 /// player/guild summaries and serve on-demand detail loads without
 /// re-parsing the whole tree.
@@ -109,6 +165,26 @@ pub struct SaveSession {
     pub guild_extra_index: HashMap<Uuid, usize>,
     pub gps_file_path: Option<PathBuf>,
     pub gps_loaded: bool,
+    /// Lazily loaded/parsed player `.sav` files (Task 7). Keyed by player
+    /// uid, same as `player_file_refs`/`player_sav_cache`.
+    ///
+    /// Deviation from the brief: the brief specifies
+    /// `indexmap::IndexMap<Uuid, LoadedPlayer>`, but `indexmap` is not (and
+    /// this task is told not to become) a direct dependency of `psp-core` —
+    /// it only reaches this crate transitively, through `uesave`, and Rust
+    /// does not let a crate name a transitive dependency's types without
+    /// declaring that dependency itself. Nothing in this task's own tests
+    /// needs `loaded_players` to iterate in insertion order (the established
+    /// pattern for anything that DOES need wire-visible insertion order in
+    /// this codebase is a separate `Vec<Uuid>` `*_order` field alongside a
+    /// plain map — see `player_summary_order` above — not an ordered map
+    /// type), so `HashMap` is a safe, dependency-free substitute here.
+    pub loaded_players: HashMap<Uuid, LoadedPlayer>,
+    /// Guild ids whose full `GuildDto` detail has been lazily loaded (Task 8).
+    pub loaded_guilds: HashSet<Uuid>,
+    /// Invalidatable lookup caches — see `WorldCaches`'s own doc comment for
+    /// the invalidation contract.
+    pub caches: WorldCaches,
 }
 
 /// Parses a Palworld save (`Level.sav`, `LevelMeta.sav`, a player `.sav`,
@@ -201,7 +277,21 @@ impl SaveSession {
             guild_extra_index: HashMap::new(),
             gps_file_path: None,
             gps_loaded: false,
+            loaded_players: HashMap::new(),
+            loaded_guilds: HashSet::new(),
+            caches: WorldCaches::default(),
         }
+    }
+
+    /// Port of `IndexingMixin.invalidate_performance_caches`
+    /// (`game/mixins/indexing.py:21-33`): resets every lazily built lookup
+    /// cache to `None` so the next accessor rebuilds it from the current
+    /// world tree. Every character-map/container-map mutation (pal/player/
+    /// guild CRUD, Tasks 9/11) MUST call this before returning — see
+    /// `WorldCaches`'s doc comment for the invalidation matrix and why this
+    /// is a procedural contract rather than a compiler-enforced one.
+    pub fn invalidate_performance_caches(&mut self) {
+        self.caches = WorldCaches::default();
     }
 
     /// Parses `Level.sav` (and `LevelMeta.sav`, when present) and builds the
