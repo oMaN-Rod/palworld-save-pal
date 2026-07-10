@@ -251,11 +251,14 @@ impl SaveSession {
     fn required_map(&self, name: &str) -> Result<&[uesave::MapEntry], CoreError> {
         props::get(self.world_properties()?, &[name])
             .and_then(props::map_entries)
+            .map(Vec::as_slice)
             .ok_or_else(|| CoreError::Parse(format!("{name} missing from worldSaveData")))
     }
 
     fn optional_map(&self, name: &str) -> Option<&[uesave::MapEntry]> {
-        props::get(self.world_properties().ok()?, &[name]).and_then(props::map_entries)
+        props::get(self.world_properties().ok()?, &[name])
+            .and_then(props::map_entries)
+            .map(Vec::as_slice)
     }
 
     /// `CharacterSaveParameterMap` — every player and pal. Required: absent
