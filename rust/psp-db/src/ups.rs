@@ -605,3 +605,565 @@ pub async fn get_collections(pool: &SqlitePool) -> Result<Vec<UpsCollectionRecor
             .await?;
     Ok(records)
 }
+
+const SYNCED_COLUMNS: [&str; 3] = ["character_id", "nickname", "level"];
+const UPDATABLE_COLUMNS: [&str; 16] = [
+    "instance_id",
+    "character_id",
+    "nickname",
+    "level",
+    "pal_data",
+    "source_save_file",
+    "source_player_uid",
+    "source_player_name",
+    "source_storage_type",
+    "source_storage_slot",
+    "collection_id",
+    "tags",
+    "notes",
+    "last_accessed_at",
+    "transfer_count",
+    "clone_count",
+];
+
+/// Port of UPSService.update_pal + _sync_pal_columns (db/ctx/ups.py:358-408).
+pub async fn update_pal(
+    pool: &SqlitePool,
+    pal_id: i64,
+    updates: &serde_json::Map<String, serde_json::Value>,
+) -> Result<Option<UpsPalRecord>, DbError> {
+    let Some(mut record) = get_pal_by_id(pool, pal_id).await? else {
+        return Ok(None);
+    };
+
+    for (key, value) in updates {
+        if !UPDATABLE_COLUMNS.contains(&key.as_str()) {
+            continue;
+        }
+        match key.as_str() {
+            "instance_id" => {
+                if let Some(v) = value.as_str() {
+                    record.instance_id = v.to_string();
+                }
+            }
+            "character_id" => {
+                if let Some(v) = value.as_str() {
+                    record.character_id = v.to_string();
+                }
+            }
+            "nickname" => record.nickname = value.as_str().map(str::to_string),
+            "level" => {
+                if let Some(v) = value.as_i64() {
+                    record.level = v;
+                }
+            }
+            "pal_data" => record.pal_data = value.clone(),
+            "source_save_file" => record.source_save_file = value.as_str().map(str::to_string),
+            "source_player_uid" => record.source_player_uid = value.as_str().map(str::to_string),
+            "source_player_name" => record.source_player_name = value.as_str().map(str::to_string),
+            "source_storage_type" => {
+                record.source_storage_type = value.as_str().map(str::to_string)
+            }
+            "source_storage_slot" => record.source_storage_slot = value.as_i64(),
+            "collection_id" => record.collection_id = value.as_i64(),
+            "tags" => {
+                if value.is_array() {
+                    record.tags = value.clone();
+                }
+            }
+            "notes" => record.notes = value.as_str().map(str::to_string),
+            "last_accessed_at" => record.last_accessed_at = value.as_str().map(str::to_string),
+            "transfer_count" => {
+                if let Some(v) = value.as_i64() {
+                    record.transfer_count = v;
+                }
+            }
+            "clone_count" => {
+                if let Some(v) = value.as_i64() {
+                    record.clone_count = v;
+                }
+            }
+            _ => {}
+        }
+    }
+
+    // _sync_pal_columns (ups.py:361-372)
+    if updates.contains_key("pal_data") {
+        if let Some(pal_data) = record.pal_data.as_object() {
+            if let Some(v) = pal_data.get("character_id").and_then(|v| v.as_str()) {
+                record.character_id = v.to_string();
+            }
+            if let Some(v) = pal_data.get("nickname") {
+                record.nickname = v.as_str().map(str::to_string);
+            }
+            if let Some(v) = pal_data.get("level").and_then(|v| v.as_i64()) {
+                record.level = v;
+            }
+        }
+    } else {
+        let updated_synced: Vec<&str> = SYNCED_COLUMNS
+            .iter()
+            .copied()
+            .filter(|c| updates.contains_key(*c))
+            .collect();
+        if !updated_synced.is_empty() {
+            if let Some(pal_data) = record.pal_data.as_object_mut() {
+                for column in updated_synced {
+                    let new_value = match column {
+                        "character_id" => serde_json::json!(record.character_id),
+                        "nickname" => serde_json::json!(record.nickname),
+                        "level" => serde_json::json!(record.level),
+                        _ => unreachable!(),
+                    };
+                    pal_data.insert(column.to_string(), new_value);
+                }
+            }
+        }
+    }
+
+    record.updated_at = crate::time::now_iso_utc_offset();
+
+    sqlx::query(
+        "UPDATE ups_pals SET instance_id = ?, character_id = ?, nickname = ?, level = ?,
+           pal_data = ?, source_save_file = ?, source_player_uid = ?, source_player_name = ?,
+           source_storage_type = ?, source_storage_slot = ?, collection_id = ?, tags = ?,
+           notes = ?, updated_at = ?, last_accessed_at = ?, transfer_count = ?, clone_count = ?
+         WHERE id = ?",
+    )
+    .bind(&record.instance_id)
+    .bind(&record.character_id)
+    .bind(&record.nickname)
+    .bind(record.level)
+    .bind(record.pal_data.to_string())
+    .bind(&record.source_save_file)
+    .bind(&record.source_player_uid)
+    .bind(&record.source_player_name)
+    .bind(&record.source_storage_type)
+    .bind(record.source_storage_slot)
+    .bind(record.collection_id)
+    .bind(record.tags.to_string())
+    .bind(&record.notes)
+    .bind(&record.updated_at)
+    .bind(&record.last_accessed_at)
+    .bind(record.transfer_count)
+    .bind(record.clone_count)
+    .bind(pal_id)
+    .execute(pool)
+    .await?;
+
+    if updates.contains_key("collection_id") {
+        update_collection_counts(pool).await?;
+    }
+    Ok(Some(record))
+}
+
+pub async fn delete_pals(
+    pool: &SqlitePool,
+    pal_ids: &[i64],
+    pals_game_data: &serde_json::Value,
+) -> Result<i64, DbError> {
+    let mut deleted = 0i64;
+    for pal_id in pal_ids {
+        if get_pal_by_id(pool, *pal_id).await?.is_some() {
+            log_transfer(
+                pool,
+                TransferLogEntry {
+                    pal_id: *pal_id,
+                    operation_type: "delete",
+                    source_type: Some("ups"),
+                    success: true,
+                    ..Default::default()
+                },
+            )
+            .await?;
+            sqlx::query("DELETE FROM ups_pals WHERE id = ?")
+                .bind(pal_id)
+                .execute(pool)
+                .await?;
+            deleted += 1;
+        }
+    }
+    recompute_stats(pool, pals_game_data).await?;
+    update_collection_counts(pool).await?;
+    Ok(deleted)
+}
+
+pub async fn clone_pal(
+    pool: &SqlitePool,
+    pal_id: i64,
+    pals_game_data: &serde_json::Value,
+) -> Result<Option<UpsPalRecord>, DbError> {
+    let Some(original) = get_pal_by_id(pool, pal_id).await? else {
+        return Ok(None);
+    };
+    let clone_nickname = original.nickname.as_ref().map(|n| format!("{n} (Clone)"));
+    let clone_notes = format!(
+        "Clone of {}",
+        original
+            .nickname
+            .clone()
+            .unwrap_or_else(|| original.character_id.clone())
+    );
+    let now = crate::time::now_iso_naive_utc();
+    let clone_id: i64 = sqlx::query_scalar(
+        "INSERT INTO ups_pals
+         (instance_id, character_id, nickname, level, pal_data, source_save_file,
+          source_player_uid, source_player_name, source_storage_type, collection_id,
+          tags, notes, created_at, updated_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'ups_clone', ?, ?, ?, ?, ?) RETURNING id",
+    )
+    .bind(uuid::Uuid::new_v4().to_string())
+    .bind(&original.character_id)
+    .bind(&clone_nickname)
+    .bind(original.level)
+    .bind(original.pal_data.to_string())
+    .bind(&original.source_save_file)
+    .bind(&original.source_player_uid)
+    .bind(&original.source_player_name)
+    .bind(original.collection_id)
+    .bind(original.tags.to_string())
+    .bind(&clone_notes)
+    .bind(&now)
+    .bind(&now)
+    .fetch_one(pool)
+    .await?;
+
+    sqlx::query("UPDATE ups_pals SET clone_count = clone_count + 1 WHERE id = ?")
+        .bind(pal_id)
+        .execute(pool)
+        .await?;
+    recompute_stats(pool, pals_game_data).await?;
+    update_collection_counts(pool).await?;
+    log_transfer(
+        pool,
+        TransferLogEntry {
+            pal_id: clone_id,
+            operation_type: "clone",
+            source_type: Some("ups"),
+            destination_type: Some("ups"),
+            success: true,
+            ..Default::default()
+        },
+    )
+    .await?;
+    get_pal_by_id(pool, clone_id).await
+}
+
+pub async fn nuke_all_pals(
+    pool: &SqlitePool,
+    pals_game_data: &serde_json::Value,
+) -> Result<i64, DbError> {
+    let all_ids: Vec<i64> = sqlx::query_scalar("SELECT id FROM ups_pals")
+        .fetch_all(pool)
+        .await?;
+    if all_ids.is_empty() {
+        return Ok(0);
+    }
+    for pal_id in &all_ids {
+        log_transfer(
+            pool,
+            TransferLogEntry {
+                pal_id: *pal_id,
+                operation_type: "nuke_delete",
+                source_type: Some("ups"),
+                success: true,
+                ..Default::default()
+            },
+        )
+        .await?;
+    }
+    sqlx::query("DELETE FROM ups_pals").execute(pool).await?;
+    sqlx::query("UPDATE ups_collections SET pal_count = 0, updated_at = ?")
+        .bind(crate::time::now_iso_naive_utc())
+        .execute(pool)
+        .await?;
+    recompute_stats(pool, pals_game_data).await?;
+    Ok(all_ids.len() as i64)
+}
+
+#[derive(Debug, Clone, Default)]
+pub struct ExportDestinationInfo {
+    pub save_file_name: Option<String>,
+    pub player_name: Option<String>,
+    pub player_uid: Option<String>,
+}
+
+pub async fn export_pal_to_save(
+    pool: &SqlitePool,
+    pal_id: i64,
+    destination_type: &str,
+    destination: &ExportDestinationInfo,
+) -> Result<bool, DbError> {
+    if get_pal_by_id(pool, pal_id).await?.is_none() {
+        return Ok(false);
+    }
+    sqlx::query(
+        "UPDATE ups_pals SET last_accessed_at = ?, transfer_count = transfer_count + 1 WHERE id = ?",
+    )
+    .bind(crate::time::now_iso_utc_offset())
+    .bind(pal_id)
+    .execute(pool)
+    .await?;
+    log_transfer(
+        pool,
+        TransferLogEntry {
+            pal_id,
+            operation_type: "export",
+            source_type: Some("ups"),
+            destination_type: Some(destination_type),
+            save_file_name: destination.save_file_name.as_deref(),
+            player_name: destination.player_name.as_deref(),
+            player_uid: destination.player_uid.as_deref(),
+            success: true,
+        },
+    )
+    .await?;
+    Ok(true)
+}
+
+pub async fn update_collection(
+    pool: &SqlitePool,
+    collection_id: i64,
+    updates: &serde_json::Map<String, serde_json::Value>,
+) -> Result<Option<UpsCollectionRecord>, DbError> {
+    let Some(mut record) = get_collection_by_id(pool, collection_id).await? else {
+        return Ok(None);
+    };
+    for (key, value) in updates {
+        match key.as_str() {
+            "name" => {
+                if let Some(v) = value.as_str() {
+                    record.name = v.to_string();
+                }
+            }
+            "description" => record.description = value.as_str().map(str::to_string),
+            "color" => record.color = value.as_str().map(str::to_string),
+            "icon" => record.icon = value.as_str().map(str::to_string),
+            "is_favorite" => {
+                if let Some(v) = value.as_bool() {
+                    record.is_favorite = v;
+                }
+            }
+            "is_archived" => {
+                if let Some(v) = value.as_bool() {
+                    record.is_archived = v;
+                }
+            }
+            "pal_count" => {
+                if let Some(v) = value.as_i64() {
+                    record.pal_count = v;
+                }
+            }
+            _ => {}
+        }
+    }
+    record.updated_at = crate::time::now_iso_utc_offset();
+    sqlx::query(
+        "UPDATE ups_collections SET name = ?, description = ?, color = ?, icon = ?,
+           is_favorite = ?, is_archived = ?, pal_count = ?, updated_at = ? WHERE id = ?",
+    )
+    .bind(&record.name)
+    .bind(&record.description)
+    .bind(&record.color)
+    .bind(&record.icon)
+    .bind(record.is_favorite)
+    .bind(record.is_archived)
+    .bind(record.pal_count)
+    .bind(&record.updated_at)
+    .bind(collection_id)
+    .execute(pool)
+    .await?;
+    Ok(Some(record))
+}
+
+pub async fn delete_collection(pool: &SqlitePool, collection_id: i64) -> Result<bool, DbError> {
+    if get_collection_by_id(pool, collection_id).await?.is_none() {
+        return Ok(false);
+    }
+    sqlx::query("UPDATE ups_pals SET collection_id = NULL WHERE collection_id = ?")
+        .bind(collection_id)
+        .execute(pool)
+        .await?;
+    sqlx::query("DELETE FROM ups_collections WHERE id = ?")
+        .bind(collection_id)
+        .execute(pool)
+        .await?;
+    Ok(true)
+}
+
+#[derive(Debug, Clone, serde::Serialize, sqlx::FromRow)]
+pub struct UpsTagRecord {
+    pub id: i64,
+    pub name: String,
+    pub description: Option<String>,
+    pub color: Option<String>,
+    pub usage_count: i64,
+    pub created_at: String,
+    pub updated_at: String,
+}
+
+pub async fn get_tag_by_id(
+    pool: &SqlitePool,
+    tag_id: i64,
+) -> Result<Option<UpsTagRecord>, DbError> {
+    let record = sqlx::query_as::<_, UpsTagRecord>("SELECT * FROM ups_tags WHERE id = ?")
+        .bind(tag_id)
+        .fetch_optional(pool)
+        .await?;
+    Ok(record)
+}
+
+pub async fn get_available_tags(pool: &SqlitePool) -> Result<Vec<UpsTagRecord>, DbError> {
+    let records = sqlx::query_as::<_, UpsTagRecord>("SELECT * FROM ups_tags ORDER BY name")
+        .fetch_all(pool)
+        .await?;
+    Ok(records)
+}
+
+pub async fn create_or_update_tag(
+    pool: &SqlitePool,
+    name: &str,
+    description: Option<&str>,
+    color: Option<&str>,
+) -> Result<UpsTagRecord, DbError> {
+    let existing: Option<i64> = sqlx::query_scalar("SELECT id FROM ups_tags WHERE name = ?")
+        .bind(name)
+        .fetch_optional(pool)
+        .await?;
+    match existing {
+        Some(tag_id) => {
+            // Only overwrite provided fields (ups.py:526-533)
+            if let Some(description) = description {
+                sqlx::query("UPDATE ups_tags SET description = ? WHERE id = ?")
+                    .bind(description)
+                    .bind(tag_id)
+                    .execute(pool)
+                    .await?;
+            }
+            if let Some(color) = color {
+                sqlx::query("UPDATE ups_tags SET color = ? WHERE id = ?")
+                    .bind(color)
+                    .bind(tag_id)
+                    .execute(pool)
+                    .await?;
+            }
+            sqlx::query("UPDATE ups_tags SET updated_at = ? WHERE id = ?")
+                .bind(crate::time::now_iso_utc_offset())
+                .bind(tag_id)
+                .execute(pool)
+                .await?;
+            Ok(get_tag_by_id(pool, tag_id).await?.expect("existing tag"))
+        }
+        None => {
+            let now = crate::time::now_iso_naive_utc();
+            let tag_id: i64 = sqlx::query_scalar(
+                "INSERT INTO ups_tags (name, description, color, created_at, updated_at)
+                 VALUES (?, ?, ?, ?, ?) RETURNING id",
+            )
+            .bind(name)
+            .bind(description)
+            .bind(color)
+            .bind(&now)
+            .bind(&now)
+            .fetch_one(pool)
+            .await?;
+            Ok(get_tag_by_id(pool, tag_id)
+                .await?
+                .expect("row just inserted"))
+        }
+    }
+}
+
+async fn rewrite_pal_tags(
+    pool: &SqlitePool,
+    tag_name: &str,
+    replacement: Option<&str>,
+) -> Result<(), DbError> {
+    let encoded = serde_json::to_string(tag_name).expect("tag encodes");
+    let rows: Vec<(i64, String)> =
+        sqlx::query_as("SELECT id, tags FROM ups_pals WHERE tags LIKE ?")
+            .bind(format!("%{encoded}%"))
+            .fetch_all(pool)
+            .await?;
+    for (pal_id, tags_text) in rows {
+        let Ok(serde_json::Value::Array(tags)) = serde_json::from_str(&tags_text) else {
+            continue;
+        };
+        if !tags.iter().any(|t| t.as_str() == Some(tag_name)) {
+            continue;
+        }
+        let rewritten: Vec<serde_json::Value> = tags
+            .into_iter()
+            .filter_map(|tag| match tag.as_str() {
+                Some(current) if current == tag_name => {
+                    replacement.map(|new_name| serde_json::json!(new_name))
+                }
+                _ => Some(tag),
+            })
+            .collect();
+        sqlx::query("UPDATE ups_pals SET tags = ?, updated_at = ? WHERE id = ?")
+            .bind(serde_json::Value::Array(rewritten).to_string())
+            .bind(crate::time::now_iso_utc_offset())
+            .bind(pal_id)
+            .execute(pool)
+            .await?;
+    }
+    Ok(())
+}
+
+pub async fn update_tag(
+    pool: &SqlitePool,
+    tag_id: i64,
+    updates: &serde_json::Map<String, serde_json::Value>,
+) -> Result<Option<UpsTagRecord>, DbError> {
+    let Some(mut record) = get_tag_by_id(pool, tag_id).await? else {
+        return Ok(None);
+    };
+    let old_name = record.name.clone();
+    for (key, value) in updates {
+        match key.as_str() {
+            "name" => {
+                if let Some(v) = value.as_str() {
+                    record.name = v.to_string();
+                }
+            }
+            "description" => record.description = value.as_str().map(str::to_string),
+            "color" => record.color = value.as_str().map(str::to_string),
+            "usage_count" => {
+                if let Some(v) = value.as_i64() {
+                    record.usage_count = v;
+                }
+            }
+            _ => {}
+        }
+    }
+    record.updated_at = crate::time::now_iso_utc_offset();
+    sqlx::query(
+        "UPDATE ups_tags SET name = ?, description = ?, color = ?, usage_count = ?, updated_at = ?
+         WHERE id = ?",
+    )
+    .bind(&record.name)
+    .bind(&record.description)
+    .bind(&record.color)
+    .bind(record.usage_count)
+    .bind(&record.updated_at)
+    .bind(tag_id)
+    .execute(pool)
+    .await?;
+    if updates.contains_key("name") && old_name != record.name {
+        rewrite_pal_tags(pool, &old_name, Some(&record.name)).await?;
+    }
+    Ok(Some(record))
+}
+
+pub async fn delete_tag(pool: &SqlitePool, tag_id: i64) -> Result<bool, DbError> {
+    let Some(record) = get_tag_by_id(pool, tag_id).await? else {
+        return Ok(false);
+    };
+    rewrite_pal_tags(pool, &record.name, None).await?;
+    sqlx::query("DELETE FROM ups_tags WHERE id = ?")
+        .bind(tag_id)
+        .execute(pool)
+        .await?;
+    Ok(true)
+}
