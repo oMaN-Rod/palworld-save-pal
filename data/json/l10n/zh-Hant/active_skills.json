@@ -51,9 +51,9 @@
     "localized_name": "隕星雨",
     "description": "召喚無數隕石落下， 並在撞擊點產生衝擊波。"
   },
-  "EPalWazaID::CrossThunder": {
-    "localized_name": "十字雷擊",
-    "description": "製造往兩個方向前進的雷擊， 從左右兩側夾攻敵人。"
+  "EPalWazaID::CreepingBubble": {
+    "localized_name": "泡沫聚湧",
+    "description": "奧滄鯨的專屬技能。 在敵人周圍生成大量泡泡，將其團團包圍並發動攻擊。"
   },
   "EPalWazaID::CrossWind": {
     "localized_name": "十字風切",
@@ -154,10 +154,6 @@
   "EPalWazaID::FlareTornado": {
     "localized_name": "烈焰風暴",
     "description": "在左右兩側製造出熾熱的龍捲風， 朝敵人步步進逼。"
-  },
-  "EPalWazaID::FlareTwister": {
-    "localized_name": "炎龍舞",
-    "description": "zh-Hant Text"
   },
   "EPalWazaID::FrostBreath": {
     "localized_name": "凜冬之息",
@@ -277,7 +273,7 @@
   },
   "EPalWazaID::Psychokinesis": {
     "localized_name": "念動引力",
-    "description": "以超能力控制四周的敵人， 將他們從高處猛力摔向地面。"
+    "description": "用重力剝奪敵人的行動自由， 並將其從高處摔向地面。"
   },
   "EPalWazaID::RadiantBarrage": {
     "localized_name": "輝耀彈",
@@ -427,6 +423,22 @@
     "localized_name": "絨毛衝撞",
     "description": "美露帕的專屬技能。 散發出可愛的氣場並朝向前方衝刺。"
   },
+  "EPalWazaID::Unique_AmaterasuWolf_Bite": {
+    "localized_name": "狂炎之牙",
+    "description": "迅速撲向敵人，以撕咬的方式發動攻擊。"
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_BiteV2": {
+    "localized_name": "狂炎雙牙",
+    "description": "快速連續向敵人進行啃咬攻擊。"
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_Dark_Bite": {
+    "localized_name": "暗影之牙",
+    "description": "迅速撲向敵人，以撕咬的方式發動攻擊。"
+  },
+  "EPalWazaID::Unique_AmaterasuWolf_Dark_BiteV2": {
+    "localized_name": "暗影雙牙",
+    "description": "快速連續向敵人進行啃咬攻擊。"
+  },
   "EPalWazaID::Unique_AmaterasuWolf_Dark_DarkCharge": {
     "localized_name": "火陰山雷",
     "description": "幽焰狼的專屬技能。 帶著纏繞全身的紫色火焰，氣勢洶洶地向前猛衝。"
@@ -446,6 +458,10 @@
   "EPalWazaID::Unique_Anubis_Tackle": {
     "localized_name": "巨力衝鋒",
     "description": "阿努比斯的專屬技能。 高速移動追逐敵人， 釋放能量並使出強力拳擊。"
+  },
+  "EPalWazaID::Unique_Baphomet_Dark_DarkKite": {
+    "localized_name": "惡夢爪",
+    "description": "闇魔羊的專屬技能。 接近目標後跳起同時以左手暗爪向上揮擊， 再用右手暗爪迅速向下揮砍。"
   },
   "EPalWazaID::Unique_Baphomet_SwallowKite": {
     "localized_name": "獄火爪",
@@ -475,6 +491,14 @@
     "localized_name": "魔龍焚炎",
     "description": "魔淵龍的專屬技能。 在向前方揮出兩拳後， 向下呼出龍屬性的吐息。"
   },
+  "EPalWazaID::Unique_BlackPuppy_Bite": {
+    "localized_name": "暗影之牙",
+    "description": "迅速撲向敵人，以撕咬的方式發動攻擊。"
+  },
+  "EPalWazaID::Unique_BlackPuppy_BiteV2": {
+    "localized_name": "暗影雙牙",
+    "description": "快速連續向敵人進行啃咬攻擊。"
+  },
   "EPalWazaID::Unique_BluePlatypus_Toboggan": {
     "localized_name": "乘風破浪",
     "description": null
@@ -483,9 +507,25 @@
     "localized_name": "熱浪滾滾",
     "description": null
   },
+  "EPalWazaID::Unique_BlueSkyDragon_DrainStorm": {
+    "localized_name": "天變之渦",
+    "description": "霄龍的專屬技能。 召喚直衝天際的巨大漩渦。 吞噬周圍的敵人，將其一網打盡。"
+  },
+  "EPalWazaID::Unique_BlueSkyDragon_SweepBreath": {
+    "localized_name": "蒼龍炎",
+    "description": "霄龍的專屬技能。 噴吐龍屬性烈焰橫掃四方， 將周圍盡數化為焦土。"
+  },
+  "EPalWazaID::Unique_BlueSkyDragon_Tossin": {
+    "localized_name": "水龍突進",
+    "description": "霄龍的專屬技能。 周身纏繞水流，筆直地向前衝。"
+  },
   "EPalWazaID::Unique_BlueThunderHorse_FlashDash": {
     "localized_name": "風馳電掣",
     "description": "馭雷馬的專屬技能。 以閃電般的高速移動， 席捲路徑上的一切事物。"
+  },
+  "EPalWazaID::Unique_BlueThunderHorse_Tossin": {
+    "localized_name": "閃雷衝鋒",
+    "description": "馭雷馬的專屬技能。 周身纏繞雷電，朝敵人高速猛衝。"
   },
   "EPalWazaID::Unique_Boar_Tackle": {
     "localized_name": "豬突猛進",
@@ -502,6 +542,14 @@
   "EPalWazaID::Unique_ChickenPal_ChickenPeck": {
     "localized_name": "皮皮衝雞",
     "description": "皮皮雞的專屬技能。 瞄準並撲向敵人，以尖銳的喙突擊對方。"
+  },
+  "EPalWazaID::Unique_ClownRabbit_TrickShow": {
+    "localized_name": "好戲上演",
+    "description": "拉比耶爾的專屬技能。 製造2道幻影迷惑敵人， 本體則從絲綢禮帽中放出炎鳥進行攻擊。"
+  },
+  "EPalWazaID::Unique_CuteMole_DiggingAttack": {
+    "localized_name": "掘地潛行",
+    "description": "遁地鼠的專屬技能。 潛入地下，從腳下猛然竄出突襲敵人。"
   },
   "EPalWazaID::Unique_DarkAlien_JumpScractch": {
     "localized_name": "惡之爪",
@@ -535,9 +583,17 @@
     "localized_name": "跳躍重刺",
     "description": "冥鎧蠍及亞種的專屬技能。 高高躍起，用尾巴狠狠地將獵物刺穿。 尾部含有毒素。"
   },
+  "EPalWazaID::Unique_Deer_Ground_DirtyHorn": {
+    "localized_name": "泥角頂擊",
+    "description": "祇岳鹿的專屬技能。 衝向敵人，並以尖角捲起泥土攻擊對方。 如在騎乘時發動此技能，可操控其前進方向。"
+  },
   "EPalWazaID::Unique_Deer_PushupHorn": {
     "localized_name": "尖角頂擊",
-    "description": "紫霞鹿及亞種的專屬技能。 衝向敵人，並以犄角猛頂攻擊對方。 如在騎乘時發動此技能，即可操控其前進方向。"
+    "description": "紫霞鹿及亞種的專屬技能。 衝向敵人，並以犄角猛頂攻擊對方。 如在騎乘時發動此技能，可操控其前進方向。"
+  },
+  "EPalWazaID::Unique_DomeArmorDragon_ExplosiveMissile": {
+    "localized_name": "轟天之翼",
+    "description": "磐甲龍的專屬技能。 從羽翼射出無數爆裂飛彈，對敵人進行轟炸。"
   },
   "EPalWazaID::Unique_DrillGame_ShellAttack": {
     "localized_name": "甲殼迴旋",
@@ -554,6 +610,18 @@
   "EPalWazaID::Unique_ElecPanda_GatlingAttack": {
     "localized_name": "雷擊的重型戰車",
     "description": "暴電熊的專屬技能。 不知從哪取出加特林機槍進行掃射。 最後一發將射出強力的充能彈。"
+  },
+  "EPalWazaID::Unique_ElecPomeranian_Bite": {
+    "localized_name": "狂雷之牙",
+    "description": "迅速撲向敵人，以撕咬的方式發動攻擊。"
+  },
+  "EPalWazaID::Unique_ElecPomeranian_BiteV2": {
+    "localized_name": "狂雷雙牙",
+    "description": "快速連續向敵人進行啃咬攻擊。"
+  },
+  "EPalWazaID::Unique_ElecSnail_ShellCharge": {
+    "localized_name": "渦殼充電",
+    "description": "電渦蝸及亞種的專屬技能。 縮入殼中減傷並積蓄電能。 充滿後釋放電流，對周圍敵人造成傷害。 放電後，短時間內自身雷屬性技能攻擊力提升。"
   },
   "EPalWazaID::Unique_FairyDragon_FairyTornado": {
     "localized_name": "神秘颶風",
@@ -583,13 +651,29 @@
     "localized_name": "熾熱角擊",
     "description": "熾焰牛的專屬技能。 鎖定敵人後， 以兇猛氣勢頂著銳利牛角衝向對方。"
   },
+  "EPalWazaID::Unique_FlowerDinosaur_Electric_ThunderWhip": {
+    "localized_name": "雷龍擺尾",
+    "description": "雷冠龍的專屬技能。 以巨大尾巴猛擊前方地面， 對直線範圍造成電擊。"
+  },
   "EPalWazaID::Unique_FlowerDinosaur_Whip": {
     "localized_name": "花龍擺尾",
     "description": "花冠龍及亞種的專屬技能。 以巨大尾巴猛擊前方地面， 藉由衝擊波攻擊直線範圍的目標。"
   },
+  "EPalWazaID::Unique_FlowerPrince_PoisonGasDance": {
+    "localized_name": "毒霧之舞",
+    "description": "夜蔓爵的專屬技能。 舞動的同時噴射腐蝕霧。 霧氣會在原地殘留一段時間。"
+  },
+  "EPalWazaID::Unique_FlowerPrince_PoisonGasTackle": {
+    "localized_name": "毒霧花滑",
+    "description": "夜蔓爵的專屬技能。 噴吐腐蝕霧氣的同時貼地滑行突進。 霧氣會在原地殘留一段時間。"
+  },
   "EPalWazaID::Unique_Garm_Bite": {
     "localized_name": "狂野獠牙",
-    "description": "獵狼的專屬技能。 迅速撲向敵人，以撕咬的方式發動攻擊。"
+    "description": "迅速撲向敵人，以撕咬的方式發動攻擊。"
+  },
+  "EPalWazaID::Unique_Garm_BiteV2": {
+    "localized_name": "狂野雙牙",
+    "description": "快速連續向敵人進行啃咬攻擊。"
   },
   "EPalWazaID::Unique_GhostAnglerfish_Fire_SweepBait_Fire": {
     "localized_name": "熾燈橫掃",
@@ -603,6 +687,22 @@
     "localized_name": "心靈衝刺",
     "description": "噬魂獸的專屬技能。 緩慢奔跑的同時，不斷召喚搖曳的火球飛向敵人。"
   },
+  "EPalWazaID::Unique_GhostDragon_PhosphorousBeam": {
+    "localized_name": "火花射線",
+    "description": "靈曦龍及亞種的專屬技能。 持續噴吐高溫光線。 最終在光線落點引發劇烈爆炸。"
+  },
+  "EPalWazaID::Unique_GhostDragon_TailSlash": {
+    "localized_name": "曳尾斬",
+    "description": "靈曦龍的專屬技能。 高速逼近敵人，以尾巴斬擊。"
+  },
+  "EPalWazaID::Unique_GoldenHorse_Bite": {
+    "localized_name": "碎岩之牙",
+    "description": "迅速撲向敵人，以撕咬的方式發動攻擊。"
+  },
+  "EPalWazaID::Unique_GoldenHorse_BiteV2": {
+    "localized_name": "碎岩雙牙",
+    "description": "快速連續向敵人進行啃咬攻擊。"
+  },
   "EPalWazaID::Unique_GoldenHorse_StoneDash": {
     "localized_name": "碎岩衝鋒",
     "description": "金馳獸的專屬技能。 在氣勢洶洶突進的同時，令碎岩向左右飛濺。"
@@ -610,6 +710,38 @@
   "EPalWazaID::Unique_Gorilla_GroundPunch": {
     "localized_name": "猩猩連打",
     "description": "鐵拳猿及亞種的專屬技能。 猛擊地面兩次後高高跳起， 再賞給對方強力的一拳。"
+  },
+  "EPalWazaID::Unique_Gorilla_Ground_EarthPunch": {
+    "localized_name": "猩猩撼地擊",
+    "description": "石掌猿的專屬技能。 猛擊地面兩次後高高跳起， 再賞給對方匯聚大地之力的一拳。"
+  },
+  "EPalWazaID::Unique_GrassGolem_ArmCannon": {
+    "localized_name": "根鬚大砲",
+    "description": "雙心岩傀的專屬技能。 從手臂發射草屬性能量彈。 能量彈落地後會化為根鬚，緊追敵人，並從其腳下破土貫穿。"
+  },
+  "EPalWazaID::Unique_GrassGolem_Dark_DarkArmCannon": {
+    "localized_name": "枯鬚大砲",
+    "description": "咒心岩傀的專屬技能。 從手臂發射暗屬性能量彈。 能量彈落地後會化為根鬚，緊追敵人，並從其腳下破土貫穿。"
+  },
+  "EPalWazaID::Unique_GrassGolem_RocketPunch": {
+    "localized_name": "火箭飛拳",
+    "description": "雙心岩傀及亞種的專屬技能。 將左臂從本體分離，橫掃敵人。 隨後再射出右臂。"
+  },
+  "EPalWazaID::Unique_GrassMinotaur_BullRush": {
+    "localized_name": "狂牛奔襲",
+    "description": "密林陶洛斯的專屬技能。 狂暴地激發力量， 連續發動4次草屬性突進。"
+  },
+  "EPalWazaID::Unique_GrassMinotaur_BullRush_Lower": {
+    "localized_name": "蠻牛奔襲",
+    "description": "密林陶洛斯的專屬技能。 狂暴地激發力量， 連續發動2次草屬性突進。"
+  },
+  "EPalWazaID::Unique_GrassMinotaur_Ice_BullRush": {
+    "localized_name": "狂牛冰襲",
+    "description": "冰峰陶洛斯的專屬技能。 狂暴地激發力量， 連續發動4次冰屬性突進。"
+  },
+  "EPalWazaID::Unique_GrassMinotaur_Ice_BullRush_Lower": {
+    "localized_name": "蠻牛冰襲",
+    "description": "冰峰陶洛斯的專屬技能。 狂暴地激發力量， 連續發動2次冰屬性突進。"
   },
   "EPalWazaID::Unique_GrassPanda_Electric_ElectricPunch": {
     "localized_name": "爆裂拳擊",
@@ -631,13 +763,21 @@
     "localized_name": "怨念連擊",
     "description": "幽戀娜的專屬技能。 瞬間移動離開原地後揮出斬擊。 接著瞬移至目標上方， 用利刃刺穿獵物並產生黑暗波動。"
   },
+  "EPalWazaID::Unique_GuardianDog_Bite": {
+    "localized_name": "狂野之牙",
+    "description": "迅速撲向敵人，以撕咬的方式發動攻擊。"
+  },
+  "EPalWazaID::Unique_GuardianDog_BiteV2": {
+    "localized_name": "狂野雙牙",
+    "description": "快速連續向敵人進行啃咬攻擊。"
+  },
   "EPalWazaID::Unique_HawkBird_Storm": {
     "localized_name": "龍捲風",
     "description": "疾風隼的專屬技能。 在前方製造出龍捲風後， 以滑翔的姿態衝向敵人。"
   },
   "EPalWazaID::Unique_HerculesBeetle_BeetleTackle": {
     "localized_name": "終極角擊",
-    "description": "鎧格力斯的專屬技能。 以四支粗壯的角串起敵人。"
+    "description": "鎧格力斯及亞種的專屬技能。 以四支粗壯的角串起敵人。"
   },
   "EPalWazaID::Unique_Horus_FlareBird": {
     "localized_name": "鳳凰翔波",
@@ -659,6 +799,10 @@
     "localized_name": "霜角猛攻",
     "description": "嚴冬鹿的專屬技能。 向前衝刺並以雄偉的冰角刺穿敵人。"
   },
+  "EPalWazaID::Unique_IceHorse_Dark_DarkBladeAttack": {
+    "localized_name": "幽夜之翼",
+    "description": "喚夜獸的專屬技能。 以黑暗能量包覆翅膀後，全力奔跑以雙翼撕裂敵人。 且黑暗能量最後會化為追蹤彈攻擊敵人。"
+  },
   "EPalWazaID::Unique_IceHorse_IceBladeAttack": {
     "localized_name": "冰晶之翼",
     "description": "喚冬獸及亞種的專屬技能。 凝結冷空氣，讓翅膀覆上冰晶， 並在全力奔跑的同時以冰翼撕裂敵人。"
@@ -675,6 +819,10 @@
     "localized_name": "泰山壓頂",
     "description": "君王美露帕及亞種的專屬技能。 向上高高跳起後， 用豐滿的龐大身軀輾壓敵人。"
   },
+  "EPalWazaID::Unique_KingAlpaca_Ice_IcePress": {
+    "localized_name": "冰山壓頂",
+    "description": "冰帝美露帕的專屬技能。 向上高高跳起後， 用豐滿的龐大身軀及冰晶輾壓敵人。"
+  },
   "EPalWazaID::Unique_KingBahamut_AirCrash": {
     "localized_name": "龍隕震擊",
     "description": "歿殃的專屬技能。 高高躍上空中後，邊在空中高速移動，邊積蓄力量。 然後打出全力一擊。"
@@ -683,9 +831,41 @@
     "localized_name": "焚天爆炎",
     "description": "焰煌及亞種的專屬技能。 伸展開手臂，使肌肉劇烈膨脹後， 猛地拍擊在一起引發巨大爆炸。"
   },
+  "EPalWazaID::Unique_KingWhale_AquaBlade": {
+    "localized_name": "波濤萬仞",
+    "description": "奧滄鯨的專屬技能。 釋放鋒利的水刃，對敵人進行攻擊。"
+  },
+  "EPalWazaID::Unique_KingWhale_AquaTornado": {
+    "localized_name": "風暴召喚",
+    "description": "奧滄鯨的專屬技能。 騰空而起，召喚多個巨型龍捲風。 龍捲風會緩慢追蹤敵人。"
+  },
+  "EPalWazaID::Unique_KingWhale_Breaching": {
+    "localized_name": "巨鯨躍",
+    "description": "奧滄鯨的專屬技能。 潛入水中，片刻後破水而出。 藉著鯨躍之勢，在周圍掀起擴散的波紋。"
+  },
+  "EPalWazaID::Unique_KingWhale_HomingBubble": {
+    "localized_name": "泡沫之雨",
+    "description": "奧滄鯨的專屬技能。 發射大量追蹤泡泡。 泡泡著落後會停留在原地。 觸碰或數秒後爆裂，對周圍造成傷害。"
+  },
+  "EPalWazaID::Unique_KingWhale_Maelstrom": {
+    "localized_name": "漩渦風暴",
+    "description": "奧滄鯨的專屬技能。 在敵人周圍生成漩渦。 將敵人捲入並不斷向中心收縮， 最終爆裂，掀起水柱。"
+  },
+  "EPalWazaID::Unique_KingWhale_WaveTackle": {
+    "localized_name": "潮湧襲浪",
+    "description": "奧滄鯨的專屬技能。 利用全身猛然撞擊敵人，掀起波浪。"
+  },
+  "EPalWazaID::Unique_Kirin_Ice_IceTackle": {
+    "localized_name": "疾風冰擊",
+    "description": "凌角馬的專屬技能。 在自己的周圍凝聚冰柱， 同時猛力衝向敵人。"
+  },
   "EPalWazaID::Unique_Kirin_LightningTackle": {
     "localized_name": "疾風雷擊",
     "description": "雷角馬的專屬技能。 在自身的周圍降下落雷， 同時猛力衝向敵人。"
+  },
+  "EPalWazaID::Unique_LanternButler_LanternFlame": {
+    "localized_name": "提燈妖火",
+    "description": "妖燄燈的專屬技能。 高舉提燈，召喚出多個執念深重的怨靈， 緊追敵人不放。"
   },
   "EPalWazaID::Unique_LeafMomonga_SomerSault": {
     "localized_name": "葉返",
@@ -711,9 +891,17 @@
     "localized_name": "風之結界",
     "description": "zh-Hant Text"
   },
+  "EPalWazaID::Unique_LotusDragon_LotusBloom": {
+    "localized_name": "怒放蓮華",
+    "description": "沁蓮龍的專屬技能。 潛入地下隱藏身影。 隨後化作花苞現身地表，綻放時對大範圍敵人發動攻擊。"
+  },
   "EPalWazaID::Unique_Manticore_InfernoStrike": {
     "localized_name": "火山獠牙",
     "description": "獄焰王及亞種的專屬技能。 毫不留情的氣勢洶洶撲向敵人， 在撲擊的地點引發火屬性的爆炸。"
+  },
+  "EPalWazaID::Unique_MonochromeQueen_BalletJump": {
+    "localized_name": "黑天鵝之舞",
+    "description": "墨羅娜的專屬技能。 向斜前方躍起，投擲黑色鋒利的羽刃進行攻擊。"
   },
   "EPalWazaID::Unique_MoonQueen_IceMoonBlade": {
     "localized_name": "青月閃",
@@ -727,6 +915,18 @@
     "localized_name": "青月刃",
     "description": "輝月伊的專屬技能。 揮出蘊含月光力量的高速二連斬擊。"
   },
+  "EPalWazaID::Unique_Mothman_GiantSpore": {
+    "localized_name": "巨大孢子",
+    "description": "暮塵蛾的專屬技能。 發射追蹤敵人的巨大孢子。 命中後爆炸，造成大規模爆炸衝擊波。"
+  },
+  "EPalWazaID::Unique_Mothman_SporeScatter": {
+    "localized_name": "孢子爆發",
+    "description": "暮塵蛾的專屬技能。 大範圍散佈爆炸孢子， 並在一定時間後同時引爆。"
+  },
+  "EPalWazaID::Unique_MummyPal_MummyAttack": {
+    "localized_name": "突襲木乃伊",
+    "description": "縛乃伊的專屬技能。 從手中伸長繃帶，對敵人進行連續攻擊。"
+  },
   "EPalWazaID::Unique_MysteryMask_LifeSteal": {
     "localized_name": "竊魂",
     "description": "面懼的專屬技能。 突然出現在敵人附近並用雙手將其束縛， 並吸收受到束縛敵人的HP。"
@@ -738,6 +938,18 @@
   "EPalWazaID::Unique_NightBlueHorse_DeathStep": {
     "localized_name": "致命舞步",
     "description": "夜冥駒的專屬技能。 用鬼魅般的步伐玩弄敵人， 同時用銳利的角揮出斬擊。"
+  },
+  "EPalWazaID::Unique_NightBlueHorse_Neutral_AirStep": {
+    "localized_name": "皇家舞步",
+    "description": "日耀駒的專屬技能。 以華麗步伐戲耍敵人， 同時用銳利的角揮出斬擊。"
+  },
+  "EPalWazaID::Unique_NightBlueHorse_Neutral_Tossin": {
+    "localized_name": "銀影疾馳",
+    "description": "日耀駒的專屬技能。 周身纏繞熾熱火焰，朝敵人衝鋒。"
+  },
+  "EPalWazaID::Unique_NightBlueHorse_Tossin": {
+    "localized_name": "幽影疾馳",
+    "description": "夜冥駒的專屬技能。 周身纏繞躍動的火焰，朝敵人衝鋒。"
   },
   "EPalWazaID::Unique_NightLady_FlameNightmare": {
     "localized_name": "烈焰華爾茲",
@@ -753,7 +965,11 @@
   },
   "EPalWazaID::Unique_OctopursGirl_InkJet": {
     "localized_name": "墨沫頭槌",
-    "description": "墨沫姬的專屬技能。 前方釋放煙霧遮蔽自身， 從隱蔽狀態突然發動頭槌，猛擊敵人。"
+    "description": "墨沫姬及亞種的專屬技能。 前方釋放煙霧遮蔽自身， 從隱蔽狀態突然發動頭槌，猛擊敵人。"
+  },
+  "EPalWazaID::Unique_PandaGirl_RapidKick": {
+    "localized_name": "連續迴旋踢",
+    "description": "莉芳的專屬技能。 迅速連續施展迴旋踢後，釋放氣功波進行攻擊。"
   },
   "EPalWazaID::Unique_PinkCat_CatPunch": {
     "localized_name": "喵喵拳",
@@ -779,11 +995,27 @@
     "localized_name": "燧火連擊",
     "description": "燧火鳥的專屬技能。 飛向前方的同時，朝正面、右、左啄擊， 並透過點火引發小規模的爆炸。"
   },
+  "EPalWazaID::Unique_RedFlowerBird_JumpKick": {
+    "localized_name": "落花踏",
+    "description": "大紅呱的專屬技能。 先輕柔地浮空，再以利爪重重砸向地面。"
+  },
   "EPalWazaID::Unique_RobinHood_BowSnipe": {
     "localized_name": "精準狙擊",
     "description": "羽箭射手及亞種的專屬技能。 拉滿弓全神貫注瞄準敵人後， 對敵人進行射擊。"
   },
+  "EPalWazaID::Unique_RockBeast_Ice_IceHorn": {
+    "localized_name": "冰角爆",
+    "description": "寒峰獸的專屬技能。 以角刨開地面並順勢上挑， 朝敵人飛射雪塊。"
+  },
+  "EPalWazaID::Unique_RockBeast_RockHorn": {
+    "localized_name": "岩角爆",
+    "description": "磐峰獸的專屬技能。 以角刨開地面並順勢上挑， 朝敵人飛射岩石彈。"
+  },
   "EPalWazaID::Unique_Ronin_Iai": {
+    "localized_name": "居合斬",
+    "description": "浪刃武士及亞種的專屬技能。 擺出迎戰姿勢後瞬間移動至敵人面前， 並使出超高速的拔刀攻擊。"
+  },
+  "EPalWazaID::Unique_Ronin_Iai_PartnerSkill": {
     "localized_name": "居合斬",
     "description": "浪刃武士及亞種的專屬技能。 擺出迎戰姿勢後瞬間移動至敵人面前， 並使出超高速的拔刀攻擊。"
   },
@@ -795,9 +1027,37 @@
     "localized_name": "鐵山靠",
     "description": "連理龍及亞種的專屬技能。 側身站立， 然後向前猛撞敵人，並將其擊飛。"
   },
+  "EPalWazaID::Unique_SakuraSaurus_Water_SplashTackle": {
+    "localized_name": "凌波鐵山靠",
+    "description": "海誓龍的專屬技能。 側身站立，然後向前猛撞敵人， 濺起水花並將其擊飛。"
+  },
+  "EPalWazaID::Unique_SamuraiDog_Bite": {
+    "localized_name": "碎岩之牙",
+    "description": "迅速撲向敵人，以撕咬的方式發動攻擊。"
+  },
+  "EPalWazaID::Unique_SamuraiDog_BiteV2": {
+    "localized_name": "碎岩雙牙",
+    "description": "快速連續向敵人進行啃咬攻擊。"
+  },
+  "EPalWazaID::Unique_SamuraiDog_DashSlash": {
+    "localized_name": "汪汪連斬",
+    "description": "宗銘丸的專屬技能。 全速奔跑的同時，用口中銜著的木棒斬擊敵人。 連續施展2段攻擊。"
+  },
+  "EPalWazaID::Unique_ScorpionMan_Erectric_UpperThunder": {
+    "localized_name": "升雷拳",
+    "description": "電針妖的專屬技能。 透過超導快速縮短和敵人的距離， 狠狠的用鉗子使出上勾拳。"
+  },
   "EPalWazaID::Unique_ScorpionMan_Uppercut": {
     "localized_name": "升蟲拳",
     "description": "蠱刺妖的專屬技能。 快速縮短和敵人的距離， 狠狠的用鉗子使出上勾拳。"
+  },
+  "EPalWazaID::Unique_Sekhmet_RollingScratch": {
+    "localized_name": "空翻爪襲",
+    "description": "塞赫麥特的專屬技能。 旋轉突進，一口氣拉近距離抓傷敵人。"
+  },
+  "EPalWazaID::Unique_Sekhmet_SomersaultScratch": {
+    "localized_name": "空爪返",
+    "description": "塞赫麥特的專屬技能。 抓撓敵人的同時向後翻躍，與敵人拉開距離。"
   },
   "EPalWazaID::Unique_SheepBall_Roll": {
     "localized_name": "滾滾毛球",
@@ -806,6 +1066,10 @@
   "EPalWazaID::Unique_SifuDog_Counter": {
     "localized_name": "氣合返",
     "description": "汪宗師的專屬技能。 擺出合氣道的架勢，在架勢中受到的攻擊將無效化， 同時一瞬間迫近敵人，使出全身力量掌擊。"
+  },
+  "EPalWazaID::Unique_SnakeGirl_SnakeShot": {
+    "localized_name": "毒液漫射",
+    "description": "梅杜娜的專屬技能。 頭部的蛇會吐出呈拋物線飛行的毒液球。 毒液球落地會化為沼澤，令接觸沼澤者陷入中毒。"
   },
   "EPalWazaID::Unique_SnowTigerBeastman_SnowImpact": {
     "localized_name": "冰川碎擊",
@@ -823,13 +1087,41 @@
     "localized_name": "狂瀾彈幕",
     "description": "布偶鯊及亞種的專屬技能。 從口中取出兩把水槍， 左右輪流射出6發水彈。 最後雙槍合併，射出一發強力水彈。"
   },
+  "EPalWazaID::Unique_SumoDog_SumoStomp": {
+    "localized_name": "四股踏",
+    "description": "力士獒的專屬技能。 高高抬起右後腿重踏地面，釋放衝擊波， 對前方扇形範圍造成攻擊。"
+  },
   "EPalWazaID::Unique_TentacleTurtle_HydroSpin": {
     "localized_name": "漩渦迴旋",
     "description": "盔盔仔及亞種的專屬技能。 利用水流噴射推進力， 一邊高速旋轉一邊向敵人飛旋而去。"
   },
+  "EPalWazaID::Unique_ThunderBird_Ice_SnowStrom": {
+    "localized_name": "冰錐俯衝",
+    "description": "疾霜鳥的專屬技能。 先從敵人腳下突起冰柱。 然後在空中突進的同時，於左右兩側接連升起冰柱。"
+  },
   "EPalWazaID::Unique_ThunderBird_ThunderStorm": {
     "localized_name": "閃電俯衝",
     "description": "迅雷鳥的專屬技能。 先在敵人所在位置降下落雷。 然後在空中突進的同時，於左右兩側召喚落雷。"
+  },
+  "EPalWazaID::Unique_ThunderDog_Bite": {
+    "localized_name": "狂雷之牙",
+    "description": "迅速撲向敵人，以撕咬的方式發動攻擊。"
+  },
+  "EPalWazaID::Unique_ThunderDog_BiteV2": {
+    "localized_name": "狂雷雙牙",
+    "description": "快速連續向敵人進行啃咬攻擊。"
+  },
+  "EPalWazaID::Unique_ThunderDog_Ice_Bite": {
+    "localized_name": "寒冰之牙",
+    "description": "迅速撲向敵人，以撕咬的方式發動攻擊。"
+  },
+  "EPalWazaID::Unique_ThunderDog_Ice_BiteV2": {
+    "localized_name": "寒冰雙牙",
+    "description": "快速連續向敵人進行啃咬攻擊。"
+  },
+  "EPalWazaID::Unique_ThunderDog_Ice_KoriShorai": {
+    "localized_name": "召雪",
+    "description": "凜光犬的專屬技能。 在前方連續不斷生成冰柱， 並在冰柱之間高速突進。"
   },
   "EPalWazaID::Unique_ThunderDog_InazumaShorai": {
     "localized_name": "召雷",
@@ -863,6 +1155,22 @@
     "localized_name": "火山爆發",
     "description": "熔岩獸的專屬技能。 舉起前腳猛擊地面， 使岩漿於敵人所在處噴發。 噴發時四周更會有火山彈傾瀉而下。"
   },
+  "EPalWazaID::Unique_VolcanoDragon_Ice_IceLaser": {
+    "localized_name": "急凍吐息",
+    "description": "川霜龍的專屬技能。 從口中噴吐凍結光線，使大地結冰。 凍結的地面會形成霜層， 凍結碰到的敵人並對其造成傷害。"
+  },
+  "EPalWazaID::Unique_VolcanoDragon_Ice_IcicleSpit": {
+    "localized_name": "寒冰噴濺",
+    "description": "川霜龍的專屬技能。 從口中吐出冰塊進行攻擊。 落地後會使地面凍結，並形成霜層， 凍結碰到的敵人並對其造成傷害。"
+  },
+  "EPalWazaID::Unique_VolcanoDragon_MagmaSpit": {
+    "localized_name": "熔岩噴濺",
+    "description": "流焰龍的專屬技能。 從口中吐出岩漿團進行攻擊。 在落點形成岩漿池， 對碰到的敵人造成傷害。"
+  },
+  "EPalWazaID::Unique_VolcanoDragon_VolcanicLaser": {
+    "localized_name": "岩漿吐息",
+    "description": "流焰龍的專屬技能。 從口中噴湧而出熾熱光束，焚燒大地。 灼熱的地面會形成岩漿池， 對碰到的敵人造成傷害。"
+  },
   "EPalWazaID::Unique_WeaselDragon_FlyingTackle": {
     "localized_name": "火箭衝撞",
     "description": "疾旋鼬及亞種的專屬技能。 短時間蓄力後，向前躍起。 在著地時因為害怕一直都是緊閉著眼睛。"
@@ -874,6 +1182,10 @@
   "EPalWazaID::Unique_Werewolf_Scratch": {
     "localized_name": "飛躍爪擊",
     "description": "WereWolf的專屬技能。 向前一躍，迅速斬下兩擊。 且每次斬擊都充滿了暗屬性的力量。"
+  },
+  "EPalWazaID::Unique_WhiteDeer_Dark_DarkPillar": {
+    "localized_name": "混沌新星",
+    "description": "織夜鹿的專屬技能。 在前方引發大範圍的暗屬性爆炸， 隨後邊緩慢前行，邊在自身周圍降下暗之柱。"
   },
   "EPalWazaID::Unique_WhiteDeer_HolyPillar": {
     "localized_name": "神聖新星",
@@ -890,6 +1202,10 @@
   "EPalWazaID::Unique_WhiteTiger_IceScratch": {
     "localized_name": "暴雪爪",
     "description": "冰棘獸的專屬技能。 以巨爪連續揮擊兩次，最後用渾身力氣使出巨大爪擊 每次揮動巨爪時，都會向前方扇形範圍射出冰柱。"
+  },
+  "EPalWazaID::Unique_WingGolem_Fire_FlameCutter": {
+    "localized_name": "迴旋炎鋸",
+    "description": "丹烽的專屬技能。 大幅迴旋身體投擲出背後的炎盤。 炎盤將會以圓弧軌道狀飛行。"
   },
   "EPalWazaID::Unique_WingGolem_RoundCutter": {
     "localized_name": "迴旋岩鋸",
@@ -966,6 +1282,10 @@
   "EPalWazaID::Weapon_Use": {
     "localized_name": "使用武器",
     "description": "使用持有的武器進行攻擊。"
+  },
+  "EPalWazaID::WindBurst": {
+    "localized_name": "翠耀罡風",
+    "description": "以自身為中心掀起巨大的風暴漩渦， 發動強力攻擊。"
   },
   "EPalWazaID::WindCutter": {
     "localized_name": "風刃",
