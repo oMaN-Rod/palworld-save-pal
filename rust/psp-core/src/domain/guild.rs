@@ -591,6 +591,145 @@ pub fn update_lab_research(
     Ok(())
 }
 
+// ============================================================================
+// Guild update (Task 10) -- port of `GuildOpsMixin.update_guilds`
+// (`guild_ops.py`) and `Guild.update_from` (`guild.py:221-241`).
+// ============================================================================
+
+/// The set of item-container ids that genuinely belong to `base_id`'s own
+/// storage (`Base._load_storage_containers`'s own enumeration,
+/// `base.py:196-228`): every `MapObjectSaveData` element for this base whose
+/// `ConcreteModel.ModuleMap` carries an `ItemContainer` module, resolved to
+/// its `target_container_id`. Used by `containers::apply_base_dto` to reject
+/// a `storage_containers` map key that doesn't actually belong to this base
+/// -- see that function's own doc comment for why this membership check is
+/// load-bearing, not decorative. A `base_id` this port can't resolve at all
+/// yields an empty set (matches the caller's own "skip, never panic" policy
+/// for a not-found base).
+pub(crate) fn base_storage_container_ids(
+    session: &SaveSession,
+    base_id: uuid::Uuid,
+) -> std::collections::HashSet<uuid::Uuid> {
+    let mut ids = std::collections::HashSet::new();
+    let Ok(Some(map_objects)) = world::map_object_values(&session.level) else {
+        return ids;
+    };
+    let index = map_object_properties_by_base_id(map_objects);
+    let Some(objects) = index.get(&base_id) else {
+        return ids;
+    };
+    for object_props in objects {
+        let Some(concrete_props) = object_props
+            .0
+            .get(&PropertyKey::from("ConcreteModel"))
+            .and_then(props::struct_props)
+        else {
+            continue;
+        };
+        let Some(module_entries) = concrete_props
+            .0
+            .get(&PropertyKey::from("ModuleMap"))
+            .and_then(props::map_entries)
+        else {
+            continue;
+        };
+        for module in module_entries {
+            if props::as_str(&module.key)
+                != Some("EPalMapObjectConcreteModelModuleType::ItemContainer")
+            {
+                continue;
+            }
+            let Some(module_props) = props::struct_props(&module.value) else {
+                continue;
+            };
+            if let Some(target_id) = module_props
+                .0
+                .get(&PropertyKey::from("RawData"))
+                .and_then(module_target_container_id)
+            {
+                ids.insert(target_id);
+            }
+        }
+    }
+    ids
+}
+
+/// `Guild.container_id`'s resolution (`guild.py:91-105`), reused by
+/// `apply_guild_dto` so a guild-chest edit routes through the SESSION's own
+/// resolved container id, never `guildDTO.guild_chest.id` (a client-supplied
+/// value) -- same "never trust the payload's own id for routing" rule
+/// `player::apply_player_dto`'s doc comment establishes for a player's five
+/// containers.
+pub(crate) fn guild_chest_id(session: &SaveSession, guild_id: uuid::Uuid) -> Option<uuid::Uuid> {
+    let extra_index = guild_extra_entry_index(session, guild_id).ok().flatten()?;
+    guild_chest_container_id(session, extra_index)
+}
+
+/// Port of `GuildOpsMixin.update_guilds` (`guild_ops.py`): progress message
+/// names the guild's UUID (`guild_ops.py:113-114`), not its name.
+pub fn update_guilds(
+    session: &mut SaveSession,
+    game_data: &GameData,
+    modified_guilds: &crate::dto::ordered_map::OrderedMap<uuid::Uuid, GuildDto>,
+    progress: &crate::progress::ProgressSink,
+) -> Result<(), CoreError> {
+    for (guild_id, dto) in modified_guilds.iter() {
+        progress(&format!("Updating guild {guild_id}"));
+        apply_guild_dto(session, game_data, *guild_id, dto)?;
+    }
+    Ok(())
+}
+
+/// Port of `Guild.update_from` (`guild.py:221-241`).
+pub fn apply_guild_dto(
+    session: &mut SaveSession,
+    game_data: &GameData,
+    guild_id: uuid::Uuid,
+    dto: &GuildDto,
+) -> Result<(), CoreError> {
+    let Some(entry_index) = guild_entry_index(session, guild_id)? else {
+        return Err(CoreError::GuildNotFound(guild_id));
+    };
+    {
+        let entries = world::group_map_mut(&mut session.level)?;
+        let Some(group_data) = guild_tail::entry_group_data_mut(&mut entries[entry_index]) else {
+            return Err(CoreError::Parse("guild group data untyped".into()));
+        };
+        let mut tail = guild_tail::GuildTail::parse(&group_data.remaining_data)?;
+        // `if guildDTO.name:` -- Python truthiness (None AND "" both skip).
+        if let Some(name) = &dto.name {
+            if !name.is_empty() {
+                tail.guild_name = name.clone();
+            }
+        }
+        // `if guildDTO.base_camp_level:` -- 0 is falsy, mirror that.
+        if let Some(level) = dto.base_camp_level {
+            if level != 0 {
+                tail.base_camp_level = level;
+            }
+        }
+        group_data.remaining_data = tail.to_bytes();
+    }
+    if let Some(bases) = &dto.bases {
+        for (base_id, base_dto) in bases.iter() {
+            super::containers::apply_base_dto(session, game_data, *base_id, base_dto)?;
+        }
+    }
+    // `if guildDTO.guild_chest and self.guild_chest is not None:` -- both
+    // sides collapse to "the guild's real chest resolves", checked via
+    // `guild_chest_id` rather than trusting `dto.guild_chest.id`.
+    if dto.guild_chest.is_some() {
+        if let Some(chest_id) = guild_chest_id(session, guild_id) {
+            if let Some(chest_dto) = &dto.guild_chest {
+                super::containers::apply_item_container_dto(
+                    session, game_data, chest_id, chest_dto, None,
+                )?;
+            }
+        }
+    }
+    Ok(())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

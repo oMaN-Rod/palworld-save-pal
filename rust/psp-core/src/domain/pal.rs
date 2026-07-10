@@ -2485,6 +2485,118 @@ pub fn delete_player_dps_pals(
     Ok(())
 }
 
+// ============================================================================
+// Save-file write-back (Task 10) -- port of `PalOpsMixin.update_pals`/
+// `update_dps_pals` (`pal_ops.py`).
+// ============================================================================
+
+/// Port of `PalOpsMixin.update_pals` (`pal_ops.py`): applies every DTO in
+/// `modified_pals` onto the matching `CharacterSaveParameterMap` entry.
+///
+/// Not ownership-scoped, matching Python exactly: `self._pals[pal_id]`
+/// indexes a FLAT dict of every pal this port has ever loaded (across every
+/// player and base), with no `OwnerPlayerUId` check anywhere in this method
+/// -- unlike Task 9's CRUD ops (`delete_player_pals`/`move_pal`/...), which
+/// port `Player`/`Base` METHODS that genuinely do scope by ownership. There
+/// is no ownership hole introduced by this port: neither language checks it
+/// here.
+///
+/// `Err(CoreError::PalNotFound)` for a `pal_id` this session never loaded --
+/// this port's stand-in for Python's `self._pals[pal_id]` `KeyError` (an
+/// unhandled crash in real Python, translated the same way this port
+/// translates every other "would-crash-in-Python" case elsewhere: never
+/// panic, return an error instead). Never invalidates
+/// `session.caches` -- this only overwrites properties on an EXISTING
+/// `CharacterSaveParameterMap` entry, it never inserts/removes one, so
+/// `character_index` (and every other cache) still resolves the same
+/// position before and after (see `world_index.rs`'s own precedent for this
+/// exact "mutate in place, no invalidation needed" reasoning).
+pub fn update_pals(
+    session: &mut SaveSession,
+    game_data: &GameData,
+    modified_pals: &OrderedMap<uuid::Uuid, PalDto>,
+    progress: &crate::progress::ProgressSink,
+) -> Result<(), CoreError> {
+    for (pal_id, dto) in modified_pals.iter() {
+        let display_name = dto
+            .nickname
+            .clone()
+            .unwrap_or_else(|| dto.character_id.clone());
+        progress(&format!("Updating pal {display_name}"));
+        let entries = world::character_map_mut(&mut session.level)?;
+        let Some(entry) = entries
+            .iter_mut()
+            .find(|entry| world::entry_instance_id(entry) == Some(*pal_id))
+        else {
+            return Err(CoreError::PalNotFound(*pal_id));
+        };
+        if let Some(save_parameter) = world::entry_save_parameter_mut(entry) {
+            apply_pal_dto(save_parameter, dto, false, game_data);
+        }
+    }
+    ensure_pal_property_schemas(&mut session.level);
+    progress("Saving changes to file");
+    Ok(())
+}
+
+/// Port of `PalOpsMixin.update_dps_pals` (`pal_ops.py`) via `Player.
+/// update_dps_pal` (`player.py`).
+///
+/// Deviation from the brief (both fixed per "never panic on malformed
+/// input", this port's established policy): real Python crashes twice over
+/// for a DTO whose `owner_uid` doesn't resolve to a loaded player --
+/// `self._players.get(pal.owner_uid)` is a plain `dict.get` (no raise), so a
+/// `None` owner_uid or an unrecognized one returns `None`, and the very next
+/// line, `player.update_dps_pal(pal_idx, pal)`, is an unguarded
+/// `AttributeError` on that `None`. `Player.update_dps_pal` itself then does
+/// `pal = self._dps[index]` -- a `KeyError`/`TypeError` crash for an
+/// out-of-range index or a player with no `_dps.sav` at all (`self._dps`
+/// stays `None`). None of these three crash paths is one of the tracked
+/// "must reproduce for byte parity" bugs (a DPS edit that can't resolve its
+/// target never reaches the wire either way) -- skipped (silent `continue`)
+/// rather than reproduced, exactly like `dps_slots_mut`'s existing
+/// `Option`-returning contract already treats "no dps file" elsewhere in
+/// this module.
+///
+/// Never invalidates `session.caches` -- DPS data (`SaveParameterArray` in a
+/// separate `_dps.sav`) is never indexed by any `WorldCaches` field.
+pub fn update_dps_pals(
+    session: &mut SaveSession,
+    game_data: &GameData,
+    modified_dps_pals: &OrderedMap<i32, PalDto>,
+    progress: &crate::progress::ProgressSink,
+) -> Result<(), CoreError> {
+    for (slot_index, dto) in modified_dps_pals.iter() {
+        let display_name = dto
+            .nickname
+            .clone()
+            .unwrap_or_else(|| dto.character_id.clone());
+        progress(&format!("Updating DPS pal {display_name}"));
+        let Some(owner_id) = dto.owner_uid else {
+            continue;
+        };
+        if !session.loaded_players.contains_key(&owner_id) {
+            continue;
+        }
+        let loaded = session.loaded_players.get_mut(&owner_id).expect("checked");
+        let Some(slots) = dps_slots_mut(loaded) else {
+            continue;
+        };
+        let Some(StructValue::Struct(slot_props)) = slots.get_mut(*slot_index as usize) else {
+            continue;
+        };
+        if let Some(save_parameter) = slot_props
+            .0
+            .get_mut(&PropertyKey::from("SaveParameter"))
+            .and_then(props::struct_props_mut)
+        {
+            apply_pal_dto(save_parameter, dto, true, game_data);
+        }
+    }
+    progress("Saving changes to file");
+    Ok(())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

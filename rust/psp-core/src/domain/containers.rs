@@ -15,11 +15,13 @@
 use crate::dto::container::{
     CharacterContainerSlotDto, DynamicItemDto, ItemContainerDto, ItemContainerSlotDto,
 };
+use crate::dto::guild::BaseDto;
+use crate::dto::pal::PalGender;
 use crate::error::CoreError;
 use crate::gamedata::GameData;
 use crate::props;
-use crate::session::WorldCaches;
-use uesave::{Properties, Property, PropertyKey, StructValue};
+use crate::session::{SaveSession, WorldCaches};
+use uesave::{ByteArray, Properties, Property, PropertyKey, StructValue, ValueVec};
 
 use super::world;
 
@@ -378,6 +380,713 @@ fn read_dynamic_item(
         }
     }
     Some(dto)
+}
+
+// ============================================================================
+// Item-container write-back (Task 10) -- port of `ItemContainer.update_from`/
+// `_update_common_container_slots`/`_clean_up_inventory`/
+// `_update_or_create_container_slot` (`game/item_container.py`),
+// `ItemContainerSlot.update_from` (`game/item_container_slot.py`), and
+// `DynamicItem.update_from` (`game/dynamic_item.py`). `Base.update_from`
+// (`game/base.py`) is `apply_base_dto` below.
+// ============================================================================
+
+/// `PalObjects.ItemContainerSlot`'s literal `CustomVersionData` byte payload
+/// (`pal_objects.py`) for a freshly created raw item-container slot.
+const ITEM_CONTAINER_SLOT_CUSTOM_VERSION_DATA: [u8; 24] = [
+    1, 0, 0, 0, 126, 180, 234, 18, 154, 27, 90, 255, 113, 170, 113, 188, 223, 51, 214, 14, 1, 0, 0,
+    0,
+];
+/// `PalObjects.DynamicItem`'s literal `CustomVersionData` byte payload for a
+/// freshly created weapon/armor dynamic item (`pal_objects.py`).
+const DYNAMIC_ITEM_WEAPON_ARMOR_CUSTOM_VERSION_DATA: [u8; 24] = [
+    1, 0, 0, 0, 56, 11, 0, 222, 73, 73, 215, 206, 151, 223, 45, 153, 192, 193, 195, 105, 1, 0, 0, 0,
+];
+/// `PalObjects.DynamicItem`'s literal `CustomVersionData` byte payload for a
+/// freshly created egg dynamic item (`pal_objects.py`).
+const DYNAMIC_ITEM_EGG_CUSTOM_VERSION_DATA: [u8; 44] = [
+    2, 0, 0, 0, 56, 11, 0, 222, 73, 73, 215, 206, 151, 223, 45, 153, 192, 193, 195, 105, 1, 0, 0,
+    0, 108, 246, 252, 15, 153, 72, 144, 17, 248, 156, 96, 177, 94, 71, 70, 74, 1, 0, 0, 0,
+];
+
+fn container_slots_mut(
+    level: &mut uesave::Save,
+    entry_index: usize,
+) -> Option<&mut Vec<StructValue>> {
+    let entries = world::item_container_map_mut(level).ok()?;
+    let value_props = props::struct_props_mut(&mut entries.get_mut(entry_index)?.value)?;
+    props::get_mut(value_props, &["Slots"]).and_then(props::struct_values_mut)
+}
+
+fn raw_container_slot(
+    slot: &StructValue,
+    slot_index: i32,
+) -> Option<&uesave::games::palworld::PalItemContainerSlot> {
+    let StructValue::Struct(slot_props) = slot else {
+        return None;
+    };
+    match slot_props.0.get(&PropertyKey::from("RawData")) {
+        Some(Property::Struct(StructValue::PalItemContainerSlots(raw)))
+            if raw.slot_index == slot_index =>
+        {
+            Some(raw)
+        }
+        _ => None,
+    }
+}
+
+/// `ItemContainerSlot.local_id` getter's underlying raw field
+/// (`item_container_slot.py`): `None` (this port's stand-in for Python's
+/// falsy/absent `local_id`) when no slot at `slot_index` exists, or its
+/// dynamic id is the nil GUID.
+fn raw_slot_local_id(
+    level: &uesave::Save,
+    entry_index: usize,
+    slot_index: i32,
+) -> Option<uuid::Uuid> {
+    let entries = world::item_container_map(level).ok()?;
+    let value_props = props::struct_props(&entries.get(entry_index)?.value)?;
+    let slots = props::get(value_props, &["Slots"]).and_then(props::struct_values)?;
+    slots.iter().find_map(|slot| {
+        let raw = raw_container_slot(slot, slot_index)?;
+        let id = props::guid_to_uuid(&raw.item.dynamic_id.local_id_in_created_world);
+        (id != props::EMPTY_UUID).then_some(id)
+    })
+}
+
+/// `ItemContainerSlot.local_id` setter (`item_container_slot.py`).
+fn set_raw_slot_local_id(
+    level: &mut uesave::Save,
+    entry_index: usize,
+    slot_index: i32,
+    local_id: uuid::Uuid,
+) {
+    let Some(slots) = container_slots_mut(level, entry_index) else {
+        return;
+    };
+    for slot in slots.iter_mut() {
+        let StructValue::Struct(slot_props) = slot else {
+            continue;
+        };
+        if let Some(Property::Struct(StructValue::PalItemContainerSlots(raw))) =
+            slot_props.0.get_mut(&PropertyKey::from("RawData"))
+        {
+            if raw.slot_index == slot_index {
+                raw.item.dynamic_id.local_id_in_created_world = props::uuid_to_guid(local_id);
+                return;
+            }
+        }
+    }
+}
+
+/// `ItemContainer._remove_container_slot` (`item_container.py`): removes the
+/// first `Slots` entry whose `slot_index` matches -- a silent no-op for an
+/// index that isn't present, matching Python's own `for ... if ...: ...
+/// break` (never raises when nothing matches).
+fn remove_raw_slot(level: &mut uesave::Save, entry_index: usize, slot_index: i32) {
+    let Some(slots) = container_slots_mut(level, entry_index) else {
+        return;
+    };
+    if let Some(position) = slots
+        .iter()
+        .position(|slot| raw_container_slot(slot, slot_index).is_some())
+    {
+        slots.remove(position);
+    }
+}
+
+/// `ItemContainer._update_or_create_container_slot`'s raw-slot half
+/// (`item_container.py`): updates an existing slot's `count`/`static_id` in
+/// place (`ItemContainerSlot.update_from`'s `slot_index`/`count`/`static_id`
+/// setters -- `slot_index` itself is a no-op re-write since the match is by
+/// that same value), or appends a fresh `PalItemContainerSlots` value
+/// (`PalObjects.ItemContainerSlot`) when none exists yet. Never touches the
+/// dynamic-id field either way -- that's `set_raw_slot_local_id`'s job,
+/// called separately by the caller once the dynamic item's final local id is
+/// known (see `apply_item_container_dto`).
+fn upsert_raw_slot(level: &mut uesave::Save, entry_index: usize, slot: &ItemContainerSlotDto) {
+    let Some(slots) = container_slots_mut(level, entry_index) else {
+        return;
+    };
+    let existing = slots.iter_mut().find_map(|value| {
+        let StructValue::Struct(slot_props) = value else {
+            return None;
+        };
+        match slot_props.0.get_mut(&PropertyKey::from("RawData")) {
+            Some(Property::Struct(StructValue::PalItemContainerSlots(raw)))
+                if raw.slot_index == slot.slot_index =>
+            {
+                Some(raw)
+            }
+            _ => None,
+        }
+    });
+    let static_id = slot.static_id.clone().unwrap_or_default();
+    match existing {
+        Some(raw) => {
+            raw.count = slot.count;
+            raw.item.static_id = static_id;
+        }
+        None => {
+            let mut slot_props = Properties::default();
+            slot_props.insert(
+                "RawData",
+                Property::Struct(StructValue::PalItemContainerSlots(
+                    uesave::games::palworld::PalItemContainerSlot {
+                        slot_index: slot.slot_index,
+                        count: slot.count,
+                        item: uesave::games::palworld::PalItemId {
+                            static_id,
+                            dynamic_id: uesave::games::palworld::PalDynamicId {
+                                created_world_id: uesave::FGuid::nil(),
+                                local_id_in_created_world: props::uuid_to_guid(props::EMPTY_UUID),
+                            },
+                        },
+                        trailing_bytes: vec![0u8; 16],
+                    },
+                )),
+            );
+            slot_props.insert(
+                "CustomVersionData",
+                Property::Array(ValueVec::Byte(ByteArray::Byte(
+                    ITEM_CONTAINER_SLOT_CUSTOM_VERSION_DATA.to_vec(),
+                ))),
+            );
+            slots.push(StructValue::Struct(slot_props));
+        }
+    }
+}
+
+/// `ItemContainer.set_slot_count` (`item_container.py`): writes `SlotNum`,
+/// then truncates `Slots` to `slot_count` entries.
+///
+/// Deviation from the brief: the brief truncated by comparing each slot's
+/// `slot_index` VALUE against `slot_count`. Real Python's `set_slot_count`
+/// does `self.slots[slot_count:]` -- a truncation by ARRAY POSITION (the
+/// order `Slots` entries were originally read in), not by `slot_index`
+/// value. The two coincide whenever a container's slots happen to already be
+/// stored in ascending-`slot_index` order (the common case for an
+/// Essential/Common container, populated sequentially), but are NOT the same
+/// operation in general. `Vec::truncate` reproduces Python's real,
+/// array-position-based behavior directly.
+fn set_item_container_slot_count(
+    session: &mut SaveSession,
+    container_id: uuid::Uuid,
+    slot_count: i32,
+) -> Result<(), CoreError> {
+    if session.caches.item_container_index.is_none() {
+        session.caches.item_container_index =
+            Some(world::build_item_container_index(&session.level));
+    }
+    let Some(entry_index) = session
+        .caches
+        .item_container_index
+        .as_ref()
+        .expect("just built")
+        .get(&container_id)
+        .copied()
+    else {
+        return Ok(());
+    };
+    let entries = world::item_container_map_mut(&mut session.level)?;
+    let Some(entry) = entries.get_mut(entry_index) else {
+        return Ok(());
+    };
+    let Some(value_props) = props::struct_props_mut(&mut entry.value) else {
+        return Ok(());
+    };
+    if let Some(slot_num_property) = props::get_mut(value_props, &["SlotNum"]) {
+        *slot_num_property = props::int_property(slot_count);
+    }
+    if let Some(slots) = props::get_mut(value_props, &["Slots"]).and_then(props::struct_values_mut)
+    {
+        if slots.len() as i32 > slot_count {
+            slots.truncate(slot_count.max(0) as usize);
+        }
+    }
+    Ok(())
+}
+
+/// `IndexedCollection.remove_by_key` applied to `DynamicItemSaveData`
+/// (`item_container.py`'s `_clean_up_inventory`): removes the entry at
+/// `local_id`, a silent no-op when it isn't present. Invalidates
+/// `dynamic_item_index` IMMEDIATELY (not deferred to the end of
+/// `apply_item_container_dto`) since a removal shifts every later entry's
+/// position -- a second removal/insertion later in the SAME
+/// `apply_item_container_dto` call must never resolve a position through a
+/// now-stale cached index.
+fn remove_dynamic_item(session: &mut SaveSession, local_id: uuid::Uuid) -> Result<(), CoreError> {
+    if session.caches.dynamic_item_index.is_none() {
+        session.caches.dynamic_item_index = Some(world::build_dynamic_item_index(&session.level));
+    }
+    let Some(position) = session
+        .caches
+        .dynamic_item_index
+        .as_ref()
+        .expect("just built")
+        .get(&local_id)
+        .copied()
+    else {
+        return Ok(());
+    };
+    let values = world::dynamic_item_values_mut(&mut session.level)?;
+    if position < values.len() {
+        values.remove(position);
+    }
+    session.caches.dynamic_item_index = None;
+    Ok(())
+}
+
+fn existing_item_type(
+    values: &[StructValue],
+    position: usize,
+) -> Option<&uesave::games::palworld::PalDynamicItemType> {
+    let StructValue::Struct(item_props) = values.get(position)? else {
+        return None;
+    };
+    match item_props.0.get(&PropertyKey::from("RawData")) {
+        Some(Property::Struct(StructValue::PalDynamicItem(existing))) => Some(&existing.item_type),
+        _ => None,
+    }
+}
+
+/// `PalObjects.SaveParameter` (`pal_objects.py`): the embedded
+/// `{"SaveParameter": {...}}` properties bag an egg dynamic item's `object`
+/// field carries when actually populated (`DynamicItem.update_from`'s egg
+/// branch, `modified: true`). Mirrors `pal::new_pal_entry`'s literal
+/// defaults for `Hp`/`FullStomach` (this constructor's own hardcoded 545000/
+/// 400.0, distinct from `new_pal_entry`'s 545000/300.0 -- verified against
+/// `pal_objects.py`'s own two, genuinely different literals).
+fn build_egg_save_parameter(dto: &DynamicItemDto) -> Properties {
+    let mut save_parameter = Properties::default();
+    save_parameter.insert(
+        "CharacterID",
+        props::name_property(dto.character_id.as_deref().unwrap_or_default()),
+    );
+    let gender = dto.gender.unwrap_or(PalGender::Female);
+    save_parameter.insert("Gender", props::enum_property(&gender.prefixed()));
+    save_parameter.insert(
+        "EquipWaza",
+        props::enum_array_property(dto.active_skills.clone().unwrap_or_default()),
+    );
+    save_parameter.insert(
+        "MasteredWaza",
+        props::enum_array_property(dto.learned_skills.clone().unwrap_or_default()),
+    );
+    save_parameter.insert("Hp", props::fixed_point64_property(545_000));
+    save_parameter.insert(
+        "Talent_HP",
+        props::byte_property(dto.talent_hp.unwrap_or(0).clamp(0, 255) as u8),
+    );
+    save_parameter.insert(
+        "Talent_Shot",
+        props::byte_property(dto.talent_shot.unwrap_or(0).clamp(0, 255) as u8),
+    );
+    save_parameter.insert(
+        "Talent_Defense",
+        props::byte_property(dto.talent_defense.unwrap_or(0).clamp(0, 255) as u8),
+    );
+    save_parameter.insert("FullStomach", props::float_property(400.0));
+    save_parameter.insert(
+        "PassiveSkillList",
+        props::name_array_property(dto.passive_skills.clone().unwrap_or_default()),
+    );
+    let mut food_regen = Properties::default();
+    food_regen.insert("EffectTime", props::int_property(2));
+    save_parameter.insert(
+        "FoodRegeneEffectInfo",
+        Property::Struct(StructValue::Struct(food_regen)),
+    );
+    let mut object = Properties::default();
+    object.insert(
+        "SaveParameter",
+        Property::Struct(StructValue::Struct(save_parameter)),
+    );
+    object
+}
+
+/// Port of `DynamicItem.update_from` (`dynamic_item.py`), narrowed to the net
+/// effect this port's strongly-typed `PalDynamicItemType` enum can represent
+/// (see `upsert_dynamic_item`'s own doc comment for what's deliberately not
+/// reproduced, and why).
+///
+/// `existing` is the CURRENT variant at this local id, if any -- `leading_
+/// bytes`/`trailing_bytes` are preserved from it whenever the type doesn't
+/// change (matching Python: NEITHER `update_from`'s per-type cleanup block
+/// nor its generic per-field loop ever rewrites those two fields for an
+/// existing item of unchanged type; the reference `palworld_save_tools`
+/// codec's `"unknown_bytes"`/`"unknown_id"` writes in `dynamic_item.py`'s own
+/// egg branch are dead code -- verified against `.venv`'s real `encode_bytes`,
+/// which never reads those two key names at all, only `"leading_bytes"`/
+/// `"trailing_bytes"`; see this task's report). A type CHANGE (or a brand
+/// new item) always gets zero-filled leading/trailing bytes, matching
+/// `PalObjects._set_leading_trailing_bytes`'s literal `[0] * N` for a freshly
+/// built entry -- Python's own real behavior for an existing item that
+/// genuinely changes type is closer to memory-unsafe (it would carry over a
+/// WRONG-LENGTH byte array from the old type into the new type's encoder,
+/// corrupting the write); this port declines to reproduce that, on the
+/// "never intentionally corrupt save data" side of this project's "never
+/// panic on malformed input" policy. This is a deliberate, DOCUMENTED
+/// divergence, not a silently-reproduced bug.
+fn build_dynamic_item_type(
+    dto: &DynamicItemDto,
+    existing: Option<&uesave::games::palworld::PalDynamicItemType>,
+) -> uesave::games::palworld::PalDynamicItemType {
+    use uesave::games::palworld::PalDynamicItemType;
+
+    match dto.r#type.as_deref() {
+        Some("armor") => {
+            let (leading_bytes, trailing_bytes) = match existing {
+                Some(PalDynamicItemType::Armor {
+                    leading_bytes,
+                    trailing_bytes,
+                    ..
+                }) => (*leading_bytes, *trailing_bytes),
+                _ => ([0u8; 4], [0u8; 4]),
+            };
+            let durability =
+                dto.durability
+                    .map(|value| value as f32)
+                    .unwrap_or_else(|| match existing {
+                        Some(PalDynamicItemType::Armor { durability, .. }) => *durability,
+                        _ => 0.0,
+                    });
+            PalDynamicItemType::Armor {
+                leading_bytes,
+                durability,
+                trailing_bytes,
+            }
+        }
+        Some("weapon") => {
+            let (leading_bytes, trailing_bytes) = match existing {
+                Some(PalDynamicItemType::Weapon {
+                    leading_bytes,
+                    trailing_bytes,
+                    ..
+                }) => (*leading_bytes, *trailing_bytes),
+                _ => ([0u8; 4], [0u8; 4]),
+            };
+            let (existing_durability, existing_bullets, existing_passives) = match existing {
+                Some(PalDynamicItemType::Weapon {
+                    durability,
+                    remaining_bullets,
+                    passive_skill_list,
+                    ..
+                }) => (*durability, *remaining_bullets, passive_skill_list.clone()),
+                _ => (0.0, 0, Vec::new()),
+            };
+            PalDynamicItemType::Weapon {
+                leading_bytes,
+                durability: dto
+                    .durability
+                    .map(|value| value as f32)
+                    .unwrap_or(existing_durability),
+                remaining_bullets: dto
+                    .remaining_bullets
+                    .map(|value| value as i32)
+                    .unwrap_or(existing_bullets),
+                passive_skill_list: dto.passive_skill_list.clone().unwrap_or(existing_passives),
+                trailing_bytes,
+            }
+        }
+        Some("egg") => {
+            let (leading_bytes, trailing_bytes, existing_object) = match existing {
+                Some(PalDynamicItemType::Egg {
+                    leading_bytes,
+                    trailing_bytes,
+                    object,
+                    ..
+                }) => (*leading_bytes, *trailing_bytes, Some(object.clone())),
+                _ => ([0u8; 4], [0u8; 28], None),
+            };
+            let object = if dto.modified {
+                build_egg_save_parameter(dto)
+            } else {
+                existing_object.unwrap_or_default()
+            };
+            PalDynamicItemType::Egg {
+                leading_bytes,
+                character_id: dto.character_id.clone().unwrap_or_default(),
+                object,
+                trailing_bytes,
+            }
+        }
+        _ => {
+            let trailer = match existing {
+                Some(PalDynamicItemType::Unknown { trailer }) => trailer.clone(),
+                _ => Vec::new(),
+            };
+            PalDynamicItemType::Unknown { trailer }
+        }
+    }
+}
+
+/// Port of `DynamicItem.update_from` (`dynamic_item.py`) plus
+/// `PalObjects.DynamicItem`'s constructor (`pal_objects.py`) for the
+/// not-yet-present case. `slot_static_id` is the CONTAINING SLOT's
+/// `static_id` (`ItemContainerSlotDto::static_id`), used ONLY when creating a
+/// brand new entry -- `PalDynamicItem.static_id` is a WIRE SIBLING of `id`
+/// (not nested inside it despite Python's dict-based decoder grouping them
+/// together; verified against `../uesave-rs/uesave/src/games/palworld/
+/// items.rs`), and `DynamicItemDTO` (the wire DTO's INPUT shape) has no
+/// `static_id` field of its own at all -- Python's `update_from` generic loop
+/// (`for key, value in other.items(): if hasattr(self, key): setattr(...)`)
+/// therefore NEVER touches `static_id` for an EXISTING item (no `"static_id"`
+/// key ever appears in `other.items()`), leaving it untouched; only
+/// `PalObjects.DynamicItem(container_slot)`'s ONE-TIME construction for a
+/// brand-new entry ever sets it, from the slot's own `static_id`.
+pub fn upsert_dynamic_item(
+    session: &mut SaveSession,
+    dto: &DynamicItemDto,
+    slot_static_id: &str,
+) -> Result<(), CoreError> {
+    if session.caches.dynamic_item_index.is_none() {
+        session.caches.dynamic_item_index = Some(world::build_dynamic_item_index(&session.level));
+    }
+    let existing_position = session
+        .caches
+        .dynamic_item_index
+        .as_ref()
+        .expect("just built")
+        .get(&dto.local_id)
+        .copied();
+
+    let existing_type = existing_position.and_then(|position| {
+        world::dynamic_item_values(&session.level)
+            .ok()
+            .and_then(|values| existing_item_type(values, position))
+    });
+    let item_type = build_dynamic_item_type(dto, existing_type);
+
+    match existing_position {
+        Some(position) => {
+            let values = world::dynamic_item_values_mut(&mut session.level)?;
+            if let Some(StructValue::Struct(item_props)) = values.get_mut(position) {
+                if let Some(Property::Struct(StructValue::PalDynamicItem(existing))) =
+                    item_props.0.get_mut(&PropertyKey::from("RawData"))
+                {
+                    existing.item_type = item_type;
+                }
+            }
+        }
+        None => {
+            let mut item_props = Properties::default();
+            item_props.insert(
+                "RawData",
+                Property::Struct(StructValue::PalDynamicItem(Box::new(
+                    uesave::games::palworld::PalDynamicItem {
+                        id: uesave::games::palworld::PalDynamicId {
+                            created_world_id: uesave::FGuid::nil(),
+                            local_id_in_created_world: props::uuid_to_guid(dto.local_id),
+                        },
+                        static_id: slot_static_id.to_string(),
+                        item_type,
+                    },
+                ))),
+            );
+            let custom_version_data: Option<&[u8]> = match dto.r#type.as_deref() {
+                Some("weapon") | Some("armor") => {
+                    Some(&DYNAMIC_ITEM_WEAPON_ARMOR_CUSTOM_VERSION_DATA)
+                }
+                Some("egg") => Some(&DYNAMIC_ITEM_EGG_CUSTOM_VERSION_DATA),
+                _ => None,
+            };
+            if let Some(bytes) = custom_version_data {
+                item_props.insert(
+                    "CustomVersionData",
+                    Property::Array(ValueVec::Byte(ByteArray::Byte(bytes.to_vec()))),
+                );
+            }
+            let values = world::dynamic_item_values_mut(&mut session.level)?;
+            values.push(StructValue::Struct(item_props));
+            session.caches.dynamic_item_index = None;
+        }
+    }
+    Ok(())
+}
+
+/// Port of `ItemContainer.update_from` (`item_container.py`): resizes the
+/// paired common container (essential only), cleans up removed dynamic
+/// items/`static_id == "None"` slots, then upserts every remaining incoming
+/// slot. `container_id` is the CALLER-RESOLVED, session-trusted target (see
+/// `player::apply_player_dto`'s own doc comment on why `dto.id` is never used
+/// for routing) -- `dto` supplies only `type`/`slots` content.
+///
+/// **A genuine, newly-found Python bug, reproduced deliberately for save-file
+/// byte parity, not on the known list (legacy `"HP"` write /
+/// `ext_status_point_list`'s missing guard / `Guild.players`'
+/// `UnboundLocalError` / `_load_pals_for_container`'s `"SlotId"`-only
+/// spelling / `safe_remove(character_save, "OwnerPlayerUId")`'s wrong-level
+/// no-op / `Pal.reset()` never clearing `IsRarePal`):** when an incoming slot
+/// has no `dynamic_item` but the existing raw slot does,
+/// `_clean_up_inventory` removes the `DynamicItemSaveData` entry AND sets
+/// `container_slot.dynamic_item = None` -- but `dynamic_item` is a PLAIN
+/// pydantic field on `ItemContainerSlot` (`item_container_slot.py`), not a
+/// computed property with a setter that writes into `_raw_data`. That
+/// assignment only updates the in-memory Python object; the RAW slot's
+/// `item.dynamic_id.local_id_in_created_world` is left untouched, still
+/// pointing at the now-deleted dynamic item. Nothing later in
+/// `_update_or_create_container_slot` fixes it either: for a slot whose
+/// incoming DTO has no `dynamic_item`, that function's `if not slot_dto.
+/// dynamic_item: return` bails out immediately, before its own `slot.
+/// local_id = ...` line ever runs. The dangling reference is harmless in
+/// practice -- the NEXT time this exact container is read (`read_item_
+/// container`, this port's own `_get_items` equivalent), a `local_id` that
+/// resolves to nothing already causes the whole slot to be dropped (see that
+/// function's own doc comment) -- but it IS what a save-out immediately after
+/// this edit would write to disk, so it is reproduced here rather than
+/// proactively cleared. See this task's report.
+pub fn apply_item_container_dto(
+    session: &mut SaveSession,
+    _game_data: &GameData,
+    container_id: uuid::Uuid,
+    dto: &ItemContainerDto,
+    paired_common_container_id: Option<uuid::Uuid>,
+) -> Result<(), CoreError> {
+    if dto.r#type == "EssentialContainer" {
+        if let Some(common_id) = paired_common_container_id {
+            let additional_inventory_count = dto
+                .slots
+                .iter()
+                .filter(|slot| {
+                    slot.static_id
+                        .as_deref()
+                        .map(|id| id.starts_with("AdditionalInventory_"))
+                        .unwrap_or(false)
+                })
+                .count() as i32;
+            set_item_container_slot_count(
+                session,
+                common_id,
+                42 + additional_inventory_count.min(4) * 3,
+            )?;
+        }
+    }
+    if session.caches.item_container_index.is_none() {
+        session.caches.item_container_index =
+            Some(world::build_item_container_index(&session.level));
+    }
+    let Some(container_entry_index) = session
+        .caches
+        .item_container_index
+        .as_ref()
+        .expect("just built")
+        .get(&container_id)
+        .copied()
+    else {
+        return Ok(());
+    };
+
+    // Cleanup pass (`_clean_up_inventory`).
+    for incoming_slot in &dto.slots {
+        let existing_local_id = raw_slot_local_id(
+            &session.level,
+            container_entry_index,
+            incoming_slot.slot_index,
+        );
+        if incoming_slot.dynamic_item.is_none() {
+            if let Some(local_id) = existing_local_id {
+                remove_dynamic_item(session, local_id)?;
+                // Raw slot's own local_id is deliberately left dangling here
+                // -- see this function's own doc comment (a real Python bug,
+                // reproduced for byte parity).
+            }
+        }
+        if incoming_slot.static_id.as_deref() == Some("None") {
+            remove_raw_slot(
+                &mut session.level,
+                container_entry_index,
+                incoming_slot.slot_index,
+            );
+        }
+    }
+
+    // Apply pass (`_update_or_create_container_slot`).
+    for incoming_slot in &dto.slots {
+        if incoming_slot.static_id.is_none() || incoming_slot.static_id.as_deref() == Some("None") {
+            continue;
+        }
+        upsert_raw_slot(&mut session.level, container_entry_index, incoming_slot);
+        if let Some(dynamic_dto) = &incoming_slot.dynamic_item {
+            let mut resolved = dynamic_dto.clone();
+            if resolved.local_id == props::EMPTY_UUID {
+                resolved.local_id = raw_slot_local_id(
+                    &session.level,
+                    container_entry_index,
+                    incoming_slot.slot_index,
+                )
+                .unwrap_or_else(uuid::Uuid::new_v4);
+            }
+            let static_id = incoming_slot.static_id.clone().unwrap_or_default();
+            upsert_dynamic_item(session, &resolved, &static_id)?;
+            set_raw_slot_local_id(
+                &mut session.level,
+                container_entry_index,
+                incoming_slot.slot_index,
+                resolved.local_id,
+            );
+        }
+    }
+
+    session.caches.dynamic_item_index = None;
+    session.caches.item_container_index = None;
+    Ok(())
+}
+
+/// Port of `Base.update_from` (`game/base.py`).
+///
+/// **Membership-scoped, unlike the brief.** The brief's reference code
+/// applied every entry in `dto.storage_containers` unconditionally. Real
+/// Python's `self.storage_containers[id].update_from(...)` indexes a dict
+/// scoped to THIS base's own already-loaded storage containers -- an `id`
+/// that isn't one of them raises `KeyError` (Python crashes rather than
+/// silently touching a container elsewhere in the save). Reproduced here as
+/// a skip (this port's established "never panic on malformed/adversarial
+/// input" policy) rather than a crash, but the MEMBERSHIP CHECK itself is
+/// real and load-bearing: without it, a forged `container_id` key in the
+/// DTO's `storage_containers` map could redirect a base-storage edit onto an
+/// unrelated container anywhere in the world (a different base's storage, a
+/// player's inventory, ...) -- the same cross-entity class of hole Task 9's
+/// review flagged Critical for `delete_player_pals`. See this task's report.
+pub fn apply_base_dto(
+    session: &mut SaveSession,
+    game_data: &GameData,
+    base_id: uuid::Uuid,
+    dto: &BaseDto,
+) -> Result<(), CoreError> {
+    let real_container_ids = super::guild::base_storage_container_ids(session, base_id);
+    for (container_id, container_dto) in dto.storage_containers.iter() {
+        if !real_container_ids.contains(container_id) {
+            continue;
+        }
+        apply_item_container_dto(session, game_data, *container_id, container_dto, None)?;
+    }
+
+    let Some(entries) = world::base_camp_map_mut(&mut session.level)? else {
+        return Ok(());
+    };
+    let Some(entry) = entries
+        .iter_mut()
+        .find(|entry| props::as_uuid(&entry.key) == Some(base_id))
+    else {
+        return Ok(());
+    };
+    let Some(value_props) = props::struct_props_mut(&mut entry.value) else {
+        return Ok(());
+    };
+    if let Some(Property::Struct(StructValue::PalBaseCamp(base_camp))) =
+        value_props.0.get_mut(&PropertyKey::from("RawData"))
+    {
+        if let Some(name) = &dto.name {
+            if !name.is_empty() {
+                base_camp.name = name.clone();
+            }
+        }
+        if let Some(area_range) = dto.area_range {
+            base_camp.area_range = area_range as f32;
+        }
+    }
+    Ok(())
 }
 
 #[cfg(test)]
@@ -1030,5 +1739,561 @@ mod tests {
         assert!(item.gender.is_none());
         assert!(item.talent_hp.is_none());
         assert!(item.active_skills.is_none());
+    }
+
+    // ---- apply_item_container_dto / apply_base_dto (Task 10 write-back) ----
+
+    use crate::session::{SaveKind, SaveSession};
+
+    fn session_with_item_container(
+        container_id: uuid::Uuid,
+        slot_num: i32,
+        slots: Vec<StructValue>,
+        dynamic_items: Vec<StructValue>,
+    ) -> SaveSession {
+        let save = save_with_item_container(container_id, slot_num, slots, dynamic_items);
+        SaveSession::new_for_tests(SaveKind::InMemory, save)
+    }
+
+    fn slot_dto(
+        slot_index: i32,
+        count: i32,
+        static_id: &str,
+        dynamic_item: Option<DynamicItemDto>,
+    ) -> ItemContainerSlotDto {
+        ItemContainerSlotDto {
+            dynamic_item,
+            slot_index,
+            count,
+            static_id: Some(static_id.to_string()),
+            local_id: None,
+        }
+    }
+
+    fn weapon_dynamic_item_dto(local_id: uuid::Uuid) -> DynamicItemDto {
+        DynamicItemDto {
+            local_id,
+            modified: false,
+            character_id: None,
+            character_key: None,
+            durability: Some(75.0),
+            passive_skill_list: Some(vec!["Rare".to_string()]),
+            remaining_bullets: Some(20),
+            r#type: Some("weapon".to_string()),
+            static_id: None,
+            gender: None,
+            active_skills: None,
+            learned_skills: None,
+            passive_skills: None,
+            talent_hp: None,
+            talent_shot: None,
+            talent_defense: None,
+        }
+    }
+
+    /// Positive cache-invalidation proof for a STRUCTURAL ADD: a brand new
+    /// dynamic item pushed onto `DynamicItemSaveData` must (a) clear
+    /// `session.caches.dynamic_item_index` (not just leave a coincidentally
+    /// matching stale one), and (b) a freshly rebuilt index must actually
+    /// resolve the new entry at its real position -- not merely "the cache
+    /// is now `None`", which would trivially pass even if the item were
+    /// never actually appended (Task 9's own established standard).
+    #[test]
+    fn apply_item_container_dto_adds_a_new_dynamic_item_and_invalidates_the_cache() {
+        let container_id = uuid::Uuid::parse_str("11111111-0000-0000-0000-000000000000").unwrap();
+        let mut session = session_with_item_container(container_id, 10, vec![], vec![]);
+        // Warm the cache with the pre-edit (empty) state, proving the SAME
+        // stale cache object gets thrown away, not just left conveniently
+        // unbuilt.
+        session.caches.dynamic_item_index = Some(world::build_dynamic_item_index(&session.level));
+        assert!(session
+            .caches
+            .dynamic_item_index
+            .as_ref()
+            .unwrap()
+            .is_empty());
+
+        let local_id = uuid::Uuid::parse_str("22222222-0000-0000-0000-000000000000").unwrap();
+        let dto = ItemContainerDto {
+            id: container_id,
+            r#type: "CommonContainer".to_string(),
+            slots: vec![slot_dto(
+                0,
+                1,
+                "SFBow_5",
+                Some(weapon_dynamic_item_dto(local_id)),
+            )],
+            key: None,
+            slot_num: 0,
+        };
+        let data = game_data();
+        apply_item_container_dto(&mut session, &data, container_id, &dto, None).unwrap();
+
+        assert!(
+            session.caches.dynamic_item_index.is_none(),
+            "a structural add must invalidate the cache"
+        );
+        let rebuilt = world::build_dynamic_item_index(&session.level);
+        assert_eq!(
+            rebuilt.get(&local_id),
+            Some(&0),
+            "the new dynamic item must actually be resolvable at its real position"
+        );
+        let values = world::dynamic_item_values(&session.level).unwrap();
+        assert_eq!(values.len(), 1);
+    }
+
+    /// Positive cache-invalidation proof for a STRUCTURAL REMOVE (the
+    /// counterpart of the add proof above): a dynamic item that gets removed
+    /// via `_clean_up_inventory`'s "incoming slot has no dynamic_item, the
+    /// existing one does" branch must vanish from a freshly rebuilt index,
+    /// and the cache field itself must be cleared.
+    #[test]
+    fn apply_item_container_dto_removes_a_dynamic_item_and_invalidates_the_cache() {
+        let container_id = uuid::Uuid::nil();
+        let local_id = uuid::Uuid::parse_str("33333333-0000-0000-0000-000000000000").unwrap();
+        let slot = item_container_slot(0, 1, "SFBow_5", local_id);
+        let weapon = dynamic_item_entry(
+            local_id,
+            "SFBow_5",
+            uesave::games::palworld::PalDynamicItemType::Weapon {
+                leading_bytes: [0; 4],
+                durability: 80.0,
+                remaining_bullets: 12,
+                passive_skill_list: vec![],
+                trailing_bytes: [0; 4],
+            },
+        );
+        let mut session = session_with_item_container(container_id, 10, vec![slot], vec![weapon]);
+        session.caches.dynamic_item_index = Some(world::build_dynamic_item_index(&session.level));
+        assert_eq!(
+            session
+                .caches
+                .dynamic_item_index
+                .as_ref()
+                .unwrap()
+                .get(&local_id),
+            Some(&0)
+        );
+
+        // Incoming slot keeps the same static_id but drops the dynamic item.
+        let dto = ItemContainerDto {
+            id: container_id,
+            r#type: "CommonContainer".to_string(),
+            slots: vec![slot_dto(0, 1, "SFBow_5", None)],
+            key: None,
+            slot_num: 0,
+        };
+        let data = game_data();
+        apply_item_container_dto(&mut session, &data, container_id, &dto, None).unwrap();
+
+        assert!(
+            session.caches.dynamic_item_index.is_none(),
+            "a structural removal must invalidate the cache"
+        );
+        let rebuilt = world::build_dynamic_item_index(&session.level);
+        assert!(
+            !rebuilt.contains_key(&local_id),
+            "the removed dynamic item must actually be gone, not merely absent from a stale cache"
+        );
+        assert!(world::dynamic_item_values(&session.level)
+            .unwrap()
+            .is_empty());
+    }
+
+    /// `_update_common_container_slots` (`item_container.py`): an essential
+    /// container with `additional_inventory_count` `AdditionalInventory_*`
+    /// slots resizes its paired common container to `42 + min(count, 4)*3`
+    /// slots, truncating the common container's own `Slots` array by
+    /// POSITION when it shrinks -- proven with 6 existing common slots and 2
+    /// `AdditionalInventory_` essential slots (expected: 42 + 2*3 = 48, well
+    /// above 6, so nothing is truncated here; the truncation half is proven
+    /// separately below).
+    #[test]
+    fn apply_item_container_dto_essential_resizes_the_paired_common_container() {
+        let common_id = uuid::Uuid::parse_str("44444444-0000-0000-0000-000000000000").unwrap();
+        let essential_id = uuid::Uuid::parse_str("55555555-0000-0000-0000-000000000000").unwrap();
+
+        // Build a save with BOTH containers present.
+        let mut key_common = Properties::default();
+        key_common.insert("ID", guid_property(common_id));
+        let mut value_common = Properties::default();
+        value_common.insert("SlotNum", props::int_property(42));
+        value_common.insert("Slots", Property::Array(ValueVec::Struct(vec![])));
+
+        let mut key_essential = Properties::default();
+        key_essential.insert("ID", guid_property(essential_id));
+        let mut value_essential = Properties::default();
+        value_essential.insert("SlotNum", props::int_property(5));
+        value_essential.insert("Slots", Property::Array(ValueVec::Struct(vec![])));
+
+        let mut world_save_data = Properties::default();
+        world_save_data.insert(
+            "ItemContainerSaveData",
+            Property::Map(vec![
+                uesave::MapEntry {
+                    key: struct_property(key_common),
+                    value: struct_property(value_common),
+                },
+                uesave::MapEntry {
+                    key: struct_property(key_essential),
+                    value: struct_property(value_essential),
+                },
+            ]),
+        );
+        world_save_data.insert(
+            "DynamicItemSaveData",
+            Property::Array(ValueVec::Struct(vec![])),
+        );
+        let mut root_properties = Properties::default();
+        root_properties.insert("worldSaveData", struct_property(world_save_data));
+        let mut session =
+            SaveSession::new_for_tests(SaveKind::InMemory, minimal_save(root_properties));
+
+        let dto = ItemContainerDto {
+            id: essential_id,
+            r#type: "EssentialContainer".to_string(),
+            slots: vec![
+                slot_dto(0, 1, "AdditionalInventory_1", None),
+                slot_dto(1, 1, "AdditionalInventory_2", None),
+            ],
+            key: None,
+            slot_num: 5,
+        };
+        let data = game_data();
+        apply_item_container_dto(&mut session, &data, essential_id, &dto, Some(common_id)).unwrap();
+
+        let entries = world::item_container_map(&session.level).unwrap();
+        let common_entry = entries
+            .iter()
+            .find(|entry| {
+                props::struct_props(&entry.key)
+                    .and_then(|key| props::get(key, &["ID"]))
+                    .and_then(props::as_uuid)
+                    == Some(common_id)
+            })
+            .unwrap();
+        let common_value = props::struct_props(&common_entry.value).unwrap();
+        let slot_num = props::get(common_value, &["SlotNum"])
+            .and_then(props::as_i32)
+            .unwrap();
+        assert_eq!(slot_num, 42 + 2 * 3, "42 + min(2,4)*3 = 48");
+    }
+
+    /// The truncation half of `set_item_container_slot_count`: shrinking
+    /// past the container's current slot COUNT removes the excess entries
+    /// by array position (see `set_item_container_slot_count`'s own doc
+    /// comment on why this is position-based, not `slot_index`-value-based).
+    #[test]
+    fn apply_item_container_dto_essential_resize_truncates_excess_common_slots() {
+        let common_id = uuid::Uuid::parse_str("66666666-0000-0000-0000-000000000000").unwrap();
+        let essential_id = uuid::Uuid::parse_str("77777777-0000-0000-0000-000000000000").unwrap();
+
+        let common_slots: Vec<StructValue> = (0..45)
+            .map(|index| item_container_slot(index, 1, "Wood", props::EMPTY_UUID))
+            .collect();
+        let mut key_common = Properties::default();
+        key_common.insert("ID", guid_property(common_id));
+        let mut value_common = Properties::default();
+        value_common.insert("SlotNum", props::int_property(45));
+        value_common.insert("Slots", Property::Array(ValueVec::Struct(common_slots)));
+
+        let mut key_essential = Properties::default();
+        key_essential.insert("ID", guid_property(essential_id));
+        let mut value_essential = Properties::default();
+        value_essential.insert("SlotNum", props::int_property(0));
+        value_essential.insert("Slots", Property::Array(ValueVec::Struct(vec![])));
+
+        let mut world_save_data = Properties::default();
+        world_save_data.insert(
+            "ItemContainerSaveData",
+            Property::Map(vec![
+                uesave::MapEntry {
+                    key: struct_property(key_common),
+                    value: struct_property(value_common),
+                },
+                uesave::MapEntry {
+                    key: struct_property(key_essential),
+                    value: struct_property(value_essential),
+                },
+            ]),
+        );
+        world_save_data.insert(
+            "DynamicItemSaveData",
+            Property::Array(ValueVec::Struct(vec![])),
+        );
+        let mut root_properties = Properties::default();
+        root_properties.insert("worldSaveData", struct_property(world_save_data));
+        let mut session =
+            SaveSession::new_for_tests(SaveKind::InMemory, minimal_save(root_properties));
+
+        // No AdditionalInventory_ slots at all -> target size 42, below the
+        // 45 the common container currently has.
+        let dto = ItemContainerDto {
+            id: essential_id,
+            r#type: "EssentialContainer".to_string(),
+            slots: vec![],
+            key: None,
+            slot_num: 0,
+        };
+        let data = game_data();
+        apply_item_container_dto(&mut session, &data, essential_id, &dto, Some(common_id)).unwrap();
+
+        let entries = world::item_container_map(&session.level).unwrap();
+        let common_entry = entries
+            .iter()
+            .find(|entry| {
+                props::struct_props(&entry.key)
+                    .and_then(|key| props::get(key, &["ID"]))
+                    .and_then(props::as_uuid)
+                    == Some(common_id)
+            })
+            .unwrap();
+        let common_value = props::struct_props(&common_entry.value).unwrap();
+        let remaining_slots = props::get(common_value, &["Slots"])
+            .and_then(props::struct_values)
+            .unwrap();
+        assert_eq!(remaining_slots.len(), 42);
+    }
+
+    /// `_update_or_create_container_slot`: a `static_id == "None"` incoming
+    /// slot removes the existing raw slot entirely.
+    #[test]
+    fn apply_item_container_dto_removes_a_slot_whose_static_id_is_none() {
+        let container_id = uuid::Uuid::nil();
+        let slot = item_container_slot(0, 1, "Wood", props::EMPTY_UUID);
+        let mut session = session_with_item_container(container_id, 10, vec![slot], vec![]);
+        let dto = ItemContainerDto {
+            id: container_id,
+            r#type: "CommonContainer".to_string(),
+            slots: vec![slot_dto(0, 0, "None", None)],
+            key: None,
+            slot_num: 10,
+        };
+        let data = game_data();
+        apply_item_container_dto(&mut session, &data, container_id, &dto, None).unwrap();
+
+        let entries = world::item_container_map(&session.level).unwrap();
+        let value_props = props::struct_props(&entries[0].value).unwrap();
+        let slots = props::get(value_props, &["Slots"])
+            .and_then(props::struct_values)
+            .unwrap();
+        assert!(slots.is_empty());
+    }
+
+    /// An `apply_item_container_dto` call for a `container_id` this session
+    /// doesn't have at all is a silent no-op, matching this port's
+    /// established "skip an unresolvable id, never panic" policy.
+    #[test]
+    fn apply_item_container_dto_unknown_container_id_is_a_no_op() {
+        let mut session = session_with_item_container(uuid::Uuid::nil(), 5, vec![], vec![]);
+        let unknown = uuid::Uuid::parse_str("88888888-0000-0000-0000-000000000000").unwrap();
+        let dto = ItemContainerDto {
+            id: unknown,
+            r#type: "CommonContainer".to_string(),
+            slots: vec![slot_dto(0, 1, "Wood", None)],
+            key: None,
+            slot_num: 5,
+        };
+        let data = game_data();
+        apply_item_container_dto(&mut session, &data, unknown, &dto, None).unwrap();
+        // The real (nil-id) container must be completely untouched.
+        let entries = world::item_container_map(&session.level).unwrap();
+        let value_props = props::struct_props(&entries[0].value).unwrap();
+        assert!(props::get(value_props, &["Slots"])
+            .and_then(props::struct_values)
+            .unwrap()
+            .is_empty());
+    }
+
+    /// A brand new egg dynamic item with `modified: true` rebuilds a full
+    /// embedded `SaveParameter` (`PalObjects.SaveParameter`) -- gender,
+    /// talents, and skills must all be readable back afterward via the same
+    /// `read_item_container`/`read_dynamic_item` path Task 5 already
+    /// verified.
+    #[test]
+    fn apply_item_container_dto_new_egg_modified_rebuilds_embedded_save_parameter() {
+        let container_id = uuid::Uuid::nil();
+        let local_id = uuid::Uuid::parse_str("99999999-0000-0000-0000-000000000000").unwrap();
+        let mut session = session_with_item_container(container_id, 10, vec![], vec![]);
+        let egg_dto = DynamicItemDto {
+            local_id: props::EMPTY_UUID, // unset -> a fresh uuid is minted
+            modified: true,
+            character_id: Some("SheepBall".to_string()),
+            character_key: None,
+            durability: None,
+            passive_skill_list: None,
+            remaining_bullets: None,
+            r#type: Some("egg".to_string()),
+            static_id: None,
+            gender: Some(PalGender::Male),
+            active_skills: Some(vec!["EPalWazaID::Move_Fire".to_string()]),
+            learned_skills: Some(vec![]),
+            passive_skills: Some(vec![]),
+            talent_hp: Some(70),
+            talent_shot: Some(60),
+            talent_defense: Some(50),
+        };
+        let dto = ItemContainerDto {
+            id: container_id,
+            r#type: "CommonContainer".to_string(),
+            slots: vec![slot_dto(0, 1, "EggSheepBall", Some(egg_dto))],
+            key: None,
+            slot_num: 10,
+        };
+        let data = game_data();
+        apply_item_container_dto(&mut session, &data, container_id, &dto, None).unwrap();
+        let _ = local_id; // not the minted id; kept for readability of intent
+
+        let mut caches = WorldCaches::default();
+        let reread = read_item_container(
+            &session.level,
+            &mut caches,
+            &data,
+            container_id,
+            "CommonContainer",
+            None,
+        )
+        .expect("container resolves");
+        let item = reread.slots[0].dynamic_item.as_ref().expect("egg resolves");
+        assert_eq!(item.r#type, Some("egg".to_string()));
+        assert_eq!(item.character_id, Some("SheepBall".to_string()));
+        assert_eq!(item.gender, Some(PalGender::Male));
+        assert_eq!(item.talent_hp, Some(70));
+        assert_eq!(item.talent_shot, Some(60));
+        assert_eq!(item.talent_defense, Some(50));
+        assert_eq!(
+            item.active_skills,
+            Some(vec!["EPalWazaID::Move_Fire".to_string()])
+        );
+    }
+
+    /// An existing egg dynamic item updated with `modified: false` must
+    /// preserve its embedded `object` exactly, even though the incoming DTO
+    /// carries different gender/talent values -- Python's `DynamicItem.
+    /// update_from` only rebuilds `object` when `modified` is truthy.
+    #[test]
+    fn apply_item_container_dto_existing_egg_unmodified_preserves_embedded_save_parameter() {
+        let container_id = uuid::Uuid::nil();
+        let local_id = uuid::Uuid::parse_str("aaaaaaab-0000-0000-0000-000000000000").unwrap();
+        let slot = item_container_slot(0, 1, "EggSheepBall", local_id);
+
+        let mut save_parameter = Properties::default();
+        save_parameter.insert("Gender", props::enum_property("EPalGenderType::Female"));
+        save_parameter.insert("Talent_HP", props::byte_property(30));
+        let mut object = Properties::default();
+        object.insert("SaveParameter", struct_property(save_parameter));
+        let egg = dynamic_item_entry(
+            local_id,
+            "EggSheepBall",
+            uesave::games::palworld::PalDynamicItemType::Egg {
+                leading_bytes: [0; 4],
+                character_id: "SheepBall".to_string(),
+                object,
+                trailing_bytes: [0; 28],
+            },
+        );
+        let mut session = session_with_item_container(container_id, 10, vec![slot], vec![egg]);
+
+        // Incoming DTO claims different stats but modified: false -- must be
+        // ignored; the original embedded object survives untouched.
+        let egg_dto = DynamicItemDto {
+            local_id,
+            modified: false,
+            character_id: Some("SheepBall".to_string()),
+            character_key: None,
+            durability: None,
+            passive_skill_list: None,
+            remaining_bullets: None,
+            r#type: Some("egg".to_string()),
+            static_id: None,
+            gender: Some(PalGender::Male),
+            active_skills: None,
+            learned_skills: None,
+            passive_skills: None,
+            talent_hp: Some(99),
+            talent_shot: None,
+            talent_defense: None,
+        };
+        let dto = ItemContainerDto {
+            id: container_id,
+            r#type: "CommonContainer".to_string(),
+            slots: vec![slot_dto(0, 1, "EggSheepBall", Some(egg_dto))],
+            key: None,
+            slot_num: 10,
+        };
+        let data = game_data();
+        apply_item_container_dto(&mut session, &data, container_id, &dto, None).unwrap();
+
+        let mut caches = WorldCaches::default();
+        let reread = read_item_container(
+            &session.level,
+            &mut caches,
+            &data,
+            container_id,
+            "CommonContainer",
+            None,
+        )
+        .unwrap();
+        let item = reread.slots[0].dynamic_item.as_ref().unwrap();
+        assert_eq!(
+            item.gender,
+            Some(crate::dto::pal::PalGender::Female),
+            "unmodified egg must keep its ORIGINAL embedded gender, not the DTO's"
+        );
+        assert_eq!(item.talent_hp, Some(30));
+    }
+
+    /// `apply_base_dto` must reject a `storage_containers` map key that
+    /// isn't actually one of THIS base's own item containers -- see
+    /// `apply_base_dto`'s own doc comment for why this membership check
+    /// exists (a Critical-class fix over the brief's unconditional-apply
+    /// reference code). A forged container id must be silently skipped,
+    /// leaving the unrelated container completely untouched.
+    #[test]
+    fn apply_base_dto_rejects_a_container_id_that_does_not_belong_to_this_base() {
+        let base_id = uuid::Uuid::parse_str("bbbbbbbb-0000-0000-0000-000000000000").unwrap();
+        let unrelated_container_id =
+            uuid::Uuid::parse_str("cccccccc-0000-0000-0000-000000000000").unwrap();
+        // A container that exists in the save but is NOT registered as one
+        // of base_id's own storage containers (no MapObjectSaveData entry
+        // links them) -- base_storage_container_ids(session, base_id) must
+        // therefore come back empty, and apply_base_dto must not touch it.
+        let mut session = session_with_item_container(unrelated_container_id, 5, vec![], vec![]);
+
+        let mut storage_containers = crate::dto::ordered_map::OrderedMap::new();
+        storage_containers.insert(
+            unrelated_container_id,
+            ItemContainerDto {
+                id: unrelated_container_id,
+                r#type: "BaseContainer".to_string(),
+                slots: vec![slot_dto(0, 1, "Wood", None)],
+                key: None,
+                slot_num: 5,
+            },
+        );
+        let base_dto = BaseDto {
+            pals: crate::dto::ordered_map::OrderedMap::new(),
+            container_id: None,
+            slot_count: None,
+            storage_containers,
+            pal_container: None,
+            id: base_id,
+            name: None,
+            location: None,
+            area_range: None,
+        };
+        let data = game_data();
+        apply_base_dto(&mut session, &data, base_id, &base_dto).unwrap();
+
+        let entries = world::item_container_map(&session.level).unwrap();
+        let value_props = props::struct_props(&entries[0].value).unwrap();
+        let slots = props::get(value_props, &["Slots"])
+            .and_then(props::struct_values)
+            .unwrap();
+        assert!(
+            slots.is_empty(),
+            "a container id outside this base's real storage set must never be mutated"
+        );
     }
 }
