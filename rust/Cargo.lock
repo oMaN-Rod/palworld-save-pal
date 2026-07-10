@@ -1350,10 +1350,14 @@ dependencies = [
 name = "psp-db"
 version = "0.17.3"
 dependencies = [
+ "chrono",
+ "serde_json",
  "sqlx",
  "tempfile",
  "thiserror 2.0.18",
  "tokio",
+ "tracing",
+ "uuid",
 ]
 
 [[package]]
