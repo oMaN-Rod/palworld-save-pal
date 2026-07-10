@@ -280,12 +280,21 @@ fn count_guild_base_pals(
 /// this explicitly filters out the nil guild UUID
 /// (`if not guild_id or is_empty_uuid(guild_id): continue`) — no summary is
 /// ever built for it.
+///
+/// Returns the `BTreeMap` alongside a `Vec<Uuid>` recording the order guild
+/// ids were actually inserted in (`group_entries`' own order, filtered) —
+/// Python's `_guild_summaries` dict preserves exactly this insertion order,
+/// and `sync_app_state_handler`'s wire `guilds` array reflects it (see
+/// `session.rs`'s `guild_summary_order` doc comment). The map alone cannot
+/// answer that question once entries are inserted, since `BTreeMap` always
+/// iterates in `Uuid`-sorted order regardless of insertion order.
 pub(crate) fn build_guild_summaries(
     group_entries: &[uesave::MapEntry],
     base_camp_entries: Option<&[uesave::MapEntry]>,
     character_entries: &[uesave::MapEntry],
-) -> BTreeMap<Uuid, GuildSummary> {
+) -> (BTreeMap<Uuid, GuildSummary>, Vec<Uuid>) {
     let mut summaries = BTreeMap::new();
+    let mut order = Vec::new();
     for entry in group_entries {
         let Some((guild_id, tail)) = guild_tail_entry(entry) else {
             continue;
@@ -296,6 +305,7 @@ pub(crate) fn build_guild_summaries(
         let base_count = base_camp_entries
             .map(|entries| base_count_for_guild(entries, guild_id))
             .unwrap_or(0);
+        order.push(guild_id);
         summaries.insert(
             guild_id,
             GuildSummary {
@@ -310,7 +320,7 @@ pub(crate) fn build_guild_summaries(
             },
         );
     }
-    summaries
+    (summaries, order)
 }
 
 /// Single entry point: extracts player summaries, then guild summaries, in
@@ -326,6 +336,14 @@ pub(crate) fn build_guild_summaries(
 /// (`pal_owner_counts`, `player_guild_map`) are pure lookup tables — never
 /// iterated for output — so their unordered iteration never reaches the
 /// wire. No parallelism is used, unlike Python's >2-player thread pool.
+///
+/// The save-file walk order is ALSO recorded verbatim into
+/// `session.player_summary_order` / `session.guild_summary_order` — see
+/// `session.rs`'s doc comment on those fields for why: Python's
+/// `sync_app_state_handler` emits `player_summaries`/`guild_summaries` dict
+/// insertion order on the wire, not a `Uuid` sort, and this is where that
+/// order is captured before it would otherwise be lost to `BTreeMap`'s
+/// sorted iteration.
 pub fn extract_summaries(
     session: &mut SaveSession,
     progress: &ProgressSink,
@@ -343,6 +361,7 @@ pub fn extract_summaries(
     let player_guild_map = build_player_guild_map(group_entries);
 
     let mut player_summaries = BTreeMap::new();
+    let mut player_summary_order = Vec::new();
     let mut parsed_player_saves = Vec::new();
     let mut filtered_without_sav_count: usize = 0;
     for (uid, parameters) in collect_player_entries(character_entries) {
@@ -373,6 +392,7 @@ pub fn extract_summaries(
             }
         }
 
+        player_summary_order.push(uid);
         player_summaries.insert(
             uid,
             build_player_summary(
@@ -393,11 +413,13 @@ pub fn extract_summaries(
     }
 
     progress("Extracting guild summaries...");
-    let guild_summaries =
+    let (guild_summaries, guild_summary_order) =
         build_guild_summaries(group_entries, session.base_camp_map(), character_entries);
 
     session.player_summaries = player_summaries;
     session.guild_summaries = guild_summaries;
+    session.player_summary_order = player_summary_order;
+    session.guild_summary_order = guild_summary_order;
     for (uid, parsed_save) in parsed_player_saves {
         // Python: `if parsed_gvas is not None and uid not in
         // self._player_gvas_sav_cache: self._player_gvas_sav_cache[uid] =
@@ -621,8 +643,9 @@ mod tests {
             pal_character_entry(PLAYER_ONE, "aaaaaaaa-0000-0000-0000-000000000003", None),
         ];
 
-        let summaries = build_guild_summaries(&groups, Some(&bases), &characters);
-        let guild = &summaries[&GUILD_ID.parse::<uuid::Uuid>().unwrap()];
+        let (summaries, order) = build_guild_summaries(&groups, Some(&bases), &characters);
+        let guild_id = GUILD_ID.parse::<uuid::Uuid>().unwrap();
+        let guild = &summaries[&guild_id];
         assert_eq!("The Guild", guild.name);
         assert_eq!(Some(PLAYER_ONE.parse().unwrap()), guild.admin_player_uid);
         assert_eq!(2, guild.player_count);
@@ -630,6 +653,7 @@ mod tests {
         assert_eq!(Some(5), guild.level);
         assert_eq!(2, guild.pal_count); // only pals slotted into the base container
         assert!(!guild.loaded);
+        assert_eq!(vec![guild_id], order);
     }
 
     #[test]
@@ -839,6 +863,8 @@ mod extraction_tests {
             player_sav_cache: HashMap::new(),
             player_summaries: BTreeMap::new(),
             guild_summaries: BTreeMap::new(),
+            player_summary_order: Vec::new(),
+            guild_summary_order: Vec::new(),
             character_index: HashMap::new(),
             item_container_index: HashMap::new(),
             character_container_index: HashMap::new(),
@@ -868,6 +894,102 @@ mod extraction_tests {
                 "Extracting guild summaries...".to_string(),
             ],
             *log.lock().unwrap()
+        );
+    }
+
+    fn player_character_entry_with_file_ref(player_uid: &str, nickname: &str) -> MapEntry {
+        let mut save_parameter = Properties::default();
+        save_parameter.insert("IsPlayer", Property::Bool(true));
+        save_parameter.insert("NickName", Property::Str(nickname.to_string()));
+        let mut object = Properties::default();
+        object.insert(
+            "SaveParameter",
+            Property::Struct(StructValue::Struct(save_parameter)),
+        );
+        let character_data = uesave::games::palworld::PalCharacterData {
+            object,
+            unknown_bytes: [0; 4],
+            group_id: uesave::FGuid::nil(),
+            trailing_bytes: [0; 4],
+        };
+        let mut value_properties = Properties::default();
+        value_properties.insert(
+            "RawData",
+            Property::Struct(StructValue::PalCharacterData(character_data)),
+        );
+        let mut key_properties = Properties::default();
+        key_properties.insert("PlayerUId", guid_property(player_uid));
+        key_properties.insert("InstanceId", guid_property(player_uid));
+        MapEntry {
+            key: Property::Struct(StructValue::Struct(key_properties)),
+            value: Property::Struct(StructValue::Struct(value_properties)),
+        }
+    }
+
+    /// The test that actually discriminates this fix from the pre-fix
+    /// `session.player_summaries.keys()` behavior (which the handler used
+    /// before `player_summary_order`/`guild_summary_order` existed): the
+    /// two players below are inserted in `CharacterSaveParameterMap` order
+    /// HIGH-then-LOW, deliberately the opposite of `Uuid`'s `Ord` — so a
+    /// `BTreeMap<Uuid, _>::keys()` read would report LOW-then-HIGH instead.
+    /// `extract_summaries` must record `player_summary_order` as the
+    /// as-encountered HIGH-then-LOW order, while `player_summaries` itself
+    /// stays sorted (LOW-then-HIGH) — proving the two are genuinely
+    /// different sequences, not a vacuous check that happens to coincide.
+    #[test]
+    fn test_extract_summaries_records_gvas_insertion_order_not_uuid_sorted_order() {
+        const HIGH_UUID: &str = "ffffffff-ffff-ffff-ffff-ffffffffffff";
+        const LOW_UUID: &str = "00000000-0000-0000-0000-000000000001";
+        let high: Uuid = HIGH_UUID.parse().unwrap();
+        let low: Uuid = LOW_UUID.parse().unwrap();
+
+        let mut world_save_data = Properties::default();
+        world_save_data.insert(
+            "CharacterSaveParameterMap",
+            Property::Map(vec![
+                player_character_entry_with_file_ref(HIGH_UUID, "High"),
+                player_character_entry_with_file_ref(LOW_UUID, "Low"),
+            ]),
+        );
+        world_save_data.insert("GroupSaveDataMap", Property::Map(Vec::new()));
+        let mut root_properties = Properties::default();
+        root_properties.insert(
+            "worldSaveData",
+            Property::Struct(StructValue::Struct(world_save_data)),
+        );
+
+        let mut player_file_refs = BTreeMap::new();
+        player_file_refs.insert(
+            high,
+            crate::session::PlayerFileData::Bytes {
+                sav: None,
+                dps: None,
+            },
+        );
+        player_file_refs.insert(
+            low,
+            crate::session::PlayerFileData::Bytes {
+                sav: None,
+                dps: None,
+            },
+        );
+
+        let mut session = minimal_empty_session();
+        session.level = minimal_uesave_save(root_properties);
+        session.player_file_refs = player_file_refs;
+
+        extract_summaries(&mut session, &crate::progress::null_progress()).unwrap();
+
+        assert_eq!(
+            vec![high, low],
+            session.player_summary_order,
+            "player_summary_order must preserve GVAS encounter order (HIGH before LOW)"
+        );
+        assert_eq!(
+            vec![low, high],
+            session.player_summaries.keys().copied().collect::<Vec<_>>(),
+            "the BTreeMap itself must still be Uuid-sorted (LOW before HIGH) -- \
+             this is what makes the check above non-vacuous"
         );
     }
 }

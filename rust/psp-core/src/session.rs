@@ -82,6 +82,21 @@ pub struct SaveSession {
     pub player_sav_cache: HashMap<Uuid, uesave::Save>,
     pub player_summaries: BTreeMap<Uuid, PlayerSummary>,
     pub guild_summaries: BTreeMap<Uuid, GuildSummary>,
+    /// GVAS-file insertion order of `player_summaries` / `guild_summaries` —
+    /// the order `domain::summaries::extract_summaries` inserted each entry
+    /// in (`CharacterSaveParameterMap` order for players,
+    /// `GroupSaveDataMap` order for guilds), NOT the `BTreeMap`'s sorted
+    /// iteration order. Python's `sync_app_state_handler` emits
+    /// `[str(p) for p in app_state.player_summaries.keys()]` /
+    /// `.guild_summaries.keys()`, and those dicts preserve exactly this
+    /// insertion order (see that function's own doc comment for why the
+    /// two Python extraction paths this depends on are deterministic at the
+    /// save sizes this port is verified against). Carried alongside the
+    /// sorted maps the same way Task 9's `player_discovery_order` sits
+    /// alongside `player_file_refs` — the sorted map is additional
+    /// information layered on top, not a substitute for the wire order.
+    pub player_summary_order: Vec<Uuid>,
+    pub guild_summary_order: Vec<Uuid>,
     /// InstanceId → CharacterSaveParameterMap position.
     pub character_index: HashMap<Uuid, usize>,
     /// key.ID → ItemContainerSaveData position.
@@ -201,6 +216,8 @@ impl SaveSession {
             player_sav_cache: HashMap::new(),
             player_summaries: BTreeMap::new(),
             guild_summaries: BTreeMap::new(),
+            player_summary_order: Vec::new(),
+            guild_summary_order: Vec::new(),
             character_index: HashMap::new(),
             item_container_index: HashMap::new(),
             character_container_index: HashMap::new(),
@@ -480,6 +497,8 @@ mod load_tests {
             player_sav_cache: std::collections::HashMap::new(),
             player_summaries: std::collections::BTreeMap::new(),
             guild_summaries: std::collections::BTreeMap::new(),
+            player_summary_order: Vec::new(),
+            guild_summary_order: Vec::new(),
             character_index: std::collections::HashMap::new(),
             item_container_index: std::collections::HashMap::new(),
             character_container_index: std::collections::HashMap::new(),

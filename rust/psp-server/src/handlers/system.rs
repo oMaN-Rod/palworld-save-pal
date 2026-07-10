@@ -29,40 +29,43 @@ pub async fn handle_sync_app_state(ctx: &mut HandlerCtx<'_>) -> Result<(), Handl
         return Ok(());
     };
 
-    // Unlike select_save's/load_zip_file's `players` array (filesystem/zip
-    // *discovery* order, see save_file.rs), these two fields intentionally
-    // keep the BTreeMap's sorted order rather than chasing Python's.
-    // Python's `sync_app_state_handler` emits
+    // Like select_save's/load_zip_file's `players` array (filesystem/zip
+    // *discovery* order, see save_file.rs), these two fields must follow
+    // Python's actual dict-insertion order -- NOT the BTreeMap's sorted
+    // order. Python's `sync_app_state_handler` emits
     // `[str(p) for p in app_state.player_summaries.keys()]` /
-    // `.guild_summaries.keys()`, and those dicts' insertion order is not a
-    // filesystem-discovery order at all:
+    // `.guild_summaries.keys()`, and both dicts preserve GVAS-file
+    // insertion order:
     //   - `player_summaries` is built by `_extract_player_summaries`, which
-    //     for saves with more than two players dispatches to
-    //     `_extract_players_parallel` -- a `ThreadPoolExecutor` whose results
-    //     are inserted via `as_completed()`, i.e. whichever worker thread
-    //     finishes first. That insertion order is genuinely
-    //     non-deterministic across runs of the same save file, so there is
-    //     no stable Python order to port here (psp-core's own
-    //     `domain/summaries.rs` already documents this same fact and is why
-    //     Task 10's parity harness restricts itself to <=2-player saves).
-    //   - `guild_summaries` is deterministic per save file, but its order is
-    //     `_group_save_data_map`'s (Level.sav's internal GroupSaveDataMap)
-    //     iteration order, filtered to guild-type entries -- an artifact of
-    //     the save's binary layout, not anything this port currently
-    //     threads through as a separate ordered list anywhere.
-    // Sorted-by-UUID is therefore not a parity gap here the way it was for
-    // select_save's `players` array; it is a reasonable, stable choice where
-    // Python itself has no fixed answer.
+    //     dispatches to `_extract_players_parallel` (a `ThreadPoolExecutor`
+    //     whose results land via `as_completed()`, genuinely
+    //     nondeterministic) only when the save has MORE than two players. At
+    //     two players or fewer it takes `_extract_players_sequential`
+    //     instead, which inserts in `players_data` order --
+    //     `CharacterSaveParameterMap` iteration order -- deterministically.
+    //     This is exactly the threshold `rust/parity/README.md`'s load_path
+    //     corpus rule ("at most 2 players") exists to stay under.
+    //   - `guild_summaries` (`_extract_guild_summaries`) is ALWAYS
+    //     sequential -- no thread pool involved at any size -- so its order
+    //     is unconditionally `GroupSaveDataMap` iteration order, filtered to
+    //     guild-type entries with a non-nil guild id.
+    // `psp_core::domain::summaries::extract_summaries` walks both maps in
+    // that same save-file order and records it verbatim into
+    // `session.player_summary_order` / `session.guild_summary_order`
+    // alongside the (still `Uuid`-sorted) `BTreeMap`s -- see that function's
+    // and `SaveSession`'s own doc comments. Reading `.keys()` here instead
+    // would silently resort to `Uuid` order whenever GVAS order isn't
+    // already ascending.
     let payload = SyncLoadedSaveFilesData {
         level: session.save_id.clone(),
         players: session
-            .player_summaries
-            .keys()
+            .player_summary_order
+            .iter()
             .map(|uid| uid.to_string())
             .collect(),
         guilds: session
-            .guild_summaries
-            .keys()
+            .guild_summary_order
+            .iter()
             .map(|guild_id| guild_id.to_string())
             .collect(),
         world_name: session.world_name.clone(),
@@ -118,17 +121,28 @@ mod tests {
     /// same pattern as psp-core's own `session_with_level_properties` test
     /// helper. All `SaveSession` fields are `pub` (Task 7), so this struct
     /// literal is legal from outside the crate.
+    ///
+    /// TWO players and TWO guilds, deliberately inserted (both into the
+    /// `BTreeMap`s and into `player_summary_order`/`guild_summary_order`) in
+    /// HIGH-then-LOW `Uuid` order -- the opposite of `Uuid`'s `Ord` impl.
+    /// This is what lets `sync_app_state_with_save_emits_full_frame_sequence_in_order`
+    /// below actually discriminate the fix: if `handle_sync_app_state` ever
+    /// regressed to `session.player_summaries.keys()` /
+    /// `.guild_summaries.keys()` (sorted order) instead of reading the
+    /// `*_order` fields, the emitted `players`/`guilds` arrays would come
+    /// back LOW-then-HIGH and the test would fail.
     fn fake_loaded_session() -> psp_core::session::SaveSession {
         use psp_core::dto::summary::{GuildSummary, PlayerSummary};
         use psp_core::session::{SaveKind, SaveSession};
         use std::collections::{BTreeMap, HashMap};
 
+        let low_player: uuid::Uuid = "11111111-1111-1111-1111-111111111111".parse().unwrap();
+        let high_player: uuid::Uuid = "ffffffff-ffff-ffff-ffff-ffffffffffff".parse().unwrap();
         let mut player_summaries = BTreeMap::new();
-        let player_uid: uuid::Uuid = "11111111-1111-1111-1111-111111111111".parse().unwrap();
         player_summaries.insert(
-            player_uid,
+            low_player,
             PlayerSummary {
-                uid: player_uid,
+                uid: low_player,
                 nickname: "Tester".to_string(),
                 level: Some(9),
                 guild_id: None,
@@ -137,15 +151,41 @@ mod tests {
                 loaded: false,
             },
         );
+        player_summaries.insert(
+            high_player,
+            PlayerSummary {
+                uid: high_player,
+                nickname: "High".to_string(),
+                level: Some(3),
+                guild_id: None,
+                pal_count: 0,
+                last_online_time: None,
+                loaded: false,
+            },
+        );
 
+        let low_guild: uuid::Uuid = "22222222-2222-2222-2222-222222222222".parse().unwrap();
+        let high_guild: uuid::Uuid = "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee".parse().unwrap();
         let mut guild_summaries = BTreeMap::new();
-        let guild_id: uuid::Uuid = "22222222-2222-2222-2222-222222222222".parse().unwrap();
         guild_summaries.insert(
-            guild_id,
+            low_guild,
             GuildSummary {
-                id: guild_id,
+                id: low_guild,
                 name: "The Guild".to_string(),
-                admin_player_uid: Some(player_uid),
+                admin_player_uid: Some(low_player),
+                player_count: 1,
+                base_count: 0,
+                level: Some(1),
+                pal_count: 0,
+                loaded: false,
+            },
+        );
+        guild_summaries.insert(
+            high_guild,
+            GuildSummary {
+                id: high_guild,
+                name: "High Guild".to_string(),
+                admin_player_uid: Some(high_player),
                 player_count: 1,
                 base_count: 0,
                 level: Some(1),
@@ -184,6 +224,8 @@ mod tests {
             player_sav_cache: HashMap::new(),
             player_summaries,
             guild_summaries,
+            player_summary_order: vec![high_player, low_player],
+            guild_summary_order: vec![high_guild, low_guild],
             character_index: HashMap::new(),
             item_container_index: HashMap::new(),
             character_container_index: HashMap::new(),
@@ -210,13 +252,23 @@ mod tests {
         let loaded = test.next_frame_json();
         assert_eq!(loaded["type"], "loaded_save_files");
         assert_eq!(loaded["data"]["level"], "C:/saves/world/Level.sav");
+        // HIGH-then-LOW: `player_summary_order`/`guild_summary_order`, NOT
+        // the BTreeMaps' sorted (LOW-then-HIGH) iteration order. This is the
+        // assertion that actually discriminates the fix -- see
+        // `fake_loaded_session`'s doc comment.
         assert_eq!(
             loaded["data"]["players"],
-            serde_json::json!(["11111111-1111-1111-1111-111111111111"])
+            serde_json::json!([
+                "ffffffff-ffff-ffff-ffff-ffffffffffff",
+                "11111111-1111-1111-1111-111111111111"
+            ])
         );
         assert_eq!(
             loaded["data"]["guilds"],
-            serde_json::json!(["22222222-2222-2222-2222-222222222222"])
+            serde_json::json!([
+                "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+                "22222222-2222-2222-2222-222222222222"
+            ])
         );
         assert_eq!(loaded["data"]["world_name"], "My World");
         assert_eq!(loaded["data"]["type"], "steam");
@@ -229,12 +281,20 @@ mod tests {
             player_summaries["data"]["11111111-1111-1111-1111-111111111111"]["nickname"],
             "Tester"
         );
+        assert_eq!(
+            player_summaries["data"]["ffffffff-ffff-ffff-ffff-ffffffffffff"]["nickname"],
+            "High"
+        );
 
         let guild_summaries = test.next_frame_json();
         assert_eq!(guild_summaries["type"], "get_guild_summaries");
         assert_eq!(
             guild_summaries["data"]["22222222-2222-2222-2222-222222222222"]["name"],
             "The Guild"
+        );
+        assert_eq!(
+            guild_summaries["data"]["eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"]["name"],
+            "High Guild"
         );
 
         test.assert_no_more_frames();
