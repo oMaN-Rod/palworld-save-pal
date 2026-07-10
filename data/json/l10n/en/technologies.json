@@ -1,4 +1,8 @@
 {
+  "AIcore": {
+    "localized_name": "AI Core",
+    "description": null
+  },
   "Accessory_AirDash1": {
     "localized_name": "Air Dash Boots",
     "description": "An accessory that allows the player to dash in mid-air when equipped."
@@ -10,6 +14,10 @@
   "Accessory_AirDash3": {
     "localized_name": "Triple Air Dash Boots",
     "description": "en-Text"
+  },
+  "Accessory_ExplosionResist": {
+    "localized_name": "Explosion-Resistant Undershirt",
+    "description": null
   },
   "Accessory_JumpCount_Increase1": {
     "localized_name": "Double Jump Boots",
@@ -51,21 +59,85 @@
     "localized_name": "Summoning Altar",
     "description": "Offer a Slab depicting a Pal to summon a powerful Pal to your base. Adequate caution and battle readiness is paramount."
   },
+  "AncientArmor": {
+    "localized_name": "Ancient Armor",
+    "description": "Ancient armor forged from Soralite Ingot. Crafted with the essence of a lost civilization, it boasts overwhelming defensive power and is capable of withstanding cataclysmic threats."
+  },
+  "AncientArmorCold": {
+    "localized_name": "Cold-Resistant Ancient Armor",
+    "description": "Refined Ancient Armor. Its cold resistance has been further enhanced using ancient technology, allowing the wearer to maintain their strength even in extreme cold regions."
+  },
+  "AncientArmorHeat": {
+    "localized_name": "Heat-Resistant Ancient Armor",
+    "description": "Refined Ancient Armor. Its heat resistance has been further enhanced using ancient technology, allowing it to endure scorching environments"
+  },
+  "AncientArmorWeight": {
+    "localized_name": "Lightweight Ancient Armor",
+    "description": "Refined Ancient Armor. It is equipped with ancient auxiliary mechanisms, allowing the wearer to carry more supplies."
+  },
+  "AncientBlastFurnace": {
+    "localized_name": "Ancient Furnace",
+    "description": "A special furnace based on ancient technology that can smelt all types of ingots. Materials are melted with fire, then quickly cooled and solidified using ice. It requires Pals with high-level Kindling and Cooling suitability."
+  },
+  "AncientCookingStove": {
+    "localized_name": "Ancient Kitchen",
+    "description": "A special kitchen based on ancient technology that can create everything from existing dishes to entirely new recipes. It retains heat through fire and completes cooking with manual preparation, allowing it to prepare any kind of cuisine. It requires Pals with high-level Kindling and Handiwork suitability."
+  },
+  "AncientElectricGenerator": {
+    "localized_name": "Ancient Power Generator",
+    "description": "A highly efficient power generator restored from lost ancient technology. It produces massive amounts of electricity, but is prone to overheating while in operation. It requires Pals with high-level Generating Electricity and any level of Watering suitability."
+  },
+  "AncientFarmBlock": {
+    "localized_name": "Ancient Farm",
+    "description": "A special cultivation device based on ancient technology that harnesses the power of the World Tree to grow all kinds of plants on Palpagos Island. Smaller than a berry plantation and suitable for indoor placement, it still follows the same cultivation process as standard plots. It requires Pals with high-level Planting, Watering, and Harvesting suitability."
+  },
+  "AncientHelmet": {
+    "localized_name": "Ancient Helm",
+    "description": "An ancient helmet forged from Soralite Ingot. It is imbued with wisdom passed down through the ages, protecting its wearer with unwavering strength. Its defensive capabilities far surpass those of modern equipment."
+  },
+  "AncientMultiProduct": {
+    "localized_name": "Ancient Material Synthesizer",
+    "description": "A special generator based on ancient technology that uses the power of the World Tree to produce all kinds of wood and ore. Due to its complex structure, only one Pal can be assigned to it."
+  },
+  "AncientRelicRecycler": {
+    "localized_name": "Ancient Relic Recycler",
+    "description": null
+  },
+  "AncientWorkBench": {
+    "localized_name": "Ancient Workbench",
+    "description": "A Pal-exclusive workbench that is capable of crafting any item in one place. It cannot be used by the player, and operates at the same speed as a regular workbench. Due to its advanced equipment, it requires Pals with high-level Handiwork and Medicine Production suitability."
+  },
+  "Ancient_Clinic": {
+    "localized_name": "Ancient Clinic",
+    "description": null
+  },
+  "Ancient_Houseset": {
+    "localized_name": "Ancient Structure Set",
+    "description": "Set for building bases using ancient architecture. Allows building of ancient-styled foundations, walls, ceilings, stairs and other things necessary for shelters."
+  },
+  "Ancient_MedicalPalBed": {
+    "localized_name": "Ancient Pal Bed",
+    "description": null
+  },
+  "Ancient_Spa": {
+    "localized_name": "Ancient Hot Spring",
+    "description": null
+  },
   "Arrow": {
     "localized_name": "Arrow",
-    "description": "Used with Old Bow. Requires Primitive Workbench to craft."
+    "description": "Arrows for use with bows. Can be crafted at Primitive Workbench."
   },
   "Arrow_Fire": {
     "localized_name": "Fire Arrow",
-    "description": "Arrows for shooting with Fire Bow and Fire Arrow Crossbow. Deals Fire damage. Requires Primitive Workbench to craft."
+    "description": "Fire Arrows for use with bows. Deals <img id=|ElemIcon_Fire|/><uiCommon id=|COMMON_ELEMENT_NAME_Fire| style=|Elem_Fire|/> damage on contact. Can be crafted at Primitive Workbench."
   },
   "Arrow_Poison": {
     "localized_name": "Poison Arrow",
-    "description": "Arrows for shooting with Poison Bow and Poison Arrow Crossbow. It poisons any target it hits. Requires Primitive Workbench to craft."
+    "description": "Poison Arrows for use with bows. Afflicts target with <uiCommon id=|ADDITIONAL_EFFECT_Poison| style=|Effect_Poison|/> on contact. Can be crafted at Primitive Workbench."
   },
   "AssaultRifleBullet": {
     "localized_name": "Assault Rifle Ammo",
-    "description": "Ammo for Assault Rifle and other similar weapons. Requires Weapon Assembly Line to craft."
+    "description": "Ammo for the Assault Rifle and similar weapons. Can be crafted at Weapon Assembly Line."
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "Small Feed Bag",
@@ -99,85 +171,97 @@
     "localized_name": "Monitoring Stand",
     "description": "Command your Pals to work on various things inside a base. You can allow or prohibit individual kinds of work."
   },
+  "BaseCampWorkHard02": {
+    "localized_name": "High Quality Monitoring Stand",
+    "description": null
+  },
+  "BaseCampWorkHard03": {
+    "localized_name": "Ancient Monitoring Stand",
+    "description": null
+  },
   "BaseCampWorkerExtraStation": {
     "localized_name": "Palbox Control Device",
     "description": null
   },
+  "Bat3": {
+    "localized_name": "Metal Bat",
+    "description": null
+  },
   "Battle_Armor_Grade_01_Cloth": {
     "localized_name": "Cloth Outfit",
-    "description": "Protects against cold nights. Requires Primitive Workbench to craft."
+    "description": "Clothes made from Cloth. Protects against cold nights. Can be crafted at Primitive Workbench."
   },
   "Battle_Armor_Grade_01_Cloth_Cold": {
     "localized_name": "Tundra Outfit",
-    "description": "Cloth Outfit produced in cold regions. Useful for surviving in cold climates. Requires Primitive Workbench to craft."
+    "description": "A Cloth Outfit produced in cold regions. Useful for surviving in cold climates. Can be crafted at Primitive Workbench."
   },
   "Battle_Armor_Grade_01_Cloth_Heat": {
     "localized_name": "Tropical Outfit",
-    "description": "Cloth Outfit produced in hot regions. Boasts high heat resistance. Requires Primitive Workbench to craft."
+    "description": "A Cloth Outfit produced in hot regions. Boasts high heat resistance. Can be crafted at Primitive Workbench."
   },
   "Battle_Armor_Grade_02_Fur": {
     "localized_name": "Pelt Armor",
-    "description": "Armor made from Leather. Its warmth and defense have been improved. Requires High-Quality Workbench to craft."
+    "description": "Armor made from Leather. Its warmth and defense have been improved. Can be crafted at High-Quality Workbench."
   },
   "Battle_Armor_Grade_02_Fur_Cold": {
     "localized_name": "Cold Resistant Pelt Armor",
-    "description": "Pelt Armor produced in cold regions. Useful for surviving in cold climates. Requires High-Quality Workbench to craft."
+    "description": "A Pelt Armor produced in cold regions. Useful for surviving in cold climates. Can be crafted at High-Quality Workbench."
   },
   "Battle_Armor_Grade_02_Fur_Heat": {
     "localized_name": "Heat Resistant Pelt Armor",
-    "description": "Pelt Armor produced in hot regions. Boasts high heat resistance. Requires High-Quality Workbench to craft."
+    "description": "A Pelt Armor produced in hot regions. Boasts high heat resistance. Can be crafted at High-Quality Workbench."
   },
   "Battle_Armor_Grade_03_Copper": {
     "localized_name": "Metal Armor",
-    "description": "Armor made of metal. Somewhat heavy, but provides good defense. Requires High-Quality Workbench to craft."
+    "description": "Armor made of metal. Somewhat heavy, but provides good defense. Can be crafted at High-Quality Workbench."
   },
   "Battle_Armor_Grade_03_Copper_Cold": {
     "localized_name": "Cold Resistant Metal Armor",
-    "description": "Improved Metal Armor. Useful for surviving in cold climates. Requires High-Quality Workbench to craft."
+    "description": "Improved Metal Armor. Useful for surviving in cold climates. Can be crafted at High-Quality Workbench."
   },
   "Battle_Armor_Grade_03_Copper_Heat": {
     "localized_name": "Heat Resistant Metal Armor",
-    "description": "Improved Metal Armor. Boasts high heat resistance. Requires High-Quality Workbench to craft."
+    "description": "Improved Metal Armor. Boasts high heat resistance. Can be crafted at High-Quality Workbench."
   },
   "Battle_Armor_Grade_03_Iron": {
     "localized_name": "Refined Metal Armor",
-    "description": "Armor made from high quality metal. Quite heavy, but provides excellent defense. Requires Production Assembly Line to craft."
+    "description": "Armor made from high quality metal. Quite heavy, but provides excellent defense. Can be crafted at Production Assembly Line."
   },
   "Battle_Armor_Grade_03_Iron_Cold": {
     "localized_name": "Cold Resistant Refined Metal Armor",
-    "description": "Improved Refined Metal Armor. Useful for surviving in cold climates. Requires Production Assembly Line to craft."
+    "description": "Improved Refined Metal Armor. Useful for surviving in cold climates. Can be crafted at Production Assembly Line."
   },
   "Battle_Armor_Grade_03_Iron_Heat": {
     "localized_name": "Heat Resistant Refined Metal Armor",
-    "description": "Improved Refined Metal Armor. Boasts high heat resistance. Requires Production Assembly Line to craft."
+    "description": "Improved Refined Metal Armor. Boasts high heat resistance. Can be crafted at Production Assembly Line."
   },
   "Battle_Armor_Grade_04_Steal": {
     "localized_name": "Pal Metal Armor",
-    "description": "Armor fully utilizing the latest technology. Boasts overwhelming defense. Requires Production Assembly Line II to craft."
+    "description": "Armor made from Pal Metal Ingot. High defense, but extremely heavy. Can be crafted at Production Assembly Line II."
   },
   "Battle_Armor_Grade_04_Steal_Cold": {
     "localized_name": "Cold Resistant Pal Metal Armor",
-    "description": "Improved Pal Metal Armor. Useful for surviving in cold climates. Requires Production Assembly Line II to craft."
+    "description": "Improved Pal Metal Armor. Useful for surviving in cold climates. Can be crafted at Production Assembly Line II."
   },
   "Battle_Armor_Grade_04_Steal_Heat": {
     "localized_name": "Heat Resistant Pal Metal Armor",
-    "description": "Improved Pal Metal Armor. Boasts high heat resistance. Requires Production Assembly Line II to craft."
+    "description": "Improved Pal Metal Armor. Boasts high heat resistance. Can be crafted at Production Assembly Line II."
   },
   "Battle_Armor_Grade_05_Plastic": {
     "localized_name": "Plasteel Armor",
-    "description": "Armor developed by pushing the edge of technology. Boasts unparalleled defense. Requires Production Assembly Line II to craft."
+    "description": "Armor made of Plasteel. In addition to enhanced defense capabilities, its weight was also reduced. Can be crafted at Production Assembly Line II."
   },
   "Battle_Armor_Grade_05_Plastic_Cold": {
     "localized_name": "Cold Resistant Plasteel Armor",
-    "description": "Improved Plasteel Armor. Useful for surviving in cold climates. Requires Production Assembly Line II to craft."
+    "description": "Improved Plasteel Armor. Useful for surviving in cold climates. Can be crafted at Production Assembly Line II."
   },
   "Battle_Armor_Grade_05_Plastic_Heat": {
     "localized_name": "Heat Resistant Plasteel Armor",
-    "description": "Improved Plasteel Armor. Boasts high heat resistance. Requires Production Assembly Line II to craft."
+    "description": "Improved Plasteel Armor. Boasts high heat resistance. Can be crafted at Production Assembly Line II."
   },
   "Battle_Armor_Grade_05_Plastic_Weight": {
     "localized_name": "Lightweight Plasteel Armor",
-    "description": "Improved Plasteel Armor. Increases carrying capacity. Requires Production Assembly Line II to craft."
+    "description": "Improved Plasteel Armor. Increases carrying capacity. Can be crafted at Production Assembly Line II."
   },
   "Battle_Cloth": {
     "localized_name": "Cloth",
@@ -217,23 +301,23 @@
   },
   "Battle_Helm_Grade_02_Fur": {
     "localized_name": "Feathered Hair Band",
-    "description": "A beautiful feathered headband. Though improbable, it somehow protects its wearer from lethal head injuries. Requires Workbench to craft."
+    "description": "A beautiful feathered headband. Though improbable, it somehow seems to protect its wearer from lethal head injuries. Can be crafted at Workbench."
   },
   "Battle_Helm_Grade_03_Copper": {
     "localized_name": "Metal Helm",
-    "description": "A helm made of metal. A reliable piece of armor that protects your head, and all the thoughts within. Requires High-Quality Workbench to craft."
+    "description": "A helm made of metal. A reliable piece of armor that protects your head, and all the thoughts within. Can be crafted at High-Quality Workbench."
   },
   "Battle_Helm_Grade_04_Iron": {
     "localized_name": "Refined Metal Helm",
-    "description": "A helm made from high quality metal. Its sheen gives the wearer a greater sense of confidence. Requires Production Assembly Line to craft."
+    "description": "A helm made from high quality metal. The luster from the polished metal gives the wearer that added boost of confidence. Can be crafted at Production Assembly Line."
   },
   "Battle_Helm_Grade_05_Steal": {
     "localized_name": "Pal Metal Helm",
-    "description": "A helm made from Pal Metal Ingot. Envied for its immaculate quality, it is proof of a chosen warrior. Requires Production Assembly Line II to craft."
+    "description": "A helm made from Pal Metal Ingot. Envied for its immaculate quality, it is proof of a chosen warrior. Can be crafted at Production Assembly Line II."
   },
   "Battle_Helm_Grade_06_Plastic": {
     "localized_name": "Plasteel Helmet",
-    "description": "Helmet made of Plasteel. In addition to enhanced defense capabilities, its weight was also reduced. Requires Production Assembly Line II to craft."
+    "description": "Helmet made of Plasteel. In addition to enhanced defense capabilities, its weight was also reduced. Can be crafted at Production Assembly Line II."
   },
   "Battle_MeleeWeapon_Axe_Steal": {
     "localized_name": "Pal Metal Axe",
@@ -253,15 +337,15 @@
   },
   "Battle_MeleeWeapon_Sword": {
     "localized_name": "Sword",
-    "description": "Sword for close-range combat. The blade is extremely sharp! Mightier than a pen, for sure. Requires Weapon Workbench to craft."
+    "description": "Sword for close-range combat. The blade is extremely sharp! Mightier than a pen, for sure. Can be crafted at Weapon Workbench."
   },
   "Battle_RangeWeapon_AssaultRifle": {
     "localized_name": "Assault Rifle",
-    "description": "Mows down enemies with overwhelming force. It excels at rapid-fire and is well suited to taking down powerful foes. Crafted at Weapon Assembly Line."
+    "description": "An Assault Rifle that mows down enemies with overwhelming force. It excels at rapid-fire and is well suited to taking down powerful foes. Can be crafted at Weapon Assembly Line."
   },
   "Battle_RangeWeapon_Bow1": {
     "localized_name": "Old Bow",
-    "description": "Primitive long range weapon. Requires Primitive Workbench to craft."
+    "description": "Primitive long-range weapon. Hastily put together, it isn't very powerful. Can be crafted at Primitive Workbench."
   },
   "Battle_RangeWeapon_Bow3": {
     "localized_name": "Three Shot Bow",
@@ -269,23 +353,7 @@
   },
   "Battle_RangeWeapon_BowGun": {
     "localized_name": "Crossbow",
-    "description": "Fires an Arrow effortlessly. Though it takes time to load, it delivers a powerful shot. Requires High-Quality Workbench to craft."
-  },
-  "Battle_RangeWeapon_BowGun_Fire": {
-    "localized_name": "Fire Arrow Crossbow",
-    "description": "A Crossbow that deals Fire damage. Requires Fire Arrow. Requires Weapon Workbench to craft."
-  },
-  "Battle_RangeWeapon_BowGun_Poison": {
-    "localized_name": "Poison Arrow Crossbow",
-    "description": "A Crossbow that inflicts poison on its target. Requires Poison Arrow. Requires Weapon Workbench to craft."
-  },
-  "Battle_RangeWeapon_Bow_Fire": {
-    "localized_name": "Fire Bow",
-    "description": "A bow that deals Fire damage. Burns Pals with fire arrows, making them easier to capture. Requires Fire Arrow."
-  },
-  "Battle_RangeWeapon_Bow_Poison": {
-    "localized_name": "Poison Bow",
-    "description": "Frightening bow that poisons its target. Poisoned Pals are easier to capture. Requires Poison Arrow."
+    "description": "Fires an Arrow effortlessly. Though it takes time to load, it delivers a powerful shot. Can be crafted at High-Quality Workbench."
   },
   "Battle_RangeWeapon_CompoundBow": {
     "localized_name": "Compound Bow",
@@ -293,19 +361,19 @@
   },
   "Battle_RangeWeapon_FlameThrower": {
     "localized_name": "FlameThrower",
-    "description": "Flamethrower that fires long-range flame. Can set the enemy on fire. Crafted at Weapon Assembly Line II."
+    "description": "Flamethrower that fires long-range flames. Can set the enemy on fire. Can be crafted at Weapon Assembly Line II."
   },
   "Battle_RangeWeapon_GatlingGun": {
     "localized_name": "Gatling Gun",
-    "description": "A Gatling Gun capable of rapid fire. Mows down enemies with suppressive fire. Crafted at Weapon Assembly Line II."
+    "description": "A Gatling Gun capable of rapid fire. Mows down enemies with suppressive shots. Can be crafted at Weapon Assembly Line II."
   },
   "Battle_RangeWeapon_GrenadeLauncher": {
     "localized_name": "Grenade Launcher",
-    "description": "Fires grenades that cause wide-ranging explosions. Useful when dealing with a large number of enemies. Crafted at Weapon Assembly Line II"
+    "description": "Fires grenades that cause wide-ranging explosions. Useful when dealing with a large number of enemies. Can be crafted at Weapon Assembly Line II."
   },
   "Battle_RangeWeapon_GuidedMissileLauncher": {
     "localized_name": "Guided Missile Launcher",
-    "description": "Fires missiles that automatically track and pursue enemies. Missiles explode upon impact, causing damage over a wide area."
+    "description": "Fires missiles that automatically track and pursue enemies. Missiles explode upon impact, causing damage over a wide area. Can be crafted at Weapon Assembly Line II."
   },
   "Battle_RangeWeapon_HandGun": {
     "localized_name": "Handgun",
@@ -313,11 +381,11 @@
   },
   "Battle_RangeWeapon_HomingSphereLauncher": {
     "localized_name": "Homing Sphere Launcher",
-    "description": "Fires Pal Spheres that automatically home in on Pals. Requires Weapon Assembly Line II to craft."
+    "description": "A launcher for firing spheres. Fired spheres home in on Pals. Can be crafted at Weapon Assembly Line II."
   },
   "Battle_RangeWeapon_LaserRifle": {
     "localized_name": "Laser Rifle",
-    "description": "A weapon that fires high-energy lasers. It has impressive firepower and is easy to handle. Crafted at Weapon Assembly Line II."
+    "description": "A weapon that fires high-energy lasers. It has impressive firepower and is easy to handle. Can be crafted at Weapon Assembly Line II."
   },
   "Battle_RangeWeapon_OldRevolver": {
     "localized_name": "Old Revolver",
@@ -329,7 +397,7 @@
   },
   "Battle_RangeWeapon_RocketLauncher": {
     "localized_name": "Rocket Launcher",
-    "description": "A Rocket Launcher that can fire a powerful round from long distances. Requires Weapon Assembly Line II to craft."
+    "description": "A Rocket Launcher that can fire a powerful round from long distances. Can be crafted at Weapon Assembly Line II."
   },
   "Battle_RangeWeapon_SemiAutoRifle": {
     "localized_name": "Semi-Auto Rifle",
@@ -345,19 +413,27 @@
   },
   "Battle_RangeWeapon_ShotGun_Multi": {
     "localized_name": "Pump-Action Shotgun",
-    "description": "A high capacity, powerful shotgun. It has outstanding close range DPS. Crafted at Weapon Assembly Line."
+    "description": "A high capacity, powerful shotgun. It has outstanding close range DPS. Can be crafted at Weapon Assembly Line."
   },
   "Battle_RangeWeapon_SphereLauncher": {
     "localized_name": "Scatter Sphere Launcher",
-    "description": "Innovative launcher that fires many Spheres simultaneously. Can easily capture a herd of Pals. Requires Weapon Assembly Line to craft."
+    "description": "A new type of launcher that fires a large number of spheres. It can easily capture a herd of Pals. Can be crafted at Weapon Assembly Line."
   },
   "Battle_RangeWeapon_SphereLauncher_Once": {
     "localized_name": "Single-Shot Sphere Launcher",
-    "description": "Can capture distant Pals. Requires Weapon Workbench to craft."
+    "description": "A launcher that fires spheres. It can capture Pals from a greater distance. Can be crafted at Weapon Workbench."
   },
   "Battle_RangeWeapon_SubmachineGun": {
     "localized_name": "SMG",
     "description": "A submachine gun with exceptional rate of fire. It’s easy to handle and effective in close-range combat."
+  },
+  "BeamLauncher": {
+    "localized_name": "Beam Launcher",
+    "description": "Fires a high-density beam that causes explosions over a wide area. Caution is required to prevent overheating during rapid fire."
+  },
+  "BeamLauncherBullet": {
+    "localized_name": "Beam Launcher Ammo",
+    "description": null
   },
   "BeamSword": {
     "localized_name": "Beam Sword",
@@ -367,6 +443,14 @@
     "localized_name": "Free Pal Alliance Flag Set",
     "description": "Free Pal Alliance Standard and Free Pal Alliance Vertical Banner set. Proof of your victory over the Free Pal Alliance."
   },
+  "Bio_Battery": {
+    "localized_name": "Bio Battery",
+    "description": null
+  },
+  "Bio_Coolant": {
+    "localized_name": "Cryogenic Coolant",
+    "description": null
+  },
   "BlastFurnace4": {
     "localized_name": "Gigantic Furnace",
     "description": "Allows refinement of Hexolite. By growing in size, multiple Pals can collaborate to perform smelting. Requires a Fire Pal to light a flame."
@@ -375,9 +459,29 @@
     "localized_name": "Breeding Farm",
     "description": "Assign a male and a female Pal to produce eggs. Cake is required for breeding."
   },
+  "BronzeSword": {
+    "localized_name": "Primitive Sword",
+    "description": "A sword for close-range combat. Not bad for a battered sword. Perfect for getting up close and personal."
+  },
   "BuildableGoddessStatue": {
     "localized_name": "Statue of Power",
     "description": "Make offerings to enhance the stats of the Player and their Pals."
+  },
+  "Cake02": {
+    "localized_name": "Mushroom Cake",
+    "description": null
+  },
+  "Cake03": {
+    "localized_name": "Vegetable Cake",
+    "description": null
+  },
+  "Cake04": {
+    "localized_name": "Extravagant Vegetable Cake",
+    "description": null
+  },
+  "Cake05": {
+    "localized_name": "Special Cake",
+    "description": null
   },
   "CarbonFiber": {
     "localized_name": "Carbon Fiber",
@@ -403,6 +507,10 @@
     "localized_name": "Charge Rifle Ammo",
     "description": "en text"
   },
+  "Clinic": {
+    "localized_name": "Clinic",
+    "description": null
+  },
   "Cloth2": {
     "localized_name": "High Quality Cloth",
     "description": "Woven from large amounts of Wool. Required to create high quality armor. Can be made at High-Quality Workbench."
@@ -410,6 +518,10 @@
   "CompositeDesk": {
     "localized_name": "Drafting Table",
     "description": "A facility that lets you combine multiple schematics to create more advanced ones."
+  },
+  "Computer": {
+    "localized_name": "Computer",
+    "description": "Computer"
   },
   "Cooler": {
     "localized_name": "Cooler",
@@ -423,6 +535,10 @@
     "localized_name": "Cold Food Box",
     "description": "A feeding box that can be kept cold. Assign an Ice Pal to it and the food inside will be less likely to spoil."
   },
+  "Corrosive_Solvent": {
+    "localized_name": "Corrosive Solvent",
+    "description": null
+  },
   "Crusher": {
     "localized_name": "Crusher",
     "description": "Facility for breaking down Stone and Wood to exchange them for other materials. Requires Pal with the Watering suitability to spin the water turbine."
@@ -434,6 +550,10 @@
   "DamagedScarecrow": {
     "localized_name": "Training Dummy",
     "description": "Training dummy shaped like a Pengullet."
+  },
+  "DarkIslandFlagSet": {
+    "localized_name": "Feybreak Flag Set",
+    "description": "Feybreak Flag and Feybreak Banner set. Proof of your victory over the Feybreak."
   },
   "DecalGunSet": {
     "localized_name": "Decal Gun Set",
@@ -467,9 +587,21 @@
     "localized_name": "Viewing Cage",
     "description": "Container for observing captured Pals. Pals inside cannot participate in battle or production, but they do not become hungry."
   },
+  "DroneLauncher": {
+    "localized_name": "Drone Launcher",
+    "description": "A launcher that fires drones which perform autonomous attacks. Capable of deploying up to 9 units, enabling sustained suppression."
+  },
   "ElecBaton": {
     "localized_name": "Stun Baton",
-    "description": "Close range weapon that sends out an electric jolt upon contact. Pals are easier to capture when electrocuted. Requires High-Quality Workbench to craft."
+    "description": "Close range weapon that sends out an electric jolt upon contact. Pals are easier to capture when electrocuted. Can be crafted at High-Quality Workbench."
+  },
+  "ElectricArcAssaultRifle": {
+    "localized_name": "Plasma Rifle",
+    "description": "A rifle that releases an electrical discharge from the point of impact, which chains to multiple enemies."
+  },
+  "ElectricArcAssaultRifleBullet": {
+    "localized_name": "Plasma Rifle Ammo",
+    "description": null
   },
   "ElectricCooler": {
     "localized_name": "Electric Cooler",
@@ -743,6 +875,42 @@
     "localized_name": "Japanese-Style Furniture Set",
     "description": "Japanese-style decorative furniture set. Transform your base into a traditional Japanese haven."
   },
+  "FurnitureTree_Bamboo": {
+    "localized_name": "Faux Bamboo Set",
+    "description": "A decorative artificial bamboo set. Use them to create a Bamboo Grove-inspired base. No materials can be obtained from this structure."
+  },
+  "FurnitureTree_Cherry": {
+    "localized_name": "Faux Cherry Blossoms Set",
+    "description": "A decorative artificial cherry blossom tree set. Use them to create a Sakurajima-inspired base. No materials can be obtained from this structure."
+  },
+  "FurnitureTree_Desert": {
+    "localized_name": "Faux Desert Greenery Set",
+    "description": "A decorative artificial desert tree set. Use them to create a oasis-inspired base. No materials can be obtained from this structure."
+  },
+  "FurnitureTree_Green": {
+    "localized_name": "Faux Greenery Set",
+    "description": "A decorative artificial tree set. Use them to create a natural-looking base. No materials can be obtained from this structure."
+  },
+  "FurnitureTree_Red": {
+    "localized_name": "Faux Crimson Foliage Set",
+    "description": "A decorative artificial autumn tree set. Use them to create a natural-looking base. No materials can be obtained from this structure."
+  },
+  "FurnitureTree_Snow": {
+    "localized_name": "Faux Snowy Greenery Set",
+    "description": "A decorative artificial snow-covered tree set. Use them to create a winte-inspired base. No materials can be obtained from this structure."
+  },
+  "FurnitureTree_Tropical": {
+    "localized_name": "Faux Tropical Greenery Set",
+    "description": "A decorative artificial tropical tree set. Use them to create a tropical-inspired base. No materials can be obtained from this structure."
+  },
+  "FurnitureTree_Yellow": {
+    "localized_name": "Faux Golden Foliage Set",
+    "description": "A decorative artificial yellow autumn tree set. Use them to create a natural-looking base. No materials can be obtained from this structure."
+  },
+  "GasMask": {
+    "localized_name": "Corrosive Mist Mask",
+    "description": "Gas Mask"
+  },
   "GatlingBullet": {
     "localized_name": "Gatling Gun Ammo",
     "description": "Ammo for the Gatling Gun and similar weapons."
@@ -785,11 +953,11 @@
   },
   "HandTorch": {
     "localized_name": "Hand-Held Torch",
-    "description": "Lights up dark areas and keeps you warm. Can also be used for close range combat in a pinch. Crafts Hand-Held Torch atPrimitive Workbench."
+    "description": "Lights up dark areas and keeps you warm. Can also be used for close-range combat in a pinch. Can be crafted at Primitive Workbench."
   },
   "HandgunBullet": {
     "localized_name": "Handgun Ammo",
-    "description": "Ammo for Handgun and other similar weapons. Requires Weapon Workbench to craft."
+    "description": "Ammo for the Handgun and similar weapons. Can be crafted at Weapon Workbench."
   },
   "Headstone": {
     "localized_name": "Tombstone",
@@ -798,6 +966,10 @@
   "Heater": {
     "localized_name": "Heater",
     "description": "Warms the nearby area and protects against the cold."
+  },
+  "HighGrade_Processed_Wood": {
+    "localized_name": "High Quality Wooden Board",
+    "description": null
   },
   "Homeward": {
     "localized_name": "Homeward Thundercloud",
@@ -812,8 +984,12 @@
     "description": "Rayne Syndicate Standard and Rayne Syndicate Vertical Banner set. Proof of your victory over the Rayne Syndicate."
   },
   "IceCrusher": {
-    "localized_name": "Refrigerated Crusher",
+    "localized_name": "Cryogenic Crusher",
     "description": "Facility that crushes Ore and converts it into other materials. Requires a power supply and a Pal with Cooling suitability, but it's very efficient."
+  },
+  "IceHorseStatue": {
+    "localized_name": "Frostallion Statue",
+    "description": null
   },
   "Infra_ElectricGenerator_Grade_01": {
     "localized_name": "Power Generator",
@@ -841,7 +1017,7 @@
   },
   "Infra_PalBed_Grade_01": {
     "localized_name": "Straw Pal Bed",
-    "description": "Pals at base recover SAN when sleeping in beds at night. Without a bed, Pals cannot sleep soundly, and no SAN is recovered."
+    "description": "Pals at base recover SAN when sleeping in beds at night. Without a Pal Bed, Pals cannot sleep soundly, and no SAN is recovered."
   },
   "Infra_PalBed_Grade_02": {
     "localized_name": "Fluffy Pal Bed",
@@ -867,12 +1043,16 @@
     "localized_name": "Japanese-Style Structure Set",
     "description": "Set for building bases using Japanese-style architecture. Allows building of Japanese-style foundations, walls, ceilings, stairs and other things necessary for shelters."
   },
+  "JetDragonStatue": {
+    "localized_name": "Jetragon Statue",
+    "description": null
+  },
   "Katana": {
     "localized_name": "Katana",
     "description": "Katana for close-range combat. Slices through with razor-sharp precision, cutting cleanly in one strike."
   },
   "Lab": {
-    "localized_name": "Pal Labor Research Laboratory",
+    "localized_name": "Pal Labor Research Lab",
     "description": "A facility for conducting research on the various tasks of Pals. By assigning tasks to Pals in this facility, research progresses, granting various benefits."
   },
   "Lamp": {
@@ -907,13 +1087,17 @@
     "localized_name": "Laser Gatling Gun",
     "description": "Fires beam-like energy blasts at high speed. Its overwhelming firepower can take down multple enemies at once."
   },
+  "LaserMiningTool": {
+    "localized_name": "Plasma Multicutter",
+    "description": "A portable plasma cutter that concentrates and emits plasma energy. It supports a wide range of uses, from ore excavation to tree cutting. Its high-output energy also allows for the mining of special ores."
+  },
   "LauncherBullet": {
     "localized_name": "Rocket Ammo",
-    "description": "Ammo for the Rocket Launcher and other similar weapons. Requires Weapon Assembly Line II to craft."
+    "description": "Ammo for the Rocket Launcher and similar weapons. Can be crafted at Weapon Assembly Line II."
   },
   "Launcher_Meteor": {
     "localized_name": "Meteor Launcher",
-    "description": "A phenomenal weapon that fires a meteor. Upon striking its target, it creates an explosion similar to a meteorite impact. Crafted at Weapon Assembly Line."
+    "description": "A phenomenal weapon that fires a meteor. Upon striking its target, it creates an explosion similar to a meteorite impact. Can be crafted at Weapon Assembly Line."
   },
   "MakeshiftAssaultRifle": {
     "localized_name": "Makeshift Assault Rifle",
@@ -983,13 +1167,17 @@
     "localized_name": "Large-Scale Electric Egg Incubator",
     "description": "Device for incubating Pal eggs. While power supply is required, it allows multiple eggs to be incubated simultaneously at the optimal temperature."
   },
+  "MultiElectricHatchingPalEggWithBreed": {
+    "localized_name": "Ancient Hatchery",
+    "description": null
+  },
   "MultiHatchingPalEgg": {
     "localized_name": "Large Incubator",
     "description": null
   },
   "Musket": {
     "localized_name": "Musket",
-    "description": "Simple, old fashioned gun. Fires a single, powerful shot at the expense of a long reload time. Requires Weapon Workbench to craft."
+    "description": "Simple, old-fashioned gun. Fires a single, powerful shot at the expense of a long reload time. Can be crafted at Weapon Workbench."
   },
   "NinjaFlagSet": {
     "localized_name": "Moonflower Flag Set",
@@ -1006,6 +1194,10 @@
   "OilPump": {
     "localized_name": "Crude Oil Extractor",
     "description": "Equipment required to extract Crude Oil from oil fields. Requires a power supply to operate."
+  },
+  "OilPump02": {
+    "localized_name": "High-Pressure Crude Oil Extractor",
+    "description": null
   },
   "OlympicCauldron": {
     "localized_name": "Flame Cauldron",
@@ -1059,6 +1251,14 @@
     "localized_name": "Revival Potion",
     "description": "A potion that revives a Pal that has been injured and is unable to move."
   },
+  "PalSphere_Ancient_1": {
+    "localized_name": "Sol Sphere",
+    "description": "An item that captures Pals when thrown. A high-grade Sphere from an ancient civilization that secured coexistence with Pals."
+  },
+  "PalSphere_Ancient_2": {
+    "localized_name": "Ancient Sphere",
+    "description": "A tool that captures Pals when thrown. An ultimate Sphere created as the pinnacle of an ancient civilization, imbued with the power of the World Tree."
+  },
   "PalSphere_Exotic": {
     "localized_name": "Exotic Sphere",
     "description": "An item that captures Pals when thrown. Boasting incredible performance, it can capture Pals that fall outside regular standards."
@@ -1079,20 +1279,24 @@
     "localized_name": "Advanced Recovery Meds",
     "description": "Medicine that heals wounds over time. Extremely high quality, it rapidly restores HP before your eyes."
   },
+  "Processed_Wood": {
+    "localized_name": "Wooden Board",
+    "description": null
+  },
   "Product_Axe_Grade_01": {
     "localized_name": "Stone Axe",
     "description": "An axe for cutting wood. Made from stone, it's not very sharp."
   },
   "Product_Axe_Grade_02": {
     "localized_name": "Metal Axe",
-    "description": "An axe for cutting wood. Made from metal, its sharpness has improved. Requires High-Quality Workbench to craft."
+    "description": "A metal axe capable of cutting down even hard trees. Effective against the sturdy trees that grow deep within the continent. Can be crafted at High-Quality Workbench."
   },
   "Product_Axe_Grade_03": {
     "localized_name": "Refined Metal Axe",
-    "description": "An axe for cutting wood. Made from high quality metal, its sharpness has improved even further. Requires Production Assembly Line to craft."
+    "description": "An axe that can gather Hardwood from trees found in harsh environments such as deserts and volcanic areas. Can be crafted at Production Assembly Line."
   },
   "Product_CoalPit": {
-    "localized_name": "Coal Mine",
+    "localized_name": "Coal Quarry",
     "description": "Facility for producing Coal. Digging Coal is grueling physical work. Leave it to a Pal that is good at mining."
   },
   "Product_Cooking_Grade_01": {
@@ -1181,26 +1385,30 @@
   },
   "Product_Pickaxe_Grade_02": {
     "localized_name": "Metal Pickaxe",
-    "description": "A pickaxe used for mining. Made from metal, its durability and efficiency have improved. Requires High-Quality Workbench to craft."
+    "description": "A pickaxe used for mining. Made from metal, its durability and efficiency have improved. Can be crafted at High-Quality Workbench."
   },
   "Product_Pickaxe_Grade_03": {
     "localized_name": "Refined Metal Pickaxe",
-    "description": "A pickaxe used for mining. Its durability and efficiency have further improved. Requires Production Assembly Line to craft."
+    "description": "A pickaxe used for mining. Its durability and efficiency have further improved. Can be crafted at Production Assembly Line."
   },
   "Product_QuartzPit": {
-    "localized_name": "Pure Quartz Mine",
+    "localized_name": "Pure Quartz Quarry",
     "description": "A facility for producing Pure Quartz. Mining Pure Quartz is hard work that requires physical endurance. Leave it to Pals skilled at mining."
   },
   "Product_StationDeforest": {
     "localized_name": "Logging Site",
     "description": "Can produce wood at a base. Requires Pal with Lumbering suitability."
   },
+  "Product_StationDeforest2": {
+    "localized_name": "Logging Site II",
+    "description": null
+  },
   "Product_StonePit": {
     "localized_name": "Stone Pit",
     "description": "Can produce stone at a base. Requires Pal with Mining suitability."
   },
   "Product_SulfurPit": {
-    "localized_name": "Sulfur Mine",
+    "localized_name": "Sulfur Quarry",
     "description": "Facility for producing Sulfur. Digging Sulfur is grueling physical work. Leave it to a Pal that is good at mining."
   },
   "Product_WeaponFactory_Dirty_Grade_01": {
@@ -1231,17 +1439,13 @@
     "localized_name": "Repair Bench",
     "description": "Repairs damaged weapons and tools."
   },
-  "RepairKit": {
-    "localized_name": "Repair Kit",
-    "description": "Tools for repairing structures. Use it on destroyed structures to repair them."
-  },
   "RifleBullet": {
     "localized_name": "Rifle Ammo",
-    "description": "Ammo for Single-Shot Rifle and other similar weapons. Requires Weapon Workbench to craft."
+    "description": "Ammo for the Single-Shot Rifle and similar weapons. Can be crafted at Weapon Workbench."
   },
   "RoughBullet": {
     "localized_name": "Coarse Ammo",
-    "description": "Ammo for Musket, Makeshift Handgun and other similar weapons. Requires Weapon Workbench to craft."
+    "description": "Ammo for the Musket, Makeshift Handgun, and similar weapons. Can be crafted at Weapon Workbench."
   },
   "SFArmor": {
     "localized_name": "Hexolite Armor",
@@ -1307,13 +1511,17 @@
     "localized_name": "Ultra Shield",
     "description": "Strange shield made with Paldium technology. As a result of further experiments, ultimate quality has been achieved. Can be made at Production Assembly Line II."
   },
+  "Shield_07": {
+    "localized_name": "Ancient Shield",
+    "description": null
+  },
   "Shield_SF": {
     "localized_name": "Advanced Shield",
     "description": "Strange shield made with advanced technology. It automatically repair itself after not taking damage for a while."
   },
   "ShotGunBullet": {
     "localized_name": "Shotgun Shell",
-    "description": "Ammo for shotguns and other similar weapons. Requires Weapon Workbench to craft."
+    "description": "Ammo for shotguns and other similar weapons. Can be crafted at Weapon Workbench."
   },
   "Signboard": {
     "localized_name": "Sign",
@@ -1371,6 +1579,10 @@
     "localized_name": "Azurobe Cryst Saddle",
     "description": null
   },
+  "SkillUnlock_BlueSkyDragon": {
+    "localized_name": "Shaolong Saddle",
+    "description": null
+  },
   "SkillUnlock_BlueThunderHorse": {
     "localized_name": "Azurmane Saddle",
     "description": "Saddle for safely riding Azurmane."
@@ -1387,9 +1599,17 @@
     "localized_name": "Tocotoco's Gloves",
     "description": "Gloves for gently holding Tocotoco. Activate its Partner Skill to hold Tocotoco and use it to fire explosive eggs."
   },
+  "SkillUnlock_CubeTurtle": {
+    "localized_name": "Tetroise Saddle",
+    "description": null
+  },
+  "SkillUnlock_CubeTurtle_Neutral": {
+    "localized_name": "Tetroise Primo Saddle",
+    "description": null
+  },
   "SkillUnlock_DarkMechaDragon": {
     "localized_name": "Xenolord Saddle",
-    "description": "Saddle for safely riding Xenolord ."
+    "description": "Saddle for safely riding Xenolord."
   },
   "SkillUnlock_Deer": {
     "localized_name": "Eikthyrdeer Saddle",
@@ -1399,17 +1619,9 @@
     "localized_name": "Eikthyrdeer Terra Saddle",
     "description": "Saddle for safely riding Eikthyrdeer Terra."
   },
-  "SkillUnlock_DreamDemon": {
-    "localized_name": "Daedream's Necklace",
-    "description": "Collar for Daedream. If Daedream is in your team, it will stay by your side and attack enemies in tandem."
-  },
-  "SkillUnlock_DrillGame": {
-    "localized_name": "Digtoise's Headband",
-    "description": "Headband for Digtoise. Activate its Partner Skill to make Digtoise spin at high speed, allowing it to more efficiently drill through rock."
-  },
-  "SkillUnlock_Eagle": {
-    "localized_name": "Galeclaw's Gloves",
-    "description": "Gloves for gently holding on to Galeclaw's legs. If Galeclaw is in your team, it can be used as a glider."
+  "SkillUnlock_DomeArmorDragon": {
+    "localized_name": "Aegidron Saddle",
+    "description": null
   },
   "SkillUnlock_ElecPanda": {
     "localized_name": "Grizzbolt's Minigun",
@@ -1455,18 +1667,6 @@
     "localized_name": "Dinossom Lux Saddle",
     "description": "Saddle for safely riding Dinossom Lux."
   },
-  "SkillUnlock_FlowerRabbit": {
-    "localized_name": "Flopie's Necklace",
-    "description": "Collar for Flopie. If Flopie is in your team, it will stay by your side and automatically gather nearby items."
-  },
-  "SkillUnlock_FlyingManta": {
-    "localized_name": "Celaray's Gloves",
-    "description": "Gloves for gently holding on to Celaray's fins. If Celaray is in your team, it can be used as a glider."
-  },
-  "SkillUnlock_FlyingManta_Thunder": {
-    "localized_name": "Celaray Lux's Gloves",
-    "description": null
-  },
   "SkillUnlock_Garm": {
     "localized_name": "Direhowl's Saddled Harness",
     "description": "Saddle for safely riding Direhowl."
@@ -1483,9 +1683,25 @@
     "localized_name": "Maraith Saddle",
     "description": "Saddle for safely riding Maraith."
   },
+  "SkillUnlock_GhostDragon": {
+    "localized_name": "Eidrolon Saddle",
+    "description": null
+  },
+  "SkillUnlock_GhostDragon_Fire": {
+    "localized_name": "Eidrolon Ignis Saddle",
+    "description": null
+  },
   "SkillUnlock_GoldenHorse": {
     "localized_name": "Gildane Saddle",
     "description": "Saddle for safely riding Gildane."
+  },
+  "SkillUnlock_GrassGolem": {
+    "localized_name": "Dualith Saddle",
+    "description": null
+  },
+  "SkillUnlock_GrassGolem_Dark": {
+    "localized_name": "Dualith Noct Saddle",
+    "description": null
   },
   "SkillUnlock_GrassMammoth": {
     "localized_name": "Mammorest Saddle",
@@ -1519,14 +1735,6 @@
     "localized_name": "Nitewing Saddle",
     "description": "Saddle for safely riding Nitewing."
   },
-  "SkillUnlock_Hedgehog": {
-    "localized_name": "Jolthog's Gloves",
-    "description": "Rubber gloves for handling Jolthog. Activate its Partner Skill to throw Jolthog as a shock grenade."
-  },
-  "SkillUnlock_Hedgehog_Ice": {
-    "localized_name": "Jolthog Cryst's Gloves",
-    "description": "Rubber gloves for handling Jolthog Cryst. Activate its Partner Skill to throw Jolthog Cryst as an ice grenade."
-  },
   "SkillUnlock_Horus": {
     "localized_name": "Faleris Saddle",
     "description": "Saddle for safely riding Faleris."
@@ -1559,6 +1767,10 @@
     "localized_name": "Polapup Saddle",
     "description": null
   },
+  "SkillUnlock_IceSeal_Ground": {
+    "localized_name": "Polapup Terra Saddle",
+    "description": null
+  },
   "SkillUnlock_JetDragon": {
     "localized_name": "Jetragon's Missile Launcher",
     "description": "Makes Jetragon fire missiles when ridden."
@@ -1579,12 +1791,24 @@
     "localized_name": "Blazamut Ryu Saddle",
     "description": "Saddle for safely riding Blazamut Ryu."
   },
+  "SkillUnlock_KingSunfish": {
+    "localized_name": "Solmora Saddle",
+    "description": null
+  },
+  "SkillUnlock_KingSunfish_Thunder": {
+    "localized_name": "Solmora Lux Saddle",
+    "description": null
+  },
   "SkillUnlock_Kirin": {
     "localized_name": "Univolt Saddle",
     "description": "Saddle for safely riding Univolt."
   },
+  "SkillUnlock_Kirin_Ice": {
+    "localized_name": "Univolt Cryst Saddle",
+    "description": null
+  },
   "SkillUnlock_Kitsunebi": {
-    "localized_name": "Foxparks's Harness",
+    "localized_name": "Foxparks' Harness",
     "description": "Harness for holding Foxparks. Activate its Partner Skill to hold Foxparks and attack using it as a flamethrower."
   },
   "SkillUnlock_Kitsunebi_Ice": {
@@ -1592,19 +1816,19 @@
     "description": "Harness for holding Foxparks Cryst. Activate its Partner Skill to hold Foxparks Cryst and release freezing air to attack."
   },
   "SkillUnlock_LazyDragon": {
-    "localized_name": "Relaxaurus's Missile Launcher",
+    "localized_name": "Relaxaurus' Missile Launcher",
     "description": "Makes Relaxaurus fire a missile launcher when ridden."
   },
   "SkillUnlock_LazyDragon_Electric": {
     "localized_name": "Relaxaurus Lux's Missile Launcher",
     "description": "Makes Relaxaurus Lux fire a missile launcher when ridden."
   },
-  "SkillUnlock_LeafMomonga": {
-    "localized_name": "Herbil's Harness",
-    "description": null
-  },
   "SkillUnlock_LegendDeer": {
     "localized_name": "Hartalis Saddle",
+    "description": null
+  },
+  "SkillUnlock_LotusDragon": {
+    "localized_name": "Ophydia Saddle",
     "description": null
   },
   "SkillUnlock_Manticore": {
@@ -1618,6 +1842,10 @@
   "SkillUnlock_Monkey": {
     "localized_name": "Tanzee's Assault Rifle",
     "description": "Assault rifle made specifically for Tanzee. Activate its Partner Skill, and Tanzee will enter gunner mode and begin shooting at nearby enemies."
+  },
+  "SkillUnlock_Monkey_Fire": {
+    "localized_name": "Tanzee Ignis's Assault Rifle",
+    "description": null
   },
   "SkillUnlock_MoonQueen": {
     "localized_name": "Selyne Saddle",
@@ -1639,17 +1867,13 @@
     "localized_name": "Grintale Saddle",
     "description": "Saddle for safely riding Grintale."
   },
-  "SkillUnlock_NegativeOctopus": {
-    "localized_name": "Killamari's Gloves",
-    "description": "Gloves for gently holding on to Killamari's legs. If Killamari is in your team, it can be used as a glider."
-  },
-  "SkillUnlock_NegativeOctopus_Neutral": {
-    "localized_name": "Killamari Primo's Gloves",
-    "description": null
-  },
   "SkillUnlock_NightBlueHorse": {
     "localized_name": "Starryon Saddle",
     "description": "Saddle for safely riding Starryon."
+  },
+  "SkillUnlock_NightBlueHorse_Neutral": {
+    "localized_name": "Starryon Primo Saddle",
+    "description": null
   },
   "SkillUnlock_Penguin": {
     "localized_name": "Pengullet Rocket Launcher",
@@ -1670,14 +1894,6 @@
   "SkillUnlock_PurpleSpider": {
     "localized_name": "Tarantriss Saddle",
     "description": "Saddle for safely riding Tarantriss."
-  },
-  "SkillUnlock_RaijinDaughter": {
-    "localized_name": "Dazzi's Necklace",
-    "description": "Collar for Dazzi. If Dazzi is in your team, it will stay by your side and attack enemies in tandem."
-  },
-  "SkillUnlock_RaijinDaughter_Water": {
-    "localized_name": "Dazzi Noct's Necklace",
-    "description": "Collar for Dazzi Noct. If Dazzi Noct is in your team, it will stay by your side and attack enemies in tandem."
   },
   "SkillUnlock_RedArmorBird": {
     "localized_name": "Ragnahawk Saddle",
@@ -1715,6 +1931,10 @@
     "localized_name": "Bastigor's Hammer",
     "description": "Saddle for safely riding Bastigor."
   },
+  "SkillUnlock_SumoDog": {
+    "localized_name": "Bulldosu Saddle",
+    "description": null
+  },
   "SkillUnlock_Suzaku": {
     "localized_name": "Suzaku Saddle",
     "description": "Saddle for safely riding Suzaku."
@@ -1723,13 +1943,29 @@
     "localized_name": "Suzaku Aqua Saddle",
     "description": "Saddle for safely riding Suzaku Aqua."
   },
+  "SkillUnlock_ThiefBird": {
+    "localized_name": "Roujay Saddle",
+    "description": null
+  },
   "SkillUnlock_ThunderBird": {
     "localized_name": "Beakon Saddle",
     "description": "Saddle for safely riding Beakon."
   },
+  "SkillUnlock_ThunderBird_Ice": {
+    "localized_name": "Beakon Cryst Saddle",
+    "description": null
+  },
   "SkillUnlock_ThunderDog": {
     "localized_name": "Rayhound Saddle",
     "description": "Saddle for safely riding Rayhound."
+  },
+  "SkillUnlock_ThunderFluffyBird": {
+    "localized_name": "Dynamoff Saddle",
+    "description": null
+  },
+  "SkillUnlock_Thunderdog_Ice": {
+    "localized_name": "Rayhound Cryst Saddle",
+    "description": null
   },
   "SkillUnlock_TropicalOstrich": {
     "localized_name": "Palumba Saddle",
@@ -1751,6 +1987,14 @@
     "localized_name": "Reptyro Cryst Saddle",
     "description": "Saddle for safely riding Reptyro Cryst."
   },
+  "SkillUnlock_VolcanoDragon": {
+    "localized_name": "Moldron Saddle",
+    "description": null
+  },
+  "SkillUnlock_VolcanoDragon_Ice": {
+    "localized_name": "Moldron Cryst Saddle",
+    "description": null
+  },
   "SkillUnlock_WeaselDragon": {
     "localized_name": "Chillet Saddle",
     "description": "Saddle for safely riding Chillet."
@@ -1767,17 +2011,13 @@
     "localized_name": "Celesdir Saddle",
     "description": "Saddle for safely riding Celesdir."
   },
+  "SkillUnlock_WhiteDeer_Dark": {
+    "localized_name": "Celesdir Noct Saddle",
+    "description": null
+  },
   "SkillUnlock_WhiteShieldDragon": {
     "localized_name": "Silvegis Saddle",
     "description": "Saddle for safely riding Silvegis."
-  },
-  "SkillUnlock_WindChimes": {
-    "localized_name": "Hangyu's Gloves",
-    "description": "Gloves for gently holding on to Hangyu's arms. If Hangyu is in your team, it can be used as a glider."
-  },
-  "SkillUnlock_WindChimes_Ice": {
-    "localized_name": "Hangyu Cryst's Glove",
-    "description": "Gloves for gently holding on to Hangyu Cryst's arms. If Hangyu Cryst is in your team, it can be used as a glider."
   },
   "SkillUnlock_Yeti": {
     "localized_name": "Wumpo Saddle",
@@ -1790,6 +2030,62 @@
   "SkinChange": {
     "localized_name": "Pal Dressing Facility",
     "description": "Pal Dressing Facility. Give your Pals a new look! Skins obtained inside and outside the game can be applied here!"
+  },
+  "SkyAssaultRifle": {
+    "localized_name": "Heavy Assault Rifle",
+    "description": "Ammo for the Heavy Assault Rifle. Can be crafted at Ancient Workbench."
+  },
+  "SkyAssaultRifleBullet": {
+    "localized_name": "Heavy Assault Rifle Ammo",
+    "description": null
+  },
+  "SkyBeamSword": {
+    "localized_name": "Laser Sword",
+    "description": "A Beam Sword made from Soralite Ingots. A close-range weapon that instantly cuts targets using its high-output energy blade."
+  },
+  "SkyBow": {
+    "localized_name": "Mechanical Bow",
+    "description": "A bow crafted from Soralite Ingots. With greatly enhanced initial velocity and piercing power, this high-precision weapon excels at ranged combat."
+  },
+  "SkyBowArrow": {
+    "localized_name": "Mechanical Bow Ammo",
+    "description": null
+  },
+  "SkyGrenadeLauncher": {
+    "localized_name": "Tactical Grenade Launcher",
+    "description": "Ammo for the Tactical Grenade Launcher. Can be crafted at Ancient Workbench."
+  },
+  "SkyGrenadeLauncherBullet": {
+    "localized_name": "Tactical Grenade Launcher Ammo",
+    "description": null
+  },
+  "SkyIslandFlagSet": {
+    "localized_name": "Azure Covenant Flag Set",
+    "description": "Azure Covenant Flag and Azure Covenant Banner set. Proof of your victory over the Azure Covenant."
+  },
+  "SkyIslandOrePit": {
+    "localized_name": "Soralite Quarry",
+    "description": null
+  },
+  "SkyShotgun": {
+    "localized_name": "Prototype Shotgun",
+    "description": "Ammo for the Prototype Shotgun. Can be crafted at Ancient Workbench."
+  },
+  "SkyShotgunBullet": {
+    "localized_name": "Prototype Shotgun Ammo",
+    "description": null
+  },
+  "SkySubmachineGun": {
+    "localized_name": "Combat SMG",
+    "description": "Ammo for the Combat SMG. Can be crafted at Ancient Workbench."
+  },
+  "SkySubmachineGunBullet": {
+    "localized_name": "Combat SMG Ammo",
+    "description": null
+  },
+  "SkyislandIngot": {
+    "localized_name": "Soralite Ingot",
+    "description": null
   },
   "Snowman": {
     "localized_name": "Snowman",
@@ -1813,15 +2109,19 @@
   },
   "Spear_2": {
     "localized_name": "Metal Spear",
-    "description": "Useful for close-range combat. The metal tip enhances its striking power. Requires High-Quality Workbench to craft."
+    "description": "Useful for close-range combat. The metal tip gives it increased attack power. Can be crafted at High-Quality Workbench."
   },
   "Spear_3": {
     "localized_name": "Refined Metal Spear",
-    "description": "Useful for close-range combat. The high-quality metal tip enhances its striking power. Requires Production Assembly Line to craft."
+    "description": "Useful for close-range combat. The high-quality metal tip gives it increased attack power. Can be crafted at Production Assembly Line."
   },
   "Spear_ForestBoss": {
     "localized_name": "Lily's Spear",
     "description": "The spear cherished by Lily. Punishes those who neglect their Pals."
+  },
+  "Spear_ForestBoss2": {
+    "localized_name": "Enhanced Lily's Spear",
+    "description": "An enhanced version of Lily's beloved spear. Pierces those who neglect their Pals."
   },
   "Special_ElectricHatchingPalEgg": {
     "localized_name": "Electric Egg Incubator",
@@ -1841,27 +2141,27 @@
   },
   "Special_PalSphere_Grade_02": {
     "localized_name": "Mega Sphere",
-    "description": "An item that captures Pals when thrown. Its capabilities have been improved, allowing it to catch a wider range of Pals. Requires Sphere Workbench to craft."
+    "description": "An item that captures Pals when thrown. Its capabilities have been improved, allowing it to catch a wider range of Pals. Can be crafted at Sphere Workbench."
   },
   "Special_PalSphere_Grade_03": {
     "localized_name": "Giga Sphere",
-    "description": "An item that captures Pals when thrown. Able to capture moderately powerful Pals. Requires Sphere Workbench to craft."
+    "description": "An item that captures Pals when thrown. Able to capture moderately powerful Pals. Can be crafted at Sphere Workbench."
   },
   "Special_PalSphere_Grade_04": {
     "localized_name": "Hyper Sphere",
-    "description": "An item that captures Pals when thrown. Enhanced capabilities allow it to capture even more powerful Pals. Requires Sphere Assembly Line to craft."
+    "description": "An item that captures Pals when thrown. Enhanced capabilities allow it to capture even more powerful Pals. Can be crafted at Sphere Assembly Line."
   },
   "Special_PalSphere_Grade_05": {
     "localized_name": "Ultra Sphere",
-    "description": "An item that captures Pals when thrown. Not many Pals can escape its highly efficient design. Requires Sphere Assembly Line II to craft."
+    "description": "An item that captures Pals when thrown. Not many Pals can escape its highly efficient design. Can be crafted at Sphere Assembly Line II."
   },
   "Special_PalSphere_Grade_06": {
     "localized_name": "Legendary Sphere",
-    "description": "An item that captures Pals when thrown. Very few Pals can escape its perfected design. Requires Sphere Assembly Line II to craft."
+    "description": "An item that captures Pals when thrown. Very few Pals can escape its perfected design. Can be crafted at Sphere Assembly Line II."
   },
   "Special_PalSphere_Grade_07": {
     "localized_name": "Ultimate Sphere",
-    "description": "An item that captures Pals when thrown. Almost no Pals can escape its flawless design. Requires Sphere Assembly Line II to craft."
+    "description": "An item that captures Pals when thrown. Almost no Pals can escape its flawless design. Can be crafted at Sphere Assembly Line II."
   },
   "Special_SphereFactory_Black_Grade_01": {
     "localized_name": "Sphere Workbench",
@@ -1900,7 +2200,7 @@
     "description": "Equipping it increases the sphere's range, allowing it to sharply capture Pals and enhancing capture power."
   },
   "SphereModule_Sniper2": {
-    "localized_name": "Sniper Module Ⅱ",
+    "localized_name": "Sniper Module II",
     "description": "Equipping it significantly increases the sphere's range, allowing it to sharply capture Pals and enhancing capture power."
   },
   "StainlessSteel": {
@@ -1919,9 +2219,21 @@
     "localized_name": "Stump and Axe",
     "description": "Place in base to improve logging speed. Placing more than one has no additional effect."
   },
+  "Supplement": {
+    "localized_name": "Nutrient Tonic",
+    "description": null
+  },
+  "TableCircular": {
+    "localized_name": "Tidy Table Set",
+    "description": "A neat decorative table set for building a clean and well-kept base."
+  },
   "TableDresser01_Stone": {
     "localized_name": "Antique Dresser",
     "description": "Dresser useful for giving yourself a remake. Allows players to edit their appearance."
+  },
+  "Thermal_Core": {
+    "localized_name": "Thermal Core",
+    "description": null
   },
   "ToolBoxV1": {
     "localized_name": "Large Toolbox",
@@ -1959,6 +2271,14 @@
     "localized_name": "Hanging Trap",
     "description": "Catches Pals that pass through. Only effective on small Pals and humans."
   },
+  "UnlockEquipmentSlot_Weapon_01": {
+    "localized_name": "Extra Weapon Holster",
+    "description": null
+  },
+  "UnlockEquipmentSlot_Weapon_02": {
+    "localized_name": "Extra Weapon Holster 2",
+    "description": null
+  },
   "Unlock_Picking_Tier1": {
     "localized_name": "Lockpicking Tool v1",
     "description": "No key? No problem! These tools will allow you to try and pry open any treasure chest that would normally require a Copper Key."
@@ -1979,9 +2299,29 @@
     "localized_name": "Wall Torch",
     "description": "Place it on a wall to light the surrounding area."
   },
+  "WaterBuildKit": {
+    "localized_name": "Aquatic Construction Kit",
+    "description": "Construction kit that allows foundations to be placed on water."
+  },
   "WeaponFactory_Dirty_04": {
     "localized_name": "Advanced Weapon Assembly Line",
     "description": "An Assembly Line for producing weapons and ammunition. Advanced machinery has been introduced, enabling high-speed weapon production. Requires Pals that can work with their hands."
+  },
+  "WidePenetrateShotgun": {
+    "localized_name": "Beam Scatter",
+    "description": "A specialized beam weapon for close-range combat. It fires compressed energy in a wide, scattering blast."
+  },
+  "WidePenetrateShotgunBullet": {
+    "localized_name": "Beam Scatter Ammo",
+    "description": null
+  },
+  "WingGlider": {
+    "localized_name": "Wing Pack",
+    "description": "A portable glider that enables flight. Consumes Wing Cell to propel the user through the skies."
+  },
+  "WingGlider_Fuel": {
+    "localized_name": "Wing Cell",
+    "description": "The fuel required to power the Wing Pack."
   },
   "Wood_Gate": {
     "localized_name": "Wooden Gate",
@@ -2002,6 +2342,10 @@
   "Workbench": {
     "localized_name": "Primitive Workbench",
     "description": "Primitive Workbench for producing simple items. Pals with Handiwork suitability help speed up production."
+  },
+  "WorldTreeIngot": {
+    "localized_name": "Paloxite Ingot",
+    "description": "An indomitable alloy created by fusing Soralite and Paloxite. A highly rare material, crystallizing the technology of ancient civilization and the power of the World Tree. It is vital for crafting the highest-grade equipment and structures."
   },
   "YakushimaBlade": {
     "localized_name": "Meowmere",

@@ -1,4 +1,8 @@
 {
+  "AIcore": {
+    "localized_name": "AI核心",
+    "description": null
+  },
   "Accessory_AirDash1": {
     "localized_name": "空中衝刺靴",
     "description": "裝備後可使玩家獲得空中衝刺能力的飾品。"
@@ -10,6 +14,10 @@
   "Accessory_AirDash3": {
     "localized_name": "空中三段衝刺靴",
     "description": "zh-hant text"
+  },
+  "Accessory_ExplosionResist": {
+    "localized_name": "防爆內衣",
+    "description": null
   },
   "Accessory_JumpCount_Increase1": {
     "localized_name": "二段跳靴",
@@ -36,7 +44,7 @@
     "description": "可攜帶額外行李的小型背包。 持有此物品，即可增加背包空間。"
   },
   "AdditionalInventory_002": {
-    "localized_name": "中等擴展背包",
+    "localized_name": "中型擴展背包",
     "description": "可攜帶額外行李的普通背包。 持有此物品，即可增加背包空間。"
   },
   "AdditionalInventory_003": {
@@ -50,6 +58,70 @@
   "Altar": {
     "localized_name": "召喚的祭壇",
     "description": "在此獻上上面繪有帕魯的石板， 就能將強大的帕魯召喚至據點。 須做好十足的戰鬥準備。"
+  },
+  "AncientArmor": {
+    "localized_name": "遠古盔甲",
+    "description": "用烈陽金屬錠打造的古代盔甲。 失落文明的精髓毫無保留地傾注其中，具備壓倒性的防禦力。 即使是導致世界末日的威脅，也能坦然面對的究極防具。"
+  },
+  "AncientArmorCold": {
+    "localized_name": "耐寒遠古盔甲",
+    "description": "經過改良的遠古盔甲。 利用古代技術進一步提高了防寒性能，在嚴寒環境下也能保存體力。"
+  },
+  "AncientArmorHeat": {
+    "localized_name": "耐熱遠古盔甲",
+    "description": "經過改良的遠古盔甲。 利用古代技術進一步提高了耐熱性能，在炎熱環境中也能自如活動。"
+  },
+  "AncientArmorWeight": {
+    "localized_name": "輕便遠古盔甲",
+    "description": "經過改良的遠古盔甲。 其中嵌入了古代的輔助機械，使穿戴者能夠攜帶更多物資。"
+  },
+  "AncientBlastFurnace": {
+    "localized_name": "古代文明熔爐",
+    "description": "應用了古文明技術的特殊火爐，能冶煉所有種類的金屬錠。 用火焰的熱度熔化素材，再用冰之力讓其快速凝固。 要使其運作，需要具備高等級生火和有冷卻適應性的帕魯。"
+  },
+  "AncientCookingStove": {
+    "localized_name": "古代文明廚房",
+    "description": "從既有的食譜到未知的新作都能做出來的古代文明廚房。 先用火焰加熱，再手工完成最後的步驟，即可做出各種料理。 要使其運作，需要具備高等級生火和手工作業適應性的帕魯。"
+  },
+  "AncientElectricGenerator": {
+    "localized_name": "古代文明發電機",
+    "description": "重現了失落的古代技術所製造出的超高效發電機。 它能製造出龐大的電力，但運作時有過熱的風險。 運作時除了需要高等級發電適應性的帕魯，還需要具備澆水適應性的帕魯負責冷卻。"
+  },
+  "AncientFarmBlock": {
+    "localized_name": "古代文明栽培器",
+    "description": "利用世界樹之力可以培育帕洛斯群島各種植物的古代文明栽培器。 體積比野莓園小很多，能設置在室內，但培育的流程與從前無異。 要使其運作，需要具備高等級播種、澆水、採集適應性的帕魯。"
+  },
+  "AncientHelmet": {
+    "localized_name": "遠古頭盔",
+    "description": "用烈陽金屬錠打造的古代頭盔。 其中凝聚著歷經歲月錘煉的智慧，能為穿戴者提供堅不可摧的保護。 防禦性能遠遠凌駕於現代的裝備。"
+  },
+  "AncientMultiProduct": {
+    "localized_name": "古代文明物質生成器",
+    "description": "利用世界樹之力可以生成各種木材和礦石的古代文明生成器。 由於構造複雜，只能分派1隻帕魯。"
+  },
+  "AncientRelicRecycler": {
+    "localized_name": "古代文明遺物轉換器",
+    "description": null
+  },
+  "AncientWorkBench": {
+    "localized_name": "古代文明工作台",
+    "description": "帕魯專用的複合設施，可以在一個地方製作所有道具。 玩家無法進行作業，製作速度也和一般設備無異。 由於功能複雜，需要具備高等級手工作業和製藥適應性的帕魯。"
+  },
+  "Ancient_Clinic": {
+    "localized_name": "古代文明診療所",
+    "description": null
+  },
+  "Ancient_Houseset": {
+    "localized_name": "古代文明建築套組",
+    "description": "解鎖此套組即可用古代文明建築建造據點。 可建造古代文明地基、牆壁、屋頂和樓梯等 建造房屋時所需的構造。"
+  },
+  "Ancient_MedicalPalBed": {
+    "localized_name": "古代文明帕魯床",
+    "description": null
+  },
+  "Ancient_Spa": {
+    "localized_name": "古代文明溫泉",
+    "description": null
   },
   "Arrow": {
     "localized_name": "箭矢",
@@ -99,8 +171,20 @@
     "localized_name": "監控台",
     "description": "可對據點內的帕魯下達工作指示。 請注意不要讓牠們勞動過度了。"
   },
+  "BaseCampWorkHard02": {
+    "localized_name": "優質監控台",
+    "description": null
+  },
+  "BaseCampWorkHard03": {
+    "localized_name": "古代文明監控台",
+    "description": null
+  },
   "BaseCampWorkerExtraStation": {
     "localized_name": "帕魯終端控制台",
+    "description": null
+  },
+  "Bat3": {
+    "localized_name": "金屬球棒",
     "description": null
   },
   "Battle_Armor_Grade_01_Cloth": {
@@ -271,22 +355,6 @@
     "localized_name": "十字弓",
     "description": "無需蓄力拉弓即可射出「箭矢」。 裝箭需要花些時間，但能造成強力一擊。 可在「優質工作台」製作。"
   },
-  "Battle_RangeWeapon_BowGun_Fire": {
-    "localized_name": "火箭十字弓",
-    "description": "可造成火屬性傷害的十字弓。 需要「火箭矢」才能使用。 可在「武器工作台」製作。"
-  },
-  "Battle_RangeWeapon_BowGun_Poison": {
-    "localized_name": "毒箭十字弓",
-    "description": "可讓攻擊目標中毒的可怕十字弓。 需要「毒箭矢」才能使用。 可在「優質工作台」製作。"
-  },
-  "Battle_RangeWeapon_Bow_Fire": {
-    "localized_name": "火之弓",
-    "description": "可造成火屬性傷害的弓。 利用火箭矢讓帕魯著火，變得更容易捕捉。 需要「火箭矢」才能使用。"
-  },
-  "Battle_RangeWeapon_Bow_Poison": {
-    "localized_name": "毒之弓",
-    "description": "可讓攻擊目標中毒的可怕毒弓。 帕魯中毒以後，會變得更容易捕捉。 需要「毒箭矢」才能使用。"
-  },
   "Battle_RangeWeapon_CompoundBow": {
     "localized_name": "複合弓",
     "description": "經過現代化改良的弓。 能夠射出威力更強大的箭矢。"
@@ -359,6 +427,14 @@
     "localized_name": "衝鋒槍",
     "description": "連射能力優異的衝鋒槍。 輕巧靈活，適合近距離戰鬥。"
   },
+  "BeamLauncher": {
+    "localized_name": "光束炮發射器",
+    "description": "能發射高精度光束，引發大範圍連鎖爆炸的發射器。 連射時要注意防止槍體過熱。"
+  },
+  "BeamLauncherBullet": {
+    "localized_name": "光束炮發射器彈藥",
+    "description": null
+  },
   "BeamSword": {
     "localized_name": "光劍",
     "description": "近戰用的光劍。 高能量雷射可瞬間融斷敵人。"
@@ -366,6 +442,14 @@
   "BelieverFlagSet": {
     "localized_name": "帕魯保護團體旗幟套組",
     "description": "帕魯保護團體團旗與 帕魯保護團體掛旗的套組。 是擊敗帕魯保護團體的證明。"
+  },
+  "Bio_Battery": {
+    "localized_name": "生化電池",
+    "description": null
+  },
+  "Bio_Coolant": {
+    "localized_name": "極低溫冷卻介質",
+    "description": null
   },
   "BlastFurnace4": {
     "localized_name": "巨大熔爐",
@@ -375,9 +459,29 @@
     "localized_name": "配種牧場",
     "description": "將♂、♀帕魯各一隻分派至此處， 即可讓牠們產下帕魯蛋。 需在設施中放入「蛋糕」才會順利生蛋。"
   },
+  "BronzeSword": {
+    "localized_name": "原始的劍",
+    "description": "近距離戰鬥用的劍。鋒利程度不可小覷！ 但需要靠近敵人攻擊，相當危險。"
+  },
   "BuildableGoddessStatue": {
     "localized_name": "力量之像",
     "description": "只要獻上供品， 就能強化玩家和帕魯。"
+  },
+  "Cake02": {
+    "localized_name": "蘑菇蛋糕",
+    "description": null
+  },
+  "Cake03": {
+    "localized_name": "蔬菜蛋糕",
+    "description": null
+  },
+  "Cake04": {
+    "localized_name": "豪華蔬菜蛋糕",
+    "description": null
+  },
+  "Cake05": {
+    "localized_name": "特製蛋糕",
+    "description": null
   },
   "CarbonFiber": {
     "localized_name": "碳纖維",
@@ -403,6 +507,10 @@
     "localized_name": "充能步槍子彈",
     "description": "zh-hant text"
   },
+  "Clinic": {
+    "localized_name": "診療所",
+    "description": null
+  },
   "Cloth2": {
     "localized_name": "優質布",
     "description": "編織大量「羊毛」製成的「優質布」。 是製作優質防具時會用到的素材。 可在「優質工作台」製作。"
@@ -410,6 +518,10 @@
   "CompositeDesk": {
     "localized_name": "製圖桌",
     "description": "可以透過組合多個設計圖， 製作出更高級的設計圖的設施。"
+  },
+  "Computer": {
+    "localized_name": "電腦",
+    "description": "zh-hant text"
   },
   "Cooler": {
     "localized_name": "降溫器",
@@ -423,6 +535,10 @@
     "localized_name": "低溫保鮮飼料箱",
     "description": "可以冷凍的飼料箱。 將冰系帕魯指派到這裡工作時， 可以使裡面的食物較不易腐壞。"
   },
+  "Corrosive_Solvent": {
+    "localized_name": "腐蝕溶劑",
+    "description": null
+  },
   "Crusher": {
     "localized_name": "粉碎機",
     "description": "可粉碎石頭或木材， 將之轉換為其他素材的設施。 需有具備「澆水」適應性的帕魯負責使水車轉動。"
@@ -434,6 +550,10 @@
   "DamagedScarecrow": {
     "localized_name": "受損的稻草人",
     "description": "以企丸丸為原型，用於訓練的稻草人。"
+  },
+  "DarkIslandFlagSet": {
+    "localized_name": "天墜之民旗幟套組",
+    "description": "天墜之民團旗與 天墜之民掛旗的套組。 是擊敗天墜之民的證明。"
   },
   "DecalGunSet": {
     "localized_name": "噴漆槍套組",
@@ -467,9 +587,21 @@
     "localized_name": "觀賞專用籠",
     "description": "放置抓來的帕魯的觀賞用籠子。 在裡頭的帕魯無法戰鬥或進行作業， 但也不會肚子餓。"
   },
+  "DroneLauncher": {
+    "localized_name": "無人機發射器",
+    "description": "用於發射能自主攻擊的無人機的發射器。 最多可以發射9架，持續壓制敵方。"
+  },
   "ElecBaton": {
     "localized_name": "電擊棒",
     "description": "敲下去就會觸電的近戰武器。 帕魯在觸電時會比較容易捕獲。 可在「優質工作台」製作。"
+  },
+  "ElectricArcAssaultRifle": {
+    "localized_name": "等離子步槍",
+    "description": "著彈點會放出雷電的步槍，可連鎖攻擊多個敵人。"
+  },
+  "ElectricArcAssaultRifleBullet": {
+    "localized_name": "等離子步槍彈藥",
+    "description": null
   },
   "ElectricCooler": {
     "localized_name": "電氣降溫器",
@@ -743,6 +875,42 @@
     "localized_name": "和風家具套組",
     "description": "裝飾用的家具套組。 用它打造日式風格的據點吧。"
   },
+  "FurnitureTree_Bamboo": {
+    "localized_name": "仿真竹子套組",
+    "description": "裝飾用的竹子模型套組。 配置一些竹子，打造竹林風格的據點吧。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree_Cherry": {
+    "localized_name": "仿真櫻花樹套組",
+    "description": "裝飾用的櫻花樹模型套組。 配置一些樹木，打造櫻花島風格的據點吧。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree_Desert": {
+    "localized_name": "仿真沙漠樹木套組",
+    "description": "裝飾用的沙漠樹木模型套組。 配置一些樹木，打造沙漠風格的據點吧。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree_Green": {
+    "localized_name": "仿真樹木套組",
+    "description": "裝飾用的樹木模型套組。 配置一些樹木，打造自然風格的據點吧。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree_Red": {
+    "localized_name": "仿真紅葉樹套組",
+    "description": "裝飾用的紅葉樹模型套組。 配置一些樹木，打造自然風格的據點吧。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree_Snow": {
+    "localized_name": "仿真積雪樹木套組",
+    "description": "裝飾用的積雪樹木模型套組。 配置一些樹木，打造雪山風格的據點吧。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree_Tropical": {
+    "localized_name": "仿真熱帶樹木套組",
+    "description": "裝飾用的熱帶樹木模型套組。 配置一些樹木，打造南國風格的據點吧。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree_Yellow": {
+    "localized_name": "仿真黃葉樹套組",
+    "description": "裝飾用的黃葉樹模型套組。 配置一些樹木，打造自然風格的據點吧。 拆除此建築物無法取得材料。"
+  },
+  "GasMask": {
+    "localized_name": "防腐霧面具",
+    "description": "zh-hant text"
+  },
   "GatlingBullet": {
     "localized_name": "加特林子彈",
     "description": "加特林機槍使用的彈藥。"
@@ -799,6 +967,10 @@
     "localized_name": "取暖器",
     "description": "可讓周圍暖和起來，抵禦寒意。"
   },
+  "HighGrade_Processed_Wood": {
+    "localized_name": "優質木板",
+    "description": null
+  },
   "Homeward": {
     "localized_name": "歸途雷雲",
     "description": "使用此道具即可移動至最近的據點。 在地下城等處無法使用。"
@@ -815,6 +987,10 @@
     "localized_name": "冷凍粉碎機",
     "description": "可粉碎金屬礦石以轉換成其他材料的設施。 雖然要使其工作需要電力供應，以及有「冷卻」適應性的帕魯，但是效率極佳。"
   },
+  "IceHorseStatue": {
+    "localized_name": "喚冬獸雕像",
+    "description": null
+  },
   "Infra_ElectricGenerator_Grade_01": {
     "localized_name": "發電機",
     "description": "能讓據點的雷系帕魯儲存電力， 供應給需要用電的設施。"
@@ -829,11 +1005,11 @@
   },
   "Infra_ItemChest_Grade_02": {
     "localized_name": "金屬箱",
-    "description": "可收納更多道具，耐久度也有所提升。 具備「搬運」適應性的帕魯會自動搬運道具。"
+    "description": "可收納更多道具，並提升了耐久度。 具備「搬運」適應性的帕魯會自動搬運道具。"
   },
   "Infra_ItemChest_Grade_03": {
     "localized_name": "精煉金屬箱",
-    "description": "可進一步收納更多道具，耐久度也有所提升。 具備「搬運」適應性的帕魯會自動搬運道具。"
+    "description": "可進一步收納更多道具，並提升了耐久度。 具備「搬運」適應性的帕魯會自動搬運道具。"
   },
   "Infra_MachineParts": {
     "localized_name": "釘子",
@@ -841,7 +1017,7 @@
   },
   "Infra_PalBed_Grade_01": {
     "localized_name": "稻草帕魯床鋪",
-    "description": "據點裡的帕魯晚上若能睡在床上，便可回復SAN值。 沒有床的話會因睡不舒服而無法回復SAN值。"
+    "description": "據點裡的帕魯晚上若能睡在帕魯床上，便可回復SAN值。 沒有帕魯床的話會因睡不舒服而無法回復SAN值。"
   },
   "Infra_PalBed_Grade_02": {
     "localized_name": "柔軟帕魯床鋪",
@@ -866,6 +1042,10 @@
   "JapaneseStyle_houseset": {
     "localized_name": "和風建築套組",
     "description": "解鎖此套組便可用和風建築打造據點。 可建造和風地基、牆壁、屋頂、樓梯等 建造房屋時所需的構造。"
+  },
+  "JetDragonStatue": {
+    "localized_name": "空渦龍雕像",
+    "description": null
   },
   "Katana": {
     "localized_name": "太刀",
@@ -906,6 +1086,10 @@
   "LaserGatlingGun": {
     "localized_name": "雷射加特林",
     "description": "能夠高速連射雷射光束。 猛烈的火力能瞬間壓制複數敵人。"
+  },
+  "LaserMiningTool": {
+    "localized_name": "多功能等離子切割器",
+    "description": "能夠匯聚並發射等離子能量的便攜式等離子切割器。 從挖礦到伐木皆可勝任，用途廣泛。 利用它發出的高能量射線，甚至可以挖掘特殊的礦石。"
   },
   "LauncherBullet": {
     "localized_name": "火箭彈",
@@ -983,6 +1167,10 @@
     "localized_name": "大型電能帕魯蛋孵化器",
     "description": "用於孵化帕魯蛋的裝置。 需有電力供應才能使用， 但可以保持在最佳溫度，並同時孵化多個蛋。"
   },
+  "MultiElectricHatchingPalEggWithBreed": {
+    "localized_name": "古代文明配種器",
+    "description": null
+  },
   "MultiHatchingPalEgg": {
     "localized_name": "大型帕魯蛋孵化器",
     "description": null
@@ -1006,6 +1194,10 @@
   "OilPump": {
     "localized_name": "原油提煉機",
     "description": "從油田提取原油所需的設備。 它需要大量電力供應才能運行。"
+  },
+  "OilPump02": {
+    "localized_name": "原油提煉機 高壓型",
+    "description": null
   },
   "OlympicCauldron": {
     "localized_name": "聖火台",
@@ -1059,6 +1251,14 @@
     "localized_name": "復活藥",
     "description": "可以使因受傷無法動彈的帕魯復活的藥物。"
   },
+  "PalSphere_Ancient_1": {
+    "localized_name": "烈陽帕魯球",
+    "description": "投擲這種道具便能捕捉帕魯。 在古代文明中，這種高階帕魯球的存在確立了與帕魯的共存關係。"
+  },
+  "PalSphere_Ancient_2": {
+    "localized_name": "遠古帕魯球",
+    "description": "可丟出並捕捉帕魯的道具。 這種帕魯球含有世界樹之力，是古代文明技術登峰造極的成果。"
+  },
   "PalSphere_Exotic": {
     "localized_name": "超限帕魯球",
     "description": "投擲這種道具便能捕捉帕魯。 擁有超凡絕倫的性能，連超規格的帕魯也能捕獲。"
@@ -1079,17 +1279,21 @@
     "localized_name": "至高恢復藥",
     "description": "需要時間才能治療身體傷口的藥水。 品質卓越，能夠顯著地恢復生命值。"
   },
+  "Processed_Wood": {
+    "localized_name": "木板",
+    "description": null
+  },
   "Product_Axe_Grade_01": {
     "localized_name": "石斧",
     "description": "用於劈砍木材的斧頭。 以石頭製成，感覺不是很鋒利。"
   },
   "Product_Axe_Grade_02": {
     "localized_name": "金屬斧",
-    "description": "用於劈砍木材的斧頭。 以金屬製成，耐久度與鋒利度都得到了提升。 可在「優質工作台」製作。"
+    "description": "能劈砍堅硬樹木的金屬製斧頭。 對於生長於大陸深處的良木也同樣有效。 可在「優質工作台」製作。"
   },
   "Product_Axe_Grade_03": {
     "localized_name": "精煉金屬斧",
-    "description": "用於劈砍木材的斧頭。 耐久度與鋒利度均有更進一步的提升。 可在「作業流水線工廠」製作。"
+    "description": "能砍伐生長於火山、沙漠等嚴苛環境中的堅韌樹木，取得硬木材的斧頭。。 可在「作業流水線工廠」製作。"
   },
   "Product_CoalPit": {
     "localized_name": "石炭採礦場",
@@ -1195,6 +1399,10 @@
     "localized_name": "採伐場",
     "description": "可在據點內生產木材。 需有具備「採伐」適應性的帕魯才能進行作業。"
   },
+  "Product_StationDeforest2": {
+    "localized_name": "採伐場Ⅱ",
+    "description": null
+  },
   "Product_StonePit": {
     "localized_name": "採石場",
     "description": "可在據點內生產石材。 需有具備「挖掘」適應性的帕魯才能進行作業。"
@@ -1230,10 +1438,6 @@
   "RepairBench": {
     "localized_name": "修理工作台",
     "description": "可修理損壞的武器及道具。"
-  },
-  "RepairKit": {
-    "localized_name": "修理工具組",
-    "description": "用以修理建築的道具。 可用於修理損壞的建築。"
   },
   "RifleBullet": {
     "localized_name": "步槍子彈",
@@ -1307,6 +1511,10 @@
     "localized_name": "超級護盾",
     "description": "以帕魯礦技術打造的神奇護盾。 經過更進一步的無數試驗，實現了究極的品質。 可在「作業流水線工廠 II」製作。"
   },
+  "Shield_07": {
+    "localized_name": "遠古護盾",
+    "description": null
+  },
   "Shield_SF": {
     "localized_name": "卓越護盾",
     "description": "以超高科技打造的神奇護盾。 一定時間不受攻擊時可自動修復。 品質達到完美無缺的境界。"
@@ -1371,6 +1579,10 @@
     "localized_name": "碧月龍的鞍具",
     "description": null
   },
+  "SkillUnlock_BlueSkyDragon": {
+    "localized_name": "霄龍的鞍具",
+    "description": null
+  },
   "SkillUnlock_BlueThunderHorse": {
     "localized_name": "馭雷馬專用鞍具",
     "description": "持有此道具即可騎乘馭雷馬。"
@@ -1387,6 +1599,14 @@
     "localized_name": "炸蛋鳥專用手套",
     "description": "用來輕輕抓住炸蛋鳥的手套。 夥伴技能發動後，便可抱著炸蛋鳥， 發射爆炸蛋來攻擊敵人。"
   },
+  "SkillUnlock_CubeTurtle": {
+    "localized_name": "重岩龜的鞍具",
+    "description": null
+  },
+  "SkillUnlock_CubeTurtle_Neutral": {
+    "localized_name": "淨岩龜的鞍具",
+    "description": null
+  },
   "SkillUnlock_DarkMechaDragon": {
     "localized_name": "傑諾多蘭專用鞍具",
     "description": "持有此道具即可騎乘傑諾多蘭。"
@@ -1399,17 +1619,9 @@
     "localized_name": "祇岳鹿專用鞍具",
     "description": "持有此道具即可騎乘祇岳鹿。"
   },
-  "SkillUnlock_DreamDemon": {
-    "localized_name": "寐魔專用項圈",
-    "description": "寐魔的項圈。 若持有此道具，隊伍內的寐魔會一直待在場上， 並配合玩家發動額外攻擊。"
-  },
-  "SkillUnlock_DrillGame": {
-    "localized_name": "碎岩龜專用頭帶",
-    "description": "碎岩龜的決勝頭帶。 夥伴技能發動後， 碎岩龜便會高速旋轉，以極高效率鑽鑿岩石。"
-  },
-  "SkillUnlock_Eagle": {
-    "localized_name": "天擒鳥專用手套",
-    "description": "用來輕輕抓住天擒鳥的腳的手套。 若持有此道具且天擒鳥在隊伍內， 便可將天擒鳥當作滑翔傘。"
+  "SkillUnlock_DomeArmorDragon": {
+    "localized_name": "磐甲龍的鞍具",
+    "description": null
   },
   "SkillUnlock_ElecPanda": {
     "localized_name": "暴電熊專用機關槍",
@@ -1455,18 +1667,6 @@
     "localized_name": "雷冠龍專用鞍具",
     "description": "持有此道具即可騎乘雷冠龍。"
   },
-  "SkillUnlock_FlowerRabbit": {
-    "localized_name": "波娜兔專用項圈",
-    "description": "波娜兔的項圈。 若持有此道具，隊伍內的波娜兔會一直待在場上， 並自動撿拾附近的道具。"
-  },
-  "SkillUnlock_FlyingManta": {
-    "localized_name": "魯米兒專用手套",
-    "description": "用來輕輕抓住魯米兒的小手的手套。 若持有此道具且魯米兒在隊伍內， 便可將魯米兒當作滑翔傘。"
-  },
-  "SkillUnlock_FlyingManta_Thunder": {
-    "localized_name": "雷米兒的手套",
-    "description": null
-  },
   "SkillUnlock_Garm": {
     "localized_name": "獵狼專用附鞍具背帶",
     "description": "持有此道具即可騎乘獵狼。"
@@ -1483,9 +1683,25 @@
     "localized_name": "噬魂獸專用鞍具",
     "description": "持有此道具即可騎乘噬魂獸。"
   },
+  "SkillUnlock_GhostDragon": {
+    "localized_name": "靈曦龍的鞍具",
+    "description": null
+  },
+  "SkillUnlock_GhostDragon_Fire": {
+    "localized_name": "獄熙龍的鞍具",
+    "description": null
+  },
   "SkillUnlock_GoldenHorse": {
     "localized_name": "金馳獸專用鞍具",
     "description": "持有此道具即可騎乘金馳獸。"
+  },
+  "SkillUnlock_GrassGolem": {
+    "localized_name": "雙心岩傀的鞍具",
+    "description": null
+  },
+  "SkillUnlock_GrassGolem_Dark": {
+    "localized_name": "咒心岩傀的鞍具",
+    "description": null
   },
   "SkillUnlock_GrassMammoth": {
     "localized_name": "森猛獁專用鞍具",
@@ -1519,14 +1735,6 @@
     "localized_name": "疾風隼專用鞍具",
     "description": "持有此道具即可騎乘疾風隼。"
   },
-  "SkillUnlock_Hedgehog": {
-    "localized_name": "電棘鼠專用手套",
-    "description": "用來抓取電棘鼠的橡膠手套。 夥伴技能發動後， 便可將電棘鼠當作電擊手榴彈投擲出去。"
-  },
-  "SkillUnlock_Hedgehog_Ice": {
-    "localized_name": "冰刺鼠專用手套",
-    "description": "用來抓取冰刺鼠的隔熱手套。 夥伴技能發動後， 便可將冰刺鼠當作冰凍手榴彈投擲出去。"
-  },
   "SkillUnlock_Horus": {
     "localized_name": "荷魯斯專用鞍具",
     "description": "持有此道具即可騎乘荷魯斯。"
@@ -1559,6 +1767,10 @@
     "localized_name": "香草豹冰的鞍具",
     "description": null
   },
+  "SkillUnlock_IceSeal_Ground": {
+    "localized_name": "巧克力豹冰的鞍具",
+    "description": null
+  },
   "SkillUnlock_JetDragon": {
     "localized_name": "空渦龍專用飛彈發射器",
     "description": "持有此道具即可騎乘空渦龍， 並以飛彈發動猛烈轟炸。"
@@ -1579,9 +1791,21 @@
     "localized_name": "歿殃專用鞍具",
     "description": "持有此道具即可騎乘歿殃。"
   },
+  "SkillUnlock_KingSunfish": {
+    "localized_name": "曼波王的鞍具",
+    "description": null
+  },
+  "SkillUnlock_KingSunfish_Thunder": {
+    "localized_name": "曼波皇的鞍具",
+    "description": null
+  },
   "SkillUnlock_Kirin": {
     "localized_name": "雷角馬專用鞍具",
     "description": "持有此道具即可騎乘雷角馬。"
+  },
+  "SkillUnlock_Kirin_Ice": {
+    "localized_name": "凌角馬的鞍具",
+    "description": null
   },
   "SkillUnlock_Kitsunebi": {
     "localized_name": "火絨狐專用背帶",
@@ -1599,12 +1823,12 @@
     "localized_name": "派克龍專用飛彈發射器",
     "description": "持有此道具即可騎乘派克龍， 並以飛彈發射器發動猛烈轟炸。"
   },
-  "SkillUnlock_LeafMomonga": {
-    "localized_name": "達鼠泥的背帶",
-    "description": null
-  },
   "SkillUnlock_LegendDeer": {
     "localized_name": "默世鹿的鞍具",
+    "description": null
+  },
+  "SkillUnlock_LotusDragon": {
+    "localized_name": "沁蓮龍的鞍具",
     "description": null
   },
   "SkillUnlock_Manticore": {
@@ -1618,6 +1842,10 @@
   "SkillUnlock_Monkey": {
     "localized_name": "新葉猿專用突擊步槍",
     "description": "新葉猿專用的小型突擊步槍。 夥伴技能發動後，新葉猿會進入射擊模式， 猛烈掃射周圍的敵人。"
+  },
+  "SkillUnlock_Monkey_Fire": {
+    "localized_name": "秋葉猿的突擊步槍",
+    "description": null
   },
   "SkillUnlock_MoonQueen": {
     "localized_name": "輝月伊專用鞍具",
@@ -1639,17 +1867,13 @@
     "localized_name": "笑魘猫專用鞍具",
     "description": "持有此道具即可騎乘笑魘猫。"
   },
-  "SkillUnlock_NegativeOctopus": {
-    "localized_name": "勾魂魷專用手套",
-    "description": "用來輕輕抓住勾魂魷的腳的手套。 若持有此道具且勾魂魷在隊伍內， 便可將勾魂魷當作滑翔傘。"
-  },
-  "SkillUnlock_NegativeOctopus_Neutral": {
-    "localized_name": "蝕魂魷的手套",
-    "description": null
-  },
   "SkillUnlock_NightBlueHorse": {
     "localized_name": "夜冥駒專用鞍具",
     "description": "持有此道具即可騎乘夜冥駒。"
+  },
+  "SkillUnlock_NightBlueHorse_Neutral": {
+    "localized_name": "日耀駒的鞍具",
+    "description": null
   },
   "SkillUnlock_Penguin": {
     "localized_name": "企丸丸專用火箭發射器",
@@ -1670,14 +1894,6 @@
   "SkillUnlock_PurpleSpider": {
     "localized_name": "桃蛛娘專用鞍具",
     "description": "持有此道具即可騎乘桃蛛娘。"
-  },
-  "SkillUnlock_RaijinDaughter": {
-    "localized_name": "雷鳴童子專用項圈",
-    "description": "雷鳴童子的項圈。 若持有此道具，隊伍內的雷鳴童子會一直待在場上， 並配合玩家發動額外攻擊。"
-  },
-  "SkillUnlock_RaijinDaughter_Water": {
-    "localized_name": "天陰童子專用項圈",
-    "description": "天陰童子的項圈。 若持有此道具，隊伍內的天陰童子會一直待在場上， 並配合玩家發動額外攻擊。"
   },
   "SkillUnlock_RedArmorBird": {
     "localized_name": "燧火鳥專用鞍具",
@@ -1715,6 +1931,10 @@
     "localized_name": "霜牙王專用巨錘",
     "description": "持有此道具即可騎乘霜牙王。"
   },
+  "SkillUnlock_SumoDog": {
+    "localized_name": "力士獒的鞍具",
+    "description": null
+  },
   "SkillUnlock_Suzaku": {
     "localized_name": "朱雀專用鞍具",
     "description": "持有此道具即可騎乘朱雀。"
@@ -1723,13 +1943,29 @@
     "localized_name": "清雀專用鞍具",
     "description": "持有此道具即可騎乘清雀。"
   },
+  "SkillUnlock_ThiefBird": {
+    "localized_name": "盜影鴉的鞍具",
+    "description": null
+  },
   "SkillUnlock_ThunderBird": {
     "localized_name": "迅雷鳥專用鞍具",
     "description": "持有此道具即可騎乘迅雷鳥。"
   },
+  "SkillUnlock_ThunderBird_Ice": {
+    "localized_name": "疾霜鳥的鞍具",
+    "description": null
+  },
   "SkillUnlock_ThunderDog": {
     "localized_name": "霹靂犬專用鞍具",
     "description": "持有此道具即可騎乘霹靂犬。"
+  },
+  "SkillUnlock_ThunderFluffyBird": {
+    "localized_name": "雷雲鷲的鞍具",
+    "description": null
+  },
+  "SkillUnlock_Thunderdog_Ice": {
+    "localized_name": "凜光犬的鞍具",
+    "description": null
   },
   "SkillUnlock_TropicalOstrich": {
     "localized_name": "咕咕桑葩的鞍具",
@@ -1751,6 +1987,14 @@
     "localized_name": "寒霜獸專用鞍具",
     "description": "持有此道具即可騎乘寒霜獸。"
   },
+  "SkillUnlock_VolcanoDragon": {
+    "localized_name": "流焰龍的鞍具",
+    "description": null
+  },
+  "SkillUnlock_VolcanoDragon_Ice": {
+    "localized_name": "川霜龍的鞍具",
+    "description": null
+  },
   "SkillUnlock_WeaselDragon": {
     "localized_name": "疾旋鼬專用鞍具",
     "description": "持有此道具即可騎乘疾旋鼬。"
@@ -1767,17 +2011,13 @@
     "localized_name": "淨世鹿專用鞍具",
     "description": "持有此道具即可騎乘淨世鹿。"
   },
+  "SkillUnlock_WhiteDeer_Dark": {
+    "localized_name": "織夜鹿的鞍具",
+    "description": null
+  },
   "SkillUnlock_WhiteShieldDragon": {
     "localized_name": "艾基魯迦專用鞍具",
     "description": "持有此道具即可騎乘艾基魯迦。"
-  },
-  "SkillUnlock_WindChimes": {
-    "localized_name": "吊縛靈專用手套",
-    "description": "用來輕輕抓住吊縛靈的手臂的手套。 若持有此道具且吊縛靈在隊伍內， 便可將吊縛靈當作滑翔傘。"
-  },
-  "SkillUnlock_WindChimes_Ice": {
-    "localized_name": "冰縛靈專用手套",
-    "description": "用來輕輕抓住冰縛靈的手臂的手套。 若持有此道具且冰縛靈在隊伍內， 便可將冰縛靈當作滑翔傘。"
   },
   "SkillUnlock_Yeti": {
     "localized_name": "白絨雪怪專用鞍具",
@@ -1790,6 +2030,62 @@
   "SkinChange": {
     "localized_name": "帕魯裝扮機",
     "description": "用於改變外觀的設施。 可以為帕魯更換特別的外觀。 通過遊戲外的其他方式獲得的外觀也能使用。"
+  },
+  "SkyAssaultRifle": {
+    "localized_name": "重型突擊步槍",
+    "description": "用烈陽金屬錠製造的突擊步槍。 在維持泛用性的前提下，能夠裝填威力更大的彈藥。"
+  },
+  "SkyAssaultRifleBullet": {
+    "localized_name": "重型突擊步槍子彈",
+    "description": null
+  },
+  "SkyBeamSword": {
+    "localized_name": "高出力光劍",
+    "description": "用烈陽金屬錠製造的光劍。 高能量光刃能夠瞬間將眼前的對手一刀兩斷。"
+  },
+  "SkyBow": {
+    "localized_name": "機械弓",
+    "description": "用烈陽金屬錠打造的弓。 射擊初速和貫通力得到大幅提升，可實現高精度遠程射擊。"
+  },
+  "SkyBowArrow": {
+    "localized_name": "機械弓箭矢",
+    "description": null
+  },
+  "SkyGrenadeLauncher": {
+    "localized_name": "戰術榴彈發射器",
+    "description": "用烈陽金屬錠製造的榴彈發射器。 提升了彈道穩定性，可實現高精度遠程轟炸。"
+  },
+  "SkyGrenadeLauncherBullet": {
+    "localized_name": "戰術榴彈發射器子彈",
+    "description": null
+  },
+  "SkyIslandFlagSet": {
+    "localized_name": "蒼天的盟約旗幟套組",
+    "description": "蒼天的盟約盟旗與 蒼天的盟約掛旗的套組。 是擊敗蒼天的盟約的證明。"
+  },
+  "SkyIslandOrePit": {
+    "localized_name": "烈陽金屬採礦場",
+    "description": null
+  },
+  "SkyShotgun": {
+    "localized_name": "原型散彈槍",
+    "description": "用烈陽金屬錠製造的散彈槍。 極近距離下能發揮出霸道的火力，特殊的彈匣還增強了其持久作戰能力。"
+  },
+  "SkyShotgunBullet": {
+    "localized_name": "原型散彈槍子彈",
+    "description": null
+  },
+  "SkySubmachineGun": {
+    "localized_name": "戰鬥衝鋒槍",
+    "description": "用烈陽金屬錠製造的衝鋒槍。 經過改良的彈匣和彈藥強化了其壓制力。"
+  },
+  "SkySubmachineGunBullet": {
+    "localized_name": "戰鬥衝鋒槍子彈",
+    "description": null
+  },
+  "SkyislandIngot": {
+    "localized_name": "烈陽金屬錠",
+    "description": null
   },
   "Snowman": {
     "localized_name": "雪人",
@@ -1822,6 +2118,10 @@
   "Spear_ForestBoss": {
     "localized_name": "莉莉之矛",
     "description": "莉莉愛用的長矛。 她會用它來制裁蔑視帕魯的人。"
+  },
+  "Spear_ForestBoss2": {
+    "localized_name": "強化莉莉之矛",
+    "description": "莉莉愛用的長矛，經過了強化。 她會用它把蔑視帕魯的人捅成篩子。"
   },
   "Special_ElectricHatchingPalEgg": {
     "localized_name": "電能帕魯蛋孵化器",
@@ -1919,9 +2219,21 @@
     "localized_name": "樹樁與斧頭",
     "description": "設置於據點時， 「採伐」的工作速度將會提升。 即使設置複數個，其效果也不會疊加。"
   },
+  "Supplement": {
+    "localized_name": "營養劑",
+    "description": null
+  },
+  "TableCircular": {
+    "localized_name": "整潔桌子套組",
+    "description": "裝飾用的整潔桌子套組。 打造乾淨整潔的據點吧。"
+  },
   "TableDresser01_Stone": {
     "localized_name": "古典梳妝台",
     "description": "裝飾用的古典梳妝台。"
+  },
+  "Thermal_Core": {
+    "localized_name": "超高熱核心",
+    "description": null
   },
   "ToolBoxV1": {
     "localized_name": "大型工具箱",
@@ -1959,6 +2271,14 @@
     "localized_name": "套索陷阱",
     "description": "能抓住途經的帕魯。 只對小型帕魯或人類有效。"
   },
+  "UnlockEquipmentSlot_Weapon_01": {
+    "localized_name": "額外武器套",
+    "description": null
+  },
+  "UnlockEquipmentSlot_Weapon_02": {
+    "localized_name": "額外武器套2",
+    "description": null
+  },
   "Unlock_Picking_Tier1": {
     "localized_name": "簡易開鎖工具",
     "description": "持有此道具時，能夠透過撬鎖打開 需要青銅鑰匙才能打開的寶箱。 即使多次使用也不會壞。"
@@ -1979,9 +2299,29 @@
     "localized_name": "懸掛型火炬",
     "description": "可安裝在牆壁上。"
   },
+  "WaterBuildKit": {
+    "localized_name": "水上建築套組",
+    "description": "用於水上建造的工具。 可以在水面上放置地基。"
+  },
   "WeaponFactory_Dirty_04": {
     "localized_name": "高等文明武器工廠",
     "description": "生產武器及彈藥的工廠。 引進了高性能機器，可以快速製作武器。 需要有能進行手工作業的帕魯。"
+  },
+  "WidePenetrateShotgun": {
+    "localized_name": "散射光束槍",
+    "description": "強化了近戰性能的光束武器。能將壓縮的能量以擴散光束的形式發射出去。"
+  },
+  "WidePenetrateShotgunBullet": {
+    "localized_name": "散射光束槍彈藥",
+    "description": null
+  },
+  "WingGlider": {
+    "localized_name": "飛翼背包",
+    "description": "背在背上即可飛行的飛翼裝置。 消耗飛翼能量單元獲得推進力。"
+  },
+  "WingGlider_Fuel": {
+    "localized_name": "飛翼能量單元",
+    "description": "飛翼背包飛行所需的能源。"
   },
   "Wood_Gate": {
     "localized_name": "木造大門",
@@ -2002,6 +2342,10 @@
   "Workbench": {
     "localized_name": "初階工作台",
     "description": "用來製作簡單道具的「初階工作台」。 如有具備「手工作業」適應性的帕魯， 牠就會來協助作業。"
+  },
+  "WorldTreeIngot": {
+    "localized_name": "帕魯樹晶錠",
+    "description": "烈陽金屬和帕魯樹晶礦熔煉而成的至高合金。 是古代文明技術和世界樹之力的結晶，極為珍貴。 想將最高級的裝備和建築化為實體時不可或缺。"
   },
   "YakushimaBlade": {
     "localized_name": "彩虹貓之刃",
