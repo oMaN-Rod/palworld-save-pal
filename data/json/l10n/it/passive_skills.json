@@ -23,12 +23,20 @@
     "localized_name": "Aumento dell'attacco Liv. 1",
     "description": null
   },
+  "Attack_ACC_up1_Armor": {
+    "localized_name": "Aumento dell'attacco (piccolo) Liv. 1",
+    "description": null
+  },
   "Attack_ACC_up1_Otomo_Only_Equip": {
     "localized_name": "Aumento dell'attacco dei Pal Liv. 1",
     "description": null
   },
   "Attack_ACC_up2": {
     "localized_name": "Aumento dell'attacco Liv. 2",
+    "description": null
+  },
+  "Attack_ACC_up2_Armor": {
+    "localized_name": "Aumento dell'attacco (piccolo) Liv. 2",
     "description": null
   },
   "Attack_ACC_up2_Otomo_Only_Equip": {
@@ -39,8 +47,32 @@
     "localized_name": "Aumento dell'attacco Liv. 3",
     "description": null
   },
+  "Attack_ACC_up3_Armor": {
+    "localized_name": "Aumento dell'attacco (piccolo) Liv. 3",
+    "description": null
+  },
   "Attack_ACC_up3_Otomo_Only_Equip": {
     "localized_name": "Aumento dell'attacco dei Pal Liv. 3",
+    "description": null
+  },
+  "Attack_ACC_up4": {
+    "localized_name": "Aumento dell'attacco Liv. 4",
+    "description": null
+  },
+  "Attack_ACC_up4_Armor": {
+    "localized_name": "Aumento dell'attacco (piccolo) Liv. 4",
+    "description": null
+  },
+  "Attack_ACC_up4_Otomo_Only_Equip": {
+    "localized_name": "Aumento dell'attacco dei Pal Liv. 4",
+    "description": null
+  },
+  "AutoHPRegeneRate_Passive": {
+    "localized_name": "Coach guaritore",
+    "description": null
+  },
+  "AvoidDurationUp_EquipSkill_2": {
+    "localized_name": "Prolungamento dell'invincibilità in schivata",
     "description": null
   },
   "BossDefeatReward_AmaterasuWolf_Dark": {
@@ -79,6 +111,10 @@
     "localized_name": "Potenziamento danno di attributo erba (medio)",
     "description": null
   },
+  "BossDefeatReward_CactusDoll": {
+    "localized_name": "Potenziamento danno di attributo erba (piccolo)",
+    "description": null
+  },
   "BossDefeatReward_CaptainPenguin": {
     "localized_name": "Potenziamento danno di attributo acqua (piccolo)",
     "description": null
@@ -91,12 +127,36 @@
     "localized_name": "Potenziamento danno di attributo oscurità (piccolo)",
     "description": null
   },
+  "BossDefeatReward_CubeTurtle": {
+    "localized_name": "Potenziamento danno di attributo terra (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_CubeTurtle_Neutral": {
+    "localized_name": "Potenziamento danno non elementale (medio)",
+    "description": null
+  },
   "BossDefeatReward_DarkScorpion": {
     "localized_name": "Potenziamento danno di attributo oscurità (piccolo)",
     "description": null
   },
   "BossDefeatReward_DarkScorpion_Ground": {
     "localized_name": "Potenziamento danno di attributo terra (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_DomeArmorDragon": {
+    "localized_name": "Potenziamento danno di attributo terra (grande)",
+    "description": null
+  },
+  "BossDefeatReward_ElecLizard": {
+    "localized_name": "Potenziamento danno di attributo elettricità (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_ElecPanda": {
+    "localized_name": "Potenziamento danno di attributo elettricità (medio)",
+    "description": null
+  },
+  "BossDefeatReward_ElecSnail": {
+    "localized_name": "Potenziamento danno di attributo elettricità (piccolo)",
     "description": null
   },
   "BossDefeatReward_FairyDragon": {
@@ -111,6 +171,14 @@
     "localized_name": "Potenziamento danno di attributo elettricità (medio)",
     "description": null
   },
+  "BossDefeatReward_FireKirin": {
+    "localized_name": "Potenziamento danno di attributo fuoco (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_FlameBuffalo": {
+    "localized_name": "Potenziamento danno di attributo fuoco (piccolo)",
+    "description": null
+  },
   "BossDefeatReward_FlowerDinosaur_Electric": {
     "localized_name": "Potenziamento danno di attributo elettricità (piccolo)",
     "description": null
@@ -119,12 +187,32 @@
     "localized_name": "Potenziamento danno di attributo erba (piccolo)",
     "description": null
   },
+  "BossDefeatReward_FoxExorcist": {
+    "localized_name": "Potenziamento danno di attributo fuoco (medio)",
+    "description": null
+  },
+  "BossDefeatReward_FoxMage": {
+    "localized_name": "Potenziamento danno di attributo fuoco (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_GhostDragon": {
+    "localized_name": "Potenziamento danno di attributo drago (medio)",
+    "description": null
+  },
   "BossDefeatReward_GhostRabbit": {
     "localized_name": "Potenziamento danno di attributo oscurità (piccolo)",
     "description": null
   },
   "BossDefeatReward_GoldenHorse": {
     "localized_name": "Potenziamento danno di attributo terra (medio)",
+    "description": null
+  },
+  "BossDefeatReward_GrassGolem": {
+    "localized_name": "Potenziamento danno di attributo erba (medio)",
+    "description": null
+  },
+  "BossDefeatReward_GrassGolem_Dark": {
+    "localized_name": "Potenziamento danno di attributo oscurità (medio)",
     "description": null
   },
   "BossDefeatReward_GrassMammoth": {
@@ -159,6 +247,10 @@
     "localized_name": "Potenziamento danno di attributo acqua (medio)",
     "description": null
   },
+  "BossDefeatReward_IceFox": {
+    "localized_name": "Potenziamento danno di attributo ghiaccio (piccolo)",
+    "description": null
+  },
   "BossDefeatReward_IceHorse": {
     "localized_name": "Potenziamento danno di attributo ghiaccio (grande)",
     "description": null
@@ -177,6 +269,10 @@
   },
   "BossDefeatReward_JetDragon": {
     "localized_name": "Potenziamento danno di attributo drago (grande)",
+    "description": null
+  },
+  "BossDefeatReward_KabukiMan": {
+    "localized_name": "Potenziamento danno di attributo fuoco (medio)",
     "description": null
   },
   "BossDefeatReward_KingAlpaca": {
@@ -207,12 +303,32 @@
     "localized_name": "Potenziamento danno di attributo drago (piccolo)",
     "description": null
   },
+  "BossDefeatReward_LilyQueen": {
+    "localized_name": "Potenziamento danno di attributo erba (grande)",
+    "description": null
+  },
   "BossDefeatReward_LilyQueen_Dark": {
     "localized_name": "Potenziamento danno di attributo oscurità (piccolo)",
     "description": null
   },
+  "BossDefeatReward_LotusDragon": {
+    "localized_name": "Potenziamento danno di attributo acqua (medio)",
+    "description": null
+  },
+  "BossDefeatReward_Manticore": {
+    "localized_name": "Potenziamento danno di attributo fuoco (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_MoonChild": {
+    "localized_name": "Potenziamento danno di attributo oscurità (medio)",
+    "description": null
+  },
   "BossDefeatReward_MopKing": {
     "localized_name": "Potenziamento danno di attributo ghiaccio (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_MushroomLady": {
+    "localized_name": "Potenziamento danno di attributo erba (piccolo)",
     "description": null
   },
   "BossDefeatReward_Mutant": {
@@ -255,6 +371,14 @@
     "localized_name": "Potenziamento danno di attributo oscurità (piccolo)",
     "description": null
   },
+  "BossDefeatReward_RockBeast": {
+    "localized_name": "Potenziamento danno di attributo terra (medio)",
+    "description": null
+  },
+  "BossDefeatReward_RockBeast_Ice": {
+    "localized_name": "Potenziamento danno di attributo ghiaccio (medio)",
+    "description": null
+  },
   "BossDefeatReward_Ronin": {
     "localized_name": "Potenziamento danno di attributo fuoco (medio)",
     "description": null
@@ -275,6 +399,10 @@
     "localized_name": "Potenziamento danno di attributo acqua (piccolo)",
     "description": null
   },
+  "BossDefeatReward_ScorpionMan_Electric": {
+    "localized_name": "Potenziamento danno di attributo elettricità (piccolo)",
+    "description": null
+  },
   "BossDefeatReward_SkyDragon": {
     "localized_name": "Potenziamento danno di attributo drago (piccolo)",
     "description": null
@@ -287,12 +415,28 @@
     "localized_name": "Potenziamento danno di attributo elettricità (piccolo)",
     "description": null
   },
+  "BossDefeatReward_ThunderFluffyBird": {
+    "localized_name": "Potenziamento danno di attributo elettricità (piccolo)",
+    "description": null
+  },
   "BossDefeatReward_Umihebi": {
     "localized_name": "Potenziamento danno di attributo acqua (medio)",
     "description": null
   },
   "BossDefeatReward_VioletFairy": {
     "localized_name": "Potenziamento danno di attributo erba (medio)",
+    "description": null
+  },
+  "BossDefeatReward_VolcanicMonster": {
+    "localized_name": "Potenziamento danno di attributo terra (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_VolcanoDragon": {
+    "localized_name": "Potenziamento danno di attributo fuoco (piccolo)",
+    "description": null
+  },
+  "BossDefeatReward_VolcanoDragon_Ice": {
+    "localized_name": "Potenziamento danno di attributo ghiaccio (medio)",
     "description": null
   },
   "BossDefeatReward_WeaselDragon": {
@@ -305,6 +449,10 @@
   },
   "BossDefeatReward_WhiteDeer": {
     "localized_name": "Potenziamento danno non elementale (medio)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteDeer_Dark": {
+    "localized_name": "Potenziamento danno di attributo oscurità (medio)",
     "description": null
   },
   "BossDefeatReward_WhiteMoth": {
@@ -431,6 +579,10 @@
     "localized_name": "Aumento della difesa dei Pal Liv. 3",
     "description": null
   },
+  "Defense_ACC_up4_Otomo_Only_Equip": {
+    "localized_name": "Aumento della difesa dei Pal Liv. 4",
+    "description": null
+  },
   "Deffence_down1": {
     "localized_name": "Debolezza",
     "description": null
@@ -445,10 +597,18 @@
   },
   "Deffence_up2": {
     "localized_name": "Corpo robusto",
-    "description": null
+    "description": "Difesa +20.0% Immunità al tentennamento"
+  },
+  "Deffence_up2_2": {
+    "localized_name": "Peso massimo",
+    "description": "Difesa +20.0% Immunità al respingimento"
   },
   "Deffence_up3": {
     "localized_name": "Corpo di diamante",
+    "description": "Difesa +30.0% Immunità al tentennamento Immunità al respingimento"
+  },
+  "Defuser_ExplosiveSpore_EquipSkill": {
+    "localized_name": "Riduzione del danno da esplosione",
     "description": null
   },
   "ElementBoost_Aqua_1_PAL": {
@@ -491,6 +651,10 @@
     "localized_name": "Potenziamento danno di attributo oscurità dei Pal Liv. 3",
     "description": null
   },
+  "ElementBoost_Dark_4_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo oscurità dei Pal Liv. 4",
+    "description": null
+  },
   "ElementBoost_Dragon_1_BossDefeat": {
     "localized_name": "Potenziamento danno di attributo drago (piccolo)",
     "description": null
@@ -521,6 +685,10 @@
   },
   "ElementBoost_Dragon_3_Otomo_Only_Equip": {
     "localized_name": "Potenziamento danno di attributo drago dei Pal Liv. 3",
+    "description": null
+  },
+  "ElementBoost_Dragon_4_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo drago dei Pal Liv. 4",
     "description": null
   },
   "ElementBoost_Earth_1_BossDefeat": {
@@ -555,6 +723,10 @@
     "localized_name": "Potenziamento danno di attributo terra dei Pal Liv. 3",
     "description": null
   },
+  "ElementBoost_Earth_4_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo terra dei Pal Liv. 4",
+    "description": null
+  },
   "ElementBoost_Electricity_1_BossDefeat": {
     "localized_name": "Potenziamento danno di attributo elettricità (piccolo)",
     "description": null
@@ -577,6 +749,10 @@
   },
   "ElementBoost_Electricity_3_Otomo_Only_Equip": {
     "localized_name": "Potenziamento danno di attributo elettricità dei Pal Liv. 3",
+    "description": null
+  },
+  "ElementBoost_Electricity_4_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo elettricità dei Pal Liv. 4",
     "description": null
   },
   "ElementBoost_Fire_1_BossDefeat": {
@@ -611,6 +787,10 @@
     "localized_name": "Potenziamento danno di attributo fuoco dei Pal Liv. 3",
     "description": null
   },
+  "ElementBoost_Fire_4_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo fuoco dei Pal Liv. 4",
+    "description": null
+  },
   "ElementBoost_Ice_1_BossDefeat": {
     "localized_name": "Potenziamento danno di attributo ghiaccio (piccolo)",
     "description": null
@@ -641,6 +821,10 @@
   },
   "ElementBoost_Ice_3_Otomo_Only_Equip": {
     "localized_name": "Potenziamento danno di attributo ghiaccio dei Pal Liv. 3",
+    "description": null
+  },
+  "ElementBoost_Ice_4_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo ghiaccio dei Pal Liv. 4",
     "description": null
   },
   "ElementBoost_Leaf_1_BossDefeat": {
@@ -675,6 +859,10 @@
     "localized_name": "Potenziamento danno di attributo erba dei Pal Liv. 3",
     "description": null
   },
+  "ElementBoost_Leaf_4_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo erba dei Pal Liv. 4",
+    "description": null
+  },
   "ElementBoost_Normal_1_BossDefeat": {
     "localized_name": "Potenziamento danno non elementale (piccolo)",
     "description": null
@@ -705,6 +893,10 @@
   },
   "ElementBoost_Normal_3_Otomo_Only_Equip": {
     "localized_name": "Potenziamento danno non elementale dei Pal Liv. 3",
+    "description": null
+  },
+  "ElementBoost_Normal_4_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno non elementale dei Pal Liv. 4",
     "description": null
   },
   "ElementBoost_Thunder_1_PAL": {
@@ -739,6 +931,10 @@
     "localized_name": "Potenziamento danno di attributo acqua dei Pal Liv. 3",
     "description": null
   },
+  "ElementBoost_Water_4_Otomo_Only_Equip": {
+    "localized_name": "Potenziamento danno di attributo acqua dei Pal Liv. 4",
+    "description": null
+  },
   "ElementResist_Aqua_1": {
     "localized_name": "Resistenza al danno di attributo acqua Liv. 1",
     "description": null
@@ -753,6 +949,10 @@
   },
   "ElementResist_Aqua_3": {
     "localized_name": "Resistenza al danno di attributo acqua Liv. 3",
+    "description": null
+  },
+  "ElementResist_Aqua_4": {
+    "localized_name": "Resistenza al danno di attributo acqua Liv. 4",
     "description": null
   },
   "ElementResist_Dark_1": {
@@ -771,6 +971,10 @@
     "localized_name": "Resistenza al danno di attributo oscurità Liv. 3",
     "description": null
   },
+  "ElementResist_Dark_4": {
+    "localized_name": "Resistenza al danno di attributo oscurità Liv. 4",
+    "description": null
+  },
   "ElementResist_Dragon_1": {
     "localized_name": "Resistenza al danno di attributo drago Liv. 1",
     "description": null
@@ -785,6 +989,10 @@
   },
   "ElementResist_Dragon_3": {
     "localized_name": "Resistenza al danno di attributo drago Liv. 3",
+    "description": null
+  },
+  "ElementResist_Dragon_4": {
+    "localized_name": "Resistenza al danno di attributo drago Liv. 4",
     "description": null
   },
   "ElementResist_Earth_1": {
@@ -803,6 +1011,10 @@
     "localized_name": "Resistenza al danno di attributo terra Liv. 3",
     "description": null
   },
+  "ElementResist_Earth_4": {
+    "localized_name": "Resistenza al danno di attributo terra Liv. 4",
+    "description": null
+  },
   "ElementResist_Fire_1": {
     "localized_name": "Resistenza al danno di attributo fuoco Liv. 1",
     "description": null
@@ -817,6 +1029,10 @@
   },
   "ElementResist_Fire_3": {
     "localized_name": "Resistenza al danno di attributo fuoco Liv. 3",
+    "description": null
+  },
+  "ElementResist_Fire_4": {
+    "localized_name": "Resistenza al danno di attributo fuoco Liv. 4",
     "description": null
   },
   "ElementResist_Ice_1": {
@@ -835,6 +1051,10 @@
     "localized_name": "Resistenza al danno di attributo ghiaccio Liv. 3",
     "description": null
   },
+  "ElementResist_Ice_4": {
+    "localized_name": "Resistenza al danno di attributo ghiaccio Liv. 4",
+    "description": null
+  },
   "ElementResist_Leaf_1": {
     "localized_name": "Resistenza al danno di attributo erba Liv. 1",
     "description": null
@@ -849,6 +1069,10 @@
   },
   "ElementResist_Leaf_3": {
     "localized_name": "Resistenza al danno di attributo erba Liv. 3",
+    "description": null
+  },
+  "ElementResist_Leaf_4": {
+    "localized_name": "Resistenza al danno di attributo erba Liv. 4",
     "description": null
   },
   "ElementResist_Normal_1": {
@@ -867,6 +1091,10 @@
     "localized_name": "Resistenza al danno non elementale Liv. 3",
     "description": null
   },
+  "ElementResist_Normal_4": {
+    "localized_name": "Resistenza al danno non elementale Liv. 4",
+    "description": null
+  },
   "ElementResist_Thunder_1": {
     "localized_name": "Resistenza al danno di attributo elettricità Liv. 1",
     "description": null
@@ -883,8 +1111,16 @@
     "localized_name": "Resistenza al danno di attributo elettricità Liv. 3",
     "description": null
   },
+  "ElementResist_Thunder_4": {
+    "localized_name": "Resistenza al danno di attributo elettricità Liv. 4",
+    "description": null
+  },
   "EternalFlame": {
     "localized_name": "Calamità delle fiamme",
+    "description": null
+  },
+  "FriendshipPoint_Increase_EquipSkill": {
+    "localized_name": "Incremento del grado di fiducia dei Pal in squadra",
     "description": null
   },
   "GYM_NAME_Desert": {
@@ -916,19 +1152,27 @@
     "description": null
   },
   "HP_ACC_up1": {
-    "localized_name": "Aumento PV Liv. 1",
+    "localized_name": "Aumento dei PV Liv. 1",
     "description": null
   },
   "HP_ACC_up2": {
-    "localized_name": "Aumento PV Liv. 2",
+    "localized_name": "Aumento dei PV Liv. 2",
     "description": null
   },
   "HP_ACC_up3": {
-    "localized_name": "Aumento PV Liv. 3",
+    "localized_name": "Aumento dei PV Liv. 3",
+    "description": null
+  },
+  "HP_ACC_up4": {
+    "localized_name": "Aumento dei PV Liv. 4",
     "description": null
   },
   "Invader": {
     "localized_name": "Invasore",
+    "description": null
+  },
+  "Invalid_ToxicGas_EquipSkill": {
+    "localized_name": "Immunità al gas velenoso",
     "description": null
   },
   "JumpCount_Increase1": {
@@ -949,7 +1193,7 @@
   },
   "Legend": {
     "localized_name": "Leggenda",
-    "description": "Incremento dell'attacco: 20.0% Incremento della difesa: 20.0% Incremento della velocità di movimento: 15.0%"
+    "description": "Incremento dell'attacco: 20.0% Incremento della difesa: 20.0% Incremento della velocità di movimento: 20.0%"
   },
   "MaxInventoryWeight_up": {
     "localized_name": "Aumento capacità trasporto Liv. 1",
@@ -975,6 +1219,14 @@
     "localized_name": "Aumento capacità trasporto Liv. 3",
     "description": null
   },
+  "MaxInventoryWeight_up_Equip_4": {
+    "localized_name": "Aumento capacità trasporto Liv. 4",
+    "description": null
+  },
+  "MiniNushi": {
+    "localized_name": "Pezzo grosso",
+    "description": null
+  },
   "MoveSpeed_up_1": {
     "localized_name": "Rapidità",
     "description": "Incremento della velocità di movimento: 10.0%"
@@ -987,8 +1239,28 @@
     "localized_name": "Velocità divina",
     "description": "Incremento della velocità di movimento: 30.0%"
   },
+  "MutationPal_Babysitter": {
+    "localized_name": "Babysitter",
+    "description": "Quando è nella base, il Pal assegnato al ranch ha i seguenti bonus: Velocità di deposizione delle uova +30.0%, Velocità di schiusa delle uova +30.0%"
+  },
+  "MutationPal_ExplosionResist": {
+    "localized_name": "Corazzato",
+    "description": "Danno da esplosione: <Status_Up>Immune</>"
+  },
+  "MutationPal_Immortal": {
+    "localized_name": "Immortale",
+    "description": "Risucchio vitale +5.0% Recupero naturale dei PV dei Pal +100.0% Attacco +15.0%"
+  },
+  "MutationPal_Mutant": {
+    "localized_name": "Mutazione idiosincratica",
+    "description": "Recupero naturale dei PV di Pal e giocatore +50.0% Difesa +{EffectValue4}% Alterazione di stato |Veleno|: <Status_Up>Immune</> Alterazione di stato |In fiamme|: <Status_Up>Immune</>"
+  },
+  "NightOwl": {
+    "localized_name": "Nottambulo",
+    "description": "Sta in piedi tutta la notte, e quindi dorme di giorno."
+  },
   "Nocturnal": {
-    "localized_name": "Notturno",
+    "localized_name": "Insonnia",
     "description": "La notte prosegue le attività senza bisogno di dormire."
   },
   "NonKilling": {
@@ -1107,9 +1379,25 @@
     "localized_name": "Aumento dell'esperienza dei Pal Liv. 3",
     "description": null
   },
+  "PlayerSP_DecreaseRate_Passive": {
+    "localized_name": "Anti-stanchezza",
+    "description": null
+  },
   "Rare": {
     "localized_name": "Fortunato",
     "description": null
+  },
+  "ReloadSpeedUp_Passive": {
+    "localized_name": "Maestro della ricarica",
+    "description": null
+  },
+  "RideJumpCount_Increase1": {
+    "localized_name": "Corpo leggero",
+    "description": "Numero di salti mentre cavalchi +1"
+  },
+  "RideJumpCount_Increase2": {
+    "localized_name": "Salti volanti",
+    "description": "Numero di salti mentre cavalchi +2"
   },
   "SalePrice_Down_1": {
     "localized_name": "Malandato",
@@ -1126,6 +1414,18 @@
   "Salvation": {
     "localized_name": "Salvatore",
     "description": null
+  },
+  "SelfDeathAddItemDrop_up_1": {
+    "localized_name": "Condivisione",
+    "description": "Oggetti lasciati +15.0%"
+  },
+  "SelfDeathAddItemDrop_up_2": {
+    "localized_name": "Servizio spirituale",
+    "description": "Oggetti lasciati +50.0%"
+  },
+  "SelfDeathAddItemDrop_up_3": {
+    "localized_name": "Danza munifica",
+    "description": "Oggetti lasciati +100.0%"
   },
   "SphereModule_Curve": {
     "localized_name": "Curva sfera +1",
@@ -1166,6 +1466,30 @@
   "Stamina_Up_3": {
     "localized_name": "Moto perpetuo",
     "description": "Resistenza massima: +75.0% *Solo per i Pal che puoi cavalcare."
+  },
+  "StonDrop_Boost_1": {
+    "localized_name": "Bonus attività mineraria Liv. 1",
+    "description": "Modesto aumento di pietre e minerali ottenuti"
+  },
+  "StonDrop_Boost_2": {
+    "localized_name": "Bonus attività mineraria Liv. 2",
+    "description": "Aumento di pietre e minerali ottenuti"
+  },
+  "StonDrop_Boost_3": {
+    "localized_name": "Bonus attività mineraria Liv. 3",
+    "description": "Buon aumento di pietre e minerali ottenuti"
+  },
+  "StonDrop_Boost_4": {
+    "localized_name": "Bonus attività mineraria Liv. 4",
+    "description": "Considerevole aumento di pietre e minerali ottenuti"
+  },
+  "StonDrop_Boost_5": {
+    "localized_name": "Bonus attività mineraria Liv. 5",
+    "description": "Enorme aumento di pietre e minerali ottenuti"
+  },
+  "StonWoodDrop_Boost": {
+    "localized_name": "Bonus segheria e attività mineraria",
+    "description": "Considerevole aumento di legno, pietre e minerali ottenuti"
   },
   "SwimSpeed_up_1": {
     "localized_name": "Nuoto aggraziato",
@@ -1247,6 +1571,26 @@
     "localized_name": "Strega",
     "description": null
   },
+  "WoodDrop_Boost_1": {
+    "localized_name": "Bonus segheria Liv. 1",
+    "description": "Modesto aumento del legno ottenuto"
+  },
+  "WoodDrop_Boost_2": {
+    "localized_name": "Bonus segheria Liv. 2",
+    "description": "Aumento del legno ottenuto"
+  },
+  "WoodDrop_Boost_3": {
+    "localized_name": "Bonus segheria Liv. 3",
+    "description": "Buon aumento del legno ottenuto"
+  },
+  "WoodDrop_Boost_4": {
+    "localized_name": "Bonus segheria Liv. 4",
+    "description": "Considerevole aumento del legno ottenuto"
+  },
+  "WoodDrop_Boost_5": {
+    "localized_name": "Bonus segheria Liv. 5",
+    "description": "Enorme aumento del legno ottenuto"
+  },
   "WorkSpeed_ACC_up1": {
     "localized_name": "Velocità attività Liv. 1",
     "description": null
@@ -1258,6 +1602,46 @@
   "WorkSpeed_ACC_up3": {
     "localized_name": "Velocità attività Liv. 3",
     "description": null
+  },
+  "WorkSpeed_ACC_up4": {
+    "localized_name": "Velocità attività Liv. 4",
+    "description": null
+  },
+  "WorkSuitabilityAddRank_MonsterFarm_1": {
+    "localized_name": "Principiante dell'allevamento",
+    "description": "Allevamento - Attività possibili - +1"
+  },
+  "WorkSuitabilityAddRank_MonsterFarm_2": {
+    "localized_name": "Genio dell'allevamento",
+    "description": "Allevamento - Attività possibili - +2"
+  },
+  "WorldTree_ATK": {
+    "localized_name": "Lama sacra a doppio filo",
+    "description": "Attacco <NumBlue_13>+</>50.0% Difesa -30.0% Puoi avvicinarti a legno e rocce dell'albero del mondo senza distruggerli."
+  },
+  "WorldTree_ATK_DEF": {
+    "localized_name": "Divinità distruttrice",
+    "description": "Attacco <NumBlue_13>+</>40.0% Difesa <NumBlue_13>+</>20.0% PV massimi -50.0% Puoi avvicinarti a legno e rocce dell'albero del mondo senza distruggerli."
+  },
+  "WorldTree_CraftSpeed": {
+    "localized_name": "Mano del diavolo",
+    "description": "Velocità delle attività <NumBlue_13>+</>90.0<NumBlue_13>%</> Calo dei punti SAN <NumRed_13>+15.0%</> Puoi avvicinarti a legno e rocce dell'albero del mondo senza distruggerli."
+  },
+  "WorldTree_DEF": {
+    "localized_name": "Muro vivente del santuario",
+    "description": "Difesa <NumBlue_13>+</>50.0% Attacco -30.0% Puoi avvicinarti a legno e rocce dell'albero del mondo senza distruggerli."
+  },
+  "WorldTree_FullStomach": {
+    "localized_name": "Raccolto dell'albero sacro",
+    "description": "Resistenza al calo della sazietà <NumBlue_13>+50.0%</> PV -20.0<NumRed_13>%</> Puoi avvicinarti a legno e rocce dell'albero del mondo senza distruggerli."
+  },
+  "WorldTree_MoveSpeed": {
+    "localized_name": "Salto dimensionale",
+    "description": "Incremento della velocità di movimento <NumBlue_13>+</>50.0<NumBlue_13>%</> Resistenza al calo della sazietà <NumRed_13>+15.0%</> Puoi avvicinarti a legno e rocce dell'albero del mondo senza distruggerli."
+  },
+  "WorldTree_Sanity": {
+    "localized_name": "Savio eremita",
+    "description": "Resistenza al calo dei punti SAN <NumBlue_13>+50.0%</> Velocità delle attività -20.0<NumRed_13>%</> Puoi avvicinarti a legno e rocce dell'albero del mondo senza distruggerli."
   },
   "YakushimaDagameBoost_Magic_Equip": {
     "localized_name": "Potere sacro - Magia",
@@ -1289,6 +1673,10 @@
   },
   "defense_ACC_up3": {
     "localized_name": "Aumento della difesa Liv. 3",
+    "description": null
+  },
+  "defense_ACC_up4": {
+    "localized_name": "Aumento della difesa Liv. 4",
     "description": null
   }
 }

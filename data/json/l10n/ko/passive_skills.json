@@ -23,12 +23,20 @@
     "localized_name": "공격 증가 Lv1",
     "description": null
   },
+  "Attack_ACC_up1_Armor": {
+    "localized_name": "공격 증가 (소) Lv1",
+    "description": null
+  },
   "Attack_ACC_up1_Otomo_Only_Equip": {
     "localized_name": "팰 공격 증가 Lv1",
     "description": null
   },
   "Attack_ACC_up2": {
     "localized_name": "공격 증가 Lv2",
+    "description": null
+  },
+  "Attack_ACC_up2_Armor": {
+    "localized_name": "공격 증가 (소) Lv2",
     "description": null
   },
   "Attack_ACC_up2_Otomo_Only_Equip": {
@@ -39,8 +47,32 @@
     "localized_name": "공격 증가 Lv3",
     "description": null
   },
+  "Attack_ACC_up3_Armor": {
+    "localized_name": "공격 증가 (소) Lv3",
+    "description": null
+  },
   "Attack_ACC_up3_Otomo_Only_Equip": {
     "localized_name": "팰 공격 증가 Lv3",
+    "description": null
+  },
+  "Attack_ACC_up4": {
+    "localized_name": "공격 증가 Lv4",
+    "description": null
+  },
+  "Attack_ACC_up4_Armor": {
+    "localized_name": "공격 증가 (소) Lv4",
+    "description": null
+  },
+  "Attack_ACC_up4_Otomo_Only_Equip": {
+    "localized_name": "팰 공격 증가 Lv4",
+    "description": null
+  },
+  "AutoHPRegeneRate_Passive": {
+    "localized_name": "힐링 코치",
+    "description": null
+  },
+  "AvoidDurationUp_EquipSkill_2": {
+    "localized_name": "회피 시 무적 시간 연장",
     "description": null
   },
   "BossDefeatReward_AmaterasuWolf_Dark": {
@@ -79,6 +111,10 @@
     "localized_name": "풀 속성 피해 강화 (중)",
     "description": null
   },
+  "BossDefeatReward_CactusDoll": {
+    "localized_name": "풀 속성 피해 강화 (소)",
+    "description": null
+  },
   "BossDefeatReward_CaptainPenguin": {
     "localized_name": "물 속성 피해 강화 (소)",
     "description": null
@@ -91,12 +127,36 @@
     "localized_name": "어둠 속성 피해 강화 (소)",
     "description": null
   },
+  "BossDefeatReward_CubeTurtle": {
+    "localized_name": "땅 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_CubeTurtle_Neutral": {
+    "localized_name": "무속성 피해 강화 (중)",
+    "description": null
+  },
   "BossDefeatReward_DarkScorpion": {
     "localized_name": "어둠 속성 피해 강화 (소)",
     "description": null
   },
   "BossDefeatReward_DarkScorpion_Ground": {
     "localized_name": "땅 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_DomeArmorDragon": {
+    "localized_name": "땅 속성 피해 강화 (대)",
+    "description": null
+  },
+  "BossDefeatReward_ElecLizard": {
+    "localized_name": "번개 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_ElecPanda": {
+    "localized_name": "번개 속성 피해 강화 (중)",
+    "description": null
+  },
+  "BossDefeatReward_ElecSnail": {
+    "localized_name": "번개 속성 피해 강화 (소)",
     "description": null
   },
   "BossDefeatReward_FairyDragon": {
@@ -111,6 +171,14 @@
     "localized_name": "번개 속성 피해 강화 (중)",
     "description": null
   },
+  "BossDefeatReward_FireKirin": {
+    "localized_name": "화염 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_FlameBuffalo": {
+    "localized_name": "화염 속성 피해 강화 (소)",
+    "description": null
+  },
   "BossDefeatReward_FlowerDinosaur_Electric": {
     "localized_name": "번개 속성 피해 강화 (소)",
     "description": null
@@ -119,12 +187,32 @@
     "localized_name": "풀 속성 피해 강화 (소)",
     "description": null
   },
+  "BossDefeatReward_FoxExorcist": {
+    "localized_name": "화염 속성 피해 강화 (중)",
+    "description": null
+  },
+  "BossDefeatReward_FoxMage": {
+    "localized_name": "화염 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_GhostDragon": {
+    "localized_name": "용 속성 피해 강화 (중)",
+    "description": null
+  },
   "BossDefeatReward_GhostRabbit": {
     "localized_name": "어둠 속성 피해 강화 (소)",
     "description": null
   },
   "BossDefeatReward_GoldenHorse": {
     "localized_name": "땅 속성 피해 강화 (중)",
+    "description": null
+  },
+  "BossDefeatReward_GrassGolem": {
+    "localized_name": "풀 속성 피해 강화 (중)",
+    "description": null
+  },
+  "BossDefeatReward_GrassGolem_Dark": {
+    "localized_name": "어둠 속성 피해 강화 (중)",
     "description": null
   },
   "BossDefeatReward_GrassMammoth": {
@@ -159,6 +247,10 @@
     "localized_name": "물 속성 피해 강화 (중)",
     "description": null
   },
+  "BossDefeatReward_IceFox": {
+    "localized_name": "얼음 속성 피해 강화 (소)",
+    "description": null
+  },
   "BossDefeatReward_IceHorse": {
     "localized_name": "얼음 속성 피해 강화 (대)",
     "description": null
@@ -177,6 +269,10 @@
   },
   "BossDefeatReward_JetDragon": {
     "localized_name": "용 속성 피해 강화 (대)",
+    "description": null
+  },
+  "BossDefeatReward_KabukiMan": {
+    "localized_name": "화염 속성 피해 강화 (중)",
     "description": null
   },
   "BossDefeatReward_KingAlpaca": {
@@ -207,12 +303,32 @@
     "localized_name": "용 속성 피해 강화 (소)",
     "description": null
   },
+  "BossDefeatReward_LilyQueen": {
+    "localized_name": "풀 속성 피해 강화 (대)",
+    "description": null
+  },
   "BossDefeatReward_LilyQueen_Dark": {
     "localized_name": "어둠 속성 피해 강화 (소)",
     "description": null
   },
+  "BossDefeatReward_LotusDragon": {
+    "localized_name": "물 속성 피해 강화 (중)",
+    "description": null
+  },
+  "BossDefeatReward_Manticore": {
+    "localized_name": "화염 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_MoonChild": {
+    "localized_name": "어둠 속성 피해 강화 (중)",
+    "description": null
+  },
   "BossDefeatReward_MopKing": {
     "localized_name": "얼음 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_MushroomLady": {
+    "localized_name": "풀 속성 피해 강화 (소)",
     "description": null
   },
   "BossDefeatReward_Mutant": {
@@ -255,6 +371,14 @@
     "localized_name": "어둠 속성 피해 강화 (소)",
     "description": null
   },
+  "BossDefeatReward_RockBeast": {
+    "localized_name": "땅 속성 피해 강화 (중)",
+    "description": null
+  },
+  "BossDefeatReward_RockBeast_Ice": {
+    "localized_name": "얼음 속성 피해 강화 (중)",
+    "description": null
+  },
   "BossDefeatReward_Ronin": {
     "localized_name": "화염 속성 피해 강화 (중)",
     "description": null
@@ -275,6 +399,10 @@
     "localized_name": "물 속성 피해 강화 (소)",
     "description": null
   },
+  "BossDefeatReward_ScorpionMan_Electric": {
+    "localized_name": "번개 속성 피해 강화 (소)",
+    "description": null
+  },
   "BossDefeatReward_SkyDragon": {
     "localized_name": "용 속성 피해 강화 (소)",
     "description": null
@@ -287,12 +415,28 @@
     "localized_name": "번개 속성 피해 강화 (소)",
     "description": null
   },
+  "BossDefeatReward_ThunderFluffyBird": {
+    "localized_name": "번개 속성 피해 강화 (소)",
+    "description": null
+  },
   "BossDefeatReward_Umihebi": {
     "localized_name": "물 속성 피해 강화 (중)",
     "description": null
   },
   "BossDefeatReward_VioletFairy": {
     "localized_name": "풀 속성 피해 강화 (중)",
+    "description": null
+  },
+  "BossDefeatReward_VolcanicMonster": {
+    "localized_name": "땅 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_VolcanoDragon": {
+    "localized_name": "화염 속성 피해 강화 (소)",
+    "description": null
+  },
+  "BossDefeatReward_VolcanoDragon_Ice": {
+    "localized_name": "얼음 속성 피해 강화 (중)",
     "description": null
   },
   "BossDefeatReward_WeaselDragon": {
@@ -305,6 +449,10 @@
   },
   "BossDefeatReward_WhiteDeer": {
     "localized_name": "무속성 피해 강화 (중)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteDeer_Dark": {
+    "localized_name": "어둠 속성 피해 강화 (중)",
     "description": null
   },
   "BossDefeatReward_WhiteMoth": {
@@ -431,6 +579,10 @@
     "localized_name": "팰 방어 증가 Lv3",
     "description": null
   },
+  "Defense_ACC_up4_Otomo_Only_Equip": {
+    "localized_name": "팰 방어 증가 Lv4",
+    "description": null
+  },
   "Deffence_down1": {
     "localized_name": "약한 맷집",
     "description": null
@@ -445,10 +597,18 @@
   },
   "Deffence_up2": {
     "localized_name": "억센 육체",
-    "description": null
+    "description": "방어 +20.0% 피격 경직 무효"
+  },
+  "Deffence_up2_2": {
+    "localized_name": "헤비급",
+    "description": "방어 +20.0% 넉백 무효"
   },
   "Deffence_up3": {
     "localized_name": "다이아몬드 보디",
+    "description": "방어 +30.0% 피격 경직 무효 넉백 무효"
+  },
+  "Defuser_ExplosiveSpore_EquipSkill": {
+    "localized_name": "폭발 피해 경감",
     "description": null
   },
   "ElementBoost_Aqua_1_PAL": {
@@ -491,6 +651,10 @@
     "localized_name": "팰 어둠 속성 피해 강화 Lv3",
     "description": null
   },
+  "ElementBoost_Dark_4_Otomo_Only_Equip": {
+    "localized_name": "팰 어둠 속성 피해 강화 Lv4",
+    "description": null
+  },
   "ElementBoost_Dragon_1_BossDefeat": {
     "localized_name": "용 속성 피해 강화 (소)",
     "description": null
@@ -521,6 +685,10 @@
   },
   "ElementBoost_Dragon_3_Otomo_Only_Equip": {
     "localized_name": "팰 용 속성 피해 강화 Lv3",
+    "description": null
+  },
+  "ElementBoost_Dragon_4_Otomo_Only_Equip": {
+    "localized_name": "팰 용 속성 피해 강화 Lv4",
     "description": null
   },
   "ElementBoost_Earth_1_BossDefeat": {
@@ -555,6 +723,10 @@
     "localized_name": "팰 땅 속성 피해 강화 Lv3",
     "description": null
   },
+  "ElementBoost_Earth_4_Otomo_Only_Equip": {
+    "localized_name": "팰 땅 속성 피해 강화 Lv4",
+    "description": null
+  },
   "ElementBoost_Electricity_1_BossDefeat": {
     "localized_name": "번개 속성 피해 강화 (소)",
     "description": null
@@ -577,6 +749,10 @@
   },
   "ElementBoost_Electricity_3_Otomo_Only_Equip": {
     "localized_name": "팰 번개 속성 피해 강화 Lv3",
+    "description": null
+  },
+  "ElementBoost_Electricity_4_Otomo_Only_Equip": {
+    "localized_name": "팰 번개 속성 피해 강화 Lv4",
     "description": null
   },
   "ElementBoost_Fire_1_BossDefeat": {
@@ -611,6 +787,10 @@
     "localized_name": "팰 화염 속성 피해 강화 Lv3",
     "description": null
   },
+  "ElementBoost_Fire_4_Otomo_Only_Equip": {
+    "localized_name": "팰 화염 속성 피해 강화 Lv4",
+    "description": null
+  },
   "ElementBoost_Ice_1_BossDefeat": {
     "localized_name": "얼음 속성 피해 강화 (소)",
     "description": null
@@ -641,6 +821,10 @@
   },
   "ElementBoost_Ice_3_Otomo_Only_Equip": {
     "localized_name": "팰 얼음 속성 피해 강화 Lv3",
+    "description": null
+  },
+  "ElementBoost_Ice_4_Otomo_Only_Equip": {
+    "localized_name": "팰 얼음 속성 피해 강화 Lv4",
     "description": null
   },
   "ElementBoost_Leaf_1_BossDefeat": {
@@ -675,6 +859,10 @@
     "localized_name": "팰 풀 속성 피해 강화 Lv3",
     "description": null
   },
+  "ElementBoost_Leaf_4_Otomo_Only_Equip": {
+    "localized_name": "팰 풀 속성 피해 강화 Lv4",
+    "description": null
+  },
   "ElementBoost_Normal_1_BossDefeat": {
     "localized_name": "무속성 피해 강화 (소)",
     "description": null
@@ -705,6 +893,10 @@
   },
   "ElementBoost_Normal_3_Otomo_Only_Equip": {
     "localized_name": "팰 무속성 피해 강화 Lv3",
+    "description": null
+  },
+  "ElementBoost_Normal_4_Otomo_Only_Equip": {
+    "localized_name": "팰 무속성 피해 강화 Lv4",
     "description": null
   },
   "ElementBoost_Thunder_1_PAL": {
@@ -739,6 +931,10 @@
     "localized_name": "팰 물 속성 피해 강화 Lv3",
     "description": null
   },
+  "ElementBoost_Water_4_Otomo_Only_Equip": {
+    "localized_name": "팰 물 속성 피해 강화 Lv4",
+    "description": null
+  },
   "ElementResist_Aqua_1": {
     "localized_name": "물 속성 피해 경감 Lv1",
     "description": null
@@ -753,6 +949,10 @@
   },
   "ElementResist_Aqua_3": {
     "localized_name": "물 속성 피해 경감 Lv3",
+    "description": null
+  },
+  "ElementResist_Aqua_4": {
+    "localized_name": "물 속성 피해 경감 Lv4",
     "description": null
   },
   "ElementResist_Dark_1": {
@@ -771,6 +971,10 @@
     "localized_name": "어둠 속성 피해 경감 Lv3",
     "description": null
   },
+  "ElementResist_Dark_4": {
+    "localized_name": "어둠 속성 피해 경감 Lv4",
+    "description": null
+  },
   "ElementResist_Dragon_1": {
     "localized_name": "용 속성 피해 경감 Lv1",
     "description": null
@@ -785,6 +989,10 @@
   },
   "ElementResist_Dragon_3": {
     "localized_name": "용 속성 피해 경감 Lv3",
+    "description": null
+  },
+  "ElementResist_Dragon_4": {
+    "localized_name": "용 속성 피해 경감 Lv4",
     "description": null
   },
   "ElementResist_Earth_1": {
@@ -803,6 +1011,10 @@
     "localized_name": "땅 속성 피해 경감 Lv3",
     "description": null
   },
+  "ElementResist_Earth_4": {
+    "localized_name": "땅 속성 피해 경감 Lv4",
+    "description": null
+  },
   "ElementResist_Fire_1": {
     "localized_name": "화염 속성 피해 경감 Lv1",
     "description": null
@@ -817,6 +1029,10 @@
   },
   "ElementResist_Fire_3": {
     "localized_name": "화염 속성 피해 경감 Lv3",
+    "description": null
+  },
+  "ElementResist_Fire_4": {
+    "localized_name": "화염 속성 피해 경감 Lv4",
     "description": null
   },
   "ElementResist_Ice_1": {
@@ -835,6 +1051,10 @@
     "localized_name": "얼음 속성 피해 경감 Lv3",
     "description": null
   },
+  "ElementResist_Ice_4": {
+    "localized_name": "얼음 속성 피해 경감 Lv4",
+    "description": null
+  },
   "ElementResist_Leaf_1": {
     "localized_name": "풀 속성 피해 경감 Lv1",
     "description": null
@@ -849,6 +1069,10 @@
   },
   "ElementResist_Leaf_3": {
     "localized_name": "풀 속성 피해 경감 Lv3",
+    "description": null
+  },
+  "ElementResist_Leaf_4": {
+    "localized_name": "풀 속성 피해 경감 Lv4",
     "description": null
   },
   "ElementResist_Normal_1": {
@@ -867,6 +1091,10 @@
     "localized_name": "무속성 피해 경감 Lv3",
     "description": null
   },
+  "ElementResist_Normal_4": {
+    "localized_name": "무속성 피해 경감 Lv4",
+    "description": null
+  },
   "ElementResist_Thunder_1": {
     "localized_name": "번개 속성 피해 경감 Lv1",
     "description": null
@@ -883,8 +1111,16 @@
     "localized_name": "번개 속성 피해 경감 Lv3",
     "description": null
   },
+  "ElementResist_Thunder_4": {
+    "localized_name": "번개 속성 피해 경감 Lv4",
+    "description": null
+  },
   "EternalFlame": {
     "localized_name": "영원한 불꽃",
+    "description": null
+  },
+  "FriendshipPoint_Increase_EquipSkill": {
+    "localized_name": "보유 팰의 신뢰도 상승량 증가",
     "description": null
   },
   "GYM_NAME_Desert": {
@@ -916,19 +1152,27 @@
     "description": null
   },
   "HP_ACC_up1": {
-    "localized_name": "체력 증가 Lv1",
+    "localized_name": "HP 증가 Lv1",
     "description": null
   },
   "HP_ACC_up2": {
-    "localized_name": "체력 증가 Lv2",
+    "localized_name": "HP 증가 Lv2",
     "description": null
   },
   "HP_ACC_up3": {
-    "localized_name": "체력 증가 Lv3",
+    "localized_name": "HP 증가 Lv3",
+    "description": null
+  },
+  "HP_ACC_up4": {
+    "localized_name": "HP 증가 Lv4",
     "description": null
   },
   "Invader": {
     "localized_name": "침략자",
+    "description": null
+  },
+  "Invalid_ToxicGas_EquipSkill": {
+    "localized_name": "독가스 피해 무효",
     "description": null
   },
   "JumpCount_Increase1": {
@@ -949,7 +1193,7 @@
   },
   "Legend": {
     "localized_name": "전설",
-    "description": "공격+20.0% 방어+20.0% 이동 속도 상승 15.0%"
+    "description": "공격+20.0% 방어+20.0% 이동 속도 상승 20.0%"
   },
   "MaxInventoryWeight_up": {
     "localized_name": "최대 소지 중량 증가 Lv1",
@@ -975,6 +1219,14 @@
     "localized_name": "최대 소지 중량 증가 Lv3",
     "description": null
   },
+  "MaxInventoryWeight_up_Equip_4": {
+    "localized_name": "최대 소지 중량 증가 Lv4",
+    "description": null
+  },
+  "MiniNushi": {
+    "localized_name": "월척",
+    "description": null
+  },
   "MoveSpeed_up_1": {
     "localized_name": "재빠름",
     "description": "이동 속도 상승 10.0%"
@@ -987,8 +1239,28 @@
     "localized_name": "신속",
     "description": "이동 속도 상승 30.0%"
   },
+  "MutationPal_Babysitter": {
+    "localized_name": "베이비시터",
+    "description": "거점에 있는 동안 배합 목장에 배치한 팰의 알 생산 속도 +30.0%, 부화 속도 +30.0%"
+  },
+  "MutationPal_ExplosionResist": {
+    "localized_name": "중장갑",
+    "description": "폭발 피해 <Status_Up>무효</>"
+  },
+  "MutationPal_Immortal": {
+    "localized_name": "불사신",
+    "description": "생명 흡수 +5.0% 팰 HP 자연 회복량 +100.0% 공격력 +15.0%"
+  },
+  "MutationPal_Mutant": {
+    "localized_name": "특이 체질",
+    "description": "팰과 플레이어의 HP 자연 회복량 +50.0% 방어력 +{EffectValue4}% 독 상태 이상 피해 <Status_Up>무효</> 화상 상태 이상 피해 <Status_Up>무효</>"
+  },
+  "NightOwl": {
+    "localized_name": "밤샘",
+    "description": "한밤중에도 일어나 있기 때문인지, 낮잠을 자주 잔다."
+  },
   "Nocturnal": {
-    "localized_name": "야행성",
+    "localized_name": "불면",
     "description": "밤이 되어도 잠들지 않고 계속 일한다."
   },
   "NonKilling": {
@@ -1107,9 +1379,25 @@
     "localized_name": "팰 경험치 획득량 증가 Lv3",
     "description": null
   },
+  "PlayerSP_DecreaseRate_Passive": {
+    "localized_name": "피로 관리사",
+    "description": null
+  },
   "Rare": {
     "localized_name": "희귀",
     "description": null
+  },
+  "ReloadSpeedUp_Passive": {
+    "localized_name": "재장전의 달인",
+    "description": null
+  },
+  "RideJumpCount_Increase1": {
+    "localized_name": "가벼운 몸",
+    "description": "탑승 중 점프 횟수 +1"
+  },
+  "RideJumpCount_Increase2": {
+    "localized_name": "하늘 뛰기",
+    "description": "탑승 중 점프 횟수 +2"
   },
   "SalePrice_Down_1": {
     "localized_name": "초라함",
@@ -1126,6 +1414,18 @@
   "Salvation": {
     "localized_name": "구세주",
     "description": null
+  },
+  "SelfDeathAddItemDrop_up_1": {
+    "localized_name": "나누는 마음",
+    "description": "자신의 드롭 아이템 +15.0%"
+  },
+  "SelfDeathAddItemDrop_up_2": {
+    "localized_name": "서비스 정신",
+    "description": "자신의 드롭 아이템 +50.0%"
+  },
+  "SelfDeathAddItemDrop_up_3": {
+    "localized_name": "호쾌한 대접",
+    "description": "자신의 드롭 아이템 +100.0%"
   },
   "SphereModule_Curve": {
     "localized_name": "스피어 커브 +1",
@@ -1166,6 +1466,30 @@
   "Stamina_Up_3": {
     "localized_name": "영구기관",
     "description": "최대 기력 +75.0% ※탑승 가능한 팰에게만 적용"
+  },
+  "StonDrop_Boost_1": {
+    "localized_name": "채굴량 증가 Lv1",
+    "description": "석재 및 광석 드롭량이 약간 증가한다"
+  },
+  "StonDrop_Boost_2": {
+    "localized_name": "채굴량 증가 Lv2",
+    "description": "석재 및 광석 드롭량이 증가한다"
+  },
+  "StonDrop_Boost_3": {
+    "localized_name": "채굴량 증가 Lv3",
+    "description": "석재 및 광석 드롭량이 크게 증가한다"
+  },
+  "StonDrop_Boost_4": {
+    "localized_name": "채굴량 증가 Lv4",
+    "description": "석재 및 광석 드롭량이 상당히 증가한다"
+  },
+  "StonDrop_Boost_5": {
+    "localized_name": "채굴량 증가 Lv5",
+    "description": "석재 및 광석 드롭량이 아주 크게 증가한다"
+  },
+  "StonWoodDrop_Boost": {
+    "localized_name": "벌목 및 채굴량 증가",
+    "description": "목재, 석재, 광석 드롭량이 상당히 증가한다"
   },
   "SwimSpeed_up_1": {
     "localized_name": "유연한 헤엄",
@@ -1247,6 +1571,26 @@
     "localized_name": "마녀",
     "description": null
   },
+  "WoodDrop_Boost_1": {
+    "localized_name": "벌목량 증가 Lv1",
+    "description": "목재 드롭량이 약간 증가한다"
+  },
+  "WoodDrop_Boost_2": {
+    "localized_name": "벌목량 증가 Lv2",
+    "description": "목재 드롭량이 증가한다"
+  },
+  "WoodDrop_Boost_3": {
+    "localized_name": "벌목량 증가 Lv3",
+    "description": "목재 드롭량이 크게 증가한다"
+  },
+  "WoodDrop_Boost_4": {
+    "localized_name": "벌목량 증가 Lv4",
+    "description": "목재 드롭량이 상당히 증가한다"
+  },
+  "WoodDrop_Boost_5": {
+    "localized_name": "벌목량 증가 Lv5",
+    "description": "목재 드롭량이 아주 크게 증가한다"
+  },
   "WorkSpeed_ACC_up1": {
     "localized_name": "고속 작업 Lv1",
     "description": null
@@ -1258,6 +1602,46 @@
   "WorkSpeed_ACC_up3": {
     "localized_name": "고속 작업 Lv3",
     "description": null
+  },
+  "WorkSpeed_ACC_up4": {
+    "localized_name": "고속 작업 Lv4",
+    "description": null
+  },
+  "WorkSuitabilityAddRank_MonsterFarm_1": {
+    "localized_name": "목장 아이",
+    "description": "목장의 작업 적성 +1"
+  },
+  "WorkSuitabilityAddRank_MonsterFarm_2": {
+    "localized_name": "목장 주인",
+    "description": "목장의 작업 적성 +2"
+  },
+  "WorldTree_ATK": {
+    "localized_name": "양날의 성검",
+    "description": "공격 <NumBlue_13>+</>50.0% 방어 -30.0% 세계수의 나무나 바위에 접근해도 소멸되지 않는다"
+  },
+  "WorldTree_ATK_DEF": {
+    "localized_name": "파괴신",
+    "description": "공격 <NumBlue_13>+</>40.0% 방어 <NumBlue_13>+</>20.0% 최대 HP-50.0% 세계수의 나무나 바위에 접근해도 소멸되지 않는다"
+  },
+  "WorldTree_CraftSpeed": {
+    "localized_name": "악마의 손",
+    "description": "작업 속도 <NumBlue_13>+</>90.0<NumBlue_13>%</> SAN 수치 쉽게 내려감 <NumRed_13>+15.0%</> 세계수의 나무나 바위에 접근해도 소멸되지 않는다"
+  },
+  "WorldTree_DEF": {
+    "localized_name": "성역의 육벽",
+    "description": "방어 <NumBlue_13>+</>50.0% 공격 -30.0% 세계수의 나무나 바위에 접근해도 소멸되지 않는다"
+  },
+  "WorldTree_FullStomach": {
+    "localized_name": "신수의 못자리",
+    "description": "포만도 쉽게 내려가지 않음 <NumBlue_13>+50.0%</> HP -20.0<NumRed_13>%</> 세계수의 나무나 바위에 접근해도 소멸되지 않는다"
+  },
+  "WorldTree_MoveSpeed": {
+    "localized_name": "차원 도약",
+    "description": "이동 속도 상승 <NumBlue_13>+</>50.0<NumBlue_13>%</> 포만도 쉽게 내려감 <NumRed_13>+15.0%</> 세계수의 나무나 바위에 접근해도 소멸되지 않는다"
+  },
+  "WorldTree_Sanity": {
+    "localized_name": "선인",
+    "description": "SAN 수치 쉽게 내려가지 않음 <NumBlue_13>+50.0%</> 작업 속도 -20.0<NumRed_13>%</> 세계수의 나무나 바위에 접근해도 소멸되지 않는다"
   },
   "YakushimaDagameBoost_Magic_Equip": {
     "localized_name": "신성한 힘 (마법)",
@@ -1289,6 +1673,10 @@
   },
   "defense_ACC_up3": {
     "localized_name": "방어 증가 Lv3",
+    "description": null
+  },
+  "defense_ACC_up4": {
+    "localized_name": "방어 증가 Lv4",
     "description": null
   }
 }

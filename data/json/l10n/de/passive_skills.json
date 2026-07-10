@@ -23,12 +23,20 @@
     "localized_name": "ANG-Erhöhung Lv. 1",
     "description": null
   },
+  "Attack_ACC_up1_Armor": {
+    "localized_name": "ANG-Erhöhung (S) Lv. 1",
+    "description": null
+  },
   "Attack_ACC_up1_Otomo_Only_Equip": {
     "localized_name": "ANG-Erhöhung Lv. 1 (Pals)",
     "description": null
   },
   "Attack_ACC_up2": {
     "localized_name": "ANG-Erhöhung Lv. 2",
+    "description": null
+  },
+  "Attack_ACC_up2_Armor": {
+    "localized_name": "ANG-Erhöhung (S) Lv. 2",
     "description": null
   },
   "Attack_ACC_up2_Otomo_Only_Equip": {
@@ -39,8 +47,32 @@
     "localized_name": "ANG-Erhöhung Lv. 3",
     "description": null
   },
+  "Attack_ACC_up3_Armor": {
+    "localized_name": "ANG-Erhöhung (S) Lv. 3",
+    "description": null
+  },
   "Attack_ACC_up3_Otomo_Only_Equip": {
     "localized_name": "ANG-Erhöhung Lv. 3 (Pals)",
+    "description": null
+  },
+  "Attack_ACC_up4": {
+    "localized_name": "ANG-Erhöhung Lv. 4",
+    "description": null
+  },
+  "Attack_ACC_up4_Armor": {
+    "localized_name": "ANG-Erhöhung (S) Lv. 4",
+    "description": null
+  },
+  "Attack_ACC_up4_Otomo_Only_Equip": {
+    "localized_name": "ANG-Erhöhung Lv. 4 (Pals)",
+    "description": null
+  },
+  "AutoHPRegeneRate_Passive": {
+    "localized_name": "Heilcoach",
+    "description": null
+  },
+  "AvoidDurationUp_EquipSkill_2": {
+    "localized_name": "Längere Unverwundbarkeit beim Ausweichen",
     "description": null
   },
   "BossDefeatReward_AmaterasuWolf_Dark": {
@@ -79,6 +111,10 @@
     "localized_name": "Grasschadensverstärkung (M)",
     "description": null
   },
+  "BossDefeatReward_CactusDoll": {
+    "localized_name": "Grasschadenssteigerung (S)",
+    "description": null
+  },
   "BossDefeatReward_CaptainPenguin": {
     "localized_name": "Wasserschadensverstärkung (S)",
     "description": null
@@ -91,12 +127,36 @@
     "localized_name": "Schattenschadensverstärkung (S)",
     "description": null
   },
+  "BossDefeatReward_CubeTurtle": {
+    "localized_name": "Erdschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_CubeTurtle_Neutral": {
+    "localized_name": "Neutralschadenssteigerung (M)",
+    "description": null
+  },
   "BossDefeatReward_DarkScorpion": {
     "localized_name": "Schattenschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_DarkScorpion_Ground": {
     "localized_name": "Erdschadensverstärkung (S)",
+    "description": null
+  },
+  "BossDefeatReward_DomeArmorDragon": {
+    "localized_name": "Erdschadenssteigerung (L)",
+    "description": null
+  },
+  "BossDefeatReward_ElecLizard": {
+    "localized_name": "Elektroschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_ElecPanda": {
+    "localized_name": "Elektroschadenssteigerung (M)",
+    "description": null
+  },
+  "BossDefeatReward_ElecSnail": {
+    "localized_name": "Elektroschadenssteigerung (S)",
     "description": null
   },
   "BossDefeatReward_FairyDragon": {
@@ -111,6 +171,14 @@
     "localized_name": "Elektroschadensverstärkung (M)",
     "description": null
   },
+  "BossDefeatReward_FireKirin": {
+    "localized_name": "Feuerschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_FlameBuffalo": {
+    "localized_name": "Feuerschadenssteigerung (S)",
+    "description": null
+  },
   "BossDefeatReward_FlowerDinosaur_Electric": {
     "localized_name": "Elektroschadensverstärkung (S)",
     "description": null
@@ -119,12 +187,32 @@
     "localized_name": "Grasschadensverstärkung (S)",
     "description": null
   },
+  "BossDefeatReward_FoxExorcist": {
+    "localized_name": "Feuerschadenssteigerung (M)",
+    "description": null
+  },
+  "BossDefeatReward_FoxMage": {
+    "localized_name": "Feuerschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_GhostDragon": {
+    "localized_name": "Drachenschadenssteigerung (M)",
+    "description": null
+  },
   "BossDefeatReward_GhostRabbit": {
     "localized_name": "Schattenschadensverstärkung (S)",
     "description": null
   },
   "BossDefeatReward_GoldenHorse": {
     "localized_name": "Erdschadensverstärkung (M)",
+    "description": null
+  },
+  "BossDefeatReward_GrassGolem": {
+    "localized_name": "Grasschadenssteigerung (M)",
+    "description": null
+  },
+  "BossDefeatReward_GrassGolem_Dark": {
+    "localized_name": "Schattenschadenssteigerung (M)",
     "description": null
   },
   "BossDefeatReward_GrassMammoth": {
@@ -159,6 +247,10 @@
     "localized_name": "Wasserschadensverstärkung (M)",
     "description": null
   },
+  "BossDefeatReward_IceFox": {
+    "localized_name": "Eisschadenssteigerung (S)",
+    "description": null
+  },
   "BossDefeatReward_IceHorse": {
     "localized_name": "Eisschadensverstärkung (L)",
     "description": null
@@ -177,6 +269,10 @@
   },
   "BossDefeatReward_JetDragon": {
     "localized_name": "Drachenschadensverstärkung (L)",
+    "description": null
+  },
+  "BossDefeatReward_KabukiMan": {
+    "localized_name": "Feuerschadenssteigerung (M)",
     "description": null
   },
   "BossDefeatReward_KingAlpaca": {
@@ -207,12 +303,32 @@
     "localized_name": "Drachenschadensverstärkung (S)",
     "description": null
   },
+  "BossDefeatReward_LilyQueen": {
+    "localized_name": "Grasschadenssteigerung (L)",
+    "description": null
+  },
   "BossDefeatReward_LilyQueen_Dark": {
     "localized_name": "Schattenschadensverstärkung (S)",
     "description": null
   },
+  "BossDefeatReward_LotusDragon": {
+    "localized_name": "Wasserschadenssteigerung (M)",
+    "description": null
+  },
+  "BossDefeatReward_Manticore": {
+    "localized_name": "Feuerschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_MoonChild": {
+    "localized_name": "Schattenschadenssteigerung (M)",
+    "description": null
+  },
   "BossDefeatReward_MopKing": {
     "localized_name": "Eisschadensverstärkung (S)",
+    "description": null
+  },
+  "BossDefeatReward_MushroomLady": {
+    "localized_name": "Grasschadenssteigerung (S)",
     "description": null
   },
   "BossDefeatReward_Mutant": {
@@ -255,6 +371,14 @@
     "localized_name": "Schattenschadensverstärkung (S)",
     "description": null
   },
+  "BossDefeatReward_RockBeast": {
+    "localized_name": "Erdschadenssteigerung (M)",
+    "description": null
+  },
+  "BossDefeatReward_RockBeast_Ice": {
+    "localized_name": "Eisschadenssteigerung (M)",
+    "description": null
+  },
   "BossDefeatReward_Ronin": {
     "localized_name": "Feuerschadensverstärkung (M)",
     "description": null
@@ -275,6 +399,10 @@
     "localized_name": "Wasserschadensverstärkung (S)",
     "description": null
   },
+  "BossDefeatReward_ScorpionMan_Electric": {
+    "localized_name": "Elektroschadenssteigerung (S)",
+    "description": null
+  },
   "BossDefeatReward_SkyDragon": {
     "localized_name": "Drachenschadensverstärkung (S)",
     "description": null
@@ -287,12 +415,28 @@
     "localized_name": "Elektroschadensverstärkung (S)",
     "description": null
   },
+  "BossDefeatReward_ThunderFluffyBird": {
+    "localized_name": "Elektroschadenssteigerung (S)",
+    "description": null
+  },
   "BossDefeatReward_Umihebi": {
     "localized_name": "Wasserschadensverstärkung (M)",
     "description": null
   },
   "BossDefeatReward_VioletFairy": {
     "localized_name": "Grasschadensverstärkung (M)",
+    "description": null
+  },
+  "BossDefeatReward_VolcanicMonster": {
+    "localized_name": "Erdschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_VolcanoDragon": {
+    "localized_name": "Feuerschadenssteigerung (S)",
+    "description": null
+  },
+  "BossDefeatReward_VolcanoDragon_Ice": {
+    "localized_name": "Eisschadenssteigerung (M)",
     "description": null
   },
   "BossDefeatReward_WeaselDragon": {
@@ -305,6 +449,10 @@
   },
   "BossDefeatReward_WhiteDeer": {
     "localized_name": "Neutralschadensverstärkung (M)",
+    "description": null
+  },
+  "BossDefeatReward_WhiteDeer_Dark": {
+    "localized_name": "Schattenschadenssteigerung (M)",
     "description": null
   },
   "BossDefeatReward_WhiteMoth": {
@@ -431,6 +579,10 @@
     "localized_name": "VTD-Erhöhung Lv. 3 (Pals)",
     "description": null
   },
+  "Defense_ACC_up4_Otomo_Only_Equip": {
+    "localized_name": "VTD-Erhöhung Lv. 4 (Pals)",
+    "description": null
+  },
   "Deffence_down1": {
     "localized_name": "Unbelastbar",
     "description": null
@@ -445,10 +597,18 @@
   },
   "Deffence_up2": {
     "localized_name": "Stämmiger Wuchs",
-    "description": null
+    "description": "Verteidigung +20.0 % Betäubungsimmunität"
+  },
+  "Deffence_up2_2": {
+    "localized_name": "Schwergewicht",
+    "description": "Verteidigung +20.0 % Rückstoßimmunität"
   },
   "Deffence_up3": {
     "localized_name": "Diamantkörper",
+    "description": "Verteidigung +30.0 % Betäubungsimmunität Rückstoßimmunität"
+  },
+  "Defuser_ExplosiveSpore_EquipSkill": {
+    "localized_name": "Immunität gegen Explosionsschaden",
     "description": null
   },
   "ElementBoost_Aqua_1_PAL": {
@@ -491,6 +651,10 @@
     "localized_name": "Schattenschadenssteigerung Lv. 3 (Pals)",
     "description": null
   },
+  "ElementBoost_Dark_4_Otomo_Only_Equip": {
+    "localized_name": "Schattenschadenssteigerung Lv. 4 (Pals)",
+    "description": null
+  },
   "ElementBoost_Dragon_1_BossDefeat": {
     "localized_name": "Drachenschadenssteigerung (S)",
     "description": null
@@ -521,6 +685,10 @@
   },
   "ElementBoost_Dragon_3_Otomo_Only_Equip": {
     "localized_name": "Drachenschadenssteigerung Lv. 3 (Pals)",
+    "description": null
+  },
+  "ElementBoost_Dragon_4_Otomo_Only_Equip": {
+    "localized_name": "Drachenschadenssteigerung Lv. 4 (Pals)",
     "description": null
   },
   "ElementBoost_Earth_1_BossDefeat": {
@@ -555,6 +723,10 @@
     "localized_name": "Erdschadenssteigerung Lv. 3 (Pals)",
     "description": null
   },
+  "ElementBoost_Earth_4_Otomo_Only_Equip": {
+    "localized_name": "Erdschadenssteigerung Lv. 4 (Pals)",
+    "description": null
+  },
   "ElementBoost_Electricity_1_BossDefeat": {
     "localized_name": "Elektroschadenssteigerung (S)",
     "description": null
@@ -577,6 +749,10 @@
   },
   "ElementBoost_Electricity_3_Otomo_Only_Equip": {
     "localized_name": "Elektroschadenssteigerung Lv. 3 (Pals)",
+    "description": null
+  },
+  "ElementBoost_Electricity_4_Otomo_Only_Equip": {
+    "localized_name": "Elektroschadenssteigerung Lv. 4 (Pals)",
     "description": null
   },
   "ElementBoost_Fire_1_BossDefeat": {
@@ -611,6 +787,10 @@
     "localized_name": "Feuerschadenssteigerung Lv. 3 (Pals)",
     "description": null
   },
+  "ElementBoost_Fire_4_Otomo_Only_Equip": {
+    "localized_name": "Feuerschadenssteigerung Lv. 4 (Pals)",
+    "description": null
+  },
   "ElementBoost_Ice_1_BossDefeat": {
     "localized_name": "Eisschadenssteigerung (S)",
     "description": null
@@ -641,6 +821,10 @@
   },
   "ElementBoost_Ice_3_Otomo_Only_Equip": {
     "localized_name": "Eisschadenssteigerung Lv. 3 (Pals)",
+    "description": null
+  },
+  "ElementBoost_Ice_4_Otomo_Only_Equip": {
+    "localized_name": "Eisschadenssteigerung Lv. 4 (Pals)",
     "description": null
   },
   "ElementBoost_Leaf_1_BossDefeat": {
@@ -675,6 +859,10 @@
     "localized_name": "Grasschadenssteigerung Lv. 3 (Pals)",
     "description": null
   },
+  "ElementBoost_Leaf_4_Otomo_Only_Equip": {
+    "localized_name": "Grasschadenssteigerung Lv. 4 (Pals)",
+    "description": null
+  },
   "ElementBoost_Normal_1_BossDefeat": {
     "localized_name": "Neutralschadenssteigerung (S)",
     "description": null
@@ -705,6 +893,10 @@
   },
   "ElementBoost_Normal_3_Otomo_Only_Equip": {
     "localized_name": "Neutralschadenssteigerung Lv. 3 (Pals)",
+    "description": null
+  },
+  "ElementBoost_Normal_4_Otomo_Only_Equip": {
+    "localized_name": "Neutralschadenssteigerung Lv. 4 (Pals)",
     "description": null
   },
   "ElementBoost_Thunder_1_PAL": {
@@ -739,6 +931,10 @@
     "localized_name": "Wasserschadenssteigerung Lv. 3 (Pals)",
     "description": null
   },
+  "ElementBoost_Water_4_Otomo_Only_Equip": {
+    "localized_name": "Wasserschadenssteigerung Lv. 4 (Pals)",
+    "description": null
+  },
   "ElementResist_Aqua_1": {
     "localized_name": "Wasserschadensminderung Lv. 1",
     "description": null
@@ -753,6 +949,10 @@
   },
   "ElementResist_Aqua_3": {
     "localized_name": "Wasserschadensminderung Lv. 3",
+    "description": null
+  },
+  "ElementResist_Aqua_4": {
+    "localized_name": "Wasserschadensminderung Lv. 4",
     "description": null
   },
   "ElementResist_Dark_1": {
@@ -771,6 +971,10 @@
     "localized_name": "Schattenschadensminderung Lv. 3",
     "description": null
   },
+  "ElementResist_Dark_4": {
+    "localized_name": "Schattenschadensminderung Lv. 4",
+    "description": null
+  },
   "ElementResist_Dragon_1": {
     "localized_name": "Drachenschadensminderung Lv. 1",
     "description": null
@@ -785,6 +989,10 @@
   },
   "ElementResist_Dragon_3": {
     "localized_name": "Drachenschadensminderung Lv. 3",
+    "description": null
+  },
+  "ElementResist_Dragon_4": {
+    "localized_name": "Drachenschadensminderung Lv. 4",
     "description": null
   },
   "ElementResist_Earth_1": {
@@ -803,6 +1011,10 @@
     "localized_name": "Erdschadensminderung Lv. 3",
     "description": null
   },
+  "ElementResist_Earth_4": {
+    "localized_name": "Erdschadensminderung Lv. 4",
+    "description": null
+  },
   "ElementResist_Fire_1": {
     "localized_name": "Feuerschadensminderung Lv. 1",
     "description": null
@@ -817,6 +1029,10 @@
   },
   "ElementResist_Fire_3": {
     "localized_name": "Feuerschadensminderung Lv. 3",
+    "description": null
+  },
+  "ElementResist_Fire_4": {
+    "localized_name": "Feuerschadensminderung Lv. 4",
     "description": null
   },
   "ElementResist_Ice_1": {
@@ -835,6 +1051,10 @@
     "localized_name": "Eisschadensminderung Lv. 3",
     "description": null
   },
+  "ElementResist_Ice_4": {
+    "localized_name": "Eisschadensminderung Lv. 4",
+    "description": null
+  },
   "ElementResist_Leaf_1": {
     "localized_name": "Grasschadensminderung Lv. 1",
     "description": null
@@ -849,6 +1069,10 @@
   },
   "ElementResist_Leaf_3": {
     "localized_name": "Grasschadensminderung Lv. 3",
+    "description": null
+  },
+  "ElementResist_Leaf_4": {
+    "localized_name": "Grasschadensminderung Lv. 4",
     "description": null
   },
   "ElementResist_Normal_1": {
@@ -867,6 +1091,10 @@
     "localized_name": "Neutralschadensminderung Lv. 3",
     "description": null
   },
+  "ElementResist_Normal_4": {
+    "localized_name": "Neutralschadensminderung Lv. 4",
+    "description": null
+  },
   "ElementResist_Thunder_1": {
     "localized_name": "Elektroschadensminderung Lv. 1",
     "description": null
@@ -883,8 +1111,16 @@
     "localized_name": "Elektroschadensminderung Lv. 3",
     "description": null
   },
+  "ElementResist_Thunder_4": {
+    "localized_name": "Elektroschadensminderung Lv. 4",
+    "description": null
+  },
   "EternalFlame": {
     "localized_name": "Ewige Lohe",
+    "description": null
+  },
+  "FriendshipPoint_Increase_EquipSkill": {
+    "localized_name": "Zutraulichkeitsbonus für Team-Pals",
     "description": null
   },
   "GYM_NAME_Desert": {
@@ -927,8 +1163,16 @@
     "localized_name": "LP-Erhöhung Lv. 3",
     "description": null
   },
+  "HP_ACC_up4": {
+    "localized_name": "LP-Erhöhung Lv. 4",
+    "description": null
+  },
   "Invader": {
     "localized_name": "Eindringling",
+    "description": null
+  },
+  "Invalid_ToxicGas_EquipSkill": {
+    "localized_name": "Giftgasimmunität",
     "description": null
   },
   "JumpCount_Increase1": {
@@ -949,7 +1193,7 @@
   },
   "Legend": {
     "localized_name": "Legendär",
-    "description": "Angriff +20.0 % Verteidigung +20.0 % Bewegungstempo +15.0 %"
+    "description": "Angriff +20.0 % Verteidigung +20.0 % Bewegungstempo +20.0 %"
   },
   "MaxInventoryWeight_up": {
     "localized_name": "Maximallasterhöhung Lv. 1",
@@ -975,6 +1219,14 @@
     "localized_name": "Maximallasterhöhung Lv. 3",
     "description": null
   },
+  "MaxInventoryWeight_up_Equip_4": {
+    "localized_name": "Maximallasterhöhung Lv. 4",
+    "description": null
+  },
+  "MiniNushi": {
+    "localized_name": "Prachtfang",
+    "description": null
+  },
   "MoveSpeed_up_1": {
     "localized_name": "Flink",
     "description": "Bewegungstempo +10.0 %"
@@ -987,8 +1239,28 @@
     "localized_name": "Blitzschnell",
     "description": "Bewegungstempo +30.0 %"
   },
+  "MutationPal_Babysitter": {
+    "localized_name": "Babysitter",
+    "description": "Wenn dieser Pal im Lager ist, steigt das Eierlegetempo von Pals auf Zuchtfarmen um 30.0 % und das Bruttempo um 30.0 %."
+  },
+  "MutationPal_ExplosionResist": {
+    "localized_name": "Bollwerk",
+    "description": "<Status_Up>Immunität</> gegen Explosionsschaden"
+  },
+  "MutationPal_Immortal": {
+    "localized_name": "Unsterblich",
+    "description": "Lebensraub +5.0 % Natürliche LP-Wiederherstellung (Pals) +100.0 % Angriff +15.0 %"
+  },
+  "MutationPal_Mutant": {
+    "localized_name": "Anomalie",
+    "description": "Natürliche LP-Wiederherstellung (Pals und Spieler) +50.0 % Verteidigung +{EffectValue4} % <Status_Up>Immunität</> gegen Giftschaden <Status_Up>Immunität</> gegen Verbrennungsschaden"
+  },
+  "NightOwl": {
+    "localized_name": "Nachteule",
+    "description": "Bleibt bis spät in die Nacht wach und holt den Schlaf dann tagsüber nach."
+  },
   "Nocturnal": {
-    "localized_name": "Nachtaktiv",
+    "localized_name": "Insomnie",
     "description": "Schläft nachts nicht und arbeitet weiter."
   },
   "NonKilling": {
@@ -1107,9 +1379,25 @@
     "localized_name": "EP-Bonus Lv. 3 (Pals)",
     "description": null
   },
+  "PlayerSP_DecreaseRate_Passive": {
+    "localized_name": "Ausdauerprofi",
+    "description": null
+  },
   "Rare": {
     "localized_name": "Außergewöhnlich",
     "description": null
+  },
+  "ReloadSpeedUp_Passive": {
+    "localized_name": "Nachlademeister",
+    "description": null
+  },
+  "RideJumpCount_Increase1": {
+    "localized_name": "Federleicht",
+    "description": "Sprungzahl beim Reiten +1"
+  },
+  "RideJumpCount_Increase2": {
+    "localized_name": "Himmelsläufer",
+    "description": "Sprungzahl beim Reiten +2"
   },
   "SalePrice_Down_1": {
     "localized_name": "Räudig",
@@ -1126,6 +1414,18 @@
   "Salvation": {
     "localized_name": "Erlöser",
     "description": null
+  },
+  "SelfDeathAddItemDrop_up_1": {
+    "localized_name": "Freigiebig",
+    "description": "Eigene Beutemenge +15.0 %"
+  },
+  "SelfDeathAddItemDrop_up_2": {
+    "localized_name": "Spendabel",
+    "description": "Eigene Beutemenge +50.0 %"
+  },
+  "SelfDeathAddItemDrop_up_3": {
+    "localized_name": "Selbstlos",
+    "description": "Eigene Beutemenge +100.0 %"
   },
   "SphereModule_Curve": {
     "localized_name": "Sphärenkurve +1",
@@ -1166,6 +1466,30 @@
   "Stamina_Up_3": {
     "localized_name": "Endloser Antrieb",
     "description": "Maximale Ausdauer +75.0 % (Gilt nur für reitbare Pals.)"
+  },
+  "StonDrop_Boost_1": {
+    "localized_name": "Bergbau St. 1",
+    "description": "Erhöht die Ausbeute beim Abbau von Stein und Erz leicht."
+  },
+  "StonDrop_Boost_2": {
+    "localized_name": "Bergbau St. 2",
+    "description": "Erhöht die Ausbeute beim Abbau von Stein und Erz."
+  },
+  "StonDrop_Boost_3": {
+    "localized_name": "Bergbau St. 3",
+    "description": "Erhöht die Ausbeute beim Abbau von Stein und Erz deutlich."
+  },
+  "StonDrop_Boost_4": {
+    "localized_name": "Bergbau St. 4",
+    "description": "Erhöht die Ausbeute beim Abbau von Stein und Erz beträchtlich."
+  },
+  "StonDrop_Boost_5": {
+    "localized_name": "Bergbau St. 5",
+    "description": "Erhöht die Ausbeute beim Abbau von Stein und Erz extrem."
+  },
+  "StonWoodDrop_Boost": {
+    "localized_name": "Ertragssteigerung beim Holzfällen/Bergbau",
+    "description": "Erhöht die Ausbeute beim Holzfällen sowie beim Abbau von Stein und Erz beträchtlich."
   },
   "SwimSpeed_up_1": {
     "localized_name": "Stromlinienform",
@@ -1247,6 +1571,26 @@
     "localized_name": "Hexe",
     "description": null
   },
+  "WoodDrop_Boost_1": {
+    "localized_name": "Holzfällen St. 1",
+    "description": "Erhöht die Ausbeute beim Holzfällen leicht."
+  },
+  "WoodDrop_Boost_2": {
+    "localized_name": "Holzfällen St. 2",
+    "description": "Erhöht die Ausbeute beim Holzfällen."
+  },
+  "WoodDrop_Boost_3": {
+    "localized_name": "Holzfällen St. 3",
+    "description": "Erhöht die Ausbeute beim Holzfällen deutlich."
+  },
+  "WoodDrop_Boost_4": {
+    "localized_name": "Holzfällen St. 4",
+    "description": "Erhöht die Ausbeute beim Holzfällen beträchtlich."
+  },
+  "WoodDrop_Boost_5": {
+    "localized_name": "Holzfällen St. 5",
+    "description": "Erhöht die Ausbeute beim Holzfällen extrem."
+  },
   "WorkSpeed_ACC_up1": {
     "localized_name": "Schnellfertigung Lv. 1",
     "description": null
@@ -1258,6 +1602,46 @@
   "WorkSpeed_ACC_up3": {
     "localized_name": "Schnellfertigung Lv. 3",
     "description": null
+  },
+  "WorkSpeed_ACC_up4": {
+    "localized_name": "Schnellfertigung Lv. 4",
+    "description": null
+  },
+  "WorkSuitabilityAddRank_MonsterFarm_1": {
+    "localized_name": "Stallbursche",
+    "description": "Eignungslevel für Farmarbeit +1"
+  },
+  "WorkSuitabilityAddRank_MonsterFarm_2": {
+    "localized_name": "Stallmeister",
+    "description": "Eignungslevel für Farmarbeit +2"
+  },
+  "WorldTree_ATK": {
+    "localized_name": "Weiheklinge",
+    "description": "Angriff <NumBlue_13>+</>50.0 % Verteidigung -30.0 % Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
+  },
+  "WorldTree_ATK_DEF": {
+    "localized_name": "Avatar der Zerstörung",
+    "description": "Angriff <NumBlue_13>+</>40.0 % Verteidigung <NumBlue_13>+</>20.0 % Max. LP -50.0 % Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
+  },
+  "WorldTree_CraftSpeed": {
+    "localized_name": "Teufelshände",
+    "description": "Arbeitstempo <NumBlue_13>+</>90.0<NumBlue_13> %</> GEI sinkt um <NumRed_13>15,0 % schneller.</> Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
+  },
+  "WorldTree_DEF": {
+    "localized_name": "Sakralleib",
+    "description": "Verteidigung <NumBlue_13>+</>50.0 % Angriff -30.0 % Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
+  },
+  "WorldTree_FullStomach": {
+    "localized_name": "Weltenkeim",
+    "description": "Sattheit sinkt um <NumBlue_13>50,0 %</> langsamer. LP -20.0<NumRed_13> %</> Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
+  },
+  "WorldTree_MoveSpeed": {
+    "localized_name": "Dimensionsriss",
+    "description": "Bewegungstempo <NumBlue_13>+</>50.0<NumBlue_13> %</> Sattheit sinkt um <NumRed_13>15,0 % schneller.</> Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
+  },
+  "WorldTree_Sanity": {
+    "localized_name": "Erleuchteter",
+    "description": "GEI sinkt um <NumBlue_13>50,0 %</> langsamer. Arbeitstempo -20.0<NumRed_13> %</> Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
   },
   "YakushimaDagameBoost_Magic_Equip": {
     "localized_name": "Heilige Macht: Magie",
@@ -1289,6 +1673,10 @@
   },
   "defense_ACC_up3": {
     "localized_name": "VTD-Erhöhung Lv. 3",
+    "description": null
+  },
+  "defense_ACC_up4": {
+    "localized_name": "VTD-Erhöhung Lv. 4",
     "description": null
   }
 }
