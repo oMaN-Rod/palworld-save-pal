@@ -1,7 +1,20 @@
 //! Guild-lookup helpers shared by pal-summary extraction (`domain::pal`,
 //! Task 5) and guild detail loading (Task 8).
 
+use std::collections::HashMap;
+
+use crate::dto::container::{CharacterContainerDto, ItemContainerDto};
+use crate::dto::guild::{BaseDto, GuildDto, GuildLabResearchInfo};
+use crate::dto::ordered_map::OrderedMap;
+use crate::dto::pal::PalDto;
+use crate::dto::player::WorldMapPointDto;
+use crate::error::CoreError;
+use crate::gamedata::GameData;
 use crate::props;
+use crate::session::SaveSession;
+use uesave::{Properties, Property, PropertyKey, StructValue};
+
+use super::{containers, guild_tail, pal, world};
 
 /// From a `BaseCampSaveData` entry: `(group_id_belong_to, WorkerDirector
 /// container_id)`. Python paths: `value.RawData.value.group_id_belong_to`
@@ -87,6 +100,495 @@ pub fn find_player_guild_id(
         .player_guild_map
         .as_ref()
         .and_then(|map| map.get(&player_id).copied()))
+}
+
+// ============================================================================
+// Guild details, lab research, guild updates (Task 8) -- port of
+// `_load_guild_by_id`/`_load_bases_for_guild` (`game/mixins/loading.py`),
+// `Guild`/`Base`'s dumps (`game/guild.py`, `game/base.py`), and
+// `Guild.update_lab_research` (`guild.py:205-219`). `Guild.update_from`
+// (`guild.py:221-241`, wired up here as `apply_guild_dto`) is Task 10 scope
+// -- it depends on `apply_base_dto`/`apply_item_container_dto`, which don't
+// exist yet; adding a stub here would just have to be replaced, so it is
+// left out of this commit entirely (see this task's report).
+// ============================================================================
+
+pub fn guild_entry_index(
+    session: &SaveSession,
+    guild_id: uuid::Uuid,
+) -> Result<Option<usize>, CoreError> {
+    Ok(world::group_map(&session.level)?
+        .iter()
+        .position(|entry| props::as_uuid(&entry.key) == Some(guild_id)))
+}
+
+/// Deviation from the brief: the brief's version did
+/// `world::guild_extra_map(&session.level)?.iter().position(...)`, which does
+/// not compile against the real signature (`GuildExtraSaveDataMap` is
+/// optional, so `world::guild_extra_map` returns
+/// `Result<Option<&Vec<MapEntry>>, CoreError>`, not `Result<&Vec<MapEntry>,
+/// CoreError>` -- see `world.rs`'s own doc comment on why the three optional
+/// maps get this treatment). `?` alone leaves an `Option<&Vec<MapEntry>>`,
+/// which has no `.iter()` that walks its *entries*; `.and_then` is needed to
+/// reach inside it first.
+pub fn guild_extra_entry_index(
+    session: &SaveSession,
+    guild_id: uuid::Uuid,
+) -> Result<Option<usize>, CoreError> {
+    let entries = world::guild_extra_map(&session.level)?;
+    Ok(entries.and_then(|entries| {
+        entries
+            .iter()
+            .position(|entry| props::as_uuid(&entry.key) == Some(guild_id))
+    }))
+}
+
+/// `Guild._load_lab_research`'s raw-data lookup (`guild.py:176-203`):
+/// `guild_extra_data.value.Lab.value.RawData.value`, typed as `PalGuildLab`.
+///
+/// Deviation from the brief: the brief's version did
+/// `world::guild_extra_map(&session.level).ok()?`, which leaves an
+/// `Option<Option<&Vec<MapEntry>>>` collapsed by a single `?` into
+/// `Option<&Vec<MapEntry>>` -- one level short of the `&Vec<MapEntry>`
+/// `.get(extra_index)` needs (`Option` has no `.get()` method; that's
+/// `Vec`'s). `.ok().flatten()?` collapses both the `Result` and the
+/// `Option<Option<_>>` in one step.
+fn guild_extra_lab(
+    session: &SaveSession,
+    extra_index: usize,
+) -> Option<&uesave::games::palworld::PalGuildLab> {
+    let entries = world::guild_extra_map(&session.level).ok().flatten()?;
+    let value_props = props::struct_props(&entries.get(extra_index)?.value)?;
+    let lab_props = props::struct_props(value_props.0.get(&PropertyKey::from("Lab"))?)?;
+    match lab_props.0.get(&PropertyKey::from("RawData"))? {
+        Property::Struct(StructValue::PalGuildLab(lab)) => Some(lab),
+        _ => None,
+    }
+}
+
+/// `Guild.container_id`'s raw-data lookup (`guild.py:91-105`):
+/// `guild_extra_data.value.GuildItemStorage.value.RawData.value.container_id`.
+/// Same `.ok().flatten()?` fix as `guild_extra_lab` above.
+fn guild_chest_container_id(session: &SaveSession, extra_index: usize) -> Option<uuid::Uuid> {
+    let entries = world::guild_extra_map(&session.level).ok().flatten()?;
+    let value_props = props::struct_props(&entries.get(extra_index)?.value)?;
+    let storage_props =
+        props::struct_props(value_props.0.get(&PropertyKey::from("GuildItemStorage"))?)?;
+    match storage_props.0.get(&PropertyKey::from("RawData"))? {
+        Property::Struct(StructValue::PalGuildItemStorage(storage)) => {
+            Some(props::guid_to_uuid(&storage.container_id))
+        }
+        _ => None,
+    }
+}
+
+/// Base-container pal membership, matching `_load_pals_for_container`
+/// (`loading.py:317-346`) exactly: `slot_id = save_parameter.get("SlotId")`
+/// checks ONLY `"SlotId"` -- unlike `Pal.storage_slot`/`storage_id`'s getter
+/// (and `read_save_parameter_dto`, and the brief's own reference code for
+/// this function, which matched via `pal_dto.storage_id ==
+/// worker_container_id`), there is no `"SlotID"` fallback here. Every one of
+/// world1's 11 pals spells this property `"SlotId"` (0 use `"SlotID"`), so
+/// the two approaches happen to agree on this port's real-save fixtures; see
+/// this task's report for why the narrower, Python-literal check is used
+/// anyway.
+fn base_container_membership(save_parameter: &Properties) -> Option<uuid::Uuid> {
+    let slot = pal::param(save_parameter, "SlotId").and_then(props::struct_props)?;
+    slot.0
+        .get(&PropertyKey::from("ContainerId"))
+        .and_then(props::struct_props)
+        .and_then(|container| container.0.get(&PropertyKey::from("ID")))
+        .and_then(props::as_uuid)
+}
+
+/// `_get_map_object_index`/`_build_map_object_index` (`indexing.py:41-58`):
+/// groups every `MapObjectSaveData` element by
+/// `Model.RawData.value.base_camp_id_belong_to`, so `_load_bases_for_guild`
+/// can look a base's map objects up in O(1) instead of re-scanning
+/// `MapObjectSaveData` once per base.
+fn map_object_properties_by_base_id(
+    map_objects: &[StructValue],
+) -> HashMap<uuid::Uuid, Vec<&Properties>> {
+    let mut index: HashMap<uuid::Uuid, Vec<&Properties>> = HashMap::new();
+    for map_object in map_objects {
+        let StructValue::Struct(object_props) = map_object else {
+            continue;
+        };
+        let Some(model_props) = object_props
+            .0
+            .get(&PropertyKey::from("Model"))
+            .and_then(props::struct_props)
+        else {
+            continue;
+        };
+        let Some(Property::Struct(StructValue::PalMapModel(model))) =
+            model_props.0.get(&PropertyKey::from("RawData"))
+        else {
+            continue;
+        };
+        let base_id = props::guid_to_uuid(&model.base_camp_id_belong_to);
+        index.entry(base_id).or_default().push(object_props);
+    }
+    index
+}
+
+/// Extracts `target_container_id` from an ItemContainer module's typed
+/// `RawData` (`base.py:214-219`'s
+/// `module["value"]["RawData"]["value"]["target_container_id"]`).
+///
+/// Deviation from the brief: the brief matched
+/// `Property::Struct(StructValue::PalMapConcreteModelModule(module))` and
+/// then matched enum variants directly on `module`, as if
+/// `PalMapConcreteModelModule` were itself the enum. The real `uesave-rs`
+/// shape (`map_concrete_model_module.rs`) is one level deeper:
+/// `PalMapConcreteModelModule` is a plain struct (`module_type`, `data`,
+/// `custom_version_data`), and the per-module-type enum
+/// (`PalMapConcreteModelModuleData`, with the `ItemContainer {
+/// target_container_id, .. }` variant this needs) lives at `module.data`.
+fn module_target_container_id(raw_data: &Property) -> Option<uuid::Uuid> {
+    let Property::Struct(StructValue::PalMapConcreteModelModule(module)) = raw_data else {
+        return None;
+    };
+    match &module.data {
+        uesave::games::palworld::PalMapConcreteModelModuleData::ItemContainer {
+            target_container_id,
+            ..
+        } => Some(props::guid_to_uuid(target_container_id)),
+        _ => None,
+    }
+}
+
+/// `_load_guild_by_id` + `_load_bases_for_guild` + `Guild`'s dump
+/// (`game/mixins/loading.py:203-346`, `game/guild.py`, `game/base.py`).
+/// `None` when the guild id doesn't resolve at all, or when its
+/// `GuildExtraSaveDataMap` entry is missing (`loading.py:222-224`: "Guild
+/// extra save data not found for guild %s" -> the guild does not load).
+///
+/// Deviation from the brief: session mutation (`loaded_guilds`/
+/// `guild_summaries[..].loaded`) is split out of the read-heavy DTO build,
+/// mirroring Task 7's `get_player_details`/`build_player_dto` split -- the
+/// brief's version interleaved a `&mut SaveSession` through the whole
+/// function body, which either fights the borrow checker once bases/pals
+/// start borrowing `session.level` while other code paths want to mutate
+/// other `SaveSession` fields, or forces every helper to also take `&mut`
+/// for no reason. `build_guild_dto` below takes `&SaveSession` and does
+/// nothing but read; `get_guild_details` does the two field writes after it
+/// returns, once no borrow of `session.level` is outstanding.
+pub fn get_guild_details(
+    session: &mut SaveSession,
+    game_data: &GameData,
+    guild_id: uuid::Uuid,
+) -> Result<Option<GuildDto>, CoreError> {
+    let Some(entry_index) = guild_entry_index(session, guild_id)? else {
+        return Ok(None);
+    };
+    let Some(extra_index) = guild_extra_entry_index(session, guild_id)? else {
+        return Ok(None);
+    };
+
+    let Some(dto) = build_guild_dto(session, game_data, guild_id, entry_index, extra_index)? else {
+        return Ok(None);
+    };
+
+    // loading.py:232-238: cached membership, then (after bases finish
+    // loading in Python; here, after the whole DTO -- including bases --
+    // has already been built) the summary's `loaded` flip. The two Python
+    // statements straddle `_load_bases_for_guild`; folding both builds into
+    // one pure function above and flipping both flags together afterward is
+    // an unobservable reordering (nothing in this task reads either flag
+    // mid-build).
+    session.loaded_guilds.insert(guild_id);
+    if let Some(summary) = session.guild_summaries.get_mut(&guild_id) {
+        summary.loaded = true;
+    }
+
+    Ok(Some(dto))
+}
+
+fn build_guild_dto(
+    session: &SaveSession,
+    game_data: &GameData,
+    guild_id: uuid::Uuid,
+    entry_index: usize,
+    extra_index: usize,
+) -> Result<Option<GuildDto>, CoreError> {
+    let (guild_name, base_camp_level, players, admin_player_uid) = {
+        let entries = world::group_map(&session.level)?;
+        let Some(group_data) = guild_tail::entry_group_data(&entries[entry_index]) else {
+            return Ok(None);
+        };
+        let tail = guild_tail::GuildTail::parse(&group_data.remaining_data)?;
+        let players: Vec<uuid::Uuid> = tail.players.iter().map(|p| p.player_uid).collect();
+        // guild.py:76-77 (`self.players[0] if self.players else None`). Note:
+        // `Guild.players` itself raises `UnboundLocalError` in real Python
+        // when the raw player list is empty -- a genuine Python bug found
+        // while porting this, NOT on the PARITY-BUG list, and NOT
+        // reproduced here (see this task's report). An empty `players` here
+        // is a normal, non-panicking "no admin" case.
+        let admin = players.first().copied();
+        (
+            tail.guild_name.clone(),
+            tail.base_camp_level,
+            players,
+            admin,
+        )
+    };
+
+    // lab research (guild.py:176-203, `lab_research`/`lab_research_data`).
+    let lab_research: Vec<GuildLabResearchInfo> = guild_extra_lab(session, extra_index)
+        .map(|lab| {
+            lab.research_info
+                .iter()
+                .map(|info| GuildLabResearchInfo {
+                    research_id: info.research_id.clone(),
+                    work_amount: info.work_amount as f64,
+                })
+                .collect()
+        })
+        .unwrap_or_default();
+
+    // guild chest (guild.py:91-105, 243-263).
+    let mut caches_scratch = crate::session::WorldCaches::default();
+    let container_id = guild_chest_container_id(session, extra_index);
+    let guild_chest = container_id.and_then(|chest_id| {
+        containers::read_item_container(
+            &session.level,
+            &mut caches_scratch,
+            game_data,
+            chest_id,
+            "GuildChest",
+            Some("GuildChest".to_string()),
+        )
+    });
+
+    // bases (loading.py:244-315).
+    let map_object_index = world::map_object_values(&session.level)?
+        .map(|values| map_object_properties_by_base_id(values))
+        .unwrap_or_default();
+    let empty_map_objects: Vec<&Properties> = Vec::new();
+    let character_container_index = world::build_character_container_index(&session.level);
+    let base_camp_entries: &[uesave::MapEntry] = world::base_camp_map(&session.level)?
+        .map(|entries| entries.as_slice())
+        .unwrap_or(&[]);
+
+    let base_entries_info: Vec<(uuid::Uuid, uuid::Uuid)> = base_camp_entries
+        .iter()
+        .filter_map(|base_entry| {
+            let base_id = props::as_uuid(&base_entry.key)?;
+            let (owner_guild, worker_container_id) = base_guild_and_container(base_entry)?;
+            (owner_guild == guild_id).then_some((base_id, worker_container_id))
+        })
+        .collect();
+
+    let mut bases: OrderedMap<uuid::Uuid, BaseDto> = OrderedMap::new();
+    for (base_id, worker_container_id) in base_entries_info {
+        let Some(container_entry_index) = character_container_index.get(&worker_container_id)
+        else {
+            continue; // loading.py:291-293
+        };
+        let Some(container_view) =
+            containers::read_character_container(&session.level, *container_entry_index)
+        else {
+            continue;
+        };
+
+        // base pals (loading.py:317-346).
+        let mut base_pals: OrderedMap<uuid::Uuid, PalDto> = OrderedMap::new();
+        for pal_entry in world::character_map(&session.level)? {
+            if world::entry_is_player(pal_entry) {
+                continue;
+            }
+            let Some(save_parameter) = world::entry_save_parameter(pal_entry) else {
+                continue;
+            };
+            if base_container_membership(save_parameter) != Some(worker_container_id) {
+                continue;
+            }
+            let Some(pal_dto) = pal::pal_dto_from_entry(pal_entry, game_data) else {
+                continue;
+            };
+            base_pals.insert(pal_dto.instance_id, pal_dto);
+        }
+
+        // base name / area_range / location (base.py's computed fields).
+        let base_entry = base_camp_entries
+            .iter()
+            .find(|entry| props::as_uuid(&entry.key) == Some(base_id));
+        let (base_name, area_range, location) = base_entry
+            .and_then(|entry| props::struct_props(&entry.value))
+            .and_then(|value_props| value_props.0.get(&PropertyKey::from("RawData")))
+            .map(|raw_data| match raw_data {
+                Property::Struct(StructValue::PalBaseCamp(base_camp)) => (
+                    Some(base_camp.name.clone()),
+                    Some(base_camp.area_range as f64),
+                    Some(WorldMapPointDto {
+                        x: base_camp.transform.translation.x.0,
+                        y: base_camp.transform.translation.y.0,
+                        z: base_camp.transform.translation.z.0,
+                    }),
+                ),
+                _ => (None, None, None),
+            })
+            .unwrap_or((None, None, None));
+
+        // storage containers: base map objects with an ItemContainer module
+        // (indexing.py:41-58 + base.py:196-228).
+        let mut storage_containers: OrderedMap<uuid::Uuid, ItemContainerDto> = OrderedMap::new();
+        let base_map_objects = map_object_index.get(&base_id).unwrap_or(&empty_map_objects);
+        for object_props in base_map_objects.iter().copied() {
+            let map_object_id = object_props
+                .0
+                .get(&PropertyKey::from("MapObjectId"))
+                .and_then(props::as_str)
+                .map(str::to_string);
+            let Some(concrete_props) = object_props
+                .0
+                .get(&PropertyKey::from("ConcreteModel"))
+                .and_then(props::struct_props)
+            else {
+                continue;
+            };
+            let Some(module_entries) = concrete_props
+                .0
+                .get(&PropertyKey::from("ModuleMap"))
+                .and_then(props::map_entries)
+            else {
+                continue;
+            };
+            for module in module_entries {
+                if props::as_str(&module.key)
+                    != Some("EPalMapObjectConcreteModelModuleType::ItemContainer")
+                {
+                    continue;
+                }
+                let Some(module_props) = props::struct_props(&module.value) else {
+                    continue;
+                };
+                let Some(target_container_id) = module_props
+                    .0
+                    .get(&PropertyKey::from("RawData"))
+                    .and_then(module_target_container_id)
+                else {
+                    continue;
+                };
+                if let Some(container_dto) = containers::read_item_container(
+                    &session.level,
+                    &mut caches_scratch,
+                    game_data,
+                    target_container_id,
+                    "BaseContainer",
+                    map_object_id.clone(),
+                ) {
+                    storage_containers.insert(target_container_id, container_dto);
+                }
+            }
+        }
+
+        bases.insert(
+            base_id,
+            BaseDto {
+                pals: base_pals,
+                container_id: Some(worker_container_id),
+                slot_count: Some(container_view.size),
+                storage_containers,
+                pal_container: Some(CharacterContainerDto {
+                    id: worker_container_id,
+                    player_uid: props::EMPTY_UUID,
+                    r#type: "Base".to_string(),
+                    size: container_view.size,
+                    slots: container_view.slots,
+                }),
+                id: base_id,
+                name: base_name,
+                location,
+                area_range,
+            },
+        );
+    }
+
+    Ok(Some(GuildDto {
+        bases: Some(bases),
+        guild_chest,
+        lab_research: Some(lab_research.clone()),
+        name: Some(guild_name),
+        base_camp_level: Some(base_camp_level),
+        id: Some(guild_id),
+        admin_player_uid,
+        players,
+        container_id,
+        lab_research_data: lab_research,
+    }))
+}
+
+/// `Guild.update_lab_research` (`guild.py:205-219`): full replacement of
+/// `research_info`; `current_research_id` and `trailing_bytes` untouched.
+/// Never touches `GroupSaveDataMap`'s raw guild-tail bytes -- this writes
+/// only into `GuildExtraSaveDataMap`'s `Lab.RawData` (a separate typed
+/// struct); see this task's report for the byte-identical proof that an
+/// untouched guild's raw tail survives a `get_guild_details`/
+/// `update_lab_research` call unchanged.
+///
+/// `Err(GuildNotFound)` only when the guild id itself was never loaded (this
+/// port's stand-in for Python's `self._guilds[guild_id]` lookup, which would
+/// raise `KeyError` before `update_lab_research` is ever called on an
+/// unloaded guild -- Task 13's WS handler owns that guard in the real
+/// pipeline). Once the guild id itself resolves, every other failure --
+/// missing/malformed `GuildExtraSaveDataMap` entry, missing `Lab`, an
+/// untyped `Lab.RawData` -- is a silent no-op (`Ok(())`), matching Python's
+/// own `if not self._lab_raw_data: logger.error(...); return` (a log
+/// message, not an exception).
+///
+/// Deviation from the brief: the brief's version (a) indexed straight into
+/// `world::guild_extra_map_mut(&mut session.level)?` as if it returned
+/// `&mut Vec<MapEntry>` (it returns `Result<Option<&mut Vec<MapEntry>>,
+/// CoreError>` -- optional maps again, see `guild_extra_entry_index`'s doc
+/// comment above), and (b) assigned `info.work_amount` (an `f64` on
+/// `GuildLabResearchInfo`) directly into `PalLabResearchInfo.work_amount`
+/// (an `f32` in the real `uesave-rs` struct) with no cast, which does not
+/// type-check. Both are fixed below; `as f32` matches Python's own
+/// unavoidable narrowing (the persisted bytes are IEEE-754 single-precision,
+/// `PalLabResearchInfo::write`'s `ar.write_f32::<LE>`; Python's `float` is a
+/// double up until the moment `struct.pack`s it into the save).
+pub fn update_lab_research(
+    session: &mut SaveSession,
+    guild_id: uuid::Uuid,
+    research_updates: &[GuildLabResearchInfo],
+) -> Result<(), CoreError> {
+    if !session.loaded_guilds.contains(&guild_id) {
+        return Err(CoreError::GuildNotFound(guild_id));
+    }
+    let Some(extra_index) = guild_extra_entry_index(session, guild_id)? else {
+        return Err(CoreError::GuildNotFound(guild_id));
+    };
+    let Some(entries) = world::guild_extra_map_mut(&mut session.level)? else {
+        return Err(CoreError::GuildNotFound(guild_id));
+    };
+    let Some(entry) = entries.get_mut(extra_index) else {
+        return Err(CoreError::GuildNotFound(guild_id));
+    };
+    let Some(value_props) = props::struct_props_mut(&mut entry.value) else {
+        return Ok(());
+    };
+    let Some(lab_props) = value_props
+        .0
+        .get_mut(&PropertyKey::from("Lab"))
+        .and_then(props::struct_props_mut)
+    else {
+        return Ok(());
+    };
+    let Some(Property::Struct(StructValue::PalGuildLab(lab))) =
+        lab_props.0.get_mut(&PropertyKey::from("RawData"))
+    else {
+        return Ok(());
+    };
+    lab.research_info = research_updates
+        .iter()
+        .map(|info| uesave::games::palworld::PalLabResearchInfo {
+            research_id: info.research_id.clone(),
+            work_amount: info.work_amount as f32,
+        })
+        .collect();
+    Ok(())
 }
 
 #[cfg(test)]
@@ -364,5 +866,121 @@ mod tests {
         let guild_id = find_player_guild_id(&mut session, PLAYER_ID.parse().unwrap()).unwrap();
 
         assert_eq!(guild_id, None);
+    }
+
+    // ---- base_container_membership ----
+
+    fn slot_save_parameter(slot_key: &str, container_id: uuid::Uuid) -> Properties {
+        let mut container_struct = Properties::default();
+        container_struct.insert("ID", crate::props::guid_property(container_id));
+        let mut slot_struct = Properties::default();
+        slot_struct.insert(
+            "ContainerId",
+            Property::Struct(StructValue::Struct(container_struct)),
+        );
+        slot_struct.insert("SlotIndex", crate::props::int_property(0));
+        let mut save_parameter = Properties::default();
+        save_parameter.insert(slot_key, Property::Struct(StructValue::Struct(slot_struct)));
+        save_parameter
+    }
+
+    /// `_load_pals_for_container` (`loading.py:317-346`) reads ONLY
+    /// `"SlotId"` -- real save data's actual spelling (verified: 11/11
+    /// world1 pals). Deliberate divergence from the brief, which matched
+    /// base-container membership via `pal_dto.storage_id ==
+    /// worker_container_id` (the DIFFERENT "SlotID"-first-then-"SlotId"-
+    /// fallback rule `Pal.storage_id`'s getter uses) -- see this function's
+    /// own doc comment and this task's report.
+    #[test]
+    fn base_container_membership_resolves_the_real_slot_id_spelling() {
+        let container_id = uuid::Uuid::parse_str(CONTAINER_ID).unwrap();
+        let save_parameter = slot_save_parameter("SlotId", container_id);
+
+        assert_eq!(
+            base_container_membership(&save_parameter),
+            Some(container_id)
+        );
+    }
+
+    /// The uppercase spelling `Pal.storage_id`'s getter checks FIRST must
+    /// resolve to `None` here -- proving the two behaviors genuinely
+    /// differ, not merely that one of them fails for an unrelated reason.
+    #[test]
+    fn base_container_membership_does_not_fall_back_to_slot_id_uppercase() {
+        let container_id = uuid::Uuid::parse_str(CONTAINER_ID).unwrap();
+        let save_parameter = slot_save_parameter("SlotID", container_id);
+
+        assert_eq!(
+            base_container_membership(&save_parameter),
+            None,
+            "loading.py's _load_pals_for_container has no \"SlotID\" fallback"
+        );
+
+        // Establish the contrast: `read_save_parameter_dto`'s
+        // `Pal.storage_id`-equivalent getter DOES resolve this same
+        // uppercase-spelled property.
+        let mut with_character_id = save_parameter;
+        with_character_id.insert("CharacterID", crate::props::name_property("SheepBall"));
+        let json_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../data/json");
+        let game_data = crate::gamedata::GameData::load(&json_dir).expect("data dir");
+        let dto = super::pal::read_save_parameter_dto(
+            &with_character_id,
+            uuid::Uuid::nil(),
+            false,
+            &game_data,
+        );
+        assert_eq!(
+            dto.storage_id, container_id,
+            "Pal.storage_id's getter checks \"SlotID\" first"
+        );
+    }
+
+    /// No slot property at all (neither spelling): a clean `None`, not a
+    /// panic -- matches Python's `if not slot_id: ...; continue`.
+    #[test]
+    fn base_container_membership_returns_none_when_no_slot_property_present() {
+        let save_parameter = Properties::default();
+        assert!(base_container_membership(&save_parameter).is_none());
+    }
+
+    // ---- module_target_container_id ----
+
+    #[test]
+    fn module_target_container_id_resolves_the_item_container_variant() {
+        use uesave::games::palworld::{PalMapConcreteModelModule, PalMapConcreteModelModuleData};
+
+        let container_id = uuid::Uuid::parse_str(CONTAINER_ID).unwrap();
+        let raw_data = Property::Struct(StructValue::PalMapConcreteModelModule(
+            PalMapConcreteModelModule {
+                module_type: "EPalMapObjectConcreteModelModuleType::ItemContainer".to_string(),
+                data: PalMapConcreteModelModuleData::ItemContainer {
+                    target_container_id: fguid(CONTAINER_ID),
+                    slot_attribute_indexes: vec![],
+                    all_slot_attribute: vec![],
+                    drop_item_at_disposed: false,
+                    usage_type: 0,
+                    trailing_bytes: [0; 4],
+                },
+                custom_version_data: vec![],
+            },
+        ));
+
+        assert_eq!(module_target_container_id(&raw_data), Some(container_id));
+    }
+
+    #[test]
+    fn module_target_container_id_returns_none_for_a_non_item_container_module() {
+        use uesave::games::palworld::{PalMapConcreteModelModule, PalMapConcreteModelModuleData};
+
+        let raw_data = Property::Struct(StructValue::PalMapConcreteModelModule(
+            PalMapConcreteModelModule {
+                module_type: "EPalMapObjectConcreteModelModuleType::Energy".to_string(),
+                data: PalMapConcreteModelModuleData::Energy,
+                custom_version_data: vec![],
+            },
+        ));
+
+        assert!(module_target_container_id(&raw_data).is_none());
+        assert!(module_target_container_id(&Property::Bool(true)).is_none());
     }
 }
