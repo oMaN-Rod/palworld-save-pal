@@ -11,6 +11,14 @@
     "localized_name": "Kitsun Noct",
     "description": "De temperamento bastante delicado, basta acontecer algo desagradável para ela logo se confinar em uma caverna. Por passar tempo demais confinada, acabou se anuviando."
   },
+  "AmaterasuWolf_Dark_Quest_Enemy": {
+    "localized_name": "Kitsun Noct",
+    "description": null
+  },
+  "AmaterasuWolf_Dark_Quest_Friend": {
+    "localized_name": "Kitsun Noct",
+    "description": null
+  },
   "Ambassador01": {
     "localized_name": "Embaixador do deserto",
     "description": null
@@ -171,6 +179,10 @@
     "localized_name": "Grill - Recompensa",
     "description": null
   },
+  "BOSS_Hunter_Fat_GatlingGun_Quest_StrongOldMan": {
+    "localized_name": "Ancião - Recompensa",
+    "description": null
+  },
   "BOSS_Hunter_Rifle": {
     "localized_name": "Hawk - Recompensa",
     "description": null
@@ -307,6 +319,10 @@
     "localized_name": "Juiz da Associação de Proteção aos Pals",
     "description": null
   },
+  "Believer_Fat_Cane_Tower": {
+    "localized_name": "Juiz da Associação de Proteção aos Pals",
+    "description": null
+  },
   "Believer_Fat_GatlingGun": {
     "localized_name": "Juiz da Associação de Proteção aos Pals",
     "description": null
@@ -355,6 +371,10 @@
     "localized_name": "Smokie",
     "description": "A chama negra emite um calor tão sutil que é possível tocá-la. No entanto, tudo que mantém contato prolongado começa a derreter por dentro. Basta colocar um pedaço de queijo sobre a chama por um momento para que fique delicioso."
   },
+  "BlackPuppy_Ice": {
+    "localized_name": "Smokie Cryst",
+    "description": "Sua chama pálida é um tanto fria ao toque, mas congela tudo que mantiver contato prolongado. Basta deixar uma garrafa de leite sobre a chama para ter leite congelado!"
+  },
   "Blacksmith01": {
     "localized_name": "Ferreiro em treinamento",
     "description": null
@@ -375,6 +395,10 @@
     "localized_name": "Fuack Ignis",
     "description": "Possuem um abdômen com força de fricção elevada e por isso se inflamam quando usam o corpo para surfar. É comum se empolgarem demais e virarem uma bola de fogo."
   },
+  "BlueSkyDragon": {
+    "localized_name": "Shaolong",
+    "description": "Quando encontram um par com quem desejam passar o resto da vida, removem o anel que trazem flutuando no meio do corpo e o oferecem um ao outro."
+  },
   "BlueThunderHorse": {
     "localized_name": "Azurmane",
     "description": "Antes pensava-se que eles estavam ligados ao deus do trovão do mesmo modo que os Univolt. Já com o declínio da fé nos Univolt, foram os Azurmane que passaram a ser considerados os próprios deuses do trovão. No entanto, a passagem do tempo fez com que eles também viessem a ser tratados como animais de carga."
@@ -390,6 +414,18 @@
   "BountyTrader": {
     "localized_name": "Sentinela",
     "description": null
+  },
+  "BrownRabbit": {
+    "localized_name": "Lapiron",
+    "description": "Escuta a voz da terra para evitar áreas instáveis enquanto corre. Mas costuma ser enganado por terrenos com os quais não se dá muito bem, então acaba tropeçando bastante em alguns lugares."
+  },
+  "CactusDoll": {
+    "localized_name": "Needoll",
+    "description": "Seus espinhos podem crescer ou encolher quando sente uma forte emoção. É comum que as pessoas queiram dar um abraço apertado num Needoll criado com carinho, mas, na grande maioria das vezes, isso só termina num triste acidente."
+  },
+  "CactusDoll_Dark": {
+    "localized_name": "Needoll Noct",
+    "description": "Seus espinhos podem crescer ou encolher quando sente uma forte emoção. Um Needoll Noct criado com muito afeto geralmente tenta dar um abraço apertado em seu dono, mas, se for aceitar essa demonstração de amor, é bom se preparar também para encarar a dor."
   },
   "CandleGhost": {
     "localized_name": "Sootseer",
@@ -412,6 +448,10 @@
     "description": null
   },
   "CaravanLeader03": {
+    "localized_name": "Líder de Caravana",
+    "description": null
+  },
+  "CaravanLeader04": {
     "localized_name": "Líder de Caravana",
     "description": null
   },
@@ -439,6 +479,18 @@
     "localized_name": "Chikipi",
     "description": "É fraca e deliciosa demais. Junto com SheepBall, é um dos Pals mais frágeis. Por mais que sejam caçadas, não param de crescer em número."
   },
+  "ClioneTwins": {
+    "localized_name": "Amione",
+    "description": "Quando um dos dois desaparece, logo surge um substituto sabe-se lá de onde. E assim o novo par começa a se entrosar como se nada tivesse acontecido. Para os Amione, o mais importante é manter uma boa relação."
+  },
+  "CloverFairy": {
+    "localized_name": "Clovee",
+    "description": "Antigamente, havia espécimes com três ou mais folhas na testa, mas eram considerados um símbolo de sorte e acabaram sendo caçados de forma indiscriminada. Isso fez com que a espécie evoluísse para ter menos folhas."
+  },
+  "ClownRabbit": {
+    "localized_name": "Dupin",
+    "description": "Às vezes é derrotado pelo clone que ele mesmo criou e acaba sendo substituído. Nem mesmo um Dupin sabe ao certo se continua sendo o mesmo Dupin do dia anterior."
+  },
   "ColorfulBird": {
     "localized_name": "Tocotoco",
     "description": "Pal aterrador que põe ovos explosivos. Embora costume disparar ovos pela cloaca como se fossem armas, faz explodir também seu próprio corpo quando não há mais escapatória."
@@ -446,6 +498,14 @@
   "CowPal": {
     "localized_name": "Mozzarina",
     "description": "Mesmo sem ninguém para cuidar delas, produzem leite como uma torneira produz água. Até os machos dão leite! É um verdadeiro milagre da natureza."
+  },
+  "CubeTurtle": {
+    "localized_name": "Tetroise",
+    "description": "As pedras empilhadas em suas costas parecem ter consciência própria. Se alguém as remover e colocar num local afastado, elas se movem sozinhas e retornam ao seu lugar de origem."
+  },
+  "CubeTurtle_Neutral": {
+    "localized_name": "Tetroise Primo",
+    "description": "Mesmo que levem as pedras de suas costas para outro lugar, Tetroise Primo sempre sabe onde elas estão. É capaz de encontrá-las até nas terras mais distantes."
   },
   "CuteButterfly": {
     "localized_name": "Cinnamoth",
@@ -459,6 +519,10 @@
     "localized_name": "Fuddler",
     "description": "Embora suas grandes garras sejam tão duras quanto diamante, usá-las para escavar consome boa parte de sua energia, às vezes o deixando exausto pelo resto do dia."
   },
+  "DandelionGirl": {
+    "localized_name": "Souffline",
+    "description": "É capaz de armazenar memórias ruins dentro de seu corpo plumoso. Por isso, basta deixar que sua pluma voe para longe com o vento para dar adeus ao mau humor."
+  },
   "DarkAlien": {
     "localized_name": "Xenovader",
     "description": "É capaz de criar energia enviando e logo esquecendo informações. Parece enviar informações para alguém específico de tempos em tempos. |Responda. Alvo identificado. Inicie a destruição imediatamente.|"
@@ -470,6 +534,10 @@
   "DarkCrow": {
     "localized_name": "Cawgnito",
     "description": "Eles costumavam voar livremente pelas alturas, mas, perdendo na disputa territorial contra as Galeclaws, abandonaram os céus para viverem furtivos pela noite."
+  },
+  "DarkFlameFox": {
+    "localized_name": "Majex",
+    "description": "Com as mãos na cintura, parece estar sempre posando para um retrato. Mas a verdade é que seus pelos da cauda e da cabeça são tão pesados que ela está apenas se segurando para não cair."
   },
   "DarkMechaDragon": {
     "localized_name": "Xenolord",
@@ -499,6 +567,10 @@
     "localized_name": "Habitante da ilha",
     "description": null
   },
+  "DomeArmorDragon": {
+    "localized_name": "Aegidron",
+    "description": "Em tempos remotos, quando eram escassos os meios de comunicação, às vezes as pessoas faziam piscar a luz debaixo das asas do Aegidron para enviar mensagens simples."
+  },
   "DreamDemon": {
     "localized_name": "Daedream",
     "description": "Quando se interessa por alguém, ele faz seu alvo cair em sono profundo e continuar a ter sonhos felizes, sem jamais acordar até o momento da morte."
@@ -519,9 +591,25 @@
     "localized_name": "Boltmane",
     "description": "pr-BR_Text"
   },
+  "ElecLizard": {
+    "localized_name": "Slowatt",
+    "description": "Faz aquilo que lhe dá na telha, dorme quando bem entende e come tudo o que quer. Para manter esse estilo de vida, sem dúvida os Slowatt devem se esforçar muito quando ninguém está olhando. Pelo menos é assim que os antigos habitantes da ilha preferiam pensar…"
+  },
   "ElecPanda": {
     "localized_name": "Grizzbolt",
     "description": "De sorriso cativante e porte robusto, este Pal torna-se obediente a quem reconhece como amigo. Por algum motivo, muda de aspecto apenas quando lhe dão uma metralhadora."
+  },
+  "ElecPomeranian": {
+    "localized_name": "Puffolt",
+    "description": "Sua pelagem macia absorve uma grande quantidade de água ao se molhar. Devido à descarga elétrica violenta que ocorre quando ele se sacode para secar o corpo, tomar banho junto com ele significa colocar a própria vida em risco."
+  },
+  "ElecSnail": {
+    "localized_name": "Snock",
+    "description": "Jogar um Snock na banheira para aproveitar um banho eletrizante é uma prática terapêutica bastante tradicional. Também não deixa de ser uma atividade que envolve um risco fenomenal."
+  },
+  "ElecSnail_Ground": {
+    "localized_name": "Snock Lux",
+    "description": "Jogar um Snock Lux aquecido na água para tomar um banho escaldante já era uma prática esquecida, mas essa moda voltou a pegar fogo nos últimos tempos."
   },
   "Emote_location_A_01": {
     "localized_name": "Habitante da ilha",
@@ -619,6 +707,10 @@
     "localized_name": "Dazemu",
     "description": "Este Pal dá um passo adiante e esquece de seus receios; dá dois passos e esquece de suas tristezas; dá três passos e então esquece de seus medos, sendo capaz de enfrentar qualquer inimigo que seja."
   },
+  "Female_DTairikuPeople01_v01": {
+    "localized_name": "Habitante da ilha",
+    "description": null
+  },
   "Female_DesertPeople02": {
     "localized_name": "Habitante da aldeia",
     "description": null
@@ -639,6 +731,14 @@
     "localized_name": "Habitante da ilha",
     "description": null
   },
+  "Female_Farmer01_v05": {
+    "localized_name": "Habitante da ilha",
+    "description": null
+  },
+  "Female_Kunoichi01": {
+    "localized_name": "Executor da Aliança Celeste",
+    "description": null
+  },
   "Female_Nomad01_v01": {
     "localized_name": "Habitante da ilha",
     "description": null
@@ -652,6 +752,10 @@
     "description": null
   },
   "Female_Nomad01_v04": {
+    "localized_name": "Habitante da ilha",
+    "description": null
+  },
+  "Female_Nomad01_v05": {
     "localized_name": "Habitante da ilha",
     "description": null
   },
@@ -683,6 +787,18 @@
     "localized_name": "Habitante da ilha",
     "description": null
   },
+  "Female_Ranger01_v05": {
+    "localized_name": "Habitante da ilha",
+    "description": null
+  },
+  "Female_SakurajimaPeople01": {
+    "localized_name": "Habitante da ilha",
+    "description": null
+  },
+  "Female_SnowPeople01": {
+    "localized_name": "Habitante da ilha",
+    "description": null
+  },
   "Female_Soldier01": {
     "localized_name": "Habitante da ilha",
     "description": null
@@ -707,6 +823,42 @@
     "localized_name": "Domadoras Gêmeas",
     "description": null
   },
+  "Female_SorajimaPeople01": {
+    "localized_name": "Habitante da ilha",
+    "description": null
+  },
+  "Female_SurveyGirl01": {
+    "localized_name": "Fia",
+    "description": null
+  },
+  "Female_SurveyGirl02": {
+    "localized_name": "Fia",
+    "description": null
+  },
+  "Female_SurveyGirl03": {
+    "localized_name": "Fia",
+    "description": null
+  },
+  "Female_SurveyGirl04": {
+    "localized_name": "Fia",
+    "description": null
+  },
+  "Female_SurveyWoman01": {
+    "localized_name": "Carla",
+    "description": null
+  },
+  "Female_SurveyWoman02": {
+    "localized_name": "Carla",
+    "description": null
+  },
+  "Female_TenrakuPeople01": {
+    "localized_name": "Habitante da ilha",
+    "description": null
+  },
+  "Female_WorldTreePeople01": {
+    "localized_name": "Habitante da ilha",
+    "description": null
+  },
   "FengyunDeeper": {
     "localized_name": "Fenglope",
     "description": "Graças à sua bela forma, em tempos remotos era um tema muito comum nas pinturas. Com o passar das eras, o que se tornou comum foi usar sua bela pelagem e chifres como objetos artísticos."
@@ -727,6 +879,14 @@
     "localized_name": "Mártir dos Amigos da Chama Eterna",
     "description": null
   },
+  "FireCult_GrenadeLauncher": {
+    "localized_name": "Mártir dos Amigos da Chama Eterna",
+    "description": null
+  },
+  "FireCult_MissileLauncher": {
+    "localized_name": "Mártir dos Amigos da Chama Eterna",
+    "description": null
+  },
   "FireCult_Prisoner": {
     "localized_name": "Mártir dos Amigos da Chama Eterna",
     "description": null
@@ -740,6 +900,10 @@
     "description": null
   },
   "FireCult_Rifle_Relax": {
+    "localized_name": "Mártir dos Amigos da Chama Eterna",
+    "description": null
+  },
+  "FireCult_RocketLauncher": {
     "localized_name": "Mártir dos Amigos da Chama Eterna",
     "description": null
   },
@@ -771,9 +935,21 @@
     "localized_name": "Petallia",
     "description": "Quando chega ao fim da vida, transforma-se em uma grande planta. Ela gera uma flor de grande beleza uma vez a cada dez anos, de onde então nasce uma nova Petallia."
   },
+  "FlowerDoll_Fire": {
+    "localized_name": "Petallia Ignis",
+    "description": "Ao atingir o fim da vida, queima por completo e vira cinzas. A terra ao redor se torna tão fértil que, cerca de dez anos mais tarde, fica repleta de vegetação."
+  },
+  "FlowerPrince": {
+    "localized_name": "Dandilord",
+    "description": "Desde tempos remotos, protege algo enquanto se mantém parado sobre a Árvore Mundial. O próprio Dandilord não entende o que protege, ou por que motivo. Afinal é a árvore quem sabe disso. A neblina que ele controla é a única que mostra a verdade."
+  },
   "FlowerRabbit": {
     "localized_name": "Flopie",
     "description": "Embora prefira locais com muita vegetação, parece que ultimamente cada vez mais Flopies têm começado a sofrer de alergia ao pólen."
+  },
+  "FluffyBird": {
+    "localized_name": "Muffly",
+    "description": "A plumagem almofadada ao redor do seu rosto é capaz de absorver ataques. Embora não sofra dano mesmo sendo arremessado até um certo ponto, vive em constante aflição pela dificuldade para alisar suas penas e para se coçar."
   },
   "FlyingManta": {
     "localized_name": "Celaray",
@@ -782,6 +958,10 @@
   "FlyingManta_Thunder": {
     "localized_name": "Celaray Lux",
     "description": "Seus padrões exuberantes são úteis na busca por um parceiro. Há registros de acidentes elétricos com Celaray Lux desde tempos antigos, tanto que, nos dias atuais, listras negras e amarelas são interpretadas como um sinal de perigo na ilha."
+  },
+  "FoxExorcist": {
+    "localized_name": "Flaracle",
+    "description": "Concentra sua mente para poder ver o futuro dentro das chamas. Quando vê um futuro que lhe desagrada, tenta de novo e de novo até ver algo melhor. E é por isso que todo Flaracle tem sempre um futuro brilhante!"
   },
   "FoxMage": {
     "localized_name": "Wixen",
@@ -802,6 +982,14 @@
   "GYM_BlackGriffon_2_Avatar": {
     "localized_name": "Victor & Shadowbeak",
     "description": null
+  },
+  "GYM_BlueSkyDragon": {
+    "localized_name": "Auri & Shaolong",
+    "description": "Quando encontram um par com quem desejam passar o resto da vida, removem o anel que trazem flutuando no meio do corpo e o oferecem um ao outro."
+  },
+  "GYM_BlueSkyDragon_2": {
+    "localized_name": "Auri & Shaolong",
+    "description": "Quando encontram um par com quem desejam passar o resto da vida, removem o anel que trazem flutuando no meio do corpo e o oferecem um ao outro."
   },
   "GYM_ElecPanda": {
     "localized_name": "Zoe & Grizzbolt",
@@ -859,6 +1047,14 @@
     "localized_name": "Axel & Orserk",
     "description": "Ele faz correr eletricidade por ferimentos, queimando o corpo do adversário. Uma briga entre Orserks é sempre resolvida em questão de segundos."
   },
+  "GYM_WorldTreeDragon": {
+    "localized_name": "Zenara & Astralym",
+    "description": "A forma à qual foi reduzida a Pal misteriosa que, em um passado remoto, chegou voando até Palpagos. Depois de trazer a destruição como a |Calamidade|, passou um longo tempo aprisionada. No entanto, finalmente foi derrotada por uma alma valente domadora de Pals."
+  },
+  "GYM_WorldTreeDragon_2": {
+    "localized_name": "Zenara & Astralym",
+    "description": "A forma à qual foi reduzida a Pal misteriosa que, em um passado remoto, chegou voando até Palpagos. Depois de trazer a destruição como a |Calamidade|, passou um longo tempo aprisionada. No entanto, finalmente foi derrotada por uma alma valente domadora de Pals."
+  },
   "Ganesha": {
     "localized_name": "Teafant",
     "description": "Embora seja expelida uma grande quantidade de água do órgão que parece ser seu nariz, há quem diga que isso não passa de coriza nasal. Atualmente ocorrem debates ardentes entre os pesquisadores."
@@ -879,9 +1075,25 @@
     "localized_name": "Maraith",
     "description": "Elas adoram o odor peculiar exalado por seres vivos à beira da morte. Se uma Maraith se afeiçoar a você, já sabe o que isso significa."
   },
+  "GhostBlackCat": {
+    "localized_name": "Wispaw",
+    "description": "As mãos em suas costas concentram os pensamentos de todos os humanos que já criaram membros de sua espécie. Nos últimos tempos, mimar os Wispaw já parece ter se tornado um consenso."
+  },
+  "GhostDragon": {
+    "localized_name": "Eidrolon",
+    "description": "Um novo Pal que passou a ser avistado nos últimos tempos. Manso e sossegado, ele apenas leva sua vida em liberdade. Já não há mais nada que o prenda."
+  },
+  "GhostDragon_Fire": {
+    "localized_name": "Eidrolon Ignis",
+    "description": "Um novo Pal que passou a ser avistado nos últimos tempos. De temperamento selvagem, está sempre descontando sua raiva em alguma coisa. Já não há mais nada em que ele acredite."
+  },
   "GhostRabbit": {
     "localized_name": "Nitemary",
     "description": "A alma que ele carrega é a sua própria. Quando se apaixona por alguém, sente o desejo de arrancar também a alma do alvo de sua adoração para misturar ambas e fazer delas uma só."
+  },
+  "GhostRabbit_Grass": {
+    "localized_name": "Nitemary Botan",
+    "description": "A alma que carrega é a sua própria. Quando se apaixona por alguém, lança-a contra o alvo de sua adoração para misturar as almas de ambos e fazer delas uma só."
   },
   "GoldenHorse": {
     "localized_name": "Gildane",
@@ -903,6 +1115,14 @@
     "localized_name": "Zoe",
     "description": null
   },
+  "GrassGolem": {
+    "localized_name": "Dualith",
+    "description": "Uma forma de vida com duas consciências. Às vezes elas brigam entre si por discordarem sobre o modo de agir. Até fazerem as pazes, não se sabe por onde a armadura vai seguir!"
+  },
+  "GrassGolem_Dark": {
+    "localized_name": "Dualith Noct",
+    "description": "Uma forma de vida com duas consciências. Em geral pensam de maneira diferente e estão sempre brigando, mas, quando surge um inimigo em comum, logo se unem de corpo e alma!"
+  },
   "GrassMammoth": {
     "localized_name": "Mammorest",
     "description": "A planta crescendo no dorso pode diferir para cada indivíduo. Historicamente eram apreciados como forma de decoração, tanto que havia inclusive podadores especializados em Mammorest."
@@ -911,6 +1131,14 @@
     "localized_name": "Mammorest Cryst",
     "description": "A vegetação nas costas varia dependendo do indivíduo. Houve um caso em que uma espécie de planta que se pensava estar extinta foi encontrada nas costas de um Mammorest Cryst, ainda congelada."
   },
+  "GrassMinotaur": {
+    "localized_name": "Elgrove",
+    "description": "É impossível arrancar a folha presa ao seu chifre, por mais que se puxe. É quando essa folha enfim cai por conta própria que o Elgrove entende que chegou a hora da sua morte."
+  },
+  "GrassMinotaur_Ice": {
+    "localized_name": "Elgrove Cryst",
+    "description": "Seus chifres de gelo jamais derretem durante toda a sua vida. É quando enfim escorre deles a primeira gota de água que o Elgrove Cryst sente pela primeira vez seu corpo começar a esfriar."
+  },
   "GrassPanda": {
     "localized_name": "Mossanda",
     "description": "Pal possuidor de uma força inacreditável. Em certo experimento, um espécime foi capaz de rasgar um maço de 3 mil folhas de papel. Só podemos agradecer pelo fato de eles não serem carnívoros."
@@ -918,6 +1146,10 @@
   "GrassPanda_Electric": {
     "localized_name": "Mossanda Lux",
     "description": "Pal possuidor de uma força inacreditável. Foi capaz de superar seus limites físicos ao converter eletricidade em sinais neurais. É sempre mencionado quando falam sobre os mais fortes dos seres vivos."
+  },
+  "GrassPanda_Electric_Tower": {
+    "localized_name": "Mossanda Lux",
+    "description": null
   },
   "GrassRabbitMan": {
     "localized_name": "Verdash",
@@ -986,6 +1218,10 @@
   "HerculesBeetle_Ground": {
     "localized_name": "Warsect Terra",
     "description": "A carapaça super-resistente que envolve seu corpo inteiro possui rigidez e durabilidade impressionantes. Permanece tranquilo mesmo se pisoteado por um Mammorest."
+  },
+  "HoodGhost": {
+    "localized_name": "Hoodle",
+    "description": "Murcha quando dorme. Murcha e desaparece. Como um Hoodle adormecido não existe, não existe Hoodle que adormeça."
   },
   "Horus": {
     "localized_name": "Faleris",
@@ -1107,6 +1343,10 @@
     "localized_name": "Iniciante dos Caçadores Clandestinos",
     "description": null
   },
+  "Hunter_Handgun_Quest_StrongOldMan": {
+    "localized_name": "Iniciante dos Caçadores Clandestinos",
+    "description": null
+  },
   "Hunter_Katana": {
     "localized_name": "Espadachim dos Caçadores Clandestinos",
     "description": null
@@ -1159,6 +1399,10 @@
     "localized_name": "Unidade atiradora dos Caçadores Clandestinos",
     "description": null
   },
+  "Hunter_Rifle_Tower": {
+    "localized_name": "Unidade atiradora dos Caçadores Clandestinos",
+    "description": null
+  },
   "Hunter_RocketLauncher": {
     "localized_name": "Elite dos Caçadores Clandestinos",
     "description": null
@@ -1183,6 +1427,10 @@
     "localized_name": "Elite dos Caçadores Clandestinos",
     "description": null
   },
+  "Hunter_RocketLauncher_Quest_StrongOldMan": {
+    "localized_name": "Elite dos Caçadores Clandestinos",
+    "description": null
+  },
   "Hunter_Shotgun": {
     "localized_name": "Agente dos Caçadores Clandestinos",
     "description": null
@@ -1200,6 +1448,10 @@
     "description": null
   },
   "Hunter_Shotgun_Oilrig": {
+    "localized_name": "Agente dos Caçadores Clandestinos",
+    "description": null
+  },
+  "Hunter_Shotgun_Quest_StrongOldMan": {
     "localized_name": "Agente dos Caçadores Clandestinos",
     "description": null
   },
@@ -1235,6 +1487,10 @@
     "localized_name": "Polapup",
     "description": "O líder do bando é aquele capaz de deslizar mais rápido sobre a neve. Às vezes acontece de um indivíduo mais empolgado saltar e cair de repente dos ares, principalmente quando há alguma competição pela liderança. A previsão é de tempo bom com pancadas de Polapup."
   },
+  "IceSeal_Ground": {
+    "localized_name": "Polapup Terra",
+    "description": "O líder do bando é aquele capaz de deslizar mais rápido sobre a neve. Às vezes acontece de um indivíduo mais empolgado saltar e se enterrar na neve, principalmente quando há alguma competição pela liderança. Cuidado com congestionamentos de Polapup Terra."
+  },
   "IceWitch": {
     "localized_name": "Icelyn",
     "description": "Seu corpo começa a derreter quando está quente, mas ela não resiste à vontade de tomar um banho de sol. Seu corpo também derrete na água quente, mas ela simplesmente adora um bom banho termal. Se for para morrer, então que seja derretendo num lindo dia nas águas termais."
@@ -1254,6 +1510,10 @@
   "JetDragon": {
     "localized_name": "Jetragon",
     "description": "Olha pela Ilha de Palpagos desde os confins do firmamento. Quando a calamidade despertar novamente, fendendo a terra e incendiando os céus, ele haverá de destruí-la com um fulgor de plena obliteração."
+  },
+  "KabukiMan": {
+    "localized_name": "Renjishi",
+    "description": "Quando confronta um inimigo, à primeira vista parece baixar muito a guarda com os movimentos que faz. Mas o curioso é que o oponente acaba se fascinando por isso e assiste compenetrado."
   },
   "Kelpie": {
     "localized_name": "Kelpsea",
@@ -1287,9 +1547,25 @@
     "localized_name": "Blazamut Ryu",
     "description": "Surgiu das profundezas do solo em um passado distante. Sem qualquer piedade, suas incontroláveis labaredas explosivas não se apagaram até carbonizar a ilha inteira. Em outras palavras, foram elas a |Chama Eterna|."
   },
+  "KingSunfish": {
+    "localized_name": "Solmora",
+    "description": "É capaz de se propulsionar girando sua cauda em formato de parafuso. De acordo com pesquisas passadas, teoricamente é capaz de nadar a velocidades superiores a 88 mph, embora precise sacrificar o próprio corpo para isso."
+  },
+  "KingSunfish_Thunder": {
+    "localized_name": "Solmora Lux",
+    "description": "É capaz de gerar eletricidade girando sua cauda em formato de parafuso. Teoricamente poderia gerar uma potência de até 1,21 gigawatts, mas isso tem pouco valor prático, já que seu corpo se destruiria no mesmo instante."
+  },
+  "KingWhale": {
+    "localized_name": "Panthalus",
+    "description": "Último sobrevivente de sua espécie, este Pal aguardava o dia de completar sua missão. No entanto, mesmo que tente chamar pela mãe depois de cumprir seu dever, a única resposta que o espera agora é o eco de sua própria voz."
+  },
   "Kirin": {
     "localized_name": "Univolt",
     "description": "Antigamente jamais eram caçados, pois as pessoas os consideravam mensageiros do deus do trovão. Quando avistaram um espécime ser morto por um raio, no entanto, a crença perdeu força e estes Pals passaram a ser tratados como animais de carga."
+  },
+  "Kirin_Ice": {
+    "localized_name": "Univolt Cryst",
+    "description": "Antigamente jamais eram caçados, pois as pessoas os consideravam mensageiros do deus do inverno. Quando avistaram um espécime escorregar no gelo, no entanto, a crença perdeu força e estes Pals passaram a ser tratados como animais de carga."
   },
   "Kitsunebi": {
     "localized_name": "Foxparks",
@@ -1298,6 +1574,10 @@
   "Kitsunebi_Ice": {
     "localized_name": "Foxparks Cryst",
     "description": "Incapazes de controlar o frio quando recém-nascidas, acabam cuspindo ar gélido e se engasgando por qualquer coisa. Ficam aflitas se apanham um resfriado, pois a coriza se congela no focinho e torna difícil respirar."
+  },
+  "LanternButler": {
+    "localized_name": "Loomen",
+    "description": "O brilho fantástico do seu lampião ilumina as verdades do mundo. Se alguém achar essa luz ofuscante demais, certamente é porque tem algo pesando na consciência."
   },
   "LavaGirl": {
     "localized_name": "Flambelle",
@@ -1318,6 +1598,10 @@
   "LazyDragon_Electric": {
     "localized_name": "Relaxaurus Lux",
     "description": "Um Relaxaurus pensou por acaso: já não seria hora de mudar seu jeito de ser? Nesse instante ele sentiu um choque percorrer todo seu corpo!"
+  },
+  "LazyDragon_Electric_Tower": {
+    "localized_name": "Relaxaurus Lux",
+    "description": null
   },
   "LeafMomonga": {
     "localized_name": "Herbil",
@@ -1355,6 +1639,14 @@
     "localized_name": "Leezpunk",
     "description": null
   },
+  "LongCat": {
+    "localized_name": "Valentail",
+    "description": "Pareciam ter um porte menor em pinturas antigas. Acredita-se que, por algum motivo, várias partes de seu corpo vêm se alongando em tempos recentes. Dentro de 100 anos, prevê-se que devem atingir 10 vezes seu tamanho atual."
+  },
+  "LotusDragon": {
+    "localized_name": "Ophydia",
+    "description": "Nas águas onde Ophydia habitam, crescem muitas flores de aparência semelhante. Já foram realizados diversos estudos para tentar reproduzir essas flores, mas elas logo murcham quando cultivadas por humanos."
+  },
   "Male_Angler01_v01": {
     "localized_name": "Habitante da ilha",
     "description": null
@@ -1375,7 +1667,27 @@
     "localized_name": "Habitante da ilha",
     "description": null
   },
+  "Male_Breeder01_v05": {
+    "localized_name": "Habitante da ilha",
+    "description": null
+  },
+  "Male_DTairikuPeople01_v01": {
+    "localized_name": "Habitante da ilha",
+    "description": null
+  },
   "Male_DarkTrader01": {
+    "localized_name": "Comerciante furtivo",
+    "description": null
+  },
+  "Male_DarkTrader01_02": {
+    "localized_name": "Comerciante furtivo",
+    "description": null
+  },
+  "Male_DarkTrader01_03": {
+    "localized_name": "Comerciante furtivo",
+    "description": null
+  },
+  "Male_DarkTrader01_04": {
     "localized_name": "Comerciante furtivo",
     "description": null
   },
@@ -1395,11 +1707,19 @@
     "localized_name": "Ninja Inferior do Bando das Flores e da Lua",
     "description": null
   },
+  "Male_Ninja01_Seabase": {
+    "localized_name": "Ninja Inferior do Bando das Flores e da Lua",
+    "description": null
+  },
   "Male_NinjaElite01": {
     "localized_name": "Ninja Superior do Bando das Flores e da Lua",
     "description": null
   },
   "Male_NinjaElite01_Invader": {
+    "localized_name": "Ninja Superior do Bando das Flores e da Lua",
+    "description": null
+  },
+  "Male_NinjaElite01_Seabase": {
     "localized_name": "Ninja Superior do Bando das Flores e da Lua",
     "description": null
   },
@@ -1412,6 +1732,10 @@
     "description": null
   },
   "Male_Police_old": {
+    "localized_name": "Habitante da ilha",
+    "description": null
+  },
+  "Male_SakurajimaPeople01": {
     "localized_name": "Habitante da ilha",
     "description": null
   },
@@ -1431,12 +1755,24 @@
     "localized_name": "Habitante da ilha",
     "description": null
   },
+  "Male_Scholar01_v05": {
+    "localized_name": "Habitante da ilha",
+    "description": null
+  },
+  "Male_Scholar02": {
+    "localized_name": "Habitante da ilha",
+    "description": null
+  },
   "Male_Scientist01_LaserRifle": {
     "localized_name": "Agente da Unidade de Pesquisas Genéticas",
     "description": null
   },
   "Male_Scientist01_LaserRifle_Invader": {
     "localized_name": "Agente da Unidade de Pesquisas Genéticas",
+    "description": null
+  },
+  "Male_SnowPeople01": {
+    "localized_name": "Habitante da ilha",
     "description": null
   },
   "Male_Soldier01": {
@@ -1467,8 +1803,124 @@
     "localized_name": "Habitante da ilha",
     "description": null
   },
+  "Male_SorajimaPeople01": {
+    "localized_name": "Habitante da ilha",
+    "description": null
+  },
+  "Male_StrongOldMan01": {
+    "localized_name": "Harold",
+    "description": null
+  },
+  "Male_StrongOldMan02": {
+    "localized_name": "Harold",
+    "description": null
+  },
+  "Male_SurveyMan01": {
+    "localized_name": "Gadel",
+    "description": null
+  },
+  "Male_SurveyMan02": {
+    "localized_name": "Gadel",
+    "description": null
+  },
+  "Male_SurveyMan03": {
+    "localized_name": "Gadel",
+    "description": null
+  },
+  "Male_TenrakuPeople01": {
+    "localized_name": "Habitante da ilha",
+    "description": null
+  },
   "Male_Trader01": {
     "localized_name": "Habitante da aldeia",
+    "description": null
+  },
+  "Male_Trader01_v04": {
+    "localized_name": "Aprendiz de açougueiro",
+    "description": null
+  },
+  "Male_Trader01_v05": {
+    "localized_name": "Quitandeiro da vila",
+    "description": null
+  },
+  "Male_Trader01_v06": {
+    "localized_name": "Faz-tudo dos contrabandistas",
+    "description": null
+  },
+  "Male_Trader01_v07": {
+    "localized_name": "Comerciante de materiais achados",
+    "description": null
+  },
+  "Male_Trader01_v08": {
+    "localized_name": "Padeiro de rua",
+    "description": null
+  },
+  "Male_Trader01_v09": {
+    "localized_name": "Vendedor de remédios suspeito",
+    "description": null
+  },
+  "Male_Trader01_v10": {
+    "localized_name": "Pescador-açougueiro calejado",
+    "description": null
+  },
+  "Male_Trader01_v11": {
+    "localized_name": "Mestre da caça",
+    "description": null
+  },
+  "Male_Trader01_v12": {
+    "localized_name": "Caçador de presas lendário",
+    "description": null
+  },
+  "Male_Trader01_v13": {
+    "localized_name": "Fornecedor dos mercenários",
+    "description": null
+  },
+  "Male_Trader01_v14": {
+    "localized_name": "Comerciante de equipamentos pesados",
+    "description": null
+  },
+  "Male_Trader01_v15": {
+    "localized_name": "Comerciante de munição lendário",
+    "description": null
+  },
+  "Male_Trader01_v16": {
+    "localized_name": "Comerciante itinerante do campo",
+    "description": null
+  },
+  "Male_Trader01_v17": {
+    "localized_name": "Quitandeiro lendário",
+    "description": null
+  },
+  "Male_Trader01_v18": {
+    "localized_name": "Farmacêutico registrado",
+    "description": null
+  },
+  "Male_Trader01_v19": {
+    "localized_name": "Farmacêutico lendário",
+    "description": null
+  },
+  "Male_Trader01_v20": {
+    "localized_name": "Marmiteiro da cidade",
+    "description": null
+  },
+  "Male_Trader01_v21": {
+    "localized_name": "Degustador iniciante",
+    "description": null
+  },
+  "Male_Trader01_v22": {
+    "localized_name": "Degustador lendário",
+    "description": null
+  },
+  "Male_Trader01_v23": {
+    "localized_name": "Comerciante de materiais registrado",
+    "description": null
+  },
+  "Male_Trader01_v24": {
+    "localized_name": "Comerciante de matéria-prima",
+    "description": null
+  },
+  "Male_Trader01_v25": {
+    "localized_name": "Comerciante de materiais lendário",
     "description": null
   },
   "Male_Trader02": {
@@ -1477,6 +1929,10 @@
   },
   "Male_Trader03": {
     "localized_name": "Habitante da aldeia",
+    "description": null
+  },
+  "Male_WorldTreePeople01": {
+    "localized_name": "Habitante da ilha",
     "description": null
   },
   "Manticore": {
@@ -1507,6 +1963,18 @@
     "localized_name": "Tanzee",
     "description": "Dizem que antigamente eles usavam galhos e objetos similares como armas. Conforme foram se relacionando com os humanos, abandonaram esse costume. Afinal, descobriram que as armas de fogo são muito mais eficientes."
   },
+  "Monkey_Fire": {
+    "localized_name": "Tanzee Ignis",
+    "description": "Suas palmas evoluíram para que ele pudesse segurar objetos ardentes sem se queimar. Talvez seja capaz até de agarrar uma arma superaquecida e usá-la para golpear o inimigo se sua munição acabar."
+  },
+  "MonochromeQueen": {
+    "localized_name": "Solenne",
+    "description": "Depois de uma boa experiência, não sossega enquanto não tiver também uma experiência proporcionalmente ruim. Para criar bem uma Solenne, é preciso ter bastante disposição."
+  },
+  "MoonChild": {
+    "localized_name": "Wistella",
+    "description": "Quando atingem o fim da vida, em algum lugar do céu surge uma nova estrela cintilante. E, quanto mais recordações possuírem, maior será seu brilho."
+  },
   "MoonQueen": {
     "localized_name": "Selyne",
     "description": "Dizem que o objeto em forma de lua que flutua às suas costas vai se assemelhando a um círculo pouco a pouco a cada geração. Ninguém sabe o que acontecerá quando enfim assumir a forma da lua cheia."
@@ -1519,6 +1987,14 @@
     "localized_name": "Sweepa",
     "description": "Durante a hibernação, seu corpo felpudo e volumoso se mantém repleto de Swees escondidos. O maior número registrado até agora foi de 101."
   },
+  "Mothman": {
+    "localized_name": "Silvance",
+    "description": "Desde tempos remotos, protege algo enquanto se mantém parado sobre a Árvore Mundial. O próprio Silvance não sabe o que protege, nem por qual motivo. Afinal é a árvore quem lhe ensina tudo. Os esporos que ele controla conhecem bem o inimigo."
+  },
+  "MummyPal": {
+    "localized_name": "Gildra",
+    "description": "Seu órgão dourado em forma de faixa é capaz de se esticar e encolher. Como ele pode se romper quando a umidade está extremamente baixa, é essencial cuidar da hidratação da pele todos os dias."
+  },
   "MushroomDragon": {
     "localized_name": "Shroomer",
     "description": "Entra numa espécie de transe ao absorver uma grande quantidade de esporos. Se um Shroomer às vezes parece estar inerte, não é por estar imitando um fungo, mas por estar drogado com os próprios esporos."
@@ -1527,6 +2003,10 @@
     "localized_name": "Shroomer Noct",
     "description": "Sua grande quantidade de esporos é capaz de bloquear a luz solar com facilidade. Se um Shroomer Noct às vezes parece estar inerte, não é por estar imitando um fungo, mas por não conseguir enxergar nada devido aos próprios esporos."
   },
+  "MushroomLady": {
+    "localized_name": "Mycora",
+    "description": "Vê os humanos apenas como bons hospedeiros. A Mycora evoluiu para essa forma justamente para fazer com que os humanos baixassem a guarda, facilitando a introdução de seus esporos."
+  },
   "Mutant": {
     "localized_name": "Lunaris",
     "description": "Quem fita seus olhos por descuido acaba sendo controlado. Muitos daqueles acompanhados por um Lunaris apenas têm a ilusão de serem seus donos."
@@ -1534,6 +2014,10 @@
   "MysteryMask": {
     "localized_name": "Omascul",
     "description": "Dizem que a parte do corpo semelhante a uma máscara na verdade não é o seu rosto. Dizem que quando parece estar logo em frente a você, na verdade não está. Dizem que está sempre olhando na sua direção. Dizem que está sempre ali quando você olha para trás."
+  },
+  "NPC_Dungeon_Shop": {
+    "localized_name": "Comerciante itinerante",
+    "description": null
   },
   "NPC_FoodRequire_1": {
     "localized_name": "Habitante da ilha",
@@ -1563,6 +2047,10 @@
     "localized_name": "Starryon",
     "description": "A bela crina voluptuosa é seu maior orgulho. Quando encontra pontas duplas, sente tanta vergonha que não consegue se concentrar ao correr. Como os pelos se desgrenham com eletricidade estática, evita chegar perto de um Azurmane a todo custo."
   },
+  "NightBlueHorse_Neutral": {
+    "localized_name": "Starryon Primo",
+    "description": "A bela crina cintilante é seu maior orgulho. Quando ela se suja um pouco que seja, sente tanta vergonha que não consegue se concentrar ao correr. Por mais que adore seu domador, não deixa que toque demais na crina para evitar a oleosidade dos seus dedos."
+  },
   "NightFox": {
     "localized_name": "Nox",
     "description": "Se você encontrar o pelo de uma Nox à noite, é melhor dar meia-volta e fingir que não o viu. Ele não passa de uma passagem só de ida para o sono eterno."
@@ -1587,11 +2075,23 @@
     "localized_name": "Ninja Superior do Bando das Flores e da Lua",
     "description": null
   },
+  "NinjaElite_Grenade": {
+    "localized_name": "Ninja Superior do Bando das Flores e da Lua",
+    "description": null
+  },
   "NinjaElite_NoEquip": {
     "localized_name": "Ninja Superior do Bando das Flores e da Lua",
     "description": null
   },
   "Ninja_Bowgun": {
+    "localized_name": "Ninja Inferior do Bando das Flores e da Lua",
+    "description": null
+  },
+  "Ninja_Bowgun_Seabase": {
+    "localized_name": "Ninja Inferior do Bando das Flores e da Lua",
+    "description": null
+  },
+  "Ninja_Grenade": {
     "localized_name": "Ninja Inferior do Bando das Flores e da Lua",
     "description": null
   },
@@ -1606,6 +2106,22 @@
   "OctopusGirl": {
     "localized_name": "Gloopie",
     "description": "Quando for dormir junto com ela, confira primeiro sua agenda para o dia seguinte. As marcas das ventosas se parecem muito com marcas de beijo, então tome cuidado para não acabar sendo chupado por acidente e causar um mal-entendido terrível."
+  },
+  "OctopusGirl_Neutral": {
+    "localized_name": "Gloopie Primo",
+    "description": "Quando for dormir junto com ela, confira primeiro sua agenda para o dia seguinte. As marcas das ventosas se parecem muito com dentadas, então tome cuidado para não acabar sendo enlaçado por acidente e causar preocupação desnecessária aos outros."
+  },
+  "OniGhostGirl": {
+    "localized_name": "Bakemi",
+    "description": "Espantar os outros é sua razão de viver — apesar de não ser nada assustadora. Ainda assim, encantadas por sua fofura, muitas pessoas se espantam de qualquer forma, o que a tornou uma verdadeira embaixadora de sorrisos."
+  },
+  "POLICE_HawkBird": {
+    "localized_name": "Montador da Milícia Popular",
+    "description": null
+  },
+  "POLICE_ThunderDog": {
+    "localized_name": "Montador da Milícia Popular",
+    "description": null
   },
   "PREDATOR_AmaterasuWolf": {
     "localized_name": "Kitsun",
@@ -1623,6 +2139,10 @@
     "localized_name": "Sootseer",
     "description": "Antigamente acreditava-se que sua chama se enfraquecia quanto mais se aproximava o fim do mundo. Os escatologistas causaram alarde repetidas vezes devido à atenuação dessa chama, mas, no fim das contas, a intensidade dela não passa de capricho do Sootseer. Ao menos por enquanto…"
   },
+  "PREDATOR_DarkScorpion": {
+    "localized_name": "Menasting",
+    "description": "Seu corpo é feito de pura energia, sem conteúdo nenhum. Ele empurra suas presas ainda vivas para dentro da carapaça, absorvendo-as. Lamentos infernais estão sempre ecoando ao seu redor."
+  },
   "PREDATOR_DrillGame": {
     "localized_name": "Digtoise",
     "description": "Existe uma história sobre |O exercício da Digtoise|. É uma fábula sobre uma Digtoise que, possuindo o casco e as brocas mais resistentes, pondera sobre contradições."
@@ -1639,9 +2159,17 @@
     "localized_name": "Dinossom",
     "description": "Não há como acalmá-lo quando irritado, pois ele se descontrola com furor incendiário. A expressão |pisar na cauda de um Dinossom| significa |deixar alguém encolerizado|."
   },
+  "PREDATOR_FlowerRabbit_Quest": {
+    "localized_name": "Flopie",
+    "description": null
+  },
   "PREDATOR_Garm": {
     "localized_name": "Direhowl",
     "description": "Já faz muito tempo que perderam seus laços com as pessoas, mas o sistema de caça dos Direhowls tem sua origem no modo como eles costumavam caçar ao lado de seres humanos."
+  },
+  "PREDATOR_Garm_Quest": {
+    "localized_name": "Direhowl",
+    "description": null
   },
   "PREDATOR_GhostBeast": {
     "localized_name": "Maraith",
@@ -1654,6 +2182,14 @@
   "PREDATOR_Gorilla": {
     "localized_name": "Gorirat",
     "description": "É capaz de se comunicar à distância batendo de forma ritmada no chão. O sentido de cada ritmo difere para cada bando, de modo que ainda hoje não foi possível categorizá-los adequadamente."
+  },
+  "PREDATOR_GrassMammoth_Ice": {
+    "localized_name": "Mammorest Cryst",
+    "description": "A vegetação nas costas varia dependendo do indivíduo. Houve um caso em que uma espécie de planta que se pensava estar extinta foi encontrada nas costas de um Mammorest Cryst, ainda congelada."
+  },
+  "PREDATOR_GrassMinotaur_Ice": {
+    "localized_name": "Elgrove Cryst",
+    "description": "Seus chifres de gelo jamais derretem durante toda a sua vida. É quando enfim escorre deles a primeira gota de água que o Elgrove Cryst sente pela primeira vez seu corpo começar a esfriar."
   },
   "PREDATOR_GrassPanda": {
     "localized_name": "Mossanda",
@@ -1679,6 +2215,14 @@
     "localized_name": "Blazehowl Noct",
     "description": "Embora prefira carne normal, sempre acaba comendo carne adulterada. Acontece que ainda não percebeu como as garras de escuridão que lhe servem de arma costumam amaldiçoar a sua presa."
   },
+  "PREDATOR_MonochromeQueen": {
+    "localized_name": "Solenne",
+    "description": "Depois de uma boa experiência, não sossega enquanto não tiver também uma experiência proporcionalmente ruim. Para criar bem uma Solenne, é preciso ter bastante disposição."
+  },
+  "PREDATOR_MummyPal": {
+    "localized_name": "Gildra",
+    "description": "Seu órgão dourado em forma de faixa é capaz de se esticar e encolher. Como ele pode se romper quando a umidade está extremamente baixa, é essencial cuidar da hidratação da pele todos os dias."
+  },
   "PREDATOR_MushroomDragon": {
     "localized_name": "Shroomer",
     "description": "Entra numa espécie de transe ao absorver uma grande quantidade de esporos. Se um Shroomer às vezes parece estar inerte, não é por estar imitando um fungo, mas por estar drogado com os próprios esporos."
@@ -1691,9 +2235,17 @@
     "localized_name": "Starryon",
     "description": "A bela crina voluptuosa é seu maior orgulho. Quando encontra pontas duplas, sente tanta vergonha que não consegue se concentrar ao correr. Como os pelos se desgrenham com eletricidade estática, evita chegar perto de um Azurmane a todo custo."
   },
+  "PREDATOR_PandaGirl": {
+    "localized_name": "Leafan",
+    "description": "Treina dia após dia para aperfeiçoar a arte marcial de seus antepassados! Perder tempo com amor é impensável — só o treino importa! Quando gosta de alguém, parte logo para o ataque — mas isso ninguém suporta! Nunca aprendeu técnicas de amor — por isso não se conforta!"
+  },
   "PREDATOR_PinkLizard": {
     "localized_name": "Lovander",
     "description": "Estão sempre perseguindo alguém em busca de um parceiro para a noite. A princípio mostravam interesse apenas por outros Pals, mas ultimamente têm estendido suas garras também aos humanos."
+  },
+  "PREDATOR_PinkLizard_Quest": {
+    "localized_name": "Lovander",
+    "description": null
   },
   "PREDATOR_PurpleSpider": {
     "localized_name": "Tarantriss",
@@ -1702,6 +2254,10 @@
   "PREDATOR_RedArmorBird": {
     "localized_name": "Ragnahawk",
     "description": "Apesar da semelhança, esta espécie não tem relação com a Beakon. Alimentando-se sobretudo de rochas, ao longo de muitas eras enrijeceu-se não apenas seu bico, mas seu corpo inteiro."
+  },
+  "PREDATOR_RedFlowerBird": {
+    "localized_name": "Tropicaw",
+    "description": "Acredita-se que ele anda sempre agitando o corpo para se disfarçar de flores balançando ao vento e escapar dos inimigos, mas também há quem diga que o movimento rápido das flores vermelhas é tão horrendo que faz com que ninguém queira chegar perto dele."
   },
   "PREDATOR_Ronin_Dark": {
     "localized_name": "Bushi Noct",
@@ -1715,6 +2271,14 @@
     "localized_name": "Dogen",
     "description": "Pal que se dedica à meditação em busca do estado de perfeita autorrenúncia. Depois de contentar-se por confrontar seus desejos terrenos, ele come até encher a pança e então reflete: |Hoje também passei da conta|."
   },
+  "PREDATOR_SnakeGirl": {
+    "localized_name": "Venusa",
+    "description": "Quando não entende alguma coisa, consulta com as serpentes que tem na cabeça. Porém, como todas são parte dela mesma, logo entende que não entende nada mesmo."
+  },
+  "PREDATOR_Suzaku": {
+    "localized_name": "Suzaku",
+    "description": "Antigamente eram considerados entidades que traziam consigo a estação seca. Quando ocorria alguma longa estiagem, tornavam-se alvos de um extermínio implacável como forma de desejar boa colheita no ano seguinte."
+  },
   "PREDATOR_ThunderDog": {
     "localized_name": "Rayhound",
     "description": "Como seu nome sugere, lembra um relâmpago quando corre à toda velocidade. E, caso colida com outro Rayhound, faz-se ouvir um estrondo como o de um trovão."
@@ -1723,13 +2287,25 @@
     "localized_name": "Jormuntide Ignis",
     "description": "Há lendas que contam sobre um guerreiro lançado para dentro de um vulcão por um crime que não cometeu; ele então retornou como uma Jormuntide Ignis e incendiou uma nação inteira."
   },
+  "PREDATOR_Umihebi_Fire_Quest": {
+    "localized_name": "Jormuntide Ignis",
+    "description": null
+  },
   "PREDATOR_VolcanicMonster_Ice": {
     "localized_name": "Reptyro Cryst",
     "description": "Sangue de temperatura ultrabaixa percorre seu corpo inteiro. Caso seja aquecido repentinamente, o sangue se vaporiza e causa uma erupção freática impressionante."
   },
+  "PREDATOR_VolcanoDragon": {
+    "localized_name": "Moldron",
+    "description": "Espécimes saudáveis apresentam um fluxo de lava mais constante nas costas. Caso mantenham hábitos ruins, o fluxo vai piorando até que, nos piores casos, a lava pode estagnar e causar uma grande explosão de repente."
+  },
   "PREDATOR_Werewolf_Ice": {
     "localized_name": "Loupmoon Cryst",
     "description": "Os chifres em sua cabeça são de um gelo fantástico que jamais se derrete. Dizem que uma raspadinha feita com um de seus chifres quebrados é uma iguaria sem igual, mas que dá uma bela dor de cabeça tanto a quem come quanto ao Loupmoon Cryst."
+  },
+  "PREDATOR_WhiteShieldDragon_Quest": {
+    "localized_name": "Silvegis",
+    "description": null
   },
   "PREDATOR_WhiteTiger_Ground": {
     "localized_name": "Cryolinx Terra",
@@ -1758,6 +2334,10 @@
   "PalTrader": {
     "localized_name": "Comerciante de Pals",
     "description": null
+  },
+  "PandaGirl": {
+    "localized_name": "Leafan",
+    "description": "Treina dia após dia para aperfeiçoar a arte marcial de seus antepassados! Perder tempo com amor é impensável — só o treino importa! Quando gosta de alguém, parte logo para o ataque — mas isso ninguém suporta! Nunca aprendeu técnicas de amor — por isso não se conforta!"
   },
   "Penguin": {
     "localized_name": "Pengullet",
@@ -1807,7 +2387,55 @@
     "localized_name": "Guarda da Milícia Popular",
     "description": null
   },
+  "Police_Invader_CrossBow": {
+    "localized_name": "Unidade de Choque da Milícia Popular",
+    "description": null
+  },
+  "Police_Invader_FlameThrower": {
+    "localized_name": "Unidade Limpadora da Milícia Popular",
+    "description": null
+  },
+  "Police_Invader_GrenadeLauncher": {
+    "localized_name": "Veterano da Milícia Popular",
+    "description": null
+  },
+  "Police_Invader_Handgun": {
+    "localized_name": "Guarda da Milícia Popular",
+    "description": null
+  },
+  "Police_Invader_Katana": {
+    "localized_name": "Lamineiro da Milícia Popular",
+    "description": null
+  },
+  "Police_Invader_LaserRifle": {
+    "localized_name": "Tecnólogo da Milícia Popular",
+    "description": null
+  },
+  "Police_Invader_MissileLauncher": {
+    "localized_name": "Interceptor da Milícia Popular",
+    "description": null
+  },
+  "Police_Invader_Rifle": {
+    "localized_name": "Unidade fuzileira da Milícia Popular",
+    "description": null
+  },
+  "Police_Invader_RocketLauncher": {
+    "localized_name": "Fogueteiro da Milícia Popular",
+    "description": null
+  },
+  "Police_Invader_Shotgun": {
+    "localized_name": "Elite da Milícia Popular",
+    "description": null
+  },
   "Police_Rifle": {
+    "localized_name": "Unidade fuzileira da Milícia Popular",
+    "description": null
+  },
+  "Police_Rifle_Crime_Lv4": {
+    "localized_name": "Unidade fuzileira da Milícia Popular",
+    "description": null
+  },
+  "Police_Rifle_Crime_Lv5": {
     "localized_name": "Unidade fuzileira da Milícia Popular",
     "description": null
   },
@@ -1877,6 +2505,22 @@
   },
   "Quest_Hunter_RocketLauncher01": {
     "localized_name": "Elite dos Caçadores Clandestinos",
+    "description": null
+  },
+  "Quest_Male_Ninja01": {
+    "localized_name": "Ninja Inferior do Bando das Flores e da Lua",
+    "description": null
+  },
+  "Quest_Male_NinjaElite01": {
+    "localized_name": "Ninja Superior do Bando das Flores e da Lua",
+    "description": null
+  },
+  "Quest_Male_Scientist01_LaserRifle": {
+    "localized_name": "Agente da Unidade de Pesquisas Genéticas",
+    "description": null
+  },
+  "Quest_Scientist_FlameThrower": {
+    "localized_name": "Agente da Unidade de Pesquisas Genéticas",
     "description": null
   },
   "RAID_DarkMechaDragon": {
@@ -1971,6 +2615,10 @@
     "localized_name": "Ragnahawk",
     "description": "Apesar da semelhança, esta espécie não tem relação com a Beakon. Alimentando-se sobretudo de rochas, ao longo de muitas eras enrijeceu-se não apenas seu bico, mas seu corpo inteiro."
   },
+  "RedFlowerBird": {
+    "localized_name": "Tropicaw",
+    "description": "Acredita-se que ele anda sempre agitando o corpo para se disfarçar de flores balançando ao vento e escapar dos inimigos, mas também há quem diga que o movimento rápido das flores vermelhas é tão horrendo que faz com que ninguém queira chegar perto dele."
+  },
   "Respawn_guide": {
     "localized_name": "Domador simpático",
     "description": null
@@ -2023,6 +2671,10 @@
     "localized_name": "Sentinela",
     "description": null
   },
+  "Reward_PalCaptureCount_v02": {
+    "localized_name": "Sentinela",
+    "description": null
+  },
   "Reward_PalDisplay_A_01": {
     "localized_name": "Sentinela",
     "description": null
@@ -2063,6 +2715,10 @@
     "localized_name": "Sentinela",
     "description": null
   },
+  "Reward_Paldex_v02": {
+    "localized_name": "Sentinela",
+    "description": null
+  },
   "Robbery_Leader": {
     "localized_name": "Comerciante de Pals",
     "description": null
@@ -2078,6 +2734,14 @@
   "RobinHood_Ground": {
     "localized_name": "Robinquill Terra",
     "description": "Um Pal de hábitos muito semelhantes aos humanos, que leva a vida como caçador em meio às rochas. Quando encontram ossos de um Robinquill Terra em alguma ruína, sempre encontram também ossos humanos nas redondezas."
+  },
+  "RockBeast": {
+    "localized_name": "Pierdon",
+    "description": "Choca-se contra rochas ainda mais duras para manter o corpo na forma desejada. Caso encontre um espécime com alguma depressão, é melhor deixá-lo sozinho. Quando isso acontece, ficam tão amuados quanto alguém que cortou demais a franja."
+  },
+  "RockBeast_Ice": {
+    "localized_name": "Pierdon Cryst",
+    "description": "Toma banho de sol enquanto vai mudando de posição para derreter o gelo do corpo na forma desejada. Caso encontre um espécime um tanto disforme, é melhor deixá-lo sozinho. Quando isso acontece, ficam tão amuados quanto alguém que cortou demais as costeletas."
   },
   "Ronin": {
     "localized_name": "Bushi",
@@ -2139,11 +2803,23 @@
     "localized_name": "Comerciante itinerante",
     "description": null
   },
+  "SamuraiDog": {
+    "localized_name": "Pupperai",
+    "description": "Depois de encarar um adversário, termina qualquer briga por território com um único golpe. A propósito, não é recomendado ensinar um Pupperai a |sentar| na hora do adestramento, ou ele pode pensar que é um comando para |sentar o pau|."
+  },
   "Scientist_FlameThrower": {
     "localized_name": "Agente da Unidade de Pesquisas Genéticas",
     "description": null
   },
   "Scientist_FlameThrower_Invader": {
+    "localized_name": "Agente da Unidade de Pesquisas Genéticas",
+    "description": null
+  },
+  "Scientist_GrenadeLauncher": {
+    "localized_name": "Agente da Unidade de Pesquisas Genéticas",
+    "description": null
+  },
+  "Scientist_MissileLauncher": {
     "localized_name": "Agente da Unidade de Pesquisas Genéticas",
     "description": null
   },
@@ -2155,9 +2831,21 @@
     "localized_name": "Prixter",
     "description": "Carrega cerca de cinco mil variedades de toxinas. Algumas seriam capazes de causar até mesmo morte instantânea, mas todas existem em tão baixa quantidade que acabam não surtindo efeito nenhum."
   },
+  "ScorpionMan_Electric": {
+    "localized_name": "Prixter Lux",
+    "description": "Espeta a cauda no inimigo para passar energia elétrica pelo seu corpo. No entanto, como a corrente elétrica é bem fraca, poderia causar muito mais dano com um soco bem dado."
+  },
   "SecurityDrone": {
     "localized_name": "Helicóptero Armado",
     "description": null
+  },
+  "SecurityDrone_Field": {
+    "localized_name": "Helicóptero Armado",
+    "description": null
+  },
+  "Sekhmet": {
+    "localized_name": "Sekhmet",
+    "description": "Com um temperamento selvagem, costumava servir como símbolo da morte. Depois que Anubis assumiu esse papel, indivíduos de posses desejosos de alguém para substituí-lo embriagaram e persuadiram membros desta espécie. E assim, num dado momento, Sekhmet se tornou um símbolo da nobreza."
   },
   "Serpent": {
     "localized_name": "Surfent",
@@ -2191,9 +2879,21 @@
     "localized_name": "Quivern Botan",
     "description": "Se você abraçar um Quivern Botan e sentir um cheiro de raios de sol e de grama, é porque amanhã vai fazer dia claro. Se sentir um cheiro úmido, é porque vai cair um toró."
   },
+  "SleeveRabbit": {
+    "localized_name": "Lapure",
+    "description": "Usa os longos pelos das mãos para encantar os outros. Bastante sensível à sujeira, mantém-se sempre bem asseada e faz uma cara de desgosto terrível caso alguém levante poeira ao seu redor."
+  },
   "SmallArmadillo": {
     "localized_name": "Kikit",
     "description": "Num passado distante, tornou-se muito popular jogar futebol com um Kikit. A prática foi logo abandonada devido à oposição fervorosa da Associação de Proteção aos Pals, mas ela também servia para remover a queratina velha do Kikit — motivo pelo qual dizem que os próprios Pals não eram contrários a ela."
+  },
+  "SmallYeti": {
+    "localized_name": "Snugloo",
+    "description": "|Ver os olhos de um Snugloo| é uma expressão que significa procurar pela natureza oculta de alguma coisa. O curioso é que não existe nenhum cientista que tenha tentado investigar se os Snugloo realmente têm olhos."
+  },
+  "SnakeGirl": {
+    "localized_name": "Venusa",
+    "description": "Quando não entende alguma coisa, consulta com as serpentes que tem na cabeça. Porém, como todas são parte dela mesma, logo entende que não entende nada mesmo."
   },
   "SnowPeafowl": {
     "localized_name": "Frostplume",
@@ -2207,6 +2907,10 @@
     "localized_name": "Beegarde",
     "description": "Vassalas que juram lealdade a uma Elizabee. Eliminam sem falta qualquer um que tentar ameaçar sua rainha, a qual protegem mesmo que precisem explodir a si mesmas."
   },
+  "SorajimaTowerGuide": {
+    "localized_name": "Habitante da ilha",
+    "description": null
+  },
   "StuffedShark": {
     "localized_name": "Finsider",
     "description": "Embora pareça ser um bicho de pelúcia com alguma coisa espiando do seu interior, você não vai encontrar nada se tentar enfiar a mão dentro dele. Aliás, pode até colocar o braço inteiro que não vai chegar a lugar nenhum. Quem sabe o próprio universo esteja contido nele."
@@ -2214,6 +2918,10 @@
   "StuffedShark_Fire": {
     "localized_name": "Finsider Ignis",
     "description": "Se tentar colocar a mão em sua boca, não encontrará nada além de um espaço infinito. Um certo pesquisador imaginou que talvez se tratasse de uma dimensão alternativa e tentou entrar com o corpo inteiro para usar o Pal como saco de dormir, mas acabou sendo vomitado — o que indica que esse espaço funciona mesmo como o interior de um organismo."
+  },
+  "SumoDog": {
+    "localized_name": "Bulldosu",
+    "description": "Antigamente, havia na ilha um passatempo conhecido como |sumô de Bulldosu|. Dizem que, se um Rushoar tentasse investir contra um lutador Bulldosu de primeira classe, era o Rushoar que acabava voando para longe."
   },
   "Suzaku": {
     "localized_name": "Suzaku",
@@ -2227,6 +2935,18 @@
     "localized_name": "Woolipop",
     "description": "Cada parte de seu corpo é 18 mil vezes mais doce que o açúcar. Pals carnívoros que são atraídos por seu cheiro e tentam mordê-lo acabam desmaiando devido ao choque da doçura extrema."
   },
+  "SweetsSheep_Ground": {
+    "localized_name": "Woolipop Terra",
+    "description": "Apesar do aroma doce que emana de seu pelo, sua carne é terrivelmente amarga. Pals carnívoros que são atraídos por seu cheiro e tentam mordê-lo acabam desmaiando devido ao choque do amargor extremo."
+  },
+  "SwordCutlassfish": {
+    "localized_name": "Skutlass",
+    "description": "Possui hábitos insanos, pois separa o próprio corpo temporariamente para fatiar os inimigos com sua espinha. Caso não se recomponha logo em seguida, acaba esgotando suas próprias forças também. Dizem que, entre os espécimes mais jovens, está na moda competir para ver quem aguenta ficar mais tempo com o corpo separado."
+  },
+  "SwordCutlassfish_Fire": {
+    "localized_name": "Skutlass Ignis",
+    "description": "Separa o próprio corpo para fatiar os inimigos com sua espinha, mas, caso não se recomponha logo em seguida, acaba esgotando suas próprias forças também. Dizem que, entre os espécimes mais velhos, há quem separe o corpo por um longo tempo de propósito para atiçar os instintos de sobrevivência e prolongar a vida."
+  },
   "TentacleTurtle": {
     "localized_name": "Turtacle",
     "description": "Este Pal desenvolveu uma dura carapaça como meio de proteger seu corpo frágil. Porém, com isso, acabou negligenciando demais as defesas de seu corpo em si. Devido a isso, até simples cócegas são o suficiente para fazê-lo desmaiar."
@@ -2235,17 +2955,33 @@
     "localized_name": "Turtacle Terra",
     "description": "Desenvolveram um casco resistente a fim de proteger seu corpo frágil. A maioria de suas terminações nervosas se concentram nas patas dianteiras e no casco, portanto eles não percebem quando alguém encosta sorrateiramente no seu corpo."
   },
+  "ThiefBird": {
+    "localized_name": "Roujay",
+    "description": "Com uma leve tendência cleptomaníaca, costuma roubar dos outros sem que eles percebam. E, mesmo que percebam, não há problema: basta roubar também a visão das vítimas que já não poderão enxergar mais nada."
+  },
   "ThunderBird": {
     "localized_name": "Beakon",
     "description": "Apesar da semelhança, esta espécie não tem relação com a Ragnahawk. Dá rasantes repentinas para eliminar seus inimigos com o bico afiado. Sua imagem é tal como um raio caindo dos céus."
+  },
+  "ThunderBird_Ice": {
+    "localized_name": "Beakon Cryst",
+    "description": "Adaptado a zonas congelantes, resiste ao frio apesar de seu corpo franzino. Seu ataque rasante é tão devastador que se assemelha a uma grande estaca de gelo caindo dos céus."
   },
   "ThunderDog": {
     "localized_name": "Rayhound",
     "description": "Como seu nome sugere, lembra um relâmpago quando corre à toda velocidade. E, caso colida com outro Rayhound, faz-se ouvir um estrondo como o de um trovão."
   },
+  "ThunderDog_Ice": {
+    "localized_name": "Rayhound Cryst",
+    "description": "Levanta uma cortina de neve ao correr a toda velocidade pelos campos nevados. São comuns os acidentes de colisão entre Rayhound Cryst, pois não conseguem enxergar uns aos outros."
+  },
   "ThunderDragonMan": {
     "localized_name": "Orserk",
     "description": "Ele faz correr eletricidade por ferimentos, queimando o corpo do adversário. Uma briga entre Orserks é sempre resolvida em questão de segundos."
+  },
+  "ThunderFluffyBird": {
+    "localized_name": "Dynamoff",
+    "description": "Como vive nas alturas, onde há pouca comida disponível, às vezes devora até mesmo os miolos dos inimigos. Acredita-se que foi um bando que se aproximou do solo em busca de uma dieta mais consistente que acabou evoluindo para o Beakon."
   },
   "TropicalOstrich": {
     "localized_name": "Palumba",
@@ -2258,6 +2994,10 @@
   "Umihebi_Fire": {
     "localized_name": "Jormuntide Ignis",
     "description": "Há lendas que contam sobre um guerreiro lançado para dentro de um vulcão por um crime que não cometeu; ele então retornou como uma Jormuntide Ignis e incendiou uma nação inteira."
+  },
+  "VenusFlytrap": {
+    "localized_name": "Carnibora",
+    "description": "Como devora até as coisas mais esquisitas sem pensar duas vezes, frequentemente a boca no alto de sua cabeça fica cheia de aftas. Quando isso acontece, ela passa a comer com a boca que tem no rosto. Mas, como mantém seus maus hábitos alimentares, acaba com aftas nela também."
   },
   "Viking": {
     "localized_name": "Povo Decaído",
@@ -2275,8 +3015,20 @@
     "localized_name": "Elite do Povo Decaído",
     "description": null
   },
+  "Viking_GrenadeLauncher": {
+    "localized_name": "Povo Decaído",
+    "description": null
+  },
+  "Viking_Melee": {
+    "localized_name": "Povo Decaído",
+    "description": null
+  },
   "Viking_Prisoner": {
     "localized_name": "Povo Decaído",
+    "description": null
+  },
+  "Viking_RocketLauncher": {
+    "localized_name": "Elite do Povo Decaído",
     "description": null
   },
   "Viking_Tower": {
@@ -2311,6 +3063,14 @@
     "localized_name": "Reptyro Cryst",
     "description": "Sangue de temperatura ultrabaixa percorre seu corpo inteiro. Caso seja aquecido repentinamente, o sangue se vaporiza e causa uma erupção freática impressionante."
   },
+  "VolcanoDragon": {
+    "localized_name": "Moldron",
+    "description": "Espécimes saudáveis apresentam um fluxo de lava mais constante nas costas. Caso mantenham hábitos ruins, o fluxo vai piorando até que, nos piores casos, a lava pode estagnar e causar uma grande explosão de repente."
+  },
+  "VolcanoDragon_Ice": {
+    "localized_name": "Moldron Cryst",
+    "description": "A substância que flui do dorso de espécimes saudáveis mantém uma temperatura estável. Quando ficam nervosos, no entanto, nos piores casos ela pode acabar se vaporizando ou solidificando, causando uma morte súbita."
+  },
   "WeaponsDealer": {
     "localized_name": "pt-BR_Text",
     "description": null
@@ -2339,9 +3099,17 @@
     "localized_name": "Celesdir",
     "description": "Na literatura antiga é mencionado como a |besta da salvação|. Isso porque a luz emitida por um Celesdir purifica todas as coisas — literalmente fazendo com que desapareçam deste mundo sem deixar vestígios."
   },
+  "WhiteDeer_Dark": {
+    "localized_name": "Celesdir Noct",
+    "description": "A luz ofuscante cria também uma sombra. Ela espalha uma escuridão que tudo envolve e reinstaura o caos que há de existir. Afinal, o mundo precisa de equilíbrio."
+  },
   "WhiteMoth": {
     "localized_name": "Sibelyx",
     "description": "Adoram a chuva, muitas vezes mantendo-se estáticas por longos períodos quando continua a chover. Foxparkss com frequência vêm abrigar-se junto a elas."
+  },
+  "WhiteMoth_Neutral": {
+    "localized_name": "Sibelyx Primo",
+    "description": "Adoram olhar para o vazio, muitas vezes mantendo-se estáticas por longos períodos. Com frequência acabam servindo de local de encontro para Pals menores."
   },
   "WhiteShieldDragon": {
     "localized_name": "Silvegis",
@@ -2355,6 +3123,14 @@
     "localized_name": "Cryolinx Terra",
     "description": "Consegue carregar muitas coisas com facilidade usando suas grandes mãos. Devido a suas pernas curtas, no entanto, caminha tão devagar que às vezes o dia se acaba antes de ele chegar ao seu destino."
   },
+  "WildlifeSanctuaryDrone": {
+    "localized_name": "Drone de Defesa",
+    "description": null
+  },
+  "WildlifeSanctuary_guide": {
+    "localized_name": "Domador Inexperiente",
+    "description": null
+  },
   "WindChimes": {
     "localized_name": "Hangyu",
     "description": "Seus braços enormes conseguem rasgar até mesmo ferro. No passado, havia um modo de execução bárbaro em que criminosos hediondos eram acorrentados em praça pública e então tinham suas carnes despedaçadas por um Windchimes."
@@ -2367,6 +3143,10 @@
     "localized_name": "Knocklem",
     "description": "Um Pal misterioso capaz de desfazer-se em 215 pedaços e voltar a andar normalmente depois de reconstruído. Caso suas partes se misturem com as de outro indivíduo, perde sua identidade e entra em depressão."
   },
+  "WingGolem_Fire": {
+    "localized_name": "Knocklem Ignis",
+    "description": "Um Pal misterioso que, mesmo se desfazendo, volta a andar normalmente depois de reconstruído. Caso suas partes se misturem com as de outro indivíduo, ocorre um erro crítico de raciocínio e ele acaba sobreaquecendo."
+  },
   "WingGolem_Oilrig": {
     "localized_name": "Knocklem",
     "description": null
@@ -2378,6 +3158,10 @@
   "WoolFox": {
     "localized_name": "Cremis",
     "description": "Possui muito mais lã que uma SheepBall (além de ser muito mais fácil de criar que qualquer SheepBall). Ainda assim, historicamente foi sempre criada apenas como Pal de estimação. Parece que a fofura a salvou da pecuária."
+  },
+  "WorldTreeDragon": {
+    "localized_name": "Astralym",
+    "description": "A forma à qual foi reduzida a Pal misteriosa que, em um passado remoto, chegou voando até Palpagos. Depois de trazer a destruição como a |Calamidade|, passou um longo tempo aprisionada. No entanto, finalmente foi derrotada por uma alma valente domadora de Pals."
   },
   "YakushimaBoss001": {
     "localized_name": "Olho de Cthulhu",
