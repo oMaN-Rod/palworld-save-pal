@@ -195,6 +195,27 @@ async fn route(
         MessageType::RenameWorld => {
             handlers::save_file::handle_rename_world(serde_json::from_value(data)?, ctx).await
         }
+        // Task 3C-4: UPS pal CRUD.
+        MessageType::GetUpsPals => {
+            handlers::ups::handle_get_ups_pals(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::GetUpsAllFilteredIds => {
+            handlers::ups::handle_get_ups_all_filtered_ids(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::AddUpsPal => {
+            handlers::ups::handle_add_ups_pal(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::UpdateUpsPal => {
+            handlers::ups::handle_update_ups_pal(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::DeleteUpsPals => {
+            handlers::ups::handle_delete_ups_pals(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::CloneUpsPal => {
+            handlers::ups::handle_clone_ups_pal(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::GetUpsStats => handlers::ups::handle_get_ups_stats(ctx).await,
+        MessageType::NukeUpsPals => handlers::ups::handle_nuke_ups_pals(ctx).await,
         // Remaining arms are added by Phases 1-6.
         other => {
             tracing::warn!(
@@ -254,12 +275,11 @@ mod tests {
 
     #[tokio::test]
     async fn valid_but_unimplemented_type_sends_nothing() {
+        // get_ups_collections (Task 3C-5, not yet registered) is still a valid
+        // MessageType — get_ups_pals no longer qualifies as of Task 3C-4.
         let mut test = TestContext::new(|_| {}).await;
         dispatch(
-            envelope(
-                "get_ups_pals",
-                serde_json::json!({"offset": 0, "limit": 30}),
-            ),
+            envelope("get_ups_collections", serde_json::Value::Null),
             HandlerCtx {
                 session: &mut test.session,
                 app: &test.app,
