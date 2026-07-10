@@ -1351,6 +1351,7 @@ name = "psp-db"
 version = "0.17.3"
 dependencies = [
  "chrono",
+ "serde",
  "serde_json",
  "sqlx",
  "tempfile",

@@ -170,3 +170,22 @@ async fn tag_pal_type_sort_and_pagination() {
             .unwrap();
     assert_eq!(page[0].id, 3);
 }
+
+#[tokio::test]
+async fn unknown_sort_order_defaults_to_ascending() {
+    // Parity with Python ups.py: sort_order "desc" => DESC, everything else => ASC.
+    // A sort_order that is neither "asc" nor "desc" must yield ASCENDING order.
+    let pool = test_pool().await;
+    insert_pal(&pool, "A", None, 1, false, &[], "2026-01-01T00:00:00").await;
+    insert_pal(&pool, "B", None, 40, false, &[], "2026-01-02T00:00:00").await;
+    insert_pal(&pool, "C", None, 30, false, &[], "2026-01-03T00:00:00").await;
+
+    let (page, _) = psp_db::ups::get_pals(&pool, &UpsFilter::default(), "level", "garbage", 0, 30)
+        .await
+        .unwrap();
+    // Ascending by level: 1, 30, 40. (Under the old `else DESC` code this would be 40, 30, 1.)
+    assert_eq!(
+        page.iter().map(|p| p.level).collect::<Vec<_>>(),
+        vec![1, 30, 40]
+    );
+}

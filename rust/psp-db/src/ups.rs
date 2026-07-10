@@ -2,7 +2,7 @@ use sqlx::{QueryBuilder, Sqlite, SqlitePool};
 
 use crate::error::DbError;
 
-#[derive(Debug, Clone, sqlx::FromRow)]
+#[derive(Debug, Clone, serde::Serialize, sqlx::FromRow)]
 pub struct UpsPalRecord {
     pub id: i64,
     pub instance_id: String,
@@ -199,7 +199,7 @@ fn sort_clause(sort_by: &str, sort_order: &str) -> String {
     } else {
         "created_at"
     };
-    let direction = if sort_order == "asc" { "ASC" } else { "DESC" };
+    let direction = if sort_order == "desc" { "DESC" } else { "ASC" };
     format!(" ORDER BY {column} {direction}")
 }
 
