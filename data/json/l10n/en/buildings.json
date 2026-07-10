@@ -3,9 +3,133 @@
     "localized_name": "Summoning Altar",
     "description": "Offer a Slab depicting a Pal to summon a powerful Pal to your base. Adequate caution and battle readiness is paramount."
   },
+  "AncientBlastFurnace": {
+    "localized_name": "Ancient Furnace",
+    "description": "A special furnace based on ancient technology that can smelt all types of ingots. Materials are melted with fire, then quickly cooled and solidified using ice. It requires Pals with high-level Kindling and Cooling suitability."
+  },
+  "AncientCookingStove": {
+    "localized_name": "Ancient Kitchen",
+    "description": "A special kitchen based on ancient technology that can create everything from existing dishes to entirely new recipes. It retains heat through fire and completes cooking with manual preparation, allowing it to prepare any kind of cuisine. It requires Pals with high-level Kindling and Handiwork suitability."
+  },
+  "AncientElectricGenerator": {
+    "localized_name": "Ancient Power Generator",
+    "description": "A highly efficient power generator restored from lost ancient technology. It produces massive amounts of electricity, but is prone to overheating while in operation. It requires Pals with high-level Generating Electricity and any level of Watering suitability."
+  },
+  "AncientFarmBlock": {
+    "localized_name": "Ancient Farm",
+    "description": "A special cultivation device based on ancient technology that harnesses the power of the World Tree to grow all kinds of plants on Palpagos Island. Smaller than a berry plantation and suitable for indoor placement, it still follows the same cultivation process as standard plots. It requires Pals with high-level Planting, Watering, and Harvesting suitability."
+  },
+  "AncientMultiProduct": {
+    "localized_name": "Ancient Material Synthesizer",
+    "description": "A special generator based on ancient technology that uses the power of the World Tree to produce all kinds of wood and ore. Due to its complex structure, only one Pal can be assigned to it."
+  },
+  "AncientRelicRecycler": {
+    "localized_name": "Ancient Relic Recycler",
+    "description": "An ancient civilization device that converts materials using repurposed technology from a lost civilization. It deciphers the technology left within Ancient Relics and refines them into new forms. A highly specialized facility designed for the efficient use of relics without waste."
+  },
+  "AncientWorkBench": {
+    "localized_name": "Ancient Workbench",
+    "description": "A Pal-exclusive workbench that is capable of crafting any item in one place. It cannot be used by the player, and operates at the same speed as a regular workbench. Due to its advanced equipment, it requires Pals with high-level Handiwork and Medicine Production suitability."
+  },
+  "Ancient_AirConditioner": {
+    "localized_name": "Ancient Air Conditioner",
+    "description": null
+  },
+  "Ancient_Clinic": {
+    "localized_name": "Ancient Clinic",
+    "description": "A top-tier medical facility that reproduces advanced ancient medical technology. It offers significantly greater protective capability than a standard clinic. By assigning a Pal with Medicine Production suitability, even bases with harsh working conditions can maintain the highest level of hygiene."
+  },
+  "Ancient_DiagonalWall": {
+    "localized_name": "Ancient Diagonal Wall",
+    "description": "An angled wall built on triangular foundations to keep out intruders. Recreates the architectural style of ancient civilizations."
+  },
+  "Ancient_DoorWall": {
+    "localized_name": "Ancient Wall and Door",
+    "description": "Door built on a foundation. Becomes an entrance. Recreates the architectural style of ancient civilizations."
+  },
+  "Ancient_Fence": {
+    "localized_name": "Ancient Fence",
+    "description": "Fencing built on foundations and roofs for keeping out intruders. Recreates the architectural style of ancient civilizations."
+  },
+  "Ancient_MedicalPalBed": {
+    "localized_name": "Ancient Pal Bed",
+    "description": "A ulitmate Pal Bed made from ancient recovery pod with soft matress. It offers one of the highest SAN recovery rates of all Pal beds, quickly relieving fatigue. It is the same size as a Large Pal Bed, allowing large Pals to rest comfortably."
+  },
+  "Ancient_Pillars": {
+    "localized_name": "Ancient Pillar",
+    "description": "Column for structural support. Recreates the architectural style of ancient civilizations."
+  },
+  "Ancient_PyramidRoof": {
+    "localized_name": "Ancient Pyramid Roof",
+    "description": "A pyramidal roof built on top of walls to keep out the rain and wind. Recreates the architectural style of ancient civilizations."
+  },
+  "Ancient_SlantedRoof": {
+    "localized_name": "Ancient Slanted Roof",
+    "description": "Slanted roof built on top of walls to keep out the rain and wind. Recreates the architectural style of ancient civilizations."
+  },
+  "Ancient_SlopedRoofCorner": {
+    "localized_name": "Ancient Slanted Triangular Roof",
+    "description": "A slanted triangular roof built on top of diagonal walls to keep out the rain and wind. Recreates the architectural style of ancient civilizations."
+  },
+  "Ancient_SlopedRoofCornerReverse": {
+    "localized_name": "Ancient Slanted Triangular Roof (Inverted)",
+    "description": "An inverted slanted triangular roof built on top of walls to keep out the rain and wind. Recreates the architectural style of ancient civilizations."
+  },
+  "Ancient_Spa": {
+    "localized_name": "Ancient Hot Spring",
+    "description": "A hot spring built with ancient technology, filled with special water infused with Paldium. It offers the highest SAN recovery of all hot springs and also restores Health. It is the same size as a standard hot spring, and can fully heal injured Pals."
+  },
+  "Ancient_TriangleFoundation": {
+    "localized_name": "Ancient Triangular Foundation",
+    "description": "A triangular foundation for building walls or facilities. Recreates the architectural style of ancient civilizations."
+  },
+  "Ancient_TriangleRoof": {
+    "localized_name": "Ancient Triangular Roof",
+    "description": "A triangular roof built on top of walls to keep out the rain and wind. Recreates the architectural style of ancient civilizations."
+  },
+  "Ancient_TriangleStairsCorner": {
+    "localized_name": "Ancient Corner Roof",
+    "description": "A corner roof built on top of walls to keep out the rain and wind. Recreates the architectural style of ancient civilizations."
+  },
+  "Ancient_TriangleWall": {
+    "localized_name": "Ancient Triangular Wall",
+    "description": "Triangular wall built on a foundation to keep out intruders. Can be used to create create clean, futuristic architecture."
+  },
+  "Ancient_TriangleWallReverse": {
+    "localized_name": "Ancient Triangular Wall (Inverted)",
+    "description": "An inverted triangular wall built on a foundation to keep out intruders. Recreates the architectural style of ancient civilizations."
+  },
+  "Ancient_WallGate": {
+    "localized_name": "Ancient Pal Passage Entrance",
+    "description": "An entrance to a Pal passage built on a foundation. Recreates the architectural style of ancient civilizations."
+  },
+  "Ancient_WindowWall": {
+    "localized_name": "Ancient Wall and Window",
+    "description": "Wall with windows, built on a foundation to keep out intruders. Recreates the architectural style of ancient civilizations."
+  },
+  "Ancient_foundation": {
+    "localized_name": "Ancient Foundation",
+    "description": "A foundation for building walls or facilities. Recreates the architectural style of ancient civilizations."
+  },
+  "Ancient_roof": {
+    "localized_name": "Ancient Roof",
+    "description": "A roof built on top of walls to keep out the rain and wind. Recreates the architectural style of ancient civilizations."
+  },
+  "Ancient_stair": {
+    "localized_name": "Ancient Stairs",
+    "description": "Stairs placed below a foundation or roof to climb up. Recreates the architectural style of ancient civilizations."
+  },
+  "Ancient_wall": {
+    "localized_name": "Ancient Wall",
+    "description": "Walls built on foundations to keep out intruders. Recreates the architectural style of ancient civilizations."
+  },
   "Andon": {
     "localized_name": "Japanese Paper Lantern",
     "description": "Decorative Paper Lantern. Perfect for Japanese-style buildings."
+  },
+  "ArcadeVideoGame": {
+    "localized_name": "Arcade Game Cabinet",
+    "description": "Decorative arcade machine. Broken, it can't be played."
   },
   "Barrel01_Iron": {
     "localized_name": "Red Metal Barrel",
@@ -34,6 +158,14 @@
   "BaseCampWorkHard": {
     "localized_name": "Monitoring Stand",
     "description": "Command your Pals to work on various things inside a base. You can allow or prohibit individual kinds of work."
+  },
+  "BaseCampWorkHard02": {
+    "localized_name": "High Quality Monitoring Stand",
+    "description": "A refined monitoring station with improved materials and structure. In addition to being able to issue work orders, the system also lowers the SAN cost for Pals working at the base. Working conditions are slightly improved, making Pals less likely to become dissatisfied."
+  },
+  "BaseCampWorkHard03": {
+    "localized_name": "Ancient Monitoring Stand",
+    "description": "A monitoring station based on ancient technology, embedded with Red Paldium. It issues commands across the entire base through a holographic interface, reducing SAN depletion in Pals. A special wavelength surrounds the base, keeping Pals calm even in harsh working environments."
   },
   "BaseCampWorkerExtraStation": {
     "localized_name": "Palbox Control Device",
@@ -151,6 +283,10 @@
     "localized_name": "Pal Essence Condenser",
     "description": "A chamber for increasing a Pal's rank. Pals can surpass their physical limitations if given a concentrated extract taken from a Pal of the same type."
   },
+  "Clinic": {
+    "localized_name": "Clinic",
+    "description": "A basic medical facility for managing the health of Pals working at the base. Assigning a Pal with Medicine Production suitability helps reduce SAN depletion and prevent illness and injury. While sanitation has its limits, it plays a crucial role in early base development."
+  },
   "Clock01_Stone": {
     "localized_name": "Antique Grandfather Clock",
     "description": "Decorative antique grandfather clock. Broken, it doesn't tell time."
@@ -160,7 +296,7 @@
     "description": "Decorative wall clock. Broken, it doesn't tell time."
   },
   "CoalPit": {
-    "localized_name": "Coal Mine",
+    "localized_name": "Coal Quarry",
     "description": "Facility for producing Coal. Digging Coal is grueling physical work. Leave it to a Pal that is good at mining."
   },
   "CompositeDesk": {
@@ -223,25 +359,37 @@
     "localized_name": "Training Dummy",
     "description": "Training dummy shaped like a Pengullet. Can only be placed in wide open areas."
   },
+  "DarkIsland_Banner": {
+    "localized_name": "Feybreak Banner",
+    "description": "Decorative Feybreak banner."
+  },
+  "DarkIsland_Flag": {
+    "localized_name": "Feybreak Flag",
+    "description": "Decorative Feybreak flag."
+  },
   "Decal_PalSticker_PinkCat": {
     "localized_name": "Tuppanyan sticker",
     "description": "en Text"
   },
   "DefenseBowGun": {
     "localized_name": "Mounted Crossbow",
-    "description": "Deploy a Pal to operate this defensive installation. Requires Arrow to use. Place ammo in the chest, and the deployed Pal will automatically load the weapon."
+    "description": "A defensive installation for protecting a base from enemies. When a Pal with Handiwork suitability is assigned, it will continuously defend the base using a crossbow."
   },
   "DefenseMachinegun": {
     "localized_name": "Mounted Machine Gun",
-    "description": "Deploy a Pal to operate this defensive installation. Requires Rifle Ammo to use. Place ammo in the chest, and the deployed Pal will automatically load the weapon."
+    "description": "A defensive installation for protecting a base from enemies. When a Pal with Handiwork suitability is assigned, it will continuously defend the base using a machine gun."
+  },
+  "DefenseMachinegun_AutoTurret": {
+    "localized_name": "Ancient Turret",
+    "description": "An unmanned turret of ancient technology equipped with rocket launcher–level size and firepower. It requires no ammunition or Pal assignment, and performs fully automated interception using only electricity. However, despite its immense power, it requires a massive amount of electricity to operate."
   },
   "DefenseMissile": {
     "localized_name": "Mounted Missile Launcher",
-    "description": "Deploy a Pal to operate this defensive installation. Requires Rocket Ammo to use. Place ammo in the chest, and the deployed Pal will automatically load the weapon."
+    "description": "A defensive installation for protecting a base from enemies. When a Pal with Handiwork suitability is assigned, it will continuously defend the base using a missile launcher."
   },
   "DefenseWait": {
     "localized_name": "Sandbag",
-    "description": "Defensive installation to protect a base from enemies. Place a Pal and it will ignore other work to stay on lookout and prepare for combat."
+    "description": "A defensive installation for protecting a base from enemies. When a Pal is assigned, it will stop other work and stay on lookout and prepare for combat."
   },
   "DefenseWall": {
     "localized_name": "Stone Defensive Wall",
@@ -325,7 +473,7 @@
   },
   "Factory_Money": {
     "localized_name": "Gold Coin Assembly Line",
-    "description": "An Assemby Line that manufactures Money. The work puts a strain on the mind, causing a decrease in Pal's SAN value. Requires Pals that can work with their hands."
+    "description": "An Assembly Line that manufactures Gold Coin. The work puts a strain on the mind, causing a decrease in Pal's SAN value. Requires Pals that can work with their hands. Warning: building this facility may draw severe scrutiny from the PIDF."
   },
   "FarmBlockV2_Berries": {
     "localized_name": "Berry Plantation",
@@ -399,6 +547,130 @@
     "localized_name": "Japanese Writing Table",
     "description": "Decorative Ornamental Writing Table. Perfect for Japanese-style buildings."
   },
+  "FurnitureBush01_Flower": {
+    "localized_name": "Faux Flowering Bush A",
+    "description": "A realistic replication of a flowering bush. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureBush01_Green": {
+    "localized_name": "Faux Bush",
+    "description": "A realistic replication of a bush. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureBush01_Snow": {
+    "localized_name": "Faux White Bush",
+    "description": "A realistic replication of a snow-covered bush. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureBush01_Tropical": {
+    "localized_name": "Faux Tropical Bush",
+    "description": "A realistic replication of a tropical bush. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureBush01_Yellow": {
+    "localized_name": "Faux Golden Bush",
+    "description": "A realistic replication of a golden bush. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureBush02_Flower": {
+    "localized_name": "Faux Flowering Bush B",
+    "description": "A realistic replication of a flowering bush. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureStone01": {
+    "localized_name": "Faux Rock",
+    "description": "A realistic replication of a boulder. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureTree01_Bamboo": {
+    "localized_name": "Faux Bamboo A",
+    "description": "A realistic replication of some bamboo. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureTree01_Cherry": {
+    "localized_name": "Faux Cherry Blossoms A",
+    "description": "A realistic replication of some cherry blossoms. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureTree01_Desert": {
+    "localized_name": "Faux Desert Greenery A",
+    "description": "A realistic replication of some desert greenery. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureTree01_Green": {
+    "localized_name": "Faux Greenery A",
+    "description": "A realistic replication of some greenery. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureTree01_Red": {
+    "localized_name": "Faux Crimson Foliage A",
+    "description": "A realistic replication of some crimson foliage. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureTree01_Snow": {
+    "localized_name": "Faux Snowy Greenery A",
+    "description": "A realistic replication of some snow-covered greenery. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureTree01_Tropical": {
+    "localized_name": "Faux Tropical Greenery A",
+    "description": "A realistic replication of some tropical greenery. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureTree01_Yellow": {
+    "localized_name": "Faux Golden Foliage A",
+    "description": "A realistic replication of some golden foliage. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureTree02_Bamboo": {
+    "localized_name": "Faux Bamboo B",
+    "description": "A realistic replication of some bamboo. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureTree02_Cherry": {
+    "localized_name": "Faux Cherry Blossoms B",
+    "description": "A realistic replication of some cherry blossoms. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureTree02_Desert": {
+    "localized_name": "Faux Desert Greenery B",
+    "description": "A realistic replication of some desert greenery. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureTree02_Green": {
+    "localized_name": "Faux Greenery B",
+    "description": "A realistic replication of some greenery. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureTree02_Red": {
+    "localized_name": "Faux Crimson Foliage B",
+    "description": "A realistic replication of some crimson foliage. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureTree02_Snow": {
+    "localized_name": "Faux Snowy Greenery B",
+    "description": "A realistic replication of some snow-covered greenery. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureTree02_Tropical": {
+    "localized_name": "Faux Tropical Greenery B",
+    "description": "A realistic replication of some tropical greenery. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureTree02_Yellow": {
+    "localized_name": "Faux Golden Foliage B",
+    "description": "A realistic replication of some golden foliage. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureTree03_Bamboo": {
+    "localized_name": "Faux Bamboo C",
+    "description": "A realistic replication of some bamboo. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureTree03_Cherry": {
+    "localized_name": "Faux Cherry Blossoms C",
+    "description": "A realistic replication of some cherry blossoms. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureTree03_Desert": {
+    "localized_name": "Faux Desert Greenery C",
+    "description": "A realistic replication of some desert greenery. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureTree03_Green": {
+    "localized_name": "Faux Greenery C",
+    "description": "A realistic replication of some greenery. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureTree03_Red": {
+    "localized_name": "Faux Crimson Foliage C",
+    "description": "A realistic replication of some crimson foliage. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureTree03_Snow": {
+    "localized_name": "Faux Snowy Greenery C",
+    "description": "A realistic replication of some snow-covered greenery. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureTree03_Tropical": {
+    "localized_name": "Faux Tropical Greenery C",
+    "description": "A realistic replication of some tropical greenery. For decoration only. Cannot be harvested for materials."
+  },
+  "FurnitureTree03_Yellow": {
+    "localized_name": "Faux Golden Foliage C",
+    "description": "A realistic replication of some golden foliage. For decoration only. Cannot be harvested for materials."
+  },
   "GarbageBag_Iron": {
     "localized_name": "Garbage Bag",
     "description": "Decorative garbage bag."
@@ -426,6 +698,10 @@
   "Glass_SlopedRoofCorner": {
     "localized_name": "Glass Slanted Triangular Roof",
     "description": "A slanted triangular roof built on top of diagonal walls to keep out the rain and wind. Made of industrial-strength glass, it's quite sturdy."
+  },
+  "Glass_SlopedRoofCornerReverse": {
+    "localized_name": "Glass Slanted Corner Roof (Inverted)",
+    "description": "An inverted slanted triangular roof built on top of walls to keep out the rain and wind. Made of industrial-strength glass, it's quite sturdy."
   },
   "Glass_TriangleFoundation": {
     "localized_name": "Glass Triangular Foundation",
@@ -520,8 +796,12 @@
     "description": "Decorative Rayne Syndicate flag."
   },
   "IceCrusher": {
-    "localized_name": "Refrigerated Crusher",
+    "localized_name": "Cryogenic Crusher",
     "description": "Facility that crushes Ore and converts it into other materials. Requires a power supply and a Pal with Cooling suitability, but it's very efficient."
+  },
+  "IceHorseStatue": {
+    "localized_name": "Frostallion Statue",
+    "description": "Decorative Frostallion statue."
   },
   "Iron_DiagonalWall": {
     "localized_name": "Metal Diagonal Wall",
@@ -538,6 +818,10 @@
   "Iron_SlopedRoofCorner": {
     "localized_name": "Metal Slanted Triangular Roof",
     "description": "A slanted triangular roof built on top of diagonal walls to keep out the rain and wind. Made from metal, it is extremely durable."
+  },
+  "Iron_SlopedRoofCornerReverse": {
+    "localized_name": "Metal Slanted Corner Roof (Inverted)",
+    "description": "An inverted slanted triangular roof built on top of walls to keep out the rain and wind. Made from metal, it is extremely durable."
   },
   "Iron_TriangleFoundation": {
     "localized_name": "Metal Triangular Foundation",
@@ -631,6 +915,10 @@
     "localized_name": "Japanese-Style Slanted Triangular Roof",
     "description": "A slanted triangular roof built on top of diagonal walls to keep out the rain and wind. You can create stylish Japanese-style architecture."
   },
+  "JapaneseStyle_SlopedRoofCornerReverse": {
+    "localized_name": "Japanese-Style Slanted Corner Roof (Inverted)",
+    "description": "An inverted slanted triangular roof built on top of walls to keep out the rain and wind. You can create stylish Japanese-style architecture."
+  },
   "JapaneseStyle_TriangleFoundation": {
     "localized_name": "Japanese-Style Triangular Foundation",
     "description": "A triangular foundation for building walls or facilities on. You can create stylish Japanese-style architecture."
@@ -683,6 +971,10 @@
     "localized_name": "Japanese-Style Wall",
     "description": "Walls built on foundations for keeping out intruders. You can create stylish Japanese-style architecture."
   },
+  "JetDragonStatue": {
+    "localized_name": "Jetragon Statue",
+    "description": "Decorative Jetragon statue."
+  },
   "Kakejiku": {
     "localized_name": "Hanging Scroll",
     "description": "Decorative hanging scroll. Perfect for Japanese-style buildings."
@@ -692,7 +984,7 @@
     "description": "Decorative Incense Burner. Perfect for Japanese-style buildings."
   },
   "Lab": {
-    "localized_name": "Pal Labor Research Laboratory",
+    "localized_name": "Pal Labor Research Lab",
     "description": "A facility for conducting research on the various tasks of Pals. By assigning tasks to Pals in this facility, research progresses, granting various benefits."
   },
   "Lamp": {
@@ -756,7 +1048,7 @@
     "description": "Decorative Lyleen statue."
   },
   "MachineGame01_Iron": {
-    "localized_name": "Claw Crane",
+    "localized_name": "Claw Machine",
     "description": "Decorative claw crane. Broken, it can't be played."
   },
   "MachineVending01_Iron": {
@@ -855,6 +1147,10 @@
     "localized_name": "Large-Scale Electric Egg Incubator",
     "description": "Device for incubating Pal eggs. While power supply is required, it allows multiple eggs to be incubated simultaneously at the optimal temperature."
   },
+  "MultiElectricHatchingPalEggWithBreed": {
+    "localized_name": "Ancient Hatchery",
+    "description": "An advanced breeding facility of ancient civilization technology, enclosed in electronic glass. It fully automates everything from egg production to incubation at high speed, and increases the inheritance rate of rare skills. Pals are managed through holograms, it requires minimal pasture space."
+  },
   "MultiHatchingPalEgg": {
     "localized_name": "Large Incubator",
     "description": "Device for incubating Pal eggs. It automatically maintains a suitable temperature and can hatch multiple eggs at once."
@@ -870,6 +1166,10 @@
   "OilPump": {
     "localized_name": "Crude Oil Extractor",
     "description": "Equipment required to extract Crude Oil from oil fields. Requires a power supply to operate."
+  },
+  "OilPump02": {
+    "localized_name": "High-Pressure Crude Oil Extractor",
+    "description": "A device that pumps and extracts Crude Oil from deep underground. It can produce Crude Oil even in areas without oil fields, but it can only be placed on open ground with no structures beneath it. It requires a far greater supply of electricity than the Crude Oil Extractor."
   },
   "OlympicCauldron": {
     "localized_name": "Flame Cauldron",
@@ -948,7 +1248,7 @@
     "description": "Decorative PIDF Standard."
   },
   "QuartzPit": {
-    "localized_name": "Pure Quartz Mine",
+    "localized_name": "Pure Quartz Quarry",
     "description": "A facility for producing Pure Quartz. Mining Pure Quartz is grueling physical work. Leave it to Pals skilled at mining."
   },
   "Refrigerator": {
@@ -1010,6 +1310,10 @@
   "SF_SlopedRoofCorner": {
     "localized_name": "Clean Slanted Triangular Roof",
     "description": "A slanted triangular roof built on top of diagonal walls to keep out the rain and wind. Can be used to create clean, futuristic architecture."
+  },
+  "SF_SlopedRoofCornerReverse": {
+    "localized_name": "Clean Slanted Corner Roof (Inverted)",
+    "description": "An inverted slanted triangular roof built on top of walls to keep out the rain and wind. Can be used to create clean, futuristic architecture."
   },
   "SF_TriangleFoundation": {
     "localized_name": "Clean Triangular Foundation",
@@ -1167,6 +1471,18 @@
     "localized_name": "Pal Dressing Facility",
     "description": "Pal Dressing Facility. Give your Pals a new look! Skins obtained inside and outside the game can be applied here!"
   },
+  "SkyIslandOrePit": {
+    "localized_name": "Soralite Quarry",
+    "description": "Facility for producing Soralite. Digging Soralite is grueling physical work. Leave it to a Pal that is good at mining."
+  },
+  "SkyIsland_Banner": {
+    "localized_name": "Azure Covenant Banner",
+    "description": "Decorative Azure Covenant banner."
+  },
+  "SkyIsland_Flag": {
+    "localized_name": "Azure Covenant Flag",
+    "description": "Decorative Azure Covenant flag."
+  },
   "Snowman": {
     "localized_name": "Snowman",
     "description": "Place in base to improve cooling speed. Placing more than one has no additional effect."
@@ -1223,6 +1539,10 @@
     "localized_name": "Logging Site",
     "description": "A facility for producing Wood. Cutting wood is hard work that requires much physical endurance. Leave it to Pals skilled in logging."
   },
+  "StationDeforest3": {
+    "localized_name": "Logging Site II",
+    "description": "Facility for producing Hardwood. Cutting wood is hard work that requires much physical endurance. Leave it to Pals skilled in logging."
+  },
   "StonePit": {
     "localized_name": "Stone Pit",
     "description": "A facility for producing Stone. Mining Stone is hard work that requires much physical endurance. Leave it to Pals skilled at mining."
@@ -1254,6 +1574,10 @@
   "Stone_SlopedRoofCorner": {
     "localized_name": "Stone Slanted Triangular Roof",
     "description": "A slanted triangular roof built on top of diagonal walls to keep out the rain and wind. Made from stone, it is reasonably sturdy."
+  },
+  "Stone_SlopedRoofCornerReverse": {
+    "localized_name": "Stone Slanted Corner Roof (Inverted)",
+    "description": "An inverted slanted triangular roof built on top of walls to keep out the rain and wind. Made from stone, it is reasonably sturdy."
   },
   "Stone_TriangleFoundation": {
     "localized_name": "Stone Triangular Foundation",
@@ -1324,7 +1648,7 @@
     "description": "Place in base to improve logging speed. Placing more than one has no additional effect."
   },
   "SulfurPit": {
-    "localized_name": "Sulfur Mine",
+    "localized_name": "Sulfur Quarry",
     "description": "Facility for producing Sulfur. Digging Sulfur is grueling physical work. Leave it to a Pal that is good at mining."
   },
   "TableCircular01_Iron": {
@@ -1338,6 +1662,10 @@
   "TableCircular_Wood": {
     "localized_name": "Round Table",
     "description": "Decorative round table."
+  },
+  "TableCircular_Wood_None": {
+    "localized_name": "Tidy Round Table",
+    "description": "Decorative round table with a clean surface."
   },
   "TableDresser01_Stone": {
     "localized_name": "Antique Dresser",
@@ -1362,6 +1690,10 @@
   "TableSquare_Wood": {
     "localized_name": "Square Table",
     "description": "Decorative square table."
+  },
+  "TableSquare_Wood_None": {
+    "localized_name": "Tidy Square Table",
+    "description": "Decorative square table with a clean surface."
   },
   "Tansu": {
     "localized_name": "Japanese-Style Chest",
@@ -1476,7 +1808,7 @@
     "description": "Trap that freezes the Pal that steps on it. The frozen Pal has a higher capture rate with the sphere."
   },
   "Trap_MovingPanel": {
-    "localized_name": "Moving panels",
+    "localized_name": "Moving Panels",
     "description": "A description of the moving panel"
   },
   "Trap_Noose": {
@@ -1558,6 +1890,10 @@
   "Wooden_SlopedRoofCorner": {
     "localized_name": "Wooden Slanted Triangular Roof",
     "description": "A slanted triangular roof built on top of diagonal walls to keep out the rain and wind. Made from wood, it breaks easily."
+  },
+  "Wooden_SlopedRoofCornerReverse": {
+    "localized_name": "Wooden Slanted Corner Roof (Inverted)",
+    "description": "An inverted slanted triangular roof built on top of walls to keep out the rain and wind. Made from wood, it breaks easily."
   },
   "Wooden_TriangleFoundation": {
     "localized_name": "Wooden Triangular Foundation",

@@ -3,9 +3,133 @@
     "localized_name": "召喚的祭壇",
     "description": "在此獻上上面繪有帕魯的石板， 就能將強大的帕魯召喚至據點。 須做好十足的戰鬥準備。"
   },
+  "AncientBlastFurnace": {
+    "localized_name": "古代文明熔爐",
+    "description": "應用了古文明技術的特殊火爐，能冶煉所有種類的金屬錠。 用火焰的熱度熔化素材，再用冰之力讓其快速凝固。 要使其運作，需要具備高等級生火和有冷卻適應性的帕魯。"
+  },
+  "AncientCookingStove": {
+    "localized_name": "古代文明廚房",
+    "description": "從既有的食譜到未知的新作都能做出來的古代文明廚房。 先用火焰加熱，再手工完成最後的步驟，即可做出各種料理。 要使其運作，需要具備高等級生火和手工作業適應性的帕魯。"
+  },
+  "AncientElectricGenerator": {
+    "localized_name": "古代文明發電機",
+    "description": "重現了失落的古代技術所製造出的超高效發電機。 它能製造出龐大的電力，但運作時有過熱的風險。 運作時除了需要高等級發電適應性的帕魯，還需要具備澆水適應性的帕魯負責冷卻。"
+  },
+  "AncientFarmBlock": {
+    "localized_name": "古代文明栽培器",
+    "description": "利用世界樹之力可以培育帕洛斯群島各種植物的古代文明栽培器。 體積比野莓園小很多，能設置在室內，但培育的流程與從前無異。 要使其運作，需要具備高等級播種、澆水、採集適應性的帕魯。"
+  },
+  "AncientMultiProduct": {
+    "localized_name": "古代文明物質生成器",
+    "description": "利用世界樹之力可以生成各種木材和礦石的古代文明生成器。 由於構造複雜，只能分派1隻帕魯。"
+  },
+  "AncientRelicRecycler": {
+    "localized_name": "古代文明遺物轉換器",
+    "description": "利用失落文明的技術製造出來的古代物質轉化裝置。 透過破解「古代文明的遺物」中遺留的技術，使其昇華為全新的形態。 是能最大限度發揮遺物的利用價值、極為特殊的設備。"
+  },
+  "AncientWorkBench": {
+    "localized_name": "古代文明工作台",
+    "description": "帕魯專用的複合設施，可以在一個地方製作所有道具。 玩家無法進行作業，製作速度也和一般設備無異。 由於功能複雜，需要具備高等級手工作業和製藥適應性的帕魯。"
+  },
+  "Ancient_AirConditioner": {
+    "localized_name": "古代文明空調",
+    "description": null
+  },
+  "Ancient_Clinic": {
+    "localized_name": "古代文明診療所",
+    "description": "重現了古代高級醫療技術的頂級醫療設施。 保護能力遠遠凌駕於普通的診所之上。 只要為其分派熟練的製藥帕魯，即便據點的工作條件非常嚴苛，也能將衛生等級維持在最高水準。"
+  },
+  "Ancient_DiagonalWall": {
+    "localized_name": "古代文明對角牆",
+    "description": "建於三角地基上的對角牆壁，用於防止入侵者。 重現了古代文明的建築樣式。"
+  },
+  "Ancient_DoorWall": {
+    "localized_name": "古代文明門",
+    "description": "建於地基上的門，可作為出入口。 重現了古代文明的建築樣式。"
+  },
+  "Ancient_Fence": {
+    "localized_name": "古代文明柵欄",
+    "description": "建在地基或屋頂上，用於防止墜落的柵欄。 重現了古代文明的建築樣式。"
+  },
+  "Ancient_MedicalPalBed": {
+    "localized_name": "古代文明帕魯床",
+    "description": "在治癒生命的古代膠囊裡鋪上柔軟的襯布，是最高級的帕魯床。 在各類帕魯床中具有最高的SAN值恢復量，能夠迅速緩解疲勞。 尺寸與大型帕魯床相同，體型較大的帕魯也能舒適地休息。"
+  },
+  "Ancient_Pillars": {
+    "localized_name": "古代文明立柱",
+    "description": "用來支撐建築的立柱。 重現了古代文明的建築樣式。"
+  },
+  "Ancient_PyramidRoof": {
+    "localized_name": "古代文明方錐屋頂",
+    "description": "建於牆壁上方的錐形屋頂，用於遮擋風雨。 重現了古代文明的建築樣式。"
+  },
+  "Ancient_SlantedRoof": {
+    "localized_name": "古代文明斜屋頂",
+    "description": "建於牆壁上方的斜屋頂，用於遮擋風雨。 重現了古代文明的建築樣式。"
+  },
+  "Ancient_SlopedRoofCorner": {
+    "localized_name": "古代文明三角斜屋頂",
+    "description": "建於對角牆上方的三角斜屋頂，用於遮擋風雨。 重現了古代文明的建築樣式。"
+  },
+  "Ancient_SlopedRoofCornerReverse": {
+    "localized_name": "古代文明三角斜屋頂（反向）",
+    "description": "建於對角牆上方的三角斜屋頂（反向），用於遮擋風雨。 重現了古代文明的建築樣式。"
+  },
+  "Ancient_Spa": {
+    "localized_name": "古代文明溫泉",
+    "description": "古代科技製造的溫泉，能泡到溶有帕魯礦物成分的特殊熱水。 在所有溫泉中擁有最高等級的SAN值恢復量，還能一併恢復體力。 尺寸與舊有的溫泉相近，能讓受傷的帕魯享受到極盡療癒。"
+  },
+  "Ancient_TriangleFoundation": {
+    "localized_name": "古代文明三角地基",
+    "description": "三角地基，可在上面建造牆壁或設施。 重現了古代文明的建築樣式。"
+  },
+  "Ancient_TriangleRoof": {
+    "localized_name": "古代文明三角屋頂",
+    "description": "建於牆壁上方的三角屋頂，用於遮擋風雨。 重現了古代文明的建築樣式。"
+  },
+  "Ancient_TriangleStairsCorner": {
+    "localized_name": "古代文明轉角屋頂",
+    "description": "建於牆壁上方的轉角屋頂，用於遮擋風雨。 重現了古代文明的建築樣式。"
+  },
+  "Ancient_TriangleWall": {
+    "localized_name": "古代文明三角牆",
+    "description": "建於地基上的三角牆。 重現了古代文明的建築樣式。"
+  },
+  "Ancient_TriangleWallReverse": {
+    "localized_name": "古代文明三角牆（反向）",
+    "description": "建於地基上的三角牆（反向）。 重現了古代文明的建築樣式。"
+  },
+  "Ancient_WallGate": {
+    "localized_name": "古代文明帕魯用通道口",
+    "description": "建於地基上的帕魯用通道口，可作為出入口。 重現了古代文明的建築樣式。"
+  },
+  "Ancient_WindowWall": {
+    "localized_name": "附窗古代文明牆壁",
+    "description": "建於地基上的附窗牆壁，用於防止入侵者。 重現了古代文明的建築樣式。"
+  },
+  "Ancient_foundation": {
+    "localized_name": "古代文明地基",
+    "description": "建築地基，可在上面建造牆壁或設施。 重現了古代文明的建築樣式。"
+  },
+  "Ancient_roof": {
+    "localized_name": "古代文明屋頂",
+    "description": "建於牆壁上方的屋頂，用於遮擋風雨。 重現了古代文明的建築樣式。"
+  },
+  "Ancient_stair": {
+    "localized_name": "古代文明樓梯",
+    "description": "置於地基或屋頂下方，使之易於攀登的樓梯。 重現了古代文明的建築樣式。"
+  },
+  "Ancient_wall": {
+    "localized_name": "古代文明牆壁",
+    "description": "建於地基上的牆壁，用於防止入侵者。 重現了古代文明的建築樣式。"
+  },
   "Andon": {
     "localized_name": "和室燈",
     "description": "裝飾用的日式燈具。 可在建造和風的建築時配合使用。"
+  },
+  "ArcadeVideoGame": {
+    "localized_name": "街機遊戲機台",
+    "description": "裝飾用的街機遊戲機台。 壞掉了，所以不能玩了。"
   },
   "Barrel01_Iron": {
     "localized_name": "紅色鐵桶",
@@ -34,6 +158,14 @@
   "BaseCampWorkHard": {
     "localized_name": "監控台",
     "description": "可對據點內的帕魯下達工作指示。 請注意不要讓牠們勞動過度了。"
+  },
+  "BaseCampWorkHard02": {
+    "localized_name": "優質監控台",
+    "description": "重新設計材料與結構，使得成品更為凝鍊的監控台。 不但能照常指揮工作分配，還能減緩據點內帕魯的SAN值下降速度。 稍微改善一點勞動環境，帕魯們就沒那麼多不滿了吧。"
+  },
+  "BaseCampWorkHard03": {
+    "localized_name": "古代文明監控台",
+    "description": "鑲嵌紅色帕魯礦的古代科技監視台。 能透過全像影像介面對整個據點下達指示，同時延緩帕魯SAN值降低的速度。 它會發出特殊的波長包裹據點，在嚴苛的工作環境下也能撫慰帕魯的心。"
   },
   "BaseCampWorkerExtraStation": {
     "localized_name": "帕魯終端控制台",
@@ -151,6 +283,10 @@
     "localized_name": "帕魯濃縮機",
     "description": "用於提升帕魯階級的設施。 將榨出的帕魯精華濃縮後注入同一種帕魯體內， 便可使該帕魯突破肉體極限。"
   },
+  "Clinic": {
+    "localized_name": "診療所",
+    "description": "基礎醫療設施，用於管理在據點工作的帕魯們的健康狀態。 分派擅長製藥的帕魯，就能減緩SAN值下降，降低帕魯生病受傷的頻率。 它能維持的環境清潔度存在上限，但在初期管理據點衛生時相當重要。"
+  },
   "Clock01_Stone": {
     "localized_name": "古典式座鐘",
     "description": "裝飾用的古典座鐘。 已經損壞，無法用來查看時間。"
@@ -223,21 +359,33 @@
     "localized_name": "受損的稻草人",
     "description": "以企丸丸為原型，用於訓練的稻草人。 只能放在寬闊的地方。"
   },
+  "DarkIsland_Banner": {
+    "localized_name": "天墜之民掛旗",
+    "description": "裝飾用的天墜之民掛旗。"
+  },
+  "DarkIsland_Flag": {
+    "localized_name": "天墜之民團旗",
+    "description": "裝飾用的天墜之民團旗。"
+  },
   "Decal_PalSticker_PinkCat": {
     "localized_name": "zh-hant text",
     "description": "tuppanyan貼紙"
   },
   "DefenseBowGun": {
     "localized_name": "固定式十字弓",
-    "description": "防禦設施，請在此部署帕魯，為戰鬥做好準備。 使用時會消耗箭矢。 把彈藥放入箱子內，部署在此的帕魯便會主動進行裝填。"
+    "description": "可以部署帕魯駐守的防禦設施。 將具備「手工作業」適應性的帕魯分派到這裡， 牠就會操作十字弓堅守據點。"
   },
   "DefenseMachinegun": {
     "localized_name": "固定式機關槍",
-    "description": "防禦設施，請在此部署帕魯，為戰鬥做好準備。 使用時會消耗步槍子彈。 把彈藥放入箱子內，部署在此的帕魯便會主動進行裝填。"
+    "description": "可以部署帕魯駐守的防禦設施。 將具備「手工作業」適應性的帕魯分派到這裡， 牠就會操作機關槍堅守據點。"
+  },
+  "DefenseMachinegun_AutoTurret": {
+    "localized_name": "古代文明防禦塔",
+    "description": "古代文明的無人防禦塔，具備相當於火箭發射器的口徑與火力。 無需配置彈藥和帕魯，只消耗電力就能全自動迎擊敵人。 性能非常強大，但需要龐大的電力來維持其運作。"
   },
   "DefenseMissile": {
     "localized_name": "固定式飛彈發射器",
-    "description": "防禦設施，請在此部署帕魯，為戰鬥做好準備。 使用時會消耗火箭彈。 把彈藥放入箱子內，部署在此的帕魯便會主動進行裝填。"
+    "description": "可以部署帕魯駐守的防禦設施。 將具備「手工作業」適應性的帕魯分派到這裡， 牠就會操作導彈發射器堅守據點。"
   },
   "DefenseWait": {
     "localized_name": "沙袋",
@@ -325,7 +473,7 @@
   },
   "Factory_Money": {
     "localized_name": "金幣製造工廠",
-    "description": "生產金幣的工廠。 因為精神負擔大，工作時SAN值會降低。 需有能進行手工作業的帕魯。"
+    "description": "生產金幣的工廠。 因為精神負擔大，工作時SAN值會降低。需有能進行手工作業的帕魯。 請注意，建造這座建築可能會引來自衛隊執行嚴厲鎮壓。"
   },
   "FarmBlockV2_Berries": {
     "localized_name": "莓果園",
@@ -399,6 +547,130 @@
     "localized_name": "日式矮桌",
     "description": "裝飾用的日式矮桌。 可在建造和風的建築時配合使用。"
   },
+  "FurnitureBush01_Flower": {
+    "localized_name": "仿真開花樹叢A",
+    "description": "裝飾用的開花樹叢模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureBush01_Green": {
+    "localized_name": "仿真樹叢",
+    "description": "裝飾用的樹叢模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureBush01_Snow": {
+    "localized_name": "仿真白色樹叢",
+    "description": "裝飾用的白色樹叢模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureBush01_Tropical": {
+    "localized_name": "仿真熱帶樹叢",
+    "description": "裝飾用的熱帶樹叢模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureBush01_Yellow": {
+    "localized_name": "仿真枯樹叢",
+    "description": "裝飾用的枯樹叢模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureBush02_Flower": {
+    "localized_name": "仿真開花樹叢B",
+    "description": "裝飾用的開花樹叢模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureStone01": {
+    "localized_name": "仿真岩石",
+    "description": "裝飾用的岩石模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree01_Bamboo": {
+    "localized_name": "仿真竹子A",
+    "description": "裝飾用的竹子模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree01_Cherry": {
+    "localized_name": "仿真櫻花樹A",
+    "description": "裝飾用的櫻花樹模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree01_Desert": {
+    "localized_name": "仿真沙漠樹木A",
+    "description": "裝飾用的沙漠樹木模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree01_Green": {
+    "localized_name": "仿真樹木A",
+    "description": "裝飾用的樹木模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree01_Red": {
+    "localized_name": "仿真紅葉樹A",
+    "description": "裝飾用的紅葉樹木模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree01_Snow": {
+    "localized_name": "仿真積雪樹木A",
+    "description": "裝飾用的積雪樹木模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree01_Tropical": {
+    "localized_name": "仿真熱帶樹木A",
+    "description": "裝飾用的熱帶樹木模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree01_Yellow": {
+    "localized_name": "仿真黃葉樹A",
+    "description": "裝飾用的黃葉樹木模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree02_Bamboo": {
+    "localized_name": "仿真竹子B",
+    "description": "裝飾用的竹子模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree02_Cherry": {
+    "localized_name": "仿真櫻花樹B",
+    "description": "裝飾用的櫻花樹模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree02_Desert": {
+    "localized_name": "仿真沙漠樹木B",
+    "description": "裝飾用的沙漠樹木模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree02_Green": {
+    "localized_name": "仿真樹木B",
+    "description": "裝飾用的樹木模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree02_Red": {
+    "localized_name": "仿真紅葉樹B",
+    "description": "裝飾用的紅葉樹木模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree02_Snow": {
+    "localized_name": "仿真積雪樹木B",
+    "description": "裝飾用的積雪樹木模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree02_Tropical": {
+    "localized_name": "仿真熱帶樹木B",
+    "description": "裝飾用的熱帶樹木模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree02_Yellow": {
+    "localized_name": "仿真黃葉樹B",
+    "description": "裝飾用的黃葉樹木模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree03_Bamboo": {
+    "localized_name": "仿真竹子C",
+    "description": "裝飾用的竹子模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree03_Cherry": {
+    "localized_name": "仿真櫻花樹C",
+    "description": "裝飾用的櫻花樹模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree03_Desert": {
+    "localized_name": "仿真沙漠樹木C",
+    "description": "裝飾用的沙漠樹木模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree03_Green": {
+    "localized_name": "仿真樹木C",
+    "description": "裝飾用的樹木模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree03_Red": {
+    "localized_name": "仿真紅葉樹C",
+    "description": "裝飾用的紅葉樹木模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree03_Snow": {
+    "localized_name": "仿真積雪樹木C",
+    "description": "裝飾用的積雪樹木模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree03_Tropical": {
+    "localized_name": "仿真熱帶樹木C",
+    "description": "裝飾用的熱帶樹木模型。 拆除此建築物無法取得材料。"
+  },
+  "FurnitureTree03_Yellow": {
+    "localized_name": "仿真黃葉樹C",
+    "description": "裝飾用的黃葉樹木模型。 拆除此建築物無法取得材料。"
+  },
   "GarbageBag_Iron": {
     "localized_name": "垃圾袋",
     "description": "裝飾用的垃圾袋。"
@@ -427,6 +699,10 @@
     "localized_name": "玻璃三角斜屋頂",
     "description": "建於對角牆上方的三角斜屋頂，用於遮擋風雨。 以鋼化玻璃製成，非常堅固。"
   },
+  "Glass_SlopedRoofCornerReverse": {
+    "localized_name": "玻璃三角斜屋頂（反向）",
+    "description": "建於對角牆上方的三角斜屋頂（反向），用於遮擋風雨。 以鋼化玻璃製成，非常堅固。"
+  },
   "Glass_TriangleFoundation": {
     "localized_name": "玻璃三角地基",
     "description": "三角地基，可在上面建造牆壁或設施。 以鋼化玻璃製成，非常堅固。"
@@ -449,7 +725,7 @@
   },
   "Glass_WallGate": {
     "localized_name": "玻璃帕魯用通道口",
-    "description": "建造在地基上的帕魯用通道口，可作為出入口。 以鋼化玻璃製成，非常堅固。"
+    "description": "建於地基上的帕魯用通道口，可作為出入口。 以鋼化玻璃製成，非常堅固。"
   },
   "Glass_WindowWall": {
     "localized_name": "附窗玻璃牆",
@@ -523,6 +799,10 @@
     "localized_name": "冷凍粉碎機",
     "description": "可粉碎金屬礦石以轉換成其他材料的設施。 雖然要使其工作需要電力供應，以及有「冷卻」適應性的帕魯，但是效率極佳。"
   },
+  "IceHorseStatue": {
+    "localized_name": "喚冬獸雕像",
+    "description": "裝飾用的喚冬獸雕像。"
+  },
   "Iron_DiagonalWall": {
     "localized_name": "金屬對角牆",
     "description": "建於三角地基上的對角牆壁，用於防止入侵者。 以金屬製成，非常堅固。"
@@ -538,6 +818,10 @@
   "Iron_SlopedRoofCorner": {
     "localized_name": "金屬三角斜屋頂",
     "description": "建於對角牆上方的三角斜屋頂，用於遮擋風雨。 以金屬製成，非常堅固。"
+  },
+  "Iron_SlopedRoofCornerReverse": {
+    "localized_name": "金屬三角斜屋頂（反向）",
+    "description": "建於對角牆上方的三角斜屋頂（反向），用於遮擋風雨。 以金屬製成，非常堅固。"
   },
   "Iron_TriangleFoundation": {
     "localized_name": "金屬三角地基",
@@ -557,7 +841,7 @@
   },
   "Iron_WallGate": {
     "localized_name": "金屬帕魯用通道口",
-    "description": "建造在地基上的帕魯用通道口，可作為出入口。 以金屬製成，非常堅固。"
+    "description": "建於地基上的帕魯用通道口，可作為出入口。 以金屬製成，非常堅固。"
   },
   "Irori": {
     "localized_name": "地爐",
@@ -631,6 +915,10 @@
     "localized_name": "和風三角斜屋頂",
     "description": "建於對角牆上方的三角斜屋頂，用於遮擋風雨。 可以建造出時尚的日式建築。"
   },
+  "JapaneseStyle_SlopedRoofCornerReverse": {
+    "localized_name": "和風三角斜屋頂（反向）",
+    "description": "建於對角牆上方的三角斜屋頂（反向），用於遮擋風雨。 可以建造出時尚的日式建築。"
+  },
   "JapaneseStyle_TriangleFoundation": {
     "localized_name": "和風三角地基",
     "description": "三角地基，可在上面建造牆壁或設施。 可以建造出時尚的日式建築。"
@@ -682,6 +970,10 @@
   "JapaneseStyle_wall_01": {
     "localized_name": "和風牆壁",
     "description": "建於地基上的牆壁，用於防止入侵者。 可以建造出時尚的日式建築。"
+  },
+  "JetDragonStatue": {
+    "localized_name": "空渦龍雕像",
+    "description": "裝飾用的空渦龍雕像。"
   },
   "Kakejiku": {
     "localized_name": "掛軸",
@@ -855,6 +1147,10 @@
     "localized_name": "大型電能帕魯蛋孵化器",
     "description": "用於孵化帕魯蛋的裝置。 需有電力供應才能使用， 但可以保持在最佳溫度，並同時孵化多個蛋。"
   },
+  "MultiElectricHatchingPalEggWithBreed": {
+    "localized_name": "古代文明配種器",
+    "description": "覆蓋電子玻璃的古代文明高級配種設施。 從產蛋到孵化都能全自動高速完成，還能提升稀有技能的遺傳率。 以全息投影監控設施內部的帕魯，不再需要廣大的牧場空間。"
+  },
   "MultiHatchingPalEgg": {
     "localized_name": "大型帕魯蛋孵化器",
     "description": "用於孵化帕魯蛋的裝置。 可自動維持大致適當的溫度， 並同時孵化多個蛋。"
@@ -870,6 +1166,10 @@
   "OilPump": {
     "localized_name": "原油提煉機",
     "description": "從油田提取原油所需的設備。 它需要大量電力供應才能運行。"
+  },
+  "OilPump02": {
+    "localized_name": "原油提煉機 高壓型",
+    "description": "從地下深處開採抽取原油的裝置。 即使在沒有油田的地方也能生產原油，但只能放置在下方沒有建築物的地表。 相較於原油提煉機需要更龐大的電力供應。"
   },
   "OlympicCauldron": {
     "localized_name": "聖火台",
@@ -1010,6 +1310,10 @@
   "SF_SlopedRoofCorner": {
     "localized_name": "簡約三角斜屋頂",
     "description": "建於對角牆上方的三角斜屋頂，用於遮擋風雨。 可以建造出近未來風格的簡約建築。"
+  },
+  "SF_SlopedRoofCornerReverse": {
+    "localized_name": "簡約三角斜屋頂（反向）",
+    "description": "建於對角牆上方的三角斜屋頂（反向），用於遮擋風雨。 可以建造出近未來風格的簡約建築。"
   },
   "SF_TriangleFoundation": {
     "localized_name": "簡約三角地基",
@@ -1167,6 +1471,18 @@
     "localized_name": "帕魯裝扮機",
     "description": "用於改變外觀的設施。 可以為帕魯更換特別的外觀。 通過遊戲外的其他方式獲得的外觀也能使用。"
   },
+  "SkyIslandOrePit": {
+    "localized_name": "烈陽金屬採礦場",
+    "description": "生產烈陽金屬的設施。 烈陽金屬挖掘的工作需要大量體力，相當嚴苛。 把這些工作交給擅長挖掘的帕魯吧。"
+  },
+  "SkyIsland_Banner": {
+    "localized_name": "蒼天的盟約掛旗",
+    "description": "裝飾用的蒼天的盟約掛旗。"
+  },
+  "SkyIsland_Flag": {
+    "localized_name": "蒼天的盟約盟旗",
+    "description": "裝飾用的蒼天的盟約盟旗。"
+  },
   "Snowman": {
     "localized_name": "雪人",
     "description": "設置於據點時， 「冷卻」的工作速度將會提升。 即使設置複數個，其效果也不會疊加。"
@@ -1223,6 +1539,10 @@
     "localized_name": "採伐場",
     "description": "生產木材的設施。 砍樹的工作需要大量體力，相當嚴苛。 把這些工作交給擅長採伐的帕魯吧。"
   },
+  "StationDeforest3": {
+    "localized_name": "採伐場Ⅱ",
+    "description": "用於生產硬木材的設施。 砍樹的工作需要大量體力，相當嚴苛。 交給擅長採伐的帕魯吧。"
+  },
   "StonePit": {
     "localized_name": "採石場",
     "description": "生產石頭的設施。 挖掘石頭的工作需要大量體力，相當嚴苛。 把這些工作交給擅長挖掘的帕魯吧。"
@@ -1254,6 +1574,10 @@
   "Stone_SlopedRoofCorner": {
     "localized_name": "石砌三角斜屋頂",
     "description": "建於對角牆上方的三角斜屋頂，用於遮擋風雨。 以石頭製成，還算堅固。"
+  },
+  "Stone_SlopedRoofCornerReverse": {
+    "localized_name": "石砌三角斜屋頂（反向）",
+    "description": "建於對角牆上方的三角斜屋頂（反向），用於遮擋風雨。 以石頭製成，還算堅固。"
   },
   "Stone_TriangleFoundation": {
     "localized_name": "石砌三角地基",
@@ -1339,6 +1663,10 @@
     "localized_name": "圓桌",
     "description": "裝飾用的圓桌。"
   },
+  "TableCircular_Wood_None": {
+    "localized_name": "整潔的圓桌",
+    "description": "裝飾用的整潔圓桌。"
+  },
   "TableDresser01_Stone": {
     "localized_name": "古典梳妝台",
     "description": "裝飾用的古典梳妝台。"
@@ -1362,6 +1690,10 @@
   "TableSquare_Wood": {
     "localized_name": "方桌",
     "description": "裝飾用的方桌。"
+  },
+  "TableSquare_Wood_None": {
+    "localized_name": "整潔的方桌",
+    "description": "裝飾用的整潔方桌。"
   },
   "Tansu": {
     "localized_name": "抽屜櫃",
@@ -1558,6 +1890,10 @@
   "Wooden_SlopedRoofCorner": {
     "localized_name": "木造三角斜屋頂",
     "description": "建於對角牆上方的三角斜屋頂，用於遮擋風雨。 以木頭製成，相當脆弱。"
+  },
+  "Wooden_SlopedRoofCornerReverse": {
+    "localized_name": "木造三角斜屋頂（反向）",
+    "description": "建於對角牆上方的三角斜屋頂（反向），用於遮擋風雨。 以木頭製成，相當脆弱。"
   },
   "Wooden_TriangleFoundation": {
     "localized_name": "木造三角地基",

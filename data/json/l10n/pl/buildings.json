@@ -3,9 +3,133 @@
     "localized_name": "Ołtarz przywołania",
     "description": "Złóż płytę przedstawiającą Pala, aby przyzwać potężny okaz do swojej bazy. Wskazana jest szczególna ostrożność i pełna gotowość do walki."
   },
+  "AncientBlastFurnace": {
+    "localized_name": "Piec starożytnej cywilizacji",
+    "description": "Specjalny piec wykorzystujący technologię starożytnej cywilizacji, który umożliwia wytapianie wszystkich rodzajów sztabek. Materiały są topione żarem ognia, a następnie gwałtownie studzone i utwardzane mocą lodu. Do jego obsługi potrzebne są Pale z umiejętnością rozpalania ognia i chłodzenia."
+  },
+  "AncientCookingStove": {
+    "localized_name": "Kuchnia starożytnej cywilizacji",
+    "description": "Kuchnia starożytnej cywilizacji, w której można przygotować wszystko – od znanych potraw po zupełnie nowe dania. Akumuluje ona żar ognia, a ręczne wykończenie pozwala dopracować każdą potrawę. Do jej obsługi potrzebne są Pale biegłe w rozpalaniu ognia i rzemiośle."
+  },
+  "AncientElectricGenerator": {
+    "localized_name": "Generator starożytnej cywilizacji",
+    "description": "Generator o wyjątkowo wysokiej wydajności, odtworzony w oparciu o zaginioną starożytną technologię. Potrafi wytwarzać ogromne ilości energii, ale podczas pracy grozi mu przegrzanie. Do jego obsługi potrzebne są nie tylko Pale o wysokich predyspozycjach do wytwarzania energii elektrycznej, ale także Pale biegłe w podlewaniu."
+  },
+  "AncientFarmBlock": {
+    "localized_name": "Kultywator starożytnej cywilizacji",
+    "description": "Urządzenie starożytnej cywilizacji służące do uprawy, które dzięki mocy Drzewa Świata pozwala hodować wszystkie rośliny występujące na Archipelagu Palpagos. Jest znacznie mniejsze od plantacji jagód i można je ustawić nawet wewnątrz budynku. Sam proces uprawy jednak pozostaje bez zmian. Do jego obsługi potrzebne są Pale biegłe w sadzeniu, podlewaniu i zbieraniu."
+  },
+  "AncientMultiProduct": {
+    "localized_name": "Generator materii starożytnej cywilizacji",
+    "description": "Generator starożytnej cywilizacji wykorzystujący moc Drzewa Świata do wytwarzania wszelkiego rodzaju drewna i rud. Pozwala wybrać dowolny surowiec, ale jego wydajność nie różni się od standardowych obiektów. Ze względu na złożoną konstrukcję można przypisać do niego tylko jednego Pala."
+  },
+  "AncientRelicRecycler": {
+    "localized_name": "Recykler reliktów starożytnej cywilizacji",
+    "description": "Starożytne urządzenie do przemiany materii, wykorzystujące technologię zaginionej cywilizacji. Odczytuje wiedzę zapisaną w „Relikcie starożytnej cywilizacji” i przekształca ją w nową formę. To wysoce specjalistyczne urządzenie, stworzone do pełnego wykorzystania potencjału reliktów."
+  },
+  "AncientWorkBench": {
+    "localized_name": "Warsztat starożytnej cywilizacji",
+    "description": "Wielofunkcyjny obiekt dla Pali, umożliwiający wytwarzanie wszystkich przedmiotów w jednym miejscu. Gracz nie może w nim pracować, a szybkość wytwarzania nie różni się od tej w standardowych urządzeniach. Ze względu na zaawansowaną konstrukcję, do jego obsługi potrzebne są Pale biegłe w rzemiośle i produkcji leków."
+  },
+  "Ancient_AirConditioner": {
+    "localized_name": "Klimatyzator starożytnej cywilizacji",
+    "description": null
+  },
+  "Ancient_Clinic": {
+    "localized_name": "Klinika starożytnej cywilizacji",
+    "description": "Najwyższej klasy placówka medyczna, odtwarzająca zaawansowane technologie medyczne starożytności we współczesnych realiach. Zapewnia ochronę znacznie przewyższającą tę oferowaną przez zwykłą klinikę. Przydzielenie do niej doświadczonego Pala biegłego w produkcji leków pozwala utrzymać najwyższy poziom higieny nawet w bazie, w której Pale wykonują wyjątkowo ciężką pracę."
+  },
+  "Ancient_DiagonalWall": {
+    "localized_name": "Skośna ściana w stylu starożytnej cywilizacji",
+    "description": "Ściana skośna, stawiana na trójkątnym fundamencie w celu powstrzymania intruzów. Nawiązuje do stylu architektonicznego starożytnej cywilizacji."
+  },
+  "Ancient_DoorWall": {
+    "localized_name": "Ściana z drzwiami w stylu starożytnej cywilizacji",
+    "description": "Drzwi montowane na fundamencie. Służą jako wejście. Nawiązują do stylu architektonicznego starożytnej cywilizacji."
+  },
+  "Ancient_Fence": {
+    "localized_name": "Płot w stylu starożytnej cywilizacji",
+    "description": "Ogrodzenie chroniące przed upadkiem z fundamentów lub dachów. Nawiązuje do stylu architektonicznego starożytnej cywilizacji."
+  },
+  "Ancient_MedicalPalBed": {
+    "localized_name": "Łóżko dla Pala w stylu starożytnej cywilizacji",
+    "description": "Najwyższej klasy łóżko dla Pali, składające się ze starożytnej kapsuły leczniczej wyścielonej miękką tkaniną. Zapewnia największą regenerację wartości SAN spośród wszystkich dostępnych łóżek i błyskawicznie niweluje zmęczenie. Rozmiarem dorównuje dużemu łóżku dla Pali, zapewniając komfortowy wypoczynek nawet największym osobnikom."
+  },
+  "Ancient_Pillars": {
+    "localized_name": "Filar w stylu starożytnej cywilizacji",
+    "description": "Kolumna wspierająca konstrukcję. Nawiązuje do stylu architektonicznego starożytnej cywilizacji."
+  },
+  "Ancient_PyramidRoof": {
+    "localized_name": "Dach piramidalny w stylu starożytnej cywilizacji",
+    "description": "Stożkowy dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Nawiązuje do stylu architektonicznego starożytnej cywilizacji."
+  },
+  "Ancient_SlantedRoof": {
+    "localized_name": "Dach skośny w stylu starożytnej cywilizacji",
+    "description": "Skośny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Nawiązuje do stylu architektonicznego starożytnej cywilizacji."
+  },
+  "Ancient_SlopedRoofCorner": {
+    "localized_name": "Trójkątny dach skośny w stylu starożytnej cywilizacji",
+    "description": "Trójkątny dach skośny stawiany na ścianach narożnych, chroniący przed deszczem i wiatrem. Nawiązuje do stylu architektonicznego starożytnej cywilizacji."
+  },
+  "Ancient_SlopedRoofCornerReverse": {
+    "localized_name": "Trójkątny dach skośny w stylu starożytnej cywilizacji (odwrócony)",
+    "description": "Trójkątny dach skośny (odwrócony) stawiany na ścianach narożnych, chroniący przed deszczem i wiatrem. Nawiązuje do stylu architektonicznego starożytnej cywilizacji."
+  },
+  "Ancient_Spa": {
+    "localized_name": "Gorące źródło w stylu starożytnej cywilizacji",
+    "description": "Gorące źródło skonstruowane w oparciu o starożytną technologię, wypełnione specjalną wodą z rozpuszczonymi składnikami Paldium. Zapewnia największą regenerację wartości SAN spośród wszystkich źródeł, a dodatkowo przywraca punkty zdrowia. Choć rozmiarem nie różni się od standardowych obiektów tego typu, w pełni leczy rany Pali."
+  },
+  "Ancient_TriangleFoundation": {
+    "localized_name": "Trójkątny fundament w stylu starożytnej cywilizacji",
+    "description": "Trójkątny fundament do stawiania ścian lub innych struktur. Nawiązuje do stylu architektonicznego starożytnej cywilizacji."
+  },
+  "Ancient_TriangleRoof": {
+    "localized_name": "Trójkątny dach w stylu starożytnej cywilizacji",
+    "description": "Trójkątny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Nawiązuje do stylu architektonicznego starożytnej cywilizacji."
+  },
+  "Ancient_TriangleStairsCorner": {
+    "localized_name": "Narożny dach w stylu starożytnej cywilizacji",
+    "description": "Narożny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Nawiązuje do stylu architektonicznego starożytnej cywilizacji."
+  },
+  "Ancient_TriangleWall": {
+    "localized_name": "Trójkątna ściana w stylu starożytnej cywilizacji",
+    "description": "Trójkątna ściana stawiana na fundamencie. Nawiązuje do stylu architektonicznego starożytnej cywilizacji."
+  },
+  "Ancient_TriangleWallReverse": {
+    "localized_name": "Trójkątna ściana w stylu starożytnej cywilizacji (odwrócona)",
+    "description": "Odwrócona trójkątna ściana stawiana na fundamencie. Nawiązuje do stylu architektonicznego starożytnej cywilizacji."
+  },
+  "Ancient_WallGate": {
+    "localized_name": "Przejście dla Pali w stylu starożytnej cywilizacji",
+    "description": "Przejście dla Pali, stawiane na fundamencie, pełniące funkcję wejścia i wyjścia. Nawiązuje do stylu architektonicznego starożytnej cywilizacji."
+  },
+  "Ancient_WindowWall": {
+    "localized_name": "Ściana z oknem w stylu starożytnej cywilizacji",
+    "description": "Ściana z oknami, stawiana na fundamencie w celu powstrzymania intruzów. Nawiązuje do stylu architektonicznego starożytnej cywilizacji."
+  },
+  "Ancient_foundation": {
+    "localized_name": "Fundament w stylu starożytnej cywilizacji",
+    "description": "Fundament do stawiania ścian lub innych struktur. Nawiązuje do stylu architektonicznego starożytnej cywilizacji."
+  },
+  "Ancient_roof": {
+    "localized_name": "Dach w stylu starożytnej cywilizacji",
+    "description": "Dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Nawiązuje do stylu architektonicznego starożytnej cywilizacji."
+  },
+  "Ancient_stair": {
+    "localized_name": "Schody w stylu starożytnej cywilizacji",
+    "description": "Schody umieszczane pod fundamentem lub dachem, umożliwiające wejście na górę. Nawiązuje do stylu architektonicznego starożytnej cywilizacji."
+  },
+  "Ancient_wall": {
+    "localized_name": "Ściana w stylu starożytnej cywilizacji",
+    "description": "Ściany stawiane na fundamentach w celu powstrzymania intruzów. Nawiązują do stylu architektonicznego starożytnej cywilizacji."
+  },
   "Andon": {
     "localized_name": "Japoński lampion papierowy",
     "description": "Dekoracyjny lampion papierowy. Doskonale pasuje do budowli w japońskim stylu."
+  },
+  "ArcadeVideoGame": {
+    "localized_name": "Automat do gier typu arcade",
+    "description": "Ozdobny automat do gier typu arcade. Jest uszkodzony i nie można na nim grać."
   },
   "Barrel01_Iron": {
     "localized_name": "Czerwona metalowa beczka",
@@ -34,6 +158,14 @@
   "BaseCampWorkHard": {
     "localized_name": "Stanowisko obserwacyjne",
     "description": "Wydawaj Palom polecenia do pracy przy różnych zadaniach w bazie. Możesz zezwolić na konkretne rodzaje pracy lub zabronić pewnych działań."
+  },
+  "BaseCampWorkHard02": {
+    "localized_name": "Wysokiej jakości stanowisko obserwacyjne",
+    "description": "Stanowisko obserwacyjne o udoskonalonej konstrukcji i staranniej dobranych materiałach. Pozwala na wydawanie standardowych poleceń, a dodatkowo spowalnia spadek wartości SAN u Pali w bazie. Dzięki niewielkiej poprawie warunków pracy Pale będą rzadziej odczuwać niezadowolenie."
+  },
+  "BaseCampWorkHard03": {
+    "localized_name": "Stanowisko obserwacyjne starożytnej cywilizacji",
+    "description": "Punkt obserwacyjny starożytnej technologii, wyposażony w czerwone Paldium. Za pomocą holograficznego interfejsu pozwala wydawać polecenia całej bazie, a jednocześnie spowalnia spadek wartości SAN u Pali. Specjalna długość fali otula bazę, pomagając zachować Palom spokój nawet w trudnych warunkach pracy."
   },
   "BaseCampWorkerExtraStation": {
     "localized_name": "Panel sterowania Palboxem",
@@ -81,7 +213,7 @@
   },
   "Box01_Stone": {
     "localized_name": "Antyczny pleciony kosz",
-    "description": "Antyczny pleciony kosz dekoracyjny."
+    "description": "Ozdobny antyczny pleciony kosz."
   },
   "Box02_Iron": {
     "localized_name": "Kontener przykryty tkaniną",
@@ -125,7 +257,7 @@
   },
   "Chair01_Iron": {
     "localized_name": "Skórzane krzesło",
-    "description": "Skórzane dekoracyjne krzesło."
+    "description": "Ozdobne skórzane krzesło."
   },
   "Chair01_Pal": {
     "localized_name": "Krzesło w kształcie żaby",
@@ -150,6 +282,10 @@
   "CharacterRankUp": {
     "localized_name": "Kondensator Esencji Pali",
     "description": "Komora służąca do podnoszenia rangi Pala. Pale mogą przekroczyć swoje fizyczne ograniczenia, jeśli otrzymają skoncentrowany ekstrakt pozyskany z Pala tego samego typu."
+  },
+  "Clinic": {
+    "localized_name": "Klinika",
+    "description": "Podstawowa placówka medyczna służąca do dbania o zdrowie Pali pracujących w bazie. Przydzielenie do niej Pala biegłego w produkcji leków pozwala ograniczyć spadek wartości SAN oraz zmniejszyć ryzyko chorób i urazów. Choć poziom higieny, jaki można dzięki niej utrzymać, ma swoje granice, obiekt ten stanowi podstawę zarządzania higieną we wczesnej fazie rozwoju bazy."
   },
   "Clock01_Stone": {
     "localized_name": "Antyczny zegar stojący",
@@ -223,21 +359,33 @@
     "localized_name": "Manekin treningowy",
     "description": "Manekin treningowy wyglądający jak Pengullet. Może być ustawiony wyłącznie na otwartej przestrzeni."
   },
+  "DarkIsland_Banner": {
+    "localized_name": "Pionowy baner ludu Feybreak",
+    "description": "Dekoracyjny pionowy baner ludu Feybreak."
+  },
+  "DarkIsland_Flag": {
+    "localized_name": "Flaga ludu Feybreak",
+    "description": "Dekoracyjna flaga ludu Feybreak."
+  },
   "Decal_PalSticker_PinkCat": {
     "localized_name": "-",
     "description": "-"
   },
   "DefenseBowGun": {
     "localized_name": "Stacjonarna kusza",
-    "description": "Przydziel Pala do obsługi tej instalacji obronnej. Do działania wymaga: Strzała. Umieść amunicję w skrzyni, a przydzielony Pal automatycznie załaduje broń."
+    "description": "Obiekt obronny, w którym można rozmieścić Pale, by przygotować się do walki. Przypisanie do niej Pala z umiejętnością „Rzemiosło” sprawi, że będzie on nieustannie bronił bazy przy użyciu kuszy."
   },
   "DefenseMachinegun": {
     "localized_name": "Stacjonarny karabin maszynowy",
-    "description": "Przydziel Pala do obsługi tej instalacji obronnej. Do działania wymaga: Amunicja: Karabin. Umieść amunicję w skrzyni, a przydzielony Pal automatycznie załaduje broń."
+    "description": "Obiekt obronny, w którym można rozmieścić Pale, by przygotować się do walki. Przypisanie do niej Pala z umiejętnością „Rzemiosło” sprawi, że będzie on nieustannie bronił bazy przy użyciu karabinu maszynowego."
+  },
+  "DefenseMachinegun_AutoTurret": {
+    "localized_name": "Wieżyczka starożytnej cywilizacji",
+    "description": "Bezzałogowa wieżyczka starożytnej cywilizacji o rozmiarze i sile ognia porównywalnych z wyrzutnią rakiet. Nie wymaga ani amunicji, ani przydzielenia Pala. Do w pełni automatycznego przechwytywania celów potrzebuje jedynie energii elektrycznej. Jest niezwykle potężna, ale zużywa ogromne ilości energii."
   },
   "DefenseMissile": {
     "localized_name": "Stacjonarna wyrzutnia pocisków",
-    "description": "Przydziel Pala do obsługi tej instalacji obronnej. Do działania wymaga: Amunicja: Rakieta. Umieść amunicję w skrzyni, a przydzielony Pal automatycznie załaduje broń."
+    "description": "Obiekt obronny, w którym można rozmieścić Pale, by przygotować się do walki. Przypisanie do niej Pala z umiejętnością „Rzemiosło” sprawi, że będzie on nieustannie bronił bazy przy użyciu wyrzutni pocisków."
   },
   "DefenseWait": {
     "localized_name": "Worki z piaskiem",
@@ -325,7 +473,7 @@
   },
   "Factory_Money": {
     "localized_name": "Linia produkcyjna złotych monet",
-    "description": "Linia produkcyjna do wytwarzania pieniędzy. Praca przy niej obciąża umysł, powodując spadek wartości SAN u Pali. Produkcja wymaga Pali potrafiących pracować rękami."
+    "description": "Linia produkcyjna do wytwarzania przedmiotu Złota moneta. Praca przy niej obciąża umysł, powodując spadek wartości SAN u pracujących Pali. Do produkcji potrzebne są Pale zdolne do pracy fizycznej. Uwaga: postawienie tego obiektu może narazić cię na bezwzględną kontrolę ze strony funkcjonariuszy SOWP."
   },
   "FarmBlockV2_Berries": {
     "localized_name": "Plantacja jagód",
@@ -399,6 +547,130 @@
     "localized_name": "Biurko w stylu japońskim",
     "description": "Ozdobne biurko do pisania. Doskonale pasuje do budowli w japońskim stylu."
   },
+  "FurnitureBush01_Flower": {
+    "localized_name": "Model kwitnącego krzewu A",
+    "description": "Ozdobny model kwitnącego krzewu. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureBush01_Green": {
+    "localized_name": "Model krzewu",
+    "description": "Ozdobny model krzewu. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureBush01_Snow": {
+    "localized_name": "Model białego krzewu",
+    "description": "Ozdobny model białego krzewu. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureBush01_Tropical": {
+    "localized_name": "Model tropikalnego krzewu",
+    "description": "Ozdobny model tropikalnego krzewu. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureBush01_Yellow": {
+    "localized_name": "Model żółtego krzewu",
+    "description": "Ozdobny model krzewu o żółtych liściach. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureBush02_Flower": {
+    "localized_name": "Model kwitnącego krzewu B",
+    "description": "Ozdobny model kwitnącego krzewu. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureStone01": {
+    "localized_name": "Model głazu",
+    "description": "Ozdobny model głazu. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree01_Bamboo": {
+    "localized_name": "Model bambusa A",
+    "description": "Ozdobny model bambusa. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree01_Cherry": {
+    "localized_name": "Model wiśni A",
+    "description": "Ozdobny model wiśni. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree01_Desert": {
+    "localized_name": "Model pustynnego drzewa A",
+    "description": "Ozdobny model pustynnego drzewa. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree01_Green": {
+    "localized_name": "Model drzewa A",
+    "description": "Ozdobny model drzewa. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree01_Red": {
+    "localized_name": "Model czerwonego drzewa A",
+    "description": "Ozdobny model drzewa o czerwonych liściach. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree01_Snow": {
+    "localized_name": "Model ośnieżonego drzewa A",
+    "description": "Ozdobny model drzewa pokrytego śniegiem. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree01_Tropical": {
+    "localized_name": "Model tropikalnego drzewa A",
+    "description": "Ozdobny model tropikalnego drzewa. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree01_Yellow": {
+    "localized_name": "Model żółtego drzewa A",
+    "description": "Ozdobny model drzewa o żółtych liściach. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree02_Bamboo": {
+    "localized_name": "Model bambusa B",
+    "description": "Ozdobny model bambusa. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree02_Cherry": {
+    "localized_name": "Model wiśni B",
+    "description": "Ozdobny model wiśni. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree02_Desert": {
+    "localized_name": "Model pustynnego drzewa B",
+    "description": "Ozdobny model pustynnego drzewa. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree02_Green": {
+    "localized_name": "Model drzewa B",
+    "description": "Ozdobny model drzewa. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree02_Red": {
+    "localized_name": "Model czerwonego drzewa B",
+    "description": "Ozdobny model drzewa o czerwonych liściach. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree02_Snow": {
+    "localized_name": "Model ośnieżonego drzewa B",
+    "description": "Ozdobny model drzewa pokrytego śniegiem. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree02_Tropical": {
+    "localized_name": "Model tropikalnego drzewa B",
+    "description": "Ozdobny model tropikalnego drzewa. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree02_Yellow": {
+    "localized_name": "Model żółtego drzewa B",
+    "description": "Ozdobny model drzewa o żółtych liściach. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree03_Bamboo": {
+    "localized_name": "Model bambusa C",
+    "description": "Ozdobny model bambusa. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree03_Cherry": {
+    "localized_name": "Model wiśni C",
+    "description": "Ozdobny model wiśni. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree03_Desert": {
+    "localized_name": "Model pustynnego drzewa C",
+    "description": "Ozdobny model pustynnego drzewa. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree03_Green": {
+    "localized_name": "Model drzewa C",
+    "description": "Ozdobny model drzewa. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree03_Red": {
+    "localized_name": "Model czerwonego drzewa C",
+    "description": "Ozdobny model drzewa o czerwonych liściach. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree03_Snow": {
+    "localized_name": "Model ośnieżonego drzewa C",
+    "description": "Ozdobny model drzewa pokrytego śniegiem. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree03_Tropical": {
+    "localized_name": "Model tropikalnego drzewa C",
+    "description": "Ozdobny model tropikalnego drzewa. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree03_Yellow": {
+    "localized_name": "Model żółtego drzewa C",
+    "description": "Ozdobny model drzewa o żółtych liściach. Z tego obiektu nie można pozyskać materiałów."
+  },
   "GarbageBag_Iron": {
     "localized_name": "Worek na śmieci",
     "description": "Dekoracyjny worek na śmieci."
@@ -424,8 +696,12 @@
     "description": "Skośny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z przemysłowego szkła, jest całkiem wytrzymały."
   },
   "Glass_SlopedRoofCorner": {
-    "localized_name": "Szklany skośny dach trójkątny",
-    "description": "Skośny dach narożny stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany ze szkła przemysłowego, jest bardzo wytrzymały."
+    "localized_name": "Szklany trójkątny skośny dach",
+    "description": "Trójkątny dach skośny stawiany na ścianach narożnych, chroniący przed deszczem i wiatrem. Wykonany ze szkła przemysłowego, jest bardzo wytrzymały."
+  },
+  "Glass_SlopedRoofCornerReverse": {
+    "localized_name": "Trójkątny skośny dach ze szkła (odwrócony)",
+    "description": "Trójkątny dach skośny (odwrócony) stawiany na ścianach narożnych, chroniący przed deszczem i wiatrem. Wykonany ze szkła przemysłowego, jest bardzo wytrzymały."
   },
   "Glass_TriangleFoundation": {
     "localized_name": "Szklany trójkątny fundament",
@@ -523,6 +799,10 @@
     "localized_name": "Chłodząca kruszarka",
     "description": "Maszyna do rozdrabniania surowca Ruda i przekształcania go w inne materiały. Wymaga zasilania oraz Pala z umiejętnością Chłodzenie, lecz jest bardzo wydajna."
   },
+  "IceHorseStatue": {
+    "localized_name": "Posąg Frostalliona",
+    "description": "Ozdobny posąg Frostalliona."
+  },
   "Iron_DiagonalWall": {
     "localized_name": "Metalowa skośna ściana",
     "description": "Ściana skośna, stawiana na trójkątnym fundamencie w celu powstrzymania intruzów. Wykonana z metalu, jest niezwykle wytrzymała."
@@ -536,8 +816,12 @@
     "description": "Stożkowy dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z metalu, jest niezwykle wytrzymały."
   },
   "Iron_SlopedRoofCorner": {
-    "localized_name": "Metalowy skośny dach trójkątny",
-    "description": "Skośny dach narożny stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z metalu, jest niezwykle wytrzymały."
+    "localized_name": "Metalowy trójkątny skośny dach",
+    "description": "Trójkątny dach skośny stawiany na ścianach narożnych, chroniący przed deszczem i wiatrem. Wykonany z metalu, jest niezwykle wytrzymały."
+  },
+  "Iron_SlopedRoofCornerReverse": {
+    "localized_name": "Trójkątny skośny dach z metalu (odwrócony)",
+    "description": "Trójkątny dach skośny (odwrócony) stawiany na ścianach narożnych, chroniący przed deszczem i wiatrem. Wykonany z metalu, jest bardzo wytrzymały."
   },
   "Iron_TriangleFoundation": {
     "localized_name": "Metalowy trójkątny fundament",
@@ -628,8 +912,12 @@
     "description": "Skośny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Umożliwia tworzenie gustownej architektury w stylu japońskim."
   },
   "JapaneseStyle_SlopedRoofCorner": {
-    "localized_name": "Trójkątny skośny dach w stylu japońskim",
-    "description": "Skośny dach narożny stawiany na ścianach, chroniący przed deszczem i wiatrem. Umożliwia tworzenie gustownej architektury w stylu japońskim."
+    "localized_name": "Trójkątny dach skośny w stylu japońskim",
+    "description": "Trójkątny dach skośny stawiany na ścianach narożnych, chroniący przed deszczem i wiatrem. Umożliwia tworzenie gustownej architektury w stylu japońskim."
+  },
+  "JapaneseStyle_SlopedRoofCornerReverse": {
+    "localized_name": "Trójkątny dach skośny w stylu japońskim (odwrócony)",
+    "description": "Trójkątny dach skośny (odwrócony) stawiany na ścianach narożnych, chroniący przed deszczem i wiatrem. Umożliwia tworzenie gustownej architektury w stylu japońskim."
   },
   "JapaneseStyle_TriangleFoundation": {
     "localized_name": "Trójkątny fundament w stylu japońskim",
@@ -682,6 +970,10 @@
   "JapaneseStyle_wall_01": {
     "localized_name": "Ściana w stylu japońskim",
     "description": "Ściany stawiane na fundamentach w celu powstrzymania intruzów. Umożliwiają tworzenie gustownej architektury w stylu japońskim."
+  },
+  "JetDragonStatue": {
+    "localized_name": "Posąg Jetragona",
+    "description": "Ozdobny posąg Jetragona."
   },
   "Kakejiku": {
     "localized_name": "Zwój ścienny",
@@ -855,6 +1147,10 @@
     "localized_name": "Duży elektryczny inkubator jaj",
     "description": "Urządzenie do inkubacji jaj Pali. Wymaga zasilania, ale umożliwia jednoczesną inkubację wielu jaj w optymalnej temperaturze."
   },
+  "MultiElectricHatchingPalEggWithBreed": {
+    "localized_name": "Rozmnażarka starożytnej cywilizacji",
+    "description": "Zaawansowana placówka hodowlana starożytnej cywilizacji, osłonięta szkłem elektronicznym. W pełni automatycznie i z dużą szybkością obsługuje cały proces — od produkcji jaj po ich wykluwanie, a dodatkowo zwiększa szansę na dziedziczenie rzadkich umiejętności. Zarządzanie Palami odbywa się za pomocą sterowania holograficznego, dzięki czemu nie wymaga rozległej przestrzeni hodowlanej."
+  },
   "MultiHatchingPalEgg": {
     "localized_name": "Duży inkubator jaj",
     "description": "Urządzenie służące do inkubacji jaj Pali. Automatycznie utrzymuje odpowiednią temperaturę, umożliwiając jednoczesne wykluwanie wielu jaj."
@@ -870,6 +1166,10 @@
   "OilPump": {
     "localized_name": "Ekstraktor ropy naftowej",
     "description": "Sprzęt do wydobycia surowca: Ropa naftowa z pól naftowych. Do działania niezbędne jest zasilanie."
+  },
+  "OilPump02": {
+    "localized_name": "Wysokociśnieniowy ekstraktor ropy naftowej",
+    "description": "Urządzenie, które pompuje i wydobywa surowiec Ropa naftowa z głębi ziemi. Pozwala pozyskiwać surowiec Ropa naftowa nawet w miejscach pozbawionych złóż, jednak można je umieścić wyłącznie na ziemi, w miejscu wolnym od innych zabudowań. Wymaga znacznie większej ilości energii elektrycznej niż Ekstraktor ropy naftowej."
   },
   "OlympicCauldron": {
     "localized_name": "Palenisko",
@@ -1008,8 +1308,12 @@
     "description": "Skośny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Umożliwia tworzenie minimalistycznych, modernistycznych konstrukcji."
   },
   "SF_SlopedRoofCorner": {
-    "localized_name": "Minimalistyczny trójkątny skośny dach",
-    "description": "Skośny dach narożny stawiany na ścianach, chroniący przed deszczem i wiatrem. Umożliwia tworzenie minimalistycznych, modernistycznych konstrukcji."
+    "localized_name": "Minimalistyczny trójkątny dach skośny",
+    "description": "Trójkątny dach skośny stawiany na ścianach narożnych. Umożliwia tworzenie minimalistycznych, modernistycznych konstrukcji."
+  },
+  "SF_SlopedRoofCornerReverse": {
+    "localized_name": "Trójkątny dach skośny w minimalistycznym stylu (odwrócony)",
+    "description": "Trójkątny dach skośny (odwrócony) stawiany na ścianach narożnych, chroniący przed deszczem i wiatrem. Umożliwia tworzenie minimalistycznych, modernistycznych konstrukcji."
   },
   "SF_TriangleFoundation": {
     "localized_name": "Minimalistyczny trójkątny fundament",
@@ -1167,13 +1471,25 @@
     "localized_name": "Urządzenie do stylizacji Pali",
     "description": "Przebieralnia dla Pali. Podaruj swoim Palom nowy wygląd! Skórki zdobyte w grze i poza nią można zastosować właśnie tutaj!"
   },
+  "SkyIslandOrePit": {
+    "localized_name": "Kopalnia solitu",
+    "description": "Placówka, w której wydobywa się: Solit. Solit jest trudnym do wydobycia surowcem i wymaga dużej siły. Powierz to zadanie Palowi specjalizującemu się w górnictwie."
+  },
+  "SkyIsland_Banner": {
+    "localized_name": "Pionowy baner Przymierza Błękitnego Nieba",
+    "description": "Dekoracyjny pionowy baner Przymierza Błękitnego Nieba."
+  },
+  "SkyIsland_Flag": {
+    "localized_name": "Flaga Przymierza Błękitnego Nieba",
+    "description": "Dekoracyjna flaga Przymierza Błękitnego Nieba."
+  },
   "Snowman": {
     "localized_name": "Bałwan",
     "description": "Umieść go w bazie, aby zwiększyć szybkość chłodzenia. Umieszczenie więcej niż jednego nie zwiększa efektu."
   },
   "Sofa01_Iron": {
     "localized_name": "Skórzany fotel",
-    "description": "Dekoracyjny fotel skórzany."
+    "description": "Ozdobna skórzana sofa jednoosobowa."
   },
   "Sofa01_Stone": {
     "localized_name": "Antyczny fotel",
@@ -1181,7 +1497,7 @@
   },
   "Sofa02_Iron": {
     "localized_name": "Skórzana kanapa",
-    "description": "Dekoracyjna kanapa skórzana."
+    "description": "Ozdobna skórzana sofa dwuosobowa."
   },
   "Sofa02_Stone": {
     "localized_name": "Antyczna kanapa",
@@ -1223,6 +1539,10 @@
     "localized_name": "Plac wyrębu",
     "description": "Obiekt, z pomocą którego pozyskuje się Drewno. Rąbanie drewna to ciężka praca wymagająca dużej wytrzymałości fizycznej. Zleć to zadanie Palom wyspecjalizowanym w wyrębie."
   },
+  "StationDeforest3": {
+    "localized_name": "Plac wyrębu II",
+    "description": "Obiekt, z pomocą którego pozyskuje się Twarde drewno. Rąbanie drewna to ciężka praca wymagająca dużej wytrzymałości fizycznej. Zleć to zadanie Palom wyspecjalizowanym w wyrębie."
+  },
   "StonePit": {
     "localized_name": "Kamieniołom",
     "description": "Obiekt, z pomocą którego pozyskuje się Kamień. Wydobycie surowca Kamień to wymagające zajęcie, które wymaga dużej wytrzymałości fizycznej. Zleć to zadanie Palom wyspecjalizowanym w górnictwie."
@@ -1252,8 +1572,12 @@
     "description": "Skośny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z kamienia, jest dość wytrzymały."
   },
   "Stone_SlopedRoofCorner": {
-    "localized_name": "Kamienny skośny dach trójkątny",
-    "description": "Narożny skośny dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z kamienia, jest dość wytrzymały."
+    "localized_name": "Kamienny trójkątny skośny dach",
+    "description": "Trójkątny dach skośny stawiany na ścianach narożnych, chroniący przed deszczem i wiatrem. Wykonany z kamienia, jest dość wytrzymały."
+  },
+  "Stone_SlopedRoofCornerReverse": {
+    "localized_name": "Trójkątny skośny dach z kamienia (odwrócony)",
+    "description": "Trójkątny dach skośny (odwrócony) stawiany na ścianach narożnych, chroniący przed deszczem i wiatrem. Wykonany z kamienia, jest dość wytrzymały."
   },
   "Stone_TriangleFoundation": {
     "localized_name": "Kamienny trójkątny fundament",
@@ -1339,6 +1663,10 @@
     "localized_name": "Okrągły stół",
     "description": "Okrągły dekoracyjny stół."
   },
+  "TableCircular_Wood_None": {
+    "localized_name": "Schludny okrągły stół",
+    "description": "Schludny, okrągły stół ozdobny."
+  },
   "TableDresser01_Stone": {
     "localized_name": "Antyczna toaletka",
     "description": "Toaletka przydatna do zmiany wyglądu. Umożliwia graczowi edycję wyglądu postaci."
@@ -1362,6 +1690,10 @@
   "TableSquare_Wood": {
     "localized_name": "Kwadratowy stół",
     "description": "Kwadratowy dekoracyjny stół."
+  },
+  "TableSquare_Wood_None": {
+    "localized_name": "Schludny kwadratowy stół",
+    "description": "Schludny, kwadratowy stół ozdobny."
   },
   "Tansu": {
     "localized_name": "Skrzynia w stylu japońskim",
@@ -1556,8 +1888,12 @@
     "description": "Stożkowy dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z drewna, łatwo się niszczy."
   },
   "Wooden_SlopedRoofCorner": {
-    "localized_name": "Drewniany skośny dach trójkątny",
-    "description": "Skośny dach narożny stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z drewna, łatwo się niszczy."
+    "localized_name": "Drewniany trójkątny skośny dach",
+    "description": "Trójkątny dach skośny stawiany na ścianach narożnych, chroniący przed deszczem i wiatrem. Wykonany z drewna, łatwo się niszczy."
+  },
+  "Wooden_SlopedRoofCornerReverse": {
+    "localized_name": "Trójkątny skośny dach z drewna (odwrócony)",
+    "description": "Trójkątny dach skośny (odwrócony) stawiany na ścianach narożnych, chroniący przed deszczem i wiatrem. Wykonany z drewna, łatwo się niszczy."
   },
   "Wooden_TriangleFoundation": {
     "localized_name": "Drewniany trójkątny fundament",

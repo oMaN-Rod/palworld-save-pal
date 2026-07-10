@@ -3,9 +3,133 @@
     "localized_name": "소환의 제단",
     "description": "이곳에 팰이 그려진 석판을 바쳐 강대한 팰을 거점에 소환할 수 있다. 전투를 시작하기 전에 충분히 준비해 두자."
   },
+  "AncientBlastFurnace": {
+    "localized_name": "고대 문명 화로",
+    "description": "고대 문명의 기술을 응용해 모든 주괴를 제련할 수 있는 특수 화로. 불의 힘으로 소재를 녹이고, 얼음의 힘으로 단숨에 식혀 굳히는 방식으로 제련을 수행한다. 가동하려면 높은 등급의 불 피우기 및 냉각 적성을 가진 팰이 필요하다."
+  },
+  "AncientCookingStove": {
+    "localized_name": "고대 문명 부엌",
+    "description": "기존 요리부터 미지의 요리까지 만들 수 있는 고대 문명 부엌. 불로 재료에 열을 가하고, 수작업으로 요리를 완성해 다양한 메뉴를 만들어 낼 수 있다. 가동하려면 높은 등급의 불 피우기 및 수작업 적성을 가진 팰이 필요하다."
+  },
+  "AncientElectricGenerator": {
+    "localized_name": "고대 문명 발전기",
+    "description": "소실된 고대 기술을 복원해 만든 초고효율 발전기. 막대한 전력을 생산할 수 있으나 가동 중에 과열을 일으킬 위험성이 있다. 운용하려면 높은 등급의 발전 적성을 가진 팰과 관개 적성을 가진 팰이 필요하다."
+  },
+  "AncientFarmBlock": {
+    "localized_name": "고대 문명 재배기",
+    "description": "세계수의 힘을 이용해 팰파고스섬 내 여러 식물을 재배하는 고대 문명 재배기. 열매 농원보다 적은 면적을 차지하며 실내 재배도 가능하지만, 재배 방법은 기존 시설과 다르지 않다. 가동하려면 높은 등급의 파종, 관개, 채집 적성을 가진 팰이 필요하다."
+  },
+  "AncientMultiProduct": {
+    "localized_name": "고대 문명 물질 생성기",
+    "description": "세계수의 힘을 이용해 여러 목재와 광석을 생성하는 고대 문명 생성기. 복잡한 구조로 구성되어 있어 단 한 마리의 팰만 배치할 수 있다."
+  },
+  "AncientRelicRecycler": {
+    "localized_name": "고대 문명 유물 변환기",
+    "description": "잃어버린 문명의 기술을 다른 방향으로 응용한 고대 물질 변환 장치. |고대 문명의 유물|에 남겨진 기술을 해독하고, 새로운 형태로 승화시킬 수 있다. 유물의 활용성을 최대화하기 위해 제작된, 지극히 특수한 설비."
+  },
+  "AncientWorkBench": {
+    "localized_name": "고대 문명 작업대",
+    "description": "모든 아이템을 한자리에서 제작할 수 있는 팰 전용 복합 시설. 플레이어는 사용할 수 없으며 작업 속도도 일반 설비와 다르지 않다. 첨단 설비이므로 운용하려면 높은 등급의 수작업 및 제약 적성을 가진 팰이 필요하다."
+  },
+  "Ancient_AirConditioner": {
+    "localized_name": "고대 문명 공조기",
+    "description": null
+  },
+  "Ancient_Clinic": {
+    "localized_name": "고대 문명 진료소",
+    "description": "고대의 첨단 의료 시설을 현대에 재현한 의료 시설의 최고봉. 일반적인 진료소와는 비교도 안 될 만큼 높은 보호 능력을 보유하고 있다. 숙련된 제약 적성 팰을 배치하면 가혹한 노동이 부과된 거점이라 해도 위생 레벨을 최고로 유지할 수 있도록 해 준다."
+  },
+  "Ancient_DiagonalWall": {
+    "localized_name": "고대 문명 대각 벽",
+    "description": "삼각 토대 위에 지어 침입자를 막는 대각 벽. 고대 문명의 건축 양식을 재현했다."
+  },
+  "Ancient_DoorWall": {
+    "localized_name": "문 딸린 고대 문명 벽",
+    "description": "토대 위에 지어 입구 역할을 하는 문. 고대 문명의 건축 양식을 재현했다."
+  },
+  "Ancient_Fence": {
+    "localized_name": "고대 문명 울타리",
+    "description": "토대나 지붕 위에 짓는 낙하 방지용 울타리. 고대 문명의 건축 양식을 재현했다."
+  },
+  "Ancient_MedicalPalBed": {
+    "localized_name": "고대 문명 팰 침대",
+    "description": "생명을 치유하는 고대 포드에 부드러운 천을 깐 최고급 팰 침대. 여러 팰 침대 중에서도 특히 높은 SAN 수치 회복량을 자랑하여, 팰의 피로를 아주 빠르게 풀어 준다. 대형 팰 침대와 같은 사이즈이므로 대형 팰도 쾌적히 쉴 수 있다."
+  },
+  "Ancient_Pillars": {
+    "localized_name": "고대 문명 기둥",
+    "description": "건물을 지탱하기 위해 세우는 기둥. 고대 문명의 건축 양식을 재현했다."
+  },
+  "Ancient_PyramidRoof": {
+    "localized_name": "고대 문명 피라미드 지붕",
+    "description": "벽 위에 지어 비바람을 막는 송곳 모양 지붕. 고대 문명의 건축 양식을 재현했다."
+  },
+  "Ancient_SlantedRoof": {
+    "localized_name": "고대 문명 경사 지붕",
+    "description": "벽 위에 지어 비바람을 막는 경사 지붕. 고대 문명의 건축 양식을 재현했다."
+  },
+  "Ancient_SlopedRoofCorner": {
+    "localized_name": "고대 문명 삼각 경사 지붕",
+    "description": "대각 벽 위에 지어 비바람을 막는 삼각 경사 지붕. 고대 문명의 건축 양식을 재현했다."
+  },
+  "Ancient_SlopedRoofCornerReverse": {
+    "localized_name": "고대 문명 삼각 경사 지붕(반전)",
+    "description": "대각 벽 위에 지어 비바람을 막는 삼각 경사 지붕(반전). 고대 문명의 건축 양식을 재현했다."
+  },
+  "Ancient_Spa": {
+    "localized_name": "고대 문명 온천",
+    "description": "고대 기술을 응용해 팰지움 성분을 함유시킨 특별한 목욕물을 채운 온천. 모든 온천 중에서 최고 수준의 SAN 수치 회복량을 자랑하며, 체력 회복 효과까지 붙어 있다. 사이즈는 기존 온천과 다르지 않지만, 상처 입은 팰을 극한까지 치유시켜 준다."
+  },
+  "Ancient_TriangleFoundation": {
+    "localized_name": "고대 문명 삼각 토대",
+    "description": "위에 벽이나 시설을 지을 수 있는 삼각 토대. 고대 문명의 건축 양식을 재현했다."
+  },
+  "Ancient_TriangleRoof": {
+    "localized_name": "고대 문명 삼각 지붕",
+    "description": "벽 위에 지어 비바람을 막는 삼각 지붕. 고대 문명의 건축 양식을 재현했다."
+  },
+  "Ancient_TriangleStairsCorner": {
+    "localized_name": "고대 문명 모서리 지붕",
+    "description": "벽 위에 지어 비바람을 막는 모서리 지붕. 고대 문명의 건축 양식을 재현했다."
+  },
+  "Ancient_TriangleWall": {
+    "localized_name": "고대 문명 삼각 벽",
+    "description": "토대 위에 짓는 삼각 벽. 고대 문명의 건축 양식을 재현했다."
+  },
+  "Ancient_TriangleWallReverse": {
+    "localized_name": "고대 문명 삼각 벽(반전)",
+    "description": "토대 위에 짓는 삼각 벽(반전). 고대 문명의 건축 양식을 재현했다."
+  },
+  "Ancient_WallGate": {
+    "localized_name": "고대 문명 팰 전용 출입구",
+    "description": "토대 위에 짓는 팰 전용 출입구. 고대 문명의 건축 양식을 재현했다."
+  },
+  "Ancient_WindowWall": {
+    "localized_name": "창문 딸린 고대 문명 벽",
+    "description": "토대 위에 짓는 창문이 딸린 침입자 방지용 벽. 고대 문명의 건축 양식을 재현했다."
+  },
+  "Ancient_foundation": {
+    "localized_name": "고대 문명 토대",
+    "description": "위에 벽이나 시설을 지을 수 있는 토대. 고대 문명의 건축 양식을 재현했다."
+  },
+  "Ancient_roof": {
+    "localized_name": "고대 문명 지붕",
+    "description": "벽 위에 지어 비바람을 막는 지붕. 고대 문명의 건축 양식을 재현했다."
+  },
+  "Ancient_stair": {
+    "localized_name": "고대 문명 계단",
+    "description": "토대나 지붕 밑에 배치해 오르내리는 계단. 고대 문명의 건축 양식을 재현했다."
+  },
+  "Ancient_wall": {
+    "localized_name": "고대 문명 벽",
+    "description": "토대 위에 지어 침입자를 막는 벽. 고대 문명의 건축 양식을 재현했다."
+  },
   "Andon": {
     "localized_name": "행등",
     "description": "장식용 행등. 일본식 거점을 만들 때 사용하자."
+  },
+  "ArcadeVideoGame": {
+    "localized_name": "아케이드 게임 기체",
+    "description": "장식용 아케이드 게임 기체. 망가져서 사용할 수 없다."
   },
   "Barrel01_Iron": {
     "localized_name": "빨간색 드럼통",
@@ -34,6 +158,14 @@
   "BaseCampWorkHard": {
     "localized_name": "감시대",
     "description": "거점 내 팰의 작업 방침을 비롯하여 각 작업별로 허가/금지 여부를 지시할 수 있다."
+  },
+  "BaseCampWorkHard02": {
+    "localized_name": "고급 감시대",
+    "description": "소재와 구조를 개편하여 더욱 세련되게 제작한 감시대. 본래 기능대로 작업 지시를 내릴 수 있으며, 거점 내 팰의 SAN 수치 감소량을 억제한다. 노동 환경이 조금 개선되었기에, 팰들도 불만을 덜 품게 될 것이다."
+  },
+  "BaseCampWorkHard03": {
+    "localized_name": "고대 문명 감시대",
+    "description": "고대 기술과 더불어 붉은 팰지움을 이식한 감시대. 홀로그램 인터페이스로 거점 전체에 지시를 내리는 동시에 SAN 수치 감소량도 줄여 준다. 거점을 특수 파장으로 뒤덮어, 팰들이 가혹한 노동 환경 속에서도 평온한 마음을 유지하도록 돕는다."
   },
   "BaseCampWorkerExtraStation": {
     "localized_name": "팰 상자 조작 단말기",
@@ -84,8 +216,8 @@
     "description": "장식용 앤티크 그물형 상자."
   },
   "Box02_Iron": {
-    "localized_name": "천 내장재 컨테이너",
-    "description": "아이템을 수납할 수 있는 천 내장재 컨테이너."
+    "localized_name": "천 덮은 컨테이너",
+    "description": "아이템을 수납할 수 있는 천 덮은 컨테이너."
   },
   "Box_Wood": {
     "localized_name": "나무 상자",
@@ -150,6 +282,10 @@
   "CharacterRankUp": {
     "localized_name": "팰 농축 포드",
     "description": "팰의 랭크를 올려주는 시설. 추출한 팰의 정수를 농축해 같은 종의 팰에게 주입하면 육체의 한계를 넘어설 수 있다."
+  },
+  "Clinic": {
+    "localized_name": "진료소",
+    "description": "거점에서 일하는 팰들의 건강을 관리하는 기초적인 의료 시설. 제약 적성을 가진 팰을 배치해 SAN 수치 감소량을 줄이고, 병과 부상 발생률도 낮출 수 있다. 유지할 수 있는 위생 환경에는 제한이 존재하지만, 그럼에도 초반 거점 운영에 꼭 필요한 위생 관리의 핵심 시설."
   },
   "Clock01_Stone": {
     "localized_name": "앤티크 괘종시계",
@@ -223,21 +359,33 @@
     "localized_name": "피해 측정 허수아비",
     "description": "펭키을(를) 본뜬 훈련용 허수아비. 좁은 곳에는 둘 수 없다."
   },
+  "DarkIsland_Banner": {
+    "localized_name": "천락의 민족 휘장",
+    "description": "장식용 천락의 민족 휘장."
+  },
+  "DarkIsland_Flag": {
+    "localized_name": "천락의 민족 깃발",
+    "description": "장식용 천락의 민족 깃발."
+  },
   "Decal_PalSticker_PinkCat": {
     "localized_name": "ko_Text",
     "description": "ko_Text"
   },
   "DefenseBowGun": {
     "localized_name": "설치형 쇠뇌",
-    "description": "팰을 배치해 전투에 대비하는 방어 시설. 사용하려면 화살이(가) 필요하다. 상자에 탄을 넣어두면 배치된 팰이 자동으로 탄을 장전한다."
+    "description": "팰을 배치해 전투에 대비하는 방어 시설. |수작업| 적성을 가진 팰을 배치하면 쇠뇌를 사용해 거점을 수호한다."
   },
   "DefenseMachinegun": {
     "localized_name": "설치형 기관총",
-    "description": "팰을 배치해 전투에 대비하는 방어 시설. 사용하려면 소총 탄약이(가) 필요하다. 상자에 탄을 넣어두면 배치된 팰이 자동으로 탄을 장전한다."
+    "description": "팰을 배치해 전투에 대비하는 방어 시설. |수작업| 적성을 가진 팰을 배치하면 기관총을 사용해 거점을 수호한다."
+  },
+  "DefenseMachinegun_AutoTurret": {
+    "localized_name": "고대 문명 터렛",
+    "description": "로켓 발사기급 사이즈와 화력을 겸비한 고대 문명 무인 터렛. 전력만으로 가동되는 자동화 터렛이므로 탄약도 팰도 배치할 필요가 없다. 매우 강력한 설비지만, 그만큼 가동에 필요한 전력량도 막대하다."
   },
   "DefenseMissile": {
     "localized_name": "설치형 미사일 발사대",
-    "description": "팰을 배치해 전투에 대비하는 방어 시설. 사용하려면 로켓탄이(가) 필요하다. 상자에 탄을 넣어두면 배치된 팰이 자동으로 탄을 장전한다."
+    "description": "팰을 배치해 전투에 대비하는 방어 시설. |수작업| 적성을 가진 팰을 배치하면 미사일 발사기를 사용해 거점을 수호한다."
   },
   "DefenseWait": {
     "localized_name": "토양",
@@ -301,7 +449,7 @@
   },
   "EnergyStorage_Electric": {
     "localized_name": "축전기",
-    "description": "발전기(으)로 만들어 낸 잉여 전기를 저장하는 시설."
+    "description": "발전기(으)로 만들어 낸 초과분의 전기를 저장하는 시설."
   },
   "Expedition": {
     "localized_name": "팰 원정소",
@@ -325,7 +473,7 @@
   },
   "Factory_Money": {
     "localized_name": "금화 제조 공장",
-    "description": "금화을(를) 제조하는 공장. 정신에 부담이 가는 작업이기에 SAN 수치가 감소한다. 수작업이 가능한 팰이 필요하다."
+    "description": "금화을(를) 제조하는 공장. 정신에 부담이 가는 작업이기에 SAN 수치가 감소한다. 수작업이 가능한 팰이 필요하다. 이 건축물을 세우면 자경단의 혹독한 단속에 걸릴 가능성이 있으니 주의하자."
   },
   "FarmBlockV2_Berries": {
     "localized_name": "열매 농원",
@@ -360,7 +508,7 @@
     "description": "기술 열매를 재배할 수 있는 농원. 재배하려는 기술 열매를 땅에 심으면 같은 종류의 열매를 여러 개 수확할 수 있다."
   },
   "FastTravelPoint": {
-    "localized_name": "흰죽지참수리 상",
+    "localized_name": "참수리 상",
     "description": "꼬꼬닭을(를) 흉내 낸 비석. 세우면 첫 여행을 떠날 수 있다."
   },
   "FireCult_Banner": {
@@ -399,6 +547,130 @@
     "localized_name": "독서대",
     "description": "장식용 독서대. 일본식 거점을 만들 때 사용하자."
   },
+  "FurnitureBush01_Flower": {
+    "localized_name": "모형 꽃 핀 덤불 A",
+    "description": "장식용 모형 꽃 핀 덤불. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureBush01_Green": {
+    "localized_name": "모형 덤불",
+    "description": "장식용 모형 덤불. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureBush01_Snow": {
+    "localized_name": "모형 하얀 덤불",
+    "description": "장식용 모형 하얀 덤불. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureBush01_Tropical": {
+    "localized_name": "모형 남국 덤불",
+    "description": "장식용 모형 남국 덤불. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureBush01_Yellow": {
+    "localized_name": "모형 노란 단풍 덤불",
+    "description": "장식용 모형 노란 단풍 덤불. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureBush02_Flower": {
+    "localized_name": "모형 꽃 핀 덤불 B",
+    "description": "장식용 모형 꽃 핀 덤불. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureStone01": {
+    "localized_name": "모형 바위",
+    "description": "장식용 모형 바위. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureTree01_Bamboo": {
+    "localized_name": "모형 대나무 A",
+    "description": "장식용 모형 대나무. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureTree01_Cherry": {
+    "localized_name": "모형 벚나무 A",
+    "description": "장식용 모형 벚나무. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureTree01_Desert": {
+    "localized_name": "모형 사막 나무 A",
+    "description": "장식용 모형 사막 나무. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureTree01_Green": {
+    "localized_name": "모형 나무 A",
+    "description": "장식용 모형 나무. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureTree01_Red": {
+    "localized_name": "모형 붉은 단풍나무 A",
+    "description": "장식용 모형 붉은 단풍나무. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureTree01_Snow": {
+    "localized_name": "모형 눈 쌓인 나무 A",
+    "description": "장식용 모형 눈 쌓인 나무. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureTree01_Tropical": {
+    "localized_name": "모형 남국 나무 A",
+    "description": "장식용 모형 남국 나무. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureTree01_Yellow": {
+    "localized_name": "모형 노란 단풍나무 A",
+    "description": "장식용 모형 노란 단풍나무. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureTree02_Bamboo": {
+    "localized_name": "모형 대나무 B",
+    "description": "장식용 모형 대나무. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureTree02_Cherry": {
+    "localized_name": "모형 벚나무 B",
+    "description": "장식용 모형 벚나무. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureTree02_Desert": {
+    "localized_name": "모형 사막 나무 B",
+    "description": "장식용 모형 사막 나무. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureTree02_Green": {
+    "localized_name": "모형 나무 B",
+    "description": "장식용 모형 나무. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureTree02_Red": {
+    "localized_name": "모형 붉은 단풍나무 B",
+    "description": "장식용 모형 붉은 단풍나무. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureTree02_Snow": {
+    "localized_name": "모형 눈 쌓인 나무 B",
+    "description": "장식용 모형 눈 쌓인 나무. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureTree02_Tropical": {
+    "localized_name": "모형 남국 나무 B",
+    "description": "장식용 모형 남국 나무. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureTree02_Yellow": {
+    "localized_name": "모형 노란 단풍나무 B",
+    "description": "장식용 모형 노란 단풍나무. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureTree03_Bamboo": {
+    "localized_name": "모형 대나무 C",
+    "description": "장식용 모형 대나무. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureTree03_Cherry": {
+    "localized_name": "모형 벚나무 C",
+    "description": "장식용 모형 벚나무. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureTree03_Desert": {
+    "localized_name": "모형 사막 나무 c",
+    "description": "장식용 모형 사막 나무. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureTree03_Green": {
+    "localized_name": "모형 나무 C",
+    "description": "장식용 모형 나무. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureTree03_Red": {
+    "localized_name": "모형 붉은 단풍나무 C",
+    "description": "장식용 모형 붉은 단풍나무. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureTree03_Snow": {
+    "localized_name": "모형 눈 쌓인 나무 C",
+    "description": "장식용 모형 눈 쌓인 나무. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureTree03_Tropical": {
+    "localized_name": "모형 남국 나무 C",
+    "description": "장식용 모형 남국 나무. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
+  "FurnitureTree03_Yellow": {
+    "localized_name": "모형 노란 단풍나무 C",
+    "description": "장식용 모형 노란 단풍나무. 이 건축물은 공격해도 소재를 얻을 수 없다."
+  },
   "GarbageBag_Iron": {
     "localized_name": "쓰레기봉투",
     "description": "장식용 쓰레기봉투."
@@ -425,7 +697,11 @@
   },
   "Glass_SlopedRoofCorner": {
     "localized_name": "유리 삼각 경사 지붕",
-    "description": "벽 위에 지어 비바람을 막는 경사 모서리 지붕. 견고한 유리로 만들어서 매우 튼튼하다."
+    "description": "대각 벽 위에 지어 비바람을 막는 삼각 경사 지붕. 견고한 유리로 만들어서 매우 튼튼하다."
+  },
+  "Glass_SlopedRoofCornerReverse": {
+    "localized_name": "유리 삼각 경사 지붕(반전)",
+    "description": "대각 벽 위에 지어 비바람을 막는 삼각 경사 지붕(반전). 견고한 유리로 만들어서 매우 튼튼하다."
   },
   "Glass_TriangleFoundation": {
     "localized_name": "유리 삼각 토대",
@@ -523,6 +799,10 @@
     "localized_name": "동결 분쇄기",
     "description": "금속 광석을(를) 분쇄하여 다른 소재로 변환할 수 있는 시설. 작업 효율이 높은 대신, 가동하려면 전력 공급 및 |냉각| 적성을 가진 팰이 필요하다."
   },
+  "IceHorseStatue": {
+    "localized_name": "빙천마 상",
+    "description": "장식용 빙천마 상."
+  },
   "Iron_DiagonalWall": {
     "localized_name": "금속 대각 벽",
     "description": "삼각 토대 위에 지어 침입자를 막는 대각 벽. 금속으로 만들어서 매우 튼튼하다."
@@ -537,7 +817,11 @@
   },
   "Iron_SlopedRoofCorner": {
     "localized_name": "금속 삼각 경사 지붕",
-    "description": "벽 위에 지어 비바람을 막는 경사 모서리 지붕. 금속으로 만들어서 매우 튼튼하다."
+    "description": "대각 벽 위에 지어 비바람을 막는 삼각 경사 지붕. 금속으로 만들어서 매우 튼튼하다."
+  },
+  "Iron_SlopedRoofCornerReverse": {
+    "localized_name": "금속 삼각 경사 지붕(반전)",
+    "description": "대각 벽 위에 지어 비바람을 막는 삼각 경사 지붕(반전). 금속으로 만들어서 매우 튼튼하다."
   },
   "Iron_TriangleFoundation": {
     "localized_name": "금속 삼각 토대",
@@ -568,7 +852,7 @@
     "description": "아이템을 판매할 때 사용하는 시설. 다른 플레이어에게 아이템을 판매할 수 있다. 얼음 팰을 배치하면 보관한 식료품의 부패가 늦춰진다."
   },
   "ItemChest": {
-    "localized_name": "나무 상자",
+    "localized_name": "나무 궤짝",
     "description": "아이템을 수납할 수 있다. 나무로 만들어서 약하다. 귀중품을 넣기엔 좀 불안하다."
   },
   "ItemChest_02": {
@@ -629,7 +913,11 @@
   },
   "JapaneseStyle_SlopedRoofCorner": {
     "localized_name": "일본식 삼각 경사 지붕",
-    "description": "벽 위에 지어 비바람을 막는 경사 모서리 지붕. 세련된 일본식 건축물을 지을 때 활용하자."
+    "description": "대각 벽 위에 지어 비바람을 막는 삼각 경사 지붕. 세련된 일본식 건축물을 지을 때 활용하자."
+  },
+  "JapaneseStyle_SlopedRoofCornerReverse": {
+    "localized_name": "일본식 삼각 경사 지붕(반전)",
+    "description": "대각 벽 위에 지어 비바람을 막는 삼각 경사 지붕(반전). 세련된 일본식 건축물을 지을 때 활용하자."
   },
   "JapaneseStyle_TriangleFoundation": {
     "localized_name": "일본식 삼각 토대",
@@ -682,6 +970,10 @@
   "JapaneseStyle_wall_01": {
     "localized_name": "일본식 벽",
     "description": "토대 위에 지어 침입자를 막는 벽. 세련된 일본식 건축물을 지을 때 활용하자."
+  },
+  "JetDragonStatue": {
+    "localized_name": "제트래곤 상",
+    "description": "장식용 제트래곤 상."
   },
   "Kakejiku": {
     "localized_name": "족자",
@@ -855,6 +1147,10 @@
     "localized_name": "대형 전동 알 부화기",
     "description": "팰의 알을 부화시키는 장치. 전기가 필요하지만 온도 최적화와 더불어 여러 알을 병행으로 부화시키는 기능이 추가되었다."
   },
+  "MultiElectricHatchingPalEggWithBreed": {
+    "localized_name": "고대 문명 배합기",
+    "description": "전자 유리로 보호된 고대 문명 첨단 배합 시설. 알 생산부터 부화까지 전자동 및 고속으로 이루어지며, 희귀 스킬이 유전될 확률도 높여준다. 홀로그램 제어식으로 팰을 관리하므로 차지하는 면적 또한 기존 시설보다 줄어들었다."
+  },
   "MultiHatchingPalEgg": {
     "localized_name": "대형 알 부화기",
     "description": "팰의 알을 부화시키는 장치. 자동으로 온도를 최적화해 주며 여러 알을 병행으로 부화시킬 수 있다."
@@ -870,6 +1166,10 @@
   "OilPump": {
     "localized_name": "원유 추출기",
     "description": "유전에서 원유을(를) 추출할 때 필요한 장치. 가동하려면 대량의 전력 공급이 필요하다."
+  },
+  "OilPump02": {
+    "localized_name": "원유 추출기(고압형)",
+    "description": "지하 깊숙한 곳으로부터 원유을(를) 끌어올려 추출하는 장치. 유전이 없는 곳에서도 원유을(를) 생산할 수 있으나, 건축물이 없는 지상에만 배치할 수 있다. 원유 추출기보다 더 막대한 전력 공급이 필요하다."
   },
   "OlympicCauldron": {
     "localized_name": "성화대",
@@ -1009,7 +1309,11 @@
   },
   "SF_SlopedRoofCorner": {
     "localized_name": "미래식 삼각 경사 지붕",
-    "description": "벽 위에 지어 비바람을 막는 경사 모서리 지붕. 클린한 느낌의 근미래적 건축물을 지을 때 활용하자."
+    "description": "대각 벽 위에 지어 비바람을 막는 삼각 경사 지붕. 클린한 느낌의 근미래적 건축물을 지을 때 활용하자."
+  },
+  "SF_SlopedRoofCornerReverse": {
+    "localized_name": "미래식 삼각 경사 지붕(반전)",
+    "description": "대각 벽 위에 지어 비바람을 막는 삼각 경사 지붕(반전). 클린한 느낌의 근미래적 건축물을 지을 때 활용하자."
   },
   "SF_TriangleFoundation": {
     "localized_name": "미래식 삼각 토대",
@@ -1167,6 +1471,18 @@
     "localized_name": "팰 치장용 장치",
     "description": "스킨을 변경하는 시설. 팰을 특별한 외모로 변경할 수 있게 된다. 게임 외적으로 획득한 스킨 등을 적용할 수 있다."
   },
+  "SkyIslandOrePit": {
+    "localized_name": "솔라이트 채굴장",
+    "description": "솔라이트을(를) 생산하는 시설. 솔라이트을(를) 파내는 작업은 고되므로 체력이 필요하다. 채굴에 자신 있는 팰에게 맡기자."
+  },
+  "SkyIsland_Banner": {
+    "localized_name": "창천의 맹약 휘장",
+    "description": "장식용 창천의 맹약 휘장."
+  },
+  "SkyIsland_Flag": {
+    "localized_name": "창천의 맹약 깃발",
+    "description": "장식용 창천의 맹약 깃발."
+  },
   "Snowman": {
     "localized_name": "눈사람",
     "description": "거점에 배치하면 냉각 작업 속도가 상승한다. 2개 이상 배치해도 효과는 없다."
@@ -1223,6 +1539,10 @@
     "localized_name": "벌목장",
     "description": "목재을(를) 생산하는 시설. 나무를 자르는 작업은 고되므로 체력이 필요하다. 벌목에 자신 있는 팰에게 맡기자."
   },
+  "StationDeforest3": {
+    "localized_name": "벌목장 Ⅱ",
+    "description": "단단한 목재을(를) 생산하는 시설. 나무를 자르는 작업은 고되므로 체력이 필요하다. 벌목에 자신 있는 팰에게 맡기자."
+  },
   "StonePit": {
     "localized_name": "채석장",
     "description": "돌을(를) 생산하는 시설. 돌을(를) 파내는 작업은 고되므로 체력이 필요하다. 채굴에 자신 있는 팰에게 맡기자."
@@ -1253,7 +1573,11 @@
   },
   "Stone_SlopedRoofCorner": {
     "localized_name": "돌 삼각 경사 지붕",
-    "description": "벽 위에 지어 비바람을 막는 경사 모서리 지붕. 돌로 만들어서 나름대로 튼튼하다."
+    "description": "대각 벽 위에 지어 비바람을 막는 삼각 경사 지붕. 돌로 만들어서 나름대로 튼튼하다."
+  },
+  "Stone_SlopedRoofCornerReverse": {
+    "localized_name": "돌 삼각 경사 지붕(반전)",
+    "description": "대각 벽 위에 지어 비바람을 막는 삼각 경사 지붕(반전). 돌로 만들어서 나름대로 튼튼하다."
   },
   "Stone_TriangleFoundation": {
     "localized_name": "돌 삼각 토대",
@@ -1339,6 +1663,10 @@
     "localized_name": "원탁",
     "description": "장식용 원탁."
   },
+  "TableCircular_Wood_None": {
+    "localized_name": "정돈된 원탁",
+    "description": "장식용 정돈된 원탁."
+  },
   "TableDresser01_Stone": {
     "localized_name": "앤티크 드레서",
     "description": "자신의 모습을 단장하기 위한 옷장. 캐릭터의 외형을 변경할 수 있다."
@@ -1362,6 +1690,10 @@
   "TableSquare_Wood": {
     "localized_name": "사각 탁자",
     "description": "장식용 사각 탁자."
+  },
+  "TableSquare_Wood_None": {
+    "localized_name": "정돈된 사각 탁자",
+    "description": "장식용 정돈된 사각 탁자."
   },
   "Tansu": {
     "localized_name": "서랍장",
@@ -1449,7 +1781,7 @@
   },
   "TrafficSign04_Iron": {
     "localized_name": "그린모스 주의 표식",
-    "description": "장식용 그린모스 주의 표식. 고대 문명에서는 그린 모스의 분노를 산 자가 사망하는 사고가 빈번했다고 한다."
+    "description": "장식용 그린모스 주의 표식. 고대 문명에서는 그린모스의 분노를 산 자가 사망하는 사고가 빈번했다고 한다."
   },
   "TransmissionTower": {
     "localized_name": "송전탑",
@@ -1557,7 +1889,11 @@
   },
   "Wooden_SlopedRoofCorner": {
     "localized_name": "나무 삼각 경사 지붕",
-    "description": "벽 위에 지어 비바람을 막는 경사 모서리 지붕. 나무로 만들어서 약하다."
+    "description": "대각 벽 위에 지어 비바람을 막는 삼각 경사 지붕. 나무로 만들어서 약하다."
+  },
+  "Wooden_SlopedRoofCornerReverse": {
+    "localized_name": "나무 삼각 경사 지붕(반전)",
+    "description": "대각 벽 위에 지어 비바람을 막는 삼각 경사 지붕(반전). 나무로 만들어서 약하다."
   },
   "Wooden_TriangleFoundation": {
     "localized_name": "나무 삼각 토대",

@@ -3,9 +3,133 @@
     "localized_name": "Bàn Thờ Triệu Hồi",
     "description": "Dâng tấm đá có khắc hình Pal để triệu hồi Pal có năng lực mạnh đến căn cứ. Cần chuẩn bị đầy đủ cho trận chiến."
   },
+  "AncientBlastFurnace": {
+    "localized_name": "Lò Luyện Văn Minh Cổ Đại",
+    "description": "Lò luyện đặc biệt ứng dụng kỹ thuật văn minh cổ đại, có thể đúc mọi loại thỏi kim loại. Quá trình luyện sử dụng nhiệt từ lửa để nung chảy và sức mạnh băng giá để làm nguội nhanh. Để vận hành, cần Pal có kỹ năng Nhóm Lửa và Làm Mát."
+  },
+  "AncientCookingStove": {
+    "localized_name": "Bếp Văn Minh Cổ Đại",
+    "description": "Nhà bếp của nền văn minh cổ đại, có thể nấu từ các món quen thuộc đến những mỹ vị mới lạ. Hoàn thành mọi món ăn bằng cách tích nhiệt từ lửa và chế biến thủ công. Để vận hành, cần Pal có kỹ năng Nhóm Lửa và Công Việc Thủ Công ở cấp cao."
+  },
+  "AncientElectricGenerator": {
+    "localized_name": "Máy Phát Điện Văn Minh Cổ Đại",
+    "description": "Máy phát điện hiệu suất siêu cao, được phục dựng từ công nghệ cổ đại thất truyền. Tạo ra lượng điện khổng lồ nhưng đi kèm nguy cơ quá nhiệt khi hoạt động. Yêu cầu vận hành: Pal có thuộc tính Phát Điện cấp cao + Pal có thuộc tính Tưới Nước."
+  },
+  "AncientFarmBlock": {
+    "localized_name": "Máy Canh Tác Văn Minh Cổ Đại",
+    "description": "Máy canh tác văn minh cổ đại, sử dụng sức mạnh Cây Thế Giới để nuôi trồng mọi loại thực vật trên đảo Palpagos. Tuy kích thước nhỏ hơn nhiều so với Nông Trại Quả Mọng và có thể lắp đặt trong nhà, nhưng quy trình trồng trọt không thay đổi. Để vận hành, cần Pal có năng lực Gieo Hạt, Tưới Nước và Thu Thập cấp cao."
+  },
+  "AncientMultiProduct": {
+    "localized_name": "Máy Tạo Vật Chất Văn Minh Cổ Đại",
+    "description": "Máy tạo tài nguyên của nền văn minh cổ đại khai thác sức mạnh Cây Thế Giới để tạo ra mọi loại gỗ và quặng. Bạn có thể chọn loại tài nguyên muốn thu thập, nhưng hiệu suất khai thác không đổi. Do cấu trúc phức tạp, nên mỗi máy chỉ có thể giao cho 1 Pal."
+  },
+  "AncientRelicRecycler": {
+    "localized_name": "Máy Chuyển Hóa Di Vật Văn Minh Cổ Đại",
+    "description": "Thiết bị chuyển hóa vật chất cổ đại ứng dụng kỹ thuật của nền văn minh đã mất. Giải mã kỹ thuật còn sót lại trong “Di Vật Văn Minh Cổ Đại” để nâng tầm chúng thành hình thái mới. Đây là thiết bị cực kỳ đặc biệt để tận dụng tối đa các di vật thu thập được."
+  },
+  "AncientWorkBench": {
+    "localized_name": "Bàn Chế Tạo Văn Minh Cổ Đại",
+    "description": "Trạm chế tác tổng hợp dành riêng cho Pal, nơi có thể sản xuất mọi loại vật phẩm. Người chơi không thể thao tác và tốc độ chế tạo không đổi. Vì là máy móc tiên tiến, nên cần Pal có chỉ số Công Việc Thủ Công và Chế Thuốc cao vận hành."
+  },
+  "Ancient_AirConditioner": {
+    "localized_name": "Máy Điều Hòa Văn Minh Cổ Đại",
+    "description": null
+  },
+  "Ancient_Clinic": {
+    "localized_name": "Trạm Y Tế Văn Minh Cổ Đại",
+    "description": "Cơ sở y tế tối tân, áp dụng các kỹ thuật y học tiên tiến cổ đại vào hiện tại. Có khả năng chăm sóc vượt trội so với trạm y tế thông thường. Chỉ cần chỉ định Pal bậc thầy về Chế Thuốc, cơ sở này có thể duy trì mức độ lành mạnh cao nhất, ngay cả khi căn cứ có điều kiện làm việc khắc nghiệt."
+  },
+  "Ancient_DiagonalWall": {
+    "localized_name": "Tường Chéo Văn Minh Cổ Đại",
+    "description": "Tường chéo dựng trên nền tam giác, để ngăn chặn kẻ xâm nhập. Được thiết kế theo phong cách kiến trúc văn minh cổ đại."
+  },
+  "Ancient_DoorWall": {
+    "localized_name": "Tường Có Cửa Văn Minh Cổ Đại",
+    "description": "Cửa được dựng trên nền nhà để làm lối ra vào. Được thiết kế theo phong cách kiến trúc văn minh cổ đại."
+  },
+  "Ancient_Fence": {
+    "localized_name": "Hàng Rào Văn Minh Cổ Đại",
+    "description": "Hàng rào được xây dựng trên nền nhà hoặc mái nhà để ngăn rơi ngã. Được thiết kế theo phong cách kiến trúc văn minh cổ đại."
+  },
+  "Ancient_MedicalPalBed": {
+    "localized_name": "Giường Pal Văn Minh Cổ Đại",
+    "description": "Chiếc giường cao cấp nhất cho Pal, được làm từ kén trị liệu cổ đại và lớp vải lót mềm mại. Có khả năng phục hồi chỉ số Minh Mẫn cao nhất trong tất cả các loại giường Pal, giúp xua tan mệt mỏi nhanh chóng. Kích thước tương đương với Giường Pal Cỡ Lớn, các Pal to lớn cũng có thể nằm thoải mái."
+  },
+  "Ancient_Pillars": {
+    "localized_name": "Cột Văn Minh Cổ Đại",
+    "description": "Cột trụ dùng để chống đỡ tòa nhà. Được thiết kế theo phong cách kiến trúc văn minh cổ đại."
+  },
+  "Ancient_PyramidRoof": {
+    "localized_name": "Mái Kim Tự Tháp Văn Minh Cổ Đại",
+    "description": "Mái nhà hình chóp được xây trên tường chéo để che chắn mưa gió. Được thiết kế theo phong cách kiến trúc văn minh cổ đại."
+  },
+  "Ancient_SlantedRoof": {
+    "localized_name": "Mái Nghiêng Văn Minh Cổ Đại",
+    "description": "Mái nghiêng được xây trên tường để che chắn mưa gió. Được thiết kế theo phong cách kiến trúc văn minh cổ đại."
+  },
+  "Ancient_SlopedRoofCorner": {
+    "localized_name": "Mái Nghiêng Tam Giác Văn Minh Cổ Đại",
+    "description": "Mái nghiêng tam giác được xây trên tường chéo để che chắn mưa gió. Được thiết kế theo phong cách kiến trúc văn minh cổ đại."
+  },
+  "Ancient_SlopedRoofCornerReverse": {
+    "localized_name": "Mái Dốc Tam Giác Văn Minh Cổ Đại (Ngược)",
+    "description": "Mái dốc tam giác ngược, lắp trên tường chéo để che mưa chắn gió. Tái hiện phong cách kiến trúc văn minh cổ đại."
+  },
+  "Ancient_Spa": {
+    "localized_name": "Suối Nước Nóng Văn Minh Cổ Đại",
+    "description": "Suối nước nóng ứng dụng Kỹ Thuật Cổ Đại, chứa loại nước đặc biệt hòa tan thành phần Paladium. Sở hữu khả năng hồi phục chỉ số Minh Mẫn hàng đầu trong mọi loại suối nước nóng, đồng thời phục hồi cả thể lực. Kích thước tương đương với suối nước nóng thông thường, nhưng có thể chữa lành hoàn toàn cho Pal bị thương."
+  },
+  "Ancient_TriangleFoundation": {
+    "localized_name": "Nền Tam Giác Văn Minh Cổ Đại",
+    "description": "Nền tam giác để dựng tường và các công trình khác lên trên. Được thiết kế theo phong cách kiến trúc văn minh cổ đại."
+  },
+  "Ancient_TriangleRoof": {
+    "localized_name": "Mái Tam Giác Văn Minh Cổ Đại",
+    "description": "Mái tam giác được xây trên tường để che chắn mưa gió. Được thiết kế theo phong cách kiến trúc văn minh cổ đại."
+  },
+  "Ancient_TriangleStairsCorner": {
+    "localized_name": "Mái Góc Văn Minh Cổ Đại",
+    "description": "Mái góc được xây trên tường để che chắn mưa gió. Được thiết kế theo phong cách kiến trúc văn minh cổ đại."
+  },
+  "Ancient_TriangleWall": {
+    "localized_name": "Tường Tam Giác Văn Minh Cổ Đại",
+    "description": "Tường tam giác dựng trên nền nhà. Được thiết kế theo phong cách kiến trúc văn minh cổ đại."
+  },
+  "Ancient_TriangleWallReverse": {
+    "localized_name": "Tường Tam Giác (Đảo Ngược) Văn Minh Cổ Đại",
+    "description": "Tường tam giác (đảo ngược) dựng trên nền nhà. Được thiết kế theo phong cách kiến trúc văn minh cổ đại."
+  },
+  "Ancient_WallGate": {
+    "localized_name": "Lối Đi Cho Pal Văn Minh Cổ Đại",
+    "description": "Lối đi cho Pal được dựng trên nền nhà để làm lối ra vào. Được thiết kế theo phong cách kiến trúc văn minh cổ đại."
+  },
+  "Ancient_WindowWall": {
+    "localized_name": "Tường Có Cửa Sổ Văn Minh Cổ Đại",
+    "description": "Tường có cửa sổ dựng trên nền nhà, để ngăn chặn kẻ xâm nhập. Được thiết kế theo phong cách kiến trúc văn minh cổ đại."
+  },
+  "Ancient_foundation": {
+    "localized_name": "Nền Nhà Văn Minh Cổ Đại",
+    "description": "Nền để dựng tường và các công trình khác lên trên. Được thiết kế theo phong cách kiến trúc văn minh cổ đại."
+  },
+  "Ancient_roof": {
+    "localized_name": "Mái Nhà Văn Minh Cổ Đại",
+    "description": "Mái nhà được xây trên tường để che chắn mưa gió. Được thiết kế theo phong cách kiến trúc văn minh cổ đại."
+  },
+  "Ancient_stair": {
+    "localized_name": "Cầu Thang Văn Minh Cổ Đại",
+    "description": "Cầu thang đặt trên nền nhà hoặc dưới mái nhà để di chuyển lên xuống. Được thiết kế theo phong cách kiến trúc văn minh cổ đại."
+  },
+  "Ancient_wall": {
+    "localized_name": "Tường Văn Minh Cổ Đại",
+    "description": "Tường dựng trên nền nhà, để ngăn chặn kẻ xâm nhập. Được thiết kế theo phong cách kiến trúc văn minh cổ đại."
+  },
   "Andon": {
     "localized_name": "Đèn Lồng Giấy Nhật Bản",
     "description": "Đèn lồng giấy Nhật Bản dùng để trang trí. Hãy sử dụng khi xây dựng theo phong cách Nhật Bản."
+  },
+  "ArcadeVideoGame": {
+    "localized_name": "Máy Chơi Game Thùng",
+    "description": "Máy chơi game thùng dùng để trang trí. Đã hỏng nên không thể chơi được."
   },
   "Barrel01_Iron": {
     "localized_name": "Thùng Phuy Đỏ",
@@ -34,6 +158,14 @@
   "BaseCampWorkHard": {
     "localized_name": "Đài Quan Sát",
     "description": "Có thể chỉ định cách làm việc của Pal trong căn cứ và cho phép/cấm từng công việc riêng lẻ."
+  },
+  "BaseCampWorkHard02": {
+    "localized_name": "Đài Quan Sát Cao Cấp",
+    "description": "Đài quan sát được cải tiến về vật liệu và kết cấu, với thiết kế tinh chỉnh hơn. Vẫn có thể thiết lập công việc như trước, đồng thời làm chậm tốc độ suy giảm chỉ số Minh Mẫn của Pal trong căn cứ. Môi trường làm việc được cải thiện đôi chút, giúp Pal ít bất mãn hơn."
+  },
+  "BaseCampWorkHard03": {
+    "localized_name": "Đài Quan Sát Văn Minh Cổ Đại",
+    "description": "Đài quan sát sử dụng kỹ thuật cổ đại, khảm đá Paldium đỏ. Điều khiển toàn bộ căn cứ thông qua giao diện Hologram, cũng như giảm thiểu tốc độ tiêu hao chỉ số Minh Mẫn của Pal. Các bước sóng đặc biệt bao phủ căn cứ, giữ cho tâm trí của Pal luôn bình tĩnh ngay cả trong điều kiện làm việc khắc nghiệt."
   },
   "BaseCampWorkerExtraStation": {
     "localized_name": "Thiết Bị Điều Khiển Palbox",
@@ -81,7 +213,7 @@
   },
   "Box01_Stone": {
     "localized_name": "Giỏ Mây Cổ",
-    "description": "Giỏ mây cổ dùng để trang trí."
+    "description": "Giỏ mây đan phong cách cổ điển dùng để trang trí."
   },
   "Box02_Iron": {
     "localized_name": "Hộp Đựng Có Vải Bọc",
@@ -125,7 +257,7 @@
   },
   "Chair01_Iron": {
     "localized_name": "Ghế Da",
-    "description": "Ghế da dùng để trang trí."
+    "description": "Ghế bọc da dùng để trang trí."
   },
   "Chair01_Pal": {
     "localized_name": "Ghế Ếch",
@@ -150,6 +282,10 @@
   "CharacterRankUp": {
     "localized_name": "Máy Tinh Luyện Pal",
     "description": "Cơ sở để giúp thăng hạng của Pal. Khi cô đặc tinh chất chiết xuất từ Pal và rót vào Pal cùng loài, có thể giúp Pal phá vỡ giới hạn thể xác."
+  },
+  "Clinic": {
+    "localized_name": "Trạm Y Tế",
+    "description": "Cơ sở y tế cơ bản để quản lý sức khỏe của các Pal làm việc tại căn cứ. Bằng cách chỉ định Pal có kỹ năng Chế Thuốc, cơ sở này giúp hạn chế suy giảm chỉ số Minh Mẫn và ngăn tình trạng bị bệnh và bị thương. Mặc dù chỉ có thể duy trì môi trường lành mạnh ở một mức độ nhất định, đây vẫn là cơ sở trọng yếu để quản lý căn cứ trong giai đoạn đầu."
   },
   "Clock01_Stone": {
     "localized_name": "Đồng Hồ Quả Lắc Cổ",
@@ -223,21 +359,33 @@
     "localized_name": "Hình Nộm Đo Sát Thương",
     "description": "Hình nộm tập luyện mô phỏng Pengullet. Chỉ có thể đặt ở nơi rộng rãi."
   },
+  "DarkIsland_Banner": {
+    "localized_name": "Biểu Ngữ Dọc Của Cư Dân Feybreak",
+    "description": "Biểu ngữ dọc của cư dân Feybreak dùng để trang trí."
+  },
+  "DarkIsland_Flag": {
+    "localized_name": "Cờ Hiệu Của Cư Dân Feybreak",
+    "description": "Cờ hiệu của cư dân Feybreak dùng để trang trí."
+  },
   "Decal_PalSticker_PinkCat": {
     "localized_name": "-",
     "description": "-"
   },
   "DefenseBowGun": {
     "localized_name": "Nỏ Săn Lắp Ráp",
-    "description": "Cơ sở phòng thủ bằng cách bố trí Pal và chuẩn bị cho trận chiến. Cần có Mũi Tên để sử dụng. Nếu đặt đạn vào rương, Pal được bố trí sẽ tự động nạp đạn."
+    "description": "Công trình phòng thủ để bố trí Pal sẵn sàng chiến đấu. Phân công Pal có năng lực “Công Việc Thủ Công”, chúng sẽ sử dụng nỏ săn để bảo vệ căn cứ."
   },
   "DefenseMachinegun": {
     "localized_name": "Súng Máy Lắp Ráp",
-    "description": "Cơ sở phòng thủ bằng cách bố trí Pal và chuẩn bị cho trận chiến. Cần có Đạn Súng Trường để sử dụng. Nếu đặt đạn vào rương, Pal được bố trí sẽ tự động nạp đạn."
+    "description": "Công trình phòng thủ để bố trí Pal sẵn sàng chiến đấu. Phân công Pal có năng lực “Công Việc Thủ Công”, chúng sẽ vận hành súng máy để bảo vệ căn cứ."
+  },
+  "DefenseMachinegun_AutoTurret": {
+    "localized_name": "Trụ Súng Văn Minh Cổ Đại",
+    "description": "Trụ súng tự động từ nền văn minh cổ đại, có kích thước và hỏa lực ngang ngửa Súng Phóng Tên Lửa. Không cần Đạn Bắn và Pal, hoạt động hoàn toàn tự động bằng điện năng. Uy lực cực kỳ mạnh mẽ nhưng cần một lượng điện năng khổng lồ để hoạt động."
   },
   "DefenseMissile": {
     "localized_name": "Bệ Phóng Tên Lửa Lắp Ráp",
-    "description": "Cơ sở phòng thủ bằng cách bố trí Pal và chuẩn bị cho trận chiến. Cần có Tên Lửa để sử dụng. Nếu đặt đạn vào rương, Pal được bố trí sẽ tự động nạp đạn."
+    "description": "Công trình phòng thủ để bố trí Pal sẵn sàng chiến đấu. Phân công Pal có năng lực “Công Việc Thủ Công”, chúng sẽ vận hành súng phóng tên lửa để bảo vệ căn cứ."
   },
   "DefenseWait": {
     "localized_name": "Bao Cát",
@@ -325,7 +473,7 @@
   },
   "Factory_Money": {
     "localized_name": "Nhà Máy Sản Xuất Tiền Vàng",
-    "description": "Nhà máy sản xuất Đồng Vàng. Do gây căng thẳng tinh thần nên chỉ số Minh Mẫn của người lao động sẽ giảm đi. Cần Pal có khả năng làm việc thủ công."
+    "description": "Nhà máy chế tạo Đồng Vàng. Công việc gây áp lực tinh thần, khiến chỉ số Minh Mẫn của Pal làm việc giảm dần. Cần Pal có kỹ năng Công Việc Thủ Công. Việc xây dựng có thể khiến bạn bị Đội Tự Vệ truy quét gắt gao, hãy cẩn thận."
   },
   "FarmBlockV2_Berries": {
     "localized_name": "Nông Trại Quả Mọng",
@@ -399,6 +547,130 @@
     "localized_name": "Bàn Làm Việc Kiểu Nhật",
     "description": "Bàn viết Nhật Bản dùng để trang trí. Hãy sử dụng khi xây dựng theo phong cách Nhật Bản."
   },
+  "FurnitureBush01_Flower": {
+    "localized_name": "Mô Hình Bụi Hoa A",
+    "description": "Mô hình bụi hoa dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureBush01_Green": {
+    "localized_name": "Mô Hình Bụi Cây",
+    "description": "Mô hình bụi cây dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureBush01_Snow": {
+    "localized_name": "Mô Hình Bụi Cây Phủ Trắng",
+    "description": "Mô hình bụi cây phủ trắng dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureBush01_Tropical": {
+    "localized_name": "Mô Hình Bụi Cây Nhiệt Đới",
+    "description": "Mô hình bụi cây nhiệt đới dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureBush01_Yellow": {
+    "localized_name": "Mô Hình Bụi Cây Lá Vàng",
+    "description": "Mô hình bụi cây lá vàng dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureBush02_Flower": {
+    "localized_name": "Mô Hình Bụi Hoa B",
+    "description": "Mô hình bụi hoa dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureStone01": {
+    "localized_name": "Mô Hình Tảng Đá",
+    "description": "Mô hình tảng đá dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree01_Bamboo": {
+    "localized_name": "Mô Hình Cây Tre A",
+    "description": "Mô hình cây tre dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree01_Cherry": {
+    "localized_name": "Mô Hình Cây Anh Đào A",
+    "description": "Mô hình cây anh đào dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree01_Desert": {
+    "localized_name": "Mô Hình Cây Sa Mạc A",
+    "description": "Mô hình cây sa mạc dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree01_Green": {
+    "localized_name": "Mô Hình Cây Xanh A",
+    "description": "Mô hình cây dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree01_Red": {
+    "localized_name": "Mô Hình Cây Lá Đỏ A",
+    "description": "Mô hình cây lá đỏ dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree01_Snow": {
+    "localized_name": "Mô Hình Cây Phủ Tuyết A",
+    "description": "Mô hình cây phủ tuyết dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree01_Tropical": {
+    "localized_name": "Mô Hình Cây Nhiệt Đới A",
+    "description": "Mô hình cây nhiệt đới dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree01_Yellow": {
+    "localized_name": "Mô Hình Cây Lá Vàng A",
+    "description": "Mô hình cây lá vàng dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree02_Bamboo": {
+    "localized_name": "Mô Hình Cây Tre B",
+    "description": "Mô hình cây tre dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree02_Cherry": {
+    "localized_name": "Mô Hình Cây Anh Đào B",
+    "description": "Mô hình cây anh đào dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree02_Desert": {
+    "localized_name": "Mô Hình Cây Sa Mạc B",
+    "description": "Mô hình cây sa mạc dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree02_Green": {
+    "localized_name": "Mô Hình Cây Xanh B",
+    "description": "Mô hình cây dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree02_Red": {
+    "localized_name": "Mô Hình Cây Lá Đỏ B",
+    "description": "Mô hình cây lá đỏ dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree02_Snow": {
+    "localized_name": "Mô Hình Cây Phủ Tuyết B",
+    "description": "Mô hình cây phủ tuyết dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree02_Tropical": {
+    "localized_name": "Mô Hình Cây Nhiệt Đới B",
+    "description": "Mô hình cây nhiệt đới dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree02_Yellow": {
+    "localized_name": "Mô Hình Cây Lá Vàng B",
+    "description": "Mô hình cây lá vàng dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree03_Bamboo": {
+    "localized_name": "Mô Hình Cây Tre C",
+    "description": "Mô hình cây tre dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree03_Cherry": {
+    "localized_name": "Mô Hình Cây Anh Đào C",
+    "description": "Mô hình cây anh đào dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree03_Desert": {
+    "localized_name": "Mô Hình Cây Sa Mạc C",
+    "description": "Mô hình cây sa mạc dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree03_Green": {
+    "localized_name": "Mô Hình Cây Xanh C",
+    "description": "Mô hình cây dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree03_Red": {
+    "localized_name": "Mô Hình Cây Lá Đỏ C",
+    "description": "Mô hình cây lá đỏ dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree03_Snow": {
+    "localized_name": "Mô Hình Cây Phủ Tuyết C",
+    "description": "Mô hình cây phủ tuyết dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree03_Tropical": {
+    "localized_name": "Mô Hình Cây Nhiệt Đới C",
+    "description": "Mô hình cây nhiệt đới dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree03_Yellow": {
+    "localized_name": "Mô Hình Cây Lá Vàng C",
+    "description": "Mô hình cây lá vàng dùng để trang trí. Không thể thu thập nguyên liệu từ công trình này."
+  },
   "GarbageBag_Iron": {
     "localized_name": "Túi Rác",
     "description": "Túi rác dùng để trang trí."
@@ -425,7 +697,11 @@
   },
   "Glass_SlopedRoofCorner": {
     "localized_name": "Mái Thủy Tinh Tam Giác Nghiêng",
-    "description": "Mái nghiêng góc được xây trên tường để che chắn mưa gió. Vì làm bằng kính cường lực nên rất kiên cố."
+    "description": "Mái nghiêng tam giác được xây trên tường chéo để che chắn mưa gió. Vì làm bằng kính cường lực nên rất kiên cố."
+  },
+  "Glass_SlopedRoofCornerReverse": {
+    "localized_name": "Mái Kính Dốc Tam Giác (Ngược)",
+    "description": "Mái dốc tam giác ngược, lắp trên tường chéo để che mưa chắn gió. Làm bằng kính cường lực nên vô cùng kiên cố."
   },
   "Glass_TriangleFoundation": {
     "localized_name": "Nền Tam Giác Thủy Tinh",
@@ -523,6 +799,10 @@
     "localized_name": "Máy Nghiền Đông Lạnh",
     "description": "Cơ sở có thể nghiền Quặng Kim Loại để chuyển đổi thành nguyên liệu khác. Cần cung cấp điện và Pal có năng lực |làm mát| để hoạt động, nhưng cơ sở này làm việc rất hiệu quả."
   },
+  "IceHorseStatue": {
+    "localized_name": "Tượng Frostallion",
+    "description": "Tượng Frostallion dùng để trang trí."
+  },
   "Iron_DiagonalWall": {
     "localized_name": "Tường Chéo Kim Loại",
     "description": "Tường chéo dựng trên nền tam giác, để ngăn chặn kẻ xâm nhập. Vì làm bằng kim loại nên rất chắc chắn."
@@ -537,7 +817,11 @@
   },
   "Iron_SlopedRoofCorner": {
     "localized_name": "Mái Kim Loại Tam Giác Nghiêng",
-    "description": "Mái nghiêng góc được xây phía tường để che chắn mưa gió. Vì làm bằng kim loại nên rất chắc chắn."
+    "description": "Mái nghiêng tam giác được xây trên tường chéo để che chắn mưa gió. Vì làm bằng kim loại nên rất chắc chắn."
+  },
+  "Iron_SlopedRoofCornerReverse": {
+    "localized_name": "Mái Kim Loại Dốc Tam Giác (Ngược)",
+    "description": "Mái dốc tam giác ngược, lắp trên tường chéo để che mưa chắn gió. Làm bằng kim loại nên rất chắc chắn."
   },
   "Iron_TriangleFoundation": {
     "localized_name": "Nền Tam Giác Kim Loại",
@@ -628,8 +912,12 @@
     "description": "Mái nghiêng được xây phía trên tường để che chắn khỏi mưa gió. Có thể xây dựng theo phong cách Nhật Bản trang nhã."
   },
   "JapaneseStyle_SlopedRoofCorner": {
-    "localized_name": "Mái Tam Giác Nghiêng Kiểu Nhật",
-    "description": "Mái nghiêng góc được xây trên tường để che chắn mưa gió. Mang phong cách Nhật Bản trang nhã."
+    "localized_name": "Mái Nghiêng Góc Tam Giác Kiểu Nhật",
+    "description": "Mái nghiêng tam giác được xây trên tường chéo để che chắn mưa gió. Mang phong cách Nhật Bản trang nhã."
+  },
+  "JapaneseStyle_SlopedRoofCornerReverse": {
+    "localized_name": "Mái Dốc Tam Giác Kiểu Nhật (Ngược)",
+    "description": "Mái dốc tam giác ngược, lắp trên tường chéo để che mưa chắn gió. Phù hợp cho các công trình kiến trúc Nhật Bản tinh tế."
   },
   "JapaneseStyle_TriangleFoundation": {
     "localized_name": "Nền Tam Giác Kiểu Nhật",
@@ -682,6 +970,10 @@
   "JapaneseStyle_wall_01": {
     "localized_name": "Tường Kiểu Nhật",
     "description": "Tường để dựng trên nền nhà và ngăn chặn kẻ xâm nhập. Có thể xây dựng theo phong cách Nhật Bản trang nhã."
+  },
+  "JetDragonStatue": {
+    "localized_name": "Tượng Jetragon",
+    "description": "Tượng Jetragon dùng để trang trí."
   },
   "Kakejiku": {
     "localized_name": "Tranh Cuộn Treo Tường",
@@ -855,6 +1147,10 @@
     "localized_name": "Máy Ấp Trứng Dùng Điện Cỡ Lớn",
     "description": "Thiết bị dùng để ấp trứng Pal. Cần cung cấp điện, nhưng có thể ấp nhiều trứng cùng lúc ở nhiệt độ tối ưu."
   },
+  "MultiElectricHatchingPalEggWithBreed": {
+    "localized_name": "Thiết Bị Phối Giống Văn Minh Cổ Đại",
+    "description": "Cơ sở phối giống tiên tiến từ nền văn minh cổ đại, được bao bọc trong lớp kính điện tử. Quy trình từ sản xuất đến ấp trứng đều được tự động hóa với tốc độ cao, đồng thời tăng tỷ lệ di truyền kỹ năng hiếm. Pal được quản lý bằng hệ thống Hologram, nên không tốn nhiều diện tích như trang trại thông thường."
+  },
   "MultiHatchingPalEgg": {
     "localized_name": "Máy Ấp Trứng Cỡ Lớn",
     "description": "Thiết bị dùng để ấp trứng Pal. Tự động duy trì nhiệt độ tối ưu, cho phép ấp cùng lúc nhiều quả trứng Pal."
@@ -870,6 +1166,10 @@
   "OilPump": {
     "localized_name": "Máy Chiết Xuất Dầu Thô",
     "description": "Thiết bị cần thiết để chiết xuất Dầu Thô từ mỏ dầu. Cần cung cấp lượng điện lớn để hoạt động."
+  },
+  "OilPump02": {
+    "localized_name": "Máy Chiết Xuất Dầu Thô - Cao Áp",
+    "description": "Thiết bị bơm hút để khai thác Dầu Thô từ sâu trong lòng đất. Có thể tạo ra Dầu Thô ngay cả ở những nơi không có mỏ dầu, nhưng chỉ có thể đặt trên mặt đất trống. Yêu cầu cung cấp năng lượng lớn hơn nhiều so với Máy Chiết Xuất Dầu Thô."
   },
   "OlympicCauldron": {
     "localized_name": "Bệ Đuốc Thiêng",
@@ -1008,8 +1308,12 @@
     "description": "Mái nghiêng được xây phía trên tường để che chắn khỏi mưa gió. Có thể xây dựng kiến trúc sạch sẽ, mang tính tương lai."
   },
   "SF_SlopedRoofCorner": {
-    "localized_name": "Mái Nghiêng Góc Tinh Tế",
-    "description": "Mái nghiêng góc được xây phía tường để che chắn mưa gió. Mang phong cách tinh tế, hiện đại."
+    "localized_name": "Mái Nghiêng Góc Tam Giác Tinh Tế",
+    "description": "Mái nghiêng tam giác được xây trên tường chéo để che chắn mưa gió. Mang phong cách tinh tế, hiện đại."
+  },
+  "SF_SlopedRoofCornerReverse": {
+    "localized_name": "Mái Dốc Tam Giác Hiện Đại (Ngược)",
+    "description": "Mái dốc tam giác ngược, lắp trên tường chéo để che mưa chắn gió. Phù hợp cho các công trình thiết kế tối giản và đậm chất tương lai."
   },
   "SF_TriangleFoundation": {
     "localized_name": "Nền Tam Giác Tinh Tế",
@@ -1167,6 +1471,18 @@
     "localized_name": "Thiết Bị Trưng Diện Pal",
     "description": "Cơ sở thay đổi giao diện. Cơ sở thay đổi giao diện của Pal thành ngoại hình đặc biệt. Có thể sử dụng giao diện có được bên ngoài trò chơi."
   },
+  "SkyIslandOrePit": {
+    "localized_name": "Mỏ Khai Thác Đá Soralite",
+    "description": "Cơ sở chế tạo Đá Soralite. Công việc khai thác Đá Soralite rất vất vả và đòi hỏi thể lực. Hãy giao cho những Pal giỏi Khai Thác."
+  },
+  "SkyIsland_Banner": {
+    "localized_name": "Biểu Ngữ Dọc Lời Thề Trời Xanh",
+    "description": "Biểu ngữ dọc Lời Thề Trời Xanh dùng để trang trí."
+  },
+  "SkyIsland_Flag": {
+    "localized_name": "Cờ Hiệu Lời Thề Trời Xanh",
+    "description": "Cờ hiệu Lời Thề Trời Xanh dùng để trang trí."
+  },
   "Snowman": {
     "localized_name": "Người Tuyết",
     "description": "Nếu đặt ở căn cứ tốc độ làm mát sẽ tăng lên. Đặt từ 2 cái trở lên sẽ không có hiệu quả."
@@ -1223,6 +1539,10 @@
     "localized_name": "Nơi Đốn Gỗ",
     "description": "Cơ sở để sản xuất Gỗ. Công việc chặt cây rất vất vả và tốn sức. Hãy giao cho Pal giỏi đốn gỗ."
   },
+  "StationDeforest3": {
+    "localized_name": "Khu Khai Thác Gỗ II",
+    "description": "Cơ sở để sản xuất Gỗ Cứng. Công việc chặt cây rất vất vả và tốn sức. Hãy giao cho những Pal giỏi Đốn Gỗ."
+  },
   "StonePit": {
     "localized_name": "Mỏ Đá",
     "description": "Cơ sở để sản xuất Đá. Công việc đào Đá rất vất vả và tốn sức. Hãy giao cho Pal giỏi công việc đào."
@@ -1253,7 +1573,11 @@
   },
   "Stone_SlopedRoofCorner": {
     "localized_name": "Mái Đá Tam Giác Nghiêng",
-    "description": "Mái nghiêng góc được xây trên tường để che chắn mưa gió. Vì làm bằng đá nên khá chắc chắn."
+    "description": "Mái nghiêng tam giác được xây trên tường chéo để che chắn mưa gió. Vì làm bằng đá nên khá chắc chắn."
+  },
+  "Stone_SlopedRoofCornerReverse": {
+    "localized_name": "Mái Đá Dốc Tam Giác (Ngược)",
+    "description": "Mái dốc tam giác ngược, lắp trên tường chéo để che mưa chắn gió. Làm bằng đá nên khá chắc chắn."
   },
   "Stone_TriangleFoundation": {
     "localized_name": "Nền Tam Giác Đá",
@@ -1339,6 +1663,10 @@
     "localized_name": "Bàn Tròn",
     "description": "Bàn tròn dùng để trang trí."
   },
+  "TableCircular_Wood_None": {
+    "localized_name": "Bàn Tròn Gọn Gàng",
+    "description": "Bàn tròn gọn gàng dùng để trang trí."
+  },
   "TableDresser01_Stone": {
     "localized_name": "Bàn Trang Điểm Cổ",
     "description": "Bàn trang điểm để xem vẻ ngoài của mình. Có thể thay đổi ngoại hình của nhân vật."
@@ -1362,6 +1690,10 @@
   "TableSquare_Wood": {
     "localized_name": "Bàn Vuông",
     "description": "Bàn vuông dùng để trang trí."
+  },
+  "TableSquare_Wood_None": {
+    "localized_name": "Bàn Vuông Gọn Gàng",
+    "description": "Bàn vuông gọn gàng dùng để trang trí."
   },
   "Tansu": {
     "localized_name": "Tủ Kiểu Nhật",
@@ -1557,7 +1889,11 @@
   },
   "Wooden_SlopedRoofCorner": {
     "localized_name": "Mái Gỗ Tam Giác Nghiêng",
-    "description": "Mái nghiêng góc được xây trên tường để che chắn mưa gió. Vì làm bằng gỗ nên khá yếu."
+    "description": "Mái nghiêng tam giác được xây trên tường chéo để che chắn mưa gió. Vì làm bằng gỗ nên khá yếu."
+  },
+  "Wooden_SlopedRoofCornerReverse": {
+    "localized_name": "Mái Gỗ Dốc Tam Giác (Ngược)",
+    "description": "Mái dốc tam giác ngược, lắp trên tường chéo để che mưa chắn gió. Chất liệu gỗ nên khá mỏng manh."
   },
   "Wooden_TriangleFoundation": {
     "localized_name": "Nền Tam Giác Gỗ",
