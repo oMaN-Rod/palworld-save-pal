@@ -19,6 +19,10 @@
     "localized_name": "Réfrigération niv. 4",
     "description": null
   },
+  "Cool1_6": {
+    "localized_name": "Réfrigération niv. 5",
+    "description": null
+  },
   "Cool2": {
     "localized_name": "Incubation stimulée niv. 1",
     "description": null
@@ -36,19 +40,23 @@
     "description": null
   },
   "Cool3": {
-    "localized_name": "Étude de la réfrigération niv. 1",
+    "localized_name": "Bases de la recherche en réfrigération – niv. 1",
     "description": null
   },
   "Cool3_2": {
-    "localized_name": "Étude de la réfrigération niv. 2",
+    "localized_name": "Bases de la recherche en réfrigération – niv. 2",
     "description": null
   },
   "Cool3_3": {
-    "localized_name": "Renforcement des Pals du camp niv. 1",
+    "localized_name": "Renforcement des Pals de la base niv. 1",
     "description": null
   },
   "Cool3_4": {
-    "localized_name": "Renforcement des Pals du camp niv. 2",
+    "localized_name": "Renforcement des Pals de la base niv. 2",
+    "description": null
+  },
+  "Cool3_5": {
+    "localized_name": "Renforcement des Pals de la base niv. 3",
     "description": null
   },
   "Cool4": {
@@ -87,6 +95,10 @@
     "localized_name": "Abattage niv. 5",
     "description": null
   },
+  "Deforest1_6": {
+    "localized_name": "Abattage niv. 6",
+    "description": null
+  },
   "Deforest2": {
     "localized_name": "Expéditions accélérées niv. 1",
     "description": null
@@ -112,19 +124,23 @@
     "description": null
   },
   "Deforest3": {
-    "localized_name": "Astuce de recherche (abattage) niv. 1",
+    "localized_name": "Bases de la recherche en abattage – niv. 1",
     "description": null
   },
   "Deforest3_2": {
-    "localized_name": "Astuce de recherche (abattage) niv. 2",
+    "localized_name": "Bases de la recherche en abattage – niv. 2",
     "description": null
   },
   "Deforest3_3": {
-    "localized_name": "Renforcement des Pals du camp niv. 1",
+    "localized_name": "Renforcement des Pals de la base niv. 1",
     "description": null
   },
   "Deforest3_4": {
-    "localized_name": "Renforcement des Pals du camp niv. 2",
+    "localized_name": "Renforcement des Pals de la base niv. 2",
+    "description": null
+  },
+  "Deforest3_5": {
+    "localized_name": "Renforcement des Pals de la base niv. 3",
     "description": null
   },
   "Deforest4": {
@@ -151,6 +167,10 @@
     "localized_name": "Allumage de feu niv. 5",
     "description": null
   },
+  "EmitFlame1_6": {
+    "localized_name": "Allumage de feu niv. 6",
+    "description": null
+  },
   "EmitFlame2": {
     "localized_name": "Incubation stimulée niv. 1",
     "description": null
@@ -168,19 +188,23 @@
     "description": null
   },
   "EmitFlame3": {
-    "localized_name": "Astuce de recherche (allumage de feu) niv. 1",
+    "localized_name": "Bases de la recherche en allumage de feu – niv. 1",
     "description": null
   },
   "EmitFlame3_2": {
-    "localized_name": "Astuce de recherche (allumage de feu) niv. 2",
+    "localized_name": "Bases de la recherche en allumage de feu – niv. 2",
     "description": null
   },
   "EmitFlame3_3": {
-    "localized_name": "Renforcement des Pals du camp niv. 1",
+    "localized_name": "Renforcement des Pals de la base niv. 1",
     "description": null
   },
   "EmitFlame3_4": {
-    "localized_name": "Renforcement des Pals du camp niv. 2",
+    "localized_name": "Renforcement des Pals de la base niv. 2",
+    "description": null
+  },
+  "EmitFlame3_5": {
+    "localized_name": "Renforcement des Pals de la base niv. 3",
     "description": null
   },
   "EmitFlame4": {
@@ -200,7 +224,7 @@
     "description": null
   },
   "EmitFlame5": {
-    "localized_name": "Développement : Marmite",
+    "localized_name": "Développement : Brasero",
     "description": null
   },
   "GenerateEnergy1": {
@@ -223,6 +247,10 @@
     "localized_name": "Génération d'énergie niv. 5",
     "description": null
   },
+  "GenerateEnergy1_6": {
+    "localized_name": "Génération d'énergie niv. 6",
+    "description": null
+  },
   "GenerateEnergy2": {
     "localized_name": "Dévouement au stockage d'énergie niv. 1",
     "description": null
@@ -236,19 +264,23 @@
     "description": null
   },
   "GenerateEnergy3": {
-    "localized_name": "Astuce de recherche (génération d'énergie) niv. 1",
+    "localized_name": "Bases de la recherche en génération d’énergie – niv. 1",
     "description": null
   },
   "GenerateEnergy3_2": {
-    "localized_name": "Astuce de recherche (génération d'énergie) niv. 2",
+    "localized_name": "Bases de la recherche en génération d’énergie – niv. 2",
     "description": null
   },
   "GenerateEnergy3_3": {
-    "localized_name": "Renforcement des Pals du camp niv. 1",
+    "localized_name": "Renforcement des Pals de la base niv. 1",
     "description": null
   },
   "GenerateEnergy3_4": {
-    "localized_name": "Renforcement des Pals du camp niv. 2",
+    "localized_name": "Renforcement des Pals de la base niv. 2",
+    "description": null
+  },
+  "GenerateEnergy3_5": {
+    "localized_name": "Renforcement des Pals de la base niv. 3",
     "description": null
   },
   "GenerateEnergy4": {
@@ -268,23 +300,27 @@
     "description": null
   },
   "Handcraft1": {
-    "localized_name": "Vitesse de travail manuel niv. 1",
+    "localized_name": "Vitesse d’artisanat niv. 1",
     "description": null
   },
   "Handcraft1_2": {
-    "localized_name": "Vitesse de travail manuel niv. 2",
+    "localized_name": "Vitesse d’artisanat niv. 2",
     "description": null
   },
   "Handcraft1_3": {
-    "localized_name": "Vitesse de travail manuel niv. 3",
+    "localized_name": "Vitesse d’artisanat niv. 3",
     "description": null
   },
   "Handcraft1_4": {
-    "localized_name": "Vitesse de travail manuel niv. 4",
+    "localized_name": "Vitesse d’artisanat niv. 4",
     "description": null
   },
   "Handcraft1_5": {
-    "localized_name": "Vitesse de travail manuel niv. 5",
+    "localized_name": "Vitesse d’artisanat niv. 5",
+    "description": null
+  },
+  "Handcraft1_6": {
+    "localized_name": "Vitesse d’artisanat niv. 6",
     "description": null
   },
   "Handcraft2": {
@@ -312,19 +348,23 @@
     "description": null
   },
   "Handcraft3": {
-    "localized_name": "Astuce de recherche (travail manuel) niv. 1",
+    "localized_name": "Bases de la recherche en artisanat – niv. 1",
     "description": null
   },
   "Handcraft3_2": {
-    "localized_name": "Astuce de recherche (travail manuel) niv. 2",
+    "localized_name": "Bases de la recherche en artisanat – niv. 2",
     "description": null
   },
   "Handcraft3_3": {
-    "localized_name": "Renforcement des Pals du camp niv. 1",
+    "localized_name": "Renforcement des Pals de la base niv. 1",
     "description": null
   },
   "Handcraft3_4": {
-    "localized_name": "Renforcement des Pals du camp niv. 2",
+    "localized_name": "Renforcement des Pals de la base niv. 2",
+    "description": null
+  },
+  "Handcraft3_5": {
+    "localized_name": "Renforcement des Pals de la base niv. 3",
     "description": null
   },
   "Handcraft4": {
@@ -367,20 +407,28 @@
     "localized_name": "Fabrication de médicaments niv. 5",
     "description": null
   },
+  "Medicine1_6": {
+    "localized_name": "Fabrication de médicaments niv. 6",
+    "description": null
+  },
   "Medicine2": {
-    "localized_name": "Étude pharmaceutique niv. 1",
+    "localized_name": "Bases de la recherche en pharmacie – niv. 1",
     "description": null
   },
   "Medicine2_2": {
-    "localized_name": "Étude pharmaceutique niv. 2",
+    "localized_name": "Bases de la recherche en pharmacie – niv. 2",
     "description": null
   },
   "Medicine2_3": {
-    "localized_name": "Renforcement des Pals du camp niv. 1",
+    "localized_name": "Renforcement des Pals de la base niv. 1",
     "description": null
   },
   "Medicine2_4": {
-    "localized_name": "Renforcement des Pals du camp niv. 2",
+    "localized_name": "Renforcement des Pals de la base niv. 2",
+    "description": null
+  },
+  "Medicine2_5": {
+    "localized_name": "Renforcement des Pals de la base niv. 3",
     "description": null
   },
   "Medicine3": {
@@ -419,6 +467,10 @@
     "localized_name": "Extraction niv. 5",
     "description": null
   },
+  "Mining1_6": {
+    "localized_name": "Extraction niv. 6",
+    "description": null
+  },
   "Mining2": {
     "localized_name": "Expéditions accélérées niv. 1",
     "description": null
@@ -436,19 +488,23 @@
     "description": null
   },
   "Mining3": {
-    "localized_name": "Astuce de recherche (extraction) niv. 1",
+    "localized_name": "Bases de la recherche en extraction – niv. 1",
     "description": null
   },
   "Mining3_2": {
-    "localized_name": "Astuce de recherche (extraction) niv. 2",
+    "localized_name": "Bases de la recherche en extraction – niv. 2",
     "description": null
   },
   "Mining3_3": {
-    "localized_name": "Renforcement des Pals du camp niv. 1",
+    "localized_name": "Renforcement des Pals de la base niv. 1",
     "description": null
   },
   "Mining3_4": {
-    "localized_name": "Renforcement des Pals du camp niv. 2",
+    "localized_name": "Renforcement des Pals de la base niv. 2",
+    "description": null
+  },
+  "Mining3_5": {
+    "localized_name": "Renforcement des Pals de la base niv. 3",
     "description": null
   },
   "Mining4": {
@@ -487,6 +543,10 @@
     "localized_name": "Semence niv. 5",
     "description": null
   },
+  "Seeding1_6": {
+    "localized_name": "Semence niv. 6",
+    "description": null
+  },
   "Seeding2": {
     "localized_name": "Connaissances en production niv. 1",
     "description": null
@@ -512,19 +572,23 @@
     "description": null
   },
   "Seeding3": {
-    "localized_name": "Astuce de recherche (semence) niv. 1",
+    "localized_name": "Bases de la recherche en semence – niv. 1",
     "description": null
   },
   "Seeding3_2": {
-    "localized_name": "Astuce de recherche (semence) niv. 2",
+    "localized_name": "Bases de la recherche en semence – niv. 2",
     "description": null
   },
   "Seeding3_3": {
-    "localized_name": "Renforcement des Pals du camp niv. 1",
+    "localized_name": "Renforcement des Pals de la base niv. 1",
     "description": null
   },
   "Seeding3_4": {
-    "localized_name": "Renforcement des Pals du camp niv. 2",
+    "localized_name": "Renforcement des Pals de la base niv. 2",
+    "description": null
+  },
+  "Seeding3_5": {
+    "localized_name": "Renforcement des Pals de la base niv. 3",
     "description": null
   },
   "Seeding4": {
@@ -555,6 +619,10 @@
     "localized_name": "Arrosage niv. 5",
     "description": null
   },
+  "Watering1_6": {
+    "localized_name": "Arrosage niv. 6",
+    "description": null
+  },
   "Watering2": {
     "localized_name": "Connaissances en production niv. 1",
     "description": null
@@ -572,19 +640,23 @@
     "description": null
   },
   "Watering3": {
-    "localized_name": "Astuce de recherche (arrosage) niv. 1",
+    "localized_name": "Bases de la recherche en arrosage – niv. 1",
     "description": null
   },
   "Watering3_2": {
-    "localized_name": "Astuce de recherche (arrosage) niv. 2",
+    "localized_name": "Bases de la recherche en arrosage – niv. 2",
     "description": null
   },
   "Watering3_3": {
-    "localized_name": "Renforcement des Pals du camp niv. 1",
+    "localized_name": "Renforcement des Pals de la base niv. 1",
     "description": null
   },
   "Watering3_4": {
-    "localized_name": "Renforcement des Pals du camp niv. 2",
+    "localized_name": "Renforcement des Pals de la base niv. 2",
+    "description": null
+  },
+  "Watering3_5": {
+    "localized_name": "Renforcement des Pals de la base niv. 3",
     "description": null
   },
   "Watering4": {

@@ -55,7 +55,7 @@
     "text_id": "NAME_COOL3",
     "category": "Cool",
     "sub_category": "CraftSpeed_Cool",
-    "assign_id": "Lab_Cool_2",
+    "assign_id": "Lab_Cool_3",
     "require_research_id": "Cool5",
     "work_amount": 30000,
     "materials": [
@@ -87,7 +87,7 @@
     "text_id": "NAME_COOL4",
     "category": "Cool",
     "sub_category": "CraftSpeed_Cool",
-    "assign_id": "Lab_Cool_3",
+    "assign_id": "Lab_Cool_5",
     "require_research_id": "Cool1_3",
     "work_amount": 75000,
     "materials": [
@@ -119,7 +119,7 @@
     "text_id": "NAME_COOL5",
     "category": "Cool",
     "sub_category": "CraftSpeed_Cool",
-    "assign_id": "Lab_Cool_4",
+    "assign_id": "Lab_Cool_6",
     "require_research_id": "Cool1_4",
     "work_amount": 150000,
     "materials": [
@@ -138,6 +138,38 @@
       {
         "id": "AncientParts3",
         "count": 35
+      }
+    ],
+    "effect_type": "CraftSpeed",
+    "effect_value": 10.0,
+    "effect_work_suitability": "Cool",
+    "effect_item_type": "None",
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
+  },
+  "Cool1_6": {
+    "text_id": "NAME_COOL18",
+    "category": "Cool",
+    "sub_category": "CraftSpeed_Cool",
+    "assign_id": "Lab_Cool_7",
+    "require_research_id": "Cool1_5",
+    "work_amount": 300000,
+    "materials": [
+      {
+        "id": "Bio_Coolant",
+        "count": 50
+      },
+      {
+        "id": "RainbowCrystal",
+        "count": 100
+      },
+      {
+        "id": "PalCrystal_Ex",
+        "count": 20
+      },
+      {
+        "id": "AncientParts3",
+        "count": 70
       }
     ],
     "effect_type": "CraftSpeed",
@@ -183,7 +215,7 @@
     "text_id": "NAME_COOL7",
     "category": "Cool",
     "sub_category": "PalEggHatchingSpeed",
-    "assign_id": "Lab_Cool_2",
+    "assign_id": "Lab_Cool_3",
     "require_research_id": "Cool2",
     "work_amount": 30000,
     "materials": [
@@ -215,7 +247,7 @@
     "text_id": "NAME_COOL8",
     "category": "Cool",
     "sub_category": "PalEggHatchingSpeed",
-    "assign_id": "Lab_Cool_3",
+    "assign_id": "Lab_Cool_4",
     "require_research_id": "Cool2_2",
     "work_amount": 75000,
     "materials": [
@@ -247,7 +279,7 @@
     "text_id": "NAME_COOL9",
     "category": "Cool",
     "sub_category": "PalEggHatchingSpeed",
-    "assign_id": "Lab_Cool_4",
+    "assign_id": "Lab_Cool_5",
     "require_research_id": "Cool2_3",
     "work_amount": 150000,
     "materials": [
@@ -339,7 +371,7 @@
     "text_id": "NAME_COOL12",
     "category": "Cool",
     "sub_category": "DefenseRateBaseCampWorker",
-    "assign_id": "Lab_Cool_3",
+    "assign_id": "Lab_Cool_4",
     "require_research_id": "Cool3_2",
     "work_amount": 100000,
     "materials": [
@@ -371,7 +403,7 @@
     "text_id": "NAME_COOL13",
     "category": "Cool",
     "sub_category": "AttackRateBaseCampWorker",
-    "assign_id": "Lab_Cool_4",
+    "assign_id": "Lab_Cool_6",
     "require_research_id": "Cool3_3",
     "work_amount": 150000,
     "materials": [
@@ -399,11 +431,43 @@
     "is_essential": true,
     "effect_description_text_id_overwrite": null
   },
+  "Cool3_5": {
+    "text_id": "NAME_COOL19",
+    "category": "Cool",
+    "sub_category": "AttackRateBaseCampWorker",
+    "assign_id": "Lab_Cool_7",
+    "require_research_id": "Cool3_4",
+    "work_amount": 300000,
+    "materials": [
+      {
+        "id": "Bio_Coolant",
+        "count": 50
+      },
+      {
+        "id": "AncientParts2",
+        "count": 10
+      },
+      {
+        "id": "PalCrystal_Ex",
+        "count": 20
+      },
+      {
+        "id": "AncientParts3",
+        "count": 70
+      }
+    ],
+    "effect_type": "DefenseRateBaseCampWorker",
+    "effect_value": 2.0,
+    "effect_work_suitability": "None",
+    "effect_item_type": "None",
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
+  },
   "Cool4": {
     "text_id": "NAME_COOL14",
     "category": "Cool",
     "sub_category": "ItemCorruptionSpeedRate",
-    "assign_id": "Lab_Cool_1",
+    "assign_id": "Lab_Cool_2",
     "require_research_id": "Cool1_2",
     "work_amount": 15000,
     "materials": [
@@ -431,7 +495,7 @@
     "text_id": "NAME_COOL15",
     "category": "Cool",
     "sub_category": "ItemCorruptionSpeedRate",
-    "assign_id": "Lab_Cool_2",
+    "assign_id": "Lab_Cool_3",
     "require_research_id": "Cool4",
     "work_amount": 30000,
     "materials": [
@@ -463,7 +527,7 @@
     "text_id": "NAME_COOL16",
     "category": "Cool",
     "sub_category": "ItemCorruptionSpeedRate",
-    "assign_id": "Lab_Cool_3",
+    "assign_id": "Lab_Cool_5",
     "require_research_id": "Cool4_2",
     "work_amount": 75000,
     "materials": [
@@ -495,7 +559,7 @@
     "text_id": "NAME_COOL17",
     "category": "Cool",
     "sub_category": "TechnologyUnlock",
-    "assign_id": "Lab_Cool_1",
+    "assign_id": "Lab_Cool_2",
     "require_research_id": "Cool1_2",
     "work_amount": 15000,
     "materials": [
@@ -579,7 +643,7 @@
     "text_id": "NAME_DEFOREST3",
     "category": "Deforest",
     "sub_category": "CraftSpeed_Deforest",
-    "assign_id": "Lab_Deforest_2",
+    "assign_id": "Lab_Deforest_3",
     "require_research_id": "Deforest4",
     "work_amount": 300000,
     "materials": [
@@ -611,7 +675,7 @@
     "text_id": "NAME_DEFOREST4",
     "category": "Deforest",
     "sub_category": "CraftSpeed_Deforest",
-    "assign_id": "Lab_Deforest_3",
+    "assign_id": "Lab_Deforest_5",
     "require_research_id": "Deforest1_3",
     "work_amount": 750000,
     "materials": [
@@ -643,7 +707,7 @@
     "text_id": "NAME_DEFOREST5",
     "category": "Deforest",
     "sub_category": "CraftSpeed_Deforest",
-    "assign_id": "Lab_Deforest_4",
+    "assign_id": "Lab_Deforest_6",
     "require_research_id": "Deforest1_4",
     "work_amount": 1500000,
     "materials": [
@@ -662,6 +726,38 @@
       {
         "id": "AncientParts3",
         "count": 35
+      }
+    ],
+    "effect_type": "CraftSpeed",
+    "effect_value": 10.0,
+    "effect_work_suitability": "Deforest",
+    "effect_item_type": "None",
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
+  },
+  "Deforest1_6": {
+    "text_id": "NAME_DEFOREST17",
+    "category": "Deforest",
+    "sub_category": "CraftSpeed_Deforest",
+    "assign_id": "Lab_Deforest_7",
+    "require_research_id": "Deforest1_5",
+    "work_amount": 3000000,
+    "materials": [
+      {
+        "id": "Wood_Fine",
+        "count": 500
+      },
+      {
+        "id": "AncientParts2",
+        "count": 10
+      },
+      {
+        "id": "PalCrystal_Ex",
+        "count": 20
+      },
+      {
+        "id": "AncientParts3",
+        "count": 70
       }
     ],
     "effect_type": "CraftSpeed",
@@ -735,7 +831,7 @@
     "text_id": "NAME_DEFOREST8",
     "category": "Deforest",
     "sub_category": "ExpeditionTimeCostRate",
-    "assign_id": "Lab_Deforest_2",
+    "assign_id": "Lab_Deforest_3",
     "require_research_id": "Deforest2",
     "work_amount": 300000,
     "materials": [
@@ -767,7 +863,7 @@
     "text_id": "NAME_DEFOREST9",
     "category": "Deforest",
     "sub_category": "ExpeditionRewardRate",
-    "assign_id": "Lab_Deforest_3",
+    "assign_id": "Lab_Deforest_4",
     "require_research_id": "Deforest2_2",
     "work_amount": 750000,
     "materials": [
@@ -799,7 +895,7 @@
     "text_id": "NAME_DEFOREST10",
     "category": "Deforest",
     "sub_category": "ExpeditionTimeCostRate",
-    "assign_id": "Lab_Deforest_3",
+    "assign_id": "Lab_Deforest_5",
     "require_research_id": "Deforest2_3",
     "work_amount": 1000000,
     "materials": [
@@ -831,7 +927,7 @@
     "text_id": "NAME_DEFOREST11",
     "category": "Deforest",
     "sub_category": "ExpeditionRewardRate",
-    "assign_id": "Lab_Deforest_4",
+    "assign_id": "Lab_Deforest_5",
     "require_research_id": "Deforest2_4",
     "work_amount": 1500000,
     "materials": [
@@ -923,7 +1019,7 @@
     "text_id": "NAME_DEFOREST14",
     "category": "Deforest",
     "sub_category": "DefenseRateBaseCampWorker",
-    "assign_id": "Lab_Deforest_3",
+    "assign_id": "Lab_Deforest_4",
     "require_research_id": "Deforest3_2",
     "work_amount": 1000000,
     "materials": [
@@ -955,7 +1051,7 @@
     "text_id": "NAME_DEFOREST15",
     "category": "Deforest",
     "sub_category": "AttackRateBaseCampWorker",
-    "assign_id": "Lab_Deforest_4",
+    "assign_id": "Lab_Deforest_6",
     "require_research_id": "Deforest3_3",
     "work_amount": 1500000,
     "materials": [
@@ -977,6 +1073,38 @@
       }
     ],
     "effect_type": "AttackRateBaseCampWorker",
+    "effect_value": 2.0,
+    "effect_work_suitability": "None",
+    "effect_item_type": "None",
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
+  },
+  "Deforest3_5": {
+    "text_id": "NAME_DEFOREST18",
+    "category": "Deforest",
+    "sub_category": "AttackRateBaseCampWorker",
+    "assign_id": "Lab_Deforest_7",
+    "require_research_id": "Deforest3_4",
+    "work_amount": 3000000,
+    "materials": [
+      {
+        "id": "Wood_Fine",
+        "count": 500
+      },
+      {
+        "id": "AncientParts2",
+        "count": 10
+      },
+      {
+        "id": "PalCrystal_Ex",
+        "count": 20
+      },
+      {
+        "id": "AncientParts3",
+        "count": 70
+      }
+    ],
+    "effect_type": "DefenseRateBaseCampWorker",
     "effect_value": 2.0,
     "effect_work_suitability": "None",
     "effect_item_type": "None",
@@ -1071,7 +1199,7 @@
     "text_id": "NAME_EMITFIRE3",
     "category": "EmitFlame",
     "sub_category": "CraftSpeed_EmitFlame",
-    "assign_id": "Lab_Fire_2",
+    "assign_id": "Lab_Fire_3",
     "require_research_id": "EmitFlame5",
     "work_amount": 500000,
     "materials": [
@@ -1103,7 +1231,7 @@
     "text_id": "NAME_EMITFIRE4",
     "category": "EmitFlame",
     "sub_category": "CraftSpeed_EmitFlame",
-    "assign_id": "Lab_Fire_3",
+    "assign_id": "Lab_Fire_5",
     "require_research_id": "EmitFlame1_3",
     "work_amount": 1500000,
     "materials": [
@@ -1135,7 +1263,7 @@
     "text_id": "NAME_EMITFIRE5",
     "category": "EmitFlame",
     "sub_category": "CraftSpeed_EmitFlame",
-    "assign_id": "Lab_Fire_4",
+    "assign_id": "Lab_Fire_6",
     "require_research_id": "EmitFlame1_4",
     "work_amount": 5000000,
     "materials": [
@@ -1154,6 +1282,38 @@
       {
         "id": "AncientParts3",
         "count": 35
+      }
+    ],
+    "effect_type": "CraftSpeed",
+    "effect_value": 10.0,
+    "effect_work_suitability": "EmitFlame",
+    "effect_item_type": "None",
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
+  },
+  "EmitFlame1_6": {
+    "text_id": "NAME_EMITFIRE19",
+    "category": "EmitFlame",
+    "sub_category": "CraftSpeed_EmitFlame",
+    "assign_id": "Lab_Fire_7",
+    "require_research_id": "EmitFlame1_5",
+    "work_amount": 10000000,
+    "materials": [
+      {
+        "id": "StainlessSteel",
+        "count": 50
+      },
+      {
+        "id": "Thermal_Core",
+        "count": 20
+      },
+      {
+        "id": "PalCrystal_Ex",
+        "count": 20
+      },
+      {
+        "id": "AncientParts3",
+        "count": 70
       }
     ],
     "effect_type": "CraftSpeed",
@@ -1199,7 +1359,7 @@
     "text_id": "NAME_EMITFIRE7",
     "category": "EmitFlame",
     "sub_category": "PalEggHatchingSpeed",
-    "assign_id": "Lab_Fire_2",
+    "assign_id": "Lab_Fire_3",
     "require_research_id": "EmitFlame2",
     "work_amount": 500000,
     "materials": [
@@ -1231,7 +1391,7 @@
     "text_id": "NAME_EMITFIRE8",
     "category": "EmitFlame",
     "sub_category": "PalEggHatchingSpeed",
-    "assign_id": "Lab_Fire_3",
+    "assign_id": "Lab_Fire_4",
     "require_research_id": "EmitFlame2_2",
     "work_amount": 1500000,
     "materials": [
@@ -1263,7 +1423,7 @@
     "text_id": "NAME_EMITFIRE9",
     "category": "EmitFlame",
     "sub_category": "PalEggHatchingSpeed",
-    "assign_id": "Lab_Fire_4",
+    "assign_id": "Lab_Fire_5",
     "require_research_id": "EmitFlame2_3",
     "work_amount": 5000000,
     "materials": [
@@ -1359,7 +1519,7 @@
     "text_id": "NAME_EMITFIRE12",
     "category": "EmitFlame",
     "sub_category": "DefenseRateBaseCampWorker",
-    "assign_id": "Lab_Fire_3",
+    "assign_id": "Lab_Fire_4",
     "require_research_id": "EmitFlame3_2",
     "work_amount": 2500000,
     "materials": [
@@ -1391,7 +1551,7 @@
     "text_id": "NAME_EMITFIRE13",
     "category": "EmitFlame",
     "sub_category": "AttackRateBaseCampWorker",
-    "assign_id": "Lab_Fire_4",
+    "assign_id": "Lab_Fire_6",
     "require_research_id": "EmitFlame3_3",
     "work_amount": 5000000,
     "materials": [
@@ -1419,11 +1579,43 @@
     "is_essential": true,
     "effect_description_text_id_overwrite": null
   },
+  "EmitFlame3_5": {
+    "text_id": "NAME_EMITFIRE20",
+    "category": "EmitFlame",
+    "sub_category": "AttackRateBaseCampWorker",
+    "assign_id": "Lab_Fire_7",
+    "require_research_id": "EmitFlame3_4",
+    "work_amount": 10000000,
+    "materials": [
+      {
+        "id": "StainlessSteel",
+        "count": 50
+      },
+      {
+        "id": "AncientParts2",
+        "count": 10
+      },
+      {
+        "id": "PalCrystal_Ex",
+        "count": 20
+      },
+      {
+        "id": "AncientParts3",
+        "count": 70
+      }
+    ],
+    "effect_type": "DefenseRateBaseCampWorker",
+    "effect_value": 2.0,
+    "effect_work_suitability": "None",
+    "effect_item_type": "None",
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
+  },
   "EmitFlame4": {
     "text_id": "NAME_EMITFIRE14",
     "category": "EmitFlame",
     "sub_category": "ProductExtraItemProbability_Food",
-    "assign_id": "Lab_Fire_1",
+    "assign_id": "Lab_Fire_2",
     "require_research_id": "EmitFlame1_2",
     "work_amount": 200000,
     "materials": [
@@ -1455,7 +1647,7 @@
     "text_id": "NAME_EMITFIRE15",
     "category": "EmitFlame",
     "sub_category": "ProductExtraItemProbability_Ingot",
-    "assign_id": "Lab_Fire_2",
+    "assign_id": "Lab_Fire_3",
     "require_research_id": "EmitFlame4",
     "work_amount": 500000,
     "materials": [
@@ -1487,7 +1679,7 @@
     "text_id": "NAME_EMITFIRE16",
     "category": "EmitFlame",
     "sub_category": "ProductExtraItemProbability_Food",
-    "assign_id": "Lab_Fire_3",
+    "assign_id": "Lab_Fire_4",
     "require_research_id": "EmitFlame4_2",
     "work_amount": 2500000,
     "materials": [
@@ -1519,7 +1711,7 @@
     "text_id": "NAME_EMITFIRE17",
     "category": "EmitFlame",
     "sub_category": "ProductExtraItemProbability_Ingot",
-    "assign_id": "Lab_Fire_4",
+    "assign_id": "Lab_Fire_6",
     "require_research_id": "EmitFlame4_3",
     "work_amount": 5000000,
     "materials": [
@@ -1551,7 +1743,7 @@
     "text_id": "NAME_EMITFIRE18",
     "category": "EmitFlame",
     "sub_category": "TechnologyUnlock",
-    "assign_id": "Lab_Fire_1",
+    "assign_id": "Lab_Fire_2",
     "require_research_id": "EmitFlame1_2",
     "work_amount": 200000,
     "materials": [
@@ -1671,7 +1863,7 @@
     "text_id": "NAME_GEN_ENERGY4",
     "category": "GenerateElectricity",
     "sub_category": "CraftSpeed_GenerateElectricity",
-    "assign_id": "Lab_Gen_Energy_3",
+    "assign_id": "Lab_Gen_Energy_5",
     "require_research_id": "GenerateEnergy5",
     "work_amount": 2000000,
     "materials": [
@@ -1703,7 +1895,7 @@
     "text_id": "NAME_GEN_ENERGY5",
     "category": "GenerateElectricity",
     "sub_category": "CraftSpeed_GenerateElectricity",
-    "assign_id": "Lab_Gen_Energy_4",
+    "assign_id": "Lab_Gen_Energy_6",
     "require_research_id": "GenerateEnergy1_4",
     "work_amount": 5000000,
     "materials": [
@@ -1722,6 +1914,38 @@
       {
         "id": "AncientParts3",
         "count": 35
+      }
+    ],
+    "effect_type": "CraftSpeed",
+    "effect_value": 10.0,
+    "effect_work_suitability": "GenerateElectricity",
+    "effect_item_type": "None",
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
+  },
+  "GenerateEnergy1_6": {
+    "text_id": "NAME_GEN_ENERGY17",
+    "category": "GenerateElectricity",
+    "sub_category": "CraftSpeed_GenerateElectricity",
+    "assign_id": "Lab_Gen_Energy_7",
+    "require_research_id": "GenerateEnergy1_5",
+    "work_amount": 10000000,
+    "materials": [
+      {
+        "id": "Bio_Battery",
+        "count": 50
+      },
+      {
+        "id": "MachineParts2",
+        "count": 50
+      },
+      {
+        "id": "PalCrystal_Ex",
+        "count": 20
+      },
+      {
+        "id": "AncientParts3",
+        "count": 70
       }
     ],
     "effect_type": "CraftSpeed",
@@ -1795,7 +2019,7 @@
     "text_id": "NAME_GEN_ENERGY8",
     "category": "GenerateElectricity",
     "sub_category": "EnergyStorageRate",
-    "assign_id": "Lab_Gen_Energy_3",
+    "assign_id": "Lab_Gen_Energy_4",
     "require_research_id": "GenerateEnergy2_2",
     "work_amount": 2000000,
     "materials": [
@@ -1887,7 +2111,7 @@
     "text_id": "NAME_GEN_ENERGY11",
     "category": "GenerateElectricity",
     "sub_category": "DefenseRateBaseCampWorker",
-    "assign_id": "Lab_Gen_Energy_3",
+    "assign_id": "Lab_Gen_Energy_4",
     "require_research_id": "GenerateEnergy3_2",
     "work_amount": 3000000,
     "materials": [
@@ -1919,7 +2143,7 @@
     "text_id": "NAME_GEN_ENERGY12",
     "category": "GenerateElectricity",
     "sub_category": "AttackRateBaseCampWorker",
-    "assign_id": "Lab_Gen_Energy_4",
+    "assign_id": "Lab_Gen_Energy_6",
     "require_research_id": "GenerateEnergy3_3",
     "work_amount": 5000000,
     "materials": [
@@ -1938,6 +2162,38 @@
       {
         "id": "AncientParts3",
         "count": 50
+      }
+    ],
+    "effect_type": "AttackRateBaseCampWorker",
+    "effect_value": 2.0,
+    "effect_work_suitability": "None",
+    "effect_item_type": "None",
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
+  },
+  "GenerateEnergy3_5": {
+    "text_id": "NAME_GEN_ENERGY18",
+    "category": "GenerateElectricity",
+    "sub_category": "AttackRateBaseCampWorker",
+    "assign_id": "Lab_Gen_Energy_7",
+    "require_research_id": "GenerateEnergy3_4",
+    "work_amount": 10000000,
+    "materials": [
+      {
+        "id": "Bio_Battery",
+        "count": 50
+      },
+      {
+        "id": "AncientParts2",
+        "count": 10
+      },
+      {
+        "id": "PalCrystal_Ex",
+        "count": 20
+      },
+      {
+        "id": "AncientParts3",
+        "count": 70
       }
     ],
     "effect_type": "AttackRateBaseCampWorker",
@@ -2015,7 +2271,7 @@
     "text_id": "NAME_GEN_ENERGY15",
     "category": "GenerateElectricity",
     "sub_category": "ConsumeEnergyRate",
-    "assign_id": "Lab_Gen_Energy_4",
+    "assign_id": "Lab_Gen_Energy_5",
     "require_research_id": "GenerateEnergy4_2",
     "work_amount": 5000000,
     "materials": [
@@ -2135,7 +2391,7 @@
     "text_id": "NAME_HANDCRAFT3",
     "category": "Handcraft",
     "sub_category": "CraftSpeed_Handcraft",
-    "assign_id": "Lab_Handcraft_2",
+    "assign_id": "Lab_Handcraft_3",
     "require_research_id": "Handcraft5",
     "work_amount": 500000,
     "materials": [
@@ -2163,7 +2419,7 @@
     "text_id": "NAME_HANDCRAFT4",
     "category": "Handcraft",
     "sub_category": "CraftSpeed_Handcraft",
-    "assign_id": "Lab_Handcraft_3",
+    "assign_id": "Lab_Handcraft_5",
     "require_research_id": "Handcraft1_3",
     "work_amount": 1500000,
     "materials": [
@@ -2195,7 +2451,7 @@
     "text_id": "NAME_HANDCRAFT5",
     "category": "Handcraft",
     "sub_category": "CraftSpeed_Handcraft",
-    "assign_id": "Lab_Handcraft_4",
+    "assign_id": "Lab_Handcraft_6",
     "require_research_id": "Handcraft1_4",
     "work_amount": 5000000,
     "materials": [
@@ -2214,6 +2470,38 @@
       {
         "id": "AncientParts3",
         "count": 30
+      }
+    ],
+    "effect_type": "CraftSpeed",
+    "effect_value": 10.0,
+    "effect_work_suitability": "Handcraft",
+    "effect_item_type": "None",
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
+  },
+  "Handcraft1_6": {
+    "text_id": "NAME_HANDCRAFT21",
+    "category": "Handcraft",
+    "sub_category": "CraftSpeed_Handcraft",
+    "assign_id": "Lab_Handcraft_7",
+    "require_research_id": "Handcraft1_5",
+    "work_amount": 10000000,
+    "materials": [
+      {
+        "id": "Computer",
+        "count": 30
+      },
+      {
+        "id": "Cloth2",
+        "count": 50
+      },
+      {
+        "id": "PalCrystal_Ex",
+        "count": 20
+      },
+      {
+        "id": "AncientParts3",
+        "count": 70
       }
     ],
     "effect_type": "CraftSpeed",
@@ -2259,7 +2547,7 @@
     "text_id": "NAME_HANDCRAFT7",
     "category": "Handcraft",
     "sub_category": "ProductItemConsumeMaterialNumRate",
-    "assign_id": "Lab_Handcraft_1",
+    "assign_id": "Lab_Handcraft_2",
     "require_research_id": "Handcraft2",
     "work_amount": 150000,
     "materials": [
@@ -2291,7 +2579,7 @@
     "text_id": "NAME_HANDCRAFT8",
     "category": "Handcraft",
     "sub_category": "ProductItemConsumeMaterialNumRate",
-    "assign_id": "Lab_Handcraft_2",
+    "assign_id": "Lab_Handcraft_3",
     "require_research_id": "Handcraft2_2",
     "work_amount": 500000,
     "materials": [
@@ -2323,7 +2611,7 @@
     "text_id": "NAME_HANDCRAFT9",
     "category": "Handcraft",
     "sub_category": "ProductItemConsumeMaterialNumRate",
-    "assign_id": "Lab_Handcraft_3",
+    "assign_id": "Lab_Handcraft_4",
     "require_research_id": "Handcraft2_3",
     "work_amount": 1500000,
     "materials": [
@@ -2355,7 +2643,7 @@
     "text_id": "NAME_HANDCRAFT10",
     "category": "Handcraft",
     "sub_category": "ProductItemConsumeMaterialNumRate",
-    "assign_id": "Lab_Handcraft_3",
+    "assign_id": "Lab_Handcraft_5",
     "require_research_id": "Handcraft2_4",
     "work_amount": 2000000,
     "materials": [
@@ -2387,7 +2675,7 @@
     "text_id": "NAME_HANDCRAFT11",
     "category": "Handcraft",
     "sub_category": "ProductItemConsumeMaterialNumRate",
-    "assign_id": "Lab_Handcraft_4",
+    "assign_id": "Lab_Handcraft_6",
     "require_research_id": "Handcraft2_5",
     "work_amount": 5000000,
     "materials": [
@@ -2483,7 +2771,7 @@
     "text_id": "NAME_HANDCRAFT14",
     "category": "Handcraft",
     "sub_category": "DefenseRateBaseCampWorker",
-    "assign_id": "Lab_Handcraft_3",
+    "assign_id": "Lab_Handcraft_4",
     "require_research_id": "Handcraft3_2",
     "work_amount": 2500000,
     "materials": [
@@ -2515,7 +2803,7 @@
     "text_id": "NAME_HANDCRAFT15",
     "category": "Handcraft",
     "sub_category": "AttackRateBaseCampWorker",
-    "assign_id": "Lab_Handcraft_4",
+    "assign_id": "Lab_Handcraft_6",
     "require_research_id": "Handcraft3_3",
     "work_amount": 5000000,
     "materials": [
@@ -2543,11 +2831,43 @@
     "is_essential": true,
     "effect_description_text_id_overwrite": null
   },
+  "Handcraft3_5": {
+    "text_id": "NAME_HANDCRAFT22",
+    "category": "Handcraft",
+    "sub_category": "AttackRateBaseCampWorker",
+    "assign_id": "Lab_Handcraft_7",
+    "require_research_id": "Handcraft3_4",
+    "work_amount": 10000000,
+    "materials": [
+      {
+        "id": "Computer",
+        "count": 30
+      },
+      {
+        "id": "AncientParts2",
+        "count": 10
+      },
+      {
+        "id": "PalCrystal_Ex",
+        "count": 20
+      },
+      {
+        "id": "AncientParts3",
+        "count": 70
+      }
+    ],
+    "effect_type": "AttackRateBaseCampWorker",
+    "effect_value": 2.0,
+    "effect_work_suitability": "None",
+    "effect_item_type": "None",
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
+  },
   "Handcraft4": {
     "text_id": "NAME_HANDCRAFT16",
     "category": "Handcraft",
     "sub_category": "ProductExtraItemProbability_Sphere",
-    "assign_id": "Lab_Handcraft_1",
+    "assign_id": "Lab_Handcraft_2",
     "require_research_id": "Handcraft1_2",
     "work_amount": 200000,
     "materials": [
@@ -2579,7 +2899,7 @@
     "text_id": "NAME_HANDCRAFT17",
     "category": "Handcraft",
     "sub_category": "ProductExtraItemProbability_Bullet",
-    "assign_id": "Lab_Handcraft_2",
+    "assign_id": "Lab_Handcraft_3",
     "require_research_id": "Handcraft4",
     "work_amount": 500000,
     "materials": [
@@ -2611,7 +2931,7 @@
     "text_id": "NAME_HANDCRAFT18",
     "category": "Handcraft",
     "sub_category": "ProductExtraItemProbability_Sphere",
-    "assign_id": "Lab_Handcraft_3",
+    "assign_id": "Lab_Handcraft_4",
     "require_research_id": "Handcraft4_2",
     "work_amount": 2500000,
     "materials": [
@@ -2643,7 +2963,7 @@
     "text_id": "NAME_HANDCRAFT19",
     "category": "Handcraft",
     "sub_category": "ProductExtraItemProbability_Bullet",
-    "assign_id": "Lab_Handcraft_4",
+    "assign_id": "Lab_Handcraft_5",
     "require_research_id": "Handcraft4_3",
     "work_amount": 5000000,
     "materials": [
@@ -2675,7 +2995,7 @@
     "text_id": "NAME_HANDCRAFT20",
     "category": "Handcraft",
     "sub_category": "TechnologyUnlock",
-    "assign_id": "Lab_Handcraft_1",
+    "assign_id": "Lab_Handcraft_2",
     "require_research_id": "Handcraft1_2",
     "work_amount": 200000,
     "materials": [
@@ -2759,7 +3079,7 @@
     "text_id": "NAME_MEDICINE3",
     "category": "ProductMedicine",
     "sub_category": "CraftSpeed_ProductMedicine",
-    "assign_id": "Lab_Medicine_2",
+    "assign_id": "Lab_Medicine_3",
     "require_research_id": "Medicine4",
     "work_amount": 500000,
     "materials": [
@@ -2791,7 +3111,7 @@
     "text_id": "NAME_MEDICINE4",
     "category": "ProductMedicine",
     "sub_category": "CraftSpeed_ProductMedicine",
-    "assign_id": "Lab_Medicine_3",
+    "assign_id": "Lab_Medicine_5",
     "require_research_id": "Medicine1_3",
     "work_amount": 1500000,
     "materials": [
@@ -2823,7 +3143,7 @@
     "text_id": "NAME_MEDICINE5",
     "category": "ProductMedicine",
     "sub_category": "CraftSpeed_ProductMedicine",
-    "assign_id": "Lab_Medicine_4",
+    "assign_id": "Lab_Medicine_6",
     "require_research_id": "Medicine1_4",
     "work_amount": 5000000,
     "materials": [
@@ -2842,6 +3162,38 @@
       {
         "id": "AncientParts3",
         "count": 35
+      }
+    ],
+    "effect_type": "CraftSpeed",
+    "effect_value": 10.0,
+    "effect_work_suitability": "ProductMedicine",
+    "effect_item_type": "None",
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
+  },
+  "Medicine1_6": {
+    "text_id": "NAME_MEDICINE14",
+    "category": "ProductMedicine",
+    "sub_category": "CraftSpeed_ProductMedicine",
+    "assign_id": "Lab_Medicine_7",
+    "require_research_id": "Medicine1_5",
+    "work_amount": 10000000,
+    "materials": [
+      {
+        "id": "Corrosive_Solvent",
+        "count": 100
+      },
+      {
+        "id": "LuxuryMedicines",
+        "count": 60
+      },
+      {
+        "id": "PalCrystal_Ex",
+        "count": 20
+      },
+      {
+        "id": "AncientParts3",
+        "count": 70
       }
     ],
     "effect_type": "CraftSpeed",
@@ -2915,7 +3267,7 @@
     "text_id": "NAME_MEDICINE8",
     "category": "ProductMedicine",
     "sub_category": "DefenseRateBaseCampWorker",
-    "assign_id": "Lab_Medicine_3",
+    "assign_id": "Lab_Medicine_4",
     "require_research_id": "Medicine2_2",
     "work_amount": 1500000,
     "materials": [
@@ -2947,7 +3299,7 @@
     "text_id": "NAME_MEDICINE9",
     "category": "ProductMedicine",
     "sub_category": "AttackRateBaseCampWorker",
-    "assign_id": "Lab_Medicine_4",
+    "assign_id": "Lab_Medicine_6",
     "require_research_id": "Medicine2_3",
     "work_amount": 5000000,
     "materials": [
@@ -2975,11 +3327,43 @@
     "is_essential": false,
     "effect_description_text_id_overwrite": null
   },
+  "Medicine2_5": {
+    "text_id": "NAME_MEDICINE15",
+    "category": "ProductMedicine",
+    "sub_category": "AttackRateBaseCampWorker",
+    "assign_id": "Lab_Medicine_7",
+    "require_research_id": "Medicine2_4",
+    "work_amount": 10000000,
+    "materials": [
+      {
+        "id": "Corrosive_Solvent",
+        "count": 100
+      },
+      {
+        "id": "AncientParts2",
+        "count": 10
+      },
+      {
+        "id": "PalCrystal_Ex",
+        "count": 20
+      },
+      {
+        "id": "AncientParts3",
+        "count": 70
+      }
+    ],
+    "effect_type": "AttackRateBaseCampWorker",
+    "effect_value": 2.0,
+    "effect_work_suitability": "None",
+    "effect_item_type": "None",
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
+  },
   "Medicine3": {
     "text_id": "NAME_MEDICINE10",
     "category": "ProductMedicine",
     "sub_category": "ProductItemConsumeMaterialNumRate",
-    "assign_id": "Lab_Medicine_2",
+    "assign_id": "Lab_Medicine_3",
     "require_research_id": "Medicine1_2",
     "work_amount": 500000,
     "materials": [
@@ -3011,7 +3395,7 @@
     "text_id": "NAME_MEDICINE11",
     "category": "ProductMedicine",
     "sub_category": "ProductItemConsumeMaterialNumRate",
-    "assign_id": "Lab_Medicine_3",
+    "assign_id": "Lab_Medicine_4",
     "require_research_id": "Medicine3",
     "work_amount": 1500000,
     "materials": [
@@ -3043,7 +3427,7 @@
     "text_id": "NAME_MEDICINE12",
     "category": "ProductMedicine",
     "sub_category": "ProductItemConsumeMaterialNumRate",
-    "assign_id": "Lab_Medicine_4",
+    "assign_id": "Lab_Medicine_5",
     "require_research_id": "Medicine3_2",
     "work_amount": 5000000,
     "materials": [
@@ -3159,7 +3543,7 @@
     "text_id": "NAME_MINING3",
     "category": "Mining",
     "sub_category": "CraftSpeed_Mining",
-    "assign_id": "Lab_Mining_2",
+    "assign_id": "Lab_Mining_3",
     "require_research_id": "Mining5",
     "work_amount": 300000,
     "materials": [
@@ -3191,7 +3575,7 @@
     "text_id": "NAME_MINING4",
     "category": "Mining",
     "sub_category": "CraftSpeed_Mining",
-    "assign_id": "Lab_Mining_3",
+    "assign_id": "Lab_Mining_5",
     "require_research_id": "Mining1_3",
     "work_amount": 750000,
     "materials": [
@@ -3223,7 +3607,7 @@
     "text_id": "NAME_MINING5",
     "category": "Mining",
     "sub_category": "CraftSpeed_Mining",
-    "assign_id": "Lab_Mining_4",
+    "assign_id": "Lab_Mining_6",
     "require_research_id": "Mining1_4",
     "work_amount": 1500000,
     "materials": [
@@ -3242,6 +3626,38 @@
       {
         "id": "AncientParts3",
         "count": 35
+      }
+    ],
+    "effect_type": "CraftSpeed",
+    "effect_value": 10.0,
+    "effect_work_suitability": "Mining",
+    "effect_item_type": "None",
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
+  },
+  "Mining1_6": {
+    "text_id": "NAME_MINING18",
+    "category": "Mining",
+    "sub_category": "CraftSpeed_Mining",
+    "assign_id": "Lab_Mining_7",
+    "require_research_id": "Mining1_5",
+    "work_amount": 3000000,
+    "materials": [
+      {
+        "id": "StainlessSteel",
+        "count": 50
+      },
+      {
+        "id": "RainbowCrystal",
+        "count": 100
+      },
+      {
+        "id": "PalCrystal_Ex",
+        "count": 20
+      },
+      {
+        "id": "AncientParts3",
+        "count": 70
       }
     ],
     "effect_type": "CraftSpeed",
@@ -3443,7 +3859,7 @@
     "text_id": "NAME_MINING12",
     "category": "Mining",
     "sub_category": "DefenseRateBaseCampWorker",
-    "assign_id": "Lab_Mining_3",
+    "assign_id": "Lab_Mining_4",
     "require_research_id": "Mining3_2",
     "work_amount": 1000000,
     "materials": [
@@ -3475,7 +3891,7 @@
     "text_id": "NAME_MINING13",
     "category": "Mining",
     "sub_category": "AttackRateBaseCampWorker",
-    "assign_id": "Lab_Mining_4",
+    "assign_id": "Lab_Mining_6",
     "require_research_id": "Mining3_3",
     "work_amount": 1500000,
     "materials": [
@@ -3503,11 +3919,43 @@
     "is_essential": false,
     "effect_description_text_id_overwrite": null
   },
+  "Mining3_5": {
+    "text_id": "NAME_MINING19",
+    "category": "Mining",
+    "sub_category": "AttackRateBaseCampWorker",
+    "assign_id": "Lab_Mining_7",
+    "require_research_id": "Mining3_4",
+    "work_amount": 3000000,
+    "materials": [
+      {
+        "id": "StainlessSteel",
+        "count": 50
+      },
+      {
+        "id": "AncientParts2",
+        "count": 10
+      },
+      {
+        "id": "PalCrystal_Ex",
+        "count": 20
+      },
+      {
+        "id": "AncientParts3",
+        "count": 70
+      }
+    ],
+    "effect_type": "AttackRateBaseCampWorker",
+    "effect_value": 2.0,
+    "effect_work_suitability": "None",
+    "effect_item_type": "None",
+    "is_essential": false,
+    "effect_description_text_id_overwrite": null
+  },
   "Mining4": {
     "text_id": "NAME_MINING14",
     "category": "Mining",
     "sub_category": "OilExtractionSpeedRate",
-    "assign_id": "Lab_Mining_3",
+    "assign_id": "Lab_Mining_4",
     "require_research_id": "Mining1_3",
     "work_amount": 750000,
     "materials": [
@@ -3539,7 +3987,7 @@
     "text_id": "NAME_MINING15",
     "category": "Mining",
     "sub_category": "OilExtractionSpeedRate",
-    "assign_id": "Lab_Mining_3",
+    "assign_id": "Lab_Mining_5",
     "require_research_id": "Mining4",
     "work_amount": 1000000,
     "materials": [
@@ -3571,7 +4019,7 @@
     "text_id": "NAME_MINING16",
     "category": "Mining",
     "sub_category": "OilExtractionSpeedRate",
-    "assign_id": "Lab_Mining_4",
+    "assign_id": "Lab_Mining_6",
     "require_research_id": "Mining4_2",
     "work_amount": 1500000,
     "materials": [
@@ -3691,7 +4139,7 @@
     "text_id": "NAME_SEEDING3",
     "category": "Seeding",
     "sub_category": "CraftSpeed_Seeding",
-    "assign_id": "Lab_Seeding_2",
+    "assign_id": "Lab_Seeding_4",
     "require_research_id": "Seeding5",
     "work_amount": 300000,
     "materials": [
@@ -3723,7 +4171,7 @@
     "text_id": "NAME_SEEDING4",
     "category": "Seeding",
     "sub_category": "CraftSpeed_Seeding",
-    "assign_id": "Lab_Seeding_3",
+    "assign_id": "Lab_Seeding_5",
     "require_research_id": "Seeding1_3",
     "work_amount": 750000,
     "materials": [
@@ -3755,7 +4203,7 @@
     "text_id": "NAME_SEEDING5",
     "category": "Seeding",
     "sub_category": "CraftSpeed_Seeding",
-    "assign_id": "Lab_Seeding_4",
+    "assign_id": "Lab_Seeding_6",
     "require_research_id": "Seeding1_4",
     "work_amount": 1500000,
     "materials": [
@@ -3774,6 +4222,38 @@
       {
         "id": "AncientParts3",
         "count": 35
+      }
+    ],
+    "effect_type": "CraftSpeed",
+    "effect_value": 10.0,
+    "effect_work_suitability": "Seeding",
+    "effect_item_type": "None",
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
+  },
+  "Seeding1_6": {
+    "text_id": "NAME_SEEDING18",
+    "category": "Seeding",
+    "sub_category": "CraftSpeed_Seeding",
+    "assign_id": "Lab_Seeding_7",
+    "require_research_id": "Seeding1_5",
+    "work_amount": 3000000,
+    "materials": [
+      {
+        "id": "Onion",
+        "count": 150
+      },
+      {
+        "id": "AncientParts2",
+        "count": 5
+      },
+      {
+        "id": "PalCrystal_Ex",
+        "count": 20
+      },
+      {
+        "id": "AncientParts3",
+        "count": 70
       }
     ],
     "effect_type": "CraftSpeed",
@@ -3903,7 +4383,7 @@
     "text_id": "NAME_SEEDING10",
     "category": "Seeding",
     "sub_category": "FarmCropHarvestNumRate",
-    "assign_id": "Lab_Seeding_3",
+    "assign_id": "Lab_Seeding_5",
     "require_research_id": "Seeding2_2",
     "work_amount": 750000,
     "materials": [
@@ -3935,7 +4415,7 @@
     "text_id": "NAME_SEEDING11",
     "category": "Seeding",
     "sub_category": "FarmCropHarvestNumRate",
-    "assign_id": "Lab_Seeding_4",
+    "assign_id": "Lab_Seeding_6",
     "require_research_id": "Seeding2_5",
     "work_amount": 1500000,
     "materials": [
@@ -4023,7 +4503,7 @@
     "text_id": "NAME_SEEDING14",
     "category": "Seeding",
     "sub_category": "DefenseRateBaseCampWorker",
-    "assign_id": "Lab_Seeding_3",
+    "assign_id": "Lab_Seeding_4",
     "require_research_id": "Seeding3_2",
     "work_amount": 1000000,
     "materials": [
@@ -4055,7 +4535,7 @@
     "text_id": "NAME_SEEDING15",
     "category": "Seeding",
     "sub_category": "AttackRateBaseCampWorker",
-    "assign_id": "Lab_Seeding_4",
+    "assign_id": "Lab_Seeding_6",
     "require_research_id": "Seeding3_3",
     "work_amount": 1500000,
     "materials": [
@@ -4083,11 +4563,43 @@
     "is_essential": true,
     "effect_description_text_id_overwrite": null
   },
+  "Seeding3_5": {
+    "text_id": "NAME_SEEDING19",
+    "category": "Seeding",
+    "sub_category": "AttackRateBaseCampWorker",
+    "assign_id": "Lab_Seeding_7",
+    "require_research_id": "Seeding3_4",
+    "work_amount": 3000000,
+    "materials": [
+      {
+        "id": "Carrot",
+        "count": 300
+      },
+      {
+        "id": "AncientParts2",
+        "count": 10
+      },
+      {
+        "id": "PalCrystal_Ex",
+        "count": 10
+      },
+      {
+        "id": "AncientParts3",
+        "count": 70
+      }
+    ],
+    "effect_type": "DefenseRateBaseCampWorker",
+    "effect_value": 2.0,
+    "effect_work_suitability": "None",
+    "effect_item_type": "None",
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
+  },
   "Seeding4": {
     "text_id": "NAME_SEEDING16",
     "category": "Seeding",
     "sub_category": "TechnologyUnlock",
-    "assign_id": "Lab_Seeding_1",
+    "assign_id": "Lab_Seeding_2",
     "require_research_id": "Seeding1_2",
     "work_amount": 150000,
     "materials": [
@@ -4119,7 +4631,7 @@
     "text_id": "NAME_SEEDING17",
     "category": "Seeding",
     "sub_category": "TechnologyUnlock",
-    "assign_id": "Lab_Seeding_2",
+    "assign_id": "Lab_Seeding_3",
     "require_research_id": "Seeding4",
     "work_amount": 200000,
     "materials": [
@@ -4203,7 +4715,7 @@
     "text_id": "NAME_WATERING3",
     "category": "Watering",
     "sub_category": "CraftSpeed_Watering",
-    "assign_id": "Lab_Water_2",
+    "assign_id": "Lab_Water_3",
     "require_research_id": "Watering5",
     "work_amount": 300000,
     "materials": [
@@ -4235,7 +4747,7 @@
     "text_id": "NAME_WATERING4",
     "category": "Watering",
     "sub_category": "CraftSpeed_Watering",
-    "assign_id": "Lab_Water_3",
+    "assign_id": "Lab_Water_5",
     "require_research_id": "Watering1_3",
     "work_amount": 750000,
     "materials": [
@@ -4267,7 +4779,7 @@
     "text_id": "NAME_WATERING5",
     "category": "Watering",
     "sub_category": "CraftSpeed_Watering",
-    "assign_id": "Lab_Water_4",
+    "assign_id": "Lab_Water_6",
     "require_research_id": "Watering1_4",
     "work_amount": 1500000,
     "materials": [
@@ -4286,6 +4798,38 @@
       {
         "id": "AncientParts3",
         "count": 35
+      }
+    ],
+    "effect_type": "CraftSpeed",
+    "effect_value": 10.0,
+    "effect_work_suitability": "Watering",
+    "effect_item_type": "None",
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
+  },
+  "Watering1_6": {
+    "text_id": "NAME_WATERING17",
+    "category": "Watering",
+    "sub_category": "CraftSpeed_Watering",
+    "assign_id": "Lab_Water_7",
+    "require_research_id": "Watering1_5",
+    "work_amount": 3000000,
+    "materials": [
+      {
+        "id": "Bio_Coolant",
+        "count": 50
+      },
+      {
+        "id": "PalOil",
+        "count": 130
+      },
+      {
+        "id": "PalCrystal_Ex",
+        "count": 20
+      },
+      {
+        "id": "AncientParts3",
+        "count": 70
       }
     ],
     "effect_type": "CraftSpeed",
@@ -4483,7 +5027,7 @@
     "text_id": "NAME_WATERING12",
     "category": "Watering",
     "sub_category": "DefenseRateBaseCampWorker",
-    "assign_id": "Lab_Water_3",
+    "assign_id": "Lab_Water_4",
     "require_research_id": "Watering3_2",
     "work_amount": 1000000,
     "materials": [
@@ -4515,7 +5059,7 @@
     "text_id": "NAME_WATERING13",
     "category": "Watering",
     "sub_category": "AttackRateBaseCampWorker",
-    "assign_id": "Lab_Water_4",
+    "assign_id": "Lab_Water_6",
     "require_research_id": "Watering3_3",
     "work_amount": 1500000,
     "materials": [
@@ -4543,11 +5087,43 @@
     "is_essential": true,
     "effect_description_text_id_overwrite": null
   },
+  "Watering3_5": {
+    "text_id": "NAME_WATERING18",
+    "category": "Watering",
+    "sub_category": "AttackRateBaseCampWorker",
+    "assign_id": "Lab_Water_7",
+    "require_research_id": "Watering3_4",
+    "work_amount": 3000000,
+    "materials": [
+      {
+        "id": "Bio_Coolant",
+        "count": 50
+      },
+      {
+        "id": "AncientParts2",
+        "count": 10
+      },
+      {
+        "id": "PalCrystal_Ex",
+        "count": 20
+      },
+      {
+        "id": "AncientParts3",
+        "count": 70
+      }
+    ],
+    "effect_type": "AttackRateBaseCampWorker",
+    "effect_value": 2.0,
+    "effect_work_suitability": "None",
+    "effect_item_type": "None",
+    "is_essential": true,
+    "effect_description_text_id_overwrite": null
+  },
   "Watering4": {
     "text_id": "NAME_WATERING14",
     "category": "Watering",
     "sub_category": "ProductExtraItemProbability_Ore",
-    "assign_id": "Lab_Water_2",
+    "assign_id": "Lab_Water_3",
     "require_research_id": "Watering1_2",
     "work_amount": 500000,
     "materials": [
@@ -4575,7 +5151,7 @@
     "text_id": "NAME_WATERING15",
     "category": "Watering",
     "sub_category": "ProductExtraItemProbability_Ore",
-    "assign_id": "Lab_Water_4",
+    "assign_id": "Lab_Water_5",
     "require_research_id": "Watering4",
     "work_amount": 1000000,
     "materials": [
@@ -4607,7 +5183,7 @@
     "text_id": "NAME_WATERING16",
     "category": "Watering",
     "sub_category": "TechnologyUnlock",
-    "assign_id": "Lab_Water_1",
+    "assign_id": "Lab_Water_2",
     "require_research_id": "Watering1_2",
     "work_amount": 150000,
     "materials": [

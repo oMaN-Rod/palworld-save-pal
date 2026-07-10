@@ -4,19 +4,23 @@
     "description": null
   },
   "Cool1_2": {
-    "localized_name": "Cooling Task Lv1",
+    "localized_name": "Cooling Lv1",
     "description": null
   },
   "Cool1_3": {
-    "localized_name": "Cooling Task Lv2",
+    "localized_name": "Cooling Lv2",
     "description": null
   },
   "Cool1_4": {
-    "localized_name": "Cooling Task Lv3",
+    "localized_name": "Cooling Lv3",
     "description": null
   },
   "Cool1_5": {
-    "localized_name": "Cooling Task Lv4",
+    "localized_name": "Cooling Lv4",
+    "description": null
+  },
+  "Cool1_6": {
+    "localized_name": "Cooling Lv5",
     "description": null
   },
   "Cool2": {
@@ -36,11 +40,11 @@
     "description": null
   },
   "Cool3": {
-    "localized_name": "Cooling Research Lv1",
+    "localized_name": "Cooling Research Tips Lv1",
     "description": null
   },
   "Cool3_2": {
-    "localized_name": "Cooling Research Lv2",
+    "localized_name": "Cooling Research Tips Lv2",
     "description": null
   },
   "Cool3_3": {
@@ -49,6 +53,10 @@
   },
   "Cool3_4": {
     "localized_name": "Pals at Base Enhancement Lv2",
+    "description": null
+  },
+  "Cool3_5": {
+    "localized_name": "Pals at Base Enhancement Lv3",
     "description": null
   },
   "Cool4": {
@@ -68,23 +76,27 @@
     "description": null
   },
   "Deforest1": {
-    "localized_name": "Lumbering Task Lv1",
+    "localized_name": "Lumbering Lv1",
     "description": null
   },
   "Deforest1_2": {
-    "localized_name": "Lumbering Task Lv2",
+    "localized_name": "Lumbering Lv2",
     "description": null
   },
   "Deforest1_3": {
-    "localized_name": "Lumbering Task Lv3",
+    "localized_name": "Lumbering Lv3",
     "description": null
   },
   "Deforest1_4": {
-    "localized_name": "Lumbering Task Lv4",
+    "localized_name": "Lumbering Lv4",
     "description": null
   },
   "Deforest1_5": {
-    "localized_name": "Lumbering Task Lv5",
+    "localized_name": "Lumbering Lv5",
+    "description": null
+  },
+  "Deforest1_6": {
+    "localized_name": "Lumbering Lv6",
     "description": null
   },
   "Deforest2": {
@@ -120,11 +132,15 @@
     "description": null
   },
   "Deforest3_3": {
-    "localized_name": "Pals at Base Enhancement Lv1",
+    "localized_name": "Base Pal Enhancement Lv1",
     "description": null
   },
   "Deforest3_4": {
-    "localized_name": "Pals at Base Enhancement Lv2",
+    "localized_name": "Base Pal Enhancement Lv2",
+    "description": null
+  },
+  "Deforest3_5": {
+    "localized_name": "Base Pal Enhancement Lv3",
     "description": null
   },
   "Deforest4": {
@@ -132,23 +148,27 @@
     "description": null
   },
   "EmitFlame1": {
-    "localized_name": "Kindling Task Lv1",
+    "localized_name": "Kindling Lv1",
     "description": null
   },
   "EmitFlame1_2": {
-    "localized_name": "Kindling Task Lv2",
+    "localized_name": "Kindling Lv2",
     "description": null
   },
   "EmitFlame1_3": {
-    "localized_name": "Kindling Task Lv3",
+    "localized_name": "Kindling Lv3",
     "description": null
   },
   "EmitFlame1_4": {
-    "localized_name": "Kindling Task Lv4",
+    "localized_name": "Kindling Lv4",
     "description": null
   },
   "EmitFlame1_5": {
-    "localized_name": "Kindling Task Lv5",
+    "localized_name": "Kindling Lv5",
+    "description": null
+  },
+  "EmitFlame1_6": {
+    "localized_name": "Kindling Lv6",
     "description": null
   },
   "EmitFlame2": {
@@ -168,19 +188,23 @@
     "description": null
   },
   "EmitFlame3": {
-    "localized_name": "Tips for Kindling Research Lv1",
+    "localized_name": "Kindling Research Tips Lv1",
     "description": null
   },
   "EmitFlame3_2": {
-    "localized_name": "Tips for Kindling Research Lv2",
+    "localized_name": "Kindling Research Tips Lv2",
     "description": null
   },
   "EmitFlame3_3": {
-    "localized_name": "Pals at Base Enhancement Lv1",
+    "localized_name": "Base Pal Enhancement Lv1",
     "description": null
   },
   "EmitFlame3_4": {
-    "localized_name": "Pals at Base Enhancement Lv2",
+    "localized_name": "Base Pal Enhancement Lv2",
+    "description": null
+  },
+  "EmitFlame3_5": {
+    "localized_name": "Base Pal Enhancement Lv3",
     "description": null
   },
   "EmitFlame4": {
@@ -204,23 +228,27 @@
     "description": null
   },
   "GenerateEnergy1": {
-    "localized_name": "Generating Electricity Task Lv1",
+    "localized_name": "Generating Electricity Lv1",
     "description": null
   },
   "GenerateEnergy1_2": {
-    "localized_name": "Generating Electricity Task Lv2",
+    "localized_name": "Generating Electricity Lv2",
     "description": null
   },
   "GenerateEnergy1_3": {
-    "localized_name": "Generating Electricity Task Lv3",
+    "localized_name": "Generating Electricity Lv3",
     "description": null
   },
   "GenerateEnergy1_4": {
-    "localized_name": "Generating Electricity Task Lv4",
+    "localized_name": "Generating Electricity Lv4",
     "description": null
   },
   "GenerateEnergy1_5": {
-    "localized_name": "Generating Electricity Task Lv5",
+    "localized_name": "Generating Electricity Lv5",
+    "description": null
+  },
+  "GenerateEnergy1_6": {
+    "localized_name": "Generating Electricity Lv6",
     "description": null
   },
   "GenerateEnergy2": {
@@ -236,19 +264,23 @@
     "description": null
   },
   "GenerateEnergy3": {
-    "localized_name": "Tips for Generating Electricity Research Lv1",
+    "localized_name": "Generating Electricity Research Tips Lv1",
     "description": null
   },
   "GenerateEnergy3_2": {
-    "localized_name": "Tips for Generating Electricity Research Lv2",
+    "localized_name": "Generating Electricity Research Tips Lv2",
     "description": null
   },
   "GenerateEnergy3_3": {
-    "localized_name": "Pals at Base Enhancement Lv1",
+    "localized_name": "Base Pal Enhancement Lv1",
     "description": null
   },
   "GenerateEnergy3_4": {
-    "localized_name": "Pals at Base Enhancement Lv2",
+    "localized_name": "Base Pal Enhancement Lv2",
+    "description": null
+  },
+  "GenerateEnergy3_5": {
+    "localized_name": "Base Pal Enhancement Lv3",
     "description": null
   },
   "GenerateEnergy4": {
@@ -287,8 +319,12 @@
     "localized_name": "Handiwork Speed Lv5",
     "description": null
   },
+  "Handcraft1_6": {
+    "localized_name": "Handiwork Speed Lv6",
+    "description": null
+  },
   "Handcraft2": {
-    "localized_name": "Armor Crafting Cost-Saving Technique Lv1",
+    "localized_name": "Armor Crafting Optimization Lv1",
     "description": null
   },
   "Handcraft2_2": {
@@ -296,35 +332,39 @@
     "description": null
   },
   "Handcraft2_3": {
-    "localized_name": "Weapon Crafting Cost-Saving Technique Lv1",
+    "localized_name": "Weapon Crafting Optimization Technique Lv1",
     "description": null
   },
   "Handcraft2_4": {
-    "localized_name": "Armor Crafting Cost-Saving Technique Lv2",
+    "localized_name": "Armor Crafting Optimization Technique Lv2",
     "description": null
   },
   "Handcraft2_5": {
-    "localized_name": "Pal Gear Crafting Cost-Saving Technique Lv2",
+    "localized_name": "Pal Gear Crafting Optimization Technique Lv2",
     "description": null
   },
   "Handcraft2_6": {
-    "localized_name": "Weapon Crafting Cost-Saving Technique Lv2",
+    "localized_name": "Weapon Crafting Optimization Technique Lv2",
     "description": null
   },
   "Handcraft3": {
-    "localized_name": "Tips for Handiwork Research Lv1",
+    "localized_name": "Handiwork Research Tips Lv1",
     "description": null
   },
   "Handcraft3_2": {
-    "localized_name": "Tips for Handiwork Research Lv2",
+    "localized_name": "Handiwork Research Tips Lv2",
     "description": null
   },
   "Handcraft3_3": {
-    "localized_name": "Pals at Base Enhancement Lv1",
+    "localized_name": "Base Pal Enhancement Lv1",
     "description": null
   },
   "Handcraft3_4": {
-    "localized_name": "Pals at Base Enhancement Lv2",
+    "localized_name": "Base Pal Enhancement Lv2",
+    "description": null
+  },
+  "Handcraft3_5": {
+    "localized_name": "Base Pal Enhancement Lv3",
     "description": null
   },
   "Handcraft4": {
@@ -367,12 +407,16 @@
     "localized_name": "Medicine Production Task Lv5",
     "description": null
   },
+  "Medicine1_6": {
+    "localized_name": "Medicine Production Task Lv6",
+    "description": null
+  },
   "Medicine2": {
-    "localized_name": "Medicine Production Research Lv1",
+    "localized_name": "Medicine Production Research Tips Lv1",
     "description": null
   },
   "Medicine2_2": {
-    "localized_name": "Medicine Production Research Lv2",
+    "localized_name": "Medicine Production Research Tips Lv2",
     "description": null
   },
   "Medicine2_3": {
@@ -381,6 +425,10 @@
   },
   "Medicine2_4": {
     "localized_name": "Pals at Base Enhancement Lv2",
+    "description": null
+  },
+  "Medicine2_5": {
+    "localized_name": "Pals at Base Enhancement Lv3",
     "description": null
   },
   "Medicine3": {
@@ -400,23 +448,27 @@
     "description": null
   },
   "Mining1": {
-    "localized_name": "Mining Task Lv1",
+    "localized_name": "Mining Lv1",
     "description": null
   },
   "Mining1_2": {
-    "localized_name": "Mining Task Lv2",
+    "localized_name": "Mining Lv2",
     "description": null
   },
   "Mining1_3": {
-    "localized_name": "Mining Task Lv3",
+    "localized_name": "Mining Lv3",
     "description": null
   },
   "Mining1_4": {
-    "localized_name": "Mining Task Lv4",
+    "localized_name": "Mining Lv4",
     "description": null
   },
   "Mining1_5": {
-    "localized_name": "Mining Task Lv5",
+    "localized_name": "Mining Lv5",
+    "description": null
+  },
+  "Mining1_6": {
+    "localized_name": "Mining Lv6",
     "description": null
   },
   "Mining2": {
@@ -444,11 +496,15 @@
     "description": null
   },
   "Mining3_3": {
-    "localized_name": "Pals at Base Enhancement Lv1",
+    "localized_name": "Base Pal Enhancement Lv1",
     "description": null
   },
   "Mining3_4": {
-    "localized_name": "Pals at Base Enhancement Lv2",
+    "localized_name": "Base Pal Enhancement Lv2",
+    "description": null
+  },
+  "Mining3_5": {
+    "localized_name": "Base Pal Enhancement Lv3",
     "description": null
   },
   "Mining4": {
@@ -468,23 +524,27 @@
     "description": null
   },
   "Seeding1": {
-    "localized_name": "Planting Task Lv1",
+    "localized_name": "Planting Lv1",
     "description": null
   },
   "Seeding1_2": {
-    "localized_name": "Planting Task Lv2",
+    "localized_name": "Planting Lv2",
     "description": null
   },
   "Seeding1_3": {
-    "localized_name": "Planting Task Lv3",
+    "localized_name": "Planting Lv3",
     "description": null
   },
   "Seeding1_4": {
-    "localized_name": "Planting Task Lv4",
+    "localized_name": "Planting Lv4",
     "description": null
   },
   "Seeding1_5": {
-    "localized_name": "Planting Task Lv5",
+    "localized_name": "Planting Lv5",
+    "description": null
+  },
+  "Seeding1_6": {
+    "localized_name": "Planting Lv6",
     "description": null
   },
   "Seeding2": {
@@ -520,11 +580,15 @@
     "description": null
   },
   "Seeding3_3": {
-    "localized_name": "Pals at Base Enhancement Lv1",
+    "localized_name": "Base Pal Enhancement Lv1",
     "description": null
   },
   "Seeding3_4": {
-    "localized_name": "Pals at Base Enhancement Lv2",
+    "localized_name": "Base Pal Enhancement Lv2",
+    "description": null
+  },
+  "Seeding3_5": {
+    "localized_name": "Base Pal Enhancement Lv3",
     "description": null
   },
   "Seeding4": {
@@ -536,23 +600,27 @@
     "description": null
   },
   "Watering1": {
-    "localized_name": "Watering Task Lv1",
+    "localized_name": "Watering Lv1",
     "description": null
   },
   "Watering1_2": {
-    "localized_name": "Watering Task Lv2",
+    "localized_name": "Watering Lv2",
     "description": null
   },
   "Watering1_3": {
-    "localized_name": "Watering Task Lv3",
+    "localized_name": "Watering Lv3",
     "description": null
   },
   "Watering1_4": {
-    "localized_name": "Watering Task Lv4",
+    "localized_name": "Watering Lv4",
     "description": null
   },
   "Watering1_5": {
-    "localized_name": "Watering Task Lv5",
+    "localized_name": "Watering Lv5",
+    "description": null
+  },
+  "Watering1_6": {
+    "localized_name": "Watering Lv6",
     "description": null
   },
   "Watering2": {
@@ -572,19 +640,23 @@
     "description": null
   },
   "Watering3": {
-    "localized_name": "Tips for Watering Research Lv1",
+    "localized_name": "Watering Research Tips Lv1",
     "description": null
   },
   "Watering3_2": {
-    "localized_name": "Tips for Watering Research Lv2",
+    "localized_name": "Watering Research Tips Lv2",
     "description": null
   },
   "Watering3_3": {
-    "localized_name": "Pals at Base Enhancement Lv1",
+    "localized_name": "Base Pal Enhancement Lv1",
     "description": null
   },
   "Watering3_4": {
-    "localized_name": "Pals at Base Enhancement Lv2",
+    "localized_name": "Base Pal Enhancement Lv2",
+    "description": null
+  },
+  "Watering3_5": {
+    "localized_name": "Base Pal Enhancement Lv3",
     "description": null
   },
   "Watering4": {

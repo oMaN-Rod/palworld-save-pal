@@ -19,6 +19,10 @@
     "localized_name": "Soğutma Görevi Sv.4",
     "description": null
   },
+  "Cool1_6": {
+    "localized_name": "Soğutma Görevi Sv.5",
+    "description": null
+  },
   "Cool2": {
     "localized_name": "Kuluçka Hızlandırma Sv.1",
     "description": null
@@ -36,11 +40,11 @@
     "description": null
   },
   "Cool3": {
-    "localized_name": "Soğutma Araştırması Sv.1",
+    "localized_name": "Soğutma Araştırması İpuçları Sv.1",
     "description": null
   },
   "Cool3_2": {
-    "localized_name": "Soğutma Araştırması Sv.2",
+    "localized_name": "Soğutma Araştırması İpuçları Sv.2",
     "description": null
   },
   "Cool3_3": {
@@ -49,6 +53,10 @@
   },
   "Cool3_4": {
     "localized_name": "Üsteki Pal'lar Geliştirmesi Sv.2",
+    "description": null
+  },
+  "Cool3_5": {
+    "localized_name": "Üsteki Pal'lar Geliştirmesi Sv.3",
     "description": null
   },
   "Cool4": {
@@ -85,6 +93,10 @@
   },
   "Deforest1_5": {
     "localized_name": "Odunculuk Görevi Sv.5",
+    "description": null
+  },
+  "Deforest1_6": {
+    "localized_name": "Odunculuk Görevi Sv.6",
     "description": null
   },
   "Deforest2": {
@@ -127,6 +139,10 @@
     "localized_name": "Üsteki Pal'lar Geliştirmesi Sv.2",
     "description": null
   },
+  "Deforest3_5": {
+    "localized_name": "Üsteki Pal'lar Geliştirmesi Sv.3",
+    "description": null
+  },
   "Deforest4": {
     "localized_name": "Kütük ve Balta Geliştirmesi",
     "description": null
@@ -149,6 +165,10 @@
   },
   "EmitFlame1_5": {
     "localized_name": "Tutuşturma Görevi Sv.5",
+    "description": null
+  },
+  "EmitFlame1_6": {
+    "localized_name": "Tutuşturma Görevi Sv.6",
     "description": null
   },
   "EmitFlame2": {
@@ -181,6 +201,10 @@
   },
   "EmitFlame3_4": {
     "localized_name": "Üsteki Pal'lar Geliştirmesi Sv.2",
+    "description": null
+  },
+  "EmitFlame3_5": {
+    "localized_name": "Üsteki Pal'lar Geliştirmesi Sv.3",
     "description": null
   },
   "EmitFlame4": {
@@ -223,6 +247,10 @@
     "localized_name": "Elektrik Üretme Görevi Sv.5",
     "description": null
   },
+  "GenerateEnergy1_6": {
+    "localized_name": "Elektrik Üretme Görevi Sv.6",
+    "description": null
+  },
   "GenerateEnergy2": {
     "localized_name": "Güç Depolama Çözümleri Sv.1",
     "description": null
@@ -249,6 +277,10 @@
   },
   "GenerateEnergy3_4": {
     "localized_name": "Üsteki Pal'lar Geliştirmesi Sv.2",
+    "description": null
+  },
+  "GenerateEnergy3_5": {
+    "localized_name": "Üsteki Pal'lar Geliştirmesi Sv.3",
     "description": null
   },
   "GenerateEnergy4": {
@@ -285,6 +317,10 @@
   },
   "Handcraft1_5": {
     "localized_name": "El İşi Hızı Sv.5",
+    "description": null
+  },
+  "Handcraft1_6": {
+    "localized_name": "El İşi Hızı Sv.6",
     "description": null
   },
   "Handcraft2": {
@@ -327,6 +363,10 @@
     "localized_name": "Üsteki Pal'lar Geliştirmesi Sv.2",
     "description": null
   },
+  "Handcraft3_5": {
+    "localized_name": "Üsteki Pal'lar Geliştirmesi Sv.3",
+    "description": null
+  },
   "Handcraft4": {
     "localized_name": "Küre Çoğaltma Tekniği Sv.1",
     "description": null
@@ -367,12 +407,16 @@
     "localized_name": "İlaç Üretimi Görevi Sv.5",
     "description": null
   },
+  "Medicine1_6": {
+    "localized_name": "İlaç Üretimi Görevi Sv.6",
+    "description": null
+  },
   "Medicine2": {
-    "localized_name": "İlaç Üretimi Araştırması Sv.1",
+    "localized_name": "İlaç Üretimi Araştırması İpuçları Sv.1",
     "description": null
   },
   "Medicine2_2": {
-    "localized_name": "İlaç Üretimi Araştırması Sv.2",
+    "localized_name": "İlaç Üretimi Araştırması İpuçları Sv.2",
     "description": null
   },
   "Medicine2_3": {
@@ -381,6 +425,10 @@
   },
   "Medicine2_4": {
     "localized_name": "Üsteki Pal'lar Geliştirmesi Sv.2",
+    "description": null
+  },
+  "Medicine2_5": {
+    "localized_name": "Üsteki Pal'lar Geliştirmesi Sv.3",
     "description": null
   },
   "Medicine3": {
@@ -419,6 +467,10 @@
     "localized_name": "Madencilik Görevi Sv.5",
     "description": null
   },
+  "Mining1_6": {
+    "localized_name": "Madencilik Görevi Sv.6",
+    "description": null
+  },
   "Mining2": {
     "localized_name": "Zaman Kazandıran Sefer Sv.1",
     "description": null
@@ -449,6 +501,10 @@
   },
   "Mining3_4": {
     "localized_name": "Üsteki Pal'lar Geliştirmesi Sv.2",
+    "description": null
+  },
+  "Mining3_5": {
+    "localized_name": "Üsteki Pal'lar Geliştirmesi Sv.3",
     "description": null
   },
   "Mining4": {
@@ -485,6 +541,10 @@
   },
   "Seeding1_5": {
     "localized_name": "Ekim Görevi Sv.5",
+    "description": null
+  },
+  "Seeding1_6": {
+    "localized_name": "Ekim Görevi Sv.6",
     "description": null
   },
   "Seeding2": {
@@ -527,6 +587,10 @@
     "localized_name": "Üsteki Pal'lar Geliştirmesi Sv.2",
     "description": null
   },
+  "Seeding3_5": {
+    "localized_name": "Üsteki Pal'lar Geliştirmesi Sv.3",
+    "description": null
+  },
   "Seeding4": {
     "localized_name": "Çiçek Tarhı Geliştirmesi",
     "description": null
@@ -553,6 +617,10 @@
   },
   "Watering1_5": {
     "localized_name": "Sulama Görevi Sv.5",
+    "description": null
+  },
+  "Watering1_6": {
+    "localized_name": "Sulama Görevi Sv.6",
     "description": null
   },
   "Watering2": {
@@ -585,6 +653,10 @@
   },
   "Watering3_4": {
     "localized_name": "Üsteki Pal'lar Geliştirmesi Sv.2",
+    "description": null
+  },
+  "Watering3_5": {
+    "localized_name": "Üsteki Pal'lar Geliştirmesi Sv.3",
     "description": null
   },
   "Watering4": {
