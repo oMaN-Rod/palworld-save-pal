@@ -1,4 +1,7 @@
 pub mod game_data;
+pub mod guilds;
+pub mod pals;
+pub mod players;
 pub mod presets;
 pub mod save_file;
 pub mod settings;

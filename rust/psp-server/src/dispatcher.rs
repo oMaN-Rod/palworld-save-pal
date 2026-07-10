@@ -121,6 +121,56 @@ async fn route(
         MessageType::LoadZipFile => {
             handlers::save_file::handle_load_zip_file(serde_json::from_value(data)?, ctx).await
         }
+        // Phase 2 (Task 13): lazy details, pal CRUD, technologies, lab
+        // research, deletes. get_pals / get_lab_research are already
+        // registered above (game_data) and are NOT re-added here.
+        MessageType::RequestPlayerDetails => {
+            handlers::players::handle_request_player_details(serde_json::from_value(data)?, ctx)
+                .await
+        }
+        MessageType::RequestGuildDetails => {
+            handlers::guilds::handle_request_guild_details(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::GetPalSummaries => handlers::pals::handle_get_pal_summaries(ctx).await,
+        MessageType::AddPal => {
+            handlers::pals::handle_add_pal(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::AddDpsPal => {
+            handlers::pals::handle_add_dps_pal(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::ClonePal => {
+            handlers::pals::handle_clone_pal(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::CloneDpsPal => {
+            handlers::pals::handle_clone_dps_pal(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::DeletePals => {
+            handlers::pals::handle_delete_pals(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::DeleteDpsPals => {
+            handlers::pals::handle_delete_dps_pals(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::MovePal => {
+            handlers::pals::handle_move_pal(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::HealPals => {
+            handlers::pals::handle_heal_pals(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::HealAllPals => {
+            handlers::pals::handle_heal_all_pals(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::SetTechnologyData => {
+            handlers::players::handle_set_technology_data(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::UpdateLabResearch => {
+            handlers::guilds::handle_update_lab_research(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::DeletePlayer => {
+            handlers::players::handle_delete_player(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::DeleteGuild => {
+            handlers::guilds::handle_delete_guild(serde_json::from_value(data)?, ctx).await
+        }
         // Remaining arms are added by Phases 1-6.
         other => {
             tracing::warn!(
