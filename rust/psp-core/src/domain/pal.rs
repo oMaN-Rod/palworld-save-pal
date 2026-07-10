@@ -2651,6 +2651,197 @@ mod tests {
         }
     }
 
+    /// No fixture save carries a `_dps.sav` file (see `player_details.rs`'s
+    /// own note: "No fixture player has a `_dps.sav` file"), so
+    /// `update_dps_pals` has NO real-save coverage anywhere in this
+    /// workspace -- this synthetic session is the only exercise it gets.
+    fn session_with_one_dps_slot(
+        owner_id: uuid::Uuid,
+        character_id: &str,
+        instance_id: uuid::Uuid,
+    ) -> SaveSession {
+        let mut save_parameter = Properties::default();
+        save_parameter.insert("CharacterID", props::name_property(character_id));
+        save_parameter.insert("Gender", props::enum_property("EPalGenderType::Female"));
+        save_parameter.insert("Level", props::byte_property(1));
+        let mut id_struct = Properties::default();
+        id_struct.insert("InstanceId", props::guid_property(instance_id));
+        let mut slot_props = Properties::default();
+        slot_props.insert(
+            "InstanceId",
+            Property::Struct(StructValue::Struct(id_struct)),
+        );
+        slot_props.insert(
+            "SaveParameter",
+            Property::Struct(StructValue::Struct(save_parameter)),
+        );
+        let mut dps_root_properties = Properties::default();
+        dps_root_properties.insert(
+            "SaveParameterArray",
+            Property::Array(ValueVec::Struct(vec![StructValue::Struct(slot_props)])),
+        );
+        let dps_save = uesave::Save {
+            header: uesave::Header {
+                magic: 0,
+                save_game_version: 0,
+                package_version: uesave::PackageVersion { ue4: 0, ue5: None },
+                engine_version_major: 0,
+                engine_version_minor: 0,
+                engine_version_patch: 0,
+                engine_version_build: 0,
+                engine_version: String::new(),
+                custom_version: None,
+            },
+            schemas: uesave::PropertySchemas::default(),
+            root: uesave::Root {
+                save_game_type: String::new(),
+                properties: dps_root_properties,
+            },
+            extra: Vec::new(),
+        };
+        let level = uesave::Save {
+            header: uesave::Header {
+                magic: 0,
+                save_game_version: 0,
+                package_version: uesave::PackageVersion { ue4: 0, ue5: None },
+                engine_version_major: 0,
+                engine_version_minor: 0,
+                engine_version_patch: 0,
+                engine_version_build: 0,
+                engine_version: String::new(),
+                custom_version: None,
+            },
+            schemas: uesave::PropertySchemas::default(),
+            root: uesave::Root {
+                save_game_type: String::new(),
+                properties: Properties::default(),
+            },
+            extra: Vec::new(),
+        };
+        let mut session = SaveSession::new_for_tests(crate::session::SaveKind::InMemory, level);
+        session.loaded_players.insert(
+            owner_id,
+            crate::session::LoadedPlayer {
+                uid: owner_id,
+                sav: {
+                    let mut sav = uesave::Save {
+                        header: uesave::Header {
+                            magic: 0,
+                            save_game_version: 0,
+                            package_version: uesave::PackageVersion { ue4: 0, ue5: None },
+                            engine_version_major: 0,
+                            engine_version_minor: 0,
+                            engine_version_patch: 0,
+                            engine_version_build: 0,
+                            engine_version: String::new(),
+                            custom_version: None,
+                        },
+                        schemas: uesave::PropertySchemas::default(),
+                        root: uesave::Root {
+                            save_game_type: String::new(),
+                            properties: Properties::default(),
+                        },
+                        extra: Vec::new(),
+                    };
+                    let mut save_data = Properties::default();
+                    sav.root.properties.insert(
+                        "SaveData",
+                        Property::Struct(StructValue::Struct(std::mem::take(&mut save_data))),
+                    );
+                    sav
+                },
+                dps: Some(dps_save),
+            },
+        );
+        session
+    }
+
+    #[test]
+    fn update_dps_pals_applies_the_dto_onto_the_matching_slot() {
+        let data = game_data();
+        let owner_id = uuid::Uuid::parse_str("11111111-0000-0000-0000-000000000000").unwrap();
+        let instance_id = uuid::Uuid::parse_str("22222222-0000-0000-0000-000000000000").unwrap();
+        let mut session = session_with_one_dps_slot(owner_id, "SheepBall", instance_id);
+
+        let mut source = read_save_parameter_dto(
+            &{
+                let mut props = Properties::default();
+                props.insert("CharacterID", props::name_property("SheepBall"));
+                props
+            },
+            instance_id,
+            true,
+            &data,
+        );
+        source.owner_uid = Some(owner_id);
+        source.nickname = Some("DPS Edited".to_string());
+        source.level = 40;
+        let mut modified: OrderedMap<i32, PalDto> = OrderedMap::new();
+        modified.insert(0, source);
+
+        let captured = std::sync::Arc::new(std::sync::Mutex::new(Vec::<String>::new()));
+        let sink = captured.clone();
+        let progress: crate::progress::ProgressSink =
+            std::sync::Arc::new(move |message: &str| sink.lock().unwrap().push(message.into()));
+        update_dps_pals(&mut session, &data, &modified, &progress).unwrap();
+
+        let messages = captured.lock().unwrap();
+        assert!(messages[0].starts_with("Updating DPS pal "));
+        assert_eq!(
+            messages.last().map(String::as_str),
+            Some("Saving changes to file")
+        );
+
+        let dps_save = session.loaded_players[&owner_id].dps.as_ref().unwrap();
+        let slots = props::struct_values(
+            dps_save
+                .root
+                .properties
+                .0
+                .get(&PropertyKey::from("SaveParameterArray"))
+                .unwrap(),
+        )
+        .unwrap();
+        let updated = pal_dto_from_dps_slot(&slots[0], &data).expect("slot still readable");
+        assert_eq!(updated.nickname.as_deref(), Some("DPS Edited"));
+        assert_eq!(updated.level, 40);
+        assert_eq!(updated.character_id, "SheepBall");
+    }
+
+    /// A DTO whose `owner_uid` doesn't resolve to a loaded player is
+    /// SKIPPED, not a panic -- see `update_dps_pals`'s own doc comment for
+    /// why real Python would crash here (`AttributeError`/`KeyError`) and
+    /// this port declines to reproduce that specific crash.
+    #[test]
+    fn update_dps_pals_skips_an_unresolvable_owner_without_panicking() {
+        let data = game_data();
+        let owner_id = uuid::Uuid::parse_str("33333333-0000-0000-0000-000000000000").unwrap();
+        let instance_id = uuid::Uuid::parse_str("44444444-0000-0000-0000-000000000000").unwrap();
+        let mut session = session_with_one_dps_slot(owner_id, "SheepBall", instance_id);
+
+        let mut source = read_save_parameter_dto(
+            &{
+                let mut props = Properties::default();
+                props.insert("CharacterID", props::name_property("SheepBall"));
+                props
+            },
+            instance_id,
+            true,
+            &data,
+        );
+        source.owner_uid = None; // never resolves -- Python: self._players.get(None)
+        let mut modified: OrderedMap<i32, PalDto> = OrderedMap::new();
+        modified.insert(0, source);
+
+        update_dps_pals(
+            &mut session,
+            &data,
+            &modified,
+            &crate::progress::null_progress(),
+        )
+        .unwrap();
+    }
+
     #[test]
     fn known_pal_keys_loads_the_real_pals_json_key_set() {
         let data = game_data();
