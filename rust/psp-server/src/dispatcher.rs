@@ -216,6 +216,27 @@ async fn route(
         }
         MessageType::GetUpsStats => handlers::ups::handle_get_ups_stats(ctx).await,
         MessageType::NukeUpsPals => handlers::ups::handle_nuke_ups_pals(ctx).await,
+        // Task 3C-5: UPS collection and tag handlers.
+        MessageType::GetUpsCollections => handlers::ups::handle_get_ups_collections(ctx).await,
+        MessageType::CreateUpsCollection => {
+            handlers::ups::handle_create_ups_collection(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::UpdateUpsCollection => {
+            handlers::ups::handle_update_ups_collection(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::DeleteUpsCollection => {
+            handlers::ups::handle_delete_ups_collection(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::GetUpsTags => handlers::ups::handle_get_ups_tags(ctx).await,
+        MessageType::CreateUpsTag => {
+            handlers::ups::handle_create_ups_tag(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::UpdateUpsTag => {
+            handlers::ups::handle_update_ups_tag(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::DeleteUpsTag => {
+            handlers::ups::handle_delete_ups_tag(serde_json::from_value(data)?, ctx).await
+        }
         // Remaining arms are added by Phases 1-6.
         other => {
             tracing::warn!(
@@ -275,11 +296,12 @@ mod tests {
 
     #[tokio::test]
     async fn valid_but_unimplemented_type_sends_nothing() {
-        // get_ups_collections (Task 3C-5, not yet registered) is still a valid
-        // MessageType — get_ups_pals no longer qualifies as of Task 3C-4.
+        // get_guild_raw_data is a valid MessageType but is never routed — a
+        // permanently-dead wire type by design. This makes the silence test
+        // durable across all phases.
         let mut test = TestContext::new(|_| {}).await;
         dispatch(
-            envelope("get_ups_collections", serde_json::Value::Null),
+            envelope("get_guild_raw_data", serde_json::Value::Null),
             HandlerCtx {
                 session: &mut test.session,
                 app: &test.app,

@@ -433,3 +433,164 @@ pub async fn handle_nuke_ups_pals(ctx: &mut HandlerCtx<'_>) -> Result<(), Handle
     }
     Ok(())
 }
+
+#[derive(Debug, serde::Deserialize)]
+pub struct CreateUpsCollectionData {
+    pub name: String,
+    pub description: Option<String>,
+    pub color: Option<String>,
+}
+
+#[derive(Debug, serde::Deserialize)]
+pub struct UpdateUpsCollectionData {
+    pub collection_id: i64,
+    pub updates: serde_json::Map<String, serde_json::Value>,
+}
+
+#[derive(Debug, serde::Deserialize)]
+pub struct DeleteUpsCollectionData {
+    pub collection_id: i64,
+}
+
+#[derive(Debug, serde::Deserialize)]
+pub struct CreateUpsTagData {
+    pub name: String,
+    pub description: Option<String>,
+    pub color: Option<String>,
+}
+
+#[derive(Debug, serde::Deserialize)]
+pub struct UpdateUpsTagData {
+    pub tag_id: i64,
+    pub updates: serde_json::Map<String, serde_json::Value>,
+}
+
+#[derive(Debug, serde::Deserialize)]
+pub struct DeleteUpsTagData {
+    pub tag_id: i64,
+}
+
+pub async fn handle_get_ups_collections(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
+    match psp_db::ups::get_collections(&ctx.app.db).await {
+        Ok(collections) => ctx.emitter.emit(
+            MessageType::GetUpsCollections,
+            &serde_json::json!({ "collections": collections }),
+        ),
+        Err(error) => emit_ups_error(ctx, format!("Failed to get UPS collections: {error}")),
+    }
+    Ok(())
+}
+
+pub async fn handle_create_ups_collection(
+    data: CreateUpsCollectionData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    match psp_db::ups::create_collection(
+        &ctx.app.db,
+        &data.name,
+        data.description.as_deref(),
+        data.color.as_deref(),
+    )
+    .await
+    {
+        Ok(collection) => ctx.emitter.emit(
+            MessageType::CreateUpsCollection,
+            &serde_json::json!({ "collection": collection }),
+        ),
+        Err(error) => emit_ups_error(ctx, format!("Failed to create UPS collection: {error}")),
+    }
+    Ok(())
+}
+
+pub async fn handle_update_ups_collection(
+    data: UpdateUpsCollectionData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    match psp_db::ups::update_collection(&ctx.app.db, data.collection_id, &data.updates).await {
+        Ok(Some(collection)) => ctx.emitter.emit(
+            MessageType::UpdateUpsCollection,
+            &serde_json::json!({ "collection": collection }),
+        ),
+        Ok(None) => emit_ups_error(
+            ctx,
+            format!("Collection with ID {} not found", data.collection_id),
+        ),
+        Err(error) => emit_ups_error(ctx, format!("Failed to update UPS collection: {error}")),
+    }
+    Ok(())
+}
+
+pub async fn handle_delete_ups_collection(
+    data: DeleteUpsCollectionData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    match psp_db::ups::delete_collection(&ctx.app.db, data.collection_id).await {
+        Ok(success) => ctx.emitter.emit(
+            MessageType::DeleteUpsCollection,
+            &serde_json::json!({"success": success, "collection_id": data.collection_id}),
+        ),
+        Err(error) => emit_ups_error(ctx, format!("Failed to delete UPS collection: {error}")),
+    }
+    Ok(())
+}
+
+pub async fn handle_get_ups_tags(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
+    match psp_db::ups::get_available_tags(&ctx.app.db).await {
+        Ok(tags) => ctx.emitter.emit(
+            MessageType::GetUpsTags,
+            &serde_json::json!({ "tags": tags }),
+        ),
+        Err(error) => emit_ups_error(ctx, format!("Failed to get UPS tags: {error}")),
+    }
+    Ok(())
+}
+
+pub async fn handle_create_ups_tag(
+    data: CreateUpsTagData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    match psp_db::ups::create_or_update_tag(
+        &ctx.app.db,
+        &data.name,
+        data.description.as_deref(),
+        data.color.as_deref(),
+    )
+    .await
+    {
+        Ok(tag) => ctx.emitter.emit(
+            MessageType::CreateUpsTag,
+            &serde_json::json!({ "tag": tag }),
+        ),
+        Err(error) => emit_ups_error(ctx, format!("Failed to create UPS tag: {error}")),
+    }
+    Ok(())
+}
+
+pub async fn handle_update_ups_tag(
+    data: UpdateUpsTagData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    match psp_db::ups::update_tag(&ctx.app.db, data.tag_id, &data.updates).await {
+        Ok(Some(tag)) => ctx.emitter.emit(
+            MessageType::UpdateUpsTag,
+            &serde_json::json!({ "tag": tag }),
+        ),
+        Ok(None) => emit_ups_error(ctx, format!("Tag with ID {} not found", data.tag_id)),
+        Err(error) => emit_ups_error(ctx, format!("Failed to update UPS tag: {error}")),
+    }
+    Ok(())
+}
+
+pub async fn handle_delete_ups_tag(
+    data: DeleteUpsTagData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    match psp_db::ups::delete_tag(&ctx.app.db, data.tag_id).await {
+        Ok(success) => ctx.emitter.emit(
+            MessageType::DeleteUpsTag,
+            &serde_json::json!({"success": success, "tag_id": data.tag_id}),
+        ),
+        Err(error) => emit_ups_error(ctx, format!("Failed to delete UPS tag: {error}")),
+    }
+    Ok(())
+}

@@ -186,16 +186,15 @@ async fn registered_but_unimplemented_type_is_silent() {
     // (dispatch's `from_wire` returns None). Silence must also hold for a wire
     // string that DOES have a variant but no handler arm yet (`route`'s
     // catch-all `other =>` branch) — a distinct code path in dispatcher.rs.
-    // `get_ups_collections` is registered in MessageType but unrouted until
-    // Task 3C-5 wires the UPS collection/tag handlers (get_ups_pals itself
-    // was routed by Task 3C-4 and no longer qualifies).
+    // `get_guild_raw_data` is registered in MessageType but never routed — a
+    // permanently-dead wire type by design that makes this test durable.
     let temp_dir = tempfile::tempdir().unwrap();
     let handle = start_test_server(&temp_dir).await;
     let mut socket = connect(&handle).await;
 
     socket
         .send(Message::Text(
-            r#"{"type":"get_ups_collections","data":null}"#.into(),
+            r#"{"type":"get_guild_raw_data","data":null}"#.into(),
         ))
         .await
         .unwrap();
