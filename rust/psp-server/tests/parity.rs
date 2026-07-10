@@ -99,7 +99,11 @@ where
 /// differs is a REAL bug to fix in domain code, never to add here.
 ///
 /// Phases 0–1 kept this EMPTY. Phase 2 is the first phase with genuinely
-/// nondeterministic outputs, and adds exactly these four masks and no more.
+/// nondeterministic outputs, adding four masks (the two `instance_id` entries
+/// plus `download_save_file`'s `name`/`content`); Phase 3 added a fifth,
+/// `add_preset:/data/id`, for a total of five. `get_presets`' ids are
+/// deliberately NOT masked here — a static JSON pointer can't reach a dynamic
+/// dict key, so it uses `compare_get_presets_equivalent` instead.
 const PARITY_IGNORED_PATHS: &[(&str, &str)] = &[
     // A freshly-created pal's InstanceId is a `uuid4` minted INDEPENDENTLY by
     // Python (capture) and Rust (replay) — it can never match. ONLY this one
@@ -333,28 +337,36 @@ const MASKED_PRESET_ID: &str = "<masked>";
 /// `rust/psp-db/src/presets.rs`) — everything else in a preset (`name`,
 /// `type`, every container, every other `pal_preset` field) is real content
 /// and must still compare strictly.
+///
+/// CRUCIALLY, only a NON-NULL STRING `pal_preset_id` is masked: `get_all`
+/// emits `pal_preset_id: null` when a preset has NO pal_preset association, so
+/// masking `null` too would collapse "association present (a real uuid)" and
+/// "association absent (null)" to the same sentinel — a genuine cross-backend
+/// divergence in whether a preset even HAS a pal_preset would then falsely
+/// compare equal. `id` is always a non-null string (a preset's primary key),
+/// and a nested `pal_preset.id` only exists when the `pal_preset` object does
+/// (where it is likewise always a string), so both are masked unconditionally.
 fn mask_preset_ids(preset: &mut Value) {
     let Some(object) = preset.as_object_mut() else {
         return;
     };
-    if object.contains_key("id") {
-        object.insert(
-            "id".to_string(),
-            Value::String(MASKED_PRESET_ID.to_string()),
-        );
+    if let Some(id) = object.get_mut("id") {
+        if id.is_string() {
+            *id = Value::String(MASKED_PRESET_ID.to_string());
+        }
     }
-    if object.contains_key("pal_preset_id") {
-        object.insert(
-            "pal_preset_id".to_string(),
-            Value::String(MASKED_PRESET_ID.to_string()),
-        );
+    if let Some(pal_preset_id) = object.get_mut("pal_preset_id") {
+        // A null here means "no pal_preset association" — a real, comparable
+        // fact, NOT a nondeterministic uuid. Only mask an actual uuid string.
+        if pal_preset_id.is_string() {
+            *pal_preset_id = Value::String(MASKED_PRESET_ID.to_string());
+        }
     }
     if let Some(pal_preset) = object.get_mut("pal_preset").and_then(Value::as_object_mut) {
-        if pal_preset.contains_key("id") {
-            pal_preset.insert(
-                "id".to_string(),
-                Value::String(MASKED_PRESET_ID.to_string()),
-            );
+        if let Some(nested_id) = pal_preset.get_mut("id") {
+            if nested_id.is_string() {
+                *nested_id = Value::String(MASKED_PRESET_ID.to_string());
+            }
         }
     }
 }
@@ -1071,8 +1083,12 @@ fn mask_preset_ids_masks_only_id_fields() {
     assert_eq!(preset["pal_preset"]["lock"], true);
     assert_eq!(preset["pal_preset"]["character_id"], "SheepBall");
 
-    // A preset with no pal_preset relationship at all must be untouched
-    // beyond its own id/pal_preset_id.
+    // A preset with no pal_preset relationship at all: its own `id` is still
+    // masked, but a NULL `pal_preset_id` must be PRESERVED as null (not
+    // collapsed to the sentinel) — "no association" is a real, comparable
+    // fact, and masking it would let a present-vs-absent divergence slip
+    // through (see mask_preset_ids's doc comment and the discriminating test
+    // `compare_get_presets_equivalent_errs_when_pal_preset_association_differs`).
     let mut bare = serde_json::json!({
         "id": "33333333-3333-3333-3333-333333333333",
         "name": "Bare",
@@ -1081,7 +1097,11 @@ fn mask_preset_ids_masks_only_id_fields() {
     });
     mask_preset_ids(&mut bare);
     assert_eq!(bare["id"], MASKED_PRESET_ID);
-    assert_eq!(bare["pal_preset_id"], MASKED_PRESET_ID);
+    assert_eq!(
+        bare["pal_preset_id"],
+        Value::Null,
+        "a null pal_preset_id (no association) must be preserved, not masked"
+    );
     assert_eq!(bare["name"], "Bare");
 }
 
@@ -1269,4 +1289,65 @@ fn compare_get_presets_equivalent_errs_on_a_count_mismatch() {
         &two_presets,
     )
     .is_err());
+}
+
+/// The discriminating test for the `pal_preset_id`-null bug: two `get_presets`
+/// dicts identical in EVERY other field, differing ONLY in `pal_preset_id` —
+/// `null` (no pal_preset association) on one side, a real uuid on the other.
+/// A genuine cross-backend divergence in whether the preset even HAS a
+/// pal_preset. This must be reported as NOT equal.
+///
+/// This is a true MUTATION CHECK for the fix, precisely because the divergence
+/// is confined to `pal_preset_id` and NOTHING else (deliberately no `pal_preset`
+/// object on either side, which would give the old code a second, unrelated
+/// difference to catch and mask the regression):
+///  - OLD `mask_preset_ids` (masking `pal_preset_id` UNCONDITIONALLY): the
+///    `null` and the uuid BOTH collapse to `"<masked>"`, the two presets become
+///    byte-identical, and the comparator FALSELY reports `Ok(())` — the exact
+///    hole the reviewer found.
+///  - FIXED `mask_preset_ids` (null preserved): the expected side keeps
+///    `pal_preset_id: null`, the actual masks its uuid to `"<masked>"`, the two
+///    differ, and the comparator correctly returns `Err`.
+///
+/// Verified RED→GREEN by hand: temporarily reverting `mask_preset_ids` to the
+/// unconditional form makes THIS test fail (`Ok` where `Err` was expected)
+/// while every other parity test still passes; the fix turns it green. See
+/// task-3B-3-report.md for the captured evidence.
+#[test]
+fn compare_get_presets_equivalent_errs_when_pal_preset_association_differs() {
+    // No association: pal_preset_id is null (no pal_preset object).
+    let without_association = make_get_presets_frame(&[(
+        "shared-key",
+        serde_json::json!({
+            "id": "shared-key",
+            "name": "Kit",
+            "type": "inventory",
+            "pal_preset_id": Value::Null
+        }),
+    )]);
+    // Has an association: pal_preset_id is a real uuid. The ONLY difference
+    // from `without_association` is this field's value (null vs uuid).
+    let with_association = make_get_presets_frame(&[(
+        "shared-key",
+        serde_json::json!({
+            "id": "shared-key",
+            "name": "Kit",
+            "type": "inventory",
+            "pal_preset_id": "pp-real-uuid"
+        }),
+    )]);
+
+    let error = compare_get_presets_equivalent(
+        "fixtures/db-presets/002_get_presets.json",
+        &without_association,
+        &with_association,
+    )
+    .expect_err(
+        "a preset with NO pal_preset association (pal_preset_id: null) vs one WITH \
+         an association (a real uuid) is a real divergence and must NOT compare equal",
+    );
+    assert!(
+        error.contains("preset list mismatch"),
+        "error must explain the mismatch; got: {error}"
+    );
 }
