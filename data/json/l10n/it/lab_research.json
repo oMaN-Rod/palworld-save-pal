@@ -19,6 +19,10 @@
     "localized_name": "Raffreddamento Liv. 4",
     "description": null
   },
+  "Cool1_6": {
+    "localized_name": "Raffreddamento Liv. 5",
+    "description": null
+  },
   "Cool2": {
     "localized_name": "Velocità schiusa Liv. 1",
     "description": null
@@ -49,6 +53,10 @@
   },
   "Cool3_4": {
     "localized_name": "Potenzia Pal della base Liv. 2",
+    "description": null
+  },
+  "Cool3_5": {
+    "localized_name": "Potenzia Pal della base Liv. 3",
     "description": null
   },
   "Cool4": {
@@ -85,6 +93,10 @@
   },
   "Deforest1_5": {
     "localized_name": "Segheria Liv. 5",
+    "description": null
+  },
+  "Deforest1_6": {
+    "localized_name": "Segheria Liv. 6",
     "description": null
   },
   "Deforest2": {
@@ -127,6 +139,10 @@
     "localized_name": "Potenzia Pal della base Liv. 2",
     "description": null
   },
+  "Deforest3_5": {
+    "localized_name": "Potenzia Pal della base Liv. 3",
+    "description": null
+  },
   "Deforest4": {
     "localized_name": "Sviluppo ceppo e ascia",
     "description": null
@@ -149,6 +165,10 @@
   },
   "EmitFlame1_5": {
     "localized_name": "Attività sputafuoco Liv. 5",
+    "description": null
+  },
+  "EmitFlame1_6": {
+    "localized_name": "Attività sputafuoco Liv. 6",
     "description": null
   },
   "EmitFlame2": {
@@ -181,6 +201,10 @@
   },
   "EmitFlame3_4": {
     "localized_name": "Potenzia Pal della base Liv. 2",
+    "description": null
+  },
+  "EmitFlame3_5": {
+    "localized_name": "Potenzia Pal della base Liv. 3",
     "description": null
   },
   "EmitFlame4": {
@@ -223,6 +247,10 @@
     "localized_name": "Generazione energia Liv. 5",
     "description": null
   },
+  "GenerateEnergy1_6": {
+    "localized_name": "Generazione energia Liv. 6",
+    "description": null
+  },
   "GenerateEnergy2": {
     "localized_name": "Stoccaggio energia Liv. 1",
     "description": null
@@ -249,6 +277,10 @@
   },
   "GenerateEnergy3_4": {
     "localized_name": "Potenzia Pal della base Liv. 2",
+    "description": null
+  },
+  "GenerateEnergy3_5": {
+    "localized_name": "Potenzia Pal della base Liv. 3",
     "description": null
   },
   "GenerateEnergy4": {
@@ -285,6 +317,10 @@
   },
   "Handcraft1_5": {
     "localized_name": "Velocità delle attività manuali Liv. 5",
+    "description": null
+  },
+  "Handcraft1_6": {
+    "localized_name": "Velocità delle attività manuali Liv. 6",
     "description": null
   },
   "Handcraft2": {
@@ -327,6 +363,10 @@
     "localized_name": "Potenzia Pal della base Liv. 2",
     "description": null
   },
+  "Handcraft3_5": {
+    "localized_name": "Potenzia Pal della base Liv. 3",
+    "description": null
+  },
   "Handcraft4": {
     "localized_name": "Tecnica duplicazione sfere Liv. 1",
     "description": null
@@ -367,6 +407,10 @@
     "localized_name": "Realizzazione medicinali Liv. 5",
     "description": null
   },
+  "Medicine1_6": {
+    "localized_name": "Realizzazione medicinali Liv. 6",
+    "description": null
+  },
   "Medicine2": {
     "localized_name": "Ricerca realizzazione medicinali Liv. 1",
     "description": null
@@ -381,6 +425,10 @@
   },
   "Medicine2_4": {
     "localized_name": "Potenzia Pal della base Liv. 2",
+    "description": null
+  },
+  "Medicine2_5": {
+    "localized_name": "Potenzia Pal della base Liv. 3",
     "description": null
   },
   "Medicine3": {
@@ -419,6 +467,10 @@
     "localized_name": "Attività mineraria Liv. 5",
     "description": null
   },
+  "Mining1_6": {
+    "localized_name": "Attività mineraria Liv. 6",
+    "description": null
+  },
   "Mining2": {
     "localized_name": "Accorcia spedizione Liv. 1",
     "description": null
@@ -449,6 +501,10 @@
   },
   "Mining3_4": {
     "localized_name": "Potenzia Pal della base Liv. 2",
+    "description": null
+  },
+  "Mining3_5": {
+    "localized_name": "Potenzia Pal della base Liv. 3",
     "description": null
   },
   "Mining4": {
@@ -485,6 +541,10 @@
   },
   "Seeding1_5": {
     "localized_name": "Attività semina Liv. 5",
+    "description": null
+  },
+  "Seeding1_6": {
+    "localized_name": "Attività semina Liv. 6",
     "description": null
   },
   "Seeding2": {
@@ -527,6 +587,10 @@
     "localized_name": "Potenzia Pal della base Liv. 2",
     "description": null
   },
+  "Seeding3_5": {
+    "localized_name": "Potenzia Pal della base Liv. 3",
+    "description": null
+  },
   "Seeding4": {
     "localized_name": "Sviluppo aiuola fiorita",
     "description": null
@@ -553,6 +617,10 @@
   },
   "Watering1_5": {
     "localized_name": "Attività irrigazione Liv. 5",
+    "description": null
+  },
+  "Watering1_6": {
+    "localized_name": "Attività irrigazione Liv. 6",
     "description": null
   },
   "Watering2": {
@@ -585,6 +653,10 @@
   },
   "Watering3_4": {
     "localized_name": "Potenzia Pal della base Liv. 2",
+    "description": null
+  },
+  "Watering3_5": {
+    "localized_name": "Potenzia Pal della base Liv. 3",
     "description": null
   },
   "Watering4": {

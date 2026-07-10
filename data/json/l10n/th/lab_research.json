@@ -19,6 +19,10 @@
     "localized_name": "งานแช่เย็น Lv4",
     "description": null
   },
+  "Cool1_6": {
+    "localized_name": "งานแช่เย็น Lv5",
+    "description": null
+  },
   "Cool2": {
     "localized_name": "ความไวฟักไข่ Lv1",
     "description": null
@@ -49,6 +53,10 @@
   },
   "Cool3_4": {
     "localized_name": "เสริมพลังพาลที่ฐาน Lv2",
+    "description": null
+  },
+  "Cool3_5": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv3",
     "description": null
   },
   "Cool4": {
@@ -85,6 +93,10 @@
   },
   "Deforest1_5": {
     "localized_name": "งานตัดไม้ Lv5",
+    "description": null
+  },
+  "Deforest1_6": {
+    "localized_name": "งานตัดไม้ Lv6",
     "description": null
   },
   "Deforest2": {
@@ -127,6 +139,10 @@
     "localized_name": "เสริมพลังพาลที่ฐาน Lv2",
     "description": null
   },
+  "Deforest3_5": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv3",
+    "description": null
+  },
   "Deforest4": {
     "localized_name": "พัฒนาตอและขวานตัดไม้",
     "description": null
@@ -149,6 +165,10 @@
   },
   "EmitFlame1_5": {
     "localized_name": "งานจุดไฟ Lv5",
+    "description": null
+  },
+  "EmitFlame1_6": {
+    "localized_name": "งานจุดไฟ Lv6",
     "description": null
   },
   "EmitFlame2": {
@@ -181,6 +201,10 @@
   },
   "EmitFlame3_4": {
     "localized_name": "เสริมพลังพาลที่ฐาน Lv2",
+    "description": null
+  },
+  "EmitFlame3_5": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv3",
     "description": null
   },
   "EmitFlame4": {
@@ -223,6 +247,10 @@
     "localized_name": "งานผลิตไฟฟ้า Lv5",
     "description": null
   },
+  "GenerateEnergy1_6": {
+    "localized_name": "งานผลิตไฟฟ้า Lv6",
+    "description": null
+  },
   "GenerateEnergy2": {
     "localized_name": "เทคนิคการสะสมไฟฟ้า Lv1",
     "description": null
@@ -249,6 +277,10 @@
   },
   "GenerateEnergy3_4": {
     "localized_name": "เสริมพลังพาลที่ฐาน Lv2",
+    "description": null
+  },
+  "GenerateEnergy3_5": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv3",
     "description": null
   },
   "GenerateEnergy4": {
@@ -285,6 +317,10 @@
   },
   "Handcraft1_5": {
     "localized_name": "ความเร็วการทำงานฝีมือ Lv5",
+    "description": null
+  },
+  "Handcraft1_6": {
+    "localized_name": "ความเร็วการทำงานฝีมือ Lv6",
     "description": null
   },
   "Handcraft2": {
@@ -327,6 +363,10 @@
     "localized_name": "เสริมพลังพาลที่ฐาน Lv2",
     "description": null
   },
+  "Handcraft3_5": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv3",
+    "description": null
+  },
   "Handcraft4": {
     "localized_name": "เทคนิคผลิตสเฟียร์ซ้ำ Lv1",
     "description": null
@@ -367,6 +407,10 @@
     "localized_name": "งานผลิตยา Lv5",
     "description": null
   },
+  "Medicine1_6": {
+    "localized_name": "งานผลิตยา Lv6",
+    "description": null
+  },
   "Medicine2": {
     "localized_name": "วิจัยผลิตยา Lv1",
     "description": null
@@ -381,6 +425,10 @@
   },
   "Medicine2_4": {
     "localized_name": "เสริมพลังพาลที่ฐาน Lv2",
+    "description": null
+  },
+  "Medicine2_5": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv3",
     "description": null
   },
   "Medicine3": {
@@ -419,6 +467,10 @@
     "localized_name": "งานขุดแร่ Lv5",
     "description": null
   },
+  "Mining1_6": {
+    "localized_name": "งานขุดแร่ Lv6",
+    "description": null
+  },
   "Mining2": {
     "localized_name": "ร่นเวลาเดินทางไกล Lv1",
     "description": null
@@ -449,6 +501,10 @@
   },
   "Mining3_4": {
     "localized_name": "เสริมพลังพาลที่ฐาน Lv2",
+    "description": null
+  },
+  "Mining3_5": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv3",
     "description": null
   },
   "Mining4": {
@@ -485,6 +541,10 @@
   },
   "Seeding1_5": {
     "localized_name": "งานหว่านเมล็ด Lv5",
+    "description": null
+  },
+  "Seeding1_6": {
+    "localized_name": "งานหว่านเมล็ด Lv6",
     "description": null
   },
   "Seeding2": {
@@ -527,6 +587,10 @@
     "localized_name": "เสริมพลังพาลที่ฐาน Lv2",
     "description": null
   },
+  "Seeding3_5": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv3",
+    "description": null
+  },
   "Seeding4": {
     "localized_name": "พัฒนากระถางดอกไม้",
     "description": null
@@ -553,6 +617,10 @@
   },
   "Watering1_5": {
     "localized_name": "งานรดน้ำ Lv5",
+    "description": null
+  },
+  "Watering1_6": {
+    "localized_name": "งานรดน้ำ Lv6",
     "description": null
   },
   "Watering2": {
@@ -585,6 +653,10 @@
   },
   "Watering3_4": {
     "localized_name": "เสริมพลังพาลที่ฐาน Lv2",
+    "description": null
+  },
+  "Watering3_5": {
+    "localized_name": "เสริมพลังพาลที่ฐาน Lv3",
     "description": null
   },
   "Watering4": {

@@ -19,6 +19,10 @@
     "localized_name": "Охлаждение, ур. 4",
     "description": null
   },
+  "Cool1_6": {
+    "localized_name": "Охлаждение, ур. 5",
+    "description": null
+  },
   "Cool2": {
     "localized_name": "Ускорение инкубации, ур. 1",
     "description": null
@@ -36,11 +40,11 @@
     "description": null
   },
   "Cool3": {
-    "localized_name": "Изучение охлаждения, ур. 1",
+    "localized_name": "Навык исследования охлаждения, ур. 1",
     "description": null
   },
   "Cool3_2": {
-    "localized_name": "Изучение охлаждения, ур. 2",
+    "localized_name": "Навык исследования охлаждения, ур. 2",
     "description": null
   },
   "Cool3_3": {
@@ -49,6 +53,10 @@
   },
   "Cool3_4": {
     "localized_name": "Усиление Палов на базе, ур. 2",
+    "description": null
+  },
+  "Cool3_5": {
+    "localized_name": "Усиление Палов на базе, ур. 3",
     "description": null
   },
   "Cool4": {
@@ -87,12 +95,16 @@
     "localized_name": "Лесозаготовка, ур. 5",
     "description": null
   },
+  "Deforest1_6": {
+    "localized_name": "Лесозаготовка, ур. 6",
+    "description": null
+  },
   "Deforest2": {
     "localized_name": "Ускоренные экспедиции, ур. 1",
     "description": null
   },
   "Deforest2_2": {
-    "localized_name": "Секреты экспедиций, ур. 1",
+    "localized_name": "Мастерство экспедиции, ур. 1",
     "description": null
   },
   "Deforest2_3": {
@@ -100,7 +112,7 @@
     "description": null
   },
   "Deforest2_4": {
-    "localized_name": "Секреты экспедиций, ур. 2",
+    "localized_name": "Мастерство экспедиции, ур. 2",
     "description": null
   },
   "Deforest2_5": {
@@ -108,7 +120,7 @@
     "description": null
   },
   "Deforest2_6": {
-    "localized_name": "Секреты экспедиций, ур. 3",
+    "localized_name": "Мастерство экспедиции, ур. 3",
     "description": null
   },
   "Deforest3": {
@@ -125,6 +137,10 @@
   },
   "Deforest3_4": {
     "localized_name": "Усиление Палов на базе, ур. 2",
+    "description": null
+  },
+  "Deforest3_5": {
+    "localized_name": "Усиление Палов на базе, ур. 3",
     "description": null
   },
   "Deforest4": {
@@ -149,6 +165,10 @@
   },
   "EmitFlame1_5": {
     "localized_name": "Разведение огня, ур. 5",
+    "description": null
+  },
+  "EmitFlame1_6": {
+    "localized_name": "Разведение огня, ур. 6",
     "description": null
   },
   "EmitFlame2": {
@@ -183,20 +203,24 @@
     "localized_name": "Усиление Палов на базе, ур. 2",
     "description": null
   },
+  "EmitFlame3_5": {
+    "localized_name": "Усиление Палов на базе, ур. 3",
+    "description": null
+  },
   "EmitFlame4": {
-    "localized_name": "Искусство массовой готовки, ур. 1",
+    "localized_name": "Техника массового приготовления пищи, ур. 1",
     "description": null
   },
   "EmitFlame4_2": {
-    "localized_name": "Тонкости очистки руды, ур. 1",
+    "localized_name": "Тонкости переплавки, ур. 1",
     "description": null
   },
   "EmitFlame4_3": {
-    "localized_name": "Искусство массовой готовки, ур. 2",
+    "localized_name": "Техника массового приготовления пищи, ур. 2",
     "description": null
   },
   "EmitFlame4_4": {
-    "localized_name": "Тонкости очистки руды, ур. 2",
+    "localized_name": "Тонкости переплавки, ур. 2",
     "description": null
   },
   "EmitFlame5": {
@@ -223,6 +247,10 @@
     "localized_name": "Производство энергии, ур. 5",
     "description": null
   },
+  "GenerateEnergy1_6": {
+    "localized_name": "Производство энергии, ур. 6",
+    "description": null
+  },
   "GenerateEnergy2": {
     "localized_name": "Тонкости накопления энергии, ур. 1",
     "description": null
@@ -236,11 +264,11 @@
     "description": null
   },
   "GenerateEnergy3": {
-    "localized_name": "Хитрости изучения энергетики, ур. 1",
+    "localized_name": "Хитрости изучения генерации энергии, ур. 1",
     "description": null
   },
   "GenerateEnergy3_2": {
-    "localized_name": "Хитрости изучения энергетики, ур. 2",
+    "localized_name": "Хитрости изучения генерации энергии, ур. 2",
     "description": null
   },
   "GenerateEnergy3_3": {
@@ -251,20 +279,24 @@
     "localized_name": "Усиление Палов на базе, ур. 2",
     "description": null
   },
+  "GenerateEnergy3_5": {
+    "localized_name": "Усиление Палов на базе, ур. 3",
+    "description": null
+  },
   "GenerateEnergy4": {
-    "localized_name": "Секреты экономии электроэнергии, ур. 1",
+    "localized_name": "Мастерство экономии электроэнергии, ур. 1",
     "description": null
   },
   "GenerateEnergy4_2": {
-    "localized_name": "Секреты экономии электроэнергии, ур. 2",
+    "localized_name": "Мастерство экономии электроэнергии, ур. 2",
     "description": null
   },
   "GenerateEnergy4_3": {
-    "localized_name": "Секреты экономии электроэнергии, ур. 3",
+    "localized_name": "Мастерство экономии электроэнергии, ур. 3",
     "description": null
   },
   "GenerateEnergy5": {
-    "localized_name": "Разработка трансформаторной вышки",
+    "localized_name": "Разработка вышки электропередачи",
     "description": null
   },
   "Handcraft1": {
@@ -287,28 +319,32 @@
     "localized_name": "Скорость ручного труда, ур. 5",
     "description": null
   },
+  "Handcraft1_6": {
+    "localized_name": "Скорость ручного труда, ур. 6",
+    "description": null
+  },
   "Handcraft2": {
-    "localized_name": "Искусство экономии: изготовление брони, ур. 1",
+    "localized_name": "Техника экономии при изготовлении брони, ур. 1",
     "description": null
   },
   "Handcraft2_2": {
-    "localized_name": "Искусство экономии: снаряжение для Палов, ур. 1",
+    "localized_name": "Техника экономии при изготовлении снаряжения Палов, ур. 1",
     "description": null
   },
   "Handcraft2_3": {
-    "localized_name": "Искусство экономии: изготовление оружия, ур. 1",
+    "localized_name": "Техника экономии при изготовлении оружия, ур. 1",
     "description": null
   },
   "Handcraft2_4": {
-    "localized_name": "Искусство экономии: изготовление брони, ур. 2",
+    "localized_name": "Техника экономии при изготовлении брони, ур. 2",
     "description": null
   },
   "Handcraft2_5": {
-    "localized_name": "Искусство экономии: снаряжение для Палов, ур. 2",
+    "localized_name": "Техника экономии при изготовлении снаряжения Палов, ур. 2",
     "description": null
   },
   "Handcraft2_6": {
-    "localized_name": "Искусство экономии: изготовление оружия, ур. 2",
+    "localized_name": "Техника экономии при изготовлении оружия, ур. 2",
     "description": null
   },
   "Handcraft3": {
@@ -327,20 +363,24 @@
     "localized_name": "Усиление Палов на базе, ур. 2",
     "description": null
   },
+  "Handcraft3_5": {
+    "localized_name": "Усиление Палов на базе, ур. 3",
+    "description": null
+  },
   "Handcraft4": {
-    "localized_name": "Искусство репродукции сфер, ур. 1",
+    "localized_name": "Техника дублирования сфер, ур. 1",
     "description": null
   },
   "Handcraft4_2": {
-    "localized_name": "Искусство репродукции снарядов, ур. 1",
+    "localized_name": "Техника дублирования патронов, ур. 1",
     "description": null
   },
   "Handcraft4_3": {
-    "localized_name": "Искусство репродукции сфер, ур. 2",
+    "localized_name": "Техника дублирования сфер, ур. 2",
     "description": null
   },
   "Handcraft4_4": {
-    "localized_name": "Искусство репродукции снарядов, ур. 2",
+    "localized_name": "Техника дублирования патронов, ур. 2",
     "description": null
   },
   "Handcraft5": {
@@ -367,12 +407,16 @@
     "localized_name": "Изготовление снадобий, ур. 5",
     "description": null
   },
+  "Medicine1_6": {
+    "localized_name": "Изготовление снадобий, ур. 6",
+    "description": null
+  },
   "Medicine2": {
-    "localized_name": "Изучение фармацевтики, ур. 1",
+    "localized_name": "Навык исследования фармацевтики, ур. 1",
     "description": null
   },
   "Medicine2_2": {
-    "localized_name": "Изучение фармацевтики, ур. 2",
+    "localized_name": "Навык исследования фармацевтики, ур. 2",
     "description": null
   },
   "Medicine2_3": {
@@ -383,16 +427,20 @@
     "localized_name": "Усиление Палов на базе, ур. 2",
     "description": null
   },
+  "Medicine2_5": {
+    "localized_name": "Усиление Палов на базе, ур. 3",
+    "description": null
+  },
   "Medicine3": {
-    "localized_name": "Искусство экономии: фармацевтика, ур. 1",
+    "localized_name": "Техника экономии при изготовлении лекарств, ур. 1",
     "description": null
   },
   "Medicine3_2": {
-    "localized_name": "Искусство экономии: фармацевтика, ур. 2",
+    "localized_name": "Техника экономии при изготовлении лекарств, ур. 2",
     "description": null
   },
   "Medicine3_3": {
-    "localized_name": "Искусство экономии: фармацевтика, ур. 3",
+    "localized_name": "Техника экономии при изготовлении лекарств, ур. 3",
     "description": null
   },
   "Medicine4": {
@@ -419,12 +467,16 @@
     "localized_name": "Добыча руды, ур. 5",
     "description": null
   },
+  "Mining1_6": {
+    "localized_name": "Добыча руды, ур. 6",
+    "description": null
+  },
   "Mining2": {
     "localized_name": "Ускоренные экспедиции, ур. 1",
     "description": null
   },
   "Mining2_2": {
-    "localized_name": "Секреты экспедиций, ур. 1",
+    "localized_name": "Мастерство экспедиции, ур. 1",
     "description": null
   },
   "Mining2_3": {
@@ -432,7 +484,7 @@
     "description": null
   },
   "Mining2_4": {
-    "localized_name": "Секреты экспедиций, ур. 2",
+    "localized_name": "Мастерство экспедиции, ур. 2",
     "description": null
   },
   "Mining3": {
@@ -449,6 +501,10 @@
   },
   "Mining3_4": {
     "localized_name": "Усиление Палов на базе, ур. 2",
+    "description": null
+  },
+  "Mining3_5": {
+    "localized_name": "Усиление Палов на базе, ур. 3",
     "description": null
   },
   "Mining4": {
@@ -485,6 +541,10 @@
   },
   "Seeding1_5": {
     "localized_name": "Посев семян, ур. 5",
+    "description": null
+  },
+  "Seeding1_6": {
+    "localized_name": "Посев семян, ур. 6",
     "description": null
   },
   "Seeding2": {
@@ -527,12 +587,16 @@
     "localized_name": "Усиление Палов на базе, ур. 2",
     "description": null
   },
+  "Seeding3_5": {
+    "localized_name": "Усиление Палов на базе, ур. 3",
+    "description": null
+  },
   "Seeding4": {
     "localized_name": "Разработка клумбы",
     "description": null
   },
   "Seeding5": {
-    "localized_name": "Разработка силосной ямы",
+    "localized_name": "Разработка силоса",
     "description": null
   },
   "Watering1": {
@@ -553,6 +617,10 @@
   },
   "Watering1_5": {
     "localized_name": "Полив, ур. 5",
+    "description": null
+  },
+  "Watering1_6": {
+    "localized_name": "Полив, ур. 6",
     "description": null
   },
   "Watering2": {
@@ -587,12 +655,16 @@
     "localized_name": "Усиление Палов на базе, ур. 2",
     "description": null
   },
+  "Watering3_5": {
+    "localized_name": "Усиление Палов на базе, ур. 3",
+    "description": null
+  },
   "Watering4": {
-    "localized_name": "Искусство дробления палзиума, ур. 1",
+    "localized_name": "Техника дробления палдиума, ур. 1",
     "description": null
   },
   "Watering4_2": {
-    "localized_name": "Искусство дробления палзиума, ур. 2",
+    "localized_name": "Техника дробления палдиума, ур. 2",
     "description": null
   },
   "Watering5": {
