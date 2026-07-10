@@ -11,6 +11,14 @@
     "localized_name": "음이리",
     "description": "기질이 워낙 예민해 기분이 상하면 동굴에 숨어 버린다. 하지만 너무 오래 숨어서 그런지 좀 흐리멍덩해졌다."
   },
+  "AmaterasuWolf_Dark_Quest_Enemy": {
+    "localized_name": "음이리",
+    "description": null
+  },
+  "AmaterasuWolf_Dark_Quest_Friend": {
+    "localized_name": "음이리",
+    "description": null
+  },
   "Ambassador01": {
     "localized_name": "사막가의 천사",
     "description": null
@@ -171,6 +179,10 @@
     "localized_name": "현상범 그릴",
     "description": null
   },
+  "BOSS_Hunter_Fat_GatlingGun_Quest_StrongOldMan": {
+    "localized_name": "현상범 엘더",
+    "description": null
+  },
   "BOSS_Hunter_Rifle": {
     "localized_name": "현상범 호크",
     "description": null
@@ -307,6 +319,10 @@
     "localized_name": "팰 애호 단체 심판자",
     "description": null
   },
+  "Believer_Fat_Cane_Tower": {
+    "localized_name": "팰 애호 단체 심판자",
+    "description": null
+  },
   "Believer_Fat_GatlingGun": {
     "localized_name": "팰 애호 단체 심판자",
     "description": null
@@ -332,12 +348,12 @@
     "description": "버드래곤의 외골격으로 만든 피리 소리는 천 개의 봉우리를 건넌다고 한다. 고대 전쟁에선 공격 신호로 사용했다."
   },
   "BirdDragon_Ice": {
-    "localized_name": "시로카바네",
-    "description": "시로카바네의 외골격으로 만든 피리 소리는 천 개의 봉우리를 건넌다고 한다. 고대의 전쟁에선 승리의 나팔로 사용했다."
+    "localized_name": "버드아이스",
+    "description": "버드아이스의 외골격으로 만든 피리 소리는 천 개의 봉우리를 건넌다고 한다. 고대의 전쟁에선 승리의 나팔로 사용했다."
   },
   "BlackCentaur": {
     "localized_name": "켄타나이트",
-    "description": "원래 팔라디우스의 일종이었다. 나쁜 감정만 분리된 듯한 모습이지만 눈동자 속에는 일말의 자비가 반짝인다."
+    "description": "본래 팔라디우스와(과) 하나의 존재였다. 부정적 감정이 분리된 존재로 여겨지나 눈동자 속에는 일말의 자비가 반짝인다."
   },
   "BlackFurDragon": {
     "localized_name": "ko_Text",
@@ -355,6 +371,10 @@
     "localized_name": "껌댕이",
     "description": "검은 불꽃은 만져도 따뜻한 정도에 그치지만 그 불꽃에 계속 닿으면 내부부터 천천히 녹게 된다. 치즈를 녹일 때 쓰면 절묘한 맛을 자아낼 수 있다."
   },
+  "BlackPuppy_Ice": {
+    "localized_name": "눈댕이",
+    "description": "푸르스름한 불꽃은 만져도 살짝 차가운 정도에 그치지만 그 불꽃에 계속 닿으면 천천히 얼게 된다. 우유병을 잠시 갖다 대면 프로즌 밀크를 만들 수 있다!"
+  },
   "Blacksmith01": {
     "localized_name": "수행 중인 대장장이",
     "description": null
@@ -369,11 +389,15 @@
   },
   "BluePlatypus": {
     "localized_name": "청부리",
-    "description": "자신이 탄생한 물에선 어디든지 물결을 일으킨다. 급할 때는 몸으로 물살을 타고 이동한다. 기운이 넘쳐 종종 벽에 부딪혀 죽는다."
+    "description": "체내에서 물을 생성해 어디든지 물결을 일으킨다. 급할 때는 몸으로 물살을 타고 이동한다. 기운이 넘쳐 종종 벽에 부딪혀 죽는다."
   },
   "BluePlatypus_Fire": {
     "localized_name": "적부리",
     "description": "배의 마찰력이 아주 강한 탓에 보디 서핑을 하면 불이 붙을 정도다. 너무 신나게 미끄러지다 간혹 불덩이가 되기도 한다."
+  },
+  "BlueSkyDragon": {
+    "localized_name": "샤오롱",
+    "description": "반려로 삼을 상대와의 해후를 이루면 몸체 중앙 부근에 떠 있는 고리를 떼어 내 상대와 교환하는 습성이 있다."
   },
   "BlueThunderHorse": {
     "localized_name": "썬더호스",
@@ -391,6 +415,18 @@
     "localized_name": "위병",
     "description": null
   },
+  "BrownRabbit": {
+    "localized_name": "레패시",
+    "description": "대지의 목소리를 들으며 불안정한 지면을 피해 달린다. 때로는 말이 안 통하는 지면에게 속아 넘어가 계속 나자빠지는 경우도 있다."
+  },
+  "CactusDoll": {
+    "localized_name": "허그미",
+    "description": "어떤 감정이든 격해지면 가시가 늘어난다. 허그미을(를) 소중히 키웠다면 무심코 안아 주고 싶어질 테지만 그런 경우 십중팔구, 눈물 어린 사고로 막을 내리게 된다."
+  },
+  "CactusDoll_Dark": {
+    "localized_name": "허그유",
+    "description": "어떤 감정이든 격해지면 가시가 늘어난다. 허그유을(를) 애정을 담아 키웠다면 무심코 주인을 안아 주려 하지만 그 사랑을 받아들이려면 아픔도 받아들여야 한다."
+  },
   "CandleGhost": {
     "localized_name": "유령초",
     "description": "일찍이 세계가 종말에 가까워질수록 화염이 약해진다고 사람들은 믿었다. 종말론자들은 이후에도 불길이 약해졌다고 여러 번 소동을 피웠지만 결국 유령초의 변덕에 불과하다. 적어도 현재로선 그렇다."
@@ -400,7 +436,7 @@
     "description": "사실 펭키와(과) 아무 연관도 없는 종. 멋대로 상전 대접을 받은 터라 일단 열심히 뻗대고 보고 있다."
   },
   "CaptainPenguin_Black": {
-    "localized_name": "펭키드",
+    "localized_name": "뎅킹",
     "description": "수중 사냥에 도움이 되도록 전기의 힘을 얻어 색이 변화했으며 그 결과 펭키의 충성을 잃고 말았다. 그러나 어째서인지는 몰라도 이번에는 뎅키의 충성을 얻게 되었다."
   },
   "CaravanLeader01": {
@@ -412,6 +448,10 @@
     "description": null
   },
   "CaravanLeader03": {
+    "localized_name": "캐러밴 상단 대장",
+    "description": null
+  },
+  "CaravanLeader04": {
     "localized_name": "캐러밴 상단 대장",
     "description": null
   },
@@ -439,6 +479,18 @@
     "localized_name": "꼬꼬닭",
     "description": "너무나 약하고 또 너무나 맛있다. SheepBall와(과) 함께 최약체를 담당한다. 많이 잡았다 싶으면 또 어디선가 튀어나온다."
   },
+  "ClioneTwins": {
+    "localized_name": "리오리네",
+    "description": "한 쪽이 사라지면 어디선가 사라진 쪽을 보충하는 누군가가 온다. 그리고 아무 일 없던 것처럼 사이좋게 지낸다. 리오리네에게 가장 중요한 것은 |사이좋게| 지내는 것이다."
+  },
+  "CloverFairy": {
+    "localized_name": "브루밍",
+    "description": "옛적에는 이마에 난 잎이 3장을 넘는 개체가 존재했으나 이러한 개체는 행운의 상징으로 여겨져 남획당한 결과 종 전체적으로 잎이 적게 나도록 진화하기 시작했다."
+  },
+  "ClownRabbit": {
+    "localized_name": "라피에르",
+    "description": "자신이 불러낸 분신에게 당해 교체되는 경우가 있다. 어제 만난 라피에르이(가), 오늘 만난 라피에르와(과) 같은 개체인지 자신조차도 제대로 알지 못한다."
+  },
   "ColorfulBird": {
     "localized_name": "알록새",
     "description": "폭발하는 알을 낳는 공포의 팰. 보통 엉덩이에서 발사하는 알을 무기로 삼지만 궁지에 몰리면 자기 몸까지 터뜨린다."
@@ -446,6 +498,14 @@
   "CowPal": {
     "localized_name": "밀카우",
     "description": "대충 풀어놓기만 해도 수도꼭지처럼 우유가 쏟아진다. 수컷도 우유가 나온다. 그야말로 생명의 신비다."
+  },
+  "CubeTurtle": {
+    "localized_name": "누름북",
+    "description": "등에 짊어진 돌에는 불가사의한 의지가 깃들어 있다. 본체와 떼어 내고 먼 곳에 방치하면 스스로 움직여 있어야 할 곳으로 돌아가려 한다."
+  },
+  "CubeTurtle_Neutral": {
+    "localized_name": "성채북",
+    "description": "등에 짊어진 돌을 누군가 몰래 가져간다 해도 성채북은(는) 돌이 어디 있는지 알 수 있다. 아무리 멀리 떨어진 곳이라 해도, 반드시 찾아낸다."
   },
   "CuteButterfly": {
     "localized_name": "귀요비",
@@ -459,6 +519,10 @@
     "localized_name": "두더비",
     "description": "커다란 발톱은 다이아몬드처럼 단단하지만 발톱 손질에 힘을 너무 쏟은 나머지 그대로 지쳐 하루를 마감하기도 한다."
   },
+  "DandelionGirl": {
+    "localized_name": "퍼프피아",
+    "description": "솜털 안에 나쁜 기억을 담아둘 수 있다. 솜털이 바람에 실려 어디론가 날아간다면 우울한 기분과도 작별할 수 있는 셈이다."
+  },
   "DarkAlien": {
     "localized_name": "제노베이더",
     "description": "정보를 보내고 망각하는 행위를 통해 에너지를 얻는다. 정기적으로 누군가에게 정보를 보내는 듯하다. - 응답하라, 목표 발견, 즉시 파괴하러 가라"
@@ -471,17 +535,21 @@
     "localized_name": "마스크로우",
     "description": "원래 드넓은 창공을 자유로이 날아다녔으나 질풍수리와(과) 싸움에서 패배해 하늘을 빼앗기고 밤에 숨죽인 채 살게 됐다."
   },
+  "DarkFlameFox": {
+    "localized_name": "마조리나",
+    "description": "허리에 손을 올리고 선 모습이 무척 그럴듯해 보이나 사실은 꼬리털과 머리 부분의 털이 너무 무거워 넘어지지 않도록 버티고 있는 것뿐이다."
+  },
   "DarkMechaDragon": {
     "localized_name": "제노드란",
     "description": "- 목적지에 도착. |개체: 유성용|의 수색을 우선. - 비고: 제압 완료 기한 (<://Error_Code:126DC>년 전). - 추가 기록: 제압 흔적 없음. 귀화 확인, 제거 개시. - 업무 연락: 중요한 정보를 잊거나 먹으면 안 됩니다!"
   },
   "DarkScorpion": {
-    "localized_name": "데스 스팅",
-    "description": "본체는 에너지 덩어리로 속이 비었다. 산 채로 먹잇감 속으로 스며들어 흡수한다. 주변엔 지옥 같은 신음이 끝없이 울려 퍼진다."
+    "localized_name": "데스스팅",
+    "description": "본체는 에너지 덩어리로 속이 비었다. 먹잇감을 외피 속으로 끌어들여 산 채로 흡수한다. 주변엔 지옥 같은 신음이 끝없이 울려 퍼진다."
   },
   "DarkScorpion_Ground": {
-    "localized_name": "골드 스팅",
-    "description": "본체는 에너지 덩어리로 속이 비었다. 토사나 광물을 외피 속에 채워 압도적인 질량을 보여준다. 공격한 상대는 지옥 같은 신음을 내지를 수밖에 없다."
+    "localized_name": "골드스팅",
+    "description": "본체는 에너지 덩어리로 속이 비었다. 토사나 광물을 외피 속에 채워 압도적인 질량을 보여준다. 공격당한 상대는 지옥 같은 신음을 내지를 수밖에 없다."
   },
   "DeathPenalty_guide": {
     "localized_name": "베테랑 팰 조련사",
@@ -499,13 +567,17 @@
     "localized_name": "섬 주민",
     "description": null
   },
+  "DomeArmorDragon": {
+    "localized_name": "셸가드라",
+    "description": "먼 옛날, 통신 수단이 마땅치 않았던 무렵에는 셸가드라의 날개 안쪽에 있는 빛을 깜빡깜빡 점멸시켜 간단한 신호를 보내는 방식으로 활용하기도 했다."
+  },
   "DreamDemon": {
     "localized_name": "몽마둥이",
     "description": "마음에 드는 상대를 깊은 잠에 빠뜨려 행복한 꿈을 꾸게 해준다. 죽을 때까지 잠에서 깰 일은 절대 없다."
   },
   "DrillGame": {
     "localized_name": "드릴북이",
-    "description": "드릴북이의 드릴'이란 이야기가 있다. 최강의 등딱지와 드릴을 가진 드릴북이이(가) 모순에 관해 고민하는 도덕적인 이야기다."
+    "description": "|드릴북이의 드릴|이란 이야기가 있다. 최강의 등딱지와 드릴을 가진 드릴북이이(가) 모순에 관해 고민하는 도덕적인 이야기다."
   },
   "Eagle": {
     "localized_name": "질풍수리",
@@ -519,9 +591,25 @@
     "localized_name": "ko_Text",
     "description": "ko_Text"
   },
+  "ElecLizard": {
+    "localized_name": "밍기저드",
+    "description": "하고 싶은 걸 하고, 자고 싶을 때 자고, 먹고 싶은 걸 먹는다. 분명 밍기저드들은 그런 생활을 유지하고자 남몰래 노력하고 있을 것이다. …옛날 섬 주민들은 그렇게라도 생각해야 버틸 수 있었다고 한다."
+  },
   "ElecPanda": {
     "localized_name": "일렉판다",
     "description": "호쾌한 얼굴에 듬직한 체구를 가졌으며 친구로 인정한 상대에겐 순종적이다. 하지만 어쩐 일인지 미니건만 맡기면 돌변한다."
+  },
+  "ElecPomeranian": {
+    "localized_name": "짜리링",
+    "description": "물에 잠기면 복실복실한 털이 물을 마구 빨아들인다. 몸을 털어 물이 뿌려질 때, 어마어마한 방전을 일으키기에 같이 목욕을 할 때는 목숨을 걸어야 한다."
+  },
+  "ElecSnail": {
+    "localized_name": "전팽이",
+    "description": "욕조 안에 짜릿한 전팽이을(를) 집어넣고 전기 목욕을 즐기는 트래디셔널한 건강 요법이 있다. 다시 말해, 데인저러스한 액티비티라는 뜻이다."
+  },
+  "ElecSnail_Ground": {
+    "localized_name": "돌팽이",
+    "description": "욕조 안에 뜨거운 돌팽이을(를) 집어넣고 고온 목욕을 즐기는 것이 먼 과거의 유행이었으나 리바이벌 붐으로 인해 요즘에도 핫한 트렌드가 되었다."
   },
   "Emote_location_A_01": {
     "localized_name": "섬 주민",
@@ -619,6 +707,10 @@
     "localized_name": "페더치프",
     "description": "한 발짝 내딛으면 망설임을 잊고 두 발짝 내딛으면 근심을 잊으며 세 발짝 내딛으면 공포를 잊고 어떤 적이 와도 맞설 수 있다."
   },
+  "Female_DTairikuPeople01_v01": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
   "Female_DesertPeople02": {
     "localized_name": "마을 사람",
     "description": null
@@ -639,6 +731,14 @@
     "localized_name": "섬 주민",
     "description": null
   },
+  "Female_Farmer01_v05": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Female_Kunoichi01": {
+    "localized_name": "창천의 맹약 집행인",
+    "description": null
+  },
   "Female_Nomad01_v01": {
     "localized_name": "섬 주민",
     "description": null
@@ -652,6 +752,10 @@
     "description": null
   },
   "Female_Nomad01_v04": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Female_Nomad01_v05": {
     "localized_name": "섬 주민",
     "description": null
   },
@@ -683,6 +787,18 @@
     "localized_name": "섬 주민",
     "description": null
   },
+  "Female_Ranger01_v05": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Female_SakurajimaPeople01": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Female_SnowPeople01": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
   "Female_Soldier01": {
     "localized_name": "섬 주민",
     "description": null
@@ -707,6 +823,42 @@
     "localized_name": "쌍둥이 팰 조련사",
     "description": null
   },
+  "Female_SorajimaPeople01": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Female_SurveyGirl01": {
+    "localized_name": "피아",
+    "description": null
+  },
+  "Female_SurveyGirl02": {
+    "localized_name": "피아",
+    "description": null
+  },
+  "Female_SurveyGirl03": {
+    "localized_name": "피아",
+    "description": null
+  },
+  "Female_SurveyGirl04": {
+    "localized_name": "피아",
+    "description": null
+  },
+  "Female_SurveyWoman01": {
+    "localized_name": "칼라",
+    "description": null
+  },
+  "Female_SurveyWoman02": {
+    "localized_name": "칼라",
+    "description": null
+  },
+  "Female_TenrakuPeople01": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Female_WorldTreePeople01": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
   "FengyunDeeper": {
     "localized_name": "윈드디어",
     "description": "먼 옛날, 그 아름다움 덕에 그림의 소재가 된 친근한 존재였다. 시대가 흐르며 아름다운 털가죽과 뿔도 예술품의 재료가 되어 일상적인 존재가 됐다."
@@ -727,6 +879,14 @@
     "localized_name": "영원한 불꽃의 동지 순교자",
     "description": null
   },
+  "FireCult_GrenadeLauncher": {
+    "localized_name": "영원한 불꽃의 동지 순교자",
+    "description": null
+  },
+  "FireCult_MissileLauncher": {
+    "localized_name": "영원한 불꽃의 동지 순교자",
+    "description": null
+  },
   "FireCult_Prisoner": {
     "localized_name": "영원한 불꽃의 동지 순교자",
     "description": null
@@ -743,12 +903,16 @@
     "localized_name": "영원한 불꽃의 동지 순교자",
     "description": null
   },
+  "FireCult_RocketLauncher": {
+    "localized_name": "영원한 불꽃의 동지 순교자",
+    "description": null
+  },
   "FireKirin": {
     "localized_name": "파이린",
     "description": "전신이 고효율의 방열 기관이 되어 경이적인 지구력을 발휘한다. 누가 올라타면 화상을 입지 않도록 배려해준다."
   },
   "FireKirin_Dark": {
-    "localized_name": "사라블랙",
+    "localized_name": "베이린",
     "description": "정체불명의 암흑 물질을 태워 에너지로 삼으며 남은 어둠의 입자를 전신에서 방출한다. 누군가 탑승하면 그가 어둠에 물들지 않도록, 눈치 있게 배려하는 면도 있다."
   },
   "FlameBambi": {
@@ -771,9 +935,21 @@
     "localized_name": "플로리나",
     "description": "수명이 다하면 큰 식물로 변한다. 10년에 한 번 아주 예쁜 꽃을 피우며 거기서 새 플로리나이(가) 자란다."
   },
+  "FlowerDoll_Fire": {
+    "localized_name": "체를리나",
+    "description": "수명이 다하면 완전히 불타 재가 된다. 타오른 자리 근처의 토양은 매우 비옥해져 약 10년 동안 수많은 식물들이 무성히 자라난다."
+  },
+  "FlowerPrince": {
+    "localized_name": "녹사주",
+    "description": "아주 오래전부터 세계수에 서서 무언가를 지키고 있다. 지금 무엇을 지키는지, 왜 지키는지, 녹사주은(는) 굳이 확인하지 않는다. 어차피 세계수가 알고 있으니까. 다루는 안개만이, 진실을 보여 줄 테니까."
+  },
   "FlowerRabbit": {
     "localized_name": "토푸리",
     "description": "식물이 많은 곳을 좋아하지만 최근 토푸리 무리에게 꽃가루 알레르기가 유행하는 듯하다."
+  },
+  "FluffyBird": {
+    "localized_name": "솜눈이",
+    "description": "얼굴 주변의 복슬복슬한 털이 충격을 흡수한다. 덕분에 웬만한 충격이라면 끄떡없으나 털 관리도 어렵고 가려운 곳도 못 긁는 탓에 괜히 답답하게 느껴진다고 한다."
   },
   "FlyingManta": {
     "localized_name": "루미카이트",
@@ -782,6 +958,10 @@
   "FlyingManta_Thunder": {
     "localized_name": "일레카이트",
     "description": "무늬가 화려할수록 파트너의 이목을 끌 수 있다고 한다. 역사적으로 일레카이트에게 감전된 사례는 끊이지 않으며 현재에 이르러 섬 내에서 노랑과 검은 줄무늬는 위험한 색으로 인식되고 있다."
+  },
+  "FoxExorcist": {
+    "localized_name": "센코",
+    "description": "정신을 집중하며 불꽃 속으로부터 미래를 들여다 본다. 원치 않는 미래가 보이면 원하는 미래가 나올 때까지 재시도한다. 그렇기에 센코에게는 항상 밝은 미래만이 있다!"
   },
   "FoxMage": {
     "localized_name": "마호",
@@ -802,6 +982,14 @@
   "GYM_BlackGriffon_2_Avatar": {
     "localized_name": "빅터&제노그리프",
     "description": null
+  },
+  "GYM_BlueSkyDragon": {
+    "localized_name": "아우리&샤오롱",
+    "description": "반려로 삼을 상대와의 해후를 이루면 몸체 중앙 부근에 떠 있는 고리를 떼어 내 상대와 교환하는 습성이 있다."
+  },
+  "GYM_BlueSkyDragon_2": {
+    "localized_name": "아우리&샤오롱",
+    "description": "반려로 삼을 상대와의 해후를 이루면 몸체 중앙 부근에 떠 있는 고리를 떼어 내 상대와 교환하는 습성이 있다."
   },
   "GYM_ElecPanda": {
     "localized_name": "조이&일렉판다",
@@ -825,11 +1013,11 @@
   },
   "GYM_LilyQueen": {
     "localized_name": "릴리&릴린",
-    "description": "자애심으로 가득한 온화한 팰. 부모를 잃은 어린 팰들을 돌봐주고 있다. 버릇은 전력으로 쏘는 SolarBeam."
+    "description": "자애심으로 가득한 온화한 팰. 부모를 잃은 어린 팰들을 돌봐주고 있다. 훈육 방법은 전력으로 쏘는 SolarBeam."
   },
   "GYM_LilyQueen_2": {
     "localized_name": "릴리&릴린",
-    "description": "자애심으로 가득한 온화한 팰. 부모를 잃은 어린 팰들을 돌봐주고 있다. 버릇은 전력으로 쏘는 SolarBeam."
+    "description": "자애심으로 가득한 온화한 팰. 부모를 잃은 어린 팰들을 돌봐주고 있다. 훈육 방법은 전력으로 쏘는 SolarBeam."
   },
   "GYM_MoonQueen": {
     "localized_name": "사야&셀레문",
@@ -852,12 +1040,20 @@
     "description": "둥근 물체를 볼 때마다 주먹이 근질거린다. SnowTigerBeastMan에게 생존 다음으로 힘겨운 일은 눈사람을 온전하게 완성하는 것이다."
   },
   "GYM_ThunderDragonMan": {
-    "localized_name": "액슬&전룡맨",
-    "description": "상처로 전류를 흘려보내 상대의 몸을 불태운다. 전룡맨끼리 싸우면 순식간에 승부가 난다."
+    "localized_name": "액슬&볼젝스",
+    "description": "상처로 전류를 흘려보내 상대의 몸을 불태운다. 볼젝스끼리 싸우면 순식간에 승부가 난다."
   },
   "GYM_ThunderDragonMan_2": {
-    "localized_name": "액슬&전룡맨",
-    "description": "상처로 전류를 흘려보내 상대의 몸을 불태운다. 전룡맨끼리 싸우면 순식간에 승부가 난다."
+    "localized_name": "액슬&볼젝스",
+    "description": "상처로 전류를 흘려보내 상대의 몸을 불태운다. 볼젝스끼리 싸우면 순식간에 승부가 난다."
+  },
+  "GYM_WorldTreeDragon": {
+    "localized_name": "제날라&제로버스",
+    "description": "아주 먼 옛날 팰파고스섬으로 날아온 정체불명의 팰이 도달한 말로. 재앙으로서 파멸을 일으켜 오랜 세월 동안 봉인되었으나 어떤 팰 조련사의 손에 타도당했다."
+  },
+  "GYM_WorldTreeDragon_2": {
+    "localized_name": "제날라&제로버스",
+    "description": "아주 먼 옛날 팰파고스섬으로 날아온 정체불명의 팰이 도달한 말로. 재앙으로서 파멸을 일으켜 오랜 세월 동안 봉인되었으나 어떤 팰 조련사의 손에 타도당했다."
   },
   "Ganesha": {
     "localized_name": "차코리",
@@ -879,9 +1075,25 @@
     "localized_name": "고스호스",
     "description": "죽을 때가 가까워진 생물이 뿜어내는 독특한 냄새를 좋아한다. 고스호스에게 사랑받는다는 건 바로 그런 것이다."
   },
+  "GhostBlackCat": {
+    "localized_name": "냥시",
+    "description": "등 뒤에 뻗어난 손에는 여태껏 일족을 키워 온 인간들의 사념이 깃들어 있다. 요즘엔 냥시을(를) 어여삐 키우는 것이 사념의 공통 의견이라고 한다."
+  },
+  "GhostDragon": {
+    "localized_name": "레이번",
+    "description": "최근 들어서 목격담이 전해지는 새로운 팰. 온화하고 조용한 성격에, 그저 자유롭게 살아간다. 더는 그 무엇에게도 얽매이지 않는다."
+  },
+  "GhostDragon_Fire": {
+    "localized_name": "헬번",
+    "description": "최근 들어서 목격담이 전해지는 새로운 팰. 언제나 무언가에 자극받은 듯, 분노에 미쳐 날뛴다. 더는 그 누구도 믿지 않는다."
+  },
   "GhostRabbit": {
     "localized_name": "코쉬마리",
     "description": "자신의 영혼을 꺼내어 들고 다닌다. 누군가에게 연심을 품으면 영혼을 억지로 뽑아 내어 자신의 영혼에 넣고 뒤섞는 식으로 하나가 되고 싶어 한다."
+  },
+  "GhostRabbit_Grass": {
+    "localized_name": "에브마리",
+    "description": "자신의 영혼을 꺼내어 들고 다닌다. 누군가에게 연심을 품으면 영혼을 힘껏 던져 상대의 영혼과 뒤섞여 하나가 되고 싶어 한다."
   },
   "GoldenHorse": {
     "localized_name": "러시골드",
@@ -903,6 +1115,14 @@
     "localized_name": "조이",
     "description": null
   },
+  "GrassGolem": {
+    "localized_name": "스태초",
+    "description": "한 생명에 두 의식이 깃든 존재. 이따금 방향성의 차이로 싸우기도 한다. 화해할 때까지 갑옷이 어느 쪽으로 나아갈지는 아무도 모른다!"
+  },
+  "GrassGolem_Dark": {
+    "localized_name": "스태그림",
+    "description": "한 생명에 두 의식이 깃든 존재. 평소에는 의견도 잘 안 맞고 싸움도 잦지만 전투가 벌어질 때면 순식간에 몸과 마음이 하나로 단결한다!"
+  },
   "GrassMammoth": {
     "localized_name": "그린모스",
     "description": "등에 있는 식물은 개체마다 제각각이다. 관상용으로 익숙한 역사도 있으며 그린모스 전문 정원사마저 존재했다."
@@ -911,13 +1131,25 @@
     "localized_name": "블리자모스",
     "description": "등 위의 식물은 개체마다 제각각이다. 멸종한 줄 알았던 식물이 얼어붙은 채로 블리자모스의 등에서 발견되는 경우도 있다."
   },
+  "GrassMinotaur": {
+    "localized_name": "그루타우",
+    "description": "뿔에 난 잎새는 아무리 잡아당겨도 떨어지지 않는다. 이 잎새가 자연스레 떨어지는 순간 그루타우은(는) 자신의 최후가 다가왔음을 깨닫는다."
+  },
+  "GrassMinotaur_Ice": {
+    "localized_name": "블랑타우",
+    "description": "뿔 형태의 얼음은 살아 있는 동안 절대 녹지 않는다. 이 얼음에서 물방울이 떨어지는 순간 블랑타우은(는) 자신의 육체가 차가워져 가고 있음을 실감한다."
+  },
   "GrassPanda": {
-    "localized_name": "초판다",
+    "localized_name": "풀바오",
     "description": "믿기 힘든 괴력의 소유자. 어느 실험에서 3,000장이 넘는 종이 뭉치를 가볍게 찢었다. 육식을 안 하는 걸 감사히 생각해야 한다."
   },
   "GrassPanda_Electric": {
-    "localized_name": "썬더판다",
+    "localized_name": "라이바오",
     "description": "믿기 힘든 괴력의 소유자. 전기를 신호로 바꿔 신체 능력의 한계를 돌파했다. 최강 생물이 화제에 오르면 절대 빠지지 않는다."
+  },
+  "GrassPanda_Electric_Tower": {
+    "localized_name": "라이바오",
+    "description": null
   },
   "GrassRabbitMan": {
     "localized_name": "초토리",
@@ -945,7 +1177,7 @@
   },
   "HadesBird_Electric": {
     "localized_name": "라이가루다",
-    "description": "지옥에서 번개를 불러낸다. 헬가루다의 아종으로 알려져 있으나 실은 지옥에서 번개에 맞은 라이가루다(이)가 헬가루다(으)로 변했다는 설도 있다"
+    "description": "지옥에서 번개를 불러낸다. 헬가루다의 아종으로 알려져 있으나 실은 지옥에서 번개에 맞은 라이가루다(이)가 헬가루다(으)로 변했다는 설도 있다."
   },
   "HadesBird_Oilrig": {
     "localized_name": "헬가루다",
@@ -986,6 +1218,10 @@
   "HerculesBeetle_Ground": {
     "localized_name": "금강벌레",
     "description": "전신을 감싸는 초강력 장갑은 압도적인 강도와 내열성을 자랑한다 그린모스에게 밟혀도 끄떡도 없다."
+  },
+  "HoodGhost": {
+    "localized_name": "후드림",
+    "description": "잠에 들면 옷만 남는다. 그 자리에 없는 것이다. 잠든 후드림은(는) 존재하지 않기에 곧 후드림은(는) 자는 것이 아니다."
   },
   "Horus": {
     "localized_name": "호루스",
@@ -1107,6 +1343,10 @@
     "localized_name": "밀렵단 초짜",
     "description": null
   },
+  "Hunter_Handgun_Quest_StrongOldMan": {
+    "localized_name": "밀렵단 초짜",
+    "description": null
+  },
   "Hunter_Katana": {
     "localized_name": "밀렵단 검사",
     "description": null
@@ -1159,6 +1399,10 @@
     "localized_name": "밀렵단 총잡이",
     "description": null
   },
+  "Hunter_Rifle_Tower": {
+    "localized_name": "밀렵단 총잡이",
+    "description": null
+  },
   "Hunter_RocketLauncher": {
     "localized_name": "밀렵단 정예 대원",
     "description": null
@@ -1183,6 +1427,10 @@
     "localized_name": "밀렵단 정예 대원",
     "description": null
   },
+  "Hunter_RocketLauncher_Quest_StrongOldMan": {
+    "localized_name": "밀렵단 정예 대원",
+    "description": null
+  },
   "Hunter_Shotgun": {
     "localized_name": "밀렵단 사냥꾼",
     "description": null
@@ -1203,6 +1451,10 @@
     "localized_name": "밀렵단 사냥꾼",
     "description": null
   },
+  "Hunter_Shotgun_Quest_StrongOldMan": {
+    "localized_name": "밀렵단 사냥꾼",
+    "description": null
+  },
   "IceCrocodile": {
     "localized_name": "크로꽁",
     "description": "입속이 무척 차가워 닫으면 냉장고 그 자체가 된다. 타액에 포함된 특수한 성분도 음식의 부패를 막아준다. 인간용 식재료 보관고로 쓰려면 쓸 수야 있지만 위생적으로는 애매하니 누가 물어보면 입을 닫는 편이 좋겠다."
@@ -1220,7 +1472,7 @@
     "description": "겨울을 불러오는 팰파고스섬의 수호신. 일찍이 재앙이 이 땅을 석권할 때 하늘을 가로지르며 끝나지 않는 겨울을 불러와 이를 봉인했다."
   },
   "IceHorse_Dark": {
-    "localized_name": "그레이섀도우",
+    "localized_name": "흑천마",
     "description": "밤을 불러오는 팰파고스섬의 수호신. 일찍이 재앙이 이 땅을 석권할 때 하늘을 가로지르며 끝나지 않는 어둠을 불러와 이를 봉인했다."
   },
   "IceNarwhal": {
@@ -1234,6 +1486,10 @@
   "IceSeal": {
     "localized_name": "크리범",
     "description": "눈 위를 제일 빠르게 미끄러지는 개체가 가장 높은 취급을 받는다. 간혹 너무 신난 나머지 점프한 개체가 하늘에서 떨어지는 경우가 있으며, 우두머리 경쟁 시기에 더더욱 자주 볼 수 있다. 맑음 때때로 크리범."
+  },
+  "IceSeal_Ground": {
+    "localized_name": "초코범",
+    "description": "눈 위를 제일 빠르게 미끄러지는 개체가 가장 높은 취급을 받는다. 간혹 너무 신난 나머지 점프한 개체가 설원에 박히는 경우가 있으며, 우두머리 경쟁 시기에 더더욱 자주 볼 수 있다. 혼잡 예상, 초코범."
   },
   "IceWitch": {
     "localized_name": "칠위치",
@@ -1255,12 +1511,16 @@
     "localized_name": "제트래곤",
     "description": "팰파고스섬을 저 먼 하늘에서 굽어본다. 재앙이 다시 눈을 떠 대지를 가르고 하늘을 불태울 때 완전한 파멸의 섬광으로 이를 파괴하리라."
   },
+  "KabukiMan": {
+    "localized_name": "업화무",
+    "description": "적과 마주했을 때, 한눈에 보면 거창하고 빈틈투성이인 움직임처럼 보이지만 신기하게도 상대는 그 움직임에 압도당해 넋을 잃고 바라보게 된다."
+  },
   "Kelpie": {
     "localized_name": "켈시",
     "description": "태어난 장소의 수질에 따라 성격이 달라진다. 더러운 웅덩이에서 태어난켈시은(는) 대체로 성격이 나쁘고 흉악하기 일쑤다."
   },
   "Kelpie_Fire": {
-    "localized_name": "마그피스",
+    "localized_name": "마그시",
     "description": "태어난 장소의 수온에 따라 성격이 달라진다. 따뜻한 웅덩이에서 태어난켈시은(는) 대체로 성격이 화끈하며 의욕이 넘쳐흐른다."
   },
   "KendoFrog": {
@@ -1280,16 +1540,32 @@
     "description": "냉담한 성격으로 감정 표현이 서투르다. 외톨이인 개체는 멜파카와(과)의 의사소통이 너무 서툴렀던 슬픈 개체다."
   },
   "KingBahamut": {
-    "localized_name": "마그마 카이저",
-    "description": "화산 분화와 함께 태어났다는 전설이 있다. 이 대지는 거대한 마그마 카이저의 등이라고 주장하는 괴상한 단체도 있었다."
+    "localized_name": "마그마카이저",
+    "description": "화산 분화와 함께 태어났다는 전설이 있다. 이 대지는 거대한 마그마카이저의 등이라고 주장하는 괴상한 단체도 있었다."
   },
   "KingBahamut_Dragon": {
-    "localized_name": "마그마 드라고",
+    "localized_name": "마그마드라고",
     "description": "아주 먼 옛날, 깊은 땅속에서 모습을 드러냈다. 맹렬한 폭염으로 일말의 자비도 없이 섬을 몽땅 태울 때까지 절대 사라지지 않았다. 말 그대로 |영원한 불꽃| 그 자체였다."
+  },
+  "KingSunfish": {
+    "localized_name": "킹복치",
+    "description": "스크루처럼 생긴 꼬리를 회전시켜 추진력을 얻는다. 과거 연구 결과에 따르면 육체 붕괴를 무시하는 가정하에 이론상 88 mph 이상으로도 헤엄칠 수 있다고 한다."
+  },
+  "KingSunfish_Thunder": {
+    "localized_name": "쇼군복치",
+    "description": "스크루처럼 생긴 꼬리를 회전시켜 전기를 발생시킨다. 이론상 1.21 기가와트의 전력을 발생시킬 수 있다고 하나 순식간에 육체 붕괴가 일어나므로 실용적이지는 않다."
+  },
+  "KingWhale": {
+    "localized_name": "그랜웰",
+    "description": "사명을 가슴에 품고 살아가던 종족의 마지막 생존자. 책무를 다한 그가 어머니를 불러도 돌아오는 것은 오직 잔향뿐이었다."
   },
   "Kirin": {
     "localized_name": "썬더콘",
     "description": "예전엔 번개 신의 사자로 여겨져 사람들이 건드리지 않았다. 하지만 낙뢰에 맞아 사망하는 모습이 목격된 뒤로 신앙이 무너지며 보이는 족족 잡혔다."
+  },
+  "Kirin_Ice": {
+    "localized_name": "레이콘",
+    "description": "예전엔 겨울 신의 사자로 여겨져 사람들이 건드리지 않았다. 하지만 얼음 위에서 미끄러져 넘어진 모습이 목격된 뒤로 신앙이 무너지며 마차를 끄는 신세로까지 미끄러졌다."
   },
   "Kitsunebi": {
     "localized_name": "파이호",
@@ -1298,6 +1574,10 @@
   "Kitsunebi_Ice": {
     "localized_name": "아이호",
     "description": "태어난 직후엔 냉기를 잘 못 다뤄서 걸핏하면 냉기를 뿜다가 숨이 탁 막힌다. 감기에 걸리면 콧물이 어는 바람에 숨이 가빠진다."
+  },
+  "LanternButler": {
+    "localized_name": "뷔랜턴",
+    "description": "신비로운 빛을 띠는 랜턴이 세계의 진실을 비춘다. 랜턴 빛이 눈부시게 느껴진다면 뭔가 켕기는 게 있기 때문일 것이다."
   },
   "LavaGirl": {
     "localized_name": "라비",
@@ -1319,6 +1599,10 @@
     "localized_name": "핑피롱",
     "description": "헤로롱은(는) 생각했다. 슬슬 자신을 바꿀 때라고. 그 순간 전신에 전기가 흘렀다!"
   },
+  "LazyDragon_Electric_Tower": {
+    "localized_name": "핑피롱",
+    "description": null
+  },
   "LeafMomonga": {
     "localized_name": "모몽파",
     "description": "고장난 건 뭐든 때리면 고쳐진다고 여긴다. 모몽파의 힘조절은 인간 입장에선 완벽하기에 때리기만 해도 멈췄던 심장이 다시 움직이는 경우도 있다."
@@ -1329,14 +1613,14 @@
   },
   "LegendDeer": {
     "localized_name": "레젠디얼",
-    "description": "소름끼칠 정도로 조용하나, 신기할 정도로 침착했다. 이제 나 말고는 아무도 없다. 모두 구원받았다. 구원의 왕이시여, 저도 무한한 정적으로 데려가 주십시오. - 낡은 문헌의 내용은 여기서 끊겨 있다."
+    "description": "소름 끼칠 정도로 조용하나, 신기할 정도로 침착했다. 이제 나 말고는 아무도 없다. 모두 구원받았다. 구원의 왕이시여, 저도 무한한 정적으로 데려가 주십시오. - 낡은 문헌의 내용은 여기서 끊겨 있다."
   },
   "LilyQueen": {
     "localized_name": "릴린",
-    "description": "자애심으로 가득한 온화한 팰. 부모를 잃은 어린 팰들을 돌봐주고 있다. 버릇은 전력으로 쏘는 SolarBeam."
+    "description": "자애심으로 가득한 온화한 팰. 부모를 잃은 어린 팰들을 돌봐주고 있다. 훈육 방법은 전력으로 쏘는 SolarBeam."
   },
   "LilyQueen_Dark": {
-    "localized_name": "루나퀸",
+    "localized_name": "루나린",
     "description": "기품이 넘치는 우아한 팰. 무례한 녀석에겐 눈물이 쏙 빠지는 따귀를 날린다. 그걸 노리는 팰도 더러 있다."
   },
   "LittleBriarRose": {
@@ -1348,12 +1632,20 @@
     "description": "일어선 모습에 이상한 집착을 보인다. 항상 제일 멋진 자세를 연구하며 거울을 주면 하루 종일 자세만 궁리한다."
   },
   "LizardMan_Fire": {
-    "localized_name": "칠리자드",
+    "localized_name": "도화맨",
     "description": "자신의 포즈에 이상한 집착을 보인다. 항상 제일 뜨거운 자세를 연구하며 키우는 사람은 보기만 해도 숨이 막히는 자세를 계속 봐야만 한다."
   },
   "LizardMan_Oilrig": {
     "localized_name": "도마맨",
     "description": null
+  },
+  "LongCat": {
+    "localized_name": "냐를르",
+    "description": "옛 그림에는 지금보다 체구가 더 작은 것으로 묘사되어 있다. 어째선지 요즘 들어 몸 이곳저곳이 급속 성장 중인 것으로 관측되어 100년 후에는 지금의 10배 이상으로 커진다는 예측이 나왔다."
+  },
+  "LotusDragon": {
+    "localized_name": "연미르",
+    "description": "연미르이(가) 서식하는 물가에는 무척 비슷한 외형의 꽃이 많이 자라난다. 이 꽃만을 번식시키고자 하는 연구를 여러 번 시도하였으나 사람의 손을 거치면 무슨 수를 써도 시들고 말았다."
   },
   "Male_Angler01_v01": {
     "localized_name": "섬 주민",
@@ -1375,7 +1667,27 @@
     "localized_name": "섬 주민",
     "description": null
   },
+  "Male_Breeder01_v05": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Male_DTairikuPeople01_v01": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
   "Male_DarkTrader01": {
+    "localized_name": "암시장 상인",
+    "description": null
+  },
+  "Male_DarkTrader01_02": {
+    "localized_name": "암시장 상인",
+    "description": null
+  },
+  "Male_DarkTrader01_03": {
+    "localized_name": "암시장 상인",
+    "description": null
+  },
+  "Male_DarkTrader01_04": {
     "localized_name": "암시장 상인",
     "description": null
   },
@@ -1395,11 +1707,19 @@
     "localized_name": "달꽃단 하급 닌자",
     "description": null
   },
+  "Male_Ninja01_Seabase": {
+    "localized_name": "달꽃단 하급 닌자",
+    "description": null
+  },
   "Male_NinjaElite01": {
     "localized_name": "달꽃단 상급 닌자",
     "description": null
   },
   "Male_NinjaElite01_Invader": {
+    "localized_name": "달꽃단 상급 닌자",
+    "description": null
+  },
+  "Male_NinjaElite01_Seabase": {
     "localized_name": "달꽃단 상급 닌자",
     "description": null
   },
@@ -1412,6 +1732,10 @@
     "description": null
   },
   "Male_Police_old": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Male_SakurajimaPeople01": {
     "localized_name": "섬 주민",
     "description": null
   },
@@ -1431,12 +1755,24 @@
     "localized_name": "섬 주민",
     "description": null
   },
+  "Male_Scholar01_v05": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Male_Scholar02": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
   "Male_Scientist01_LaserRifle": {
     "localized_name": "유전자 연구 부대 실행반",
     "description": null
   },
   "Male_Scientist01_LaserRifle_Invader": {
     "localized_name": "유전자 연구 부대 실행반",
+    "description": null
+  },
+  "Male_SnowPeople01": {
+    "localized_name": "섬 주민",
     "description": null
   },
   "Male_Soldier01": {
@@ -1467,8 +1803,124 @@
     "localized_name": "섬 주민",
     "description": null
   },
+  "Male_SorajimaPeople01": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
+  "Male_StrongOldMan01": {
+    "localized_name": "해럴드",
+    "description": null
+  },
+  "Male_StrongOldMan02": {
+    "localized_name": "해럴드",
+    "description": null
+  },
+  "Male_SurveyMan01": {
+    "localized_name": "가델",
+    "description": null
+  },
+  "Male_SurveyMan02": {
+    "localized_name": "가델",
+    "description": null
+  },
+  "Male_SurveyMan03": {
+    "localized_name": "가델",
+    "description": null
+  },
+  "Male_TenrakuPeople01": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
   "Male_Trader01": {
     "localized_name": "마을 사람",
+    "description": null
+  },
+  "Male_Trader01_v04": {
+    "localized_name": "견습 정육업자",
+    "description": null
+  },
+  "Male_Trader01_v05": {
+    "localized_name": "마을 채소장수",
+    "description": null
+  },
+  "Male_Trader01_v06": {
+    "localized_name": "밀수업자 심부름꾼",
+    "description": null
+  },
+  "Male_Trader01_v07": {
+    "localized_name": "소재 줍는 상인",
+    "description": null
+  },
+  "Male_Trader01_v08": {
+    "localized_name": "길거리 빵 판매원",
+    "description": null
+  },
+  "Male_Trader01_v09": {
+    "localized_name": "수상한 약장수",
+    "description": null
+  },
+  "Male_Trader01_v10": {
+    "localized_name": "숙련 어부 겸 정육업자",
+    "description": null
+  },
+  "Male_Trader01_v11": {
+    "localized_name": "수렵의 달인",
+    "description": null
+  },
+  "Male_Trader01_v12": {
+    "localized_name": "전설의 야생육 헌터",
+    "description": null
+  },
+  "Male_Trader01_v13": {
+    "localized_name": "용병 보급계원",
+    "description": null
+  },
+  "Male_Trader01_v14": {
+    "localized_name": "중무장한 상인",
+    "description": null
+  },
+  "Male_Trader01_v15": {
+    "localized_name": "전설의 탄약 상인",
+    "description": null
+  },
+  "Male_Trader01_v16": {
+    "localized_name": "농원 행상인",
+    "description": null
+  },
+  "Male_Trader01_v17": {
+    "localized_name": "전설의 채소장수",
+    "description": null
+  },
+  "Male_Trader01_v18": {
+    "localized_name": "정규 약제사",
+    "description": null
+  },
+  "Male_Trader01_v19": {
+    "localized_name": "전설의 약사",
+    "description": null
+  },
+  "Male_Trader01_v20": {
+    "localized_name": "마을 정식요리 판매원",
+    "description": null
+  },
+  "Male_Trader01_v21": {
+    "localized_name": "신출내기 미식가",
+    "description": null
+  },
+  "Male_Trader01_v22": {
+    "localized_name": "전설의 미식가",
+    "description": null
+  },
+  "Male_Trader01_v23": {
+    "localized_name": "정규 소재 상인",
+    "description": null
+  },
+  "Male_Trader01_v24": {
+    "localized_name": "엘리먼트 상인",
+    "description": null
+  },
+  "Male_Trader01_v25": {
+    "localized_name": "전설의 소재 상인",
     "description": null
   },
   "Male_Trader02": {
@@ -1479,12 +1931,16 @@
     "localized_name": "마을 사람",
     "description": null
   },
+  "Male_WorldTreePeople01": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
   "Manticore": {
     "localized_name": "만티파이어",
     "description": "생고기를 좋아하지만 항상 익힌 고기를 먹는다. 타오르는 발톱을 무기로 삼은 탓에 잡은 먹이가 바싹 익어버린다는 것을 깨닫지 못했기 때문이다."
   },
   "Manticore_Dark": {
-    "localized_name": "시니에노",
+    "localized_name": "만티녹턴",
     "description": "평범한 고기를 좋아하지만 항상 오염된 고기를 먹는다. 암흑의 발톱을 무기로 삼은 탓에 잡은 먹이가 저주받는다는 걸 깨닫지 못했기 때문이다."
   },
   "MimicDog": {
@@ -1507,6 +1963,18 @@
     "localized_name": "몽지",
     "description": "예전엔 나뭇가지처럼 가늘고 긴 물건을 무기로 삼았다. 인간과 엮이며 그런 무기는 쓰지 않게 됐다. 대신 가늘고 길며 더 효율적인 '총기'를 찾았다."
   },
+  "Monkey_Fire": {
+    "localized_name": "몽화",
+    "description": "손바닥이 진화하여 불에 달궈진 물건을 잡아도 화상을 입지 않는다. 잔탄을 소진하고 나면 한창 뜨거워진 총신을 손으로 붙잡아 둔기로 쓸 수 있을지도 모른다."
+  },
+  "MonochromeQueen": {
+    "localized_name": "모노크로나",
+    "description": "좋은 일을 겪은 후에는 그만큼 나쁜 일을 겪어야 직성이 풀린다. 모노크로나을(를) 소중히 키우려 한다면 그만한 각오를 해야만 한다."
+  },
+  "MoonChild": {
+    "localized_name": "달보미",
+    "description": "생애를 마쳤을 때 하늘 어딘가에 빛나는 별이 하나 늘어난다. 그 별은 추억의 숫자만큼, 강하게 빛난다."
+  },
   "MoonQueen": {
     "localized_name": "셀레문",
     "description": "등 뒤에 떠다니는 달처럼 생긴 물체는 세대를 거듭할 때마다 아주 조금씩 원형에 가까워진다고 한다. 그 달이 완전히 찼을 때 무슨 일이 벌어질지는, 아무도 모른다."
@@ -1517,7 +1985,15 @@
   },
   "MopKing": {
     "localized_name": "모프킹",
-    "description": "동면 중엔 거대한 털 뭉치 속에 대량의모프링이(가) 숨어 있다. 과거 최대 기록은 무려 101마리."
+    "description": "동면 중엔 거대한 털 뭉치 속에 대량의 모프링이(가) 숨어 있다. 과거 최대 기록은 무려 101마리."
+  },
+  "Mothman": {
+    "localized_name": "모슬론",
+    "description": "아주 오래전부터 세계수에 서서 무언가를 지키고 있다. 지금 무엇을 지키는지, 왜 지키는지, 모슬론은(는) 모른다. 어차피 세계수가 가르쳐 주니까. 조종하는 포자가, 적을 알고 있을 테니까."
+  },
+  "MummyPal": {
+    "localized_name": "요미이라",
+    "description": "금색 붕대는 자유자재로 늘어나고 줄어드는 일종의 기관. 지나치게 건조하면 찢어질 수도 있으므로 날마다 습기 체크를 빼먹지 말아야 한다."
   },
   "MushroomDragon": {
     "localized_name": "머쉬드래곤",
@@ -1527,6 +2003,10 @@
     "localized_name": "머쉬포이즌",
     "description": "내뿜는 포자가 대량 축적되면 햇빛마저 완전히 가리게 된다. 가끔 머쉬포이즌이(가) 가만히 있는 이유는 버섯 흉내를 내는 것이 아니라 자신의 포자가 눈을 가려 아무것도 안 보이기 때문이다."
   },
+  "MushroomLady": {
+    "localized_name": "머슐리",
+    "description": "인간을 써먹기 좋은 기생 대상으로만 여긴다. 머슐리이(가) 지금의 형태를 갖추게 된 것은 인간의 방심을 유도해 포자를 효율적으로 퍼뜨리기 위함이다."
+  },
   "Mutant": {
     "localized_name": "루나리스",
     "description": "무심결에 눈을 쳐다봤다간 꼼짝없이 당하고 만다. 루나리스을(를) 데리고 다니는 상당수는 그저 그렇게 하도록 홀렸을 뿐이다."
@@ -1534,6 +2014,10 @@
   "MysteryMask": {
     "localized_name": "홀로페이스",
     "description": "가면으로 보이는 부분은, 사실 얼굴이 아니라고 한다. 눈앞에 있는 듯해도, 사실 눈앞에 없다고 한다. 항상 어딘가에서, 지켜보고 있다고 한다. 그리고 뒤돌아보면, 바로 그곳에 있다고 한다."
+  },
+  "NPC_Dungeon_Shop": {
+    "localized_name": "방랑 상인",
+    "description": null
   },
   "NPC_FoodRequire_1": {
     "localized_name": "섬 주민",
@@ -1563,6 +2047,10 @@
     "localized_name": "나이트롯",
     "description": "물 흐르는 듯이 아름다운 갈기를 자랑으로 여긴다. 갈라진 털끝이 보이면 부끄러워 달리기에 집중을 못 한다. 정전기가 일어나면 갈기가 마구잡이로 뜨기에 썬더호스 근처에는 얼씬도 하지 않으려 한다."
   },
+  "NightBlueHorse_Neutral": {
+    "localized_name": "라이트롯",
+    "description": "번쩍이는 듯이 아름다운 갈기를 자랑으로 여긴다. 약간이라도 더러워지면 부끄러워 달리기에 집중을 못 한다. 피지 얼룩이 생기기 때문에 아무리 좋아하는 팰 조련사라 해도 지나치게 만지는 것은 원치 않는다."
+  },
   "NightFox": {
     "localized_name": "루나티",
     "description": "밤길에 루나티의 털을 발견했다면 줍지 말고 그대로 두는 게 좋다. 그 털은 밝지 않는 밤으로 향하는 편도 티켓이다."
@@ -1587,11 +2075,23 @@
     "localized_name": "달꽃단 상급 닌자",
     "description": null
   },
+  "NinjaElite_Grenade": {
+    "localized_name": "달꽃단 상급 닌자",
+    "description": null
+  },
   "NinjaElite_NoEquip": {
     "localized_name": "달꽃단 상급 닌자",
     "description": null
   },
   "Ninja_Bowgun": {
+    "localized_name": "달꽃단 하급 닌자",
+    "description": null
+  },
+  "Ninja_Bowgun_Seabase": {
+    "localized_name": "달꽃단 하급 닌자",
+    "description": null
+  },
+  "Ninja_Grenade": {
     "localized_name": "달꽃단 하급 닌자",
     "description": null
   },
@@ -1606,6 +2106,22 @@
   "OctopusGirl": {
     "localized_name": "옥토비아",
     "description": "같이 잘 때는 미리 내일 스케줄을 확인하자. 빨판 자국이 키스 마크로 보일 수 있기에 잠꼬대로 빨려 자국이 남으면 온갖 오해를 사게 되기 때문이다."
+  },
+  "OctopusGirl_Neutral": {
+    "localized_name": "옥토넬라",
+    "description": "같이 잘 때는 다음 날의 스케줄을 확인하자. 빨판 자국이 물린 자국처럼 보일 수 있으니 잠결에 빨려 자국이라도 생기면 괜한 오해를 살 수 있다."
+  },
+  "OniGhostGirl": {
+    "localized_name": "우라미",
+    "description": "누군가를 놀라게 하는 것이 삶의 보람이지만 하나도 안 무섭다. 반대로 귀여워서 놀라주는 이들이 늘어나 우라미은(는) 어느새 미소의 사자가 되었다."
+  },
+  "POLICE_HawkBird": {
+    "localized_name": "자경단 라이더",
+    "description": null
+  },
+  "POLICE_ThunderDog": {
+    "localized_name": "자경단 라이더",
+    "description": null
   },
   "PREDATOR_AmaterasuWolf": {
     "localized_name": "불이리",
@@ -1623,9 +2139,13 @@
     "localized_name": "유령초",
     "description": "일찍이 세계가 종말에 가까워질수록 화염이 약해진다고 사람들은 믿었다. 종말론자들은 이후에도 불길이 약해졌다고 여러 번 소동을 피웠지만 결국 유령초의 변덕에 불과하다. 적어도 현재로선 그렇다."
   },
+  "PREDATOR_DarkScorpion": {
+    "localized_name": "데스스팅",
+    "description": "본체는 에너지 덩어리로 속이 비었다. 먹잇감을 외피 속으로 끌어들여 산 채로 흡수한다. 주변엔 지옥 같은 신음이 끝없이 울려 퍼진다."
+  },
   "PREDATOR_DrillGame": {
     "localized_name": "드릴북이",
-    "description": "드릴북이의 드릴'이란 이야기가 있다. 최강의 등딱지와 드릴을 가진 드릴북이이(가) 모순에 관해 고민하는 도덕적인 이야기다."
+    "description": "|드릴북이의 드릴|이란 이야기가 있다. 최강의 등딱지와 드릴을 가진 드릴북이이(가) 모순에 관해 고민하는 도덕적인 이야기다."
   },
   "PREDATOR_FairyDragon": {
     "localized_name": "실피아",
@@ -1639,9 +2159,17 @@
     "localized_name": "플로라디노",
     "description": "한번 화를 내면 걷잡을 수 없을 정도로 분기탱천한다. '플로라디노의 꼬리를 밟다'라는 말은 누군가의 격노를 샀다는 뜻이다."
   },
+  "PREDATOR_FlowerRabbit_Quest": {
+    "localized_name": "토푸리",
+    "description": null
+  },
   "PREDATOR_Garm": {
     "localized_name": "다크울프",
     "description": "인간과 접촉이 뜸해진 지 오래지만 다크울프 무리의 수렵 체계는 일찍이 인간과 함께했던 사냥이 그 뿌리다."
+  },
+  "PREDATOR_Garm_Quest": {
+    "localized_name": "다크울프",
+    "description": null
   },
   "PREDATOR_GhostBeast": {
     "localized_name": "고스호스",
@@ -1655,8 +2183,16 @@
     "localized_name": "고릴레이지",
     "description": "지면을 두드리는 리듬으로 동료와 의사소통한다. 리듬에 상응하는 의미는 무리마다 다른데 그 분류는 지금도 명확하지 않다."
   },
+  "PREDATOR_GrassMammoth_Ice": {
+    "localized_name": "블리자모스",
+    "description": "등 위의 식물은 개체마다 제각각이다. 멸종한 줄 알았던 식물이 얼어붙은 채로 블리자모스의 등에서 발견되는 경우도 있다."
+  },
+  "PREDATOR_GrassMinotaur_Ice": {
+    "localized_name": "블랑타우",
+    "description": "뿔 형태의 얼음은 살아 있는 동안 절대 녹지 않는다. 이 얼음에서 물방울이 떨어지는 순간 블랑타우은(는) 자신의 육체가 차가워져 가고 있음을 실감한다."
+  },
   "PREDATOR_GrassPanda": {
-    "localized_name": "초판다",
+    "localized_name": "풀바오",
     "description": "믿기 힘든 괴력의 소유자. 어느 실험에서 3,000장이 넘는 종이 뭉치를 가볍게 찢었다. 육식을 안 하는 걸 감사히 생각해야 한다."
   },
   "PREDATOR_GrimGirl": {
@@ -1665,7 +2201,7 @@
   },
   "PREDATOR_HadesBird_Electric": {
     "localized_name": "라이가루다",
-    "description": "지옥에서 번개를 불러낸다. 헬가루다의 아종으로 알려져 있으나 실은 지옥에서 번개에 맞은 라이가루다(이)가 헬가루다(으)로 변했다는 설도 있다"
+    "description": "지옥에서 번개를 불러낸다. 헬가루다의 아종으로 알려져 있으나 실은 지옥에서 번개에 맞은 라이가루다(이)가 헬가루다(으)로 변했다는 설도 있다."
   },
   "PREDATOR_Horus_Water": {
     "localized_name": "이시스",
@@ -1676,8 +2212,16 @@
     "description": "어리바리한 겉모습과 달리 속은 사납다. 눈에 띄는 모든 걸 먹이로 인식하여 닥치는 대로 잡아먹으려고 든다."
   },
   "PREDATOR_Manticore_Dark": {
-    "localized_name": "시니에노",
+    "localized_name": "만티녹턴",
     "description": "평범한 고기를 좋아하지만 항상 오염된 고기를 먹는다. 암흑의 발톱을 무기로 삼은 탓에 잡은 먹이가 저주받는다는 걸 깨닫지 못했기 때문이다."
+  },
+  "PREDATOR_MonochromeQueen": {
+    "localized_name": "모노크로나",
+    "description": "좋은 일을 겪은 후에는 그만큼 나쁜 일을 겪어야 직성이 풀린다. 모노크로나을(를) 소중히 키우려 한다면 그만한 각오를 해야만 한다."
+  },
+  "PREDATOR_MummyPal": {
+    "localized_name": "요미이라",
+    "description": "금색 붕대는 자유자재로 늘어나고 줄어드는 일종의 기관. 지나치게 건조하면 찢어질 수도 있으므로 날마다 습기 체크를 빼먹지 말아야 한다."
   },
   "PREDATOR_MushroomDragon": {
     "localized_name": "머쉬드래곤",
@@ -1691,9 +2235,17 @@
     "localized_name": "나이트롯",
     "description": "물 흐르는 듯이 아름다운 갈기를 자랑으로 여긴다. 갈라진 털끝이 보이면 부끄러워 달리기에 집중을 못 한다. 정전기가 일어나면 갈기가 마구잡이로 뜨기에 썬더호스 근처에는 얼씬도 하지 않으려 한다."
   },
+  "PREDATOR_PandaGirl": {
+    "localized_name": "리팡",
+    "description": "일자상전의 무술을 갈고닦기 위해, 매일 단련만이 있을 뿐! 사랑에 정신이 팔리는 것은 언어도단! 매일 단련만이 있을 뿐! 드디어 때가 왔다! 관심 있던 그 애에게 대시! 결과는 실연뿐! 사랑의 기술은 전승받지 못했다! 미련만이 있을 뿐!"
+  },
   "PREDATOR_PinkLizard": {
     "localized_name": "핑크뇽",
     "description": "하룻밤의 사랑을 찾아 항상 누군가를 뒤쫓는다. 처음엔 팰에게만 흥미를 보였지만 최근엔 사람에게도 마수를 뻗기 시작했다."
+  },
+  "PREDATOR_PinkLizard_Quest": {
+    "localized_name": "핑크뇽",
+    "description": null
   },
   "PREDATOR_PurpleSpider": {
     "localized_name": "스틱툴라",
@@ -1702,6 +2254,10 @@
   "PREDATOR_RedArmorBird": {
     "localized_name": "적토조",
     "description": "라이버드의 근연종이지만 관계는 없다. 암석이 주식이며 오랜 세월에 걸쳐 주둥이는 물론 머리 전체가 단단해졌다."
+  },
+  "PREDATOR_RedFlowerBird": {
+    "localized_name": "플라페크",
+    "description": "시도 때도 없이 몸을 흔드는 이유는 바람에 흔들리는 꽃으로 위장해 적을 피하기 위함이라고 하나 그저 고속으로 흔들리는 붉은 꽃이 너무 꺼림칙해서 아무도 다가가지 않는 게 아닌가라는 반론도 있다."
   },
   "PREDATOR_Ronin_Dark": {
     "localized_name": "어둠무사",
@@ -1715,6 +2271,14 @@
     "localized_name": "시푸도그",
     "description": "무아지경에 빠지는 것을 목표로 명상을 거듭한다. 번뇌를 마주해 말끔히 씻어내면 배불리 먹은 뒤 이렇게 생각한다. 오늘도 과식해 버렸다고."
   },
+  "PREDATOR_SnakeGirl": {
+    "localized_name": "메두나",
+    "description": "모르는 게 있으면 머리에 있는 뱀들과 함께 회의를 시작한다. 하지만 뱀들도 모두 자기 자신이기에 |모른다|라는 결론만이 나온다."
+  },
+  "PREDATOR_Suzaku": {
+    "localized_name": "주작",
+    "description": "옛날에는 건기를 불러오는 존재로 여겨졌다. 지난 해에 가물었다면 다음 해의 풍작을 기원하며 이 녀석을 집요하게 사냥하곤 했다."
+  },
   "PREDATOR_ThunderDog": {
     "localized_name": "썬도그",
     "description": "전속력으로 뛰면 그야말로 번개나 다름없다. 썬도그끼리 충돌하면 천둥 같은 굉음이 울려 퍼진다."
@@ -1723,13 +2287,25 @@
     "localized_name": "아그니드라",
     "description": "억울한 누명으로 화산에 떨어진 전사가 아그니드라(으)로 환생하여 한 나라를 모조리 불살라버렸다는 전설이 있다."
   },
+  "PREDATOR_Umihebi_Fire_Quest": {
+    "localized_name": "아그니드라",
+    "description": null
+  },
   "PREDATOR_VolcanicMonster_Ice": {
     "localized_name": "프로스카노",
     "description": "초저온의 피가 전신에 힘차게 흐르고 있다. 순식간에 가열되면 혈액이 증발해 엄청난 증기 폭발이 발생한다."
   },
+  "PREDATOR_VolcanoDragon": {
+    "localized_name": "마그맨더",
+    "description": "건강한 개체라면 등의 용암이 말끔히 순환하지만 생활 습관이 안 좋으면 흐름이 점점 나빠지며 최악의 경우 용암 경색으로 흐름이 막혀 갑작스러운 대폭발을 일으킨다."
+  },
   "PREDATOR_Werewolf_Ice": {
     "localized_name": "얼서니",
     "description": "머리의 뿔은 절대 녹지 않는 신비한 얼음. 뿔을 부러뜨려 빙수를 만들면 엄청난 별미가 된다고 하지만 먹은 본인도 얼서니도 머리가 띵할 만큼 아파진다."
+  },
+  "PREDATOR_WhiteShieldDragon_Quest": {
+    "localized_name": "드라이지스",
+    "description": null
   },
   "PREDATOR_WhiteTiger_Ground": {
     "localized_name": "토랑이",
@@ -1758,6 +2334,10 @@
   "PalTrader": {
     "localized_name": "팰 상인",
     "description": null
+  },
+  "PandaGirl": {
+    "localized_name": "리팡",
+    "description": "일자상전의 무술을 갈고닦기 위해, 매일 단련만이 있을 뿐! 사랑에 정신이 팔리는 것은 언어도단! 매일 단련만이 있을 뿐! 드디어 때가 왔다! 관심 있던 그 애에게 대시! 결과는 실연뿐! 사랑의 기술은 전승받지 못했다! 미련만이 있을 뿐!"
   },
   "Penguin": {
     "localized_name": "펭키",
@@ -1807,7 +2387,55 @@
     "localized_name": "자경단 경비원",
     "description": null
   },
+  "Police_Invader_CrossBow": {
+    "localized_name": "자경단 진압대원",
+    "description": null
+  },
+  "Police_Invader_FlameThrower": {
+    "localized_name": "자경단 청소부",
+    "description": null
+  },
+  "Police_Invader_GrenadeLauncher": {
+    "localized_name": "자경단 베테랑",
+    "description": null
+  },
+  "Police_Invader_Handgun": {
+    "localized_name": "자경단 경비원",
+    "description": null
+  },
+  "Police_Invader_Katana": {
+    "localized_name": "자경단 검객",
+    "description": null
+  },
+  "Police_Invader_LaserRifle": {
+    "localized_name": "자경단 기술자",
+    "description": null
+  },
+  "Police_Invader_MissileLauncher": {
+    "localized_name": "자경단 요격병",
+    "description": null
+  },
+  "Police_Invader_Rifle": {
+    "localized_name": "자경단 소총수",
+    "description": null
+  },
+  "Police_Invader_RocketLauncher": {
+    "localized_name": "자경단 로켓병",
+    "description": null
+  },
+  "Police_Invader_Shotgun": {
+    "localized_name": "자경단 정예 대원",
+    "description": null
+  },
   "Police_Rifle": {
+    "localized_name": "자경단 소총수",
+    "description": null
+  },
+  "Police_Rifle_Crime_Lv4": {
+    "localized_name": "자경단 소총수",
+    "description": null
+  },
+  "Police_Rifle_Crime_Lv5": {
     "localized_name": "자경단 소총수",
     "description": null
   },
@@ -1841,7 +2469,7 @@
   },
   "PoseidonOrca": {
     "localized_name": "넵티오스",
-    "description": "재앙을 봉인한 후, 천락의 맹자가 해후를 이뤘다. 그 이후, 근처 바다에서 강자들의 눈앞에 모습을 드러낸다. 이는 곧 필연적인 만남이었다."
+    "description": "재앙을 봉인한 후, 천락의 전사가 그것과 마주쳤다. 그 이후, 근처 바다에서 강자들 앞에 모습을 드러낸다. 이는 곧 필연적인 만남이다."
   },
   "PurpleSpider": {
     "localized_name": "스틱툴라",
@@ -1879,6 +2507,22 @@
     "localized_name": "밀렵단 정예 대원",
     "description": null
   },
+  "Quest_Male_Ninja01": {
+    "localized_name": "달꽃단 하급 닌자",
+    "description": null
+  },
+  "Quest_Male_NinjaElite01": {
+    "localized_name": "달꽃단 상급 닌자",
+    "description": null
+  },
+  "Quest_Male_Scientist01_LaserRifle": {
+    "localized_name": "유전자 연구 부대 실행반",
+    "description": null
+  },
+  "Quest_Scientist_FlameThrower": {
+    "localized_name": "유전자 연구 부대 실행반",
+    "description": null
+  },
   "RAID_DarkMechaDragon": {
     "localized_name": "제노드란",
     "description": null
@@ -1888,11 +2532,11 @@
     "description": null
   },
   "RAID_KingBahamut_Dragon": {
-    "localized_name": "마그마 드라고",
+    "localized_name": "마그마드라고",
     "description": null
   },
   "RAID_KingBahamut_Dragon_2": {
-    "localized_name": "마그마 드라고",
+    "localized_name": "마그마드라고",
     "description": null
   },
   "RAID_LegendDeer": {
@@ -1956,11 +2600,11 @@
     "description": null
   },
   "RaijinDaughter": {
-    "localized_name": "썬더 키드",
+    "localized_name": "썬더키드",
     "description": "외톨이인 팰에게 친근하게 잘 대해준다. 착각한 상대 팰이 곁을 내주기가 무섭게 이때다 하고 낙뢰로 숨통을 끊는다."
   },
   "RaijinDaughter_Water": {
-    "localized_name": "다크 키드",
+    "localized_name": "다크키드",
     "description": "외톨이인 팰에게 친근하게 잘 대해주고 곁을 내주기가 무섭게 낙뢰로 숨통을 끊는다. 본래 계획은 그랬지만 타이밍을 놓치다가 좋은 친구 사이로 남게 된다고 한다."
   },
   "RandomEventShop": {
@@ -1970,6 +2614,10 @@
   "RedArmorBird": {
     "localized_name": "적토조",
     "description": "라이버드의 근연종이지만 관계는 없다. 암석이 주식이며 오랜 세월에 걸쳐 주둥이는 물론 머리 전체가 단단해졌다."
+  },
+  "RedFlowerBird": {
+    "localized_name": "플라페크",
+    "description": "시도 때도 없이 몸을 흔드는 이유는 바람에 흔들리는 꽃으로 위장해 적을 피하기 위함이라고 하나 그저 고속으로 흔들리는 붉은 꽃이 너무 꺼림칙해서 아무도 다가가지 않는 게 아닌가라는 반론도 있다."
   },
   "Respawn_guide": {
     "localized_name": "친절한 팰 조련사",
@@ -2023,6 +2671,10 @@
     "localized_name": "위병",
     "description": null
   },
+  "Reward_PalCaptureCount_v02": {
+    "localized_name": "위병",
+    "description": null
+  },
   "Reward_PalDisplay_A_01": {
     "localized_name": "위병",
     "description": null
@@ -2063,6 +2715,10 @@
     "localized_name": "위병",
     "description": null
   },
+  "Reward_Paldex_v02": {
+    "localized_name": "위병",
+    "description": null
+  },
   "Robbery_Leader": {
     "localized_name": "팰 상인",
     "description": null
@@ -2076,8 +2732,16 @@
     "description": "숲에서 수렵 생활을 하는, 사람과 비슷한 성질의 팰. 아주 먼 옛날 사람과 다른 계통으로 갈라졌다고 여겨지며 팰의 정체를 밝혀줄 열쇠일지도 모른다."
   },
   "RobinHood_Ground": {
-    "localized_name": "산도로",
-    "description": "바위투성이인 곳에서 수렵 생활을 하며, 사람과 성질이 아주 비슷한 팰. 유적에서 산도로의 뼈가 발견된다면 사람의 뼈 또한 반드시 출토된다."
+    "localized_name": "샌드몽",
+    "description": "바위투성이인 곳에서 수렵 생활을 하며, 사람과 성질이 아주 비슷한 팰. 유적에서 샌드몽의 뼈가 발견된다면 사람의 뼈 또한 반드시 출토된다."
+  },
+  "RockBeast": {
+    "localized_name": "지오르돈",
+    "description": "더욱 단단한 바위에 몸을 부딪혀, 자신의 몸을 원하는 모양으로 다듬는다. 몸이 파여 있는 개체라면 모르는 척해 주자. 사람으로 비유하자면 앞머리를 너무 많이 자른 것과 비슷하다."
+  },
+  "RockBeast_Ice": {
+    "localized_name": "프로스돈",
+    "description": "방향을 바꿔가며 일광욕을 하면서 얼음을 원하는 모양으로 녹인다. 균형이 안 맞는 개체는 모르는 척해주자. 사람으로 비유하자면 옆머리를 너무 많이 자른 것과 비슷하다."
   },
   "Ronin": {
     "localized_name": "불무사",
@@ -2105,7 +2769,7 @@
   },
   "SaintCentaur": {
     "localized_name": "팔라디우스",
-    "description": "원래 켄타나이트의 일종이었다. 나쁜 감정을 제거한 존재로 여겨지나 눈동자 속에선 일말의 증오가 번뜩인다."
+    "description": "본래 켄타나이트와(과) 하나의 존재였다. 부정적 감정을 제거한 존재로 여겨지나 눈동자 속에선 일말의 증오가 번뜩인다."
   },
   "SakuraSaurus": {
     "localized_name": "라브라돈",
@@ -2139,11 +2803,23 @@
     "localized_name": "방랑 상인",
     "description": null
   },
+  "SamuraiDog": {
+    "localized_name": "솔바둑",
+    "description": "솔바둑의 영역 싸움은 눈싸움 끝에 이어지는 일섬이다. 만약 길들였다 하더라도 |기다려|를 가르치지 않는 편이 좋다. |잘했어| 라는 신호 뒤에 일어나는 본능적 행동은 훈련으로 막을 수 없다."
+  },
   "Scientist_FlameThrower": {
     "localized_name": "유전자 연구 부대 실행반",
     "description": null
   },
   "Scientist_FlameThrower_Invader": {
+    "localized_name": "유전자 연구 부대 실행반",
+    "description": null
+  },
+  "Scientist_GrenadeLauncher": {
+    "localized_name": "유전자 연구 부대 실행반",
+    "description": null
+  },
+  "Scientist_MissileLauncher": {
     "localized_name": "유전자 연구 부대 실행반",
     "description": null
   },
@@ -2155,16 +2831,28 @@
     "localized_name": "스콜피어스",
     "description": "약 5,000종에 달하는 독을 함유하고 있다. 그중에는 즉사할 정도로 무시무시한 위력의 독도 있으나 정작 독의 농도가 하나같이 옅은 탓에 아무런 의미가 없다."
   },
+  "ScorpionMan_Electric": {
+    "localized_name": "썬더피어스",
+    "description": "상대를 꼬리로 찔러 몸속에 전기를 흘려보낼 수 있으나 정작 전기가 너무 약한 탓에 차라리 직접 때리는 게 훨씬 나을 정도다."
+  },
   "SecurityDrone": {
     "localized_name": "무장 헬기",
     "description": null
+  },
+  "SecurityDrone_Field": {
+    "localized_name": "무장 헬기",
+    "description": null
+  },
+  "Sekhmet": {
+    "localized_name": "세크메트",
+    "description": "과거에는 성정이 거친 죽음의 상징이었다. 아누비스이(가) 죽음의 상징으로 탈바꿈한 뒤, 대신할 존재를 원한 이들이 세크메트을(를) 술에 취하게 해 종족을 타락시켰다. 그렇게 세크메트은(는) 고귀의 상징이 되었다."
   },
   "Serpent": {
     "localized_name": "씨무기",
     "description": "유선형의 몸을 가져 수상 활동에 적합하다. 밀렵꾼에게 자주 붙잡혀 서핑보드 대용으로 사용되고 있다."
   },
   "Serpent_Ground": {
-    "localized_name": "스너펜트",
+    "localized_name": "샌무기",
     "description": "유선형의 몸을 가져 모래 위 생활에 적합하다. 밀렵꾼에게 자주 붙잡혀 서핑보드 대용으로 사용되고 있다."
   },
   "SharkKid": {
@@ -2191,9 +2879,21 @@
     "localized_name": "포레스키",
     "description": "포레스키을(를) 안고 있을 때 햇님과 초원의 향기가 난다면 내일 날씨는 맑다. 아직 축축한 냄새가 난다면 내일은 장대비가 온다."
   },
+  "SleeveRabbit": {
+    "localized_name": "슬리비",
+    "description": "손끝에 난 기다란 털로 자신을 뽐낸다. 위생에 민감해 세심히 관리하고 있기에 근처에서 먼지를 일으키면 아주 싫어하는 표정을 짓는다."
+  },
   "SmallArmadillo": {
     "localized_name": "꼬마딜로",
     "description": "예전엔 꼬마딜로 축구가 유행했다. 팰 애호 단체의 강한 반발에 부딪쳐 곧 폐지되었지만 오래된 각질이 떨어지기 때문에, 꼬마딜로 무리도 크게 꺼리는 기색은 없었다고 한다."
+  },
+  "SmallYeti": {
+    "localized_name": "설뭉치",
+    "description": "|설뭉치의 눈을 보다|. 사물의 보이지 않는 본질을 탐구한다, 라는 뜻을 가진 말이다. 정작 설뭉치에게 눈이 있는지 없는지를 탐구한 연구자는 여태껏 한 명도 없었다."
+  },
+  "SnakeGirl": {
+    "localized_name": "메두나",
+    "description": "모르는 게 있으면 머리에 있는 뱀들과 함께 회의를 시작한다. 하지만 뱀들도 모두 자기 자신이기에 |모른다|라는 결론만이 나온다."
   },
   "SnowPeafowl": {
     "localized_name": "프리설라",
@@ -2207,6 +2907,10 @@
     "localized_name": "비나이트",
     "description": "퀸비나을(를) 충실히 따르는 하인. 여왕에게 해를 끼치는 자를 철저히 배제한다. 끝내 자폭을 해서라도 여왕을 지켜낸다."
   },
+  "SorajimaTowerGuide": {
+    "localized_name": "섬 주민",
+    "description": null
+  },
   "StuffedShark": {
     "localized_name": "무상이",
     "description": "인형 속에서 무언가 이쪽을 들여다보는 듯하지만 정작 그 안에 손을 넣어보면 아무것도 없다. 오히려 손이 빨려 들어갈 듯 끝없이 들어간다. 어쩌면 우주는 이곳에 있을지도 모른다."
@@ -2214,6 +2918,10 @@
   "StuffedShark_Fire": {
     "localized_name": "염상이",
     "description": "입에 손을 넣어도 아무것도 없으며, 끝없이 들어간다. 어느 연구자는 이를 이차원 공간으로 예상하여 침낭 대신 쓰려고 온몸을 넣어보려 했지만 구역질을 하는 모습으로 보아 |몸속|인 것만큼은 확실한 듯하다."
+  },
+  "SumoDog": {
+    "localized_name": "와르차차",
+    "description": "옛 섬에는 와르차차 스모라는 오락이 존재했다. 톱 클래스의 와르차차(이)라면 돌진돼지의 돌진을 직격으로 맞아도 오히려 돌진돼지이(가) 멀리 날아갈 정도였다."
   },
   "Suzaku": {
     "localized_name": "주작",
@@ -2227,6 +2935,18 @@
     "localized_name": "캔디쉽",
     "description": "전신이 설탕보다 18,000배나 달다. 향기에 이끌려 덥석 베어 문 육식 팰은 상상을 초월하는 단맛에 눈이 뒤집힌 채 졸도해 버린다."
   },
+  "SweetsSheep_Ground": {
+    "localized_name": "비터쉽",
+    "description": "털에서 달콤한 냄새가 나지만 살은 어마어마하게 쓰다. 향기에 이끌려 덥석 베어 문 육식 팰은 상상을 초월하는 쓴맛에 눈이 뒤집힌 채 졸도해 버린다."
+  },
+  "SwordCutlassfish": {
+    "localized_name": "날검치",
+    "description": "몸을 일시 분리해 뼈로 적을 베는 광기에 가까운 생태를 지녔다. 그러나 즉시 몸을 되돌리지 않으면 자신도 쓰러진다. 젊은 개체 중에선 얼마나 오래 분리하는지 겨루는 위험한 놀이가 유행한다는 소문이 있다나 뭐라나."
+  },
+  "SwordCutlassfish_Fire": {
+    "localized_name": "불검치",
+    "description": "몸을 분리해 뼈로 적을 베지만 즉시 몸을 되돌리지 않으면 자신도 쓰러진다. 늙은 개체 중에선 몸을 일부러 오래 분리해 생존 본능을 활성화시켜 수명을 늘린다는 소문이 있다나 뭐라나."
+  },
   "TentacleTurtle": {
     "localized_name": "헬터클",
     "description": "물렁한 본체를 지키기 위해 단단한 갑각을 얻었다. 그 대신 본체의 방어력을 거의 다 포기했기에 간지럽히기만 해도 기절한다."
@@ -2235,17 +2955,33 @@
     "localized_name": "골터클",
     "description": "물렁한 본체를 지키기 위해 단단한 갑각을 얻었다. 대부분의 촉각이 손과 갑각에 집중되어 있기에 본체만 살짝 만지더라도 눈치채지 못한다."
   },
+  "ThiefBird": {
+    "localized_name": "아르셉",
+    "description": "손버릇이 고약하여 상대의 눈을 피해 물건을 훔친다. 설령 피하지 못하더라도 상관없다. 그럴 땐 재빨리 |눈을 훔치면| 아무것도 안 보이게 되니 말이다."
+  },
   "ThunderBird": {
     "localized_name": "라이버드",
     "description": "적토조의 근연종으로 보이나 관계는 없다. 급강하해 날카로운 주둥이로 적을 처치한다. 그 모습은 마치 낙뢰를 보는 듯하다."
+  },
+  "ThunderBird_Ice": {
+    "localized_name": "칠버드",
+    "description": "한랭 토지에 특화되어, 몸체는 가늘지만 추위에 강하다. 막강한 위력의 급강하 공격을 자랑하며 마치 거대한 고드름이 떨어지는 것과 같다."
   },
   "ThunderDog": {
     "localized_name": "썬도그",
     "description": "전속력으로 뛰면 그야말로 번개나 다름없다. 썬도그끼리 충돌하면 천둥 같은 굉음이 울려 퍼진다."
   },
+  "ThunderDog_Ice": {
+    "localized_name": "프리도그",
+    "description": "설원을 전속력으로 뛰면 눈보라가 휘몰아친다. 그 탓에 서로의 모습을 확인할 수 없어 프리도그(으)로 인한 교통사고가 자주 발생한다."
+  },
   "ThunderDragonMan": {
-    "localized_name": "전룡맨",
-    "description": "상처로 전류를 흘려보내 상대의 몸을 불태운다. 전룡맨끼리 싸우면 순식간에 승부가 난다."
+    "localized_name": "볼젝스",
+    "description": "상처로 전류를 흘려보내 상대의 몸을 불태운다. 볼젝스끼리 싸우면 순식간에 승부가 난다."
+  },
+  "ThunderFluffyBird": {
+    "localized_name": "뇌운조",
+    "description": "먹이가 부족한 고공에서 생활하기 때문인지 때로는 먹잇감의 뇌마저 파먹는다. 먹이 환경이 안정된 곳을 원하던 무리가 저공으로 내려와 라이버드이(가) 된 것이 아닌가라는 설도 있다."
   },
   "TropicalOstrich": {
     "localized_name": "트로조크",
@@ -2258,6 +2994,10 @@
   "Umihebi_Fire": {
     "localized_name": "아그니드라",
     "description": "억울한 누명으로 화산에 떨어진 전사가 아그니드라(으)로 환생하여 한 나라를 모조리 불살라버렸다는 전설이 있다."
+  },
+  "VenusFlytrap": {
+    "localized_name": "카프릴리스",
+    "description": "이상한 것도 거리낌 없이 먹어치우는 탓에 머리 위쪽 입에 구내염이 자주 생긴다. 그럴 땐 얼굴 쪽 입을 대신 사용한다. 식성은 변함없기에 결국 양쪽 입에 구내염이 생긴다."
   },
   "Viking": {
     "localized_name": "천락의 민족",
@@ -2275,8 +3015,20 @@
     "localized_name": "천락의 민족 정예",
     "description": null
   },
+  "Viking_GrenadeLauncher": {
+    "localized_name": "천락의 민족",
+    "description": null
+  },
+  "Viking_Melee": {
+    "localized_name": "천락의 민족",
+    "description": null
+  },
   "Viking_Prisoner": {
     "localized_name": "천락의 민족",
+    "description": null
+  },
+  "Viking_RocketLauncher": {
+    "localized_name": "천락의 민족 정예",
     "description": null
   },
   "Viking_Tower": {
@@ -2311,6 +3063,14 @@
     "localized_name": "프로스카노",
     "description": "초저온의 피가 전신에 힘차게 흐르고 있다. 순식간에 가열되면 혈액이 증발해 엄청난 증기 폭발이 발생한다."
   },
+  "VolcanoDragon": {
+    "localized_name": "마그맨더",
+    "description": "건강한 개체라면 등의 용암이 말끔히 순환하지만 생활 습관이 안 좋으면 흐름이 점점 나빠지며 최악의 경우 용암 경색으로 흐름이 막혀 갑작스러운 대폭발을 일으킨다."
+  },
+  "VolcanoDragon_Ice": {
+    "localized_name": "블리잰더",
+    "description": "건강한 개체라면 등에 흐르는 물질이 안정적인 온도를 유지한다. 가슴이 두근거리면 온도가 점점 불안정해지며 최악의 경우 기화와 응고를 일으켜 갑작스러운 쇼크사로 사망한다."
+  },
   "WeaponsDealer": {
     "localized_name": "ko_Text",
     "description": null
@@ -2339,9 +3099,17 @@
     "localized_name": "셀레스디얼",
     "description": "고대 문헌에서 |구원의 짐승| 등으로 기록되어 있다. 셀레스디얼이(가) 내뿜는 빛이 이 세상의 모든 것을 정화하기 때문이다. 말 그대로, 이 세상에서 흔적도 없이 사라진다."
   },
+  "WhiteDeer_Dark": {
+    "localized_name": "코스모디얼",
+    "description": "눈부신 빛이 생겨난 후, 동시에 그림자도 생겨났다. 모든 것을 감싸는 어둠을 흩뿌리고, 존재해 마땅한 혼돈을 되찾는다. 균형이야말로, 이 세계에 필요한 것이기 때문이다."
+  },
   "WhiteMoth": {
     "localized_name": "실키누",
     "description": "비를 좋아해서 비가 내리는 동안 꼼작 않고 있는 경우가 많다. 파이호이(가) 자주 비를 피하러 찾아온다."
+  },
+  "WhiteMoth_Neutral": {
+    "localized_name": "수아레누",
+    "description": "허공을 바라보는 것을 좋아하여 가만히 서 있는 경우가 많다. 그럴 때마다 작은 팰들의 모임터가 되곤 한다."
   },
   "WhiteShieldDragon": {
     "localized_name": "드라이지스",
@@ -2355,6 +3123,14 @@
     "localized_name": "토랑이",
     "description": "커다란 손으로 많은 짐들을 거뜬히 들어 올릴 수 있다. 하지만 다리가 짧은 탓에 걸음걸이가 느려 채 옮기기도 전에 날이 저무는 경우가 비일비재하다."
   },
+  "WildlifeSanctuaryDrone": {
+    "localized_name": "방어 드론",
+    "description": null
+  },
+  "WildlifeSanctuary_guide": {
+    "localized_name": "초짜 팰 조련사",
+    "description": null
+  },
   "WindChimes": {
     "localized_name": "건다리",
     "description": "거대한 팔은 강철도 찢어버릴 정도다. 대역죄인을 마을 광장에 결박해 Windchimes에게 전신이 으스러지도록 만드는 잔혹한 형벌이 시행됐던 적도 있다."
@@ -2367,6 +3143,10 @@
     "localized_name": "테라나이트",
     "description": "215개의 부품으로 분해할 수 있으며 뿔뿔이 흩어져도 다시 조립하면 원래대로 움직이는 괴상한 팰. 각 개체의 부품이 섞이면 정체성이 붕괴하고 사고 회로까지 망가진다."
   },
+  "WingGolem_Fire": {
+    "localized_name": "마그나이트",
+    "description": "분해해도 다시 조립하면 아무 일 없다는 듯 움직이는 괴상한 팰. 다른 개체의 부품이 섞이면 사고 회로에 치명적 에러가 발생해 과열된다."
+  },
   "WingGolem_Oilrig": {
     "localized_name": "테라나이트",
     "description": null
@@ -2378,6 +3158,10 @@
   "WoolFox": {
     "localized_name": "밀피",
     "description": "SheepBall보다 털의 품질이 좋고 SheepBall보다 가축으로 삼기 좋은 성격이다. 하지만 역사적으로는 항상 애완용 팰로 사육되어 왔다. 역시 귀여운 게 최고다."
+  },
+  "WorldTreeDragon": {
+    "localized_name": "제로버스",
+    "description": "아주 먼 옛날 팰파고스섬으로 날아온 정체불명의 팰이 도달한 말로. 재앙으로서 파멸을 일으켜 오랜 세월 동안 봉인되었으나 어떤 팰 조련사의 손에 타도당했다."
   },
   "YakushimaBoss001": {
     "localized_name": "크툴루의 눈",
@@ -2448,7 +3232,7 @@
     "description": "정체를 밝혀내려고 연구자가 털을 깎았지만 애초부터 안엔 아무것도 없었다는 듯 털만 남아 있었다."
   },
   "Yeti_Grass": {
-    "localized_name": "트로피티",
+    "localized_name": "움피티",
     "description": "정체를 밝혀내려고 연구자가 풀을 벴지만 애초부터 안엔 아무것도 없었다는 듯 풀만 남아 있었다."
   }
 }

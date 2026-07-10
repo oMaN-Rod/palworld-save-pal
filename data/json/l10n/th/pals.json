@@ -11,6 +11,14 @@
     "localized_name": "Kitsun Noct",
     "description": "อารมณ์อ่อนไหวขั้นสุด ถ้าเจอเรื่องไม่ชอบใจจะไปหมกตัวอยู่ในถ้ำ หมกตัวนานเกินไปจนดูมืดมนชอบกล"
   },
+  "AmaterasuWolf_Dark_Quest_Enemy": {
+    "localized_name": "Kitsun Noct",
+    "description": null
+  },
+  "AmaterasuWolf_Dark_Quest_Friend": {
+    "localized_name": "Kitsun Noct",
+    "description": null
+  },
   "Ambassador01": {
     "localized_name": "ทูตแห่งเมืองทะเลทราย",
     "description": null
@@ -84,7 +92,7 @@
     "description": null
   },
   "Arena_PalPassive_Doctor": {
-    "localized_name": "ศาสตราจารย์ Brown",
+    "localized_name": "ศาสตราจารย์ Brawn",
     "description": null
   },
   "Arena_Ranger04": {
@@ -169,6 +177,10 @@
   },
   "BOSS_Hunter_Fat_GatlingGun": {
     "localized_name": "คนร้ายมีค่าหัว Grill",
+    "description": null
+  },
+  "BOSS_Hunter_Fat_GatlingGun_Quest_StrongOldMan": {
+    "localized_name": "นักล่าค่าหัวผู้เฒ่า",
     "description": null
   },
   "BOSS_Hunter_Rifle": {
@@ -307,6 +319,10 @@
     "localized_name": "องค์กรผู้พิทักษ์พาล ผู้พิพากษา",
     "description": null
   },
+  "Believer_Fat_Cane_Tower": {
+    "localized_name": "องค์กรผู้พิทักษ์พาล ผู้พิพากษา",
+    "description": null
+  },
   "Believer_Fat_GatlingGun": {
     "localized_name": "องค์กรผู้พิทักษ์พาล ผู้พิพากษา",
     "description": null
@@ -355,6 +371,10 @@
     "localized_name": "Smokie",
     "description": "เปลงเพลิงสีดำที่หากสัมผัสจะรู้สึกเพียงอุ่นมือ แต่วัตถุที่สัมผัสกับเปลวเพลิงต่อเนื่องยาวนานจะค่อย ๆ หลอมเหลวจากภายใน ถ้าลองโปะชีสลงไปสักแผ่นละแจ่มเลย"
   },
+  "BlackPuppy_Ice": {
+    "localized_name": "Smokie Cryst",
+    "description": "เปลวไฟสีฟ้าซีดนั้น แม้สัมผัสดูก็เย็นดี แต่หากแตะมันนานไป ก็จะถูกแช่แข็งอย่างช้า ๆ"
+  },
   "Blacksmith01": {
     "localized_name": "ช่างตีเหล็กฝึกหัด",
     "description": null
@@ -375,6 +395,10 @@
     "localized_name": "Fuack Ignis",
     "description": "บริเวณท้องมีแรงเสียดทานสูง เวลาไถลตัวจะเกิดไฟลุก บางครั้งก็ไฟแรงจนกลายไฟลุกท่วมทั้งตัว"
   },
+  "BlueSkyDragon": {
+    "localized_name": "Shaolong",
+    "description": "เมื่อได้พบกับคู่แท้ที่ควรจะใช้ชีวิตร่วมกัน มันจะ ถอดวงแหวนที่ลอยอยู่บริเวณกึ่งกลางลำตัวออกมา แล้วแลกเปลี่ยนกันซึ่ง ๆ หน้า"
+  },
   "BlueThunderHorse": {
     "localized_name": "Azurmane",
     "description": "มีคนเชื่อว่าเกี่ยวข้องกับเทพสายฟ้าเช่นเดียวกับUnivolt หลังลัทธิUnivoltล่มสลาย ผู้คนเชื่อว่ามีเพียงAzurmaneเท่านั้นที่เป็นทูตของเทพสายฟ้า แต่เมื่อเวลาผ่านไปก็ได้รับตำแหน่งม้าเทียมรถม้าอย่างเท่าเทียม"
@@ -390,6 +414,18 @@
   "BountyTrader": {
     "localized_name": "ทหารยาม",
     "description": null
+  },
+  "BrownRabbit": {
+    "localized_name": "Lapiron",
+    "description": "รับฟังเสียงของผืนดินและวิ่งโดยหลีกเลี่ยงพื้นที่ที่ไม่มั่นคง แต่เมื่ออยู่บนพื้นดินที่ม้าไม่ถนัด การรับรู้จะผิดพลาด ทำให้ในบางพื้นที่มีโอกาสล้มสูง"
+  },
+  "CactusDoll": {
+    "localized_name": "Needoll",
+    "description": "เมื่ออารมณ์บางอย่างรุนแรงขึ้น หนามของมันจะยืดหดตามไปด้วย ตัว ที่เลี้ยงดูมาอย่างทะนุถนอมNeedollย่อมชวนให้เผลออยากกอดไว้ในอ้อมแขน แต่ เก้าในสิบครั้ง เรื่องราวก็มักจบลงด้วยอุบัติเหตุอันน่าเศร้า"
+  },
+  "CactusDoll_Dark": {
+    "localized_name": "Needoll Noct",
+    "description": "เมื่ออารมณ์บางอย่างรุนแรงขึ้น หนามของมันจะยืดและหดตามไปด้วย ตัว ที่ถูกเลี้ยงดูมาด้วยความรักอย่างเต็มเปี่ยมNeedoll Noct มักจะพยายามเข้ามากอดเจ้าของอยู่เสมอ แต่หากจะยอมรับความรักนั้น ก็จำเป็นต้องยอมรับความเจ็บปวดไปพร้อมกัน"
   },
   "CandleGhost": {
     "localized_name": "Sootseer",
@@ -412,6 +448,10 @@
     "description": null
   },
   "CaravanLeader03": {
+    "localized_name": "หัวหน้ากลุ่มพ่อค้าเร่",
+    "description": null
+  },
+  "CaravanLeader04": {
     "localized_name": "หัวหน้ากลุ่มพ่อค้าเร่",
     "description": null
   },
@@ -439,6 +479,18 @@
     "localized_name": "Chikipi",
     "description": "อ่อนแอมาก และอร่อยมาก พาลที่อ่อนแอสุด ๆ ใกล้เคียงกับSheepBall ไม่ว่าจะล่าไปมากแค่ไหน มันก็ยังโผล่มาเรื่อย ๆ"
   },
+  "ClioneTwins": {
+    "localized_name": "Amione",
+    "description": "หากฝ่ายหนึ่งหายไป ก็จะมีใครบางคนมาจากไหนไม่รู้เข้ามาแทนที่ แล้วทั้งคู่ก็เริ่มใช้ชีวิตร่วมกันอย่างสนิทสนม ราวกับไม่เคยมีอะไรเกิดขึ้น Amioneสำหรับพวกมันแล้ว สิ่งที่สำคัญที่สุดคือการอยู่ร่วมกันอย่างกลมเกลียว"
+  },
+  "CloverFairy": {
+    "localized_name": "Clovee",
+    "description": "ในอดีต เคยมีตัวที่มีใบไม้บนหน้าผากตั้งแต่ 3 ใบขึ้นไปอยู่ แต่เนื่องจากถูกยกให้เป็นสัญลักษณ์แห่งโชคดี ตัวที่มีใบไม้มากจึงถูกล่าจับอย่างหนัก ผลลัพธ์คือ ทั้งเผ่าพันธุ์เริ่มวิวัฒนาการไปในทิศทางที่มีใบไม้น้อยลง"
+  },
+  "ClownRabbit": {
+    "localized_name": "Dupin",
+    "description": "บางครั้งมันอาจถูกโค่นล้มโดยร่างแยกที่ตนเองเรียกออกมา และถูกสลับตัวกันไป แม้แต่ตัวมันเองก็ไม่แน่ใจว่า ตัวเมื่อวานDupinกับDupinตัวในวันนี้ ยังเป็นตัวเดียวกันอยู่หรือไม่"
+  },
   "ColorfulBird": {
     "localized_name": "Tocotoco",
     "description": "พาลน่ากลัวที่ออกไข่ที่ระเบิดได้ ปกติจะยิงไข่ออกทางก้นใช้แทนอาวุธ แต่พอหมดทางก็จะระเบิดตัวเอง"
@@ -446,6 +498,14 @@
   "CowPal": {
     "localized_name": "Mozzarina",
     "description": "แม้ปล่อยทิ้งไว้ส่ง ๆ ก็ยังมีน้ำนมไหลเหมือนเปิดก๊อก ต่อให้เป็นตัวผู้ก็มีน้ำนม นี่คือมหัศจรรย์สัตว์โลก"
+  },
+  "CubeTurtle": {
+    "localized_name": "Tetroise",
+    "description": "หินที่กองอยู่บนแผ่นหลังของมัน ดูเหมือนจะมีเจตจำนงบางอย่างเป็นของตัวเอง หากถอดออกแล้วนำไปทิ้งไว้ในที่ห่างไกล มันจะเริ่มเคลื่อนไหวขึ้นมาเอง และพยายามกลับไปยังสถานที่ที่ควรอยู่"
+  },
+  "CubeTurtle_Neutral": {
+    "localized_name": "Tetroise Primo",
+    "description": "ไม่ว่าก้อนหินบนหลังมันจะถูกลักไปไว้ไหนก็ตาม Tetroise Primoมันรู้ และสามารถตามหาได้คนเจอ"
   },
   "CuteButterfly": {
     "localized_name": "Cinnamoth",
@@ -459,6 +519,10 @@
     "localized_name": "Fuddler",
     "description": "ภูมิใจในเล็บขนาดใหญ่ที่แข็งดั่งเพชร แต่แค่ลับเล็บก็ใช้พลังงานไปเกือบหมดแล้ว บางครั้งจึงหมดวันไปกับการลับเล็บ"
   },
+  "DandelionGirl": {
+    "localized_name": "Souffline",
+    "description": "มันสามารถเก็บความทรงจำอันไม่พึงประสงค์เอาไว้ในปุยขนได้ เมื่อปล่อยให้ปุยขนลอยไปตามสายลมและหายไปที่ไหนสักแห่ง ความรู้สึกหม่นหมองก็จะได้โบกมือลาไปพร้อมกัน"
+  },
   "DarkAlien": {
     "localized_name": "Xenovader",
     "description": "ได้พลังงานจากการส่งและลืมข้อมูล ดูเหมือนจะส่งข้อมูลไปให้ใครบางคนเป็นระยะ - ทราบแล้วเปลี่ยน พบเป้าหมาย มุ่งหน้ามาทำลายด่วน"
@@ -470,6 +534,10 @@
   "DarkCrow": {
     "localized_name": "Cawgnito",
     "description": "อดีตเคยบินอย่างอิสระบนท้องฟ้ากว้าง แต่เมื่อแข่งแพ้Galeclaw จึงละทิ้งท้องฟ้า ใช้ชีวิตหลบ ๆ ซ่อน ๆ ในเวลากลางคืน"
+  },
+  "DarkFlameFox": {
+    "localized_name": "Majex",
+    "description": "ท่ายืนเอามือเท้าเอวของมันดูราวกับหลุดออกมาจากภาพวาด แต่ความจริงแล้ว มันแค่กำลังยืนถ่างขาเกร็งไว้เพื่อไม่ให้ล้ม เพราะหางและขนที่ดูคล้ายเส้นผมนั้นหนักเกินไปเท่านั้นเอง"
   },
   "DarkMechaDragon": {
     "localized_name": "Xenolord",
@@ -499,6 +567,10 @@
     "localized_name": "ชาวเกาะ",
     "description": null
   },
+  "DomeArmorDragon": {
+    "localized_name": "Aegidron",
+    "description": "ในครั้นสมัยโบราณ เมื่อวิธีการสื่อสารนั้นจำกัด Aegidronพวกมันมักกะพรือปีกเพื่อส่งแสง เป็นสัญญาณง่าย ๆ ให้เข้าใจ"
+  },
   "DreamDemon": {
     "localized_name": "Daedream",
     "description": "จะทำให้ผู้ที่ตัวเองถูกใจหลับลึก และฝันดีไปเรื่อย ๆ ไม่ตื่นขึ้นมาอีกเลยจนกว่าจะตาย"
@@ -519,9 +591,25 @@
     "localized_name": "Boltmane",
     "description": "-"
   },
+  "ElecLizard": {
+    "localized_name": "Slowatt",
+    "description": "ใช้ชีวิตทำในสิ่งที่อยากทำ นอนเมื่ออยากนอน และกินในสิ่งที่อยากกิน เพื่อจะรักษาวิถีชีวิตแบบนั้นเอาไว้Slowattคงต้องมีพวกมัน ที่คอยทุ่มเทพยายามอยู่เบื้องหลังอย่างแน่นอน …อย่างน้อยก็ต้องคิดแบบนั้น ไม่เช่นนั้นชาวเกาะในสมัยก่อนคงอยู่กันไม่ไหว"
+  },
   "ElecPanda": {
     "localized_name": "Grizzbolt",
     "description": "มีรอยยิ้มกว้าง และร่างกายบึกบึน จะเชื่อฟังคนที่ตนยอมรับว่าเป็นคู่หู ไม่รู้ทำไมถึงเปลี่ยนไปเป็นคนละคนเฉพาะตอนที่ถือปืนมินิกัน"
+  },
+  "ElecPomeranian": {
+    "localized_name": "Puffolt",
+    "description": "เมื่อมันแช่อยู่ในน้ำ ขนฟูนุ่มของมันจะดูดซับน้ำเอาไว้เป็นจำนวนมาก และในจังหวะที่สะบัดน้ำเหล่านั้นออกไป มันจะปล่อยกระแสไฟฟ้าอย่างรุนแรงเกินคาด ดังนั้นการอาบน้ำร่วมกับมันจึงเป็นกิจกรรมที่ต้องเอาชีวิตเข้าแลก"
+  },
+  "ElecSnail": {
+    "localized_name": "Snock",
+    "description": "Snockการจับมันโยนลงไป ในอ่างอาบน้ำเพื่อแช่อ่างไฟฟ้าถือเป็นวิธีดูแลสุขภาพแบบดั้งเดิม กล่าวอีกนัยหนึ่ง นั่นคือกิจกรรมที่อันตรายเอามาก ๆ"
+  },
+  "ElecSnail_Ground": {
+    "localized_name": "Snock Lux",
+    "description": "Snock Luxการจับมันโยนลงไป ในอ่างอาบน้ำเพื่อแช่อ่างเดือดพล่านนั้น เคยเป็นกระแสนิยมในอดีตอันไกลโพ้น แต่ด้วยกระแสการฟื้นคืนความนิยมในปัจจุบัน ทำให้ตอนนี้มันกลายเป็นเทรนด์สุดฮอตไปแล้ว"
   },
   "Emote_location_A_01": {
     "localized_name": "ชาวเกาะ",
@@ -619,6 +707,10 @@
     "localized_name": "Dazemu",
     "description": "ย่างก้าวแรก ลืมความลังเล ย่างก้าวที่สอง ลืมความหดหู่ ย่างก้าวที่สาม ลืมความหวาดกลัว จงเผชิญหน้า ไม่ว่าศัตรูจะเป็นใคร"
   },
+  "Female_DTairikuPeople01_v01": {
+    "localized_name": "ชาวเกาะ",
+    "description": null
+  },
   "Female_DesertPeople02": {
     "localized_name": "ชาวบ้าน",
     "description": null
@@ -639,6 +731,14 @@
     "localized_name": "ชาวเกาะ",
     "description": null
   },
+  "Female_Farmer01_v05": {
+    "localized_name": "ชาวเกาะ",
+    "description": null
+  },
+  "Female_Kunoichi01": {
+    "localized_name": "ผู้ปฎิบัติการแห่งพันธสัญญาใต้เงาฟ้า",
+    "description": null
+  },
   "Female_Nomad01_v01": {
     "localized_name": "ชาวเกาะ",
     "description": null
@@ -652,6 +752,10 @@
     "description": null
   },
   "Female_Nomad01_v04": {
+    "localized_name": "ชาวเกาะ",
+    "description": null
+  },
+  "Female_Nomad01_v05": {
     "localized_name": "ชาวเกาะ",
     "description": null
   },
@@ -683,6 +787,18 @@
     "localized_name": "ชาวเกาะ",
     "description": null
   },
+  "Female_Ranger01_v05": {
+    "localized_name": "ชาวเกาะ",
+    "description": null
+  },
+  "Female_SakurajimaPeople01": {
+    "localized_name": "ชาวเกาะ",
+    "description": null
+  },
+  "Female_SnowPeople01": {
+    "localized_name": "ชาวเกาะ",
+    "description": null
+  },
   "Female_Soldier01": {
     "localized_name": "ชาวเกาะ",
     "description": null
@@ -707,6 +823,42 @@
     "localized_name": "พาลเทมเมอร์แฝด",
     "description": null
   },
+  "Female_SorajimaPeople01": {
+    "localized_name": "ชาวเกาะ",
+    "description": null
+  },
+  "Female_SurveyGirl01": {
+    "localized_name": "เฟีย",
+    "description": null
+  },
+  "Female_SurveyGirl02": {
+    "localized_name": "เฟีย",
+    "description": null
+  },
+  "Female_SurveyGirl03": {
+    "localized_name": "เฟีย",
+    "description": null
+  },
+  "Female_SurveyGirl04": {
+    "localized_name": "เฟีย",
+    "description": null
+  },
+  "Female_SurveyWoman01": {
+    "localized_name": "คาร์ลา",
+    "description": null
+  },
+  "Female_SurveyWoman02": {
+    "localized_name": "คาร์ลา",
+    "description": null
+  },
+  "Female_TenrakuPeople01": {
+    "localized_name": "ชาวเกาะ",
+    "description": null
+  },
+  "Female_WorldTreePeople01": {
+    "localized_name": "ชาวเกาะ",
+    "description": null
+  },
   "FengyunDeeper": {
     "localized_name": "Fenglope",
     "description": "นานมาแล้ว รูปลักษณ์ที่งดงามนั้น เป็นสิ่งใกล้ตัวในฐานะแบบวาดภาพ เมื่อเวลาผ่านไป ขนและเขาอันงดงามนั้น เลยเป็นสิ่งใกล้ตัวในฐานะวัตถุดิบของงานศิลปะ"
@@ -727,6 +879,14 @@
     "localized_name": "ภารดรเพลิงนิรันดร์ ผู้พลีชีพ",
     "description": null
   },
+  "FireCult_GrenadeLauncher": {
+    "localized_name": "ภารดรเพลิงนิรันดร์ ผู้พลีชีพ",
+    "description": null
+  },
+  "FireCult_MissileLauncher": {
+    "localized_name": "ภารดรเพลิงนิรันดร์ ผู้พลีชีพ",
+    "description": null
+  },
   "FireCult_Prisoner": {
     "localized_name": "ภารดรเพลิงนิรันดร์ ผู้พลีชีพ",
     "description": null
@@ -740,6 +900,10 @@
     "description": null
   },
   "FireCult_Rifle_Relax": {
+    "localized_name": "ภารดรเพลิงนิรันดร์ ผู้พลีชีพ",
+    "description": null
+  },
+  "FireCult_RocketLauncher": {
     "localized_name": "ภารดรเพลิงนิรันดร์ ผู้พลีชีพ",
     "description": null
   },
@@ -771,9 +935,21 @@
     "localized_name": "Petallia",
     "description": "เมื่อหมดอายุขัยจะกลายสภาพเป็นต้นไม้ใหญ่ และออกดอกแสนงดงามทุก 10 ปี ซึ่งPetalliaตัวใหม่จะเกิดมาจากดอกไม้ดังกล่าว"
   },
+  "FlowerDoll_Fire": {
+    "localized_name": "Petallia Ignis",
+    "description": "เมื่อสิ้นอายุขัย มันจะมอดไหม้เป็นถ่านเถ้า ทำให้ดินนั้นเกิดพืชผล นับเป็นเวลาราว 10 ปีที่พฤกษานานาพรรณงอกงามยิ่งนัก"
+  },
+  "FlowerPrince": {
+    "localized_name": "Dandilord",
+    "description": "ตั้งแต่กาลโบราณ เขายืนอยู่เคียงต้นไม้ คอยปกป้องบางสิ่งมาโดยตลอด บัดนี้กำลังปกป้องอะไรอยู่ หรือเพราะเหตุใดจึงต้องปกป้องDandilordมิอาจมองเห็นได้ เพราะว่าต้นไม้นั้นรู้คำตอบ และมีเพียงหมอกที่เขาควบคุมเท่านั้น ที่จะเผยให้เห็นความจริง"
+  },
   "FlowerRabbit": {
     "localized_name": "Flopie",
     "description": "ชอบสถานที่ที่มีต้นไม้เยอะ แต่ช่วงนี้ดูเหมือนว่าโรคแพ้เกสรดอกไม้ จะแพร่ระบาดในหมู่Flopie"
+  },
+  "FluffyBird": {
+    "localized_name": "Muffly",
+    "description": "ปุยขนฟูรอบใบหน้าช่วยดูดซับแรงกระแทก ต่อให้ถูกกระเด็นปลิวไปบ้างก็ไม่ใช่เรื่องใหญ่ แต่เพราะมันเกะกะจน เล็มขนได้ยาก แถมยังเกาในจุดที่คันไม่ได้อีก ทำให้รู้สึกหงุดหงิดใจอยู่ไม่น้อย"
   },
   "FlyingManta": {
     "localized_name": "Celaray",
@@ -782,6 +958,10 @@
   "FlyingManta_Thunder": {
     "localized_name": "Celaray Lux",
     "description": "ลายสุดเด่นมีประโยชน์เวลาหาคู่ ประวัติผู้ถูกไฟช็อตจากCelaray Luxมีมาแต่โบราณ ดังนั้นในปัจจุบันลายม้าลายสีเหลืองสลับดำ เลยกลายเป็นสีบอกอันตรายบนเกาะ"
+  },
+  "FoxExorcist": {
+    "localized_name": "Flaracle",
+    "description": "มันรวบรวมสมาธิและมองเห็นอนาคตท่ามกลางเปลวไฟ หากเห็นอนาคตที่ไม่ถูกใจก็จะเริ่มใหม่ซ้ำแล้วซ้ำเล่า จนกว่าจะได้ผลลัพธ์ที่ดี เพราะเหตุนี้เองFlaracleอนาคตของมันจึงเปล่งประกายอยู่เสมอ!"
   },
   "FoxMage": {
     "localized_name": "Wixen",
@@ -802,6 +982,14 @@
   "GYM_BlackGriffon_2_Avatar": {
     "localized_name": "Victor & Shadowbeak",
     "description": null
+  },
+  "GYM_BlueSkyDragon": {
+    "localized_name": "Auri & Shaolong",
+    "description": "เมื่อได้พบกับคู่แท้ที่ควรจะใช้ชีวิตร่วมกัน มันจะ ถอดวงแหวนที่ลอยอยู่บริเวณกึ่งกลางลำตัวออกมา แล้วแลกเปลี่ยนกันซึ่ง ๆ หน้า"
+  },
+  "GYM_BlueSkyDragon_2": {
+    "localized_name": "Auri & Shaolong",
+    "description": "เมื่อได้พบกับคู่แท้ที่ควรจะใช้ชีวิตร่วมกัน มันจะ ถอดวงแหวนที่ลอยอยู่บริเวณกึ่งกลางลำตัวออกมา แล้วแลกเปลี่ยนกันซึ่ง ๆ หน้า"
   },
   "GYM_ElecPanda": {
     "localized_name": "Zoe & Grizzbolt",
@@ -859,6 +1047,14 @@
     "localized_name": "Axel & Orserk",
     "description": "ส่งกระแสไฟฟ้าเข้าไปตามบาดแผล เผาร่างศัตรู เวลาOrserkทะเลาะกันเอง จะรู้ผลในพริบตา"
   },
+  "GYM_WorldTreeDragon": {
+    "localized_name": "Zenara & Astralym",
+    "description": "พาลลึกลับที่เคยบินมายังพาลพากอสในอดีตกาลอันไกลโพ้น กลายเป็นหายนะที่นำพาความพินาศมา จนถูกผนึกไว้เป็นเวลายาวนาน ท้ายที่สุดได้ถูกโค่นล้มลงโดยพาลเทเมอร์"
+  },
+  "GYM_WorldTreeDragon_2": {
+    "localized_name": "Zenara & Astralym",
+    "description": "พาลลึกลับที่เคยบินมายังพาลพากอสในอดีตกาลอันไกลโพ้น กลายเป็นหายนะที่นำพาความพินาศมา จนถูกผนึกไว้เป็นเวลายาวนาน ท้ายที่สุดได้ถูกโค่นล้มลงโดยพาลเทเมอร์"
+  },
   "Ganesha": {
     "localized_name": "Teafant",
     "description": "พ่นน้ำมหาศาลออกมาจากอวัยวะที่เหมือนจมูก แต่บางคนก็บอกว่าน้ำนั่นเป็นแค่น้ำมูก นักวิจัยต่างถกเรื่องนี้กันอย่างเผ็ดร้อน"
@@ -879,9 +1075,25 @@
     "localized_name": "Maraith",
     "description": "ชอบกลิ่นอันมีเอกลักษณ์ของสิ่งมีชีวิตที่ใกล้ตาย ถ้ามีMaraithมาติดพัน ก็นั่นแหละ"
   },
+  "GhostBlackCat": {
+    "localized_name": "Wispaw",
+    "description": "ความคิดและความรู้สึกของมนุษย์ทุกคนที่เคยเลี้ยงดูเผ่าพันธุ์นี้มาจนถึงปัจจุบัน ได้อัดแน่นรวมอยู่ในมือที่อยู่ด้านหลัง และในช่วงหลังมานี้Wispawดูเหมือนว่าความเห็นพ้องต้องกันจะเป็นการตามใจมันเป็นพิเศษ"
+  },
+  "GhostDragon": {
+    "localized_name": "Eidrolon",
+    "description": "มีพาลตัวใหม่ปรากฏตัวขึ้น ณ พฤกษาโลก สุขุมและอ่อนโยน ชอบเอาใจใส่กับทุกสรรพสิ่งรอบตัว ตอนนี้ มันก็แค่อยากอยู่เงียบ ๆ เคียงข้างใครซักคน"
+  },
+  "GhostDragon_Fire": {
+    "localized_name": "Eidrolon Ignis",
+    "description": "พาลตัวใหม่ที่เพิ่งเริ่มมีการพบเห็นในช่วงหลังมานี้ มีนิสัยดุร้าย และคอยระบายความโกรธใส่อะไรบางอย่างอยู่ตลอดเวลา ไม่เชื่ออะไรอีกต่อไปเลย"
+  },
   "GhostRabbit": {
     "localized_name": "Nitemary",
     "description": "สิ่งที่ถืออยู่คือวิญญาณของตน เมื่อเจอผู้ที่ชอบ ก็อยากจะใช้กำลังดึงวิญญาณออกมา และผสมกับวิญญาณของตนให้เป็นหนึ่งเดียวกัน"
+  },
+  "GhostRabbit_Grass": {
+    "localized_name": "Nitemary Botan",
+    "description": "สิ่งที่มันมีคือดวงวิญญาณของตนเอง เมื่อได้พบผู้ที่รักสุดหัวใจ มันจะโหมวิญญาณตนเองเข้าใส่ แล้วหลอมมันเข้ากับอีกฝ่าย เพราะปรารถนาให้เป็นหนึ่งเดียวกัน"
   },
   "GoldenHorse": {
     "localized_name": "Gildane",
@@ -903,6 +1115,14 @@
     "localized_name": "Zoe",
     "description": null
   },
+  "GrassGolem": {
+    "localized_name": "Dualith",
+    "description": "หนึ่งชีวิต แต่มีสองจิตสำนึก บางครั้ง ความเห็นที่ไม่ตรงกันก็ทำให้ทั้งสองเริ่มทะเลาะกัน จนกว่าจะคืนดีกันได้ ไม่มีใครรู้เลยว่าเกราะจะมุ่งหน้าไปทางไหน!"
+  },
+  "GrassGolem_Dark": {
+    "localized_name": "Dualith Noct",
+    "description": "ชีวิตเดียว แต่มีจิตใจถึงสองดวง ปกติมักเห็นต่างและมีเรื่องปะทะกันอยู่เสมอ ทว่าเมื่อถึงคราวต่อสู้ ทั้งจิตใจและร่างกายจะหลอมรวมเป็นหนึ่งอย่างรวดเร็ว!"
+  },
   "GrassMammoth": {
     "localized_name": "Mammorest",
     "description": "ต้นไม้บนหลังของแต่ละตัวจะแตกต่างกัน มีบันทึกในประวัติศาสตร์ว่ามีคนที่เลี้ยงมันไว้ชื่นชม มีกระทั่งนักแต่งสวนสำหรับMammorestโดยเฉพาะ"
@@ -911,6 +1131,14 @@
     "localized_name": "Mammorest Cryst",
     "description": "ต้นไม้บนหลังของแต่ละตัวจะแตกต่างกัน มีคนเคยพบพืชที่คิดว่าสูญพันธุ์ไปแล้ว บนหลังMammorest Crystในสภาพแช่แข็งด้วย"
   },
+  "GrassMinotaur": {
+    "localized_name": "Elgrove",
+    "description": "ใบไม้ที่ติดอยู่บนเขานั้น ต่อให้ดึงแรงแค่ไหนก็ไม่หลุดออกมา แต่หากวันใดใบไม้นั้นร่วงหล่นลงเอง Elgroveมันจะรู้ทันทีว่านั่นคือสัญญาณแห่งวาระสุดท้ายของตนเอง"
+  },
+  "GrassMinotaur_Ice": {
+    "localized_name": "Elgrove Cryst",
+    "description": "เขาน้ำแข็งจะไม่ละลายตราบใดที่มันยังมีชีวิตอยู่ แต่เมื่อใดที่หยดน้ำเริ่มไหลลงมาจากน้ำแข็งนั้นElgrove Cryst มันจะรับรู้ได้ว่าร่างกายของตนกำลังค่อย ๆ เย็นลง"
+  },
   "GrassPanda": {
     "localized_name": "Mossanda",
     "description": "เจ้าของพลังอันน่าทึ่ง ในการทดลองครั้งหนึ่งพบว่ามันทำให้กระดาษที่ซ้อนกัน 3000 แผ่นขาดได้อย่างง่ายดาย ต้องขอบคุณสิ่งศักดิ์สิทธิ์ที่มันไม่ใช่พาลกินเนื้อ"
@@ -918,6 +1146,10 @@
   "GrassPanda_Electric": {
     "localized_name": "Mossanda Lux",
     "description": "เจ้าของพลังอันน่าทึ่ง แปลงไฟฟ้าเป็นสัญญาณ ทำให้ความสามารถทางกายทะลุขีดจำกัด ถ้าพูดถึงสิ่งมีชีวิตที่แข็งแกร่งที่สุดจะต้องมีพูดถึงมันเสมอ"
+  },
+  "GrassPanda_Electric_Tower": {
+    "localized_name": "Mossanda Lux",
+    "description": null
   },
   "GrassRabbitMan": {
     "localized_name": "Verdash",
@@ -986,6 +1218,10 @@
   "HerculesBeetle_Ground": {
     "localized_name": "Warsect Terra",
     "description": "เปลือกแข็งที่หุ้มทั่วทั้งตัว ทนความร้อนและแรงดันสูง แม้จะโดนMammorestเหยียบก็ไม่เป็นไร"
+  },
+  "HoodGhost": {
+    "localized_name": "Hoodle",
+    "description": "หลับแล้วก็เหี่ยวลง หลับแล้วก็หายไป เพราะสิ่งที่เรียกว่า การหลับHoodleนั้นไม่มีอยู่จริง Hoodleมันจึงไม่เคยหลับเลย"
   },
   "Horus": {
     "localized_name": "Faleris",
@@ -1107,6 +1343,10 @@
     "localized_name": "ขบวนการพรานเถื่อน ดาวรุ่ง",
     "description": null
   },
+  "Hunter_Handgun_Quest_StrongOldMan": {
+    "localized_name": "ขบวนการพรานเถื่อน ดาวรุ่ง",
+    "description": null
+  },
   "Hunter_Katana": {
     "localized_name": "ขบวนการพรานเถื่อน นักดาบ",
     "description": null
@@ -1159,6 +1399,10 @@
     "localized_name": "ขบวนการพรานเถื่อน มือปืน",
     "description": null
   },
+  "Hunter_Rifle_Tower": {
+    "localized_name": "ขบวนการพรานเถื่อน มือปืน",
+    "description": null
+  },
   "Hunter_RocketLauncher": {
     "localized_name": "ขบวนการพรานเถื่อน หัวกะทิ",
     "description": null
@@ -1183,6 +1427,10 @@
     "localized_name": "ขบวนการพรานเถื่อน หัวกะทิ",
     "description": null
   },
+  "Hunter_RocketLauncher_Quest_StrongOldMan": {
+    "localized_name": "ขบวนการพรานเถื่อน หัวกะทิ",
+    "description": null
+  },
   "Hunter_Shotgun": {
     "localized_name": "ขบวนการพรานเถื่อน นักล่า",
     "description": null
@@ -1200,6 +1448,10 @@
     "description": null
   },
   "Hunter_Shotgun_Oilrig": {
+    "localized_name": "ขบวนการพรานเถื่อน นักล่า",
+    "description": null
+  },
+  "Hunter_Shotgun_Quest_StrongOldMan": {
     "localized_name": "ขบวนการพรานเถื่อน นักล่า",
     "description": null
   },
@@ -1235,6 +1487,10 @@
     "localized_name": "Polapup",
     "description": "ผู้ที่ไถลบนหิมะได้เร็วที่สุดจะมีหน้ามีตามากที่สุด วันดีคืนดีก็จะมีตัวที่กระโดดตามแรงไถลตกลงมาจากฟ้า ช่วงที่สู้กับบอสจะมีปรากฏการณ์เช่นนั้นเกิดขึ้นบ่อยขึ้น อากาศแจ่มใส และมีPolapupตกเป็นบางเวลา"
   },
+  "IceSeal_Ground": {
+    "localized_name": "Polapup Terra",
+    "description": "ใครไถลบนหิมะได้เร็วสุดคือผู้ชนะ บางครั้งบางตัวอาจใช้แรงพุ่งเกินตัว จนหัวทิ่มและถูกหิมะกลืนกิน โดยเฉพาะฤดูหาจ่าฝูง จะเกิดเหตุการณ์เช่นนี้บ่อยครั้ง โปรดระวังกองทัพแมวน้ำอืดPolapup Terra"
+  },
   "IceWitch": {
     "localized_name": "Icelyn",
     "description": "พออากาศร้อน ตัวจะเริ่มละลาย แต่มันชอบอาบแดดอย่างยิ่ง ถ้าเจอของร้อน ตัวจะเริ่มละลาย แต่มันชอบแช่บ่อน้ำพุร้อนเป็นอย่างยิ่ง มันคิดว่า ในเมื่อยังไงก็ต้องตาย งั้นก็อยากละลายในบ่อน้ำพุร้อนกลางแจ้งให้สบายใจ"
@@ -1254,6 +1510,10 @@
   "JetDragon": {
     "localized_name": "Jetragon",
     "description": "คอยเฝ้ามองเกาะพาลพากอสจากฟากฟ้าอันไกลโพ้น เพื่อในยามที่ท้องฟ้าลุกไหม้ แผ่นดินแตกระแหง หายนะลืมตาตื่นขึ้นอีกครั้ง มันจะทำลายหายนะด้วยประกายแสงแห่งการทำลายล้าง"
+  },
+  "KabukiMan": {
+    "localized_name": "Renjishi",
+    "description": "เมื่อต้องเผชิญหน้ากับศัตรู แวบแรก อาจจดูเหมือนว่าท่าของมันดูเว่อร์วังและอ่อนหัด ทว่าช่างน่าประหลาด ที่ศัตรูมักรู้สึกท้วมท้นและฉงนกับมันจนไม่สามารถละสายตาได้"
   },
   "Kelpie": {
     "localized_name": "Kelpsea",
@@ -1287,9 +1547,25 @@
     "localized_name": "Blazamut Ryu",
     "description": "ปรากฎกายขึ้นมาจากใต้พิภพในอดีตอันไกลโพ้น เปลวเพลิงลุกโชนไร้ความปรานี ไฟจะไม่มอดดับจนกว่าจะเผาไหม้ทั่วทั้งเกาะ รู้จักกันในนาม |เพลิงนิรันดร์|"
   },
+  "KingSunfish": {
+    "localized_name": "Solmora",
+    "description": "ด้วยการหมุนหางรูปทรงคล้ายสกรู มันจึงสามารถสร้างแรงขับเคลื่อนได้ มีรายงานการวิจัยในอดีตที่ชี้ว่า หากไม่ต้องคำนึงถึงการพังทลายของร่างกาย ตามทฤษฎีแล้วมันสามารถว่ายน้ำได้เร็วเกิน 88 mph"
+  },
+  "KingSunfish_Thunder": {
+    "localized_name": "Solmora Lux",
+    "description": "มันหมุนหางที่มีลักษณะคล้ายสกรูเพื่อสร้างกระแสไฟฟ้า ตามทฤษฎีแล้วสามารถผลิตพลังงานได้สูงถึง 1.21 กิกะวัตต์ แต่เนื่องจากร่างกายจะพังทลายในทันที จึงไม่สามารถนำมาใช้งานได้จริง"
+  },
+  "KingWhale": {
+    "localized_name": "Panthalus",
+    "description": "ผู้รอดชีวิตคนสุดท้ายของเผ่าพันธุ์ ที่เฝ้ารอคอยโดยยึดมั่นในภารกิจ เมื่อเขาทำหน้าที่ของตนสำเร็จ และเอ่ยเรียกหา “แม่” แต่อนิจจาสิ่งที่ตอบกลับมานั้น กลับกลายเเป็นแค่เพียงเสียงสะท้อนเท่านั้น"
+  },
   "Kirin": {
     "localized_name": "Univolt",
     "description": "ในอดีตเชื่อว่าเป็นทูตของเทพสายฟ้า จึงไม่ถูกมนุษย์ล่า แต่เมื่อมีคนเห็นว่ามันถูกฟ้าผ่าตาย ลัทธิก็ล่มสลาย ก่อนตกต่ำกลายเป็นม้าเทียมรถม้าตามตัวอักษร"
+  },
+  "Kirin_Ice": {
+    "localized_name": "Univolt Cryst",
+    "description": "ครั้งหนึ่งมันเคยได้รับการนับถือในฐานะผู้รับใช้ของเทพแห่งฤดูหนาวและไม่เคยถูกมนุษย์ล่า แต่เมื่อชั่วขณะที่มันลื่นล้มบนผืนน้ำแข็งถูกผู้คนพบเห็น ศรัทธาก็พังทลาย และมันก็ร่วงหล่นจากสถานะอันศักดิ์สิทธิ์ กลายเป็นแค่ม้าลากเกวียนอย่างแท้จริง"
   },
   "Kitsunebi": {
     "localized_name": "Foxparks",
@@ -1298,6 +1574,10 @@
   "Kitsunebi_Ice": {
     "localized_name": "Foxparks Cryst",
     "description": "ตอนเพิ่งเกิดควบคุมไอเย็นไม่เก่ง จะสำลัก และสำรอกไอเย็นออกมาทุกครั้ง เวลาเป็นหวัดน้ำมูกจะแข็ง หายใจลำบากจนลนลาน"
+  },
+  "LanternButler": {
+    "localized_name": "Loomen",
+    "description": "โคมไฟที่ส่องแสงเรืองรองอย่างพิศวงจะเผยให้เห็นความจริงของโลก หากแสงจากโคมนั้นทำให้รู้สึกแสบตา ก็คงเป็นเพราะมีเรื่องไม่ชอบมาพากลซ่อนอยู่ในใจ"
   },
   "LavaGirl": {
     "localized_name": "Flambelle",
@@ -1318,6 +1598,10 @@
   "LazyDragon_Electric": {
     "localized_name": "Relaxaurus Lux",
     "description": "จู่ ๆ Relaxaurusก็นึกขึ้นมาว่า ได้เวลาเปลี่ยนตัวเองแล้วละมั้ง พริบตานั้นก็มีสายฟ้าแล่นไปทั่วร่าง!"
+  },
+  "LazyDragon_Electric_Tower": {
+    "localized_name": "Relaxaurus Lux",
+    "description": null
   },
   "LeafMomonga": {
     "localized_name": "Herbil",
@@ -1355,6 +1639,14 @@
     "localized_name": "Leezpunk",
     "description": null
   },
+  "LongCat": {
+    "localized_name": "Valentail",
+    "description": "จากภาพที่ปรากฏในภาพวาดโบราณ แสดงให้เห็นว่าในอดีตมันมีรูปร่างเล็กกว่าปัจจุบันมาก อย่างไรก็ตาม ด้วยเหตุผลที่ไม่ทราบแน่ชัด ในช่วงไม่กี่ปีมานี้ส่วนต่าง ๆ ของร่างกายกลับยืดยาวขึ้นอย่างรวดเร็ว และมีการคาดการณ์ว่าในอีก 100 ปีข้างหน้า ขนาดของมันอาจเพิ่มขึ้นมากถึงประมาณ 10 เท่าของปัจจุบัน"
+  },
+  "LotusDragon": {
+    "localized_name": "Ophydia",
+    "description": "Ophydiaบริเวณแหล่งน้ำที่มันอาศัย มีดอกไม้คล้าย ๆ กันขึ้นมากมาย มีการวิจัยเพื่อพยายามเพาะพันธุ์ดอกไม้ชนิดนี้ แต่ทุกครั้งที่มนุษย์เข้าไปยุ่งย่าม ดอกไม้มันจะเหี่ยวเฉาในที่สุด"
+  },
   "Male_Angler01_v01": {
     "localized_name": "ชาวเกาะ",
     "description": null
@@ -1375,7 +1667,27 @@
     "localized_name": "ชาวเกาะ",
     "description": null
   },
+  "Male_Breeder01_v05": {
+    "localized_name": "ชาวเกาะ",
+    "description": null
+  },
+  "Male_DTairikuPeople01_v01": {
+    "localized_name": "ชาวเกาะ",
+    "description": null
+  },
   "Male_DarkTrader01": {
+    "localized_name": "พ่อค้าเถื่อน",
+    "description": null
+  },
+  "Male_DarkTrader01_02": {
+    "localized_name": "พ่อค้าเถื่อน",
+    "description": null
+  },
+  "Male_DarkTrader01_03": {
+    "localized_name": "พ่อค้าเถื่อน",
+    "description": null
+  },
+  "Male_DarkTrader01_04": {
     "localized_name": "พ่อค้าเถื่อน",
     "description": null
   },
@@ -1395,11 +1707,19 @@
     "localized_name": "กลุ่มบุปผาจันทรา เกะนิน",
     "description": null
   },
+  "Male_Ninja01_Seabase": {
+    "localized_name": "กลุ่มบุปผาจันทรา เกะนิน",
+    "description": null
+  },
   "Male_NinjaElite01": {
     "localized_name": "กลุ่มบุปผาจันทรา โจนิน",
     "description": null
   },
   "Male_NinjaElite01_Invader": {
+    "localized_name": "กลุ่มบุปผาจันทรา โจนิน",
+    "description": null
+  },
+  "Male_NinjaElite01_Seabase": {
     "localized_name": "กลุ่มบุปผาจันทรา โจนิน",
     "description": null
   },
@@ -1412,6 +1732,10 @@
     "description": null
   },
   "Male_Police_old": {
+    "localized_name": "ชาวเกาะ",
+    "description": null
+  },
+  "Male_SakurajimaPeople01": {
     "localized_name": "ชาวเกาะ",
     "description": null
   },
@@ -1431,12 +1755,24 @@
     "localized_name": "ชาวเกาะ",
     "description": null
   },
+  "Male_Scholar01_v05": {
+    "localized_name": "ชาวเกาะ",
+    "description": null
+  },
+  "Male_Scholar02": {
+    "localized_name": "ชาวเกาะ",
+    "description": null
+  },
   "Male_Scientist01_LaserRifle": {
     "localized_name": "กองกำลังวิจัยพันธุกรรม ผู้ลงทัณฑ์",
     "description": null
   },
   "Male_Scientist01_LaserRifle_Invader": {
     "localized_name": "กองกำลังวิจัยพันธุกรรม ผู้ลงทัณฑ์",
+    "description": null
+  },
+  "Male_SnowPeople01": {
+    "localized_name": "ชาวเกาะ",
     "description": null
   },
   "Male_Soldier01": {
@@ -1467,8 +1803,124 @@
     "localized_name": "ชาวเกาะ",
     "description": null
   },
+  "Male_SorajimaPeople01": {
+    "localized_name": "ชาวเกาะ",
+    "description": null
+  },
+  "Male_StrongOldMan01": {
+    "localized_name": "ฮาโรลด์",
+    "description": null
+  },
+  "Male_StrongOldMan02": {
+    "localized_name": "ฮาโรลด์",
+    "description": null
+  },
+  "Male_SurveyMan01": {
+    "localized_name": "กาเดล",
+    "description": null
+  },
+  "Male_SurveyMan02": {
+    "localized_name": "กาเดล",
+    "description": null
+  },
+  "Male_SurveyMan03": {
+    "localized_name": "กาเดล",
+    "description": null
+  },
+  "Male_TenrakuPeople01": {
+    "localized_name": "ชาวเกาะ",
+    "description": null
+  },
   "Male_Trader01": {
     "localized_name": "ชาวบ้าน",
+    "description": null
+  },
+  "Male_Trader01_v04": {
+    "localized_name": "ผู้ช่วยช่างตัดเนื้อ",
+    "description": null
+  },
+  "Male_Trader01_v05": {
+    "localized_name": "ร้านขายผักในหมู่บ้าน",
+    "description": null
+  },
+  "Male_Trader01_v06": {
+    "localized_name": "เด็กส่งของของพวกลักลอบ",
+    "description": null
+  },
+  "Male_Trader01_v07": {
+    "localized_name": "พ่อค้าจัดหาวัสดุ",
+    "description": null
+  },
+  "Male_Trader01_v08": {
+    "localized_name": "ร้านขนมปังริมถนน",
+    "description": null
+  },
+  "Male_Trader01_v09": {
+    "localized_name": "คนขายยาน่าสงสัย",
+    "description": null
+  },
+  "Male_Trader01_v10": {
+    "localized_name": "ชาวประมงและคนขายเนื้อฝีมือดี",
+    "description": null
+  },
+  "Male_Trader01_v11": {
+    "localized_name": "นักล่ามือฉมัง",
+    "description": null
+  },
+  "Male_Trader01_v12": {
+    "localized_name": "นักล่าสัตว์ในตำนาน",
+    "description": null
+  },
+  "Male_Trader01_v13": {
+    "localized_name": "เสบียงทหารรับจ้าง",
+    "description": null
+  },
+  "Male_Trader01_v14": {
+    "localized_name": "พ่อค้าติดอาวุธหนัก",
+    "description": null
+  },
+  "Male_Trader01_v15": {
+    "localized_name": "คนขายกระสุนปืนในตำนาน",
+    "description": null
+  },
+  "Male_Trader01_v16": {
+    "localized_name": "พ่อค้าเร่ขายของเกษตร",
+    "description": null
+  },
+  "Male_Trader01_v17": {
+    "localized_name": "พ่อค้าผักในตำนาน",
+    "description": null
+  },
+  "Male_Trader01_v18": {
+    "localized_name": "คนปรุงยาที่ขึ้นทะเบียน",
+    "description": null
+  },
+  "Male_Trader01_v19": {
+    "localized_name": "คนปรุงยาในตำนาน",
+    "description": null
+  },
+  "Male_Trader01_v20": {
+    "localized_name": "ร้านอาหารท้องถิ่น",
+    "description": null
+  },
+  "Male_Trader01_v21": {
+    "localized_name": "นักชิมอาหารมือใหม่",
+    "description": null
+  },
+  "Male_Trader01_v22": {
+    "localized_name": "นักชิมอาหารในตำนาน",
+    "description": null
+  },
+  "Male_Trader01_v23": {
+    "localized_name": "พ่อค้าจัดหาวัสดุที่ถูกต้องตามกฎหมาย",
+    "description": null
+  },
+  "Male_Trader01_v24": {
+    "localized_name": "พ่อค้าเอเลเมนท์",
+    "description": null
+  },
+  "Male_Trader01_v25": {
+    "localized_name": "พ่อค้าวัสดุในตำนาน",
     "description": null
   },
   "Male_Trader02": {
@@ -1477,6 +1929,10 @@
   },
   "Male_Trader03": {
     "localized_name": "ชาวบ้าน",
+    "description": null
+  },
+  "Male_WorldTreePeople01": {
+    "localized_name": "ชาวเกาะ",
     "description": null
   },
   "Manticore": {
@@ -1507,6 +1963,18 @@
     "localized_name": "Tanzee",
     "description": "แรกเริ่มเดิมทีมันใช้แท่งเรียวยาวเช่นกิ่งไม้เป็นอาวุธ แต่เมื่อคลุกคลีกับมนุษย์ ก็ไม่ได้ใช้อีก เพราะมันพบ |ปืน| ที่ทั้งเรียวยาวและมีประสิทธิภาพยิ่งกว่าแล้ว"
   },
+  "Monkey_Fire": {
+    "localized_name": "Tanzee Ignis",
+    "description": "ฝ่ามือของมันวิวัฒนาการขึ้น จนสามารถจับวัตถุที่เผาไหม้ได้โดยไม่ถูกลวก หากกระสุนปืนหมดลง มันอาจคว้าลำกล้องปืนที่ร้อนจัด แล้วพุ่งเข้าไปโจมตีด้วยการชกก็เป็นได้"
+  },
+  "MonochromeQueen": {
+    "localized_name": "Solenne",
+    "description": "เมื่อมันได้ลิ้มรสประสบการณ์ที่ดีแล้ว ก็จะไม่รู้สึกสงบจนกว่าจะได้เผชิญกับประสบการณ์เลวร้ายในระดับเดียวกัน Solenneหากตั้งใจจะเลี้ยงดูมันอย่างใกล้ชิด จำเป็นต้องเตรียมใจและยอมรับผลที่ตามมาให้สมกับการตัดสินใจนั้น"
+  },
+  "MoonChild": {
+    "localized_name": "Wistella",
+    "description": "เมื่อชีวิตของมันสิ้นสุดลง จะมีดาวดวงหนึ่งเพิ่มขึ้น และส่องประกายอยู่ที่ไหนสักแห่งบนท้องฟ้า และมันจะเปล่งแสงเจิดจ้ายิ่งขึ้น ตามจำนวนความทรงจำที่มี"
+  },
   "MoonQueen": {
     "localized_name": "Selyne",
     "description": "วัตถุรูปร่างเหมือนพระจันทร์ที่ลอยอยู่ด้านหลัง ว่ากันว่าเมื่อเวลาผ่านไปจะค่อย ๆ กลมขึ้นทีละนิด ไม่มีใครรู้ว่าเมื่อพระจันทร์เต็มดวงแล้วจะเกิดอะไรขึ้น"
@@ -1519,6 +1987,14 @@
     "localized_name": "Sweepa",
     "description": "ระหว่างจำศีล ด้านในขนหนา จะมีSweeจำนวนมากซ่อนอยู่ สถิติสูงสุดมีมากถึง 101 ตัว"
   },
+  "Mothman": {
+    "localized_name": "Silvance",
+    "description": "มันยืนนิ่งเคียงข้างพฤกษาโลกพื่อปกป้องบางสิ่งมาตั้งแต่สมัยโบราณกาล ทว่าSilvanceแม้แต่ตัวมันเอง ก็ไม่รู้ว่าตัวเองกำลังปกป้องอะไรหรือเพราะเหตุใด เพราะพฤกษาโลกจะเป็นผู้บอกกล่าวเอง และสปอร์ที่มันสามารถควบคุมได้จะรู้ว่าใครคือศัตรู"
+  },
+  "MummyPal": {
+    "localized_name": "Gildra",
+    "description": "อวัยวะที่ดูคล้ายผ้าพันแผลสีทองนี้ สามารถยืดและหดได้อย่างอิสระ หากแห้งเกินไปอาจฉีกขาดได้ ดังนั้นการตรวจเช็กความชุ่มชื้นเป็นประจำจึงเป็นสิ่งที่ขาดไม่ได้อย่างยิ่ง"
+  },
   "MushroomDragon": {
     "localized_name": "Shroomer",
     "description": "ถ้าสูดสปอร์เข้าไปปริมาณมากจะตกอยู่ในภวังค์ประเภทหนึ่ง บางครั้งที่Shroomerอยู่นิ่ง ๆ ไม่ใช่เพราะมันทำตัวเลียนแบบเห็ด แต่เพราะมันเมาสปอร์ของตัวเอง"
@@ -1527,6 +2003,10 @@
     "localized_name": "Shroomer Noct",
     "description": "สปอร์ปริมาณมากจะบดบังแสงอาทิตย์ได้อย่างง่ายดาย บางครั้งที่Shroomer Noctอยู่นิ่ง ๆ ไม่ใช่เพราะมันทำตัวเลียนแบบเห็ด แต่เพราะสปอร์บังแสงอาทิตย์จนมองอะไรไม่เห็น"
   },
+  "MushroomLady": {
+    "localized_name": "Mycora",
+    "description": "มันมองมนุษย์เป็นเพียงร่างอาศัยที่ใช้ประโยชน์ได้ Mycoraเหตุที่มันมีรูปลักษณ์เช่นนี้ก็เพื่อ หลอกให้มนุษย์คลายความระแวง และกระจายสปอร์ได้อย่างมีประสิทธิภาพ"
+  },
   "Mutant": {
     "localized_name": "Lunaris",
     "description": "ถ้ามองตาโดยไม่ระวังจะโดนควบคุม คนที่ไปไหนมาไหนกับLunaris ส่วนใหญ่แค่ทำเหมือนว่าควบคุมพวกมันได้เท่านั้น"
@@ -1534,6 +2014,10 @@
   "MysteryMask": {
     "localized_name": "Omascul",
     "description": "หน้ากากที่ใส่มิใช่หน้าแท้ คล้ายอยู่หน้าแน่แต่หาอยู่ไม่ คอยมองตลอดมิใกล้มิไกล หันหลังกลับไปปรากฏใกล้ตัว"
+  },
+  "NPC_Dungeon_Shop": {
+    "localized_name": "พ่อค้าเร่",
+    "description": null
   },
   "NPC_FoodRequire_1": {
     "localized_name": "ชาวเกาะ",
@@ -1563,6 +2047,10 @@
     "localized_name": "Starryon",
     "description": "ภูมิใจในแผงคองามพลิ้วของตนยิ่งกว่าอะไร หากพบขนแตกปลายจะอายจนไม่มีสมาธิวิ่ง ไม่มีทางเข้าใกล้Azurmaneเด็ดขาด เพราะไฟฟ้าสถิตทำให้ขนเสียทรง"
   },
+  "NightBlueHorse_Neutral": {
+    "localized_name": "Starryon Primo",
+    "description": "แผงคอที่งดงามและเปล่งประกายคือความภาคภูมิใจที่สุดของมัน หากสกปรกขึ้นมาแม้เพียงเล็กน้อย ก็จะรู้สึกอับอายจนไม่สามารถมีสมาธิกับการวิ่งได้ เนื่องจากคราบไขมันติดง่าย แม้แต่พาลเทมเมอร์ที่มันรักมาก ก็ไม่อยากให้มาจับต้องตัวแบบลูบคลำบ่อยนัก"
+  },
   "NightFox": {
     "localized_name": "Nox",
     "description": "ถ้าพบขนของNoxตามทางตอนกลางคืน ควรหันหลังกลับ อย่าเก็บขึ้นมา เพราะนั่นเป็นตั๋วเที่ยวเดียวไปสู่ค่ำคืนที่ฟ้าไม่สาง"
@@ -1587,11 +2075,23 @@
     "localized_name": "กลุ่มบุปผาจันทรา โจนิน",
     "description": null
   },
+  "NinjaElite_Grenade": {
+    "localized_name": "กลุ่มบุปผาจันทรา โจนิน",
+    "description": null
+  },
   "NinjaElite_NoEquip": {
     "localized_name": "กลุ่มบุปผาจันทรา โจนิน",
     "description": null
   },
   "Ninja_Bowgun": {
+    "localized_name": "กลุ่มบุปผาจันทรา เกะนิน",
+    "description": null
+  },
+  "Ninja_Bowgun_Seabase": {
+    "localized_name": "กลุ่มบุปผาจันทรา เกะนิน",
+    "description": null
+  },
+  "Ninja_Grenade": {
     "localized_name": "กลุ่มบุปผาจันทรา เกะนิน",
     "description": null
   },
@@ -1606,6 +2106,22 @@
   "OctopusGirl": {
     "localized_name": "Gloopie",
     "description": "ถ้าจะนอนด้วยกันกับมัน ให้ดูตารางในวันรุ่งขึ้นไว้ด้วย เพราะจากรอยปุ่มดูดของมันดูคล้ายรอยจูบ ถ้าโดนมันละเมอดูด อาจทำให้คนอื่นเข้าใจผิดได้"
+  },
+  "OctopusGirl_Neutral": {
+    "localized_name": "Gloopie Primo",
+    "description": "ก่อนนอนกัน อย่าลืมเช็กแผนวันพรุ่งนี้ รอยดูดอาจดูเหมือนรอยกัด หากโดนดูดตอนงัวเงีย อาจทำให้เกิดเรื่องเข้าใจผิดได้"
+  },
+  "OniGhostGirl": {
+    "localized_name": "Bakemi",
+    "description": "การทำให้คนตกใจคือความหมายของชีวิตมันก็จริง แต่กลับไม่ได้น่ากลัวเลย ตรงกันข้าม ด้วยความน่ารักของมัน ผู้คนจึงมักแกล้งทำเป็นตกใจให้เสมอ จนตอนนี้Bakemiมันแทบจะกลายเป็นทูตแห่งรอยยิ้มไปแล้ว"
+  },
+  "POLICE_HawkBird": {
+    "localized_name": "ไรเดอร์สันติบาล",
+    "description": null
+  },
+  "POLICE_ThunderDog": {
+    "localized_name": "ไรเดอร์สันติบาล",
+    "description": null
   },
   "PREDATOR_AmaterasuWolf": {
     "localized_name": "Kitsun",
@@ -1623,6 +2139,10 @@
     "localized_name": "Sootseer",
     "description": "ในอดีตเชื่อกันว่าเมื่อใกล้วันสิ้นโลกเปลวเพลิงจะยิ่งอ่อนลง ผู้เชื่อในวันสิ้นโลกโวยวายเรื่องเปลงเพลิงอ่อนแรงมาหลายครั้งแล้ว แต่ผลลัพธ์กลับกลายเป็นเพราะอารมณ์ชั่วแล่นของSootseer อย่างน้อยในตอนนี้ก็เป็นเช่นนั้น"
   },
+  "PREDATOR_DarkScorpion": {
+    "localized_name": "Menasting",
+    "description": "ร่างจริงเป็นร่างพลังงาน เนื้อในกลวงเปล่า จับเหยื่อเป็น ๆ เข้าไปในกระดอง และดูดซับเหยื่อ มีเสียงโหยหวนราวกับในนรกดังก้องรอบตัว"
+  },
   "PREDATOR_DrillGame": {
     "localized_name": "Digtoise",
     "description": "มีเรื่องเล่าชื่อ |สว่านของDigtoise| เป็นปริศนาธรรมให้ขบคิดเกี่ยวกับ ความลักลั่นย้อนแย้งของDigtoiseที่มีเกราะและสว่านที่แข็งแกร่งที่สุด"
@@ -1639,9 +2159,17 @@
     "localized_name": "Dinossom",
     "description": "ถ้าโกรธขึ้นมาจะอาละวาดเหมือนเพลิงผลาญรับมือไม่ไหว สำนวนที่ว่า |เหยียบหางDinossom| หมายถึงทำให้ใครบางคนโกรธมาก"
   },
+  "PREDATOR_FlowerRabbit_Quest": {
+    "localized_name": "Flopie",
+    "description": null
+  },
   "PREDATOR_Garm": {
     "localized_name": "Direhowl",
     "description": "สายสัมพันธ์ระหว่างพวกมันกับมนุษย์เจือจางไปนานแล้ว แต่ระบบการล่าของพวกDirehowlนั้น ใช้เส้นทางล่าเส้นเดียวกับสมัยที่เคยล่าเหยื่อกับมนุษย์"
+  },
+  "PREDATOR_Garm_Quest": {
+    "localized_name": "Direhowl",
+    "description": null
   },
   "PREDATOR_GhostBeast": {
     "localized_name": "Maraith",
@@ -1654,6 +2182,14 @@
   "PREDATOR_Gorilla": {
     "localized_name": "Gorirat",
     "description": "สื่อสารกับพวกพ้องผ่านจังหวะการทุบพื้น ความหมายของจังหวะในแต่ละฝูงก็ต่างกัน จนตอนนี้ก็ยังไม่รู้วิธีการแยกแยะที่ชัดเจน"
+  },
+  "PREDATOR_GrassMammoth_Ice": {
+    "localized_name": "Mammorest Cryst",
+    "description": "ต้นไม้บนหลังของแต่ละตัวจะแตกต่างกัน มีคนเคยพบพืชที่คิดว่าสูญพันธุ์ไปแล้ว บนหลังMammorest Crystในสภาพแช่แข็งด้วย"
+  },
+  "PREDATOR_GrassMinotaur_Ice": {
+    "localized_name": "Elgrove Cryst",
+    "description": "เขาน้ำแข็งจะไม่ละลายตราบใดที่มันยังมีชีวิตอยู่ แต่เมื่อใดที่หยดน้ำเริ่มไหลลงมาจากน้ำแข็งนั้นElgrove Cryst มันจะรับรู้ได้ว่าร่างกายของตนกำลังค่อย ๆ เย็นลง"
   },
   "PREDATOR_GrassPanda": {
     "localized_name": "Mossanda",
@@ -1679,6 +2215,14 @@
     "localized_name": "Blazehowl Noct",
     "description": "ชอบเนื้อดิบมากกว่า แต่ก็กินเนื้อที่ปนเปื้อนเสมอ เพราะใช้เล็บอันธการเป็นอาวุธ เหยื่อเลยถูกสาป แต่มันไม่รู้ตัว"
   },
+  "PREDATOR_MonochromeQueen": {
+    "localized_name": "Solenne",
+    "description": "เมื่อมันได้ลิ้มรสประสบการณ์ที่ดีแล้ว ก็จะไม่รู้สึกสงบจนกว่าจะได้เผชิญกับประสบการณ์เลวร้ายในระดับเดียวกัน Solenneหากตั้งใจจะเลี้ยงดูมันอย่างใกล้ชิด จำเป็นต้องเตรียมใจและยอมรับผลที่ตามมาให้สมกับการตัดสินใจนั้น"
+  },
+  "PREDATOR_MummyPal": {
+    "localized_name": "Gildra",
+    "description": "อวัยวะที่ดูคล้ายผ้าพันแผลสีทองนี้ สามารถยืดและหดได้อย่างอิสระ หากแห้งเกินไปอาจฉีกขาดได้ ดังนั้นการตรวจเช็กความชุ่มชื้นเป็นประจำจึงเป็นสิ่งที่ขาดไม่ได้อย่างยิ่ง"
+  },
   "PREDATOR_MushroomDragon": {
     "localized_name": "Shroomer",
     "description": "ถ้าสูดสปอร์เข้าไปปริมาณมากจะตกอยู่ในภวังค์ประเภทหนึ่ง บางครั้งที่Shroomerอยู่นิ่ง ๆ ไม่ใช่เพราะมันทำตัวเลียนแบบเห็ด แต่เพราะมันเมาสปอร์ของตัวเอง"
@@ -1691,9 +2235,17 @@
     "localized_name": "Starryon",
     "description": "ภูมิใจในแผงคองามพลิ้วของตนยิ่งกว่าอะไร หากพบขนแตกปลายจะอายจนไม่มีสมาธิวิ่ง ไม่มีทางเข้าใกล้Azurmaneเด็ดขาด เพราะไฟฟ้าสถิตทำให้ขนเสียทรง"
   },
+  "PREDATOR_PandaGirl": {
+    "localized_name": "Leafan",
+    "description": "เพื่อขัดเกลาวิชาต่อสู้ที่สืบทอดกันให้แก่ทายาทหนึ่งเดียว จึงต้องฝึกฝนกันทุกวัน! จะมัวแต่มัวเมาในความรักไม่ได้! ต้องรักษาวินัย! มันถึงเวลาแล้วที่ต้องบุกเข้าหาคนที่แอบชอบ! บทจบมีแต่ใจที่แตกสลาย! เพราะวิชาความรักไม่ได้มีในตำรา! อนิจจา จึงต้องลงเอยด้วยความรันทด!"
+  },
   "PREDATOR_PinkLizard": {
     "localized_name": "Lovander",
     "description": "ปรารถนาความรักชั่วข้ามคืน คอยไล่ตามใครสักคนอยู่เสมอ ตอนแรกก็สนใจแค่พาล แต่ไม่กี่ปีมานี้เริ่มยื่นมือเข้าไปยุ่งกับมนุษย์ด้วย"
+  },
+  "PREDATOR_PinkLizard_Quest": {
+    "localized_name": "Lovander",
+    "description": null
   },
   "PREDATOR_PurpleSpider": {
     "localized_name": "Tarantriss",
@@ -1702,6 +2254,10 @@
   "PREDATOR_RedArmorBird": {
     "localized_name": "Ragnahawk",
     "description": "คล้ายจะเป็นสายพันธุ์ใกล้เคียงกับBeakon แต่ไม่เกี่ยวข้องกัน กินก้อนหินเป็นอาหารหลัก นานวันเข้า นอกจากจะงอยปากจะแข็งแล้ว ส่วนหัวทั้งหมดก็แข็งตามไปด้วย"
+  },
+  "PREDATOR_RedFlowerBird": {
+    "localized_name": "Tropicaw",
+    "description": "ว่ากันว่าการที่มันแกว่งร่างไปมาอย่างรุนแรงนั้น เป็นการพรางตัวเลียนแบบดอกไม้ที่ไหวตามแรงลมเพื่อหลีกเลี่ยงศัตรู แต่ก็มีความเห็นแย้งว่า แท้จริงแล้วอาจเป็นเพียงเพราะดอกไม้สีแดงที่เคลื่อนไหวด้วยความเร็วสูงนั้นดูน่าขนลุกเกินไป จนไม่มีใครกล้าเข้าใกล้ก็เท่านั้นเอง"
   },
   "PREDATOR_Ronin_Dark": {
     "localized_name": "Bushi Noct",
@@ -1715,6 +2271,14 @@
     "localized_name": "Dogen",
     "description": "หมั่นทำสมาธิมุ่งสู่ขอบเขตไร้ลักษณ์ หลังเผชิญหน้ากับกิเลสจนรู้สึกปลอดโปร่ง ก็กินข้าวจนอิ่ม แล้วคิดว่า วันนี้ก็กินเยอะเกินไปอีกแล้ว"
   },
+  "PREDATOR_SnakeGirl": {
+    "localized_name": "Venusa",
+    "description": "เมื่อมีเรื่องที่ไม่เข้าใจ มันจะเริ่มประชุมร่วมกับบรรดางูบนศีรษะของตัวเอง ทว่าท้ายที่สุด เพราะทุกคนก็คือตัวมันเอง จึงได้ข้อสรุปเพียงว่า ยังไงก็ไม่เข้าใจอะไรอยู่ดี"
+  },
+  "PREDATOR_Suzaku": {
+    "localized_name": "Suzaku",
+    "description": "สมัยก่อนเชื่อว่าเป็นตัวตนที่นำพาฤดูแล้ง หากปีก่อนหน้าแห้งแล้ง มันจะถูกขับไล่อย่างไม่ลดละ เพราะผู้คนอยากให้ปีต่อไปอุดมสมบูรณ์"
+  },
   "PREDATOR_ThunderDog": {
     "localized_name": "Rayhound",
     "description": "ความเร็วสูงสุดเร็วปานสายฟ้าตามชื่อ ถ้าRayhoundปะทะกันเอง จะเกิดเสียงกดังกึกก้องเหมือนเวลาฟ้าร้อง"
@@ -1723,13 +2287,25 @@
     "localized_name": "Jormuntide Ignis",
     "description": "มีตำนานว่านักรบที่ถูกผลักลงไปในภูเขาไฟโดยไร้ความผิด จะคืนชีพกลายเป็นJormuntide Ignis มาเผาประเทศให้มอดไหม้"
   },
+  "PREDATOR_Umihebi_Fire_Quest": {
+    "localized_name": "Jormuntide Ignis",
+    "description": null
+  },
   "PREDATOR_VolcanicMonster_Ice": {
     "localized_name": "Reptyro Cryst",
     "description": "เลือดเย็นเฉียบไหลเวียนไปทั่วร่าง หากให้ความร้อนสูงในเวลาสั้น ๆ เลือดจะระเหย เกิดเป็นระเบิดไออานุภาพร้ายแรง"
   },
+  "PREDATOR_VolcanoDragon": {
+    "localized_name": "Moldron",
+    "description": "ตัวที่มีสุขภาพดีจะมีลาวาบนแผ่นหลังไหลเวียนได้อย่างราบรื่น แต่หากมีพฤติกรรมการใช้ชีวิตที่ไม่ดี การไหลจะยิ่งแย่ลงเรื่อย ๆ และในกรณีเลวร้ายที่สุด อาจเกิดลาวาอุดตัน จนระเบิดขึ้นมาอย่างกะทันหัน"
+  },
   "PREDATOR_Werewolf_Ice": {
     "localized_name": "Loupmoon Cryst",
     "description": "เขาบนหัวเป็นน้ำแข็งมหัศจรรย์ที่ไม่มีวันละลาย น้ำแข็งไสที่ทำจากเขาที่หัก ว่ากันว่ารสชาติดียิ่งนัก น้ำแข็งไสทำเอาทั้งคนกินและLoupmoon Crystปวดหัวจี๊ดไปตาม ๆ กัน"
+  },
+  "PREDATOR_WhiteShieldDragon_Quest": {
+    "localized_name": "Silvegis",
+    "description": null
   },
   "PREDATOR_WhiteTiger_Ground": {
     "localized_name": "Cryolinx Terra",
@@ -1758,6 +2334,10 @@
   "PalTrader": {
     "localized_name": "พ่อค้าพาล",
     "description": null
+  },
+  "PandaGirl": {
+    "localized_name": "Leafan",
+    "description": "เพื่อขัดเกลาวิชาต่อสู้ที่สืบทอดกันให้แก่ทายาทหนึ่งเดียว จึงต้องฝึกฝนกันทุกวัน! จะมัวแต่มัวเมาในความรักไม่ได้! ต้องรักษาวินัย! มันถึงเวลาแล้วที่ต้องบุกเข้าหาคนที่แอบชอบ! บทจบมีแต่ใจที่แตกสลาย! เพราะวิชาความรักไม่ได้มีในตำรา! อนิจจา จึงต้องลงเอยด้วยความรันทด!"
   },
   "Penguin": {
     "localized_name": "Pengullet",
@@ -1807,7 +2387,55 @@
     "localized_name": "สันติบาล ทหารยาม",
     "description": null
   },
+  "Police_Invader_CrossBow": {
+    "localized_name": "หน่วยสันติบาล - ไลโอต",
+    "description": null
+  },
+  "Police_Invader_FlameThrower": {
+    "localized_name": "หน่วยสันติบาล - ผู้เก็บกวาด",
+    "description": null
+  },
+  "Police_Invader_GrenadeLauncher": {
+    "localized_name": "หน่วยสันติบาล - ทหารผ่านศึก",
+    "description": null
+  },
+  "Police_Invader_Handgun": {
+    "localized_name": "สันติบาล ทหารยาม",
+    "description": null
+  },
+  "Police_Invader_Katana": {
+    "localized_name": "หน่วยสันติบาล - เบรเดอร์",
+    "description": null
+  },
+  "Police_Invader_LaserRifle": {
+    "localized_name": "หน่วยสันติบาล - นักรบไฮเทค",
+    "description": null
+  },
+  "Police_Invader_MissileLauncher": {
+    "localized_name": "หน่วยสันติบาล - หน่วยสกัดกั้น",
+    "description": null
+  },
+  "Police_Invader_Rifle": {
+    "localized_name": "สันติบาล พลปืน",
+    "description": null
+  },
+  "Police_Invader_RocketLauncher": {
+    "localized_name": "หน่วยสันติบาล - หน่วยยิงจรวด",
+    "description": null
+  },
+  "Police_Invader_Shotgun": {
+    "localized_name": "สันติบาล หัวกะทิ",
+    "description": null
+  },
   "Police_Rifle": {
+    "localized_name": "สันติบาล พลปืน",
+    "description": null
+  },
+  "Police_Rifle_Crime_Lv4": {
+    "localized_name": "สันติบาล พลปืน",
+    "description": null
+  },
+  "Police_Rifle_Crime_Lv5": {
     "localized_name": "สันติบาล พลปืน",
     "description": null
   },
@@ -1841,7 +2469,7 @@
   },
   "PoseidonOrca": {
     "localized_name": "Neptilius",
-    "description": "หลังผนึกหายนะ ชายฉกรรจ์ชาวสวรรค์ก็ได้เผชิญหน้ากับมัน ตั้งแต่นั้นมา มันก็มาปรากฏตัวต่อหน้าผู้แข็งแกร่งตามริมทะเล การที่ได้พบกันไม่ใช่เรื่องบังเอิญ"
+    "description": "หลังผนึกหายนะ นักรบผู้แข็งแกร่งแห่งสวรรค์ล่มได้เผชิญหน้ากับมัน ตั้งแต่นั้นมา มันก็มาปรากฏตัวต่อหน้าผู้แข็งแกร่งตามริมทะเล การที่ได้พบกันไม่ใช่เรื่องบังเอิญ"
   },
   "PurpleSpider": {
     "localized_name": "Tarantriss",
@@ -1877,6 +2505,22 @@
   },
   "Quest_Hunter_RocketLauncher01": {
     "localized_name": "ขบวนการพรานเถื่อน หัวกะทิ",
+    "description": null
+  },
+  "Quest_Male_Ninja01": {
+    "localized_name": "กลุ่มบุปผาจันทรา เกะนิน",
+    "description": null
+  },
+  "Quest_Male_NinjaElite01": {
+    "localized_name": "กลุ่มบุปผาจันทรา โจนิน",
+    "description": null
+  },
+  "Quest_Male_Scientist01_LaserRifle": {
+    "localized_name": "กองกำลังวิจัยพันธุกรรม ผู้ลงทัณฑ์",
+    "description": null
+  },
+  "Quest_Scientist_FlameThrower": {
+    "localized_name": "กองกำลังวิจัยพันธุกรรม ผู้ลงทัณฑ์",
     "description": null
   },
   "RAID_DarkMechaDragon": {
@@ -1971,6 +2615,10 @@
     "localized_name": "Ragnahawk",
     "description": "คล้ายจะเป็นสายพันธุ์ใกล้เคียงกับBeakon แต่ไม่เกี่ยวข้องกัน กินก้อนหินเป็นอาหารหลัก นานวันเข้า นอกจากจะงอยปากจะแข็งแล้ว ส่วนหัวทั้งหมดก็แข็งตามไปด้วย"
   },
+  "RedFlowerBird": {
+    "localized_name": "Tropicaw",
+    "description": "ว่ากันว่าการที่มันแกว่งร่างไปมาอย่างรุนแรงนั้น เป็นการพรางตัวเลียนแบบดอกไม้ที่ไหวตามแรงลมเพื่อหลีกเลี่ยงศัตรู แต่ก็มีความเห็นแย้งว่า แท้จริงแล้วอาจเป็นเพียงเพราะดอกไม้สีแดงที่เคลื่อนไหวด้วยความเร็วสูงนั้นดูน่าขนลุกเกินไป จนไม่มีใครกล้าเข้าใกล้ก็เท่านั้นเอง"
+  },
   "Respawn_guide": {
     "localized_name": "พาลเทมเมอร์ผู้ใจดี",
     "description": null
@@ -2023,6 +2671,10 @@
     "localized_name": "ทหารยาม",
     "description": null
   },
+  "Reward_PalCaptureCount_v02": {
+    "localized_name": "ทหารยาม",
+    "description": null
+  },
   "Reward_PalDisplay_A_01": {
     "localized_name": "ทหารยาม",
     "description": null
@@ -2063,6 +2715,10 @@
     "localized_name": "ทหารยาม",
     "description": null
   },
+  "Reward_Paldex_v02": {
+    "localized_name": "ทหารยาม",
+    "description": null
+  },
   "Robbery_Leader": {
     "localized_name": "พ่อค้าพาล",
     "description": null
@@ -2078,6 +2734,14 @@
   "RobinHood_Ground": {
     "localized_name": "Robinquill Terra",
     "description": "เป็นพาลที่มีคุณสมบัติใกล้เคียงกับมนุษย์มาก ใช้ชีวิตล่าสัตว์อยู่ตามลานหิน เวลาที่พบโครงกระดูกของRobinquill Terraตามโบราณสถาน ก็จะพบโครงกระดูกมนุษย์อยู่ด้วยกันเสมอ"
+  },
+  "RockBeast": {
+    "localized_name": "Kuprok",
+    "description": "มันชนร่างกายเข้ากับหินที่แข็งกว่า เพื่อคงรูปร่างให้อยู่ในแบบที่ถูกใจ หากเห็นตัวไหนยุบอยู่ ก็อย่าไปรบกวนมันเลย ถ้าเทียบกับมนุษย์ ก็น่าจะเป็นอารมณ์เดียวกับการตัดหน้าม้าพลาดนั่นเอง"
+  },
+  "RockBeast_Ice": {
+    "localized_name": "Kuprok Cryst",
+    "description": "มันจะเปลี่ยนทิศทางขณะอาบแดดเพื่อหลอมละลายน้ำแข็งไปเรื่อย ๆ ให้เป็นรูปทรงที่ชอบ ถ้าเห็นตัวไหนทรงตัวได้ไม่ดี ก็อย่าไปว่ามันเลย หากเทียบกับมนุษย์ ก็คงเหมือนคนที่เผลอตัดผมสั้นเกินไปนั่นแหละ"
   },
   "Ronin": {
     "localized_name": "Bushi",
@@ -2139,11 +2803,23 @@
     "localized_name": "พ่อค้าเร่",
     "description": null
   },
+  "SamuraiDog": {
+    "localized_name": "Pupperai",
+    "description": "Pupperaiการแย่งชิงอาณาเขตของพวกมัน มักเริ่มจากการจ้องเขม็ง ก่อนจะฟาดฟันกันในพริบตา ว่าแต่ สำหรับตัวที่ถูกเลี้ยงให้เชื่องแล้ว ไม่ควรสอนคำสั่งว่า “รอ” จะดีกว่า เพราะ หลังคำว่า “ไป” สิ่งที่จะเกิดขึ้นคือพฤติกรรมตามสัญชาตญาณ ซึ่งหลีกเลี่ยงไม่ได้"
+  },
   "Scientist_FlameThrower": {
     "localized_name": "กองกำลังวิจัยพันธุกรรม ผู้ลงทัณฑ์",
     "description": null
   },
   "Scientist_FlameThrower_Invader": {
+    "localized_name": "กองกำลังวิจัยพันธุกรรม ผู้ลงทัณฑ์",
+    "description": null
+  },
+  "Scientist_GrenadeLauncher": {
+    "localized_name": "กองกำลังวิจัยพันธุกรรม ผู้ลงทัณฑ์",
+    "description": null
+  },
+  "Scientist_MissileLauncher": {
     "localized_name": "กองกำลังวิจัยพันธุกรรม ผู้ลงทัณฑ์",
     "description": null
   },
@@ -2155,9 +2831,21 @@
     "localized_name": "Prixter",
     "description": "มีพิษอยู่ราว 5000 ชนิด ในบรรดาพิษเหล่านั้นมีพิษร้ายแรงถึงตายทันทีอยู่ด้วย แต่ทุกชนิดเจือจางเกินไปจนไม่มีความหมาย"
   },
+  "ScorpionMan_Electric": {
+    "localized_name": "Prixter Lux",
+    "description": "สามารถใช้หางแทงเข้าไปแล้วปล่อยกระแสไฟฟ้าเข้าสู่ร่างกายของศัตรูได้ แต่กระแสไฟนั้นอ่อนแรงเกินไป จนการชกตรง ๆ ยังรุนแรงกว่ามาก"
+  },
   "SecurityDrone": {
     "localized_name": "เฮลิคอปเตอร์ติดอาวุธ",
     "description": null
+  },
+  "SecurityDrone_Field": {
+    "localized_name": "เฮลิคอปเตอร์ติดอาวุธ",
+    "description": null
+  },
+  "Sekhmet": {
+    "localized_name": "Sekhmet",
+    "description": "ครั้งหนึ่งมันเคยมีนิสัยดุร้าย Anubisและถูกมองว่าเป็นสัญลักษณ์แห่งความตาย แต่เมื่อมันกลายเป็นตัวแทนของความตายอย่างชัดเจนขึ้น เหล่าผู้มั่งคั่งที่แสวงหาสิ่งทดแทนก็ ทำให้มันเมามายด้วยสุรา และใช้มันเพื่อผสมพันธุ์ กระทั่งวันหนึ่งSekhmetมันก็แปรเปลี่ยนไปเป็นสัญลักษณ์แห่งความสูงศักดิ์"
   },
   "Serpent": {
     "localized_name": "Surfent",
@@ -2191,9 +2879,21 @@
     "localized_name": "Quivern Botan",
     "description": "เวลาที่นอนกอดQuivern Botanเป็นหมอนข้าง แล้วได้กลิ่นแดดกับกลิ่นทุ่งหญ้า พรุ่งนี้อากาศจะแจ่มใส ถ้าได้กลิ่นอับชื้น พรุ่งนี้จะฝนตกหนัก"
   },
+  "SleeveRabbit": {
+    "localized_name": "Lapure",
+    "description": "มันใช้ขนยาวที่ปลายมือไว้สำหรับการอวดตัว ใส่ใจเรื่องความสะอาดเป็นอย่างมากและดูแลอย่างทะนุถนอม ดังนั้น ถ้ามีใครทำฝุ่นฟุ้งขึ้นมาใกล้ ๆ ก็จะถูกมองด้วยสายตาที่ไม่พอใจอย่างแรงทันที"
+  },
   "SmallArmadillo": {
     "localized_name": "Kikit",
     "description": "สมัยก่อนฟุตบอลKikitเป็นที่นิยม หลังโดนองค์กรผู้พิทักษ์พาลต่อต้านอย่างรุนแรงก็เลิกล้มกีฬานี้ไปทันที แต่พวกKikitไม่รังเกียจจะให้ความร่วมมือ เพราะกีฬานี้ช่วยลอกคราบเก่าของพวกมันออกไปได้"
+  },
+  "SmallYeti": {
+    "localized_name": "Snugloo",
+    "description": "คำว่าSnuglooมองด้วยสายตาของ เป็นสำนวนที่หมายถึงการมองหาสาระหรือแก่นแท้ของสิ่งต่าง ๆ ที่มองไม่เห็นด้วยตาเปล่า แต่เอาเข้าจริงแล้วSnuglooกลับไม่เคยมีนักวิจัยคนใดพยายามตรวจสอบเลยว่า มีดวงตาอยู่จริงหรือไม่ ด้วยเหตุผลบางอย่างที่ไม่มีใครรู้"
+  },
+  "SnakeGirl": {
+    "localized_name": "Venusa",
+    "description": "เมื่อมีเรื่องที่ไม่เข้าใจ มันจะเริ่มประชุมร่วมกับบรรดางูบนศีรษะของตัวเอง ทว่าท้ายที่สุด เพราะทุกคนก็คือตัวมันเอง จึงได้ข้อสรุปเพียงว่า ยังไงก็ไม่เข้าใจอะไรอยู่ดี"
   },
   "SnowPeafowl": {
     "localized_name": "Frostplume",
@@ -2207,6 +2907,10 @@
     "localized_name": "Beegarde",
     "description": "ทาสผู้สาบานว่าจะภักดีต่อElizabee ต้องกำจัดผู้เป็นภัยต่อราชินีให้จงได้ สุดท้ายแม้จะต้องระเบิดตัวเองก็จะขอปกป้องราชินี"
   },
+  "SorajimaTowerGuide": {
+    "localized_name": "ชาวเกาะ",
+    "description": null
+  },
   "StuffedShark": {
     "localized_name": "Finsider",
     "description": "รูปร่างเหมือนมีอะไรโผล่ออกมาจากชุดตุ๊กตามาสคอต แต่ถ้าเอามือสอดเข้าไปข้างในจะพบว่าไม่มีอะไรเลย มิหนำซ้ำ ยังสอดมือได้ลึกไม่มีที่สิ้นสุดด้วย อวกาศอาจอยู่ในนี้ก็ได้"
@@ -2214,6 +2918,10 @@
   "StuffedShark_Fire": {
     "localized_name": "Finsider Ignis",
     "description": "แม้จะสอดมือเข้าไปในปากก็ไม่พบอะไร และสอดเข้าไปได้ไม่มีที่สิ้นสุด มีนักวิจัยที่คิดว่าด้านในเป็นต่างมิติ และอาจจะใช้เป็นถุงนอนได้ เลยพยายามจะสอดตัวเข้าไป แต่พบว่ามันเริ่มสำลัก ดังนั้นดูเหมือนว่าด้านในจึงไม่ใช่ต่างมิติแต่เป็นร่างกาย"
+  },
+  "SumoDog": {
+    "localized_name": "Bulldosu",
+    "description": "บนเกาะในอดีตBulldosuเคยมีความบันเทิงที่เรียกว่า ซูโม่ หากเป็นระดับท็อปแล้วBulldosu Rushoarต่อให้รับการพุ่งชนเข้าเต็มแรง Rushoarสุดท้ายกลับเป็นฝ่ายตรงข้ามที่กระเด็นปลิวออกไปแทน"
   },
   "Suzaku": {
     "localized_name": "Suzaku",
@@ -2227,6 +2935,18 @@
     "localized_name": "Woolipop",
     "description": "ทั่วทั้งร่างหวานกว่าน้ำตาลทราย 18000 เท่า พาลกินเนื้อที่โดนกลิ่นล่อลวงมาและกัดเนื้อของมัน จะตาเหลือกเป็นลมเพราะความหวานเกินพิกัด"
   },
+  "SweetsSheep_Ground": {
+    "localized_name": "Woolipop Terra",
+    "description": "แม้ขนจะส่งกลิ่นหวานฉุนชวนลิ้มลอง แต่เนื้อกลับขมขื่นอย่างน่าสยดสยอง พาลกินเนื้อที่ถูกกลิ่นนั้นล่อลวงจนเผลอกัดเข้าไป มักจะช็อกจากความขมสุดขีด ถึงกับตาถลนแล้วหมดสติ"
+  },
+  "SwordCutlassfish": {
+    "localized_name": "Skutlass",
+    "description": "มันสามารถแยกร่างออกจากกันชั่วคราว และใช้กระดูกฉีกกระชากศัตรู เป็นพฤติกรรมสุดคลั่งที่อันตรายอย่างยิ่ง หากไม่รีบรวมร่างกลับคืนมา ตัวมันเองก็จะหมดแรงลงไปด้วย ว่ากันว่าในหมู่ตัววัยอ่อน กำลังมีการละเล่นสุดเสี่ยงที่แข่งกันว่าใครจะแยกร่างได้นานกว่ากัน หรืออาจจะไม่มีก็ได้"
+  },
+  "SwordCutlassfish_Fire": {
+    "localized_name": "Skutlass Ignis",
+    "description": "มันสามารถฉีกร่างคู่ต่อสู้ด้วยกระดูกของมัน แต่ถ้าไม่ต่อร่างกลับคืนโดยไว มันก็จะล้าเสียเอง มีตำนานเล่าว่า ตัวที่อยู่มานานมักชอบแย่งร่าง เพื่อปลุกสัญชาตญาณรักตัวกลัวตายให้อายุยืน"
+  },
   "TentacleTurtle": {
     "localized_name": "Turtacle",
     "description": "ด้วยความที่ร่างกายหลักนั้นอ่อนเเอจึงต้องมีกระดองอันเเข็งเเกร่งมาห้อมล้อม เพราะทิ้งพลังป้องกันของร่างกายหลักไป ทำให้เเค่โดนจั้กจี้เบาๆก็เป็นลมได้เลย"
@@ -2235,17 +2955,33 @@
     "localized_name": "Turtacle Terra",
     "description": "มีเปลือกอันแข็งแกร่ง เพื่อปกป้องร่างจริงที่อ่อนแอเกินไป ประสาทสัมผัสส่วนใหญ่ไปรวมอยู่ที่มือและเปลือก หากมีผู้แอบสัมผัสร่างจริง เจ้าตัวก็ไม่รู้สึก"
   },
+  "ThiefBird": {
+    "localized_name": "Roujay",
+    "description": "มันค่อนข้างมือไว มักอาศัยจังหวะที่อีกฝ่ายเผลอแอบฉกฉวยของไป ต่อให้เกือบถูกจับได้ก็ไม่ใช่ปัญหา เพราะแค่ขโมย “ดวงตา” ไปอย่างรวดเร็ว สุดท้ายอีกฝ่ายก็ย่อมมองอะไรไม่เห็นอยู่ดี"
+  },
   "ThunderBird": {
     "localized_name": "Beakon",
     "description": "คล้ายจะเป็นสายพันธุ์ใกล้เคียงกับRagnahawk แต่ไม่เกี่ยวข้องกัน มันจะโฉบลงมาอย่างรวดเร็ว ใช้จะงอยปากแหลมคมจัดการเหยื่อ ดูราวกับสายฟ้าฟาด"
+  },
+  "ThunderBird_Ice": {
+    "localized_name": "Beakon Cryst",
+    "description": "แม้ร่างเพลียวก็ทนหนาวได้ เพราะถูกสร้างมาเช่นนั้น สามารถพุ่งดิ่งหลาได้อย่างน่าครั้นคร้าม ดังเช่นแท่งน้ำแข็งยักษ์ร่วงหล่นมาจากฟากฟ้า"
   },
   "ThunderDog": {
     "localized_name": "Rayhound",
     "description": "ความเร็วสูงสุดเร็วปานสายฟ้าตามชื่อ ถ้าRayhoundปะทะกันเอง จะเกิดเสียงกดังกึกก้องเหมือนเวลาฟ้าร้อง"
   },
+  "ThunderDog_Ice": {
+    "localized_name": "Rayhound Cryst",
+    "description": "เมื่อวิ่งเต็มกำลังบนทุ่งหิมะ จะก่อให้เกิดพายุหิมะพัดกระหน่ำ เนื่องจากมองไม่เห็นกันและกัน Rayhound Crystจึงเกิดอุบัติเหตุชนกันขึ้นบ่อยครั้ง"
+  },
   "ThunderDragonMan": {
     "localized_name": "Orserk",
     "description": "ส่งกระแสไฟฟ้าเข้าไปตามบาดแผล เผาร่างศัตรู เวลาOrserkทะเลาะกันเอง จะรู้ผลในพริบตา"
+  },
+  "ThunderFluffyBird": {
+    "localized_name": "Dynamoff",
+    "description": "ในการดำรงชีวิตอยู่บนที่สูงซึ่งขาดแคลนอาหาร บางครั้งมันถึงขั้นกินแม้กระทั่งสมองของศัตรู เชื่อกันว่ากลุ่มที่แสวงหาแหล่งอาหารที่มั่นคงมากกว่านั้นได้ บินลงสู่ที่ต่ำBeakonและแตกสายวิวัฒนาการออกไปเป็นอีกสายหนึ่ง"
   },
   "TropicalOstrich": {
     "localized_name": "Palumba",
@@ -2258,6 +2994,10 @@
   "Umihebi_Fire": {
     "localized_name": "Jormuntide Ignis",
     "description": "มีตำนานว่านักรบที่ถูกผลักลงไปในภูเขาไฟโดยไร้ความผิด จะคืนชีพกลายเป็นJormuntide Ignis มาเผาประเทศให้มอดไหม้"
+  },
+  "VenusFlytrap": {
+    "localized_name": "Carnibora",
+    "description": "เพราะกินแม้แต่ของประหลาดโดยไม่ใส่ใจ ปากที่อยู่บนศีรษะจึงมักเกิดแผลร้อนในอย่างรุนแรงอยู่บ่อยครั้ง พอถึงตอนนั้นก็จะหันไปใช้ปากที่อยู่บนใบหน้าแทน แต่เพราะยังคงเป็นนักกินไม่เลือกเหมือนเดิม สุดท้ายแล้วก็หนีไม่พ้นที่ทั้งสองปากจะกลายเป็นร้อนในเหมือนกันอยู่ดี"
   },
   "Viking": {
     "localized_name": "ชาวสวรรค์ล่ม",
@@ -2275,8 +3015,20 @@
     "localized_name": "ชาวสวรรค์ล่ม นักรบผู้กล้า",
     "description": null
   },
+  "Viking_GrenadeLauncher": {
+    "localized_name": "ชาวสวรรค์ล่ม",
+    "description": null
+  },
+  "Viking_Melee": {
+    "localized_name": "ชาวสวรรค์ล่ม",
+    "description": null
+  },
   "Viking_Prisoner": {
     "localized_name": "ชาวสวรรค์ล่ม",
+    "description": null
+  },
+  "Viking_RocketLauncher": {
+    "localized_name": "ชาวสวรรค์ล่ม นักรบผู้กล้า",
     "description": null
   },
   "Viking_Tower": {
@@ -2311,6 +3063,14 @@
     "localized_name": "Reptyro Cryst",
     "description": "เลือดเย็นเฉียบไหลเวียนไปทั่วร่าง หากให้ความร้อนสูงในเวลาสั้น ๆ เลือดจะระเหย เกิดเป็นระเบิดไออานุภาพร้ายแรง"
   },
+  "VolcanoDragon": {
+    "localized_name": "Moldron",
+    "description": "ตัวที่มีสุขภาพดีจะมีลาวาบนแผ่นหลังไหลเวียนได้อย่างราบรื่น แต่หากมีพฤติกรรมการใช้ชีวิตที่ไม่ดี การไหลจะยิ่งแย่ลงเรื่อย ๆ และในกรณีเลวร้ายที่สุด อาจเกิดลาวาอุดตัน จนระเบิดขึ้นมาอย่างกะทันหัน"
+  },
+  "VolcanoDragon_Ice": {
+    "localized_name": "Moldron Cryst",
+    "description": "ตัวไหนสุขภาพดีเหลวก็ไหลผ่านสันหลังได้ปกติดี แต่ในกรณีที่ใจเต้นรัว อุณหภูมิอาจจะผิดเพี้ยน และขั้นร้ายสุด อาจะช็อกเสียชีวิตกระทันหันจากการระเหยและแข็งตัว"
+  },
   "WeaponsDealer": {
     "localized_name": "-",
     "description": null
@@ -2339,9 +3099,17 @@
     "localized_name": "Celesdir",
     "description": "ในตำราโบราณมีบันทึกไว้ว่าเป็น |สัตว์ผู้ช่วยเหลือ| เพราะแสงที่Celesdirเปล่งออกมา ชำระล้างได้ทุกสิ่ง ชำระและล้างตรงตามตัวอักษร คือหายไปจากโลกนี้ ไม่ทิ้งร่องรอย"
   },
+  "WhiteDeer_Dark": {
+    "localized_name": "Celesdir Noct",
+    "description": "แสงอันตระการตาก่อกำเนิดเงาอันมหันต์ ที่ปกคลุมทุกสรรพสิ่งและสร้างความโกลาหล อย่างที่ควรเป็น เพื่อให้โลกนี้มีสมดุล"
+  },
   "WhiteMoth": {
     "localized_name": "Sibelyx",
     "description": "ชอบฝน มักจะอยู่เฉย ๆ เวลาฝนตกต่อเนื่อง Foxparksจะมาหลบฝนที่ตัวมัน"
+  },
+  "WhiteMoth_Neutral": {
+    "localized_name": "Sibelyx Primo",
+    "description": "มักชอบจ้องมองความว่างเปล่า และยืนนิ่งอยู่บ่อยครั้ง จึงกลายเป็นจุดรวมตัวของพาลตัวเล็ก ๆ อยู่เสมอ"
   },
   "WhiteShieldDragon": {
     "localized_name": "Silvegis",
@@ -2355,6 +3123,14 @@
     "localized_name": "Cryolinx Terra",
     "description": "ใช้อุ้งมือใหญ่แบกของมากมายได้อย่างง่ายดาย แต่เพราะขาสั้นเลยเดินช้า จนพระอาทิตย์จะตกระหว่างเดินทางอยู่บ่อย ๆ"
   },
+  "WildlifeSanctuaryDrone": {
+    "localized_name": "โดรนป้องกัน",
+    "description": null
+  },
+  "WildlifeSanctuary_guide": {
+    "localized_name": "พาลเทมเมอร์มือใหม่",
+    "description": null
+  },
   "WindChimes": {
     "localized_name": "Hangyu",
     "description": "แขนใหญ่ฉีกได้กระทั่งเหล็ก โทษประหารที่โหดร้ายแบบหนึ่งคือ จะจับนักโทษฉกรรจ์มัดไว้ที่ลานเมือง และให้Windchimesฉีกเนื้อนักโทษ"
@@ -2366,6 +3142,10 @@
   "WingGolem": {
     "localized_name": "Knocklem",
     "description": "พาลประหลาดที่มีชิ้นส่วน 215 ชิ้น ต่อให้แยกส่วนเป็นชิ้น ๆ ถ้าประกอบใหม่ก็ขยับได้ตามปกติ ถ้าประกอบชิ้นส่วนของตัวอื่นปนเข้าไป ตัวตนจะพัง ทำตัวบ้า ๆ บอ ๆ"
+  },
+  "WingGolem_Fire": {
+    "localized_name": "Knocklem Ignis",
+    "description": "พาลตัวนี้แม้ถูกแยกร่างออกเป็นเศษชิ้นและประกอบขึ้นใหม่ก็ไม่ตาย ช่างประหลาด แต่หากมีชิ้นผิดร่างไหนเข้าไปใส่ มันจะเกิดความคิดวิปลาส จนธาตุไฟแตกซ่าน"
   },
   "WingGolem_Oilrig": {
     "localized_name": "Knocklem",
@@ -2379,49 +3159,53 @@
     "localized_name": "Cremis",
     "description": "คุณภาพขนดีกว่าSheepBall นิสัยเหมาะเป็นสัตว์ปศุสัตว์มากกว่าSheepBall แต่ตามประวัติศาสตร์คนเลี้ยงมันเป็นพาลสัตว์เลี้ยงมาตลอด ความน่ารักคือที่สุด"
   },
+  "WorldTreeDragon": {
+    "localized_name": "Astralym",
+    "description": "พาลลึกลับที่เคยบินมายังพาลพากอสในอดีตกาลอันไกลโพ้น กลายเป็นหายนะที่นำพาความพินาศมา จนถูกผนึกไว้เป็นเวลายาวนาน ท้ายที่สุดได้ถูกโค่นล้มลงโดยพาลเทเมอร์"
+  },
   "YakushimaBoss001": {
     "localized_name": "Eye of Cthulhu",
-    "description": "[อีเวนต์คอลแลบ Terraria] มอนสเตอร์ที่มาจากต่างโลก ดูเหมือนว่าจะสามารถทำให้เชื่องได้นะ"
+    "description": "[คอลแลบ Terraria] มอนสเตอร์ที่มาจากต่างโลก ดูเหมือนว่าจะสามารถทำให้เชื่องได้นะ"
   },
   "YakushimaBoss001_Small": {
     "localized_name": "Demon Eye",
-    "description": "[อีเวนต์คอลแลบ Terraria] มอนสเตอร์ที่มาจากต่างโลก ดูเหมือนว่าจะสามารถทำให้เชื่องได้นะ"
+    "description": "[คอลแลบ Terraria] มอนสเตอร์ที่มาจากต่างโลก ดูเหมือนว่าจะสามารถทำให้เชื่องได้นะ"
   },
   "YakushimaMonster001": {
     "localized_name": "Green Slime",
-    "description": "[อีเวนต์คอลแลบ Terraria] มอนสเตอร์ที่มาจากต่างโลก ดูเหมือนว่าจะสามารถทำให้เชื่องได้นะ"
+    "description": "[คอลแลบ Terraria] มอนสเตอร์ที่มาจากต่างโลก ดูเหมือนว่าจะสามารถทำให้เชื่องได้นะ"
   },
   "YakushimaMonster001_Blue": {
     "localized_name": "Blue Slime",
-    "description": "[อีเวนต์คอลแลบ Terraria] มอนสเตอร์ที่มาจากต่างโลก ดูเหมือนว่าจะสามารถทำให้เชื่องได้นะ"
+    "description": "[คอลแลบ Terraria] มอนสเตอร์ที่มาจากต่างโลก ดูเหมือนว่าจะสามารถทำให้เชื่องได้นะ"
   },
   "YakushimaMonster001_Pink": {
     "localized_name": "Illuminant Slime",
-    "description": "[อีเวนต์คอลแลบ Terraria] มอนสเตอร์ที่มาจากต่างโลก ดูเหมือนว่าจะสามารถทำให้เชื่องได้นะ"
+    "description": "[คอลแลบ Terraria] มอนสเตอร์ที่มาจากต่างโลก ดูเหมือนว่าจะสามารถทำให้เชื่องได้นะ"
   },
   "YakushimaMonster001_Purple": {
     "localized_name": "Purple Slime",
-    "description": "[อีเวนต์คอลแลบ Terraria] มอนสเตอร์ที่มาจากต่างโลก ดูเหมือนว่าจะสามารถทำให้เชื่องได้นะ"
+    "description": "[คอลแลบ Terraria] มอนสเตอร์ที่มาจากต่างโลก ดูเหมือนว่าจะสามารถทำให้เชื่องได้นะ"
   },
   "YakushimaMonster001_Rainbow": {
     "localized_name": "Rainbow Slime",
-    "description": "[อีเวนต์คอลแลบ Terraria] มอนสเตอร์ที่มาจากต่างโลก ดูเหมือนว่าจะสามารถทำให้เชื่องได้นะ"
+    "description": "[คอลแลบ Terraria] มอนสเตอร์ที่มาจากต่างโลก ดูเหมือนว่าจะสามารถทำให้เชื่องได้นะ"
   },
   "YakushimaMonster001_Red": {
     "localized_name": "Red Slime",
-    "description": "[อีเวนต์คอลแลบ Terraria] มอนสเตอร์ที่มาจากต่างโลก ดูเหมือนว่าจะสามารถทำให้เชื่องได้นะ"
+    "description": "[คอลแลบ Terraria] มอนสเตอร์ที่มาจากต่างโลก ดูเหมือนว่าจะสามารถทำให้เชื่องได้นะ"
   },
   "YakushimaMonster002": {
     "localized_name": "Enchanted Sword",
-    "description": "[อีเวนต์คอลแลบ Terraria] มอนสเตอร์ที่มาจากต่างโลก ดูเหมือนว่าจะสามารถทำให้เชื่องได้นะ"
+    "description": "[คอลแลบ Terraria] มอนสเตอร์ที่มาจากต่างโลก ดูเหมือนว่าจะสามารถทำให้เชื่องได้นะ"
   },
   "YakushimaMonster003": {
     "localized_name": "Cave Bat",
-    "description": "[อีเวนต์คอลแลบ Terraria] มอนสเตอร์ที่มาจากต่างโลก ดูเหมือนว่าจะสามารถทำให้เชื่องได้นะ"
+    "description": "[คอลแลบ Terraria] มอนสเตอร์ที่มาจากต่างโลก ดูเหมือนว่าจะสามารถทำให้เชื่องได้นะ"
   },
   "YakushimaMonster003_Purple": {
     "localized_name": "Illuminant Bat",
-    "description": "[อีเวนต์คอลแลบ Terraria] มอนสเตอร์ที่มาจากต่างโลก ดูเหมือนว่าจะสามารถทำให้เชื่องได้นะ"
+    "description": "[คอลแลบ Terraria] มอนสเตอร์ที่มาจากต่างโลก ดูเหมือนว่าจะสามารถทำให้เชื่องได้นะ"
   },
   "Yamishima_guide1": {
     "localized_name": "ชาวเกาะ",

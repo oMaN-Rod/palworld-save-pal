@@ -11,6 +11,14 @@
     "localized_name": "幽焰狼",
     "description": "性格極為纖細敏感， 遇到討厭的事物就會躲進洞窟裡不肯出來。 由於宅在洞裡太久了，讓人感覺變得陰鬱。"
   },
+  "AmaterasuWolf_Dark_Quest_Enemy": {
+    "localized_name": "幽焰狼",
+    "description": null
+  },
+  "AmaterasuWolf_Dark_Quest_Friend": {
+    "localized_name": "幽焰狼",
+    "description": null
+  },
   "Ambassador01": {
     "localized_name": "沙漠之鎮的大使",
     "description": null
@@ -28,19 +36,19 @@
     "description": null
   },
   "Arena_Female_Presenter": {
-    "localized_name": "親切的帕魯訓練家",
+    "localized_name": "親切的帕魯馴養師",
     "description": null
   },
   "Arena_Female_Soldier02": {
-    "localized_name": "處於成長期的帕魯訓練家",
+    "localized_name": "處於成長期的帕魯馴養師",
     "description": null
   },
   "Arena_Female_Soldier03": {
-    "localized_name": "老手帕魯訓練家",
+    "localized_name": "老手帕魯馴養師",
     "description": null
   },
   "Arena_Female_Soldier04": {
-    "localized_name": "經驗老到的帕魯訓練家",
+    "localized_name": "經驗老到的帕魯馴養師",
     "description": null
   },
   "Arena_FireCult_FlameThrower": {
@@ -60,19 +68,19 @@
     "description": null
   },
   "Arena_Male_Soldier02": {
-    "localized_name": "初出茅廬的帕魯訓練家",
+    "localized_name": "初出茅廬的帕魯馴養師",
     "description": null
   },
   "Arena_Male_Soldier02_Invader": {
-    "localized_name": "充滿鬥志的帕魯訓練家",
+    "localized_name": "充滿鬥志的帕魯馴養師",
     "description": null
   },
   "Arena_Male_Soldier03": {
-    "localized_name": "冷酷的帕魯訓練家",
+    "localized_name": "冷酷的帕魯馴養師",
     "description": null
   },
   "Arena_Male_Soldier04": {
-    "localized_name": "鬥志昂揚的帕魯訓練家",
+    "localized_name": "鬥志昂揚的帕魯馴養師",
     "description": null
   },
   "Arena_Ninja": {
@@ -169,6 +177,10 @@
   },
   "BOSS_Hunter_Fat_GatlingGun": {
     "localized_name": "通緝犯 格里爾",
+    "description": null
+  },
+  "BOSS_Hunter_Fat_GatlingGun_Quest_StrongOldMan": {
+    "localized_name": "通緝犯 埃爾達",
     "description": null
   },
   "BOSS_Hunter_Rifle": {
@@ -307,6 +319,10 @@
     "localized_name": "帕魯保護團體 審判官",
     "description": null
   },
+  "Believer_Fat_Cane_Tower": {
+    "localized_name": "帕魯保護團體 審判官",
+    "description": null
+  },
   "Believer_Fat_GatlingGun": {
     "localized_name": "帕魯保護團體 審判官",
     "description": null
@@ -355,6 +371,10 @@
     "localized_name": "墨丸",
     "description": "黑色火焰即便摸上去也不過只是微熱 但是持續接觸的物體會慢慢從內部開始融化。 如果用來烤起司，可謂絕品。"
   },
+  "BlackPuppy_Ice": {
+    "localized_name": "冬丸",
+    "description": "蒼白的火焰即便摸上去也只感到些微的涼意， 但是持續接觸的物體則會逐漸凍結。 放上一瓶牛奶，就能得到一瓶冰凍牛奶！"
+  },
   "Blacksmith01": {
     "localized_name": "修行中的鍛造專家",
     "description": null
@@ -375,6 +395,10 @@
     "localized_name": "熱浪鴨",
     "description": "腹部的摩擦係數很高， 趴板衝浪時會產生火花。 但常會煞不住衝勁而變成一團火球。"
   },
+  "BlueSkyDragon": {
+    "localized_name": "霄龍",
+    "description": "靈環寄吾心，長相伴君身。 悠悠青天鑑，裊裊霄龍吟。"
+  },
   "BlueThunderHorse": {
     "localized_name": "馭雷馬",
     "description": "和雷角馬一樣，曾經被視為雷神的使者。 隨著雷角馬不再受到人們信仰， 便使得馭雷馬被視為真正的雷神使者。 然而隨著時代變遷，兩者平等地皆淪為拉車的平凡馬匹。"
@@ -390,6 +414,18 @@
   "BountyTrader": {
     "localized_name": "衛兵",
     "description": null
+  },
+  "BrownRabbit": {
+    "localized_name": "詹兔曼",
+    "description": "會聆聽大地的聲音，避開不穩固的立足點奔跑。 但有時會被跟自己不對盤的地面欺騙， 在某些地方摔得兔仰馬翻。"
+  },
+  "CactusDoll": {
+    "localized_name": "球抱苞",
+    "description": "當某種感情變得強烈時，牠的尖刺就會伸縮。 精心養育的球抱苞，會令人忍不住想要擁入懷中， 但十有八九都是悲劇結尾。"
+  },
+  "CactusDoll_Dark": {
+    "localized_name": "妖抱苞",
+    "description": "當某種感情變得強烈時，牠的尖刺就會伸縮。 在滿滿的愛中成長的妖抱苞， 總是動不動就愛往主人懷裡鑽， 但若要接納牠的愛，就要一併接納牠帶來的痛。"
   },
   "CandleGhost": {
     "localized_name": "恐炬靈",
@@ -412,6 +448,10 @@
     "description": null
   },
   "CaravanLeader03": {
+    "localized_name": "旅行商隊隊長",
+    "description": null
+  },
+  "CaravanLeader04": {
     "localized_name": "旅行商隊隊長",
     "description": null
   },
@@ -439,6 +479,18 @@
     "localized_name": "皮皮雞",
     "description": "極為弱小，但也極為美味。 和SheepBall並列為最弱小的帕魯。 不管再怎麼捕捉這種帕魯，牠們還是會從某處冒出來。"
   },
+  "ClioneTwins": {
+    "localized_name": "莉歐·莉涅",
+    "description": "要是缺了其中一方，就會從不知何處出現替補者。 然後兩者就會像無事發生般，開始和睦的生活在一起。 對於莉歐·莉涅來說，最重要的是「和睦相處」。"
+  },
+  "CloverFairy": {
+    "localized_name": "幸葉茸",
+    "description": "曾經存在過額頭上的葉子有3片以上的個體， 但是因為被當作了幸運的象徵，葉片多的個體被濫捕， 最終導致整個種族開始朝著葉片數量少的方向進化了。"
+  },
+  "ClownRabbit": {
+    "localized_name": "拉比耶爾",
+    "description": "有時會被自己召喚的分身打敗，並被取代。 昨天的拉比耶爾和今天的拉比耶爾還是同一隻嗎？就連牠自己也不太清楚。"
+  },
   "ColorfulBird": {
     "localized_name": "炸蛋鳥",
     "description": "這種帕魯產下的蛋會爆炸，相當恐怖。 平常會從屁股射出蛋當作武器， 但其他方法都不見效時，牠就會採取自爆手段了。"
@@ -446,6 +498,14 @@
   "CowPal": {
     "localized_name": "波霸牛",
     "description": "這種帕魯不須特意照料，無論其性別為何， 都會像水龍頭般地分泌大量牛奶。 這就是生命的神秘之處吧。"
+  },
+  "CubeTurtle": {
+    "localized_name": "重岩龜",
+    "description": "背部堆砌的石頭有一定的自我意識。 若是取下來放到別處， 就會自己移動，試著回到本體所在的地方。"
+  },
+  "CubeTurtle_Neutral": {
+    "localized_name": "淨岩龜",
+    "description": "背部堆砌的石頭即便拿到某處， 淨岩龜也能感應石頭的位置。 就算相隔天涯海角，它也一定要去找出來。"
   },
   "CuteButterfly": {
     "localized_name": "幻悅蝶",
@@ -459,6 +519,10 @@
     "localized_name": "遁地鼠",
     "description": "牠那巨大爪子的硬度可與鑽石媲美， 但磨爪子得耗費大量力氣， 因此有時牠們磨完爪子後，一天就過去了。"
   },
+  "DandelionGirl": {
+    "localized_name": "蒲蒲飛芽",
+    "description": "牠會將不好的記憶封存在絨毛球裡。 風一吹，絨毛乘風而去， 憂鬱的心情也隨之飄散。"
+  },
   "DarkAlien": {
     "localized_name": "傑諾貝達",
     "description": "具有將訊息傳輸中的損耗變換為能量的能力。 會定期的向不明對象發送情報。 「發現目標，請立刻前往破壞，見信速回。」"
@@ -470,6 +534,10 @@
   "DarkCrow": {
     "localized_name": "黑鴉隱士",
     "description": "這種帕魯過去曾在空中自由翱翔， 但牠們在與天擒鳥的競爭中敗退後便捨棄天空， 過起了在夜裡悄然出沒的生活。"
+  },
+  "DarkFlameFox": {
+    "localized_name": "紫狐嬌",
+    "description": "雖然雙手叉腰，擺出一副如畫般的神氣姿態， 但實際上，是因為尾巴和頭上的毛髮太過沉重， 牠不過是為了不跌倒而拚命在保持平衡罷了。"
   },
   "DarkMechaDragon": {
     "localized_name": "傑諾多蘭",
@@ -484,7 +552,7 @@
     "description": "這種帕魯的本體是一團能量體，內部是空的。 透過將砂石和礦物填充進外殼，得以實現了壓倒性的質量。 被其擊中的生物只能發出如地獄般的呻吟聲。"
   },
   "DeathPenalty_guide": {
-    "localized_name": "老手帕魯訓練家",
+    "localized_name": "老手帕魯馴養師",
     "description": null
   },
   "Deer": {
@@ -498,6 +566,10 @@
   "Doctor": {
     "localized_name": "島民",
     "description": null
+  },
+  "DomeArmorDragon": {
+    "localized_name": "磐甲龍",
+    "description": "很久以前，在通信手段匱乏的年代， 人們曾經透過閃爍磐甲龍翅膀內側的光芒， 傳遞簡單的信號。"
   },
   "DreamDemon": {
     "localized_name": "寐魔",
@@ -519,9 +591,25 @@
     "localized_name": "zh_Hant_Text",
     "description": "zh_Hant_Text"
   },
+  "ElecLizard": {
+    "localized_name": "電懶懶",
+    "description": "想吃就吃，想睡就睡，想幹嘛就幹嘛。 電懶懶們為了維持這樣的生活，一定也在我們看不見的地方努力著。 ……如果不強迫自己這麼想的話，以前的島民們的日子就過不下去了。"
+  },
   "ElecPanda": {
     "localized_name": "暴電熊",
     "description": "這種帕魯笑容豪邁且體格健壯， 對自己認定為搭檔的人很溫順。但不知為何， 牠一拿到機關槍就會性情大變。"
+  },
+  "ElecPomeranian": {
+    "localized_name": "電汪汪",
+    "description": "泡在水裡的話，蓬鬆的毛會大量吸水。 當牠抖動身體甩乾水分時，會伴隨劇烈的放電， 和牠一起泡澡可是賭命的行為。"
+  },
+  "ElecSnail": {
+    "localized_name": "電渦蝸",
+    "description": "傳統的健康療法中，有著在浴缸放入電渦蝸， 然後享受電療浴的做法。 換句話說就是，古老偏方，切勿模仿。"
+  },
+  "ElecSnail_Ground": {
+    "localized_name": "金渦蝸",
+    "description": "將加熱後的金渦蝸放進浴缸， 享受一場滾燙的熱水澡，在遙遠的過去曾經十分流行。 近年來由於復古風潮興起，如今再度成為熱門新潮流。"
   },
   "Emote_location_A_01": {
     "localized_name": "島民",
@@ -600,7 +688,7 @@
     "description": null
   },
   "Escort_PalTamer01": {
-    "localized_name": "傭兵帕魯訓練家",
+    "localized_name": "傭兵帕魯馴養師",
     "description": null
   },
   "Escort_Warrior01": {
@@ -618,6 +706,10 @@
   "FeatherOstrich": {
     "localized_name": "戰冠雀",
     "description": "行一步，斷迷惘。 行兩步，捨憂慮。 行三步，離怯懦。 敵雖魍魎，吾亦往。"
+  },
+  "Female_DTairikuPeople01_v01": {
+    "localized_name": "島民",
+    "description": null
   },
   "Female_DesertPeople02": {
     "localized_name": "村民",
@@ -639,6 +731,14 @@
     "localized_name": "島民",
     "description": null
   },
+  "Female_Farmer01_v05": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Female_Kunoichi01": {
+    "localized_name": "蒼天的盟約 執行者",
+    "description": null
+  },
   "Female_Nomad01_v01": {
     "localized_name": "島民",
     "description": null
@@ -655,6 +755,10 @@
     "localized_name": "島民",
     "description": null
   },
+  "Female_Nomad01_v05": {
+    "localized_name": "島民",
+    "description": null
+  },
   "Female_People02": {
     "localized_name": "村民",
     "description": null
@@ -664,7 +768,7 @@
     "description": null
   },
   "Female_Presenter01": {
-    "localized_name": "親切的帕魯訓練家",
+    "localized_name": "親切的帕魯馴養師",
     "description": null
   },
   "Female_Ranger01_v01": {
@@ -683,6 +787,18 @@
     "localized_name": "島民",
     "description": null
   },
+  "Female_Ranger01_v05": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Female_SakurajimaPeople01": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Female_SnowPeople01": {
+    "localized_name": "島民",
+    "description": null
+  },
   "Female_Soldier01": {
     "localized_name": "島民",
     "description": null
@@ -696,7 +812,7 @@
     "description": null
   },
   "Female_Soldier03_Invader": {
-    "localized_name": "雙子帕魯訓練家",
+    "localized_name": "雙子帕魯馴養師",
     "description": null
   },
   "Female_Soldier04": {
@@ -704,7 +820,43 @@
     "description": null
   },
   "Female_Soldier04_Invader": {
-    "localized_name": "雙子帕魯訓練家",
+    "localized_name": "雙子帕魯馴養師",
+    "description": null
+  },
+  "Female_SorajimaPeople01": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Female_SurveyGirl01": {
+    "localized_name": "菲亞",
+    "description": null
+  },
+  "Female_SurveyGirl02": {
+    "localized_name": "菲亞",
+    "description": null
+  },
+  "Female_SurveyGirl03": {
+    "localized_name": "菲亞",
+    "description": null
+  },
+  "Female_SurveyGirl04": {
+    "localized_name": "菲亞",
+    "description": null
+  },
+  "Female_SurveyWoman01": {
+    "localized_name": "卡拉",
+    "description": null
+  },
+  "Female_SurveyWoman02": {
+    "localized_name": "卡拉",
+    "description": null
+  },
+  "Female_TenrakuPeople01": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Female_WorldTreePeople01": {
+    "localized_name": "島民",
     "description": null
   },
   "FengyunDeeper": {
@@ -727,6 +879,14 @@
     "localized_name": "永炎同心會 殉教者",
     "description": null
   },
+  "FireCult_GrenadeLauncher": {
+    "localized_name": "永炎同心會 殉教者",
+    "description": null
+  },
+  "FireCult_MissileLauncher": {
+    "localized_name": "永炎同心會 殉教者",
+    "description": null
+  },
   "FireCult_Prisoner": {
     "localized_name": "永炎同心會 殉教者",
     "description": null
@@ -740,6 +900,10 @@
     "description": null
   },
   "FireCult_Rifle_Relax": {
+    "localized_name": "永炎同心會 殉教者",
+    "description": null
+  },
+  "FireCult_RocketLauncher": {
     "localized_name": "永炎同心會 殉教者",
     "description": null
   },
@@ -771,9 +935,21 @@
     "localized_name": "花麗娜",
     "description": "牠在壽命已盡時，會變成一株巨大的植物。 其後每十年都會開出極為美麗的花， 而新的花麗娜便會從花朵中誕生。"
   },
+  "FlowerDoll_Fire": {
+    "localized_name": "櫻麗娜",
+    "description": "牠在壽命已盡時，會自燃化作灰燼。 這周圍的土壤會因此變得非常肥沃， 此後的10年左右，無數的草木在此繁榮茂盛。"
+  },
+  "FlowerPrince": {
+    "localized_name": "夜蔓爵",
+    "description": "其自古時起便靜靜佇立在「世界樹」旁，一直守護著什麼。 現今夜蔓爵已經看不清要守護什麼，又為什麼要守護了。 畢竟，「世界樹」知曉一切。 畢竟，唯有牠操縱的濃霧能揭露那片真相。"
+  },
   "FlowerRabbit": {
     "localized_name": "波娜兔",
     "description": "這種帕魯喜歡植物多的地方， 但最近波娜兔群體之中， 不少個體似乎都得了花粉症。"
+  },
+  "FluffyBird": {
+    "localized_name": "雪綿啾",
+    "description": "牠臉頰周圍的柔毛能吸收衝擊力。 就算被擊飛幾公尺也沒什麼大不了的， 但整理羽毛很麻煩，癢的地方又抓不到， 總覺得有些煩亂、鬱悶。"
   },
   "FlyingManta": {
     "localized_name": "魯米兒",
@@ -782,6 +958,10 @@
   "FlyingManta_Thunder": {
     "localized_name": "雷米兒",
     "description": "鮮豔的外表能幫助牠找到命中之人。 自古以來，就有因為雷米兒而觸電的事故。 現今的島上，黃黑相間的條紋被視為危險的顏色。"
+  },
+  "FoxExorcist": {
+    "localized_name": "昭炎狐",
+    "description": "聚精會神，從火焰中窺探未來。 要是看見了不合心意的未來，就會一直重抽，直到抽出滿意的結果。 所以昭炎狐的未來一直都是一片光明！"
   },
   "FoxMage": {
     "localized_name": "焰巫狐",
@@ -802,6 +982,14 @@
   "GYM_BlackGriffon_2_Avatar": {
     "localized_name": "維克托 & 異構格里芬",
     "description": null
+  },
+  "GYM_BlueSkyDragon": {
+    "localized_name": "蒼璃 & 霄龍",
+    "description": "靈環寄吾心，長相伴君身。 悠悠青天鑑，裊裊霄龍吟。"
+  },
+  "GYM_BlueSkyDragon_2": {
+    "localized_name": "蒼璃 & 霄龍",
+    "description": "靈環寄吾心，長相伴君身。 悠悠青天鑑，裊裊霄龍吟。"
   },
   "GYM_ElecPanda": {
     "localized_name": "佐伊 & 暴電熊",
@@ -859,6 +1047,14 @@
     "localized_name": "阿克塞爾 & 波魯傑克斯",
     "description": "牠的電擊能從傷口進入，以此灼燒對手的全身。 波魯傑克斯同類之間發生的爭吵， 能在一瞬間決出勝負。"
   },
+  "GYM_WorldTreeDragon": {
+    "localized_name": "澤娜拉 & 枯星龍",
+    "description": "於遙遠過去降臨於帕洛斯群島，神秘的帕魯迎來其終焉。 作為災厄帶來無數毀滅，後來被長久封印。 最後被某位帕魯馴養師所擊敗。"
+  },
+  "GYM_WorldTreeDragon_2": {
+    "localized_name": "澤娜拉 & 枯星龍",
+    "description": "於遙遠過去降臨於帕洛斯群島，神秘的帕魯迎來其終焉。 作為災厄帶來無數毀滅，後來被長久封印。 最後被某位帕魯馴養師所擊敗。"
+  },
   "Ganesha": {
     "localized_name": "壺小象",
     "description": "牠那被認為是鼻子的器官會噴出大量的水， 但也有人指出那只是鼻水罷了。 研究者之間就此問題爭論不休。"
@@ -879,9 +1075,25 @@
     "localized_name": "噬魂獸",
     "description": "這種帕魯喜歡死期將近的生物身上的獨特氣味。 因此要是噬魂獸對你很親近， 也就代表著大限將至。"
   },
+  "GhostBlackCat": {
+    "localized_name": "念影喵",
+    "description": "迄今為止，所有養育過牠們一族的人類的思念， 全都凝聚在牠背後的手裡。 最近，盡情寵愛念影喵似乎已成了大家的共識。"
+  },
+  "GhostDragon": {
+    "localized_name": "靈曦龍",
+    "description": "直到最近才被目擊到的全新帕魯。 性情沉穩安靜，只是想要自由的生活著。 已經，不再有任何束縛了。"
+  },
+  "GhostDragon_Fire": {
+    "localized_name": "獄熙龍",
+    "description": "最近才開始被目擊到的新型帕魯。 性情暴躁，總是對什麼東西發洩怒氣。 已經，不會再去相信任何事物。"
+  },
   "GhostRabbit": {
     "localized_name": "魅愛莉",
-    "description": "牠手持的是自己的靈魂。 當牠有了喜愛的對象，就會強行將對方的靈魂抽出 然後和自己的融合在一起，以求成為一心同體。"
+    "description": "牠手裡捧著的，是自己的靈魂。 當牠找到了喜愛的對象，就會強行將對方的靈魂抽出 並與自己的靈魂融合，以求成為一心同體。"
+  },
+  "GhostRabbit_Grass": {
+    "localized_name": "碧艾莉",
+    "description": "牠手裡捧著的，是自己的靈魂。 當牠找到了喜愛的對象，就會將自己的靈魂拋向對方 渴望與對方的靈魂融合，成為一心同體。"
   },
   "GoldenHorse": {
     "localized_name": "金馳獸",
@@ -903,6 +1115,14 @@
     "localized_name": "佐伊",
     "description": null
   },
+  "GrassGolem": {
+    "localized_name": "雙心岩傀",
+    "description": "一副身軀，兩個意識。 有時會因為想法分歧而爭吵。 在牠們和好前，完全不知道身體會往哪裡去！"
+  },
+  "GrassGolem_Dark": {
+    "localized_name": "咒心岩傀",
+    "description": "一副身軀，兩個意識。 平時意見向來不合，總是吵個沒完， 但一旦進入戰鬥，牠們就會在瞬息之間身心合一！"
+  },
   "GrassMammoth": {
     "localized_name": "森猛獁",
     "description": "這種帕魯背部的植被因個體而異。 牠在過去被人們視為觀賞用帕魯， 甚至曾有過專精森猛獁的修剪師。"
@@ -911,6 +1131,14 @@
     "localized_name": "雪猛獁",
     "description": "這種帕魯背部的植被因個體而異。 有人曾在雪猛獁的背上發現被認為已滅絕的植物種子， 在冷凍狀態下保存良好。"
   },
+  "GrassMinotaur": {
+    "localized_name": "密林陶洛斯",
+    "description": "角上的那片葉子，無論如何拉扯都不會掉落。 而當葉子自行飄落時， 密林陶洛斯便感應到自身大限將至。"
+  },
+  "GrassMinotaur_Ice": {
+    "localized_name": "冰峰陶洛斯",
+    "description": "只要一息尚存，頭上的冰角就不會融化。 當有水滴從冰角上滴落之時， 冰峰陶洛斯便會感覺到自己的身體逐漸變得冰冷。"
+  },
   "GrassPanda": {
     "localized_name": "葉胖達",
     "description": "牠擁有令人難以置信的力量。 在某次實驗中，牠甚至一口氣輕鬆撕破了3000張紙。 你我都該慶幸牠並不是肉食性帕魯。"
@@ -918,6 +1146,10 @@
   "GrassPanda_Electric": {
     "localized_name": "雷胖達",
     "description": "牠擁有令人難以置信的力量。 牠將電力轉變為神經訊號，突破了肉體能力的極限。 每當討論最強生物時，牠一定榜上有名。"
+  },
+  "GrassPanda_Electric_Tower": {
+    "localized_name": "雷胖達",
+    "description": null
   },
   "GrassRabbitMan": {
     "localized_name": "踏春兔",
@@ -986,6 +1218,10 @@
   "HerculesBeetle_Ground": {
     "localized_name": "格魯力斯",
     "description": "牠全身包覆著極為堅韌的裝甲， 其強度與耐熱度可謂無與倫比。 即使被森猛獁踩踏也不痛不癢。"
+  },
+  "HoodGhost": {
+    "localized_name": "兜兜靈",
+    "description": "睡著就變扁了。 睡著了就不在裡面了。 因為不存在睡著了的兜兜靈， 所以兜兜靈並沒有睡著。"
   },
   "Horus": {
     "localized_name": "荷魯斯",
@@ -1107,6 +1343,10 @@
     "localized_name": "盜獵集團 菜鳥",
     "description": null
   },
+  "Hunter_Handgun_Quest_StrongOldMan": {
+    "localized_name": "盜獵集團 菜鳥",
+    "description": null
+  },
   "Hunter_Katana": {
     "localized_name": "盜獵團員 劍士",
     "description": null
@@ -1159,6 +1399,10 @@
     "localized_name": "盜獵集團 射手",
     "description": null
   },
+  "Hunter_Rifle_Tower": {
+    "localized_name": "盜獵集團 射手",
+    "description": null
+  },
   "Hunter_RocketLauncher": {
     "localized_name": "盜獵集團 菁英",
     "description": null
@@ -1183,6 +1427,10 @@
     "localized_name": "盜獵集團 菁英",
     "description": null
   },
+  "Hunter_RocketLauncher_Quest_StrongOldMan": {
+    "localized_name": "盜獵集團 菁英",
+    "description": null
+  },
   "Hunter_Shotgun": {
     "localized_name": "盜獵集團 獵人",
     "description": null
@@ -1200,6 +1448,10 @@
     "description": null
   },
   "Hunter_Shotgun_Oilrig": {
+    "localized_name": "盜獵集團 獵人",
+    "description": null
+  },
+  "Hunter_Shotgun_Quest_StrongOldMan": {
     "localized_name": "盜獵集團 獵人",
     "description": null
   },
@@ -1235,6 +1487,10 @@
     "localized_name": "香草豹冰",
     "description": "族群內能在雪上滑行最快的個體，就是最了不起的個體。 有時會有因為衝太快飛躍起來的個體突然從天而降， 在爭奪首領地位的時期這種情況尤其常見。 晴時多雲，偶「豹」雨。"
   },
+  "IceSeal_Ground": {
+    "localized_name": "巧克力豹冰",
+    "description": "族群內能在雪上滑行最快的個體，就是最了不起的個體。 有時會有因為衝太快飛躍起來的個體一頭栽進雪裡。 在爭奪首領地位的時期這種情況尤其常見。 今日路況預測雍塞，小心追撞。"
+  },
   "IceWitch": {
     "localized_name": "冰姬靈",
     "description": "就算身體會在酷暑時融化，牠還是迷戀日光浴。 就算身體會在高溫時融化，牠依然迷戀泡溫泉。 反正最後都是一死，那麼不如融化在艷陽高照的露天溫泉裡。"
@@ -1254,6 +1510,10 @@
   "JetDragon": {
     "localized_name": "空渦龍",
     "description": "居於遙遠高空，守護帕洛斯群島。 當災厄再度甦醒，大地崩裂，天空化作火海之際， 牠將以破滅萬物之光摧毀災厄。"
+  },
+  "KabukiMan": {
+    "localized_name": "燎火舞伶",
+    "description": "和敵人對峙時，乍看之下 總是在做一些看似浮誇破綻百出的誇張動作。 但神奇的是，對手反而會被震懾住，不由自主地看得入神。"
   },
   "Kelpie": {
     "localized_name": "水靈兒",
@@ -1287,9 +1547,25 @@
     "localized_name": "歿殃",
     "description": "自太古時期，其於地底現身。 焚天的烈火在將一切焚燒殆盡前，永遠不會熄滅。 此謂「永炎」。"
   },
+  "KingSunfish": {
+    "localized_name": "曼波王",
+    "description": "透過旋轉螺旋槳般的尾巴獲得推進力。 根據先前的研究，若是能忽視肉體的崩壞， 理論上能夠達到時速141.6km/h的游泳速度。"
+  },
+  "KingSunfish_Thunder": {
+    "localized_name": "曼波皇",
+    "description": "透過旋轉螺旋槳般的尾巴來產生電力。 理論上，牠可以產生1.21吉瓦的電力， 但由於肉體會瞬間崩壞，因此並不實用。"
+  },
+  "KingWhale": {
+    "localized_name": "奧滄鯨",
+    "description": "懷抱著使命一直等待著，族群中最後的倖存者。 即便履行了職責的牠呼喚著母親， 回應的，也已經只剩餘音。"
+  },
   "Kirin": {
     "localized_name": "雷角馬",
-    "description": "這種帕魯過去被認為是雷神的使者，因此免於遭人狩獵的命運。 然而有人目擊牠因雷擊而喪命後， 人們對牠不再敬畏，牠也淪為了拉馬車的馬。"
+    "description": "過去，這種帕魯被認為是雷神的使者，因此免於遭人狩獵的命運。 然而，當有人目擊牠因雷擊而喪命後， 人們對牠不再敬畏，牠也淪落成了拉車的馬。"
+  },
+  "Kirin_Ice": {
+    "localized_name": "凌角馬",
+    "description": "過去，這種帕魯被認為是冬之神的使者，無人敢獵捕。 然而當有人目睹牠在冰面滑倒的瞬間， 信仰逐漸消失，一失足即成千古牛馬。"
   },
   "Kitsunebi": {
     "localized_name": "火絨狐",
@@ -1298,6 +1574,10 @@
   "Kitsunebi_Ice": {
     "localized_name": "雪絨狐",
     "description": "這種帕魯剛出生不久時還不擅長控制冷氣。 動不動就不小心噴出冷氣，因而噎到自己。 感冒時會把鼻涕凍住引起鼻塞，驚慌失措。"
+  },
+  "LanternButler": {
+    "localized_name": "妖燄燈",
+    "description": "閃爍著妖異光芒的提燈，映照出世界的真實樣貌。 若是感到提燈的光芒刺眼， 那想必是做了虧心事吧。"
   },
   "LavaGirl": {
     "localized_name": "融焰娘",
@@ -1318,6 +1598,10 @@
   "LazyDragon_Electric": {
     "localized_name": "派克龍",
     "description": "佩克龍突然有了個想法。 是時候改變自己了呢。 那個瞬間，靈感就像雷電貫穿了牠的全身！"
+  },
+  "LazyDragon_Electric_Tower": {
+    "localized_name": "派克龍",
+    "description": null
   },
   "LeafMomonga": {
     "localized_name": "達鼠泥",
@@ -1355,6 +1639,14 @@
     "localized_name": "龐克蜥",
     "description": null
   },
+  "LongCat": {
+    "localized_name": "喵璐璐",
+    "description": "牠在舊畫作上被描繪的體型要比現在嬌小得多。 不知為何，近年來該物種的各方面體長數據都觀察到急速上升。 照目前成長速度，預計100年後體長會達到現在的10倍。"
+  },
+  "LotusDragon": {
+    "localized_name": "沁蓮龍",
+    "description": "沁蓮龍居住的水邊，生有大量的外觀相似的花朵。 研究者雖多次實驗人工繁育花朵， 但只要進行了人為干預，無論怎樣花朵都會枯萎。"
+  },
   "Male_Angler01_v01": {
     "localized_name": "島民",
     "description": null
@@ -1375,7 +1667,27 @@
     "localized_name": "島民",
     "description": null
   },
+  "Male_Breeder01_v05": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Male_DTairikuPeople01_v01": {
+    "localized_name": "島民",
+    "description": null
+  },
   "Male_DarkTrader01": {
+    "localized_name": "黑市商人",
+    "description": null
+  },
+  "Male_DarkTrader01_02": {
+    "localized_name": "黑市商人",
+    "description": null
+  },
+  "Male_DarkTrader01_03": {
+    "localized_name": "黑市商人",
+    "description": null
+  },
+  "Male_DarkTrader01_04": {
     "localized_name": "黑市商人",
     "description": null
   },
@@ -1395,11 +1707,19 @@
     "localized_name": "月花眾 下忍",
     "description": null
   },
+  "Male_Ninja01_Seabase": {
+    "localized_name": "月花眾 下忍",
+    "description": null
+  },
   "Male_NinjaElite01": {
     "localized_name": "月花眾 上忍",
     "description": null
   },
   "Male_NinjaElite01_Invader": {
+    "localized_name": "月花眾 上忍",
+    "description": null
+  },
+  "Male_NinjaElite01_Seabase": {
     "localized_name": "月花眾 上忍",
     "description": null
   },
@@ -1412,6 +1732,10 @@
     "description": null
   },
   "Male_Police_old": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Male_SakurajimaPeople01": {
     "localized_name": "島民",
     "description": null
   },
@@ -1431,12 +1755,24 @@
     "localized_name": "島民",
     "description": null
   },
+  "Male_Scholar01_v05": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Male_Scholar02": {
+    "localized_name": "島民",
+    "description": null
+  },
   "Male_Scientist01_LaserRifle": {
     "localized_name": "基因研究部隊 執行小隊",
     "description": null
   },
   "Male_Scientist01_LaserRifle_Invader": {
     "localized_name": "基因研究部隊 執行小隊",
+    "description": null
+  },
+  "Male_SnowPeople01": {
+    "localized_name": "島民",
     "description": null
   },
   "Male_Soldier01": {
@@ -1456,7 +1792,7 @@
     "description": null
   },
   "Male_Soldier02_Invader": {
-    "localized_name": "充滿鬥志的帕魯訓練家",
+    "localized_name": "充滿鬥志的帕魯馴養師",
     "description": null
   },
   "Male_Soldier03": {
@@ -1467,8 +1803,124 @@
     "localized_name": "島民",
     "description": null
   },
+  "Male_SorajimaPeople01": {
+    "localized_name": "島民",
+    "description": null
+  },
+  "Male_StrongOldMan01": {
+    "localized_name": "哈羅德",
+    "description": null
+  },
+  "Male_StrongOldMan02": {
+    "localized_name": "哈羅德",
+    "description": null
+  },
+  "Male_SurveyMan01": {
+    "localized_name": "加德爾",
+    "description": null
+  },
+  "Male_SurveyMan02": {
+    "localized_name": "加德爾",
+    "description": null
+  },
+  "Male_SurveyMan03": {
+    "localized_name": "加德爾",
+    "description": null
+  },
+  "Male_TenrakuPeople01": {
+    "localized_name": "島民",
+    "description": null
+  },
   "Male_Trader01": {
     "localized_name": "村民",
+    "description": null
+  },
+  "Male_Trader01_v04": {
+    "localized_name": "肉鋪學徒",
+    "description": null
+  },
+  "Male_Trader01_v05": {
+    "localized_name": "蔬果攤老闆",
+    "description": null
+  },
+  "Male_Trader01_v06": {
+    "localized_name": "走私者的跑腿小弟",
+    "description": null
+  },
+  "Male_Trader01_v07": {
+    "localized_name": "撿材料的商人",
+    "description": null
+  },
+  "Male_Trader01_v08": {
+    "localized_name": "路邊攤麵包師",
+    "description": null
+  },
+  "Male_Trader01_v09": {
+    "localized_name": "可疑的藥販子",
+    "description": null
+  },
+  "Male_Trader01_v10": {
+    "localized_name": "熟練漁夫兼肉舖老闆",
+    "description": null
+  },
+  "Male_Trader01_v11": {
+    "localized_name": "狩獵達人",
+    "description": null
+  },
+  "Male_Trader01_v12": {
+    "localized_name": "傳說中的野味獵人",
+    "description": null
+  },
+  "Male_Trader01_v13": {
+    "localized_name": "傭兵的補給官",
+    "description": null
+  },
+  "Male_Trader01_v14": {
+    "localized_name": "重武裝商人",
+    "description": null
+  },
+  "Male_Trader01_v15": {
+    "localized_name": "傳說中的彈藥商",
+    "description": null
+  },
+  "Male_Trader01_v16": {
+    "localized_name": "旅行的農場商人",
+    "description": null
+  },
+  "Male_Trader01_v17": {
+    "localized_name": "傳說中的蔬果店老闆",
+    "description": null
+  },
+  "Male_Trader01_v18": {
+    "localized_name": "正規藥師",
+    "description": null
+  },
+  "Male_Trader01_v19": {
+    "localized_name": "傳說中的藥師",
+    "description": null
+  },
+  "Male_Trader01_v20": {
+    "localized_name": "小餐廳老闆",
+    "description": null
+  },
+  "Male_Trader01_v21": {
+    "localized_name": "初出茅廬的美食家",
+    "description": null
+  },
+  "Male_Trader01_v22": {
+    "localized_name": "傳說中的美食家",
+    "description": null
+  },
+  "Male_Trader01_v23": {
+    "localized_name": "正規材料商人",
+    "description": null
+  },
+  "Male_Trader01_v24": {
+    "localized_name": "元素商人",
+    "description": null
+  },
+  "Male_Trader01_v25": {
+    "localized_name": "傳說中的材料商人",
     "description": null
   },
   "Male_Trader02": {
@@ -1477,6 +1929,10 @@
   },
   "Male_Trader03": {
     "localized_name": "村民",
+    "description": null
+  },
+  "Male_WorldTreePeople01": {
+    "localized_name": "島民",
     "description": null
   },
   "Manticore": {
@@ -1507,6 +1963,18 @@
     "localized_name": "新葉猿",
     "description": "這種帕魯在古代會用樹枝等細長物品當作武器。 牠們與人類關係變得密切後，就不再使用這些東西。 因為牠們發現了同樣細長，但更有效率的「槍」。"
   },
+  "Monkey_Fire": {
+    "localized_name": "秋葉猿",
+    "description": "手掌的部分得到了進化， 能夠握住燒紅的物品而不被燙傷。 如果把子彈打光了，牠說不定會握住高溫的槍管， 舉起槍身揍人。"
+  },
+  "MonochromeQueen": {
+    "localized_name": "墨羅娜",
+    "description": "經歷過美好的體驗之後，若不經歷同等程度糟糕的體驗就無法釋懷。 若要精心養育墨羅娜的話， 必須要做好相應的心理準備。"
+  },
+  "MoonChild": {
+    "localized_name": "綴夜星",
+    "description": "當其生命走到盡頭時，夜空中的某處便會多出一顆星星。 一生中的回憶越多，其光芒越是璀璨。"
+  },
   "MoonQueen": {
     "localized_name": "輝月伊",
     "description": "據傳，其身後漂浮的形似新月的物體， 會隨著世代的交替一點點的接近圓形。 至於到滿月月相時會發生什麼，就沒有人知道了。"
@@ -1519,6 +1987,14 @@
     "localized_name": "毛老爹",
     "description": "牠的體毛相當有份量，在牠冬眠時， 會有大量的毛撣兒躲在那些毛的內側。 史上最高紀錄高達101隻。"
   },
+  "Mothman": {
+    "localized_name": "暮塵蛾",
+    "description": "其自古時起便靜靜佇立在「世界樹」旁，一直守護著什麼。 現今Mothmon已然不知道要守護什麼，又為什麼要守護了。 畢竟，「世界樹」會給予指引。 畢竟，被操縱的孢子們，也理應知曉敵人是誰。"
+  },
+  "MummyPal": {
+    "localized_name": "縛乃伊",
+    "description": "如同金色繃帶般的器官有著伸縮自如的特性。 若在極端乾燥的環境下會發生斷裂， 所以每天的保濕檢查絕不可少。"
+  },
   "MushroomDragon": {
     "localized_name": "菇咚",
     "description": "吸入大量菇咚的孢子會陷入一種神智不清的狀態。 偶爾會看到牠呆站著一動也不動， 牠這不是在模仿蘑菇， 而是吸自己的孢子吸嗨了。"
@@ -1527,6 +2003,10 @@
     "localized_name": "菇波",
     "description": "散佈的大量孢子可以輕易遮擋陽光。 偶爾會看到牠呆站著一動也不動， 牠這不是在模仿蘑菇， 而是被自己的孢子遮住，什麼都看不見。"
   },
+  "MushroomLady": {
+    "localized_name": "紅菇娘",
+    "description": "在牠眼中，人類不過是方便的寄生對象罷了。 紅菇娘之所以演化成現在的模樣， 就是為了讓人類放鬆警戒，以便更有效率地傳播孢子。"
+  },
   "Mutant": {
     "localized_name": "秘斯媞雅",
     "description": "要是一不小心對上牠的眼睛，就會被牠操縱。 有許多帶著秘斯媞雅的人， 都認為自己只是在順著牠而已。"
@@ -1534,6 +2014,10 @@
   "MysteryMask": {
     "localized_name": "面懼",
     "description": "看起來像是假面的部分，似乎不是牠的臉。 彷彿就在眼前，但實際上又似乎不存在。 常常彷彿有雙眼睛不知道從哪裡，盯著這邊看。 轉頭看去，似乎就在背後。"
+  },
+  "NPC_Dungeon_Shop": {
+    "localized_name": "流浪商人",
+    "description": null
   },
   "NPC_FoodRequire_1": {
     "localized_name": "島民",
@@ -1561,7 +2045,11 @@
   },
   "NightBlueHorse": {
     "localized_name": "夜冥駒",
-    "description": "牠最自豪的就是自己如流動般的鬃毛。 如果發現了毛髮分叉，就會害羞的無法集中精神奔跑。 由於靜電會導致炸毛，所以牠絕對不會想靠近馭雷馬。"
+    "description": "牠最自豪的，就是自己如流水般柔順的鬃毛。 如果發現了毛髮分叉，就會害羞到無法集中精神奔跑。 由於靜電會導致炸毛，所以牠絕對不會想靠近馭雷馬。"
+  },
+  "NightBlueHorse_Neutral": {
+    "localized_name": "日耀駒",
+    "description": "牠最自豪的就是自己光彩奪目的鬃毛。 只要有一點髒污，就會害羞的無法集中精神奔跑。 因為容易沾黏上皮脂污垢，即便是最喜歡的帕魯馴養師，也不希望被黏糊糊的摸個不停。"
   },
   "NightFox": {
     "localized_name": "露娜蒂",
@@ -1587,11 +2075,23 @@
     "localized_name": "月花眾 上忍",
     "description": null
   },
+  "NinjaElite_Grenade": {
+    "localized_name": "月花眾 上忍",
+    "description": null
+  },
   "NinjaElite_NoEquip": {
     "localized_name": "月花眾 上忍",
     "description": null
   },
   "Ninja_Bowgun": {
+    "localized_name": "月花眾 下忍",
+    "description": null
+  },
+  "Ninja_Bowgun_Seabase": {
+    "localized_name": "月花眾 下忍",
+    "description": null
+  },
+  "Ninja_Grenade": {
     "localized_name": "月花眾 下忍",
     "description": null
   },
@@ -1606,6 +2106,22 @@
   "OctopusGirl": {
     "localized_name": "墨沫姬",
     "description": "若要和牠一起睡覺，最好確認一下隔天的行程。 因為牠吸盤的痕跡看起來很像吻痕， 如果被睡迷糊的牠吸住，就會產生不必要的誤會。"
+  },
+  "OctopusGirl_Neutral": {
+    "localized_name": "夢沫姬",
+    "description": "若要和牠一起睡覺，最好確認一下隔天的行程。 因為牠吸盤的痕跡看起來很像咬痕， 如果被睡迷糊的牠吸住，就會增加不必要的煩惱。"
+  },
+  "OniGhostGirl": {
+    "localized_name": "嚇絲妮",
+    "description": "嚇唬人就是牠的生存意義，但是卻完全不可怕。 但因為牠太可愛，大家總會忍不住裝出被嚇到的樣子。 嚇絲妮已經成為帶給人們笑容的使者了。"
+  },
+  "POLICE_HawkBird": {
+    "localized_name": "自衛隊 騎士",
+    "description": null
+  },
+  "POLICE_ThunderDog": {
+    "localized_name": "自衛隊 騎士",
+    "description": null
   },
   "PREDATOR_AmaterasuWolf": {
     "localized_name": "蒼焰狼",
@@ -1623,6 +2139,10 @@
     "localized_name": "恐炬靈",
     "description": "古人曾認為，越接近世界末日，恐炬靈的火焰就越弱。 末日主義者曾屢次因火焰減弱了而產生騷亂， 最後發現火勢強弱全看牠的心情， 至少到目前還是這樣的。"
   },
+  "PREDATOR_DarkScorpion": {
+    "localized_name": "冥鎧蠍",
+    "description": "這種帕魯的本體是一團能量體，內部是空的。 牠會將獵物活生生地塞進外殼後吸收掉， 且身邊總是迴盪著有如地獄般的呻吟聲。"
+  },
   "PREDATOR_DrillGame": {
     "localized_name": "碎岩龜",
     "description": "有則寓言叫做「碎岩龜的鑽頭」， 講的是擁有最強甲殼與最硬鑽頭的碎岩龜 思考自身矛盾之處的道德故事。"
@@ -1639,9 +2159,17 @@
     "localized_name": "花冠龍",
     "description": "牠一生氣就會如火山爆發般地大鬧特鬧，一發不可收拾。 因此「踩到花冠龍的尾巴」這句話， 就是指「讓某人暴怒」的意思。"
   },
+  "PREDATOR_FlowerRabbit_Quest": {
+    "localized_name": "波娜兔",
+    "description": null
+  },
   "PREDATOR_Garm": {
     "localized_name": "獵狼",
     "description": "獵狼與人類之間的關係早已淡化， 但過往與人類共同狩獵的記憶， 構成了牠們如今的狩獵體系。"
+  },
+  "PREDATOR_Garm_Quest": {
+    "localized_name": "獵狼",
+    "description": null
   },
   "PREDATOR_GhostBeast": {
     "localized_name": "噬魂獸",
@@ -1654,6 +2182,14 @@
   "PREDATOR_Gorilla": {
     "localized_name": "鐵拳猿",
     "description": "牠會用不同節奏敲擊地面，藉此與同伴溝通。 各節奏對應的意義因族群而異， 人類至今仍未能完全理解、區分。"
+  },
+  "PREDATOR_GrassMammoth_Ice": {
+    "localized_name": "雪猛獁",
+    "description": "這種帕魯背部的植被因個體而異。 有人曾在雪猛獁的背上發現被認為已滅絕的植物種子， 在冷凍狀態下保存良好。"
+  },
+  "PREDATOR_GrassMinotaur_Ice": {
+    "localized_name": "冰峰陶洛斯",
+    "description": "只要一息尚存，頭上的冰角就不會融化。 當有水滴從冰角上滴落之時， 冰峰陶洛斯便會感覺到自己的身體逐漸變得冰冷。"
   },
   "PREDATOR_GrassPanda": {
     "localized_name": "葉胖達",
@@ -1679,6 +2215,14 @@
     "localized_name": "獄閻王",
     "description": "牠比較喜歡吃正常的肉，但每次吃到肚裡的都成了受汙染的肉。 這是因為牠以暗黑利爪為武器， 但卻不知獵物會因此受到詛咒。"
   },
+  "PREDATOR_MonochromeQueen": {
+    "localized_name": "墨羅娜",
+    "description": "經歷過美好的體驗之後，若不經歷同等程度糟糕的體驗就無法釋懷。 若要精心養育墨羅娜的話， 必須要做好相應的心理準備。"
+  },
+  "PREDATOR_MummyPal": {
+    "localized_name": "縛乃伊",
+    "description": "如同金色繃帶般的器官有著伸縮自如的特性。 若在極端乾燥的環境下會發生斷裂， 所以每天的保濕檢查絕不可少。"
+  },
   "PREDATOR_MushroomDragon": {
     "localized_name": "菇咚",
     "description": "吸入大量菇咚的孢子會陷入一種神智不清的狀態。 偶爾會看到牠呆站著一動也不動， 牠這不是在模仿蘑菇， 而是吸自己的孢子吸嗨了。"
@@ -1689,11 +2233,19 @@
   },
   "PREDATOR_NightBlueHorse": {
     "localized_name": "夜冥駒",
-    "description": "牠最自豪的就是自己如流動般的鬃毛。 如果發現了毛髮分叉，就會害羞的無法集中精神奔跑。 由於靜電會導致炸毛，所以牠絕對不會想靠近馭雷馬。"
+    "description": "牠最自豪的，就是自己如流水般柔順的鬃毛。 如果發現了毛髮分叉，就會害羞到無法集中精神奔跑。 由於靜電會導致炸毛，所以牠絕對不會想靠近馭雷馬。"
+  },
+  "PREDATOR_PandaGirl": {
+    "localized_name": "莉芳",
+    "description": "磨礪一脈相傳的武術，唯有日日精進！ 沉溺情愛乃荒唐無稽！唯有日日修行！ 時機已至！向心儀之人發動攻勢！唯有失戀！ 戀愛之術未曾傳承！此情唯有未竟！"
   },
   "PREDATOR_PinkLizard": {
     "localized_name": "博愛蜥",
     "description": "牠總是為了一宵的愛戀而四處糾纏他人。 一開始牠只會對帕魯感到興趣， 但近年來牠的魔爪也開始伸向人類了。"
+  },
+  "PREDATOR_PinkLizard_Quest": {
+    "localized_name": "博愛蜥",
+    "description": null
   },
   "PREDATOR_PurpleSpider": {
     "localized_name": "桃蛛娘",
@@ -1702,6 +2254,10 @@
   "PREDATOR_RedArmorBird": {
     "localized_name": "燧火鳥",
     "description": "此一物種外觀類似迅雷鳥，但其實毫無關係。 牠以岩石為主食，因此經過漫長歲月後， 除了鳥喙外，也演化出堅硬的頭顱。"
+  },
+  "PREDATOR_RedFlowerBird": {
+    "localized_name": "大紅呱",
+    "description": "有人認為牠之所以常常搖頭晃腦的，是為了擬態成被風吹動的花朵。 但也有人反駁， 難道不是快速扭來扭去的紅花看起來太詭異了，所以誰都不想接近嗎。"
   },
   "PREDATOR_Ronin_Dark": {
     "localized_name": "鬼刃武士",
@@ -1715,6 +2271,14 @@
     "localized_name": "汪宗師",
     "description": "為了到達「無我」的境地而不停的冥想。 面對煩惱並頓悟之後，牠都會胃口大開吃到撐， 每當此時就會有所感悟——今天吃太多了。"
   },
+  "PREDATOR_SnakeGirl": {
+    "localized_name": "梅杜娜",
+    "description": "一遇到不明白的事情，就會和腦袋上的蛇一起開會。 但由於所有的蛇本質上都是牠自己， 因此牠唯一能弄清楚的是，自己什麼都不明白。"
+  },
+  "PREDATOR_Suzaku": {
+    "localized_name": "朱雀",
+    "description": "過去人們認為牠是帶來旱季的使者。 只要前一年發生乾旱，人們就會全力驅逐這種帕魯， 祈禱今年能夠獲得豐收。"
+  },
   "PREDATOR_ThunderDog": {
     "localized_name": "霹靂犬",
     "description": "當牠全速衝刺時，就和一道閃電一樣。 霹靂犬互相衝撞時， 更會發出如同雷擊般的轟鳴聲。"
@@ -1723,13 +2287,25 @@
     "localized_name": "騰炎龍",
     "description": "傳說有位戰士因冤罪而被推落火山， 隨後以騰炎龍之姿重生， 並把整個國家燒成一片焦土。"
   },
+  "PREDATOR_Umihebi_Fire_Quest": {
+    "localized_name": "騰炎龍",
+    "description": null
+  },
   "PREDATOR_VolcanicMonster_Ice": {
     "localized_name": "寒霜獸",
     "description": "牠全身上下都流淌著極其低溫的血液。 要是突然施加高溫，牠的血液就會蒸發， 引發大規模的蒸氣爆炸。"
   },
+  "PREDATOR_VolcanoDragon": {
+    "localized_name": "流焰龍",
+    "description": "健康的個體，背部熔岩的流動也會十分順暢。 如果生活習慣不良，流動狀況也會越來越惡化。 最壞的情況熔岩會發生堵塞， 最後突然大爆發。"
+  },
   "PREDATOR_Werewolf_Ice": {
     "localized_name": "霜鐮魔",
     "description": "牠頭上的角是絕對不會融化的，不可思議的冰。 用牠折斷的角製成的刨冰，那可真稱的上是絕頂美味， 無論是吃刨冰的人，或是霜鐮魔，頭都很痛。"
+  },
+  "PREDATOR_WhiteShieldDragon_Quest": {
+    "localized_name": "艾基魯迦",
+    "description": null
   },
   "PREDATOR_WhiteTiger_Ground": {
     "localized_name": "金棘獸",
@@ -1758,6 +2334,10 @@
   "PalTrader": {
     "localized_name": "帕魯商人",
     "description": null
+  },
+  "PandaGirl": {
+    "localized_name": "莉芳",
+    "description": "磨礪一脈相傳的武術，唯有日日精進！ 沉溺情愛乃荒唐無稽！唯有日日修行！ 時機已至！向心儀之人發動攻勢！唯有失戀！ 戀愛之術未曾傳承！此情唯有未竟！"
   },
   "Penguin": {
     "localized_name": "企丸丸",
@@ -1807,7 +2387,55 @@
     "localized_name": "自衛隊 守衛",
     "description": null
   },
+  "Police_Invader_CrossBow": {
+    "localized_name": "自衛隊 暴徒",
+    "description": null
+  },
+  "Police_Invader_FlameThrower": {
+    "localized_name": "自衛隊 善後組",
+    "description": null
+  },
+  "Police_Invader_GrenadeLauncher": {
+    "localized_name": "自衛隊 老手",
+    "description": null
+  },
+  "Police_Invader_Handgun": {
+    "localized_name": "自衛隊 守衛",
+    "description": null
+  },
+  "Police_Invader_Katana": {
+    "localized_name": "自衛隊 劍士",
+    "description": null
+  },
+  "Police_Invader_LaserRifle": {
+    "localized_name": "自衛隊 高科技分隊",
+    "description": null
+  },
+  "Police_Invader_MissileLauncher": {
+    "localized_name": "自衛隊 攔截者",
+    "description": null
+  },
+  "Police_Invader_Rifle": {
+    "localized_name": "自衛隊 步槍兵",
+    "description": null
+  },
+  "Police_Invader_RocketLauncher": {
+    "localized_name": "自衛隊 火箭手",
+    "description": null
+  },
+  "Police_Invader_Shotgun": {
+    "localized_name": "自衛隊 菁英",
+    "description": null
+  },
   "Police_Rifle": {
+    "localized_name": "自衛隊 步槍兵",
+    "description": null
+  },
+  "Police_Rifle_Crime_Lv4": {
+    "localized_name": "自衛隊 步槍兵",
+    "description": null
+  },
+  "Police_Rifle_Crime_Lv5": {
     "localized_name": "自衛隊 步槍兵",
     "description": null
   },
@@ -1877,6 +2505,22 @@
   },
   "Quest_Hunter_RocketLauncher01": {
     "localized_name": "盜獵集團 菁英",
+    "description": null
+  },
+  "Quest_Male_Ninja01": {
+    "localized_name": "月花眾 下忍",
+    "description": null
+  },
+  "Quest_Male_NinjaElite01": {
+    "localized_name": "月花眾 上忍",
+    "description": null
+  },
+  "Quest_Male_Scientist01_LaserRifle": {
+    "localized_name": "基因研究部隊 執行小隊",
+    "description": null
+  },
+  "Quest_Scientist_FlameThrower": {
+    "localized_name": "基因研究部隊 執行小隊",
     "description": null
   },
   "RAID_DarkMechaDragon": {
@@ -1971,8 +2615,12 @@
     "localized_name": "燧火鳥",
     "description": "此一物種外觀類似迅雷鳥，但其實毫無關係。 牠以岩石為主食，因此經過漫長歲月後， 除了鳥喙外，也演化出堅硬的頭顱。"
   },
+  "RedFlowerBird": {
+    "localized_name": "大紅呱",
+    "description": "有人認為牠之所以常常搖頭晃腦的，是為了擬態成被風吹動的花朵。 但也有人反駁， 難道不是快速扭來扭去的紅花看起來太詭異了，所以誰都不想接近嗎。"
+  },
   "Respawn_guide": {
-    "localized_name": "親切的帕魯訓練家",
+    "localized_name": "親切的帕魯馴養師",
     "description": null
   },
   "Reward_BossDefeat": {
@@ -2023,6 +2671,10 @@
     "localized_name": "衛兵",
     "description": null
   },
+  "Reward_PalCaptureCount_v02": {
+    "localized_name": "衛兵",
+    "description": null
+  },
   "Reward_PalDisplay_A_01": {
     "localized_name": "衛兵",
     "description": null
@@ -2063,6 +2715,10 @@
     "localized_name": "衛兵",
     "description": null
   },
+  "Reward_Paldex_v02": {
+    "localized_name": "衛兵",
+    "description": null
+  },
   "Robbery_Leader": {
     "localized_name": "帕魯商人",
     "description": null
@@ -2078,6 +2734,14 @@
   "RobinHood_Ground": {
     "localized_name": "山岳射手",
     "description": "這種帕魯棲息於岩石地帶，以狩獵維生，習性與人類非常相似。 若在遺跡裡發現山岳射手的骨頭， 該處一定也能找到人類的骸骨。"
+  },
+  "RockBeast": {
+    "localized_name": "磐峰獸",
+    "description": "會以身體撞擊更堅硬的岩石，來維持自己喜歡的形狀。 至於那些身形凹陷的個體還是不要去打擾了吧。 用人來類比的話，就像不小心把瀏海剪太短了。"
+  },
+  "RockBeast_Ice": {
+    "localized_name": "寒峰獸",
+    "description": "透過變換姿勢曬日光浴，來將冰塊融成喜歡的形狀。 至於那些身形不均的個體還是不要去打擾了吧。 用人來類比的話，就像不小心把鬢角剪過頭了。"
   },
   "Ronin": {
     "localized_name": "浪刃武士",
@@ -2139,11 +2803,23 @@
     "localized_name": "流浪商人",
     "description": null
   },
+  "SamuraiDog": {
+    "localized_name": "宗銘丸",
+    "description": "互相緊盯對峙後的拔刀一閃，便是宗銘丸間的地盤爭奪。 話說回來，飼養時最好不要訓練牠學「等一下」指令， 因為在聽到「好」後隨之而來的本能拔刀行為，是任誰都避不開的。"
+  },
   "Scientist_FlameThrower": {
     "localized_name": "基因研究部隊 執行小隊",
     "description": null
   },
   "Scientist_FlameThrower_Invader": {
+    "localized_name": "基因研究部隊 執行小隊",
+    "description": null
+  },
+  "Scientist_GrenadeLauncher": {
+    "localized_name": "基因研究部隊 執行小隊",
+    "description": null
+  },
+  "Scientist_MissileLauncher": {
     "localized_name": "基因研究部隊 執行小隊",
     "description": null
   },
@@ -2155,9 +2831,21 @@
     "localized_name": "蠱刺妖",
     "description": "身懷5000多種毒素。 雖然其中甚至有能夠立刻致死的可怕劇毒， 但是由於劑量都太低了，所以沒有什麼用。"
   },
+  "ScorpionMan_Electric": {
+    "localized_name": "電針妖",
+    "description": "能將尾針刺入敵人體內，釋放電流。 但是由於電流實在太弱了， 還不如直接操起鉗子用揍的更有殺傷力。"
+  },
   "SecurityDrone": {
     "localized_name": "武裝直升機",
     "description": null
+  },
+  "SecurityDrone_Field": {
+    "localized_name": "武裝直升機",
+    "description": null
+  },
+  "Sekhmet": {
+    "localized_name": "塞赫麥特",
+    "description": "曾經脾氣暴躁並被當作死亡的象徵。 當阿努比斯變為死亡的象徵後，尋求替代的富人用酒灌醉它，並將其馴服。 不知從何時​​起，塞赫麥特成為了高貴的象徵。"
   },
   "Serpent": {
     "localized_name": "滑水蛇",
@@ -2191,9 +2879,21 @@
     "localized_name": "翠羽龍",
     "description": "在擁抱翠羽龍時， 如果聞到了太陽的味道和草原的馨香，那明天就是晴天。 如果聞到一股發霉的味道，那明天就是傾盆大雨。"
   },
+  "SleeveRabbit": {
+    "localized_name": "兔繡袖",
+    "description": "爪尖的長毛是炫耀的資本。 牠對於污漬很敏感，一直小心翼翼的護理著毛髮。 要是附近揚起了灰塵，就會露出非常嫌棄的表情。"
+  },
   "SmallArmadillo": {
     "localized_name": "球犰",
     "description": "曾經有一段時間流行過球犰足球這項運動。 雖然因為收到帕魯保護組織的強烈反對，很快就被廢除， 但其實被當球踢能夠清理死皮，球犰也並非不情不願。"
+  },
+  "SmallYeti": {
+    "localized_name": "雪墩墩",
+    "description": "「直視雪墩墩的眼睛」 這句話的意思是，透過現象看清背後隱藏的本質。 說起來不知為何，從來沒有想要探究雪墩墩到底有沒有眼睛的研究者。"
+  },
+  "SnakeGirl": {
+    "localized_name": "梅杜娜",
+    "description": "一遇到不明白的事情，就會和腦袋上的蛇一起開會。 但由於所有的蛇本質上都是牠自己， 因此牠唯一能弄清楚的是，自己什麼都不明白。"
   },
   "SnowPeafowl": {
     "localized_name": "白真雪雀",
@@ -2207,6 +2907,10 @@
     "localized_name": "騎士蜂",
     "description": "立誓效忠女皇蜂的僕人。 這種帕魯誓死消滅傷害女王的事物。 牠們甚至會用自爆的手段，守護女王到最後一刻。"
   },
+  "SorajimaTowerGuide": {
+    "localized_name": "島民",
+    "description": null
+  },
   "StuffedShark": {
     "localized_name": "布偶鯊",
     "description": "雖然看起來就像是有什麼生物正從布偶中向外窺視著， 但試著把手伸進布偶裝中卻又什麼都摸不到。 不僅如此，手甚至可以無止盡地向深處伸去。 也許，宇宙就存在於這裡。"
@@ -2214,6 +2918,10 @@
   "StuffedShark_Fire": {
     "localized_name": "粉粉布偶鯊",
     "description": "從嘴巴伸手進去也什麼都摸不到，甚至可以無止盡地探向深處。 認為這是某種異次元空間的研究者們，突發奇想將其當作睡袋 試圖將整個身體擠進去，但卻導致牠乾嘔了。 看來，還是有體內這個概念的。"
+  },
+  "SumoDog": {
+    "localized_name": "力士獒",
+    "description": "曾經島上有過力士獒的相撲娛樂活動。 如果是最高級別的力士獒的話， 在受到草莽豬的突進攻擊時， 結果反而是草莽豬會被撞飛。"
   },
   "Suzaku": {
     "localized_name": "朱雀",
@@ -2227,6 +2935,18 @@
     "localized_name": "棉花糖",
     "description": "牠全身上下都比砂糖甜18,000倍。 被牠的氣味吸引的肉食帕魯要是往牠身上大口一咬， 就會被甜到翻白眼昏迷。"
   },
+  "SweetsSheep_Ground": {
+    "localized_name": "可可棉花糖",
+    "description": "雖然棉毛上散發出香甜濃郁的氣息，但是肉卻苦澀到令人戰慄。 被牠的氣味吸引的肉食帕魯要是往牠身上大口一咬， 就會因難以忍受的苦味，苦到翻白眼昏迷。"
+  },
+  "SwordCutlassfish": {
+    "localized_name": "鞘刀魚",
+    "description": "有著將骨骼和身體暫時分離，用骨頭斬斷敵人的瘋狂生態。 如若不趕快收回體內，自己也會力竭倒下。 有傳言在年輕的個體間流行著比賽身體分離時長的危險遊戲，但真假未知。"
+  },
+  "SwordCutlassfish_Fire": {
+    "localized_name": "煉刃魚",
+    "description": "能將骨骼和身體暫時分離，用骨頭斬斷敵人。 如若不趕快收回體內，自己也會力竭倒下。 據傳聞，年老的個體會故意長時間分離，藉此激發求生本能， 以期達到延壽的效果，但真假未知。"
+  },
   "TentacleTurtle": {
     "localized_name": "盔盔仔",
     "description": "為保護脆弱的本體，獲得了堅硬的甲殼。 作為代價則完全捨棄了本體的防禦力， 現在的牠甚至會因為撓癢而陷入昏厥。"
@@ -2235,17 +2955,33 @@
     "localized_name": "金盔仔",
     "description": "為保護脆弱的本體，獲得了堅硬的甲殼。 大半的觸覺神經都集中在了手部和甲殼上， 偷偷摸牠的本體也不會被發現。"
   },
+  "ThiefBird": {
+    "localized_name": "盜影鴉",
+    "description": "爪子有些不太老實，會趁人不注意順爪牽羊。 就算快暴露了也沒關係。 只要迅速連「眼睛」一起偷走，那就不會被目擊到行竊現場了。"
+  },
   "ThunderBird": {
     "localized_name": "迅雷鳥",
     "description": "此一物種外觀類似燧火鳥，但其實毫無關係。 牠會快速俯衝，用鋒利的鳥喙把敵人解決掉。 那身姿正有如落雷一般。"
+  },
+  "ThunderBird_Ice": {
+    "localized_name": "疾霜鳥",
+    "description": "特化適應了寒冷環境，即便身形纖細也能抵禦嚴寒。 從高空俯衝攻擊的威力驚人， 要比喻的話，就像巨大的冰錐從天而降一般。"
   },
   "ThunderDog": {
     "localized_name": "霹靂犬",
     "description": "當牠全速衝刺時，就和一道閃電一樣。 霹靂犬互相衝撞時， 更會發出如同雷擊般的轟鳴聲。"
   },
+  "ThunderDog_Ice": {
+    "localized_name": "凜光犬",
+    "description": "牠若在雪原上全速奔跑，就會揚起大量飛雪。 由於完全看不到彼此， 導致凜光犬間經常發生交通事故。"
+  },
   "ThunderDragonMan": {
     "localized_name": "波魯傑克斯",
     "description": "牠的電擊能從傷口進入，以此灼燒對手的全身。 波魯傑克斯同類之間發生的爭吵， 能在一瞬間決出勝負。"
+  },
+  "ThunderFluffyBird": {
+    "localized_name": "雷雲鷲",
+    "description": "要在食物匱乏的高空生存 有時甚至會連獵物的腦子都吃。 有一種說法是，雷雲鷲為了尋求更穩定的食物來源， 一部分族群從高空遷移到了低空，最後演化成了迅雷鳥。"
   },
   "TropicalOstrich": {
     "localized_name": "咕咕桑葩",
@@ -2258,6 +2994,10 @@
   "Umihebi_Fire": {
     "localized_name": "騰炎龍",
     "description": "傳說有位戰士因冤罪而被推落火山， 隨後以騰炎龍之姿重生， 並把整個國家燒成一片焦土。"
+  },
+  "VenusFlytrap": {
+    "localized_name": "顎莉絲",
+    "description": "什麼奇怪的東西都毫不在意地往嘴裡塞， 導致頭頂的嘴巴有時會患上口腔潰瘍。 每當這種時候，就由臉部的嘴巴來替代。 但是胡亂吃東西的毛病依然不改，最後兩張嘴都得了口腔潰瘍。"
   },
   "Viking": {
     "localized_name": "天墜之民",
@@ -2275,8 +3015,20 @@
     "localized_name": "天墜之民 精英",
     "description": null
   },
+  "Viking_GrenadeLauncher": {
+    "localized_name": "天墜之民",
+    "description": null
+  },
+  "Viking_Melee": {
+    "localized_name": "天墜之民",
+    "description": null
+  },
   "Viking_Prisoner": {
     "localized_name": "天墜之民",
+    "description": null
+  },
+  "Viking_RocketLauncher": {
+    "localized_name": "天墜之民 精英",
     "description": null
   },
   "Viking_Tower": {
@@ -2311,6 +3063,14 @@
     "localized_name": "寒霜獸",
     "description": "牠全身上下都流淌著極其低溫的血液。 要是突然施加高溫，牠的血液就會蒸發， 引發大規模的蒸氣爆炸。"
   },
+  "VolcanoDragon": {
+    "localized_name": "流焰龍",
+    "description": "健康的個體，背部熔岩的流動也會十分順暢。 如果生活習慣不良，流動狀況也會越來越惡化。 最壞的情況熔岩會發生堵塞， 最後突然大爆發。"
+  },
+  "VolcanoDragon_Ice": {
+    "localized_name": "川霜龍",
+    "description": "健康的個體，背部物質的溫度也會十分穩定。 但一旦心跳過快，溫度就會失去穩定。 最壞的情況會引發氣化或凝固現象， 最後突然休克而死。"
+  },
   "WeaponsDealer": {
     "localized_name": "-",
     "description": null
@@ -2339,9 +3099,17 @@
     "localized_name": "淨世鹿",
     "description": "在古老的文獻中，牠被記載為「救贖之獸」。 淨世鹿釋放出的光芒能夠將一切事物淨化的一乾二淨。 字面意義上的，從這世上消失得乾乾淨淨。"
   },
+  "WhiteDeer_Dark": {
+    "localized_name": "織夜鹿",
+    "description": "光芒越耀眼，陰影就越深邃。 散播籠罩萬物的黑暗，重拾本應存在的混沌。 平衡對這個世界是必要的。"
+  },
   "WhiteMoth": {
     "localized_name": "綢笠蛾",
     "description": "牠很喜歡下雨，下雨的時候， 常常能看到牠站著不動享受雨水。 火絨狐常常會跑來躲雨。"
+  },
+  "WhiteMoth_Neutral": {
+    "localized_name": "絹笠蛾",
+    "description": "牠喜歡凝望天空， 常常靜靜地佇立在那裡。 經常成為小型帕魯們聚會的場所。"
   },
   "WhiteShieldDragon": {
     "localized_name": "艾基魯迦",
@@ -2355,6 +3123,14 @@
     "localized_name": "金棘獸",
     "description": "牠擁有巨大的爪子，能夠輕輕鬆鬆地搬運大量東西。 但短腿卻讓牠走路綬慢， 往往走在半路上就已經天黑了。"
   },
+  "WildlifeSanctuaryDrone": {
+    "localized_name": "防衛無人機",
+    "description": null
+  },
+  "WildlifeSanctuary_guide": {
+    "localized_name": "初出茅廬的帕魯馴養師",
+    "description": null
+  },
   "WindChimes": {
     "localized_name": "吊縛靈",
     "description": "牠那巨大的雙臂就連鋼鐵都能撕裂。 以前犯下重罪者會被綁在城鎮廣場上， 讓Windchimes直接撕下該人的血肉， 是種極為殘忍的刑罰。"
@@ -2367,6 +3143,10 @@
     "localized_name": "泰鋒",
     "description": "即便拆解成215塊零件，只要再拼裝在一起， 又能完好如初正常活動的神奇帕魯。 需注意如果拼裝過程中混進其他個體的零件， 牠就會因為失去人格同一性而陷入憂鬱。"
   },
+  "WingGolem_Fire": {
+    "localized_name": "丹烽",
+    "description": "即便被拆解，只要再拼裝在一起， 又能完好如初正常活動的神奇帕魯。 如果拼裝過程中混進其他個體的零件，其思維就會發生致命錯誤， 最終導致過熱。"
+  },
   "WingGolem_Oilrig": {
     "localized_name": "泰鋒",
     "description": null
@@ -2378,6 +3158,10 @@
   "WoolFox": {
     "localized_name": "米露菲",
     "description": "與SheepBall相較，這種帕魯的毛質更加優良， 個性也更適合作為家畜。 但歷史上這種帕魯總是被當成寵物。 畢竟可愛就是正義。"
+  },
+  "WorldTreeDragon": {
+    "localized_name": "枯星龍",
+    "description": "於遙遠過去降臨於帕洛斯群島，神秘的帕魯迎來其終焉。 作為災厄帶來無數毀滅，後來被長久封印。 最後被某位帕魯馴養師所擊敗。"
   },
   "YakushimaBoss001": {
     "localized_name": "克蘇魯之眼",
