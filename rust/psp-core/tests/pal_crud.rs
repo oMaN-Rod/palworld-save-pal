@@ -73,7 +73,28 @@ fn loaded_session(session: &mut SaveSession, data: &GameData) -> Uuid {
 fn add_and_delete_player_pal_invalidate_caches_and_shift_the_rebuilt_index() {
     let mut session = common::load_fixture_session("world1");
     let data = game_data();
-    let player_id = loaded_session(&mut session, &data);
+    // Needs a player who already owns at least one pal, to serve as the
+    // "earlier entry" deleted below -- not just "whichever player happens
+    // to be first in `player_summaries`'s (unordered) iteration order",
+    // which may legitimately own none in a given fixture (world1's second
+    // player owns zero pals -- verified directly).
+    let mut player_id = None;
+    for candidate in session.player_summaries.keys().copied().collect::<Vec<_>>() {
+        player::get_player_details(&mut session, &data, candidate, &null_progress())
+            .unwrap()
+            .expect("player loads");
+        let details = player::build_player_dto(&session, &data, candidate)
+            .unwrap()
+            .unwrap();
+        if !details.pals.is_empty() {
+            player_id = Some(candidate);
+            break;
+        }
+    }
+    let Some(player_id) = player_id else {
+        eprintln!("world1 has no player owning any pal; nothing to prove");
+        return;
+    };
     let details = player::build_player_dto(&session, &data, player_id)
         .unwrap()
         .unwrap();
@@ -111,10 +132,26 @@ fn add_and_delete_player_pal_invalidate_caches_and_shift_the_rebuilt_index() {
 
     // Warm the cache again, then delete an EARLIER entry -- this must shift
     // every later position (including the just-added pal's) down by one.
+    // Must be an actual PAL this player owns (not `entries[0]`, which is
+    // frequently the player's OWN character entry, `is_player == true` --
+    // `delete_player_pals`'s ownership guard, this task's Critical fix,
+    // correctly rejects that as "not a pal player_id owns", matching
+    // Python's `Player.pals` scoping, which never includes the player's own
+    // entry either).
     session.caches.character_index = Some(index_after_add);
     let earlier_pal_id = {
         let entries = world::character_map(&session.level).unwrap();
-        world::entry_instance_id(&entries[0]).expect("first entry has an instance id")
+        entries
+            .iter()
+            .find(|entry| {
+                !world::entry_is_player(entry)
+                    && world::entry_save_parameter(entry).and_then(|params| {
+                        psp_core::props::get(params, &["OwnerPlayerUId"])
+                            .and_then(psp_core::props::as_uuid)
+                    }) == Some(player_id)
+            })
+            .and_then(world::entry_instance_id)
+            .expect("player_id must already own at least one pal earlier in the map")
     };
     assert_ne!(earlier_pal_id, new_pal.instance_id);
 
@@ -300,6 +337,71 @@ fn move_pal_rejects_a_pal_not_owned_by_this_player_without_mutating_any_containe
     );
 }
 
+/// Critical fix (this task's review): `delete_player_pals` must reject a
+/// `pal_id` that belongs to a DIFFERENT player BEFORE mutating anything --
+/// mirrors `move_pal_rejects_a_pal_not_owned_by_this_player_without_
+/// mutating_any_container` above. Without the ownership guard,
+/// `delete_pal_entry`'s unscoped whole-map search would delete player B's
+/// pal entirely from the save when called through player A.
+#[test]
+fn delete_player_pals_rejects_a_pal_not_owned_by_this_player_without_mutating_anything() {
+    let mut session = common::load_fixture_session("world1");
+    let data = game_data();
+    let player_ids: Vec<Uuid> = session.player_summaries.keys().copied().collect();
+    if player_ids.len() < 2 {
+        eprintln!("world1 must have 2 players for this test; skipping");
+        return;
+    }
+    let (player_a, player_b) = (player_ids[0], player_ids[1]);
+    player::get_player_details(&mut session, &data, player_a, &null_progress())
+        .unwrap()
+        .expect("player a loads");
+    player::get_player_details(&mut session, &data, player_b, &null_progress())
+        .unwrap()
+        .expect("player b loads");
+    let details_b = player::build_player_dto(&session, &data, player_b)
+        .unwrap()
+        .unwrap();
+    let Some((&foreign_pal_id, _)) = details_b.pals.iter().next() else {
+        eprintln!("player b has no pals; nothing to prove");
+        return;
+    };
+    let entry_count_before = world::character_map(&session.level).unwrap().len();
+    let details_a = player::build_player_dto(&session, &data, player_a)
+        .unwrap()
+        .unwrap();
+    let pal_box_a = details_a.pal_box.clone().unwrap();
+    let container_index = world::build_character_container_index(&session.level);
+    let &entry_index_a = container_index.get(&pal_box_a.id).unwrap();
+    let slots_before = containers::read_character_container(&session.level, entry_index_a)
+        .unwrap()
+        .slots;
+
+    let error = pal::delete_player_pals(&mut session, player_a, &[foreign_pal_id]).unwrap_err();
+    assert!(matches!(error, CoreError::PalNotFound(id) if id == foreign_pal_id));
+
+    assert_eq!(
+        world::character_map(&session.level).unwrap().len(),
+        entry_count_before,
+        "a rejected delete must not remove player B's pal from the save"
+    );
+    assert!(
+        world::character_map(&session.level)
+            .unwrap()
+            .iter()
+            .any(|e| world::entry_instance_id(e) == Some(foreign_pal_id)),
+        "player B's pal must still exist in the character map"
+    );
+    let slots_after = containers::read_character_container(&session.level, entry_index_a)
+        .unwrap()
+        .slots;
+    assert_eq!(
+        slots_before, slots_after,
+        "player A's own pal box must be untouched by a rejected delete of a \
+         pal A never owned"
+    );
+}
+
 #[test]
 fn heal_pals_clears_sickness_and_skips_a_missing_id_without_erroring() {
     let mut session = common::load_fixture_session("world1");
@@ -429,6 +531,310 @@ fn add_guild_pal_at_slot_zero_succeeds_and_leaves_owner_player_uid_present() {
         .unwrap()
         .iter()
         .all(|e| world::entry_instance_id(e) != Some(new_pal.instance_id)));
+}
+
+// ============================================================================
+// Synthetic multi-guild/base fixtures -- world1's only real base has a
+// single already-consumed slot (see `add_guild_pal_at_slot_zero_...`
+// above), leaving no room to independently prove `clone_guild_pal`'s cache
+// invalidation, nor to exercise a genuine cross-guild/cross-base ownership
+// mismatch. Built the same way `clone_bug_fixture` below is: from scratch,
+// with full control over occupancy.
+// ============================================================================
+
+fn shuffle_guid_bytes(b: [u8; 16]) -> [u8; 16] {
+    [
+        b[3], b[2], b[1], b[0], b[7], b[6], b[5], b[4], b[11], b[10], b[9], b[8], b[15], b[14],
+        b[13], b[12],
+    ]
+}
+
+/// `WorkerDirector.RawData`'s fixed 118-byte blob -- see
+/// `psp_core::palbin::worker_director_container_id`'s own doc comment for
+/// the exact field layout (`container_id` at byte offset 98).
+fn worker_director_blob(container_id: Uuid) -> Vec<u8> {
+    let mut blob = vec![0u8; 118];
+    blob[98..114].copy_from_slice(&shuffle_guid_bytes(*container_id.as_bytes()));
+    blob
+}
+
+fn zero_transform() -> uesave::games::palworld::PalTransform {
+    use uesave::{Double, Quat, Vector};
+    uesave::games::palworld::PalTransform {
+        rotation: Quat {
+            x: Double(0.0),
+            y: Double(0.0),
+            z: Double(0.0),
+            w: Double(1.0),
+        },
+        translation: Vector {
+            x: Double(0.0),
+            y: Double(0.0),
+            z: Double(0.0),
+        },
+        scale: Vector {
+            x: Double(1.0),
+            y: Double(1.0),
+            z: Double(1.0),
+        },
+    }
+}
+
+fn base_camp_entry(base_id: Uuid, guild_id: Uuid, worker_container_id: Uuid) -> MapEntry {
+    use uesave::games::palworld::PalBaseCamp;
+    use uesave::ByteArray;
+    let camp = PalBaseCamp {
+        id: psp_core::props::uuid_to_guid(base_id),
+        name: String::new(),
+        state: 0,
+        transform: zero_transform(),
+        area_range: 0.0,
+        group_id_belong_to: psp_core::props::uuid_to_guid(guild_id),
+        fast_travel_local_transform: zero_transform(),
+        owner_map_object_instance_id: uesave::FGuid::nil(),
+        trailing_bytes: [0; 4],
+    };
+    let mut worker_properties = Properties::default();
+    worker_properties.insert(
+        "RawData",
+        Property::Array(ValueVec::Byte(ByteArray::Byte(worker_director_blob(
+            worker_container_id,
+        )))),
+    );
+    let mut value_properties = Properties::default();
+    value_properties.insert(
+        "RawData",
+        Property::Struct(StructValue::PalBaseCamp(Box::new(camp))),
+    );
+    value_properties.insert(
+        "WorkerDirector",
+        Property::Struct(StructValue::Struct(worker_properties)),
+    );
+    MapEntry {
+        key: guid_property(base_id),
+        value: Property::Struct(StructValue::Struct(value_properties)),
+    }
+}
+
+fn guild_group_entry(guild_id: Uuid) -> MapEntry {
+    use uesave::games::palworld::PalGroupData;
+    let mut value_properties = Properties::default();
+    value_properties.insert(
+        "GroupType",
+        Property::Enum("EPalGroupType::Guild".to_string()),
+    );
+    let group_data = PalGroupData {
+        group_id: psp_core::props::uuid_to_guid(guild_id),
+        group_name: String::new(),
+        individual_character_handle_ids: vec![],
+        remaining_data: vec![],
+    };
+    value_properties.insert(
+        "RawData",
+        Property::Struct(StructValue::PalGroupData(group_data)),
+    );
+    MapEntry {
+        key: guid_property(guild_id),
+        value: Property::Struct(StructValue::Struct(value_properties)),
+    }
+}
+
+/// One `SaveSession` holding N independent guild/base/worker-container
+/// triples, each with `session.loaded_guilds` warmed the way
+/// `get_guild_details` would leave it -- every base starts with an EMPTY
+/// worker container (`CharacterSaveParameterMap` starts empty too); callers
+/// seed pals via the real `pal::add_guild_pal` entry point, not hand-built
+/// entries, so the fixture's pals are exactly what production code would
+/// create.
+fn multi_guild_base_session(bases: &[(Uuid, Uuid, Uuid, i32)]) -> SaveSession {
+    let mut container_entries = Vec::new();
+    let mut base_entries = Vec::new();
+    let mut group_entries = Vec::new();
+    for &(guild_id, base_id, container_id, slot_num) in bases {
+        container_entries.push(empty_character_container_entry(container_id, slot_num));
+        base_entries.push(base_camp_entry(base_id, guild_id, container_id));
+        group_entries.push(guild_group_entry(guild_id));
+    }
+    let mut world_save_data = Properties::default();
+    world_save_data.insert("CharacterSaveParameterMap", Property::Map(vec![]));
+    world_save_data.insert(
+        "CharacterContainerSaveData",
+        Property::Map(container_entries),
+    );
+    world_save_data.insert("ItemContainerSaveData", Property::Map(vec![]));
+    world_save_data.insert("GroupSaveDataMap", Property::Map(group_entries));
+    world_save_data.insert("BaseCampSaveData", Property::Map(base_entries));
+    world_save_data.insert(
+        "DynamicItemSaveData",
+        Property::Array(ValueVec::Struct(vec![])),
+    );
+    let mut root_properties = Properties::default();
+    root_properties.insert(
+        "worldSaveData",
+        Property::Struct(StructValue::Struct(world_save_data)),
+    );
+    let level = minimal_save(root_properties);
+    let mut session = SaveSession::new_for_tests(SaveKind::InMemory, level);
+    for &(guild_id, _, _, _) in bases {
+        session.loaded_guilds.insert(guild_id);
+    }
+    session
+}
+
+/// Important-2 fix (this task's review): `clone_guild_pal` had no dedicated
+/// positive cache-invalidation proof (world1's only real base has a single
+/// already-consumed slot). Mirrors `add_and_delete_player_pal_invalidate_
+/// caches_and_shift_the_rebuilt_index`'s own pattern exactly, through the
+/// guild/base entry points instead of the player ones: warm the index,
+/// clone (an add), assert invalidation, rebuild, record the clone's
+/// position; warm again, delete the EARLIER (seed) pal through
+/// `delete_guild_pals`, assert invalidation again, rebuild, and assert the
+/// cloned pal's position actually shifted down by one -- the concrete,
+/// provable consequence a stale index would miss.
+#[test]
+fn clone_guild_pal_invalidates_caches_and_the_rebuilt_index_reflects_both_the_clone_and_a_later_delete(
+) {
+    let data = game_data();
+    let guild_id = Uuid::new_v4();
+    let base_id = Uuid::new_v4();
+    let container_id = Uuid::new_v4();
+    let mut session = multi_guild_base_session(&[(guild_id, base_id, container_id, 2)]);
+
+    let seed = pal::add_guild_pal(
+        &mut session,
+        &data,
+        guild_id,
+        base_id,
+        "Sheepball",
+        "seed",
+        None,
+    )
+    .unwrap()
+    .expect("fixture worker container has room for the seed pal");
+    // `clone_guild_pal`'s own (already-reviewed, unchanged) source-pal
+    // lookup scopes via `guild::base_container_membership` -- Task 8's
+    // "SlotId" (mixed-case)-only rule, `_load_pals_for_container`'s own real
+    // Python behavior. `add_guild_pal`/`new_pal_entry` always write "SlotID"
+    // (uppercase, `PalObjects.PalCharacterSlotId`'s own literal spelling),
+    // so a freshly seeded pal must be re-spelled "SlotId" here to simulate
+    // what every REAL, already-saved base pal in this port's own fixtures
+    // actually looks like on disk (11/11 world1 pals, per this task's
+    // report) -- otherwise `clone_guild_pal` would never find this seed pal
+    // at all, regardless of the fix under test here.
+    {
+        let entries = world::character_map_mut(&mut session.level).unwrap();
+        let entry = entries
+            .iter_mut()
+            .find(|e| world::entry_instance_id(e) == Some(seed.instance_id))
+            .unwrap();
+        if let Some(save_parameter) = world::entry_save_parameter_mut(entry) {
+            if let Some(slot_property) = save_parameter
+                .0
+                .shift_remove(&uesave::PropertyKey::from("SlotID"))
+            {
+                save_parameter.insert("SlotId", slot_property);
+            }
+        }
+    }
+    let entry_count_before = world::character_map(&session.level).unwrap().len();
+
+    session.caches.character_index = Some(world::build_character_index(&session.level));
+    let cloned = pal::clone_guild_pal(&mut session, &data, guild_id, base_id, &seed)
+        .unwrap()
+        .expect("fixture worker container has room for the clone");
+    assert_ne!(cloned.instance_id, seed.instance_id);
+    assert_eq!(cloned.storage_id, container_id);
+    assert_eq!(
+        world::character_map(&session.level).unwrap().len(),
+        entry_count_before + 1
+    );
+    assert!(
+        session.caches.character_index.is_none(),
+        "clone_guild_pal must invalidate caches"
+    );
+
+    let index_after_clone = world::build_character_index(&session.level);
+    let position_after_clone = *index_after_clone.get(&cloned.instance_id).unwrap();
+    assert_eq!(position_after_clone, entry_count_before);
+
+    session.caches.character_index = Some(index_after_clone);
+    pal::delete_guild_pals(&mut session, guild_id, base_id, &[seed.instance_id]).unwrap();
+    assert!(
+        session.caches.character_index.is_none(),
+        "delete_guild_pals must invalidate caches too"
+    );
+    let index_after_delete = world::build_character_index(&session.level);
+    let position_after_delete = *index_after_delete
+        .get(&cloned.instance_id)
+        .expect("the cloned pal must still be present after deleting the earlier seed pal");
+    assert_eq!(
+        position_after_delete,
+        position_after_clone - 1,
+        "removing an earlier entry must shift every later position -- a stale \
+         (not-invalidated) index would still claim the cloned pal lives at its \
+         pre-delete position"
+    );
+}
+
+/// Critical fix (this task's review): `delete_guild_pals` must reject a
+/// `pal_id` belonging to a DIFFERENT guild/base BEFORE mutating anything --
+/// the guild/base analogue of
+/// `delete_player_pals_rejects_a_pal_not_owned_by_this_player_without_
+/// mutating_anything` above. Without the membership guard,
+/// `delete_pal_entry`'s unscoped whole-map search would delete guild B's
+/// base pal entirely from the save when called through guild A / base A.
+#[test]
+fn delete_guild_pals_rejects_a_pal_from_a_different_base_without_mutating_anything() {
+    let data = game_data();
+    let guild_a = Uuid::new_v4();
+    let base_a = Uuid::new_v4();
+    let container_a = Uuid::new_v4();
+    let guild_b = Uuid::new_v4();
+    let base_b = Uuid::new_v4();
+    let container_b = Uuid::new_v4();
+    let mut session = multi_guild_base_session(&[
+        (guild_a, base_a, container_a, 2),
+        (guild_b, base_b, container_b, 2),
+    ]);
+
+    pal::add_guild_pal(&mut session, &data, guild_a, base_a, "Sheepball", "a", None)
+        .unwrap()
+        .expect("base a has room");
+    let pal_b = pal::add_guild_pal(&mut session, &data, guild_b, base_b, "Sheepball", "b", None)
+        .unwrap()
+        .expect("base b has room");
+
+    let entry_count_before = world::character_map(&session.level).unwrap().len();
+    let container_index = world::build_character_container_index(&session.level);
+    let &entry_index_b = container_index.get(&container_b).unwrap();
+    let slots_before = containers::read_character_container(&session.level, entry_index_b)
+        .unwrap()
+        .slots;
+
+    let error =
+        pal::delete_guild_pals(&mut session, guild_a, base_a, &[pal_b.instance_id]).unwrap_err();
+    assert!(matches!(error, CoreError::PalNotFound(id) if id == pal_b.instance_id));
+
+    assert_eq!(
+        world::character_map(&session.level).unwrap().len(),
+        entry_count_before,
+        "a rejected delete must not remove guild B's base pal from the save"
+    );
+    assert!(
+        world::character_map(&session.level)
+            .unwrap()
+            .iter()
+            .any(|e| world::entry_instance_id(e) == Some(pal_b.instance_id)),
+        "guild B's base pal must still exist in the character map"
+    );
+    let slots_after = containers::read_character_container(&session.level, entry_index_b)
+        .unwrap()
+        .slots;
+    assert_eq!(
+        slots_before, slots_after,
+        "base B's worker container must be untouched by a rejected delete of \
+         a pal base A never owned"
+    );
 }
 
 // ============================================================================
@@ -828,6 +1234,139 @@ fn add_player_dps_pal_into_a_recycled_slot_inherits_a_stale_is_rare_pal_flag() {
         "reset() never touches IsRarePal -- a recycled slot's stale lucky \
          flag survives into the freshly created pal (found-but-not-on-the-\
          PARITY-BUG-list Python quirk; see this task's report)"
+    );
+}
+
+/// A dedicated fixture for the Important-1 fix (this task's review):
+/// `add_player_dps_pal` never wrote `FullStomach` at all. Slot 0 is
+/// never-used (`CharacterID` "None", no `FullStomach` key whatsoever).
+/// Slot 1 is recycled from a real, previously-used "Alpaca" pal (real
+/// `max_full_stomach` 225.0 per `data/json/pals.json`) carrying a stale,
+/// deliberately-bogus `FullStomach` (999.0, chosen to collide with neither
+/// the missing-key default 150.0 nor either species' real max) that must
+/// never survive into a freshly created pal.
+fn dps_fixture_for_stomach() -> (SaveSession, GameData, Uuid) {
+    let data = game_data();
+    let player_id = Uuid::new_v4();
+
+    let empty_slot = dps_slot("None", Uuid::nil());
+
+    let mut recycled_slot_props = match dps_slot("Alpaca", Uuid::new_v4()) {
+        StructValue::Struct(p) => p,
+        _ => unreachable!(),
+    };
+    if let Some(save_parameter) = recycled_slot_props
+        .0
+        .get_mut(&uesave::PropertyKey::from("SaveParameter"))
+        .and_then(psp_core::props::struct_props_mut)
+    {
+        save_parameter.insert("FullStomach", psp_core::props::float_property(999.0));
+    }
+
+    let mut dps_root_properties = Properties::default();
+    dps_root_properties.insert(
+        "SaveParameterArray",
+        Property::Array(ValueVec::Struct(vec![
+            empty_slot,
+            StructValue::Struct(recycled_slot_props),
+        ])),
+    );
+    let dps_sav = minimal_save(dps_root_properties);
+
+    let mut world_save_data = Properties::default();
+    world_save_data.insert("CharacterSaveParameterMap", Property::Map(vec![]));
+    world_save_data.insert("CharacterContainerSaveData", Property::Map(vec![]));
+    world_save_data.insert("ItemContainerSaveData", Property::Map(vec![]));
+    world_save_data.insert("GroupSaveDataMap", Property::Map(vec![]));
+    world_save_data.insert(
+        "DynamicItemSaveData",
+        Property::Array(ValueVec::Struct(vec![])),
+    );
+    let mut root_properties = Properties::default();
+    root_properties.insert(
+        "worldSaveData",
+        Property::Struct(StructValue::Struct(world_save_data)),
+    );
+    let level = minimal_save(root_properties);
+    let mut session = SaveSession::new_for_tests(SaveKind::InMemory, level);
+
+    let mut player_save_data = Properties::default();
+    let mut pal_box_id_struct = Properties::default();
+    pal_box_id_struct.insert("ID", guid_property(Uuid::new_v4()));
+    player_save_data.insert(
+        "PalStorageContainerId",
+        Property::Struct(StructValue::Struct(pal_box_id_struct)),
+    );
+    let mut player_root_properties = Properties::default();
+    player_root_properties.insert(
+        "SaveData",
+        Property::Struct(StructValue::Struct(player_save_data)),
+    );
+    let player_sav = minimal_save(player_root_properties);
+
+    session.loaded_players.insert(
+        player_id,
+        LoadedPlayer {
+            uid: player_id,
+            sav: player_sav,
+            dps: Some(dps_sav),
+        },
+    );
+
+    (session, data, player_id)
+}
+
+#[test]
+fn add_player_dps_pal_writes_a_flat_default_full_stomach_for_a_never_used_slot() {
+    let (mut session, data, player_id) = dps_fixture_for_stomach();
+
+    let (slot_index, new_pal) = pal::add_player_dps_pal(
+        &mut session,
+        &data,
+        player_id,
+        "Sheepball",
+        "Combat",
+        Some(0),
+    )
+    .unwrap()
+    .expect("slot 0 explicitly requested");
+    assert_eq!(slot_index, 0);
+    assert_eq!(
+        new_pal.stomach, 300.0,
+        "_set_max_stomach() (pal.py) falls back to the flat 300.0 default \
+         when the slot's PREVIOUS (pre-reset) CharacterID -- \"None\" here \
+         -- has no pals.json entry"
+    );
+}
+
+/// Proves both halves at once: the stale 999.0 already sitting in the slot
+/// must be overwritten (never inherited), and the value written must be
+/// species-aware off the slot's PREVIOUS occupant ("Alpaca", 225.0) -- NOT
+/// the newly-requested species ("Sheepball", which would be 150.0 if this
+/// port mistakenly used the new species instead).
+#[test]
+fn add_player_dps_pal_into_a_recycled_slot_overwrites_stale_full_stomach_using_the_previous_occupants_species(
+) {
+    let (mut session, data, player_id) = dps_fixture_for_stomach();
+
+    let (slot_index, new_pal) = pal::add_player_dps_pal(
+        &mut session,
+        &data,
+        player_id,
+        "Sheepball", // the NEW species being requested
+        "Combat",
+        Some(1), // recycled from "Alpaca"
+    )
+    .unwrap()
+    .expect("slot 1 explicitly requested");
+    assert_eq!(slot_index, 1);
+    assert_eq!(
+        new_pal.stomach, 225.0,
+        "_set_max_stomach() (pal.py) runs during Pal.__init__, BEFORE reset()/ \
+         character_id reassignment -- it keys off the slot's PREVIOUS \
+         occupant (\"Alpaca\", max_full_stomach 225.0 per data/json/pals.json), \
+         never the stale 999.0 already in the slot and never the newly- \
+         requested \"Sheepball\" -- see this task's report"
     );
 }
 
