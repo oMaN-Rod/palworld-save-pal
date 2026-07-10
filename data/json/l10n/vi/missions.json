@@ -3,6 +3,10 @@
     "localized_name": "Căn Cứ Thoải Mái",
     "description": "Mở rộng căn cứ là điều cần thiết để Pal làm việc hiệu quả. Trước hết, hãy nâng cấp căn cứ lên cấp 7 để tạo không gian thoải mái hơn cho các Pal. Khi đã chuẩn bị sẵn sàng, bạn sẽ có đủ sức mạnh để chinh phục những tòa tháp kia."
   },
+  "Main_BeginAdventure": {
+    "localized_name": "Lên Đường Thám Hiểm",
+    "description": "Bạn đã luyện tập và thành thạo tất cả các mục hiển thị trên thiết bị. Đã đến lúc quay lại gặp cô ấy rồi."
+  },
   "Main_BuildHatchingMachine": {
     "localized_name": "Trứng Pal",
     "description": "Ai cũng biết rằng Pal nở ra từ trứng. Bạn có thể tìm thấy trứng ở khắp nơi trên đảo, vì vậy hãy nhớ quan sát kỹ xung quanh khi khám phá. Bằng cách ấp trứng Pal, bạn có thể thu được các cá thể đa dạng hơn. Rồi bạn sẽ muốn đi tìm một Pal độc nhất của riêng mình. Đầu tiên, hãy mở khóa Kỹ Thuật Máy Ấp Trứng và đặt tại Căn cứ của bạn. Sau khi cho trứng vào Máy Ấp Trứng, hãy kiên nhẫn chờ đợi cho đến khi trứng nở."
@@ -11,9 +15,13 @@
     "localized_name": "Căn Cứ Khởi Đầu",
     "description": "Mở Menu Xây Dựng bằng <keyGuideIcon id=|OpenConstructionMenu| iconScale=|0.7|/>, sau đó thử đặt Palbox trên một khu đất rộng. Đây là căn cứ đầu tiên của bạn và Pal, và cũng là điểm khởi đầu cho chuyến thám hiểm. Nếu chuẩn bị tốt, đó sẽ là chỗ dựa vững chắc khi tiến đến các tòa tháp sau này. Hãy chọn vị trí cẩn thận."
   },
-  "Main_BuildWorkBench": {
+  "Main_BuildWorkBench_Old": {
     "localized_name": "Bắt Đầu Làm Việc",
     "description": "Vật liệu chẳng qua chỉ là tài nguyên. Khi lắp ráp được Bàn Gia Công, bạn sẽ có thể chế tạo các vật dụng phức tạp hơn. Mở Menu Xây Dựng, chọn Bàn Gia Công Nguyên Thủy và quyết định vị trí sẽ xây dựng. Tự tay xây dựng nên công trình đầu tiên của mình nào."
+  },
+  "Main_BuildWorkbench": {
+    "localized_name": "Lắp đặt bàn gia công",
+    "description": "Thu thập Vật Liệu Gỗ và Chế tạo Bàn Gia Công: Hòn đảo này rất giàu tài nguyên, từ gỗ cho đến đá và nhiều vật liệu khác. Để tiến hành nghiên cứu lâu dài trong khi vẫn phải tiết kiệm nguồn nhu yếu phẩm có hạn, bạn cần phải tận dụng chúng. Trước tiên là Vật Liệu Gỗ. Hãy nhặt những cành khô rơi trên mặt đất hoặc thu thập bằng cách đốn các cây xung quanh. Sau đó, khi bạn tìm được một mảnh đất đủ rộng rãi và an toàn, hãy chọn vị trí chế tạo Bàn Gia Công và đặt nó ở đó."
   },
   "Main_Capture30Pal": {
     "localized_name": "Bắt 30 Pal bất kỳ",
@@ -29,19 +37,31 @@
   },
   "Main_CaptureSheepBall": {
     "localized_name": "Pal Yếu Nhất",
-    "description": "Đảo Palpagos là thế giới của kẻ mạnh, nơi |cá lớn nuốt cá bé|. SheepBall là loài Pal nằm dưới đáy chuỗi thức ăn và rất dễ bắt. Tuy nhiên, với sự khéo léo, chúng có thể hỗ trợ bạn thực hiện nhiều công việc khác nhau. Đầu tiên, hãy thử bắt 5 con SheepBall. Chúng sẽ là những cộng sự đáng tin cậy cho bước khởi đầu để mở rộng căn cứ. Bạn cũng có thể thu được những vật liệu thiết yếu để sinh tồn từ SheepBall, như Lông Cừu hoặc Thịt Cừu Lamball. Để tồn tại trong thế giới khắc nghiệt này, bạn phải tận dụng mọi thứ có thể."
+    "description": "Tận dụng SheepBall: SheepBall có sức chiến đấu thấp và rất dễ bắt nhưng lại vô cùng khéo léo, có thể hỗ trợ nhiều công việc thủ công vốn dĩ là của con người. Đây chắc chắn sẽ là người bạn đồng hành đáng tin cậy để bắt đầu mở rộng căn cứ. Ngoài ra, bạn còn có thể thu được những nguyên liệu thiết yếu cho sinh hoạt như Lông Cừu và Thịt Cừu Lamball , v.v... Trước mắt, việc bắt giữ vài cá thể Pal này sẽ giúp quá trình phát triển căn cứ trở nên thuận lợi hơn."
+  },
+  "Main_CaptureSheepBall_Old": {
+    "localized_name": "Pal Yếu Nhất",
+    "description": "Đảo Palpagos là thế giới của kẻ mạnh, nơi |cá lớn nuốt cá bé|. SheepBall là loài Pal nằm dưới đáy chuỗi thức ăn và rất dễ bắt. Tuy nhiên, với sự khéo léo, chúng có thể hỗ trợ bạn thực hiện nhiều công việc khác nhau. Đầu tiên, hãy thử bắt 5 con SheepBall. Chúng sẽ là những cộng sự đáng tin cậy cho bước khởi đầu để mở rộng căn cứ. Bạn cũng có thể thu được những vật liệu thiết yếu để sinh tồn từ Lamball , như Lông Cừu hoặc Thịt Cừu Lamball . Để tồn tại trong thế giới khắc nghiệt này, bạn phải tận dụng mọi thứ có thể."
+  },
+  "Main_CatchPal": {
+    "localized_name": "Bắt giữ Pal",
+    "description": "Chế tạo Quả Cầu Pal và Thu phục Pal: Như bạn đã thấy, hòn đảo này là nơi sinh sống của vô số sinh vật bí ẩn. Những sinh vật được gọi là “Pal” này có những đặc điểm sinh thái phong phú cùng trí thông minh cao. Chúng sẽ vô cùng hữu ích cho các hoạt động nghiên cứu của chúng ta. Bạn có thể bắt Pal bằng một công cụ gọi là “Quả Cầu Pal”. Cơ chế của công cụ này cũng rất bí ẩn… nhưng một khi đã bị bắt, các Pal sẽ trở nên ngoan ngoãn và nghe lời con người. Hãy mở màn hình Kỹ Thuật trong Menu để xem cách chế tạo Quả Cầu Pal sau đó hãy thu thập Mảnh Paldium làm nguyên liệu. Loại khoáng thạch kỳ lạ phát ra ánh sáng xanh này thường được tìm thấy ở khu vực gần nguồn nước. Sau đó, hãy sử dụng Bàn Gia Công Nguyên Thủy để chế tạo Quả Cầu Pal , như vậy là bạn đã hoàn tất việc chuẩn bị để bắt Pal. Khi bắt Pal, hãy cố gắng làm suy yếu thể lực của chúng để giảm sức kháng cự và tăng tỷ lệ bắt thành công. Hãy nhớ rằng phần lớn các Pal sẽ phản kháng, vì vậy hãy bắt đầu với những Pal nhỏ và yếu cho đến khi bạn đã trang bị bản thân đầy đủ."
   },
   "Main_CollectCrystal": {
     "localized_name": "Paldium",
     "description": "Trên hòn đảo này, tồn tại một loại khoáng thạch tên là Paldium, ẩn chứa sức mạnh siêu nhiên. Người ta nói rằng nó liên quan mật thiết đến cái cây khổng lồ ở tận đằng xa kia, nhưng chi tiết thì không rõ. Loại khoáng thạch kỳ diệu này có nhiều công dụng, là vật liệu không thể thiếu cho Quả Cầu Pal. Paldium có thể được tìm thấy gần những nơi có nước. Hãy tìm dọc theo con sông hay những nơi có nước, nếu thấy thứ gì đó trông giống viên đá màu xanh lam phát sáng, hãy thử lấy cuốc đập vào. Bạn có thể chế tạo cuốc tại Bàn Gia Công Nguyên Thủy bằng cách kết hợp Đá và Gỗ."
   },
-  "Main_CraftKitsunebiGear": {
-    "localized_name": "Kỹ Năng Đồng Hành",
-    "description": "Tất cả Pal đều sở hữu Kỹ Năng Đồng Hành, và những khả năng đặc trưng theo từng loài. Một số Pal có thể được trang bị trực tiếp, hoặc cưỡi trên lưng chúng để làm phương tiện di chuyển. Đầu tiên, hãy mở khóa Kỹ Thuật Bàn Chế Tạo Trang Bị Pal và đặt tại Căn cứ của bạn. Tiếp theo, hãy mở khóa kỹ thuật Dây Giữ Foxparks và chế tạo tại Bàn Chế Tạo Trang Bị Pal. Khác với các trang bị và vật phẩm thông thường, Trang Bị Pal được lưu trữ ở một vị trí đặc biệt nằm cạnh Túi Đồ."
+  "Main_CollectKeySpheres": {
+    "localized_name": "Thu thập Quả Cầu Khởi Nguyên",
+    "description": "Theo lời Zoe, trên hòn đảo này có tổng cộng 8 tòa tháp, và trong mỗi tháp đều phong ấn một Quả Cầu Khởi Nguyên. Nếu thu thập đủ toàn bộ Quả Cầu Khởi Nguyên, có lẽ mọi bí mật sẽ được hé lộ."
   },
   "Main_CraftMealPouch": {
     "localized_name": "Kẻ Thù Lớn Nhất Là Cái Bụng Đói",
     "description": "Cơn đói chính là kẻ thù lớn nhất. Dù trong bất cứ hoàn cảnh nào cũng không được quên ăn. Nếu có Túi Đựng Thức Ăn Nhỏ, việc nạp thức ăn cho bạn và Pal sẽ đơn giản hơn rất nhiều. Công cụ nhỏ này sẽ giúp ích rất nhiều trong hành trình khám phá và chiến đấu. Túi Đựng Thức Ăn Nhỏ sẽ được lưu trữ ở vị trí đặc biệt nằm cạnh Túi Đồ, giống như Trang Bị Pal."
+  },
+  "Main_CraftPalGear": {
+    "localized_name": "Chế Tạo Trang Bị Pal",
+    "description": "Vị Trưởng làng tại ngôi làng nhỏ gợi ý rằng, nếu muốn biết về quá khứ của đảo Palpagos, hãy thử tìm gặp Zoe, cô con gái duy nhất của Thủ lĩnh Tổ Chức Săn Trộm. Tuy nhiên, trước hết vẫn nên làm theo lời vị Trưởng làng đó, bắt Foxparks và chế tạo Trang Bị Pal để chuẩn bị kỹ lưỡng trước khi tiến đến tòa tháp."
   },
   "Main_CraftPalSphere": {
     "localized_name": "Công Cụ Bắt Pal",
@@ -51,9 +71,17 @@
     "localized_name": "Bùa Hộ Mệnh Paldium",
     "description": "Khi bước vào một trận chiến, bạn không thể cứ mãi né tránh các đòn tấn công. Hãy trang bị phương tiện phòng thủ với sức mạnh Paldium. Mở khóa Kỹ Thuật Khiên Thường và chế tạo tại Bàn Gia Công Nguyên Thủy. Nếu chuẩn bị sẵn sàng từ trước, bạn có thể ứng phó với các cuộc tấn công bất ngờ."
   },
+  "Main_CraftTools": {
+    "localized_name": "Chế tạo rìu và cuốc",
+    "description": "Chế tạo Rìu và Cuốc: Bạn sẽ còn cần đến các tài nguyên cơ bản như Gỗ hoặc Đá với số lượng lớn trong tương lai. Ngoài việc nhặt từ trên mặt đất, bạn cũng có thể dùng tay không đấm vào cây hoặc đá để thu thập chúng…… Nhưng để thu thập hiệu quả, bạn cần chuẩn bị các công cụ phù hợp như Rìu hoặc Cuốc. Trước tiên, hãy xem công thức tại Bàn Gia Công, thu thập đủ số lượng Gỗ hoặc Đá cần thiết, sau đó tiến hành chế tạo Cuốc Đá và Rìu Đá."
+  },
+  "Main_Craft_PalGear": {
+    "localized_name": "Kỹ Năng Đồng Hành",
+    "description": "Tất cả Pal đều sở hữu Kỹ Năng Đồng Hành, và những khả năng đặc trưng theo từng loài. Một số Pal có thể được trang bị trực tiếp, hoặc cưỡi trên lưng chúng để làm phương tiện di chuyển. Đầu tiên, hãy mở khóa Kỹ Thuật Bàn Chế Tạo Trang Bị Pal và đặt tại Căn cứ của bạn. Tiếp theo, hãy mở khóa kỹ thuật Dây Giữ Foxparks và chế tạo tại Bàn Chế Tạo Trang Bị Pal. Khác với các trang bị và vật phẩm thông thường, Trang Bị Pal được lưu trữ ở một vị trí đặc biệt nằm cạnh Túi Đồ."
+  },
   "Main_DefeatDesertBoss": {
     "localized_name": "Kẻ Thống Trị Sa Mạc",
-    "description": "Đội Tự Vệ lẽ ra phải bảo vệ vùng đất này, giờ đây lại trở thành gốc rễ của sự mục nát. Đứng đầu nhóm người này là một người đàn ông tên Marcus Dryden. Dưới vỏ bọc thực thi pháp luật, hắn ta phân phối ma túy, làm đầy túi riêng và thao túng sự hỗn loạn trên đảo. Sa mạc mà hắn đang cai trị, đang yên lặng chờ đón sự trở lại của một người cai trị mới – chính là bạn. Hãy đến Cồn Cát Khát Khô và giải phóng nơi đây khỏi sự mục nát này."
+    "description": "Bạn đã đánh bại Axel Travers và nhận được “Quả Cầu Khởi Nguyên Lười Biếng”. Mục tiêu tiếp theo là Tháp Đội Tự Vệ."
   },
   "Main_DefeatDungeonBoss": {
     "localized_name": "Pal Bị Phong Ấn",
@@ -61,31 +89,51 @@
   },
   "Main_DefeatForestBoss": {
     "localized_name": "Ngươi Không Được Làm Hại Pal",
-    "description": "Lily Everhart kêu gọi sống hòa bình với Pal, thế nhưng tình yêu của cô dành cho chúng lại cuồng nhiệt đến lạ thường. Chẳng mấy chốc tình yêu quá mức ấy đã biến thành một lý lẽ điên rồ, lên án loài người là những kẻ tội đồ. Để ngăn cô ấy đi quá xa, bạn cần phải đi trước một bước. Hãy đi đến tòa tháp ở Núi Đóng Băng và đối mặt với cô ấy."
+    "description": "Bạn đã đánh bại Zoe Rayne và nhận được “Quả Cầu Khởi Nguyên Đố Kỵ”. Mục tiêu tiếp theo là Tháp Tổ Chức Bảo Vệ Pal."
   },
   "Main_DefeatGrassBoss": {
     "localized_name": "Cô Gái Và Tòa Tháp",
     "description": "Đã đến lúc thách thức một trong những tòa tháp nằm rải rác trên đảo. Cô gái tên Zoe Rayne là một trong những người bảo vệ các tòa tháp này. Nhưng cô nàng lại không biết sứ mệnh thực sự của mình là gì. Dẫu vậy, cô ấy vẫn chấp nhận nhiệm vụ được giao, canh giữ tháp cho đến tận hôm nay. Trên đỉnh tòa tháp ấy ẩn chứa điều gì? Câu trả lời chỉ dành cho người dám đặt chân đến đó."
   },
+  "Main_DefeatKingWhale": {
+    "localized_name": "Panthalus",
+    "description": "Để vào được Cây Thế Giới, bạn cần có sự trợ giúp của Panthalus. Hãy tìm ra Panthalus và cho nó thấy sức mạnh của bạn."
+  },
   "Main_DefeatSakurajimaBoss": {
     "localized_name": "Đêm Nay Rượu Thật Ngon",
-    "description": "Saya Kurosaki là người bảo vệ Tháp Đảo Hoa Đào. Dưới vầng trăng vĩnh hằng, cô ấy lặng lẽ bảo vệ dòng thời gian bất biến. Có vẻ như gần đây, sau khi gặp một Pal được gọi là Lưỡi Kiếm Trăng Lưỡi Liềm, Saya đã quyết tâm phá vỡ sự tĩnh lặng bấy lâu. Hãy đến Tháp Hoa Mặt Trăng trên Đảo Hoa Đào để tìm ra sự thật."
+    "description": "Bạn đã đánh bại Victor Ashford và nhận được “Quả Cầu Khởi Nguyên Tham Ăn”. Mục tiêu tiếp theo là Tháp Hoa Mặt Trăng."
+  },
+  "Main_DefeatSkyIslandBoss": {
+    "localized_name": "Một ngày dài như ba thu, mùa xuân đã đến",
+    "description": "Bạn đã đánh bại Bjorn Seligsson và nhận được “Quả Cầu Khởi Nguyên Giận Dữ”. Mục tiêu tiếp theo là Tháp Giao Ước."
   },
   "Main_DefeatSnowyMountainBoss": {
     "localized_name": "Thí Nghiệm Kết Hợp Pal",
-    "description": "Có bằng chứng cho thấy các thí nghiệm cực kỳ nguy hiểm đang được lặp lại tại một cơ sở nào đó. Những bản ghi chép sót lại đề cập đến việc tạo ra loài mới và tăng cường khả năng của chúng. Cái tên xuất hiện trong các ghi chép là Victor Ashford. Chắc hẳn ông ta đã tìm ra đáp án nào đó. Bạn nên tận mắt xem những gì diễn ra ở đó và kết quả ra sao. Mục tiêu là tòa tháp trên đỉnh Núi Tỏa Hồn Ánh Bạc và sớm chấm dứt những thí nghiệm điên rồ đó."
+    "description": "Bạn đã đánh bại Marcus Dryden và nhận được “Quả Cầu Khởi Nguyên Tham Lam”. Mục tiêu tiếp theo là Tháp Đơn Vị Nghiên Cứu Gen."
   },
   "Main_DefeatVikingBoss": {
     "localized_name": "Người Gánh Mọi Trách Nhiệm",
-    "description": "Vùng đất Feybreak đã từng hứng chịu những tai ương. Ở trung tâm nơi này, Bjorn Seligsson đã dẫn dắt người dân và tiếp tục bảo vệ tòa tháp đến ngày nay. Không ai rõ |thời khắc đó| mà ông ấy nhắc đến có ý nghĩa gì. Chỉ có một điều chắc chắn là sức mạnh của người đặt chân đến Feybreak sẽ mang đến cơ hội chuyển mình cho vùng đất. Hãy đến tòa tháp nằm sâu nhất trong vùng đất Feybreak và cứu lấy người dân bằng chính đôi tay mình. Chỉ bạn mới có thể gánh vác trách nhiệm xóa bỏ tai ương này."
+    "description": "Bạn đã đánh bại Saya Kurosaki và nhận được “Quả Cầu Khởi Nguyên Sắc Dục”. Mục tiêu tiếp theo là Tháp Feybreak."
   },
   "Main_DefeatVolcanoBoss": {
-    "localized_name": "Ám Ảnh Về Chiến Thắng Tuyệt Đối",
-    "description": "Trước kia, từng có một kẻ không cho phép bất kỳ đối thủ nào tiếp cận, chỉ ám ảnh duy nhất bởi chiến thắng tuyệt đối. Cuộc chiến của hắn không có lý do. Chỉ là để gặp được đối thủ mạnh mẽ hơn bản thân. Đó là Axel Travers, người đàn ông đứng trên Tháp Ngọn Lửa Vĩnh Cửu. Tại tòa tháp trên miệng núi lửa Obsidian, Axel đang chờ đợi sự thách đấu từ bạn."
+    "localized_name": "Ám Ảnh Toàn Thắng",
+    "description": "Bạn đã đánh bại Lily Everhart và nhận được “Quả Cầu Khởi Nguyên Kiêu Ngạo”. Mục tiêu tiếp theo là Tháp Đồng Minh Ngọn Lửa Vĩnh Cửu."
   },
   "Main_DefeatWildBoss": {
     "localized_name": "Đánh Bại Boss Đầu Tiên",
     "description": "Nhiều khu vực trên đảo Palpagos đã bị những Pal hùng mạnh chiếm giữ làm lãnh thổ riêng. Đôi khi chúng là mối đe dọa. Đánh bại chúng sẽ mang lại rất nhiều điểm kinh nghiệm, còn nếu bắt được thì chúng sẽ là những đồng đội tuyệt vời. Quyết định đánh bại hay bắt lấy là tùy do bạn. Nghe nói Pal {targetpal} trú ngụ đâu đó trên hòn đảo này. Hãy tìm {targetpal} và thử đánh bại hoặc bắt lấy."
+  },
+  "Main_DefeatWorldTreeDragon": {
+    "localized_name": "Thức tỉnh",
+    "description": "Bạch Long Tai Ương và chủ nhân của nó sắp thức tỉnh sau giấc ngủ dài. Giữa bạn và họ, không còn lời nào cần nói nữa. Đã đến lúc kết thúc tất cả rồi."
+  },
+  "Main_DefeatWorldTreeMiddleBoss": {
+    "localized_name": "Con đường dẫn đến vực thẳm",
+    "description": "Tại một nơi khá gần khu vực sâu nhất của Cây Thế Giới, bạn đã nghe thấy bản ghi âm do một người canh giữ để lại. Hãy thử tìm kiếm manh mối dựa trên dữ liệu tọa độ được đính kèm."
+  },
+  "Main_EatFood": {
+    "localized_name": "Lấp Đầy Chiếc Bụng Đói",
+    "description": "Đảm bảo lương thực: Để duy trì các hoạt động trong thời gian dài, việc đảm bảo nguồn lương thực ổn định là điều kiện tiên quyết. May mắn là Quả Mọng Đỏ mọc rải rác ở nhiều nơi và có thể ăn ngay mà không cần chế biến cũng có thể dùng một số Pal làm thực phẩm. Dẫu có đau lòng… nhưng để sinh tồn, đây là sự hy sinh không thể tránh khỏi."
   },
   "Main_EquipClothArmor": {
     "localized_name": "Bảo Vệ Bản Thân",
@@ -101,15 +149,59 @@
   },
   "Main_OpenSurvivalGuide": {
     "localized_name": "Kiến Thức Sinh Tồn Được Ghi Lại",
-    "description": "Trước đây, đã có không ít nhà khai phá, nhà thám hiểm muốn băng qua hòn đảo này nhưng đã phải bỏ mạng. Ghi chép sinh tồn tập hợp những kiến thức của họ đã được đồng bộ vào thiết bị của bạn. Để sống sót trong thế giới khắc nghiệt này, trước tiên, hãy mở menu Tùy chọn <keyGuideIcon id=|UIEscape|/> và xem Hướng dẫn sinh tồn."
+    "description": "Giới thiệu: Hướng dẫn sinh tồn này là tài liệu được biên soạn dựa trên kinh nghiệm thực tế mà đội Tiền trạm chúng tôi đã đúc kết được tại đảo Palpagos. Mọi chuyện diễn ra ở nơi đây đều nằm ngoài những lẽ thường mà chúng ta từng biết. Nếu bạn cảm thấy bối rối trước bất kỳ điều gì, hãy tham khảo hướng dẫn này."
   },
   "Main_PickupWood": {
     "localized_name": "Thu Thập Vật Liệu Đầu Tiên",
-    "description": "Trong số các tài nguyên có thể thu thập từ tự nhiên, Gỗ là vật liệu cơ bản để chế tạo các trang bị và công cụ. Thu thập Gỗ bằng cách nhặt cành cây rơi dưới đất hoặc đốn hạ cây cối gần đó."
+    "description": "Trong số các tài nguyên có thể thu thập từ tự nhiên, Gỗ là vật liệu cơ bản để chế tạo các trang bị và công cụ. Thu thập Gỗ bằng cách nhặt cành cây rơi dưới đất hoặc đốn hạ cây cối gần đó."
+  },
+  "Main_PrepareEquipment": {
+    "localized_name": "Chuẩn bị thiết bị",
+    "description": "Chế tạo trang bị: Trước hết, dùng lông cừu thu được từ Lamball để chế biến thành Vải tại Bàn Gia Công, sau đó chế tạo Trang Phục Vải . Tiếp theo, ứng dụng khả năng tự phục hồi của Paldium để phát triển Khiên Thường. Cuối cùng là Dù Lượn Thường để thăm dò những địa hình có độ dốc lớn. Khi đã chuẩn bị đầy đủ những trang bị này, quá trình khảo sát sẽ trở nên hiệu quả hơn."
+  },
+  "Main_RayneSyndicate": {
+    "localized_name": "Tổ Chức Săn Trộm Rayne",
+    "description": "Bạn đã chuẩn bị đầy đủ rồi. Hãy tiến đến tòa tháp của Tổ Chức Săn Trộm và đi gặp “Zoe”."
+  },
+  "Main_ReachWorldTree": {
+    "localized_name": "Hướng về Cây Thế Giới",
+    "description": "Bạn đã chứng minh được sức mạnh trước Panthalus và giành được sự công nhận. Panthalus chính là chìa khóa để bước vào Cây Thế Giới. Hãy tiến về phía Cây Thế Giới và tìm cách vào bên trong."
+  },
+  "Main_ReturnSmallVillage": {
+    "localized_name": "Quả Cầu Khởi Nguyên",
+    "description": "Bạn đã đánh bại cô gái được cho là Zoe và thu giữ một vật thể trông giống Quả Cầu Pal rơi ở gần đó. Hãy quay lại ngôi làng nhỏ và thử hỏi Trưởng làng xem sao."
+  },
+  "Main_SmallVillage": {
+    "localized_name": "Làng Nhỏ",
+    "description": "Bạn đã luyện tập và thành thạo tất cả các mục hiển thị trên thiết bị. Theo thông tin từ người sống sót của đội Tiền trạm, hình như có một khu dân cư nằm gần tòa tháp của Tổ Chức Săn Trộm. Nếu tìm thấy nơi ấy, có lẽ bạn nên tìm gặp trưởng làng và thử hỏi thêm thông tin."
+  },
+  "Main_StatusUp": {
+    "localized_name": "Cường Hóa Chỉ Số",
+    "description": "Nâng Cấp Chỉ Số: Tích lũy kinh nghiệm và nâng cao năng lực sẽ giúp bạn có đủ sức mạnh để đối mặt với các thử thách. Khi lên cấp thành công, hãy mở Túi Đồ và nâng cấp bất kỳ chỉ số nào bạn muốn điều này sẽ giúp các hoạt động nghiên cứu của bạn được hiệu quả hơn."
+  },
+  "Main_TalkGrassBoss": {
+    "localized_name": "Zoe Rayne",
+    "description": "Trưởng làng khuyên bạn nên tìm Zoe để hỏi rõ ngọn ngành. Hãy quay lại tòa tháp của Tổ Chức Săn Trộm Rayne một lần nữa."
+  },
+  "Main_TalkSkyBoss": {
+    "localized_name": "Kẻ Thấu Hiểu Bầu Trời",
+    "description": "Bạn đã đánh bại Auri, nhưng dường như cô ấy vẫn chưa tung hết sức. Có cảm giác cô ấy khác với những thủ lĩnh ở các tòa tháp khác. Có lẽ bạn nên thử nói chuyện với cô ấy một lần."
+  },
+  "Main_TalkSkyBossAgain": {
+    "localized_name": "Tai Ương",
+    "description": "Có vẻ như Auri muốn cung cấp cho bạn một vài thông tin về Cây Thế Giới. Câu chuyện này có vẻ sẽ khá dài đấy. Khi nào có thời gian, hãy quay lại trò chuyện với cô ấy nhé."
+  },
+  "Main_TalkWorldTreeNPC": {
+    "localized_name": "Nghiệp chướng",
+    "description": "Cuối cùng, bạn đã đặt chân vào bên trong Cây Thế Giới. Một không gian huyền bí mở ra trước mắt, nhưng đâu đó lại phảng phất cảm giác bất an. Sau một hồi quan sát xung quanh, bạn chợt nhìn thấy một bóng người."
+  },
+  "Main_TutorialStart": {
+    "localized_name": "Dân Đảo 1",
+    "description": "Bạn tỉnh dậy trên một bãi biển xa lạ, ký ức trở nên hỗn loạn. Đây là đâu và bạn là ai……? Trong lúc tìm kiếm manh mối, bạn nhìn thấy một bóng người ở đằng xa."
   },
   "Main_UnlockFastTravel": {
     "localized_name": "Kích hoạt Tượng Đại Bàng",
-    "description": "Khu vực này tồn tại một thiết bị dịch chuyển còn lưu lại từ một nền văn minh cổ xưa, được gọi là Tượng Đại Bàng. Nếu kích hoạt được thiết bị này, hành trình của bạn sẽ dễ dàng hơn rất nhiều. Trước hết, hãy tương tác với Tượng Đại Bàng ở gần bạn để xây dựng nền tảng cho những chuyến đi. Biết đâu một ngày nào đó, bạn sẽ muốn đi đến những tòa tháp ở tận nơi xa."
+    "description": "Gửi các thành viên nhóm nghiên cứu: Đảo Palpagos vẫn còn ẩn chứa vô vàn bí ẩn, nhưng theo các nguồn tin hiện có, hòn đảo này có những bức tượng đá mang hình dạng như một loài chim, nằm rải rác ở khắp nơi. Các bức tượng này dường như được kết nối với nhau bằng một công nghệ bí ẩn, cho phép người dùng dịch chuyển tức thời giữa chúng. Hãy tiến hành khảo sát bằng cách xây dụng căn cứ xung quanh những bức tượng này."
   },
   "Main_UnlockPalBox": {
     "localized_name": "Palbox",
@@ -123,9 +215,17 @@
     "localized_name": "Trang Bị An Toàn",
     "description": "Hòn đảo này ẩn chứa vô vàn hiểm nguy. Một trong số đó là các vách đá. Nếu sơ sẩy trượt chân, hậu quả sẽ không chỉ là vài vết thương. Mở khóa Kỹ Thuật Dù Lượn Thường và chế tạo tại Bàn Gia Công Nguyên Thủy. Có thiết bị này trong tay, bạn có thể an toàn đáp xuống từ những vách đá cao."
   },
+  "Main_WorkPal": {
+    "localized_name": "Cho Pal làm việc",
+    "description": "Sử dụng Pal làm lực lượng lao động: Các Pal đã bắt giữ thành công Quả Cầu Pal có thể được quản lý và sử dụng hiệu quả bằng một thiết bị gọi là Palbox. Trước tiên, hãy kiểm tra cách chế tạo Palbox ở màn hình Kỹ Thuật, rồi đặt ở vị trí bất kỳ mà bạn muốn. Trong Palbox, bạn có thể lưu trữ các Pal đang mang theo, hoặc triệu hồi chúng ra khu vực xung quanh Palbox. Hãy nhớ rằng các Pal được triệu hồi từ Palbox chỉ hoạt động trong một phạm vi nhất định quanh thiết bị, và đó cũng chính là phạm vi căn cứ trên thực tế của chúng ta. Hãy cân nhắc thật kỹ vị trí lắp đặt. Tùy theo đặc điểm riêng của từng loài, các Pal được triệu hồi từ Palbox sẽ tự tìm công việc phù hợp với khả năng của mình để thực hiện. Trong tương lai, nếu tập hợp được nhiều loại Pal khác nhau, bạn sẽ có thể vận hành căn cứ hiệu quả hơn nữa."
+  },
   "Main_WorkerPal": {
     "localized_name": "Cho Pal Làm Việc",
     "description": "Pal sẽ làm việc cùng bạn và giúp xây dựng Căn cứ. Truy cập Palbox, chọn 1 Pal đã bắt được từ menu Quản lý để đưa ra Căn cứ."
+  },
+  "Main_WorldTreeAbyss": {
+    "localized_name": "Tai Ương Bị Giam Cầm",
+    "description": "Bạn đã nghe người canh giữ Cây Thế Giới kể về những gì hiện đang xảy ra với Cây Thế Giới và danh tính thực sự của tai họa đang ngủ say nơi sâu thẳm nhất. Thời khắc lụi tàn đã cận kề ngay trước mắt."
   },
   "Sub_Angler01": {
     "localized_name": "Ngày Đi Câu Lý Tưởng",
@@ -151,6 +251,26 @@
     "localized_name": "Kế Hoạch Nhân Giống Splatterina",
     "description": "Bạn đã thu thập đủ Splatterina cho tôi chưa? Có 10 con là đủ để nhân giống rồi. Trông cậy vào bạn đấy!"
   },
+  "Sub_DeliveryQuartz": {
+    "localized_name": "Thu thập Thạch Anh Tinh Khiết",
+    "description": "Hãy thu thập 10 Thạch Anh Tinh Khiết và mang đến cho người ủy thác."
+  },
+  "Sub_DeliveryRainbowCrystal": {
+    "localized_name": "Thu thập Thạch Anh Lục Giác",
+    "description": "Hãy thu thập 10 Thạch Anh Lục Giác và mang đến cho người ủy thác."
+  },
+  "Sub_DeliverySkyIslandOre": {
+    "localized_name": "Thu thập Đá Soralite",
+    "description": "Hãy thu thập 10 Đá Soralite và mang đến cho người ủy thác."
+  },
+  "Sub_DeliverySulfur": {
+    "localized_name": "Thu thập Lưu Huỳnh",
+    "description": "Hãy thu thập 10 Lưu Huỳnh và mang đến cho người ủy thác."
+  },
+  "Sub_DeliveryWood_Fine": {
+    "localized_name": "Thu thập Gỗ Cứng",
+    "description": "Hãy thu thập 10 Gỗ Cứng và mang đến cho người ủy thác."
+  },
   "Sub_Farmer01": {
     "localized_name": "Lợi Ích Của Pal",
     "description": "Nếu bạn có Pal giỏi tưới nước, làm ơn nhường lại cho tôi được không? Dù tôi có thể lấy nước từ sông, nhưng có vẻ như nước mà các Pal tưới có chứa thứ gì đó đặc biệt, giúp rau củ phát triển tươi tốt hơn. Xin hãy giúp tôi!"
@@ -171,6 +291,10 @@
     "localized_name": "Yêu Cầu Của Người Sành Ăn Kiêu Ngạo",
     "description": "À... Ta là nhà phê bình ẩm thực, kiêm cố vấn tối cao của Hiệp Hội Ẩm Thực Palpagos. Với khẩu vị tinh tế của mình, ta sẽ đặc biệt nếm thử món ăn của ngươi. Dù sao, ta cũng không nghĩ một kẻ lang thang như ngươi có thể làm ta hài lòng."
   },
+  "Sub_HowSurviveWorldTree": {
+    "localized_name": "Thuật sinh tồn tại Cây Thế Giới",
+    "description": "Hãy thu thập Vật Liệu Gỗ Thần Bí và Paloxite, mỗi thứ 1 cái, sau đó báo cáo với người ủy thác."
+  },
   "Sub_Kigurumi01": {
     "localized_name": "Cậu cũng có thể trở thành Depresso!",
     "description": "Khoan đã! Tôi không phải Pal đâu! Đừng ném Quả Cầu đó! ……À, thì ra là cậu! Chúng ta có hẹn làm đồ cosplay mà nhỉ! Ha ha! Cậu đã có đủ vật liệu chưa? 20 Vải Thượng Hạng và 100 Tuyến Độc! Phải có thật nhiều Tuyến Độc mới tạo ra được màu lông đẹp như Depresso."
@@ -178,6 +302,18 @@
   "Sub_Kigurumi01_Replay": {
     "localized_name": "Cậu cũng có thể trở thành Depresso!",
     "description": "Khoan đã! Tôi không phải Pal đâu! Đừng ném Quả Cầu đó! ……À, thì ra là cậu! Chúng ta có hẹn làm đồ cosplay mà nhỉ! Ha ha! Cậu đã có đủ vật liệu chưa? 20 Vải Thượng Hạng và 100 Tuyến Độc! Phải có thật nhiều Tuyến Độc mới tạo ra được màu lông đẹp như Depresso."
+  },
+  "Sub_LoneWolf01": {
+    "localized_name": "Sói Đen Đơn Độc",
+    "description": "Bạn đã tìm thấy một con Kitsun Noct đang gục ngã vì bị thương."
+  },
+  "Sub_LoneWolf02": {
+    "localized_name": "Lang Thang Trong Ký Ức",
+    "description": "Hãy tìm kiếm manh mối dẫn đến chủ nhân của Kitsun Noct."
+  },
+  "Sub_LoneWolf03": {
+    "localized_name": "Thanh kiếm không vỏ",
+    "description": "Bạn đã nhận nhiệm vụ xử lý con Pal hung dữ trong làng."
   },
   "Sub_Nomad01": {
     "localized_name": "Xuống Núi Cũng Là Leo Núi",
@@ -189,7 +325,7 @@
   },
   "Sub_Nomad03": {
     "localized_name": "Tìm Kiếm Ngục Tối",
-    "description": "Bạn có tìm thấy Leezpunk hay Leezpunk Ignis không? Hãy đổi lấy vật phẩm quý giá nhất của tôi nhé!"
+    "description": "Bạn có tìm thấy Tombat không? Hãy đổi lấy vật phẩm quý giá nhất của tôi nhé!"
   },
   "Sub_Nomad04": {
     "localized_name": "Chuyến Đi Thong Thả",
@@ -248,16 +384,32 @@
     "description": "Bọn chúng ở phía trước kìa. Thật sự không thể tha thứ được. Hãy tự tay trừng phạt chúng thật đích đáng!"
   },
   "Sub_Ranger03": {
-    "localized_name": "Tarantriss Khổng Lồ",
-    "description": "Con Tarantriss khổng lồ đó khá nguy hiểm đấy. Trước khi khiêu chiến, tốt nhất là bạn nên tối ưu hóa trang bị của mình."
+    "localized_name": "Faleris Aqua Khổng Lồ",
+    "description": "Con Faleris Aqua khổng lồ đó khá nguy hiểm đấy. Trước khi khiêu chiến, tốt nhất là bạn nên tối ưu hóa trang bị của mình."
   },
   "Sub_Ranger04": {
     "localized_name": "Thu Thập Mật Hoa",
     "description": "Bạn có tìm thấy con Beegarde hay Elizabee không? Chỉ cần 3 con là đủ rồi!"
   },
+  "Sub_RookieExpeditionTeam01": {
+    "localized_name": "Đội Điều Tra Tập Sự",
+    "description": "Bạn tình cờ bắt gặp một nhóm 3 người đang trong tình trạng kiệt sức sau khi bị Pal tấn công. Hãy dang tay giúp đỡ họ."
+  },
+  "Sub_RookieExpeditionTeam02": {
+    "localized_name": "Mầm mống",
+    "description": "Bạn tái ngộ nhóm nghiên cứu mình từng giúp đỡ trước đây. Thế nhưng, có vẻ như không thấy bóng dáng Carla đâu cả."
+  },
+  "Sub_RookieExpeditionTeam03": {
+    "localized_name": "Sinh trưởng",
+    "description": "Bạn gặp lại Fia một lần nữa. Có vẻ như cô ấy đang khao khát có được sức mạnh bằng mọi giá."
+  },
+  "Sub_RookieExpeditionTeam04": {
+    "localized_name": "Hoa tàn",
+    "description": "Khi tái ngộ lần nữa, Fia xuất hiện với ánh mắt vô hồn, cô ấy bất ngờ lao vào tấn công bạn. Để giữ được mạng sống, bạn không còn cách nào khác là phải chiến đấu."
+  },
   "Sub_Scholar01": {
     "localized_name": "Chứng Minh Huyền Thoại!",
-    "description": "Nào, hãy lên đường tìm Pal huyền thoại! Tôi chỉ biết rằng ở Núi Lửa Obsidian phía Tây, Núi Tỏa Hồn Ánh Bạc ở phía Bắc, Cồn Cát Khát Khô phía Đông, và vùng đất tận cùng được gọi là Feybreak, mỗi nơi đó đều có ít nhất một Pal huyền thoại. Nếu leo lên mỏm đá lớn đằng đó, bạn sẽ có thể nhìn thấy rất xa. Tôi sẽ chờ tin tốt từ bạn!"
+    "description": "Nào, hãy đi tìm Pal Huyền Thoại! Theo những gì ta biết, tại đỉnh núi thiêng phủ tuyết trắng phương Bắc, sa mạc khô cằn phía Đông và vùng đất tận cùng gọi là Miền Ánh Dương, mỗi nơi đều có ít nhất một Pal Huyền Thoại đang ẩn mình. Nếu leo lên mỏm đá lớn đằng đó, ngươi sẽ có thể nhìn thấy rất xa. Lão chờ tin tốt của ngươi!"
   },
   "Sub_Scholar02": {
     "localized_name": "Công Tắc Động Lực",
@@ -271,9 +423,29 @@
     "localized_name": "Dò Tìm Kim Loại",
     "description": "Sao rồi? Đã thu thập được Chromite chưa? Nếu có máy dò kim loại, có thể bạn sẽ tìm được Chromite nằm sâu dưới lòng đất ở đâu đó trên hòn đảo này."
   },
+  "Sub_StrongOldMan01": {
+    "localized_name": "Nhà Thám Hiểm Bị Giam Cầm",
+    "description": "Bạn đã giải cứu một người có vẻ là cư dân đảo bị nhốt trong lồng nhưng dường như những kẻ săn trộm đã phát hiện ra và đang kéo đến. Việc bạn cần làm là đánh bại chúng để đảm bảo an toàn cho bản thân."
+  },
+  "Sub_StrongOldMan02": {
+    "localized_name": "Tiêu Diệt Kẻ Bị Truy Nã",
+    "description": "Khi bạn gặp lại nhà mạo hiểm Harold, dường như ông ta đang phải đối mặt với một kẻ địch đáng gờm. Ông ta rất vui mừng khi có bạn cùng giúp sức chiến đấu. Hãy hợp tác với Harold để hạ gục kẻ bị truy nã này."
+  },
+  "Sub_StrongOldMan03": {
+    "localized_name": "Kẻ Đại Diện",
+    "description": "Bạn gặp lại Harold lần nữa, nhưng lần này ống ấy có vẻ trầm lặng hơn thường lệ. Nhiệm vụ ông ấy nhận từ ngôi làng gần đó là khống chế một Pal đang phát điên. Với vẻ mặt đượm buồn, Harold đã mô tả chi tiết nhiệm vụ và đưa ra một đề xuất. |Bạn có thể đảm nhận nhiệm vụ này không?| Khi bạn đồng ý, Harold lộ rõ vẻ nhẹ nhõm trong giây lát… nhưng một nỗi buồn sâu thẳm vẫn hiện lên trên khuôn mặt ủ rũ của ông ấy."
+  },
+  "Sub_StrongOldMan04": {
+    "localized_name": "Quá Khứ",
+    "description": "Harold đứng dưới gốc Cây Thế Giới, dường ông ta như có điều gì đó muốn tiết lộ với bạn. Phải chăng ông ta muốn đối mặt với quá khứ và thú nhận điều gì đó? Hay ông ta muốn để lại câu chuyện của mình trong ký ức của người khác? Từ vẻ mặt kiên quyết của ông ta, thật khó để biết được."
+  },
+  "Sub_StrongOldMan05": {
+    "localized_name": "Hồi Kết Của Kỵ Sĩ",
+    "description": "Bạn sẽ chứng kiến số phận của người đàn ông này."
+  },
   "Sub_Zoe01": {
     "localized_name": "Đừng Có Mà Tự Mãn Chỉ Vì Thắng",
-    "description": "Bắt được Grizzbolt chưa? Nghe nói ở Khu Cấm Săn Bắt 1 còn có rất nhiều Pal mạnh khác nữa, mà chắc cậu không bắt được đâu. Nếu muốn được tôi công nhận thì cố gắng hết sức đi nhé."
+    "description": "Bạn đã bắt được Grizzbolt chưa đấy? Nghe nói ở Khu Cấm Săn Bắt 1 còn có nhiều Pal mạnh khác nữa, cỡ như bạn chắc là không chịu nổi đâu. Muốn được tôi công nhận thì hãy cố gắng hết sức đi nhé."
   },
   "Sub_Zoe02": {
     "localized_name": "Dù Gì Cũng Không Tin Tưởng Đâu",

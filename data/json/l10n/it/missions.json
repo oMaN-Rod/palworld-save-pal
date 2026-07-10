@@ -3,17 +3,25 @@
     "localized_name": "Una base accogliente",
     "description": "Per far lavorare i Pal in modo efficiente sarà necessario espandere la base. Porta la base fino al livello 7 e crea un ambiente più confortevole per i tuoi Pal. Continua così e diventerai abbastanza forte da sfidare il boss della torre."
   },
+  "Main_BeginAdventure": {
+    "localized_name": "L'avventura ha inizio",
+    "description": "Hai completato tutte le mansioni indicate sul dispositivo. Torna dalla sopravvissuta."
+  },
   "Main_BuildHatchingMachine": {
     "localized_name": "Uova di Pal",
     "description": "È noto che i Pal nascano dalle uova. È possibile trovare uova in ogni angolo dell'isola, quindi tieni gli occhi ben aperti durante le tue esplorazioni. Facendo schiudere le uova di Pal, potrai incontrare tanti esemplari diversi. In poco tempo, alleverai dei Pal tutti tuoi. Sblocca la tecnologia Incubatrice per uova e attivala nella base. Inserisci le uova nella Incubatrice per uova e a quel punto dovrai soltanto aspettare."
   },
   "Main_BuildPalBox": {
     "localized_name": "Una base da cui iniziare",
-    "description": "Apri il menu Edificazione da <keyGuideIcon id=|OpenConstructionMenu| iconScale=|0.7|/>, e costruisci il Box per Pal in uno spazio ampio. Qui sorgerà la prima base per te e i Pal: sarà il punto d'origine delle spedizioni, e una risorsa fondamentale quando un giorno punterai alle torri. Scegli con attenzione dove edificarla."
+    "description": "Apri il menu Edificazione da <keyGuideIcon id=|OpenConstructionMenu| iconScale=|0.7|/> e costruisci il Box per Pal in uno spazio ampio. Qui sorgerà la prima base per te e i Pal: sarà il punto d'origine delle spedizioni, e una risorsa fondamentale quando un giorno punterai alle torri. Scegli con attenzione dove edificarla."
   },
-  "Main_BuildWorkBench": {
+  "Main_BuildWorkBench_Old": {
     "localized_name": "Dove inizia ogni attività",
     "description": "Le risorse hanno utilizzi sorprendenti. Costruendo un banco da lavoro, potrai realizzare oggetti più complessi. Apri il menu Edificazione, seleziona Banco da lavoro primitivo e scegli dove costruirlo. Costruisci con le tue mani i tuoi primi strumenti."
+  },
+  "Main_BuildWorkbench": {
+    "localized_name": "Costruisci un banco da lavoro",
+    "description": "Raccogliere legname e costruire un banco da lavoro: Quest'isola è ricca di risorse come legname, minerali e altro ancora. Dovrai imparare a sfruttarle al meglio, se vorrai condurre ricerca sul lungo periodo in luoghi con risorse limitate. Inizia dal legname. Raccogli i pezzi di legno caduti a terra, oppure attacca gli alberi per tagliarli. Poi trova una zona abbastanza spaziosa e facilmente difendibile. Scegli dove costruire il banco da lavoro e conferma la tua scelta."
   },
   "Main_Capture30Pal": {
     "localized_name": "Cattura 30 Pal",
@@ -29,19 +37,31 @@
   },
   "Main_CaptureSheepBall": {
     "localized_name": "Il Pal più debole",
+    "description": "Attività di SheepBall: SheepBall è debole in battaglia e semplice da catturare. Gli esemplari sono piuttosto abili e possono aiutare gli umani nei lavori manuali. Sono compagni più che adeguati per far crescere la tua base agli inizi. Inoltre, da essi si ricavano risorse essenziali come Lana e Carne di Lamball. Inizia catturando più esemplari di questo Pal e l'espansione della base procederà senza intoppi."
+  },
+  "Main_CaptureSheepBall_Old": {
+    "localized_name": "Il Pal più debole",
     "description": "A Palpagos vige la legge del più forte. SheepBall si trova in fondo alla catena alimentare dei Pal ed è facile da catturare. Tuttavia si tratta di una specie abile in certe attività, che potrà svolgere al posto tuo. Cattura 5 esemplari di SheepBall. Ti saranno di certo utili man mano che la tua base crescerà. Inoltre, dai SheepBall puoi ricavare Lana e Carne di Lamball, risorse fondamentali per vivere bene. Per sopravvivere in questo mondo spietato, dovrai sfruttare ogni risorsa a tua disposizione."
+  },
+  "Main_CatchPal": {
+    "localized_name": "Cattura un Pal",
+    "description": "Creare una Sfera Pal e catturare i Pal: Come avrai notato, quest'isola ospita un numero incalcolabile di creature ignote. Questi esseri, noti come Pal, mostrano una grande biodiversità e un alto grado di intelligenza. Possono essere molto utili nelle nostre esplorazioni. I Pal possono essere catturati usando lo strumento noto come Sfera Pal. Non è chiaro come funzionino, ma una volta usate per catturare un Pal, questo diventa generalmente obbediente agli esseri umani. Apri la schermata Tecnologia dal menu per trovare le istruzioni per realizzare una Sfera Pal. Dovrai procurarti la risorsa necessaria: un minerale chiamato Frammento di Paldium. Questa pietra misteriosa, che splende di luce blu, si trova generalmente vicino all'acqua. A quel punto, usala per creare una Sfera Pal al Banco da lavoro primitivo, e potrai infine catturare un Pal. Per aumentare le probabilità di cattura, devi indebolire il bersaglio il più possibile coi tuoi attacchi. Ricorda che molti Pal ti attaccheranno a loro volta. Per iniziare, concentrati sui Pal più piccoli e deboli, e intanto migliora il tuo equipaggiamento."
   },
   "Main_CollectCrystal": {
     "localized_name": "Il Paldium",
     "description": "Su quest'isola esiste un minerale dalle capacità incredibili, noto come Paldium. Sembra che abbia a che fare col gigantesco albero che si vede all'orizzonte, ma non sono noti i dettagli. Questo materiale misterioso ha tanti utilizzi diversi ed è una risorsa essenziale per creare la Sfera Pal. Il Paldium si trova nei pressi delle acque. Cerca sulla riva dei corsi d'acqua e, quando trovi un minerale blu splendente, colpiscilo col piccone. Per costruirti un piccone, vai al Banco da lavoro primitivo e combina Pietra e Legno."
   },
-  "Main_CraftKitsunebiGear": {
-    "localized_name": "Abilità compagno",
-    "description": "Tutti i Pal hanno capacità chiamate abilità compagno, che variano in base alla specie di appartenenza. A volte potrai equipaggiare e usare direttamente un'abilità, altre volte potrai cavalcare un Pal per muoverti. Sblocca la tecnologia Banco da lavoro per strumenti per Pal e attivala nella base. Quindi sblocca la tecnologia Bardatura di Foxparks e creala al Banco da lavoro per strumenti per Pal. A differenza di equipaggiamenti e oggetti, gli strumenti per Pal si trovano sotto Oggetti importanti, accanto all'inventario."
+  "Main_CollectKeySpheres": {
+    "localized_name": "Trova le Sfere chiave",
+    "description": "Zoe ha detto che sull'isola ci sono otto torri, e che in ognuna di esse è sigillata una Sfera chiave. Trovandole tutte, potresti scoprire qualcosa."
   },
   "Main_CraftMealPouch": {
     "localized_name": "La fame è il peggiore dei nemici",
     "description": "La fame è il peggiore dei nemici. Non bisogna mai dimenticarsi di mangiare. Con una Borsa di cibo piccola, sarà più facile gestire l'alimentazione sia tua che dei tuoi Pal. Un dispositivo così piccolo cambierà tutto sia per l'esplorazione che per le battaglie. La Borsa di cibo piccola, proprio come gli strumenti per Pal, si trova sotto Oggetti importanti, accanto all'inventario."
+  },
+  "Main_CraftPalGear": {
+    "localized_name": "Costruisci strumenti per Pal",
+    "description": "Stando al capo del piccolo insediamento, il modo migliore per scoprire di più sul passato di Palpagos è chiedere alla figlia del leader dei bracconieri, Zoe. Prima però dovrai catturare Foxparks e creare uno strumento per Pal. Solo così avrai il necessario per affrontare la torre."
   },
   "Main_CraftPalSphere": {
     "localized_name": "Uno strumento di cattura",
@@ -51,9 +71,17 @@
     "localized_name": "La protezione del Paldium",
     "description": "Durante uno scontro, è impossibile schivare all'infinito i colpi nemici. Ottieni uno strumento difensivo col potere del Paldium. Sblocca la tecnologia Scudo normale e creala al Banco da lavoro primitivo. Se la equipaggi ogni giorno, ti proteggerà anche dagli attacchi a sorpresa."
   },
+  "Main_CraftTools": {
+    "localized_name": "Costruisci un'ascia e un piccone",
+    "description": "Come creare un'ascia e un piccone: Legno e Pietra sono due risorse fondamentali. Ti serviranno sempre in grande quantità. Sono risorse che puoi trovare a terra, o puoi ottenere colpendo a mani nude alberi e rocce. Per raccoglierle in modo efficiente, però, è meglio avere strumenti appositi come un'ascia e un piccone. Innanzitutto conferma la ricetta al banco da lavoro. Trova la quantità di Legno e Pietra richiesta, e crea Piccone di pietra e Ascia di pietra."
+  },
+  "Main_Craft_PalGear": {
+    "localized_name": "Abilità compagno",
+    "description": "Tutti i Pal hanno capacità chiamate abilità compagno, che variano in base alla specie di appartenenza. A volte potrai equipaggiare e usare direttamente un'abilità, altre volte potrai cavalcare un Pal per muoverti. Sblocca la tecnologia Banco da lavoro per strumenti per Pal e attivala nella base. Quindi sblocca la tecnologia Bardatura di Foxparks e creala al Banco da lavoro per strumenti per Pal. A differenza di equipaggiamenti e oggetti, gli strumenti per Pal si trovano sotto Oggetti importanti, accanto all'inventario."
+  },
   "Main_DefeatDesertBoss": {
     "localized_name": "Il signore delle sabbie",
-    "description": "La Milizia volontaria avrebbe dovuto proteggere questa terra, ma oramai non fa che corromperla. Al centro di tutto c'è un uomo chiamato Marcus Dryden. Smercia veleno e si arricchisce approfittando della sua posizione di guardiano dell'ordine, gettando così l'isola nel caos. Il deserto da lui dominato attende anche oggi che qualcuno lo riconquisti. Qualcuno come te. Raggiungi la torre delle dune della siccità e liberala dalla sua corruzione."
+    "description": "Hai sconfitto Axel Travers e ottenuto la Sfera chiave dell'Accidia. Il tuo prossimo obiettivo è la Torre della Milizia volontaria."
   },
   "Main_DefeatDungeonBoss": {
     "localized_name": "Il Pal sigillato",
@@ -61,31 +89,51 @@
   },
   "Main_DefeatForestBoss": {
     "localized_name": "I Pal sono sacri",
-    "description": "Lily Everhart predica la coesistenza coi Pal, che ama d'un amore anomalo. Questo amore, però, l'ha portata presto a considerare tutti gli umani come peccatori. Se vuoi procedere per la tua strada, dovrai porre un freno al suo estremismo. Raggiungi la torre della montagna dei ghiacci eterni e affrontala direttamente."
+    "description": "Hai sconfitto Zoe Rayne e ottenuto la Sfera chiave dell'Invidia. Il tuo prossimo obiettivo è la Torre dell'Ente per la tutela dei Pal."
   },
   "Main_DefeatGrassBoss": {
     "localized_name": "La ragazza e la torre",
     "description": "È giunto il momento di affrontare la prima delle torri dell'isola. A sua difesa c'è una ragazza di nome Zoe Rayne. Totalmente ignara del suo vero destino, anche oggi se ne sta nella torre, obbedendo al compito che le è stato assegnato. Cosa si troverà oltre quella torre? Starà a te cercare la risposta."
   },
+  "Main_DefeatKingWhale": {
+    "localized_name": "Panthalus",
+    "description": "Per entrare nell'albero del mondo, avrai bisogno dell'aiuto di Panthalus. Trova Panthalus e mostrale la tua forza."
+  },
   "Main_DefeatSakurajimaBoss": {
     "localized_name": "Stanotte il sakè è buonissimo",
-    "description": "Saya Kurosaki è la guardiana della torre dell'isola dei ciliegi. Veglia in silenzio su un tempo immobile, sotto una luna immutabile. Di recente ha incontrato un Pal che chiama |lama della luna crescente|, e ha finalmente deciso di rompere il suo silenzio. Raggiungi la torre del clan dei fiori di luna sull'isola dei ciliegi e metti alla prova la sua determinazione."
+    "description": "Hai sconfitto Victor Ashford e ottenuto la Sfera chiave della Gola. Il tuo prossimo obiettivo è la Torre del clan dei fiori di luna."
+  },
+  "Main_DefeatSkyIslandBoss": {
+    "localized_name": "Un'eternità in attesa della primavera",
+    "description": "Hai sconfitto Bjorn Seligson e ottenuto la Sfera chiave dell'Ira. Il tuo prossimo obiettivo è la Torre del giuramento."
   },
   "Main_DefeatSnowyMountainBoss": {
     "localized_name": "Gli esperimenti interspecie sui Pal",
-    "description": "In una certa struttura sono state rinvenute tracce di esperimenti estremamente pericolosi. Da ciò che si può evincere, il loro scopo era creare nuove forme di vita e potenziare gli esseri viventi. Nella documentazione, ricorre spesso il nome di Victor Ashford. Sembra che abbia trovato la risposta che cercava. Dovrai osservare con i tuoi occhi ciò che è accaduto in quel luogo. Scala la torre sulla cima del monte dello spirito argento e metti fine ai suoi pericolosi esperimenti."
+    "description": "Hai sconfitto Marcus Dryden e ottenuto la Sfera chiave dell'Avarizia. Il tuo prossimo obiettivo è la Torre della Squadra per la ricerca genetica."
   },
   "Main_DefeatVikingBoss": {
     "localized_name": "La persona giusta",
-    "description": "In un lontano passato, le terre della rovina furono colpite da una calamità. A quel tempo Bjorn Seligson prese la guida del suo popolo, e ancora oggi difende la torre. Parla sempre dell'arrivo di |quel momento|, ma non è chiaro cosa stia aspettando. L'unica cosa certa è che questa terra potrà venire cambiata dall'arrivo della persona giusta. Raggiungi la torre nelle profondità delle terre della rovina, e aiuta il suo popolo. Solo tu puoi farti carico del peso della calamità."
+    "description": "Hai sconfitto Saya Kurosaki e ottenuto la Sfera chiave della Lussuria. Il tuo prossimo obiettivo è la Torre della rovina."
   },
   "Main_DefeatVolcanoBoss": {
     "localized_name": "L'ossessione per la vittoria perfetta",
-    "description": "Un tempo c'era un uomo ossessionato dalla vittoria perfetta. Non aveva una ragione per combattere, se non la ricerca di qualcuno più forte di lui. Non desiderava altro. Axel Traverse si erge a difesa della torre del fuoco perenne. Sta aspettando la tua sfida nella torre del cratere dei monti fiammeggianti."
+    "description": "Hai sconfitto Lily Everhart e ottenuto la Sfera chiave della Superbia. Il tuo prossimo obiettivo è la Torre della Congrega del fuoco perenne."
   },
   "Main_DefeatWildBoss": {
     "localized_name": "Il primo scontro con un boss",
     "description": "Alcune zone dell'isola di Palpagos sono il territorio di Pal potentissimi. A volte si rivelano un pericolo, ma sconfiggendoli puoi ottenere tanti punti esperienza, mentre catturandoli ti guadagnerai potenti alleati. La scelta spetta a te. Sembra che su quest'isola ci sia un Pal chiamato {targetpal}. Trova {targetpal} e scegli se sconfiggerlo o catturarlo."
+  },
+  "Main_DefeatWorldTreeDragon": {
+    "localized_name": "Risveglio",
+    "description": "Il drago bianco della Calamità e la sua signora si stanno risvegliando da un lungo sonno. Non c'è modo di scambiare parole con loro. È giunto il momento di mettere fine a tutto."
+  },
+  "Main_DefeatWorldTreeMiddleBoss": {
+    "localized_name": "Strada che conduce all'abisso",
+    "description": "Hai ascoltato la registrazione lasciata da un guardiano nella parte più profonda dell'albero del mondo. Cerca indizi sfruttando le coordinate che ti ha lasciato."
+  },
+  "Main_EatFood": {
+    "localized_name": "Sazia la fame",
+    "description": "Procacciarsi il cibo: Per condurre attività sul lungo periodo, sono indispensabili scorte costanti di cibo. Per fortuna, le Bacche rosse che crescono un po' dappertutto possono essere consumate crude. Anche alcuni Pal sono commestibili. Mangiare i Pal è crudele, ma a volte è necessario per sopravvivere."
   },
   "Main_EquipClothArmor": {
     "localized_name": "Proteggiti",
@@ -101,15 +149,59 @@
   },
   "Main_OpenSurvivalGuide": {
     "localized_name": "Nozioni per sopravvivere",
-    "description": "Sino a oggi, tanti pionieri e avventurieri hanno perso la vita sfidando quest'isola. Trovi i resoconti di ciò che hanno imparato nella lotta alla sopravvivenza nel tuo dispositivo. Se vuoi sopravvivere un po' più a lungo, innanzitutto apri <keyGuideIcon id=|UIEscape|/> dal menu opzioni e leggi la sezione Manuale di sopravvivenza."
+    "description": "Premessa: Il manuale di sopravvivenza raccoglie le esperienze su Palpagos di noi ricognitori. Ciò che avviene su quest'isola va al di là del nostro senso comune. Consulta questa guida quando ti senti in difficoltà."
   },
   "Main_PickupWood": {
     "localized_name": "La prima raccolta di risorse",
     "description": "Tra tutte le risorse che esistono in natura, il Legno è fondamentale come base per vari strumenti. Procurati del Legno cogliendo rami da terra o attaccando un albero vicino."
   },
+  "Main_PrepareEquipment": {
+    "localized_name": "Vestiti per l'avventura",
+    "description": "Produzione degli equipaggiamenti: Per prima cosa, porta la lana ottenuta da SheepBall al banco da lavoro per realizzare Stoffa, con cui confezionare Abiti di stoffa. Poi sfrutta le capacità di autoriparazione del Paldium per costruirti uno Scudo normale. Infine, costruisciti un Paracadute normale per esplorare i territori più elevati. Con questi strumenti, potrai condurre l'esplorazione in modo più efficiente."
+  },
+  "Main_RayneSyndicate": {
+    "localized_name": "Sindacato di Rayne",
+    "description": "Vedo che hai ultimato i preparativi. Ora, vai a incontrare Zoe alla torre del Sindacato di Rayne!"
+  },
+  "Main_ReachWorldTree": {
+    "localized_name": "Verso l'albero del mondo",
+    "description": "Hai dimostrato la tua forza a Panthalus e ottenuto il suo aiuto. Panthalus è la chiave per l'albero del mondo. Raggiungila e trova un modo per entrare."
+  },
+  "Main_ReturnSmallVillage": {
+    "localized_name": "Sfera chiave",
+    "description": "Hai sconfitto una ragazza, che supponi essere Zoe, e hai ottenuto uno strano oggetto simile a una sfera Pal. Torna all'insediamento e parla col capovillaggio."
+  },
+  "Main_SmallVillage": {
+    "localized_name": "Il piccolo insediamento",
+    "description": "Hai completato tutte le missioni sul dispositivo e fatte tue quelle nozioni. Stando a quanto ti ha detto la ricognitrice sopravvissuta, c'è un insediamento nei pressi della torre del Sindacato. Potrebbe essere una buona idea trovarlo e parlare col capovillaggio."
+  },
+  "Main_StatusUp": {
+    "localized_name": "Potenziamento statistiche",
+    "description": "Potenziare le statistiche: Accumulare esperienza ti permetterà di diventare più forte e superare le avversità. Quando sali di livello, apri l'inventario e potenzia una statistica a tua scelta. Così potrai esplorare in modo ancora più efficiente."
+  },
+  "Main_TalkGrassBoss": {
+    "localized_name": "Zoe Rayne",
+    "description": "Il capovillaggio ti ha consigliato di chiedere più informazioni a Zoe. Torna alla torre del Sindacato di Rayne."
+  },
+  "Main_TalkSkyBoss": {
+    "localized_name": "Sapiente celeste",
+    "description": "Hai sconfitto Auri. Sembra che le siano ancora rimaste un po' di forze. Ha qualcosa di diverso dai leader delle altre torri. Forse dovresti provare a parlarle di nuovo."
+  },
+  "Main_TalkSkyBossAgain": {
+    "localized_name": "Calamità",
+    "description": "Auri sembra ansiosa di darti informazioni sull'albero del mondo. Ha detto che sarà una storia molto lunga. Quando hai tempo, torna da lei."
+  },
+  "Main_TalkWorldTreeNPC": {
+    "localized_name": "Peccato",
+    "description": "Finalmente hai messo piede nell'albero del mondo. L'atmosfera all'interno è quantomai misteriosa, e avverti una presenza oscura. Guardandoti intorno, noti una figura distante."
+  },
+  "Main_TutorialStart": {
+    "localized_name": "Primo incontro sull'isola",
+    "description": "Ti svegli su una spiaggia a te ignota, con la mente annebbiata. Dove ti trovi, e soprattutto, chi sei? Mentre cerchi indizi, noti una figura poco distante."
+  },
   "Main_UnlockFastTravel": {
     "localized_name": "Attiva la statua del grande volatile",
-    "description": "In questa terra esistono le cosiddette statue del grande volatile, la cui origine è tramandata negli antichi testi. Se riesci ad attivarle, rendono molto comodi gli spostamenti. Innanzitutto devi toccare una statua del grande volatile vicina, per attivarla e creare un punto di partenza. Forse, un giorno, potresti voler raggiungere persino quella torre distante."
+    "description": "A tutti i membri del corpo di spedizione! L'isola di Palpagos cela ancora tanti misteri. In vari punti sono presenti statue che raffigurano forme di vita simili a uccelli. Sembra che le statue siano collegate da una tecnologia misteriosa, che permette di spostarsi in un istante dall'una all'altra. Usate quelle statue come avamposti per portare avanti l'esplorazione dell'isola."
   },
   "Main_UnlockPalBox": {
     "localized_name": "Box per Pal",
@@ -123,9 +215,17 @@
     "localized_name": "Misure di sicurezza",
     "description": "Su questa isola esistono tantissimi pericoli. Uno di questi sono i precipizi. Mettere un piede in fallo potrebbe causare ferite o peggio. Sblocca la tecnologia Paracadute normale e creala al Banco da lavoro primitivo. Una volta fatto, potrai planare giù da ogni elevazione senza correre rischi."
   },
+  "Main_WorkPal": {
+    "localized_name": "Metti al lavoro i Pal",
+    "description": "Usare i Pal come forza lavoro: I Pal catturati con una Sfera Pal possono essere gestiti e trasferiti con efficienza dal Box per Pal. Innanzitutto apri la schermata Tecnologia dal menu per costruirne uno e posizionarlo. Potrai depositare i Pal che hai in squadra nel box, o evocarne altri, che si materializzeranno nei paraggi. I Pal così richiamati si manterranno nell'area intorno al box, rendendola di fatto il territorio della tua base. Scegli la posizione con attenzione. Ogni Pal evocato dal box per Pal si troverà un'attività da svolgere, in base alle proprie predisposizioni. Cattura Pal di vario genere per incrementare l'efficienza della base."
+  },
   "Main_WorkerPal": {
     "localized_name": "Metti al lavoro i Pal",
     "description": "I Pal sono compagni che mandano avanti la base insieme a te. Accedi al Box per Pal e assegna un Pal alla base dal menu di gestione."
+  },
+  "Main_WorldTreeAbyss": {
+    "localized_name": "La calamità sigillata",
+    "description": "Hai appreso cosa sta accadendo nell'albero del mondo e, soprattutto, l'identità della Calamità che attende nelle sue profondità. Il momento dello scontro finale si avvicina."
   },
   "Sub_Angler01": {
     "localized_name": "Una gran giornata di pesca",
@@ -151,6 +251,26 @@
     "localized_name": "Il piano per la proliferazione di Splatterina",
     "description": "Beh, hai già trovato qualche Splatterina? 10 andranno bene per iniziare. Conto su di te!"
   },
+  "Sub_DeliveryQuartz": {
+    "localized_name": "Trova il Quarzo puro",
+    "description": "Consegna 10 unità di Quarzo puro a chi ti ha dato la missione."
+  },
+  "Sub_DeliveryRainbowCrystal": {
+    "localized_name": "Trova il Exoquarzo",
+    "description": "Consegna 10 unità di Exoquarzo a chi ti ha dato la missione."
+  },
+  "Sub_DeliverySkyIslandOre": {
+    "localized_name": "Trova la Soralite",
+    "description": "Consegna 10 unità di Soralite a chi ti ha dato la missione."
+  },
+  "Sub_DeliverySulfur": {
+    "localized_name": "Trova lo Zolfo",
+    "description": "Consegna 10 unità di Zolfo a chi ti ha dato la missione."
+  },
+  "Sub_DeliveryWood_Fine": {
+    "localized_name": "Trova il Legno duro",
+    "description": "Consegna 10 unità di Legno duro a chi ti ha dato la missione."
+  },
   "Sub_Farmer01": {
     "localized_name": "La benedizione dei Pal",
     "description": "Se hai un Pal specializzato nell'irrigazione, potresti darmelo? Certo, c'è l'acqua del fiume, ma quella spruzzata dai Pal ha dentro qualcosa di speciale che fa crescere le verdure più rigogliose. Ti prego, dammi una mano!"
@@ -171,6 +291,10 @@
     "localized_name": "Richiesta del buongustaio arrogante",
     "description": "Io ricopro l'incarico di presidente in carica del comitato di buongustai di Palpagos. In quanto celebre gourmet, sono disposto a valutare la tua cucina. Anche se non penso che un'anima errante come te sia in grado di appagare il mio palato."
   },
+  "Sub_HowSurviveWorldTree": {
+    "localized_name": "Tecnica per sopravvivere nell'albero del mondo",
+    "description": "Trova 1 unità di Legno mistico e 1 di Paloxite, e consegnale a chi ti ha dato la missione."
+  },
   "Sub_Kigurumi01": {
     "localized_name": "Diventa anche tu Depresso!",
     "description": "Aspetta! Non sono un Pal! Non lanciarmi sfere per Pal addosso! Ah, ma sei tu! Ti avevo promesso un costume come questo! Ahah! Hai trovato i materiali necessari? Ricorda: 20 rotoli di stoffa di alta qualità e 100 ghiandole velenifere! Servono un sacco di ghiandole velenifere per rendere al meglio la bellezza del manto di Depresso."
@@ -178,6 +302,18 @@
   "Sub_Kigurumi01_Replay": {
     "localized_name": "Diventa anche tu Depresso!",
     "description": "Aspetta! Non sono un Pal! Non lanciarmi sfere per Pal addosso! Ah, ma sei tu! Ti avevo promesso un costume come questo! Ahah! Hai trovato i materiali necessari? Ricorda: 20 rotoli di stoffa di alta qualità e 100 ghiandole velenifere! Servono un sacco di ghiandole velenifere per rendere al meglio la bellezza del manto di Depresso."
+  },
+  "Sub_LoneWolf01": {
+    "localized_name": "Un lupo nero solitario",
+    "description": "Hai trovato un Kitsun Noct coperto di ferite."
+  },
+  "Sub_LoneWolf02": {
+    "localized_name": "Ricordi di un vagabondo",
+    "description": "Cerca indizi che ti aiutino a trovare il padrone di Kitsun Noct."
+  },
+  "Sub_LoneWolf03": {
+    "localized_name": "Katana senza fodero",
+    "description": "Hai accettato di occuparti dei Pal violenti per conto del villaggio."
   },
   "Sub_Nomad01": {
     "localized_name": "Per ogni salita, una discesa",
@@ -189,7 +325,7 @@
   },
   "Sub_Nomad03": {
     "localized_name": "Cercasi dungeon",
-    "description": "Hai trovato Leezpunk e Leezpunk Ignis? In cambio, ti darò un oggetto che mi piace tanto!"
+    "description": "Hai trovato Tombat? In cambio, ti darò un oggetto che mi piace tanto!"
   },
   "Sub_Nomad04": {
     "localized_name": "Viaggio di relax",
@@ -248,16 +384,32 @@
     "description": "Si trovano in questa direzione. Sono davvero imperdonabili. Dagli una bella lezione!"
   },
   "Sub_Ranger03": {
-    "localized_name": "Tarantriss titanico",
-    "description": "Quel Tarantriss titanico è davvero pericoloso. Se intendi sfidarlo, preparati come si deve."
+    "localized_name": "Faleris Aqua enorme",
+    "description": "Quel Faleris Aqua titanico è davvero pericoloso. Se intendi sfidarlo, preparati come si deve."
   },
   "Sub_Ranger04": {
     "localized_name": "Nettare tra i fiori",
     "description": "Hai trovato dei Beegarde o degli Elizabee? Me ne bastano tre!"
   },
+  "Sub_RookieExpeditionTeam01": {
+    "localized_name": "Corpo di spedizione novizio",
+    "description": "Hai incontrato per caso tre persone che sono state aggredite dai Pal. Dai loro una mano."
+  },
+  "Sub_RookieExpeditionTeam02": {
+    "localized_name": "Germogli",
+    "description": "Hai incontrato di nuovo i membri del corpo di spedizione che hai salvato in precedenza. Non c'è traccia di Carla, però..."
+  },
+  "Sub_RookieExpeditionTeam03": {
+    "localized_name": "Crescita",
+    "description": "Hai incontrato di nuovo Fia. Sembra che abbia cercato di diventare più forte."
+  },
+  "Sub_RookieExpeditionTeam04": {
+    "localized_name": "Fiore sterile",
+    "description": "Hai incontrato di nuovo Fia. Ha il vuoto negli occhi e ti si lancia contro in un attacco. Dovrai combattere, se vuoi sopravvivere."
+  },
   "Sub_Scholar01": {
     "localized_name": "Sveliamo le leggende!",
-    "description": "Avanti, aiutami a trovare un Pal delle leggende! I monti fiammeggianti a ovest, il monte dello spirito argento a nord, le dune della siccità a est... Sembra che si trovi almeno un Pal delle leggende in ognuno di questi luoghi, come anche ai confini di quella che chiamano |terra della rovina|. Se ti inerpichi sulle grandi zone rocciose, potrai guardarti intorno senza ostacoli. Conto su di te!"
+    "description": "Avanti, aiutami a trovare un Pal delle leggende! Il monte dello spirito argenteo a nord, le dune della siccità a est... Sembra che si trovi almeno un Pal delle leggende in ognuno di questi luoghi, come anche ai confini di quella che chiamano |capitale del firmamento|. Se ti inerpichi sulle grandi zone rocciose, potrai guardarti intorno senza ostacoli. Conto su di te!"
   },
   "Sub_Scholar02": {
     "localized_name": "In cerca di motivazione",
@@ -271,9 +423,29 @@
     "localized_name": "Alla ricerca di minerali",
     "description": "Allora? Hai trovato le cromiti che ti ho chiesto? Un metal detector sarebbe sicuramente utile per trovare quelle sepolte in giro per l'isola."
   },
+  "Sub_StrongOldMan01": {
+    "localized_name": "L'avventuriero prigioniero",
+    "description": "Salvando dalla gabbia quello strano personaggio che sembrava un locale, hai finito per attirare i bracconieri. Innanzitutto, pensa a respingerli e a salvare la pelle."
+  },
+  "Sub_StrongOldMan02": {
+    "localized_name": "La taglia",
+    "description": "Harold, l'avventuriero che hai incontrato in precedenza, si trova di fronte a una pericolosa minaccia. Gioisce all'idea di poter combattere al tuo fianco. Collabora con lui per riscuotere la taglia!"
+  },
+  "Sub_StrongOldMan03": {
+    "localized_name": "Passaggio di consegna",
+    "description": "Hai incontrato nuovamente Harold, ma sembra meno allegro del solito. Ha accettato la missione di abbattere un Pal fuori controllo. Harold, scuro in volto, ti fa una richiesta. |Potresti occupartene tu?| Quando accetti la sua richiesta, Harold appare visibilmente sollevato. Eppure, allo stesso tempo, un'ombra ancora più scura cala sul suo capo reclinato."
+  },
+  "Sub_StrongOldMan04": {
+    "localized_name": "Il passato",
+    "description": "Harold attende ai piedi dell'albero del mondo, e sembra avere qualcosa da confessarti. Che voglia sgravarsi di un peccato passato? O forse vuole che resti traccia della sua storia nei ricordi di qualcun altro? Sul suo profilo riesci a leggere solo una ferrea determinazione."
+  },
+  "Sub_StrongOldMan05": {
+    "localized_name": "L'ultima battaglia del cavaliere",
+    "description": "Fai da testimone della loro fine."
+  },
   "Sub_Zoe01": {
     "localized_name": "Non montarti la testa solo perché hai vinto",
-    "description": "Allora, hai preso un Grizzbolt? Nella prima riserva ci sono un sacco di Pal forti, non ce la farai mai. Datti da fare, se vuoi conquistarti il mio rispetto."
+    "description": "Allora, hai preso un esemplare di Grizzbolt? Nella prima riserva ci sono un sacco di Pal forti, non ce la farai mai. Datti da fare, se vuoi conquistarti il mio rispetto."
   },
   "Sub_Zoe02": {
     "localized_name": "Non mi fido mica di te!",
