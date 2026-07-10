@@ -3,9 +3,133 @@
     "localized_name": "Altar de invocación",
     "description": "Si ofreces la tabla con la imagen de un Pal, puedes invocar a un poderoso Pal en la base. Asegúrate de estar bien preparado para la batalla."
   },
+  "AncientBlastFurnace": {
+    "localized_name": "Horno de la civilización antigua",
+    "description": "Horno especial basado en tecnología de la civilización antigua que puede refinar todo tipo de lingotes. Refina al derretir materiales con el calor del fuego y enfriarlos de golpe con el poder del hielo. Para funcionar, necesita Pals con aptitud para encendido de fuego y enfriar."
+  },
+  "AncientCookingStove": {
+    "localized_name": "Cocina de la civilización antigua",
+    "description": "Cocina de la civilización antigua capaz de crear desde recetas conocidas hasta nuevas. Acumula calor con fuego y se finaliza manualmente. Requiere Pals con alta aptitud de encendido de fuego y trabajo manual."
+  },
+  "AncientElectricGenerator": {
+    "localized_name": "Generador de la civilización antigua",
+    "description": "Generador eléctrico de ultra alta eficiencia que restaura una tecnología antigua perdida. Puede producir una enorme cantidad de electricidad, pero durante su funcionamiento existe el riesgo de sobrecalentamiento. Para operarlo se requieren Pals con alta aptitud para producción eléctrica, además de Pals con aptitud para riego."
+  },
+  "AncientFarmBlock": {
+    "localized_name": "Cultivador de la civilización antigua",
+    "description": "Cultivador de la civilización antigua que, gracias al poder del Árbol del Mundo, puede hacer crecer todas las plantas de la Isla Palápagos. Es mucho más pequeño que una plantación de bayas y puede colocarse incluso en interiores, aunque el proceso de cultivo sigue siendo el mismo de siempre. Para funcionar, requiere Pals con alta aptitud en siembra, riego y recolección."
+  },
+  "AncientMultiProduct": {
+    "localized_name": "Generador de materiales de la civilización antigua",
+    "description": "Generador de la civilización antigua que utiliza el poder del Árbol del Mundo para producir toda clase de madera y minerales. Puedes elegir el recurso que quieras obtener, aunque la eficiencia de extracción en sí no cambia respecto a las instalaciones convencionales. Debido a su compleja estructura, solo se puede asignar 1 Pal."
+  },
+  "AncientRelicRecycler": {
+    "localized_name": "Convertidor de Reliquias de la la civilización antigua",
+    "description": "Dispositivo antiguo de transmutación de materia que reutiliza la tecnología de una civilización perdida. Descifra la tecnología remanente en la “Reliquia de la Civilización Antigua” y la sublima hacia una nueva forma. Es una instalación extremadamente especial, diseñada para aprovechar los relictos sin desperdiciar nada."
+  },
+  "AncientWorkBench": {
+    "localized_name": "Mesa de trabajo de la civilización antigua",
+    "description": "Instalación compuesta exclusiva para Pals donde puede fabricarse cualquier objeto en un solo lugar. El jugador no puede trabajar en ella, y la velocidad de fabricación no difiere de la del equipamiento habitual. Como es una instalación avanzada, requiere Pals con alta aptitud de trabajo manual y producción de medicinas para funcionar."
+  },
+  "Ancient_AirConditioner": {
+    "localized_name": "Climatizador de la civilización antigua",
+    "description": null
+  },
+  "Ancient_Clinic": {
+    "localized_name": "Clínica de la civilización antigua",
+    "description": "Instalación médica avanzada de la civilización antigua con tecnología de alto nivel. Supera ampliamente a una clínica común. Si le asignas un Pal de fabricación de medicinas, permite mantener el máximo nivel de higiene incluso en condiciones extremas."
+  },
+  "Ancient_DiagonalWall": {
+    "localized_name": "Pared diagonal de la civilización antigua",
+    "description": "Pared diagonal construida sobre una base triangular para evitar intrusos. Reproduce el estilo arquitectónico de la civilización antigua."
+  },
+  "Ancient_DoorWall": {
+    "localized_name": "Pared con puerta de la civilización antigua",
+    "description": "Puerta construida sobre una base y que funciona como entrada. Reproduce el estilo arquitectónico de la civilización antigua."
+  },
+  "Ancient_Fence": {
+    "localized_name": "Cerca de la civilización antigua",
+    "description": "Valla para construir sobre bases y tejados y evitar caídas. Reproduce el estilo arquitectónico de la civilización antigua."
+  },
+  "Ancient_MedicalPalBed": {
+    "localized_name": "Cama para Pals de la civilización antigua",
+    "description": "Cama Pal de máxima calidad, equipada con una suave tela sobre una cápsula ancestral capaz de sanar la vida. Posee una de las mayores tasas de recuperación de COR entre todas las camas Pal y elimina rápidamente la fatiga. Tiene el mismo tamaño que una cama Pal grande, por lo que incluso los Pals grandes pueden descansar cómodamente."
+  },
+  "Ancient_Pillars": {
+    "localized_name": "Columna de la civilización antigua",
+    "description": "Pilar para sostener estructuras. Reproduce el estilo arquitectónico de la civilización antigua."
+  },
+  "Ancient_PyramidRoof": {
+    "localized_name": "Techo piramidal de la civilización antigua",
+    "description": "Techo cónico construido sobre muros para proteger de la lluvia y el viento. Reproduce el estilo arquitectónico de la civilización antigua."
+  },
+  "Ancient_SlantedRoof": {
+    "localized_name": "Techo inclinado de la civilización antigua",
+    "description": "Techo inclinado construido sobre paredes y proteger de la intemperie. Reproduce el estilo arquitectónico de la civilización antigua."
+  },
+  "Ancient_SlopedRoofCorner": {
+    "localized_name": "Techo inclinado triangular de la civilización antigua",
+    "description": "Techo inclinado triangular construida sobre paredes diagonales para protegerse de la lluvia y el viento. Reproduce el estilo arquitectónico de la civilización antigua."
+  },
+  "Ancient_SlopedRoofCornerReverse": {
+    "localized_name": "Techo triangular e inclinado de la civilización antigua (invertido)",
+    "description": "Techo inclinado triangular (invertido) construida sobre paredes diagonales para protegerse de la lluvia y el viento. Reproduce el estilo arquitectónico de la civilización antigua."
+  },
+  "Ancient_Spa": {
+    "localized_name": "Baños termales de la civilización antigua",
+    "description": "Aguas termales de tecnología ancestral llenas de una solución especial infusionada con componentes de paldium. Ofrecen una de las mejores recuperaciones de COR entre todas las aguas termales y además restauran salud. Mantienen el mismo tamaño que unas aguas termales normales y pueden sanar a los Pals heridos al máximo."
+  },
+  "Ancient_TriangleFoundation": {
+    "localized_name": "Base triangular de la civilización antigua",
+    "description": "Base triangular para construir paredes o instalaciones encima. Reproduce el estilo arquitectónico de la civilización antigua."
+  },
+  "Ancient_TriangleRoof": {
+    "localized_name": "Techo triangular de la civilización antigua",
+    "description": "Techo triangular construido sobre muros para proteger de la lluvia y el viento. Reproduce el estilo arquitectónico de la civilización antigua."
+  },
+  "Ancient_TriangleStairsCorner": {
+    "localized_name": "Techo de esquina de la civilización antigua",
+    "description": "Techo en esquina construido sobre muros para proteger de la lluvia y el viento. Reproduce el estilo arquitectónico de la civilización antigua."
+  },
+  "Ancient_TriangleWall": {
+    "localized_name": "Pared triangular de la civilización antigua",
+    "description": "Pared triangular para construir sobre una base. Reproduce el estilo arquitectónico de la civilización antigua."
+  },
+  "Ancient_TriangleWallReverse": {
+    "localized_name": "Pared triangular invertida de la civilización antigua",
+    "description": "Pared triangular invertida para construir sobre una base. Reproduce el estilo arquitectónico de la civilización antigua."
+  },
+  "Ancient_WallGate": {
+    "localized_name": "Entrada para Pals de la civilización antigua",
+    "description": "Puerta para Pals construida sobre una base que funciona como entrada y salida. Reproduce el estilo arquitectónico de la civilización antigua."
+  },
+  "Ancient_WindowWall": {
+    "localized_name": "Pared con ventana de la civilización antigua",
+    "description": "Pared con ventana construida sobre una base para evitar intrusos. Reproduce el estilo arquitectónico de la civilización antigua."
+  },
+  "Ancient_foundation": {
+    "localized_name": "Base de la civilización antigua",
+    "description": "Base para construir paredes o instalaciones encima. Reproduce el estilo arquitectónico de la civilización antigua."
+  },
+  "Ancient_roof": {
+    "localized_name": "Techo de la civilización antigua",
+    "description": "Techo construido sobre paredes para protegerse de la lluvia y el viento. Reproduce el estilo arquitectónico de la civilización antigua."
+  },
+  "Ancient_stair": {
+    "localized_name": "Escalera de la civilización antigua",
+    "description": "Escalera que se coloca bajo una base o techos para poder subir. Reproduce el estilo arquitectónico de la civilización antigua."
+  },
+  "Ancient_wall": {
+    "localized_name": "Pared de la civilización antigua",
+    "description": "Pared construida sobre una base para evitar intrusos. Reproduce el estilo arquitectónico de la civilización antigua."
+  },
   "Andon": {
     "localized_name": "Farol japonés",
     "description": "Lámpara de papel decorativa. Ideal para construcciones con estilo japonés."
+  },
+  "ArcadeVideoGame": {
+    "localized_name": "Máquina de arcade",
+    "description": "Máquina de arcade decorativa. Está averiada y no se puede usar."
   },
   "Barrel01_Iron": {
     "localized_name": "Barril rojo",
@@ -34,6 +158,14 @@
   "BaseCampWorkHard": {
     "localized_name": "Puesto de vigilancia",
     "description": "Permite gestionar el modo de trabajo de los Pals en la base y habilitar o prohibir tareas individuales."
+  },
+  "BaseCampWorkHard02": {
+    "localized_name": "Puesto de vigilancia de lujo",
+    "description": "Puesto de vigilancia mejorado con materiales y estructura refinados. Además de permitir dar instrucciones de tareas como siempre, reduce la velocidad a la que disminuye la COR de los Pals en la base. El entorno laboral mejora un poco y los Pals tendrán menos descontento."
+  },
+  "BaseCampWorkHard03": {
+    "localized_name": "Puesto de vigilancia de la civilización antigua",
+    "description": "Puesto de vigilancia creado con tecnología antigua e incrustado con Paldium rojo. Mientras da órdenes a toda la base mediante una interfaz holográfica, también reduce la caída de COR de los Pals. Una longitud de onda especial envuelve la base y mantiene sereno el corazón de los Pals incluso en entornos de trabajo extremos."
   },
   "BaseCampWorkerExtraStation": {
     "localized_name": "Terminal de control de la Caja Pal",
@@ -81,7 +213,7 @@
   },
   "Box01_Stone": {
     "localized_name": "Caja de mimbre antigua",
-    "description": "Caja con mimbre antigua decorativa."
+    "description": "Caja antigua de mimbre decorativa."
   },
   "Box02_Iron": {
     "localized_name": "Contenedor con lona",
@@ -125,7 +257,7 @@
   },
   "Chair01_Iron": {
     "localized_name": "Silla de cuero",
-    "description": "Silla de cuero decorativa."
+    "description": "Silla decorativa tapizada en cuero."
   },
   "Chair01_Pal": {
     "localized_name": "Silla rana",
@@ -150,6 +282,10 @@
   "CharacterRankUp": {
     "localized_name": "Cápsula de concentrado Pal",
     "description": "Instalación que permite subir de rango a un Pal. Concentra el extracto de un Pal e inyéctalo en otro del mismo tipo para superar hacerlo más fuerte."
+  },
+  "Clinic": {
+    "localized_name": "Clínica",
+    "description": "Instalación médica básica para gestionar la salud de los Pals en la base. Asignando Pals con aptitud de fabricación de medicinas, reduce la pérdida de COR y previene enfermedades y heridas. Tiene un límite en el nivel de higiene que puede mantener."
   },
   "Clock01_Stone": {
     "localized_name": "Reloj de pie antiguo",
@@ -223,21 +359,33 @@
     "localized_name": "Espantapájaros de entrenamiento",
     "description": "Espantapájaros de entrenamiento con forma de Pengullet. Solo puede colocarse en un espacio amplio."
   },
+  "DarkIsland_Banner": {
+    "localized_name": "Estandarte vertical del pueblo de Tenraku",
+    "description": "Estandarte vertical decorativo del pueblo de Tenraku."
+  },
+  "DarkIsland_Flag": {
+    "localized_name": "Bandera del pueblo de Tenraku",
+    "description": "Bandera decorativa del pueblo de Tenraku."
+  },
   "Decal_PalSticker_PinkCat": {
     "localized_name": "-",
     "description": "-"
   },
   "DefenseBowGun": {
     "localized_name": "Ballesta fija",
-    "description": "Instalación defensiva donde puedes asignar Pals para el combate. Se requiere Flecha para su uso. Si colocas municiones en un cofre, los Pals asignados las recargarán automáticamente."
+    "description": "Una instalación defensiva donde se colocan Pals para prepararse para el combate. Al asignar un Pal con la aptitud |trabajo manual|, usará la ballesta para proteger la base."
   },
   "DefenseMachinegun": {
     "localized_name": "Ametralladora fija",
-    "description": "Instalación defensiva donde puedes asignar Pals para el combate. Se requiere Balas de rifle para su uso. Si colocas municiones en un cofre, los Pals asignados las recargarán automáticamente."
+    "description": "Una instalación defensiva donde se colocan Pals para prepararse para el combate. Al asignar un Pal con la aptitud |trabajo manual|, usará la ametralladora para proteger la base."
+  },
+  "DefenseMachinegun_AutoTurret": {
+    "localized_name": "Torreta de la civilización antigua",
+    "description": "Torreta no tripulada de la civilización antigua, con tamaño y potencia de fuego comparables a los de un lanzacohetes. No necesita munición ni asignación de Pals; funciona únicamente con electricidad y realiza intercepciones de forma totalmente automática. Es extremadamente poderosa, pero también requiere una enorme cantidad de energía para operar."
   },
   "DefenseMissile": {
     "localized_name": "Lanzamisiles fijo",
-    "description": "Instalación defensiva donde puedes asignar Pals para el combate. Se requiere Balas de cohete para su uso. Si colocas municiones en un cofre, los Pals asignados las recargarán automáticamente."
+    "description": "Una instalación defensiva donde se colocan Pals para prepararse para el combate. Al asignar un Pal con la aptitud |trabajo manual|, usará el lanzamisiles para proteger la base."
   },
   "DefenseWait": {
     "localized_name": "Bolsa de arena",
@@ -325,7 +473,7 @@
   },
   "Factory_Money": {
     "localized_name": "Fábrica de monedas de oro",
-    "description": "Fábrica de Moneda de oro. El trabajo afecta la mente, disminuyendo la COR de los trabajadores. Requiere un Pal que realice trabajos manuales."
+    "description": "Fábrica de Moneda de oro. El trabajo afecta la mente, disminuyendo la COR de los trabajadores. Requiere un Pal que realice trabajos manuales. Ten cuidado si construyes esto, podrías ser objeto de una estricta intervención por parte de Los Vigilantes."
   },
   "FarmBlockV2_Berries": {
     "localized_name": "Plantación de bayas",
@@ -399,6 +547,130 @@
     "localized_name": "Escritorio japonés",
     "description": "Escritorio bajo decorativo. Ideal para construcciones con estilo japonés."
   },
+  "FurnitureBush01_Flower": {
+    "localized_name": "Arbusto florido decorativo A",
+    "description": "Modelo decorativo de arbusto con flores. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureBush01_Green": {
+    "localized_name": "Arbusto decorativo",
+    "description": "Modelo decorativo de arbusto. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureBush01_Snow": {
+    "localized_name": "Arbusto blanco decorativo",
+    "description": "Modelo decorativo de arbusto blanco. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureBush01_Tropical": {
+    "localized_name": "Arbusto tropical decorativo",
+    "description": "Modelo decorativo de arbusto tropical. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureBush01_Yellow": {
+    "localized_name": "Arbusto amarillento decorativo",
+    "description": "Modelo decorativo de arbusto amarillento. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureBush02_Flower": {
+    "localized_name": "Arbusto florido decorativo B",
+    "description": "Modelo decorativo de arbusto con flores. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureStone01": {
+    "localized_name": "Roca decorativa",
+    "description": "Modelo decorativo de roca. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureTree01_Bamboo": {
+    "localized_name": "Bambú decorativo A",
+    "description": "Modelo decorativo de bambú. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureTree01_Cherry": {
+    "localized_name": "Cerezo decorativo A",
+    "description": "Modelo decorativo de cerezo. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureTree01_Desert": {
+    "localized_name": "Árbol del desierto decorativo A",
+    "description": "Modelo decorativo de árbol del desierto. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureTree01_Green": {
+    "localized_name": "Árbol decorativo A",
+    "description": "Modelo decorativo de árbol. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureTree01_Red": {
+    "localized_name": "Árbol de otoño decorativo A",
+    "description": "Modelo decorativo de árbol otoñal. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureTree01_Snow": {
+    "localized_name": "Árbol nevado decorativo A",
+    "description": "Modelo decorativo de árbol nevado. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureTree01_Tropical": {
+    "localized_name": "Árbol tropical decorativo A",
+    "description": "Modelo decorativo de árbol tropical. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureTree01_Yellow": {
+    "localized_name": "Árbol amarillo decorativo A",
+    "description": "Modelo decorativo de árbol amarillento. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureTree02_Bamboo": {
+    "localized_name": "Bambú decorativo B",
+    "description": "Modelo decorativo de bambú. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureTree02_Cherry": {
+    "localized_name": "Cerezo decorativo B",
+    "description": "Modelo decorativo de cerezo. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureTree02_Desert": {
+    "localized_name": "Árbol del desierto decorativo B",
+    "description": "Modelo decorativo de árbol del desierto. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureTree02_Green": {
+    "localized_name": "Árbol decorativo B",
+    "description": "Modelo decorativo de árbol. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureTree02_Red": {
+    "localized_name": "Árbol de otoño decorativo B",
+    "description": "Modelo decorativo de árbol otoñal. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureTree02_Snow": {
+    "localized_name": "Árbol nevado decorativo B",
+    "description": "Modelo decorativo de árbol nevado. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureTree02_Tropical": {
+    "localized_name": "Árbol tropical decorativo B",
+    "description": "Modelo decorativo de árbol tropical. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureTree02_Yellow": {
+    "localized_name": "Árbol amarillo decorativo B",
+    "description": "Modelo decorativo de árbol amarillento. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureTree03_Bamboo": {
+    "localized_name": "Bambú decorativo C",
+    "description": "Modelo decorativo de bambú. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureTree03_Cherry": {
+    "localized_name": "Cerezo decorativo C",
+    "description": "Modelo decorativo de cerezo. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureTree03_Desert": {
+    "localized_name": "Árbol del desierto decorativo C",
+    "description": "Modelo decorativo de árbol del desierto. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureTree03_Green": {
+    "localized_name": "Árbol decorativo C",
+    "description": "Modelo decorativo de árbol. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureTree03_Red": {
+    "localized_name": "Árbol de otoño decorativo C",
+    "description": "Modelo decorativo de árbol otoñal. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureTree03_Snow": {
+    "localized_name": "Árbol nevado decorativo C",
+    "description": "Modelo decorativo de árbol nevado. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureTree03_Tropical": {
+    "localized_name": "Árbol tropical decorativo C",
+    "description": "Modelo decorativo de árbol tropical. No se pueden obtener materiales de esta construcción."
+  },
+  "FurnitureTree03_Yellow": {
+    "localized_name": "Árbol amarillo decorativo C",
+    "description": "Modelo decorativo de árbol amarillento. No se pueden obtener materiales de esta construcción."
+  },
   "GarbageBag_Iron": {
     "localized_name": "Bolsa de basura",
     "description": "Bolsa de basura decorativa."
@@ -425,7 +697,11 @@
   },
   "Glass_SlopedRoofCorner": {
     "localized_name": "Techo triangular e inclinado de vidrio",
-    "description": "Techo inclinado construido sobre muros para proteger de la lluvia y el viento. Al estar hecho de vidrio templado, es muy resistente."
+    "description": "Techo triangular inclinado construido sobre muros diagonales para protegerse de la lluvia y el viento. Al estar hecho de vidrio templado, es muy resistente."
+  },
+  "Glass_SlopedRoofCornerReverse": {
+    "localized_name": "Techo triangular e inclinado de vidrio (invertido)",
+    "description": "Techo triangular inclinado (invertido) construido sobre muros diagonales para protegerse de la lluvia y el viento. Al estar hecho de vidrio templado, es muy resistente."
   },
   "Glass_TriangleFoundation": {
     "localized_name": "Base triangular de vidrio",
@@ -523,6 +799,10 @@
     "localized_name": "Trituradora de congelación",
     "description": "Instalación que permite triturar Mineral de metal y convertirlo en otros materiales. Requiere suministro eléctrico y un Pal con habilidad de refrigeración, pero permite trabajar eficientemente."
   },
+  "IceHorseStatue": {
+    "localized_name": "Estatua de Frostallion",
+    "description": "Estatua decorativa de Frostallion."
+  },
   "Iron_DiagonalWall": {
     "localized_name": "Pared diagonal de metal",
     "description": "Pared diagonal construida sobre una base triangular para evitar intrusos. Al estar hecha de metal, es muy resistente."
@@ -537,7 +817,11 @@
   },
   "Iron_SlopedRoofCorner": {
     "localized_name": "Techo triangular e inclinado de metal",
-    "description": "Techo inclinado construido sobre muros para proteger de la lluvia y el viento. Al estar hecho de metal, es muy resistente."
+    "description": "Techo triangular inclinado construido sobre muros diagonales para protegerse de la lluvia y el viento. Al estar hecho de metal, es muy resistente."
+  },
+  "Iron_SlopedRoofCornerReverse": {
+    "localized_name": "Techo triangular e inclinado de metal (invertido)",
+    "description": "Techo triangular inclinado (invertido) construido sobre muros diagonales para protegerse de la lluvia y el viento. Al estar hecho de metal, es muy resistente."
   },
   "Iron_TriangleFoundation": {
     "localized_name": "Base triangular de metal",
@@ -629,7 +913,11 @@
   },
   "JapaneseStyle_SlopedRoofCorner": {
     "localized_name": "Techo triangular e inclinado de estilo japonés",
-    "description": "Techo inclinado construido sobre muros para proteger de la lluvia y el viento. Permite crear construcciones de estilo japonés con buen gusto."
+    "description": "Techo triangular inclinado construido sobre muros diagonales para protegerse de la lluvia y el viento. Permite crear construcciones de estilo japonés con buen gusto."
+  },
+  "JapaneseStyle_SlopedRoofCornerReverse": {
+    "localized_name": "Techo triangular e inclinado de estilo japonés (invertido)",
+    "description": "Techo triangular inclinado (invertido) construido sobre muros diagonales para protegerse de la lluvia y el viento. Permite crear construcciones de estilo japonés con buen gusto."
   },
   "JapaneseStyle_TriangleFoundation": {
     "localized_name": "Base triangular de estilo japonés",
@@ -682,6 +970,10 @@
   "JapaneseStyle_wall_01": {
     "localized_name": "Pared de estilo japonés",
     "description": "Muro construido sobre una base para evitar intrusos. Permite construir con un estilo japonés elegante."
+  },
+  "JetDragonStatue": {
+    "localized_name": "Estatua de Jetragon",
+    "description": "Estatua decorativa de Jetragon."
   },
   "Kakejiku": {
     "localized_name": "Pergamino colgante",
@@ -855,6 +1147,10 @@
     "localized_name": "Incubadora eléctrica grande",
     "description": "Dispositivo para incubar huevos de Pal. Requiere suministro eléctrico, pero permite incubar múltiples huevos al mismo tiempo a temperatura óptima."
   },
+  "MultiElectricHatchingPalEggWithBreed": {
+    "localized_name": "Mezclador de la civilización antigua",
+    "description": "Instalación de mezcla avanzada de la civilización antigua, recubierta con vidrio electrónico. Automatiza y acelera por completo tanto la producción como la incubación de huevos, y además aumenta la tasa de herencia de habilidades raras. Como los Pals se gestionan mediante control holográfico, no requiere un gran espacio de rancho."
+  },
   "MultiHatchingPalEgg": {
     "localized_name": "Incubadora grande",
     "description": "Un dispositivo para incubar huevos de Pals. Ajusta automáticamente la temperatura adecuada hasta cierto punto, y permite incubar varios huevos al mismo tiempo."
@@ -870,6 +1166,10 @@
   "OilPump": {
     "localized_name": "Extractor de crudo",
     "description": "Dispositivo necesario para extraer Petróleo de un yacimiento petrolero. Requiere una gran cantidad de electricidad para funcionar."
+  },
+  "OilPump02": {
+    "localized_name": "Extractor de petróleo de alta presión",
+    "description": "Dispositivo que bombea y extrae Petróleo desde las profundidades del subsuelo. Puede producir Petróleo incluso en lugares sin yacimientos, pero solo se puede colocar en terreno despejado sin construcciones debajo. Requiere mucha más electricidad que la Extractor de crudo."
   },
   "OlympicCauldron": {
     "localized_name": "Antorcha olímpica",
@@ -1009,7 +1309,11 @@
   },
   "SF_SlopedRoofCorner": {
     "localized_name": "Techo triangular e inclinado limpio",
-    "description": "Techo inclinado construido sobre muros para proteger de la lluvia y el viento. Permite edificaciones limpias y futuristas."
+    "description": "Techo triangular inclinado construido sobre muros diagonales para protegerse de la lluvia y el viento. Permite edificaciones limpias y futuristas."
+  },
+  "SF_SlopedRoofCornerReverse": {
+    "localized_name": "Techo triangular e inclinado limpio (invertido)",
+    "description": "Techo triangular inclinado (invertido) construido sobre muros diagonales para protegerse de la lluvia y el viento. Permite edificaciones limpias y futuristas."
   },
   "SF_TriangleFoundation": {
     "localized_name": "Base triangular limpia",
@@ -1167,13 +1471,25 @@
     "localized_name": "Dispositivo de cambio de look Pal",
     "description": "Instalación para cambiar el aspecto del Pal. Permite aplicar apariencias especiales obtenidas fuera del juego. Puedes transformar al Pal con skins especiales."
   },
+  "SkyIslandOrePit": {
+    "localized_name": "Cantera de soralite",
+    "description": "Instalación para producir Soralite. SoraliteExcavar requiere mucho esfuerzo físico. Asigna un Pal especializado en minería."
+  },
+  "SkyIsland_Banner": {
+    "localized_name": "Estandarte vertical del Pacto celestial",
+    "description": "Estandarte vertical decorativo del Pacto celestial."
+  },
+  "SkyIsland_Flag": {
+    "localized_name": "Bandera del Pacto celestial",
+    "description": "Bandera decorativa del Pacto celestial."
+  },
   "Snowman": {
     "localized_name": "Muñeco de nieve",
     "description": "Aumenta la velocidad de refrigeración si está colocado en la base. No tiene efecto si se colocan más de dos."
   },
   "Sofa01_Iron": {
     "localized_name": "Sofá individual de cuero",
-    "description": "Sofá individual de cuero decorativo."
+    "description": "Sillón individual decorativo tapizado en cuero."
   },
   "Sofa01_Stone": {
     "localized_name": "Sofá individual antiguo",
@@ -1181,7 +1497,7 @@
   },
   "Sofa02_Iron": {
     "localized_name": "Sofá doble de cuero",
-    "description": "Sofá para dos personas de cuero decorativo."
+    "description": "Sofá para dos personas decorativo tapizado en cuero."
   },
   "Sofa02_Stone": {
     "localized_name": "Sofá doble antiguo",
@@ -1223,6 +1539,10 @@
     "localized_name": "Zona de tala",
     "description": "Una instalación para producir Madera. Cortar árboles requiere mucho esfuerzo físico. Asigna un Pal especializado en tala."
   },
+  "StationDeforest3": {
+    "localized_name": "Zona de tala II",
+    "description": "Una instalación para producir Madera dura. Cortar árboles requiere mucho esfuerzo físico. Asigna un Pal especializado en tala."
+  },
   "StonePit": {
     "localized_name": "Cantera",
     "description": "Instalación para producir Piedra. La excavación de Piedra requiere fuerza física. Asigna un Pal especializado en minería."
@@ -1252,8 +1572,12 @@
     "description": "Techo inclinado para colocar sobre muros y proteger de la lluvia y el viento. Al estar hecho de piedra, es relativamente resistente."
   },
   "Stone_SlopedRoofCorner": {
-    "localized_name": "Techo de piedra inclinado en esquina",
-    "description": "Techo inclinado construido sobre muros para proteger de la lluvia y el viento. Al estar hecho de piedra, es relativamente resistente."
+    "localized_name": "Techo triangular e inclinado de piedra",
+    "description": "Techo triangular inclinado construido sobre muros diagonales para protegerse de la lluvia y el viento. Al estar hecho de piedra, es relativamente resistente."
+  },
+  "Stone_SlopedRoofCornerReverse": {
+    "localized_name": "Techo triangular e inclinado de piedra (invertido)",
+    "description": "Techo triangular inclinado (invertido) construido sobre muros diagonales para protegerse de la lluvia y el viento. Al estar hecho de piedra, es relativamente resistente."
   },
   "Stone_TriangleFoundation": {
     "localized_name": "Base triangular de piedra",
@@ -1339,6 +1663,10 @@
     "localized_name": "Mesa redonda",
     "description": "Mesa redonda decorativa."
   },
+  "TableCircular_Wood_None": {
+    "localized_name": "Mesa redonda ordenada",
+    "description": "Mesa redonda ordenada decorativa."
+  },
   "TableDresser01_Stone": {
     "localized_name": "Tocador antiguo",
     "description": "Tocador para revisar tu apariencia. Permite cambiar el aspecto de tu personaje."
@@ -1362,6 +1690,10 @@
   "TableSquare_Wood": {
     "localized_name": "Mesa cuadrada",
     "description": "Mesa cuadrada decorativa."
+  },
+  "TableSquare_Wood_None": {
+    "localized_name": "Mesa cuadrada ordenada",
+    "description": "Mesa cuadrada ordenada decorativa."
   },
   "Tansu": {
     "localized_name": "Cofre japones",
@@ -1557,7 +1889,11 @@
   },
   "Wooden_SlopedRoofCorner": {
     "localized_name": "Techo triangular e inclinado de madera",
-    "description": "Techo inclinado construido sobre muros para proteger de la lluvia y el viento. Al estar hecho de madera, es frágil."
+    "description": "Techo triangular inclinado construido sobre muros diagonales para protegerse de la lluvia y el viento. Al estar hecho de madera, es frágil."
+  },
+  "Wooden_SlopedRoofCornerReverse": {
+    "localized_name": "Techo triangular e inclinado de madera (invertido)",
+    "description": "Techo triangular e inclinado (invertido) construido sobre muros diagonales para proteger de la lluvia y el viento. Al estar hecho de madera, es frágil."
   },
   "Wooden_TriangleFoundation": {
     "localized_name": "Base triangular de madera",

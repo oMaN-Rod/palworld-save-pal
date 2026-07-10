@@ -3,9 +3,133 @@
     "localized_name": "Beschwörungsaltar",
     "description": "Opfere hier Steintafeln, auf denen Pals abgebildet sind, um mächtige Pals zu beschwören. Bereite dich zuvor gut auf den Kampf vor!"
   },
+  "AncientBlastFurnace": {
+    "localized_name": "Antiker Hochofen",
+    "description": "Ein spezieller Hochofen, in dem sich mithilfe antiker Technologie alle Arten von Metallbarren raffinieren lassen. Die Rohmaterialien werden zunächst unter Hitzeeinwirkung geschmolzen und anschließend schlagartig abgekühlt und ausgehärtet. Für die Arbeit benötigt man Pals mit hohem Eignungslevel für Feuererzeugung und Kühlung."
+  },
+  "AncientCookingStove": {
+    "localized_name": "Antike Küche",
+    "description": "Eine Küche, die antike Technologie nutzt und sowohl bekannte Gerichte als auch völlig neue Kreationen hervorbringen kann. Die Anlage wird zunächst durch Feuer erhitzt, wonach Gerichte durch sorgfältige Handarbeit vollendet werden. Für die Arbeit benötigt man Pals mit hohem Eignungslevel für Feuererzeugung und Handwerk."
+  },
+  "AncientElectricGenerator": {
+    "localized_name": "Antiker Stromgenerator",
+    "description": "Ein Hochleistungsgenerator, der auf Grundlage verlorengeglaubter antiker Technologien entwickelt wurde. Damit lassen sich gewaltige Mengen Strom erzeugen, während des Betriebs besteht jedoch Überhitzungsgefahr. Für die Arbeit benötigt man deshalb neben einem Pal mit hohem Eignungslevel für Stromerzeugung auch einen Pal, der Bewässerung beherrscht."
+  },
+  "AncientFarmBlock": {
+    "localized_name": "Antiker Kultivator",
+    "description": "Eine antike Kultivierungsanlage, die mit der Kraft des Weltenbaums jede beliebige Pflanze, die auf Palapagos vorkommt, wachsen lassen kann. Benötigt weit weniger Fläche als ein Beerengarten und kann auch drinnen aufgestellt werden, doch der Anbau folgt weiterhin dem herkömmlichen Ablauf. Für den Betrieb werden Pals mit hohem Eignungslevel für Aussaat, Bewässerung und Sammeln benötigt."
+  },
+  "AncientMultiProduct": {
+    "localized_name": "Antiker Synthesator",
+    "description": "Eine antike Produktionsanlage, die mit der Kraft des Weltenbaums jedes beliebige Holz oder Erz synthetisieren kann. Aufgrund der hohen Komplexität kann nur ein einziger Pal zugewiesen werden."
+  },
+  "AncientRelicRecycler": {
+    "localized_name": "Antiker Reliktkonverter",
+    "description": "Ein antiker Materialumwandler, der auf verlorengeglaubte Technologien zurückgreift. Er entschlüsselt die Technologie von Relikten der antiken Zivilisation und gestaltet diese um. Eine hochspezialisierte Anlage, um Relikte verlustfrei zu verwerten."
+  },
+  "AncientWorkBench": {
+    "localized_name": "Antike Werkbank",
+    "description": "Eine multifunktionale Anlage, mit der sich alle Gegenstände an einem Ort von Pals fertigen lassen. Du selbst kannst dort nicht arbeiten, und auch die Fertigungsdauer ist nicht kürzer als bei gewöhnlichen Anlagen. Aufgrund der hohen Komplexität werden für die Arbeit Pals mit hohem Eignungslevel für Handwerk und Arzneimittelherstellung benötigt."
+  },
+  "Ancient_AirConditioner": {
+    "localized_name": "Antike Klimaanlage",
+    "description": null
+  },
+  "Ancient_Clinic": {
+    "localized_name": "Antike Klinik",
+    "description": "Eine hochmoderne medizinische Einrichtung, die fortschrittliche antike Heiltechnologie nutzt. Die Gesundheitsversorgung übertrifft die einer gewöhnlichen Klinik bei Weitem. Wird ein Pal mit hohem Eignungslevel für Pharmazie zugewiesen, kann selbst in einem Lager mit härtesten Arbeitsbedingungen ein maximales Hygienelevel aufrechterhalten werden."
+  },
+  "Ancient_DiagonalWall": {
+    "localized_name": "Antike diagonale Wand",
+    "description": "Eine diagonale Wand, die du auf einem dreieckigen Fundament errichten kannst, um Eindringlinge fernzuhalten. Ist dem Baustil der antiken Zivilisation nachempfunden."
+  },
+  "Ancient_DoorWall": {
+    "localized_name": "Antike Wand mit Tür",
+    "description": "Eine Eingangstür, die du auf einem Fundament errichten kannst. Ist dem Baustil der antiken Zivilisation nachempfunden."
+  },
+  "Ancient_Fence": {
+    "localized_name": "Antikes Geländer",
+    "description": "Ein Geländer, das du auf einem Fundament oder einem Dach errichten kannst, um Absturzunfällen vorzubeugen. Ist dem Baustil der antiken Zivilisation nachempfunden."
+  },
+  "Ancient_MedicalPalBed": {
+    "localized_name": "Antikes Palbett",
+    "description": "Ein luxuriöses Palbett, das auf einem antiken Heilpod basiert und weich gepolstert ist. Es bietet die höchste GEI-Regeneration aller Palbetten und beseitigt Erschöpfung im Handumdrehen. Hat die gleiche Größe wie ein großes Palbett, sodass auch große Pals bequem darauf Platz finden."
+  },
+  "Ancient_Pillars": {
+    "localized_name": "Antike Säule",
+    "description": "Eine Säule zum Abstützen von Gebäuden. Ist dem Baustil der antiken Zivilisation nachempfunden."
+  },
+  "Ancient_PyramidRoof": {
+    "localized_name": "Antikes pyramidenförmiges Dach",
+    "description": "Ein pyramidenförmiges Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist dem Baustil der antiken Zivilisation nachempfunden."
+  },
+  "Ancient_SlantedRoof": {
+    "localized_name": "Antikes Schrägdach",
+    "description": "Ein Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist dem Baustil der antiken Zivilisation nachempfunden."
+  },
+  "Ancient_SlopedRoofCorner": {
+    "localized_name": "Antikes dreieckiges Schrägdach",
+    "description": "Ein dreieckiges Schrägdach, mit dem du diagonale Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist dem Baustil der antiken Zivilisation nachempfunden."
+  },
+  "Ancient_SlopedRoofCornerReverse": {
+    "localized_name": "Antikes dreieckiges Schrägdach (umgedreht)",
+    "description": "Ein umgekehrtes dreieckiges Schrägdach, mit dem du diagonale Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist dem Baustil der antiken Zivilisation nachempfunden."
+  },
+  "Ancient_Spa": {
+    "localized_name": "Antike heiße Quelle",
+    "description": "Eine heiße Quelle, die antike Technologie nutzt und mit Paldiumsalzen angereichertes Wasser enthält. Sie bietet die höchste GEI-Regeneration aller heißen Quellen und regeneriert zugleich auch die LP. Hat die gleiche Größe wie eine herkömmliche heiße Quelle und sorgt bei verletzten Pals für maximale Erholung."
+  },
+  "Ancient_TriangleFoundation": {
+    "localized_name": "Antikes dreieckiges Fundament",
+    "description": "Ein dreieckiges Fundament, worauf du Wände oder Gebäude errichten kannst. Ist dem Baustil der antiken Zivilisation nachempfunden."
+  },
+  "Ancient_TriangleRoof": {
+    "localized_name": "Antikes dreieckiges Dach",
+    "description": "Ein dreieckiges Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist dem Baustil der antiken Zivilisation nachempfunden."
+  },
+  "Ancient_TriangleStairsCorner": {
+    "localized_name": "Antikes Eckdach",
+    "description": "Ein Eckdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist dem Baustil der antiken Zivilisation nachempfunden."
+  },
+  "Ancient_TriangleWall": {
+    "localized_name": "Antike dreieckige Wand",
+    "description": "Eine dreieckige Wand, die du auf einem Fundament errichten kannst. Ist dem Baustil der antiken Zivilisation nachempfunden."
+  },
+  "Ancient_TriangleWallReverse": {
+    "localized_name": "Antike dreieckige Wand (umgedreht)",
+    "description": "Eine umgekehrte dreieckige Wand, die du auf einem Fundament errichten kannst. Ist dem Baustil der antiken Zivilisation nachempfunden."
+  },
+  "Ancient_WallGate": {
+    "localized_name": "Antiker Durchgang für Pals",
+    "description": "Ein Durchgang für Pals, den du auf einem Fundament errichten kannst. Ist dem Baustil der antiken Zivilisation nachempfunden."
+  },
+  "Ancient_WindowWall": {
+    "localized_name": "Antike Wand mit Fenster",
+    "description": "Eine Wand mit Fenster, die du auf einem Fundament errichten kannst, um Eindringlinge fernzuhalten. Ist dem Baustil der antiken Zivilisation nachempfunden."
+  },
+  "Ancient_foundation": {
+    "localized_name": "Antikes Fundament",
+    "description": "Ein Fundament, worauf du Wände oder Gebäude errichten kannst. Ist dem Baustil der antiken Zivilisation nachempfunden."
+  },
+  "Ancient_roof": {
+    "localized_name": "Antikes Dach",
+    "description": "Ein Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist dem Baustil der antiken Zivilisation nachempfunden."
+  },
+  "Ancient_stair": {
+    "localized_name": "Antike Treppe",
+    "description": "Eine Treppe, mit der du auf Fundamente oder Dächer steigen kannst. Ist dem Baustil der antiken Zivilisation nachempfunden."
+  },
+  "Ancient_wall": {
+    "localized_name": "Antike Wand",
+    "description": "Eine Wand, die du auf einem Fundament errichten kannst, um Eindringlinge fernzuhalten. Ist dem Baustil der antiken Zivilisation nachempfunden."
+  },
   "Andon": {
     "localized_name": "Papierlaterne",
     "description": "Eine dekorative Papierlaterne. Passt perfekt zu Gebäuden im fernöstlichen Stil."
+  },
+  "ArcadeVideoGame": {
+    "localized_name": "Arcade-Automat",
+    "description": "Ein dekorativer Arcade-Automat. Ist leider kaputt. Spielen kannst du damit nicht."
   },
   "Barrel01_Iron": {
     "localized_name": "Rote Metalltonne",
@@ -35,13 +159,21 @@
     "localized_name": "Aufsichtskanzel",
     "description": "Von hier aus kannst du anordnen, wie deine Arbeitspals arbeiten sollen und ihnen bestimmte Arbeiten erlauben oder verbieten."
   },
+  "BaseCampWorkHard02": {
+    "localized_name": "Optimierte Aufsichtskanzel",
+    "description": "Überarbeitete Aufsichtskanzel mit optimierter Materialwahl und Konstruktion. Verfügt über die gewohnten Zuweisungsfunktionen und verlangsamt zusätzlich den GEI-Verlust von Arbeitspals. Die Arbeitsbedingungen verbessern sich etwas, sodass Unzufriedenheit unter den Pals seltener aufkommt."
+  },
+  "BaseCampWorkHard03": {
+    "localized_name": "Antike Aufsichtskanzel",
+    "description": "Eine Aufsichtskanzel mit rotem Paldium, die antike Technologie nutzt. Über eine holografische Schnittstelle können dem gesamten Lager Anweisungen erteilt werden, während zugleich der Rückgang des GEI-Werts deiner Pals verlangsamt wird. Eine besondere Wellenfrequenz durchströmt das Lager und sorgt dafür, dass deine Pals selbst unter härtesten Arbeitsbedingungen gelassen bleiben."
+  },
   "BaseCampWorkerExtraStation": {
     "localized_name": "Pal-Box-Bedienterminal",
     "description": "Ein Gerät, mit dem du die Pal-Box aus der Entfernung bedienen kannst. Platziere es an einer Stelle, wo du deine Pals erscheinen lassen möchtest und gestalte dein Lager flexibel."
   },
   "BathTub_Stone": {
-    "localized_name": "Antike Badewanne",
-    "description": "Eine dekorative antike Badewanne."
+    "localized_name": "Viktorianische Badewanne",
+    "description": "Eine dekorative viktorianische Badewanne."
   },
   "Believer_Banner": {
     "localized_name": "Liga der Palfreunde-Hochbanner",
@@ -80,8 +212,8 @@
     "description": "Eine kleine Kiste zur Aufbewahrung von Gegenständen."
   },
   "Box01_Stone": {
-    "localized_name": "Antike Rattankiste",
-    "description": "Eine dekorative antike Rattankiste."
+    "localized_name": "Viktorianische Rattankiste",
+    "description": "Eine dekorative viktorianische Rattankiste."
   },
   "Box02_Iron": {
     "localized_name": "Kiste mit Stoffabdeckung",
@@ -132,8 +264,8 @@
     "description": "Ein dekorativer, niedlicher Stuhl."
   },
   "Chair01_Stone": {
-    "localized_name": "Antiker Holzstuhl",
-    "description": "Ein dekorativer antiker Holzstuhl."
+    "localized_name": "Viktorianischer Holzstuhl",
+    "description": "Ein dekorativer viktorianischer Holzstuhl."
   },
   "Chair01_Wood": {
     "localized_name": "Holzstuhl",
@@ -144,16 +276,20 @@
     "description": "Ein dekorativer Metallstuhl."
   },
   "Chair02_Stone": {
-    "localized_name": "Antiker Holzstuhl (grün)",
-    "description": "Ein dekorativer antiker Holzstuhl in Grün."
+    "localized_name": "Viktorianischer Holzstuhl (grün)",
+    "description": "Ein dekorativer viktorianischer Holzstuhl in Grün."
   },
   "CharacterRankUp": {
     "localized_name": "Pal-Entsafter",
     "description": "Eine Anlage, mit der sich der Rang von Pals erhöhen lässt, indem man ausgepressten Pal-Extrakt konzentriert und einem Pal derselben Art verabreicht. Damit lassen sich dessen körperliche Grenzen erweitern."
   },
+  "Clinic": {
+    "localized_name": "Klinik",
+    "description": "Eine einfache medizinische Einrichtung zur Gesundheitsversorgung von Arbeitspals. Weist man einen Pal zu, der Pharmazie beherrscht, sinkt die GEI von Arbeitspals langsamer und Krankheiten sowie Verletzungen treten seltener auf. Damit ist nur ein begrenztes Hygienelevel erreichbar, in der Anfangsphase ist sie jedoch für eine funktionierende Gesundheitsversorgung deines Lagers unverzichtbar."
+  },
   "Clock01_Stone": {
-    "localized_name": "Antike Pendeluhr",
-    "description": "Eine dekorative antike Pendeluhr. Ist leider kaputt. Die richtige Zeit lässt sich daran nicht ablesen."
+    "localized_name": "Viktorianische Pendeluhr",
+    "description": "Eine dekorative viktorianische Pendeluhr. Ist leider kaputt. Die richtige Zeit lässt sich daran nicht ablesen."
   },
   "Clock01_Wall_Iron": {
     "localized_name": "Wanduhr",
@@ -216,12 +352,20 @@
     "description": "Eine Anlage zur Gewinnung von Hexoquarz. Der Hexoquarz-Abbau ist körperlich anstrengend. Überlasse die Arbeit Pals, die sich mit Bergbau auskennen."
   },
   "Curtain01_Wall_Stone": {
-    "localized_name": "Antiker Vorhang",
-    "description": "Ein dekorativer antiker Vorhang. Muss an einer Wand angebracht werden."
+    "localized_name": "Viktorianischer Vorhang",
+    "description": "Ein dekorativer viktorianischer Vorhang. Muss an einer Wand angebracht werden."
   },
   "DamagedScarecrow": {
     "localized_name": "Übungsdummy",
     "description": "Ein Übungsdummy in Gestalt eines Pengullet. Zum Aufstellen benötigst du viel Platz."
+  },
+  "DarkIsland_Banner": {
+    "localized_name": "Hochbanner der Feybreak",
+    "description": "Ein dekoratives Hochbanner der Feybreak."
+  },
+  "DarkIsland_Flag": {
+    "localized_name": "Standarte der Feybreak",
+    "description": "Eine dekorative Standarte der Feybreak."
   },
   "Decal_PalSticker_PinkCat": {
     "localized_name": "de_Text",
@@ -229,15 +373,19 @@
   },
   "DefenseBowGun": {
     "localized_name": "Stationäre Armbrust",
-    "description": "Eine Verteidigungsanlage, die mit einem Pal besetzt werden kann, um gegen Angriffe gewappnet zu sein. Für den Betrieb wird Munition vom Typ „Pfeil| benötigt. Lege Munition in einer Truhe bereit, und der stationierte Pal wird automatisch nachladen."
+    "description": "Eine Verteidigungsanlage zur Sicherung deines Lagers. Weise einen Pal zu, der Handwerk beherrscht, und er wird dein Lager mit der Armbrust verteidigen."
   },
   "DefenseMachinegun": {
     "localized_name": "Stationäres Maschinengewehr",
-    "description": "Eine Verteidigungsanlage, die mit einem Pal besetzt werden kann, um gegen Angriffe gewappnet zu sein. Für den Betrieb wird Gewehrmunition benötigt. Lege Munition in einer Truhe bereit, und der stationierte Pal wird automatisch nachladen."
+    "description": "Eine Verteidigungsanlage zur Sicherung deines Lagers. Weise einen Pal zu, der Handwerk beherrscht, und er wird dein Lager mit dem Maschinengewehr verteidigen."
+  },
+  "DefenseMachinegun_AutoTurret": {
+    "localized_name": "Antiker Geschützturm",
+    "description": "Ein unbemanntes Geschütz der antiken Zivilisation, das die Größe und Feuerkraft einer Panzerfaust hat. Es benötigt weder Munition noch Pals, die es bedienen, und wehrt Angreifer vollautomatisch ab, solange Stromzufuhr besteht. Ist äußerst wirkungsvoll, benötigt für den Betrieb jedoch enorme Mengen an Strom."
   },
   "DefenseMissile": {
     "localized_name": "Stationärer Raketenwerfer",
-    "description": "Eine Verteidigungsanlage, die mit einem Pal besetzt werden kann, um gegen Angriffe gewappnet zu sein. Für den Betrieb wird Munition vom Typ „Panzerfaustmunition| benötigt. Lege Munition in einer Truhe bereit, und der stationierte Pal wird automatisch nachladen."
+    "description": "Eine Verteidigungsanlage zur Sicherung deines Lagers. Weise einen Pal zu, der Handwerk beherrscht, und er wird dein Lager mit dem Raketenwerfer verteidigen."
   },
   "DefenseWait": {
     "localized_name": "Sandsack",
@@ -260,8 +408,8 @@
     "description": "Ein dekorativer Metalltisch."
   },
   "Desk01_Stone": {
-    "localized_name": "Antiker Schreibtisch",
-    "description": "Ein dekorativer antiker Schreibtisch."
+    "localized_name": "Viktorianischer Schreibtisch",
+    "description": "Ein dekorativer viktorianischer Schreibtisch."
   },
   "DimensionPalStorage": {
     "localized_name": "Dimensionaler Pal-Speicher",
@@ -325,7 +473,7 @@
   },
   "Factory_Money": {
     "localized_name": "Goldmünzen-Prägewerk",
-    "description": "Eine Werkstatt zur Prägung von Goldmünze. Die Arbeit verlangt einiges ab, weshalb die GEI der hier beschäftigten Pals sinkt. Für die Arbeit benötigt man Pals, die Handwerk beherrschen."
+    "description": "Eine Werkstatt zur Prägung von Goldmünze. Die Arbeit verlangt einiges ab, weshalb die GEI der hier beschäftigten Pals sinkt. Für die Arbeit benötigt man Pals, die Handwerk beherrschen. Wenn du ein Prägewerk baust, besteht die Gefahr, dass die Miliz hart gegen dich durchgreift."
   },
   "FarmBlockV2_Berries": {
     "localized_name": "Beerengarten",
@@ -399,6 +547,130 @@
     "localized_name": "Fernöstlicher Schreibtisch",
     "description": "Ein dekorativer fernöstlicher Schreibtisch. Passt perfekt zu Gebäuden im fernöstlichen Stil."
   },
+  "FurnitureBush01_Flower": {
+    "localized_name": "Künstlicher blühender Strauch A",
+    "description": "Ein dekorativer künstlicher blühender Strauch. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureBush01_Green": {
+    "localized_name": "Künstlicher Strauch",
+    "description": "Ein dekorativer künstlicher Strauch. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureBush01_Snow": {
+    "localized_name": "Künstlicher weißer Strauch",
+    "description": "Ein dekorativer künstlicher weißer Strauch. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureBush01_Tropical": {
+    "localized_name": "Künstlicher Tropenstrauch",
+    "description": "Ein dekorativer künstlicher Tropenstrauch. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureBush01_Yellow": {
+    "localized_name": "Künstlicher Goldlaubstrauch",
+    "description": "Ein dekorativer künstlicher Goldlaubstrauch. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureBush02_Flower": {
+    "localized_name": "Künstlicher blühender Strauch B",
+    "description": "Ein dekorativer künstlicher blühender Strauch. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureStone01": {
+    "localized_name": "Künstlicher Felsen",
+    "description": "Ein dekorativer künstlicher Felsen. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureTree01_Bamboo": {
+    "localized_name": "Künstlicher Bambus A",
+    "description": "Ein dekorativer künstlicher Bambus. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureTree01_Cherry": {
+    "localized_name": "Künstlicher Kirschbaum A",
+    "description": "Ein dekorativer künstlicher Kirschbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureTree01_Desert": {
+    "localized_name": "Künstlicher Wüstenbaum A",
+    "description": "Ein dekorativer künstlicher Wüstenbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureTree01_Green": {
+    "localized_name": "Künstlicher Baum A",
+    "description": "Ein dekorativer künstlicher Baum. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureTree01_Red": {
+    "localized_name": "Künstlicher Rotlaubbaum A",
+    "description": "Ein dekorativer künstlicher Rotlaubbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureTree01_Snow": {
+    "localized_name": "Künstlicher schneebedeckter Baum A",
+    "description": "Ein dekorativer künstlicher schneebedeckter Baum. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureTree01_Tropical": {
+    "localized_name": "Künstlicher Tropenbaum A",
+    "description": "Ein dekorativer künstlicher Tropenbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureTree01_Yellow": {
+    "localized_name": "Künstlicher Goldlaubbaum A",
+    "description": "Ein dekorativer künstlicher Goldlaubbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureTree02_Bamboo": {
+    "localized_name": "Künstlicher Bambus B",
+    "description": "Ein dekorativer künstlicher Bambus. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureTree02_Cherry": {
+    "localized_name": "Künstlicher Kirschbaum B",
+    "description": "Ein dekorativer künstlicher Kirschbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureTree02_Desert": {
+    "localized_name": "Künstlicher Wüstenbaum B",
+    "description": "Ein dekorativer künstlicher Wüstenbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureTree02_Green": {
+    "localized_name": "Künstlicher Baum B",
+    "description": "Ein dekorativer künstlicher Baum. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureTree02_Red": {
+    "localized_name": "Künstlicher Rotlaubbaum B",
+    "description": "Ein dekorativer künstlicher Rotlaubbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureTree02_Snow": {
+    "localized_name": "Künstlicher schneebedeckter Baum B",
+    "description": "Ein dekorativer künstlicher schneebedeckter Baum. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureTree02_Tropical": {
+    "localized_name": "Künstlicher Tropenbaum B",
+    "description": "Ein dekorativer künstlicher Tropenbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureTree02_Yellow": {
+    "localized_name": "Künstlicher Goldlaubbaum B",
+    "description": "Ein dekorativer künstlicher Goldlaubbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureTree03_Bamboo": {
+    "localized_name": "Künstlicher Bambus C",
+    "description": "Ein dekorativer künstlicher Bambus. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureTree03_Cherry": {
+    "localized_name": "Künstlicher Kirschbaum C",
+    "description": "Ein dekorativer künstlicher Kirschbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureTree03_Desert": {
+    "localized_name": "Künstlicher Wüstenbaum C",
+    "description": "Ein dekorativer künstlicher Wüstenbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureTree03_Green": {
+    "localized_name": "Künstlicher Baum C",
+    "description": "Ein dekorativer künstlicher Baum. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureTree03_Red": {
+    "localized_name": "Künstlicher Rotlaubbaum C",
+    "description": "Ein dekorativer künstlicher Rotlaubbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureTree03_Snow": {
+    "localized_name": "Künstlicher schneebedeckter Baum C",
+    "description": "Ein dekorativer künstlicher schneebedeckter Baum. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureTree03_Tropical": {
+    "localized_name": "Künstlicher Tropenbaum C",
+    "description": "Ein dekorativer künstlicher Tropenbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
+  "FurnitureTree03_Yellow": {
+    "localized_name": "Künstlicher Goldlaubbaum C",
+    "description": "Ein dekorativer künstlicher Goldlaubbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
+  },
   "GarbageBag_Iron": {
     "localized_name": "Müllsack",
     "description": "Dekorative Müllsäcke. Wem’s gefällt..."
@@ -425,7 +697,11 @@
   },
   "Glass_SlopedRoofCorner": {
     "localized_name": "Dreieckiges Glasschrägdach",
-    "description": "Ein dreieckiges Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Hartglas und dadurch sehr robust."
+    "description": "Ein dreieckiges Schrägdach, mit dem du diagonale Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Hartglas und dadurch sehr robust."
+  },
+  "Glass_SlopedRoofCornerReverse": {
+    "localized_name": "Dreieckiges Glasschrägdach (umgedreht)",
+    "description": "Ein umgekehrtes dreieckiges Schrägdach, mit dem du diagonale Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Hartglas und dadurch sehr robust."
   },
   "Glass_TriangleFoundation": {
     "localized_name": "Dreieckiges Glasfundament",
@@ -476,8 +752,8 @@
     "description": "Hier kannst du die genetischen Daten von Pals speichern und Pals aus ihren gespeicherten genetischen Daten wiederherstellen. Außerdem kannst du gespeicherte Daten in andere Welten übertragen."
   },
   "Globe01_Stone": {
-    "localized_name": "Antiker Globus",
-    "description": "Ein dekorativer antiker Globus."
+    "localized_name": "Viktorianischer Globus",
+    "description": "Ein dekorativer viktorianischer Globus."
   },
   "GoalSoccer_Iron": {
     "localized_name": "Fußballtor",
@@ -523,6 +799,10 @@
     "localized_name": "Gefrierzerkleinerer",
     "description": "Eine Anlage zum Zerkleinern und Umwandeln von Erz. Für den Betrieb benötigt man Strom sowie einen Pal, der „Kühlung| beherrscht. Sehr effizient."
   },
+  "IceHorseStatue": {
+    "localized_name": "Frostallion-Statue",
+    "description": "Eine dekorative Frostallion-Statue."
+  },
   "Iron_DiagonalWall": {
     "localized_name": "Diagonale Metallwand",
     "description": "Eine diagonale Wand, die du auf einem dreieckigen Fundament errichten kannst, um Eindringlinge fernzuhalten. Ist aus Metall und dadurch extrem solide."
@@ -536,8 +816,12 @@
     "description": "Ein pyramidenförmiges Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Metall und dadurch extrem solide."
   },
   "Iron_SlopedRoofCorner": {
-    "localized_name": "Tejado triangular e inclinado de metal",
-    "description": "Ein dreieckiges Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Metall und dadurch extrem solide."
+    "localized_name": "Dreieckiges Metallschrägdach",
+    "description": "Ein dreieckiges Schrägdach, mit dem du diagonale Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Metall und dadurch extrem solide."
+  },
+  "Iron_SlopedRoofCornerReverse": {
+    "localized_name": "Dreieckiges Metallschrägdach (umgedreht)",
+    "description": "Ein umgekehrtes dreieckiges Schrägdach, mit dem du diagonale Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Metall und dadurch extrem solide."
   },
   "Iron_TriangleFoundation": {
     "localized_name": "Dreieckiges Metallfundament",
@@ -628,8 +912,12 @@
     "description": "Ein Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Besticht mit fernöstlicher Eleganz."
   },
   "JapaneseStyle_SlopedRoofCorner": {
-    "localized_name": "Japanisches dreieckiges Schrägdach",
-    "description": "Ein dreieckiges Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Besticht mit fernöstlicher Eleganz."
+    "localized_name": "Fernöstliches dreieckiges Schrägdach",
+    "description": "Ein dreieckiges Schrägdach, mit dem du diagonale Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Besticht mit fernöstlicher Eleganz."
+  },
+  "JapaneseStyle_SlopedRoofCornerReverse": {
+    "localized_name": "Fernöstliches dreieckiges Schrägdach (umgedreht)",
+    "description": "Ein umgekehrtes dreieckiges Schrägdach, mit dem du diagonale Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Besticht mit fernöstlicher Eleganz."
   },
   "JapaneseStyle_TriangleFoundation": {
     "localized_name": "Fernöstliches dreieckiges Fundament",
@@ -683,6 +971,10 @@
     "localized_name": "Fernöstliche Wand",
     "description": "Eine Wand, die du auf einem Fundament errichten kannst, um Eindringlinge fernzuhalten. Besticht mit fernöstlicher Eleganz."
   },
+  "JetDragonStatue": {
+    "localized_name": "Jetragon-Statue",
+    "description": "Eine dekorative Jetragon-Statue."
+  },
   "Kakejiku": {
     "localized_name": "Hängebild",
     "description": "Ein dekoratives Hängebild. Passt perfekt zu Gebäuden im fernöstlichen Stil."
@@ -728,12 +1020,12 @@
     "description": "Ein Kamin, der als Lichtquelle dienen kann. Muss dafür von einem Pal angefeuert werden."
   },
   "Light_FloorLamp01": {
-    "localized_name": "Antike Stehlampe (braun)",
-    "description": "Eine antike Stehlampe in Braun. Benötigt zum Leuchten Strom."
+    "localized_name": "Viktorianische Stehlampe (braun)",
+    "description": "Eine viktorianische Stehlampe in Braun. Benötigt zum Leuchten Strom."
   },
   "Light_FloorLamp02": {
-    "localized_name": "Antike Stehlampe (rot)",
-    "description": "Eine antike Stehlampe in Rot. Benötigt zum Leuchten Strom."
+    "localized_name": "Viktorianische Stehlampe (rot)",
+    "description": "Eine viktorianische Stehlampe in Rot. Benötigt zum Leuchten Strom."
   },
   "Light_LightPole01": {
     "localized_name": "Einfache Straßenlaterne",
@@ -768,11 +1060,11 @@
     "description": "Eine Anlage, die Drehbewegung in elektrische Energie umsetzt. Ist ineffizient und senkt die GEI der hier beschäftigten Pals, bringt jedoch EP ein."
   },
   "MedicalPalBed_02": {
-    "localized_name": "Pal-Strohbett",
+    "localized_name": "Metalltruhe",
     "description": "Ein Strohbett für Pals. Wird als nächtliche Schlafstätte oder zum Ausruhen für verletzte Pals verwendet. Ist ziemlich hart, aber allemal besser als nichts."
   },
   "MedicalPalBed_03": {
-    "localized_name": "Pal-Flauschbett",
+    "localized_name": "Hochwertige Metalltruhe",
     "description": "Ein gemütliches Bett für Pals. Wird als nächtliche Schlafstätte oder zum Ausruhen für verletzte Pals verwendet. Flauschig weich für schönste Träume."
   },
   "MedicalPalBed_04": {
@@ -836,16 +1128,16 @@
     "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo beim Bergbau. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
   },
   "Mirror01_Stone": {
-    "localized_name": "Antiker Spiegel (oval)",
-    "description": "Ein dekorativer, ovaler antiker Spiegel."
+    "localized_name": "Viktorianischer Spiegel (oval)",
+    "description": "Ein dekorativer, ovaler viktorianischer Spiegel."
   },
   "Mirror01_Wall_Stone": {
-    "localized_name": "Antiker Wandspiegel",
-    "description": "Ein dekorativer antiker Wandspiegel. Muss an einer Wand angebracht werden."
+    "localized_name": "Viktorianischer Wandspiegel",
+    "description": "Ein dekorativer viktorianischer Wandspiegel. Muss an einer Wand angebracht werden."
   },
   "Mirror02_Stone": {
-    "localized_name": "Antiker Spiegel",
-    "description": "Ein dekorativer antiker Spiegel."
+    "localized_name": "Viktorianischer Spiegel",
+    "description": "Ein dekorativer viktorianischer Spiegel."
   },
   "MonsterFarm": {
     "localized_name": "Viehfarm",
@@ -854,6 +1146,10 @@
   "MultiElectricHatchingPalEgg": {
     "localized_name": "Großer elektrischer Brutkasten",
     "description": "Ein Gerät zum Ausbrüten von Pal-Eiern. Benötigt Strom, kann aber mehrere Eier gleichzeitig bei optimaler Temperatur ausbrüten."
+  },
+  "MultiElectricHatchingPalEggWithBreed": {
+    "localized_name": "Antike Zuchtanlage",
+    "description": "Eine hochentwickelte antike Zuchtanlage mit Brutzylinder aus Elektroglas. Die Produktion und das Ausbrüten von Eiern erfolgen schnell und vollautomatisch. Zudem wird die Vererbungsrate seltener Fähigkeiten begünstigt. Die Haltung erfolgt holografisch, wodurch der Bedarf für einen großen Weidebereich entfällt."
   },
   "MultiHatchingPalEgg": {
     "localized_name": "Große Brutmaschine",
@@ -870,6 +1166,10 @@
   "OilPump": {
     "localized_name": "Ölförderpumpe",
     "description": "Eine Anlage, die zur Förderung von Rohöl aus Ölfeldern benötigt wird. Der Betrieb erfordert viel Strom."
+  },
+  "OilPump02": {
+    "localized_name": "Hochdruck-Ölförderpumpe",
+    "description": "Eine Anlage, mit der sich Rohöl aus den Tiefen des Erdreichs fördern lässt. Funktioniert sogar außerhalb von Ölfeldern, muss jedoch direkt auf dem Boden errichtet werden. Der Stromverbrauch übersteigt den einer gewöhnlichen Ölförderpumpe nochmals deutlich."
   },
   "OlympicCauldron": {
     "localized_name": "Olympisches Feuer",
@@ -900,8 +1200,8 @@
     "description": "Ein Erste-Hilfe-Regal für Pal-Medizin. Kranke Pals können sich hier Medizin holen. Achte darauf, dass immer genügend Medizin da ist."
   },
   "Partition_Stone": {
-    "localized_name": "Antiker Wandschirm",
-    "description": "Ein dekorativer antiker Wandschirm."
+    "localized_name": "Viktorianischer Wandschirm",
+    "description": "Ein dekorativer viktorianischer Wandschirm."
   },
   "Piano01_Stone": {
     "localized_name": "Flügel",
@@ -960,20 +1260,20 @@
     "description": "Eine Werkbank zur Reparatur kaputter Werkzeuge und Hilfsmittel. Bei der Reparatur wird Material verbraucht."
   },
   "Rug01_Stone": {
-    "localized_name": "Antiker Teppich",
-    "description": "Ein dekorativer antiker Teppich."
+    "localized_name": "Viktorianischer Teppich",
+    "description": "Ein dekorativer viktorianischer Teppich."
   },
   "Rug02_Stone": {
-    "localized_name": "Antiker Teppich (rot)",
-    "description": "Ein dekorativer, antiker roter Teppich."
+    "localized_name": "Viktorianischer Teppich (rot)",
+    "description": "Ein dekorativer, viktorianischer roter Teppich."
   },
   "Rug03_Stone": {
-    "localized_name": "Antiker Teppich (grün)",
-    "description": "Ein dekorativer, antiker grüner Teppich."
+    "localized_name": "Viktorianischer Teppich (grün)",
+    "description": "Ein dekorativer, viktorianischer grüner Teppich."
   },
   "Rug04_Stone": {
-    "localized_name": "Antiker Teppich (lang)",
-    "description": "Ein dekorativer, langer antiker Teppich."
+    "localized_name": "Viktorianischer Teppich (lang)",
+    "description": "Ein dekorativer, langer viktorianischer Teppich."
   },
   "Rug_Wood": {
     "localized_name": "de_Text",
@@ -1008,8 +1308,12 @@
     "description": "Ein Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Für Liebhaber steriler Futuristik."
   },
   "SF_SlopedRoofCorner": {
-    "localized_name": "Futuristisches Schrägdach",
-    "description": "Ein dreieckiges Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Für Liebhaber steriler Futuristik."
+    "localized_name": "Futuristisches dreieckiges Schrägdach",
+    "description": "Ein dreieckiges Schrägdach, mit dem du diagonale Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Für Liebhaber steriler Futuristik."
+  },
+  "SF_SlopedRoofCornerReverse": {
+    "localized_name": "Futuristisches dreieckiges Schrägdach (umgedreht)",
+    "description": "Ein umgekehrtes dreieckiges Schrägdach, mit dem du diagonale Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Für Liebhaber steriler Futuristik."
   },
   "SF_TriangleFoundation": {
     "localized_name": "Futuristisches dreieckiges Fundament",
@@ -1076,52 +1380,52 @@
     "description": "Ein Metallregal zur Aufbewahrung von Gegenständen."
   },
   "Shelf01_Stone": {
-    "localized_name": "Antikes Bücherregal",
-    "description": "Ein antikes Bücherregal zur Aufbewahrung von Gegenständen."
+    "localized_name": "Viktorianisches Bücherregal",
+    "description": "Ein viktorianisches Bücherregal zur Aufbewahrung von Gegenständen."
   },
   "Shelf01_Wall_Iron": {
     "localized_name": "Metallwandregal",
     "description": "Ein Metallregal zur Aufbewahrung von Gegenständen. Muss an einer Wand angebracht werden."
   },
   "Shelf01_Wall_Stone": {
-    "localized_name": "Antiker Wandschrank",
-    "description": "Ein antiker Schrank zur Aufbewahrung von Gegenständen. Muss an einer Wand angebracht werden."
+    "localized_name": "Viktorianischer Wandschrank",
+    "description": "Ein viktorianischer Schrank zur Aufbewahrung von Gegenständen. Muss an einer Wand angebracht werden."
   },
   "Shelf02_Iron": {
     "localized_name": "Breites Metallregal",
     "description": "Ein breites Metallregal zur Aufbewahrung von Gegenständen."
   },
   "Shelf02_Stone": {
-    "localized_name": "Antiker Kleiderschrank",
-    "description": "Ein antiker Kleiderschrank zur Aufbewahrung von Gegenständen."
+    "localized_name": "Viktorianischer Kleiderschrank",
+    "description": "Ein viktorianischer Kleiderschrank zur Aufbewahrung von Gegenständen."
   },
   "Shelf03_Iron": {
     "localized_name": "Orangefarbener Spind",
     "description": "Ein orangefarbener Spind zur Aufbewahrung von Gegenständen. Mit niedlichen Pal-Stickern drauf."
   },
   "Shelf03_Stone": {
-    "localized_name": "Antike Kommode",
-    "description": "Eine antike Kommode zur Aufbewahrung von Gegenständen. Mit Fotos von Pals ausgeschmückt."
+    "localized_name": "Viktorianische Kommode",
+    "description": "Eine viktorianische Kommode zur Aufbewahrung von Gegenständen. Mit Fotos von Pals ausgeschmückt."
   },
   "Shelf04_Iron": {
     "localized_name": "Spind",
     "description": "Ein Spind zur Aufbewahrung von Gegenständen. Mit niedlichen Pal-Stickern drauf."
   },
   "Shelf04_Stone": {
-    "localized_name": "Antiker Nachttisch",
-    "description": "Eine antike Beistellkommode zur Aufbewahrung von Gegenständen. Mit Fotos von Pals ausgeschmückt."
+    "localized_name": "Viktorianischer Nachttisch",
+    "description": "Eine viktorianische Beistellkommode zur Aufbewahrung von Gegenständen. Mit Fotos von Pals ausgeschmückt."
   },
   "Shelf05_Stone": {
-    "localized_name": "Antiker Schrank",
-    "description": "Ein antiker Schrank zur Aufbewahrung von Gegenständen."
+    "localized_name": "Viktorianischer Schrank",
+    "description": "Ein viktorianischer Schrank zur Aufbewahrung von Gegenständen."
   },
   "Shelf06_Stone": {
-    "localized_name": "Antiker Schrank (breit)",
-    "description": "Ein antiker breiter Schrank zur Aufbewahrung von Gegenständen. Mit Fotos von Pals ausgeschmückt."
+    "localized_name": "Viktorianischer Schrank (breit)",
+    "description": "Ein viktorianischer breiter Schrank zur Aufbewahrung von Gegenständen. Mit Fotos von Pals ausgeschmückt."
   },
   "Shelf07_Stone": {
-    "localized_name": "Antiker Schrank (groß)",
-    "description": "Ein antiker großer Schrank zur Aufbewahrung von Gegenständen."
+    "localized_name": "Viktorianischer Schrank (groß)",
+    "description": "Ein viktorianischer großer Schrank zur Aufbewahrung von Gegenständen."
   },
   "Shelf_Cask_Wood": {
     "localized_name": "Holzfassregal",
@@ -1167,6 +1471,18 @@
     "localized_name": "Pal-Aufhübscher",
     "description": "Eine Anlage, in der du Pals ein besonderes Aussehen verpassen kannst. Für Skins, die du außerhalb des Spiels bekommen hast."
   },
+  "SkyIslandOrePit": {
+    "localized_name": "Soralitmine",
+    "description": "Eine Anlage zur Gewinnung von Soralit. Der Soralit-Abbau ist körperlich anstrengend. Überlasse die Arbeit Pals, die sich mit Bergbau auskennen."
+  },
+  "SkyIsland_Banner": {
+    "localized_name": "Hochbanner des Azurgelübdes",
+    "description": "Ein dekoratives Hochbanner des Azurgelübdes."
+  },
+  "SkyIsland_Flag": {
+    "localized_name": "Standarte des Azurgelübdes",
+    "description": "Eine dekorative Standarte des Azurgelübdes."
+  },
   "Snowman": {
     "localized_name": "Schneemann",
     "description": "Kann im Lager aufgestellt werden und erhöht das Arbeitstempo beim Kühlen. Mehrere aufzustellen, bringt keinen zusätzlichen Nutzen."
@@ -1176,20 +1492,20 @@
     "description": "Ein dekorativer Ledersessel."
   },
   "Sofa01_Stone": {
-    "localized_name": "Antiker Sessel",
-    "description": "Ein dekorativer antiker Sessel."
+    "localized_name": "Viktorianischer Sessel",
+    "description": "Ein dekorativer viktorianischer Sessel."
   },
   "Sofa02_Iron": {
     "localized_name": "Ledersofa",
     "description": "Ein dekoratives Ledersofa."
   },
   "Sofa02_Stone": {
-    "localized_name": "Antikes Sofa",
-    "description": "Ein dekoratives antikes Sofa."
+    "localized_name": "Viktorianisches Sofa",
+    "description": "Ein dekoratives viktorianisches Sofa."
   },
   "Sofa03_Stone": {
-    "localized_name": "Antiker Ottomane",
-    "description": "Ein dekorativer antiker Ottomane."
+    "localized_name": "Viktorianischer Ottomane",
+    "description": "Ein dekorativer viktorianischer Ottomane."
   },
   "Spa": {
     "localized_name": "Heiße Quelle",
@@ -1223,6 +1539,10 @@
     "localized_name": "Holzfällerlager",
     "description": "Eine Anlage zur Gewinnung von Holz. Bäume zu fällen ist körperlich anstrengend. Überlasse die Arbeit Pals, die sich mit Holzfällen auskennen."
   },
+  "StationDeforest3": {
+    "localized_name": "Holzfällerlager Ⅱ",
+    "description": "Eine Anlage zur Gewinnung von Hartholz. Bäume zu fällen ist körperlich anstrengend. Überlasse die Arbeit Pals, die sich mit Holzfällen auskennen."
+  },
   "StonePit": {
     "localized_name": "Steinbruch",
     "description": "Eine Anlage zur Gewinnung von Stein. Der Stein-Abbau ist körperlich anstrengend. Überlasse die Arbeit Pals, die sich mit Bergbau auskennen."
@@ -1253,7 +1573,11 @@
   },
   "Stone_SlopedRoofCorner": {
     "localized_name": "Dreieckiges Steinschrägdach",
-    "description": "Ein dreieckiges Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Stein und dadurch ziemlich robust."
+    "description": "Ein dreieckiges Schrägdach, mit dem du diagonale Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Stein und dadurch ziemlich robust."
+  },
+  "Stone_SlopedRoofCornerReverse": {
+    "localized_name": "Dreieckiges Steinschrägdach (umgedreht)",
+    "description": "Ein umgekehrtes dreieckiges Schrägdach, mit dem du diagonale Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Stein und dadurch ziemlich robust."
   },
   "Stone_TriangleFoundation": {
     "localized_name": "Dreieckiges Steinfundament",
@@ -1304,8 +1628,8 @@
     "description": "Ein dekorativer Metallhocker."
   },
   "Stool01_Stone": {
-    "localized_name": "Antiker Hocker",
-    "description": "Ein dekorativer antiker Hocker."
+    "localized_name": "Viktorianischer Hocker",
+    "description": "Ein dekorativer viktorianischer Hocker."
   },
   "Stool_High_Wood": {
     "localized_name": "Holzbarhocker",
@@ -1316,8 +1640,8 @@
     "description": "Ein dekorativer Holzhocker."
   },
   "Stove01_Stone": {
-    "localized_name": "Antiker Ofen",
-    "description": "Ein dekorativer antiker Ofen."
+    "localized_name": "Viktorianischer Ofen",
+    "description": "Ein dekorativer viktorianischer Ofen."
   },
   "Stump": {
     "localized_name": "Hackklotz und Beil",
@@ -1332,15 +1656,19 @@
     "description": "Ein dekorativer runder Metalltisch."
   },
   "TableCircular01_Stone": {
-    "localized_name": "Antiker Tisch (rund)",
-    "description": "Ein dekorativer, runder antiker Tisch."
+    "localized_name": "Viktorianischer Tisch (rund)",
+    "description": "Ein dekorativer, runder viktorianischer Tisch."
   },
   "TableCircular_Wood": {
     "localized_name": "Runder Tisch",
     "description": "Ein dekorativer runder Tisch."
   },
+  "TableCircular_Wood_None": {
+    "localized_name": "Aufgeräumter runder Tisch",
+    "description": "Ein dekorativer, aufgeräumter runder Tisch."
+  },
   "TableDresser01_Stone": {
-    "localized_name": "Antike Frisierkommode",
+    "localized_name": "Viktorianische Frisierkommode",
     "description": "Eine Frisierkommode zum Hübschmachen. Damit kannst du das Aussehen deines Charakters ändern."
   },
   "TableSide01_Iron": {
@@ -1348,8 +1676,8 @@
     "description": "Ein dekorativer Beistelltisch aus Eisenholz."
   },
   "TableSink01_Stone": {
-    "localized_name": "Antiker Waschtisch",
-    "description": "Ein dekorativer antiker Waschtisch."
+    "localized_name": "Viktorianischer Waschtisch",
+    "description": "Ein dekorativer viktorianischer Waschtisch."
   },
   "TableSquare01_Iron": {
     "localized_name": "Eisenholz-Tisch",
@@ -1362,6 +1690,10 @@
   "TableSquare_Wood": {
     "localized_name": "Viereckiger Tisch",
     "description": "Ein dekorativer viereckiger Tisch."
+  },
+  "TableSquare_Wood_None": {
+    "localized_name": "Aufgeräumter viereckiger Tisch",
+    "description": "Ein dekorativer, aufgeräumter viereckiger Tisch."
   },
   "Tansu": {
     "localized_name": "Fernöstliche Kommode",
@@ -1376,12 +1708,12 @@
     "description": "Ein dekorativer Reifen."
   },
   "Toilet01_Stone": {
-    "localized_name": "Antike Toilette",
-    "description": "Eine dekorative antike Toilette. Die Notdurft bitte woanders verrichten."
+    "localized_name": "Viktorianische Toilette",
+    "description": "Eine dekorative viktorianische Toilette. Die Notdurft bitte woanders verrichten."
   },
   "ToiletHolder01_Stone": {
-    "localized_name": "Antiker WC-Rollenhalter",
-    "description": "Ein dekorativer antiker Toilettenpapierhalter."
+    "localized_name": "Viktorianischer WC-Rollenhalter",
+    "description": "Ein dekorativer viktorianischer Toilettenpapierhalter."
   },
   "ToolBoxV1": {
     "localized_name": "Große Werkzeugkiste",
@@ -1396,8 +1728,8 @@
     "description": "Eine dekorative Steinlaterne. Passt perfekt zu Gebäuden im fernöstlichen Stil."
   },
   "TowlRack01_Stone": {
-    "localized_name": "Antiker Handtuchhalter",
-    "description": "Ein dekorativer antiker Handtuchhalter."
+    "localized_name": "Viktorianischer Handtuchhalter",
+    "description": "Ein dekorativer viktorianischer Handtuchhalter."
   },
   "TrafficBarricade01_Iron": {
     "localized_name": "Absperrung",
@@ -1557,7 +1889,11 @@
   },
   "Wooden_SlopedRoofCorner": {
     "localized_name": "Dreieckiges Holzschrägdach",
-    "description": "Ein dreieckiges Schrägdach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Holz und nicht sonderlich stabil."
+    "description": "Ein dreieckiges Schrägdach, mit dem du diagonale Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Holz und nicht sonderlich stabil."
+  },
+  "Wooden_SlopedRoofCornerReverse": {
+    "localized_name": "Dreieckiges Holzschrägdach (umgedreht)",
+    "description": "Ein umgekehrtes dreieckiges Schrägdach, mit dem du diagonale Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Holz und nicht sonderlich stabil."
   },
   "Wooden_TriangleFoundation": {
     "localized_name": "Dreieckiges Holzfundament",

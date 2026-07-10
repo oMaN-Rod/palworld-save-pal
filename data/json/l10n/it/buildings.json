@@ -3,9 +3,133 @@
     "localized_name": "Altare di evocazione",
     "description": "Offrendo una stele raffigurante un Pal, è possibile evocare nella base un grande e potente Pal. Dovrai prepararti a una battaglia estremamente impegnativa."
   },
+  "AncientBlastFurnace": {
+    "localized_name": "Fornace dell'antica civiltà",
+    "description": "Una fornace speciale che fa uso delle tecnologie dell'antica civiltà per produrre qualunque tipo di lingotto. Raffina i materiali sciogliendoli con le fiamme e compattandoli col gelo. Per utilizzarla sono necessari Pal capaci di controllare il fuoco e il gelo ai massimi livelli possibili."
+  },
+  "AncientCookingStove": {
+    "localized_name": "Cucina dell'antica civiltà",
+    "description": "Una cucina dell'antica civiltà che permette di realizzare ogni ricetta, nota o meno. Basta accendere il forno col fuoco e poi, con un po' di lavoro manuale, potrai preparare qualunque cibo. Per utilizzarla sono necessari Pal capaci di controllare il fuoco e svolgere lavori manuali ai massimi livelli possibili."
+  },
+  "AncientElectricGenerator": {
+    "localized_name": "Generatore elettrico dell'antica civiltà",
+    "description": "Un generatore elettrico a elevatissima efficienza, ricreato grazie alla tecnologia perduta dell'antica civiltà. Può generare elevatissime quantità d'energia, ma questo comporta anche un rischio di surriscaldamento. Sono necessari Pal capaci di generare elettricità e occuparsi di irrigazione ai massimi livelli possibili."
+  },
+  "AncientFarmBlock": {
+    "localized_name": "Macchina coltivatrice dell'antica civiltà",
+    "description": "Una macchina coltivatrice dell'antica civiltà che permette di far crescere ogni pianta di Palpagos grazie al potere dell'albero del mondo. Occupa persino meno spazio di un campo di bacche, ma le piante crescono come al solito. Per utilizzarla sono necessari Pal capaci di svolgere semina, irrigazione e raccolta ai massimi livelli."
+  },
+  "AncientMultiProduct": {
+    "localized_name": "Generatore di materia dell'antica civiltà",
+    "description": "Un generatore dell'antica civiltà, che permette di creare ogni genere di legname o minerali grazie al potere dell'albero del mondo. Essendo un macchinario molto complesso, è possibile assegnarvi un solo Pal."
+  },
+  "AncientRelicRecycler": {
+    "localized_name": "Convertitore di cimeli dell'antica civiltà",
+    "description": "Un convertitore di materia dell'antica civiltà, che fa uso di tecnologie perdute. Permette di decifrare le tecnologie dei cimeli dell'antica civiltà, convertendoli in nuove forme. Un oggetto eccezionale che restituisce un'utilità pratica a ogni cimelio."
+  },
+  "AncientWorkBench": {
+    "localized_name": "Banco da lavoro dell'antica civiltà",
+    "description": "Una struttura complessa utilizzabile dai Pal, dove può essere realizzato qualunque oggetto. Il tuo personaggio non può farne uso, e la velocità di creazione è la solita. Data la complessità della struttura, sono necessari Pal capaci di svolgere lavoro manuale e creare medicinali ai massimi livelli possibili."
+  },
+  "Ancient_AirConditioner": {
+    "localized_name": "Condizionatore dell'antica civiltà",
+    "description": null
+  },
+  "Ancient_Clinic": {
+    "localized_name": "Ambulatorio dell'antica civiltà",
+    "description": "Una struttura medica del massimo livello, che fa uso di antiche tecnologie riscoperte nella nostra epoca. Garantisce un'efficienza superiore a una normale struttura medica. Assegnandogli Pal esperti nell'uso dei medicinali, potrà garantire il massimo livello d'igiene anche in una base dalle condizioni di lavoro molto dure."
+  },
+  "Ancient_DiagonalWall": {
+    "localized_name": "Muro diagonale dell'antica civiltà",
+    "description": "Un muro diagonale edificato su fondamenta triangolari per difendersi dagli invasori. Riproduce lo stile architettonico dell'antica civiltà."
+  },
+  "Ancient_DoorWall": {
+    "localized_name": "Muro con porta dell'antica civiltà",
+    "description": "Una porta edificata su delle fondamenta. Riproduce lo stile architettonico dell'antica civiltà."
+  },
+  "Ancient_Fence": {
+    "localized_name": "Recinto dell'antica civiltà",
+    "description": "Un recinto edificato su fondamenta e tetti per evitare di cadere. Riproduce lo stile architettonico dell'antica civiltà."
+  },
+  "Ancient_MedicalPalBed": {
+    "localized_name": "Letto per Pal dell'antica civiltà",
+    "description": "Un letto per Pal di qualità estrema, con una antica capsula capace di ripristinare le forze e lenzuola morbidissime. Non esiste letto migliore per recuperare punti SAN, e riprendersi da ogni fatica. Ha le dimensioni dei letti più grandi, e può accogliere Pal giganteschi."
+  },
+  "Ancient_Pillars": {
+    "localized_name": "Pilastro dell'antica civiltà",
+    "description": "Un pilastro per sostenere un edificio. Riproduce lo stile architettonico dell'antica civiltà."
+  },
+  "Ancient_PyramidRoof": {
+    "localized_name": "Tetto piramidale dell'antica civiltà",
+    "description": "Un tetto piramidale edificato su dei muri per proteggersi dagli elementi. Riproduce lo stile architettonico dell'antica civiltà."
+  },
+  "Ancient_SlantedRoof": {
+    "localized_name": "Tetto spiovente dell'antica civiltà",
+    "description": "Un tetto spiovente edificato su dei muri per proteggersi dagli elementi. Riproduce lo stile architettonico dell'antica civiltà."
+  },
+  "Ancient_SlopedRoofCorner": {
+    "localized_name": "Tetto triangolare spiovente dell'antica civiltà",
+    "description": "Un tetto spiovente triangolare edificato su dei muri diagonali per proteggersi dagli elementi. Riproduce lo stile architettonico dell'antica civiltà."
+  },
+  "Ancient_SlopedRoofCornerReverse": {
+    "localized_name": "Tetto triangolare spiovente dell'antica civiltà (invertito)",
+    "description": "Un tetto triangolare spiovente (invertito) edificato su dei muri diagonali per proteggersi dagli elementi. Riproduce lo stile architettonico dell'antica civiltà."
+  },
+  "Ancient_Spa": {
+    "localized_name": "Terme dell'antica civiltà",
+    "description": "Terme create grazie alla tecnologia antica, che rilasciano nell'acqua particelle di Paldium. Sono le migliori terme possibili per far recuperare punti SAN, e fanno riprendere le energie allo stesso tempo. Le dimensioni non sono da meno di quelle delle altre terme, e possono far tornare in perfetta salute ogni Pal ferito."
+  },
+  "Ancient_TriangleFoundation": {
+    "localized_name": "Fondamenta triangolari dell'antica civiltà",
+    "description": "Fondamenta triangolari su cui edificare muri e strutture. Riproduce lo stile architettonico dell'antica civiltà."
+  },
+  "Ancient_TriangleRoof": {
+    "localized_name": "Tetto triangolare dell'antica civiltà",
+    "description": "Un tetto triangolare edificato su dei muri per proteggersi dagli elementi. Riproduce lo stile architettonico dell'antica civiltà."
+  },
+  "Ancient_TriangleStairsCorner": {
+    "localized_name": "Tetto angolare dell'antica civiltà",
+    "description": "Un tetto angolare edificato su dei muri per proteggersi dagli elementi. Riproduce lo stile architettonico dell'antica civiltà."
+  },
+  "Ancient_TriangleWall": {
+    "localized_name": "Muro triangolare dell'antica civiltà",
+    "description": "Un muro triangolare edificato su fondamenta. Riproduce lo stile architettonico dell'antica civiltà."
+  },
+  "Ancient_TriangleWallReverse": {
+    "localized_name": "Muro triangolare dell'antica civiltà (invertito)",
+    "description": "Un muro triangolare (invertito) edificato su fondamenta. Riproduce lo stile architettonico dell'antica civiltà."
+  },
+  "Ancient_WallGate": {
+    "localized_name": "Passaggio per Pal dell'antica civiltà",
+    "description": "Un passaggio edificato su fondamenta, che consente ai Pal di entrare e uscire. Riproduce lo stile architettonico dell'antica civiltà."
+  },
+  "Ancient_WindowWall": {
+    "localized_name": "Muro con finestra dell'antica civiltà",
+    "description": "Un muro con finestre, edificato su fondamenta per difendersi dagli invasori. Riproduce lo stile architettonico dell'antica civiltà."
+  },
+  "Ancient_foundation": {
+    "localized_name": "Fondamenta dell'antica civiltà",
+    "description": "Fondamenta su cui edificare muri e strutture. Riproduce lo stile architettonico dell'antica civiltà."
+  },
+  "Ancient_roof": {
+    "localized_name": "Tetto dell'antica civiltà",
+    "description": "Un tetto edificato su dei muri per proteggersi dagli elementi. Riproduce lo stile architettonico dell'antica civiltà."
+  },
+  "Ancient_stair": {
+    "localized_name": "Scala dell'antica civiltà",
+    "description": "Una scala per salire e scendere tra fondamenta e tetti. Riproduce lo stile architettonico dell'antica civiltà."
+  },
+  "Ancient_wall": {
+    "localized_name": "Muro dell'antica civiltà",
+    "description": "Un muro edificato su fondamenta per difendersi dagli invasori. Riproduce lo stile architettonico dell'antica civiltà."
+  },
   "Andon": {
     "localized_name": "Lanterna di carta",
     "description": "Lanterna di carta per l'arredo. Adatta ad arredare edifici in stile giapponese."
+  },
+  "ArcadeVideoGame": {
+    "localized_name": "Cabinato arcade",
+    "description": "Un cabinato arcade da arredo. È rotto, quindi non ci si può giocare."
   },
   "Barrel01_Iron": {
     "localized_name": "Barile in metallo rosso",
@@ -34,6 +158,14 @@
   "BaseCampWorkHard": {
     "localized_name": "Torre di sorveglianza",
     "description": "Permette di gestire il lavoro dei Pal nella base, definendo quali attività individuali consentire e proibire."
+  },
+  "BaseCampWorkHard02": {
+    "localized_name": "Torre di sorveglianza di alta qualità",
+    "description": "Una torre di sorveglianza per gestire meglio risorse e organizzazione. Ti permette di gestire le attività come sempre, e in più riduce la perdita di punti SAN dei Pal nella base. Basta migliorare un po' l'ambiente di lavoro per mantenere i Pal soddisfatti."
+  },
+  "BaseCampWorkHard03": {
+    "localized_name": "Torre di sorveglianza dell'antica civiltà",
+    "description": "Torre di sorveglianza creata grazie alla tecnologia antica e al Paldium rosso. L'interfaccia olografica permette di controllare tutta la base limitando la perdita di punti SAN dei Pal. Emette particolari frequenze che rasserenano l'animo dei Pal anche nelle condizioni di lavoro più estreme."
   },
   "BaseCampWorkerExtraStation": {
     "localized_name": "Dispositivo di controllo del box per Pal",
@@ -125,7 +257,7 @@
   },
   "Chair01_Iron": {
     "localized_name": "Sedia in pelle",
-    "description": "Sedia in pelle per l'arredo."
+    "description": "Sedia foderata in pelle per l'arredo."
   },
   "Chair01_Pal": {
     "localized_name": "Sedia Ranocchia",
@@ -150,6 +282,10 @@
   "CharacterRankUp": {
     "localized_name": "Capsula di potenziamento Pal",
     "description": "Una struttura che permette di far salire di rango i Pal. Instillando l'essenza ricavata da più Pal dello stesso tipo in un singolo Pal, diventa possibile spingere il suo corpo oltre il limite."
+  },
+  "Clinic": {
+    "localized_name": "Ambulatorio",
+    "description": "Una struttura medica di base, fondamentale per tenere in salute i Pal che lavorano nella base. Assegnandogli Pal specializzati nell'uso dei medicinali, può rallentare la perdita di punti SAN e ridurre il rischio di malattie e ferite. C'è un limite a quanto può essere tenuto pulito l'ambiente, ma l'igiene è fondamentale nelle fasi iniziali della base."
   },
   "Clock01_Stone": {
     "localized_name": "Orologio a pendolo d'antiquariato",
@@ -223,21 +359,33 @@
     "localized_name": "Spaventapasseri danneggiato",
     "description": "Fantoccio da allenamento con le fattezze di Pengullet. Serve uno spazio molto grande."
   },
+  "DarkIsland_Banner": {
+    "localized_name": "Striscione del popolo della rovina",
+    "description": "Striscione del popolo della rovina per l'arredo."
+  },
+  "DarkIsland_Flag": {
+    "localized_name": "Vessillo del popolo della rovina",
+    "description": "Vessillo del popolo della rovina per l'arredo."
+  },
   "Decal_PalSticker_PinkCat": {
     "localized_name": "it_Text",
     "description": "it_Text"
   },
   "DefenseBowGun": {
     "localized_name": "Balestra a postazione fissa",
-    "description": "Struttura difensiva che può essere utilizzata in combattimento da un Pal. Per usarla servono Freccia. Se lasci proiettili nel forziere, il Pal la ricarica automaticamente."
+    "description": "Struttura difensiva che può essere utilizzata in combattimento da un Pal. Un Pal competente nell'attività |lavoro manuale| potrà proteggere la base con la balestra."
   },
   "DefenseMachinegun": {
     "localized_name": "Mitragliatrice a postazione fissa",
-    "description": "Struttura difensiva che può essere utilizzata in combattimento da un Pal. Per usarla servono Proiettili per fucile. Se lasci proiettili nel forziere, il Pal la ricarica automaticamente."
+    "description": "Struttura difensiva che può essere utilizzata in combattimento da un Pal. Un Pal competente nell'attività |lavoro manuale| potrà proteggere la base con la mitragliatrice."
+  },
+  "DefenseMachinegun_AutoTurret": {
+    "localized_name": "Torretta dell'antica civiltà",
+    "description": "Torretta automatica dell'antica civiltà, dotata delle dimensioni e della potenza di un lanciarazzi. Non ha bisogno di munizioni o Pal che la controllino, e può intercettare i nemici finché ha energia. Data la sua enorme potenza, ha bisogno di grandi quantità di elettricità per funzionare."
   },
   "DefenseMissile": {
     "localized_name": "Lanciarazzi a postazione fissa",
-    "description": "Struttura difensiva che può essere utilizzata in combattimento da un Pal. Per usarla servono Razzi. Se lasci proiettili nel forziere, il Pal la ricarica automaticamente."
+    "description": "Struttura difensiva che può essere utilizzata in combattimento da un Pal. Un Pal competente nell'attività |lavoro manuale| potrà proteggere la base con il lanciarazzi."
   },
   "DefenseWait": {
     "localized_name": "Sacco di sabbia",
@@ -325,7 +473,7 @@
   },
   "Factory_Money": {
     "localized_name": "Zecca per il denaro",
-    "description": "Una fabbrica dove coniare Denaro. È un luogo che logora lo spirito: chi ci lavora perde punti SAN. Sono necessari Pal capaci di svolgere lavoro manuale."
+    "description": "Una fabbrica dove coniare Denaro. È un luogo che logora lo spirito: chi ci lavora perde punti SAN. Richiede Pal capaci di svolgere attività manuali. Fai attenzione: edificando questa struttura, potresti attirare controlli severi da parte della Milizia volontaria."
   },
   "FarmBlockV2_Berries": {
     "localized_name": "Campo di bacche",
@@ -399,6 +547,130 @@
     "localized_name": "Scrivania giapponese",
     "description": "Scrivania in stile giapponese per l'arredo. Adatta ad arredare edifici in stile giapponese."
   },
+  "FurnitureBush01_Flower": {
+    "localized_name": "Siepe fiorita sintetica A",
+    "description": "Siepe fiorita da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureBush01_Green": {
+    "localized_name": "Siepe sintetica",
+    "description": "Siepe da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureBush01_Snow": {
+    "localized_name": "Siepe innevata sintetica",
+    "description": "Siepe innevata da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureBush01_Tropical": {
+    "localized_name": "Siepe tropicale sintetica",
+    "description": "Siepe tropicale da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureBush01_Yellow": {
+    "localized_name": "Siepe gialla sintetica",
+    "description": "Siepe gialla da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureBush02_Flower": {
+    "localized_name": "Siepe fiorita sintetica B",
+    "description": "Siepe fiorita da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureStone01": {
+    "localized_name": "Roccia sintetica",
+    "description": "Roccia da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureTree01_Bamboo": {
+    "localized_name": "Bambù sintetico A",
+    "description": "Bambù da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureTree01_Cherry": {
+    "localized_name": "Ciliegio sintetico A",
+    "description": "Ciliegio da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureTree01_Desert": {
+    "localized_name": "Pianta del deserto sintetica A",
+    "description": "Pianta del deserto da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureTree01_Green": {
+    "localized_name": "Albero sintetico A",
+    "description": "Albero da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureTree01_Red": {
+    "localized_name": "Albero con foglie rosse sintetico A",
+    "description": "Albero con foglie rosse da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureTree01_Snow": {
+    "localized_name": "Albero innevato sintetico A",
+    "description": "Albero innevato da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureTree01_Tropical": {
+    "localized_name": "Albero tropicale sintetico A",
+    "description": "Albero tropicale da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureTree01_Yellow": {
+    "localized_name": "Albero con foglie gialle sintetico A",
+    "description": "Albero con foglie gialle da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureTree02_Bamboo": {
+    "localized_name": "Bambù sintetico B",
+    "description": "Bambù da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureTree02_Cherry": {
+    "localized_name": "Ciliegio sintetico B",
+    "description": "Ciliegio da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureTree02_Desert": {
+    "localized_name": "Pianta del deserto sintetica B",
+    "description": "Pianta del deserto da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureTree02_Green": {
+    "localized_name": "Albero sintetico B",
+    "description": "Albero da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureTree02_Red": {
+    "localized_name": "Albero con foglie rosse sintetico B",
+    "description": "Albero con foglie rosse da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureTree02_Snow": {
+    "localized_name": "Albero innevato sintetico B",
+    "description": "Albero innevato da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureTree02_Tropical": {
+    "localized_name": "Albero tropicale sintetico B",
+    "description": "Albero tropicale da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureTree02_Yellow": {
+    "localized_name": "Albero con foglie gialle sintetico B",
+    "description": "Albero con foglie gialle da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureTree03_Bamboo": {
+    "localized_name": "Bambù sintetico C",
+    "description": "Bambù da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureTree03_Cherry": {
+    "localized_name": "Ciliegio sintetico C",
+    "description": "Ciliegio da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureTree03_Desert": {
+    "localized_name": "Pianta del deserto sintetica C",
+    "description": "Pianta del deserto da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureTree03_Green": {
+    "localized_name": "Albero sintetico C",
+    "description": "Albero da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureTree03_Red": {
+    "localized_name": "Albero con foglie rosse sintetico C",
+    "description": "Albero con foglie rosse da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureTree03_Snow": {
+    "localized_name": "Albero innevato sintetico C",
+    "description": "Albero innevato da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureTree03_Tropical": {
+    "localized_name": "Albero tropicale sintetico C",
+    "description": "Albero tropicale da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
+  "FurnitureTree03_Yellow": {
+    "localized_name": "Albero con foglie gialle sintetico C",
+    "description": "Albero con foglie gialle da arredo. Non è possibile ottenere risorse da questa struttura."
+  },
   "GarbageBag_Iron": {
     "localized_name": "Pattumiera",
     "description": "Pattumiera per l'arredo."
@@ -425,7 +697,11 @@
   },
   "Glass_SlopedRoofCorner": {
     "localized_name": "Tetto triangolare spiovente in vetro",
-    "description": "Un tetto spiovente angolare edificato su dei muri per proteggersi dagli elementi. È in vetro incredibilmente resistente."
+    "description": "Un tetto spiovente triangolare edificato su dei muri diagonali per proteggersi dagli elementi. È in vetro incredibilmente resistente."
+  },
+  "Glass_SlopedRoofCornerReverse": {
+    "localized_name": "Tetto triangolare spiovente in vetro (invertito)",
+    "description": "Un tetto triangolare spiovente (invertito) edificato su dei muri diagonali per proteggersi dagli elementi. È in vetro incredibilmente resistente."
   },
   "Glass_TriangleFoundation": {
     "localized_name": "Fondamenta triangolari in vetro",
@@ -523,6 +799,10 @@
     "localized_name": "Macinatore criogenico",
     "description": "Una struttura per ridurre in polvere Minerale metallico e ottenere così altri tipi di risorse. Richiede Pal competenti nell'attività |Refrigerazione| e il collegamento all'alimentazione, ma è davvero efficiente."
   },
+  "IceHorseStatue": {
+    "localized_name": "Statua di Frostallion",
+    "description": "Statua di Frostallion da arredo."
+  },
   "Iron_DiagonalWall": {
     "localized_name": "Muro diagonale in metallo",
     "description": "Un muro diagonale edificato su delle fondamenta triangolari per difendersi dagli invasori. È in metallo, quindi è molto resistente."
@@ -537,7 +817,11 @@
   },
   "Iron_SlopedRoofCorner": {
     "localized_name": "Tetto triangolare spiovente in metallo",
-    "description": "Un tetto spiovente angolare edificato su dei muri per proteggersi dagli elementi. È in metallo, quindi è molto resistente."
+    "description": "Un tetto spiovente triangolare edificato su dei muri diagonali per proteggersi dagli elementi. È in metallo, quindi è molto resistente."
+  },
+  "Iron_SlopedRoofCornerReverse": {
+    "localized_name": "Tetto triangolare spiovente in metallo (invertito)",
+    "description": "Un tetto triangolare spiovente (invertito) edificato su dei muri diagonali per proteggersi dagli elementi. È in metallo, quindi è molto resistente."
   },
   "Iron_TriangleFoundation": {
     "localized_name": "Fondamenta triangolari in metallo",
@@ -629,7 +913,11 @@
   },
   "JapaneseStyle_SlopedRoofCorner": {
     "localized_name": "Tetto triangolare spiovente in stile giapponese",
-    "description": "Un tetto spiovente angolare edificato su dei muri per proteggersi dagli elementi. È in un raffinato stile giapponese."
+    "description": "Un tetto spiovente triangolare edificato su dei muri diagonali per proteggersi dagli elementi. È in un raffinato stile giapponese."
+  },
+  "JapaneseStyle_SlopedRoofCornerReverse": {
+    "localized_name": "Tetto triangolare spiovente in stile giapponese (invertito)",
+    "description": "Un tetto triangolare spiovente (invertito) edificato su dei muri diagonali per proteggersi dagli elementi. È in un raffinato stile giapponese."
   },
   "JapaneseStyle_TriangleFoundation": {
     "localized_name": "Fondamenta triangolari in stile giapponese",
@@ -682,6 +970,10 @@
   "JapaneseStyle_wall_01": {
     "localized_name": "Muro in stile giapponese",
     "description": "Un muro edificato su delle fondamenta per difendersi dagli invasori. È in un raffinato stile giapponese."
+  },
+  "JetDragonStatue": {
+    "localized_name": "Statua di Jetragon",
+    "description": "Statua di Jetragon da arredo."
   },
   "Kakejiku": {
     "localized_name": "Pergamene ornamentali",
@@ -855,6 +1147,10 @@
     "localized_name": "Incubatrice elettrica per uova grande",
     "description": "Un dispositivo per far schiudere le uova di Pal. Ha bisogno di essere collegato all'elettricità, ma mantiene la temperatura ideale per far schiudere più uova."
   },
+  "MultiElectricHatchingPalEggWithBreed": {
+    "localized_name": "Sistema di allevamento dell'antica civiltà",
+    "description": "Struttura da allevamento di alto livello dell'antica civiltà, all'interno di un vetro elettrificato. Gestisce in modo rapido e automatico le uova, dalla produzione alla schiusa, e aumenta la possibilità di ottenere abilità genetiche rare. I Pal sono gestiti tramite ologrammi, è quindi possibile allevarli in spazi contenuti."
+  },
   "MultiHatchingPalEgg": {
     "localized_name": "Incubatrice per uova grande",
     "description": "Un dispositivo per far schiudere le uova di Pal. Mantiene automaticamente la temperatura ideale, e permette di far schiudere più uova."
@@ -870,6 +1166,10 @@
   "OilPump": {
     "localized_name": "Pompa petrolifera",
     "description": "Dispositivo per estrarre Petrolio greggio dai campi petroliferi. Deve essere collegato a un alimentatore molto potente per funzionare."
+  },
+  "OilPump02": {
+    "localized_name": "Pompa petrolifera ad alta pressione",
+    "description": "Strumento per raggiungere ed estrarre il Petrolio greggio dalle profondità della terra. Può estrarre Petrolio greggio anche in luoghi senza campi petroliferi, ma va posizionato su terreni privi di strutture. Hai bisogno di più energia di una normale Pompa petrolifera."
   },
   "OlympicCauldron": {
     "localized_name": "Fiamma olimpica",
@@ -1009,7 +1309,11 @@
   },
   "SF_SlopedRoofCorner": {
     "localized_name": "Tetto triangolare spiovente lucido",
-    "description": "Un tetto spiovente angolare edificato su dei muri per proteggersi dagli elementi. Design pulito, futuristico."
+    "description": "Un tetto spiovente triangolare edificato su dei muri diagonali per proteggersi dagli elementi. Design pulito, futuristico."
+  },
+  "SF_SlopedRoofCornerReverse": {
+    "localized_name": "Tetto triangolare spiovente lucido (invertito)",
+    "description": "Un tetto triangolare spiovente (invertito) edificato su dei muri diagonali per proteggersi dagli elementi. Design pulito, futuristico."
   },
   "SF_TriangleFoundation": {
     "localized_name": "Fondamenta triangolari lucide",
@@ -1167,13 +1471,25 @@
     "localized_name": "Camerino per Pal",
     "description": "Una struttura dove cambiare skin. Qui potrai dare un aspetto particolare ai tuoi Pal. Potrai equipaggiare le skin ottenute fuori dal gioco."
   },
+  "SkyIslandOrePit": {
+    "localized_name": "Cava di Soralite",
+    "description": "Una struttura dove produrre Soralite. Estrarre Soralite è un lavoro estremamente faticoso. Sono necessari Pal capaci di svolgere attività minerarie."
+  },
+  "SkyIsland_Banner": {
+    "localized_name": "Striscione del giuramento ceruleo",
+    "description": "Striscione del giuramento ceruleo per l'arredo."
+  },
+  "SkyIsland_Flag": {
+    "localized_name": "Vessillo del giuramento ceruleo",
+    "description": "Vessillo del giuramento ceruleo per l'arredo."
+  },
   "Snowman": {
     "localized_name": "Pupazzo di neve",
     "description": "Accelera la velocità di ogni attività relativa alla refrigerazione nella base. Anche mettendone due o più, il boost rimane uguale."
   },
   "Sofa01_Iron": {
     "localized_name": "Divano in pelle a un posto",
-    "description": "Divano in pelle a un posto per l'arredo."
+    "description": "Divano foderato in pelle a un posto per l'arredo."
   },
   "Sofa01_Stone": {
     "localized_name": "Divano d'antiquariato a un posto",
@@ -1181,7 +1497,7 @@
   },
   "Sofa02_Iron": {
     "localized_name": "Divano in pelle a due posti",
-    "description": "Divano in pelle a due posti per l'arredo."
+    "description": "Divano foderato in pelle a due posti per l'arredo."
   },
   "Sofa02_Stone": {
     "localized_name": "Divano d'antiquariato a due posti",
@@ -1223,6 +1539,10 @@
     "localized_name": "Segheria",
     "description": "Una struttura dove produrre Legno. Tagliare il legno è un lavoro estremamente faticoso. Sono necessari Pal capaci di svolgere attività di falegnameria."
   },
+  "StationDeforest3": {
+    "localized_name": "Segheria II",
+    "description": "Una struttura dove produrre Legno duro. Tagliare il legno è un lavoro estremamente faticoso. Sono necessari Pal capaci di svolgere attività di falegnameria."
+  },
   "StonePit": {
     "localized_name": "Cava di pietra",
     "description": "Una struttura dove produrre Pietra. Estrarre Pietra è un lavoro estremamente faticoso. Sono necessari Pal capaci di svolgere attività minerarie."
@@ -1253,7 +1573,11 @@
   },
   "Stone_SlopedRoofCorner": {
     "localized_name": "Tetto triangolare spiovente in pietra",
-    "description": "Un tetto spiovente angolare edificato su dei muri per proteggersi dagli elementi. È in pietra, quindi è abbastanza resistente."
+    "description": "Un tetto spiovente triangolare edificato su dei muri diagonali per proteggersi dagli elementi. È in pietra, quindi è abbastanza resistente."
+  },
+  "Stone_SlopedRoofCornerReverse": {
+    "localized_name": "Tetto triangolare spiovente in pietra (invertito)",
+    "description": "Un tetto triangolare spiovente (invertito) edificato su dei muri diagonali per proteggersi dagli elementi. È in pietra, quindi è abbastanza resistente."
   },
   "Stone_TriangleFoundation": {
     "localized_name": "Fondamenta triangolari in pietra",
@@ -1339,6 +1663,10 @@
     "localized_name": "Tavolo rotondo",
     "description": "Tavolo rotondo per l'arredo."
   },
+  "TableCircular_Wood_None": {
+    "localized_name": "Tavolo rotondo ordinato",
+    "description": "Tavolo rotondo ordinato per l'arredo."
+  },
   "TableDresser01_Stone": {
     "localized_name": "Cassettiera d'antiquariato",
     "description": "Cassettiera per rifarsi il look. Permette di cambiare l'aspetto del personaggio."
@@ -1362,6 +1690,10 @@
   "TableSquare_Wood": {
     "localized_name": "Tavolo quadrato",
     "description": "Tavolo quadrato per l'arredo."
+  },
+  "TableSquare_Wood_None": {
+    "localized_name": "Tavolo quadrato ordinato",
+    "description": "Tavolo quadrato ordinato per l'arredo."
   },
   "Tansu": {
     "localized_name": "Armadio giapponese",
@@ -1557,7 +1889,11 @@
   },
   "Wooden_SlopedRoofCorner": {
     "localized_name": "Tetto triangolare spiovente in legno",
-    "description": "Un tetto spiovente angolare edificato su dei muri per proteggersi dagli elementi. È in legno, quindi è piuttosto fragile."
+    "description": "Un tetto spiovente triangolare edificato su dei muri diagonali per proteggersi dagli elementi. È in legno, quindi è piuttosto fragile."
+  },
+  "Wooden_SlopedRoofCornerReverse": {
+    "localized_name": "Tetto triangolare spiovente in legno (invertito)",
+    "description": "Un tetto triangolare spiovente (invertito) edificato su dei muri diagonali per proteggersi dagli elementi. È in legno, quindi è piuttosto fragile."
   },
   "Wooden_TriangleFoundation": {
     "localized_name": "Fondamenta triangolari in legno",
