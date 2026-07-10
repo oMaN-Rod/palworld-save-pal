@@ -29,6 +29,7 @@ percent-encoding = "2"     # contract addition: SPA redirect encoding
 base64 = "0.22"
 zip = "2"
 flate2 = "1"
+chrono = "0.4"
 # dev-dependencies
 tokio-tungstenite = "0.24"
 tempfile = "3"
