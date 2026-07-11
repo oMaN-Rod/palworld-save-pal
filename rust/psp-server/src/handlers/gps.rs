@@ -189,13 +189,13 @@ pub async fn handle_clone_gps_pal_to_player(
         );
         return Ok(());
     };
-    let Some(pal_box_id) = player.pal_box_id else {
-        ctx.emitter.emit(
-            MessageType::Error,
-            &serde_json::json!({"message": "Player not found"}),
-        );
-        return Ok(());
-    };
+    // `pal_box_id` is resolved but NOT guarded here: Python (gps_handler.py:
+    // 139-207) only reads `player.pal_box_id` INSIDE the "pal_box" branch
+    // (:173), never at request level, so a missing PalStorageContainerId must
+    // not reject a "dps"-destination request. The `None` case is handled as a
+    // per-pal failure inside the pal_box branch below, mirroring
+    // `handlers::ups::handle_export_ups_pal`'s scoped pal_box guard.
+    let pal_box_id = player.pal_box_id;
     if save.gps_pals().map(|pals| pals.is_empty()).unwrap_or(true) {
         ctx.emitter.emit(
             MessageType::Error,
@@ -227,6 +227,13 @@ pub async fn handle_clone_gps_pal_to_player(
 
         let save = ctx.session.save.as_mut().unwrap();
         if data.destination_type == "pal_box" {
+            // Per-pal failure (NOT a request-level `error` frame) when this
+            // player has no pal box container id -- the dps branch never
+            // touches `pal_box_id` at all.
+            let Some(pal_box_id) = pal_box_id else {
+                errors.push(format!("Failed to add pal to pal box: {pal_id_text}"));
+                continue;
+            };
             match pal::add_player_pal_from_dto(
                 save,
                 &ctx.app.game_data,
