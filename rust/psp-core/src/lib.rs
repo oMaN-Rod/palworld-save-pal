@@ -8,3 +8,4 @@ pub mod progress;
 pub mod props;
 pub mod savio;
 pub mod session;
+pub mod steam_id;

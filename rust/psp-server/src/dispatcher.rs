@@ -263,6 +263,10 @@ async fn route(
         MessageType::CloneGpsPalToPlayer => {
             handlers::gps::handle_clone_gps_pal_to_player(serde_json::from_value(data)?, ctx).await
         }
+        // Task 3E-1: standalone steam-id conversion tool.
+        MessageType::ConvertSteamId => {
+            handlers::tools::handle_convert_steam_id(serde_json::from_value(data)?, ctx).await
+        }
         // Remaining arms are added by Phases 1-6.
         other => {
             tracing::warn!(

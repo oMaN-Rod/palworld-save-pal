@@ -11,6 +11,7 @@ uuid = { workspace = true }
 uesave = { workspace = true }
 chrono = { workspace = true }
 tracing = { workspace = true }
+cityhasher = { workspace = true }
 
 [dev-dependencies]
 tempfile = { workspace = true }
