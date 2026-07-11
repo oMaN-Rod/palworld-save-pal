@@ -86,6 +86,53 @@ fn write_utf16_string(writer: &mut impl Write, value: &str) -> Result<(), CoreEr
     Ok(())
 }
 
+/// Fixed-width `char_count` UTF-16LE code units, NUL-padded; trailing NULs are
+/// stripped on read. Port of `ContainerFileList._read_utf16_fixed_string`
+/// (container_types.py:161-164).
+fn read_utf16_fixed(reader: &mut impl Read, char_count: usize) -> Result<String, CoreError> {
+    let mut bytes = vec![0u8; char_count * 2];
+    reader.read_exact(&mut bytes)?;
+    let units: Vec<u16> = bytes
+        .chunks_exact(2)
+        .map(|pair| u16::from_le_bytes([pair[0], pair[1]]))
+        .collect();
+    let value = String::from_utf16(&units)
+        .map_err(|error| CoreError::Parse(format!("invalid UTF-16 container string: {error}")))?;
+    Ok(value.trim_end_matches('\0').to_string())
+}
+
+/// Port of `ContainerFileList._write_utf16_fixed_string`
+/// (container_types.py:166-171).
+fn write_utf16_fixed(
+    writer: &mut impl Write,
+    value: &str,
+    char_count: usize,
+) -> Result<(), CoreError> {
+    let units: Vec<u16> = value.encode_utf16().collect();
+    let byte_len = char_count * 2;
+    if units.len() * 2 > byte_len {
+        return Err(CoreError::Parse(format!(
+            "container file name too long for fixed {char_count}-char field: {value}"
+        )));
+    }
+    for unit in &units {
+        writer.write_all(&unit.to_le_bytes())?;
+    }
+    let padding = byte_len - units.len() * 2;
+    writer.write_all(&vec![0u8; padding])?;
+    Ok(())
+}
+
+/// Reads a fixed 64-char UTF-16LE file name field (128 bytes).
+pub(crate) fn read_utf16_fixed_64(reader: &mut impl Read) -> Result<String, CoreError> {
+    read_utf16_fixed(reader, 64)
+}
+
+/// Writes a fixed 64-char UTF-16LE file name field (128 bytes).
+pub(crate) fn write_utf16_fixed_64(writer: &mut impl Write, value: &str) -> Result<(), CoreError> {
+    write_utf16_fixed(writer, value, 64)
+}
+
 #[derive(Debug, Clone, PartialEq)]
 pub struct ContainerEntry {
     pub container_name: String,
@@ -266,6 +313,74 @@ impl ContainerIndex {
             }
         }
         latest
+    }
+}
+
+/// One file inside a container: fixed-width name + blob loaded from a sibling file.
+#[derive(Debug, Clone, PartialEq)]
+pub struct ContainerBlob {
+    pub name: String,
+    pub file_uuid: uuid::Uuid,
+    pub data: Vec<u8>,
+}
+
+#[derive(Debug, Clone, PartialEq)]
+pub struct ContainerFileList {
+    pub seq: u32,
+    pub files: Vec<ContainerBlob>,
+}
+
+impl ContainerFileList {
+    /// Port of ContainerFileList.from_stream (container_types.py:102-137).
+    /// `list_path` must be `<container dir>/container.<seq>`; blob payloads are read
+    /// from sibling files named by the file GUID; missing blobs are skipped.
+    pub fn read_from_file(list_path: &Path) -> Result<Self, CoreError> {
+        let file_name = list_path
+            .file_name()
+            .map(|name| name.to_string_lossy().to_string())
+            .unwrap_or_default();
+        let seq: u32 = file_name
+            .strip_prefix("container.")
+            .and_then(|suffix| suffix.parse().ok())
+            .ok_or_else(|| {
+                CoreError::Parse(format!(
+                    "Invalid container file name: {}",
+                    list_path.display()
+                ))
+            })?;
+        let parent_dir = list_path.parent().unwrap_or_else(|| Path::new("."));
+
+        let bytes = std::fs::read(list_path)?;
+        let mut reader = std::io::Cursor::new(bytes);
+        let version = read_u32(&mut reader)?;
+        if version != CONTAINER_FILE_LIST_VERSION {
+            return Err(CoreError::Parse(format!(
+                "Unsupported container file version: {version}"
+            )));
+        }
+        let file_count = read_u32(&mut reader)?;
+        let mut files = Vec::with_capacity(file_count as usize);
+        for _ in 0..file_count {
+            let name = read_utf16_fixed_64(&mut reader)?;
+            let mut cloud_uuid = [0u8; 16];
+            reader.read_exact(&mut cloud_uuid)?; // skipped, always zeros
+            let mut uuid_bytes = [0u8; 16];
+            reader.read_exact(&mut uuid_bytes)?;
+            let file_uuid = uuid::Uuid::from_bytes(uuid_bytes);
+
+            let blob_path = parent_dir.join(guid_file_name(&file_uuid));
+            if !blob_path.exists() {
+                // Python logs a warning and skips the entry.
+                continue;
+            }
+            let data = std::fs::read(&blob_path)?;
+            files.push(ContainerBlob {
+                name,
+                file_uuid,
+                data,
+            });
+        }
+        Ok(ContainerFileList { seq, files })
     }
 }
 

@@ -2,6 +2,7 @@
 //! Port of palworld_save_pal/utils/gamepass/{container_types,container_utils}.py.
 
 pub mod format;
+pub mod store;
 
 /// Player save payloads keyed by kind, decoupled from session types.
 #[derive(Debug, Default, Clone)]
