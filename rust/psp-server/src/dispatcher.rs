@@ -237,6 +237,16 @@ async fn route(
         MessageType::DeleteUpsTag => {
             handlers::ups::handle_delete_ups_tag(serde_json::from_value(data)?, ctx).await
         }
+        // Task 3C-6: UPS <-> save-session interop.
+        MessageType::CloneToUps => {
+            handlers::ups::handle_clone_to_ups(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::ImportToUps => {
+            handlers::ups::handle_import_to_ups(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::ExportUpsPal => {
+            handlers::ups::handle_export_ups_pal(serde_json::from_value(data)?, ctx).await
+        }
         // Remaining arms are added by Phases 1-6.
         other => {
             tracing::warn!(

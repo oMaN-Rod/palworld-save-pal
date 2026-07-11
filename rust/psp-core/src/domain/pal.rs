@@ -1494,6 +1494,83 @@ pub fn add_player_pal(
         .and_then(|e| pal_dto_from_entry(e, game_data)))
 }
 
+/// Port of `Player.add_pal_from_dto` (`game/player.py:462`), reached via
+/// `PalOpsMixin.add_player_pal_from_dto` (`pal_ops.py:73`) -- the pal-box
+/// destination of Task 3C-6's `export_ups_pal`. Models the container/slot
+/// placement on `add_player_pal` above, but applies the FULL `pal_dto` (via
+/// `apply_pal_dto`, the same DTO-application machinery `clone_pal` and
+/// `add_gps_pal_from_dto` use) instead of just character_id + nickname, so
+/// every preserved stat/talent/skill survives the export.
+///
+/// Python sets `pal_dto.instance_id = new_pal_id`, `pal_dto.storage_id =
+/// container_id`, `pal_dto.storage_slot = slot_idx` BEFORE `update_from`, then
+/// builds the fresh `PalSaveParameter` with `owner_uid=self.uid`; the DTO's
+/// own `owner_uid` (if `Some`) then overwrites it inside `update_from`, so a
+/// pal exported into a player's box keeps whatever owner the stored DTO
+/// carried. Reproduced exactly: `new_pal_entry` writes `player_id`, then
+/// `apply_pal_dto`'s None-skip leaves it as-is (or overwrites with
+/// `dto.owner_uid`). `storage_id`/`storage_slot`: PARITY-BUG-1 -- only
+/// SlotIndex is ever observable, ContainerId never moves (see `apply_pal_dto`'s
+/// own doc comment). Same `ensure_pal_property_schemas` + guild-handle +
+/// cache-invalidation tail as `add_player_pal`.
+pub fn add_player_pal_from_dto(
+    session: &mut SaveSession,
+    game_data: &GameData,
+    player_id: uuid::Uuid,
+    pal_dto: &PalDto,
+    container_id: uuid::Uuid,
+    storage_slot: Option<i32>,
+) -> Result<Option<PalDto>, CoreError> {
+    require_loaded_player(session, player_id)?;
+    let (pal_box_id, party_id) = player_container_ids(session, player_id)?;
+    let target_container_id = if container_id == pal_box_id {
+        pal_box_id
+    } else {
+        party_id
+    };
+    let Some(entry_index) = container_entry_index(session, target_container_id)? else {
+        return Ok(None);
+    };
+    let new_pal_id = uuid::Uuid::new_v4();
+    let Some(slot_index) = super::containers::character_container_add_pal(
+        &mut session.level,
+        entry_index,
+        new_pal_id,
+        storage_slot,
+    )?
+    else {
+        return Ok(None); // container full (character_container.py's available_slots)
+    };
+    let guild_id = super::guild::find_player_guild_id(session, player_id)?;
+    let mut entry = new_pal_entry(
+        &pal_dto.character_id,
+        new_pal_id,
+        player_id,
+        container_id,
+        slot_index,
+        guild_id,
+        pal_dto.nickname.as_deref().unwrap_or(&pal_dto.character_id),
+        game_data,
+    );
+    let mut incoming = pal_dto.clone();
+    incoming.instance_id = new_pal_id;
+    incoming.storage_id = container_id; // inert -- PARITY-BUG-1
+    incoming.storage_slot = slot_index as i64;
+    if let Some(save_parameter) = world::entry_save_parameter_mut(&mut entry) {
+        apply_pal_dto(save_parameter, &incoming, false, game_data);
+    }
+    ensure_pal_property_schemas(&mut session.level);
+    world::character_map_mut(&mut session.level)?.push(entry);
+    if let Some(guild) = guild_id {
+        append_guild_handle(session, guild, new_pal_id)?;
+    }
+    session.invalidate_performance_caches();
+    let entries = world::character_map(&session.level)?;
+    Ok(entries
+        .last()
+        .and_then(|e| pal_dto_from_entry(e, game_data)))
+}
+
 /// Port of `Base.add_pal` (`game/base.py`), reached via `Guild.add_base_pal`
 /// / `PalOpsMixin.add_guild_pal` (`guild.py`/`pal_ops.py`).
 ///
@@ -2411,6 +2488,91 @@ pub fn add_player_dps_pal(
         save_parameter.insert(
             "Hp",
             props::fixed_point64_property(max_hp_for(&dto, boosted, game_data)),
+        );
+    }
+    let loaded = session.loaded_players.get(&player_id).expect("checked");
+    let dps_save = loaded.dps.as_ref().expect("checked");
+    let slots = props::struct_values(
+        dps_save
+            .root
+            .properties
+            .0
+            .get(&PropertyKey::from("SaveParameterArray"))
+            .unwrap(),
+    )
+    .unwrap();
+    Ok(pal_dto_from_dps_slot(&slots[slot_index], game_data).map(|dto| (slot_index as i32, dto)))
+}
+
+/// Port of `Player.add_dps_pal_from_dto` (`game/player.py:530`), reached via
+/// `PalOpsMixin.add_player_dps_pal_from_dto` (`pal_ops.py:108`) -- the DPS
+/// destination of Task 3C-6's `export_ups_pal`. DPS slots use the identical
+/// `SaveParameterArray` layout as GPS, so this mirrors `add_gps_pal_from_dto`
+/// (domain/gps.rs)'s DTO application, but targets the player's own `_dps.sav`
+/// via `add_player_dps_pal`'s slot-access machinery (`dps_slots_mut`/
+/// `first_empty_dps_slot`).
+///
+/// Deviation from THIS TASK'S BRIEF (which said "nil owner_uid", copied from
+/// the GPS model): Python's `add_dps_pal_from_dto` sets `pal_dto.owner_uid =
+/// self.uid` (the destination PLAYER), NOT the nil guid the GPS clone uses --
+/// a pal exported into a player's DPS storage belongs to that player. Python
+/// source wins over the brief here (see this task's report). `storage_id =
+/// self.pal_box_id` / `storage_slot = 0`: PARITY-BUG-1, inert. Like
+/// `add_gps_pal_from_dto`, `apply_pal_dto` already reproduces `update_from`'s
+/// `hp = max_hp` tail, so no separate Hp write is needed;
+/// `populate_status_point_lists()` is the two status-list inserts.
+pub fn add_player_dps_pal_from_dto(
+    session: &mut SaveSession,
+    game_data: &GameData,
+    player_id: uuid::Uuid,
+    pal_dto: &PalDto,
+    storage_slot: Option<i32>,
+) -> Result<Option<(i32, PalDto)>, CoreError> {
+    require_loaded_player(session, player_id)?;
+    let (pal_box_id, _party_id) = player_container_ids(session, player_id)?;
+    let loaded = session.loaded_players.get_mut(&player_id).expect("checked");
+    let Some(slots) = dps_slots_mut(loaded) else {
+        return Ok(None);
+    };
+    let slot_index = match storage_slot {
+        Some(requested) if requested >= 0 && (requested as usize) < slots.len() => {
+            requested as usize
+        }
+        Some(_) => return Ok(None),
+        None => match first_empty_dps_slot(slots) {
+            Some(found) => found,
+            None => return Ok(None),
+        },
+    };
+    let new_instance_id = uuid::Uuid::new_v4();
+    let mut incoming = pal_dto.clone();
+    incoming.owner_uid = Some(player_id);
+    incoming.instance_id = new_instance_id;
+    incoming.storage_id = pal_box_id; // inert -- PARITY-BUG-1
+    incoming.storage_slot = 0;
+    {
+        let StructValue::Struct(slot_props) = &mut slots[slot_index] else {
+            return Ok(None);
+        };
+        if let Some(id_struct) = slot_props
+            .0
+            .get_mut(&PropertyKey::from("InstanceId"))
+            .and_then(props::struct_props_mut)
+        {
+            id_struct.insert("InstanceId", props::guid_property(new_instance_id));
+        }
+        let Some(save_parameter) = slot_props
+            .0
+            .get_mut(&PropertyKey::from("SaveParameter"))
+            .and_then(props::struct_props_mut)
+        else {
+            return Ok(None);
+        };
+        apply_pal_dto(save_parameter, &incoming, true, game_data);
+        save_parameter.insert("GotStatusPointList", status_point_structs(&STATUS_NAMES));
+        save_parameter.insert(
+            "GotExStatusPointList",
+            status_point_structs(&EX_STATUS_NAMES),
         );
     }
     let loaded = session.loaded_players.get(&player_id).expect("checked");

@@ -131,7 +131,77 @@ const PARITY_IGNORED_PATHS: &[(&str, &str)] = &[
     // a dynamic dict key, so it gets its own comparator — see
     // `compare_get_presets_equivalent` below.
     ("add_preset", "/data/id"),
+    // Task 3C-6 (db-ups scenario). Every timestamp below is a wall-clock value
+    // written by whichever backend ran (Python at capture, Rust at replay) and
+    // can never match; each freshly-persisted pal's `instance_id` is likewise
+    // a `uuid4` minted independently. All are SINGLE-OBJECT frames reachable by
+    // a fixed JSON pointer; the ARRAY-shaped list frames (`get_ups_pals`,
+    // `get_ups_collections`, `get_ups_tags`) are handled by
+    // `mask_ups_list_frames` instead (a static pointer can't reach every
+    // element). Everything else on these frames (character_id, nickname, level,
+    // tags, notes, source_*, counts, names, colors) is still compared strictly.
+    //
+    // add_ups_pal echoes the whole persisted record.
+    ("add_ups_pal", "/data/created_at"),
+    ("add_ups_pal", "/data/updated_at"),
+    ("add_ups_pal", "/data/last_accessed_at"),
+    ("add_ups_pal", "/data/instance_id"),
+    // update_ups_pal / clone_ups_pal wrap the pal under `pal`/`cloned_pal`.
+    ("update_ups_pal", "/data/pal/updated_at"),
+    ("update_ups_pal", "/data/pal/instance_id"),
+    ("clone_ups_pal", "/data/cloned_pal/instance_id"),
+    // get_ups_stats: `last_updated` is a timestamp; `storage_size_mb` differs
+    // by a few bytes because Python orjson vs Rust serde_json compact-encode
+    // the same pal_data JSON slightly differently (float/whitespace) — a
+    // documented, sub-kilobyte serializer divergence, not a data difference.
+    ("get_ups_stats", "/data/stats/last_updated"),
+    ("get_ups_stats", "/data/stats/storage_size_mb"),
+    // Collections / tags wrap their record under `collection`/`tag`.
+    ("create_ups_collection", "/data/collection/created_at"),
+    ("create_ups_collection", "/data/collection/updated_at"),
+    ("update_ups_collection", "/data/collection/updated_at"),
+    ("create_ups_tag", "/data/tag/created_at"),
+    ("create_ups_tag", "/data/tag/updated_at"),
+    ("update_ups_tag", "/data/tag/updated_at"),
 ];
+
+/// The db-ups list frames carry an ARRAY of records whose per-element
+/// timestamps / instance ids are independently generated (Python at capture,
+/// Rust at replay) — a static `PARITY_IGNORED_PATHS` pointer can only reach a
+/// FIXED path, never every element of a variable-length array. Mask those
+/// per-element fields IN PLACE, leaving deterministic siblings
+/// (`total_count`/`offset`/`limit`, names, colors, counts) strictly compared.
+/// Called from `mask_ignored_paths` so it runs on both the expected and the
+/// actual frame, exactly like the static masks.
+fn mask_ups_list_frames(message_type: &str, value: &mut Value) {
+    let (array_field, keys): (&str, &[&str]) = match message_type {
+        "get_ups_pals" => (
+            "pals",
+            &[
+                "created_at",
+                "updated_at",
+                "last_accessed_at",
+                "instance_id",
+            ],
+        ),
+        "get_ups_collections" => ("collections", &["created_at", "updated_at"]),
+        "get_ups_tags" => ("tags", &["created_at", "updated_at"]),
+        _ => return,
+    };
+    let pointer = format!("/data/{array_field}");
+    if let Some(items) = value.pointer_mut(&pointer).and_then(Value::as_array_mut) {
+        for item in items.iter_mut() {
+            let Some(object) = item.as_object_mut() else {
+                continue;
+            };
+            for key in keys {
+                if let Some(field) = object.get_mut(*key) {
+                    *field = Value::String("<masked>".to_string());
+                }
+            }
+        }
+    }
+}
 
 /// Replaces every masked pointer for `message_type` with a fixed sentinel, in
 /// place. A pointer that isn't present in `value` is left alone (the frame may
@@ -144,6 +214,8 @@ fn mask_ignored_paths(message_type: &str, value: &mut Value) {
             }
         }
     }
+    // db-ups list frames need per-element masking a fixed pointer can't do.
+    mask_ups_list_frames(message_type, value);
 }
 
 /// Splits a `download_save_file` filename `<world>_<YYYYMMDD>_<HHMMSS>.zip`
@@ -1349,5 +1421,215 @@ fn compare_get_presets_equivalent_errs_when_pal_preset_association_differs() {
     assert!(
         error.contains("preset list mismatch"),
         "error must explain the mismatch; got: {error}"
+    );
+}
+
+// ---------------------------------------------------------------------------
+// db-ups masking (Task 3C-6). The db-ups fixtures are gitignored (local-only,
+// captured against a fresh psp.db) so the live replay path loud-SKIPs them in
+// CI — these synthetic unit tests are the standing proof that the masking is
+// correct, mirroring the get_presets comparator's own unit tests above.
+// ---------------------------------------------------------------------------
+
+/// The SINGLE-OBJECT db-ups frames mask EXACTLY their nondeterministic
+/// timestamp / instance-id fields and nothing else. A future edit that widened
+/// any of these (e.g. blanked the whole `pal`/`collection`, or masked
+/// `character_id`/`level`) turns this red.
+#[test]
+fn mask_ignored_paths_masks_ups_single_object_frames() {
+    // add_ups_pal echoes the whole record at /data.
+    let mut add = serde_json::json!({
+        "type": "add_ups_pal",
+        "data": {
+            "id": 1, "instance_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+            "character_id": "SheepBall", "nickname": "Fluffy", "level": 12,
+            "created_at": "2026-07-10T00:00:00Z", "updated_at": "2026-07-10T00:00:00Z",
+            "last_accessed_at": "2026-07-10T00:00:00Z", "tags": ["parity-tag"]
+        }
+    });
+    mask_ignored_paths("add_ups_pal", &mut add);
+    assert_eq!(add["data"]["instance_id"], "<masked>");
+    assert_eq!(add["data"]["created_at"], "<masked>");
+    assert_eq!(add["data"]["updated_at"], "<masked>");
+    assert_eq!(add["data"]["last_accessed_at"], "<masked>");
+    assert_eq!(add["data"]["character_id"], "SheepBall");
+    assert_eq!(add["data"]["nickname"], "Fluffy");
+    assert_eq!(add["data"]["level"], 12);
+    assert_eq!(add["data"]["tags"], serde_json::json!(["parity-tag"]));
+    assert_eq!(add["data"]["id"], 1, "the DB id is deterministic (rowid)");
+
+    // update_ups_pal / clone_ups_pal nest the pal under pal/cloned_pal.
+    let mut update = serde_json::json!({
+        "type": "update_ups_pal",
+        "data": {"pal": {"id": 1, "instance_id": "bbbb", "nickname": "Rex",
+                         "updated_at": "2026-07-10T00:00:00Z"}}
+    });
+    mask_ignored_paths("update_ups_pal", &mut update);
+    assert_eq!(update["data"]["pal"]["instance_id"], "<masked>");
+    assert_eq!(update["data"]["pal"]["updated_at"], "<masked>");
+    assert_eq!(update["data"]["pal"]["nickname"], "Rex");
+
+    let mut clone = serde_json::json!({
+        "type": "clone_ups_pal",
+        "data": {"original_pal_id": 1, "cloned_pal": {"id": 2, "instance_id": "cccc",
+                 "nickname": "Rex (Clone)"}}
+    });
+    mask_ignored_paths("clone_ups_pal", &mut clone);
+    assert_eq!(clone["data"]["cloned_pal"]["instance_id"], "<masked>");
+    assert_eq!(clone["data"]["cloned_pal"]["nickname"], "Rex (Clone)");
+    assert_eq!(clone["data"]["original_pal_id"], 1);
+
+    // get_ups_stats: only last_updated + storage_size_mb.
+    let mut stats = serde_json::json!({
+        "type": "get_ups_stats",
+        "data": {"stats": {"total_pals": 2, "storage_size_mb": 0.01,
+                 "last_updated": "2026-07-10T00:00:00Z"}}
+    });
+    mask_ignored_paths("get_ups_stats", &mut stats);
+    assert_eq!(stats["data"]["stats"]["last_updated"], "<masked>");
+    assert_eq!(stats["data"]["stats"]["storage_size_mb"], "<masked>");
+    assert_eq!(
+        stats["data"]["stats"]["total_pals"], 2,
+        "total_pals is a deterministic count and must NOT be masked"
+    );
+
+    // create_ups_collection / create_ups_tag nest under collection/tag.
+    let mut collection = serde_json::json!({
+        "type": "create_ups_collection",
+        "data": {"collection": {"id": 1, "name": "Parity Favs",
+                 "created_at": "t", "updated_at": "t"}}
+    });
+    mask_ignored_paths("create_ups_collection", &mut collection);
+    assert_eq!(collection["data"]["collection"]["created_at"], "<masked>");
+    assert_eq!(collection["data"]["collection"]["updated_at"], "<masked>");
+    assert_eq!(collection["data"]["collection"]["name"], "Parity Favs");
+
+    let mut tag = serde_json::json!({
+        "type": "create_ups_tag",
+        "data": {"tag": {"id": 1, "name": "parity-tag", "created_at": "t", "updated_at": "t"}}
+    });
+    mask_ignored_paths("create_ups_tag", &mut tag);
+    assert_eq!(tag["data"]["tag"]["created_at"], "<masked>");
+    assert_eq!(tag["data"]["tag"]["updated_at"], "<masked>");
+    assert_eq!(tag["data"]["tag"]["name"], "parity-tag");
+}
+
+/// The ARRAY-shaped list frames mask the per-element nondeterministic fields in
+/// EVERY element while leaving deterministic siblings — both inside each
+/// element (character_id, nickname, pal_data, name, color) AND alongside the
+/// array (total_count/offset/limit) — untouched. This is the case a static
+/// `PARITY_IGNORED_PATHS` pointer provably cannot handle.
+#[test]
+fn mask_ups_list_frames_masks_every_element_only() {
+    let mut pals = serde_json::json!({
+        "type": "get_ups_pals",
+        "data": {
+            "total_count": 2, "offset": 0, "limit": 30,
+            "pals": [
+                {"id": 1, "instance_id": "a1", "character_id": "SheepBall",
+                 "nickname": "Fluffy", "pal_data": {"x": 1},
+                 "created_at": "t", "updated_at": "t", "last_accessed_at": "t"},
+                {"id": 2, "instance_id": "a2", "character_id": "Lamball",
+                 "nickname": "Woolly", "pal_data": {"y": 2},
+                 "created_at": "t2", "updated_at": "t2", "last_accessed_at": "t2"}
+            ]
+        }
+    });
+    mask_ignored_paths("get_ups_pals", &mut pals);
+    for index in 0..2 {
+        assert_eq!(pals["data"]["pals"][index]["instance_id"], "<masked>");
+        assert_eq!(pals["data"]["pals"][index]["created_at"], "<masked>");
+        assert_eq!(pals["data"]["pals"][index]["updated_at"], "<masked>");
+        assert_eq!(pals["data"]["pals"][index]["last_accessed_at"], "<masked>");
+    }
+    assert_eq!(pals["data"]["pals"][0]["character_id"], "SheepBall");
+    assert_eq!(pals["data"]["pals"][1]["character_id"], "Lamball");
+    assert_eq!(pals["data"]["pals"][0]["nickname"], "Fluffy");
+    assert_eq!(
+        pals["data"]["pals"][0]["pal_data"],
+        serde_json::json!({"x": 1})
+    );
+    assert_eq!(pals["data"]["pals"][0]["id"], 1);
+    assert_eq!(
+        pals["data"]["total_count"], 2,
+        "total_count is deterministic and must survive the per-element mask"
+    );
+    assert_eq!(pals["data"]["offset"], 0);
+    assert_eq!(pals["data"]["limit"], 30);
+
+    // collections + tags carry only created_at/updated_at per element.
+    let mut collections = serde_json::json!({
+        "type": "get_ups_collections",
+        "data": {"collections": [
+            {"id": 1, "name": "Favs", "color": "#f00", "created_at": "t", "updated_at": "t"}
+        ]}
+    });
+    mask_ignored_paths("get_ups_collections", &mut collections);
+    assert_eq!(
+        collections["data"]["collections"][0]["created_at"],
+        "<masked>"
+    );
+    assert_eq!(
+        collections["data"]["collections"][0]["updated_at"],
+        "<masked>"
+    );
+    assert_eq!(collections["data"]["collections"][0]["name"], "Favs");
+    assert_eq!(collections["data"]["collections"][0]["color"], "#f00");
+
+    let mut tags = serde_json::json!({
+        "type": "get_ups_tags",
+        "data": {"tags": [{"id": 1, "name": "t1", "created_at": "t", "updated_at": "t"}]}
+    });
+    mask_ignored_paths("get_ups_tags", &mut tags);
+    assert_eq!(tags["data"]["tags"][0]["created_at"], "<masked>");
+    assert_eq!(tags["data"]["tags"][0]["updated_at"], "<masked>");
+    assert_eq!(tags["data"]["tags"][0]["name"], "t1");
+}
+
+/// End-to-end through `compare_responses` (the actual pass/fail decision):
+/// two get_ups_pals frames whose ONLY differences are the masked per-element
+/// timestamps/instance-ids must compare EQUAL after masking, while a real
+/// content difference (a nickname) must still FAIL. Proves the mask is neither
+/// too weak (letting timestamps fail replay) nor too strong (swallowing real
+/// divergences).
+#[test]
+fn ups_pal_list_masking_is_neither_too_weak_nor_too_strong() {
+    let make = |instance: &str, timestamp: &str, nickname: &str| {
+        let mut frame = serde_json::json!({
+            "type": "get_ups_pals",
+            "data": {"total_count": 1, "offset": 0, "limit": 30, "pals": [
+                {"id": 1, "instance_id": instance, "character_id": "SheepBall",
+                 "nickname": nickname, "created_at": timestamp, "updated_at": timestamp,
+                 "last_accessed_at": timestamp}
+            ]}
+        });
+        mask_ignored_paths("get_ups_pals", &mut frame);
+        frame
+    };
+
+    // Same content, different (masked) instance id + timestamps → equal.
+    let captured = vec![make("py-uuid", "2026-07-10T00:00:00Z", "Fluffy")];
+    let replayed = vec![make("rs-uuid", "2026-07-10T09:59:59Z", "Fluffy")];
+    assert_eq!(
+        compare_responses(
+            "fixtures/db-ups/00_get_ups_pals.json",
+            "get_ups_pals",
+            &replayed,
+            &captured
+        ),
+        Ok(())
+    );
+
+    // Real content divergence (nickname) survives the mask and must fail.
+    let divergent = vec![make("rs-uuid", "2026-07-10T09:59:59Z", "Rex")];
+    assert!(
+        compare_responses(
+            "fixtures/db-ups/00_get_ups_pals.json",
+            "get_ups_pals",
+            &divergent,
+            &captured
+        )
+        .is_err(),
+        "a real nickname difference must NOT be masked away"
     );
 }

@@ -361,3 +361,74 @@ there.**
 
 Fixtures are gitignored (`rust/.gitignore`'s `/parity/fixtures/`); this
 corpus, like every other, is local-only — regenerate, never commit.
+
+## db-ups scenario (Phase 3, Task 3C-6)
+
+Exercises the UPS DATABASE surface against a FRESH psp.db (no loaded save):
+`get_ups_stats` → `get_ups_collections` → `create_ups_collection` →
+`get_ups_tags` → `create_ups_tag` → `add_ups_pal` → `get_ups_pals` →
+`get_ups_all_filtered_ids` → `update_ups_pal` → `clone_ups_pal` →
+`get_ups_stats` → `delete_ups_pals` → `nuke_ups_pals` →
+`update_ups_collection` → `update_ups_tag` → `delete_ups_tag` →
+`delete_ups_collection`. `scripts/capture_parity.py`'s `SAMPLE_PAL_DTO` is the
+same 30-field dict as `psp-server/tests/ups_ws.rs::sample_pal_dto`.
+
+The three session-level interop handlers (`clone_to_ups`/`import_to_ups`/
+`export_ups_pal`) are NOT in this corpus: they need a loaded save, and the
+add-from-DTO destinations mint fresh `uuid4` instance ids that would diverge
+the save bytes. Their no-save error paths are covered by
+`psp-server/tests/ups_session_ws.rs`.
+
+**Why db-ups needs masks, not a custom comparator.** Unlike `get_presets`
+(a uuid-KEYED dict, which no fixed pointer can reach), every db-ups frame is
+addressable: single-object frames (`add_ups_pal` echoes the whole record;
+`update_ups_pal`/`clone_ups_pal` nest under `pal`/`cloned_pal`;
+`get_ups_stats` under `stats`; collections/tags under `collection`/`tag`) use
+ordinary `PARITY_IGNORED_PATHS` entries; the ARRAY-shaped list frames
+(`get_ups_pals` → `data.pals[]`, `get_ups_collections` →
+`data.collections[]`, `get_ups_tags` → `data.tags[]`) are masked per-element
+by `mask_ups_list_frames` (called from `mask_ignored_paths`), which blanks
+each element's `created_at`/`updated_at`/`last_accessed_at`/`instance_id`
+while leaving `total_count`/`offset`/`limit`, names, colors, and every real
+field strictly compared. Both mechanisms are unit-tested synthetically
+(`mask_ignored_paths_masks_ups_single_object_frames`,
+`mask_ups_list_frames_masks_every_element_only`,
+`ups_pal_list_masking_is_neither_too_weak_nor_too_strong`) since the fixtures
+themselves are gitignored and loud-SKIP in CI. `get_ups_stats.storage_size_mb`
+is also masked: Python orjson vs Rust serde_json compact-encode the same
+`pal_data` JSON with slightly different float/whitespace, so the reported size
+differs by a few bytes — a documented serializer divergence, not a data one.
+
+### Safe capture procedure
+
+**Same discipline as db-presets: the backend's `psp.db` lives at the repo
+root and may hold the developer's real, hand-curated pals/collections/tags.
+This scenario needs EMPTY UPS tables, i.e. a FRESH `psp.db`. Never delete the
+real one to get there.**
+
+1. From the repo root, back up and move the existing `psp.db` ASIDE (don't
+   delete it):
+   `mv psp.db psp.db.ups-parity-backup` (PowerShell:
+   `Move-Item psp.db psp.db.ups-parity-backup`).
+2. Start the Python backend on a port your real client isn't using (the
+   default 5174 may be held by a running desktop build / dev server):
+   `uv run python psp.py --port 5199`
+   This creates a brand-new, empty `psp.db` whose UPS tables start with zero
+   rows. (The row ids the scenario references — `pal_id: 1`, `collection_id:
+   1`, `tag_id: 1` — assume that fresh table state.)
+3. From the repo root, capture against that same port:
+   `uv run --with websockets scripts/capture_parity.py --scenario db-ups --url ws://127.0.0.1:5199/ws/999999999`
+   Fixtures land in `rust/parity/fixtures/db-ups/`.
+4. Stop the Python backend (Ctrl+C).
+5. Delete the FRESH `psp.db` this run created, then restore the developer's
+   original:
+   `rm psp.db` then `mv psp.db.ups-parity-backup psp.db`
+   (PowerShell: `Remove-Item psp.db` then
+   `Move-Item psp.db.ups-parity-backup psp.db`).
+6. From `rust/`: `cargo test -p psp-server --test parity` — replays `db-ups`
+   (and every other captured corpus) against a fresh Rust temp DB.
+
+Fixtures are gitignored (`rust/.gitignore`'s `/parity/fixtures/`); this
+corpus, like every other, is local-only — regenerate, never commit. With no
+db-ups fixtures present (the CI/default state), the replay loud-SKIPs them —
+that is correct, not a failure.

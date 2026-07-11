@@ -5,6 +5,10 @@
 use crate::dispatcher::HandlerCtx;
 use crate::handler_error::HandlerError;
 use crate::messages::MessageType;
+use psp_core::domain::pal;
+use psp_core::domain::player::build_player_dto;
+use psp_core::dto::pal::PalDto;
+use psp_core::session::SaveSession;
 use psp_db::ups::{PalTypeFilter, UpsFilter};
 
 fn default_limit() -> i64 {
@@ -591,6 +595,517 @@ pub async fn handle_delete_ups_tag(
             &serde_json::json!({"success": success, "tag_id": data.tag_id}),
         ),
         Err(error) => emit_ups_error(ctx, format!("Failed to delete UPS tag: {error}")),
+    }
+    Ok(())
+}
+
+// ===========================================================================
+// Task 3C-6: UPS <-> save-session interop (clone_to_ups / import_to_ups /
+// export_ups_pal). Wire shapes + error strings ported verbatim from
+// `ws/handlers/ups_handler.py:257-707`; the source/destination resolution is
+// reconciled against this port's DTO/functional architecture (there is no
+// `Player` struct with `.pals`/`.to_dto()` -- see this task's report).
+// ===========================================================================
+
+/// `ws/messages.py` CloneToUpsData. `pal_ids` are instance-id STRINGS.
+#[derive(Debug, serde::Deserialize)]
+pub struct CloneToUpsData {
+    pub pal_ids: Vec<String>,
+    pub source_type: String,
+    pub source_player_uid: Option<String>,
+    pub collection_id: Option<i64>,
+    pub tags: Option<Vec<String>>,
+    pub notes: Option<String>,
+}
+
+/// `ws/messages.py` ImportToUpsData.
+#[derive(Debug, serde::Deserialize)]
+pub struct ImportToUpsData {
+    pub source_type: String,
+    pub source_pal_id: Option<uuid::Uuid>,
+    pub source_slot: Option<i32>,
+    pub source_player_uid: Option<uuid::Uuid>,
+    pub collection_id: Option<i64>,
+    pub tags: Option<Vec<String>>,
+    pub notes: Option<String>,
+}
+
+/// `ws/messages.py` ExportUpsPalData.
+#[derive(Debug, serde::Deserialize)]
+pub struct ExportUpsPalData {
+    pub pal_id: i64,
+    pub destination_type: String,
+    pub destination_player_uid: Option<uuid::Uuid>,
+    pub destination_slot: Option<i32>,
+}
+
+/// A source pal resolved out of the loaded save, plus the source metadata
+/// `UPSService.add_pal` records (`ups_handler.py`'s `source_info` dict).
+struct ResolvedSourcePal {
+    dto: PalDto,
+    player_uid: Option<uuid::Uuid>,
+    player_name: Option<String>,
+    storage_type: String,
+    storage_slot: Option<i64>,
+}
+
+/// The specific lookup failure `resolve_source_pal` hit, so each caller
+/// (`clone_to_ups` collects; `import_to_ups` hard-errors) can render the exact
+/// per-mode Python string it needs -- the two handlers use DIFFERENT strings
+/// for the same failure (compare `ups_handler.py:415-506` vs `565-663`).
+enum ResolveError {
+    PlayerNotFound,
+    PlayerHasNoPals,
+    PalNotFoundPalBox,
+    GpsNotAvailable,
+    PalNotFoundGps,
+    PlayerOrDpsNotFound,
+    PalNotFoundDps,
+    UnknownSourceType,
+}
+
+/// Shared source-pal resolution for clone_to_ups/import_to_ups. `pal_box`
+/// reads `build_player_dto(...).pals` (keyed by instance id); `gps` reads
+/// `session.gps_pals()`; `dps` reads `build_player_dto(...).dps`. `gps`/`dps`
+/// resolve by SLOT when `source_slot` is `Some` (import) and by INSTANCE ID
+/// otherwise (clone), scanning `PalDto.instance_id` (a field, not a method).
+fn resolve_source_pal(
+    session: &SaveSession,
+    game_data: &psp_core::gamedata::GameData,
+    source_type: &str,
+    pal_instance_id: Option<uuid::Uuid>,
+    source_slot: Option<i32>,
+    source_player_uid: Option<uuid::Uuid>,
+) -> Result<ResolvedSourcePal, ResolveError> {
+    match source_type {
+        "pal_box" => {
+            let player_uid = source_player_uid.ok_or(ResolveError::PlayerNotFound)?;
+            let player = build_player_dto(session, game_data, player_uid)
+                .map_err(|_| ResolveError::PlayerNotFound)?
+                .ok_or(ResolveError::PlayerNotFound)?;
+            if player.pals.is_empty() {
+                return Err(ResolveError::PlayerHasNoPals);
+            }
+            let pal_id = pal_instance_id.ok_or(ResolveError::PalNotFoundPalBox)?;
+            let dto = player
+                .pals
+                .get(&pal_id)
+                .ok_or(ResolveError::PalNotFoundPalBox)?
+                .clone();
+            Ok(ResolvedSourcePal {
+                dto,
+                player_uid: Some(player_uid),
+                player_name: Some(player.nickname.clone()),
+                storage_type: "pal_box".to_string(),
+                storage_slot: None,
+            })
+        }
+        "gps" => {
+            let gps_pals = session
+                .gps_pals()
+                .filter(|pals| !pals.is_empty())
+                .ok_or(ResolveError::GpsNotAvailable)?;
+            let (slot, dto) = match source_slot {
+                Some(slot) => (
+                    slot,
+                    gps_pals
+                        .get(&slot)
+                        .ok_or(ResolveError::PalNotFoundGps)?
+                        .clone(),
+                ),
+                None => {
+                    let pal_id = pal_instance_id.ok_or(ResolveError::PalNotFoundGps)?;
+                    gps_pals
+                        .iter()
+                        .find(|(_, pal)| pal.instance_id == pal_id)
+                        .map(|(slot, pal)| (*slot, pal.clone()))
+                        .ok_or(ResolveError::PalNotFoundGps)?
+                }
+            };
+            Ok(ResolvedSourcePal {
+                dto,
+                player_uid: None,
+                player_name: None,
+                storage_type: "gps".to_string(),
+                storage_slot: Some(slot as i64),
+            })
+        }
+        "dps" => {
+            let player_uid = source_player_uid.ok_or(ResolveError::PlayerOrDpsNotFound)?;
+            let player = build_player_dto(session, game_data, player_uid)
+                .map_err(|_| ResolveError::PlayerOrDpsNotFound)?
+                .ok_or(ResolveError::PlayerOrDpsNotFound)?;
+            let dps = player
+                .dps
+                .as_ref()
+                .filter(|slots| !slots.is_empty())
+                .ok_or(ResolveError::PlayerOrDpsNotFound)?;
+            let (slot, dto) = match source_slot {
+                Some(slot) => (
+                    slot,
+                    dps.get(&slot).ok_or(ResolveError::PalNotFoundDps)?.clone(),
+                ),
+                None => {
+                    let pal_id = pal_instance_id.ok_or(ResolveError::PalNotFoundDps)?;
+                    dps.iter()
+                        .find(|(_, pal)| pal.instance_id == pal_id)
+                        .map(|(slot, pal)| (*slot, pal.clone()))
+                        .ok_or(ResolveError::PalNotFoundDps)?
+                }
+            };
+            Ok(ResolvedSourcePal {
+                dto,
+                player_uid: Some(player_uid),
+                player_name: Some(player.nickname.clone()),
+                storage_type: "dps".to_string(),
+                storage_slot: Some(slot as i64),
+            })
+        }
+        _ => Err(ResolveError::UnknownSourceType),
+    }
+}
+
+/// Builds the `AddUpsPalData` for a resolved source pal so the existing
+/// `new_ups_pal_from_dto` (Task 3C-4) converts it to a `NewUpsPal` -- exactly
+/// the field mapping `UPSService.add_pal(...)` performs in Python.
+fn new_ups_pal_for_source(
+    resolved: ResolvedSourcePal,
+    world_name: String,
+    collection_id: Option<i64>,
+    tags: Option<Vec<String>>,
+    notes: Option<String>,
+) -> Result<psp_db::ups::NewUpsPal, HandlerError> {
+    new_ups_pal_from_dto(AddUpsPalData {
+        pal_dto: resolved.dto,
+        source_save_file: Some(world_name),
+        source_player_uid: resolved.player_uid,
+        source_player_name: resolved.player_name,
+        source_storage_type: Some(resolved.storage_type),
+        source_storage_slot: resolved.storage_slot,
+        collection_id,
+        tags,
+        notes,
+    })
+}
+
+pub async fn handle_clone_to_ups(
+    data: CloneToUpsData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    if ctx.session.save.is_none() {
+        emit_ups_error(ctx, "No save file loaded".to_string());
+        return Ok(());
+    }
+    let world_name = ctx.session.save.as_ref().unwrap().world_name.clone();
+    let mut cloned_count = 0usize;
+    let mut errors: Vec<String> = Vec::new();
+
+    for pal_id_text in &data.pal_ids {
+        // Per-mode "Player UID required..." precondition (ups_handler.py:417-421,
+        // 474-478); gps needs no uid.
+        let source_player_uid = match data.source_type.as_str() {
+            "pal_box" | "dps" => {
+                let Some(raw) = data.source_player_uid.as_deref() else {
+                    errors.push(if data.source_type == "pal_box" {
+                        format!("Player UID required for pal box clone: {pal_id_text}")
+                    } else {
+                        format!("Player UID required for DPS clone: {pal_id_text}")
+                    });
+                    continue;
+                };
+                match uuid::Uuid::parse_str(raw) {
+                    Ok(uid) => Some(uid),
+                    Err(error) => {
+                        errors.push(format!("Failed to clone {pal_id_text}: {error}"));
+                        continue;
+                    }
+                }
+            }
+            _ => None,
+        };
+        // clone resolves gps/dps by INSTANCE ID (source_slot = None).
+        let pal_instance_id = uuid::Uuid::parse_str(pal_id_text).ok();
+        let resolved = match resolve_source_pal(
+            ctx.session.save.as_ref().unwrap(),
+            &ctx.app.game_data,
+            &data.source_type,
+            pal_instance_id,
+            None,
+            source_player_uid,
+        ) {
+            Ok(resolved) => resolved,
+            Err(reason) => {
+                errors.push(clone_error_string(
+                    &data.source_type,
+                    reason,
+                    pal_id_text,
+                    data.source_player_uid.as_deref(),
+                ));
+                continue;
+            }
+        };
+        let new_pal = new_ups_pal_for_source(
+            resolved,
+            world_name.clone(),
+            data.collection_id,
+            data.tags.clone(),
+            data.notes.clone(),
+        )?;
+        let pals_data = pals_game_data(ctx);
+        match psp_db::ups::add_pal(&ctx.app.db, new_pal, &pals_data).await {
+            Ok(_) => cloned_count += 1,
+            Err(error) => errors.push(format!("Failed to clone {pal_id_text}: {error}")),
+        }
+    }
+
+    ctx.emitter.emit(
+        MessageType::CloneToUps,
+        &serde_json::json!({
+            "success": cloned_count > 0,
+            "cloned_count": cloned_count,
+            "total_requested": data.pal_ids.len(),
+            "errors": errors,
+        }),
+    );
+    Ok(())
+}
+
+/// clone_to_ups per-mode error strings (ups_handler.py:415-506).
+fn clone_error_string(
+    source_type: &str,
+    reason: ResolveError,
+    pal_id_text: &str,
+    source_player_uid: Option<&str>,
+) -> String {
+    match (source_type, reason) {
+        ("pal_box", ResolveError::PlayerNotFound) => {
+            format!("Player not found {}", source_player_uid.unwrap_or(""))
+        }
+        ("pal_box", ResolveError::PlayerHasNoPals) => "Player has no pals".to_string(),
+        ("pal_box", _) => format!("Pal not found in player's pal box: {pal_id_text}"),
+        ("gps", ResolveError::GpsNotAvailable) => format!("GPS not available for: {pal_id_text}"),
+        ("gps", _) => format!("Pal not found in GPS: {pal_id_text}"),
+        ("dps", ResolveError::PlayerOrDpsNotFound) => {
+            format!("Player or DPS not found for: {pal_id_text}")
+        }
+        ("dps", _) => format!("Pal not found in DPS: {pal_id_text}"),
+        _ => format!("Failed to clone {pal_id_text}"),
+    }
+}
+
+pub async fn handle_import_to_ups(
+    data: ImportToUpsData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    if ctx.session.save.is_none() {
+        emit_ups_error(ctx, "No save file loaded".to_string());
+        return Ok(());
+    }
+    // Preconditions copied verbatim (ups_handler.py:565-651).
+    match data.source_type.as_str() {
+        "pal_box" if data.source_pal_id.is_none() || data.source_player_uid.is_none() => {
+            emit_ups_error(
+                ctx,
+                "Pal ID and Player UID required for pal box import".into(),
+            );
+            return Ok(());
+        }
+        "gps" if data.source_slot.is_none() => {
+            emit_ups_error(ctx, "Slot index required for GPS import".into());
+            return Ok(());
+        }
+        "dps" if data.source_slot.is_none() || data.source_player_uid.is_none() => {
+            emit_ups_error(
+                ctx,
+                "Slot index and Player UID required for DPS import".into(),
+            );
+            return Ok(());
+        }
+        _ => {}
+    }
+    let world_name = ctx.session.save.as_ref().unwrap().world_name.clone();
+    let resolved = match resolve_source_pal(
+        ctx.session.save.as_ref().unwrap(),
+        &ctx.app.game_data,
+        &data.source_type,
+        data.source_pal_id,
+        data.source_slot,
+        data.source_player_uid,
+    ) {
+        Ok(resolved) => resolved,
+        Err(reason) => {
+            emit_ups_error(
+                ctx,
+                import_error_string(&data.source_type, reason).to_string(),
+            );
+            return Ok(());
+        }
+    };
+    let new_pal = new_ups_pal_for_source(
+        resolved,
+        world_name,
+        data.collection_id,
+        data.tags,
+        data.notes,
+    )?;
+    let pals_data = pals_game_data(ctx);
+    match psp_db::ups::add_pal(&ctx.app.db, new_pal, &pals_data).await {
+        Ok(record) => ctx.emitter.emit(
+            MessageType::ImportToUps,
+            &serde_json::json!({"success": true, "pal": {
+                "id": record.id,
+                "instance_id": record.instance_id,
+                "character_id": record.character_id,
+                "nickname": record.nickname,
+                "level": record.level,
+                "collection_id": record.collection_id,
+                "tags": record.tags,
+                "notes": record.notes,
+            }}),
+        ),
+        Err(error) => emit_ups_error(ctx, format!("Failed to import to UPS: {error}")),
+    }
+    Ok(())
+}
+
+/// import_to_ups hard-error strings (ups_handler.py:565-668). A fall-through
+/// (unknown source type -> `pal_dto` never set) is Python's final
+/// "Failed to retrieve Pal data".
+fn import_error_string(source_type: &str, reason: ResolveError) -> &'static str {
+    match (source_type, reason) {
+        ("pal_box", ResolveError::PlayerNotFound | ResolveError::PlayerHasNoPals) => {
+            "Player or pals not found"
+        }
+        ("pal_box", _) => "Pal not found in player's pal box",
+        ("gps", _) => "Pal not found in GPS slot",
+        ("dps", ResolveError::PlayerOrDpsNotFound) => "Player or DPS not found",
+        ("dps", _) => "Pal not found in DPS slot",
+        _ => "Failed to retrieve Pal data",
+    }
+}
+
+pub async fn handle_export_ups_pal(
+    data: ExportUpsPalData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    if ctx.session.save.is_none() {
+        emit_ups_error(ctx, "No save file loaded".to_string());
+        return Ok(());
+    }
+    let Some(ups_pal) = psp_db::ups::get_pal_by_id(&ctx.app.db, data.pal_id).await? else {
+        emit_ups_error(ctx, format!("UPS Pal with ID {} not found", data.pal_id));
+        return Ok(());
+    };
+    let pal_dto = match PalDto::from_json_lenient(&ups_pal.pal_data) {
+        Ok(dto) => dto,
+        Err(error) => {
+            emit_ups_error(ctx, format!("Failed to export UPS pal: {error}"));
+            return Ok(());
+        }
+    };
+
+    let world_name = ctx.session.save.as_ref().unwrap().world_name.clone();
+    let mut player_name: Option<String> = None;
+    let mut exported = false;
+
+    match data.destination_type.as_str() {
+        "pal_box" => {
+            let Some(player_uid) = data.destination_player_uid else {
+                emit_ups_error(ctx, "Player UID required for pal box export".into());
+                return Ok(());
+            };
+            // player.pal_box_id + existence check (ups_handler.py:292-304).
+            let save = ctx.session.save.as_ref().unwrap();
+            let Some(player) = build_player_dto(save, &ctx.app.game_data, player_uid)? else {
+                emit_ups_error(ctx, "Player not found".into());
+                return Ok(());
+            };
+            let Some(pal_box_id) = player.pal_box_id else {
+                emit_ups_error(ctx, "Player not found".into());
+                return Ok(());
+            };
+            player_name = Some(player.nickname.clone());
+            let save = ctx.session.save_mut()?;
+            if let Some(new_pal) = pal::add_player_pal_from_dto(
+                save,
+                &ctx.app.game_data,
+                player_uid,
+                &pal_dto,
+                pal_box_id,
+                None,
+            )? {
+                exported = true;
+                ctx.emitter.emit(
+                    MessageType::AddPal,
+                    &serde_json::json!({"player_id": player_uid.to_string(), "pal": new_pal}),
+                );
+            }
+        }
+        "gps" => {
+            let save = ctx.session.save_mut()?;
+            if let Some((slot_index, new_pal)) =
+                save.add_gps_pal_from_dto(&ctx.app.game_data, &pal_dto, data.destination_slot)?
+            {
+                exported = true;
+                ctx.emitter.emit(
+                    MessageType::AddGpsPal,
+                    &serde_json::json!({"pal": new_pal, "index": slot_index}),
+                );
+            }
+        }
+        "dps" => {
+            let Some(player_uid) = data.destination_player_uid else {
+                emit_ups_error(ctx, "Player UID required for DPS export".into());
+                return Ok(());
+            };
+            let save = ctx.session.save_mut()?;
+            if let Some((slot_index, new_pal)) = pal::add_player_dps_pal_from_dto(
+                save,
+                &ctx.app.game_data,
+                player_uid,
+                &pal_dto,
+                data.destination_slot,
+            )? {
+                exported = true;
+                ctx.emitter.emit(
+                    MessageType::AddDpsPal,
+                    &serde_json::json!({
+                        "player_id": player_uid.to_string(),
+                        "pal": new_pal,
+                        "index": slot_index,
+                    }),
+                );
+            }
+        }
+        _ => {}
+    }
+
+    if exported {
+        psp_db::ups::export_pal_to_save(
+            &ctx.app.db,
+            data.pal_id,
+            &data.destination_type,
+            &psp_db::ups::ExportDestinationInfo {
+                save_file_name: Some(world_name),
+                player_name,
+                player_uid: data.destination_player_uid.map(|uid| uid.to_string()),
+            },
+        )
+        .await?;
+        ctx.emitter.emit(
+            MessageType::ExportUpsPal,
+            &serde_json::json!({
+                "success": true,
+                "destination_type": data.destination_type,
+                "destination_player_uid": data.destination_player_uid.map(|uid| uid.to_string()),
+                "destination_slot": data.destination_slot,
+            }),
+        );
+    } else {
+        ctx.emitter.emit(
+            MessageType::ExportUpsPal,
+            &serde_json::json!({"success": false, "error": "Failed to export pal to destination"}),
+        );
     }
     Ok(())
 }

@@ -123,10 +123,129 @@ DB_PRESETS_SCENARIO = (
     ],
 )
 
+# Task 3C-6: the UPS database surface (stats/collections/tags/pal CRUD),
+# against a FRESH psp.db — mirrors the same 30-field pal DTO the Rust
+# ups_ws.rs::sample_pal_dto test uses. This scenario exercises ONLY the
+# DB-backed UPS handlers; clone_to_ups/import_to_ups/export_ups_pal need a
+# loaded save and are covered by session-level tests, not this corpus.
+#
+# get_ups_pals returns an ARRAY of records each with independently-generated
+# created_at/updated_at/last_accessed_at/instance_id, and add_ups_pal echoes
+# the whole record — parity.rs masks those per-element/per-record fields (see
+# mask_ups_list_frames + the add_ups_pal/... PARITY_IGNORED_PATHS entries).
+# See rust/parity/README.md, "db-ups scenario", for the safe capture procedure
+# (this backend's psp.db must NOT be the developer's real one).
+SAMPLE_PAL_DTO = {
+    "instance_id": "11111111-1111-1111-1111-111111111111",
+    "owner_uid": None,
+    "character_id": "SheepBall",
+    "is_lucky": False,
+    "is_boss": False,
+    "gender": "Female",
+    "rank_hp": 1,
+    "rank_attack": 2,
+    "rank_defense": 3,
+    "rank_craftspeed": 4,
+    "talent_hp": 50,
+    "talent_shot": 60,
+    "talent_defense": 70,
+    "rank": 1,
+    "level": 12,
+    "exp": 3450,
+    "nickname": "Fluffy",
+    "is_tower": False,
+    "storage_id": "22222222-2222-2222-2222-222222222222",
+    "stomach": 100.0,
+    "storage_slot": 3,
+    "learned_skills": [],
+    "active_skills": [],
+    "passive_skills": [],
+    "hp": 5000,
+    "max_hp": 5000,
+    "group_id": None,
+    "sanity": 100.0,
+    "work_suitability": {"Handcraft": 1},
+    "is_sick": False,
+    "friendship_point": 0,
+}
+
+DB_UPS_SCENARIO = (
+    "db-ups",
+    [
+        {"type": "get_ups_stats", "data": None},
+        {"type": "get_ups_collections", "data": None},
+        {
+            "type": "create_ups_collection",
+            "data": {"name": "Parity Favs", "description": "d", "color": "#f00"},
+        },
+        {"type": "get_ups_tags", "data": None},
+        {
+            "type": "create_ups_tag",
+            "data": {"name": "parity-tag", "description": None, "color": "#0f0"},
+        },
+        {
+            "type": "add_ups_pal",
+            "data": {
+                "pal_dto": SAMPLE_PAL_DTO,
+                "source_save_file": "ParityWorld",
+                "source_player_uid": "55555555-5555-5555-5555-555555555555",
+                "source_player_name": "Omar",
+                "source_storage_type": "pal_box",
+                "source_storage_slot": 3,
+                "collection_id": None,
+                "tags": ["parity-tag"],
+                "notes": None,
+            },
+        },
+        {
+            "type": "get_ups_pals",
+            "data": {
+                "offset": 0,
+                "limit": 30,
+                "search_query": None,
+                "character_id_filter": None,
+                "collection_id": None,
+                "tags": None,
+                "element_types": None,
+                "pal_types": None,
+                "sort_by": "created_at",
+                "sort_order": "desc",
+            },
+        },
+        {
+            "type": "get_ups_all_filtered_ids",
+            "data": {
+                "search_query": None,
+                "character_id_filter": None,
+                "collection_id": None,
+                "tags": ["parity-tag"],
+                "element_types": None,
+                "pal_types": None,
+            },
+        },
+        {"type": "update_ups_pal", "data": {"pal_id": 1, "updates": {"nickname": "Rex"}}},
+        {"type": "clone_ups_pal", "data": {"pal_id": 1}},
+        {"type": "get_ups_stats", "data": None},
+        {"type": "delete_ups_pals", "data": {"pal_ids": [1]}},
+        {"type": "nuke_ups_pals", "data": None},
+        {
+            "type": "update_ups_collection",
+            "data": {"collection_id": 1, "updates": {"is_favorite": True}},
+        },
+        {
+            "type": "update_ups_tag",
+            "data": {"tag_id": 1, "updates": {"name": "parity-tag-2"}},
+        },
+        {"type": "delete_ups_tag", "data": {"tag_id": 1}},
+        {"type": "delete_ups_collection", "data": {"collection_id": 1}},
+    ],
+)
+
 # Scenarios with a fixed request list, independent of any on-disk save.
 FIXED_SCENARIOS = {
     "static-data": STATIC_DATA_SCENARIO,
     DB_PRESETS_SCENARIO[0]: DB_PRESETS_SCENARIO[1],
+    DB_UPS_SCENARIO[0]: DB_UPS_SCENARIO[1],
 }
 
 # Scenarios that build their request list from a corpus save directory
