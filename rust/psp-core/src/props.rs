@@ -395,6 +395,286 @@ pub fn ensure_schema(save: &mut uesave::Save, path: String, tag: uesave::Propert
     }
 }
 
+// ---------------------------------------------------------------------------
+// Deep UID swap (Task 3E-4) -- port of `_deep_swap_uids`/`_swap_uid_value`
+// (`game/mixins/player_swap.py:19-58`).
+// ---------------------------------------------------------------------------
+
+/// If `value` equals `old` return `Some(new)`, if it equals `new` return
+/// `Some(old)`, else `None` -- port of `_swap_uid_value` (`player_swap.py:
+/// 27-34`). Python compares `current_value.lower()` against two already-
+/// lowercased strings; here both sides are parsed `Uuid`s first, so the
+/// comparison is exact regardless of hyphenation/case in the source text --
+/// strictly more permissive than Python's literal string compare, never
+/// less (every string Python's compare would match, this also matches,
+/// since Python's `old_uid_str`/`new_uid_str` are always `str(uuid).lower()`
+/// canonical form).
+fn swap_uuid_value(value: uuid::Uuid, old: uuid::Uuid, new: uuid::Uuid) -> Option<uuid::Uuid> {
+    if value == old {
+        Some(new)
+    } else if value == new {
+        Some(old)
+    } else {
+        None
+    }
+}
+
+/// Swaps a single ownership-key leaf property in place: a `Str` property
+/// parsed as a `Uuid` (Python's `isinstance(value, str)` branch), or a
+/// `Guid` struct property (Python's `isinstance(value, dict)` branch, where
+/// `value["value"]` holds the uuid -- `uesave`'s `StructValue::Guid` IS that
+/// unwrapped uuid, no separate `"value"` hop needed). Any other property
+/// shape (including a `Str` that isn't valid uuid text) is left untouched,
+/// matching Python's `if isinstance(inner, str)` / `elif isinstance(value,
+/// str)` guards silently no-op-ing on anything else.
+fn swap_leaf_uuid_property(property: &mut uesave::Property, old: uuid::Uuid, new: uuid::Uuid) {
+    match property {
+        uesave::Property::Str(text) => {
+            if let Ok(parsed) = text.parse::<uuid::Uuid>() {
+                if let Some(swapped) = swap_uuid_value(parsed, old, new) {
+                    *text = swapped.to_string();
+                }
+            }
+        }
+        uesave::Property::Struct(uesave::StructValue::Guid(guid)) => {
+            if let Some(swapped) = swap_uuid_value(guid_to_uuid(guid), old, new) {
+                *guid = uuid_to_guid(swapped);
+            }
+        }
+        _ => {}
+    }
+}
+
+/// Recurses into a single property's children, looking for more `Properties`
+/// bags to run the ownership-key check over -- the counterpart of Python's
+/// `for child in data.values(): _deep_swap_uids(child, ...)` /
+/// `elif isinstance(data, list): for item in data: _deep_swap_uids(item,
+/// ...)`. Only descends through the property shapes this port's `Property`
+/// tree can actually carry a named field bag inside: a user struct
+/// (`Struct(StructValue::Struct)`), an array of user structs
+/// (`Array(ValueVec::Struct)`, Python's list-of-dicts), and a map's key/value
+/// pairs (`Map`, Python's `{"values": [{"key":..., "value":...}, ...]}`
+/// export shape). Every other `Property`/`StructValue`/`ValueVec` variant --
+/// including the game-specific typed structs (`PalGroupData`,
+/// `PalCharacterData`, the `map_concrete_model.rs` structs that also happen
+/// to declare `build_player_uid`/`private_lock_player_uid`/
+/// `owner_player_uid` fields, ...) -- carries no generic `Properties` bag to
+/// search, so recursion stops there; see this module's own doc comment on
+/// `swap_uuid_values_deep` for why those typed fields are a known,
+/// structural gap rather than a bug in this walk.
+fn swap_uuid_values_deep_in_property(
+    property: &mut uesave::Property,
+    keys: &[&str],
+    old: uuid::Uuid,
+    new: uuid::Uuid,
+) {
+    match property {
+        uesave::Property::Struct(uesave::StructValue::Struct(nested)) => {
+            swap_uuid_values_deep(nested, keys, old, new);
+        }
+        uesave::Property::Array(uesave::ValueVec::Struct(values)) => {
+            for value in values.iter_mut() {
+                if let uesave::StructValue::Struct(nested) = value {
+                    swap_uuid_values_deep(nested, keys, old, new);
+                }
+            }
+        }
+        uesave::Property::Map(entries) => {
+            for entry in entries.iter_mut() {
+                swap_uuid_values_deep_in_property(&mut entry.key, keys, old, new);
+                swap_uuid_values_deep_in_property(&mut entry.value, keys, old, new);
+            }
+        }
+        _ => {}
+    }
+}
+
+/// Recursively walks every `Property` reachable from `properties`; for each
+/// field whose NAME is in `keys` (the four ownership keys
+/// `swap_player_uids` passes: `OwnerPlayerUId`, `owner_player_uid`,
+/// `build_player_uid`, `private_lock_player_uid`) and whose leaf value is a
+/// uuid string or a `Guid` struct equal to `old` or `new`, swaps it to the
+/// other -- bidirectionally, in one pass. Port of `_deep_swap_uids`
+/// (`game/mixins/player_swap.py:19-58`).
+///
+/// Contract deviation, load-bearing and worth stating plainly: this walk
+/// only ever reaches `OwnerPlayerUId` in practice on a real Palworld save.
+/// `owner_player_uid`/`build_player_uid`/`private_lock_player_uid` (the
+/// three lowercase keys) do not exist ANYWHERE in this codebase as
+/// `Properties`-map string keys -- they are typed `FGuid` fields on Rust
+/// structs (`uesave-rs/uesave/src/games/palworld/map_concrete_model.rs`'s
+/// `PalMapObjectItemBoothModel`/`PalMapObjectItemChestModel`/
+/// `PalMapObjectItemChestAffectCorruption`/the base-camp owner struct, and
+/// `map_model.rs`'s `PalMapModel`), decoded from `MapObjectSaveData`/
+/// `BaseCampSaveData` `RawData` byte blobs the same way `PalGroupData`'s
+/// guild tail is (`domain::guild_tail`'s own `remaining_data` split). Python
+/// walks a fully dynamic dict tree where every one of those fields is still
+/// a plain named dict key, so `_deep_swap_uids` reaches all four keys;
+/// `uesave`'s typed codec structs have no generic `Properties` bag for this
+/// walk to search once it steps into one of those `StructValue` variants
+/// (see `swap_uuid_values_deep_in_property`'s doc comment). Extending this
+/// walk into those typed structs would mean hand-writing a swap arm per
+/// struct/field, which is out of scope for this contract-sanctioned `props`
+/// addition (the brief scopes this function to "the concrete `uesave::
+/// Property` enum variants Phase 1 exposed") and is not attempted here --
+/// this is a real, structural fidelity gap versus Python, not an oversight,
+/// and is called out again in this task's report.
+pub fn swap_uuid_values_deep(
+    properties: &mut uesave::Properties,
+    keys: &[&str],
+    old: uuid::Uuid,
+    new: uuid::Uuid,
+) {
+    for (property_key, property_value) in properties.0.iter_mut() {
+        if keys.contains(&property_key.1.as_str()) {
+            swap_leaf_uuid_property(property_value, old, new);
+        }
+        swap_uuid_values_deep_in_property(property_value, keys, old, new);
+    }
+}
+
+#[cfg(test)]
+mod deep_swap_tests {
+    use super::*;
+    use uesave::{MapEntry, Properties, Property, StructValue, ValueVec};
+
+    const OWNERSHIP_KEYS: [&str; 4] = [
+        "OwnerPlayerUId",
+        "owner_player_uid",
+        "build_player_uid",
+        "private_lock_player_uid",
+    ];
+
+    fn uid(text: &str) -> uuid::Uuid {
+        text.parse().unwrap()
+    }
+
+    const OLD: &str = "11111111-1111-1111-1111-111111111111";
+    const NEW: &str = "22222222-2222-2222-2222-222222222222";
+
+    #[test]
+    fn swaps_guid_struct_leaf_old_to_new() {
+        let mut properties = Properties::default();
+        properties.insert("OwnerPlayerUId", guid_property(uid(OLD)));
+
+        swap_uuid_values_deep(&mut properties, &OWNERSHIP_KEYS, uid(OLD), uid(NEW));
+
+        assert_eq!(as_uuid(&properties["OwnerPlayerUId"]), Some(uid(NEW)));
+    }
+
+    #[test]
+    fn swaps_guid_struct_leaf_new_to_old_bidirectionally() {
+        let mut properties = Properties::default();
+        properties.insert("OwnerPlayerUId", guid_property(uid(NEW)));
+
+        swap_uuid_values_deep(&mut properties, &OWNERSHIP_KEYS, uid(OLD), uid(NEW));
+
+        assert_eq!(as_uuid(&properties["OwnerPlayerUId"]), Some(uid(OLD)));
+    }
+
+    #[test]
+    fn swaps_str_leaf_case_insensitively() {
+        let mut properties = Properties::default();
+        properties.insert("owner_player_uid", str_property(&OLD.to_uppercase()));
+
+        swap_uuid_values_deep(&mut properties, &OWNERSHIP_KEYS, uid(OLD), uid(NEW));
+
+        assert_eq!(as_str(&properties["owner_player_uid"]), Some(NEW));
+    }
+
+    #[test]
+    fn no_match_leaves_value_unchanged() {
+        let unrelated = uid("33333333-3333-3333-3333-333333333333");
+        let mut properties = Properties::default();
+        properties.insert("owner_player_uid", guid_property(unrelated));
+
+        swap_uuid_values_deep(&mut properties, &OWNERSHIP_KEYS, uid(OLD), uid(NEW));
+
+        assert_eq!(as_uuid(&properties["owner_player_uid"]), Some(unrelated));
+    }
+
+    #[test]
+    fn ignores_non_ownership_keys() {
+        let mut properties = Properties::default();
+        properties.insert("SomeOtherKey", guid_property(uid(OLD)));
+
+        swap_uuid_values_deep(&mut properties, &OWNERSHIP_KEYS, uid(OLD), uid(NEW));
+
+        assert_eq!(as_uuid(&properties["SomeOtherKey"]), Some(uid(OLD)));
+    }
+
+    #[test]
+    fn recurses_into_nested_struct() {
+        let mut inner = Properties::default();
+        inner.insert("owner_player_uid", guid_property(uid(OLD)));
+        let mut outer = Properties::default();
+        outer.insert("Outer", Property::Struct(StructValue::Struct(inner)));
+
+        swap_uuid_values_deep(&mut outer, &OWNERSHIP_KEYS, uid(OLD), uid(NEW));
+
+        let nested = struct_props(&outer["Outer"]).unwrap();
+        assert_eq!(as_uuid(&nested["owner_player_uid"]), Some(uid(NEW)));
+    }
+
+    #[test]
+    fn recurses_into_array_of_structs_independently_per_element() {
+        let mut first = Properties::default();
+        first.insert("owner_player_uid", guid_property(uid(OLD)));
+        let mut second = Properties::default();
+        second.insert("owner_player_uid", guid_property(uid(NEW)));
+
+        let mut properties = Properties::default();
+        properties.insert(
+            "Items",
+            Property::Array(ValueVec::Struct(vec![
+                StructValue::Struct(first),
+                StructValue::Struct(second),
+            ])),
+        );
+
+        swap_uuid_values_deep(&mut properties, &OWNERSHIP_KEYS, uid(OLD), uid(NEW));
+
+        let Property::Array(ValueVec::Struct(values)) = &properties["Items"] else {
+            panic!("expected Array(Struct)");
+        };
+        let StructValue::Struct(first_props) = &values[0] else {
+            panic!("expected Struct");
+        };
+        let StructValue::Struct(second_props) = &values[1] else {
+            panic!("expected Struct");
+        };
+        assert_eq!(as_uuid(&first_props["owner_player_uid"]), Some(uid(NEW)));
+        assert_eq!(as_uuid(&second_props["owner_player_uid"]), Some(uid(OLD)));
+    }
+
+    #[test]
+    fn recurses_into_map_key_and_value_structs() {
+        let mut key_props = Properties::default();
+        key_props.insert("owner_player_uid", guid_property(uid(OLD)));
+        let mut value_props = Properties::default();
+        value_props.insert("build_player_uid", guid_property(uid(OLD)));
+
+        let mut properties = Properties::default();
+        properties.insert(
+            "SomeMap",
+            Property::Map(vec![MapEntry {
+                key: Property::Struct(StructValue::Struct(key_props)),
+                value: Property::Struct(StructValue::Struct(value_props)),
+            }]),
+        );
+
+        swap_uuid_values_deep(&mut properties, &OWNERSHIP_KEYS, uid(OLD), uid(NEW));
+
+        let Property::Map(entries) = &properties["SomeMap"] else {
+            panic!("expected Map");
+        };
+        let key_props = struct_props(&entries[0].key).unwrap();
+        let value_props = struct_props(&entries[0].value).unwrap();
+        assert_eq!(as_uuid(&key_props["owner_player_uid"]), Some(uid(NEW)));
+        assert_eq!(as_uuid(&value_props["build_player_uid"]), Some(uid(NEW)));
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

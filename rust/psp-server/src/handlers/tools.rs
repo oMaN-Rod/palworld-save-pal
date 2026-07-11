@@ -9,6 +9,11 @@
 //! touch `ctx.session` (`source`/`transfer_target`, and `save` as the
 //! transfer_player fallback target) and reuse Phase-1/2's Steam-load and
 //! disk-write plumbing from `handlers::save_file` rather than reinventing it.
+//!
+//! Task 3E-4 adds `swap_player_uids`, a port of
+//! `ws/handlers/uid_swap_handler.py` over `psp_core::domain::uid_swap`.
+//! Unlike `transfer_player` (two distinct `SaveSession`s), this operates on
+//! the single main `ctx.session.save`.
 
 use std::path::PathBuf;
 
@@ -422,5 +427,50 @@ pub async fn handle_unload_source_save(ctx: &mut HandlerCtx<'_>) -> Result<(), H
         MessageType::UnloadSourceSave,
         &serde_json::json!({"success": true}),
     );
+    Ok(())
+}
+
+// ---------------------------------------------------------------------------
+// Player UID swap (Task 3E-4) -- port of ws/handlers/uid_swap_handler.py.
+// ---------------------------------------------------------------------------
+
+#[derive(Debug, serde::Deserialize)]
+pub struct SwapPlayerUidsData {
+    pub old_player_uid: Uuid,
+    pub new_player_uid: Uuid,
+}
+
+/// Port of `uid_swap_handler.py`. No save loaded -> `{"error": "No save file
+/// loaded."}` on this SAME `swap_player_uids` wire type (a soft response,
+/// like every other rejection here -- never the hard WS `error` frame); a
+/// soft rejection from `SaveSession::swap_player_uids` (same player,
+/// missing player, invalid SaveData) -> `{"error": message}`; a genuine
+/// `CoreError` -> `{"error": error.to_string()}`; success -> `{"success":
+/// true}`. No separate summary-refresh step is needed here -- `
+/// swap_player_uids`'s own trailing `rebuild_player_caches()` call already
+/// recomputes `session.player_summaries`/`guild_summaries` in place, which
+/// `sync_app_state`/`get_player_summaries` read on demand.
+pub async fn handle_swap_player_uids(
+    data: SwapPlayerUidsData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let Some(save) = ctx.session.save.as_mut() else {
+        ctx.emitter.emit(
+            MessageType::SwapPlayerUids,
+            &serde_json::json!({"error": "No save file loaded."}),
+        );
+        return Ok(());
+    };
+    let progress = ctx.emitter.progress_sink();
+    let result = match save.swap_player_uids(data.old_player_uid, data.new_player_uid, &progress) {
+        Ok(()) => serde_json::json!({"success": true}),
+        Err(psp_core::transfer::TransferError::Rejected(message)) => {
+            serde_json::json!({"error": message})
+        }
+        Err(psp_core::transfer::TransferError::Core(error)) => {
+            serde_json::json!({"error": error.to_string()})
+        }
+    };
+    ctx.emitter.emit(MessageType::SwapPlayerUids, &result);
     Ok(())
 }

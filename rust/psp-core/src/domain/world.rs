@@ -229,6 +229,20 @@ pub fn entry_player_uid(entry: &MapEntry) -> Option<uuid::Uuid> {
     props::get(entry_key_props(entry)?, &["PlayerUId"]).and_then(props::as_uuid)
 }
 
+/// Write counterpart of `entry_player_uid` -- overwrites the entry key's
+/// existing `PlayerUId` field in place (`Properties::insert` on an
+/// already-present key updates the value without disturbing the recorded
+/// write schema, so this never risks `Error::MissingPropertySchema`). A
+/// no-op when `entry.key` isn't a user struct (Task 3E-4's
+/// `swap_player_uids` only ever calls this on a `CharacterSaveParameterMap`
+/// entry, whose key always is one, but this stays defensive like every
+/// other `props`-based accessor in this port).
+pub fn set_entry_player_uid(entry: &mut MapEntry, uid: uuid::Uuid) {
+    if let Some(key_props) = props::struct_props_mut(&mut entry.key) {
+        key_props.insert("PlayerUId", props::guid_property(uid));
+    }
+}
+
 /// `entry.value.RawData`, decoded as `PalCharacterData` -- the typed struct
 /// backing every character-map entry (player or pal). `None` for anything
 /// that isn't shaped this way, matching `domain::summaries::save_parameter`'s
@@ -554,5 +568,40 @@ mod tests {
         let save = world_save(world_save_data);
 
         assert!(build_dynamic_item_index(&save).is_empty());
+    }
+
+    // ---- set_entry_player_uid (Task 3E-4's write counterpart of
+    // entry_player_uid) ----
+
+    #[test]
+    fn set_entry_player_uid_overwrites_existing_key_field() {
+        let old_uid = uuid::Uuid::parse_str("11111111-1111-1111-1111-111111111111").unwrap();
+        let new_uid = uuid::Uuid::parse_str("22222222-2222-2222-2222-222222222222").unwrap();
+
+        let mut key_props = Properties::default();
+        key_props.insert("PlayerUId", guid_property(old_uid));
+        key_props.insert("InstanceId", guid_property(uuid::Uuid::nil()));
+        let mut entry = MapEntry {
+            key: struct_property(key_props),
+            value: Property::Bool(true),
+        };
+
+        set_entry_player_uid(&mut entry, new_uid);
+
+        assert_eq!(entry_player_uid(&entry), Some(new_uid));
+        // The sibling field must survive the overwrite untouched.
+        assert_eq!(entry_instance_id(&entry), Some(uuid::Uuid::nil()));
+    }
+
+    #[test]
+    fn set_entry_player_uid_is_a_no_op_on_a_non_struct_key() {
+        let mut entry = MapEntry {
+            key: Property::Bool(true),
+            value: Property::Bool(true),
+        };
+
+        set_entry_player_uid(&mut entry, uuid::Uuid::nil());
+
+        assert!(matches!(entry.key, Property::Bool(true)));
     }
 }

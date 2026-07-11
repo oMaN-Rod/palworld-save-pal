@@ -565,6 +565,95 @@ impl SaveSession {
         self.world_name = new_name.to_string();
         Ok(())
     }
+
+    /// `&mut` access to `Level.sav`'s ROOT properties (not `worldSaveData` --
+    /// one level up), for Task 3E-4's `props::swap_uuid_values_deep` to walk.
+    /// Port of `_deep_swap_uids(self._gvas_file.properties, ...)`'s call site
+    /// (`player_swap.py:115`): Python passes the whole GVAS property tree,
+    /// of which `worldSaveData` is just one top-level entry among siblings,
+    /// so this returns the same root, not `world_properties`'s narrower
+    /// `worldSaveData` substruct.
+    pub fn level_properties_mut(&mut self) -> &mut uesave::Properties {
+        &mut self.level.root.properties
+    }
+
+    /// Port of `_swap_player_gvas_uids` (`player_swap.py:156-171`): writes
+    /// `second` into `first`'s own loaded GVAS `SaveData.PlayerUId` AND
+    /// `SaveData.IndividualId.PlayerUId` (both `Guid` struct properties --
+    /// `PalObjects.Guid`/`PalObjects.get_guid` construct/read `PlayerUId` the
+    /// same way at both paths, per `game/pal_objects.py`), and `first` into
+    /// `second`'s. A no-op for whichever uid (or both) has no loaded GVAS --
+    /// `swap_player_uids` only calls this after confirming both are loaded,
+    /// but this stays defensive like every other player-GVAS accessor in
+    /// this port.
+    pub fn swap_player_gvas_uids(&mut self, first: uuid::Uuid, second: uuid::Uuid) {
+        fn set_player_uid(sav: &mut uesave::Save, new_uid: uuid::Uuid) {
+            let Ok(save_data) = crate::domain::player::save_data_props_mut(sav) else {
+                return;
+            };
+            save_data.insert("PlayerUId", props::guid_property(new_uid));
+            if let Some(individual_id) =
+                props::get_mut(save_data, &["IndividualId"]).and_then(props::struct_props_mut)
+            {
+                individual_id.insert("PlayerUId", props::guid_property(new_uid));
+            }
+        }
+        if let Some(loaded) = self.loaded_players.get_mut(&first) {
+            set_player_uid(&mut loaded.sav, second);
+        }
+        if let Some(loaded) = self.loaded_players.get_mut(&second) {
+            set_player_uid(&mut loaded.sav, first);
+        }
+    }
+
+    /// Port of `_swap_player_file_refs` (`player_swap.py:265-280`). Only
+    /// runs when BOTH `first` and `second` already have a loaded GVAS /
+    /// file reference -- `swap_player_uids`'s own validation guarantees
+    /// this, so this is a plain swap, not a partial-state one.
+    ///
+    /// Faithfully reproduces a subtlety in Python's version: the two
+    /// players' `.sav` CONTENT trades places between the two uids (each
+    /// carries its `swap_player_gvas_uids`-updated `PlayerUId` with it), but
+    /// each uid keeps its OWN original `_dps.sav` companion -- Python's
+    /// `old_gvas.dps, new_gvas.dps = new_gvas.dps, old_gvas.dps` line runs
+    /// BEFORE the `_player_gvas_files[old] = new_gvas` / `[new] = old_gvas`
+    /// reassignment, so the dps that ends up filed under `old_player_uid`
+    /// is the dps that was ALREADY there (this port's `first_loaded.dps`
+    /// below), not the dps that traveled with the swapped `.sav`. This is
+    /// reproduced exactly, not "fixed" -- byte-parity with the Python
+    /// behavior is the goal, and nothing about this task's brief asks for a
+    /// different dps policy.
+    pub fn swap_player_file_refs(&mut self, first: uuid::Uuid, second: uuid::Uuid) {
+        if let (Some(first_loaded), Some(second_loaded)) = (
+            self.loaded_players.remove(&first),
+            self.loaded_players.remove(&second),
+        ) {
+            self.loaded_players.insert(
+                first,
+                LoadedPlayer {
+                    uid: first,
+                    sav: second_loaded.sav,
+                    dps: first_loaded.dps,
+                },
+            );
+            self.loaded_players.insert(
+                second,
+                LoadedPlayer {
+                    uid: second,
+                    sav: first_loaded.sav,
+                    dps: second_loaded.dps,
+                },
+            );
+        }
+
+        if let (Some(first_ref), Some(second_ref)) = (
+            self.player_file_refs.remove(&first),
+            self.player_file_refs.remove(&second),
+        ) {
+            self.player_file_refs.insert(first, second_ref);
+            self.player_file_refs.insert(second, first_ref);
+        }
+    }
 }
 
 /// The on-disk locations a standalone `TransferTarget` was loaded from, kept

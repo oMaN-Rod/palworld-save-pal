@@ -276,6 +276,10 @@ async fn route(
             handlers::tools::handle_transfer_player(serde_json::from_value(data)?, ctx).await
         }
         MessageType::UnloadSourceSave => handlers::tools::handle_unload_source_save(ctx).await,
+        // Task 3E-4: player uid swap.
+        MessageType::SwapPlayerUids => {
+            handlers::tools::handle_swap_player_uids(serde_json::from_value(data)?, ctx).await
+        }
         // Remaining arms are added by Phases 1-6.
         other => {
             tracing::warn!(

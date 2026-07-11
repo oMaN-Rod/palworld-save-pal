@@ -56,3 +56,20 @@ async fn convert_steam_id_handles_uid_steam_id_and_garbage() {
 
     server.handle.shutdown().await;
 }
+
+#[tokio::test]
+async fn swap_player_uids_without_save_errors() {
+    let server = common::start_test_server().await;
+    let mut ws = common::connect(&server).await;
+    common::send_json(
+        &mut ws,
+        serde_json::json!({"type": "swap_player_uids", "data": {
+            "old_player_uid": "55555555-5555-5555-5555-555555555555",
+            "new_player_uid": "66666666-6666-6666-6666-666666666666"}}),
+    )
+    .await;
+    let response = common::next_json(&mut ws).await;
+    assert_eq!(response["type"], "swap_player_uids");
+    assert_eq!(response["data"]["error"], "No save file loaded.");
+    server.handle.shutdown().await;
+}

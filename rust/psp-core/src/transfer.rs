@@ -251,7 +251,15 @@ pub fn transfer_player(
 /// `player::get_player_details` does) and its `_dps.sav` companion into
 /// `loaded_players`. A no-op when already loaded or the player has no file
 /// reference (matching Python's early returns).
-fn ensure_player_gvas_loaded(session: &mut SaveSession, uid: Uuid) -> Result<(), CoreError> {
+///
+/// `pub(crate)`: Task 3E-4's `domain::uid_swap::SaveSession::swap_player_uids`
+/// reuses this exact helper for its own "load both players on demand" step
+/// (`player_swap.py::_validate_swap_players`'s `load_player_on_demand`
+/// calls) rather than re-implementing GVAS lazy-loading a second time.
+pub(crate) fn ensure_player_gvas_loaded(
+    session: &mut SaveSession,
+    uid: Uuid,
+) -> Result<(), CoreError> {
     if session.loaded_players.contains_key(&uid) {
         return Ok(());
     }
@@ -300,7 +308,10 @@ fn container_entry_id(entry: &MapEntry) -> Option<Uuid> {
 
 /// `source_save_data["IndividualId"]["value"]["InstanceId"]`
 /// (player_transfer.py:204-206).
-fn save_data_instance_id(save_data: &Properties) -> Option<Uuid> {
+///
+/// `pub(crate)`: reused by Task 3E-4's `domain::uid_swap` for the identical
+/// `IndividualId.InstanceId` read `player_swap.py:92-97` needs.
+pub(crate) fn save_data_instance_id(save_data: &Properties) -> Option<Uuid> {
     props::get(save_data, &["IndividualId", "InstanceId"]).and_then(props::as_uuid)
 }
 
