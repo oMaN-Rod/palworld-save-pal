@@ -454,3 +454,16 @@ class TestAsUuid:
 
     def test_none(self):
         assert PalObjects.as_uuid(None) is None
+
+
+class TestStatusNameMaps:
+    def test_status_name_map_values_are_unique(self):
+        values = list(PalObjects.StatusNameMap.values())
+        assert len(values) == len(set(values)), "reverse map would be ambiguous"
+
+    def test_ex_status_name_map_values_are_unique(self):
+        values = list(PalObjects.ExStatusNameMap.values())
+        assert len(values) == len(set(values)), "reverse map would be ambiguous"
+
+    def test_move_speed_is_mapped(self):
+        assert PalObjects.StatusNameMap["移動速度アップ"] == "move_speed"

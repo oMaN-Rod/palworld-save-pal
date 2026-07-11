@@ -246,7 +246,10 @@ class Player(BaseModel):
                 status_point_list.remove(item)
         reverse_status_map = {v: k for k, v in PalObjects.StatusNameMap.items()}
         for status_name, point_value in value.items():
-            japanese_name = reverse_status_map[status_name]
+            japanese_name = reverse_status_map.get(status_name)
+            if japanese_name is None:
+                logger.warning("Skipping unknown status point name: %s", status_name)
+                continue
             for item in status_point_list:
                 if PalObjects.get_value(item["StatusName"]) == japanese_name:
                     PalObjects.set_value(item["StatusPoint"], point_value)
@@ -273,7 +276,10 @@ class Player(BaseModel):
         )
         reverse_ex_status_map = {v: k for k, v in PalObjects.ExStatusNameMap.items()}
         for status_name, point_value in value.items():
-            japanese_name = reverse_ex_status_map[status_name]
+            japanese_name = reverse_ex_status_map.get(status_name)
+            if japanese_name is None:
+                logger.warning("Skipping unknown ex status point name: %s", status_name)
+                continue
             for item in ext_status_point_list:
                 if PalObjects.get_value(item["StatusName"]) == japanese_name:
                     PalObjects.set_value(item["StatusPoint"], point_value)
