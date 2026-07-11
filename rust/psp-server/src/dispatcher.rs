@@ -316,6 +316,13 @@ async fn route(
         MessageType::UnlockMap => {
             handlers::save_file::handle_unlock_map(serde_json::from_value(data)?, ctx).await
         }
+        // Phase 5 (Task 6): desktop folder/browser opening.
+        MessageType::OpenFolder => {
+            handlers::system::handle_open_folder(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::OpenInBrowser => {
+            handlers::system::handle_open_in_browser(serde_json::from_value(data)?, ctx).await
+        }
         // Remaining arms are added by Phases 1-6.
         other => {
             tracing::warn!(

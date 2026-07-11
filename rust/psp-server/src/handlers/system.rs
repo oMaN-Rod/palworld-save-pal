@@ -1,3 +1,5 @@
+use std::path::{Path, PathBuf};
+
 use crate::dispatcher::HandlerCtx;
 use crate::handler_error::HandlerError;
 use crate::handlers::save_file::emit_summary_messages;
@@ -75,6 +77,96 @@ pub async fn handle_sync_app_state(ctx: &mut HandlerCtx<'_>) -> Result<(), Handl
     };
     ctx.emitter.emit(MessageType::LoadedSaveFiles, &payload);
     emit_summary_messages(session, ctx.emitter);
+    Ok(())
+}
+
+// ---------------------------------------------------------------------------
+// open_folder / open_in_browser — port of desktop.py:68-76,147-158 and
+// open_in_browser_handler.py:10-19.
+// ---------------------------------------------------------------------------
+
+#[derive(Debug, serde::Deserialize)]
+pub struct OpenFolderData {
+    pub folder_type: String,
+}
+
+/// Port of desktop.py:68-76. `app_root` is the process working directory --
+/// the desktop shell sets cwd to a writable per-user dir at startup (Task 8),
+/// which is where backups/ are written, mirroring Python's exe-dir layout.
+pub fn folder_path_for(folder_type: &str, app_root: &Path) -> Option<PathBuf> {
+    match folder_type {
+        "backups" => Some(app_root.join("backups")),
+        "steam" => Some(crate::desktop_dialogs::steam_save_root()),
+        "gamepass" => Some(crate::desktop_dialogs::gamepass_save_root()),
+        "psp_root" => Some(app_root.to_path_buf()),
+        _ => None,
+    }
+}
+
+/// Port of open_in_browser_handler.py:11-15.
+pub fn browser_url_from(host_and_port: &str) -> String {
+    let (host, port) = match host_and_port.rsplit_once(':') {
+        Some((host, port)) => (host, port),
+        None => (host_and_port, ""),
+    };
+    let host = if host == "127.0.0.1" {
+        "localhost"
+    } else {
+        host
+    };
+    format!("http://{host}:{port}")
+}
+
+/// desktop.py:147-158 -- open on success with NO response; warning otherwise.
+pub async fn handle_open_folder(
+    data: OpenFolderData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    if !ctx.app.config.desktop_mode {
+        ctx.emitter.emit(
+            MessageType::Warning,
+            &"open_folder is only available in the desktop app",
+        );
+        return Ok(());
+    }
+    let app_root = std::env::current_dir().map_err(psp_core::error::CoreError::Io)?;
+    let resolved = folder_path_for(&data.folder_type, &app_root);
+    match resolved {
+        Some(folder_path) if folder_path.exists() => {
+            opener::open(&folder_path).map_err(|open_error| {
+                HandlerError::Other(format!(
+                    "Failed to open folder {}: {open_error}",
+                    folder_path.display()
+                ))
+            })?;
+        }
+        Some(folder_path) => {
+            ctx.emitter.emit(
+                MessageType::Warning,
+                &format!("Folder not found: {}", folder_path.display()),
+            );
+        }
+        None => {
+            ctx.emitter.emit(
+                MessageType::Warning,
+                &format!("Folder not found: {}", data.folder_type),
+            );
+        }
+    }
+    Ok(())
+}
+
+/// open_in_browser_handler.py:10-19 -- active in BOTH modes, like Python.
+pub async fn handle_open_in_browser(
+    data: String,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let url = browser_url_from(&data);
+    opener::open(&url).map_err(|open_error| {
+        HandlerError::Other(format!("Failed to open browser: {open_error}"))
+    })?;
+    ctx.emitter
+        .emit(MessageType::OpenInBrowser, &"Browser opened successfully");
     Ok(())
 }
 
@@ -287,5 +379,39 @@ mod tests {
         );
 
         test.assert_no_more_frames();
+    }
+}
+
+#[cfg(test)]
+mod desktop_system_tests {
+    use super::*;
+    use std::path::Path;
+
+    #[test]
+    fn folder_path_resolves_all_four_python_folder_types() {
+        let app_root = Path::new("/opt/psp-data");
+        assert_eq!(
+            folder_path_for("backups", app_root),
+            Some(app_root.join("backups"))
+        );
+        assert_eq!(
+            folder_path_for("steam", app_root),
+            Some(crate::desktop_dialogs::steam_save_root())
+        );
+        assert_eq!(
+            folder_path_for("gamepass", app_root),
+            Some(crate::desktop_dialogs::gamepass_save_root())
+        );
+        assert_eq!(
+            folder_path_for("psp_root", app_root),
+            Some(app_root.to_path_buf())
+        );
+        assert_eq!(folder_path_for("bogus", app_root), None);
+    }
+
+    #[test]
+    fn browser_url_maps_loopback_to_localhost() {
+        assert_eq!(browser_url_from("127.0.0.1:5174"), "http://localhost:5174");
+        assert_eq!(browser_url_from("myhost:8080"), "http://myhost:8080");
     }
 }

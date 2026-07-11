@@ -25,6 +25,7 @@ uuid = { workspace = true }
 base64 = { workspace = true }
 chrono = { workspace = true }
 rfd = { workspace = true }
+opener = { workspace = true }
 
 [dev-dependencies]
 tokio-tungstenite = { workspace = true }
