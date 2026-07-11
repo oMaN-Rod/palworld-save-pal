@@ -1,6 +1,7 @@
 //! Xbox/WinStore (wgs) container format support.
 //! Port of palworld_save_pal/utils/gamepass/{container_types,container_utils}.py.
 
+pub mod convert;
 pub mod format;
 pub mod scan;
 pub mod store;
