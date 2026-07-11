@@ -595,8 +595,8 @@ wheels = [
 
 [[package]]
 name = "palworld-save-tools"
-version = "0.23.2.dev73+ga78c3c130"
-source = { git = "https://github.com/oMaN-Rod/palworld-save-tools.git?rev=main#a78c3c13058abb534aa31a440d57cba17b9e3210" }
+version = "0.23.2.dev76+gfd6bd52d6"
+source = { git = "https://github.com/oMaN-Rod/palworld-save-tools.git?rev=main#fd6bd52d6c6d0612fcb9969853ca038a65f362d3" }
 dependencies = [
     { name = "loguru" },
     { name = "orjson" },
@@ -605,7 +605,7 @@ dependencies = [
 
 [[package]]
 name = "palworldsavepal"
-version = "0.17.4"
+version = "0.17.5"
 source = { virtual = "." }
 dependencies = [
     { name = "altgraph" },

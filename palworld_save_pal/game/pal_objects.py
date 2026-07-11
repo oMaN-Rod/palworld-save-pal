@@ -5,6 +5,7 @@ from palworld_save_tools.archive import UUID as ArchiveUUID
 
 from palworld_save_pal.dto.item_container_slot import ItemContainerSlotDTO
 from palworld_save_pal.game.enum import ArrayType, PalGender, WorkSuitability
+from palworld_save_pal.utils.json_manager import JsonManager
 from palworld_save_pal.utils.logging_config import create_logger
 
 logger = create_logger(__name__)
@@ -390,7 +391,18 @@ class PalObjects:
         "所持重量": "weight",
         "捕獲率": "capture_rate",
         "作業速度": "work_speed",
-        "移動速度アップ": "move_speed",  # added in Palworld 1.0
+        "空腹率低減": "hunger_reduction",
+        "泳ぎ速度": "swim_speed",
+        "食料腐敗低減": "food_decay_reduction",
+        "ジャンプ力": "jump_power",
+        "滑空速度": "glider_speed",
+        "崖登り速度": "climb_speed",
+        "状態異常耐性": "status_ailment_resist",
+        "経験値ボーナス": "exp_bonus",
+        "虹パッシブ率": "rainbow_passive_rate",
+        "移動速度アップ": "move_speed",
+        "パルスフィアホーミング": "sphere_homing",
+        "スタミナ消費軽減": "stamina_reduction",
     }
 
     ExStatusNames = [
@@ -408,6 +420,55 @@ class PalObjects:
         "所持重量": "weight",
         "作業速度": "work_speed",
     }
+
+    RelicTypeMap = {
+        "EPalRelicType::CapturePower": "capture_power",
+        "EPalRelicType::HungerReduction": "hunger_reduction",
+        "EPalRelicType::SwimSpeed": "swim_speed",
+        "EPalRelicType::FoodDecayReduction": "food_decay_reduction",
+        "EPalRelicType::JumpPower": "jump_power",
+        "EPalRelicType::GliderSpeed": "glider_speed",
+        "EPalRelicType::ClimbSpeed": "climb_speed",
+        "EPalRelicType::StatusAilmentResist": "status_ailment_resist",
+        "EPalRelicType::StaminaReduction": "stamina_reduction",
+        "EPalRelicType::SphereHoming": "sphere_homing",
+        "EPalRelicType::ExpBonus": "exp_bonus",
+        "EPalRelicType::RainbowPassiveRate": "rainbow_passive_rate",
+        "EPalRelicType::MoveSpeed": "move_speed",
+    }
+
+    RelicTypeToStatusName = {
+        "capture_power": "捕獲率",
+        "hunger_reduction": "空腹率低減",
+        "swim_speed": "泳ぎ速度",
+        "food_decay_reduction": "食料腐敗低減",
+        "jump_power": "ジャンプ力",
+        "glider_speed": "滑空速度",
+        "climb_speed": "崖登り速度",
+        "status_ailment_resist": "状態異常耐性",
+        "stamina_reduction": "スタミナ消費軽減",
+        "sphere_homing": "パルスフィアホーミング",
+        "exp_bonus": "経験値ボーナス",
+        "rainbow_passive_rate": "虹パッシブ率",
+        "move_speed": "移動速度アップ",
+    }
+
+    RELIC_DATA = JsonManager("data/json/relic_data.json").read()
+
+    @staticmethod
+    def relic_rank_for_count(relic_key: str, count: int) -> int:
+        data = PalObjects.RELIC_DATA.get(relic_key)
+        if not data:
+            return 0
+        rank = 0
+        cumulative = 0
+        for step in data["per_rank"]:
+            cumulative += step
+            if count >= cumulative:
+                rank += 1
+            else:
+                break
+        return rank
 
     @staticmethod
     def GetStatusPointList(prop_name: str, status_points: List[str]) -> Dict[str, Any]:
