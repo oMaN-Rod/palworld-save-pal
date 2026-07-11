@@ -75,6 +75,7 @@ pub fn load_corpus_session() -> Option<SaveSession> {
         level_meta_bytes.as_deref(),
         player_file_refs,
         None,
+        true,
         &psp_core::progress::null_progress(),
     )
     .expect("load corpus session");
@@ -143,6 +144,7 @@ pub fn load_fixture_session(name: &str) -> SaveSession {
         level_meta_bytes.as_deref(),
         player_file_refs,
         None,
+        true,
         &psp_core::progress::null_progress(),
     )
     .expect("load fixture session")

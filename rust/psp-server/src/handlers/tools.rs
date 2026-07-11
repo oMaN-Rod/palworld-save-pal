@@ -122,6 +122,18 @@ fn summaries_json(save: &SaveSession) -> serde_json::Value {
 /// `Err(message)` (not `HandlerError`) since every failure here becomes a
 /// SOFT `{"error": ...}` response, never the hard WS `error` frame -- see
 /// `handle_load_source_save`'s try/catch-shaped `match`.
+///
+/// The caller emits its own `"Loading {label} Level.sav..."` progress frame
+/// (see `handle_load_source_save`) BEFORE the `SaveSession::load` below, and
+/// passes `emit_top_level_progress = false` to that load so it does NOT ALSO
+/// emit the generic `"Loading Level.sav..."` frame. This mirrors Python's
+/// transfer path exactly: `_load_steam_save` (transfer_handler.py:38) calls
+/// `SaveManager.load_sav_files` DIRECTLY, bypassing
+/// `AppState.process_save_files` -- the only place the generic frame lives
+/// (state.py:69). `select_save`/`load_zip` go through `process_save_files`
+/// and keep the generic frame (their sequence is Phase-1-parity-verified);
+/// emitting it here too would put ONE extra frame on the transfer wire that
+/// Python never sends.
 fn load_steam_save_for_transfer(
     save_path: &str,
     label: &str,
@@ -170,6 +182,10 @@ fn load_steam_save_for_transfer(
         level_meta_bytes.as_deref(),
         player_file_refs,
         layout.global_pal_storage_sav.clone(),
+        // false: the transfer path bypasses process_save_files (see this
+        // function's doc comment); the "Loading {label} Level.sav..." frame
+        // above is the only leading frame Python's transfer path emits.
+        false,
         progress,
     )
     .map_err(|error| error.to_string())?;

@@ -342,6 +342,19 @@ impl SaveSession {
     /// message) and `SaveManager.load_sav_files` (everything else), which the
     /// Rust port folds into a single entry point since Task 9's WS handler is
     /// a thin wrapper around this call.
+    ///
+    /// `emit_top_level_progress` gates ONLY the leading generic `"Loading
+    /// Level.sav..."` frame — the one that in Python lives in
+    /// `AppState.process_save_files` (state.py:69), NOT in
+    /// `SaveManager.load_sav_files`. `select_save`/`load_zip` go through
+    /// `process_save_files` and so pass `true` (their sequence is
+    /// Phase-1-parity-verified with that frame present); the transfer path
+    /// (`load_source_save`) calls `load_sav_files` directly, bypassing
+    /// `process_save_files`, and emits its own `"Loading {label} Level.sav..."`
+    /// instead, so it passes `false` to avoid a duplicate generic frame. Every
+    /// later frame (`"Loading level meta..."` / `"No LevelMeta.sav found,
+    /// skipped."` / the summary-extraction frames) is unaffected by this flag —
+    /// those all originate in `load_sav_files`, which BOTH paths run.
     #[allow(clippy::too_many_arguments)]
     pub fn load(
         kind: SaveKind,
@@ -351,9 +364,12 @@ impl SaveSession {
         level_meta_bytes: Option<&[u8]>,
         player_file_refs: BTreeMap<Uuid, PlayerFileData>,
         gps_file_path: Option<PathBuf>,
+        emit_top_level_progress: bool,
         progress: &ProgressSink,
     ) -> Result<Self, CoreError> {
-        progress("Loading Level.sav...");
+        if emit_top_level_progress {
+            progress("Loading Level.sav...");
+        }
         let level = parse_palworld_save(level_sav_bytes)?;
 
         let (world_name, level_meta) = match level_meta_bytes {
@@ -670,6 +686,7 @@ mod load_tests {
             level_meta_bytes.as_deref(),
             player_file_refs,
             None,
+            true,
             &progress,
         )
         .unwrap();
@@ -699,6 +716,7 @@ mod load_tests {
             None,
             std::collections::BTreeMap::new(),
             None,
+            true,
             &null_progress(),
         );
         assert!(result.is_err());

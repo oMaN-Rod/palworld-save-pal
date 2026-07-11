@@ -253,6 +253,10 @@ pub async fn handle_select_save(
         level_meta_bytes.as_deref(),
         player_file_refs,
         layout.global_pal_storage_sav.clone(),
+        // select_save goes through Python's process_save_files, which emits
+        // the leading generic "Loading Level.sav..." frame -- keep it (this
+        // sequence is Phase-1-parity-verified).
+        true,
         &progress,
     )?;
 
@@ -493,6 +497,9 @@ pub async fn handle_load_zip_file(
         level_meta_bytes.as_deref(),
         player_file_refs,
         gps_file_path.clone(),
+        // load_zip_file also goes through Python's process_save_files -- keep
+        // the leading generic "Loading Level.sav..." frame.
+        true,
         &progress,
     )?;
 
@@ -1329,6 +1336,7 @@ mod tests {
             Some(&meta_bytes),
             BTreeMap::new(),
             None,
+            true,
             &psp_core::progress::null_progress(),
         )
         .unwrap();
