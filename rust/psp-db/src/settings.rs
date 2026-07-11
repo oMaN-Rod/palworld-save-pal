@@ -116,6 +116,17 @@ pub async fn update_save_dir(pool: &SqlitePool, save_dir: &str) -> Result<(), Db
     Ok(())
 }
 
+/// Reads the singleton settings row's save_dir. Returns None when the row has
+/// not been created yet (fresh DB, before get_settings seeds it). Used by the
+/// Phase-5 desktop dialog flow to pick the file picker's initial directory
+/// (Python passes app_state.settings.save_dir to open_file_dialog, desktop.py:97).
+pub async fn saved_save_dir(pool: &SqlitePool) -> Result<Option<String>, DbError> {
+    let row: Option<(String,)> = sqlx::query_as("SELECT save_dir FROM settings WHERE id = 1")
+        .fetch_optional(pool)
+        .await?;
+    Ok(row.map(|(save_dir,)| save_dir))
+}
+
 /// Port of STEAM_ROOT from palworld_save_pal/utils/file_manager.py:23-35.
 pub fn default_steam_save_dir() -> String {
     #[cfg(target_os = "windows")]

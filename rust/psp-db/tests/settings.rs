@@ -1,4 +1,6 @@
-use psp_db::settings::{get_settings, update_settings, SettingsUpdate};
+use psp_db::settings::{
+    get_settings, saved_save_dir, update_save_dir, update_settings, SettingsUpdate,
+};
 
 #[tokio::test]
 async fn first_get_inserts_python_default_row() {
@@ -121,4 +123,25 @@ async fn update_on_empty_db_creates_row_with_default_save_dir() {
 
     assert_eq!(created.language, "de");
     assert_eq!(created.save_dir, psp_db::settings::default_steam_save_dir());
+}
+
+#[tokio::test]
+async fn saved_save_dir_round_trips_through_update_save_dir() {
+    let temp_dir = tempfile::tempdir().unwrap();
+    let pool = psp_db::open(&temp_dir.path().join("test.db"))
+        .await
+        .unwrap();
+
+    assert_eq!(
+        saved_save_dir(&pool).await.unwrap(),
+        None,
+        "fresh DB has no settings row yet"
+    );
+
+    update_save_dir(&pool, "/saves/world-1").await.unwrap();
+
+    assert_eq!(
+        saved_save_dir(&pool).await.unwrap(),
+        Some("/saves/world-1".to_string())
+    );
 }
