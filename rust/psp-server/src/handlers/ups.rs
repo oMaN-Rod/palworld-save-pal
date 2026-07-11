@@ -770,14 +770,19 @@ fn resolve_source_pal(
 /// the field mapping `UPSService.add_pal(...)` performs in Python.
 fn new_ups_pal_for_source(
     resolved: ResolvedSourcePal,
-    world_name: String,
     collection_id: Option<i64>,
     tags: Option<Vec<String>>,
     notes: Option<String>,
 ) -> Result<psp_db::ups::NewUpsPal, HandlerError> {
     new_ups_pal_from_dto(AddUpsPalData {
         pal_dto: resolved.dto,
-        source_save_file: Some(world_name),
+        // Python records `getattr(app_state.save_file, "name", "Unknown")`
+        // (ups_handler.py:443/469/501/595/...), but `app_state.save_file` is a
+        // `SaveManager` (state.py:22) with NO `name` attribute -- only
+        // `world_name`/`set_world_name` -- so the getattr ALWAYS falls through
+        // to the literal "Unknown". Emit that verbatim (NOT the world name) for
+        // wire-visible parity: `get_ups_pals` echoes `source_save_file`.
+        source_save_file: Some("Unknown".to_string()),
         source_player_uid: resolved.player_uid,
         source_player_name: resolved.player_name,
         source_storage_type: Some(resolved.storage_type),
@@ -796,7 +801,6 @@ pub async fn handle_clone_to_ups(
         emit_ups_error(ctx, "No save file loaded".to_string());
         return Ok(());
     }
-    let world_name = ctx.session.save.as_ref().unwrap().world_name.clone();
     let mut cloned_count = 0usize;
     let mut errors: Vec<String> = Vec::new();
 
@@ -846,7 +850,6 @@ pub async fn handle_clone_to_ups(
         };
         let new_pal = new_ups_pal_for_source(
             resolved,
-            world_name.clone(),
             data.collection_id,
             data.tags.clone(),
             data.notes.clone(),
@@ -923,7 +926,6 @@ pub async fn handle_import_to_ups(
         }
         _ => {}
     }
-    let world_name = ctx.session.save.as_ref().unwrap().world_name.clone();
     let resolved = match resolve_source_pal(
         ctx.session.save.as_ref().unwrap(),
         &ctx.app.game_data,
@@ -941,13 +943,7 @@ pub async fn handle_import_to_ups(
             return Ok(());
         }
     };
-    let new_pal = new_ups_pal_for_source(
-        resolved,
-        world_name,
-        data.collection_id,
-        data.tags,
-        data.notes,
-    )?;
+    let new_pal = new_ups_pal_for_source(resolved, data.collection_id, data.tags, data.notes)?;
     let pals_data = pals_game_data(ctx);
     match psp_db::ups::add_pal(&ctx.app.db, new_pal, &pals_data).await {
         Ok(record) => ctx.emitter.emit(
@@ -1004,7 +1000,6 @@ pub async fn handle_export_ups_pal(
         }
     };
 
-    let world_name = ctx.session.save.as_ref().unwrap().world_name.clone();
     let mut player_name: Option<String> = None;
     let mut exported = false;
 
@@ -1086,7 +1081,11 @@ pub async fn handle_export_ups_pal(
             data.pal_id,
             &data.destination_type,
             &psp_db::ups::ExportDestinationInfo {
-                save_file_name: Some(world_name),
+                // Python's `getattr(app_state.save_file, "name", "Unknown")`
+                // (ups_handler.py:330) always resolves to "Unknown": the
+                // `save_file` is a `SaveManager` with no `name` attribute (see
+                // `new_ups_pal_for_source`). Match that literal, not world_name.
+                save_file_name: Some("Unknown".to_string()),
                 player_name,
                 player_uid: data.destination_player_uid.map(|uid| uid.to_string()),
             },
