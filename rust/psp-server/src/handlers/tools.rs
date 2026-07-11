@@ -25,9 +25,12 @@ pub async fn handle_convert_steam_id(
                 "nosteam_uid": sid::player_uid_to_nosteam(palworld_uid).to_uppercase(),
                 "from_uid": true,
             }),
-            Err(_) => serde_json::json!({
-                "error": "Invalid input. Enter a numeric Steam ID, profile URL, or Palworld UID."
-            }),
+            // Near-unreachable: `is_palworld_uid` already validated `raw` as
+            // 32-hex / dashed-hex, and every such string parses as a UUID, so
+            // Python never actually hits `parse_palworld_uid`'s error path
+            // either. Kept only so the branch is total; the emitted text is not
+            // load-bearing (no Python fixture exercises it).
+            Err(error) => serde_json::json!({ "error": error.to_string() }),
         }
     } else {
         match sid::parse_steam_input(raw) {
@@ -38,16 +41,13 @@ pub async fn handle_convert_steam_id(
                     "nosteam_uid": sid::player_uid_to_nosteam(palworld_uid).to_uppercase(),
                 })
             }
-            Err(error) => {
-                let message = error.to_string();
-                let message = if message.is_empty() {
-                    "Invalid input. Enter a numeric Steam ID, profile URL, or Palworld UID."
-                        .to_string()
-                } else {
-                    message
-                };
-                serde_json::json!({ "error": message })
-            }
+            // Emit the error's own message verbatim. For a non-numeric input
+            // this is Python's `int()` text ("invalid literal for int() with
+            // base 10: '<processed>'"); for a vanity URL it is the distinct
+            // VanityUrl message. steam_id_handler.py:39-42's `str(e) if str(e)
+            // else <generic>` fallback is dead code in real Python (`int()`'s
+            // ValueError message is never empty), so no generic remap here.
+            Err(error) => serde_json::json!({ "error": error.to_string() }),
         }
     };
     ctx.emitter.emit(MessageType::ConvertSteamId, &payload);

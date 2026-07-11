@@ -46,6 +46,21 @@ fn input_parsing_matches_python() {
         psp_core::steam_id::parse_steam_input("https://steamcommunity.com/id/somebody"),
         Err(psp_core::steam_id::SteamIdError::VanityUrl)
     ));
+    // Non-numeric input must reproduce Python's `int()` ValueError message
+    // verbatim, over the PROCESSED string (post prefix/URL stripping), which is
+    // what steam_id_handler.py puts on the wire. Verified against live Python.
+    assert_eq!(
+        psp_core::steam_id::parse_steam_input("garbage!!")
+            .unwrap_err()
+            .to_string(),
+        "invalid literal for int() with base 10: 'garbage!!'"
+    );
+    assert_eq!(
+        psp_core::steam_id::parse_steam_input("steam_abc")
+            .unwrap_err()
+            .to_string(),
+        "invalid literal for int() with base 10: 'abc'"
+    );
     assert!(psp_core::steam_id::is_palworld_uid(
         "AABBCCDD000000000000000000000000"
     ));

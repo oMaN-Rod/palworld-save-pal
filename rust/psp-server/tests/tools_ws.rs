@@ -45,9 +45,13 @@ async fn convert_steam_id_handles_uid_steam_id_and_garbage() {
     )
     .await;
     let garbage = common::next_json(&mut ws).await;
+    // Matches the real Python backend: `int("garbage!!")` raises
+    // `ValueError: invalid literal for int() with base 10: 'garbage!!'` and
+    // steam_id_handler.py emits `str(e)` verbatim (verified against the live
+    // handler). The generic "Invalid input..." fallback never fires in Python.
     assert_eq!(
         garbage["data"]["error"],
-        "Invalid input. Enter a numeric Steam ID, profile URL, or Palworld UID."
+        "invalid literal for int() with base 10: 'garbage!!'"
     );
 
     server.handle.shutdown().await;

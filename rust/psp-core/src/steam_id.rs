@@ -5,8 +5,13 @@
 pub enum SteamIdError {
     #[error("Vanity URLs (/id/) are not supported. Use the numeric Steam ID from the profile URL (/profiles/...) instead.")]
     VanityUrl,
-    #[error("")]
-    NotNumeric,
+    // Python's `int(raw)` raises `ValueError: invalid literal for int() with
+    // base 10: '<processed>'` where `<processed>` is the string AFTER the URL /
+    // `steam_` prefix stripping (i.e. exactly what `int()` was handed). Carry
+    // that processed text and format the message byte-for-byte the same way, so
+    // `steam_id_handler.py:39`'s `str(e)` is reproduced verbatim on the wire.
+    #[error("invalid literal for int() with base 10: '{0}'")]
+    NotNumeric(String),
     #[error("invalid uuid")]
     BadUuid,
 }
@@ -20,7 +25,8 @@ pub fn parse_steam_input(raw: &str) -> Result<u64, SteamIdError> {
     } else if let Some(stripped) = text.strip_prefix("steam_") {
         text = stripped.to_string();
     }
-    text.parse::<u64>().map_err(|_| SteamIdError::NotNumeric)
+    text.parse::<u64>()
+        .map_err(|_| SteamIdError::NotNumeric(text))
 }
 
 fn is_hex_32(raw: &str) -> bool {
