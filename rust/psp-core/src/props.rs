@@ -459,9 +459,13 @@ fn swap_leaf_uuid_property(property: &mut uesave::Property, old: uuid::Uuid, new
 /// `PalCharacterData`, the `map_concrete_model.rs` structs that also happen
 /// to declare `build_player_uid`/`private_lock_player_uid`/
 /// `owner_player_uid` fields, ...) -- carries no generic `Properties` bag to
-/// search, so recursion stops there; see this module's own doc comment on
-/// `swap_uuid_values_deep` for why those typed fields are a known,
-/// structural gap rather than a bug in this walk.
+/// search, so recursion stops there. That is intentional and
+/// parity-correct, NOT a gap to close: Python's `_deep_swap_uids` swaps none
+/// of those typed-struct fields on real saves either (they are `UUID`
+/// objects / typed structs, never the `str` its `isinstance(value, str)`
+/// guard requires) -- see `swap_uuid_values_deep`'s own doc comment for the
+/// full mutual-no-op reasoning and the explicit warning against
+/// hand-descending into these typed structs.
 fn swap_uuid_values_deep_in_property(
     property: &mut uesave::Property,
     keys: &[&str],
@@ -497,28 +501,38 @@ fn swap_uuid_values_deep_in_property(
 /// other -- bidirectionally, in one pass. Port of `_deep_swap_uids`
 /// (`game/mixins/player_swap.py:19-58`).
 ///
-/// Contract deviation, load-bearing and worth stating plainly: this walk
-/// only ever reaches `OwnerPlayerUId` in practice on a real Palworld save.
-/// `owner_player_uid`/`build_player_uid`/`private_lock_player_uid` (the
-/// three lowercase keys) do not exist ANYWHERE in this codebase as
-/// `Properties`-map string keys -- they are typed `FGuid` fields on Rust
-/// structs (`uesave-rs/uesave/src/games/palworld/map_concrete_model.rs`'s
-/// `PalMapObjectItemBoothModel`/`PalMapObjectItemChestModel`/
-/// `PalMapObjectItemChestAffectCorruption`/the base-camp owner struct, and
-/// `map_model.rs`'s `PalMapModel`), decoded from `MapObjectSaveData`/
-/// `BaseCampSaveData` `RawData` byte blobs the same way `PalGroupData`'s
-/// guild tail is (`domain::guild_tail`'s own `remaining_data` split). Python
-/// walks a fully dynamic dict tree where every one of those fields is still
-/// a plain named dict key, so `_deep_swap_uids` reaches all four keys;
-/// `uesave`'s typed codec structs have no generic `Properties` bag for this
-/// walk to search once it steps into one of those `StructValue` variants
-/// (see `swap_uuid_values_deep_in_property`'s doc comment). Extending this
-/// walk into those typed structs would mean hand-writing a swap arm per
-/// struct/field, which is out of scope for this contract-sanctioned `props`
-/// addition (the brief scopes this function to "the concrete `uesave::
-/// Property` enum variants Phase 1 exposed") and is not attempted here --
-/// this is a real, structural fidelity gap versus Python, not an oversight,
-/// and is called out again in this task's report.
+/// This step is a faithful MUTUAL NO-OP with Python on real save data --
+/// and that is the correct, parity-preserving behavior. Do NOT "fix" it by
+/// hand-adding typed-struct swap arms; doing so would make this port
+/// OVER-swap relative to Python, a genuine divergence.
+///
+/// Why it is a no-op on both sides:
+/// * Python's `_deep_swap_uids` only mutates a value when it is a Python
+///   `str` (`isinstance(value, str)`), or a dict whose `"value"` is a `str`
+///   (`player_swap.py:44-53`). On a real save loaded by
+///   `palworld_save_tools`, ALL FOUR ownership keys are `UUID`-wrapper
+///   objects / typed Guid structs, never plain `str` -- which is exactly
+///   why `player_transfer.py:57` has to call `str(owner_value).lower()`
+///   before comparing. So `isinstance(value, str)` is `False` for every
+///   one of them and Python swaps NOTHING here. `_deep_swap_uids` only ever
+///   actually fires in synthetic unit tests that pass string literals in.
+/// * This Rust walk likewise reaches none of the four on a real save:
+///   `OwnerPlayerUId` lives inside the typed `PalCharacterData` RawData (a
+///   `StructValue::PalCharacterData` the walk stops at, per
+///   `swap_uuid_values_deep_in_property`'s doc comment); the three
+///   lowercase keys are typed `FGuid` fields on the
+///   `map_concrete_model.rs`/`map_model.rs` structs decoded from
+///   `MapObjectSaveData`/`BaseCampSaveData` RawData blobs -- also typed
+///   `StructValue` variants with no generic `Properties` bag to search.
+///
+/// The ACTUAL uid swapping is done entirely by `swap_player_uids`'s four
+/// other steps (`swap_player_gvas_uids`, the character-map key rewrite via
+/// `world::set_entry_player_uid`, `swap_guild_member_uids`,
+/// `swap_player_file_refs`). This deep walk exists to mirror Python's own
+/// (real-save-inert) call to `_deep_swap_uids` exactly, and the `Str`/`Guid`
+/// leaf handling in `swap_leaf_uuid_property` is retained only so that the
+/// synthetic-string case Python's unit tests exercise stays behaviorally
+/// matched -- not because any such leaf is reachable on real data.
 pub fn swap_uuid_values_deep(
     properties: &mut uesave::Properties,
     keys: &[&str],

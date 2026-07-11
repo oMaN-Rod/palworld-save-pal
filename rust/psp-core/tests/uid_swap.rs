@@ -14,9 +14,17 @@ mod common;
 
 use psp_core::domain::world;
 use psp_core::progress::null_progress;
+use psp_core::props;
 use psp_core::session::SaveSession;
 use psp_core::transfer::TransferError;
 use uuid::Uuid;
+
+const OWNERSHIP_KEYS: [&str; 4] = [
+    "OwnerPlayerUId",
+    "owner_player_uid",
+    "build_player_uid",
+    "private_lock_player_uid",
+];
 
 /// The `InstanceId` of the `CharacterSaveParameterMap` entry belonging to
 /// `player_uid`'s own player character (`IsPlayer == true`).
@@ -124,6 +132,49 @@ fn world1_swap_between_two_players_exchanges_character_map_identities() {
     session
         .level_sav_bytes()
         .expect("post-swap Level.sav re-serializes without a schema error");
+}
+
+/// Locks in the deep-swap step's real-save behavior: running
+/// `props::swap_uuid_values_deep` over world1's actual `Level.sav` root
+/// properties for two real player uids changes NOTHING on the wire. This is
+/// the parity-correct outcome -- Python's `_deep_swap_uids` is likewise a
+/// no-op on real saves (all four ownership keys are `UUID` objects / typed
+/// Guid structs, never the `str` its guard requires; the reachable ones are
+/// behind typed codec structs this walk stops at). The test guards against a
+/// future regression where `swap_leaf_uuid_property` starts over-swapping a
+/// reachable `Str`/`Guid` leaf and diverges from Python. Asserted on the
+/// serialized `Level.sav` bytes (a total, structural equality check), not on
+/// a hand-picked subset of properties.
+#[test]
+fn deep_swap_over_real_level_sav_properties_changes_nothing() {
+    let mut session = common::load_fixture_session("world1");
+    let uids: Vec<Uuid> = session.player_summaries.keys().copied().collect();
+    assert!(
+        uids.len() >= 2,
+        "world1 fixture must have at least two players for this test"
+    );
+    let (first_uid, second_uid) = (uids[0], uids[1]);
+
+    let before = session
+        .level_sav_bytes()
+        .expect("world1 Level.sav serializes before the deep swap");
+
+    props::swap_uuid_values_deep(
+        session.level_properties_mut(),
+        &OWNERSHIP_KEYS,
+        first_uid,
+        second_uid,
+    );
+
+    let after = session
+        .level_sav_bytes()
+        .expect("world1 Level.sav serializes after the deep swap");
+
+    assert_eq!(
+        before, after,
+        "the deep ownership-key swap must be a no-op on real save data \
+         (parity with Python's real-save-inert _deep_swap_uids)"
+    );
 }
 
 /// Brief Step-1 test, adapted to the real API (`common::load_corpus_session`
