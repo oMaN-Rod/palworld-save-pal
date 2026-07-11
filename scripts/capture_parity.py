@@ -746,12 +746,142 @@ async def capture_gps(
     print(f"gps capture complete: {index} fixtures written to {corpus_dir}")
 
 
+# ---------------------------------------------------------------------------
+# Task 3E-3: the player-transfer scenario.
+#
+# Dynamic like `phase2`/`capture_gps`, not a FIXED_SCENARIOS list: it needs a
+# REAL player uid from the corpus save (CORPUS_PLAYER_UID) to drive
+# transfer_player, harvested from select_save's own get_player_summaries
+# response burst -- the same harvest pattern `capture_phase2`/`capture_gps`
+# use for their own live ids.
+#
+# The corpus save is loaded TWICE, in two different roles, over ONE
+# connection: once as the ordinary MAIN save via `select_save` (so
+# transfer_player has a target -- `ctx.session.save`), and once as the
+# transfer SOURCE via `load_source_save` (role="source", same --save-dir).
+# `transfer_player` is called with `target_player_uid: None` (spawn mode),
+# spawning the source player into the main save under its own uid -- this
+# never touches the standalone-target auto-save-to-disk branch
+# (`handlers/tools.rs::handle_transfer_player`'s `has_standalone_target`
+# path), which needs its OWN dedicated, disk-writing corpus and is
+# deliberately NOT exercised here (see rust/parity/README.md, "transfer
+# scenario", for why and how that would be captured safely later).
+#
+# Wire-response determinism: every response this scenario captures is a
+# fixed-shape success/error object (`{success, role, player_count,
+# world_name}`, `{source: {...}, target: {...}}` keyed by REAL on-disk player
+# uuids, `{success: true}`) -- no fresh uuid4 is minted on any code path this
+# sequence exercises (spawn-mode transfer_player never returns an id; the
+# guild `Uuid::new_v4()` `create_guild_for_player` may mint stays inside the
+# target SAVE TREE, not the WS response). So, unlike add_pal/add_preset/
+# add_gps_pal, this scenario needs NO PARITY_IGNORED_PATHS entries.
+TRANSFER_SCENARIO = "transfer"
+
+
+async def capture_transfer(
+    url: str,
+    save_dir: str,
+    corpus: str,
+    output_root: pathlib.Path,
+) -> None:
+    corpus_dir = output_root / corpus
+    corpus_dir.mkdir(parents=True, exist_ok=True)
+    level_sav_path = os.path.join(save_dir, "Level.sav")
+
+    index = 0
+    try:
+        socket_context = websockets.connect(url, max_size=2**30)
+        async with socket_context as socket:
+
+            async def run(request: dict) -> list:
+                nonlocal index
+                await socket.send(json.dumps(request))
+                responses = await _drain_response_burst(socket)
+                _refuse_null_save_dir(request, responses)
+                _write_fixture(corpus_dir, index, request, responses)
+                index += 1
+                return responses
+
+            # 000 select_save -- load the corpus save as the MAIN save, so
+            # transfer_player has a target. Harvest a real player uid for
+            # CORPUS_PLAYER_UID.
+            select_responses = await run(
+                {
+                    "type": "select_save",
+                    "data": {"type": "steam", "path": level_sav_path, "local": False},
+                }
+            )
+            player_summaries = _find_response(select_responses, "get_player_summaries")
+            player_ids = (
+                list(player_summaries["data"].keys()) if player_summaries else []
+            )
+            if not player_ids:
+                print(
+                    "error: corpus has no players -- the transfer scenario's "
+                    "transfer_player step needs a real source_player_uid "
+                    "(CORPUS_PLAYER_UID).",
+                    file=sys.stderr,
+                )
+                sys.exit(1)
+            corpus_player_uid = player_ids[0]
+            print(f"transfer: corpus_player_uid={corpus_player_uid}")
+
+            # 001 load_source_save -- unsupported save_type error path.
+            await run(
+                {
+                    "type": "load_source_save",
+                    "data": {"type": "gamepass", "path": "X", "role": "source"},
+                }
+            )
+            # 002 get_source_players -- nothing loaded into source/target yet.
+            await run({"type": "get_source_players", "data": None})
+            # 003 load_source_save -- the real corpus save, as the transfer
+            # SOURCE (role="source", same --save-dir as the main select_save
+            # above -- a save can be both a source and, separately, the main
+            # save at once; this scenario deliberately does NOT load it a
+            # third time as a standalone role="target").
+            await run(
+                {
+                    "type": "load_source_save",
+                    "data": {"type": "steam", "path": save_dir, "role": "source"},
+                }
+            )
+            # 004 get_source_players -- now source is populated, target still
+            # empty (no standalone target loaded; transfer_player below falls
+            # back to the main save).
+            await run({"type": "get_source_players", "data": None})
+            # 005 transfer_player -- spawn mode (target_player_uid: None):
+            # spawns the source player into the main save under its own uid.
+            await run(
+                {
+                    "type": "transfer_player",
+                    "data": {
+                        "source_player_uid": corpus_player_uid,
+                        "target_player_uid": None,
+                    },
+                }
+            )
+            # 006 unload_source_save -- clears source + transfer_target.
+            await run({"type": "unload_source_save", "data": None})
+    except (OSError, websockets.exceptions.InvalidHandshake) as connect_error:
+        print(
+            f"error: could not connect to {url}: {connect_error}\n"
+            "Is the Python backend running? (uv run python psp.py --port 5174)",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+    print(f"transfer capture complete: {index} fixtures written to {corpus_dir}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--scenario",
         choices=sorted(
-            set(FIXED_SCENARIOS) | set(SAVE_DIR_SCENARIOS) | {PHASE2_SCENARIO, GPS_SCENARIO}
+            set(FIXED_SCENARIOS)
+            | set(SAVE_DIR_SCENARIOS)
+            | {PHASE2_SCENARIO, GPS_SCENARIO, TRANSFER_SCENARIO}
         ),
         default="static-data",
         help="which request sequence to send",
@@ -810,6 +940,20 @@ def main() -> None:
             )
             sys.exit(1)
         asyncio.run(capture_gps(arguments.url, arguments.save_dir, corpus, output_root))
+        return
+
+    if arguments.scenario == TRANSFER_SCENARIO:
+        if arguments.save_dir is None:
+            print(
+                f"error: scenario {TRANSFER_SCENARIO!r} requires --save-dir (the "
+                "corpus save's directory, i.e. Level.sav's parent). Pass an "
+                "ABSOLUTE path.",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        asyncio.run(
+            capture_transfer(arguments.url, arguments.save_dir, corpus, output_root)
+        )
         return
 
     asyncio.run(

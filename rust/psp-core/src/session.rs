@@ -551,12 +551,43 @@ impl SaveSession {
     }
 }
 
+/// The on-disk locations a standalone `TransferTarget` was loaded from, kept
+/// alongside its `SaveSession` so `transfer_player`'s auto-save step
+/// (`transfer_handler.py:194-219`) can write the edited session straight back
+/// without re-deriving paths. `level_sav`/`level_meta`/`players_dir` mirror
+/// `FileManager.FileValidationResult`'s corresponding fields (`level_meta` is
+/// `None` when the load found no `LevelMeta.sav`, matching Python's
+/// `save_info.get("level_meta")` falsy-check before writing it back);
+/// `save_dir` is `level_sav`'s parent directory, the same value Python stores
+/// as `save_info["save_dir"]` and backs up before writing.
+pub struct TransferSaveInfo {
+    pub level_sav: std::path::PathBuf,
+    pub level_meta: Option<std::path::PathBuf>,
+    pub players_dir: std::path::PathBuf,
+    pub save_dir: std::path::PathBuf,
+}
+
+/// A standalone Steam save loaded as the transfer TARGET (`role: "target"` on
+/// `load_source_save`), as opposed to the ordinary main `Session::save` also
+/// being usable as a transfer target. Mirrors Python's
+/// `AppState.target_transfer_save` + `target_transfer_save_info` pair
+/// (`transfer_handler.py:110-113`).
+pub struct TransferTarget {
+    pub session: SaveSession,
+    pub save_info: TransferSaveInfo,
+}
+
 /// Per-WS-connection state (spec §3: per-connection sessions fix multi-tab clobbering).
 #[derive(Default)]
 pub struct Session {
     pub save: Option<SaveSession>,
     /// Transfer-source save (Phase 3).
     pub source: Option<SaveSession>,
+    /// Standalone transfer-target save (Phase 3, Task 3E-3) -- loaded via
+    /// `load_source_save` with `role: "target"`. When absent, `transfer_player`
+    /// falls back to `save` as the target (Python's `target_transfer_save or
+    /// app_state.save_file`).
+    pub transfer_target: Option<TransferTarget>,
 }
 
 impl Session {

@@ -267,6 +267,15 @@ async fn route(
         MessageType::ConvertSteamId => {
             handlers::tools::handle_convert_steam_id(serde_json::from_value(data)?, ctx).await
         }
+        // Task 3E-3: player transfer.
+        MessageType::LoadSourceSave => {
+            handlers::tools::handle_load_source_save(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::GetSourcePlayers => handlers::tools::handle_get_source_players(ctx).await,
+        MessageType::TransferPlayer => {
+            handlers::tools::handle_transfer_player(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::UnloadSourceSave => handlers::tools::handle_unload_source_save(ctx).await,
         // Remaining arms are added by Phases 1-6.
         other => {
             tracing::warn!(

@@ -543,3 +543,97 @@ corpus, like every other, is local-only — regenerate, never commit. With no
 gps fixtures present (the CI/default state, and every state in THIS
 checkout), the replay simply never iterates a `gps` directory — that is
 correct, not a failure.
+
+## transfer scenario (Phase 3, Task 3E-3)
+
+Exercises the player-transfer WS surface (`load_source_save` /
+`get_source_players` / `transfer_player` / `unload_source_save`, a port of
+`ws/handlers/transfer_handler.py`): `select_save` (loads the corpus save as
+the ordinary MAIN save, so `transfer_player` has a target) → `load_source_save`
+(unsupported `gamepass` type, error path) → `get_source_players` (both empty)
+→ `load_source_save` (the SAME corpus save again, `role: "source"`, so it is
+now loaded a second time as the transfer source) → `get_source_players`
+(source populated, target still empty — no standalone target was loaded) →
+`transfer_player` (spawn mode: `target_player_uid: null`, spawning the source
+player into the main save under its own uid) → `unload_source_save`.
+`scripts/capture_parity.py`'s `capture_transfer` builds this sequence
+dynamically (like `capture_phase2`/`capture_gps`, not a `FIXED_SCENARIOS`
+list), harvesting `CORPUS_PLAYER_UID` from `select_save`'s own
+`get_player_summaries` response burst.
+
+**This scenario deliberately does NOT exercise the standalone-target
+auto-save-to-disk branch** (`handlers/tools.rs::handle_transfer_player`'s
+`has_standalone_target` path — `load_source_save` with `role: "target"`,
+which backs up and overwrites the target save directory on a successful
+transfer). That path performs a REAL filesystem write, is covered by its own
+plumbing being reused byte-for-byte from Phase 2's `write_steam_modded_save`
+write conventions (see `handlers::save_file::write_transfer_target_save`),
+and needs a corpus the developer is comfortable having backed-up-and-rewritten
+by the capture run; a future task can add a dedicated `role: "target"` corpus
+if live parity coverage of that branch is ever wanted. The error-path and
+`{success: true}`-without-a-standalone-target flows this scenario DOES cover
+are exercised by `psp-server/tests/transfer_ws.rs` at the unit/integration
+level instead.
+
+**Masking assessment: this scenario needs NO `PARITY_IGNORED_PATHS` entries.**
+Every response it captures is a fixed-shape object —
+`{"success": true, "role", "player_count", "world_name"}` from
+`load_source_save`; `{"source": {...}, "target": {...}}` from
+`get_source_players`, keyed by the REAL, already-on-disk player uuids both
+backends read from the same corpus save (not freshly minted); and a bare
+`{"success": true}` from `transfer_player` in spawn mode (no id is echoed on
+that response shape at all — unlike `add_pal`/`add_gps_pal`, whose fresh
+`instance_id` is masked, spawn-mode `transfer_player` never puts an id on the
+wire in the first place). The one place a fresh `uuid4` genuinely IS minted on
+this code path — `create_guild_for_player`'s new guild id, when the spawned
+player has no guild to join — stays inside the target's in-memory SAVE TREE;
+it is never serialized into a WS response this scenario reads, so it cannot
+diverge the comparison. If a future extension of this scenario ever adds
+`download_save_file`/`save_modded_save` (which DO serialize save bytes onto
+the wire), revisit this assessment — this note applies only to the sequence
+above.
+
+### Safe capture procedure
+
+**Same discipline as db-presets/db-ups/gps: the backend's `psp.db` lives at
+the repo root and may hold the developer's real, hand-curated data. The
+transfer scenario itself touches NO `psp.db` table (no `get_settings`/
+`sync_app_state`/DB-CRUD request is in its sequence), but back it up anyway as
+defensive practice.**
+
+**This scenario WRITES to nothing on disk in this checkout's default
+configuration** (no `role: "target"` load, so `handle_transfer_player`'s
+disk-write branch never fires) — but treat the corpus save directory as
+read-only anyway and use a disposable copy, not a save you care about, in
+case a future edit to this scenario adds a `role: "target"` step.
+
+1. From the repo root, back up and move the existing `psp.db` ASIDE (don't
+   delete it):
+   `mv psp.db psp.db.transfer-parity-backup` (PowerShell:
+   `Move-Item psp.db psp.db.transfer-parity-backup`).
+2. Start the Python backend on a port your real client isn't using — the
+   default 5174 may already be held by a running desktop build (`PSP.exe`)/
+   dev server:
+   `uv run python psp.py --port 5199`
+3. From the repo root, capture against that same port, pointing `--save-dir`
+   at a corpus save directory with **at most 2 players** (same nondeterminism
+   caveat as `load_path` — `select_save`'s player-summary extraction races on
+   a `ThreadPoolExecutor` above that threshold), passing a **native, absolute**
+   path (see the `phase2` section above for why mixed separators cause a
+   spurious `level` mismatch):
+   `uv run --with websockets scripts/capture_parity.py --scenario transfer --save-dir "D:\...\tests\fixtures\saves\world2" --url ws://127.0.0.1:5199/ws/999999999`
+   Fixtures land in `rust/parity/fixtures/transfer/`.
+4. Stop the Python backend (Ctrl+C).
+5. Delete the FRESH `psp.db` this run created, then restore the developer's
+   original:
+   `rm psp.db` then `mv psp.db.transfer-parity-backup psp.db`
+   (PowerShell: `Remove-Item psp.db` then
+   `Move-Item psp.db.transfer-parity-backup psp.db`).
+6. From `rust/`: `cargo test -p psp-server --test parity` — replays
+   `transfer` (and every other captured corpus) against a fresh Rust temp DB.
+
+Fixtures are gitignored (`rust/.gitignore`'s `/parity/fixtures/`); this
+corpus, like every other, is local-only — regenerate, never commit. With no
+transfer fixtures present (the CI/default state, and every state in THIS
+checkout), the replay simply never iterates a `transfer` directory — that is
+correct, not a failure.

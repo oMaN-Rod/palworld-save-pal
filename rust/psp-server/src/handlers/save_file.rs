@@ -79,17 +79,27 @@ fn parse_player_file_stem(stem: &str) -> Option<(Uuid, bool)> {
         .map(|uid| (uid, is_dps))
 }
 
+/// `pub(crate)` (not just module-private): Task 3E-3's `load_source_save`
+/// handler (`handlers/tools.rs`) reuses this same layout, and Python's own
+/// `_load_steam_save` (`transfer_handler.py:23-67`) reuses the identical
+/// `FileManager.validate_steam_save_directory` this ports -- so the transfer
+/// handler must call the exact same validation, not a re-implementation with
+/// its own (necessarily divergent) error strings.
 #[derive(Debug)]
-struct SteamSaveLayout {
-    level_sav: PathBuf,
-    level_meta: Option<PathBuf>,
-    players_dir: PathBuf,
-    global_pal_storage_sav: Option<PathBuf>,
+pub(crate) struct SteamSaveLayout {
+    pub(crate) level_sav: PathBuf,
+    pub(crate) level_meta: Option<PathBuf>,
+    pub(crate) players_dir: PathBuf,
+    pub(crate) global_pal_storage_sav: Option<PathBuf>,
 }
 
 /// Port of `FileManager.validate_steam_save_directory` -- error strings and
-/// check order are wire-visible and must match exactly.
-fn validate_steam_save_directory(save_path: &str) -> Result<SteamSaveLayout, HandlerError> {
+/// check order are wire-visible and must match exactly. `pub(crate)`: shared
+/// with `handlers/tools.rs::handle_load_source_save`, see `SteamSaveLayout`'s
+/// doc comment.
+pub(crate) fn validate_steam_save_directory(
+    save_path: &str,
+) -> Result<SteamSaveLayout, HandlerError> {
     let save_dir = Path::new(save_path)
         .parent()
         .unwrap_or_else(|| Path::new(""))
@@ -153,7 +163,7 @@ fn validate_steam_save_directory(save_path: &str) -> Result<SteamSaveLayout, Han
 /// returned here is what `handle_select_save` uses to build the wire
 /// `players` array to match it -- the sorted map is additional information
 /// layered on top, not a substitute for it.
-fn discover_player_file_refs(
+pub(crate) fn discover_player_file_refs(
     players_dir: &Path,
 ) -> Result<(BTreeMap<Uuid, PlayerFileData>, Vec<Uuid>), HandlerError> {
     let dir_entries = std::fs::read_dir(players_dir).map_err(CoreError::Io)?;
@@ -791,6 +801,55 @@ fn write_steam_modded_save(
         if let Some(dps_bytes) = dps_bytes {
             std::fs::write(players_dir.join(format!("{stem}_dps.sav")), &dps_bytes)
                 .map_err(CoreError::Io)?;
+        }
+    }
+    Ok(())
+}
+
+/// Writes a standalone transfer target's `Level.sav` (+ `LevelMeta.sav` when
+/// present) and every lazily-loaded player's `.sav`/`_dps.sav` (UPPERCASE-hex
+/// names, `save_modded_player_stem`) to the on-disk locations recorded in its
+/// `TransferSaveInfo`. Port of the write half of `transfer_handler.py:213-216`
+/// (`target_save.to_level_sav_file` / `to_level_meta_sav_file` /
+/// `to_player_sav_files`).
+///
+/// Deliberately does NOT back up first, unlike `write_steam_modded_save`: the
+/// caller (`handlers/tools.rs::handle_transfer_player`) already performs its
+/// OWN backup via `copy_dir_ignoring` before calling this, matching Python's
+/// `shutil.copytree(..., ignore=ignore_patterns("backups"))` at
+/// `transfer_handler.py:207-211`, which precedes (and is entirely separate
+/// from) the three write calls this function replaces. Backing up twice would
+/// silently diverge from that ordering and double the I/O for no benefit.
+pub(crate) fn write_transfer_target_save(
+    session: &SaveSession,
+    save_info: &psp_core::session::TransferSaveInfo,
+) -> Result<(), HandlerError> {
+    let level_sav_bytes = session.level_sav_bytes()?;
+    if let Some(parent) = save_info.level_sav.parent() {
+        std::fs::create_dir_all(parent).map_err(CoreError::Io)?;
+    }
+    std::fs::write(&save_info.level_sav, &level_sav_bytes).map_err(CoreError::Io)?;
+
+    if let Some(level_meta_path) = &save_info.level_meta {
+        if let Some(level_meta_bytes) = session.level_meta_sav_bytes()? {
+            std::fs::write(level_meta_path, &level_meta_bytes).map_err(CoreError::Io)?;
+        }
+    }
+
+    std::fs::create_dir_all(&save_info.players_dir).map_err(CoreError::Io)?;
+    for (player_id, (sav_bytes, dps_bytes)) in session.player_sav_bytes()? {
+        let stem = save_modded_player_stem(&player_id);
+        std::fs::write(
+            save_info.players_dir.join(format!("{stem}.sav")),
+            &sav_bytes,
+        )
+        .map_err(CoreError::Io)?;
+        if let Some(dps_bytes) = dps_bytes {
+            std::fs::write(
+                save_info.players_dir.join(format!("{stem}_dps.sav")),
+                &dps_bytes,
+            )
+            .map_err(CoreError::Io)?;
         }
     }
     Ok(())
