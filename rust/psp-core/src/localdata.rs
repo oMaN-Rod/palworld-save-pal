@@ -82,12 +82,35 @@ mod tests {
     use super::*;
     use crate::gamepass::fixture::python_testdata_dir;
 
-    fn testdata_or_skip() -> Option<std::path::PathBuf> {
-        let dir = python_testdata_dir();
-        if dir.is_none() {
+    /// Resolves the Python testdata dir ONLY when it actually contains a
+    /// `LocalData.sav` — `python_testdata_dir` itself only gates on
+    /// `Level.sav`, so a `Level`-but-no-`LocalData` layout would otherwise
+    /// slip through and make the `std::fs::read(... "LocalData.sav")` calls
+    /// below `.unwrap()`-panic instead of skipping cleanly. Gating on the
+    /// exact file each test reads keeps a partial testdata checkout a SKIP,
+    /// never a panic.
+    fn testdata_local_data_or_skip() -> Option<std::path::PathBuf> {
+        let Some(dir) = python_testdata_dir() else {
             eprintln!("SKIP: python testdata not found (set PSP_PY_TESTDATA)");
+            return None;
+        };
+        if !dir.join("LocalData.sav").exists() {
+            eprintln!("SKIP: python testdata has no LocalData.sav (partial layout)");
+            return None;
         }
-        dir
+        Some(dir)
+    }
+
+    /// A real committed gamepass `LevelMeta.sav` (mirrors
+    /// `gamepass::scan::corpus_level_meta_path`): it carries a `SaveData`
+    /// struct property, so the hermetic zeroing test can graft a synthetic
+    /// `WorldMapMaskTextureV4` byte array into it and drive the full
+    /// read → zero → count → re-emit path against a real GVAS tree without
+    /// depending on a `LocalData.sav` fixture (which the corpus lacks).
+    fn corpus_level_meta_path() -> std::path::PathBuf {
+        std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join(
+            "../../backups/gamepass/000900000487F3B6_0000000000000000000000006B210A9C_20260325231642/4F64BAB699AE4B4A97A5862116E07C6D/LevelMeta.sav",
+        )
     }
 
     fn mask_bytes(local_data_sav: &[u8]) -> Vec<u8> {
@@ -111,7 +134,7 @@ mod tests {
 
     #[test]
     fn local_data_round_trips_byte_identical_at_gvas_level() {
-        let Some(testdata) = testdata_or_skip() else {
+        let Some(testdata) = testdata_local_data_or_skip() else {
             return;
         };
         let sav_bytes = std::fs::read(testdata.join("LocalData.sav")).unwrap();
@@ -133,7 +156,7 @@ mod tests {
 
     #[test]
     fn unlock_world_map_zeroes_mask_and_emits_plm() {
-        let Some(testdata) = testdata_or_skip() else {
+        let Some(testdata) = testdata_local_data_or_skip() else {
             return;
         };
         let sav_bytes = std::fs::read(testdata.join("LocalData.sav")).unwrap();
@@ -159,6 +182,68 @@ mod tests {
         // so build the negative case from raw bytes instead — any parse failure path:
         let error = unlock_world_map(b"not a sav file").unwrap_err();
         assert!(matches!(error, crate::error::CoreError::Parse(_)));
+    }
+
+    /// Hermetic positive test for the CORE zeroing/count/re-emit logic that
+    /// runs WITHOUT any `LocalData.sav` fixture (the corpus has none and the
+    /// Python fixtures no longer carry `WorldMapMaskTextureV4`). Grafts a
+    /// synthetic mask `[1, 2, 3, 0, 4]` — a deliberate mix of non-zero AND
+    /// already-zero bytes so the count is discriminating — into a REAL
+    /// committed `LevelMeta.sav`'s `SaveData` struct, re-emits it, and feeds
+    /// the bytes through `unlock_world_map`. Asserts `cleared_byte_count == 4`
+    /// (the four non-zero bytes `1, 2, 3, 4`, NOT `5` — the pre-zero byte is
+    /// not counted), the output re-reads with an all-zero mask, and the
+    /// output carries the `PlM1` magic. Skips (never panics) only if the
+    /// committed `LevelMeta.sav` is absent from this checkout.
+    #[test]
+    fn unlock_world_map_zeroes_synthetic_mask_grafted_into_real_savedata() {
+        let level_meta_path = corpus_level_meta_path();
+        if !level_meta_path.exists() {
+            eprintln!(
+                "SKIP: corpus LevelMeta.sav not found ({})",
+                level_meta_path.display()
+            );
+            return;
+        }
+        let meta_bytes = std::fs::read(&level_meta_path).unwrap();
+
+        // Parse the real LevelMeta, insert a synthetic byte-array mask into
+        // its SaveData struct, and register the schema for the brand-new
+        // property so the writer doesn't hit MissingPropertySchema (same
+        // construct → register → write pattern the rest of the port uses).
+        let mut save = savio::read_sav_bytes(&meta_bytes).unwrap();
+        {
+            let save_data =
+                crate::props::get_mut(&mut save.root.properties, &["SaveData"]).unwrap();
+            let save_data = crate::props::struct_props_mut(save_data).unwrap();
+            save_data.insert(
+                "WorldMapMaskTextureV4",
+                Property::Array(ValueVec::Byte(ByteArray::Byte(vec![1, 2, 3, 0, 4]))),
+            );
+        }
+        crate::props::ensure_schema(
+            &mut save,
+            "SaveData.WorldMapMaskTextureV4".to_string(),
+            uesave::PropertyTagPartial {
+                id: None,
+                data: uesave::PropertyTagDataPartial::Array(Box::new(
+                    uesave::PropertyTagDataPartial::Byte(None),
+                )),
+            },
+        );
+        let grafted_sav = savio::write_sav_bytes(&save).unwrap();
+        // Sanity: the graft really produced the discriminating mask.
+        assert_eq!(mask_bytes(&grafted_sav), vec![1, 2, 3, 0, 4]);
+
+        let outcome = unlock_world_map(&grafted_sav).unwrap();
+        assert_eq!(
+            outcome.cleared_byte_count, 4,
+            "only the four non-zero bytes (1, 2, 3, 4) are cleared; the already-zero byte is not counted"
+        );
+        assert_eq!(&outcome.sav_bytes[8..12], b"PlM1");
+
+        let mask_after = mask_bytes(&outcome.sav_bytes);
+        assert_eq!(mask_after, vec![0, 0, 0, 0, 0]);
     }
 
     /// Real Xbox `LocalData.sav`, if present in the on-disk gamepass backup
