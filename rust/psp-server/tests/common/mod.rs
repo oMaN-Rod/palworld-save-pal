@@ -65,3 +65,50 @@ pub async fn next_json(socket: &mut WsClient) -> serde_json::Value {
         }
     }
 }
+
+/// Serializes tests that mutate the PROCESS-GLOBAL gamepass env vars and
+/// restores their prior values on Drop (so a panic mid-test cannot leak a
+/// temp path into a sibling test). Hold this for the whole test body.
+///
+/// `#[allow(dead_code)]`: `tests/common/mod.rs` is compiled fresh into every
+/// integration-test binary via `mod common;`, and only `phase4_ws.rs` uses
+/// this guard today — the other binaries would otherwise fail
+/// `-D dead-code`.
+#[allow(dead_code)]
+pub static GAMEPASS_ENV_LOCK: tokio::sync::Mutex<()> = tokio::sync::Mutex::const_new(());
+
+#[allow(dead_code)]
+pub struct GamepassEnvGuard {
+    _lock: tokio::sync::MutexGuard<'static, ()>,
+    previous: Vec<(&'static str, Option<std::ffi::OsString>)>,
+}
+
+#[allow(dead_code)]
+impl GamepassEnvGuard {
+    /// Acquire the lock, snapshot the current values of the given vars, then
+    /// set them. `vars` is a slice of (name, value) pairs; only the named
+    /// vars are touched. Restored (or removed if previously unset) on Drop.
+    pub async fn acquire(vars: &[(&'static str, std::path::PathBuf)]) -> Self {
+        let lock = GAMEPASS_ENV_LOCK.lock().await;
+        let mut previous = Vec::new();
+        for (name, value) in vars {
+            previous.push((*name, std::env::var_os(name)));
+            std::env::set_var(name, value);
+        }
+        Self {
+            _lock: lock,
+            previous,
+        }
+    }
+}
+
+impl Drop for GamepassEnvGuard {
+    fn drop(&mut self) {
+        for (name, prior) in &self.previous {
+            match prior {
+                Some(value) => std::env::set_var(name, value),
+                None => std::env::remove_var(name),
+            }
+        }
+    }
+}

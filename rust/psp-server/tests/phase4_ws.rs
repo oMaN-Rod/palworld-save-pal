@@ -6,16 +6,6 @@
 
 mod common;
 
-/// Serializes the two tests below, which both mutate the PROCESS-GLOBAL env
-/// vars `PSP_GAMEPASS_PACKAGES_ROOT` / `PSP_BACKUPS_ROOT` (cargo runs a test
-/// binary's tests in parallel threads, so without this one test could clear an
-/// env var mid-flight of the other and its gamepass backup could land under the
-/// process CWD's real `backups/`). A `tokio::sync::Mutex` (not `std`) so the
-/// guard can be held across the tests' `.await` points without tripping
-/// `clippy::await_holding_lock`; the async mutex also releases cleanly if a
-/// test panics while holding it, so there is no poison to recover from.
-static GAMEPASS_ENV_LOCK: tokio::sync::Mutex<()> = tokio::sync::Mutex::const_new(());
-
 /// Repo root, resolved from this crate's manifest dir (mirrors
 /// `phase2_ws.rs`'s `repo_root()`): `rust/psp-server/../..`.
 fn repo_root() -> std::path::PathBuf {
@@ -41,7 +31,6 @@ async fn recv_until(ws: &mut common::WsClient, target_type: &str) -> Vec<serde_j
 
 #[tokio::test]
 async fn gamepass_scan_and_management_flow() {
-    let _env_guard = GAMEPASS_ENV_LOCK.lock().await;
     // Seed the synthetic wgs tree with the COMMITTED, always-present
     // `tests/fixtures/saves/world1/LevelMeta.sav` (a real PlM1/Oodle save
     // that `savio::read_sav_bytes` + `scan` parse for the world name) rather
@@ -79,8 +68,14 @@ async fn gamepass_scan_and_management_flow() {
     };
 
     psp_core::gamepass::fixture::build_wgs_tree(gamepass_root.path(), &[save]).unwrap();
-    std::env::set_var("PSP_GAMEPASS_PACKAGES_ROOT", gamepass_root.path());
-    std::env::set_var("PSP_BACKUPS_ROOT", gamepass_root.path().join("backups"));
+    let _env_guard = common::GamepassEnvGuard::acquire(&[
+        (
+            "PSP_GAMEPASS_PACKAGES_ROOT",
+            gamepass_root.path().to_path_buf(),
+        ),
+        ("PSP_BACKUPS_ROOT", gamepass_root.path().join("backups")),
+    ])
+    .await;
 
     let server = common::start_test_server().await;
     let mut ws = common::connect(&server).await;
@@ -174,8 +169,6 @@ async fn gamepass_scan_and_management_flow() {
         format!("No containers found for save: {save_id}")
     );
 
-    std::env::remove_var("PSP_GAMEPASS_PACKAGES_ROOT");
-    std::env::remove_var("PSP_BACKUPS_ROOT");
     server.handle.shutdown().await;
 }
 
@@ -187,8 +180,6 @@ async fn gamepass_scan_and_management_flow() {
 /// `save_modded_save` sequence in `local_file_handler.py`.
 #[tokio::test]
 async fn select_gamepass_save_loads_and_saves_modded_copy() {
-    let _env_guard = GAMEPASS_ENV_LOCK.lock().await;
-
     let world1 = repo_root().join("tests/fixtures/saves/world1");
     let level_bytes = std::fs::read(world1.join("Level.sav")).unwrap();
     let meta_bytes = std::fs::read(world1.join("LevelMeta.sav")).unwrap();
@@ -217,8 +208,14 @@ async fn select_gamepass_save_loads_and_saves_modded_copy() {
         psp_core::gamepass::fixture::build_wgs_tree(gamepass_root.path(), &[save]).unwrap();
 
     // Backups must NOT touch the process CWD's real `backups/`.
-    std::env::set_var("PSP_BACKUPS_ROOT", gamepass_root.path().join("backups"));
-    std::env::set_var("PSP_GAMEPASS_PACKAGES_ROOT", gamepass_root.path());
+    let _env_guard = common::GamepassEnvGuard::acquire(&[
+        ("PSP_BACKUPS_ROOT", gamepass_root.path().join("backups")),
+        (
+            "PSP_GAMEPASS_PACKAGES_ROOT",
+            gamepass_root.path().to_path_buf(),
+        ),
+    ])
+    .await;
 
     let server = common::start_test_server().await;
 
@@ -303,8 +300,6 @@ async fn select_gamepass_save_loads_and_saves_modded_copy() {
         .expect("modded save missing");
     assert_eq!(modded.world_name, "Modded World");
 
-    std::env::remove_var("PSP_BACKUPS_ROOT");
-    std::env::remove_var("PSP_GAMEPASS_PACKAGES_ROOT");
     server.handle.shutdown().await;
 }
 
@@ -317,8 +312,6 @@ async fn select_gamepass_save_loads_and_saves_modded_copy() {
 /// process CWD's real `backups/` untouched.
 #[tokio::test]
 async fn convert_save_format_standalone_round_trip_over_ws() {
-    let _env_guard = GAMEPASS_ENV_LOCK.lock().await;
-
     let world1 = repo_root().join("tests/fixtures/saves/world1");
     let level_bytes = std::fs::read(world1.join("Level.sav")).unwrap();
     let meta_bytes = std::fs::read(world1.join("LevelMeta.sav")).unwrap();
@@ -343,7 +336,9 @@ async fn convert_save_format_standalone_round_trip_over_ws() {
     let container_dir = psp_core::gamepass::fixture::build_wgs_tree(temp.path(), &[save]).unwrap();
     let steam_out = temp.path().join("steam-out");
 
-    std::env::set_var("PSP_BACKUPS_ROOT", temp.path().join("backups"));
+    let _env_guard =
+        common::GamepassEnvGuard::acquire(&[("PSP_BACKUPS_ROOT", temp.path().join("backups"))])
+            .await;
 
     let server = common::start_test_server().await;
     let mut ws = common::connect(&server).await;
@@ -426,7 +421,6 @@ async fn convert_save_format_standalone_round_trip_over_ws() {
         "No save file loaded and no source path provided."
     );
 
-    std::env::remove_var("PSP_BACKUPS_ROOT");
     server.handle.shutdown().await;
 }
 
