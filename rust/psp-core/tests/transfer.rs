@@ -84,6 +84,57 @@ fn world1_spawn_mode_transfer_keeps_player_present() {
     assert!(target.player_summaries.contains_key(&source_uid));
 }
 
+/// True spawn mode: `target_player_uid = None` with a VALID source uid. This
+/// is the ONLY test that drives `spawn_mode = true` past validation, so it is
+/// the only one that exercises the spawn-only path (re-parse-from-bytes clone +
+/// `loaded_players`/`player_file_refs` insert, transfer.rs). Asserts the spawn
+/// branch's effect is observable and specific: `loaded_players` (empty on a
+/// freshly loaded target) gains the uid ONLY because the spawn branch inserted
+/// the cloned GVAS -- `rebuild_player_caches` deliberately preserves
+/// `loaded_players`, so the entry survives the call.
+#[test]
+fn world1_true_spawn_mode_inserts_cloned_player() {
+    let mut source = common::load_fixture_session("world1");
+    let mut target = common::load_fixture_session("world1");
+
+    let Some(source_uid) = level_two_player(&source) else {
+        eprintln!("world1 fixture has no level>=2 player; skipping spawn assertion");
+        return;
+    };
+
+    // A freshly loaded target has parsed no player GVAS yet: the spawn branch
+    // is the only thing that can populate `loaded_players` for this uid.
+    assert!(
+        !target.loaded_players.contains_key(&source_uid),
+        "precondition: target has not loaded this player before the spawn"
+    );
+
+    transfer_player(
+        &mut source,
+        &mut target,
+        source_uid,
+        None, // <-- true spawn mode (target_player_uid == None)
+        &all_options(),
+        &null_progress(),
+    )
+    .expect("true spawn-mode transfer succeeds");
+
+    // Discriminates the spawn branch specifically: the cloned player GVAS was
+    // inserted into the target.
+    assert!(
+        target.loaded_players.contains_key(&source_uid),
+        "spawn branch must insert the cloned player GVAS into the target"
+    );
+    assert!(
+        target.player_file_refs.contains_key(&source_uid),
+        "spawn branch must insert the player's file reference into the target"
+    );
+    assert!(
+        target.player_summaries.contains_key(&source_uid),
+        "spawned player has a summary after the cache rebuild"
+    );
+}
+
 /// Brief Step-1 test, adapted to the real API (`common::load_corpus_session`
 /// instead of the fictional `session::load_steam_save`, `player_summaries`
 /// field instead of a method). Runs only with `PSP_TEST_LEVEL_SAV` set.
