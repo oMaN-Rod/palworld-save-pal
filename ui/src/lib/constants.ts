@@ -1,3 +1,4 @@
 export const ASSET_DATA_PATH = '/src/lib/assets';
 
-export const MAX_LEVEL = 65;
+/** Non-cheat level cap (Palworld 1.0). Cheat-mode ceilings are separate. */
+export const MAX_LEVEL = 80;

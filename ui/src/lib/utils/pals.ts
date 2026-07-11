@@ -1,6 +1,7 @@
 import { expData, palsData } from '$lib/data';
 import { getStats } from '$lib/utils';
 import { getAppState } from '$states';
+import { MAX_LEVEL } from '$lib/constants';
 import {
 	EntryState,
 	type Pal,
@@ -93,8 +94,8 @@ export function formatNickname(nickname: string, prefix: string | undefined) {
 export async function handleMaxOutPal(pal: Pal, player: Player): Promise<void> {
 	if (!pal) return;
 	const appState = getAppState();
-	pal.level = appState.settings.cheat_mode ? 255 : 65;
-	const maxLevelData = expData.expData[appState.settings.cheat_mode ? '100' : '66'];
+	pal.level = appState.settings.cheat_mode ? 255 : MAX_LEVEL;
+	const maxLevelData = expData.expData[appState.settings.cheat_mode ? '100' : '81'];
 	pal.exp = maxLevelData.PalTotalEXP - maxLevelData.PalNextEXP;
 	editAlpha(pal, true);
 	pal.talent_hp = appState.settings.cheat_mode ? 255 : 100;
