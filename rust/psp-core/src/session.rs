@@ -399,6 +399,35 @@ impl SaveSession {
         Ok(session)
     }
 
+    /// Port of `PlayerSwapMixin.rebuild_player_caches`
+    /// (`game/mixins/player_swap.py:282-291`): invalidate the lazy performance
+    /// caches, drop the loaded-guild set, and re-extract both summary maps
+    /// from the (now-mutated) world tree. The eager Phase-1 position indexes
+    /// are rebuilt too -- unlike Python (whose indexes are all in the lazy
+    /// cache layer), this port keeps them eager and built once in `load`, so a
+    /// character/container/group-map mutation leaves them stale until they are
+    /// rebuilt here.
+    ///
+    /// `loaded_players` is deliberately NOT cleared: it is this port's
+    /// `_player_gvas_files` (the parsed player GVAS the save-out iterates),
+    /// which Python's `rebuild_player_caches` also keeps -- Python only clears
+    /// `_players`/`_loaded_players` (the domain objects and the id set), whose
+    /// only observable effect here is the summaries' `loaded` flag resetting to
+    /// `false`, which re-extraction already does. `extract_summaries` is called
+    /// with a null progress sink so this reproduces Python's rebuild exactly
+    /// (its `_extract_*_summaries` take no `ws_callback` and emit nothing).
+    pub fn rebuild_player_caches(&mut self) -> Result<(), CoreError> {
+        self.invalidate_performance_caches();
+        self.loaded_guilds.clear();
+        self.character_index = build_position_index(self.character_map()?, Some("InstanceId"));
+        self.item_container_index = build_position_index(self.item_container_map()?, Some("ID"));
+        self.character_container_index =
+            build_position_index(self.character_container_map()?, Some("ID"));
+        self.group_index = build_position_index(self.group_map()?, None);
+        self.guild_extra_index = build_position_index(self.guild_extra_map().unwrap_or(&[]), None);
+        crate::domain::summaries::extract_summaries(self, &crate::progress::null_progress())
+    }
+
     pub fn world_properties(&self) -> Result<&uesave::Properties, CoreError> {
         props::get(&self.level.root.properties, &["worldSaveData"])
             .and_then(props::struct_properties)
