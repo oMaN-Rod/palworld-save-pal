@@ -422,6 +422,55 @@ pub fn save_modified_gamepass(
     Ok(())
 }
 
+fn delete_matching_containers(
+    container_dir: &Path,
+    backups_root: &Path,
+    matches: impl Fn(&ContainerEntry) -> bool,
+) -> Result<usize, CoreError> {
+    backup_container_dir(container_dir, backups_root)?;
+    let mut index = ContainerIndex::read_from_dir(container_dir)?;
+    let (doomed, kept): (Vec<ContainerEntry>, Vec<ContainerEntry>) =
+        index.containers.into_iter().partition(&matches);
+    index.containers = kept;
+    if doomed.is_empty() {
+        return Ok(0);
+    }
+    for entry in &doomed {
+        let blob_dir = container_dir.join(guid_file_name(&entry.container_uuid));
+        if blob_dir.exists() {
+            std::fs::remove_dir_all(&blob_dir)?;
+        }
+    }
+    index.write_to_dir(container_dir)?;
+    Ok(doomed.len())
+}
+
+/// Port of delete_gamepass_save_handler's container removal (convert_handler.py:680-730).
+pub fn delete_save_containers(
+    container_dir: &Path,
+    save_id: &str,
+    backups_root: &Path,
+) -> Result<usize, CoreError> {
+    let prefix = format!("{save_id}-");
+    delete_matching_containers(container_dir, backups_root, |entry| {
+        entry.container_name.starts_with(&prefix)
+    })
+}
+
+/// Port of delete_gamepass_player_handler's container removal (convert_handler.py:733-791).
+pub fn delete_player_containers(
+    container_dir: &Path,
+    save_id: &str,
+    player_id: &str,
+    backups_root: &Path,
+) -> Result<usize, CoreError> {
+    let prefix = format!("{save_id}-");
+    let player_fragment = format!("Players-{player_id}");
+    delete_matching_containers(container_dir, backups_root, |entry| {
+        entry.container_name.starts_with(&prefix) && entry.container_name.contains(&player_fragment)
+    })
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -790,5 +839,98 @@ mod tests {
         assert!(!reloaded
             .latest_save_containers("OLDID000OLDID000OLDID000OLDID000")
             .is_empty());
+    }
+
+    #[test]
+    fn delete_save_containers_removes_all_and_reports_count() {
+        let temp = tempfile::tempdir().unwrap();
+        let player_id = uuid::Uuid::new_v4();
+        let doomed = crate::gamepass::fixture::SyntheticSave {
+            save_id: "DEAD0000DEAD0000DEAD0000DEAD0000".to_string(),
+            level_sav: b"L".to_vec(),
+            level_meta: Some(b"M".to_vec()),
+            local_data: None,
+            world_option: None,
+            players: vec![crate::gamepass::fixture::SyntheticPlayer {
+                id: player_id,
+                sav: b"P".to_vec(),
+                dps: Some(b"D".to_vec()),
+            }],
+        };
+        let survivor = crate::gamepass::fixture::SyntheticSave {
+            save_id: "A11FE000A11FE000A11FE000A11FE000".to_string(),
+            level_sav: b"L2".to_vec(),
+            level_meta: Some(b"M2".to_vec()),
+            local_data: None,
+            world_option: None,
+            players: vec![],
+        };
+        let container_dir =
+            crate::gamepass::fixture::build_wgs_tree(temp.path(), &[doomed, survivor]).unwrap();
+        let backups = temp.path().join("backups");
+
+        let removed =
+            delete_save_containers(&container_dir, "DEAD0000DEAD0000DEAD0000DEAD0000", &backups)
+                .unwrap();
+        assert_eq!(removed, 4);
+
+        let index = crate::gamepass::format::ContainerIndex::read_from_dir(&container_dir).unwrap();
+        assert_eq!(index.containers.len(), 2); // survivor's Level + LevelMeta
+        assert!(index
+            .containers
+            .iter()
+            .all(|entry| entry.container_name.starts_with("A11FE000")));
+        assert!(backups.read_dir().unwrap().next().is_some()); // backup was taken
+
+        // Nothing matched: 0, no error.
+        let removed =
+            delete_save_containers(&container_dir, "0000000000000000000000000000BEEF", &backups)
+                .unwrap();
+        assert_eq!(removed, 0);
+    }
+
+    #[test]
+    fn delete_player_containers_removes_sav_and_dps_only() {
+        let temp = tempfile::tempdir().unwrap();
+        let victim = uuid::Uuid::new_v4();
+        let bystander = uuid::Uuid::new_v4();
+        let save = crate::gamepass::fixture::SyntheticSave {
+            save_id: "CAFE0000CAFE0000CAFE0000CAFE0000".to_string(),
+            level_sav: b"L".to_vec(),
+            level_meta: Some(b"M".to_vec()),
+            local_data: None,
+            world_option: None,
+            players: vec![
+                crate::gamepass::fixture::SyntheticPlayer {
+                    id: victim,
+                    sav: b"P1".to_vec(),
+                    dps: Some(b"D1".to_vec()),
+                },
+                crate::gamepass::fixture::SyntheticPlayer {
+                    id: bystander,
+                    sav: b"P2".to_vec(),
+                    dps: None,
+                },
+            ],
+        };
+        let container_dir = crate::gamepass::fixture::build_wgs_tree(temp.path(), &[save]).unwrap();
+        let backups = temp.path().join("backups");
+
+        let victim_hex = victim.as_simple().to_string().to_uppercase();
+        let removed = delete_player_containers(
+            &container_dir,
+            "CAFE0000CAFE0000CAFE0000CAFE0000",
+            &victim_hex,
+            &backups,
+        )
+        .unwrap();
+        assert_eq!(removed, 2); // sav + dps
+
+        let index = crate::gamepass::format::ContainerIndex::read_from_dir(&container_dir).unwrap();
+        assert_eq!(index.containers.len(), 3); // Level, LevelMeta, bystander
+        assert!(!index
+            .containers
+            .iter()
+            .any(|entry| entry.container_name.contains(&victim_hex)));
     }
 }
