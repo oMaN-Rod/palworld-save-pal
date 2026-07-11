@@ -390,6 +390,7 @@ class PalObjects:
         "所持重量": "weight",
         "捕獲率": "capture_rate",
         "作業速度": "work_speed",
+        "移動速度アップ": "move_speed",  # added in Palworld 1.0
     }
 
     ExStatusNames = [

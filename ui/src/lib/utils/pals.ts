@@ -55,8 +55,8 @@ export function formatNickname(nickname: string, prefix: string | undefined) {
 export async function handleMaxOutPal(pal: Pal, player: Player): Promise<void> {
 	if (!pal) return;
 	const appState = getAppState();
-	pal.level = appState.settings.cheat_mode ? 255 : 65;
-	const maxLevelData = expData.expData[appState.settings.cheat_mode ? '100' : '66'];
+	pal.level = appState.settings.cheat_mode ? 255 : 80;
+	const maxLevelData = expData.expData[appState.settings.cheat_mode ? '100' : '81'];
 	pal.exp = maxLevelData.PalTotalEXP - maxLevelData.PalNextEXP;
 	const [_, valid] = canBeLucky(pal.character_id);
 	pal.is_boss = valid;
