@@ -15,3 +15,6 @@ cityhasher = { workspace = true }
 
 [dev-dependencies]
 tempfile = { workspace = true }
+
+[features]
+test-fixtures = []

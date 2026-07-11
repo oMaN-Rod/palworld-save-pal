@@ -1,4 +1,5 @@
 pub mod container;
+pub mod gamepass;
 pub mod guild;
 pub mod ordered_map;
 pub mod pal;
