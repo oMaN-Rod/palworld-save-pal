@@ -1,4 +1,5 @@
 pub mod api_convert;
+pub mod desktop_dialogs;
 pub mod dispatcher;
 pub mod emitter;
 pub mod envelope;
