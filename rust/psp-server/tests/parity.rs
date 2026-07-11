@@ -163,6 +163,16 @@ const PARITY_IGNORED_PATHS: &[(&str, &str)] = &[
     ("create_ups_tag", "/data/tag/created_at"),
     ("create_ups_tag", "/data/tag/updated_at"),
     ("update_ups_tag", "/data/tag/updated_at"),
+    // Task 3D-3 (gps scenario). add_gps_pal mints a fresh uuid4 InstanceId,
+    // INDEPENDENTLY minted by Python (capture) and Rust (replay) exactly like
+    // add_pal/add_dps_pal above -- it can never match. handle_clone_gps_pal
+    // (rust/psp-server/src/handlers/gps.rs) answers on this same
+    // `add_gps_pal` wire type, so this entry covers that path too. Every
+    // other field of the new pal (character_id, nickname, storage_slot,
+    // every stat) is still compared strictly. get_gps_response's slot-keyed
+    // map of GPS pals is NOT handled here -- a static JSON pointer can't
+    // reach a dynamic map value -- see mask_gps_response_frame below.
+    ("add_gps_pal", "/data/pal/instance_id"),
 ];
 
 /// The db-ups list frames carry an ARRAY of records whose per-element
@@ -203,6 +213,43 @@ fn mask_ups_list_frames(message_type: &str, value: &mut Value) {
     }
 }
 
+/// `get_gps_response`'s `data` is a DYNAMIC slot-keyed object (Global Pal
+/// Storage's `BTreeMap<i32, PalDto>`, JSON-encoded as `{"0": {pal...}, "3":
+/// {pal...}}` -- a map keyed by storage slot, not an array), so -- like
+/// `mask_ups_list_frames` above -- a static `PARITY_IGNORED_PATHS` pointer
+/// can't reach every value. After `add_gps_pal`, the newly-added pal's
+/// `instance_id` is a fresh `uuid4` minted INDEPENDENTLY by Python (capture)
+/// and Rust (replay) and can never match. Every OTHER GPS pal in the map was
+/// read from the same on-disk `GlobalPalStorage.sav` by both backends, so its
+/// `instance_id` is already stable and IDENTICAL between capture and replay
+/// -- masking it too is harmless (a no-op on already-equal values), and doing
+/// so unconditionally (rather than trying to distinguish "the one pal that's
+/// new" from the rest) keeps this walker as simple as `mask_ups_list_frames`.
+/// GPS pals carry no DB timestamps (unlike db-ups' `created_at`/etc.), so
+/// `instance_id` is the only field this masks; every other field (
+/// `character_id`, `nickname`, stats, the slot key itself) stays strictly
+/// compared. The `error`/`available: false` no-save / no-gps-file shapes
+/// (see `handle_request_gps` in `rust/psp-server/src/handlers/gps.rs`) have
+/// no pal map under `data` at all, so this is a no-op for them.
+fn mask_gps_response_frame(message_type: &str, value: &mut Value) {
+    if message_type != "get_gps_response" {
+        return;
+    }
+    let Some(slots) = value.get_mut("data").and_then(Value::as_object_mut) else {
+        return;
+    };
+    for pal in slots.values_mut() {
+        let Some(object) = pal.as_object_mut() else {
+            // The error/`available: false` shapes' `data` values are
+            // strings/bools, not pal objects -- nothing to mask.
+            continue;
+        };
+        if let Some(field) = object.get_mut("instance_id") {
+            *field = Value::String("<masked>".to_string());
+        }
+    }
+}
+
 /// Replaces every masked pointer for `message_type` with a fixed sentinel, in
 /// place. A pointer that isn't present in `value` is left alone (the frame may
 /// legitimately not carry it, e.g. a `warning` instead of an `add_pal`).
@@ -216,6 +263,8 @@ fn mask_ignored_paths(message_type: &str, value: &mut Value) {
     }
     // db-ups list frames need per-element masking a fixed pointer can't do.
     mask_ups_list_frames(message_type, value);
+    // get_gps_response's slot-keyed map needs the same per-value treatment.
+    mask_gps_response_frame(message_type, value);
 }
 
 /// Splits a `download_save_file` filename `<world>_<YYYYMMDD>_<HHMMSS>.zip`
@@ -917,6 +966,31 @@ fn mask_ignored_paths_masks_only_the_listed_pointers() {
     assert_eq!(
         add_pal["data"]["player_id"], "11111111-1111-1111-1111-111111111111",
         "player_id is deterministic and must NOT be masked"
+    );
+
+    // add_gps_pal: only /data/pal/instance_id is masked; /data/index (a
+    // deterministic slot number, unlike a generated uuid) and every other
+    // pal field stay strictly compared.
+    let mut add_gps_pal = serde_json::json!({
+        "type": "add_gps_pal",
+        "data": {
+            "pal": {
+                "instance_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+                "character_id": "SheepBall",
+                "nickname": "ParitySheep",
+                "storage_slot": 0
+            },
+            "index": 0
+        }
+    });
+    mask_ignored_paths("add_gps_pal", &mut add_gps_pal);
+    assert_eq!(add_gps_pal["data"]["pal"]["instance_id"], "<masked>");
+    assert_eq!(add_gps_pal["data"]["pal"]["character_id"], "SheepBall");
+    assert_eq!(add_gps_pal["data"]["pal"]["nickname"], "ParitySheep");
+    assert_eq!(add_gps_pal["data"]["pal"]["storage_slot"], 0);
+    assert_eq!(
+        add_gps_pal["data"]["index"], 0,
+        "index is a deterministic slot number and must NOT be masked"
     );
 
     // A message type with no mask entry is left completely untouched.
@@ -1626,6 +1700,162 @@ fn ups_pal_list_masking_is_neither_too_weak_nor_too_strong() {
         compare_responses(
             "fixtures/db-ups/00_get_ups_pals.json",
             "get_ups_pals",
+            &divergent,
+            &captured
+        )
+        .is_err(),
+        "a real nickname difference must NOT be masked away"
+    );
+}
+
+// ---------------------------------------------------------------------------
+// get_gps_response masking (Task 3D-3, gps scenario). The gps fixtures need a
+// corpus save with a GlobalPalStorage.sav that does not exist in this
+// checkout, so the live replay path loud-SKIPs this corpus entirely -- these
+// synthetic unit tests are the standing proof the masking is correct,
+// mirroring the db-ups list-frame tests above (mask_ups_list_frames_masks_
+// every_element_only / ups_pal_list_masking_is_neither_too_weak_nor_too_strong).
+// ---------------------------------------------------------------------------
+
+/// `mask_gps_response_frame` masks EXACTLY `instance_id` inside every pal
+/// value of `get_gps_response`'s slot-keyed map, and leaves everything else
+/// untouched: other pal fields, the slot keys themselves, the no-save/
+/// no-gps-file `error`/`available` shapes (which have no pal map to walk),
+/// and any OTHER message type entirely.
+#[test]
+fn mask_gps_response_frame_masks_only_instance_id_per_slot() {
+    let mut response = serde_json::json!({
+        "type": "get_gps_response",
+        "data": {
+            "0": {"instance_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+                  "character_id": "SheepBall", "nickname": "Fluffy", "level": 12},
+            "3": {"instance_id": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+                  "character_id": "Lamball", "nickname": "Woolly", "level": 5}
+        }
+    });
+    mask_gps_response_frame("get_gps_response", &mut response);
+    assert_eq!(response["data"]["0"]["instance_id"], "<masked>");
+    assert_eq!(response["data"]["3"]["instance_id"], "<masked>");
+    assert_eq!(response["data"]["0"]["character_id"], "SheepBall");
+    assert_eq!(response["data"]["0"]["nickname"], "Fluffy");
+    assert_eq!(response["data"]["0"]["level"], 12);
+    assert_eq!(response["data"]["3"]["character_id"], "Lamball");
+    assert_eq!(response["data"]["3"]["nickname"], "Woolly");
+
+    // The no-save-loaded error shape has no pal map under `data` -- must be a
+    // complete no-op, not a panic.
+    let mut no_save = serde_json::json!({
+        "type": "get_gps_response",
+        "data": {"error": "No save file loaded"}
+    });
+    let original_no_save = no_save.clone();
+    mask_gps_response_frame("get_gps_response", &mut no_save);
+    assert_eq!(
+        no_save, original_no_save,
+        "the no-save error shape has no pal map to mask"
+    );
+
+    // The no-gps-file-available shape is likewise untouched.
+    let mut unavailable = serde_json::json!({
+        "type": "get_gps_response",
+        "data": {"available": false, "message": "No GPS file available for this save"}
+    });
+    let original_unavailable = unavailable.clone();
+    mask_gps_response_frame("get_gps_response", &mut unavailable);
+    assert_eq!(
+        unavailable, original_unavailable,
+        "the unavailable shape has no pal map to mask"
+    );
+
+    // A different message type must be left completely untouched, even
+    // though its own shape (a `pal` object with an `instance_id`) looks
+    // superficially similar.
+    let mut other = serde_json::json!({
+        "type": "add_gps_pal",
+        "data": {"pal": {"instance_id": "should-not-be-masked"}, "index": 0}
+    });
+    let original_other = other.clone();
+    mask_gps_response_frame("add_gps_pal", &mut other);
+    assert_eq!(
+        other, original_other,
+        "mask_gps_response_frame must only touch get_gps_response frames"
+    );
+}
+
+/// End-to-end through `mask_ignored_paths` (the actual function the replay
+/// loop calls, not `mask_gps_response_frame` directly): two `get_gps_response`
+/// maps with DIFFERENT slot keys ("0"/"3" swapped for "1"/"2") and DIFFERENT
+/// instance_ids, but identical other pal content in each slot, compare EQUAL
+/// after masking -- proving the walker is actually wired into the real
+/// masking entry point the replay loop uses, not just directly callable.
+#[test]
+fn mask_ignored_paths_masks_gps_response_map_by_slot() {
+    let mut captured = serde_json::json!({
+        "type": "get_gps_response",
+        "data": {
+            "0": {"instance_id": "py-uuid-0", "character_id": "SheepBall", "nickname": "Fluffy"},
+            "3": {"instance_id": "py-uuid-3", "character_id": "Lamball", "nickname": "Woolly"}
+        }
+    });
+    let mut replayed = serde_json::json!({
+        "type": "get_gps_response",
+        "data": {
+            "0": {"instance_id": "rs-uuid-0", "character_id": "SheepBall", "nickname": "Fluffy"},
+            "3": {"instance_id": "rs-uuid-3", "character_id": "Lamball", "nickname": "Woolly"}
+        }
+    });
+    mask_ignored_paths("get_gps_response", &mut captured);
+    mask_ignored_paths("get_gps_response", &mut replayed);
+    assert_eq!(
+        captured, replayed,
+        "identical GPS content at each slot must compare equal once each \
+         slot's instance_id is masked"
+    );
+}
+
+/// Mutation check: a REAL pal-field difference (nickname) surviving the mask
+/// must still fail comparison, through `compare_responses` -- the actual
+/// pass/fail decision the replay loop uses, exactly mirroring
+/// `ups_pal_list_masking_is_neither_too_weak_nor_too_strong`. Proves the
+/// walker is neither too weak (letting a genuinely different GPS pal pass)
+/// nor too strong (swallowing real content divergence along with the id).
+#[test]
+fn gps_response_masking_is_neither_too_weak_nor_too_strong() {
+    let make = |slot_zero_instance_id: &str, nickname: &str| {
+        let mut frame = serde_json::json!({
+            "type": "get_gps_response",
+            "data": {
+                "0": {"instance_id": slot_zero_instance_id, "character_id": "SheepBall",
+                      "nickname": nickname}
+            }
+        });
+        mask_ignored_paths("get_gps_response", &mut frame);
+        frame
+    };
+
+    // Same content, different (masked) instance_id -> equal.
+    let captured = vec![make("py-uuid", "ParitySheep")];
+    let replayed = vec![make("rs-uuid", "ParitySheep")];
+    assert_eq!(
+        compare_responses(
+            "fixtures/gps/005_request_gps.json",
+            "get_gps_response",
+            &replayed,
+            &captured
+        ),
+        Ok(())
+    );
+
+    // Real content divergence (nickname) survives the mask and must fail --
+    // this is the mutation check: if mask_gps_response_frame ever regressed
+    // to blank the WHOLE pal object (not just instance_id), this assertion
+    // would go red because "NotParitySheep" would never reach the compare at
+    // all.
+    let divergent = vec![make("rs-uuid", "NotParitySheep")];
+    assert!(
+        compare_responses(
+            "fixtures/gps/005_request_gps.json",
+            "get_gps_response",
             &divergent,
             &captured
         )

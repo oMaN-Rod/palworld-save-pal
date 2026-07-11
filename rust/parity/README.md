@@ -295,15 +295,19 @@ it is not a wire-field mask.
 ## `PARITY_IGNORED_PATHS`
 
 Was empty through Phase 1; Phase 2 added exactly the four masks enumerated
-under "Determinism policy" above. Phase 3 (Task 3B-3) adds exactly one more:
+under "Determinism policy" above. Phase 3 (Task 3B-3) adds one more:
 `add_preset:/data/id` — the response echoes the server-generated preset uuid,
 minted INDEPENDENTLY by Python (capture) and Rust (replay), same rationale as
-the `add_pal`/`add_dps_pal` `instance_id` masks. Any FUTURE entry must be a
-narrow, enumerated `(message_type, json_pointer)` mask, never a whole-payload
-wildcard, and must carry a one-line comment in `parity.rs` explaining why the
-Python and Rust values are expected to legitimately differ (timestamps,
-generated uuids, Python-serializer quirks). A mask that swallows more than
-the specific field it names turns a passing test into a lie.
+the `add_pal`/`add_dps_pal` `instance_id` masks. Task 3C-6 adds the db-ups
+single-object masks (see "db-ups scenario" below). Task 3D-3 adds
+`add_gps_pal:/data/pal/instance_id` — same rationale, for a freshly-added GPS
+pal's uuid4 (also covers `clone_gps_pal`, which answers on this same wire
+type). Any FUTURE entry must be a narrow, enumerated `(message_type,
+json_pointer)` mask, never a whole-payload wildcard, and must carry a
+one-line comment in `parity.rs` explaining why the Python and Rust values are
+expected to legitimately differ (timestamps, generated uuids,
+Python-serializer quirks). A mask that swallows more than the specific field
+it names turns a passing test into a lie.
 
 ## db-presets scenario (Phase 3, Task 3B-3)
 
@@ -432,3 +436,110 @@ Fixtures are gitignored (`rust/.gitignore`'s `/parity/fixtures/`); this
 corpus, like every other, is local-only — regenerate, never commit. With no
 db-ups fixtures present (the CI/default state), the replay loud-SKIPs them —
 that is correct, not a failure.
+
+## gps scenario (Phase 3, Task 3D-3)
+
+Exercises the GPS (Global Pal Storage) surface: `load_zip_file` (a ZIP
+upload, not `select_save`) → `request_gps` ×2 (first lazy-loads
+`GlobalPalStorage.sav` and emits a `progress_message`; the second returns the
+cached map with none) → `add_gps_pal` → `delete_gps_pals` (never responds —
+`gps_handler.py:106-114` / `handlers/gps.rs::handle_delete_gps_pals`) →
+`request_gps` → `clone_gps_pal_to_player` (a pal id NOT present in GPS, to
+capture the per-pal `errors` list path). `scripts/capture_parity.py`'s
+`capture_gps` builds this sequence dynamically (like `capture_phase2`, not a
+`FIXED_SCENARIOS` list) for two reasons: the ZIP upload has to be built from
+`--save-dir` via `build_save_zip_bytes` (now also embedding
+`GlobalPalStorage.sav` when the save dir has one), and
+`clone_gps_pal_to_player`'s `destination_player_uid` needs a REAL player uid
+from this corpus — harvested from `load_zip_file`'s own
+`get_player_summaries` response burst, the same `CORPUS_PLAYER_UID`
+substitution pattern `phase2` uses for its own ids.
+
+**Why `load_zip_file` directly, not `select_save` (unlike `load_path`/
+`phase2`).** GPS is read from a temp file staged only on the ZIP-upload path:
+`resolve_zip_layout`/`zip_gps_temp_path` in
+`rust/psp-server/src/handlers/save_file.rs` (mirroring
+`save_file_handler.py:205`) extract an uploaded ZIP's `GlobalPalStorage.sav`
+entry to `<tempdir>/<save_id>_GlobalPalStorage.sav` and point
+`save.gps.file_path` there; `select_save` never touches this path at all. The
+scenario needs to exercise that exact temp-file lazy-load, not the ordinary
+on-disk one.
+
+**NO GPS-containing corpus exists in this checkout** — no save directory
+combining `Level.sav`/`Players/` with a `GlobalPalStorage.sav` (the one
+`GlobalPalStorage.sav` under `tests/fixtures/saves/` sits alone, with no
+matching `Level.sav` beside it, and is used only by Python's
+`tests/game/conftest.py::GPS_FILE` and Rust's env-var-gated
+`rust/psp-core/tests/gps.rs` direct-parse tests — neither is a WS-replayable
+corpus). `capture_gps` and its
+masking in `parity.rs` are scaffolding, proven correct by synthetic unit
+tests (below) rather than a live capture — a developer with such a corpus
+runs the procedure below later.
+
+**Why `get_gps_response` needs its own walker, not a `PARITY_IGNORED_PATHS`
+entry.** `get_gps_response`'s `data` is `save.gps.pals`
+(`BTreeMap<i32, PalDto>`) JSON-encoded as a slot-keyed OBJECT — `{"0":
+{pal...}, "3": {pal...}}` — not an array and not a uuid-keyed dict like
+`get_presets`. A static JSON pointer can reach exactly one fixed path, never
+every value of a variable-keyed map, so `parity.rs`'s `mask_gps_response_frame`
+(wired into `mask_ignored_paths`, same pattern as `mask_ups_list_frames`)
+walks every pal value in the map and masks its `instance_id`: after
+`add_gps_pal`, the new pal's `instance_id` is a fresh `uuid4` minted
+INDEPENDENTLY by Python (capture) and Rust (replay) and can never match.
+Every OTHER GPS pal in the map was read from the same on-disk
+`GlobalPalStorage.sav` by both backends, so its `instance_id` is already
+identical between the two — masking it too is a harmless no-op, and doing so
+unconditionally (rather than trying to single out just the new pal) keeps the
+walker simple. GPS pals carry no DB timestamps (unlike db-ups), so
+`instance_id` is the only field masked; every other field (`character_id`,
+`nickname`, every stat, the slot key itself) stays strictly compared. The
+no-save-loaded/no-gps-file `error`/`available: false` response shapes (see
+`handle_request_gps` in `rust/psp-server/src/handlers/gps.rs`) have no pal
+map under `data` at all, so the walker is a no-op for them.
+
+Proven by three synthetic unit tests in `parity.rs`
+(`mask_gps_response_frame_masks_only_instance_id_per_slot`,
+`mask_ignored_paths_masks_gps_response_map_by_slot`,
+`gps_response_masking_is_neither_too_weak_nor_too_strong`), mirroring the
+db-ups list-frame tests, since the gps fixtures themselves don't exist yet
+and the live replay path loud-SKIPs this corpus entirely.
+
+### Safe capture procedure
+
+**Same discipline as db-presets/db-ups: the backend's `psp.db` lives at the
+repo root and may hold the developer's real, hand-curated data. The gps
+scenario itself touches NO `psp.db` table (no `get_settings`/
+`sync_app_state`/DB-CRUD request is in its sequence — it starts straight from
+`load_zip_file`), but back it up anyway as defensive practice, the same as
+`phase2`'s "psp.db safety" note above: never take the risk of a stray write
+touching the developer's real database.**
+
+1. From the repo root, back up and move the existing `psp.db` ASIDE (don't
+   delete it):
+   `mv psp.db psp.db.gps-parity-backup` (PowerShell:
+   `Move-Item psp.db psp.db.gps-parity-backup`).
+2. Start the Python backend on a port your real client isn't using — the
+   default 5174 may already be held by a running desktop build (`PSP.exe`)/
+   dev server:
+   `uv run python psp.py --port 5199`
+3. From the repo root, capture against that same port, pointing `--save-dir`
+   at a corpus save directory that has a `GlobalPalStorage.sav` alongside its
+   `Level.sav`/`Players/` (pass a **native, absolute** path — see the
+   `phase2` section above for why mixed separators cause a spurious `level`
+   mismatch):
+   `uv run --with websockets scripts/capture_parity.py --scenario gps --save-dir "D:\...\some-corpus-with-gps" --url ws://127.0.0.1:5199/ws/999999999`
+   Fixtures land in `rust/parity/fixtures/gps/`.
+4. Stop the Python backend (Ctrl+C).
+5. Delete the FRESH `psp.db` this run created, then restore the developer's
+   original:
+   `rm psp.db` then `mv psp.db.gps-parity-backup psp.db`
+   (PowerShell: `Remove-Item psp.db` then
+   `Move-Item psp.db.gps-parity-backup psp.db`).
+6. From `rust/`: `cargo test -p psp-server --test parity` — replays `gps`
+   (and every other captured corpus) against a fresh Rust temp DB.
+
+Fixtures are gitignored (`rust/.gitignore`'s `/parity/fixtures/`); this
+corpus, like every other, is local-only — regenerate, never commit. With no
+gps fixtures present (the CI/default state, and every state in THIS
+checkout), the replay simply never iterates a `gps` directory — that is
+correct, not a failure.

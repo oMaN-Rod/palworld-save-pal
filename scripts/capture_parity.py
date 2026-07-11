@@ -52,13 +52,20 @@ STATIC_DATA_SCENARIO = [
 
 def build_save_zip_bytes(save_dir: str) -> bytes:
     """Zip the corpus save the same way the UI would upload it:
-    Level.sav, optional LevelMeta.sav, Players/*.sav at the archive root."""
+    Level.sav, optional LevelMeta.sav, optional GlobalPalStorage.sav (Task
+    3D-3's gps scenario -- see zip_gps_temp_path in
+    rust/psp-server/src/handlers/save_file.rs / save_file_handler.py:205 for
+    the temp-file lazy-load path this exercises), Players/*.sav at the
+    archive root."""
     buffer = io.BytesIO()
     with zipfile.ZipFile(buffer, "w", zipfile.ZIP_DEFLATED) as archive:
         archive.write(os.path.join(save_dir, "Level.sav"), "Level.sav")
         level_meta = os.path.join(save_dir, "LevelMeta.sav")
         if os.path.exists(level_meta):
             archive.write(level_meta, "LevelMeta.sav")
+        global_pal_storage = os.path.join(save_dir, "GlobalPalStorage.sav")
+        if os.path.exists(global_pal_storage):
+            archive.write(global_pal_storage, "GlobalPalStorage.sav")
         players_dir = os.path.join(save_dir, "Players")
         for file_name in sorted(os.listdir(players_dir)):
             if file_name.endswith(".sav"):
@@ -605,11 +612,147 @@ async def capture_phase2(
     print(f"phase2 capture complete: {index} fixtures written to {corpus_dir}")
 
 
+# ---------------------------------------------------------------------------
+# Task 3D-3: the GPS (Global Pal Storage) scenario.
+#
+# Dynamic like `phase2` (capture_phase2 above), not a FIXED_SCENARIOS list,
+# for two reasons: (1) the zip upload has to be built from --save-dir at
+# capture time via build_save_zip_bytes, which now also embeds
+# GlobalPalStorage.sav when the corpus save dir has one; (2)
+# clone_gps_pal_to_player's destination_player_uid needs a REAL player uid
+# from THIS corpus (CORPUS_PLAYER_UID), harvested from load_zip_file's own
+# get_player_summaries response burst -- there's no way to know it ahead of
+# time from a static request list, the same reason phase2 harvests its
+# player/guild/pal ids from live responses instead of hardcoding them.
+#
+# The sequence starts with `load_zip_file` directly -- no `select_save` /
+# `sync_app_state` first, unlike `load_path_requests` -- so both backends
+# exercise the ZIP-upload temp-file lazy-load path GPS reads
+# GlobalPalStorage.sav from (`zip_gps_temp_path` in
+# rust/psp-server/src/handlers/save_file.rs; `save_file_handler.py:205` on
+# the Python side), not the on-disk save_dir path `select_save` would use.
+# `save_file.rs::handle_load_zip_file` still emits `get_player_summaries` /
+# `get_guild_summaries` (shared with `select_save`/`sync_app_state`), so the
+# player-uid harvest below works from this single request's response burst.
+#
+# NO GPS-containing corpus exists in this checkout (no
+# `GlobalPalStorage.sav` alongside any `Level.sav`/`Players/` directory) --
+# this function is scaffolding for a developer who has one to capture
+# against later. See rust/parity/README.md, "gps scenario", for the safe
+# capture procedure.
+GPS_SCENARIO = "gps"
+
+
+async def capture_gps(
+    url: str,
+    save_dir: str,
+    corpus: str,
+    output_root: pathlib.Path,
+) -> None:
+    corpus_dir = output_root / corpus
+    corpus_dir.mkdir(parents=True, exist_ok=True)
+
+    index = 0
+    try:
+        socket_context = websockets.connect(url, max_size=2**30)
+        async with socket_context as socket:
+
+            async def run(request: dict) -> list:
+                nonlocal index
+                await socket.send(json.dumps(request))
+                responses = await _drain_response_burst(socket)
+                _refuse_null_save_dir(request, responses)
+                _write_fixture(corpus_dir, index, request, responses)
+                index += 1
+                return responses
+
+            # 000 load_zip_file -- zip upload (see module comment above for
+            # why this, not select_save). Harvest a real player uid from the
+            # get_player_summaries frame in this same response burst; that is
+            # the CORPUS_PLAYER_UID substitution the clone_gps_pal_to_player
+            # step below needs.
+            load_responses = await run(
+                {"type": "load_zip_file", "data": list(build_save_zip_bytes(save_dir))}
+            )
+            player_summaries = _find_response(load_responses, "get_player_summaries")
+            player_ids = (
+                list(player_summaries["data"].keys()) if player_summaries else []
+            )
+            if not player_ids:
+                print(
+                    "error: corpus has no players -- the gps scenario's "
+                    "clone_gps_pal_to_player step needs a real "
+                    "destination_player_uid (CORPUS_PLAYER_UID).",
+                    file=sys.stderr,
+                )
+                sys.exit(1)
+            corpus_player_uid = player_ids[0]
+            print(f"gps: corpus_player_uid={corpus_player_uid}")
+
+            # 001 request_gps -- first call lazy-loads GlobalPalStorage.sav
+            # from the temp file staged by load_zip_file, so it emits a
+            # progress_message before the get_gps_response frame.
+            await run({"type": "request_gps", "data": None})
+            # 002 request_gps -- second call returns the now-cached map, with
+            # NO progress_message frame.
+            await run({"type": "request_gps", "data": None})
+
+            # 003 add_gps_pal -- mints a fresh uuid4 instance_id (masked by
+            # PARITY_IGNORED_PATHS' "add_gps_pal:/data/pal/instance_id").
+            await run(
+                {
+                    "type": "add_gps_pal",
+                    "data": {
+                        "character_id": "SheepBall",
+                        "nickname": "ParitySheep",
+                        "storage_slot": None,
+                    },
+                }
+            )
+
+            # 004 delete_gps_pals -- never responds (gps_handler.py:106-114 /
+            # handlers/gps.rs::handle_delete_gps_pals), so this fixture
+            # records zero response frames in both capture and replay.
+            await run({"type": "delete_gps_pals", "data": {"pal_indexes": [0]}})
+
+            # 005 request_gps -- re-read after the add/delete above; the
+            # slot-keyed map's per-pal instance_id is masked by parity.rs's
+            # get_gps_response walker (mask_gps_response_frame), not a static
+            # PARITY_IGNORED_PATHS pointer -- see rust/parity/README.md.
+            await run({"type": "request_gps", "data": None})
+
+            # 006 clone_gps_pal_to_player -- a pal id NOT present in GPS, so
+            # this exercises the per-pal `errors` list path (no new
+            # instance_id minted on this path, so nothing here needs
+            # masking).
+            await run(
+                {
+                    "type": "clone_gps_pal_to_player",
+                    "data": {
+                        "pal_ids": ["00000000-0000-0000-0000-00000000dead"],
+                        "destination_type": "pal_box",
+                        "destination_player_uid": corpus_player_uid,
+                    },
+                }
+            )
+    except (OSError, websockets.exceptions.InvalidHandshake) as connect_error:
+        print(
+            f"error: could not connect to {url}: {connect_error}\n"
+            "Is the Python backend running? (uv run python psp.py --port 5174)",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+    print(f"gps capture complete: {index} fixtures written to {corpus_dir}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--scenario",
-        choices=sorted(set(FIXED_SCENARIOS) | set(SAVE_DIR_SCENARIOS) | {PHASE2_SCENARIO}),
+        choices=sorted(
+            set(FIXED_SCENARIOS) | set(SAVE_DIR_SCENARIOS) | {PHASE2_SCENARIO, GPS_SCENARIO}
+        ),
         default="static-data",
         help="which request sequence to send",
     )
@@ -655,6 +798,18 @@ def main() -> None:
         asyncio.run(
             capture_phase2(arguments.url, arguments.save_dir, corpus, output_root)
         )
+        return
+
+    if arguments.scenario == GPS_SCENARIO:
+        if arguments.save_dir is None:
+            print(
+                f"error: scenario {GPS_SCENARIO!r} requires --save-dir (a corpus "
+                "save's directory, i.e. Level.sav's parent, that ALSO has a "
+                "GlobalPalStorage.sav). Pass an ABSOLUTE path.",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        asyncio.run(capture_gps(arguments.url, arguments.save_dir, corpus, output_root))
         return
 
     asyncio.run(
