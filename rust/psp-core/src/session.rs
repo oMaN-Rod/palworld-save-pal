@@ -1089,17 +1089,20 @@ mod load_tests {
             header
         }
 
+        // PlZ/CNK are now supported formats (uesave gained zlib + chunked-zlib
+        // decompression), so a valid magic with an empty/garbage payload no
+        // longer hits an "unsupported" guard — it must still fail CLEANLY (bad
+        // zlib stream for PlZ; a truncated 12-byte buffer where CNK needs 24 for
+        // its nested header) without panicking on this untrusted input.
         let plz_error = parse_palworld_save(&compression_header(b"PlZ")).unwrap_err();
-        assert_eq!(
-            "parse error: at offset 0: Zlib compression not yet supported",
-            plz_error.to_string()
-        );
+        assert!(matches!(plz_error, CoreError::Parse(_)), "{plz_error}");
 
         let cnk_error = parse_palworld_save(&compression_header(b"CNK")).unwrap_err();
-        assert_eq!(
-            "parse error: at offset 0: Chunk format not yet supported",
-            cnk_error.to_string()
-        );
+        assert!(matches!(cnk_error, CoreError::Parse(_)), "{cnk_error}");
+
+        // A genuinely unknown magic is still rejected cleanly.
+        let unknown_error = parse_palworld_save(&compression_header(b"XYZ")).unwrap_err();
+        assert!(matches!(unknown_error, CoreError::Parse(_)), "{unknown_error}");
 
         // Fewer than the 12 bytes CompressionHeader::read needs before it can
         // even inspect a magic value.
