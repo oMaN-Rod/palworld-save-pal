@@ -40,10 +40,12 @@
 				<div class="flex grow flex-col">
 					<h4 class="h4">{m.current_save_file()}</h4>
 					<p class="text"><strong>{m.file({ count: 1 })}</strong> {appState.saveFile.name}</p>
-					<p class="text">
-						<strong>{m.size()}</strong>
-						{(appState.saveFile.size! / 1024 / 1024).toFixed(2)} MB
-					</p>
+					{#if typeof appState.saveFile.size === 'number' && !isNaN(appState.saveFile.size)}
+						<p class="text">
+							<strong>{m.size()}</strong>
+							{(appState.saveFile.size / 1024 / 1024).toFixed(2)} MB
+						</p>
+					{/if}
 				</div>
 				<div class="flex flex-col space-y-2">
 					<Tooltip>
