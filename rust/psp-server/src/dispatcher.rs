@@ -130,6 +130,11 @@ async fn route(
         MessageType::SelectSave => {
             handlers::save_file::handle_select_save(serde_json::from_value(data)?, ctx).await
         }
+        // Phase 4 (Task 12): gamepass load path. Data is a BARE save-id string.
+        MessageType::SelectGamepassSave => {
+            handlers::gamepass::handle_select_gamepass_save(serde_json::from_value(data)?, ctx)
+                .await
+        }
         MessageType::LoadZipFile => {
             handlers::save_file::handle_load_zip_file(serde_json::from_value(data)?, ctx).await
         }

@@ -221,16 +221,56 @@ where
     (player_file_refs, discovery_order)
 }
 
+/// Gamepass branch of `select_save` — port of `get_gamepass_saves`
+/// (`local_file_handler.py:238-252`) + `FileManager.validate_gamepass_directory`
+/// (`file_manager.py:394-413`). The two failure payloads are `error` frames
+/// whose data is a PLAIN STRING (not the `{message, trace}` shape the
+/// dispatcher emits for a raised `HandlerError`), matching Python's
+/// `build_response(ERROR, validation.error)`. On success emits a
+/// `select_gamepass_save` frame whose data IS the saves map
+/// (`{<save_id>: GamepassSaveData}`) — NOT the `{"saves": ...}` wrapper that
+/// only `scan_gamepass_saves` uses.
+pub(crate) async fn select_gamepass_directory(
+    index_file_path: &str,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let containers_dir = Path::new(index_file_path)
+        .parent()
+        .map(|parent| parent.to_path_buf())
+        .unwrap_or_default();
+    if !containers_dir.join("containers.index").exists() {
+        ctx.emitter.emit(
+            MessageType::Error,
+            &"containers.index file not found in the selected directory.",
+        );
+        return Ok(());
+    }
+    let saves = psp_core::gamepass::scan::scan_saves(&containers_dir)?;
+    if saves.is_empty() {
+        ctx.emitter.emit(
+            MessageType::Error,
+            &"No valid Palworld saves found in the selected directory.",
+        );
+        return Ok(());
+    }
+    // Cache the discovered saves so `select_gamepass_save` can resolve the
+    // selected save's metadata later (Python: `app_state.gamepass_saves = ...`).
+    ctx.session.gamepass_saves = saves
+        .iter()
+        .map(|(save_id, save_data)| (save_id.clone(), save_data.clone()))
+        .collect();
+    ctx.emitter.emit(MessageType::SelectGamepassSave, &saves);
+    Ok(())
+}
+
 pub async fn handle_select_save(
     data: SelectSaveData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     if data.r#type != "steam" {
-        // GamePass save loading (get_gamepass_saves / select_gamepass_save)
-        // is Phase 4 scope; Steam is the only save_type Phase 1 supports.
-        return Err(HandlerError::Other(
-            "GamePass saves are not supported yet".to_string(),
-        ));
+        // Python's `select_save_files_handler` routes every non-"steam"
+        // save_type to `get_gamepass_saves` (local_file_handler.py:238-252).
+        return select_gamepass_directory(&data.path, ctx).await;
     }
 
     let layout = validate_steam_save_directory(&data.path)?;
@@ -868,26 +908,34 @@ const STEAM_BACKUP_BASE: &str = "backups/steam";
 
 /// Port of `save_modded_save_handler`. `data` is a bare world-name STRING
 /// (used only by the GamePass branch; the Steam write path ignores it, as
-/// Python does). No save → the "No save file loaded" `error` frame. GamePass
-/// / non-Steam sessions are Phase 4 and rejected with the same "not supported
-/// yet" string `handle_select_save` already uses. On success emits
-/// `save_modded_save` with the exact Python string
-/// `"Modded save file saved successfully"`.
+/// Python does). No save → the "No save file loaded" `error` frame, raised
+/// BEFORE the save-type branch exactly as Python does. Dispatches on the loaded
+/// save's `kind`: a `SaveKind::GamePass` session writes new wgs containers
+/// (`save_modded_gamepass_save`); every other kind (Steam, and the InMemory
+/// zip-upload the Phase-2 write path rejects) stays on the on-disk Steam path.
 pub async fn handle_save_modded_save(
-    _world_name: String,
+    world_name: String,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
+    let Some(session) = ctx.session.save.as_ref() else {
+        return Err(HandlerError::Other("No save file loaded".to_string()));
+    };
+    if matches!(session.kind, SaveKind::GamePass { .. }) {
+        return save_modded_gamepass_save(&world_name, ctx).await;
+    }
+    save_modded_steam_save(ctx).await
+}
+
+/// On-disk Steam write path (`save_modded_steam_save`, local_file_handler.py:
+/// 143-166). On success emits `save_modded_save` with the exact Python string
+/// `"Modded save file saved successfully"`.
+async fn save_modded_steam_save(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let save_dir = psp_db::settings::get_settings(&ctx.app.db).await?.save_dir;
     let progress = ctx.emitter.progress_sink();
 
     let Some(session) = ctx.session.save.as_ref() else {
         return Err(HandlerError::Other("No save file loaded".to_string()));
     };
-    if session.save_type_label != "steam" {
-        return Err(HandlerError::Other(
-            "GamePass saves are not supported yet".to_string(),
-        ));
-    }
     let SaveKind::Steam { level_path } = &session.kind else {
         // A zip-uploaded (InMemory) session has no on-disk level path to
         // overwrite; disk write-back is only defined for real Steam loads.
@@ -909,6 +957,104 @@ pub async fn handle_save_modded_save(
         MessageType::SaveModdedSave,
         &"Modded save file saved successfully",
     );
+    Ok(())
+}
+
+/// GamePass write path — port of `save_modded_gamepass_save`
+/// (local_file_handler.py:81-140). On success emits `save_modded_save` with the
+/// data string `"Created modded save"`. On failure, mirrors Python's
+/// `except` block EXACTLY: emit an `error` frame with PLAIN-STRING data
+/// `"Failed to save gamepass save: <e>"` AND re-raise, so the dispatcher ALSO
+/// emits its standard `{message, trace}` error frame — two error frames, not
+/// one.
+async fn save_modded_gamepass_save(
+    world_name: &str,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    match write_modded_gamepass_containers(world_name, ctx).await {
+        Ok(()) => {
+            ctx.emitter
+                .emit(MessageType::SaveModdedSave, &"Created modded save");
+            Ok(())
+        }
+        Err(error) => {
+            ctx.emitter.emit(
+                MessageType::Error,
+                &format!("Failed to save gamepass save: {error}"),
+            );
+            Err(error)
+        }
+    }
+}
+
+/// The write half of `save_modded_gamepass_save`, split out so the two-error
+/// failure contract above wraps a single fallible body. Backs up the container
+/// dir, cleans orphaned containers, then writes a brand-new save id's worth of
+/// containers (new Level from the re-serialized world tree; every other
+/// original container copied, LevelMeta world name rewritten, loaded players'
+/// `.sav`/`_dps.sav` replaced). Progress strings and their order match Python
+/// byte-for-byte.
+async fn write_modded_gamepass_containers(
+    world_name: &str,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    use psp_core::gamepass::format::ContainerIndex;
+    use psp_core::gamepass::{store, PlayerSavBytes};
+
+    let selected = ctx
+        .session
+        .selected_gamepass_save
+        .clone()
+        .ok_or_else(|| HandlerError::Other("No GamePass save selected".to_string()))?;
+    let container_dir = PathBuf::from(psp_db::settings::get_settings(&ctx.app.db).await?.save_dir);
+    let progress = ctx.emitter.progress_sink();
+
+    progress("Creating backup of container path...");
+    let backup_path =
+        store::backup_container_dir(&container_dir, &store::backups_root().join("gamepass"))?;
+    progress(&format!("Created backup at: {}", backup_path.display()));
+
+    let mut index = ContainerIndex::read_from_dir(&container_dir)?;
+    store::cleanup_container_dir(&mut index, &container_dir)?;
+    let original_containers = index.latest_save_containers(&selected.save_id);
+    if original_containers.is_empty() {
+        return Err(HandlerError::Other(format!(
+            "No containers found for save: {}",
+            selected.save_id
+        )));
+    }
+
+    progress("Converting modified save to SAV format...");
+    // A fresh uppercase, dash-less uuid for the new save id (Python:
+    // `uuid.uuid4().hex.upper()`).
+    let new_save_id = Uuid::new_v4().as_simple().to_string().to_uppercase();
+    let session = ctx.session.save_mut()?;
+    let level_bytes = session.level_sav_bytes()?;
+    let player_map: std::collections::HashMap<Uuid, PlayerSavBytes> = session
+        .player_sav_bytes()?
+        .into_iter()
+        .map(|(player_uuid, (sav_bytes, dps_bytes))| {
+            (
+                player_uuid,
+                PlayerSavBytes {
+                    sav: Some(sav_bytes),
+                    dps: dps_bytes,
+                },
+            )
+        })
+        .collect();
+
+    progress("Creating new containers for modified save...");
+    store::save_modified_gamepass(
+        &mut index,
+        &container_dir,
+        &new_save_id,
+        &level_bytes,
+        &player_map,
+        &original_containers,
+        world_name,
+    )?;
+    progress("Modded save created");
     Ok(())
 }
 

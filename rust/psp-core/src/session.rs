@@ -747,6 +747,16 @@ pub struct Session {
     /// falls back to `save` as the target (Python's `target_transfer_save or
     /// app_state.save_file`).
     pub transfer_target: Option<TransferTarget>,
+    /// Saves discovered by the gamepass branch of `select_save` (Python:
+    /// `AppState.gamepass_saves`). Keyed by save id. Populated by
+    /// `select_gamepass_directory`, consumed by `select_gamepass_save` to
+    /// resolve the selected save's metadata.
+    pub gamepass_saves: HashMap<String, crate::dto::gamepass::GamepassSaveData>,
+    /// The gamepass save the user selected (Python:
+    /// `AppState.selected_gamepass_save`). Set by `select_gamepass_save` and
+    /// read by the gamepass branch of `save_modded_save` to locate the
+    /// original containers to copy from.
+    pub selected_gamepass_save: Option<crate::dto::gamepass::GamepassSaveData>,
 }
 
 impl Session {

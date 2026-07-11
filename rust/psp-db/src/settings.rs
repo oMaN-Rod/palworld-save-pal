@@ -96,6 +96,26 @@ pub async fn update_settings(
     get_settings(pool).await
 }
 
+/// Port of db/ctx/settings.py::update_save_dir (43-54): sets the singleton
+/// settings row's `save_dir`, creating the row first when it does not yet
+/// exist. Python creates a fresh `SettingsModel(id=1, save_dir=save_dir)` on a
+/// missing row and otherwise assigns `settings.save_dir = save_dir`; this
+/// mirrors both by ensuring the row exists via `get_settings` (which inserts
+/// Python's defaults on first access) and then `UPDATE`-ing only `save_dir`, so
+/// the other columns keep whatever they held (defaults on a fresh row).
+///
+/// Used by the desktop native-file-dialog flow (Phase 5) and by the gamepass
+/// load path's tests, which set `save_dir` directly so `select_gamepass_save`
+/// can read the container directory back out of settings.
+pub async fn update_save_dir(pool: &SqlitePool, save_dir: &str) -> Result<(), DbError> {
+    get_settings(pool).await?;
+    sqlx::query("UPDATE settings SET save_dir = ?1 WHERE id = 1")
+        .bind(save_dir)
+        .execute(pool)
+        .await?;
+    Ok(())
+}
+
 /// Port of STEAM_ROOT from palworld_save_pal/utils/file_manager.py:23-35.
 pub fn default_steam_save_dir() -> String {
     #[cfg(target_os = "windows")]

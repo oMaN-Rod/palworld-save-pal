@@ -8,8 +8,9 @@ use tokio_tungstenite::tungstenite::Message;
 
 pub struct TestServer {
     pub handle: psp_server::ServerHandle,
-    /// Held for RAII only (deletes the temp tree on drop) — underscore
-    /// prefix keeps the compiler's dead_code lint quiet.
+    /// Held for RAII (deletes the temp tree on drop) AND read by tests that
+    /// need the server's DB file: the SQLite database lives at
+    /// `_temp_dir.path().join("psp-rs.db")` (see `start_test_server`).
     pub _temp_dir: tempfile::TempDir,
 }
 
@@ -47,7 +48,12 @@ pub async fn send_json(socket: &mut WsClient, value: serde_json::Value) {
 
 pub async fn next_json(socket: &mut WsClient) -> serde_json::Value {
     loop {
-        match tokio::time::timeout(std::time::Duration::from_secs(10), socket.next())
+        // 30s (not 10s): a WS flow that (de)compresses a real Level.sav via
+        // Oodle can have a single frame delayed well past 10s when the whole
+        // `cargo test --workspace` suite saturates the CPU in parallel. The
+        // timeout only bounds a genuine hang, so a generous value costs nothing
+        // on the happy path but removes a load-induced flake.
+        match tokio::time::timeout(std::time::Duration::from_secs(30), socket.next())
             .await
             .expect("timed out waiting for a frame")
             .expect("socket closed")
