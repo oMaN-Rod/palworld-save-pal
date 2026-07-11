@@ -444,6 +444,33 @@ impl SaveSession {
         crate::domain::summaries::extract_summaries(self, &crate::progress::null_progress())
     }
 
+    /// Lazily loads `player_uid`'s GVAS (`.sav`/`_dps.sav`) into
+    /// `loaded_players` on demand — a thin, `pub` wrapper around
+    /// `transfer::ensure_player_gvas_loaded` (previously `pub(crate)`, reachable
+    /// only from `domain::transfer`'s own `transfer_player` and
+    /// `domain::uid_swap`'s player-uid swap).
+    ///
+    /// Exists to close a cross-handler parity gap: `domain::player::
+    /// build_player_dto` returns `Ok(None)` for any player not yet in
+    /// `loaded_players`, which is correct for the pal/guild-detail read paths
+    /// (a player the frontend hasn't "opened" is expected to read as absent
+    /// there), but is WRONG for a handler resolving a real player purely as a
+    /// transfer DESTINATION (`handlers::ups::handle_export_ups_pal`'s
+    /// `"pal_box"` branch, `handlers::gps::handle_clone_gps_pal_to_player`) --
+    /// Python eager-loads every player at save-load
+    /// (`SaveManager.get_players`), so a real-but-unopened destination player
+    /// always succeeds there. Callers should gate on an eager existence check
+    /// (`player_summaries`/`player_file_refs`) first, so a genuinely
+    /// nonexistent uid still surfaces "Player not found" as before, and only
+    /// call this to force-load a uid already confirmed real.
+    ///
+    /// A no-op (not an error) when the player is already loaded or carries no
+    /// file reference at all — exactly `ensure_player_gvas_loaded`'s own two
+    /// early returns, reused verbatim rather than reimplemented.
+    pub fn ensure_player_loaded(&mut self, player_uid: Uuid) -> Result<(), CoreError> {
+        crate::transfer::ensure_player_gvas_loaded(self, player_uid)
+    }
+
     pub fn world_properties(&self) -> Result<&uesave::Properties, CoreError> {
         props::get(&self.level.root.properties, &["worldSaveData"])
             .and_then(props::struct_properties)

@@ -181,6 +181,26 @@ pub async fn handle_clone_gps_pal_to_player(
         return Ok(());
     };
 
+    // Python's `save_file.get_players()` eager-loads every player at
+    // save-load, so a real player_uid resolves there even if the frontend
+    // never "opened" it. This port lazy-loads players on demand, so
+    // `build_player_dto` alone would wrongly reject a real-but-unopened
+    // destination player -- gate existence against the eagerly populated
+    // `player_summaries` first (a genuinely nonexistent uid still errors
+    // "Player not found", matching Python), then force-load the player's
+    // GVAS before calling `build_player_dto`. See
+    // `SaveSession::ensure_player_loaded`'s doc comment and
+    // `handlers::ups::handle_export_ups_pal` for the identical fix.
+    let save = ctx.session.save.as_ref().unwrap();
+    if !save.player_summaries.contains_key(&player_uid) {
+        ctx.emitter.emit(
+            MessageType::Error,
+            &serde_json::json!({"message": "Player not found"}),
+        );
+        return Ok(());
+    }
+    let save = ctx.session.save_mut()?;
+    save.ensure_player_loaded(player_uid)?;
     let save = ctx.session.save.as_ref().unwrap();
     let Some(player) = build_player_dto(save, &ctx.app.game_data, player_uid)? else {
         ctx.emitter.emit(

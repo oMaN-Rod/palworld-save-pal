@@ -592,3 +592,91 @@ fn build_player_dto_falls_back_to_the_ninja_emoji_nickname_when_nickname_is_abse
     );
     assert!(details.nickname.starts_with('\u{1f977}'));
 }
+
+// ============================================================================
+// `SaveSession::ensure_player_loaded` (Phase-3-blocker fix): a real player
+// that the frontend hasn't "opened" yet is present in `player_summaries`
+// (this port's eager, always-populated player list) but absent from
+// `loaded_players` (this port's lazy-loaded GVAS cache) -- so
+// `build_player_dto` alone returns `None` for them, unlike Python, which
+// eager-loads every player's GVAS at save-load. Proves the RED->GREEN shape
+// of the fix WS handlers (`ups::handle_export_ups_pal`'s "pal_box" branch,
+// `gps::handle_clone_gps_pal_to_player`) now apply: gate on
+// `player_summaries`, force-load via `ensure_player_loaded`, THEN call
+// `build_player_dto`.
+// ============================================================================
+
+/// A world1 player never touched by this test's own session is real (present
+/// in `player_summaries`, the eager source) but starts unloaded --
+/// `build_player_dto` must return `None` before any load call, exactly the
+/// stale "Player not found" this port's WS handlers used to emit for a
+/// perfectly valid, merely-unopened destination player.
+#[test]
+fn ensure_player_loaded_resolves_a_real_but_unloaded_player_for_build_player_dto() {
+    let mut session = common::load_fixture_session("world1");
+    let data = game_data();
+    let player_id: Uuid = WORLD1_PLAYER_SKY.parse().unwrap();
+
+    assert!(
+        session.player_summaries.contains_key(&player_id),
+        "fixture player must be a real, eagerly-known player"
+    );
+    assert!(
+        !session.loaded_players.contains_key(&player_id),
+        "a freshly loaded session must not have lazily loaded any player yet"
+    );
+
+    // RED: unloaded -> None, the exact shape that used to produce a wrongful
+    // "Player not found" in the two affected WS handlers.
+    assert!(
+        player::build_player_dto(&session, &data, player_id)
+            .unwrap()
+            .is_none(),
+        "build_player_dto must return None before the player is loaded"
+    );
+
+    session
+        .ensure_player_loaded(player_id)
+        .expect("a real, file-ref-backed player must load without error");
+    assert!(session.loaded_players.contains_key(&player_id));
+
+    // GREEN: loaded -> Some, proving the lazy-load resolves a real player
+    // build_player_dto alone could not.
+    let details = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .expect("build_player_dto must resolve the player once loaded");
+    assert_eq!(details.uid, player_id);
+    assert_eq!(details.nickname, "sky");
+}
+
+/// A bogus uuid is gated out, not force-loaded: `ensure_player_loaded` is a
+/// documented no-op for a uid with no file reference (mirrors
+/// `ensure_player_gvas_loaded`'s own early return), so it must not insert
+/// anything into `loaded_players`, and `build_player_dto` must keep returning
+/// `None` -- i.e. a genuinely nonexistent player still resolves to the
+/// original "Player not found" behavior, matching Python's own rejection of
+/// an unknown player_uid.
+#[test]
+fn ensure_player_loaded_is_a_no_op_for_an_unknown_player_and_stays_unresolved() {
+    let mut session = common::load_fixture_session("world1");
+    let data = game_data();
+    let bogus_uid = Uuid::new_v4();
+
+    assert!(!session.player_summaries.contains_key(&bogus_uid));
+    assert!(!session.player_file_refs.contains_key(&bogus_uid));
+
+    session
+        .ensure_player_loaded(bogus_uid)
+        .expect("a uid with no file reference is a documented no-op, not an error");
+
+    assert!(
+        !session.loaded_players.contains_key(&bogus_uid),
+        "a bogus uid must never be inserted into loaded_players"
+    );
+    assert!(
+        player::build_player_dto(&session, &data, bogus_uid)
+            .unwrap()
+            .is_none(),
+        "a genuinely nonexistent player must still resolve to None (\"Player not found\")"
+    );
+}

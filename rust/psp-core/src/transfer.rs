@@ -256,6 +256,11 @@ pub fn transfer_player(
 /// reuses this exact helper for its own "load both players on demand" step
 /// (`player_swap.py::_validate_swap_players`'s `load_player_on_demand`
 /// calls) rather than re-implementing GVAS lazy-loading a second time.
+/// `SaveSession::ensure_player_loaded` (`session.rs`) re-exposes this same
+/// helper as `pub`, for WS handlers that need to force-load a real,
+/// eagerly-confirmed-present player before calling `domain::player::
+/// build_player_dto` (which only resolves already-loaded players) — see that
+/// method's own doc comment for the parity gap it closes.
 pub(crate) fn ensure_player_gvas_loaded(
     session: &mut SaveSession,
     uid: Uuid,
