@@ -286,6 +286,20 @@ async fn route(
         MessageType::GetRawData => {
             handlers::tools::handle_get_raw_data(serde_json::from_value(data)?, ctx).await
         }
+        // Phase 4 (Task 11): gamepass container scan / delete / rename.
+        MessageType::ScanGamepassSaves => handlers::gamepass::handle_scan_gamepass_saves(ctx).await,
+        MessageType::DeleteGamepassSave => {
+            handlers::gamepass::handle_delete_gamepass_save(serde_json::from_value(data)?, ctx)
+                .await
+        }
+        MessageType::DeleteGamepassPlayer => {
+            handlers::gamepass::handle_delete_gamepass_player(serde_json::from_value(data)?, ctx)
+                .await
+        }
+        MessageType::RenameGamepassWorld => {
+            handlers::gamepass::handle_rename_gamepass_world(serde_json::from_value(data)?, ctx)
+                .await
+        }
         // Remaining arms are added by Phases 1-6.
         other => {
             tracing::warn!(

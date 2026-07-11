@@ -1,4 +1,5 @@
 pub mod game_data;
+pub mod gamepass;
 pub mod gps;
 pub mod guilds;
 pub mod pals;

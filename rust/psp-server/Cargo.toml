@@ -31,3 +31,4 @@ tempfile = { workspace = true }
 pretty_assertions = { workspace = true }
 tower = { workspace = true }
 http-body-util = { workspace = true }
+psp-core = { path = "../psp-core", features = ["test-fixtures"] }
