@@ -105,18 +105,27 @@ pub fn read_first_blob(
     if !blob_dir.exists() {
         return Ok(None);
     }
-    let mut list_paths: Vec<PathBuf> = std::fs::read_dir(&blob_dir)?
+    // Parse the numeric seq from each `container.<N>` name and visit them in
+    // ascending numeric order. String sorting would rank "container.10" before
+    // "container.2", silently returning a stale blob once a dir reaches 10+
+    // file lists; the numeric seq is the authoritative "latest" (it mirrors
+    // ContainerEntry.seq in containers.index).
+    let mut list_paths: Vec<(u32, PathBuf)> = std::fs::read_dir(&blob_dir)?
         .flatten()
         .map(|dir_entry| dir_entry.path())
-        .filter(|path| {
-            path.file_name()
-                .map(|name| name.to_string_lossy().starts_with("container."))
-                .unwrap_or(false)
+        .filter_map(|path| {
+            let seq: u32 = path.file_name().and_then(|name| {
+                name.to_string_lossy()
+                    .strip_prefix("container.")?
+                    .parse()
+                    .ok()
+            })?;
+            Some((seq, path))
         })
         .collect();
-    list_paths.sort();
+    list_paths.sort_by_key(|(seq, _)| *seq);
     let mut newest: Option<(u32, Vec<u8>)> = None;
-    for list_path in list_paths {
+    for (_, list_path) in list_paths {
         let file_list = ContainerFileList::read_from_file(&list_path)?;
         if let Some(first) = file_list.files.first() {
             newest = Some((file_list.seq, first.data.clone()));
@@ -172,6 +181,27 @@ pub fn create_container(
 mod tests {
     use super::*;
     use crate::gamepass::format::ContainerFileList;
+    use std::sync::Mutex;
+
+    /// Serializes tests that mutate process-global env vars so they can't race
+    /// tests reading production defaults (cargo runs tests in parallel threads).
+    static ENV_GUARD: Mutex<()> = Mutex::new(());
+
+    /// Writes a `container.<seq>` file list (single file) plus its blob into
+    /// `blob_dir`, letting a test control the seq (production `create_container`
+    /// only ever writes `container.1`).
+    fn write_file_list_at_seq(blob_dir: &Path, seq: u32, name: &str, data: &[u8]) {
+        std::fs::create_dir_all(blob_dir).unwrap();
+        let file_uuid = uuid::Uuid::new_v4();
+        let mut buffer = Vec::new();
+        buffer.extend_from_slice(&CONTAINER_FILE_LIST_VERSION.to_le_bytes());
+        buffer.extend_from_slice(&1u32.to_le_bytes()); // file count
+        write_utf16_fixed_64(&mut buffer, name).unwrap();
+        buffer.extend_from_slice(&[0u8; 16]); // cloud UUID
+        buffer.extend_from_slice(file_uuid.as_bytes());
+        std::fs::write(blob_dir.join(guid_file_name(&file_uuid)), data).unwrap();
+        std::fs::write(blob_dir.join(format!("container.{seq}")), buffer).unwrap();
+    }
 
     #[test]
     fn wgs_dir_name_matcher_mirrors_python_regex() {
@@ -309,5 +339,50 @@ mod tests {
             !list.files[0].data.is_empty(),
             "expected non-empty blob data for the real container's first file"
         );
+    }
+
+    #[test]
+    fn read_first_blob_picks_numeric_latest_seq_not_lexicographic() {
+        // container.10 is the true latest, but sorts BEFORE container.2 as a
+        // string ("container.10" < "container.2"). Old lexicographic sort would
+        // visit .10 then .2 and keep .2's stale blob; numeric ordering keeps .10.
+        let temp = tempfile::tempdir().unwrap();
+        let entry = create_container(temp.path(), "AAAA", b"seq1", "Data", "Level").unwrap();
+        let blob_dir = temp.path().join(crate::gamepass::format::guid_file_name(
+            &entry.container_uuid,
+        ));
+        write_file_list_at_seq(&blob_dir, 2, "Data", b"seq2-blob");
+        write_file_list_at_seq(&blob_dir, 10, "Data", b"seq10-blob");
+
+        let blob = read_first_blob(temp.path(), &entry).unwrap();
+        assert_eq!(blob, Some((10, b"seq10-blob".to_vec())));
+    }
+
+    #[test]
+    fn backups_root_honors_env_override() {
+        let _guard = ENV_GUARD.lock().unwrap();
+        let temp = tempfile::tempdir().unwrap();
+        let override_path = temp.path().join("custom-backups");
+        std::env::set_var("PSP_BACKUPS_ROOT", &override_path);
+        let resolved = backups_root();
+        std::env::remove_var("PSP_BACKUPS_ROOT");
+        assert_eq!(resolved, override_path);
+    }
+
+    #[test]
+    fn find_container_dir_honors_packages_root_env_override() {
+        let _guard = ENV_GUARD.lock().unwrap();
+        let temp = tempfile::tempdir().unwrap();
+        let wgs_leaf = temp
+            .path()
+            .join("SystemAppData")
+            .join("wgs")
+            .join("000900000487F3B6_0000000000000000000000006B210A9C");
+        std::fs::create_dir_all(&wgs_leaf).unwrap();
+
+        std::env::set_var("PSP_GAMEPASS_PACKAGES_ROOT", temp.path());
+        let resolved = find_container_dir();
+        std::env::remove_var("PSP_GAMEPASS_PACKAGES_ROOT");
+        assert_eq!(resolved.unwrap(), wgs_leaf);
     }
 }
