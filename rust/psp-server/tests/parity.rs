@@ -267,6 +267,148 @@ fn mask_ignored_paths(message_type: &str, value: &mut Value) {
     mask_gps_response_frame(message_type, value);
 }
 
+/// gamepass corpus (Task P4-14): `save_modded_save`'s gamepass branch emits
+/// SIX response frames -- five `progress_message` frames, then the final
+/// `save_modded_save` frame (`local_file_handler.py:88-132` /
+/// `save_file.rs::write_modded_gamepass_containers`). Response index 1 is
+/// `f"Created backup at: {backup_path}"` -- a wall-clock-timestamped backup
+/// directory name, computed independently by Python at capture time and
+/// Rust at replay time, so it can never match. This can't be a
+/// `PARITY_IGNORED_PATHS` entry keyed by response `type`: EVERY frame in
+/// this sequence (including the four fully-deterministic ones) shares the
+/// generic `progress_message` wire type, which is also used by countless
+/// deterministic progress lines in every OTHER corpus -- a type-wide mask
+/// would blank all of those too. Masking by (request type, response INDEX)
+/// instead stays narrow to this one frame; the prefix check makes a future
+/// re-ordering of the progress sequence fail LOUDLY (the frame silently
+/// stops being masked and the aggregate `compare_responses` catches the raw
+/// text mismatch) rather than silently masking the wrong field.
+fn mask_gamepass_backup_progress_line(
+    request_type: &str,
+    response_index: usize,
+    value: &mut Value,
+) {
+    if request_type != "save_modded_save" || response_index != 1 {
+        return;
+    }
+    if value["type"] != "progress_message" {
+        return;
+    }
+    let Some(text) = value["data"].as_str() else {
+        return;
+    };
+    if !text.starts_with("Created backup at: ") {
+        return;
+    }
+    value["data"] = Value::String("<masked>".to_string());
+}
+
+/// The gamepass corpus's shared tmp state, written once by
+/// `scripts/capture_parity.py`'s `build_gamepass_corpus` and read by every
+/// replay run: `wgs/` (the LIVE container tree, mutated by `save_modded_save`
+/// each time the corpus replays), `wgs-pristine/` (a snapshot taken right
+/// after the corpus was built, before any request touched it),
+/// `LocalData.sav` (the working copy `unlock_map` zeroes IN PLACE) and
+/// `LocalData.sav.pristine` (an untouched copy -- see
+/// `rust/parity/README.md`, "gamepass scenario", for why a synthetic graft
+/// is used here instead of a real corpus `LocalData.sav`, which neither
+/// `world1` nor `world2` has).
+fn gamepass_tmp_root() -> PathBuf {
+    // Deliberately built WITHOUT a literal ".." component (unlike e.g.
+    // `fixtures_root`'s "../parity/fixtures" elsewhere in this file): this
+    // exact PathBuf is never compared against a Python-captured string, but
+    // keeping it clean costs nothing and avoids ever having to reason about
+    // whether a lexically-unnormalized path behaves the same as a clean one
+    // for the plain filesystem calls below.
+    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .parent()
+        .expect("psp-server crate dir has a parent (rust/)")
+        .join("parity")
+        .join("tmp")
+        .join("gamepass")
+}
+
+/// Recursively copies `source` into `destination`, creating `destination`
+/// (and every subdirectory) as needed. Used to restore the gamepass corpus's
+/// `wgs/` container tree from its `wgs-pristine/` snapshot before every
+/// replay run, undoing whatever `save_modded_save` wrote into it last time.
+fn copy_dir_recursive(source: &std::path::Path, destination: &std::path::Path) {
+    std::fs::create_dir_all(destination).unwrap();
+    for entry in std::fs::read_dir(source).unwrap() {
+        let entry = entry.unwrap();
+        let dest_path = destination.join(entry.file_name());
+        if entry.file_type().unwrap().is_dir() {
+            copy_dir_recursive(&entry.path(), &dest_path);
+        } else {
+            std::fs::copy(entry.path(), &dest_path).unwrap();
+        }
+    }
+}
+
+/// Resets every piece of the gamepass corpus's shared on-disk state that a
+/// PREVIOUS replay run (or the capture run itself) may have mutated, so this
+/// replay starts from the exact snapshot `build_gamepass_corpus` captured.
+/// Returns `false` (and resets nothing) when `rust/parity/tmp/gamepass`
+/// doesn't exist -- the normal state on a fresh clone/CI, or before the
+/// gamepass corpus has ever been captured locally; the caller treats that
+/// exactly like the "no fixtures" skip every other corpus already has.
+fn reset_gamepass_corpus_filesystem_state() -> bool {
+    let tmp_root = gamepass_tmp_root();
+    if !tmp_root.exists() {
+        return false;
+    }
+
+    let container_dir = tmp_root
+        .join("wgs")
+        .join("0009000000000000_00000000000000000000000000000000");
+    if container_dir.exists() {
+        std::fs::remove_dir_all(&container_dir).unwrap();
+    }
+    let pristine_wgs = tmp_root.join("wgs-pristine");
+    if pristine_wgs.exists() {
+        copy_dir_recursive(&pristine_wgs, &container_dir);
+    }
+
+    // convert_save_format (standalone gamepass->steam) writes fresh output
+    // here every replay; clear it so a stale run from a previous replay
+    // can't linger (the WS response never echoes these files' bytes, but a
+    // clean directory keeps local state honest with what capture produced).
+    let steam_out = tmp_root.join("steam-out");
+    if steam_out.exists() {
+        std::fs::remove_dir_all(&steam_out).unwrap();
+    }
+
+    // unlock_map mutates LocalData.sav IN PLACE; restore the untouched graft
+    // from the `.pristine` copy `build_gamepass_corpus` wrote alongside it.
+    let pristine_local_data = tmp_root.join("LocalData.sav.pristine");
+    if pristine_local_data.exists() {
+        std::fs::copy(&pristine_local_data, tmp_root.join("LocalData.sav")).unwrap();
+    }
+
+    true
+}
+
+/// Extracts the gamepass container directory from the FIRST fixture's
+/// captured `select_save` request (`data.path` = "<container_dir>/containers.index"),
+/// rather than independently re-resolving it on the Rust side. Python's own
+/// absolute path -- baked into the fixture at capture time by
+/// `build_gamepass_corpus` -- is the ONE string `loaded_save_files.level`
+/// (fixture 001, `select_gamepass_save`) must match byte-for-byte, since both
+/// backends build that field from `settings.save_dir` joined with a
+/// container UUID; recomputing the directory independently here would risk a
+/// spurious drive-letter-case or path-separator mismatch on Windows (the
+/// exact failure mode the `phase2` scenario's README section warns about for
+/// mixed-separator `--save-dir` input). Reading it out of the fixture instead
+/// guarantees Rust's `settings.save_dir` is set to the LITERAL string Python
+/// used for its own.
+fn gamepass_save_dir_from_first_fixture(fixture_paths: &[PathBuf]) -> Option<String> {
+    let first = fixture_paths.first()?;
+    let fixture: Value = serde_json::from_str(&std::fs::read_to_string(first).ok()?).ok()?;
+    let path = fixture["request"]["data"]["path"].as_str()?;
+    let (container_dir, _file_name) = path.rsplit_once(['/', '\\'])?;
+    Some(container_dir.to_string())
+}
+
 /// Splits a `download_save_file` filename `<world>_<YYYYMMDD>_<HHMMSS>.zip`
 /// into its world-name prefix, or `None` if it doesn't match that shape. The
 /// world name itself may contain `_` or spaces (e.g. `"Parity World"`), so we
@@ -641,6 +783,42 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
             .collect();
         fixture_paths.sort();
 
+        // gamepass corpus (Task P4-14): reset the shared on-disk container
+        // tree to the pristine snapshot capture took, and point THIS
+        // server's settings.save_dir at the exact directory the fixtures'
+        // own captured select_save request already carries — the Rust twin
+        // of scripts/capture_parity.py's prepare_gamepass_corpus pre-step
+        // (Python does the equivalent write into ITS psp.db before its
+        // backend process starts; here it happens once per corpus, right
+        // before the corpus's own socket connects). `settings.save_dir` is
+        // GLOBAL, shared-server state across every corpus this ONE
+        // `start_server` instance replays (unlike the gamepass corpus's own
+        // wgs/LocalData.sav files, which are scoped to its own tmp dir) — so
+        // `previous_save_dir` remembers what it was before mutating it, and
+        // is restored right after this corpus's fixtures finish, below,
+        // so it doesn't leak into `static-data`'s (or any other corpus's)
+        // `get_settings`/`sync_app_state` fixtures replayed afterward.
+        let mut previous_save_dir: Option<String> = None;
+        if corpus_dir.file_name().and_then(|name| name.to_str()) == Some("gamepass")
+            && reset_gamepass_corpus_filesystem_state()
+        {
+            if let Some(save_dir) = gamepass_save_dir_from_first_fixture(&fixture_paths) {
+                let gamepass_db_pool = psp_db::open(&temp_dir.path().join("parity.db"))
+                    .await
+                    .expect("open replay server's own sqlite db for gamepass save_dir setup");
+                previous_save_dir = Some(
+                    psp_db::settings::get_settings(&gamepass_db_pool)
+                        .await
+                        .expect("read settings.save_dir before overwriting it")
+                        .save_dir,
+                );
+                psp_db::settings::update_save_dir(&gamepass_db_pool, &save_dir)
+                    .await
+                    .expect("persist gamepass container dir into settings.save_dir");
+                gamepass_db_pool.close().await;
+            }
+        }
+
         let (mut socket, _) = connect_async(format!("ws://{}/ws/parity-replay", handle.addr))
             .await
             .unwrap();
@@ -722,6 +900,7 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
                     value["data"] = Value::String(MASKED_STRUCTURAL_DATA.to_string());
                 }
                 mask_ignored_paths(&response_message_type, &mut value);
+                mask_gamepass_backup_progress_line(&request_type, response_index, &mut value);
                 actual_responses.push(value);
             }
 
@@ -738,7 +917,7 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
             }
 
             let mut expected = expected_responses;
-            for value in expected.iter_mut() {
+            for (response_index, value) in expected.iter_mut().enumerate() {
                 let response_message_type =
                     value["type"].as_str().unwrap_or(&request_type).to_string();
                 if response_message_type == "get_presets" {
@@ -747,6 +926,7 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
                     value["data"] = Value::String(MASKED_STRUCTURAL_DATA.to_string());
                 }
                 mask_ignored_paths(&response_message_type, value);
+                mask_gamepass_backup_progress_line(&request_type, response_index, value);
             }
             if let Err(message) = compare_responses(
                 &fixture_path.display().to_string(),
@@ -759,6 +939,19 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
             fixtures_replayed += 1;
         }
         socket.close(None).await.ok();
+
+        // Restore settings.save_dir (see the comment above where it was
+        // overwritten) so the NEXT corpus in this loop sees the same
+        // shared-server state it would if the gamepass corpus had never run.
+        if let Some(save_dir) = previous_save_dir {
+            let restore_pool = psp_db::open(&temp_dir.path().join("parity.db"))
+                .await
+                .expect("open replay server's own sqlite db to restore settings.save_dir");
+            psp_db::settings::update_save_dir(&restore_pool, &save_dir)
+                .await
+                .expect("restore settings.save_dir after the gamepass corpus");
+            restore_pool.close().await;
+        }
     }
     handle.shutdown().await;
     fixtures_replayed
@@ -1175,6 +1368,73 @@ fn mask_ignored_paths_masks_only_the_listed_pointers() {
         download["data"][0]["extra"], "keep-me",
         "download mask must touch only name + content"
     );
+}
+
+/// `mask_gamepass_backup_progress_line` masks EXACTLY response index 1 of a
+/// `save_modded_save` request's progress burst, and touches nothing else —
+/// in particular, it must NOT blank other `progress_message` frames sharing
+/// the same wire `type`, since `PARITY_IGNORED_PATHS` (which this sits
+/// beside, not inside) has no way to express "only index 1" and a type-wide
+/// mask would defeat every other deterministic progress line in every other
+/// corpus.
+#[test]
+fn mask_gamepass_backup_progress_line_masks_only_index_one_of_save_modded_save() {
+    // Index 1 of a save_modded_save burst, matching the real text: masked.
+    let mut backup_line = serde_json::json!({
+        "type": "progress_message",
+        "data": "Created backup at: backups/gamepass/foo_20260711120000"
+    });
+    mask_gamepass_backup_progress_line("save_modded_save", 1, &mut backup_line);
+    assert_eq!(backup_line["data"], "<masked>");
+
+    // Index 0 of the SAME request (a different, fully-deterministic
+    // progress_message frame): untouched.
+    let mut creating_backup = serde_json::json!({
+        "type": "progress_message",
+        "data": "Creating backup of container path..."
+    });
+    mask_gamepass_backup_progress_line("save_modded_save", 0, &mut creating_backup);
+    assert_eq!(
+        creating_backup["data"], "Creating backup of container path...",
+        "only response index 1 of save_modded_save may be masked"
+    );
+
+    // Index 1 of a DIFFERENT request type that also happens to emit a
+    // progress_message at index 1: untouched (the mask is keyed to
+    // save_modded_save specifically, not "index 1 of any request").
+    let mut other_request = serde_json::json!({
+        "type": "progress_message",
+        "data": "Loading Level.sav..."
+    });
+    mask_gamepass_backup_progress_line("select_save", 1, &mut other_request);
+    assert_eq!(
+        other_request["data"], "Loading Level.sav...",
+        "the mask must not fire for any request type other than save_modded_save"
+    );
+
+    // Index 1 of save_modded_save whose text does NOT match the expected
+    // "Created backup at: " prefix (e.g. the sequence was reordered):
+    // untouched, so a reordering fails loudly via compare_responses instead
+    // of being silently swallowed by an over-eager index-only mask.
+    let mut reordered = serde_json::json!({
+        "type": "progress_message",
+        "data": "Converting modified save to SAV format..."
+    });
+    mask_gamepass_backup_progress_line("save_modded_save", 1, &mut reordered);
+    assert_eq!(
+        reordered["data"], "Converting modified save to SAV format...",
+        "a non-matching text at index 1 must not be masked, so re-ordering is caught, not hidden"
+    );
+
+    // The final save_modded_save response frame itself (type
+    // "save_modded_save", not "progress_message") at whatever index it
+    // lands on: untouched, since the type check excludes it.
+    let mut final_frame = serde_json::json!({
+        "type": "save_modded_save",
+        "data": "Created modded save"
+    });
+    mask_gamepass_backup_progress_line("save_modded_save", 5, &mut final_frame);
+    assert_eq!(final_frame["data"], "Created modded save");
 }
 
 /// Builds a `download_save_file`-shaped frame from `(member name, raw sav

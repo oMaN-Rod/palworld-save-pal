@@ -732,3 +732,201 @@ expected_was_not`, `compare_raw_data_structural_oks_both_sides_empty`,
 `compare_raw_data_structural_oks_non_empty_sides_with_differing_content`,
 `compare_raw_data_structural_errs_when_data_is_not_an_object`), mirroring the
 `get_presets`/db-ups/gps comparators' own synthetic-test pattern above.
+
+## gamepass scenario (Phase 4, Task P4-14 — final Phase-4 corpus)
+
+Exercises the gamepass load/convert/save-back/unlock-map surface:
+`select_save` (gamepass branch) → `select_gamepass_save` →
+`convert_save_format` (standalone gamepass→steam) → `save_modded_save`
+(gamepass branch) → `unlock_map`.
+
+**Captured / not captured:**
+
+- Captured: `select_save` (gamepass), `select_gamepass_save`,
+  `convert_save_format` (standalone gamepass→steam), `save_modded_save`
+  (gamepass), `unlock_map`.
+- NOT captured, with reasons:
+  - `scan_gamepass_saves`, `delete_gamepass_save`, `delete_gamepass_player`,
+    `rename_gamepass_world` — the Python handlers hardcode
+    `find_container_path()` against the REAL `%LOCALAPPDATA%` install;
+    capturing would read/mutate the machine's actual saves. Covered by Rust
+    WS integration tests on synthetic containers instead
+    (`psp-server/tests/phase4_ws.rs`).
+  - `convert_save_format` loaded→gamepass — writes into the real install
+    (same reason).
+  - `convert_sav_file` — JSON schema intentionally diverges (uesave schema,
+    spec §4); already exercised by `phase4_ws.rs::
+    convert_sav_file_round_trips_over_ws` without needing byte-parity against
+    Python's palworld-save-tools GVAS-dict dialect.
+
+### Why a synthetic container, not a real gamepass install
+
+Every other corpus in this harness points requests at an existing corpus
+save directory. GamePass saves live in a machine-specific
+`%LOCALAPPDATA%\Packages\...\SystemAppData\wgs\<container-id>\` tree that
+doesn't exist in this checkout (or on CI) at all, so this corpus instead
+PACKAGES the existing `tests/fixtures/saves/world2` steam save (chosen for
+the same 1-player-avoids-`ThreadPoolExecutor`-nondeterminism reason
+`load_path`'s README section documents above — `world2` is exactly 1 player)
+into a synthetic wgs container tree, using Python's OWN
+`palworld_save_pal.utils.gamepass.container_types`/`container_utils` code
+(`ContainerIndex`, `FILETIME`, `create_new_container`) — so the on-disk
+fixture the two backends are compared against is Python-authoritative, not
+reverse-engineered. `scripts/capture_parity.py`'s `build_gamepass_corpus`
+builds it under `rust/parity/tmp/gamepass/wgs/0009000000000000_0000000000
+0000000000000000000000/`, snapshots it once (`wgs-pristine/`, restored
+before every replay run since `save_modded_save` mutates the live tree), and
+both backends operate on that SAME physical directory.
+
+### The `unlock_map` LocalData.sav problem, and its resolution
+
+`unlock_map` needs a `LocalData.sav` — the file whose `SaveData.
+WorldMapMaskTextureV4` byte array it zeroes — but **neither `world1` nor
+`world2` (this repo's only two steam corpora) has one** (map-unlock data is
+optional/rare; most corpus saves never carry it). Rather than skip
+`unlock_map` or only capture its error path, `build_gamepass_corpus` grafts a
+synthetic `WorldMapMaskTextureV4` byte array (`[1, 2, 3, 0, 4]` — a mix of
+zero and non-zero bytes so a byte COUNT would be discriminating, though the
+WS response never echoes one) into a COPY of the corpus `LevelMeta.sav`'s
+`SaveData` struct, done in Python (`_graft_world_map_mask`, using
+`palworld_save_tools`' own `GvasFile`/`archive.py` read-modify-write) so the
+resulting `LocalData.sav`-shaped fixture stays capture-authoritative. This is
+the EXACT technique `rust/psp-core/src/localdata.rs`'s own
+`unlock_world_map_zeroes_synthetic_mask_grafted_into_real_savedata` hermetic
+test already uses on the Rust side (grafting into a real committed
+`LevelMeta.sav` because the corpus lacks a `LocalData.sav`) — `unlock_map`
+only ever reads `SaveData.WorldMapMaskTextureV4` and never validates the rest
+of the struct's shape or file provenance beyond the literal filename
+`LocalData.sav` (`map_unlock_handler.py:39-41`), so a LevelMeta-shaped
+carrier is a legitimate stand-in for both backends, not a shortcut that
+changes what's being tested.
+
+`unlock_map` mutates its input file **in place** (`map_unlock_handler.py:
+82-83` / `save_file.rs`'s `unlock_map_on_disk` both overwrite `path` with the
+zeroed bytes after backing it up to `<path>.backup`), so `build_gamepass_
+corpus` writes BOTH `rust/parity/tmp/gamepass/LocalData.sav` (the working
+copy the `004_unlock_map.json` request points at) and an untouched `LocalData
+.sav.pristine` copy alongside it. `parity.rs`'s per-replay reset
+(`reset_gamepass_corpus_filesystem_state`) restores `LocalData.sav` from
+`.pristine` before every run, mirroring how it restores `wgs/` from
+`wgs-pristine/`.
+
+### Determinism findings
+
+**No new `PARITY_IGNORED_PATHS` entries were needed.** The only
+irreducibly-nondeterministic value this corpus produces is
+`save_modded_save`'s response index 1 — a `progress_message` frame carrying
+`f"Created backup at: {backup_path}"`, where `backup_path` embeds a
+wall-clock `strftime("%Y%m%d%H%M%S")` timestamp
+(`local_file_handler.py:93-94` / `save_file.rs`'s
+`write_modded_gamepass_containers`) computed independently by Python at
+capture time and Rust at replay time. This can NOT be a
+`PARITY_IGNORED_PATHS` entry: that mechanism masks by response `type` alone,
+and EVERY frame in this corpus's `save_modded_save` sequence (four
+deterministic frames plus this one nondeterministic one) shares the generic
+`progress_message` wire type — also shared by countless deterministic
+progress lines in every OTHER corpus. A type-wide mask would blank all of
+those too. Instead, `parity.rs` adds a narrow, dedicated
+`mask_gamepass_backup_progress_line(request_type, response_index, value)`,
+called beside (not folded into) `mask_ignored_paths` at both of its call
+sites, which masks ONLY response index 1 of a `save_modded_save` request, and
+only after confirming the text still starts with `"Created backup at: "` — a
+future re-ordering of the progress sequence fails LOUDLY (the aggregate
+`compare_responses` catches the raw text mismatch) instead of silently
+masking the wrong field. Proven narrow and correct by a dedicated synthetic
+unit test, `mask_gamepass_backup_progress_line_masks_only_index_one_of_
+save_modded_save`.
+
+Two fields that LOOKED like determinism risks going in, but turned out fine
+against the live fixtures (recorded here so a future re-investigation doesn't
+repeat the analysis from scratch):
+
+- **`select_save`/`select_gamepass_save`'s `last_modified`/`size` fields**
+  (`GamepassSaveData`/`GamepassContainerInfo`, `file_manager.py:49-63`) come
+  from the `Container.mtime`/`.size` fields embedded IN the container's own
+  binary metadata (written once by `create_new_container` at corpus-BUILD
+  time), not from the filesystem's OS-level mtime — so they're stable across
+  a `wgs-pristine/` → `wgs/` restore, unlike a real on-disk mtime would be.
+  `last_modified` is a FILETIME-derived float
+  (`(ticks - epoch_ticks) / 10_000_000`); Python computes the numerator as an
+  exact arbitrary-precision int before converting to `float`, while Rust's
+  `Filetime::to_unix_seconds` (`gamepass/format.rs`) converts `self.0` (a
+  `u64`) to `f64` FIRST, then subtracts — a different order of operations
+  that, for large FILETIME magnitudes (this checkout's are ~1.4×10¹⁷ ticks,
+  well past `f64`'s 2⁵³ exact-integer boundary), could in principle round to
+  a different bit pattern. The live replay proved this ISN'T a live bug for
+  the actual values this corpus produces (byte-identical JSON on both
+  sides) — left unmasked on purpose, since masking a field that already
+  matches would hide a real future regression instead of proving one didn't
+  happen.
+- **`loaded_save_files.level`** (fixture `001_select_gamepass_save.json`)
+  embeds `settings.save_dir` verbatim. Rather than have `parity.rs`
+  independently re-resolve `rust/parity/tmp/gamepass/wgs/<container-id>` on
+  the Rust side (risking a spurious drive-letter-case or path-separator
+  mismatch vs. Python's own resolved string — the exact failure mode the
+  `phase2` section above warns about for mixed-separator `--save-dir`
+  input), `gamepass_save_dir_from_first_fixture` reads the directory
+  straight out of fixture `000_select_save.json`'s own captured `data.path`
+  and writes THAT literal string into the replay server's
+  `settings.save_dir` before connecting — guaranteeing both backends embed
+  the identical string, by construction rather than by coincidence.
+
+**`settings.save_dir` is global, shared-server state, not scoped to one
+corpus.** All corpora in one `cargo test -p psp-server --test parity` run
+replay against a SINGLE `start_server` instance (see `replay_all_fixtures`),
+so a naive `update_save_dir` call for the gamepass corpus would leak into
+every OTHER corpus's `get_settings`/`sync_app_state` fixtures replayed
+afterward in the same run (caught live: `static-data/001_get_settings.json`
+failed with the gamepass container path where the corpus's real default
+`save_dir` was expected, the first time this was implemented without a
+restore step). `parity.rs` now reads `settings.save_dir`'s value BEFORE
+overwriting it for the gamepass corpus and restores it right after that
+corpus's fixtures finish, so corpus ordering (`corpus_dirs.sort()` puts
+`gamepass` alphabetically before `phase2`/`static-data`/etc.) can't leak
+state between unrelated corpora.
+
+### Safe capture procedure
+
+**Same discipline as db-presets/db-ups/gps/transfer/tools: the backend's
+`psp.db` lives at the repo root and may hold the developer's real,
+hand-curated data. This scenario WRITES `settings.save_dir`, so back it up
+and use a throwaway fresh one — never risk the developer's real save_dir
+setting.**
+
+Unlike every other corpus, the gamepass scenario needs a step run
+**BEFORE** the Python backend process starts: `Settings.__init__` caches
+`save_dir` from the DB at import time (`state.py`'s module-level
+`app_state = AppState()`, same import-order fact documented in "Known Python
+quirks affecting capture" above), so the container tree has to exist, and
+its path has to already be in the DB, before `psp.py` boots.
+
+1. From the repo root, back up and move the existing `psp.db` ASIDE (don't
+   delete it):
+   `mv psp.db psp.db.gamepass-parity-backup` (PowerShell:
+   `Move-Item psp.db psp.db.gamepass-parity-backup`).
+2. Build the container tree and persist its path into a FRESH `psp.db`
+   (`create_db_and_tables()` inside `prepare_gamepass_corpus` creates it if
+   missing, so this step needs no separate two-start warm-up dance):
+   `uv run python scripts/capture_parity.py --scenario gamepass --prepare-gamepass --save-dir "<absolute path to tests/fixtures/saves/world2>"`
+   This prints the container dir — copy it for step 4.
+3. Start the Python backend on a port your real client isn't using:
+   `uv run python psp.py --port 5199`
+4. From the repo root, capture against that same port, passing the container
+   dir step 2 printed:
+   `uv run --with websockets scripts/capture_parity.py --scenario gamepass --save-dir "<container dir from step 2>" --url ws://127.0.0.1:5199/ws/999999999`
+   Fixtures land in `rust/parity/fixtures/gamepass/`; shared mutable state
+   (the wgs tree, its pristine snapshot, the synthetic LocalData.sav + its
+   pristine copy, and the standalone-conversion output) lands in
+   `rust/parity/tmp/gamepass/`.
+5. Stop the Python backend (Ctrl+C).
+6. Delete the FRESH `psp.db` this run created, then restore the developer's
+   original:
+   `rm psp.db` then `mv psp.db.gamepass-parity-backup psp.db`
+   (PowerShell: `Remove-Item psp.db` then
+   `Move-Item psp.db.gamepass-parity-backup psp.db`).
+7. From `rust/`: `cargo test -p psp-server --test parity` — replays
+   `gamepass` (and every other captured corpus) against a fresh Rust temp DB.
+
+Both `rust/parity/fixtures/` and `rust/parity/tmp/` are gitignored
+(`rust/.gitignore`); this corpus, like every other, is local-only —
+regenerate, never commit.

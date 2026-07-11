@@ -18,9 +18,22 @@ import os
 import pathlib
 import sys
 import zipfile
+from pathlib import Path
 from typing import Optional
 
 import websockets
+
+# Every other scenario in this script talks to palworld_save_pal ONLY over
+# the WS wire, against a separately-running backend process, so it never
+# needs the package importable here. The gamepass scenario's prepare step
+# (build_gamepass_corpus / prepare_gamepass_corpus below) is the first
+# exception: it has to build the synthetic wgs container tree and write
+# psp.db's settings row OUT OF BAND, before any backend process starts. When
+# this file is run directly (`python scripts/capture_parity.py`), Python
+# puts the SCRIPT's own directory on sys.path[0] (not the repo root), so the
+# repo-root `palworld_save_pal/` package -- not pip-installed, only present
+# as a source tree -- isn't importable without this.
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
 # Requests for a fresh backend with no save loaded. One fixture per request.
 # get_presets is EXCLUDED here — it has its own DB_PRESETS_SCENARIO below,
@@ -300,6 +313,195 @@ TOOLS_SCENARIO = (
     ],
 )
 
+# ---------------------------------------------------------------------------
+# Task P4-14: the gamepass scenario.
+#
+# Exercises the gamepass load/convert/save-back/unlock-map surface:
+# `select_save` (gamepass branch) -> `select_gamepass_save` ->
+# `convert_save_format` (standalone gamepass->steam) -> `save_modded_save`
+# (gamepass branch) -> `unlock_map`. Unlike load_path/phase2/gps/transfer,
+# this scenario's INPUT isn't a pre-existing corpus save directory -- it's a
+# synthetic wgs container tree that has to be BUILT before the Python
+# backend even starts (build_gamepass_corpus), because the backend's
+# Settings object caches `save_dir` at import time (see "Known Python quirks
+# affecting capture" -- the same import-order fact, applied here on purpose
+# rather than worked around). So the gamepass scenario needs a PREPARE step
+# run standalone, before the backend starts:
+#
+#   uv run --with websockets scripts/capture_parity.py \
+#       --scenario gamepass --prepare-gamepass \
+#       --save-dir "<absolute path to tests/fixtures/saves/world2>"
+#
+# which builds the container tree under rust/parity/tmp/gamepass/wgs/...,
+# writes its absolute path into the (freshly-created) psp.db's settings row,
+# and prints the container dir for the next step. See rust/parity/README.md,
+# "gamepass scenario", for the full safe-capture procedure (fresh psp.db,
+# same discipline as db-presets/db-ups/gps/transfer/tools).
+GAMEPASS_TMP = Path(__file__).resolve().parents[1] / "rust" / "parity" / "tmp" / "gamepass"
+GAMEPASS_SAVE_ID = "0123456789ABCDEF0123456789ABCDEF"
+# world2 (exactly 1 player) -- NOT world1 (2 players) -- for the same reason
+# the load_path scenario's README section documents: Python's
+# _extract_players_parallel races on a ThreadPoolExecutor above 1 player,
+# making player-summary array order genuinely nondeterministic run-to-run.
+
+
+def _graft_world_map_mask(level_meta_bytes: bytes, mask: bytes) -> bytes:
+    """Return `level_meta_bytes` re-emitted with a synthetic
+    `SaveData.WorldMapMaskTextureV4` byte-array property grafted in. Neither
+    `world1` nor `world2` (this repo's only steam corpora) has a real
+    LocalData.sav, so `unlock_map` (request 05) has nothing to unlock unless
+    one is synthesized. This mirrors, in Python (for capture authoritativeness),
+    the EXACT technique rust/psp-core/src/localdata.rs's own
+    `unlock_world_map_zeroes_synthetic_mask_grafted_into_real_savedata` test
+    uses on the Rust side: graft the mask into a COPY of the corpus
+    LevelMeta.sav's `SaveData` struct (unlock_map only ever reads
+    `SaveData.WorldMapMaskTextureV4`; it never validates the rest of the
+    struct's shape, so a LevelMeta-shaped carrier is fine) and re-emit as a
+    `LocalData.sav`-shaped PlM/Oodle payload. Property dict shape verified
+    empirically against palworld_save_tools' archive.py (`_write_ArrayProperty`
+    -> `array_property` -> the `ByteProperty` fast path, which accepts a
+    plain `bytes` value)."""
+    from palworld_save_tools.gvas import GvasFile
+    from palworld_save_tools.palsav import compress_gvas_to_sav, decompress_sav_to_gvas
+    from palworld_save_tools.paltypes import PALWORLD_CUSTOM_PROPERTIES, PALWORLD_TYPE_HINTS
+
+    raw_gvas, _ = decompress_sav_to_gvas(level_meta_bytes)
+    gvas_file = GvasFile.read(
+        raw_gvas, PALWORLD_TYPE_HINTS, PALWORLD_CUSTOM_PROPERTIES, allow_nan=True
+    )
+    save_data = gvas_file.properties["SaveData"]["value"]
+    save_data["WorldMapMaskTextureV4"] = {
+        "array_type": "ByteProperty",
+        "id": None,
+        "value": {"values": mask},
+        "type": "ArrayProperty",
+    }
+    return compress_gvas_to_sav(gvas_file.write(PALWORLD_CUSTOM_PROPERTIES), 0x31)
+
+
+def build_gamepass_corpus(steam_save_dir: Path) -> Path:
+    """Package the primary steam corpus save into a synthetic wgs container
+    dir, snapshot it (`wgs-pristine`, for the Rust replay's pre-fixture
+    reset), and stage a synthetic `LocalData.sav` (+ an untouched
+    `LocalData.sav.pristine` copy, since `unlock_map` mutates its input file
+    IN PLACE -- map_unlock_handler.py:82-83 / save_file.rs's
+    `unlock_map_on_disk` both overwrite `path` with the zeroed bytes) for the
+    `unlock_map` request."""
+    import shutil
+    from datetime import datetime
+
+    from palworld_save_pal.utils.gamepass.container_types import FILETIME, ContainerIndex
+    from palworld_save_pal.utils.gamepass.container_utils import create_new_container
+
+    container_dir = (
+        GAMEPASS_TMP / "wgs" / "0009000000000000_00000000000000000000000000000000"
+    )
+    if GAMEPASS_TMP.exists():
+        shutil.rmtree(GAMEPASS_TMP)
+    container_dir.mkdir(parents=True)
+
+    index = ContainerIndex(
+        flag1=0,
+        package_name="PocketpairInc.Palworld_ad4psfrxyesvt",
+        mtime=FILETIME.from_timestamp(datetime.now().timestamp()),
+        flag2=0,
+        index_uuid="",
+        unknown=0,
+        containers=[],
+    )
+    index.containers.append(
+        create_new_container(
+            str(container_dir), GAMEPASS_SAVE_ID, (steam_save_dir / "Level.sav").read_bytes()
+        )
+    )
+    level_meta_bytes = (steam_save_dir / "LevelMeta.sav").read_bytes()
+    index.containers.append(
+        create_new_container(
+            str(container_dir),
+            GAMEPASS_SAVE_ID,
+            level_meta_bytes,
+            container_suffix="LevelMeta",
+        )
+    )
+    for player_file in sorted((steam_save_dir / "Players").glob("*.sav")):
+        index.containers.append(
+            create_new_container(
+                str(container_dir),
+                GAMEPASS_SAVE_ID,
+                player_file.read_bytes(),
+                container_suffix=f"Players-{player_file.stem}",
+            )
+        )
+    index.write_file(str(container_dir))
+
+    shutil.copytree(container_dir, GAMEPASS_TMP / "wgs-pristine")
+
+    local_data_bytes = _graft_world_map_mask(level_meta_bytes, bytes([1, 2, 3, 0, 4]))
+    (GAMEPASS_TMP / "LocalData.sav").write_bytes(local_data_bytes)
+    (GAMEPASS_TMP / "LocalData.sav.pristine").write_bytes(local_data_bytes)
+
+    return container_dir
+
+
+def prepare_gamepass_corpus(steam_save_dir: Path) -> Path:
+    """The pre-backend-start half of the gamepass scenario: build the
+    container tree, then persist its path into the (possibly brand-new)
+    psp.db's settings row -- `create_db_and_tables()` runs the same idempotent
+    `SQLModel.metadata.create_all` the real backend runs at startup, so this
+    works against either a fresh or an already-warmed psp.db without the
+    two-start dance the static-data corpus needs. Must run and complete
+    BEFORE the Python backend process starts (see the module comment above)."""
+    from palworld_save_pal.db.bootstrap import create_db_and_tables
+    from palworld_save_pal.db.ctx.settings import update_save_dir
+
+    container_dir = build_gamepass_corpus(steam_save_dir)
+    create_db_and_tables()
+    update_save_dir(str(container_dir))
+    return container_dir
+
+
+def gamepass_requests(container_dir: str) -> list[dict]:
+    """The gamepass request sequence. `container_dir` here is NOT a
+    Level.sav's parent (unlike every other SAVE_DIR_SCENARIOS entry) -- it is
+    the wgs container directory `prepare_gamepass_corpus` printed, passed back
+    in via `--save-dir` for this second, backend-running invocation.
+    `_resolve_requests` hands every SAVE_DIR_SCENARIOS entry the raw
+    `--save-dir` STRING (see `load_path_requests`'s own `str` parameter) --
+    wrap it in `Path` here since this function needs `/`-joining."""
+    container_dir = Path(container_dir)
+    return [
+        # 000: gamepass branch of select_save -> a select_gamepass_save
+        # response (not select_save -- see local_file_handler.py:172-175).
+        {
+            "type": "select_save",
+            "data": {
+                "type": "gamepass",
+                "path": str(container_dir / "containers.index"),
+                "local": False,
+            },
+        },
+        # 001: full load -> progress* / loaded_save_files / summaries.
+        {"type": "select_gamepass_save", "data": GAMEPASS_SAVE_ID},
+        # 002: standalone extraction BEFORE any mutation adds a second save
+        # id -- _standalone_gamepass_to_steam iterates a SET of save ids
+        # (convert_handler.py:502), whose order is only deterministic with
+        # exactly one save present in the container index.
+        {
+            "type": "convert_save_format",
+            "data": {
+                "target_format": "steam",
+                "source_path": str(container_dir),
+                "output_path": str(GAMEPASS_TMP / "steam-out"),
+            },
+        },
+        # 003: gamepass modded save (adds a new save id + a
+        # wall-clock-timestamped backup dir).
+        {"type": "save_modded_save", "data": "Parity Modded"},
+        # 004: unlock_map on the staged synthetic LocalData.sav.
+        {"type": "unlock_map", "data": {"path": str(GAMEPASS_TMP / "LocalData.sav")}},
+    ]
+
+
 # Scenarios with a fixed request list, independent of any on-disk save.
 FIXED_SCENARIOS = {
     "static-data": STATIC_DATA_SCENARIO,
@@ -310,7 +512,7 @@ FIXED_SCENARIOS = {
 
 # Scenarios that build their request list from a corpus save directory
 # (--save-dir), keyed by scenario name.
-SAVE_DIR_SCENARIOS = {"load_path": load_path_requests}
+SAVE_DIR_SCENARIOS = {"load_path": load_path_requests, "gamepass": gamepass_requests}
 
 # The Phase-2 dynamic scenario (see capture_phase2): it derives each request
 # from earlier live responses, so it has no static request list and is handled
@@ -953,7 +1155,20 @@ def main() -> None:
         "SAVE_DIR_SCENARIOS scenarios such as load_path. Pass an ABSOLUTE "
         "path: it is embedded verbatim in the captured select_save request "
         "and read from disk again during Rust replay, which may run from a "
-        "different working directory than this script.",
+        "different working directory than this script. For "
+        "--scenario gamepass, this is the STEAM corpus save dir when paired "
+        "with --prepare-gamepass, and the PRINTED container dir on the "
+        "subsequent capturing run (see rust/parity/README.md).",
+    )
+    parser.add_argument(
+        "--prepare-gamepass",
+        action="store_true",
+        help="run the gamepass scenario's pre-backend-start step: build the "
+        "synthetic wgs container tree from --save-dir (a steam corpus save "
+        "dir) and persist its path into psp.db's settings row, then print "
+        "the container dir and exit -- no backend connection is made. Must "
+        "run and complete BEFORE the Python backend process starts (see "
+        "rust/parity/README.md, 'gamepass scenario').",
     )
     # psp.py:51 declares `client_id: int` on the WS route, so a non-numeric
     # path segment (e.g. "parity-capture") fails the Starlette route
@@ -968,6 +1183,29 @@ def main() -> None:
     arguments = parser.parse_args()
     corpus = arguments.corpus or arguments.scenario
     output_root = pathlib.Path(arguments.output)
+
+    if arguments.prepare_gamepass:
+        if arguments.scenario != "gamepass":
+            print(
+                "error: --prepare-gamepass only applies to --scenario gamepass",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        if arguments.save_dir is None:
+            print(
+                "error: --prepare-gamepass requires --save-dir (a STEAM corpus "
+                "save's directory, i.e. Level.sav's parent -- tests/fixtures/"
+                "saves/world2 in this checkout). Pass an ABSOLUTE path.",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        container_dir = prepare_gamepass_corpus(Path(arguments.save_dir))
+        print(f"gamepass corpus prepared: {container_dir}")
+        print(
+            "Next: start the Python backend, then re-run this script WITHOUT "
+            f"--prepare-gamepass and with --save-dir \"{container_dir}\" to capture."
+        )
+        return
 
     if arguments.scenario == PHASE2_SCENARIO:
         if arguments.save_dir is None:
