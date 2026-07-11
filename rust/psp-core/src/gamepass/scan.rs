@@ -7,7 +7,8 @@ use std::path::Path;
 use crate::dto::gamepass::{GamepassContainerInfo, GamepassSaveData};
 use crate::dto::ordered_map::OrderedMap;
 use crate::error::CoreError;
-use crate::gamepass::format::{guid_file_name, ContainerEntry, ContainerFileList, ContainerIndex};
+use crate::gamepass::format::{guid_file_name, ContainerEntry, ContainerIndex};
+use crate::gamepass::store;
 use crate::savio;
 use crate::session;
 
@@ -91,39 +92,26 @@ pub fn scan_saves(container_dir: &Path) -> Result<OrderedMap<String, GamepassSav
             continue;
         }
 
-        // First container.* file only, matching Python's `break`
-        // (file_manager.py:318-328).
-        let mut world_name = "Unknown World".to_string();
-        let mut valid = false;
-        let mut list_paths: Vec<std::path::PathBuf> = std::fs::read_dir(&meta_dir)?
-            .flatten()
-            .map(|dir_entry| dir_entry.path())
-            .filter(|path| {
-                path.file_name()
-                    .map(|name| name.to_string_lossy().starts_with("container."))
-                    .unwrap_or(false)
-            })
-            .collect();
-        list_paths.sort();
-        if let Some(first_list_path) = list_paths.first() {
-            match ContainerFileList::read_from_file(first_list_path) {
-                Ok(file_list) => {
-                    if let Some(first_file) = file_list.files.first() {
-                        match world_name_from_level_meta(&first_file.data) {
-                            Ok(name) => {
-                                valid = true;
-                                world_name = name;
-                            }
-                            Err(_) => continue, // unreadable meta: skip this save
-                        }
-                    }
-                }
-                Err(_) => continue,
-            }
-        }
-        if !valid {
-            continue;
-        }
+        // Read the LevelMeta blob via `store::read_first_blob`, which selects
+        // the NUMERICALLY-latest `container.<seq>` revision's first file (see
+        // its doc comment / the `read_first_blob_picks_numeric_latest_seq_not_
+        // lexicographic` regression test). This deliberately deviates from
+        // `file_manager.py:318-328`, which reads whichever entry `os.listdir`
+        // happens to yield first and then unconditionally `break`s — a
+        // nondeterministic, potentially-stale pick (and outright wrong once a
+        // blob dir has >=10 revisions, where a lexicographic sort ranks
+        // "container.10" before "container.2"). Numeric-latest is both
+        // deterministic and correct, so it is used here instead of mirroring
+        // Python's listdir order. A save whose LevelMeta blob is missing or
+        // unreadable is skipped (`continue`), matching Python's own `continue`
+        // on that condition.
+        let world_name = match store::read_first_blob(container_dir, level_meta_entry)? {
+            Some((_seq, blob)) => match world_name_from_level_meta(&blob) {
+                Ok(name) => name,
+                Err(_) => continue, // unreadable meta: skip this save
+            },
+            None => continue, // no readable container file / blob: skip this save
+        };
 
         let player_count = latest
             .iter()
@@ -189,6 +177,59 @@ mod tests {
             eprintln!("SKIP: python testdata not found (set PSP_PY_TESTDATA)");
         }
         dir
+    }
+
+    /// Path to a real gamepass `LevelMeta.sav` in the on-disk backup corpus,
+    /// used as a valid base for tests that need to synthesize `.sav` bytes
+    /// with a specific `WorldName` via `set_world_name_in_level_meta`.
+    fn corpus_level_meta_path() -> std::path::PathBuf {
+        std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join(
+            "../../backups/gamepass/000900000487F3B6_0000000000000000000000006B210A9C_20260325231642/4F64BAB699AE4B4A97A5862116E07C6D/LevelMeta.sav",
+        )
+    }
+
+    /// A valid `LevelMeta.sav` byte payload to use as a base for tests that
+    /// re-stamp its `WorldName`: prefers the `PSP_PY_TESTDATA` fixture, falls
+    /// back to the gamepass backup corpus, and skips (returns `None`) when
+    /// neither is available.
+    fn base_level_meta_bytes_or_skip() -> Option<Vec<u8>> {
+        if let Some(testdata) = python_testdata_dir() {
+            if let Ok(bytes) = std::fs::read(testdata.join("LevelMeta.sav")) {
+                return Some(bytes);
+            }
+        }
+        let corpus = corpus_level_meta_path();
+        if corpus.exists() {
+            if let Ok(bytes) = std::fs::read(&corpus) {
+                return Some(bytes);
+            }
+        }
+        eprintln!(
+            "SKIP: no base LevelMeta.sav available (set PSP_PY_TESTDATA or provide gamepass corpus)"
+        );
+        None
+    }
+
+    /// Writes an extra `container.<seq>` file list (single file) plus its
+    /// blob into an existing LevelMeta blob dir, letting a test add a higher
+    /// revision than the fixture builder's `container.1`. Mirrors
+    /// `store.rs`'s own `write_file_list_at_seq` test helper.
+    fn write_extra_container_revision(
+        blob_dir: &std::path::Path,
+        seq: u32,
+        name: &str,
+        data: &[u8],
+    ) {
+        use crate::gamepass::format::{write_utf16_fixed_64, CONTAINER_FILE_LIST_VERSION};
+        let file_uuid = uuid::Uuid::new_v4();
+        let mut buffer = Vec::new();
+        buffer.extend_from_slice(&CONTAINER_FILE_LIST_VERSION.to_le_bytes());
+        buffer.extend_from_slice(&1u32.to_le_bytes()); // file count
+        write_utf16_fixed_64(&mut buffer, name).unwrap();
+        buffer.extend_from_slice(&[0u8; 16]); // cloud UUID
+        buffer.extend_from_slice(file_uuid.as_bytes());
+        std::fs::write(blob_dir.join(guid_file_name(&file_uuid)), data).unwrap();
+        std::fs::write(blob_dir.join(format!("container.{seq}")), buffer).unwrap();
     }
 
     #[test]
@@ -261,6 +302,52 @@ mod tests {
         };
         let container_dir = build_wgs_tree(temp.path(), &[save]).unwrap();
         assert!(scan_saves(&container_dir).unwrap().is_empty());
+    }
+
+    /// A LevelMeta blob dir with revisions `container.1` (world "OLD") and
+    /// `container.10` (world "NEW") must surface the NUMERICALLY-latest
+    /// revision's world name ("NEW"), not the lexicographically-first
+    /// (`"container.1" < "container.10"` as strings, so a naive
+    /// `read_dir().sort().first()` reads the STALE seq-1 blob). This is the
+    /// exact pitfall `store::read_first_blob` already guards against with
+    /// numeric-seq selection; `scan_saves` must reuse that, not reintroduce
+    /// a lexicographic sort. FAILS (returns "OLD") under a lexicographic
+    /// pick; passes once selection is numeric-latest.
+    #[test]
+    fn scan_saves_reads_numerically_latest_level_meta_revision_not_lexicographic() {
+        let Some(base_meta) = base_level_meta_bytes_or_skip() else {
+            return;
+        };
+        let old_meta = set_world_name_in_level_meta(&base_meta, "OLD").unwrap();
+        let new_meta = set_world_name_in_level_meta(&base_meta, "NEW").unwrap();
+        // Sanity: the two synthesized metas really do carry the distinct names.
+        assert_eq!(world_name_from_level_meta(&old_meta).unwrap(), "OLD");
+        assert_eq!(world_name_from_level_meta(&new_meta).unwrap(), "NEW");
+
+        let temp = tempfile::tempdir().unwrap();
+        let save = SyntheticSave {
+            save_id: "0123456789ABCDEF0123456789ABCDEF".to_string(),
+            level_sav: b"LEVEL".to_vec(),
+            level_meta: Some(old_meta), // fixture writes this as container.1 ("OLD")
+            local_data: None,
+            world_option: None,
+            players: vec![],
+        };
+        let container_dir = build_wgs_tree(temp.path(), &[save]).unwrap();
+
+        // Add container.10 ("NEW") into the same LevelMeta blob dir.
+        let index = ContainerIndex::read_from_dir(&container_dir).unwrap();
+        let latest = index.latest_save_containers("0123456789ABCDEF0123456789ABCDEF");
+        let meta_entry = latest.get("LevelMeta").unwrap();
+        let meta_dir = container_dir.join(guid_file_name(&meta_entry.container_uuid));
+        write_extra_container_revision(&meta_dir, 10, "Data", &new_meta);
+
+        let saves = scan_saves(&container_dir).unwrap();
+        let data = saves.get("0123456789ABCDEF0123456789ABCDEF").unwrap();
+        assert_eq!(
+            data.world_name, "NEW",
+            "scan_saves must read the numerically-latest LevelMeta revision (container.10), not the lexicographically-first (container.1)"
+        );
     }
 
     /// Reads a real gamepass `LevelMeta.sav` pulled from the on-disk gamepass
