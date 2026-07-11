@@ -244,15 +244,45 @@ pub(crate) fn parse_palworld_save(bytes: &[u8]) -> Result<uesave::Save, CoreErro
         .map_err(|parse_error| CoreError::Parse(parse_error.to_string()))
 }
 
+/// `SaveData.WorldName` from a LevelMeta (or Level) property tree, filtered
+/// to a non-empty string, or `None` when the property is absent or empty.
+/// Shared navigation behind two Python originals that read the identical
+/// path but fall back to different placeholder text:
+/// `world_name_from_meta_properties` below (`SaveManager._load_world_name`,
+/// fallback `"Unknown"`) and `gamepass::scan::world_name_from_level_meta`
+/// (`FileManager.read_level_meta`, fallback `"Unknown World"`). Extracted so
+/// neither caller reimplements the GVAS navigation.
+pub(crate) fn world_name_property(properties: &uesave::Properties) -> Option<String> {
+    props::get(properties, &["SaveData", "WorldName"])
+        .and_then(props::as_str)
+        .filter(|name| !name.is_empty())
+        .map(|name| name.to_string())
+}
+
 /// Port of `SaveManager._load_world_name`: `SaveData.WorldName` from
 /// `LevelMeta.sav`, falling back to `"Unknown"` when the property is absent
 /// or its string value is empty.
 pub(crate) fn world_name_from_meta_properties(properties: &uesave::Properties) -> String {
-    props::get(properties, &["SaveData", "WorldName"])
-        .and_then(props::as_str)
-        .filter(|name| !name.is_empty())
-        .unwrap_or("Unknown")
-        .to_string()
+    world_name_property(properties).unwrap_or_else(|| "Unknown".to_string())
+}
+
+/// Sets `SaveData.WorldName` on a LevelMeta (or Level) property tree in
+/// place. Shared core behind `SaveSession::set_world_name` (which also
+/// updates `self.world_name` on the loaded session) and
+/// `gamepass::scan::set_world_name_in_level_meta` (which operates on
+/// standalone bytes with no `SaveSession` to update) — both port the same
+/// property write `SaveManager().sav(level_meta)` callers rely on
+/// (`rename_gamepass_world` / `copy_container`), so the write logic lives
+/// once here rather than being duplicated per caller.
+pub(crate) fn set_world_name_property(
+    properties: &mut uesave::Properties,
+    new_name: &str,
+) -> Result<(), CoreError> {
+    let save_data = props::get_mut(properties, &["SaveData"])
+        .and_then(props::struct_props_mut)
+        .ok_or_else(|| CoreError::Parse("LevelMeta SaveData missing".into()))?;
+    save_data.insert("WorldName", props::str_property(new_name));
+    Ok(())
 }
 
 /// Resolves a `MapEntry`'s key to a `Uuid`: `nested_field` names a struct
@@ -585,10 +615,7 @@ impl SaveSession {
                 "No LevelMeta GvasFile has been loaded.".to_string(),
             ));
         };
-        let save_data = props::get_mut(&mut meta.root.properties, &["SaveData"])
-            .and_then(props::struct_props_mut)
-            .ok_or_else(|| CoreError::Parse("LevelMeta SaveData missing".into()))?;
-        save_data.insert("WorldName", props::str_property(new_name));
+        set_world_name_property(&mut meta.root.properties, new_name)?;
         self.world_name = new_name.to_string();
         Ok(())
     }
@@ -1102,7 +1129,10 @@ mod load_tests {
 
         // A genuinely unknown magic is still rejected cleanly.
         let unknown_error = parse_palworld_save(&compression_header(b"XYZ")).unwrap_err();
-        assert!(matches!(unknown_error, CoreError::Parse(_)), "{unknown_error}");
+        assert!(
+            matches!(unknown_error, CoreError::Parse(_)),
+            "{unknown_error}"
+        );
 
         // Fewer than the 12 bytes CompressionHeader::read needs before it can
         // even inspect a magic value.

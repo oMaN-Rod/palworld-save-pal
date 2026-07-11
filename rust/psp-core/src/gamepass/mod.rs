@@ -2,6 +2,7 @@
 //! Port of palworld_save_pal/utils/gamepass/{container_types,container_utils}.py.
 
 pub mod format;
+pub mod scan;
 pub mod store;
 
 #[cfg(any(test, feature = "test-fixtures"))]
