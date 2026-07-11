@@ -53,9 +53,14 @@ impl ServerProcessStatus {
     }
 }
 
+/// Mirrors Python's builtin `round(value, decimals)`, which rounds halves to
+/// even (banker's rounding) — not away from zero. Stats values are fed straight
+/// to `round(...)` in docker_service.py / native_server_service.py, so the tie
+/// rule is wire-visible; `f64::round()` (half-away) would diverge on exact ties
+/// like `round(0.125, 2)` (Python → 0.12, half-away → 0.13).
 pub fn round_to(value: f64, decimals: u32) -> f64 {
     let factor = 10f64.powi(decimals as i32);
-    (value * factor).round() / factor
+    (value * factor).round_ties_even() / factor
 }
 
 /// Python datetime.isoformat(): "T" separator, microseconds omitted when zero.
@@ -87,7 +92,12 @@ mod tests {
     fn round_to_matches_python_round_for_stats_values() {
         assert_eq!(round_to(80.004, 2), 80.0);
         assert_eq!(round_to(1024.04, 1), 1024.0);
-        assert_eq!(round_to(0.125, 2), 0.13);
+        // Exactly-representable halves (eighths) round to even, matching
+        // Python's builtin round(): round(0.125, 2) == 0.12 (2 is even),
+        // round(0.375, 2) == 0.38 (8 is even). `f64::round()` (half-away)
+        // would give 0.13 / 0.38 and diverge on the first.
+        assert_eq!(round_to(0.125, 2), 0.12);
+        assert_eq!(round_to(0.375, 2), 0.38);
     }
 
     #[test]
