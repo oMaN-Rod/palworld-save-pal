@@ -24,7 +24,7 @@
 
 	const appState = getAppState();
 
-	const max_level = $derived(appState.settings.cheat_mode ? 255 : 65);
+	const max_level = $derived(appState.settings.cheat_mode ? 255 : 80);
 	const max_rank = $derived(appState.settings.cheat_mode ? 255 : 5);
 
 	let palLevelProgressToNext: number = $state(0);
