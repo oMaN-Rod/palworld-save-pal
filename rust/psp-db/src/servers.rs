@@ -1,7 +1,6 @@
 //! Query functions for the servers table (Phase 6). Mirrors db/ctx/servers.py.
 use std::collections::HashSet;
 
-use chrono::NaiveDateTime;
 use serde_json::{Map, Value};
 use sqlx::{QueryBuilder, Row, Sqlite, SqlitePool};
 
@@ -33,8 +32,8 @@ pub struct ServerRecord {
     pub admin_password: String,
     pub max_players: i64,
     pub env_vars: sqlx::types::Json<Map<String, Value>>,
-    pub created_at: NaiveDateTime,
-    pub updated_at: NaiveDateTime,
+    pub created_at: String,
+    pub updated_at: String,
 }
 
 #[derive(Debug, Clone, Default)]
@@ -101,7 +100,7 @@ pub async fn create_server(
     pool: &SqlitePool,
     new_server: NewServer,
 ) -> Result<ServerRecord, DbError> {
-    let now = chrono::Utc::now().naive_utc();
+    let now = crate::time::now_iso_naive_utc();
     let env_vars_text = Value::Object(new_server.env_vars).to_string();
     let inserted = sqlx::query(
         "INSERT INTO servers (name, container_name, image_name, server_type, game_port, \
@@ -133,8 +132,8 @@ pub async fn create_server(
     .bind(&new_server.admin_password)
     .bind(new_server.max_players)
     .bind(env_vars_text)
-    .bind(now)
-    .bind(now)
+    .bind(&now)
+    .bind(&now)
     .execute(pool)
     .await?;
     let server_id = inserted.last_insert_rowid();
@@ -174,7 +173,7 @@ pub async fn update_server(
         return Ok(None);
     }
     let mut builder = QueryBuilder::<Sqlite>::new("UPDATE servers SET updated_at = ");
-    builder.push_bind(chrono::Utc::now().naive_utc());
+    builder.push_bind(crate::time::now_iso_naive_utc());
     for (key, value) in updates {
         if !UPDATABLE_COLUMNS.contains(&key.as_str()) {
             continue;

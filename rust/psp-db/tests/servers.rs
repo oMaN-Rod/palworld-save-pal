@@ -55,6 +55,23 @@ async fn create_then_get_round_trips_all_fields() {
     assert!(fetched.env_vars.0.is_empty());
     assert_eq!(fetched.created_at, created.created_at);
     assert_eq!(fetched.updated_at, created.updated_at);
+    // Timestamps must match Python's datetime.utcnow().isoformat(): T-separated,
+    // no space, and no UTC offset suffix (servers use naive utcnow, not aware now()).
+    assert!(
+        created.created_at.contains('T') && !created.created_at.contains(' '),
+        "created_at must be T-separated ISO, got {:?}",
+        created.created_at
+    );
+    assert!(
+        !created.created_at.contains("+00:00"),
+        "created_at must not carry a UTC offset suffix, got {:?}",
+        created.created_at
+    );
+    assert!(
+        created.updated_at.contains('T') && !created.updated_at.contains(' '),
+        "updated_at must be T-separated ISO, got {:?}",
+        created.updated_at
+    );
 }
 
 #[tokio::test]
@@ -99,6 +116,11 @@ async fn update_server_applies_partial_updates_and_ignores_unknown_keys() {
         Some(&serde_json::json!("2.0"))
     );
     assert!(updated.updated_at >= created.updated_at);
+    assert!(
+        updated.updated_at.contains('T') && !updated.updated_at.contains(' '),
+        "updated_at must remain a T-separated ISO string after update, got {:?}",
+        updated.updated_at
+    );
 
     let mut null_pid = serde_json::Map::new();
     null_pid.insert("pid".to_string(), serde_json::Value::Null);
