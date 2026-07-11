@@ -26,6 +26,11 @@ base64 = { workspace = true }
 chrono = { workspace = true }
 rfd = { workspace = true }
 opener = { workspace = true }
+reqwest = { workspace = true }
+async-trait = { workspace = true }
+sysinfo = { workspace = true }
+futures-util = { workspace = true }
+bollard = { workspace = true }
 
 [dev-dependencies]
 tokio-tungstenite = { workspace = true }

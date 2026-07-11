@@ -28,12 +28,17 @@ futures = "0.3"            # contract addition: WS split + panic containment
 percent-encoding = "2"     # contract addition: SPA redirect encoding
 base64 = "0.22"
 zip = { version = "2", default-features = false, features = ["deflate"] }
-chrono = "0.4"
+chrono = { version = "0.4", features = ["serde"] }
 rfd = "0.15"
 opener = "0.7"
 tauri = { version = "2", features = [] }
 tauri-build = { version = "2", features = [] }
 tauri-plugin-single-instance = "2"
+bollard = "0.18"
+reqwest = { version = "0.12", features = ["json"] }
+sysinfo = "0.33"
+async-trait = "0.1"
+futures-util = "0.3"
 # dev-dependencies
 tokio-tungstenite = "0.24"
 tempfile = "3"

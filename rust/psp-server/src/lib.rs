@@ -7,6 +7,7 @@ pub mod handler_error;
 pub mod handlers;
 pub mod messages;
 pub mod router;
+pub mod services;
 pub mod static_files;
 pub mod ws;
 
