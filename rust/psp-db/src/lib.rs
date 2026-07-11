@@ -3,6 +3,7 @@ pub mod error;
 pub mod import_legacy;
 pub mod meta;
 pub mod presets;
+pub mod servers;
 pub mod settings;
 pub mod time;
 pub mod ups;
