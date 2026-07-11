@@ -36,6 +36,7 @@ pub struct AppState {
     pub config: ServerConfig,
     pub game_data: Arc<GameData>,
     pub db: sqlx::SqlitePool,
+    pub dialogs: Arc<dyn crate::desktop_dialogs::FileDialogProvider>,
     /// Count of currently-open `/ws/{client_id}` connections. `ws::connection_loop`
     /// increments on start and decrements (via a `Drop` guard, so it also fires on
     /// panic or early return) when it exits. Exists so termination of the reader
@@ -69,9 +70,25 @@ impl ServerHandle {
     }
 }
 
-/// Binds the listener before returning, so the port is already accepting
-/// connections by the time the caller sees a `ServerHandle`.
+/// Delegating wrapper: picks the real `RfdDialogProvider` in desktop mode and
+/// the inert `NullDialogProvider` otherwise, then defers to `start_server_with`.
 pub async fn start_server(config: ServerConfig) -> anyhow::Result<ServerHandle> {
+    let dialogs: Arc<dyn crate::desktop_dialogs::FileDialogProvider> = if config.desktop_mode {
+        Arc::new(crate::desktop_dialogs::RfdDialogProvider)
+    } else {
+        Arc::new(crate::desktop_dialogs::NullDialogProvider)
+    };
+    start_server_with(config, dialogs).await
+}
+
+/// Binds the listener before returning, so the port is already accepting
+/// connections by the time the caller sees a `ServerHandle`. `dialogs` lets
+/// callers (tests, `psp-desktop`) inject a `FileDialogProvider` instead of
+/// the real native-dialog implementation `start_server` wires up by default.
+pub async fn start_server_with(
+    config: ServerConfig,
+    dialogs: Arc<dyn crate::desktop_dialogs::FileDialogProvider>,
+) -> anyhow::Result<ServerHandle> {
     let game_data = Arc::new(GameData::load(&config.data_dir.join("json"))?);
     let db = psp_db::open(&config.db_path).await?;
     let legacy_db_path = config
@@ -98,6 +115,7 @@ pub async fn start_server(config: ServerConfig) -> anyhow::Result<ServerHandle> 
         config: config.clone(),
         game_data,
         db,
+        dialogs,
         live_connections,
     });
 
@@ -173,6 +191,7 @@ pub(crate) mod test_support {
                 config,
                 game_data,
                 db,
+                dialogs: Arc::new(crate::desktop_dialogs::NullDialogProvider),
                 live_connections,
             });
             let (sender, frames) = tokio::sync::mpsc::unbounded_channel();

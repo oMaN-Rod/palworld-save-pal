@@ -33,6 +33,7 @@ async fn test_router(temp_dir: &tempfile::TempDir) -> axum::Router {
         config,
         game_data,
         db,
+        dialogs: Arc::new(psp_server::desktop_dialogs::NullDialogProvider),
         live_connections,
     }))
 }

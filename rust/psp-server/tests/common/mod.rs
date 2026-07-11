@@ -14,6 +14,10 @@ pub struct TestServer {
     pub _temp_dir: tempfile::TempDir,
 }
 
+/// `#[allow(dead_code)]`: `tests/common/mod.rs` is compiled fresh into every
+/// integration-test binary via `mod common;`; binaries that only exercise
+/// desktop mode (e.g. `desktop_config.rs`) don't call this helper.
+#[allow(dead_code)]
 pub async fn start_test_server() -> TestServer {
     let temp_dir = tempfile::tempdir().unwrap();
     let ui_dir = temp_dir.path().join("ui");
@@ -27,6 +31,34 @@ pub async fn start_test_server() -> TestServer {
         desktop_mode: false,
     };
     let handle = psp_server::start_server(config).await.unwrap();
+    TestServer {
+        handle,
+        _temp_dir: temp_dir,
+    }
+}
+
+/// Mirrors `start_test_server`, but runs in desktop mode with an
+/// injected `FileDialogProvider` (Task P5-2). Reused by Phase 5 tests
+/// that exercise desktop-only handler branches (select_save, unlock_map,
+/// open_folder) against a `QueuedDialogProvider`.
+#[allow(dead_code)]
+pub async fn start_desktop_test_server(
+    dialogs: std::sync::Arc<dyn psp_server::desktop_dialogs::FileDialogProvider>,
+) -> TestServer {
+    let temp_dir = tempfile::tempdir().unwrap();
+    let ui_dir = temp_dir.path().join("ui");
+    std::fs::create_dir_all(&ui_dir).unwrap();
+    let config = psp_server::ServerConfig {
+        host: "127.0.0.1".parse().unwrap(),
+        port: 0,
+        ui_dir,
+        data_dir: std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../data"),
+        db_path: temp_dir.path().join("psp-rs.db"),
+        desktop_mode: true,
+    };
+    let handle = psp_server::start_server_with(config, dialogs)
+        .await
+        .unwrap();
     TestServer {
         handle,
         _temp_dir: temp_dir,
