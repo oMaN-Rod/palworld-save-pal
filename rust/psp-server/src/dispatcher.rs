@@ -305,6 +305,17 @@ async fn route(
             handlers::gamepass::handle_rename_gamepass_world(serde_json::from_value(data)?, ctx)
                 .await
         }
+        // Phase 4 (Task 13): standalone/loaded save-format conversion, in-memory
+        // sav<->json conversion, and LocalData.sav map unlock.
+        MessageType::ConvertSaveFormat => {
+            handlers::gamepass::handle_convert_save_format(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::ConvertSavFile => {
+            handlers::save_file::handle_convert_sav_file(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::UnlockMap => {
+            handlers::save_file::handle_unlock_map(serde_json::from_value(data)?, ctx).await
+        }
         // Remaining arms are added by Phases 1-6.
         other => {
             tracing::warn!(

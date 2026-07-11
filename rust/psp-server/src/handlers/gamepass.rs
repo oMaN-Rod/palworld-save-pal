@@ -15,10 +15,13 @@
 //! `settings.save_dir` (the desktop dialog's chosen path) and LOADS the save
 //! into `ctx.session.save`.
 
+use std::path::PathBuf;
+
 use serde::{Deserialize, Serialize};
 
 use psp_core::dto::gamepass::GamepassSaveData;
 use psp_core::dto::ordered_map::OrderedMap;
+use psp_core::gamepass::convert as gamepass_convert;
 use psp_core::gamepass::format::{guid_file_name, ContainerIndex};
 use psp_core::gamepass::{scan, store};
 use psp_core::session::{PlayerFileData, SaveKind, SaveSession};
@@ -355,5 +358,311 @@ pub async fn handle_select_gamepass_save(
         .emit(MessageType::LoadedSaveFiles, &loaded_payload);
     crate::handlers::save_file::emit_summary_messages(&session, ctx.emitter);
     ctx.session.save = Some(session);
+    Ok(())
+}
+
+// ---------------------------------------------------------------------------
+// convert_save_format — port of convert_handler.py:71-129 (+ its standalone
+// and loaded-save helpers). Branch order below matters: it mirrors Python's
+// `if/elif` chain exactly, including which branches need a desktop dialog
+// (Phase 5) and which are fully headless.
+// ---------------------------------------------------------------------------
+
+#[derive(Debug, Deserialize)]
+pub struct ConvertSaveFormatData {
+    pub target_format: String,
+    #[serde(default)]
+    pub source_path: Option<String>,
+    #[serde(default)]
+    pub output_path: Option<String>,
+    #[serde(default)]
+    pub save_id: Option<String>,
+}
+
+/// Port of convert_save_format_handler (convert_handler.py:71-129). Branch order matters.
+pub async fn handle_convert_save_format(
+    data: ConvertSaveFormatData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    if data.save_id.is_some() && data.target_format == "steam" {
+        // Python prompts for an output dir and extracts the chosen save
+        // (convert_handler.py:132-244). Web mode / no window → error payload.
+        // Phase 5: desktop dialog + extract_containers_to_steam_dir(SelectedSave labels).
+        ctx.emitter.emit(
+            MessageType::ConvertSaveFormat,
+            &serde_json::json!({"error": "Desktop mode required."}),
+        );
+        return Ok(());
+    }
+    if data.source_path.as_deref() == Some("__select__")
+        || data.output_path.as_deref() == Some("__select__")
+    {
+        // Python opens file dialogs; headless _prompt_standalone_paths → (None, None)
+        // → {"error": "No file selected."}. Phase 5 wires the dialogs.
+        ctx.emitter.emit(
+            MessageType::ConvertSaveFormat,
+            &serde_json::json!({"error": "No file selected."}),
+        );
+        return Ok(());
+    }
+    if let (Some(source_path), Some(output_path)) =
+        (data.source_path.clone(), data.output_path.clone())
+    {
+        return convert_standalone(&source_path, &output_path, &data.target_format, ctx).await;
+    }
+    if ctx.session.save.is_some() {
+        return convert_loaded_save(&data.target_format, ctx).await;
+    }
+    ctx.emitter.emit(
+        MessageType::ConvertSaveFormat,
+        &serde_json::json!({"error": "No save file loaded and no source path provided."}),
+    );
+    Ok(())
+}
+
+/// convert_handler.py:474-491.
+async fn convert_standalone(
+    source_path: &str,
+    output_path: &str,
+    target_format: &str,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    match target_format {
+        "steam" => standalone_gamepass_to_steam(source_path, output_path, ctx).await,
+        "gamepass" => standalone_steam_to_gamepass(source_path, output_path, ctx).await,
+        other => {
+            ctx.emitter.emit(
+                MessageType::ConvertSaveFormat,
+                &serde_json::json!({"error": format!("Unknown target format: {other}")}),
+            );
+            Ok(())
+        }
+    }
+}
+
+/// convert_handler.py:494-588 — extracts EVERY save found in the container dir.
+async fn standalone_gamepass_to_steam(
+    source_path: &str,
+    output_path: &str,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let progress = ctx.emitter.progress_sink();
+    progress("Reading GamePass container index...");
+    let container_dir = PathBuf::from(source_path);
+    // Index read failures propagate to the dispatcher error, like Python's raise.
+    let index = ContainerIndex::read_from_dir(&container_dir)?;
+
+    let save_ids = gamepass_convert::unique_save_ids(&index);
+    if save_ids.is_empty() {
+        ctx.emitter.emit(
+            MessageType::ConvertSaveFormat,
+            &serde_json::json!({"error": "No saves found in GamePass containers."}),
+        );
+        return Ok(());
+    }
+    let output_root = PathBuf::from(output_path);
+    for save_id in &save_ids {
+        let containers = index.latest_save_containers(save_id);
+        if containers.get("Level").is_none() {
+            continue;
+        }
+        gamepass_convert::extract_containers_to_steam_dir(
+            &container_dir,
+            save_id,
+            &containers,
+            &output_root,
+            gamepass_convert::ExtractLabels::AllSaves,
+            &progress,
+        )?;
+    }
+    progress("Conversion complete!");
+    ctx.emitter.emit(
+        MessageType::ConvertSaveFormat,
+        &serde_json::json!({
+            "message": format!("GamePass saves extracted to Steam format at: {output_path}"),
+            "output_path": output_path,
+        }),
+    );
+    Ok(())
+}
+
+/// convert_handler.py:591-674.
+async fn standalone_steam_to_gamepass(
+    source_path: &str,
+    output_path: &str,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let source_dir = PathBuf::from(source_path);
+    if !source_dir.join("Level.sav").exists() {
+        ctx.emitter.emit(
+            MessageType::ConvertSaveFormat,
+            &serde_json::json!({
+                "error": "Level.sav not found in source directory. Is this a valid Steam save?"
+            }),
+        );
+        return Ok(());
+    }
+    let progress = ctx.emitter.progress_sink();
+    progress("Reading GamePass container index...");
+    let container_dir = PathBuf::from(output_path);
+    let index = match ContainerIndex::read_from_dir(&container_dir) {
+        Ok(index) => index,
+        Err(error) => {
+            ctx.emitter.emit(
+                MessageType::ConvertSaveFormat,
+                &serde_json::json!({
+                    "error": format!("Could not read GamePass container index: {error}")
+                }),
+            );
+            return Ok(());
+        }
+    };
+    let new_save_id = gamepass_convert::import_steam_dir_to_gamepass(
+        &source_dir,
+        &container_dir,
+        index,
+        &store::backups_root().join("gamepass"),
+        &progress,
+    )?;
+    progress("Conversion complete!");
+    ctx.emitter.emit(
+        MessageType::ConvertSaveFormat,
+        &serde_json::json!({
+            "message": format!("Steam save imported to GamePass format (ID: {new_save_id})"),
+            "save_id": new_save_id,
+        }),
+    );
+    Ok(())
+}
+
+/// convert_handler.py:117-129 + 247-373.
+async fn convert_loaded_save(
+    target_format: &str,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    match target_format {
+        "gamepass" => loaded_save_to_gamepass(ctx).await,
+        "steam" => {
+            let already_steam = matches!(
+                ctx.session.save.as_ref().map(|save| &save.kind),
+                Some(SaveKind::Steam { .. })
+            );
+            if already_steam {
+                ctx.emitter.emit(
+                    MessageType::ConvertSaveFormat,
+                    &serde_json::json!({"error": "Save is already in Steam format."}),
+                );
+                return Ok(());
+            }
+            // Python prompts for an output dir and writes the steam layout
+            // (convert_handler.py:335-409). Phase 5: dialog + write Level/LevelMeta/Players
+            // from the session (level_sav_bytes / level_meta_sav_bytes / player_sav_bytes).
+            ctx.emitter.emit(
+                MessageType::ConvertSaveFormat,
+                &serde_json::json!({
+                    "error": "Desktop mode required for Steam directory selection."
+                }),
+            );
+            Ok(())
+        }
+        other => {
+            ctx.emitter.emit(
+                MessageType::ConvertSaveFormat,
+                &serde_json::json!({"error": format!("Unknown target format: {other}")}),
+            );
+            Ok(())
+        }
+    }
+}
+
+/// convert_handler.py:247-332 — writes the LOADED save into the real gamepass install.
+async fn loaded_save_to_gamepass(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
+    let already_gamepass = matches!(
+        ctx.session.save.as_ref().map(|save| &save.kind),
+        Some(SaveKind::GamePass { .. })
+    );
+    if already_gamepass {
+        ctx.emitter.emit(
+            MessageType::ConvertSaveFormat,
+            &serde_json::json!({"error": "Save is already in GamePass format."}),
+        );
+        return Ok(());
+    }
+    let progress = ctx.emitter.progress_sink();
+    progress("Finding GamePass container path...");
+    let container_dir = match store::find_container_dir() {
+        Ok(dir) => dir,
+        Err(error) => {
+            ctx.emitter.emit(
+                MessageType::ConvertSaveFormat,
+                &serde_json::json!({
+                    "error": format!("Could not find GamePass installation: {error}")
+                }),
+            );
+            return Ok(());
+        }
+    };
+    progress("Creating backup of GamePass containers...");
+    store::backup_container_dir(&container_dir, &store::backups_root().join("gamepass"))?;
+    progress("Reading container index...");
+    let mut index = ContainerIndex::read_from_dir(&container_dir)?;
+    index
+        .containers
+        .retain(|entry| !entry.container_name.starts_with("EggTest"));
+
+    let new_save_id = uuid::Uuid::new_v4().as_simple().to_string().to_uppercase();
+    let save = ctx.session.save_mut()?;
+    progress("Converting Level.sav...");
+    let level_bytes = save.level_sav_bytes()?;
+    progress("Converting player save files...");
+    let player_bytes = save.player_sav_bytes()?;
+    let level_meta_bytes = save.level_meta_sav_bytes()?;
+
+    progress("Creating GamePass containers...");
+    index.containers.push(store::create_container(
+        &container_dir,
+        &new_save_id,
+        &level_bytes,
+        "Data",
+        "Level",
+    )?);
+    if let Some(meta_bytes) = level_meta_bytes {
+        index.containers.push(store::create_container(
+            &container_dir,
+            &new_save_id,
+            &meta_bytes,
+            "Data",
+            "LevelMeta",
+        )?);
+    }
+    for (player_uuid, (sav_bytes, dps_bytes)) in &player_bytes {
+        let player_hex = player_uuid.as_simple().to_string().to_uppercase();
+        index.containers.push(store::create_container(
+            &container_dir,
+            &new_save_id,
+            sav_bytes,
+            "Data",
+            &format!("Players-{player_hex}"),
+        )?);
+        if let Some(dps_bytes) = dps_bytes {
+            index.containers.push(store::create_container(
+                &container_dir,
+                &new_save_id,
+                dps_bytes,
+                "Data",
+                &format!("Players-{player_hex}_dps"),
+            )?);
+        }
+    }
+    progress("Writing container index...");
+    index.write_to_dir(&container_dir)?;
+    progress("Conversion complete!");
+    ctx.emitter.emit(
+        MessageType::ConvertSaveFormat,
+        &serde_json::json!({
+            "message": format!("Save converted to GamePass format (ID: {new_save_id})"),
+            "save_id": new_save_id,
+        }),
+    );
     Ok(())
 }

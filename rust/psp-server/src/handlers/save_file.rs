@@ -1089,6 +1089,89 @@ pub async fn handle_rename_world(
     Ok(())
 }
 
+// ---------------------------------------------------------------------------
+// convert_sav_file — port of local_file_handler.py:394-406.
+// ---------------------------------------------------------------------------
+
+#[derive(Debug, serde::Deserialize)]
+pub struct ConvertSavFileData {
+    /// The frontend sends the file as a JSON array of ints (ws/messages.py:767-769).
+    pub file_data: Vec<u8>,
+    pub target_type: String,
+}
+
+/// Port of convert_sav_file (local_file_handler.py:394-406). JSON output uses the
+/// uesave schema — documented breaking change (spec §4); excluded from parity fixtures.
+pub async fn handle_convert_sav_file(
+    data: ConvertSavFileData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    if data.target_type == "json" {
+        let json_text = psp_core::convert::sav_to_json_string(&data.file_data)?;
+        ctx.emitter.emit(MessageType::ConvertSavFile, &json_text);
+    } else {
+        let sav_bytes = psp_core::convert::json_to_sav_bytes(&data.file_data)?;
+        let encoded = base64::engine::general_purpose::STANDARD.encode(&sav_bytes);
+        ctx.emitter.emit(MessageType::ConvertSavFile, &encoded);
+    }
+    Ok(())
+}
+
+// ---------------------------------------------------------------------------
+// unlock_map — port of map_unlock_handler.py:20-94.
+// ---------------------------------------------------------------------------
+
+#[derive(Debug, serde::Deserialize)]
+pub struct UnlockMapData {
+    #[serde(default)]
+    pub path: Option<String>,
+}
+
+/// Port of unlock_map_handler (map_unlock_handler.py:20-94). Every failure is reported
+/// by THIS handler as error {message: "Failed to unlock map: <inner>", trace} and never
+/// bubbles to the dispatcher. Desktop mode injects `path` via a dialog in Phase 5
+/// (desktop.py:139-146 is the Python interception point).
+pub async fn handle_unlock_map(
+    data: UnlockMapData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    if let Err(failure_message) = unlock_map_on_disk(&data) {
+        ctx.emitter
+            .emit_error(&format!("Failed to unlock map: {failure_message}"), "");
+        return Ok(());
+    }
+    ctx.emitter.emit(
+        MessageType::UnlockMap,
+        &serde_json::json!({
+            "success": true,
+            "message": "Map unlocked successfully! Restart the game to see changes.",
+        }),
+    );
+    Ok(())
+}
+
+fn unlock_map_on_disk(data: &UnlockMapData) -> Result<(), String> {
+    let path = data
+        .path
+        .as_deref()
+        .filter(|candidate| !candidate.is_empty())
+        .ok_or("No file path provided")?;
+    let file_path = Path::new(path);
+    let is_local_data = file_path
+        .file_name()
+        .map(|name| name == "LocalData.sav")
+        .unwrap_or(false);
+    if !is_local_data {
+        return Err("Please select the LocalData.sav file.".to_string());
+    }
+    std::fs::copy(file_path, format!("{path}.backup")).map_err(|error| error.to_string())?;
+    let local_data = std::fs::read(file_path).map_err(|error| error.to_string())?;
+    let outcome =
+        psp_core::localdata::unlock_world_map(&local_data).map_err(|error| error.to_string())?;
+    std::fs::write(file_path, outcome.sav_bytes).map_err(|error| error.to_string())?;
+    Ok(())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
