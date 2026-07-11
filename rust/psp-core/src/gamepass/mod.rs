@@ -4,6 +4,9 @@
 pub mod format;
 pub mod store;
 
+#[cfg(any(test, feature = "test-fixtures"))]
+pub mod fixture;
+
 /// Player save payloads keyed by kind, decoupled from session types.
 #[derive(Debug, Default, Clone)]
 pub struct PlayerSavBytes {
