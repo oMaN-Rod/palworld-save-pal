@@ -411,6 +411,40 @@ class TestPalSaveParameter:
         assert len(suitabilities) == len(PalObjects.StatusNames)
 
 
+class TestRelicData:
+    RELIC_KEYS = [
+        "capture_power", "hunger_reduction", "swim_speed", "food_decay_reduction",
+        "jump_power", "glider_speed", "climb_speed", "status_ailment_resist",
+        "stamina_reduction", "sphere_homing", "exp_bonus", "rainbow_passive_rate",
+        "move_speed",
+    ]
+
+    def test_relic_type_map_covers_13_unique_keys(self):
+        assert len(PalObjects.RelicTypeMap) == 13
+        assert sorted(PalObjects.RelicTypeMap.values()) == sorted(self.RELIC_KEYS)
+
+    def test_relic_type_to_status_name_maps_every_key(self):
+        for key in self.RELIC_KEYS:
+            assert key in PalObjects.RelicTypeToStatusName
+            assert PalObjects.RelicTypeToStatusName[key] in PalObjects.StatusNameMap
+
+    def test_relic_data_present_for_every_key(self):
+        for key in self.RELIC_KEYS:
+            d = PalObjects.RELIC_DATA[key]
+            assert len(d["per_rank"]) == d["max_rank"]
+            assert sum(d["per_rank"]) == d["cumulative_max"]
+
+    def test_rank_for_count_boundaries(self):
+        assert PalObjects.relic_rank_for_count("capture_power", 0) == 0
+        assert PalObjects.relic_rank_for_count("capture_power", 1) == 1
+        assert PalObjects.relic_rank_for_count("capture_power", 3) == 2
+        assert PalObjects.relic_rank_for_count("capture_power", 100) == 15
+        assert PalObjects.relic_rank_for_count("capture_power", 695) == 15
+
+    def test_rank_for_unknown_key_is_zero(self):
+        assert PalObjects.relic_rank_for_count("not_a_relic", 50) == 0
+
+
 class TestAsUuid:
     def test_from_uuid(self):
         assert PalObjects.as_uuid(TEST_UUID) == TEST_UUID
