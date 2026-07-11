@@ -2,16 +2,16 @@
 //! palworld_save_pal/ws/handlers/local_file_handler.py::process_steam_save
 //! and palworld_save_pal/ws/handlers/save_file_handler.py::load_zip_file_handler.
 //!
-//! `select_save`'s desktop-native-file-dialog / "no file selected" branch
-//! (desktop.py:93-117) is NOT part of this handler in Python either: it
-//! lives entirely in `desktop.py`'s own separate `/ws/{client_id}` endpoint,
-//! which intercepts a `select_save` message, drives a native OS file picker,
-//! and only forwards the (path-rewritten) message into the normal dispatcher
-//! when a file was actually chosen -- otherwise it responds
-//! `no_file_selected` itself and never calls `select_save_files_handler` at
-//! all. That whole layer is Phase 5 scope (ServerConfig::desktop_mode's own
-//! doc comment: "Swaps select_save/open_folder behavior in Phase 5"), so
-//! `handle_select_save` below is deliberately ignorant of desktop mode.
+//! `select_save`'s desktop-native-file-dialog / "no file selected" branch is
+//! a port of `desktop.py:93-117` (`handle_file_selection`) + `desktop.py:
+//! 129-138` (the `select_save` interception). In Python it lives entirely in
+//! `desktop.py`'s own separate `/ws/{client_id}` endpoint, which intercepts a
+//! `select_save` message, drives a native OS file picker, and only forwards
+//! the (path-rewritten) message into the normal dispatcher when a file was
+//! actually chosen -- otherwise it responds `no_file_selected` itself and
+//! never calls `select_save_files_handler` at all. Here that same behavior
+//! lives directly at the top of `handle_select_save`, gated on
+//! `ctx.app.config.desktop_mode`.
 
 use std::collections::BTreeMap;
 use std::io::{Read, Write};
@@ -37,7 +37,11 @@ use crate::messages::MessageType;
 #[derive(Debug, serde::Deserialize)]
 pub struct SelectSaveData {
     pub r#type: String,
-    pub path: String,
+    /// Required in web mode (the frontend always sends it there); absent in
+    /// desktop mode, where the frontend omits it and `handle_select_save`
+    /// resolves it via a native file dialog instead (`ui/src/routes/file/
+    /// +page.svelte:40-43`, `desktop.py:129-138`).
+    pub path: Option<String>,
     /// Wire-compat only: Python threads `local` through to `AppState.local`,
     /// which only affects the write path (later phases). Unused here.
     #[allow(dead_code)]
@@ -263,17 +267,55 @@ pub(crate) async fn select_gamepass_directory(
     Ok(())
 }
 
+/// Desktop-mode dialog flow shared by select_save and unlock_map
+/// (port of desktop.py:93-117 handle_file_selection).
+/// Ok(Some(path)) = picked+valid; Ok(None) = canceled (no_file_selected
+/// already emitted, caller returns Ok); Err = invalid pick (dispatcher emits `error`).
+async fn pick_save_file_via_dialog(
+    save_type: &str,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<Option<std::path::PathBuf>, HandlerError> {
+    let saved_dir = psp_db::settings::saved_save_dir(&ctx.app.db).await?;
+    let request = crate::desktop_dialogs::dialog_request_for(save_type, saved_dir.as_deref());
+    let Some(selected) = ctx.app.dialogs.pick_file(request).await else {
+        ctx.emitter
+            .emit(MessageType::NoFileSelected, &"No file selected");
+        return Ok(None);
+    };
+    crate::desktop_dialogs::validate_selected_file(
+        save_type,
+        &selected,
+        &crate::desktop_dialogs::application_root(),
+    )
+    .map_err(HandlerError::Other)?;
+    Ok(Some(selected))
+}
+
 pub async fn handle_select_save(
     data: SelectSaveData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
+    let mut resolved_path = data.path.clone();
+    if ctx.app.config.desktop_mode {
+        let Some(selected) = pick_save_file_via_dialog(&data.r#type, ctx).await? else {
+            return Ok(()); // canceled; no_file_selected already emitted
+        };
+        if let Some(parent_dir) = selected.parent() {
+            // Persist BEFORE loading, matching desktop.py:136.
+            psp_db::settings::update_save_dir(&ctx.app.db, &parent_dir.to_string_lossy()).await?;
+        }
+        resolved_path = Some(selected.to_string_lossy().into_owned());
+    }
+    let save_path = resolved_path
+        .ok_or_else(|| HandlerError::Other("select_save requires a path".to_string()))?;
+
     if data.r#type != "steam" {
         // Python's `select_save_files_handler` routes every non-"steam"
         // save_type to `get_gamepass_saves` (local_file_handler.py:238-252).
-        return select_gamepass_directory(&data.path, ctx).await;
+        return select_gamepass_directory(&save_path, ctx).await;
     }
 
-    let layout = validate_steam_save_directory(&data.path)?;
+    let layout = validate_steam_save_directory(&save_path)?;
     let level_sav_bytes = std::fs::read(&layout.level_sav).map_err(CoreError::Io)?;
     let level_meta_bytes = match &layout.level_meta {
         Some(meta_path) => Some(std::fs::read(meta_path).map_err(CoreError::Io)?),
@@ -287,7 +329,7 @@ pub async fn handle_select_save(
         SaveKind::Steam {
             level_path: layout.level_sav.clone(),
         },
-        data.path.clone(),
+        save_path.clone(),
         "steam",
         &level_sav_bytes,
         level_meta_bytes.as_deref(),
