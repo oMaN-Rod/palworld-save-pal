@@ -595,8 +595,8 @@ wheels = [
 
 [[package]]
 name = "palworld-save-tools"
-version = "0.23.2.dev76+gfd6bd52d6"
-source = { git = "https://github.com/oMaN-Rod/palworld-save-tools.git?rev=main#fd6bd52d6c6d0612fcb9969853ca038a65f362d3" }
+version = "0.23.2.dev80+ge395ba4cf"
+source = { git = "https://github.com/oMaN-Rod/palworld-save-tools.git?rev=main#e395ba4cfda20082401daa805f5ec51a620e127c" }
 dependencies = [
     { name = "loguru" },
     { name = "orjson" },
