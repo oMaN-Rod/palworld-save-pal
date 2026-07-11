@@ -1174,9 +1174,18 @@ pub struct UnlockMapData {
 /// bubbles to the dispatcher. Desktop mode injects `path` via a dialog in Phase 5
 /// (desktop.py:139-146 is the Python interception point).
 pub async fn handle_unlock_map(
-    data: UnlockMapData,
+    mut data: UnlockMapData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
+    if ctx.app.config.desktop_mode && data.path.is_none() {
+        let Some(selected) = pick_save_file_via_dialog("local_data", ctx).await? else {
+            return Ok(()); // canceled; no_file_selected already emitted
+        };
+        // NOTE: deliberately NO update_save_dir here (desktop.py:139-146 does
+        // not persist save_dir for unlock_map, unlike select_save).
+        data.path = Some(selected.to_string_lossy().into_owned());
+    }
+
     if let Err(failure_message) = unlock_map_on_disk(&data) {
         ctx.emitter
             .emit_error(&format!("Failed to unlock map: {failure_message}"), "");
