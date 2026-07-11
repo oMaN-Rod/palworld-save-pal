@@ -123,10 +123,11 @@ pub async fn handle_open_folder(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     if !ctx.app.config.desktop_mode {
-        ctx.emitter.emit(
-            MessageType::Warning,
-            &"open_folder is only available in the desktop app",
-        );
+        // Parity: Python registers open_folder only in the desktop WS endpoint
+        // (desktop.py); web mode has no handler, so the dispatcher discards the
+        // unknown type and sends nothing (ws/manager.py). Match that silence —
+        // never emit a wire frame web mode wouldn't. The desktop-only nav button
+        // means this branch is unreachable from the real UI.
         return Ok(());
     }
     let app_root = std::env::current_dir().map_err(psp_core::error::CoreError::Io)?;
