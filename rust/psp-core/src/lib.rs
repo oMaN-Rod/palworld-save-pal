@@ -4,6 +4,7 @@ pub mod dto;
 pub mod error;
 pub mod gamedata;
 pub mod gamepass;
+pub mod localdata;
 pub mod palbin;
 pub mod progress;
 pub mod props;
