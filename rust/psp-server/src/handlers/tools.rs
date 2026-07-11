@@ -474,3 +474,65 @@ pub async fn handle_swap_player_uids(
     ctx.emitter.emit(MessageType::SwapPlayerUids, &result);
     Ok(())
 }
+
+// ---------------------------------------------------------------------------
+// Raw-data inspector (Task 3E-5) -- port of ws/handlers/debug_handler.py's
+// get_raw_data_handler. get_guild_raw_data is a permanently dead wire type
+// (registered in the enum, never routed in bootstrap.py) and has NO handler
+// / dispatcher arm here either -- see dispatcher.rs's
+// valid_but_unimplemented_type_sends_nothing test.
+// ---------------------------------------------------------------------------
+
+#[derive(Debug, serde::Deserialize)]
+pub struct GetRawDataData {
+    pub guild_id: Option<Uuid>,
+    pub player_id: Option<Uuid>,
+    pub pal_id: Option<Uuid>,
+    pub base_id: Option<Uuid>,
+    pub item_container_id: Option<Uuid>,
+    pub character_container_id: Option<Uuid>,
+    #[serde(default)]
+    pub level: bool,
+}
+
+/// Port of `get_raw_data_handler` (`debug_handler.py:10-44`): the six ids are
+/// tried in order (guild -> player -> pal -> base -> item_container ->
+/// character_container), falling back to `level` when none is set; no save
+/// loaded, an unresolved id, or none of the seven fields set all answer
+/// `{}` (Python's own `data = {}` default, never reassigned on that path) --
+/// see `psp_core::domain::RawTarget::raw_json_for`'s own doc comment for why
+/// this response is compared STRUCTURALLY, not value-exact, against Python's
+/// fixture (Contract deviation 6).
+pub async fn handle_get_raw_data(
+    data: GetRawDataData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    use psp_core::domain::RawTarget;
+    let target = if let Some(id) = data.guild_id {
+        Some(RawTarget::Guild(id))
+    } else if let Some(id) = data.player_id {
+        Some(RawTarget::Player(id))
+    } else if let Some(id) = data.pal_id {
+        Some(RawTarget::Pal(id))
+    } else if let Some(id) = data.base_id {
+        Some(RawTarget::Base(id))
+    } else if let Some(id) = data.item_container_id {
+        Some(RawTarget::ItemContainer(id))
+    } else if let Some(id) = data.character_container_id {
+        Some(RawTarget::CharacterContainer(id))
+    } else if data.level {
+        Some(RawTarget::Level)
+    } else {
+        None
+    };
+    let payload = target
+        .and_then(|target| {
+            ctx.session
+                .save
+                .as_ref()
+                .and_then(|save| save.raw_json_for(target))
+        })
+        .unwrap_or_else(|| serde_json::json!({}));
+    ctx.emitter.emit(MessageType::GetRawData, &payload);
+    Ok(())
+}

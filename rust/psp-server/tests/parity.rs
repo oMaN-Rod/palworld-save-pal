@@ -447,6 +447,59 @@ fn compare_download_equivalent(
     Ok(())
 }
 
+/// Message types whose `data` payload is legitimately dialect-divergent
+/// between the two backends (Contract deviation 6, `rust/parity/README.md`):
+/// `get_raw_data` echoes uesave's own JSON serialization of the located save
+/// subtree on the Rust side (`psp_core::domain::raw::SaveSession::
+/// raw_json_for`), and palworld-save-tools' GVAS-dict form on the Python side
+/// (`debug_handler.py`'s `guild.save_data`/`player.save_data`/etc.) — two
+/// different, non-comparable JSON shapes for the SAME underlying save data.
+/// For a type in this list, `replay_all_fixtures` skips value-exact
+/// comparison entirely and instead only asserts (a) same message `type`
+/// (implicit — both sides are read from the SAME response index), (b) both
+/// `data` are JSON *objects*, and (c) the actual `data` is non-empty whenever
+/// the expected (Python-captured) `data` was non-empty — see
+/// `compare_raw_data_structural`. Content beyond that is deliberately
+/// UNCHECKED.
+const PARITY_STRUCTURAL_TYPES: &[&str] = &["get_raw_data"];
+
+/// Sentinel value substituted for a structurally-compared `data` field (see
+/// `PARITY_STRUCTURAL_TYPES`), matching `MASKED_PRESET_ID`'s convention —
+/// used so the aggregate `compare_responses` strict-equality pass (which
+/// only knows plain equality) doesn't re-fail on the two, necessarily
+/// different, raw `data` payloads once the real structural check below has
+/// already run.
+const MASKED_STRUCTURAL_DATA: &str = "<structural>";
+
+/// The structural (not value-exact) comparator for `PARITY_STRUCTURAL_TYPES`.
+/// Returns `Err` when either side's `data` isn't a JSON object, or when the
+/// actual side is empty while the expected side wasn't (on-the-wire proof
+/// that the Rust handler failed to resolve a target Python resolved).
+/// Deliberately does NOT compare the two objects' contents — Python and Rust
+/// emit different, non-comparable JSON dialects for the same underlying save
+/// data (see `PARITY_STRUCTURAL_TYPES`'s own doc comment).
+fn compare_raw_data_structural(
+    fixture_name: &str,
+    expected: &Value,
+    actual: &Value,
+) -> Result<(), String> {
+    let expected_data = expected["data"].as_object().ok_or_else(|| {
+        format!("{fixture_name}: expected get_raw_data frame's data is not a JSON object")
+    })?;
+    let actual_data = actual["data"].as_object().ok_or_else(|| {
+        format!("{fixture_name}: actual get_raw_data frame's data is not a JSON object")
+    })?;
+    if !expected_data.is_empty() && actual_data.is_empty() {
+        return Err(format!(
+            "{fixture_name}: expected get_raw_data data was non-empty ({} key(s)) but the \
+             actual (Rust) data is empty -- the Rust handler failed to resolve a target \
+             Python resolved",
+            expected_data.len()
+        ));
+    }
+    Ok(())
+}
+
 /// Sentinel value substituted for a server-generated preset uuid, matching
 /// `mask_ignored_paths`'s convention.
 const MASKED_PRESET_ID: &str = "<masked>";
@@ -651,6 +704,22 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
                         panic!("{message}");
                     }
                     value["data"] = Value::String(MASKED_PRESET_ID.to_string());
+                } else if PARITY_STRUCTURAL_TYPES.contains(&response_message_type.as_str()) {
+                    // get_raw_data's data is a deliberately non-comparable
+                    // JSON dialect between Python and Rust (Contract
+                    // deviation 6). Run the real (shape-only) check on the
+                    // UNMASKED pair now, then blank both sides to a shared
+                    // sentinel so the aggregate compare_responses below
+                    // doesn't re-fail on the (necessarily different) raw
+                    // objects.
+                    if let Err(message) = compare_raw_data_structural(
+                        &fixture_path.display().to_string(),
+                        expected_frame,
+                        &value,
+                    ) {
+                        panic!("{message}");
+                    }
+                    value["data"] = Value::String(MASKED_STRUCTURAL_DATA.to_string());
                 }
                 mask_ignored_paths(&response_message_type, &mut value);
                 actual_responses.push(value);
@@ -674,6 +743,8 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
                     value["type"].as_str().unwrap_or(&request_type).to_string();
                 if response_message_type == "get_presets" {
                     value["data"] = Value::String(MASKED_PRESET_ID.to_string());
+                } else if PARITY_STRUCTURAL_TYPES.contains(&response_message_type.as_str()) {
+                    value["data"] = Value::String(MASKED_STRUCTURAL_DATA.to_string());
                 }
                 mask_ignored_paths(&response_message_type, value);
             }
@@ -925,6 +996,91 @@ async fn assert_no_surplus_frame_oks_an_exhausted_stream() {
     .await;
 
     assert_eq!(result, Ok(()));
+}
+
+// ---------------------------------------------------------------------------
+// get_raw_data structural comparator (Task 3E-5). Proves
+// compare_raw_data_structural discriminates: a Rust-side failure to resolve
+// a target Python resolved must be caught, while two non-empty (but
+// CONTENT-different — different JSON dialects, see PARITY_STRUCTURAL_TYPES's
+// own doc comment) objects must NOT be flagged.
+// ---------------------------------------------------------------------------
+
+/// Expected non-empty, actual empty -> the discriminating failure case: Rust
+/// failed to resolve a target Python resolved.
+#[test]
+fn compare_raw_data_structural_errs_when_actual_is_empty_but_expected_was_not() {
+    let expected = serde_json::json!({"type": "get_raw_data", "data": {"key": "SaveData.Guild"}});
+    let actual = serde_json::json!({"type": "get_raw_data", "data": {}});
+
+    let error =
+        compare_raw_data_structural("fixtures/tools/005_get_raw_data.json", &expected, &actual)
+            .expect_err("an unresolved Rust target when Python resolved one must be reported");
+    assert!(
+        error.contains("fixtures/tools/005_get_raw_data.json"),
+        "error must name the offending fixture; got: {error}"
+    );
+    assert!(
+        error.contains("failed to resolve"),
+        "error must explain why it failed; got: {error}"
+    );
+}
+
+/// Both sides empty (neither backend resolved a target — e.g. no save
+/// loaded, or none of the seven fields set) -> compares clean.
+#[test]
+fn compare_raw_data_structural_oks_both_sides_empty() {
+    let expected = serde_json::json!({"type": "get_raw_data", "data": {}});
+    let actual = serde_json::json!({"type": "get_raw_data", "data": {}});
+
+    assert_eq!(
+        compare_raw_data_structural("fixtures/tools/005_get_raw_data.json", &expected, &actual),
+        Ok(())
+    );
+}
+
+/// Both sides non-empty but with COMPLETELY DIFFERENT content (Python's
+/// GVAS-dict dialect vs. Rust's uesave-serde dialect for the very same
+/// underlying save subtree) -> still compares clean. This is the whole point
+/// of the structural comparator: a naive `actual == expected` (what
+/// `compare_responses` does for every other message type) would fail here on
+/// content alone, proving that path is NOT what decides `get_raw_data`
+/// fixtures.
+#[test]
+fn compare_raw_data_structural_oks_non_empty_sides_with_differing_content() {
+    let expected = serde_json::json!({
+        "type": "get_raw_data",
+        "data": {"GroupType": "EPalGroupType::Guild", "group_name": "The Guild"}
+    });
+    let actual = serde_json::json!({
+        "type": "get_raw_data",
+        "data": {"key": {"struct": {}}, "value": {"struct": {"RawData": {"struct": {}}}}}
+    });
+
+    assert_eq!(
+        compare_raw_data_structural("fixtures/tools/005_get_raw_data.json", &expected, &actual),
+        Ok(())
+    );
+}
+
+/// Either side's `data` not even being a JSON object (a malformed fixture,
+/// or a response shape this comparator was never meant to see) is reported,
+/// not silently treated as "empty".
+#[test]
+fn compare_raw_data_structural_errs_when_data_is_not_an_object() {
+    let expected = serde_json::json!({"type": "get_raw_data", "data": "not-an-object"});
+    let actual = serde_json::json!({"type": "get_raw_data", "data": {}});
+    let error =
+        compare_raw_data_structural("fixtures/tools/005_get_raw_data.json", &expected, &actual)
+            .expect_err("a non-object expected data must be reported");
+    assert!(error.contains("not a JSON object"), "got: {error}");
+
+    let expected = serde_json::json!({"type": "get_raw_data", "data": {}});
+    let actual = serde_json::json!({"type": "get_raw_data", "data": [1, 2, 3]});
+    let error =
+        compare_raw_data_structural("fixtures/tools/005_get_raw_data.json", &expected, &actual)
+            .expect_err("a non-object actual data must be reported");
+    assert!(error.contains("not a JSON object"), "got: {error}");
 }
 
 // ---------------------------------------------------------------------------

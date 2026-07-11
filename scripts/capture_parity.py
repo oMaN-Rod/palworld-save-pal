@@ -248,11 +248,64 @@ DB_UPS_SCENARIO = (
     ],
 )
 
+# Task 3E-5: the tools surface's remaining unexercised requests --
+# convert_steam_id's non-uid input shapes (a vanity URL, garbage input, and a
+# non-standard-length hex string), swap_player_uids's no-save error path, and
+# get_raw_data's no-save/no-target-set empty-object path. No save is loaded
+# (matches convert_steam_id/swap_player_uids' own no-save-needed nature), so
+# this needs no --save-dir and, unlike db-presets/db-ups, touches no psp.db
+# table at all (same as the transfer scenario) -- back the DB up anyway as
+# defensive practice; see rust/parity/README.md, "tools scenario".
+#
+# get_raw_data's captured `data` is compared STRUCTURALLY, not value-exact,
+# by parity.rs's PARITY_STRUCTURAL_TYPES (Contract deviation 6: Rust's
+# get_raw_data echoes uesave's own JSON dialect, Python's echoes
+# palworld-save-tools' GVAS-dict form -- two different, non-comparable JSON
+# shapes for the SAME underlying save data). With no save loaded here, both
+# backends answer `{}` for it -- a live-save fixture that exercises a
+# resolved (non-empty) target belongs in a future save-backed corpus, not
+# this one.
+TOOLS_SCENARIO = (
+    "tools",
+    [
+        {"type": "convert_steam_id", "data": {"steam_input": "76561198000000001"}},
+        {
+            "type": "convert_steam_id",
+            "data": {"steam_input": "https://steamcommunity.com/id/vanity"},
+        },
+        {"type": "convert_steam_id", "data": {"steam_input": "garbage!!"}},
+        {
+            "type": "convert_steam_id",
+            "data": {"steam_input": "AABBCCDD000000000000000000000000"},
+        },
+        {
+            "type": "swap_player_uids",
+            "data": {
+                "old_player_uid": "55555555-5555-5555-5555-555555555555",
+                "new_player_uid": "55555555-5555-5555-5555-555555555555",
+            },
+        },
+        {
+            "type": "get_raw_data",
+            "data": {
+                "guild_id": None,
+                "player_id": None,
+                "pal_id": None,
+                "base_id": None,
+                "item_container_id": None,
+                "character_container_id": None,
+                "level": False,
+            },
+        },
+    ],
+)
+
 # Scenarios with a fixed request list, independent of any on-disk save.
 FIXED_SCENARIOS = {
     "static-data": STATIC_DATA_SCENARIO,
     DB_PRESETS_SCENARIO[0]: DB_PRESETS_SCENARIO[1],
     DB_UPS_SCENARIO[0]: DB_UPS_SCENARIO[1],
+    TOOLS_SCENARIO[0]: TOOLS_SCENARIO[1],
 }
 
 # Scenarios that build their request list from a corpus save directory

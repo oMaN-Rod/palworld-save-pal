@@ -73,3 +73,105 @@ async fn swap_player_uids_without_save_errors() {
     assert_eq!(response["data"]["error"], "No save file loaded.");
     server.handle.shutdown().await;
 }
+
+// ---------------------------------------------------------------------------
+// get_raw_data (Task 3E-5) -- port of ws/handlers/debug_handler.py's
+// get_raw_data_handler. get_raw_data's `data` payload is compared
+// STRUCTURALLY, not value-exact, by the parity replay (Contract deviation 6 --
+// see psp_core::domain::raw and rust/parity/README.md), so these WS-level
+// tests only pin the SHAPE the handler produces (empty object vs. resolved
+// non-empty object), never its exact field content.
+// ---------------------------------------------------------------------------
+
+#[tokio::test]
+async fn get_raw_data_without_resolvable_target_returns_empty_object() {
+    let server = common::start_test_server().await;
+    let mut ws = common::connect(&server).await;
+    common::send_json(
+        &mut ws,
+        serde_json::json!({"type": "get_raw_data", "data": {
+            "guild_id": null, "player_id": null, "pal_id": null, "base_id": null,
+            "item_container_id": null, "character_container_id": null, "level": false}}),
+    )
+    .await;
+    let response = common::next_json(&mut ws).await;
+    assert_eq!(response["type"], "get_raw_data");
+    assert_eq!(response["data"], serde_json::json!({}));
+
+    // get_guild_raw_data has no handler in Python either — parity is SILENCE
+    // (the dispatcher's error object is discarded by manager.py:35). Prove the
+    // silence by ordering: send the dead type, then a live probe; the very next
+    // frame must answer the probe, meaning the dead type emitted nothing.
+    common::send_json(
+        &mut ws,
+        serde_json::json!({"type": "get_guild_raw_data", "data": null}),
+    )
+    .await;
+    common::send_json(
+        &mut ws,
+        serde_json::json!({"type": "get_raw_data", "data": {
+            "guild_id": null, "player_id": null, "pal_id": null, "base_id": null,
+            "item_container_id": null, "character_container_id": null, "level": false}}),
+    )
+    .await;
+    let next_frame = common::next_json(&mut ws).await;
+    assert_eq!(next_frame["type"], "get_raw_data");
+
+    server.handle.shutdown().await;
+}
+
+/// Always-run (uses the committed `tests/fixtures/saves/world1` fixture, not
+/// `PSP_TEST_SAVE_DIR`-gated): once a real save is loaded, `level: true`
+/// resolves `RawTarget::Level` to the whole GVAS root — a non-empty JSON
+/// object carrying at least the `properties` field `raw_json_for`'s doc
+/// comment says `Root` serializes to. `level` is used (rather than a
+/// player/pal/guild id) because it needs no id harvested from an earlier
+/// response burst — the loaded save always resolves it.
+#[tokio::test]
+async fn get_raw_data_level_resolves_against_a_loaded_world1_save() {
+    let server = common::start_test_server().await;
+    let mut ws = common::connect(&server).await;
+
+    let level_sav = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("../../tests/fixtures/saves/world1/Level.sav")
+        .to_string_lossy()
+        .into_owned();
+    common::send_json(
+        &mut ws,
+        serde_json::json!({"type": "select_save",
+            "data": {"type": "steam", "path": level_sav, "local": false}}),
+    )
+    .await;
+    // Drain the select_save response burst -- get_guild_summaries is its
+    // last frame on a successful load (mirrors phase2_ws.rs::load_world1).
+    loop {
+        let frame = common::next_json(&mut ws).await;
+        if frame["type"] == "get_guild_summaries" {
+            break;
+        }
+    }
+
+    common::send_json(
+        &mut ws,
+        serde_json::json!({"type": "get_raw_data", "data": {
+            "guild_id": null, "player_id": null, "pal_id": null, "base_id": null,
+            "item_container_id": null, "character_container_id": null, "level": true}}),
+    )
+    .await;
+    let response = common::next_json(&mut ws).await;
+    assert_eq!(response["type"], "get_raw_data");
+    let data = response["data"]
+        .as_object()
+        .expect("get_raw_data's data must be a JSON object once a save is loaded");
+    assert!(
+        !data.is_empty(),
+        "level: true must resolve to a non-empty object once a save is loaded"
+    );
+    assert!(
+        data.contains_key("properties"),
+        "expected the serialized GVAS root's properties field, got keys {:?}",
+        data.keys().collect::<Vec<_>>()
+    );
+
+    server.handle.shutdown().await;
+}

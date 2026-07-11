@@ -280,6 +280,12 @@ async fn route(
         MessageType::SwapPlayerUids => {
             handlers::tools::handle_swap_player_uids(serde_json::from_value(data)?, ctx).await
         }
+        // Task 3E-5: raw-data inspector. NO arm for GetGuildRawData -- a
+        // permanently dead wire type, see
+        // valid_but_unimplemented_type_sends_nothing below.
+        MessageType::GetRawData => {
+            handlers::tools::handle_get_raw_data(serde_json::from_value(data)?, ctx).await
+        }
         // Remaining arms are added by Phases 1-6.
         other => {
             tracing::warn!(

@@ -309,6 +309,11 @@ expected to legitimately differ (timestamps, generated uuids,
 Python-serializer quirks). A mask that swallows more than the specific field
 it names turns a passing test into a lie.
 
+`get_raw_data` (Task 3E-5) is NOT handled by a `PARITY_IGNORED_PATHS` entry
+either — like `get_presets`, its `data` needs a dedicated comparator
+(`compare_raw_data_structural`, gated by `PARITY_STRUCTURAL_TYPES`) rather
+than a fixed-pointer mask; see "tools scenario" below for why.
+
 ## db-presets scenario (Phase 3, Task 3B-3)
 
 Exercises the presets CRUD surface against a FRESH presets table:
@@ -637,3 +642,93 @@ corpus, like every other, is local-only — regenerate, never commit. With no
 transfer fixtures present (the CI/default state, and every state in THIS
 checkout), the replay simply never iterates a `transfer` directory — that is
 correct, not a failure.
+
+## tools scenario (Phase 3, Task 3E-5 — final Phase-3 corpus)
+
+A FIXED_SCENARIOS list (`TOOLS_SCENARIO` in `scripts/capture_parity.py`),
+independent of any on-disk save — no `--save-dir` needed. Exercises the
+remaining tools-surface requests no earlier corpus covers:
+`convert_steam_id` (a vanity-URL input and a garbage input — the plain-uid
+and steam-id shapes are already golden-vector-validated at the unit level in
+Task 3E-1, and `static-data`/`phase2` don't touch this handler at all), a
+same-uid `swap_player_uids` call against a save-less backend (its `{"error":
+"No save file loaded."}` soft-rejection path), and a `get_raw_data` call with
+every id `null`/`level: false` (its `{}` empty-object path). No save is
+loaded for any of it.
+
+**Why `get_raw_data` needs a structural comparator, not
+`PARITY_IGNORED_PATHS`.** `get_raw_data`'s `data` is two DIFFERENT,
+non-comparable JSON dialects for the same underlying save subtree (Contract
+deviation 6): Python's `debug_handler.py` returns
+`guild.save_data`/`player.save_data`/`pal.character_save`/etc. —
+palworld-save-tools' GVAS-dict form — while Rust's
+`psp_core::domain::raw::SaveSession::raw_json_for` serializes uesave's own
+typed tree straight through serde. Neither a `PARITY_IGNORED_PATHS` field
+mask nor a value-exact `compare_responses` pass can reconcile two
+independently-shaped dialects of the SAME data (unlike, say, `add_pal`'s
+freshly-minted `instance_id`, which differs in VALUE but agrees in SHAPE).
+`parity.rs`'s `PARITY_STRUCTURAL_TYPES` list (currently `["get_raw_data"]`)
+routes this type to `compare_raw_data_structural` instead: it asserts both
+sides' `data` are JSON objects, and that the actual (Rust) side is non-empty
+whenever the expected (Python) side was — i.e. "did Rust resolve a target
+when Python did" — never comparing the two objects' CONTENT. With no save
+loaded (this scenario's only `get_raw_data` fixture), both sides answer `{}`
+and the check is a trivial pass; a fixture that resolves a real, non-empty
+target belongs in a future save-backed corpus (see this task's report for
+why one wasn't added here — Contract deviation 6 already made the payload
+content non-comparable, so a live-save capture would add coverage of "does
+Rust panic/error resolving a real target" without adding any NEW comparable
+assertion `psp-server`'s own always-run `tools_ws.rs::
+get_raw_data_level_resolves_against_a_loaded_world1_save` test doesn't
+already cover locally).
+
+**`get_guild_raw_data` is NOT in this scenario.** It is a permanently dead
+wire type (registered in `MessageType`, never routed in Python's
+`bootstrap.py` nor in `dispatcher.rs`'s `route`) — sending it produces no
+response on either backend, which `capture_parity.py`'s
+burst-until-`IDLE_SECONDS`-silence capture loop would record as a
+zero-response fixture carrying no assertion at all. The dispatcher-level
+silence itself is already covered without a capture, by
+`psp-server/tests/dispatcher.rs::valid_but_unimplemented_type_sends_nothing`
+and `psp-server/tests/ws_integration.rs::registered_but_unimplemented_type_
+is_silent`.
+
+### Safe capture procedure
+
+**Same discipline as db-presets/db-ups/gps/transfer: the backend's `psp.db`
+lives at the repo root and may hold the developer's real, hand-curated data.
+This scenario touches NO `psp.db` table (no `get_settings`/`sync_app_state`/
+DB-CRUD request is in its sequence, and no save is loaded), but back it up
+anyway as defensive practice.**
+
+1. From the repo root, back up and move the existing `psp.db` ASIDE (don't
+   delete it):
+   `mv psp.db psp.db.tools-parity-backup` (PowerShell:
+   `Move-Item psp.db psp.db.tools-parity-backup`).
+2. Start the Python backend on a port your real client isn't using — the
+   default 5174 may already be held by a running desktop build (`PSP.exe`)/
+   dev server:
+   `uv run python psp.py --port 5199`
+3. From the repo root, capture against that same port:
+   `uv run --with websockets scripts/capture_parity.py --scenario tools --url ws://127.0.0.1:5199/ws/999999999`
+   Fixtures land in `rust/parity/fixtures/tools/`.
+4. Stop the Python backend (Ctrl+C).
+5. Delete the FRESH `psp.db` this run created, then restore the developer's
+   original:
+   `rm psp.db` then `mv psp.db.tools-parity-backup psp.db`
+   (PowerShell: `Remove-Item psp.db` then
+   `Move-Item psp.db.tools-parity-backup psp.db`).
+6. From `rust/`: `cargo test -p psp-server --test parity` — replays `tools`
+   (and every other captured corpus) against a fresh Rust temp DB.
+
+Fixtures are gitignored (`rust/.gitignore`'s `/parity/fixtures/`); this
+corpus, like every other, is local-only — regenerate, never commit. With no
+tools fixtures present (the CI/default state, and every state in THIS
+checkout), the replay simply never iterates a `tools` directory — that is
+correct, not a failure. `compare_raw_data_structural`'s own correctness is
+proven independently of any live fixture by four synthetic unit tests in
+`parity.rs` (`compare_raw_data_structural_errs_when_actual_is_empty_but_
+expected_was_not`, `compare_raw_data_structural_oks_both_sides_empty`,
+`compare_raw_data_structural_oks_non_empty_sides_with_differing_content`,
+`compare_raw_data_structural_errs_when_data_is_not_an_object`), mirroring the
+`get_presets`/db-ups/gps comparators' own synthetic-test pattern above.
