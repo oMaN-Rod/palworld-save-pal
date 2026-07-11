@@ -6,20 +6,34 @@
 
 mod common;
 
-fn python_testdata_or_skip() -> Option<std::path::PathBuf> {
-    let dir = psp_core::gamepass::fixture::python_testdata_dir();
-    if dir.is_none() {
-        eprintln!("SKIP: python testdata not found (set PSP_PY_TESTDATA)");
-    }
-    dir
+/// Repo root, resolved from this crate's manifest dir (mirrors
+/// `phase2_ws.rs`'s `repo_root()`): `rust/psp-server/../..`.
+fn repo_root() -> std::path::PathBuf {
+    std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("..")
+        .join("..")
 }
 
 #[tokio::test]
 async fn gamepass_scan_and_management_flow() {
-    let Some(testdata) = python_testdata_or_skip() else {
-        return;
-    };
-    let meta_bytes = std::fs::read(testdata.join("LevelMeta.sav")).unwrap();
+    // Seed the synthetic wgs tree with the COMMITTED, always-present
+    // `tests/fixtures/saves/world1/LevelMeta.sav` (a real PlM1/Oodle save
+    // that `savio::read_sav_bytes` + `scan` parse for the world name) rather
+    // than the `PSP_PY_TESTDATA`-gated fixture — so this test RUNS
+    // unconditionally in a fresh clone / CI, exercising the brand-new
+    // scan/delete/rename WS handlers with real assertions. (The gamepass
+    // `backups/gamepass/` corpus is gitignored/local-only and is NOT a
+    // CI-safe fixture source.)
+    let meta_bytes =
+        std::fs::read(repo_root().join("tests/fixtures/saves/world1/LevelMeta.sav")).unwrap();
+
+    // The world name scan should extract from those committed fixture bytes.
+    let expected_world_name =
+        psp_core::gamepass::scan::world_name_from_level_meta(&meta_bytes).unwrap();
+    assert!(
+        !expected_world_name.is_empty(),
+        "committed LevelMeta fixture must yield a non-empty world name"
+    );
 
     let gamepass_root = tempfile::tempdir().unwrap();
     let player_id = uuid::Uuid::new_v4();
@@ -37,6 +51,7 @@ async fn gamepass_scan_and_management_flow() {
             dps: Some(b"D".to_vec()),
         }],
     };
+
     psp_core::gamepass::fixture::build_wgs_tree(gamepass_root.path(), &[save]).unwrap();
     std::env::set_var("PSP_GAMEPASS_PACKAGES_ROOT", gamepass_root.path());
     std::env::set_var("PSP_BACKUPS_ROOT", gamepass_root.path().join("backups"));
@@ -53,7 +68,10 @@ async fn gamepass_scan_and_management_flow() {
     let response = common::next_json(&mut ws).await;
     assert_eq!(response["type"], "scan_gamepass_saves");
     assert!(response["data"]["container_path"].is_string());
-    assert!(response["data"]["saves"][save_id]["world_name"].is_string());
+    assert_eq!(
+        response["data"]["saves"][save_id]["world_name"],
+        expected_world_name
+    );
     assert_eq!(response["data"]["saves"][save_id]["player_count"], 1);
 
     // rename world
