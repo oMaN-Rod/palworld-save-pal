@@ -247,6 +247,22 @@ async fn route(
         MessageType::ExportUpsPal => {
             handlers::ups::handle_export_ups_pal(serde_json::from_value(data)?, ctx).await
         }
+        // Task 3D-2: GPS websocket handlers. NO arm for GetGpsPals -- a
+        // permanently dead wire type, see dispatcher::tests::
+        // valid_but_unimplemented_type_sends_nothing.
+        MessageType::RequestGps => handlers::gps::handle_request_gps(ctx).await,
+        MessageType::AddGpsPal => {
+            handlers::gps::handle_add_gps_pal(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::CloneGpsPal => {
+            handlers::gps::handle_clone_gps_pal(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::DeleteGpsPals => {
+            handlers::gps::handle_delete_gps_pals(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::CloneGpsPalToPlayer => {
+            handlers::gps::handle_clone_gps_pal_to_player(serde_json::from_value(data)?, ctx).await
+        }
         // Remaining arms are added by Phases 1-6.
         other => {
             tracing::warn!(
