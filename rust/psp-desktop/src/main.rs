@@ -1,7 +1,124 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+use std::net::{IpAddr, Ipv4Addr};
+use std::path::PathBuf;
+use std::sync::Mutex;
+
+use tauri::{Manager, RunEvent, WebviewUrl, WebviewWindowBuilder};
+
+const SERVER_PORT: u16 = 5174;
+
+/// Holds the running embedded server so the exit handler can shut it down.
+struct EmbeddedServer(Mutex<Option<psp_server::ServerHandle>>);
+
+struct AssetDirs {
+    ui_dir: PathBuf,
+    data_dir: PathBuf,
+    db_path: PathBuf,
+}
+
+/// Packaged app: serve bundled resources, keep mutable state (DB, backups/) in
+/// the per-user app data dir. Dev (`cargo run` from the repo root): use the
+/// repo's ui_build/ and data/ directly.
+fn resolve_asset_dirs(app: &tauri::AppHandle) -> anyhow::Result<AssetDirs> {
+    if let Ok(resource_dir) = app.path().resource_dir() {
+        let bundled_ui = resource_dir.join("ui");
+        if bundled_ui.join("index.html").is_file() {
+            let app_data_dir = app.path().app_data_dir()?;
+            std::fs::create_dir_all(&app_data_dir)?;
+            // backups/ and open_folder("psp_root") resolve against cwd
+            // (psp-server convention); point it at the writable app data dir.
+            std::env::set_current_dir(&app_data_dir)?;
+            return Ok(AssetDirs {
+                ui_dir: bundled_ui,
+                data_dir: resource_dir.join("data"),
+                db_path: app_data_dir.join("psp-rs.db"),
+            });
+        }
+    }
+    let repo_root = std::env::current_dir()?;
+    anyhow::ensure!(
+        repo_root.join("ui_build").join("index.html").is_file(),
+        "ui_build/index.html not found — run scripts/build-ui-desktop before `cargo run -p psp-desktop`, from the repo root"
+    );
+    Ok(AssetDirs {
+        ui_dir: repo_root.join("ui_build"),
+        data_dir: repo_root.join("data"),
+        db_path: repo_root.join("psp-rs.db"),
+    })
+}
+
 fn main() {
+    tracing_subscriber::fmt()
+        .with_env_filter(
+            tracing_subscriber::EnvFilter::try_from_default_env()
+                .unwrap_or_else(|_| tracing_subscriber::EnvFilter::new("info")),
+        )
+        .init();
+
     tauri::Builder::default()
-        .run(tauri::generate_context!())
-        .expect("failed to run Palworld Save Pal desktop app");
+        // Replaces desktop.py's temp-dir lock file (desktop.py:273-381):
+        // a second launch triggers this callback in the FIRST instance,
+        // which focuses the existing window; the second process exits.
+        .plugin(tauri_plugin_single_instance::init(|app, _argv, _cwd| {
+            if let Some(main_window) = app.get_webview_window("main") {
+                let _ = main_window.unminimize();
+                let _ = main_window.set_focus();
+            }
+        }))
+        .manage(EmbeddedServer(Mutex::new(None)))
+        .setup(|app| {
+            let app_handle = app.handle().clone();
+            let asset_dirs = resolve_asset_dirs(&app_handle)?;
+
+            let server_config = psp_server::ServerConfig {
+                host: IpAddr::V4(Ipv4Addr::LOCALHOST),
+                port: SERVER_PORT,
+                ui_dir: asset_dirs.ui_dir,
+                data_dir: asset_dirs.data_dir,
+                db_path: asset_dirs.db_path,
+                desktop_mode: true,
+            };
+
+            // start_server binds the listener before returning, so once this
+            // await completes the URL below is live — no sleep, no polling
+            // (replaces desktop.py:440's time.sleep(2)).
+            let server_handle =
+                tauri::async_runtime::block_on(psp_server::start_server(server_config))?;
+            let server_url: tauri::Url = format!("http://{}", server_handle.addr).parse()?;
+            tracing::info!("embedded server listening on {}", server_handle.addr);
+
+            app_handle
+                .state::<EmbeddedServer>()
+                .0
+                .lock()
+                .expect("server state mutex poisoned")
+                .replace(server_handle);
+
+            // desktop.py:231-237 — title, 1366x768, min 1366x768.
+            WebviewWindowBuilder::new(&app_handle, "main", WebviewUrl::External(server_url))
+                .title(format!("Palworld Save Pal v{}", env!("CARGO_PKG_VERSION")))
+                .inner_size(1366.0, 768.0)
+                .min_inner_size(1366.0, 768.0)
+                .build()?;
+
+            Ok(())
+        })
+        .build(tauri::generate_context!())
+        .expect("failed to build Palworld Save Pal desktop app")
+        .run(|app, event| {
+            if let RunEvent::Exit = event {
+                // Graceful shutdown (replaces desktop.py on_closed + psutil
+                // child cleanup — the server is in-process, nothing to kill).
+                let taken = app
+                    .state::<EmbeddedServer>()
+                    .0
+                    .lock()
+                    .expect("server state mutex poisoned")
+                    .take();
+                if let Some(server_handle) = taken {
+                    tauri::async_runtime::block_on(server_handle.shutdown());
+                }
+            }
+        });
 }
