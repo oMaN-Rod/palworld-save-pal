@@ -230,7 +230,7 @@ class Player(BaseModel):
             ]: PalObjects.get_value(item["StatusPoint"])
             for item in status_point_list
             if "StatusName" in item
-            and PalObjects.get_value(item["StatusName"]) != "None"
+            and PalObjects.get_value(item["StatusName"]) in PalObjects.StatusNameMap
         }
 
     @status_point_list.setter
@@ -262,6 +262,8 @@ class Player(BaseModel):
                 PalObjects.get_value(item["StatusName"])
             ]: PalObjects.get_value(item["StatusPoint"])
             for item in ext_status_point_list
+            if "StatusName" in item
+            and PalObjects.get_value(item["StatusName"]) in PalObjects.ExStatusNameMap
         }
 
     @ext_status_point_list.setter

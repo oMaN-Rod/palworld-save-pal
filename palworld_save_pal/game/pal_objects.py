@@ -390,6 +390,18 @@ class PalObjects:
         "所持重量": "weight",
         "捕獲率": "capture_rate",
         "作業速度": "work_speed",
+        "空腹率低減": "hunger_reduction",
+        "泳ぎ速度": "swim_speed",
+        "食料腐敗低減": "food_decay_reduction",
+        "ジャンプ力": "jump_power",
+        "滑空速度": "glider_speed",
+        "崖登り速度": "climb_speed",
+        "状態異常耐性": "status_ailment_resist",
+        "経験値ボーナス": "exp_bonus",
+        "虹パッシブ率": "rainbow_passive_rate",
+        "移動速度アップ": "move_speed",
+        "パルスフィアホーミング": "sphere_homing",
+        "スタミナ消費軽減": "stamina_reduction",
     }
 
     ExStatusNames = [

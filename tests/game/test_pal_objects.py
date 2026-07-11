@@ -181,9 +181,7 @@ class TestByteEnumGetSet:
 
 class TestArrayProperties:
     def test_array_property_values(self):
-        p = PalObjects.ArrayPropertyValues(
-            ArrayType.ENUM_PROPERTY, ["a", "b"]
-        )
+        p = PalObjects.ArrayPropertyValues(ArrayType.ENUM_PROPERTY, ["a", "b"])
         assert p["type"] == "ArrayProperty"
         assert p["array_type"] == "EnumProperty"
         assert PalObjects.get_array_property(p) == ["a", "b"]
@@ -194,9 +192,7 @@ class TestArrayProperties:
         assert p["value"] is None
 
     def test_array_property_with_custom_type(self):
-        p = PalObjects.ArrayProperty(
-            ArrayType.BYTE_PROPERTY, custom_type="custom"
-        )
+        p = PalObjects.ArrayProperty(ArrayType.BYTE_PROPERTY, custom_type="custom")
         assert p["custom_type"] == "custom"
 
     def test_get_array_property_empty(self):
@@ -317,6 +313,43 @@ class TestStatusPointStruct:
         assert sp["StatusPoint"]["value"] == 100
 
 
+class TestStatusNameMap:
+    # Every EPalRelicType (Pal_enums.hpp) surfaces in GotStatusPointList as one
+    # of these names; StatusNameMap must map all of them or the player's
+    # relic-derived status points get dropped.
+    RELIC_STATUS_NAMES = [
+        "捕獲率",  # CapturePower
+        "空腹率低減",  # HungerReduction
+        "泳ぎ速度",  # SwimSpeed
+        "食料腐敗低減",  # FoodDecayReduction
+        "ジャンプ力",  # JumpPower
+        "滑空速度",  # GliderSpeed
+        "崖登り速度",  # ClimbSpeed
+        "状態異常耐性",  # StatusAilmentResist
+        "スタミナ消費軽減",  # StaminaReduction
+        "パルスフィアホーミング",  # SphereHoming
+        "経験値ボーナス",  # ExpBonus
+        "虹パッシブ率",  # RainbowPassiveRate
+        "移動速度アップ",  # MoveSpeed
+    ]
+
+    def test_all_relic_status_names_mapped(self):
+        missing = [
+            n for n in self.RELIC_STATUS_NAMES if n not in PalObjects.StatusNameMap
+        ]
+        assert missing == []
+
+    def test_english_keys_are_unique(self):
+        values = list(PalObjects.StatusNameMap.values())
+        assert len(values) == len(set(values))
+
+    def test_status_names_template_is_base_only(self):
+        for relic_name in self.RELIC_STATUS_NAMES:
+            if relic_name == "捕獲率":
+                continue  # a base stat as well
+            assert relic_name not in PalObjects.StatusNames
+
+
 # ---------------------------------------------------------------------------
 # PalSaveParameter
 # ---------------------------------------------------------------------------
@@ -334,23 +367,31 @@ class TestPalSaveParameter:
 
     def test_character_id(self, mock_pal_save_parameter):
         psp = mock_pal_save_parameter
-        save_param = psp["value"]["RawData"]["value"]["object"]["SaveParameter"]["value"]
+        save_param = psp["value"]["RawData"]["value"]["object"]["SaveParameter"][
+            "value"
+        ]
         assert save_param["CharacterID"]["value"] == "Lambball"
 
     def test_gender(self, mock_pal_save_parameter):
         psp = mock_pal_save_parameter
-        save_param = psp["value"]["RawData"]["value"]["object"]["SaveParameter"]["value"]
+        save_param = psp["value"]["RawData"]["value"]["object"]["SaveParameter"][
+            "value"
+        ]
         assert save_param["Gender"]["value"]["value"] == "EPalGenderType::Male"
 
     def test_active_skills(self, mock_pal_save_parameter):
         psp = mock_pal_save_parameter
-        save_param = psp["value"]["RawData"]["value"]["object"]["SaveParameter"]["value"]
+        save_param = psp["value"]["RawData"]["value"]["object"]["SaveParameter"][
+            "value"
+        ]
         skills = PalObjects.get_array_property(save_param["EquipWaza"])
         assert skills == ["EPalWazaID::AirCanon"]
 
     def test_passive_skills(self, mock_pal_save_parameter):
         psp = mock_pal_save_parameter
-        save_param = psp["value"]["RawData"]["value"]["object"]["SaveParameter"]["value"]
+        save_param = psp["value"]["RawData"]["value"]["object"]["SaveParameter"][
+            "value"
+        ]
         passives = PalObjects.get_array_property(save_param["PassiveSkillList"])
         assert passives == ["Legend"]
 
@@ -363,10 +404,10 @@ class TestPalSaveParameter:
             slot_idx=0,
             group_id=UUID("abcdef01-abcd-abcd-abcd-abcdef012345"),
         )
-        save_param = psp["value"]["RawData"]["value"]["object"]["SaveParameter"]["value"]
-        suitabilities = PalObjects.get_array_property(
-            save_param["GotStatusPointList"]
-        )
+        save_param = psp["value"]["RawData"]["value"]["object"]["SaveParameter"][
+            "value"
+        ]
+        suitabilities = PalObjects.get_array_property(save_param["GotStatusPointList"])
         assert len(suitabilities) == len(PalObjects.StatusNames)
 
 
