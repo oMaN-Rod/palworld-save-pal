@@ -2,8 +2,8 @@
 pub mod docker;
 pub mod docker_mods;
 pub mod native_config;
+pub mod native_mods;
 pub mod palworld_api;
-// pub mod native_mods;     // Task 8
 // pub mod native_process;  // Task 9
 
 #[derive(Debug, thiserror::Error)]
