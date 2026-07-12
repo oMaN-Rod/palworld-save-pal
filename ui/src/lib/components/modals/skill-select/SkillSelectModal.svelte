@@ -33,7 +33,7 @@
 		let skills = [];
 		if (type === 'Active') {
 			skills = Object.values(activeSkillsData.activeSkills)
-				.filter((skill) => isSkillAvailableForCharacter(skill.id, pal.character_key))
+				.filter((skill) => !pal || isSkillAvailableForCharacter(skill.id, pal.character_key))
 				.sort((a, b) => a.details.element.localeCompare(b.details.element))
 				.map((s) => ({
 					value: s.id,

@@ -4,7 +4,7 @@
 	import { PawPrint, Trash2, Trash } from '@lucide/svelte';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
-	import { getModalState, getToastState } from '$states';
+	import { getAppState, getModalState, getToastState } from '$states';
 	import { send, sendAndWait } from '$lib/utils/websocketUtils';
 	import { MessageType, type PalSummary } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
@@ -12,13 +12,34 @@
 	import { assetLoader } from '$utils';
 	import { filterBySearch } from './bulk.utils';
 	import BulkSelectionBanner from './BulkSelectionBanner.svelte';
+	import PalDetailPanel from './PalDetailPanel.svelte';
 
 	let { selected = $bindable(new Set<string>()) }: { selected?: Set<string> } = $props();
 
 	type PalRow = PalSummary & { species_name: string };
 
+	const appState = getAppState();
 	const modal = getModalState();
 	const toast = getToastState();
+	let detailOpen = $state(false);
+	let detailPalId = $state<string | null>(null);
+
+	function openDetail(row: PalRow) {
+		detailPalId = row.instance_id;
+		detailOpen = true;
+		if (row.owner_uid) {
+			appState.bulkDetailPlayer = undefined;
+			appState.loadPlayerDetailsForBulk(row.owner_uid);
+		} else if (row.guild_id) {
+			appState.bulkDetailGuild = undefined;
+			appState.loadGuildDetailsForBulk(row.guild_id);
+		}
+	}
+
+	function closeDetail() {
+		detailOpen = false;
+		detailPalId = null;
+	}
 
 	// $state.raw: rows are read-only display data, reassigned wholesale on refetch.
 	// Deep-proxying 1700+ rows makes the allRows map take seconds in dev.
@@ -168,7 +189,14 @@
 				/>
 			</div>
 		{:else}
-			<Table {rows} {columns} rowKey={(row) => row.instance_id} pageSize={15} bind:selected>
+			<Table
+				{rows}
+				{columns}
+				rowKey={(row) => row.instance_id}
+				pageSize={15}
+				bind:selected
+				onrowclick={openDetail}
+			>
 				{#snippet cell({ row, column })}
 					{#if column.key === 'nickname'}
 						{row.nickname ?? '—'}
@@ -209,4 +237,5 @@
 			</Table>
 		{/if}
 	</div>
+	<PalDetailPanel expanded={detailOpen} palId={detailPalId} onclose={closeDetail} />
 </div>
