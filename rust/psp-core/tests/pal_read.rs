@@ -121,10 +121,7 @@ fn every_corpus_pal_reads_into_a_dto() {
         assert!(!dto.character_id.is_empty());
         assert_eq!(
             dto.character_key,
-            psp_core::dto::pal::format_character_key(
-                &dto.character_id,
-                &pal::known_pal_keys(&data)
-            )
+            psp_core::dto::pal::format_character_key(&dto.character_id, pal::known_pal_keys(&data))
         );
         assert!(dto.level >= 1);
         pal_count += 1;

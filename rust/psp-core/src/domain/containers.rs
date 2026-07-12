@@ -360,7 +360,7 @@ fn read_dynamic_item(
             dto.character_id = Some(character_id.clone());
             dto.character_key = Some(crate::dto::pal::format_character_key(
                 character_id,
-                &super::pal::known_pal_keys(game_data),
+                super::pal::known_pal_keys(game_data),
             ));
             // `_save_parameter` (dynamic_item.py): `PalObjects.get_nested(
             // self._raw_data, "object", "SaveParameter", "value")` -- `object`

@@ -36,12 +36,17 @@ pub(crate) fn param<'a>(save_parameter: &'a Properties, name: &str) -> Option<&'
 /// `data/json/pals.json`, used by `format_character_key` to decide whether a
 /// `BOSS_`-prefixed id names a real "boss variant is its own catalog entry"
 /// pal (keep the prefix) or an ordinary pal spawned as a boss (strip it).
-pub fn known_pal_keys(game_data: &GameData) -> HashSet<String> {
-    game_data
-        .get("pals")
-        .and_then(|value| value.as_object())
-        .map(|object| object.keys().cloned().collect())
-        .unwrap_or_default()
+///
+/// Borrowed from `GameData`'s own memoized `PalLookup` (built once per
+/// `GameData` instance, not rebuilt on every call) -- see `PalLookup`'s own
+/// doc comment. This function used to allocate a fresh `HashSet<String>`
+/// (cloning every one of `pals.json`'s ~600 keys) on EVERY call, and it is
+/// called at least once per pal `read_save_parameter_dto` decodes -- a real,
+/// measured perf bug: a save with a large Dimensional Palbox (9,600 DPS
+/// slots observed) turned that into ~780ms of wasted rebuilding for a single
+/// player's DPS section alone.
+pub fn known_pal_keys(game_data: &GameData) -> &HashSet<String> {
+    &game_data.pal_lookup().keys
 }
 
 /// `PAL_SICK_TYPES` (`game/pal.py`), minus `HungerType`/`SanityValue`: `Pal.
@@ -60,19 +65,24 @@ const SICK_MARKERS: [&str; 3] = ["PalReviveTimer", "PhysicalHealth", "WorkerSick
 /// (`Pal.max_hp`'s `self.pal_data`) and `read_save_parameter_dto`'s
 /// `stomach` NaN/Infinity guard (`Pal.stomach`'s `_set_max_stomach`), both
 /// of which port a Python property that reads `self.pal_data` the same way.
+///
+/// O(1) via `GameData`'s memoized `PalLookup.lower_to_canonical` -- see that
+/// struct's own doc comment. This used to be a linear `.find()` over every
+/// `pals.json` entry, `.to_lowercase()`-ing each candidate key, on EVERY
+/// call; `known_pal_keys`'s own doc comment has the measured impact of this
+/// same class of per-pal `pals.json` rescan.
 fn pal_data_for<'a>(character_key: &str, game_data: &'a GameData) -> Option<&'a serde_json::Value> {
     if character_key.is_empty() {
         return None;
     }
+    let canonical = game_data
+        .pal_lookup()
+        .lower_to_canonical
+        .get(character_key)?;
     game_data
         .get("pals")
         .and_then(|value| value.as_object())
-        .and_then(|pals_json| {
-            pals_json
-                .iter()
-                .find(|(key, _)| key.to_lowercase() == character_key)
-                .map(|(_, value)| value)
-        })
+        .and_then(|pals_json| pals_json.get(canonical))
 }
 
 /// Port of `Pal`'s full computed-field dump (`game/pal.py`), applied to an
@@ -207,7 +217,7 @@ pub fn read_save_parameter_dto(
     // front because `stomach`'s NaN/Infinity guard below needs it to resolve
     // `pal_data["max_full_stomach"]`, the same `self.pal_data` lookup
     // (`get_pal_data(self.character_key)`) Python's `_set_max_stomach` uses.
-    let character_key = format_character_key(&character_id, &known_pal_keys(game_data));
+    let character_key = format_character_key(&character_id, known_pal_keys(game_data));
 
     // `stomach` (Pal.stomach): 150.0 when FullStomach is absent. Python has
     // an explicit "artifact bug fix" (game/pal.py Pal.stomach) for corrupted
@@ -352,7 +362,7 @@ pub fn read_save_parameter_dto(
 /// makes a stale value structurally impossible to feed into this function.
 pub fn max_hp_for(dto: &PalDto, boosted: bool, game_data: &GameData) -> i64 {
     let keys = known_pal_keys(game_data);
-    let pal_key = format_character_key(&dto.character_id, &keys);
+    let pal_key = format_character_key(&dto.character_id, keys);
     let Some(pal_data) = pal_data_for(&pal_key, game_data) else {
         return dto.hp;
     };
@@ -505,7 +515,7 @@ pub fn pal_summaries(
 
         summaries.push(PalSummary {
             instance_id,
-            character_key: format_character_key(&character_id, &keys),
+            character_key: format_character_key(&character_id, keys),
             character_id,
             nickname: param(save_parameter, "NickName")
                 .and_then(props::as_str)
@@ -598,7 +608,7 @@ fn set_or_remove(save_parameter: &mut Properties, name: &str, property: Option<P
 /// fewer copy of it in this module).
 pub fn max_stomach_for(character_id: &str, game_data: &GameData) -> f64 {
     let keys = known_pal_keys(game_data);
-    let pal_key = format_character_key(character_id, &keys);
+    let pal_key = format_character_key(character_id, keys);
     pal_data_for(&pal_key, game_data)
         .and_then(|pal_data| pal_data.pointer("/max_full_stomach"))
         .and_then(|value| value.as_f64())
