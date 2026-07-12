@@ -1,6 +1,6 @@
 [project]
 name = "PalworldSavePal"
-version = "0.17.6"
+version = "0.17.7"
 description = "Palworld Save Pal"
 requires-python = ">=3.12"
 dependencies = [
