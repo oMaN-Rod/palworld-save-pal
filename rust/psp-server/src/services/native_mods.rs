@@ -101,24 +101,34 @@ pub fn ensure_mod_settings(record: &ServerRecord) -> std::io::Result<()> {
 pub fn parse_info_json(mod_dir: &Path) -> Option<Value> {
     let contents = std::fs::read_to_string(mod_dir.join("Info.json")).ok()?;
     let data: Value = serde_json::from_str(&contents).ok()?;
-    let mod_type = data
+    // Python (native_server_service.py:896-907): mod_type defaults to "unknown"
+    // ONLY when InstallRule is missing/empty. When it is non-empty,
+    // rule_type = install_rules[0].get("Type", "").lower() (so "" when the
+    // entry has no Type key), and mod_type = type_map.get(rule_type, rule_type)
+    // — an unmapped rule_type (including "") passes straight through, so a
+    // Type-less first rule yields "" here, not "unknown".
+    let mod_type = match data
         .get("InstallRule")
         .and_then(Value::as_array)
         .and_then(|rules| rules.first())
-        .and_then(|rule| rule.get("Type"))
-        .and_then(Value::as_str)
-        .map(|rule_type| {
-            let lowered = rule_type.to_ascii_lowercase();
-            match lowered.as_str() {
+    {
+        Some(rule) => {
+            let rule_type = rule
+                .get("Type")
+                .and_then(Value::as_str)
+                .unwrap_or("")
+                .to_ascii_lowercase();
+            match rule_type.as_str() {
                 "ue4ss" => "ue4ss".to_string(),
                 "lua" => "lua".to_string(),
                 "palschema" => "palschema".to_string(),
                 "logicmods" => "logic".to_string(),
                 "paks" => "paks".to_string(),
-                _ => lowered,
+                _ => rule_type,
             }
-        })
-        .unwrap_or_else(|| "unknown".to_string());
+        }
+        None => "unknown".to_string(),
+    };
     let text = |key: &str| {
         data.get(key)
             .and_then(Value::as_str)
@@ -339,6 +349,53 @@ mod tests {
                 "dependencies": []
             })
         );
+    }
+
+    #[test]
+    fn parse_info_json_mod_type_matches_python_install_rule_edge_cases() {
+        // InstallRule present but the first rule has no Type key: Python's
+        // install_rules[0].get("Type", "") is "", type_map.get("", "") is "" —
+        // so mod_type is the empty string, NOT "unknown".
+        let no_type = tempfile::tempdir().unwrap();
+        std::fs::write(
+            no_type.path().join("Info.json"),
+            serde_json::json!({"PackageName": "P", "InstallRule": [{}]}).to_string(),
+        )
+        .unwrap();
+        assert_eq!(parse_info_json(no_type.path()).unwrap()["mod_type"], "");
+
+        // Missing/empty InstallRule falls back to the "unknown" default.
+        let missing = tempfile::tempdir().unwrap();
+        std::fs::write(
+            missing.path().join("Info.json"),
+            serde_json::json!({"PackageName": "P"}).to_string(),
+        )
+        .unwrap();
+        assert_eq!(
+            parse_info_json(missing.path()).unwrap()["mod_type"],
+            "unknown"
+        );
+
+        let empty = tempfile::tempdir().unwrap();
+        std::fs::write(
+            empty.path().join("Info.json"),
+            serde_json::json!({"PackageName": "P", "InstallRule": []}).to_string(),
+        )
+        .unwrap();
+        assert_eq!(
+            parse_info_json(empty.path()).unwrap()["mod_type"],
+            "unknown"
+        );
+
+        // An unmapped Type passes through lowercased (type_map.get default).
+        let other = tempfile::tempdir().unwrap();
+        std::fs::write(
+            other.path().join("Info.json"),
+            serde_json::json!({"PackageName": "P", "InstallRule": [{"Type": "Custom"}]})
+                .to_string(),
+        )
+        .unwrap();
+        assert_eq!(parse_info_json(other.path()).unwrap()["mod_type"], "custom");
     }
 
     #[test]
