@@ -1,6 +1,6 @@
 //! Server-management services (Phase 6). Mirrors palworld_save_pal/services/*.
+pub mod docker;
 pub mod palworld_api;
-// pub mod docker;          // Task 4
 // pub mod docker_mods;     // Task 6
 // pub mod native_config;   // Task 7
 // pub mod native_mods;     // Task 8
