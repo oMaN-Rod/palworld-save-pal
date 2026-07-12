@@ -1,5 +1,11 @@
 import { getAppState, getToastState } from '$states';
 import { MessageType } from '$types';
+import {
+	clearSessionPersistence,
+	consumeReattachPending,
+	getStoredSelectedPlayerUid,
+	setStoredSessionId
+} from '$lib/utils/sessionPersistence';
 import type { WSMessageHandler } from '../types';
 
 export const noFileSelectedHandler: WSMessageHandler = {
@@ -15,12 +21,33 @@ export const loadedSaveFilesHandler: WSMessageHandler = {
 	type: MessageType.LOADED_SAVE_FILES,
 	async handle(data) {
 		const appState = getAppState();
-		const { level, players, world_name, type, has_gps } = data;
+		const { level, players, world_name, type, has_gps, session_id } = data;
 		console.log('Loaded save files', level, players, 'has_gps:', has_gps);
 		appState.resetState();
 		appState.saveFile = { name: level, world_name, type };
 		appState.playerSaveFiles = players.map((p: any) => ({ name: p }));
 		appState.hasGpsAvailable = has_gps ?? false;
+
+		if (session_id) {
+			setStoredSessionId(session_id);
+		}
+
+		// This overview came from a reattach — re-select the player the user had
+		// open before the refresh.
+		if (consumeReattachPending()) {
+			const storedPlayerUid = getStoredSelectedPlayerUid();
+			if (storedPlayerUid) {
+				appState.selectPlayerLazy(storedPlayerUid);
+			}
+		}
+	}
+};
+
+export const sessionNotFoundHandler: WSMessageHandler = {
+	type: MessageType.SESSION_NOT_FOUND,
+	async handle(_, { goto }) {
+		clearSessionPersistence();
+		await goto('/file');
 	}
 };
 
@@ -85,5 +112,6 @@ export const saveFileHandlers = [
 	downloadSaveFileHandler,
 	updateSaveFileHandler,
 	noFileSelectedHandler,
-	selectGamepassSaveHandler
+	selectGamepassSaveHandler,
+	sessionNotFoundHandler
 ];

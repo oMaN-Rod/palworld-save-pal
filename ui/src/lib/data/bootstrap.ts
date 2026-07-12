@@ -1,4 +1,5 @@
 import { send } from '$lib/utils/websocketUtils';
+import { getStoredSessionId, markReattachPending } from '$lib/utils/sessionPersistence';
 import { getUpsState } from '$states/upsState.svelte';
 import { MessageType } from '$types';
 import { activeSkillsData } from './activeSkills.svelte';
@@ -39,5 +40,13 @@ export const bootstrap = async () => {
 	await upsState.loadAll();
 
 	send(MessageType.GET_VERSION);
+
+	// Reattach to the last session if this tab held one before the refresh.
+	const storedSessionId = getStoredSessionId();
+	if (storedSessionId) {
+		markReattachPending();
+		send(MessageType.REATTACH_SESSION, { session_id: storedSessionId });
+	}
+
 	send(MessageType.SYNC_APP_STATE);
 };
