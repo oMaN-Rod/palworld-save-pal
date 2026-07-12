@@ -99,17 +99,26 @@ pub fn steamcmd_install_args(install_dir: &str) -> Vec<String> {
 
 /// Run steamcmd to install/update the dedicated server. SteamCMD exit codes are
 /// unreliable — success is defined by PalServer.exe existing afterwards (Python
-/// parity). 1800 s timeout.
+/// parity). 1800 s timeout; on timeout the child is killed rather than orphaned
+/// (Python parity: `subprocess.run(..., timeout=1800)` kills the child on
+/// `TimeoutExpired`).
 pub async fn install_server(steamcmd_exe: &str, install_dir: &str) -> bool {
     if std::fs::create_dir_all(install_dir).is_err() {
         return false;
     }
-    let command_future = tokio::process::Command::new(steamcmd_exe)
+    let spawned = tokio::process::Command::new(steamcmd_exe)
         .args(steamcmd_install_args(install_dir))
         .stdout(std::process::Stdio::null())
         .stderr(std::process::Stdio::null())
-        .status();
-    let _ = tokio::time::timeout(std::time::Duration::from_secs(1800), command_future).await;
+        .spawn();
+    if let Ok(mut child) = spawned {
+        let wait_result =
+            tokio::time::timeout(std::time::Duration::from_secs(1800), child.wait()).await;
+        if wait_result.is_err() {
+            // child.kill() awaits the process's actual exit, so this also reaps it.
+            let _ = child.kill().await;
+        }
+    }
     Path::new(install_dir).join("PalServer.exe").exists()
 }
 
@@ -250,19 +259,39 @@ fn pid_alive(pid: u32) -> bool {
         .unwrap_or(false)
 }
 
-fn force_kill(pid: u32) -> bool {
-    let mut system = system().lock().unwrap();
-    system.refresh_processes(
-        sysinfo::ProcessesToUpdate::Some(&[Pid::from_u32(pid)]),
-        true,
-    );
-    match system.process(Pid::from_u32(pid)) {
-        Some(process) => process.kill(),
-        None => true, // already gone
+/// Send the kill signal, then poll for up to 10 s for the pid to actually
+/// disappear. `Process::kill()` returning `true` only means the signal was
+/// sent, not that the process died (sysinfo 0.33 docs) — Python parity:
+/// `proc.kill(); proc.wait(timeout=10)` returns `False` if still alive after
+/// that wait.
+async fn force_kill(pid: u32) -> bool {
+    {
+        let mut system = system().lock().unwrap();
+        system.refresh_processes(
+            sysinfo::ProcessesToUpdate::Some(&[Pid::from_u32(pid)]),
+            true,
+        );
+        match system.process(Pid::from_u32(pid)) {
+            Some(process) => {
+                process.kill();
+            }
+            None => return true, // already gone
+        }
+    }
+    let deadline = tokio::time::Instant::now() + std::time::Duration::from_secs(10);
+    loop {
+        if !pid_alive(pid) {
+            return true;
+        }
+        if tokio::time::Instant::now() >= deadline {
+            return false;
+        }
+        tokio::time::sleep(std::time::Duration::from_millis(200)).await;
     }
 }
 
-/// REST-API shutdown ({"waittime":5,...}), wait up to 30 s, then force kill.
+/// REST-API shutdown ({"waittime":5,...}), wait up to 30 s, then force kill
+/// and confirm the pid actually disappears (Python parity: see `force_kill`).
 pub async fn stop_server_process(record: &ServerRecord, api: &PalworldApiClient) -> bool {
     let Some(pid) = record.pid else {
         return false;
@@ -289,7 +318,7 @@ pub async fn stop_server_process(record: &ServerRecord, api: &PalworldApiClient)
             tokio::time::sleep(std::time::Duration::from_millis(500)).await;
         }
     }
-    force_kill(pid)
+    force_kill(pid).await
 }
 
 /// psutil-equivalent status: running unless missing/zombie; started_at is the
