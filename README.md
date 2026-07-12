@@ -12,13 +12,12 @@ Palworld Save Pal is a tool for managing and analyzing save files.
   - [📋 Table of Contents](#-table-of-contents)
   - [🚀 Installation](#-installation)
   - [🎮 Usage](#-usage)
+  - [🦀 Rust backend migration](#-rust-backend-migration)
   - [🐳 Docker](#-docker)
   - [👨‍💻 Developer Guide](#-developer-guide)
     - [Web](#web)
     - [Desktop App](#desktop-app)
     - [Build Desktop App](#build-desktop-app)
-      - [Using build script](#using-build-script)
-      - [Manual build](#manual-build)
   - [🔥 Features](#-features)
     - [General](#general)
     - [Pals](#pals)
@@ -39,6 +38,28 @@ Grab the latest release from the [releases](https://github.com/oMaN-Rod/palworld
 ## 🎮 Usage
 
 Details for using Palworld Save Pal can be found in the [User Guide](https://github.com/oMaN-Rod/palworld-save-pal/wiki/%F0%9F%8E%AE-Usage)
+
+## 🦀 Rust backend migration
+
+The backend is now a single Rust binary (`psp-server`) — the Python/FastAPI
+backend is retired. The UI, save-editing features, and WebSocket API are
+unchanged.
+
+**Your existing database (`psp.db`) is imported automatically.** On first
+start, if a legacy `psp.db` sits next to the new database file
+(`psp-rs.db`) and no new database exists yet, your settings, presets,
+Universal Pal Storage, and server configs are imported; the legacy file is
+backed up, never modified, and the import runs only once.
+
+- Desktop: nothing to do — the app finds your existing `psp.db`.
+- Docker: copy your old `psp.db` into the `./db/` folder (see the Docker
+  section) before first start.
+
+**Breaking change:** JSON files exported by the old Python tooling
+(palworld-save-tools `convert.py` output) can no longer be converted back to
+`.sav` via `POST /api/convert/json-to-sav` or the Raw editor. Re-export the
+save with this version first — `sav → json → sav` round-trips are only
+supported within the same tooling generation.
 
 ## 🐳 Docker
 
@@ -75,16 +96,15 @@ To run Palworld Save Pal using Docker:
             context: .
             dockerfile: Dockerfile
             args:
-              # Change this to the URL of your public server
+              # Change this to the host:port browsers will use to reach the server
               - PUBLIC_WS_URL=127.0.0.1:5174/ws
           ports:
             - "5174:5174"
           volumes:
             - ./data:/app/data
-            - ./palworld_save_pal:/app/palworld_save_pal
-          environment:
-            - PORT=5174
-          command: python psp.py
+            # Persists psp-rs.db (settings, presets, UPS). To import a legacy
+            # Python psp.db, copy it to ./db/psp.db before first start.
+            - ./db:/app/db
       ```
 
    2. Build the docker container:
@@ -95,18 +115,20 @@ To run Palworld Save Pal using Docker:
 
 ## 👨‍💻 Developer Guide
 
-For developers who want to contribute to Palworld Save Pal:
+Desktop (Windows/Linux/Mac) is the primary way Palworld Save Pal ships;
+Docker/web is also supported. The backend is a Rust workspace at the repo
+root — see [docs/rust-dev-guide.md](docs/rust-dev-guide.md) for the full
+guide.
 
 ### Web
 
-1. Set up the development environment:
+1. Run the backend:
 
    ```bash
-   uv sync
-   source .venv/bin/activate
+   cargo run -p psp-server -- --dev
    ```
 
-2. Run the application in development mode:
+2. Run the UI dev server:
 
    ```bash
    cd ui
@@ -118,77 +140,31 @@ For developers who want to contribute to Palworld Save Pal:
 
 ### Desktop App
 
-1. Set the environment variable for the svelte SPA `ui/.env`.
+1. Set the environment variables for the svelte SPA `ui/.env`:
 
    ```env
    PUBLIC_WS_URL=127.0.0.1:5174/ws
    PUBLIC_DESKTOP_MODE=true
    ```
 
-2. Activate python environment
+2. Build the SPA and run the Tauri app:
 
-   ```powershell
-   uv sync
-   .venv\Scripts\activate
-   ```
-
-3. Run the desktop app:
-
-   ```powershell
-   cd ui
-   bun install
-   bun run dev:desktop
-   ```
-
-### Build Desktop App
-
-> Activate the environment
-
-```powershell
-uv sync
-.venv\Scripts\activate
-```
-
-#### Using build script
-
-```powershell
-.\scripts\build-desktop.ps1
-```
-
-#### Manual build
-
-1. Set the environment variable for the svelte SPA `ui/.env`.
-
-   ```env
-   PUBLIC_WS_URL=127.0.0.1:5174/ws
-   PUBLIC_DESKTOP_MODE=true
-   ```
-
-2. Build the SPA (replace bun with your package manager of choice). This will create a build directory in the project root containing the static files for the SPA:
-
-   ```powershell
+   ```bash
    cd ui
    bun install
    bun run build
    cd ..
-   mkdir dist
+   cargo run -p psp-desktop
    ```
 
-3. Build standalone executable:
+### Build Desktop App
 
-   ```powershell
-   python setup.py build
-   ```
+```bash
+cargo tauri build
+```
 
-or
-
-3. Build installer:
-
-   ```powershell
-   python setup.py bdist_msi
-   ```
-
-> **Note:** The `dist` folder will contain the executable and the SPA build files, the data folder contains json files with game data, all need to be distributed together.
+Bundles (Windows MSI/NSIS, macOS dmg, Linux deb/rpm) land under
+`target/release/bundle/`.
 
 ## 🔥 Features
 

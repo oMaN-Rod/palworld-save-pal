@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev:desktop": "node scripts/ensure-desktop-env.mjs && vite dev",
-		"dev:web": "concurrently \"vite dev\" \"cd .. && python psp.py --dev\"",
+		"dev:web": "concurrently \"vite dev\" \"cd .. && cargo run -p psp-server -- --dev\"",
 		"dev:vite": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
