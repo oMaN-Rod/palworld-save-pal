@@ -323,6 +323,17 @@ async fn route(
         MessageType::OpenInBrowser => {
             handlers::system::handle_open_in_browser(serde_json::from_value(data)?, ctx).await
         }
+        // Phase 6 (Task 11): server list/get/detect/stats.
+        MessageType::ListServers => handlers::servers::handle_list_servers(data, ctx).await,
+        MessageType::GetServer => {
+            handlers::servers::handle_get_server(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::DetectWorkshopDir => {
+            handlers::servers::handle_detect_workshop_dir(data, ctx).await
+        }
+        MessageType::GetServerStats => {
+            handlers::servers::handle_get_server_stats(serde_json::from_value(data)?, ctx).await
+        }
         // Remaining arms are added by Phases 1-6.
         other => {
             tracing::warn!(
