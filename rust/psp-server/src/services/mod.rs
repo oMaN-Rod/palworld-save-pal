@@ -227,13 +227,16 @@ mod tests {
     }
 
     #[test]
-    fn server_services_real_never_touches_docker_at_construction() {
+    fn server_services_real_constructs_without_a_docker_daemon() {
         // BollardDocker::connect() is deliberately not called until the first
         // trait method fires — constructing ServerServices::real() must succeed
         // even with no Docker daemon present on the test machine (mirrors
-        // Python's DockerService, which only connects lazily on first use).
+        // Python's DockerService, which only connects lazily on first use). The
+        // strong_count == 1 pins that each call yields a fresh, unshared lazy
+        // client (no global registry / eager connection) — it would exceed 1 if
+        // construction stashed the client anywhere.
         let services = ServerServices::real();
-        assert!(std::sync::Arc::strong_count(&services.docker) >= 1);
+        assert_eq!(std::sync::Arc::strong_count(&services.docker), 1);
     }
 
     #[tokio::test]
