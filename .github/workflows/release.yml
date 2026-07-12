@@ -39,16 +39,6 @@ jobs:
         with:
           path: palworld-save-pal
 
-      # The Rust workspace consumes uesave as a path dependency resolving to a
-      # sibling checkout (../uesave-rs/uesave relative to the repo root).
-      - name: Checkout uesave-rs (path dependency)
-        uses: actions/checkout@v4
-        with:
-          repository: oMaN-Rod/uesave-rs
-          ref: palworld-v1
-          path: uesave-rs
-          token: ${{ secrets.UESAVE_RS_TOKEN || github.token }}
-
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
         with:
@@ -108,14 +98,6 @@ jobs:
         with:
           path: palworld-save-pal
 
-      - name: Checkout uesave-rs (path dependency)
-        uses: actions/checkout@v4
-        with:
-          repository: oMaN-Rod/uesave-rs
-          ref: palworld-v1
-          path: uesave-rs
-          token: ${{ secrets.UESAVE_RS_TOKEN || github.token }}
-
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
         with:
@@ -163,14 +145,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           path: palworld-save-pal
-
-      - name: Checkout uesave-rs (path dependency)
-        uses: actions/checkout@v4
-        with:
-          repository: oMaN-Rod/uesave-rs
-          ref: palworld-v1
-          path: uesave-rs
-          token: ${{ secrets.UESAVE_RS_TOKEN || github.token }}
 
       - name: Install Linux system dependencies
         run: |

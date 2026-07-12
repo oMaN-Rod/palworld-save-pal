@@ -33,17 +33,6 @@ jobs:
         with:
           path: palworld-save-pal
 
-      # The Rust workspace consumes uesave as a path dependency that resolves
-      # to a sibling checkout (../uesave-rs/uesave relative to the repo root).
-      # Recreate the local disk layout: both repos side by side.
-      - name: Checkout uesave-rs (path dependency)
-        uses: actions/checkout@v3
-        with:
-          repository: oMaN-Rod/uesave-rs
-          ref: palworld-v1
-          path: uesave-rs
-          token: ${{ secrets.UESAVE_RS_TOKEN || github.token }}
-
       - name: Install Linux system dependencies
         if: matrix.os == 'ubuntu-latest'
         run: |
