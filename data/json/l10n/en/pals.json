@@ -477,7 +477,7 @@
   },
   "ChickenPal": {
     "localized_name": "Chikipi",
-    "description": "Extremely weak and far too delicious. It is one of the weakest Pals alongside SheepBall. No matter how many are hunted, they just keep appearing."
+    "description": "Extremely weak and far too delicious. It is one of the weakest Pals alongside Lamball. No matter how many are hunted, they just keep appearing."
   },
   "ClioneTwins": {
     "localized_name": "Amione",
@@ -1065,7 +1065,7 @@
   },
   "GhostAnglerfish": {
     "localized_name": "Ghangler",
-    "description": "With its shining lure, it illuminates the darkness. The wandering Pals drawn in by the light stand no chance of escape once spotted by GhostAnglerFish. No matter how far, it will keep guiding them until they get home safe and sound."
+    "description": "With its shining lure, it illuminates the darkness. The wandering Pals drawn in by the light stand no chance of escape once spotted by Ghangler. No matter how far, it will keep guiding them until they get home safe and sound."
   },
   "GhostAnglerfish_Fire": {
     "localized_name": "Ghangler Ignis",
@@ -1617,7 +1617,7 @@
   },
   "LilyQueen": {
     "localized_name": "Lyleen",
-    "description": "A docile Pal full of love. It watches over small Pals who have lost their parents. It uses a full-power SolarBeam to discipline naughty Pals."
+    "description": "A docile Pal full of love. It watches over small Pals who have lost their parents. It uses a full-power Solar Blast to discipline naughty Pals."
   },
   "LilyQueen_Dark": {
     "localized_name": "Lyleen Noct",
@@ -2328,7 +2328,7 @@
     "description": null
   },
   "PalPassive_Doctor": {
-    "localized_name": "Islander",
+    "localized_name": "Dr. Brawn",
     "description": null
   },
   "PalTrader": {
@@ -2624,7 +2624,7 @@
     "description": null
   },
   "Reward_BossDefeat": {
-    "localized_name": "Guard",
+    "localized_name": "Veteran Hunter",
     "description": null
   },
   "Reward_Emote_A_01": {
@@ -2712,7 +2712,7 @@
     "description": null
   },
   "Reward_Paldex": {
-    "localized_name": "Guard",
+    "localized_name": "Pal Ecological Researcher",
     "description": null
   },
   "Reward_Paldex_v02": {
@@ -2901,7 +2901,7 @@
   },
   "SnowTigerBeastman": {
     "localized_name": "Bastigor",
-    "description": "The sight of anything round gives it an uncontrollable urge to punch it. For SnowTigerBeastMan the toughest challenge, after simply living, is making a snowman."
+    "description": "The sight of anything round gives it an uncontrollable urge to punch it. For Bastigor the toughest challenge, after simply living, is making a snowman."
   },
   "SoldierBee": {
     "localized_name": "Beegarde",
@@ -3133,11 +3133,11 @@
   },
   "WindChimes": {
     "localized_name": "Hangyu",
-    "description": "Its gigantic arms can rip apart even iron. As a particularly cruel form of execution, serious criminals would be strung up in a public square, and a Windchimes would tear the skin right from their bones."
+    "description": "Its gigantic arms can rip apart even iron. As a particularly cruel form of execution, serious criminals would be strung up in a public square, and a Hangyu would tear the skin right from their bones."
   },
   "WindChimes_Ice": {
     "localized_name": "Hangyu Cryst",
-    "description": "Its gigantic arms can tear through blocks of ice. There were times when great sinners were tied in the town square and had their hair torn out by Windchimes_Ice as a brutal form of public humiliation."
+    "description": "Its gigantic arms can tear through blocks of ice. There were times when great sinners were tied in the town square and had their hair torn out by Hangyu Cryst as a brutal form of public humiliation."
   },
   "WingGolem": {
     "localized_name": "Knocklem",
@@ -3157,7 +3157,7 @@
   },
   "WoolFox": {
     "localized_name": "Cremis",
-    "description": "Compared to SheepBall, it has finer wool and a temperament more suited for domestication. However, it has historically always been kept as a pet. Cuteness is considered a virtue."
+    "description": "Compared to Lamball, it has finer wool and a temperament more suited for domestication. However, it has historically always been kept as a pet. Cuteness is considered a virtue."
   },
   "WorldTreeDragon": {
     "localized_name": "Astralym",
@@ -3234,5 +3234,221 @@
   "Yeti_Grass": {
     "localized_name": "Wumpo Botan",
     "description": "Researchers once tried to cut the grass off its body to reveal its true form. In the end, only grass was left, as if that was all there was to begin with."
+  },
+  "ArenaShop": {
+    "localized_name": "ArenaShop",
+    "description": null
+  },
+  "Arena_Legend_1": {
+    "localized_name": "Arena_Legend_1",
+    "description": null
+  },
+  "Arena_Legend_10": {
+    "localized_name": "Arena_Legend_10",
+    "description": null
+  },
+  "Arena_Legend_11": {
+    "localized_name": "Arena_Legend_11",
+    "description": null
+  },
+  "Arena_Legend_12": {
+    "localized_name": "Arena_Legend_12",
+    "description": null
+  },
+  "Arena_Legend_13": {
+    "localized_name": "Arena_Legend_13",
+    "description": null
+  },
+  "Arena_Legend_14": {
+    "localized_name": "Arena_Legend_14",
+    "description": null
+  },
+  "Arena_Legend_15": {
+    "localized_name": "Arena_Legend_15",
+    "description": null
+  },
+  "Arena_Legend_16": {
+    "localized_name": "Arena_Legend_16",
+    "description": null
+  },
+  "Arena_Legend_17": {
+    "localized_name": "Arena_Legend_17",
+    "description": null
+  },
+  "Arena_Legend_18": {
+    "localized_name": "Arena_Legend_18",
+    "description": null
+  },
+  "Arena_Legend_19": {
+    "localized_name": "Arena_Legend_19",
+    "description": null
+  },
+  "Arena_Legend_2": {
+    "localized_name": "Arena_Legend_2",
+    "description": null
+  },
+  "Arena_Legend_20": {
+    "localized_name": "Arena_Legend_20",
+    "description": null
+  },
+  "Arena_Legend_3": {
+    "localized_name": "Arena_Legend_3",
+    "description": null
+  },
+  "Arena_Legend_4": {
+    "localized_name": "Arena_Legend_4",
+    "description": null
+  },
+  "Arena_Legend_5": {
+    "localized_name": "Arena_Legend_5",
+    "description": null
+  },
+  "Arena_Legend_6": {
+    "localized_name": "Arena_Legend_6",
+    "description": null
+  },
+  "Arena_Legend_7": {
+    "localized_name": "Arena_Legend_7",
+    "description": null
+  },
+  "Arena_Legend_8": {
+    "localized_name": "Arena_Legend_8",
+    "description": null
+  },
+  "Arena_Legend_9": {
+    "localized_name": "Arena_Legend_9",
+    "description": null
+  },
+  "ArmorWoodlouse": {
+    "localized_name": "ArmorWoodlouse",
+    "description": null
+  },
+  "BeardedDragon": {
+    "localized_name": "BeardedDragon",
+    "description": "This Pal is under investigation."
+  },
+  "BlueWoolRabbit": {
+    "localized_name": "BlueWoolRabbit",
+    "description": null
+  },
+  "CandleWitch": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "CuteOrca": {
+    "localized_name": "CuteOrca",
+    "description": null
+  },
+  "DarkMutant": {
+    "localized_name": "DarkMutant",
+    "description": "Some say a beam from a DarkMutant that has perfected its technique can tear holes into other dimensions. It's even believed that certain species of Pals were born from such phenomena."
+  },
+  "DesertBoss": {
+    "localized_name": "DesertBoss",
+    "description": null
+  },
+  "ElecSnail_Fire": {
+    "localized_name": "ElecSnail_Fire",
+    "description": null
+  },
+  "ElectricBoss": {
+    "localized_name": "ElectricBoss",
+    "description": null
+  },
+  "Emote_Tester": {
+    "localized_name": "Emote_Tester",
+    "description": null
+  },
+  "ForestBoss": {
+    "localized_name": "Lily & Lyleen",
+    "description": null
+  },
+  "FrozenBear": {
+    "localized_name": "FrozenBear",
+    "description": null
+  },
+  "GrassDragon": {
+    "localized_name": "GrassDragon",
+    "description": "This Pal is under investigation."
+  },
+  "IceVeilDragon": {
+    "localized_name": "IceVeilDragon",
+    "description": null
+  },
+  "KingCrab": {
+    "localized_name": "KingCrab",
+    "description": null
+  },
+  "LeafBird": {
+    "localized_name": "LeafBird",
+    "description": null
+  },
+  "MedjedBird": {
+    "localized_name": "MedjedBird",
+    "description": null
+  },
+  "MexicanSalamander": {
+    "localized_name": "MexicanSalamander",
+    "description": null
+  },
+  "Monkey_Ice": {
+    "localized_name": "Monkey_Ice",
+    "description": null
+  },
+  "MonochromeMushroom": {
+    "localized_name": "MonochromeMushroom",
+    "description": null
+  },
+  "Negotiator": {
+    "localized_name": "Negotiator",
+    "description": null
+  },
+  "PinkKangaroo": {
+    "localized_name": "PinkKangaroo",
+    "description": null
+  },
+  "RockCheetah": {
+    "localized_name": "RockCheetah",
+    "description": null
+  },
+  "SakurajimaBoss": {
+    "localized_name": "Saya & Selyne",
+    "description": null
+  },
+  "SnakeQueen": {
+    "localized_name": "SnakeQueen",
+    "description": null
+  },
+  "SnowBoss": {
+    "localized_name": "Victor & Shadowbeak",
+    "description": null
+  },
+  "StrawHatCat": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "TestAssassin": {
+    "localized_name": "TestAssassin",
+    "description": null
+  },
+  "TestNPC": {
+    "localized_name": "TestNPC",
+    "description": null
+  },
+  "VikingBoss": {
+    "localized_name": "Bjorn & Bastigor",
+    "description": null
+  },
+  "VolcanicTurtle": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "WaterLizard": {
+    "localized_name": "WaterLizard",
+    "description": "-"
+  },
+  "WorldTree_Hunter_MissileLauncher_test": {
+    "localized_name": "WorldTree_Hunter_MissileLauncher_test",
+    "description": null
   }
 }

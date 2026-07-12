@@ -131,6 +131,10 @@
     "localized_name": "ตู้เกมอาเขต",
     "description": "ตู้คีบตุ๊กตาสำหรับตกแต่ง เนื่องจากเครื่องชำรุดแล้วจึงไม่สามรถเล่นได้"
   },
+  "Banyan_Big": {
+    "localized_name": "Banyan_Big",
+    "description": null
+  },
   "Barrel01_Iron": {
     "localized_name": "ถังเหล็กสีแดง",
     "description": "ถังเหล็กสีแดงสำหรับตกแต่ง"
@@ -358,6 +362,10 @@
   "DamagedScarecrow": {
     "localized_name": "หุ่นฝึกซ้อม",
     "description": "หุ่นฝึกซ้อมรูปPengullet ต้องวางไว้ในที่กว้างเท่านั้น"
+  },
+  "DamagedScarecrow_Test": {
+    "localized_name": "DamagedScarecrow_Test",
+    "description": null
   },
   "DarkIsland_Banner": {
     "localized_name": "แบนเนอร์ชาวสวรรค์ล่ม",
@@ -735,6 +743,10 @@
     "localized_name": "พื้นกระจกใส",
     "description": "ฐานรากของสิ่งปลูกสร้างหรือผนัง ทนทานมากเพราะทำจากกระจกใสที่แข็งเป็นพิเศษ"
   },
+  "Glass_pillars": {
+    "localized_name": "เสากระจกใส",
+    "description": "เสาที่ไว้ค้ำอาคาร ทนทานมากเพราะทำจากกระจกใสที่แข็งเป็นพิเศษ"
+  },
   "Glass_roof": {
     "localized_name": "หลังคากระจกใส",
     "description": "หลังคาที่สร้างไว้บนผนัง ไว้ใช้กันลมกันฝน ทนทานมากเพราะทำจากกระจกใสที่แข็งเป็นพิเศษ"
@@ -757,7 +769,7 @@
   },
   "GoalSoccer_Iron": {
     "localized_name": "โกลฟุตบอล",
-    "description": "โกลฟุตบอลสำหรับตกแต่ง แม้จะยิงSheepBallเข้าประตูไปก็ไม่ได้คะแนน"
+    "description": "โกลฟุตบอลสำหรับตกแต่ง แม้จะยิงLamballเข้าประตูไปก็ไม่ได้คะแนน"
   },
   "GuardianDogStatue": {
     "localized_name": "รูปปั้น Yakumo",
@@ -1111,6 +1123,10 @@
     "localized_name": "พื้นโลหะ",
     "description": "ฐานรากของสิ่งปลูกสร้างหรือผนัง ทนทานมากเพราะทำจากโลหะ"
   },
+  "Metal_pillars": {
+    "localized_name": "เสาโลหะ",
+    "description": "เสาที่ไว้ค้ำอาคาร ทนทานมากเพราะทำจากโลหะ"
+  },
   "Metal_roof": {
     "localized_name": "หลังคาโลหะ",
     "description": "หลังคาที่สร้างไว้บนผนัง ไว้ใช้กันลมกันฝน ทนทานมากเพราะทำจากโลหะ"
@@ -1346,6 +1362,10 @@
   "SF_foundation": {
     "localized_name": "พื้นสีเขียว",
     "description": "ฐานรากของสิ่งปลูกสร้างหรือผนัง ใช้สร้างอาคารสีเขียว สไตล์อนาคต"
+  },
+  "SF_pillars": {
+    "localized_name": "เสาสีเขียว",
+    "description": "เสาที่ไว้ค้ำอาคาร ใช้สร้างอาคารสีเขียว สไตล์อนาคต"
   },
   "SF_roof": {
     "localized_name": "หลังคาสีเขียว",
@@ -1610,6 +1630,10 @@
   "Stone_foundation": {
     "localized_name": "พื้นหิน",
     "description": "ฐานรากของสิ่งปลูกสร้างหรือผนัง ทนทานพอประมาณเพราะทำจากหิน"
+  },
+  "Stone_pillar": {
+    "localized_name": "เสาหิน",
+    "description": "เสาที่ไว้ค้ำอาคาร ทนทานพอประมาณเพราะทำจากหิน"
   },
   "Stone_roof": {
     "localized_name": "หลังคาหิน",
@@ -1919,6 +1943,10 @@
     "localized_name": "บันได",
     "description": "บันไดลิงไว้ปืนขึ้นที่สูง"
   },
+  "Wooden_pillar": {
+    "localized_name": "เสาไม้",
+    "description": "เสาที่ไว้ค้ำอาคาร เปราะบางเพราะทำจากไม้"
+  },
   "Wooden_roof": {
     "localized_name": "หลังคาไม้",
     "description": "หลังคาที่สร้างไว้บนผนัง ไว้ใช้กันลมกันฝน เปราะบางเพราะทำจากไม้"
@@ -1954,5 +1982,13 @@
   "Zaisu": {
     "localized_name": "เก้าอี้นั่งพื้น",
     "description": "เก้าอี้นั่งพื้นสำหรับตกแต่ง ใช้สร้างอาคารสไตล์ญี่ปุ่น"
+  },
+  "JapaneseStyle_TriangleStairsCorner_02": {
+    "localized_name": "-",
+    "description": "-"
+  },
+  "WoodCreator": {
+    "localized_name": "-",
+    "description": "-"
   }
 }

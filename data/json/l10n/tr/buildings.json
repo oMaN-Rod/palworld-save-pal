@@ -131,6 +131,10 @@
     "localized_name": "Atari Oyunu Makinesi",
     "description": "Dekoratif oyuncak yakalama makinesi. Bozuktur, oynanamaz."
   },
+  "Banyan_Big": {
+    "localized_name": "Banyan_Big",
+    "description": null
+  },
   "Barrel01_Iron": {
     "localized_name": "Kırmızı Metal Fıçı",
     "description": "Dekoratif kırmızı metal fıçı."
@@ -358,6 +362,10 @@
   "DamagedScarecrow": {
     "localized_name": "Antrenman Mankeni",
     "description": "Pengullet şeklinde bir antrenman mankeni. Sadece geniş, açık alanlara yerleştirilebilir."
+  },
+  "DamagedScarecrow_Test": {
+    "localized_name": "DamagedScarecrow_Test",
+    "description": null
   },
   "DarkIsland_Banner": {
     "localized_name": "Feybreak Halkının Dikey Sancağı",
@@ -735,6 +743,10 @@
     "localized_name": "Cam Zemin",
     "description": "Üzerine duvarlar inşa edebileceğin veya araç ve tesisler kurabileceğin bir zemin. Endüstriyel camdan yapılmıştır ve epey dayanıklıdır."
   },
+  "Glass_pillars": {
+    "localized_name": "Cam Direk",
+    "description": "Yapıya destek olması için bir sütun. Endüstriyel camdan yapılmıştır ve epey dayanıklıdır."
+  },
   "Glass_roof": {
     "localized_name": "Cam Çatı",
     "description": "Yağmuru ve rüzgârı uzak tutmak için duvarların üzerine inşa edilmiş bir çatı. Endüstriyel camdan yapılmıştır ve epey dayanıklıdır."
@@ -757,7 +769,7 @@
   },
   "GoalSoccer_Iron": {
     "localized_name": "Futbol Kalesi",
-    "description": "Dekoratif futbol kalesi. Vurduğun SheepBall içine girerse golün sayılmaz."
+    "description": "Dekoratif futbol kalesi. Vurduğun Lamball içine girerse golün sayılmaz."
   },
   "GuardianDogStatue": {
     "localized_name": "Yakumo Heykeli",
@@ -1111,6 +1123,10 @@
     "localized_name": "Metal Zemin",
     "description": "Üzerine duvarlar inşa edebileceğin veya araç ve tesisler kurabileceğin bir zemin. Metalden yapılmıştır ve son derece sağlamdır."
   },
+  "Metal_pillars": {
+    "localized_name": "Metal Direk",
+    "description": "Yapıya destek olması için bir sütun. Metalden yapılmıştır ve son derece sağlamdır."
+  },
   "Metal_roof": {
     "localized_name": "Metal Çatı",
     "description": "Yağmuru ve rüzgârı uzak tutmak için duvarların üzerine inşa edilmiş bir çatı. Metalden yapılmıştır ve son derece sağlamdır."
@@ -1346,6 +1362,10 @@
   "SF_foundation": {
     "localized_name": "Temiz Temel",
     "description": "Üstüne duvar veya tesisler inşa etmek için bir temel. Temiz ve fütüristik bir mimari inşa etmeye olanak tanır."
+  },
+  "SF_pillars": {
+    "localized_name": "Temiz Sütun",
+    "description": "Binayı desteklemek için kullanılan sütun. Temiz ve fütüristik bir mimari yaratır."
   },
   "SF_roof": {
     "localized_name": "Temiz Çatı",
@@ -1610,6 +1630,10 @@
   "Stone_foundation": {
     "localized_name": "Taş Zemin",
     "description": "Üzerine duvarlar inşa edebileceğin veya araç ve tesisler kurabileceğin bir zemin. Taştan yapılmıştır ve yeteri kadar sağlamdır."
+  },
+  "Stone_pillar": {
+    "localized_name": "Taş Direk",
+    "description": "Yapıya destek olması için bir sütun. Taştan yapılmıştır ve yeteri kadar sağlamdır."
   },
   "Stone_roof": {
     "localized_name": "Taş Çatı",
@@ -1919,6 +1943,10 @@
     "localized_name": "Merdiven",
     "description": "Biraz yüksekte yerlere tırmanmana olanak tanıyan bir merdiven."
   },
+  "Wooden_pillar": {
+    "localized_name": "Tahta Direk",
+    "description": "Yapıya destek olması için bir sütun. Tahtadan yapıldığı için kolay kırılır."
+  },
   "Wooden_roof": {
     "localized_name": "Tahta Çatı",
     "description": "Yağmuru ve rüzgârı uzak tutmak için duvarların üzerine inşa edilmiş bir çatı. Tahtadan yapıldığı için kolay kırılır."
@@ -1954,5 +1982,13 @@
   "Zaisu": {
     "localized_name": "Japon Tarzı Yer Sandalyesi",
     "description": "Dekoratif yer sandalyesi. Japon tarzı binalar için mükemmel."
+  },
+  "JapaneseStyle_TriangleStairsCorner_02": {
+    "localized_name": "-",
+    "description": "-"
+  },
+  "WoodCreator": {
+    "localized_name": "-",
+    "description": "-"
   }
 }

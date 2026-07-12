@@ -477,7 +477,7 @@
   },
   "ChickenPal": {
     "localized_name": "Chikipi",
-    "description": "É fraca e deliciosa demais. Junto com SheepBall, é um dos Pals mais frágeis. Por mais que sejam caçadas, não param de crescer em número."
+    "description": "É fraca e deliciosa demais. Junto com Lamball, é um dos Pals mais frágeis. Por mais que sejam caçadas, não param de crescer em número."
   },
   "ClioneTwins": {
     "localized_name": "Amione",
@@ -589,7 +589,7 @@
   },
   "ElecLion": {
     "localized_name": "Boltmane",
-    "description": "pr-BR_Text"
+    "description": "The more it moves, the more it heats up and the hair tips increasingly glow brighter. At its peak, it becomes so dazzling that you risk blindness if you stare at it directly."
   },
   "ElecLizard": {
     "localized_name": "Slowatt",
@@ -1065,7 +1065,7 @@
   },
   "GhostAnglerfish": {
     "localized_name": "Ghangler",
-    "description": "Este Pal ilumina a escuridão com sua isca luminosa. Quando Pals perdidos, atraídos por essa isca, são descobertos pelo GhostAnglerFish, já não há mais escapatória. Eles são gentilmente conduzidos por todo o caminho até conseguirem voltar para casa em segurança."
+    "description": "Este Pal ilumina a escuridão com sua isca luminosa. Quando Pals perdidos, atraídos por essa isca, são descobertos pelo Ghangler, já não há mais escapatória. Eles são gentilmente conduzidos por todo o caminho até conseguirem voltar para casa em segurança."
   },
   "GhostAnglerfish_Fire": {
     "localized_name": "Ghangler Ignis",
@@ -1617,7 +1617,7 @@
   },
   "LilyQueen": {
     "localized_name": "Lyleen",
-    "description": "Uma Pal dócil e repleta de afeto. Costuma cuidar de Pals filhotes que perderam os pais. A educação, ela dá com um SolarBeam de força total."
+    "description": "Uma Pal dócil e repleta de afeto. Costuma cuidar de Pals filhotes que perderam os pais. A educação, ela dá com um Rajada Solar de força total."
   },
   "LilyQueen_Dark": {
     "localized_name": "Lyleen Noct",
@@ -2328,7 +2328,7 @@
     "description": null
   },
   "PalPassive_Doctor": {
-    "localized_name": "Habitante da ilha",
+    "localized_name": "Doutor Brawn",
     "description": null
   },
   "PalTrader": {
@@ -2480,7 +2480,7 @@
     "description": "Rainha eleita para governar as Beegardes. Como é um deleite poder servir a uma soberana tão venerada, nunca deixam de surgir mais vassalas dispostas a trabalhar até a morte."
   },
   "QuestMan": {
-    "localized_name": "pt-BR_Text",
+    "localized_name": "Quest Client",
     "description": null
   },
   "Quest_Farmer03_PinkCat": {
@@ -2624,7 +2624,7 @@
     "description": null
   },
   "Reward_BossDefeat": {
-    "localized_name": "Sentinela",
+    "localized_name": "Caçador veterano",
     "description": null
   },
   "Reward_Emote_A_01": {
@@ -2712,7 +2712,7 @@
     "description": null
   },
   "Reward_Paldex": {
-    "localized_name": "Sentinela",
+    "localized_name": "Biólogo de Pals",
     "description": null
   },
   "Reward_Paldex_v02": {
@@ -2901,7 +2901,7 @@
   },
   "SnowTigerBeastman": {
     "localized_name": "Bastigor",
-    "description": "Quando enxerga algo redondo, sente uma vontade intensa de dar um soco. À parte da vida em si, para um SnowTigerBeastMan a coisa mais difícil é construir um boneco de neve até o fim."
+    "description": "Quando enxerga algo redondo, sente uma vontade intensa de dar um soco. À parte da vida em si, para um Bastigor a coisa mais difícil é construir um boneco de neve até o fim."
   },
   "SoldierBee": {
     "localized_name": "Beegarde",
@@ -3040,7 +3040,7 @@
     "description": "|Era um vez um castelo com muitas flores que o rei adorava. Mas um dia aconteceu uma grande guerra e o castelo foi ameaçado pelo fogo. Foi então que apareceu o espírito de uma das flores.| Excerto do conto de fadas |A flor do rei|."
   },
   "VisitingMerchant": {
-    "localized_name": "pt-BR_Text",
+    "localized_name": "VisitingMerchant",
     "description": null
   },
   "Visitor_Hunter_Rifle": {
@@ -3072,7 +3072,7 @@
     "description": "A substância que flui do dorso de espécimes saudáveis mantém uma temperatura estável. Quando ficam nervosos, no entanto, nos piores casos ela pode acabar se vaporizando ou solidificando, causando uma morte súbita."
   },
   "WeaponsDealer": {
-    "localized_name": "pt-BR_Text",
+    "localized_name": "WeaponsDealer",
     "description": null
   },
   "WeaselDragon": {
@@ -3133,11 +3133,11 @@
   },
   "WindChimes": {
     "localized_name": "Hangyu",
-    "description": "Seus braços enormes conseguem rasgar até mesmo ferro. No passado, havia um modo de execução bárbaro em que criminosos hediondos eram acorrentados em praça pública e então tinham suas carnes despedaçadas por um Windchimes."
+    "description": "Seus braços enormes conseguem rasgar até mesmo ferro. No passado, havia um modo de execução bárbaro em que criminosos hediondos eram acorrentados em praça pública e então tinham suas carnes despedaçadas por um Hangyu."
   },
   "WindChimes_Ice": {
     "localized_name": "Hangyu Cryst",
-    "description": "Seus braços enormes conseguem despedaçar até mesmo blocos de gelo. No passado, havia um modo de tortura bárbaro em que criminosos hediondos eram acorrentados em praça pública e então tinham seus cabelos arrancados por um Windchimes_Ice."
+    "description": "Seus braços enormes conseguem despedaçar até mesmo blocos de gelo. No passado, havia um modo de tortura bárbaro em que criminosos hediondos eram acorrentados em praça pública e então tinham seus cabelos arrancados por um Hangyu Cryst."
   },
   "WingGolem": {
     "localized_name": "Knocklem",
@@ -3157,7 +3157,7 @@
   },
   "WoolFox": {
     "localized_name": "Cremis",
-    "description": "Possui muito mais lã que uma SheepBall (além de ser muito mais fácil de criar que qualquer SheepBall). Ainda assim, historicamente foi sempre criada apenas como Pal de estimação. Parece que a fofura a salvou da pecuária."
+    "description": "Possui muito mais lã que uma Lamball (além de ser muito mais fácil de criar que qualquer Lamball). Ainda assim, historicamente foi sempre criada apenas como Pal de estimação. Parece que a fofura a salvou da pecuária."
   },
   "WorldTreeDragon": {
     "localized_name": "Astralym",
@@ -3234,5 +3234,221 @@
   "Yeti_Grass": {
     "localized_name": "Wumpo Botan",
     "description": "Cientistas já apararam um espécime todo para descobrir sua verdadeira forma, mas no final restou apenas a grama cortada, como se nunca tivesse existido nada no interior."
+  },
+  "ArenaShop": {
+    "localized_name": "ArenaShop",
+    "description": null
+  },
+  "Arena_Legend_1": {
+    "localized_name": "Arena_Legend_1",
+    "description": null
+  },
+  "Arena_Legend_10": {
+    "localized_name": "Arena_Legend_10",
+    "description": null
+  },
+  "Arena_Legend_11": {
+    "localized_name": "Arena_Legend_11",
+    "description": null
+  },
+  "Arena_Legend_12": {
+    "localized_name": "Arena_Legend_12",
+    "description": null
+  },
+  "Arena_Legend_13": {
+    "localized_name": "Arena_Legend_13",
+    "description": null
+  },
+  "Arena_Legend_14": {
+    "localized_name": "Arena_Legend_14",
+    "description": null
+  },
+  "Arena_Legend_15": {
+    "localized_name": "Arena_Legend_15",
+    "description": null
+  },
+  "Arena_Legend_16": {
+    "localized_name": "Arena_Legend_16",
+    "description": null
+  },
+  "Arena_Legend_17": {
+    "localized_name": "Arena_Legend_17",
+    "description": null
+  },
+  "Arena_Legend_18": {
+    "localized_name": "Arena_Legend_18",
+    "description": null
+  },
+  "Arena_Legend_19": {
+    "localized_name": "Arena_Legend_19",
+    "description": null
+  },
+  "Arena_Legend_2": {
+    "localized_name": "Arena_Legend_2",
+    "description": null
+  },
+  "Arena_Legend_20": {
+    "localized_name": "Arena_Legend_20",
+    "description": null
+  },
+  "Arena_Legend_3": {
+    "localized_name": "Arena_Legend_3",
+    "description": null
+  },
+  "Arena_Legend_4": {
+    "localized_name": "Arena_Legend_4",
+    "description": null
+  },
+  "Arena_Legend_5": {
+    "localized_name": "Arena_Legend_5",
+    "description": null
+  },
+  "Arena_Legend_6": {
+    "localized_name": "Arena_Legend_6",
+    "description": null
+  },
+  "Arena_Legend_7": {
+    "localized_name": "Arena_Legend_7",
+    "description": null
+  },
+  "Arena_Legend_8": {
+    "localized_name": "Arena_Legend_8",
+    "description": null
+  },
+  "Arena_Legend_9": {
+    "localized_name": "Arena_Legend_9",
+    "description": null
+  },
+  "ArmorWoodlouse": {
+    "localized_name": "ArmorWoodlouse",
+    "description": null
+  },
+  "BeardedDragon": {
+    "localized_name": "BeardedDragon",
+    "description": "This Pal is under investigation."
+  },
+  "BlueWoolRabbit": {
+    "localized_name": "BlueWoolRabbit",
+    "description": null
+  },
+  "CandleWitch": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "CuteOrca": {
+    "localized_name": "CuteOrca",
+    "description": null
+  },
+  "DarkMutant": {
+    "localized_name": "DarkMutant",
+    "description": "O clarão de um DarkMutant de técnica aprimorada é capaz de cortar dimensões, criando uma ruptura no espaço. Há quem teorize que foi dessas rupturas que alguns Pals surgiram."
+  },
+  "DesertBoss": {
+    "localized_name": "DesertBoss",
+    "description": null
+  },
+  "ElecSnail_Fire": {
+    "localized_name": "ElecSnail_Fire",
+    "description": null
+  },
+  "ElectricBoss": {
+    "localized_name": "ElectricBoss",
+    "description": null
+  },
+  "Emote_Tester": {
+    "localized_name": "Emote_Tester",
+    "description": null
+  },
+  "ForestBoss": {
+    "localized_name": "Lily & Lyleen",
+    "description": null
+  },
+  "FrozenBear": {
+    "localized_name": "FrozenBear",
+    "description": null
+  },
+  "GrassDragon": {
+    "localized_name": "GrassDragon",
+    "description": "This Pal is under investigation."
+  },
+  "IceVeilDragon": {
+    "localized_name": "IceVeilDragon",
+    "description": null
+  },
+  "KingCrab": {
+    "localized_name": "KingCrab",
+    "description": null
+  },
+  "LeafBird": {
+    "localized_name": "LeafBird",
+    "description": null
+  },
+  "MedjedBird": {
+    "localized_name": "MedjedBird",
+    "description": null
+  },
+  "MexicanSalamander": {
+    "localized_name": "MexicanSalamander",
+    "description": null
+  },
+  "Monkey_Ice": {
+    "localized_name": "Monkey_Ice",
+    "description": null
+  },
+  "MonochromeMushroom": {
+    "localized_name": "MonochromeMushroom",
+    "description": null
+  },
+  "Negotiator": {
+    "localized_name": "Negotiator",
+    "description": null
+  },
+  "PinkKangaroo": {
+    "localized_name": "PinkKangaroo",
+    "description": null
+  },
+  "RockCheetah": {
+    "localized_name": "RockCheetah",
+    "description": null
+  },
+  "SakurajimaBoss": {
+    "localized_name": "Saya & Selyne",
+    "description": null
+  },
+  "SnakeQueen": {
+    "localized_name": "SnakeQueen",
+    "description": null
+  },
+  "SnowBoss": {
+    "localized_name": "Victor & Shadowbeak",
+    "description": null
+  },
+  "StrawHatCat": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "TestAssassin": {
+    "localized_name": "TestAssassin",
+    "description": null
+  },
+  "TestNPC": {
+    "localized_name": "TestNPC",
+    "description": null
+  },
+  "VikingBoss": {
+    "localized_name": "Björn & Bastigor",
+    "description": null
+  },
+  "VolcanicTurtle": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "WaterLizard": {
+    "localized_name": "WaterLizard",
+    "description": "-"
+  },
+  "WorldTree_Hunter_MissileLauncher_test": {
+    "localized_name": "WorldTree_Hunter_MissileLauncher_test",
+    "description": null
   }
 }

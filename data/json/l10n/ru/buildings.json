@@ -131,6 +131,10 @@
     "localized_name": "Аркадный автомат",
     "description": "Декоративный аркадный автомат. Сломан и не пригоден для игры."
   },
+  "Banyan_Big": {
+    "localized_name": "Banyan_Big",
+    "description": null
+  },
   "Barrel01_Iron": {
     "localized_name": "Красная металлическая бочка",
     "description": "Декоративная красная металлическая бочка."
@@ -359,6 +363,10 @@
     "localized_name": "Тренировочное чучело",
     "description": "Тренировочное чучело, выполненное по образу Пенгуллет. Можно ставить только в просторном месте."
   },
+  "DamagedScarecrow_Test": {
+    "localized_name": "DamagedScarecrow_Test",
+    "description": null
+  },
   "DarkIsland_Banner": {
     "localized_name": "Вертикальное знамя воинов Тэнраку",
     "description": "Декоративное вертикальное знамя народа Тэнраку."
@@ -368,8 +376,8 @@
     "description": "Декоративный флаг народа Тэнраку."
   },
   "Decal_PalSticker_PinkCat": {
-    "localized_name": "ru_Text",
-    "description": "ru_Text"
+    "localized_name": "Tuppanyan sticker",
+    "description": null
   },
   "DefenseBowGun": {
     "localized_name": "Стационарный арбалет",
@@ -735,6 +743,10 @@
     "localized_name": "Стеклянный фундамент",
     "description": "Фундамент для строительства стен и сооружений. Очень прочный, так как сделан из закалённого стекла."
   },
+  "Glass_pillars": {
+    "localized_name": "Стеклянная колонна",
+    "description": "Колонна для поддержки здания. Очень прочная, так как сделана из закалённого стекла."
+  },
   "Glass_roof": {
     "localized_name": "Стеклянная крыша",
     "description": "Крыша, устанавливаемая на стены для защиты от непогоды. Очень прочная, так как сделана из закалённого стекла."
@@ -757,7 +769,7 @@
   },
   "GoalSoccer_Iron": {
     "localized_name": "Футбольные ворота",
-    "description": "Декоративные футбольные ворота. SheepBall не принесёт очков — голы не засчитываются."
+    "description": "Декоративные футбольные ворота. Ламболл не принесёт очков — голы не засчитываются."
   },
   "GuardianDogStatue": {
     "localized_name": "Статуя Якумо",
@@ -1111,6 +1123,10 @@
     "localized_name": "Металлический фундамент",
     "description": "Фундамент для строительства стен и сооружений. Очень прочный, ведь сделан из металла."
   },
+  "Metal_pillars": {
+    "localized_name": "Металлическая колонна",
+    "description": "Колонна для поддержки здания. Очень прочная, ведь сделана из металла."
+  },
   "Metal_roof": {
     "localized_name": "Металлическая крыша",
     "description": "Крыша для защиты от непогоды. Устанавливается на стены. Прочная, ведь сделана из металла."
@@ -1276,8 +1292,8 @@
     "description": "Декоративный узкий антикварный ковер."
   },
   "Rug_Wood": {
-    "localized_name": "ru_Text",
-    "description": "ru_Text"
+    "localized_name": "Fur rug",
+    "description": null
   },
   "SF_Chair": {
     "localized_name": "Лабораторный стул",
@@ -1346,6 +1362,10 @@
   "SF_foundation": {
     "localized_name": "Лаконичный фундамент",
     "description": "Фундамент для строительства стен и сооружений. Позволяет создавать минималистичные постройки в стиле неофутуризма."
+  },
+  "SF_pillars": {
+    "localized_name": "Лаконичная колонна",
+    "description": "Колонна для опоры здания. Придаёт постройке минималистичный стиль в духе неофутуризма."
   },
   "SF_roof": {
     "localized_name": "Лаконичная крыша",
@@ -1611,6 +1631,10 @@
     "localized_name": "Каменный фундамент",
     "description": "Фундамент для строительства стен и сооружений. Довольно прочный, ведь сделан из камня."
   },
+  "Stone_pillar": {
+    "localized_name": "Каменная колонна",
+    "description": "Колонна для поддержки здания. Довольно прочная, ведь сделана из камня."
+  },
   "Stone_roof": {
     "localized_name": "Каменная крыша",
     "description": "Крыша для защиты от непогоды. Устанавливается на стены. Довольно прочные, ведь сделана из камня."
@@ -1808,8 +1832,8 @@
     "description": "Ловушка, замораживающая Палов, наступивших на неё. Шанс поимки таких замороженных Палов с помощью сфер повышается."
   },
   "Trap_MovingPanel": {
-    "localized_name": "ru_Text",
-    "description": "ru_Text"
+    "localized_name": "Moving Panels",
+    "description": "A description of the moving panel"
   },
   "Trap_Noose": {
     "localized_name": "Подвесная ловушка",
@@ -1919,6 +1943,10 @@
     "localized_name": "Лестница",
     "description": "Лестница, с помощью которой можно забраться на небольшую высоту."
   },
+  "Wooden_pillar": {
+    "localized_name": "Деревянная колонна",
+    "description": "Колонна для поддержки здания. Непрочная, ведь сделана из дерева."
+  },
   "Wooden_roof": {
     "localized_name": "Деревянная крыша",
     "description": "Крыша для защиты от непогоды. Устанавливается на стены. Непрочная, ведь сделана из дерева."
@@ -1954,5 +1982,13 @@
   "Zaisu": {
     "localized_name": "Напольный стул",
     "description": "Декоративный напольный стул. Используйте для строительства в японском стиле."
+  },
+  "JapaneseStyle_TriangleStairsCorner_02": {
+    "localized_name": "JapaneseStyle_TriangleStairsCorner_02",
+    "description": null
+  },
+  "WoodCreator": {
+    "localized_name": "WoodCreator",
+    "description": null
   }
 }

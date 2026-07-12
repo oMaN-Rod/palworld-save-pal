@@ -131,6 +131,10 @@
     "localized_name": "Borne d'arcade",
     "description": "Une borne d'arcade décorative. Cassée, il est impossible d'y jouer."
   },
+  "Banyan_Big": {
+    "localized_name": "Banyan_Big",
+    "description": null
+  },
   "Barrel01_Iron": {
     "localized_name": "Baril rouge",
     "description": "Un baril rouge décoratif."
@@ -359,6 +363,10 @@
     "localized_name": "Mannequin d’entraînement",
     "description": "Un mannequin d'entraînement à l'effigie de Pengullet. Ne peut être installé que dans les lieux spacieux."
   },
+  "DamagedScarecrow_Test": {
+    "localized_name": "DamagedScarecrow_Test",
+    "description": null
+  },
   "DarkIsland_Banner": {
     "localized_name": "Bannière du Paradis Déchu",
     "description": "Bannière du Paradis Déchu, destinée à la décoration."
@@ -368,8 +376,8 @@
     "description": "Drapeau du Paradis Déchu, destiné à la décoration."
   },
   "Decal_PalSticker_PinkCat": {
-    "localized_name": "fr_Text",
-    "description": "fr_Text"
+    "localized_name": "Tuppanyan sticker",
+    "description": null
   },
   "DefenseBowGun": {
     "localized_name": "Arbalète montée",
@@ -413,7 +421,7 @@
   },
   "DimensionPalStorage": {
     "localized_name": "Stockage de Pals dimensionnel",
-    "description": "Une installation qui permet de stocker un grand nombre de Pals attrapés. Les membres de la guilde peuvent ajouter et retirer des Pals à leur guise. Passer les paramètres en « privé » restreint l'accès au propriétaire uniquement."
+    "description": "Une installation qui permet de stocker un grand nombre de Pals attrapés. Les membres de la guilde peuvent ajouter et retirer des Pals à leur guise. Passer les paramètres en « privé » restreint l'accès au propriétaire uniquement."
   },
   "DismantlingConveyor": {
     "localized_name": "Destructeur de Pals",
@@ -735,6 +743,10 @@
     "localized_name": "Fondation en verre",
     "description": "Une fondation sur laquelle construire des murs ou des installations. Sa structure en verre renforcé la rend extrêmement solide."
   },
+  "Glass_pillars": {
+    "localized_name": "Pilier en verre",
+    "description": "Un pilier pour soutenir les bâtiments. Sa composition en verre le rend très robuste."
+  },
   "Glass_roof": {
     "localized_name": "Toit en verre",
     "description": "Un toit à construire sur des murs pour contrer les éléments. Sa composition en verre le rend très robuste."
@@ -757,7 +769,7 @@
   },
   "GoalSoccer_Iron": {
     "localized_name": "Cage de foot",
-    "description": "Une cage de foot décorative. Y introduire un SheepBall n'accorde aucun but."
+    "description": "Une cage de foot décorative. Y introduire un Lamball n'accorde aucun but."
   },
   "GuardianDogStatue": {
     "localized_name": "Statue de Yakumo",
@@ -1111,6 +1123,10 @@
     "localized_name": "Fondation en métal",
     "description": "Une fondation sur laquelle construire des murs ou des installations. Sa structure en métal la rend extrêmement solide."
   },
+  "Metal_pillars": {
+    "localized_name": "Pilier en métal",
+    "description": "Un pilier pour soutenir les bâtiments. Sa composition en métal le rend très robuste."
+  },
   "Metal_roof": {
     "localized_name": "Toit en métal",
     "description": "Un toit à construire sur des murs pour contrer les éléments. Sa composition en métal le rend très solide."
@@ -1276,8 +1292,8 @@
     "description": "Un tapis long ancien décoratif."
   },
   "Rug_Wood": {
-    "localized_name": "fr_Text",
-    "description": "fr_Text"
+    "localized_name": "Fur rug",
+    "description": null
   },
   "SF_Chair": {
     "localized_name": "Chaise de laboratoire",
@@ -1346,6 +1362,10 @@
   "SF_foundation": {
     "localized_name": "Fondation futuriste",
     "description": "Une fondation sur laquelle construire des murs ou des installations. Permet de bâtir dans un style moderne et futuriste."
+  },
+  "SF_pillars": {
+    "localized_name": "Pilier futuriste",
+    "description": "Un pilier pour soutenir les bâtiments. Permet de bâtir dans un style moderne et futuriste."
   },
   "SF_roof": {
     "localized_name": "Toit futuriste",
@@ -1611,6 +1631,10 @@
     "localized_name": "Fondation en pierre",
     "description": "Une fondation sur laquelle construire des murs ou des installations. Sa structure en pierre lui confère une solidité appréciable."
   },
+  "Stone_pillar": {
+    "localized_name": "Pilier en pierre",
+    "description": "Un pilier pour soutenir les bâtiments. Sa composition en pierre le rend assez robuste."
+  },
   "Stone_roof": {
     "localized_name": "Toit en pierre",
     "description": "Un toit à construire sur des murs pour contrer les éléments. Le fait qu'il soit en pierre le rend plus solide."
@@ -1808,8 +1832,8 @@
     "description": "Un piège qui gèle les Pals marchant dessus. Les Pals congelés seront plus faciles à capturer."
   },
   "Trap_MovingPanel": {
-    "localized_name": "fr_Text",
-    "description": "fr_Text"
+    "localized_name": "Moving Panels",
+    "description": "A description of the moving panel"
   },
   "Trap_Noose": {
     "localized_name": "Piège suspendu",
@@ -1919,6 +1943,10 @@
     "localized_name": "Échelle",
     "description": "Une échelle qui permet de monter sur les lieux légèrement surélevés."
   },
+  "Wooden_pillar": {
+    "localized_name": "Pilier en bois",
+    "description": "Un pilier pour soutenir les bâtiments. Sa composition en bois le rend fragile."
+  },
   "Wooden_roof": {
     "localized_name": "Toit en bois",
     "description": "Un toit à placer sur des murs pour contrer les éléments. Sa matière en bois le rend fragile."
@@ -1954,5 +1982,13 @@
   "Zaisu": {
     "localized_name": "Chaise de sol",
     "description": "Une chaise de sol décorative. À utiliser dans les constructions de style japonais."
+  },
+  "JapaneseStyle_TriangleStairsCorner_02": {
+    "localized_name": "JapaneseStyle_TriangleStairsCorner_02",
+    "description": null
+  },
+  "WoodCreator": {
+    "localized_name": "WoodCreator",
+    "description": null
   }
 }

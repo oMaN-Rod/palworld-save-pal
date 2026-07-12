@@ -356,7 +356,7 @@
     "description": "본래 팔라디우스와(과) 하나의 존재였다. 부정적 감정이 분리된 존재로 여겨지나 눈동자 속에는 일말의 자비가 반짝인다."
   },
   "BlackFurDragon": {
-    "localized_name": "ko_Text",
+    "localized_name": "Dragostrophe",
     "description": "심연에서 온 침묵의 존재. 그대, 이 용의 등에 타지 말지어다. 그대, 이 용에게 소리치지 말지어다."
   },
   "BlackGriffon": {
@@ -477,7 +477,7 @@
   },
   "ChickenPal": {
     "localized_name": "꼬꼬닭",
-    "description": "너무나 약하고 또 너무나 맛있다. SheepBall와(과) 함께 최약체를 담당한다. 많이 잡았다 싶으면 또 어디선가 튀어나온다."
+    "description": "너무나 약하고 또 너무나 맛있다. 도로롱와(과) 함께 최약체를 담당한다. 많이 잡았다 싶으면 또 어디선가 튀어나온다."
   },
   "ClioneTwins": {
     "localized_name": "리오리네",
@@ -588,8 +588,8 @@
     "description": "건기엔 신경질적이어서 항상 까칠하다. 같은 무리끼리의 사소한 충돌도 우당탕탕 큰 싸움으로 번진다."
   },
   "ElecLion": {
-    "localized_name": "ko_Text",
-    "description": "ko_Text"
+    "localized_name": "Boltmane",
+    "description": "The more it moves, the more it heats up and the hair tips increasingly glow brighter. At its peak, it becomes so dazzling that you risk blindness if you stare at it directly."
   },
   "ElecLizard": {
     "localized_name": "밍기저드",
@@ -1065,7 +1065,7 @@
   },
   "GhostAnglerfish": {
     "localized_name": "빛초롱",
-    "description": "반짝이는 발광체로 주변의 어둠을 밝게 비춘다. 발광체의 빛에 혹해 이끌려 온 팰들은 GhostAnglerFish의 정처 없는 길 안내를 받게 된다. 그저 무사히 집에 돌아갈 때를 기다리면서."
+    "description": "반짝이는 발광체로 주변의 어둠을 밝게 비춘다. 발광체의 빛에 혹해 이끌려 온 팰들은 빛초롱의 정처 없는 길 안내를 받게 된다. 그저 무사히 집에 돌아갈 때를 기다리면서."
   },
   "GhostAnglerfish_Fire": {
     "localized_name": "불초롱",
@@ -1617,7 +1617,7 @@
   },
   "LilyQueen": {
     "localized_name": "릴린",
-    "description": "자애심으로 가득한 온화한 팰. 부모를 잃은 어린 팰들을 돌봐주고 있다. 훈육 방법은 전력으로 쏘는 SolarBeam."
+    "description": "자애심으로 가득한 온화한 팰. 부모를 잃은 어린 팰들을 돌봐주고 있다. 훈육 방법은 전력으로 쏘는 태양 폭발."
   },
   "LilyQueen_Dark": {
     "localized_name": "루나린",
@@ -2328,7 +2328,7 @@
     "description": null
   },
   "PalPassive_Doctor": {
-    "localized_name": "섬 주민",
+    "localized_name": "브라운 박사",
     "description": null
   },
   "PalTrader": {
@@ -2480,7 +2480,7 @@
     "description": "비나이트을(를) 총괄하는 선택받은 여왕. 위대한 여왕을 위해 일한다는 기쁨으로 죽을 때까지 일하는 하인이 끊이지 않는다."
   },
   "QuestMan": {
-    "localized_name": "ko_Text",
+    "localized_name": "Quest Client",
     "description": null
   },
   "Quest_Farmer03_PinkCat": {
@@ -2624,7 +2624,7 @@
     "description": null
   },
   "Reward_BossDefeat": {
-    "localized_name": "위병",
+    "localized_name": "베테랑 팰 사냥꾼",
     "description": null
   },
   "Reward_Emote_A_01": {
@@ -2712,7 +2712,7 @@
     "description": null
   },
   "Reward_Paldex": {
-    "localized_name": "위병",
+    "localized_name": "팰 생태조사원",
     "description": null
   },
   "Reward_Paldex_v02": {
@@ -2901,7 +2901,7 @@
   },
   "SnowTigerBeastman": {
     "localized_name": "빙호우거",
-    "description": "둥근 물체를 볼 때마다 주먹이 근질거린다. SnowTigerBeastMan에게 생존 다음으로 힘겨운 일은 눈사람을 온전하게 완성하는 것이다."
+    "description": "둥근 물체를 볼 때마다 주먹이 근질거린다. 빙호우거에게 생존 다음으로 힘겨운 일은 눈사람을 온전하게 완성하는 것이다."
   },
   "SoldierBee": {
     "localized_name": "비나이트",
@@ -3040,7 +3040,7 @@
     "description": "성에는 임금님께서 좋아하시는 꽃이 잔뜩 피어 있었습니다. 어느 날 큰 싸움이 벌어져, 성까지 불이 옮겨붙으려 하고 있었습니다. 바로 그곳에서, 한 꽃의 정령이 나타났습니다. - 동화 '임금님의 꽃'에서 발췌."
   },
   "VisitingMerchant": {
-    "localized_name": "ko_Text",
+    "localized_name": "VisitingMerchant",
     "description": null
   },
   "Visitor_Hunter_Rifle": {
@@ -3072,7 +3072,7 @@
     "description": "건강한 개체라면 등에 흐르는 물질이 안정적인 온도를 유지한다. 가슴이 두근거리면 온도가 점점 불안정해지며 최악의 경우 기화와 응고를 일으켜 갑작스러운 쇼크사로 사망한다."
   },
   "WeaponsDealer": {
-    "localized_name": "ko_Text",
+    "localized_name": "WeaponsDealer",
     "description": null
   },
   "WeaselDragon": {
@@ -3133,11 +3133,11 @@
   },
   "WindChimes": {
     "localized_name": "건다리",
-    "description": "거대한 팔은 강철도 찢어버릴 정도다. 대역죄인을 마을 광장에 결박해 Windchimes에게 전신이 으스러지도록 만드는 잔혹한 형벌이 시행됐던 적도 있다."
+    "description": "거대한 팔은 강철도 찢어버릴 정도다. 대역죄인을 마을 광장에 결박해 건다리에게 전신이 으스러지도록 만드는 잔혹한 형벌이 시행됐던 적도 있다."
   },
   "WindChimes_Ice": {
     "localized_name": "유령건다리",
-    "description": "얼음덩어리도 찢어버릴 만큼 거대한 팔이 특징. 대역죄인을 마을 광장에 결박하여 Windchimes_Ice의 힘으로 머리채를 쥐어뜯어버리는 잔혹한 형벌이 시행됐던 적도 있다."
+    "description": "얼음덩어리도 찢어버릴 만큼 거대한 팔이 특징. 대역죄인을 마을 광장에 결박하여 유령건다리의 힘으로 머리채를 쥐어뜯어버리는 잔혹한 형벌이 시행됐던 적도 있다."
   },
   "WingGolem": {
     "localized_name": "테라나이트",
@@ -3157,7 +3157,7 @@
   },
   "WoolFox": {
     "localized_name": "밀피",
-    "description": "SheepBall보다 털의 품질이 좋고 SheepBall보다 가축으로 삼기 좋은 성격이다. 하지만 역사적으로는 항상 애완용 팰로 사육되어 왔다. 역시 귀여운 게 최고다."
+    "description": "도로롱보다 털의 품질이 좋고 도로롱보다 가축으로 삼기 좋은 성격이다. 하지만 역사적으로는 항상 애완용 팰로 사육되어 왔다. 역시 귀여운 게 최고다."
   },
   "WorldTreeDragon": {
     "localized_name": "제로버스",
@@ -3234,5 +3234,221 @@
   "Yeti_Grass": {
     "localized_name": "움피티",
     "description": "정체를 밝혀내려고 연구자가 풀을 벴지만 애초부터 안엔 아무것도 없었다는 듯 풀만 남아 있었다."
+  },
+  "ArenaShop": {
+    "localized_name": "ArenaShop",
+    "description": null
+  },
+  "Arena_Legend_1": {
+    "localized_name": "Arena_Legend_1",
+    "description": null
+  },
+  "Arena_Legend_10": {
+    "localized_name": "Arena_Legend_10",
+    "description": null
+  },
+  "Arena_Legend_11": {
+    "localized_name": "Arena_Legend_11",
+    "description": null
+  },
+  "Arena_Legend_12": {
+    "localized_name": "Arena_Legend_12",
+    "description": null
+  },
+  "Arena_Legend_13": {
+    "localized_name": "Arena_Legend_13",
+    "description": null
+  },
+  "Arena_Legend_14": {
+    "localized_name": "Arena_Legend_14",
+    "description": null
+  },
+  "Arena_Legend_15": {
+    "localized_name": "Arena_Legend_15",
+    "description": null
+  },
+  "Arena_Legend_16": {
+    "localized_name": "Arena_Legend_16",
+    "description": null
+  },
+  "Arena_Legend_17": {
+    "localized_name": "Arena_Legend_17",
+    "description": null
+  },
+  "Arena_Legend_18": {
+    "localized_name": "Arena_Legend_18",
+    "description": null
+  },
+  "Arena_Legend_19": {
+    "localized_name": "Arena_Legend_19",
+    "description": null
+  },
+  "Arena_Legend_2": {
+    "localized_name": "Arena_Legend_2",
+    "description": null
+  },
+  "Arena_Legend_20": {
+    "localized_name": "Arena_Legend_20",
+    "description": null
+  },
+  "Arena_Legend_3": {
+    "localized_name": "Arena_Legend_3",
+    "description": null
+  },
+  "Arena_Legend_4": {
+    "localized_name": "Arena_Legend_4",
+    "description": null
+  },
+  "Arena_Legend_5": {
+    "localized_name": "Arena_Legend_5",
+    "description": null
+  },
+  "Arena_Legend_6": {
+    "localized_name": "Arena_Legend_6",
+    "description": null
+  },
+  "Arena_Legend_7": {
+    "localized_name": "Arena_Legend_7",
+    "description": null
+  },
+  "Arena_Legend_8": {
+    "localized_name": "Arena_Legend_8",
+    "description": null
+  },
+  "Arena_Legend_9": {
+    "localized_name": "Arena_Legend_9",
+    "description": null
+  },
+  "ArmorWoodlouse": {
+    "localized_name": "ArmorWoodlouse",
+    "description": null
+  },
+  "BeardedDragon": {
+    "localized_name": "BeardedDragon",
+    "description": "This Pal is under investigation."
+  },
+  "BlueWoolRabbit": {
+    "localized_name": "BlueWoolRabbit",
+    "description": null
+  },
+  "CandleWitch": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "CuteOrca": {
+    "localized_name": "CuteOrca",
+    "description": null
+  },
+  "DarkMutant": {
+    "localized_name": "DarkMutant",
+    "description": "실력이 극에 달한 DarkMutant의 칼질 한 번에 차원이 단절되고 공간에 균열이 생긴다고 한다. 일부 팰은 그곳에서 태어난다는 설도 있다."
+  },
+  "DesertBoss": {
+    "localized_name": "DesertBoss",
+    "description": null
+  },
+  "ElecSnail_Fire": {
+    "localized_name": "ElecSnail_Fire",
+    "description": null
+  },
+  "ElectricBoss": {
+    "localized_name": "ElectricBoss",
+    "description": null
+  },
+  "Emote_Tester": {
+    "localized_name": "Emote_Tester",
+    "description": null
+  },
+  "ForestBoss": {
+    "localized_name": "릴리&릴린",
+    "description": null
+  },
+  "FrozenBear": {
+    "localized_name": "FrozenBear",
+    "description": null
+  },
+  "GrassDragon": {
+    "localized_name": "GrassDragon",
+    "description": "This Pal is under investigation."
+  },
+  "IceVeilDragon": {
+    "localized_name": "IceVeilDragon",
+    "description": null
+  },
+  "KingCrab": {
+    "localized_name": "KingCrab",
+    "description": null
+  },
+  "LeafBird": {
+    "localized_name": "LeafBird",
+    "description": null
+  },
+  "MedjedBird": {
+    "localized_name": "MedjedBird",
+    "description": null
+  },
+  "MexicanSalamander": {
+    "localized_name": "MexicanSalamander",
+    "description": null
+  },
+  "Monkey_Ice": {
+    "localized_name": "Monkey_Ice",
+    "description": null
+  },
+  "MonochromeMushroom": {
+    "localized_name": "MonochromeMushroom",
+    "description": null
+  },
+  "Negotiator": {
+    "localized_name": "Negotiator",
+    "description": null
+  },
+  "PinkKangaroo": {
+    "localized_name": "PinkKangaroo",
+    "description": null
+  },
+  "RockCheetah": {
+    "localized_name": "RockCheetah",
+    "description": null
+  },
+  "SakurajimaBoss": {
+    "localized_name": "사야&셀레문",
+    "description": null
+  },
+  "SnakeQueen": {
+    "localized_name": "SnakeQueen",
+    "description": null
+  },
+  "SnowBoss": {
+    "localized_name": "빅터&제노그리프",
+    "description": null
+  },
+  "StrawHatCat": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "TestAssassin": {
+    "localized_name": "TestAssassin",
+    "description": null
+  },
+  "TestNPC": {
+    "localized_name": "TestNPC",
+    "description": null
+  },
+  "VikingBoss": {
+    "localized_name": "비에른&빙호우거",
+    "description": null
+  },
+  "VolcanicTurtle": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "WaterLizard": {
+    "localized_name": "WaterLizard",
+    "description": "-"
+  },
+  "WorldTree_Hunter_MissileLauncher_test": {
+    "localized_name": "WorldTree_Hunter_MissileLauncher_test",
+    "description": null
   }
 }

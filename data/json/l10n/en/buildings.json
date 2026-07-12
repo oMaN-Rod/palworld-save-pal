@@ -131,6 +131,10 @@
     "localized_name": "Arcade Game Cabinet",
     "description": "Decorative arcade machine. Broken, it can't be played."
   },
+  "Banyan_Big": {
+    "localized_name": "Banyan_Big",
+    "description": null
+  },
   "Barrel01_Iron": {
     "localized_name": "Red Metal Barrel",
     "description": "Decorative red metal barrel."
@@ -359,6 +363,10 @@
     "localized_name": "Training Dummy",
     "description": "Training dummy shaped like a Pengullet. Can only be placed in wide open areas."
   },
+  "DamagedScarecrow_Test": {
+    "localized_name": "DamagedScarecrow_Test",
+    "description": null
+  },
   "DarkIsland_Banner": {
     "localized_name": "Feybreak Banner",
     "description": "Decorative Feybreak banner."
@@ -369,7 +377,7 @@
   },
   "Decal_PalSticker_PinkCat": {
     "localized_name": "Tuppanyan sticker",
-    "description": "en Text"
+    "description": null
   },
   "DefenseBowGun": {
     "localized_name": "Mounted Crossbow",
@@ -735,6 +743,10 @@
     "localized_name": "Glass Foundation",
     "description": "A foundation for building walls or facilities on. Made of industrial-strength glass, it's quite sturdy."
   },
+  "Glass_pillars": {
+    "localized_name": "Glass Pillar",
+    "description": "Column for structural support. Made of industrial-strength glass, it's quite sturdy."
+  },
   "Glass_roof": {
     "localized_name": "Glass Roof",
     "description": "A roof built on top of walls to keep out the rain and wind. Made of industrial-strength glass, it's quite sturdy."
@@ -757,7 +769,7 @@
   },
   "GoalSoccer_Iron": {
     "localized_name": "Soccer Goal",
-    "description": "Decorative soccer goal. Kicking a SheepBall into it will get you no points."
+    "description": "Decorative soccer goal. Kicking a Lamball into it will get you no points."
   },
   "GuardianDogStatue": {
     "localized_name": "Yakumo Statue",
@@ -1111,6 +1123,10 @@
     "localized_name": "Metal Foundation",
     "description": "A foundation for building walls or facilities on. Made from metal, it is extremely durable."
   },
+  "Metal_pillars": {
+    "localized_name": "Metal Pillar",
+    "description": "Column for structural support. Made from metal, it is extremely durable."
+  },
   "Metal_roof": {
     "localized_name": "Metal Roof",
     "description": "A roof built on top of walls to keep out the rain and wind. Made from metal, it is extremely durable."
@@ -1277,7 +1293,7 @@
   },
   "Rug_Wood": {
     "localized_name": "Fur rug",
-    "description": "en Text"
+    "description": null
   },
   "SF_Chair": {
     "localized_name": "Laboratory Chair",
@@ -1346,6 +1362,10 @@
   "SF_foundation": {
     "localized_name": "Clean Foundation",
     "description": "A foundation for building walls or facilities. Can be used to create clean, futuristic architecture."
+  },
+  "SF_pillars": {
+    "localized_name": "Clean Pillar",
+    "description": "Column for structural support. Can be used to create clean, futuristic architecture."
   },
   "SF_roof": {
     "localized_name": "Clean Roof",
@@ -1610,6 +1630,10 @@
   "Stone_foundation": {
     "localized_name": "Stone Foundation",
     "description": "A foundation for building walls or facilities on. Made from stone, it is reasonably sturdy."
+  },
+  "Stone_pillar": {
+    "localized_name": "Stone Pillar",
+    "description": "Column for structural support. Made from stone, it is reasonably sturdy."
   },
   "Stone_roof": {
     "localized_name": "Stone Roof",
@@ -1919,6 +1943,10 @@
     "localized_name": "Ladder",
     "description": "A ladder that allows you to climb to a slightly higher place."
   },
+  "Wooden_pillar": {
+    "localized_name": "Wooden Pillar",
+    "description": "Column for structural support. Made from wood, it breaks easily."
+  },
   "Wooden_roof": {
     "localized_name": "Wooden Roof",
     "description": "A roof built on top of walls to keep out the rain and wind. Made from wood, it breaks easily."
@@ -1954,5 +1982,13 @@
   "Zaisu": {
     "localized_name": "Japanese Floor Chair",
     "description": "Decorative floor chair. Perfect for Japanese-style buildings."
+  },
+  "JapaneseStyle_TriangleStairsCorner_02": {
+    "localized_name": "JapaneseStyle_TriangleStairsCorner_02",
+    "description": null
+  },
+  "WoodCreator": {
+    "localized_name": "WoodCreator",
+    "description": null
   }
 }
