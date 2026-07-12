@@ -174,6 +174,10 @@ define_message_types! {
     LoadServerSave => "load_server_save",
     GetServerStats => "get_server_stats",
     ServerCreationProgress => "server_creation_progress",
+    // Feature additions beyond the 123 Python-parity set (session persistence).
+    ReattachSession => "reattach_session",
+    EjectSession => "eject_session",
+    SessionNotFound => "session_not_found",
 }
 
 #[cfg(test)]
@@ -308,16 +312,29 @@ mod tests {
         "server_creation_progress",
     ];
 
+    /// Feature-only additions (session persistence) that sit AFTER the 123
+    /// Python-parity types in declaration order.
+    const FEATURE_ADDITION_WIRE_NAMES: &[&str] =
+        &["reattach_session", "eject_session", "session_not_found"];
+
     #[test]
     fn exactly_123_message_types() {
         assert_eq!(EXPECTED_WIRE_NAMES.len(), 123);
-        assert_eq!(MessageType::ALL.len(), 123);
+        assert_eq!(
+            MessageType::ALL.len(),
+            EXPECTED_WIRE_NAMES.len() + FEATURE_ADDITION_WIRE_NAMES.len()
+        );
     }
 
     #[test]
     fn wire_names_match_python_enum_exactly() {
         let actual: Vec<&str> = MessageType::ALL.iter().map(|t| t.as_wire()).collect();
-        assert_eq!(actual, EXPECTED_WIRE_NAMES);
+        let expected: Vec<&str> = EXPECTED_WIRE_NAMES
+            .iter()
+            .chain(FEATURE_ADDITION_WIRE_NAMES)
+            .copied()
+            .collect();
+        assert_eq!(actual, expected);
     }
 
     #[test]

@@ -24,11 +24,12 @@ pub struct HandlerCtx<'a> {
 }
 
 /// Links a `HandlerCtx` to the connection's entry in `AppState::sessions`.
-/// SP-T2's reattach/eject also set `current_id` to point a connection at an
-/// existing store entry.
+/// `arc` is the connection's OWN arc slot (`&mut`), so `reattach_session` can
+/// REPLACE it with the store's arc for a different id — setting `current_id`
+/// alone does not reattach.
 pub struct SessionAttachment<'a> {
     pub current_id: &'a mut Option<uuid::Uuid>,
-    pub arc: &'a crate::SharedSession,
+    pub arc: &'a mut crate::SharedSession,
 }
 
 impl HandlerCtx<'_> {
@@ -46,7 +47,7 @@ impl HandlerCtx<'_> {
         if let Some(previous_id) = attachment.current_id.take() {
             store.remove(&previous_id);
         }
-        let new_id = store.register(std::sync::Arc::clone(attachment.arc));
+        let new_id = store.register(std::sync::Arc::clone(&*attachment.arc));
         drop(store);
         *attachment.current_id = Some(new_id);
         new_id
@@ -402,6 +403,14 @@ async fn route(
         // dispatcher::tests::valid_but_unimplemented_type_sends_nothing.
         MessageType::LoadServerSave => {
             handlers::servers::handle_load_server_save(serde_json::from_value(data)?, ctx).await
+        }
+        // Session persistence (SP-T2). session_not_found is emit-only, so it
+        // has no inbound arm.
+        MessageType::ReattachSession => {
+            handlers::session::handle_reattach_session(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::EjectSession => {
+            handlers::session::handle_eject_session(serde_json::from_value(data)?, ctx).await
         }
         // Remaining arms are added by Phases 1-6.
         other => {

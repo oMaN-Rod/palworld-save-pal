@@ -49,7 +49,7 @@ pub struct SelectSaveData {
 }
 
 #[derive(Debug, serde::Serialize)]
-struct LoadedSaveFilesData {
+pub(crate) struct LoadedSaveFilesData {
     level: String,
     players: Vec<String>,
     world_name: String,
@@ -60,6 +60,38 @@ struct LoadedSaveFilesData {
     /// session was registered under, so the frontend can reattach after a
     /// refresh. Last, so existing key order is unchanged.
     session_id: String,
+}
+
+impl LoadedSaveFilesData {
+    /// Rebuilds the load overview from an already-parsed session, for
+    /// `reattach_session` (SP-T2). `level`/`players` mirror `sync_app_state`'s
+    /// derivation (save id + summary order), the only values a reattach has.
+    pub(crate) fn from_session(session: &SaveSession, session_id: Uuid) -> Self {
+        Self {
+            level: session.save_id.clone(),
+            players: session
+                .player_summary_order
+                .iter()
+                .map(|uid| uid.to_string())
+                .collect(),
+            world_name: session.world_name.clone(),
+            r#type: session.save_type_label,
+            size: session.size,
+            has_gps: session.gps_available(),
+            session_id: session_id.to_string(),
+        }
+    }
+}
+
+/// Emits the load overview (`loaded_save_files` + both summaries) for a
+/// reattached session — the tail of a fresh load, read from an existing
+/// in-memory session. Shared by `reattach_session` (SP-T2).
+pub(crate) fn emit_reattach_overview(session: &SaveSession, session_id: Uuid, emitter: &Emitter) {
+    emitter.emit(
+        MessageType::LoadedSaveFiles,
+        &LoadedSaveFilesData::from_session(session, session_id),
+    );
+    emit_summary_messages(session, emitter);
 }
 
 /// Shared by select_save, load_zip_file and sync_app_state's save branch:

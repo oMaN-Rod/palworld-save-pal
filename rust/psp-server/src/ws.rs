@@ -79,12 +79,12 @@ async fn connection_loop(socket: WebSocket, client_id: String, app: Arc<AppState
 
     let emitter = Emitter::new(frame_sender);
 
-    // The connection owns ONE session `Arc` for its whole life and reuses it
-    // for every message, so per-connection state (a loaded save, gamepass scan
-    // results, a transfer source) persists across messages exactly as before.
-    // A load handler registers this same `Arc` in `AppState::sessions` under a
-    // fresh id (`current_session_id`) so it survives a reconnect (SP-T2).
-    let current_session: Arc<tokio::sync::Mutex<Session>> =
+    // The connection owns ONE session `Arc` slot, reused for every message so
+    // per-connection state (a loaded save, gamepass scan results, a transfer
+    // source) persists across messages. A load registers this `Arc` in
+    // `AppState::sessions` under a fresh id; `reattach_session` can REPLACE the
+    // slot with the store's arc for another id (SP-T2), so it is `mut`.
+    let mut current_session: Arc<tokio::sync::Mutex<Session>> =
         Arc::new(tokio::sync::Mutex::new(Session::new()));
     let mut current_session_id: Option<Uuid> = None;
 
@@ -99,7 +99,7 @@ async fn connection_loop(socket: WebSocket, client_id: String, app: Arc<AppState
             Some(Ok(Message::Text(text))) => {
                 process_text_frame(
                     text.as_str(),
-                    &current_session,
+                    &mut current_session,
                     &mut current_session_id,
                     &app,
                     &emitter,
@@ -125,7 +125,7 @@ async fn connection_loop(socket: WebSocket, client_id: String, app: Arc<AppState
 /// ws/manager.py:31-51 process_message, split into two failure stages.
 async fn process_text_frame(
     text: &str,
-    current_session: &Arc<tokio::sync::Mutex<Session>>,
+    current_session: &mut Arc<tokio::sync::Mutex<Session>>,
     current_session_id: &mut Option<Uuid>,
     app: &Arc<AppState>,
     emitter: &Emitter,
@@ -158,9 +158,11 @@ async fn process_text_frame(
     };
 
     tracing::debug!(message_type = %envelope.message_type, "processing message");
-    // Lock the connection's own session for this message. Held across the
-    // handler's `.await`s (a `tokio::Mutex`), so the map lock never is.
-    let mut session_guard = current_session.lock().await;
+    // Lock a CLONE of the connection's current arc, not the slot itself, so the
+    // slot stays mutably free for `reattach_session` to swap. The guard is held
+    // across the handler's `.await`s (a `tokio::Mutex`), so the map lock never is.
+    let session_arc = Arc::clone(current_session);
+    let mut session_guard = session_arc.lock().await;
     dispatch(
         envelope,
         HandlerCtx {
