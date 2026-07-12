@@ -1,6 +1,6 @@
 mod common;
 
-use psp_core::domain::guild_tail::{self, GuildPlayerInfo, GuildTail};
+use psp_core::domain::guild_tail;
 use psp_core::domain::{guild, player, world};
 use psp_core::error::CoreError;
 use psp_core::gamedata::GameData;
@@ -173,10 +173,7 @@ fn deleting_one_world1_guild_leaves_the_other_guild_and_its_admin_byte_identical
             .iter()
             .find(|e| props::as_uuid(&e.key) == Some(other_guild))
             .unwrap();
-        guild_tail::entry_group_data(entry)
-            .unwrap()
-            .remaining_data
-            .clone()
+        guild_tail::entry_group_data(entry).unwrap().data.clone()
     };
     let other_admin_entry_before = world::character_map(&session.level)
         .unwrap()
@@ -200,10 +197,7 @@ fn deleting_one_world1_guild_leaves_the_other_guild_and_its_admin_byte_identical
             .iter()
             .find(|e| props::as_uuid(&e.key) == Some(other_guild))
             .expect("other guild's group entry must still exist");
-        guild_tail::entry_group_data(entry)
-            .unwrap()
-            .remaining_data
-            .clone()
+        guild_tail::entry_group_data(entry).unwrap().data.clone()
     };
     assert_eq!(
         other_tail_before, other_tail_after,
@@ -416,7 +410,11 @@ fn player_sav_with_containers(pal_box_id: Uuid, otomo_id: Uuid) -> Save {
     minimal_save(player_root_properties)
 }
 
-fn guild_group_entry(guild_id: Uuid, handle_ids: &[Uuid], tail_bytes: Vec<u8>) -> MapEntry {
+fn guild_group_entry(
+    guild_id: Uuid,
+    handle_ids: &[Uuid],
+    guild: uesave::games::palworld::PalGuildGroup,
+) -> MapEntry {
     let mut value_properties = Properties::default();
     value_properties.insert(
         "GroupType",
@@ -432,7 +430,7 @@ fn guild_group_entry(guild_id: Uuid, handle_ids: &[Uuid], tail_bytes: Vec<u8>) -
                 instance_id: props::uuid_to_guid(*id),
             })
             .collect(),
-        remaining_data: tail_bytes,
+        data: uesave::games::palworld::PalGroupVariant::Guild(guild),
     };
     value_properties.insert(
         "RawData",
@@ -491,33 +489,13 @@ fn two_player_guild_session(guild_loaded: bool) -> TwoPlayerGuild {
     let admin_entry = player_character_entry(admin_id);
     let member_entry = player_character_entry(member_id);
 
-    let tail = GuildTail {
-        org_type: 0,
-        leading_bytes: [0; 4],
-        base_ids: vec![],
-        unknown_1: 0,
-        base_camp_level: 1,
-        map_object_instance_ids_base_camp_points: vec![],
-        guild_name: "Two Player Guild".to_string(),
-        last_guild_name_modifier_player_uid: Uuid::nil(),
-        unknown_2: [0; 4],
-        admin_player_uid: admin_id,
-        players: vec![
-            GuildPlayerInfo {
-                player_uid: admin_id,
-                last_online_real_time: 0,
-                player_name: "Admin".to_string(),
-            },
-            GuildPlayerInfo {
-                player_uid: member_id,
-                last_online_real_time: 0,
-                player_name: "Member".to_string(),
-            },
-        ],
-        trailing_bytes: [0; 4],
-    }
-    .to_bytes();
-    let group_entry = guild_group_entry(guild_id, &[admin_id, member_id, member_pal_id], tail);
+    let guild = guild_tail::pre_update_guild(
+        1,
+        "Two Player Guild",
+        admin_id,
+        &[(admin_id, 0, "Admin"), (member_id, 0, "Member")],
+    );
+    let group_entry = guild_group_entry(guild_id, &[admin_id, member_id, member_pal_id], guild);
     let guild_extra = guild_extra_entry(guild_id);
 
     let mut world_save_data = Properties::default();
@@ -653,13 +631,13 @@ fn delete_non_admin_player_removes_everything_and_leaves_the_admin_byte_identica
     assert!(session.loaded_players.contains_key(&admin_id));
 
     // Guild players row: member gone, admin remains, admin_player_uid/
-    // guild_name untouched (byte-identical raw tail fields).
+    // guild_name untouched (structured tail fields).
     let group_data = group_data_for(&session, guild_id);
-    let tail = GuildTail::parse(&group_data.remaining_data).unwrap();
-    assert_eq!(tail.players.len(), 1);
-    assert_eq!(tail.players[0].player_uid, admin_id);
-    assert_eq!(tail.admin_player_uid, admin_id);
-    assert_eq!(tail.guild_name, "Two Player Guild");
+    let guild = guild_tail::as_guild(group_data).unwrap();
+    assert_eq!(guild_tail::guild_player_count(guild), 1);
+    assert_eq!(guild_tail::guild_player_uids(guild)[0], admin_id);
+    assert_eq!(guild_tail::guild_admin_uid(guild), admin_id);
+    assert_eq!(guild.guild_name, "Two Player Guild");
 
     // Member's OWN guild handle removed (Guild.delete_player, guild.py:159-170).
     assert!(!group_data

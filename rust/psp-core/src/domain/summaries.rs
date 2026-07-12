@@ -9,11 +9,14 @@ use std::collections::{BTreeMap, HashMap};
 
 use crate::dto::summary::{ticks_to_datetime, GuildSummary, IsoDateTime, PlayerSummary};
 use crate::error::CoreError;
-use crate::palbin::{self, GuildRawTail};
+use crate::palbin;
 use crate::progress::ProgressSink;
 use crate::props;
 use crate::session::{parse_palworld_save, SaveSession};
+use uesave::games::palworld::PalGuildGroup;
 use uuid::Uuid;
+
+use super::guild_tail;
 
 const GROUP_TYPE_GUILD: &str = "EPalGroupType::Guild";
 
@@ -57,7 +60,7 @@ fn player_uid_from_key(entry: &uesave::MapEntry) -> Option<Uuid> {
 /// nil check Python applies in `_extract_guild_summaries`
 /// (`if not guild_id or is_empty_uuid(guild_id)`) lives only in
 /// `build_guild_summaries`, not here — see that function.
-fn guild_tail_entry(entry: &uesave::MapEntry) -> Option<(Uuid, GuildRawTail)> {
+fn guild_tail_entry(entry: &uesave::MapEntry) -> Option<(Uuid, &PalGuildGroup)> {
     let value_properties = props::struct_properties(&entry.value)?;
     let group_type = props::get(value_properties, &["GroupType"]).and_then(props::as_enum)?;
     if group_type != GROUP_TYPE_GUILD {
@@ -68,19 +71,19 @@ fn guild_tail_entry(entry: &uesave::MapEntry) -> Option<(Uuid, GuildRawTail)> {
     let uesave::Property::Struct(uesave::StructValue::PalGroupData(group_data)) = raw_data else {
         return None;
     };
-    let tail = palbin::parse_guild_raw_tail(&group_data.remaining_data).ok()?;
-    Some((guild_id, tail))
+    let guild = guild_tail::as_guild(group_data)?;
+    Some((guild_id, guild))
 }
 
 /// Port of `_build_player_guild_index`.
 pub(crate) fn build_player_guild_map(group_entries: &[uesave::MapEntry]) -> HashMap<Uuid, Uuid> {
     let mut player_guild_map = HashMap::new();
     for entry in group_entries {
-        let Some((guild_id, tail)) = guild_tail_entry(entry) else {
+        let Some((guild_id, guild)) = guild_tail_entry(entry) else {
             continue;
         };
-        for player in &tail.players {
-            player_guild_map.insert(player.player_uid, guild_id);
+        for player_uid in guild_tail::guild_player_uids(guild) {
+            player_guild_map.insert(player_uid, guild_id);
         }
     }
     player_guild_map
@@ -296,7 +299,7 @@ pub(crate) fn build_guild_summaries(
     let mut summaries = BTreeMap::new();
     let mut order = Vec::new();
     for entry in group_entries {
-        let Some((guild_id, tail)) = guild_tail_entry(entry) else {
+        let Some((guild_id, guild)) = guild_tail_entry(entry) else {
             continue;
         };
         if guild_id.is_nil() {
@@ -310,11 +313,11 @@ pub(crate) fn build_guild_summaries(
             guild_id,
             GuildSummary {
                 id: guild_id,
-                name: tail.guild_name.clone(),
-                admin_player_uid: Some(tail.admin_player_uid),
-                player_count: tail.players.len() as i64,
+                name: guild.guild_name.clone(),
+                admin_player_uid: Some(guild_tail::guild_admin_uid(guild)),
+                player_count: guild_tail::guild_player_count(guild) as i64,
                 base_count,
-                level: Some(i64::from(tail.base_camp_level)),
+                level: Some(i64::from(guild.base_camp_level)),
                 pal_count: count_guild_base_pals(base_camp_entries, character_entries, guild_id),
                 loaded: false,
             },
@@ -433,8 +436,10 @@ pub fn extract_summaries(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::palbin::test_bytes::{guild_tail, shuffle_guid_bytes};
-    use uesave::games::palworld::{PalBaseCamp, PalCharacterData, PalGroupData, PalTransform};
+    use crate::palbin::test_bytes::shuffle_guid_bytes;
+    use uesave::games::palworld::{
+        PalBaseCamp, PalCharacterData, PalGroupData, PalGroupVariant, PalGuildGroup, PalTransform,
+    };
     use uesave::{
         ByteArray, Double, MapEntry, Properties, Property, Quat, StructValue, ValueVec, Vector,
     };
@@ -517,7 +522,7 @@ mod tests {
         character_entry(NIL_UUID, instance_id, save_parameter)
     }
 
-    fn guild_entry(guild_id: &str, tail: Vec<u8>) -> MapEntry {
+    fn guild_entry(guild_id: &str, guild: PalGuildGroup) -> MapEntry {
         let mut value_properties = Properties::default();
         value_properties.insert(
             "GroupType",
@@ -527,7 +532,7 @@ mod tests {
             group_id: fguid(guild_id),
             group_name: String::new(),
             individual_character_handle_ids: vec![],
-            remaining_data: tail,
+            data: PalGroupVariant::Guild(guild),
         };
         value_properties.insert(
             "RawData",
@@ -537,6 +542,26 @@ mod tests {
             key: guid_property(guild_id),
             value: Property::Struct(StructValue::Struct(value_properties)),
         }
+    }
+
+    /// String-keyed convenience wrapper over `guild_tail::pre_update_guild`,
+    /// mirroring the old byte-tail test builder's signature.
+    fn guild(
+        base_camp_level: i32,
+        guild_name: &str,
+        admin_player_uid: &str,
+        players: &[(&str, i64, &str)],
+    ) -> PalGuildGroup {
+        let players: Vec<(Uuid, i64, &str)> = players
+            .iter()
+            .map(|(uid, last_online, name)| (uid.parse().unwrap(), *last_online, *name))
+            .collect();
+        guild_tail::pre_update_guild(
+            base_camp_level,
+            guild_name,
+            admin_player_uid.parse().unwrap(),
+            &players,
+        )
     }
 
     fn zero_transform() -> PalTransform {
@@ -609,7 +634,7 @@ mod tests {
 
     #[test]
     fn test_build_player_guild_map() {
-        let tail = guild_tail(3, "The Guild", PLAYER_ONE, &[(PLAYER_ONE, 0, "Tester")]);
+        let tail = guild(3, "The Guild", PLAYER_ONE, &[(PLAYER_ONE, 0, "Tester")]);
         let groups = vec![guild_entry(GUILD_ID, tail)];
         let map = build_player_guild_map(&groups);
         assert_eq!(
@@ -620,7 +645,7 @@ mod tests {
 
     #[test]
     fn test_build_guild_summaries_counts() {
-        let tail = guild_tail(
+        let tail = guild(
             5,
             "The Guild",
             PLAYER_ONE,
@@ -670,7 +695,7 @@ mod tests {
             },
             pal_character_entry(PLAYER_ONE, "aaaaaaaa-0000-0000-0000-000000000001", None),
         ];
-        let tail = guild_tail(1, "G", PLAYER_ONE, &[(PLAYER_ONE, 0, "Tester")]);
+        let tail = guild(1, "G", PLAYER_ONE, &[(PLAYER_ONE, 0, "Tester")]);
         let groups = vec![guild_entry(GUILD_ID, tail)];
 
         let guild_map = build_player_guild_map(&groups);

@@ -1175,10 +1175,11 @@ pub fn delete_player(
             let entries = world::group_map(&session.level)?;
             let group_data = super::guild_tail::entry_group_data(&entries[entry_index])
                 .ok_or_else(|| CoreError::Parse("guild group data untyped".into()))?;
-            let tail = super::guild_tail::GuildTail::parse(&group_data.remaining_data)?;
+            let guild = super::guild_tail::as_guild(group_data)
+                .ok_or_else(|| CoreError::Parse("guild group data untyped".into()))?;
             (
-                tail.guild_name.clone(),
-                tail.players.first().map(|player| player.player_uid),
+                guild.guild_name.clone(),
+                super::guild_tail::guild_player_uids(guild).first().copied(),
             )
         };
         if admin_uid == Some(player_id) {
@@ -1188,7 +1189,9 @@ pub fn delete_player(
             "Deleting player {nickname} from guild {guild_name}"
         ));
         // `Guild.delete_player` (guild.py:159-170): drop the player's own
-        // character handle and their `players` row.
+        // character handle and their `players` row. uesave re-serializes the
+        // structured guild on save, so removing the row in place is the whole
+        // write -- no blob re-encode.
         let entries = world::group_map_mut(&mut session.level)?;
         if let Some(group_data) = super::guild_tail::entry_group_data_mut(&mut entries[entry_index])
         {
@@ -1196,9 +1199,8 @@ pub fn delete_player(
                 props::guid_to_uuid(&handle.instance_id) != player_id
                     && props::guid_to_uuid(&handle.guid) != player_id
             });
-            if let Ok(mut tail) = super::guild_tail::GuildTail::parse(&group_data.remaining_data) {
-                tail.players.retain(|player| player.player_uid != player_id);
-                group_data.remaining_data = tail.to_bytes();
+            if let Some(guild) = super::guild_tail::as_guild_mut(group_data) {
+                super::guild_tail::remove_player(guild, player_id);
             }
         }
     }

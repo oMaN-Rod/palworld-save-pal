@@ -777,15 +777,22 @@ fn build_dynamic_item_type(
                 }) => (*leading_bytes, *trailing_bytes),
                 _ => ([0u8; 4], [0u8; 4]),
             };
-            let (existing_durability, existing_bullets, existing_passives) = match existing {
-                Some(PalDynamicItemType::Weapon {
-                    durability,
-                    remaining_bullets,
-                    passive_skill_list,
-                    ..
-                }) => (*durability, *remaining_bullets, passive_skill_list.clone()),
-                _ => (0.0, 0, Vec::new()),
-            };
+            let (existing_durability, existing_bullets, existing_passives, existing_unknown_str) =
+                match existing {
+                    Some(PalDynamicItemType::Weapon {
+                        durability,
+                        remaining_bullets,
+                        passive_skill_list,
+                        unknown_str,
+                        ..
+                    }) => (
+                        *durability,
+                        *remaining_bullets,
+                        passive_skill_list.clone(),
+                        unknown_str.clone(),
+                    ),
+                    _ => (0.0, 0, Vec::new(), None),
+                };
             PalDynamicItemType::Weapon {
                 leading_bytes,
                 durability: dto
@@ -797,6 +804,7 @@ fn build_dynamic_item_type(
                     .map(|value| value as i32)
                     .unwrap_or(existing_bullets),
                 passive_skill_list: dto.passive_skill_list.clone().unwrap_or(existing_passives),
+                unknown_str: existing_unknown_str,
                 trailing_bytes,
             }
         }
@@ -1677,6 +1685,7 @@ mod tests {
                 durability: 80.5,
                 remaining_bullets: 12,
                 passive_skill_list: vec!["Rare".to_string()],
+                unknown_str: None,
                 trailing_bytes: [0; 4],
             },
         );
@@ -2003,6 +2012,7 @@ mod tests {
                 durability: 80.0,
                 remaining_bullets: 12,
                 passive_skill_list: vec![],
+                unknown_str: None,
                 trailing_bytes: [0; 4],
             },
         );
@@ -2444,7 +2454,7 @@ mod tests {
                 target_container_id: props::uuid_to_guid(container_id),
                 slot_attribute_indexes: vec![],
                 all_slot_attribute: vec![],
-                drop_item_at_disposed: false,
+                drop_item_at_disposed: 0,
                 usage_type: 0,
                 trailing_bytes: [0; 4],
             },

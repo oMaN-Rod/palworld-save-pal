@@ -185,14 +185,14 @@ fn edit_one_pal_leaves_guild_tails_byte_identical() {
     let mut session = common::load_fixture_session("world1");
     let data = game_data();
 
-    let untouched_tails: Vec<(uuid::Uuid, Vec<u8>)> =
+    let untouched_tails: Vec<(uuid::Uuid, uesave::games::palworld::PalGroupVariant)> =
         psp_core::domain::world::group_map(&session.level)
             .unwrap()
             .iter()
             .filter_map(|entry| {
                 let guild_id = psp_core::props::as_uuid(&entry.key)?;
                 let group = guild_tail::entry_group_data(entry)?;
-                Some((guild_id, group.remaining_data.clone()))
+                Some((guild_id, group.data.clone()))
             })
             .collect();
     assert!(
@@ -244,8 +244,8 @@ fn edit_one_pal_leaves_guild_tails_byte_identical() {
             .find(|(id, _)| *id == guild_id)
             .expect("guild present before edit");
         assert_eq!(
-            group.remaining_data, original.1,
-            "a pal stat edit must leave the guild raw tail untouched"
+            group.data, original.1,
+            "a pal stat edit must leave the guild's structured data untouched"
         );
     }
 }

@@ -161,79 +161,6 @@ fn describe_field<T>(field: &'static str, result: Result<T, CoreError>) -> Resul
     })
 }
 
-#[derive(Debug, Clone, PartialEq)]
-pub struct GuildPlayerEntry {
-    pub player_uid: Uuid,
-    pub last_online_real_time: i64,
-    pub player_name: String,
-}
-
-#[derive(Debug, Clone, PartialEq)]
-pub struct GuildRawTail {
-    pub base_camp_level: i32,
-    pub guild_name: String,
-    pub admin_player_uid: Uuid,
-    pub players: Vec<GuildPlayerEntry>,
-}
-
-/// Parses the Guild-branch tail of `PalGroupData::remaining_data`.
-///
-/// uesave's `PalGroupData::read` already consumes `group_id`, `group_name`,
-/// and `individual_character_handle_ids`, so `remaining_data` starts at
-/// `org_type` (palworld_save_tools/rawdata/group.py, `decode_bytes`,
-/// `EPalGroupType::Guild` branch). Field order:
-/// `org_type: u8`, `leading_bytes: [u8; 4]`, `base_ids: TArray<guid>`,
-/// `unknown_1: i32`, `base_camp_level: i32`,
-/// `map_object_instance_ids_base_camp_points: TArray<guid>`,
-/// `guild_name: fstring`, `last_guild_name_modifier_player_uid: guid`,
-/// `unknown_2: [u8; 4]`, `admin_player_uid: guid`,
-/// `players: TArray<{ player_uid: guid, last_online_real_time: i64, player_name: fstring }>`,
-/// `trailing_bytes: [u8; 4]`, then EOF (Python raises "Warning: EOF not
-/// reached" if bytes remain — we mirror that as a hard error).
-pub fn parse_guild_raw_tail(remaining_data: &[u8]) -> Result<GuildRawTail, CoreError> {
-    let mut reader = BlobReader::new(remaining_data);
-    describe_field("org_type", reader.read_u8())?;
-    describe_field("leading_bytes", reader.skip(4))?;
-    describe_field("base_ids", reader.read_tarray(BlobReader::read_uuid))?;
-    describe_field("unknown_1", reader.read_i32())?;
-    let base_camp_level = describe_field("base_camp_level", reader.read_i32())?;
-    describe_field(
-        "map_object_instance_ids_base_camp_points",
-        reader.read_tarray(BlobReader::read_uuid),
-    )?;
-    let guild_name = describe_field("guild_name", reader.read_string())?;
-    describe_field("last_guild_name_modifier_player_uid", reader.read_uuid())?;
-    describe_field("unknown_2", reader.skip(4))?;
-    let admin_player_uid = describe_field("admin_player_uid", reader.read_uuid())?;
-    let players = describe_field(
-        "players",
-        reader.read_tarray(|element_reader| {
-            Ok(GuildPlayerEntry {
-                player_uid: describe_field("players[].player_uid", element_reader.read_uuid())?,
-                last_online_real_time: describe_field(
-                    "players[].last_online_real_time",
-                    element_reader.read_i64(),
-                )?,
-                player_name: describe_field("players[].player_name", element_reader.read_string())?,
-            })
-        }),
-    )?;
-    describe_field("trailing_bytes", reader.skip(4))?;
-    if !reader.is_at_end() {
-        return Err(CoreError::Parse(format!(
-            "guild raw tail has unread trailing bytes: {} byte(s) remain at offset {}",
-            remaining_data.len() - reader.position,
-            reader.position
-        )));
-    }
-    Ok(GuildRawTail {
-        base_camp_level,
-        guild_name,
-        admin_player_uid,
-        players,
-    })
-}
-
 /// `WorkerDirector` RawData layout (palworld_save_tools/rawdata/worker_director.py,
 /// `decode_bytes`), fields concatenated in order:
 /// `id: guid` (16 bytes),
@@ -281,14 +208,6 @@ pub(crate) mod test_bytes {
         pub fn write_i32(&mut self, value: i32) {
             self.write_raw(&value.to_le_bytes());
         }
-        pub fn write_i64(&mut self, value: i64) {
-            self.write_raw(&value.to_le_bytes());
-        }
-        pub fn write_uuid(&mut self, text: &str) {
-            let display = *text.parse::<uuid::Uuid>().unwrap().as_bytes();
-            let raw = shuffle_guid_bytes(display);
-            self.write_raw(&raw);
-        }
         /// ASCII fstring: length includes the trailing NUL
         pub fn write_string(&mut self, text: &str) {
             assert!(text.is_ascii());
@@ -304,33 +223,6 @@ pub(crate) mod test_bytes {
             b[3], b[2], b[1], b[0], b[7], b[6], b[5], b[4], b[11], b[10], b[9], b[8], b[15], b[14],
             b[13], b[12],
         ]
-    }
-
-    pub fn guild_tail(
-        base_camp_level: i32,
-        guild_name: &str,
-        admin_player_uid: &str,
-        players: &[(&str, i64, &str)],
-    ) -> Vec<u8> {
-        let mut writer = BlobWriter::default();
-        writer.write_u8(0); // org_type
-        writer.write_raw(&[0; 4]); // leading_bytes
-        writer.write_u32(0); // base_ids count
-        writer.write_i32(0); // unknown_1
-        writer.write_i32(base_camp_level);
-        writer.write_u32(0); // base camp point ids count
-        writer.write_string(guild_name);
-        writer.write_uuid("00000000-0000-0000-0000-000000000000"); // last modifier
-        writer.write_raw(&[0; 4]); // unknown_2
-        writer.write_uuid(admin_player_uid);
-        writer.write_u32(players.len() as u32);
-        for (player_uid, last_online, player_name) in players {
-            writer.write_uuid(player_uid);
-            writer.write_i64(*last_online);
-            writer.write_string(player_name);
-        }
-        writer.write_raw(&[0; 4]); // trailing_bytes
-        writer.bytes
     }
 }
 
@@ -407,62 +299,6 @@ mod tests {
         let mut reader = BlobReader::new(&writer.bytes);
         let result = reader.read_tarray(BlobReader::read_uuid);
         assert!(result.is_err());
-    }
-
-    #[test]
-    fn test_parse_guild_raw_tail() {
-        let admin = "a1b2c3d4-0000-1111-2222-333344445555";
-        let member = "0f0e0d0c-0b0a-0908-0706-050403020100";
-        let tail = guild_tail(
-            7,
-            "The Guild",
-            admin,
-            &[(member, 638400000000000000, "PlayerOne")],
-        );
-
-        let parsed = parse_guild_raw_tail(&tail).unwrap();
-        assert_eq!(7, parsed.base_camp_level);
-        assert_eq!("The Guild", parsed.guild_name);
-        assert_eq!(admin, parsed.admin_player_uid.to_string());
-        assert_eq!(1, parsed.players.len());
-        assert_eq!(member, parsed.players[0].player_uid.to_string());
-        assert_eq!(638400000000000000, parsed.players[0].last_online_real_time);
-        assert_eq!("PlayerOne", parsed.players[0].player_name);
-    }
-
-    #[test]
-    fn test_parse_guild_raw_tail_rejects_trailing_garbage() {
-        let mut tail = guild_tail(1, "G", "a1b2c3d4-0000-1111-2222-333344445555", &[]);
-        tail.push(0xFF);
-        assert!(parse_guild_raw_tail(&tail).is_err());
-    }
-
-    #[test]
-    fn test_parse_guild_raw_tail_rejects_truncated_input() {
-        let full = guild_tail(1, "G", "a1b2c3d4-0000-1111-2222-333344445555", &[]);
-        // Cut the blob off mid-way through the guild_name fstring.
-        let truncated = &full[..full.len() - 20];
-        assert!(parse_guild_raw_tail(truncated).is_err());
-    }
-
-    #[test]
-    fn test_parse_guild_raw_tail_rejects_oversized_player_count() {
-        // Build a valid header, then splice in a players-tarray count that
-        // claims far more entries than remain in the buffer.
-        let mut writer = BlobWriter::default();
-        writer.write_u8(0); // org_type
-        writer.write_raw(&[0; 4]); // leading_bytes
-        writer.write_u32(0); // base_ids count
-        writer.write_i32(0); // unknown_1
-        writer.write_i32(1); // base_camp_level
-        writer.write_u32(0); // base camp point ids count
-        writer.write_string("G");
-        writer.write_uuid("00000000-0000-0000-0000-000000000000");
-        writer.write_raw(&[0; 4]); // unknown_2
-        writer.write_uuid("a1b2c3d4-0000-1111-2222-333344445555");
-        writer.write_u32(u32::MAX); // players count: absurd
-                                    // no player data follows
-        assert!(parse_guild_raw_tail(&writer.bytes).is_err());
     }
 
     #[test]

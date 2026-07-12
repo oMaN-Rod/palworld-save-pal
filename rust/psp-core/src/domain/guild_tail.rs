@@ -1,245 +1,41 @@
-//! Guild raw-tail codec -- the byte-exact encoder for the Guild branch of
-//! `PalGroupData::remaining_data` (`palworld_save_tools/rawdata/group.py`'s
-//! `decode_bytes`/`encode_bytes`, the `EPalGroupType::Guild` arm). Phase 1's
-//! `palbin::parse_guild_raw_tail` already reads this same byte range but
-//! only keeps the four fields the summary screens need
-//! (`base_camp_level`/`guild_name`/`admin_player_uid`/`players`); every
-//! other field there is discarded. Phase 2's guild edits (rename, base camp
-//! level, player removal, admin lookup) need to write the tail *back* into
-//! a save, so `GuildTail` here keeps every field -- including the
-//! `leading_bytes`/`unknown_1`/`unknown_2`/`trailing_bytes` runs Python
-//! itself never decodes further -- so `to_bytes` can reproduce the original
-//! bytes exactly.
+//! Thin accessors and mutation helpers over the structured guild group that
+//! `uesave` now owns.
 //!
-//! Reads go through `palbin::BlobReader`, the bounds-checked cursor Phase 1
-//! already built and proved against a real save (every read is gated by one
-//! `checked_add`, so a hostile length prefix can never panic or wrap). The
-//! writer half is new: it is the literal field-for-field inverse of that
-//! reader, verified in `tests/guild_tail.rs` both synthetically and against
-//! real guild tails extracted from the fixture saves at
-//! `tests/fixtures/saves/{world1,world2}`.
+//! Before the 2026-07 `uesave` refactor, `PalGroupData` carried a flat
+//! `remaining_data: Vec<u8>` blob and psp-core parsed/re-serialized the Guild
+//! branch of it by hand here (`GuildTail::parse`/`to_bytes`). `uesave` now
+//! decodes that blob into a structured `PalGroupVariant::Guild(PalGuildGroup)`
+//! and re-serializes it on save, so psp-core no longer needs (or wants) its
+//! own byte codec: it reads and mutates the structured fields directly, and
+//! `uesave` writes them back byte-for-byte on the next save.
+//!
+//! The one wrinkle is the guild TAIL. A real save's `PalGuildGroup::tail` is a
+//! two-shape enum: `PalGuildTail::PreUpdate` (the fixed pre-2026-07 layout:
+//! `admin_player_uid` + `players: Vec<PalPlayerInfo>` + trailing bytes) or
+//! `PalGuildTail::PostUpdate` (the 2026-07 layout, which additionally carries
+//! `guild_chest_allowed_roles`, per-player `role` bytes, and
+//! `role_permissions`). A real save can be EITHER, so every accessor and
+//! mutator below matches both shapes and never assumes one. Mutations touch
+//! only the field being changed (a player's uid, name, timestamp, the admin,
+//! the guild name/level, base ids), leaving every other tail field --
+//! markers, roles, role permissions, trailing bytes -- untouched so byte
+//! parity holds.
 
-use crate::error::CoreError;
-use crate::palbin::BlobReader;
 use crate::props;
-use uesave::games::palworld::PalGroupData;
+use uesave::games::palworld::{
+    PalGroupData, PalGroupVariant, PalGuildGroup, PalGuildPlayerWithRole, PalGuildTail,
+    PalGuildTailPreUpdate, PalPlayerInfo, PalPlayerInfoDetails,
+};
 use uesave::{MapEntry, Property, StructValue};
+use uuid::Uuid;
 
-/// One guild member's slot inside the `players` `TArray` of the
-/// Guild-branch tail (`group.py`'s `player_info_reader`/`player_info_writer`).
+/// One guild member, as psp-core's edit paths carry it around (transfer's
+/// retargeted membership row). A plain data carrier, independent of which
+/// tail shape it ends up written into.
 pub struct GuildPlayerInfo {
-    pub player_uid: uuid::Uuid,
+    pub player_uid: Uuid,
     pub last_online_real_time: i64,
     pub player_name: String,
-}
-
-/// The full byte-for-byte Guild-branch layout of
-/// `PalGroupData::remaining_data`, starting immediately after
-/// `individual_character_handle_ids` (which uesave's `PalGroupData::read`
-/// already consumes). Field order, per `group.py`'s `decode_bytes`
-/// (`EPalGroupType::Guild` arm): `org_type: u8`, `leading_bytes: [u8; 4]`,
-/// `base_ids: TArray<guid>`, `unknown_1: i32`, `base_camp_level: i32`,
-/// `map_object_instance_ids_base_camp_points: TArray<guid>`,
-/// `guild_name: fstring`, `last_guild_name_modifier_player_uid: guid`,
-/// `unknown_2: [u8; 4]`, `admin_player_uid: guid`,
-/// `players: TArray<{player_uid: guid, last_online_real_time: i64, player_name: fstring}>`,
-/// `trailing_bytes: [u8; 4]`, then EOF.
-pub struct GuildTail {
-    pub org_type: u8,
-    pub leading_bytes: [u8; 4],
-    pub base_ids: Vec<uuid::Uuid>,
-    pub unknown_1: i32,
-    pub base_camp_level: i32,
-    pub map_object_instance_ids_base_camp_points: Vec<uuid::Uuid>,
-    pub guild_name: String,
-    pub last_guild_name_modifier_player_uid: uuid::Uuid,
-    pub unknown_2: [u8; 4],
-    pub admin_player_uid: uuid::Uuid,
-    pub players: Vec<GuildPlayerInfo>,
-    pub trailing_bytes: [u8; 4],
-}
-
-/// Adds a field name to a leaf read's error, alongside `BlobReader::take`'s
-/// byte offset (mirrors the private `palbin::describe_field`, which is not
-/// reachable from this module).
-fn describe_field<T>(field: &'static str, result: Result<T, CoreError>) -> Result<T, CoreError> {
-    result.map_err(|err| match err {
-        CoreError::Parse(message) => CoreError::Parse(format!("{field}: {message}")),
-        other => other,
-    })
-}
-
-fn read_four_raw_bytes(reader: &mut BlobReader) -> Result<[u8; 4], CoreError> {
-    let mut bytes = [0u8; 4];
-    for byte in &mut bytes {
-        *byte = reader.read_u8()?;
-    }
-    Ok(bytes)
-}
-
-/// The Palworld guid byte permutation `BlobReader::read_uuid` applies to
-/// turn 16 raw little-endian bytes into RFC 4122 display order: each of the
-/// four 4-byte groups is reversed in place (`[3,2,1,0, 7,6,5,4, 11,10,9,8,
-/// 15,14,13,12]`). Reversing a 4-byte block twice restores it, so this same
-/// function also converts a canonical `Uuid`'s bytes back to the raw order
-/// this codec writes -- the write-side mirror of `read_uuid`.
-fn shuffle_guid_bytes(raw: [u8; 16]) -> [u8; 16] {
-    [
-        raw[3], raw[2], raw[1], raw[0], raw[7], raw[6], raw[5], raw[4], raw[11], raw[10], raw[9],
-        raw[8], raw[15], raw[14], raw[13], raw[12],
-    ]
-}
-
-fn write_uuid(buffer: &mut Vec<u8>, value: uuid::Uuid) {
-    buffer.extend_from_slice(&shuffle_guid_bytes(*value.as_bytes()));
-}
-
-fn write_uuid_tarray(buffer: &mut Vec<u8>, values: &[uuid::Uuid]) {
-    // `unwrap_or(u32::MAX)` rather than a panic: this codec must never
-    // panic on its way to producing save bytes. A guid list exceeding four
-    // billion entries is unreachable in practice (it would itself be
-    // larger than any real save), so this is a defensive clamp, not a
-    // documented behavior.
-    let count = u32::try_from(values.len()).unwrap_or(u32::MAX);
-    buffer.extend_from_slice(&count.to_le_bytes());
-    for value in values {
-        write_uuid(buffer, *value);
-    }
-}
-
-/// Unreal `fstring`, matching `FArchiveWriter.fstring`
-/// (`palworld_save_tools/archive.py`) field-for-field:
-/// * the empty string is a bare zero length prefix and nothing else --
-///   checked *before* the ASCII branch, not folded into it (Python's
-///   `if string == "": self.i32(0)` is its own branch, so an ASCII string
-///   of length zero and the empty string are not written the same way
-///   `write_fstring` must replicate this ordering exactly, or an empty
-///   string would gain a spurious NUL byte);
-/// * an ASCII string is a positive `len + 1` length prefix, the ASCII
-///   bytes, then one NUL byte;
-/// * anything else is UTF-16LE with a negative `-(code_units + 1)` length
-///   prefix, the code units, then a two-byte NUL terminator.
-fn write_fstring(buffer: &mut Vec<u8>, value: &str) {
-    if value.is_empty() {
-        buffer.extend_from_slice(&0i32.to_le_bytes());
-        return;
-    }
-    if value.is_ascii() {
-        let ascii_bytes = value.as_bytes();
-        // See `write_uuid_tarray`: clamped, not panicking, for an
-        // unreachable-in-practice multi-gigabyte string.
-        let length = i32::try_from(ascii_bytes.len() + 1).unwrap_or(i32::MAX);
-        buffer.extend_from_slice(&length.to_le_bytes());
-        buffer.extend_from_slice(ascii_bytes);
-        buffer.push(0);
-    } else {
-        let code_units: Vec<u16> = value.encode_utf16().collect();
-        let length = i32::try_from(code_units.len() + 1)
-            .map(|len| -len)
-            .unwrap_or(i32::MIN);
-        buffer.extend_from_slice(&length.to_le_bytes());
-        for unit in &code_units {
-            buffer.extend_from_slice(&unit.to_le_bytes());
-        }
-        buffer.extend_from_slice(&0u16.to_le_bytes());
-    }
-}
-
-impl GuildTail {
-    /// Parses the Guild-branch tail of `PalGroupData::remaining_data`. The
-    /// blob is assumed to already be positioned at `org_type` -- uesave's
-    /// `PalGroupData::read` has already consumed `group_id`, `group_name`,
-    /// and `individual_character_handle_ids` before `remaining_data` is
-    /// populated. Consumes every byte; returns `Err` (never panics) on
-    /// truncated input, an oversized declared count, or unconsumed
-    /// trailing bytes.
-    pub fn parse(remaining_data: &[u8]) -> Result<Self, CoreError> {
-        let mut reader = BlobReader::new(remaining_data);
-        let org_type = describe_field("org_type", reader.read_u8())?;
-        let leading_bytes = describe_field("leading_bytes", read_four_raw_bytes(&mut reader))?;
-        let base_ids = describe_field("base_ids", reader.read_tarray(BlobReader::read_uuid))?;
-        let unknown_1 = describe_field("unknown_1", reader.read_i32())?;
-        let base_camp_level = describe_field("base_camp_level", reader.read_i32())?;
-        let map_object_instance_ids_base_camp_points = describe_field(
-            "map_object_instance_ids_base_camp_points",
-            reader.read_tarray(BlobReader::read_uuid),
-        )?;
-        let guild_name = describe_field("guild_name", reader.read_string())?;
-        let last_guild_name_modifier_player_uid =
-            describe_field("last_guild_name_modifier_player_uid", reader.read_uuid())?;
-        let unknown_2 = describe_field("unknown_2", read_four_raw_bytes(&mut reader))?;
-        let admin_player_uid = describe_field("admin_player_uid", reader.read_uuid())?;
-        let players = describe_field(
-            "players",
-            reader.read_tarray(|element_reader| {
-                Ok(GuildPlayerInfo {
-                    player_uid: describe_field("players[].player_uid", element_reader.read_uuid())?,
-                    last_online_real_time: describe_field(
-                        "players[].last_online_real_time",
-                        element_reader.read_i64(),
-                    )?,
-                    player_name: describe_field(
-                        "players[].player_name",
-                        element_reader.read_string(),
-                    )?,
-                })
-            }),
-        )?;
-        let trailing_bytes = describe_field("trailing_bytes", read_four_raw_bytes(&mut reader))?;
-
-        if !reader.is_at_end() {
-            return Err(CoreError::Parse(format!(
-                "guild tail: {} unread byte(s) remain at offset {} (blob is {} byte(s) long)",
-                remaining_data.len() - reader.position(),
-                reader.position(),
-                remaining_data.len()
-            )));
-        }
-
-        Ok(GuildTail {
-            org_type,
-            leading_bytes,
-            base_ids,
-            unknown_1,
-            base_camp_level,
-            map_object_instance_ids_base_camp_points,
-            guild_name,
-            last_guild_name_modifier_player_uid,
-            unknown_2,
-            admin_player_uid,
-            players,
-            trailing_bytes,
-        })
-    }
-
-    /// Serializes back to the exact byte layout `parse` reads: every
-    /// integer little-endian, every `fstring` written per `write_fstring`,
-    /// every guid written per `write_uuid` (the involution that inverts
-    /// `BlobReader::read_uuid`). This is the write-back path a corrupted or
-    /// partially-written result must never reach -- every field here is
-    /// already in memory (`self`), so nothing past this point can fail.
-    pub fn to_bytes(&self) -> Vec<u8> {
-        let mut buffer = Vec::new();
-        buffer.push(self.org_type);
-        buffer.extend_from_slice(&self.leading_bytes);
-        write_uuid_tarray(&mut buffer, &self.base_ids);
-        buffer.extend_from_slice(&self.unknown_1.to_le_bytes());
-        buffer.extend_from_slice(&self.base_camp_level.to_le_bytes());
-        write_uuid_tarray(&mut buffer, &self.map_object_instance_ids_base_camp_points);
-        write_fstring(&mut buffer, &self.guild_name);
-        write_uuid(&mut buffer, self.last_guild_name_modifier_player_uid);
-        buffer.extend_from_slice(&self.unknown_2);
-        write_uuid(&mut buffer, self.admin_player_uid);
-        let player_count = u32::try_from(self.players.len()).unwrap_or(u32::MAX);
-        buffer.extend_from_slice(&player_count.to_le_bytes());
-        for player in &self.players {
-            write_uuid(&mut buffer, player.player_uid);
-            buffer.extend_from_slice(&player.last_online_real_time.to_le_bytes());
-            write_fstring(&mut buffer, &player.player_name);
-        }
-        buffer.extend_from_slice(&self.trailing_bytes);
-        buffer
-    }
 }
 
 /// `entry.value.GroupType`, as its fully qualified enum variant name (e.g.
@@ -252,10 +48,9 @@ pub fn entry_group_type(entry: &MapEntry) -> Option<String> {
         .map(str::to_string)
 }
 
-/// `entry.value.RawData`, decoded as `PalGroupData` -- the typed struct
-/// whose `remaining_data` is this module's `GuildTail::parse` input, for a
-/// `GroupSaveDataMap` entry only (only meaningful when `entry_group_type`
-/// returns `Some("EPalGroupType::Guild")`, but does not check that itself).
+/// `entry.value.RawData`, decoded as the structured `PalGroupData` for a
+/// `GroupSaveDataMap` entry (only meaningful when `entry_group_type` returns
+/// `Some("EPalGroupType::Guild")`, but does not check that itself).
 pub fn entry_group_data(entry: &MapEntry) -> Option<&PalGroupData> {
     let value_properties = props::struct_properties(&entry.value)?;
     match props::get(value_properties, &["RawData"])? {
@@ -264,9 +59,9 @@ pub fn entry_group_data(entry: &MapEntry) -> Option<&PalGroupData> {
     }
 }
 
-/// Mutable counterpart of `entry_group_data`, for Phase 2's guild-edit
-/// write path (rename, base camp level, player removal, admin lookup) to
-/// mutate `remaining_data` in place via `GuildTail::to_bytes`.
+/// Mutable counterpart of `entry_group_data`, for the guild-edit write paths
+/// (rename, base camp level, player add/remove/retarget, admin swap) to
+/// mutate the structured guild fields in place.
 pub fn entry_group_data_mut(entry: &mut MapEntry) -> Option<&mut PalGroupData> {
     let value_properties = props::struct_props_mut(&mut entry.value)?;
     match props::get_mut(value_properties, &["RawData"])? {
@@ -275,71 +70,437 @@ pub fn entry_group_data_mut(entry: &mut MapEntry) -> Option<&mut PalGroupData> {
     }
 }
 
+/// The `PalGuildGroup` inside a `PalGroupData`, if its variant is `Guild`.
+/// Any other variant (`IndependentGuild`, `Organization`, `Unknown`) yields
+/// `None` -- the caller skips it, exactly as the old codec skipped a tail it
+/// could not parse.
+pub fn as_guild(group_data: &PalGroupData) -> Option<&PalGuildGroup> {
+    match &group_data.data {
+        PalGroupVariant::Guild(guild) => Some(guild),
+        _ => None,
+    }
+}
+
+/// Mutable counterpart of `as_guild`.
+pub fn as_guild_mut(group_data: &mut PalGroupData) -> Option<&mut PalGuildGroup> {
+    match &mut group_data.data {
+        PalGroupVariant::Guild(guild) => Some(guild),
+        _ => None,
+    }
+}
+
+/// The guild's `admin_player_uid`, from whichever tail shape it carries.
+pub fn guild_admin_uid(guild: &PalGuildGroup) -> Uuid {
+    match &guild.tail {
+        PalGuildTail::PreUpdate(tail) => props::guid_to_uuid(&tail.admin_player_uid),
+        PalGuildTail::PostUpdate(tail) => props::guid_to_uuid(&tail.admin_player_uid),
+    }
+}
+
+/// Every member's `player_uid`, in tail order, from whichever tail shape.
+pub fn guild_player_uids(guild: &PalGuildGroup) -> Vec<Uuid> {
+    match &guild.tail {
+        PalGuildTail::PreUpdate(tail) => tail
+            .players
+            .iter()
+            .map(|player| props::guid_to_uuid(&player.player_uid))
+            .collect(),
+        PalGuildTail::PostUpdate(tail) => tail
+            .players
+            .iter()
+            .map(|player| props::guid_to_uuid(&player.player_uid))
+            .collect(),
+    }
+}
+
+/// Number of members, from whichever tail shape.
+pub fn guild_player_count(guild: &PalGuildGroup) -> usize {
+    match &guild.tail {
+        PalGuildTail::PreUpdate(tail) => tail.players.len(),
+        PalGuildTail::PostUpdate(tail) => tail.players.len(),
+    }
+}
+
+/// Whether `uid` is one of the guild's members.
+pub fn guild_has_player(guild: &PalGuildGroup, uid: Uuid) -> bool {
+    match &guild.tail {
+        PalGuildTail::PreUpdate(tail) => tail
+            .players
+            .iter()
+            .any(|player| props::guid_to_uuid(&player.player_uid) == uid),
+        PalGuildTail::PostUpdate(tail) => tail
+            .players
+            .iter()
+            .any(|player| props::guid_to_uuid(&player.player_uid) == uid),
+    }
+}
+
+/// `(last_online_real_time, player_name)` for `uid`, if a member. Used by
+/// transfer to carry the source player's membership details onto the
+/// transferred player's row.
+pub fn find_player_membership(guild: &PalGuildGroup, uid: Uuid) -> Option<(i64, String)> {
+    match &guild.tail {
+        PalGuildTail::PreUpdate(tail) => tail
+            .players
+            .iter()
+            .find(|player| props::guid_to_uuid(&player.player_uid) == uid)
+            .map(|player| {
+                (
+                    player.player_info.last_online_real_time,
+                    player.player_info.player_name.clone(),
+                )
+            }),
+        PalGuildTail::PostUpdate(tail) => tail
+            .players
+            .iter()
+            .find(|player| props::guid_to_uuid(&player.player_uid) == uid)
+            .map(|player| {
+                (
+                    player.player_info.last_online_real_time,
+                    player.player_info.player_name.clone(),
+                )
+            }),
+    }
+}
+
+/// The `role` byte `uid`'s row carries, for a `PostUpdate` guild. `None` for
+/// a `PreUpdate` guild (no per-player roles) or when `uid` is not a member.
+pub fn player_role(guild: &PalGuildGroup, uid: Uuid) -> Option<u8> {
+    match &guild.tail {
+        PalGuildTail::PreUpdate(_) => None,
+        PalGuildTail::PostUpdate(tail) => tail
+            .players
+            .iter()
+            .find(|player| props::guid_to_uuid(&player.player_uid) == uid)
+            .map(|player| player.role),
+    }
+}
+
+/// Removes every member row matching `uid`. Returns the removed row's `role`
+/// (`PostUpdate` only; `None` for a `PreUpdate` guild or when `uid` was not a
+/// member) so a caller retargeting that same slot can preserve its role.
+pub fn remove_player(guild: &mut PalGuildGroup, uid: Uuid) -> Option<u8> {
+    match &mut guild.tail {
+        PalGuildTail::PreUpdate(tail) => {
+            tail.players
+                .retain(|player| props::guid_to_uuid(&player.player_uid) != uid);
+            None
+        }
+        PalGuildTail::PostUpdate(tail) => {
+            let removed_role = tail
+                .players
+                .iter()
+                .find(|player| props::guid_to_uuid(&player.player_uid) == uid)
+                .map(|player| player.role);
+            tail.players
+                .retain(|player| props::guid_to_uuid(&player.player_uid) != uid);
+            removed_role
+        }
+    }
+}
+
+/// Appends a member row. For a `PostUpdate` guild the row is given `role`
+/// (defaulting to `0` when `None`); for a `PreUpdate` guild `role` is
+/// irrelevant and ignored.
+pub fn push_player(guild: &mut PalGuildGroup, member: &GuildPlayerInfo, role: Option<u8>) {
+    match &mut guild.tail {
+        PalGuildTail::PreUpdate(tail) => tail.players.push(PalPlayerInfo {
+            player_uid: props::uuid_to_guid(member.player_uid),
+            player_info: PalPlayerInfoDetails {
+                last_online_real_time: member.last_online_real_time,
+                player_name: member.player_name.clone(),
+            },
+        }),
+        PalGuildTail::PostUpdate(tail) => tail.players.push(PalGuildPlayerWithRole {
+            player_uid: props::uuid_to_guid(member.player_uid),
+            player_info: PalPlayerInfoDetails {
+                last_online_real_time: member.last_online_real_time,
+                player_name: member.player_name.clone(),
+            },
+            role: role.unwrap_or(0),
+        }),
+    }
+}
+
+/// Sets `last_online_real_time` on every member row matching `uid` (the
+/// timestamp-sync path updates all of a player's rows, no early break).
+pub fn set_player_last_online(guild: &mut PalGuildGroup, uid: Uuid, ticks: i64) {
+    match &mut guild.tail {
+        PalGuildTail::PreUpdate(tail) => {
+            for player in tail.players.iter_mut() {
+                if props::guid_to_uuid(&player.player_uid) == uid {
+                    player.player_info.last_online_real_time = ticks;
+                }
+            }
+        }
+        PalGuildTail::PostUpdate(tail) => {
+            for player in tail.players.iter_mut() {
+                if props::guid_to_uuid(&player.player_uid) == uid {
+                    player.player_info.last_online_real_time = ticks;
+                }
+            }
+        }
+    }
+}
+
+/// Bidirectionally swaps `old_uid` <-> `new_uid` across the guild's
+/// `admin_player_uid` and every member `player_uid` (the uid-swap path).
+/// Every other field -- roles, names, timestamps, markers -- is untouched.
+pub fn swap_player_uids(guild: &mut PalGuildGroup, old_uid: Uuid, new_uid: Uuid) {
+    fn swapped(current: Uuid, old_uid: Uuid, new_uid: Uuid) -> Option<Uuid> {
+        if current == old_uid {
+            Some(new_uid)
+        } else if current == new_uid {
+            Some(old_uid)
+        } else {
+            None
+        }
+    }
+    match &mut guild.tail {
+        PalGuildTail::PreUpdate(tail) => {
+            let admin = props::guid_to_uuid(&tail.admin_player_uid);
+            if let Some(target) = swapped(admin, old_uid, new_uid) {
+                tail.admin_player_uid = props::uuid_to_guid(target);
+            }
+            for player in tail.players.iter_mut() {
+                let current = props::guid_to_uuid(&player.player_uid);
+                if let Some(target) = swapped(current, old_uid, new_uid) {
+                    player.player_uid = props::uuid_to_guid(target);
+                }
+            }
+        }
+        PalGuildTail::PostUpdate(tail) => {
+            let admin = props::guid_to_uuid(&tail.admin_player_uid);
+            if let Some(target) = swapped(admin, old_uid, new_uid) {
+                tail.admin_player_uid = props::uuid_to_guid(target);
+            }
+            for player in tail.players.iter_mut() {
+                let current = props::guid_to_uuid(&player.player_uid);
+                if let Some(target) = swapped(current, old_uid, new_uid) {
+                    player.player_uid = props::uuid_to_guid(target);
+                }
+            }
+        }
+    }
+}
+
+/// Resets a (cloned template) guild to a fresh single-member guild owned by
+/// `admin_uid`: clears base ids and base-camp points, sets `base_camp_level`
+/// to 1, applies `guild_name`, sets the admin, and replaces the member list
+/// with the single `member` row. Preserves the tail SHAPE (`Pre`/`PostUpdate`)
+/// and every non-member field it carries (for `PostUpdate`:
+/// `guild_chest_allowed_roles`, `role_permissions`, and the single row's
+/// `role`, taken from `role`).
+pub fn reset_to_single_member(
+    guild: &mut PalGuildGroup,
+    guild_name: &str,
+    admin_uid: Uuid,
+    member: &GuildPlayerInfo,
+    role: Option<u8>,
+) {
+    guild.guild_name = guild_name.to_string();
+    guild.base_ids = Vec::new();
+    guild.base_camp_level = 1;
+    guild.map_object_instance_ids_base_camp_points = Vec::new();
+    match &mut guild.tail {
+        PalGuildTail::PreUpdate(tail) => {
+            tail.admin_player_uid = props::uuid_to_guid(admin_uid);
+            tail.players = vec![PalPlayerInfo {
+                player_uid: props::uuid_to_guid(member.player_uid),
+                player_info: PalPlayerInfoDetails {
+                    last_online_real_time: member.last_online_real_time,
+                    player_name: member.player_name.clone(),
+                },
+            }];
+        }
+        PalGuildTail::PostUpdate(tail) => {
+            tail.admin_player_uid = props::uuid_to_guid(admin_uid);
+            tail.players = vec![PalGuildPlayerWithRole {
+                player_uid: props::uuid_to_guid(member.player_uid),
+                player_info: PalPlayerInfoDetails {
+                    last_online_real_time: member.last_online_real_time,
+                    player_name: member.player_name.clone(),
+                },
+                role: role.unwrap_or(0),
+            }];
+        }
+    }
+}
+
+/// Builds a `PalGuildGroup` with the pre-2026-07 (`PreUpdate`) tail shape --
+/// the fixed layout every guild used before `uesave` owned guild
+/// (de)serialization. A construction helper for tests and synthetic sessions
+/// (production never builds a guild from scratch; transfer clones a template
+/// instead). Empty `guild_markers` reproduce the old four-zero-byte marker
+/// count run exactly.
+pub fn pre_update_guild(
+    base_camp_level: i32,
+    guild_name: &str,
+    admin_player_uid: Uuid,
+    players: &[(Uuid, i64, &str)],
+) -> PalGuildGroup {
+    PalGuildGroup {
+        org_type: 0,
+        leading_bytes: [0; 4],
+        base_ids: Vec::new(),
+        unknown_1: 0,
+        base_camp_level,
+        map_object_instance_ids_base_camp_points: Vec::new(),
+        guild_name: guild_name.to_string(),
+        last_guild_name_modifier_player_uid: uesave::FGuid::nil(),
+        guild_markers: Vec::new(),
+        tail: PalGuildTail::PreUpdate(PalGuildTailPreUpdate {
+            admin_player_uid: props::uuid_to_guid(admin_player_uid),
+            players: players
+                .iter()
+                .map(|(uid, last_online, name)| PalPlayerInfo {
+                    player_uid: props::uuid_to_guid(*uid),
+                    player_info: PalPlayerInfoDetails {
+                        last_online_real_time: *last_online,
+                        player_name: (*name).to_string(),
+                    },
+                })
+                .collect(),
+            trailing_bytes: [0; 4],
+        }),
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+    use uesave::games::palworld::PalGuildTailPostUpdate;
 
-    #[test]
-    fn write_fstring_matches_python_archive_writer_empty_string() {
-        // Python's FArchiveWriter.fstring: `string == ""` is its own
-        // branch (`self.i32(0)`), producing 4 bytes total -- not the
-        // 5-byte ascii-branch result (`i32(1)` + NUL) an empty string
-        // would get if routed through the ascii branch instead.
-        let mut buffer = Vec::new();
-        write_fstring(&mut buffer, "");
-        assert_eq!(buffer, 0i32.to_le_bytes().to_vec());
+    fn uid(byte: u8) -> Uuid {
+        Uuid::from_bytes([byte; 16])
+    }
+
+    fn post_update_guild() -> PalGuildGroup {
+        let mut guild = pre_update_guild(3, "Post", uid(1), &[]);
+        guild.tail = PalGuildTail::PostUpdate(PalGuildTailPostUpdate {
+            guild_chest_allowed_roles: vec![7, 8],
+            unknown_i32: 42,
+            admin_player_uid: props::uuid_to_guid(uid(1)),
+            players: vec![
+                PalGuildPlayerWithRole {
+                    player_uid: props::uuid_to_guid(uid(1)),
+                    player_info: PalPlayerInfoDetails {
+                        last_online_real_time: 100,
+                        player_name: "Admin".to_string(),
+                    },
+                    role: 5,
+                },
+                PalGuildPlayerWithRole {
+                    player_uid: props::uuid_to_guid(uid(2)),
+                    player_info: PalPlayerInfoDetails {
+                        last_online_real_time: 200,
+                        player_name: "Member".to_string(),
+                    },
+                    role: 2,
+                },
+            ],
+            role_permissions: Vec::new(),
+            trailing_bytes: [9; 4],
+        });
+        guild
     }
 
     #[test]
-    fn write_fstring_matches_python_archive_writer_ascii() {
-        let mut buffer = Vec::new();
-        write_fstring(&mut buffer, "Guild");
-        let mut expected = 6i32.to_le_bytes().to_vec(); // len + NUL
-        expected.extend_from_slice(b"Guild\0");
-        assert_eq!(buffer, expected);
+    fn accessors_read_pre_update_shape() {
+        let guild = pre_update_guild(4, "Pre", uid(1), &[(uid(1), 10, "A"), (uid(2), 20, "B")]);
+        assert_eq!(guild_admin_uid(&guild), uid(1));
+        assert_eq!(guild_player_uids(&guild), vec![uid(1), uid(2)]);
+        assert_eq!(guild_player_count(&guild), 2);
+        assert!(guild_has_player(&guild, uid(2)));
+        assert!(!guild_has_player(&guild, uid(9)));
+        assert_eq!(
+            find_player_membership(&guild, uid(2)),
+            Some((20, "B".to_string()))
+        );
+        assert_eq!(player_role(&guild, uid(1)), None);
     }
 
     #[test]
-    fn write_fstring_matches_python_archive_writer_utf16() {
-        let mut buffer = Vec::new();
-        write_fstring(&mut buffer, "ギ"); // one UTF-16 code unit
-        let mut expected = (-2i32).to_le_bytes().to_vec(); // -(1 unit + NUL unit)
-        expected.extend_from_slice(&0x30ae_u16.to_le_bytes());
-        expected.extend_from_slice(&0u16.to_le_bytes());
-        assert_eq!(buffer, expected);
+    fn accessors_read_post_update_shape() {
+        let guild = post_update_guild();
+        assert_eq!(guild_admin_uid(&guild), uid(1));
+        assert_eq!(guild_player_uids(&guild), vec![uid(1), uid(2)]);
+        assert_eq!(guild_player_count(&guild), 2);
+        assert_eq!(
+            find_player_membership(&guild, uid(2)),
+            Some((200, "Member".to_string()))
+        );
+        assert_eq!(player_role(&guild, uid(2)), Some(2));
     }
 
     #[test]
-    fn shuffle_guid_bytes_is_an_involution() {
-        let raw: [u8; 16] = (0u8..16).collect::<Vec<u8>>().try_into().unwrap();
-        assert_eq!(shuffle_guid_bytes(shuffle_guid_bytes(raw)), raw);
+    fn remove_player_returns_role_and_preserves_other_rows_post_update() {
+        let mut guild = post_update_guild();
+        assert_eq!(remove_player(&mut guild, uid(2)), Some(2));
+        assert_eq!(guild_player_uids(&guild), vec![uid(1)]);
+        // Non-member fields survive untouched.
+        if let PalGuildTail::PostUpdate(tail) = &guild.tail {
+            assert_eq!(tail.guild_chest_allowed_roles, vec![7, 8]);
+            assert_eq!(tail.unknown_i32, 42);
+            assert_eq!(tail.trailing_bytes, [9; 4]);
+        } else {
+            panic!("shape must stay PostUpdate");
+        }
     }
 
     #[test]
-    fn write_uuid_inverts_blob_reader_read_uuid() {
-        let raw: [u8; 16] = (0u8..16).collect::<Vec<u8>>().try_into().unwrap();
-        let mut reader = BlobReader::new(&raw);
-        let uuid = reader.read_uuid().unwrap();
-        let mut buffer = Vec::new();
-        write_uuid(&mut buffer, uuid);
-        assert_eq!(buffer, raw);
+    fn push_player_uses_role_for_post_update_only() {
+        let member = GuildPlayerInfo {
+            player_uid: uid(3),
+            last_online_real_time: 300,
+            player_name: "New".to_string(),
+        };
+
+        let mut pre = pre_update_guild(1, "Pre", uid(1), &[]);
+        push_player(&mut pre, &member, Some(9));
+        assert_eq!(guild_player_uids(&pre), vec![uid(3)]);
+        assert_eq!(player_role(&pre, uid(3)), None);
+
+        let mut post = post_update_guild();
+        push_player(&mut post, &member, Some(9));
+        assert_eq!(player_role(&post, uid(3)), Some(9));
     }
 
     #[test]
-    fn parse_rejects_oversized_players_count_without_panicking() {
-        let mut header = Vec::new();
-        header.push(0u8); // org_type
-        header.extend_from_slice(&[0; 4]); // leading_bytes
-        header.extend_from_slice(&0u32.to_le_bytes()); // base_ids count
-        header.extend_from_slice(&0i32.to_le_bytes()); // unknown_1
-        header.extend_from_slice(&1i32.to_le_bytes()); // base_camp_level
-        header.extend_from_slice(&0u32.to_le_bytes()); // base camp points count
-        write_fstring(&mut header, "G");
-        write_uuid(&mut header, uuid::Uuid::nil()); // last modifier
-        header.extend_from_slice(&[0; 4]); // unknown_2
-        write_uuid(&mut header, uuid::Uuid::nil()); // admin
-        header.extend_from_slice(&u32::MAX.to_le_bytes()); // players count: absurd
-                                                           // no player data follows
-        assert!(GuildTail::parse(&header).is_err());
+    fn swap_player_uids_swaps_admin_and_members_both_shapes() {
+        for mut guild in [
+            pre_update_guild(1, "G", uid(1), &[(uid(1), 0, "A"), (uid(2), 0, "B")]),
+            post_update_guild(),
+        ] {
+            swap_player_uids(&mut guild, uid(1), uid(2));
+            assert_eq!(guild_admin_uid(&guild), uid(2));
+            assert_eq!(guild_player_uids(&guild), vec![uid(2), uid(1)]);
+        }
+    }
+
+    #[test]
+    fn reset_to_single_member_keeps_post_update_shape_and_perms() {
+        let mut guild = post_update_guild();
+        if let PalGuildTail::PostUpdate(tail) = &mut guild.tail {
+            tail.role_permissions.clear();
+            tail.guild_chest_allowed_roles = vec![1, 2, 3];
+        }
+        let member = GuildPlayerInfo {
+            player_uid: uid(7),
+            last_online_real_time: 700,
+            player_name: "Solo".to_string(),
+        };
+        reset_to_single_member(&mut guild, "Transferred Guild", uid(7), &member, Some(4));
+        assert_eq!(guild.guild_name, "Transferred Guild");
+        assert_eq!(guild.base_camp_level, 1);
+        assert!(guild.base_ids.is_empty());
+        assert_eq!(guild_admin_uid(&guild), uid(7));
+        assert_eq!(guild_player_uids(&guild), vec![uid(7)]);
+        assert_eq!(player_role(&guild, uid(7)), Some(4));
+        if let PalGuildTail::PostUpdate(tail) = &guild.tail {
+            assert_eq!(tail.guild_chest_allowed_roles, vec![1, 2, 3]);
+        } else {
+            panic!("shape must stay PostUpdate");
+        }
     }
 }

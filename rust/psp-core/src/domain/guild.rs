@@ -86,11 +86,11 @@ pub fn find_player_guild_id(
             let Some(group_data) = super::guild_tail::entry_group_data(entry) else {
                 continue;
             };
-            let Ok(tail) = super::guild_tail::GuildTail::parse(&group_data.remaining_data) else {
+            let Some(guild) = super::guild_tail::as_guild(group_data) else {
                 continue;
             };
-            for player in &tail.players {
-                player_guild_map.insert(player.player_uid, guild_id);
+            for player_uid in super::guild_tail::guild_player_uids(guild) {
+                player_guild_map.insert(player_uid, guild_id);
             }
         }
         session.caches.player_guild_map = Some(player_guild_map);
@@ -317,8 +317,10 @@ fn build_guild_dto(
         let Some(group_data) = guild_tail::entry_group_data(&entries[entry_index]) else {
             return Ok(None);
         };
-        let tail = guild_tail::GuildTail::parse(&group_data.remaining_data)?;
-        let players: Vec<uuid::Uuid> = tail.players.iter().map(|p| p.player_uid).collect();
+        let Some(guild) = guild_tail::as_guild(group_data) else {
+            return Ok(None);
+        };
+        let players: Vec<uuid::Uuid> = guild_tail::guild_player_uids(guild);
         // guild.py:76-77 (`self.players[0] if self.players else None`). Note:
         // `Guild.players` itself raises `UnboundLocalError` in real Python
         // when the raw player list is empty -- a genuine Python bug found
@@ -327,8 +329,8 @@ fn build_guild_dto(
         // is a normal, non-panicking "no admin" case.
         let admin = players.first().copied();
         (
-            tail.guild_name.clone(),
-            tail.base_camp_level,
+            guild.guild_name.clone(),
+            guild.base_camp_level,
             players,
             admin,
         )
@@ -706,20 +708,23 @@ pub fn apply_guild_dto(
         let Some(group_data) = guild_tail::entry_group_data_mut(&mut entries[entry_index]) else {
             return Err(CoreError::Parse("guild group data untyped".into()));
         };
-        let mut tail = guild_tail::GuildTail::parse(&group_data.remaining_data)?;
+        let Some(guild) = guild_tail::as_guild_mut(group_data) else {
+            return Err(CoreError::Parse("guild group data untyped".into()));
+        };
         // `if guildDTO.name:` -- Python truthiness (None AND "" both skip).
         if let Some(name) = &dto.name {
             if !name.is_empty() {
-                tail.guild_name = name.clone();
+                guild.guild_name = name.clone();
             }
         }
-        // `if guildDTO.base_camp_level:` -- 0 is falsy, mirror that.
+        // `if guildDTO.base_camp_level:` -- 0 is falsy, mirror that. uesave
+        // re-serializes the structured guild on save, so mutating the field
+        // in place is the whole write -- no blob re-encode needed.
         if let Some(level) = dto.base_camp_level {
             if level != 0 {
-                tail.base_camp_level = level;
+                guild.base_camp_level = level;
             }
         }
-        group_data.remaining_data = tail.to_bytes();
     }
     if let Some(bases) = &dto.bases {
         for (base_id, base_dto) in bases.iter() {
@@ -1148,7 +1153,10 @@ mod tests {
         }
     }
 
-    fn guild_group_entry(guild_id: &str, tail: Vec<u8>) -> UMapEntry {
+    fn guild_group_entry(
+        guild_id: &str,
+        guild: uesave::games::palworld::PalGuildGroup,
+    ) -> UMapEntry {
         let mut value_properties = Properties::default();
         value_properties.insert(
             "GroupType",
@@ -1158,7 +1166,7 @@ mod tests {
             group_id: fguid(guild_id),
             group_name: String::new(),
             individual_character_handle_ids: vec![],
-            remaining_data: tail,
+            data: uesave::games::palworld::PalGroupVariant::Guild(guild),
         };
         value_properties.insert(
             "RawData",
@@ -1185,11 +1193,11 @@ mod tests {
 
     #[test]
     fn find_player_guild_id_locates_the_guild_owning_the_player() {
-        let tail = crate::palbin::test_bytes::guild_tail(
+        let tail = guild_tail::pre_update_guild(
             3,
             "The Guild",
-            "77777777-7777-7777-7777-777777777777",
-            &[(PLAYER_ID, 0, "Tester")],
+            "77777777-7777-7777-7777-777777777777".parse().unwrap(),
+            &[(PLAYER_ID.parse().unwrap(), 0, "Tester")],
         );
         let mut session = session_with_group_map(vec![guild_group_entry(GUILD_ID, tail)]);
 
@@ -1207,11 +1215,15 @@ mod tests {
 
     #[test]
     fn find_player_guild_id_returns_none_for_a_player_in_no_guild() {
-        let tail = crate::palbin::test_bytes::guild_tail(
+        let tail = guild_tail::pre_update_guild(
             1,
             "Other Guild",
-            "77777777-7777-7777-7777-777777777777",
-            &[("88888888-8888-8888-8888-888888888888", 0, "Someone Else")],
+            "77777777-7777-7777-7777-777777777777".parse().unwrap(),
+            &[(
+                "88888888-8888-8888-8888-888888888888".parse().unwrap(),
+                0,
+                "Someone Else",
+            )],
         );
         let mut session = session_with_group_map(vec![guild_group_entry(GUILD_ID, tail)]);
 
@@ -1230,17 +1242,16 @@ mod tests {
             "GroupType",
             Property::Enum("EPalGroupType::Alliance".to_string()),
         );
-        let tail = crate::palbin::test_bytes::guild_tail(
-            1,
-            "Alliance",
-            "77777777-7777-7777-7777-777777777777",
-            &[(PLAYER_ID, 0, "Tester")],
-        );
+        // A non-guild group's `data` never decodes to the Guild variant; the
+        // exact fallback contents are irrelevant since this entry must be
+        // skipped on its `GroupType` alone.
         let group_data = PalGroupData {
             group_id: fguid(GUILD_ID),
             group_name: String::new(),
             individual_character_handle_ids: vec![],
-            remaining_data: tail,
+            data: uesave::games::palworld::PalGroupVariant::Unknown {
+                remaining_data: vec![],
+            },
         };
         value_properties.insert(
             "RawData",
@@ -1346,7 +1357,7 @@ mod tests {
                     target_container_id: fguid(CONTAINER_ID),
                     slot_attribute_indexes: vec![],
                     all_slot_attribute: vec![],
-                    drop_item_at_disposed: false,
+                    drop_item_at_disposed: 0,
                     usage_type: 0,
                     trailing_bytes: [0; 4],
                 },
@@ -1561,7 +1572,7 @@ mod tests {
                 player_infos: vec![PalPlayerLockInfo {
                     player_uid: fguid(SDM_PLAYER),
                     try_failed_count: 0,
-                    try_success_cache: false,
+                    try_success_cache: 0,
                 }],
                 trailing_bytes: [0; 4],
             },

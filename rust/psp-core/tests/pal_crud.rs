@@ -627,7 +627,9 @@ fn guild_group_entry(guild_id: Uuid) -> MapEntry {
         group_id: psp_core::props::uuid_to_guid(guild_id),
         group_name: String::new(),
         individual_character_handle_ids: vec![],
-        remaining_data: vec![],
+        data: uesave::games::palworld::PalGroupVariant::Guild(
+            psp_core::domain::guild_tail::pre_update_guild(1, "", uuid::Uuid::nil(), &[]),
+        ),
     };
     value_properties.insert(
         "RawData",

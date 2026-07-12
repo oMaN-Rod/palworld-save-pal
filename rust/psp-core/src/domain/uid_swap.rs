@@ -35,7 +35,7 @@
 //! 79-120`, which also excludes line 123's trailing `"UID swap complete!"`
 //! progress message -- also not reproduced here, matching that scoping.
 
-use crate::domain::guild_tail::{self, GuildTail};
+use crate::domain::guild_tail;
 use crate::domain::{player, world};
 use crate::error::CoreError;
 use crate::progress::ProgressSink;
@@ -95,22 +95,14 @@ fn swap_guild_member_uids(
             }
         }
 
-        let Ok(mut tail) = GuildTail::parse(&group_data.remaining_data) else {
+        // The admin uid and every member `player_uid` are swapped
+        // bidirectionally in place; uesave re-serializes the structured guild
+        // on save, and all other tail fields (roles, names, markers) survive
+        // untouched.
+        let Some(guild) = guild_tail::as_guild_mut(group_data) else {
             continue;
         };
-        if tail.admin_player_uid == old_uid {
-            tail.admin_player_uid = new_uid;
-        } else if tail.admin_player_uid == new_uid {
-            tail.admin_player_uid = old_uid;
-        }
-        for guild_player in tail.players.iter_mut() {
-            if guild_player.player_uid == old_uid {
-                guild_player.player_uid = new_uid;
-            } else if guild_player.player_uid == new_uid {
-                guild_player.player_uid = old_uid;
-            }
-        }
-        group_data.remaining_data = tail.to_bytes();
+        guild_tail::swap_player_uids(guild, old_uid, new_uid);
     }
     Ok(())
 }

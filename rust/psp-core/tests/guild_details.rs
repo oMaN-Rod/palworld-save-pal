@@ -322,14 +322,17 @@ fn update_lab_research_with_no_lab_data_is_a_silent_no_op() {
 // `update_lab_research` round trip.
 // ============================================================================
 
-fn raw_tail_bytes(session: &SaveSession, guild_id: Uuid) -> Vec<u8> {
+fn raw_tail_bytes(
+    session: &SaveSession,
+    guild_id: Uuid,
+) -> uesave::games::palworld::PalGroupVariant {
     let entries = world::group_map(&session.level).unwrap();
     let entry_index = guild::guild_entry_index(session, guild_id)
         .unwrap()
         .expect("guild present in GroupSaveDataMap");
     guild_tail::entry_group_data(&entries[entry_index])
         .unwrap()
-        .remaining_data
+        .data
         .clone()
 }
 

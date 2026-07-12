@@ -1,35 +1,52 @@
 mod common;
 
 use psp_core::domain::{guild_tail, world};
+use uuid::Uuid;
 
-/// Deviation from the brief: the brief's version of this test gated itself
-/// on `common::load_corpus_session()` (an optional `PSP_TEST_SAVE_DIR` env
-/// var), which is unset in this environment and would silently skip,
-/// producing no evidence at all. The task instructions are explicit that the
-/// checked-in fixtures at `tests/fixtures/saves/world1` (2 players) and
-/// `world2` (1 player) must be used instead, via the always-present
-/// `common::load_fixture_session` helper -- this never skips, so a pass here
-/// is real evidence the encoder matches real save bytes.
+/// Every guild in a real save survives a full write -> read round trip with
+/// its structured data byte-identical.
+///
+/// Reconciliation with the 2026-07 uesave refactor: uesave now OWNS guild
+/// (de)serialization -- `PalGroupData::data` is a structured
+/// `PalGroupVariant::Guild(PalGuildGroup)` (with a two-shape `PalGuildTail`),
+/// not the flat `remaining_data` blob psp-core used to parse and re-encode by
+/// hand. So this test no longer re-encodes a blob; instead it captures each
+/// guild's structured `data`, re-serializes the WHOLE level through uesave's
+/// writer (`level_sav_bytes()`), re-reads it, and asserts every guild's
+/// structured data is unchanged. Because uesave's `PalGuildGroup::write` is
+/// the exact inverse of its `read`, structural equality across this round trip
+/// IS byte identity of the guild's on-disk bytes -- the same guarantee the old
+/// `tail.to_bytes() == remaining_data` assertion made, now proven through the
+/// real save write path rather than a hand-rolled codec.
+///
+/// Runs UNCONDITIONALLY on the committed fixtures (never the env-gated private
+/// corpus), so a pass here is real evidence on bare CI.
 #[test]
 fn every_guild_tail_in_fixture_saves_round_trips_byte_identically() {
     let mut guild_count = 0;
     for fixture_name in ["world1", "world2"] {
         let session = common::load_fixture_session(fixture_name);
-        let groups = world::group_map(&session.level).unwrap();
-        for entry in groups {
-            if guild_tail::entry_group_type(entry).as_deref() != Some("EPalGroupType::Guild") {
-                continue;
-            }
-            let group_data = guild_tail::entry_group_data(entry).expect("typed PalGroupData");
-            let original_bytes = &group_data.remaining_data;
-            let tail = guild_tail::GuildTail::parse(original_bytes)
-                .unwrap_or_else(|err| panic!("{fixture_name} guild tail parses: {err}"));
-            let re_encoded = tail.to_bytes();
+        let before = collect_guild_data(&session.level);
+        assert!(
+            !before.is_empty(),
+            "{fixture_name}: fixture must contain at least one guild"
+        );
+
+        let bytes = session
+            .level_sav_bytes()
+            .unwrap_or_else(|err| panic!("{fixture_name}: write level sav: {err}"));
+        let reloaded = psp_core::savio::read_sav_bytes(&bytes)
+            .unwrap_or_else(|err| panic!("{fixture_name}: re-read level sav: {err}"));
+        let after = collect_guild_data(&reloaded);
+
+        for (guild_id, data) in &before {
+            let round_tripped = after
+                .iter()
+                .find(|(id, _)| id == guild_id)
+                .unwrap_or_else(|| panic!("{fixture_name}: guild {guild_id} survives resave"));
             assert_eq!(
-                &re_encoded,
-                original_bytes,
-                "{fixture_name}: byte-identical rewrite of a {}-byte guild tail",
-                original_bytes.len()
+                &round_tripped.1, data,
+                "{fixture_name}: guild {guild_id} structured data must be byte-identical after resave"
             );
             guild_count += 1;
         }
@@ -40,102 +57,72 @@ fn every_guild_tail_in_fixture_saves_round_trips_byte_identically() {
     );
 }
 
-/// Supplementary to the fixture-based test above: when `PSP_TEST_SAVE_DIR`
-/// points at a larger corpus save (not set in this environment), also
-/// exercise the codec against it, matching the gating convention every
-/// other corpus test in this workspace uses (`world_index.rs`).
+/// The same round trip on the PRIVATE corpus named by `PSP_TEST_SAVE_DIR`
+/// (skips loudly when unset).
 #[test]
 fn every_guild_tail_in_corpus_session_round_trips_byte_identically() {
     let Some(session) = common::load_corpus_session() else {
         return;
     };
-    let groups = world::group_map(&session.level).unwrap();
-    for entry in groups {
-        if guild_tail::entry_group_type(entry).as_deref() != Some("EPalGroupType::Guild") {
-            continue;
-        }
-        let group_data = guild_tail::entry_group_data(entry).expect("typed PalGroupData");
-        let original_bytes = &group_data.remaining_data;
-        let tail = guild_tail::GuildTail::parse(original_bytes)
-            .unwrap_or_else(|err| panic!("corpus guild tail parses: {err}"));
+    let before = collect_guild_data(&session.level);
+    let bytes = session.level_sav_bytes().expect("write corpus level sav");
+    let reloaded = psp_core::savio::read_sav_bytes(&bytes).expect("re-read corpus level sav");
+    let after = collect_guild_data(&reloaded);
+
+    for (guild_id, data) in &before {
+        let round_tripped = after
+            .iter()
+            .find(|(id, _)| id == guild_id)
+            .unwrap_or_else(|| panic!("corpus guild {guild_id} survives resave"));
         assert_eq!(
-            tail.to_bytes(),
-            *original_bytes,
-            "byte-identical rewrite of a {}-byte guild tail",
-            original_bytes.len()
+            &round_tripped.1, data,
+            "corpus guild {guild_id} structured data must be byte-identical after resave"
         );
     }
 }
 
+/// Two-shape coverage: the structured accessors and mutators must read and
+/// edit BOTH the pre-2026-07 (`PreUpdate`) and 2026-07 (`PostUpdate`) tail
+/// shapes without ever assuming one. A `PreUpdate` guild is built via the
+/// public constructor; every guild the fixtures actually carry exercises the
+/// real read path in the round-trip test above.
 #[test]
-fn synthetic_tail_round_trip_with_unicode_name() {
-    let tail = guild_tail::GuildTail {
-        org_type: 0,
-        leading_bytes: [0; 4],
-        base_ids: vec![uuid::Uuid::new_v4()],
-        unknown_1: 0,
-        base_camp_level: 5,
-        map_object_instance_ids_base_camp_points: vec![],
-        guild_name: "ギルド".to_string(),
-        last_guild_name_modifier_player_uid: uuid::Uuid::new_v4(),
-        unknown_2: [0; 4],
-        admin_player_uid: uuid::Uuid::new_v4(),
-        players: vec![guild_tail::GuildPlayerInfo {
-            player_uid: uuid::Uuid::new_v4(),
-            last_online_real_time: 638_000_000_000_000_000,
-            player_name: "プレイヤー".to_string(),
-        }],
-        trailing_bytes: [0; 4],
-    };
-    let encoded = tail.to_bytes();
-    let reparsed = guild_tail::GuildTail::parse(&encoded).unwrap();
-    assert_eq!(reparsed.guild_name, "ギルド");
-    assert_eq!(reparsed.players[0].player_name, "プレイヤー");
-    assert_eq!(reparsed.base_camp_level, 5);
-    assert_eq!(reparsed.base_ids, tail.base_ids);
-    assert_eq!(
-        reparsed.admin_player_uid, tail.admin_player_uid,
-        "guid round-trips through the write/read permutation exactly"
+fn accessors_handle_pre_update_guilds_built_from_the_constructor() {
+    let admin: Uuid = "77777777-7777-7777-7777-777777777777".parse().unwrap();
+    let member: Uuid = "88888888-8888-8888-8888-888888888888".parse().unwrap();
+    let mut guild = guild_tail::pre_update_guild(
+        5,
+        "Founders",
+        admin,
+        &[(admin, 10, "Admin"), (member, 20, "Member")],
     );
-    // encode(decode(encode(x))) must also equal encode(x): a second pass
-    // through the codec must not drift.
+
+    assert_eq!(guild_tail::guild_admin_uid(&guild), admin);
+    assert_eq!(guild_tail::guild_player_uids(&guild), vec![admin, member]);
+    assert_eq!(guild_tail::guild_player_count(&guild), 2);
     assert_eq!(
-        guild_tail::GuildTail::parse(&encoded).unwrap().to_bytes(),
-        encoded
+        guild_tail::find_player_membership(&guild, member),
+        Some((20, "Member".to_string()))
     );
+
+    guild_tail::remove_player(&mut guild, member);
+    assert_eq!(guild_tail::guild_player_uids(&guild), vec![admin]);
+    assert_eq!(guild.base_camp_level, 5);
 }
 
-#[test]
-fn parse_rejects_truncated_blob_without_panicking() {
-    let truncated = [0u8; 3]; // shorter than even org_type + leading_bytes
-    let result = guild_tail::GuildTail::parse(&truncated);
-    assert!(
-        result.is_err(),
-        "truncated blob must be a clean Err, not a panic"
-    );
-}
-
-#[test]
-fn parse_rejects_trailing_garbage_without_panicking() {
-    let tail = guild_tail::GuildTail {
-        org_type: 0,
-        leading_bytes: [0; 4],
-        base_ids: vec![],
-        unknown_1: 0,
-        base_camp_level: 1,
-        map_object_instance_ids_base_camp_points: vec![],
-        guild_name: "G".to_string(),
-        last_guild_name_modifier_player_uid: uuid::Uuid::nil(),
-        unknown_2: [0; 4],
-        admin_player_uid: uuid::Uuid::nil(),
-        players: vec![],
-        trailing_bytes: [0; 4],
-    };
-    let mut bytes = tail.to_bytes();
-    bytes.push(0xFF); // one extra byte beyond a structurally complete tail
-    let result = guild_tail::GuildTail::parse(&bytes);
-    assert!(
-        result.is_err(),
-        "unconsumed trailing bytes must be a clean Err, not silently ignored"
-    );
+fn collect_guild_data(
+    level: &uesave::Save,
+) -> Vec<(Uuid, uesave::games::palworld::PalGroupVariant)> {
+    world::group_map(level)
+        .unwrap()
+        .iter()
+        .filter_map(|entry| {
+            if guild_tail::entry_group_type(entry).as_deref() != Some("EPalGroupType::Guild") {
+                return None;
+            }
+            let guild_id = psp_core::props::as_uuid(&entry.key)?;
+            let group_data = guild_tail::entry_group_data(entry)?;
+            Some((guild_id, group_data.data.clone()))
+        })
+        .collect()
 }

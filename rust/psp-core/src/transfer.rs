@@ -34,7 +34,7 @@ use uesave::games::palworld::PalInstanceId;
 use uesave::{MapEntry, Properties, Property, PropertyKey, Save, StructValue, ValueVec};
 use uuid::Uuid;
 
-use crate::domain::guild_tail::{self, GuildPlayerInfo, GuildTail};
+use crate::domain::guild_tail::{self, GuildPlayerInfo};
 use crate::domain::{guild, pal, player, world};
 use crate::error::CoreError;
 use crate::progress::ProgressSink;
@@ -880,14 +880,13 @@ fn find_source_guild_member(
         let Some(group_data) = guild_tail::entry_group_data(entry) else {
             continue;
         };
-        let Ok(tail) = GuildTail::parse(&group_data.remaining_data) else {
+        let Some(guild) = guild_tail::as_guild(group_data) else {
             continue;
         };
-        if let Some(player) = tail.players.iter().find(|p| p.player_uid == source_uid) {
-            return Ok(Some((
-                player.last_online_real_time,
-                player.player_name.clone(),
-            )));
+        if let Some((last_online_real_time, player_name)) =
+            guild_tail::find_player_membership(guild, source_uid)
+        {
+            return Ok(Some((last_online_real_time, player_name)));
         }
     }
     Ok(None)
@@ -918,8 +917,8 @@ fn transfer_guild(
         groups.iter().position(|entry| {
             guild_tail::entry_group_type(entry).as_deref() == Some("EPalGroupType::Guild")
                 && guild_tail::entry_group_data(entry)
-                    .and_then(|group_data| GuildTail::parse(&group_data.remaining_data).ok())
-                    .map(|tail| tail.players.iter().any(|p| p.player_uid == target_uid))
+                    .and_then(guild_tail::as_guild)
+                    .map(|guild| guild_tail::guild_has_player(guild, target_uid))
                     .unwrap_or(false)
         })
     };
@@ -927,10 +926,13 @@ fn transfer_guild(
         let groups = world::group_map_mut(&mut target.level)?;
         let group_data = guild_tail::entry_group_data_mut(&mut groups[position])
             .ok_or_else(|| CoreError::Parse("target guild group data untyped".into()))?;
-        let mut tail = GuildTail::parse(&group_data.remaining_data)?;
-        tail.players.retain(|p| p.player_uid != target_uid);
-        tail.players.push(retargeted);
-        group_data.remaining_data = tail.to_bytes();
+        let guild = guild_tail::as_guild_mut(group_data)
+            .ok_or_else(|| CoreError::Parse("target guild group data untyped".into()))?;
+        // Drop the target's existing row and re-add the retargeted one,
+        // preserving its role (PostUpdate guilds) so the members-with-roles
+        // and role_permissions stay consistent.
+        let existing_role = guild_tail::remove_player(guild, target_uid);
+        guild_tail::push_player(guild, &retargeted, existing_role);
         return Ok(());
     }
 
@@ -952,8 +954,8 @@ fn create_guild_for_player(
         .find(|entry| {
             guild_tail::entry_group_type(entry).as_deref() == Some("EPalGroupType::Guild")
                 && guild_tail::entry_group_data(entry)
-                    .and_then(|group_data| GuildTail::parse(&group_data.remaining_data).ok())
-                    .map(|tail| tail.players.iter().any(|p| p.player_uid == source_uid))
+                    .and_then(guild_tail::as_guild)
+                    .map(|guild| guild_tail::guild_has_player(guild, source_uid))
                     .unwrap_or(false)
         })
         .cloned();
@@ -971,14 +973,18 @@ fn create_guild_for_player(
     if let Some(group_data) = guild_tail::entry_group_data_mut(&mut new_guild) {
         group_data.group_id = props::uuid_to_guid(new_guild_id);
         group_data.individual_character_handle_ids = Vec::new();
-        if let Ok(mut tail) = GuildTail::parse(&group_data.remaining_data) {
-            tail.guild_name = "Transferred Guild".to_string();
-            tail.admin_player_uid = target_uid;
-            tail.players = vec![retargeted];
-            tail.base_ids = Vec::new();
-            tail.base_camp_level = 1;
-            tail.map_object_instance_ids_base_camp_points = Vec::new();
-            group_data.remaining_data = tail.to_bytes();
+        if let Some(guild) = guild_tail::as_guild_mut(group_data) {
+            // Preserve the source admin's role for the new single-member
+            // guild (PostUpdate guilds carry per-player roles); harmless
+            // `None` for PreUpdate.
+            let source_role = guild_tail::player_role(guild, source_uid);
+            guild_tail::reset_to_single_member(
+                guild,
+                "Transferred Guild",
+                target_uid,
+                &retargeted,
+                source_role,
+            );
         }
     }
     world::group_map_mut(&mut target.level)?.push(new_guild);
@@ -1043,19 +1049,10 @@ fn sync_timestamps(target: &mut SaveSession, target_uid: Uuid) -> Result<(), Cor
             let Some(group_data) = guild_tail::entry_group_data_mut(entry) else {
                 continue;
             };
-            let Ok(mut tail) = GuildTail::parse(&group_data.remaining_data) else {
+            let Some(guild) = guild_tail::as_guild_mut(group_data) else {
                 continue;
             };
-            let mut changed = false;
-            for player in tail.players.iter_mut() {
-                if player.player_uid == target_uid {
-                    player.last_online_real_time = world_tick;
-                    changed = true;
-                }
-            }
-            if changed {
-                group_data.remaining_data = tail.to_bytes();
-            }
+            guild_tail::set_player_last_online(guild, target_uid, world_tick);
         }
     }
     Ok(())
