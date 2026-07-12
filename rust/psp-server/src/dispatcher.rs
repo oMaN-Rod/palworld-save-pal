@@ -334,6 +334,22 @@ async fn route(
         MessageType::GetServerStats => {
             handlers::servers::handle_get_server_stats(serde_json::from_value(data)?, ctx).await
         }
+        // Phase 6 (Task 12): server lifecycle create/update/delete/start/stop.
+        MessageType::CreateServer => {
+            handlers::servers::handle_create_server(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::UpdateServer => {
+            handlers::servers::handle_update_server(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::DeleteServer => {
+            handlers::servers::handle_delete_server(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::StartServer => {
+            handlers::servers::handle_start_server(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::StopServer => {
+            handlers::servers::handle_stop_server(serde_json::from_value(data)?, ctx).await
+        }
         // Remaining arms are added by Phases 1-6.
         other => {
             tracing::warn!(

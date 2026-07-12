@@ -5,13 +5,13 @@
 //! returns Ok(()). Only payload-parse failures use the HandlerError path.
 use serde_json::Value;
 
-use psp_db::servers::ServerRecord;
+use psp_db::servers::{NewServer, ServerRecord};
 
 use crate::dispatcher::HandlerCtx;
 use crate::emitter::Emitter;
 use crate::handler_error::HandlerError;
 use crate::messages::MessageType;
-use crate::services::{docker, native_mods, native_process, ServerProcessStatus};
+use crate::services::{docker, native_config, native_mods, native_process, ServerProcessStatus};
 use crate::AppState;
 
 #[derive(Debug, serde::Deserialize)]
@@ -203,6 +203,554 @@ pub async fn handle_get_server_stats(
         Err(error) => {
             emit_business_error(ctx.emitter, format!("Failed to get server stats: {error}"));
         }
+    }
+    Ok(())
+}
+
+fn default_image_name() -> String {
+    "omanrod/psp-palworld-server".to_string()
+}
+fn default_server_type() -> String {
+    "docker".to_string()
+}
+fn default_game_port() -> i64 {
+    8211
+}
+fn default_query_port() -> i64 {
+    27015
+}
+fn default_rest_api_port() -> i64 {
+    8212
+}
+fn default_server_name() -> String {
+    "PSP Palworld Server".to_string()
+}
+fn default_admin_password() -> String {
+    "admin".to_string()
+}
+fn default_max_players() -> i64 {
+    16
+}
+
+/// messages.py CreateServerData — field names and defaults verbatim.
+#[derive(Debug, serde::Deserialize)]
+pub struct CreateServerData {
+    pub name: String,
+    pub container_name: String,
+    #[serde(default = "default_image_name")]
+    pub image_name: String,
+    #[serde(default = "default_server_type")]
+    pub server_type: String,
+    #[serde(default = "default_game_port")]
+    pub game_port: i64,
+    #[serde(default = "default_query_port")]
+    pub query_port: i64,
+    #[serde(default = "default_rest_api_port")]
+    pub rest_api_port: i64,
+    #[serde(default = "default_server_name")]
+    pub server_name: String,
+    #[serde(default)]
+    pub server_description: String,
+    #[serde(default)]
+    pub server_password: String,
+    #[serde(default = "default_admin_password")]
+    pub admin_password: String,
+    #[serde(default = "default_max_players")]
+    pub max_players: i64,
+    #[serde(default)]
+    pub env_vars: serde_json::Map<String, Value>,
+    #[serde(default)]
+    pub steamcmd_path: String,
+    #[serde(default)]
+    pub install_path: String,
+    #[serde(default)]
+    pub launch_args: String,
+    #[serde(default)]
+    pub workshop_dir: String,
+}
+
+#[derive(Debug, serde::Deserialize)]
+pub struct UpdateServerData {
+    pub server_id: i64,
+    pub updates: serde_json::Map<String, Value>,
+}
+
+fn emit_creation_progress(emitter: &Emitter, message: &str) {
+    emitter.emit(
+        MessageType::ServerCreationProgress,
+        &serde_json::json!({ "message": message }),
+    );
+}
+
+async fn persist_steamcmd_path(
+    db: &sqlx::SqlitePool,
+    server_id: i64,
+    steamcmd_path: &str,
+) -> Result<(), String> {
+    let mut updates = serde_json::Map::new();
+    updates.insert(
+        "steamcmd_path".to_string(),
+        Value::String(steamcmd_path.to_string()),
+    );
+    psp_db::servers::update_server(db, server_id, &updates)
+        .await
+        .map(|_| ())
+        .map_err(|error| error.to_string())
+}
+
+/// create_server_handler parity. Returns Err(String) only for failures Python
+/// would catch in its outer try/except ("Failed to create server: {e}").
+async fn create_server_impl(
+    data: CreateServerData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), String> {
+    let emitter = ctx.emitter;
+    let db = &ctx.app.db;
+    let is_native = data.server_type == "native";
+
+    let allocated = psp_db::servers::allocated_ports(db)
+        .await
+        .map_err(|error| error.to_string())?;
+    for port in [data.game_port, data.query_port, data.rest_api_port] {
+        if allocated.contains(&(port as u16)) {
+            emit_business_error(
+                emitter,
+                format!("Port {port} is already allocated to another server"),
+            );
+            return Ok(());
+        }
+    }
+
+    if is_native {
+        if data.install_path.is_empty() {
+            emit_business_error(
+                emitter,
+                "Install path is required for native servers".to_string(),
+            );
+            return Ok(());
+        }
+        emit_creation_progress(emitter, "Validating server configuration...");
+
+        let mut workshop_dir = data.workshop_dir.clone();
+        if workshop_dir.is_empty() {
+            emit_creation_progress(emitter, "Auto-detecting Steam Workshop directory...");
+            workshop_dir = native_mods::find_steam_workshop_dir().unwrap_or_default();
+            if workshop_dir.is_empty() {
+                emit_creation_progress(
+                    emitter,
+                    "Steam Workshop directory not found (can be set later)",
+                );
+            } else {
+                emit_creation_progress(emitter, &format!("Found Steam Workshop at {workshop_dir}"));
+            }
+        }
+
+        let new_server = NewServer {
+            name: data.name.clone(),
+            container_name: data.container_name.clone(),
+            image_name: String::new(),
+            server_type: "native".to_string(),
+            game_port: data.game_port,
+            query_port: data.query_port,
+            rest_api_port: data.rest_api_port,
+            data_volume_name: String::new(),
+            saves_path: native_config::saves_path(&data.install_path),
+            mods_path: native_config::mods_path(&data.install_path),
+            logicmods_path: native_config::logicmods_path(&data.install_path),
+            nativemods_path: native_config::nativemods_path(&data.install_path),
+            install_path: data.install_path.clone(),
+            steamcmd_path: data.steamcmd_path.clone(),
+            launch_args: data.launch_args.clone(),
+            workshop_dir: workshop_dir.clone(),
+            server_name: data.server_name.clone(),
+            server_description: data.server_description.clone(),
+            server_password: data.server_password.clone(),
+            admin_password: data.admin_password.clone(),
+            max_players: data.max_players,
+            env_vars: data.env_vars.clone(),
+        };
+        let mut record = psp_db::servers::create_server(db, new_server)
+            .await
+            .map_err(|error| error.to_string())?;
+
+        // SteamCMD resolution: user-provided > auto-detect > auto-download.
+        let mut steamcmd_path = data.steamcmd_path.clone();
+        if steamcmd_path.is_empty() {
+            emit_creation_progress(emitter, "Auto-detecting SteamCMD...");
+            if let Some(found) = native_process::find_steamcmd() {
+                emit_creation_progress(emitter, &format!("Found SteamCMD at {found}"));
+                persist_steamcmd_path(db, record.id, &found).await?;
+                steamcmd_path = found;
+            }
+        }
+
+        emit_creation_progress(emitter, "Searching for existing PalServer installation...");
+        let source_path = native_process::find_existing_server(&steamcmd_path, &data.install_path);
+        if let Some(ref source) = source_path {
+            emit_creation_progress(
+                emitter,
+                &format!("Found existing server at {source}, copying base files..."),
+            );
+        } else {
+            if steamcmd_path.is_empty() {
+                let steamcmd_dir = native_process::default_steamcmd_dir();
+                emit_creation_progress(
+                    emitter,
+                    &format!(
+                        "SteamCMD not found. Downloading to {}...",
+                        steamcmd_dir.display()
+                    ),
+                );
+                let downloaded = native_process::ensure_steamcmd(&steamcmd_dir)
+                    .await
+                    .map_err(|error| error.to_string())?;
+                steamcmd_path = downloaded.to_string_lossy().to_string();
+                persist_steamcmd_path(db, record.id, &steamcmd_path).await?;
+            } else {
+                let steamcmd_dir = if steamcmd_path.ends_with(".exe") {
+                    std::path::Path::new(&steamcmd_path)
+                        .parent()
+                        .map(|parent| parent.to_path_buf())
+                        .unwrap_or_default()
+                } else {
+                    std::path::PathBuf::from(&steamcmd_path)
+                };
+                emit_creation_progress(emitter, "Setting up SteamCMD...");
+                native_process::ensure_steamcmd(&steamcmd_dir)
+                    .await
+                    .map_err(|error| error.to_string())?;
+            }
+            emit_creation_progress(
+                emitter,
+                "Downloading Palworld Dedicated Server via SteamCMD (this may take a while)...",
+            );
+            record = psp_db::servers::get_server(db, record.id)
+                .await
+                .map_err(|error| error.to_string())?
+                .ok_or_else(|| "server row vanished during creation".to_string())?;
+            if record.steamcmd_path.is_empty() {
+                persist_steamcmd_path(db, record.id, &steamcmd_path).await?;
+                record = psp_db::servers::get_server(db, record.id)
+                    .await
+                    .map_err(|error| error.to_string())?
+                    .ok_or_else(|| "server row vanished during creation".to_string())?;
+            }
+        }
+
+        let created = native_process::create_native_server(&record, source_path.as_deref()).await;
+        if !created {
+            psp_db::servers::delete_server(db, record.id)
+                .await
+                .map_err(|error| error.to_string())?;
+            emit_creation_progress(emitter, "");
+            emit_business_error(
+                emitter,
+                "Failed to create native server installation".to_string(),
+            );
+            return Ok(());
+        }
+
+        emit_creation_progress(emitter, "Writing server configuration files...");
+        native_mods::write_palmodsettings(&data.install_path, true, &[], &workshop_dir)
+            .map_err(|error| error.to_string())?;
+        emit_creation_progress(emitter, "");
+
+        let mut result = server_to_wire_json(&record);
+        result["status"] =
+            serde_json::to_value(native_process::process_status(record.pid)).expect("serializes");
+        result["player_count"] = Value::from(0);
+        emitter.emit(MessageType::CreateServer, &result);
+    } else {
+        emit_creation_progress(emitter, "Validating server configuration...");
+        let base_path = std::env::current_dir()
+            .map_err(|error| error.to_string())?
+            .join("servers")
+            .join(&data.container_name);
+        let new_server = NewServer {
+            name: data.name.clone(),
+            container_name: data.container_name.clone(),
+            image_name: data.image_name.clone(),
+            server_type: "docker".to_string(),
+            game_port: data.game_port,
+            query_port: data.query_port,
+            rest_api_port: data.rest_api_port,
+            data_volume_name: format!("psp-{}-data", data.container_name),
+            saves_path: base_path.join("saves").to_string_lossy().to_string(),
+            mods_path: base_path.join("mods").to_string_lossy().to_string(),
+            logicmods_path: base_path.join("logicmods").to_string_lossy().to_string(),
+            nativemods_path: base_path.join("nativemods").to_string_lossy().to_string(),
+            install_path: String::new(),
+            steamcmd_path: String::new(),
+            launch_args: String::new(),
+            workshop_dir: String::new(),
+            server_name: data.server_name.clone(),
+            server_description: data.server_description.clone(),
+            server_password: data.server_password.clone(),
+            admin_password: data.admin_password.clone(),
+            max_players: data.max_players,
+            env_vars: data.env_vars.clone(),
+        };
+        let record = psp_db::servers::create_server(db, new_server)
+            .await
+            .map_err(|error| error.to_string())?;
+
+        emit_creation_progress(
+            emitter,
+            &format!("Pulling Docker image {}...", data.image_name),
+        );
+        docker::create_server_container(ctx.app.server_services.docker.as_ref(), &record)
+            .await
+            .map_err(|error| error.to_string())?;
+        emit_creation_progress(emitter, "Container started successfully");
+        emit_creation_progress(emitter, "");
+
+        let status = docker::container_status(
+            ctx.app.server_services.docker.as_ref(),
+            &record.container_name,
+        )
+        .await;
+        let mut result = server_to_wire_json(&record);
+        result["status"] = serde_json::to_value(&status).expect("serializes");
+        result["player_count"] = Value::from(0);
+        emitter.emit(MessageType::CreateServer, &result);
+    }
+    Ok(())
+}
+
+pub async fn handle_create_server(
+    data: CreateServerData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    if let Err(message) = create_server_impl(data, ctx).await {
+        emit_business_error(ctx.emitter, format!("Failed to create server: {message}"));
+    }
+    Ok(())
+}
+
+async fn update_server_impl(
+    data: UpdateServerData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), String> {
+    let emitter = ctx.emitter;
+    let db = &ctx.app.db;
+    let Some(old_record) = psp_db::servers::get_server(db, data.server_id)
+        .await
+        .map_err(|error| error.to_string())?
+    else {
+        emit_business_error(emitter, "Server not found".to_string());
+        return Ok(());
+    };
+    let Some(mut record) = psp_db::servers::update_server(db, data.server_id, &data.updates)
+        .await
+        .map_err(|error| error.to_string())?
+    else {
+        emit_business_error(emitter, "Failed to update server".to_string());
+        return Ok(());
+    };
+
+    let env_changed = data
+        .updates
+        .get("env_vars")
+        .map(|value| !value.is_null())
+        .unwrap_or(false);
+    let ports_changed = ["game_port", "query_port", "rest_api_port"]
+        .iter()
+        .any(|key| data.updates.contains_key(*key));
+    let identity_changed = [
+        "server_name",
+        "server_description",
+        "server_password",
+        "admin_password",
+        "max_players",
+    ]
+    .iter()
+    .any(|key| data.updates.contains_key(*key));
+    let needs_apply = env_changed || ports_changed || identity_changed;
+
+    if record.server_type == "native" {
+        if needs_apply {
+            native_config::write_palworld_settings(&record).map_err(|error| error.to_string())?;
+            if record.pid.is_some() {
+                let status = native_process::process_status(record.pid);
+                if status.running {
+                    native_process::stop_server_process(
+                        &record,
+                        &ctx.app.server_services.palworld_api,
+                    )
+                    .await;
+                    if let Some(new_pid) = native_process::start_server_process(&record) {
+                        let mut pid_update = serde_json::Map::new();
+                        pid_update.insert("pid".to_string(), Value::from(new_pid));
+                        if let Some(refreshed) =
+                            psp_db::servers::update_server(db, record.id, &pid_update)
+                                .await
+                                .map_err(|error| error.to_string())?
+                        {
+                            record = refreshed;
+                        }
+                    }
+                }
+            }
+        }
+    } else if needs_apply {
+        let docker_api = ctx.app.server_services.docker.as_ref();
+        docker::stop_server_container(docker_api, &old_record.container_name).await;
+        docker::remove_server_container(docker_api, &old_record.container_name, false).await;
+        docker::create_server_container(docker_api, &record)
+            .await
+            .map_err(|error| error.to_string())?;
+    }
+
+    let status = server_status(ctx.app, &record).await;
+    let mut result = server_to_wire_json(&record);
+    result["status"] = serde_json::to_value(&status).expect("serializes");
+    emitter.emit(MessageType::UpdateServer, &result);
+    Ok(())
+}
+
+pub async fn handle_update_server(
+    data: UpdateServerData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    if let Err(message) = update_server_impl(data, ctx).await {
+        emit_business_error(ctx.emitter, format!("Failed to update server: {message}"));
+    }
+    Ok(())
+}
+
+pub async fn handle_delete_server(
+    data: ServerIdData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let emitter = ctx.emitter;
+    let db = &ctx.app.db;
+    let result: Result<(), String> = async {
+        let Some(record) = psp_db::servers::get_server(db, data.server_id)
+            .await
+            .map_err(|error| error.to_string())?
+        else {
+            emit_business_error(emitter, "Server not found".to_string());
+            return Ok(());
+        };
+        if record.server_type == "native" {
+            if record.pid.is_some() {
+                native_process::stop_server_process(&record, &ctx.app.server_services.palworld_api)
+                    .await;
+            }
+            // Python: remove_server(install_path, remove_data=False) — keeps files.
+        } else {
+            let docker_api = ctx.app.server_services.docker.as_ref();
+            docker::stop_server_container(docker_api, &record.container_name).await;
+            // Python's delete_server_handler discards remove_server's bool
+            // return value unconditionally — the DB row and delete_server
+            // response are unaffected by a Docker-side removal failure.
+            docker::remove_server_container(docker_api, &record.container_name, true).await;
+        }
+        psp_db::servers::delete_server(db, record.id)
+            .await
+            .map_err(|error| error.to_string())?;
+        emitter.emit(
+            MessageType::DeleteServer,
+            &serde_json::json!({ "server_id": record.id }),
+        );
+        Ok(())
+    }
+    .await;
+    if let Err(message) = result {
+        emit_business_error(emitter, format!("Failed to delete server: {message}"));
+    }
+    Ok(())
+}
+
+pub async fn handle_start_server(
+    data: ServerIdData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let emitter = ctx.emitter;
+    let db = &ctx.app.db;
+    let result: Result<(), String> = async {
+        let Some(record) = psp_db::servers::get_server(db, data.server_id)
+            .await
+            .map_err(|error| error.to_string())?
+        else {
+            emit_business_error(emitter, "Server not found".to_string());
+            return Ok(());
+        };
+        let (success, status) = if record.server_type == "native" {
+            let new_pid = native_process::start_server_process(&record);
+            if let Some(pid) = new_pid {
+                let mut pid_update = serde_json::Map::new();
+                pid_update.insert("pid".to_string(), Value::from(pid));
+                psp_db::servers::update_server(db, record.id, &pid_update)
+                    .await
+                    .map_err(|error| error.to_string())?;
+            }
+            let status = native_process::process_status(new_pid.map(i64::from));
+            (new_pid.is_some(), Some(status))
+        } else {
+            let docker_api = ctx.app.server_services.docker.as_ref();
+            let success = docker::start_server_container(docker_api, &record.container_name).await;
+            let status = docker::container_status(docker_api, &record.container_name).await;
+            (success, status)
+        };
+        emitter.emit(
+            MessageType::ServerStatusUpdate,
+            &serde_json::json!({ "server_id": record.id, "status": status, "success": success }),
+        );
+        Ok(())
+    }
+    .await;
+    if let Err(message) = result {
+        emit_business_error(emitter, format!("Failed to start server: {message}"));
+    }
+    Ok(())
+}
+
+pub async fn handle_stop_server(
+    data: ServerIdData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let emitter = ctx.emitter;
+    let db = &ctx.app.db;
+    let result: Result<(), String> = async {
+        let Some(record) = psp_db::servers::get_server(db, data.server_id)
+            .await
+            .map_err(|error| error.to_string())?
+        else {
+            emit_business_error(emitter, "Server not found".to_string());
+            return Ok(());
+        };
+        emit_creation_progress(emitter, &format!("Stopping server \"{}\"...", record.name));
+        let (success, status) = if record.server_type == "native" {
+            emit_creation_progress(emitter, "Sending shutdown command to server...");
+            let success =
+                native_process::stop_server_process(&record, &ctx.app.server_services.palworld_api)
+                    .await;
+            if success {
+                let mut pid_update = serde_json::Map::new();
+                pid_update.insert("pid".to_string(), Value::Null);
+                psp_db::servers::update_server(db, record.id, &pid_update)
+                    .await
+                    .map_err(|error| error.to_string())?;
+            }
+            (success, Some(native_process::process_status(None)))
+        } else {
+            emit_creation_progress(emitter, "Stopping Docker container...");
+            let docker_api = ctx.app.server_services.docker.as_ref();
+            let success = docker::stop_server_container(docker_api, &record.container_name).await;
+            let status = docker::container_status(docker_api, &record.container_name).await;
+            (success, status)
+        };
+        emit_creation_progress(emitter, "");
+        emitter.emit(
+            MessageType::ServerStatusUpdate,
+            &serde_json::json!({ "server_id": record.id, "status": status, "success": success }),
+        );
+        Ok(())
+    }
+    .await;
+    if let Err(message) = result {
+        emit_business_error(emitter, format!("Failed to stop server: {message}"));
     }
     Ok(())
 }
@@ -440,5 +988,276 @@ mod tests {
             messages[0]["data"],
             serde_json::json!({"server_id": record.id, "stats": null})
         );
+    }
+
+    #[tokio::test]
+    async fn create_docker_server_emits_progress_then_create_server() {
+        let mut env = TestEnv::new().await;
+        let data: CreateServerData = serde_json::from_value(serde_json::json!({
+            "name": "My Server",
+            "container_name": "alpha"
+        }))
+        .unwrap();
+        // Defaults from messages.py must apply
+        assert_eq!(data.image_name, "omanrod/psp-palworld-server");
+        assert_eq!(data.server_type, "docker");
+        assert_eq!(data.game_port, 8211);
+        assert_eq!(data.query_port, 27015);
+        assert_eq!(data.rest_api_port, 8212);
+        assert_eq!(data.server_name, "PSP Palworld Server");
+        assert_eq!(data.admin_password, "admin");
+        assert_eq!(data.max_players, 16);
+
+        let mut ctx = env.ctx();
+        handle_create_server(data, &mut ctx).await.unwrap();
+        let messages = env.drain();
+        let types: Vec<&str> = messages
+            .iter()
+            .map(|message| message["type"].as_str().unwrap())
+            .collect();
+        assert_eq!(
+            types,
+            vec![
+                "server_creation_progress", // Validating server configuration...
+                "server_creation_progress", // Pulling Docker image ...
+                "server_creation_progress", // Container started successfully
+                "server_creation_progress", // "" (clear)
+                "create_server",
+            ]
+        );
+        assert_eq!(
+            messages[0]["data"],
+            serde_json::json!({"message": "Validating server configuration..."})
+        );
+        assert_eq!(
+            messages[1]["data"],
+            serde_json::json!({"message": "Pulling Docker image omanrod/psp-palworld-server..."})
+        );
+        assert_eq!(messages[3]["data"], serde_json::json!({"message": ""}));
+        let created = &messages[4]["data"];
+        assert_eq!(created["container_name"], "alpha");
+        assert_eq!(created["data_volume_name"], "psp-alpha-data");
+        assert_eq!(created["status"]["running"], true); // mock create starts it
+        assert_eq!(created["player_count"], 0);
+        assert!(created.get("total_players").is_none()); // create has no total_players
+                                                         // DB row exists
+        let listed = psp_db::servers::list_servers(&env.app.db).await.unwrap();
+        assert_eq!(listed.len(), 1);
+        // Host mount dirs are under <cwd>/servers/alpha
+        assert!(listed[0].saves_path.ends_with(&format!(
+            "servers{0}alpha{0}saves",
+            std::path::MAIN_SEPARATOR
+        )));
+    }
+
+    #[tokio::test]
+    async fn create_server_rejects_allocated_ports() {
+        let mut env = TestEnv::new().await;
+        psp_db::servers::create_server(&env.app.db, docker_new_server("first"))
+            .await
+            .unwrap();
+        let data: CreateServerData = serde_json::from_value(serde_json::json!({
+            "name": "Second",
+            "container_name": "second"
+        }))
+        .unwrap();
+        let mut ctx = env.ctx();
+        handle_create_server(data, &mut ctx).await.unwrap();
+        let messages = env.drain();
+        assert_eq!(messages.len(), 1);
+        assert_eq!(messages[0]["type"], "error");
+        assert_eq!(
+            messages[0]["data"],
+            serde_json::json!({"message": "Port 8211 is already allocated to another server"})
+        );
+    }
+
+    #[tokio::test]
+    async fn create_native_server_without_install_path_errors() {
+        let mut env = TestEnv::new().await;
+        let data: CreateServerData = serde_json::from_value(serde_json::json!({
+            "name": "Native",
+            "container_name": "native1",
+            "server_type": "native"
+        }))
+        .unwrap();
+        let mut ctx = env.ctx();
+        handle_create_server(data, &mut ctx).await.unwrap();
+        let messages = env.drain();
+        assert_eq!(messages[0]["type"], "error");
+        assert_eq!(
+            messages[0]["data"],
+            serde_json::json!({"message": "Install path is required for native servers"})
+        );
+    }
+
+    #[tokio::test]
+    async fn update_server_recreates_docker_container_when_identity_changes() {
+        let mut env = TestEnv::new().await;
+        let record = psp_db::servers::create_server(&env.app.db, docker_new_server("alpha"))
+            .await
+            .unwrap();
+        let mut updates = serde_json::Map::new();
+        updates.insert("server_name".to_string(), serde_json::json!("Renamed"));
+        let mut ctx = env.ctx();
+        handle_update_server(
+            UpdateServerData {
+                server_id: record.id,
+                updates,
+            },
+            &mut ctx,
+        )
+        .await
+        .unwrap();
+        let messages = env.drain();
+        assert_eq!(messages.len(), 1);
+        assert_eq!(messages[0]["type"], "update_server");
+        assert_eq!(messages[0]["data"]["server_name"], "Renamed");
+        assert!(messages[0]["data"].get("player_count").is_none()); // update has no counts
+        let calls = env.docker.calls.lock().unwrap().clone();
+        // stop old, remove (no volume), recreate
+        assert!(calls.contains(&"stop:alpha".to_string()));
+        assert!(calls.contains(&"remove_container:alpha".to_string()));
+        assert!(!calls.contains(&"remove_volume:psp-alpha-data".to_string()));
+        assert!(calls.contains(&"create_and_start:alpha".to_string()));
+    }
+
+    #[tokio::test]
+    async fn update_server_without_relevant_keys_skips_recreation() {
+        let mut env = TestEnv::new().await;
+        let record = psp_db::servers::create_server(&env.app.db, docker_new_server("alpha"))
+            .await
+            .unwrap();
+        let mut updates = serde_json::Map::new();
+        updates.insert("name".to_string(), serde_json::json!("Display Only"));
+        let mut ctx = env.ctx();
+        handle_update_server(
+            UpdateServerData {
+                server_id: record.id,
+                updates,
+            },
+            &mut ctx,
+        )
+        .await
+        .unwrap();
+        let calls = env.docker.calls.lock().unwrap().clone();
+        assert!(!calls
+            .iter()
+            .any(|call| call.starts_with("create_and_start")));
+    }
+
+    #[tokio::test]
+    async fn update_unknown_server_emits_not_found() {
+        let mut env = TestEnv::new().await;
+        let mut ctx = env.ctx();
+        handle_update_server(
+            UpdateServerData {
+                server_id: 42,
+                updates: serde_json::Map::new(),
+            },
+            &mut ctx,
+        )
+        .await
+        .unwrap();
+        let messages = env.drain();
+        assert_eq!(messages[0]["type"], "error");
+        assert_eq!(messages[0]["data"]["message"], "Server not found");
+    }
+
+    #[tokio::test]
+    async fn delete_docker_server_stops_removes_with_volumes_and_deletes_row() {
+        let mut env = TestEnv::new().await;
+        let record = psp_db::servers::create_server(&env.app.db, docker_new_server("alpha"))
+            .await
+            .unwrap();
+        let mut ctx = env.ctx();
+        handle_delete_server(
+            ServerIdData {
+                server_id: record.id,
+            },
+            &mut ctx,
+        )
+        .await
+        .unwrap();
+        let messages = env.drain();
+        assert_eq!(messages[0]["type"], "delete_server");
+        assert_eq!(
+            messages[0]["data"],
+            serde_json::json!({"server_id": record.id})
+        );
+        let calls = env.docker.calls.lock().unwrap().clone();
+        assert!(calls.contains(&"remove_volume:psp-alpha-data".to_string()));
+        assert!(psp_db::servers::get_server(&env.app.db, record.id)
+            .await
+            .unwrap()
+            .is_none());
+    }
+
+    #[tokio::test]
+    async fn start_docker_server_emits_server_status_update() {
+        let mut env = TestEnv::new().await;
+        let record = psp_db::servers::create_server(&env.app.db, docker_new_server("alpha"))
+            .await
+            .unwrap();
+        let mut ctx = env.ctx();
+        handle_start_server(
+            ServerIdData {
+                server_id: record.id,
+            },
+            &mut ctx,
+        )
+        .await
+        .unwrap();
+        let messages = env.drain();
+        assert_eq!(messages.len(), 1);
+        assert_eq!(messages[0]["type"], "server_status_update");
+        assert_eq!(messages[0]["data"]["server_id"], record.id);
+        assert_eq!(messages[0]["data"]["success"], true);
+        assert_eq!(messages[0]["data"]["status"]["running"], true);
+    }
+
+    #[tokio::test]
+    async fn stop_docker_server_emits_progress_then_status_update() {
+        let mut env = TestEnv::new().await;
+        let record = psp_db::servers::create_server(&env.app.db, docker_new_server("alpha"))
+            .await
+            .unwrap();
+        env.docker.statuses.lock().unwrap().insert(
+            "alpha".to_string(),
+            serde_json::json!({"State": {"Status": "running", "Running": true, "StartedAt": "x"}}),
+        );
+        let mut ctx = env.ctx();
+        handle_stop_server(
+            ServerIdData {
+                server_id: record.id,
+            },
+            &mut ctx,
+        )
+        .await
+        .unwrap();
+        let messages = env.drain();
+        let types: Vec<&str> = messages
+            .iter()
+            .map(|message| message["type"].as_str().unwrap())
+            .collect();
+        assert_eq!(
+            types,
+            vec![
+                "server_creation_progress", // Stopping server "..."...
+                "server_creation_progress", // Stopping Docker container...
+                "server_creation_progress", // "" clear
+                "server_status_update",
+            ]
+        );
+        assert_eq!(
+            messages[0]["data"]["message"],
+            format!("Stopping server \"{}\"...", record.name)
+        );
+        assert_eq!(
+            messages[1]["data"]["message"],
+            "Stopping Docker container..."
+        );
+        assert_eq!(messages[3]["data"]["success"], true);
+        assert_eq!(messages[3]["data"]["status"]["running"], false);
     }
 }

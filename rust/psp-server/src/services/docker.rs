@@ -254,6 +254,15 @@ pub async fn stop_server_container(api: &dyn DockerApi, container_name: &str) ->
     api.stop_container(container_name, 30).await.is_ok()
 }
 
+/// Python DockerService.remove_server: the container removal and the
+/// (optional) volume removal are both inside a single try/except that only
+/// swallows a volume `NotFound` — any other volume-removal error (an
+/// `APIError`) falls through to the outer `except (NotFound, APIError):
+/// return False` just like a container-removal failure does. The
+/// `DockerApi::remove_volume` implementations already fold "volume not
+/// found" into `Ok(())` (see `BollardDocker::remove_volume` /
+/// `MockDocker::remove_volume`), so any `Err` reaching here is a genuine
+/// removal failure and must flip the return value to `false`.
 pub async fn remove_server_container(
     api: &dyn DockerApi,
     container_name: &str,
@@ -262,11 +271,12 @@ pub async fn remove_server_container(
     match api.remove_container_forced(container_name).await {
         Ok(()) => {
             if remove_volumes {
-                let _ = api
-                    .remove_volume(&format!("psp-{container_name}-data"))
-                    .await;
+                api.remove_volume(&format!("psp-{container_name}-data"))
+                    .await
+                    .is_ok()
+            } else {
+                true
             }
-            true
         }
         Err(_) => false,
     }
@@ -506,6 +516,10 @@ pub mod mock {
         pub fail_start: Mutex<HashSet<String>>,
         pub fail_stop: Mutex<HashSet<String>>,
         pub fail_inspect: Mutex<HashSet<String>>,
+        /// Volume names (bare, e.g. "psp-alpha-data") whose removal should
+        /// fail with a non-NotFound error — exercises the
+        /// remove_server_container parity path (see docker.rs tests).
+        pub fail_remove_volume: Mutex<HashSet<String>>,
     }
 
     fn running_state() -> Value {
@@ -587,6 +601,16 @@ pub mod mock {
                 .lock()
                 .unwrap()
                 .push(format!("remove_volume:{volume_name}"));
+            if self
+                .fail_remove_volume
+                .lock()
+                .unwrap()
+                .contains(volume_name)
+            {
+                return Err(ServiceError::Docker(
+                    "mock volume removal failure".to_string(),
+                ));
+            }
             Ok(())
         }
 
@@ -877,6 +901,39 @@ mod tests {
         let calls = api.calls.lock().unwrap().clone();
         assert!(calls.contains(&"remove_container:alpha".to_string()));
         assert!(calls.contains(&"remove_volume:psp-alpha-data".to_string()));
+    }
+
+    #[tokio::test]
+    async fn remove_server_container_returns_false_when_volume_removal_fails() {
+        // Python parity: DockerService.remove_server only swallows a volume
+        // NotFound; any other volume-removal error (APIError) falls through
+        // to the outer except and the call returns False, even though the
+        // container itself was already removed.
+        let api = mock::MockDocker::default();
+        api.statuses.lock().unwrap().insert(
+            "alpha".to_string(),
+            serde_json::json!({"State": {"Status": "exited", "Running": false}}),
+        );
+        api.fail_remove_volume
+            .lock()
+            .unwrap()
+            .insert("psp-alpha-data".to_string());
+        assert!(!remove_server_container(&api, "alpha", true).await);
+        let calls = api.calls.lock().unwrap().clone();
+        assert!(calls.contains(&"remove_container:alpha".to_string()));
+        assert!(calls.contains(&"remove_volume:psp-alpha-data".to_string()));
+    }
+
+    #[tokio::test]
+    async fn remove_server_container_ignores_volume_failure_when_not_requested() {
+        let api = mock::MockDocker::default();
+        api.fail_remove_volume
+            .lock()
+            .unwrap()
+            .insert("psp-alpha-data".to_string());
+        assert!(remove_server_container(&api, "alpha", false).await);
+        let calls = api.calls.lock().unwrap().clone();
+        assert!(!calls.iter().any(|call| call.starts_with("remove_volume")));
     }
 
     #[tokio::test]
