@@ -11,7 +11,7 @@ edition = "2021"
 [workspace.dependencies]
 psp-core = { path = "psp-core" }
 psp-db = { path = "psp-db" }
-uesave = { path = "../uesave-rs/uesave", features = ["oodle"] }
+uesave = { git = "https://github.com/oMaN-Rod/uesave-rs.git", branch = "palworld-v1", features = ["oodle"] }
 axum = { version = "0.8", features = ["ws", "multipart"] }
 tokio = { version = "1", features = ["full"] }
 tower-http = { version = "0.6", features = ["fs"] }
