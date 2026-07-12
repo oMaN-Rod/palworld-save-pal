@@ -97,7 +97,7 @@ impl PalworldApiClient {
 mod tests {
     use super::*;
     use axum::extract::State;
-    use axum::http::HeaderMap;
+    use axum::http::{HeaderMap, StatusCode};
     use axum::routing::{get, post};
     use axum::{Json, Router};
     use std::sync::{Arc, Mutex};
@@ -131,9 +131,16 @@ mod tests {
                 }
             }
         };
+        let server_error = || async {
+            (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                Json(serde_json::json!({"error": "boom"})),
+            )
+        };
         let router = Router::new()
             .route("/v1/api/players", get(players))
             .route("/v1/api/announce", post(announce))
+            .route("/v1/api/error", get(server_error))
             .with_state(());
         let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
         let port = listener.local_addr().unwrap().port();
@@ -174,6 +181,19 @@ mod tests {
             captured.body.lock().unwrap().clone().unwrap(),
             serde_json::json!({})
         );
+    }
+
+    #[tokio::test]
+    async fn get_call_passes_non_2xx_status_through_as_data_instead_of_erroring() {
+        let captured = Captured::default();
+        let port = spawn_stub(captured).await;
+        let client = PalworldApiClient::new();
+        let result = client
+            .rest_api_call("127.0.0.1", port, "secret", "error", "GET", None)
+            .await
+            .unwrap();
+        assert_eq!(result["status_code"], 500);
+        assert_eq!(result["data"], serde_json::json!({"error": "boom"}));
     }
 
     #[tokio::test]
