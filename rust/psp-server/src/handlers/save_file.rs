@@ -948,22 +948,27 @@ pub(crate) fn write_transfer_target_save(
 /// `f"backups/{save_type}"` = `backups/steam`.
 const STEAM_BACKUP_BASE: &str = "backups/steam";
 
-/// Port of `save_modded_save_handler`. `data` is a bare world-name STRING
-/// (used only by the GamePass branch; the Steam write path ignores it, as
-/// Python does). No save → the "No save file loaded" `error` frame, raised
-/// BEFORE the save-type branch exactly as Python does. Dispatches on the loaded
-/// save's `kind`: a `SaveKind::GamePass` session writes new wgs containers
-/// (`save_modded_gamepass_save`); every other kind (Steam, and the InMemory
-/// zip-upload the Phase-2 write path rejects) stays on the on-disk Steam path.
+/// Port of `save_modded_save_handler`. `data` is a bare world-name string used
+/// only by the GamePass branch; the Steam write path ignores it, as Python
+/// does. The frontend sends `null` for Steam saves (`writeSave` in
+/// saveOperations.svelte.ts only supplies a world name for GamePass), so the
+/// payload is `Option<String>` — Python accepts the `None` because it never
+/// enforces the `data: str` hint at runtime, and a strict `String` here would
+/// reject the Steam write with a serde parse error. No save → the "No save file
+/// loaded" `error` frame, raised BEFORE the save-type branch exactly as Python
+/// does. Dispatches on the loaded save's `kind`: a `SaveKind::GamePass` session
+/// writes new wgs containers (`save_modded_gamepass_save`); every other kind
+/// (Steam, and the InMemory zip-upload the Phase-2 write path rejects) stays on
+/// the on-disk Steam path.
 pub async fn handle_save_modded_save(
-    world_name: String,
+    world_name: Option<String>,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     let Some(session) = ctx.session.save.as_ref() else {
         return Err(HandlerError::Other("No save file loaded".to_string()));
     };
     if matches!(session.kind, SaveKind::GamePass { .. }) {
-        return save_modded_gamepass_save(&world_name, ctx).await;
+        return save_modded_gamepass_save(&world_name.unwrap_or_default(), ctx).await;
     }
     save_modded_steam_save(ctx).await
 }

@@ -381,6 +381,28 @@ async fn save_modded_save_without_save_errors() {
 }
 
 #[tokio::test]
+async fn save_modded_save_accepts_null_data_from_the_steam_write_path() {
+    // The Steam branch of the frontend's `writeSave` sends `save_modded_save`
+    // with `data: null` (the world name is GamePass-only). The payload must
+    // deserialize (Option<String>) and reach the handler — NOT fail with a
+    // "invalid type: null, expected a string" parse error. With no save loaded
+    // it lands on the same "No save file loaded" business error the string case
+    // does, proving the null passed payload parsing.
+    let (server, _scratch) = start_test_server().await;
+    let mut socket = connect(server.addr).await;
+
+    send(
+        &mut socket,
+        json!({"type": "save_modded_save", "data": null}),
+    )
+    .await;
+    let frame = recv(&mut socket).await;
+    assert_eq!(frame["type"], "error");
+    assert_eq!(frame["data"]["message"], "No save file loaded");
+    server.shutdown().await;
+}
+
+#[tokio::test]
 async fn rename_world_renames_and_reports_old_and_new_name() {
     let (server, _scratch) = start_test_server().await;
     let mut socket = connect(server.addr).await;
