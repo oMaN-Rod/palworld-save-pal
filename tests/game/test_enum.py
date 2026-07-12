@@ -138,4 +138,4 @@ class TestWazaID:
     def test_int_value(self):
         assert WazaID.AirCanon == 22
         assert WazaID.NONE == 0
-        assert WazaID.MAX == 310
+        assert WazaID.MAX == 391
