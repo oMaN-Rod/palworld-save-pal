@@ -3,8 +3,8 @@ pub mod docker;
 pub mod docker_mods;
 pub mod native_config;
 pub mod native_mods;
+pub mod native_process;
 pub mod palworld_api;
-// pub mod native_process;  // Task 9
 
 #[derive(Debug, thiserror::Error)]
 pub enum ServiceError {
