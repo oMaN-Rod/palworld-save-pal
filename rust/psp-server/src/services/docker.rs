@@ -4,7 +4,7 @@
 use psp_db::servers::ServerRecord;
 use serde_json::Value;
 
-use super::{python_str, round_to, ServerProcessStatus};
+use super::{python_str, round_to, ServerProcessStatus, ServiceError};
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct PortBinding {
@@ -209,6 +209,406 @@ pub fn stats_from_raw(raw_stats: &Value) -> Option<Value> {
     }))
 }
 
+#[async_trait::async_trait]
+pub trait DockerApi: Send + Sync {
+    async fn ensure_image(&self, image_name: &str) -> Result<(), ServiceError>;
+    async fn create_and_start_container(&self, spec: ContainerSpec)
+        -> Result<String, ServiceError>;
+    async fn start_container(&self, container_name: &str) -> Result<(), ServiceError>;
+    async fn stop_container(
+        &self,
+        container_name: &str,
+        timeout_seconds: i64,
+    ) -> Result<(), ServiceError>;
+    async fn remove_container_forced(&self, container_name: &str) -> Result<(), ServiceError>;
+    async fn remove_volume(&self, volume_name: &str) -> Result<(), ServiceError>;
+    async fn inspect_container(&self, container_name: &str) -> Result<Option<Value>, ServiceError>;
+    async fn raw_container_stats(
+        &self,
+        container_name: &str,
+    ) -> Result<Option<Value>, ServiceError>;
+}
+
+/// DockerService.create_server: pull image if missing, create host dirs, create+start.
+pub async fn create_server_container(
+    api: &dyn DockerApi,
+    record: &ServerRecord,
+) -> Result<String, ServiceError> {
+    api.ensure_image(&record.image_name).await?;
+    for host_path in [
+        &record.saves_path,
+        &record.mods_path,
+        &record.logicmods_path,
+        &record.nativemods_path,
+    ] {
+        std::fs::create_dir_all(host_path)?;
+    }
+    api.create_and_start_container(container_spec(record)).await
+}
+
+pub async fn start_server_container(api: &dyn DockerApi, container_name: &str) -> bool {
+    api.start_container(container_name).await.is_ok()
+}
+
+pub async fn stop_server_container(api: &dyn DockerApi, container_name: &str) -> bool {
+    api.stop_container(container_name, 30).await.is_ok()
+}
+
+pub async fn remove_server_container(
+    api: &dyn DockerApi,
+    container_name: &str,
+    remove_volumes: bool,
+) -> bool {
+    match api.remove_container_forced(container_name).await {
+        Ok(()) => {
+            if remove_volumes {
+                let _ = api
+                    .remove_volume(&format!("psp-{container_name}-data"))
+                    .await;
+            }
+            true
+        }
+        Err(_) => false,
+    }
+}
+
+/// Python get_container_status: NotFound -> not_found dict, other errors -> None.
+pub async fn container_status(
+    api: &dyn DockerApi,
+    container_name: &str,
+) -> Option<ServerProcessStatus> {
+    match api.inspect_container(container_name).await {
+        Ok(Some(inspect)) => Some(status_from_inspect(&inspect)),
+        Ok(None) => Some(ServerProcessStatus::not_found()),
+        Err(_) => None,
+    }
+}
+
+/// Python get_container_stats: None unless the container is running; all errors -> None.
+pub async fn container_stats(api: &dyn DockerApi, container_name: &str) -> Option<Value> {
+    let inspect = api.inspect_container(container_name).await.ok()??;
+    if status_from_inspect(&inspect).status != "running" {
+        return None;
+    }
+    let raw = api.raw_container_stats(container_name).await.ok()??;
+    stats_from_raw(&raw)
+}
+
+pub struct BollardDocker {
+    docker: bollard::Docker,
+}
+
+impl BollardDocker {
+    pub fn connect() -> Result<Self, ServiceError> {
+        bollard::Docker::connect_with_local_defaults()
+            .map(|docker| Self { docker })
+            .map_err(|error| ServiceError::Docker(error.to_string()))
+    }
+}
+
+fn is_not_found(error: &bollard::errors::Error) -> bool {
+    matches!(
+        error,
+        bollard::errors::Error::DockerResponseServerError {
+            status_code: 404,
+            ..
+        }
+    )
+}
+
+fn docker_err(error: bollard::errors::Error) -> ServiceError {
+    ServiceError::Docker(error.to_string())
+}
+
+// NOTE: bollard 0.18.1 (the version actually resolved by Cargo.lock) still uses the
+// older per-call *Options structs living in bollard::container / bollard::image /
+// bollard::volume, and the create-container body is bollard::container::Config (not
+// bollard::query_parameters / bollard::models::ContainerCreateBody as newer bollard
+// releases use). Verified against the vendored source under
+// ~/.cargo/registry/src/.../bollard-0.18.1.
+#[async_trait::async_trait]
+impl DockerApi for BollardDocker {
+    async fn ensure_image(&self, image_name: &str) -> Result<(), ServiceError> {
+        use futures_util::StreamExt;
+        if self.docker.inspect_image(image_name).await.is_ok() {
+            return Ok(());
+        }
+        let options = bollard::image::CreateImageOptions {
+            from_image: image_name,
+            ..Default::default()
+        };
+        let mut pull_progress = self.docker.create_image(Some(options), None, None);
+        while let Some(step) = pull_progress.next().await {
+            step.map_err(docker_err)?;
+        }
+        Ok(())
+    }
+
+    async fn create_and_start_container(
+        &self,
+        spec: ContainerSpec,
+    ) -> Result<String, ServiceError> {
+        use std::collections::HashMap;
+        let mut port_bindings = HashMap::new();
+        let mut exposed_ports = HashMap::new();
+        for binding in &spec.port_bindings {
+            exposed_ports.insert(binding.container_port.clone(), HashMap::new());
+            port_bindings.insert(
+                binding.container_port.clone(),
+                Some(vec![bollard::models::PortBinding {
+                    host_ip: None,
+                    host_port: Some(binding.host_port.to_string()),
+                }]),
+            );
+        }
+        let config = bollard::container::Config {
+            image: Some(spec.image.clone()),
+            env: Some(spec.env.clone()),
+            stop_signal: Some(spec.stop_signal.clone()),
+            exposed_ports: Some(exposed_ports),
+            host_config: Some(bollard::models::HostConfig {
+                binds: Some(spec.binds.clone()),
+                port_bindings: Some(port_bindings),
+                restart_policy: Some(bollard::models::RestartPolicy {
+                    name: Some(bollard::models::RestartPolicyNameEnum::UNLESS_STOPPED),
+                    maximum_retry_count: None,
+                }),
+                ..Default::default()
+            }),
+            ..Default::default()
+        };
+        let options = bollard::container::CreateContainerOptions {
+            name: spec.name.clone(),
+            platform: None,
+        };
+        let created = self
+            .docker
+            .create_container(Some(options), config)
+            .await
+            .map_err(docker_err)?;
+        self.docker
+            .start_container(
+                &spec.name,
+                None::<bollard::container::StartContainerOptions<String>>,
+            )
+            .await
+            .map_err(docker_err)?;
+        Ok(created.id)
+    }
+
+    async fn start_container(&self, container_name: &str) -> Result<(), ServiceError> {
+        self.docker
+            .start_container(
+                container_name,
+                None::<bollard::container::StartContainerOptions<String>>,
+            )
+            .await
+            .map_err(docker_err)
+    }
+
+    async fn stop_container(
+        &self,
+        container_name: &str,
+        timeout_seconds: i64,
+    ) -> Result<(), ServiceError> {
+        let options = bollard::container::StopContainerOptions { t: timeout_seconds };
+        self.docker
+            .stop_container(container_name, Some(options))
+            .await
+            .map_err(docker_err)
+    }
+
+    async fn remove_container_forced(&self, container_name: &str) -> Result<(), ServiceError> {
+        let options = bollard::container::RemoveContainerOptions {
+            force: true,
+            ..Default::default()
+        };
+        self.docker
+            .remove_container(container_name, Some(options))
+            .await
+            .map_err(docker_err)
+    }
+
+    async fn remove_volume(&self, volume_name: &str) -> Result<(), ServiceError> {
+        match self.docker.remove_volume(volume_name, None).await {
+            Ok(()) => Ok(()),
+            Err(error) if is_not_found(&error) => Ok(()),
+            Err(error) => Err(docker_err(error)),
+        }
+    }
+
+    async fn inspect_container(&self, container_name: &str) -> Result<Option<Value>, ServiceError> {
+        match self
+            .docker
+            .inspect_container(
+                container_name,
+                None::<bollard::container::InspectContainerOptions>,
+            )
+            .await
+        {
+            Ok(inspect) => {
+                Ok(Some(serde_json::to_value(inspect).map_err(|error| {
+                    ServiceError::Docker(error.to_string())
+                })?))
+            }
+            Err(error) if is_not_found(&error) => Ok(None),
+            Err(error) => Err(docker_err(error)),
+        }
+    }
+
+    async fn raw_container_stats(
+        &self,
+        container_name: &str,
+    ) -> Result<Option<Value>, ServiceError> {
+        use futures_util::StreamExt;
+        // Python's docker-py container.stats(stream=False) leaves the Engine API's
+        // one-shot flag at its default (false), which makes dockerd wait for a real
+        // second sample so cpu_stats/precpu_stats both carry usable deltas. Setting
+        // one_shot=true here would return a single degenerate sample and break parity.
+        let options = bollard::container::StatsOptions {
+            stream: false,
+            one_shot: false,
+        };
+        let mut stats_stream = self.docker.stats(container_name, Some(options));
+        match stats_stream.next().await {
+            Some(Ok(stats)) => {
+                Ok(Some(serde_json::to_value(stats).map_err(|error| {
+                    ServiceError::Docker(error.to_string())
+                })?))
+            }
+            Some(Err(error)) if is_not_found(&error) => Ok(None),
+            Some(Err(error)) => Err(docker_err(error)),
+            None => Ok(None),
+        }
+    }
+}
+
+/// Scripted in-memory DockerApi for handler and orchestration tests.
+/// Lives in src (not cfg(test)) so handler tests in other modules can inject it
+/// into AppState.
+pub mod mock {
+    use std::collections::{HashMap, HashSet};
+    use std::sync::Mutex;
+
+    use serde_json::Value;
+
+    use super::{ContainerSpec, DockerApi};
+    use crate::services::ServiceError;
+
+    #[derive(Default)]
+    pub struct MockDocker {
+        /// container_name -> inspect JSON ({"State": {...}})
+        pub statuses: Mutex<HashMap<String, Value>>,
+        /// container_name -> raw stats JSON
+        pub stats: Mutex<HashMap<String, Value>>,
+        /// ordered call log: "ensure_image:x", "create_and_start:x", "start:x", ...
+        pub calls: Mutex<Vec<String>>,
+        pub fail_start: Mutex<HashSet<String>>,
+        pub fail_stop: Mutex<HashSet<String>>,
+        pub fail_inspect: Mutex<HashSet<String>>,
+    }
+
+    fn running_state() -> Value {
+        serde_json::json!({
+            "State": {"Status": "running", "Running": true, "StartedAt": "2026-07-09T00:00:00Z"}
+        })
+    }
+
+    #[async_trait::async_trait]
+    impl DockerApi for MockDocker {
+        async fn ensure_image(&self, image_name: &str) -> Result<(), ServiceError> {
+            self.calls
+                .lock()
+                .unwrap()
+                .push(format!("ensure_image:{image_name}"));
+            Ok(())
+        }
+
+        async fn create_and_start_container(
+            &self,
+            spec: ContainerSpec,
+        ) -> Result<String, ServiceError> {
+            self.calls
+                .lock()
+                .unwrap()
+                .push(format!("create_and_start:{}", spec.name));
+            self.statuses
+                .lock()
+                .unwrap()
+                .insert(spec.name.clone(), running_state());
+            Ok(format!("mock-{}", spec.name))
+        }
+
+        async fn start_container(&self, container_name: &str) -> Result<(), ServiceError> {
+            if self.fail_start.lock().unwrap().contains(container_name) {
+                return Err(ServiceError::Docker("mock start failure".to_string()));
+            }
+            self.calls
+                .lock()
+                .unwrap()
+                .push(format!("start:{container_name}"));
+            self.statuses
+                .lock()
+                .unwrap()
+                .insert(container_name.to_string(), running_state());
+            Ok(())
+        }
+
+        async fn stop_container(
+            &self,
+            container_name: &str,
+            _timeout_seconds: i64,
+        ) -> Result<(), ServiceError> {
+            if self.fail_stop.lock().unwrap().contains(container_name) {
+                return Err(ServiceError::Docker("mock stop failure".to_string()));
+            }
+            self.calls
+                .lock()
+                .unwrap()
+                .push(format!("stop:{container_name}"));
+            self.statuses.lock().unwrap().insert(
+                container_name.to_string(),
+                serde_json::json!({"State": {"Status": "exited", "Running": false, "StartedAt": null}}),
+            );
+            Ok(())
+        }
+
+        async fn remove_container_forced(&self, container_name: &str) -> Result<(), ServiceError> {
+            self.calls
+                .lock()
+                .unwrap()
+                .push(format!("remove_container:{container_name}"));
+            self.statuses.lock().unwrap().remove(container_name);
+            Ok(())
+        }
+
+        async fn remove_volume(&self, volume_name: &str) -> Result<(), ServiceError> {
+            self.calls
+                .lock()
+                .unwrap()
+                .push(format!("remove_volume:{volume_name}"));
+            Ok(())
+        }
+
+        async fn inspect_container(
+            &self,
+            container_name: &str,
+        ) -> Result<Option<Value>, ServiceError> {
+            if self.fail_inspect.lock().unwrap().contains(container_name) {
+                return Err(ServiceError::Docker("mock inspect failure".to_string()));
+            }
+            Ok(self.statuses.lock().unwrap().get(container_name).cloned())
+        }
+
+        async fn raw_container_stats(
+            &self,
+            container_name: &str,
+        ) -> Result<Option<Value>, ServiceError> {
+            Ok(self.stats.lock().unwrap().get(container_name).cloned())
+        }
+    }
+}
+
 #[cfg(test)]
 pub(crate) mod test_support {
     use psp_db::servers::ServerRecord;
@@ -402,5 +802,100 @@ mod tests {
             "precpu_stats": {"cpu_usage": {"total_usage": 0u64}}
         });
         assert!(stats_from_raw(&raw).is_none());
+    }
+
+    #[tokio::test]
+    async fn create_server_container_pulls_image_makes_dirs_and_starts() {
+        let scratch = tempfile::tempdir().unwrap();
+        let mut record = test_support::docker_record();
+        record.saves_path = scratch.path().join("saves").to_string_lossy().to_string();
+        record.mods_path = scratch.path().join("mods").to_string_lossy().to_string();
+        record.logicmods_path = scratch
+            .path()
+            .join("logicmods")
+            .to_string_lossy()
+            .to_string();
+        record.nativemods_path = scratch
+            .path()
+            .join("nativemods")
+            .to_string_lossy()
+            .to_string();
+        let api = mock::MockDocker::default();
+        let container_id = create_server_container(&api, &record).await.unwrap();
+        assert_eq!(container_id, "mock-alpha");
+        assert!(std::path::Path::new(&record.saves_path).is_dir());
+        assert!(std::path::Path::new(&record.nativemods_path).is_dir());
+        let calls = api.calls.lock().unwrap().clone();
+        assert_eq!(
+            calls,
+            vec![
+                "ensure_image:omanrod/psp-palworld-server".to_string(),
+                "create_and_start:alpha".to_string()
+            ]
+        );
+    }
+
+    #[tokio::test]
+    async fn container_status_maps_missing_container_to_not_found_and_error_to_none() {
+        let api = mock::MockDocker::default();
+        assert_eq!(
+            container_status(&api, "ghost").await,
+            Some(ServerProcessStatus::not_found())
+        );
+        api.fail_inspect
+            .lock()
+            .unwrap()
+            .insert("broken".to_string());
+        assert_eq!(container_status(&api, "broken").await, None);
+    }
+
+    #[tokio::test]
+    async fn container_stats_requires_running_container() {
+        let api = mock::MockDocker::default();
+        // Not found -> None
+        assert!(container_stats(&api, "ghost").await.is_none());
+        // Exited container -> None even when stats exist
+        api.statuses.lock().unwrap().insert(
+            "sleepy".to_string(),
+            serde_json::json!({"State": {"Status": "exited", "Running": false}}),
+        );
+        api.stats
+            .lock()
+            .unwrap()
+            .insert("sleepy".to_string(), serde_json::json!({}));
+        assert!(container_stats(&api, "sleepy").await.is_none());
+    }
+
+    #[tokio::test]
+    async fn remove_server_container_optionally_removes_volume() {
+        let api = mock::MockDocker::default();
+        api.statuses.lock().unwrap().insert(
+            "alpha".to_string(),
+            serde_json::json!({"State": {"Status": "exited", "Running": false}}),
+        );
+        assert!(remove_server_container(&api, "alpha", true).await);
+        let calls = api.calls.lock().unwrap().clone();
+        assert!(calls.contains(&"remove_container:alpha".to_string()));
+        assert!(calls.contains(&"remove_volume:psp-alpha-data".to_string()));
+    }
+
+    #[tokio::test]
+    async fn start_and_stop_return_false_on_api_errors() {
+        let api = mock::MockDocker::default();
+        api.fail_start.lock().unwrap().insert("alpha".to_string());
+        assert!(!start_server_container(&api, "alpha").await);
+        api.fail_stop.lock().unwrap().insert("alpha".to_string());
+        assert!(!stop_server_container(&api, "alpha").await);
+    }
+
+    #[tokio::test]
+    async fn bollard_status_for_missing_container_when_docker_available() {
+        if std::env::var("PSP_DOCKER_TESTS").as_deref() != Ok("1") {
+            eprintln!("skipped: set PSP_DOCKER_TESTS=1 to run Docker integration tests");
+            return;
+        }
+        let api = BollardDocker::connect().expect("docker daemon reachable");
+        let status = container_status(&api, "psp-phase6-test-does-not-exist").await;
+        assert_eq!(status, Some(ServerProcessStatus::not_found()));
     }
 }
