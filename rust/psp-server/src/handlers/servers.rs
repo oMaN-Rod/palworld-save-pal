@@ -3,13 +3,17 @@
 //! Error convention (Python parity): business failures emit message type
 //! `error` with data {"message": "<text>"} — no trace key — and the handler
 //! returns Ok(()). Only payload-parse failures use the HandlerError path.
+use std::path::Path;
+
 use serde_json::Value;
 
+use psp_core::session::{SaveKind, SaveSession};
 use psp_db::servers::{NewServer, ServerRecord};
 
 use crate::dispatcher::HandlerCtx;
 use crate::emitter::Emitter;
 use crate::handler_error::HandlerError;
+use crate::handlers::save_file;
 use crate::messages::MessageType;
 use crate::services::{
     docker, docker_mods, native_config, native_mods, native_process, ServerProcessStatus,
@@ -965,6 +969,160 @@ pub async fn handle_install_server_mod(
     Ok(())
 }
 
+// ---------------------------------------------------------------------------
+// load_server_save — port of server_handler.py::load_server_save_handler.
+// ---------------------------------------------------------------------------
+
+/// Business-error and loading core of `handle_load_server_save`. Locates the
+/// server's saved world under `<saves_path>/SaveGames/0/<world>/Level.sav`
+/// and runs it through the SAME Phase 1 load pipeline `handle_select_save`
+/// uses (`save_file::validate_steam_save_directory` /
+/// `save_file::discover_player_file_refs` / `SaveSession::load` /
+/// `save_file::emit_summary_messages`) rather than reimplementing it -- see
+/// `SteamSaveLayout`'s doc comment in `save_file.rs` for why those helpers
+/// are `pub(crate)` in the first place.
+///
+/// Returns `Err(String)` only for failures Python's outer `except Exception`
+/// would catch (`"Failed to load server save: {e}"`, `load_server_save_handler`'s
+/// final `except` clause). Every earlier business failure (server not found,
+/// still running, no save data at the expected location, no world dirs, no
+/// Level.sav, or an invalid steam directory) emits its own `error` frame
+/// directly and returns `Ok(())`, matching each early `return` in Python.
+async fn load_server_save_impl(data: ServerIdData, ctx: &mut HandlerCtx<'_>) -> Result<(), String> {
+    let emitter = ctx.emitter;
+    let db = &ctx.app.db;
+    let Some(record) = psp_db::servers::get_server(db, data.server_id)
+        .await
+        .map_err(|error| error.to_string())?
+    else {
+        emit_business_error(emitter, "Server not found".to_string());
+        return Ok(());
+    };
+
+    // Verify server is stopped.
+    let status = server_status(ctx.app, &record).await;
+    if status
+        .as_ref()
+        .map(|current| current.running)
+        .unwrap_or(false)
+    {
+        emit_business_error(
+            emitter,
+            "Server must be stopped before loading saves. Please stop the server first."
+                .to_string(),
+        );
+        return Ok(());
+    }
+
+    // Find the save directory: saves/SaveGames/0/{world_guid}/
+    let save_games_path = Path::new(&record.saves_path).join("SaveGames").join("0");
+    if !save_games_path.is_dir() {
+        emit_business_error(
+            emitter,
+            format!("No save data found at {}", save_games_path.display()),
+        );
+        return Ok(());
+    }
+
+    // Use the first (usually only) world directory -- matches Python's
+    // `os.listdir(save_games_path)[0]` (both are filesystem-enumeration-order
+    // dependent; this is bug-compatible, not a design choice).
+    let world_dir = std::fs::read_dir(&save_games_path)
+        .map_err(|error| error.to_string())?
+        .flatten()
+        .map(|entry| entry.path())
+        .find(|path| path.is_dir());
+    let Some(world_dir) = world_dir else {
+        emit_business_error(
+            emitter,
+            "No world saves found in server save directory".to_string(),
+        );
+        return Ok(());
+    };
+
+    let level_sav_path = world_dir.join("Level.sav");
+    if !level_sav_path.exists() {
+        emit_business_error(emitter, "Level.sav not found in save directory".to_string());
+        return Ok(());
+    }
+
+    // ---- Shared Phase 1 load pipeline (identical to handle_select_save's
+    // steam branch) ----
+    let layout = match save_file::validate_steam_save_directory(&level_sav_path.to_string_lossy()) {
+        Ok(layout) => layout,
+        Err(error) => {
+            emit_business_error(emitter, error.to_string());
+            return Ok(());
+        }
+    };
+    let level_sav_bytes = std::fs::read(&layout.level_sav).map_err(|error| error.to_string())?;
+    let level_meta_bytes = match &layout.level_meta {
+        Some(meta_path) => Some(std::fs::read(meta_path).map_err(|error| error.to_string())?),
+        None => None,
+    };
+    let (player_file_refs, player_discovery_order) =
+        save_file::discover_player_file_refs(&layout.players_dir)
+            .map_err(|error| error.to_string())?;
+
+    let progress = emitter.progress_sink();
+    let session = SaveSession::load(
+        SaveKind::Steam {
+            level_path: layout.level_sav.clone(),
+        },
+        level_sav_path.to_string_lossy().into_owned(),
+        "steam",
+        &level_sav_bytes,
+        level_meta_bytes.as_deref(),
+        player_file_refs,
+        layout.global_pal_storage_sav.clone(),
+        // load_server_save goes through the same process_save_files pipeline
+        // select_save does -- keep the leading generic "Loading Level.sav..." frame.
+        true,
+        &progress,
+    )
+    .map_err(|error| error.to_string())?;
+
+    // Python: app_state.settings.save_dir = world_dir
+    psp_db::settings::update_save_dir(db, &world_dir.to_string_lossy())
+        .await
+        .map_err(|error| error.to_string())?;
+
+    let has_gps = layout.global_pal_storage_sav.is_some();
+    emitter.emit(
+        MessageType::LoadedSaveFiles,
+        &serde_json::json!({
+            "level": layout.level_sav.to_string_lossy().into_owned(),
+            "players": player_discovery_order
+                .iter()
+                .map(|uid| uid.to_string())
+                .collect::<Vec<_>>(),
+            "world_name": session.world_name,
+            "type": "steam",
+            "size": session.size,
+            "has_gps": has_gps,
+            "server_id": record.id,
+            "server_name": record.name,
+        }),
+    );
+    save_file::emit_summary_messages(&session, emitter);
+
+    ctx.session.save = Some(session);
+    Ok(())
+}
+
+pub async fn handle_load_server_save(
+    data: ServerIdData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    if let Err(message) = load_server_save_impl(data, ctx).await {
+        emit_business_error(
+            ctx.emitter,
+            format!("Failed to load server save: {message}"),
+        );
+    }
+    Ok(())
+}
+
 #[cfg(test)]
 pub(crate) mod test_env {
     use std::sync::Arc;
@@ -1667,5 +1825,139 @@ mod tests {
         }))
         .unwrap();
         assert_eq!(data.mod_type, "ue4ss");
+    }
+
+    #[tokio::test]
+    async fn load_server_save_requires_stopped_server() {
+        let mut env = TestEnv::new().await;
+        let record = psp_db::servers::create_server(&env.app.db, docker_new_server("running"))
+            .await
+            .unwrap();
+        env.docker.statuses.lock().unwrap().insert(
+            "running".to_string(),
+            serde_json::json!({"State": {"Status": "running", "Running": true, "StartedAt": "x"}}),
+        );
+        let mut ctx = env.ctx();
+        handle_load_server_save(
+            ServerIdData {
+                server_id: record.id,
+            },
+            &mut ctx,
+        )
+        .await
+        .unwrap();
+        let messages = env.drain();
+        assert_eq!(messages[0]["type"], "error");
+        assert_eq!(
+            messages[0]["data"]["message"],
+            "Server must be stopped before loading saves. Please stop the server first."
+        );
+    }
+
+    #[tokio::test]
+    async fn load_server_save_reports_missing_save_dir() {
+        let mut env = TestEnv::new().await;
+        let mut new_server = docker_new_server("empty-saves");
+        new_server.saves_path = env
+            ._scratch
+            .path()
+            .join("nosaves")
+            .to_string_lossy()
+            .to_string();
+        let record = psp_db::servers::create_server(&env.app.db, new_server)
+            .await
+            .unwrap();
+        let mut ctx = env.ctx();
+        handle_load_server_save(
+            ServerIdData {
+                server_id: record.id,
+            },
+            &mut ctx,
+        )
+        .await
+        .unwrap();
+        let messages = env.drain();
+        assert_eq!(messages[0]["type"], "error");
+        assert!(messages[0]["data"]["message"]
+            .as_str()
+            .unwrap()
+            .starts_with("No save data found at "));
+    }
+
+    /// Full load path — needs a real world save. Set PSP_TEST_SAVE_DIR to a
+    /// directory containing Level.sav (same corpus the parity harness uses).
+    /// This is the ONE test in this suite that depends on host state outside
+    /// the repo -- everything else (including `cargo test -p psp-server`
+    /// with no env vars set) is fully self-contained.
+    #[tokio::test]
+    async fn load_server_save_loads_world_and_emits_summaries() {
+        let Ok(source_save_dir) = std::env::var("PSP_TEST_SAVE_DIR") else {
+            eprintln!("skipped: set PSP_TEST_SAVE_DIR to a directory containing Level.sav");
+            return;
+        };
+        let mut env = TestEnv::new().await;
+        // servers layout: <saves_path>/SaveGames/0/<world>/
+        let saves_root = env._scratch.path().join("saves");
+        let world_dir = saves_root.join("SaveGames").join("0").join("WORLD01");
+        std::fs::create_dir_all(&world_dir).unwrap();
+        for entry in std::fs::read_dir(&source_save_dir).unwrap().flatten() {
+            let target = world_dir.join(entry.file_name());
+            if entry.path().is_dir() {
+                copy_dir_recursive(&entry.path(), &target);
+            } else {
+                std::fs::copy(entry.path(), target).unwrap();
+            }
+        }
+        let mut new_server = docker_new_server("world-host");
+        new_server.saves_path = saves_root.to_string_lossy().to_string();
+        let record = psp_db::servers::create_server(&env.app.db, new_server)
+            .await
+            .unwrap();
+        let mut ctx = env.ctx();
+        handle_load_server_save(
+            ServerIdData {
+                server_id: record.id,
+            },
+            &mut ctx,
+        )
+        .await
+        .unwrap();
+        let messages = env.drain();
+        let types: Vec<&str> = messages
+            .iter()
+            .map(|message| message["type"].as_str().unwrap())
+            .collect();
+        // progress_message* then the three-response tail
+        assert!(types.contains(&"loaded_save_files"));
+        let tail: Vec<&str> = types.iter().rev().take(3).rev().copied().collect();
+        assert_eq!(
+            tail,
+            vec![
+                "loaded_save_files",
+                "get_player_summaries",
+                "get_guild_summaries"
+            ]
+        );
+        let loaded = messages
+            .iter()
+            .find(|message| message["type"] == "loaded_save_files")
+            .unwrap();
+        assert_eq!(loaded["data"]["type"], "steam");
+        assert_eq!(loaded["data"]["server_id"], record.id);
+        assert_eq!(loaded["data"]["server_name"], record.name);
+        assert!(loaded["data"]["has_gps"].is_boolean());
+        assert!(env.session.save.is_some());
+    }
+
+    fn copy_dir_recursive(source: &std::path::Path, dest: &std::path::Path) {
+        std::fs::create_dir_all(dest).unwrap();
+        for entry in std::fs::read_dir(source).unwrap().flatten() {
+            let target = dest.join(entry.file_name());
+            if entry.path().is_dir() {
+                copy_dir_recursive(&entry.path(), &target);
+            } else {
+                std::fs::copy(entry.path(), target).unwrap();
+            }
+        }
     }
 }

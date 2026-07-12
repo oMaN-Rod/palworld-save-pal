@@ -363,6 +363,12 @@ async fn route(
         MessageType::InstallServerMod => {
             handlers::servers::handle_install_server_mod(serde_json::from_value(data)?, ctx).await
         }
+        // Phase 6 (Task 14): final server load-save handler. NO arm for
+        // ServerPlayerCount -- a permanently dead wire type, see
+        // dispatcher::tests::valid_but_unimplemented_type_sends_nothing.
+        MessageType::LoadServerSave => {
+            handlers::servers::handle_load_server_save(serde_json::from_value(data)?, ctx).await
+        }
         // Remaining arms are added by Phases 1-6.
         other => {
             tracing::warn!(

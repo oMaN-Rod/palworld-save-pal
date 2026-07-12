@@ -313,6 +313,34 @@ TOOLS_SCENARIO = (
     ],
 )
 
+# Task P6-14: the servers scenario -- exercises the deterministic subset of
+# the server-management surface (list/get/get_stats/toggle_mod against an
+# UNKNOWN server id, plus detect_workshop_dir). Server management is
+# otherwise host-environment-dependent (Docker daemon, steamcmd, live
+# processes), so this corpus deliberately covers only what's fully
+# deterministic against a FRESH, EMPTY psp.db with no server rows:
+# list_servers answers an empty list, and every id-424242 request answers
+# "Server not found" (server 424242 is never created here). detect_workshop_dir
+# is the one exception -- its own response IS machine-dependent (it echoes
+# whatever Steam workshop install path THIS capture machine resolves, or ""
+# if none is found) -- record it as-is; rust/psp-server/tests/parity.rs masks
+# "/data/workshop_dir" for that response type (PARITY_IGNORED_PATHS,
+# "machine-dependent Steam install location") so replay doesn't require the
+# replay machine to have the same Steam install.
+SERVERS_SCENARIO = (
+    "servers",
+    [
+        {"type": "list_servers", "data": None},
+        {"type": "get_server", "data": {"server_id": 424242}},
+        {"type": "get_server_stats", "data": {"server_id": 424242}},
+        {
+            "type": "toggle_server_mod",
+            "data": {"server_id": 424242, "mod_name": "X", "enabled": True},
+        },
+        {"type": "detect_workshop_dir", "data": None},
+    ],
+)
+
 # ---------------------------------------------------------------------------
 # Task P4-14: the gamepass scenario.
 #
@@ -508,6 +536,7 @@ FIXED_SCENARIOS = {
     DB_PRESETS_SCENARIO[0]: DB_PRESETS_SCENARIO[1],
     DB_UPS_SCENARIO[0]: DB_UPS_SCENARIO[1],
     TOOLS_SCENARIO[0]: TOOLS_SCENARIO[1],
+    SERVERS_SCENARIO[0]: SERVERS_SCENARIO[1],
 }
 
 # Scenarios that build their request list from a corpus save directory

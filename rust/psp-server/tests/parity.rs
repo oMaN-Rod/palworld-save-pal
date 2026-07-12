@@ -173,6 +173,16 @@ const PARITY_IGNORED_PATHS: &[(&str, &str)] = &[
     // map of GPS pals is NOT handled here -- a static JSON pointer can't
     // reach a dynamic map value -- see mask_gps_response_frame below.
     ("add_gps_pal", "/data/pal/instance_id"),
+    // Task P6-14 (servers scenario). detect_workshop_dir's own response IS
+    // machine-dependent: it echoes whatever Steam workshop install path the
+    // CAPTURING machine resolved (or "" if none was found), which the
+    // REPLAYING machine (a different CI/dev box, almost always with no Steam
+    // install at all) can never reproduce. Nothing else in the servers
+    // corpus is masked -- list_servers/get_server/get_server_stats/
+    // toggle_server_mod all answer fully deterministically (empty list /
+    // "Server not found") against the fresh, empty psp.db the corpus is
+    // captured against.
+    ("detect_workshop_dir", "/data/workshop_dir"), // machine-dependent Steam install location
 ];
 
 /// The db-ups list frames carry an ARRAY of records whose per-element
