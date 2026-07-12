@@ -815,6 +815,10 @@ fn apply_player_dto(
         // after the `save_data` borrow of `loaded.sav` ends (this call needs
         // `&mut loaded.sav` for its `.schemas` table).
         ensure_boss_technology_point_schema(&mut loaded.sav);
+        // Same gap for the two quest arrays this block also writes
+        // unconditionally -- see `ensure_player_quest_array_schemas`'s own
+        // doc comment.
+        ensure_player_quest_array_schemas(&mut loaded.sav);
         // unlock flags: only when the caller actually supplied a value
         // (player.py's `case ... : if value is not None: setattr(...)`).
         // Needs `&mut loaded.sav` (not just its `SaveData` `Properties`) so it
@@ -1123,6 +1127,81 @@ fn ensure_boss_technology_point_schema(player_sav: &mut uesave::Save) {
             },
         );
     }
+}
+
+/// Registers write schemas for `SaveData.CompletedQuestArray`/
+/// `OrderedQuestArray` when missing, so `apply_player_dto`'s unconditional
+/// writes to both (`Player.completed_missions`/`current_missions` setters,
+/// `player.py`) survive a real `uesave::Save::write` for a player who has
+/// never completed or started a quest -- the exact same
+/// `MissingPropertySchema` gap `ensure_boss_technology_point_schema` closes
+/// for `bossTechnologyPoint`, reported live as `missing property schema for
+/// path: SaveData.CompletedQuestArray`.
+///
+/// Shapes copied from a real parsed occurrence of both properties
+/// (`PalObjects.OrderedQuestArray`/`OrderedQuest`, `pal_objects.py`), not
+/// guessed: `CompletedQuestArray` is a plain `Array(NameProperty)`, matching
+/// `props::name_array_property`. `OrderedQuestArray` is an
+/// `Array(Struct("PalOrderedQuestSaveData"))` whose elements carry
+/// `QuestName` (Name), `BlockIndex` (Int), `IntegerMap` (Map<Name, Int>),
+/// `StringMap` (Map<Name, Str>) -- `uesave`'s writer looks each struct-array
+/// element field's schema up at the same flat `<ArrayPath>.<FieldName>` path
+/// used for any other struct-array field (see `ensure_pal_property_schemas`'s
+/// `GotWorkSuitabilityAddRankList` precedent), so all four need their own
+/// entry too, not just the array itself.
+fn ensure_player_quest_array_schemas(player_sav: &mut uesave::Save) {
+    use uesave::{PropertyTagDataPartial, PropertyTagPartial, PropertyType, StructType};
+
+    let Some(prefix) = props::schema_prefix_ending_with(player_sav, ".TechnologyPoint") else {
+        return;
+    };
+    let tag = |data: PropertyTagDataPartial| PropertyTagPartial { id: None, data };
+    let path = |name: &str| format!("{prefix}.{name}");
+
+    props::ensure_schema(
+        player_sav,
+        path("CompletedQuestArray"),
+        tag(PropertyTagDataPartial::Array(Box::new(
+            PropertyTagDataPartial::Other(PropertyType::NameProperty),
+        ))),
+    );
+
+    props::ensure_schema(
+        player_sav,
+        path("OrderedQuestArray"),
+        tag(PropertyTagDataPartial::Array(Box::new(
+            PropertyTagDataPartial::Struct {
+                struct_type: StructType::Struct(Some("PalOrderedQuestSaveData".to_string())),
+                id: uesave::FGuid::nil(),
+            },
+        ))),
+    );
+    props::ensure_schema(
+        player_sav,
+        path("OrderedQuestArray.QuestName"),
+        tag(PropertyTagDataPartial::Other(PropertyType::NameProperty)),
+    );
+    props::ensure_schema(
+        player_sav,
+        path("OrderedQuestArray.BlockIndex"),
+        tag(PropertyTagDataPartial::Other(PropertyType::IntProperty)),
+    );
+    props::ensure_schema(
+        player_sav,
+        path("OrderedQuestArray.IntegerMap"),
+        tag(PropertyTagDataPartial::Map {
+            key_type: Box::new(PropertyTagDataPartial::Other(PropertyType::NameProperty)),
+            value_type: Box::new(PropertyTagDataPartial::Other(PropertyType::IntProperty)),
+        }),
+    );
+    props::ensure_schema(
+        player_sav,
+        path("OrderedQuestArray.StringMap"),
+        tag(PropertyTagDataPartial::Map {
+            key_type: Box::new(PropertyTagDataPartial::Other(PropertyType::NameProperty)),
+            value_type: Box::new(PropertyTagDataPartial::Other(PropertyType::StrProperty)),
+        }),
+    );
 }
 
 // ============================================================================

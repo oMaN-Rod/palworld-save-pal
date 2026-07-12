@@ -422,6 +422,123 @@ fn update_players_creates_missing_unlock_flag_map_and_it_round_trips() {
     );
 }
 
+/// **The real user-reported bug this task's report documents.**
+/// `apply_player_dto` unconditionally writes `SaveData.CompletedQuestArray`/
+/// `OrderedQuestArray` (`Player.completed_missions`/`current_missions`
+/// setters, `player.py`), but a player who has never completed or started a
+/// quest carries neither property NOR its write schema -- `uesave`'s writer
+/// then refuses the resave with `missing property schema for path:
+/// SaveData.CompletedQuestArray`. World1's real player `8C2F1930` already
+/// carries both (with real schemas), which is exactly why
+/// `update_players_full_dto`/`save_reload_cycle.rs`'s own full-player-object
+/// edit never caught this -- so both properties AND their recorded schemas
+/// are stripped here first, reproducing a genuinely quest-less player
+/// regardless of what this fixture happens to carry.
+#[test]
+fn update_players_full_dto_survives_missing_quest_array_schema() {
+    let mut session = common::load_fixture_session("world1");
+    let data = game_data();
+    let player_id: Uuid = WORLD1_PLAYER_O.parse().unwrap();
+    player::get_player_details(&mut session, &data, player_id, &null_progress())
+        .unwrap()
+        .unwrap();
+
+    {
+        let loaded = session.loaded_players.get_mut(&player_id).unwrap();
+        let save_data_property = loaded
+            .sav
+            .root
+            .properties
+            .0
+            .get_mut(&uesave::PropertyKey::from("SaveData"))
+            .expect("player has SaveData");
+        let save_data =
+            psp_core::props::struct_props_mut(save_data_property).expect("SaveData is a struct");
+        save_data
+            .0
+            .shift_remove(&uesave::PropertyKey::from("CompletedQuestArray"));
+        save_data
+            .0
+            .shift_remove(&uesave::PropertyKey::from("OrderedQuestArray"));
+
+        // Also strip the recorded write schemas for both paths (and every
+        // nested `OrderedQuestArray.<field>` schema) -- each player `.sav` is
+        // its own standalone `uesave::Save`, so this fully removes them
+        // without touching any other player.
+        let mut stripped_schemas = uesave::PropertySchemas::new();
+        for (path, tag) in loaded.sav.schemas.schemas() {
+            if path.ends_with(".CompletedQuestArray")
+                || path.ends_with(".OrderedQuestArray")
+                || path.contains(".OrderedQuestArray.")
+            {
+                continue;
+            }
+            stripped_schemas.record(path.clone(), tag.clone());
+        }
+        loaded.sav.schemas = stripped_schemas;
+    }
+    {
+        let loaded = session.loaded_players.get(&player_id).unwrap();
+        assert!(
+            loaded
+                .sav
+                .schemas
+                .get("SaveData.CompletedQuestArray")
+                .is_none(),
+            "test setup: CompletedQuestArray schema must be stripped"
+        );
+        assert!(
+            loaded
+                .sav
+                .schemas
+                .get("SaveData.OrderedQuestArray")
+                .is_none(),
+            "test setup: OrderedQuestArray schema must be stripped"
+        );
+    }
+
+    let mut dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    assert!(
+        dto.completed_missions.is_empty() && dto.current_missions.is_empty(),
+        "test setup: player must genuinely have no quests before this edit"
+    );
+    dto.completed_missions = vec!["Main_UnlockFastTravel".to_string()];
+    dto.current_missions = vec!["Main_PickupWood".to_string()];
+    let mut modified = OrderedMap::new();
+    modified.insert(player_id, dto);
+    player::update_players(&mut session, &data, &modified, &null_progress()).unwrap();
+
+    let player_files = session.player_sav_bytes().expect(
+        "a full player edit must serialize even when CompletedQuestArray/OrderedQuestArray \
+         have never been written by this player before",
+    );
+    let (sav_bytes, _dps_bytes) = player_files.get(&player_id).expect("player serialized");
+    let reparsed = psp_core::savio::read_sav_bytes(sav_bytes).expect("reparse written .sav");
+    let save_data_property =
+        psp_core::props::get(&reparsed.root.properties, &["SaveData"]).expect("SaveData present");
+    let save_data =
+        psp_core::props::struct_props(save_data_property).expect("SaveData is a struct");
+
+    let completed = psp_core::props::get(save_data, &["CompletedQuestArray"])
+        .and_then(psp_core::props::name_values)
+        .expect("CompletedQuestArray round trips as a Name array");
+    assert_eq!(completed, &vec!["Main_UnlockFastTravel".to_string()]);
+
+    let ordered = psp_core::props::get(save_data, &["OrderedQuestArray"])
+        .and_then(psp_core::props::struct_values)
+        .expect("OrderedQuestArray round trips as a Struct array");
+    assert_eq!(ordered.len(), 1);
+    let uesave::StructValue::Struct(quest) = &ordered[0] else {
+        panic!("OrderedQuestArray element must be a Struct");
+    };
+    let quest_name = psp_core::props::get(quest, &["QuestName"])
+        .and_then(psp_core::props::as_str)
+        .expect("QuestName present");
+    assert_eq!(quest_name, "Main_PickupWood");
+}
+
 #[test]
 fn technologies_on_unloaded_player_errors() {
     let mut session = common::load_fixture_session("world1");
