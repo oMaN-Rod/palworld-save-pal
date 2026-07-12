@@ -9,7 +9,10 @@ logger = create_logger(__name__)
 
 class ServerThread(threading.Thread):
     def __init__(self, app, host, port, dev_mode):
-        super().__init__()
+        # daemon so the process can exit even if the webview never starts;
+        # otherwise a windowless PSP.exe keeps squatting on the port and
+        # every later launch serves its UI from this broken instance
+        super().__init__(daemon=True)
         self.app = app
         self.host = host
         self.port = port

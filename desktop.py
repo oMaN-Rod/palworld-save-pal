@@ -8,6 +8,7 @@ from urllib.parse import quote
 import sys
 from pathlib import Path
 import multiprocessing
+import threading
 import time
 import webview
 from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
@@ -236,7 +237,30 @@ def start_webview(url):
         min_size=(1366, 768),
     )
     app_state.webview_window.events.closed += on_closed
-    webview.start(debug=True, user_agent="pywebview", private_mode=False)
+
+    def window_watchdog():
+        # If the window never reaches shown, every create_file_dialog call
+        # fails with "Main window failed to start" while the server keeps
+        # answering websockets. Better to die and free the port.
+        if not app_state.webview_window.events.shown.wait(60):
+            logger.error(
+                "Webview window did not appear within 60s; "
+                "exiting to avoid an orphaned server process"
+            )
+            remove_lock_file()
+            os._exit(1)
+
+    threading.Thread(target=window_watchdog, daemon=True).start()
+
+    try:
+        webview.start(debug=True, user_agent="pywebview", private_mode=False)
+    except Exception:
+        logger.exception("webview failed to start; shutting down server")
+        app_state.terminate_flag.set()
+        if app_state.server_instance:
+            app_state.server_instance.stop()
+        remove_lock_file()
+        os._exit(1)
 
 
 def on_closed():
