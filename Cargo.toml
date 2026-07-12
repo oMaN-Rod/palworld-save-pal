@@ -3,7 +3,8 @@ resolver = "2"
 members = ["psp-core", "psp-db", "psp-server", "psp-desktop"]
 
 [workspace.package]
-# Keep in sync with palworld_save_pal/__version__.py — get_version parity depends on it.
+# Single source of truth for the project version (get_version, Tauri bundle,
+# all crates). Bump with scripts/bump.ps1.
 version = "0.17.3"
 edition = "2021"
 

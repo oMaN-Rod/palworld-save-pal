@@ -4,10 +4,10 @@ name: Build and Release
 # creates a (draft) GitHub Release. Publishing the draft fires nexus-upload.yml
 # and discord.yml. Release assets are named canonically so nexus-upload.yml can
 # pattern-match them:
-#   PalworldSavePal-<tag>-windows.msi         (MSI)
-#   PalworldSavePal-<tag>-windows-setup.exe   (NSIS installer)
-#   PalworldSavePal-<tag>-macos.dmg           (DMG)
-#   PalworldSavePal-<tag>-linux.deb           (Debian package)
+#   PalworldSavePal-<tag>-windows.msi              (MSI installer)
+#   PalworldSavePal-<tag>-windows-standalone.zip   (portable: exe + ui + data)
+#   PalworldSavePal-<tag>-macos.dmg                (DMG)
+#   PalworldSavePal-<tag>-linux.deb                (Debian package)
 
 on:
   workflow_dispatch:
@@ -72,18 +72,26 @@ jobs:
 
       - name: Build Tauri bundles
         working-directory: palworld-save-pal/psp-desktop
-        run: cargo tauri build --bundles msi,nsis
+        run: cargo tauri build --bundles msi
 
-      - name: Collect and rename installers
+      - name: Collect MSI + portable standalone
         shell: pwsh
         working-directory: palworld-save-pal
         run: |
           $tag = "${{ github.event.inputs.version }}"
           New-Item -ItemType Directory -Force dist | Out-Null
+          # MSI installer (the only Windows installer we ship).
           $msi = Get-ChildItem target/release/bundle/msi/*.msi | Select-Object -First 1
           Copy-Item $msi.FullName "dist/PalworldSavePal-$tag-windows.msi"
-          $exe = Get-ChildItem target/release/bundle/nsis/*-setup.exe | Select-Object -First 1
-          Copy-Item $exe.FullName "dist/PalworldSavePal-$tag-windows-setup.exe"
+          # Portable standalone: exe + ui_build + data in one folder, zipped;
+          # extract-and-run (keeps its DB alongside the exe).
+          $staging = "dist/PalworldSavePal"
+          New-Item -ItemType Directory -Force $staging | Out-Null
+          Copy-Item target/release/psp-desktop.exe "$staging/psp-desktop.exe"
+          Copy-Item -Recurse ui_build "$staging/ui_build"
+          Copy-Item -Recurse data "$staging/data"
+          Compress-Archive -Path $staging -DestinationPath "dist/PalworldSavePal-$tag-windows-standalone.zip"
+          Remove-Item -Recurse -Force $staging
 
       - name: Upload Windows artifacts
         uses: actions/upload-artifact@v4

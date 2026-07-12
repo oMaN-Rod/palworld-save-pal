@@ -19,9 +19,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # NSIS installer -> the "standalone" Nexus group (2308165)
-          - variant: win_nsis
-            asset: PalworldSavePal-{tag}-windows-setup.exe
+          # Portable standalone zip -> the "standalone" Nexus group (2308165)
+          - variant: win_standalone
+            asset: PalworldSavePal-{tag}-windows-standalone.zip
             group_id: "2308165"
           # MSI installer -> the "installer" Nexus group (2308168)
           - variant: win_msi
