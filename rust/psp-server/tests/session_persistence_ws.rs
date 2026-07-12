@@ -257,3 +257,63 @@ async fn eject_removes_from_store_and_clears_connection() {
 
     server.handle.shutdown().await;
 }
+
+#[tokio::test]
+async fn eject_of_non_attached_id_leaves_other_connection_intact() {
+    // Connection A loads session A; connection B loads its own session B, then
+    // ejects A (an id B is NOT attached to). A must be gone from the store, but
+    // B's own session must be untouched — eject only resets the CALLER's
+    // connection when the ejected id matches its own current id.
+    let (_temp_a, level_a) = temp_world1();
+    let (_temp_b, level_b) = temp_world1();
+    let server = common::start_test_server().await;
+
+    let mut socket_a = common::connect(&server).await;
+    let mut socket_b = common::connect(&server).await;
+    let session_a = select_world1(&mut socket_a, &level_a).await;
+    let _session_b = select_world1(&mut socket_b, &level_b).await;
+
+    // B ejects A's id.
+    common::send_json(
+        &mut socket_b,
+        json!({"type": "eject_session", "data": {"session_id": session_a}}),
+    )
+    .await;
+    let frame = common::next_json(&mut socket_b).await;
+    assert_eq!(frame["type"], "eject_session");
+    assert_eq!(frame["data"], session_a);
+
+    // (a) A is gone from the store: reattaching it from A's own connection
+    // now returns session_not_found.
+    common::send_json(
+        &mut socket_a,
+        json!({"type": "reattach_session", "data": {"session_id": session_a}}),
+    )
+    .await;
+    let frame = common::next_json(&mut socket_a).await;
+    assert_eq!(frame["type"], "session_not_found");
+    assert_eq!(frame["data"], session_a);
+
+    // (b) B's own session is untouched: it can still request player details...
+    common::send_json(
+        &mut socket_b,
+        json!({"type": "request_player_details",
+               "data": {"player_id": WORLD1_PLAYER_O, "origin": "edit"}}),
+    )
+    .await;
+    let detail_frames = recv_until(&mut socket_b, "get_player_details_response").await;
+    let player = &detail_frames.last().unwrap()["data"]["player"];
+    assert_eq!(player["uid"], WORLD1_PLAYER_O);
+
+    // ...and still save successfully (not "No save file loaded").
+    common::send_json(
+        &mut socket_b,
+        json!({"type": "save_modded_save", "data": null}),
+    )
+    .await;
+    let save_frames = recv_until(&mut socket_b, "save_modded_save").await;
+    let save_result = save_frames.last().unwrap();
+    assert_eq!(save_result["data"], "Modded save file saved successfully");
+
+    server.handle.shutdown().await;
+}
