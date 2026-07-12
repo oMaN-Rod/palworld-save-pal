@@ -17,9 +17,24 @@ struct AssetDirs {
     db_path: PathBuf,
 }
 
+/// Unpackaged runs resolve assets against the repo root. In debug builds that is
+/// derived from the compile-time manifest path rather than the cwd, because
+/// `tauri dev` runs the binary from the crate dir, not the repo root.
+fn repo_root() -> anyhow::Result<PathBuf> {
+    if cfg!(debug_assertions) {
+        let manifest_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+        let root = manifest_dir
+            .parent()
+            .and_then(|rust_dir| rust_dir.parent())
+            .ok_or_else(|| anyhow::anyhow!("psp-desktop manifest has no repo root above it"))?;
+        return Ok(root.to_path_buf());
+    }
+    Ok(std::env::current_dir()?)
+}
+
 /// Packaged app: serve bundled resources, keep mutable state (DB, backups/) in
-/// the per-user app data dir. Dev (`cargo run` from the repo root): use the
-/// repo's ui_build/ and data/ directly.
+/// the per-user app data dir. Unpackaged (`cargo tauri dev`, `cargo run`): use
+/// the repo's ui_build/ and data/ directly.
 fn resolve_asset_dirs(app: &tauri::AppHandle) -> anyhow::Result<AssetDirs> {
     if let Ok(resource_dir) = app.path().resource_dir() {
         let bundled_ui = resource_dir.join("ui");
@@ -36,11 +51,16 @@ fn resolve_asset_dirs(app: &tauri::AppHandle) -> anyhow::Result<AssetDirs> {
             });
         }
     }
-    let repo_root = std::env::current_dir()?;
+    let repo_root = repo_root()?;
+    // Under `tauri dev` the webview loads Vite, so no static build is needed.
+    // ServeDir just 404s on the absent dir; nothing else reads ui_dir.
     anyhow::ensure!(
-        repo_root.join("ui_build").join("index.html").is_file(),
+        tauri::is_dev() || repo_root.join("ui_build").join("index.html").is_file(),
         "ui_build/index.html not found — run scripts/build-ui-desktop before `cargo run -p psp-desktop`, from the repo root"
     );
+    // backups/ and open_folder("psp_root") resolve against cwd; `tauri dev` runs
+    // the binary from the crate dir, so pin it back to the repo root.
+    std::env::set_current_dir(&repo_root)?;
     Ok(AssetDirs {
         ui_dir: repo_root.join("ui_build"),
         data_dir: repo_root.join("data"),
@@ -88,6 +108,19 @@ fn main() {
             let server_url: tauri::Url = format!("http://{}", server_handle.addr).parse()?;
             tracing::info!("embedded server listening on {}", server_handle.addr);
 
+            // Dev: load the Vite dev server so frontend edits hot-reload. It
+            // proxies /api back to the embedded server, and PUBLIC_WS_URL is an
+            // absolute host, so /ws still connects straight to it. Prod: load the
+            // embedded server, which serves the static ui_build/.
+            let webview_url = app
+                .config()
+                .build
+                .dev_url
+                .clone()
+                .filter(|_| tauri::is_dev())
+                .unwrap_or(server_url);
+            tracing::info!("webview loading {}", webview_url);
+
             app_handle
                 .state::<EmbeddedServer>()
                 .0
@@ -96,7 +129,7 @@ fn main() {
                 .replace(server_handle);
 
             // desktop.py:231-237 — title, 1366x768, min 1366x768.
-            WebviewWindowBuilder::new(&app_handle, "main", WebviewUrl::External(server_url))
+            WebviewWindowBuilder::new(&app_handle, "main", WebviewUrl::External(webview_url))
                 .title(format!("Palworld Save Pal v{}", env!("CARGO_PKG_VERSION")))
                 .inner_size(1366.0, 768.0)
                 .min_inner_size(1366.0, 768.0)

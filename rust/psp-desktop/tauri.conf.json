@@ -3,7 +3,12 @@
   "productName": "Palworld Save Pal",
   "identifier": "com.palworldsavepal.desktop",
   "build": {
-    "frontendDist": "http://127.0.0.1:5174"
+    "beforeDevCommand": {
+      "script": "bun run dev:desktop",
+      "cwd": "../../ui"
+    },
+    "devUrl": "http://localhost:5173",
+    "frontendDist": "../../ui_build"
   },
   "app": {
     "windows": [],
