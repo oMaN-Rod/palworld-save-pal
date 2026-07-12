@@ -37,7 +37,7 @@ export const loadedSaveFilesHandler: WSMessageHandler = {
 		if (consumeReattachPending()) {
 			const storedPlayerUid = getStoredSelectedPlayerUid();
 			if (storedPlayerUid) {
-				appState.selectPlayerLazy(storedPlayerUid);
+				appState.selectPlayerLazy(storedPlayerUid, 'reattach');
 			}
 		}
 	}

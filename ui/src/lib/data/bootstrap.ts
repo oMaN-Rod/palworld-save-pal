@@ -41,12 +41,14 @@ export const bootstrap = async () => {
 
 	send(MessageType.GET_VERSION);
 
+	// Frames are processed FIFO: send sync first so it runs pre-reattach (no
+	// save yet, settings-only emit), then reattach emits the overview once.
+	send(MessageType.SYNC_APP_STATE);
+
 	// Reattach to the last session if this tab held one before the refresh.
 	const storedSessionId = getStoredSessionId();
 	if (storedSessionId) {
 		markReattachPending();
 		send(MessageType.REATTACH_SESSION, { session_id: storedSessionId });
 	}
-
-	send(MessageType.SYNC_APP_STATE);
 };

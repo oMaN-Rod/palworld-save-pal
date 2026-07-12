@@ -1,4 +1,4 @@
-export type PlayerDetailsOrigin = 'edit' | 'bulk' | 'worldmap';
+export type PlayerDetailsOrigin = 'edit' | 'bulk' | 'worldmap' | 'reattach';
 
 export interface PlayerDetailsRouting {
 	/** Where the loaded player should be stored in app state. */
@@ -17,7 +17,8 @@ export function resolvePlayerDetailsRouting(origin: string | undefined): PlayerD
 	if (origin === 'bulk') {
 		return { target: 'bulkDetail', navigateTo: null };
 	}
-	if (origin === 'worldmap') {
+	if (origin === 'worldmap' || origin === 'reattach') {
+		// Reattach on refresh: load into state, stay on whatever route reloaded.
 		return { target: 'selected', navigateTo: null };
 	}
 	// Default (edit) path: select the player and open the editor.

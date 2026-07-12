@@ -29,4 +29,11 @@ describe('resolvePlayerDetailsRouting', () => {
 			navigateTo: null
 		});
 	});
+
+	it('routes the reattach origin to the selected player without navigating', () => {
+		expect(resolvePlayerDetailsRouting('reattach')).toEqual({
+			target: 'selected',
+			navigateTo: null
+		});
+	});
 });
