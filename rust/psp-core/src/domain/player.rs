@@ -706,6 +706,11 @@ fn apply_player_dto(
             "Player {player_id} not found in the save file."
         )));
     }
+    // Player edits write `SanityValue` into this entry, but a player's raw
+    // SaveParameter may carry no schema for that path and uesave rejects any
+    // unschema'd property -- so level_sav_bytes() would fail on every player
+    // edit. Prime the shared per-path schemas pals already rely on.
+    pal::ensure_pal_property_schemas(&mut session.level);
     // --- character-map save parameter fields ---
     {
         let entries = world::character_map_mut(&mut session.level)?;

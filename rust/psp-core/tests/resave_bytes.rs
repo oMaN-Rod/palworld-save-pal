@@ -327,6 +327,72 @@ fn edited_player_save_out_succeeds_after_boss_technology_point_fix() {
     psp_core::savio::read_sav_bytes(sav_bytes).expect("edited player .sav re-reads cleanly");
 }
 
+/// Reproduces (and pins the fix for) a data-loss bug found via a full WS
+/// `update_save_file` -> `save_modded_save` -> reload reproduction
+/// (`psp-server/tests/save_reload_cycle.rs`): `apply_player_dto` writes
+/// `SanityValue` into the player's OWN entry in `worldSaveData.
+/// CharacterSaveParameterMap` unconditionally on every player edit, but
+/// (unlike a pal's raw `SaveParameter` struct) a player entry has no
+/// pre-existing write-schema for that path in the world1 fixture -- so
+/// `session.level_sav_bytes()` (which `save_modded_save`/`download_save_file`
+/// both call) failed with `MissingPropertySchema` for EVERY player edit, not
+/// just ones that touch sanity directly. Because that failure happens after
+/// `update_save_file` has already applied (and reported success for) the
+/// edit in memory, and before a single byte of the new `Level.sav` is
+/// written, the on-disk save was left completely untouched -- so the very
+/// next `select_save` silently reread the pre-edit file, exactly matching
+/// the user-reported symptom ("I edited, saved, reloaded, and my edit is
+/// gone"). Unlike `edited_player_save_out_succeeds_after_boss_technology_
+/// point_fix` (which only proves `player_sav_bytes()` -- the per-player
+/// `.sav` -- survives an edit), this asserts `level_sav_bytes()` -- the
+/// SHARED `Level.sav` this exact bug broke -- also survives, and that the
+/// edit is actually present after a full write+reread of that `Level.sav`.
+#[test]
+fn edited_player_level_sav_bytes_succeeds_and_edit_round_trips() {
+    let mut session = common::load_fixture_session("world1");
+    let data = game_data();
+    let player_id = *session.player_summaries.keys().next().unwrap();
+    player::get_player_details(&mut session, &data, player_id, &null_progress())
+        .unwrap()
+        .unwrap();
+    let mut dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    dto.level = 60;
+    let mut modified = OrderedMap::new();
+    modified.insert(player_id, dto);
+    player::update_players(&mut session, &data, &modified, &null_progress())
+        .expect("update players");
+
+    let level_bytes = session
+        .level_sav_bytes()
+        .expect("Level.sav re-serialization must succeed after a player edit (SanityValue schema)");
+
+    let reloaded = SaveSession::new_for_tests(
+        SaveKind::InMemory,
+        psp_core::savio::read_sav_bytes(&level_bytes).expect("edited Level.sav re-reads cleanly"),
+    );
+    let entries = psp_core::domain::world::character_map(&reloaded.level).unwrap();
+    let reloaded_entry = entries
+        .iter()
+        .find(|entry| {
+            psp_core::domain::world::entry_is_player(entry)
+                && psp_core::domain::world::entry_player_uid(entry) == Some(player_id)
+        })
+        .expect("edited player still present in the reloaded Level.sav");
+    let save_parameter = psp_core::domain::world::entry_save_parameter(reloaded_entry)
+        .expect("reloaded player entry has a save parameter");
+    let level_after = save_parameter
+        .0
+        .get(&uesave::PropertyKey::from("Level"))
+        .expect("Level property present");
+    assert_eq!(
+        level_after,
+        &psp_core::props::byte_property(60),
+        "the edited level must survive the Level.sav write+reread, not just the in-memory apply"
+    );
+}
+
 /// Pins the `SlotID` write-schema fix (Task 14b). `new_pal_entry` inserts the
 /// new pal's slot struct under the all-caps key `SlotID` (Python's
 /// `PalObjects.PalCharacterSlotId`), but every pal already on disk spells it
