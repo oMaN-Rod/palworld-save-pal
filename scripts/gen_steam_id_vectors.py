@@ -20,7 +20,7 @@ for steam_id in STEAM_IDS:
         }
     )
 
-out_path = os.path.join("rust", "psp-core", "tests", "fixtures", "steam_id_vectors.json")
+out_path = os.path.join("psp-core", "tests", "fixtures", "steam_id_vectors.json")
 os.makedirs(os.path.dirname(out_path), exist_ok=True)
 with open(out_path, "w") as f:
     json.dump(vectors, f, indent=2)

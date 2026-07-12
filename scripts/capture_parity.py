@@ -2,7 +2,7 @@
 """Capture WS request/response fixtures from the RUNNING Python backend.
 
 The recorded fixtures are replayed against the Rust server by
-rust/psp-server/tests/parity.rs. Fixtures are machine-local (save_dir defaults,
+psp-server/tests/parity.rs. Fixtures are machine-local (save_dir defaults,
 loaded saves) and are gitignored — regenerate, don't commit.
 
 Usage (backend must be running with a FRESH psp.db and NO save loaded for the
@@ -67,7 +67,7 @@ def build_save_zip_bytes(save_dir: str) -> bytes:
     """Zip the corpus save the same way the UI would upload it:
     Level.sav, optional LevelMeta.sav, optional GlobalPalStorage.sav (Task
     3D-3's gps scenario -- see zip_gps_temp_path in
-    rust/psp-server/src/handlers/save_file.rs / save_file_handler.py:205 for
+    psp-server/src/handlers/save_file.rs / save_file_handler.py:205 for
     the temp-file lazy-load path this exercises), Players/*.sav at the
     archive root."""
     buffer = io.BytesIO()
@@ -108,7 +108,7 @@ def load_path_requests(save_dir: str) -> list[dict]:
 # embedded as each preset's own `id`/`pal_preset_id`), so parity.rs replays
 # this corpus with a custom comparator (compare_get_presets_equivalent)
 # instead of the usual masked strict-equality path — see
-# rust/parity/README.md, "db-presets scenario", for the safe capture
+# parity/README.md, "db-presets scenario", for the safe capture
 # procedure (this backend's psp.db must NOT be the developer's real one).
 DB_PRESETS_SCENARIO = (
     "db-presets",
@@ -153,7 +153,7 @@ DB_PRESETS_SCENARIO = (
 # created_at/updated_at/last_accessed_at/instance_id, and add_ups_pal echoes
 # the whole record — parity.rs masks those per-element/per-record fields (see
 # mask_ups_list_frames + the add_ups_pal/... PARITY_IGNORED_PATHS entries).
-# See rust/parity/README.md, "db-ups scenario", for the safe capture procedure
+# See parity/README.md, "db-ups scenario", for the safe capture procedure
 # (this backend's psp.db must NOT be the developer's real one).
 SAMPLE_PAL_DTO = {
     "instance_id": "11111111-1111-1111-1111-111111111111",
@@ -268,7 +268,7 @@ DB_UPS_SCENARIO = (
 # (matches convert_steam_id/swap_player_uids' own no-save-needed nature), so
 # this needs no --save-dir and, unlike db-presets/db-ups, touches no psp.db
 # table at all (same as the transfer scenario) -- back the DB up anyway as
-# defensive practice; see rust/parity/README.md, "tools scenario".
+# defensive practice; see parity/README.md, "tools scenario".
 #
 # get_raw_data's captured `data` is compared STRUCTURALLY, not value-exact,
 # by parity.rs's PARITY_STRUCTURAL_TYPES (Contract deviation 6: Rust's
@@ -323,7 +323,7 @@ TOOLS_SCENARIO = (
 # "Server not found" (server 424242 is never created here). detect_workshop_dir
 # is the one exception -- its own response IS machine-dependent (it echoes
 # whatever Steam workshop install path THIS capture machine resolves, or ""
-# if none is found) -- record it as-is; rust/psp-server/tests/parity.rs masks
+# if none is found) -- record it as-is; psp-server/tests/parity.rs masks
 # "/data/workshop_dir" for that response type (PARITY_IGNORED_PATHS,
 # "machine-dependent Steam install location") so replay doesn't require the
 # replay machine to have the same Steam install.
@@ -360,12 +360,12 @@ SERVERS_SCENARIO = (
 #       --scenario gamepass --prepare-gamepass \
 #       --save-dir "<absolute path to tests/fixtures/saves/world2>"
 #
-# which builds the container tree under rust/parity/tmp/gamepass/wgs/...,
+# which builds the container tree under parity/tmp/gamepass/wgs/...,
 # writes its absolute path into the (freshly-created) psp.db's settings row,
-# and prints the container dir for the next step. See rust/parity/README.md,
+# and prints the container dir for the next step. See parity/README.md,
 # "gamepass scenario", for the full safe-capture procedure (fresh psp.db,
 # same discipline as db-presets/db-ups/gps/transfer/tools).
-GAMEPASS_TMP = Path(__file__).resolve().parents[1] / "rust" / "parity" / "tmp" / "gamepass"
+GAMEPASS_TMP = Path(__file__).resolve().parents[1] / "parity" / "tmp" / "gamepass"
 GAMEPASS_SAVE_ID = "0123456789ABCDEF0123456789ABCDEF"
 # world2 (exactly 1 player) -- NOT world1 (2 players) -- for the same reason
 # the load_path scenario's README section documents: Python's
@@ -379,7 +379,7 @@ def _graft_world_map_mask(level_meta_bytes: bytes, mask: bytes) -> bytes:
     `world1` nor `world2` (this repo's only steam corpora) has a real
     LocalData.sav, so `unlock_map` (request 05) has nothing to unlock unless
     one is synthesized. This mirrors, in Python (for capture authoritativeness),
-    the EXACT technique rust/psp-core/src/localdata.rs's own
+    the EXACT technique psp-core/src/localdata.rs's own
     `unlock_world_map_zeroes_synthetic_mask_grafted_into_real_savedata` test
     uses on the Rust side: graft the mask into a COPY of the corpus
     LevelMeta.sav's `SaveData` struct (unlock_map only ever reads
@@ -556,7 +556,7 @@ def _null_save_dir_response_type(responses: list) -> Optional[str]:
     """Return the wire `type` of the first response carrying `data.save_dir:
     null`, or None if none do. Narrow, cheap scan for one known-bad capture
     symptom (see 'Known Python quirks affecting capture' in
-    rust/parity/README.md) — not a general fixture validator."""
+    parity/README.md) — not a general fixture validator."""
     for response in responses:
         if not isinstance(response, dict):
             continue
@@ -607,14 +607,14 @@ def _refuse_null_save_dir(request: dict, responses: list) -> None:
     # life. This is a known, 100%-reproducible capture-time artifact, not a
     # legitimate Rust/Python divergence — recording it would be a trap for
     # whoever replays this fixture next. Refuse to write it; see
-    # rust/parity/README.md, "Known Python quirks affecting capture", for the
+    # parity/README.md, "Known Python quirks affecting capture", for the
     # fix (warm the DB first) and why this must NOT become a
     # PARITY_IGNORED_PATHS mask.
     print(
         f"error: response type {offending_type!r} (for request "
         f"{request['type']!r}) has save_dir: null — the Python backend's "
         "settings table did not exist when it started. See 'Known Python "
-        "quirks affecting capture' in rust/parity/README.md: stop the backend, "
+        "quirks affecting capture' in parity/README.md: stop the backend, "
         "then start it again (a warmed psp.db) before capturing. Refusing to "
         "write this fixture.",
         file=sys.stderr,
@@ -913,7 +913,7 @@ async def capture_phase2(
 # `sync_app_state` first, unlike `load_path_requests` -- so both backends
 # exercise the ZIP-upload temp-file lazy-load path GPS reads
 # GlobalPalStorage.sav from (`zip_gps_temp_path` in
-# rust/psp-server/src/handlers/save_file.rs; `save_file_handler.py:205` on
+# psp-server/src/handlers/save_file.rs; `save_file_handler.py:205` on
 # the Python side), not the on-disk save_dir path `select_save` would use.
 # `save_file.rs::handle_load_zip_file` still emits `get_player_summaries` /
 # `get_guild_summaries` (shared with `select_save`/`sync_app_state`), so the
@@ -922,7 +922,7 @@ async def capture_phase2(
 # NO GPS-containing corpus exists in this checkout (no
 # `GlobalPalStorage.sav` alongside any `Level.sav`/`Players/` directory) --
 # this function is scaffolding for a developer who has one to capture
-# against later. See rust/parity/README.md, "gps scenario", for the safe
+# against later. See parity/README.md, "gps scenario", for the safe
 # capture procedure.
 GPS_SCENARIO = "gps"
 
@@ -1002,7 +1002,7 @@ async def capture_gps(
             # 005 request_gps -- re-read after the add/delete above; the
             # slot-keyed map's per-pal instance_id is masked by parity.rs's
             # get_gps_response walker (mask_gps_response_frame), not a static
-            # PARITY_IGNORED_PATHS pointer -- see rust/parity/README.md.
+            # PARITY_IGNORED_PATHS pointer -- see parity/README.md.
             await run({"type": "request_gps", "data": None})
 
             # 006 clone_gps_pal_to_player -- a pal id NOT present in GPS, so
@@ -1048,7 +1048,7 @@ async def capture_gps(
 # never touches the standalone-target auto-save-to-disk branch
 # (`handlers/tools.rs::handle_transfer_player`'s `has_standalone_target`
 # path), which needs its OWN dedicated, disk-writing corpus and is
-# deliberately NOT exercised here (see rust/parity/README.md, "transfer
+# deliberately NOT exercised here (see parity/README.md, "transfer
 # scenario", for why and how that would be captured safely later).
 #
 # Wire-response determinism: every response this scenario captures is a
@@ -1187,7 +1187,7 @@ def main() -> None:
         "different working directory than this script. For "
         "--scenario gamepass, this is the STEAM corpus save dir when paired "
         "with --prepare-gamepass, and the PRINTED container dir on the "
-        "subsequent capturing run (see rust/parity/README.md).",
+        "subsequent capturing run (see parity/README.md).",
     )
     parser.add_argument(
         "--prepare-gamepass",
@@ -1197,7 +1197,7 @@ def main() -> None:
         "dir) and persist its path into psp.db's settings row, then print "
         "the container dir and exit -- no backend connection is made. Must "
         "run and complete BEFORE the Python backend process starts (see "
-        "rust/parity/README.md, 'gamepass scenario').",
+        "parity/README.md, 'gamepass scenario').",
     )
     # psp.py:51 declares `client_id: int` on the WS route, so a non-numeric
     # path segment (e.g. "parity-capture") fails the Starlette route
@@ -1207,7 +1207,7 @@ def main() -> None:
     parser.add_argument("--url", default="ws://127.0.0.1:5174/ws/999999999")
     parser.add_argument(
         "--output",
-        default=str(pathlib.Path(__file__).resolve().parents[1] / "rust/parity/fixtures"),
+        default=str(pathlib.Path(__file__).resolve().parents[1] / "parity/fixtures"),
     )
     arguments = parser.parse_args()
     corpus = arguments.corpus or arguments.scenario

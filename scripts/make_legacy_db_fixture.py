@@ -25,7 +25,7 @@ from palworld_save_pal.db.models.ups_models import (
 from palworld_save_pal.editor.preset_profile import PalPreset, PresetProfile
 from palworld_save_pal.game.pal_objects import PalGender
 
-OUTPUT_PATH = os.path.join("rust", "psp-db", "tests", "fixtures", "legacy_psp.db")
+OUTPUT_PATH = os.path.join("psp-db", "tests", "fixtures", "legacy_psp.db")
 FIXED_TIME = datetime(2026, 1, 2, 3, 4, 5, 123456)
 
 VALID_PAL_DATA = {

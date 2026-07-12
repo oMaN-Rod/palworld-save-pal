@@ -13,19 +13,19 @@ jobs:
             bundles: msi,nsis
             artifact_name: desktop-windows
             artifact_paths: |
-              palworld-save-pal/rust/target/release/bundle/msi/*.msi
-              palworld-save-pal/rust/target/release/bundle/nsis/*.exe
+              palworld-save-pal/target/release/bundle/msi/*.msi
+              palworld-save-pal/target/release/bundle/nsis/*.exe
           - os: macos-latest
             bundles: dmg
             artifact_name: desktop-macos
             artifact_paths: |
-              palworld-save-pal/rust/target/release/bundle/dmg/*.dmg
+              palworld-save-pal/target/release/bundle/dmg/*.dmg
           - os: ubuntu-latest
             bundles: deb,rpm
             artifact_name: desktop-linux
             artifact_paths: |
-              palworld-save-pal/rust/target/release/bundle/deb/*.deb
-              palworld-save-pal/rust/target/release/bundle/rpm/*.rpm
+              palworld-save-pal/target/release/bundle/deb/*.deb
+              palworld-save-pal/target/release/bundle/rpm/*.rpm
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout palworld-save-pal
@@ -34,7 +34,7 @@ jobs:
           path: palworld-save-pal
 
       # The Rust workspace consumes uesave as a path dependency that resolves
-      # to a sibling checkout (../../uesave-rs/uesave relative to rust/).
+      # to a sibling checkout (../uesave-rs/uesave relative to the repo root).
       # Recreate the local disk layout: both repos side by side.
       - name: Checkout uesave-rs (path dependency)
         uses: actions/checkout@v3
@@ -66,13 +66,13 @@ jobs:
       - name: Cache Rust build
         uses: Swatinem/rust-cache@v2
         with:
-          workspaces: palworld-save-pal/rust
+          workspaces: palworld-save-pal
 
       - name: Install Tauri CLI
         run: cargo install tauri-cli --version "^2" --locked
 
       - name: Build Tauri bundles
-        working-directory: palworld-save-pal/rust/psp-desktop
+        working-directory: palworld-save-pal/psp-desktop
         run: cargo tauri build --bundles ${{ matrix.bundles }}
 
       - name: Upload installers

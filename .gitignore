@@ -34,6 +34,8 @@ logs/
 # Database
 *.sqlite3
 *.db
+*.db-shm
+*.db-wal
 
 # UI specific (respecting the existing .gitignore in ui/)
 /ui/node_modules
@@ -79,3 +81,8 @@ backups/
 data/json/settings.json
 .claude/
 /servers/
+
+# Rust workspace build output
+/target
+/parity/fixtures/
+/parity/tmp/

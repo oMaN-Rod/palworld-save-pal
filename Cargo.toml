@@ -1,0 +1,47 @@
+[workspace]
+resolver = "2"
+members = ["psp-core", "psp-db", "psp-server", "psp-desktop"]
+
+[workspace.package]
+# Keep in sync with palworld_save_pal/__version__.py — get_version parity depends on it.
+version = "0.17.3"
+edition = "2021"
+
+[workspace.dependencies]
+psp-core = { path = "psp-core" }
+psp-db = { path = "psp-db" }
+uesave = { path = "../uesave-rs/uesave", features = ["oodle"] }
+axum = { version = "0.8", features = ["ws", "multipart"] }
+tokio = { version = "1", features = ["full"] }
+tower-http = { version = "0.6", features = ["fs"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["float_roundtrip", "preserve_order"] }
+sqlx = { version = "0.8", features = ["sqlite", "runtime-tokio", "macros", "migrate", "json", "chrono"] }
+uuid = { version = "1", features = ["serde", "v4"] }
+thiserror = "2"
+anyhow = "1"
+tracing = "0.1"
+tracing-subscriber = "0.3"
+clap = { version = "4", features = ["derive"] }
+cityhasher = "0.1"         # contract deviation 1: CityHash64, matches Python's `cityhash` package
+futures = "0.3"            # contract addition: WS split + panic containment
+percent-encoding = "2"     # contract addition: SPA redirect encoding
+base64 = "0.22"
+zip = { version = "2", default-features = false, features = ["deflate"] }
+chrono = { version = "0.4", features = ["serde"] }
+rfd = "0.15"
+opener = "0.7"
+tauri = { version = "2", features = [] }
+tauri-build = { version = "2", features = [] }
+tauri-plugin-single-instance = "2"
+bollard = "0.18"
+reqwest = { version = "0.12", features = ["json"] }
+sysinfo = "0.33"
+async-trait = "0.1"
+futures-util = "0.3"
+# dev-dependencies
+tokio-tungstenite = "0.24"
+tempfile = "3"
+pretty_assertions = "1"
+tower = { version = "0.5", features = ["util"] }
+http-body-util = "0.1"

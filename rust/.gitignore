@@ -1,6 +1,0 @@
-/target
-*.db
-*.db-shm
-*.db-wal
-/parity/fixtures/
-/parity/tmp/
