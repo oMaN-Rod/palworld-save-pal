@@ -29,12 +29,16 @@ async fn test_router(temp_dir: &tempfile::TempDir) -> axum::Router {
     let game_data =
         Arc::new(psp_core::gamedata::GameData::load(&config.data_dir.join("json")).unwrap());
     let (live_connections, _live_connections_rx) = tokio::sync::watch::channel(0usize);
+    let server_services = Arc::new(psp_server::services::ServerServices::with_docker(Arc::new(
+        psp_server::services::docker::mock::MockDocker::default(),
+    )));
     build_router(Arc::new(AppState {
         config,
         game_data,
         db,
         dialogs: Arc::new(psp_server::desktop_dialogs::NullDialogProvider),
         live_connections,
+        server_services,
     }))
 }
 

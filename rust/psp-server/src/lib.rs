@@ -46,6 +46,10 @@ pub struct AppState {
     /// `tokio::spawn`ed task, decoupled from the HTTP connection future that
     /// graceful shutdown actually waits on).
     pub live_connections: tokio::sync::watch::Sender<usize>,
+    /// Docker + Palworld REST clients used by the server-management handlers
+    /// (Phase 6). Real `BollardDocker` (via `ServerServices::real()`) in
+    /// production; `mock::MockDocker` in tests.
+    pub server_services: Arc<crate::services::ServerServices>,
 }
 
 pub struct ServerHandle {
@@ -118,6 +122,7 @@ pub async fn start_server_with(
         db,
         dialogs,
         live_connections,
+        server_services: Arc::new(crate::services::ServerServices::real()),
     });
 
     let listener = tokio::net::TcpListener::bind((config.host, config.port)).await?;
@@ -188,12 +193,16 @@ pub(crate) mod test_support {
             let db = psp_db::open(&config.db_path).await.unwrap();
             let game_data = Arc::new(GameData::load(&json_dir).unwrap());
             let (live_connections, _live_connections_rx) = tokio::sync::watch::channel(0usize);
+            let server_services = Arc::new(crate::services::ServerServices::with_docker(Arc::new(
+                crate::services::docker::mock::MockDocker::default(),
+            )));
             let app = Arc::new(AppState {
                 config,
                 game_data,
                 db,
                 dialogs: Arc::new(crate::desktop_dialogs::NullDialogProvider),
                 live_connections,
+                server_services,
             });
             let (sender, frames) = tokio::sync::mpsc::unbounded_channel();
             Self {

@@ -83,6 +83,99 @@ pub fn python_str(value: &serde_json::Value) -> String {
     }
 }
 
+/// Bundles the server-management services a running psp-server needs: the
+/// Docker API (real bollard in production, `mock::MockDocker` in tests) and
+/// the Palworld dedicated-server REST client. Held once in `AppState` behind
+/// an `Arc` so handlers can share it across connections.
+pub struct ServerServices {
+    pub docker: std::sync::Arc<dyn docker::DockerApi>,
+    pub palworld_api: palworld_api::PalworldApiClient,
+}
+
+impl ServerServices {
+    /// Production wiring: lazy Docker (connection failures surface per-request,
+    /// like the Python DockerService.get_client), real REST client.
+    pub fn real() -> Self {
+        Self::with_docker(std::sync::Arc::new(LazyDocker::default()))
+    }
+
+    pub fn with_docker(docker: std::sync::Arc<dyn docker::DockerApi>) -> Self {
+        Self {
+            docker,
+            palworld_api: palworld_api::PalworldApiClient::new(),
+        }
+    }
+}
+
+/// Connects to Docker on first use; every method reports `ServiceError::Docker`
+/// when the daemon is unreachable (server startup never fails on missing Docker).
+#[derive(Default)]
+pub struct LazyDocker {
+    inner: tokio::sync::OnceCell<docker::BollardDocker>,
+}
+
+impl LazyDocker {
+    async fn api(&self) -> Result<&docker::BollardDocker, ServiceError> {
+        self.inner
+            .get_or_try_init(|| async { docker::BollardDocker::connect() })
+            .await
+    }
+}
+
+#[async_trait::async_trait]
+impl docker::DockerApi for LazyDocker {
+    async fn ensure_image(&self, image_name: &str) -> Result<(), ServiceError> {
+        self.api().await?.ensure_image(image_name).await
+    }
+
+    async fn create_and_start_container(
+        &self,
+        spec: docker::ContainerSpec,
+    ) -> Result<String, ServiceError> {
+        self.api().await?.create_and_start_container(spec).await
+    }
+
+    async fn start_container(&self, container_name: &str) -> Result<(), ServiceError> {
+        self.api().await?.start_container(container_name).await
+    }
+
+    async fn stop_container(
+        &self,
+        container_name: &str,
+        timeout_seconds: i64,
+    ) -> Result<(), ServiceError> {
+        self.api()
+            .await?
+            .stop_container(container_name, timeout_seconds)
+            .await
+    }
+
+    async fn remove_container_forced(&self, container_name: &str) -> Result<(), ServiceError> {
+        self.api()
+            .await?
+            .remove_container_forced(container_name)
+            .await
+    }
+
+    async fn remove_volume(&self, volume_name: &str) -> Result<(), ServiceError> {
+        self.api().await?.remove_volume(volume_name).await
+    }
+
+    async fn inspect_container(
+        &self,
+        container_name: &str,
+    ) -> Result<Option<serde_json::Value>, ServiceError> {
+        self.api().await?.inspect_container(container_name).await
+    }
+
+    async fn raw_container_stats(
+        &self,
+        container_name: &str,
+    ) -> Result<Option<serde_json::Value>, ServiceError> {
+        self.api().await?.raw_container_stats(container_name).await
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -130,6 +223,31 @@ mod tests {
         assert_eq!(
             serde_json::to_value(ServerProcessStatus::exited()).unwrap(),
             serde_json::json!({"status": "exited", "running": false, "started_at": null, "health": null})
+        );
+    }
+
+    #[test]
+    fn server_services_real_never_touches_docker_at_construction() {
+        // BollardDocker::connect() is deliberately not called until the first
+        // trait method fires — constructing ServerServices::real() must succeed
+        // even with no Docker daemon present on the test machine (mirrors
+        // Python's DockerService, which only connects lazily on first use).
+        let services = ServerServices::real();
+        assert!(std::sync::Arc::strong_count(&services.docker) >= 1);
+    }
+
+    #[tokio::test]
+    async fn server_services_with_docker_delegates_to_injected_api() {
+        let mock = std::sync::Arc::new(docker::mock::MockDocker::default());
+        let services = ServerServices::with_docker(mock.clone());
+        services
+            .docker
+            .ensure_image("omanrod/psp-palworld-server")
+            .await
+            .unwrap();
+        assert_eq!(
+            mock.calls.lock().unwrap().clone(),
+            vec!["ensure_image:omanrod/psp-palworld-server".to_string()]
         );
     }
 }

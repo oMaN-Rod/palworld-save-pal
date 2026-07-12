@@ -1,5 +1,5 @@
 use axum::extract::ws::Message;
-use tokio::sync::mpsc::UnboundedSender;
+use tokio::sync::mpsc::{UnboundedReceiver, UnboundedSender};
 
 use psp_core::progress::ProgressSink;
 
@@ -52,6 +52,12 @@ impl Emitter {
         std::sync::Arc::new(move |progress_text: &str| {
             emitter.emit(MessageType::ProgressMessage, &progress_text);
         })
+    }
+
+    /// Test-only: an Emitter whose frames land in a receiver instead of a socket.
+    pub fn test_channel() -> (Self, UnboundedReceiver<Message>) {
+        let (sender, receiver) = tokio::sync::mpsc::unbounded_channel();
+        (Self::new(sender), receiver)
     }
 }
 
@@ -135,5 +141,26 @@ mod tests {
             value,
             serde_json::json!({"type": "progress_message", "data": "Loading Level.sav..."})
         );
+    }
+}
+
+#[cfg(test)]
+mod phase6_tests {
+    use super::*;
+
+    #[tokio::test]
+    async fn test_channel_captures_emitted_envelopes() {
+        let (emitter, mut receiver) = Emitter::test_channel();
+        emitter.emit(
+            crate::messages::MessageType::DetectWorkshopDir,
+            &serde_json::json!({"workshop_dir": ""}),
+        );
+        let frame = receiver.recv().await.unwrap();
+        let axum::extract::ws::Message::Text(text) = frame else {
+            panic!("expected text frame");
+        };
+        let envelope: serde_json::Value = serde_json::from_str(text.as_str()).unwrap();
+        assert_eq!(envelope["type"], "detect_workshop_dir");
+        assert_eq!(envelope["data"]["workshop_dir"], "");
     }
 }
