@@ -7,8 +7,10 @@
 	import { MessageType } from '$types';
 	import { send } from '$lib/utils/websocketUtils';
 	import { page } from '$app/state';
+	import { goto } from '$app/navigation';
 	import * as m from '$i18n/messages';
 	import { persistedState } from 'svelte-persisted-state';
+	import { getStoredSessionId, clearSessionPersistence } from '$lib/utils/sessionPersistence';
 	import {
 		activeNavId,
 		navItems,
@@ -37,6 +39,9 @@
 			case 'save':
 				appState.writeSave();
 				break;
+			case 'eject':
+				handleEject();
+				break;
 			case 'open-folder':
 				handleOpenFolder();
 				break;
@@ -61,6 +66,16 @@
 				location.reload();
 			}, 500);
 		}
+	}
+
+	async function handleEject(): Promise<void> {
+		const sessionId = getStoredSessionId();
+		if (sessionId) {
+			send(MessageType.EJECT_SESSION, { session_id: sessionId });
+		}
+		appState.resetState();
+		clearSessionPersistence();
+		await goto('/file');
 	}
 
 	async function handleOpenFolder(): Promise<void> {

@@ -4,6 +4,7 @@ import {
 	Bug,
 	ChevronsLeft,
 	ChevronsRight,
+	CircleX,
 	Database,
 	Download,
 	File,
@@ -27,7 +28,7 @@ import { c } from '$lib/utils/commonTranslations';
 
 export type NavSection = 'header' | 'tiles' | 'footer';
 
-export type NavAction = 'toggle-expanded' | 'save' | 'open-folder' | 'settings';
+export type NavAction = 'toggle-expanded' | 'save' | 'eject' | 'open-folder' | 'settings';
 
 export type NavContext = {
 	appState: AppState;
@@ -68,6 +69,14 @@ export const navItems: NavItem[] = [
 		label: () => c.save,
 		action: 'save',
 		visible: (ctx) => Boolean(ctx.appState.saveFile) && ctx.desktop
+	},
+	{
+		id: 'eject',
+		section: 'header',
+		icon: () => CircleX,
+		label: () => m.eject(),
+		action: 'eject',
+		visible: (ctx) => Boolean(ctx.appState.saveFile)
 	},
 
 	// --- tiles ---

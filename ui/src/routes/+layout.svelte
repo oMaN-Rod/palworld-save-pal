@@ -41,6 +41,17 @@
 		}
 	});
 
+	// Best-effort autosave flush on refresh/close; no prompt, fire-and-forget.
+	$effect(() => {
+		function handleBeforeUnload(): void {
+			if (appState.saveFile) {
+				appState.saveState();
+			}
+		}
+		window.addEventListener('beforeunload', handleBeforeUnload);
+		return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+	});
+
 	onMount(async () => {
 		ws.connect({ goto });
 
