@@ -58,6 +58,7 @@ mod tests {
             session: &mut test.session,
             app: &test.app,
             emitter: &test.emitter,
+            attachment: None,
         };
         handle_get_settings(&mut ctx).await.unwrap();
 
@@ -82,6 +83,7 @@ mod tests {
             session: &mut test.session,
             app: &test.app,
             emitter: &test.emitter,
+            attachment: None,
         };
         let update: psp_core::dto::settings::SettingsUpdateDto =
             serde_json::from_value(serde_json::json!({

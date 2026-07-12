@@ -11,11 +11,63 @@ pub mod services;
 pub mod static_files;
 pub mod ws;
 
+use std::collections::{HashMap, VecDeque};
 use std::net::{IpAddr, SocketAddr};
 use std::path::PathBuf;
 use std::sync::Arc;
 
 use psp_core::gamedata::GameData;
+use psp_core::session::Session;
+use uuid::Uuid;
+
+/// A parsed session shared between a connection and the store. The per-session
+/// `tokio::Mutex` may be held across a handler's `.await`s; the store's outer
+/// `std::Mutex` is only ever held briefly.
+pub type SharedSession = Arc<tokio::sync::Mutex<Session>>;
+
+/// Id-keyed store of parsed sessions, so a session survives a WS reconnect
+/// (session-persistence feature). `order` bounds growth: the oldest entry is
+/// evicted past `MAX_STORED_SESSIONS`. Replace-on-load keeps this small
+/// (desktop holds ~1); the cap is only a safety net.
+#[derive(Default)]
+pub struct SessionStore {
+    by_id: HashMap<Uuid, SharedSession>,
+    order: VecDeque<Uuid>,
+}
+
+const MAX_STORED_SESSIONS: usize = 8;
+
+impl SessionStore {
+    /// Inserts `session` under a fresh id, evicting the oldest past the cap.
+    pub fn register(&mut self, session: SharedSession) -> Uuid {
+        let id = Uuid::new_v4();
+        self.by_id.insert(id, session);
+        self.order.push_back(id);
+        while self.order.len() > MAX_STORED_SESSIONS {
+            if let Some(evicted) = self.order.pop_front() {
+                self.by_id.remove(&evicted);
+            }
+        }
+        id
+    }
+
+    pub fn get(&self, id: &Uuid) -> Option<SharedSession> {
+        self.by_id.get(id).cloned()
+    }
+
+    pub fn remove(&mut self, id: &Uuid) {
+        self.by_id.remove(id);
+        self.order.retain(|existing| existing != id);
+    }
+
+    pub fn len(&self) -> usize {
+        self.by_id.len()
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.by_id.is_empty()
+    }
+}
 
 #[derive(Debug, Clone)]
 pub struct ServerConfig {
@@ -50,10 +102,16 @@ pub struct AppState {
     /// (Phase 6). Real `BollardDocker` (via `ServerServices::real()`) in
     /// production; `mock::MockDocker` in tests.
     pub server_services: Arc<crate::services::ServerServices>,
+    /// Parsed sessions keyed by id, so a session survives a WS reconnect.
+    /// Reachable by handlers via `ctx.app` (SP-T2 reattach/eject use it); a
+    /// connection registers its session here on load.
+    pub sessions: std::sync::Mutex<SessionStore>,
 }
 
 pub struct ServerHandle {
     pub addr: SocketAddr,
+    /// The running server's shared state — lets tests inspect `sessions`.
+    pub app: Arc<AppState>,
     /// Subscriber on `AppState::live_connections`, seeded at 0 before any
     /// connection is accepted. Tests can `.borrow()` the current count or
     /// `.changed().await` to observe connection teardown without sleeping.
@@ -123,6 +181,7 @@ pub async fn start_server_with(
         dialogs,
         live_connections,
         server_services: Arc::new(crate::services::ServerServices::real()),
+        sessions: std::sync::Mutex::new(SessionStore::default()),
     });
 
     let listener = tokio::net::TcpListener::bind((config.host, config.port)).await?;
@@ -130,7 +189,7 @@ pub async fn start_server_with(
     tracing::info!(%addr, desktop_mode = config.desktop_mode, "psp-server listening");
 
     let (shutdown_sender, shutdown_receiver) = tokio::sync::oneshot::channel::<()>();
-    let application = router::build_router(state);
+    let application = router::build_router(Arc::clone(&state));
     let serve_task = tokio::spawn(async move {
         axum::serve(listener, application)
             .with_graceful_shutdown(async {
@@ -141,10 +200,50 @@ pub async fn start_server_with(
 
     Ok(ServerHandle {
         addr,
+        app: state,
         live_connections: live_connections_rx,
         shutdown_sender,
         serve_task,
     })
+}
+
+#[cfg(test)]
+mod session_store_tests {
+    use super::{SessionStore, SharedSession, MAX_STORED_SESSIONS};
+    use psp_core::session::Session;
+    use std::sync::Arc;
+
+    fn empty_session() -> SharedSession {
+        Arc::new(tokio::sync::Mutex::new(Session::new()))
+    }
+
+    #[test]
+    fn register_get_remove_round_trips() {
+        let mut store = SessionStore::default();
+        let session = empty_session();
+        let id = store.register(Arc::clone(&session));
+
+        // Findable by id, and it's the same Arc we registered.
+        let found = store.get(&id).expect("registered session is findable");
+        assert!(Arc::ptr_eq(&found, &session));
+        assert_eq!(store.len(), 1);
+
+        store.remove(&id);
+        assert!(store.get(&id).is_none());
+        assert!(store.is_empty());
+    }
+
+    #[test]
+    fn evicts_oldest_past_the_cap() {
+        let mut store = SessionStore::default();
+        let first_id = store.register(empty_session());
+        for _ in 0..MAX_STORED_SESSIONS {
+            store.register(empty_session());
+        }
+        // The very first id fell out once we exceeded the cap.
+        assert_eq!(store.len(), MAX_STORED_SESSIONS);
+        assert!(store.get(&first_id).is_none());
+    }
 }
 
 #[cfg(test)]
@@ -203,6 +302,7 @@ pub(crate) mod test_support {
                 dialogs: Arc::new(crate::desktop_dialogs::NullDialogProvider),
                 live_connections,
                 server_services,
+                sessions: std::sync::Mutex::new(crate::SessionStore::default()),
             });
             let (sender, frames) = tokio::sync::mpsc::unbounded_channel();
             Self {

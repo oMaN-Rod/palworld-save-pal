@@ -56,6 +56,10 @@ struct LoadedSaveFilesData {
     r#type: &'static str,
     size: u64,
     has_gps: bool,
+    /// Feature-only addition (not in the Python parity contract): the id the
+    /// session was registered under, so the frontend can reattach after a
+    /// refresh. Last, so existing key order is unchanged.
+    session_id: String,
 }
 
 /// Shared by select_save, load_zip_file and sync_app_state's save branch:
@@ -342,6 +346,7 @@ pub async fn handle_select_save(
         &progress,
     )?;
 
+    let session_id = ctx.register_current_session();
     let payload = LoadedSaveFilesData {
         level: layout.level_sav.to_string_lossy().into_owned(),
         players: player_discovery_order
@@ -352,6 +357,7 @@ pub async fn handle_select_save(
         r#type: "steam",
         size: session.size,
         has_gps: layout.global_pal_storage_sav.is_some(),
+        session_id: session_id.to_string(),
     };
     ctx.emitter.emit(MessageType::LoadedSaveFiles, &payload);
     emit_summary_messages(&session, ctx.emitter);
@@ -593,6 +599,7 @@ pub async fn handle_load_zip_file(
 
     progress("Zip file uploaded and processed successfully, results coming right up!");
 
+    let session_id = ctx.register_current_session();
     let payload = LoadedSaveFilesData {
         level: layout.save_id,
         players: player_order.iter().map(|uid| uid.to_string()).collect(),
@@ -600,6 +607,7 @@ pub async fn handle_load_zip_file(
         r#type: "steam",
         size: session.size,
         has_gps: gps_file_path.is_some(),
+        session_id: session_id.to_string(),
     };
     ctx.emitter.emit(MessageType::LoadedSaveFiles, &payload);
     emit_summary_messages(&session, ctx.emitter);

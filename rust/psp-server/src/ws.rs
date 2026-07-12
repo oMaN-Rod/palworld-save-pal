@@ -7,9 +7,11 @@ use axum::extract::{Path, State};
 use axum::response::Response;
 use futures::{SinkExt, StreamExt};
 
+use uuid::Uuid;
+
 use psp_core::session::Session;
 
-use crate::dispatcher::{dispatch, HandlerCtx};
+use crate::dispatcher::{dispatch, HandlerCtx, SessionAttachment};
 use crate::emitter::Emitter;
 use crate::envelope::Envelope;
 use crate::messages::MessageType;
@@ -76,7 +78,15 @@ async fn connection_loop(socket: WebSocket, client_id: String, app: Arc<AppState
     });
 
     let emitter = Emitter::new(frame_sender);
-    let mut session = Session::new();
+
+    // The connection owns ONE session `Arc` for its whole life and reuses it
+    // for every message, so per-connection state (a loaded save, gamepass scan
+    // results, a transfer source) persists across messages exactly as before.
+    // A load handler registers this same `Arc` in `AppState::sessions` under a
+    // fresh id (`current_session_id`) so it survives a reconnect (SP-T2).
+    let current_session: Arc<tokio::sync::Mutex<Session>> =
+        Arc::new(tokio::sync::Mutex::new(Session::new()));
+    let mut current_session_id: Option<Uuid> = None;
 
     // ws/manager.py's `while True: await websocket.receive_text()` loop.
     // `incoming_stream.next()` returns `None` on a clean disconnect, `Some(Err(_))`
@@ -87,7 +97,14 @@ async fn connection_loop(socket: WebSocket, client_id: String, app: Arc<AppState
     loop {
         match incoming_stream.next().await {
             Some(Ok(Message::Text(text))) => {
-                process_text_frame(text.as_str(), &mut session, &app, &emitter).await;
+                process_text_frame(
+                    text.as_str(),
+                    &current_session,
+                    &mut current_session_id,
+                    &app,
+                    &emitter,
+                )
+                .await;
             }
             Some(Ok(Message::Close(_))) => break,
             // Ping/pong handled by axum; binary frames are not part of the protocol.
@@ -108,7 +125,8 @@ async fn connection_loop(socket: WebSocket, client_id: String, app: Arc<AppState
 /// ws/manager.py:31-51 process_message, split into two failure stages.
 async fn process_text_frame(
     text: &str,
-    session: &mut Session,
+    current_session: &Arc<tokio::sync::Mutex<Session>>,
+    current_session_id: &mut Option<Uuid>,
     app: &Arc<AppState>,
     emitter: &Emitter,
 ) {
@@ -140,12 +158,19 @@ async fn process_text_frame(
     };
 
     tracing::debug!(message_type = %envelope.message_type, "processing message");
+    // Lock the connection's own session for this message. Held across the
+    // handler's `.await`s (a `tokio::Mutex`), so the map lock never is.
+    let mut session_guard = current_session.lock().await;
     dispatch(
         envelope,
         HandlerCtx {
-            session,
+            session: &mut session_guard,
             app,
             emitter,
+            attachment: Some(SessionAttachment {
+                current_id: current_session_id,
+                arc: current_session,
+            }),
         },
     )
     .await;

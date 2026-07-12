@@ -39,6 +39,7 @@ async fn test_router(temp_dir: &tempfile::TempDir) -> axum::Router {
         dialogs: Arc::new(psp_server::desktop_dialogs::NullDialogProvider),
         live_connections,
         server_services,
+        sessions: std::sync::Mutex::new(psp_server::SessionStore::default()),
     }))
 }
 

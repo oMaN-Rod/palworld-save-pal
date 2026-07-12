@@ -152,6 +152,7 @@ mod tests {
             session: &mut test.session,
             app: &test.app,
             emitter: &test.emitter,
+            attachment: None,
         })
         .await
         .unwrap();
@@ -169,6 +170,7 @@ mod tests {
             session: &mut test.session,
             app: &test.app,
             emitter: &test.emitter,
+            attachment: None,
         })
         .await
         .unwrap();

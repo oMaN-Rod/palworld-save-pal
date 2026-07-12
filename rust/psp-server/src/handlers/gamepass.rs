@@ -343,6 +343,7 @@ pub async fn handle_select_gamepass_save(
     } else {
         session.world_name.clone()
     };
+    let session_id = ctx.register_current_session();
     let loaded_payload = serde_json::json!({
         "level": format!("{}/container.{}", level_dir.display(), level_seq),
         "players": player_order
@@ -353,6 +354,7 @@ pub async fn handle_select_gamepass_save(
         "type": "gamepass",
         "size": session.size,
         "has_gps": false,
+        "session_id": session_id.to_string(),
     });
     ctx.emitter
         .emit(MessageType::LoadedSaveFiles, &loaded_payload);

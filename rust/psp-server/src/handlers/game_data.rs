@@ -424,6 +424,7 @@ mod tests {
                 session: &mut $test.session,
                 app: &$test.app,
                 emitter: &$test.emitter,
+                attachment: None,
             };
             $handler(&mut ctx).await.unwrap();
             $test.next_frame_json()

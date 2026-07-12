@@ -17,6 +17,40 @@ pub struct HandlerCtx<'a> {
     pub session: &'a mut Session,
     pub app: &'a Arc<AppState>,
     pub emitter: &'a Emitter,
+    /// The connection's store attachment: its current session id (settable) and
+    /// the `Arc` backing `session`, so a load handler can register/replace it in
+    /// the store. `None` in unit tests that build a ctx directly and never load.
+    pub attachment: Option<SessionAttachment<'a>>,
+}
+
+/// Links a `HandlerCtx` to the connection's entry in `AppState::sessions`.
+/// SP-T2's reattach/eject also set `current_id` to point a connection at an
+/// existing store entry.
+pub struct SessionAttachment<'a> {
+    pub current_id: &'a mut Option<uuid::Uuid>,
+    pub arc: &'a crate::SharedSession,
+}
+
+impl HandlerCtx<'_> {
+    /// Registers the connection's session in the store under a FRESH id,
+    /// dropping the id this connection previously held (replace-on-load), sets
+    /// the connection's current id, and returns it. Load handlers put the
+    /// returned id in their `loaded_save_files` response. Only the outer std
+    /// map lock is taken, briefly — never across an `.await`.
+    pub fn register_current_session(&mut self) -> uuid::Uuid {
+        let attachment = self
+            .attachment
+            .as_mut()
+            .expect("register_current_session requires a connection attachment");
+        let mut store = self.app.sessions.lock().expect("session store poisoned");
+        if let Some(previous_id) = attachment.current_id.take() {
+            store.remove(&previous_id);
+        }
+        let new_id = store.register(std::sync::Arc::clone(attachment.arc));
+        drop(store);
+        *attachment.current_id = Some(new_id);
+        new_id
+    }
 }
 
 /// Routes one envelope to its handler. Behavior (matches the Python backend, see
@@ -420,6 +454,7 @@ mod tests {
                 session: &mut test.session,
                 app: &test.app,
                 emitter: &test.emitter,
+                attachment: None,
             },
         )
         .await;
@@ -438,6 +473,7 @@ mod tests {
                 session: &mut test.session,
                 app: &test.app,
                 emitter: &test.emitter,
+                attachment: None,
             },
         )
         .await;
@@ -453,6 +489,7 @@ mod tests {
                 session: &mut test.session,
                 app: &test.app,
                 emitter: &test.emitter,
+                attachment: None,
             },
         )
         .await;
@@ -475,6 +512,7 @@ mod tests {
                 session: &mut test.session,
                 app: &test.app,
                 emitter: &test.emitter,
+                attachment: None,
             },
         )
         .await;
@@ -491,6 +529,7 @@ mod tests {
                 session: &mut test.session,
                 app: &test.app,
                 emitter: &test.emitter,
+                attachment: None,
             },
         )
         .await;

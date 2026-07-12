@@ -1088,6 +1088,7 @@ async fn load_server_save_impl(data: ServerIdData, ctx: &mut HandlerCtx<'_>) -> 
         .map_err(|error| error.to_string())?;
 
     let has_gps = layout.global_pal_storage_sav.is_some();
+    let session_id = ctx.register_current_session();
     emitter.emit(
         MessageType::LoadedSaveFiles,
         &serde_json::json!({
@@ -1102,6 +1103,7 @@ async fn load_server_save_impl(data: ServerIdData, ctx: &mut HandlerCtx<'_>) -> 
             "has_gps": has_gps,
             "server_id": record.id,
             "server_name": record.name,
+            "session_id": session_id.to_string(),
         }),
     );
     save_file::emit_summary_messages(&session, emitter);
@@ -1164,6 +1166,7 @@ pub(crate) mod test_env {
                 dialogs: Arc::new(crate::desktop_dialogs::NullDialogProvider),
                 live_connections,
                 server_services: Arc::new(ServerServices::with_docker(docker.clone())),
+                sessions: std::sync::Mutex::new(crate::SessionStore::default()),
             });
             let (emitter, receiver) = crate::emitter::Emitter::test_channel();
             Self {
@@ -1181,6 +1184,7 @@ pub(crate) mod test_env {
                 session: &mut self.session,
                 app: &self.app,
                 emitter: &self.emitter,
+                attachment: None,
             }
         }
 

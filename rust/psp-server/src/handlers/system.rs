@@ -192,6 +192,7 @@ mod tests {
             session: &mut test.session,
             app: &test.app,
             emitter: &test.emitter,
+            attachment: None,
         };
         handle_sync_app_state(&mut ctx).await.unwrap();
         let frame = test.next_frame_json();
@@ -326,6 +327,7 @@ mod tests {
             session: &mut test.session,
             app: &test.app,
             emitter: &test.emitter,
+            attachment: None,
         };
         handle_sync_app_state(&mut ctx).await.unwrap();
 

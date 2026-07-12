@@ -275,6 +275,14 @@ fn mask_ignored_paths(message_type: &str, value: &mut Value) {
     mask_ups_list_frames(message_type, value);
     // get_gps_response's slot-keyed map needs the same per-value treatment.
     mask_gps_response_frame(message_type, value);
+    // `loaded_save_files` gained a feature-only `session_id` (SP-T1); Python's
+    // fixtures never had it, so drop the whole key rather than mask its value
+    // (masking can't reconcile a key that's ABSENT on the expected side).
+    if message_type == "loaded_save_files" {
+        if let Some(data) = value.get_mut("data").and_then(Value::as_object_mut) {
+            data.remove("session_id");
+        }
+    }
 }
 
 /// gamepass corpus (Task P4-14): `save_modded_save`'s gamepass branch emits
