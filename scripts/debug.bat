@@ -1,1 +1,0 @@
-.\PSP.exe --dev
