@@ -67,6 +67,20 @@ fn resolve_asset_dirs(app: &tauri::AppHandle) -> anyhow::Result<AssetDirs> {
     })
 }
 
+/// Chooses the URL the webview loads. The Vite dev server (`dev_url`) is only
+/// correct under `tauri dev`; every `--release` binary must load the embedded
+/// server. `tauri::is_dev()` reports true for any binary NOT produced by
+/// `cargo tauri build` (e.g. a bare `cargo build --release`), so callers gate
+/// `allow_dev_server` on `cfg!(debug_assertions)` too — otherwise a release
+/// binary loads a dev server that isn't running ("localhost refused").
+fn choose_webview_url(
+    dev_url: Option<tauri::Url>,
+    server_url: tauri::Url,
+    allow_dev_server: bool,
+) -> tauri::Url {
+    dev_url.filter(|_| allow_dev_server).unwrap_or(server_url)
+}
+
 fn main() {
     tracing_subscriber::fmt()
         .with_env_filter(
@@ -107,17 +121,15 @@ fn main() {
             let server_url: tauri::Url = format!("http://{}", server_handle.addr).parse()?;
             tracing::info!("embedded server listening on {}", server_handle.addr);
 
-            // Dev: load the Vite dev server so frontend edits hot-reload. It
-            // proxies /api back to the embedded server, and PUBLIC_WS_URL is an
-            // absolute host, so /ws still connects straight to it. Prod: load the
-            // embedded server, which serves the static ui_build/.
-            let webview_url = app
-                .config()
-                .build
-                .dev_url
-                .clone()
-                .filter(|_| tauri::is_dev())
-                .unwrap_or(server_url);
+            // Dev (`tauri dev`): load the Vite dev server so frontend edits
+            // hot-reload; it proxies /api and /ws to the embedded server. Any
+            // release build loads the embedded server, which serves ui_build/.
+            let allow_dev_server = cfg!(debug_assertions) && tauri::is_dev();
+            let webview_url = choose_webview_url(
+                app.config().build.dev_url.clone(),
+                server_url,
+                allow_dev_server,
+            );
             tracing::info!("webview loading {}", webview_url);
 
             app_handle
@@ -153,4 +165,31 @@ fn main() {
                 }
             }
         });
+}
+
+#[cfg(test)]
+mod tests {
+    use super::choose_webview_url;
+
+    fn url(s: &str) -> tauri::Url {
+        s.parse().expect("valid url")
+    }
+
+    #[test]
+    fn dev_server_loaded_only_when_allowed() {
+        let dev = url("http://localhost:5173/");
+        let server = url("http://127.0.0.1:5174/");
+
+        // `tauri dev` (debug + is_dev): load Vite.
+        assert_eq!(
+            choose_webview_url(Some(dev.clone()), server.clone(), true),
+            dev
+        );
+        // Release binary (allow_dev_server false): NEVER the dev URL, even
+        // though tauri.conf.json still carries a dev_url. This is the
+        // "localhost refused" regression guard.
+        assert_eq!(choose_webview_url(Some(dev), server.clone(), false), server);
+        // No dev URL configured: always the embedded server.
+        assert_eq!(choose_webview_url(None, server.clone(), true), server);
+    }
 }
