@@ -163,6 +163,61 @@ async fn reattach_same_id_does_not_deadlock() {
 }
 
 #[tokio::test]
+async fn mutual_reattach_across_connections_does_not_deadlock() {
+    // Two connections, each attached to its own session (X and Y). They then
+    // reattach to EACH OTHER's id at the same time. If a handler held its own
+    // per-session guard while locking the target's (same lock order on both
+    // tasks: own-arc → target-arc), this forms a cycle and deadlocks forever.
+    // The fix locks at most one per-session arc, so both complete.
+    let (_temp_x, level_x) = temp_world1();
+    let (_temp_y, level_y) = temp_world1();
+    let server = common::start_test_server().await;
+
+    let mut socket_x = common::connect(&server).await;
+    let mut socket_y = common::connect(&server).await;
+    let session_x = select_world1(&mut socket_x, &level_x).await;
+    let session_y = select_world1(&mut socket_y, &level_y).await;
+
+    // Concurrently: the X-attached connection reattaches Y, and vice versa.
+    let reattach_x_to_y = async {
+        common::send_json(
+            &mut socket_x,
+            json!({"type": "reattach_session", "data": {"session_id": session_y}}),
+        )
+        .await;
+        recv_until(&mut socket_x, "get_guild_summaries").await
+    };
+    let reattach_y_to_x = async {
+        common::send_json(
+            &mut socket_y,
+            json!({"type": "reattach_session", "data": {"session_id": session_x}}),
+        )
+        .await;
+        recv_until(&mut socket_y, "get_guild_summaries").await
+    };
+
+    // Bound the whole exchange: the old own-arc→target-arc code hangs here.
+    let (frames_x, frames_y) = tokio::time::timeout(std::time::Duration::from_secs(15), async {
+        tokio::join!(reattach_x_to_y, reattach_y_to_x)
+    })
+    .await
+    .expect("mutual reattach deadlocked");
+
+    let loaded_x = frames_x
+        .iter()
+        .find(|frame| frame["type"] == "loaded_save_files")
+        .expect("loaded_save_files on X→Y reattach");
+    assert_eq!(loaded_x["data"]["session_id"], session_y);
+    let loaded_y = frames_y
+        .iter()
+        .find(|frame| frame["type"] == "loaded_save_files")
+        .expect("loaded_save_files on Y→X reattach");
+    assert_eq!(loaded_y["data"]["session_id"], session_x);
+
+    server.handle.shutdown().await;
+}
+
+#[tokio::test]
 async fn eject_removes_from_store_and_clears_connection() {
     let (_temp_root, level_sav_path) = temp_world1();
     let server = common::start_test_server().await;

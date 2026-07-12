@@ -1,6 +1,13 @@
 //! reattach_session / eject_session — session-persistence lifecycle (SP-T2).
 //! Feature additions beyond the Python parity set: a connection can re-attach
 //! to a stored session by id after a reconnect, or eject it.
+//!
+//! Concurrency invariant: neither handler ever holds more than ONE per-session
+//! `tokio::Mutex` guard at a time. `ws.rs::process_text_frame` deliberately does
+//! NOT pre-lock the connection's current session for these two message types, so
+//! the handlers below are free to lock exactly the single arc they need. Holding
+//! two per-session guards on one task would let two connections that reattach to
+//! each other's ids form a lock cycle and deadlock permanently.
 
 use uuid::Uuid;
 
@@ -22,9 +29,16 @@ pub struct EjectSessionData {
 }
 
 /// Re-attach the connection to a stored session by id. Absent (or unparseable)
-/// id → `session_not_found` (data: the id), leaving the current attachment
-/// untouched. Present → emit the load overview and, for a DIFFERENT id, swap
-/// the connection's arc + id to the store's.
+/// id / unknown id → `session_not_found` (data: the id), leaving the current
+/// attachment untouched. Present → emit the load overview and point the
+/// connection's arc slot + id at the store's session.
+///
+/// Locks exactly ONE per-session mutex: the TARGET arc. When the requested id is
+/// the one already attached, the target arc IS the connection's current arc, but
+/// because `process_text_frame` did not pre-lock it for this message, locking it
+/// here is still a single, safe lock — and the swap below is then a harmless
+/// self-reassign. We never hold the connection's current guard while taking the
+/// target's, so no cross-connection reattach cycle can deadlock.
 pub async fn handle_reattach_session(
     data: ReattachSessionData,
     ctx: &mut HandlerCtx<'_>,
@@ -46,22 +60,8 @@ pub async fn handle_reattach_session(
         return Ok(());
     };
 
-    let attachment = ctx
-        .attachment
-        .as_mut()
-        .expect("reattach_session requires a connection attachment");
-
-    // Deadlock guard: if we're already on this id, `ctx.session` IS this arc's
-    // held guard — re-locking the same mutex would hang. Read from it directly
-    // and skip the swap (already attached).
-    if *attachment.current_id == Some(requested_id) {
-        if let Some(save) = ctx.session.save.as_ref() {
-            emit_reattach_overview(save, requested_id, ctx.emitter);
-        }
-        return Ok(());
-    }
-
-    // Different id → a different mutex, safe to lock while holding ctx.session.
+    // Lock the single target arc (no other per-session guard is held), read its
+    // overview, then drop the guard before swapping.
     {
         let target_guard = target_arc.lock().await;
         if let Some(save) = target_guard.save.as_ref() {
@@ -69,20 +69,27 @@ pub async fn handle_reattach_session(
         }
     }
 
-    // Swap the connection's own arc slot + id to the store's.
-    let attachment = ctx.attachment.as_mut().unwrap();
+    // Point the connection's own arc slot + id at the store's session.
+    let attachment = ctx
+        .attachment
+        .as_mut()
+        .expect("reattach_session requires a connection attachment");
     *attachment.arc = target_arc;
     *attachment.current_id = Some(requested_id);
     Ok(())
 }
 
-/// Remove the session from the store and clear the connection back to an empty
-/// session, then confirm with `eject_session` (data: the id).
+/// Remove the session from the store, then confirm with `eject_session`
+/// (data: the id). Only resets THIS connection (to an empty session) when it was
+/// the one attached to the ejected id — ejecting some OTHER id must not wipe the
+/// client's own, possibly-unsaved, session. Resets by swapping the arc slot to a
+/// fresh empty session, so it holds no per-session guard.
 pub async fn handle_eject_session(
     data: EjectSessionData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    if let Ok(requested_id) = Uuid::parse_str(&data.session_id) {
+    let requested_id = Uuid::parse_str(&data.session_id).ok();
+    if let Some(requested_id) = requested_id {
         ctx.app
             .sessions
             .lock()
@@ -90,10 +97,12 @@ pub async fn handle_eject_session(
             .remove(&requested_id);
     }
 
-    // Reset every loaded field the connection holds (save/source/gamepass/...).
-    *ctx.session = Session::new();
+    // Reset the connection only if it is currently attached to the ejected id.
     if let Some(attachment) = ctx.attachment.as_mut() {
-        *attachment.current_id = None;
+        if requested_id.is_some() && requested_id == *attachment.current_id {
+            *attachment.arc = std::sync::Arc::new(tokio::sync::Mutex::new(Session::new()));
+            *attachment.current_id = None;
+        }
     }
 
     ctx.emitter

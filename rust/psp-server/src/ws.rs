@@ -158,24 +158,54 @@ async fn process_text_frame(
     };
 
     tracing::debug!(message_type = %envelope.message_type, "processing message");
-    // Lock a CLONE of the connection's current arc, not the slot itself, so the
-    // slot stays mutably free for `reattach_session` to swap. The guard is held
-    // across the handler's `.await`s (a `tokio::Mutex`), so the map lock never is.
-    let session_arc = Arc::clone(current_session);
-    let mut session_guard = session_arc.lock().await;
-    dispatch(
-        envelope,
-        HandlerCtx {
-            session: &mut session_guard,
-            app,
-            emitter,
-            attachment: Some(SessionAttachment {
-                current_id: current_session_id,
-                arc: current_session,
-            }),
-        },
-    )
-    .await;
+
+    // reattach_session / eject_session must NOT run under the connection's own
+    // per-session guard: they lock a DIFFERENT arc (the target), and holding two
+    // per-session guards on one task lets two mutually-reattaching connections
+    // deadlock. Hand them a scratch session and let the handler lock at most the
+    // single arc it needs via `attachment.arc`.
+    let holds_own_session_lock = !matches!(
+        MessageType::from_wire(&envelope.message_type),
+        Some(MessageType::ReattachSession | MessageType::EjectSession)
+    );
+
+    if holds_own_session_lock {
+        // Lock a CLONE of the connection's current arc, not the slot itself, so
+        // the slot stays mutably free for a reattach swap. The guard is held
+        // across the handler's `.await`s (a `tokio::Mutex`), so the map lock
+        // never is.
+        let session_arc = Arc::clone(current_session);
+        let mut session_guard = session_arc.lock().await;
+        dispatch(
+            envelope,
+            HandlerCtx {
+                session: &mut session_guard,
+                app,
+                emitter,
+                attachment: Some(SessionAttachment {
+                    current_id: current_session_id,
+                    arc: current_session,
+                }),
+            },
+        )
+        .await;
+    } else {
+        // No pre-held per-session guard: reattach/eject operate on `attachment`.
+        let mut scratch_session = Session::new();
+        dispatch(
+            envelope,
+            HandlerCtx {
+                session: &mut scratch_session,
+                app,
+                emitter,
+                attachment: Some(SessionAttachment {
+                    current_id: current_session_id,
+                    arc: current_session,
+                }),
+            },
+        )
+        .await;
+    }
 }
 
 #[cfg(test)]
