@@ -11,7 +11,9 @@ use crate::dispatcher::HandlerCtx;
 use crate::emitter::Emitter;
 use crate::handler_error::HandlerError;
 use crate::messages::MessageType;
-use crate::services::{docker, native_config, native_mods, native_process, ServerProcessStatus};
+use crate::services::{
+    docker, docker_mods, native_config, native_mods, native_process, ServerProcessStatus,
+};
 use crate::AppState;
 
 #[derive(Debug, serde::Deserialize)]
@@ -755,6 +757,214 @@ pub async fn handle_stop_server(
     Ok(())
 }
 
+fn default_api_method() -> String {
+    "GET".to_string()
+}
+fn default_mod_type() -> String {
+    "ue4ss".to_string()
+}
+
+/// messages.py ServerApiCallMessage.data — field names and defaults verbatim.
+#[derive(Debug, serde::Deserialize)]
+pub struct ServerApiCallData {
+    pub server_id: i64,
+    pub endpoint: String,
+    #[serde(default = "default_api_method")]
+    pub method: String,
+    #[serde(default)]
+    pub payload: Option<Value>,
+}
+
+#[derive(Debug, serde::Deserialize)]
+pub struct ToggleServerModData {
+    pub server_id: i64,
+    pub mod_name: String,
+    pub enabled: bool,
+}
+
+#[derive(Debug, serde::Deserialize)]
+pub struct InstallServerModData {
+    pub server_id: i64,
+    pub mod_name: String,
+    /// base64-encoded zip
+    pub mod_data: String,
+    #[serde(default = "default_mod_type")]
+    pub mod_type: String,
+}
+
+/// server_api_call_handler parity: proxies to the Palworld dedicated-server
+/// REST API at 127.0.0.1:{rest_api_port} using the server's admin_password.
+pub async fn handle_server_api_call(
+    data: ServerApiCallData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let emitter = ctx.emitter;
+    let record = match psp_db::servers::get_server(&ctx.app.db, data.server_id).await {
+        Ok(Some(record)) => record,
+        Ok(None) => {
+            emit_business_error(emitter, "Server not found".to_string());
+            return Ok(());
+        }
+        Err(error) => {
+            emit_business_error(emitter, format!("API call failed: {error}"));
+            return Ok(());
+        }
+    };
+    match ctx
+        .app
+        .server_services
+        .palworld_api
+        .rest_api_call(
+            "127.0.0.1",
+            record.rest_api_port as u16,
+            &record.admin_password,
+            &data.endpoint,
+            &data.method,
+            data.payload.as_ref(),
+        )
+        .await
+    {
+        Ok(result) => emitter.emit(
+            MessageType::ServerApiResponse,
+            &serde_json::json!({
+                "server_id": record.id,
+                "endpoint": data.endpoint,
+                "result": result
+            }),
+        ),
+        Err(error) => emit_business_error(emitter, format!("API call failed: {error}")),
+    }
+    Ok(())
+}
+
+/// list_server_mods_handler parity: native servers use the PalModSettings.ini
+/// workshop scan; docker servers merge ue4ss (mods.txt), logic (.pak), and
+/// native (.dll) mod listings.
+pub async fn handle_list_server_mods(
+    data: ServerIdData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let emitter = ctx.emitter;
+    let record = match psp_db::servers::get_server(&ctx.app.db, data.server_id).await {
+        Ok(Some(record)) => record,
+        Ok(None) => {
+            emit_business_error(emitter, "Server not found".to_string());
+            return Ok(());
+        }
+        Err(error) => {
+            emit_business_error(emitter, format!("Failed to list mods: {error}"));
+            return Ok(());
+        }
+    };
+    let mods = if record.server_type == "native" {
+        native_mods::list_native_server_mods(&record)
+    } else {
+        let mut mods = docker_mods::list_ue4ss_mods(&record.mods_path);
+        if let Ok(entries) = std::fs::read_dir(&record.logicmods_path) {
+            for entry in entries.flatten() {
+                let name = entry.file_name().to_string_lossy().to_string();
+                if name.ends_with(".pak") {
+                    mods.push(serde_json::json!({
+                        "mod_name": name,
+                        "mod_type": "logic",
+                        "enabled": true
+                    }));
+                }
+            }
+        }
+        mods.extend(docker_mods::list_native_dll_mods(&record.nativemods_path));
+        mods
+    };
+    emitter.emit(
+        MessageType::ListServerMods,
+        &serde_json::json!({ "server_id": record.id, "mods": mods }),
+    );
+    Ok(())
+}
+
+/// toggle_server_mod_handler parity.
+pub async fn handle_toggle_server_mod(
+    data: ToggleServerModData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let emitter = ctx.emitter;
+    let record = match psp_db::servers::get_server(&ctx.app.db, data.server_id).await {
+        Ok(Some(record)) => record,
+        Ok(None) => {
+            emit_business_error(emitter, "Server not found".to_string());
+            return Ok(());
+        }
+        Err(error) => {
+            emit_business_error(emitter, format!("Failed to toggle mod: {error}"));
+            return Ok(());
+        }
+    };
+    let toggle_result = if record.server_type == "native" {
+        native_mods::toggle_native_mod(&record.install_path, &data.mod_name, data.enabled)
+    } else {
+        docker_mods::set_mod_enabled(&record.mods_path, &data.mod_name, data.enabled)
+    };
+    if let Err(error) = toggle_result {
+        emit_business_error(emitter, format!("Failed to toggle mod: {error}"));
+        return Ok(());
+    }
+    emitter.emit(
+        MessageType::ToggleServerMod,
+        &serde_json::json!({
+            "server_id": record.id,
+            "mod_name": data.mod_name,
+            "enabled": data.enabled
+        }),
+    );
+    Ok(())
+}
+
+/// install_server_mod_handler parity: native servers install via the
+/// Steam-workshop-style extraction; docker servers dispatch on mod_type
+/// (native DLL vs ue4ss/logic zip).
+pub async fn handle_install_server_mod(
+    data: InstallServerModData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let emitter = ctx.emitter;
+    let record = match psp_db::servers::get_server(&ctx.app.db, data.server_id).await {
+        Ok(Some(record)) => record,
+        Ok(None) => {
+            emit_business_error(emitter, "Server not found".to_string());
+            return Ok(());
+        }
+        Err(error) => {
+            emit_business_error(emitter, format!("Failed to install mod: {error}"));
+            return Ok(());
+        }
+    };
+    let success = if record.server_type == "native" {
+        native_mods::install_native_workshop_mod(
+            &record.install_path,
+            &data.mod_name,
+            &data.mod_data,
+        )
+    } else if data.mod_type == "native" {
+        docker_mods::install_native_dll_mod(&record.nativemods_path, &data.mod_data)
+    } else {
+        let target_path = if data.mod_type == "ue4ss" {
+            &record.mods_path
+        } else {
+            &record.logicmods_path
+        };
+        docker_mods::install_zip_mod(target_path, &data.mod_name, &data.mod_data)
+    };
+    emitter.emit(
+        MessageType::InstallServerMod,
+        &serde_json::json!({
+            "server_id": record.id,
+            "mod_name": data.mod_name,
+            "success": success
+        }),
+    );
+    Ok(())
+}
+
 #[cfg(test)]
 pub(crate) mod test_env {
     use std::sync::Arc;
@@ -1259,5 +1469,203 @@ mod tests {
         );
         assert_eq!(messages[3]["data"]["success"], true);
         assert_eq!(messages[3]["data"]["status"]["running"], false);
+    }
+
+    async fn spawn_players_stub() -> u16 {
+        use axum::routing::get;
+        let router = axum::Router::new().route(
+            "/v1/api/players",
+            get(|| async { axum::Json(serde_json::json!({"players": [{"name": "one"}]})) }),
+        );
+        let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
+        let port = listener.local_addr().unwrap().port();
+        tokio::spawn(async move { axum::serve(listener, router).await.unwrap() });
+        port
+    }
+
+    #[tokio::test]
+    async fn server_api_call_proxies_and_emits_server_api_response() {
+        let mut env = TestEnv::new().await;
+        let stub_port = spawn_players_stub().await;
+        let mut new_server = docker_new_server("api");
+        new_server.rest_api_port = stub_port as i64;
+        let record = psp_db::servers::create_server(&env.app.db, new_server)
+            .await
+            .unwrap();
+        let mut ctx = env.ctx();
+        handle_server_api_call(
+            ServerApiCallData {
+                server_id: record.id,
+                endpoint: "players".to_string(),
+                method: "GET".to_string(),
+                payload: None,
+            },
+            &mut ctx,
+        )
+        .await
+        .unwrap();
+        let messages = env.drain();
+        assert_eq!(messages[0]["type"], "server_api_response");
+        assert_eq!(messages[0]["data"]["server_id"], record.id);
+        assert_eq!(messages[0]["data"]["endpoint"], "players");
+        assert_eq!(messages[0]["data"]["result"]["status_code"], 200);
+        assert_eq!(
+            messages[0]["data"]["result"]["data"]["players"]
+                .as_array()
+                .unwrap()
+                .len(),
+            1
+        );
+    }
+
+    #[tokio::test]
+    async fn server_api_call_failure_emits_api_call_failed() {
+        let mut env = TestEnv::new().await;
+        let mut new_server = docker_new_server("dead-api");
+        new_server.rest_api_port = 1; // nothing listens here
+        let record = psp_db::servers::create_server(&env.app.db, new_server)
+            .await
+            .unwrap();
+        let mut ctx = env.ctx();
+        handle_server_api_call(
+            ServerApiCallData {
+                server_id: record.id,
+                endpoint: "info".to_string(),
+                method: "GET".to_string(),
+                payload: None,
+            },
+            &mut ctx,
+        )
+        .await
+        .unwrap();
+        let messages = env.drain();
+        assert_eq!(messages[0]["type"], "error");
+        assert!(messages[0]["data"]["message"]
+            .as_str()
+            .unwrap()
+            .starts_with("API call failed: "));
+    }
+
+    #[tokio::test]
+    async fn list_server_mods_for_docker_merges_ue4ss_logic_and_native() {
+        let mut env = TestEnv::new().await;
+        let scratch = env._scratch.path().to_path_buf();
+        let mods_dir = scratch.join("mods");
+        let logic_dir = scratch.join("logicmods");
+        let native_dir = scratch.join("nativemods");
+        std::fs::create_dir_all(mods_dir.join("LuaMod")).unwrap();
+        std::fs::write(mods_dir.join("mods.txt"), "LuaMod : 1\n").unwrap();
+        std::fs::create_dir_all(&logic_dir).unwrap();
+        std::fs::write(logic_dir.join("big.pak"), b"pak").unwrap();
+        std::fs::create_dir_all(&native_dir).unwrap();
+        std::fs::write(native_dir.join("inject.dll"), b"MZ").unwrap();
+        let mut new_server = docker_new_server("modded");
+        new_server.mods_path = mods_dir.to_string_lossy().to_string();
+        new_server.logicmods_path = logic_dir.to_string_lossy().to_string();
+        new_server.nativemods_path = native_dir.to_string_lossy().to_string();
+        let record = psp_db::servers::create_server(&env.app.db, new_server)
+            .await
+            .unwrap();
+        let mut ctx = env.ctx();
+        handle_list_server_mods(
+            ServerIdData {
+                server_id: record.id,
+            },
+            &mut ctx,
+        )
+        .await
+        .unwrap();
+        let messages = env.drain();
+        assert_eq!(messages[0]["type"], "list_server_mods");
+        let mods = messages[0]["data"]["mods"].as_array().unwrap();
+        assert_eq!(
+            mods,
+            &vec![
+                serde_json::json!({"mod_name": "LuaMod", "mod_type": "ue4ss", "enabled": true}),
+                serde_json::json!({"mod_name": "big.pak", "mod_type": "logic", "enabled": true}),
+                serde_json::json!({"mod_name": "inject.dll", "mod_type": "native", "enabled": true}),
+            ]
+        );
+    }
+
+    #[tokio::test]
+    async fn toggle_server_mod_updates_mods_txt_and_echoes() {
+        let mut env = TestEnv::new().await;
+        let mods_dir = env._scratch.path().join("mods");
+        std::fs::create_dir_all(&mods_dir).unwrap();
+        let mut new_server = docker_new_server("toggler");
+        new_server.mods_path = mods_dir.to_string_lossy().to_string();
+        let record = psp_db::servers::create_server(&env.app.db, new_server)
+            .await
+            .unwrap();
+        let mut ctx = env.ctx();
+        handle_toggle_server_mod(
+            ToggleServerModData {
+                server_id: record.id,
+                mod_name: "LuaMod".to_string(),
+                enabled: true,
+            },
+            &mut ctx,
+        )
+        .await
+        .unwrap();
+        let messages = env.drain();
+        assert_eq!(messages[0]["type"], "toggle_server_mod");
+        assert_eq!(
+            messages[0]["data"],
+            serde_json::json!({"server_id": record.id, "mod_name": "LuaMod", "enabled": true})
+        );
+        let mods_txt = std::fs::read_to_string(mods_dir.join("mods.txt")).unwrap();
+        assert_eq!(mods_txt, "LuaMod : 1\n");
+    }
+
+    #[tokio::test]
+    async fn install_server_mod_ue4ss_extracts_and_reports_success() {
+        let mut env = TestEnv::new().await;
+        let mods_dir = env._scratch.path().join("mods");
+        std::fs::create_dir_all(&mods_dir).unwrap();
+        let mut new_server = docker_new_server("installer");
+        new_server.mods_path = mods_dir.to_string_lossy().to_string();
+        let record = psp_db::servers::create_server(&env.app.db, new_server)
+            .await
+            .unwrap();
+        let zip_b64 = crate::services::docker_mods::zip_fixture::base64_zip(&[(
+            "scripts/main.lua",
+            "print('hi')",
+        )]);
+        let mut ctx = env.ctx();
+        handle_install_server_mod(
+            InstallServerModData {
+                server_id: record.id,
+                mod_name: "LuaMod".to_string(),
+                mod_data: zip_b64,
+                mod_type: "ue4ss".to_string(),
+            },
+            &mut ctx,
+        )
+        .await
+        .unwrap();
+        let messages = env.drain();
+        assert_eq!(messages[0]["type"], "install_server_mod");
+        assert_eq!(
+            messages[0]["data"],
+            serde_json::json!({"server_id": record.id, "mod_name": "LuaMod", "success": true})
+        );
+        assert!(mods_dir
+            .join("LuaMod")
+            .join("scripts")
+            .join("main.lua")
+            .exists());
+    }
+
+    #[tokio::test]
+    async fn install_server_mod_default_mod_type_is_ue4ss() {
+        let data: InstallServerModData = serde_json::from_value(serde_json::json!({
+            "server_id": 1,
+            "mod_name": "X",
+            "mod_data": "AAAA"
+        }))
+        .unwrap();
+        assert_eq!(data.mod_type, "ue4ss");
     }
 }

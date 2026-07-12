@@ -350,6 +350,19 @@ async fn route(
         MessageType::StopServer => {
             handlers::servers::handle_stop_server(serde_json::from_value(data)?, ctx).await
         }
+        // Phase 6 (Task 13): server API proxy + mod management.
+        MessageType::ServerApiCall => {
+            handlers::servers::handle_server_api_call(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::ListServerMods => {
+            handlers::servers::handle_list_server_mods(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::ToggleServerMod => {
+            handlers::servers::handle_toggle_server_mod(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::InstallServerMod => {
+            handlers::servers::handle_install_server_mod(serde_json::from_value(data)?, ctx).await
+        }
         // Remaining arms are added by Phases 1-6.
         other => {
             tracing::warn!(
