@@ -1,4 +1,3 @@
-import copy
 import os
 from typing import TYPE_CHECKING, Any, Dict, Optional
 from uuid import UUID
@@ -107,9 +106,8 @@ class SerializationMixin(_Base):
     def sav(self, gvas_file: GvasFile = None) -> bytes:
         logger.info("Converting %s to SAV", self.level_sav_path)
         target_gvas = gvas_file if gvas_file else self._gvas_file
-        gvas = copy.deepcopy(target_gvas)
         with gc_paused():
-            raw = gvas.write(CUSTOM_PROPERTIES)
+            raw = target_gvas.write(CUSTOM_PROPERTIES)
         return compress_gvas_to_sav(raw, 0x31)
 
     def player_savs(self) -> Dict[UUID, bytes]:
@@ -150,9 +148,8 @@ class SerializationMixin(_Base):
         if not self._gps_gvas_file:
             return None
         logger.info("Converting GlobalPalStorage to SAV")
-        gvas = copy.deepcopy(self._gps_gvas_file)
         with gc_paused():
-            raw = gvas.write(CUSTOM_PROPERTIES)
+            raw = self._gps_gvas_file.write(CUSTOM_PROPERTIES)
         return compress_gvas_to_sav(raw, 0x31)
 
     def to_json_file(
@@ -184,9 +181,8 @@ class SerializationMixin(_Base):
         logger.info(
             "Converting %s to SAV, saving to %s", self.level_sav_path, output_path
         )
-        gvas = copy.deepcopy(self._gvas_file)
         with gc_paused():
-            raw = gvas.write(CUSTOM_PROPERTIES)
+            raw = self._gvas_file.write(CUSTOM_PROPERTIES)
         sav_file = compress_gvas_to_sav(raw, 0x31)
         atomic_write(output_path, sav_file)
 
@@ -203,9 +199,8 @@ class SerializationMixin(_Base):
         if not self._gps_gvas_file:
             raise ValueError("No GPS GvasFile has been loaded.")
         logger.info("Converting GPS save file to SAV, saving to %s", output_path)
-        gvas = copy.deepcopy(self._gps_gvas_file)
         with gc_paused():
-            raw = gvas.write(CUSTOM_PROPERTIES)
+            raw = self._gps_gvas_file.write(CUSTOM_PROPERTIES)
         sav_file = compress_gvas_to_sav(raw, 0x31)
         atomic_write(output_path, sav_file)
 

@@ -71,17 +71,16 @@ def skip_encode(writer: FArchiveWriter, property_type: str, properties: dict) ->
         else:
             # Never be run to here
             return writer.property_inner(writer, property_type, properties)
+    # `custom_type`/`skip_type` are deliberately left in place: SaveManager
+    # reuses cached GvasFile objects across saves, so consuming them here would
+    # make every write after the first take the wrong branch.
     if property_type == "ArrayProperty":
-        del properties["custom_type"]
-        del properties["skip_type"]
         writer.fstring(properties["array_type"])
         writer.optional_guid(properties.get("id", None))
         data = _ensure_bytes(properties["value"])
         writer.write(data)
         return len(data)
     elif property_type == "MapProperty":
-        del properties["custom_type"]
-        del properties["skip_type"]
         writer.fstring(properties["key_type"])
         writer.fstring(properties["value_type"])
         writer.optional_guid(properties.get("id", None))
@@ -89,8 +88,6 @@ def skip_encode(writer: FArchiveWriter, property_type: str, properties: dict) ->
         writer.write(data)
         return len(data)
     elif property_type == "StructProperty":
-        del properties["custom_type"]
-        del properties["skip_type"]
         writer.fstring(properties["struct_type"])
         writer.guid(properties["struct_id"])
         writer.optional_guid(properties.get("id", None))
