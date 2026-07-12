@@ -19,17 +19,20 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - variant: win_standalone
-            asset: PalworldSavePal-{tag}-windows-standalone.zip
+          # NSIS installer -> the "standalone" Nexus group (2308165)
+          - variant: win_nsis
+            asset: PalworldSavePal-{tag}-windows-setup.exe
             group_id: "2308165"
-          - variant: win_installer
-            asset: PalworldSavePal-{tag}-windows-installer.msi
+          # MSI installer -> the "installer" Nexus group (2308168)
+          - variant: win_msi
+            asset: PalworldSavePal-{tag}-windows.msi
             group_id: "2308168"
           - variant: macos
-            asset: PalworldSavePal-{tag}-macos-installer.dmg
+            asset: PalworldSavePal-{tag}-macos.dmg
             group_id: "2308174"
-          - variant: linux_standalone
-            asset: PalworldSavePal-{tag}-linux-standalone.zip
+          # Debian package -> the "linux" Nexus group (2308171)
+          - variant: linux_deb
+            asset: PalworldSavePal-{tag}-linux.deb
             group_id: "2308171"
     steps:
       - name: Resolve tag and version

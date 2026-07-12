@@ -1,10 +1,19 @@
 name: Build and Release
 
+# Builds the Rust/Tauri desktop bundles for Windows, macOS, and Linux and
+# creates a (draft) GitHub Release. Publishing the draft fires nexus-upload.yml
+# and discord.yml. Release assets are named canonically so nexus-upload.yml can
+# pattern-match them:
+#   PalworldSavePal-<tag>-windows.msi         (MSI)
+#   PalworldSavePal-<tag>-windows-setup.exe   (NSIS installer)
+#   PalworldSavePal-<tag>-macos.dmg           (DMG)
+#   PalworldSavePal-<tag>-linux.deb           (Debian package)
+
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Version number for the release (e.g., v1.0.0)"
+        description: "Version tag for the release (e.g. v1.0.0)"
         required: true
       release_name:
         description: "Name of the release"
@@ -25,192 +34,178 @@ jobs:
   build-windows:
     runs-on: windows-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Checkout palworld-save-pal
+        uses: actions/checkout@v4
         with:
-          python-version: "3.12"
+          path: palworld-save-pal
 
-      - name: Install dependencies using uv
-        run: |
-          pip install uv
-          uv sync
+      # The Rust workspace consumes uesave as a path dependency resolving to a
+      # sibling checkout (../uesave-rs/uesave relative to the repo root).
+      - name: Checkout uesave-rs (path dependency)
+        uses: actions/checkout@v4
+        with:
+          repository: oMaN-Rod/uesave-rs
+          ref: palworld-v1
+          path: uesave-rs
+          token: ${{ secrets.UESAVE_RS_TOKEN || github.token }}
 
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
 
-      - name: Create ui/.env file
-        run: |
-          echo "PUBLIC_WS_URL=127.0.0.1:5174/ws`nPUBLIC_DESKTOP_MODE=true" > ui/.env
+      - name: Build desktop UI
+        working-directory: palworld-save-pal
+        shell: bash
+        run: bash scripts/build-ui-desktop.sh
 
-      - name: Install and build the Svelte frontend
-        run: |
-          cd ui
-          bun install
-          bun run build
-          cd ..
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
 
-      - name: Build Windows ZIP and MSI
-        run: |
-          uv run -- python setup.py build
-          uv run -- python setup.py bdist_msi
+      - name: Cache Rust build
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: palworld-save-pal
 
-      - name: Prepare dist directory
-        run: |
-          $version = "${{ github.event.inputs.version }}"
-          $distDir = "dist/psp-windows-$version"
-          if (Test-Path $distDir) { Remove-Item -Path $distDir -Recurse -Force }
-          New-Item -Path $distDir -ItemType Directory | Out-Null
-          Copy-Item -Path "build/exe.win-amd64-*\*" -Destination $distDir -Recurse -Force
-          Write-Host "Copied build files to $distDir"
+      - name: Install Tauri CLI
+        run: cargo install tauri-cli --version "^2" --locked
+
+      - name: Build Tauri bundles
+        working-directory: palworld-save-pal/psp-desktop
+        run: cargo tauri build --bundles msi,nsis
+
+      - name: Collect and rename installers
         shell: pwsh
-
-      - name: Create ZIP archive
+        working-directory: palworld-save-pal
         run: |
-          $version = "${{ github.event.inputs.version }}"
-          $zipPath = "dist/PalworldSavePal-$version-windows-standalone.zip"
-          Compress-Archive -Path "dist/psp-windows-$version\*" -DestinationPath $zipPath -Force
-          Write-Host "Created ZIP archive at $zipPath"
-        shell: pwsh
+          $tag = "${{ github.event.inputs.version }}"
+          New-Item -ItemType Directory -Force dist | Out-Null
+          $msi = Get-ChildItem target/release/bundle/msi/*.msi | Select-Object -First 1
+          Copy-Item $msi.FullName "dist/PalworldSavePal-$tag-windows.msi"
+          $exe = Get-ChildItem target/release/bundle/nsis/*-setup.exe | Select-Object -First 1
+          Copy-Item $exe.FullName "dist/PalworldSavePal-$tag-windows-setup.exe"
 
-      - name: Rename MSI
-        run: |
-          $version = "${{ github.event.inputs.version }}"
-          $msiPath = "dist/PalworldSavePal-$version-windows-installer.msi"
-          Move-Item -Path "dist/*.msi" -Destination $msiPath -Force
-          Write-Host "Renamed MSI to $msiPath"
-        shell: pwsh
-
-      - name: Upload Windows ZIP artifact
+      - name: Upload Windows artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: windows-zip
-          path: dist/*.zip
-
-      - name: Upload Windows MSI artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: windows-msi
-          path: dist/*.msi
+          name: windows
+          path: palworld-save-pal/dist/*
+          if-no-files-found: error
 
   build-macos:
     runs-on: macos-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Checkout palworld-save-pal
+        uses: actions/checkout@v4
         with:
-          python-version: "3.12"
+          path: palworld-save-pal
 
-      - name: Install dependencies using uv
-        run: |
-          pip install uv
-          export CXXFLAGS="-std=c++11"
-          uv sync
+      - name: Checkout uesave-rs (path dependency)
+        uses: actions/checkout@v4
+        with:
+          repository: oMaN-Rod/uesave-rs
+          ref: palworld-v1
+          path: uesave-rs
+          token: ${{ secrets.UESAVE_RS_TOKEN || github.token }}
 
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
 
-      - name: Create ui/.env file
-        run: |
-          printf "PUBLIC_WS_URL=127.0.0.1:5174/ws\nPUBLIC_DESKTOP_MODE=true" > ui/.env
+      - name: Build desktop UI
+        working-directory: palworld-save-pal
+        shell: bash
+        run: bash scripts/build-ui-desktop.sh
 
-      - name: Install and build the Svelte frontend
-        run: |
-          cd ui
-          bun install
-          bun run build
-          cd ..
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
 
-      - name: Build macOS DMG
-        run: |
-          uv run -- python setup.py bdist_dmg
+      - name: Cache Rust build
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: palworld-save-pal
 
-      - name: Rename macOS DMG
+      - name: Install Tauri CLI
+        run: cargo install tauri-cli --version "^2" --locked
+
+      - name: Build Tauri bundles
+        working-directory: palworld-save-pal/psp-desktop
+        run: cargo tauri build --bundles dmg
+
+      - name: Collect and rename installer
+        working-directory: palworld-save-pal
         run: |
-          version="${{ github.event.inputs.version }}"
-          dmg_path="dist/PalworldSavePal-$version-macos-installer.dmg"
+          tag="${{ github.event.inputs.version }}"
           mkdir -p dist
-          mv build/*.dmg "$dmg_path"
-          echo "Renamed DMG to $dmg_path"
+          cp target/release/bundle/dmg/*.dmg "dist/PalworldSavePal-$tag-macos.dmg"
 
-      - name: Upload macOS DMG artifact
+      - name: Upload macOS artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: macos-dmg
-          path: dist/*.dmg
+          name: macos
+          path: palworld-save-pal/dist/*
+          if-no-files-found: error
 
   build-linux:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout palworld-save-pal
+        uses: actions/checkout@v4
+        with:
+          path: palworld-save-pal
 
-      - name: Install system dependencies
+      - name: Checkout uesave-rs (path dependency)
+        uses: actions/checkout@v4
+        with:
+          repository: oMaN-Rod/uesave-rs
+          ref: palworld-v1
+          path: uesave-rs
+          token: ${{ secrets.UESAVE_RS_TOKEN || github.token }}
+
+      - name: Install Linux system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libcairo2-dev libgirepository-2.0-dev pkg-config
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.12"
-
-      - name: Install dependencies using uv
-        run: |
-          pip install uv
-          uv sync
+          sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev
 
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
 
-      - name: Create ui/.env file
-        run: |
-          printf "PUBLIC_WS_URL=127.0.0.1:5174/ws\nPUBLIC_DESKTOP_MODE=true" > ui/.env
+      - name: Build desktop UI
+        working-directory: palworld-save-pal
+        shell: bash
+        run: bash scripts/build-ui-desktop.sh
 
-      - name: Install and build the Svelte frontend
-        run: |
-          cd ui
-          bun install
-          bun run build
-          cd ..
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
 
-      - name: Build Linux executable
-        run: |
-          uv run -- python setup.py build
+      - name: Cache Rust build
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: palworld-save-pal
 
-      - name: Prepare dist directory
-        run: |
-          version="${{ github.event.inputs.version }}"
-          distDir="dist/psp-linux-$version"
-          if [ -d "$distDir" ]; then rm -rf "$distDir"; fi
-          mkdir -p "$distDir"
-          cp -r ./build/exe.linux-*/* "$distDir" 2>/dev/null || cp -r ./build/exe.*/* "$distDir" 2>/dev/null
-          echo "Copied build files to $distDir"
+      - name: Install Tauri CLI
+        run: cargo install tauri-cli --version "^2" --locked
 
-      - name: Create ZIP archive
-        run: |
-          version="${{ github.event.inputs.version }}"
-          zipPath="dist/PalworldSavePal-$version-linux-standalone.zip"
-          cd dist
-          zip -r "$(basename "$zipPath")" "psp-linux-$version"
-          echo "Created ZIP archive at $zipPath"
+      - name: Build Tauri bundles
+        working-directory: palworld-save-pal/psp-desktop
+        run: cargo tauri build --bundles deb
 
-      - name: Upload Linux ZIP artifact
+      - name: Collect and rename installer
+        working-directory: palworld-save-pal
+        run: |
+          tag="${{ github.event.inputs.version }}"
+          mkdir -p dist
+          cp target/release/bundle/deb/*.deb "dist/PalworldSavePal-$tag-linux.deb"
+
+      - name: Upload Linux artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: linux-zip
-          path: dist/*.zip
+          name: linux
+          path: palworld-save-pal/dist/*
+          if-no-files-found: error
 
   create-release:
     needs: [build-windows, build-macos, build-linux]
@@ -222,7 +217,6 @@ jobs:
           path: artifacts
 
       - name: Create Release
-        id: create_release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ github.event.inputs.version }}
@@ -230,9 +224,8 @@ jobs:
           draft: ${{ github.event.inputs.draft }}
           prerelease: ${{ github.event.inputs.prerelease }}
           files: |
-            artifacts/windows-zip/*.zip
-            artifacts/windows-msi/*.msi
-            artifacts/macos-dmg/*.dmg
-            artifacts/linux-zip/*.zip
+            artifacts/windows/*
+            artifacts/macos/*
+            artifacts/linux/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
