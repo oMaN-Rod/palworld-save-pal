@@ -9,11 +9,12 @@ use tower::ServiceExt;
 use psp_server::router::build_router;
 use psp_server::{AppState, ServerConfig};
 
-/// Plain-GVAS sample save shipped with uesave-rs (sibling checkout).
+/// Plain-GVAS (non-Palworld) sample save, vendored under tests/fixtures/ so the
+/// convert-endpoint test is self-contained (no uesave-rs sibling checkout).
 fn sample_save_bytes() -> Vec<u8> {
     let path =
-        PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../uesave-rs/uesave/drg-save-test.sav");
-    std::fs::read(path).expect("uesave-rs sibling checkout with drg-save-test.sav")
+        PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../tests/fixtures/drg-save-test.sav");
+    std::fs::read(path).expect("vendored tests/fixtures/drg-save-test.sav")
 }
 
 async fn test_router(temp_dir: &tempfile::TempDir) -> axum::Router {
