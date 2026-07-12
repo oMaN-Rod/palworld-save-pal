@@ -1,7 +1,5 @@
 # Palworld Save Pal
 
-> **Note**: This project was put together for fun and to kick the tires on Sveltekit 5 and Skeleton UI Next. Things may be broken or not work as expected.
-
 ⚠️ **Backup your save files before using this tool!!** ⚠️
 
 Palworld Save Pal is a tool for managing and analyzing save files.
@@ -122,49 +120,41 @@ guide.
 
 ### Web
 
-1. Run the backend:
+`dev:web` starts the Vite dev server and the Rust backend together:
 
-   ```bash
-   cargo run -p psp-server -- --dev
-   ```
+```bash
+cd ui
+bun install
+bun run dev:web
+```
 
-2. Run the UI dev server:
-
-   ```bash
-   cd ui
-   bun install
-   bun run dev:web
-   ```
-
-3. Open your browser and navigate to `http://127.0.0.1:5173`
+Then open `http://127.0.0.1:5173`.
 
 ### Desktop App
 
-1. Set the environment variables for the svelte SPA `ui/.env`:
+Run the app in dev mode with hot-reload — Tauri starts the Vite dev server for
+you (requires the Tauri CLI: `cargo install tauri-cli --version "^2" --locked`):
 
-   ```env
-   PUBLIC_WS_URL=127.0.0.1:5174/ws
-   PUBLIC_DESKTOP_MODE=true
-   ```
-
-2. Build the SPA and run the Tauri app:
-
-   ```bash
-   cd ui
-   bun install
-   bun run build
-   cd ..
-   cargo run -p psp-desktop
-   ```
+```bash
+cd ui && bun install && cd ..
+cd psp-desktop
+cargo tauri dev
+```
 
 ### Build Desktop App
 
-```bash
-cargo tauri build
+Use the platform build script — it builds the UI, runs `cargo tauri build`, and
+collects the shipped artifacts into `dist/`:
+
+```powershell
+# Windows: MSI installer + portable standalone zip
+.\scripts\build-desktop.ps1
 ```
 
-Bundles (Windows MSI/NSIS, macOS dmg, Linux deb/rpm) land under
-`target/release/bundle/`.
+```bash
+# macOS (.dmg) / Linux (.deb)
+./scripts/build-desktop.sh
+```
 
 ## 🔥 Features
 
@@ -259,8 +249,9 @@ MIT License (do whatever you want with it).
 These are projects I've found that specifically target Palworld save files, each was helpful in some way during the development of this project:
 
 - [PalEdit](https://github.com/EternalWraith/PalEdit) - PSP was inspired by it.
-- [palworld-save-tools](https://github.com/cheahjs/palworld-save-tools) - PSP uses this tool for handling save files, can be used directly to convert to/from json.
-- [palworld-uesave-rs](https://github.com/DKingAlpha/palworld-uesave-rs) - I originally considered building this app using Tauri, opted for using Python, but this project was helpful.
+- [uesave-rs](https://github.com/oMaN-Rod/uesave-rs) - The Rust library the current backend uses to read and write Palworld save files.
+- [palworld-save-tools](https://github.com/cheahjs/palworld-save-tools) - Python library for parsing Palworld saves; PSP's original Python backend was built on it.
+- [palworld-uesave-rs](https://github.com/DKingAlpha/palworld-uesave-rs) - An early reference while exploring save parsing.
 - [Palworld Pal Editor](https://github.com/KrisCris/Palworld-Pal-Editor) - Also served as a reference for Palworld Save Pal, adopted some of this projects approach.
 - [PalWorldSaveTools](https://github.com/deafdudecomputers/PalWorldSaveTools) - Has a bunch of useful features for parsing, editing, and converting save files.
 
