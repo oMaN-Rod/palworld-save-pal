@@ -3,6 +3,12 @@ name = "psp-server"
 version.workspace = true
 edition.workspace = true
 
+[features]
+# Desktop-only native file dialogs (rfd). Off by default so the server/Docker
+# build stays headless — rfd's Linux backend (ashpd) pulls wayland system libs.
+# psp-desktop enables it.
+desktop = ["dep:rfd"]
+
 [dependencies]
 psp-core = { workspace = true }
 psp-db = { workspace = true }
@@ -24,7 +30,7 @@ zip = { workspace = true }
 uuid = { workspace = true }
 base64 = { workspace = true }
 chrono = { workspace = true }
-rfd = { workspace = true }
+rfd = { workspace = true, optional = true }
 opener = { workspace = true }
 reqwest = { workspace = true }
 async-trait = { workspace = true }

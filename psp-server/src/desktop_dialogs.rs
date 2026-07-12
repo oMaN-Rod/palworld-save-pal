@@ -31,9 +31,12 @@ impl FileDialogProvider for NullDialogProvider {
     }
 }
 
-/// Desktop mode: real native dialog via rfd.
+/// Desktop mode: real native dialog via rfd. Gated behind the `desktop`
+/// feature so the headless server/Docker build doesn't pull rfd's GUI deps.
+#[cfg(feature = "desktop")]
 pub struct RfdDialogProvider;
 
+#[cfg(feature = "desktop")]
 impl FileDialogProvider for RfdDialogProvider {
     fn pick_file(&self, request: FileDialogRequest) -> DialogFuture {
         Box::pin(async move {

@@ -136,11 +136,17 @@ impl ServerHandle {
 /// Delegating wrapper: picks the real `RfdDialogProvider` in desktop mode and
 /// the inert `NullDialogProvider` otherwise, then defers to `start_server_with`.
 pub async fn start_server(config: ServerConfig) -> anyhow::Result<ServerHandle> {
+    // The real rfd dialog only exists under the `desktop` feature (psp-desktop);
+    // the headless server build always uses the inert NullDialogProvider.
+    #[cfg(feature = "desktop")]
     let dialogs: Arc<dyn crate::desktop_dialogs::FileDialogProvider> = if config.desktop_mode {
         Arc::new(crate::desktop_dialogs::RfdDialogProvider)
     } else {
         Arc::new(crate::desktop_dialogs::NullDialogProvider)
     };
+    #[cfg(not(feature = "desktop"))]
+    let dialogs: Arc<dyn crate::desktop_dialogs::FileDialogProvider> =
+        Arc::new(crate::desktop_dialogs::NullDialogProvider);
     start_server_with(config, dialogs).await
 }
 

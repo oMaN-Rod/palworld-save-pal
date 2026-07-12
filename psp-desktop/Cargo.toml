@@ -9,7 +9,7 @@ tauri-build = { workspace = true }
 [dependencies]
 tauri = { workspace = true }
 tauri-plugin-single-instance = { workspace = true }
-psp-server = { path = "../psp-server" }
+psp-server = { path = "../psp-server", features = ["desktop"] }
 tokio = { workspace = true }
 anyhow = { workspace = true }
 tracing = { workspace = true }
