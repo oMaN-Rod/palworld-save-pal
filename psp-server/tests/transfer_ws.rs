@@ -1,10 +1,8 @@
 mod common;
 
-/// Error-path and unload coverage for the player-transfer WS surface (Task
-/// 3E-3). Hits ONLY the error paths -- no loaded target/source -- so no disk
-/// write is ever triggered (the standalone-target auto-save path is a real
-/// filesystem write and deliberately NOT exercised by this test; see the
-/// task report for how it's covered instead).
+/// Error-path and unload coverage for the player-transfer surface. Nothing is
+/// ever loaded, so the standalone-target auto-save path -- a real filesystem
+/// write -- is never reached.
 #[tokio::test]
 async fn transfer_suite_error_paths_and_unload() {
     let server = common::start_test_server().await;
@@ -71,12 +69,9 @@ async fn transfer_suite_error_paths_and_unload() {
     server.handle.shutdown().await;
 }
 
-/// A non-existent Steam save directory takes the "no target loaded" branch
-/// off the table via a different route than the type-check above: this
-/// proves `load_steam_save_for_transfer`'s failure path (bad directory)
-/// responds with `{"error": ...}` too, not the hard WS `error` frame, and
-/// leaves `ctx.session.source` unset (so a subsequent `get_source_players`
-/// still reports `{}`).
+/// A bad source directory must answer with a soft `{"error": ...}` payload
+/// rather than a hard `error` frame, and must leave the session's source unset
+/// -- so a following `get_source_players` still reports `{}`.
 #[tokio::test]
 async fn load_source_save_bad_directory_is_a_soft_error_and_does_not_populate_source() {
     let server = common::start_test_server().await;

@@ -68,9 +68,9 @@ async fn malformed_json_yields_string_error_and_socket_survives() {
         .unwrap();
     let error_frame = next_json(&mut socket).await;
     assert_eq!(error_frame["type"], "error");
-    // ws/manager.py sends a STRING payload for JSON decode errors — this is
-    // Stage 1 (JSON syntax) and must stay distinguishable from Stage 2
-    // (envelope shape) below, which sends an OBJECT payload instead.
+    // A JSON syntax error carries a STRING payload; an envelope-shape error
+    // carries an OBJECT. The frontend branches on the two, so they must stay
+    // distinguishable.
     assert!(
         error_frame["data"].is_string(),
         "Stage 1 (JSON syntax) errors must carry a STRING payload: {error_frame}"
@@ -95,11 +95,8 @@ async fn envelope_shape_error_yields_object_error_with_message_and_trace() {
     let handle = start_test_server(&temp_dir).await;
     let mut socket = connect(&handle).await;
 
-    // Syntactically valid JSON, but missing the required "type" field: this
-    // fails `Envelope` deserialization (Stage 2), not JSON parsing (Stage 1).
-    // ws/manager.py's matching branch (the generic `except Exception`, lines
-    // 43-51) sends {"message": ..., "trace": ...} — an OBJECT payload, not the
-    // plain string Stage 1 uses above.
+    // Valid JSON, but no "type" field: fails `Envelope` deserialization rather
+    // than JSON parsing, so the payload is a {message, trace} OBJECT.
     socket
         .send(Message::Text(r#"{"data":1}"#.into()))
         .await
@@ -181,13 +178,10 @@ async fn unknown_type_is_silent() {
 
 #[tokio::test]
 async fn registered_but_unimplemented_type_is_silent() {
-    // Deliberate strengthening beyond the brief: `unknown_type_is_silent` above
-    // only proves silence for a wire string with no MessageType variant at all
-    // (dispatch's `from_wire` returns None). Silence must also hold for a wire
-    // string that DOES have a variant but no handler arm yet (`route`'s
-    // catch-all `other =>` branch) — a distinct code path in dispatcher.rs.
-    // `get_guild_raw_data` is registered in MessageType but never routed — a
-    // permanently-dead wire type by design that makes this test durable.
+    // Covers a different silence path than `unknown_type_is_silent`: a wire
+    // string that HAS a MessageType variant but no handler arm, hitting
+    // `route`'s catch-all. `get_guild_raw_data` is registered but never routed
+    // by design, which keeps this test durable.
     let temp_dir = tempfile::tempdir().unwrap();
     let handle = start_test_server(&temp_dir).await;
     let mut socket = connect(&handle).await;

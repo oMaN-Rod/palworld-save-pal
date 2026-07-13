@@ -1,11 +1,12 @@
-//! Phase-2 WS handler integration tests (Task 13): lazy details, pal CRUD,
-//! technologies, lab research, deletes. Boots the real in-process server
-//! (mirroring `tests/load_path.rs`) and drives everything over a live
-//! WebSocket, so every assertion exercises the full dispatch + emit path.
+//! WS handler integration tests: lazy player/guild details, pal CRUD,
+//! technologies, lab research, deletes, and the save-file handlers
+//! (update/download/rename/save_modded_save). Everything runs over a live
+//! socket against an in-process server, so the full dispatch + emit path is
+//! exercised.
 //!
-//! Most tests are UNCONDITIONAL: the "no save loaded" cases need no fixture,
-//! and the load-then-edit flow drives the committed `tests/fixtures/saves/world1`
-//! save (2 players, 2 guilds — always present, never `PSP_TEST_SAVE_DIR`-gated).
+//! Every test runs unconditionally: the "no save loaded" cases need no fixture,
+//! and the load-then-edit flows drive the committed
+//! `tests/fixtures/saves/world1` save (2 players, 2 guilds).
 
 use std::path::PathBuf;
 use std::time::Duration;
@@ -97,8 +98,8 @@ async fn recv_until_type_or_error(socket: &mut WsClient, stop_type: &str) -> Vec
     frames
 }
 
-/// select_save the committed world1 fixture and drain to get_guild_summaries.
-/// Returns the collected frames.
+/// select_save the committed world1 fixture and drain to get_guild_summaries,
+/// the last frame of a successful load.
 async fn load_world1(socket: &mut WsClient) -> Vec<Value> {
     let level_sav = repo_root()
         .join("tests/fixtures/saves/world1/Level.sav")
@@ -123,10 +124,6 @@ fn first_key(payload: &Value) -> String {
         .clone()
 }
 
-// ---------------------------------------------------------------------------
-// No-save-loaded cases (unconditional, no fixture needed).
-// ---------------------------------------------------------------------------
-
 #[tokio::test]
 async fn add_pal_without_save_warns() {
     let (server, _scratch) = start_test_server().await;
@@ -138,8 +135,8 @@ async fn add_pal_without_save_warns() {
     )
     .await;
     let frame = recv(&mut socket).await;
-    // pal_handler.py checks "no save" BEFORE the missing-id branch, and the
-    // warning payload is a bare STRING (not the {message, trace} object).
+    // The no-save check runs BEFORE the missing-id branch, and its payload is a
+    // bare STRING on a `warning` frame (not the {message, trace} error object).
     assert_eq!(frame["type"], "warning");
     assert_eq!(frame["data"], "No save file loaded");
     server.shutdown().await;
@@ -164,7 +161,7 @@ async fn set_technology_data_without_save_is_silent() {
     let (server, _scratch) = start_test_server().await;
     let mut socket = connect(server.addr).await;
 
-    // technologies_handler.py returns with NO frame when no save is loaded.
+    // This handler emits NO frame at all when no save is loaded.
     send(
         &mut socket,
         json!({"type": "set_technology_data",
@@ -183,8 +180,8 @@ async fn update_lab_research_without_save_errors_with_plain_string() {
     let (server, _scratch) = start_test_server().await;
     let mut socket = connect(server.addr).await;
 
-    // lab_research_handler.py emits MessageType.ERROR with a bare STRING (the
-    // second, distinct error shape) — not the dispatcher's {message, trace}.
+    // This handler's no-save error is an `error` frame carrying a bare STRING —
+    // a distinct shape from the dispatcher's {message, trace} object.
     send(
         &mut socket,
         json!({"type": "update_lab_research",
@@ -220,10 +217,6 @@ async fn request_guild_details_without_save_errors() {
     server.shutdown().await;
 }
 
-// ---------------------------------------------------------------------------
-// Committed-fixture (world1) flows — always run.
-// ---------------------------------------------------------------------------
-
 #[tokio::test]
 async fn player_details_then_add_then_delete_flow() {
     let (server, _scratch) = start_test_server().await;
@@ -236,8 +229,8 @@ async fn player_details_then_add_then_delete_flow() {
         .expect("select_save emits get_player_summaries");
     let player_id = first_key(&player_summaries["data"]);
 
-    // --- request_player_details: progress_message(s) must precede the
-    //     get_player_details_response (the player is lazily loaded on demand).
+    // A player is loaded lazily, so progress_message(s) must precede the
+    // get_player_details_response.
     send(
         &mut socket,
         json!({"type": "request_player_details",
@@ -265,7 +258,7 @@ async fn player_details_then_add_then_delete_flow() {
         .expect("player has a pal_box_id")
         .to_string();
 
-    // --- add_pal into the pal box (huge capacity → always has a free slot).
+    // The pal box has huge capacity, so a free slot is guaranteed.
     send(
         &mut socket,
         json!({"type": "add_pal",
@@ -282,8 +275,8 @@ async fn player_details_then_add_then_delete_flow() {
         .to_string();
     assert_eq!(add_frame["data"]["pal"]["character_id"], "SheepBall");
 
-    // --- delete_pals: NO delete_pals frame, exactly get_player_summaries then
-    //     get_guild_summaries, and NO spurious progress_message.
+    // delete_pals answers with exactly get_player_summaries then
+    // get_guild_summaries: no delete_pals frame, no progress_message.
     send(
         &mut socket,
         json!({"type": "delete_pals",
@@ -300,25 +293,20 @@ async fn player_details_then_add_then_delete_flow() {
         second["type"], "get_guild_summaries",
         "delete_pals must emit get_guild_summaries second, got {second}"
     );
-    // Prove nothing else (no delete_pals frame, no progress) trails the pair:
-    // the next request's answer must arrive immediately.
+    // Nothing may trail the pair: the next request's answer must arrive first.
     send(&mut socket, json!({"type": "get_version"})).await;
     assert_eq!(recv(&mut socket).await["type"], "get_version");
 
     server.shutdown().await;
 }
 
-// ---------------------------------------------------------------------------
-// Task 14 — save-file handlers.
-// ---------------------------------------------------------------------------
-
 #[tokio::test]
 async fn update_save_file_without_save_errors_with_object_payload() {
     let (server, _scratch) = start_test_server().await;
     let mut socket = connect(server.addr).await;
 
-    // Python `raise ValueError("No save file loaded")` → dispatcher `error`
-    // frame with the {message, trace} object shape.
+    // Here the no-save failure surfaces through the dispatcher, so its payload
+    // is the {message, trace} OBJECT rather than a bare string.
     send(
         &mut socket,
         json!({"type": "update_save_file", "data": {"modified_pals": {}}}),
@@ -365,8 +353,8 @@ async fn save_modded_save_without_save_errors() {
     let (server, _scratch) = start_test_server().await;
     let mut socket = connect(server.addr).await;
 
-    // data is a BARE world-name string. No save loaded → error frame; this
-    // NEVER reaches the disk-write path, so it cannot touch any real save.
+    // data is a BARE world-name string. With no save loaded this errors out
+    // before the disk-write path, so it cannot touch any real save.
     send(
         &mut socket,
         json!({"type": "save_modded_save", "data": "MyWorld"}),
@@ -380,12 +368,10 @@ async fn save_modded_save_without_save_errors() {
 
 #[tokio::test]
 async fn save_modded_save_accepts_null_data_from_the_steam_write_path() {
-    // The Steam branch of the frontend's `writeSave` sends `save_modded_save`
-    // with `data: null` (the world name is GamePass-only). The payload must
-    // deserialize (Option<String>) and reach the handler — NOT fail with a
-    // "invalid type: null, expected a string" parse error. With no save loaded
-    // it lands on the same "No save file loaded" business error the string case
-    // does, proving the null passed payload parsing.
+    // The frontend's Steam write path sends `data: null` (the world name is
+    // GamePass-only), so the payload must deserialize and reach the handler
+    // instead of failing as "invalid type: null, expected a string". Landing on
+    // the same "No save file loaded" business error proves it parsed.
     let (server, _scratch) = start_test_server().await;
     let mut socket = connect(server.addr).await;
 
@@ -443,11 +429,9 @@ async fn update_then_download_save_file_round_trip() {
         .cloned()
         .collect();
 
-    // Lazily load players until we find one carrying at least one existing
-    // pal, then edit THAT pal (an already-serializable, save-resident pal —
-    // editing it keeps Level.sav byte-valid, unlike a freshly-added pal). The
-    // loaded player is also what puts an entry in `player_sav_bytes` for the
-    // download step.
+    // Edit an EXISTING, save-resident pal: it is already serializable, so
+    // Level.sav stays byte-valid (a freshly-added pal would not). Loading the
+    // player is also what puts an entry in `player_sav_bytes` for the download.
     let mut chosen: Option<(String, String, Value)> = None;
     let mut loaded_player_count: usize = 0;
     for player_id in &player_ids {
@@ -474,9 +458,7 @@ async fn update_then_download_save_file_round_trip() {
     let mut edited_pal = pal_dto.clone();
     edited_pal["nickname"] = json!("RoundTripRenamed");
 
-    // update_save_file with a single modified pal. Progress messages
-    // ("Updating pal ...", "Saving changes to file") must precede the
-    // update_save_file frame, whose data is the exact string "Changes saved".
+    // Progress messages must precede the terminal update_save_file frame.
     send(
         &mut socket,
         json!({"type": "update_save_file",
@@ -494,9 +476,8 @@ async fn update_then_download_save_file_round_trip() {
     );
     assert_eq!(update_response["data"], "Changes saved");
 
-    // download_save_file: the four progress strings in order, then a
-    // download_save_file frame carrying a one-element array whose zip decodes
-    // and contains Level.sav plus the loaded player's LOWERCASE-named .sav.
+    // The download's zip must carry Level.sav plus the loaded player's
+    // LOWERCASE-named .sav (the on-disk saves use uppercase hex names).
     send(&mut socket, json!({"type": "download_save_file"})).await;
     let download_frames = recv_until_type_or_error(&mut socket, "download_save_file").await;
     let progress_texts: Vec<String> = download_frames

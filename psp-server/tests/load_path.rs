@@ -1,6 +1,5 @@
-//! Integration tests for the save-load path: select_save, load_zip_file,
-//! sync_app_state's save branch, and no_file_selected's (lack of) behavior.
-//! See psp-server/src/handlers/save_file.rs and handlers/system.rs.
+//! Integration tests for the save-load path: select_save, load_zip_file and
+//! sync_app_state's save branch (see src/handlers/save_file.rs, system.rs).
 
 use std::io::Write;
 use std::time::Duration;
@@ -107,8 +106,8 @@ async fn handle_survives(socket: &mut WsClient) {
 
 #[tokio::test]
 async fn test_select_save_missing_players_directory_errors() {
-    // Pins the check ORDER (Level.sav exists, Players/ doesn't) against
-    // FileManager.validate_steam_save_directory, not just "some error".
+    // Pins validate_steam_save_directory's check ORDER: with Level.sav present
+    // but Players/ absent, the Players/ error must be the one reported.
     let (server, _scratch) = start_test_server().await;
     let temp_save_dir = tempfile::tempdir().unwrap();
     std::fs::write(temp_save_dir.path().join("Level.sav"), b"not-a-real-save").unwrap();
@@ -162,10 +161,9 @@ async fn test_select_save_no_player_saves_errors() {
 
 #[tokio::test]
 async fn test_select_save_garbage_level_sav_errors_cleanly_and_connection_survives() {
-    // Passes every FileManager.validate_steam_save_directory check but the
-    // Level.sav bytes themselves are garbage -- SaveSession::load must
-    // surface this as a normal `error` frame, never a panic, and the
-    // connection must still answer the next request.
+    // Passes every validate_steam_save_directory check, but the Level.sav bytes
+    // are garbage: the load must surface a normal `error` frame, never a panic,
+    // and the connection must still answer the next request.
     let (server, _scratch) = start_test_server().await;
     let temp_save_dir = tempfile::tempdir().unwrap();
     std::fs::write(temp_save_dir.path().join("Level.sav"), b"not-a-real-save").unwrap();
@@ -282,12 +280,10 @@ async fn test_load_zip_file_empty_zip_errors() {
 
 #[tokio::test]
 async fn test_load_zip_file_corrupt_archive_errors_cleanly_and_connection_survives() {
-    // Not a zip at all -- ZipArchive::new must fail cleanly, never panic,
-    // and the socket must still answer the next request. Regardless of
-    // whether the `zip` crate itself ever panics internally on some
-    // malformed input, dispatcher::catch_handler_panic already contains any
-    // panic escaping a handler and converts it into this same `error` frame
-    // shape -- this test does not depend on which layer catches it.
+    // Not a zip at all: the handler must fail cleanly and the socket must still
+    // answer the next request. Whether the `zip` crate errors or panics is
+    // immaterial -- dispatcher::catch_handler_panic converts an escaping panic
+    // into this same `error` frame shape.
     let (server, _scratch) = start_test_server().await;
     let mut socket = connect(server.addr).await;
 
@@ -308,15 +304,11 @@ async fn test_load_zip_file_corrupt_archive_errors_cleanly_and_connection_surviv
 
 #[tokio::test]
 async fn test_load_zip_file_with_traversal_style_entry_names_does_not_crash_and_stays_contained() {
-    // A zip whose top-level "folder" name is a directory-traversal string.
-    // save_id is derived from this name, so this proves the malicious name
-    // can reach handle_load_zip_file's GPS-temp-file write path without
-    // corrupting anything outside the OS temp directory (see
-    // zip_gps_temp_path's unit tests in save_file.rs for the direct proof;
-    // this end-to-end test proves the request-handling side doesn't panic
-    // or hang on such input). Level.sav content is garbage, so this
-    // ultimately surfaces as a normal parse error frame -- the point is
-    // *how* it fails, not that it succeeds.
+    // The zip's top-level "folder" name is a traversal string, and save_id is
+    // derived from it -- so a malicious name reaches the GPS-temp-file write
+    // path. Request handling must neither panic nor hang (containment itself is
+    // proven by zip_gps_temp_path's unit tests). The garbage Level.sav means
+    // this ends in a parse error: HOW it fails is the point, not that it fails.
     let (server, _scratch) = start_test_server().await;
     let mut socket = connect(server.addr).await;
 
@@ -366,12 +358,9 @@ async fn test_sync_app_state_without_save_emits_only_settings() {
 
 #[tokio::test]
 async fn test_no_file_selected_produces_no_response() {
-    // Python never registers a handler for "no_file_selected" -- it's a
-    // message the SERVER sends (desktop.py:113, Phase 5 scope), never one
-    // the frontend sends TO the server. If a client ever did send it, the
-    // dispatcher's own "valid type, no handler" catch-all already covers it
-    // silently -- this pins that this message type requires no Phase 1
-    // handler at all.
+    // `no_file_selected` is a SERVER-to-client message; a client sending it must
+    // fall through the dispatcher's "valid type, no handler" catch-all in
+    // silence, leaving the connection usable.
     let (server, _scratch) = start_test_server().await;
     let mut socket = connect(server.addr).await;
 
@@ -380,14 +369,10 @@ async fn test_no_file_selected_produces_no_response() {
     server.shutdown().await;
 }
 
-/// Prints a highly visible skip notice for a `PSP_TEST_SAVE_DIR`-gated test.
-/// Rust's test harness captures `eprintln!`/`println!` output and only shows
-/// it for FAILED tests unless the caller passes `--nocapture` -- and these
-/// tests pass on purpose when the fixture directory is unset. Writing
-/// straight to `std::io::stderr()` bypasses the `eprint!` macro's capture
-/// hook entirely, so the notice shows up in a plain `cargo test` run too.
-/// Same technique as `psp-server/tests/parity.rs`'s
-/// `replay_recorded_python_fixtures`.
+/// Skip notice for the `PSP_TEST_SAVE_DIR`-gated tests, which PASS when the
+/// fixture dir is unset. The test harness swallows `eprintln!` on a passing
+/// test unless `--nocapture` is given; writing straight to `std::io::stderr()`
+/// bypasses that capture hook, so the notice shows up in a plain `cargo test`.
 fn print_save_dir_skip_notice(test_name: &str) {
     use std::io::Write;
     let _ = writeln!(
@@ -528,16 +513,11 @@ async fn test_load_zip_file_full_emission_order() {
     assert_eq!("loaded_save_files", received_types[type_count - 3]);
     assert_eq!("get_player_summaries", received_types[type_count - 2]);
     assert_eq!("get_guild_summaries", received_types[type_count - 1]);
-    // The very last progress message before loaded_save_files must be the
-    // zip-specific completion string (load_zip_file_handler's ws_callback
-    // call right before it assembles `data`).
     assert_eq!("progress_message", received_types[type_count - 4]);
 
-    // Prove no surplus frame follows get_guild_summaries: the receive loop
-    // above stops as soon as it sees get_guild_summaries, so a leaked extra
-    // frame emitted after the sequence would otherwise go undetected (this
-    // is the same follow-up-request technique
-    // test_select_save_full_emission_order uses).
+    // The receive loop stops at get_guild_summaries, so a surplus frame emitted
+    // after the sequence would go unnoticed; a follow-up request whose answer
+    // arrives first proves nothing trails it.
     send_request(&mut socket, serde_json::json!({"type": "sync_app_state"})).await;
     assert_eq!("get_settings", receive_json(&mut socket).await["type"]);
 

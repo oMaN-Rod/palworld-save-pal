@@ -1,8 +1,6 @@
-//! Task 3C-6: the three UPS <-> save-session interop handlers
-//! (clone_to_ups / import_to_ups / export_ups_pal) all require a loaded save.
-//! With no save loaded, each emits the `error` `{"message": "No save file
-//! loaded"}` frame (ups_handler.py:262-267,399-403,553-557). The full
-//! save-loaded paths are corpus/parity territory, not unit-tested here.
+//! The three UPS <-> save-session interop handlers (clone_to_ups /
+//! import_to_ups / export_ups_pal) all require a loaded save, and each must
+//! answer with the same `error` / "No save file loaded" frame without one.
 
 mod common;
 

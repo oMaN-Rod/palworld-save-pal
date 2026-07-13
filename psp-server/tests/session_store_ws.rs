@@ -1,6 +1,6 @@
-//! SP-T1: a WS `select_save` load registers the session in `AppState::sessions`
-//! and returns its id in `loaded_save_files`, and two connections loading two
-//! saves get two distinct ids / two distinct store entries (isolation).
+//! A `select_save` load registers its session in `AppState::sessions` and
+//! returns the id in `loaded_save_files`; two connections loading two saves
+//! stay isolated in distinct store entries.
 
 mod common;
 
@@ -75,7 +75,6 @@ async fn load_registers_session_and_returns_findable_id() {
     let session_id = select_save_get_session_id(&mut socket, &level_sav_path).await;
     let parsed = Uuid::parse_str(&session_id).expect("session_id is a uuid");
 
-    // The id is findable in the store, and its session holds the loaded save.
     // Scope the std map lock so it's dropped before the per-session await below.
     let stored = {
         let store = server.handle.app.sessions.lock().unwrap();

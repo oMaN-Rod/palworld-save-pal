@@ -1,7 +1,5 @@
-//! Desktop-mode `open_folder` warning path (Phase 5, Task 6). This test only
-//! exercises the "folder type not resolved" branch of
-//! `handlers::system::handle_open_folder`, which never calls
-//! `opener::open` -- so it stays safe to run headless.
+//! Desktop-mode `open_folder`. Only the "folder type not resolved" branch is
+//! exercised: it never calls `opener::open`, so the test stays headless-safe.
 
 mod common;
 

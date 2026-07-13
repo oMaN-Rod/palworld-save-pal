@@ -1,9 +1,7 @@
-//! End-to-end reproduction: `update_save_file` (inventory edit) ->
-//! `save_modded_save` -> fresh `select_save`, against a temp copy of the
-//! committed `world1` fixture, asserting the edit survives the backend's own
-//! save->reload cycle. `settings.save_dir` is pointed at the temp copy first
-//! so the Steam write's LevelMeta/Players output lands there, not on the real
-//! machine's default Steam dir.
+//! An inventory edit must survive `update_save_file` -> `save_modded_save` ->
+//! a fresh `select_save` from disk. Runs against a temp copy of the committed
+//! `world1` fixture, with `settings.save_dir` pointed at that copy so the write
+//! lands there rather than in the machine's real Steam save directory.
 
 mod common;
 
@@ -30,10 +28,8 @@ fn copy_dir_recursive(src: &Path, dst: &Path) {
     }
 }
 
-/// Like `phase2_ws.rs`'s `recv_until_type_or_error`: reads frames until one
-/// whose `type` equals `stop_type`, panicking loudly (dumping the payload)
-/// if an `error` frame arrives first instead of hanging until the receive
-/// timeout.
+/// Reads frames until one whose `type` equals `stop_type`, panicking with the
+/// payload if an `error` arrives first rather than hanging until the timeout.
 async fn recv_until(socket: &mut common::WsClient, stop_type: &str) -> Vec<Value> {
     let mut frames = Vec::new();
     loop {
@@ -73,7 +69,6 @@ async fn load_player(socket: &mut common::WsClient, player_id: &str) -> Value {
 
 #[tokio::test]
 async fn item_edit_survives_update_save_modded_save_and_reload() {
-    // 1. Copy the committed world1 fixture to a temp dir.
     let temp_root = tempfile::tempdir().unwrap();
     let world1_copy = temp_root.path().join("world1");
     copy_dir_recursive(
@@ -82,9 +77,9 @@ async fn item_edit_survives_update_save_modded_save_and_reload() {
     );
     let level_sav_path = world1_copy.join("Level.sav").to_string_lossy().into_owned();
 
-    // 2. Start a test server and point settings.save_dir at the temp copy so
-    // the Steam write path (LevelMeta.sav + Players/*.sav) targets it instead
-    // of the machine's real default Steam save dir.
+    // settings.save_dir decides where the Steam write path puts LevelMeta.sav
+    // and Players/*.sav; point it at the temp copy, never the machine's real
+    // default save dir.
     let server = common::start_test_server().await;
     let db_path = server._temp_dir.path().join("psp-rs.db");
     let db = psp_db::open(&db_path).await.expect("open test db");
@@ -94,13 +89,9 @@ async fn item_edit_survives_update_save_modded_save_and_reload() {
 
     let mut socket = common::connect(&server).await;
 
-    // 3. Load the temp save.
     select_save(&mut socket, &level_sav_path).await;
 
-    // 4. Load the world1 player and add a new inventory slot to their common
-    // container -- mirrors psp-core's
-    // `update_players_common_container_edit_ignores_forged_dto_id`, which
-    // proves this exact edit shape applies correctly in-memory.
+    // Add a new inventory slot to the player's common container.
     let mut player = load_player(&mut socket, WORLD1_PLAYER_O).await;
     let common_container = player
         .get_mut("common_container")
@@ -120,8 +111,8 @@ async fn item_edit_survives_update_save_modded_save_and_reload() {
         "local_id": null,
     }));
 
-    // 5. update_save_file — the exact WS message the frontend's saveState()
-    // sends before writeSave's save_modded_save call.
+    // update_save_file then save_modded_save (with `data: null`) is exactly the
+    // pair the frontend sends when saving a Steam save.
     common::send_json(
         &mut socket,
         json!({"type": "update_save_file",
@@ -131,8 +122,6 @@ async fn item_edit_survives_update_save_modded_save_and_reload() {
     let update_frames = recv_until(&mut socket, "update_save_file").await;
     assert_eq!(update_frames.last().unwrap()["data"], "Changes saved");
 
-    // 6. save_modded_save — Steam branch, data: null (matches writeSave's
-    // saveOperations.svelte.ts).
     common::send_json(
         &mut socket,
         json!({"type": "save_modded_save", "data": null}),
@@ -144,8 +133,7 @@ async fn item_edit_survives_update_save_modded_save_and_reload() {
         "Modded save file saved successfully"
     );
 
-    // 7. RE-LOAD fresh from disk (same path) and check the edit survived the
-    // full write+reload cycle.
+    // Re-load fresh from the same path on disk: the edit must still be there.
     select_save(&mut socket, &level_sav_path).await;
     let reloaded_player = load_player(&mut socket, WORLD1_PLAYER_O).await;
     let reloaded_slots = reloaded_player["common_container"]["slots"]

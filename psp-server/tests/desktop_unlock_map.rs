@@ -1,6 +1,5 @@
-//! Desktop-mode `unlock_map` native-file-dialog flow (Phase 5, Task 5).
-//! Port of `desktop.py:139-146` as exercised through `handle_unlock_map`'s
-//! desktop branch.
+//! Desktop-mode `unlock_map`: the native-file-dialog branch of
+//! `handle_unlock_map`, driven through a queued (fake) dialog provider.
 
 mod common;
 

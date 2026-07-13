@@ -9,8 +9,8 @@ use tower::ServiceExt;
 use psp_server::router::build_router;
 use psp_server::{AppState, ServerConfig};
 
-/// Plain-GVAS (non-Palworld) sample save, vendored under tests/fixtures/ so the
-/// convert-endpoint test is self-contained (no uesave-rs sibling checkout).
+/// A plain-GVAS (non-Palworld) save, vendored so this test needs no external
+/// checkout.
 fn sample_save_bytes() -> Vec<u8> {
     let path =
         PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../tests/fixtures/drg-save-test.sav");
@@ -72,7 +72,6 @@ async fn sav_to_json_to_sav_round_trips() {
     let temp_dir = tempfile::tempdir().unwrap();
     let router = test_router(&temp_dir).await;
 
-    // 1) sav -> json
     let response = router
         .clone()
         .oneshot(multipart_file_request(
@@ -93,7 +92,6 @@ async fn sav_to_json_to_sav_round_trips() {
     );
     let first_json = body_bytes(response).await;
 
-    // 2) json -> sav (Oodle/PlM output)
     let response = router
         .clone()
         .oneshot(
@@ -115,8 +113,8 @@ async fn sav_to_json_to_sav_round_trips() {
         "attachment; filename=converted.sav"
     );
     let compressed_save = body_bytes(response).await;
-    // .sav layout: [uncompressed_len u32][compressed_len u32][magic 3B][save_type 1B]...
-    // so the "PlM" magic sits at bytes 8..11 (uesave compression.rs CompressionHeader).
+    // .sav layout: [uncompressed_len u32][compressed_len u32][magic 3B][save_type 1B],
+    // so the "PlM" magic sits at bytes 8..11 and the save type at byte 11.
     assert_eq!(
         &compressed_save[8..11],
         b"PlM",
@@ -127,7 +125,7 @@ async fn sav_to_json_to_sav_round_trips() {
         "expected save_type byte 0x31 (SaveType.PLM)"
     );
 
-    // 3) the PlM sav converts back to identical JSON
+    // The PlM sav must convert back to identical JSON.
     let response = router
         .oneshot(multipart_file_request(
             "/api/convert/sav-to-json",
@@ -167,11 +165,6 @@ async fn sav_to_json_without_file_field_is_422() {
 
 #[tokio::test]
 async fn sav_to_json_with_corrupt_bytes_is_500() {
-    // Strengthened beyond the brief's json_to_sav-only failure test: the
-    // parse-failure branch of sav_to_json (SaveReader::read returning Err)
-    // is a distinct code path from json_to_sav's serde_json::from_slice
-    // failure and needs its own coverage, or a bug in that branch could
-    // ship unnoticed.
     let temp_dir = tempfile::tempdir().unwrap();
     let router = test_router(&temp_dir).await;
     let response = router

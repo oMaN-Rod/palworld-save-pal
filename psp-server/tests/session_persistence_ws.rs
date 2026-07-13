@@ -1,5 +1,5 @@
-//! WS-level tests for session persistence (SP-T2): reattach_session /
-//! eject_session against a temp copy of the committed `world1` fixture.
+//! Session persistence over the socket: reattach_session / eject_session,
+//! driven against temp copies of the committed `world1` fixture.
 
 mod common;
 
@@ -140,16 +140,16 @@ async fn reattach_same_id_does_not_deadlock() {
     let server = common::start_test_server().await;
     let mut socket = common::connect(&server).await;
 
-    // The connection is already attached to this id; reattaching it must read
-    // the overview from the held guard, NOT re-lock the same mutex (deadlock).
+    // The connection is ALREADY attached to this id, so the handler must read
+    // the overview from the guard it holds instead of re-locking the same mutex.
     let session_id = select_world1(&mut socket, &level_sav_path).await;
     common::send_json(
         &mut socket,
         json!({"type": "reattach_session", "data": {"session_id": session_id}}),
     )
     .await;
-    // If the handler re-locked its own arc this would hang until the 30s recv
-    // timeout and fail; reaching get_guild_summaries proves it did not.
+    // A re-lock would hang until the receive timeout; reaching
+    // get_guild_summaries proves it did not happen.
     let frames = recv_until(&mut socket, "get_guild_summaries").await;
     let loaded = frames
         .iter()
@@ -162,11 +162,10 @@ async fn reattach_same_id_does_not_deadlock() {
 
 #[tokio::test]
 async fn mutual_reattach_across_connections_does_not_deadlock() {
-    // Two connections, each attached to its own session (X and Y). They then
-    // reattach to EACH OTHER's id at the same time. If a handler held its own
-    // per-session guard while locking the target's (same lock order on both
-    // tasks: own-arc → target-arc), this forms a cycle and deadlocks forever.
-    // The fix locks at most one per-session arc, so both complete.
+    // Two connections, each on its own session, reattach to EACH OTHER's id at
+    // once. A handler that held its own per-session guard while locking the
+    // target's would form a cycle and deadlock, so it must hold at most one
+    // per-session lock at a time.
     let (_temp_x, level_x) = temp_world1();
     let (_temp_y, level_y) = temp_world1();
     let server = common::start_test_server().await;
@@ -176,7 +175,6 @@ async fn mutual_reattach_across_connections_does_not_deadlock() {
     let session_x = select_world1(&mut socket_x, &level_x).await;
     let session_y = select_world1(&mut socket_y, &level_y).await;
 
-    // Concurrently: the X-attached connection reattaches Y, and vice versa.
     let reattach_x_to_y = async {
         common::send_json(
             &mut socket_x,
@@ -194,7 +192,7 @@ async fn mutual_reattach_across_connections_does_not_deadlock() {
         recv_until(&mut socket_y, "get_guild_summaries").await
     };
 
-    // Bound the whole exchange: the old own-arc→target-arc code hangs here.
+    // Bound the exchange: a lock cycle would hang here rather than fail.
     let (frames_x, frames_y) = tokio::time::timeout(std::time::Duration::from_secs(15), async {
         tokio::join!(reattach_x_to_y, reattach_y_to_x)
     })
@@ -258,10 +256,9 @@ async fn eject_removes_from_store_and_clears_connection() {
 
 #[tokio::test]
 async fn eject_of_non_attached_id_leaves_other_connection_intact() {
-    // Connection A loads session A; connection B loads its own session B, then
-    // ejects A (an id B is NOT attached to). A must be gone from the store, but
-    // B's own session must be untouched — eject only resets the CALLER's
-    // connection when the ejected id matches its own current id.
+    // B ejects A's id, which B is NOT attached to. Eject may only reset the
+    // caller's own connection when the ejected id matches its current one, so
+    // A must leave the store while B's session stays usable.
     let (_temp_a, level_a) = temp_world1();
     let (_temp_b, level_b) = temp_world1();
     let server = common::start_test_server().await;

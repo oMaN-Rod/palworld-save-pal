@@ -45,10 +45,8 @@ async fn convert_steam_id_handles_uid_steam_id_and_garbage() {
     )
     .await;
     let garbage = common::next_json(&mut ws).await;
-    // Matches the real Python backend: `int("garbage!!")` raises
-    // `ValueError: invalid literal for int() with base 10: 'garbage!!'` and
-    // steam_id_handler.py emits `str(e)` verbatim (verified against the live
-    // handler). The generic "Invalid input..." fallback never fires in Python.
+    // The frontend matches on this exact string, so unparseable input must keep
+    // reporting it verbatim rather than falling back to a generic message.
     assert_eq!(
         garbage["data"]["error"],
         "invalid literal for int() with base 10: 'garbage!!'"
@@ -74,15 +72,10 @@ async fn swap_player_uids_without_save_errors() {
     server.handle.shutdown().await;
 }
 
-// ---------------------------------------------------------------------------
-// get_raw_data (Task 3E-5) -- port of ws/handlers/debug_handler.py's
-// get_raw_data_handler. get_raw_data's `data` payload is compared
-// STRUCTURALLY, not value-exact, by the parity replay (Contract deviation 6 --
-// see psp_core::domain::raw and rust/parity/README.md), so these WS-level
-// tests only pin the SHAPE the handler produces (empty object vs. resolved
-// non-empty object), never its exact field content.
-// ---------------------------------------------------------------------------
-
+// get_raw_data echoes uesave's own JSON serialization of the located save
+// subtree, so its exact field content is an implementation detail. These tests
+// pin only the SHAPE: an empty object when nothing resolves, a non-empty one
+// when a target does.
 #[tokio::test]
 async fn get_raw_data_without_resolvable_target_returns_empty_object() {
     let server = common::start_test_server().await;
@@ -98,10 +91,9 @@ async fn get_raw_data_without_resolvable_target_returns_empty_object() {
     assert_eq!(response["type"], "get_raw_data");
     assert_eq!(response["data"], serde_json::json!({}));
 
-    // get_guild_raw_data has no handler in Python either — parity is SILENCE
-    // (the dispatcher's error object is discarded by manager.py:35). Prove the
-    // silence by ordering: send the dead type, then a live probe; the very next
-    // frame must answer the probe, meaning the dead type emitted nothing.
+    // `get_guild_raw_data` has no handler and must stay SILENT. Prove it by
+    // ordering: send the dead type, then a live probe -- the very next frame
+    // answering the probe means the dead type emitted nothing.
     common::send_json(
         &mut ws,
         serde_json::json!({"type": "get_guild_raw_data", "data": null}),
@@ -120,13 +112,10 @@ async fn get_raw_data_without_resolvable_target_returns_empty_object() {
     server.handle.shutdown().await;
 }
 
-/// Always-run (uses the committed `tests/fixtures/saves/world1` fixture, not
-/// `PSP_TEST_SAVE_DIR`-gated): once a real save is loaded, `level: true`
-/// resolves `RawTarget::Level` to the whole GVAS root — a non-empty JSON
-/// object carrying at least the `properties` field `raw_json_for`'s doc
-/// comment says `Root` serializes to. `level` is used (rather than a
-/// player/pal/guild id) because it needs no id harvested from an earlier
-/// response burst — the loaded save always resolves it.
+/// With a save loaded, `level: true` resolves to the whole GVAS root: a
+/// non-empty object carrying a `properties` field. `level` is used rather than
+/// a player/pal/guild id because it needs no id harvested from an earlier
+/// response burst.
 #[tokio::test]
 async fn get_raw_data_level_resolves_against_a_loaded_world1_save() {
     let server = common::start_test_server().await;
@@ -142,8 +131,7 @@ async fn get_raw_data_level_resolves_against_a_loaded_world1_save() {
             "data": {"type": "steam", "path": level_sav, "local": false}}),
     )
     .await;
-    // Drain the select_save response burst -- get_guild_summaries is its
-    // last frame on a successful load (mirrors phase2_ws.rs::load_world1).
+    // get_guild_summaries is the last frame of a successful load.
     loop {
         let frame = common::next_json(&mut ws).await;
         if frame["type"] == "get_guild_summaries" {

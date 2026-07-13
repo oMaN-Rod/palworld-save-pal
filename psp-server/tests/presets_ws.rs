@@ -1,6 +1,5 @@
-//! Task 3B-2: preset CRUD WS integration test — drives get/add/update/delete/
-//! nuke over a live WebSocket against the real dispatcher + psp-db presets
-//! module (Task 3B-1), matching wire shapes from `preset_handler.py`.
+//! Preset CRUD over a live WebSocket: get/add/update/delete/nuke, plus the
+//! export/import paths that need a desktop file dialog.
 
 mod common;
 
@@ -9,7 +8,8 @@ async fn preset_crud_over_websocket() {
     let server = common::start_test_server().await;
     let mut ws = common::connect(&server).await;
 
-    // get_presets seeds from data/json/presets.json when empty (preset_handler.py:41)
+    // On an empty table, get_presets seeds itself from data/json/presets.json —
+    // hence the non-zero baseline count the later assertions compare against.
     common::send_json(
         &mut ws,
         serde_json::json!({"type": "get_presets", "data": null}),
@@ -77,7 +77,7 @@ async fn export_and_import_preset_require_desktop_dialog() {
     let server = common::start_test_server().await;
     let mut ws = common::connect(&server).await;
 
-    // Unknown preset id validated before the dialog check (preset_handler.py:100-106)
+    // An unknown preset id is rejected BEFORE the dialog-availability check.
     common::send_json(
         &mut ws,
         serde_json::json!({"type": "export_preset",

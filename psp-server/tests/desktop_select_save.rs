@@ -1,6 +1,5 @@
-//! Desktop-mode `select_save` native-file-dialog flow (Phase 5, Task 4).
-//! Port of `desktop.py:93-117` (`handle_file_selection`) as exercised through
-//! `handle_select_save`'s desktop branch.
+//! Desktop-mode `select_save`: the native-file-dialog branch of
+//! `handle_select_save`, driven through a queued (fake) dialog provider.
 
 mod common;
 
@@ -74,10 +73,10 @@ async fn valid_pick_persists_save_dir_before_loading() {
     )
     .await;
 
-    // The junk Level.sav eventually fails to parse -> an `error` message; drain
-    // frames (progress_message etc.) until we see it. save_dir must have been
-    // persisted BEFORE the load attempt (Python sets settings.save_dir first,
-    // desktop.py:136).
+    // The junk Level.sav fails to parse -> an `error` frame; drain progress
+    // frames until it arrives. save_dir must already be persisted by then: it
+    // is written BEFORE the load attempt, so a failed load still remembers the
+    // directory the user picked.
     loop {
         let reply = common::next_json(&mut socket).await;
         if reply["type"] == "error" {

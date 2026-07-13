@@ -1,20 +1,19 @@
-//! Phase 4 WS integration tests (Task 11: gamepass scan/delete/rename).
+//! GamePass WS surface: scan/rename/delete, the load + modded-save write flow,
+//! standalone save-format conversion and `unlock_map`.
+//!
 //! `PSP_GAMEPASS_PACKAGES_ROOT` and `PSP_BACKUPS_ROOT` are process-global env
-//! vars, so every assertion that depends on them lives in the single
-//! `gamepass_scan_and_management_flow` test below to avoid cross-test races
-//! (cargo runs tests in the same process, in parallel threads by default).
+//! vars and cargo runs tests in one process on parallel threads, so tests that
+//! depend on them take `common::GamepassEnvGuard` (which serializes them and
+//! restores the prior values) rather than setting the vars directly.
 
 mod common;
 
-/// Repo root, resolved from this crate's manifest dir (mirrors
-/// `phase2_ws.rs`'s `repo_root()`): `psp-server/..`.
 fn repo_root() -> std::path::PathBuf {
     std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("..")
 }
 
-/// Collects WS frames until (and including) the first whose `type` equals
-/// `target_type`. Used to gather the `progress_message`* burst a load or
-/// modded-save emits before its terminal response frame.
+/// Collects frames up to and including the first whose `type` is `target_type`,
+/// gathering the `progress_message` burst that precedes a terminal frame.
 async fn recv_until(ws: &mut common::WsClient, target_type: &str) -> Vec<serde_json::Value> {
     let mut frames = Vec::new();
     loop {
@@ -29,18 +28,12 @@ async fn recv_until(ws: &mut common::WsClient, target_type: &str) -> Vec<serde_j
 
 #[tokio::test]
 async fn gamepass_scan_and_management_flow() {
-    // Seed the synthetic wgs tree with the COMMITTED, always-present
-    // `tests/fixtures/saves/world1/LevelMeta.sav` (a real PlM1/Oodle save
-    // that `savio::read_sav_bytes` + `scan` parse for the world name) rather
-    // than the `PSP_PY_TESTDATA`-gated fixture — so this test RUNS
-    // unconditionally in a fresh clone / CI, exercising the brand-new
-    // scan/delete/rename WS handlers with real assertions. (The gamepass
-    // `backups/gamepass/` corpus is gitignored/local-only and is NOT a
-    // CI-safe fixture source.)
+    // The synthetic wgs tree is seeded with the committed world1 LevelMeta.sav
+    // (real PlM1/Oodle bytes the scanner can parse a world name out of), so
+    // this runs unconditionally in a fresh clone / CI.
     let meta_bytes =
         std::fs::read(repo_root().join("tests/fixtures/saves/world1/LevelMeta.sav")).unwrap();
 
-    // The world name scan should extract from those committed fixture bytes.
     let expected_world_name =
         psp_core::gamepass::scan::world_name_from_level_meta(&meta_bytes).unwrap();
     assert!(
@@ -78,7 +71,6 @@ async fn gamepass_scan_and_management_flow() {
     let server = common::start_test_server().await;
     let mut ws = common::connect(&server).await;
 
-    // scan
     common::send_json(
         &mut ws,
         serde_json::json!({"type": "scan_gamepass_saves", "data": null}),
@@ -93,7 +85,6 @@ async fn gamepass_scan_and_management_flow() {
     );
     assert_eq!(response["data"]["saves"][save_id]["player_count"], 1);
 
-    // rename world
     common::send_json(
         &mut ws,
         serde_json::json!({
@@ -120,7 +111,6 @@ async fn gamepass_scan_and_management_flow() {
         "Renamed World"
     );
 
-    // delete player
     common::send_json(
         &mut ws,
         serde_json::json!({
@@ -136,7 +126,6 @@ async fn gamepass_scan_and_management_flow() {
         format!("Deleted player {player_hex}")
     );
 
-    // delete save
     common::send_json(
         &mut ws,
         serde_json::json!({
@@ -152,7 +141,7 @@ async fn gamepass_scan_and_management_flow() {
         .unwrap()
         .starts_with("Deleted save with "));
 
-    // deleting again reports the Python error payload
+    // Deleting the same save twice reports a soft `error` payload, not a frame.
     common::send_json(
         &mut ws,
         serde_json::json!({
@@ -170,20 +159,18 @@ async fn gamepass_scan_and_management_flow() {
     server.handle.shutdown().await;
 }
 
-/// End-to-end gamepass LOAD + modded-save WRITE flow, exercised over the WS
-/// socket against a synthetic wgs container tree built from the COMMITTED
-/// `tests/fixtures/saves/world1` save (real PlM/Oodle bytes, always present in
-/// a fresh clone / CI — no `PSP_PY_TESTDATA` gate). Mirrors Python's
-/// `select_save` (gamepass branch) -> `select_gamepass_save` ->
-/// `save_modded_save` sequence in `local_file_handler.py`.
+/// End-to-end gamepass LOAD + modded-save WRITE flow (`select_save` ->
+/// `select_gamepass_save` -> `save_modded_save`) against a synthetic wgs
+/// container tree built from the committed world1 save.
 #[tokio::test]
 async fn select_gamepass_save_loads_and_saves_modded_copy() {
     let world1 = repo_root().join("tests/fixtures/saves/world1");
     let level_bytes = std::fs::read(world1.join("Level.sav")).unwrap();
     let meta_bytes = std::fs::read(world1.join("LevelMeta.sav")).unwrap();
-    // world1's players are named with UPPERCASE simple-hex UUIDs (Steam on-disk
-    // form); parse one back to a Uuid so the synthetic gamepass container name
-    // (`Players-<HEX>`) and the wire `players` array (dashed lowercase) agree.
+    // world1's players are named with UPPERCASE simple-hex UUIDs (the Steam
+    // on-disk form); parsing one back to a Uuid keeps the synthetic container
+    // name (`Players-<HEX>`) and the wire `players` array (dashed lowercase)
+    // agreeing on the same player.
     let player_uuid = uuid::Uuid::parse_str("43797F87000000000000000000000000").unwrap();
     let player_bytes =
         std::fs::read(world1.join("Players/43797F87000000000000000000000000.sav")).unwrap();
@@ -217,10 +204,9 @@ async fn select_gamepass_save_loads_and_saves_modded_copy() {
 
     let server = common::start_test_server().await;
 
-    // The gamepass load reads the container dir from settings.save_dir (set by
-    // the desktop dialog in production); seed it directly in the SAME SQLite
-    // file the server opened (`<temp>/psp-rs.db`), then drop our pool so no
-    // extra connection lingers against it.
+    // The gamepass load reads the container dir from settings.save_dir (the
+    // desktop dialog writes it in production), so seed it in the SAME SQLite
+    // file the server opened, then drop the pool so no connection lingers.
     let pool = psp_db::open(&server._temp_dir.path().join("psp-rs.db"))
         .await
         .unwrap();
@@ -231,7 +217,6 @@ async fn select_gamepass_save_loads_and_saves_modded_copy() {
 
     let mut ws = common::connect(&server).await;
 
-    // select_save (gamepass branch) -> select_gamepass_save with the saves map.
     common::send_json(
         &mut ws,
         serde_json::json!({
@@ -248,7 +233,6 @@ async fn select_gamepass_save_loads_and_saves_modded_copy() {
     assert_eq!(response["type"], "select_gamepass_save");
     assert!(response["data"][save_id]["world_name"].is_string());
 
-    // select_gamepass_save -> progress* -> loaded_save_files -> summaries.
     common::send_json(
         &mut ws,
         serde_json::json!({"type": "select_gamepass_save", "data": save_id}),
@@ -270,7 +254,6 @@ async fn select_gamepass_save_loads_and_saves_modded_copy() {
         .iter()
         .any(|message| message["type"] == "get_player_summaries"));
 
-    // save_modded_save (gamepass branch) -> progress* -> save_modded_save.
     common::send_json(
         &mut ws,
         serde_json::json!({"type": "save_modded_save", "data": "Modded World"}),
@@ -301,12 +284,9 @@ async fn select_gamepass_save_loads_and_saves_modded_copy() {
     server.handle.shutdown().await;
 }
 
-/// Standalone (headless) `convert_save_format`: gamepass -> steam -> gamepass,
-/// built entirely from the COMMITTED `tests/fixtures/saves/world1` fixture (no
-/// `PSP_PY_TESTDATA` gate), plus the sentinel-path and nothing-loaded error
-/// branches. Runs unconditionally in a fresh clone / CI. Only the second leg
-/// (steam -> gamepass) writes a backup (`import_steam_dir_to_gamepass`), so
-/// `PSP_BACKUPS_ROOT` is pointed at a temp dir for the whole test to keep the
+/// Standalone `convert_save_format`: gamepass -> steam -> gamepass, plus the
+/// sentinel-path and nothing-loaded error branches. The steam -> gamepass leg
+/// writes a backup, so `PSP_BACKUPS_ROOT` is pointed at a temp dir to keep the
 /// process CWD's real `backups/` untouched.
 #[tokio::test]
 async fn convert_save_format_standalone_round_trip_over_ws() {
@@ -341,7 +321,7 @@ async fn convert_save_format_standalone_round_trip_over_ws() {
     let server = common::start_test_server().await;
     let mut ws = common::connect(&server).await;
 
-    // gamepass → steam (standalone, explicit paths)
+    // gamepass -> steam
     common::send_json(
         &mut ws,
         serde_json::json!({
@@ -372,7 +352,7 @@ async fn convert_save_format_standalone_round_trip_over_ws() {
             && message["data"] == format!("Converting Level.sav for {save_id}...")
     }));
 
-    // steam → gamepass (standalone, back into the same container dir)
+    // steam -> gamepass, back into the same container dir
     common::send_json(
         &mut ws,
         serde_json::json!({
@@ -392,7 +372,7 @@ async fn convert_save_format_standalone_round_trip_over_ws() {
     let saves = psp_core::gamepass::scan::scan_saves(&container_dir).unwrap();
     assert!(saves.get(new_save_id).is_some());
 
-    // sentinel path in web mode → "No file selected."
+    // The "__select__" sentinel asks for a native dialog, unavailable in web mode.
     common::send_json(
         &mut ws,
         serde_json::json!({
@@ -404,7 +384,7 @@ async fn convert_save_format_standalone_round_trip_over_ws() {
     let response = common::next_json(&mut ws).await;
     assert_eq!(response["data"]["error"], "No file selected.");
 
-    // nothing loaded, no paths → Python's exact error string
+    // Nothing loaded and no paths given.
     common::send_json(
         &mut ws,
         serde_json::json!({
@@ -422,10 +402,8 @@ async fn convert_save_format_standalone_round_trip_over_ws() {
     server.handle.shutdown().await;
 }
 
-/// `convert_sav_file` round trip over the WS socket: a real committed
-/// player `.sav` (`tests/fixtures/saves/world1/Players/...`) -> JSON string ->
-/// back to `.sav` (base64), asserting the rebuilt bytes carry the PlM1 magic.
-/// Runs unconditionally (no `PSP_PY_TESTDATA` gate).
+/// `convert_sav_file` round trip: a real committed player `.sav` -> JSON string
+/// -> back to `.sav` (base64), whose rebuilt bytes must carry the PlM1 magic.
 #[tokio::test]
 async fn convert_sav_file_round_trips_over_ws() {
     let world1 = repo_root().join("tests/fixtures/saves/world1");
@@ -472,9 +450,7 @@ async fn convert_sav_file_round_trips_over_ws() {
 }
 
 /// Reads `SaveData.WorldMapMaskTextureV4` back out of a `LocalData.sav`-shaped
-/// GVAS blob, mirroring `psp_core::localdata`'s own private test helper of the
-/// same name (that one is `cfg(test)`-private to `psp-core`, so this WS-level
-/// test needs its own copy to inspect the mask before/after the handler runs).
+/// GVAS blob, so the mask can be inspected before and after the handler runs.
 fn mask_bytes(local_data_sav: &[u8]) -> Vec<u8> {
     let save = uesave::Save::read_with_types(
         &mut std::io::Cursor::new(local_data_sav),
@@ -494,16 +470,12 @@ fn mask_bytes(local_data_sav: &[u8]) -> Vec<u8> {
     bytes.clone()
 }
 
-/// Hermetic `unlock_map` test: grafts a synthetic `WorldMapMaskTextureV4`
-/// mask `[1, 2, 3, 0, 4]` into the COMMITTED `tests/fixtures/saves/world1`
-/// `LevelMeta.sav`'s `SaveData` struct (the same graft `psp_core::localdata`'s
-/// own hermetic test uses, ported to a real committed fixture instead of the
-/// gamepass backup corpus), writes the result to a TEMP `LocalData.sav`, and
-/// drives the `unlock_map` WS handler against that temp path — the real
-/// `tests/fixtures` tree is never written to.
+/// Grafts a synthetic `WorldMapMaskTextureV4` mask `[1, 2, 3, 0, 4]` into the
+/// committed world1 `LevelMeta.sav`, writes the result to a TEMP
+/// `LocalData.sav`, and drives `unlock_map` against that.
 ///
-/// SAFETY: `unlock_map` rewrites its target file IN PLACE, so this test only
-/// ever points the handler at a path under `tempfile::tempdir()`.
+/// SAFETY: `unlock_map` rewrites its target file IN PLACE, so the handler must
+/// only ever be pointed at a path under `tempfile::tempdir()`.
 #[tokio::test]
 async fn unlock_map_zeroes_mask_and_backs_up() {
     let world1 = repo_root().join("tests/fixtures/saves/world1");
@@ -570,7 +542,7 @@ async fn unlock_map_zeroes_mask_and_backs_up() {
     assert_eq!(&rewritten[8..12], b"PlM1");
     assert_eq!(mask_bytes(&rewritten), vec![0, 0, 0, 0, 0]);
 
-    // Wrong file name → handler-internal error message (NOT a dispatcher error).
+    // A wrong file name is rejected by the handler itself, before any write.
     let wrong_path = temp.path().join("Level.sav");
     std::fs::write(&wrong_path, b"x").unwrap();
     common::send_json(
@@ -588,7 +560,7 @@ async fn unlock_map_zeroes_mask_and_backs_up() {
         "Failed to unlock map: Please select the LocalData.sav file."
     );
 
-    // Missing path (web mode) → "No file path provided"
+    // Web mode has no dialog to fall back on, so a missing path is an error.
     common::send_json(
         &mut ws,
         serde_json::json!({"type": "unlock_map", "data": {}}),

@@ -1,22 +1,18 @@
-//! Shared WS test-server helper (Task 3B-2). Mirrors the connect/send/recv
-//! pattern established in `tests/phase2_ws.rs` and `tests/ws_integration.rs` —
-//! `futures::{SinkExt, StreamExt}` (not `futures_util`, which psp-server does
-//! not depend on directly) supplies the socket's `send`/`next` methods.
+//! Shared WS test-server helpers. This module is compiled fresh into every
+//! integration-test binary via `mod common;`, so helpers a given binary
+//! doesn't call need `#[allow(dead_code)]`.
 
 use futures::{SinkExt, StreamExt};
 use tokio_tungstenite::tungstenite::Message;
 
 pub struct TestServer {
     pub handle: psp_server::ServerHandle,
-    /// Held for RAII (deletes the temp tree on drop) AND read by tests that
-    /// need the server's DB file: the SQLite database lives at
-    /// `_temp_dir.path().join("psp-rs.db")` (see `start_test_server`).
+    /// Deletes the temp tree on drop; also read by tests that need the
+    /// server's SQLite file at `_temp_dir.path().join("psp-rs.db")`.
     pub _temp_dir: tempfile::TempDir,
 }
 
-/// `#[allow(dead_code)]`: `tests/common/mod.rs` is compiled fresh into every
-/// integration-test binary via `mod common;`; binaries that only exercise
-/// desktop mode (e.g. `desktop_config.rs`) don't call this helper.
+/// Starts a web-mode server on an ephemeral port (`port: 0`).
 #[allow(dead_code)]
 pub async fn start_test_server() -> TestServer {
     let temp_dir = tempfile::tempdir().unwrap();
@@ -37,10 +33,8 @@ pub async fn start_test_server() -> TestServer {
     }
 }
 
-/// Mirrors `start_test_server`, but runs in desktop mode with an
-/// injected `FileDialogProvider` (Task P5-2). Reused by Phase 5 tests
-/// that exercise desktop-only handler branches (select_save, unlock_map,
-/// open_folder) against a `QueuedDialogProvider`.
+/// Same, but in desktop mode with an injected `FileDialogProvider`, so
+/// desktop-only handler branches can run headless.
 #[allow(dead_code)]
 pub async fn start_desktop_test_server(
     dialogs: std::sync::Arc<dyn psp_server::desktop_dialogs::FileDialogProvider>,
@@ -80,11 +74,9 @@ pub async fn send_json(socket: &mut WsClient, value: serde_json::Value) {
 
 pub async fn next_json(socket: &mut WsClient) -> serde_json::Value {
     loop {
-        // 30s (not 10s): a WS flow that (de)compresses a real Level.sav via
-        // Oodle can have a single frame delayed well past 10s when the whole
-        // `cargo test --workspace` suite saturates the CPU in parallel. The
-        // timeout only bounds a genuine hang, so a generous value costs nothing
-        // on the happy path but removes a load-induced flake.
+        // 30s: a flow that (de)compresses a real Level.sav via Oodle can stall
+        // a frame well past 10s when the suite saturates the CPU in parallel.
+        // The timeout only bounds a genuine hang.
         match tokio::time::timeout(std::time::Duration::from_secs(30), socket.next())
             .await
             .expect("timed out waiting for a frame")
@@ -99,13 +91,8 @@ pub async fn next_json(socket: &mut WsClient) -> serde_json::Value {
 }
 
 /// Serializes tests that mutate the PROCESS-GLOBAL gamepass env vars and
-/// restores their prior values on Drop (so a panic mid-test cannot leak a
-/// temp path into a sibling test). Hold this for the whole test body.
-///
-/// `#[allow(dead_code)]`: `tests/common/mod.rs` is compiled fresh into every
-/// integration-test binary via `mod common;`, and only `phase4_ws.rs` uses
-/// this guard today — the other binaries would otherwise fail
-/// `-D dead-code`.
+/// restores their prior values on Drop, so a panic mid-test cannot leak a temp
+/// path into a sibling test. Hold this for the whole test body.
 #[allow(dead_code)]
 pub static GAMEPASS_ENV_LOCK: tokio::sync::Mutex<()> = tokio::sync::Mutex::const_new(());
 
@@ -117,9 +104,6 @@ pub struct GamepassEnvGuard {
 
 #[allow(dead_code)]
 impl GamepassEnvGuard {
-    /// Acquire the lock, snapshot the current values of the given vars, then
-    /// set them. `vars` is a slice of (name, value) pairs; only the named
-    /// vars are touched. Restored (or removed if previously unset) on Drop.
     pub async fn acquire(vars: &[(&'static str, std::path::PathBuf)]) -> Self {
         let lock = GAMEPASS_ENV_LOCK.lock().await;
         let mut previous = Vec::new();

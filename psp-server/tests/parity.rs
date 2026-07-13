@@ -1,7 +1,8 @@
-//! Replays parity/fixtures/** against an in-process Rust server and
-//! asserts response-sequence equality with the recorded Python behavior.
-//! With no fixtures generated (fresh clone / CI), the test skips loudly on
-//! stderr and passes — see rust/parity/README.md for the three states.
+//! Replays recorded request/response fixtures against an in-process server and
+//! asserts each response sequence still matches, frame for frame and in order.
+//! The fixtures are generated locally, so with none on disk (a fresh clone, or
+//! CI) the replay test skips loudly on stderr and passes; the comparators and
+//! masks it relies on are unit-tested below regardless.
 
 use std::path::PathBuf;
 use std::time::Duration;
@@ -13,18 +14,9 @@ use tokio_tungstenite::tungstenite::Message;
 
 use psp_server::{start_server, ServerConfig};
 
-/// The load-bearing comparison at the heart of the parity harness (see
-/// `rust/parity/README.md`): are `actual` and `expected` the SAME sequence,
-/// in the SAME order? `replay_all_fixtures` below calls this — and nothing
-/// else decides pass/fail for a fixture — so a regression that made this
-/// function set-based (sorted/deduped before comparing) instead of
-/// order-based would fail the `compare_responses_*` unit tests even with no
-/// live multi-frame fixture to exercise it end-to-end.
-///
-/// `[Value]`/`Vec<Value>` equality is already index-wise (order- and
-/// length-sensitive) — this function doesn't add that property, it just
-/// makes it a named, directly-testable one rather than an inline
-/// `assert_eq!` that only a live replay could ever reach.
+/// The single pass/fail decision for a fixture: same frames, same ORDER, same
+/// count. Named (rather than an inline `assert_eq!`) so the ordering rule stays
+/// unit-testable without a live multi-frame fixture to replay.
 fn compare_responses(
     fixture_name: &str,
     request_type: &str,
@@ -43,33 +35,20 @@ fn compare_responses(
     ))
 }
 
-/// How long `assert_no_surplus_frame` waits for a frame that should NOT
-/// arrive before declaring the burst well and truly over. Mirrors the
-/// purpose of `scripts/capture_parity.py`'s `IDLE_SECONDS` (2.0) — "this much
-/// silence means the response burst ended" — but is much shorter: capture's
-/// timeout has to tolerate Python doing real work (game-data loads, DB I/O)
-/// before each frame it emits, whereas this check races an in-process Rust
-/// server over a loopback socket that has, by construction, ALREADY finished
-/// emitting every frame the fixture expects (they were read out one `send`
-/// ahead of this check running). 250ms is generous slack for a surplus frame
-/// already in flight without materially slowing the suite down per fixture.
+/// How long `assert_no_surplus_frame` waits for a frame that should NOT arrive.
+/// By the time it runs, the in-process server has already emitted every frame
+/// the fixture expects, so 250ms is ample slack for a surplus frame in flight
+/// over a loopback socket without slowing the suite down per fixture.
 const SURPLUS_FRAME_IDLE_TIMEOUT: Duration = Duration::from_millis(250);
 
-/// The other half of `compare_responses`: after a fixture's expected frames
-/// have been read, confirms NO further frame arrives within `idle_timeout`.
-/// Reading exactly `expected_frame_count` frames and declaring victory (what
-/// `replay_all_fixtures` used to do, unconditionally) is blind to a Rust
-/// handler that emits MORE frames than Python recorded: mid-corpus, the
-/// surplus frame sits in the socket buffer and corrupts the NEXT fixture's
-/// comparison (caught, but misattributed to the wrong fixture); on a
-/// corpus's LAST fixture, `socket.close`/`handle.shutdown` simply discard it
-/// and nothing ever notices.
+/// The other half of `compare_responses`: after a fixture's expected frames have
+/// been read, confirms NO further frame arrives. A handler emitting MORE frames
+/// than the fixture recorded would otherwise corrupt the NEXT fixture's
+/// comparison mid-corpus, and go entirely unnoticed on a corpus's LAST fixture,
+/// where `socket.close`/`handle.shutdown` just discard it.
 ///
-/// Generic over the stream type — rather than the concrete
-/// `tokio_tungstenite::WebSocketStream` `replay_all_fixtures` uses — purely so
-/// this can be unit-tested against a `futures::stream::iter` with a surplus
-/// frame already queued, with no live socket or server required. See
-/// `assert_no_surplus_frame_errs_when_a_frame_is_already_queued` below.
+/// Generic over the stream so it can be unit-tested against a
+/// `futures::stream::iter` with a surplus frame queued, no live socket needed.
 async fn assert_no_surplus_frame<S>(
     socket: &mut S,
     fixture_name: &str,
@@ -90,109 +69,68 @@ where
     }
 }
 
-/// Justified, documented parity divergences as `(message_type, json_pointer)`
-/// pairs whose value is IRREDUCIBLY nondeterministic (generated independently by
-/// Python at capture time and Rust at replay time). Each is masked in BOTH the
-/// expected and the actual frame before the equality check. See
-/// `rust/parity/README.md` ("Determinism policy") for the per-entry
-/// justification. This is the ONLY divergence mechanism: any other field that
-/// differs is a REAL bug to fix in domain code, never to add here.
+/// `(message_type, json_pointer)` pairs whose value is IRREDUCIBLY
+/// nondeterministic — generated fresh on the recording run and again on the
+/// replay run, so it can never match. Each is masked on BOTH the recorded and
+/// the replayed frame before the equality check. This is the ONLY divergence
+/// mechanism: any other field that differs is a REAL bug to fix in domain code,
+/// never to add here.
 ///
-/// Phases 0–1 kept this EMPTY. Phase 2 is the first phase with genuinely
-/// nondeterministic outputs, adding four masks (the two `instance_id` entries
-/// plus `download_save_file`'s `name`/`content`); Phase 3 added a fifth,
-/// `add_preset:/data/id`, for a total of five. `get_presets`' ids are
-/// deliberately NOT masked here — a static JSON pointer can't reach a dynamic
-/// dict key, so it uses `compare_get_presets_equivalent` instead.
+/// A static pointer can only reach a FIXED path, so array- and map-shaped
+/// payloads get dedicated walkers instead (`mask_ups_list_frames`,
+/// `mask_gps_response_frame`, `compare_get_presets_equivalent`).
 const PARITY_IGNORED_PATHS: &[(&str, &str)] = &[
-    // A freshly-created pal's InstanceId is a `uuid4` minted INDEPENDENTLY by
-    // Python (capture) and Rust (replay) — it can never match. ONLY this one
-    // field is masked; every other field of the new pal (character_id,
-    // nickname, container id, storage_slot, every stat) is still compared
-    // strictly. `clone_pal`/`clone_dps_pal` answer on the `add_pal`/
-    // `add_dps_pal` response types, so these two entries cover them too.
+    // A freshly-created pal's InstanceId is a fresh uuid4. ONLY that field is
+    // masked; every other field of the new pal (character_id, nickname,
+    // container id, storage_slot, every stat) is still compared strictly.
+    // clone_pal/clone_dps_pal answer on these same response types.
     ("add_pal", "/data/pal/instance_id"),
     ("add_dps_pal", "/data/pal/instance_id"),
-    // download_save_file: `name` embeds a `Local::now()` timestamp, and
-    // `content` is a base64 zip whose CONTAINER (per-entry DOS timestamps +
-    // Python `zipfile` vs Rust `zip` deflate streams) differs even when the
-    // saves inside are byte-identical. Neither is a blind skip: the replay
-    // loop additionally (a) shape-checks `name` and asserts its world-name
-    // prefix matches, and (b) decodes BOTH zips and asserts the DECOMPRESSED
-    // GVAS of `Level.sav` and every `Players/*.sav` member is byte-identical
-    // (see `compare_download_equivalent`).
+    // `name` embeds a wall-clock timestamp, and `content` is a base64 zip whose
+    // CONTAINER framing (per-entry DOS timestamps, deflate stream) differs even
+    // when the saves inside are byte-identical. Neither is a blind skip: the
+    // replay loop shape-checks `name`, and decodes both zips to compare the
+    // DECOMPRESSED GVAS of every member — see `compare_download_equivalent`.
     ("download_save_file", "/data/0/name"),
     ("download_save_file", "/data/0/content"),
-    // add_preset: the response echoes the server-generated uuid4 preset id —
-    // minted INDEPENDENTLY by Python (capture) and Rust (replay), so it can
-    // never match. get_presets (the dict-keyed listing that also carries
-    // these ids, as both the dict KEYS and each preset's `id`/`pal_preset_id`/
-    // `pal_preset.id`) is NOT handled here: a static JSON pointer can't mask
-    // a dynamic dict key, so it gets its own comparator — see
-    // `compare_get_presets_equivalent` below.
+    // The response echoes a server-generated uuid4 preset id.
     ("add_preset", "/data/id"),
-    // Task 3C-6 (db-ups scenario). Every timestamp below is a wall-clock value
-    // written by whichever backend ran (Python at capture, Rust at replay) and
-    // can never match; each freshly-persisted pal's `instance_id` is likewise
-    // a `uuid4` minted independently. All are SINGLE-OBJECT frames reachable by
-    // a fixed JSON pointer; the ARRAY-shaped list frames (`get_ups_pals`,
-    // `get_ups_collections`, `get_ups_tags`) are handled by
-    // `mask_ups_list_frames` instead (a static pointer can't reach every
-    // element). Everything else on these frames (character_id, nickname, level,
-    // tags, notes, source_*, counts, names, colors) is still compared strictly.
-    //
-    // add_ups_pal echoes the whole persisted record.
+    // Every timestamp below is a wall-clock value written by whichever run
+    // produced the frame, and each freshly-persisted pal's `instance_id` is a
+    // fresh uuid4. Everything else on these frames (character_id, nickname,
+    // level, tags, notes, source_*, counts, names, colors) is compared strictly.
     ("add_ups_pal", "/data/created_at"),
     ("add_ups_pal", "/data/updated_at"),
     ("add_ups_pal", "/data/last_accessed_at"),
     ("add_ups_pal", "/data/instance_id"),
-    // update_ups_pal / clone_ups_pal wrap the pal under `pal`/`cloned_pal`.
     ("update_ups_pal", "/data/pal/updated_at"),
     ("update_ups_pal", "/data/pal/instance_id"),
     ("clone_ups_pal", "/data/cloned_pal/instance_id"),
-    // get_ups_stats: `last_updated` is a timestamp; `storage_size_mb` differs
-    // by a few bytes because Python orjson vs Rust serde_json compact-encode
-    // the same pal_data JSON slightly differently (float/whitespace) — a
-    // documented, sub-kilobyte serializer divergence, not a data difference.
+    // `storage_size_mb` drifts by a few bytes because the two runs' JSON
+    // encoders compact-encode the same pal_data slightly differently
+    // (float/whitespace) — a serializer artifact, not a data difference.
     ("get_ups_stats", "/data/stats/last_updated"),
     ("get_ups_stats", "/data/stats/storage_size_mb"),
-    // Collections / tags wrap their record under `collection`/`tag`.
     ("create_ups_collection", "/data/collection/created_at"),
     ("create_ups_collection", "/data/collection/updated_at"),
     ("update_ups_collection", "/data/collection/updated_at"),
     ("create_ups_tag", "/data/tag/created_at"),
     ("create_ups_tag", "/data/tag/updated_at"),
     ("update_ups_tag", "/data/tag/updated_at"),
-    // Task 3D-3 (gps scenario). add_gps_pal mints a fresh uuid4 InstanceId,
-    // INDEPENDENTLY minted by Python (capture) and Rust (replay) exactly like
-    // add_pal/add_dps_pal above -- it can never match. handle_clone_gps_pal
-    // (psp-server/src/handlers/gps.rs) answers on this same
-    // `add_gps_pal` wire type, so this entry covers that path too. Every
-    // other field of the new pal (character_id, nickname, storage_slot,
-    // every stat) is still compared strictly. get_gps_response's slot-keyed
-    // map of GPS pals is NOT handled here -- a static JSON pointer can't
-    // reach a dynamic map value -- see mask_gps_response_frame below.
+    // add_gps_pal mints a fresh uuid4 InstanceId, exactly like add_pal above.
+    // handle_clone_gps_pal answers on this same wire type, so it is covered too.
     ("add_gps_pal", "/data/pal/instance_id"),
-    // Task P6-14 (servers scenario). detect_workshop_dir's own response IS
-    // machine-dependent: it echoes whatever Steam workshop install path the
-    // CAPTURING machine resolved (or "" if none was found), which the
-    // REPLAYING machine (a different CI/dev box, almost always with no Steam
-    // install at all) can never reproduce. Nothing else in the servers
-    // corpus is masked -- list_servers/get_server/get_server_stats/
-    // toggle_server_mod all answer fully deterministically (empty list /
-    // "Server not found") against the fresh, empty psp.db the corpus is
-    // captured against.
+    // Machine-dependent: this echoes whatever Steam workshop install path the
+    // host resolved (or "" if none), which another machine cannot reproduce.
+    // Nothing else in the servers corpus is masked — every other handler there
+    // answers deterministically against a fresh, empty DB.
     ("detect_workshop_dir", "/data/workshop_dir"), // machine-dependent Steam install location
 ];
 
-/// The db-ups list frames carry an ARRAY of records whose per-element
-/// timestamps / instance ids are independently generated (Python at capture,
-/// Rust at replay) — a static `PARITY_IGNORED_PATHS` pointer can only reach a
-/// FIXED path, never every element of a variable-length array. Mask those
-/// per-element fields IN PLACE, leaving deterministic siblings
-/// (`total_count`/`offset`/`limit`, names, colors, counts) strictly compared.
-/// Called from `mask_ignored_paths` so it runs on both the expected and the
-/// actual frame, exactly like the static masks.
+/// The UPS list frames carry an ARRAY of records, so their per-element
+/// timestamps / instance ids need a walker rather than a fixed pointer.
+/// Deterministic siblings (`total_count`/`offset`/`limit`, names, colors,
+/// counts) stay strictly compared.
 fn mask_ups_list_frames(message_type: &str, value: &mut Value) {
     let (array_field, keys): (&str, &[&str]) = match message_type {
         "get_ups_pals" => (
@@ -223,24 +161,12 @@ fn mask_ups_list_frames(message_type: &str, value: &mut Value) {
     }
 }
 
-/// `get_gps_response`'s `data` is a DYNAMIC slot-keyed object (Global Pal
-/// Storage's `BTreeMap<i32, PalDto>`, JSON-encoded as `{"0": {pal...}, "3":
-/// {pal...}}` -- a map keyed by storage slot, not an array), so -- like
-/// `mask_ups_list_frames` above -- a static `PARITY_IGNORED_PATHS` pointer
-/// can't reach every value. After `add_gps_pal`, the newly-added pal's
-/// `instance_id` is a fresh `uuid4` minted INDEPENDENTLY by Python (capture)
-/// and Rust (replay) and can never match. Every OTHER GPS pal in the map was
-/// read from the same on-disk `GlobalPalStorage.sav` by both backends, so its
-/// `instance_id` is already stable and IDENTICAL between capture and replay
-/// -- masking it too is harmless (a no-op on already-equal values), and doing
-/// so unconditionally (rather than trying to distinguish "the one pal that's
-/// new" from the rest) keeps this walker as simple as `mask_ups_list_frames`.
-/// GPS pals carry no DB timestamps (unlike db-ups' `created_at`/etc.), so
-/// `instance_id` is the only field this masks; every other field (
-/// `character_id`, `nickname`, stats, the slot key itself) stays strictly
-/// compared. The `error`/`available: false` no-save / no-gps-file shapes
-/// (see `handle_request_gps` in `psp-server/src/handlers/gps.rs`) have
-/// no pal map under `data` at all, so this is a no-op for them.
+/// `get_gps_response`'s `data` is a slot-keyed MAP of pals, so it needs a walker
+/// like `mask_ups_list_frames` above. Only a pal added during the run has a
+/// fresh `instance_id`; the rest were read from the same on-disk
+/// `GlobalPalStorage.sav` on both runs and already match, so masking every slot
+/// unconditionally is a no-op for them and keeps this simple. Every other field
+/// (character_id, nickname, stats, the slot key itself) stays strictly compared.
 fn mask_gps_response_frame(message_type: &str, value: &mut Value) {
     if message_type != "get_gps_response" {
         return;
@@ -250,8 +176,8 @@ fn mask_gps_response_frame(message_type: &str, value: &mut Value) {
     };
     for pal in slots.values_mut() {
         let Some(object) = pal.as_object_mut() else {
-            // The error/`available: false` shapes' `data` values are
-            // strings/bools, not pal objects -- nothing to mask.
+            // The no-save / no-gps-file shapes put a string or bool under
+            // `data` instead of a pal map -- nothing to mask.
             continue;
         };
         if let Some(field) = object.get_mut("instance_id") {
@@ -271,13 +197,10 @@ fn mask_ignored_paths(message_type: &str, value: &mut Value) {
             }
         }
     }
-    // db-ups list frames need per-element masking a fixed pointer can't do.
     mask_ups_list_frames(message_type, value);
-    // get_gps_response's slot-keyed map needs the same per-value treatment.
     mask_gps_response_frame(message_type, value);
-    // `loaded_save_files` gained a feature-only `session_id` (SP-T1); Python's
-    // fixtures never had it, so drop the whole key rather than mask its value
-    // (masking can't reconcile a key that's ABSENT on the expected side).
+    // `session_id` post-dates the fixtures, so it is DROPPED rather than masked:
+    // a mask can't reconcile a key that is absent on the recorded side.
     if message_type == "loaded_save_files" {
         if let Some(data) = value.get_mut("data").and_then(Value::as_object_mut) {
             data.remove("session_id");
@@ -285,22 +208,13 @@ fn mask_ignored_paths(message_type: &str, value: &mut Value) {
     }
 }
 
-/// gamepass corpus (Task P4-14): `save_modded_save`'s gamepass branch emits
-/// SIX response frames -- five `progress_message` frames, then the final
-/// `save_modded_save` frame (`local_file_handler.py:88-132` /
-/// `save_file.rs::write_modded_gamepass_containers`). Response index 1 is
-/// `f"Created backup at: {backup_path}"` -- a wall-clock-timestamped backup
-/// directory name, computed independently by Python at capture time and
-/// Rust at replay time, so it can never match. This can't be a
-/// `PARITY_IGNORED_PATHS` entry keyed by response `type`: EVERY frame in
-/// this sequence (including the four fully-deterministic ones) shares the
-/// generic `progress_message` wire type, which is also used by countless
-/// deterministic progress lines in every OTHER corpus -- a type-wide mask
-/// would blank all of those too. Masking by (request type, response INDEX)
-/// instead stays narrow to this one frame; the prefix check makes a future
-/// re-ordering of the progress sequence fail LOUDLY (the frame silently
-/// stops being masked and the aggregate `compare_responses` catches the raw
-/// text mismatch) rather than silently masking the wrong field.
+/// Response index 1 of `save_modded_save`'s gamepass burst names a
+/// wall-clock-timestamped backup directory, so it can never match. A mask keyed
+/// by response `type` is useless here: every frame in the burst shares the
+/// generic `progress_message` type, as do countless deterministic progress lines
+/// elsewhere. Keying on (request type, response INDEX) keeps it narrow, and the
+/// prefix check means a re-ordered progress sequence fails LOUDLY — the frame
+/// simply stops being masked — instead of silently masking the wrong field.
 fn mask_gamepass_backup_progress_line(
     request_type: &str,
     response_index: usize,
@@ -321,23 +235,12 @@ fn mask_gamepass_backup_progress_line(
     value["data"] = Value::String("<masked>".to_string());
 }
 
-/// The gamepass corpus's shared tmp state, written once by
-/// `scripts/capture_parity.py`'s `build_gamepass_corpus` and read by every
-/// replay run: `wgs/` (the LIVE container tree, mutated by `save_modded_save`
-/// each time the corpus replays), `wgs-pristine/` (a snapshot taken right
-/// after the corpus was built, before any request touched it),
-/// `LocalData.sav` (the working copy `unlock_map` zeroes IN PLACE) and
-/// `LocalData.sav.pristine` (an untouched copy -- see
-/// `parity/README.md`, "gamepass scenario", for why a synthetic graft
-/// is used here instead of a real corpus `LocalData.sav`, which neither
-/// `world1` nor `world2` has).
+/// The gamepass corpus's shared on-disk state, written once when the corpus is
+/// captured and read by every replay: `wgs/` (the LIVE container tree, which
+/// `save_modded_save` mutates on each replay), `wgs-pristine/` (the snapshot it
+/// is restored from), `LocalData.sav` (the working copy `unlock_map` zeroes IN
+/// PLACE) and `LocalData.sav.pristine` (its untouched original).
 fn gamepass_tmp_root() -> PathBuf {
-    // Deliberately built WITHOUT a literal ".." component (unlike e.g.
-    // `fixtures_root`'s "../parity/fixtures" elsewhere in this file): this
-    // exact PathBuf is never compared against a Python-captured string, but
-    // keeping it clean costs nothing and avoids ever having to reason about
-    // whether a lexically-unnormalized path behaves the same as a clean one
-    // for the plain filesystem calls below.
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
         .parent()
         .expect("psp-server crate dir has a parent (rust/)")
@@ -346,10 +249,6 @@ fn gamepass_tmp_root() -> PathBuf {
         .join("gamepass")
 }
 
-/// Recursively copies `source` into `destination`, creating `destination`
-/// (and every subdirectory) as needed. Used to restore the gamepass corpus's
-/// `wgs/` container tree from its `wgs-pristine/` snapshot before every
-/// replay run, undoing whatever `save_modded_save` wrote into it last time.
 fn copy_dir_recursive(source: &std::path::Path, destination: &std::path::Path) {
     std::fs::create_dir_all(destination).unwrap();
     for entry in std::fs::read_dir(source).unwrap() {
@@ -363,13 +262,10 @@ fn copy_dir_recursive(source: &std::path::Path, destination: &std::path::Path) {
     }
 }
 
-/// Resets every piece of the gamepass corpus's shared on-disk state that a
-/// PREVIOUS replay run (or the capture run itself) may have mutated, so this
-/// replay starts from the exact snapshot `build_gamepass_corpus` captured.
-/// Returns `false` (and resets nothing) when `rust/parity/tmp/gamepass`
-/// doesn't exist -- the normal state on a fresh clone/CI, or before the
-/// gamepass corpus has ever been captured locally; the caller treats that
-/// exactly like the "no fixtures" skip every other corpus already has.
+/// Resets every piece of the gamepass corpus's shared on-disk state a previous
+/// replay may have mutated. Returns `false`, resetting nothing, when the corpus
+/// has never been captured on this machine — the caller then skips it, exactly
+/// like a corpus with no fixtures.
 fn reset_gamepass_corpus_filesystem_state() -> bool {
     let tmp_root = gamepass_tmp_root();
     if !tmp_root.exists() {
@@ -387,17 +283,15 @@ fn reset_gamepass_corpus_filesystem_state() -> bool {
         copy_dir_recursive(&pristine_wgs, &container_dir);
     }
 
-    // convert_save_format (standalone gamepass->steam) writes fresh output
-    // here every replay; clear it so a stale run from a previous replay
-    // can't linger (the WS response never echoes these files' bytes, but a
-    // clean directory keeps local state honest with what capture produced).
+    // convert_save_format writes fresh output here on every replay; clear it so
+    // no stale run lingers.
     let steam_out = tmp_root.join("steam-out");
     if steam_out.exists() {
         std::fs::remove_dir_all(&steam_out).unwrap();
     }
 
-    // unlock_map mutates LocalData.sav IN PLACE; restore the untouched graft
-    // from the `.pristine` copy `build_gamepass_corpus` wrote alongside it.
+    // unlock_map mutates LocalData.sav IN PLACE; restore it from the untouched
+    // copy written alongside it at capture time.
     let pristine_local_data = tmp_root.join("LocalData.sav.pristine");
     if pristine_local_data.exists() {
         std::fs::copy(&pristine_local_data, tmp_root.join("LocalData.sav")).unwrap();
@@ -406,19 +300,12 @@ fn reset_gamepass_corpus_filesystem_state() -> bool {
     true
 }
 
-/// Extracts the gamepass container directory from the FIRST fixture's
-/// captured `select_save` request (`data.path` = "<container_dir>/containers.index"),
-/// rather than independently re-resolving it on the Rust side. Python's own
-/// absolute path -- baked into the fixture at capture time by
-/// `build_gamepass_corpus` -- is the ONE string `loaded_save_files.level`
-/// (fixture 001, `select_gamepass_save`) must match byte-for-byte, since both
-/// backends build that field from `settings.save_dir` joined with a
-/// container UUID; recomputing the directory independently here would risk a
-/// spurious drive-letter-case or path-separator mismatch on Windows (the
-/// exact failure mode the `phase2` scenario's README section warns about for
-/// mixed-separator `--save-dir` input). Reading it out of the fixture instead
-/// guarantees Rust's `settings.save_dir` is set to the LITERAL string Python
-/// used for its own.
+/// Reads the gamepass container directory out of the FIRST fixture's recorded
+/// `select_save` request (`data.path` = "<container_dir>/containers.index")
+/// instead of re-resolving it. `loaded_save_files.level` is built from
+/// `settings.save_dir`, so it must match the recorded string byte-for-byte;
+/// recomputing the directory would risk a spurious drive-letter-case or
+/// path-separator mismatch on Windows.
 fn gamepass_save_dir_from_first_fixture(fixture_paths: &[PathBuf]) -> Option<String> {
     let first = fixture_paths.first()?;
     let fixture: Value = serde_json::from_str(&std::fs::read_to_string(first).ok()?).ok()?;
@@ -427,11 +314,10 @@ fn gamepass_save_dir_from_first_fixture(fixture_paths: &[PathBuf]) -> Option<Str
     Some(container_dir.to_string())
 }
 
-/// Splits a `download_save_file` filename `<world>_<YYYYMMDD>_<HHMMSS>.zip`
-/// into its world-name prefix, or `None` if it doesn't match that shape. The
-/// world name itself may contain `_` or spaces (e.g. `"Parity World"`), so we
-/// anchor on the trailing `_<8 digits>_<6 digits>.zip` rather than splitting
-/// on the first `_`.
+/// Splits a `download_save_file` filename `<world>_<YYYYMMDD>_<HHMMSS>.zip` into
+/// its world-name prefix, or `None` if it doesn't match that shape. A world name
+/// may itself contain `_` or spaces, so this anchors on the trailing
+/// `_<8 digits>_<6 digits>.zip` rather than splitting on the first `_`.
 fn download_world_prefix(name: &str) -> Option<String> {
     let stem = name.strip_suffix(".zip")?;
     let (rest, hms) = stem.rsplit_once('_')?;
@@ -449,9 +335,8 @@ fn download_world_prefix(name: &str) -> Option<String> {
 }
 
 /// Decodes a `download_save_file` frame's base64 zip into `{member name -> raw
-/// (still-compressed) sav bytes}`. A `BTreeMap` so member order (which differs
-/// between Python's insertion order and Rust's `BTreeMap` iteration) never
-/// affects the comparison.
+/// (still-compressed) sav bytes}`. A `BTreeMap`, so differing member order
+/// between the two zips never affects the comparison.
 fn decode_download_zip_members(response: &Value) -> std::collections::BTreeMap<String, Vec<u8>> {
     use base64::Engine as _;
     let content = response["data"][0]["content"]
@@ -474,42 +359,25 @@ fn decode_download_zip_members(response: &Value) -> std::collections::BTreeMap<S
 }
 
 /// Decompresses one `.sav` CONTAINER (PlM/Oodle) to its raw GVAS payload. The
-/// container framing is exactly what legitimately differs between the two
-/// backends' zips; the GVAS INSIDE is what must match.
+/// container framing is what legitimately differs between the two zips; the
+/// GVAS INSIDE is what must match.
 fn decompress_sav_container(sav_bytes: &[u8]) -> Vec<u8> {
     uesave::compression::decompress_save(&mut std::io::Cursor::new(sav_bytes))
         .expect("sav container decompresses to GVAS")
 }
 
-/// Decompresses a `.sav` CONTAINER, parses its GVAS with uesave, drops
-/// `worldSaveData.MapObjectSaveData`, then re-serialises canonically and
-/// returns the resulting GVAS bytes.
+/// Decompresses a `.sav` CONTAINER, parses its GVAS, drops
+/// `worldSaveData.MapObjectSaveData`, then re-serialises canonically.
 ///
-/// Why drop `MapObjectSaveData`: Python's `palworld_save_tools` re-encodes that
-/// one map's opaque `RawData` blobs NON-byte-faithfully. Proven empirically:
-/// an UNEDITED `world1/Level.sav` downloaded from the real Python backend
-/// differs from the on-disk original by 356 bytes with ZERO edits, and EVERY
-/// differing byte lies inside `MapObjectSaveData` — remove that one map from
-/// both and the entire rest of the GVAS is byte-identical. Rust (uesave) keeps
-/// those blobs opaque and byte-faithful to the game file (Phase-1 Task 12's
-/// resave gate proves `read -> write` is byte-identical), so this is a Python
-/// serializer quirk we must normalise away to compare the parts both backends
-/// DO agree on — it is NOT a wire-field mask, and Rust is the correct side.
-/// See `rust/parity/README.md`, "download_save_file deep check".
-///
-/// Everything else the edit sequence touches is preserved and still compared
-/// byte-for-byte: the pals' `CharacterSaveParameterMap` (property ORDER
-/// included — uesave parses into an order-preserving `IndexMap`, so the Task-15
-/// `GotWorkSuitabilityAddRankList` reordering fix is covered here), the
-/// guild's `GuildExtraSaveDataMap` lab research, and every `Players/*.sav`
-/// (which carry no `worldSaveData`, so the removal is a no-op there).
-///
-/// Caveat: because BOTH sides are re-serialised through uesave's writer here,
-/// a hypothetical Python↔Rust divergence that uesave canonicalises to the same
-/// bytes would be invisible to this check. That risk is low and deliberately
-/// accepted: Task 12 proves uesave's writer is order-preserving and
-/// byte-faithful (unedited `read -> write` reproduces the game file exactly),
-/// so it does not silently absorb real content differences.
+/// `MapObjectSaveData` is dropped because the recorded saves re-encode that one
+/// map's opaque `RawData` blobs non-byte-faithfully: an UNEDITED, zero-edit
+/// `world1/Level.sav` from the recording run differs from the on-disk original
+/// by 356 bytes, every one of them inside that map. uesave keeps those blobs
+/// opaque and byte-faithful, so the map is normalised away to compare the parts
+/// both sides agree on. Everything the edit sequence actually touches survives:
+/// the pals' `CharacterSaveParameterMap` (property ORDER included — uesave uses
+/// an order-preserving `IndexMap`), the guild's `GuildExtraSaveDataMap`, and
+/// every `Players/*.sav` (which carry no `worldSaveData` at all).
 fn normalized_member_gvas(compressed_sav: &[u8]) -> Vec<u8> {
     use uesave::{Property, PropertyKey, StructValue};
     let mut save = psp_core::savio::read_sav_bytes(compressed_sav).expect("parse sav container");
@@ -528,18 +396,15 @@ fn normalized_member_gvas(compressed_sav: &[u8]) -> Vec<u8> {
         .expect("decompress re-serialized sav container")
 }
 
-/// The deep, non-masked half of the `download_save_file` check (the `content`
-/// mask is only for the strict-equality pass; the real assertion lives here).
-/// Verifies, for the captured (`expected`) vs replayed (`actual`) download
-/// frames:
+/// The real `download_save_file` assertion (the `name`/`content` masks only
+/// exist so the strict-equality pass doesn't re-fail on them afterwards):
 ///  1. both filenames have the `<world>_<YYYYMMDD>_<HHMMSS>.zip` shape and the
-///     SAME world-name prefix (only the timestamp may differ);
-///  2. both zips carry the same set of member names; and
+///     SAME world-name prefix — only the timestamp may differ;
+///  2. both zips carry the same member names; and
 ///  3. every member's DECOMPRESSED GVAS payload is byte-identical.
 ///
-/// Returns `Err` (rather than panicking) so both the pass and the fail branch
-/// are directly unit-testable, mirroring `compare_responses`. The replay loop
-/// turns an `Err` into a panic.
+/// Returns `Err` rather than panicking so both branches are unit-testable; the
+/// replay loop turns an `Err` into a panic.
 fn compare_download_equivalent(
     fixture_name: &str,
     expected: &Value,
@@ -607,37 +472,21 @@ fn compare_download_equivalent(
     Ok(())
 }
 
-/// Message types whose `data` payload is legitimately dialect-divergent
-/// between the two backends (Contract deviation 6, `rust/parity/README.md`):
-/// `get_raw_data` echoes uesave's own JSON serialization of the located save
-/// subtree on the Rust side (`psp_core::domain::raw::SaveSession::
-/// raw_json_for`), and palworld-save-tools' GVAS-dict form on the Python side
-/// (`debug_handler.py`'s `guild.save_data`/`player.save_data`/etc.) — two
-/// different, non-comparable JSON shapes for the SAME underlying save data.
-/// For a type in this list, `replay_all_fixtures` skips value-exact
-/// comparison entirely and instead only asserts (a) same message `type`
-/// (implicit — both sides are read from the SAME response index), (b) both
-/// `data` are JSON *objects*, and (c) the actual `data` is non-empty whenever
-/// the expected (Python-captured) `data` was non-empty — see
-/// `compare_raw_data_structural`. Content beyond that is deliberately
-/// UNCHECKED.
+/// Message types whose `data` is a raw GVAS serialization: the recorded frames
+/// and the replayed ones express the SAME save subtree in two different,
+/// non-comparable JSON dialects. These are compared structurally instead of
+/// value-exactly — see `compare_raw_data_structural`.
 const PARITY_STRUCTURAL_TYPES: &[&str] = &["get_raw_data"];
 
-/// Sentinel value substituted for a structurally-compared `data` field (see
-/// `PARITY_STRUCTURAL_TYPES`), matching `MASKED_PRESET_ID`'s convention —
-/// used so the aggregate `compare_responses` strict-equality pass (which
-/// only knows plain equality) doesn't re-fail on the two, necessarily
-/// different, raw `data` payloads once the real structural check below has
-/// already run.
+/// Sentinel substituted for a structurally-compared `data` field, so the
+/// strict-equality pass afterwards doesn't re-fail on the two necessarily
+/// different payloads.
 const MASKED_STRUCTURAL_DATA: &str = "<structural>";
 
-/// The structural (not value-exact) comparator for `PARITY_STRUCTURAL_TYPES`.
-/// Returns `Err` when either side's `data` isn't a JSON object, or when the
-/// actual side is empty while the expected side wasn't (on-the-wire proof
-/// that the Rust handler failed to resolve a target Python resolved).
-/// Deliberately does NOT compare the two objects' contents — Python and Rust
-/// emit different, non-comparable JSON dialects for the same underlying save
-/// data (see `PARITY_STRUCTURAL_TYPES`'s own doc comment).
+/// Structural comparator for `PARITY_STRUCTURAL_TYPES`. Errs when either side's
+/// `data` isn't a JSON object, or when the replayed side is empty though the
+/// recorded one was not — proof on the wire that a target failed to resolve.
+/// Contents beyond that are deliberately UNCHECKED (the two dialects differ).
 fn compare_raw_data_structural(
     fixture_name: &str,
     expected: &Value,
@@ -660,26 +509,18 @@ fn compare_raw_data_structural(
     Ok(())
 }
 
-/// Sentinel value substituted for a server-generated preset uuid, matching
-/// `mask_ignored_paths`'s convention.
+/// Sentinel substituted for a server-generated preset uuid.
 const MASKED_PRESET_ID: &str = "<masked>";
 
-/// Masks the server-generated uuid fields inside ONE preset object, in place:
-/// the preset's own `id`, its `pal_preset_id`, and (when present) the nested
-/// `pal_preset.id`. These are the only uuid-shaped fields
-/// `psp_db::presets::add` mints independently on each backend (see
-/// `psp-db/src/presets.rs`) — everything else in a preset (`name`,
-/// `type`, every container, every other `pal_preset` field) is real content
-/// and must still compare strictly.
+/// Masks the uuids a preset gets minted fresh on each run — its own `id`, its
+/// `pal_preset_id`, and the nested `pal_preset.id`. Everything else (`name`,
+/// `type`, every container, every other `pal_preset` field) is real content and
+/// still compares strictly.
 ///
-/// CRUCIALLY, only a NON-NULL STRING `pal_preset_id` is masked: `get_all`
-/// emits `pal_preset_id: null` when a preset has NO pal_preset association, so
-/// masking `null` too would collapse "association present (a real uuid)" and
-/// "association absent (null)" to the same sentinel — a genuine cross-backend
-/// divergence in whether a preset even HAS a pal_preset would then falsely
-/// compare equal. `id` is always a non-null string (a preset's primary key),
-/// and a nested `pal_preset.id` only exists when the `pal_preset` object does
-/// (where it is likewise always a string), so both are masked unconditionally.
+/// CRUCIALLY, only a NON-NULL STRING `pal_preset_id` is masked. `null` there
+/// means "no pal_preset association" — a real, comparable fact — so masking it
+/// too would collapse "has an association" and "has none" into the same
+/// sentinel and let that divergence compare equal.
 fn mask_preset_ids(preset: &mut Value) {
     let Some(object) = preset.as_object_mut() else {
         return;
@@ -690,8 +531,6 @@ fn mask_preset_ids(preset: &mut Value) {
         }
     }
     if let Some(pal_preset_id) = object.get_mut("pal_preset_id") {
-        // A null here means "no pal_preset association" — a real, comparable
-        // fact, NOT a nondeterministic uuid. Only mask an actual uuid string.
         if pal_preset_id.is_string() {
             *pal_preset_id = Value::String(MASKED_PRESET_ID.to_string());
         }
@@ -705,16 +544,10 @@ fn mask_preset_ids(preset: &mut Value) {
     }
 }
 
-/// Ordered, id-masked preset VALUES extracted from a `get_presets` frame's
-/// `data` (an object keyed by server-generated uuid). The dict KEYS
-/// themselves are intentionally dropped here — they are just as
-/// nondeterministic as the ids inside each preset, and only the masked
-/// VALUES, in order, are what `compare_get_presets_equivalent` compares.
-/// `serde_json::Map` (built with the `preserve_order` feature — see
-/// `rust/Cargo.toml`) preserves insertion order, and both backends insert in
-/// the same logical order: `ORDER BY rowid` — seed presets from
-/// `presets.json` in array order, then any added preset appended
-/// (`psp_db::presets::get_all`, `db/ctx/presets.py::get_all_presets`).
+/// Ordered, id-masked preset VALUES from a `get_presets` frame. The dict KEYS
+/// are dropped: they are the same nondeterministic uuids as the ids inside each
+/// preset. Order is meaningful and preserved — `serde_json::Map` is built with
+/// `preserve_order`, and presets are always listed `ORDER BY rowid`.
 fn masked_preset_values(frame: &Value) -> Result<Vec<Value>, String> {
     let object = frame["data"]
         .as_object()
@@ -729,14 +562,9 @@ fn masked_preset_values(frame: &Value) -> Result<Vec<Value>, String> {
         .collect())
 }
 
-/// Custom equivalence comparator for `get_presets` frames, mirroring the
-/// `compare_download_equivalent` pattern: `get_presets`' `data` is a DICT
-/// keyed by server-generated uuids, with each preset's own `id`/
-/// `pal_preset_id`/`pal_preset.id` also being those same random uuids. A
-/// static `PARITY_IGNORED_PATHS` JSON pointer can only mask a fixed path, not
-/// a dynamic dict key, so `get_presets` gets its own comparator instead:
-/// mask every preset's ids, then compare the two ORDERED lists of masked
-/// preset objects (dict keys ignored, insertion order preserved).
+/// `get_presets`' `data` is a dict keyed by the same server-generated uuids its
+/// values carry, which no fixed JSON pointer can mask. So: mask every preset's
+/// ids, then compare the two ORDERED lists of masked presets, keys ignored.
 fn compare_get_presets_equivalent(
     fixture_name: &str,
     expected: &Value,
@@ -801,21 +629,11 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
             .collect();
         fixture_paths.sort();
 
-        // gamepass corpus (Task P4-14): reset the shared on-disk container
-        // tree to the pristine snapshot capture took, and point THIS
-        // server's settings.save_dir at the exact directory the fixtures'
-        // own captured select_save request already carries — the Rust twin
-        // of scripts/capture_parity.py's prepare_gamepass_corpus pre-step
-        // (Python does the equivalent write into ITS psp.db before its
-        // backend process starts; here it happens once per corpus, right
-        // before the corpus's own socket connects). `settings.save_dir` is
-        // GLOBAL, shared-server state across every corpus this ONE
-        // `start_server` instance replays (unlike the gamepass corpus's own
-        // wgs/LocalData.sav files, which are scoped to its own tmp dir) — so
-        // `previous_save_dir` remembers what it was before mutating it, and
-        // is restored right after this corpus's fixtures finish, below,
-        // so it doesn't leak into `static-data`'s (or any other corpus's)
-        // `get_settings`/`sync_app_state` fixtures replayed afterward.
+        // The gamepass corpus needs its container tree reset to the pristine
+        // snapshot, and settings.save_dir pointed at the directory its own
+        // fixtures were recorded against. save_dir is GLOBAL state shared by
+        // every corpus this one server replays, so the previous value is
+        // restored below rather than leaking into the corpora that follow.
         let mut previous_save_dir: Option<String> = None;
         if corpus_dir.file_name().and_then(|name| name.to_str()) == Some("gamepass")
             && reset_gamepass_corpus_filesystem_state()
@@ -871,10 +689,8 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
                 let mut value: Value = serde_json::from_str(frame.to_text().unwrap()).unwrap();
                 let response_message_type =
                     value["type"].as_str().unwrap_or(&request_type).to_string();
-                // download_save_file's `content`/`name` masks hide only the
-                // nondeterministic zip container + timestamp; the REAL check is
-                // this deep comparison of the decompressed inner saves, run on
-                // the UNMASKED pair before masking blanks those fields out.
+                // The deep checks below all run on the UNMASKED pair, BEFORE the
+                // masking pass blanks the fields they inspect.
                 if response_message_type == "download_save_file" {
                     if let Err(message) = compare_download_equivalent(
                         &fixture_path.display().to_string(),
@@ -884,14 +700,9 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
                         panic!("{message}");
                     }
                 } else if response_message_type == "get_presets" {
-                    // get_presets' `data` dict is keyed by server-generated
-                    // uuids that no static PARITY_IGNORED_PATHS pointer can
-                    // mask (see compare_get_presets_equivalent). Run the real
-                    // check on the UNMASKED pair now, then blank the whole
-                    // `data` field on both sides to a shared sentinel so the
-                    // aggregate compare_responses below — which only knows
-                    // how to do plain equality — doesn't re-fail on the
-                    // (necessarily different) raw dict.
+                    // Both sides' `data` is then blanked to a shared sentinel so
+                    // the strict-equality pass below doesn't re-fail on the
+                    // necessarily different raw dict.
                     if let Err(message) = compare_get_presets_equivalent(
                         &fixture_path.display().to_string(),
                         expected_frame,
@@ -901,13 +712,6 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
                     }
                     value["data"] = Value::String(MASKED_PRESET_ID.to_string());
                 } else if PARITY_STRUCTURAL_TYPES.contains(&response_message_type.as_str()) {
-                    // get_raw_data's data is a deliberately non-comparable
-                    // JSON dialect between Python and Rust (Contract
-                    // deviation 6). Run the real (shape-only) check on the
-                    // UNMASKED pair now, then blank both sides to a shared
-                    // sentinel so the aggregate compare_responses below
-                    // doesn't re-fail on the (necessarily different) raw
-                    // objects.
                     if let Err(message) = compare_raw_data_structural(
                         &fixture_path.display().to_string(),
                         expected_frame,
@@ -958,9 +762,6 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
         }
         socket.close(None).await.ok();
 
-        // Restore settings.save_dir (see the comment above where it was
-        // overwritten) so the NEXT corpus in this loop sees the same
-        // shared-server state it would if the gamepass corpus had never run.
         if let Some(save_dir) = previous_save_dir {
             let restore_pool = psp_db::open(&temp_dir.path().join("parity.db"))
                 .await
@@ -980,14 +781,10 @@ async fn replay_recorded_python_fixtures() {
     let fixtures_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../parity/fixtures");
     let fixtures_replayed = replay_all_fixtures(&fixtures_root).await;
     if fixtures_replayed == 0 {
-        // Rust's test harness captures `eprintln!`/`println!` output and only
-        // shows it for FAILED tests unless the caller passes `--nocapture` —
-        // and this test passes on purpose when there are no fixtures. Writing
-        // straight to `std::io::stderr()` (bypassing the `eprint!` macro's
-        // capture hook entirely) is what makes the skip note show up in the
-        // default `cargo test` run, not just under `--nocapture`. Confirmed
-        // empirically: `eprintln!` here was silently swallowed on a passing
-        // run; this raw write was not.
+        // This test PASSES when there are no fixtures, and the harness swallows
+        // `eprintln!` on a passing test unless `--nocapture` is given. Writing
+        // straight to `std::io::stderr()` bypasses that capture hook, so the
+        // skip note shows up in a plain `cargo test` run.
         use std::io::Write;
         let _ = writeln!(
             std::io::stderr(),
@@ -998,13 +795,9 @@ async fn replay_recorded_python_fixtures() {
     }
 }
 
-/// Proves the harness above actually discriminates: builds a synthetic
-/// fixture set — one fixture with a correct expected response, one with a
-/// deliberately WRONG expected response — and asserts the replay panics on
-/// the mismatch. Without this, `replay_all_fixtures` could be miscomparing
-/// (e.g. comparing lengths only, or comparing as an unordered set) and the
-/// "no fixtures → skip" test above would never catch it, since it never
-/// exercises the comparison logic at all.
+/// Proves the harness discriminates at all: with no fixtures on disk, the test
+/// above never exercises the comparison logic, so a `replay_all_fixtures` that
+/// compared lengths only (or compared as an unordered set) would still pass it.
 #[tokio::test]
 #[should_panic(expected = "response sequence mismatch")]
 async fn replay_panics_on_a_mismatched_fixture() {
@@ -1026,10 +819,8 @@ async fn replay_panics_on_a_mismatched_fixture() {
     replay_all_fixtures(&temp_dir.path().join("fixtures")).await;
 }
 
-/// Companion to the mismatch test: the identical fixture, with the correct
-/// expected value substituted in, must replay clean. Proves the harness
-/// isn't just panicking unconditionally on any synthetic input — it can
-/// also pass when the recorded response is right.
+/// The same fixture with the correct expected value must replay clean — the
+/// harness is not simply panicking on any synthetic input.
 #[tokio::test]
 async fn replay_passes_on_a_matching_fixture() {
     let temp_dir = tempfile::tempdir().unwrap();
@@ -1049,14 +840,10 @@ async fn replay_passes_on_a_matching_fixture() {
     assert_eq!(fixtures_replayed, 1);
 }
 
-/// Proves fixtures are replayed in FILENAME order, not filesystem discovery
-/// order: `std::fs::read_dir` makes no ordering guarantee, so if
-/// `replay_all_fixtures` ever dropped its `.sort()` call, this would start
-/// failing intermittently depending on directory-entry order. Writes the
-/// "01_" fixture (an unregistered — hence silent — message type, so it
-/// can't itself hang the test) to disk before the "00_" fixture, so a
-/// creation-order bug and a filename-order-respecting implementation would
-/// disagree about the number of fixtures a single connection round-trips.
+/// Fixtures must replay in FILENAME order: `std::fs::read_dir` guarantees no
+/// ordering, so dropping the `.sort()` would make replays order-dependent. The
+/// "01_" fixture is written to disk BEFORE the "00_" one to tell the two apart,
+/// and uses an unregistered (hence silent) message type so it cannot hang.
 #[tokio::test]
 async fn replay_reads_fixtures_in_filename_order() {
     let temp_dir = tempfile::tempdir().unwrap();
@@ -1082,18 +869,9 @@ async fn replay_reads_fixtures_in_filename_order() {
     assert_eq!(fixtures_replayed, 2);
 }
 
-/// Pins the load-bearing multi-response ordering rule described in
-/// rust/parity/README.md by calling `compare_responses` directly — the exact
-/// function `replay_all_fixtures` uses to decide pass/fail — rather than
-/// re-deriving the `Vec<T>: PartialEq` guarantee in isolation. Identical
-/// order must report success.
-///
-/// No live Phase-0 handler emits more than one frame per request (so there's
-/// no live multi-frame fixture to replay yet), which is why this test calls
-/// the extracted comparison function directly instead of driving it through
-/// a real WebSocket round-trip: it pins the same property a live multi-frame
-/// test would, against the same code path, without fabricating a handler
-/// that doesn't exist.
+/// Identical order must report success. Calls `compare_responses` directly —
+/// the exact function that decides pass/fail — so the rule is pinned even with
+/// no multi-frame fixture on disk to drive it through a real socket.
 #[test]
 fn compare_responses_oks_identical_order() {
     let progress = serde_json::json!({"type": "progress_message", "data": "step 1"});
@@ -1112,15 +890,9 @@ fn compare_responses_oks_identical_order() {
     );
 }
 
-/// Companion to the test above: the identical two frames, swapped in the
-/// REPLAYED sequence, must be reported as a mismatch — not silently accepted
-/// because both frames are individually present. Asserts on the error
-/// content, not merely that an `Err` came back: the message must name the
-/// offending fixture (so a developer can find it without `--nocapture`) and
-/// explain that this is an ordering/count mismatch, not a vacuous "something
-/// differs". If a future refactor made the comparison sort or dedupe before
-/// comparing, this test goes red — proved by temporarily inserting a `.sort()`
-/// into `compare_responses` during development (see task-14-report.md).
+/// The same two frames SWAPPED must be a mismatch, not accepted because both
+/// are individually present — a comparison that sorted or deduped first would
+/// go red here. The error must also name the offending fixture and say why.
 #[test]
 fn compare_responses_errs_on_swapped_order() {
     let progress = serde_json::json!({"type": "progress_message", "data": "step 1"});
@@ -1148,21 +920,9 @@ fn compare_responses_errs_on_swapped_order() {
     );
 }
 
-/// Proves `assert_no_surplus_frame` actually discriminates: a stream with one
-/// more frame already queued past what the fixture expected must be reported
-/// as an error, and the error must name the fixture (so a developer can find
-/// it without extra flags) and include the surplus frame's own content — not
-/// a vacuous "something extra arrived".
-///
-/// This is the direct unit-test seam for the parity-harness hole described in
-/// `replay_all_fixtures`'s doc comment: before `assert_no_surplus_frame`
-/// existed, `replay_all_fixtures` read exactly `expected_responses.len()`
-/// frames and moved on, so a Rust handler emitting one extra frame for the
-/// LAST fixture of a corpus was silently discarded by
-/// `socket.close`/`handle.shutdown` and never failed any test. There is no
-/// live Phase-0 handler that emits a surplus frame to drive that scenario
-/// through a real socket, which is why this test constructs the surplus
-/// directly with `futures::stream::iter` instead.
+/// A stream with one frame queued past what the fixture expected must be
+/// reported, naming the fixture and quoting the surplus frame. No live handler
+/// emits a surplus frame, so the stream is constructed directly.
 #[tokio::test]
 async fn assert_no_surplus_frame_errs_when_a_frame_is_already_queued() {
     let surplus = Message::Text(r#"{"type":"get_settings","data":{}}"#.into());
@@ -1189,9 +949,8 @@ async fn assert_no_surplus_frame_errs_when_a_frame_is_already_queued() {
     );
 }
 
-/// Companion to the test above: an exhausted stream (nothing queued beyond
-/// what was already read) must be reported clean — proves the check isn't
-/// just failing unconditionally on any stream it's handed.
+/// An exhausted stream must be reported clean — the check does not simply fail
+/// on any stream it is handed.
 #[tokio::test]
 async fn assert_no_surplus_frame_oks_an_exhausted_stream() {
     let mut stream =
@@ -1209,16 +968,8 @@ async fn assert_no_surplus_frame_oks_an_exhausted_stream() {
     assert_eq!(result, Ok(()));
 }
 
-// ---------------------------------------------------------------------------
-// get_raw_data structural comparator (Task 3E-5). Proves
-// compare_raw_data_structural discriminates: a Rust-side failure to resolve
-// a target Python resolved must be caught, while two non-empty (but
-// CONTENT-different — different JSON dialects, see PARITY_STRUCTURAL_TYPES's
-// own doc comment) objects must NOT be flagged.
-// ---------------------------------------------------------------------------
-
-/// Expected non-empty, actual empty -> the discriminating failure case: Rust
-/// failed to resolve a target Python resolved.
+/// Recorded non-empty, replayed empty: the handler failed to resolve a target
+/// that once resolved.
 #[test]
 fn compare_raw_data_structural_errs_when_actual_is_empty_but_expected_was_not() {
     let expected = serde_json::json!({"type": "get_raw_data", "data": {"key": "SaveData.Guild"}});
@@ -1237,8 +988,7 @@ fn compare_raw_data_structural_errs_when_actual_is_empty_but_expected_was_not() 
     );
 }
 
-/// Both sides empty (neither backend resolved a target — e.g. no save
-/// loaded, or none of the seven fields set) -> compares clean.
+/// Both sides empty (no save loaded, or no target field set) compares clean.
 #[test]
 fn compare_raw_data_structural_oks_both_sides_empty() {
     let expected = serde_json::json!({"type": "get_raw_data", "data": {}});
@@ -1250,13 +1000,9 @@ fn compare_raw_data_structural_oks_both_sides_empty() {
     );
 }
 
-/// Both sides non-empty but with COMPLETELY DIFFERENT content (Python's
-/// GVAS-dict dialect vs. Rust's uesave-serde dialect for the very same
-/// underlying save subtree) -> still compares clean. This is the whole point
-/// of the structural comparator: a naive `actual == expected` (what
-/// `compare_responses` does for every other message type) would fail here on
-/// content alone, proving that path is NOT what decides `get_raw_data`
-/// fixtures.
+/// Both sides non-empty but in COMPLETELY DIFFERENT dialects for the same save
+/// subtree still compares clean — this is the whole point of the structural
+/// comparator, since plain equality would fail here on content alone.
 #[test]
 fn compare_raw_data_structural_oks_non_empty_sides_with_differing_content() {
     let expected = serde_json::json!({
@@ -1294,18 +1040,11 @@ fn compare_raw_data_structural_errs_when_data_is_not_an_object() {
     assert!(error.contains("not a JSON object"), "got: {error}");
 }
 
-// ---------------------------------------------------------------------------
-// Phase-2 masking + download deep-comparator unit tests.
-// ---------------------------------------------------------------------------
-
-/// Proves `mask_ignored_paths` replaces EXACTLY the listed pointers for a
-/// message type and touches nothing else. If a future edit widened a mask
-/// (e.g. blanked the whole `pal` object, or masked `character_id`), the
-/// "unchanged" assertions here go red — the mask must never swallow more than
-/// the single nondeterministic field it names.
+/// `mask_ignored_paths` must replace EXACTLY the listed pointers and nothing
+/// else: a mask that widened (blanking the whole `pal`, say, or `character_id`)
+/// would swallow real divergences, so the "unchanged" assertions here guard it.
 #[test]
 fn mask_ignored_paths_masks_only_the_listed_pointers() {
-    // add_pal: only /data/pal/instance_id is masked; every sibling stays.
     let mut add_pal = serde_json::json!({
         "type": "add_pal",
         "data": {
@@ -1335,9 +1074,6 @@ fn mask_ignored_paths_masks_only_the_listed_pointers() {
         "player_id is deterministic and must NOT be masked"
     );
 
-    // add_gps_pal: only /data/pal/instance_id is masked; /data/index (a
-    // deterministic slot number, unlike a generated uuid) and every other
-    // pal field stay strictly compared.
     let mut add_gps_pal = serde_json::json!({
         "type": "add_gps_pal",
         "data": {
@@ -1360,7 +1096,6 @@ fn mask_ignored_paths_masks_only_the_listed_pointers() {
         "index is a deterministic slot number and must NOT be masked"
     );
 
-    // A message type with no mask entry is left completely untouched.
     let original_get_pals = serde_json::json!({
         "type": "get_pals",
         "data": {"instance_id": "should-not-be-masked"}
@@ -1372,7 +1107,6 @@ fn mask_ignored_paths_masks_only_the_listed_pointers() {
         "a type with no mask entry must be untouched"
     );
 
-    // download_save_file: only name + content in data[0] are masked.
     let mut download = serde_json::json!({
         "type": "download_save_file",
         "data": [{"name": "Parity World_20260101_000000.zip",
@@ -1388,16 +1122,12 @@ fn mask_ignored_paths_masks_only_the_listed_pointers() {
     );
 }
 
-/// `mask_gamepass_backup_progress_line` masks EXACTLY response index 1 of a
-/// `save_modded_save` request's progress burst, and touches nothing else —
-/// in particular, it must NOT blank other `progress_message` frames sharing
-/// the same wire `type`, since `PARITY_IGNORED_PATHS` (which this sits
-/// beside, not inside) has no way to express "only index 1" and a type-wide
-/// mask would defeat every other deterministic progress line in every other
-/// corpus.
+/// The backup-line mask must fire ONLY on response index 1 of a
+/// `save_modded_save` burst: every other `progress_message` frame — in this
+/// burst and in every other corpus — carries deterministic text that must stay
+/// compared.
 #[test]
 fn mask_gamepass_backup_progress_line_masks_only_index_one_of_save_modded_save() {
-    // Index 1 of a save_modded_save burst, matching the real text: masked.
     let mut backup_line = serde_json::json!({
         "type": "progress_message",
         "data": "Created backup at: backups/gamepass/foo_20260711120000"
@@ -1405,8 +1135,6 @@ fn mask_gamepass_backup_progress_line_masks_only_index_one_of_save_modded_save()
     mask_gamepass_backup_progress_line("save_modded_save", 1, &mut backup_line);
     assert_eq!(backup_line["data"], "<masked>");
 
-    // Index 0 of the SAME request (a different, fully-deterministic
-    // progress_message frame): untouched.
     let mut creating_backup = serde_json::json!({
         "type": "progress_message",
         "data": "Creating backup of container path..."
@@ -1417,9 +1145,7 @@ fn mask_gamepass_backup_progress_line_masks_only_index_one_of_save_modded_save()
         "only response index 1 of save_modded_save may be masked"
     );
 
-    // Index 1 of a DIFFERENT request type that also happens to emit a
-    // progress_message at index 1: untouched (the mask is keyed to
-    // save_modded_save specifically, not "index 1 of any request").
+    // Index 1 of a DIFFERENT request that also emits a progress_message there.
     let mut other_request = serde_json::json!({
         "type": "progress_message",
         "data": "Loading Level.sav..."
@@ -1430,10 +1156,8 @@ fn mask_gamepass_backup_progress_line_masks_only_index_one_of_save_modded_save()
         "the mask must not fire for any request type other than save_modded_save"
     );
 
-    // Index 1 of save_modded_save whose text does NOT match the expected
-    // "Created backup at: " prefix (e.g. the sequence was reordered):
-    // untouched, so a reordering fails loudly via compare_responses instead
-    // of being silently swallowed by an over-eager index-only mask.
+    // Index 1 whose text does NOT match the "Created backup at: " prefix, i.e.
+    // the burst was reordered: it must stay unmasked so the reordering fails.
     let mut reordered = serde_json::json!({
         "type": "progress_message",
         "data": "Converting modified save to SAV format..."
@@ -1444,9 +1168,7 @@ fn mask_gamepass_backup_progress_line_masks_only_index_one_of_save_modded_save()
         "a non-matching text at index 1 must not be masked, so re-ordering is caught, not hidden"
     );
 
-    // The final save_modded_save response frame itself (type
-    // "save_modded_save", not "progress_message") at whatever index it
-    // lands on: untouched, since the type check excludes it.
+    // The terminal frame (type "save_modded_save", not "progress_message").
     let mut final_frame = serde_json::json!({
         "type": "save_modded_save",
         "data": "Created modded save"
@@ -1455,11 +1177,9 @@ fn mask_gamepass_backup_progress_line_masks_only_index_one_of_save_modded_save()
     assert_eq!(final_frame["data"], "Created modded save");
 }
 
-/// Builds a `download_save_file`-shaped frame from `(member name, raw sav
-/// bytes)` pairs, with a chosen filename and compression method — so the deep
-/// comparator can be exercised against zips that legitimately differ in
-/// container framing (compression) and filename timestamp while carrying
-/// identical inner saves.
+/// Builds a `download_save_file`-shaped frame with a chosen filename and
+/// compression method, so the deep comparator can be driven against zips that
+/// differ in container framing and timestamp while carrying the same saves.
 #[cfg(test)]
 fn make_download_frame(
     filename: &str,
@@ -1493,12 +1213,10 @@ fn world1_sav(file_name: &str) -> Vec<u8> {
     std::fs::read(&path).unwrap_or_else(|error| panic!("read {}: {error}", path.display()))
 }
 
-/// The deep download check PASSES when the inner saves are identical even
-/// though the zip container (compression method) AND the filename timestamp
-/// both differ — proving `content`/`name` are legitimately masked while the
-/// decompressed GVAS is what actually gets compared. Uses the real committed
-/// `world1/Level.sav` container so `decompress_save` runs a genuine PlM/Oodle
-/// decode, not a synthetic stand-in.
+/// Identical inner saves must PASS despite a different compression method AND a
+/// different filename timestamp — the decompressed GVAS is what is compared.
+/// Uses the real committed `world1/Level.sav`, so this runs a genuine PlM/Oodle
+/// decode rather than a synthetic stand-in.
 #[test]
 fn compare_download_equivalent_oks_identical_inner_saves() {
     let level = world1_sav("Level.sav");
@@ -1507,8 +1225,6 @@ fn compare_download_equivalent_oks_identical_inner_saves() {
         &[("Level.sav", &level)],
         zip::CompressionMethod::Deflated,
     );
-    // Different timestamp AND a different (Stored) container — nothing about the
-    // inner Level.sav changed.
     let actual = make_download_frame(
         "Parity World_20991231_235959.zip",
         &[("Level.sav", &level)],
@@ -1521,19 +1237,15 @@ fn compare_download_equivalent_oks_identical_inner_saves() {
     );
 }
 
-/// The deep download check FAILS when a zip member's DECOMPRESSED GVAS differs
-/// by even one byte. Realised here by giving the two zips a same-named
-/// `Level.sav` member backed by two genuinely different sav containers
-/// (`world1/Level.sav` vs `world1/LevelMeta.sav`) — both decode successfully,
-/// so the failure is proven to come from the GVAS byte comparison, not from a
-/// decode error or a member-name mismatch. The error must name the differing
-/// member and flag it as a real divergence (not a maskable field).
+/// A member whose DECOMPRESSED GVAS differs by even one byte must FAIL. The two
+/// zips carry a same-named `Level.sav` backed by two different, both-decodable
+/// containers, so the failure can only come from the GVAS byte comparison — not
+/// from a decode error or a member-name mismatch.
 #[test]
 fn compare_download_equivalent_errs_on_a_differing_inner_save() {
     let level = world1_sav("Level.sav");
     let level_meta = world1_sav("LevelMeta.sav");
-    // Sanity: the two containers really do decompress to different GVAS, so
-    // this test can't pass vacuously.
+    // Guards against a vacuous pass: the two really must decode differently.
     assert_ne!(
         decompress_sav_container(&level),
         decompress_sav_container(&level_meta),
@@ -1563,8 +1275,7 @@ fn compare_download_equivalent_errs_on_a_differing_inner_save() {
     );
 }
 
-/// A zip whose member SET differs (an extra `Players/*.sav` on one side) is
-/// also a failure — the download must carry the same members on both backends.
+/// A differing member SET (an extra `Players/*.sav` on one side) must also fail.
 #[test]
 fn compare_download_equivalent_errs_on_a_member_set_mismatch() {
     let level = world1_sav("Level.sav");
@@ -1610,18 +1321,9 @@ fn download_world_prefix_parses_the_timestamped_shape() {
     assert_eq!(download_world_prefix("_20260710_143012.zip"), None); // empty world
 }
 
-// ---------------------------------------------------------------------------
-// get_presets custom comparator (Task 3B-3): the dict is keyed by
-// server-generated uuids, and each preset's own `id`/`pal_preset_id`/
-// `pal_preset.id` are those same random uuids — no static
-// PARITY_IGNORED_PATHS pointer can mask a dynamic dict key, so this gets its
-// own equivalence check.
-// ---------------------------------------------------------------------------
-
-/// Builds a `get_presets`-shaped frame from `(dict key, preset object)`
-/// pairs, preserving the given order (the `preserve_order` `serde_json`
-/// feature keeps `Map` insertion order, mirroring both backends' real
-/// `ORDER BY rowid` insertion order).
+/// Builds a `get_presets`-shaped frame from `(dict key, preset)` pairs in the
+/// given order (`serde_json`'s `preserve_order` feature keeps `Map` insertion
+/// order, matching the real `ORDER BY rowid` listing).
 #[cfg(test)]
 fn make_get_presets_frame(entries: &[(&str, Value)]) -> Value {
     let mut data = serde_json::Map::new();
@@ -1631,11 +1333,9 @@ fn make_get_presets_frame(entries: &[(&str, Value)]) -> Value {
     serde_json::json!({ "type": "get_presets", "data": Value::Object(data) })
 }
 
-/// `mask_preset_ids` replaces EXACTLY `id`, `pal_preset_id`, and (nested)
-/// `pal_preset.id` and touches nothing else — mirrors
-/// `mask_ignored_paths_masks_only_the_listed_pointers`'s shape for the same
-/// reason: a future edit that widened the mask (e.g. blanked `pal_preset`
-/// wholesale, or masked `name`) must turn this red.
+/// `mask_preset_ids` must replace EXACTLY `id`, `pal_preset_id` and the nested
+/// `pal_preset.id`, and nothing else: a widened mask (blanking `pal_preset`
+/// wholesale, or masking `name`) has to turn this red.
 #[test]
 fn mask_preset_ids_masks_only_id_fields() {
     let mut preset = serde_json::json!({
@@ -1663,12 +1363,8 @@ fn mask_preset_ids_masks_only_id_fields() {
     assert_eq!(preset["pal_preset"]["lock"], true);
     assert_eq!(preset["pal_preset"]["character_id"], "SheepBall");
 
-    // A preset with no pal_preset relationship at all: its own `id` is still
-    // masked, but a NULL `pal_preset_id` must be PRESERVED as null (not
-    // collapsed to the sentinel) — "no association" is a real, comparable
-    // fact, and masking it would let a present-vs-absent divergence slip
-    // through (see mask_preset_ids's doc comment and the discriminating test
-    // `compare_get_presets_equivalent_errs_when_pal_preset_association_differs`).
+    // A preset with no pal_preset relationship: its `id` is still masked, but a
+    // NULL `pal_preset_id` must survive as null (see mask_preset_ids).
     let mut bare = serde_json::json!({
         "id": "33333333-3333-3333-3333-333333333333",
         "name": "Bare",
@@ -1685,13 +1381,9 @@ fn mask_preset_ids_masks_only_id_fields() {
     assert_eq!(bare["name"], "Bare");
 }
 
-/// (a) Two `get_presets` dicts with COMPLETELY DIFFERENT uuid dict keys and
-/// different `id`/`pal_preset_id`/`pal_preset.id` values, but otherwise
-/// identical preset content in the same order, must compare EQUAL. This is
-/// the whole point of the custom comparator: a naive `actual == expected` on
-/// the raw dicts (as `compare_responses` does for every other message type)
-/// would fail here on the keys alone — proving that path is NOT what decides
-/// `get_presets` fixtures.
+/// Different uuid dict keys and different id values, but identical preset
+/// content in the same order, must compare EQUAL — plain equality on the raw
+/// dicts would fail on the keys alone.
 #[test]
 fn compare_get_presets_equivalent_oks_different_uuids_same_content() {
     let expected = make_get_presets_frame(&[
@@ -1719,10 +1411,7 @@ fn compare_get_presets_equivalent_oks_different_uuids_same_content() {
             }),
         ),
     ]);
-    // Same logical presets, same order, but every uuid (dict key, `id`,
-    // `pal_preset_id`, nested `pal_preset.id`) is a DIFFERENT random value —
-    // exactly what independently-minted uuid4s from two separate backend
-    // runs look like.
+    // Same presets, same order, but every uuid is a different random value.
     let actual = make_get_presets_frame(&[
         (
             "11111111-9999-9999-9999-999999999999",
@@ -1759,13 +1448,9 @@ fn compare_get_presets_equivalent_oks_different_uuids_same_content() {
     );
 }
 
-/// Mutation check for the NESTED mask specifically: two presets whose ONLY
-/// difference is `pal_preset.id` (every other field, including the outer
-/// `id`/`pal_preset_id`, is IDENTICAL) must still compare equal. If
-/// `mask_preset_ids` ever forgot the `pal_preset.id` masking step, this is
-/// the test that goes red — `compare_get_presets_equivalent_errs_on_a_real_field_difference`
-/// below would NOT catch that regression, since it exercises a different
-/// (non-id) field.
+/// Guards the NESTED mask specifically: two presets differing ONLY in
+/// `pal_preset.id` must still compare equal. Nothing else here would catch
+/// `mask_preset_ids` dropping that step.
 #[test]
 fn compare_get_presets_equivalent_oks_when_only_nested_pal_preset_id_differs() {
     let expected = make_get_presets_frame(&[(
@@ -1799,11 +1484,9 @@ fn compare_get_presets_equivalent_oks_when_only_nested_pal_preset_id_differs() {
     );
 }
 
-/// (b) Two `get_presets` dicts that differ in a REAL field (not an id) — here
-/// a container's item count — must NOT compare equal, even with matching
-/// (masked) ids. Proves the comparator isn't vacuously permissive: it can
-/// still fail on genuine content divergence, not just report success no
-/// matter what.
+/// A REAL field difference (here a container's item count) must NOT compare
+/// equal, even with matching masked ids — the comparator is not vacuously
+/// permissive.
 #[test]
 fn compare_get_presets_equivalent_errs_on_a_real_field_difference() {
     let expected = make_get_presets_frame(&[(
@@ -1823,7 +1506,6 @@ fn compare_get_presets_equivalent_errs_on_a_real_field_difference() {
             "name": "Kit",
             "type": "inventory",
             "pal_preset_id": Value::Null,
-            // Real divergence: 998 vs 999.
             "common_container": [{"static_id": "Wood", "count": 998, "slot_index": 0}]
         }),
     )]);
@@ -1844,8 +1526,8 @@ fn compare_get_presets_equivalent_errs_on_a_real_field_difference() {
     );
 }
 
-/// A preset list mismatch in COUNT (one backend returned an extra preset)
-/// must also fail — not silently truncate to the shorter list.
+/// A COUNT mismatch (one side has an extra preset) must fail, not silently
+/// truncate to the shorter list.
 #[test]
 fn compare_get_presets_equivalent_errs_on_a_count_mismatch() {
     let one_preset = make_get_presets_frame(&[(
@@ -1871,31 +1553,13 @@ fn compare_get_presets_equivalent_errs_on_a_count_mismatch() {
     .is_err());
 }
 
-/// The discriminating test for the `pal_preset_id`-null bug: two `get_presets`
-/// dicts identical in EVERY other field, differing ONLY in `pal_preset_id` —
-/// `null` (no pal_preset association) on one side, a real uuid on the other.
-/// A genuine cross-backend divergence in whether the preset even HAS a
-/// pal_preset. This must be reported as NOT equal.
-///
-/// This is a true MUTATION CHECK for the fix, precisely because the divergence
-/// is confined to `pal_preset_id` and NOTHING else (deliberately no `pal_preset`
-/// object on either side, which would give the old code a second, unrelated
-/// difference to catch and mask the regression):
-///  - OLD `mask_preset_ids` (masking `pal_preset_id` UNCONDITIONALLY): the
-///    `null` and the uuid BOTH collapse to `"<masked>"`, the two presets become
-///    byte-identical, and the comparator FALSELY reports `Ok(())` — the exact
-///    hole the reviewer found.
-///  - FIXED `mask_preset_ids` (null preserved): the expected side keeps
-///    `pal_preset_id: null`, the actual masks its uuid to `"<masked>"`, the two
-///    differ, and the comparator correctly returns `Err`.
-///
-/// Verified RED→GREEN by hand: temporarily reverting `mask_preset_ids` to the
-/// unconditional form makes THIS test fail (`Ok` where `Err` was expected)
-/// while every other parity test still passes; the fix turns it green. See
-/// task-3B-3-report.md for the captured evidence.
+/// Two presets identical in every field except `pal_preset_id` — `null` (no
+/// association) on one side, a real uuid on the other — must NOT compare equal.
+/// The divergence is deliberately confined to that one field: masking
+/// `pal_preset_id` unconditionally would collapse both to the same sentinel and
+/// make the two presets identical, so this is the only test that catches it.
 #[test]
 fn compare_get_presets_equivalent_errs_when_pal_preset_association_differs() {
-    // No association: pal_preset_id is null (no pal_preset object).
     let without_association = make_get_presets_frame(&[(
         "shared-key",
         serde_json::json!({
@@ -1905,8 +1569,6 @@ fn compare_get_presets_equivalent_errs_when_pal_preset_association_differs() {
             "pal_preset_id": Value::Null
         }),
     )]);
-    // Has an association: pal_preset_id is a real uuid. The ONLY difference
-    // from `without_association` is this field's value (null vs uuid).
     let with_association = make_get_presets_frame(&[(
         "shared-key",
         serde_json::json!({
@@ -1932,20 +1594,12 @@ fn compare_get_presets_equivalent_errs_when_pal_preset_association_differs() {
     );
 }
 
-// ---------------------------------------------------------------------------
-// db-ups masking (Task 3C-6). The db-ups fixtures are gitignored (local-only,
-// captured against a fresh psp.db) so the live replay path loud-SKIPs them in
-// CI — these synthetic unit tests are the standing proof that the masking is
-// correct, mirroring the get_presets comparator's own unit tests above.
-// ---------------------------------------------------------------------------
-
-/// The SINGLE-OBJECT db-ups frames mask EXACTLY their nondeterministic
-/// timestamp / instance-id fields and nothing else. A future edit that widened
-/// any of these (e.g. blanked the whole `pal`/`collection`, or masked
-/// `character_id`/`level`) turns this red.
+/// The single-object UPS frames must mask EXACTLY their timestamp /
+/// instance-id fields and nothing else. The UPS fixtures are local-only, so the
+/// live replay skips them in CI and these synthetic checks are the standing
+/// proof the masking is right.
 #[test]
 fn mask_ignored_paths_masks_ups_single_object_frames() {
-    // add_ups_pal echoes the whole record at /data.
     let mut add = serde_json::json!({
         "type": "add_ups_pal",
         "data": {
@@ -1966,7 +1620,6 @@ fn mask_ignored_paths_masks_ups_single_object_frames() {
     assert_eq!(add["data"]["tags"], serde_json::json!(["parity-tag"]));
     assert_eq!(add["data"]["id"], 1, "the DB id is deterministic (rowid)");
 
-    // update_ups_pal / clone_ups_pal nest the pal under pal/cloned_pal.
     let mut update = serde_json::json!({
         "type": "update_ups_pal",
         "data": {"pal": {"id": 1, "instance_id": "bbbb", "nickname": "Rex",
@@ -1987,7 +1640,6 @@ fn mask_ignored_paths_masks_ups_single_object_frames() {
     assert_eq!(clone["data"]["cloned_pal"]["nickname"], "Rex (Clone)");
     assert_eq!(clone["data"]["original_pal_id"], 1);
 
-    // get_ups_stats: only last_updated + storage_size_mb.
     let mut stats = serde_json::json!({
         "type": "get_ups_stats",
         "data": {"stats": {"total_pals": 2, "storage_size_mb": 0.01,
@@ -2001,7 +1653,6 @@ fn mask_ignored_paths_masks_ups_single_object_frames() {
         "total_pals is a deterministic count and must NOT be masked"
     );
 
-    // create_ups_collection / create_ups_tag nest under collection/tag.
     let mut collection = serde_json::json!({
         "type": "create_ups_collection",
         "data": {"collection": {"id": 1, "name": "Parity Favs",
@@ -2022,11 +1673,10 @@ fn mask_ignored_paths_masks_ups_single_object_frames() {
     assert_eq!(tag["data"]["tag"]["name"], "parity-tag");
 }
 
-/// The ARRAY-shaped list frames mask the per-element nondeterministic fields in
-/// EVERY element while leaving deterministic siblings — both inside each
-/// element (character_id, nickname, pal_data, name, color) AND alongside the
-/// array (total_count/offset/limit) — untouched. This is the case a static
-/// `PARITY_IGNORED_PATHS` pointer provably cannot handle.
+/// The array-shaped list frames must mask EVERY element's nondeterministic
+/// fields while leaving deterministic siblings untouched — both inside each
+/// element (character_id, nickname, pal_data, name, color) and beside the array
+/// (total_count/offset/limit).
 #[test]
 fn mask_ups_list_frames_masks_every_element_only() {
     let mut pals = serde_json::json!({
@@ -2065,7 +1715,6 @@ fn mask_ups_list_frames_masks_every_element_only() {
     assert_eq!(pals["data"]["offset"], 0);
     assert_eq!(pals["data"]["limit"], 30);
 
-    // collections + tags carry only created_at/updated_at per element.
     let mut collections = serde_json::json!({
         "type": "get_ups_collections",
         "data": {"collections": [
@@ -2094,12 +1743,10 @@ fn mask_ups_list_frames_masks_every_element_only() {
     assert_eq!(tags["data"]["tags"][0]["name"], "t1");
 }
 
-/// End-to-end through `compare_responses` (the actual pass/fail decision):
-/// two get_ups_pals frames whose ONLY differences are the masked per-element
-/// timestamps/instance-ids must compare EQUAL after masking, while a real
-/// content difference (a nickname) must still FAIL. Proves the mask is neither
-/// too weak (letting timestamps fail replay) nor too strong (swallowing real
-/// divergences).
+/// Driven through `compare_responses`, the actual pass/fail decision: frames
+/// differing ONLY in masked timestamps/instance-ids compare EQUAL, while a real
+/// nickname difference still FAILS. The mask must be neither too weak (letting
+/// timestamps fail a replay) nor too strong (swallowing real divergences).
 #[test]
 fn ups_pal_list_masking_is_neither_too_weak_nor_too_strong() {
     let make = |instance: &str, timestamp: &str, nickname: &str| {
@@ -2115,7 +1762,6 @@ fn ups_pal_list_masking_is_neither_too_weak_nor_too_strong() {
         frame
     };
 
-    // Same content, different (masked) instance id + timestamps → equal.
     let captured = vec![make("py-uuid", "2026-07-10T00:00:00Z", "Fluffy")];
     let replayed = vec![make("rs-uuid", "2026-07-10T09:59:59Z", "Fluffy")];
     assert_eq!(
@@ -2128,7 +1774,6 @@ fn ups_pal_list_masking_is_neither_too_weak_nor_too_strong() {
         Ok(())
     );
 
-    // Real content divergence (nickname) survives the mask and must fail.
     let divergent = vec![make("rs-uuid", "2026-07-10T09:59:59Z", "Rex")];
     assert!(
         compare_responses(
@@ -2142,20 +1787,11 @@ fn ups_pal_list_masking_is_neither_too_weak_nor_too_strong() {
     );
 }
 
-// ---------------------------------------------------------------------------
-// get_gps_response masking (Task 3D-3, gps scenario). The gps fixtures need a
-// corpus save with a GlobalPalStorage.sav that does not exist in this
-// checkout, so the live replay path loud-SKIPs this corpus entirely -- these
-// synthetic unit tests are the standing proof the masking is correct,
-// mirroring the db-ups list-frame tests above (mask_ups_list_frames_masks_
-// every_element_only / ups_pal_list_masking_is_neither_too_weak_nor_too_strong).
-// ---------------------------------------------------------------------------
-
-/// `mask_gps_response_frame` masks EXACTLY `instance_id` inside every pal
-/// value of `get_gps_response`'s slot-keyed map, and leaves everything else
-/// untouched: other pal fields, the slot keys themselves, the no-save/
-/// no-gps-file `error`/`available` shapes (which have no pal map to walk),
-/// and any OTHER message type entirely.
+/// `mask_gps_response_frame` must mask EXACTLY `instance_id` in every pal of the
+/// slot-keyed map and leave everything else alone: other pal fields, the slot
+/// keys, the no-save / no-gps-file shapes (no pal map to walk), and any other
+/// message type. The GPS corpus needs a save this checkout does not carry, so
+/// the live replay skips it and these synthetic checks stand in for it.
 #[test]
 fn mask_gps_response_frame_masks_only_instance_id_per_slot() {
     let mut response = serde_json::json!({
@@ -2176,8 +1812,7 @@ fn mask_gps_response_frame_masks_only_instance_id_per_slot() {
     assert_eq!(response["data"]["3"]["character_id"], "Lamball");
     assert_eq!(response["data"]["3"]["nickname"], "Woolly");
 
-    // The no-save-loaded error shape has no pal map under `data` -- must be a
-    // complete no-op, not a panic.
+    // The no-save-loaded shape has no pal map: a no-op, not a panic.
     let mut no_save = serde_json::json!({
         "type": "get_gps_response",
         "data": {"error": "No save file loaded"}
@@ -2189,7 +1824,6 @@ fn mask_gps_response_frame_masks_only_instance_id_per_slot() {
         "the no-save error shape has no pal map to mask"
     );
 
-    // The no-gps-file-available shape is likewise untouched.
     let mut unavailable = serde_json::json!({
         "type": "get_gps_response",
         "data": {"available": false, "message": "No GPS file available for this save"}
@@ -2201,9 +1835,8 @@ fn mask_gps_response_frame_masks_only_instance_id_per_slot() {
         "the unavailable shape has no pal map to mask"
     );
 
-    // A different message type must be left completely untouched, even
-    // though its own shape (a `pal` object with an `instance_id`) looks
-    // superficially similar.
+    // A different type whose shape (a `pal` with an `instance_id`) looks
+    // superficially similar must be left completely untouched.
     let mut other = serde_json::json!({
         "type": "add_gps_pal",
         "data": {"pal": {"instance_id": "should-not-be-masked"}, "index": 0}
@@ -2216,12 +1849,9 @@ fn mask_gps_response_frame_masks_only_instance_id_per_slot() {
     );
 }
 
-/// End-to-end through `mask_ignored_paths` (the actual function the replay
-/// loop calls, not `mask_gps_response_frame` directly): two `get_gps_response`
-/// maps with DIFFERENT slot keys ("0"/"3" swapped for "1"/"2") and DIFFERENT
-/// instance_ids, but identical other pal content in each slot, compare EQUAL
-/// after masking -- proving the walker is actually wired into the real
-/// masking entry point the replay loop uses, not just directly callable.
+/// Driven through `mask_ignored_paths` — the entry point the replay loop calls,
+/// not `mask_gps_response_frame` directly — proving the walker is actually
+/// wired in and not merely callable.
 #[test]
 fn mask_ignored_paths_masks_gps_response_map_by_slot() {
     let mut captured = serde_json::json!({
@@ -2247,12 +1877,9 @@ fn mask_ignored_paths_masks_gps_response_map_by_slot() {
     );
 }
 
-/// Mutation check: a REAL pal-field difference (nickname) surviving the mask
-/// must still fail comparison, through `compare_responses` -- the actual
-/// pass/fail decision the replay loop uses, exactly mirroring
-/// `ups_pal_list_masking_is_neither_too_weak_nor_too_strong`. Proves the
-/// walker is neither too weak (letting a genuinely different GPS pal pass)
-/// nor too strong (swallowing real content divergence along with the id).
+/// The GPS walker must be neither too weak (letting a genuinely different pal
+/// pass) nor too strong (blanking the whole pal object along with its id), so a
+/// real nickname difference must still fail through `compare_responses`.
 #[test]
 fn gps_response_masking_is_neither_too_weak_nor_too_strong() {
     let make = |slot_zero_instance_id: &str, nickname: &str| {
@@ -2267,7 +1894,6 @@ fn gps_response_masking_is_neither_too_weak_nor_too_strong() {
         frame
     };
 
-    // Same content, different (masked) instance_id -> equal.
     let captured = vec![make("py-uuid", "ParitySheep")];
     let replayed = vec![make("rs-uuid", "ParitySheep")];
     assert_eq!(
@@ -2280,11 +1906,6 @@ fn gps_response_masking_is_neither_too_weak_nor_too_strong() {
         Ok(())
     );
 
-    // Real content divergence (nickname) survives the mask and must fail --
-    // this is the mutation check: if mask_gps_response_frame ever regressed
-    // to blank the WHOLE pal object (not just instance_id), this assertion
-    // would go red because "NotParitySheep" would never reach the compare at
-    // all.
     let divergent = vec![make("rs-uuid", "NotParitySheep")];
     assert!(
         compare_responses(

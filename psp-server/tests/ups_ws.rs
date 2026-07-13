@@ -1,7 +1,5 @@
-//! Task 3C-4: UPS pal CRUD WS integration test — drives add/get/get_ids/
-//! update/clone/stats/delete/nuke over a live WebSocket against the real
-//! dispatcher + psp-db UPS module (Task 3C-1..3), matching wire shapes from
-//! `ups_handler.py`.
+//! UPS pal CRUD over a live WebSocket: add/get/get_ids/update/clone/stats/
+//! delete/nuke, against the real dispatcher and psp-db UPS module.
 
 mod common;
 
