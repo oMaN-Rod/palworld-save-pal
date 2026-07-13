@@ -11,6 +11,7 @@
 		mapOf,
 		MAP_SIZE,
 		DEFAULT_MAP_AREA,
+		MAP_AREA_ORDER,
 		type MapArea
 	} from './utils';
 	import {
@@ -49,6 +50,8 @@
 	// Props to control which markers to display
 	let {
 		map = $bindable(),
+		area = DEFAULT_MAP_AREA,
+		onAreaChange,
 		showOrigin = false,
 		showPlayers = true,
 		showBases = true,
@@ -64,6 +67,8 @@
 		onCollectAllEffigies
 	}: {
 		map?: OLMap | null;
+		area?: MapArea;
+		onAreaChange?: (area: MapArea) => void;
 		showOrigin?: boolean;
 		showPlayers?: boolean;
 		showBases?: boolean;
@@ -80,7 +85,6 @@
 	} = $props();
 
 	const appState = getAppState();
-	const area: MapArea = DEFAULT_MAP_AREA;
 
 	// Map extent and projection setup
 	const extent: [number, number, number, number] = [0, 0, MAP_SIZE, MAP_SIZE];
@@ -104,13 +108,19 @@
 	});
 
 	// Derived data
-	const players = $derived(Object.values(appState.players || {}));
+	const players = $derived(
+		Object.values(appState.players || {}).filter(
+			(player) => player.location && mapOf(player.location.x, player.location.y) === area
+		)
+	);
 	const bases = $derived.by(() => {
 		const guilds = Object.values(appState.guilds || {});
 		return guilds.reduce((acc, guild) => {
 			if (guild.bases) {
 				Object.values(guild.bases).forEach((base) => {
-					acc.push({ base, guildName: guild.name });
+					if (base.location && mapOf(base.location.x, base.location.y) === area) {
+						acc.push({ base, guildName: guild.name });
+					}
 				});
 			}
 			return acc;
@@ -123,41 +133,51 @@
 		const unlocked = new Set(
 			(selectedPlayer?.unlocked_fast_travel_points ?? []).map((guid) => guid.toUpperCase())
 		);
-		return Object.entries(fastTravelPoints.points).map(([guid, point]) => ({
-			guid,
-			x: point.x,
-			y: point.y,
-			localized_name: point.localized_name ?? point.id,
-			unlocked: selectedPlayer ? unlocked.has(guid.toUpperCase()) : undefined
-		}));
+		return Object.entries(fastTravelPoints.points)
+			.map(([guid, point]) => ({
+				guid,
+				x: point.x,
+				y: point.y,
+				localized_name: point.localized_name ?? point.id,
+				unlocked: selectedPlayer ? unlocked.has(guid.toUpperCase()) : undefined
+			}))
+			.filter((p) => mapOf(p.x, p.y) === area);
 	});
 
 	const effigyPointList = $derived.by(() => {
 		const collected = new Set(
 			(selectedPlayer?.collected_effigies ?? []).map((guid) => guid.toUpperCase())
 		);
-		return Object.entries(effigies.points).map(([guid, point]) => ({
-			guid,
-			x: point.x,
-			y: point.y,
-			localized_name: m.effigy(),
-			unlocked: selectedPlayer ? collected.has(guid.toUpperCase()) : undefined
-		}));
+		return Object.entries(effigies.points)
+			.map(([guid, point]) => ({
+				guid,
+				x: point.x,
+				y: point.y,
+				localized_name: m.effigy(),
+				unlocked: selectedPlayer ? collected.has(guid.toUpperCase()) : undefined
+			}))
+			.filter((p) => mapOf(p.x, p.y) === area);
 	});
 
 	const dungeonPoints = $derived.by(() => {
 		if (!mapObjects) return [];
-		return mapObjects.points.filter((p) => p.type === 'dungeon');
+		return mapObjects.points
+			.filter((p) => p.type === 'dungeon')
+			.filter((p) => mapOf(p.x, p.y) === area);
 	});
 
 	const alphaPalPoints = $derived.by(() => {
 		if (!mapObjects) return [];
-		return mapObjects.points.filter((p) => p.type === 'alpha_pal');
+		return mapObjects.points
+			.filter((p) => p.type === 'alpha_pal')
+			.filter((p) => mapOf(p.x, p.y) === area);
 	});
 
 	const predatorPalPoints = $derived.by(() => {
 		if (!mapObjects) return [];
-		return mapObjects.points.filter((p) => p.type === 'predator_pal');
+		return mapObjects.points
+			.filter((p) => p.type === 'predator_pal')
+			.filter((p) => mapOf(p.x, p.y) === area);
 	});
 
 	// Origin coordinates
@@ -253,7 +273,7 @@
 			<Layer.Static url={mapImg.maps[area]} {extent} />
 
 			<!-- Origin marker layer -->
-			{#if showOrigin}
+			{#if showOrigin && area === 'MainMap'}
 				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
 					<Feature.Point coordinates={originCoords} style={originIconStyle}>
 						<Overlay.Hover {positioning} {offset} class={hoverClass}>
@@ -447,6 +467,19 @@
 		</div>
 	{/if}
 
+	<div class="map-area-switch">
+		{#each MAP_AREA_ORDER as candidate}
+			<button
+				type="button"
+				class="map-area-btn"
+				class:active={area === candidate}
+				onclick={() => onAreaChange?.(candidate)}
+			>
+				{candidate === 'MainMap' ? m.map_area_mainmap() : m.map_area_tree()}
+			</button>
+		{/each}
+	</div>
+
 	<!-- Coordinate display overlay -->
 	<div class="coordinate-display" bind:this={coordDisplayElement}>
 		{@html coordDisplayText}
@@ -530,5 +563,37 @@
 		background: none;
 		box-shadow: none !important;
 		filter: none !important;
+	}
+
+	.map-area-switch {
+		position: absolute;
+		top: 8px;
+		left: 50%;
+		transform: translateX(-50%);
+		display: flex;
+		gap: 2px;
+		padding: 2px;
+		background: color-mix(in srgb, var(--color-surface-900) 85%, transparent);
+		backdrop-filter: blur(8px);
+		border: 1px solid color-mix(in srgb, var(--color-surface-700) 40%, transparent);
+		border-radius: 4px;
+		z-index: 1000;
+	}
+
+	.map-area-btn {
+		padding: 4px 12px;
+		border-radius: 3px;
+		color: white;
+		font-size: 13px;
+		cursor: pointer;
+		transition: background-color 0.15s ease-out;
+	}
+
+	.map-area-btn:hover {
+		background: color-mix(in srgb, var(--color-secondary-500) 25%, transparent);
+	}
+
+	.map-area-btn.active {
+		background: color-mix(in srgb, var(--color-secondary-500) 45%, transparent);
 	}
 </style>

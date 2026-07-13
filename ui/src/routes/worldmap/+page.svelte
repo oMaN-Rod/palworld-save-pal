@@ -2,7 +2,13 @@
 	import { PlayerList } from '$components/player';
 	import { Button, Combobox, Loading } from '$components/ui';
 	import { getAppState, getModalState, getToastState } from '$states';
-	import { worldToPixel, worldToMap, mapOf, DEFAULT_MAP_AREA } from '$components/map/utils';
+	import {
+		worldToPixel,
+		worldToMap,
+		mapOf,
+		DEFAULT_MAP_AREA,
+		type MapArea
+	} from '$components/map/utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { mapImg } from '$components/map/styles';
 	import Target from '@lucide/svelte/icons/target';
@@ -30,6 +36,7 @@
 	let selectedGuildId = $state('');
 
 	type MapOptions = {
+		area: MapArea;
 		showOrigin: boolean;
 		showPlayers: boolean;
 		showBases: boolean;
@@ -41,6 +48,7 @@
 	};
 
 	const mapOptionsState = persistedState<MapOptions>('mapOptions', {
+		area: DEFAULT_MAP_AREA,
 		showOrigin: false,
 		showPlayers: true,
 		showBases: true,
@@ -51,6 +59,7 @@
 		showPredatorPals: true
 	});
 	const mapOptions = $derived(mapOptionsState.current);
+	const activeArea = $derived(mapOptions.area ?? DEFAULT_MAP_AREA);
 	const toast = getToastState();
 	let section = $state(['players']);
 	let map: OLMap | null = $state(null);
@@ -116,7 +125,9 @@
 	const starryonImg = $derived(assetLoader.loadMenuImage('nightbluehorse'));
 
 	function panTo(x: number, y: number) {
-		const area = mapOf(x, y) ?? DEFAULT_MAP_AREA;
+		const area = mapOf(x, y);
+		if (!area) return;
+		mapOptions.area = area;
 		const coords = worldToPixel(x, y, area);
 		map?.getView().animate({ center: coords, zoom: 5, duration: 500 });
 	}
@@ -592,6 +603,8 @@
 			{#if MapComponent}
 				<MapComponent
 					bind:map
+					area={activeArea}
+					onAreaChange={(next) => (mapOptions.area = next)}
 					showOrigin={mapOptions.showOrigin}
 					showPlayers={mapOptions.showPlayers}
 					showBases={mapOptions.showBases}
