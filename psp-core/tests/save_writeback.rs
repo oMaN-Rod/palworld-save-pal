@@ -969,3 +969,152 @@ fn effigy_unlock_does_not_add_1_0_relic_fields_to_a_pre_1_0_save() {
         "must not add RelicBonusExpTableIndex to a pre-1.0 save"
     );
 }
+
+/// Palworld 1.0 renamed both quest arrays to `<Base>_FullRelease`. This 1.0
+/// fixture player genuinely carries 19 completed and 13 current quests -- reading
+/// the pre-1.0 names finds neither and reports both as empty.
+const V1_PLAYER_WITH_QUESTS: &str = "b38a3ab1-0000-0000-0000-000000000000";
+
+/// Every property key anywhere in a serialized `.sav`, with uesave's `_<index>`
+/// disambiguating suffix stripped. Matching a bare NAME against the raw JSON text
+/// would be a trap: `CompletedQuestArray` is a strict PREFIX of
+/// `CompletedQuestArray_FullRelease`, so a substring check cannot tell them apart.
+fn property_names(value: &serde_json::Value, out: &mut BTreeSet<String>) {
+    match value {
+        serde_json::Value::Object(map) => {
+            for (key, child) in map {
+                if let Some((name, index)) = key.rsplit_once('_') {
+                    if !name.is_empty() && index.chars().all(|c| c.is_ascii_digit()) {
+                        out.insert(name.to_string());
+                    }
+                }
+                property_names(child, out);
+            }
+        }
+        serde_json::Value::Array(items) => {
+            for item in items {
+                property_names(item, out);
+            }
+        }
+        _ => {}
+    }
+}
+
+fn v1_quest_session() -> (psp_core::session::SaveSession, GameData, Uuid) {
+    let mut session = common::load_fixture_session("v1_relics");
+    let data = game_data();
+    let player_id: Uuid = V1_PLAYER_WITH_QUESTS.parse().unwrap();
+    player::get_player_details(&mut session, &data, player_id, &null_progress())
+        .unwrap()
+        .expect("v1_relics carries this player");
+    (session, data, player_id)
+}
+
+/// The headline bug: a 1.0 save's missions must actually be read.
+#[test]
+fn v1_save_missions_are_read() {
+    let (session, data, player_id) = v1_quest_session();
+    let dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    assert_eq!(
+        dto.completed_missions.len(),
+        19,
+        "the 1.0 fixture player carries 19 completed quests in \
+         CompletedQuestArray_FullRelease"
+    );
+    assert_eq!(
+        dto.current_missions.len(),
+        13,
+        "the 1.0 fixture player carries 13 current quests in \
+         OrderedQuestArray_FullRelease"
+    );
+}
+
+/// Writing a 1.0 player back unchanged must not lose their missions -- which it
+/// would, if the write landed on the bare-named property the game never reads.
+#[test]
+fn v1_save_missions_round_trip_unchanged() {
+    let (mut session, data, player_id) = v1_quest_session();
+    let dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    let mut modified = OrderedMap::new();
+    modified.insert(player_id, dto);
+    player::update_players(&mut session, &data, &modified, &null_progress()).unwrap();
+
+    let reread = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    assert_eq!(reread.completed_missions.len(), 19);
+    assert_eq!(reread.current_missions.len(), 13);
+}
+
+/// An edit to a 1.0 player's missions must persist.
+#[test]
+fn v1_save_mission_edit_persists() {
+    let (mut session, data, player_id) = v1_quest_session();
+    let mut dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    assert!(
+        !dto.completed_missions
+            .contains(&"PSP_TEST_QUEST".to_string()),
+        "fixture sanity: the appended quest must not already be present"
+    );
+    dto.completed_missions.push("PSP_TEST_QUEST".to_string());
+    let mut modified = OrderedMap::new();
+    modified.insert(player_id, dto);
+    player::update_players(&mut session, &data, &modified, &null_progress()).unwrap();
+
+    let reread = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    assert_eq!(reread.completed_missions.len(), 20);
+    assert!(
+        reread
+            .completed_missions
+            .contains(&"PSP_TEST_QUEST".to_string()),
+        "the appended quest must survive the write"
+    );
+    assert_eq!(
+        reread.current_missions.len(),
+        13,
+        "the untouched current missions must survive too"
+    );
+}
+
+/// A 1.0 save must gain no bare-named quest property: writing one invents a
+/// property the game never wrote, and leaves the real `_FullRelease` data stale.
+#[test]
+fn v1_save_gains_no_bare_named_quest_property() {
+    let (mut session, data, player_id) = v1_quest_session();
+    let dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    let mut modified = OrderedMap::new();
+    modified.insert(player_id, dto);
+    player::update_players(&mut session, &data, &modified, &null_progress()).unwrap();
+
+    let sav = common::player_sav_json(&session, player_id);
+    let mut names = BTreeSet::new();
+    property_names(&sav, &mut names);
+
+    assert!(
+        names.contains("CompletedQuestArray_FullRelease"),
+        "fixture sanity: the 1.0 save must carry the _FullRelease completed array; \
+         found: {names:?}"
+    );
+    assert!(
+        names.contains("OrderedQuestArray_FullRelease"),
+        "fixture sanity: the 1.0 save must carry the _FullRelease ordered array"
+    );
+    assert!(
+        !names.contains("CompletedQuestArray"),
+        "must not invent a bare CompletedQuestArray on a 1.0 save"
+    );
+    assert!(
+        !names.contains("OrderedQuestArray"),
+        "must not invent a bare OrderedQuestArray on a 1.0 save"
+    );
+}

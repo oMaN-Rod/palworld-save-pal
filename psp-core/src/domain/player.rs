@@ -68,6 +68,30 @@ pub fn ticks_to_isoformat(ticks: u64) -> String {
     }
 }
 
+const COMPLETED_QUEST_ARRAY: &str = "CompletedQuestArray";
+const ORDERED_QUEST_ARRAY: &str = "OrderedQuestArray";
+
+/// Palworld 1.0 renamed both player quest arrays to `<Base>_FullRelease`, and no
+/// save carries both namings: a 1.0 save has only the `_FullRelease` pair, a
+/// pre-1.0 save only the bare pair. So the name is resolved from the save rather
+/// than hard-coded -- the 1.0 name when the save carries it, the bare name
+/// otherwise.
+///
+/// A save carrying NEITHER (only reachable synthetically, e.g. a player stripped
+/// of both properties) falls back to the bare name rather than guessing
+/// `_FullRelease`. The two arrays resolve independently.
+fn quest_array_name(save_data: &Properties, base: &str) -> String {
+    let full_release = format!("{base}_FullRelease");
+    if save_data
+        .0
+        .contains_key(&PropertyKey::from(full_release.as_str()))
+    {
+        full_release
+    } else {
+        base.to_string()
+    }
+}
+
 pub(crate) fn save_data_props(player_sav: &uesave::Save) -> Result<&Properties, CoreError> {
     props::struct_props(
         player_sav
@@ -344,13 +368,17 @@ pub fn build_player_dto(
 
     let completed_missions = save_data
         .0
-        .get(&PropertyKey::from("CompletedQuestArray"))
+        .get(&PropertyKey::from(
+            quest_array_name(save_data, COMPLETED_QUEST_ARRAY).as_str(),
+        ))
         .and_then(props::name_values)
         .cloned()
         .unwrap_or_default();
     let current_missions = save_data
         .0
-        .get(&PropertyKey::from("OrderedQuestArray"))
+        .get(&PropertyKey::from(
+            quest_array_name(save_data, ORDERED_QUEST_ARRAY).as_str(),
+        ))
         .and_then(props::struct_values)
         .map(|quests| {
             quests
@@ -660,8 +688,14 @@ fn apply_player_dto(
     // --- player .sav SaveData fields ---
     {
         let loaded = session.loaded_players.get_mut(&player_id).expect("checked");
-        {
+        // Both quest arrays are written under the name this save actually uses --
+        // a 1.0 save's `_FullRelease` pair, a pre-1.0 save's bare pair. Writing the
+        // bare name onto a 1.0 save would invent a property the game never reads
+        // and leave the real data stale.
+        let (completed_quest_array, ordered_quest_array) = {
             let save_data = save_data_props_mut(&mut loaded.sav)?;
+            let completed_quest_array = quest_array_name(save_data, COMPLETED_QUEST_ARRAY);
+            let ordered_quest_array = quest_array_name(save_data, ORDERED_QUEST_ARRAY);
             save_data.insert(
                 "UnlockedRecipeTechnologyNames",
                 props::name_array_property(dto.technologies.clone()),
@@ -681,7 +715,7 @@ fn apply_player_dto(
                 ),
             );
             save_data.insert(
-                "CompletedQuestArray",
+                completed_quest_array.as_str(),
                 props::name_array_property(dto.completed_missions.clone()),
             );
             // One {QuestName, BlockIndex: 0, IntegerMap: {}, StringMap: {}}
@@ -696,15 +730,20 @@ fn apply_player_dto(
                 quest_structs.push(StructValue::Struct(quest_props));
             }
             save_data.insert(
-                "OrderedQuestArray",
+                ordered_quest_array.as_str(),
                 Property::Array(ValueVec::Struct(quest_structs)),
             );
-        }
+            (completed_quest_array, ordered_quest_array)
+        };
         // The three writes above can each land on a property the save carries no
         // schema for; register those now. Each needs `&mut loaded.sav` for its
         // `.schemas` table, so the `save_data` borrow must already have ended.
         ensure_boss_technology_point_schema(&mut loaded.sav);
-        ensure_player_quest_array_schemas(&mut loaded.sav);
+        ensure_player_quest_array_schemas(
+            &mut loaded.sav,
+            &completed_quest_array,
+            &ordered_quest_array,
+        );
         // Unlock flags apply only when the caller supplied a value.
         if let Some(points) = &dto.unlocked_fast_travel_points {
             // Fast travel has no relic counter of any kind; the delta is deliberately dropped.
@@ -1173,9 +1212,17 @@ fn ensure_boss_technology_point_schema(player_sav: &mut uesave::Save) {
 /// schema for either, and the writer rejects the unconditional write.
 ///
 /// `uesave` looks each struct-array element field up at a flat
-/// `<ArrayPath>.<FieldName>` path, so `OrderedQuestArray`'s four element fields
-/// each need their own schema entry, not just the array itself.
-fn ensure_player_quest_array_schemas(player_sav: &mut uesave::Save) {
+/// `<ArrayPath>.<FieldName>` path, so the ordered array's four element fields each
+/// need their own schema entry, not just the array itself.
+///
+/// The two array names are the ones `apply_player_dto` resolved from the save, so
+/// a 1.0 save registers `SaveData.OrderedQuestArray_FullRelease.QuestName` and a
+/// pre-1.0 save the bare form -- the schema must follow the name that was written.
+fn ensure_player_quest_array_schemas(
+    player_sav: &mut uesave::Save,
+    completed_quest_array: &str,
+    ordered_quest_array: &str,
+) {
     use uesave::{PropertyTagDataPartial, PropertyTagPartial, PropertyType, StructType};
 
     let Some(prefix) = props::schema_prefix_ending_with(player_sav, ".TechnologyPoint") else {
@@ -1186,7 +1233,7 @@ fn ensure_player_quest_array_schemas(player_sav: &mut uesave::Save) {
 
     props::ensure_schema(
         player_sav,
-        path("CompletedQuestArray"),
+        path(completed_quest_array),
         tag(PropertyTagDataPartial::Array(Box::new(
             PropertyTagDataPartial::Other(PropertyType::NameProperty),
         ))),
@@ -1194,7 +1241,7 @@ fn ensure_player_quest_array_schemas(player_sav: &mut uesave::Save) {
 
     props::ensure_schema(
         player_sav,
-        path("OrderedQuestArray"),
+        path(ordered_quest_array),
         tag(PropertyTagDataPartial::Array(Box::new(
             PropertyTagDataPartial::Struct {
                 struct_type: StructType::Struct(Some("PalOrderedQuestSaveData".to_string())),
@@ -1204,17 +1251,17 @@ fn ensure_player_quest_array_schemas(player_sav: &mut uesave::Save) {
     );
     props::ensure_schema(
         player_sav,
-        path("OrderedQuestArray.QuestName"),
+        path(&format!("{ordered_quest_array}.QuestName")),
         tag(PropertyTagDataPartial::Other(PropertyType::NameProperty)),
     );
     props::ensure_schema(
         player_sav,
-        path("OrderedQuestArray.BlockIndex"),
+        path(&format!("{ordered_quest_array}.BlockIndex")),
         tag(PropertyTagDataPartial::Other(PropertyType::IntProperty)),
     );
     props::ensure_schema(
         player_sav,
-        path("OrderedQuestArray.IntegerMap"),
+        path(&format!("{ordered_quest_array}.IntegerMap")),
         tag(PropertyTagDataPartial::Map {
             key_type: Box::new(PropertyTagDataPartial::Other(PropertyType::NameProperty)),
             value_type: Box::new(PropertyTagDataPartial::Other(PropertyType::IntProperty)),
@@ -1222,7 +1269,7 @@ fn ensure_player_quest_array_schemas(player_sav: &mut uesave::Save) {
     );
     props::ensure_schema(
         player_sav,
-        path("OrderedQuestArray.StringMap"),
+        path(&format!("{ordered_quest_array}.StringMap")),
         tag(PropertyTagDataPartial::Map {
             key_type: Box::new(PropertyTagDataPartial::Other(PropertyType::NameProperty)),
             value_type: Box::new(PropertyTagDataPartial::Other(PropertyType::StrProperty)),
