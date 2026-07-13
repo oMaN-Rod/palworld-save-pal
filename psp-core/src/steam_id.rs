@@ -1,15 +1,12 @@
-//! Port of palworld_save_pal/game/steam_id.py. All arithmetic is wrapping u32,
-//! matching the Python _u32 mask-and-reinterpret helper.
+//! Steam ID / player-UID conversions. Every step of the uid obfuscation is
+//! wrapping u32 arithmetic.
 
 #[derive(Debug, thiserror::Error)]
 pub enum SteamIdError {
     #[error("Vanity URLs (/id/) are not supported. Use the numeric Steam ID from the profile URL (/profiles/...) instead.")]
     VanityUrl,
-    // Python's `int(raw)` raises `ValueError: invalid literal for int() with
-    // base 10: '<processed>'` where `<processed>` is the string AFTER the URL /
-    // `steam_` prefix stripping (i.e. exactly what `int()` was handed). Carry
-    // that processed text and format the message byte-for-byte the same way, so
-    // `steam_id_handler.py:39`'s `str(e)` is reproduced verbatim on the wire.
+    // Carries the text left after URL / `steam_` prefix stripping. The message
+    // wording is part of the wire contract the frontend matches on.
     #[error("invalid literal for int() with base 10: '{0}'")]
     NotNumeric(String),
     #[error("invalid uuid")]
@@ -51,7 +48,8 @@ pub fn parse_palworld_uid(raw: &str) -> Result<uuid::Uuid, SteamIdError> {
     uuid::Uuid::parse_str(raw.trim()).map_err(|_| SteamIdError::BadUuid)
 }
 
-/// CityHash64 over the UTF-16-LE encoding of the decimal steam id (steam_id.py:47-50).
+/// CityHash64 over the UTF-16-LE encoding of the decimal steam id; the uid is
+/// the folded 32-bit result in the first 4 bytes, rest zero.
 pub fn steam_id_to_player_uid(steam_id: u64) -> uuid::Uuid {
     let decimal = steam_id.to_string();
     let utf16_le: Vec<u8> = decimal
@@ -67,7 +65,8 @@ pub fn steam_id_to_player_uid(steam_id: u64) -> uuid::Uuid {
     uuid::Uuid::from_bytes(bytes)
 }
 
-/// steam_id.py:53-63 — obfuscation cascade in wrapping u32 arithmetic.
+/// The game's uid obfuscation cascade over the uid's first 4 bytes; every
+/// step is wrapping u32 arithmetic, overflow included.
 pub fn player_uid_to_nosteam(player_uid: uuid::Uuid) -> String {
     let raw = u32::from_le_bytes(player_uid.as_bytes()[0..4].try_into().unwrap());
     let a = (raw << 8) ^ 2654435769u32.wrapping_sub(raw);

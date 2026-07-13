@@ -23,8 +23,6 @@ pub enum SaveKind {
 
 /// A player's `.sav`/`_dps.sav` payload, either as on-disk paths (Steam/local
 /// loads) or as in-memory bytes (GamePass container reads, web zip uploads).
-/// Mirrors Python `SaveManager._player_file_refs`, whose values are
-/// `{"sav": <path-or-bytes>, "dps": <path-or-bytes-or-None>}`.
 #[derive(Debug, Clone)]
 pub enum PlayerFileData {
     Paths {
@@ -63,66 +61,32 @@ impl PlayerFileData {
     }
 }
 
-/// One lazily-loaded player's compressed save-out: the `.sav` bytes and, when
-/// the player has a `_dps.sav` companion, its bytes too. Mirrors Python
-/// `player_gvas_files`'s `{"sav": bytes, "dps": Optional[bytes]}` per uid.
+/// One player's compressed save-out: the `.sav` bytes and, when the player has
+/// a `_dps.sav` companion, its bytes too.
 pub type PlayerSaveBytes = (Vec<u8>, Option<Vec<u8>>);
 
-/// A lazily loaded player `.sav` (and, when present, its `_dps.sav`
-/// companion), cached once parsed so a later edit doesn't re-read/re-parse
-/// the file. Task 7 populates this on first detail load.
+/// A lazily loaded player `.sav` (and, when present, its `_dps.sav` companion),
+/// cached once parsed so a later edit doesn't re-read the file.
 pub struct LoadedPlayer {
     pub uid: Uuid,
     pub sav: uesave::Save,
     pub dps: Option<uesave::Save>,
 }
 
-/// Lazily built, invalidatable lookup caches over `SaveSession::level`'s
-/// world tree — port of the six `None`-able caches
-/// `IndexingMixin.invalidate_performance_caches` clears
-/// (`game/mixins/indexing.py:21-33`). Every field starts `None` and is only
-/// ever populated by the domain code that actually needs it (see
-/// `domain::world::build_*_index`); nothing in this task's own scope reads
-/// or writes them except `invalidate_performance_caches` itself and this
-/// crate's tests.
+/// Lazily built lookup caches over `SaveSession::level`'s world tree. Every
+/// field starts `None` and is populated on first use by `domain::world`.
 ///
-/// Cache-invalidation strategy: `WorldCaches` is deliberately a SEPARATE
-/// struct from `SaveSession`'s own Phase-1 index fields
-/// (`character_index`/`item_container_index`/`character_container_index`/
-/// `group_index`/`guild_extra_index`), which stay eager, non-`Option`, and
-/// built exactly once in `SaveSession::load` (see below) — those are kept
-/// unchanged because the brief that introduced this struct says to keep
-/// every existing Phase-1 field, and changing an already-`pub`,
-/// already-server-consumed field's shape is the one kind of edit this task
-/// is explicitly told never to make unasked. `WorldCaches` is the
-/// InvalidateOnWrite layer Tasks 9/11 (pal/player/guild CRUD) actually
-/// build on: every mutating operation that inserts or removes a
+/// INVALIDATION CONTRACT: every mutation that inserts or removes a
 /// character-map/container-map entry MUST call
-/// `SaveSession::invalidate_performance_caches` before returning (see the
-/// invalidation matrix in this task's brief) — a mutation that forgets to
-/// call it leaves a `Some(stale_index)` behind that resolves the wrong pal
-/// on the next lookup, silently. There is no compiler-enforced guarantee here
-/// (Rust can't tie "this Vec of MapEntry was mutated" to "clear this
-/// Option"); the mitigation is procedural + tested: every mutation call
-/// site is required by this contract to call
-/// `invalidate_performance_caches`, and `world_index.rs`'s
-/// `stale_character_index_after_removal_would_resolve_the_wrong_entry` test
-/// demonstrates concretely what breaks if a future task forgets.
-/// `HashMap`-vs-`BTreeMap` audit for every field below (each is a pure
-/// uuid-keyed lookup table, verified against how Python's own equivalent
-/// cache is consumed — `.get(uid, default)` throughout `mixins/summaries.py`/
-/// `mixins/loading.py`, never iterated to build an ordered collection):
-/// `character_index`/`item_container_index`/`character_container_index`/
-/// `dynamic_item_index` resolve a single uuid to a single position, on
-/// demand, exactly like the unchanged Phase-1 eager indexes of the same
-/// shape (`SaveSession::character_index` etc.) they mirror; `pal_owner_counts`/
-/// `player_guild_map` are looked up per-player one uuid at a time when
-/// building a `PlayerSummary`/`GuildSummary` (`domain::summaries`), never
-/// walked start-to-end for wire output. None of the six has an iteration
-/// order that could reach the wire, so all six stay `HashMap` — unlike
-/// `SaveSession::loaded_players` (see its own doc comment), which the
-/// project's cross-phase reconciliation specifically calls out for
-/// `BTreeMap`.
+/// `SaveSession::invalidate_performance_caches` before returning. Nothing
+/// enforces this at compile time — a mutation that forgets leaves a stale
+/// index behind that silently resolves the wrong pal on the next lookup
+/// (`world_index.rs`'s
+/// `stale_character_index_after_removal_would_resolve_the_wrong_entry`
+/// demonstrates it).
+///
+/// All six are `HashMap`: each is a uuid-keyed lookup resolved one key at a
+/// time, never iterated for wire output, so their iteration order cannot leak.
 #[derive(Default)]
 pub struct WorldCaches {
     /// InstanceId → `CharacterSaveParameterMap` position.
@@ -133,48 +97,34 @@ pub struct WorldCaches {
     pub character_container_index: Option<HashMap<Uuid, usize>>,
     /// `RawData.id.local_id_in_created_world` → `DynamicItemSaveData` position.
     pub dynamic_item_index: Option<HashMap<Uuid, usize>>,
-    /// player uid → number of pals that player owns. `i64`, matching
-    /// `domain::summaries::build_pal_owner_counts`'s own return type
-    /// (Phase 1) — this field is a cache of that function's output, so its
-    /// type follows the producer rather than inventing a narrower one a
-    /// later task would have to cast into.
+    /// player uid → number of pals that player owns.
     pub pal_owner_counts: Option<HashMap<Uuid, i64>>,
     /// player uid → guild id.
     pub player_guild_map: Option<HashMap<Uuid, Uuid>>,
 }
 
-/// A loaded world save: `Level.sav` plus everything Task 8/9 need to derive
-/// player/guild summaries and serve on-demand detail loads without
-/// re-parsing the whole tree.
+/// A loaded world save: `Level.sav` plus the indexes and summaries needed to
+/// serve on-demand detail loads without re-parsing the whole tree.
 pub struct SaveSession {
     pub kind: SaveKind,
     pub world_name: String,
     pub level: uesave::Save,
-    /// Python `SaveManager.level_sav_path` — the save's on-disk path (Steam)
-    /// or GamePass save id, used as a stable identifier on the wire.
+    /// The save's on-disk path (Steam) or GamePass save id — a stable
+    /// identifier on the wire.
     pub save_id: String,
     pub save_type_label: &'static str,
-    /// `level_sav_bytes.len() + 33`, matching CPython's `bytes.__sizeof__()`
-    /// so `loaded_save_files.size` stays wire-identical to the Python build.
+    /// `level_sav_bytes.len() + 33`. The 33-byte offset is part of the
+    /// `loaded_save_files.size` wire contract the frontend expects.
     pub size: u64,
     pub level_meta: Option<uesave::Save>,
     pub player_file_refs: BTreeMap<Uuid, PlayerFileData>,
     pub player_sav_cache: HashMap<Uuid, uesave::Save>,
     pub player_summaries: BTreeMap<Uuid, PlayerSummary>,
     pub guild_summaries: BTreeMap<Uuid, GuildSummary>,
-    /// GVAS-file insertion order of `player_summaries` / `guild_summaries` —
-    /// the order `domain::summaries::extract_summaries` inserted each entry
-    /// in (`CharacterSaveParameterMap` order for players,
-    /// `GroupSaveDataMap` order for guilds), NOT the `BTreeMap`'s sorted
-    /// iteration order. Python's `sync_app_state_handler` emits
-    /// `[str(p) for p in app_state.player_summaries.keys()]` /
-    /// `.guild_summaries.keys()`, and those dicts preserve exactly this
-    /// insertion order (see that function's own doc comment for why the
-    /// two Python extraction paths this depends on are deterministic at the
-    /// save sizes this port is verified against). Carried alongside the
-    /// sorted maps the same way Task 9's `player_discovery_order` sits
-    /// alongside `player_file_refs` — the sorted map is additional
-    /// information layered on top, not a substitute for the wire order.
+    /// GVAS-file order of `player_summaries` / `guild_summaries`
+    /// (`CharacterSaveParameterMap` order for players, `GroupSaveDataMap` order
+    /// for guilds), NOT the `BTreeMap`'s sorted order. `sync_app_state` emits
+    /// the summary arrays in this order, so it must be carried separately.
     pub player_summary_order: Vec<Uuid>,
     pub guild_summary_order: Vec<Uuid>,
     /// InstanceId → CharacterSaveParameterMap position.
@@ -187,56 +137,25 @@ pub struct SaveSession {
     pub group_index: HashMap<Uuid, usize>,
     /// key → GuildExtraSaveDataMap position.
     pub guild_extra_index: HashMap<Uuid, usize>,
-    /// GPS (Global Pal Storage) session state -- Task 3D-1's `GpsState`
-    /// (`domain::gps`). Kept as a single sub-struct, not flattened, so every
-    /// GPS field (`file_path`/`save`/`slot_count`/`pals`/`loaded`) lives next
-    /// to the methods that mutate it (`domain::gps`'s `impl SaveSession`
-    /// block) rather than growing this struct's own top-level field list.
+    /// GPS (Global Pal Storage) state; the methods that mutate it live in
+    /// `domain::gps`.
     pub gps: crate::domain::gps::GpsState,
-    /// Lazily loaded/parsed player `.sav` files (Task 7). Keyed by player
-    /// uid, same as `player_file_refs`/`player_sav_cache`.
-    ///
-    /// Deviation from the brief: the brief specifies
-    /// `indexmap::IndexMap<Uuid, LoadedPlayer>`, but `indexmap` is not (and
-    /// this task is told not to become) a direct dependency of `psp-core` —
-    /// it only reaches this crate transitively, through `uesave`, and Rust
-    /// does not let a crate name a transitive dependency's types without
-    /// declaring that dependency itself. The project's own cross-phase
-    /// reconciliation already resolved this exact substitution project-wide:
-    /// Phase 2's `IndexMap` → `BTreeMap`, specifically to keep deterministic
-    /// iteration order with zero new dependencies (`Uuid: Ord`, so
-    /// `BTreeMap<Uuid, LoadedPlayer>` needs nothing beyond `std`). `HashMap`
-    /// was used in an earlier revision of this field on "nothing iterates it
-    /// yet" grounds — true today, but `HashMap` iteration order is
-    /// nondeterministic per process, the exact bug class the parity harness
-    /// caught twice in Phase 1 (`sync_app_state`'s `players`/`guilds`
-    /// arrays). Fixing it now, before any Task 7+ code iterates this map, is
-    /// free; fixing it after is a parity hunt. See `player_summary_order`
-    /// above for this codebase's actual pattern when a map's WIRE order
-    /// needs to be something other than sorted-by-key: a separate `Vec<Uuid>`
-    /// alongside the map, not an ordered map type — if a later task needs
-    /// `loaded_players` in original-discovery order rather than sorted-by-
-    /// uuid order, that's the pattern to reach for, not reverting this to
-    /// `HashMap`.
+    /// Lazily loaded/parsed player `.sav` files, keyed like
+    /// `player_file_refs`/`player_sav_cache`. `BTreeMap`, not `HashMap`: this
+    /// map IS iterated (`player_sav_bytes`), and a nondeterministic order here
+    /// would surface as nondeterministic save-out.
     pub loaded_players: BTreeMap<Uuid, LoadedPlayer>,
-    /// Guild ids whose full `GuildDto` detail has been lazily loaded (Task 8).
-    /// Not a map, so outside the `HashMap`/`BTreeMap` audit above by
-    /// definition, but the same question applies to any collection: this is
-    /// a pure membership set (`.contains(&uid)`), never iterated to produce
-    /// ordered output, so `HashSet` stays as-is.
+    /// Guild ids whose full `GuildDto` detail has been lazily loaded.
     pub loaded_guilds: HashSet<Uuid>,
-    /// Invalidatable lookup caches — see `WorldCaches`'s own doc comment for
-    /// the invalidation contract.
+    /// Lazily built lookup caches — see `WorldCaches` for the invalidation
+    /// contract every mutation must honor.
     pub caches: WorldCaches,
 }
 
-/// Parses a Palworld save (`Level.sav`, `LevelMeta.sav`, a player `.sav`,
-/// ...) with loud failures on the editor path: `error_to_raw(false)` (the
-/// `SaveReader` default) turns any unparseable property into a hard error
-/// instead of silently degrading it to raw bytes. PlZ (zlib) and CNK (chunk)
-/// compressed saves are not implemented in `uesave`'s decompressor and
-/// surface here as an ordinary `CoreError::Parse` — this function does not
-/// attempt to handle either format itself.
+/// Parses a Palworld save (`Level.sav`, `LevelMeta.sav`, a player `.sav`, ...).
+/// `SaveReader`'s default `error_to_raw(false)` is deliberate: on an editor
+/// path an unparseable property must be a hard error, not silently degraded to
+/// raw bytes that would be written back as-is.
 pub(crate) fn parse_palworld_save(bytes: &[u8]) -> Result<uesave::Save, CoreError> {
     uesave::SaveReader::new()
         .types(uesave::games::palworld::palworld_types())
@@ -244,14 +163,10 @@ pub(crate) fn parse_palworld_save(bytes: &[u8]) -> Result<uesave::Save, CoreErro
         .map_err(|parse_error| CoreError::Parse(parse_error.to_string()))
 }
 
-/// `SaveData.WorldName` from a LevelMeta (or Level) property tree, filtered
-/// to a non-empty string, or `None` when the property is absent or empty.
-/// Shared navigation behind two Python originals that read the identical
-/// path but fall back to different placeholder text:
-/// `world_name_from_meta_properties` below (`SaveManager._load_world_name`,
-/// fallback `"Unknown"`) and `gamepass::scan::world_name_from_level_meta`
-/// (`FileManager.read_level_meta`, fallback `"Unknown World"`). Extracted so
-/// neither caller reimplements the GVAS navigation.
+/// `SaveData.WorldName` from a LevelMeta (or Level) property tree, or `None`
+/// when the property is absent or empty. Callers supply their own placeholder:
+/// `world_name_from_meta_properties` uses `"Unknown"`,
+/// `gamepass::scan::world_name_from_level_meta` uses `"Unknown World"`.
 pub(crate) fn world_name_property(properties: &uesave::Properties) -> Option<String> {
     props::get(properties, &["SaveData", "WorldName"])
         .and_then(props::as_str)
@@ -259,21 +174,13 @@ pub(crate) fn world_name_property(properties: &uesave::Properties) -> Option<Str
         .map(|name| name.to_string())
 }
 
-/// Port of `SaveManager._load_world_name`: `SaveData.WorldName` from
-/// `LevelMeta.sav`, falling back to `"Unknown"` when the property is absent
-/// or its string value is empty.
 pub(crate) fn world_name_from_meta_properties(properties: &uesave::Properties) -> String {
     world_name_property(properties).unwrap_or_else(|| "Unknown".to_string())
 }
 
-/// Sets `SaveData.WorldName` on a LevelMeta (or Level) property tree in
-/// place. Shared core behind `SaveSession::set_world_name` (which also
-/// updates `self.world_name` on the loaded session) and
-/// `gamepass::scan::set_world_name_in_level_meta` (which operates on
-/// standalone bytes with no `SaveSession` to update) — both port the same
-/// property write `SaveManager().sav(level_meta)` callers rely on
-/// (`rename_gamepass_world` / `copy_container`), so the write logic lives
-/// once here rather than being duplicated per caller.
+/// Sets `SaveData.WorldName` on a LevelMeta (or Level) property tree in place.
+/// Shared by `SaveSession::set_world_name` and
+/// `gamepass::scan::set_world_name_in_level_meta`.
 pub(crate) fn set_world_name_property(
     properties: &mut uesave::Properties,
     new_name: &str,
@@ -296,10 +203,9 @@ fn map_entry_key_uuid(entry: &uesave::MapEntry, nested_field: Option<&str>) -> O
     }
 }
 
-/// Builds a `Uuid -> position` index over a map's entries, matching Python's
-/// `IndexingMixin` key extractors, which silently skip entries whose key
-/// can't be resolved to a `Uuid` (`except (KeyError, TypeError): return
-/// None`) rather than failing the whole load.
+/// Builds a `Uuid -> position` index over a map's entries. Entries whose key
+/// can't be resolved to a `Uuid` are skipped, so one malformed entry never
+/// fails the whole load.
 fn build_position_index(
     entries: &[uesave::MapEntry],
     nested_field: Option<&str>,
@@ -315,19 +221,8 @@ fn build_position_index(
 
 impl SaveSession {
     /// Builds a `SaveSession` with only `kind` and `level` set; every other
-    /// field defaults to an empty/harmless placeholder (`world_name:
-    /// String::new()`, empty maps, `size: 0`, `save_type_label: "steam"`).
-    ///
-    /// Named for its primary external caller — Phase 2's
-    /// `tests/common/mod.rs` and every test-only `SaveSession` builder in
-    /// this workspace construct a session through this one function instead
-    /// of re-declaring `SaveSession`'s full (and still growing) field list
-    /// at each call site. `load` below is built on it too, for the same
-    /// reason: one place to update when a field is added, not N
-    /// independently hand-written struct literals that silently go stale
-    /// (see the whole-branch Phase-1 review this constructor was raised
-    /// against: four such literals already existed before Phase 2's first
-    /// commit).
+    /// field gets an empty placeholder. `load` builds on this too, so a new
+    /// field only needs a default in one place.
     pub fn new_for_tests(kind: SaveKind, level: uesave::Save) -> Self {
         SaveSession {
             kind,
@@ -355,36 +250,20 @@ impl SaveSession {
         }
     }
 
-    /// Port of `IndexingMixin.invalidate_performance_caches`
-    /// (`game/mixins/indexing.py:21-33`): resets every lazily built lookup
-    /// cache to `None` so the next accessor rebuilds it from the current
-    /// world tree. Every character-map/container-map mutation (pal/player/
-    /// guild CRUD, Tasks 9/11) MUST call this before returning — see
-    /// `WorldCaches`'s doc comment for the invalidation matrix and why this
-    /// is a procedural contract rather than a compiler-enforced one.
+    /// Resets every lazily built cache to `None` so the next accessor rebuilds
+    /// it from the current world tree. Mandatory after any character-map or
+    /// container-map mutation; see `WorldCaches`.
     pub fn invalidate_performance_caches(&mut self) {
         self.caches = WorldCaches::default();
     }
 
     /// Parses `Level.sav` (and `LevelMeta.sav`, when present) and builds the
-    /// typed indexes Task 8/9 rely on. Mirrors the combination of Python's
-    /// `AppState.process_save_files` (the `"Loading Level.sav..."` progress
-    /// message) and `SaveManager.load_sav_files` (everything else), which the
-    /// Rust port folds into a single entry point since Task 9's WS handler is
-    /// a thin wrapper around this call.
+    /// position indexes and summaries.
     ///
-    /// `emit_top_level_progress` gates ONLY the leading generic `"Loading
-    /// Level.sav..."` frame — the one that in Python lives in
-    /// `AppState.process_save_files` (state.py:69), NOT in
-    /// `SaveManager.load_sav_files`. `select_save`/`load_zip` go through
-    /// `process_save_files` and so pass `true` (their sequence is
-    /// Phase-1-parity-verified with that frame present); the transfer path
-    /// (`load_source_save`) calls `load_sav_files` directly, bypassing
-    /// `process_save_files`, and emits its own `"Loading {label} Level.sav..."`
-    /// instead, so it passes `false` to avoid a duplicate generic frame. Every
-    /// later frame (`"Loading level meta..."` / `"No LevelMeta.sav found,
-    /// skipped."` / the summary-extraction frames) is unaffected by this flag —
-    /// those all originate in `load_sav_files`, which BOTH paths run.
+    /// `emit_top_level_progress` gates ONLY the leading `"Loading Level.sav..."`
+    /// frame. `select_save`/`load_zip` pass `true`; the transfer path emits its
+    /// own `"Loading {label} Level.sav..."` first and passes `false` to avoid a
+    /// duplicate. Every later frame is emitted regardless.
     #[allow(clippy::too_many_arguments)]
     pub fn load(
         kind: SaveKind,
@@ -415,10 +294,6 @@ impl SaveSession {
             }
         };
 
-        // CPython's bytes.__sizeof__() is len(data) + 33 (verified against
-        // .venv Python 3.13); Python's _get_file_size falls back to that when
-        // handed a plain bytes object (no seek/tell), which is always the
-        // case for level_sav here.
         let size = level_sav_bytes.len() as u64 + 33;
 
         let mut session = SaveSession::new_for_tests(kind, level);
@@ -445,23 +320,13 @@ impl SaveSession {
         Ok(session)
     }
 
-    /// Port of `PlayerSwapMixin.rebuild_player_caches`
-    /// (`game/mixins/player_swap.py:282-291`): invalidate the lazy performance
-    /// caches, drop the loaded-guild set, and re-extract both summary maps
-    /// from the (now-mutated) world tree. The eager Phase-1 position indexes
-    /// are rebuilt too -- unlike Python (whose indexes are all in the lazy
-    /// cache layer), this port keeps them eager and built once in `load`, so a
-    /// character/container/group-map mutation leaves them stale until they are
-    /// rebuilt here.
+    /// Invalidates the lazy caches, drops the loaded-guild set, rebuilds the
+    /// eager position indexes, and re-extracts both summary maps from the
+    /// now-mutated world tree.
     ///
-    /// `loaded_players` is deliberately NOT cleared: it is this port's
-    /// `_player_gvas_files` (the parsed player GVAS the save-out iterates),
-    /// which Python's `rebuild_player_caches` also keeps -- Python only clears
-    /// `_players`/`_loaded_players` (the domain objects and the id set), whose
-    /// only observable effect here is the summaries' `loaded` flag resetting to
-    /// `false`, which re-extraction already does. `extract_summaries` is called
-    /// with a null progress sink so this reproduces Python's rebuild exactly
-    /// (its `_extract_*_summaries` take no `ws_callback` and emit nothing).
+    /// `loaded_players` is deliberately NOT cleared: it holds the parsed player
+    /// GVAS that the save-out path iterates, and dropping it would discard
+    /// pending edits.
     pub fn rebuild_player_caches(&mut self) -> Result<(), CoreError> {
         self.invalidate_performance_caches();
         self.loaded_guilds.clear();
@@ -474,29 +339,14 @@ impl SaveSession {
         crate::domain::summaries::extract_summaries(self, &crate::progress::null_progress())
     }
 
-    /// Lazily loads `player_uid`'s GVAS (`.sav`/`_dps.sav`) into
-    /// `loaded_players` on demand — a thin, `pub` wrapper around
-    /// `transfer::ensure_player_gvas_loaded` (previously `pub(crate)`, reachable
-    /// only from `domain::transfer`'s own `transfer_player` and
-    /// `domain::uid_swap`'s player-uid swap).
+    /// Force-loads `player_uid`'s GVAS into `loaded_players`. Needed by
+    /// handlers that resolve a player purely as a transfer DESTINATION, since
+    /// `domain::player::build_player_dto` returns `Ok(None)` for any player the
+    /// frontend has not opened yet.
     ///
-    /// Exists to close a cross-handler parity gap: `domain::player::
-    /// build_player_dto` returns `Ok(None)` for any player not yet in
-    /// `loaded_players`, which is correct for the pal/guild-detail read paths
-    /// (a player the frontend hasn't "opened" is expected to read as absent
-    /// there), but is WRONG for a handler resolving a real player purely as a
-    /// transfer DESTINATION (`handlers::ups::handle_export_ups_pal`'s
-    /// `"pal_box"` branch, `handlers::gps::handle_clone_gps_pal_to_player`) --
-    /// Python eager-loads every player at save-load
-    /// (`SaveManager.get_players`), so a real-but-unopened destination player
-    /// always succeeds there. Callers should gate on an eager existence check
-    /// (`player_summaries`/`player_file_refs`) first, so a genuinely
-    /// nonexistent uid still surfaces "Player not found" as before, and only
-    /// call this to force-load a uid already confirmed real.
-    ///
-    /// A no-op (not an error) when the player is already loaded or carries no
-    /// file reference at all — exactly `ensure_player_gvas_loaded`'s own two
-    /// early returns, reused verbatim rather than reimplemented.
+    /// Callers must first confirm the uid is real (via
+    /// `player_summaries`/`player_file_refs`): this is a silent no-op, not an
+    /// error, when the player is already loaded or has no file reference.
     pub fn ensure_player_loaded(&mut self, player_uid: Uuid) -> Result<(), CoreError> {
         crate::transfer::ensure_player_gvas_loaded(self, player_uid)
     }
@@ -520,8 +370,8 @@ impl SaveSession {
             .map(Vec::as_slice)
     }
 
-    /// `CharacterSaveParameterMap` — every player and pal. Required: absent
-    /// only in a malformed save (Python `_set_data` raises `KeyError`).
+    /// `CharacterSaveParameterMap` — every player and pal. Absent only in a
+    /// malformed save.
     pub fn character_map(&self) -> Result<&[uesave::MapEntry], CoreError> {
         self.required_map("CharacterSaveParameterMap")
     }
@@ -538,8 +388,7 @@ impl SaveSession {
         self.required_map("GroupSaveDataMap")
     }
 
-    /// `BaseCampSaveData` — absent in saves that have never had a base built
-    /// (Python guards with `"BaseCampSaveData" in world_save_data`).
+    /// `BaseCampSaveData` — absent in saves that never had a base built.
     pub fn base_camp_map(&self) -> Option<&[uesave::MapEntry]> {
         self.optional_map("BaseCampSaveData")
     }
@@ -549,19 +398,13 @@ impl SaveSession {
         self.optional_map("GuildExtraSaveDataMap")
     }
 
-    /// Compresses the current (possibly edited) `Level.sav` tree back to its
-    /// PlM/Oodle `.sav` bytes. Port of `SerializationMixin.sav`
-    /// (`serialization.py:106-111`), which does `compress_gvas_to_sav(self.
-    /// _gvas_file.write(CUSTOM_PROPERTIES), 0x31)` — the save-type `0x31` and
-    /// `PlM` magic are emitted by `savio::write_sav_bytes`.
+    /// Compresses the current (possibly edited) `Level.sav` tree back to `.sav`
+    /// bytes.
     pub fn level_sav_bytes(&self) -> Result<Vec<u8>, CoreError> {
         crate::savio::write_sav_bytes(&self.level)
     }
 
-    /// Compresses the loaded `LevelMeta.sav` tree back to its `.sav` bytes, or
-    /// `None` when no LevelMeta was loaded. Port of
-    /// `SerializationMixin.level_meta_sav` (`serialization.py:172-178`), which
-    /// returns `None` when `self._level_meta_gvas_file` is falsy.
+    /// `None` when no `LevelMeta.sav` was loaded.
     pub fn level_meta_sav_bytes(&self) -> Result<Option<Vec<u8>>, CoreError> {
         match &self.level_meta {
             Some(meta) => Ok(Some(crate::savio::write_sav_bytes(meta)?)),
@@ -569,22 +412,8 @@ impl SaveSession {
         }
     }
 
-    /// Compresses every lazily-loaded player's `.sav` (and its `_dps.sav`
-    /// companion, when present) back to `.sav` bytes. Port of
-    /// `SerializationMixin.player_gvas_files` (`serialization.py:124-145`),
-    /// which iterates `self._player_gvas_files` — ONLY the players lazily
-    /// loaded so far (Task 7 populates `loaded_players` on first detail
-    /// load), NOT every player the save records.
-    ///
-    /// Deviation from the brief: the brief's signature returns
-    /// `indexmap::IndexMap<Uuid, ..>`. `indexmap` is deliberately not a
-    /// dependency of this port (`session.rs`'s `loaded_players` doc comment
-    /// records the project-wide `IndexMap → BTreeMap` reconciliation). The
-    /// return is a `BTreeMap<Uuid, (Vec<u8>, Option<Vec<u8>>)>` instead. This
-    /// is faithful, not a compromise: Python's dict maps each uid to its OWN
-    /// independent pair of files, so the map's iteration order affects no
-    /// file's contents and reaches no wire array — only the per-uid `.sav`/
-    /// `_dps.sav` bytes matter, and those are `BTreeMap`-order-independent.
+    /// Compresses every LOADED player's `.sav` (and `_dps.sav` companion) back
+    /// to bytes — only the players opened so far, not every player in the save.
     pub fn player_sav_bytes(&self) -> Result<BTreeMap<Uuid, PlayerSaveBytes>, CoreError> {
         let mut player_files = BTreeMap::new();
         for (player_id, loaded) in &self.loaded_players {
@@ -598,17 +427,10 @@ impl SaveSession {
         Ok(player_files)
     }
 
-    /// Renames the world: updates the loaded `LevelMeta.sav`'s
-    /// `SaveData.WorldName` property AND the session's own `world_name`. Port
-    /// of `SaveManager.set_world_name` (`save_manager.py:191-204`), which
-    /// raises `ValueError("No LevelMeta GvasFile has been loaded.")` when no
-    /// LevelMeta is loaded — reproduced here as `CoreError::Other` carrying
-    /// that exact string (it reaches the UI as an error frame). Python sets
-    /// `self.world_name` before writing the property; here the `SaveData`
-    /// borrow is live while we write `WorldName`, so `self.world_name` is set
-    /// immediately after. Both run only once the LevelMeta guard and the
-    /// `SaveData` lookup have succeeded, so the observable result is identical:
-    /// neither is touched unless a LevelMeta is loaded.
+    /// Updates the loaded `LevelMeta.sav`'s `SaveData.WorldName` AND the
+    /// session's own `world_name`. Neither is touched unless a LevelMeta is
+    /// loaded and its `SaveData` lookup succeeds; the error string reaches the
+    /// UI verbatim.
     pub fn set_world_name(&mut self, new_name: &str) -> Result<(), CoreError> {
         let Some(meta) = self.level_meta.as_mut() else {
             return Err(CoreError::Other(
@@ -620,26 +442,16 @@ impl SaveSession {
         Ok(())
     }
 
-    /// `&mut` access to `Level.sav`'s ROOT properties (not `worldSaveData` --
-    /// one level up), for Task 3E-4's `props::swap_uuid_values_deep` to walk.
-    /// Port of `_deep_swap_uids(self._gvas_file.properties, ...)`'s call site
-    /// (`player_swap.py:115`): Python passes the whole GVAS property tree,
-    /// of which `worldSaveData` is just one top-level entry among siblings,
-    /// so this returns the same root, not `world_properties`'s narrower
-    /// `worldSaveData` substruct.
+    /// `&mut` access to `Level.sav`'s ROOT properties — one level above
+    /// `worldSaveData`, which is only one top-level entry among siblings.
+    /// `props::swap_uuid_values_deep` must walk the whole root.
     pub fn level_properties_mut(&mut self) -> &mut uesave::Properties {
         &mut self.level.root.properties
     }
 
-    /// Port of `_swap_player_gvas_uids` (`player_swap.py:156-171`): writes
-    /// `second` into `first`'s own loaded GVAS `SaveData.PlayerUId` AND
-    /// `SaveData.IndividualId.PlayerUId` (both `Guid` struct properties --
-    /// `PalObjects.Guid`/`PalObjects.get_guid` construct/read `PlayerUId` the
-    /// same way at both paths, per `game/pal_objects.py`), and `first` into
-    /// `second`'s. A no-op for whichever uid (or both) has no loaded GVAS --
-    /// `swap_player_uids` only calls this after confirming both are loaded,
-    /// but this stays defensive like every other player-GVAS accessor in
-    /// this port.
+    /// Writes `second` into `first`'s loaded GVAS at both `SaveData.PlayerUId`
+    /// and `SaveData.IndividualId.PlayerUId`, and `first` into `second`'s. A
+    /// no-op for whichever uid has no loaded GVAS.
     pub fn swap_player_gvas_uids(&mut self, first: uuid::Uuid, second: uuid::Uuid) {
         fn set_player_uid(sav: &mut uesave::Save, new_uid: uuid::Uuid) {
             let Ok(save_data) = crate::domain::player::save_data_props_mut(sav) else {
@@ -660,23 +472,13 @@ impl SaveSession {
         }
     }
 
-    /// Port of `_swap_player_file_refs` (`player_swap.py:265-280`). Only
-    /// runs when BOTH `first` and `second` already have a loaded GVAS /
-    /// file reference -- `swap_player_uids`'s own validation guarantees
-    /// this, so this is a plain swap, not a partial-state one.
+    /// Runs only when BOTH uids already have a loaded GVAS and a file
+    /// reference, so this is a plain swap, never a partial one.
     ///
-    /// Faithfully reproduces a subtlety in Python's version: the two
-    /// players' `.sav` CONTENT trades places between the two uids (each
-    /// carries its `swap_player_gvas_uids`-updated `PlayerUId` with it), but
-    /// each uid keeps its OWN original `_dps.sav` companion -- Python's
-    /// `old_gvas.dps, new_gvas.dps = new_gvas.dps, old_gvas.dps` line runs
-    /// BEFORE the `_player_gvas_files[old] = new_gvas` / `[new] = old_gvas`
-    /// reassignment, so the dps that ends up filed under `old_player_uid`
-    /// is the dps that was ALREADY there (this port's `first_loaded.dps`
-    /// below), not the dps that traveled with the swapped `.sav`. This is
-    /// reproduced exactly, not "fixed" -- byte-parity with the Python
-    /// behavior is the goal, and nothing about this task's brief asks for a
-    /// different dps policy.
+    /// Note the asymmetry: the two `.sav` trees trade places between the uids
+    /// (each carrying its `swap_player_gvas_uids`-updated `PlayerUId`), but
+    /// each uid KEEPS its own original `_dps.sav` companion rather than the one
+    /// that traveled with the swapped `.sav`.
     pub fn swap_player_file_refs(&mut self, first: uuid::Uuid, second: uuid::Uuid) {
         if let (Some(first_loaded), Some(second_loaded)) = (
             self.loaded_players.remove(&first),
@@ -710,15 +512,11 @@ impl SaveSession {
     }
 }
 
-/// The on-disk locations a standalone `TransferTarget` was loaded from, kept
-/// alongside its `SaveSession` so `transfer_player`'s auto-save step
-/// (`transfer_handler.py:194-219`) can write the edited session straight back
-/// without re-deriving paths. `level_sav`/`level_meta`/`players_dir` mirror
-/// `FileManager.FileValidationResult`'s corresponding fields (`level_meta` is
-/// `None` when the load found no `LevelMeta.sav`, matching Python's
-/// `save_info.get("level_meta")` falsy-check before writing it back);
-/// `save_dir` is `level_sav`'s parent directory, the same value Python stores
-/// as `save_info["save_dir"]` and backs up before writing.
+/// The on-disk locations a standalone `TransferTarget` was loaded from, so the
+/// auto-save step can write the edited session straight back without
+/// re-deriving paths. `level_meta` is `None` when the load found no
+/// `LevelMeta.sav`; `save_dir` is `level_sav`'s parent, the directory backed up
+/// before writing.
 pub struct TransferSaveInfo {
     pub level_sav: std::path::PathBuf,
     pub level_meta: Option<std::path::PathBuf>,
@@ -727,35 +525,27 @@ pub struct TransferSaveInfo {
 }
 
 /// A standalone Steam save loaded as the transfer TARGET (`role: "target"` on
-/// `load_source_save`), as opposed to the ordinary main `Session::save` also
-/// being usable as a transfer target. Mirrors Python's
-/// `AppState.target_transfer_save` + `target_transfer_save_info` pair
-/// (`transfer_handler.py:110-113`).
+/// `load_source_save`), as opposed to the main `Session::save`, which can also
+/// serve as a target.
 pub struct TransferTarget {
     pub session: SaveSession,
     pub save_info: TransferSaveInfo,
 }
 
-/// Per-WS-connection state (spec §3: per-connection sessions fix multi-tab clobbering).
+/// Per-WS-connection state; sessions are per-connection so multiple tabs cannot
+/// clobber each other.
 #[derive(Default)]
 pub struct Session {
     pub save: Option<SaveSession>,
-    /// Transfer-source save (Phase 3).
     pub source: Option<SaveSession>,
-    /// Standalone transfer-target save (Phase 3, Task 3E-3) -- loaded via
-    /// `load_source_save` with `role: "target"`. When absent, `transfer_player`
-    /// falls back to `save` as the target (Python's `target_transfer_save or
-    /// app_state.save_file`).
+    /// Standalone transfer-target save. When absent, `transfer_player` falls
+    /// back to `save` as the target.
     pub transfer_target: Option<TransferTarget>,
-    /// Saves discovered by the gamepass branch of `select_save` (Python:
-    /// `AppState.gamepass_saves`). Keyed by save id. Populated by
-    /// `select_gamepass_directory`, consumed by `select_gamepass_save` to
-    /// resolve the selected save's metadata.
+    /// Saves discovered by `select_gamepass_directory`, keyed by save id;
+    /// consumed by `select_gamepass_save`.
     pub gamepass_saves: HashMap<String, crate::dto::gamepass::GamepassSaveData>,
-    /// The gamepass save the user selected (Python:
-    /// `AppState.selected_gamepass_save`). Set by `select_gamepass_save` and
-    /// read by the gamepass branch of `save_modded_save` to locate the
-    /// original containers to copy from.
+    /// Read by the gamepass branch of `save_modded_save` to locate the original
+    /// containers to copy from.
     pub selected_gamepass_save: Option<crate::dto::gamepass::GamepassSaveData>,
 }
 
@@ -875,11 +665,6 @@ mod load_tests {
         assert!(result.is_err());
     }
 
-    /// Synthetic (no corpus save required) proof that
-    /// `invalidate_performance_caches` actually clears every field --
-    /// `world_index.rs`'s corpus-gated tests cover the same contract against
-    /// real save data, but skip silently when `PSP_TEST_SAVE_DIR` is unset,
-    /// so this unit test is the one that always runs.
     #[test]
     fn test_invalidate_performance_caches_clears_every_field() {
         let level = minimal_uesave_save(uesave::Properties::default());
@@ -906,11 +691,8 @@ mod load_tests {
         assert!(session.caches.player_guild_map.is_none());
     }
 
-    /// `new_for_tests` is now the sole construction path for every
-    /// hand-built `SaveSession` in this workspace (including `load` itself),
-    /// so its defaults matter beyond just this test file. Pins every field
-    /// it's responsible for defaulting, not just the two it takes as
-    /// arguments.
+    /// `new_for_tests` is the sole construction path for every hand-built
+    /// `SaveSession` (including `load`), so pin every field it defaults.
     #[test]
     fn test_new_for_tests_sets_kind_and_level_and_defaults_everything_else() {
         let level = minimal_uesave_save(uesave::Properties::default());
@@ -945,10 +727,6 @@ mod load_tests {
         assert!(session.caches.player_guild_map.is_none());
     }
 
-    /// Python's `_load_world_name`: `world_name if world_name else "Unknown"`
-    /// (`palworld_save_pal/game/save_manager.py`). Four distinct shapes of
-    /// `LevelMeta.sav`'s property tree, each asserted separately so a
-    /// regression in any one branch fails on its own name.
     #[test]
     fn test_world_name_falls_back_to_unknown_when_save_data_absent() {
         assert_eq!(
@@ -985,10 +763,8 @@ mod load_tests {
         assert_eq!("My World", world_name_from_meta_properties(&properties));
     }
 
-    /// Builds a `uesave::Save` whose only content that matters to
-    /// `world_properties`/`required_map`/`optional_map` is `properties` at
-    /// the property-tree root; the header/schema fields only matter to the
-    /// (de)serializer, which these tests never touch.
+    /// A `uesave::Save` carrying only root `properties`; the header/schema
+    /// fields only matter to the (de)serializer, which these tests never touch.
     fn minimal_uesave_save(properties: uesave::Properties) -> uesave::Save {
         uesave::Save {
             header: uesave::Header {
@@ -1011,10 +787,6 @@ mod load_tests {
         }
     }
 
-    /// A `SaveSession` whose `level` is built from `root_properties` and
-    /// every other field is a harmless placeholder — enough to exercise
-    /// `world_properties`/`required_map`/`optional_map`, the only methods
-    /// these tests call.
     fn session_with_level_properties(root_properties: uesave::Properties) -> SaveSession {
         let mut session =
             SaveSession::new_for_tests(SaveKind::InMemory, minimal_uesave_save(root_properties));
@@ -1043,9 +815,8 @@ mod load_tests {
         }
     }
 
-    /// Python raises on absence for these four maps (`_set_data`'s
-    /// unconditional `["..."]` indexing); each must fail with a message
-    /// naming the missing map, not panic.
+    /// Each of the four required maps must fail with a message naming the
+    /// missing map, never panic.
     #[test]
     fn test_required_maps_missing_from_world_save_data_return_named_parse_errors() {
         let mut root_properties = uesave::Properties::default();
@@ -1075,9 +846,8 @@ mod load_tests {
         }
     }
 
-    /// `BaseCampSaveData` and `GuildExtraSaveDataMap` are optional (Python
-    /// guards both with `"... in world_save_data"`): their absence must
-    /// come back `None`, never an `Err`.
+    /// `BaseCampSaveData` and `GuildExtraSaveDataMap` are optional: absence
+    /// must come back `None`, never an `Err`.
     #[test]
     fn test_optional_maps_absent_from_world_save_data_return_none_not_error() {
         let mut root_properties = uesave::Properties::default();
@@ -1108,29 +878,21 @@ mod load_tests {
             .is_some_and(|entries| entries.is_empty()));
     }
 
-    /// `test_load_rejects_garbage_bytes` only proves *some* error comes back;
-    /// this pins the exact, non-panicking messages for the three unsupported/
-    /// malformed shapes called out by the phase plan: PlZ (zlib) and CNK
-    /// (chunk) formats that `uesave`'s decompressor deliberately doesn't
-    /// implement yet, and a header truncated before the compression header
-    /// can even be read. None of these should ever panic, since Level.sav is
-    /// untrusted, attacker-controlled input on the editor's load path.
+    /// Level.sav is untrusted input on the load path, so a malformed or
+    /// truncated compression header must produce a clean error, never a panic.
     #[test]
     fn test_parse_palworld_save_rejects_unsupported_and_truncated_formats_cleanly() {
-        // Mirrors uesave::compression::CompressionHeader::read's non-CNK
-        // layout: 4-byte uncompressed_len, 4-byte compressed_len, 3-byte
-        // magic, 1-byte save_type, then payload.
+        // Non-CNK compression header: 4-byte uncompressed_len, 4-byte
+        // compressed_len, 3-byte magic, 1-byte save_type, then payload.
         fn compression_header(magic: &[u8; 3]) -> Vec<u8> {
             let mut header = vec![0u8; 12];
             header[8..11].copy_from_slice(magic);
             header
         }
 
-        // PlZ/CNK are now supported formats (uesave gained zlib + chunked-zlib
-        // decompression), so a valid magic with an empty/garbage payload no
-        // longer hits an "unsupported" guard — it must still fail CLEANLY (bad
-        // zlib stream for PlZ; a truncated 12-byte buffer where CNK needs 24 for
-        // its nested header) without panicking on this untrusted input.
+        // PlZ (zlib) and CNK (chunked zlib) are supported magics, so these fail
+        // on their payloads instead: a bad zlib stream for PlZ, and a 12-byte
+        // buffer where CNK needs 24 for its nested header.
         let plz_error = parse_palworld_save(&compression_header(b"PlZ")).unwrap_err();
         assert!(matches!(plz_error, CoreError::Parse(_)), "{plz_error}");
 

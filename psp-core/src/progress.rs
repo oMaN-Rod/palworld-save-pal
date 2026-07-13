@@ -4,7 +4,6 @@ use std::sync::Arc;
 /// the `progress_message` WS type.
 pub type ProgressSink = Arc<dyn Fn(&str) + Send + Sync>;
 
-/// A sink that discards all progress messages.
 pub fn null_progress() -> ProgressSink {
     Arc::new(|_| {})
 }

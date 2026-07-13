@@ -1,7 +1,4 @@
-//! In-memory sav↔json conversion (uesave JSON schema).
-//! Serves the convert_sav_file WS handler (serialization.py:86-105 is the Python
-//! equivalent, but the JSON schema here is uesave's — documented breaking change,
-//! spec §4).
+//! In-memory sav<->json conversion. The JSON shape is `uesave`'s own schema.
 
 use std::io::Cursor;
 
@@ -47,12 +44,11 @@ mod tests {
 
         let json = sav_to_json_string(&sav_bytes).unwrap();
         assert!(json.starts_with('{'));
-        assert!(!json.contains('\n')); // minified, like Python's minify=True
+        assert!(!json.contains('\n')); // minified
 
         let rebuilt_sav = json_to_sav_bytes(json.as_bytes()).unwrap();
         assert_eq!(&rebuilt_sav[8..12], b"PlM1");
 
-        // GVAS payloads identical after the full round trip.
         let original_gvas =
             uesave::compression::decompress_save(&mut std::io::Cursor::new(sav_bytes.as_slice()))
                 .unwrap();
@@ -70,7 +66,6 @@ mod tests {
 
     #[test]
     fn corpus_level_meta_round_trip() {
-        // Use real gamepass LevelMeta.sav from the on-disk corpus
         let corpus_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join(
             "../backups/gamepass/000900000487F3B6_0000000000000000000000006B210A9C_20260325231642/4F64BAB699AE4B4A97A5862116E07C6D/LevelMeta.sav",
         );
@@ -81,7 +76,6 @@ mod tests {
 
         let sav_bytes = std::fs::read(&corpus_path).unwrap();
 
-        // Convert to JSON
         let json = sav_to_json_string(&sav_bytes).unwrap();
         assert!(json.starts_with('{'), "JSON should start with '{{");
         assert!(
@@ -89,7 +83,6 @@ mod tests {
             "JSON should be minified (no newlines)"
         );
 
-        // Convert back to sav
         let rebuilt_sav = json_to_sav_bytes(json.as_bytes()).unwrap();
         assert_eq!(
             &rebuilt_sav[8..12],
@@ -97,7 +90,6 @@ mod tests {
             "rebuilt sav should have PlM1 at offset 8"
         );
 
-        // Verify GVAS payloads are identical (full round-trip)
         let original_gvas =
             uesave::compression::decompress_save(&mut std::io::Cursor::new(sav_bytes.as_slice()))
                 .unwrap();

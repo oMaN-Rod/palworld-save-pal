@@ -1,17 +1,13 @@
-//! Readers for Palworld binary blobs that uesave keeps opaque:
-//! the guild tail inside `PalGroupData::remaining_data` and the
-//! `WorkerDirector` RawData byte array. Layouts mirror
-//! palworld_save_tools/rawdata/{group,worker_director}.py.
-//!
-//! All multi-byte integers are little-endian, matching the save file's
-//! native encoding (`archive.py`'s `struct.unpack` calls all use `<`).
+//! Readers for the Palworld binary blobs `uesave` keeps opaque: the guild tail
+//! inside `PalGroupData::remaining_data` and the `WorkerDirector` RawData byte
+//! array. All multi-byte integers in these blobs are little-endian.
 
 use crate::error::CoreError;
 use uuid::Uuid;
 
-/// Cursor over an opaque byte blob. Every read is bounds-checked against
-/// the remaining bytes; a truncated or maliciously long declared length
-/// produces a `CoreError::Parse` naming the offset, never a panic.
+/// Cursor over an opaque byte blob. Every read is bounds-checked against the
+/// remaining bytes; a truncated or maliciously long declared length produces a
+/// `CoreError::Parse` naming the offset, never a panic.
 pub struct BlobReader<'a> {
     bytes: &'a [u8],
     position: usize,
@@ -26,17 +22,14 @@ impl<'a> BlobReader<'a> {
         self.position == self.bytes.len()
     }
 
-    /// Bytes already consumed. Lets a caller outside this module (e.g.
-    /// `domain::guild_tail`) build its own "blob has unread trailing bytes"
-    /// error naming the exact offset, the same way this module's own
-    /// `parse_guild_raw_tail` does with the private `position` field.
+    /// Bytes already consumed — lets callers report trailing-byte errors at the
+    /// exact offset.
     pub fn position(&self) -> usize {
         self.position
     }
 
-    /// Bounds-checked slice of the next `count` bytes. `position + count`
-    /// is computed with `checked_add` so an attacker-controlled `count`
-    /// (e.g. a length prefix read straight from the blob) can never wrap
+    /// Bounds-checked slice of the next `count` bytes. `position + count` uses
+    /// `checked_add` so a `count` read straight out of the blob can never wrap
     /// or index past the end of `bytes`.
     fn take(&mut self, count: usize) -> Result<&'a [u8], CoreError> {
         let end = self
@@ -66,7 +59,6 @@ impl<'a> BlobReader<'a> {
 
     pub fn read_u32(&mut self) -> Result<u32, CoreError> {
         let bytes = self.take(4)?;
-        // take(4) always returns exactly 4 bytes, so this conversion cannot fail.
         Ok(u32::from_le_bytes(
             bytes.try_into().expect("take(4) yields 4 bytes"),
         ))
@@ -86,11 +78,10 @@ impl<'a> BlobReader<'a> {
         ))
     }
 
-    /// Palworld guid: 16 raw little-endian bytes shuffled into RFC 4122
-    /// display order. Matches `palworld_save_tools.archive.UUID.__str__`:
+    /// Palworld guid: 16 raw bytes shuffled into RFC 4122 display order —
     /// raw `[b0..b15]` -> display `[b3,b2,b1,b0, b7,b6, b5,b4, b11,b10, b9,b8, b15,b14,b13,b12]`.
-    /// The permutation is an involution, so the same shuffle also converts
-    /// display order back to raw order (used by the test-only `BlobWriter`).
+    /// The permutation is an involution, so the same shuffle converts display
+    /// order back to raw order.
     pub fn read_uuid(&mut self) -> Result<Uuid, CoreError> {
         let b = self.take(16)?;
         Ok(Uuid::from_bytes([
@@ -101,12 +92,10 @@ impl<'a> BlobReader<'a> {
 
     /// Unreal fstring: `i32` length prefix.
     /// * `0` -> empty string, no bytes follow.
-    /// * `> 0` -> that many ASCII/UTF-8 bytes, the last of which is the
-    ///   trailing NUL terminator and is unconditionally dropped (mirrors
-    ///   Python's `reader.read(size)[:-1]`, not a conditional check).
-    /// * `< 0` -> `|length|` UTF-16LE code units, the last of which is the
-    ///   trailing NUL and is unconditionally dropped (mirrors Python's
-    ///   `reader.read(size * 2)[:-2]`).
+    /// * `> 0` -> that many UTF-8 bytes, the last being the NUL terminator.
+    /// * `< 0` -> `|length|` UTF-16LE code units, the last being the NUL.
+    ///
+    /// The terminator is dropped unconditionally, not checked for.
     pub fn read_string(&mut self) -> Result<String, CoreError> {
         let length = self.read_i32()?;
         if length == 0 {
@@ -125,8 +114,8 @@ impl<'a> BlobReader<'a> {
                 .chunks_exact(2)
                 .map(|pair| u16::from_le_bytes([pair[0], pair[1]]))
                 .collect();
-            // length < 0 and length != 0 (handled above) means unit_count >= 1,
-            // so units is non-empty and this unconditional pop cannot panic.
+            // length < 0 means unit_count >= 1, so units is non-empty and this
+            // pop cannot panic.
             units.pop();
             Ok(String::from_utf16_lossy(&units))
         } else {
@@ -139,10 +128,9 @@ impl<'a> BlobReader<'a> {
     }
 
     /// Unreal `TArray`: `u32` element count followed by that many elements.
-    /// A hostile huge count cannot cause unbounded work or allocation: the
-    /// underlying `Result` iterator short-circuits at the first element
-    /// read that runs out of bytes, so iterations are bounded by the
-    /// blob's actual remaining length, never by the declared count.
+    /// A hostile count cannot cause unbounded work: the `Result` collect
+    /// short-circuits on the first element that runs out of bytes, so
+    /// iterations are bounded by the blob's length, not the declared count.
     pub fn read_tarray<T>(
         &mut self,
         mut read_element: impl FnMut(&mut Self) -> Result<T, CoreError>,
@@ -152,8 +140,8 @@ impl<'a> BlobReader<'a> {
     }
 }
 
-/// Adds a field name to a leaf read's error so a truncated save reports
-/// *which* field was being read, in addition to `take`'s byte offset.
+/// Adds a field name to a leaf read's error, so a truncated save reports which
+/// field failed in addition to `take`'s byte offset.
 fn describe_field<T>(field: &'static str, result: Result<T, CoreError>) -> Result<T, CoreError> {
     result.map_err(|err| match err {
         CoreError::Parse(msg) => CoreError::Parse(format!("{field}: {msg}")),
@@ -161,18 +149,11 @@ fn describe_field<T>(field: &'static str, result: Result<T, CoreError>) -> Resul
     })
 }
 
-/// `WorkerDirector` RawData layout (palworld_save_tools/rawdata/worker_director.py,
-/// `decode_bytes`), fields concatenated in order:
-/// `id: guid` (16 bytes),
-/// `spawn_transform: FTransform` (rotation quat 4 doubles, translation
-/// vector3 3 doubles, scale3d vector3 3 doubles; 10 doubles, 80 bytes),
-/// `current_order_type: u8` (1 byte),
-/// `current_battle_type: u8` (1 byte),
-/// `container_id: guid` (16 bytes),
-/// `trailing_bytes: [u8; 4]` (4 bytes);
-/// 118 bytes total, with `container_id` at offset 16 + 80 + 1 + 1 = 98.
-/// The blob is a fixed-size `TArray<u8>`, so any length other than
-/// exactly 118 is treated as corrupt.
+/// `WorkerDirector` RawData is a fixed 118-byte layout, concatenated in order:
+/// `id: guid` (16), `spawn_transform: FTransform` (10 doubles = 80),
+/// `current_order_type: u8` (1), `current_battle_type: u8` (1),
+/// `container_id: guid` (16), `trailing_bytes` (4) — putting `container_id` at
+/// offset 98. Any other length is corrupt.
 pub fn worker_director_container_id(raw_data: &[u8]) -> Result<Uuid, CoreError> {
     const WORKER_DIRECTOR_BLOB_LEN: usize = 118;
     const CONTAINER_ID_OFFSET: usize = 98;
@@ -188,8 +169,7 @@ pub fn worker_director_container_id(raw_data: &[u8]) -> Result<Uuid, CoreError> 
 
 #[cfg(test)]
 pub(crate) mod test_bytes {
-    /// Test-only little writer that is the exact inverse of BlobReader —
-    /// used here and by the summaries tests (Task 8).
+    /// Test-only writer, the exact inverse of `BlobReader`.
     #[derive(Default)]
     pub struct BlobWriter {
         pub bytes: Vec<u8>,
@@ -235,10 +215,6 @@ mod tests {
     fn test_read_uuid_matches_python_byte_order() {
         let raw: Vec<u8> = (0u8..16).collect();
         let parsed = BlobReader::new(&raw).read_uuid().unwrap();
-        // Ground truth: python -c "from palworld_save_tools.archive import UUID;
-        // print(str(UUID(bytes(range(16)))))" -> 03020100-0706-0504-0b0a-09080f0e0d0c
-        // (the brief's original assertion transposed the second and third groups;
-        // corrected here per the standing "fix wrong prescribed tests" policy)
         assert_eq!("03020100-0706-0504-0b0a-09080f0e0d0c", parsed.to_string());
     }
 

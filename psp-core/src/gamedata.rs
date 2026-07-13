@@ -6,36 +6,17 @@ use serde_json::Value;
 
 use crate::error::CoreError;
 
-/// Memoized index over `pals.json`'s top-level keys (`GameData::get("pals")`
-/// as an object), built once per `GameData` instance the first time
-/// `domain::pal::known_pal_keys`/`pal_data_for` needs it and reused for the
-/// rest of that instance's lifetime.
-///
-/// **Why this exists (real, measured perf bug -- see `domain::pal`'s own doc
-/// comment on `known_pal_keys`/`pal_data_for` for the full story).** Before
-/// this cache, `known_pal_keys` rebuilt a fresh `HashSet<String>` by cloning
-/// every one of `pals.json`'s ~600 keys, and `pal_data_for` re-scanned all
-/// ~600 entries with a `.to_lowercase()` string comparison per candidate --
-/// on EVERY pal `read_save_parameter_dto` decodes (both `Level.sav` pals and
-/// DPS/GPS-array pals), `known_pal_keys` alone twice over (once directly, once
-/// again inside `max_hp_for`). A save with a large Dimensional Palbox (a real
-/// one observed: 9,600 DPS slots) turned that into ~78µs of wasted
-/// re-scanning per slot -- ~780ms for one player's DPS section alone,
-/// dominating a `request_player_details` call that should take single-digit
-/// milliseconds. Memoizing both lookups here, indexed once per `GameData`
-/// (not per pal), removes the redundant work entirely without changing any
-/// decoded value.
+/// Memoized index over `pals.json`'s top-level keys, built once per `GameData`
+/// instance. Without it, every pal decoded from a save re-scans all ~600 keys —
+/// crippling on a save with a large Dimensional Palbox (thousands of slots).
 #[derive(Debug, Default)]
 pub(crate) struct PalLookup {
-    /// Exact-case `pals.json` keys -- `domain::pal::format_character_key`'s
-    /// `known_pal_keys.contains(character_id)` boss-prefix check is
-    /// deliberately case-sensitive (see that function's own doc comment), so
-    /// this must stay exact-case, not lowercased.
+    /// Exact-case `pals.json` keys. Must stay exact-case:
+    /// `domain::pal::format_character_key`'s boss-prefix check is
+    /// case-sensitive.
     pub keys: HashSet<String>,
-    /// Lowercased key -> the real, exact-case `pals.json` key it came from --
-    /// `domain::pal::pal_data_for`'s case-insensitive lookup used to redo this
-    /// same lowercasing-and-comparing scan on every call; this is that scan,
-    /// computed once.
+    /// Lowercased key -> the exact-case `pals.json` key, for
+    /// `domain::pal::pal_data_for`'s case-insensitive lookup.
     pub lower_to_canonical: HashMap<String, String>,
 }
 
@@ -50,8 +31,8 @@ pub struct GameData {
 }
 
 impl GameData {
-    /// Loads every *.json file under `data_dir` (the `data/json` directory),
-    /// including `l10n/` and `ui/` subtrees.
+    /// Loads every *.json file under `data_dir`, recursing into `l10n/` and
+    /// `ui/`.
     pub fn load(data_dir: &Path) -> Result<Self, CoreError> {
         let mut entries = HashMap::new();
         load_json_directory(data_dir, data_dir, &mut entries)?;
@@ -71,11 +52,6 @@ impl GameData {
         &self.version
     }
 
-    /// Builds (on first call) or returns the already-built `PalLookup` --
-    /// see that struct's own doc comment. `pub(crate)`, not `pub`: only
-    /// `domain::pal` reads this; every other caller keeps going through
-    /// `domain::pal::known_pal_keys`/the private `pal_data_for`, unaware this
-    /// cache exists.
     pub(crate) fn pal_lookup(&self) -> &PalLookup {
         self.pal_lookup.get_or_init(|| {
             let mut keys = HashSet::new();

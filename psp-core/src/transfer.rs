@@ -1,32 +1,11 @@
-//! Cross-save player transfer -- port of `game/player_transfer.py`'s
-//! `transfer_player` and its six private helpers
-//! (`_transfer_character_entry`, `_transfer_player_containers`,
-//! `_transfer_tech`/`_transfer_appearance`, `_transfer_inventory`,
-//! `_transfer_pals`/`_copy_pal_container_slots`/`_update_guild_pal_handles`,
-//! `_transfer_guild`/`_create_guild_for_player`, `_sync_timestamps`).
+//! Cross-save player transfer.
 //!
-//! Reconciliation with the brief: the brief's assumed interface
-//! (`CharacterMapEntry`/`GroupMapEntry`/`GroupPlayerInfo`/`ContainerEntry`
-//! wrapper types with typed inherent methods, `PlayerGvasFiles::container_ids`,
-//! `SaveSession::player_gvas`, ...) does NOT exist in this codebase. There are
-//! no typed wrapper structs over `uesave::MapEntry`; Phase 2 navigates the raw
-//! `Property` tree functionally through `psp_core::props` and the `domain::*`
-//! helpers. This module is implemented directly against that real navigation
-//! layer -- reusing `domain::world`'s character/group/container accessors and
-//! entry helpers, `domain::player`'s `save_data_props`/`container_id_from`,
-//! `domain::pal`'s `param`, `domain::guild`'s `find_player_guild_id`, and
-//! `domain::guild_tail`'s `GuildTail` raw-tail codec -- rather than inventing a
-//! typed-wrapper abstraction. The control flow, the `progress(...)` strings,
-//! and the rejection messages are reproduced 1:1 from `player_transfer.py`.
-//!
-//! The Python guild `RawData` dict is split across two Rust representations:
-//! `group_id`/`individual_character_handle_ids` are typed fields on
-//! `uesave::games::palworld::PalGroupData`, while `players`/`guild_name`/
-//! `admin_player_uid`/`base_ids`/`base_camp_level`/
-//! `map_object_instance_ids_base_camp_points` live in `PalGroupData.
-//! remaining_data`, decoded/re-encoded by `domain::guild_tail::GuildTail`. Each
-//! Python `raw_data["..."]` access below is translated to whichever of the two
-//! actually carries that field (see each helper).
+//! A guild's data is split across two representations: `group_id` and
+//! `individual_character_handle_ids` are typed fields on
+//! `uesave::games::palworld::PalGroupData`, while `players`, `guild_name`,
+//! `admin_player_uid`, `base_ids`, `base_camp_level` and
+//! `map_object_instance_ids_base_camp_points` live in the opaque
+//! `PalGroupData.remaining_data` tail, decoded by `domain::guild_tail`.
 
 use std::collections::HashSet;
 
@@ -41,10 +20,7 @@ use crate::progress::ProgressSink;
 use crate::props;
 use crate::session::{parse_palworld_save, LoadedPlayer, SaveSession};
 
-/// Which of a player's sub-trees the transfer touches. Mirrors
-/// `transfer_player`'s five boolean parameters (`transfer_character`/
-/// `transfer_inventory`/`transfer_pals`/`transfer_tech`/`transfer_appearance`),
-/// each defaulting to `True` in Python.
+/// Which of a player's sub-trees the transfer touches.
 #[derive(Debug, Clone)]
 pub struct TransferOptions {
     pub transfer_character: bool,
@@ -54,10 +30,9 @@ pub struct TransferOptions {
     pub transfer_appearance: bool,
 }
 
-/// `transfer_player`'s two failure shapes. `Rejected` is a SOFT rejection --
-/// Python returns `{"error": msg}` (a normal WS response), NOT the WS error
-/// frame -- so the handler layer maps this to `{"error": msg}`, not the
-/// hard-error type. `Core` carries a genuine parse/IO failure.
+/// `Rejected` is a SOFT rejection: the handler layer must map it to a normal
+/// `{"error": msg}` WS response, not the WS error frame. `Core` carries a
+/// genuine parse/IO failure.
 #[derive(Debug, thiserror::Error)]
 pub enum TransferError {
     #[error("{0}")]
@@ -66,16 +41,12 @@ pub enum TransferError {
     Core(#[from] CoreError),
 }
 
-/// Port of `player_transfer.py::transfer_player`. `Ok(())` == Python's
-/// `{"success": True}`; `Err(TransferError::Rejected(msg))` == Python's
-/// `{"error": msg}`. `target_player_uid == None` is spawn mode (Python's
-/// `spawn_mode = target_player_uid is None`, then `target_player_uid =
-/// source_player_uid`).
+/// `target_player_uid == None` means spawn mode: the source player is spawned
+/// into the target save under its own uid.
 ///
-/// `source` and `target` are always distinct `SaveSession`s (Rust's borrow
-/// checker forbids passing the same object as two `&mut`), which is why every
-/// helper below can hold an immutable borrow of `source` and a mutable borrow
-/// of `target` at once.
+/// `source` and `target` are always distinct `SaveSession`s — the borrow
+/// checker forbids passing one object as two `&mut` — which is why every helper
+/// below can hold `&source` and `&mut target` at once.
 pub fn transfer_player(
     source: &mut SaveSession,
     target: &mut SaveSession,
@@ -87,7 +58,6 @@ pub fn transfer_player(
     let spawn_mode = target_player_uid.is_none();
     let target_player_uid = target_player_uid.unwrap_or(source_player_uid);
 
-    // --- Validation (player_transfer.py:173-207) ---
     progress("Validating players...");
 
     if !source.player_file_refs.contains_key(&source_player_uid) {
@@ -101,9 +71,6 @@ pub fn transfer_player(
         )));
     }
 
-    // `if source_player_uid not in source._player_gvas_files: await
-    // source.load_player_on_demand(...)`. `loaded_players` is this port's
-    // `_player_gvas_files` (the parsed GVAS, not the `_loaded_players` id set).
     ensure_player_gvas_loaded(source, source_player_uid)?;
     if !source.loaded_players.contains_key(&source_player_uid) {
         return Err(TransferError::Rejected(
@@ -111,9 +78,6 @@ pub fn transfer_player(
         ));
     }
 
-    // `source_save_data = get_value(source_gvas.sav.properties["SaveData"])`;
-    // `if not source_save_data: return {"error": "Source player SaveData is
-    // missing or invalid."}`. Then the instance id.
     let source_instance_id = {
         let gvas = source
             .loaded_players
@@ -130,8 +94,7 @@ pub fn transfer_player(
         save_data_instance_id(save_data).unwrap_or(props::EMPTY_UUID)
     };
 
-    // `source_level = (source_summary.level or 1) if source_summary else 1`.
-    // `x or 1` treats both `None` and `0` as falsy -> 1.
+    // A missing summary and a recorded level of 0 both mean level 1.
     let source_level = source
         .player_summaries
         .get(&source_player_uid)
@@ -144,14 +107,10 @@ pub fn transfer_player(
         )));
     }
 
-    // --- Prepare target (player_transfer.py:208-236) ---
     let target_instance_id = if spawn_mode {
         progress("Spawning player into target save...");
-        // Python deep-copies the in-memory source GVAS. `uesave::Save` is not
-        // `Clone`, so this instead re-parses an independent copy from the
-        // source player's own `.sav`/`_dps.sav` bytes -- identical to the
-        // freshly-loaded source tree, since nothing edits the source between
-        // load and here.
+        // `uesave::Save` is not `Clone`, so an independent copy of the source
+        // player is obtained by re-parsing its own bytes.
         let Some(file_ref) = source.player_file_refs.get(&source_player_uid).cloned() else {
             return Err(TransferError::Rejected(
                 "Failed to load source player save file.".into(),
@@ -195,7 +154,6 @@ pub fn transfer_player(
         save_data_instance_id(save_data).unwrap_or(props::EMPTY_UUID)
     };
 
-    // --- Execute transfer steps (player_transfer.py:238-289) ---
     if options.transfer_character {
         progress("Transferring character data...");
         transfer_character_entry(
@@ -239,28 +197,11 @@ pub fn transfer_player(
     Ok(())
 }
 
-// ---------------------------------------------------------------------------
-// GVAS loading (player_transfer.py's `load_player_on_demand` dependency)
-// ---------------------------------------------------------------------------
-
-/// The GVAS-parsing half of `LoadingMixin.load_player_on_demand`
-/// (`game/mixins/loading.py:82-141`) -- enough for the transfer, which reads
-/// the raw character/group/container maps directly and never needs the pal
-/// `Player` domain object Python's full loader also builds. Loads the player's
-/// `.sav` (reusing the summary-extraction sav cache when present, exactly as
-/// `player::get_player_details` does) and its `_dps.sav` companion into
-/// `loaded_players`. A no-op when already loaded or the player has no file
-/// reference (matching Python's early returns).
+/// Loads a player's `.sav` (reusing the summary-extraction sav cache when
+/// present) and its `_dps.sav` companion into `loaded_players`. A no-op when
+/// already loaded or the player has no file reference.
 ///
-/// `pub(crate)`: Task 3E-4's `domain::uid_swap::SaveSession::swap_player_uids`
-/// reuses this exact helper for its own "load both players on demand" step
-/// (`player_swap.py::_validate_swap_players`'s `load_player_on_demand`
-/// calls) rather than re-implementing GVAS lazy-loading a second time.
-/// `SaveSession::ensure_player_loaded` (`session.rs`) re-exposes this same
-/// helper as `pub`, for WS handlers that need to force-load a real,
-/// eagerly-confirmed-present player before calling `domain::player::
-/// build_player_dto` (which only resolves already-loaded players) — see that
-/// method's own doc comment for the parity gap it closes.
+/// Re-exposed as `pub` by `SaveSession::ensure_player_loaded`.
 pub(crate) fn ensure_player_gvas_loaded(
     session: &mut SaveSession,
     uid: Uuid,
@@ -300,29 +241,15 @@ pub(crate) fn ensure_player_gvas_loaded(
     Ok(())
 }
 
-// ---------------------------------------------------------------------------
-// Small navigation helpers (raw-MapEntry, no typed wrappers)
-// ---------------------------------------------------------------------------
-
-/// A container map entry's `key.ID` -- item- and character-container maps both
-/// key this way (`_find_character_container`/`_find_item_container`'s
-/// `container["key"]["ID"]`).
+/// A container map entry's `key.ID` — item- and character-container maps both
+/// key this way.
 fn container_entry_id(entry: &MapEntry) -> Option<Uuid> {
     props::get(props::struct_props(&entry.key)?, &["ID"]).and_then(props::as_uuid)
 }
 
-/// `source_save_data["IndividualId"]["value"]["InstanceId"]`
-/// (player_transfer.py:204-206).
-///
-/// `pub(crate)`: reused by Task 3E-4's `domain::uid_swap` for the identical
-/// `IndividualId.InstanceId` read `player_swap.py:92-97` needs.
 pub(crate) fn save_data_instance_id(save_data: &Properties) -> Option<Uuid> {
     props::get(save_data, &["IndividualId", "InstanceId"]).and_then(props::as_uuid)
 }
-
-// ---------------------------------------------------------------------------
-// Transfer: character entry (player_transfer.py:298-339)
-// ---------------------------------------------------------------------------
 
 fn transfer_character_entry(
     source: &SaveSession,
@@ -351,7 +278,6 @@ fn transfer_character_entry(
             && world::entry_player_uid(entry) == Some(target_uid)
             && world::entry_instance_id(entry) == Some(target_instance_id)
         {
-            // `entry["value"] = copy.deepcopy(source_character["value"])`.
             entry.value = source_entry.value.clone();
             return Ok(());
         }
@@ -360,15 +286,9 @@ fn transfer_character_entry(
     Ok(())
 }
 
-// ---------------------------------------------------------------------------
-// Transfer: player containers (player_transfer.py:347-398)
-// ---------------------------------------------------------------------------
-
-/// `_get_player_container_ids` (player_transfer.py:101-141): the (up to) eight
-/// container ids a player's SaveData references -- pal box + party at the top
-/// level, the six inventory containers nested under `InventoryInfo` (capital
-/// I, no lowercase fallback, matching Python's literal path tuples). Skips the
-/// nil UUID.
+/// The up to eight container ids a player's SaveData references: pal box and
+/// party at the top level, the six inventory containers nested under
+/// `InventoryInfo`. The nil UUID is skipped.
 fn player_container_ids(save_data: &Properties) -> HashSet<Uuid> {
     let mut ids = HashSet::new();
     for name in ["PalStorageContainerId", "OtomoCharacterContainerId"] {
@@ -399,8 +319,8 @@ fn player_container_ids(save_data: &Properties) -> HashSet<Uuid> {
     ids
 }
 
-/// `_copy_missing_containers` (player_transfer.py:372-398): append every source
-/// container whose id is in `allowed` and not already present in the target.
+/// Appends every source container whose id is in `allowed` and not already
+/// present in the target.
 fn copy_missing_containers(
     source_entries: &[MapEntry],
     target_entries: &mut Vec<MapEntry>,
@@ -447,15 +367,9 @@ fn transfer_player_containers(
     Ok(())
 }
 
-// ---------------------------------------------------------------------------
-// Transfer: technology / appearance (player_transfer.py:406-428)
-// ---------------------------------------------------------------------------
-
-/// Registers the `SaveData.bossTechnologyPoint` schema (an `IntProperty`)
-/// copied off the always-present sibling `TechnologyPoint`, so a target that
-/// never carried `bossTechnologyPoint` survives a later `Save::write`. Same
-/// Phase-2 schema gap `player::apply_player_dto` closes; reproduced here since
-/// `transfer_tech` can newly introduce that property on the target.
+/// Registers the `SaveData.bossTechnologyPoint` schema off its always-present
+/// sibling `TechnologyPoint`. `transfer_tech` can introduce that property on a
+/// target that never carried it, which would otherwise fail `Save::write`.
 fn ensure_boss_tech_schema(sav: &mut Save) {
     if let Some(prefix) = props::schema_prefix_ending_with(sav, ".TechnologyPoint") {
         props::ensure_schema(
@@ -510,10 +424,8 @@ fn transfer_tech(
             return Ok(());
         };
 
-        // For each of the two point fields: copy source's value if present,
-        // else zero the target's (only when the target already has it) --
-        // `if key in source: target[key] = deepcopy(source[key]); elif key in
-        // target: set_value(target[key], 0)`.
+        // Copy the source's value when present, else zero the target's — but
+        // only when the target already carries the field.
         for (key, source_value) in [
             ("TechnologyPoint", technology_point),
             ("bossTechnologyPoint", boss_technology_point),
@@ -532,8 +444,7 @@ fn transfer_tech(
         if let Some(value) = unlocked_recipes {
             target_save_data.insert("UnlockedRecipeTechnologyNames", value);
         }
-        // `if "RecordData" in source: target["RecordData"] = deepcopy(...);
-        // elif "RecordData" in target: del target["RecordData"]`.
+        // A source with no RecordData removes the target's outright.
         match record_data {
             Some(value) => {
                 target_save_data.insert("RecordData", value);
@@ -584,21 +495,15 @@ fn transfer_appearance(
     Ok(())
 }
 
-// ---------------------------------------------------------------------------
-// Transfer: inventory (player_transfer.py:436-480)
-// ---------------------------------------------------------------------------
-
 fn transfer_inventory(
     source: &SaveSession,
     source_uid: Uuid,
     target: &mut SaveSession,
     target_uid: Uuid,
 ) -> Result<(), CoreError> {
-    // `_INVENTORY_CONTAINER_KEYS` (player_transfer.py:436-442), reproduced
-    // literally: only the "main" path reaches through `InventoryInfo`; the
-    // other four resolve against SaveData's top level (where these ids do NOT
-    // live on a real save, so `_resolve_inventory_container_id` returns None
-    // and Python skips them -- a faithful quirk, not a bug fixed here).
+    // Only the first path reaches through `InventoryInfo`; the other four
+    // resolve against SaveData's top level, where these ids do not live on a
+    // real save, so they resolve to `None` and are skipped.
     let paths: [&[&str]; 5] = [
         &["InventoryInfo", "CommonContainerId", "ID"],
         &["CommonContainerId", "ID"],
@@ -647,16 +552,11 @@ fn transfer_inventory(
             .iter_mut()
             .find(|entry| container_entry_id(entry) == Some(target_id))
         {
-            // `target_container["value"] = copy.deepcopy(source_container["value"])`.
             entry.value = source_value;
         }
     }
     Ok(())
 }
-
-// ---------------------------------------------------------------------------
-// Transfer: pals (player_transfer.py:488-644)
-// ---------------------------------------------------------------------------
 
 fn transfer_pals(
     source: &SaveSession,
@@ -664,8 +564,7 @@ fn transfer_pals(
     target: &mut SaveSession,
     target_uid: Uuid,
 ) -> Result<(), CoreError> {
-    // `target_guild_id = _find_guild_id_for_player(target._group_save_data_map,
-    // target_uid_str)` -- the guild containing the target, else the nil UUID.
+    // The guild containing the target, else the nil UUID.
     let target_guild_id =
         guild::find_player_guild_id(target, target_uid)?.unwrap_or(props::EMPTY_UUID);
 
@@ -685,7 +584,6 @@ fn transfer_pals(
         transferred.push(entry.clone());
     }
     for pal_entry in transferred.iter_mut() {
-        // `pal_raw["group_id"] = target_guild_id` -- PalCharacterData.group_id.
         if let Some(character_data) = world::entry_character_data_mut(pal_entry) {
             character_data.group_id = props::uuid_to_guid(target_guild_id);
         }
@@ -708,8 +606,7 @@ fn transfer_pals(
         .filter_map(world::entry_instance_id)
         .collect();
 
-    // Replace the target player's own pals with the transferred set
-    // (player_transfer.py:535-542's in-place `[:]` reassignment).
+    // Replace the target player's own pals with the transferred set.
     {
         let entries = world::character_map_mut(&mut target.level)?;
         entries.retain(|entry| {
@@ -726,10 +623,9 @@ fn transfer_pals(
     Ok(())
 }
 
-/// `Slots.value.values` of the character container with id `container_id` --
-/// `None` only when no such container entry exists (`_find_character_container`
-/// returned None); an existing container with no `Slots` yields an empty vec,
-/// matching Python's `.get("values", [])`.
+/// `Slots` of the character container with id `container_id`. `None` only when
+/// no such container exists; an existing container with no `Slots` yields an
+/// empty vec.
 fn character_container_slots(level: &Save, container_id: Uuid) -> Option<Vec<StructValue>> {
     let entry = world::character_container_map(level)
         .ok()?
@@ -745,8 +641,7 @@ fn character_container_slots(level: &Save, container_id: Uuid) -> Option<Vec<Str
 }
 
 /// Replaces the `Slots` array of the character container with id
-/// `container_id`. Returns `false` when no such container entry exists (Python
-/// `if not target_container: continue`).
+/// `container_id`. `false` when no such container entry exists.
 fn set_character_container_slots(
     level: &mut Save,
     container_id: Uuid,
@@ -766,9 +661,9 @@ fn set_character_container_slots(
     Ok(true)
 }
 
-/// `_copy_pal_container_slots` (player_transfer.py:550-610): copy the pal box
-/// and party slot arrays from source to target, then repoint every transferred
-/// pal's `SlotId.ContainerId.ID` at the target container when the ids differ.
+/// Copies the pal box and party slot arrays from source to target, then
+/// repoints every transferred pal's `SlotId.ContainerId.ID` at the target
+/// container when the ids differ.
 fn copy_pal_container_slots(
     source: &SaveSession,
     source_uid: Uuid,
@@ -806,9 +701,8 @@ fn copy_pal_container_slots(
             continue;
         }
 
-        // `if source_container_id != target_container_id:` repoint pals whose
-        // slot still references the source container. Python reads only
-        // `"SlotId"` here (no `"SlotID"` fallback), so this does too.
+        // Repoint pals whose slot still references the source container. The
+        // key is `SlotId`; there is no `SlotID` spelling on this path.
         if source_id != target_id {
             for pal_entry in transferred.iter_mut() {
                 let Some(save_parameter) = world::entry_save_parameter_mut(pal_entry) else {
@@ -827,11 +721,9 @@ fn copy_pal_container_slots(
     Ok(())
 }
 
-/// `_update_guild_pal_handles` (player_transfer.py:613-644): in the target's
-/// own guild, drop any handle already pointing at a transferred pal, then
-/// append a fresh `{guid: nil, instance_id}` handle per transferred pal.
-/// `individual_character_handle_ids` is a typed `PalGroupData` field here (not
-/// part of the raw guild tail).
+/// In the target's own guild, drops any handle already pointing at a
+/// transferred pal, then appends a fresh `{guid: nil, instance_id}` handle per
+/// transferred pal.
 fn update_guild_pal_handles(
     target: &mut SaveSession,
     target_guild_id: Uuid,
@@ -861,10 +753,6 @@ fn update_guild_pal_handles(
     }
     Ok(())
 }
-
-// ---------------------------------------------------------------------------
-// Transfer: guild membership (player_transfer.py:652-743)
-// ---------------------------------------------------------------------------
 
 /// The source player's guild-tail membership (`last_online_real_time`,
 /// `player_name`), the two fields carried onto the transferred player's new
@@ -903,7 +791,6 @@ fn transfer_guild(
         tracing::warn!("Source player has no guild membership to transfer");
         return Ok(());
     };
-    // `source_guild_info["player_uid"] = target_uid_str` -- the retargeted row.
     let retargeted = GuildPlayerInfo {
         player_uid: target_uid,
         last_online_real_time,
@@ -936,9 +823,8 @@ fn transfer_guild(
         return Ok(());
     }
 
-    // Target player has no guild -- clone the source guild as a template and
-    // reset it to a fresh single-member guild (`_create_guild_for_player`,
-    // player_transfer.py:700-743).
+    // Target player has no guild: clone the source guild as a template and
+    // reset it to a fresh single-member guild.
     create_guild_for_player(source, source_uid, target, target_uid, retargeted)
 }
 
@@ -965,10 +851,7 @@ fn create_guild_for_player(
     };
 
     let new_guild_id = Uuid::new_v4();
-    // Python assigns the raw string uuid to `new_guild["key"]`; the correct
-    // typed representation of a GroupSaveDataMap key is a Guid property, so
-    // that is what is written here (Python's bare-string key is a latent bug
-    // with no faithful, non-corrupting Rust analogue -- see this task's report).
+    // A GroupSaveDataMap key is a Guid property, not a string.
     new_guild.key = props::guid_property(new_guild_id);
     if let Some(group_data) = guild_tail::entry_group_data_mut(&mut new_guild) {
         group_data.group_id = props::uuid_to_guid(new_guild_id);
@@ -991,13 +874,8 @@ fn create_guild_for_player(
     Ok(())
 }
 
-// ---------------------------------------------------------------------------
-// Transfer: timestamps (player_transfer.py:751-795)
-// ---------------------------------------------------------------------------
-
 fn sync_timestamps(target: &mut SaveSession, target_uid: Uuid) -> Result<(), CoreError> {
-    // `world_tick = world_save["GameTimeSaveData"]["value"]
-    // ["RealDateTimeTicks"]["value"]`; `if not world_tick: return` (0 is falsy).
+    // A world tick of 0 means the save has no usable clock; nothing to sync.
     let world_tick = {
         let Ok(world_props) = world::world_props(&target.level) else {
             return Ok(());
@@ -1011,12 +889,9 @@ fn sync_timestamps(target: &mut SaveSession, target_uid: Uuid) -> Result<(), Cor
         }
     };
 
-    // CharacterSaveParameterMap: the target player's own entry. Python also
-    // sets `raw_data["last_online_real_time"]` on the character RawData, but
-    // that key is not part of `PalCharacterData`'s codec (`object`/
-    // `unknown_bytes`/`group_id`/`trailing_bytes`), so Python's write there is
-    // a no-op on the wire and has no Rust counterpart. `LastOnlineRealTime` in
-    // the SaveParameter bag IS real and is updated (only when already present).
+    // `LastOnlineRealTime` lives in the SaveParameter bag, and is updated only
+    // when the entry already carries it. The character RawData
+    // (`PalCharacterData`) has no last-online field at all.
     {
         let entries = world::character_map_mut(&mut target.level)?;
         for entry in entries.iter_mut() {
@@ -1038,8 +913,7 @@ fn sync_timestamps(target: &mut SaveSession, target_uid: Uuid) -> Result<(), Cor
         }
     }
 
-    // Guild player list: every guild row for the target player (Python's loop
-    // has no break, so all matches are updated).
+    // Every guild row for the target player is updated, not just the first.
     {
         let groups = world::group_map_mut(&mut target.level)?;
         for entry in groups.iter_mut() {

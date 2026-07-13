@@ -1,4 +1,4 @@
-// Domain logic. No web-framework dependencies (spec §1).
+// Domain logic; no web-framework dependencies.
 pub mod convert;
 pub mod domain;
 pub mod dto;

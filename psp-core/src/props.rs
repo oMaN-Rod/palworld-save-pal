@@ -1,17 +1,13 @@
-//! Ergonomic accessors into `uesave`'s dynamic `Property` tree.
+//! Accessors into `uesave`'s dynamic `Property` tree, used where no typed
+//! `uesave` struct exists for a node.
 //!
-//! The port types typed `uesave` structs first; these functions are the
-//! fallback for reaching into a save's property tree when no typed struct
-//! exists for a node yet (spec: "typed structs first, tree-access
-//! fallback"). They return `Option` — a missing or wrong-typed node in an
-//! untrusted save file is a normal condition, not a bug. These accessors
-//! are too low-level to carry a path in their failure; callers that need
-//! to surface a failure to the user should name the path in their own
-//! error (e.g. `CoreError`) when a lookup comes back `None`.
+//! Everything here returns `Option`: a missing or wrong-typed node in an
+//! untrusted save file is a normal condition, not a bug. These accessors carry
+//! no path in their failure, so callers should name the path in their own
+//! `CoreError` when a lookup comes back `None`.
 
-/// Look up a top-level property by name inside a `Properties` map — the
-/// entry point into the dynamic property tree. When `path` has more than
-/// one segment, continues through nested user structs (see `get_in`).
+/// Looks up a property by name, descending through nested user structs when
+/// `path` has more than one segment.
 pub fn get<'a>(properties: &'a uesave::Properties, path: &[&str]) -> Option<&'a uesave::Property> {
     let (segment, rest) = path.split_first()?;
     let property = properties
@@ -24,8 +20,7 @@ pub fn get<'a>(properties: &'a uesave::Properties, path: &[&str]) -> Option<&'a 
     }
 }
 
-/// Walk a nested user-struct chain starting from a property (complement of
-/// `get`, which starts from a `Properties` map).
+/// Like `get`, but starting from a property rather than a `Properties` map.
 pub fn get_in<'a>(property: &'a uesave::Property, path: &[&str]) -> Option<&'a uesave::Property> {
     let mut current = property;
     for segment in path {
@@ -34,15 +29,9 @@ pub fn get_in<'a>(property: &'a uesave::Property, path: &[&str]) -> Option<&'a u
     Some(current)
 }
 
-/// Mutable counterpart of `get`. Phase 2's edit core navigates to a node and
-/// mutates it in place (a pal's stats, a container's slot list, ...), so
-/// every read path through the property tree needs a mutable mirror. Walks
-/// the same way `get` does: found by name only (the leading `u32` half of a
-/// `PropertyKey` disambiguates same-named sibling properties, a case this
-/// port has not needed to distinguish on any read path so far, `get`
-/// included) — so `get_mut` stays consistent with `get` rather than
-/// introducing a second, stricter lookup rule that could resolve a
-/// differently-keyed node than the immutable accessor would.
+/// Mutable counterpart of `get`. Matches by NAME only, ignoring the `u32` half
+/// of a `PropertyKey` that disambiguates same-named siblings, so it resolves
+/// exactly the node `get` would.
 pub fn get_mut<'a>(
     properties: &'a mut uesave::Properties,
     path: &[&str],
@@ -71,8 +60,8 @@ pub fn get_in_mut<'a>(
     Some(current)
 }
 
-/// The nested `Properties` map of a user-struct property (e.g. a struct
-/// field like `ContainerId` whose value is itself a bag of properties).
+/// The nested `Properties` map of a user-struct property (e.g. `ContainerId`,
+/// whose value is itself a bag of properties).
 pub fn struct_properties(property: &uesave::Property) -> Option<&uesave::Properties> {
     match property {
         uesave::Property::Struct(uesave::StructValue::Struct(properties)) => Some(properties),
@@ -80,9 +69,7 @@ pub fn struct_properties(property: &uesave::Property) -> Option<&uesave::Propert
     }
 }
 
-/// A `Str`, `Name`, or `Enum` property's text. Widened from Phase 1's
-/// `Str | Name` to also cover `Enum` (Phase 2 constructors/DTOs read enum
-/// variant names through the same accessor as free-text fields).
+/// A `Str`, `Name`, or `Enum` property's text.
 pub fn as_str(property: &uesave::Property) -> Option<&str> {
     match property {
         uesave::Property::Str(text)
@@ -92,7 +79,6 @@ pub fn as_str(property: &uesave::Property) -> Option<&str> {
     }
 }
 
-/// A `Bool` property's value.
 pub fn as_bool(property: &uesave::Property) -> Option<bool> {
     match property {
         uesave::Property::Bool(value) => Some(*value),
@@ -118,7 +104,7 @@ pub fn as_byte(property: &uesave::Property) -> Option<u8> {
     }
 }
 
-/// .NET-style ticks from a `DateTime` struct property (player .sav
+/// .NET-style ticks from a `DateTime` struct property (the player .sav
 /// "Timestamp").
 pub fn as_datetime_ticks(property: &uesave::Property) -> Option<u64> {
     match property {
@@ -127,12 +113,6 @@ pub fn as_datetime_ticks(property: &uesave::Property) -> Option<u64> {
     }
 }
 
-/// A `Map` property's entries. Widened from Phase 1's `&[MapEntry]` to
-/// `&Vec<MapEntry>` (matching `Property::Map`'s own field type exactly, no
-/// slice narrowing) so the Phase-2 mutable counterpart (`map_entries_mut`)
-/// can support `push`/`retain`/`remove` for pal/container CRUD. Existing
-/// Phase-1 callers keep compiling unchanged: `&Vec<T>` coerces to `&[T]` at
-/// every one of their call sites (direct function-argument passing).
 pub fn map_entries(property: &uesave::Property) -> Option<&Vec<uesave::MapEntry>> {
     match property {
         uesave::Property::Map(entries) => Some(entries),
@@ -140,8 +120,6 @@ pub fn map_entries(property: &uesave::Property) -> Option<&Vec<uesave::MapEntry>
     }
 }
 
-/// Mutable counterpart of `map_entries` (Phase 2: pal/container CRUD needs
-/// to push/remove map entries in place).
 pub fn map_entries_mut(property: &mut uesave::Property) -> Option<&mut Vec<uesave::MapEntry>> {
     match property {
         uesave::Property::Map(entries) => Some(entries),
@@ -160,16 +138,15 @@ pub fn as_byte_array(property: &uesave::Property) -> Option<&[u8]> {
     }
 }
 
-/// `FGuid`'s `Display` already renders the Palworld byte order as a
-/// canonical UUID string (verified equal to Python
-/// `palworld_save_tools`'s `uuid_reader`).
+/// `FGuid`'s `Display` already renders Palworld's guid byte order as a
+/// canonical UUID string. Panics only on unreachable input; prefer
+/// `guid_to_uuid` for untrusted save data.
 pub fn fguid_to_uuid(guid: &uesave::FGuid) -> uuid::Uuid {
     guid.to_string()
         .parse()
         .expect("FGuid Display always yields a canonical uuid")
 }
 
-/// A property's UUID value, if it is a `Guid` struct.
 pub fn as_uuid(property: &uesave::Property) -> Option<uuid::Uuid> {
     match property {
         uesave::Property::Struct(uesave::StructValue::Guid(guid)) => Some(fguid_to_uuid(guid)),
@@ -177,51 +154,29 @@ pub fn as_uuid(property: &uesave::Property) -> Option<uuid::Uuid> {
     }
 }
 
-// ============================================================================
-// Phase 2 — accessors, constructors, and schema management (edit core).
-//
-// A constructor built here produces a `uesave::Property` that later gets
-// re-serialized into a save on disk. Every constructor is paired with the
-// accessor that parses its shape back out, and the round-trip is asserted
-// in `phase2_tests` below (construct -> parse -> equals input) — a
-// constructor that only "compiles" is not considered done for this port.
-// ============================================================================
-
-/// The canonical nil UUID (`00000000-0000-0000-0000-000000000000`) —
-/// Palworld's sentinel for "no owner"/"no group" in several property slots.
+/// The nil UUID — Palworld's sentinel for "no owner"/"no group" in several
+/// property slots.
 pub const EMPTY_UUID: uuid::Uuid = uuid::Uuid::nil();
 
-/// Converts an `FGuid` to a `Uuid` without panicking. Save data reaching
-/// this accessor is untrusted, so unlike Phase 1's `fguid_to_uuid` (which
-/// `.expect()`s), this falls back to the nil UUID if `FGuid`'s Display
-/// output ever failed to parse — a case that should be unreachable in
-/// practice (`FGuid`'s four `u32` fields always format to exactly 32 hex
-/// digits, per `fguid_to_uuid`'s own established parity with Python's
-/// `uuid_reader`), but a defensive accessor must not panic on the
-/// unreachable case either. Prefer this over `fguid_to_uuid` in new Phase-2
-/// code.
+/// `FGuid` -> `Uuid` without panicking, for untrusted save data. The nil
+/// fallback is unreachable in practice (`FGuid`'s four `u32` fields always
+/// format to 32 hex digits) but a defensive accessor must not panic.
 pub fn guid_to_uuid(guid: &uesave::FGuid) -> uuid::Uuid {
     guid.to_string().parse().unwrap_or(uuid::Uuid::nil())
 }
 
-/// Converts a `Uuid` to an `FGuid` for writing back into a save. Falls back
-/// to the nil `FGuid` on the same unreachable parse failure as
-/// `guid_to_uuid` (a `Uuid`'s canonical string form is always 32 valid hex
-/// digits, which `FGuid::parse_str` accepts).
+/// `Uuid` -> `FGuid` for writing back into a save. The nil fallback is
+/// likewise unreachable: a `Uuid`'s canonical string is always 32 hex digits,
+/// which `FGuid::parse_str` accepts.
 pub fn uuid_to_guid(value: uuid::Uuid) -> uesave::FGuid {
     uesave::FGuid::parse_str(&value.to_string()).unwrap_or_else(|_| uesave::FGuid::nil())
 }
 
-/// The nested `Properties` map of a user-struct property. Phase-2 name for
-/// `struct_properties` — later Phase-2/3/4 tasks are written against this
-/// name; kept as a thin alias rather than renaming `struct_properties`
-/// (Phase-1 callers already depend on that name).
+/// Alias of `struct_properties`.
 pub fn struct_props(property: &uesave::Property) -> Option<&uesave::Properties> {
     struct_properties(property)
 }
 
-/// Mutable counterpart of `struct_props`/`struct_properties` (Phase 1 only
-/// ever needed read access).
 pub fn struct_props_mut(property: &mut uesave::Property) -> Option<&mut uesave::Properties> {
     match property {
         uesave::Property::Struct(uesave::StructValue::Struct(properties)) => Some(properties),
@@ -229,7 +184,6 @@ pub fn struct_props_mut(property: &mut uesave::Property) -> Option<&mut uesave::
     }
 }
 
-/// An `Int` property's value.
 pub fn as_i32(property: &uesave::Property) -> Option<i32> {
     match property {
         uesave::Property::Int(value) => Some(*value),
@@ -237,9 +191,8 @@ pub fn as_i32(property: &uesave::Property) -> Option<i32> {
     }
 }
 
-/// An `Int64` property's value. Also widens a plain `Int`, since Palworld
-/// writes some numeric fields (engine-version-dependent) as one or the
-/// other.
+/// Also widens a plain `Int`: the game writes some numeric fields as `Int` or
+/// `Int64` depending on the engine version that produced the save.
 pub fn as_i64(property: &uesave::Property) -> Option<i64> {
     match property {
         uesave::Property::Int64(value) => Some(*value),
@@ -248,7 +201,6 @@ pub fn as_i64(property: &uesave::Property) -> Option<i64> {
     }
 }
 
-/// A `Float` property's value.
 pub fn as_f32(property: &uesave::Property) -> Option<f32> {
     match property {
         uesave::Property::Float(uesave::Float(value)) => Some(*value),
@@ -256,13 +208,11 @@ pub fn as_f32(property: &uesave::Property) -> Option<f32> {
     }
 }
 
-/// A raw `Byte` property's value. Phase-2 name for `as_byte` — later tasks
-/// are written against this name.
+/// Alias of `as_byte`.
 pub fn as_byte_number(property: &uesave::Property) -> Option<u8> {
     as_byte(property)
 }
 
-/// An `Array(Name)` property's contents.
 pub fn name_values(property: &uesave::Property) -> Option<&Vec<String>> {
     match property {
         uesave::Property::Array(uesave::ValueVec::Name(values)) => Some(values),
@@ -270,7 +220,6 @@ pub fn name_values(property: &uesave::Property) -> Option<&Vec<String>> {
     }
 }
 
-/// An `Array(Enum)` property's contents.
 pub fn enum_values(property: &uesave::Property) -> Option<&Vec<String>> {
     match property {
         uesave::Property::Array(uesave::ValueVec::Enum(values)) => Some(values),
@@ -278,7 +227,6 @@ pub fn enum_values(property: &uesave::Property) -> Option<&Vec<String>> {
     }
 }
 
-/// An `Array(Struct)` property's contents.
 pub fn struct_values(property: &uesave::Property) -> Option<&Vec<uesave::StructValue>> {
     match property {
         uesave::Property::Array(uesave::ValueVec::Struct(values)) => Some(values),
@@ -286,7 +234,6 @@ pub fn struct_values(property: &uesave::Property) -> Option<&Vec<uesave::StructV
     }
 }
 
-/// Mutable counterpart of `struct_values`.
 pub fn struct_values_mut(property: &mut uesave::Property) -> Option<&mut Vec<uesave::StructValue>> {
     match property {
         uesave::Property::Array(uesave::ValueVec::Struct(values)) => Some(values),
@@ -294,19 +241,14 @@ pub fn struct_values_mut(property: &mut uesave::Property) -> Option<&mut Vec<ues
     }
 }
 
-/// A `FixedPoint64`-shaped user struct's decoded value — Palworld's
-/// fixed-point encoding for several stat fields, always a bare
-/// `{"Value": Int64(n)}`. Uses `Properties::get` (never the panicking
-/// `Index` impl) since a malformed save may be missing the field.
+/// A `FixedPoint64` stat field: always the bare user struct
+/// `{"Value": Int64(n)}`. Uses `Properties::get`, never the panicking `Index`
+/// impl, since a malformed save may be missing the field.
 pub fn fixed_point64(property: &uesave::Property) -> Option<i64> {
     let inner = struct_props(property)?;
     as_i64(inner.0.get(&uesave::PropertyKey::from("Value"))?)
 }
 
-// ---- constructors (mirror PalObjects.*Property builders) ----
-
-/// `Struct(Guid)` — the shape `uesave` both reads and writes for a `Guid`
-/// struct property (see `StructValue::Guid` in `uesave/src/lib.rs`).
 pub fn guid_property(value: uuid::Uuid) -> uesave::Property {
     uesave::Property::Struct(uesave::StructValue::Guid(uuid_to_guid(value)))
 }
@@ -319,8 +261,8 @@ pub fn name_property(value: &str) -> uesave::Property {
     uesave::Property::Name(value.to_string())
 }
 
-/// `value` must be the fully qualified enum variant name (e.g.
-/// `"EPalGenderType::Female"`), matching what `as_str`/`as_enum` read back.
+/// `value` must be the fully qualified variant name (e.g.
+/// `"EPalGenderType::Female"`).
 pub fn enum_property(value: &str) -> uesave::Property {
     uesave::Property::Enum(value.to_string())
 }
@@ -353,30 +295,22 @@ pub fn enum_array_property(values: Vec<String>) -> uesave::Property {
     uesave::Property::Array(uesave::ValueVec::Enum(values))
 }
 
-/// Inverse of `fixed_point64`: wraps `value` in the `{"Value": Int64(n)}`
-/// user struct Palworld's fixed-point fields expect.
+/// Inverse of `fixed_point64`.
 pub fn fixed_point64_property(value: i64) -> uesave::Property {
     let mut inner = uesave::Properties::default();
     inner.insert("Value", uesave::Property::Int64(value));
     uesave::Property::Struct(uesave::StructValue::Struct(inner))
 }
 
-// ---- schema management ----
-//
-// uesave's writer looks up a property's schema by its exact dotted scope
-// path and refuses to write (`Error::MissingPropertySchema`) when none is
-// recorded (see `write_property` in uesave/src/lib.rs). Every property NAME
-// this port newly introduces into a save — as opposed to only ever
-// overwriting an already-present one, which already carries a schema
-// recorded during the original read — must have a schema registered before
-// write.
+// `uesave`'s writer looks up a property's schema by its exact dotted scope path
+// and fails with `Error::MissingPropertySchema` when none is recorded. Any
+// property NAME newly introduced into a save (as opposed to overwriting a
+// present one, which already carries a schema from the read) must have a schema
+// registered before write.
 
 /// Finds a recorded schema path ending with `suffix` and returns everything
-/// before the suffix. Used to derive a schema for a brand-new sibling
-/// property (e.g. a field this port adds to every pal entry) by copying the
-/// shape already recorded for an existing sibling at the same tree
-/// position, since there is by definition no schema yet at the exact new
-/// path.
+/// before it — the way to derive a schema for a brand-new property by copying
+/// an existing sibling's shape, since no schema exists at the new path yet.
 pub fn schema_prefix_ending_with(save: &uesave::Save, suffix: &str) -> Option<String> {
     save.schemas
         .schemas()
@@ -385,30 +319,16 @@ pub fn schema_prefix_ending_with(save: &uesave::Save, suffix: &str) -> Option<St
         .map(|key| key[..key.len() - suffix.len()].to_string())
 }
 
-/// Records `tag` at `path` if no schema exists there yet; a no-op when one
-/// is already recorded (never overwrites — the existing schema was either
-/// recorded from the real save during read, or already `ensure_schema`d by
-/// an earlier call for this same path).
+/// Records `tag` at `path` only when no schema exists there yet; never
+/// overwrites one already read from the real save.
 pub fn ensure_schema(save: &mut uesave::Save, path: String, tag: uesave::PropertyTagPartial) {
     if save.schemas.get(&path).is_none() {
         save.schemas.record(path, tag);
     }
 }
 
-// ---------------------------------------------------------------------------
-// Deep UID swap (Task 3E-4) -- port of `_deep_swap_uids`/`_swap_uid_value`
-// (`game/mixins/player_swap.py:19-58`).
-// ---------------------------------------------------------------------------
-
-/// If `value` equals `old` return `Some(new)`, if it equals `new` return
-/// `Some(old)`, else `None` -- port of `_swap_uid_value` (`player_swap.py:
-/// 27-34`). Python compares `current_value.lower()` against two already-
-/// lowercased strings; here both sides are parsed `Uuid`s first, so the
-/// comparison is exact regardless of hyphenation/case in the source text --
-/// strictly more permissive than Python's literal string compare, never
-/// less (every string Python's compare would match, this also matches,
-/// since Python's `old_uid_str`/`new_uid_str` are always `str(uuid).lower()`
-/// canonical form).
+/// `old` -> `new`, `new` -> `old`, anything else `None`. Both sides are parsed
+/// `Uuid`s, so the match ignores hyphenation and case in the source text.
 fn swap_uuid_value(value: uuid::Uuid, old: uuid::Uuid, new: uuid::Uuid) -> Option<uuid::Uuid> {
     if value == old {
         Some(new)
@@ -419,14 +339,9 @@ fn swap_uuid_value(value: uuid::Uuid, old: uuid::Uuid, new: uuid::Uuid) -> Optio
     }
 }
 
-/// Swaps a single ownership-key leaf property in place: a `Str` property
-/// parsed as a `Uuid` (Python's `isinstance(value, str)` branch), or a
-/// `Guid` struct property (Python's `isinstance(value, dict)` branch, where
-/// `value["value"]` holds the uuid -- `uesave`'s `StructValue::Guid` IS that
-/// unwrapped uuid, no separate `"value"` hop needed). Any other property
-/// shape (including a `Str` that isn't valid uuid text) is left untouched,
-/// matching Python's `if isinstance(inner, str)` / `elif isinstance(value,
-/// str)` guards silently no-op-ing on anything else.
+/// Swaps a single ownership-key leaf in place: a `Str` holding uuid text, or a
+/// `Guid` struct. Any other shape (including a `Str` that isn't valid uuid
+/// text) is left untouched.
 fn swap_leaf_uuid_property(property: &mut uesave::Property, old: uuid::Uuid, new: uuid::Uuid) {
     match property {
         uesave::Property::Str(text) => {
@@ -445,27 +360,12 @@ fn swap_leaf_uuid_property(property: &mut uesave::Property, old: uuid::Uuid, new
     }
 }
 
-/// Recurses into a single property's children, looking for more `Properties`
-/// bags to run the ownership-key check over -- the counterpart of Python's
-/// `for child in data.values(): _deep_swap_uids(child, ...)` /
-/// `elif isinstance(data, list): for item in data: _deep_swap_uids(item,
-/// ...)`. Only descends through the property shapes this port's `Property`
-/// tree can actually carry a named field bag inside: a user struct
-/// (`Struct(StructValue::Struct)`), an array of user structs
-/// (`Array(ValueVec::Struct)`, Python's list-of-dicts), and a map's key/value
-/// pairs (`Map`, Python's `{"values": [{"key":..., "value":...}, ...]}`
-/// export shape). Every other `Property`/`StructValue`/`ValueVec` variant --
-/// including the game-specific typed structs (`PalGroupData`,
-/// `PalCharacterData`, the `map_concrete_model.rs` structs that also happen
-/// to declare `build_player_uid`/`private_lock_player_uid`/
-/// `owner_player_uid` fields, ...) -- carries no generic `Properties` bag to
-/// search, so recursion stops there. That is intentional and
-/// parity-correct, NOT a gap to close: Python's `_deep_swap_uids` swaps none
-/// of those typed-struct fields on real saves either (they are `UUID`
-/// objects / typed structs, never the `str` its `isinstance(value, str)`
-/// guard requires) -- see `swap_uuid_values_deep`'s own doc comment for the
-/// full mutual-no-op reasoning and the explicit warning against
-/// hand-descending into these typed structs.
+/// Descends only through the shapes that can carry a named field bag: a user
+/// struct, an array of user structs, and a map's key/value pairs. The
+/// game-specific typed structs (`PalGroupData`, `PalCharacterData`, the map
+/// object models) have no generic `Properties` bag, so recursion stops at them
+/// — see `swap_uuid_values_deep` for why that is correct and must not be
+/// "fixed" by hand-adding typed-struct arms.
 fn swap_uuid_values_deep_in_property(
     property: &mut uesave::Property,
     keys: &[&str],
@@ -493,46 +393,18 @@ fn swap_uuid_values_deep_in_property(
     }
 }
 
-/// Recursively walks every `Property` reachable from `properties`; for each
-/// field whose NAME is in `keys` (the four ownership keys
-/// `swap_player_uids` passes: `OwnerPlayerUId`, `owner_player_uid`,
-/// `build_player_uid`, `private_lock_player_uid`) and whose leaf value is a
-/// uuid string or a `Guid` struct equal to `old` or `new`, swaps it to the
-/// other -- bidirectionally, in one pass. Port of `_deep_swap_uids`
-/// (`game/mixins/player_swap.py:19-58`).
+/// Walks every `Property` reachable from `properties` and, for each field whose
+/// NAME is in `keys` and whose leaf is a uuid string or `Guid` struct equal to
+/// `old` or `new`, swaps it to the other — bidirectionally, in one pass.
 ///
-/// This step is a faithful MUTUAL NO-OP with Python on real save data --
-/// and that is the correct, parity-preserving behavior. Do NOT "fix" it by
-/// hand-adding typed-struct swap arms; doing so would make this port
-/// OVER-swap relative to Python, a genuine divergence.
-///
-/// Why it is a no-op on both sides:
-/// * Python's `_deep_swap_uids` only mutates a value when it is a Python
-///   `str` (`isinstance(value, str)`), or a dict whose `"value"` is a `str`
-///   (`player_swap.py:44-53`). On a real save loaded by
-///   `palworld_save_tools`, ALL FOUR ownership keys are `UUID`-wrapper
-///   objects / typed Guid structs, never plain `str` -- which is exactly
-///   why `player_transfer.py:57` has to call `str(owner_value).lower()`
-///   before comparing. So `isinstance(value, str)` is `False` for every
-///   one of them and Python swaps NOTHING here. `_deep_swap_uids` only ever
-///   actually fires in synthetic unit tests that pass string literals in.
-/// * This Rust walk likewise reaches none of the four on a real save:
-///   `OwnerPlayerUId` lives inside the typed `PalCharacterData` RawData (a
-///   `StructValue::PalCharacterData` the walk stops at, per
-///   `swap_uuid_values_deep_in_property`'s doc comment); the three
-///   lowercase keys are typed `FGuid` fields on the
-///   `map_concrete_model.rs`/`map_model.rs` structs decoded from
-///   `MapObjectSaveData`/`BaseCampSaveData` RawData blobs -- also typed
-///   `StructValue` variants with no generic `Properties` bag to search.
-///
-/// The ACTUAL uid swapping is done entirely by `swap_player_uids`'s four
-/// other steps (`swap_player_gvas_uids`, the character-map key rewrite via
-/// `world::set_entry_player_uid`, `swap_guild_member_uids`,
-/// `swap_player_file_refs`). This deep walk exists to mirror Python's own
-/// (real-save-inert) call to `_deep_swap_uids` exactly, and the `Str`/`Guid`
-/// leaf handling in `swap_leaf_uuid_property` is retained only so that the
-/// synthetic-string case Python's unit tests exercise stays behaviorally
-/// matched -- not because any such leaf is reachable on real data.
+/// On a real save this walk finds nothing, by design: `OwnerPlayerUId` lives
+/// inside the typed `PalCharacterData` RawData, and the lowercase ownership
+/// keys are typed `FGuid` fields on the map-object models — all
+/// `StructValue` variants with no generic `Properties` bag, which the walk
+/// stops at. The real uid rewriting is done by `swap_player_uids`'s other
+/// steps (`swap_player_gvas_uids`, the character-map key rewrite,
+/// `swap_guild_member_uids`, `swap_player_file_refs`). Adding typed-struct
+/// arms here would double-swap those fields.
 pub fn swap_uuid_values_deep(
     properties: &mut uesave::Properties,
     keys: &[&str],
@@ -877,9 +749,8 @@ mod phase2_tests {
 
     #[test]
     fn guid_to_uuid_matches_phase1_fguid_to_uuid() {
-        // guid_to_uuid must not silently diverge from the already
-        // parity-verified Phase-1 conversion (fguid_to_uuid), just drop its
-        // panic-on-malformed-input behavior.
+        // guid_to_uuid differs from fguid_to_uuid only in not panicking on
+        // malformed input; the conversion itself must be identical.
         let guid = fguid("0b1c2d3e-1111-2222-3333-444455556666");
         assert_eq!(guid_to_uuid(&guid), fguid_to_uuid(&guid));
     }
@@ -900,8 +771,6 @@ mod phase2_tests {
         assert_eq!(as_i32(&int_property(7)), Some(7));
         assert_eq!(as_i32(&Property::Bool(true)), None);
         assert_eq!(as_i64(&int64_property(1_234_567)), Some(1_234_567));
-        // as_i64 also widens a plain Int, since some fields are written as
-        // either depending on engine version.
         assert_eq!(as_i64(&int_property(7)), Some(7));
         assert_eq!(as_i64(&Property::Bool(true)), None);
         assert_eq!(as_f32(&float_property(1.5)), Some(1.5));
@@ -1014,11 +883,9 @@ mod phase2_tests {
         let mut outer = Properties::default();
         outer.insert("Inner", Property::Struct(StructValue::Struct(inner)));
 
-        // Navigate to the nested node and mutate it in place.
         let found = get_mut(&mut outer, &["Inner", "Value"]).expect("get_mut finds nested node");
         *found = Property::Str("after".to_string());
 
-        // Read the change back through the immutable accessor.
         let read_back = get(&outer, &["Inner", "Value"]).expect("get finds the mutated node");
         assert_eq!(Some("after"), as_str(read_back));
     }
