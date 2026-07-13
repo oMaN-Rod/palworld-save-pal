@@ -1,8 +1,7 @@
-//! The wire message-type vocabulary. Source of truth:
-//! palworld_save_pal/ws/messages.py (123 members). Every wire string is the
-//! exact snake_case of its variant name — verified against the Python enum;
-//! if a future Python addition ever breaks that rule, give the variant an
-//! explicit #[serde(rename = "...")] AND a matching literal here.
+//! The wire message-type vocabulary shared with the frontend. Every wire string
+//! is the exact snake_case of its variant name; a variant that ever needs to
+//! break that rule needs an explicit #[serde(rename = "...")] AND a matching
+//! literal here.
 
 macro_rules! define_message_types {
     ($($variant:ident => $wire:literal),+ $(,)?) => {
@@ -13,7 +12,6 @@ macro_rules! define_message_types {
         }
 
         impl MessageType {
-            /// Every variant, in Python-enum declaration order.
             pub const ALL: &'static [MessageType] = &[$(MessageType::$variant),+];
 
             /// The exact wire string (equals the serde serialization).
@@ -23,7 +21,6 @@ macro_rules! define_message_types {
                 }
             }
 
-            /// Reverse lookup used by the dispatcher.
             pub fn from_wire(wire: &str) -> Option<MessageType> {
                 match wire {
                     $($wire => Some(MessageType::$variant),)+
@@ -174,7 +171,7 @@ define_message_types! {
     LoadServerSave => "load_server_save",
     GetServerStats => "get_server_stats",
     ServerCreationProgress => "server_creation_progress",
-    // Feature additions beyond the 123 Python-parity set (session persistence).
+    // Session persistence
     ReattachSession => "reattach_session",
     EjectSession => "eject_session",
     SessionNotFound => "session_not_found",
@@ -184,8 +181,8 @@ define_message_types! {
 mod tests {
     use super::MessageType;
 
-    /// Copied character-for-character from palworld_save_pal/ws/messages.py.
-    /// Independent duplicate of the enum table — guards against typos in either.
+    /// An independent duplicate of the enum table: a typo on either side fails
+    /// the tests below rather than silently changing the wire vocabulary.
     const EXPECTED_WIRE_NAMES: &[&str] = &[
         "add_pal",
         "add_dps_pal",
@@ -312,8 +309,8 @@ mod tests {
         "server_creation_progress",
     ];
 
-    /// Feature-only additions (session persistence) that sit AFTER the 123
-    /// Python-parity types in declaration order.
+    /// Session-persistence types, which sit after the other 123 in declaration
+    /// order.
     const FEATURE_ADDITION_WIRE_NAMES: &[&str] =
         &["reattach_session", "eject_session", "session_not_found"];
 

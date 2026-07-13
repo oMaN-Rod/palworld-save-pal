@@ -1,6 +1,5 @@
-//! Native PalServer.exe lifecycle: steamcmd install, process spawn/stop,
-//! psutil-style status/stats via sysinfo. Mirrors NativeServerService
-//! (native_server_service.py:167-490).
+//! Native PalServer.exe lifecycle: steamcmd install, process spawn/stop, and
+//! status/stats via sysinfo.
 use std::path::{Path, PathBuf};
 use std::sync::{Mutex, OnceLock};
 
@@ -17,8 +16,8 @@ use super::{
 pub const STEAMCMD_ZIP_URL: &str = "https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip";
 pub const PALWORLD_APP_ID: &str = "2394010";
 
-/// Shared System so successive stat polls compute CPU deltas (like psutil's
-/// per-process cpu_percent bookkeeping; first call reports ~0, fine at 5 s polls).
+/// One shared `System` so successive polls have a previous sample to compute CPU
+/// deltas against; the first poll for a pid therefore reports ~0.
 fn system() -> &'static Mutex<System> {
     static SYSTEM: OnceLock<Mutex<System>> = OnceLock::new();
     SYSTEM.get_or_init(|| Mutex::new(System::new()))
@@ -54,7 +53,6 @@ pub fn find_steamcmd() -> Option<String> {
     None
 }
 
-/// Download + extract steamcmd.zip if steamcmd.exe is not already in the dir.
 pub async fn ensure_steamcmd(steamcmd_dir: &Path) -> Result<PathBuf, ServiceError> {
     let steamcmd_exe = steamcmd_dir.join("steamcmd.exe");
     if steamcmd_exe.exists() {
@@ -97,11 +95,9 @@ pub fn steamcmd_install_args(install_dir: &str) -> Vec<String> {
     ]
 }
 
-/// Run steamcmd to install/update the dedicated server. SteamCMD exit codes are
-/// unreliable — success is defined by PalServer.exe existing afterwards (Python
-/// parity). 1800 s timeout; on timeout the child is killed rather than orphaned
-/// (Python parity: `subprocess.run(..., timeout=1800)` kills the child on
-/// `TimeoutExpired`).
+/// SteamCMD's exit codes are unreliable, so success is judged by PalServer.exe
+/// existing afterwards. The 1800 s cap covers a cold full download of the app; on
+/// timeout the child is killed rather than left running detached.
 pub async fn install_server(steamcmd_exe: &str, install_dir: &str) -> bool {
     if std::fs::create_dir_all(install_dir).is_err() {
         return false;
@@ -155,7 +151,9 @@ pub fn find_existing_server(steamcmd_path: &str, install_path: &str) -> Option<S
     None
 }
 
-/// Recursive copy excluding "Saved" and "steamapps" directories at any depth.
+/// Clones an existing install's binaries and content. `Saved` (world data,
+/// config) and `steamapps` (install metadata) are skipped so the new server does
+/// not inherit the source's saves or Steam bookkeeping.
 pub fn copy_server_base(source: &Path, dest: &Path) -> std::io::Result<()> {
     const EXCLUDED_DIRS: [&str; 2] = ["Saved", "steamapps"];
     std::fs::create_dir_all(dest)?;
@@ -176,8 +174,8 @@ pub fn copy_server_base(source: &Path, dest: &Path) -> std::io::Result<()> {
     Ok(())
 }
 
-/// NativeServerService.create_server: skip if PalServer.exe present, else copy
-/// from source, else steamcmd install (requires steamcmd_path); then write config.
+/// Installs only when PalServer.exe is absent: copy from an existing install when
+/// one is given, otherwise steamcmd. Writes PalWorldSettings.ini either way.
 pub async fn create_native_server(record: &ServerRecord, source_server_path: Option<&str>) -> bool {
     let install_path = record.install_path.clone();
     if install_path.is_empty() {
@@ -212,8 +210,9 @@ pub async fn create_native_server(record: &ServerRecord, source_server_path: Opt
     native_config::write_palworld_settings(record).is_ok()
 }
 
-/// Spawn PalServer.exe detached; returns the PID. Rewrites config + mod settings
-/// first (Python parity).
+/// Rewrites the ini files first, since PalServer.exe only reads them at launch.
+/// On Windows the child gets its own process group so a Ctrl-C to psp-server does
+/// not take the game server down with it.
 pub fn start_server_process(record: &ServerRecord) -> Option<u32> {
     let exe_path = Path::new(&record.install_path).join("PalServer.exe");
     if !exe_path.exists() {
@@ -259,11 +258,9 @@ fn pid_alive(pid: u32) -> bool {
         .unwrap_or(false)
 }
 
-/// Send the kill signal, then poll for up to 10 s for the pid to actually
-/// disappear. `Process::kill()` returning `true` only means the signal was
-/// sent, not that the process died (sysinfo 0.33 docs) — Python parity:
-/// `proc.kill(); proc.wait(timeout=10)` returns `False` if still alive after
-/// that wait.
+/// `Process::kill()` returning `true` only means the signal was delivered, not
+/// that the process died, so poll for up to 10 s for the pid to actually vanish
+/// before reporting failure.
 async fn force_kill(pid: u32) -> bool {
     {
         let mut system = system().lock().unwrap();
@@ -290,8 +287,8 @@ async fn force_kill(pid: u32) -> bool {
     }
 }
 
-/// REST-API shutdown ({"waittime":5,...}), wait up to 30 s, then force kill
-/// and confirm the pid actually disappears (Python parity: see `force_kill`).
+/// Asks the server to shut itself down over the REST API first so it flushes the
+/// world save; the 30 s wait covers that save. Falls back to a force kill.
 pub async fn stop_server_process(record: &ServerRecord, api: &PalworldApiClient) -> bool {
     let Some(pid) = record.pid else {
         return false;
@@ -321,8 +318,8 @@ pub async fn stop_server_process(record: &ServerRecord, api: &PalworldApiClient)
     force_kill(pid).await
 }
 
-/// psutil-equivalent status: running unless missing/zombie; started_at is the
-/// local-time isoformat of the process create time.
+/// Running unless the pid is gone or a zombie; `started_at` is the process create
+/// time in local time.
 pub fn process_status(pid: Option<i64>) -> ServerProcessStatus {
     let Some(pid) = pid else {
         return ServerProcessStatus::exited();
@@ -347,8 +344,9 @@ pub fn process_status(pid: Option<i64>) -> ServerProcessStatus {
     ServerProcessStatus::exited()
 }
 
-/// psutil-equivalent stats aggregated over the process tree (PalServer.exe
-/// spawns children). Native shape: net fields are integer 0.
+/// Aggregated over the whole process tree, because PalServer.exe is a launcher
+/// that spawns the actual game server as a child. Native servers cannot report
+/// per-process network I/O, so the net fields are always integer 0.
 pub fn process_stats(pid: Option<i64>) -> Option<Value> {
     let root_pid = Pid::from_u32(pid? as u32);
     let mut system = system().lock().unwrap();
@@ -356,7 +354,6 @@ pub fn process_stats(pid: Option<i64>) -> Option<Value> {
     system.refresh_memory();
     system.process(root_pid)?;
 
-    // Collect the tree: root + all processes whose parent chain reaches root.
     let mut tree: Vec<Pid> = vec![root_pid];
     let mut added = true;
     while added {
@@ -482,7 +479,7 @@ mod tests {
                 "disk_write_mb"
             ]
         );
-        // Native servers report integer 0 for network I/O (Python parity).
+        // Native servers report integer 0 for network I/O.
         assert_eq!(stats["net_rx_mb"], serde_json::json!(0));
         assert_eq!(stats["net_tx_mb"], serde_json::json!(0));
         assert!(stats["mem_usage_mb"].as_f64().unwrap() > 0.0);

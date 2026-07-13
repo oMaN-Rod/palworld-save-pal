@@ -1,7 +1,5 @@
-//! POST /api/convert/* — port of palworld_save_pal/api/convert.py.
-//! Reading accepts GVAS/PlM (PlZ/CNK decompression are Phase 1 uesave items);
-//! writing emits PlM/Oodle save_type 0x31 — identical to Python's
-//! compress_gvas_to_sav(raw, 0x31) (0x31 = SaveType.PLM).
+//! POST /api/convert/* — .sav <-> JSON conversion. Reading accepts GVAS/PlM;
+//! writing emits PlM/Oodle.
 
 use std::io::Cursor;
 use std::sync::Arc;
@@ -28,9 +26,6 @@ pub fn routes() -> Router<Arc<AppState>> {
         .layer(DefaultBodyLimit::max(MAX_CONVERT_BODY_BYTES))
 }
 
-// Mirrors palworld_save_pal/api/convert.py:sav_to_json (`file: UploadFile = File(...)`),
-// which reads the whole upload, calls SaveManager().convert_sav_file_to_json, and
-// streams the result back as `application/json`.
 async fn sav_to_json(mut multipart: Multipart) -> Response {
     let mut file_bytes: Option<Bytes> = None;
     while let Ok(Some(field)) = multipart.next_field().await {
@@ -45,7 +40,6 @@ async fn sav_to_json(mut multipart: Multipart) -> Response {
         }
     }
     let Some(file_bytes) = file_bytes else {
-        // FastAPI returns 422 for a missing required File(...) field.
         return (
             StatusCode::UNPROCESSABLE_ENTITY,
             "missing multipart field 'file'",
@@ -59,7 +53,6 @@ async fn sav_to_json(mut multipart: Multipart) -> Response {
             .types(palworld_types())
             .read(Cursor::new(file_bytes.as_ref()))
             .map_err(|parse_error| parse_error.to_string())?;
-        // Python sends minified JSON (indent=None) — serde_json::to_string is minified.
         serde_json::to_string(&save).map_err(|serialize_error| serialize_error.to_string())
     })
     .await;
@@ -81,10 +74,6 @@ async fn sav_to_json(mut multipart: Multipart) -> Response {
     }
 }
 
-// Mirrors palworld_save_pal/api/convert.py:json_to_sav, which reads the raw
-// request body, calls SaveManager().convert_json_to_sav_file (internally
-// compress_gvas_to_sav(raw, 0x31) — SaveType.PLM, i.e. Oodle), and returns it
-// as `application/octet-stream` with a `converted.sav` attachment filename.
 async fn json_to_sav(body: Bytes) -> Response {
     let conversion = tokio::task::spawn_blocking(move || -> Result<Vec<u8>, String> {
         let save: Save =

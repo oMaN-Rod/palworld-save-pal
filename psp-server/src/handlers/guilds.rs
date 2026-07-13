@@ -1,10 +1,5 @@
-//! Guild-management WS handlers — ports of
-//! `palworld_save_pal/ws/handlers/lazy_load_handler.py` (request_guild_details),
-//! `lab_research_handler.py` (update_lab_research) and `guild_handler.py`
-//! (delete_guild).
-//!
-//! `get_lab_research` is NOT here — it is already implemented and registered
-//! in `handlers::game_data`.
+//! Guild-management WS handlers: request_guild_details, update_lab_research,
+//! delete_guild. (`get_lab_research` lives in `handlers::game_data`.)
 
 use serde::Deserialize;
 use serde_json::json;
@@ -13,24 +8,22 @@ use crate::dispatcher::HandlerCtx;
 use crate::handler_error::HandlerError;
 use crate::messages::MessageType;
 
-/// ws/messages.py:460-462.
 #[derive(Debug, Deserialize)]
 pub struct DeleteGuildData {
     pub guild_id: uuid::Uuid,
     pub origin: String,
 }
 
-/// ws/messages.py:488-490.
 #[derive(Debug, Deserialize)]
 pub struct UpdateLabResearchData {
     pub guild_id: uuid::Uuid,
     pub research_updates: Vec<psp_core::dto::guild::GuildLabResearchInfo>,
 }
 
-/// request_guild_details_handler (lazy_load_handler.py:67-107). `data` is a
-/// BARE UUID string (ws/messages.py:755 `data: UUID`). No save →
-/// `get_guild_details_response` `{error}`; found → `{guild, guild_id (string)}`;
-/// missing → `{error}`.
+/// `data` is a BARE UUID string. Every outcome answers under
+/// `get_guild_details_response`: `{guild, guild_id}` on success, `{error}` when
+/// no save is loaded or the guild is unknown — never the dispatcher's
+/// `error` frame, which the frontend does not correlate to this request.
 pub async fn handle_request_guild_details(
     guild_id: uuid::Uuid,
     ctx: &mut HandlerCtx<'_>,
@@ -55,11 +48,8 @@ pub async fn handle_request_guild_details(
     Ok(())
 }
 
-/// update_lab_research_handler (lab_research_handler.py:38-66). Uses
-/// PLAIN-STRING `error` payloads (NOT the dispatcher `{message, trace}`
-/// shape): no save → `error` "No save file loaded."; guild missing → `error`
-/// "Guild {id} not found."; other failure → `error` "Failed to update lab
-/// research: {e}". Success → `update_lab_research` `{success: true, guild_id}`.
+/// Failures emit `error` frames whose data is a PLAIN STRING, not the
+/// dispatcher's `{message, trace}` object — the frontend renders it directly.
 pub async fn handle_update_lab_research(
     data: UpdateLabResearchData,
     ctx: &mut HandlerCtx<'_>,
@@ -94,9 +84,8 @@ pub async fn handle_update_lab_research(
     Ok(())
 }
 
-/// delete_guild_handler (guild_handler.py:13-38). No save → `warning`
-/// "No save file loaded". Otherwise progress frames (from the domain), then
-/// `delete_guild` `{guild_id, origin}`.
+/// `origin` is echoed back untouched: the frontend routes the response to the
+/// view that asked for the delete.
 pub async fn handle_delete_guild(
     data: DeleteGuildData,
     ctx: &mut HandlerCtx<'_>,

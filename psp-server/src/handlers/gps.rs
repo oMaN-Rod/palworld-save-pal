@@ -1,12 +1,5 @@
-//! GPS (Global Pal Storage) WS handlers (Task 3D-2), wiring the 3D-1 session
-//! API (`psp_core::domain::gps`'s `impl SaveSession` block) and 3C-6's
-//! `build_player_dto`/`add_player_pal_from_dto`/`add_player_dps_pal_from_dto`
-//! to the five wire types `request_gps`/`add_gps_pal`/`clone_gps_pal`/
-//! `delete_gps_pals`/`clone_gps_pal_to_player`. Wire shapes ported verbatim
-//! from `ws/handlers/gps_handler.py` — see this task's report for the full
-//! reconciliation against the task brief, which assumed a since-superseded
-//! `Pal`/`players()` API that does not exist in this port's actual
-//! (DTO/functional) architecture.
+//! GPS (Global Pal Storage) WS handlers: `request_gps`, `add_gps_pal`,
+//! `clone_gps_pal`, `delete_gps_pals`, `clone_gps_pal_to_player`.
 
 use crate::dispatcher::HandlerCtx;
 use crate::handler_error::HandlerError;
@@ -39,11 +32,8 @@ pub struct CloneGpsPalToPlayerData {
     pub destination_player_uid: String,
 }
 
-/// `save.gps.pals` (`BTreeMap<i32, PalDto>`) serialized as the JSON object
-/// Python's `Dict[int, Pal]` produces: keyed by the slot's decimal string,
-/// ascending order (`BTreeMap`'s natural iteration order already matches).
-/// Each `PalDto` is already the wire shape (no `.to_dto()` -- unlike the 3C
-/// UPS/pal handlers' `Pal` domain objects, GPS stores `PalDto`s directly).
+/// The GPS pals as a JSON object keyed by the slot's decimal string, in
+/// ascending slot order — the shape the frontend indexes its slot grid by.
 fn gps_map_json(pals: &std::collections::BTreeMap<i32, PalDto>) -> serde_json::Value {
     let mut map = serde_json::Map::new();
     for (slot, pal_dto) in pals {
@@ -103,7 +93,7 @@ pub async fn handle_add_gps_pal(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     let Some(save) = ctx.session.save.as_mut() else {
-        return Ok(()); // gps_handler.py:64-65 -- silent
+        return Ok(()); // no save: answer nothing
     };
     match save.add_gps_pal(
         &ctx.app.game_data,
@@ -128,10 +118,11 @@ pub async fn handle_clone_gps_pal(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     let Some(save) = ctx.session.save.as_mut() else {
-        return Ok(()); // silent, gps_handler.py:88-89
+        return Ok(()); // no save: answer nothing
     };
     match save.add_gps_pal_from_dto(&ctx.app.game_data, &data.pal, None)? {
-        // Success and failure both use the ADD_GPS_PAL type (gps_handler.py:94-103).
+        // A clone answers under `add_gps_pal`, not `clone_gps_pal` — on both
+        // the success and the failure branch. The frontend listens for that.
         Some((slot_index, new_pal)) => ctx.emitter.emit(
             MessageType::AddGpsPal,
             &serde_json::json!({"pal": new_pal, "index": slot_index}),
@@ -149,10 +140,10 @@ pub async fn handle_delete_gps_pals(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     let Some(save) = ctx.session.save.as_mut() else {
-        return Ok(()); // silent, gps_handler.py:110-113
+        return Ok(());
     };
     save.delete_gps_pals(&data.pal_indexes);
-    Ok(()) // never responds (gps_handler.py:106-114)
+    Ok(()) // deliberately silent: the frontend does not await a response here
 }
 
 pub async fn handle_clone_gps_pal_to_player(
@@ -181,16 +172,10 @@ pub async fn handle_clone_gps_pal_to_player(
         return Ok(());
     };
 
-    // Python's `save_file.get_players()` eager-loads every player at
-    // save-load, so a real player_uid resolves there even if the frontend
-    // never "opened" it. This port lazy-loads players on demand, so
-    // `build_player_dto` alone would wrongly reject a real-but-unopened
-    // destination player -- gate existence against the eagerly populated
-    // `player_summaries` first (a genuinely nonexistent uid still errors
-    // "Player not found", matching Python), then force-load the player's
-    // GVAS before calling `build_player_dto`. See
-    // `SaveSession::ensure_player_loaded`'s doc comment and
-    // `handlers::ups::handle_export_ups_pal` for the identical fix.
+    // Players are loaded lazily, so `build_player_dto` alone would reject a
+    // real-but-not-yet-opened destination player. Check existence against the
+    // eagerly built `player_summaries` first, then force-load the player's
+    // GVAS. Same guard as `handlers::ups::handle_export_ups_pal`.
     let save = ctx.session.save.as_ref().unwrap();
     if !save.player_summaries.contains_key(&player_uid) {
         ctx.emitter.emit(
@@ -209,12 +194,9 @@ pub async fn handle_clone_gps_pal_to_player(
         );
         return Ok(());
     };
-    // `pal_box_id` is resolved but NOT guarded here: Python (gps_handler.py:
-    // 139-207) only reads `player.pal_box_id` INSIDE the "pal_box" branch
-    // (:173), never at request level, so a missing PalStorageContainerId must
-    // not reject a "dps"-destination request. The `None` case is handled as a
-    // per-pal failure inside the pal_box branch below, mirroring
-    // `handlers::ups::handle_export_ups_pal`'s scoped pal_box guard.
+    // Resolved but deliberately NOT guarded here: a missing pal box must not
+    // reject a "dps"-destination request. The `None` case becomes a per-pal
+    // failure inside the pal_box branch below.
     let pal_box_id = player.pal_box_id;
     if save.gps_pals().map(|pals| pals.is_empty()).unwrap_or(true) {
         ctx.emitter.emit(
@@ -228,11 +210,9 @@ pub async fn handle_clone_gps_pal_to_player(
     let mut errors: Vec<String> = Vec::new();
 
     for pal_id_text in &data.pal_ids {
-        // Clone the source `PalDto` out of `save.gps_pals()` (immutable
-        // borrow) BEFORE calling the mutable `add_player_*_from_dto` below --
-        // holding the borrow across the mutable call would not compile (see
-        // this task's report / `resolve_source_pal` in ups.rs for the same
-        // pattern).
+        // Clone the source `PalDto` out from under the immutable borrow before
+        // the mutable `add_player_*_from_dto` call below; holding it across
+        // would not compile.
         let save = ctx.session.save.as_ref().unwrap();
         let source_dto: Option<PalDto> =
             uuid::Uuid::parse_str(pal_id_text).ok().and_then(|pal_id| {
@@ -247,9 +227,7 @@ pub async fn handle_clone_gps_pal_to_player(
 
         let save = ctx.session.save.as_mut().unwrap();
         if data.destination_type == "pal_box" {
-            // Per-pal failure (NOT a request-level `error` frame) when this
-            // player has no pal box container id -- the dps branch never
-            // touches `pal_box_id` at all.
+            // Per-pal failure, NOT a request-level `error` frame.
             let Some(pal_box_id) = pal_box_id else {
                 errors.push(format!("Failed to add pal to pal box: {pal_id_text}"));
                 continue;

@@ -1,5 +1,7 @@
-//! Native-server mod management via the official PalModSettings.ini system.
-//! Mirrors NativeServerService mod methods (native_server_service.py:777-1022).
+//! Native-server mod management via the game's own `Mods/PalModSettings.ini`:
+//! a flat key=value file with `bGlobalEnableMod`, an optional `WorkshopRootDir`,
+//! and one repeated `ActiveModList=<PackageName>` line per enabled mod. Mods
+//! themselves live in per-mod directories, each carrying an `Info.json`.
 use std::path::{Path, PathBuf};
 
 use psp_db::servers::ServerRecord;
@@ -75,8 +77,9 @@ pub fn write_palmodsettings(
     std::fs::write(palmodsettings_path(install_path), lines.join("\n") + "\n")
 }
 
-/// Ensure Mods/Workshop and PalModSettings.ini exist before server start; sync
-/// WorkshopRootDir when the record's workshop_dir changed.
+/// The server will not load mods unless Mods/Workshop and PalModSettings.ini
+/// exist, so both are created before start and WorkshopRootDir is re-synced
+/// whenever the record's workshop_dir has moved.
 pub fn ensure_mod_settings(record: &ServerRecord) -> std::io::Result<()> {
     let install_path = record.install_path.as_str();
     std::fs::create_dir_all(local_workshop_path(install_path))?;
@@ -97,16 +100,12 @@ pub fn ensure_mod_settings(record: &ServerRecord) -> std::io::Result<()> {
     Ok(())
 }
 
-/// Parse Info.json from a workshop mod directory into the Python dict shape.
+/// Reads a mod directory's Info.json. `mod_type` comes from the first InstallRule:
+/// an unrecognized Type passes through lowercased, and only a missing or empty
+/// InstallRule yields "unknown".
 pub fn parse_info_json(mod_dir: &Path) -> Option<Value> {
     let contents = std::fs::read_to_string(mod_dir.join("Info.json")).ok()?;
     let data: Value = serde_json::from_str(&contents).ok()?;
-    // Python (native_server_service.py:896-907): mod_type defaults to "unknown"
-    // ONLY when InstallRule is missing/empty. When it is non-empty,
-    // rule_type = install_rules[0].get("Type", "").lower() (so "" when the
-    // entry has no Type key), and mod_type = type_map.get(rule_type, rule_type)
-    // — an unmapped rule_type (including "") passes straight through, so a
-    // Type-less first rule yields "" here, not "unknown".
     let mod_type = match data
         .get("InstallRule")
         .and_then(Value::as_array)
@@ -137,7 +136,7 @@ pub fn parse_info_json(mod_dir: &Path) -> Option<Value> {
     };
     let dependencies = match data.get("Dependencies") {
         Some(Value::Array(items)) => Value::Array(items.clone()),
-        _ => Value::Array(Vec::new()), // Python: data.get("Dependencies") or []
+        _ => Value::Array(Vec::new()),
     };
     Some(serde_json::json!({
         "package_name": text("PackageName"),
@@ -182,8 +181,9 @@ pub fn list_workshop_mods(workshop_dir: &str, source: &str) -> Vec<Value> {
     mods
 }
 
-/// All mods for a native server: Steam workshop dir + local Mods/Workshop, with
-/// enabled flags from ActiveModList, plus config-only entries.
+/// Merges the Steam workshop dir and the local Mods/Workshop dir, flagging each
+/// against ActiveModList. Packages listed as active but present in neither
+/// directory are still reported, as source "config".
 pub fn list_native_server_mods(record: &ServerRecord) -> Vec<Value> {
     let install_path = record.install_path.as_str();
     let settings = read_palmodsettings(install_path);
@@ -240,7 +240,8 @@ pub fn toggle_native_mod(
     )
 }
 
-/// Extract a mod zip into Mods/Workshop/<mod_name>/ and activate its PackageName.
+/// ActiveModList keys on the PackageName from Info.json, which need not match the
+/// directory the mod was installed into.
 pub fn install_native_workshop_mod(install_path: &str, mod_name: &str, mod_zip_b64: &str) -> bool {
     let mod_dir = local_workshop_path(install_path).join(mod_name);
     if crate::services::docker_mods::extract_base64_zip(mod_zip_b64, &mod_dir).is_err() {
@@ -353,9 +354,8 @@ mod tests {
 
     #[test]
     fn parse_info_json_mod_type_matches_python_install_rule_edge_cases() {
-        // InstallRule present but the first rule has no Type key: Python's
-        // install_rules[0].get("Type", "") is "", type_map.get("", "") is "" —
-        // so mod_type is the empty string, NOT "unknown".
+        // InstallRule present but the first rule has no Type: mod_type is the
+        // empty string, NOT "unknown".
         let no_type = tempfile::tempdir().unwrap();
         std::fs::write(
             no_type.path().join("Info.json"),
@@ -387,7 +387,7 @@ mod tests {
             "unknown"
         );
 
-        // An unmapped Type passes through lowercased (type_map.get default).
+        // An unmapped Type passes through lowercased.
         let other = tempfile::tempdir().unwrap();
         std::fs::write(
             other.path().join("Info.json"),

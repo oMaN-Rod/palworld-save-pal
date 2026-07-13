@@ -1,18 +1,11 @@
 //! Gamepass container handlers: scan / delete-save / delete-player /
-//! rename-world (`convert_handler.py`) plus the gamepass LOAD path
-//! `select_gamepass_save` (`local_file_handler.py:255-374`). Ports of
-//! `convert_handler.py`'s scan_gamepass_saves_handler (47-68),
-//! delete_gamepass_save_handler (680-730), delete_gamepass_player_handler
-//! (733-791) and rename_gamepass_world_handler (794-863).
+//! rename-world, plus the gamepass load path `select_gamepass_save`.
 //!
-//! The four container-MANAGEMENT handlers always target the REAL install via
-//! `psp_core::gamepass::store::find_container_dir()` (env-overridable via
-//! `PSP_GAMEPASS_PACKAGES_ROOT` / `PSP_BACKUPS_ROOT` — see that function's doc
-//! comment), matching Python's unconditional `find_container_path()` call, and
-//! none of the four touch `ctx.session`: gamepass container management is
-//! independent of any loaded save. `handle_select_gamepass_save` is the
-//! exception on BOTH counts — it reads the container dir from
-//! `settings.save_dir` (the desktop dialog's chosen path) and LOADS the save
+//! The four container-MANAGEMENT handlers target the REAL install via
+//! `store::find_container_dir()` and never touch `ctx.session` — container
+//! management is independent of any loaded save. `handle_select_gamepass_save`
+//! is the exception on both counts: it takes the container dir from
+//! `settings.save_dir` (the desktop dialog's chosen path) and loads the save
 //! into `ctx.session.save`.
 
 use std::path::PathBuf;
@@ -30,20 +23,18 @@ use crate::dispatcher::HandlerCtx;
 use crate::handler_error::HandlerError;
 use crate::messages::MessageType;
 
-/// Wire shape of `scan_gamepass_saves`'s response. `saves` is `OrderedMap`,
-/// not `indexmap::IndexMap`: this port deliberately keeps `indexmap` out of
-/// psp-server's dependencies (mirrors `psp-core`'s own `dto::ordered_map`
-/// reconciliation) — `scan::scan_saves` already returns the same
-/// `OrderedMap`, so this struct just carries it straight through to
-/// `serde_json`, which serializes it as a JSON object in insertion order.
+/// Wire shape of `scan_gamepass_saves`'s response. `saves` is an `OrderedMap`
+/// so it serializes as a JSON object in scan (insertion) order, which the
+/// frontend renders directly.
 #[derive(Debug, Serialize)]
 struct ScanGamepassSavesResponse {
     saves: OrderedMap<String, GamepassSaveData>,
     container_path: Option<String>,
 }
 
-/// convert_handler.py:47-68 — a missing GamePass install is a normal empty
-/// response ({"saves": {}, "container_path": null}), not an `error` frame.
+/// A missing GamePass install is a normal empty response
+/// (`{"saves": {}, "container_path": null}`), not an `error` frame — the
+/// frontend treats it as "no gamepass saves here", not as a failure.
 pub async fn handle_scan_gamepass_saves(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let container_dir = match store::find_container_dir() {
         Ok(dir) => dir,
@@ -74,7 +65,6 @@ pub struct DeleteGamepassSaveData {
     pub save_id: String,
 }
 
-/// convert_handler.py:680-730.
 pub async fn handle_delete_gamepass_save(
     data: DeleteGamepassSaveData,
     ctx: &mut HandlerCtx<'_>,
@@ -118,7 +108,6 @@ pub struct DeleteGamepassPlayerData {
     pub player_id: String,
 }
 
-/// convert_handler.py:733-791.
 pub async fn handle_delete_gamepass_player(
     data: DeleteGamepassPlayerData,
     ctx: &mut HandlerCtx<'_>,
@@ -162,12 +151,9 @@ pub struct RenameGamepassWorldData {
     pub new_name: String,
 }
 
-/// convert_handler.py:794-863 — reads the save's current LevelMeta blob,
-/// rewrites `SaveData.WorldName`, and appends a brand-new LevelMeta
-/// container (not an in-place edit); `ContainerIndex::latest_save_containers`
-/// (Task 5's seq/mtime "latest" rule) then makes the new container win over
-/// the old one on every subsequent read, exactly like Python's
-/// `create_new_container` + `container_index.containers.append(...)`.
+/// Appends a brand-new LevelMeta container rather than editing in place;
+/// `ContainerIndex::latest_save_containers`'s seq/mtime rule then makes the
+/// new container win on every subsequent read.
 pub async fn handle_rename_gamepass_world(
     data: RenameGamepassWorldData,
     ctx: &mut HandlerCtx<'_>,
@@ -225,17 +211,16 @@ pub async fn handle_rename_gamepass_world(
     Ok(())
 }
 
-/// Port of `select_gamepass_save_handler` (local_file_handler.py:255-374). The
-/// message data is a BARE save-id string. Unlike the scan/delete/rename
-/// handlers, this one loads a save into `ctx.session.save`, so the container
-/// directory comes from `settings.save_dir` (set by the desktop file dialog in
-/// production) — NOT `find_container_dir()`.
+/// The message data is a BARE save-id string. Unlike the scan/delete/rename
+/// handlers this one loads a save into `ctx.session.save`, so the container
+/// directory comes from `settings.save_dir` (set by the desktop file dialog),
+/// NOT `find_container_dir()`.
 ///
-/// Silent-return contract: a missing Level OR LevelMeta *container entry*
-/// returns `Ok(())` with NO frame emitted at all (Python `return`s), whereas a
-/// missing Level *payload* or an empty player set raises (surfacing an `error`
-/// frame). On success emits `loaded_save_files` (`type: "gamepass"`,
-/// `has_gps: false`) then `get_player_summaries` / `get_guild_summaries`.
+/// Silent-return contract: a missing Level or LevelMeta *container entry*
+/// returns `Ok(())` with NO frame at all, whereas a missing Level *payload* or
+/// an empty player set errors (surfacing an `error` frame). On success emits
+/// `loaded_save_files` (`type: "gamepass"`, `has_gps: false`) then
+/// `get_player_summaries` / `get_guild_summaries`.
 pub async fn handle_select_gamepass_save(
     save_id: String,
     ctx: &mut HandlerCtx<'_>,
@@ -243,17 +228,14 @@ pub async fn handle_select_gamepass_save(
     use std::collections::BTreeMap;
     use std::path::PathBuf;
 
-    // Python sets `selected_gamepass_save` up front, before the silent-return
-    // guards, so the modded-save path can find the original containers even if
-    // this load returns early.
+    // Recorded before the silent-return guards below, so the modded-save path
+    // can still find the original containers if this load returns early.
     ctx.session.selected_gamepass_save = ctx.session.gamepass_saves.get(&save_id).cloned();
 
     let container_dir = PathBuf::from(psp_db::settings::get_settings(&ctx.app.db).await?.save_dir);
     let index = ContainerIndex::read_from_dir(&container_dir)?;
     let containers = index.latest_save_containers(&save_id);
 
-    // Missing Level / LevelMeta container ENTRY: Python returns silently
-    // (local_file_handler.py:270-272, 287-289).
     let Some(level_entry) = containers.get("Level") else {
         return Ok(());
     };
@@ -266,10 +248,8 @@ pub async fn handle_select_gamepass_save(
     let level_meta =
         store::read_first_blob(&container_dir, level_meta_entry)?.map(|(_seq, bytes)| bytes);
 
-    // Player containers → in-memory byte refs. `player_order` preserves the
-    // first-seen order across player containers so the wire `players` array
-    // matches Python's `[str(p) for p in player_files.keys()]` (insertion
-    // order), rather than the `BTreeMap`'s uuid-sorted order.
+    // `player_order` records first-seen container order: the wire `players`
+    // array must follow it, not the `BTreeMap`'s uuid-sorted order.
     let mut player_order: Vec<uuid::Uuid> = Vec::new();
     let mut player_file_refs: BTreeMap<uuid::Uuid, PlayerFileData> = BTreeMap::new();
     for (key, entry) in containers.iter() {
@@ -325,15 +305,13 @@ pub async fn handle_select_gamepass_save(
             container_id: save_id.clone(),
         },
         save_id.clone(),
-        // sync_app_state emits this as the loaded save's `type` field
-        // (app_state_handler.py:30 `save_type.name.lower()` → "gamepass").
+        // `sync_app_state` re-emits this as the loaded save's `type` field.
         "gamepass",
         &level_sav,
         level_meta.as_deref(),
         player_file_refs,
         None,
-        // select_gamepass_save goes through Python's process_save_files, which
-        // emits the leading generic "Loading Level.sav..." frame.
+        // Emit the leading generic "Loading Level.sav..." progress frame.
         true,
         &progress,
     )?;
@@ -363,13 +341,6 @@ pub async fn handle_select_gamepass_save(
     Ok(())
 }
 
-// ---------------------------------------------------------------------------
-// convert_save_format — port of convert_handler.py:71-129 (+ its standalone
-// and loaded-save helpers). Branch order below matters: it mirrors Python's
-// `if/elif` chain exactly, including which branches need a desktop dialog
-// (Phase 5) and which are fully headless.
-// ---------------------------------------------------------------------------
-
 #[derive(Debug, Deserialize)]
 pub struct ConvertSaveFormatData {
     pub target_format: String,
@@ -381,15 +352,15 @@ pub struct ConvertSaveFormatData {
     pub save_id: Option<String>,
 }
 
-/// Port of convert_save_format_handler (convert_handler.py:71-129). Branch order matters.
+/// Branch order is load-bearing: a `save_id` + "steam" request means "extract
+/// the named gamepass save", which outranks the standalone source/output pair,
+/// which in turn outranks converting the currently loaded save.
 pub async fn handle_convert_save_format(
     data: ConvertSaveFormatData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     if data.save_id.is_some() && data.target_format == "steam" {
-        // Python prompts for an output dir and extracts the chosen save
-        // (convert_handler.py:132-244). Web mode / no window → error payload.
-        // Phase 5: desktop dialog + extract_containers_to_steam_dir(SelectedSave labels).
+        // Extracting a named save needs a native output-dir dialog.
         ctx.emitter.emit(
             MessageType::ConvertSaveFormat,
             &serde_json::json!({"error": "Desktop mode required."}),
@@ -399,8 +370,8 @@ pub async fn handle_convert_save_format(
     if data.source_path.as_deref() == Some("__select__")
         || data.output_path.as_deref() == Some("__select__")
     {
-        // Python opens file dialogs; headless _prompt_standalone_paths → (None, None)
-        // → {"error": "No file selected."}. Phase 5 wires the dialogs.
+        // "__select__" asks for a native file dialog; without one there is no
+        // path to convert.
         ctx.emitter.emit(
             MessageType::ConvertSaveFormat,
             &serde_json::json!({"error": "No file selected."}),
@@ -422,7 +393,6 @@ pub async fn handle_convert_save_format(
     Ok(())
 }
 
-/// convert_handler.py:474-491.
 async fn convert_standalone(
     source_path: &str,
     output_path: &str,
@@ -442,7 +412,7 @@ async fn convert_standalone(
     }
 }
 
-/// convert_handler.py:494-588 — extracts EVERY save found in the container dir.
+/// Extracts EVERY save found in the container dir, not just one.
 async fn standalone_gamepass_to_steam(
     source_path: &str,
     output_path: &str,
@@ -451,7 +421,8 @@ async fn standalone_gamepass_to_steam(
     let progress = ctx.emitter.progress_sink();
     progress("Reading GamePass container index...");
     let container_dir = PathBuf::from(source_path);
-    // Index read failures propagate to the dispatcher error, like Python's raise.
+    // An unreadable index is a hard failure: it surfaces as the dispatcher's
+    // `error` frame rather than a soft `{"error": ...}` payload.
     let index = ContainerIndex::read_from_dir(&container_dir)?;
 
     let save_ids = gamepass_convert::unique_save_ids(&index);
@@ -488,7 +459,6 @@ async fn standalone_gamepass_to_steam(
     Ok(())
 }
 
-/// convert_handler.py:591-674.
 async fn standalone_steam_to_gamepass(
     source_path: &str,
     output_path: &str,
@@ -537,7 +507,6 @@ async fn standalone_steam_to_gamepass(
     Ok(())
 }
 
-/// convert_handler.py:117-129 + 247-373.
 async fn convert_loaded_save(
     target_format: &str,
     ctx: &mut HandlerCtx<'_>,
@@ -556,9 +525,7 @@ async fn convert_loaded_save(
                 );
                 return Ok(());
             }
-            // Python prompts for an output dir and writes the steam layout
-            // (convert_handler.py:335-409). Phase 5: dialog + write Level/LevelMeta/Players
-            // from the session (level_sav_bytes / level_meta_sav_bytes / player_sav_bytes).
+            // Writing the steam layout needs a native output-dir dialog.
             ctx.emitter.emit(
                 MessageType::ConvertSaveFormat,
                 &serde_json::json!({
@@ -577,7 +544,7 @@ async fn convert_loaded_save(
     }
 }
 
-/// convert_handler.py:247-332 — writes the LOADED save into the real gamepass install.
+/// Writes the LOADED save into the real gamepass install under a fresh save id.
 async fn loaded_save_to_gamepass(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let already_gamepass = matches!(
         ctx.session.save.as_ref().map(|save| &save.kind),

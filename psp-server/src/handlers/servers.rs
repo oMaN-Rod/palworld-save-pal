@@ -1,8 +1,8 @@
-//! Server-management handlers. Mirrors ws/handlers/server_handler.py.
+//! Server-management handlers.
 //!
-//! Error convention (Python parity): business failures emit message type
-//! `error` with data {"message": "<text>"} — no trace key — and the handler
-//! returns Ok(()). Only payload-parse failures use the HandlerError path.
+//! Error convention: business failures emit message type `error` with data
+//! `{"message": "<text>"}` — no `trace` key — and the handler returns `Ok(())`.
+//! Only payload-parse failures take the `HandlerError` path.
 use std::path::Path;
 
 use serde_json::Value;
@@ -32,7 +32,6 @@ pub(crate) fn emit_business_error(emitter: &Emitter, message: String) {
     );
 }
 
-/// _server_to_dict parity — key set, order, and value shapes.
 pub fn server_to_wire_json(record: &ServerRecord) -> Value {
     serde_json::json!({
         "id": record.id,
@@ -64,8 +63,8 @@ pub fn server_to_wire_json(record: &ServerRecord) -> Value {
     })
 }
 
-/// _count_total_players: first world dir under saves/SaveGames/0 that has a
-/// Players dir wins (Python returns inside the loop — bug-compatible).
+/// The FIRST world dir under saves/SaveGames/0 that has a Players dir wins;
+/// later world dirs are not counted.
 pub fn count_total_players(saves_path: &str) -> u64 {
     let save_games = std::path::Path::new(saves_path).join("SaveGames").join("0");
     let Ok(world_dirs) = std::fs::read_dir(&save_games) else {
@@ -89,7 +88,6 @@ pub fn count_total_players(saves_path: &str) -> u64 {
     0
 }
 
-/// _get_server_status: native → process status by pid, docker → container status.
 pub(crate) async fn server_status(
     app: &AppState,
     record: &ServerRecord,
@@ -238,7 +236,6 @@ fn default_max_players() -> i64 {
     16
 }
 
-/// messages.py CreateServerData — field names and defaults verbatim.
 #[derive(Debug, serde::Deserialize)]
 pub struct CreateServerData {
     pub name: String,
@@ -304,8 +301,9 @@ async fn persist_steamcmd_path(
         .map_err(|error| error.to_string())
 }
 
-/// create_server_handler parity. Returns Err(String) only for failures Python
-/// would catch in its outer try/except ("Failed to create server: {e}").
+/// Returns `Err(String)` only for failures the caller renders as
+/// "Failed to create server: {e}"; every business rejection emits its own
+/// `error` frame and returns `Ok(())`.
 async fn create_server_impl(
     data: CreateServerData,
     ctx: &mut HandlerCtx<'_>,
@@ -643,13 +641,12 @@ pub async fn handle_delete_server(
                 native_process::stop_server_process(&record, &ctx.app.server_services.palworld_api)
                     .await;
             }
-            // Python: remove_server(install_path, remove_data=False) — keeps files.
+            // Native installs keep their files on disk; only the DB row goes.
         } else {
             let docker_api = ctx.app.server_services.docker.as_ref();
             docker::stop_server_container(docker_api, &record.container_name).await;
-            // Python's delete_server_handler discards remove_server's bool
-            // return value unconditionally — the DB row and delete_server
-            // response are unaffected by a Docker-side removal failure.
+            // Removal result is deliberately ignored: a Docker-side failure must
+            // not block deleting the DB row or change the response.
             docker::remove_server_container(docker_api, &record.container_name, true).await;
         }
         psp_db::servers::delete_server(db, record.id)
@@ -768,7 +765,6 @@ fn default_mod_type() -> String {
     "ue4ss".to_string()
 }
 
-/// messages.py ServerApiCallMessage.data — field names and defaults verbatim.
 #[derive(Debug, serde::Deserialize)]
 pub struct ServerApiCallData {
     pub server_id: i64,
@@ -796,8 +792,8 @@ pub struct InstallServerModData {
     pub mod_type: String,
 }
 
-/// server_api_call_handler parity: proxies to the Palworld dedicated-server
-/// REST API at 127.0.0.1:{rest_api_port} using the server's admin_password.
+/// Proxies to the Palworld dedicated-server REST API at
+/// 127.0.0.1:{rest_api_port} using the server's admin_password.
 pub async fn handle_server_api_call(
     data: ServerApiCallData,
     ctx: &mut HandlerCtx<'_>,
@@ -841,9 +837,8 @@ pub async fn handle_server_api_call(
     Ok(())
 }
 
-/// list_server_mods_handler parity: native servers use the PalModSettings.ini
-/// workshop scan; docker servers merge ue4ss (mods.txt), logic (.pak), and
-/// native (.dll) mod listings.
+/// Native servers use the PalModSettings.ini workshop scan; docker servers
+/// merge ue4ss (mods.txt), logic (.pak), and native (.dll) listings.
 pub async fn handle_list_server_mods(
     data: ServerIdData,
     ctx: &mut HandlerCtx<'_>,
@@ -886,7 +881,6 @@ pub async fn handle_list_server_mods(
     Ok(())
 }
 
-/// toggle_server_mod_handler parity.
 pub async fn handle_toggle_server_mod(
     data: ToggleServerModData,
     ctx: &mut HandlerCtx<'_>,
@@ -923,9 +917,8 @@ pub async fn handle_toggle_server_mod(
     Ok(())
 }
 
-/// install_server_mod_handler parity: native servers install via the
-/// Steam-workshop-style extraction; docker servers dispatch on mod_type
-/// (native DLL vs ue4ss/logic zip).
+/// Native servers install via Steam-workshop-style extraction; docker servers
+/// dispatch on `mod_type` (native DLL vs ue4ss/logic zip).
 pub async fn handle_install_server_mod(
     data: InstallServerModData,
     ctx: &mut HandlerCtx<'_>,
@@ -969,25 +962,14 @@ pub async fn handle_install_server_mod(
     Ok(())
 }
 
-// ---------------------------------------------------------------------------
-// load_server_save — port of server_handler.py::load_server_save_handler.
-// ---------------------------------------------------------------------------
-
-/// Business-error and loading core of `handle_load_server_save`. Locates the
-/// server's saved world under `<saves_path>/SaveGames/0/<world>/Level.sav`
-/// and runs it through the SAME Phase 1 load pipeline `handle_select_save`
-/// uses (`save_file::validate_steam_save_directory` /
-/// `save_file::discover_player_file_refs` / `SaveSession::load` /
-/// `save_file::emit_summary_messages`) rather than reimplementing it -- see
-/// `SteamSaveLayout`'s doc comment in `save_file.rs` for why those helpers
-/// are `pub(crate)` in the first place.
+/// Locates the server's world under `<saves_path>/SaveGames/0/<world>/Level.sav`
+/// and runs it through the SAME load pipeline `handle_select_save` uses, so the
+/// two paths cannot drift in behavior or error strings.
 ///
-/// Returns `Err(String)` only for failures Python's outer `except Exception`
-/// would catch (`"Failed to load server save: {e}"`, `load_server_save_handler`'s
-/// final `except` clause). Every earlier business failure (server not found,
-/// still running, no save data at the expected location, no world dirs, no
-/// Level.sav, or an invalid steam directory) emits its own `error` frame
-/// directly and returns `Ok(())`, matching each early `return` in Python.
+/// Returns `Err(String)` only for failures the caller renders as
+/// "Failed to load server save: {e}"; every business rejection (server not
+/// found, still running, no save data, no Level.sav, invalid steam directory)
+/// emits its own `error` frame and returns `Ok(())`.
 async fn load_server_save_impl(data: ServerIdData, ctx: &mut HandlerCtx<'_>) -> Result<(), String> {
     let emitter = ctx.emitter;
     let db = &ctx.app.db;
@@ -999,7 +981,8 @@ async fn load_server_save_impl(data: ServerIdData, ctx: &mut HandlerCtx<'_>) -> 
         return Ok(());
     };
 
-    // Verify server is stopped.
+    // A running server holds the save file open and will overwrite whatever we
+    // write back, so refuse to load from it.
     let status = server_status(ctx.app, &record).await;
     if status
         .as_ref()
@@ -1014,7 +997,6 @@ async fn load_server_save_impl(data: ServerIdData, ctx: &mut HandlerCtx<'_>) -> 
         return Ok(());
     }
 
-    // Find the save directory: saves/SaveGames/0/{world_guid}/
     let save_games_path = Path::new(&record.saves_path).join("SaveGames").join("0");
     if !save_games_path.is_dir() {
         emit_business_error(
@@ -1024,9 +1006,8 @@ async fn load_server_save_impl(data: ServerIdData, ctx: &mut HandlerCtx<'_>) -> 
         return Ok(());
     }
 
-    // Use the first (usually only) world directory -- matches Python's
-    // `os.listdir(save_games_path)[0]` (both are filesystem-enumeration-order
-    // dependent; this is bug-compatible, not a design choice).
+    // The first (usually only) world directory wins; a multi-world server is
+    // not addressable here.
     let world_dir = std::fs::read_dir(&save_games_path)
         .map_err(|error| error.to_string())?
         .flatten()
@@ -1046,8 +1027,6 @@ async fn load_server_save_impl(data: ServerIdData, ctx: &mut HandlerCtx<'_>) -> 
         return Ok(());
     }
 
-    // ---- Shared Phase 1 load pipeline (identical to handle_select_save's
-    // steam branch) ----
     let layout = match save_file::validate_steam_save_directory(&level_sav_path.to_string_lossy()) {
         Ok(layout) => layout,
         Err(error) => {
@@ -1075,14 +1054,13 @@ async fn load_server_save_impl(data: ServerIdData, ctx: &mut HandlerCtx<'_>) -> 
         level_meta_bytes.as_deref(),
         player_file_refs,
         layout.global_pal_storage_sav.clone(),
-        // load_server_save goes through the same process_save_files pipeline
-        // select_save does -- keep the leading generic "Loading Level.sav..." frame.
+        // Emit the leading generic "Loading Level.sav..." progress frame.
         true,
         &progress,
     )
     .map_err(|error| error.to_string())?;
 
-    // Python: app_state.settings.save_dir = world_dir
+    // Point save_dir at the loaded world so a later write-back lands there.
     psp_db::settings::update_save_dir(db, &world_dir.to_string_lossy())
         .await
         .map_err(|error| error.to_string())?;
@@ -1370,7 +1348,7 @@ mod tests {
             "container_name": "alpha"
         }))
         .unwrap();
-        // Defaults from messages.py must apply
+        // Serde defaults must apply for every omitted field.
         assert_eq!(data.image_name, "omanrod/psp-palworld-server");
         assert_eq!(data.server_type, "docker");
         assert_eq!(data.game_port, 8211);
@@ -1889,10 +1867,8 @@ mod tests {
     }
 
     /// Full load path — needs a real world save. Set PSP_TEST_SAVE_DIR to a
-    /// directory containing Level.sav (same corpus the parity harness uses).
-    /// This is the ONE test in this suite that depends on host state outside
-    /// the repo -- everything else (including `cargo test -p psp-server`
-    /// with no env vars set) is fully self-contained.
+    /// directory containing Level.sav. This is the ONE test here that depends
+    /// on host state outside the repo; it skips itself when unset.
     #[tokio::test]
     async fn load_server_save_loads_world_and_emits_summaries() {
         let Ok(source_save_dir) = std::env::var("PSP_TEST_SAVE_DIR") else {

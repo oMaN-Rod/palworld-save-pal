@@ -1,6 +1,5 @@
-//! reattach_session / eject_session — session-persistence lifecycle (SP-T2).
-//! Feature additions beyond the Python parity set: a connection can re-attach
-//! to a stored session by id after a reconnect, or eject it.
+//! reattach_session / eject_session: a connection can re-attach to a stored
+//! session by id after a reconnect, or eject it.
 //!
 //! Concurrency invariant: neither handler ever holds more than ONE per-session
 //! `tokio::Mutex` guard at a time. `ws.rs::process_text_frame` deliberately does
@@ -28,16 +27,15 @@ pub struct EjectSessionData {
     pub session_id: String,
 }
 
-/// Re-attach the connection to a stored session by id. Absent (or unparseable)
-/// id / unknown id → `session_not_found` (data: the id), leaving the current
-/// attachment untouched. Present → emit the load overview and point the
-/// connection's arc slot + id at the store's session.
+/// Re-attach the connection to a stored session by id. An unparseable or
+/// unknown id answers `session_not_found` (data: the id) and leaves the current
+/// attachment untouched.
 ///
 /// Locks exactly ONE per-session mutex: the TARGET arc. When the requested id is
 /// the one already attached, the target arc IS the connection's current arc, but
 /// because `process_text_frame` did not pre-lock it for this message, locking it
 /// here is still a single, safe lock — and the swap below is then a harmless
-/// self-reassign. We never hold the connection's current guard while taking the
+/// self-reassign. The connection's current guard is never held while taking the
 /// target's, so no cross-connection reattach cycle can deadlock.
 pub async fn handle_reattach_session(
     data: ReattachSessionData,

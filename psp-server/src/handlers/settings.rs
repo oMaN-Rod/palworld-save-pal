@@ -23,8 +23,8 @@ pub async fn handle_get_settings(ctx: &mut HandlerCtx<'_>) -> Result<(), Handler
     Ok(())
 }
 
-/// NOTE: the response type is `get_settings`, not `update_settings` —
-/// wire-exact port of settings_handler.py:19-22.
+/// Answers under `get_settings`, NOT `update_settings` — the frontend refreshes
+/// its settings store off that message type.
 pub async fn handle_update_settings(
     update: SettingsUpdateDto,
     ctx: &mut HandlerCtx<'_>,
@@ -75,9 +75,6 @@ mod tests {
 
     #[tokio::test]
     async fn update_settings_responds_with_get_settings_type() {
-        // Python quirk: the update_settings response is typed "get_settings"
-        // (settings_handler.py:22). Load-bearing for the frontend correlator? No —
-        // but it is the wire contract.
         let mut test = TestContext::new(|_| {}).await;
         let mut ctx = HandlerCtx {
             session: &mut test.session,
@@ -98,11 +95,8 @@ mod tests {
         assert_eq!(frame["type"], "get_settings");
         assert_eq!(frame["data"]["language"], "fr");
         assert_eq!(frame["data"]["debug_mode"], true);
-        // Proves more than "not the literal request value": save_dir in the
-        // response is exactly the row's persisted save_dir, which for a fresh
-        // test database is the computed default (SettingsUpdateDto has no
-        // save_dir field at all, so update_settings can never have written
-        // "ignored-extra-key" into the row in the first place).
+        // `save_dir` is not a settable field: the response must carry the row's
+        // persisted default, never the extra key the request smuggled in.
         assert_eq!(
             frame["data"]["save_dir"],
             psp_db::settings::default_steam_save_dir()

@@ -1,4 +1,4 @@
-//! Server-management services (Phase 6). Mirrors palworld_save_pal/services/*.
+//! Server-management services: Docker and native Palworld dedicated servers.
 pub mod docker;
 pub mod docker_mods;
 pub mod native_config;
@@ -24,8 +24,6 @@ impl From<ServiceError> for crate::handler_error::HandlerError {
     }
 }
 
-/// Matches the Python status dict shape from DockerService.get_container_status /
-/// NativeServerService.get_process_status.
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
 pub struct ServerProcessStatus {
     pub status: String,
@@ -53,17 +51,15 @@ impl ServerProcessStatus {
     }
 }
 
-/// Mirrors Python's builtin `round(value, decimals)`, which rounds halves to
-/// even (banker's rounding) — not away from zero. Stats values are fed straight
-/// to `round(...)` in docker_service.py / native_server_service.py, so the tie
-/// rule is wire-visible; `f64::round()` (half-away) would diverge on exact ties
-/// like `round(0.125, 2)` (Python → 0.12, half-away → 0.13).
+/// Rounds stats values half-to-even (banker's rounding), the tie rule the
+/// server-stats wire format is specified with — not `f64::round()`'s half-away.
 pub fn round_to(value: f64, decimals: u32) -> f64 {
     let factor = 10f64.powi(decimals as i32);
     (value * factor).round_ties_even() / factor
 }
 
-/// Python datetime.isoformat(): "T" separator, microseconds omitted when zero.
+/// ISO-8601 timestamp for the wire format: "T" separator, microseconds omitted
+/// when zero.
 pub fn python_isoformat(timestamp: chrono::NaiveDateTime) -> String {
     if timestamp.and_utc().timestamp_subsec_micros() == 0 {
         timestamp.format("%Y-%m-%dT%H:%M:%S").to_string()
@@ -72,7 +68,8 @@ pub fn python_isoformat(timestamp: chrono::NaiveDateTime) -> String {
     }
 }
 
-/// Python str() semantics for env-var values (build_environment uses str(v)).
+/// Stringifies env-var values the way the server image and PalWorldSettings.ini
+/// expect them: bools as `True`/`False`, null as `None`.
 pub fn python_str(value: &serde_json::Value) -> String {
     match value {
         serde_json::Value::String(text) => text.clone(),
@@ -83,18 +80,14 @@ pub fn python_str(value: &serde_json::Value) -> String {
     }
 }
 
-/// Bundles the server-management services a running psp-server needs: the
-/// Docker API (real bollard in production, `mock::MockDocker` in tests) and
-/// the Palworld dedicated-server REST client. Held once in `AppState` behind
-/// an `Arc` so handlers can share it across connections.
+/// Held once in `AppState` behind an `Arc` so handlers share one Docker API
+/// (real bollard in production, `mock::MockDocker` in tests) and REST client.
 pub struct ServerServices {
     pub docker: std::sync::Arc<dyn docker::DockerApi>,
     pub palworld_api: palworld_api::PalworldApiClient,
 }
 
 impl ServerServices {
-    /// Production wiring: lazy Docker (connection failures surface per-request,
-    /// like the Python DockerService.get_client), real REST client.
     pub fn real() -> Self {
         Self::with_docker(std::sync::Arc::new(LazyDocker::default()))
     }
@@ -185,10 +178,8 @@ mod tests {
     fn round_to_matches_python_round_for_stats_values() {
         assert_eq!(round_to(80.004, 2), 80.0);
         assert_eq!(round_to(1024.04, 1), 1024.0);
-        // Exactly-representable halves (eighths) round to even, matching
-        // Python's builtin round(): round(0.125, 2) == 0.12 (2 is even),
-        // round(0.375, 2) == 0.38 (8 is even). `f64::round()` (half-away)
-        // would give 0.13 / 0.38 and diverge on the first.
+        // Exactly-representable halves (eighths) must round to even: 0.125 -> 0.12,
+        // 0.375 -> 0.38. `f64::round()` (half-away) would give 0.13 for the first.
         assert_eq!(round_to(0.125, 2), 0.12);
         assert_eq!(round_to(0.375, 2), 0.38);
     }
@@ -228,13 +219,9 @@ mod tests {
 
     #[test]
     fn server_services_real_constructs_without_a_docker_daemon() {
-        // BollardDocker::connect() is deliberately not called until the first
-        // trait method fires — constructing ServerServices::real() must succeed
-        // even with no Docker daemon present on the test machine (mirrors
-        // Python's DockerService, which only connects lazily on first use). The
-        // strong_count == 1 pins that each call yields a fresh, unshared lazy
-        // client (no global registry / eager connection) — it would exceed 1 if
-        // construction stashed the client anywhere.
+        // Constructing ServerServices::real() must succeed with no Docker daemon
+        // present. strong_count == 1 pins that each call yields a fresh, unshared
+        // lazy client — it would exceed 1 if construction stashed it anywhere.
         let services = ServerServices::real();
         assert_eq!(std::sync::Arc::strong_count(&services.docker), 1);
     }

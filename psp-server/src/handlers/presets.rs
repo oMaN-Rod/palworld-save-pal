@@ -8,8 +8,8 @@ pub struct UpdatePresetData {
     pub name: String,
 }
 
-/// The `data/json/presets.json` seed array (Python's `default_factory=uuid4`
-/// equivalent — entries carry no `id`, so `add` generates one per entry).
+/// The `data/json/presets.json` seed array. Entries carry no `id`; `add`
+/// generates one per entry.
 fn presets_seed(ctx: &HandlerCtx<'_>) -> serde_json::Value {
     ctx.app
         .game_data
@@ -18,8 +18,8 @@ fn presets_seed(ctx: &HandlerCtx<'_>) -> serde_json::Value {
         .unwrap_or_else(|| serde_json::json!([]))
 }
 
-/// Mirrors preset_handler.py:40-46: seed the table from the JSON fixture only
-/// when it is empty, then return every preset as an id-keyed object.
+/// Seeds the table from the JSON fixture only when it is empty, then answers
+/// with every preset as an id-keyed object (not an array).
 pub async fn handle_get_presets(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let seed = presets_seed(ctx);
     psp_db::presets::populate_from_json(&ctx.app.db, &seed).await?;
@@ -51,7 +51,7 @@ pub async fn handle_update_preset(
             &format!("{} updated successfully", data.name),
         );
     } else {
-        // preset_handler.py:60-62 — error data is a plain string here.
+        // Plain-string error data, not the dispatcher's `{message, trace}`.
         ctx.emitter.emit(
             MessageType::Error,
             &format!("Failed to update preset {}", data.id),
@@ -94,11 +94,8 @@ pub struct ExportPresetData {
     pub preset_name: String,
 }
 
-/// Mirrors preset_handler.py:91-147: both export/import require a native file
-/// dialog (`app_state.webview_window`), which only exists in desktop mode. In
-/// web mode Python always answers `error` with the plain string
-/// "File dialog not available". Phase 3 implements exactly that non-desktop
-/// path; Phase 5 wires the native dialog behind `desktop_mode`.
+/// Export and import both need a native file dialog, so outside desktop mode
+/// they answer `error` with the plain string "File dialog not available".
 pub async fn handle_export_preset(
     data: ExportPresetData,
     ctx: &mut HandlerCtx<'_>,
@@ -112,7 +109,7 @@ pub async fn handle_export_preset(
         return Ok(());
     }
     if ctx.app.config.desktop_mode {
-        // Phase 5 wires the native save dialog here (preset_handler.py:117-147).
+        // TODO: native save dialog.
     }
     ctx.emitter
         .emit(MessageType::Error, &"File dialog not available");
@@ -121,8 +118,7 @@ pub async fn handle_export_preset(
 
 pub async fn handle_import_preset(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     if ctx.app.config.desktop_mode {
-        // Phase 5 wires the native open dialog + id-stripping import here
-        // (preset_handler.py:166-237).
+        // TODO: native open dialog + id-stripping import.
     }
     ctx.emitter
         .emit(MessageType::Error, &"File dialog not available");
@@ -134,10 +130,8 @@ mod tests {
     use super::*;
     use crate::test_support::TestContext;
 
-    /// Real (non-stopgap) coverage for handle_get_presets: TestContext gives a
-    /// migrated DB pool and a GameData over a temp data/json dir, so this
-    /// seeds one preset via a real presets.json fixture and checks the DICT
-    /// shape (id -> preset) that replaces the Phase-0 empty-list stopgap.
+    /// Seeds one preset from a real presets.json fixture and checks the
+    /// id-keyed dict shape of the response.
     #[tokio::test]
     async fn get_presets_seeds_from_json_and_returns_dict() {
         let mut test = TestContext::new(|json_dir| {

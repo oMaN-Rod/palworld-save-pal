@@ -25,10 +25,8 @@ use uuid::Uuid;
 /// `std::Mutex` is only ever held briefly.
 pub type SharedSession = Arc<tokio::sync::Mutex<Session>>;
 
-/// Id-keyed store of parsed sessions, so a session survives a WS reconnect
-/// (session-persistence feature). `order` bounds growth: the oldest entry is
-/// evicted past `MAX_STORED_SESSIONS`. Replace-on-load keeps this small
-/// (desktop holds ~1); the cap is only a safety net.
+/// Id-keyed store of parsed sessions, so a session survives a WS reconnect.
+/// `order` bounds growth: the oldest entry is evicted past `MAX_STORED_SESSIONS`.
 #[derive(Default)]
 pub struct SessionStore {
     by_id: HashMap<Uuid, SharedSession>,
@@ -73,15 +71,13 @@ impl SessionStore {
 pub struct ServerConfig {
     /// Web default 0.0.0.0; desktop 127.0.0.1.
     pub host: IpAddr,
-    /// Default 5174. 0 = pick a free port (tests).
+    /// 0 picks a free port (tests).
     pub port: u16,
-    /// Directory holding the built SvelteKit UI ("./ui").
     pub ui_dir: PathBuf,
-    /// Directory holding "json/" with the game data ("./data").
+    /// Directory holding "json/" with the game data.
     pub data_dir: PathBuf,
-    /// The NEW database file ("./psp-rs.db"); the legacy ./psp.db is imported in Phase 3.
     pub db_path: PathBuf,
-    /// Swaps select_save/open_folder behavior in Phase 5.
+    /// Enables native file dialogs and the local folder/browser handlers.
     pub desktop_mode: bool,
 }
 
@@ -90,31 +86,26 @@ pub struct AppState {
     pub game_data: Arc<GameData>,
     pub db: sqlx::SqlitePool,
     pub dialogs: Arc<dyn crate::desktop_dialogs::FileDialogProvider>,
-    /// Count of currently-open `/ws/{client_id}` connections. `ws::connection_loop`
-    /// increments on start and decrements (via a `Drop` guard, so it also fires on
-    /// panic or early return) when it exits. Exists so termination of the reader
-    /// loop / writer task is independently observable in tests — `ServerHandle::shutdown`
-    /// alone cannot prove it (axum hands the upgraded socket to its own
-    /// `tokio::spawn`ed task, decoupled from the HTTP connection future that
-    /// graceful shutdown actually waits on).
+    /// Count of currently-open `/ws/{client_id}` connections, maintained by a
+    /// `Drop` guard in `ws::connection_loop` so it also decrements on panic or
+    /// early return. Makes reader-loop/writer-task teardown observable in tests:
+    /// axum runs the upgraded socket on its own spawned task, decoupled from the
+    /// HTTP connection future that `ServerHandle::shutdown` waits on.
     pub live_connections: tokio::sync::watch::Sender<usize>,
-    /// Docker + Palworld REST clients used by the server-management handlers
-    /// (Phase 6). Real `BollardDocker` (via `ServerServices::real()`) in
-    /// production; `mock::MockDocker` in tests.
+    /// Docker + Palworld REST clients used by the server-management handlers.
+    /// Real `BollardDocker` in production; `mock::MockDocker` in tests.
     pub server_services: Arc<crate::services::ServerServices>,
-    /// Parsed sessions keyed by id, so a session survives a WS reconnect.
-    /// Reachable by handlers via `ctx.app` (SP-T2 reattach/eject use it); a
-    /// connection registers its session here on load.
+    /// Parsed sessions keyed by id, so a session survives a WS reconnect. A
+    /// connection registers its session here on load; reattach/eject read it.
     pub sessions: std::sync::Mutex<SessionStore>,
 }
 
 pub struct ServerHandle {
     pub addr: SocketAddr,
-    /// The running server's shared state — lets tests inspect `sessions`.
     pub app: Arc<AppState>,
     /// Subscriber on `AppState::live_connections`, seeded at 0 before any
-    /// connection is accepted. Tests can `.borrow()` the current count or
-    /// `.changed().await` to observe connection teardown without sleeping.
+    /// connection is accepted, so tests can await connection teardown instead
+    /// of sleeping.
     pub live_connections: tokio::sync::watch::Receiver<usize>,
     shutdown_sender: tokio::sync::oneshot::Sender<()>,
     serve_task: tokio::task::JoinHandle<std::io::Result<()>>,
@@ -133,11 +124,11 @@ impl ServerHandle {
     }
 }
 
-/// Delegating wrapper: picks the real `RfdDialogProvider` in desktop mode and
-/// the inert `NullDialogProvider` otherwise, then defers to `start_server_with`.
+/// Picks the real `RfdDialogProvider` in desktop mode and the inert
+/// `NullDialogProvider` otherwise, then defers to `start_server_with`.
 pub async fn start_server(config: ServerConfig) -> anyhow::Result<ServerHandle> {
-    // The real rfd dialog only exists under the `desktop` feature (psp-desktop);
-    // the headless server build always uses the inert NullDialogProvider.
+    // rfd only exists under the `desktop` feature; the headless server/Docker
+    // build always uses the inert NullDialogProvider.
     #[cfg(feature = "desktop")]
     let dialogs: Arc<dyn crate::desktop_dialogs::FileDialogProvider> = if config.desktop_mode {
         Arc::new(crate::desktop_dialogs::RfdDialogProvider)
@@ -152,8 +143,7 @@ pub async fn start_server(config: ServerConfig) -> anyhow::Result<ServerHandle> 
 
 /// Binds the listener before returning, so the port is already accepting
 /// connections by the time the caller sees a `ServerHandle`. `dialogs` lets
-/// callers (tests, `psp-desktop`) inject a `FileDialogProvider` instead of
-/// the real native-dialog implementation `start_server` wires up by default.
+/// callers inject a `FileDialogProvider` of their own.
 pub async fn start_server_with(
     config: ServerConfig,
     dialogs: Arc<dyn crate::desktop_dialogs::FileDialogProvider>,
@@ -229,7 +219,6 @@ mod session_store_tests {
         let session = empty_session();
         let id = store.register(Arc::clone(&session));
 
-        // Findable by id, and it's the same Arc we registered.
         let found = store.get(&id).expect("registered session is findable");
         assert!(Arc::ptr_eq(&found, &session));
         assert_eq!(store.len(), 1);
@@ -246,7 +235,6 @@ mod session_store_tests {
         for _ in 0..MAX_STORED_SESSIONS {
             store.register(empty_session());
         }
-        // The very first id fell out once we exceeded the cap.
         assert_eq!(store.len(), MAX_STORED_SESSIONS);
         assert!(store.get(&first_id).is_none());
     }
@@ -266,15 +254,13 @@ pub(crate) mod test_support {
     use crate::{AppState, ServerConfig};
 
     /// Everything a handler unit test needs: an AppState over a temp DB and a
-    /// synthetic (initially empty) game-data dir, plus an Emitter whose frames
-    /// land in `frames`.
+    /// synthetic game-data dir, plus an Emitter whose frames land in `frames`.
     pub struct TestContext {
         pub app: Arc<AppState>,
         pub session: Session,
         pub emitter: Emitter,
         pub frames: UnboundedReceiver<Message>,
-        /// Held for RAII only (deletes the temp tree on drop) — underscore
-        /// prefix keeps clippy's dead_code lint quiet.
+        /// Held for RAII only: deletes the temp tree on drop.
         pub _temp_dir: tempfile::TempDir,
     }
 
@@ -329,10 +315,8 @@ pub(crate) mod test_support {
         }
     }
 
-    /// Shared by `TestContext::next_frame_json` (which owns its receiver behind
-    /// `&mut self`) and any test that needs to drive a raw `UnboundedReceiver`
-    /// directly (e.g. dispatcher tests that build an `Emitter` without a full
-    /// `TestContext`) — one implementation instead of two copies drifting apart.
+    /// Also usable by tests that drive a raw `UnboundedReceiver` without a full
+    /// `TestContext`.
     pub fn next_frame_json_from(receiver: &mut UnboundedReceiver<Message>) -> serde_json::Value {
         match receiver.try_recv().expect("expected an emitted frame") {
             Message::Text(text) => serde_json::from_str(text.as_str()).unwrap(),

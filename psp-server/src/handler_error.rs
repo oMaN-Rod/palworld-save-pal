@@ -17,9 +17,8 @@ mod tests {
     use super::HandlerError;
     use psp_core::error::CoreError;
 
-    /// The `#[error(...)]` strings end up in the `message` field of the
-    /// wire `error` frame the frontend renders — pin them like
-    /// psp-core/src/error.rs's display_strings_match_contract.
+    /// The `#[error(...)]` strings end up in the `message` field of the wire
+    /// `error` frame the frontend renders, so pin them.
     #[test]
     fn display_strings_match_contract() {
         assert_eq!(

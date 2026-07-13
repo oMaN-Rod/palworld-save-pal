@@ -1,8 +1,5 @@
-//! Native file dialog abstraction for desktop mode.
-//!
-//! Port of `palworld_save_pal/utils/file_manager.py:132-189` (open_file_dialog)
-//! and `:23-46` (STEAM_ROOT / GAMEPASS_ROOT). The trait exists so handler logic
-//! is testable without a display server (`QueuedDialogProvider`).
+//! Native file dialog abstraction for desktop mode. The trait exists so handler
+//! logic is testable without a display server (`QueuedDialogProvider`).
 
 use std::collections::VecDeque;
 use std::future::Future;
@@ -81,7 +78,7 @@ impl FileDialogProvider for QueuedDialogProvider {
     }
 }
 
-/// Port of file_manager.py STEAM_ROOT.
+/// Platform default directory for Steam saves.
 pub fn steam_save_root() -> PathBuf {
     if cfg!(target_os = "windows") {
         let local_app_data = std::env::var_os("LOCALAPPDATA").unwrap_or_default();
@@ -101,7 +98,7 @@ pub fn steam_save_root() -> PathBuf {
     }
 }
 
-/// Port of file_manager.py GAMEPASS_ROOT.
+/// Platform default directory for Game Pass save containers.
 pub fn gamepass_save_root() -> PathBuf {
     if cfg!(target_os = "windows") {
         let local_app_data = std::env::var_os("LOCALAPPDATA").unwrap_or_default();
@@ -117,8 +114,8 @@ pub fn gamepass_save_root() -> PathBuf {
     }
 }
 
-/// Filter + initial dir per save type (file_manager.py:141-148); a previously
-/// saved save_dir (settings) overrides the platform default.
+/// Filter + initial dir per save type; a save_dir stored in settings overrides
+/// the platform default.
 pub fn dialog_request_for(save_type: &str, saved_save_dir: Option<&str>) -> FileDialogRequest {
     let (filter_name, filter_extensions, default_root): (
         &'static str,
@@ -135,9 +132,8 @@ pub fn dialog_request_for(save_type: &str, saved_save_dir: Option<&str>) -> File
     }
 }
 
-/// Port of file_manager.py:157-188 — app-dir guard + expected-filename check.
-/// Error strings are wire-visible (sent as the `error` message) and must stay
-/// byte-identical to the Python originals.
+/// App-dir guard + expected-filename check. The error strings are wire-visible:
+/// they are sent verbatim as the `error` message the frontend renders.
 pub fn validate_selected_file(
     save_type: &str,
     selected: &Path,
@@ -167,9 +163,8 @@ pub fn validate_selected_file(
     }
 }
 
-/// The directory containing the running executable (Python: frozen exe dir /
-/// source root, desktop.py:62-65). Used only for the "picked a file inside the
-/// app dir" guard.
+/// The directory containing the running executable. Used only for the "picked a
+/// file inside the app dir" guard.
 pub fn application_root() -> PathBuf {
     std::env::current_exe()
         .ok()

@@ -17,9 +17,9 @@ pub struct HandlerCtx<'a> {
     pub session: &'a mut Session,
     pub app: &'a Arc<AppState>,
     pub emitter: &'a Emitter,
-    /// The connection's store attachment: its current session id (settable) and
-    /// the `Arc` backing `session`, so a load handler can register/replace it in
-    /// the store. `None` in unit tests that build a ctx directly and never load.
+    /// The connection's store attachment: its current session id and the `Arc`
+    /// backing `session`, so a load handler can register/replace it in the
+    /// store. `None` in unit tests that build a ctx directly and never load.
     pub attachment: Option<SessionAttachment<'a>>,
 }
 
@@ -34,10 +34,9 @@ pub struct SessionAttachment<'a> {
 
 impl HandlerCtx<'_> {
     /// Registers the connection's session in the store under a FRESH id,
-    /// dropping the id this connection previously held (replace-on-load), sets
-    /// the connection's current id, and returns it. Load handlers put the
-    /// returned id in their `loaded_save_files` response. Only the outer std
-    /// map lock is taken, briefly — never across an `.await`.
+    /// dropping the id this connection already held, and returns it. Load
+    /// handlers put the returned id in their `loaded_save_files` response. Only
+    /// the outer std map lock is taken, briefly — never across an `.await`.
     pub fn register_current_session(&mut self) -> uuid::Uuid {
         let attachment = self
             .attachment
@@ -54,10 +53,8 @@ impl HandlerCtx<'_> {
     }
 }
 
-/// Routes one envelope to its handler. Behavior (matches the Python backend, see
-/// plan "Contract deviations" 1-2):
-/// - unknown wire string → warn log, nothing sent;
-/// - registered type without a Phase-0 handler → warn log, nothing sent;
+/// Routes one envelope to its handler. Wire contract:
+/// - unknown or unrouted message type → warn log, nothing sent;
 /// - handler Err → `error` message {message, trace};
 /// - handler panic → contained, reported as an `error` message.
 ///
@@ -82,16 +79,11 @@ pub async fn dispatch(envelope: Envelope, mut ctx: HandlerCtx<'_>) {
     }
 }
 
-/// Runs `handler` to completion, catching any panic it raises and converting it
-/// into an `error` frame via `emitter.emit_error` (spec §5: a handler panic must
-/// be contained, not tear down the connection). On a non-panicking completion the
-/// handler's own `Result` is passed straight through unchanged.
-///
-/// Extracted out of `dispatch` as its own function so the panic-containment path
-/// is directly unit-testable: `route`'s dispatch table is a fixed `match` over
-/// `MessageType`, so no test can register an arbitrary panicking handler through
-/// `dispatch` itself. `message_type` is only used for the log line — it plays no
-/// part in what gets emitted.
+/// Runs `handler` to completion, converting any panic it raises into an `error`
+/// frame so a bad handler cannot tear down the connection. A separate function
+/// (rather than inline in `dispatch`) so the containment path is unit-testable:
+/// `route`'s dispatch table is a fixed `match`, so no test can push a panicking
+/// handler through `dispatch` itself.
 async fn catch_handler_panic<F>(
     handler: F,
     message_type: &str,
@@ -165,7 +157,7 @@ async fn route(
         MessageType::SelectSave => {
             handlers::save_file::handle_select_save(serde_json::from_value(data)?, ctx).await
         }
-        // Phase 4 (Task 12): gamepass load path. Data is a BARE save-id string.
+        // `data` is a BARE save-id string, not an object.
         MessageType::SelectGamepassSave => {
             handlers::gamepass::handle_select_gamepass_save(serde_json::from_value(data)?, ctx)
                 .await
@@ -173,9 +165,6 @@ async fn route(
         MessageType::LoadZipFile => {
             handlers::save_file::handle_load_zip_file(serde_json::from_value(data)?, ctx).await
         }
-        // Phase 2 (Task 13): lazy details, pal CRUD, technologies, lab
-        // research, deletes. get_pals / get_lab_research are already
-        // registered above (game_data) and are NOT re-added here.
         MessageType::RequestPlayerDetails => {
             handlers::players::handle_request_player_details(serde_json::from_value(data)?, ctx)
                 .await
@@ -223,8 +212,6 @@ async fn route(
         MessageType::DeleteGuild => {
             handlers::guilds::handle_delete_guild(serde_json::from_value(data)?, ctx).await
         }
-        // Phase 2 (Task 14): save-file handlers. None of these four was
-        // previously registered — they all fell through to the catch-all.
         MessageType::UpdateSaveFile => {
             handlers::save_file::handle_update_save_file(serde_json::from_value(data)?, ctx).await
         }
@@ -235,7 +222,6 @@ async fn route(
         MessageType::RenameWorld => {
             handlers::save_file::handle_rename_world(serde_json::from_value(data)?, ctx).await
         }
-        // Task 3C-4: UPS pal CRUD.
         MessageType::GetUpsPals => {
             handlers::ups::handle_get_ups_pals(serde_json::from_value(data)?, ctx).await
         }
@@ -256,7 +242,6 @@ async fn route(
         }
         MessageType::GetUpsStats => handlers::ups::handle_get_ups_stats(ctx).await,
         MessageType::NukeUpsPals => handlers::ups::handle_nuke_ups_pals(ctx).await,
-        // Task 3C-5: UPS collection and tag handlers.
         MessageType::GetUpsCollections => handlers::ups::handle_get_ups_collections(ctx).await,
         MessageType::CreateUpsCollection => {
             handlers::ups::handle_create_ups_collection(serde_json::from_value(data)?, ctx).await
@@ -277,7 +262,6 @@ async fn route(
         MessageType::DeleteUpsTag => {
             handlers::ups::handle_delete_ups_tag(serde_json::from_value(data)?, ctx).await
         }
-        // Task 3C-6: UPS <-> save-session interop.
         MessageType::CloneToUps => {
             handlers::ups::handle_clone_to_ups(serde_json::from_value(data)?, ctx).await
         }
@@ -287,9 +271,7 @@ async fn route(
         MessageType::ExportUpsPal => {
             handlers::ups::handle_export_ups_pal(serde_json::from_value(data)?, ctx).await
         }
-        // Task 3D-2: GPS websocket handlers. NO arm for GetGpsPals -- a
-        // permanently dead wire type, see dispatcher::tests::
-        // valid_but_unimplemented_type_sends_nothing.
+        // GetGpsPals has no arm on purpose: it is a permanently dead wire type.
         MessageType::RequestGps => handlers::gps::handle_request_gps(ctx).await,
         MessageType::AddGpsPal => {
             handlers::gps::handle_add_gps_pal(serde_json::from_value(data)?, ctx).await
@@ -303,11 +285,9 @@ async fn route(
         MessageType::CloneGpsPalToPlayer => {
             handlers::gps::handle_clone_gps_pal_to_player(serde_json::from_value(data)?, ctx).await
         }
-        // Task 3E-1: standalone steam-id conversion tool.
         MessageType::ConvertSteamId => {
             handlers::tools::handle_convert_steam_id(serde_json::from_value(data)?, ctx).await
         }
-        // Task 3E-3: player transfer.
         MessageType::LoadSourceSave => {
             handlers::tools::handle_load_source_save(serde_json::from_value(data)?, ctx).await
         }
@@ -316,17 +296,14 @@ async fn route(
             handlers::tools::handle_transfer_player(serde_json::from_value(data)?, ctx).await
         }
         MessageType::UnloadSourceSave => handlers::tools::handle_unload_source_save(ctx).await,
-        // Task 3E-4: player uid swap.
         MessageType::SwapPlayerUids => {
             handlers::tools::handle_swap_player_uids(serde_json::from_value(data)?, ctx).await
         }
-        // Task 3E-5: raw-data inspector. NO arm for GetGuildRawData -- a
-        // permanently dead wire type, see
-        // valid_but_unimplemented_type_sends_nothing below.
+        // GetGuildRawData has no arm on purpose: it is a permanently dead wire
+        // type, pinned by valid_but_unimplemented_type_sends_nothing below.
         MessageType::GetRawData => {
             handlers::tools::handle_get_raw_data(serde_json::from_value(data)?, ctx).await
         }
-        // Phase 4 (Task 11): gamepass container scan / delete / rename.
         MessageType::ScanGamepassSaves => handlers::gamepass::handle_scan_gamepass_saves(ctx).await,
         MessageType::DeleteGamepassSave => {
             handlers::gamepass::handle_delete_gamepass_save(serde_json::from_value(data)?, ctx)
@@ -340,8 +317,6 @@ async fn route(
             handlers::gamepass::handle_rename_gamepass_world(serde_json::from_value(data)?, ctx)
                 .await
         }
-        // Phase 4 (Task 13): standalone/loaded save-format conversion, in-memory
-        // sav<->json conversion, and LocalData.sav map unlock.
         MessageType::ConvertSaveFormat => {
             handlers::gamepass::handle_convert_save_format(serde_json::from_value(data)?, ctx).await
         }
@@ -351,14 +326,12 @@ async fn route(
         MessageType::UnlockMap => {
             handlers::save_file::handle_unlock_map(serde_json::from_value(data)?, ctx).await
         }
-        // Phase 5 (Task 6): desktop folder/browser opening.
         MessageType::OpenFolder => {
             handlers::system::handle_open_folder(serde_json::from_value(data)?, ctx).await
         }
         MessageType::OpenInBrowser => {
             handlers::system::handle_open_in_browser(serde_json::from_value(data)?, ctx).await
         }
-        // Phase 6 (Task 11): server list/get/detect/stats.
         MessageType::ListServers => handlers::servers::handle_list_servers(data, ctx).await,
         MessageType::GetServer => {
             handlers::servers::handle_get_server(serde_json::from_value(data)?, ctx).await
@@ -369,7 +342,6 @@ async fn route(
         MessageType::GetServerStats => {
             handlers::servers::handle_get_server_stats(serde_json::from_value(data)?, ctx).await
         }
-        // Phase 6 (Task 12): server lifecycle create/update/delete/start/stop.
         MessageType::CreateServer => {
             handlers::servers::handle_create_server(serde_json::from_value(data)?, ctx).await
         }
@@ -385,7 +357,6 @@ async fn route(
         MessageType::StopServer => {
             handlers::servers::handle_stop_server(serde_json::from_value(data)?, ctx).await
         }
-        // Phase 6 (Task 13): server API proxy + mod management.
         MessageType::ServerApiCall => {
             handlers::servers::handle_server_api_call(serde_json::from_value(data)?, ctx).await
         }
@@ -398,21 +369,18 @@ async fn route(
         MessageType::InstallServerMod => {
             handlers::servers::handle_install_server_mod(serde_json::from_value(data)?, ctx).await
         }
-        // Phase 6 (Task 14): final server load-save handler. NO arm for
-        // ServerPlayerCount -- a permanently dead wire type, see
-        // dispatcher::tests::valid_but_unimplemented_type_sends_nothing.
+        // ServerPlayerCount has no arm on purpose: it is a permanently dead
+        // wire type.
         MessageType::LoadServerSave => {
             handlers::servers::handle_load_server_save(serde_json::from_value(data)?, ctx).await
         }
-        // Session persistence (SP-T2). session_not_found is emit-only, so it
-        // has no inbound arm.
+        // session_not_found is emit-only, so it has no inbound arm.
         MessageType::ReattachSession => {
             handlers::session::handle_reattach_session(serde_json::from_value(data)?, ctx).await
         }
         MessageType::EjectSession => {
             handlers::session::handle_eject_session(serde_json::from_value(data)?, ctx).await
         }
-        // Remaining arms are added by Phases 1-6.
         other => {
             tracing::warn!(
                 message_type = other.as_wire(),
@@ -454,8 +422,6 @@ mod tests {
 
     #[tokio::test]
     async fn unknown_type_sends_nothing() {
-        // ws/manager.py discards the dispatcher's {"error": ...} return value,
-        // so Python sends NOTHING for unknown types. We match that.
         let mut test = TestContext::new(|_| {}).await;
         dispatch(
             envelope("definitely_not_a_type", serde_json::Value::Null),
@@ -472,9 +438,7 @@ mod tests {
 
     #[tokio::test]
     async fn valid_but_unimplemented_type_sends_nothing() {
-        // get_guild_raw_data is a valid MessageType but is never routed — a
-        // permanently-dead wire type by design. This makes the silence test
-        // durable across all phases.
+        // get_guild_raw_data is a valid MessageType that is never routed.
         let mut test = TestContext::new(|_| {}).await;
         dispatch(
             envelope("get_guild_raw_data", serde_json::Value::Null),
@@ -545,15 +509,11 @@ mod tests {
         assert_eq!(test.next_frame_json()["type"], "get_settings");
     }
 
-    // The dispatch table (`route`'s `match`) is fixed, so `dispatch` itself can
-    // never be driven through a panicking handler from a test. `catch_handler_panic`
-    // is the extracted seam: exercise it directly with futures that panic in the
-    // exact ways a real handler could.
     #[tokio::test]
     async fn catch_handler_panic_converts_panics_into_error_frames() {
         // The default panic hook prints to stderr even though catch_unwind
-        // catches it. Silence it for the duration so test output stays
-        // pristine, and always restore it afterward via the guard's Drop impl.
+        // catches it. Silence it for the duration so test output stays clean;
+        // the guard's Drop restores it.
         let _hook_guard = PanicHookGuard(Some(std::panic::take_hook()));
         std::panic::set_hook(Box::new(|_| {}));
 

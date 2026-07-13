@@ -1,19 +1,9 @@
-//! Standalone conversion utilities (Task 3E-1), ported from
-//! `ws/handlers/steam_id_handler.py`. Unlike the other handler modules this
-//! one does not touch `ctx.session`/`ctx.app` at all -- `convert_steam_id` is
-//! a pure input->output tool available with no save file loaded.
-//!
-//! Task 3E-3 adds the player-transfer WS surface (`load_source_save`/
-//! `get_source_players`/`transfer_player`/`unload_source_save`), a port of
-//! `ws/handlers/transfer_handler.py`. Unlike `convert_steam_id`, these DO
-//! touch `ctx.session` (`source`/`transfer_target`, and `save` as the
-//! transfer_player fallback target) and reuse Phase-1/2's Steam-load and
-//! disk-write plumbing from `handlers::save_file` rather than reinventing it.
-//!
-//! Task 3E-4 adds `swap_player_uids`, a port of
-//! `ws/handlers/uid_swap_handler.py` over `psp_core::domain::uid_swap`.
-//! Unlike `transfer_player` (two distinct `SaveSession`s), this operates on
-//! the single main `ctx.session.save`.
+//! Standalone tools: `convert_steam_id` (a pure input->output tool that works
+//! with no save loaded), the player-transfer surface (`load_source_save` /
+//! `get_source_players` / `transfer_player` / `unload_source_save`, operating
+//! on `ctx.session.source` and `ctx.session.transfer_target`),
+//! `swap_player_uids` (operating on the main `ctx.session.save`), and the
+//! raw-data inspector.
 
 use std::path::PathBuf;
 
@@ -46,10 +36,8 @@ pub async fn handle_convert_steam_id(
                 "from_uid": true,
             }),
             // Near-unreachable: `is_palworld_uid` already validated `raw` as
-            // 32-hex / dashed-hex, and every such string parses as a UUID, so
-            // Python never actually hits `parse_palworld_uid`'s error path
-            // either. Kept only so the branch is total; the emitted text is not
-            // load-bearing (no Python fixture exercises it).
+            // 32-hex / dashed-hex, and every such string parses as a UUID.
+            // Present only to make the branch total.
             Err(error) => serde_json::json!({ "error": error.to_string() }),
         }
     } else {
@@ -61,22 +49,14 @@ pub async fn handle_convert_steam_id(
                     "nosteam_uid": sid::player_uid_to_nosteam(palworld_uid).to_uppercase(),
                 })
             }
-            // Emit the error's own message verbatim. For a non-numeric input
-            // this is Python's `int()` text ("invalid literal for int() with
-            // base 10: '<processed>'"); for a vanity URL it is the distinct
-            // VanityUrl message. steam_id_handler.py:39-42's `str(e) if str(e)
-            // else <generic>` fallback is dead code in real Python (`int()`'s
-            // ValueError message is never empty), so no generic remap here.
+            // The error's own message goes on the wire verbatim (a vanity URL
+            // and a malformed number are told apart by their text alone).
             Err(error) => serde_json::json!({ "error": error.to_string() }),
         }
     };
     ctx.emitter.emit(MessageType::ConvertSteamId, &payload);
     Ok(())
 }
-
-// ---------------------------------------------------------------------------
-// Player transfer (Task 3E-3) -- port of ws/handlers/transfer_handler.py.
-// ---------------------------------------------------------------------------
 
 fn default_role() -> String {
     "source".to_string()
@@ -111,34 +91,20 @@ pub struct TransferPlayerData {
     pub transfer_appearance: bool,
 }
 
-/// A save's player summaries, wire-shaped exactly like `get_player_summaries`
-/// (`handlers::save_file::emit_summary_messages` emits the same field
-/// directly) -- `SaveSession::player_summaries` is a plain `BTreeMap<Uuid,
-/// PlayerSummary>` field, not a method, so this just re-serializes it.
+/// A save's player summaries, wire-shaped exactly like `get_player_summaries`.
 fn summaries_json(save: &SaveSession) -> serde_json::Value {
     serde_json::to_value(&save.player_summaries).expect("player summaries always serialize")
 }
 
-/// Port of `transfer_handler.py::_load_steam_save`: resolves a directory-or-
-/// Level.sav `save_path` to its Steam save layout, reusing the EXACT same
-/// `FileManager.validate_steam_save_directory` / `get_player_save_paths`
-/// helpers `handle_select_save` uses (`handlers::save_file`) so a bad
-/// directory produces the identical error string `select_save` would. Returns
-/// `Err(message)` (not `HandlerError`) since every failure here becomes a
-/// SOFT `{"error": ...}` response, never the hard WS `error` frame -- see
-/// `handle_load_source_save`'s try/catch-shaped `match`.
+/// Resolves a directory-or-Level.sav `save_path` to its Steam layout, reusing
+/// `handlers::save_file`'s validation and discovery helpers so a bad directory
+/// produces the identical error string `select_save` would. Returns
+/// `Err(message)`, not `HandlerError`: every failure here becomes a SOFT
+/// `{"error": ...}` response, never the hard WS `error` frame.
 ///
-/// The caller emits its own `"Loading {label} Level.sav..."` progress frame
-/// (see `handle_load_source_save`) BEFORE the `SaveSession::load` below, and
-/// passes `emit_top_level_progress = false` to that load so it does NOT ALSO
-/// emit the generic `"Loading Level.sav..."` frame. This mirrors Python's
-/// transfer path exactly: `_load_steam_save` (transfer_handler.py:38) calls
-/// `SaveManager.load_sav_files` DIRECTLY, bypassing
-/// `AppState.process_save_files` -- the only place the generic frame lives
-/// (state.py:69). `select_save`/`load_zip` go through `process_save_files`
-/// and keep the generic frame (their sequence is Phase-1-parity-verified);
-/// emitting it here too would put ONE extra frame on the transfer wire that
-/// Python never sends.
+/// The caller emits its own `"Loading {label} Level.sav..."` progress frame, so
+/// the load below is told NOT to also emit the generic `"Loading Level.sav..."`
+/// one — that would put an extra frame on the transfer wire.
 fn load_steam_save_for_transfer(
     save_path: &str,
     label: &str,
@@ -187,9 +153,8 @@ fn load_steam_save_for_transfer(
         level_meta_bytes.as_deref(),
         player_file_refs,
         layout.global_pal_storage_sav.clone(),
-        // false: the transfer path bypasses process_save_files (see this
-        // function's doc comment); the "Loading {label} Level.sav..." frame
-        // above is the only leading frame Python's transfer path emits.
+        // The "Loading {label} Level.sav..." frame above is the only leading
+        // frame the transfer path emits; suppress the generic one.
         false,
         progress,
     )
@@ -198,12 +163,10 @@ fn load_steam_save_for_transfer(
     Ok((session, save_info))
 }
 
-/// Port of `load_source_save_handler`. `role` selects whether the loaded save
-/// becomes `ctx.session.source` (the default, "source") or a standalone
-/// `ctx.session.transfer_target` ("target"). Every failure -- unsupported
-/// type, no desktop window for `"__select__"`, or a load error -- responds
-/// with `{"error": ...}` on this same wire type, never the hard `error` frame
-/// (Python wraps the whole body in `try/except Exception`).
+/// `role` selects whether the loaded save becomes `ctx.session.source` (the
+/// default) or a standalone `ctx.session.transfer_target`. EVERY failure answers
+/// `{"error": ...}` under this same wire type, never the hard `error` frame —
+/// the transfer UI correlates both outcomes to this request.
 pub async fn handle_load_source_save(
     data: LoadSourceSaveData,
     ctx: &mut HandlerCtx<'_>,
@@ -216,9 +179,7 @@ pub async fn handle_load_source_save(
         return Ok(());
     }
     if data.path == "__select__" {
-        // `_prompt_folder` (transfer_handler.py:70-81): Phase 5 wires the
-        // native folder dialog behind desktop_mode. No desktop window exists
-        // yet, so this always takes Python's `if not window: raise` branch.
+        // "__select__" asks for a native folder dialog.
         ctx.emitter.emit(
             MessageType::LoadSourceSave,
             &serde_json::json!({"error": "Desktop mode required for file selection."}),
@@ -259,11 +220,9 @@ pub async fn handle_load_source_save(
     Ok(())
 }
 
-/// Port of `get_source_players_handler`: `source`/`target` each report their
-/// live `player_summaries` map (refreshed in place whenever a transfer
-/// mutates the underlying `SaveSession` -- `transfer_player` ends with
-/// `target.rebuild_player_caches()`, so no separate refresh step is needed
-/// here), or `{}` when that role has nothing loaded.
+/// `source` and `target` each report their live `player_summaries`, or `{}`
+/// when that role has nothing loaded — both keys are always present, so the
+/// frontend never has to null-check them.
 pub async fn handle_get_source_players(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let source = ctx
         .session
@@ -284,9 +243,9 @@ pub async fn handle_get_source_players(ctx: &mut HandlerCtx<'_>) -> Result<(), H
     Ok(())
 }
 
-/// `shutil.copytree(..., ignore=ignore_patterns("backups"))` equivalent
-/// (`transfer_handler.py:207-211`): recursively copies `from` into `to`,
-/// skipping any entry (file or directory) literally named `ignore_name`.
+/// Recursively copies `from` into `to`, skipping any entry (file or directory)
+/// literally named `ignore_name`, which keeps a backup dir out of its own
+/// backup.
 fn copy_dir_ignoring(
     from: &std::path::Path,
     to: &std::path::Path,
@@ -309,16 +268,13 @@ fn copy_dir_ignoring(
     Ok(())
 }
 
-/// Port of `transfer_player_handler`. Target resolution order matches Python
-/// exactly: `transfer_target` (a standalone-loaded save) first, falling back
-/// to the main `save` session -- `target_transfer_save or app_state.save_file`
-/// (`transfer_handler.py:157`). Missing target is checked BEFORE missing
-/// source, matching Python's check order. A successful transfer into a
-/// standalone target additionally auto-saves it to disk (no separate "save"
-/// button exists for it): backs up the target's save directory, then writes
-/// `Level.sav`/`LevelMeta.sav`/`Players/*.sav` via
-/// `handlers::save_file::write_transfer_target_save`, and extends the result
-/// with `saved_to`.
+/// Target resolution order: a standalone `transfer_target` first, falling back
+/// to the main `save` session. A missing target is reported BEFORE a missing
+/// source.
+///
+/// A successful transfer into a standalone target ALSO auto-saves it to disk
+/// (there is no separate "save" button for it): backup first, then write, then
+/// extend the result with `saved_to`.
 pub async fn handle_transfer_player(
     data: TransferPlayerData,
     ctx: &mut HandlerCtx<'_>,
@@ -381,8 +337,6 @@ pub async fn handle_transfer_player(
     };
 
     if succeeded && has_standalone_target {
-        // Auto-save the standalone target to disk -- it has no separate
-        // "save" button (transfer_handler.py:194-219).
         ctx.emitter.emit(
             MessageType::ProgressMessage,
             &"Saving modified target save to disk...",
@@ -392,9 +346,8 @@ pub async fn handle_transfer_player(
             .transfer_target
             .as_ref()
             .expect("checked Some above at the top of this handler");
-        // Python's `time.strftime` (no explicit tz) uses LOCAL time, matched
-        // here with `chrono::Local` -- same convention as the existing
-        // `backup_save_directory` helper this mirrors.
+        // Local time, matching `backup_save_directory`'s naming convention so
+        // both backup roots sort together for the user.
         let timestamp = chrono::Local::now().format("%Y-%m-%d-%H-%M-%S").to_string();
         let backup_path = target
             .save_info
@@ -418,8 +371,7 @@ pub async fn handle_transfer_player(
     Ok(())
 }
 
-/// Port of `unload_source_save_handler`: clears both the transfer source and
-/// any standalone transfer target.
+/// Clears both the transfer source and any standalone transfer target.
 pub async fn handle_unload_source_save(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     ctx.session.source = None;
     ctx.session.transfer_target = None;
@@ -430,26 +382,16 @@ pub async fn handle_unload_source_save(ctx: &mut HandlerCtx<'_>) -> Result<(), H
     Ok(())
 }
 
-// ---------------------------------------------------------------------------
-// Player UID swap (Task 3E-4) -- port of ws/handlers/uid_swap_handler.py.
-// ---------------------------------------------------------------------------
-
 #[derive(Debug, serde::Deserialize)]
 pub struct SwapPlayerUidsData {
     pub old_player_uid: Uuid,
     pub new_player_uid: Uuid,
 }
 
-/// Port of `uid_swap_handler.py`. No save loaded -> `{"error": "No save file
-/// loaded."}` on this SAME `swap_player_uids` wire type (a soft response,
-/// like every other rejection here -- never the hard WS `error` frame); a
-/// soft rejection from `SaveSession::swap_player_uids` (same player,
-/// missing player, invalid SaveData) -> `{"error": message}`; a genuine
-/// `CoreError` -> `{"error": error.to_string()}`; success -> `{"success":
-/// true}`. No separate summary-refresh step is needed here -- `
-/// swap_player_uids`'s own trailing `rebuild_player_caches()` call already
-/// recomputes `session.player_summaries`/`guild_summaries` in place, which
-/// `sync_app_state`/`get_player_summaries` read on demand.
+/// EVERY outcome answers under `swap_player_uids` — success as
+/// `{"success": true}`, any rejection as `{"error": message}`, never the hard
+/// WS `error` frame. `SaveSession::swap_player_uids` rebuilds the player caches
+/// itself, so no summary refresh is needed here.
 pub async fn handle_swap_player_uids(
     data: SwapPlayerUidsData,
     ctx: &mut HandlerCtx<'_>,
@@ -475,14 +417,6 @@ pub async fn handle_swap_player_uids(
     Ok(())
 }
 
-// ---------------------------------------------------------------------------
-// Raw-data inspector (Task 3E-5) -- port of ws/handlers/debug_handler.py's
-// get_raw_data_handler. get_guild_raw_data is a permanently dead wire type
-// (registered in the enum, never routed in bootstrap.py) and has NO handler
-// / dispatcher arm here either -- see dispatcher.rs's
-// valid_but_unimplemented_type_sends_nothing test.
-// ---------------------------------------------------------------------------
-
 #[derive(Debug, serde::Deserialize)]
 pub struct GetRawDataData {
     pub guild_id: Option<Uuid>,
@@ -495,14 +429,10 @@ pub struct GetRawDataData {
     pub level: bool,
 }
 
-/// Port of `get_raw_data_handler` (`debug_handler.py:10-44`): the six ids are
-/// tried in order (guild -> player -> pal -> base -> item_container ->
-/// character_container), falling back to `level` when none is set; no save
-/// loaded, an unresolved id, or none of the seven fields set all answer
-/// `{}` (Python's own `data = {}` default, never reassigned on that path) --
-/// see `psp_core::domain::RawTarget::raw_json_for`'s own doc comment for why
-/// this response is compared STRUCTURALLY, not value-exact, against Python's
-/// fixture (Contract deviation 6).
+/// The six ids are tried in order (guild -> player -> pal -> base ->
+/// item_container -> character_container), falling back to `level`. No save
+/// loaded, an unresolved id, or no field set at all each answer `{}` rather
+/// than an error.
 pub async fn handle_get_raw_data(
     data: GetRawDataData,
     ctx: &mut HandlerCtx<'_>,

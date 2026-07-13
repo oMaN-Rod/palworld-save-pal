@@ -1,6 +1,6 @@
-//! UE4SS / logic / native-DLL mod file management for Docker servers.
-//! Mirrors DockerService.list_mods / set_mod_enabled / install_mod /
-//! list_native_mods / install_native_mod (docker_service.py:263-378).
+//! UE4SS / logic / native-DLL mod file management for Docker servers. UE4SS
+//! discovers mods as subdirectories and reads their enabled state from
+//! `mods.txt`, one `<ModName> : <0|1>` line per mod.
 use std::io::Read;
 use std::path::Path;
 
@@ -8,7 +8,8 @@ use serde_json::Value;
 
 use super::ServiceError;
 
-/// Decode a base64 zip and extract it into `destination` (created if needed).
+/// Decodes a base64 zip and extracts it into `destination`. Entries whose paths
+/// escape the destination (zip-slip) are skipped, since the archive is untrusted.
 pub fn extract_base64_zip(mod_zip_b64: &str, destination: &Path) -> Result<(), ServiceError> {
     use base64::Engine;
     let zip_bytes = base64::engine::general_purpose::STANDARD
@@ -94,8 +95,7 @@ pub fn set_mod_enabled(mods_path: &str, mod_name: &str, enabled: bool) -> std::i
     std::fs::write(&mods_txt, lines.join("\n") + "\n")
 }
 
-/// DockerService.install_mod: extract into <target>/<mod_name>/ and enable in
-/// <target>/mods.txt (yes, even for logic mods — Python quirk kept for parity).
+/// Extracts into `<target>/<mod_name>/` and enables it in `<target>/mods.txt`.
 pub fn install_zip_mod(target_path: &str, mod_name: &str, mod_zip_b64: &str) -> bool {
     let mod_dir = Path::new(target_path).join(mod_name);
     if extract_base64_zip(mod_zip_b64, &mod_dir).is_err() {

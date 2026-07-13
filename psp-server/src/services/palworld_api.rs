@@ -1,6 +1,7 @@
-//! Palworld dedicated-server REST API proxy. Mirrors DockerService.rest_api_call
-//! (docker_service.py:218-258): http://{host}:{port}/v1/api/{endpoint}, basic auth
-//! "admin":{admin_password}, 10 s timeout.
+//! Palworld dedicated-server REST API client. The server exposes plain HTTP at
+//! `http://{host}:{port}/v1/api/{endpoint}` and authenticates with HTTP basic
+//! auth whose user is always the literal "admin" and whose password is the
+//! server's AdminPassword.
 use serde_json::Value;
 
 use super::ServiceError;
@@ -25,6 +26,10 @@ impl PalworldApiClient {
         Self { http }
     }
 
+    /// Some endpoints answer with bare text ("OK") rather than JSON, so the body
+    /// is only parsed as JSON when the content type says so. A non-2xx response is
+    /// still `Ok`, carrying its `status_code` for the caller to inspect; `Err` is
+    /// reserved for transport failures.
     pub async fn rest_api_call(
         &self,
         host: &str,

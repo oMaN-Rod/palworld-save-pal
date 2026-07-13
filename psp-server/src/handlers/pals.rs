@@ -1,7 +1,4 @@
-//! Pal-management WS handlers — ports of
-//! `palworld_save_pal/ws/handlers/pal_handler.py`. `get_pals` is NOT here
-//! (it is already implemented + registered in `handlers::game_data`); this
-//! module covers only the genuinely-new Phase-2 pal message types.
+//! Pal-management WS handlers. (`get_pals` lives in `handlers::game_data`.)
 
 use serde::Deserialize;
 use serde_json::json;
@@ -13,8 +10,7 @@ use crate::dispatcher::HandlerCtx;
 use crate::handler_error::HandlerError;
 use crate::messages::MessageType;
 
-/// ws/messages.py:176-183 AddPalData. Reused by both `add_pal` and
-/// `add_dps_pal` (ws/messages.py:191-193 `AddDpsPalMessage.data: AddPalData`).
+/// Shared by both the `add_pal` and `add_dps_pal` messages.
 #[derive(Debug, Deserialize)]
 pub struct AddPalData {
     #[serde(default)]
@@ -31,7 +27,6 @@ pub struct AddPalData {
     pub storage_slot: Option<i32>,
 }
 
-/// ws/messages.py:196-199 MovePalData.
 #[derive(Debug, Deserialize)]
 pub struct MovePalData {
     pub player_id: uuid::Uuid,
@@ -39,7 +34,6 @@ pub struct MovePalData {
     pub container_id: uuid::Uuid,
 }
 
-/// ws/messages.py:207-210 ClonePalData.
 #[derive(Debug, Deserialize)]
 pub struct ClonePalData {
     pub pal: PalDto,
@@ -49,8 +43,7 @@ pub struct ClonePalData {
     pub base_id: Option<uuid::Uuid>,
 }
 
-/// ws/messages.py:243-248 DeletePalsData. Reused by `delete_dps_pals`
-/// (ws/messages.py:256-258).
+/// Shared by both the `delete_pals` and `delete_dps_pals` messages.
 #[derive(Debug, Deserialize)]
 pub struct DeletePalsData {
     #[serde(default)]
@@ -65,7 +58,6 @@ pub struct DeletePalsData {
     pub base_id: Option<uuid::Uuid>,
 }
 
-/// ws/messages.py:398-401 HealAllPalData.
 #[derive(Debug, Deserialize)]
 pub struct HealAllPalData {
     #[serde(default)]
@@ -76,9 +68,9 @@ pub struct HealAllPalData {
     pub base_id: Option<uuid::Uuid>,
 }
 
-/// get_pal_summaries_handler (pal_handler.py:53-64): no save → the
-/// plain-object `{"error": "No save file loaded"}` payload (NOT the dispatcher's
-/// `{message, trace}` error frame).
+/// With no save loaded, answers under `get_pal_summaries` with
+/// `{"error": ...}` rather than an `error` frame — the frontend correlates the
+/// failure to this request by message type.
 pub async fn handle_get_pal_summaries(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let Some(session) = ctx.session.save.as_ref() else {
         ctx.emitter.emit(
@@ -93,10 +85,7 @@ pub async fn handle_get_pal_summaries(ctx: &mut HandlerCtx<'_>) -> Result<(), Ha
     Ok(())
 }
 
-/// add_pal_handler (pal_handler.py:67-109). No save → `warning` "No save file
-/// loaded" (a plain string). Neither id → `warning` "No player_id or guild_id
-/// provided". Player path takes precedence over guild path, matching Python's
-/// `if player_id: ... elif guild_id: ...`.
+/// `player_id` takes precedence over `guild_id` when both are present.
 pub async fn handle_add_pal(
     data: AddPalData,
     ctx: &mut HandlerCtx<'_>,
@@ -107,9 +96,6 @@ pub async fn handle_add_pal(
         return Ok(());
     };
     if let Some(player_id) = data.player_id {
-        // Python passes container_id straight through; add_player_pal itself
-        // resolves the mutation target and writes the raw id (see its doc
-        // comment). A missing container_id is a real Python `None` there.
         let container_id = data.container_id.ok_or_else(|| {
             HandlerError::Other("container_id required for player add".to_string())
         })?;
@@ -150,11 +136,8 @@ pub async fn handle_add_pal(
     Ok(())
 }
 
-/// add_dps_pal_handler (pal_handler.py:112-127). Python only builds a response
-/// when `player_id` is set (else `data` is undefined → NameError → dispatcher
-/// error frame); reproduced as an `Err` for a missing id. A `None` result
-/// (container full — Python would `TypeError` unpacking it) emits nothing, per
-/// this port's graceful policy documented on `add_player_dps_pal`.
+/// A full DPS container emits NO response frame at all; only a missing
+/// `player_id` is an error.
 pub async fn handle_add_dps_pal(
     data: AddPalData,
     ctx: &mut HandlerCtx<'_>,
@@ -180,9 +163,8 @@ pub async fn handle_add_dps_pal(
     Ok(())
 }
 
-/// clone_pal_handler (pal_handler.py:151-171). Guild path → `add_pal`
-/// `{guild_id, base_id, pal}`; player path → `add_pal`
-/// `{player_id: pal.owner_uid or None, pal}`.
+/// Both branches answer under `add_pal` (not `clone_pal`): the frontend
+/// inserts the new pal off the same message it uses for a fresh add.
 pub async fn handle_clone_pal(
     data: ClonePalData,
     ctx: &mut HandlerCtx<'_>,
@@ -208,9 +190,8 @@ pub async fn handle_clone_pal(
     Ok(())
 }
 
-/// clone_dps_pal_handler (pal_handler.py:174-196). A `None` result →
-/// `add_dps_pal` `{"error": ...}`; success → `add_dps_pal`
-/// `{player_id: pal.owner_uid or None, pal, index}`.
+/// Answers under `add_dps_pal` (not `clone_dps_pal`) on both the success and
+/// the failure branch.
 pub async fn handle_clone_dps_pal(
     data: ClonePalData,
     ctx: &mut HandlerCtx<'_>,
@@ -233,13 +214,9 @@ pub async fn handle_clone_dps_pal(
     Ok(())
 }
 
-/// delete_pals_handler (pal_handler.py:199-222). Emits NO `delete_pals`
-/// response: it refreshes both summary maps and emits `get_player_summaries`
-/// then `get_guild_summaries`, in that order. Python does this silently via
-/// `get_player_summaries()`/`get_guild_summaries()` (no progress callback),
-/// so the refresh here uses `null_progress` — reusing `extract_summaries`
-/// with the connection's progress sink would inject spurious
-/// `progress_message` frames and break frame-order parity.
+/// Emits NO `delete_pals` response. Instead it rebuilds both summary maps and
+/// emits `get_player_summaries` then `get_guild_summaries`, in that order —
+/// the frontend refreshes its lists off those two frames.
 pub async fn handle_delete_pals(
     data: DeletePalsData,
     ctx: &mut HandlerCtx<'_>,
@@ -255,14 +232,15 @@ pub async fn handle_delete_pals(
             .ok_or_else(|| HandlerError::Other("base_id required".to_string()))?;
         pal::delete_guild_pals(session, guild_id, base_id, &pal_ids)?;
     }
-    // Rebuild both summary maps from the post-delete world tree, silently
-    // (matching Python's non-callback recompute), then emit them in order.
+    // `null_progress`, not the connection's sink: a progress sink here would
+    // inject `progress_message` frames the frontend does not expect on a
+    // delete.
     psp_core::domain::summaries::extract_summaries(session, &psp_core::progress::null_progress())?;
     crate::handlers::save_file::emit_summary_messages(session, ctx.emitter);
     Ok(())
 }
 
-/// delete_dps_pals_handler (pal_handler.py:225-230): no response.
+/// Emits no response frame.
 pub async fn handle_delete_dps_pals(
     data: DeletePalsData,
     ctx: &mut HandlerCtx<'_>,
@@ -276,9 +254,8 @@ pub async fn handle_delete_dps_pals(
     Ok(())
 }
 
-/// move_pal_handler (pal_handler.py:130-148). Success → `move_pal` with every
-/// id as a STRING; a `None` (container full) → `warning` "Pal container is
-/// full".
+/// On success the `move_pal` payload carries every id as a STRING; a full
+/// destination container answers with a `warning` frame instead.
 pub async fn handle_move_pal(
     data: MovePalData,
     ctx: &mut HandlerCtx<'_>,
@@ -309,8 +286,7 @@ pub async fn handle_move_pal(
     Ok(())
 }
 
-/// heal_pals_handler (pal_handler.py:233-237): `data` is a bare UUID list, no
-/// response.
+/// `data` is a bare UUID list; emits no response frame.
 pub async fn handle_heal_pals(
     data: Vec<uuid::Uuid>,
     ctx: &mut HandlerCtx<'_>,
@@ -320,7 +296,7 @@ pub async fn handle_heal_pals(
     Ok(())
 }
 
-/// heal_all_pals_handler (pal_handler.py:240-249): no response.
+/// Emits no response frame.
 pub async fn handle_heal_all_pals(
     data: HealAllPalData,
     ctx: &mut HandlerCtx<'_>,

@@ -1,6 +1,5 @@
-//! Docker server lifecycle. Mirrors DockerService (docker_service.py).
-//! Pure builders + JSON transforms here; the DockerApi trait and bollard
-//! implementation live in this file too (Task 5).
+//! Docker server lifecycle: container spec builders, Engine-API JSON transforms,
+//! and the `DockerApi` trait with its bollard implementation.
 use psp_db::servers::ServerRecord;
 use serde_json::Value;
 
@@ -31,8 +30,8 @@ fn upsert_env(env: &mut Vec<(String, String)>, key: &str, value: String) {
     }
 }
 
-/// build_environment (docker_service.py:383-403): user env_vars first (Python str()
-/// semantics), explicit server fields override, SERVER_PASSWORD only when non-empty.
+/// User-supplied `env_vars` come first; the explicit server fields below always
+/// override them.
 pub fn build_environment(record: &ServerRecord) -> Vec<String> {
     let mut env: Vec<(String, String)> = record
         .env_vars
@@ -102,8 +101,8 @@ pub fn container_spec(record: &ServerRecord) -> ContainerSpec {
     }
 }
 
-/// get_container_status success path (docker_service.py:116-128): container.status is
-/// State.Status; health only when a Health block exists.
+/// Docker only emits `State.Health` for images that declare a HEALTHCHECK, so an
+/// absent block means "unknown", not "unhealthy".
 pub fn status_from_inspect(inspect: &Value) -> ServerProcessStatus {
     let state = inspect.get("State").cloned().unwrap_or(Value::Null);
     ServerProcessStatus {
@@ -128,8 +127,8 @@ pub fn status_from_inspect(inspect: &Value) -> ServerProcessStatus {
     }
 }
 
-/// get_container_stats math (docker_service.py:148-187). Required fields missing
-/// (Python KeyError) → None; .get() fields default like Python.
+/// CPU percent needs both the current and previous sample; the very first stats
+/// sample after a container starts has no `precpu_stats`, hence `None`.
 pub fn stats_from_raw(raw_stats: &Value) -> Option<Value> {
     let cpu_total = raw_stats
         .pointer("/cpu_stats/cpu_usage/total_usage")?
@@ -229,7 +228,8 @@ pub trait DockerApi: Send + Sync {
     ) -> Result<Option<Value>, ServiceError>;
 }
 
-/// DockerService.create_server: pull image if missing, create host dirs, create+start.
+/// The bind-mount host directories must exist before the container starts, or
+/// Docker creates them root-owned.
 pub async fn create_server_container(
     api: &dyn DockerApi,
     record: &ServerRecord,
@@ -254,15 +254,9 @@ pub async fn stop_server_container(api: &dyn DockerApi, container_name: &str) ->
     api.stop_container(container_name, 30).await.is_ok()
 }
 
-/// Python DockerService.remove_server: the container removal and the
-/// (optional) volume removal are both inside a single try/except that only
-/// swallows a volume `NotFound` — any other volume-removal error (an
-/// `APIError`) falls through to the outer `except (NotFound, APIError):
-/// return False` just like a container-removal failure does. The
-/// `DockerApi::remove_volume` implementations already fold "volume not
-/// found" into `Ok(())` (see `BollardDocker::remove_volume` /
-/// `MockDocker::remove_volume`), so any `Err` reaching here is a genuine
-/// removal failure and must flip the return value to `false`.
+/// `DockerApi::remove_volume` folds "volume not found" into `Ok(())`, so any
+/// `Err` here is a genuine removal failure and must report `false` even though
+/// the container itself was already removed.
 pub async fn remove_server_container(
     api: &dyn DockerApi,
     container_name: &str,
@@ -282,7 +276,8 @@ pub async fn remove_server_container(
     }
 }
 
-/// Python get_container_status: NotFound -> not_found dict, other errors -> None.
+/// A missing container is a `not_found` status; `None` means Docker itself could
+/// not be reached.
 pub async fn container_status(
     api: &dyn DockerApi,
     container_name: &str,
@@ -294,7 +289,7 @@ pub async fn container_status(
     }
 }
 
-/// Python get_container_stats: None unless the container is running; all errors -> None.
+/// Stats are only meaningful for a running container; a stopped one reports zeros.
 pub async fn container_stats(api: &dyn DockerApi, container_name: &str) -> Option<Value> {
     let inspect = api.inspect_container(container_name).await.ok()??;
     if status_from_inspect(&inspect).status != "running" {
@@ -330,12 +325,10 @@ fn docker_err(error: bollard::errors::Error) -> ServiceError {
     ServiceError::Docker(error.to_string())
 }
 
-// NOTE: bollard 0.18.1 (the version actually resolved by Cargo.lock) still uses the
-// older per-call *Options structs living in bollard::container / bollard::image /
-// bollard::volume, and the create-container body is bollard::container::Config (not
-// bollard::query_parameters / bollard::models::ContainerCreateBody as newer bollard
-// releases use). Verified against the vendored source under
-// ~/.cargo/registry/src/.../bollard-0.18.1.
+// bollard 0.18 keeps the per-call `*Options` structs in bollard::container /
+// ::image / ::volume, and the create-container body is bollard::container::Config
+// — newer bollard releases move these to bollard::query_parameters and
+// bollard::models::ContainerCreateBody, so upgrading requires rewriting the calls.
 #[async_trait::async_trait]
 impl DockerApi for BollardDocker {
     async fn ensure_image(&self, image_name: &str) -> Result<(), ServiceError> {
@@ -471,10 +464,9 @@ impl DockerApi for BollardDocker {
         container_name: &str,
     ) -> Result<Option<Value>, ServiceError> {
         use futures_util::StreamExt;
-        // Python's docker-py container.stats(stream=False) leaves the Engine API's
-        // one-shot flag at its default (false), which makes dockerd wait for a real
-        // second sample so cpu_stats/precpu_stats both carry usable deltas. Setting
-        // one_shot=true here would return a single degenerate sample and break parity.
+        // one_shot must stay false: dockerd then waits for a real second sample, so
+        // cpu_stats/precpu_stats both carry usable deltas. With one_shot=true the
+        // single returned sample has an empty precpu_stats and CPU percent is always 0.
         let options = bollard::container::StatsOptions {
             stream: false,
             one_shot: false,
@@ -493,9 +485,8 @@ impl DockerApi for BollardDocker {
     }
 }
 
-/// Scripted in-memory DockerApi for handler and orchestration tests.
-/// Lives in src (not cfg(test)) so handler tests in other modules can inject it
-/// into AppState.
+/// Scripted in-memory DockerApi. Lives outside `cfg(test)` so handler tests in
+/// other modules can inject it into AppState.
 pub mod mock {
     use std::collections::{HashMap, HashSet};
     use std::sync::Mutex;
@@ -511,14 +502,13 @@ pub mod mock {
         pub statuses: Mutex<HashMap<String, Value>>,
         /// container_name -> raw stats JSON
         pub stats: Mutex<HashMap<String, Value>>,
-        /// ordered call log: "ensure_image:x", "create_and_start:x", "start:x", ...
+        /// Ordered call log: "ensure_image:x", "create_and_start:x", "start:x", ...
         pub calls: Mutex<Vec<String>>,
         pub fail_start: Mutex<HashSet<String>>,
         pub fail_stop: Mutex<HashSet<String>>,
         pub fail_inspect: Mutex<HashSet<String>>,
-        /// Volume names (bare, e.g. "psp-alpha-data") whose removal should
-        /// fail with a non-NotFound error — exercises the
-        /// remove_server_container parity path (see docker.rs tests).
+        /// Bare volume names (e.g. "psp-alpha-data") whose removal fails with a
+        /// non-NotFound error.
         pub fail_remove_volume: Mutex<HashSet<String>>,
     }
 
@@ -819,8 +809,7 @@ mod tests {
 
     #[test]
     fn stats_from_raw_returns_none_when_required_cpu_fields_missing() {
-        // First stats sample after start lacks precpu system_cpu_usage — Python's
-        // KeyError path returns None.
+        // The first stats sample after start lacks precpu system_cpu_usage.
         let raw = serde_json::json!({
             "cpu_stats": {"cpu_usage": {"total_usage": 1u64}},
             "precpu_stats": {"cpu_usage": {"total_usage": 0u64}}
@@ -876,7 +865,6 @@ mod tests {
     #[tokio::test]
     async fn container_stats_requires_running_container() {
         let api = mock::MockDocker::default();
-        // Not found -> None
         assert!(container_stats(&api, "ghost").await.is_none());
         // Exited container -> None even when stats exist
         api.statuses.lock().unwrap().insert(
@@ -905,10 +893,6 @@ mod tests {
 
     #[tokio::test]
     async fn remove_server_container_returns_false_when_volume_removal_fails() {
-        // Python parity: DockerService.remove_server only swallows a volume
-        // NotFound; any other volume-removal error (APIError) falls through
-        // to the outer except and the call returns False, even though the
-        // container itself was already removed.
         let api = mock::MockDocker::default();
         api.statuses.lock().unwrap().insert(
             "alpha".to_string(),

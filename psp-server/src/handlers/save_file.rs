@@ -1,17 +1,9 @@
-//! select_save / load_zip_file — ports of
-//! palworld_save_pal/ws/handlers/local_file_handler.py::process_steam_save
-//! and palworld_save_pal/ws/handlers/save_file_handler.py::load_zip_file_handler.
+//! Save-file load/write handlers: select_save, load_zip_file,
+//! update_save_file, download_save_file, save_modded_save, rename_world,
+//! convert_sav_file, unlock_map.
 //!
-//! `select_save`'s desktop-native-file-dialog / "no file selected" branch is
-//! a port of `desktop.py:93-117` (`handle_file_selection`) + `desktop.py:
-//! 129-138` (the `select_save` interception). In Python it lives entirely in
-//! `desktop.py`'s own separate `/ws/{client_id}` endpoint, which intercepts a
-//! `select_save` message, drives a native OS file picker, and only forwards
-//! the (path-rewritten) message into the normal dispatcher when a file was
-//! actually chosen -- otherwise it responds `no_file_selected` itself and
-//! never calls `select_save_files_handler` at all. Here that same behavior
-//! lives directly at the top of `handle_select_save`, gated on
-//! `ctx.app.config.desktop_mode`.
+//! In desktop mode `handle_select_save` drives a native file picker up front:
+//! a cancelled pick answers `no_file_selected` and loads nothing.
 
 use std::collections::BTreeMap;
 use std::io::{Read, Write};
@@ -37,13 +29,10 @@ use crate::messages::MessageType;
 #[derive(Debug, serde::Deserialize)]
 pub struct SelectSaveData {
     pub r#type: String,
-    /// Required in web mode (the frontend always sends it there); absent in
-    /// desktop mode, where the frontend omits it and `handle_select_save`
-    /// resolves it via a native file dialog instead (`ui/src/routes/file/
-    /// +page.svelte:40-43`, `desktop.py:129-138`).
+    /// Required in web mode; absent in desktop mode, where the frontend omits
+    /// it and `handle_select_save` resolves it via a native file dialog.
     pub path: Option<String>,
-    /// Wire-compat only: Python threads `local` through to `AppState.local`,
-    /// which only affects the write path (later phases). Unused here.
+    /// Accepted for wire compatibility; not read.
     #[allow(dead_code)]
     pub local: bool,
 }
@@ -56,16 +45,16 @@ pub(crate) struct LoadedSaveFilesData {
     r#type: &'static str,
     size: u64,
     has_gps: bool,
-    /// Feature-only addition (not in the Python parity contract): the id the
-    /// session was registered under, so the frontend can reattach after a
-    /// refresh. Last, so existing key order is unchanged.
+    /// The id the session was registered under, so the frontend can reattach
+    /// after a refresh.
     session_id: String,
 }
 
 impl LoadedSaveFilesData {
     /// Rebuilds the load overview from an already-parsed session, for
-    /// `reattach_session` (SP-T2). `level`/`players` mirror `sync_app_state`'s
-    /// derivation (save id + summary order), the only values a reattach has.
+    /// `reattach_session`. `level`/`players` are derived the way
+    /// `sync_app_state` derives them (save id + summary order) — the only
+    /// values a reattach has.
     pub(crate) fn from_session(session: &SaveSession, session_id: Uuid) -> Self {
         Self {
             level: session.save_id.clone(),
@@ -84,8 +73,7 @@ impl LoadedSaveFilesData {
 }
 
 /// Emits the load overview (`loaded_save_files` + both summaries) for a
-/// reattached session — the tail of a fresh load, read from an existing
-/// in-memory session. Shared by `reattach_session` (SP-T2).
+/// reattached session — the same tail a fresh load emits.
 pub(crate) fn emit_reattach_overview(session: &SaveSession, session_id: Uuid, emitter: &Emitter) {
     emitter.emit(
         MessageType::LoadedSaveFiles,
@@ -94,23 +82,16 @@ pub(crate) fn emit_reattach_overview(session: &SaveSession, session_id: Uuid, em
     emit_summary_messages(session, emitter);
 }
 
-/// Shared by select_save, load_zip_file and sync_app_state's save branch:
-/// get_player_summaries then get_guild_summaries, in that order, every time
-/// a load completes.
+/// `get_player_summaries` then `get_guild_summaries`, in that order, every time
+/// a load completes — the frontend relies on both arriving, and on the order.
 pub(crate) fn emit_summary_messages(session: &SaveSession, emitter: &Emitter) {
     emitter.emit(MessageType::GetPlayerSummaries, &session.player_summaries);
     emitter.emit(MessageType::GetGuildSummaries, &session.guild_summaries);
 }
 
-/// A `Players/*.sav` or `Players/*_dps.sav` file stem, split into its player
-/// id and whether it's the "_dps" companion file. Shared by the Steam
-/// directory scan (`discover_player_file_refs`) and the zip-upload scan
-/// (`handle_load_zip_file`) -- both mirror the same Python logic
-/// (`"_dps" in player_id`, `uuid.UUID(player_id)`) in
-/// `FileManager.get_player_save_paths` and `load_zip_file_handler`
-/// respectively. Returns `None` for anything that doesn't parse as a UUID
-/// once "_dps" is stripped, matching Python's blanket `except: continue` /
-/// `except ValueError: continue`.
+/// A `Players/*.sav` or `Players/*_dps.sav` file stem, split into its player id
+/// and whether it's the "_dps" companion file. `None` for anything that doesn't
+/// parse as a UUID once "_dps" is stripped; callers skip those.
 fn parse_player_file_stem(stem: &str) -> Option<(Uuid, bool)> {
     let is_dps = stem.contains("_dps");
     stem.replace("_dps", "")
@@ -119,12 +100,9 @@ fn parse_player_file_stem(stem: &str) -> Option<(Uuid, bool)> {
         .map(|uid| (uid, is_dps))
 }
 
-/// `pub(crate)` (not just module-private): Task 3E-3's `load_source_save`
-/// handler (`handlers/tools.rs`) reuses this same layout, and Python's own
-/// `_load_steam_save` (`transfer_handler.py:23-67`) reuses the identical
-/// `FileManager.validate_steam_save_directory` this ports -- so the transfer
-/// handler must call the exact same validation, not a re-implementation with
-/// its own (necessarily divergent) error strings.
+/// `pub(crate)` so `handlers::tools`'s `load_source_save` reuses this exact
+/// layout and validation rather than re-implementing it with its own,
+/// necessarily divergent, error strings.
 #[derive(Debug)]
 pub(crate) struct SteamSaveLayout {
     pub(crate) level_sav: PathBuf,
@@ -133,10 +111,8 @@ pub(crate) struct SteamSaveLayout {
     pub(crate) global_pal_storage_sav: Option<PathBuf>,
 }
 
-/// Port of `FileManager.validate_steam_save_directory` -- error strings and
-/// check order are wire-visible and must match exactly. `pub(crate)`: shared
-/// with `handlers/tools.rs::handle_load_source_save`, see `SteamSaveLayout`'s
-/// doc comment.
+/// Error strings AND check order are wire-visible: the frontend shows the first
+/// failure it gets back, so a reordering changes what the user is told.
 pub(crate) fn validate_steam_save_directory(
     save_path: &str,
 ) -> Result<SteamSaveLayout, HandlerError> {
@@ -190,19 +166,11 @@ pub(crate) fn validate_steam_save_directory(
     })
 }
 
-/// Port of `FileManager.get_player_save_paths`: every `Players/*.sav`, its
-/// "_dps" companion folded into the same map entry, invalid names skipped
-/// (logged, matching Python's blanket `except:` continue). Returns both the
-/// pairing map -- a `BTreeMap`, kept because `SaveSession::player_file_refs`
-/// is contract-bound to that type and Phases 2-4 depend on it -- and the
-/// order in which players were first encountered while scanning the
-/// directory. Python's `player_save_paths` is a plain dict built by
-/// iterating `players_path.glob("*.sav")`, and
-/// `process_steam_save`'s `[str(p) for p in player_file_refs]` reflects that
-/// glob/filesystem *encounter* order, not a UUID sort. The discovery order
-/// returned here is what `handle_select_save` uses to build the wire
-/// `players` array to match it -- the sorted map is additional information
-/// layered on top, not a substitute for it.
+/// Every `Players/*.sav`, its "_dps" companion folded into the same map entry,
+/// invalid names logged and skipped. Returns BOTH the pairing map (uuid-sorted,
+/// the type `SaveSession::player_file_refs` requires) and the order in which
+/// players were first encountered — `handle_select_save` builds the wire
+/// `players` array from the discovery order, NOT from the sorted map.
 pub(crate) fn discover_player_file_refs(
     players_dir: &Path,
 ) -> Result<(BTreeMap<Uuid, PlayerFileData>, Vec<Uuid>), HandlerError> {
@@ -213,14 +181,10 @@ pub(crate) fn discover_player_file_refs(
     Ok(collect_player_file_refs(paths))
 }
 
-/// Pure core of `discover_player_file_refs`, factored out so the
-/// discovery-order guarantee can be unit-tested against a hand-constructed,
-/// deliberately non-UUID-ascending sequence of paths -- `std::fs::read_dir`'s
-/// enumeration order is platform-specific (on NTFS it is typically
-/// name-sorted, which for UUID-named files coincides with UUID-ascending
-/// order and so cannot be relied on to expose a regression to sorted order;
-/// see `test_collect_player_file_refs_preserves_a_non_sorted_discovery_order`
-/// below, which does not depend on filesystem behavior at all).
+/// Pure core of `discover_player_file_refs`, split out so the discovery-order
+/// guarantee can be tested against a deliberately non-UUID-ascending path
+/// sequence: `std::fs::read_dir` is name-sorted on NTFS, which for UUID-named
+/// files coincides with UUID-ascending order and would hide a resort.
 fn collect_player_file_refs<I>(paths: I) -> (BTreeMap<Uuid, PlayerFileData>, Vec<Uuid>)
 where
     I: IntoIterator<Item = PathBuf>,
@@ -261,15 +225,11 @@ where
     (player_file_refs, discovery_order)
 }
 
-/// Gamepass branch of `select_save` — port of `get_gamepass_saves`
-/// (`local_file_handler.py:238-252`) + `FileManager.validate_gamepass_directory`
-/// (`file_manager.py:394-413`). The two failure payloads are `error` frames
-/// whose data is a PLAIN STRING (not the `{message, trace}` shape the
-/// dispatcher emits for a raised `HandlerError`), matching Python's
-/// `build_response(ERROR, validation.error)`. On success emits a
-/// `select_gamepass_save` frame whose data IS the saves map
-/// (`{<save_id>: GamepassSaveData}`) — NOT the `{"saves": ...}` wrapper that
-/// only `scan_gamepass_saves` uses.
+/// Gamepass branch of `select_save`. The two failure payloads are `error`
+/// frames whose data is a PLAIN STRING, not the `{message, trace}` shape the
+/// dispatcher emits for a raised `HandlerError`. On success the
+/// `select_gamepass_save` data IS the saves map (`{<save_id>: GamepassSaveData}`)
+/// — NOT the `{"saves": ...}` wrapper that only `scan_gamepass_saves` uses.
 pub(crate) async fn select_gamepass_directory(
     index_file_path: &str,
     ctx: &mut HandlerCtx<'_>,
@@ -294,7 +254,7 @@ pub(crate) async fn select_gamepass_directory(
         return Ok(());
     }
     // Cache the discovered saves so `select_gamepass_save` can resolve the
-    // selected save's metadata later (Python: `app_state.gamepass_saves = ...`).
+    // selected save's metadata later.
     ctx.session.gamepass_saves = saves
         .iter()
         .map(|(save_id, save_data)| (save_id.clone(), save_data.clone()))
@@ -303,10 +263,10 @@ pub(crate) async fn select_gamepass_directory(
     Ok(())
 }
 
-/// Desktop-mode dialog flow shared by select_save and unlock_map
-/// (port of desktop.py:93-117 handle_file_selection).
-/// Ok(Some(path)) = picked+valid; Ok(None) = canceled (no_file_selected
-/// already emitted, caller returns Ok); Err = invalid pick (dispatcher emits `error`).
+/// Desktop-mode dialog flow shared by select_save and unlock_map.
+/// `Ok(Some(path))` = picked and valid; `Ok(None)` = cancelled (`no_file_selected`
+/// already emitted, caller just returns); `Err` = invalid pick (the dispatcher
+/// emits `error`).
 async fn pick_save_file_via_dialog(
     save_type: &str,
     ctx: &mut HandlerCtx<'_>,
@@ -337,7 +297,8 @@ pub async fn handle_select_save(
             return Ok(()); // canceled; no_file_selected already emitted
         };
         if let Some(parent_dir) = selected.parent() {
-            // Persist BEFORE loading, matching desktop.py:136.
+            // Persist BEFORE loading: a load failure must not lose the dir the
+            // user just picked.
             psp_db::settings::update_save_dir(&ctx.app.db, &parent_dir.to_string_lossy()).await?;
         }
         resolved_path = Some(selected.to_string_lossy().into_owned());
@@ -346,8 +307,7 @@ pub async fn handle_select_save(
         .ok_or_else(|| HandlerError::Other("select_save requires a path".to_string()))?;
 
     if data.r#type != "steam" {
-        // Python's `select_save_files_handler` routes every non-"steam"
-        // save_type to `get_gamepass_saves` (local_file_handler.py:238-252).
+        // Every non-"steam" save type is handled as gamepass.
         return select_gamepass_directory(&save_path, ctx).await;
     }
 
@@ -371,9 +331,7 @@ pub async fn handle_select_save(
         level_meta_bytes.as_deref(),
         player_file_refs,
         layout.global_pal_storage_sav.clone(),
-        // select_save goes through Python's process_save_files, which emits
-        // the leading generic "Loading Level.sav..." frame -- keep it (this
-        // sequence is Phase-1-parity-verified).
+        // Emit the leading generic "Loading Level.sav..." progress frame.
         true,
         &progress,
     )?;
@@ -398,13 +356,10 @@ pub async fn handle_select_save(
     Ok(())
 }
 
-/// Per-entry decompressed-size ceiling: bounds a maliciously crafted zip
-/// entry's memory/CPU blow-up (a "zip bomb" is real decompression
-/// amplification, not merely a lie in the declared-size header -- capping
-/// the number of bytes actually read back out is what matters). 1 GiB
-/// matches the "real Level.sav files are 100s of MB" headroom already used
-/// for the whole WS frame (`ws::MAX_WS_MESSAGE_BYTES`) and the
-/// `/api/convert` body limit.
+/// Per-entry decompressed-size ceiling, bounding a zip bomb's memory/CPU
+/// blow-up. It caps bytes actually read back OUT (a bomb is real decompression
+/// amplification, not just a lie in the declared-size header). 1 GiB matches the
+/// headroom real Level.sav files already get from `ws::MAX_WS_MESSAGE_BYTES`.
 const MAX_ZIP_ENTRY_BYTES: u64 = 1 << 30;
 
 /// Ceiling on the number of central-directory entries a zip may declare. A
@@ -443,13 +398,13 @@ struct ZipLayout {
     gps_name: String,
 }
 
-/// Port of `load_zip_file_handler`'s "nested vs flat" detection: the zip is
-/// "nested" (everything under a single top-level save-id folder) unless a
-/// top-level `Level.sav` entry exists. `save_id` is always the piece of the
-/// FIRST entry's name before its first `/` -- which by construction can
-/// never itself contain `/` -- so it can never be used to build a path that
-/// escapes a single path component (see `zip_gps_temp_path`), even when an
-/// attacker crafts an entry name like `"../../evil/Level.sav"`.
+/// "Nested vs flat" detection: the zip is nested (everything under a single
+/// top-level save-id folder) unless a top-level `Level.sav` entry exists.
+///
+/// `save_id` is always the piece of the FIRST entry's name before its first
+/// `/`, so it structurally can never itself contain a `/` — that is what stops
+/// a crafted entry name like `"../../evil/Level.sav"` from building a path that
+/// escapes a single component (see `zip_gps_temp_path`).
 fn resolve_zip_layout(file_list: &[String]) -> ZipLayout {
     let nested = !file_list.iter().any(|name| name == "Level.sav");
     let save_id = if nested {
@@ -486,11 +441,9 @@ fn resolve_zip_layout(file_list: &[String]) -> ZipLayout {
     }
 }
 
-/// Where an uploaded zip's `GlobalPalStorage.sav` entry is staged, mirroring
-/// Python's `os.path.join(tempfile.gettempdir(), f"{save_id}_GlobalPalStorage.sav")`.
-/// `save_id` is guaranteed slash-free by `resolve_zip_layout` (see its doc
-/// comment), so this can never resolve outside `std::env::temp_dir()`
-/// regardless of what the uploaded zip's entry names contain.
+/// Where an uploaded zip's `GlobalPalStorage.sav` entry is staged. `save_id` is
+/// guaranteed slash-free by `resolve_zip_layout`, so this can never resolve
+/// outside `std::env::temp_dir()`, whatever the zip's entry names contain.
 fn zip_gps_temp_path(save_id: &str) -> PathBuf {
     std::env::temp_dir().join(format!("{save_id}_GlobalPalStorage.sav"))
 }
@@ -503,8 +456,8 @@ pub async fn handle_load_zip_file(
         .map_err(|zip_error| HandlerError::Other(zip_error.to_string()))?;
     ensure_entry_count_within_limit(archive.len(), MAX_ZIP_ENTRIES)?;
 
-    // Central-directory order (matches Python's `namelist()` order) -- the
-    // zip crate's `file_names()` iterator is unordered, so index explicitly.
+    // Index explicitly to get central-directory order: `file_names()` is
+    // unordered, and `resolve_zip_layout` below reads the FIRST entry.
     let mut file_list = Vec::with_capacity(archive.len());
     for index in 0..archive.len() {
         let name = archive
@@ -554,10 +507,8 @@ pub async fn handle_load_zip_file(
         None
     };
 
-    // Preserve zip encounter order for the wire "players" array: Python's
-    // `player_saves` is a plain dict built by walking `namelist()` in order,
-    // and `[str(p) for p in player_saves.keys()]` reflects dict insertion
-    // (first-encounter) order, not a UUID sort.
+    // Zip encounter order, not a UUID sort: the wire "players" array follows
+    // this, same as the Steam directory scan.
     let mut player_order: Vec<Uuid> = Vec::new();
     let mut player_file_refs: BTreeMap<Uuid, PlayerFileData> = BTreeMap::new();
     let player_entry_names: Vec<String> = file_list
@@ -617,8 +568,7 @@ pub async fn handle_load_zip_file(
         level_meta_bytes.as_deref(),
         player_file_refs,
         gps_file_path.clone(),
-        // load_zip_file also goes through Python's process_save_files -- keep
-        // the leading generic "Loading Level.sav..." frame.
+        // Emit the leading generic "Loading Level.sav..." progress frame.
         true,
         &progress,
     )?;
@@ -648,24 +598,11 @@ pub async fn handle_load_zip_file(
     Ok(())
 }
 
-// ---------------------------------------------------------------------------
-// update_save_file — port of save_file_handler.py::update_save_file_handler.
-// ---------------------------------------------------------------------------
-
-/// ws/messages.py:270-275 `UpdateSaveFileData`. Every field is `Optional`
-/// (defaults to `None`); Python then treats an EMPTY dict as falsy
-/// (`data.modified_x if data.modified_x else None`), so both a missing key
-/// and a present-but-empty object skip that update section.
+/// Every field is optional, and a present-but-EMPTY map skips its update
+/// section just like an absent one.
 ///
-/// The int-keyed maps (`modified_dps_pals`, `modified_gps_pals`) deserialize
-/// from a JSON object whose keys are strings — `OrderedMap`'s `Deserialize`
-/// routes each key through `serde_json`'s map-key handling, which parses
-/// `"0"` → `0i32` (proven in `int_keyed_ordered_map_deserializes_from_string_keys`).
-///
-/// Deviation from the brief: the brief typed these as `IndexMap<...>`;
-/// `indexmap` is forbidden in this port, so they are the project's own
-/// `psp_core::dto::ordered_map::OrderedMap<K, V>` instead — the exact type
-/// the `pal`/`player`/`guild` `update_*` entry points already take.
+/// The int-keyed maps (`modified_dps_pals`, `modified_gps_pals`) arrive as JSON
+/// objects with string keys; `OrderedMap`'s `Deserialize` coerces `"0"` → `0i32`.
 #[derive(Debug, serde::Deserialize)]
 pub struct UpdateSaveFileData {
     #[serde(default)]
@@ -680,25 +617,12 @@ pub struct UpdateSaveFileData {
     pub modified_gps_pals: Option<OrderedMap<i32, PalDto>>,
 }
 
-/// Port of `update_save_file_handler`. Apply order is load-bearing (pals →
-/// players → guilds → dps → gps), matching Python; each section is skipped
-/// when its map is absent or empty (`if data.modified_x else None`). On
-/// success emits `update_save_file` with the exact Python string
-/// `"Changes saved"`.
+/// Apply order is load-bearing: pals → players → guilds → dps → gps. A section
+/// is skipped when its map is absent or empty.
 ///
-/// No-save path: Python `raise ValueError("No save file loaded")`, which the
-/// ws manager turns into an `error` frame `{message, trace}` whose `message`
-/// is that exact string — reproduced here as `HandlerError::Other` (NOT
-/// `save_mut()?`, whose `CoreError::SaveNotLoaded` displays the different
-/// string `"no save loaded"`).
-///
-/// GPS path: Phase 3 doesn't load GPS, and Python's `update_gps_pals`
-/// (`pal_ops.py:358-362`) `raise ValueError("No GPS pals to update.")` the
-/// moment `self._gps_pals` is empty — before emitting any per-pal progress.
-/// With no `update_gps_pals` in this port yet, a non-empty `modified_gps_pals`
-/// reproduces that exact error string via the same `error`-frame path, and
-/// only AFTER the earlier sections have applied (matching Python's ordering,
-/// where gps is the last section reached).
+/// The no-save path raises `HandlerError::Other("No save file loaded")` rather
+/// than using `save_mut()?`, whose `CoreError::SaveNotLoaded` renders the
+/// different string `"no save loaded"` — the frontend matches on this one.
 pub async fn handle_update_save_file(
     data: UpdateSaveFileData,
     ctx: &mut HandlerCtx<'_>,
@@ -722,7 +646,7 @@ pub async fn handle_update_save_file(
         pal::update_dps_pals(session, game_data, &modified_dps_pals, &progress)?;
     }
     if data.modified_gps_pals.is_some_and(|map| !map.is_empty()) {
-        // GPS storage is Phase 3; matches Python's immediate raise.
+        // Reached only after the sections above have applied.
         return Err(HandlerError::Other("No GPS pals to update.".to_string()));
     }
 
@@ -731,25 +655,17 @@ pub async fn handle_update_save_file(
     Ok(())
 }
 
-// ---------------------------------------------------------------------------
-// download_save_file — port of save_file_handler.py::download_save_file_handler.
-// ---------------------------------------------------------------------------
-
-/// A player's uuid as it appears inside the DOWNLOAD zip: `str(uuid).replace(
-/// "-", "")` — LOWERCASE hex, no dashes (Python's `uuid.UUID` stringifies
-/// lowercase and the download handler does not `.upper()` it, unlike the
-/// on-disk `save_modded` write path). See `download_player_stem_is_lowercase`.
+/// A player's uuid as it appears inside the DOWNLOAD zip: LOWERCASE hex, no
+/// dashes. Deliberately different from `save_modded_player_stem` (uppercase);
+/// the two must not be collapsed.
 fn download_player_stem(player_id: &Uuid) -> String {
     player_id.simple().to_string()
 }
 
-/// Port of `download_save_file_handler`. Builds an in-memory DEFLATE zip
-/// (`Level.sav`, then `Players/<lower-hex>.sav` and its `_dps.sav` companion
-/// for every lazily-loaded player) and emits it as a one-element ARRAY
-/// `[{"name": "<world|PSP>_<ts>.zip", "content": <base64>}]`. The four
-/// progress strings (with their emoji) and their ORDER are wire-visible and
-/// copied byte-for-byte from Python. GPS is Phase 3 and never present here,
-/// so `gps_msg` is always empty.
+/// Builds an in-memory DEFLATE zip (`Level.sav`, then `Players/<lower-hex>.sav`
+/// and its `_dps.sav` companion per loaded player) and emits it as a
+/// ONE-ELEMENT ARRAY `[{"name": ..., "content": <base64>}]` — the frontend
+/// iterates the array, so the wrapper must stay even for a single file.
 pub async fn handle_download_save_file(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let progress = ctx.emitter.progress_sink();
     let Some(session) = ctx.session.save.as_ref() else {
@@ -814,23 +730,13 @@ pub async fn handle_download_save_file(ctx: &mut HandlerCtx<'_>) -> Result<(), H
     Ok(())
 }
 
-// ---------------------------------------------------------------------------
-// save_modded_save — port of local_file_handler.py::save_modded_save_handler
-// (Steam branch only; GamePass is Phase 4).
-// ---------------------------------------------------------------------------
-
-/// A player's uuid as it appears in the ON-DISK Steam write: `str(uuid).
-/// replace("-", "").upper()` — UPPERCASE hex, no dashes (serialization.py:218,
-/// so Palworld's case-sensitive-filesystem read path finds the record). This
-/// is deliberately DIFFERENT from `download_player_stem` (lowercase). See
-/// `save_modded_player_stem_is_uppercase`.
+/// A player's uuid as it appears in the ON-DISK Steam write: UPPERCASE hex, no
+/// dashes, which is what Palworld's own read path looks for. Deliberately the
+/// opposite casing from `download_player_stem`.
 fn save_modded_player_stem(player_id: &Uuid) -> String {
     player_id.simple().to_string().to_uppercase()
 }
 
-/// Recursive directory copy, standing in for Python's `shutil.copytree`
-/// (`backup_dir`). Creates `dst` and mirrors every file/subdirectory under
-/// `src` into it.
 fn copy_dir_recursive(src: &Path, dst: &Path) -> std::io::Result<()> {
     std::fs::create_dir_all(dst)?;
     for dir_entry in std::fs::read_dir(src)? {
@@ -846,17 +752,10 @@ fn copy_dir_recursive(src: &Path, dst: &Path) -> std::io::Result<()> {
     Ok(())
 }
 
-/// Port of `local_file_handler.py::backup_dir`. `backup_base` is Python's
-/// `f"backups/{save_type}"` — a CWD-RELATIVE `backups/steam` (verified: the
-/// brief's claim that this path is "almost certainly wrong" is itself wrong;
-/// Python really does root the backup at the process CWD). Kept relative to
-/// match, but injected as a parameter so tests can point it at a `TempDir`.
-///
-/// Backup dir name is `{basename(save_dir)}_{%Y-%m-%d-%H-%M}`, with a
-/// `_{%S}` suffix appended if that already exists (Python's collision guard).
-/// A missing `save_dir` emits the exact "skipping backup" progress string
-/// instead of copying. After copy, a nested `backup/` subdir (if any) is
-/// removed, matching Python.
+/// Copies `save_dir` to `{backup_base}/{basename}_{%Y-%m-%d-%H-%M}`, appending a
+/// `_{%S}` suffix on collision. `backup_base` is a parameter (not a constant) so
+/// tests can point it at a `TempDir` instead of the real backups root. A missing
+/// `save_dir` reports "skipping backup" rather than failing.
 fn backup_save_directory(
     save_dir: &Path,
     backup_base: &Path,
@@ -891,13 +790,10 @@ fn backup_save_directory(
     Ok(())
 }
 
-/// Pure write half of `save_modded_steam_save`, factored out so the full
-/// backup+overwrite path is hermetically testable against a `TempDir`
-/// without touching the owner's real save_dir, the committed fixtures, or the
-/// process CWD. Writes `Level.sav` to `level_path` (the session's own level
-/// path, which may differ from `save_dir`), then `LevelMeta.sav` and every
-/// loaded player's `.sav`/`_dps.sav` (UPPERCASE-hex names) under `save_dir`.
-/// Progress strings and their order match Python exactly.
+/// Write half of `save_modded_steam_save`, split out so the backup+overwrite
+/// path is testable against a `TempDir` without touching the user's real
+/// save_dir or the process CWD. `Level.sav` goes to `level_path` (which may
+/// differ from `save_dir`); `LevelMeta.sav` and the players go under `save_dir`.
 fn write_steam_modded_save(
     session: &SaveSession,
     level_path: &Path,
@@ -936,19 +832,13 @@ fn write_steam_modded_save(
 }
 
 /// Writes a standalone transfer target's `Level.sav` (+ `LevelMeta.sav` when
-/// present) and every lazily-loaded player's `.sav`/`_dps.sav` (UPPERCASE-hex
-/// names, `save_modded_player_stem`) to the on-disk locations recorded in its
-/// `TransferSaveInfo`. Port of the write half of `transfer_handler.py:213-216`
-/// (`target_save.to_level_sav_file` / `to_level_meta_sav_file` /
-/// `to_player_sav_files`).
+/// present) and every loaded player's `.sav`/`_dps.sav` to the locations
+/// recorded in its `TransferSaveInfo`.
 ///
 /// Deliberately does NOT back up first, unlike `write_steam_modded_save`: the
-/// caller (`handlers/tools.rs::handle_transfer_player`) already performs its
-/// OWN backup via `copy_dir_ignoring` before calling this, matching Python's
-/// `shutil.copytree(..., ignore=ignore_patterns("backups"))` at
-/// `transfer_handler.py:207-211`, which precedes (and is entirely separate
-/// from) the three write calls this function replaces. Backing up twice would
-/// silently diverge from that ordering and double the I/O for no benefit.
+/// caller (`handlers::tools::handle_transfer_player`) already backs up via
+/// `copy_dir_ignoring` before calling this. Backing up here too would double
+/// the I/O for no benefit.
 pub(crate) fn write_transfer_target_save(
     session: &SaveSession,
     save_info: &psp_core::session::TransferSaveInfo,
@@ -984,22 +874,14 @@ pub(crate) fn write_transfer_target_save(
     Ok(())
 }
 
-/// CWD-relative backup root for Steam saves, matching Python's
-/// `f"backups/{save_type}"` = `backups/steam`.
+/// CWD-relative backup root for Steam saves.
 const STEAM_BACKUP_BASE: &str = "backups/steam";
 
-/// Port of `save_modded_save_handler`. `data` is a bare world-name string used
-/// only by the GamePass branch; the Steam write path ignores it, as Python
-/// does. The frontend sends `null` for Steam saves (`writeSave` in
-/// saveOperations.svelte.ts only supplies a world name for GamePass), so the
-/// payload is `Option<String>` — Python accepts the `None` because it never
-/// enforces the `data: str` hint at runtime, and a strict `String` here would
-/// reject the Steam write with a serde parse error. No save → the "No save file
-/// loaded" `error` frame, raised BEFORE the save-type branch exactly as Python
-/// does. Dispatches on the loaded save's `kind`: a `SaveKind::GamePass` session
-/// writes new wgs containers (`save_modded_gamepass_save`); every other kind
-/// (Steam, and the InMemory zip-upload the Phase-2 write path rejects) stays on
-/// the on-disk Steam path.
+/// `data` is a bare world-name string, used only by the GamePass branch. It MUST
+/// stay `Option<String>`: the frontend sends `null` for Steam saves, and a
+/// strict `String` would reject the Steam write with a serde parse error.
+/// Dispatches on the loaded save's `kind` — GamePass writes new wgs containers,
+/// everything else takes the on-disk Steam path.
 pub async fn handle_save_modded_save(
     world_name: Option<String>,
     ctx: &mut HandlerCtx<'_>,
@@ -1013,9 +895,6 @@ pub async fn handle_save_modded_save(
     save_modded_steam_save(ctx).await
 }
 
-/// On-disk Steam write path (`save_modded_steam_save`, local_file_handler.py:
-/// 143-166). On success emits `save_modded_save` with the exact Python string
-/// `"Modded save file saved successfully"`.
 async fn save_modded_steam_save(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let save_dir = psp_db::settings::get_settings(&ctx.app.db).await?.save_dir;
     let progress = ctx.emitter.progress_sink();
@@ -1047,13 +926,9 @@ async fn save_modded_steam_save(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerE
     Ok(())
 }
 
-/// GamePass write path — port of `save_modded_gamepass_save`
-/// (local_file_handler.py:81-140). On success emits `save_modded_save` with the
-/// data string `"Created modded save"`. On failure, mirrors Python's
-/// `except` block EXACTLY: emit an `error` frame with PLAIN-STRING data
-/// `"Failed to save gamepass save: <e>"` AND re-raise, so the dispatcher ALSO
-/// emits its standard `{message, trace}` error frame — two error frames, not
-/// one.
+/// On failure this emits an `error` frame with plain-string data AND re-raises,
+/// so the dispatcher emits its own `{message, trace}` frame too — TWO error
+/// frames, not one. The frontend expects both.
 async fn save_modded_gamepass_save(
     world_name: &str,
     ctx: &mut HandlerCtx<'_>,
@@ -1075,12 +950,7 @@ async fn save_modded_gamepass_save(
 }
 
 /// The write half of `save_modded_gamepass_save`, split out so the two-error
-/// failure contract above wraps a single fallible body. Backs up the container
-/// dir, cleans orphaned containers, then writes a brand-new save id's worth of
-/// containers (new Level from the re-serialized world tree; every other
-/// original container copied, LevelMeta world name rewritten, loaded players'
-/// `.sav`/`_dps.sav` replaced). Progress strings and their order match Python
-/// byte-for-byte.
+/// failure contract above wraps a single fallible body.
 async fn write_modded_gamepass_containers(
     world_name: &str,
     ctx: &mut HandlerCtx<'_>,
@@ -1112,8 +982,6 @@ async fn write_modded_gamepass_containers(
     }
 
     progress("Converting modified save to SAV format...");
-    // A fresh uppercase, dash-less uuid for the new save id (Python:
-    // `uuid.uuid4().hex.upper()`).
     let new_save_id = Uuid::new_v4().as_simple().to_string().to_uppercase();
     let session = ctx.session.save_mut()?;
     let level_bytes = session.level_sav_bytes()?;
@@ -1145,16 +1013,9 @@ async fn write_modded_gamepass_containers(
     Ok(())
 }
 
-// ---------------------------------------------------------------------------
-// rename_world — port of local_file_handler.py::rename_world_handler.
-// ---------------------------------------------------------------------------
-
-/// Port of `rename_world_handler`. `data` is a bare new-name STRING. The
-/// old-name is read BEFORE the no-save guard, falling back to `"Unknown"`
-/// only when no save is loaded (an empty world_name on a loaded save is NOT
-/// replaced). Calls `set_world_name` (which itself errors if no LevelMeta is
-/// loaded), then emits `rename_world` with the exact Python string
-/// `World renamed from '<old>' to '<new>'` (single quotes included).
+/// `data` is a bare new-name STRING. The old name is read BEFORE the no-save
+/// guard, falling back to "Unknown" only when no save is loaded — an empty
+/// world_name on a LOADED save is reported as empty, not as "Unknown".
 pub async fn handle_rename_world(
     new_world_name: String,
     ctx: &mut HandlerCtx<'_>,
@@ -1176,19 +1037,14 @@ pub async fn handle_rename_world(
     Ok(())
 }
 
-// ---------------------------------------------------------------------------
-// convert_sav_file — port of local_file_handler.py:394-406.
-// ---------------------------------------------------------------------------
-
 #[derive(Debug, serde::Deserialize)]
 pub struct ConvertSavFileData {
-    /// The frontend sends the file as a JSON array of ints (ws/messages.py:767-769).
+    /// The frontend sends the file as a JSON array of ints.
     pub file_data: Vec<u8>,
     pub target_type: String,
 }
 
-/// Port of convert_sav_file (local_file_handler.py:394-406). JSON output uses the
-/// uesave schema — documented breaking change (spec §4); excluded from parity fixtures.
+/// JSON output uses the uesave schema.
 pub async fn handle_convert_sav_file(
     data: ConvertSavFileData,
     ctx: &mut HandlerCtx<'_>,
@@ -1204,20 +1060,15 @@ pub async fn handle_convert_sav_file(
     Ok(())
 }
 
-// ---------------------------------------------------------------------------
-// unlock_map — port of map_unlock_handler.py:20-94.
-// ---------------------------------------------------------------------------
-
 #[derive(Debug, serde::Deserialize)]
 pub struct UnlockMapData {
     #[serde(default)]
     pub path: Option<String>,
 }
 
-/// Port of unlock_map_handler (map_unlock_handler.py:20-94). Every failure is reported
-/// by THIS handler as error {message: "Failed to unlock map: <inner>", trace} and never
-/// bubbles to the dispatcher. Desktop mode injects `path` via a dialog in Phase 5
-/// (desktop.py:139-146 is the Python interception point).
+/// Every failure is reported by THIS handler as
+/// `error {message: "Failed to unlock map: <inner>", trace}` and never bubbles
+/// to the dispatcher, so the frontend always sees the prefixed message.
 pub async fn handle_unlock_map(
     mut data: UnlockMapData,
     ctx: &mut HandlerCtx<'_>,
@@ -1226,8 +1077,9 @@ pub async fn handle_unlock_map(
         let Some(selected) = pick_save_file_via_dialog("local_data", ctx).await? else {
             return Ok(()); // canceled; no_file_selected already emitted
         };
-        // NOTE: deliberately NO update_save_dir here (desktop.py:139-146 does
-        // not persist save_dir for unlock_map, unlike select_save).
+        // Deliberately NO update_save_dir here: LocalData.sav does not live in
+        // the save dir, so persisting its parent would corrupt select_save's
+        // starting directory.
         data.path = Some(selected.to_string_lossy().into_owned());
     }
 
@@ -1391,15 +1243,10 @@ mod tests {
     }
 
     /// Real-filesystem companion to the synthetic test below: whatever order
-    /// `std::fs::read_dir` actually hands back on this platform, the
-    /// discovery order returned must match it exactly (not the sorted map
-    /// order). This does NOT prove the function discriminates from the old
-    /// (always-sorted) behavior -- on NTFS, `read_dir` enumerates these
-    /// UUID-named files in name-sorted order, which for a UUID string is the
-    /// same ordering as `Uuid`'s `Ord` impl, so a regression back to
-    /// `player_file_refs.keys()` would pass this test too. See
-    /// `test_collect_player_file_refs_preserves_a_non_sorted_discovery_order`
-    /// for the test that actually discriminates.
+    /// `std::fs::read_dir` hands back on this platform, the discovery order must
+    /// match it. On NTFS that is name-sorted, which for UUID names coincides
+    /// with `Uuid`'s `Ord`, so this alone cannot catch a resort — see
+    /// `test_collect_player_file_refs_preserves_a_non_sorted_discovery_order`.
     #[test]
     fn test_discover_player_file_refs_discovery_order_matches_raw_read_dir_order() {
         let temp_dir = tempfile::tempdir().unwrap();
@@ -1427,22 +1274,17 @@ mod tests {
         assert_eq!(expected_order, discovery_order);
     }
 
-    /// The test that actually discriminates Finding 1's fix from the old
-    /// always-sorted behavior: feeds `collect_player_file_refs` a
-    /// hand-constructed path sequence whose UUIDs are deliberately NOT
-    /// ascending, bypassing `std::fs::read_dir` (and its platform-specific,
-    /// on-NTFS-usually-sorted enumeration order) entirely. If
-    /// `handle_select_save` ever regresses to emitting
-    /// `player_file_refs.keys()` (UUID-sorted) instead of this discovery
-    /// order, this assertion -- which checks first-encounter order, not
-    /// sorted order -- fails.
+    /// Feeds `collect_player_file_refs` a hand-built, deliberately
+    /// NON-ascending path sequence, bypassing `read_dir`'s platform-specific
+    /// enumeration order. This is the test that catches a regression to
+    /// emitting `player_file_refs.keys()` (UUID-sorted) as the wire order.
     #[test]
     fn test_collect_player_file_refs_preserves_a_non_sorted_discovery_order() {
         let highest: Uuid = "ffffffff-ffff-ffff-ffff-ffffffffffff".parse().unwrap();
         let lowest: Uuid = "00000000-0000-0000-0000-000000000000".parse().unwrap();
         let middle: Uuid = "77777777-7777-7777-7777-777777777777".parse().unwrap();
-        // Deliberately descending -- the opposite of BTreeMap<Uuid, _>'s
-        // iteration order, so a resort anywhere in the pipeline is visible.
+        // Descending: the opposite of BTreeMap<Uuid, _>'s iteration order, so a
+        // resort anywhere in the pipeline is visible.
         let paths = vec![
             PathBuf::from(format!("{highest}.sav")),
             PathBuf::from(format!("{middle}.sav")),
@@ -1502,12 +1344,10 @@ mod tests {
         assert_eq!("MyWorld/Players/", layout.players_folder);
     }
 
-    /// Security-critical property: even a maliciously crafted top-level
-    /// entry name (directory-traversal-shaped) can never leave `save_id`
-    /// holding a '/' -- `split('/').next()` structurally guarantees this,
-    /// which is what makes `zip_gps_temp_path` safe below. This test would
-    /// fail immediately if `resolve_zip_layout` were ever rewritten to use
-    /// the whole first path segment chain instead of just the first piece.
+    /// Security-critical: a traversal-shaped top-level entry name can never
+    /// leave `save_id` holding a '/'. That is what makes `zip_gps_temp_path`
+    /// safe, and it breaks the moment `resolve_zip_layout` takes more than the
+    /// first path segment.
     #[test]
     fn test_resolve_zip_layout_save_id_never_contains_a_path_separator() {
         for first_entry in [
@@ -1525,11 +1365,9 @@ mod tests {
         }
     }
 
-    /// Direct proof that a hostile `save_id` cannot make the GPS temp file
-    /// escape the OS temp directory: `Path::join` only escapes its base when
-    /// the joined string contains a `/`-separated `..` component, and
-    /// `save_id` can never contain `/` (see the test above), so the result's
-    /// parent is always exactly `std::env::temp_dir()`.
+    /// A hostile `save_id` cannot make the GPS temp file escape the OS temp
+    /// directory: `Path::join` only escapes its base via a `/`-separated `..`
+    /// component, and `save_id` can never contain `/` (test above).
     #[test]
     fn test_zip_gps_temp_path_never_escapes_the_temp_directory() {
         for save_id in ["..", "...", "normal_id", "", "%2e%2e"] {
@@ -1538,12 +1376,7 @@ mod tests {
         }
     }
 
-    // -----------------------------------------------------------------------
-    // Task 14 — save-file handler helpers.
-    // -----------------------------------------------------------------------
-
-    /// The download zip uses LOWERCASE hex (no dashes): Python's
-    /// `str(uuid).replace("-", "")`, which never `.upper()`s.
+    /// The download zip uses LOWERCASE hex, no dashes.
     #[test]
     fn download_player_stem_is_lowercase() {
         let uid: Uuid = "ABCDEF12-3456-7890-ABCD-EF1234567890".parse().unwrap();
@@ -1553,10 +1386,9 @@ mod tests {
         );
     }
 
-    /// The on-disk Steam write uses UPPERCASE hex (no dashes):
-    /// serialization.py:218 `str(uid).replace("-", "").upper()`. This is the
-    /// exact opposite casing from `download_player_stem` — the two must never
-    /// be collapsed into one helper.
+    /// The on-disk Steam write uses UPPERCASE hex, no dashes — the exact
+    /// opposite casing from `download_player_stem`. The two must never be
+    /// collapsed into one helper.
     #[test]
     fn save_modded_player_stem_is_uppercase() {
         let uid: Uuid = "abcdef12-3456-7890-abcd-ef1234567890".parse().unwrap();
@@ -1569,11 +1401,9 @@ mod tests {
     }
 
     /// `OrderedMap<i32, _>` must round-trip the string-keyed JSON objects the
-    /// wire uses for `modified_dps_pals`/`modified_gps_pals` — parsed straight
-    /// from raw text so the integer key genuinely flows through serde_json's
-    /// map-key handling (not the `json!` macro, which would pre-build a
-    /// `Value` and hide key coercion). Would fail if `OrderedMap`'s
-    /// `Deserialize` couldn't coerce `"7"` → `7i32`.
+    /// wire uses for `modified_dps_pals`/`modified_gps_pals`. Parsed from raw
+    /// text, not `json!`, so the key genuinely flows through serde_json's
+    /// map-key coercion (`"7"` → `7i32`).
     #[test]
     fn int_keyed_ordered_map_deserializes_from_string_keys() {
         let map: OrderedMap<i32, i64> = serde_json::from_str(r#"{"7": 70, "3": 30}"#).unwrap();
@@ -1603,8 +1433,7 @@ mod tests {
         );
     }
 
-    /// A missing `save_dir` must NOT copy anything and must emit the exact
-    /// Python "skipping backup" progress string (and no backup dir contents).
+    /// A missing `save_dir` must copy nothing and report "skipping backup".
     #[test]
     fn backup_save_directory_skips_and_reports_a_missing_directory() {
         let temp_dir = tempfile::tempdir().unwrap();
@@ -1634,12 +1463,10 @@ mod tests {
         assert!(created.is_empty(), "no backup dir should be created");
     }
 
-    /// HERMETIC full write-path test. Copies the committed `world1` fixture
-    /// into a `TempDir`, points BOTH the session level_path AND save_dir at
-    /// that copy, and directs the backup at a `TempDir` subfolder — so nothing
-    /// can touch the owner's real save_dir, the committed fixtures, or the
-    /// process CWD. Proves the backup ran (a timestamped copy of the save dir
-    /// exists) and that `Level.sav`/`LevelMeta.sav` were (re)written.
+    /// Hermetic full write-path test: the `world1` fixture is copied into a
+    /// `TempDir` and BOTH the session level_path and save_dir point at that
+    /// copy, so nothing can touch the user's real save_dir, the committed
+    /// fixtures, or the process CWD.
     #[test]
     fn write_steam_modded_save_backs_up_and_writes_into_a_temp_dir() {
         let fixture = fixture_world1_dir();
@@ -1681,7 +1508,7 @@ mod tests {
         )
         .unwrap();
 
-        // Level.sav and LevelMeta.sav were re-serialized (no longer STALE).
+        // Both files were re-serialized: the STALE sentinels are gone.
         let written_level = std::fs::read(&level_path).unwrap();
         let written_meta = std::fs::read(save_dir.join("LevelMeta.sav")).unwrap();
         assert_ne!(b"STALE".to_vec(), written_level);
@@ -1704,8 +1531,6 @@ mod tests {
         );
     }
 
-    /// world1 lives at `<repo>/tests/fixtures/saves/world1` (psp-server's
-    /// manifest dir is `<repo>/psp-server`).
     fn fixture_world1_dir() -> PathBuf {
         PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../tests/fixtures/saves/world1")
     }

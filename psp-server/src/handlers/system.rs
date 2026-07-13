@@ -6,7 +6,6 @@ use crate::handlers::save_file::emit_summary_messages;
 use crate::handlers::settings::settings_dto_from_row;
 use crate::messages::MessageType;
 
-/// Port of app_state_handler.py sync_app_state_handler's dict literal.
 #[derive(Debug, serde::Serialize)]
 struct SyncLoadedSaveFilesData {
     level: String,
@@ -18,9 +17,8 @@ struct SyncLoadedSaveFilesData {
     has_gps: bool,
 }
 
-/// Port of app_state_handler.py sync_app_state_handler: settings first,
-/// then -- only when a save is loaded -- loaded_save_files followed by both
-/// summary messages.
+/// Frame order is the contract: `get_settings` first, then — only when a save
+/// is loaded — `loaded_save_files` followed by both summary messages.
 pub async fn handle_sync_app_state(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let row = psp_db::settings::get_settings(&ctx.app.db).await?;
     ctx.emitter
@@ -31,33 +29,10 @@ pub async fn handle_sync_app_state(ctx: &mut HandlerCtx<'_>) -> Result<(), Handl
         return Ok(());
     };
 
-    // Like select_save's/load_zip_file's `players` array (filesystem/zip
-    // *discovery* order, see save_file.rs), these two fields must follow
-    // Python's actual dict-insertion order -- NOT the BTreeMap's sorted
-    // order. Python's `sync_app_state_handler` emits
-    // `[str(p) for p in app_state.player_summaries.keys()]` /
-    // `.guild_summaries.keys()`, and both dicts preserve GVAS-file
-    // insertion order:
-    //   - `player_summaries` is built by `_extract_player_summaries`, which
-    //     dispatches to `_extract_players_parallel` (a `ThreadPoolExecutor`
-    //     whose results land via `as_completed()`, genuinely
-    //     nondeterministic) only when the save has MORE than two players. At
-    //     two players or fewer it takes `_extract_players_sequential`
-    //     instead, which inserts in `players_data` order --
-    //     `CharacterSaveParameterMap` iteration order -- deterministically.
-    //     This is exactly the threshold `rust/parity/README.md`'s load_path
-    //     corpus rule ("at most 2 players") exists to stay under.
-    //   - `guild_summaries` (`_extract_guild_summaries`) is ALWAYS
-    //     sequential -- no thread pool involved at any size -- so its order
-    //     is unconditionally `GroupSaveDataMap` iteration order, filtered to
-    //     guild-type entries with a non-nil guild id.
-    // `psp_core::domain::summaries::extract_summaries` walks both maps in
-    // that same save-file order and records it verbatim into
-    // `session.player_summary_order` / `session.guild_summary_order`
-    // alongside the (still `Uuid`-sorted) `BTreeMap`s -- see that function's
-    // and `SaveSession`'s own doc comments. Reading `.keys()` here instead
-    // would silently resort to `Uuid` order whenever GVAS order isn't
-    // already ascending.
+    // The `players`/`guilds` arrays must follow save-file (GVAS) order, which
+    // `extract_summaries` records into `player_summary_order` /
+    // `guild_summary_order`. Reading the `BTreeMap`s' `.keys()` instead would
+    // silently resort them to `Uuid` order.
     let payload = SyncLoadedSaveFilesData {
         level: session.save_id.clone(),
         players: session
@@ -80,19 +55,13 @@ pub async fn handle_sync_app_state(ctx: &mut HandlerCtx<'_>) -> Result<(), Handl
     Ok(())
 }
 
-// ---------------------------------------------------------------------------
-// open_folder / open_in_browser — port of desktop.py:68-76,147-158 and
-// open_in_browser_handler.py:10-19.
-// ---------------------------------------------------------------------------
-
 #[derive(Debug, serde::Deserialize)]
 pub struct OpenFolderData {
     pub folder_type: String,
 }
 
-/// Port of desktop.py:68-76. `app_root` is the process working directory --
-/// the desktop shell sets cwd to a writable per-user dir at startup (Task 8),
-/// which is where backups/ are written, mirroring Python's exe-dir layout.
+/// `app_root` is the process working directory — the desktop shell sets cwd to
+/// a writable per-user dir at startup, which is where `backups/` is written.
 pub fn folder_path_for(folder_type: &str, app_root: &Path) -> Option<PathBuf> {
     match folder_type {
         "backups" => Some(app_root.join("backups")),
@@ -103,7 +72,6 @@ pub fn folder_path_for(folder_type: &str, app_root: &Path) -> Option<PathBuf> {
     }
 }
 
-/// Port of open_in_browser_handler.py:11-15.
 pub fn browser_url_from(host_and_port: &str) -> String {
     let (host, port) = match host_and_port.rsplit_once(':') {
         Some((host, port)) => (host, port),
@@ -117,17 +85,14 @@ pub fn browser_url_from(host_and_port: &str) -> String {
     format!("http://{host}:{port}")
 }
 
-/// desktop.py:147-158 -- open on success with NO response; warning otherwise.
+/// Opens with NO response frame on success; a missing folder answers `warning`.
 pub async fn handle_open_folder(
     data: OpenFolderData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     if !ctx.app.config.desktop_mode {
-        // Parity: Python registers open_folder only in the desktop WS endpoint
-        // (desktop.py); web mode has no handler, so the dispatcher discards the
-        // unknown type and sends nothing (ws/manager.py). Match that silence —
-        // never emit a wire frame web mode wouldn't. The desktop-only nav button
-        // means this branch is unreachable from the real UI.
+        // `open_folder` is a desktop-only message: stay silent rather than
+        // emit a frame a web client would never see the button for.
         return Ok(());
     }
     let app_root = std::env::current_dir().map_err(psp_core::error::CoreError::Io)?;
@@ -157,7 +122,7 @@ pub async fn handle_open_folder(
     Ok(())
 }
 
-/// open_in_browser_handler.py:10-19 -- active in BOTH modes, like Python.
+/// Active in BOTH desktop and web mode, unlike `open_folder`.
 pub async fn handle_open_in_browser(
     data: String,
     ctx: &mut HandlerCtx<'_>,
@@ -179,14 +144,9 @@ mod tests {
     #[tokio::test]
     async fn sync_app_state_without_save_emits_only_settings() {
         // sync_app_state is the ONLY path by which settings reach the UI during
-        // bootstrap() — so this asserts the full six-field payload, not just
-        // `language`. `save_dir` is the most delicate field in it: Python emits
-        // `null` on a fresh DB (a deterministic import-order bug — see
-        // rust/parity/README.md), Rust correctly emits
-        // `default_steam_save_dir()`, and that divergence is deliberately left
-        // unmasked (PARITY_IGNORED_PATHS stays empty). Pinning the real default
-        // here, rather than merely `is_string()`, is what would catch a
-        // regression back to `null`/an empty string.
+        // bootstrap, so assert the full six-field payload. Pinning `save_dir` to
+        // the real default (rather than merely `is_string()`) is what catches a
+        // regression to `null`/an empty string.
         let mut test = TestContext::new(|_| {}).await;
         let mut ctx = HandlerCtx {
             session: &mut test.session,
@@ -209,22 +169,13 @@ mod tests {
         test.assert_no_more_frames();
     }
 
-    /// A `SaveSession` whose only content that matters to
-    /// `handle_sync_app_state` is populated -- everything else (the `level`
-    /// GVAS tree, the position indexes) is a harmless empty placeholder,
-    /// same pattern as psp-core's own `session_with_level_properties` test
-    /// helper. All `SaveSession` fields are `pub` (Task 7), so this struct
-    /// literal is legal from outside the crate.
+    /// A `SaveSession` with only the fields `handle_sync_app_state` reads
+    /// populated; everything else is an empty placeholder.
     ///
-    /// TWO players and TWO guilds, deliberately inserted (both into the
-    /// `BTreeMap`s and into `player_summary_order`/`guild_summary_order`) in
-    /// HIGH-then-LOW `Uuid` order -- the opposite of `Uuid`'s `Ord` impl.
-    /// This is what lets `sync_app_state_with_save_emits_full_frame_sequence_in_order`
-    /// below actually discriminate the fix: if `handle_sync_app_state` ever
-    /// regressed to `session.player_summaries.keys()` /
-    /// `.guild_summaries.keys()` (sorted order) instead of reading the
-    /// `*_order` fields, the emitted `players`/`guilds` arrays would come
-    /// back LOW-then-HIGH and the test would fail.
+    /// The two players and two guilds are inserted in HIGH-then-LOW `Uuid`
+    /// order — the opposite of `Uuid`'s `Ord`. That is what lets the test below
+    /// discriminate: reading `player_summaries.keys()` instead of
+    /// `player_summary_order` would emit them LOW-then-HIGH and fail.
     fn fake_loaded_session() -> psp_core::session::SaveSession {
         use psp_core::dto::summary::{GuildSummary, PlayerSummary};
         use psp_core::session::{SaveKind, SaveSession};
@@ -336,10 +287,7 @@ mod tests {
         let loaded = test.next_frame_json();
         assert_eq!(loaded["type"], "loaded_save_files");
         assert_eq!(loaded["data"]["level"], "C:/saves/world/Level.sav");
-        // HIGH-then-LOW: `player_summary_order`/`guild_summary_order`, NOT
-        // the BTreeMaps' sorted (LOW-then-HIGH) iteration order. This is the
-        // assertion that actually discriminates the fix -- see
-        // `fake_loaded_session`'s doc comment.
+        // HIGH-then-LOW: `*_summary_order`, NOT the BTreeMaps' sorted order.
         assert_eq!(
             loaded["data"]["players"],
             serde_json::json!([

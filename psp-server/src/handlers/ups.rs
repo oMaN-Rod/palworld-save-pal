@@ -1,6 +1,6 @@
-//! UPS pal handlers (Task 3C-4): get/get_ids/add/update/delete/clone/stats/
-//! nuke, wired to the psp-db UPS layer (Task 3C-1..3). Wire shapes are ported
-//! from `ws/ups_handler.py`.
+//! UPS pal handlers: get / get_ids / add / update / delete / clone / stats /
+//! nuke, plus collections, tags, and save-session interop (clone_to_ups /
+//! import_to_ups / export_ups_pal). Backed by the psp-db UPS layer.
 
 use crate::dispatcher::HandlerCtx;
 use crate::handler_error::HandlerError;
@@ -78,8 +78,8 @@ pub struct CloneUpsPalData {
     pub pal_id: i64,
 }
 
-/// Python UPS handlers emit error data as {"message": "..."} (ups_handler.py:63-67) —
-/// NOT the dispatcher's default {message, trace} shape.
+/// UPS errors go out as `{"message": "..."}`, NOT the dispatcher's default
+/// `{message, trace}` shape.
 pub(crate) fn emit_ups_error(ctx: &HandlerCtx<'_>, message: String) {
     ctx.emitter.emit(
         MessageType::Error,
@@ -95,7 +95,7 @@ fn pals_game_data(ctx: &HandlerCtx<'_>) -> serde_json::Value {
         .unwrap_or_else(|| serde_json::json!({}))
 }
 
-/// element_types -> character ids whose pals.json entry shares any element (ups.py:141-160).
+/// element_types -> character ids whose pals.json entry shares any element.
 fn character_ids_with_elements(
     pals_data: &serde_json::Value,
     element_types: &[String],
@@ -120,7 +120,7 @@ fn character_ids_with_elements(
         .collect()
 }
 
-/// is_pal == false in pals.json (ups.py:177-184).
+/// Character ids whose pals.json entry has `is_pal == false`.
 fn human_character_ids(pals_data: &serde_json::Value) -> Vec<String> {
     let Some(entries) = pals_data.as_object() else {
         return Vec::new();
@@ -170,8 +170,7 @@ fn build_filter(
 }
 
 /// pals.json keys, used by `format_character_key` to decide whether a
-/// `BOSS_`-prefixed character_id is itself a known key (psp_core::dto::pal::
-/// format_character_key, a reviewed Phase 2 port of game/utils.py:7-19).
+/// `BOSS_`-prefixed character_id is itself a known key.
 fn known_pal_keys(pals_data: &serde_json::Value) -> std::collections::HashSet<String> {
     pals_data
         .as_object()
@@ -179,7 +178,8 @@ fn known_pal_keys(pals_data: &serde_json::Value) -> std::collections::HashSet<St
         .unwrap_or_default()
 }
 
-/// The 20-key wire dict from ups_handler.py:88-113.
+/// The full 20-key wire object for a UPS pal, including the derived
+/// `character_key` the frontend uses to pick an icon.
 fn pal_wire_object(
     record: &psp_db::ups::UpsPalRecord,
     known_keys: &std::collections::HashSet<String>,
@@ -277,10 +277,6 @@ pub async fn handle_get_ups_all_filtered_ids(
     Ok(())
 }
 
-/// `data` already groups every field `NewUpsPal` needs (one call site, from
-/// `handle_add_ups_pal`) — taking it whole instead of 9 separate parameters
-/// keeps this under clippy's too-many-arguments threshold without losing
-/// any of the wire-shape documentation the individual fields carried.
 pub(crate) fn new_ups_pal_from_dto(
     data: AddUpsPalData,
 ) -> Result<psp_db::ups::NewUpsPal, HandlerError> {
@@ -308,8 +304,8 @@ pub async fn handle_add_ups_pal(
     let pals_data = pals_game_data(ctx);
     let new_pal = new_ups_pal_from_dto(data)?;
     match psp_db::ups::add_pal(&ctx.app.db, new_pal, &pals_data).await {
-        // Python responds with the whole model object (ups_handler.py:149) — no
-        // character_key, unlike get_ups_pals's 20-key wire dict.
+        // The whole record goes out, WITHOUT the derived `character_key` that
+        // `get_ups_pals` adds.
         Ok(record) => ctx.emitter.emit(MessageType::AddUpsPal, &record),
         Err(error) => emit_ups_error(ctx, format!("Failed to add UPS pal: {error}")),
     }
@@ -599,15 +595,7 @@ pub async fn handle_delete_ups_tag(
     Ok(())
 }
 
-// ===========================================================================
-// Task 3C-6: UPS <-> save-session interop (clone_to_ups / import_to_ups /
-// export_ups_pal). Wire shapes + error strings ported verbatim from
-// `ws/handlers/ups_handler.py:257-707`; the source/destination resolution is
-// reconciled against this port's DTO/functional architecture (there is no
-// `Player` struct with `.pals`/`.to_dto()` -- see this task's report).
-// ===========================================================================
-
-/// `ws/messages.py` CloneToUpsData. `pal_ids` are instance-id STRINGS.
+/// `pal_ids` are instance-id STRINGS, not integers.
 #[derive(Debug, serde::Deserialize)]
 pub struct CloneToUpsData {
     pub pal_ids: Vec<String>,
@@ -618,7 +606,6 @@ pub struct CloneToUpsData {
     pub notes: Option<String>,
 }
 
-/// `ws/messages.py` ImportToUpsData.
 #[derive(Debug, serde::Deserialize)]
 pub struct ImportToUpsData {
     pub source_type: String,
@@ -630,7 +617,6 @@ pub struct ImportToUpsData {
     pub notes: Option<String>,
 }
 
-/// `ws/messages.py` ExportUpsPalData.
 #[derive(Debug, serde::Deserialize)]
 pub struct ExportUpsPalData {
     pub pal_id: i64,
@@ -639,8 +625,8 @@ pub struct ExportUpsPalData {
     pub destination_slot: Option<i32>,
 }
 
-/// A source pal resolved out of the loaded save, plus the source metadata
-/// `UPSService.add_pal` records (`ups_handler.py`'s `source_info` dict).
+/// A source pal resolved out of the loaded save, plus the provenance metadata
+/// recorded alongside it in the UPS.
 struct ResolvedSourcePal {
     dto: PalDto,
     player_uid: Option<uuid::Uuid>,
@@ -649,10 +635,9 @@ struct ResolvedSourcePal {
     storage_slot: Option<i64>,
 }
 
-/// The specific lookup failure `resolve_source_pal` hit, so each caller
-/// (`clone_to_ups` collects; `import_to_ups` hard-errors) can render the exact
-/// per-mode Python string it needs -- the two handlers use DIFFERENT strings
-/// for the same failure (compare `ups_handler.py:415-506` vs `565-663`).
+/// The specific lookup failure `resolve_source_pal` hit. `clone_to_ups` and
+/// `import_to_ups` render DIFFERENT user-facing strings for the same failure,
+/// so the reason has to survive back to the caller.
 enum ResolveError {
     PlayerNotFound,
     PlayerHasNoPals,
@@ -664,11 +649,9 @@ enum ResolveError {
     UnknownSourceType,
 }
 
-/// Shared source-pal resolution for clone_to_ups/import_to_ups. `pal_box`
-/// reads `build_player_dto(...).pals` (keyed by instance id); `gps` reads
-/// `session.gps_pals()`; `dps` reads `build_player_dto(...).dps`. `gps`/`dps`
-/// resolve by SLOT when `source_slot` is `Some` (import) and by INSTANCE ID
-/// otherwise (clone), scanning `PalDto.instance_id` (a field, not a method).
+/// Shared source-pal resolution for clone_to_ups/import_to_ups. `gps` and `dps`
+/// resolve by SLOT when `source_slot` is `Some` (the import path) and by
+/// INSTANCE ID otherwise (the clone path).
 fn resolve_source_pal(
     session: &SaveSession,
     game_data: &psp_core::gamedata::GameData,
@@ -765,9 +748,6 @@ fn resolve_source_pal(
     }
 }
 
-/// Builds the `AddUpsPalData` for a resolved source pal so the existing
-/// `new_ups_pal_from_dto` (Task 3C-4) converts it to a `NewUpsPal` -- exactly
-/// the field mapping `UPSService.add_pal(...)` performs in Python.
 fn new_ups_pal_for_source(
     resolved: ResolvedSourcePal,
     collection_id: Option<i64>,
@@ -776,12 +756,8 @@ fn new_ups_pal_for_source(
 ) -> Result<psp_db::ups::NewUpsPal, HandlerError> {
     new_ups_pal_from_dto(AddUpsPalData {
         pal_dto: resolved.dto,
-        // Python records `getattr(app_state.save_file, "name", "Unknown")`
-        // (ups_handler.py:443/469/501/595/...), but `app_state.save_file` is a
-        // `SaveManager` (state.py:22) with NO `name` attribute -- only
-        // `world_name`/`set_world_name` -- so the getattr ALWAYS falls through
-        // to the literal "Unknown". Emit that verbatim (NOT the world name) for
-        // wire-visible parity: `get_ups_pals` echoes `source_save_file`.
+        // The literal "Unknown", not the world name: `get_ups_pals` echoes this
+        // field back, and stored pals are expected to show it.
         source_save_file: Some("Unknown".to_string()),
         source_player_uid: resolved.player_uid,
         source_player_name: resolved.player_name,
@@ -805,8 +781,7 @@ pub async fn handle_clone_to_ups(
     let mut errors: Vec<String> = Vec::new();
 
     for pal_id_text in &data.pal_ids {
-        // Per-mode "Player UID required..." precondition (ups_handler.py:417-421,
-        // 474-478); gps needs no uid.
+        // pal_box and dps need a player uid; gps does not.
         let source_player_uid = match data.source_type.as_str() {
             "pal_box" | "dps" => {
                 let Some(raw) = data.source_player_uid.as_deref() else {
@@ -827,7 +802,7 @@ pub async fn handle_clone_to_ups(
             }
             _ => None,
         };
-        // clone resolves gps/dps by INSTANCE ID (source_slot = None).
+        // The clone path resolves gps/dps by INSTANCE ID, hence source_slot=None.
         let pal_instance_id = uuid::Uuid::parse_str(pal_id_text).ok();
         let resolved = match resolve_source_pal(
             ctx.session.save.as_ref().unwrap(),
@@ -873,7 +848,7 @@ pub async fn handle_clone_to_ups(
     Ok(())
 }
 
-/// clone_to_ups per-mode error strings (ups_handler.py:415-506).
+/// Per-pal error strings collected into `clone_to_ups`'s `errors` array.
 fn clone_error_string(
     source_type: &str,
     reason: ResolveError,
@@ -904,7 +879,6 @@ pub async fn handle_import_to_ups(
         emit_ups_error(ctx, "No save file loaded".to_string());
         return Ok(());
     }
-    // Preconditions copied verbatim (ups_handler.py:565-651).
     match data.source_type.as_str() {
         "pal_box" if data.source_pal_id.is_none() || data.source_player_uid.is_none() => {
             emit_ups_error(
@@ -964,9 +938,8 @@ pub async fn handle_import_to_ups(
     Ok(())
 }
 
-/// import_to_ups hard-error strings (ups_handler.py:565-668). A fall-through
-/// (unknown source type -> `pal_dto` never set) is Python's final
-/// "Failed to retrieve Pal data".
+/// `import_to_ups`'s hard-error strings — deliberately distinct from
+/// `clone_error_string`'s per-pal wording for the same failures.
 fn import_error_string(source_type: &str, reason: ResolveError) -> &'static str {
     match (source_type, reason) {
         ("pal_box", ResolveError::PlayerNotFound | ResolveError::PlayerHasNoPals) => {
@@ -1009,18 +982,11 @@ pub async fn handle_export_ups_pal(
                 emit_ups_error(ctx, "Player UID required for pal box export".into());
                 return Ok(());
             };
-            // player.pal_box_id + existence check (ups_handler.py:292-304).
-            // Python's `save_file.get_players()` eager-loads every player at
-            // save-load, so a real player_uid resolves there even if the
-            // frontend never "opened" it. This port lazy-loads players on
-            // demand, so `build_player_dto` alone would wrongly reject a
-            // real-but-unopened destination player -- gate existence against
-            // the eagerly populated `player_summaries` first (a genuinely
-            // nonexistent uid still errors "Player not found", matching
-            // Python), then force-load the player's GVAS before calling
-            // `build_player_dto`. See `SaveSession::ensure_player_loaded`'s
-            // doc comment and `handlers::gps::handle_clone_gps_pal_to_player`
-            // for the identical fix.
+            // Players are loaded lazily, so `build_player_dto` alone would
+            // reject a real-but-not-yet-opened destination player. Check
+            // existence against the eagerly built `player_summaries` first, then
+            // force-load the player's GVAS. Same guard as
+            // `handlers::gps::handle_clone_gps_pal_to_player`.
             let save = ctx.session.save.as_ref().unwrap();
             if !save.player_summaries.contains_key(&player_uid) {
                 emit_ups_error(ctx, "Player not found".into());
@@ -1099,10 +1065,8 @@ pub async fn handle_export_ups_pal(
             data.pal_id,
             &data.destination_type,
             &psp_db::ups::ExportDestinationInfo {
-                // Python's `getattr(app_state.save_file, "name", "Unknown")`
-                // (ups_handler.py:330) always resolves to "Unknown": the
-                // `save_file` is a `SaveManager` with no `name` attribute (see
-                // `new_ups_pal_for_source`). Match that literal, not world_name.
+                // The literal "Unknown", not world_name — see
+                // `new_ups_pal_for_source`.
                 save_file_name: Some("Unknown".to_string()),
                 player_name,
                 player_uid: data.destination_player_uid.map(|uid| uid.to_string()),

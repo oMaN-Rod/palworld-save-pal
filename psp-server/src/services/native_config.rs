@@ -1,5 +1,7 @@
-//! PalWorldSettings.ini generation for native servers. Mirrors
-//! NativeServerService.write_palworld_settings + helpers (native_server_service.py).
+//! PalWorldSettings.ini generation for native servers. The file holds a single
+//! `[/Script/Pal.PalGameWorldSettings]` section whose `OptionSettings=(...)` line
+//! is one comma-separated `Key=Value` list; strings are quoted, bools are
+//! `True`/`False`, and unknown keys are ignored by the server.
 use std::path::{Path, PathBuf};
 
 use psp_db::servers::ServerRecord;
@@ -42,8 +44,9 @@ pub fn nativemods_path(install_path: &str) -> String {
         .to_string()
 }
 
-/// ENV var key -> PalWorldSettings.ini OptionSettings key. Unmapped keys are
-/// skipped when writing config (matches the Python code path, not its comment).
+/// ENV var key -> OptionSettings key. Unmapped keys are skipped when writing the
+/// ini. Several ini keys are misspelled by the game itself (Decreace, Regene) —
+/// the spellings here are what the server actually reads.
 const ENV_TO_INI: &[(&str, &str)] = &[
     ("SERVER_NAME", "ServerName"),
     ("SERVER_DESCRIPTION", "ServerDescription"),
@@ -230,7 +233,8 @@ const ENV_TO_INI: &[(&str, &str)] = &[
     ),
 ];
 
-/// Docker-image-only ENV keys — never written to PalWorldSettings.ini.
+/// Consumed by the Docker image's entrypoint, not by the game — never written to
+/// PalWorldSettings.ini.
 const DOCKER_ONLY_KEYS: &[&str] = &[
     "MULTITHREADING",
     "COMMUNITY",
@@ -354,7 +358,8 @@ pub fn format_ini_value(ini_key: &str, value: &str) -> String {
     value.to_string()
 }
 
-/// Split "K=V,K=V" respecting quoted strings and parenthesized tuples.
+/// Splits the `OptionSettings` list on commas, ignoring those inside quoted
+/// strings and parenthesized tuples like `CrossplayPlatforms=(Steam,Xbox)`.
 pub fn split_option_settings(options: &str) -> Vec<String> {
     let mut pairs = Vec::new();
     let mut current = String::new();
@@ -387,8 +392,8 @@ pub fn split_option_settings(options: &str) -> Vec<String> {
     pairs
 }
 
-/// Parse DefaultPalWorldSettings.ini; ordered key/value pairs, or the hardcoded
-/// defaults if the file/OptionSettings line is missing.
+/// Reads the server's own DefaultPalWorldSettings.ini (shipped at the install
+/// root), falling back to [`hardcoded_defaults`] when it is missing or malformed.
 pub fn parse_default_settings(default_ini_path: &Path) -> Vec<(String, String)> {
     let Ok(contents) = std::fs::read_to_string(default_ini_path) else {
         return hardcoded_defaults();
@@ -423,8 +428,8 @@ fn upsert(defaults: &mut Vec<(String, String)>, key: &str, value: String) {
     }
 }
 
-/// write_palworld_settings content: defaults <- env_vars (mapped keys only)
-/// <- explicit server fields (always win).
+/// Precedence: shipped defaults, then mapped `env_vars`, then the explicit server
+/// fields, which always win.
 pub fn build_palworld_settings_content(record: &ServerRecord) -> String {
     let default_ini_path = Path::new(&record.install_path).join("DefaultPalWorldSettings.ini");
     let mut settings = parse_default_settings(&default_ini_path);
@@ -509,7 +514,8 @@ pub fn write_palworld_settings(record: &ServerRecord) -> std::io::Result<()> {
     )
 }
 
-/// Fallback defaults matching NativeServerService._hardcoded_defaults (verbatim).
+/// Stock OptionSettings for a vanilla server, used when the install has no
+/// readable DefaultPalWorldSettings.ini.
 fn hardcoded_defaults() -> Vec<(String, String)> {
     [
         ("Difficulty", "None"),
@@ -751,7 +757,7 @@ mod tests {
         let mut record = native_record(&scratch.path().to_string_lossy());
         record.server_password = String::new();
         let content = build_palworld_settings_content(&record);
-        // A few sentinel defaults from _hardcoded_defaults
+        // Sentinel values from the hardcoded fallback
         assert!(content.contains("Difficulty=None"));
         assert!(content.contains("BanListURL=\"https://b.palworldgame.com/api/banlist.txt\""));
         assert!(content.contains("CrossplayPlatforms=(Steam,Xbox,PS5,Mac)"));

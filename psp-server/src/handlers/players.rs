@@ -1,7 +1,5 @@
-//! Player-management WS handlers — ports of
-//! `palworld_save_pal/ws/handlers/lazy_load_handler.py` (request_player_details),
-//! `player_handler.py` (delete_player) and `technologies_handler.py`
-//! (set_technology_data).
+//! Player-management WS handlers: request_player_details, delete_player,
+//! set_technology_data.
 
 use serde::Deserialize;
 use serde_json::json;
@@ -10,7 +8,6 @@ use crate::dispatcher::HandlerCtx;
 use crate::handler_error::HandlerError;
 use crate::messages::MessageType;
 
-/// ws/messages.py:743-745 (origin defaults to "edit").
 #[derive(Debug, Deserialize)]
 pub struct RequestPlayerDetailsData {
     pub player_id: uuid::Uuid,
@@ -22,14 +19,14 @@ fn default_origin() -> String {
     "edit".to_string()
 }
 
-/// ws/messages.py:470-472.
 #[derive(Debug, Deserialize)]
 pub struct DeletePlayerData {
     pub player_id: uuid::Uuid,
     pub origin: String,
 }
 
-/// ws/messages.py:436-440 — camelCase field names copied EXACTLY off the wire.
+/// The frontend sends these three fields in camelCase; the renames are the
+/// wire contract, not a style choice.
 #[derive(Debug, Deserialize)]
 pub struct TechnologyData {
     #[serde(rename = "playerID")]
@@ -41,11 +38,9 @@ pub struct TechnologyData {
     pub ancient_tech_points: i64,
 }
 
-/// request_player_details_handler (lazy_load_handler.py:22-64). No save →
-/// `get_player_details_response` `{error, origin}` (NOT the dispatcher error
-/// frame). Otherwise the domain's on-demand load emits `progress_message`
-/// frames first, then the response is `{player, player_id (string), origin}`
-/// or `{error, origin}`.
+/// Every outcome answers under `get_player_details_response`, and `origin` is
+/// echoed on the error payload too — the frontend routes the response (success
+/// or failure) back to the view that asked for it.
 pub async fn handle_request_player_details(
     data: RequestPlayerDetailsData,
     ctx: &mut HandlerCtx<'_>,
@@ -84,10 +79,8 @@ pub async fn handle_request_player_details(
     Ok(())
 }
 
-/// delete_player_handler (player_handler.py:14-39). No save → `warning`
-/// "No save file loaded". Otherwise progress frames (from the domain), then
-/// `delete_player` `{player_id: id-or-null, origin}` — Python emits the id on
-/// success, `None` on failure.
+/// `player_id` on the response is the deleted id, or `null` when nothing was
+/// deleted — that null is how the frontend detects a no-op delete.
 pub async fn handle_delete_player(
     data: DeletePlayerData,
     ctx: &mut HandlerCtx<'_>,
@@ -114,9 +107,7 @@ pub async fn handle_delete_player(
     Ok(())
 }
 
-/// set_technology_data_handler (technologies_handler.py:40-56): silently
-/// returns (no frame) when no save is loaded; otherwise applies the update and
-/// emits `set_technology_data` `{"success": true}`.
+/// Emits nothing at all when no save is loaded.
 pub async fn handle_set_technology_data(
     data: TechnologyData,
     ctx: &mut HandlerCtx<'_>,

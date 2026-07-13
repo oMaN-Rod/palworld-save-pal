@@ -5,9 +5,8 @@ use psp_core::progress::ProgressSink;
 
 use crate::messages::MessageType;
 
-/// Cheaply cloneable handle that queues outgoing frames onto the
-/// per-connection writer task. Response construction mirrors
-/// ws/utils.py:29 build_response: {"type": <wire>, "data": <payload>}.
+/// Cheaply cloneable handle that queues outgoing frames onto the per-connection
+/// writer task, each wrapped in the wire envelope {"type": ..., "data": ...}.
 #[derive(Clone)]
 pub struct Emitter {
     sender: UnboundedSender<Message>,
@@ -19,8 +18,8 @@ impl Emitter {
     }
 
     pub fn emit<T: serde::Serialize>(&self, message_type: MessageType, data: &T) {
-        // Serialize the payload on its own first. If a `Serialize` impl fails we
-        // must not panic the connection — log and drop the frame instead.
+        // Serialize the payload on its own first: a failing `Serialize` impl must
+        // not panic the connection, so log and drop the frame instead.
         let payload = match serde_json::to_value(data) {
             Ok(value) => value,
             Err(serialize_error) => {
@@ -29,8 +28,6 @@ impl Emitter {
                 return;
             }
         };
-        // `payload` is already a valid Value, so wrapping it in the envelope and
-        // stringifying it cannot fail.
         let frame = serde_json::json!({ "type": message_type.as_wire(), "data": payload });
         let text =
             serde_json::to_string(&frame).expect("envelope of a Value cannot fail to serialize");
@@ -38,7 +35,7 @@ impl Emitter {
         let _ = self.sender.send(Message::Text(text.into()));
     }
 
-    /// {"type": "error", "data": {"message": ..., "trace": ...}} — ws/manager.py:46-49.
+    /// Emits {"type": "error", "data": {"message": ..., "trace": ...}}.
     pub fn emit_error(&self, message: &str, trace: &str) {
         self.emit(
             MessageType::Error,
@@ -97,10 +94,9 @@ mod tests {
         );
     }
 
-    /// A payload whose `Serialize` impl always fails. Note that a bare
-    /// `f64::NAN`/`INFINITY` does *not* exercise this path: serde_json encodes
-    /// non-finite floats as JSON `null` rather than erroring, so it would not
-    /// discriminate the fix. This type deterministically returns `Err`.
+    /// A payload whose `Serialize` impl always fails. A bare `f64::NAN` does
+    /// *not* exercise this path: serde_json encodes non-finite floats as JSON
+    /// `null` rather than erroring.
     struct AlwaysFailsToSerialize;
 
     impl serde::Serialize for AlwaysFailsToSerialize {
@@ -114,7 +110,6 @@ mod tests {
         let (sender, mut receiver) = tokio::sync::mpsc::unbounded_channel();
         let emitter = Emitter::new(sender);
 
-        // Must be logged and dropped, not panic the connection.
         emitter.emit(MessageType::GetVersion, &AlwaysFailsToSerialize);
         assert!(matches!(
             receiver.try_recv(),

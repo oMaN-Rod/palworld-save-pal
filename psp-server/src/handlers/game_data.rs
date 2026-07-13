@@ -1,6 +1,5 @@
 //! Static game-data handlers: forward data/json/* files, merged with the
-//! l10n table for the current settings language. Each function is a
-//! wire-exact port of the Python handler named in the plan table.
+//! l10n table for the current settings language.
 
 use serde_json::{json, Map, Value};
 
@@ -10,13 +9,10 @@ use crate::dispatcher::HandlerCtx;
 use crate::handler_error::HandlerError;
 use crate::messages::MessageType;
 
-/// Python reads app_state.settings.language; we read the settings row.
 async fn current_language(ctx: &HandlerCtx<'_>) -> Result<String, HandlerError> {
     Ok(psp_db::settings::get_settings(&ctx.app.db).await?.language)
 }
 
-/// A data file as a JSON object; missing file behaves like Python's
-/// auto-created empty {} file.
 fn object_table(game_data: &GameData, key: &str) -> Map<String, Value> {
     game_data
         .get(key)
@@ -36,8 +32,8 @@ fn string_or(entry: Option<&Value>, field: &str, fallback: &str) -> Value {
         .unwrap_or_else(|| Value::String(fallback.to_string()))
 }
 
-/// {id, localized_name, description, details} — shape shared by
-/// active_skills / passive_skills / technologies.
+/// Wire shape `{id, localized_name, description, details}`, shared by the
+/// active_skills / passive_skills / technologies responses.
 fn skill_style_table(game_data: &GameData, language: &str, file: &str) -> Value {
     let base = object_table(game_data, file);
     let localization = object_table(game_data, &format!("l10n/{language}/{file}"));
@@ -57,7 +53,6 @@ fn skill_style_table(game_data: &GameData, language: &str, file: &str) -> Value 
     Value::Object(merged)
 }
 
-/// active_skills_handler.py — {id, localized_name, description, details}.
 pub async fn handle_get_active_skills(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let language = current_language(ctx).await?;
     let payload = skill_style_table(&ctx.app.game_data, &language, "active_skills");
@@ -65,7 +60,6 @@ pub async fn handle_get_active_skills(ctx: &mut HandlerCtx<'_>) -> Result<(), Ha
     Ok(())
 }
 
-/// passive_skills_handler.py — same shape as active_skills.
 pub async fn handle_get_passive_skills(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let language = current_language(ctx).await?;
     let payload = skill_style_table(&ctx.app.game_data, &language, "passive_skills");
@@ -73,7 +67,6 @@ pub async fn handle_get_passive_skills(ctx: &mut HandlerCtx<'_>) -> Result<(), H
     Ok(())
 }
 
-/// technologies_handler.py — same shape as active_skills.
 pub async fn handle_get_technologies(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let language = current_language(ctx).await?;
     let payload = skill_style_table(&ctx.app.game_data, &language, "technologies");
@@ -81,8 +74,8 @@ pub async fn handle_get_technologies(ctx: &mut HandlerCtx<'_>) -> Result<(), Han
     Ok(())
 }
 
-/// elements_handler.py: {"localized_name": <l10n>, **details} — only
-/// localized_name is taken from the l10n entry.
+/// Wire shape `{localized_name, **details}` — only `localized_name` comes
+/// from the l10n entry; every other field is spread from the base entry.
 pub async fn handle_get_elements(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let language = current_language(ctx).await?;
     let base = object_table(&ctx.app.game_data, "elements");
@@ -106,7 +99,7 @@ pub async fn handle_get_elements(ctx: &mut HandlerCtx<'_>) -> Result<(), Handler
     Ok(())
 }
 
-/// items_handler.py: {"id", "details", "info"} where info is the whole l10n entry.
+/// Wire shape `{id, details, info}`, where `info` is the whole l10n entry.
 pub async fn handle_get_items(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let language = current_language(ctx).await?;
     let base = object_table(&ctx.app.game_data, "items");
@@ -127,7 +120,8 @@ pub async fn handle_get_items(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerErr
     Ok(())
 }
 
-/// missions_handler.py: quest_type defaults to "Main", rewards to {}.
+/// `quest_type` and `rewards` are always present on the wire, defaulting to
+/// "Main" / `{}` so the frontend never has to null-check them.
 pub async fn handle_get_missions(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let language = current_language(ctx).await?;
     let base = object_table(&ctx.app.game_data, "missions");
@@ -152,7 +146,7 @@ pub async fn handle_get_missions(ctx: &mut HandlerCtx<'_>) -> Result<(), Handler
     Ok(())
 }
 
-/// buildings_handler.py: {"localized_name", "description", **details}.
+/// Wire shape `{localized_name, description, **details}`.
 pub async fn handle_get_buildings(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let language = current_language(ctx).await?;
     let base = object_table(&ctx.app.game_data, "buildings");
@@ -181,7 +175,6 @@ pub async fn handle_get_buildings(ctx: &mut HandlerCtx<'_>) -> Result<(), Handle
     Ok(())
 }
 
-/// work_suitability_handler.py — raw l10n/<lang>/work_suitability file.
 pub async fn handle_get_work_suitability(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let language = current_language(ctx).await?;
     let payload = raw_file(
@@ -192,43 +185,38 @@ pub async fn handle_get_work_suitability(ctx: &mut HandlerCtx<'_>) -> Result<(),
     Ok(())
 }
 
-/// exp_handler.py — raw exp file.
 pub async fn handle_get_exp_data(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let payload = raw_file(&ctx.app.game_data, "exp");
     ctx.emitter.emit(MessageType::GetExpData, &payload);
     Ok(())
 }
 
-/// friendship_handler.py — raw friendship file.
 pub async fn handle_get_friendship_data(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let payload = raw_file(&ctx.app.game_data, "friendship");
     ctx.emitter.emit(MessageType::GetFriendshipData, &payload);
     Ok(())
 }
 
-/// map_objects_handler.py:get_map_objects_handler — raw map_objects file.
 pub async fn handle_get_map_objects(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let payload = raw_file(&ctx.app.game_data, "map_objects");
     ctx.emitter.emit(MessageType::GetMapObjects, &payload);
     Ok(())
 }
 
-/// map_objects_handler.py:get_fast_travel_points_handler — raw fast_travel_points file.
 pub async fn handle_get_fast_travel_points(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let payload = raw_file(&ctx.app.game_data, "fast_travel_points");
     ctx.emitter.emit(MessageType::GetFastTravelPoints, &payload);
     Ok(())
 }
 
-/// map_objects_handler.py:get_effigies_handler — raw effigies file.
 pub async fn handle_get_effigies(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let payload = raw_file(&ctx.app.game_data, "effigies");
     ctx.emitter.emit(MessageType::GetEffigies, &payload);
     Ok(())
 }
 
-/// ui_common_handler.py:20 responds with MessageType.GET_ACTIVE_SKILLS —
-/// a real Python bug that is now wire behavior. Do NOT fix it here.
+/// Responds under the `get_active_skills` message type, NOT `get_ui_common`.
+/// The frontend correlates on that type — do not "fix" it here.
 pub async fn handle_get_ui_common(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let language = current_language(ctx).await?;
     let payload = raw_file(&ctx.app.game_data, &format!("l10n/{language}/ui"));
@@ -236,15 +224,15 @@ pub async fn handle_get_ui_common(ctx: &mut HandlerCtx<'_>) -> Result<(), Handle
     Ok(())
 }
 
-/// version_handler.py — the crate version string.
 pub async fn handle_get_version(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let version = ctx.app.game_data.version().to_string();
     ctx.emitter.emit(MessageType::GetVersion, &version);
     Ok(())
 }
 
-/// pal_handler.py:26-50 — mutates the base entry, appending localized_name
-/// and description.
+/// Localization is merged INTO the base entry (rather than nested under a
+/// sub-object), so every pal on the wire carries `localized_name` and
+/// `description` alongside its base fields.
 pub async fn handle_get_pals(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let language = current_language(ctx).await?;
     let base = object_table(&ctx.app.game_data, "pals");
@@ -278,7 +266,8 @@ pub async fn handle_get_pals(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerErro
     Ok(())
 }
 
-/// lab_research_handler.py:16-35 — fallback description is null (Python None).
+/// `description` is present but `null` when the l10n table has no entry — the
+/// frontend distinguishes null from an empty string here.
 pub async fn handle_get_lab_research(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let language = current_language(ctx).await?;
     let base = object_table(&ctx.app.game_data, "lab_research");
@@ -376,10 +365,8 @@ mod tests {
         )
         .unwrap();
         fs::write(json_dir.join("l10n/en/lab_research.json"), r#"{}"#).unwrap();
-        // Handlers with no dedicated table logic to exercise beyond correct
-        // wiring (right GameData key, right response MessageType): still
-        // given distinct fixture content per-file so a copy-paste mistake
-        // that reads the wrong file or emits the wrong type is caught.
+        // Distinct content per file, so a handler that reads the wrong file
+        // (or emits the wrong response type) is caught.
         fs::write(
             json_dir.join("passive_skills.json"),
             r#"{"Vampiric": {"power": 5}}"#,
@@ -530,7 +517,7 @@ mod tests {
         assert_eq!(frame["type"], "get_exp_data");
         assert_eq!(frame["data"], json!({"1": {"TotalEXP": 0}}));
 
-        // Missing file → empty object (Python auto-creates an empty {} file).
+        // Missing file → empty object.
         let frame = run_handler!(test, handle_get_map_objects);
         assert_eq!(frame["type"], "get_map_objects");
         assert_eq!(frame["data"], json!({}));
@@ -538,12 +525,9 @@ mod tests {
 
     #[tokio::test]
     async fn remaining_raw_forwarders_send_correct_file_and_type() {
-        // work_suitability, friendship_data, fast_travel_points and effigies
-        // share the same raw_file() plumbing as exp_data/map_objects but have
-        // no dedicated coverage in the brief's test list; pin each one's
-        // GameData key and response MessageType explicitly so a copy-paste
-        // mistake (e.g. friendship_data reading fast_travel_points.json) is
-        // still catchable.
+        // These four share raw_file()'s plumbing; pin each one's GameData key
+        // and response type so a mix-up (e.g. friendship_data reading
+        // fast_travel_points.json) is caught.
         let mut test = TestContext::new(write_fixture_tree).await;
 
         let frame = run_handler!(test, handle_get_work_suitability);
@@ -565,7 +549,6 @@ mod tests {
 
     #[tokio::test]
     async fn ui_common_response_is_typed_get_active_skills() {
-        // Wire-exact reproduction of the Python bug in ui_common_handler.py:20.
         let mut test = TestContext::new(write_fixture_tree).await;
         let frame = run_handler!(test, handle_get_ui_common);
         assert_eq!(frame["type"], "get_active_skills");
