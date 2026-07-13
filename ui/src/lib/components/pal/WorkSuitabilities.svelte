@@ -60,8 +60,8 @@
 			title: m.edit_entity({ entity: m.work_suitability() }),
 			value: value,
 			min: 0,
-			max: 5,
-			markers: [1, 2, 3, 4, 5]
+			max: 10,
+			markers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 		});
 		if (!result) return;
 		if (!pal!.work_suitability) {
@@ -72,7 +72,7 @@
 			...pal!.work_suitability,
 			[workSuitability]: Math.min(
 				result - (palData?.work_suitability[workSuitability as WorkSuitability] ?? 0),
-				4
+				9
 			)
 		};
 

@@ -201,7 +201,7 @@
 		if (!palData) return;
 		for (const [key, value] of Object.entries(palData.work_suitability)) {
 			if (value === 0) continue;
-			appState.selectedPal.work_suitability[key as WorkSuitability] = Math.min(5 - value, 4);
+			appState.selectedPal.work_suitability[key as WorkSuitability] = Math.min(10 - value, 9);
 		}
 		appState.selectedPal.state = EntryState.MODIFIED;
 	}
