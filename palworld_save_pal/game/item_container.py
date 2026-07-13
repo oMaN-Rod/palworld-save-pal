@@ -89,7 +89,9 @@ class ItemContainer(BaseModel):
             "%s (%s) with keys %s", self.type.value, self.id, other_container.keys()
         )
         for key, value in other_container.items():
-            if key == "slots":
+            if key == "slot_num" and isinstance(value, int):
+                self.set_slot_count(value)
+            elif key == "slots":
                 new_slots = self._build_new_slots(value)
                 self._update_common_container_slots(new_slots, common_container)
                 self._clean_up_inventory(new_slots)
