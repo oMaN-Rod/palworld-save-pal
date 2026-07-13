@@ -158,7 +158,7 @@
 	{@const max = maxRankFor(relicKey)}
 	{@const effect = effectFor(relicKey)}
 	<!-- Disable editing until this relic's cap is known. -->
-	<Tooltip label={entry.localized_name}>
+	<Tooltip label={`${entry.localized_name} +${effect}%`}>
 		<button
 			class="hover:ring-secondary-500 bg-surface-600/50 flex w-full items-center space-x-2 rounded-sm py-2 pr-2 hover:ring disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:ring-0"
 			disabled={max === undefined}
@@ -170,9 +170,6 @@
 				alt={entry.localized_name}
 				class="mx-2 h-6 w-6"
 			/>
-			{#if effect !== undefined}
-				<span class="opacity-80">+{effect}%</span>
-			{/if}
 			<span>
 				{rankOf(relicKey)}{#if max !== undefined}<span class="opacity-60">/{max}</span>{/if}
 			</span>
