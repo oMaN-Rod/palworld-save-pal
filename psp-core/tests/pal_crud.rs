@@ -1176,7 +1176,7 @@ fn add_player_dps_pal_into_a_recycled_slot_inherits_a_stale_is_rare_pal_flag() {
 
 /// A DPS save for the `FullStomach` tests. Slot 0 is never-used (`CharacterID`
 /// "None", no `FullStomach` key at all). Slot 1 is recycled from an "Alpaca"
-/// (`max_full_stomach` 225.0 in `pals.json`) and carries a stale 999.0 --
+/// (`max_full_stomach` 150.0 in `pals.json`) and carries a stale 999.0 --
 /// chosen to collide with neither the 150.0 missing-key default nor either
 /// species' real max, so an inherited value is unmistakable.
 fn dps_fixture_for_stomach() -> (SaveSession, GameData, Uuid) {
@@ -1293,10 +1293,10 @@ fn add_player_dps_pal_into_a_recycled_slot_overwrites_stale_full_stomach_using_t
     .expect("slot 1 explicitly requested");
     assert_eq!(slot_index, 1);
     assert_eq!(
-        new_pal.stomach, 225.0,
+        new_pal.stomach, 150.0,
         "_set_max_stomach() (pal.py) runs during Pal.__init__, BEFORE reset()/ \
          character_id reassignment -- it keys off the slot's PREVIOUS \
-         occupant (\"Alpaca\", max_full_stomach 225.0 per data/json/pals.json), \
+         occupant (\"Alpaca\", max_full_stomach 150.0 per data/json/pals.json), \
          never the stale 999.0 already in the slot and never the newly- \
          requested \"Sheepball\" -- see this task's report"
     );

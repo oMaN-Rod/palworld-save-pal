@@ -370,11 +370,11 @@ fn heal_save_parameter_clears_sickness_and_resets_sanity_and_stomach() {
 }
 
 /// A recognized pal uses its `pals.json` `max_full_stomach` ("Alpaca" is
-/// 225.0 there); an unrecognized character_id falls back to a flat 300.0.
+/// 150.0 there); an unrecognized character_id falls back to a flat 300.0.
 #[test]
 fn max_stomach_for_uses_pals_json_when_recognized_else_the_flat_default() {
     let data = game_data();
-    assert_eq!(pal::max_stomach_for("Alpaca", &data), 225.0);
+    assert_eq!(pal::max_stomach_for("Alpaca", &data), 150.0);
     assert_eq!(pal::max_stomach_for("TotallyMadeUpCreature", &data), 300.0);
 }
 
@@ -407,8 +407,8 @@ fn new_pal_entry_reads_back() {
     assert_eq!(dto.talent_hp, 50);
     assert_eq!(dto.talent_shot, 50);
     assert_eq!(dto.talent_defense, 50);
-    // Sheepball's own `max_full_stomach` (150), not the flat 300 fallback.
-    assert_eq!(dto.stomach, 150.0);
+    // Sheepball's own `max_full_stomach` (100), not the flat 300 fallback.
+    assert_eq!(dto.stomach, 100.0);
     assert!(dto.learned_skills.is_empty());
     assert!(dto.active_skills.is_empty());
     assert!(dto.passive_skills.is_empty());
