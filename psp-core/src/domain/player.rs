@@ -1007,9 +1007,9 @@ fn apply_effigy_relic_counters(
             .unwrap_or(0);
         let possess = current.saturating_add(newly_collected as i32);
         record_data.insert("RelicPossessNum", props::int_property(possess));
-        possess
+        Some(possess)
     } else {
-        0
+        None
     };
 
     // Mirror the flat flags into the CapturePower by-type entry, when present.
@@ -1042,23 +1042,29 @@ fn apply_effigy_relic_counters(
         }
     }
 
-    // RelicPossessNumMap[CapturePower] mirrors the scalar, when present.
-    if let Some(entries) = record_data
-        .0
-        .get_mut(&possess_map_key)
-        .and_then(props::map_entries_mut)
-    {
-        match entries
-            .iter_mut()
-            .find(|entry| relic_type_name(&entry.key) == Some(CAPTURE_POWER_RELIC))
+    // RelicPossessNumMap[CapturePower] mirrors the scalar, when present. `possess` is
+    // `None` only when the legacy scalar is absent *and* nothing was newly collected --
+    // there is no value to mirror then, and writing the `0` default would zero a real
+    // map entry. (Unreachable in every real save examined, where the scalar always
+    // exists alongside the map, but the map write must not depend on that.)
+    if let Some(possess) = possess {
+        if let Some(entries) = record_data
+            .0
+            .get_mut(&possess_map_key)
+            .and_then(props::map_entries_mut)
         {
-            Some(entry) => entry.value = props::int_property(possess),
-            // The map's declared key type is EnumProperty, so a fresh key must be one
-            // too -- a NameProperty here would not read back as a relic type.
-            None => entries.push(uesave::MapEntry {
-                key: props::enum_property(CAPTURE_POWER_RELIC),
-                value: props::int_property(possess),
-            }),
+            match entries
+                .iter_mut()
+                .find(|entry| relic_type_name(&entry.key) == Some(CAPTURE_POWER_RELIC))
+            {
+                Some(entry) => entry.value = props::int_property(possess),
+                // The map's declared key type is EnumProperty, so a fresh key must be one
+                // too -- a NameProperty here would not read back as a relic type.
+                None => entries.push(uesave::MapEntry {
+                    key: props::enum_property(CAPTURE_POWER_RELIC),
+                    value: props::int_property(possess),
+                }),
+            }
         }
     }
 

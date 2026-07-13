@@ -260,3 +260,36 @@ pub fn first_player_with_relics(session: &mut SaveSession, data: &GameData) -> U
     }
     panic!("no fixture player carries by-type relic structures");
 }
+
+/// The relic type every effigy grants; the only one the legacy flat fields mirror.
+#[allow(dead_code)]
+pub const CAPTURE_POWER_RELIC: &str = "EPalRelicType::CapturePower";
+
+/// The first fixture player carrying a *non*-CapturePower relic type with at least one
+/// true flag. Only such a player can witness a regression that wipes the other relic
+/// types' flag sets: an effigy unlock touches CapturePower alone, so every other type's
+/// flags must survive the write byte for byte.
+#[allow(dead_code)]
+pub fn first_player_with_non_capture_power_relics(
+    session: &mut SaveSession,
+    data: &GameData,
+) -> Uuid {
+    let ids: Vec<Uuid> = session.player_file_refs.keys().copied().collect();
+    for id in ids {
+        if psp_core::domain::player::get_player_details(session, data, id, &null_progress())
+            .ok()
+            .flatten()
+            .is_none()
+        {
+            continue;
+        }
+        let sav = player_sav_json(session, id);
+        let has_other = relic_by_type_flags(&sav)
+            .iter()
+            .any(|(ty, flags)| ty != CAPTURE_POWER_RELIC && !flags.is_empty());
+        if has_other {
+            return id;
+        }
+    }
+    panic!("no fixture player carries a non-CapturePower relic type with flags");
+}

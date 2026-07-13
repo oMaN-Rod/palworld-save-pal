@@ -2,6 +2,8 @@
 
 mod common;
 
+use std::collections::{BTreeMap, BTreeSet};
+
 use psp_core::domain::{guild, pal, player};
 use psp_core::dto::ordered_map::OrderedMap;
 use psp_core::gamedata::GameData;
@@ -680,7 +682,27 @@ fn relic_possess_num_only_counts_newly_collected_effigies() {
 fn effigy_unlock_keeps_1_0_relic_structures_consistent() {
     let mut session = common::load_fixture_session("v1_relics");
     let data = game_data();
-    let player_id = common::first_player_with_relics(&mut session, &data);
+    // A player with a second, non-CapturePower relic type: without one, the
+    // "other types are untouched" assertions below would be vacuous.
+    let player_id = common::first_player_with_non_capture_power_relics(&mut session, &data);
+
+    // Snapshot every non-CapturePower type's flag set *before* the write. Comparing the
+    // exp index against the by-type flags the code under test just wrote can only prove
+    // they agree with each other -- a regression that wiped the other types' flags would
+    // move both sides together and still pass. These are the fixed reference points.
+    let before_by_type = common::relic_by_type_flags(&common::player_sav_json(&session, player_id));
+    let other_types_before: BTreeMap<String, BTreeSet<String>> = before_by_type
+        .iter()
+        .filter(|(ty, flags)| ty.as_str() != common::CAPTURE_POWER_RELIC && !flags.is_empty())
+        .map(|(ty, flags)| (ty.clone(), flags.clone()))
+        .collect();
+    assert!(
+        !other_types_before.is_empty(),
+        "fixture sanity: this player must carry a non-CapturePower relic type with flags"
+    );
+    for (ty, flags) in &other_types_before {
+        println!("non-CapturePower relic type {ty}: {} flag(s)", flags.len());
+    }
 
     let mut dto = player::build_player_dto(&session, &data, player_id)
         .unwrap()
@@ -735,6 +757,31 @@ fn effigy_unlock_keeps_1_0_relic_structures_consistent() {
     assert_eq!(
         exp_index as usize, total,
         "RelicBonusExpTableIndex must equal the total by-type flag count"
+    );
+
+    // (4) An effigy unlock grants CapturePower only. Every other relic type's flag set
+    // must come through the write non-empty and byte-for-byte unchanged -- asserted
+    // against the snapshot taken before the write, not against what the code just wrote.
+    for (ty, expected) in &other_types_before {
+        let actual = by_type.get(ty);
+        assert_eq!(
+            actual,
+            Some(expected),
+            "relic type {ty} must keep its flag set unchanged across an effigy unlock"
+        );
+        assert!(
+            actual.is_some_and(|flags| !flags.is_empty()),
+            "relic type {ty} must still carry flags after an effigy unlock"
+        );
+    }
+    // The exp index therefore counts more than just CapturePower.
+    let capture_power_flags = by_type
+        .get(common::CAPTURE_POWER_RELIC)
+        .map(|f| f.len())
+        .unwrap_or(0);
+    assert!(
+        total > capture_power_flags,
+        "the exp index must count non-CapturePower flags too, else this test is vacuous"
     );
 }
 

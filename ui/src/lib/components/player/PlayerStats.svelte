@@ -32,9 +32,15 @@
 		return stat === 'capture_rate' ? 'capture_power' : stat;
 	}
 
+	// Stays `{}` while the fetch is in flight, and if it fails. Either way we do not
+	// know any rank's cap, and every rank editor stays disabled until we do -- see
+	// `updateExtraStat`.
 	let relics: Record<string, RelicRankData> = $state({});
 	$effect(() => {
-		relicData.getRelicData().then((data) => (relics = data));
+		relicData
+			.getRelicData()
+			.then((data) => (relics = data))
+			.catch((error) => console.error('Failed to load relic data; rank editing disabled', error));
 	});
 
 	const extraStats = $derived(
@@ -58,16 +64,22 @@
 
 	async function updateExtraStat(stat: string) {
 		const max = maxRankFor(stat);
+		// No cap, no edit. Opening the slider without a `max` would let it fall back to
+		// its default of 50 and write, say, sphere_homing = 50 when the real max_rank is
+		// 4 -- exactly the invalid save state the cap exists to prevent. Relic data is
+		// still loading, or its fetch failed; the button is disabled either way, and this
+		// is the guard that makes the write impossible rather than merely unlikely.
+		if (max === undefined) return;
 		// @ts-ignore
 		const result = await modal.showModal<number>(NumberSliderModal, {
 			title: m.edit_entity({ entity: stat }),
 			value: player.status_point_list[stat],
 			min: 0,
-			...(max !== undefined ? { max } : {})
+			max
 		});
 		if (result === undefined || result === null) return;
 		// The modal already clamps to `max`; this is a backstop.
-		const value = max !== undefined ? Math.min(Math.max(result, 0), max) : Math.max(result, 0);
+		const value = Math.min(Math.max(result, 0), max);
 		player.status_point_list[stat] = value;
 		player.state = EntryState.MODIFIED;
 	}
@@ -156,8 +168,11 @@
 {#snippet rankButton(stat: string)}
 	{@const max = maxRankFor(stat)}
 	{@const effect = effectFor(stat)}
+	<!-- Read-only until we know this rank's cap: the row still shows the current value,
+	     but an edit that cannot be clamped must not be reachable. -->
 	<button
-		class="hover:ring-secondary-500 bg-surface-600/50 flex w-full items-center space-x-2 rounded-sm py-2 pr-2 hover:ring"
+		class="hover:ring-secondary-500 bg-surface-600/50 flex w-full items-center space-x-2 rounded-sm py-2 pr-2 hover:ring disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:ring-0"
+		disabled={max === undefined}
 		onclick={() => updateExtraStat(stat)}
 	>
 		<span class="grow pl-2 text-start">{stat}</span>

@@ -48,9 +48,12 @@
 			closeModal(null);
 			return;
 		}
-		// The number input lets you type past the slider's bounds; the modal never
-		// returns a value outside [min, max].
-		closeModal(Math.min(Math.max(sliderValue[0] ?? min, min), max));
+		// The number input lets you type past the slider's bounds -- and clearing it
+		// yields NaN, which would sail straight through Math.min/Math.max. The modal
+		// never returns a value outside [min, max].
+		const raw = sliderValue[0];
+		const value = typeof raw === 'number' && Number.isFinite(raw) ? raw : min;
+		closeModal(Math.min(Math.max(value, min), max));
 	}
 
 	onMount(() => {
