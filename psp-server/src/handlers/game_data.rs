@@ -191,6 +191,12 @@ pub async fn handle_get_exp_data(ctx: &mut HandlerCtx<'_>) -> Result<(), Handler
     Ok(())
 }
 
+pub async fn handle_get_relic_data(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
+    let payload = raw_file(&ctx.app.game_data, "relic_data");
+    ctx.emitter.emit(MessageType::GetRelicData, &payload);
+    Ok(())
+}
+
 pub async fn handle_get_friendship_data(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let payload = raw_file(&ctx.app.game_data, "friendship");
     ctx.emitter.emit(MessageType::GetFriendshipData, &payload);

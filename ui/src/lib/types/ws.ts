@@ -34,6 +34,7 @@ export enum MessageType {
 	SET_TECHNOLOGY_DATA = 'set_technology_data',
 	OPEN_IN_BROWSER = 'open_in_browser',
 	GET_EXP_DATA = 'get_exp_data',
+	GET_RELIC_DATA = 'get_relic_data',
 	GET_VERSION = 'get_version',
 	SELECT_SAVE = 'select_save',
 	LOADED_SAVE_FILES = 'loaded_save_files',

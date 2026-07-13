@@ -87,6 +87,7 @@ define_message_types! {
     GetBuildings => "get_buildings",
     GetElements => "get_elements",
     GetExpData => "get_exp_data",
+    GetRelicData => "get_relic_data",
     GetMapObjects => "get_map_objects",
     GetFastTravelPoints => "get_fast_travel_points",
     GetEffigies => "get_effigies",
@@ -233,6 +234,7 @@ mod tests {
         "get_buildings",
         "get_elements",
         "get_exp_data",
+        "get_relic_data",
         "get_map_objects",
         "get_fast_travel_points",
         "get_effigies",
@@ -309,14 +311,14 @@ mod tests {
         "server_creation_progress",
     ];
 
-    /// Session-persistence types, which sit after the other 123 in declaration
+    /// Session-persistence types, which sit after the other 124 in declaration
     /// order.
     const FEATURE_ADDITION_WIRE_NAMES: &[&str] =
         &["reattach_session", "eject_session", "session_not_found"];
 
     #[test]
-    fn exactly_123_message_types() {
-        assert_eq!(EXPECTED_WIRE_NAMES.len(), 123);
+    fn exactly_124_message_types() {
+        assert_eq!(EXPECTED_WIRE_NAMES.len(), 124);
         assert_eq!(
             MessageType::ALL.len(),
             EXPECTED_WIRE_NAMES.len() + FEATURE_ADDITION_WIRE_NAMES.len()

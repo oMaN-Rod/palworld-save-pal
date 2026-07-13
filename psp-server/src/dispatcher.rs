@@ -128,6 +128,7 @@ async fn route(
             handlers::game_data::handle_get_work_suitability(ctx).await
         }
         MessageType::GetExpData => handlers::game_data::handle_get_exp_data(ctx).await,
+        MessageType::GetRelicData => handlers::game_data::handle_get_relic_data(ctx).await,
         MessageType::GetFriendshipData => {
             handlers::game_data::handle_get_friendship_data(ctx).await
         }
