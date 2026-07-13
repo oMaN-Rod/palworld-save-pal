@@ -1,0 +1,54 @@
+{
+  "capture_power": {
+    "localized_name": "Poder de captura",
+    "description": "Mejora el poder de captura de las esferas que uses."
+  },
+  "hunger_reduction": {
+    "localized_name": "Saciedad",
+    "description": "Te entrará hambre más despacio."
+  },
+  "swim_speed": {
+    "localized_name": "Capacidad de nado",
+    "description": "Aumenta la velocidad del jugador al nadar y reduce la energía que consume."
+  },
+  "food_decay_reduction": {
+    "localized_name": "Preservación de alimentos",
+    "description": "La comida del inventario aguanta más sin estropearse."
+  },
+  "jump_power": {
+    "localized_name": "Potencia de salto",
+    "description": "Aumenta la potencia de salto del jugador."
+  },
+  "glider_speed": {
+    "localized_name": "Capacidad de vuelo",
+    "description": "Aumenta la velocidad al usar el planeador y reduce la energía que consume."
+  },
+  "climb_speed": {
+    "localized_name": "Capacidad de escalada",
+    "description": "Aumenta la velocidad de escalada y reduce la energía que consume."
+  },
+  "status_ailment_resist": {
+    "localized_name": "Resistencia a estados alterados",
+    "description": "Disminuye la probabilidad de que el jugador sufra estados alterados."
+  },
+  "stamina_reduction": {
+    "localized_name": "Aguante",
+    "description": "Reduce la energía que consume el jugador o una montura Pal al correr."
+  },
+  "sphere_homing": {
+    "localized_name": "Persecución de esfera",
+    "description": "Tras lanzar una esfera, esta persigue al objetivo."
+  },
+  "exp_bonus": {
+    "localized_name": "Ganancia de EXP",
+    "description": "Aumenta la cantidad de puntos de EXP obtenidos (exceptuando algunas bonificaciones)."
+  },
+  "rainbow_passive_rate": {
+    "localized_name": "Fortuna arcoíris",
+    "description": "Aumenta la probabilidad de que los Pals salvajes posean técnicas pasivas superiores."
+  },
+  "move_speed": {
+    "localized_name": "Velocidad de movimiento",
+    "description": "Aumenta la velocidad de movimiento del jugador."
+  }
+}

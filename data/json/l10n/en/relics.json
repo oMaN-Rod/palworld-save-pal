@@ -1,0 +1,54 @@
+{
+  "capture_power": {
+    "localized_name": "Capture Power",
+    "description": "Enhances Capture Power when using spheres."
+  },
+  "hunger_reduction": {
+    "localized_name": "Satiety Duration",
+    "description": "Makes the player less prone to hunger."
+  },
+  "swim_speed": {
+    "localized_name": "Swimming Ability",
+    "description": "Increases the player's Swim Speed and reduces stamina depletion while swimming."
+  },
+  "food_decay_reduction": {
+    "localized_name": "Food Preservation",
+    "description": "Makes food in inventory less likely to spoil."
+  },
+  "jump_power": {
+    "localized_name": "Jump Power",
+    "description": "Increases the player's Jump Power."
+  },
+  "glider_speed": {
+    "localized_name": "Flight Capacity",
+    "description": "Increases the player's Glide Speed and reduces stamina depletion while gliding."
+  },
+  "climb_speed": {
+    "localized_name": "Climbing Proficiency",
+    "description": "Increases the player's Climb Speed and reduces stamina depletion while climbing."
+  },
+  "status_ailment_resist": {
+    "localized_name": "Status Resistance",
+    "description": "Makes the player less prone to status conditions."
+  },
+  "stamina_reduction": {
+    "localized_name": "Endurance",
+    "description": "Reduces stamina depletion when running while mounted."
+  },
+  "sphere_homing": {
+    "localized_name": "Sphere Tracking",
+    "description": "Thrown spheres pursue their targets."
+  },
+  "exp_bonus": {
+    "localized_name": "EXP Gain",
+    "description": "Increases EXP gained. (Some Bonus EXP exceptions apply)"
+  },
+  "rainbow_passive_rate": {
+    "localized_name": "Rainbow Fortune",
+    "description": "Increases the chance of wild Pals having better passive skills."
+  },
+  "move_speed": {
+    "localized_name": "Movement Speed",
+    "description": "Increases the player's Movement Speed."
+  }
+}

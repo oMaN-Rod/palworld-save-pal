@@ -1,0 +1,54 @@
+{
+  "capture_power": {
+    "localized_name": "Yakalama Gücü",
+    "description": "Kullanılan kürelerin yakalama gücü artırılır."
+  },
+  "hunger_reduction": {
+    "localized_name": "Tokluk süresi / Tok tutma özelliği",
+    "description": "Oyuncunun karnı daha geç acıkır."
+  },
+  "swim_speed": {
+    "localized_name": "Yüzme Gücü / Yüzme Yeteneği",
+    "description": "Oyuncunun yüzme hızı artar ve stamina tüketimi azalır."
+  },
+  "food_decay_reduction": {
+    "localized_name": "Yiyecek Saklama / Gıda Koruma",
+    "description": "Envanterdeki yiyeceklerin bozulması/çürümesi zorlaşır."
+  },
+  "jump_power": {
+    "localized_name": "Zıplama Gücü / Sıçrama Yeteneği",
+    "description": "Oyuncunun zıplama gücü artar"
+  },
+  "glider_speed": {
+    "localized_name": "Süzülme Gücü / Planör Yeteneği",
+    "description": "Planör kullanırken hız artar ve stamina tüketimi azalır."
+  },
+  "climb_speed": {
+    "localized_name": "Tırmanma / Kayalık Tırmanışı",
+    "description": "Tırmanma hızı artar ve stamina tüketimi azalır."
+  },
+  "status_ailment_resist": {
+    "localized_name": "Durum Etkisi Direnci / Statü Bozukluğu Direnci",
+    "description": "Oyuncunun durum etkilerine yakalanması zorlaşır."
+  },
+  "stamina_reduction": {
+    "localized_name": "Dayanıklılık / Kondisyon - Stamina",
+    "description": "Oyuncu ve binek Pal'ı koşarken harcanan stamina miktarı azalır.)"
+  },
+  "sphere_homing": {
+    "localized_name": "Küre Takibi / Sphere Takibi",
+    "description": "Küre fırlatıldığında hedefi takip eder."
+  },
+  "exp_bonus": {
+    "localized_name": "Kazanılan EXP / Tecrübe Puanı",
+    "description": "Kazanılan tecrübe puanı artar. (Bazı bonus tecrübe puanları hariç)"
+  },
+  "rainbow_passive_rate": {
+    "localized_name": "Gökkuşağı Şansı",
+    "description": "Vahşi Pal'ların daha iyi pasif yeteneklere sahip olma olasılığı artar."
+  },
+  "move_speed": {
+    "localized_name": "Hareket Hızı",
+    "description": "Oyuncunun hareket hızı artar."
+  }
+}

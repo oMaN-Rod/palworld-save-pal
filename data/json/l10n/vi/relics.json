@@ -1,0 +1,54 @@
+{
+  "capture_power": {
+    "localized_name": "Sức bắt giữ",
+    "description": "Tăng khả năng bắt giữ của các Quả Cầu Pal được sử dụng."
+  },
+  "hunger_reduction": {
+    "localized_name": "Cảm Giác No",
+    "description": "Giúp người chơi no lâu hơn."
+  },
+  "swim_speed": {
+    "localized_name": "Kỹ Năng Bơi",
+    "description": "Tăng tốc độ bơi và giảm lượng tiêu hao thể lực của người chơi."
+  },
+  "food_decay_reduction": {
+    "localized_name": "Bảo Quản Thực Phẩm",
+    "description": "Thực phẩm trong Túi Đồ sẽ lâu bị hỏng hơn."
+  },
+  "jump_power": {
+    "localized_name": "Sức Bật Nhảy",
+    "description": "Tăng sức bật nhảy của người chơi."
+  },
+  "glider_speed": {
+    "localized_name": "Sức Lướt",
+    "description": "Tăng tốc độ khi sử dụng Dù Lượn và giảm lượng thể lực tiêu hao."
+  },
+  "climb_speed": {
+    "localized_name": "Leo Trèo",
+    "description": "Tăng tốc độ leo trèo và giảm lượng thể lực tiêu hao."
+  },
+  "status_ailment_resist": {
+    "localized_name": "Kháng Hiệu Ứng",
+    "description": "Người chơi ít gặp các trạng thái bất lợi hơn."
+  },
+  "stamina_reduction": {
+    "localized_name": "Sức Bền",
+    "description": "Giảm lượng thể lực tiêu hao khi người chơi và Pal chạy."
+  },
+  "sphere_homing": {
+    "localized_name": "Truy Đuổi Quả Cầu Pal",
+    "description": "Khi ném Quả Cầu Pal, nó sẽ tự động đuổi theo mục tiêu."
+  },
+  "exp_bonus": {
+    "localized_name": "EXP Nhận Được",
+    "description": "Tăng lượng kinh nghiệm nhận được. (Ngoại trừ một số loại kinh nghiệm điểm thưởng)"
+  },
+  "rainbow_passive_rate": {
+    "localized_name": "Vận May Cầu Vồng",
+    "description": "Tăng tỉ lệ Pal hoang dã sở hữu các kỹ năng bị động tốt hơn."
+  },
+  "move_speed": {
+    "localized_name": "Tốc độ di chuyển",
+    "description": "Tăng tốc độ di chuyển của người chơi."
+  }
+}

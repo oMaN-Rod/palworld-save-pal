@@ -1,0 +1,54 @@
+{
+  "capture_power": {
+    "localized_name": "포획력",
+    "description": "사용하는 스피어의 포획력이 강화됩니다."
+  },
+  "hunger_reduction": {
+    "localized_name": "포만감",
+    "description": "플레이어의 포만감이 더 오래 지속됩니다."
+  },
+  "swim_speed": {
+    "localized_name": "수영 능력",
+    "description": "플레이어의 수영 속도가 증가하며, 기력 소비량이 감소합니다."
+  },
+  "food_decay_reduction": {
+    "localized_name": "식료품 저장",
+    "description": "인벤토리 내에 보관한 식료품의 부패 속도가 저하됩니다."
+  },
+  "jump_power": {
+    "localized_name": "도약력",
+    "description": "플레이어의 점프력이 상승합니다."
+  },
+  "glider_speed": {
+    "localized_name": "활공력",
+    "description": "글라이더 사용 중 활공 속도가 증가하며, 기력 소비량이 감소합니다."
+  },
+  "climb_speed": {
+    "localized_name": "절벽 오르기",
+    "description": "절벽을 오르는 속도가 증가하며, 기력 소비량이 감소합니다."
+  },
+  "status_ailment_resist": {
+    "localized_name": "상태 이상 저항",
+    "description": "플레이어의 상태 이상 발생률이 감소합니다."
+  },
+  "stamina_reduction": {
+    "localized_name": "지구력",
+    "description": "플레이어와 탑승한 팰이 달릴 때의 기력 소비량이 감소합니다."
+  },
+  "sphere_homing": {
+    "localized_name": "스피어 추적",
+    "description": "스피어를 사용하면 목표를 추적합니다."
+  },
+  "exp_bonus": {
+    "localized_name": "획득 EXP",
+    "description": "획득 경험치가 증가합니다. (일부 보너스 경험치 제외)"
+  },
+  "rainbow_passive_rate": {
+    "localized_name": "무지갯빛 행운",
+    "description": "야생 팰이 더 좋은 패시브 스킬을 보유하고 있을 확률이 증가합니다."
+  },
+  "move_speed": {
+    "localized_name": "이동 속도",
+    "description": "플레이어의 이동 속도가 증가합니다."
+  }
+}

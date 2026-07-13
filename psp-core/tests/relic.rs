@@ -176,3 +176,48 @@ fn relic_key_for_stat(stat: &str) -> &str {
         other => other,
     }
 }
+
+/// Every language must carry every relic key. Guards a game patch that renumbers or
+/// renames the BUILDUP_PLAYER_STATUS rows: the l10n files are joined to relic keys BY
+/// INDEX, so a renumbering would silently mislabel every stat rather than fail loudly.
+#[test]
+fn relic_l10n_covers_every_language_and_key() {
+    const LANGS: [&str; 16] = [
+        "de", "en", "es", "es-MX", "fr", "id", "it", "ko", "pl", "pt-BR", "ru", "th", "tr", "vi",
+        "zh-Hans", "zh-Hant",
+    ];
+    let data = game_data();
+    for lang in LANGS {
+        let table = data
+            .get(&format!("l10n/{lang}/relics"))
+            .unwrap_or_else(|| panic!("missing data/json/l10n/{lang}/relics.json"));
+        let map = table
+            .as_object()
+            .unwrap_or_else(|| panic!("l10n/{lang}/relics is not an object"));
+        assert_eq!(
+            map.len(),
+            13,
+            "{lang}: expected 13 relics, got {}",
+            map.len()
+        );
+
+        for (_, key) in RELIC_TYPE_MAP {
+            let entry = map
+                .get(key)
+                .unwrap_or_else(|| panic!("{lang}: missing relic key {key}"));
+            let name = entry["localized_name"].as_str().unwrap_or("");
+            assert!(!name.is_empty(), "{lang}/{key}: empty localized_name");
+        }
+    }
+}
+
+/// The names really do differ from our internal keys -- if this ever passes trivially,
+/// the l10n merge has silently fallen back to echoing the key.
+#[test]
+fn relic_l10n_names_are_not_just_the_keys() {
+    let data = game_data();
+    let en = data.get("l10n/en/relics").expect("en relics");
+    assert_eq!(en["hunger_reduction"]["localized_name"], "Satiety Duration");
+    assert_eq!(en["stamina_reduction"]["localized_name"], "Endurance");
+    assert_eq!(en["sphere_homing"]["localized_name"], "Sphere Tracking");
+}

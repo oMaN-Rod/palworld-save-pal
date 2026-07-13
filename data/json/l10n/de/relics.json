@@ -1,0 +1,54 @@
+{
+  "capture_power": {
+    "localized_name": "Fanggeschick",
+    "description": "Die Fangkraft deiner Sphären wird erhöht."
+  },
+  "hunger_reduction": {
+    "localized_name": "Hungerresistenz",
+    "description": "Du bleibst länger satt."
+  },
+  "swim_speed": {
+    "localized_name": "Schwimmen",
+    "description": "Dein Schwimmtempo wird erhöht und der Ausdauerverbrauch reduziert."
+  },
+  "food_decay_reduction": {
+    "localized_name": "Lebensmittelhaltbarkeit",
+    "description": "Lebensmittel im Inventar verderben langsamer."
+  },
+  "jump_power": {
+    "localized_name": "Sprungkraft",
+    "description": "Deine Sprungkraft wird erhöht."
+  },
+  "glider_speed": {
+    "localized_name": "Gleiterhandhabung",
+    "description": "Dein Tempo beim Gleiten wird erhöht und der Ausdauerverbrauch reduziert."
+  },
+  "climb_speed": {
+    "localized_name": "Klettern",
+    "description": "Dein Tempo beim Klettern wird erhöht und der Ausdauerverbrauch reduziert."
+  },
+  "status_ailment_resist": {
+    "localized_name": "Statusresistenz",
+    "description": "Deine Anfälligkeit für Statusprobleme wird verringert."
+  },
+  "stamina_reduction": {
+    "localized_name": "Ausdauer",
+    "description": "Der Ausdauerverbrauch beim Sprinten und Reiten wird reduziert."
+  },
+  "sphere_homing": {
+    "localized_name": "Sphärenhandhabung",
+    "description": "Geworfene Sphären verfolgen ihr Ziel."
+  },
+  "exp_bonus": {
+    "localized_name": "EP-Gewinn",
+    "description": "Die Menge erhaltener EP wird erhöht (ausgenommen bestimmte Bonus-EP)."
+  },
+  "rainbow_passive_rate": {
+    "localized_name": "Schillerndes Glück",
+    "description": "Die Wahrscheinlichkeit, dass wilde Pals bessere Passivfähigkeiten besitzen, wird erhöht."
+  },
+  "move_speed": {
+    "localized_name": "Bewegungstempo",
+    "description": "Dein Bewegungstempo wird erhöht."
+  }
+}

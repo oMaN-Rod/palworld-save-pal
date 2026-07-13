@@ -1,0 +1,54 @@
+{
+  "capture_power": {
+    "localized_name": "Poder de captura",
+    "description": "Se incrementa la capacidad de captura de las esferas utilizadas."
+  },
+  "hunger_reduction": {
+    "localized_name": "Saciedad",
+    "description": "El jugador tarda más en tener hambre."
+  },
+  "swim_speed": {
+    "localized_name": "Capacidad de nado",
+    "description": "Aumenta la velocidad de nado del jugador y reduce el consumo de resistencia."
+  },
+  "food_decay_reduction": {
+    "localized_name": "Conservación de alimentos",
+    "description": "Los alimentos en el inventario tardan más en echarse a perder."
+  },
+  "jump_power": {
+    "localized_name": "Capacidad de salto",
+    "description": "Aumenta la capacidad de salto del jugador."
+  },
+  "glider_speed": {
+    "localized_name": "Capacidad de planeo",
+    "description": "Aumenta la velocidad al usar el planeador y reduce el consumo de resistencia."
+  },
+  "climb_speed": {
+    "localized_name": "Escalada de acantilados",
+    "description": "Aumenta la velocidad de escalada y reduce el consumo de resistencia."
+  },
+  "status_ailment_resist": {
+    "localized_name": "Resistencia a estados alterados",
+    "description": "Reduce la probabilidad de que el jugador sufra estados alterados."
+  },
+  "stamina_reduction": {
+    "localized_name": "Resistencia",
+    "description": "Reduce el consumo de resistencia al correr del jugador y de los Pals montables."
+  },
+  "sphere_homing": {
+    "localized_name": "Seguimiento de esferas",
+    "description": "Las esferas siguen al objetivo al ser lanzadas."
+  },
+  "exp_bonus": {
+    "localized_name": "EXP obtenida",
+    "description": "Aumenta la experiencia obtenida (excepto algunos bonus)."
+  },
+  "rainbow_passive_rate": {
+    "localized_name": "Suerte arcoíris",
+    "description": "Aumenta la probabilidad de que los Pals salvajes tengan mejores habilidades pasivas."
+  },
+  "move_speed": {
+    "localized_name": "Velocidad de movimiento",
+    "description": "Aumenta la velocidad de movimiento del jugador."
+  }
+}

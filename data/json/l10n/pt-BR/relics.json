@@ -1,0 +1,54 @@
+{
+  "capture_power": {
+    "localized_name": "Poder de captura",
+    "description": "Fortalece o poder de captura das esferas utilizadas."
+  },
+  "hunger_reduction": {
+    "localized_name": "Saciedade",
+    "description": "Diminui a frequência com que você sente fome."
+  },
+  "swim_speed": {
+    "localized_name": "Nado",
+    "description": "Aumenta sua velocidade e reduz o fôlego consumido ao nadar."
+  },
+  "food_decay_reduction": {
+    "localized_name": "Preservação de alimentos",
+    "description": "Retarda o apodrecimento de alimentos no seu inventário."
+  },
+  "jump_power": {
+    "localized_name": "Salto",
+    "description": "Aumenta a potência do seu pulo."
+  },
+  "glider_speed": {
+    "localized_name": "Capacidade de planar",
+    "description": "Aumenta sua velocidade e reduz o fôlego consumido ao usar o planador."
+  },
+  "climb_speed": {
+    "localized_name": "Escalada",
+    "description": "Aumenta sua velocidade e reduz o fôlego consumido ao escalar."
+  },
+  "status_ailment_resist": {
+    "localized_name": "Resistência a condições negativas",
+    "description": "Diminui a chance de você sofrer condições negativas."
+  },
+  "stamina_reduction": {
+    "localized_name": "Vitalidade",
+    "description": "Reduz o fôlego consumido quando você ou sua montaria estiverem correndo."
+  },
+  "sphere_homing": {
+    "localized_name": "Perseguição de esferas",
+    "description": "Faz com que as esferas persigam o alvo ao serem arremessadas."
+  },
+  "exp_bonus": {
+    "localized_name": "Experiência obtida",
+    "description": "Aumenta a experiência obtida (exceto por alguns bônus de experiência)."
+  },
+  "rainbow_passive_rate": {
+    "localized_name": "Sorte iridescente",
+    "description": "Aumenta a chance de que Pals selvagens tenham habilidades passivas melhores."
+  },
+  "move_speed": {
+    "localized_name": "Velocidade de movimento",
+    "description": "Aumenta sua velocidade de movimento."
+  }
+}
