@@ -8,6 +8,12 @@ members = ["psp-core", "psp-db", "psp-server", "psp-desktop"]
 version = "0.17.3"
 edition = "2021"
 
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
+
 [workspace.dependencies]
 psp-core = { path = "psp-core" }
 psp-db = { path = "psp-db" }
