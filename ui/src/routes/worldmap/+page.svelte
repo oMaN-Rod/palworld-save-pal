@@ -16,7 +16,7 @@
 	import Users from '@lucide/svelte/icons/users';
 	import MapIcon from '@lucide/svelte/icons/map';
 	import Building from '@lucide/svelte/icons/building';
-	import { mapObjects, fastTravelPoints, effigies } from '$lib/data';
+	import { mapObjects, fastTravelPoints, effigies, bosses } from '$lib/data';
 	import type { Map as OLMap } from 'ol';
 	import type { Base, GuildSummary, MapUnlockPoint, Player } from '$types';
 	import { assetLoader } from '$utils';
@@ -43,6 +43,7 @@
 		showFastTravel: boolean;
 		showEffigies: boolean;
 		showDungeons: boolean;
+		showBosses: boolean;
 		showAlphaPals: boolean;
 		showPredatorPals: boolean;
 	};
@@ -55,6 +56,7 @@
 		showFastTravel: true,
 		showEffigies: true,
 		showDungeons: true,
+		showBosses: true,
 		showAlphaPals: true,
 		showPredatorPals: true
 	});
@@ -121,6 +123,9 @@
 			Object.values(mapObjects.points).filter((point) => point.type === 'predator_pal').length || 0
 		);
 	});
+	const bossCount = $derived(
+		Object.values(bosses.points).filter((b) => mapOf(b.x, b.y) === activeArea).length
+	);
 	const anubisImg = $derived(assetLoader.loadMenuImage('anubis'));
 	const starryonImg = $derived(assetLoader.loadMenuImage('nightbluehorse'));
 
@@ -423,6 +428,14 @@
 							<span class="text-surface-500 text-xs">{dungeonCount}</span>
 						</button>
 						<button
+							class="flex items-center space-x-2 {(mapOptions.showBosses ?? true) ? '' : 'opacity-25'}"
+							onclick={() => (mapOptions.showBosses = !(mapOptions.showBosses ?? true))}
+						>
+							<img src={mapImg.boss} alt={m.bosses()} class="mr-2 h-6 w-6" />
+							<span>{m.bosses()}</span>
+							<span class="text-surface-500 text-xs">{bossCount}</span>
+						</button>
+						<button
 							class="flex items-center space-x-2 {mapOptions.showAlphaPals ? '' : 'opacity-25'}"
 							onclick={() => (mapOptions.showAlphaPals = !mapOptions.showAlphaPals)}
 						>
@@ -611,6 +624,7 @@
 					showFastTravel={mapOptions.showFastTravel}
 					showEffigies={mapOptions.showEffigies ?? true}
 					showDungeons={mapOptions.showDungeons}
+					showBosses={mapOptions.showBosses ?? true}
 					showAlphaPals={mapOptions.showAlphaPals}
 					showPredatorPals={mapOptions.showPredatorPals}
 					onEditBase={handleEditBase}

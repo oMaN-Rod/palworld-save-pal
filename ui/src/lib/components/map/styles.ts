@@ -194,6 +194,29 @@ export const dungeonIconStyle = createIconStyle({
 	anchorYUnits: 'fraction'
 });
 
+export const bossIconStyle = createIconStyle({
+	src: mapImg.boss,
+	scale: 1,
+	anchor: [0.5, 0.5],
+	anchorXUnits: 'fraction',
+	anchorYUnits: 'fraction',
+	opacity: 1
+});
+
+export const bossDefeatedIconStyle = createIconStyle({
+	src: mapImg.boss,
+	scale: 1,
+	anchor: [0.5, 0.5],
+	anchorXUnits: 'fraction',
+	anchorYUnits: 'fraction',
+	opacity: 0.6
+});
+
+export const bossStyle = (feature: FeatureLike) => {
+	const data = feature.get('data');
+	return data?.defeated === true ? bossDefeatedIconStyle : bossIconStyle;
+};
+
 export const originIconStyle = createStyle({
 	image: {
 		src: compass,

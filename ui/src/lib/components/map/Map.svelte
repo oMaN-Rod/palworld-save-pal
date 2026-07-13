@@ -21,11 +21,12 @@
 		fastTravelStyle,
 		effigyStyle,
 		dungeonIconStyle,
+		bossStyle,
 		originIconStyle,
 		originLineStyle,
 		playerIconStyle
 	} from './styles';
-	import { mapObjects, fastTravelPoints, effigies } from '$lib/data';
+	import { mapObjects, fastTravelPoints, effigies, bosses } from '$lib/data';
 	import { assetLoader } from '$utils';
 	import 'svelte-openlayers/styles.css';
 	import PlayerPopup from './PlayerPopup.svelte';
@@ -40,6 +41,8 @@
 	import EffigyPopup from './EffigyPopup.svelte';
 	import DungeonHover from './DungeonHover.svelte';
 	import DungeonPopup from './DungeonPopup.svelte';
+	import BossHover from './BossHover.svelte';
+	import BossPopup from './BossPopup.svelte';
 	import PalHover from './PalHover.svelte';
 	import PalPopup from './PalPopup.svelte';
 	import { onMount } from 'svelte';
@@ -58,6 +61,7 @@
 		showFastTravel = true,
 		showEffigies = true,
 		showDungeons = true,
+		showBosses = true,
 		showAlphaPals = true,
 		showPredatorPals = true,
 		onEditBase,
@@ -75,6 +79,7 @@
 		showFastTravel?: boolean;
 		showEffigies?: boolean;
 		showDungeons?: boolean;
+		showBosses?: boolean;
 		showAlphaPals?: boolean;
 		showPredatorPals?: boolean;
 		onEditBase?: (base: any) => void;
@@ -171,6 +176,14 @@
 		return mapObjects.points
 			.filter((p) => p.type === 'alpha_pal')
 			.filter((p) => mapOf(p.x, p.y) === area);
+	});
+
+	// Boss defeat state isn't parsed from the save yet (no NormalBossDefeatFlag /
+	// TowerBossDefeatFlag read path exists) — every boss renders undimmed until that lands.
+	const bossPoints = $derived.by(() => {
+		return Object.entries(bosses.points)
+			.map(([rowKey, boss]) => ({ ...boss, rowKey }))
+			.filter((boss) => mapOf(boss.x, boss.y) === area);
 	});
 
 	const predatorPalPoints = $derived.by(() => {
@@ -391,6 +404,26 @@
 							</Overlay.Hover>
 							<Overlay.Popup {positioning} {offset}>
 								<DungeonPopup {point} />
+							</Overlay.Popup>
+						</Feature.Point>
+					{/each}
+				</Layer.Vector>
+			{/if}
+
+			<!-- Boss markers layer -->
+			{#if showBosses}
+				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
+					{#each bossPoints as point (point.rowKey)}
+						<Feature.Point
+							coordinates={worldToPixel(point.x, point.y, area)}
+							style={bossStyle}
+							properties={{ type: 'boss', data: point }}
+						>
+							<Overlay.Hover {positioning} {offset} class={hoverClass}>
+								<BossHover {point} />
+							</Overlay.Hover>
+							<Overlay.Popup {positioning} {offset}>
+								<BossPopup {point} />
 							</Overlay.Popup>
 						</Feature.Point>
 					{/each}
