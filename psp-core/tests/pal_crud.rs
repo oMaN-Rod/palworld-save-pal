@@ -1175,8 +1175,8 @@ fn add_player_dps_pal_into_a_recycled_slot_inherits_a_stale_is_rare_pal_flag() {
 }
 
 /// A DPS save for the `FullStomach` tests. Slot 0 is never-used (`CharacterID`
-/// "None", no `FullStomach` key at all). Slot 1 is recycled from an "Alpaca"
-/// (`max_full_stomach` 150.0 in `pals.json`) and carries a stale 999.0 --
+/// "None", no `FullStomach` key at all). Slot 1 is recycled from an "Anubis"
+/// (`max_full_stomach` 540.0 in `pals.json`) and carries a stale 999.0 --
 /// chosen to collide with neither the 150.0 missing-key default nor either
 /// species' real max, so an inherited value is unmistakable.
 fn dps_fixture_for_stomach() -> (SaveSession, GameData, Uuid) {
@@ -1185,7 +1185,7 @@ fn dps_fixture_for_stomach() -> (SaveSession, GameData, Uuid) {
 
     let empty_slot = dps_slot("None", Uuid::nil());
 
-    let mut recycled_slot_props = match dps_slot("Alpaca", Uuid::new_v4()) {
+    let mut recycled_slot_props = match dps_slot("Anubis", Uuid::new_v4()) {
         StructValue::Struct(p) => p,
         _ => unreachable!(),
     };
@@ -1274,7 +1274,7 @@ fn add_player_dps_pal_writes_a_flat_default_full_stomach_for_a_never_used_slot()
 }
 
 /// Both halves at once: the stale 999.0 is overwritten, and the value written
-/// keys off the slot's PREVIOUS occupant ("Alpaca", 225.0), not the
+/// keys off the slot's PREVIOUS occupant ("Anubis", 540.0), not the
 /// newly-requested species ("Sheepball", which would give 150.0).
 #[test]
 fn add_player_dps_pal_into_a_recycled_slot_overwrites_stale_full_stomach_using_the_previous_occupants_species(
@@ -1287,16 +1287,16 @@ fn add_player_dps_pal_into_a_recycled_slot_overwrites_stale_full_stomach_using_t
         player_id,
         "Sheepball", // the NEW species being requested
         "Combat",
-        Some(1), // recycled from "Alpaca"
+        Some(1), // recycled from "Anubis"
     )
     .unwrap()
     .expect("slot 1 explicitly requested");
     assert_eq!(slot_index, 1);
     assert_eq!(
-        new_pal.stomach, 150.0,
+        new_pal.stomach, 540.0,
         "_set_max_stomach() (pal.py) runs during Pal.__init__, BEFORE reset()/ \
          character_id reassignment -- it keys off the slot's PREVIOUS \
-         occupant (\"Alpaca\", max_full_stomach 150.0 per data/json/pals.json), \
+         occupant (\"Anubis\", max_full_stomach 540.0 per data/json/pals.json), \
          never the stale 999.0 already in the slot and never the newly- \
          requested \"Sheepball\" -- see this task's report"
     );

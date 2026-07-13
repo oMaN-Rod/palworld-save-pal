@@ -2614,17 +2614,20 @@ mod tests {
 
     #[test]
     fn read_save_parameter_dto_stomach_guards_against_nan_using_pal_data_fallback() {
-        // "Alpaca" has max_full_stomach 150 in pals.json.
+        // "Anubis" has max_full_stomach 540 in pals.json -- deliberately not
+        // Alpaca (150, which now collides with the missing-key flat default)
+        // and not 300 (the unrecognized-pal fallback), so this assertion
+        // still proves the pal_data lookup ran rather than either default.
         let data = game_data();
         let mut save_parameter = Properties::default();
-        save_parameter.insert("CharacterID", Property::Name("Alpaca".to_string()));
+        save_parameter.insert("CharacterID", Property::Name("Anubis".to_string()));
         save_parameter.insert("FullStomach", Property::Float(uesave::Float(f32::NAN)));
         let instance_id = uuid::Uuid::nil();
 
         let dto = read_save_parameter_dto(&save_parameter, instance_id, false, &data);
 
         assert_eq!(
-            dto.stomach, 150.0,
+            dto.stomach, 540.0,
             "NaN FullStomach on a recognized pal must fall back to pals.json's max_full_stomach"
         );
 
@@ -2633,7 +2636,7 @@ mod tests {
         let serialized = serde_json::to_value(&dto).unwrap();
         assert_eq!(
             serialized["stomach"],
-            serde_json::json!(150.0),
+            serde_json::json!(540.0),
             "a NaN FullStomach must never reach the wire as null"
         );
     }
@@ -2663,11 +2666,14 @@ mod tests {
     fn read_save_parameter_dto_stomach_missing_key_still_defaults_to_150_not_the_pal_data_fallback()
     {
         // An absent FullStomach defaults to 150.0; only a present-but-invalid
-        // one falls back to the species max (in 1.0's pals.json, "Alpaca" is
-        // also 150.0 -- via max_full_stomach, not this flat default).
+        // one falls back to the species max. "Anubis" has max_full_stomach
+        // 540 in pals.json, so getting 150.0 here (not 540.0) proves the
+        // missing-key path uses the flat default and never consults
+        // pal_data at all -- unlike "Alpaca" (150), which would no longer
+        // discriminate between the two paths.
         let data = game_data();
         let mut save_parameter = Properties::default();
-        save_parameter.insert("CharacterID", Property::Name("Alpaca".to_string()));
+        save_parameter.insert("CharacterID", Property::Name("Anubis".to_string()));
         let instance_id = uuid::Uuid::nil();
 
         let dto = read_save_parameter_dto(&save_parameter, instance_id, false, &data);

@@ -801,8 +801,10 @@ async fn replay_recorded_wire_fixtures() {
         use std::io::Write;
         let _ = writeln!(
             std::io::stderr(),
-            "SKIPPED: no parity fixtures at {} — run scripts/capture_parity.py; \
-             this is expected on a fresh clone/CI (see parity/README.md)",
+            "SKIPPED: no parity fixtures at {} — fixtures are local-only, \
+             gitignored, and can never be re-captured (their Python source \
+             is gone from this repo); this is expected on a fresh clone/CI \
+             (see parity/README.md)",
             fixtures_root.display()
         );
     }
