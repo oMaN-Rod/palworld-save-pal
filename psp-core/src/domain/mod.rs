@@ -6,6 +6,7 @@ pub mod guild_tail;
 pub mod pal;
 pub mod player;
 pub mod raw;
+pub mod relic;
 pub mod summaries;
 pub mod uid_swap;
 pub mod world;
