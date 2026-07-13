@@ -57,3 +57,35 @@ fn pals_json_keys_are_upper_camel_and_boss_prefixes_are_uppercase() {
         "expected at least one BOSS_-prefixed pal key, got 0"
     );
 }
+
+/// Every language the app can be set to must actually resolve its l10n tables.
+///
+/// `GameData` keys files by their on-disk path, but four of the l10n directories are
+/// mixed-case (`es-MX`, `pt-BR`, `zh-Hans`, `zh-Hant`) while the app sends lowercase
+/// locale codes (`es-mx`, ...). With an exact-case lookup those four languages resolve to
+/// NOTHING -- for every table, not just one -- and users see raw code names throughout the
+/// app instead of translations.
+///
+/// The codes below are `SupportedLanguage` in `ui/src/lib/types/settings.ts`. They are what
+/// the server receives in `settings.language` and interpolates into the l10n key.
+#[test]
+fn every_supported_language_resolves_its_l10n_tables() {
+    const APP_LOCALES: [&str; 16] = [
+        "de", "en", "es", "es-mx", "fr", "it", "id-id", "ko", "pl", "pt-br", "ru", "th", "tr",
+        "vi", "zh-hans", "zh-hant",
+    ];
+    let data = game_data();
+    let mut broken = Vec::new();
+    for locale in APP_LOCALES {
+        for table in ["pals", "items", "relics"] {
+            if data.get(&format!("l10n/{locale}/{table}")).is_none() {
+                broken.push(format!("l10n/{locale}/{table}"));
+            }
+        }
+    }
+    assert!(
+        broken.is_empty(),
+        "these l10n tables do not resolve for a language the app can be set to, so those \
+         users see raw code names: {broken:?}"
+    );
+}

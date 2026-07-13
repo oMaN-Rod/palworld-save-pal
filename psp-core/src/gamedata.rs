@@ -43,8 +43,17 @@ impl GameData {
         })
     }
 
+    /// Looks a file up by its extension-less path, case-insensitively.
+    ///
+    /// The l10n directories carry the game's casing (`es-MX`, `zh-Hans`), but the app's
+    /// locale codes are lowercase (`es-mx`, `zh-hans`), so an exact-case lookup silently
+    /// resolved to nothing for four languages -- across every table, not just one.
+    ///
+    /// This is about FILE keys only. The pal catalog's keys *inside* `pals.json` remain
+    /// case-sensitive on purpose: `pal_lookup` below relies on exact casing to decide
+    /// whether a `BOSS_`-prefixed id names a real catalog entry.
     pub fn get(&self, key: &str) -> Option<&Value> {
-        self.entries.get(key)
+        self.entries.get(&key.to_lowercase())
     }
 
     /// App version for the `get_version` message.
@@ -84,12 +93,15 @@ fn load_json_directory(
             let value: Value = serde_json::from_str(&text).map_err(|parse_error| {
                 CoreError::Parse(format!("{}: {parse_error}", path.display()))
             })?;
+            // Lower-cased so a mixed-case directory on disk (`l10n/es-MX/`) still answers
+            // the lowercase locale code the app sends (`es-mx`). See `GameData::get`.
             let key = path
                 .strip_prefix(root)
                 .expect("path is under root by construction")
                 .with_extension("")
                 .to_string_lossy()
-                .replace('\\', "/");
+                .replace('\\', "/")
+                .to_lowercase();
             entries.insert(key, value);
         }
     }
