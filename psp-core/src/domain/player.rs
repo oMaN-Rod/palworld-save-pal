@@ -11,6 +11,7 @@ use crate::progress::ProgressSink;
 use crate::props;
 use crate::session::{parse_palworld_save, LoadedPlayer, SaveSession, WorldCaches};
 use chrono::Timelike;
+use std::collections::BTreeMap;
 use uesave::{Properties, Property, PropertyKey, StructValue, ValueVec};
 
 use super::{containers, pal, relic, world};
@@ -124,6 +125,53 @@ fn unlock_flag_keys(record_data: &Properties, flag_name: &str) -> Vec<String> {
         .filter(|entry| props::as_bool(&entry.value).unwrap_or(false))
         .filter_map(|entry| props::as_str(&entry.key).map(str::to_string))
         .collect()
+}
+
+/// Collected relic instance-flag keys, by our bare relic-type key
+/// (`relic::RELIC_TYPE_MAP`), read from `RelicObtainForInstanceFlagByType`. A save
+/// without the property (pre-1.0) reads as an empty map, not an error.
+fn collected_relics_by_type(record_data: &Properties) -> BTreeMap<String, Vec<String>> {
+    let Some(entries) = record_data
+        .0
+        .get(&PropertyKey::from("RelicObtainForInstanceFlagByType"))
+        .and_then(props::struct_values)
+    else {
+        return BTreeMap::new();
+    };
+
+    let mut out = BTreeMap::new();
+    for entry in entries {
+        let StructValue::Struct(entry_props) = entry else {
+            continue;
+        };
+        let Some(key) = entry_props
+            .0
+            .get(&PropertyKey::from("Type"))
+            .and_then(relic_type_name)
+            .and_then(|type_name| {
+                relic::RELIC_TYPE_MAP
+                    .iter()
+                    .find(|(enum_name, _)| *enum_name == type_name)
+            })
+            .map(|(_, key)| key.to_string())
+        else {
+            continue;
+        };
+        let flags: Vec<String> = entry_props
+            .0
+            .get(&PropertyKey::from("Flags"))
+            .and_then(props::map_entries)
+            .map(|flag_entries| {
+                flag_entries
+                    .iter()
+                    .filter(|flag| props::as_bool(&flag.value).unwrap_or(false))
+                    .filter_map(|flag| props::as_str(&flag.key).map(str::to_string))
+                    .collect()
+            })
+            .unwrap_or_default();
+        out.insert(key, flags);
+    }
+    out
 }
 
 /// One `english_name -> StatusPoint` entry per list element whose `StatusName`
@@ -361,6 +409,9 @@ pub fn build_player_dto(
     let collected_effigies = record_data
         .map(|record| unlock_flag_keys(record, "RelicObtainForInstanceFlag"))
         .unwrap_or_default();
+    let collected_relics = record_data
+        .map(collected_relics_by_type)
+        .unwrap_or_default();
     // Read-only: `NormalBossDefeatFlag` is keyed by boss `spawner_id`;
     // `TowerBossDefeatFlag` uses a distinct `BOSS_BATTLE_NAME_*` key. Merged
     // since the UI only needs "is this boss defeated".
@@ -528,6 +579,7 @@ pub fn build_player_dto(
         current_missions,
         unlocked_fast_travel_points: Some(unlocked_fast_travel_points),
         collected_effigies: Some(collected_effigies),
+        collected_relics: Some(collected_relics),
         defeated_bosses: Some(defeated_bosses),
         effigy_possess_num,
         location,
@@ -1528,6 +1580,133 @@ pub(crate) fn delete_player_and_pals_for_guild(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// Loads a committed fixture save from `tests/fixtures/saves/<name>/`.
+    fn load_fixture_session(name: &str) -> SaveSession {
+        let save_dir = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .join("../tests/fixtures/saves")
+            .join(name);
+        let level_sav_bytes =
+            std::fs::read(save_dir.join("Level.sav")).expect("read fixture Level.sav");
+        let level_meta_bytes = std::fs::read(save_dir.join("LevelMeta.sav")).ok();
+
+        let mut player_file_refs: std::collections::BTreeMap<
+            uuid::Uuid,
+            crate::session::PlayerFileData,
+        > = std::collections::BTreeMap::new();
+        if let Ok(entries) = std::fs::read_dir(save_dir.join("Players")) {
+            for entry in entries.flatten() {
+                let path = entry.path();
+                if path.extension().is_none_or(|ext| ext != "sav") {
+                    continue;
+                }
+                let Some(stem) = path.file_stem().and_then(|s| s.to_str()) else {
+                    continue;
+                };
+                let (uid_part, is_dps) = match stem.strip_suffix("_dps") {
+                    Some(base) => (base, true),
+                    None => (stem, false),
+                };
+                let Ok(uid) = uid_part.parse::<uuid::Uuid>() else {
+                    continue;
+                };
+                let file_ref =
+                    player_file_refs
+                        .entry(uid)
+                        .or_insert(crate::session::PlayerFileData::Paths {
+                            sav: None,
+                            dps: None,
+                        });
+                if let crate::session::PlayerFileData::Paths { sav, dps } = file_ref {
+                    if is_dps {
+                        *dps = Some(path);
+                    } else {
+                        *sav = Some(path);
+                    }
+                }
+            }
+        }
+
+        SaveSession::load(
+            crate::session::SaveKind::Steam {
+                level_path: save_dir.join("Level.sav"),
+            },
+            save_dir.to_string_lossy().into_owned(),
+            "steam",
+            &level_sav_bytes,
+            level_meta_bytes.as_deref(),
+            player_file_refs,
+            None,
+            true,
+            &crate::progress::null_progress(),
+        )
+        .expect("load fixture session")
+    }
+
+    fn game_data() -> GameData {
+        let json_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../data/json");
+        GameData::load(&json_dir).expect("data dir")
+    }
+
+    /// The documented invariant (`apply_effigy_relic_counters`'s doc comment):
+    /// the legacy flat flags equal the CapturePower by-type flag set. Checked
+    /// here against a real 1.0 save, not synthetic data.
+    #[test]
+    fn collected_relics_capture_power_matches_collected_effigies_on_real_save() {
+        let data = game_data();
+        let mut session = load_fixture_session("v1_relics");
+        let ids: Vec<uuid::Uuid> = session.player_file_refs.keys().copied().collect();
+        let mut checked = 0;
+        for id in ids {
+            let Some(dto) = get_player_details(&mut session, &data, id, &crate::progress::null_progress())
+                .unwrap()
+            else {
+                continue;
+            };
+            let effigies = dto.collected_effigies.clone().unwrap_or_default();
+            let relics = dto.collected_relics.clone().unwrap_or_default();
+            let capture_power = relics.get("capture_power").cloned().unwrap_or_default();
+            let mut effigies_sorted = effigies.clone();
+            effigies_sorted.sort();
+            let mut capture_power_sorted = capture_power.clone();
+            capture_power_sorted.sort();
+            assert_eq!(
+                effigies_sorted, capture_power_sorted,
+                "{id}: collected_relics[capture_power] must equal collected_effigies"
+            );
+            if !effigies.is_empty() {
+                checked += 1;
+            }
+        }
+        assert!(
+            checked > 0,
+            "no fixture player had any collected effigies -- the invariant was checked vacuously"
+        );
+    }
+
+    /// A pre-1.0 save carries no `RelicObtainForInstanceFlagByType` and must read
+    /// as an empty map, never an error.
+    #[test]
+    fn collected_relics_is_empty_map_on_pre_1_0_save() {
+        let data = game_data();
+        let mut session = load_fixture_session("world1");
+        let ids: Vec<uuid::Uuid> = session.player_file_refs.keys().copied().collect();
+        let mut checked = 0;
+        for id in ids {
+            let Some(dto) = get_player_details(&mut session, &data, id, &crate::progress::null_progress())
+                .unwrap()
+            else {
+                continue;
+            };
+            assert_eq!(
+                dto.collected_relics,
+                Some(std::collections::BTreeMap::new()),
+                "{id}: pre-1.0 save must read collected_relics as an empty map"
+            );
+            checked += 1;
+        }
+        assert!(checked > 0, "no fixture player was loaded from world1");
+    }
 
     fn status_point_struct(name: &str, point: i32) -> StructValue {
         let mut status_props = Properties::default();

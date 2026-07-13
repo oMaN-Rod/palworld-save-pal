@@ -193,6 +193,7 @@ export type Player = {
 	completed_missions: string[];
 	unlocked_fast_travel_points: string[];
 	collected_effigies: string[];
+	collected_relics: Record<string, string[]>;
 	defeated_bosses: string[];
 };
 

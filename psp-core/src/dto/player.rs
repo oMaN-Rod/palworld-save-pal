@@ -1,6 +1,8 @@
 //! `PlayerDto` covers both the frontend's edit payload and the server's
 //! response. Field declaration order is a wire contract: `serde` serializes
 //! in declaration order and the frontend consumes this JSON as-is.
+use std::collections::BTreeMap;
+
 use serde::{Deserialize, Serialize};
 
 use super::container::{CharacterContainerDto, ItemContainerDto};
@@ -80,6 +82,12 @@ pub struct PlayerDto {
     pub unlocked_fast_travel_points: Option<Vec<String>>,
     #[serde(default)]
     pub collected_effigies: Option<Vec<String>>,
+    /// Collected relic instance-flag keys per relic type (bare key from
+    /// `relic::RELIC_TYPE_MAP`), read from `RelicObtainForInstanceFlagByType`.
+    /// `collected_relics["capture_power"]` equals `collected_effigies` on a 1.0
+    /// save. A pre-1.0 save reads as an empty map.
+    #[serde(default)]
+    pub collected_relics: Option<BTreeMap<String, Vec<String>>>, // output-only
     /// `NormalBossDefeatFlag` + `TowerBossDefeatFlag` keys merged, read-only:
     /// the UI only needs "is this boss defeated" for the map overlay.
     #[serde(default)]
@@ -218,6 +226,7 @@ mod tests {
             current_missions: vec![],
             unlocked_fast_travel_points: None,
             collected_effigies: None,
+            collected_relics: None,
             defeated_bosses: None,
             effigy_possess_num: 0,
             location: None,
@@ -257,6 +266,7 @@ mod tests {
                 "current_missions",
                 "unlocked_fast_travel_points",
                 "collected_effigies",
+                "collected_relics",
                 "defeated_bosses",
                 "effigy_possess_num",
                 "location",
