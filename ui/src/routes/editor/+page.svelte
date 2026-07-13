@@ -134,7 +134,7 @@
 			<Spinner />
 			<Stopwatch bind:seconds={elapsed} />
 		{:else}
-			<FileDropzone baseClass="w-1/2 hover:bg-surface-800" name="file" bind:files>
+			<FileDropzone baseClass="w-1/2 hover:bg-surface-800" name="file" accept=".sav" bind:files>
 				{#snippet message()}
 					<h3 class="h3">Edit SAV</h3>
 					<span>Drag and drop a *.sav file here</span>
