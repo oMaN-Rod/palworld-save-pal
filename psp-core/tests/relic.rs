@@ -133,6 +133,7 @@ fn max_rank_and_effect_for_rank() {
 #[test]
 fn no_fixture_player_exceeds_max_rank() {
     let data = game_data();
+    let mut ranks_checked = 0;
     for fixture in ["v1_relics", "v1_stats"] {
         let mut session = common::load_fixture_session(fixture);
         let ids: Vec<Uuid> = session.player_file_refs.keys().copied().collect();
@@ -147,6 +148,7 @@ fn no_fixture_player_exceeds_max_rank() {
                 let Some(max) = relic::max_rank(&data, relic_key_for_stat(stat)) else {
                     continue; // not a relic-backed stat (max_hp, attack, ...)
                 };
+                ranks_checked += 1;
                 assert!(
                     *points <= max,
                     "{fixture}/{id}: {stat} rank {points} exceeds max_rank {max}"
@@ -154,6 +156,13 @@ fn no_fixture_player_exceeds_max_rank() {
             }
         }
     }
+    // Without this, the test passes vacuously if the fixtures ever stop carrying
+    // relic-backed stats -- and it is the only thing validating our max ranks
+    // against real game output.
+    assert!(
+        ranks_checked > 0,
+        "checked no relic-backed ranks at all: the fixtures no longer exercise this"
+    );
 }
 
 /// The DTO's english stat key equals the relic key for every relic-backed stat
