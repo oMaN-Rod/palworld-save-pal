@@ -46,24 +46,16 @@ fn container_id_key(entry: &MapEntry) -> Option<Uuid> {
         .and_then(props::as_uuid)
 }
 
-// ============================================================================
-// Real-save coverage: world1's own guilds/players (checked-in fixture,
-// always runs -- see `tests/common/mod.rs`'s own doc comment for why this is
-// the established convention over `PSP_TEST_SAVE_DIR`-gated tests). Ground
-// truth for world1's guild shape (2 guilds, each with exactly one player who
-// is that guild's sole admin, one real base with an empty worker container
-// but 4 real storage containers, one guild chest) was independently
-// confirmed by `guild_details.rs`'s own already-reviewed tests -- reused
-// here, not re-derived.
-// ============================================================================
+// world1 has 2 guilds, each with exactly one player who is that guild's sole
+// admin, one base whose worker container is empty but which owns 4 storage
+// containers, and one guild chest.
 
 const WORLD1_GUILD_WITH_BASE: &str = "54491484-4e6c-7327-70b2-868f350929f6";
 const WORLD1_GUILD_NO_BASES: &str = "004e71b6-4166-2b71-eb6a-539ae931ca34";
 const WORLD1_BASE_ID: &str = "4bb24de8-4965-af19-f596-e296089e8ab0";
 const WORLD1_GUILD_CHEST: &str = "1b1b065d-4812-11ba-e444-8f84bbbe40fd";
 
-/// **Ownership check #1, real-save proof:** a guild admin is refused
-/// (`player_ops.py:34-40`) -- nothing removed, nothing mutated.
+/// Deleting a guild admin is refused: nothing removed, nothing mutated.
 #[test]
 fn delete_admin_player_is_refused_and_nothing_is_deleted() {
     let mut session = common::load_fixture_session("world1");
@@ -101,8 +93,7 @@ fn delete_admin_player_is_refused_and_nothing_is_deleted() {
     );
 }
 
-/// A `player_id` never loaded this session is a hard error, matching
-/// Python's `raise ValueError` (`player_ops.py:29-31`) -- BEFORE any
+/// A `player_id` never loaded this session is a hard error, raised before any
 /// mutation.
 #[test]
 fn delete_unloaded_player_is_an_error_and_mutates_nothing() {
@@ -122,9 +113,8 @@ fn delete_unloaded_player_is_an_error_and_mutates_nothing() {
     );
 }
 
-/// A `guild_id` never loaded this session is a hard error (`guild_ops.py:
-/// 38-39`) -- checked directly, without lazily loading the guild as a side
-/// effect.
+/// A `guild_id` never loaded this session is a hard error -- and the check
+/// must not lazily load the guild as a side effect.
 #[test]
 fn delete_unloaded_guild_is_an_error_and_mutates_nothing() {
     let mut session = common::load_fixture_session("world1");
@@ -144,12 +134,9 @@ fn delete_unloaded_guild_is_an_error_and_mutates_nothing() {
     );
 }
 
-/// **Cross-entity proof, real save data:** deleting one world1 guild must
-/// leave the OTHER guild's raw tail bytes byte-identical, and that other
-/// guild's admin player entirely untouched. Against a buggy
-/// `delete_guild_and_players` that scoped its map-object sweep or
-/// container deletion too broadly (e.g. matching on ANY guild rather than
-/// the target one), this would go red.
+/// Deleting one guild must leave the other guild's tail bytes and its admin
+/// player entirely untouched -- a delete whose sweep is scoped too broadly
+/// (matching any guild rather than the target one) goes red here.
 #[test]
 fn deleting_one_world1_guild_leaves_the_other_guild_and_its_admin_byte_identical() {
     let mut session = common::load_fixture_session("world1");
@@ -184,13 +171,11 @@ fn deleting_one_world1_guild_leaves_the_other_guild_and_its_admin_byte_identical
 
     guild::delete_guild_and_players(&mut session, &data, target_guild, &null_progress()).unwrap();
 
-    // Target guild is really gone.
     assert!(guild::guild_entry_index(&session, target_guild)
         .unwrap()
         .is_none());
     assert!(!session.loaded_guilds.contains(&target_guild));
 
-    // The OTHER guild's raw tail bytes are untouched.
     let other_tail_after = {
         let entries = world::group_map(&session.level).unwrap();
         let entry = entries
@@ -204,7 +189,6 @@ fn deleting_one_world1_guild_leaves_the_other_guild_and_its_admin_byte_identical
         "deleting one guild must never touch a different guild's raw tail bytes"
     );
 
-    // The OTHER guild's admin player is entirely untouched too.
     let other_admin_entry_after = world::character_map(&session.level)
         .unwrap()
         .iter()
@@ -217,14 +201,11 @@ fn deleting_one_world1_guild_leaves_the_other_guild_and_its_admin_byte_identical
     );
 }
 
-/// **A newly-found Python bug, positively proven against real save data:**
 /// `delete_guild_and_players` removes the guild's `GroupSaveDataMap`,
-/// `GuildExtraSaveDataMap`, and `BaseCampSaveData` entries, but NEVER
-/// removes the guild's own item-storage container (the chest) -- see
-/// `guild::delete_guild_and_players`'s own doc comment for the exact
-/// Python-source citation. If a "fixed" implementation deleted the chest
-/// (as the brief's own reference code did), this assertion would flip and
-/// this test would fail.
+/// `GuildExtraSaveDataMap` and `BaseCampSaveData` entries plus its bases'
+/// storage containers, but deliberately leaves the guild's own chest behind
+/// as an orphan, for save-file fidelity with the game. Deleting the chest
+/// would flip the final assertion here.
 #[test]
 fn delete_guild_removes_group_extra_and_base_entries_but_leaves_the_chest_orphaned() {
     let mut session = common::load_fixture_session("world1");
@@ -275,7 +256,6 @@ fn delete_guild_removes_group_extra_and_base_entries_but_leaves_the_chest_orphan
     );
     assert!(!session.loaded_guilds.contains(&guild_id));
 
-    // The real base's own storage containers (4 of them) must be gone.
     let item_containers_after = world::item_container_map(&session.level).unwrap();
     for storage_id in &base_storage_ids {
         assert!(
@@ -286,7 +266,6 @@ fn delete_guild_removes_group_extra_and_base_entries_but_leaves_the_chest_orphan
         );
     }
 
-    // The guild's own chest container is a PERMANENT ORPHAN -- reproduced, not fixed.
     assert!(
         world::item_container_map(&session.level)
             .unwrap()
@@ -298,23 +277,13 @@ fn delete_guild_removes_group_extra_and_base_entries_but_leaves_the_chest_orphan
          orphaned ItemContainerSaveData entry"
     );
 
-    // Positive cache-invalidation proof: the character-container index no
-    // longer resolves the (now-removed) worker container, and the caches
-    // were actually reset, not merely left stale-but-unread.
     assert!(session.caches.character_container_index.is_none());
     assert!(session.caches.item_container_index.is_none());
 }
 
-// ============================================================================
-// Synthetic coverage: a minimal, self-contained 2-player guild (admin +
-// non-admin member, the member owning one pal) -- world1's own two real
-// guilds each have exactly one player (their own sole admin), so no real
-// fixture in this repo can exercise the "delete a NON-admin player" path,
-// the cross-entity admin-untouched proof, or the dangling-pal-handle bug
-// pin. Built by hand rather than mutated real save data, following this
-// workspace's own established convention (`pal_crud.rs`'s
-// `multi_guild_base_session`/`clone_bug_fixture`).
-// ============================================================================
+// Both world1 guilds have exactly one player (their own sole admin), so no
+// fixture here can exercise deleting a NON-admin player. The synthetic
+// two-player guild below is the only coverage for that path.
 
 fn guid_property(id: Uuid) -> Property {
     props::guid_property(id)
@@ -459,12 +428,10 @@ struct TwoPlayerGuild {
     member_pal_box_id: Uuid,
 }
 
-/// A guild with exactly two players -- `admin_id` (the guild's admin, first
-/// in the raw `players` list) and `member_id` (a non-admin member who owns
-/// one pal, `member_pal_id`, sitting in their own pal box). Both players'
-/// AND the member's pal's own guild handles are recorded in
-/// `individual_character_handle_ids` up front, so a delete's handle
-/// cleanup (or lack of it) is directly observable afterward.
+/// A guild with an admin plus one non-admin member who owns a single pal in
+/// their own pal box. Both players' guild handles AND the pal's are recorded
+/// in `individual_character_handle_ids` up front, so a delete's handle cleanup
+/// (or lack of it) is directly observable afterward.
 fn two_player_guild_session(guild_loaded: bool) -> TwoPlayerGuild {
     let data = game_data();
     let guild_id = Uuid::new_v4();
@@ -571,14 +538,10 @@ fn group_data_for(session: &SaveSession, guild_id: Uuid) -> &uesave::games::palw
     guild_tail::entry_group_data(entry).expect("group data must be typed")
 }
 
-/// **The core cross-entity test.** Deleting the NON-admin member must
-/// remove everything of theirs (character-map entry, pal, containers, file
-/// ref, guild membership row + own handle) while leaving the admin's
-/// character-map entry byte-identical and their loaded state untouched.
-/// Against a buggy over-broad delete (e.g. Task 9's own historical
-/// `delete_player_pals` bug, searching the whole character map unscoped),
-/// this must go red -- see this test's own final assertions for the direct
-/// proof.
+/// Deleting the non-admin member removes everything of theirs (character-map
+/// entry, pal, containers, file ref, guild membership row and handle) while
+/// leaving the admin's own entry byte-identical -- an over-broad delete that
+/// searches the character map unscoped goes red here.
 #[test]
 fn delete_non_admin_player_removes_everything_and_leaves_the_admin_byte_identical() {
     let TwoPlayerGuild {
@@ -601,7 +564,6 @@ fn delete_non_admin_player_removes_everything_and_leaves_the_admin_byte_identica
     let deleted = player::delete_player(&mut session, &data, member_id, &null_progress()).unwrap();
     assert!(deleted);
 
-    // Member entirely gone.
     assert!(!world::character_map(&session.level)
         .unwrap()
         .iter()
@@ -617,7 +579,6 @@ fn delete_non_admin_player_removes_everything_and_leaves_the_admin_byte_identica
         .iter()
         .any(|e| container_id_key(e) == Some(member_pal_box_id)));
 
-    // Admin byte-identical.
     let admin_entry_after = world::character_map(&session.level)
         .unwrap()
         .iter()
@@ -630,8 +591,6 @@ fn delete_non_admin_player_removes_everything_and_leaves_the_admin_byte_identica
     );
     assert!(session.loaded_players.contains_key(&admin_id));
 
-    // Guild players row: member gone, admin remains, admin_player_uid/
-    // guild_name untouched (structured tail fields).
     let group_data = group_data_for(&session, guild_id);
     let guild = guild_tail::as_guild(group_data).unwrap();
     assert_eq!(guild_tail::guild_player_count(guild), 1);
@@ -639,20 +598,18 @@ fn delete_non_admin_player_removes_everything_and_leaves_the_admin_byte_identica
     assert_eq!(guild_tail::guild_admin_uid(guild), admin_id);
     assert_eq!(guild.guild_name, "Two Player Guild");
 
-    // Member's OWN guild handle removed (Guild.delete_player, guild.py:159-170).
     assert!(!group_data
         .individual_character_handle_ids
         .iter()
         .any(|h| props::guid_to_uuid(&h.instance_id) == member_id));
-    // Admin's own handle untouched.
     assert!(group_data
         .individual_character_handle_ids
         .iter()
         .any(|h| props::guid_to_uuid(&h.instance_id) == admin_id));
 
-    // Positive cache-invalidation proof: caches actually reset, and the
-    // REBUILT index no longer resolves the deleted pal/container -- not
-    // merely `is_none()` (which a no-op mutation would also satisfy).
+    // The caches must be reset AND the rebuilt index must no longer resolve
+    // the deleted pal/container -- `is_none()` alone would also hold for a
+    // mutation that never happened.
     assert!(session.caches.character_index.is_none());
     assert!(session.caches.character_container_index.is_none());
     let character_index = world::build_character_index(&session.level);
@@ -661,14 +618,10 @@ fn delete_non_admin_player_removes_everything_and_leaves_the_admin_byte_identica
     assert!(!container_index.contains_key(&member_pal_box_id));
 }
 
-/// **A newly-found Python bug, positively pinned:** the deleted player's OWN
-/// pal's guild handle is left DANGLING -- `_delete_player_and_pals` never
-/// calls `Guild.delete_character_handle` for box/party pals (see
-/// `player::delete_player_and_pals_for_guild`'s own doc comment for the
-/// exact citation). If a "fixed" implementation cleaned this up (as
-/// `PalOpsMixin.delete_player_pals`/`Player.delete_pal` genuinely does for
-/// a *single*-pal delete), this assertion would flip and the test would
-/// fail -- proving the reproduction is load-bearing.
+/// Deleting a player leaves their pals' guild handles dangling: the whole-
+/// player delete path never calls `delete_character_handle` for box/party
+/// pals, unlike a single-pal delete. Deliberate, for save-file fidelity with
+/// the game -- cleaning the handles up would flip this assertion.
 #[test]
 fn delete_player_leaves_the_deleted_players_own_pal_guild_handle_dangling() {
     let TwoPlayerGuild {
@@ -682,12 +635,11 @@ fn delete_player_leaves_the_deleted_players_own_pal_guild_handle_dangling() {
 
     player::delete_player(&mut session, &data, member_id, &null_progress()).unwrap();
 
-    // The pal itself is really gone from the character map...
+    // The pal is gone from the character map, but its guild handle is not.
     assert!(!world::character_map(&session.level)
         .unwrap()
         .iter()
         .any(|e| world::entry_instance_id(e) == Some(member_pal_id)));
-    // ...but its guild handle is NOT -- the dangling-handle bug, reproduced.
     let group_data = group_data_for(&session, guild_id);
     assert!(
         group_data
@@ -722,15 +674,9 @@ fn delete_admin_player_is_refused_when_their_guild_is_loaded_this_session() {
     );
 }
 
-/// **The `_player_guild`-scoping fix, positively demonstrated.** Real
-/// Python's `_player_guild` (`save_manager.py`) only ever consults
-/// `self._guilds` -- guilds already lazily loaded -- never the raw save's
-/// full `GroupSaveDataMap`. When the admin's guild was never separately
-/// loaded this session (`session.loaded_guilds` doesn't contain it),
-/// `delete_player` must treat them as guildless: no admin refusal, deletion
-/// proceeds. See this task's report for what happens when this scoping is
-/// removed (the brief's own unscoped reference code) -- this exact test
-/// goes red.
+/// The admin-refusal check is scoped to `session.loaded_guilds`, never the
+/// raw `GroupSaveDataMap`: an admin whose guild was never loaded this session
+/// counts as guildless, so the delete proceeds rather than being refused.
 #[test]
 fn delete_admin_player_is_allowed_when_their_guild_was_never_loaded_this_session() {
     let TwoPlayerGuild {
@@ -754,17 +700,9 @@ fn delete_admin_player_is_allowed_when_their_guild_was_never_loaded_this_session
         .any(|e| world::entry_player_uid(e) == Some(admin_id)));
 }
 
-// ============================================================================
-// `containers::delete_item_containers` -- direct, synthetic coverage of the
-// dynamic-item cascade. Not exercised by any real fixture in this repo:
-// world1's own base storage containers (the only real containers this
-// task's real-save tests delete) carry ZERO dynamic items end to end
-// (verified empirically -- `DynamicItemSaveData` has 43 entries before AND
-// after `delete_guild_removes_group_extra_and_base_entries_but_leaves_the_
-// chest_orphaned` runs; see this task's report). This test is the only
-// coverage this task has for the cascade actually removing a real
-// `DynamicItemSaveData` entry.
-// ============================================================================
+// world1's base storage containers (the only real containers deleted above)
+// hold zero dynamic items, so the dynamic-item cascade has no real-save
+// coverage. The synthetic container below is its only coverage.
 
 fn item_container_entry_with_dynamic_slot(container_id: Uuid, local_id: Uuid) -> MapEntry {
     let mut key_props = Properties::default();
@@ -818,13 +756,10 @@ fn dynamic_item_value(local_id: Uuid) -> StructValue {
     StructValue::Struct(item_props)
 }
 
-/// **Positive cache-invalidation proof for the item-container/dynamic-item
-/// path.** Deleting a container removes its own `ItemContainerSaveData`
-/// entry AND the `DynamicItemSaveData` entry its one slot referenced;
-/// afterward, both caches are actually reset (not just left alone) AND the
-/// freshly rebuilt indexes genuinely no longer resolve either id -- proving
-/// the mutation really happened, not merely that the `Option` field reads
-/// `None`.
+/// Deleting a container removes its `ItemContainerSaveData` entry and
+/// cascades to the `DynamicItemSaveData` entry its slot referenced, resetting
+/// both caches. The rebuilt indexes are checked too: `is_none()` alone would
+/// also hold for a mutation that never happened.
 #[test]
 fn delete_item_containers_cascades_its_dynamic_item_and_invalidates_both_indexes() {
     let container_id = Uuid::new_v4();
@@ -858,8 +793,6 @@ fn delete_item_containers_cascades_its_dynamic_item_and_invalidates_both_indexes
 
     psp_core::domain::containers::delete_item_containers(&mut session, &[container_id]).unwrap();
 
-    // Both the container and its dynamic item are gone; the unrelated
-    // survivor container is untouched.
     let containers_after = world::item_container_map(&session.level).unwrap();
     assert_eq!(containers_after.len(), 1);
     assert!(!containers_after
@@ -872,7 +805,6 @@ fn delete_item_containers_cascades_its_dynamic_item_and_invalidates_both_indexes
         .unwrap()
         .is_empty());
 
-    // Positive cache-invalidation proof.
     assert!(session.caches.item_container_index.is_none());
     assert!(session.caches.dynamic_item_index.is_none());
     let item_index = world::build_item_container_index(&session.level);
@@ -882,19 +814,9 @@ fn delete_item_containers_cascades_its_dynamic_item_and_invalidates_both_indexes
     assert!(!dynamic_index.contains_key(&local_id));
 }
 
-// ============================================================================
-// Optional corpus coverage: an arbitrary real save the developer points
-// `PSP_TEST_SAVE_DIR` at, complementing the checked-in world1/world2
-// fixtures above with whatever real guild/player shapes that save happens
-// to carry (skipped, not failed, when unset -- matching this workspace's
-// own established convention, e.g. `world_index.rs`).
-// ============================================================================
-
-/// Deleting a non-admin player (when the corpus happens to have one) must
-/// leave every OTHER player's own character-map entry untouched -- the same
-/// cross-entity property `delete_non_admin_player_removes_everything_and_
-/// leaves_the_admin_byte_identical` proves on the synthetic fixture, spot-
-/// checked here against whatever real save the developer points at.
+/// The same cross-entity property the synthetic two-player guild proves,
+/// spot-checked against whatever real save `PSP_TEST_SAVE_DIR` names: deleting
+/// a non-admin player leaves every other player's entry untouched.
 #[test]
 fn delete_non_admin_player_round_trips_against_an_optional_real_corpus_save() {
     let Some(mut session) = common::load_corpus_session() else {

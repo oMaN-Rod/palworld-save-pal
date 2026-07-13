@@ -1,13 +1,3 @@
-//! Player-transfer integration coverage -- port of `game/player_transfer.py`.
-//!
-//! Two layers:
-//! * `world1` fixture (checked in, always runs): the unknown-source soft
-//!   rejection (needs no level>=2 player) plus, when the fixture has a
-//!   level>=2 player, a spawn-mode transfer that must succeed and keep the
-//!   player present.
-//! * `PSP_TEST_LEVEL_SAV` corpus (env-gated, clean-skips when unset): the same
-//!   assertions against an external corpus, matching the brief's Step-1 test.
-
 mod common;
 
 use psp_core::progress::null_progress;
@@ -25,8 +15,8 @@ fn all_options() -> TransferOptions {
     }
 }
 
-/// The first player summary whose level is >= 2 (the minimum `transfer_player`
-/// requires), if any.
+/// The first player whose level is >= 2 -- the minimum `transfer_player`
+/// accepts.
 fn level_two_player(session: &SaveSession) -> Option<Uuid> {
     session
         .player_summaries
@@ -70,8 +60,8 @@ fn world1_spawn_mode_transfer_keeps_player_present() {
         return;
     };
 
-    // Spawn into the same uid in an identical world: must succeed and leave the
-    // player's summary in place after the cache rebuild.
+    // Spawning into the same uid in an identical world must succeed and leave
+    // the player's summary in place after the cache rebuild.
     transfer_player(
         &mut source,
         &mut target,
@@ -84,14 +74,9 @@ fn world1_spawn_mode_transfer_keeps_player_present() {
     assert!(target.player_summaries.contains_key(&source_uid));
 }
 
-/// True spawn mode: `target_player_uid = None` with a VALID source uid. This
-/// is the ONLY test that drives `spawn_mode = true` past validation, so it is
-/// the only one that exercises the spawn-only path (re-parse-from-bytes clone +
-/// `loaded_players`/`player_file_refs` insert, transfer.rs). Asserts the spawn
-/// branch's effect is observable and specific: `loaded_players` (empty on a
-/// freshly loaded target) gains the uid ONLY because the spawn branch inserted
-/// the cloned GVAS -- `rebuild_player_caches` deliberately preserves
-/// `loaded_players`, so the entry survives the call.
+/// True spawn mode (`target_player_uid = None` with a valid source uid): the
+/// only path that clones the source GVAS and inserts it into the target's
+/// `loaded_players`/`player_file_refs`.
 #[test]
 fn world1_true_spawn_mode_inserts_cloned_player() {
     let mut source = common::load_fixture_session("world1");
@@ -102,8 +87,8 @@ fn world1_true_spawn_mode_inserts_cloned_player() {
         return;
     };
 
-    // A freshly loaded target has parsed no player GVAS yet: the spawn branch
-    // is the only thing that can populate `loaded_players` for this uid.
+    // A freshly loaded target has parsed no player GVAS yet, so the spawn
+    // branch is the only thing that can populate `loaded_players` for this uid.
     assert!(
         !target.loaded_players.contains_key(&source_uid),
         "precondition: target has not loaded this player before the spawn"
@@ -119,8 +104,6 @@ fn world1_true_spawn_mode_inserts_cloned_player() {
     )
     .expect("true spawn-mode transfer succeeds");
 
-    // Discriminates the spawn branch specifically: the cloned player GVAS was
-    // inserted into the target.
     assert!(
         target.loaded_players.contains_key(&source_uid),
         "spawn branch must insert the cloned player GVAS into the target"
@@ -135,9 +118,8 @@ fn world1_true_spawn_mode_inserts_cloned_player() {
     );
 }
 
-/// Brief Step-1 test, adapted to the real API (`common::load_corpus_session`
-/// instead of the fictional `session::load_steam_save`, `player_summaries`
-/// field instead of a method). Runs only with `PSP_TEST_LEVEL_SAV` set.
+/// The same assertions against an external corpus, when `PSP_TEST_LEVEL_SAV`
+/// points at one.
 #[test]
 fn corpus_spawn_mode_transfer_copies_player_into_target() {
     let level_path = match std::env::var("PSP_TEST_LEVEL_SAV") {

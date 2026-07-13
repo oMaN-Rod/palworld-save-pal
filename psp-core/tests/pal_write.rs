@@ -3,18 +3,11 @@ mod common;
 use psp_core::domain::{containers, pal, world};
 use psp_core::gamedata::GameData;
 
-/// `GameData::load` takes the `data/json` directory. From `<root>/psp-core`
-/// (this crate's `CARGO_MANIFEST_DIR`) that's `../data/json`.
 fn game_data() -> GameData {
     let json_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../data/json");
     GameData::load(&json_dir).expect("data dir")
 }
 
-/// Real-save coverage that always runs (not gated behind `PSP_TEST_SAVE_DIR`):
-/// mutate a real pal from `tests/fixtures/saves/world1`, extract it back
-/// through Task 5's real `pal_dto_from_entry`, and assert every field the
-/// mutation touched actually round-tripped -- not just "the property is
-/// present now", but the exact values a caller would see on the wire.
 #[test]
 fn apply_dto_round_trips_through_reader_on_a_real_pal() {
     let mut session = common::load_fixture_session("world1");
@@ -79,12 +72,9 @@ fn apply_dto_round_trips_through_reader_on_a_real_pal() {
     );
 }
 
-/// Regression test for a real bug found in the brief's own reference
-/// implementation: `update_from` (`game/pal.py`) skips `is_lucky` entirely
-/// when the DTO value is `None` (`if value is None: continue`) -- it does
-/// NOT treat "absent" the same as "false" (which would remove an existing
-/// `IsRarePal`). An implementation that force-removes `IsRarePal` whenever
-/// `dto.is_lucky` isn't `Some(true)` would fail this test.
+/// `is_lucky: None` means "not supplied", not "false": it must skip the
+/// `IsRarePal` setter entirely rather than remove an existing flag. A partial
+/// edit that never touched luck must not silently un-lucky the pal.
 #[test]
 fn apply_dto_is_lucky_none_leaves_existing_is_rare_pal_untouched() {
     let mut session = common::load_fixture_session("world1");
@@ -97,7 +87,7 @@ fn apply_dto_is_lucky_none_leaves_existing_is_rare_pal_untouched() {
             .expect("a pal")
     };
 
-    // First, make the pal lucky (a real, present IsRarePal property).
+    // Make the pal lucky first, so `IsRarePal` is genuinely present.
     let mut dto = {
         let entries = world::character_map(&session.level).unwrap();
         pal::pal_dto_from_entry(&entries[entry_index], &data).unwrap()
@@ -115,8 +105,6 @@ fn apply_dto_is_lucky_none_leaves_existing_is_rare_pal_untouched() {
     };
     assert_eq!(after_lucky.is_lucky, Some(true));
 
-    // Now apply an update whose is_lucky is None (e.g. a partial edit that
-    // never touched luck) -- IsRarePal must survive untouched.
     let mut second_dto = after_lucky.clone();
     second_dto.is_lucky = None;
     second_dto.nickname = Some("StillLucky".to_string());
@@ -137,23 +125,13 @@ fn apply_dto_is_lucky_none_leaves_existing_is_rare_pal_untouched() {
     assert_eq!(final_dto.nickname.as_deref(), Some("StillLucky"));
 }
 
-/// Regression test for a second real bug found in the brief: the boss-prefix
-/// decision at the end of `update_from` must be derived from the
-/// already-updated `character_id`/`is_lucky` (`self.is_boss or
-/// self.is_lucky`, which simplifies to `character_id.upper().startswith
-/// ("BOSS_") or is_lucky`), never from the DTO's own (possibly stale)
-/// `is_boss` field -- `is_boss` has no setter in Python and is unconditionally
-/// skipped by `update_from`'s loop. A stale `is_boss: Some(true)` on a
-/// non-boss, non-lucky pal must NOT add a `BOSS_` prefix.
-///
-/// Also covers the Critical sibling bug found in review: `Pal.max_hp`'s
-/// `alpha_scaling` reads the exact same `self.is_boss or self.is_lucky`
-/// condition, and `max_hp_for` used to read it straight off the caller's
-/// (possibly stale) `dto.is_boss`/`dto.is_lucky` -- inflating `Hp` for this
-/// same stale-`is_boss` pal. This is proven here, not just asserted, by
-/// comparing against independently computed boosted/unboosted `max_hp_for`
-/// values, so a regression back to the old behavior fails on a concrete
-/// number mismatch, not just a boolean.
+/// `is_boss` is derived, never supplied: the boss prefix and `max_hp`'s
+/// alpha scaling must both be decided from the updated `character_id`/
+/// `is_lucky`, never from a client-supplied `dto.is_boss`. A stale
+/// `is_boss: Some(true)` on a non-boss, non-lucky pal must add no `BOSS_`
+/// prefix and no 1.2x HP boost. Compared against independently computed
+/// boosted/unboosted `max_hp_for` values so a regression fails on a concrete
+/// number, not just a boolean.
 #[test]
 fn apply_dto_stale_is_boss_flag_does_not_add_boss_prefix_or_inflate_hp() {
     let mut session = common::load_fixture_session("world1");
@@ -177,13 +155,9 @@ fn apply_dto_stale_is_boss_flag_does_not_add_boss_prefix_or_inflate_hp() {
     dto.is_boss = Some(true);
     dto.is_lucky = Some(false);
 
-    // Independently compute what Hp WOULD be under each alpha_scaling
-    // *before* touching the save, using the exact same dto (rank/level/
-    // talent_hp/rank_hp all unmutated by this test) apply_pal_dto is about
-    // to write from. If these two ever match, this fixture pal stopped being
-    // a recognized pal with a real `pals.json` hp_scaling entry and this
-    // test can no longer discriminate the bug -- fail loudly rather than
-    // silently passing.
+    // If these two ever come out equal, the fixture pal has stopped resolving
+    // a real `pals.json` hp_scaling entry and the test can no longer tell the
+    // boosted case from the unboosted one -- fail loudly rather than pass.
     let unboosted_max_hp = pal::max_hp_for(&dto, false, &data);
     let boosted_max_hp = pal::max_hp_for(&dto, true, &data);
     assert_ne!(
@@ -213,15 +187,9 @@ fn apply_dto_stale_is_boss_flag_does_not_add_boss_prefix_or_inflate_hp() {
     assert_eq!(reread.hp, reread.max_hp, "update_from sets hp = max_hp");
 }
 
-/// Mirror of the test above: a REAL `BOSS_`-prefixed pal with a stale
-/// `dto.is_boss: Some(false)` must still get the boosted Hp -- the opposite
-/// direction of the same hazard (a client echoing back a stale flag must
-/// never be trusted either way). Uses a synthetic `SaveParameter` directly
-/// (no fixture session/schema registration needed: this exercises
-/// `apply_pal_dto`/`read_save_parameter_dto` in isolation, not
-/// `uesave::Save::write`), matching `heal_save_parameter_clears_sickness_
-/// and_resets_sanity_and_stomach`'s established pattern for tests that don't
-/// need a real world tree.
+/// The opposite direction of the same hazard: a real `BOSS_` pal with a stale
+/// `dto.is_boss: Some(false)` must still get the boosted Hp. A client-echoed
+/// flag is untrusted in both directions.
 #[test]
 fn apply_dto_stale_is_boss_false_on_a_real_boss_pal_still_gets_boosted_hp() {
     let data = game_data();
@@ -238,8 +206,6 @@ fn apply_dto_stale_is_boss_false_on_a_real_boss_pal_still_gets_boosted_hp() {
         "test setup: this must be a real boss pal"
     );
 
-    // A stale is_boss=false that does not match the actual (still-BOSS_)
-    // character_id.
     dto.is_boss = Some(false);
     dto.is_lucky = Some(false);
 
@@ -264,13 +230,9 @@ fn apply_dto_stale_is_boss_false_on_a_real_boss_pal_still_gets_boosted_hp() {
     assert_eq!(reread.hp, reread.max_hp, "update_from sets hp = max_hp");
 }
 
-/// `GotWorkSuitabilityAddRankList` (Pal.work_suitability setter): every
-/// world1 fixture pal already carries this property, so a round-trip test
-/// that merely mutates its contents never proves the two edge-case branches
-/// actually do anything (see this task's report gap note). Proves both: an
-/// unrecognized `WorkSuitability` name is filtered out and never written,
-/// and applying an entirely empty map removes the property outright rather
-/// than leaving an empty array behind.
+/// The two `GotWorkSuitabilityAddRankList` edge cases: an unrecognized
+/// suitability name is filtered out and never written, and an empty map
+/// removes the property outright rather than leaving an empty array behind.
 #[test]
 fn apply_dto_work_suitability_filters_unknown_names_and_removes_when_empty() {
     let mut session = common::load_fixture_session("world1");
@@ -317,8 +279,6 @@ fn apply_dto_work_suitability_filters_unknown_names_and_removes_when_empty() {
         "an unrecognized WorkSuitability name must be filtered out, never written"
     );
 
-    // Now apply an entirely empty map -- the property must be removed
-    // outright, not written as an empty array.
     let mut second_dto = after_mixed.clone();
     second_dto.work_suitability = psp_core::dto::ordered_map::OrderedMap::new();
     {
@@ -334,13 +294,9 @@ fn apply_dto_work_suitability_filters_unknown_names_and_removes_when_empty() {
     );
 }
 
-/// `storage_slot`'s in-place `SlotIndex` mutation, exercised end-to-end
-/// through `apply_pal_dto` for the first time in this suite -- previously
-/// only proven by source analysis (PARITY-BUG-1's mechanism writeup in this
-/// task's report), never by an actual round trip. Also directly proves
-/// PARITY-BUG-1 itself: even when the DTO carries a *different* `storage_id`
-/// (as it always does verbatim from a real read), `ContainerId` must never
-/// change -- only `SlotIndex` does.
+/// At the `apply_pal_dto` level: `storage_slot` round-trips through
+/// `SlotIndex`, but `storage_id` never moves `ContainerId`, even when the DTO
+/// carries a different one.
 #[test]
 fn apply_dto_storage_slot_round_trips_and_storage_id_never_changes_container_id() {
     let mut session = common::load_fixture_session("world1");
@@ -364,7 +320,7 @@ fn apply_dto_storage_slot_round_trips_and_storage_id_never_changes_container_id(
         "test setup must pick a genuinely different container id"
     );
     dto.storage_slot = new_slot;
-    dto.storage_id = unrelated_new_container; // PARITY-BUG-1: must be ignored on write.
+    dto.storage_id = unrelated_new_container; // must be ignored on write
 
     pal::ensure_pal_property_schemas(&mut session.level);
     {
@@ -413,10 +369,8 @@ fn heal_save_parameter_clears_sickness_and_resets_sanity_and_stomach() {
     );
 }
 
-/// `max_stomach_for`: a recognized pal with a `pals.json` `max_full_stomach`
-/// entry uses it; an unrecognized character_id falls back to the flat 300.0
-/// default. ("Alpaca" -> 225.0 verified against real `data/json/pals.json`,
-/// same fixture value `domain::pal`'s own read-side NaN-guard test uses.)
+/// A recognized pal uses its `pals.json` `max_full_stomach` ("Alpaca" is
+/// 225.0 there); an unrecognized character_id falls back to a flat 300.0.
 #[test]
 fn max_stomach_for_uses_pals_json_when_recognized_else_the_flat_default() {
     let data = game_data();
@@ -424,10 +378,6 @@ fn max_stomach_for_uses_pals_json_when_recognized_else_the_flat_default() {
     assert_eq!(pal::max_stomach_for("TotallyMadeUpCreature", &data), 300.0);
 }
 
-/// `new_pal_entry` builds a complete, independently readable
-/// `CharacterSaveParameterMap` entry -- proven by round-tripping it through
-/// Task 5's real `pal_dto_from_entry`, not by inspecting the raw property
-/// tree.
 #[test]
 fn new_pal_entry_reads_back() {
     let data = game_data();
@@ -457,8 +407,7 @@ fn new_pal_entry_reads_back() {
     assert_eq!(dto.talent_hp, 50);
     assert_eq!(dto.talent_shot, 50);
     assert_eq!(dto.talent_defense, 50);
-    // `_set_max_stomach` (game/pal.py) writes Sheepball's `max_full_stomach`
-    // (150), NOT the flat 300 fallback -- matches Python's fresh-pal value.
+    // Sheepball's own `max_full_stomach` (150), not the flat 300 fallback.
     assert_eq!(dto.stomach, 150.0);
     assert!(dto.learned_skills.is_empty());
     assert!(dto.active_skills.is_empty());
@@ -469,9 +418,8 @@ fn new_pal_entry_reads_back() {
     );
 }
 
-/// `new_pal_entry`'s `group_id` parameter, when `Some`, is readable back
-/// through the same `PalCharacterData.group_id` path `pal_dto_from_entry`
-/// already decodes (not exercised by the test above, which passes `None`).
+/// The `Some(group_id)` case the test above (which passes `None`) leaves
+/// uncovered.
 #[test]
 fn new_pal_entry_surfaces_a_real_group_id() {
     let data = game_data();
@@ -491,11 +439,9 @@ fn new_pal_entry_surfaces_a_real_group_id() {
     assert_eq!(dto.group_id, Some(group_id));
 }
 
-/// `new_pal_entry`'s `OwnedTime` must be `PalObjects.TIME` (`pal_objects.py`
-/// -- `638486453957560000`, a fixed UE tick count, NOT "now" and NOT `0`),
-/// verbatim. `PalDto` has no `owned_time` field, so no round-trip test
-/// through `pal_dto_from_entry` can witness this -- the only honest check is
-/// reading the raw `OwnedTime` property directly off the built entry.
+/// `OwnedTime` is a fixed UE tick constant on every new pal, never "now" and
+/// never 0. `PalDto` has no `owned_time` field, so the raw property has to be
+/// read straight off the built entry.
 #[test]
 fn new_pal_entry_writes_the_real_owned_time_tick_constant() {
     let data = game_data();
@@ -519,16 +465,10 @@ fn new_pal_entry_writes_the_real_owned_time_tick_constant() {
     );
 }
 
-/// Strong proof that `ensure_pal_property_schemas` is not merely
-/// compileable but functionally sufficient: mutate a real world1 pal that
-/// (confirmed via a since-deleted debug test, see this task's report)
-/// carries NEITHER `IsRarePal` NOR `MasteredWaza` NOR `SanityValue` to begin
-/// with, apply a DTO that introduces all three fresh, then actually
-/// serialize the WHOLE session to bytes through `uesave::Save::write`.
-/// `uesave` refuses to write any property whose path has no recorded schema
-/// (`Error::MissingPropertySchema`) -- if `ensure_pal_property_schemas`
-/// were missing an entry this mutation needs, this test would fail with
-/// that error, not just an assertion.
+/// `ensure_pal_property_schemas` must be functionally sufficient, not just
+/// present: world1's chosen pal carries none of `IsRarePal`/`MasteredWaza`/
+/// `SanityValue`, so introducing all three and serializing the whole session
+/// fails with `MissingPropertySchema` if any schema entry is missing.
 #[test]
 fn ensure_pal_property_schemas_makes_a_freshly_introduced_property_set_actually_serializable() {
     let mut session = common::load_fixture_session("world1");
@@ -545,7 +485,6 @@ fn ensure_pal_property_schemas_makes_a_freshly_introduced_property_set_actually_
         let entries = world::character_map(&session.level).unwrap();
         pal::pal_dto_from_entry(&entries[entry_index], &data).unwrap()
     };
-    // Precondition: none of these three are present on the chosen pal yet.
     {
         let entries = world::character_map(&session.level).unwrap();
         let save_parameter = world::entry_save_parameter(&entries[entry_index]).unwrap();
@@ -575,16 +514,10 @@ fn ensure_pal_property_schemas_makes_a_freshly_introduced_property_set_actually_
     assert!(!buffer.is_empty());
 }
 
-/// Sibling to the schema test above, covering the two entries it doesn't
-/// exercise: `GotWorkSuitabilityAddRankList` (+ its nested `.WorkSuitability`
-/// / `.Rank` schemas) and `Rank_HP`/`Rank_Attack`/`Rank_Defence`/
-/// `Rank_CraftSpeed`. Every world1 pal already carries
-/// `GotWorkSuitabilityAddRankList`, and no other test in this suite ever
-/// sets a `Rank_*` field, so registering those schemas is otherwise always a
-/// never-overwrite no-op (see this task's report gap note) -- never proven
-/// to matter. Strips all five off a real pal first, so introducing them
-/// fresh is a genuine test of the registration, then actually serializes the
-/// whole session, exactly like the test above.
+/// The schema entries the test above leaves uncovered:
+/// `GotWorkSuitabilityAddRankList` (plus its nested schemas) and the `Rank_*`
+/// fields. Every world1 pal already carries them, so all five are stripped
+/// off first to make introducing them fresh a genuine test of registration.
 #[test]
 fn ensure_pal_property_schemas_covers_work_suitability_and_rank_fields_freshly_introduced() {
     let mut session = common::load_fixture_session("world1");
@@ -693,12 +626,9 @@ fn character_container_add_and_remove_on_a_real_container() {
 }
 
 /// `character_container_add_pal`/`remove_pal` mutate a `Slots` array nested
-/// *inside* an already-positioned `CharacterContainerSaveData` entry -- they
-/// never insert or remove a map entry, so the container's own position (what
-/// `build_character_container_index`/`SaveSession::character_container_index`
-/// cache) must never move. Direct, real-save proof that no cache
-/// invalidation call is needed anywhere in this task -- see this task's
-/// report for the full reasoning.
+/// inside an already-positioned entry and never insert or remove a map entry,
+/// so no container's cached position may move and no cache invalidation is
+/// required.
 #[test]
 fn container_mutation_never_moves_any_containers_index_position() {
     let mut session = common::load_fixture_session("world1");
@@ -724,15 +654,9 @@ fn container_mutation_never_moves_any_containers_index_position() {
     assert_eq!(after.get(&container_id), Some(&entry_index));
 }
 
-/// Corpus-gated variant of `apply_dto_round_trips_through_reader_on_a_real_pal`
-/// (skips when `PSP_TEST_SAVE_DIR` is unset, per this workspace's
-/// established convention for larger, non-committed save corpora): the same
-/// mutate/reread/assert shape, run against every pal in whatever save the
-/// environment points at, rather than just the first one in the committed
-/// `world1` fixture. Keeping this alongside the always-run fixture tests
-/// above also keeps `common::load_corpus_session` from going unused in this
-/// binary (`cargo clippy -D warnings` flags an unused `pub fn` per test
-/// binary, since each integration test file is compiled as its own crate).
+/// The same mutate/reread shape as
+/// `apply_dto_round_trips_through_reader_on_a_real_pal`, but across every pal
+/// in whatever save `PSP_TEST_SAVE_DIR` names rather than one fixture pal.
 #[test]
 fn apply_dto_round_trips_through_reader_across_the_whole_corpus() {
     let Some(mut session) = common::load_corpus_session() else {

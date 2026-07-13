@@ -1,26 +1,9 @@
-//! Phase-2 Task 12 — save-out (`.sav` bytes), world rename, and the
-//! byte-validity resave gate.
+//! Save-out (`.sav` bytes), world rename, and the byte-validity resave gate.
 //!
-//! Every test here runs UNCONDITIONALLY off the committed fixture
-//! `tests/fixtures/saves/world1` (via `common::load_fixture_session`), never
-//! the env-gated private corpus. Two reasons: (1) it discharges the Phase-1
-//! deferred item "commit a fixture so the write gate isn't env-gated" — bare
-//! CI now has real protection for the resave path; (2) the (C) compression
-//! experiment (below) proved this port's Oodle output is byte-identical to
-//! the game's original `Level.sav`, so an unconditional original-file gate is
-//! legitimate here rather than a GVAS-layer fallback.
-//!
-//! **(C) compression experiment result (run during implementation, then
-//! folded into `untouched_level_resaves_byte_identical`).** Loading
-//! `world1/Level.sav` (112 879 compressed bytes → 1 339 023 GVAS bytes) and
-//! re-writing it produced output byte-identical at BOTH layers: the
-//! compressed `.sav` (112 879 bytes, `compressed_identical=true`) and the
-//! decompressed GVAS (1 339 023 bytes, `gvas_identical=true`). The game
-//! compressed the original with the same Oodle Mermaid/Normal settings this
-//! port drives, so decompress→recompress reproduces the original file. Gate
-//! chosen: compare `level_sav_bytes()` against the raw original file bytes
-//! (the brief's strong form), NOT the GVAS-layer fallback (C) allows when
-//! recompression diverges.
+//! The gates here compare against the original file bytes rather than the
+//! decompressed GVAS: the game compresses `Level.sav` with the same Oodle
+//! Mermaid/Normal settings this crate drives, so decompress -> recompress
+//! reproduces the original file exactly.
 
 mod common;
 
@@ -41,11 +24,10 @@ fn fixture_file(relative: &str) -> Vec<u8> {
     std::fs::read(&path).unwrap_or_else(|error| panic!("read fixture {relative}: {error}"))
 }
 
-/// The (C) gate, strong form: a no-edit resave of `Level.sav` reproduces the
-/// original file byte-for-byte. Proves the whole read→write compressed
-/// pipeline (`savio::read_sav_bytes` → `savio::write_sav_bytes`) is
-/// lossless. Non-trivial: the fixture is ~112 KB, and this fails the moment
-/// any codec, schema, or the Oodle compressor drifts by a single byte.
+/// A no-edit resave of `Level.sav` must reproduce the original file
+/// byte-for-byte: the whole read -> write compressed pipeline is lossless.
+/// The fixture is ~112 KB, so this goes red the moment any codec, schema, or
+/// the Oodle compressor drifts by a single byte.
 #[test]
 fn untouched_level_resaves_byte_identical() {
     let session = common::load_fixture_session("world1");
@@ -58,12 +40,8 @@ fn untouched_level_resaves_byte_identical() {
     );
 }
 
-/// The same no-edit resave gate on the PRIVATE corpus named by
-/// `PSP_TEST_SAVE_DIR` (skips loudly when unset — see
-/// `common::load_corpus_session`). The committed fixture above already runs
-/// this gate unconditionally on bare CI; this widens it to whatever
-/// larger/other real save a developer points at, catching byte drift the one
-/// small fixture might not exercise.
+/// The same gate widened to whatever larger real save `PSP_TEST_SAVE_DIR`
+/// names, catching byte drift the one small fixture might not exercise.
 #[test]
 fn untouched_corpus_level_resaves_byte_identical() {
     let Some(session) = common::load_corpus_session() else {
@@ -80,8 +58,7 @@ fn untouched_corpus_level_resaves_byte_identical() {
     );
 }
 
-/// Same gate for `LevelMeta.sav` — exercises `level_meta_sav_bytes()`'s
-/// `Some` branch and proves the meta write path is lossless too.
+/// The same gate for `LevelMeta.sav`.
 #[test]
 fn untouched_level_meta_resaves_byte_identical() {
     let session = common::load_fixture_session("world1");
@@ -97,11 +74,8 @@ fn untouched_level_meta_resaves_byte_identical() {
     );
 }
 
-/// An edited pal survives the full write→read round trip with its edit
+/// An edited pal survives the full write -> read round trip with its edit
 /// applied, and editing a pal never changes the character-map entry count.
-/// Non-tautological: `target_level` is chosen to DIFFER from the pal's
-/// current level, so a resave that silently dropped the edit would read back
-/// the original and fail.
 #[test]
 fn edited_pal_reloads_with_edit_applied_and_entry_count_stable() {
     let mut session = common::load_fixture_session("world1");
@@ -175,11 +149,9 @@ fn edited_pal_reloads_with_edit_applied_and_entry_count_stable() {
     );
 }
 
-/// Editing one pal's nickname leaves every guild's opaque raw tail
-/// (`GroupSaveDataMap` `remaining_data`) byte-identical — a pal stat edit
-/// touches `CharacterSaveParameterMap`, never the guild tail blob. Captures
-/// the tails before the edit and asserts each is unchanged after, so a
-/// regression that accidentally re-encoded a tail would go red.
+/// A pal stat edit touches `CharacterSaveParameterMap` only, so every guild's
+/// tail in `GroupSaveDataMap` must come out byte-identical -- a regression
+/// that accidentally re-encoded a tail goes red here.
 #[test]
 fn edit_one_pal_leaves_guild_tails_byte_identical() {
     let mut session = common::load_fixture_session("world1");
@@ -250,9 +222,9 @@ fn edit_one_pal_leaves_guild_tails_byte_identical() {
     }
 }
 
-/// `set_world_name` updates both `self.world_name` and the LevelMeta
-/// `SaveData.WorldName` property, and the rename survives a
-/// `level_meta_sav_bytes()` write→read round trip.
+/// `set_world_name` updates both `world_name` and the LevelMeta
+/// `SaveData.WorldName` property, and the rename survives a write -> read
+/// round trip.
 #[test]
 fn rename_world_updates_meta_and_survives_resave() {
     let mut session = common::load_fixture_session("world1");
@@ -277,9 +249,7 @@ fn rename_world_updates_meta_and_survives_resave() {
     assert_eq!(world_name, Some(new_name.as_str()));
 }
 
-/// `set_world_name` with no LevelMeta loaded errors with EXACTLY Python's
-/// message (`save_manager.py:193`: `raise ValueError("No LevelMeta GvasFile
-/// has been loaded.")`). Unconditional (synthetic session).
+/// `set_world_name` with no LevelMeta loaded must error, not silently no-op.
 #[test]
 fn set_world_name_without_level_meta_errors_with_python_message() {
     let level = read_level_only();
@@ -290,14 +260,10 @@ fn set_world_name_without_level_meta_errors_with_python_message() {
     assert_eq!(error.to_string(), "No LevelMeta GvasFile has been loaded.");
 }
 
-/// Pins the `bossTechnologyPoint` schema fix (Task 10 → Task 12
-/// carry-forward). `apply_player_dto` writes `SaveData.bossTechnologyPoint`
-/// unconditionally, but the world1 fixture player's `.sav` has no schema for
-/// it — so before the fix (`ensure_boss_technology_point_schema`), writing an
-/// edited player `.sav` through `player_sav_bytes()` failed with
-/// `missing property schema for path: SaveData.bossTechnologyPoint`. This
-/// test edits a player, saves out, and asserts the write succeeds. It fails
-/// (Err on the resave) if the schema fix is removed.
+/// `apply_player_dto` writes `SaveData.bossTechnologyPoint` unconditionally,
+/// but a player `.sav` that never carried the property has no write schema
+/// for it. `ensure_boss_technology_point_schema` must register one, or every
+/// edited player `.sav` fails to serialize.
 #[test]
 fn edited_player_save_out_succeeds_after_boss_technology_point_fix() {
     let mut session = common::load_fixture_session("world1");
@@ -323,30 +289,15 @@ fn edited_player_save_out_succeeds_after_boss_technology_point_fix() {
         "written player .sav must be non-trivial"
     );
 
-    // And it must round-trip back to a parseable save.
     psp_core::savio::read_sav_bytes(sav_bytes).expect("edited player .sav re-reads cleanly");
 }
 
-/// Reproduces (and pins the fix for) a data-loss bug found via a full WS
-/// `update_save_file` -> `save_modded_save` -> reload reproduction
-/// (`psp-server/tests/save_reload_cycle.rs`): `apply_player_dto` writes
-/// `SanityValue` into the player's OWN entry in `worldSaveData.
-/// CharacterSaveParameterMap` unconditionally on every player edit, but
-/// (unlike a pal's raw `SaveParameter` struct) a player entry has no
-/// pre-existing write-schema for that path in the world1 fixture -- so
-/// `session.level_sav_bytes()` (which `save_modded_save`/`download_save_file`
-/// both call) failed with `MissingPropertySchema` for EVERY player edit, not
-/// just ones that touch sanity directly. Because that failure happens after
-/// `update_save_file` has already applied (and reported success for) the
-/// edit in memory, and before a single byte of the new `Level.sav` is
-/// written, the on-disk save was left completely untouched -- so the very
-/// next `select_save` silently reread the pre-edit file, exactly matching
-/// the user-reported symptom ("I edited, saved, reloaded, and my edit is
-/// gone"). Unlike `edited_player_save_out_succeeds_after_boss_technology_
-/// point_fix` (which only proves `player_sav_bytes()` -- the per-player
-/// `.sav` -- survives an edit), this asserts `level_sav_bytes()` -- the
-/// SHARED `Level.sav` this exact bug broke -- also survives, and that the
-/// edit is actually present after a full write+reread of that `Level.sav`.
+/// The sibling gate for the SHARED `Level.sav` rather than the per-player
+/// `.sav`: `apply_player_dto` also writes `SanityValue` into the player's own
+/// `CharacterSaveParameterMap` entry on every edit, and (unlike a pal's
+/// `SaveParameter`) a player entry has no write schema for that path. If
+/// `level_sav_bytes()` fails, the edit has already been applied in memory and
+/// reported as saved while not one byte reached disk -- silent data loss.
 #[test]
 fn edited_player_level_sav_bytes_succeeds_and_edit_round_trips() {
     let mut session = common::load_fixture_session("world1");
@@ -393,15 +344,10 @@ fn edited_player_level_sav_bytes_succeeds_and_edit_round_trips() {
     );
 }
 
-/// Pins the `SlotID` write-schema fix (Task 14b). `new_pal_entry` inserts the
-/// new pal's slot struct under the all-caps key `SlotID` (Python's
-/// `PalObjects.PalCharacterSlotId`), but every pal already on disk spells it
-/// `SlotId`, so uesave recorded a write-schema only for the `SlotId` paths.
-/// Before the fix, adding a pal then re-serializing `Level.sav` failed with
-/// `missing property schema for path: worldSaveData.CharacterSaveParameterMap.
-/// RawData.SaveParameter.SlotID`. This adds a pal via `add_player_pal`, asserts
-/// `level_sav_bytes()` succeeds, and confirms the new pal survives a read-back
-/// (its `InstanceId` is present in the reloaded `CharacterSaveParameterMap`).
+/// `new_pal_entry` writes the new pal's slot struct under the all-caps key
+/// `SlotID`, but every pal already on disk spells it `SlotId`, so uesave has
+/// recorded a write schema only for the `SlotId` paths. A schema for `SlotID`
+/// must be registered or `Level.sav` fails to serialize after any pal add.
 #[test]
 fn add_player_pal_then_resave_succeeds_and_pal_round_trips() {
     let mut session = common::load_fixture_session("world1");
@@ -437,14 +383,9 @@ fn add_player_pal_then_resave_succeeds_and_pal_round_trips() {
     .unwrap()
     .expect("world1's pal box has room for one more pal");
 
-    // Task-15 pin: a freshly added pal reports Python's placeholder `HP`
-    // (545000, NOT the computed max_hp). `Pal.__init__(new_pal=True)` sets
-    // `new_pal.hp = new_pal.max_hp`, but the `hp` getter's later `"HP"→"Hp"`
-    // migration clobbers it back to the `PalObjects.PalSaveParameter`
-    // placeholder, so every freshly added pal's wire `hp` is that fixed value.
-    // Without this the resave test would still pass if the fix regressed to
-    // emitting the computed max_hp. (The species-`max_full_stomach` half of the
-    // same fix is pinned by `pal_write.rs::max_stomach_for_uses_pals_json_*`.)
+    // A freshly added pal's wire `hp` is the fixed 545000 placeholder written
+    // into its `HP` property, not the computed max_hp: the reader looks at
+    // `Hp`, which the new entry never sets.
     assert_eq!(
         new_pal.hp, 545_000,
         "a newly added pal must report Python's placeholder HP, not the computed max_hp"
@@ -467,13 +408,11 @@ fn add_player_pal_then_resave_succeeds_and_pal_round_trips() {
     );
 }
 
-/// The guild-add sibling of the above, on world1's real founding guild + base
-/// (see `pal_crud.rs`'s `WORLD1_GUILD_WITH_BASE`/`WORLD1_BASE_ID`). A base pal
-/// built by `add_guild_pal` also carries the all-caps `SlotID`, so the same
-/// schema gap broke `level_sav_bytes()` for guild adds until Task 14b.
+/// The guild-add sibling of the above: a base pal built by `add_guild_pal`
+/// carries the same all-caps `SlotID`, so it needs the same schema.
 #[test]
 fn add_guild_pal_then_resave_succeeds_and_pal_round_trips() {
-    // world1's founding guild + its one real base (empty worker container).
+    // world1's founding guild + its one base (empty worker container).
     const WORLD1_GUILD_WITH_BASE: &str = "54491484-4e6c-7327-70b2-868f350929f6";
     const WORLD1_BASE_ID: &str = "4bb24de8-4965-af19-f596-e296089e8ab0";
 
@@ -482,7 +421,7 @@ fn add_guild_pal_then_resave_succeeds_and_pal_round_trips() {
     let guild_id: uuid::Uuid = WORLD1_GUILD_WITH_BASE.parse().unwrap();
     let base_id: uuid::Uuid = WORLD1_BASE_ID.parse().unwrap();
 
-    // add_guild_pal requires the guild to be loaded this session.
+    // `add_guild_pal` requires the guild to be loaded this session.
     psp_core::domain::guild::get_guild_details(&mut session, &data, guild_id)
         .unwrap()
         .expect("guild loads");
@@ -499,7 +438,7 @@ fn add_guild_pal_then_resave_succeeds_and_pal_round_trips() {
     .unwrap()
     .expect("world1's base worker container has room");
 
-    // Same Task-15 pin as the player-add test: the placeholder HP (545000).
+    // Same placeholder HP as the player-add test above.
     assert_eq!(
         new_pal.hp, 545_000,
         "a newly added guild pal must report Python's placeholder HP, not the computed max_hp"
@@ -522,8 +461,6 @@ fn add_guild_pal_then_resave_succeeds_and_pal_round_trips() {
     );
 }
 
-/// Builds a `SaveSession` from just `world1/Level.sav`, with no LevelMeta —
-/// the state `set_world_name` must reject.
 fn read_level_only() -> uesave::Save {
     let level_bytes = fixture_file("world1/Level.sav");
     psp_core::savio::read_sav_bytes(&level_bytes).expect("parse level")

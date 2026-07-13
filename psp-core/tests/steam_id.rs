@@ -46,9 +46,8 @@ fn input_parsing_matches_python() {
         psp_core::steam_id::parse_steam_input("https://steamcommunity.com/id/somebody"),
         Err(psp_core::steam_id::SteamIdError::VanityUrl)
     ));
-    // Non-numeric input must reproduce Python's `int()` ValueError message
-    // verbatim, over the PROCESSED string (post prefix/URL stripping), which is
-    // what steam_id_handler.py puts on the wire. Verified against live Python.
+    // The error message is the wire contract: it quotes the PROCESSED string
+    // (after prefix/URL stripping), not the raw input.
     assert_eq!(
         psp_core::steam_id::parse_steam_input("garbage!!")
             .unwrap_err()

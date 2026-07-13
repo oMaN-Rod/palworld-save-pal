@@ -9,18 +9,11 @@ use uesave::{
     StructValue,
 };
 
-/// `GameData::load` takes the `data/json` directory itself. From
-/// `<root>/psp-core` (this crate's `CARGO_MANIFEST_DIR`) that's `../data/json`,
-/// matching `gamedata.rs`'s `loads_the_real_repo_data_dir` test.
 fn game_data() -> GameData {
     let json_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../data/json");
     GameData::load(&json_dir).expect("data dir")
 }
 
-/// A `Save` whose only content that matters to `pal_summaries` (via
-/// `world::character_map`) is `properties` at the property-tree root --
-/// mirrors `session.rs`/`world.rs`'s own private `minimal_save` helpers,
-/// duplicated here rather than exported since it's test-only scaffolding.
 fn minimal_save(properties: Properties) -> Save {
     Save {
         header: Header {
@@ -53,12 +46,9 @@ fn guid_property(text: &str) -> Property {
     Property::Struct(StructValue::Guid(guid))
 }
 
-/// A well-formed non-player `CharacterSaveParameterMap` entry -- the same
-/// key/value shape `world::entry_save_parameter`/`entry_instance_id` expect
-/// (`PlayerUId`+`InstanceId` key struct, `RawData` -> `PalCharacterData` ->
-/// `SaveParameter`), built directly rather than through a real save so a
-/// synthetic `save_parameter` (e.g. one missing `Rank`, or carrying an empty
-/// `Gender`) can be fed straight into `pal_summaries`.
+/// A well-formed non-player `CharacterSaveParameterMap` entry, built by hand
+/// so a synthetic `save_parameter` (one missing `Rank`, say) can be fed
+/// straight into `pal_summaries`.
 fn pal_character_entry(instance_id: &str, save_parameter: Properties) -> MapEntry {
     let mut key_properties = Properties::default();
     key_properties.insert(
@@ -87,11 +77,9 @@ fn pal_character_entry(instance_id: &str, save_parameter: Properties) -> MapEntr
     }
 }
 
-/// A `SaveSession` whose `CharacterSaveParameterMap` is exactly `entries` --
-/// enough to exercise `pal_summaries` end to end (it reads
-/// `world::character_map(&session.level)` and, optionally,
-/// `session.base_camp_map()`, which stays absent/`None` here) without a real
-/// save file on disk.
+/// A `SaveSession` whose `CharacterSaveParameterMap` is exactly `entries` and
+/// which has no base camp map -- enough to run `pal_summaries` end to end
+/// without a save file on disk.
 fn session_with_character_map_entries(entries: Vec<MapEntry>) -> SaveSession {
     let mut world_save_data = Properties::default();
     world_save_data.insert("CharacterSaveParameterMap", Property::Map(entries));
@@ -139,12 +127,9 @@ fn pal_summaries_match_python_defaults() {
     assert_eq!(summaries.len(), pal_entry_count);
     for summary in &summaries {
         assert!(summary.level >= 1);
-        // This only proves no corpus pal happens to carry `Rank == 0` --
-        // every real pal with any progression already has an explicit
-        // `Rank` property, so this corpus assertion never actually exercises
-        // the "Rank absent -> defaults to 1" branch. That branch is proven
-        // separately, with synthetic input that genuinely omits Rank, by
-        // `pal_summaries_defaults_rank_to_one_when_rank_is_absent` below.
+        // Every real pal already carries an explicit `Rank`, so this only
+        // shows no corpus pal has `Rank == 0`; the "Rank absent -> 1" default
+        // is covered by `pal_summaries_defaults_rank_to_one_when_rank_is_absent`.
         assert!(
             summary.rank >= 1,
             "no corpus pal has Rank == 0 (summaries.py get_pal_summaries)"
@@ -152,21 +137,10 @@ fn pal_summaries_match_python_defaults() {
     }
 }
 
-/// The task's own named risk: `Rank` defaults to `0` in the full `Pal` dump
-/// (`read_save_parameter_dto_applies_every_default_for_an_empty_save_parameter`
-/// covers that branch) but to `1` in `PalSummary` -- both are correct, not a
-/// typo. Real save corpora can't prove the summary side of this: every real
-/// pal with any progression already carries an explicit `Rank`, so
-/// `pal_summaries_match_python_defaults`'s `rank >= 1` assertion above never
-/// actually exercises "Rank absent". This test builds a `SaveParameter` that
-/// genuinely has no `Rank` property and proves `pal_summaries` still
-/// defaults it to `1` (summaries.py `get_pal_summaries`:
-/// `rank=self._sp_byte(save_parameter, "Rank", 1)`).
-///
-/// Discriminates: with the summaries-side default temporarily changed from
-/// `1` to `0` in `domain::pal::pal_summaries`, this test failed (`assertion
-/// `left == right` failed: left: 0, right: 1`); reverting the default back
-/// to `1` made it pass again.
+/// An absent `Rank` defaults to `1` in `PalSummary` but to `0` in the full
+/// `PalDto` dump -- both are deliberate. No real save can prove the summary
+/// side (every real pal carries an explicit `Rank`), so this feeds a
+/// `SaveParameter` that genuinely has none.
 #[test]
 fn pal_summaries_defaults_rank_to_one_when_rank_is_absent() {
     let mut save_parameter = Properties::default();
@@ -184,12 +158,9 @@ fn pal_summaries_defaults_rank_to_one_when_rank_is_absent() {
     );
 }
 
-/// `summaries.py get_pal_summaries`: `gender = None; if "Gender" in
-/// save_parameter: raw_gender = ...; if raw_gender: gender =
-/// PalGender.from_value(raw_gender).value` -- an empty decoded string is
-/// falsy in Python and leaves `gender` `None`, unlike the full `Pal.gender`
-/// dump (which always runs a present value through `from_value`, defaulting
-/// even an empty string to `Female`).
+/// An empty `Gender` string leaves `PalSummary.gender` as `None`, unlike the
+/// full `PalDto` dump, which runs any present value through `from_prefixed`
+/// and so defaults even an empty string to `Female`.
 #[test]
 fn pal_summaries_treats_an_empty_gender_string_as_absent() {
     let mut save_parameter = Properties::default();
@@ -209,11 +180,6 @@ fn pal_summaries_treats_an_empty_gender_string_as_absent() {
     );
 }
 
-/// Real-save coverage that always runs (not gated behind `PSP_TEST_SAVE_DIR`):
-/// `tests/fixtures/saves/world1` is checked into the repo. Asserts concrete
-/// field values, not just "some DTO came back" -- proving the accessors
-/// actually read the right save-file properties, not just that they don't
-/// panic.
 #[test]
 fn world1_fixture_pals_have_real_field_values() {
     let session = common::load_fixture_session("world1");
@@ -256,21 +222,12 @@ fn world1_fixture_pals_have_real_field_values() {
     );
 }
 
-/// `pal_summaries` derives `guild_id`/`base_id` via
-/// `domain::guild::base_guild_and_container`, which decodes the real
-/// `BaseCampSaveData`/`WorkerDirector` byte blob (`palbin::
-/// worker_director_container_id`) rather than reading a typed struct field
-/// that doesn't exist in uesave-rs (see this task's report). world1's single
-/// base camp has no pals actually slotted into its worker container (both of
-/// its 11 pals sit in party/pal-box containers instead), so `pal_summaries`
-/// itself has no real-save case where a `base_id` resolves to `Some` in this
-/// particular fixture -- asserting that would test the fixture's data, not
-/// this code. What *is* real-save-verified here is the base entry's own
-/// decode, checked directly against ground truth independently confirmed
-/// via `.venv` Python (`GvasFile.read` on the same fixture): base key
-/// `4bb24de8-4965-af19-f596-e296089e8ab0`, `group_id_belong_to`
-/// `54491484-4e6c-7327-70b2-868f350929f6`, WorkerDirector `container_id`
-/// `a77f85ca-4037-97d8-acef-fcb73f1d931b`.
+/// `pal_summaries` derives `guild_id`/`base_id` by decoding the raw
+/// `BaseCampSaveData`/`WorkerDirector` byte blob, so this pins the decode
+/// against world1's known base: guild `54491484-...`, worker container
+/// `a77f85ca-...`. Every one of world1's 11 pals sits in a party/pal-box
+/// container rather than the base's worker container, so no pal in this
+/// fixture ever resolves a `base_id`.
 #[test]
 fn world1_fixture_base_camp_worker_director_decodes_to_known_real_values() {
     let session = common::load_fixture_session("world1");
@@ -286,18 +243,14 @@ fn world1_fixture_base_camp_worker_director_decodes_to_known_real_values() {
         container_id.to_string()
     );
 
-    // pal_summaries itself must still run cleanly end to end over this save
-    // (guild_id/base_id simply stay None for every pal in this fixture).
     let data = game_data();
     let summaries = pal::pal_summaries(&session, &data).unwrap();
     assert!(!summaries.is_empty());
     assert!(summaries.iter().all(|summary| summary.base_id.is_none()));
 }
 
-/// A `CharacterSaveParameterMap` entry that isn't shaped like a pal at all
-/// (untrusted save data: a wrong-typed value, no `RawData`) must be skipped
-/// by `pal_dto_from_entry`, never panic -- matching Python's `PalObjects.
-/// get_nested` returning `None` through a broken chain rather than raising.
+/// Save data is untrusted: an entry that isn't shaped like a pal at all must
+/// be skipped, never panic.
 #[test]
 fn pal_dto_from_entry_returns_none_for_a_malformed_entry() {
     let malformed = uesave::MapEntry {
@@ -309,9 +262,8 @@ fn pal_dto_from_entry_returns_none_for_a_malformed_entry() {
     assert!(pal::pal_dto_from_entry(&malformed, &data).is_none());
 }
 
-/// A well-formed character entry whose `SaveParameter` is simply empty (no
-/// properties at all) must still produce a `PalDto` -- every field in
-/// `read_save_parameter_dto` has a Python-matching default for "key absent".
+/// An entry whose `SaveParameter` is empty must still produce a `PalDto`:
+/// every field in `read_save_parameter_dto` has a default for "key absent".
 #[test]
 fn read_save_parameter_dto_applies_every_default_for_an_empty_save_parameter() {
     let empty_save_parameter = uesave::Properties::default();

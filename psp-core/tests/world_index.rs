@@ -3,14 +3,10 @@ mod common;
 use psp_core::domain::world;
 use uesave::{Property, StructValue};
 
-/// Real-save validation of `PalDynamicItem.id.local_id_in_created_world` --
-/// the field path `build_dynamic_item_index` keys by, which the Phase 2
-/// Task 2 brief flagged as unverified against actual game data ("adjust the
-/// field path to match the actual struct"). Uses the repo-committed
-/// `world1` fixture directly (not `PSP_TEST_SAVE_DIR`), so this always runs,
-/// never silently skips. `world1` (2 players) genuinely has
-/// `DynamicItemSaveData` entries -- 43, at last count -- so this exercises
-/// real parsed `PalDynamicItem` structs, not just a compile check.
+/// Real-save validation of `PalDynamicItem.id.local_id_in_created_world`, the
+/// field path `build_dynamic_item_index` keys by. world1 carries ~43 real
+/// `DynamicItemSaveData` entries, so this exercises parsed `PalDynamicItem`
+/// structs rather than an empty loop.
 #[test]
 fn dynamic_item_index_resolves_every_real_entry_by_local_id_in_created_world() {
     let session = common::load_fixture_session("world1");
@@ -33,10 +29,9 @@ fn dynamic_item_index_resolves_every_real_entry_by_local_id_in_created_world() {
          a mismatch here means the field path is wrong for real save data"
     );
 
-    // Round-trip every indexed position back through the real entries: the
-    // struct at that position must itself report the same uuid the index
-    // filed it under, proving the key extraction reads the field it claims
-    // to, not just that counts happen to line up.
+    // The struct at each indexed position must itself report the uuid the
+    // index filed it under -- proving the key extraction reads the field it
+    // claims to, not just that the counts happen to line up.
     for (&local_id, &position) in &index {
         let StructValue::Struct(item_props) = &entries[position] else {
             panic!("indexed position {position} is not a StructValue::Struct");
@@ -99,32 +94,20 @@ fn invalidation_clears_all_caches() {
     assert!(session.caches.player_guild_map.is_none());
 }
 
-/// The mandated cache-invalidation-after-mutation proof: builds the
-/// character index, mutates the underlying map (removes an entry) WITHOUT
-/// invalidating, and shows the stale index would now resolve to a DIFFERENT,
-/// EXISTING entry -- demonstrating exactly why `WorldCaches` must be
-/// invalidated on every character-map mutation (Tasks 9/11's contract).
-/// Then re-builds after the mutation and shows the fresh index is correct.
-///
-/// Deliberately removes position 0, not "whatever `HashMap` iteration hands
-/// back first" (the prior version of this test): position 0 is provably not
-/// the last position whenever there are >= 2 entries (the last position is
-/// `len - 1 >= 1 != 0`), so `entries_after_removal.get(0)` is guaranteed
-/// `Some` on every run -- the demonstration can never degrade into "the slot
-/// is merely gone" (which `assert!(!still_matches)` alone would also accept,
-/// without ever proving a WRONG entry got resolved). Also fully
-/// deterministic run-to-run, unlike the `HashMap`-iteration-order pick this
-/// replaces.
+/// Why `WorldCaches` must be invalidated on every character-map mutation: a
+/// stale index resolves to a different, still-existing entry, silently
+/// editing the wrong pal. Removes position 0 specifically -- with >= 2
+/// entries it is provably not the last position, so something always shifts
+/// into it and the demonstration can never degrade into "the slot is merely
+/// gone".
 #[test]
 fn stale_character_index_after_removal_would_resolve_the_wrong_entry() {
     let Some(mut session) = common::load_corpus_session() else {
         return;
     };
     let entries_before_removal = world::character_map(&session.level).unwrap();
-    // A single-entry corpus can't demonstrate "resolves to a DIFFERENT
-    // existing entry" -- there would be nothing left at position 0 to be
-    // that different entry. Every corpus this test is actually run against
-    // (world1/world2, any real multi-pal save) clears this easily.
+    // A single-entry corpus leaves nothing behind at position 0 to be the
+    // "different existing entry" this test is about.
     if entries_before_removal.len() < 2 {
         return;
     }
@@ -133,9 +116,9 @@ fn stale_character_index_after_removal_would_resolve_the_wrong_entry() {
     let entries = world::character_map_mut(&mut session.level).unwrap();
     entries.remove(0);
 
-    // The stale index still claims `removed_id` lives at position 0, but
-    // every entry has shifted left by one -- position 0 now holds what used
-    // to be position 1: a different entry that still exists.
+    // The stale index still claims `removed_id` lives at position 0, but every
+    // entry has shifted left by one, so position 0 now holds a different entry
+    // that still exists.
     let entries_after_removal = world::character_map(&session.level).unwrap();
     let resolved_after_removal = entries_after_removal
         .first()
@@ -152,9 +135,7 @@ fn stale_character_index_after_removal_would_resolve_the_wrong_entry() {
         "position 0 must no longer resolve to the removed entry's InstanceId"
     );
 
-    // A freshly rebuilt index (what every Task-9/11 mutation must trigger
-    // via invalidate_performance_caches, then a rebuild-on-next-access) no
-    // longer contains the removed id at all.
+    // A freshly rebuilt index no longer contains the removed id at all.
     if let Some(removed_id) = removed_id {
         let fresh_index = world::build_character_index(&session.level);
         assert!(!fresh_index.contains_key(&removed_id));

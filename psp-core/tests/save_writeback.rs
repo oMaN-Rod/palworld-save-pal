@@ -1,31 +1,4 @@
-//! Task 10: `update_save_file` write-back — pals, players, guilds, item
-//! containers. Port of `PalOpsMixin.update_pals/update_dps_pals`
-//! (`pal_ops.py`), `PlayerOpsMixin.update_players/update_player_technologies`
-//! (`player_ops.py`), `GuildOpsMixin.update_guilds` (`guild_ops.py`),
-//! `Player.update_from` (`player.py`), `ItemContainer.update_from`
-//! (`item_container.py`), `Guild.update_from`/`Base.update_from`.
-//!
-//! Deviation from the brief: the brief's test file used
-//! `indexmap::IndexMap` for `modified_pals`/`modified_players`/
-//! `modified_guilds`. `indexmap` is not (and this task is told not to
-//! become) a direct dependency of `psp-core` -- see `session.rs`'s
-//! `loaded_players` doc comment, where the project's own cross-phase
-//! reconciliation already resolved this exact substitution project-wide
-//! ("Phase 2's `IndexMap` -> `BTreeMap`/`OrderedMap`, specifically to keep
-//! deterministic iteration order with zero new dependencies"). Every
-//! `update_*` function in this task therefore takes
-//! `&crate::dto::ordered_map::OrderedMap<K, V>` instead, matching every
-//! other wire-facing collection in this crate (`PlayerDto::pals`,
-//! `GuildDto::bases`, ...).
-//!
-//! Deviation from the brief: most tests here run against the checked-in
-//! `tests/fixtures/saves/world1` fixture via `common::load_fixture_session`
-//! (always runs, real save data), not `common::load_corpus_session` (gated
-//! by `PSP_TEST_SAVE_DIR`, unset in this environment) -- matching the
-//! established convention every other Phase-2 test file in this workspace
-//! already follows (`pal_crud.rs`, `player_details.rs`, `guild_details.rs`).
-//! One corpus-gated test is kept to exercise `load_corpus_session` when a
-//! real save directory is supplied.
+//! `update_save_file` write-back: pals, players, guilds, item containers.
 
 mod common;
 
@@ -67,7 +40,7 @@ fn update_pals_edit_then_reread() {
         sink_messages.lock().unwrap().push(message.to_string());
     });
     pal::update_pals(&mut session, &data, &modified, &collector).unwrap();
-    // progress parity: per-pal message then the trailing save message
+    // A per-pal message, then the trailing save message.
     let messages = captured_messages.lock().unwrap();
     assert!(messages[0].starts_with("Updating pal "));
     assert_eq!(
@@ -84,17 +57,9 @@ fn update_pals_edit_then_reread() {
     assert_eq!(updated.hp, updated.max_hp);
 }
 
-/// PARITY-BUG-1 preserved end to end through `update_pals` -- pinned here
-/// (not just at `apply_pal_dto`'s own unit-test level, Task 6) to prove the
-/// bug survives the whole Task 10 write-back path a real WS edit takes.
-///
-/// The DTO's `storage_id` is set to a DIFFERENT value than the pal's real
-/// container id (not just echoed back unchanged) -- PARITY-BUG-1 only
-/// manifests when the incoming DTO actually TRIES to move the pal to a
-/// different container. Echoing `storage_id` back unchanged (as an earlier
-/// version of this test did) can't discriminate the bug from a hypothetical
-/// fix, since `ContainerId` staying equal to `original_container_id` would
-/// be true either way when the DTO never asked for a different one.
+/// An incoming `storage_id` never moves the pal's `ContainerId`, all the way
+/// through the write-back path. The DTO must request a genuinely different
+/// container, or the assertion would hold either way and prove nothing.
 #[test]
 fn update_pals_preserves_parity_bug_1_container_id_never_moves() {
     let mut session = common::load_fixture_session("world1");
@@ -230,20 +195,11 @@ fn update_players_full_dto() {
     assert_eq!(reread.technology_points, 999);
 }
 
-/// `update_players`' container write-back must never trust the DTO's own
-/// `common_container.id` for ROUTING -- Python's `Player.update_from`
-/// mutates `self.common_container` (the player's own, already-server-
-/// resolved `ItemContainer` object), never looking at the dumped dict's
-/// `id` field at all. Proven here by forging a bogus `id` on the outgoing
-/// common-container DTO AND making a REAL content edit (a brand-new slot):
-/// the edit must land on the player's REAL common container (found via the
-/// player's own `InventoryInfo`), not silently no-op and not corrupt an
-/// unrelated container elsewhere in the save. A content edit is essential
-/// here -- against the brief's `dto.id`-based routing, this forged,
-/// unresolvable id would make `apply_item_container_dto` silently no-op
-/// (see `apply_item_container_dto_unknown_container_id_is_a_no_op`), which
-/// would leave `common_after.id` unchanged too; asserting `id` alone cannot
-/// tell "routed correctly" apart from "routing broken, did nothing".
+/// Container write-back must route through the player's own `InventoryInfo`,
+/// never the incoming DTO's `common_container.id`. The forged id here is
+/// paired with a real content edit on purpose: id-based routing would
+/// silently no-op on an unresolvable id, and that leaves `id` unchanged too,
+/// so asserting `id` alone cannot tell "routed correctly" from "did nothing".
 #[test]
 fn update_players_common_container_edit_ignores_forged_dto_id() {
     let mut session = common::load_fixture_session("world1");
@@ -293,10 +249,8 @@ fn update_players_common_container_edit_ignores_forged_dto_id() {
     assert_eq!(added.count, 3);
 }
 
-/// Real-save coverage for a WEAPON dynamic item update: player
-/// `WORLD1_PLAYER_O`'s `weapon_load_out_container` carries one real slot
-/// (`SFBow_5`) -- editing its durability through the full `update_players`
-/// path must round-trip.
+/// Real-save coverage for a weapon dynamic-item update: `WORLD1_PLAYER_O`'s
+/// weapon container carries exactly one slot, an `SFBow_5`.
 #[test]
 fn update_players_weapon_durability_round_trips() {
     let mut session = common::load_fixture_session("world1");
@@ -334,18 +288,12 @@ fn update_players_weapon_durability_round_trips() {
     assert_eq!(item_after.static_id.as_deref(), Some("SFBow_5"));
 }
 
-/// The newly-found Python bug this task's report documents: removing a
-/// dynamic item from a slot (incoming DTO has `dynamic_item: None` while
+/// Removing a dynamic item from a slot (`dynamic_item: None` while
 /// `static_id` stays non-"None") deletes the `DynamicItemSaveData` entry but
-/// leaves the raw slot's own `local_id_in_created_world` pointing at it --
-/// reproduced here deliberately for save-file byte parity (see
-/// `containers::apply_item_container_dto`'s own doc comment). The
-/// observable effect through this port's OWN read path: the very next read
-/// of this container silently drops the slot entirely (`read_item_container`
-/// already treats a dangling `local_id` as "slot gone" -- this is not a new
-/// behavior Task 10 introduces, it is Task 5's existing, already-tested
-/// contract), which is exactly what real Python's own next load would also
-/// do.
+/// leaves the slot's `local_id_in_created_world` pointing at it. The dangling
+/// slot is deliberate, for save-file byte fidelity; `read_item_container`
+/// treats a dangling `local_id` as "slot gone", so the slot vanishes on the
+/// next read, which is what the game itself would do.
 #[test]
 fn update_players_removing_a_dynamic_item_leaves_the_slot_dangling_on_next_read() {
     let mut session = common::load_fixture_session("world1");
@@ -363,7 +311,7 @@ fn update_players_removing_a_dynamic_item_leaves_the_slot_dangling_on_next_read(
         .expect("armor container loads");
     assert_eq!(armor_container.slots.len(), 6);
     // Keep the slot (static_id untouched, not "None") but drop its dynamic
-    // item reference -- the exact shape that triggers the bug.
+    // item reference: the exact shape that leaves the slot dangling.
     armor_container.slots[0].dynamic_item = None;
     let mut modified = OrderedMap::new();
     modified.insert(player_id, dto);
@@ -382,14 +330,9 @@ fn update_players_removing_a_dynamic_item_leaves_the_slot_dangling_on_next_read(
     );
 }
 
-/// `apply_unlock_flags`'s "create the Map property when missing" fix (see
-/// this task's report): world1's real player `8C2F1930` genuinely has NO
-/// `RelicObtainForInstanceFlag` key under `RecordData` at all yet (verified
-/// empirically -- see this task's report), the exact "legitimately key-less
-/// save" scenario Python's `Player._set_unlock_flags` handles by creating a
-/// fresh `MapProperty("NameProperty", "BoolProperty")` rather than
-/// no-op'ing. Setting `collected_effigies` on this player must not silently
-/// no-op.
+/// world1's player `8C2F1930` has no `RelicObtainForInstanceFlag` key under
+/// `RecordData` at all -- a legitimately key-less save. `apply_unlock_flags`
+/// must create the Map property rather than silently no-op.
 #[test]
 fn update_players_creates_missing_unlock_flag_map_and_it_round_trips() {
     let mut session = common::load_fixture_session("world1");
@@ -422,18 +365,11 @@ fn update_players_creates_missing_unlock_flag_map_and_it_round_trips() {
     );
 }
 
-/// **The real user-reported bug this task's report documents.**
 /// `apply_player_dto` unconditionally writes `SaveData.CompletedQuestArray`/
-/// `OrderedQuestArray` (`Player.completed_missions`/`current_missions`
-/// setters, `player.py`), but a player who has never completed or started a
-/// quest carries neither property NOR its write schema -- `uesave`'s writer
-/// then refuses the resave with `missing property schema for path:
-/// SaveData.CompletedQuestArray`. World1's real player `8C2F1930` already
-/// carries both (with real schemas), which is exactly why
-/// `update_players_full_dto`/`save_reload_cycle.rs`'s own full-player-object
-/// edit never caught this -- so both properties AND their recorded schemas
-/// are stripped here first, reproducing a genuinely quest-less player
-/// regardless of what this fixture happens to carry.
+/// `OrderedQuestArray`, but a player who has never started a quest carries
+/// neither property nor its write schema, so the resave is refused. world1's
+/// player already carries both, so the properties and their schemas are
+/// stripped here to reproduce a genuinely quest-less player.
 #[test]
 fn update_players_full_dto_survives_missing_quest_array_schema() {
     let mut session = common::load_fixture_session("world1");
@@ -461,10 +397,8 @@ fn update_players_full_dto_survives_missing_quest_array_schema() {
             .0
             .shift_remove(&uesave::PropertyKey::from("OrderedQuestArray"));
 
-        // Also strip the recorded write schemas for both paths (and every
-        // nested `OrderedQuestArray.<field>` schema) -- each player `.sav` is
-        // its own standalone `uesave::Save`, so this fully removes them
-        // without touching any other player.
+        // Each player `.sav` is its own standalone `uesave::Save`, so dropping
+        // these schemas here cannot affect any other player.
         let mut stripped_schemas = uesave::PropertySchemas::new();
         for (path, tag) in loaded.sav.schemas.schemas() {
             if path.ends_with(".CompletedQuestArray")
@@ -562,7 +496,7 @@ fn update_guilds_name_and_base_camp_level() {
     let mut dto = before.clone();
     dto.name = Some("Renamed Guild".to_string());
     dto.base_camp_level = Some(before.base_camp_level.unwrap_or(1) + 1);
-    dto.bases = None; // omitted bases: Python skips base processing entirely
+    dto.bases = None; // omitted bases skip base processing entirely
     let mut modified = OrderedMap::new();
     modified.insert(guild_id, dto);
 
@@ -589,9 +523,8 @@ fn update_guilds_name_and_base_camp_level() {
     );
 }
 
-/// `Guild.update_from`'s `if guildDTO.base_camp_level:` is a Python
-/// truthiness check -- `0` is falsy and must leave the existing level
-/// untouched, exactly like an omitted field.
+/// A `base_camp_level` of `0` is treated as "not supplied" and must leave the
+/// existing level untouched, exactly like an omitted field.
 #[test]
 fn update_guilds_zero_base_camp_level_is_a_no_op() {
     let mut session = common::load_fixture_session("world1");
@@ -613,11 +546,9 @@ fn update_guilds_zero_base_camp_level_is_a_no_op() {
     assert_eq!(after.base_camp_level, before.base_camp_level);
 }
 
-/// Full guild round trip: name/base_camp_level, a base's storage container
-/// slot, and the guild chest, all through one `update_guilds` call, then
-/// reread via `get_guild_details` -- the widest single real-save exercise of
-/// `apply_guild_dto`/`apply_base_dto`/`apply_item_container_dto` this task
-/// has.
+/// The widest single real-save exercise of `apply_guild_dto`/`apply_base_dto`/
+/// `apply_item_container_dto`: name, base camp level, a base's storage
+/// container, and the guild chest all through one `update_guilds` call.
 #[test]
 fn update_guilds_full_round_trip_bases_and_chest() {
     let mut session = common::load_fixture_session("world1");
@@ -633,18 +564,11 @@ fn update_guilds_full_round_trip_bases_and_chest() {
     modified.insert(guild_id, dto);
     guild::update_guilds(&mut session, &data, &modified, &null_progress()).unwrap();
 
-    // Must not panic and must still resolve after the round trip.
     let after = guild::get_guild_details(&mut session, &data, guild_id)
         .unwrap()
         .unwrap();
     assert_eq!(after.id, Some(guild_id));
 }
-
-// ============================================================================
-// Corpus-gated (optional `PSP_TEST_SAVE_DIR`) coverage -- also keeps
-// `common::load_corpus_session` from going unused in this binary, matching
-// this workspace's established convention (`pal_crud.rs`'s own final test).
-// ============================================================================
 
 #[test]
 fn update_pals_across_the_whole_corpus_never_panics() {

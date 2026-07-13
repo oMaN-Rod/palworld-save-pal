@@ -4,23 +4,9 @@ use psp_core::domain::{guild_tail, world};
 use uuid::Uuid;
 
 /// Every guild in a real save survives a full write -> read round trip with
-/// its structured data byte-identical.
-///
-/// Reconciliation with the 2026-07 uesave refactor: uesave now OWNS guild
-/// (de)serialization -- `PalGroupData::data` is a structured
-/// `PalGroupVariant::Guild(PalGuildGroup)` (with a two-shape `PalGuildTail`),
-/// not the flat `remaining_data` blob psp-core used to parse and re-encode by
-/// hand. So this test no longer re-encodes a blob; instead it captures each
-/// guild's structured `data`, re-serializes the WHOLE level through uesave's
-/// writer (`level_sav_bytes()`), re-reads it, and asserts every guild's
-/// structured data is unchanged. Because uesave's `PalGuildGroup::write` is
-/// the exact inverse of its `read`, structural equality across this round trip
-/// IS byte identity of the guild's on-disk bytes -- the same guarantee the old
-/// `tail.to_bytes() == remaining_data` assertion made, now proven through the
-/// real save write path rather than a hand-rolled codec.
-///
-/// Runs UNCONDITIONALLY on the committed fixtures (never the env-gated private
-/// corpus), so a pass here is real evidence on bare CI.
+/// its structured data unchanged. `PalGuildGroup::write` is the exact inverse
+/// of its `read`, so structural equality across this round trip is byte
+/// identity of the guild's on-disk bytes.
 #[test]
 fn every_guild_tail_in_fixture_saves_round_trips_byte_identically() {
     let mut guild_count = 0;
@@ -57,8 +43,7 @@ fn every_guild_tail_in_fixture_saves_round_trips_byte_identically() {
     );
 }
 
-/// The same round trip on the PRIVATE corpus named by `PSP_TEST_SAVE_DIR`
-/// (skips loudly when unset).
+/// The same round trip on the private corpus named by `PSP_TEST_SAVE_DIR`.
 #[test]
 fn every_guild_tail_in_corpus_session_round_trips_byte_identically() {
     let Some(session) = common::load_corpus_session() else {
@@ -81,11 +66,9 @@ fn every_guild_tail_in_corpus_session_round_trips_byte_identically() {
     }
 }
 
-/// Two-shape coverage: the structured accessors and mutators must read and
-/// edit BOTH the pre-2026-07 (`PreUpdate`) and 2026-07 (`PostUpdate`) tail
-/// shapes without ever assuming one. A `PreUpdate` guild is built via the
-/// public constructor; every guild the fixtures actually carry exercises the
-/// real read path in the round-trip test above.
+/// The accessors and mutators must handle both guild-tail shapes
+/// (`PreUpdate` and `PostUpdate`), never assuming one. The `PreUpdate` shape
+/// is built via the public constructor since the fixtures cannot guarantee it.
 #[test]
 fn accessors_handle_pre_update_guilds_built_from_the_constructor() {
     let admin: Uuid = "77777777-7777-7777-7777-777777777777".parse().unwrap();

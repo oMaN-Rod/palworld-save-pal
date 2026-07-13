@@ -1,7 +1,7 @@
-//! Performance-diagnosis harness for `get_player_details` (real user report:
-//! ~18s debug / ~3-4s release for a SINGLE player). Not a correctness test --
-//! `#[ignore]`d and gated behind `PSP_PERF_SAVE` (a Steam save directory
-//! containing `Level.sav` + `Players/`) so it never runs in normal
+//! Performance-diagnosis harness for `get_player_details` (a single player
+//! can take ~18s debug / ~3-4s release on a large save). Not a correctness
+//! test -- `#[ignore]`d and gated behind `PSP_PERF_SAVE` (a Steam save
+//! directory containing `Level.sav` + `Players/`) so it never runs in normal
 //! `cargo test`/CI. Run with:
 //!
 //!   cargo test --release -p psp-core --test perf_player_details -- --ignored --nocapture
@@ -24,10 +24,8 @@ fn game_data() -> GameData {
     GameData::load(&json_dir).expect("data dir")
 }
 
-/// Mirrors `tests/common::load_corpus_session`, duplicated here (not reused)
-/// so this harness has no dependency on that helper's own
-/// `PSP_TEST_SAVE_DIR` gate -- this is a deliberately separate, perf-only
-/// entry point per the investigation brief.
+/// Deliberately duplicates `common::load_corpus_session` so this harness has
+/// its own `PSP_PERF_SAVE` gate rather than that helper's `PSP_TEST_SAVE_DIR`.
 fn load_perf_session(save_dir: &Path) -> SaveSession {
     let level_sav_bytes = std::fs::read(save_dir.join("Level.sav")).expect("read Level.sav");
     let level_meta_bytes = std::fs::read(save_dir.join("LevelMeta.sav")).ok();
@@ -81,11 +79,9 @@ fn load_perf_session(save_dir: &Path) -> SaveSession {
     .expect("load perf session")
 }
 
-/// Coarse section timing for `get_player_details`'s single dominant loop
-/// (the pals-owned-by-this-player scan over the WHOLE `CharacterSaveParameterMap`)
-/// plus a breakdown of what inside `pal_dto_from_entry` costs the most --
-/// see this file's own top doc comment and the investigation report for how
-/// to read the numbers this prints.
+/// Coarse section timing for `get_player_details`'s dominant loop (the
+/// owned-pals scan over the whole `CharacterSaveParameterMap`), plus a
+/// breakdown of what inside `pal_dto_from_entry` costs the most.
 #[test]
 #[ignore]
 fn profile_get_player_details_for_real_save() {
@@ -112,9 +108,8 @@ fn profile_get_player_details_for_real_save() {
         "[perf] CharacterSaveParameterMap: {total_entries} total entries, {non_player_entries} non-player"
     );
 
-    // ---- breakdown: owner-uid-only prefilter cost vs full DTO-build cost,
-    // over the exact same entries `get_player_details`'s own pals loop scans
-    // ----
+    // Owner-uid-only prefilter cost vs full DTO-build cost, over the same
+    // entries `get_player_details`'s own pals loop scans.
     let mut owned_count = 0usize;
     let owner_check_start = Instant::now();
     for entry in entries {
@@ -150,9 +145,8 @@ fn profile_get_player_details_for_real_save() {
         "[perf] full pal_dto_from_entry over {non_player_entries} entries: {full_dto_elapsed:?} ({built} built)"
     );
 
-    // ---- isolate known_pal_keys()'s own per-call cost (called at least
-    // twice per pal by read_save_parameter_dto/max_hp_for on the current
-    // code path) ----
+    // `known_pal_keys()`'s per-call cost, isolated: it is called at least
+    // twice per pal by `read_save_parameter_dto`/`max_hp_for`.
     let known_keys_start = Instant::now();
     for _ in 0..non_player_entries {
         std::hint::black_box(pal::known_pal_keys(&data));
@@ -169,8 +163,7 @@ fn profile_get_player_details_for_real_save() {
         keys.len()
     );
 
-    // ---- end to end get_player_details, first call (cold: parses the
-    // player .sav too) ----
+    // End to end, cold: this call also parses the player .sav.
     let e2e_start = Instant::now();
     let details = player::get_player_details(&mut session, &data, player_id, &null_progress())
         .expect("no error")
@@ -181,9 +174,8 @@ fn profile_get_player_details_for_real_save() {
         details.pals.len()
     );
 
-    // Second call: player + guild already cached, isolates build_player_dto's
-    // own cost (the pals loop + 5 read_inventory calls + containers), which
-    // is what a REPEAT open of the same player pays.
+    // Warm: player + guild already cached, so this isolates what a repeat open
+    // of the same player pays (the pals loop, inventory reads, containers).
     let e2e_warm_start = Instant::now();
     let _details_warm =
         player::get_player_details(&mut session, &data, player_id, &null_progress())

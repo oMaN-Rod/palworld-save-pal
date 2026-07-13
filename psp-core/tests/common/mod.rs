@@ -3,26 +3,8 @@ use std::collections::BTreeMap;
 use std::path::PathBuf;
 use uuid::Uuid;
 
-/// Loads the corpus save named by `PSP_TEST_SAVE_DIR` into a `SaveSession`
-/// the same way the real load path (`handle_select_save`) does — via
-/// `SaveSession::load`, discovering `Players/*.sav` file references first.
-/// Returns `None` (after printing a skip notice) when the env var is unset,
-/// matching every other corpus-gated test in this workspace
-/// (`session.rs`'s `test_load_real_steam_save`,
-/// `psp-server/tests/load_path.rs`).
-///
-/// Deviation from the brief: the brief's version of this helper called
-/// `SaveSession::new_for_tests` plus `psp_core::savio::read_sav_bytes` and
-/// `psp_core::domain::summaries::extract_player_summaries` /
-/// `extract_guild_summaries` — none of which exist. `savio` is Task 12
-/// scope (not yet built), and summary extraction is one combined
-/// `extract_summaries` function, not two. `SaveSession::load` already does
-/// everything this helper needs (parse Level.sav/LevelMeta.sav, build the
-/// Phase-1 indexes, extract both summary maps) through a single already-`pub`
-/// entry point, so this helper builds `player_file_refs` itself (mirroring
-/// `psp-server`'s own `collect_player_file_refs`, which isn't reachable from
-/// here — it's private to the `psp-server` crate) and calls straight into
-/// `SaveSession::load` instead.
+/// Loads the private corpus save named by `PSP_TEST_SAVE_DIR`, or `None`
+/// (skipping) when that env var is unset.
 pub fn load_corpus_session() -> Option<SaveSession> {
     let Ok(save_dir) = std::env::var("PSP_TEST_SAVE_DIR") else {
         eprintln!("PSP_TEST_SAVE_DIR not set; skipping corpus test");
@@ -83,16 +65,9 @@ pub fn load_corpus_session() -> Option<SaveSession> {
     Some(session)
 }
 
-/// Loads a fixture save checked into the repo at
-/// `tests/fixtures/saves/<name>/` -- unlike `load_corpus_session`, NOT gated
-/// by `PSP_TEST_SAVE_DIR`, since these fixtures are committed (`git log --
-/// tests/fixtures/saves/world1/Level.sav` has history) and always present, so
-/// a test built on this helper always runs rather than silently skipping.
-/// Panics loudly on any load failure: a missing/broken checked-in fixture is
-/// a repo problem, not a "skip and move on" condition. Duplicates
-/// `load_corpus_session`'s small `Players/` directory walk rather than
-/// factoring it out, so that function's already-verified behavior stays
-/// untouched.
+/// Loads a committed fixture save from `tests/fixtures/saves/<name>/`. Never
+/// env-gated, so tests built on it always run; panics on failure, since a
+/// missing or broken checked-in fixture is a repo problem, not a skip.
 pub fn load_fixture_session(name: &str) -> SaveSession {
     let save_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
         .join("../tests/fixtures/saves")

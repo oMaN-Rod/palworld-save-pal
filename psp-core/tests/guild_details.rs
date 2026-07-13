@@ -16,30 +16,16 @@ fn game_data() -> GameData {
     GameData::load(&json_dir).expect("data dir")
 }
 
-// ============================================================================
-// Real-save coverage: always runs (checked-in world1/world2 fixtures, not
-// gated behind PSP_TEST_SAVE_DIR -- see `tests/common/mod.rs`'s own doc
-// comment and `player_details.rs`'s established convention for this
-// workspace). The brief's own version of these tests gated itself on
-// `common::load_corpus_session()`, which is unset in this environment and
-// would silently skip every assertion below -- exactly the "test that
-// asserts nothing" this task's standing policy requires strengthening, not
-// just relaying. Ground truth for every value asserted here was
-// independently confirmed via `.venv` Python (`GvasFile.read` on the same
-// fixture files), not eyeballed from this port's own output -- see this
-// task's report for the exact commands.
-// ============================================================================
-
-// world1's founding guild: admin 8c2f1930 ("O"), base_camp_level 1, one real
-// base (`4bb24de8-...`) whose worker container is empty (SlotNum 1, 0
-// filled) but which owns 4 real storage containers (one "ItemChest", three
-// "CommonDropItem3D"), and 150 lab research entries (all work_amount 0.0).
+// world1's founding guild: admin 8c2f1930 ("O"), base_camp_level 1, one base
+// (`4bb24de8-...`) whose worker container is empty (SlotNum 1, 0 filled) but
+// which owns 4 storage containers (one "ItemChest", three "CommonDropItem3D"),
+// and 150 lab research entries (all work_amount 0.0).
 const WORLD1_GUILD_WITH_BASE: &str = "54491484-4e6c-7327-70b2-868f350929f6";
 const WORLD1_GUILD_ADMIN: &str = "8c2f1930-0000-0000-0000-000000000000";
 const WORLD1_BASE_ID: &str = "4bb24de8-4965-af19-f596-e296089e8ab0";
 const WORLD1_WORKER_CONTAINER: &str = "a77f85ca-4037-97d8-acef-fcb73f1d931b";
 const WORLD1_GUILD_CHEST: &str = "1b1b065d-4812-11ba-e444-8f84bbbe40fd";
-// world1's second guild: admin 43797f87 ("sky"), no bases at all.
+// world1's second guild: admin 43797f87 ("sky"), no bases.
 const WORLD1_GUILD_NO_BASES: &str = "004e71b6-4166-2b71-eb6a-539ae931ca34";
 const WORLD1_GUILD_NO_BASES_ADMIN: &str = "43797f87-0000-0000-0000-000000000000";
 
@@ -64,8 +50,6 @@ fn guild_details_load_real_base_lab_research_and_guild_chest() {
         "admin = first player (guild.py:76-77)"
     );
 
-    // Lab research: 150 real entries, all work_amount 0.0 (spot-checked by
-    // name, not just count).
     let lab_research = details.lab_research.clone().unwrap_or_default();
     assert_eq!(lab_research.len(), 150);
     assert_eq!(details.lab_research_data.len(), lab_research.len());
@@ -75,7 +59,6 @@ fn guild_details_load_real_base_lab_research_and_guild_chest() {
         .expect("Handcraft1 present");
     assert_eq!(handcraft1.work_amount, 0.0);
 
-    // Guild chest: real container id, resolves, 54 slots.
     assert_eq!(
         details.container_id,
         Some(WORLD1_GUILD_CHEST.parse().unwrap())
@@ -85,8 +68,6 @@ fn guild_details_load_real_base_lab_research_and_guild_chest() {
     assert_eq!(guild_chest.r#type, "GuildChest");
     assert_eq!(guild_chest.key, Some("GuildChest".to_string()));
 
-    // Exactly one real base, with real name/area_range/location/container
-    // values.
     let bases = details.bases.as_ref().expect("bases is Some, not None");
     assert_eq!(bases.len(), 1);
     let base_id: Uuid = WORLD1_BASE_ID.parse().unwrap();
@@ -116,7 +97,6 @@ fn guild_details_load_real_base_lab_research_and_guild_chest() {
     assert_eq!(pal_container.size, 1);
     assert!(pal_container.slots.is_empty());
 
-    // 4 real storage containers, one keyed "ItemChest" with 10 slots.
     assert_eq!(base.storage_containers.len(), 4);
     let item_chest = base
         .storage_containers
@@ -126,14 +106,12 @@ fn guild_details_load_real_base_lab_research_and_guild_chest() {
     assert_eq!(item_chest.1.slot_num, 10);
     assert_eq!(item_chest.1.r#type, "BaseContainer");
 
-    // Loaded bookkeeping.
     assert!(session.loaded_guilds.contains(&guild_id));
     assert!(session.guild_summaries[&guild_id].loaded);
 }
 
-/// The second world1 guild has zero bases: `Guild.bases` (`game/guild.py`)
-/// is a plain `Field(default_factory=dict)`, never `None` on output --
-/// `details.bases` must be `Some(empty map)`, not `None`.
+/// A guild with zero bases must surface `bases: Some(empty map)`, never
+/// `None` -- the wire contract the frontend relies on.
 #[test]
 fn guild_details_with_no_bases_is_some_empty_map_not_none() {
     let mut session = common::load_fixture_session("world1");
@@ -150,22 +128,16 @@ fn guild_details_with_no_bases_is_some_empty_map_not_none() {
         .bases
         .expect("bases is Some, not None, even when empty");
     assert!(bases.is_empty());
-    // This guild's raw tail carries no base_ids either, so guild_chest is
-    // whatever GuildExtraSaveDataMap says -- just confirm the call didn't
-    // panic and produced a container_id/guild_chest pair consistent with
-    // each other (both present or both absent).
+    // This guild's tail carries no base ids, so its chest is whatever
+    // `GuildExtraSaveDataMap` says: assert only that the container_id and
+    // guild_chest agree with each other (both present or both absent).
     assert_eq!(
         details.guild_chest.is_some(),
         details.container_id.is_some()
     );
 }
 
-/// Every guild in both checked-in fixtures loads without panicking, and its
-/// summary flips `loaded`. Broader than the two single-guild tests above,
-/// though weaker (no per-field assertions) -- exactly the tradeoff
-/// `player_details.rs`'s `every_corpus_player_loads_without_panicking`
-/// makes for the corpus-gated case; this one is fixture-gated (always
-/// runs) instead.
+/// Broad but shallow: every guild in both fixtures loads and flips `loaded`.
 #[test]
 fn every_fixture_guild_loads_without_panicking() {
     let mut guild_count = 0;
@@ -187,9 +159,7 @@ fn every_fixture_guild_loads_without_panicking() {
     assert_eq!(guild_count, 3, "world1 has 2 guilds, world2 has 1");
 }
 
-/// Broader real-save coverage against a user-supplied save directory, when
-/// available (skipped otherwise) -- matches this workspace's established
-/// convention (`player_details.rs`, `world_index.rs`, `guild_tail.rs`).
+/// The same sweep against the private corpus, when `PSP_TEST_SAVE_DIR` is set.
 #[test]
 fn every_corpus_guild_loads_without_panicking() {
     let Some(mut session) = common::load_corpus_session() else {
@@ -217,10 +187,6 @@ fn unknown_guild_returns_none() {
     assert!(result.is_none());
 }
 
-// ============================================================================
-// update_lab_research
-// ============================================================================
-
 #[test]
 fn lab_research_update_round_trips() {
     let mut session = common::load_fixture_session("world1");
@@ -241,7 +207,6 @@ fn lab_research_update_round_trips() {
     assert_eq!(research.len(), 1, "full replacement, not a merge");
     assert_eq!(research[0].research_id, "Research_Tech_01");
     assert_eq!(research[0].work_amount, 250.0);
-    // lab_research_data mirrors lab_research (guild.py:107-109).
     assert_eq!(details.lab_research_data.len(), 1);
 }
 
@@ -256,12 +221,9 @@ fn update_lab_research_on_a_guild_never_loaded_is_guild_not_found() {
     assert!(matches!(result, Err(CoreError::GuildNotFound(id)) if id == guild_id));
 }
 
-/// A guild marked `loaded` (so the id-level guard passes) whose
-/// `GuildExtraSaveDataMap` entry carries no `"Lab"` property at all: matches
-/// Python's `if not self._lab_raw_data: logger.error(...); return` -- a
-/// silent no-op, not an exception. Synthetic (no real fixture guild is
-/// missing `Lab`), proving the deliberate `Ok(())` divergence from the
-/// brief's uniform-`Err` sketch documented on `update_lab_research`.
+/// A loaded guild whose `GuildExtraSaveDataMap` entry carries no `"Lab"`
+/// property must no-op, not error. Synthetic: no fixture guild is missing
+/// `Lab`.
 #[test]
 fn update_lab_research_with_no_lab_data_is_a_silent_no_op() {
     let guild_id: Uuid = "11111111-2222-3333-4444-555555555555".parse().unwrap();
@@ -313,15 +275,6 @@ fn update_lab_research_with_no_lab_data_is_a_silent_no_op() {
     assert!(result.is_ok(), "missing Lab data must no-op, not error");
 }
 
-// ============================================================================
-// Guild-tail byte identity: this task makes NO guild-tail mutations at all
-// (`update_lab_research` writes only into `GuildExtraSaveDataMap.Lab`, a
-// wholly separate typed struct from `GroupSaveDataMap`'s raw tail bytes
-// `guild_tail.rs` owns). Proven directly: an untouched guild's raw tail
-// bytes are byte-identical before and after a `get_guild_details` +
-// `update_lab_research` round trip.
-// ============================================================================
-
 fn raw_tail_bytes(
     session: &SaveSession,
     guild_id: Uuid,
@@ -336,6 +289,9 @@ fn raw_tail_bytes(
         .clone()
 }
 
+/// `update_lab_research` writes only into `GuildExtraSaveDataMap.Lab`, a
+/// separate struct from `GroupSaveDataMap`'s guild tail, so neither it nor
+/// `get_guild_details` may perturb a single tail byte.
 #[test]
 fn guild_details_and_lab_research_update_never_touch_the_raw_guild_tail_bytes() {
     let mut session = common::load_fixture_session("world1");
@@ -363,20 +319,10 @@ fn guild_details_and_lab_research_update_never_touch_the_raw_guild_tail_bytes() 
     );
 }
 
-// ============================================================================
-// Cache invalidation: neither function inserts or removes any
-// CharacterSaveParameterMap/ItemContainerSaveData/CharacterContainerSaveData
-// entry -- both only read the tree (`get_guild_details`) or mutate a field
-// in place without changing any map's length (`update_lab_research`
-// replaces `Lab.RawData.research_info`, a `Vec` nested INSIDE one already-
-// positioned `GuildExtraSaveDataMap` entry, not the map itself). Proven
-// directly, matching `player_details.rs`'s
-// `get_player_details_never_moves_any_world_tree_index_position` pattern:
-// every position-keyed index this task's own code depends on resolves
-// identically before and after, so nothing needs
-// `invalidate_performance_caches`.
-// ============================================================================
-
+/// Neither guild call inserts or removes a map entry -- `update_lab_research`
+/// replaces a `Vec` nested inside one already-positioned entry -- so every
+/// position-keyed index must resolve identically afterward and no cache
+/// invalidation is required.
 #[test]
 fn guild_operations_never_move_any_world_tree_index_position() {
     let mut session = common::load_fixture_session("world1");
