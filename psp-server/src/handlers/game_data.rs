@@ -191,9 +191,33 @@ pub async fn handle_get_exp_data(ctx: &mut HandlerCtx<'_>) -> Result<(), Handler
     Ok(())
 }
 
+/// Localization is merged INTO the base entry (rather than nested under a sub-object),
+/// so every relic on the wire carries `localized_name` and `description` alongside its
+/// rank table. Same shape as `handle_get_pals`.
 pub async fn handle_get_relic_data(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
-    let payload = raw_file(&ctx.app.game_data, "relic_data");
-    ctx.emitter.emit(MessageType::GetRelicData, &payload);
+    let language = current_language(ctx).await?;
+    let base = object_table(&ctx.app.game_data, "relic_data");
+    let localization = object_table(&ctx.app.game_data, &format!("l10n/{language}/relics"));
+    let mut merged = Map::new();
+    for (relic_key, mut entry_value) in base {
+        let entry = entry_value.as_object_mut().ok_or_else(|| {
+            HandlerError::Other(format!(
+                "relic_data.json entry {relic_key} is not an object"
+            ))
+        })?;
+        let l10n_entry = localization.get(&relic_key);
+        entry.insert(
+            "localized_name".into(),
+            string_or(l10n_entry, "localized_name", &relic_key),
+        );
+        entry.insert(
+            "description".into(),
+            string_or(l10n_entry, "description", "No description available"),
+        );
+        merged.insert(relic_key, entry_value);
+    }
+    ctx.emitter
+        .emit(MessageType::GetRelicData, &Value::Object(merged));
     Ok(())
 }
 
