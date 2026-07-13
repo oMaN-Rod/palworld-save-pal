@@ -785,6 +785,157 @@ fn effigy_unlock_keeps_1_0_relic_structures_consistent() {
     );
 }
 
+/// The worldmap UI un-collects an effigy on a single click, with no confirmation.
+/// A collect/un-collect/re-collect cycle therefore lands the flags exactly back where
+/// they started, and `RelicPossessNum` must land back where it started too. Counting
+/// only additions inflates it by one per cycle -- the very inflation this counter's
+/// handling exists to prevent.
+#[test]
+fn effigy_toggle_cycle_does_not_inflate_relic_possess_num() {
+    let mut session = common::load_fixture_session("world1");
+    let data = game_data();
+    let player_id: Uuid = WORLD1_PLAYER_O.parse().unwrap();
+    player::get_player_details(&mut session, &data, player_id, &null_progress())
+        .unwrap()
+        .unwrap();
+
+    // Start from a player holding two effigies.
+    let mut dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    dto.collected_effigies = Some(vec!["EF_1".into(), "EF_2".into()]);
+    let mut m = OrderedMap::new();
+    m.insert(player_id, dto);
+    player::update_players(&mut session, &data, &m, &null_progress()).unwrap();
+    let collected = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    let baseline = collected.effigy_possess_num;
+
+    // Click EF_2's marker: it is spliced out of `collected_effigies`.
+    let mut dto = collected.clone();
+    dto.collected_effigies = Some(vec!["EF_1".into()]);
+    let mut m = OrderedMap::new();
+    m.insert(player_id, dto);
+    player::update_players(&mut session, &data, &m, &null_progress()).unwrap();
+
+    // Click it again: it is put back. The flags are now identical to `collected`.
+    let mut dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    dto.collected_effigies = Some(vec!["EF_1".into(), "EF_2".into()]);
+    let mut m = OrderedMap::new();
+    m.insert(player_id, dto);
+    player::update_players(&mut session, &data, &m, &null_progress()).unwrap();
+
+    let after = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    assert_eq!(
+        after.collected_effigies,
+        Some(vec!["EF_1".to_string(), "EF_2".to_string()]),
+        "fixture sanity: the toggle cycle must leave the flags where they started"
+    );
+    assert_eq!(
+        after.effigy_possess_num, baseline,
+        "an off/on effigy toggle cycle must leave RelicPossessNum exactly where it started"
+    );
+}
+
+/// Un-collecting effigies gives their relics back, one per effigy -- symmetric with
+/// the frontend, which already decrements the inventory `Relic` item on removal.
+#[test]
+fn removing_effigies_lowers_relic_possess_num_by_the_number_removed() {
+    let mut session = common::load_fixture_session("world1");
+    let data = game_data();
+    let player_id: Uuid = WORLD1_PLAYER_O.parse().unwrap();
+    player::get_player_details(&mut session, &data, player_id, &null_progress())
+        .unwrap()
+        .unwrap();
+
+    let base = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    let start = base.effigy_possess_num;
+
+    let mut dto = base.clone();
+    dto.collected_effigies = Some(vec!["EF_1".into(), "EF_2".into(), "EF_3".into()]);
+    let mut m = OrderedMap::new();
+    m.insert(player_id, dto);
+    player::update_players(&mut session, &data, &m, &null_progress()).unwrap();
+    let after_three = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    assert_eq!(after_three.effigy_possess_num, start + 3);
+
+    // Remove two of the three.
+    let mut dto = after_three.clone();
+    dto.collected_effigies = Some(vec!["EF_2".into()]);
+    let mut m = OrderedMap::new();
+    m.insert(player_id, dto);
+    player::update_players(&mut session, &data, &m, &null_progress()).unwrap();
+    let after_removal = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    assert_eq!(
+        after_removal.effigy_possess_num,
+        start + 1,
+        "removing 2 effigies must lower RelicPossessNum by exactly 2"
+    );
+}
+
+/// A relic already spent on a rank cannot be un-spent, so a real save holds fewer
+/// unspent relics than it has effigy flags. Un-collecting every effigy must floor the
+/// counter at 0, never drive it negative.
+#[test]
+fn relic_possess_num_never_goes_below_zero() {
+    let mut session = common::load_fixture_session("v1_relics");
+    let data = game_data();
+    let player_id = common::first_player_with_non_capture_power_relics(&mut session, &data);
+
+    let base = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    let held = base.effigy_possess_num;
+    let effigies = base.collected_effigies.clone().unwrap_or_default();
+    assert!(
+        effigies.len() as i64 > held,
+        "fixture sanity: this player must have spent relics (more effigy flags ({}) than \
+         unspent relics held ({held})), else flooring is never exercised",
+        effigies.len()
+    );
+
+    // Un-collect every effigy: more removals than there are relics to give back.
+    let mut dto = base.clone();
+    dto.collected_effigies = Some(vec![]);
+    let mut m = OrderedMap::new();
+    m.insert(player_id, dto);
+    player::update_players(&mut session, &data, &m, &null_progress()).unwrap();
+
+    let after = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    assert_eq!(
+        after.effigy_possess_num, 0,
+        "removing more effigies than there are unspent relics must floor RelicPossessNum at 0"
+    );
+
+    let sav = common::player_sav_json(&session, player_id);
+    assert_eq!(
+        common::relic_possess_num(&sav),
+        0,
+        "the written RelicPossessNum must be 0, not negative"
+    );
+    assert_eq!(
+        common::relic_possess_num_map(&sav)
+            .get(common::CAPTURE_POWER_RELIC)
+            .copied()
+            .unwrap_or(0),
+        0,
+        "RelicPossessNumMap[CapturePower] must mirror the floored scalar"
+    );
+}
+
 /// A pre-1.0 save has none of the 1.0 relic fields. The new code must not invent
 /// them.
 #[test]

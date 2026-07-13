@@ -707,12 +707,12 @@ fn apply_player_dto(
         ensure_player_quest_array_schemas(&mut loaded.sav);
         // Unlock flags apply only when the caller supplied a value.
         if let Some(points) = &dto.unlocked_fast_travel_points {
+            // Fast travel has no relic counter of any kind; the delta is deliberately dropped.
             apply_unlock_flags(&mut loaded.sav, "FastTravelPointUnlockFlag", points);
         }
         if let Some(effigies) = &dto.collected_effigies {
-            let newly_collected =
-                apply_unlock_flags(&mut loaded.sav, "RelicObtainForInstanceFlag", effigies);
-            apply_effigy_relic_counters(&mut loaded.sav, effigies, newly_collected);
+            let delta = apply_unlock_flags(&mut loaded.sav, "RelicObtainForInstanceFlag", effigies);
+            apply_effigy_relic_counters(&mut loaded.sav, effigies, delta);
         }
     }
     // Resolve every container id from the player's own save data first, then
@@ -823,8 +823,19 @@ fn apply_status_points(
     }
 }
 
-/// Replaces the flag map's entries, every key set to `true`, and returns how many
-/// of them were not already `true`.
+/// How a flag-map write changed the set of `true` keys. Both directions matter:
+/// the worldmap UI un-collects an effigy on a single click, so a caller that only
+/// counted additions would let an off/on toggle cycle ratchet a counter upward.
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
+struct FlagDelta {
+    /// Keys in the new set that were not already `true`.
+    added: usize,
+    /// Keys that were `true` and are not in the new set.
+    removed: usize,
+}
+
+/// Replaces the flag map's entries, every key set to `true`, and reports how the
+/// `true` set changed (see `FlagDelta`).
 ///
 /// This function does not touch any relic counter. `RelicPossessNum` is an
 /// effigy-only concern and is handled by `apply_effigy_relic_counters`; folding it
@@ -834,7 +845,11 @@ fn apply_status_points(
 /// is created here, preceded by an `ensure_schema` at the
 /// `SaveData.RecordData.<name>` path, because uesave's writer refuses to serialize
 /// a property with no registered schema.
-fn apply_unlock_flags(player_sav: &mut uesave::Save, flag_name: &str, keys: &[String]) -> usize {
+fn apply_unlock_flags(
+    player_sav: &mut uesave::Save,
+    flag_name: &str,
+    keys: &[String],
+) -> FlagDelta {
     let record_data_key = PropertyKey::from("RecordData");
     let flag_key = PropertyKey::from(flag_name);
 
@@ -844,7 +859,7 @@ fn apply_unlock_flags(player_sav: &mut uesave::Save, flag_name: &str, keys: &[St
         .and_then(props::struct_props)
         .is_some();
     if !has_record_data {
-        return 0;
+        return FlagDelta::default();
     }
 
     let flag_already_present = save_data_props(player_sav)
@@ -875,17 +890,18 @@ fn apply_unlock_flags(player_sav: &mut uesave::Save, flag_name: &str, keys: &[St
     }
 
     let Ok(save_data) = save_data_props_mut(player_sav) else {
-        return 0;
+        return FlagDelta::default();
     };
     let Some(record_data) = save_data
         .0
         .get_mut(&record_data_key)
         .and_then(props::struct_props_mut)
     else {
-        return 0;
+        return FlagDelta::default();
     };
 
-    // Which keys were already true? Anything else in `keys` is newly unlocked.
+    // Which keys were already true? Anything else in `keys` is newly unlocked, and any
+    // of these missing from `keys` is being un-set by this write.
     let previously_true: std::collections::BTreeSet<String> = record_data
         .0
         .get(&flag_key)
@@ -898,11 +914,20 @@ fn apply_unlock_flags(player_sav: &mut uesave::Save, flag_name: &str, keys: &[St
                 .collect()
         })
         .unwrap_or_default();
+    // `keys` is untrusted input and may repeat a key; dedupe so a duplicate cannot be
+    // counted as two additions (the map write below collapses it to one entry anyway).
+    let now_true: std::collections::BTreeSet<&str> = keys.iter().map(String::as_str).collect();
 
-    let newly_unlocked = keys
-        .iter()
-        .filter(|key| !previously_true.contains(*key))
-        .count();
+    let delta = FlagDelta {
+        added: now_true
+            .iter()
+            .filter(|key| !previously_true.contains(**key))
+            .count(),
+        removed: previously_true
+            .iter()
+            .filter(|key| !now_true.contains(key.as_str()))
+            .count(),
+    };
 
     let entries: Vec<uesave::MapEntry> = keys
         .iter()
@@ -913,7 +938,7 @@ fn apply_unlock_flags(player_sav: &mut uesave::Save, flag_name: &str, keys: &[St
         .collect();
     record_data.insert(flag_name, Property::Map(entries));
 
-    newly_unlocked
+    delta
 }
 
 /// The relic type every effigy grants. Pre-1.0, effigies were the *only* relic, so
@@ -927,13 +952,22 @@ fn relic_type_name(property: &Property) -> Option<&str> {
     props::as_enum(property).or_else(|| props::as_str(property))
 }
 
-/// Adds `newly_collected` to `RelicPossessNum` -- the count of *unspent* effigy
-/// relics the player holds -- and, on a Palworld 1.0 save, keeps the structures the
-/// game actually reads in agreement with it.
+/// Applies `delta` to `RelicPossessNum` -- the count of *unspent* effigy relics the
+/// player holds -- and, on a Palworld 1.0 save, keeps the structures the game
+/// actually reads in agreement with it.
 ///
-/// `RelicPossessNum` grows only when effigies are newly collected, so an unchanged
-/// resave leaves it alone. It is never decremented: the game has no "un-collect",
-/// and a relic already spent on a rank cannot be un-spent.
+/// The counter moves by `added - removed`, floored at 0. Un-collecting matters
+/// because the worldmap UI splices an effigy out of the set on a single click: were
+/// only additions counted, an off/on toggle cycle would leave the flags identical
+/// but ratchet the counter up by one every time. Removal giving a relic back also
+/// makes this symmetric with the frontend, which already decrements the inventory
+/// `Relic` item when an effigy is un-collected.
+///
+/// The floor is not cosmetic: a relic already spent on a rank cannot be un-spent, so
+/// a real save holds fewer unspent relics than it has effigy flags, and un-collecting
+/// them all must stop at 0 rather than go negative.
+///
+/// An unchanged resave has `added == removed == 0` and so leaves the counter alone.
 ///
 /// A 1.0 save carries `RelicObtainForInstanceFlagByType`, `RelicPossessNumMap` and
 /// `RelicBonusExpTableIndex` alongside the legacy pair, and
@@ -944,19 +978,22 @@ fn relic_type_name(property: &Property) -> Option<&str> {
 ///   RelicPossessNum         == RelicPossessNumMap[CapturePower]
 ///   RelicBonusExpTableIndex == total true flags across ALL by-type entries
 ///
-/// There is deliberately no `newly_collected == 0` early return: a save whose
-/// structures are already out of sync must get repaired on resave, even when the
-/// edit collected nothing new.
+/// There is deliberately no `delta.is_zero()` early return: a save whose structures
+/// are already out of sync must get repaired on resave, even when the edit changed no
+/// flags.
 ///
 /// A pre-1.0 save has none of the three, and every update below is conditional on
 /// the property already existing, so we never invent them. `RelicPossessNum` itself
-/// is the one property we may create -- but only when an effigy was actually
-/// collected, so an unchanged resave of a pre-1.0 save stays a strict no-op.
+/// is the one property we may create -- but only when the delta is positive, so an
+/// unchanged resave of a pre-1.0 save stays a strict no-op, and a removal-only edit
+/// never conjures a `0` into a save that never carried the field.
 fn apply_effigy_relic_counters(
     player_sav: &mut uesave::Save,
     effigies: &[String],
-    newly_collected: usize,
+    delta: FlagDelta,
 ) {
+    // Relics given back on removal, netted against those granted by new collections.
+    let net = delta.added as i64 - delta.removed as i64;
     let record_data_key = PropertyKey::from("RecordData");
     let relic_key = PropertyKey::from("RelicPossessNum");
     let by_type_key = PropertyKey::from("RelicObtainForInstanceFlagByType");
@@ -973,7 +1010,7 @@ fn apply_effigy_relic_counters(
     // A save predating the field carries no `RelicPossessNum`. Creating it needs an
     // `ensure_schema` first, because uesave's writer refuses to serialize a property
     // with no registered schema.
-    if !relic_already_present && newly_collected > 0 {
+    if !relic_already_present && net > 0 {
         if let Some(prefix) = props::schema_prefix_ending_with(player_sav, "RecordData") {
             props::ensure_schema(
                 player_sav,
@@ -997,15 +1034,17 @@ fn apply_effigy_relic_counters(
         return;
     };
 
-    // Unspent effigy relics: grows only by what was newly collected. Writing a 0 into
-    // a save that never had the property would be inventing a field, so don't.
-    let possess = if relic_already_present || newly_collected > 0 {
+    // Unspent effigy relics: moves by the net of collections and un-collections, floored
+    // at 0 -- a spent relic cannot be un-spent, so the count must never go negative.
+    // Writing a 0 into a save that never had the property would be inventing a field,
+    // so don't.
+    let possess = if relic_already_present || net > 0 {
         let current = record_data
             .0
             .get(&relic_key)
             .and_then(props::as_i32)
             .unwrap_or(0);
-        let possess = current.saturating_add(newly_collected as i32);
+        let possess = (current as i64 + net).clamp(0, i32::MAX as i64) as i32;
         record_data.insert("RelicPossessNum", props::int_property(possess));
         Some(possess)
     } else {
