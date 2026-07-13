@@ -3,6 +3,16 @@
 //! The fixtures are generated locally, so with none on disk (a fresh clone, or
 //! CI) the replay test skips loudly on stderr and passes; the comparators and
 //! masks it relies on are unit-tested below regardless.
+//!
+//! These fixtures were originally recorded from a Python implementation of
+//! this server, to prove the Rust port matched it byte-for-byte. That
+//! implementation is gone from this repo and the fixtures can never be
+//! re-recorded from it. Their surviving job is different: they are golden
+//! snapshots of the wire protocol the Svelte frontend depends on, so this
+//! suite is now a regression net against ACCIDENTAL protocol drift, not a
+//! Python parity check. Fixtures that only echoed static `data/json` content
+//! (and so broke on every game-data patch without exercising any port logic)
+//! have been retired; what remains covers real request/response behaviour.
 
 use std::path::PathBuf;
 use std::time::Duration;
@@ -776,8 +786,11 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
     fixtures_replayed
 }
 
+/// Replays every recorded wire fixture and fails on any deviation: a
+/// regression net for the request/response protocol the frontend consumes,
+/// not a comparison against the now-deleted Python implementation.
 #[tokio::test]
-async fn replay_recorded_python_fixtures() {
+async fn replay_recorded_wire_fixtures() {
     let fixtures_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../parity/fixtures");
     let fixtures_replayed = replay_all_fixtures(&fixtures_root).await;
     if fixtures_replayed == 0 {
