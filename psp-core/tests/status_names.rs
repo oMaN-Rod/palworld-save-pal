@@ -3,6 +3,7 @@
 mod common;
 
 use psp_core::domain::player::{self, STATUS_NAME_MAP};
+use psp_core::dto::ordered_map::OrderedMap;
 use psp_core::gamedata::GameData;
 use psp_core::progress::null_progress;
 use uuid::Uuid;
@@ -10,6 +11,14 @@ use uuid::Uuid;
 fn game_data() -> GameData {
     let json_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../data/json");
     GameData::load(&json_dir).expect("data dir")
+}
+
+fn first_player_id(session: &mut psp_core::session::SaveSession) -> Uuid {
+    *session
+        .player_file_refs
+        .keys()
+        .next()
+        .expect("fixture has players")
 }
 
 const NEW_IN_1_0: [&str; 12] = [
@@ -72,4 +81,127 @@ fn real_1_0_saves_exercise_all_18_status_names() {
              or the fixtures no longer cover it. seen = {seen:?}"
         );
     }
+}
+
+/// The game creates a `{StatusName, StatusPoint}` row lazily -- it exists only once a
+/// rank has been bought, so an absent row means rank 0. Setting a stat the save has no
+/// row for must CREATE the row, or the edit would silently do nothing.
+#[test]
+fn setting_a_stat_with_no_row_appends_one() {
+    let mut session = common::load_fixture_session("v1_relics");
+    let data = game_data();
+    let player_id = first_player_id(&mut session);
+    player::get_player_details(&mut session, &data, player_id, &null_progress())
+        .unwrap()
+        .unwrap();
+    let mut dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+
+    // Find a relic stat this player has NO row for. Every fixture player is missing at
+    // least one; if not, the fixture changed and this test is no longer meaningful.
+    let missing = STATUS_NAME_MAP
+        .iter()
+        .map(|(_, english)| *english)
+        .find(|english| dto.status_point_list.get(*english).is_none())
+        .expect("fixture player should be missing at least one status row");
+
+    dto.status_point_list.insert(missing.to_string(), 7);
+    let mut modified = OrderedMap::new();
+    modified.insert(player_id, dto);
+    player::update_players(&mut session, &data, &modified, &null_progress()).unwrap();
+
+    let reread = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    assert_eq!(
+        reread.status_point_list.get(missing).copied(),
+        Some(7),
+        "a stat with no row must be appended, not silently dropped"
+    );
+}
+
+/// A rank-0 stat has no row in a real save. The UI sends all 13 relic keys, so an
+/// unedited save carries 0 for every stat the player never unlocked -- appending those
+/// would bloat the save with rows the game never wrote.
+#[test]
+fn setting_a_missing_stat_to_zero_appends_nothing() {
+    let mut session = common::load_fixture_session("v1_relics");
+    let data = game_data();
+    let player_id = first_player_id(&mut session);
+    player::get_player_details(&mut session, &data, player_id, &null_progress())
+        .unwrap()
+        .unwrap();
+    let mut dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+
+    let missing = STATUS_NAME_MAP
+        .iter()
+        .map(|(_, english)| *english)
+        .find(|english| dto.status_point_list.get(*english).is_none())
+        .expect("fixture player should be missing at least one status row");
+
+    dto.status_point_list.insert(missing.to_string(), 0);
+    let mut modified = OrderedMap::new();
+    modified.insert(player_id, dto);
+    player::update_players(&mut session, &data, &modified, &null_progress()).unwrap();
+
+    let reread = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    assert!(
+        reread.status_point_list.get(missing).is_none(),
+        "a rank-0 stat must not create a row: the game has none, and appending one on \
+         every save would bloat the file"
+    );
+}
+
+/// Writes the fixture player back through the real writer, first letting `edit`
+/// mutate the DTO, and returns the resulting `.sav` bytes.
+fn resave_player_sav(edit: impl FnOnce(&mut psp_core::dto::player::PlayerDto)) -> Vec<u8> {
+    let mut session = common::load_fixture_session("v1_relics");
+    let data = game_data();
+    let player_id = first_player_id(&mut session);
+    player::get_player_details(&mut session, &data, player_id, &null_progress())
+        .unwrap()
+        .unwrap();
+    let mut dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    edit(&mut dto);
+    let mut modified = OrderedMap::new();
+    modified.insert(player_id, dto);
+    player::update_players(&mut session, &data, &modified, &null_progress()).unwrap();
+    session
+        .player_sav_bytes()
+        .expect("serialize player savs")
+        .get(&player_id)
+        .expect("player loaded")
+        .0
+        .clone()
+}
+
+/// Pins the anti-bloat rule end to end. The UI sends every relic key on save, 0 for the
+/// ones the player never unlocked; that must produce the exact same bytes as a save that
+/// sent only the keys the file already had rows for -- not one byte of new row data.
+///
+/// Compared against another write rather than the on-disk bytes on purpose: writing a
+/// player is not byte-identical for unrelated reasons (`update_players` always emits
+/// `CompletedQuestArray`, which a 1.0 save carrying `CompletedQuestArray_FullRelease`
+/// does not have). Diffing two writes isolates the zeros, which is what this pins.
+#[test]
+fn resaving_with_all_relic_keys_at_zero_is_byte_identical() {
+    let untouched = resave_player_sav(|_| {});
+    let all_keys_zeroed = resave_player_sav(|dto| {
+        for (_, english) in STATUS_NAME_MAP {
+            if dto.status_point_list.get(english).is_none() {
+                dto.status_point_list.insert(english.to_string(), 0);
+            }
+        }
+    });
+    assert_eq!(
+        untouched, all_keys_zeroed,
+        "sending every relic key at 0 must not change a single byte"
+    );
 }

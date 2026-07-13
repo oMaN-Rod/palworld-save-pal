@@ -750,6 +750,11 @@ fn apply_player_dto(
 
 /// Writes `points` back onto a `StatusPoint` list.
 ///
+/// A key with no row is APPENDED when its value is positive: the game creates a row
+/// lazily, only once a rank is bought, so an absent row means rank 0 and setting such a
+/// stat would otherwise silently do nothing. A key with no row and a value of 0 appends
+/// nothing -- see the comment on that branch.
+///
 /// `drop_none_rows` first prunes `"None"`/unrecognized rows -- set for
 /// `GotStatusPointList`, deliberately NOT for `GotExStatusPointList`, whose rows
 /// are left as-is. A `points` key matching no `name_map` entry is skipped rather
@@ -801,23 +806,34 @@ fn apply_status_points(
         else {
             continue;
         };
-        for value in values.iter_mut() {
-            let StructValue::Struct(status_props) = value else {
-                continue;
-            };
-            if status_props
-                .0
-                .get(&PropertyKey::from("StatusName"))
-                .and_then(props::as_str)
-                == Some(*japanese_name)
-            {
-                status_props.insert(
-                    "StatusPoint",
-                    props::int_property(
-                        (*point_value).clamp(i32::MIN as i64, i32::MAX as i64) as i32
-                    ),
-                );
-                break;
+        let clamped = (*point_value).clamp(i32::MIN as i64, i32::MAX as i64) as i32;
+
+        let existing = values.iter_mut().find(|value| match value {
+            StructValue::Struct(status_props) => {
+                status_props
+                    .0
+                    .get(&PropertyKey::from("StatusName"))
+                    .and_then(props::as_str)
+                    == Some(*japanese_name)
+            }
+            _ => false,
+        });
+
+        match existing {
+            Some(StructValue::Struct(status_props)) => {
+                status_props.insert("StatusPoint", props::int_property(clamped));
+            }
+            _ => {
+                // No row. The game creates one lazily, only once a rank is bought, so an
+                // absent row means rank 0 -- and a rank-0 stat must NOT create one. The UI
+                // sends every relic key on save, so appending zeros here would add rows the
+                // game never wrote to every file that passes through the editor.
+                if clamped > 0 {
+                    let mut status_props = Properties::default();
+                    status_props.insert("StatusName", props::name_property(japanese_name));
+                    status_props.insert("StatusPoint", props::int_property(clamped));
+                    values.push(StructValue::Struct(status_props));
+                }
             }
         }
     }
