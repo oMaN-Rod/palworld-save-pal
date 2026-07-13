@@ -121,6 +121,42 @@ fn setting_a_stat_with_no_row_appends_one() {
     );
 }
 
+/// The DTO is untrusted input off the websocket. A negative rank is a value the game
+/// never writes, so it must not conjure a row either. Without this, a mutation of the
+/// append guard from `> 0` to `!= 0` would append `StatusPoint = -5` and every other
+/// test would still pass.
+#[test]
+fn setting_a_missing_stat_to_a_negative_appends_nothing() {
+    let mut session = common::load_fixture_session("v1_relics");
+    let data = game_data();
+    let player_id = first_player_id(&mut session);
+    player::get_player_details(&mut session, &data, player_id, &null_progress())
+        .unwrap()
+        .unwrap();
+    let mut dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+
+    let missing = STATUS_NAME_MAP
+        .iter()
+        .map(|(_, english)| *english)
+        .find(|english| dto.status_point_list.get(*english).is_none())
+        .expect("fixture player should be missing at least one status row");
+
+    dto.status_point_list.insert(missing.to_string(), -5);
+    let mut modified = OrderedMap::new();
+    modified.insert(player_id, dto);
+    player::update_players(&mut session, &data, &modified, &null_progress()).unwrap();
+
+    let reread = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    assert!(
+        reread.status_point_list.get(missing).is_none(),
+        "a negative rank must not create a row"
+    );
+}
+
 /// A rank-0 stat has no row in a real save. The UI sends all 13 relic keys, so an
 /// unedited save carries 0 for every stat the player never unlocked -- appending those
 /// would bloat the save with rows the game never wrote.

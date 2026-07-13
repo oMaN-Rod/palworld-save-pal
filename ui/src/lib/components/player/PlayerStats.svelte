@@ -187,8 +187,10 @@
 	{@const entry = relics[relicKey]}
 	{@const max = maxRankFor(relicKey)}
 	{@const effect = effectFor(relicKey)}
-	<!-- Read-only until we know this rank's cap: the row still shows the current value,
-	     but an edit that cannot be clamped must not be reachable. -->
+	<!-- An edit that cannot be clamped must not be reachable, so the button is disabled
+	     without a known cap. (Rows are driven by the relic data, so in practice a row
+	     without a cap does not render at all -- this guard is the backstop, not the
+	     mechanism.) -->
 	<button
 		class="hover:ring-secondary-500 bg-surface-600/50 flex w-full items-center space-x-2 rounded-sm py-2 pr-2 hover:ring disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:ring-0"
 		disabled={max === undefined}

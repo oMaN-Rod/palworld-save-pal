@@ -182,9 +182,18 @@ fn relic_key_for_stat(stat: &str) -> &str {
 /// INDEX, so a renumbering would silently mislabel every stat rather than fail loudly.
 #[test]
 fn relic_l10n_covers_every_language_and_key() {
+    // The directories `relics.json` actually lives in -- the same ones every other l10n
+    // file uses. Indonesian is `id-id`, NOT `id`: a stale `id/` directory also exists and
+    // nothing reads it, so writing there would silently leave Indonesian users with raw keys.
+    //
+    // Note these are the ON-DISK directory names. Four of them (`es-MX`, `pt-BR`, `zh-Hans`,
+    // `zh-Hant`) do not match the lowercase locale codes the app sends (`es-mx`, ...), and
+    // `GameData`'s lookup is exact-case -- so those languages currently resolve to nothing for
+    // EVERY l10n table, not just this one. That is a pre-existing, repo-wide bug; this test
+    // asserts the files exist where the rest of the l10n lives, and does not paper over it.
     const LANGS: [&str; 16] = [
-        "de", "en", "es", "es-MX", "fr", "id", "it", "ko", "pl", "pt-BR", "ru", "th", "tr", "vi",
-        "zh-Hans", "zh-Hant",
+        "de", "en", "es", "es-MX", "fr", "id-id", "it", "ko", "pl", "pt-BR", "ru", "th", "tr",
+        "vi", "zh-Hans", "zh-Hant",
     ];
     let data = game_data();
     for lang in LANGS {

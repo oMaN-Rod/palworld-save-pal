@@ -39,9 +39,29 @@ const RELIC_KEYS = [
 	'move_speed'
 ];
 
+// [source dir in the game dump, destination dir under data/json/l10n].
+//
+// These are NOT always the same string. The game dumps Indonesian as `id`, but this
+// repo's Indonesian l10n lives in `id-id` (there is also a stale `id/` directory that
+// nothing reads). Writing to `id/` would silently leave Indonesian users with raw keys,
+// so the destination is stated explicitly rather than inferred from the source.
 const LANGS = [
-	'de', 'en', 'es', 'es-MX', 'fr', 'id', 'it', 'ko',
-	'pl', 'pt-BR', 'ru', 'th', 'tr', 'vi', 'zh-Hans', 'zh-Hant'
+	['de', 'de'],
+	['en', 'en'],
+	['es', 'es'],
+	['es-MX', 'es-MX'],
+	['fr', 'fr'],
+	['id', 'id-id'],
+	['it', 'it'],
+	['ko', 'ko'],
+	['pl', 'pl'],
+	['pt-BR', 'pt-BR'],
+	['ru', 'ru'],
+	['th', 'th'],
+	['tr', 'tr'],
+	['vi', 'vi'],
+	['zh-Hans', 'zh-Hans'],
+	['zh-Hant', 'zh-Hant']
 ];
 
 const text = (rows, key) => {
@@ -49,10 +69,10 @@ const text = (rows, key) => {
 	return typeof raw === 'string' ? raw.trim() : '';
 };
 
-for (const lang of LANGS) {
+for (const [sourceLang, destLang] of LANGS) {
 	const src = join(
 		contentRoot,
-		'L10N', lang, 'Pal', 'DataTable', 'Text', 'DT_UI_Common_Text_Common.json'
+		'L10N', sourceLang, 'Pal', 'DataTable', 'Text', 'DT_UI_Common_Text_Common.json'
 	);
 	const rows = JSON.parse(readFileSync(src, 'utf8'))[0].Rows;
 
@@ -62,13 +82,13 @@ for (const lang of LANGS) {
 		const localized_name = text(rows, `BUILDUP_PLAYER_STATUS_${nn}`);
 		const description = text(rows, `BUILDUP_PLAYER_STATUS_DESC_${nn}`);
 		if (!localized_name) {
-			throw new Error(`${lang}: no BUILDUP_PLAYER_STATUS_${nn} for ${key}`);
+			throw new Error(`${sourceLang}: no BUILDUP_PLAYER_STATUS_${nn} for ${key}`);
 		}
 		out[key] = { localized_name, description };
 	});
 
-	const dir = join('data', 'json', 'l10n', lang);
+	const dir = join('data', 'json', 'l10n', destLang);
 	mkdirSync(dir, { recursive: true });
 	writeFileSync(join(dir, 'relics.json'), JSON.stringify(out, null, 2) + '\n');
-	console.log(`${lang}: ${Object.keys(out).length} relics`);
+	console.log(`${sourceLang} -> ${destLang}: ${Object.keys(out).length} relics`);
 }
