@@ -74,7 +74,7 @@ fn iso_naive_matches_python_isoformat() {
         .unwrap()
         .and_hms_opt(3, 4, 5)
         .unwrap();
-    // Python isoformat() drops the fraction entirely when microsecond == 0
+    // The fraction is dropped entirely when microsecond == 0.
     assert_eq!(
         psp_db::time::iso_naive(without_micros),
         "2026-01-02T03:04:05"

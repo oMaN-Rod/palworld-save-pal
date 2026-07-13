@@ -142,8 +142,9 @@ fn push_filter(builder: &mut QueryBuilder<'_, Sqlite>, filter: &UpsFilter) {
     }
 
     if let Some(pal_types) = filter.pal_types.as_ref().filter(|t| !t.is_empty()) {
-        // Build the OR group; "human" with an empty id list contributes nothing
-        // (ups.py:185-191); a fully empty group adds no condition (ups.py:207-208).
+        // A Human filter with no ids matches nothing, so it is dropped from the OR group;
+        // if that leaves the group empty, no condition is emitted at all (an empty `()`
+        // is a syntax error, and `WHERE (false)` would wrongly exclude everything).
         let contributes = pal_types.iter().any(|pt| match pt {
             PalTypeFilter::Human(ids) => !ids.is_empty(),
             _ => true,
@@ -381,8 +382,6 @@ async fn ensure_stats_row(pool: &SqlitePool) -> Result<(), DbError> {
     Ok(())
 }
 
-/// Port of UPSService._update_stats + _calculate_elemental_and_special_stats
-/// (db/ctx/ups.py:692-810).
 pub async fn recompute_stats(
     pool: &SqlitePool,
     pals_game_data: &serde_json::Value,
@@ -420,15 +419,14 @@ pub async fn recompute_stats(
     )
     .fetch_optional(pool)
     .await?;
-    // CAST to BLOB so LENGTH() returns UTF-8 byte count (Python sums len(orjson.dumps),
-    // which is bytes); a bare LENGTH() on TEXT counts characters and reads too low.
+    // CAST to BLOB so LENGTH() returns the UTF-8 byte count; on TEXT it counts characters,
+    // which under-reports storage for any multi-byte pal_data.
     let total_bytes: i64 =
         sqlx::query_scalar("SELECT COALESCE(SUM(LENGTH(CAST(pal_data AS BLOB))), 0) FROM ups_pals")
             .fetch_one(pool)
             .await?;
     let storage_size_mb = total_bytes as f64 / (1024.0 * 1024.0);
 
-    // Elemental + special category pass over every pal (ups.py:756-810)
     let rows: Vec<(String, String)> = sqlx::query_as("SELECT character_id, pal_data FROM ups_pals")
         .fetch_all(pool)
         .await?;
@@ -483,7 +481,8 @@ pub async fn recompute_stats(
         }
     }
 
-    // most_* ids only overwrite when a row exists (ups.py:717-727 keeps stale values)
+    // COALESCE keeps the last known most_* ids when the table is empty rather than
+    // nulling them out.
     sqlx::query(
         "UPDATE ups_stats SET
            total_pals = ?, total_collections = ?, total_tags = ?, total_transfers = ?,
@@ -547,8 +546,6 @@ pub async fn update_collection_counts(pool: &SqlitePool) -> Result<(), DbError> 
     Ok(())
 }
 
-/// Collection CRUD: These are defined here and Task 3C-3 EXTENDS collection CRUD
-/// (it must not redefine them).
 #[derive(Debug, Clone, serde::Serialize, sqlx::FromRow)]
 pub struct UpsCollectionRecord {
     pub id: i64,
@@ -626,7 +623,6 @@ const UPDATABLE_COLUMNS: [&str; 16] = [
     "clone_count",
 ];
 
-/// Port of UPSService.update_pal + _sync_pal_columns (db/ctx/ups.py:358-408).
 pub async fn update_pal(
     pool: &SqlitePool,
     pal_id: i64,
@@ -687,7 +683,8 @@ pub async fn update_pal(
         }
     }
 
-    // _sync_pal_columns (ups.py:361-372)
+    // character_id/nickname/level are denormalized out of the pal_data JSON so they can be
+    // filtered and sorted on; whichever side the caller updated becomes the source of truth.
     if updates.contains_key("pal_data") {
         if let Some(pal_data) = record.pal_data.as_object() {
             if let Some(v) = pal_data.get("character_id").and_then(|v| v.as_str()) {
@@ -1032,7 +1029,6 @@ pub async fn create_or_update_tag(
         .await?;
     match existing {
         Some(tag_id) => {
-            // Only overwrite provided fields (ups.py:526-533)
             if let Some(description) = description {
                 sqlx::query("UPDATE ups_tags SET description = ? WHERE id = ?")
                     .bind(description)

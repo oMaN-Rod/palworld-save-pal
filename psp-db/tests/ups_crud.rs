@@ -38,7 +38,7 @@ async fn update_pal_syncs_columns_both_directions() {
     let pool = test_pool().await;
     let pal = seed_pal(&pool).await;
 
-    // column update without pal_data -> written back into pal_data JSON (ups.py:367-372)
+    // Updating the denormalized columns writes back into the pal_data JSON.
     let mut updates = serde_json::Map::new();
     updates.insert("nickname".into(), serde_json::json!("Rex"));
     updates.insert("level".into(), serde_json::json!(30));
@@ -51,7 +51,7 @@ async fn update_pal_syncs_columns_both_directions() {
     assert_eq!(updated.pal_data["level"], 30);
     assert!(updated.updated_at.ends_with("+00:00"));
 
-    // pal_data update -> columns mirrored from it (ups.py:361-365)
+    // The sync runs the other way too: updating pal_data makes the columns follow the JSON.
     let mut updates = serde_json::Map::new();
     updates.insert(
         "pal_data".into(),

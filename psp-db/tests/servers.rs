@@ -55,8 +55,7 @@ async fn create_then_get_round_trips_all_fields() {
     assert!(fetched.env_vars.0.is_empty());
     assert_eq!(fetched.created_at, created.created_at);
     assert_eq!(fetched.updated_at, created.updated_at);
-    // Timestamps must match Python's datetime.utcnow().isoformat(): T-separated,
-    // no space, and no UTC offset suffix (servers use naive utcnow, not aware now()).
+    // Server timestamps are naive UTC: T-separated, no space, and no offset suffix.
     assert!(
         created.created_at.contains('T') && !created.created_at.contains(' '),
         "created_at must be T-separated ISO, got {:?}",
@@ -109,7 +108,6 @@ async fn update_server_applies_partial_updates_and_ignores_unknown_keys() {
         .unwrap();
     assert_eq!(updated.pid, Some(4242));
     assert_eq!(updated.max_players, 32);
-    // container_name (not part of the update) must be untouched.
     assert_eq!(updated.container_name, "beta");
     assert_eq!(
         updated.env_vars.0.get("EXP_RATE"),
@@ -129,7 +127,6 @@ async fn update_server_applies_partial_updates_and_ignores_unknown_keys() {
         .unwrap()
         .unwrap();
     assert_eq!(cleared.pid, None);
-    // Clearing pid must not disturb the previously-updated max_players.
     assert_eq!(cleared.max_players, 32);
 }
 

@@ -24,12 +24,14 @@ pub struct LegacyImportReport {
 pub type PalDataValidator<'a> =
     &'a (dyn Fn(&serde_json::Value) -> Result<serde_json::Value, String> + Send + Sync);
 
-/// Legacy SQLAlchemy DATETIME text ("2026-01-02 03:04:05.123456") -> ISO ("...T...").
+/// The legacy DB stores DATETIME as space-separated text ("2026-01-02 03:04:05.123456");
+/// this DB stores ISO ("2026-01-02T03:04:05.123456").
 fn legacy_datetime_to_iso(value: Option<String>) -> Option<String> {
     value.map(|v| v.replacen(' ', "T", 1))
 }
 
-/// SQLAlchemy Enum stores the member NAME; the wire uses the VALUE (game/enum.py:75-80).
+/// The legacy DB stores gender as the enum member NAME ("MALE"); the wire uses the
+/// value ("Male").
 fn gender_name_to_value(name: Option<String>) -> serde_json::Value {
     match name.as_deref() {
         Some("NONE") => serde_json::Value::String("None".to_string()),
@@ -47,11 +49,9 @@ fn parse_json_column(text: Option<String>) -> serde_json::Value {
     }
 }
 
-/// Legacy UUID columns are stored DASHLESS TEXT. The Rust wire format (and later UPS
-/// handlers that look pals up by `instance_id`) use canonical dashed-lowercase, matching
-/// what legacy Python emitted on the wire (UUID objects serialize dashed). `parse_str`
-/// accepts both dashed and dashless input; fall back to a lowercased copy of the raw
-/// value for any non-UUID string rather than dropping data.
+/// Legacy UUID columns are dashless TEXT; this DB and the wire use canonical
+/// dashed-lowercase. Non-UUID strings fall back to a lowercased copy rather than
+/// being dropped.
 fn normalize_uuid(raw: String) -> String {
     uuid::Uuid::parse_str(&raw)
         .map(|u| u.to_string())
@@ -82,7 +82,7 @@ pub async fn import_legacy_if_needed(
         return Ok(None);
     }
 
-    // Back up the legacy file first (copy, never modify).
+    // The legacy file is only ever copied and read, never written to.
     let backup_path = legacy_db_path.with_extension("db.pre-rust-import.bak");
     if !backup_path.exists() {
         std::fs::copy(legacy_db_path, &backup_path)?;
@@ -108,7 +108,6 @@ pub async fn import_legacy_if_needed(
         servers_imported: 0,
     };
 
-    // --- settings ---
     if legacy_table_exists(&mut legacy, "settingsmodel").await? {
         if let Some(row) = sqlx::query("SELECT * FROM settingsmodel WHERE id = 1")
             .fetch_optional(&mut legacy)
@@ -134,7 +133,8 @@ pub async fn import_legacy_if_needed(
         }
     }
 
-    // --- presets (presetprofile + palpreset -> presets.pal_preset JSON) ---
+    // The legacy DB splits a preset across `presetprofile` and a linked `palpreset` row;
+    // here the pal half is folded into the `presets.pal_preset` JSON column.
     if legacy_table_exists(&mut legacy, "presetprofile").await? {
         let preset_rows = sqlx::query("SELECT * FROM presetprofile ORDER BY rowid")
             .fetch_all(&mut legacy)
@@ -274,7 +274,7 @@ pub async fn import_legacy_if_needed(
         }
     }
 
-    // --- UPS collections (before pals: FK) ---
+    // Collections must land before pals: ups_pals.collection_id is a foreign key into them.
     if legacy_table_exists(&mut legacy, "ups_collections").await? {
         for row in sqlx::query("SELECT * FROM ups_collections ORDER BY id")
             .fetch_all(&mut legacy)
@@ -301,7 +301,6 @@ pub async fn import_legacy_if_needed(
         }
     }
 
-    // --- UPS tags ---
     if legacy_table_exists(&mut legacy, "ups_tags").await? {
         for row in sqlx::query("SELECT * FROM ups_tags ORDER BY id")
             .fetch_all(&mut legacy)
@@ -329,7 +328,6 @@ pub async fn import_legacy_if_needed(
         }
     }
 
-    // --- UPS pals (pal_data re-validated through PalDto; invalid rows skipped) ---
     if legacy_table_exists(&mut legacy, "ups_pals").await? {
         for row in sqlx::query("SELECT * FROM ups_pals ORDER BY id")
             .fetch_all(&mut legacy)
@@ -396,7 +394,6 @@ pub async fn import_legacy_if_needed(
         }
     }
 
-    // --- UPS transfer log ---
     if legacy_table_exists(&mut legacy, "ups_transfer_log").await? {
         for row in sqlx::query("SELECT * FROM ups_transfer_log ORDER BY id")
             .fetch_all(&mut legacy)
@@ -433,7 +430,7 @@ pub async fn import_legacy_if_needed(
         }
     }
 
-    // --- UPS stats (copied as-is; recomputed on first get_ups_stats anyway) ---
+    // Copied verbatim; the first get_stats call recomputes every column anyway.
     if legacy_table_exists(&mut legacy, "ups_stats").await? {
         if let Some(row) = sqlx::query("SELECT * FROM ups_stats WHERE id = 1")
             .fetch_optional(&mut legacy)
@@ -476,7 +473,6 @@ pub async fn import_legacy_if_needed(
         }
     }
 
-    // --- servers ---
     if legacy_table_exists(&mut legacy, "servers").await? {
         for row in sqlx::query("SELECT * FROM servers ORDER BY id")
             .fetch_all(&mut legacy)

@@ -2,7 +2,6 @@ use sqlx::SqlitePool;
 
 use crate::error::DbError;
 
-/// The settings row as stored (and as sent to the frontend after DTO conversion).
 #[derive(Debug, Clone, sqlx::FromRow)]
 pub struct SettingsRow {
     pub language: String,
@@ -13,8 +12,8 @@ pub struct SettingsRow {
     pub cheat_mode: bool,
 }
 
-/// Fields updatable through the `update_settings` message (save_dir is not one of them —
-/// matches palworld_save_pal/dto/settings.py).
+/// Fields updatable through the `update_settings` message. `save_dir` is deliberately
+/// absent: it is only ever set by `update_save_dir`.
 #[derive(Debug, Clone)]
 pub struct SettingsUpdate {
     pub language: String,
@@ -27,8 +26,7 @@ pub struct SettingsUpdate {
 const SELECT_SETTINGS: &str = "SELECT language, save_dir, clone_prefix, new_pal_prefix, \
                                debug_mode, cheat_mode FROM settings WHERE id = 1";
 
-/// Returns the settings row, inserting Python's defaults on first access
-/// (mirrors db/ctx/settings.py get_settings).
+/// Returns the settings row, inserting the default row on first access.
 pub async fn get_settings(pool: &SqlitePool) -> Result<SettingsRow, DbError> {
     if let Some(row) = sqlx::query_as::<_, SettingsRow>(SELECT_SETTINGS)
         .fetch_optional(pool)
@@ -45,10 +43,8 @@ pub async fn get_settings(pool: &SqlitePool) -> Result<SettingsRow, DbError> {
         debug_mode: false,
         cheat_mode: false,
     };
-    // ON CONFLICT DO NOTHING makes this race-safe: if another connection wins
-    // the insert first, this call simply falls through to the re-select below
-    // and returns the winner's row instead of erroring on the PRIMARY KEY
-    // CHECK (id = 1) constraint.
+    // ON CONFLICT DO NOTHING makes concurrent first calls race-safe: a loser of the
+    // insert falls through to the re-select instead of failing the id = 1 primary key.
     sqlx::query(
         "INSERT INTO settings (id, language, save_dir, clone_prefix, new_pal_prefix, debug_mode, cheat_mode) \
          VALUES (1, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO NOTHING",
@@ -62,19 +58,16 @@ pub async fn get_settings(pool: &SqlitePool) -> Result<SettingsRow, DbError> {
     .execute(pool)
     .await?;
 
-    // Re-select rather than returning `defaults` locally: this reflects
-    // whichever row actually got committed (ours or a concurrent racer's).
-    // If the row is somehow still missing here, that's a genuine error —
-    // fetch_one surfaces it as sqlx::Error::RowNotFound via DbError's
-    // existing #[from] conversion, rather than silently returning `defaults`.
+    // Re-select rather than return `defaults`: the committed row may be a racer's, and a
+    // still-missing row is a real error worth surfacing as RowNotFound.
     let row = sqlx::query_as::<_, SettingsRow>(SELECT_SETTINGS)
         .fetch_one(pool)
         .await?;
     Ok(row)
 }
 
-/// Upserts everything except save_dir (which only gets its default on fresh insert) —
-/// mirrors db/ctx/settings.py update_settings.
+/// Upserts every column except save_dir: the DO UPDATE branch omits it, so the bound
+/// default only lands when this call is the one creating the row.
 pub async fn update_settings(
     pool: &SqlitePool,
     update: &SettingsUpdate,
@@ -96,17 +89,8 @@ pub async fn update_settings(
     get_settings(pool).await
 }
 
-/// Port of db/ctx/settings.py::update_save_dir (43-54): sets the singleton
-/// settings row's `save_dir`, creating the row first when it does not yet
-/// exist. Python creates a fresh `SettingsModel(id=1, save_dir=save_dir)` on a
-/// missing row and otherwise assigns `settings.save_dir = save_dir`; this
-/// mirrors both by ensuring the row exists via `get_settings` (which inserts
-/// Python's defaults on first access) and then `UPDATE`-ing only `save_dir`, so
-/// the other columns keep whatever they held (defaults on a fresh row).
-///
-/// Used by the desktop native-file-dialog flow (Phase 5) and by the gamepass
-/// load path's tests, which set `save_dir` directly so `select_gamepass_save`
-/// can read the container directory back out of settings.
+/// Sets the singleton settings row's `save_dir`, leaning on `get_settings` to create
+/// the row (with defaults) first so the UPDATE always has something to hit.
 pub async fn update_save_dir(pool: &SqlitePool, save_dir: &str) -> Result<(), DbError> {
     get_settings(pool).await?;
     sqlx::query("UPDATE settings SET save_dir = ?1 WHERE id = 1")
@@ -116,10 +100,8 @@ pub async fn update_save_dir(pool: &SqlitePool, save_dir: &str) -> Result<(), Db
     Ok(())
 }
 
-/// Reads the singleton settings row's save_dir. Returns None when the row has
-/// not been created yet (fresh DB, before get_settings seeds it). Used by the
-/// Phase-5 desktop dialog flow to pick the file picker's initial directory
-/// (Python passes app_state.settings.save_dir to open_file_dialog, desktop.py:97).
+/// Reads the singleton settings row's save_dir. None means the row does not exist yet
+/// (fresh DB, before `get_settings` seeds it).
 pub async fn saved_save_dir(pool: &SqlitePool) -> Result<Option<String>, DbError> {
     let row: Option<(String,)> = sqlx::query_as("SELECT save_dir FROM settings WHERE id = 1")
         .fetch_optional(pool)
@@ -127,7 +109,7 @@ pub async fn saved_save_dir(pool: &SqlitePool) -> Result<Option<String>, DbError
     Ok(row.map(|(save_dir,)| save_dir))
 }
 
-/// Port of STEAM_ROOT from palworld_save_pal/utils/file_manager.py:23-35.
+/// Platform-specific location where the Steam release of the game keeps its saves.
 pub fn default_steam_save_dir() -> String {
     #[cfg(target_os = "windows")]
     {

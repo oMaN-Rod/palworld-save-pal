@@ -60,7 +60,7 @@ async fn preset_without_pal_preset_omits_the_key() {
     .unwrap();
     let all = psp_db::presets::get_all(&pool).await.unwrap();
     let preset = all.get(&preset_id).unwrap();
-    // Python only inserts "pal_preset" when the relationship is set (presets.py:26-28)
+    // The key must be absent, not null.
     assert!(preset.get("pal_preset").is_none());
     assert_eq!(preset["pal_preset_id"], serde_json::Value::Null);
 }
@@ -96,7 +96,6 @@ async fn populate_from_json_only_seeds_empty_table() {
         .await
         .unwrap();
     assert_eq!(psp_db::presets::get_all(&pool).await.unwrap().len(), 1);
-    // second call: table non-empty -> no-op
     psp_db::presets::populate_from_json(&pool, &seed)
         .await
         .unwrap();

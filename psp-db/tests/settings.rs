@@ -60,12 +60,9 @@ async fn update_persists_everything_except_save_dir() {
     let pool = psp_db::open(&db_path).await.unwrap();
     get_settings(&pool).await.unwrap();
 
-    // Seed a save_dir that provably differs from default_steam_save_dir().
-    // update_settings always binds its save_dir placeholder to
-    // default_steam_save_dir(), so comparing against the pre-update value of
-    // that same helper (as the brief's original assertion did) would pass
-    // even if the ON CONFLICT clause wrongly overwrote save_dir. Only a
-    // custom, non-default value can prove the column was left untouched.
+    // update_settings always binds default_steam_save_dir() to its save_dir placeholder,
+    // so only a custom value can prove the ON CONFLICT branch left the column alone —
+    // asserting against the default would pass even if it were overwritten.
     let custom_save_dir = "C:/custom/save/dir";
     sqlx::query("UPDATE settings SET save_dir = ?1 WHERE id = 1")
         .bind(custom_save_dir)

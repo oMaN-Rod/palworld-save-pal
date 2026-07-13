@@ -85,7 +85,7 @@ async fn stats_count_special_categories_exclusively() {
     let stats = psp_db::ups::get_stats(&pool, &game_data).await.unwrap();
     assert_eq!(stats.alpha_count, 1);
     assert_eq!(stats.human_count, 1);
-    // elif chain in ups.py:796-802 — predator/oilrig/summon are mutually exclusive
+    // predator/oilrig/summon are mutually exclusive: a character_id counts toward at most one.
     assert_eq!(stats.predator_count, 1);
     assert_eq!(stats.oilrig_count, 1);
     assert_eq!(stats.summon_count, 1);

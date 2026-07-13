@@ -1,4 +1,3 @@
-//! Query functions for the servers table (Phase 6). Mirrors db/ctx/servers.py.
 use std::collections::HashSet;
 
 use serde_json::{Map, Value};
@@ -68,8 +67,8 @@ const SELECT_COLUMNS: &str = "id, name, container_name, image_name, server_type,
     server_description, server_password, admin_password, max_players, env_vars, created_at, \
     updated_at";
 
-/// Column whitelist for update_server — mirrors Python's hasattr() guard and
-/// prevents SQL injection through update keys.
+/// `update_server` interpolates update keys straight into SQL, so they must be
+/// checked against this whitelist first.
 const UPDATABLE_COLUMNS: &[&str] = &[
     "name",
     "container_name",

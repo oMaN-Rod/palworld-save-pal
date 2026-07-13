@@ -17,8 +17,8 @@ fn json_or_null(text: Option<String>) -> serde_json::Value {
         .unwrap_or(serde_json::Value::Null)
 }
 
-/// id -> wire preset object, in table insertion order (Python dict preserves
-/// SELECT order; serde_json `preserve_order` keeps ours).
+/// id -> wire preset object, in table insertion order (which survives only because
+/// serde_json is built with the `preserve_order` feature).
 pub async fn get_all(
     pool: &SqlitePool,
 ) -> Result<serde_json::Map<String, serde_json::Value>, DbError> {
@@ -51,7 +51,7 @@ pub async fn get_all(
             .map(|s| serde_json::json!(s))
             .unwrap_or(serde_json::Value::Null);
         preset.insert("pal_preset_id".into(), pal_preset_id);
-        // Python adds the pal_preset key only when the relationship is set (presets.py:26-28)
+        // The wire contract omits `pal_preset` entirely when unset — it is never sent as null.
         if pal_preset.is_object() {
             preset.insert("pal_preset".into(), pal_preset);
         }
@@ -60,8 +60,8 @@ pub async fn get_all(
     Ok(result)
 }
 
-/// Insert a preset from a wire object (PresetProfileDTO shape or a legacy seed row
-/// that already carries an id). Generates ids where absent; returns the preset id.
+/// Inserts a preset from a wire object, honouring an `id` the payload already carries
+/// (seed rows do) and generating one otherwise. Returns the preset id.
 pub async fn add(pool: &SqlitePool, preset_data: serde_json::Value) -> Result<String, DbError> {
     let object = preset_data
         .as_object()
@@ -154,8 +154,8 @@ pub async fn nuke(pool: &SqlitePool) -> Result<(), DbError> {
     Ok(())
 }
 
-/// Mirror of populate_presets_from_json (db/ctx/presets.py:108-127): seed from
-/// data/json/presets.json only when the table is empty.
+/// Seeds the presets table from the bundled JSON, but only when it is empty — a
+/// user who deleted every seeded preset does not get them back.
 pub async fn populate_from_json(
     pool: &SqlitePool,
     presets_seed: &serde_json::Value,
