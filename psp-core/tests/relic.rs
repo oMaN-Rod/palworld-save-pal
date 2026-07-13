@@ -221,3 +221,16 @@ fn relic_l10n_names_are_not_just_the_keys() {
     assert_eq!(en["stamina_reduction"]["localized_name"], "Endurance");
     assert_eq!(en["sphere_homing"]["localized_name"], "Sphere Tracking");
 }
+
+/// Every relic type needs an icon, or its row renders the generic unknown.webp.
+#[test]
+fn every_relic_has_an_icon_asset() {
+    let img_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../ui/src/lib/assets/img");
+    let mut missing = Vec::new();
+    for (_, key) in RELIC_TYPE_MAP {
+        if !img_dir.join(format!("relic_{key}.webp")).exists() {
+            missing.push(key);
+        }
+    }
+    assert!(missing.is_empty(), "relic icons missing: {missing:?}");
+}
