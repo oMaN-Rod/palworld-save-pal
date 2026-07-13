@@ -1,16 +1,9 @@
-//! Character-container slot operations — port of `game/character_container.py`
-//! (`CharacterContainer.add_pal`/`remove_pal`). Item-container slot
-//! operations are Task 10 scope, not this module's.
+//! Character- and item-container slot operations.
 //!
-//! Neither function here inserts or removes a `CharacterContainerSaveData`
-//! `MapEntry` — both only mutate the `Slots` array *nested inside* an
-//! already-positioned entry (found by `entry_index`, supplied by the
-//! caller). `SaveSession::character_container_index`/`caches.
-//! character_container_index` map container id → **entry position**, and
-//! neither function changes any entry's position or the map's length, so
-//! neither needs to call `invalidate_performance_caches` — see this task's
-//! report for the empirical proof (`build_character_container_index`
-//! resolves the same position before and after `character_container_add_pal`).
+//! `character_container_add_pal`/`remove_pal` mutate only the `Slots` array
+//! nested inside an already-positioned `CharacterContainerSaveData` entry;
+//! no entry's position changes, so the container-id → entry-position caches
+//! stay valid across them.
 
 use crate::dto::container::{
     CharacterContainerSlotDto, DynamicItemDto, ItemContainerDto, ItemContainerSlotDto,
@@ -25,9 +18,8 @@ use uesave::{ByteArray, Properties, Property, PropertyKey, StructValue, ValueVec
 
 use super::world;
 
-/// `game/character_container.py::CharacterContainer` — not a wire type (no
-/// DTO counterpart lives here; `dto::container::CharacterContainerDto` is
-/// the response shape a higher-level Task assembles from this).
+/// Internal read view, not a wire type — `dto::container::CharacterContainerDto`
+/// is the response shape callers assemble from this.
 pub struct CharacterContainerView {
     pub container_id: uuid::Uuid,
     pub size: i32,
@@ -39,10 +31,7 @@ fn container_value_props(level: &uesave::Save, entry_index: usize) -> Option<&Pr
     props::struct_props(&entries.get(entry_index)?.value)
 }
 
-/// Port of `CharacterContainer._load_from_container_data`
-/// (`game/character_container.py`): `size` from `SlotNum`, one
-/// `CharacterContainerSlot` per `Slots` element (`slot_index` +
-/// `RawData.instance_id`, decoded as a `PalCharacterContainer`).
+/// A slot's occupant is `RawData.instance_id`; the nil GUID means empty.
 pub fn read_character_container(
     level: &uesave::Save,
     entry_index: usize,
@@ -85,14 +74,8 @@ pub fn read_character_container(
     })
 }
 
-/// Port of `CharacterContainer.add_pal` (`game/character_container.py`):
-/// `None` when the container is full (`len(slots) >= size`, matching
-/// `available_slots()`); otherwise appends a new `Slots` element at
-/// `requested_slot` (or the first free index, matching
-/// `find_first_available_slot`) and returns the assigned index.
-///
-/// Does not insert/remove a `CharacterContainerSaveData` entry — see this
-/// module's doc comment on cache invalidation.
+/// Returns the assigned slot index, or `None` when the container is full.
+/// Without a `requested_slot`, the first free index below `SlotNum` is used.
 pub fn character_container_add_pal(
     level: &mut uesave::Save,
     entry_index: usize,
@@ -139,11 +122,7 @@ pub fn character_container_add_pal(
     Ok(Some(assigned))
 }
 
-/// Port of `CharacterContainer.remove_pal`/`_delete_slot_data`
-/// (`game/character_container.py`): removes the first slot whose
-/// `instance_id` matches `pal_id` (Python's own loop `break`s after the
-/// first match too). A `pal_id` that isn't present is a silent no-op,
-/// matching Python (the `for` loop simply never matches).
+/// Removes the first slot holding `pal_id`; an absent `pal_id` is a no-op.
 pub fn character_container_remove_pal(
     level: &mut uesave::Save,
     entry_index: usize,
@@ -177,20 +156,8 @@ pub fn character_container_remove_pal(
     Ok(())
 }
 
-/// `game/item_container.py::ItemContainer`'s read side (`_get_items`) plus
-/// `game/item_container_slot.py`'s per-slot getters. Slot `RawData` is a
-/// typed `PalItemContainerSlots` (`../uesave-rs/uesave/src/games/palworld/
-/// items.rs`: `PalItemContainerSlot { slot_index, count, item: PalItemId,
-/// trailing_bytes }`, `PalItemId { static_id, dynamic_id: PalDynamicId }`,
-/// `PalDynamicId { created_world_id, local_id_in_created_world }`) --
-/// verified against `item_container_slot.py`'s own field paths
-/// (`item.static_id`, `item.dynamic_id.local_id_in_created_world`), which
-/// address the exact same nesting despite Python's dict-based decoder
-/// grouping fields differently at the top level (see `read_dynamic_item`'s
-/// doc comment for the analogous, more surprising case). `game_data` is
-/// needed only for the Egg dynamic-item branch, which reuses
-/// `domain::pal::read_save_parameter_dto` to decode an egg's embedded
-/// SaveParameter bag the same way a Level.sav pal is decoded.
+/// Reads a container's slots, resolving each slot's dynamic item (if any).
+/// `game_data` is used only by the Egg branch of `read_dynamic_item`.
 pub fn read_item_container(
     level: &uesave::Save,
     session_caches: &mut WorldCaches,
@@ -228,26 +195,17 @@ pub fn read_item_container(
             let slot_index = raw_slot.slot_index;
             let count = raw_slot.count;
             let static_id = Some(raw_slot.item.static_id.clone());
-            // Python's `ItemContainerSlot.local_id` computed field is
-            // `as_uuid(local_id_in_created_world)` = the RAW guid, emitted
-            // verbatim: the nil UUID (serialized `"00000000-…"`) for a plain
-            // stackable item, a real uuid for a dynamic-backed item. It is NOT
-            // filtered to `null` — only a slot that structurally lacks the raw
-            // field (never, for a typed uesave slot) would be `None`.
             let raw_local_id =
                 props::guid_to_uuid(&raw_slot.item.dynamic_id.local_id_in_created_world);
-            // The non-empty id gates ONLY the dynamic-item lookup and the
-            // drop-on-missing decision (item_container.py `_get_items`:
-            // `if slot.local_id and not is_empty_uuid(slot.local_id):`) — the
-            // nil UUID is truthy in Python but excluded here by is_empty_uuid.
+            // A plain stackable item carries the nil GUID here; only a
+            // non-nil id backs a `DynamicItemSaveData` entry.
             let dynamic_local_id = (raw_local_id != props::EMPTY_UUID).then_some(raw_local_id);
             let dynamic_item = dynamic_local_id.and_then(|dynamic_local_id| {
                 let dynamic_entry_index = *dynamic_index.get(&dynamic_local_id)?;
                 read_dynamic_item(level, dynamic_entry_index, dynamic_local_id, game_data)
             });
-            // Python drops a slot whose NON-EMPTY local_id has no matching
-            // dynamic item (`_get_items` logs then `_remove_container_slot`); a
-            // nil local_id (plain item) is kept unconditionally.
+            // A dangling dynamic-item reference drops the whole slot; a plain
+            // (nil-id) item slot is always kept.
             if dynamic_local_id.is_some() && dynamic_item.is_none() {
                 continue;
             }
@@ -256,8 +214,8 @@ pub fn read_item_container(
                 slot_index,
                 count,
                 static_id,
-                // Raw `as_uuid` value — nil included, never `null` for a real
-                // slot (matches Python's computed field byte-for-byte).
+                // Emitted raw: a plain item's nil UUID is serialized as
+                // "00000000-…", never as `null`.
                 local_id: Some(raw_local_id),
             });
         }
@@ -272,31 +230,9 @@ pub fn read_item_container(
     })
 }
 
-/// `game/dynamic_item.py::DynamicItem`'s computed-field dump, applied to an
-/// already-resolved `DynamicItemSaveData` entry's typed `PalDynamicItem`.
-///
-/// Deviation from the brief: the brief's reference code read
-/// `dynamic_item.id.static_id` and matched on `dynamic_item.data`. Neither
-/// exists on the real `uesave-rs` struct (`items.rs`): `PalDynamicItem` is
-/// `{ id: PalDynamicId, static_id: String, item_type: PalDynamicItemType }`
-/// -- `static_id` is a SIBLING of `id`, not nested inside it, and the enum
-/// field is named `item_type`, not `data`. Python's own dict-based decoder
-/// (`palworld_save_tools/rawdata/dynamic_item.py::decode_bytes`) nests
-/// `static_id` inside a `data["id"]` dict purely as an artifact of how it
-/// groups the three fields it reads consecutively off the wire
-/// (`created_world_id`, `local_id_in_created_world`, then `static_id`) --
-/// the actual byte layout is identical either way, only the two
-/// implementations' in-memory grouping differs. This port follows the real
-/// `uesave-rs` struct shape, verified directly against `items.rs`, not the
-/// brief's assumption.
-///
-/// The brief's match arms also omitted `PalDynamicItemType::Unknown`, which
-/// does not compile (a non-exhaustive match) against the real 4-variant enum
-/// (`Unknown`, `Egg`, `Armor`, `Weapon`). `Unknown` mirrors Python's own
-/// `data["type"] = "unknown"` default (`decode_bytes`, before any of the
-/// egg/armor/weapon trial-parses succeed) -- every other field stays at its
-/// `None` default, matching Python's raw dict carrying no other keys for
-/// that shape.
+/// Decodes one `DynamicItemSaveData` entry. `Unknown` is the wire default for
+/// a dynamic item whose payload matches none of the egg/armor/weapon layouts;
+/// its DTO carries only `type` and `static_id`.
 fn read_dynamic_item(
     level: &uesave::Save,
     dynamic_entry_index: usize,
@@ -362,13 +298,8 @@ fn read_dynamic_item(
                 character_id,
                 super::pal::known_pal_keys(game_data),
             ));
-            // `_save_parameter` (dynamic_item.py): `PalObjects.get_nested(
-            // self._raw_data, "object", "SaveParameter", "value")` -- `object`
-            // here is itself a `Properties` bag (Python's
-            // `reader.properties_until_end()`), which, when the egg's
-            // in-game data was actually populated, carries one
-            // "SaveParameter" struct property holding the same shape a
-            // Level.sav pal's `SaveParameter` does.
+            // An egg's `object` bag carries a "SaveParameter" struct — the same
+            // shape a Level.sav pal has — only once its pal data is populated.
             if let Some(save_parameter) = object
                 .0
                 .get(&PropertyKey::from("SaveParameter"))
@@ -393,28 +324,17 @@ fn read_dynamic_item(
     Some(dto)
 }
 
-// ============================================================================
-// Item-container write-back (Task 10) -- port of `ItemContainer.update_from`/
-// `_update_common_container_slots`/`_clean_up_inventory`/
-// `_update_or_create_container_slot` (`game/item_container.py`),
-// `ItemContainerSlot.update_from` (`game/item_container_slot.py`), and
-// `DynamicItem.update_from` (`game/dynamic_item.py`). `Base.update_from`
-// (`game/base.py`) is `apply_base_dto` below.
-// ============================================================================
-
-/// `PalObjects.ItemContainerSlot`'s literal `CustomVersionData` byte payload
-/// (`pal_objects.py`) for a freshly created raw item-container slot.
+/// `CustomVersionData` the game writes on a freshly created item-container slot.
 const ITEM_CONTAINER_SLOT_CUSTOM_VERSION_DATA: [u8; 24] = [
     1, 0, 0, 0, 126, 180, 234, 18, 154, 27, 90, 255, 113, 170, 113, 188, 223, 51, 214, 14, 1, 0, 0,
     0,
 ];
-/// `PalObjects.DynamicItem`'s literal `CustomVersionData` byte payload for a
-/// freshly created weapon/armor dynamic item (`pal_objects.py`).
+/// `CustomVersionData` for a freshly created weapon/armor dynamic item.
 const DYNAMIC_ITEM_WEAPON_ARMOR_CUSTOM_VERSION_DATA: [u8; 24] = [
     1, 0, 0, 0, 56, 11, 0, 222, 73, 73, 215, 206, 151, 223, 45, 153, 192, 193, 195, 105, 1, 0, 0, 0,
 ];
-/// `PalObjects.DynamicItem`'s literal `CustomVersionData` byte payload for a
-/// freshly created egg dynamic item (`pal_objects.py`).
+/// `CustomVersionData` for a freshly created egg dynamic item — a second GUID
+/// entry longer than the weapon/armor payload.
 const DYNAMIC_ITEM_EGG_CUSTOM_VERSION_DATA: [u8; 44] = [
     2, 0, 0, 0, 56, 11, 0, 222, 73, 73, 215, 206, 151, 223, 45, 153, 192, 193, 195, 105, 1, 0, 0,
     0, 108, 246, 252, 15, 153, 72, 144, 17, 248, 156, 96, 177, 94, 71, 70, 74, 1, 0, 0, 0,
@@ -446,10 +366,8 @@ fn raw_container_slot(
     }
 }
 
-/// `ItemContainerSlot.local_id` getter's underlying raw field
-/// (`item_container_slot.py`): `None` (this port's stand-in for Python's
-/// falsy/absent `local_id`) when no slot at `slot_index` exists, or its
-/// dynamic id is the nil GUID.
+/// `None` when no slot at `slot_index` exists, or its dynamic id is the nil
+/// GUID (a plain, non-dynamic item).
 fn raw_slot_local_id(
     level: &uesave::Save,
     entry_index: usize,
@@ -465,7 +383,6 @@ fn raw_slot_local_id(
     })
 }
 
-/// `ItemContainerSlot.local_id` setter (`item_container_slot.py`).
 fn set_raw_slot_local_id(
     level: &mut uesave::Save,
     entry_index: usize,
@@ -490,10 +407,7 @@ fn set_raw_slot_local_id(
     }
 }
 
-/// `ItemContainer._remove_container_slot` (`item_container.py`): removes the
-/// first `Slots` entry whose `slot_index` matches -- a silent no-op for an
-/// index that isn't present, matching Python's own `for ... if ...: ...
-/// break` (never raises when nothing matches).
+/// Removes the first `Slots` entry at `slot_index`; an absent index is a no-op.
 fn remove_raw_slot(level: &mut uesave::Save, entry_index: usize, slot_index: i32) {
     let Some(slots) = container_slots_mut(level, entry_index) else {
         return;
@@ -506,15 +420,9 @@ fn remove_raw_slot(level: &mut uesave::Save, entry_index: usize, slot_index: i32
     }
 }
 
-/// `ItemContainer._update_or_create_container_slot`'s raw-slot half
-/// (`item_container.py`): updates an existing slot's `count`/`static_id` in
-/// place (`ItemContainerSlot.update_from`'s `slot_index`/`count`/`static_id`
-/// setters -- `slot_index` itself is a no-op re-write since the match is by
-/// that same value), or appends a fresh `PalItemContainerSlots` value
-/// (`PalObjects.ItemContainerSlot`) when none exists yet. Never touches the
-/// dynamic-id field either way -- that's `set_raw_slot_local_id`'s job,
-/// called separately by the caller once the dynamic item's final local id is
-/// known (see `apply_item_container_dto`).
+/// Updates an existing slot's `count`/`static_id`, or appends a fresh one.
+/// Never touches the slot's dynamic id — the caller sets that separately, once
+/// the dynamic item's final local id is known (see `apply_item_container_dto`).
 fn upsert_raw_slot(level: &mut uesave::Save, entry_index: usize, slot: &ItemContainerSlotDto) {
     let Some(slots) = container_slots_mut(level, entry_index) else {
         return;
@@ -568,18 +476,9 @@ fn upsert_raw_slot(level: &mut uesave::Save, entry_index: usize, slot: &ItemCont
     }
 }
 
-/// `ItemContainer.set_slot_count` (`item_container.py`): writes `SlotNum`,
-/// then truncates `Slots` to `slot_count` entries.
-///
-/// Deviation from the brief: the brief truncated by comparing each slot's
-/// `slot_index` VALUE against `slot_count`. Real Python's `set_slot_count`
-/// does `self.slots[slot_count:]` -- a truncation by ARRAY POSITION (the
-/// order `Slots` entries were originally read in), not by `slot_index`
-/// value. The two coincide whenever a container's slots happen to already be
-/// stored in ascending-`slot_index` order (the common case for an
-/// Essential/Common container, populated sequentially), but are NOT the same
-/// operation in general. `Vec::truncate` reproduces Python's real,
-/// array-position-based behavior directly.
+/// Writes `SlotNum`, then truncates `Slots` to `slot_count` entries by ARRAY
+/// POSITION, not by `slot_index` value — the two differ whenever a container's
+/// slots are not stored in ascending-`slot_index` order.
 fn set_item_container_slot_count(
     session: &mut SaveSession,
     container_id: uuid::Uuid,
@@ -618,14 +517,10 @@ fn set_item_container_slot_count(
     Ok(())
 }
 
-/// `IndexedCollection.remove_by_key` applied to `DynamicItemSaveData`
-/// (`item_container.py`'s `_clean_up_inventory`): removes the entry at
-/// `local_id`, a silent no-op when it isn't present. Invalidates
-/// `dynamic_item_index` IMMEDIATELY (not deferred to the end of
-/// `apply_item_container_dto`) since a removal shifts every later entry's
-/// position -- a second removal/insertion later in the SAME
-/// `apply_item_container_dto` call must never resolve a position through a
-/// now-stale cached index.
+/// Removes the `DynamicItemSaveData` entry at `local_id` (a no-op if absent).
+/// Invalidates `dynamic_item_index` immediately, never deferred: the removal
+/// shifts every later entry's position, so any further lookup in the same
+/// caller must not resolve through the now-stale index.
 fn remove_dynamic_item(session: &mut SaveSession, local_id: uuid::Uuid) -> Result<(), CoreError> {
     if session.caches.dynamic_item_index.is_none() {
         session.caches.dynamic_item_index = Some(world::build_dynamic_item_index(&session.level));
@@ -661,13 +556,9 @@ fn existing_item_type(
     }
 }
 
-/// `PalObjects.SaveParameter` (`pal_objects.py`): the embedded
-/// `{"SaveParameter": {...}}` properties bag an egg dynamic item's `object`
-/// field carries when actually populated (`DynamicItem.update_from`'s egg
-/// branch, `modified: true`). Mirrors `pal::new_pal_entry`'s literal
-/// defaults for `Hp`/`FullStomach` (this constructor's own hardcoded 545000/
-/// 400.0, distinct from `new_pal_entry`'s 545000/300.0 -- verified against
-/// `pal_objects.py`'s own two, genuinely different literals).
+/// Builds the `{"SaveParameter": {...}}` bag an egg dynamic item's `object`
+/// field carries. `Hp` 545000 / `FullStomach` 400.0 are the game's own egg
+/// defaults, deliberately different from a hatched pal's (545000 / 300.0).
 fn build_egg_save_parameter(dto: &DynamicItemDto) -> Properties {
     let mut save_parameter = Properties::default();
     save_parameter.insert(
@@ -716,29 +607,11 @@ fn build_egg_save_parameter(dto: &DynamicItemDto) -> Properties {
     object
 }
 
-/// Port of `DynamicItem.update_from` (`dynamic_item.py`), narrowed to the net
-/// effect this port's strongly-typed `PalDynamicItemType` enum can represent
-/// (see `upsert_dynamic_item`'s own doc comment for what's deliberately not
-/// reproduced, and why).
-///
-/// `existing` is the CURRENT variant at this local id, if any -- `leading_
-/// bytes`/`trailing_bytes` are preserved from it whenever the type doesn't
-/// change (matching Python: NEITHER `update_from`'s per-type cleanup block
-/// nor its generic per-field loop ever rewrites those two fields for an
-/// existing item of unchanged type; the reference `palworld_save_tools`
-/// codec's `"unknown_bytes"`/`"unknown_id"` writes in `dynamic_item.py`'s own
-/// egg branch are dead code -- verified against `.venv`'s real `encode_bytes`,
-/// which never reads those two key names at all, only `"leading_bytes"`/
-/// `"trailing_bytes"`; see this task's report). A type CHANGE (or a brand
-/// new item) always gets zero-filled leading/trailing bytes, matching
-/// `PalObjects._set_leading_trailing_bytes`'s literal `[0] * N` for a freshly
-/// built entry -- Python's own real behavior for an existing item that
-/// genuinely changes type is closer to memory-unsafe (it would carry over a
-/// WRONG-LENGTH byte array from the old type into the new type's encoder,
-/// corrupting the write); this port declines to reproduce that, on the
-/// "never intentionally corrupt save data" side of this project's "never
-/// panic on malformed input" policy. This is a deliberate, DOCUMENTED
-/// divergence, not a silently-reproduced bug.
+/// `existing` is the current variant at this local id, if any. Its opaque
+/// leading/trailing bytes are carried over only when the type is unchanged:
+/// each variant's byte arrays have a different, fixed length, so reusing them
+/// across a type change would encode a wrong-length payload and corrupt the
+/// save. A type change (or a new item) therefore zero-fills them.
 fn build_dynamic_item_type(
     dto: &DynamicItemDto,
     existing: Option<&uesave::games::palworld::PalDynamicItemType>,
@@ -840,20 +713,9 @@ fn build_dynamic_item_type(
     }
 }
 
-/// Port of `DynamicItem.update_from` (`dynamic_item.py`) plus
-/// `PalObjects.DynamicItem`'s constructor (`pal_objects.py`) for the
-/// not-yet-present case. `slot_static_id` is the CONTAINING SLOT's
-/// `static_id` (`ItemContainerSlotDto::static_id`), used ONLY when creating a
-/// brand new entry -- `PalDynamicItem.static_id` is a WIRE SIBLING of `id`
-/// (not nested inside it despite Python's dict-based decoder grouping them
-/// together; verified against `../uesave-rs/uesave/src/games/palworld/
-/// items.rs`), and `DynamicItemDTO` (the wire DTO's INPUT shape) has no
-/// `static_id` field of its own at all -- Python's `update_from` generic loop
-/// (`for key, value in other.items(): if hasattr(self, key): setattr(...)`)
-/// therefore NEVER touches `static_id` for an EXISTING item (no `"static_id"`
-/// key ever appears in `other.items()`), leaving it untouched; only
-/// `PalObjects.DynamicItem(container_slot)`'s ONE-TIME construction for a
-/// brand-new entry ever sets it, from the slot's own `static_id`.
+/// `slot_static_id` is the containing slot's `static_id`, used ONLY when
+/// creating a brand-new entry: an existing dynamic item's `static_id` is never
+/// rewritten, since the incoming DTO has no authoritative value for it.
 pub fn upsert_dynamic_item(
     session: &mut SaveSession,
     dto: &DynamicItemDto,
@@ -924,44 +786,12 @@ pub fn upsert_dynamic_item(
     Ok(())
 }
 
-/// Port of `ItemContainer.update_from` (`item_container.py`): resizes the
-/// paired common container (essential only), cleans up removed dynamic
-/// items/`static_id == "None"` slots, then upserts every remaining incoming
-/// slot. `container_id` is the CALLER-RESOLVED, session-trusted target (see
-/// `player::apply_player_dto`'s own doc comment on why `dto.id` is never used
-/// for routing) -- `dto` supplies only `type`/`slots` content.
+/// Resizes the paired common container (essential containers only), cleans up
+/// removed dynamic items and `static_id == "None"` slots, then upserts every
+/// remaining incoming slot.
 ///
-/// No `game_data: &GameData` parameter: an earlier revision carried one
-/// (`_game_data`, prefixed to suppress the unused-parameter warning) on the
-/// mistaken assumption a future egg-schema step would need it here -- it
-/// never did (every helper this function calls, including the egg branch of
-/// `upsert_dynamic_item`/`build_dynamic_item_type`, needs no `GameData` at
-/// all). Removed rather than kept-and-justified, per this task's review.
-///
-/// **A genuine, newly-found Python bug, reproduced deliberately for save-file
-/// byte parity, not on the known list (legacy `"HP"` write /
-/// `ext_status_point_list`'s missing guard / `Guild.players`'
-/// `UnboundLocalError` / `_load_pals_for_container`'s `"SlotId"`-only
-/// spelling / `safe_remove(character_save, "OwnerPlayerUId")`'s wrong-level
-/// no-op / `Pal.reset()` never clearing `IsRarePal`):** when an incoming slot
-/// has no `dynamic_item` but the existing raw slot does,
-/// `_clean_up_inventory` removes the `DynamicItemSaveData` entry AND sets
-/// `container_slot.dynamic_item = None` -- but `dynamic_item` is a PLAIN
-/// pydantic field on `ItemContainerSlot` (`item_container_slot.py`), not a
-/// computed property with a setter that writes into `_raw_data`. That
-/// assignment only updates the in-memory Python object; the RAW slot's
-/// `item.dynamic_id.local_id_in_created_world` is left untouched, still
-/// pointing at the now-deleted dynamic item. Nothing later in
-/// `_update_or_create_container_slot` fixes it either: for a slot whose
-/// incoming DTO has no `dynamic_item`, that function's `if not slot_dto.
-/// dynamic_item: return` bails out immediately, before its own `slot.
-/// local_id = ...` line ever runs. The dangling reference is harmless in
-/// practice -- the NEXT time this exact container is read (`read_item_
-/// container`, this port's own `_get_items` equivalent), a `local_id` that
-/// resolves to nothing already causes the whole slot to be dropped (see that
-/// function's own doc comment) -- but it IS what a save-out immediately after
-/// this edit would write to disk, so it is reproduced here rather than
-/// proactively cleared. See this task's report.
+/// `container_id` is the caller-resolved, session-trusted target; `dto` supplies
+/// only `type`/`slots` content, and `dto.id` is never used for routing.
 pub fn apply_item_container_dto(
     session: &mut SaveSession,
     container_id: uuid::Uuid,
@@ -1002,7 +832,7 @@ pub fn apply_item_container_dto(
         return Ok(());
     };
 
-    // Cleanup pass (`_clean_up_inventory`).
+    // Cleanup pass.
     for incoming_slot in &dto.slots {
         let existing_local_id = raw_slot_local_id(
             &session.level,
@@ -1012,9 +842,8 @@ pub fn apply_item_container_dto(
         if incoming_slot.dynamic_item.is_none() {
             if let Some(local_id) = existing_local_id {
                 remove_dynamic_item(session, local_id)?;
-                // Raw slot's own local_id is deliberately left dangling here
-                // -- see this function's own doc comment (a real Python bug,
-                // reproduced for byte parity).
+                // The raw slot keeps pointing at the removed entry; a slot with
+                // a dangling reference is dropped on the next read.
             }
         }
         if incoming_slot.static_id.as_deref() == Some("None") {
@@ -1026,7 +855,7 @@ pub fn apply_item_container_dto(
         }
     }
 
-    // Apply pass (`_update_or_create_container_slot`).
+    // Apply pass.
     for incoming_slot in &dto.slots {
         if incoming_slot.static_id.is_none() || incoming_slot.static_id.as_deref() == Some("None") {
             continue;
@@ -1058,25 +887,11 @@ pub fn apply_item_container_dto(
     Ok(())
 }
 
-/// Port of `Base.update_from` (`game/base.py`).
+/// Applies a base's storage-container edits and its name/area-range.
 ///
-/// **Membership-scoped, unlike the brief.** The brief's reference code
-/// applied every entry in `dto.storage_containers` unconditionally. Real
-/// Python's `self.storage_containers[id].update_from(...)` indexes a dict
-/// scoped to THIS base's own already-loaded storage containers -- an `id`
-/// that isn't one of them raises `KeyError` (Python crashes rather than
-/// silently touching a container elsewhere in the save). Reproduced here as
-/// a skip (this port's established "never panic on malformed/adversarial
-/// input" policy) rather than a crash, but the MEMBERSHIP CHECK itself is
-/// real and load-bearing: without it, a forged `container_id` key in the
-/// DTO's `storage_containers` map could redirect a base-storage edit onto an
-/// unrelated container anywhere in the world (a different base's storage, a
-/// player's inventory, ...) -- the same cross-entity class of hole Task 9's
-/// review flagged Critical for `delete_player_pals`. See this task's report.
-///
-/// No `game_data: &GameData` parameter, for the same reason
-/// `apply_item_container_dto` (the only function this one ever needed it
-/// for) no longer has one -- see that function's own doc comment.
+/// The membership check is load-bearing: a `storage_containers` key this base
+/// does not actually own is skipped, so a forged container id cannot redirect a
+/// base-storage edit onto an unrelated container elsewhere in the world.
 pub fn apply_base_dto(
     session: &mut SaveSession,
     base_id: uuid::Uuid,
@@ -1117,29 +932,9 @@ pub fn apply_base_dto(
     Ok(())
 }
 
-// ============================================================================
-// Player/guild deletion (Task 11) -- port of `GuildOpsMixin._delete_item_
-// containers`/`_delete_dynamic_items`/`_delete_character_containers`
-// (`guild_ops.py`).
-// ============================================================================
-
-/// `_delete_item_containers` + `_delete_dynamic_items` (`guild_ops.py`): for
-/// each container id, removes its slots' dynamic items, then the
-/// `ItemContainerSaveData` entry itself. An id that doesn't resolve to a
-/// real container is a silent no-op.
-///
-/// Deviation from Python: real `_delete_item_containers` also has a
-/// fallback branch that, for a `container_id` NOT found by direct lookup,
-/// searches for ANY container whose `BelongInfo.GroupId` equals the
-/// caller's own `target_id` argument and deletes that one instead. Every
-/// caller in this port (`player::delete_player_and_pals_for_guild`,
-/// `guild::delete_guild_and_players`) only ever passes container ids it
-/// already resolved from the session's OWN loaded player/base data, so that
-/// fallback path is never reachable for any id this port's own callers
-/// pass -- not reproduced here. See this task's report for the SEPARATE,
-/// genuinely reachable fallback bug in `guild_ops.py`'s second (buggy)
-/// `_delete_item_containers` call, which this port does not reproduce
-/// either.
+/// For each container id, removes its slots' dynamic items, then the
+/// `ItemContainerSaveData` entry itself. An id that doesn't resolve to a real
+/// container is a silent no-op.
 pub fn delete_item_containers(
     session: &mut SaveSession,
     container_ids: &[uuid::Uuid],
@@ -1160,8 +955,7 @@ pub fn delete_item_containers(
             continue;
         };
 
-        // Collect this container's dynamic-item local ids before removing
-        // it -- mirrors `read_item_container`'s own slot traversal.
+        // Collect this container's dynamic-item local ids before removing it.
         let local_ids: Vec<uuid::Uuid> = {
             let entries = world::item_container_map(&session.level)?;
             let mut ids = Vec::new();
@@ -1191,8 +985,6 @@ pub fn delete_item_containers(
             ids
         };
         for local_id in local_ids {
-            // Invalidates `dynamic_item_index` itself -- see its own doc
-            // comment on why that must happen immediately, not deferred.
             remove_dynamic_item(session, local_id)?;
         }
 
@@ -1201,16 +993,14 @@ pub fn delete_item_containers(
             entries.remove(entry_index);
         }
         // The removal above shifts every later entry's position; the next
-        // loop iteration (or any later caller) must rebuild fresh.
+        // iteration must rebuild the index.
         session.caches.item_container_index = None;
     }
     Ok(())
 }
 
-/// `_delete_character_containers` (`guild_ops.py`): removes every
-/// `CharacterContainerSaveData` entry whose key matches one of
-/// `container_ids`. An id that isn't present is a silent no-op, matching
-/// `IndexedCollection.remove_by_key`'s own tolerant behavior.
+/// Removes every `CharacterContainerSaveData` entry whose key matches one of
+/// `container_ids`; an id that isn't present is a silent no-op.
 pub fn delete_character_containers(
     session: &mut SaveSession,
     container_ids: &[uuid::Uuid],
@@ -1280,9 +1070,6 @@ mod tests {
         StructValue::Struct(slot_props)
     }
 
-    /// A one-container `Save` whose `CharacterContainerSaveData` has `size`
-    /// slots and the given pre-existing occupants — enough to exercise every
-    /// function in this module without a real save file on disk.
     fn save_with_one_container(
         container_id: uuid::Uuid,
         size: i32,
@@ -1416,12 +1203,8 @@ mod tests {
         assert_eq!(read_character_container(&save, 0).unwrap().slots.len(), 1);
     }
 
-    /// Direct proof that `character_container_add_pal`/`remove_pal` never
-    /// change *which position* a container lives at in
-    /// `CharacterContainerSaveData` -- the fact this module's doc comment
-    /// relies on to justify never calling `invalidate_performance_caches`.
-    /// Two containers; mutate the first one's slots repeatedly; the second
-    /// container's index-built position must never move.
+    /// Pins the invariant this module's doc comment relies on: slot mutations
+    /// never move a container's position in `CharacterContainerSaveData`.
     #[test]
     fn container_position_in_the_map_is_stable_across_add_and_remove() {
         let first_id = uuid::Uuid::parse_str("11111111-0000-0000-0000-000000000000").unwrap();
@@ -1471,12 +1254,6 @@ mod tests {
             "mutating container 0's Slots must never move container 1's position"
         );
     }
-
-    // ---- read_item_container / read_dynamic_item (item containers, read
-    // side) -- synthetic saves, since world1/world2's own dynamic items are
-    // exercised for real by `tests/player_details.rs` instead (weapon/armor
-    // via player 8C2F1930's real equipment containers) or -- for Egg, which
-    // no fixture player's containers reach -- by the synthetic test below. ----
 
     fn game_data() -> GameData {
         let json_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../data/json");
@@ -1531,10 +1308,6 @@ mod tests {
         StructValue::Struct(item_props)
     }
 
-    /// A `Save` whose `ItemContainerSaveData` has one container (`container_id`,
-    /// `slots`) and whose `DynamicItemSaveData` is `dynamic_items` -- enough to
-    /// exercise `read_item_container`/`read_dynamic_item` end to end without a
-    /// real save file on disk.
     fn save_with_item_container(
         container_id: uuid::Uuid,
         slot_num: i32,
@@ -1626,13 +1399,7 @@ mod tests {
         assert_eq!(dto.slots.len(), 1);
         assert_eq!(dto.slots[0].static_id, Some("Wood".to_string()));
         assert_eq!(dto.slots[0].count, 5);
-        // A plain stackable item's `local_id` is the RAW nil UUID, NOT null:
-        // Python's `ItemContainerSlot.local_id` computed field is
-        // `as_uuid(local_id_in_created_world)`, and `toUUID` of the nil guid is
-        // the (truthy) nil UUID, which serializes as the string
-        // "00000000-0000-0000-0000-000000000000". Regression pin for the
-        // Task-15 parity fix (Rust previously filtered nil → null, diverging
-        // from every plain item slot Python emits).
+        // A plain stackable item's `local_id` is the raw nil UUID, not null.
         assert_eq!(dto.slots[0].local_id, Some(props::EMPTY_UUID));
         assert_eq!(
             serde_json::to_value(&dto.slots[0]).unwrap()["local_id"],
@@ -1642,10 +1409,6 @@ mod tests {
         assert!(dto.slots[0].dynamic_item.is_none());
     }
 
-    /// Python drops a slot whose `local_id` is set but no matching
-    /// `DynamicItemSaveData` entry exists (`item_container.py::_get_items`:
-    /// `if not dynamic_item: ... continue`) -- proven here by a slot whose
-    /// `local_id` resolves to nothing in `DynamicItemSaveData`.
     #[test]
     fn read_item_container_drops_a_slot_whose_dynamic_item_is_missing() {
         let container_id = uuid::Uuid::nil();
@@ -1786,13 +1549,6 @@ mod tests {
         assert!(item.durability.is_none());
     }
 
-    /// No fixture player's containers reach an Egg dynamic item (see this
-    /// task's report: world1's 34 eggs live outside any player-reachable
-    /// container in that particular save) -- this synthetic save is the
-    /// real-behavior proof for the Egg branch, including its embedded
-    /// `SaveParameter` bag (gender/talents/skills), reusing
-    /// `domain::pal::read_save_parameter_dto` the same way
-    /// `read_dynamic_item` does.
     #[test]
     fn read_item_container_resolves_an_egg_dynamic_item_with_embedded_save_parameter() {
         let container_id = uuid::Uuid::nil();
@@ -1852,11 +1608,8 @@ mod tests {
         assert!(item.remaining_bullets.is_none());
     }
 
-    /// An egg whose `object` never gained a `"SaveParameter"` property (a
-    /// freshly hatched slot with no embedded pal data yet) leaves every
-    /// save-parameter-derived field at its `None` default, matching
-    /// Python's `_save_parameter` returning `None` through
-    /// `PalObjects.get_nested`'s missing-key guard.
+    /// An egg whose `object` carries no `"SaveParameter"` yet leaves every
+    /// save-parameter-derived field at its `None` default.
     #[test]
     fn read_item_container_egg_without_save_parameter_leaves_stats_none() {
         let container_id = uuid::Uuid::nil();
@@ -1892,8 +1645,6 @@ mod tests {
         assert!(item.talent_hp.is_none());
         assert!(item.active_skills.is_none());
     }
-
-    // ---- apply_item_container_dto / apply_base_dto (Task 10 write-back) ----
 
     use crate::session::{SaveKind, SaveSession};
 
@@ -1943,20 +1694,12 @@ mod tests {
         }
     }
 
-    /// Positive cache-invalidation proof for a STRUCTURAL ADD: a brand new
-    /// dynamic item pushed onto `DynamicItemSaveData` must (a) clear
-    /// `session.caches.dynamic_item_index` (not just leave a coincidentally
-    /// matching stale one), and (b) a freshly rebuilt index must actually
-    /// resolve the new entry at its real position -- not merely "the cache
-    /// is now `None`", which would trivially pass even if the item were
-    /// never actually appended (Task 9's own established standard).
     #[test]
     fn apply_item_container_dto_adds_a_new_dynamic_item_and_invalidates_the_cache() {
         let container_id = uuid::Uuid::parse_str("11111111-0000-0000-0000-000000000000").unwrap();
         let mut session = session_with_item_container(container_id, 10, vec![], vec![]);
-        // Warm the cache with the pre-edit (empty) state, proving the SAME
-        // stale cache object gets thrown away, not just left conveniently
-        // unbuilt.
+        // Warm the cache with the pre-edit state, so the assertions below prove
+        // the stale index is discarded rather than merely never built.
         session.caches.dynamic_item_index = Some(world::build_dynamic_item_index(&session.level));
         assert!(session
             .caches
@@ -1994,11 +1737,6 @@ mod tests {
         assert_eq!(values.len(), 1);
     }
 
-    /// Positive cache-invalidation proof for a STRUCTURAL REMOVE (the
-    /// counterpart of the add proof above): a dynamic item that gets removed
-    /// via `_clean_up_inventory`'s "incoming slot has no dynamic_item, the
-    /// existing one does" branch must vanish from a freshly rebuilt index,
-    /// and the cache field itself must be cleared.
     #[test]
     fn apply_item_container_dto_removes_a_dynamic_item_and_invalidates_the_cache() {
         let container_id = uuid::Uuid::nil();
@@ -2052,14 +1790,8 @@ mod tests {
             .is_empty());
     }
 
-    /// `_update_common_container_slots` (`item_container.py`): an essential
-    /// container with `additional_inventory_count` `AdditionalInventory_*`
-    /// slots resizes its paired common container to `42 + min(count, 4)*3`
-    /// slots, truncating the common container's own `Slots` array by
-    /// POSITION when it shrinks -- proven with 6 existing common slots and 2
-    /// `AdditionalInventory_` essential slots (expected: 42 + 2*3 = 48, well
-    /// above 6, so nothing is truncated here; the truncation half is proven
-    /// separately below).
+    /// Each `AdditionalInventory_*` slot in an essential container grows its
+    /// paired common container by 3 slots over the base 42, capped at 4.
     #[test]
     fn apply_item_container_dto_essential_resizes_the_paired_common_container() {
         let common_id = uuid::Uuid::parse_str("44444444-0000-0000-0000-000000000000").unwrap();
@@ -2130,10 +1862,8 @@ mod tests {
         assert_eq!(slot_num, 42 + 2 * 3, "42 + min(2,4)*3 = 48");
     }
 
-    /// The truncation half of `set_item_container_slot_count`: shrinking
-    /// past the container's current slot COUNT removes the excess entries
-    /// by array position (see `set_item_container_slot_count`'s own doc
-    /// comment on why this is position-based, not `slot_index`-value-based).
+    /// Shrinking below the container's current slot count removes the excess
+    /// entries by array position.
     #[test]
     fn apply_item_container_dto_essential_resize_truncates_excess_common_slots() {
         let common_id = uuid::Uuid::parse_str("66666666-0000-0000-0000-000000000000").unwrap();
@@ -2205,8 +1935,6 @@ mod tests {
         assert_eq!(remaining_slots.len(), 42);
     }
 
-    /// `_update_or_create_container_slot`: a `static_id == "None"` incoming
-    /// slot removes the existing raw slot entirely.
     #[test]
     fn apply_item_container_dto_removes_a_slot_whose_static_id_is_none() {
         let container_id = uuid::Uuid::nil();
@@ -2229,9 +1957,7 @@ mod tests {
         assert!(slots.is_empty());
     }
 
-    /// An `apply_item_container_dto` call for a `container_id` this session
-    /// doesn't have at all is a silent no-op, matching this port's
-    /// established "skip an unresolvable id, never panic" policy.
+    /// An unresolvable `container_id` is skipped, never a panic.
     #[test]
     fn apply_item_container_dto_unknown_container_id_is_a_no_op() {
         let mut session = session_with_item_container(uuid::Uuid::nil(), 5, vec![], vec![]);
@@ -2253,11 +1979,8 @@ mod tests {
             .is_empty());
     }
 
-    /// A brand new egg dynamic item with `modified: true` rebuilds a full
-    /// embedded `SaveParameter` (`PalObjects.SaveParameter`) -- gender,
-    /// talents, and skills must all be readable back afterward via the same
-    /// `read_item_container`/`read_dynamic_item` path Task 5 already
-    /// verified.
+    /// A new egg with `modified: true` rebuilds a full embedded `SaveParameter`,
+    /// readable back through `read_item_container`.
     #[test]
     fn apply_item_container_dto_new_egg_modified_rebuilds_embedded_save_parameter() {
         let container_id = uuid::Uuid::nil();
@@ -2315,10 +2038,8 @@ mod tests {
         );
     }
 
-    /// An existing egg dynamic item updated with `modified: false` must
-    /// preserve its embedded `object` exactly, even though the incoming DTO
-    /// carries different gender/talent values -- Python's `DynamicItem.
-    /// update_from` only rebuilds `object` when `modified` is truthy.
+    /// An existing egg updated with `modified: false` preserves its embedded
+    /// `object` exactly, even when the incoming DTO carries different stats.
     #[test]
     fn apply_item_container_dto_existing_egg_unmodified_preserves_embedded_save_parameter() {
         let container_id = uuid::Uuid::nil();
@@ -2342,8 +2063,6 @@ mod tests {
         );
         let mut session = session_with_item_container(container_id, 10, vec![slot], vec![egg]);
 
-        // Incoming DTO claims different stats but modified: false -- must be
-        // ignored; the original embedded object survives untouched.
         let egg_dto = DynamicItemDto {
             local_id,
             modified: false,
@@ -2391,8 +2110,7 @@ mod tests {
         assert_eq!(item.talent_hp, Some(30));
     }
 
-    /// `PalTransform` zeroed out -- `PalMapModel.initial_transform_cache`
-    /// needs a value but this test never inspects it.
+    /// `PalMapModel.initial_transform_cache` needs a value; no test inspects it.
     fn zero_map_transform() -> uesave::games::palworld::PalTransform {
         uesave::games::palworld::PalTransform {
             rotation: uesave::Quat {
@@ -2414,14 +2132,9 @@ mod tests {
         }
     }
 
-    /// One `MapObjectSaveData` element genuinely linking `base_id` to
-    /// `container_id` via an `ItemContainer` module -- the exact real-save
-    /// shape `guild::base_storage_container_ids` (and `guild::
-    /// map_object_properties_by_base_id`/`module_target_container_id`)
-    /// enumerates (`base.py:196-228`). Used to build a session where a base
-    /// GENUINELY owns a storage container, so `apply_base_dto`'s membership
-    /// check can be proven to ACCEPT the owned container in the same
-    /// fixture it REJECTS a foreign one in.
+    /// One `MapObjectSaveData` element linking `base_id` to `container_id` via
+    /// an `ItemContainer` module — the shape `guild::base_storage_container_ids`
+    /// enumerates to decide base ownership.
     fn map_object_owning_container(base_id: uuid::Uuid, container_id: uuid::Uuid) -> StructValue {
         let model = uesave::games::palworld::PalMapModel {
             instance_id: uesave::FGuid::nil(),
@@ -2481,12 +2194,9 @@ mod tests {
         StructValue::Struct(object_props)
     }
 
-    /// A session with TWO item containers -- `owned_container_id` (linked to
-    /// `base_id` via a real `MapObjectSaveData` `ItemContainer` module) and
-    /// `foreign_container_id` (present in `ItemContainerSaveData` but with
-    /// NO `MapObjectSaveData` link to `base_id` at all) -- so
-    /// `apply_base_dto`'s membership check has both a genuine positive and a
-    /// genuine negative to discriminate between in the same fixture.
+    /// Two item containers: one linked to `base_id` by a `MapObjectSaveData`
+    /// module, one with no link at all — a positive and a negative for
+    /// `apply_base_dto`'s membership check in the same fixture.
     fn session_with_base_owning_one_of_two_containers(
         base_id: uuid::Uuid,
         owned_container_id: uuid::Uuid,
@@ -2534,14 +2244,8 @@ mod tests {
         SaveSession::new_for_tests(SaveKind::InMemory, minimal_save(root_properties))
     }
 
-    /// `apply_base_dto` must ACCEPT a `storage_containers` entry the base
-    /// genuinely owns and REJECT one it doesn't, in the SAME fixture -- see
-    /// `apply_base_dto`'s own doc comment for why the membership check is
-    /// load-bearing (a Critical-class fix over the brief's unconditional-
-    /// apply reference code), and this task's review, which asked whether
-    /// the check over-restricts: it doesn't -- the owned container's real
-    /// edit lands, proving the check isn't just an always-reject bug that
-    /// happens to also pass the negative case.
+    /// The membership check must accept an owned container and reject a foreign
+    /// one in the same call — proving it is not an always-reject.
     #[test]
     fn apply_base_dto_accepts_the_owned_container_and_rejects_the_foreign_one() {
         let base_id = uuid::Uuid::parse_str("bbbbbbbb-0000-0000-0000-000000000000").unwrap();

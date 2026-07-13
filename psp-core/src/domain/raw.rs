@@ -1,26 +1,6 @@
-//! Raw-data inspector targets (Task 3E-5) — port of `debug_handler.py`'s
-//! `get_raw_data_handler`. `RawTarget` mirrors `GetRawDataData`'s six
-//! optional ids + `level: bool` (`messages.py:413-420`) one-to-one; Python's
-//! priority order (guild -> player -> pal -> base -> item_container ->
-//! character_container -> level) is the CALLER's job
-//! (`handlers::tools::handle_get_raw_data`), not this module's — this module
-//! only knows how to locate and serialize ONE already-chosen target.
-//!
-//! **Value-exact parity with Python is explicitly NOT the goal here**
-//! (Contract deviation 6, `rust/parity/README.md`): Python's
-//! `guild.save_data`/`player.save_data`/`pal.character_save`/etc. return
-//! palworld-save-tools' GVAS-dict form (built by that library's own
-//! `decode`/property-tree walker), while this port serializes uesave's own
-//! typed tree straight through serde — two different, legitimately
-//! non-comparable JSON dialects for the same underlying save data. The
-//! parity replay (`psp-server/tests/parity.rs`'s `PARITY_STRUCTURAL_TYPES`)
-//! only checks that `get_raw_data` resolves to *some* non-empty JSON object
-//! when Python's did, never that the two dialects agree field-for-field. So
-//! this module's only real job is LOCATING the right subtree; a faithful
-//! `serde_json::to_value` of whatever `uesave` already parsed is enough --
-//! every `uesave::MapEntry`/`Properties`/`Property`/`Root` in this codebase
-//! already derives `Serialize` (`../uesave-rs/uesave/src/lib.rs`), so no new
-//! serializer is needed.
+//! Raw-data inspector: locates one already-chosen subtree of the loaded
+//! `Level.sav` and serializes it as-is. Target selection (and its priority
+//! order) is the caller's job.
 
 use crate::props;
 use crate::session::SaveSession;
@@ -28,8 +8,6 @@ use uuid::Uuid;
 
 use super::world;
 
-/// One of `get_raw_data`'s six id-addressed targets, or the whole loaded
-/// `Level.sav`.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum RawTarget {
     Guild(Uuid),
@@ -42,23 +20,11 @@ pub enum RawTarget {
 }
 
 impl SaveSession {
-    /// Locates `target`'s subtree in the currently loaded `Level.sav` and
-    /// serializes it via uesave's own `Serialize` impls. `None` when the
-    /// target's id doesn't resolve against this save — the caller
-    /// (`handlers::tools::handle_get_raw_data`) sends `{}` in that case,
-    /// matching Python's own `data = {}` fallback (`debug_handler.py`).
+    /// `None` when the target's id doesn't resolve against this save.
     ///
-    /// Each id-addressed variant re-derives its position index fresh from
-    /// `self.level` via the same `world::build_*_index` helpers
-    /// `domain::guild::build_guild_dto` already uses for the same purpose,
-    /// rather than reading `self.character_index`/`item_container_index`/
-    /// `character_container_index` — those three eager fields are written by
-    /// `SaveSession::load`/`rebuild_player_caches` but, per that field's own
-    /// audit, read by nothing else in this codebase either; every other
-    /// reader (guild/base/container detail loads) already re-derives its own
-    /// index on demand instead of trusting a field that could go stale
-    /// between a mutation and the next `rebuild_player_caches` call. A
-    /// read-only inspector has no reason to be the first exception.
+    /// Each id-addressed variant re-derives its position index fresh rather
+    /// than reading `self.character_index` and friends, which can be stale
+    /// between a mutation and the next `rebuild_player_caches` call.
     pub fn raw_json_for(&self, target: RawTarget) -> Option<serde_json::Value> {
         match target {
             RawTarget::Guild(id) => {
@@ -68,12 +34,9 @@ impl SaveSession {
                     .find(|entry| props::as_uuid(&entry.key) == Some(id))?;
                 serde_json::to_value(entry).ok()
             }
-            // A player's CharacterSaveParameterMap entry is addressed by
-            // PlayerUId + IsPlayer, exactly like get_player_details's own
-            // lookup (session.rs's entry_is_player/entry_player_uid) —
-            // NOT by character_index, which keys by InstanceId and would
-            // just as happily resolve a pal that happens to share no
-            // relationship with `id` at all.
+            // A player's entry is addressed by PlayerUId + IsPlayer, not by
+            // character_index, which keys by InstanceId and would resolve an
+            // unrelated pal.
             RawTarget::Player(id) => {
                 let entries = world::character_map(&self.level).ok()?;
                 let entry = entries.iter().find(|entry| {
@@ -106,11 +69,8 @@ impl SaveSession {
                 let entries = world::character_container_map(&self.level).ok()?;
                 serde_json::to_value(entries.get(position)?).ok()
             }
-            // The whole GVAS root (save_game_type + every top-level
-            // property, including worldSaveData) — Python's `level` branch
-            // returns `save_file.get_dict()`, the whole-file dict; `Root` is
-            // this port's closest analogue (Save's header/schemas/extra are
-            // (de)serializer plumbing, not save DATA).
+            // The GVAS root only: `Save`'s header/schemas/extra are
+            // (de)serializer plumbing, not save data.
             RawTarget::Level => serde_json::to_value(&self.level.root).ok(),
         }
     }
@@ -164,8 +124,7 @@ mod tests {
         }
     }
 
-    /// A character-map entry shaped like `domain::summaries`'s own test
-    /// helper: `PlayerUId`/`InstanceId` in the key, `IsPlayer` inside
+    /// `PlayerUId`/`InstanceId` in the key, `IsPlayer` inside
     /// `RawData.object.SaveParameter`.
     fn character_entry(player_uid: &str, instance_id: &str, is_player: bool) -> MapEntry {
         let mut key_properties = Properties::default();
@@ -220,9 +179,7 @@ mod tests {
         }
     }
 
-    /// Builds a `SaveSession` whose `worldSaveData` carries one populated
-    /// player entry, one pal entry, one guild, one base, one item container,
-    /// and one character container — enough for every `RawTarget` variant to
+    /// One entry of each kind -- enough for every `RawTarget` variant to
     /// resolve against a single fixture.
     fn session_with_every_target() -> SaveSession {
         let mut world_save_data = Properties::default();
@@ -276,9 +233,7 @@ mod tests {
         assert_resolves_to_non_empty_object(
             session.raw_json_for(RawTarget::Player(uid(PLAYER_ID))),
         );
-        // PAL_ID shares PLAYER_ID as its OwnerPlayerUId-equivalent key field
-        // in no way here -- but the pal entry's own InstanceId (PAL_ID) must
-        // NOT resolve as a Player target: it is IsPlayer=false.
+        // The pal entry's InstanceId must not resolve as a Player target.
         assert!(session
             .raw_json_for(RawTarget::Player(uid(PAL_ID)))
             .is_none());
@@ -307,8 +262,7 @@ mod tests {
 
     #[test]
     fn raw_json_for_base_is_none_when_base_camp_save_data_is_entirely_absent() {
-        // A young world that has never built a base at all -- BaseCampSaveData
-        // is optional (world.rs's own doc comment), so this must not panic.
+        // A world that has never built a base carries no BaseCampSaveData.
         let mut root_properties = Properties::default();
         root_properties.insert("worldSaveData", struct_property(Properties::default()));
         let session = SaveSession::new_for_tests(SaveKind::InMemory, minimal_save(root_properties));

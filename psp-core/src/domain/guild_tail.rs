@@ -1,25 +1,16 @@
-//! Thin accessors and mutation helpers over the structured guild group that
-//! `uesave` now owns.
+//! Accessors and mutation helpers over `uesave`'s structured guild group.
 //!
-//! Before the 2026-07 `uesave` refactor, `PalGroupData` carried a flat
-//! `remaining_data: Vec<u8>` blob and psp-core parsed/re-serialized the Guild
-//! branch of it by hand here (`GuildTail::parse`/`to_bytes`). `uesave` now
-//! decodes that blob into a structured `PalGroupVariant::Guild(PalGuildGroup)`
-//! and re-serializes it on save, so psp-core no longer needs (or wants) its
-//! own byte codec: it reads and mutates the structured fields directly, and
-//! `uesave` writes them back byte-for-byte on the next save.
+//! A guild's binary TAIL comes in two shapes, and a real save can be either:
+//! `PalGuildTail::PreUpdate` (`admin_player_uid` + `players` + trailing bytes)
+//! or `PalGuildTail::PostUpdate` (which additionally carries
+//! `guild_chest_allowed_roles`, a per-player `role` byte, and
+//! `role_permissions`). Every accessor and mutator here handles both and never
+//! assumes one.
 //!
-//! The one wrinkle is the guild TAIL. A real save's `PalGuildGroup::tail` is a
-//! two-shape enum: `PalGuildTail::PreUpdate` (the fixed pre-2026-07 layout:
-//! `admin_player_uid` + `players: Vec<PalPlayerInfo>` + trailing bytes) or
-//! `PalGuildTail::PostUpdate` (the 2026-07 layout, which additionally carries
-//! `guild_chest_allowed_roles`, per-player `role` bytes, and
-//! `role_permissions`). A real save can be EITHER, so every accessor and
-//! mutator below matches both shapes and never assumes one. Mutations touch
-//! only the field being changed (a player's uid, name, timestamp, the admin,
-//! the guild name/level, base ids), leaving every other tail field --
-//! markers, roles, role permissions, trailing bytes -- untouched so byte
-//! parity holds.
+//! Mutations touch only the field being changed, leaving markers, roles, role
+//! permissions, and trailing bytes intact -- `uesave` re-serializes the guild
+//! byte-for-byte on save, so any field clobbered here is a field corrupted in
+//! the save.
 
 use crate::props;
 use uesave::games::palworld::{
@@ -29,9 +20,7 @@ use uesave::games::palworld::{
 use uesave::{MapEntry, Property, StructValue};
 use uuid::Uuid;
 
-/// One guild member, as psp-core's edit paths carry it around (transfer's
-/// retargeted membership row). A plain data carrier, independent of which
-/// tail shape it ends up written into.
+/// One guild member, independent of which tail shape it is written into.
 pub struct GuildPlayerInfo {
     pub player_uid: Uuid,
     pub last_online_real_time: i64,
@@ -39,8 +28,7 @@ pub struct GuildPlayerInfo {
 }
 
 /// `entry.value.GroupType`, as its fully qualified enum variant name (e.g.
-/// `"EPalGroupType::Guild"`). `None` if `entry.value` isn't a user struct or
-/// carries no `GroupType` field.
+/// `"EPalGroupType::Guild"`).
 pub fn entry_group_type(entry: &MapEntry) -> Option<String> {
     let value_properties = props::struct_properties(&entry.value)?;
     props::get(value_properties, &["GroupType"])
@@ -48,9 +36,8 @@ pub fn entry_group_type(entry: &MapEntry) -> Option<String> {
         .map(str::to_string)
 }
 
-/// `entry.value.RawData`, decoded as the structured `PalGroupData` for a
-/// `GroupSaveDataMap` entry (only meaningful when `entry_group_type` returns
-/// `Some("EPalGroupType::Guild")`, but does not check that itself).
+/// A `GroupSaveDataMap` entry's `RawData` as structured `PalGroupData`. Does
+/// not check the group type; callers that need a guild must do that themselves.
 pub fn entry_group_data(entry: &MapEntry) -> Option<&PalGroupData> {
     let value_properties = props::struct_properties(&entry.value)?;
     match props::get(value_properties, &["RawData"])? {
@@ -59,9 +46,6 @@ pub fn entry_group_data(entry: &MapEntry) -> Option<&PalGroupData> {
     }
 }
 
-/// Mutable counterpart of `entry_group_data`, for the guild-edit write paths
-/// (rename, base camp level, player add/remove/retarget, admin swap) to
-/// mutate the structured guild fields in place.
 pub fn entry_group_data_mut(entry: &mut MapEntry) -> Option<&mut PalGroupData> {
     let value_properties = props::struct_props_mut(&mut entry.value)?;
     match props::get_mut(value_properties, &["RawData"])? {
@@ -70,10 +54,9 @@ pub fn entry_group_data_mut(entry: &mut MapEntry) -> Option<&mut PalGroupData> {
     }
 }
 
-/// The `PalGuildGroup` inside a `PalGroupData`, if its variant is `Guild`.
-/// Any other variant (`IndependentGuild`, `Organization`, `Unknown`) yields
-/// `None` -- the caller skips it, exactly as the old codec skipped a tail it
-/// could not parse.
+/// The `PalGuildGroup` inside a `PalGroupData`, if its variant is `Guild`. Any
+/// other variant (`IndependentGuild`, `Organization`, `Unknown`) yields `None`
+/// for the caller to skip.
 pub fn as_guild(group_data: &PalGroupData) -> Option<&PalGuildGroup> {
     match &group_data.data {
         PalGroupVariant::Guild(guild) => Some(guild),
@@ -81,7 +64,6 @@ pub fn as_guild(group_data: &PalGroupData) -> Option<&PalGuildGroup> {
     }
 }
 
-/// Mutable counterpart of `as_guild`.
 pub fn as_guild_mut(group_data: &mut PalGroupData) -> Option<&mut PalGuildGroup> {
     match &mut group_data.data {
         PalGroupVariant::Guild(guild) => Some(guild),
@@ -89,7 +71,6 @@ pub fn as_guild_mut(group_data: &mut PalGroupData) -> Option<&mut PalGuildGroup>
     }
 }
 
-/// The guild's `admin_player_uid`, from whichever tail shape it carries.
 pub fn guild_admin_uid(guild: &PalGuildGroup) -> Uuid {
     match &guild.tail {
         PalGuildTail::PreUpdate(tail) => props::guid_to_uuid(&tail.admin_player_uid),
@@ -97,7 +78,7 @@ pub fn guild_admin_uid(guild: &PalGuildGroup) -> Uuid {
     }
 }
 
-/// Every member's `player_uid`, in tail order, from whichever tail shape.
+/// Every member's `player_uid`, in tail order. The first is the guild admin.
 pub fn guild_player_uids(guild: &PalGuildGroup) -> Vec<Uuid> {
     match &guild.tail {
         PalGuildTail::PreUpdate(tail) => tail
@@ -113,7 +94,6 @@ pub fn guild_player_uids(guild: &PalGuildGroup) -> Vec<Uuid> {
     }
 }
 
-/// Number of members, from whichever tail shape.
 pub fn guild_player_count(guild: &PalGuildGroup) -> usize {
     match &guild.tail {
         PalGuildTail::PreUpdate(tail) => tail.players.len(),
@@ -121,7 +101,6 @@ pub fn guild_player_count(guild: &PalGuildGroup) -> usize {
     }
 }
 
-/// Whether `uid` is one of the guild's members.
 pub fn guild_has_player(guild: &PalGuildGroup, uid: Uuid) -> bool {
     match &guild.tail {
         PalGuildTail::PreUpdate(tail) => tail
@@ -135,9 +114,7 @@ pub fn guild_has_player(guild: &PalGuildGroup, uid: Uuid) -> bool {
     }
 }
 
-/// `(last_online_real_time, player_name)` for `uid`, if a member. Used by
-/// transfer to carry the source player's membership details onto the
-/// transferred player's row.
+/// `(last_online_real_time, player_name)` for `uid`, if a member.
 pub fn find_player_membership(guild: &PalGuildGroup, uid: Uuid) -> Option<(i64, String)> {
     match &guild.tail {
         PalGuildTail::PreUpdate(tail) => tail
@@ -163,8 +140,8 @@ pub fn find_player_membership(guild: &PalGuildGroup, uid: Uuid) -> Option<(i64, 
     }
 }
 
-/// The `role` byte `uid`'s row carries, for a `PostUpdate` guild. `None` for
-/// a `PreUpdate` guild (no per-player roles) or when `uid` is not a member.
+/// The `role` byte on `uid`'s row. `None` for a `PreUpdate` guild, whose tail
+/// has no per-player roles at all, or when `uid` is not a member.
 pub fn player_role(guild: &PalGuildGroup, uid: Uuid) -> Option<u8> {
     match &guild.tail {
         PalGuildTail::PreUpdate(_) => None,
@@ -176,9 +153,8 @@ pub fn player_role(guild: &PalGuildGroup, uid: Uuid) -> Option<u8> {
     }
 }
 
-/// Removes every member row matching `uid`. Returns the removed row's `role`
-/// (`PostUpdate` only; `None` for a `PreUpdate` guild or when `uid` was not a
-/// member) so a caller retargeting that same slot can preserve its role.
+/// Removes every member row matching `uid`, returning the removed row's `role`
+/// (`PostUpdate` only) so a caller retargeting that slot can preserve it.
 pub fn remove_player(guild: &mut PalGuildGroup, uid: Uuid) -> Option<u8> {
     match &mut guild.tail {
         PalGuildTail::PreUpdate(tail) => {
@@ -199,9 +175,8 @@ pub fn remove_player(guild: &mut PalGuildGroup, uid: Uuid) -> Option<u8> {
     }
 }
 
-/// Appends a member row. For a `PostUpdate` guild the row is given `role`
-/// (defaulting to `0` when `None`); for a `PreUpdate` guild `role` is
-/// irrelevant and ignored.
+/// Appends a member row. `role` defaults to `0` for a `PostUpdate` guild and is
+/// ignored entirely for a `PreUpdate` one.
 pub fn push_player(guild: &mut PalGuildGroup, member: &GuildPlayerInfo, role: Option<u8>) {
     match &mut guild.tail {
         PalGuildTail::PreUpdate(tail) => tail.players.push(PalPlayerInfo {
@@ -222,8 +197,8 @@ pub fn push_player(guild: &mut PalGuildGroup, member: &GuildPlayerInfo, role: Op
     }
 }
 
-/// Sets `last_online_real_time` on every member row matching `uid` (the
-/// timestamp-sync path updates all of a player's rows, no early break).
+/// Sets `last_online_real_time` on EVERY member row matching `uid` -- a tail can
+/// carry duplicate rows for one player, and all of them must stay in sync.
 pub fn set_player_last_online(guild: &mut PalGuildGroup, uid: Uuid, ticks: i64) {
     match &mut guild.tail {
         PalGuildTail::PreUpdate(tail) => {
@@ -244,8 +219,8 @@ pub fn set_player_last_online(guild: &mut PalGuildGroup, uid: Uuid, ticks: i64) 
 }
 
 /// Bidirectionally swaps `old_uid` <-> `new_uid` across the guild's
-/// `admin_player_uid` and every member `player_uid` (the uid-swap path).
-/// Every other field -- roles, names, timestamps, markers -- is untouched.
+/// `admin_player_uid` and every member `player_uid`. Roles, names, timestamps,
+/// and markers are untouched.
 pub fn swap_player_uids(guild: &mut PalGuildGroup, old_uid: Uuid, new_uid: Uuid) {
     fn swapped(current: Uuid, old_uid: Uuid, new_uid: Uuid) -> Option<Uuid> {
         if current == old_uid {
@@ -284,13 +259,9 @@ pub fn swap_player_uids(guild: &mut PalGuildGroup, old_uid: Uuid, new_uid: Uuid)
     }
 }
 
-/// Resets a (cloned template) guild to a fresh single-member guild owned by
-/// `admin_uid`: clears base ids and base-camp points, sets `base_camp_level`
-/// to 1, applies `guild_name`, sets the admin, and replaces the member list
-/// with the single `member` row. Preserves the tail SHAPE (`Pre`/`PostUpdate`)
-/// and every non-member field it carries (for `PostUpdate`:
-/// `guild_chest_allowed_roles`, `role_permissions`, and the single row's
-/// `role`, taken from `role`).
+/// Resets a cloned template guild to a fresh single-member guild owned by
+/// `admin_uid`. Preserves the tail shape and every non-member field it carries
+/// (`guild_chest_allowed_roles`, `role_permissions`, trailing bytes).
 pub fn reset_to_single_member(
     guild: &mut PalGuildGroup,
     guild_name: &str,
@@ -327,12 +298,9 @@ pub fn reset_to_single_member(
     }
 }
 
-/// Builds a `PalGuildGroup` with the pre-2026-07 (`PreUpdate`) tail shape --
-/// the fixed layout every guild used before `uesave` owned guild
-/// (de)serialization. A construction helper for tests and synthetic sessions
-/// (production never builds a guild from scratch; transfer clones a template
-/// instead). Empty `guild_markers` reproduce the old four-zero-byte marker
-/// count run exactly.
+/// Builds a `PalGuildGroup` with a `PreUpdate` tail, for tests and synthetic
+/// sessions. Production never builds a guild from scratch -- transfer clones a
+/// template instead.
 pub fn pre_update_guild(
     base_camp_level: i32,
     guild_name: &str,

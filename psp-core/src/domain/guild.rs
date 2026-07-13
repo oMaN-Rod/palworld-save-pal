@@ -1,5 +1,4 @@
-//! Guild-lookup helpers shared by pal-summary extraction (`domain::pal`,
-//! Task 5) and guild detail loading (Task 8).
+//! Guild lookup, detail loading, updates, and deletion.
 
 use std::collections::HashMap;
 
@@ -17,30 +16,12 @@ use uesave::{Properties, Property, PropertyKey, StructValue};
 use super::{containers, guild_tail, pal, world};
 
 /// From a `BaseCampSaveData` entry: `(group_id_belong_to, WorkerDirector
-/// container_id)`. Python paths: `value.RawData.value.group_id_belong_to`
-/// and `value.WorkerDirector.value.RawData.value.container_id`
-/// (`game/mixins/loading.py`'s `_load_base_camps`,
-/// `game/mixins/summaries.py`'s `_build_base_container_map`).
+/// container_id)`.
 ///
-/// Deviation from the brief: the brief's version of this function matched on
-/// `Property::Struct(StructValue::PalWorkerDirector(director))` and read
-/// `director.container_id`. Neither that variant nor that struct exists in
-/// `uesave-rs`. The API-shape checkpoint the brief called out was
-/// necessary but insufficient -- the real gap is one level up: `../uesave-
-/// rs/uesave/src/games/palworld/mod.rs` registers
-/// `worldSaveData.BaseCampSaveData.WorkerDirector.RawData` in its
-/// `struct_hints` list as a generic `StructType::Struct(None)`, and
-/// `is_pal_struct_type` (same file) does not recognize `Struct(None)` as
-/// Palworld-embedded data -- so `process_property_for_read` never attempts
-/// to decode that byte array at all. The property survives parsing as a
-/// plain, undecoded `Property::Array(ValueVec::Byte(ByteArray::Byte(bytes)))`,
-/// not any `StructValue` variant, typed or otherwise. Phase 1 already solved
-/// exactly this for `domain::summaries::guild_worker_container_ids`:
-/// `palbin::worker_director_container_id` is a bounds-checked, already-
-/// tested parser for this exact fixed 118-byte layout
-/// (`palworld_save_tools/rawdata/worker_director.py`'s `decode_bytes`) --
-/// this function reuses it rather than reinventing a byte parser or
-/// depending on a struct that doesn't exist.
+/// `uesave` registers `BaseCampSaveData.WorkerDirector.RawData` as a generic
+/// `Struct(None)` hint, which it never decodes, so the property arrives as a
+/// raw byte array. `palbin::worker_director_container_id` bounds-checks and
+/// parses that fixed 118-byte layout.
 pub fn base_guild_and_container(entry: &uesave::MapEntry) -> Option<(uuid::Uuid, uuid::Uuid)> {
     let value_properties = props::struct_props(&entry.value)?;
     let raw_data = props::get(value_properties, &["RawData"])?;
@@ -56,19 +37,11 @@ pub fn base_guild_and_container(entry: &uesave::MapEntry) -> Option<(uuid::Uuid,
     Some((guild_id, container_id))
 }
 
-/// `_find_player_guild_id` / the player-guild lookup (`game/mixins/loading.py`).
-/// Python branches on whether `self._player_guild_map_cache` happens to
-/// already be populated (a fast cached path that yields a single result) vs.
-/// a full fallback scan of every `EPalGroupType::Guild` group's `players`
-/// list -- but both branches converge on the exact same answer (the guild
-/// whose player list contains `player_id`), since the cache itself is only
-/// ever built BY that same fallback scan (`_build_player_guild_index`). This
-/// function reproduces that converged answer directly: build the full
-/// `player uid -> guild id` map once (caching it in `session.caches.
-/// player_guild_map`, mirroring the Python cache's role), then look up
-/// `player_id` in it. A guild-type group whose tail fails to parse
-/// contributes no entries rather than aborting the whole scan, matching this
-/// port's "skip malformed, don't panic" policy for untrusted save data.
+/// The guild whose member list contains `player_id`, via a cached
+/// `player uid -> guild id` map built on first call.
+///
+/// A guild group whose tail doesn't decode contributes no entries rather than
+/// aborting the scan: save data is untrusted, so malformed entries are skipped.
 pub fn find_player_guild_id(
     session: &mut crate::session::SaveSession,
     player_id: uuid::Uuid,
@@ -102,17 +75,6 @@ pub fn find_player_guild_id(
         .and_then(|map| map.get(&player_id).copied()))
 }
 
-// ============================================================================
-// Guild details, lab research, guild updates (Task 8) -- port of
-// `_load_guild_by_id`/`_load_bases_for_guild` (`game/mixins/loading.py`),
-// `Guild`/`Base`'s dumps (`game/guild.py`, `game/base.py`), and
-// `Guild.update_lab_research` (`guild.py:205-219`). `Guild.update_from`
-// (`guild.py:221-241`, wired up here as `apply_guild_dto`) is Task 10 scope
-// -- it depends on `apply_base_dto`/`apply_item_container_dto`, which don't
-// exist yet; adding a stub here would just have to be replaced, so it is
-// left out of this commit entirely (see this task's report).
-// ============================================================================
-
 pub fn guild_entry_index(
     session: &SaveSession,
     guild_id: uuid::Uuid,
@@ -122,15 +84,8 @@ pub fn guild_entry_index(
         .position(|entry| props::as_uuid(&entry.key) == Some(guild_id)))
 }
 
-/// Deviation from the brief: the brief's version did
-/// `world::guild_extra_map(&session.level)?.iter().position(...)`, which does
-/// not compile against the real signature (`GuildExtraSaveDataMap` is
-/// optional, so `world::guild_extra_map` returns
-/// `Result<Option<&Vec<MapEntry>>, CoreError>`, not `Result<&Vec<MapEntry>,
-/// CoreError>` -- see `world.rs`'s own doc comment on why the three optional
-/// maps get this treatment). `?` alone leaves an `Option<&Vec<MapEntry>>`,
-/// which has no `.iter()` that walks its *entries*; `.and_then` is needed to
-/// reach inside it first.
+/// `GuildExtraSaveDataMap` is optional in the save format, so a `None` result
+/// means either "no such map" or "no such guild in it".
 pub fn guild_extra_entry_index(
     session: &SaveSession,
     guild_id: uuid::Uuid,
@@ -143,16 +98,7 @@ pub fn guild_extra_entry_index(
     }))
 }
 
-/// `Guild._load_lab_research`'s raw-data lookup (`guild.py:176-203`):
-/// `guild_extra_data.value.Lab.value.RawData.value`, typed as `PalGuildLab`.
-///
-/// Deviation from the brief: the brief's version did
-/// `world::guild_extra_map(&session.level).ok()?`, which leaves an
-/// `Option<Option<&Vec<MapEntry>>>` collapsed by a single `?` into
-/// `Option<&Vec<MapEntry>>` -- one level short of the `&Vec<MapEntry>`
-/// `.get(extra_index)` needs (`Option` has no `.get()` method; that's
-/// `Vec`'s). `.ok().flatten()?` collapses both the `Result` and the
-/// `Option<Option<_>>` in one step.
+/// `GuildExtraSaveDataMap[i].Lab.RawData`, typed as `PalGuildLab`.
 fn guild_extra_lab(
     session: &SaveSession,
     extra_index: usize,
@@ -166,9 +112,8 @@ fn guild_extra_lab(
     }
 }
 
-/// `Guild.container_id`'s raw-data lookup (`guild.py:91-105`):
-/// `guild_extra_data.value.GuildItemStorage.value.RawData.value.container_id`.
-/// Same `.ok().flatten()?` fix as `guild_extra_lab` above.
+/// The guild chest's container id, from
+/// `GuildExtraSaveDataMap[i].GuildItemStorage.RawData.container_id`.
 fn guild_chest_container_id(session: &SaveSession, extra_index: usize) -> Option<uuid::Uuid> {
     let entries = world::guild_extra_map(&session.level).ok().flatten()?;
     let value_props = props::struct_props(&entries.get(extra_index)?.value)?;
@@ -182,16 +127,10 @@ fn guild_chest_container_id(session: &SaveSession, extra_index: usize) -> Option
     }
 }
 
-/// Base-container pal membership, matching `_load_pals_for_container`
-/// (`loading.py:317-346`) exactly: `slot_id = save_parameter.get("SlotId")`
-/// checks ONLY `"SlotId"` -- unlike `Pal.storage_slot`/`storage_id`'s getter
-/// (and `read_save_parameter_dto`, and the brief's own reference code for
-/// this function, which matched via `pal_dto.storage_id ==
-/// worker_container_id`), there is no `"SlotID"` fallback here. Every one of
-/// world1's 11 pals spells this property `"SlotId"` (0 use `"SlotID"`), so
-/// the two approaches happen to agree on this port's real-save fixtures; see
-/// this task's report for why the narrower, Python-literal check is used
-/// anyway.
+/// The container a base pal sits in, via `SaveParameter.SlotId.ContainerId.ID`.
+///
+/// Only the `"SlotId"` spelling is accepted here -- deliberately narrower than
+/// `pal::read_save_parameter_dto`, which also falls back to `"SlotID"`.
 pub(crate) fn base_container_membership(save_parameter: &Properties) -> Option<uuid::Uuid> {
     let slot = pal::param(save_parameter, "SlotId").and_then(props::struct_props)?;
     slot.0
@@ -201,11 +140,9 @@ pub(crate) fn base_container_membership(save_parameter: &Properties) -> Option<u
         .and_then(props::as_uuid)
 }
 
-/// `_get_map_object_index`/`_build_map_object_index` (`indexing.py:41-58`):
-/// groups every `MapObjectSaveData` element by
-/// `Model.RawData.value.base_camp_id_belong_to`, so `_load_bases_for_guild`
-/// can look a base's map objects up in O(1) instead of re-scanning
-/// `MapObjectSaveData` once per base.
+/// Groups every `MapObjectSaveData` element by its
+/// `Model.RawData.base_camp_id_belong_to`, so a base's map objects resolve in
+/// O(1) instead of rescanning the whole array once per base.
 fn map_object_properties_by_base_id(
     map_objects: &[StructValue],
 ) -> HashMap<uuid::Uuid, Vec<&Properties>> {
@@ -232,19 +169,7 @@ fn map_object_properties_by_base_id(
     index
 }
 
-/// Extracts `target_container_id` from an ItemContainer module's typed
-/// `RawData` (`base.py:214-219`'s
-/// `module["value"]["RawData"]["value"]["target_container_id"]`).
-///
-/// Deviation from the brief: the brief matched
-/// `Property::Struct(StructValue::PalMapConcreteModelModule(module))` and
-/// then matched enum variants directly on `module`, as if
-/// `PalMapConcreteModelModule` were itself the enum. The real `uesave-rs`
-/// shape (`map_concrete_model_module.rs`) is one level deeper:
-/// `PalMapConcreteModelModule` is a plain struct (`module_type`, `data`,
-/// `custom_version_data`), and the per-module-type enum
-/// (`PalMapConcreteModelModuleData`, with the `ItemContainer {
-/// target_container_id, .. }` variant this needs) lives at `module.data`.
+/// `target_container_id` from an ItemContainer module's typed `RawData`.
 fn module_target_container_id(raw_data: &Property) -> Option<uuid::Uuid> {
     let Property::Struct(StructValue::PalMapConcreteModelModule(module)) = raw_data else {
         return None;
@@ -258,22 +183,9 @@ fn module_target_container_id(raw_data: &Property) -> Option<uuid::Uuid> {
     }
 }
 
-/// `_load_guild_by_id` + `_load_bases_for_guild` + `Guild`'s dump
-/// (`game/mixins/loading.py:203-346`, `game/guild.py`, `game/base.py`).
-/// `None` when the guild id doesn't resolve at all, or when its
-/// `GuildExtraSaveDataMap` entry is missing (`loading.py:222-224`: "Guild
-/// extra save data not found for guild %s" -> the guild does not load).
-///
-/// Deviation from the brief: session mutation (`loaded_guilds`/
-/// `guild_summaries[..].loaded`) is split out of the read-heavy DTO build,
-/// mirroring Task 7's `get_player_details`/`build_player_dto` split -- the
-/// brief's version interleaved a `&mut SaveSession` through the whole
-/// function body, which either fights the borrow checker once bases/pals
-/// start borrowing `session.level` while other code paths want to mutate
-/// other `SaveSession` fields, or forces every helper to also take `&mut`
-/// for no reason. `build_guild_dto` below takes `&SaveSession` and does
-/// nothing but read; `get_guild_details` does the two field writes after it
-/// returns, once no borrow of `session.level` is outstanding.
+/// Loads a guild's full detail DTO. `None` when the guild id doesn't resolve,
+/// or when it has no `GuildExtraSaveDataMap` entry (a guild without one cannot
+/// be loaded at all).
 pub fn get_guild_details(
     session: &mut SaveSession,
     game_data: &GameData,
@@ -290,13 +202,6 @@ pub fn get_guild_details(
         return Ok(None);
     };
 
-    // loading.py:232-238: cached membership, then (after bases finish
-    // loading in Python; here, after the whole DTO -- including bases --
-    // has already been built) the summary's `loaded` flip. The two Python
-    // statements straddle `_load_bases_for_guild`; folding both builds into
-    // one pure function above and flipping both flags together afterward is
-    // an unobservable reordering (nothing in this task reads either flag
-    // mid-build).
     session.loaded_guilds.insert(guild_id);
     if let Some(summary) = session.guild_summaries.get_mut(&guild_id) {
         summary.loaded = true;
@@ -321,12 +226,8 @@ fn build_guild_dto(
             return Ok(None);
         };
         let players: Vec<uuid::Uuid> = guild_tail::guild_player_uids(guild);
-        // guild.py:76-77 (`self.players[0] if self.players else None`). Note:
-        // `Guild.players` itself raises `UnboundLocalError` in real Python
-        // when the raw player list is empty -- a genuine Python bug found
-        // while porting this, NOT on the PARITY-BUG list, and NOT
-        // reproduced here (see this task's report). An empty `players` here
-        // is a normal, non-panicking "no admin" case.
+        // The admin is the first member row in the guild tail; an empty member
+        // list is a normal "no admin" case, not an error.
         let admin = players.first().copied();
         (
             guild.guild_name.clone(),
@@ -336,7 +237,6 @@ fn build_guild_dto(
         )
     };
 
-    // lab research (guild.py:176-203, `lab_research`/`lab_research_data`).
     let lab_research: Vec<GuildLabResearchInfo> = guild_extra_lab(session, extra_index)
         .map(|lab| {
             lab.research_info
@@ -349,7 +249,6 @@ fn build_guild_dto(
         })
         .unwrap_or_default();
 
-    // guild chest (guild.py:91-105, 243-263).
     let mut caches_scratch = crate::session::WorldCaches::default();
     let container_id = guild_chest_container_id(session, extra_index);
     let guild_chest = container_id.and_then(|chest_id| {
@@ -363,7 +262,6 @@ fn build_guild_dto(
         )
     });
 
-    // bases (loading.py:244-315).
     let map_object_index = world::map_object_values(&session.level)?
         .map(|values| map_object_properties_by_base_id(values))
         .unwrap_or_default();
@@ -386,7 +284,7 @@ fn build_guild_dto(
     for (base_id, worker_container_id) in base_entries_info {
         let Some(container_entry_index) = character_container_index.get(&worker_container_id)
         else {
-            continue; // loading.py:291-293
+            continue;
         };
         let Some(container_view) =
             containers::read_character_container(&session.level, *container_entry_index)
@@ -394,7 +292,6 @@ fn build_guild_dto(
             continue;
         };
 
-        // base pals (loading.py:317-346).
         let mut base_pals: OrderedMap<uuid::Uuid, PalDto> = OrderedMap::new();
         for pal_entry in world::character_map(&session.level)? {
             if world::entry_is_player(pal_entry) {
@@ -412,7 +309,6 @@ fn build_guild_dto(
             base_pals.insert(pal_dto.instance_id, pal_dto);
         }
 
-        // base name / area_range / location (base.py's computed fields).
         let base_entry = base_camp_entries
             .iter()
             .find(|entry| props::as_uuid(&entry.key) == Some(base_id));
@@ -433,8 +329,8 @@ fn build_guild_dto(
             })
             .unwrap_or((None, None, None));
 
-        // storage containers: base map objects with an ItemContainer module
-        // (indexing.py:41-58 + base.py:196-228).
+        // A base's storage containers are its map objects that carry an
+        // ItemContainer module.
         let mut storage_containers: OrderedMap<uuid::Uuid, ItemContainerDto> = OrderedMap::new();
         let base_map_objects = map_object_index.get(&base_id).unwrap_or(&empty_map_objects);
         for object_props in base_map_objects.iter().copied() {
@@ -522,35 +418,14 @@ fn build_guild_dto(
     }))
 }
 
-/// `Guild.update_lab_research` (`guild.py:205-219`): full replacement of
-/// `research_info`; `current_research_id` and `trailing_bytes` untouched.
-/// Never touches `GroupSaveDataMap`'s raw guild-tail bytes -- this writes
-/// only into `GuildExtraSaveDataMap`'s `Lab.RawData` (a separate typed
-/// struct); see this task's report for the byte-identical proof that an
-/// untouched guild's raw tail survives a `get_guild_details`/
-/// `update_lab_research` call unchanged.
+/// Fully replaces the guild's lab `research_info`, leaving
+/// `current_research_id` and `trailing_bytes` alone. Writes only into
+/// `GuildExtraSaveDataMap`'s `Lab.RawData`, never the guild tail.
 ///
-/// `Err(GuildNotFound)` only when the guild id itself was never loaded (this
-/// port's stand-in for Python's `self._guilds[guild_id]` lookup, which would
-/// raise `KeyError` before `update_lab_research` is ever called on an
-/// unloaded guild -- Task 13's WS handler owns that guard in the real
-/// pipeline). Once the guild id itself resolves, every other failure --
-/// missing/malformed `GuildExtraSaveDataMap` entry, missing `Lab`, an
-/// untyped `Lab.RawData` -- is a silent no-op (`Ok(())`), matching Python's
-/// own `if not self._lab_raw_data: logger.error(...); return` (a log
-/// message, not an exception).
-///
-/// Deviation from the brief: the brief's version (a) indexed straight into
-/// `world::guild_extra_map_mut(&mut session.level)?` as if it returned
-/// `&mut Vec<MapEntry>` (it returns `Result<Option<&mut Vec<MapEntry>>,
-/// CoreError>` -- optional maps again, see `guild_extra_entry_index`'s doc
-/// comment above), and (b) assigned `info.work_amount` (an `f64` on
-/// `GuildLabResearchInfo`) directly into `PalLabResearchInfo.work_amount`
-/// (an `f32` in the real `uesave-rs` struct) with no cast, which does not
-/// type-check. Both are fixed below; `as f32` matches Python's own
-/// unavoidable narrowing (the persisted bytes are IEEE-754 single-precision,
-/// `PalLabResearchInfo::write`'s `ar.write_f32::<LE>`; Python's `float` is a
-/// double up until the moment `struct.pack`s it into the save).
+/// `Err(GuildNotFound)` only when the guild id itself is not loaded. Once it
+/// resolves, every other failure (missing extra entry, missing `Lab`, untyped
+/// `Lab.RawData`) is a silent no-op. `work_amount` narrows to `f32` because the
+/// save persists it as IEEE-754 single precision.
 pub fn update_lab_research(
     session: &mut SaveSession,
     guild_id: uuid::Uuid,
@@ -593,21 +468,10 @@ pub fn update_lab_research(
     Ok(())
 }
 
-// ============================================================================
-// Guild update (Task 10) -- port of `GuildOpsMixin.update_guilds`
-// (`guild_ops.py`) and `Guild.update_from` (`guild.py:221-241`).
-// ============================================================================
-
-/// The set of item-container ids that genuinely belong to `base_id`'s own
-/// storage (`Base._load_storage_containers`'s own enumeration,
-/// `base.py:196-228`): every `MapObjectSaveData` element for this base whose
-/// `ConcreteModel.ModuleMap` carries an `ItemContainer` module, resolved to
-/// its `target_container_id`. Used by `containers::apply_base_dto` to reject
-/// a `storage_containers` map key that doesn't actually belong to this base
-/// -- see that function's own doc comment for why this membership check is
-/// load-bearing, not decorative. A `base_id` this port can't resolve at all
-/// yields an empty set (matches the caller's own "skip, never panic" policy
-/// for a not-found base).
+/// The item-container ids that genuinely belong to `base_id`'s own storage.
+/// `containers::apply_base_dto` uses this to reject a client-supplied
+/// `storage_containers` key that doesn't belong to this base. An unresolvable
+/// `base_id` yields an empty set rather than an error.
 pub(crate) fn base_storage_container_ids(
     session: &SaveSession,
     base_id: uuid::Uuid,
@@ -656,30 +520,16 @@ pub(crate) fn base_storage_container_ids(
     ids
 }
 
-/// `Guild.container_id`'s resolution (`guild.py:91-105`), reused by
-/// `apply_guild_dto` so a guild-chest edit routes through the SESSION's own
-/// resolved container id, never `guildDTO.guild_chest.id` (a client-supplied
-/// value) -- same "never trust the payload's own id for routing" rule
-/// `player::apply_player_dto`'s doc comment establishes for a player's five
-/// containers.
+/// The guild chest's container id as resolved from the save itself. Guild-chest
+/// edits route through this, never through the client-supplied
+/// `GuildDto::guild_chest.id`, so a forged id cannot redirect the write.
 pub(crate) fn guild_chest_id(session: &SaveSession, guild_id: uuid::Uuid) -> Option<uuid::Uuid> {
     let extra_index = guild_extra_entry_index(session, guild_id).ok().flatten()?;
     guild_chest_container_id(session, extra_index)
 }
 
-/// Port of `GuildOpsMixin.update_guilds` (`guild_ops.py`): progress message
-/// names the guild's UUID (`guild_ops.py:113-114`), not its name.
-///
-/// `_game_data` is currently unused by this call chain (`apply_guild_dto`'s
-/// own internals need no `GameData` -- see `apply_item_container_dto`'s doc
-/// comment on why that's true all the way down). Kept, not removed: this
-/// port's whole `update_*` family (`pal::update_pals`/`update_dps_pals`,
-/// this function, `player::update_players`) shares one uniform
-/// `(session, game_data, modified, progress)` public signature, matching
-/// this task's own established convention -- `update_pals` genuinely needs
-/// it. Changing only this one public entry point's shape for an internal
-/// implementation detail would be a bigger, less obviously safe edit than
-/// this task's review asked for.
+/// `_game_data` is unused here; the whole `update_*` family shares one uniform
+/// `(session, game_data, modified, progress)` signature.
 pub fn update_guilds(
     session: &mut SaveSession,
     _game_data: &GameData,
@@ -693,8 +543,6 @@ pub fn update_guilds(
     Ok(())
 }
 
-/// Port of `Guild.update_from` (`guild.py:221-241`). No `game_data:
-/// &GameData` parameter -- see `apply_item_container_dto`'s doc comment.
 pub fn apply_guild_dto(
     session: &mut SaveSession,
     guild_id: uuid::Uuid,
@@ -711,15 +559,16 @@ pub fn apply_guild_dto(
         let Some(guild) = guild_tail::as_guild_mut(group_data) else {
             return Err(CoreError::Parse("guild group data untyped".into()));
         };
-        // `if guildDTO.name:` -- Python truthiness (None AND "" both skip).
+        // An absent OR empty name means "leave it alone", per this API's
+        // contract.
         if let Some(name) = &dto.name {
             if !name.is_empty() {
                 guild.guild_name = name.clone();
             }
         }
-        // `if guildDTO.base_camp_level:` -- 0 is falsy, mirror that. uesave
-        // re-serializes the structured guild on save, so mutating the field
-        // in place is the whole write -- no blob re-encode needed.
+        // Likewise level 0 means "leave it alone". uesave re-serializes the
+        // structured guild on save, so mutating the field in place is the whole
+        // write -- no blob re-encode needed.
         if let Some(level) = dto.base_camp_level {
             if level != 0 {
                 guild.base_camp_level = level;
@@ -731,9 +580,8 @@ pub fn apply_guild_dto(
             super::containers::apply_base_dto(session, *base_id, base_dto)?;
         }
     }
-    // `if guildDTO.guild_chest and self.guild_chest is not None:` -- both
-    // sides collapse to "the guild's real chest resolves", checked via
-    // `guild_chest_id` rather than trusting `dto.guild_chest.id`.
+    // Route the chest edit through the id resolved from the save, not the
+    // client-supplied `dto.guild_chest.id`.
     if dto.guild_chest.is_some() {
         if let Some(chest_id) = guild_chest_id(session, guild_id) {
             if let Some(chest_dto) = &dto.guild_chest {
@@ -744,44 +592,15 @@ pub fn apply_guild_dto(
     Ok(())
 }
 
-// ============================================================================
-// delete_player / delete_guild (Task 11) -- port of
-// `GuildOpsMixin.delete_guild_and_players`/`_should_delete_map_object`
-// (`guild_ops.py`) and `Guild.delete_player` (`guild.py:159-170`, wired up
-// in `domain::player::delete_player`).
-// ============================================================================
-
-/// `_should_delete_map_object` (`guild_ops.py`): delete a `MapObjectSaveData`
-/// element when `Model.RawData.group_id_belong_to == guild_id`, OR
-/// `Model.RawData.build_player_uid` is one of `player_ids`, OR (ItemBooth
-/// concrete models only) `private_lock_player_uid` or any
+/// Delete a `MapObjectSaveData` element when `Model.RawData.group_id_belong_to`
+/// is `guild_id`, OR `Model.RawData.build_player_uid` is one of `player_ids`,
+/// OR (ItemBooth concrete models only) `private_lock_player_uid` or any
 /// `trade_infos[].seller_player_uid` is one of `player_ids`.
 ///
-/// **The `ConcreteModel`'s `ModuleMap`/`PasswordLock` branch is deliberately
-/// NOT implemented here -- a newly-found Python bug, not on the known list,
-/// reproduced by omission (required for byte parity: whether a given map
-/// object survives a delete is directly observable in the written save).**
-/// Python's own check reads `concrete_model_raw_data.get("ModuleMap", {})
-/// .get("value", [])`, where `concrete_model_raw_data =
-/// map_object["ConcreteModel"]["value"]["RawData"]["value"]` -- i.e. it
-/// looks for a `"ModuleMap"` key INSIDE the decoded, per-object-type
-/// `RawData` dict. But `palworld_save_tools/rawdata/map_object.py::decode`
-/// populates `ModuleMap` as a SIBLING of `RawData`
-/// (`map_object["ConcreteModel"]["value"]["ModuleMap"]["value"]`, walked in
-/// its own separate loop right after `RawData` is decoded), never nested
-/// inside it -- verified against every per-object-type decoder in
-/// `rawdata/map_concrete_model.py` (`PalMapObjectItemBoothModel` et al.),
-/// none of which ever produce a `"ModuleMap"` key of their own. Real
-/// Python's `.get("ModuleMap", {})` therefore ALWAYS returns the
-/// empty-dict default, and the PasswordLock loop body never executes for
-/// any real save -- dead code. Reproduced here by never implementing that
-/// branch at all (an unconditional non-match), rather than "fixing" it into
-/// a functional check, which is what the brief's own reference code did:
-/// it read `ModuleMap` from the CORRECT sibling location under this port's
-/// own `uesave-rs`-typed shape (`concrete_props.0.get("ModuleMap")`,
-/// alongside `RawData`, not nested inside it) -- accidentally MORE correct
-/// than Python, and therefore byte-divergent from what real Python actually
-/// deletes. See this task's report.
+/// A `ConcreteModel.ModuleMap` `PasswordLock` module recording a target player
+/// is deliberately NOT a delete trigger: the game never treats a lock record as
+/// ownership, and honoring it here would destroy map objects other players
+/// merely had access to.
 pub(crate) fn should_delete_map_object(
     map_object: &StructValue,
     guild_id: Option<uuid::Uuid>,
@@ -811,8 +630,7 @@ pub(crate) fn should_delete_map_object(
         return true;
     }
 
-    // ItemBooth edge cases (guild_ops.py:141-162): private lock owner, or
-    // any trade-info seller.
+    // ItemBooth edge cases: private lock owner, or any trade-info seller.
     let Some(concrete_props) = object_props
         .0
         .get(&PropertyKey::from("ConcreteModel"))
@@ -842,49 +660,15 @@ pub(crate) fn should_delete_map_object(
     false
 }
 
-/// Port of `delete_guild_and_players` (`guild_ops.py`). `Err` when
-/// `guild_id` was never loaded (matching Python's `guild =
-/// self._guilds.get(guild_id); if not guild: raise ValueError(...)`, before
-/// any mutation) -- checked directly via `session.loaded_guilds`, NOT by
-/// calling `get_guild_details` first, which would lazily LOAD an unloaded
-/// guild as a side effect that real Python's plain dict `.get` here never
-/// has. Once confirmed loaded, `get_guild_details` is safe to call for its
-/// `GuildDto` (its `loaded_guilds.insert`/`guild_summaries[..].loaded = true`
-/// side effects are no-ops on an already-loaded guild).
+/// Deletes a guild, its bases, its map objects, and its loaded members.
 ///
-/// **Never deletes the guild's own item-storage container (the "chest") --
-/// a newly-found Python bug, not on the known list, reproduced for byte
-/// parity, and a deliberate divergence from the brief.** The brief's own
-/// reference code added an explicit extra `delete_item_containers(session,
-/// &[chest_id])` call, justified as approximating a described Python
-/// fallback. That justification does not hold up against
-/// `_delete_item_containers`'s actual fallback condition (`guild_ops.py`):
-/// the fallback only fires PER CONTAINER ID ALREADY IN THE CALLER'S OWN
-/// LIST, when that specific id isn't found by direct lookup -- and
-/// `container_ids_to_delete` here is built ONLY from player containers and
-/// base storage containers (`base.storage_containers.keys()`); the guild's
-/// own `container_id` (the chest) is NEVER added to that list at all, so
-/// neither the primary lookup nor the fallback ever considers it. Real
-/// Python therefore leaves the guild chest as a permanently orphaned
-/// `ItemContainerSaveData` entry after `delete_guild_and_players` runs --
-/// not fixed here. See this task's report.
+/// `Err` when `guild_id` isn't loaded. The check reads `session.loaded_guilds`
+/// directly rather than calling `get_guild_details`, which would lazily load an
+/// unloaded guild as a side effect.
 ///
-/// **The second, buggy `_delete_item_containers(player_id,
-/// container_ids_to_delete)` call in `guild_ops.py` is a THIRD newly-found
-/// Python bug, NOT reproduced.** After the guild's players/bases are fully
-/// processed, real Python calls `_delete_item_containers` TWICE: once with
-/// `target_id=guild_id` (the real, correct pass), then AGAIN with
-/// `target_id=player_id` -- a name that, at that point in the function, is
-/// whatever value survives from the earlier `for player_id in
-/// guild.players:` loop (the LAST guild member processed; an
-/// `UnboundLocalError` if `guild.players` was ever empty). By the second
-/// call, every id in `container_ids_to_delete` has ALREADY been removed by
-/// the first call, so every one of them takes the FALLBACK branch this
-/// time: a linear scan for any container whose `BelongInfo.GroupId` equals
-/// that stale, unrelated player id, deleted on a match. This does nothing
-/// to help delete the guild's own correct containers (already done by the
-/// first call) and risks an unpredictable extra deletion this port declines
-/// to gamble on reproducing; not implemented. See this task's report.
+/// Only player containers and base storage containers are collected for
+/// deletion; the guild's own chest container is intentionally left behind as an
+/// orphaned `ItemContainerSaveData` entry.
 pub fn delete_guild_and_players(
     session: &mut SaveSession,
     game_data: &GameData,
@@ -905,7 +689,6 @@ pub fn delete_guild_and_players(
         guild_players.len()
     ));
 
-    // Map objects owned by the guild or its players (guild_ops.py:50-55).
     if let Some(values) = world::map_object_values_mut(&mut session.level)? {
         values.retain(|map_object| {
             !should_delete_map_object(map_object, Some(guild_id), &guild_players)
@@ -915,9 +698,8 @@ pub fn delete_guild_and_players(
     let mut item_container_ids: Vec<uuid::Uuid> = Vec::new();
     let mut character_container_ids: Vec<uuid::Uuid> = Vec::new();
 
-    // Every loaded guild player (guild_ops.py:57-65): an unloaded member is
-    // skipped entirely, matching Python's `if player_id not in self._players:
-    // continue`.
+    // An unloaded member is skipped entirely -- their containers and pals are
+    // only knowable from their own loaded `.sav`.
     for player_uid in &guild_players {
         if !session.loaded_players.contains_key(player_uid) {
             continue;
@@ -938,12 +720,10 @@ pub fn delete_guild_and_players(
         character_container_ids.extend(player_characters);
     }
 
-    // GuildExtraSaveDataMap entry (guild_ops.py:67-72).
     if let Some(entries) = world::guild_extra_map_mut(&mut session.level)? {
         entries.retain(|entry| props::as_uuid(&entry.key) != Some(guild_id));
     }
 
-    // Every base (guild_ops.py:74-87).
     if let Some(bases) = &details.bases {
         for (base_id, base) in bases.iter() {
             progress(&format!("Deleting base {base_id}"));
@@ -952,16 +732,9 @@ pub fn delete_guild_and_players(
                 character_container_ids.push(worker_container);
             }
             let base_pal_ids: Vec<uuid::Uuid> = base.pals.iter().map(|(id, _)| *id).collect();
-            // `Guild.delete_base_pal` (guild.py:143-146), via
-            // `PalOpsMixin.delete_guild_pals` -- unlike the brief's own
-            // reference code (a raw `delete_pal_entry` per id, which skips
-            // the guild-handle cleanup `delete_base_pal` actually does),
-            // this reuses the existing, already-reviewed Task 9 op so a
-            // base pal's `individual_character_handle_ids` entry is removed
-            // too, matching Python's real behavior for base pals exactly
-            // (contrast with player pals -- see
-            // `delete_player_and_pals_for_guild`'s own doc comment on why
-            // THOSE are deliberately left dangling instead).
+            // `delete_guild_pals` (not a raw `delete_pal_entry` per id) so each
+            // base pal's `individual_character_handle_ids` entry in the guild
+            // tail is removed too.
             super::pal::delete_guild_pals(session, guild_id, *base_id, &base_pal_ids)?;
             if let Some(entries) = world::base_camp_map_mut(&mut session.level)? {
                 entries.retain(|entry| props::as_uuid(&entry.key) != Some(*base_id));
@@ -977,7 +750,6 @@ pub fn delete_guild_and_players(
     ));
     super::containers::delete_character_containers(session, &character_container_ids)?;
 
-    // The group entry itself (guild_ops.py:98-104).
     world::group_map_mut(&mut session.level)?
         .retain(|entry| props::as_uuid(&entry.key) != Some(guild_id));
     session.loaded_guilds.remove(&guild_id);
@@ -1204,10 +976,7 @@ mod tests {
         let guild_id = find_player_guild_id(&mut session, PLAYER_ID.parse().unwrap()).unwrap();
 
         assert_eq!(guild_id, Some(GUILD_ID.parse().unwrap()));
-        // The cache is now warm; a second lookup must return the same answer
-        // without needing to re-scan (this only proves the answer stays
-        // correct across calls -- the "no re-scan" half is a performance
-        // claim this test does not attempt to measure).
+        // A second lookup, now against the warm cache, must agree.
         let guild_id_again =
             find_player_guild_id(&mut session, PLAYER_ID.parse().unwrap()).unwrap();
         assert_eq!(guild_id_again, Some(GUILD_ID.parse().unwrap()));
@@ -1233,8 +1002,7 @@ mod tests {
     }
 
     /// A `GroupSaveDataMap` entry whose `GroupType` isn't `Guild` (an alliance,
-    /// say) must never be scanned for a player match -- matching Python's own
-    /// `if GroupType.from_value(group_type) != GroupType.GUILD: continue`.
+    /// say) must never be scanned for a player match.
     #[test]
     fn find_player_guild_id_ignores_non_guild_groups() {
         let mut value_properties = Properties::default();
@@ -1242,9 +1010,6 @@ mod tests {
             "GroupType",
             Property::Enum("EPalGroupType::Alliance".to_string()),
         );
-        // A non-guild group's `data` never decodes to the Guild variant; the
-        // exact fallback contents are irrelevant since this entry must be
-        // skipped on its `GroupType` alone.
         let group_data = PalGroupData {
             group_id: fguid(GUILD_ID),
             group_name: String::new(),
@@ -1284,13 +1049,7 @@ mod tests {
         save_parameter
     }
 
-    /// `_load_pals_for_container` (`loading.py:317-346`) reads ONLY
-    /// `"SlotId"` -- real save data's actual spelling (verified: 11/11
-    /// world1 pals). Deliberate divergence from the brief, which matched
-    /// base-container membership via `pal_dto.storage_id ==
-    /// worker_container_id` (the DIFFERENT "SlotID"-first-then-"SlotId"-
-    /// fallback rule `Pal.storage_id`'s getter uses) -- see this function's
-    /// own doc comment and this task's report.
+    /// `"SlotId"` is real save data's actual spelling (11/11 world1 pals).
     #[test]
     fn base_container_membership_resolves_the_real_slot_id_spelling() {
         let container_id = uuid::Uuid::parse_str(CONTAINER_ID).unwrap();
@@ -1302,9 +1061,8 @@ mod tests {
         );
     }
 
-    /// The uppercase spelling `Pal.storage_id`'s getter checks FIRST must
-    /// resolve to `None` here -- proving the two behaviors genuinely
-    /// differ, not merely that one of them fails for an unrelated reason.
+    /// The uppercase spelling `read_save_parameter_dto` accepts must resolve to
+    /// `None` here -- the two lookups genuinely differ.
     #[test]
     fn base_container_membership_does_not_fall_back_to_slot_id_uppercase() {
         let container_id = uuid::Uuid::parse_str(CONTAINER_ID).unwrap();
@@ -1313,12 +1071,11 @@ mod tests {
         assert_eq!(
             base_container_membership(&save_parameter),
             None,
-            "loading.py's _load_pals_for_container has no \"SlotID\" fallback"
+            "base-container membership has no \"SlotID\" fallback"
         );
 
-        // Establish the contrast: `read_save_parameter_dto`'s
-        // `Pal.storage_id`-equivalent getter DOES resolve this same
-        // uppercase-spelled property.
+        // Contrast: `read_save_parameter_dto` DOES resolve the uppercase
+        // spelling.
         let mut with_character_id = save_parameter;
         with_character_id.insert("CharacterID", crate::props::name_property("SheepBall"));
         let json_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../data/json");
@@ -1331,12 +1088,11 @@ mod tests {
         );
         assert_eq!(
             dto.storage_id, container_id,
-            "Pal.storage_id's getter checks \"SlotID\" first"
+            "read_save_parameter_dto checks \"SlotID\" first"
         );
     }
 
-    /// No slot property at all (neither spelling): a clean `None`, not a
-    /// panic -- matches Python's `if not slot_id: ...; continue`.
+    /// No slot property at all (neither spelling): a clean `None`, not a panic.
     #[test]
     fn base_container_membership_returns_none_when_no_slot_property_present() {
         let save_parameter = Properties::default();
@@ -1432,12 +1188,11 @@ mod tests {
         object_props.insert("Model", Property::Struct(StructValue::Struct(model_props)));
         if concrete_raw_data.is_some() || module_map.is_some() {
             let mut concrete_props = Properties::default();
-            // Every real `MapObjectSaveData` element decodes `ConcreteModel.
-            // RawData` unconditionally (`map_object.py::decode`), whatever
-            // the object type -- an `Unknown`/`BaseModel` fallback when the
-            // module_map-only caller doesn't care which concrete type this
-            // is. Omitting `RawData` entirely (as an earlier revision of
-            // this helper did) is not a shape any real save produces.
+            // Every real `MapObjectSaveData` element carries a
+            // `ConcreteModel.RawData` whatever its object type, so callers that
+            // only care about `ModuleMap` still get a `BaseModel` fallback here
+            // -- an element with no `RawData` at all is not a shape any real
+            // save produces.
             let raw_data = concrete_raw_data.unwrap_or_else(|| {
                 Property::Struct(StructValue::PalMapConcreteModel(Box::new(
                     uesave::games::palworld::PalMapConcreteModel {
@@ -1548,16 +1303,10 @@ mod tests {
         assert!(should_delete_map_object(&object, None, &[player]));
     }
 
-    /// **The dead-code reproduction, pinned.** A map object with NO group/
-    /// builder/item-booth match, but whose `ConcreteModel.ModuleMap` (the
-    /// SIBLING location -- not nested inside `RawData`, matching the real
-    /// property tree shape) carries a `PasswordLock` module recording the
-    /// target player's uid, must NOT be deleted. If a "fixed" (functional)
-    /// PasswordLock check were implemented instead of this reproduction,
-    /// this assertion would flip to `true` and this test would fail --
-    /// proving the omission is load-bearing, not a no-op no one would
-    /// notice. See `should_delete_map_object`'s own doc comment for the
-    /// Python-source citation this reproduces.
+    /// A map object with no group/builder/item-booth match, but whose
+    /// `ConcreteModel.ModuleMap` carries a `PasswordLock` module recording the
+    /// target player's uid, must NOT be deleted -- a lock record is access, not
+    /// ownership. Pins that the omission is load-bearing.
     #[test]
     fn should_delete_map_object_never_matches_via_password_lock_module_dead_code() {
         use uesave::games::palworld::{
@@ -1593,10 +1342,7 @@ mod tests {
 
         assert!(
             !should_delete_map_object(&object, None, &[player]),
-            "PasswordLock's player_infos must never be consulted -- real Python's \
-             equivalent lookup targets the wrong (nested-in-RawData) location and \
-             is unreachable dead code; a functional check here would diverge from \
-             Python's actual byte-visible output"
+            "PasswordLock's player_infos must never be consulted"
         );
     }
 

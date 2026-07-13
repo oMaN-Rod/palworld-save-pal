@@ -1,9 +1,4 @@
-//! Player/guild summary extraction — port of
-//! `palworld_save_pal/game/mixins/summaries.py`'s sequential path. Python
-//! switches to a thread pool above two players purely for throughput; that
-//! path's map-insertion order is nondeterministic, which is exactly why the
-//! parity harness (Task 10) restricts itself to <=2-player saves. This port
-//! never parallelizes summary extraction, so it has no such gap to avoid.
+//! Player/guild summary extraction.
 
 use std::collections::{BTreeMap, HashMap};
 
@@ -21,12 +16,8 @@ use super::guild_tail;
 const GROUP_TYPE_GUILD: &str = "EPalGroupType::Guild";
 
 /// `entry.value.RawData(.PalCharacterData).object.SaveParameter` — the
-/// property bag every other accessor in this module reads from. Mirrors the
-/// `try/except (KeyError, TypeError): continue` guard Python wraps around
-/// this same chain (`_categorize_character_entries`, `_count_guild_base_pals`
-/// in `mixins/summaries.py`): a missing or mistyped link anywhere in the
-/// chain returns `None` rather than panicking — the character entry it
-/// belongs to is simply skipped by the caller.
+/// property bag every other accessor in this module reads from. A missing or
+/// mistyped link anywhere in the chain yields `None`; callers skip the entry.
 pub(crate) fn save_parameter(entry: &uesave::MapEntry) -> Option<&uesave::Properties> {
     let value_properties = props::struct_properties(&entry.value)?;
     let raw_data = props::get(value_properties, &["RawData"])?;
@@ -37,29 +28,20 @@ pub(crate) fn save_parameter(entry: &uesave::MapEntry) -> Option<&uesave::Proper
     props::get(&character_data.object, &["SaveParameter"]).and_then(props::struct_properties)
 }
 
-/// Port of `SaveManager._is_player`, taking the already-resolved save
-/// parameter bag rather than the raw map entry: `IsPlayer` bool, defaulting
-/// to `false` when the property is absent.
+/// `IsPlayer`, defaulting to `false` when the property is absent.
 pub(crate) fn is_player_entry(save_parameter: &uesave::Properties) -> bool {
     props::get(save_parameter, &["IsPlayer"])
         .and_then(props::as_bool)
         .unwrap_or(false)
 }
 
-/// `entry.key.PlayerUId` as a `Uuid`, if present and well-typed.
 fn player_uid_from_key(entry: &uesave::MapEntry) -> Option<Uuid> {
     props::get_in(&entry.key, &["PlayerUId"]).and_then(props::as_uuid)
 }
 
-/// Locates a `GroupSaveDataMap` entry's decoded guild tail, for an entry
-/// whose `GroupType` is `EPalGroupType::Guild` and whose `RawData` decodes
-/// cleanly. Deliberately does **not** filter out a nil guild id: this
-/// mirrors `_build_player_guild_index`, which only `continue`s when
-/// `guild_id` extraction itself fails (`if not guild_id`) — a resolved nil
-/// UUID is still a truthy Python `UUID` object and is kept. The *stricter*
-/// nil check Python applies in `_extract_guild_summaries`
-/// (`if not guild_id or is_empty_uuid(guild_id)`) lives only in
-/// `build_guild_summaries`, not here — see that function.
+/// A `GroupSaveDataMap` entry's decoded guild, when it is a Guild-type group
+/// whose `RawData` decodes cleanly. A nil guild id is deliberately kept here;
+/// only `build_guild_summaries` filters it out.
 fn guild_tail_entry(entry: &uesave::MapEntry) -> Option<(Uuid, &PalGuildGroup)> {
     let value_properties = props::struct_properties(&entry.value)?;
     let group_type = props::get(value_properties, &["GroupType"]).and_then(props::as_enum)?;
@@ -75,7 +57,6 @@ fn guild_tail_entry(entry: &uesave::MapEntry) -> Option<(Uuid, &PalGuildGroup)> 
     Some((guild_id, guild))
 }
 
-/// Port of `_build_player_guild_index`.
 pub(crate) fn build_player_guild_map(group_entries: &[uesave::MapEntry]) -> HashMap<Uuid, Uuid> {
     let mut player_guild_map = HashMap::new();
     for entry in group_entries {
@@ -89,10 +70,8 @@ pub(crate) fn build_player_guild_map(group_entries: &[uesave::MapEntry]) -> Hash
     player_guild_map
 }
 
-/// Port of the pal-owner-counting half of `_categorize_character_entries`:
-/// every non-player character entry's `OwnerPlayerUId`, including the nil
-/// UUID — Python's `if owner_uid:` never filters it out, since `UUID`
-/// objects (even the nil one) are always truthy.
+/// Counts every non-player character entry against its `OwnerPlayerUId`,
+/// including the nil UUID (wild/unowned pals get their own bucket).
 pub(crate) fn build_pal_owner_counts(character_entries: &[uesave::MapEntry]) -> HashMap<Uuid, i64> {
     let mut owner_counts = HashMap::new();
     for entry in character_entries {
@@ -111,9 +90,8 @@ pub(crate) fn build_pal_owner_counts(character_entries: &[uesave::MapEntry]) -> 
     owner_counts
 }
 
-/// Port of the player half of `_categorize_character_entries`: player
-/// character entries with a non-nil `PlayerUId`, paired with their save
-/// parameter bag.
+/// Player character entries with a non-nil `PlayerUId`, paired with their
+/// save parameter bag.
 pub(crate) fn collect_player_entries(
     character_entries: &[uesave::MapEntry],
 ) -> Vec<(Uuid, &uesave::Properties)> {
@@ -133,9 +111,7 @@ pub(crate) fn collect_player_entries(
 }
 
 /// Player-facing nickname: `NickName` if present and non-empty, otherwise
-/// `"Player (<uid8>)"`. Shared by `build_player_summary` and the
-/// no-`.sav`-file diagnostic in `extract_summaries` so both derive the same
-/// name Python's `_create_player_summary` computes.
+/// `"Player (<uid8>)"`.
 fn player_nickname(uid: Uuid, save_parameter: &uesave::Properties) -> String {
     props::get(save_parameter, &["NickName"])
         .and_then(props::as_str)
@@ -144,12 +120,8 @@ fn player_nickname(uid: Uuid, save_parameter: &uesave::Properties) -> String {
         .unwrap_or_else(|| format!("Player ({})", &uid.to_string()[..8]))
 }
 
-/// Port of `_create_player_summary`'s pure part: nickname fallback, level,
-/// guild link, pal count. The caller supplies `last_online_time` because
-/// parsing the player's own `.sav` is I/O this function has no business
-/// doing — that stays a distinct step in `extract_summaries`, matching
-/// `_parse_player_gvas_and_timestamp` being a free function Python calls
-/// separately from `_create_player_summary`'s own logic.
+/// The caller supplies `last_online_time`: it comes from the player's own
+/// `.sav`, which this function does no I/O to read.
 pub(crate) fn build_player_summary(
     uid: Uuid,
     save_parameter: &uesave::Properties,
@@ -174,12 +146,9 @@ pub(crate) fn build_player_summary(
     }
 }
 
-/// Extracts a player save's `Timestamp` (.NET ticks) as a datetime, applying
-/// the zero-tick guard `_parse_player_gvas_and_timestamp` applies *before*
-/// calling `ticks_to_datetime` (`if not ticks: return gvas_file, None`):
-/// ticks of `0`, and any missing/mistyped `Timestamp` property, both mean
-/// "no timestamp". The guard belongs here, the caller — never inside
-/// `ticks_to_datetime` itself (see that function's doc comment).
+/// A player save's `Timestamp` (.NET ticks) as a datetime. Zero ticks means
+/// "never online", not the year 1 -- a save that has never been played writes
+/// `0` rather than omitting the property.
 fn last_online_time_from_root(properties: &uesave::Properties) -> Option<chrono::NaiveDateTime> {
     props::get(properties, &["Timestamp"])
         .and_then(props::as_datetime_ticks)
@@ -187,10 +156,8 @@ fn last_online_time_from_root(properties: &uesave::Properties) -> Option<chrono:
         .and_then(ticks_to_datetime)
 }
 
-/// Port of `_parse_player_gvas_and_timestamp`: parses a player `.sav`,
-/// returning the parsed save (for `player_sav_cache`) alongside its
-/// `Timestamp`. Any parse failure collapses to `(None, None)`, matching
-/// Python's blanket `except Exception: return None, None`.
+/// Any parse failure collapses to `(None, None)`: one corrupt player file
+/// must not fail the whole save load.
 fn parse_player_save_and_timestamp(
     sav_bytes: &[u8],
 ) -> (Option<uesave::Save>, Option<chrono::NaiveDateTime>) {
@@ -201,10 +168,9 @@ fn parse_player_save_and_timestamp(
     (Some(save), last_online_time)
 }
 
-/// Collects worker-container ids for every base belonging to `guild_id`
-/// (the first loop of `_count_guild_base_pals`). A base whose
-/// `WorkerDirector` blob fails to decode simply contributes no container
-/// id, rather than aborting the whole count.
+/// Worker-container ids for every base belonging to `guild_id`. A base whose
+/// `WorkerDirector` blob fails to decode contributes no container id rather
+/// than aborting the count.
 fn guild_worker_container_ids(base_camp_entries: &[uesave::MapEntry], guild_id: Uuid) -> Vec<Uuid> {
     let mut container_ids = Vec::new();
     for base_entry in base_camp_entries {
@@ -231,7 +197,6 @@ fn guild_worker_container_ids(base_camp_entries: &[uesave::MapEntry], guild_id: 
     container_ids
 }
 
-/// Port of `_extract_guild_summaries`'s `base_count` computation.
 fn base_count_for_guild(base_camp_entries: &[uesave::MapEntry], guild_id: Uuid) -> i64 {
     base_camp_entries
         .iter()
@@ -249,7 +214,8 @@ fn base_count_for_guild(base_camp_entries: &[uesave::MapEntry], guild_id: Uuid) 
         .count() as i64
 }
 
-/// Port of `_count_guild_base_pals`.
+/// Pals working at any of `guild_id`'s bases: those slotted into one of its
+/// bases' worker containers.
 fn count_guild_base_pals(
     base_camp_entries: Option<&[uesave::MapEntry]>,
     character_entries: &[uesave::MapEntry],
@@ -279,18 +245,11 @@ fn count_guild_base_pals(
         .count() as i64
 }
 
-/// Port of `_extract_guild_summaries`. Unlike `build_player_guild_map`,
-/// this explicitly filters out the nil guild UUID
-/// (`if not guild_id or is_empty_uuid(guild_id): continue`) — no summary is
-/// ever built for it.
+/// No summary is built for the nil guild UUID.
 ///
-/// Returns the `BTreeMap` alongside a `Vec<Uuid>` recording the order guild
-/// ids were actually inserted in (`group_entries`' own order, filtered) —
-/// Python's `_guild_summaries` dict preserves exactly this insertion order,
-/// and `sync_app_state_handler`'s wire `guilds` array reflects it (see
-/// `session.rs`'s `guild_summary_order` doc comment). The map alone cannot
-/// answer that question once entries are inserted, since `BTreeMap` always
-/// iterates in `Uuid`-sorted order regardless of insertion order.
+/// The returned `Vec<Uuid>` records save-file encounter order, which the wire
+/// `guilds` array must preserve — the `BTreeMap` itself always iterates in
+/// `Uuid`-sorted order and cannot answer that question.
 pub(crate) fn build_guild_summaries(
     group_entries: &[uesave::MapEntry],
     base_camp_entries: Option<&[uesave::MapEntry]>,
@@ -326,37 +285,20 @@ pub(crate) fn build_guild_summaries(
     (summaries, order)
 }
 
-/// Single entry point: extracts player summaries, then guild summaries, in
-/// that order — matching `AppState.process_save_files`'s progress-message
-/// sequence (`"Extracting player summaries..."` then
-/// `"Extracting guild summaries..."`). `SaveSession::load` (Task 7) calls
-/// this once, after building its typed indexes.
+/// Single entry point, called once per save load.
 ///
-/// Iteration order throughout is deterministic: `character_entries` and
-/// `group_entries` are plain slices walked in save-file order, and the two
-/// output maps (`session.player_summaries`, `session.guild_summaries`) are
-/// `BTreeMap`s keyed by `Uuid`. The `HashMap`s built along the way
-/// (`pal_owner_counts`, `player_guild_map`) are pure lookup tables — never
-/// iterated for output — so their unordered iteration never reaches the
-/// wire. No parallelism is used, unlike Python's >2-player thread pool.
-///
-/// The save-file walk order is ALSO recorded verbatim into
-/// `session.player_summary_order` / `session.guild_summary_order` — see
-/// `session.rs`'s doc comment on those fields for why: Python's
-/// `sync_app_state_handler` emits `player_summaries`/`guild_summaries` dict
-/// insertion order on the wire, not a `Uuid` sort, and this is where that
-/// order is captured before it would otherwise be lost to `BTreeMap`'s
-/// sorted iteration.
+/// Output is deterministic: the `HashMap`s built along the way are pure
+/// lookup tables, never iterated for output. Save-file walk order is captured
+/// into `player_summary_order`/`guild_summary_order` here, before the
+/// `Uuid`-sorted `BTreeMap`s would lose it.
 pub fn extract_summaries(
     session: &mut SaveSession,
     progress: &ProgressSink,
 ) -> Result<(), CoreError> {
     progress("Extracting player summaries...");
 
-    // `character_entries` and `group_entries` are resolved once and shared by
-    // both the player- and guild-summary passes below; both passes only ever
-    // borrow `session` immutably (`player_file_refs`, `base_camp_map`), so
-    // `session`'s fields are assigned once, together, at the very end.
+    // Both passes hold immutable borrows of `session`, so its fields are
+    // assigned once, together, at the very end.
     let character_entries = session.character_map()?;
     let group_entries = session.group_map()?;
 
@@ -368,14 +310,8 @@ pub fn extract_summaries(
     let mut parsed_player_saves = Vec::new();
     let mut filtered_without_sav_count: usize = 0;
     for (uid, parameters) in collect_player_entries(character_entries) {
-        // Mirrors `get_player_summaries`'s filter: in this port, a player
-        // entry with no `.sav` file reference never gets a summary at all
-        // (the reconciled `SaveSession.player_summaries` holds only the
-        // filtered map Python's `AppState` ends up with). Python logs a
-        // per-player warning plus an aggregate count for this same filter
-        // (`SummariesMixin.get_player_summaries`); this port emits the
-        // equivalent diagnostics here, at the point the filter is actually
-        // applied.
+        // A character entry with no `.sav` file behind it is a ghost the game
+        // cannot load; it gets no summary.
         let Some(file_ref) = session.player_file_refs.get(&uid) else {
             filtered_without_sav_count += 1;
             tracing::warn!(
@@ -424,9 +360,7 @@ pub fn extract_summaries(
     session.player_summary_order = player_summary_order;
     session.guild_summary_order = guild_summary_order;
     for (uid, parsed_save) in parsed_player_saves {
-        // Python: `if parsed_gvas is not None and uid not in
-        // self._player_gvas_sav_cache: self._player_gvas_sav_cache[uid] =
-        // parsed_gvas` — first parse wins, matched by `or_insert`.
+        // First parse wins: never evict a save the session already holds.
         session.player_sav_cache.entry(uid).or_insert(parsed_save);
     }
 
@@ -544,8 +478,7 @@ mod tests {
         }
     }
 
-    /// String-keyed convenience wrapper over `guild_tail::pre_update_guild`,
-    /// mirroring the old byte-tail test builder's signature.
+    /// String-keyed convenience wrapper over `guild_tail::pre_update_guild`.
     fn guild(
         base_camp_level: i32,
         guild_name: &str,
@@ -683,12 +616,10 @@ mod tests {
 
     #[test]
     fn test_player_summary_fields_without_file_parsing() {
-        // Build the summary parts directly (no SaveSession) to check
-        // nickname fallback, level, guild link and pal counts.
         let characters = vec![
             player_character_entry(PLAYER_ONE, "Tester", 9),
             {
-                // Player with no NickName property → fallback name
+                // No NickName property → fallback name
                 let mut save_parameter = Properties::default();
                 save_parameter.insert("IsPlayer", Property::Bool(true));
                 character_entry(PLAYER_TWO, PLAYER_TWO, save_parameter)
@@ -732,12 +663,6 @@ mod tests {
     }
 }
 
-/// Coverage beyond the brief's prescribed test module (standing policy:
-/// strengthen tests the brief left thin or missing, rather than logging the
-/// gap as a footnote): a malformed character entry must be skipped, not
-/// panic; a zero-tick `Timestamp` must yield no `last_online_time`; and
-/// `extract_summaries`'s progress messages must fire in the documented
-/// order even for an empty save.
 #[cfg(test)]
 mod extraction_tests {
     use super::*;
@@ -787,11 +712,8 @@ mod extraction_tests {
 
     #[test]
     fn test_malformed_entries_are_skipped_without_panicking() {
-        // Untrusted save data: a value that isn't even a struct (so
-        // `save_parameter` can't resolve `RawData` at all), and a struct
-        // whose `RawData` is present but is the wrong StructValue variant.
-        // Neither should panic; both should simply be excluded from the
-        // counts and the collected player list.
+        // A value that isn't a struct at all, and a struct whose `RawData` is
+        // the wrong variant. Neither may panic.
         let not_a_struct_at_all = MapEntry {
             key: guid_property(PLAYER_ONE),
             value: Property::Bool(true),
@@ -864,8 +786,8 @@ mod extraction_tests {
         }
     }
 
-    /// A `SaveSession` with empty (but present) required maps — enough for
-    /// `extract_summaries` to run end to end without a real save file.
+    /// Empty but present required maps — enough for `extract_summaries` to run
+    /// end to end without a real save file.
     fn minimal_empty_session() -> SaveSession {
         let mut world_save_data = Properties::default();
         world_save_data.insert("CharacterSaveParameterMap", Property::Map(Vec::new()));
@@ -936,16 +858,9 @@ mod extraction_tests {
         }
     }
 
-    /// The test that actually discriminates this fix from the pre-fix
-    /// `session.player_summaries.keys()` behavior (which the handler used
-    /// before `player_summary_order`/`guild_summary_order` existed): the
-    /// two players below are inserted in `CharacterSaveParameterMap` order
-    /// HIGH-then-LOW, deliberately the opposite of `Uuid`'s `Ord` — so a
-    /// `BTreeMap<Uuid, _>::keys()` read would report LOW-then-HIGH instead.
-    /// `extract_summaries` must record `player_summary_order` as the
-    /// as-encountered HIGH-then-LOW order, while `player_summaries` itself
-    /// stays sorted (LOW-then-HIGH) — proving the two are genuinely
-    /// different sequences, not a vacuous check that happens to coincide.
+    /// The two players are laid out HIGH-then-LOW, deliberately the opposite
+    /// of `Uuid`'s `Ord`, so encounter order and sorted order are genuinely
+    /// different sequences and the assertions below are non-vacuous.
     #[test]
     fn test_extract_summaries_records_gvas_insertion_order_not_uuid_sorted_order() {
         const HIGH_UUID: &str = "ffffffff-ffff-ffff-ffff-ffffffffffff";

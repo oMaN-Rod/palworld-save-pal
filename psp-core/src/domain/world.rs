@@ -1,53 +1,17 @@
-//! World-tree navigation — port of `IndexingMixin` (`game/mixins/indexing.py`)
-//! plus the handful of `worldSaveData` accessors the Python `SaveManager`
-//! properties (`_character_save_parameter_map`, `_item_container_save_data`,
-//! ...) wrap. Every accessor here takes `&uesave::Save`/`&mut uesave::Save`
-//! directly (not `&SaveSession`) so Phase 2's DTO/CRUD code (Tasks 4-11) can
-//! navigate a player's or a source-transfer save's tree the same way it
-//! navigates `session.level`.
+//! World-tree navigation. Accessors take `&uesave::Save` rather than
+//! `&SaveSession` so a player's or a transfer source's tree can be navigated
+//! the same way as `session.level`.
 //!
-//! Deviation from the brief: `base_camp_map`/`guild_extra_map`/
-//! `map_object_values` (and their `_mut` counterparts) return
-//! `Result<Option<&Vec<_>>, CoreError>`, not the brief's uniform
-//! `Result<&Vec<_>, CoreError>`. The brief applied the same "required" macro
-//! to all six/eight maps and struct arrays uniformly, but Python guards
-//! `BaseCampSaveData`/`GuildExtraSaveDataMap`/`MapObjectSaveData`
-//! specifically with `"... in world_save_data"` (`save_manager.py`'s
-//! `_set_data`):
+//! `BaseCampSaveData`/`GuildExtraSaveDataMap`/`MapObjectSaveData` are absent
+//! from any save that has never built a base, formed a guild, or placed a map
+//! object -- normal data, not corruption -- so their accessors return
+//! `Ok(None)`. `Err` is reserved for a broken `worldSaveData` or a
+//! present-but-wrong-typed value.
 //!
-//! ```python
-//! self._map_object_save_data = PalObjects.get_value(
-//!     world_save_data["MapObjectSaveData"]
-//!     if "MapObjectSaveData" in world_save_data
-//!     else None
-//! )
-//! ```
-//!
-//! All three are genuinely absent from any save that has never placed the
-//! corresponding data (no base built, no guild extras, no map objects
-//! placed), which is normal, common save data, not a malformed save. Phase
-//! 1's `SaveSession::base_camp_map`/`guild_extra_map` already encode exactly
-//! this optionality (see `session.rs`); treating any of the three absences
-//! as a hard `Err` here would regress that and break every operation that
-//! touches one of these on a save that has never populated it. `Err` is
-//! still reserved for a genuine structural problem (a missing/malformed
-//! `worldSaveData` itself, or a present-but-wrong-typed value); `Ok(None)` is
-//! "this specific optional field isn't present," matching Python's own `if
-//! "..." in world_save_data` guard exactly. `DynamicItemSaveData` is NOT
-//! given this treatment -- Python's `_set_data` indexes it unconditionally
-//! (`world_save_data["DynamicItemSaveData"]`, no `in` guard), so
-//! `dynamic_item_values`/`_mut` stay on the required macro.
-//!
-//! Every lookup here goes through `props::get`/`props::get_mut` (name-only
-//! matching) rather than indexing `Properties`' underlying `IndexMap`
-//! directly by a hand-built `PropertyKey`. A `PropertyKey` is `(u32, String)`
-//! -- the `u32` disambiguates same-named sibling properties -- and nothing
-//! about a top-level `worldSaveData` field name guarantees that index is
-//! always `0`. `props::get` already established the robust convention
-//! (linear scan matching the name only) for every Phase-1 read path; this
-//! module stays consistent with it instead of introducing a second, stricter
-//! lookup rule that could resolve a different node than the rest of the
-//! codebase would for the same path.
+//! Lookups go through `props::get` (name-only matching) rather than indexing
+//! `Properties`' `IndexMap` by a hand-built `PropertyKey`: a `PropertyKey` is
+//! `(u32, String)` whose `u32` disambiguates same-named siblings, and nothing
+//! guarantees a `worldSaveData` field sits at index `0`.
 
 use crate::error::CoreError;
 use crate::props;
@@ -62,16 +26,14 @@ pub fn world_props(level: &Save) -> Result<&Properties, CoreError> {
         .ok_or_else(|| CoreError::Parse("worldSaveData missing from Level.sav".to_string()))
 }
 
-/// Mutable counterpart of `world_props`.
 pub fn world_props_mut(level: &mut Save) -> Result<&mut Properties, CoreError> {
     props::get_mut(&mut level.root.properties, &["worldSaveData"])
         .and_then(props::struct_props_mut)
         .ok_or_else(|| CoreError::Parse("worldSaveData missing from Level.sav".to_string()))
 }
 
-/// A named map directly under `worldSaveData` that every real save is
-/// expected to carry (Python's `_set_data` indexes it unconditionally,
-/// raising `KeyError` on absence).
+/// A named map under `worldSaveData` that every real save carries; absence is
+/// an `Err`.
 macro_rules! world_map_accessors {
     ($get:ident, $get_mut:ident, $name:literal) => {
         pub fn $get(level: &Save) -> Result<&Vec<MapEntry>, CoreError> {
@@ -97,10 +59,8 @@ macro_rules! world_map_accessors {
     };
 }
 
-/// A named map directly under `worldSaveData` that a real save may
-/// legitimately not carry (Python guards with `"... in world_save_data"`):
-/// `Ok(None)` for "not present", `Err` only for a structurally broken
-/// `worldSaveData` or a present-but-wrong-typed value.
+/// A named map under `worldSaveData` a real save may legitimately not carry:
+/// `Ok(None)` for absent, `Err` only for a present-but-wrong-typed value.
 macro_rules! world_optional_map_accessors {
     ($get:ident, $get_mut:ident, $name:literal) => {
         pub fn $get(level: &Save) -> Result<Option<&Vec<MapEntry>>, CoreError> {
@@ -174,12 +134,7 @@ macro_rules! world_struct_array_accessors {
     };
 }
 
-/// A named struct array directly under `worldSaveData` that a real save may
-/// legitimately not carry (Python guards with `"... in world_save_data"`):
-/// `Ok(None)` for "not present", `Err` only for a structurally broken
-/// `worldSaveData` or a present-but-wrong-typed value. Mirrors
-/// `world_optional_map_accessors!` above, for struct-array-shaped fields
-/// instead of map-shaped ones.
+/// `world_optional_map_accessors!` for struct-array-shaped fields.
 macro_rules! world_optional_struct_array_accessors {
     ($get:ident, $get_mut:ident, $name:literal) => {
         pub fn $get(level: &Save) -> Result<Option<&Vec<StructValue>>, CoreError> {
@@ -214,8 +169,6 @@ world_optional_struct_array_accessors!(
     "MapObjectSaveData"
 );
 
-// ---- character-map entry helpers ----
-
 /// A `CharacterSaveParameterMap` entry's key bag (`PlayerUId`, `InstanceId`).
 pub fn entry_key_props(entry: &MapEntry) -> Option<&Properties> {
     props::struct_props(&entry.key)
@@ -229,14 +182,10 @@ pub fn entry_player_uid(entry: &MapEntry) -> Option<uuid::Uuid> {
     props::get(entry_key_props(entry)?, &["PlayerUId"]).and_then(props::as_uuid)
 }
 
-/// Write counterpart of `entry_player_uid` -- overwrites the entry key's
-/// existing `PlayerUId` field in place (`Properties::insert` on an
-/// already-present key updates the value without disturbing the recorded
-/// write schema, so this never risks `Error::MissingPropertySchema`). A
-/// no-op when `entry.key` isn't a user struct (Task 3E-4's
-/// `swap_player_uids` only ever calls this on a `CharacterSaveParameterMap`
-/// entry, whose key always is one, but this stays defensive like every
-/// other `props`-based accessor in this port).
+/// Overwrites the key's existing `PlayerUId` in place: `insert` on an
+/// already-present key updates the value without disturbing uesave's recorded
+/// write schema, so this never risks `Error::MissingPropertySchema`. A no-op
+/// when `entry.key` isn't a struct.
 pub fn set_entry_player_uid(entry: &mut MapEntry, uid: uuid::Uuid) {
     if let Some(key_props) = props::struct_props_mut(&mut entry.key) {
         key_props.insert("PlayerUId", props::guid_property(uid));
@@ -244,9 +193,7 @@ pub fn set_entry_player_uid(entry: &mut MapEntry, uid: uuid::Uuid) {
 }
 
 /// `entry.value.RawData`, decoded as `PalCharacterData` -- the typed struct
-/// backing every character-map entry (player or pal). `None` for anything
-/// that isn't shaped this way, matching `domain::summaries::save_parameter`'s
-/// same non-panicking guard on untrusted save data.
+/// backing every character-map entry, player or pal.
 pub fn entry_character_data(entry: &MapEntry) -> Option<&PalCharacterData> {
     let value_props = props::struct_props(&entry.value)?;
     match props::get(value_props, &["RawData"])? {
@@ -255,7 +202,6 @@ pub fn entry_character_data(entry: &MapEntry) -> Option<&PalCharacterData> {
     }
 }
 
-/// Mutable counterpart of `entry_character_data`.
 pub fn entry_character_data_mut(entry: &mut MapEntry) -> Option<&mut PalCharacterData> {
     let value_props = props::struct_props_mut(&mut entry.value)?;
     match props::get_mut(value_props, &["RawData"])? {
@@ -264,22 +210,19 @@ pub fn entry_character_data_mut(entry: &mut MapEntry) -> Option<&mut PalCharacte
     }
 }
 
-/// `PalCharacterData.object`'s one `"SaveParameter"` struct property -- the
-/// property bag every pal/player field (nickname, level, stats, ...) lives
-/// under.
+/// The property bag every pal/player field (nickname, level, stats, ...)
+/// lives under.
 pub fn entry_save_parameter(entry: &MapEntry) -> Option<&Properties> {
     let data = entry_character_data(entry)?;
     props::get(&data.object, &["SaveParameter"]).and_then(props::struct_props)
 }
 
-/// Mutable counterpart of `entry_save_parameter`.
 pub fn entry_save_parameter_mut(entry: &mut MapEntry) -> Option<&mut Properties> {
     let data = entry_character_data_mut(entry)?;
     props::get_mut(&mut data.object, &["SaveParameter"]).and_then(props::struct_props_mut)
 }
 
-/// `SaveParameter.IsPlayer` -- `false` when absent, matching every other
-/// `IsPlayer` read in this port (`domain::summaries::is_player_entry`).
+/// `SaveParameter.IsPlayer` -- `false` when absent.
 pub fn entry_is_player(entry: &MapEntry) -> bool {
     entry_save_parameter(entry)
         .and_then(|parameters| props::get(parameters, &["IsPlayer"]))
@@ -287,9 +230,8 @@ pub fn entry_is_player(entry: &MapEntry) -> bool {
         .unwrap_or(false)
 }
 
-// ---- index builders (each returns a fresh map; `SaveSession` caches them
-// behind `WorldCaches`, invalidated on every character/container-map
-// mutation -- see `session.rs`'s `invalidate_performance_caches`) ----
+// Index builders each return a fresh map; `SaveSession` caches them behind
+// `WorldCaches` and invalidates on every character/container-map mutation.
 
 pub fn build_character_index(level: &Save) -> std::collections::HashMap<uuid::Uuid, usize> {
     let mut index = std::collections::HashMap::new();
@@ -303,9 +245,8 @@ pub fn build_character_index(level: &Save) -> std::collections::HashMap<uuid::Uu
     index
 }
 
-/// A container map entry's `key.ID` -- shared by item- and
-/// character-container indexing (`ItemContainerSaveData`/
-/// `CharacterContainerSaveData` both key this way).
+/// `ItemContainerSaveData` and `CharacterContainerSaveData` both key by
+/// `key.ID`.
 fn container_key_id(entry: &MapEntry) -> Option<uuid::Uuid> {
     props::get(props::struct_props(&entry.key)?, &["ID"]).and_then(props::as_uuid)
 }
@@ -336,9 +277,8 @@ pub fn build_character_container_index(
     index
 }
 
-/// Dynamic items are an array of structs whose `RawData` is `PalDynamicItem`;
-/// key = `RawData.id.local_id_in_created_world` (`indexing.py`'s
-/// `_build_dynamic_items_collection` key extractor).
+/// Dynamic items are an array of structs whose `RawData` is `PalDynamicItem`,
+/// keyed by `RawData.id.local_id_in_created_world`.
 pub fn build_dynamic_item_index(level: &Save) -> std::collections::HashMap<uuid::Uuid, usize> {
     let mut index = std::collections::HashMap::new();
     if let Ok(values) = dynamic_item_values(level) {
@@ -392,9 +332,6 @@ mod tests {
         Property::Struct(StructValue::Struct(properties))
     }
 
-    /// A `Save` whose `worldSaveData` is `world_save_data` -- enough to
-    /// exercise every accessor/index builder in this module, which all
-    /// start from `world_props`/`world_props_mut`.
     fn world_save(world_save_data: Properties) -> Save {
         let mut root_properties = Properties::default();
         root_properties.insert("worldSaveData", struct_property(world_save_data));
@@ -405,15 +342,9 @@ mod tests {
         Property::Struct(StructValue::Guid(props::uuid_to_guid(value)))
     }
 
-    // ---- map_object_values optionality (MapObjectSaveData is guarded by
-    // Python's `"MapObjectSaveData" in world_save_data`, same as
-    // base_camp_map/guild_extra_map -- see this file's top-level doc
-    // comment) ----
-
     #[test]
     fn map_object_values_absent_returns_ok_none() {
-        // worldSaveData is present but carries no "MapObjectSaveData" key --
-        // a young world that has never had a map object placed.
+        // A world that has never had a map object placed.
         let save = world_save(Properties::default());
         assert!(
             map_object_values(&save).unwrap().is_none(),
@@ -464,9 +395,6 @@ mod tests {
         assert_eq!(2, map_object_values(&save).unwrap().unwrap().len());
     }
 
-    // ---- build_character_container_index (never exercised by any prior
-    // test -- Important 2 of the follow-up review) ----
-
     #[test]
     fn build_character_container_index_maps_key_id_to_position() {
         let first_id = uuid::Uuid::parse_str("11111111-1111-1111-1111-111111111111").unwrap();
@@ -514,11 +442,7 @@ mod tests {
         assert!(build_character_container_index(&save).is_empty());
     }
 
-    // ---- build_dynamic_item_index (never exercised by any prior test, and
-    // the `PalDynamicItem.id.local_id_in_created_world` field path was
-    // unverified against real save data -- Important 2 of the follow-up
-    // review; the real-save half of this coverage lives in
-    // tests/world_index.rs) ----
+    // The real-save half of this coverage lives in tests/world_index.rs.
 
     fn dynamic_item_struct_value(local_id: uuid::Uuid) -> StructValue {
         let dynamic_item = PalDynamicItem {
@@ -569,9 +493,6 @@ mod tests {
 
         assert!(build_dynamic_item_index(&save).is_empty());
     }
-
-    // ---- set_entry_player_uid (Task 3E-4's write counterpart of
-    // entry_player_uid) ----
 
     #[test]
     fn set_entry_player_uid_overwrites_existing_key_field() {
