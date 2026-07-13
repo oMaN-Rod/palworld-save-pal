@@ -178,11 +178,10 @@
 			.filter((p) => mapOf(p.x, p.y) === area);
 	});
 
-	// Boss defeat state isn't parsed from the save yet (no NormalBossDefeatFlag /
-	// TowerBossDefeatFlag read path exists) — every boss renders undimmed until that lands.
 	const bossPoints = $derived.by(() => {
+		const defeated = new Set(selectedPlayer?.defeated_bosses ?? []);
 		return Object.entries(bosses.points)
-			.map(([rowKey, boss]) => ({ ...boss, rowKey }))
+			.map(([rowKey, boss]) => ({ ...boss, rowKey, defeated: defeated.has(boss.spawner_id) }))
 			.filter((boss) => mapOf(boss.x, boss.y) === area);
 	});
 

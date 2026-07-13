@@ -80,6 +80,10 @@ pub struct PlayerDto {
     pub unlocked_fast_travel_points: Option<Vec<String>>,
     #[serde(default)]
     pub collected_effigies: Option<Vec<String>>,
+    /// `NormalBossDefeatFlag` + `TowerBossDefeatFlag` keys merged, read-only:
+    /// the UI only needs "is this boss defeated" for the map overlay.
+    #[serde(default)]
+    pub defeated_bosses: Option<Vec<String>>, // output-only
     #[serde(default)]
     pub effigy_possess_num: i64, // output-only
     #[serde(default)]
@@ -214,6 +218,7 @@ mod tests {
             current_missions: vec![],
             unlocked_fast_travel_points: None,
             collected_effigies: None,
+            defeated_bosses: None,
             effigy_possess_num: 0,
             location: None,
             last_online_time: None,
@@ -252,6 +257,7 @@ mod tests {
                 "current_missions",
                 "unlocked_fast_travel_points",
                 "collected_effigies",
+                "defeated_bosses",
                 "effigy_possess_num",
                 "location",
                 "last_online_time",

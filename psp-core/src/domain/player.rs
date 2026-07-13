@@ -361,6 +361,16 @@ pub fn build_player_dto(
     let collected_effigies = record_data
         .map(|record| unlock_flag_keys(record, "RelicObtainForInstanceFlag"))
         .unwrap_or_default();
+    // Read-only: `NormalBossDefeatFlag` is keyed by boss `spawner_id`;
+    // `TowerBossDefeatFlag` uses a distinct `BOSS_BATTLE_NAME_*` key. Merged
+    // since the UI only needs "is this boss defeated".
+    let defeated_bosses = record_data
+        .map(|record| {
+            let mut keys = unlock_flag_keys(record, "NormalBossDefeatFlag");
+            keys.extend(unlock_flag_keys(record, "TowerBossDefeatFlag"));
+            keys
+        })
+        .unwrap_or_default();
     let effigy_possess_num = record_data
         .and_then(|record| record.0.get(&PropertyKey::from("RelicPossessNum")))
         .and_then(props::as_i32)
@@ -518,6 +528,7 @@ pub fn build_player_dto(
         current_missions,
         unlocked_fast_travel_points: Some(unlocked_fast_travel_points),
         collected_effigies: Some(collected_effigies),
+        defeated_bosses: Some(defeated_bosses),
         effigy_possess_num,
         location,
         last_online_time,

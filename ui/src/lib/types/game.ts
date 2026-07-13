@@ -193,6 +193,7 @@ export type Player = {
 	completed_missions: string[];
 	unlocked_fast_travel_points: string[];
 	collected_effigies: string[];
+	defeated_bosses: string[];
 };
 
 export type GuildLabResearchInfo = {
