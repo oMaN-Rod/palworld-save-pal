@@ -6,11 +6,12 @@
 	import {
 		pixelToWorld,
 		pixelToGameCoords,
-		MAP_SIZE,
 		mapToWorld,
-		ORIGIN_GAME_X,
-		ORIGIN_GAME_Y,
-		worldToPixel
+		worldToPixel,
+		mapOf,
+		MAP_SIZE,
+		DEFAULT_MAP_AREA,
+		type MapArea
 	} from './utils';
 	import {
 		createPalIconStyle,
@@ -79,6 +80,7 @@
 	} = $props();
 
 	const appState = getAppState();
+	const area: MapArea = DEFAULT_MAP_AREA;
 
 	// Map extent and projection setup
 	const extent: [number, number, number, number] = [0, 0, MAP_SIZE, MAP_SIZE];
@@ -92,13 +94,13 @@
 	const hoverClass = 'bg-transparent! p-0 shadow-none!';
 
 	const defaultCenter = () => {
-		const worldCoords = mapToWorld(ORIGIN_GAME_X, ORIGIN_GAME_Y);
-		return worldToPixel(worldCoords.x, worldCoords.y);
+		const worldCoords = mapToWorld(0, 0);
+		return worldToPixel(worldCoords.x, worldCoords.y, area);
 	};
 
 	const originPixelCoords = $derived.by(() => {
-		const worldCoords = mapToWorld(ORIGIN_GAME_X, ORIGIN_GAME_Y);
-		return worldToPixel(worldCoords.x, worldCoords.y);
+		const worldCoords = mapToWorld(0, 0);
+		return worldToPixel(worldCoords.x, worldCoords.y, area);
 	});
 
 	// Derived data
@@ -129,7 +131,6 @@
 			unlocked: selectedPlayer ? unlocked.has(guid.toUpperCase()) : undefined
 		}));
 	});
-	$inspect(fastTravelPointList);
 
 	const effigyPointList = $derived.by(() => {
 		const collected = new Set(
@@ -161,8 +162,8 @@
 
 	// Origin coordinates
 	const originCoords = $derived.by(() => {
-		const worldCoords = mapToWorld(ORIGIN_GAME_X, ORIGIN_GAME_Y);
-		return worldToPixel(worldCoords.x, worldCoords.y);
+		const worldCoords = mapToWorld(0, 0);
+		return worldToPixel(worldCoords.x, worldCoords.y, area);
 	});
 
 	// Overlay reveal state
@@ -174,8 +175,8 @@
 
 	function handlePointerMove(evt: MapBrowserEvent<PointerEvent | KeyboardEvent | WheelEvent>) {
 		const [pixelX, pixelY] = evt.coordinate;
-		const { worldX, worldY } = pixelToWorld(pixelX, pixelY);
-		const { gameX, gameY } = pixelToGameCoords(pixelX, pixelY);
+		const { worldX, worldY } = pixelToWorld(pixelX, pixelY, area);
+		const { gameX, gameY } = pixelToGameCoords(pixelX, pixelY, area);
 		coordDisplayText = `World: ${Math.round(worldX)}, ${Math.round(worldY)}<br>Map: ${gameX}, ${gameY}`;
 	}
 
@@ -249,7 +250,7 @@
 			controls={{ fullscreen: true }}
 		>
 			<!-- World map background -->
-			<Layer.Static url={mapImg.worldMap} {extent} />
+			<Layer.Static url={mapImg.maps[area]} {extent} />
 
 			<!-- Origin marker layer -->
 			{#if showOrigin}
@@ -280,7 +281,7 @@
 					{#each players as player}
 						{#if player.location}
 							<Feature.Point
-								coordinates={worldToPixel(player.location.x, player.location.y)}
+								coordinates={worldToPixel(player.location.x, player.location.y, area)}
 								style={playerIconStyle}
 								properties={{ type: 'player', data: player }}
 							>
@@ -301,8 +302,8 @@
 				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
 					{#each bases as { base, guildName }}
 						<Feature.Point
-							coordinates={worldToPixel(base.location.x, base.location.y)}
-							style={baseIconStyle}
+							coordinates={worldToPixel(base.location.x, base.location.y, area)}
+							style={baseIconStyle(area)}
 							properties={{ type: 'base', data: base }}
 						>
 							<Overlay.Hover {positioning} {offset} class={hoverClass}>
@@ -321,7 +322,7 @@
 				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
 					{#each fastTravelPointList as point (point.guid)}
 						<Feature.Point
-							coordinates={worldToPixel(point.x, point.y)}
+							coordinates={worldToPixel(point.x, point.y, area)}
 							style={fastTravelStyle}
 							properties={{ type: 'fast_travel', data: point }}
 						>
@@ -341,7 +342,7 @@
 				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
 					{#each effigyPointList as point (point.guid)}
 						<Feature.Point
-							coordinates={worldToPixel(point.x, point.y)}
+							coordinates={worldToPixel(point.x, point.y, area)}
 							style={effigyStyle}
 							properties={{ type: 'effigy', data: point }}
 						>
@@ -361,7 +362,7 @@
 				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
 					{#each dungeonPoints as point}
 						<Feature.Point
-							coordinates={worldToPixel(point.x, point.y)}
+							coordinates={worldToPixel(point.x, point.y, area)}
 							style={dungeonIconStyle}
 							properties={{ type: 'dungeon', data: point }}
 						>
@@ -383,7 +384,7 @@
 						{@const palImage = assetLoader.loadMenuImage(point.pal)}
 						{@const palStyle = createPalIconStyle(palImage, '#ffffff', map)}
 						<Feature.Point
-							coordinates={worldToPixel(point.x, point.y)}
+							coordinates={worldToPixel(point.x, point.y, area)}
 							style={palStyle}
 							properties={{ type: 'alpha_pal', data: point }}
 						>
@@ -405,7 +406,7 @@
 						{@const palImage = assetLoader.loadMenuImage(point.pal)}
 						{@const palStyle = createPalIconStyle(palImage, '#ef4444', map)}
 						<Feature.Point
-							coordinates={worldToPixel(point.x, point.y)}
+							coordinates={worldToPixel(point.x, point.y, area)}
 							style={palStyle}
 							properties={{ type: 'predator_pal', data: point }}
 						>

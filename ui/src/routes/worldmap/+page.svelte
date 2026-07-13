@@ -2,7 +2,7 @@
 	import { PlayerList } from '$components/player';
 	import { Button, Combobox, Loading } from '$components/ui';
 	import { getAppState, getModalState, getToastState } from '$states';
-	import { worldToPixel, worldToMap } from '$components/map/utils';
+	import { worldToPixel, worldToMap, mapOf, DEFAULT_MAP_AREA } from '$components/map/utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { mapImg } from '$components/map/styles';
 	import Target from '@lucide/svelte/icons/target';
@@ -116,7 +116,8 @@
 	const starryonImg = $derived(assetLoader.loadMenuImage('nightbluehorse'));
 
 	function panTo(x: number, y: number) {
-		const coords = worldToPixel(x, y);
+		const area = mapOf(x, y) ?? DEFAULT_MAP_AREA;
+		const coords = worldToPixel(x, y, area);
 		map?.getView().animate({ center: coords, zoom: 5, duration: 500 });
 	}
 	function handlePlayerFocus(player: Player) {

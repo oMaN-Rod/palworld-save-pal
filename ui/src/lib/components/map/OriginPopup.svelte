@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Card } from '$components/ui';
-	import { mapToWorld, ORIGIN_GAME_X, ORIGIN_GAME_Y } from './utils';
+	import { mapToWorld } from './utils';
 	import { Globe, Map } from 'lucide-svelte';
 	import * as m from '$i18n/messages';
 </script>
@@ -18,10 +18,7 @@
 				<div class="min-w-0 flex-1">
 					<div class="text-muted-foreground mb-1 text-xs font-medium">{m.world_coordinates()}</div>
 					<div class="text-foreground font-mono text-xs">
-						{mapToWorld(ORIGIN_GAME_X, ORIGIN_GAME_Y).x.toFixed(2)}, {mapToWorld(
-							ORIGIN_GAME_X,
-							ORIGIN_GAME_Y
-						).y.toFixed(2)}
+						{mapToWorld(0, 0).x.toFixed(2)}, {mapToWorld(0, 0).y.toFixed(2)}
 					</div>
 				</div>
 			</div>
@@ -30,7 +27,7 @@
 				<div class="min-w-0 flex-1">
 					<div class="text-muted-foreground mb-1 text-xs font-medium">{m.map_coordinates()}</div>
 					<div class="text-foreground font-mono text-xs">
-						{ORIGIN_GAME_X}, {ORIGIN_GAME_Y}
+						0, 0
 					</div>
 				</div>
 			</div>
