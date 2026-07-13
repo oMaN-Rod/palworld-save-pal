@@ -2,7 +2,6 @@ use serde::{Deserialize, Serialize};
 
 /// Full settings object as sent to the frontend (response to `get_settings`,
 /// `update_settings`, and the `sync_app_state` settings emission).
-/// Field order mirrors palworld_save_pal/editor/settings.py computed fields.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SettingsDto {
     pub language: String,
@@ -13,8 +12,8 @@ pub struct SettingsDto {
     pub cheat_mode: bool,
 }
 
-/// `update_settings` request payload — mirrors palworld_save_pal/dto/settings.py
-/// (no save_dir; save_dir is never updated through this message).
+/// `update_settings` request payload. Deliberately has no `save_dir`: that
+/// setting is never updated through this message.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SettingsUpdateDto {
     pub language: String,
@@ -47,20 +46,17 @@ mod tests {
 
     #[test]
     fn update_dto_ignores_extra_keys_like_save_dir() {
-        // The NavBar sends {...appState.settings} which includes save_dir;
-        // Python's SettingsUpdateDto silently drops it. serde does too by default.
+        // The NavBar sends {...appState.settings}, which includes save_dir.
         let payload = r#"{"language":"fr","clone_prefix":"c","new_pal_prefix":"n",
                           "debug_mode":true,"cheat_mode":false,"save_dir":"/tmp"}"#;
         let update: SettingsUpdateDto = serde_json::from_str(payload).unwrap();
 
-        // Verify all five fields round-trip correctly.
         assert_eq!(update.language, "fr");
         assert_eq!(update.clone_prefix, "c");
         assert_eq!(update.new_pal_prefix, "n");
         assert!(update.debug_mode);
         assert!(!update.cheat_mode);
 
-        // Verify save_dir is structurally absent: serialize back and check the JSON.
         let reserialized = serde_json::to_value(&update).unwrap();
         let obj = reserialized.as_object().unwrap();
         assert_eq!(

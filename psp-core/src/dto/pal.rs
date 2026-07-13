@@ -1,36 +1,16 @@
-//! `PalDto` — a field-for-field port of the *union* of
-//! `palworld_save_pal/dto/pal.py::PalDTO` (what the frontend sends for
-//! edits/clones) and `palworld_save_pal/game/pal.py::Pal`'s computed-field
-//! dump (what the server sends back in player/base details responses). One
-//! Rust struct covers both directions: `PalDTO` is a strict field subset of
-//! `Pal`'s dump (plus one input-only alias, `character_key`, which `Pal`
-//! also computes), so `#[serde(default)]` on the output-only fields makes
-//! them optional on input without weakening what a response must contain.
-//!
-//! Field order is a wire contract (see `dto/summary.rs`'s module doc for
-//! why): `serde` serializes in declaration order, and *this* struct's wire
-//! order must match `Pal`'s, not `PalDTO`'s, because `Pal`'s dump — not
-//! `PalDTO`'s — is what the server actually serializes onto the WebSocket.
-//! Pydantic v2 dumps a model's plain `Field`-declared attributes first (in
-//! their declaration order), then its `@computed_field`s (in *their*
-//! declaration order) — the two groups are never interleaved by source
-//! position. `Pal` declares zero plain fields (every attribute is a
-//! `@computed_field`), so its wire order is exactly its computed-field
-//! declaration order. Verified directly against the real classes rather
-//! than transcribed by hand:
-//! `.venv/Scripts/python.exe -c "from palworld_save_pal.game.pal import Pal;
-//! print(list(Pal.model_computed_fields.keys()))"` — 34 names, in the order
-//! reproduced below.
+//! `PalDto` covers both directions of the wire: what the frontend sends for
+//! edits/clones (a strict subset) and what the server sends back in
+//! player/base details responses. Field declaration order is a wire
+//! contract — `serde` serializes in declaration order and the frontend
+//! consumes this JSON as-is over the WebSocket.
 use std::collections::HashSet;
 
 use serde::{Deserialize, Serialize};
 
 use super::ordered_map::OrderedMap;
 
-/// `game/enum.py::PalGender` — wire values are the bare variant names
-/// (`PalGender` is a `(str, PrefixedEnum)`; its `.value` has no
-/// `EPalGenderType::` prefix, and that `.value` is what pydantic puts on
-/// the wire).
+/// Wire values are the bare variant names; save data carries them with an
+/// `EPalGenderType::` prefix (see [`PalGender::from_prefixed`]).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub enum PalGender {
     None,
@@ -39,10 +19,8 @@ pub enum PalGender {
 }
 
 impl PalGender {
-    /// Port of `PalGender.from_value`: strips the `EPalGenderType::` prefix
-    /// game save data carries, defaulting to `Female` for anything that
-    /// isn't `None`/`Male` after stripping — matching Python's
-    /// `except Exception: ... return PalGender.FEMALE` fallback.
+    /// Strips the `EPalGenderType::` prefix save data carries. Anything
+    /// unrecognized falls back to `Female` rather than erroring.
     pub fn from_prefixed(value: &str) -> PalGender {
         match value.trim_start_matches("EPalGenderType::") {
             "None" => PalGender::None,
@@ -51,8 +29,7 @@ impl PalGender {
         }
     }
 
-    /// Port of `PrefixedEnum.prefixed`: re-adds the `EPalGenderType::`
-    /// prefix for writing back into save data.
+    /// Re-adds the `EPalGenderType::` prefix for writing back into save data.
     pub fn prefixed(&self) -> String {
         let bare = match self {
             PalGender::None => "None",
@@ -63,8 +40,8 @@ impl PalGender {
     }
 }
 
-/// `game/enum.py::WorkSuitability` declaration order — the wire keys of
-/// `work_suitability` maps (each key is the enum's bare `.value`).
+/// Wire keys of `work_suitability` maps. Order is significant: it is the key
+/// order the frontend expects to receive them in.
 pub const WORK_SUITABILITIES: [&str; 13] = [
     "EmitFlame",
     "Watering",
@@ -81,10 +58,9 @@ pub const WORK_SUITABILITIES: [&str; 13] = [
     "MonsterFarm",
 ];
 
-/// Port of `game/utils.py::format_character_key`. Python closes over a
-/// module-level `PAL_DATA` dict (`data/json/pals.json`, loaded once at
-/// import time); `psp-core` has no such global load path (yet), so the
-/// known-key set is threaded through explicitly instead.
+/// Normalizes a raw save-data character id into the lowercase pal-database
+/// key. `known_pal_keys` guards the `boss_` strip: an id that is itself a
+/// known key keeps its prefix.
 pub fn format_character_key(character_id: &str, known_pal_keys: &HashSet<String>) -> String {
     let lowered = character_id.to_lowercase();
     if !known_pal_keys.contains(character_id) {
@@ -101,22 +77,20 @@ pub fn format_character_key(character_id: &str, known_pal_keys: &HashSet<String>
     }
 }
 
-/// Union of `dto/pal.py::PalDTO` (input) and `game/pal.py::Pal`'s
-/// computed-field dump (output). Field order matches `Pal`'s dump — see
-/// this module's doc comment. Output-only fields (`character_key`,
-/// `is_predator`, `filtered_nickname`) are `#[serde(default)]` so frontend
-/// edit/clone payloads, which never send them, still deserialize.
+/// Output-only fields (`character_key`, `is_predator`, `filtered_nickname`)
+/// are `#[serde(default)]` so frontend edit/clone payloads, which never send
+/// them, still deserialize.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PalDto {
     pub instance_id: uuid::Uuid,
     pub character_id: String,
     #[serde(default)]
-    pub character_key: String, // output-only (Pal.character_key)
+    pub character_key: String, // output-only
     pub owner_uid: Option<uuid::Uuid>,
     pub is_lucky: Option<bool>,
     pub is_boss: Option<bool>,
     #[serde(default)]
-    pub is_predator: bool, // output-only (Pal.is_predator)
+    pub is_predator: bool, // output-only
     pub is_tower: bool,
     pub gender: PalGender,
     pub nickname: Option<String>,
@@ -148,15 +122,14 @@ pub struct PalDto {
 }
 
 impl PalDto {
-    /// Port of Python PalDTO.from_dict: tolerant conversion + defaults
-    /// (dto/pal.py:99-126). Unknown keys ignored; unconvertible values dropped
-    /// then defaulted; character_id must end up a string.
+    /// Tolerant construction from arbitrary JSON: unknown keys are ignored and
+    /// null/missing values fall back to defaults. Errors only if `character_id`
+    /// is not a string.
     pub fn from_json_lenient(value: &serde_json::Value) -> Result<Self, crate::error::CoreError> {
         let source = value
             .as_object()
             .ok_or_else(|| crate::error::CoreError::Other("pal_data is not an object".into()))?;
         let mut normalized = serde_json::Map::new();
-        // Start from the defaults table (dto/pal.py:99-126)
         let defaults = serde_json::json!({
             "instance_id": "00000000-0000-0000-0000-000000000000",
             "owner_uid": null,
@@ -188,7 +161,6 @@ impl PalDto {
             };
             normalized.insert(key.clone(), accepted);
         }
-        // character_id must be a string (the fixture's broken row fails here)
         if !normalized["character_id"].is_string() {
             return Err(crate::error::CoreError::Other(
                 "character_id is not a string".into(),
@@ -205,8 +177,8 @@ mod tests {
 
     #[test]
     fn pal_dto_deserializes_python_input_shape() {
-        // Shape sent by the frontend for clone_pal (dto/pal.py fields only,
-        // no character_key/is_predator/filtered_nickname).
+        // Shape sent by the frontend for clone_pal: no character_key,
+        // is_predator or filtered_nickname.
         let payload = serde_json::json!({
             "instance_id": "11111111-2222-3333-4444-555555555555",
             "owner_uid": "99999999-2222-3333-4444-555555555555",
@@ -316,8 +288,6 @@ mod tests {
 
     #[test]
     fn pal_dto_pins_exact_wire_order() {
-        // Field order matches `Pal.model_computed_fields` exactly, not
-        // `PalDTO`'s declaration order -- see this module's doc comment.
         let serialized = serde_json::to_string(&sample_pal_dto()).unwrap();
         assert_eq!(
             concat!(
@@ -375,8 +345,6 @@ mod tests {
 
     #[test]
     fn pal_dto_ignores_unknown_keys_from_the_frontend() {
-        // Pydantic silently drops extra keys on request payloads; PalDto
-        // must too (no #[serde(deny_unknown_fields)]).
         let mut payload = serde_json::to_value(sample_pal_dto()).unwrap();
         payload.as_object_mut().unwrap().insert(
             "some_future_field_the_frontend_added".to_string(),

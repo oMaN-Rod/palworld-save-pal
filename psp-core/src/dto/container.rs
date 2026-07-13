@@ -1,28 +1,18 @@
-//! Item/character container wire DTOs. Field order for each struct was
-//! verified directly against the real pydantic classes rather than
-//! transcribed by hand, the same way as `dto/pal.rs` (see that module's doc
-//! comment for the general rule: plain `Field`-declared attributes first in
-//! declaration order, then `@computed_field`s in declaration order):
-//! `.venv/Scripts/python.exe -c "from palworld_save_pal.game.dynamic_item
-//! import DynamicItem; print(list(DynamicItem.model_fields.keys()),
-//! list(DynamicItem.model_computed_fields.keys()))"` (and likewise for
-//! `ItemContainer`, `ItemContainerSlot`, `CharacterContainer`).
+//! Item/character container wire DTOs. Field declaration order is a wire
+//! contract: `serde` serializes in declaration order and the frontend
+//! consumes this JSON as-is.
 use serde::{Deserialize, Serialize};
 
 use super::pal::PalGender;
 
-/// Union of `dto/dynamic_item.py::DynamicItemDTO` (input) and
-/// `game/dynamic_item.py::DynamicItem`'s dump (output: `local_id` (its one
-/// plain field) followed by its computed fields in declaration order).
-/// `modified` is an input-only flag `DynamicItem`'s dump never produces --
-/// `#[serde(skip_serializing)]` keeps it off outgoing responses so a
-/// round-tripped output DTO doesn't grow a key Python's never emits.
-/// `character_key` and `static_id` are output-only (absent from the DTO).
+/// One struct covers both the frontend's edit payload and the server's
+/// response. `modified` is an input-only flag; `skip_serializing` keeps it
+/// out of responses.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DynamicItemDto {
     pub local_id: uuid::Uuid,
     #[serde(default, skip_serializing)]
-    pub modified: bool, // input-only (dto/dynamic_item.py only)
+    pub modified: bool, // input-only
     #[serde(default)]
     pub character_id: Option<String>,
     #[serde(default)]
@@ -53,12 +43,6 @@ pub struct DynamicItemDto {
     pub talent_defense: Option<i64>,
 }
 
-/// Union of `dto/item_container_slot.py::ItemContainerSlotDTO` (input:
-/// `slot_index`, `count`, `static_id`, `dynamic_item`) and
-/// `game/item_container_slot.py::ItemContainerSlot`'s dump (output:
-/// `dynamic_item` (its one plain field), then its computed fields in
-/// declaration order: `slot_index`, `count`, `static_id`, `local_id`).
-/// `local_id` is output-only.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ItemContainerSlotDto {
     #[serde(default)]
@@ -71,13 +55,9 @@ pub struct ItemContainerSlotDto {
     pub local_id: Option<uuid::Uuid>, // output-only
 }
 
-/// Union of `dto/item_container.py::ItemContainerDTO` (input) and
-/// `game/item_container.py::ItemContainer`'s dump (output: `id`, `type`,
-/// `slots`, `key` (plain fields, declaration order), then `slot_num` (its
-/// one computed field)). `type` wire values: `"CommonContainer"`,
-/// `"EssentialContainer"`, `"WeaponLoadOutContainer"`,
-/// `"PlayerEquipArmorContainer"`, `"FoodEquipContainer"`, `"BaseContainer"`,
-/// `"GuildChest"` (`ItemContainerType`, `game/item_container.py:21-28`).
+/// `type` wire values: `"CommonContainer"`, `"EssentialContainer"`,
+/// `"WeaponLoadOutContainer"`, `"PlayerEquipArmorContainer"`,
+/// `"FoodEquipContainer"`, `"BaseContainer"`, `"GuildChest"`.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ItemContainerDto {
     pub id: uuid::Uuid,
@@ -91,19 +71,13 @@ pub struct ItemContainerDto {
     pub slot_num: i32, // output-only
 }
 
-/// `game/character_container.py::CharacterContainerSlot` — plain
-/// `BaseModel`, no DTO counterpart (response-only).
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CharacterContainerSlotDto {
     pub slot_index: i32,
     pub pal_id: Option<uuid::Uuid>,
 }
 
-/// `game/character_container.py::CharacterContainer` — plain `BaseModel`
-/// (`id`, `player_uid`, `type`, `size`, `slots`, all declared fields, zero
-/// computed fields), no DTO counterpart (response-only). `type` wire
-/// values: `"PalBox"` | `"Party"` | `"Base"`
-/// (`CharacterContainerType`, `game/character_container.py:15-18`).
+/// Response-only. `type` wire values: `"PalBox"` | `"Party"` | `"Base"`.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CharacterContainerDto {
     pub id: uuid::Uuid,
@@ -206,7 +180,6 @@ mod tests {
 
     #[test]
     fn item_container_slot_dto_deserializes_python_input_shape_without_local_id() {
-        // dto/item_container_slot.py::ItemContainerSlotDTO has no local_id.
         let payload = serde_json::json!({
             "slot_index": 0,
             "count": 5,

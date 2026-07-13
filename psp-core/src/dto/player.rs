@@ -1,15 +1,6 @@
-//! `PlayerDto` — a field-for-field port of the union of
-//! `palworld_save_pal/dto/player.py::PlayerDTO` (input) and
-//! `palworld_save_pal/game/player.py::Player`'s dump (output). Field order
-//! matches `Player`'s dump, not `PlayerDTO`'s declaration order — see
-//! `dto/pal.rs`'s module doc for why (plain fields first in declaration
-//! order, then computed fields in declaration order; the two groups are
-//! never interleaved by source position). Verified directly against the
-//! real class:
-//! `.venv/Scripts/python.exe -c "from palworld_save_pal.game.player import
-//! Player; print(list(Player.model_fields.keys()),
-//! list(Player.model_computed_fields.keys()))"` — 8 plain fields (`pals` ..
-//! `party`) then 24 computed fields (`guild_id` .. `dps`), 32 total.
+//! `PlayerDto` covers both the frontend's edit payload and the server's
+//! response. Field declaration order is a wire contract: `serde` serializes
+//! in declaration order and the frontend consumes this JSON as-is.
 use serde::{Deserialize, Serialize};
 
 use super::container::{CharacterContainerDto, ItemContainerDto};
@@ -17,8 +8,6 @@ use super::ordered_map::OrderedMap;
 use super::pal::PalDto;
 use super::summary::IsoDateTime;
 
-/// `game/map.py::WorldMapPoint` — plain `BaseModel`, no DTO counterpart
-/// (response-only).
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorldMapPointDto {
     pub x: f64,
@@ -34,14 +23,9 @@ fn default_hundred() -> f64 {
     100.0
 }
 
-/// Union of `dto/player.py::PlayerDTO` (input) and
-/// `game/player.py::Player`'s dump (output). See this module's doc comment
-/// for the wire-order derivation. Fields absent from `PlayerDTO` entirely
-/// (`pals`, `pal_box`, `party`, `relic_possess_num`, `location`,
-/// `last_online_time`, `dps`) are `#[serde(default)]`; fields the DTO
-/// declares with a Python default (`hp = 5000`, `stomach = 100.0`,
-/// `sanity = 100.0`) carry the matching Rust default so an edit payload
-/// that omits them behaves the same as it does in Python.
+/// Output-only fields are `#[serde(default)]` so edit payloads, which never
+/// send them, still deserialize. `hp`/`stomach`/`sanity` carry explicit
+/// defaults an omitting edit payload must land on.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PlayerDto {
     #[serde(default)]
@@ -102,19 +86,9 @@ pub struct PlayerDto {
     pub location: Option<WorldMapPointDto>, // output-only
     #[serde(default)]
     pub last_online_time: Option<IsoDateTime>, // output-only
-    /// `Option` is deliberate, not an oversight: `game/player.py::Player.dps`
-    /// is a `@computed_field` returning `self._dps`, a `PrivateAttr` that
-    /// defaults to `None` and is only populated by `_load_dps()`, which
-    /// `Player.__init__` calls **only when `self._player_gvas_files.dps` is
-    /// present** (i.e. only when the save actually has a separate per-player
-    /// DPS-arena `.sav` file — not guaranteed). When that file is absent,
-    /// `_dps` stays `None` and pydantic serializes `"dps": null`, despite the
-    /// computed field's `-> Dict[int, Pal]` annotation claiming otherwise.
-    /// Verified empirically: a pydantic `computed_field` with a non-`Optional`
-    /// return annotation that actually returns `None` serializes `null`
-    /// without warning or error (checked under `python -W error`). So `null`
-    /// is a real wire shape here, unlike `PlayerDto::pals`, which is a plain
-    /// `Field(default_factory=dict)` with no such nullable code path.
+    /// `Option` because `null` is a real wire shape: a player only has DPS
+    /// data when the save carries a separate per-player DPS-arena `.sav`
+    /// file. Absent file serializes `null`; present-but-empty serializes `{}`.
     #[serde(default)]
     pub dps: Option<OrderedMap<i32, PalDto>>, // output-only
 }
@@ -164,8 +138,7 @@ mod tests {
     }
 
     fn minimal_player_dto_request_payload() -> serde_json::Value {
-        // Shape sent by the frontend for update_player (dto/player.py's
-        // required fields only: uid, nickname, level, exp).
+        // Shape sent by the frontend for update_player: required fields only.
         serde_json::json!({
             "uid": "99999999-2222-3333-4444-555555555555",
             "nickname": "Tester",
@@ -179,7 +152,6 @@ mod tests {
         let dto: PlayerDto = serde_json::from_value(minimal_player_dto_request_payload()).unwrap();
         assert_eq!(dto.nickname, "Tester");
         assert_eq!(dto.level, 25);
-        // Python defaults: hp=5000, stomach=100.0, sanity=100.0.
         assert_eq!(dto.hp, 5000);
         assert_eq!(dto.stomach, 100.0);
         assert_eq!(dto.sanity, 100.0);
@@ -287,26 +259,21 @@ mod tests {
             ],
             keys
         );
-        // A couple of value spot-checks alongside the key-order pin.
         assert_eq!(value["nickname"], "Tester");
         assert_eq!(value["status_point_list"]["HP"], 3);
     }
 
     #[test]
     fn dps_none_and_empty_map_are_both_legitimate_and_distinct_wire_shapes() {
-        // `dps: None` must serialize as JSON `null`: this is the real shape
-        // Python emits for a player with no DPS-arena save file (see the
-        // doc comment on `PlayerDto::dps`), not a defect to be normalized
-        // away.
+        // `null` is the real shape for a player with no DPS-arena save file,
+        // not a defect to be normalized away (see `PlayerDto::dps`).
         let none_payload = minimal_player_dto_request_payload();
         let dto: PlayerDto = serde_json::from_value(none_payload).unwrap();
         assert!(dto.dps.is_none());
         let value = serde_json::to_value(&dto).unwrap();
         assert!(value["dps"].is_null());
 
-        // `dps: Some({})` must serialize as an empty object, distinct from
-        // `null` — the case where the DPS-arena file exists but currently
-        // holds no pals.
+        // `Some({})` is the distinct case where the file exists but holds no pals.
         let mut with_empty_dps = dto;
         with_empty_dps.dps = Some(OrderedMap::new());
         let value = serde_json::to_value(&with_empty_dps).unwrap();

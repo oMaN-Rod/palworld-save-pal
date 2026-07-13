@@ -1,30 +1,11 @@
-//! A minimal insertion-order-preserving map, standing in for
-//! `indexmap::IndexMap`.
-//!
-//! `indexmap` is deliberately not a dependency of `psp-core` — see
-//! `session.rs`'s `loaded_players` doc comment, where the project's own
-//! cross-phase reconciliation already resolved this exact substitution:
-//! "Phase 2's `IndexMap` → `BTreeMap`, specifically to keep deterministic
-//! iteration order with zero new dependencies". That fix works for
-//! `SaveSession` fields, which are never serialized directly — code that
-//! needs a specific wire order builds the JSON by hand from a companion
-//! `Vec<Uuid>` order list sitting beside a sorted `BTreeMap`.
-//!
-//! That pattern doesn't reach here: `OrderedMap` backs *wire DTO fields*
-//! that `#[derive(Serialize)]` emits automatically as part of a larger
-//! struct (`PalDto::work_suitability`, `PlayerDto::pals`,
-//! `PlayerDto::status_point_list`, `BaseDto::storage_containers`,
-//! `GuildDto::bases`, ...). Their Python originals are plain `dict`s that
-//! pydantic serializes in insertion order — an order that, per the game
-//! models this ports (`game/player.py::status_point_list`,
-//! `game/base.py::_load_storage_containers`, etc.), comes from iterating a
-//! save file's array/list data, not from sorting by key. A `BTreeMap` field
-//! would silently re-sort those keys on the wire; there is no room to carry
-//! a *separate* order field next to it without changing the JSON shape.
-//! `OrderedMap` fills that gap with a `Vec<(K, V)>` and hand-written
-//! `Serialize`/`Deserialize` impls, matching `indexmap::IndexMap`'s
-//! observable behavior (insertion order preserved on both directions) using
-//! nothing beyond `std` + the `serde` this crate already depends on.
+//! A minimal insertion-order-preserving map, backing wire DTO fields whose
+//! JSON key order comes from the save file's own list order
+//! (`PalDto::work_suitability`, `PlayerDto::status_point_list`,
+//! `BaseDto::storage_containers`, ...). A `BTreeMap`/`HashMap` field would
+//! re-sort or scramble those keys on the wire, and there is no room to carry
+//! a separate order list beside the map without changing the JSON shape.
+//! Implemented over a `Vec<(K, V)>` with hand-written serde impls so the
+//! crate needs no `indexmap` dependency.
 use std::borrow::Borrow;
 use std::fmt;
 use std::marker::PhantomData;
@@ -59,10 +40,8 @@ impl<K, V> OrderedMap<K, V> {
 }
 
 impl<K: PartialEq, V> OrderedMap<K, V> {
-    /// Inserts `key` → `value`, preserving `key`'s original position if it
-    /// was already present (matching Python `dict[key] = value` semantics:
-    /// re-assigning an existing key updates its value without moving it to
-    /// the end).
+    /// Re-inserting an existing key updates its value in place; the key keeps
+    /// its original position.
     pub fn insert(&mut self, key: K, value: V) {
         if let Some(existing) = self.0.iter_mut().find(|(k, _)| *k == key) {
             existing.1 = value;
@@ -130,13 +109,9 @@ impl<'de, K: Deserialize<'de> + PartialEq, V: Deserialize<'de>> Deserialize<'de>
             }
 
             fn visit_map<A: MapAccess<'de>>(self, mut access: A) -> Result<Self::Value, A::Error> {
-                // Mirrors Python `json.loads`/`dict` and `indexmap::IndexMap`'s
-                // `insert`-based `Deserialize`: a repeated key is last-value-wins
-                // *at the original key's position*, not appended as a second
-                // entry. Route every entry through `insert()` (the same method
-                // the rest of this type's mutation API uses) rather than
-                // pushing directly onto the backing `Vec`, so both entry points
-                // share one dedupe path.
+                // Routed through `insert()` rather than pushing onto the
+                // backing `Vec` so a repeated JSON key is last-value-wins at
+                // the first key's position instead of becoming a second entry.
                 let mut map = OrderedMap::with_capacity(access.size_hint().unwrap_or(0));
                 while let Some((key, value)) = access.next_entry()? {
                     map.insert(key, value);
@@ -193,19 +168,9 @@ mod tests {
 
     #[test]
     fn deserialize_dedupes_repeated_keys_last_value_wins_at_first_position() {
-        // Matches Python `json.loads`/`dict` and `indexmap::IndexMap`'s
-        // `insert`-based `Deserialize`: a duplicated key keeps its *first*
-        // position but takes its *last* value, rather than producing two
-        // entries for the same key.
-        //
-        // Deliberately parsed via `from_str` on a raw JSON literal, not
-        // `serde_json::json!{...}` + `from_value`: the `json!` macro builds a
-        // `serde_json::Value::Object` first, which *already* dedupes
-        // duplicate keys (last-value-wins) while constructing the `Value` —
-        // so a test built that way would never actually drive a duplicate
-        // key through `visit_map` at all. `from_str` parses the raw text
-        // directly through this type's `Deserialize` impl, which is the only
-        // path that genuinely exercises repeated-key handling.
+        // Parsed via `from_str`, not `json!` + `from_value`: the `json!` macro
+        // builds a `Value::Object` that already dedupes duplicate keys, so
+        // `visit_map` would never see the repeated key at all.
         let map: OrderedMap<String, i64> =
             serde_json::from_str(r#"{"a": 1, "b": 2, "a": 3}"#).unwrap();
         assert_eq!(2, map.len(), "duplicate key must not produce two entries");

@@ -1,5 +1,4 @@
 //! Wire DTOs for gamepass save scanning.
-//! Mirrors palworld_save_pal/utils/file_manager.py:49-63 exactly.
 
 use serde::{Deserialize, Serialize};
 

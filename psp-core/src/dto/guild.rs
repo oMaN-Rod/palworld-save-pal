@@ -1,13 +1,5 @@
-//! `GuildDto`/`BaseDto` — field-for-field ports of the union of
-//! `dto/guild.py::GuildDTO`/`dto/base.py::BaseDTO` (input) and
-//! `game/guild.py::Guild`/`game/base.py::Base`'s dumps (output). Field
-//! order matches the game models' dumps, not the DTOs' declaration order —
-//! see `dto/pal.rs`'s module doc for why. Verified directly against the
-//! real classes:
-//! `.venv/Scripts/python.exe -c "from palworld_save_pal.game.guild import
-//! Guild; from palworld_save_pal.game.base import Base; print(list(
-//! Guild.model_fields), list(Guild.model_computed_fields)); print(list(
-//! Base.model_fields), list(Base.model_computed_fields))"`.
+//! Guild/base wire DTOs. Field declaration order is a wire contract: `serde`
+//! serializes in declaration order and the frontend consumes this JSON as-is.
 use serde::{Deserialize, Serialize};
 
 use super::container::{CharacterContainerDto, ItemContainerDto};
@@ -15,28 +7,17 @@ use super::ordered_map::OrderedMap;
 use super::pal::PalDto;
 use super::player::WorldMapPointDto;
 
-/// `game/guild_lab_research_info.py::GuildLabResearchInfo` — a plain
-/// `BaseModel` used directly (not through a separate DTO) as both the
-/// `Guild.lab_research`/`lab_research_data` wire shape *and* the
-/// `update_lab_research` request payload's item shape. `work_amount` is
-/// `f64`, not `f32`: Python's `float` is IEEE-754 double precision, and
-/// this value is an accumulated in-game progress counter, not a small
-/// literal -- an `f32` round-trip could visibly perturb its decimal digits
-/// relative to what Python would emit for the same double.
+/// Serves as both the `lab_research`/`lab_research_data` wire shape and the
+/// `update_lab_research` request item shape. `work_amount` is an accumulated
+/// progress counter, so it stays `f64` to avoid `f32` round-trip drift.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct GuildLabResearchInfo {
     pub research_id: String,
     pub work_amount: f64,
 }
 
-/// Union of `dto/base.py::BaseDTO` (input) and `game/base.py::Base`'s dump
-/// (output: `pals`, `container_id`, `slot_count`, `storage_containers`,
-/// `pal_container` (plain fields, declaration order), then `id`, `name`,
-/// `location`, `area_range` (computed fields, declaration order)).
-/// `storage_containers` is required (non-`Option`) on `BaseDTO`'s input but
-/// `Optional[...] = None` on `Base`'s output; unified here as a plain
-/// (non-`Option`) map defaulting empty -- an absent/`None` map and an empty
-/// map are interchangeable for every downstream consumer of this field.
+/// `storage_containers` is a plain map defaulting to empty rather than an
+/// `Option`: no consumer distinguishes an absent map from an empty one.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct BaseDto {
     #[serde(default)]
@@ -58,17 +39,9 @@ pub struct BaseDto {
     pub area_range: Option<f64>,
 }
 
-/// Union of `dto/guild.py::GuildDTO` (input) and `game/guild.py::Guild`'s
-/// dump (output: `bases`, `guild_chest`, `lab_research` (plain fields,
-/// declaration order), then `name`, `base_camp_level`, `id`,
-/// `admin_player_uid`, `players`, `container_id`, `lab_research_data`
-/// (computed fields, declaration order)).
-///
 /// `bases` and `lab_research` stay `Option` (unlike `BaseDto`'s
-/// `storage_containers`): `Guild.update_from` treats `None` and an empty
-/// collection differently on input (`if guildDTO.bases: ... else:
-/// logger.warning(...)`), so collapsing that distinction here would lose
-/// real behavior a later task needs.
+/// `storage_containers`): guild updates treat an omitted collection and an
+/// empty one differently, so that distinction must survive the wire.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct GuildDto {
     #[serde(default)]
@@ -177,7 +150,6 @@ mod tests {
 
     #[test]
     fn base_dto_deserializes_python_input_shape() {
-        // dto/base.py::BaseDTO required fields: id, storage_containers.
         let payload = serde_json::json!({
             "id": "11111111-2222-3333-4444-555555555555",
             "storage_containers": {},
@@ -240,8 +212,6 @@ mod tests {
 
     #[test]
     fn guild_dto_distinguishes_omitted_bases_from_empty_bases() {
-        // Guild.update_from branches on `if guildDTO.bases:` -- None (key
-        // omitted) and {} (key present, empty) must stay distinguishable.
         let omitted: GuildDto = serde_json::from_value(serde_json::json!({})).unwrap();
         assert!(omitted.bases.is_none());
 
