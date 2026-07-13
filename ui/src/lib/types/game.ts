@@ -127,6 +127,8 @@ export type StatusPointList = {
 	weight: number;
 	capture_rate: number;
 	work_speed: number;
+	// Palworld 1.0 relic-backed ranks. Absent on pre-1.0 saves.
+	[key: string]: number;
 };
 
 export type ExStatusPointList = {
@@ -180,7 +182,7 @@ export type Player = {
 	stomach: number;
 	sanity: number;
 	status_point_list: StatusPointList;
-	ex_status_point_list: ExStatusPointList;
+	ext_status_point_list: ExStatusPointList;
 	guild_id: string;
 	technologies: string[];
 	technology_points: number;

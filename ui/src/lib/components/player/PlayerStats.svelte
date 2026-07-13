@@ -4,6 +4,8 @@
 	import { getModalState } from '$states';
 	import { NumberSliderModal } from '$components/modals';
 	import { CornerDotButton } from '$components/ui';
+	import { relicData } from '$lib/data';
+	import type { RelicRankData } from '$lib/data/relic.svelte';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
@@ -18,6 +20,57 @@
 	let attack = $derived(100 + player.status_point_list.attack * 2);
 	let workSpeed = $derived(100 + player.status_point_list.work_speed * 50);
 	let weight = $derived(300 + player.status_point_list.weight * 50);
+
+	// The five stats with known display formulas, rendered above. Everything else in
+	// status_point_list is a relic-backed rank. Iterating the keys the save actually
+	// has matters: writes are mutate-only, so offering to edit a missing row would
+	// silently no-op.
+	const HERO_STATS = ['max_hp', 'max_sp', 'attack', 'work_speed', 'weight'];
+
+	// The status stat is `capture_rate`; its relic type is `capture_power`.
+	function relicKeyFor(stat: string): string {
+		return stat === 'capture_rate' ? 'capture_power' : stat;
+	}
+
+	let relics: Record<string, RelicRankData> = $state({});
+	$effect(() => {
+		relicData.getRelicData().then((data) => (relics = data));
+	});
+
+	const extraStats = $derived(
+		Object.keys(player.status_point_list ?? {})
+			.filter((key) => !HERO_STATS.includes(key))
+			.sort()
+	);
+
+	function maxRankFor(stat: string): number | undefined {
+		return relics[relicKeyFor(stat)]?.max_rank;
+	}
+
+	function effectFor(stat: string): number | undefined {
+		const entry = relics[relicKeyFor(stat)];
+		const rank = player.status_point_list[stat];
+		if (!entry || !rank || rank < 1 || rank > entry.effect_rate.length) return undefined;
+		const effect = entry.effect_rate[rank - 1];
+		// capture_power's effect rate is 0 at every rank: show the rank, no percentage.
+		return effect > 0 ? effect : undefined;
+	}
+
+	async function updateExtraStat(stat: string) {
+		const max = maxRankFor(stat);
+		// @ts-ignore
+		const result = await modal.showModal<number>(NumberSliderModal, {
+			title: m.edit_entity({ entity: stat }),
+			value: player.status_point_list[stat],
+			min: 0,
+			...(max !== undefined ? { max } : {})
+		});
+		if (result === undefined || result === null) return;
+		// The modal already clamps to `max`; this is a backstop.
+		const value = max !== undefined ? Math.min(Math.max(result, 0), max) : Math.max(result, 0);
+		player.status_point_list[stat] = value;
+		player.state = EntryState.MODIFIED;
+	}
 
 	async function updateStat(statType: string) {
 		console.log('updateStat', statType);
@@ -100,11 +153,32 @@
 	</button>
 {/snippet}
 
+{#snippet rankButton(stat: string)}
+	{@const max = maxRankFor(stat)}
+	{@const effect = effectFor(stat)}
+	<button
+		class="hover:ring-secondary-500 bg-surface-600/50 flex w-full items-center space-x-2 rounded-sm py-2 pr-2 hover:ring"
+		onclick={() => updateExtraStat(stat)}
+	>
+		<span class="grow pl-2 text-start">{stat}</span>
+		{#if effect !== undefined}
+			<span class="opacity-80">+{effect}%</span>
+		{/if}
+		<span>
+			{player.status_point_list[stat]}{#if max !== undefined}<span class="opacity-60">/{max}</span
+				>{/if}
+		</span>
+	</button>
+{/snippet}
+
 <div id="player-stats" class="flex flex-col items-end space-y-1">
 	{@render statButton('health', staticIcons.hpIcon, m.health(), health)}
 	{@render statButton('stamina', staticIcons.staminaIcon, m.stamina(), stamina)}
 	{@render statButton('attack', staticIcons.attackIcon, m.attack(), attack)}
 	{@render statButton('workSpeed', staticIcons.workSpeedIcon, m.workspeed(), workSpeed)}
 	{@render statButton('weight', staticIcons.weightIcon, m.weight(), weight)}
+	{#each extraStats as stat (stat)}
+		{@render rankButton(stat)}
+	{/each}
 	<CornerDotButton id="max-player-stats" class="w-24" label={m.max()} onClick={handleMaxPlayerStats} />
 </div>

@@ -11,7 +11,7 @@
 	let {
 		title = '',
 		value = 0,
-		markers = [5, 10, 15, 20, 25, 30, 35, 40, 45],
+		markers,
 		step = 1,
 		min = 0,
 		max = 50,
@@ -29,8 +29,28 @@
 	let sliderValue: number[] = $state([value]);
 	let modalContainer: HTMLDivElement;
 
+	// Callers that pass explicit markers keep them; otherwise derive roughly ten evenly
+	// spaced marks inside [min, max]. For the historical default (0-50) this yields
+	// [5, 10, ..., 45] — the previous hard-coded list — but a small max (e.g. a relic
+	// rank capped at 4) no longer draws markers beyond the end of the slider.
+	const sliderMarkers = $derived.by(() => {
+		if (markers) return markers;
+		const span = max - min;
+		if (span <= step) return [];
+		const interval = Math.round(span / 10 / step) * step || step;
+		const marks: number[] = [];
+		for (let mark = min + interval; mark < max; mark += interval) marks.push(mark);
+		return marks;
+	});
+
 	function handleClose(confirmed: boolean) {
-		closeModal(confirmed ? sliderValue[0] : null);
+		if (!confirmed) {
+			closeModal(null);
+			return;
+		}
+		// The number input lets you type past the slider's bounds; the modal never
+		// returns a value outside [min, max].
+		closeModal(Math.min(Math.max(sliderValue[0] ?? min, min), max));
 	}
 
 	onMount(() => {
@@ -49,7 +69,7 @@
 					value={sliderValue}
 					{min}
 					{max}
-					{markers}
+					markers={sliderMarkers}
 					{step}
 					height="h-2"
 					meterBg="bg-secondary-500"

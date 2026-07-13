@@ -12,6 +12,7 @@ import { missionsData } from './missions.svelte';
 import { palsData } from './pals.svelte';
 import { passiveSkillsData } from './passiveSkills.svelte';
 import { presetsData } from './presets.svelte';
+import { relicData } from './relic.svelte';
 import { technologiesData } from './technologies.svelte';
 import { uiCommonData } from './ui.svelte';
 import { workSuitabilityData } from './workSuitability.svelte';
@@ -31,6 +32,7 @@ export {
 	palsData,
 	passiveSkillsData,
 	presetsData,
+	relicData,
 	technologiesData,
 	uiCommonData,
 	workSuitabilityData

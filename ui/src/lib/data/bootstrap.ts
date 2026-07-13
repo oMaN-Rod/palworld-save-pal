@@ -16,6 +16,7 @@ import { missionsData } from './missions.svelte';
 import { palsData } from './pals.svelte';
 import { passiveSkillsData } from './passiveSkills.svelte';
 import { presetsData } from './presets.svelte';
+import { relicData } from './relic.svelte';
 import { technologiesData } from './technologies.svelte';
 import { workSuitabilityData } from './workSuitability.svelte';
 
@@ -36,6 +37,7 @@ export const bootstrap = async () => {
 	await effigies.reset();
 	await labResearchData.reset();
 	await missionsData.reset();
+	await relicData.reset();
 	const upsState = getUpsState();
 	await upsState.loadAll();
 

@@ -36,6 +36,11 @@ class RelicDataHandler {
 		await this.ensureLoaded();
 		return this.relicData;
 	}
+
+	async reset(): Promise<void> {
+		this.relicData = {};
+		await this.ensureLoaded();
+	}
 }
 
 export const relicData = new RelicDataHandler();
