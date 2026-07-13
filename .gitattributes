@@ -1,0 +1,9 @@
+# SQL migrations must stay LF on every platform.
+#
+# `sqlx::migrate!` embeds each migration with `include_str!` and checksums the
+# bytes as they sit on disk. With `core.autocrlf=true` (the Windows default) git
+# rewrites them to CRLF on checkout, which changes the checksum and makes sqlx
+# reject an already-applied migration with "migration N was previously applied
+# but has been modified" -- even though the SQL is identical. Every existing
+# database was migrated from LF files, so LF is the checksum that must hold.
+*.sql text eol=lf

@@ -80,3 +80,36 @@ fn iso_naive_matches_python_isoformat() {
         "2026-01-02T03:04:05"
     );
 }
+
+/// Migration files must be LF-only on every platform.
+///
+/// `sqlx::migrate!` embeds each file with `include_str!` and checksums the bytes
+/// exactly as they sit on disk. Every database in the wild was migrated from LF
+/// files, so a CRLF checkout changes the checksum and makes sqlx reject an
+/// already-applied migration -- "migration N was previously applied but has been
+/// modified" -- even though the SQL is byte-for-byte identical apart from the line
+/// endings. On Windows `core.autocrlf=true` does exactly that on checkout, which
+/// is why `.gitattributes` pins `*.sql` to `eol=lf`. This test is the guard.
+#[test]
+fn migration_files_are_lf_only() {
+    let dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("migrations");
+    let mut checked = 0;
+    for entry in std::fs::read_dir(&dir).expect("migrations dir") {
+        let path = entry.expect("dir entry").path();
+        if path.extension().is_none_or(|ext| ext != "sql") {
+            continue;
+        }
+        let bytes = std::fs::read(&path).expect("read migration");
+        let carriage_returns = bytes.iter().filter(|b| **b == b'\r').count();
+        assert_eq!(
+            carriage_returns,
+            0,
+            "{} has {carriage_returns} CR byte(s): a CRLF checkout changes its sqlx \
+             checksum and breaks every existing database. Check .gitattributes pins \
+             *.sql to eol=lf, then re-checkout the file.",
+            path.display()
+        );
+        checked += 1;
+    }
+    assert!(checked > 0, "found no migration files to check");
+}
