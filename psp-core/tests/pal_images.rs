@@ -1,5 +1,12 @@
-//! Every pal in `pals.json` must have a matching image asset, or the UI falls
-//! back to the generic "unknown" icon instead of the pal's real artwork.
+//! Content-completeness check: every `is_pal == true` entry in `pals.json`
+//! should have a matching `.webp` asset, so that newly-added pals ship with
+//! real artwork instead of silently falling back to art-less rendering.
+//!
+//! This is NOT a crash guard. `ui/src/lib/utils/assetLoader.ts` (`AssetLoader`)
+//! falls back to a shared `unknownIcon` (`img/unknown.webp`) whenever a
+//! per-key lookup misses, so a missing asset degrades gracefully to a
+//! generic icon rather than a broken image / 404. The value of this test is
+//! purely to flag the gap early so someone remembers to add the art.
 //!
 //! Filename derivation mirrors `ui/src/lib/utils/assetLoader.ts`:
 //! - `AssetLoader.cleanseCharacterId` lowercases the key and strips the
@@ -12,12 +19,38 @@
 //! (humans/NPCs), the UI callers (`PalCard.svelte`, `PalBadge.svelte`,
 //! `itemUtils.ts`, etc.) hardcode `character_id = "commonhuman"` before
 //! calling into the asset loader, so those entries never attempt a per-key
-//! lookup and can't 404 regardless of what images ship.
+//! lookup and are out of scope for this check.
 
 use std::collections::HashSet;
 use std::path::Path;
 
 use psp_core::gamedata::GameData;
+
+/// Pal keys that are known to have no `.webp` asset, and are deliberately
+/// exempted rather than fixed.
+///
+/// All eight entries are internal body-part/phase sub-entities of the
+/// `RAID_YakushimaBoss002` raid boss (its two hand hitboxes, its head
+/// hitbox, and their "_2" phase variants). A player can never own or
+/// display one of these as a pal, upstream ships no art for them either
+/// (we cherry-picked their image commits verbatim), and at runtime the UI
+/// simply falls back to `unknown.webp` for them. If upstream ever adds art
+/// for these, the "still missing" check below will start failing and this
+/// list should be pruned.
+///
+/// If this list grows for a *new* reason, add a comment explaining why that
+/// entry is legitimately un-ownable/internal rather than just silencing the
+/// test.
+const KNOWN_MISSING_ART: &[&str] = &[
+    "RAID_YakushimaBoss002",
+    "RAID_YakushimaBoss002_2",
+    "RAID_YakushimaBoss002_Hand_Left",
+    "RAID_YakushimaBoss002_Hand_Left_2",
+    "RAID_YakushimaBoss002_Hand_Right",
+    "RAID_YakushimaBoss002_Hand_Right_2",
+    "RAID_YakushimaBoss002_Head",
+    "RAID_YakushimaBoss002_Head_2",
+];
 
 fn game_data() -> GameData {
     let json_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../data/json");
@@ -44,19 +77,32 @@ fn cleanse_character_id(key: &str) -> String {
     s
 }
 
+/// Returns true if neither `<cleansed>.webp` nor the menu-icon fallback
+/// exists in `existing` for the given pal `key`.
+fn is_missing_art(key: &str, existing: &HashSet<String>) -> bool {
+    let cleansed = cleanse_character_id(key);
+    let direct = format!("{cleansed}.webp");
+    let menu_fallback = format!("t_{cleansed}_icon_normal.webp");
+    !existing.contains(&direct) && !existing.contains(&menu_fallback)
+}
+
+fn existing_assets() -> HashSet<String> {
+    let img_dir = Path::new(env!("CARGO_MANIFEST_DIR")).join("../ui/src/lib/assets/img");
+    std::fs::read_dir(&img_dir)
+        .expect("img dir present")
+        .filter_map(|entry| entry.ok())
+        .map(|entry| entry.file_name().to_string_lossy().to_lowercase())
+        .collect()
+}
+
 #[test]
 fn every_pal_key_has_an_image_asset() {
     let data = game_data();
     let pals = data.get("pals").expect("pals.json present");
     let map = pals.as_object().expect("pals.json is an object");
 
-    let img_dir =
-        Path::new(env!("CARGO_MANIFEST_DIR")).join("../ui/src/lib/assets/img");
-    let existing: HashSet<String> = std::fs::read_dir(&img_dir)
-        .expect("img dir present")
-        .filter_map(|entry| entry.ok())
-        .map(|entry| entry.file_name().to_string_lossy().to_lowercase())
-        .collect();
+    let existing = existing_assets();
+    let allow_list: HashSet<&str> = KNOWN_MISSING_ART.iter().copied().collect();
 
     let mut missing: Vec<String> = Vec::new();
     for (key, value) in map.iter() {
@@ -67,10 +113,11 @@ fn every_pal_key_has_an_image_asset() {
             continue;
         }
 
-        let cleansed = cleanse_character_id(key);
-        let direct = format!("{cleansed}.webp");
-        let menu_fallback = format!("t_{cleansed}_icon_normal.webp");
-        if !existing.contains(&direct) && !existing.contains(&menu_fallback) {
+        if allow_list.contains(key.as_str()) {
+            continue;
+        }
+
+        if is_missing_art(key, &existing) {
             missing.push(key.clone());
         }
     }
@@ -78,8 +125,32 @@ fn every_pal_key_has_an_image_asset() {
     missing.sort();
     assert!(
         missing.is_empty(),
-        "{} pals have no .webp asset: {:?}",
+        "{} pal(s) have no .webp asset and are not in KNOWN_MISSING_ART: {:?}\n\
+         Either add the missing asset(s) under ui/src/lib/assets/img, or if the \
+         pal is a genuinely un-ownable internal entity (like a raid-boss body \
+         part), deliberately add it to KNOWN_MISSING_ART in psp-core/tests/pal_images.rs \
+         with a comment explaining why.",
         missing.len(),
         &missing[..missing.len().min(20)]
+    );
+
+    // Keep KNOWN_MISSING_ART honest: if upstream ever ships art for one of
+    // these entries, fail here so the entry gets pruned instead of the
+    // allow-list silently rotting.
+    let still_missing: Vec<&str> = KNOWN_MISSING_ART
+        .iter()
+        .copied()
+        .filter(|key| is_missing_art(key, &existing))
+        .collect();
+    let stale: Vec<&str> = KNOWN_MISSING_ART
+        .iter()
+        .copied()
+        .filter(|key| !still_missing.contains(key))
+        .collect();
+    assert!(
+        stale.is_empty(),
+        "these KNOWN_MISSING_ART entries now have art and should be removed \
+         from the allow-list in psp-core/tests/pal_images.rs: {:?}",
+        stale
     );
 }
