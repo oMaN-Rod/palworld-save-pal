@@ -15,7 +15,9 @@ keys are appended alphabetically. --check reports the diff without writing.
 
 import argparse
 import json
+import os
 import re
+import subprocess
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -31,10 +33,24 @@ from dt_reader import (  # noqa: E402
 )
 
 
-def _clean(value: str | None) -> str | None:
+def _clean(value: str | None, key: str | None = None) -> str | None:
     """None out per-language placeholder strings ("ko_Text") that leaked into
-    previously committed l10n files."""
-    if isinstance(value, str) and _PLACEHOLDER.match(value.strip()):
+    previously committed l10n files. When the entry key is given, a committed
+    value that is just the raw code name ("AnimalSkin2") is dropped too —
+    natural display names never look like code identifiers."""
+    if isinstance(value, str) and (
+            _PLACEHOLDER.match(value.strip()) or value.strip() == "-"):
+        return None
+    # Unresolved RichText remnants from older pipeline runs ("<itemName
+    # id=|X|/>") mean the committed value was never valid display text.
+    if isinstance(value, str) and "<" in value and ("id=|" in value or "/>" in value):
+        return None
+    # Known-bad strings committed by older generator runs (upstream included):
+    # raw code leaks for rows the game never authored in any language.
+    if isinstance(value, str) and value.strip().startswith(_BAD_COMMITTED_PREFIXES):
+        return None
+    if (key is not None and isinstance(value, str) and value == key.split("::")[-1]
+            and re.search(r"[_0-9]|[a-z][A-Z]", value)):
         return None
     return value
 
@@ -114,7 +130,9 @@ def build_pals(dump: Path, existing: dict) -> dict:
 
     skill_sets: dict[str, dict] = defaultdict(dict)
     for row in waza_levels.values():
-        skill_sets[row["PalId"].lower()][strip_enum(row["WazaID"])] = row["Level"]
+        # column casing differs between exports ("PalId" vs "PalID")
+        pal_id = row.get("PalId") or row.get("PalID")
+        skill_sets[pal_id.lower()][strip_enum(row["WazaID"])] = row["Level"]
 
     def make_entry(key: str, row: dict, old: dict | None) -> dict:
         genus = strip_enum(row["GenusCategory"])
@@ -415,6 +433,15 @@ def build_items(dump: Path, existing: dict) -> dict:
 def build_buildings(dump: Path, existing: dict) -> dict:
     dt = read_rows(dump, "Pal/DataTable/MapObject/Building/DT_BuildObjectDataTable.json")
     master = read_rows(dump, "Pal/DataTable/MapObject/DT_MapObjectMasterDataTable.json")
+    icons = read_rows(dump, "Pal/DataTable/MapObject/Building/DT_BuildObjectIconDataTable_Common.json")
+
+    def icon_for(key: str, old: dict | None) -> str:
+        row = icons.get(key)
+        if row:
+            asset = row.get("SoftIcon", {}).get("AssetPathName") or ""
+            if asset:
+                return asset.rsplit("/", 1)[-1].split(".")[0].lower()
+        return (old or {}).get("icon") or f"t_icon_buildobject_{key.lower()}"
 
     def make_entry(key: str, row: dict, old: dict | None) -> dict:
         materials = []
@@ -423,7 +450,7 @@ def build_buildings(dump: Path, existing: dict) -> dict:
             if mid != "None":
                 materials.append({"id": mid, "count": row[f"Material{i}_Count"]})
         m = master.get(row["MapObjectId"], {})
-        return {
+        entry = {
             "type_a": strip_enum(row["TypeA"]),
             "type_b": strip_enum(row["TypeB"]),
             "rank": row["Rank"],
@@ -436,8 +463,11 @@ def build_buildings(dump: Path, existing: dict) -> dict:
             "hp": m.get("Hp", (old or {}).get("hp")),
             "defense": m.get("Defense", (old or {}).get("defense")),
             "deterioration_damage": m.get("DeteriorationDamage", (old or {}).get("deterioration_damage")),
-            "icon": (old or {}).get("icon", f"t_icon_buildobject_{key.lower()}"),
+            "icon": icon_for(key, old),
         }
+        if (old or {}).get("disabled"):
+            entry["disabled"] = True
+        return entry
 
     result = {}
     for key, old in existing.items():
@@ -491,6 +521,16 @@ L10N_SPEC = {
         ("L10N/{lang}/Pal/DataTable/Text/DT_MapObjectNameText_Common.json", "MAPOBJECT_NAME_",
          "L10N/{lang}/Pal/DataTable/Text/DT_BuildObjectDescText_Common.json", "BUILDOBJECT_DESC_"),
     ],
+    # Element and work-suitability display names live in the shared UI table;
+    # the PSP keys match the game key suffixes 1:1.
+    "elements": [
+        ("L10N/{lang}/Pal/DataTable/Text/DT_UI_Common_Text_Common.json",
+         "COMMON_ELEMENT_NAME_", None, None),
+    ],
+    "work_suitability": [
+        ("L10N/{lang}/Pal/DataTable/Text/DT_UI_Common_Text_Common.json",
+         "COMMON_WORK_SUITABILITY_", None, None),
+    ],
 }
 
 # Files whose l10n text key is carried in a DataTable row field rather than
@@ -509,9 +549,39 @@ L10N_INDIRECT = {
 }
 
 
+# "Previously committed translation" source. With PSP_L10N_BASELINE set to a
+# git ref (e.g. the merge-base with upstream), fallbacks only trust
+# translations that existed at that ref — text this branch itself generated
+# earlier is regenerated from the dump instead of being recycled, so a bad
+# earlier run can't keep contaminating later ones.
+_BASELINE_REF = os.environ.get("PSP_L10N_BASELINE")
+_BASELINE_CACHE: dict = {}
+
+
+def _load_baseline(lang: str, base_name: str) -> dict | None:
+    key = (lang, base_name)
+    if key not in _BASELINE_CACHE:
+        rel = f"data/json/l10n/{lang}/{base_name}.json"
+        proc = subprocess.run(
+            ["git", "-C", str(REPO_ROOT), "show", f"{_BASELINE_REF}:{rel}"],
+            capture_output=True, text=True)
+        _BASELINE_CACHE[key] = json.loads(proc.stdout) if proc.returncode == 0 else {}
+    return _BASELINE_CACHE[key]
+
+
 def _load_existing(lang: str, base_name: str) -> dict:
     """Previous l10n entries for a language; a language that mirrors another
     (id-id -> id) also inherits the source's hand-maintained entries."""
+    if _BASELINE_REF:
+        own = _load_baseline(lang, base_name)
+        src = LANG_SOURCE_OVERRIDES.get(lang)
+        if src:
+            merged = dict(own)
+            for key, entry in _load_baseline(src, base_name).items():
+                if _clean(entry.get("localized_name")):
+                    merged[key] = entry
+            return merged
+        return own
     own_path = L10N_DIR / lang / f"{base_name}.json"
     own = load_psp_json(own_path) if own_path.exists() else {}
     src = LANG_SOURCE_OVERRIDES.get(lang)
@@ -531,10 +601,11 @@ def build_l10n_indirect(dump: Path, base_name: str, base_keys: list[str]) -> dic
     dt = read_rows(dump, dt_path)
     text_dir = "L10N/{lang}/Pal/DataTable/Text/"
     langs = sorted(d.name for d in L10N_DIR.iterdir() if d.is_dir())
+    en_resolve = make_markup_resolver(dump, "en")
     result = {}
     for lang in langs:
         src = LANG_SOURCE_OVERRIDES.get(lang, lang)
-        resolve = make_markup_resolver(dump, src)
+        resolve = en_resolve if src == "en" else make_markup_resolver(dump, src)
 
         def texts(rel, lang_code):
             try:
@@ -563,6 +634,12 @@ def build_l10n_indirect(dump: Path, base_name: str, base_keys: list[str]) -> dic
                     return v
             return None
 
+        def pick(candidates):
+            for value, resolver in candidates:
+                if value is not None:
+                    return resolver(value)
+            return None
+
         existing = _load_existing(lang, base_name)
         lang_out = {}
         for key in base_keys:
@@ -572,8 +649,8 @@ def build_l10n_indirect(dump: Path, base_name: str, base_keys: list[str]) -> dic
             old_desc = _clean((old or {}).get("description"))
             if row is None:
                 if old_name:
-                    lang_out[key] = {"localized_name": old_name,
-                                     "description": old_desc}
+                    lang_out[key] = {"localized_name": resolve(old_name),
+                                     "description": resolve(old_desc)}
                 continue
             nk = row[name_field].lower()
             if desc_field:
@@ -582,17 +659,29 @@ def build_l10n_indirect(dump: Path, base_name: str, base_keys: list[str]) -> dic
                 dk = nk.replace("name_", "desc_", 1)
             # Language-correct preference: this language's own text (direct,
             # then via the unlocked item/building the game displays), then
-            # the previously committed translation, then English.
-            name = names.get(nk)
-            if name is None and base_name == "technologies":
-                name = unlock_fallback(row, item_names, build_names)
-            name = name or old_name or en_names.get(nk)
-            if name is None and base_name == "technologies":
-                name = unlock_fallback(row, en_item_names, en_build_names)
-            desc = descs.get(dk) or old_desc or en_descs.get(dk)
+            # the previously committed translation, then English — each
+            # candidate resolved in the language of the text it came from.
+            # A committed raw code name still beats the full enum key.
+            unlock_own = unlock_fallback(row, item_names, build_names) \
+                if base_name == "technologies" else None
+            unlock_en = unlock_fallback(row, en_item_names, en_build_names) \
+                if base_name == "technologies" else None
+            name = pick([
+                (names.get(nk), resolve),
+                (unlock_own, resolve),
+                (_clean(old_name, key), resolve),
+                (en_names.get(nk), en_resolve),
+                (unlock_en, en_resolve),
+                (old_name, resolve),
+            ])
+            desc = pick([
+                (descs.get(dk), resolve),
+                (old_desc, resolve),
+                (en_descs.get(dk), en_resolve),
+            ])
             lang_out[key] = {
-                "localized_name": resolve(name) if name is not None else key,
-                "description": resolve(desc),
+                "localized_name": name if name is not None else key,
+                "description": desc,
             }
         result[lang] = lang_out
     return result
@@ -623,48 +712,113 @@ def item_overrides(dump: Path) -> tuple[dict, dict]:
 # Game text embeds UE RichText markup. Reference tags (<itemName id=|X|/>)
 # are resolved against the same language's text tables; style tags
 # (<Status_Up>...</>) are stripped keeping their content; icon tags dropped.
-_REF_TAG = re.compile(r"<(\w+)\s+id=\|([^|]*)\|[^>]*/>")
+# Some shipped rows close the id with an apostrophe instead of the second
+# pipe ("<itemName id=|Head004_5'/>", a game-side typo) — accept both.
+_REF_TAG = re.compile(r"<(\w+)\s+id=\|([^|'>]*)['|][^>]*/>")
 _ICON_TAG = re.compile(r"<(?:img|keyGuideIcon)\s+[^>]*/>")
 _STYLE_TAG = re.compile(r"</?\w[^>]*>|</>")
+
+
+_EFFECT_TOKEN = re.compile(r"\{EffectValue(\d)\}")
+
+
+def _subst_effect_values(text: str | None, row) -> str | None:
+    """Passive descriptions embed {EffectValueN} tokens that the game fills
+    from DT_PassiveSkill_Main at runtime; bake the row's values in."""
+    if not text or row is None or "{EffectValue" not in text:
+        return text
+
+    def repl(m):
+        v = row.get(f"EffectValue{m.group(1)}")
+        if v is None:
+            return m.group(0)
+        return f"{v:g}" if isinstance(v, float) else str(v)
+
+    return _EFFECT_TOKEN.sub(repl, text)
+
+
+def _pipes_to_quotes(text: str, lang: str) -> str:
+    """The game marks quoted phrases with pipes ("|word|"), but some locales
+    mix them with real CJK quote brackets ("「word|"). Convert pipes to real
+    quotes, closing whatever opener (CJK bracket or pipe) they pair with."""
+    if "|" not in text:
+        return text
+    pipe_open, pipe_close = ("「", "」") if lang.startswith("zh") else ('"', '"')
+    pairs = {"「": "」", "『": "』", "“": "”", "|": pipe_close}
+    closers = {"」", "』", "”"}
+    out: list[str] = []
+    stack: list[str] = []
+    for ch in text:
+        if ch == "|":
+            if stack:
+                out.append(pairs[stack.pop()])
+            else:
+                stack.append("|")
+                out.append(pipe_open)
+        elif ch in pairs:
+            stack.append(ch)
+            out.append(ch)
+        elif ch in closers:
+            if stack and pairs.get(stack[-1]) == ch:
+                stack.pop()
+            out.append(ch)
+        else:
+            out.append(ch)
+    return "".join(out)
 
 
 def make_markup_resolver(dump: Path, lang: str):
     tables = {}
 
-    def table(rel: str, prefix: str) -> dict:
-        cache_key = (rel, prefix)
+    def table(rel: str, prefix: str, lang_code: str) -> dict:
+        cache_key = (rel, prefix, lang_code)
         if cache_key not in tables:
-            tables[cache_key] = read_text_table(dump, rel.format(lang=lang), prefix)
+            tables[cache_key] = read_text_table(dump, rel.format(lang=lang_code), prefix)
         return tables[cache_key]
 
-    def lookup(tag: str, ref_id: str) -> str | None:
+    def lookup_in(tag: str, ref_id: str, lang_code: str) -> str | None:
         text_dir = "L10N/{lang}/Pal/DataTable/Text/"
-        tag = tag.lower()
         if tag == "itemname":
-            item_tbl = table(text_dir + "DT_ItemNameText_Common.json", "ITEM_NAME_")
+            item_tbl = table(text_dir + "DT_ItemNameText_Common.json", "ITEM_NAME_", lang_code)
             ov = item_overrides(dump)[0].get(ref_id.lower())
-            return item_tbl.get(ov) if ov else item_tbl.get(ref_id.lower())
+            return (item_tbl.get(ov) if ov else None) or item_tbl.get(ref_id.lower())
         if tag == "charactername":
-            return (table(text_dir + "DT_PalNameText_Common.json", "PAL_NAME_").get(ref_id.lower())
-                    or table(text_dir + "DT_HumanNameText_Common.json", "NAME_").get(ref_id.lower()))
+            return (table(text_dir + "DT_PalNameText_Common.json", "PAL_NAME_", lang_code).get(ref_id.lower())
+                    or table(text_dir + "DT_HumanNameText_Common.json", "NAME_", lang_code).get(ref_id.lower()))
         if tag == "mapobjectname":
-            return table(text_dir + "DT_MapObjectNameText_Common.json", "MAPOBJECT_NAME_").get(ref_id.lower())
+            return table(text_dir + "DT_MapObjectNameText_Common.json", "MAPOBJECT_NAME_", lang_code).get(ref_id.lower())
         if tag == "activeskillname":
-            return table(text_dir + "DT_SkillNameText_Common.json", "ACTION_SKILL_").get(ref_id.lower())
+            return table(text_dir + "DT_SkillNameText_Common.json", "ACTION_SKILL_", lang_code).get(ref_id.lower())
         if tag == "uicommon":
-            return table(text_dir + "DT_UI_Common_Text_Common.json", "").get(ref_id.lower())
+            return table(text_dir + "DT_UI_Common_Text_Common.json", "", lang_code).get(ref_id.lower())
         return None
 
+    def lookup(tag: str, ref_id: str) -> str | None:
+        tag = tag.lower()
+        # own language first; unauthored rows fall back to the English name
+        # so a display name never degrades to a raw code id.
+        value = lookup_in(tag, ref_id, lang)
+        if value is None and lang != "en":
+            value = lookup_in(tag, ref_id, "en")
+        return value
+
     def resolve(text: str | None) -> str | None:
-        if not text or "<" not in text:
+        if not text:
             return text
-        for _ in range(3):  # referenced names may themselves contain tags
-            new = _REF_TAG.sub(lambda m: lookup(m.group(1), m.group(2)) or m.group(2), text)
-            if new == text:
-                break
-            text = new
-        text = _ICON_TAG.sub("", text)
-        text = _STYLE_TAG.sub("", text)
+        if "<" in text:
+            # Icon tags (<img id=|X|/>) are visual-only and must be stripped
+            # before the reference-tag loop: _REF_TAG's shape also matches
+            # them, and since "img" isn't a recognized lookup() tag type,
+            # leaving them for that pass leaks the raw icon id as text
+            # (e.g. "<img id=|ElemIcon_Fire|/>Fuego" -> "ElemIcon_FireFuego").
+            text = _ICON_TAG.sub("", text)
+            for _ in range(3):  # referenced names may themselves contain tags
+                new = _REF_TAG.sub(lambda m: lookup(m.group(1), m.group(2)) or m.group(2), text)
+                if new == text:
+                    break
+                text = new
+            text = _STYLE_TAG.sub("", text)
+        text = _pipes_to_quotes(text, lang)
         return re.sub(r"  +", " ", text).strip()
 
     return resolve
@@ -689,6 +843,60 @@ def read_text_table(dump: Path, rel: str, prefix: str) -> dict:
     return out
 
 
+# Hand corrections for typos in the game's own text, keyed by the exact
+# broken value so each fix deactivates automatically once the game ships
+# corrected text. (lang, base, key, field) -> (broken, fixed). The lang key
+# is the SOURCE language (LANG_SOURCE_OVERRIDES applied), so mirror locales
+# (id-id) inherit their source's fixes automatically.
+# Committed strings (any language) that must never survive as fallbacks.
+_BAD_COMMITTED_PREFIXES = (
+    "When in inventory, unlocks recipe for Head017 2",
+)
+
+HAND_FIXES = {
+    ("ko", "items", "Blueprint_Head017_5", "localized_name"):
+        ("크레메ーオ 모자 디자인 도면 5", "캐티메이지 모자 설계도 5"),
+    # game text typo: Japanese "の" in the Thai string (sibling _1 uses "ของ")
+    ("th", "passive_skills", "WorkSuitabilityAddRank_MonsterFarm_2", "description"):
+        ("ความถนัดงาน+2のฟาร์ม", "ความถนัดงาน+2ของฟาร์ม"),
+    # es-MX has no native work_suitability text for this key anywhere in the
+    # game data, so it falls back to English; use the es (Spanish) locale's
+    # translation instead, since es-MX/es share the language.
+    ("es-MX", "work_suitability", "OilExtraction", "localized_name"):
+        ("Crude Oil Extraction", "Extracción de petróleo crudo"),
+    # id game text garbles the "4x mid-air dash" description (sibling
+    # AirDash3 uses the correct "melompat 3 kali di udara" pattern).
+    ("id", "items", "Accessory_AirDash4", "description"): (
+        "Aksesori yang saat dipakai membuat pemain jadi bisa berlari di 4 kali udara.",
+        "Aksesori yang saat dipakai membuat pemain bisa melakukan dash di udara sebanyak 4 kali.",
+    ),
+    # game text has a stray katakana interpunct (・) nowhere else used in the
+    # Thai localization; every other Thai skill name is space-separated.
+    ("th", "active_skills", "EPalWazaID::Unique_GrassMinotaur_BullRush", "localized_name"):
+        ("พุ่งชน・คลั่ง", "พุ่งชน คลั่ง"),
+    # fr is the only locale (of 17) whose text equals the raw key "Vampire"
+    # instead of a real translation; en/es/it/etc. all use the adjectival
+    # form ("Vampiric"/"Vampírico"), so match that convention in French.
+    ("fr", "passive_skills", "Vampire", "localized_name"):
+        ("Vampire", "Vampirique"),
+    # zh-Hans/zh-Hant game text is a literal untranslated placeholder
+    # ("zh Hans/Hant Text"), which dt_reader treats as missing, so the value
+    # arriving here is the English fallback; reuse PalEgg_MutationPal_05's
+    # translation since both keys share the identical EN name.
+    ("zh-Hans", "items", "PalEgg_MutationPal", "localized_name"):
+        ("Huge Mutated Egg", "巨大突变帕鲁蛋"),
+    ("zh-Hant", "items", "PalEgg_MutationPal", "localized_name"):
+        ("Huge Mutated Egg", "巨大突變帕魯蛋"),
+}
+
+
+def _hand_fix(lang: str, base: str, key: str, field: str, value):
+    fix = HAND_FIXES.get((lang, base, key, field))
+    if fix and value == fix[0]:
+        return fix[1]
+    return value
+
+
 def build_l10n(dump: Path, base_name: str, base_keys: list[str]) -> dict:
     """Returns {lang: {key: {localized_name, description}}} for all PSP langs."""
     langs = sorted(d.name for d in L10N_DIR.iterdir() if d.is_dir())
@@ -704,11 +912,25 @@ def build_l10n(dump: Path, base_name: str, base_keys: list[str]) -> dict:
 
     en_names, en_descs = tables_for("en")
     name_ov, desc_ov = item_overrides(dump) if base_name == "items" else ({}, {})
+    en_existing = _load_existing("en", base_name)
+    en_resolve = make_markup_resolver(dump, "en")
+    effect_rows = (read_rows(dump, "Pal/DataTable/PassiveSkill/DT_PassiveSkill_Main.json")
+                   if base_name == "passive_skills" else {})
     result = {}
     for lang in langs:
         src = LANG_SOURCE_OVERRIDES.get(lang, lang)
         names, descs = tables_for(src) if src != "en" else (en_names, en_descs)
-        resolve = make_markup_resolver(dump, src)
+        # embedded references must be resolved in the language of the text
+        # they sit in, or an English fallback sentence ends up with a
+        # translated facility name spliced into it (and vice versa).
+        resolve = en_resolve if src == "en" else make_markup_resolver(dump, src)
+
+        def pick(candidates):
+            for value, resolver in candidates:
+                if value is not None:
+                    return resolver(value)
+            return None
+
         existing = _load_existing(lang, base_name)
         lang_out = {}
         for key in base_keys:
@@ -716,15 +938,39 @@ def build_l10n(dump: Path, base_name: str, base_keys: list[str]) -> dict:
             nk = name_ov.get(lk, lk)
             dk = desc_ov.get(lk, lk)
             old = existing.get(key)
-            old_name = _clean((old or {}).get("localized_name"))
+            old_name_raw = _clean((old or {}).get("localized_name"))
+            old_name = _clean(old_name_raw, key)
             old_desc = _clean((old or {}).get("description"))
+            old_en = en_existing.get(key) or {}
             # Prefer language-correct text: this language's game text, then
-            # the previously committed translation, then English game text.
-            name = names.get(nk) or old_name or en_names.get(nk)
-            desc = descs.get(dk) or old_desc or en_descs.get(dk)
+            # the previously committed translation, then English game text,
+            # then the committed English translation (hand-curated names for
+            # rows the game text tables never authored). A committed value
+            # that is just the raw code name loses to those, but still beats
+            # the full enum key.
+            # Some override targets are bogus (Shield_05 -> ITEM_NAME_PV_ITEMS),
+            # so a failed override lookup falls back to the item's own key.
+            name = pick([
+                (names.get(nk) or names.get(lk), resolve),
+                (old_name, resolve),
+                (en_names.get(nk) or en_names.get(lk), en_resolve),
+                (_clean(old_en.get("localized_name"), key), en_resolve),
+                (old_name_raw, resolve),
+            ])
+            desc = pick([
+                (descs.get(dk) or descs.get(lk), resolve),
+                (old_desc, resolve),
+                (en_descs.get(dk) or en_descs.get(lk), en_resolve),
+                (_clean(old_en.get("description")), en_resolve),
+            ])
             lang_out[key] = {
-                "localized_name": resolve(name) if name is not None else key,
-                "description": resolve(desc),
+                # unauthored rows fall back to the bare code name, never the
+                # full enum key ("EPalWazaID::X" -> "X")
+                "localized_name": _hand_fix(src, base_name, key, "localized_name",
+                                            name if name is not None
+                                            else key.split("::")[-1]),
+                "description": _hand_fix(src, base_name, key, "description",
+                                          _subst_effect_values(desc, effect_rows.get(key))),
             }
         result[lang] = lang_out
     return result
@@ -784,7 +1030,12 @@ def main() -> None:
         for base_name, builder in [(n, build_l10n) for n in L10N_SPEC] + \
                 [(n, build_l10n_indirect) for n in L10N_INDIRECT]:
             base_path = DATA_DIR / f"{base_name}.json"
-            base = built.get(base_name) or load_psp_json(base_path)
+            if base_path.exists():
+                base = built.get(base_name) or load_psp_json(base_path)
+            else:
+                # no base data file (e.g. work_suitability): the English l10n
+                # file is the key authority instead.
+                base = load_psp_json(L10N_DIR / "en" / f"{base_name}.json")
             per_lang = builder(dump, base_name, list(base))
             for lang, data in per_lang.items():
                 path = L10N_DIR / lang / f"{base_name}.json"

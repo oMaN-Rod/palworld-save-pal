@@ -34,8 +34,14 @@ python scripts/game_data/convert_icons.py --dump-dir <dump> [--check]
 ```
 
 Covered by `generate.py`: `pals`, `items`, `active_skills`, `passive_skills`,
-`buildings`, `exp`, and l10n for those plus `technologies` and `lab_research`
-(whose text keys are indirected through DataTable row fields).
+`buildings`, `exp`, and l10n for those plus `technologies`, `lab_research`
+(whose text keys are indirected through DataTable row fields), `elements` and
+`work_suitability` (whose display names live in `DT_UI_Common_Text_Common`).
+
+A dedicated-server pak works as a dump source for text data: it carries all
+DataTables and the per-language `*_Common` L10N tables (recent content), but
+not the full base text tables or any textures. Older entries then keep their
+committed translations via the merge fallback below.
 
 ## Merge semantics
 
@@ -48,6 +54,15 @@ Covered by `generate.py`: `pals`, `items`, `active_skills`, `passive_skills`,
   know (see `ui/src/lib/types/game.ts`) are recorded as `"None"`.
 - items.json: existing keys + any new row named in the l10n item name table
   (unnamed rows are NPC/debug internals).
-- l10n: RichText markup (`<itemName id=|X|/>`, style tags) is resolved against
-  the same language's text tables; hard line breaks become spaces; `id-id`
-  copies `id`; missing keys fall back to English, then to the code name.
+- l10n: RichText markup (`<itemName id=|X|/>`, style tags, including the
+  game-typo variant that closes the id with `'` instead of `|`) is resolved
+  against the same language's text tables; hard line breaks become spaces;
+  `id-id` copies `id`. Unauthored game rows (`ko_Text`, `zh_Hans_Text`,
+  `en Text`, bare `-`) are treated as missing, and the fallback chain is:
+  own-language game text → previously committed translation → English game
+  text → committed English translation → code name. A committed value that is
+  itself a raw code name never shadows a better fallback. Known game-text
+  typos are corrected via `HAND_FIXES` (keyed on the exact broken value, so
+  each fix deactivates once the game ships corrected text).
+- DataTable property-name casing differs between exporter/usmap versions
+  ("PalId" vs "PalID"); rows are read case-insensitively.
