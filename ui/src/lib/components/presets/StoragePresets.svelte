@@ -15,7 +15,8 @@
 		X,
 		Hash,
 		ChevronsLeftRight,
-		PackagePlus
+		PackagePlus,
+		Expand
 	} from 'lucide-svelte';
 	import { ItemSelectModal, NumberInputModal } from '$components/modals';
 	import * as m from '$i18n/messages';
@@ -235,6 +236,38 @@
 		container.state = EntryState.MODIFIED;
 	}
 
+	async function handleResizeContainer() {
+		if (!container) return;
+		// @ts-ignore
+		const result = await modal.showModal<number>(NumberInputModal, {
+			title: m.available_slots(),
+			value: container.slot_num,
+			min: 0,
+			max: 9999
+		});
+		if (result === null || result === undefined) return;
+
+		const oldSlots = container.slots;
+		let newSlots = [];
+		for (let i = 0; i < result; i++) {
+			const slot = oldSlots.find((s: ItemContainerSlot) => s.slot_index === i);
+			if (!slot) {
+				newSlots.push({
+					static_id: 'None',
+					slot_index: i,
+					count: 0,
+					dynamic_item: undefined
+				});
+			} else {
+				newSlots.push(slot);
+			}
+		}
+		container.slot_num = result;
+		container.slots = newSlots;
+		container.state = EntryState.MODIFIED;
+		onUpdate();
+	}
+
 	function handleClearContainer() {
 		container.slots.forEach((slot: ItemContainerSlot) => {
 			slot.dynamic_item = undefined;
@@ -266,6 +299,12 @@
 			popupLabel={m.set_entity_item_count({ entity: c.container })}
 		>
 			<Hash />
+		</TooltipButton>
+		<TooltipButton
+			onclick={handleResizeContainer}
+			popupLabel={m.available_slots()}
+		>
+			<Expand />
 		</TooltipButton>
 		<TooltipButton
 			onclick={handleClearContainer}
