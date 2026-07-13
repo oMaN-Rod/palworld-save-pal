@@ -712,7 +712,7 @@ fn apply_player_dto(
         if let Some(effigies) = &dto.collected_effigies {
             let newly_collected =
                 apply_unlock_flags(&mut loaded.sav, "RelicObtainForInstanceFlag", effigies);
-            apply_effigy_relic_counters(&mut loaded.sav, newly_collected);
+            apply_effigy_relic_counters(&mut loaded.sav, effigies, newly_collected);
         }
     }
     // Resolve every container id from the player's own save data first, then
@@ -916,22 +916,52 @@ fn apply_unlock_flags(player_sav: &mut uesave::Save, flag_name: &str, keys: &[St
     newly_unlocked
 }
 
+/// The relic type every effigy grants. Pre-1.0, effigies were the *only* relic, so
+/// 1.0 kept the legacy flat fields as CapturePower-only mirrors and put the other
+/// relic types exclusively in the by-type structures.
+const CAPTURE_POWER_RELIC: &str = "EPalRelicType::CapturePower";
+
+/// A relic type key. The save stores these as `EnumProperty`, but read `Name`/`Str`
+/// too rather than silently skipping an entry we would then duplicate.
+fn relic_type_name(property: &Property) -> Option<&str> {
+    props::as_enum(property).or_else(|| props::as_str(property))
+}
+
 /// Adds `newly_collected` to `RelicPossessNum` -- the count of *unspent* effigy
-/// relics the player holds.
+/// relics the player holds -- and, on a Palworld 1.0 save, keeps the structures the
+/// game actually reads in agreement with it.
 ///
-/// Only ever called for effigies. It grows only when effigies are newly collected,
-/// so an unchanged resave is a no-op. It is never decremented: the game has no
-/// "un-collect", and a relic already spent on a rank cannot be un-spent.
+/// `RelicPossessNum` grows only when effigies are newly collected, so an unchanged
+/// resave leaves it alone. It is never decremented: the game has no "un-collect",
+/// and a relic already spent on a rank cannot be un-spent.
 ///
-/// A save predating the field carries no `RelicPossessNum`; it is created here,
-/// preceded by an `ensure_schema`, because uesave's writer refuses to serialize a
-/// property with no registered schema.
-fn apply_effigy_relic_counters(player_sav: &mut uesave::Save, newly_collected: usize) {
-    if newly_collected == 0 {
-        return;
-    }
+/// A 1.0 save carries `RelicObtainForInstanceFlagByType`, `RelicPossessNumMap` and
+/// `RelicBonusExpTableIndex` alongside the legacy pair, and
+/// `bCaptureCompletionRelicFixupDone` is already `true`, so the game's one-time
+/// migration has run and will never re-derive them from our legacy writes. These
+/// invariants hold in every real 1.0 save examined, and are restored here:
+///   flat flags              == the CapturePower by-type flag set
+///   RelicPossessNum         == RelicPossessNumMap[CapturePower]
+///   RelicBonusExpTableIndex == total true flags across ALL by-type entries
+///
+/// There is deliberately no `newly_collected == 0` early return: a save whose
+/// structures are already out of sync must get repaired on resave, even when the
+/// edit collected nothing new.
+///
+/// A pre-1.0 save has none of the three, and every update below is conditional on
+/// the property already existing, so we never invent them. `RelicPossessNum` itself
+/// is the one property we may create -- but only when an effigy was actually
+/// collected, so an unchanged resave of a pre-1.0 save stays a strict no-op.
+fn apply_effigy_relic_counters(
+    player_sav: &mut uesave::Save,
+    effigies: &[String],
+    newly_collected: usize,
+) {
     let record_data_key = PropertyKey::from("RecordData");
     let relic_key = PropertyKey::from("RelicPossessNum");
+    let by_type_key = PropertyKey::from("RelicObtainForInstanceFlagByType");
+    let possess_map_key = PropertyKey::from("RelicPossessNumMap");
+    let exp_index_key = PropertyKey::from("RelicBonusExpTableIndex");
 
     let relic_already_present = save_data_props(player_sav)
         .ok()
@@ -940,7 +970,10 @@ fn apply_effigy_relic_counters(player_sav: &mut uesave::Save, newly_collected: u
         .map(|record_data| record_data.0.contains_key(&relic_key))
         .unwrap_or(false);
 
-    if !relic_already_present {
+    // A save predating the field carries no `RelicPossessNum`. Creating it needs an
+    // `ensure_schema` first, because uesave's writer refuses to serialize a property
+    // with no registered schema.
+    if !relic_already_present && newly_collected > 0 {
         if let Some(prefix) = props::schema_prefix_ending_with(player_sav, "RecordData") {
             props::ensure_schema(
                 player_sav,
@@ -964,15 +997,92 @@ fn apply_effigy_relic_counters(player_sav: &mut uesave::Save, newly_collected: u
         return;
     };
 
-    let current = record_data
+    // Unspent effigy relics: grows only by what was newly collected. Writing a 0 into
+    // a save that never had the property would be inventing a field, so don't.
+    let possess = if relic_already_present || newly_collected > 0 {
+        let current = record_data
+            .0
+            .get(&relic_key)
+            .and_then(props::as_i32)
+            .unwrap_or(0);
+        let possess = current.saturating_add(newly_collected as i32);
+        record_data.insert("RelicPossessNum", props::int_property(possess));
+        possess
+    } else {
+        0
+    };
+
+    // Mirror the flat flags into the CapturePower by-type entry, when present.
+    if let Some(by_type) = record_data
         .0
-        .get(&relic_key)
-        .and_then(props::as_i32)
-        .unwrap_or(0);
-    record_data.insert(
-        "RelicPossessNum",
-        props::int_property(current.saturating_add(newly_collected as i32)),
-    );
+        .get_mut(&by_type_key)
+        .and_then(props::struct_values_mut)
+    {
+        for value in by_type.iter_mut() {
+            let StructValue::Struct(entry) = value else {
+                continue;
+            };
+            let is_capture_power = entry
+                .0
+                .get(&PropertyKey::from("Type"))
+                .and_then(relic_type_name)
+                == Some(CAPTURE_POWER_RELIC);
+            if !is_capture_power {
+                continue;
+            }
+            let flags: Vec<uesave::MapEntry> = effigies
+                .iter()
+                .map(|key| uesave::MapEntry {
+                    key: props::name_property(key),
+                    value: props::bool_property(true),
+                })
+                .collect();
+            entry.insert("Flags", Property::Map(flags));
+            break;
+        }
+    }
+
+    // RelicPossessNumMap[CapturePower] mirrors the scalar, when present.
+    if let Some(entries) = record_data
+        .0
+        .get_mut(&possess_map_key)
+        .and_then(props::map_entries_mut)
+    {
+        match entries
+            .iter_mut()
+            .find(|entry| relic_type_name(&entry.key) == Some(CAPTURE_POWER_RELIC))
+        {
+            Some(entry) => entry.value = props::int_property(possess),
+            // The map's declared key type is EnumProperty, so a fresh key must be one
+            // too -- a NameProperty here would not read back as a relic type.
+            None => entries.push(uesave::MapEntry {
+                key: props::enum_property(CAPTURE_POWER_RELIC),
+                value: props::int_property(possess),
+            }),
+        }
+    }
+
+    // RelicBonusExpTableIndex counts every by-type flag, not just CapturePower.
+    if record_data.0.contains_key(&exp_index_key) {
+        let total: i32 = record_data
+            .0
+            .get(&by_type_key)
+            .and_then(props::struct_values)
+            .map(|values| {
+                values
+                    .iter()
+                    .filter_map(|value| match value {
+                        StructValue::Struct(entry) => entry.0.get(&PropertyKey::from("Flags")),
+                        _ => None,
+                    })
+                    .filter_map(props::map_entries)
+                    .flatten()
+                    .filter(|entry| props::as_bool(&entry.value).unwrap_or(false))
+                    .count() as i32
+            })
+            .unwrap_or(0);
+        record_data.insert("RelicBonusExpTableIndex", props::int_property(total));
+    }
 }
 
 /// Registers the `SaveData.bossTechnologyPoint` schema when the player's `.sav`

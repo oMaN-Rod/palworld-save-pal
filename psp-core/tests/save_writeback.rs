@@ -671,3 +671,103 @@ fn relic_possess_num_only_counts_newly_collected_effigies() {
         "one newly collected effigy must grant exactly one relic"
     );
 }
+
+/// After an effigy unlock on a 1.0 save, the legacy fields and the 1.0 by-type
+/// structures must still agree. The game's fixup already ran
+/// (`bCaptureCompletionRelicFixupDone` is `true` in every real save), so it will
+/// never reconcile them for us.
+#[test]
+fn effigy_unlock_keeps_1_0_relic_structures_consistent() {
+    let mut session = common::load_fixture_session("v1_relics");
+    let data = game_data();
+    let player_id = common::first_player_with_relics(&mut session, &data);
+
+    let mut dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+
+    // Collect one more effigy than the player currently has.
+    let mut effigies = dto.collected_effigies.clone().unwrap_or_default();
+    assert!(
+        !effigies.is_empty(),
+        "fixture sanity: this player must already carry effigies"
+    );
+    effigies.push("NEWLY_COLLECTED_EFFIGY".to_string());
+    dto.collected_effigies = Some(effigies);
+
+    let mut m = OrderedMap::new();
+    m.insert(player_id, dto);
+    player::update_players(&mut session, &data, &m, &null_progress()).unwrap();
+
+    let sav = common::player_sav_json(&session, player_id);
+    let flat = common::relic_flat_flags(&sav);
+    let by_type = common::relic_by_type_flags(&sav);
+    let possess = common::relic_possess_num(&sav);
+    let possess_map = common::relic_possess_num_map(&sav);
+    let exp_index = common::relic_bonus_exp_table_index(&sav);
+
+    // (2) flat == the CapturePower by-type flag set
+    assert_eq!(
+        flat,
+        by_type
+            .get("EPalRelicType::CapturePower")
+            .cloned()
+            .unwrap_or_default(),
+        "the flat effigy flag map must equal the CapturePower by-type flag set"
+    );
+    assert!(
+        flat.contains("NEWLY_COLLECTED_EFFIGY"),
+        "the newly collected effigy must appear in both representations"
+    );
+
+    // (3) scalar == map[CapturePower]
+    assert_eq!(
+        possess,
+        possess_map
+            .get("EPalRelicType::CapturePower")
+            .copied()
+            .unwrap_or(0),
+        "RelicPossessNum must equal RelicPossessNumMap[CapturePower]"
+    );
+
+    // (1) exp table index == total by-type true flags
+    let total: usize = by_type.values().map(|s| s.len()).sum();
+    assert_eq!(
+        exp_index as usize, total,
+        "RelicBonusExpTableIndex must equal the total by-type flag count"
+    );
+}
+
+/// A pre-1.0 save has none of the 1.0 relic fields. The new code must not invent
+/// them.
+#[test]
+fn effigy_unlock_does_not_add_1_0_relic_fields_to_a_pre_1_0_save() {
+    let mut session = common::load_fixture_session("world1");
+    let data = game_data();
+    let player_id: Uuid = WORLD1_PLAYER_O.parse().unwrap();
+    player::get_player_details(&mut session, &data, player_id, &null_progress())
+        .unwrap()
+        .unwrap();
+    let mut dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    dto.collected_effigies = Some(vec!["EF_1".into()]);
+    let mut m = OrderedMap::new();
+    m.insert(player_id, dto);
+    player::update_players(&mut session, &data, &m, &null_progress()).unwrap();
+
+    let sav = common::player_sav_json(&session, player_id);
+    let text = serde_json::to_string(&sav).unwrap();
+    assert!(
+        !text.contains("RelicPossessNumMap"),
+        "must not add RelicPossessNumMap to a pre-1.0 save"
+    );
+    assert!(
+        !text.contains("RelicObtainForInstanceFlagByType"),
+        "must not add RelicObtainForInstanceFlagByType to a pre-1.0 save"
+    );
+    assert!(
+        !text.contains("RelicBonusExpTableIndex"),
+        "must not add RelicBonusExpTableIndex to a pre-1.0 save"
+    );
+}
