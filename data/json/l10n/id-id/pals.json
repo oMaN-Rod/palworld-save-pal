@@ -577,7 +577,7 @@
   },
   "DrillGame": {
     "localized_name": "Digtoise",
-    "description": "Konon ada kisah tentang |BorDigtoise|. Ini adalah kisah moral tentang Digtoise yang memiliki tempurung dan bor terkuat dan selalu memikirkan paradoks cerita anaka-anak."
+    "description": "Konon ada kisah tentang \"BorDigtoise\". Ini adalah kisah moral tentang Digtoise yang memiliki tempurung dan bor terkuat dan selalu memikirkan paradoks cerita anaka-anak."
   },
   "Eagle": {
     "localized_name": "Galeclaw",
@@ -589,7 +589,7 @@
   },
   "ElecLion": {
     "localized_name": "Boltmane",
-    "description": "-"
+    "description": "The more it moves, the more it heats up and the hair tips increasingly glow brighter. At its peak, it becomes so dazzling that you risk blindness if you stare at it directly."
   },
   "ElecLizard": {
     "localized_name": "Slowatt",
@@ -925,11 +925,11 @@
   },
   "FlowerDinosaur": {
     "localized_name": "Dinossom",
-    "description": "Sekali marah, mereka jadi tak terkendali dan mengamuk seperti kesetanan. Peribahasa |menginjak ekor Dinossom| bermakna membuat seseorang marah."
+    "description": "Sekali marah, mereka jadi tak terkendali dan mengamuk seperti kesetanan. Peribahasa \"menginjak ekor Dinossom\" bermakna membuat seseorang marah."
   },
   "FlowerDinosaur_Electric": {
     "localized_name": "Dinossom Lux",
-    "description": "Meski tersambar petir, nyawa mereka selamat. Peribahasa |petir menyambar Dinossom Lux| bermakna lolos dari maut."
+    "description": "Meski tersambar petir, nyawa mereka selamat. Peribahasa \"petir menyambar Dinossom Lux\" bermakna lolos dari maut."
   },
   "FlowerDoll": {
     "localized_name": "Petallia",
@@ -1545,7 +1545,7 @@
   },
   "KingBahamut_Dragon": {
     "localized_name": "Blazamut Ryu",
-    "description": "Dahulu kala, mereka muncul dari dalam bumi. Dengan kobaran api yang tiada henti dan tanpa belas kasihan membakar seluruh pulau sampai tidak ada yang tersisa. Ini dikenal dengan |Api Abadi|."
+    "description": "Dahulu kala, mereka muncul dari dalam bumi. Dengan kobaran api yang tiada henti dan tanpa belas kasihan membakar seluruh pulau sampai tidak ada yang tersisa. Ini dikenal dengan \"Api Abadi\"."
   },
   "KingSunfish": {
     "localized_name": "Solmora",
@@ -1945,7 +1945,7 @@
   },
   "MimicDog": {
     "localized_name": "Mimog",
-    "description": "Di kerajaan yang dulunya ada di pulau ini terdapat tradisi untuk memberikan penghargaan kepada orang yang mati paling bodoh di tahun itu. Alasan kematian pertama yang layak diingat adalah |tidak menyadari adanya Mimog, membuka petinya, dan digigit sampai mati.|"
+    "description": "Di kerajaan yang dulunya ada di pulau ini terdapat tradisi untuk memberikan penghargaan kepada orang yang mati paling bodoh di tahun itu. Alasan kematian pertama yang layak diingat adalah \"tidak menyadari adanya Mimog, membuka petinya, dan digigit sampai mati.\""
   },
   "MobuCitizen": {
     "localized_name": "Penduduk Pulau",
@@ -2145,7 +2145,7 @@
   },
   "PREDATOR_DrillGame": {
     "localized_name": "Digtoise",
-    "description": "Konon ada kisah tentang |BorDigtoise|. Ini adalah kisah moral tentang Digtoise yang memiliki tempurung dan bor terkuat dan selalu memikirkan paradoks cerita anaka-anak."
+    "description": "Konon ada kisah tentang \"BorDigtoise\". Ini adalah kisah moral tentang Digtoise yang memiliki tempurung dan bor terkuat dan selalu memikirkan paradoks cerita anaka-anak."
   },
   "PREDATOR_FairyDragon": {
     "localized_name": "Elphidran",
@@ -2157,7 +2157,7 @@
   },
   "PREDATOR_FlowerDinosaur": {
     "localized_name": "Dinossom",
-    "description": "Sekali marah, mereka jadi tak terkendali dan mengamuk seperti kesetanan. Peribahasa |menginjak ekor Dinossom| bermakna membuat seseorang marah."
+    "description": "Sekali marah, mereka jadi tak terkendali dan mengamuk seperti kesetanan. Peribahasa \"menginjak ekor Dinossom\" bermakna membuat seseorang marah."
   },
   "PREDATOR_FlowerRabbit_Quest": {
     "localized_name": "Flopie",
@@ -2249,7 +2249,7 @@
   },
   "PREDATOR_PurpleSpider": {
     "localized_name": "Tarantriss",
-    "description": "Sangat lengket dan terus menempel. Semakin dilawan malah semakin menempel. Begitulah |kepribadiannya|."
+    "description": "Sangat lengket dan terus menempel. Semakin dilawan malah semakin menempel. Begitulah \"kepribadiannya\"."
   },
   "PREDATOR_RedArmorBird": {
     "localized_name": "Ragnahawk",
@@ -2473,14 +2473,14 @@
   },
   "PurpleSpider": {
     "localized_name": "Tarantriss",
-    "description": "Sangat lengket dan terus menempel. Semakin dilawan malah semakin menempel. Begitulah |kepribadiannya|."
+    "description": "Sangat lengket dan terus menempel. Semakin dilawan malah semakin menempel. Begitulah \"kepribadiannya\"."
   },
   "QueenBee": {
     "localized_name": "Elizabee",
     "description": "Ratu terpilih yang mengatur para Beegarde. Tidak pernah habis pelayan yang bersedia bekerja sampai mati demi kesenangan melayani ratunya."
   },
   "QuestMan": {
-    "localized_name": "-",
+    "localized_name": "Quest Client",
     "description": null
   },
   "Quest_Farmer03_PinkCat": {
@@ -2773,11 +2773,11 @@
   },
   "SakuraSaurus": {
     "localized_name": "Broncherry",
-    "description": "Baunya berubah drastis sebelum dan sesudah kawin. Ia mengeluarkan aroma yang wangi setelah menemukan partner yang disebut dengan |Aroma Cinta Pertama|."
+    "description": "Baunya berubah drastis sebelum dan sesudah kawin. Ia mengeluarkan aroma yang wangi setelah menemukan partner yang disebut dengan \"Aroma Cinta Pertama\"."
   },
   "SakuraSaurus_Water": {
     "localized_name": "Broncherry Aqua",
-    "description": "Baunya berubah drastis sebelum dan sesudah kawin. Ia mengeluarkan aroma yang wangi setelah menemukan partner yang disebut dengan |Aroma Kesucian|."
+    "description": "Baunya berubah drastis sebelum dan sesudah kawin. Ia mengeluarkan aroma yang wangi setelah menemukan partner yang disebut dengan \"Aroma Kesucian\"."
   },
   "SalesPerson": {
     "localized_name": "Pedagang Pengembara",
@@ -2805,7 +2805,7 @@
   },
   "SamuraiDog": {
     "localized_name": "Pupperai",
-    "description": "Perang wilayah Pupperai dimulai dengan saling bertatapan dan diikuti oleh serangan kilat. Omong-omong, lebih baik jangan mengajari kata |Tunggu| pada yang telah dijinakkan. Gerakan alaminya setelah kamu memberikan perintah |Jalan| tidak akan dapat dihindari."
+    "description": "Perang wilayah Pupperai dimulai dengan saling bertatapan dan diikuti oleh serangan kilat. Omong-omong, lebih baik jangan mengajari kata \"Tunggu\" pada yang telah dijinakkan. Gerakan alaminya setelah kamu memberikan perintah \"Jalan\" tidak akan dapat dihindari."
   },
   "Scientist_FlameThrower": {
     "localized_name": "Unit Penelitian Genetika, Tim Eksekutif",
@@ -2889,7 +2889,7 @@
   },
   "SmallYeti": {
     "localized_name": "Snugloo",
-    "description": "|Melihat mata Snugloo| adalah ungkapan yang berarti mencari esensi yang tidak terlihat oleh mata. Omong-omong, entah kenapa tidak ada peneliti yang mencoba mencari apakah Snugloo benar-benar memiliki mata."
+    "description": "\"Melihat mata Snugloo\" adalah ungkapan yang berarti mencari esensi yang tidak terlihat oleh mata. Omong-omong, entah kenapa tidak ada peneliti yang mencoba mencari apakah Snugloo benar-benar memiliki mata."
   },
   "SnakeGirl": {
     "localized_name": "Venusa",
@@ -3037,10 +3037,10 @@
   },
   "VioletFairy": {
     "localized_name": "Vaelet",
-    "description": "Kastilnya penuh dengan bunga kesukaan raja. Pertempuran besar terjadi dan api menghampiri kastil. Di tengah hal itu, sesosok roh bunga muncul. - dari dongeng |Bunga Sang Raja|"
+    "description": "Kastilnya penuh dengan bunga kesukaan raja. Pertempuran besar terjadi dan api menghampiri kastil. Di tengah hal itu, sesosok roh bunga muncul. - dari dongeng \"Bunga Sang Raja\""
   },
   "VisitingMerchant": {
-    "localized_name": "-",
+    "localized_name": "Visitor",
     "description": null
   },
   "Visitor_Hunter_Rifle": {
@@ -3072,7 +3072,7 @@
     "description": "Pada individu yang sehat, suhu zat yang mengalir di punggungnya tetap stabil. Jika sedang gugup, suhunya menjadi tidak stabil, dan dalam skenario terburuk, zat tersebut dapat menguap atau membeku, mengakibatkan syok mendadak dan kematian."
   },
   "WeaponsDealer": {
-    "localized_name": "-",
+    "localized_name": "Weapons Dealer",
     "description": null
   },
   "WeaselDragon": {
@@ -3097,7 +3097,7 @@
   },
   "WhiteDeer": {
     "localized_name": "Celesdir",
-    "description": "Naskah kuno menyebutnya sebagai |Binatang Penyelamat|. Cahaya yang dipancarkan Celesdir memurnikan segalanya. Secara harfiah, ia melenyapkan sesuatu dari dunia ini tanpa jejak."
+    "description": "Naskah kuno menyebutnya sebagai \"Binatang Penyelamat\". Cahaya yang dipancarkan Celesdir memurnikan segalanya. Secara harfiah, ia melenyapkan sesuatu dari dunia ini tanpa jejak."
   },
   "WhiteDeer_Dark": {
     "localized_name": "Celesdir Noct",
@@ -3153,7 +3153,7 @@
   },
   "WizardOwl": {
     "localized_name": "Hoocrates",
-    "description": "Ia kerap tenggelam dalam pikirannya sendiri. Alhasil, ia sulit tidur karena pikirannya tidak bisa berhenti berputar. |Aku berpikir, maka aku ada.|"
+    "description": "Ia kerap tenggelam dalam pikirannya sendiri. Alhasil, ia sulit tidur karena pikirannya tidak bisa berhenti berputar. \"Aku berpikir, maka aku ada.\""
   },
   "WoolFox": {
     "localized_name": "Cremis",
@@ -3325,7 +3325,7 @@
   },
   "BeardedDragon": {
     "localized_name": "BeardedDragon",
-    "description": "-"
+    "description": "This Pal is under investigation."
   },
   "BlueWoolRabbit": {
     "localized_name": "BlueWoolRabbit",
@@ -3369,7 +3369,7 @@
   },
   "GrassDragon": {
     "localized_name": "GrassDragon",
-    "description": "-"
+    "description": "This Pal is under investigation."
   },
   "IceVeilDragon": {
     "localized_name": "IceVeilDragon",
@@ -3445,7 +3445,7 @@
   },
   "WaterLizard": {
     "localized_name": "WaterLizard",
-    "description": "-"
+    "description": null
   },
   "WorldTree_Hunter_MissileLauncher_test": {
     "localized_name": "WorldTree_Hunter_MissileLauncher_test",

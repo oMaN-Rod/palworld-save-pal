@@ -597,15 +597,15 @@
   },
   "Deffence_up2": {
     "localized_name": "Burly Body",
-    "description": "Defense +{EffectValue1}% Immune to Flinch"
+    "description": "Defense +20% Immune to Flinch"
   },
   "Deffence_up2_2": {
     "localized_name": "Heavyweight",
-    "description": "Defense +{EffectValue1}% Immune to Knockback"
+    "description": "Defense +20% Immune to Knockback"
   },
   "Deffence_up3": {
     "localized_name": "Diamond Body",
-    "description": "Defense +{EffectValue1}% Immune to Flinch Immune to Knockback"
+    "description": "Defense +30% Immune to Flinch Immune to Knockback"
   },
   "Defuser_ExplosiveSpore_EquipSkill": {
     "localized_name": "Explosion Immunity",
@@ -613,7 +613,7 @@
   },
   "ElementBoost_Aqua_1_PAL": {
     "localized_name": "Hydromaniac",
-    "description": "{EffectValue1}% increase in Water attack damage."
+    "description": "10% increase in Water attack damage."
   },
   "ElementBoost_Aqua_2_PAL": {
     "localized_name": "Lord of the Sea",
@@ -629,7 +629,7 @@
   },
   "ElementBoost_Dark_1_PAL": {
     "localized_name": "Veil of Darkness",
-    "description": "{EffectValue1}% increase in Dark attack damage."
+    "description": "10% increase in Dark attack damage."
   },
   "ElementBoost_Dark_2_BossDefeat": {
     "localized_name": "Dark Damage Enhancement (Medium)",
@@ -665,7 +665,7 @@
   },
   "ElementBoost_Dragon_1_PAL": {
     "localized_name": "Blood of the Dragon",
-    "description": "{EffectValue1}% increase in Dragon attack damage."
+    "description": "10% increase in Dragon attack damage."
   },
   "ElementBoost_Dragon_2_BossDefeat": {
     "localized_name": "Dragon Damage Enhancement (Medium)",
@@ -701,7 +701,7 @@
   },
   "ElementBoost_Earth_1_PAL": {
     "localized_name": "Power of Gaia",
-    "description": "{EffectValue1}% increase in Earth attack damage."
+    "description": "10% increase in Earth attack damage."
   },
   "ElementBoost_Earth_2_BossDefeat": {
     "localized_name": "Ground Damage Enhancement (Medium)",
@@ -765,7 +765,7 @@
   },
   "ElementBoost_Fire_1_PAL": {
     "localized_name": "Pyromaniac",
-    "description": "{EffectValue1}% increase in Fire attack damage."
+    "description": "10% increase in Fire attack damage."
   },
   "ElementBoost_Fire_2_BossDefeat": {
     "localized_name": "Fire Damage Enhancement (Medium)",
@@ -801,7 +801,7 @@
   },
   "ElementBoost_Ice_1_PAL": {
     "localized_name": "Coldblooded",
-    "description": "{EffectValue1}% increase in Ice attack damage."
+    "description": "10% increase in Ice attack damage."
   },
   "ElementBoost_Ice_2_BossDefeat": {
     "localized_name": "Ice Damage Enhancement (Medium)",
@@ -837,7 +837,7 @@
   },
   "ElementBoost_Leaf_1_PAL": {
     "localized_name": "Fragrant Foliage",
-    "description": "{EffectValue1}% increase in Grass attack damage."
+    "description": "10% increase in Grass attack damage."
   },
   "ElementBoost_Leaf_2_BossDefeat": {
     "localized_name": "Grass Damage Enhancement (Medium)",
@@ -873,7 +873,7 @@
   },
   "ElementBoost_Normal_1_PAL": {
     "localized_name": "Spirit of Zen",
-    "description": "{EffectValue1}% increase in Neutral attack damage."
+    "description": "10% increase in Neutral attack damage."
   },
   "ElementBoost_Normal_2_BossDefeat": {
     "localized_name": "Neutral Damage Enhancement (Medium)",
@@ -901,7 +901,7 @@
   },
   "ElementBoost_Thunder_1_PAL": {
     "localized_name": "Capacitor",
-    "description": "{EffectValue1}% increase in Lightning attack damage."
+    "description": "10% increase in Lightning attack damage."
   },
   "ElementBoost_Thunder_2_PAL": {
     "localized_name": "Lord of Lightning",
@@ -941,7 +941,7 @@
   },
   "ElementResist_Aqua_1_PAL": {
     "localized_name": "Waterproof",
-    "description": "{EffectValue1}% decrease in incoming Water damage."
+    "description": "10% decrease in incoming Water damage."
   },
   "ElementResist_Aqua_2": {
     "localized_name": "Water Damage Reduction Lv. 2",
@@ -961,7 +961,7 @@
   },
   "ElementResist_Dark_1_PAL": {
     "localized_name": "Cheery",
-    "description": "{EffectValue1}% decrease in incoming Dark damage."
+    "description": "10% decrease in incoming Dark damage."
   },
   "ElementResist_Dark_2": {
     "localized_name": "Dark Damage Reduction Lv. 2",
@@ -981,7 +981,7 @@
   },
   "ElementResist_Dragon_1_PAL": {
     "localized_name": "Dragonkiller",
-    "description": "{EffectValue1}% decrease in incoming Dragon damage."
+    "description": "10% decrease in incoming Dragon damage."
   },
   "ElementResist_Dragon_2": {
     "localized_name": "Dragon Damage Reduction Lv. 2",
@@ -1001,7 +1001,7 @@
   },
   "ElementResist_Earth_1_PAL": {
     "localized_name": "Earthquake Resistant",
-    "description": "{EffectValue1}% decrease in incoming Earth damage."
+    "description": "10% decrease in incoming Earth damage."
   },
   "ElementResist_Earth_2": {
     "localized_name": "Earth Damage Reduction Lv. 2",
@@ -1021,7 +1021,7 @@
   },
   "ElementResist_Fire_1_PAL": {
     "localized_name": "Suntan Lover",
-    "description": "{EffectValue1}% decrease in incoming Fire damage."
+    "description": "10% decrease in incoming Fire damage."
   },
   "ElementResist_Fire_2": {
     "localized_name": "Fire Damage Reduction Lv. 2",
@@ -1041,7 +1041,7 @@
   },
   "ElementResist_Ice_1_PAL": {
     "localized_name": "Heated Body",
-    "description": "{EffectValue1}% decrease in incoming Ice damage."
+    "description": "10% decrease in incoming Ice damage."
   },
   "ElementResist_Ice_2": {
     "localized_name": "Ice Damage Reduction Lv. 2",
@@ -1061,7 +1061,7 @@
   },
   "ElementResist_Leaf_1_PAL": {
     "localized_name": "Botanical Barrier",
-    "description": "{EffectValue1}% decrease in incoming Grass damage."
+    "description": "10% decrease in incoming Grass damage."
   },
   "ElementResist_Leaf_2": {
     "localized_name": "Grass Damage Reduction Lv. 2",
@@ -1081,7 +1081,7 @@
   },
   "ElementResist_Normal_1_PAL": {
     "localized_name": "Abnormal",
-    "description": "{EffectValue1}% decrease in incoming Neutral damage."
+    "description": "10% decrease in incoming Neutral damage."
   },
   "ElementResist_Normal_2": {
     "localized_name": "Neutral Damage Reduction Lv. 2",
@@ -1101,7 +1101,7 @@
   },
   "ElementResist_Thunder_1_PAL": {
     "localized_name": "Insulated Body",
-    "description": "{EffectValue1}% decrease in incoming Lightning damage."
+    "description": "10% decrease in incoming Lightning damage."
   },
   "ElementResist_Thunder_2": {
     "localized_name": "Electric Damage Reduction Lv. 2",
@@ -1133,7 +1133,7 @@
   },
   "GYM_NAME_Meadow": {
     "localized_name": "Rayne Syndicate Boss",
-    "description": "Attack +{EffectValue1}% Movement Speed increases {EffectValue2}%"
+    "description": "Attack +20% Movement Speed increases 10%"
   },
   "GYM_NAME_Sakurajima": {
     "localized_name": "Leader of the Moonflowers",
@@ -1245,7 +1245,7 @@
   },
   "MutationPal_ExplosionResist": {
     "localized_name": "Heavily Armored",
-    "description": "Immune to Explosion Damage"
+    "description": null
   },
   "MutationPal_Immortal": {
     "localized_name": "Immortality",
@@ -1253,7 +1253,7 @@
   },
   "MutationPal_Mutant": {
     "localized_name": "Idiosyncratic",
-    "description": "Pal and Player Auto Health Regeneration Rate +50.0% Defense +{EffectValue4}% Immune to Poison Damage Immune to Burn Damage"
+    "description": null
   },
   "NightOwl": {
     "localized_name": "Night Owl",
@@ -1273,7 +1273,7 @@
   },
   "Nushi": {
     "localized_name": "Lunker",
-    "description": "{EffectValue1}% increase to Water attack damage {EffectValue1}% increase to Ice attack damage {EffectValue1}% increase to defense."
+    "description": "20% increase to Water attack damage 20% increase to Ice attack damage 20% increase to defense."
   },
   "OctaviaArmorVampire": {
     "localized_name": "Blood Is Fuel",
@@ -1545,23 +1545,23 @@
   },
   "TrainerATK_UP_1": {
     "localized_name": "Vanguard",
-    "description": "{EffectValue1}% increase in Player Attack."
+    "description": "10% increase in Player Attack."
   },
   "TrainerDEF_UP_1": {
     "localized_name": "Stronghold Strategist",
-    "description": "{EffectValue1}% increase in Player Defense."
+    "description": "10% increase in Player Defense."
   },
   "TrainerLogging_up1": {
     "localized_name": "Logging Foreman",
-    "description": "{EffectValue1}% increase in Player Logging Efficiency."
+    "description": "25% increase in Player Logging Efficiency."
   },
   "TrainerMining_up1": {
     "localized_name": "Mine Foreman",
-    "description": "{EffectValue1}% increase in Player Mining Efficiency."
+    "description": "25% increase in Player Mining Efficiency."
   },
   "TrainerWorkSpeed_UP_1": {
     "localized_name": "Motivational Leader",
-    "description": "{EffectValue1}% increase in Player Work Speed."
+    "description": "25% increase in Player Work Speed."
   },
   "Vampire": {
     "localized_name": "Vampiric",
@@ -1609,39 +1609,39 @@
   },
   "WorkSuitabilityAddRank_MonsterFarm_1": {
     "localized_name": "Farmhand",
-    "description": "Farming's Work Suitability +1"
+    "description": null
   },
   "WorkSuitabilityAddRank_MonsterFarm_2": {
     "localized_name": "Ranch Master",
-    "description": "Farming's Work Suitability +2"
+    "description": null
   },
   "WorldTree_ATK": {
     "localized_name": "Twin-Edged Holy Blade",
-    "description": "Attack +{EffectValue1}% Defense {EffectValue2}% World Tree resources will not vanish when approached."
+    "description": "Attack +50% Defense -30% World Tree resources will not vanish when approached."
   },
   "WorldTree_ATK_DEF": {
     "localized_name": "God of Destruction",
-    "description": "Attack +{EffectValue1}% Defense +{EffectValue2}% Max Health {EffectValue3}% World Tree resources will not vanish when approached."
+    "description": "Attack +40% Defense +20% Max Health -50% World Tree resources will not vanish when approached."
   },
   "WorldTree_CraftSpeed": {
     "localized_name": "Demon’s Hand",
-    "description": "Work Speed +{EffectValue1}% SAN dreceases +15.0% faster World Tree harvestables won't vanish when approached."
+    "description": "Work Speed +90% SAN dreceases +15.0% faster World Tree harvestables won't vanish when approached."
   },
   "WorldTree_DEF": {
     "localized_name": "Sanctified Meat Shield",
-    "description": "Defense +{EffectValue1}% Attack {EffectValue2}% World Tree resources will not vanish when approached."
+    "description": "Defense +50% Attack -30% World Tree resources will not vanish when approached."
   },
   "WorldTree_FullStomach": {
     "localized_name": "World Tree Seedbed",
-    "description": "Decrease Hunger depletion rate by +50.0% HP {EffectValue2}% World Tree resources will not vanish when approached."
+    "description": "Decrease Hunger depletion rate by +50.0% HP -20% World Tree resources will not vanish when approached."
   },
   "WorldTree_MoveSpeed": {
     "localized_name": "Dimensional Leap",
-    "description": "Movement Speed +{EffectValue1}% Increases Hunger depletion rate by +15.0% World Tree resources will not vanish when approached."
+    "description": "Movement Speed +50% Increases Hunger depletion rate by +15.0% World Tree resources will not vanish when approached."
   },
   "WorldTree_Sanity": {
     "localized_name": "Hermit Sage",
-    "description": "SAN depletion rate -50.0% Work Speed {EffectValue2}% World Tree resources will not vanish when approached."
+    "description": "SAN depletion rate -50.0% Work Speed -20% World Tree resources will not vanish when approached."
   },
   "YakushimaDagameBoost_Magic_Equip": {
     "localized_name": "Hallowed Power: Magic",

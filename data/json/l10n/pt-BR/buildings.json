@@ -25,7 +25,7 @@
   },
   "AncientRelicRecycler": {
     "localized_name": "Conversor de Relíquias Antigas",
-    "description": "Mecanismo de conversão de materiais da antiguidade que reaproveita técnicas de uma civilização perdida. Pode desvendar tecnologias deixadas na forma de |relíquias da civilização antiga| para dar a elas uma nova forma aprimorada. É um recurso indispensável para poder aproveitar relíquias sem nenhum desperdício."
+    "description": "Mecanismo de conversão de materiais da antiguidade que reaproveita técnicas de uma civilização perdida. Pode desvendar tecnologias deixadas na forma de \"relíquias da civilização antiga\" para dar a elas uma nova forma aprimorada. É um recurso indispensável para poder aproveitar relíquias sem nenhum desperdício."
   },
   "AncientWorkBench": {
     "localized_name": "Bancada da Civilização Antiga",

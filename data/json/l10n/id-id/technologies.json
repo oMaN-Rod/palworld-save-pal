@@ -125,19 +125,19 @@
   },
   "Arrow": {
     "localized_name": "Anak Panah",
-    "description": "Anak Panah untuk ditembakkan dengan busur. Bisa dibuat di |Meja Kerja Primitif|."
+    "description": "Anak Panah untuk ditembakkan dengan busur. Bisa dibuat di \"Meja Kerja Primitif\"."
   },
   "Arrow_Fire": {
     "localized_name": "Anak Panah Api",
-    "description": "Anak Panah Api untuk ditembakkan dengan busur. Memberikan damage ElemIcon_FireApi pada target. Bisa dibuat di |Meja Kerja Primitif|."
+    "description": "Anak Panah Api untuk ditembakkan dengan busur. Memberikan damage Api pada target. Bisa dibuat di \"Meja Kerja Primitif\"."
   },
   "Arrow_Poison": {
     "localized_name": "Anak Panah Beracun",
-    "description": "Anak Panah Beracun untuk ditembakkan dengan busur. Memberikan damage Racun pada target. Bisa dibuat di |Meja Kerja Primitif|."
+    "description": "Anak Panah Beracun untuk ditembakkan dengan busur. Memberikan damage Racun pada target. Bisa dibuat di \"Meja Kerja Primitif\"."
   },
   "AssaultRifleBullet": {
     "localized_name": "Peluru Senapan Serbu",
-    "description": "Peluru yang digunakan untuk |Senapan Serbu| dan sejenisnya. Bisa dibuat di |Pabrik Perakitan Senjata|."
+    "description": "Peluru yang digunakan untuk \"Senapan Serbu\" dan sejenisnya. Bisa dibuat di \"Pabrik Perakitan Senjata\"."
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "Kantong Makanan Otomatis Kecil",
@@ -189,79 +189,79 @@
   },
   "Battle_Armor_Grade_01_Cloth": {
     "localized_name": "Pakaian Kain",
-    "description": "Pakaian yang terbuat dari |Kain|. Mampu melindungi dari dinginnya malam. Bisa dibuat di |Meja Kerja Primitif|."
+    "description": "Pakaian yang terbuat dari \"Kain\". Mampu melindungi dari dinginnya malam. Bisa dibuat di \"Meja Kerja Primitif\"."
   },
   "Battle_Armor_Grade_01_Cloth_Cold": {
     "localized_name": "Cetak Biru Pakaian Etnik Daerah Dingin",
-    "description": "|Pakaian Kain| yang diproduksi di wilayah dingin. Mampu menahan dingin yang menusuk tulang. Bisa dibuat di |Meja Kerja Primitif|."
+    "description": "\"Pakaian Kain\" yang diproduksi di wilayah dingin. Mampu menahan dingin yang menusuk tulang. Bisa dibuat di \"Meja Kerja Primitif\"."
   },
   "Battle_Armor_Grade_01_Cloth_Heat": {
     "localized_name": "Pakaian Etnik Daerah Tropis",
-    "description": "|Pakaian Kain| yang diproduksi di wilayah panas. Ketahanan panasnya tinggi. Bisa dibuat di |Meja Kerja Primitif|."
+    "description": "\"Pakaian Kain\" yang diproduksi di wilayah panas. Ketahanan panasnya tinggi. Bisa dibuat di \"Meja Kerja Primitif\"."
   },
   "Battle_Armor_Grade_02_Fur": {
     "localized_name": "Armor Bulu",
-    "description": "Baju zirah yang terbuat dari |Kulit|. Daya tahan dan pertahanannya ditingkatkan. Bisa dibuat di |Meja Kerja Kualitas Tinggi|."
+    "description": "Baju zirah yang terbuat dari \"Kulit\". Daya tahan dan pertahanannya ditingkatkan. Bisa dibuat di \"Meja Kerja Kualitas Tinggi\"."
   },
   "Battle_Armor_Grade_02_Fur_Cold": {
     "localized_name": "Armor Bulu Tahan Dingin",
-    "description": "|Armor Bulu| yang diproduksi di wilayah dingin. Mampu menahan dingin yang menusuk tulang. Bisa dibuat di |Meja Kerja Kualitas Tinggi|."
+    "description": "\"Armor Bulu\" yang diproduksi di wilayah dingin. Mampu menahan dingin yang menusuk tulang. Bisa dibuat di \"Meja Kerja Kualitas Tinggi\"."
   },
   "Battle_Armor_Grade_02_Fur_Heat": {
     "localized_name": "Armor Bulu Tahan Panas",
-    "description": "|Armor Bulu| yang diproduksi di wilayah panas. Ketahanan panasnya tinggi. Bisa dibuat di |Meja Kerja Kualitas Tinggi|."
+    "description": "\"Armor Bulu\" yang diproduksi di wilayah panas. Ketahanan panasnya tinggi. Bisa dibuat di \"Meja Kerja Kualitas Tinggi\"."
   },
   "Battle_Armor_Grade_03_Copper": {
     "localized_name": "Armor Logam",
-    "description": "Baju zirah yang terbuat dari logam. Kekuatan pertahanannya cukup dan beratnya sedang. Bisa dibuat di |Meja Kerja Kualitas Tinggi|."
+    "description": "Baju zirah yang terbuat dari logam. Kekuatan pertahanannya cukup dan beratnya sedang. Bisa dibuat di \"Meja Kerja Kualitas Tinggi\"."
   },
   "Battle_Armor_Grade_03_Copper_Cold": {
     "localized_name": "Armor Logam Tahan Dingin",
-    "description": "|Armor Logam| yang sudah ditingkatkan. Mampu menahan dingin yang menusuk tulang. Bisa dibuat di |Meja Kerja Kualitas Tinggi|."
+    "description": "\"Armor Logam\" yang sudah ditingkatkan. Mampu menahan dingin yang menusuk tulang. Bisa dibuat di \"Meja Kerja Kualitas Tinggi\"."
   },
   "Battle_Armor_Grade_03_Copper_Heat": {
     "localized_name": "Armor Logam Tahan Panas",
-    "description": "|Armor Logam| yang sudah ditingkatkan. Ketahanan panasnya tinggi. Bisa dibuat di |Meja Kerja Kualitas Tinggi|."
+    "description": "\"Armor Logam\" yang sudah ditingkatkan. Ketahanan panasnya tinggi. Bisa dibuat di \"Meja Kerja Kualitas Tinggi\"."
   },
   "Battle_Armor_Grade_03_Iron": {
     "localized_name": "Armor Logam Murni",
-    "description": "Baju zirah yang terbuat dari logam kualitas tinggi. Ketahanannya sangat baik, tetapi berat. Bisa dibuat di |Pabrik Perakitan|."
+    "description": "Baju zirah yang terbuat dari logam kualitas tinggi. Ketahanannya sangat baik, tetapi berat. Bisa dibuat di \"Pabrik Perakitan\"."
   },
   "Battle_Armor_Grade_03_Iron_Cold": {
     "localized_name": "Armor Logam Murni Tahan Dingin",
-    "description": "|Armor Logam Murni| yang sudah ditingkatkan. Mampu menahan dingin yang menusuk tulang. Bisa dibuat di |Pabrik Perakitan|."
+    "description": "\"Armor Logam Murni\" yang sudah ditingkatkan. Mampu menahan dingin yang menusuk tulang. Bisa dibuat di \"Pabrik Perakitan\"."
   },
   "Battle_Armor_Grade_03_Iron_Heat": {
     "localized_name": "Armor Logam Murni Tahan Panas",
-    "description": "|Armor Logam Murni| yang sudah ditingkatkan. Ketahanan panasnya tinggi. Bisa dibuat di |Pabrik Perakitan|."
+    "description": "\"Armor Logam Murni\" yang sudah ditingkatkan. Ketahanan panasnya tinggi. Bisa dibuat di \"Pabrik Perakitan\"."
   },
   "Battle_Armor_Grade_04_Steal": {
     "localized_name": "Armor Metal Pal",
-    "description": "Baju zirah yang terbuat dari Batangan Logam Metal Pal. Pertahanannya luar biasa, tetapi sangat berat. Bisa dibuat di |Pabrik Perakitan II|."
+    "description": "Baju zirah yang terbuat dari Batangan Logam Metal Pal. Pertahanannya luar biasa, tetapi sangat berat. Bisa dibuat di \"Pabrik Perakitan II\"."
   },
   "Battle_Armor_Grade_04_Steal_Cold": {
     "localized_name": "Armor Metal Pal Tahan Dingin",
-    "description": "|Armor Metal Pal| yang sudah ditingkatkan. Mampu menahan dingin yang menusuk tulang. Bisa dibuat di |Pabrik Perakitan II|."
+    "description": "\"Armor Metal Pal\" yang sudah ditingkatkan. Mampu menahan dingin yang menusuk tulang. Bisa dibuat di \"Pabrik Perakitan II\"."
   },
   "Battle_Armor_Grade_04_Steal_Heat": {
     "localized_name": "Armor Metal Pal Tahan Panas",
-    "description": "|Armor Metal Pal| yang sudah ditingkatkan. Ketahanan panasnya tinggi. Bisa dibuat di |Pabrik Perakitan II|."
+    "description": "\"Armor Metal Pal\" yang sudah ditingkatkan. Ketahanan panasnya tinggi. Bisa dibuat di \"Pabrik Perakitan II\"."
   },
   "Battle_Armor_Grade_05_Plastic": {
     "localized_name": "Armor Plastik",
-    "description": "Baju zirah yang terbuat dari Plastik. Pertahanannya meningkat, dan bobotnya lebih ringan. Bisa dibuat di |Pabrik Perakitan II|."
+    "description": "Baju zirah yang terbuat dari Plastik. Pertahanannya meningkat, dan bobotnya lebih ringan. Bisa dibuat di \"Pabrik Perakitan II\"."
   },
   "Battle_Armor_Grade_05_Plastic_Cold": {
     "localized_name": "Armor Plastik Tahan Dingin",
-    "description": "|Armor Plastik| yang sudah ditingkatkan. Mampu menahan dingin yang menusuk tulang. Bisa dibuat di |Pabrik Perakitan II|."
+    "description": "\"Armor Plastik\" yang sudah ditingkatkan. Mampu menahan dingin yang menusuk tulang. Bisa dibuat di \"Pabrik Perakitan II\"."
   },
   "Battle_Armor_Grade_05_Plastic_Heat": {
     "localized_name": "Armor Plastik Tahan Panas",
-    "description": "|Armor Plastik| yang sudah ditingkatkan. Ketahanan panasnya tinggi. Bisa dibuat di |Pabrik Perakitan II|."
+    "description": "\"Armor Plastik\" yang sudah ditingkatkan. Ketahanan panasnya tinggi. Bisa dibuat di \"Pabrik Perakitan II\"."
   },
   "Battle_Armor_Grade_05_Plastic_Weight": {
     "localized_name": "Armor Plastik Ringan",
-    "description": "|Armor Plastik| yang sudah ditingkatkan. Meningkatkan batas berat bawaan pemain. Bisa dibuat di |Pabrik Perakitan II|."
+    "description": "\"Armor Plastik\" yang sudah ditingkatkan. Meningkatkan batas berat bawaan pemain. Bisa dibuat di \"Pabrik Perakitan II\"."
   },
   "Battle_Cloth": {
     "localized_name": "Kain",
@@ -269,15 +269,15 @@
   },
   "Battle_Defense_BowGun": {
     "localized_name": "Busur Silang Statis",
-    "description": "Dengan menugaskan Pal yang memiliki keahlian |Kerajinan Tangan|, mereka akan terus menjaga markas dengan menggunakan busur silang dengan baik."
+    "description": "Dengan menugaskan Pal yang memiliki keahlian \"Kerajinan Tangan\", mereka akan terus menjaga markas dengan menggunakan busur silang dengan baik."
   },
   "Battle_Defense_MachineGun": {
     "localized_name": "Senapan Mesin Statis",
-    "description": "Dengan menugaskan Pal yang memiliki kemampuan |Kerajinan Tangan|, mereka akan menjaga markas dengan baik menggunakan fasilitas pertahanan ini."
+    "description": "Dengan menugaskan Pal yang memiliki kemampuan \"Kerajinan Tangan\", mereka akan menjaga markas dengan baik menggunakan fasilitas pertahanan ini."
   },
   "Battle_Defense_Missile": {
     "localized_name": "Peluncur Rudal Statis",
-    "description": "Dengan menugaskan Pal yang memiliki keahlian |Kerajinan Tangan|, mereka akan terus menjaga markas dengan menggunakan peluncur rudal dengan baik."
+    "description": "Dengan menugaskan Pal yang memiliki keahlian \"Kerajinan Tangan\", mereka akan terus menjaga markas dengan menggunakan peluncur rudal dengan baik."
   },
   "Battle_Glider_Grade_01": {
     "localized_name": "Parasut Normal",
@@ -285,39 +285,39 @@
   },
   "Battle_Glider_Grade_02": {
     "localized_name": "Glider Mega",
-    "description": "Glider yang dibentangkan dan digunakan untuk meluncur. Cukup kencang karena jenis produksi massal. Bisa dibuat di |Meja Kerja Kualitas Tinggi|."
+    "description": "Glider yang dibentangkan dan digunakan untuk meluncur. Cukup kencang karena jenis produksi massal. Bisa dibuat di \"Meja Kerja Kualitas Tinggi\"."
   },
   "Battle_Glider_Grade_03": {
     "localized_name": "Glider Giga",
-    "description": "Glider yang dibentangkan dan digunakan untuk meluncur. Kemampuannya ditingkatkan, sehingga bisa terbang dengan kecepatan tinggi. Bisa dibuat di |Pabrik Perakitan|."
+    "description": "Glider yang dibentangkan dan digunakan untuk meluncur. Kemampuannya ditingkatkan, sehingga bisa terbang dengan kecepatan tinggi. Bisa dibuat di \"Pabrik Perakitan\"."
   },
   "Battle_Glider_Grade_04": {
     "localized_name": "Glider Terra",
-    "description": "Glider yang dibentangkan dan digunakan untuk meluncur. Kemampuannya ditingkatkan lebih jauh, dan kecepatan serta daya angkat meningkat. Bisa dibuat di |Pabrik Perakitan II|."
+    "description": "Glider yang dibentangkan dan digunakan untuk meluncur. Kemampuannya ditingkatkan lebih jauh, dan kecepatan serta daya angkat meningkat. Bisa dibuat di \"Pabrik Perakitan II\"."
   },
   "Battle_GunPowder_Grade_02": {
     "localized_name": "Bubuk Mesiu",
-    "description": "|Bubuk Mesiu| untuk menembakkan peluru. Dibutuhkan untuk membuat peluru. Bisa dibuat di |Meja Kerja Kualitas Tinggi|."
+    "description": "\"Bubuk Mesiu\" untuk menembakkan peluru. Dibutuhkan untuk membuat peluru. Bisa dibuat di \"Meja Kerja Kualitas Tinggi\"."
   },
   "Battle_Helm_Grade_02_Fur": {
     "localized_name": "Hiasan Rambut Bulu",
-    "description": "Hiasan rambut dari bulu yang indah. Sepertinya bisa mencegah cedera fatal di kepala. Bisa dibuat di |Meja Kerja Primitif|."
+    "description": "Hiasan rambut dari bulu yang indah. Sepertinya bisa mencegah cedera fatal di kepala. Bisa dibuat di \"Meja Kerja Primitif\"."
   },
   "Battle_Helm_Grade_03_Copper": {
     "localized_name": "Helm Logam",
-    "description": "Helm yang terbuat dari logam. Pelindung yang andal dan terpercaya untuk kepala yang membuatmu tenang. Bisa dibuat di |Meja Kerja Kualitas Tinggi|."
+    "description": "Helm yang terbuat dari logam. Pelindung yang andal dan terpercaya untuk kepala yang membuatmu tenang. Bisa dibuat di \"Meja Kerja Kualitas Tinggi\"."
   },
   "Battle_Helm_Grade_04_Iron": {
     "localized_name": "Helm Logam Murni",
-    "description": "Helm yang terbuat dari logam berkualitas tinggi. Kilau logam yang dipoles meningkatkan nilainya. Bisa dibuat di |Pabrik Perakitan|."
+    "description": "Helm yang terbuat dari logam berkualitas tinggi. Kilau logam yang dipoles meningkatkan nilainya. Bisa dibuat di \"Pabrik Perakitan\"."
   },
   "Battle_Helm_Grade_05_Steal": {
     "localized_name": "Helm Metal Pal",
-    "description": "Helm yang terbuat dari Batangan Logam Metal Pal. Kualitasnya yang tak tertandingi membuat semua orang iri, bukti bahwa pemakainya adalah seorang kesatria sejati. Bisa dibuat di |Pabrik Perakitan II|."
+    "description": "Helm yang terbuat dari Batangan Logam Metal Pal. Kualitasnya yang tak tertandingi membuat semua orang iri, bukti bahwa pemakainya adalah seorang kesatria sejati. Bisa dibuat di \"Pabrik Perakitan II\"."
   },
   "Battle_Helm_Grade_06_Plastic": {
     "localized_name": "Helm Plastik",
-    "description": "Helm yang terbuat dari Plastik. Selain meningkatkan pertahanan, helm ini juga jadi lebih ringan. Bisa dibuat di |Pabrik Perakitan II|."
+    "description": "Helm yang terbuat dari Plastik. Selain meningkatkan pertahanan, helm ini juga jadi lebih ringan. Bisa dibuat di \"Pabrik Perakitan II\"."
   },
   "Battle_MeleeWeapon_Axe_Steal": {
     "localized_name": "Kapak Metal Pal",
@@ -337,15 +337,15 @@
   },
   "Battle_MeleeWeapon_Sword": {
     "localized_name": "Pedang",
-    "description": "|Pedang| untuk pertarungan jarak dekat. Kejatamannya sempurna! Semakin dekat dengan musuh, semakin berbahaya. Bisa dibuat di |Meja Produksi Senjata|."
+    "description": "\"Pedang\" untuk pertarungan jarak dekat. Kejatamannya sempurna! Semakin dekat dengan musuh, semakin berbahaya. Bisa dibuat di \"Meja Produksi Senjata\"."
   },
   "Battle_RangeWeapon_AssaultRifle": {
     "localized_name": "Senapan Serbu",
-    "description": "Senapan Serbu yang menaklukkan musuh dengan daya tembak yang luar biasa. Sangat cocok untuk bertempur melawan musuh yang kuat. Bisa dibuat di |Pabrik Perakitan Senjata|."
+    "description": "Senapan Serbu yang menaklukkan musuh dengan daya tembak yang luar biasa. Sangat cocok untuk bertempur melawan musuh yang kuat. Bisa dibuat di \"Pabrik Perakitan Senjata\"."
   },
   "Battle_RangeWeapon_Bow1": {
     "localized_name": "Busur Tua",
-    "description": "Senjata primitif untuk serangan jarak jauh. Dibuat seadanya dengan cara tambal sulam sehingga kekuatannya rendah. Bisa dibuat di |Meja Kerja Primitif|."
+    "description": "Senjata primitif untuk serangan jarak jauh. Dibuat seadanya dengan cara tambal sulam sehingga kekuatannya rendah. Bisa dibuat di \"Meja Kerja Primitif\"."
   },
   "Battle_RangeWeapon_Bow3": {
     "localized_name": "Busur Tiga Senar",
@@ -353,7 +353,7 @@
   },
   "Battle_RangeWeapon_BowGun": {
     "localized_name": "Busur Silang",
-    "description": "Bisa menembakkan |Anak Panah| tanpa perlu mengerahkan banyak tenaga. Perlu waktu untuk mengisi ulang, tetapi menghasilkan serangan yang kuat. Bisa dibuat di |Meja Kerja Kualitas Tinggi|."
+    "description": "Bisa menembakkan \"Anak Panah\" tanpa perlu mengerahkan banyak tenaga. Perlu waktu untuk mengisi ulang, tetapi menghasilkan serangan yang kuat. Bisa dibuat di \"Meja Kerja Kualitas Tinggi\"."
   },
   "Battle_RangeWeapon_CompoundBow": {
     "localized_name": "Busur Compound",
@@ -361,31 +361,31 @@
   },
   "Battle_RangeWeapon_FlameThrower": {
     "localized_name": "Penyembur Api",
-    "description": "Penyembur Api yang menembakkan api jarak jauh. Mampu membakar lawan. Bisa dibuat di |Pabrik Perakitan Senjata II|."
+    "description": "Penyembur Api yang menembakkan api jarak jauh. Mampu membakar lawan. Bisa dibuat di \"Pabrik Perakitan Senjata II\"."
   },
   "Battle_RangeWeapon_GatlingGun": {
     "localized_name": "Senapan Gatling",
-    "description": "Senapan gatling yang mampu melakukan tembakan penekan dengan rentetan cepat. Bisa menghujani musuh dengan pelurunya. Bisa dibuat di |Pabrik Perakitan Senjata II|."
+    "description": "Senapan gatling yang mampu melakukan tembakan penekan dengan rentetan cepat. Bisa menghujani musuh dengan pelurunya. Bisa dibuat di \"Pabrik Perakitan Senjata II\"."
   },
   "Battle_RangeWeapon_GrenadeLauncher": {
     "localized_name": "Peluncur Granat",
-    "description": "Bisa menembakkan granat yang menyebabkan ledakan di area yang luas. Berguna saat menghadapi banyak musuh. Bisa dibuat di |Pabrik Perakitan Senjata II|."
+    "description": "Bisa menembakkan granat yang menyebabkan ledakan di area yang luas. Berguna saat menghadapi banyak musuh. Bisa dibuat di \"Pabrik Perakitan Senjata II\"."
   },
   "Battle_RangeWeapon_GuidedMissileLauncher": {
     "localized_name": "Peluncur Rudal",
-    "description": "Bisa menembakkan rudal yang otomatis melacak dan mengejar musuh. Rudal akan meledak saat mengenai sasaran dan memberikan damage area yang luas. Bisa dibuat di |Pabrik Perakitan Senjata II|."
+    "description": "Bisa menembakkan rudal yang otomatis melacak dan mengejar musuh. Rudal akan meledak saat mengenai sasaran dan memberikan damage area yang luas. Bisa dibuat di \"Pabrik Perakitan Senjata II\"."
   },
   "Battle_RangeWeapon_HandGun": {
     "localized_name": "Pistol Tangan",
-    "description": "Pistol dengan kapasitas peluru dan kecepatan tembak yang telah ditingkatkan. Daya tembak per detik lebih tinggi dari Pistol Tangan Bekas. Dapat dibuat di |Meja Produksi Senjata|."
+    "description": "Pistol dengan kapasitas peluru dan kecepatan tembak yang telah ditingkatkan. Daya tembak per detik lebih tinggi dari Pistol Tangan Bekas. Dapat dibuat di \"Meja Produksi Senjata\"."
   },
   "Battle_RangeWeapon_HomingSphereLauncher": {
     "localized_name": "Peluncur Sphere Homing",
-    "description": "Peluncur untuk menembakkan Sphere. Sphere yang ditembakkan akan mengejar Pal. Bisa dibuat di |Pabrik Perakitan Senjata II|."
+    "description": "Peluncur untuk menembakkan Sphere. Sphere yang ditembakkan akan mengejar Pal. Bisa dibuat di \"Pabrik Perakitan Senjata II\"."
   },
   "Battle_RangeWeapon_LaserRifle": {
     "localized_name": "Senapan Laser",
-    "description": "Senjata yang menembakkan laser. Daya tembaknya tinggi dan mudah digunakan. Bisa dibuat di |Pabrik Perakitan Senjata II|."
+    "description": "Senjata yang menembakkan laser. Daya tembaknya tinggi dan mudah digunakan. Bisa dibuat di \"Pabrik Perakitan Senjata II\"."
   },
   "Battle_RangeWeapon_OldRevolver": {
     "localized_name": "Pistol Tua",
@@ -393,11 +393,11 @@
   },
   "Battle_RangeWeapon_Rifle": {
     "localized_name": "Senapan Tembakan Tunggal",
-    "description": "Senapan satu tembakan. Butuh waktu untuk memuat pelurunya. Jumlah pelurunya sedikit, tapi tembakannya kuat. Dapat dibuat di |Pabrik Perakitan Senjata|."
+    "description": "Senapan satu tembakan. Butuh waktu untuk memuat pelurunya. Jumlah pelurunya sedikit, tapi tembakannya kuat. Dapat dibuat di \"Pabrik Perakitan Senjata\"."
   },
   "Battle_RangeWeapon_RocketLauncher": {
     "localized_name": "Peluncur Roket",
-    "description": "Peluncur Roket yang dapat melakukan pengeboman yang kuat dari jarak jauh. Bisa dibuat di |Pabrik Perakitan Senjata II|."
+    "description": "Peluncur Roket yang dapat melakukan pengeboman yang kuat dari jarak jauh. Bisa dibuat di \"Pabrik Perakitan Senjata II\"."
   },
   "Battle_RangeWeapon_SemiAutoRifle": {
     "localized_name": "Pistol Semi Otomatis",
@@ -409,19 +409,19 @@
   },
   "Battle_RangeWeapon_ShotGun": {
     "localized_name": "Shotgun Laras Ganda",
-    "description": "Shotgun yang mematikan dalam jarak dekat. Bisa menembak beruntun 2 kali. Jumlah pelurunya sedikit, tapi tembakannya kuat. Dapat dibuat di |Pabrik Perakitan Senjata|."
+    "description": "Shotgun yang mematikan dalam jarak dekat. Bisa menembak beruntun 2 kali. Jumlah pelurunya sedikit, tapi tembakannya kuat. Dapat dibuat di \"Pabrik Perakitan Senjata\"."
   },
   "Battle_RangeWeapon_ShotGun_Multi": {
     "localized_name": "Shotgun Pompa",
-    "description": "Shotgun yang menjadi lebih kuat dengan bertambahnya kapasitas peluru. DPS jarak dekatnya luar biasa. Bisa dibuat di |Pabrik Perakitan Senjata|."
+    "description": "Shotgun yang menjadi lebih kuat dengan bertambahnya kapasitas peluru. DPS jarak dekatnya luar biasa. Bisa dibuat di \"Pabrik Perakitan Senjata\"."
   },
   "Battle_RangeWeapon_SphereLauncher": {
     "localized_name": "Peluncur Sphere Tersebar",
-    "description": "Peluncur model baru yang dapat menembakkan banyak Sphere secara bersamaan. Bisa menangkap banyak Pal sekaligus. Bisa dibuat di |Pabrik Perakitan Senjata|."
+    "description": "Peluncur model baru yang dapat menembakkan banyak Sphere secara bersamaan. Bisa menangkap banyak Pal sekaligus. Bisa dibuat di \"Pabrik Perakitan Senjata\"."
   },
   "Battle_RangeWeapon_SphereLauncher_Once": {
     "localized_name": "Peluncur Sphere Tunggal",
-    "description": "Peluncur untuk menembakkan Sphere. Bisa menangkap Pal yang bahkan berada di jarak yang lebih jauh. Bisa dibuat di |Meja Produksi Senjata|."
+    "description": "Peluncur untuk menembakkan Sphere. Bisa menangkap Pal yang bahkan berada di jarak yang lebih jauh. Bisa dibuat di \"Meja Produksi Senjata\"."
   },
   "Battle_RangeWeapon_SubmachineGun": {
     "localized_name": "Senapan Mesin Ringan",
@@ -457,7 +457,7 @@
   },
   "BreedFarm": {
     "localized_name": "Tempat Pembiakkan",
-    "description": "Dengan menugaskan 1 Pal ♂ dan 1 Pal ♀, kamu bisa membuat mereka bertelur. Untuk mengembangbiakkan mereka, kamu perlu memasukkan |Bolu|."
+    "description": "Dengan menugaskan 1 Pal ♂ dan 1 Pal ♀, kamu bisa membuat mereka bertelur. Untuk mengembangbiakkan mereka, kamu perlu memasukkan \"Bolu\"."
   },
   "BronzeSword": {
     "localized_name": "Pedang Primitif",
@@ -513,7 +513,7 @@
   },
   "Cloth2": {
     "localized_name": "Kain Kualitas Tinggi",
-    "description": "|Kain Kualitas Tinggi| yang dibuat dengan menenun banyak |Wol|. Dibutuhkan untuk membuat armor kualitas tinggi. Bisa dibuat di |Meja Kerja Kualitas Tinggi|."
+    "description": "\"Kain Kualitas Tinggi\" yang dibuat dengan menenun banyak \"Wol\". Dibutuhkan untuk membuat armor kualitas tinggi. Bisa dibuat di \"Meja Kerja Kualitas Tinggi\"."
   },
   "CompositeDesk": {
     "localized_name": "Meja Desain",
@@ -541,7 +541,7 @@
   },
   "Crusher": {
     "localized_name": "Mesin Penghancur",
-    "description": "Fasilitas untuk menghancurkan Batu dan Kayu lalu mengubahnya menjadi material lain. Membutuhkan Pal yang memiliki keahlian |Penyiraman| untuk menggerakkan kincir air."
+    "description": "Fasilitas untuk menghancurkan Batu dan Kayu lalu mengubahnya menjadi material lain. Membutuhkan Pal yang memiliki keahlian \"Penyiraman\" untuk menggerakkan kincir air."
   },
   "CrystalPit": {
     "localized_name": "Lokasi Tambang Kuarsa Hexo",
@@ -593,7 +593,7 @@
   },
   "ElecBaton": {
     "localized_name": "Tongkat Setrum",
-    "description": "Senjata jarak dekat yang menyetrum musuh. Pal yang tersengat listrik akan lebih mudah ditangkap. Bisa dibuat di |Meja Kerja Kualitas Tinggi|."
+    "description": "Senjata jarak dekat yang menyetrum musuh. Pal yang tersengat listrik akan lebih mudah ditangkap. Bisa dibuat di \"Meja Kerja Kualitas Tinggi\"."
   },
   "ElectricArcAssaultRifle": {
     "localized_name": "Senapan Plasma",
@@ -693,7 +693,7 @@
   },
   "FlourMill": {
     "localized_name": "Penggiling Tepung",
-    "description": "Fasilitas untuk menggiling Gandum untuk membuat Tepung Gandum. Membutuhkan Pal yang memiliki keahlian |Penyiraman| untuk menggerakkan kincir air."
+    "description": "Fasilitas untuk menggiling Gandum untuk membuat Tepung Gandum. Membutuhkan Pal yang memiliki keahlian \"Penyiraman\" untuk menggerakkan kincir air."
   },
   "FlowerBed": {
     "localized_name": "Petak Bunga",
@@ -953,11 +953,11 @@
   },
   "HandTorch": {
     "localized_name": "Obor",
-    "description": "Bisa menerangi dari gelapnya malam dan melindungi tubuh dari kedinginan. Dapat digunakan untuk pertarungan jarak dekat. Bisa dibuat di |Meja Kerja Primitif|."
+    "description": "Bisa menerangi dari gelapnya malam dan melindungi tubuh dari kedinginan. Dapat digunakan untuk pertarungan jarak dekat. Bisa dibuat di \"Meja Kerja Primitif\"."
   },
   "HandgunBullet": {
     "localized_name": "Peluru Pistol Tangan",
-    "description": "Peluru yang digunakan untuk |Pistol Tangan| dan sejenisnya. Bisa dibuat di |Meja Produksi Senjata|."
+    "description": "Peluru yang digunakan untuk \"Pistol Tangan\" dan sejenisnya. Bisa dibuat di \"Meja Produksi Senjata\"."
   },
   "Headstone": {
     "localized_name": "Batu Nisan",
@@ -997,19 +997,19 @@
   },
   "Infra_ElectronicCircuit": {
     "localized_name": "Papan Elektronik",
-    "description": "|Papan Elektronik| yang dibutuhkan untuk membuat senjata rahasia. Bisa dibuat di |Pabrik Perakitan|."
+    "description": "\"Papan Elektronik\" yang dibutuhkan untuk membuat senjata rahasia. Bisa dibuat di \"Pabrik Perakitan\"."
   },
   "Infra_ItemChest_Grade_01": {
     "localized_name": "Peti Kayu",
-    "description": "Dapat digunakan untuk menyimpan item. Jika diletakkan di markas, Pal dengan keahlian |Mengangkut| akan mengangkut item secara otomatis."
+    "description": "Dapat digunakan untuk menyimpan item. Jika diletakkan di markas, Pal dengan keahlian \"Mengangkut\" akan mengangkut item secara otomatis."
   },
   "Infra_ItemChest_Grade_02": {
     "localized_name": "Peti Logam",
-    "description": "Dapat menyimpan lebih banyak item, daya tahannya juga meningkat. Pal dengan keahlian |Mengangkut| akan mengangkut item secara otomatis."
+    "description": "Dapat menyimpan lebih banyak item, daya tahannya juga meningkat. Pal dengan keahlian \"Mengangkut\" akan mengangkut item secara otomatis."
   },
   "Infra_ItemChest_Grade_03": {
     "localized_name": "Peti Logam Murni",
-    "description": "Dapat menyimpan jauh lebih banyak item, daya tahannya juga meningkat. Pal dengan keahlian |Mengangkut| akan mengangkut item secara otomatis."
+    "description": "Dapat menyimpan jauh lebih banyak item, daya tahannya juga meningkat. Pal dengan keahlian \"Mengangkut\" akan mengangkut item secara otomatis."
   },
   "Infra_MachineParts": {
     "localized_name": "Paku",
@@ -1093,11 +1093,11 @@
   },
   "LauncherBullet": {
     "localized_name": "Bom Roket",
-    "description": "Peluru yang digunakan untuk |Peluncur Roket| dan sejenisnya. Bisa dibuat di |Pabrik Perakitan Senjata II|."
+    "description": "Peluru yang digunakan untuk \"Peluncur Roket\" dan sejenisnya. Bisa dibuat di \"Pabrik Perakitan Senjata II\"."
   },
   "Launcher_Meteor": {
     "localized_name": "Peluncur Meteor",
-    "description": "Senjata luar biasa yang terbuat dari meteorit yang diproses. Meledak seperti meteorit saat mengenai sasaran. Bisa dibuat di |Pabrik Perakitan Senjata|."
+    "description": "Senjata luar biasa yang terbuat dari meteorit yang diproses. Meledak seperti meteorit saat mengenai sasaran. Bisa dibuat di \"Pabrik Perakitan Senjata\"."
   },
   "MakeshiftAssaultRifle": {
     "localized_name": "Senapan Serbu Jelek",
@@ -1105,7 +1105,7 @@
   },
   "MakeshiftHandgun": {
     "localized_name": "Pistol Tangan Bekas",
-    "description": "Sebuah pistol yang dirakit dari rongsokan. Cocok untuk pertarungan jarak dekat, tetapi hanya dapat menembakkan satu peluru setiap kali. Dibuat di |Meja Produksi Senjata|."
+    "description": "Sebuah pistol yang dirakit dari rongsokan. Cocok untuk pertarungan jarak dekat, tetapi hanya dapat menembakkan satu peluru setiap kali. Dibuat di \"Meja Produksi Senjata\"."
   },
   "MakeshiftShotgun": {
     "localized_name": "Shotgun Jelek",
@@ -1125,7 +1125,7 @@
   },
   "MeatCutterKnife": {
     "localized_name": "Pisau Pemotong Daging",
-    "description": "Pisau yang dapat memotong Pal yang sedang dipanggil. Saat digunakan |mengelus| berubah menjadi sembelih. Pal yang sudah disembelih tidak akan kembali."
+    "description": "Pisau yang dapat memotong Pal yang sedang dipanggil. Saat digunakan \"mengelus\" berubah menjadi sembelih. Pal yang sudah disembelih tidak akan kembali."
   },
   "MedicalPalBed_04": {
     "localized_name": "Tempat Tidur Pal Besar",
@@ -1177,7 +1177,7 @@
   },
   "Musket": {
     "localized_name": "Senjata Senapan",
-    "description": "Senapan kuno sederhana. Tembakannya kuat, tetapi perlu waktu lama untuk mengisi ulang. Bisa dibuat di |Meja Produksi Senjata|."
+    "description": "Senapan kuno sederhana. Tembakannya kuat, tetapi perlu waktu lama untuk mengisi ulang. Bisa dibuat di \"Meja Produksi Senjata\"."
   },
   "NinjaFlagSet": {
     "localized_name": "Set Bendera Gerakan Bunga Bulan",
@@ -1289,11 +1289,11 @@
   },
   "Product_Axe_Grade_02": {
     "localized_name": "Kapak Logam",
-    "description": "Kapak logam yang dapat digunakan menebang kayu keras. Efektif untuk pohon kokoh yang tumbuh di pedalaman terpencil. Bisa dibuat di |Meja Kerja Kualitas Tinggi|."
+    "description": "Kapak logam yang dapat digunakan menebang kayu keras. Efektif untuk pohon kokoh yang tumbuh di pedalaman terpencil. Bisa dibuat di \"Meja Kerja Kualitas Tinggi\"."
   },
   "Product_Axe_Grade_03": {
     "localized_name": "Kapak Logam Murni",
-    "description": "Kapak yang dapat digunakan untuk mengumpulkan Kayu Keras dari pohon yang tumbuh di wilayah ekstrem seperti gurun dan gunung berapi. Bisa dibuat di |Pabrik Perakitan|."
+    "description": "Kapak yang dapat digunakan untuk mengumpulkan Kayu Keras dari pohon yang tumbuh di wilayah ekstrem seperti gurun dan gunung berapi. Bisa dibuat di \"Pabrik Perakitan\"."
   },
   "Product_CoalPit": {
     "localized_name": "Tambang Batu Bara",
@@ -1309,7 +1309,7 @@
   },
   "Product_Cooking_Grade_03": {
     "localized_name": "Dapur Listrik",
-    "description": "Meski membutuhkan listrik, kamu bisa memasak dengan lebih cepat dan efisien. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian |Menyalakan Api|."
+    "description": "Meski membutuhkan listrik, kamu bisa memasak dengan lebih cepat dan efisien. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian \"Menyalakan Api\"."
   },
   "Product_CopperPit": {
     "localized_name": "Lokasi Tambang Logam",
@@ -1321,19 +1321,19 @@
   },
   "Product_Factory_Hard_Grade_01": {
     "localized_name": "Meja Kerja Kualitas Tinggi",
-    "description": "Produksinya lebih cepat daripada |Meja Kerja Primitif|. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian |Kerajinan Tangan|."
+    "description": "Produksinya lebih cepat daripada \"Meja Kerja Primitif\". Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian \"Kerajinan Tangan\"."
   },
   "Product_Factory_Hard_Grade_02": {
     "localized_name": "Pabrik Perakitan",
-    "description": "Meski membutuhkan listrik, kamu bisa memproduksi berbagai item dengan lebih cepat. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian |Kerajinan Tangan|."
+    "description": "Meski membutuhkan listrik, kamu bisa memproduksi berbagai item dengan lebih cepat. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian \"Kerajinan Tangan\"."
   },
   "Product_Factory_Hard_Grade_03": {
     "localized_name": "Pabrik Perakitan II",
-    "description": "Meski membutuhkan listrik, kamu bisa memproduksi berbagai item dengan jauh lebih cepat. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian |Kerajinan Tangan|."
+    "description": "Meski membutuhkan listrik, kamu bisa memproduksi berbagai item dengan jauh lebih cepat. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian \"Kerajinan Tangan\"."
   },
   "Product_Farm_Berries": {
     "localized_name": "Ladang Beri",
-    "description": "Ladang untuk menghasilkan buah beri. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian |Menanam Bibit|, |Menyiram|, dan |Mengumpulkan|."
+    "description": "Ladang untuk menghasilkan buah beri. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian \"Menanam Bibit\", \"Menyiram\", dan \"Mengumpulkan\"."
   },
   "Product_Farm_Carrot": {
     "localized_name": "Ladang Wortel",
@@ -1341,7 +1341,7 @@
   },
   "Product_Farm_Lettuce": {
     "localized_name": "Ladang Selada",
-    "description": "Ladang untuk menghasilkan selada. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian |Menanam Bibit|, |Menyiram|, dan |Mengumpulkan|."
+    "description": "Ladang untuk menghasilkan selada. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian \"Menanam Bibit\", \"Menyiram\", dan \"Mengumpulkan\"."
   },
   "Product_Farm_Onion": {
     "localized_name": "Ladang Bawang Bombai",
@@ -1353,31 +1353,31 @@
   },
   "Product_Farm_tomato": {
     "localized_name": "Ladang Tomat",
-    "description": "Ladang untuk menghasilkan tomat. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian |Menanam Bibit|, |Menyiram|, dan |Mengumpulkan|."
+    "description": "Ladang untuk menghasilkan tomat. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian \"Menanam Bibit\", \"Menyiram\", dan \"Mengumpulkan\"."
   },
   "Product_Farm_wheat": {
     "localized_name": "Ladang Gandum",
-    "description": "Ladang penghasil gandum yang menjadi bahan untuk membuat |Roti|. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki kemampuan |Menanam Bibit|, |Menyiram|, |Mengumpulkan|."
+    "description": "Ladang penghasil gandum yang menjadi bahan untuk membuat \"Roti\". Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki kemampuan \"Menanam Bibit\", \"Menyiram\", \"Mengumpulkan\"."
   },
   "Product_Ingot_Grade_01_Copper": {
     "localized_name": "Tungku Primitif",
-    "description": "|Bijih Logam| dapat dilebur untuk membuat batangan logam."
+    "description": "\"Bijih Logam\" dapat dilebur untuk membuat batangan logam."
   },
   "Product_Ingot_Grade_02_Iron": {
     "localized_name": "Tungku Modern",
-    "description": "Kamu dapat melebur |Batangan Logam Murni|."
+    "description": "Kamu dapat melebur \"Batangan Logam Murni\"."
   },
   "Product_Ingot_Grade_03_Steal": {
     "localized_name": "Tungku Listrik",
-    "description": "Kamu dapat melebur |Batangan Logam Metal Pal|."
+    "description": "Kamu dapat melebur \"Batangan Logam Metal Pal\"."
   },
   "Product_Medicine_Grade_01": {
     "localized_name": "Meja Produksi Obat Abad Pertengahan",
-    "description": "Bisa memproduksi obat sederhana. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian |Memproduksi Obat|."
+    "description": "Bisa memproduksi obat sederhana. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian \"Memproduksi Obat\"."
   },
   "Product_Medicine_Grade_02": {
     "localized_name": "Meja Produksi Obat Elektrik",
-    "description": "Meski membutuhkan listrik, kamu bisa memproduksi obat dengan kualitas yang lebih tinggi. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian |Memproduksi Obat|."
+    "description": "Meski membutuhkan listrik, kamu bisa memproduksi obat dengan kualitas yang lebih tinggi. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian \"Memproduksi Obat\"."
   },
   "Product_Pickaxe_Grade_01": {
     "localized_name": "Beliung Batu",
@@ -1385,11 +1385,11 @@
   },
   "Product_Pickaxe_Grade_02": {
     "localized_name": "Beliung Logam",
-    "description": "Beliung untuk menambang. Terbuat dari logam sehingga meningkatkan daya tahan dan efisiensinya. Bisa dibuat di |Meja Kerja Kualitas Tinggi|."
+    "description": "Beliung untuk menambang. Terbuat dari logam sehingga meningkatkan daya tahan dan efisiensinya. Bisa dibuat di \"Meja Kerja Kualitas Tinggi\"."
   },
   "Product_Pickaxe_Grade_03": {
     "localized_name": "Beliung Logam Murni",
-    "description": "Beliung untuk menambang. Daya tahan dan efisiensinya sudah ditingkatkan lebih lanjut. Bisa dibuat di |Pabrik Perakitan|."
+    "description": "Beliung untuk menambang. Daya tahan dan efisiensinya sudah ditingkatkan lebih lanjut. Bisa dibuat di \"Pabrik Perakitan\"."
   },
   "Product_QuartzPit": {
     "localized_name": "Lokasi Tambang Kuarsa Murni",
@@ -1397,7 +1397,7 @@
   },
   "Product_StationDeforest": {
     "localized_name": "Lokasi Penebangan Kayu",
-    "description": "Dapat menghasilkan kayu di markas. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian |Menebang Kayu|."
+    "description": "Dapat menghasilkan kayu di markas. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian \"Menebang Kayu\"."
   },
   "Product_StationDeforest2": {
     "localized_name": "Lokasi Penebangan Kayu Ⅱ",
@@ -1405,7 +1405,7 @@
   },
   "Product_StonePit": {
     "localized_name": "Tambang Batu",
-    "description": "Dapat menghasilkan batu di markas. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian |Menambang|."
+    "description": "Dapat menghasilkan batu di markas. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian \"Menambang\"."
   },
   "Product_SulfurPit": {
     "localized_name": "Tambang Belerang",
@@ -1413,15 +1413,15 @@
   },
   "Product_WeaponFactory_Dirty_Grade_01": {
     "localized_name": "Meja Produksi Senjata",
-    "description": "Fasilitas di mana kamu bisa membuat senjata mekanik sederhana. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian |Kerajinan Tangan|."
+    "description": "Fasilitas di mana kamu bisa membuat senjata mekanik sederhana. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian \"Kerajinan Tangan\"."
   },
   "Product_WeaponFactory_Dirty_Grade_02": {
     "localized_name": "Pabrik Perakitan Senjata",
-    "description": "Meski membutuhkan listrik, kamu bisa memproduksi senjata dan amunisi dengan lebih cepat. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian |Kerajinan Tangan|."
+    "description": "Meski membutuhkan listrik, kamu bisa memproduksi senjata dan amunisi dengan lebih cepat. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian \"Kerajinan Tangan\"."
   },
   "Product_WeaponFactory_Dirty_Grade_03": {
     "localized_name": "Pabrik Perakitan Senjata II",
-    "description": "Meski membutuhkan listrik, kamu bisa memproduksi senjata dan amunisi dengan jauh lebih cepat. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian |Kerajinan Tangan|."
+    "description": "Meski membutuhkan listrik, kamu bisa memproduksi senjata dan amunisi dengan jauh lebih cepat. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian \"Kerajinan Tangan\"."
   },
   "Product_WorkBench_SkillUnlock": {
     "localized_name": "Meja Produksi Pal Gear",
@@ -1441,11 +1441,11 @@
   },
   "RifleBullet": {
     "localized_name": "Peluru Senapan",
-    "description": "Peluru yang digunakan untuk senapan dan sejenisnya. Bisa dibuat di |Meja Produksi Senjata|."
+    "description": "Peluru yang digunakan untuk senapan dan sejenisnya. Bisa dibuat di \"Meja Produksi Senjata\"."
   },
   "RoughBullet": {
     "localized_name": "Amunisi Kasar",
-    "description": "Peluru yang digunakan untuk |Senjata Senapan|, |Pistol Tangan Bekas,| dan sejenisnya. Bisa dibuat di |Meja Produksi Senjata|."
+    "description": "Peluru yang digunakan untuk \"Senjata Senapan\", \"Pistol Tangan Bekas,\" dan sejenisnya. Bisa dibuat di \"Meja Produksi Senjata\"."
   },
   "SFArmor": {
     "localized_name": "Armor Hexolit",
@@ -1497,19 +1497,19 @@
   },
   "Shield_02": {
     "localized_name": "Perisai Mega",
-    "description": "Perisai misterius yang diciptakan dengan teknologi paldium. Prototipe yang telah ditingkatkan dan kekuatan pertahanannya meningkat. Bisa dibuat di |Meja Kerja Kualitas Tinggi|."
+    "description": "Perisai misterius yang diciptakan dengan teknologi paldium. Prototipe yang telah ditingkatkan dan kekuatan pertahanannya meningkat. Bisa dibuat di \"Meja Kerja Kualitas Tinggi\"."
   },
   "Shield_03": {
     "localized_name": "Perisai Giga",
-    "description": "Perisai misterius yang diciptakan dengan teknologi paldium. Telah ditingkatkan, kekuatan pertahanannya jauh lebih meningkat. Bisa dibuat di |Pabrik Perakitan|."
+    "description": "Perisai misterius yang diciptakan dengan teknologi paldium. Telah ditingkatkan, kekuatan pertahanannya jauh lebih meningkat. Bisa dibuat di \"Pabrik Perakitan\"."
   },
   "Shield_04": {
     "localized_name": "Perisai Terra",
-    "description": "Perisai misterius yang diciptakan dengan teknologi paldium. Hasil dari percobaan berulang kali dan telah mencapai kualitas tertinggi. Bisa dibuat di |Pabrik Perakitan II|."
+    "description": "Perisai misterius yang diciptakan dengan teknologi paldium. Hasil dari percobaan berulang kali dan telah mencapai kualitas tertinggi. Bisa dibuat di \"Pabrik Perakitan II\"."
   },
   "Shield_05": {
     "localized_name": "Perisai Ultra",
-    "description": "Perisai misterius yang diciptakan oleh teknologi paladium. Hasil dari serangkaian percobaan dan telah mencapai kualitas tertinggi. Bisa dibuat di |Pabrik Perakitan II|."
+    "description": "Perisai misterius yang diciptakan oleh teknologi paladium. Hasil dari serangkaian percobaan dan telah mencapai kualitas tertinggi. Bisa dibuat di \"Pabrik Perakitan II\"."
   },
   "Shield_07": {
     "localized_name": "Perisai Kuno",
@@ -1521,7 +1521,7 @@
   },
   "ShotGunBullet": {
     "localized_name": "Peluru Shotgun",
-    "description": "Peluru yang digunakan untuk shotgun dan sejenisnya. Bisa dibuat di |Meja Produksi Senjata|."
+    "description": "Peluru yang digunakan untuk shotgun dan sejenisnya. Bisa dibuat di \"Meja Produksi Senjata\"."
   },
   "Signboard": {
     "localized_name": "Papan Nama",
@@ -2093,7 +2093,7 @@
   },
   "Spa": {
     "localized_name": "Pemandian Air Panas",
-    "description": "|Pemandian Air Panas| untuk Pal. Memulihkan nilai SAN."
+    "description": "\"Pemandian Air Panas\" untuk Pal. Memulihkan nilai SAN."
   },
   "Spa2": {
     "localized_name": "Pemandian Air Panas Kualitas Tinggi",
@@ -2109,11 +2109,11 @@
   },
   "Spear_2": {
     "localized_name": "Tombak Logam",
-    "description": "Tombak yang berguna untuk pertempuran jarak dekat. Terbuat dari logam dan kekuatan serangannya lebih besar. Bisa dibuat di |Meja Kerja Kualitas Tinggi|."
+    "description": "Tombak yang berguna untuk pertempuran jarak dekat. Terbuat dari logam dan kekuatan serangannya lebih besar. Bisa dibuat di \"Meja Kerja Kualitas Tinggi\"."
   },
   "Spear_3": {
     "localized_name": "Tombak Logam Murni",
-    "description": "Tombak yang berguna dalam pertempuran jarak dekat. Terbuat dari logam berkualitas tinggi sehingga meningkatkan kekuatan serangan. Bisa dibuat di |Pabrik Perakitan|."
+    "description": "Tombak yang berguna dalam pertempuran jarak dekat. Terbuat dari logam berkualitas tinggi sehingga meningkatkan kekuatan serangan. Bisa dibuat di \"Pabrik Perakitan\"."
   },
   "Spear_ForestBoss": {
     "localized_name": "Tombak Lily",
@@ -2141,39 +2141,39 @@
   },
   "Special_PalSphere_Grade_02": {
     "localized_name": "Mega Sphere",
-    "description": "Alat yang bisa dilempar untuk menangkap Pal. Performanya meningkat, dan jangkauan Pal yang bisa ditangkap pun bertambah. Bisa dibuat di |Meja Produksi Sphere|."
+    "description": "Alat yang bisa dilempar untuk menangkap Pal. Performanya meningkat, dan jangkauan Pal yang bisa ditangkap pun bertambah. Bisa dibuat di \"Meja Produksi Sphere\"."
   },
   "Special_PalSphere_Grade_03": {
     "localized_name": "Giga Sphere",
-    "description": "Alat yang bisa dilempar untuk menangkap Pal. Sudah bisa digunakan untuk menangkap Pal yang cukup kuat. Bisa dibuat di |Meja Produksi Sphere|."
+    "description": "Alat yang bisa dilempar untuk menangkap Pal. Sudah bisa digunakan untuk menangkap Pal yang cukup kuat. Bisa dibuat di \"Meja Produksi Sphere\"."
   },
   "Special_PalSphere_Grade_04": {
     "localized_name": "Hyper Sphere",
-    "description": "Alat yang bisa dilempar untuk menangkap Pal. Bisa menangkap Pal yang sangat kuat sekalipun. Bisa dibuat di |Pabrik Perakitan Sphere|."
+    "description": "Alat yang bisa dilempar untuk menangkap Pal. Bisa menangkap Pal yang sangat kuat sekalipun. Bisa dibuat di \"Pabrik Perakitan Sphere\"."
   },
   "Special_PalSphere_Grade_05": {
     "localized_name": "Ultra Sphere",
-    "description": "Alat yang bisa dilempar untuk menangkap Pal. Performanya cukup baik, hanya sedikit Pal yang bisa lolos. Bisa dibuat di |Pabrik Perakitan Sphere II|."
+    "description": "Alat yang bisa dilempar untuk menangkap Pal. Performanya cukup baik, hanya sedikit Pal yang bisa lolos. Bisa dibuat di \"Pabrik Perakitan Sphere II\"."
   },
   "Special_PalSphere_Grade_06": {
     "localized_name": "Legendary Sphere",
-    "description": "Alat yang bisa dilempar untuk menangkap Pal. Sangat efektif, sehingga hampir tidak ada Pal yang bisa meloloskan diri. Bisa dibuat di |Pabrik Perakitan Sphere II|."
+    "description": "Alat yang bisa dilempar untuk menangkap Pal. Sangat efektif, sehingga hampir tidak ada Pal yang bisa meloloskan diri. Bisa dibuat di \"Pabrik Perakitan Sphere II\"."
   },
   "Special_PalSphere_Grade_07": {
     "localized_name": "Pal Sphere Terbaik",
-    "description": "Alat yang bisa dilempar untuk menangkap Pal. Performanya luar biasa dan bisa menangkap hampir semua Pal. Bisa dibuat di |Pabrik Perakitan Sphere II|."
+    "description": "Alat yang bisa dilempar untuk menangkap Pal. Performanya luar biasa dan bisa menangkap hampir semua Pal. Bisa dibuat di \"Pabrik Perakitan Sphere II\"."
   },
   "Special_SphereFactory_Black_Grade_01": {
     "localized_name": "Meja Produksi Sphere",
-    "description": "Meja produksi Sphere untuk menangkap Pal. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian |Kerajinan Tangan|."
+    "description": "Meja produksi Sphere untuk menangkap Pal. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian \"Kerajinan Tangan\"."
   },
   "Special_SphereFactory_Black_Grade_02": {
     "localized_name": "Pabrik Perakitan Sphere",
-    "description": "Dapat memproduksi |Pal Sphere| dengan lebih cepat. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian |Kerajinan Tangan|."
+    "description": "Dapat memproduksi \"Pal Sphere\" dengan lebih cepat. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian \"Kerajinan Tangan\"."
   },
   "Special_SphereFactory_Black_Grade_03": {
     "localized_name": "Pabrik Perakitan Sphere II",
-    "description": "Dapat memproduksi |Pal Sphere| dengan jauh lebih cepat. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian |Kerajinan Tangan|."
+    "description": "Dapat memproduksi \"Pal Sphere\" dengan jauh lebih cepat. Untuk pekerjaan ini, kamu membutuhkan Pal yang memiliki keahlian \"Kerajinan Tangan\"."
   },
   "SphereFactory_Black_04": {
     "localized_name": "Pabrik Perakitan Sphere Modern",
@@ -2341,7 +2341,7 @@
   },
   "Workbench": {
     "localized_name": "Meja Kerja Primitif",
-    "description": "|Meja Kerja Primitif| untuk membuat item sederhana. Jika kamu memiliki Pal dengan keahlian |Kerajinan Tangan|, mereka akan membantu bekerja."
+    "description": "\"Meja Kerja Primitif\" untuk membuat item sederhana. Jika kamu memiliki Pal dengan keahlian \"Kerajinan Tangan\", mereka akan membantu bekerja."
   },
   "WorldTreeIngot": {
     "localized_name": "Batangan Palxite",

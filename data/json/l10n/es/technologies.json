@@ -129,7 +129,7 @@
   },
   "Arrow_Fire": {
     "localized_name": "Flecha incendiaria",
-    "description": "Flecha incendiaria para disparar con un arco. Inflige daño de ElemIcon_FireFuego al rival. Se puede fabricar en una «Mesa de trabajo primitiva»."
+    "description": "Flecha incendiaria para disparar con un arco. Inflige daño de Fuego al rival. Se puede fabricar en una «Mesa de trabajo primitiva»."
   },
   "Arrow_Poison": {
     "localized_name": "Flecha envenenada",

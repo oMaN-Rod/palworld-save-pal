@@ -129,7 +129,7 @@
   },
   "Arrow_Fire": {
     "localized_name": "Flecha de Fogo",
-    "description": "Flecha de Fogo que pode ser disparada com arcos. Causa dano do elemento ElemIcon_FireFogo no alvo atingido. Você pode fazê-la na Bancada Primitiva."
+    "description": "Flecha de Fogo que pode ser disparada com arcos. Causa dano do elemento Fogo no alvo atingido. Você pode fazê-la na Bancada Primitiva."
   },
   "Arrow_Poison": {
     "localized_name": "Flecha de Veneno",
@@ -1125,7 +1125,7 @@
   },
   "MeatCutterKnife": {
     "localized_name": "Cutelo",
-    "description": "Faca para abater o Pal chamado por você. Enquanto está equipada, o comando |Acariciar| é convertido em |Abater|. Pals abatidos são perdidos para sempre."
+    "description": "Faca para abater o Pal chamado por você. Enquanto está equipada, o comando \"Acariciar\" é convertido em \"Abater\". Pals abatidos são perdidos para sempre."
   },
   "MedicalPalBed_04": {
     "localized_name": "Cama Grande para Pals",

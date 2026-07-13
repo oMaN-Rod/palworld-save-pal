@@ -77,11 +77,11 @@
   },
   "AncientBlastFurnace": {
     "localized_name": "Antik Medeniyet Ocağı",
-    "description": "Antik medeniyet teknolojisi kullanılarak tasarlanmış, tüm külçeleri rafine edebilen özel bir ocak. Malzemeleri ateşin ısısıyla eritir ve buzun gücüyle anında dondurup sertleştirerek rafine işlemini gerçekleştirir. Çalışması için |Ateş Yakma| ve |Soğutma| yeteneğine sahip Pal'lar gerekir."
+    "description": "Antik medeniyet teknolojisi kullanılarak tasarlanmış, tüm külçeleri rafine edebilen özel bir ocak. Malzemeleri ateşin ısısıyla eritir ve buzun gücüyle anında dondurup sertleştirerek rafine işlemini gerçekleştirir. Çalışması için \"Ateş Yakma\" ve \"Soğutma\" yeteneğine sahip Pal'lar gerekir."
   },
   "AncientCookingStove": {
     "localized_name": "Antik Medeniyet Mutfağı",
-    "description": "Mevcut tariflerden bilinmeyen yeni lezzetlere kadar her şeyi üretebilen antik medeniyet mutfağı. Isıyı ateşle depolar ve el işçiliğiyle her türlü yemeği tamamlar. İşletilmesi için üst düzey |Ateş Yakma| ve |El İşçiliği| yeteneğine sahip Pal'lar gereklidir."
+    "description": "Mevcut tariflerden bilinmeyen yeni lezzetlere kadar her şeyi üretebilen antik medeniyet mutfağı. Isıyı ateşle depolar ve el işçiliğiyle her türlü yemeği tamamlar. İşletilmesi için üst düzey \"Ateş Yakma\" ve \"El İşçiliği\" yeteneğine sahip Pal'lar gereklidir."
   },
   "AncientElectricGenerator": {
     "localized_name": "Antik Medeniyet Jeneratörü",
@@ -89,7 +89,7 @@
   },
   "AncientFarmBlock": {
     "localized_name": "Antik Medeniyet Yetiştiricisi",
-    "description": "Dünya Ağacı'nın gücüyle Palpagos Adası'ndaki her türlü bitkiyi yetiştirebilen antik medeniyet saksısı. Meyve bahçelerinden çok daha küçüktür ve iç mekana yerleştirilebilir, ancak yetiştirme süreci geleneksel yöntemle aynıdır. Çalışması için üst düzey |Tohum Ekme| ve |Sulama| yeteneğine sahip Pal'lar gerekir."
+    "description": "Dünya Ağacı'nın gücüyle Palpagos Adası'ndaki her türlü bitkiyi yetiştirebilen antik medeniyet saksısı. Meyve bahçelerinden çok daha küçüktür ve iç mekana yerleştirilebilir, ancak yetiştirme süreci geleneksel yöntemle aynıdır. Çalışması için üst düzey \"Tohum Ekme\" ve \"Sulama\" yeteneğine sahip Pal'lar gerekir."
   },
   "AncientHelmet": {
     "localized_name": "Kadim Miğfer",
@@ -105,7 +105,7 @@
   },
   "AncientWorkBench": {
     "localized_name": "Antik Medeniyet Tezgahı",
-    "description": "Tüm eşyaların tek bir yerde üretilebildiği, Pal'lara özel çok amaçlı bir tesis. Oyuncu burada çalışamaz ve üretim hızı standart tesislerle aynıdır. Gelişmiş bir ekipman olduğu için, işletilmesi yüksek |El İşçiliği| ve |İlaç Üretimi| yeteneğine sahip Pal'lar gerektirir."
+    "description": "Tüm eşyaların tek bir yerde üretilebildiği, Pal'lara özel çok amaçlı bir tesis. Oyuncu burada çalışamaz ve üretim hızı standart tesislerle aynıdır. Gelişmiş bir ekipman olduğu için, işletilmesi yüksek \"El İşçiliği\" ve \"İlaç Üretimi\" yeteneğine sahip Pal'lar gerektirir."
   },
   "Ancient_Clinic": {
     "localized_name": "Antik Medeniyet Kliniği",
@@ -129,7 +129,7 @@
   },
   "Arrow_Fire": {
     "localized_name": "Ateş Oku",
-    "description": "Yay ile fırlatılmak üzere kullanılan bir Ateş Oku. İsabet ettiği hedefe ElemIcon_FireAteş hasar verir. İlkel Tezgâh kullanılarak üretilebilir."
+    "description": "Yay ile fırlatılmak üzere kullanılan bir Ateş Oku. İsabet ettiği hedefe Ateş hasar verir. İlkel Tezgâh kullanılarak üretilebilir."
   },
   "Arrow_Poison": {
     "localized_name": "Zehirli Ok",
@@ -273,7 +273,7 @@
   },
   "Battle_Defense_MachineGun": {
     "localized_name": "Sabitlenmiş Makineli Tüfek",
-    "description": "|El İşi| yeteneğine sahip bir Pal görevlendirilirse, makineli tüfeği ustalıkla kullanarak üssü korumaya devam edecektir."
+    "description": "\"El İşi\" yeteneğine sahip bir Pal görevlendirilirse, makineli tüfeği ustalıkla kullanarak üssü korumaya devam edecektir."
   },
   "Battle_Defense_Missile": {
     "localized_name": "Sabitlenmiş Füzeatar",
@@ -1357,11 +1357,11 @@
   },
   "Product_Farm_wheat": {
     "localized_name": "Buğday Tarlası",
-    "description": "|Ekmek|in hammaddesi olan buğdayı üreten bir çiftlik. Orada çalışmak için, |Ekim|, |Sulama| ve |Toplama| yeteneklerine sahip Pal’lara ihtiyaç var."
+    "description": "\"Ekmek\"in hammaddesi olan buğdayı üreten bir çiftlik. Orada çalışmak için, \"Ekim\", \"Sulama\" ve \"Toplama\" yeteneklerine sahip Pal’lara ihtiyaç var."
   },
   "Product_Ingot_Grade_01_Copper": {
     "localized_name": "İlkel Ocak",
-    "description": "|Cevher|i işleyerek külçesi üretilebilir hale gelir."
+    "description": "\"Cevher\"i işleyerek külçesi üretilebilir hale gelir."
   },
   "Product_Ingot_Grade_02_Iron": {
     "localized_name": "Geliştirilmiş Ocak",

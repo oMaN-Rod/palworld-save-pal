@@ -484,20 +484,20 @@
     "description": "Animal Skin"
   },
   "AnimalSkin2": {
-    "localized_name": "AnimalSkin2",
-    "description": null
+    "localized_name": "Animal Skin",
+    "description": "Animal Skin"
   },
   "Antibiotic_Good": {
-    "localized_name": "Antibiotic_Good",
-    "description": null
+    "localized_name": "Antibiotic Good",
+    "description": "Antibiotic Good"
   },
   "Antibiotic_Normal": {
-    "localized_name": "Antibiotic_Normal",
-    "description": null
+    "localized_name": "Antibiotic Normal",
+    "description": "Antibiotic Normal"
   },
   "Antibiotic_Super": {
-    "localized_name": "Antibiotic_Super",
-    "description": null
+    "localized_name": "Antibiotic Super",
+    "description": "Antibiotic Super"
   },
   "Arrow": {
     "localized_name": "Flecha",
@@ -505,7 +505,7 @@
   },
   "Arrow_Fire": {
     "localized_name": "Flecha de Fogo",
-    "description": "Flecha de Fogo que pode ser disparada com arcos. Causa dano do elemento ElemIcon_FireFogo no alvo atingido. Você pode fazê-la na Bancada Primitiva."
+    "description": "Flecha de Fogo que pode ser disparada com arcos. Causa dano do elemento Fogo no alvo atingido. Você pode fazê-la na Bancada Primitiva."
   },
   "Arrow_Poison": {
     "localized_name": "Flecha de Veneno",
@@ -732,8 +732,8 @@
     "description": "Alimentos muito práticos, deliciosos tanto ao natural quanto assados. Basta andar pela ilha para encontrá-los por toda parte."
   },
   "Berries2": {
-    "localized_name": "Berries2",
-    "description": null
+    "localized_name": "Red Berries",
+    "description": "A versatile ingredient that is delicious raw or cooked. They can be found anywhere on the island."
   },
   "BerrySeeds": {
     "localized_name": "Semente de Frutinha",
@@ -1521,7 +1521,7 @@
   },
   "Blueprint_Head001_5": {
     "localized_name": "Diagrama de design da coroa do rei 5",
-    "description": "Ao possuir, a receita para |Coroa Real（Lendário）| será desbloqueada. Pode ser feito na |Bancada Primitiva|."
+    "description": "Ao possuir, a receita para \"Coroa Real（Lendário）\" será desbloqueada. Pode ser feito na \"Bancada Primitiva\"."
   },
   "Blueprint_Head002_1": {
     "localized_name": "Esquema de Coroa de Ouro 1",
@@ -1541,7 +1541,7 @@
   },
   "Blueprint_Head002_5": {
     "localized_name": "Planta do coroa de ouro 5",
-    "description": "Ao possuir, a receita para |Coroa de Ouro (Lendário)| é desbloqueada. Pode ser feito no |Bancada Primitiva|."
+    "description": "Ao possuir, a receita para \"Coroa de Ouro (Lendário)\" é desbloqueada. Pode ser feito no \"Bancada Primitiva\"."
   },
   "Blueprint_Head003_1": {
     "localized_name": "Esquema de Tiara de Orelhas Longas 1",
@@ -1561,7 +1561,7 @@
   },
   "Blueprint_Head003_5": {
     "localized_name": "Diagrama de design para tiara de orelhas longas 5",
-    "description": "Ao possuir, a receita para |Tiara de Orelhas Longas (Lendário)| é desbloqueado. Pode ser feito em |Bancada Primitiva|."
+    "description": "Ao possuir, a receita para \"Tiara de Orelhas Longas (Lendário)\" é desbloqueado. Pode ser feito em \"Bancada Primitiva\"."
   },
   "Blueprint_Head004_1": {
     "localized_name": "Esquema de Chapéu de Bruxa 1",
@@ -1581,7 +1581,7 @@
   },
   "Blueprint_Head004_5": {
     "localized_name": "Planta do chapéu de bruxa 5",
-    "description": "Ao possuir, a receita de |Chapéu de Bruxa (Lendário)| é desbloqueada. Pode ser feito no |Bancada Primitiva|."
+    "description": "Ao possuir, a receita de \"Chapéu de Bruxa (Lendário)\" é desbloqueada. Pode ser feito no \"Bancada Primitiva\"."
   },
   "Blueprint_Head005_1": {
     "localized_name": "Esquema de Chapéu de Feltro 1",
@@ -1601,7 +1601,7 @@
   },
   "Blueprint_Head005_5": {
     "localized_name": "5 Blueprints do Chapéu Macio",
-    "description": "Ao possuir, a receita para |Chapéu de Feltro (Lendário)| é desbloqueada. Pode ser feito em |Bancada Primitiva|."
+    "description": "Ao possuir, a receita para \"Chapéu de Feltro (Lendário)\" é desbloqueada. Pode ser feito em \"Bancada Primitiva\"."
   },
   "Blueprint_Head006_1": {
     "localized_name": "Esquema de Capacete 1",
@@ -1621,7 +1621,7 @@
   },
   "Blueprint_Head006_5": {
     "localized_name": "Diagrama do capacete 5",
-    "description": "Ao possuir, a receita para |Capacete(Lendário)| é desbloqueada. Pode ser feito no |Bancada Primitiva|."
+    "description": "Ao possuir, a receita para \"Capacete(Lendário)\" é desbloqueada. Pode ser feito no \"Bancada Primitiva\"."
   },
   "Blueprint_Head007_1": {
     "localized_name": "Esquema de Cartola 1",
@@ -1641,7 +1641,7 @@
   },
   "Blueprint_Head007_5": {
     "localized_name": "Planta do chapéu de seda 5",
-    "description": "Ao possuir, a receita para |Cartola (Lendário)| é desbloqueada. Pode ser fabricado em |Bancada Primitiva|."
+    "description": "Ao possuir, a receita para \"Cartola (Lendário)\" é desbloqueada. Pode ser fabricado em \"Bancada Primitiva\"."
   },
   "Blueprint_Head008_1": {
     "localized_name": "Esquema de Tricórnio 1",
@@ -1661,7 +1661,7 @@
   },
   "Blueprint_Head008_5": {
     "localized_name": "Diagrama do chapéu de três pontas 5",
-    "description": "Ao possuir, a receita para |Tricórnio (Lendário)| é desbloqueada. Pode ser feito no |Bancada Primitiva|."
+    "description": "Ao possuir, a receita para \"Tricórnio (Lendário)\" é desbloqueada. Pode ser feito no \"Bancada Primitiva\"."
   },
   "Blueprint_Head009_1": {
     "localized_name": "Esquema de Chapéu de Explorador 1",
@@ -1681,7 +1681,7 @@
   },
   "Blueprint_Head009_5": {
     "localized_name": "Diagrama do chapéu de exploração 5",
-    "description": "Ao possuí-lo, a receita para |Chapéu de Explorador (Lendário)| é desbloqueada. Pode ser criado no |Bancada Primitiva|."
+    "description": "Ao possuí-lo, a receita para \"Chapéu de Explorador (Lendário)\" é desbloqueada. Pode ser criado no \"Bancada Primitiva\"."
   },
   "Blueprint_Head010_1": {
     "localized_name": "Esquema de Capelo Universitário 1",
@@ -1701,7 +1701,7 @@
   },
   "Blueprint_Head010_5": {
     "localized_name": "Projeto do chapéu universitário 5",
-    "description": "Ao possuir, a receita de |Capelo Universitário (Lendário)| é desbloqueada. Pode ser fabricado em |Bancada Primitiva|."
+    "description": "Ao possuir, a receita de \"Capelo Universitário (Lendário)\" é desbloqueada. Pode ser fabricado em \"Bancada Primitiva\"."
   },
   "Blueprint_Head011_1": {
     "localized_name": "Esquema de Chapéu de Fazendeiro 1",
@@ -1721,7 +1721,7 @@
   },
   "Blueprint_Head011_5": {
     "localized_name": "Planta do chapéu agrícola 5",
-    "description": "Ao possuir, a receita para |Chapéu de Fazendeiro (Lendário)| é desbloqueada. Pode ser criado em |Bancada Primitiva|."
+    "description": "Ao possuir, a receita para \"Chapéu de Fazendeiro (Lendário)\" é desbloqueada. Pode ser criado em \"Bancada Primitiva\"."
   },
   "Blueprint_Head012_1": {
     "localized_name": "Esquema de Chapéu-coco 1",
@@ -1741,7 +1741,7 @@
   },
   "Blueprint_Head012_5": {
     "localized_name": "Planta do Chapéu Bowler 5",
-    "description": "Ao possuir, a receita para |Chapéu-coco (Lendário)| é desbloqueada. Pode ser fabricado em |Bancada Primitiva|."
+    "description": "Ao possuir, a receita para \"Chapéu-coco (Lendário)\" é desbloqueada. Pode ser fabricado em \"Bancada Primitiva\"."
   },
   "Blueprint_Head013_1": {
     "localized_name": "Esquema de Chapéu de Tocotoco 1",
@@ -1761,7 +1761,7 @@
   },
   "Blueprint_Head013_5": {
     "localized_name": "Diagrama de chapéu de Cruttli 5",
-    "description": "Ao possuir, a receita para |Chapéu de Tocotoco (Lendário)| é desbloqueada. Pode ser criado em |Bancada Primitiva|."
+    "description": "Ao possuir, a receita para \"Chapéu de Tocotoco (Lendário)\" é desbloqueada. Pode ser criado em \"Bancada Primitiva\"."
   },
   "Blueprint_Head014_1": {
     "localized_name": "Esquema de Chapéu de Tocotoco Sorridente 1",
@@ -1781,7 +1781,7 @@
   },
   "Blueprint_Head014_5": {
     "localized_name": "Rascunho do chapéu Kruttli sorridente 5",
-    "description": "Ao possuir, a receita para |Chapéu de Tocotoco Sorridente (Lendário)| é desbloqueada. Pode ser feito em |Bancada Primitiva|."
+    "description": "Ao possuir, a receita para \"Chapéu de Tocotoco Sorridente (Lendário)\" é desbloqueada. Pode ser feito em \"Bancada Primitiva\"."
   },
   "Blueprint_Head015_1": {
     "localized_name": "Esquema de Chapéu de Gumoss 1",
@@ -1801,7 +1801,7 @@
   },
   "Blueprint_Head015_5": {
     "localized_name": "5 diagramas de chapéu NaeMochi",
-    "description": "Ao possuir, a receita de |Chapéu de Gumoss (Lendário)| é liberada. Pode ser criado em |Bancada Primitiva|."
+    "description": "Ao possuir, a receita de \"Chapéu de Gumoss (Lendário)\" é liberada. Pode ser criado em \"Bancada Primitiva\"."
   },
   "Blueprint_Head016_1": {
     "localized_name": "Esquema de Chapéu de Penking 1",
@@ -1821,7 +1821,7 @@
   },
   "Blueprint_Head016_5": {
     "localized_name": "Diagrama do chapéu de Cappenn 5",
-    "description": "Ao possuir, a receita para |Chapéu de Penking (Lendário)| é desbloqueada. Pode ser feito em |Bancada Primitiva|."
+    "description": "Ao possuir, a receita para \"Chapéu de Penking (Lendário)\" é desbloqueada. Pode ser feito em \"Bancada Primitiva\"."
   },
   "Blueprint_Head017_1": {
     "localized_name": "Esquema de Chapéu de Katress 1",
@@ -3129,39 +3129,39 @@
   },
   "BossDefeatReward_AmaterasuWolf_Dark": {
     "localized_name": "Prova de Eliminação de Kitsun Noct",
-    "description": "Prova de haver eliminado |Kitsun Noct: Deus Guardião da Chama Escura|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Kitsun Noct: Deus Guardião da Chama Escura\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_Anubis": {
     "localized_name": "Prova de Eliminação de Anubis",
-    "description": "Prova de haver eliminado |Anubis: Protetor do Sol Sombrio|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Anubis: Protetor do Sol Sombrio\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_BadCatgirl": {
     "localized_name": "Prova de Eliminação de Nyafia",
-    "description": "Prova de haver eliminado |Nyafia: Caçador da Paisagem Noturna|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Nyafia: Caçador da Paisagem Noturna\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_BerryGoat_Dark": {
     "localized_name": "Prova de Eliminação de Caprity Noct",
-    "description": "Prova de haver eliminado |Caprity Noct: Fazenda do Negrume|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Caprity Noct: Fazenda do Negrume\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_BlackMetalDragon": {
     "localized_name": "Prova de Eliminação de Astegon",
-    "description": "Prova de haver eliminado |Astegon: Rei Dragão de Aço|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Astegon: Rei Dragão de Aço\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_BlackPuppy": {
     "localized_name": "Prova de Eliminação de Smokie",
-    "description": "Prova de haver eliminado |Smokie: Pequeno Herói de Ébano|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Smokie: Pequeno Herói de Ébano\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_BlueDragon": {
     "localized_name": "Prova de Eliminação de Azurobe",
-    "description": "Prova de haver eliminado |Azurobe: Rainha do Lago|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Azurobe: Rainha do Lago\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_BlueThunderHorse": {
     "localized_name": "Prova de Eliminação de Azurmane",
-    "description": "Prova de haver eliminado |Azurmane: Corcel do Relâmpago Azul|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Azurmane: Corcel do Relâmpago Azul\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_BlueberryFairy": {
     "localized_name": "Prova de Eliminação de Prunelia",
-    "description": "Prova de haver eliminado |Prunelia: Aia Tingida de Anil|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Prunelia: Aia Tingida de Anil\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_BossRush": {
     "localized_name": "Essência Impura de Pal Modificado",
@@ -3169,283 +3169,283 @@
   },
   "BossDefeatReward_CactusDoll": {
     "localized_name": "Prova de Eliminação de Needoll",
-    "description": "Prova de haver eliminado |Needoll: Acolhida dos Mil Espinhos|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Needoll: Acolhida dos Mil Espinhos\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_CaptainPenguin": {
     "localized_name": "Prova de Eliminação de Penking",
-    "description": "Prova de haver eliminado |Penking: Desbravador do Mar Gelado|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Penking: Desbravador do Mar Gelado\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_CatMage": {
     "localized_name": "Prova de Eliminação de Katress",
-    "description": "Prova de haver eliminado |Katress: Mago-Gato Negro|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Katress: Mago-Gato Negro\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_CatVampire": {
     "localized_name": "Prova de Eliminação de Felbat",
-    "description": "Prova de haver eliminado |Felbat: Vampiro da Sonoite|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Felbat: Vampiro da Sonoite\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_CubeTurtle": {
     "localized_name": "Prova de Eliminação de Tetroise",
-    "description": "Prova de haver eliminado |Tetroise: Grande Rocha do Deserto|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Tetroise: Grande Rocha do Deserto\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_CubeTurtle_Neutral": {
     "localized_name": "Prova de Eliminação de Tetroise Primo",
-    "description": "Prova de haver eliminado |Tetroise Primo: Rocha Guardiã do Deserto|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Tetroise Primo: Rocha Guardiã do Deserto\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_DarkScorpion": {
     "localized_name": "Prova de Eliminação de Menasting",
-    "description": "Prova de haver eliminado |Menasting: Lança que Tudo Perfura|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Menasting: Lança que Tudo Perfura\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_DarkScorpion_Ground": {
     "localized_name": "Prova de Eliminação de Menasting Terra",
-    "description": "Prova de haver eliminado |Menasting Terra: Lança Perfuradora de Ouro|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Menasting Terra: Lança Perfuradora de Ouro\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_DomeArmorDragon": {
     "localized_name": "Prova de Eliminação de Aegidron",
-    "description": "Prova de haver eliminado |Aegidron: Dragão Guardião que Tece Rastros de Luz|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Aegidron: Dragão Guardião que Tece Rastros de Luz\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_ElecLizard": {
     "localized_name": "Prova de Eliminação de Slowatt",
-    "description": "Prova de haver eliminado |Slowatt: Sossego Eletrificado|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Slowatt: Sossego Eletrificado\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_ElecPanda": {
     "localized_name": "Prova de Eliminação de Grizzbolt",
-    "description": "Prova de haver eliminado |Grizzbolt: Garras Trovejantes|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Grizzbolt: Garras Trovejantes\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_ElecSnail": {
     "localized_name": "Prova de Eliminação de Snock",
-    "description": "Prova de haver eliminado |Snock: Lerdeza do Relâmpago Azul|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Snock: Lerdeza do Relâmpago Azul\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_FairyDragon": {
     "localized_name": "Prova de Eliminação de Elphidran",
-    "description": "Prova de haver eliminado |Elphidran: Dócil Dragão Celeste|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Elphidran: Dócil Dragão Celeste\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_FengyunDeeper": {
     "localized_name": "Prova de Eliminação de Fenglope",
-    "description": "Prova de haver eliminado |Fenglope: Nuvem Flutuante|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Fenglope: Nuvem Flutuante\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_FengyunDeeper_Electric": {
     "localized_name": "Prova de Eliminação de Fenglope Lux",
-    "description": "Prova de haver eliminado |Fenglope Lux: Relâmpago Flutuante|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Fenglope Lux: Relâmpago Flutuante\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_FireKirin": {
     "localized_name": "Prova de Eliminação de Pyrin",
-    "description": "Prova de haver eliminado |Pyrin: Corcel das Areias Escaldantes|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Pyrin: Corcel das Areias Escaldantes\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_FlameBuffalo": {
     "localized_name": "Prova de Eliminação de Arsox",
-    "description": "Prova de haver eliminado |Arsox: Ignicórnio|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Arsox: Ignicórnio\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_FlowerDinosaur_Electric": {
     "localized_name": "Prova de Eliminação de Dinossom Lux",
-    "description": "Prova de haver eliminado |Dinossom Lux: Dragão Protetor dos Relâmpagos|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Dinossom Lux: Dragão Protetor dos Relâmpagos\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_FlowerDoll": {
     "localized_name": "Prova de Eliminação de Petallia",
-    "description": "Prova de haver eliminado |Petallia: Princesa dos Jardins|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Petallia: Princesa dos Jardins\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_FlowerPrince": {
     "localized_name": "Pétala de Dandilord",
-    "description": "Prova de haver eliminado |Dandilord|. É uma das chaves para anular a barreira da Sala do Selo na parte mais profunda da Árvore Mundial."
+    "description": "Prova de haver eliminado \"Dandilord\". É uma das chaves para anular a barreira da Sala do Selo na parte mais profunda da Árvore Mundial."
   },
   "BossDefeatReward_FoxExorcist": {
     "localized_name": "Prova de Eliminação de Flaracle",
-    "description": "Prova de haver eliminado |Flaracle: Vidência da Conveniência|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Flaracle: Vidência da Conveniência\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_FoxMage": {
     "localized_name": "Prova de Eliminação de Wixen",
-    "description": "Prova de haver eliminado |Wixen: Maga-Raposa de Fogo|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Wixen: Maga-Raposa de Fogo\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_GhostDragon": {
     "localized_name": "Prova de Eliminação de Eidrolon",
-    "description": "Prova de haver eliminado |Eidrolon: Asas da Liberdade|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Eidrolon: Asas da Liberdade\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_GhostRabbit": {
     "localized_name": "Prova de Eliminação de Nitemary",
-    "description": "Prova de haver eliminado |Nitemary: Coelho Negro das Almas|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Nitemary: Coelho Negro das Almas\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_GoldenHorse": {
     "localized_name": "Prova de Eliminação de Gildane",
-    "description": "Prova de haver eliminado |Gildane: Criatura Protetora do Ocaso|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Gildane: Criatura Protetora do Ocaso\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_GrassGolem": {
     "localized_name": "Prova de Eliminação de Dualith",
-    "description": "Prova de haver eliminado |Dualith: Dois Corações de Veios Azuis|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Dualith: Dois Corações de Veios Azuis\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_GrassGolem_Dark": {
     "localized_name": "Prova de Eliminação de Dualith Noct",
-    "description": "Prova de haver eliminado |Dualith Noct: Dois Corações de Veios Violetas|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Dualith Noct: Dois Corações de Veios Violetas\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_GrassMammoth": {
     "localized_name": "Prova de Eliminação de Mammorest",
-    "description": "Prova de haver eliminado |Mammorest: Presas Selvagens|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Mammorest: Presas Selvagens\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_GrassPanda_Electric": {
     "localized_name": "Prova de Eliminação de Mossanda Lux",
-    "description": "Prova de haver eliminado |Mossanda Lux: Excêntrico Fulminado|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Mossanda Lux: Excêntrico Fulminado\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_GrassRabbitMan": {
     "localized_name": "Prova de Eliminação de Verdash",
-    "description": "Prova de haver eliminado |Verdash: Ventania dos Bosques|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Verdash: Ventania dos Bosques\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_GrimGirl": {
     "localized_name": "Prova de Eliminação de Splatterina",
-    "description": "Prova de haver eliminado |Splatterina: Talhadora Ensanguentada|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Splatterina: Talhadora Ensanguentada\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_HawkBird": {
     "localized_name": "Prova de Eliminação de Nitewing",
-    "description": "Prova de haver eliminado |Nitewing: Asas do Firmamento|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Nitewing: Asas do Firmamento\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_HerculesBeetle": {
     "localized_name": "Prova de Eliminação de Warsect",
-    "description": "Prova de haver eliminado |Warsect: Guerreiro de Pesada Armadura|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Warsect: Guerreiro de Pesada Armadura\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_HerculesBeetle_Ground": {
     "localized_name": "Prova de Eliminação de Warsect Terra",
-    "description": "Prova de haver eliminado |Warsect Terra: Guerreiro da Armadura de Ouro|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Warsect Terra: Guerreiro da Armadura de Ouro\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_Horus_Water": {
     "localized_name": "Prova de Eliminação de Faleris Aqua",
-    "description": "Prova de haver eliminado |Faleris Aqua: Conquistador do Céu de Água|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Faleris Aqua: Conquistador do Céu de Água\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_IceFox": {
     "localized_name": "Prova de Eliminação de Foxcicle",
-    "description": "Prova de haver eliminado |Foxcicle: Raposa de Gelo Congelante|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Foxcicle: Raposa de Gelo Congelante\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_IceHorse": {
     "localized_name": "Prova de Eliminação de Frostallion",
-    "description": "Prova de haver eliminado |Frostallion: Lendário Cavalo do Céu Congelado|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Frostallion: Lendário Cavalo do Céu Congelado\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_IceHorse_Dark": {
     "localized_name": "Prova de Eliminação de Frostallion Noct",
-    "description": "Prova de haver eliminado |Frostallion Noct: Lendário Cavalo do Céu Negro|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Frostallion Noct: Lendário Cavalo do Céu Negro\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_IceNarwhal": {
     "localized_name": "Prova de Eliminação de Whalaska",
-    "description": "Prova de haver eliminado |Whalaska: Amável Lança de Gelo|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Whalaska: Amável Lança de Gelo\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_IceNarwhal_Fire": {
     "localized_name": "Prova de Eliminação de Whalaska Ignis",
-    "description": "Prova de haver eliminado |Whalaska Ignis: Amável Lança Carmesim|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Whalaska Ignis: Amável Lança Carmesim\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_JetDragon": {
     "localized_name": "Prova de Eliminação de Jetragon",
-    "description": "Prova de haver eliminado |Jetragon: Lendário Dragão do Meteoro|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Jetragon: Lendário Dragão do Meteoro\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_KabukiMan": {
     "localized_name": "Prova de Eliminação de Renjishi",
-    "description": "Prova de haver eliminado |Renjishi: Guerreiro Excêntrico Ansioso por Aplausos|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Renjishi: Guerreiro Excêntrico Ansioso por Aplausos\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_KingAlpaca": {
     "localized_name": "Prova de Eliminação de Kingpaca",
-    "description": "Prova de haver eliminado |Kingpaca: Conquistador Felpudo|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Kingpaca: Conquistador Felpudo\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_KingAlpaca_Ice": {
     "localized_name": "Prova de Eliminação de Ice Kingpaca",
-    "description": "Prova de haver eliminado |Ice Kingpaca: Conquistador Felpudo Azul|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Ice Kingpaca: Conquistador Felpudo Azul\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_KingBahamut": {
     "localized_name": "Prova de Eliminação de Blazamut",
-    "description": "Prova de haver eliminado |Blazamut: Tirano do Purgatório|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Blazamut: Tirano do Purgatório\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_Kirin": {
     "localized_name": "Prova de Eliminação de Univolt",
-    "description": "Prova de haver eliminado |Univolt: Vendaval Relâmpago|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Univolt: Vendaval Relâmpago\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_Kitsunebi_Ice": {
     "localized_name": "Prova de Eliminação de Foxparks Cryst",
-    "description": "Prova de haver eliminado |Foxparks Cryst: Flor de Gelo Cor das Veredas|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Foxparks Cryst: Flor de Gelo Cor das Veredas\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_LazyCatfish": {
     "localized_name": "Prova de Eliminação de Dumud",
-    "description": "Prova de haver eliminado |Dumud: Procrastinador|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Dumud: Procrastinador\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_LazyDragon_Electric": {
     "localized_name": "Prova de Eliminação de Relaxaurus Lux",
-    "description": "Prova de haver eliminado |Relaxaurus Lux: Dragão Voraz Trovejante|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Relaxaurus Lux: Dragão Voraz Trovejante\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_LilyQueen": {
     "localized_name": "Prova de Eliminação de Lyleen",
-    "description": "Prova de haver eliminado |Lyleen: Imperadora dos Lírios|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Lyleen: Imperadora dos Lírios\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_LilyQueen_Dark": {
     "localized_name": "Prova de Eliminação de Lyleen Noct",
-    "description": "Prova de haver eliminado |Lyleen Noct: Imperadora do Abismo|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Lyleen Noct: Imperadora do Abismo\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_LotusDragon": {
     "localized_name": "Prova de Eliminação de Ophydia",
-    "description": "Prova de haver eliminado |Ophydia: Dragão Imaculado das Flores d'Água|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Ophydia: Dragão Imaculado das Flores d'Água\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_Manticore": {
     "localized_name": "Prova de Eliminação de Blazehowl",
-    "description": "Prova de haver eliminado |Blazehowl: Rei das Cem Labaredas|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Blazehowl: Rei das Cem Labaredas\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_MoonChild": {
     "localized_name": "Prova de Eliminação de Wistella",
-    "description": "Prova de haver eliminado |Wistella: Aquela que Traja o Céu Noturno|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Wistella: Aquela que Traja o Céu Noturno\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_MopKing": {
     "localized_name": "Prova de Eliminação de Sweepa",
-    "description": "Prova de haver eliminado |Sweepa: Maciez Misteriosa|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Sweepa: Maciez Misteriosa\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_Mothman": {
     "localized_name": "Asa de Silvance",
-    "description": "Prova de haver eliminado |Silvance|. É uma das chaves para anular a barreira da Sala do Selo na parte mais profunda da Árvore Mundial."
+    "description": "Prova de haver eliminado \"Silvance\". É uma das chaves para anular a barreira da Sala do Selo na parte mais profunda da Árvore Mundial."
   },
   "BossDefeatReward_MushroomLady": {
     "localized_name": "Prova de Eliminação de Mycora",
-    "description": "Prova de haver eliminado |Mycora: Cogumelo Meigo|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Mycora: Cogumelo Meigo\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_Mutant": {
     "localized_name": "Prova de Eliminação de Lunaris",
-    "description": "Prova de haver eliminado |Lunaris: Visitante Espacial|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Lunaris: Visitante Espacial\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_MysteryMask": {
     "localized_name": "Prova de Eliminação de Omascul",
-    "description": "Prova de haver eliminado |Omascul: Apóstolo Multifacetado|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Omascul: Apóstolo Multifacetado\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_NaughtyCat": {
     "localized_name": "Prova de Eliminação de Grintale",
-    "description": "Prova de haver eliminado |Grintale: Corpo de Marshmallow|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Grintale: Corpo de Marshmallow\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_NightBlueHorse": {
     "localized_name": "Prova de Eliminação de Starryon",
-    "description": "Prova de haver eliminado |Starryon: Crina de Azul Profundo|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Starryon: Crina de Azul Profundo\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_PinkRabbit_Grass": {
     "localized_name": "Prova de Eliminação de Ribbuny Botan",
-    "description": "Prova de haver eliminado |Ribbuny Botan: Sorriso Cintilante|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Ribbuny Botan: Sorriso Cintilante\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_PlantSlime": {
     "localized_name": "Prova de Eliminação de Gumoss",
-    "description": "Prova de haver eliminado |Gumoss: Mutação Espontânea|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Gumoss: Mutação Espontânea\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_PoseidonOrca": {
     "localized_name": "Prova de Eliminação de Neptilius",
-    "description": "Prova de haver eliminado |Neptilius: Lendária Besta Marinha|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Neptilius: Lendária Besta Marinha\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_PurpleSpider": {
     "localized_name": "Prova de Eliminação de Tarantriss",
-    "description": "Prova de haver eliminado |Tarantriss: Estrategista das Teias|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Tarantriss: Estrategista das Teias\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_QueenBee": {
     "localized_name": "Prova de Eliminação de Elizabee",
-    "description": "Prova de haver eliminado |Elizabee: Rainha do Grande Exército|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Elizabee: Rainha do Grande Exército\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_RaijinDaughter_Water": {
     "localized_name": "Prova de Eliminação de Dazzi Noct",
-    "description": "Prova de haver eliminado |Dazzi Noct: Descendente das Nuvens Negras|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Dazzi Noct: Descendente das Nuvens Negras\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_RockBeast": {
     "localized_name": "Prova de Eliminação de Kuprok",
-    "description": "Prova de haver eliminado |Kuprok: Grande Veio Ambulante|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Kuprok: Grande Veio Ambulante\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_RockBeast_Ice": {
     "localized_name": "Prova de Eliminação de Kuprok Cryst",
-    "description": "Prova de haver eliminado |Kuprok Cryst: Grande Geleira Ambulante|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Kuprok Cryst: Grande Geleira Ambulante\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_Ronin": {
     "localized_name": "Prova de Eliminação de Bushi",
-    "description": "Prova de haver eliminado |Bushi: Samurai Andarilho|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Bushi: Samurai Andarilho\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_SaintCentaur": {
     "localized_name": "Prova de Eliminação dos Cavaleiros Gêmeos",
@@ -3453,87 +3453,87 @@
   },
   "BossDefeatReward_SakuraSaurus": {
     "localized_name": "Prova de Eliminação de Broncherry",
-    "description": "Prova de haver eliminado |Broncherry: Brisa Anunciadora da Primavera|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Broncherry: Brisa Anunciadora da Primavera\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_SakuraSaurus_Water": {
     "localized_name": "Prova de Eliminação de Water Broncherry",
-    "description": "Prova de haver eliminado |Water Broncherry: Onda Anunciadora do Verão|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Water Broncherry: Onda Anunciadora do Verão\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_ScorpionMan_Electric": {
     "localized_name": "Prova de Eliminação de Prixter Lux",
-    "description": "Prova de haver eliminado |Prixter Lux: Garoto do Trovão|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Prixter Lux: Garoto do Trovão\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_SkyDragon": {
     "localized_name": "Prova de Eliminação de Quivern",
-    "description": "Prova de haver eliminado |Quivern: Voador Imaculado|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Quivern: Voador Imaculado\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_Suzaku": {
     "localized_name": "Prova de Eliminação de Suzaku",
-    "description": "Prova de haver eliminado |Suzaku: Majestade Celeste|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Suzaku: Majestade Celeste\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_ThunderBird": {
     "localized_name": "Prova de Eliminação de Beakon",
-    "description": "Prova de haver eliminado |Beakon: Asas Fulminantes|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Beakon: Asas Fulminantes\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_ThunderFluffyBird": {
     "localized_name": "Prova de Eliminação de Dynamoff",
-    "description": "Prova de haver eliminado |Dynamoff: Fofura Eletrizante|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Dynamoff: Fofura Eletrizante\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_Umihebi": {
     "localized_name": "Prova de Eliminação de Jormuntide",
-    "description": "Prova de haver eliminado |Jormuntide: Conquistador dos Mares|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Jormuntide: Conquistador dos Mares\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_VioletFairy": {
     "localized_name": "Prova de Eliminação de Vaelet",
-    "description": "Prova de haver eliminado |Vaelet: Erva Mística de Negro Púrpura|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Vaelet: Erva Mística de Negro Púrpura\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_VolcanicMonster": {
     "localized_name": "Prova de Eliminação de Reptyro",
-    "description": "Prova de haver eliminado |Reptyro: Besta que Cobiça a Lava|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Reptyro: Besta que Cobiça a Lava\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_VolcanoDragon": {
     "localized_name": "Prova de Eliminação de Moldron",
-    "description": "Prova de haver eliminado |Moldron: Trilhador da Terra Ardente|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Moldron: Trilhador da Terra Ardente\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_VolcanoDragon_Ice": {
     "localized_name": "Prova de Eliminação de Moldron Cryst",
-    "description": "Prova de haver eliminado |Moldron Cryst: Trilhador da Terra Regelante|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Moldron Cryst: Trilhador da Terra Regelante\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_WeaselDragon": {
     "localized_name": "Prova de Eliminação de Chillet",
-    "description": "Prova de haver eliminado |Chillet: Dançarina das Planícies|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Chillet: Dançarina das Planícies\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_Werewolf_Ice": {
     "localized_name": "Prova de Eliminação de Loupmoon Cryst",
-    "description": "Prova de haver eliminado |Loupmoon Cryst: Movido pelo Luar Gélido|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Loupmoon Cryst: Movido pelo Luar Gélido\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_WhiteDeer": {
     "localized_name": "Prova de Eliminação de Celesdir",
-    "description": "Prova de haver eliminado |Celesdir: Criatura da Salvação|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Celesdir: Criatura da Salvação\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_WhiteDeer_Dark": {
     "localized_name": "Prova de Eliminação de Celesdir Noct",
-    "description": "Prova de haver eliminado |Celesdir Noct: Criatura do Caos|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Celesdir Noct: Criatura do Caos\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_WhiteMoth": {
     "localized_name": "Prova de Eliminação de Sibelyx",
-    "description": "Prova de haver eliminado |Sibelyx: Dama Imaculada|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Sibelyx: Dama Imaculada\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_WhiteShieldDragon": {
     "localized_name": "Prova de Eliminação de Silvegis",
-    "description": "Prova de haver eliminado |Silvegis: Dragão Protetor Impérvio|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Silvegis: Dragão Protetor Impérvio\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_WhiteTiger_Ground": {
     "localized_name": "Prova de Eliminação de Cryolinx Terra",
-    "description": "Prova de haver eliminado |Cryolinx Terra: Predador da Terra|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Cryolinx Terra: Predador da Terra\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_WingGolem": {
     "localized_name": "Prova de Eliminação de Knocklem",
-    "description": "Prova de haver eliminado |Knocklem: Armadura Gigantesca Móvel|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Knocklem: Armadura Gigantesca Móvel\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BossDefeatReward_Yeti_Grass": {
     "localized_name": "Prova de Eliminação de Wumpo Botan",
-    "description": "Prova de haver eliminado |Wumpo Botan: Colosso das Terras Meridionais|. Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
+    "description": "Prova de haver eliminado \"Wumpo Botan: Colosso das Terras Meridionais\". Basta possuir isto para que os atributos dos Pals no grupo aumentem de forma permanente."
   },
   "BountyProof_1": {
     "localized_name": "Prova de Conquista de Recompensa",
@@ -3716,8 +3716,8 @@
     "description": "Claw"
   },
   "Claws2": {
-    "localized_name": "Claws2",
-    "description": null
+    "localized_name": "Claw",
+    "description": "Claw"
   },
   "Cloth": {
     "localized_name": "Pano",
@@ -4160,8 +4160,8 @@
     "description": "Fang"
   },
   "Fang2": {
-    "localized_name": "Fang2",
-    "description": null
+    "localized_name": "Fang",
+    "description": "Fang"
   },
   "Fiber": {
     "localized_name": "Fibra",
@@ -4861,23 +4861,23 @@
   },
   "Head012": {
     "localized_name": "Chapéu-coco",
-    "description": "Chapéu redondo e resistente. Costumava ser vendido como um chapéu que |não se estraga mesmo se pisado por um Mammorest|."
+    "description": "Chapéu redondo e resistente. Costumava ser vendido como um chapéu que \"não se estraga mesmo se pisado por um Mammorest\"."
   },
   "Head012_2": {
     "localized_name": "Chapéu-coco",
-    "description": "Chapéu redondo e resistente. Costumava ser vendido como um chapéu que |não se estraga mesmo se pisado por um Mammorest|."
+    "description": "Chapéu redondo e resistente. Costumava ser vendido como um chapéu que \"não se estraga mesmo se pisado por um Mammorest\"."
   },
   "Head012_3": {
     "localized_name": "Chapéu-coco",
-    "description": "Chapéu redondo e resistente. Costumava ser vendido como um chapéu que |não se estraga mesmo se pisado por um Mammorest|."
+    "description": "Chapéu redondo e resistente. Costumava ser vendido como um chapéu que \"não se estraga mesmo se pisado por um Mammorest\"."
   },
   "Head012_4": {
     "localized_name": "Chapéu-coco",
-    "description": "Chapéu redondo e resistente. Costumava ser vendido como um chapéu que |não se estraga mesmo se pisado por um Mammorest|."
+    "description": "Chapéu redondo e resistente. Costumava ser vendido como um chapéu que \"não se estraga mesmo se pisado por um Mammorest\"."
   },
   "Head012_5": {
     "localized_name": "Chapéu-coco",
-    "description": "Chapéu redondo e resistente. Costumava ser vendido como um chapéu que |não se estraga mesmo se pisado por um Mammorest|."
+    "description": "Chapéu redondo e resistente. Costumava ser vendido como um chapéu que \"não se estraga mesmo se pisado por um Mammorest\"."
   },
   "Head013": {
     "localized_name": "Chapéu de Tocotoco",
@@ -5349,35 +5349,35 @@
   },
   "KeySphere_01": {
     "localized_name": "Esfera-Chave da Inveja",
-    "description": "Relíquia da civilização antiga que costumava prosperar nesta terra em um passado distante. Embora não tenha sido completamente decifrada, estudos recentes sugerem que ela é parte de algum dispositivo gigantesco. |O pecado que trouxe a ruína pela cobiça da fortuna alheia.|"
+    "description": "Relíquia da civilização antiga que costumava prosperar nesta terra em um passado distante. Embora não tenha sido completamente decifrada, estudos recentes sugerem que ela é parte de algum dispositivo gigantesco. \"O pecado que trouxe a ruína pela cobiça da fortuna alheia.\""
   },
   "KeySphere_02": {
     "localized_name": "Esfera-Chave da Soberba",
-    "description": "Relíquia da civilização antiga que costumava prosperar nesta terra em um passado distante. Embora não tenha sido completamente decifrada, estudos recentes sugerem que ela é parte de algum dispositivo gigantesco. |O pecado que trouxe a desgraça por um desejo insolente pela convivência.|"
+    "description": "Relíquia da civilização antiga que costumava prosperar nesta terra em um passado distante. Embora não tenha sido completamente decifrada, estudos recentes sugerem que ela é parte de algum dispositivo gigantesco. \"O pecado que trouxe a desgraça por um desejo insolente pela convivência.\""
   },
   "KeySphere_03": {
     "localized_name": "Esfera-Chave da Avareza",
-    "description": "Relíquia da civilização antiga que costumava prosperar nesta terra em um passado distante. Embora não tenha sido completamente decifrada, estudos recentes sugerem que ela é parte de algum dispositivo gigantesco. |O pecado de ansiar pela união sem aceitar o próprio destino.|"
+    "description": "Relíquia da civilização antiga que costumava prosperar nesta terra em um passado distante. Embora não tenha sido completamente decifrada, estudos recentes sugerem que ela é parte de algum dispositivo gigantesco. \"O pecado de ansiar pela união sem aceitar o próprio destino.\""
   },
   "KeySphere_04": {
     "localized_name": "Esfera-Chave da Preguiça",
-    "description": "Relíquia da civilização antiga que costumava prosperar nesta terra em um passado distante. Embora não tenha sido completamente decifrada, estudos recentes sugerem que ela é parte de algum dispositivo gigantesco. |O pecado de cair no caminho da ruína por abandonar a compaixão.|"
+    "description": "Relíquia da civilização antiga que costumava prosperar nesta terra em um passado distante. Embora não tenha sido completamente decifrada, estudos recentes sugerem que ela é parte de algum dispositivo gigantesco. \"O pecado de cair no caminho da ruína por abandonar a compaixão.\""
   },
   "KeySphere_05": {
     "localized_name": "Esfera-Chave da Gula",
-    "description": "Relíquia da civilização antiga que costumava prosperar nesta terra em um passado distante. Embora não tenha sido completamente decifrada, estudos recentes sugerem que ela é parte de algum dispositivo gigantesco. |O pecado de devorar a vida do planeta, sem jamais se saciar.|"
+    "description": "Relíquia da civilização antiga que costumava prosperar nesta terra em um passado distante. Embora não tenha sido completamente decifrada, estudos recentes sugerem que ela é parte de algum dispositivo gigantesco. \"O pecado de devorar a vida do planeta, sem jamais se saciar.\""
   },
   "KeySphere_06": {
     "localized_name": "Esfera-Chave da Luxúria",
-    "description": "Relíquia da civilização antiga que costumava prosperar nesta terra em um passado distante. Embora não tenha sido completamente decifrada, estudos recentes sugerem que ela é parte de algum dispositivo gigantesco. |O pecado de buscar tabus exteriores e transgredir as leis humanas.|"
+    "description": "Relíquia da civilização antiga que costumava prosperar nesta terra em um passado distante. Embora não tenha sido completamente decifrada, estudos recentes sugerem que ela é parte de algum dispositivo gigantesco. \"O pecado de buscar tabus exteriores e transgredir as leis humanas.\""
   },
   "KeySphere_07": {
     "localized_name": "Esfera-Chave da Ira",
-    "description": "Relíquia da civilização antiga que costumava prosperar nesta terra em um passado distante. Embora não tenha sido completamente decifrada, estudos recentes sugerem que ela é parte de algum dispositivo gigantesco. |O pecado de espalhar morte por entregar-se à cólera.|"
+    "description": "Relíquia da civilização antiga que costumava prosperar nesta terra em um passado distante. Embora não tenha sido completamente decifrada, estudos recentes sugerem que ela é parte de algum dispositivo gigantesco. \"O pecado de espalhar morte por entregar-se à cólera.\""
   },
   "KeySphere_08": {
     "localized_name": "Esfera-Chave do Pecado Original",
-    "description": "Relíquia da civilização antiga que costumava prosperar nesta terra em um passado distante. Embora não tenha sido completamente decifrada, estudos recentes sugerem que ela é parte de algum dispositivo gigantesco. |O pecado de haver nascido e negar a vida de todos os seres.|"
+    "description": "Relíquia da civilização antiga que costumava prosperar nesta terra em um passado distante. Embora não tenha sido completamente decifrada, estudos recentes sugerem que ela é parte de algum dispositivo gigantesco. \"O pecado de haver nascido e negar a vida de todos os seres.\""
   },
   "Lantern": {
     "localized_name": "Lampião de Cintura",
@@ -5476,8 +5476,8 @@
     "description": "Couro de Pals que serve de material para armaduras . Pode ser obtido apenas de certos Pals."
   },
   "Leather2": {
-    "localized_name": "Leather2",
-    "description": null
+    "localized_name": "Leather",
+    "description": "Leather taken from a Pal, it serves as a defensive material. It can be obtained from certain Pals."
   },
   "Lettuce": {
     "localized_name": "Alface",
@@ -5537,7 +5537,7 @@
   },
   "LuxuryOmelette": {
     "localized_name": "LuxuryOmelette",
-    "description": null
+    "description": "LuxuryOmelette"
   },
   "LvUP_01": {
     "localized_name": "Cristal de Prática",
@@ -5660,8 +5660,8 @@
     "description": "Carne de Pal. É tão fresca que pode até ser consumida crua pelos humanos."
   },
   "Meat2": {
-    "localized_name": "Meat2",
-    "description": null
+    "localized_name": "Meat",
+    "description": "Pal meat. It’s so fresh that even a human could safely eat it raw."
   },
   "MeatAndPotatoes": {
     "localized_name": "Ensopado de Batata e Carne de Galeclaw",
@@ -5669,7 +5669,7 @@
   },
   "MeatCutterKnife": {
     "localized_name": "Cutelo",
-    "description": "Faca para talhar o Pal chamado por você. Enquanto está equipada, o comando |Acariciar| é convertido em |Talhar|. Pals talhados são perdidos para sempre."
+    "description": "Faca para talhar o Pal chamado por você. Enquanto está equipada, o comando \"Acariciar\" é convertido em \"Talhar\". Pals talhados são perdidos para sempre."
   },
   "MeatSauce": {
     "localized_name": "Molho de Carne",
@@ -6205,75 +6205,75 @@
   },
   "PalAwakening_Dark": {
     "localized_name": "Cristal do Despertar da Escuridão",
-    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento ElemIcon_DarkEscuridão para liberar sua força oculta."
+    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento Escuridão para liberar sua força oculta."
   },
   "PalAwakening_Dragon": {
     "localized_name": "Cristal do Despertar Dracônico",
-    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento ElemIcon_DragonDracônico para liberar sua força oculta."
+    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento Dracônico para liberar sua força oculta."
   },
   "PalAwakening_Electric": {
     "localized_name": "Cristal do Despertar Elétrico",
-    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento ElemIcon_ElectricElétrico para liberar sua força oculta."
+    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento Elétrico para liberar sua força oculta."
   },
   "PalAwakening_Fire": {
     "localized_name": "Cristal do Despertar do Fogo",
-    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento ElemIcon_FireFogo para liberar sua força oculta."
+    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento Fogo para liberar sua força oculta."
   },
   "PalAwakening_Grass": {
     "localized_name": "Cristal do Despertar da Grama",
-    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento ElemIcon_GrassGrama para liberar sua força oculta."
+    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento Grama para liberar sua força oculta."
   },
   "PalAwakening_Ground": {
     "localized_name": "Cristal do Despertar da Terra",
-    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento ElemIcon_GroundTerra para liberar sua força oculta."
+    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento Terra para liberar sua força oculta."
   },
   "PalAwakening_Ice": {
     "localized_name": "Cristal do Despertar do Gelo",
-    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento ElemIcon_IceGelo para liberar sua força oculta."
+    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento Gelo para liberar sua força oculta."
   },
   "PalAwakening_Material_Dark": {
     "localized_name": "Fulgorita da Escuridão",
-    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento ElemIcon_DarkEscuridão para liberar sua força oculta."
+    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento Escuridão para liberar sua força oculta."
   },
   "PalAwakening_Material_Dragon": {
     "localized_name": "Fulgorita do Dragão",
-    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento ElemIcon_DragonDracônico para liberar sua força oculta."
+    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento Dracônico para liberar sua força oculta."
   },
   "PalAwakening_Material_Electric": {
     "localized_name": "Fulgorita do Raio",
-    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento ElemIcon_ElectricElétrico para liberar sua força oculta."
+    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento Elétrico para liberar sua força oculta."
   },
   "PalAwakening_Material_Fire": {
     "localized_name": "Fulgorita do Fogo",
-    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento ElemIcon_FireFogo para liberar sua força oculta."
+    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento Fogo para liberar sua força oculta."
   },
   "PalAwakening_Material_Grass": {
     "localized_name": "Fulgorita da Grama",
-    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento ElemIcon_GrassGrama para liberar sua força oculta."
+    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento Grama para liberar sua força oculta."
   },
   "PalAwakening_Material_Ground": {
     "localized_name": "Fulgorita da Terra",
-    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento ElemIcon_GroundTerra para liberar sua força oculta."
+    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento Terra para liberar sua força oculta."
   },
   "PalAwakening_Material_Ice": {
     "localized_name": "Fulgorita do Gelo",
-    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento ElemIcon_IceGelo para liberar sua força oculta."
+    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento Gelo para liberar sua força oculta."
   },
   "PalAwakening_Material_Neutral": {
     "localized_name": "Fulgorita Não Elemental",
-    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento ElemIcon_NeutralNão elemental para liberar sua força oculta."
+    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento Não elemental para liberar sua força oculta."
   },
   "PalAwakening_Material_Water": {
     "localized_name": "Fulgorita da Água",
-    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento ElemIcon_WaterÁgua para liberar sua força oculta."
+    "description": "Pedra formada quando a energia da Árvore Mundial se concentra no corpo de um Pal. Pode ser processada em um item que desperta Pals do elemento Água para liberar sua força oculta."
   },
   "PalAwakening_Neutral": {
     "localized_name": "Cristal do Despertar Não Elemental",
-    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento ElemIcon_NeutralNão elemental para liberar sua força oculta."
+    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento Não elemental para liberar sua força oculta."
   },
   "PalAwakening_Water": {
     "localized_name": "Cristal do Despertar da Água",
-    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento ElemIcon_WaterÁgua para liberar sua força oculta."
+    "description": "Cristal formado pela condensação da energia da Árvore Mundial. Pode despertar Pals do elemento Água para liberar sua força oculta."
   },
   "PalCrystal_Ex": {
     "localized_name": "Peça da Civilização Antiga",
@@ -6441,7 +6441,7 @@
   },
   "PalEgg_MutationPal": {
     "localized_name": "Huge Mutated Egg",
-    "description": "-"
+    "description": "[WIP] Description not finalized. A Huge Mutated Egg. You can feel the restless aura of a strange soul, as if a monster is about to be born. Place it in a Egg Incubator to hatch it."
   },
   "PalEgg_MutationPal_01": {
     "localized_name": "Ovo Mutante",
@@ -7189,7 +7189,7 @@
   },
   "PotatoSeedPotatoes": {
     "localized_name": "PotatoSeedPotatoes",
-    "description": null
+    "description": "PotatoSeedPotatoes"
   },
   "PotatoSeeds": {
     "localized_name": "Batata-Semente",
@@ -8645,7 +8645,7 @@
   },
   "SkyHeavyBullet": {
     "localized_name": "Sunreach Single-Shot Ammo",
-    "description": "-"
+    "description": "[WIP] Description not finalized. Ammo for the Prototype Shotgun, Tactical Grenade Launcher, and similar weapons."
   },
   "SkyIslandOre": {
     "localized_name": "Soralite",
@@ -8653,7 +8653,7 @@
   },
   "SkyLightBullet": {
     "localized_name": "Sunreach Rapid-Fire Ammo",
-    "description": "-"
+    "description": "[WIP] Description not finalized. Ammo for the Combat SMG, Heavy Assault Rifle, and similar weapons."
   },
   "SkyShotgun": {
     "localized_name": "Espingarda-Protótipo",
@@ -9552,8 +9552,8 @@
     "description": "Material necessário para produzir fogo. Encontrado às vezes durante a escavação de pedras."
   },
   "Gasoline": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Gasoline",
+    "description": null
   },
   "IronOre": {
     "localized_name": "IronOre",
@@ -9608,8 +9608,8 @@
     "description": null
   },
   "Propellant": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Propellant",
+    "description": null
   },
   "Pumpkin": {
     "localized_name": "Pumpkin",
@@ -9640,8 +9640,8 @@
     "description": null
   },
   "Shield_05": {
-    "localized_name": "Shield_05",
-    "description": null
+    "localized_name": "Escudo Ultra",
+    "description": "Escudo fantástico criado com a tecnologia do palúdio. Ele se conserta automaticamente após algum tempo sem sofrer ataques. Como resultado de ainda mais experiências, atingiu-se uma qualidade antes inimaginável."
   },
   "Silicon": {
     "localized_name": "Silício",

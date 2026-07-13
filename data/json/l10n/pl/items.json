@@ -28,7 +28,7 @@
     "description": "Akcesorium, które po założeniu pozwala graczowi wykonać potrójny zryw w powietrzu."
   },
   "Accessory_AirDash4": {
-    "localized_name": "-",
+    "localized_name": "Quadruple Air Dash Boots",
     "description": "Akcesorium, które po założeniu pozwala graczowi wykonać czterokrotny zryw w powietrzu."
   },
   "Accessory_AquaResist_1": {
@@ -480,24 +480,24 @@
     "description": "Księga zawierająca dawno utracone sekrety technologii z zapomnianej epoki. Użyj jej, by zdobyć Punkty Starożytnej Technologii."
   },
   "AnimalSkin": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Animal Skin",
+    "description": "Animal Skin"
   },
   "AnimalSkin2": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Animal Skin",
+    "description": "Animal Skin"
   },
   "Antibiotic_Good": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Antibiotic Good",
+    "description": "Antibiotic Good"
   },
   "Antibiotic_Normal": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Antibiotic Normal",
+    "description": "Antibiotic Normal"
   },
   "Antibiotic_Super": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Antibiotic Super",
+    "description": "Antibiotic Super"
   },
   "Arrow": {
     "localized_name": "Strzała",
@@ -505,7 +505,7 @@
   },
   "Arrow_Fire": {
     "localized_name": "Ognista strzała",
-    "description": "Ognista strzała do wystrzelenia z łuku. Zadaje trafionemu celowi obrażenia typu ElemIcon_FireOgnisty. Do wytworzenia potrzebny jest Prymitywny stół warsztatowy."
+    "description": "Ognista strzała do wystrzelenia z łuku. Zadaje trafionemu celowi obrażenia typu Ognisty. Do wytworzenia potrzebny jest Prymitywny stół warsztatowy."
   },
   "Arrow_Poison": {
     "localized_name": "Zatruta strzała",
@@ -572,12 +572,12 @@
     "description": "Topór przeznaczony do ścinania drzew. Wyróżnia się jeszcze większą wytrzymałością oraz lepszą ostrością. Pozwala na pozyskiwanie twardego drewna z wysokiej jakości drzew rosnących w surowych rejonach."
   },
   "Axe_Tier_03": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Axe4",
+    "description": "Axe4"
   },
   "BLT": {
     "localized_name": "Kanapka BLT",
-    "description": "-"
+    "description": "A dish where bacon, Lettuce, Tomato are sandwiched in Bread. Consumption increases Attack by +15% for a while."
   },
   "BaconEggs": {
     "localized_name": "Jajka i bekon z Rushoara",
@@ -724,16 +724,16 @@
     "description": "Zwietrzałe kości bestii, które przez wieki znosiły skrajne warunki. Choć dawno utraciły ciało, wciąż emanują potężną aurą."
   },
   "Beer": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Beer",
+    "description": "Beer"
   },
   "Berries": {
     "localized_name": "Czerwone jagody",
     "description": "Uniwersalny składnik, pyszny zarówno na surowo, jak i po ugotowaniu. Można je znaleźć wszędzie na wyspie."
   },
   "Berries2": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Red Berries",
+    "description": "A versatile ingredient that is delicious raw or cooked. They can be found anywhere on the island."
   },
   "BerrySeeds": {
     "localized_name": "Nasiona jagód",
@@ -1520,8 +1520,8 @@
     "description": "Będąc w ekwipunku, odblokowuje przepis na Korona monarchy (Epicki). Można wykonać przy użyciu: Prymitywny stół warsztatowy."
   },
   "Blueprint_Head001_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Blueprint of the King's Crown 5",
+    "description": "When in inventory, unlocks recipe for Monarch's Crown (Legendary). Can be crafted at Primitive Workbench."
   },
   "Blueprint_Head002_1": {
     "localized_name": "Złota korona: Schemat 1",
@@ -1540,8 +1540,8 @@
     "description": "Będąc w ekwipunku, odblokowuje przepis na Złota korona (Epicki). Można wykonać przy użyciu: Prymitywny stół warsztatowy."
   },
   "Blueprint_Head002_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Blueprint for Golden Crown 5",
+    "description": "Possessing it will unlock the recipe for \"Golden Crown (Legendary)\". It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head003_1": {
     "localized_name": "Opaska z długimi uszami: Schemat 1",
@@ -1560,8 +1560,8 @@
     "description": "Będąc w ekwipunku, odblokowuje przepis na Opaska z długimi uszami (Epicki). Można wykonać przy użyciu: Prymitywny stół warsztatowy."
   },
   "Blueprint_Head003_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "5 Blueprints of Long-eared Headband",
+    "description": "Possessing it will unlock the recipe for 'Long-Eared Headband (Legendary)'. It can be crafted at the 'Primitive Workbench'."
   },
   "Blueprint_Head004_1": {
     "localized_name": "Kapelusz czarownicy: Schemat 1",
@@ -1580,8 +1580,8 @@
     "description": "Będąc w ekwipunku, odblokowuje przepis na Kapelusz czarownicy (Epicki). Można wykonać przy użyciu: Prymitywny stół warsztatowy."
   },
   "Blueprint_Head004_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Design of Witch Hat No. 5",
+    "description": "When possessed, it unlocks the recipe for \"Witch Hat (Legendary)\". It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head005_1": {
     "localized_name": "Miękki kapelusz: Schemat 1",
@@ -1600,8 +1600,8 @@
     "description": "Będąc w ekwipunku, odblokowuje przepis na Miękki kapelusz (Epicki). Można wykonać przy użyciu: Prymitywny stół warsztatowy."
   },
   "Blueprint_Head005_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Blueprint of Soft Hat 5",
+    "description": "Owning it will unlock the recipe for \"Soft Hat (Legendary)\". You can craft it at the \"Primitive Workbench\"."
   },
   "Blueprint_Head006_1": {
     "localized_name": "Hełm: Schemat 1",
@@ -1620,8 +1620,8 @@
     "description": "Będąc w ekwipunku, odblokowuje przepis na Hełm (Epicki). Można wykonać przy użyciu: Prymitywny stół warsztatowy."
   },
   "Blueprint_Head006_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Blueprint of Helmet 5",
+    "description": "When in possession, the recipe for \"Helmet (Legendary)\" is unlocked. It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head007_1": {
     "localized_name": "Jedwabny kapelusz: Schemat 1",
@@ -1640,8 +1640,8 @@
     "description": "Będąc w ekwipunku, odblokowuje przepis na Jedwabny kapelusz (Epicki). Można wykonać przy użyciu: Prymitywny stół warsztatowy."
   },
   "Blueprint_Head007_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "5 Schematic Diagrams of the Silk Hat",
+    "description": "When owned, the recipe for \"Silk Hat (Legendary)\" becomes available. It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head008_1": {
     "localized_name": "Kapelusz trójgraniasty: Schemat 1",
@@ -1660,8 +1660,8 @@
     "description": "Będąc w ekwipunku, odblokowuje przepis na Kapelusz trójgraniasty (Epicki). Można wykonać przy użyciu: Prymitywny stół warsztatowy."
   },
   "Blueprint_Head008_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Blueprint of the Tricorn Hat 5",
+    "description": "When possessed, the recipe for \"Tricorne (Legendary)\" becomes available. It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head009_1": {
     "localized_name": "Czapka odkrywcy: Schemat 1",
@@ -1680,8 +1680,8 @@
     "description": "Będąc w ekwipunku, odblokowuje przepis na Czapka odkrywcy (Epicki). Można wykonać przy użyciu: Prymitywny stół warsztatowy."
   },
   "Blueprint_Head009_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Blueprint of Exploration Hat 5",
+    "description": "When owned, the recipe for \"Explorer Cap (Legendary)\" is unlocked. It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head010_1": {
     "localized_name": "Czapka dyplomowa: Schemat 1",
@@ -1700,8 +1700,8 @@
     "description": "Będąc w ekwipunku, odblokowuje przepis na Czapka dyplomowa (Epicki). Można wykonać przy użyciu: Prymitywny stół warsztatowy."
   },
   "Blueprint_Head010_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Blueprint 5 of University Hat",
+    "description": "If you possess it, the recipe for \"Graduation Cap (Legendary)\" will be unlocked. It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head011_1": {
     "localized_name": "Kapelusz rolnika: Schemat 1",
@@ -1720,8 +1720,8 @@
     "description": "Będąc w ekwipunku, odblokowuje przepis na Kapelusz rolnika (Epicki). Można wykonać przy użyciu: Prymitywny stół warsztatowy."
   },
   "Blueprint_Head011_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "5 Diagrams of Agricultural Hat",
+    "description": "Owning it will unlock the recipe for \"Farming Hat (Legendary)\". It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head012_1": {
     "localized_name": "Melonik: Schemat 1",
@@ -1740,8 +1740,8 @@
     "description": "Będąc w ekwipunku, odblokowuje przepis na Melonik (Epicki). Można wykonać przy użyciu: Prymitywny stół warsztatowy."
   },
   "Blueprint_Head012_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Blueprint of Bowler Hat 5",
+    "description": "When owned, the recipe for \"Bowler Hat （Legendary）\" will be unlocked. It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head013_1": {
     "localized_name": "Czapka Tocotoco: Schemat 1",
@@ -1760,8 +1760,8 @@
     "description": "Będąc w ekwipunku, odblokowuje przepis na Czapka Tocotoco (Epicki). Można wykonać przy użyciu: Prymitywny stół warsztatowy."
   },
   "Blueprint_Head013_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Design Plan 5 for the Crutchli Hat",
+    "description": "When you possess it, the recipe for \"Tocotoco Cap (Legendary)\" is unlocked. You can craft it at the \"Primitive Workbench\"."
   },
   "Blueprint_Head014_1": {
     "localized_name": "Czapka szczerzącego się Tocotoco: Schemat 1",
@@ -1780,8 +1780,8 @@
     "description": "Będąc w ekwipunku, odblokowuje przepis na Czapka szczerzącego się Tocotoco (Epicki). Można wykonać przy użyciu: Prymitywny stół warsztatowy."
   },
   "Blueprint_Head014_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Grinning Curly Hat Blueprint 5",
+    "description": "Possession of this will unlock the recipe for \"Grinning Tocotoco Cap (Legendary)\". It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head015_1": {
     "localized_name": "Czapka Gumossa: Schemat 1",
@@ -1800,8 +1800,8 @@
     "description": "Będąc w ekwipunku, odblokowuje przepis na Czapka Gumossa (Epicki). Można wykonać przy użyciu: Prymitywny stół warsztatowy."
   },
   "Blueprint_Head015_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "5 Blueprints of Naemochi Hat",
+    "description": "When owned, the recipe for \"Gumoss Cap (Legendary)\" is unlocked. It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head016_1": {
     "localized_name": "Czapka Penkinga: Schemat 1",
@@ -1820,8 +1820,8 @@
     "description": "Będąc w ekwipunku, odblokowuje przepis na Czapka Penkinga (Epicki). Można wykonać przy użyciu: Prymitywny stół warsztatowy."
   },
   "Blueprint_Head016_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Blueprint of Capppen Hat 5",
+    "description": "Owning it will unlock the recipe for \"Penking Cap(Legendary)\". It can be crafted on the \"Primitive Workbench\"."
   },
   "Blueprint_Head017_1": {
     "localized_name": "Czapka Katress: Schemat 1",
@@ -1840,8 +1840,8 @@
     "description": "Będąc w ekwipunku, odblokowuje przepis na Czapka Katress (Epicki). Można wykonać przy użyciu: Prymitywny stół warsztatowy."
   },
   "Blueprint_Head017_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Design Blueprint of Clemence Hat 5",
+    "description": null
   },
   "Blueprint_HeadEquip025_1": {
     "localized_name": "Kaptur Leezpunka: Schemat 1",
@@ -3693,7 +3693,7 @@
   },
   "CheeseBurger": {
     "localized_name": "Cheeseburger",
-    "description": "-"
+    "description": "A meal made with a Hamburger with cheese squeezed between it. Upon consumption, it increases the satiety level for a certain period as well as Defense +10%."
   },
   "Cheeseburger_2": {
     "localized_name": "Cheeseburger z Mozzariny",
@@ -3712,12 +3712,12 @@
     "description": "Rodzaj metalu zakopanego pod ziemią. Można go wykryć za pomocą urządzenia Wykrywacz metalu na niektórych wyspach."
   },
   "Claws": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Claw",
+    "description": "Claw"
   },
   "Claws2": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Claw",
+    "description": "Claw"
   },
   "Cloth": {
     "localized_name": "Sukno",
@@ -3904,8 +3904,8 @@
     "description": "Po przetopieniu w piecu zmienia się w sztabę. Można ją znaleźć w jaskiniach i innych podobnych miejscach."
   },
   "CornSoup": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Corn Soup",
+    "description": "Corn Soup"
   },
   "Corrosive_Solvent": {
     "localized_name": "Rozpuszczalnik żrący",
@@ -3920,8 +3920,8 @@
     "description": "Danie przygotowane przez duszenie warzyw i mięsa z przyprawami. Intensywny smak podkreślają grube kawałki delikatnego mięsa. Jego zjedzenie zwiększa Atak o 25% na pewien czas."
   },
   "Curry_old": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Curry",
+    "description": "Curry"
   },
   "DecalGun_1": {
     "localized_name": "Pistolet do naklejek 1",
@@ -4156,12 +4156,12 @@
     "description": "Amunicja do broni, takiej jak Wyrzutnia rakiet. Do wytworzenia potrzebna jest Linia produkcyjna broni II."
   },
   "Fang": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Fang",
+    "description": "Fang"
   },
   "Fang2": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Fang",
+    "description": "Fang"
   },
   "Fiber": {
     "localized_name": "Włókno",
@@ -4232,20 +4232,20 @@
     "description": "Wędka do łowienia Pali. Jest trwalsza niż Wędka dla zaawansowanych (Pengullet) i ma nieco lepsze parametry."
   },
   "FishingRod_Good": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Fishing Rod_Good",
+    "description": "Fishing Rod_Good"
   },
   "FishingRod_Legendary": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Fishing Rod_Legendary",
+    "description": "Fishing Rod_Legendary"
   },
   "FishingRod_Old": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Fishing Rod_Old",
+    "description": "Fishing Rod_Old"
   },
   "FishingRod_Super": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Fishing Rod_Super",
+    "description": "Fishing Rod_Super"
   },
   "FlameThrower": {
     "localized_name": "Miotacz ognia",
@@ -4329,7 +4329,7 @@
   },
   "FriedVegetables": {
     "localized_name": "Smażone warzywa",
-    "description": "-"
+    "description": "A dish prepared by stir frying Lettuce and Raw Meat. When eaten, it will temporarily increase Attack by +10%."
   },
   "Fruit__defense_01": {
     "localized_name": "Owoc krzepy",
@@ -4504,8 +4504,8 @@
     "description": "Szybowiec do lotu w przestworzach. O jeszcze lepszych osiągach — z większą prędkością i lepszą zdolnością wznoszenia się."
   },
   "Grape": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Grape",
+    "description": "Grape"
   },
   "GrapplingGun": {
     "localized_name": "Pistolet z hakiem",
@@ -4556,8 +4556,8 @@
     "description": "Wystrzeliwuje granaty powodujące eksplozje na dużym obszarze. Przydatne w walce z licznymi wrogami."
   },
   "GrilledFish": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Grilled Fish",
+    "description": "Grilled Fish"
   },
   "GrilledMeat": {
     "localized_name": "Grillowane mięso",
@@ -4592,8 +4592,8 @@
     "description": "Wystrzeliwuje pociski, które automatyczne tropią i ścigają wrogów. Pociski wybuchają przy zderzeniu, zadając obrażenia na dużym obszarze."
   },
   "Gunpowder": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Gunpowder",
+    "description": "Gunpowder"
   },
   "Gunpowder2": {
     "localized_name": "Proch strzelniczy",
@@ -4605,7 +4605,7 @@
   },
   "Hamburger": {
     "localized_name": "Hamburger",
-    "description": "-"
+    "description": "A dish where a hamburger, Lettuce the Tomato are contained in the Bread. When eaten, it boosts one's stomach fullness and Attack by +10% for a while."
   },
   "Hamburger_2": {
     "localized_name": "Hamburger z Mozzariny",
@@ -5204,8 +5204,8 @@
     "description": "Miód zebrany z Beegarde. Słodki i bardzo smaczny."
   },
   "Hop": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Hop",
+    "description": "Hop"
   },
   "Horn": {
     "localized_name": "Róg",
@@ -5213,7 +5213,7 @@
   },
   "HotDog": {
     "localized_name": "Hot dog",
-    "description": "-"
+    "description": "A culinary dinner sandwiching a sausage in an Bread. Consumption leads to an improved sense of fullness for a specific period."
   },
   "HotDog_2": {
     "localized_name": "Hot dog z Rushoara",
@@ -5476,8 +5476,8 @@
     "description": "Skóra pozyskana od Pala, służy jako materiał obronny. Można ją zdobyć od niektórych Pali."
   },
   "Leather2": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Leather",
+    "description": "Leather taken from a Pal, it serves as a defensive material. It can be obtained from certain Pals."
   },
   "Lettuce": {
     "localized_name": "Sałata",
@@ -5488,8 +5488,8 @@
     "description": "Nasiona, z których wyrasta Sałata. Niezbędne do założenia farmy. Można je kupić od kupca."
   },
   "LightzHelmet": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Lightz Helmet",
+    "description": "Lightz Helmet"
   },
   "Lotus_attack_01": {
     "localized_name": "Lotos potęgi (mały)",
@@ -5536,8 +5536,8 @@
     "description": "Zaopatrzenie medyczne wysokiej klasy, które są skuteczne w leczeniu Osłabienie i Przygnębienie. Niestety, nie mają właściwości uzdrawiających."
   },
   "LuxuryOmelette": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "LuxuryOmelette",
+    "description": "LuxuryOmelette"
   },
   "LvUP_01": {
     "localized_name": "Kryształ szkoleniowy",
@@ -5660,8 +5660,8 @@
     "description": "Mięso z Pala. Tak świeże, że nawet człowiek mógłby zjeść je na surowo i nic mu nie będzie."
   },
   "Meat2": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Meat",
+    "description": "Pal meat. It’s so fresh that even a human could safely eat it raw."
   },
   "MeatAndPotatoes": {
     "localized_name": "Ziemniaki z mięsem Galeclawa",
@@ -5673,7 +5673,7 @@
   },
   "MeatSauce": {
     "localized_name": "Sos boloński",
-    "description": "-"
+    "description": "A pasta dish combined with meat sauce. Eating it makes it difficult for sanity to decrease and provides Attack +10% for a while."
   },
   "Meat_BerryGoat": {
     "localized_name": "Mięso z Caprity",
@@ -5817,7 +5817,7 @@
   },
   "MushroomStew": {
     "localized_name": "Potrawka grzybowa",
-    "description": "-"
+    "description": "A stew made with Mushroom. Consumption elevates work speed and offers Attack +10% for a particular duration."
   },
   "Musket": {
     "localized_name": "Muszkiet",
@@ -5848,8 +5848,8 @@
     "description": "Piasek, który można znaleźć nocą na pustyni. Wykorzystywany jako materiał do wytwarzania niektórych akcesoriów i innych przedmiotów."
   },
   "NightVisionGoggles": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Night Vision Goggles",
+    "description": "Night Vision Goggles"
   },
   "Octavia001_Armor": {
     "localized_name": "Pancerz V1",
@@ -6205,75 +6205,75 @@
   },
   "PalAwakening_Dark": {
     "localized_name": "Mroczny kryształ przebudzenia",
-    "description": "Kryształ ze skondensowaną energią Drzewa Świata. Przebudza Pale typu ElemIcon_DarkMroczny i uwalnia ich ukrytą moc."
+    "description": "Kryształ ze skondensowaną energią Drzewa Świata. Przebudza Pale typu Mroczny i uwalnia ich ukrytą moc."
   },
   "PalAwakening_Dragon": {
     "localized_name": "Smoczy kryształ przebudzenia",
-    "description": "Kryształ ze skondensowaną energią Drzewa Świata. Przebudza Pale typu ElemIcon_DragonSmoczy i uwalnia ich ukrytą moc."
+    "description": "Kryształ ze skondensowaną energią Drzewa Świata. Przebudza Pale typu Smoczy i uwalnia ich ukrytą moc."
   },
   "PalAwakening_Electric": {
     "localized_name": "Elektryczny kryształ przebudzenia",
-    "description": "Kryształ ze skondensowaną energią Drzewa Świata. Przebudza Pale typu ElemIcon_ElectricElektryczny i uwalnia ich ukrytą moc."
+    "description": "Kryształ ze skondensowaną energią Drzewa Świata. Przebudza Pale typu Elektryczny i uwalnia ich ukrytą moc."
   },
   "PalAwakening_Fire": {
     "localized_name": "Ognisty kryształ przebudzenia",
-    "description": "Kryształ ze skondensowaną energią Drzewa Świata. Przebudza Pale typu ElemIcon_FireOgnisty i uwalnia ich ukrytą moc."
+    "description": "Kryształ ze skondensowaną energią Drzewa Świata. Przebudza Pale typu Ognisty i uwalnia ich ukrytą moc."
   },
   "PalAwakening_Grass": {
     "localized_name": "Roślinny kryształ przebudzenia",
-    "description": "Kryształ ze skondensowaną energią Drzewa Świata. Przebudza Pale typu ElemIcon_GrassRoślinny i uwalnia ich ukrytą moc."
+    "description": "Kryształ ze skondensowaną energią Drzewa Świata. Przebudza Pale typu Roślinny i uwalnia ich ukrytą moc."
   },
   "PalAwakening_Ground": {
     "localized_name": "Ziemny kryształ przebudzenia",
-    "description": "Kryształ ze skondensowaną energią Drzewa Świata. Przebudza Pale typu ElemIcon_GroundZiemny i uwalnia ich ukrytą moc."
+    "description": "Kryształ ze skondensowaną energią Drzewa Świata. Przebudza Pale typu Ziemny i uwalnia ich ukrytą moc."
   },
   "PalAwakening_Ice": {
     "localized_name": "Lodowy kryształ przebudzenia",
-    "description": "Kryształ ze skondensowaną energią Drzewa Świata. Przebudza Pale typu ElemIcon_IceLodowy i uwalnia ich ukrytą moc."
+    "description": "Kryształ ze skondensowaną energią Drzewa Świata. Przebudza Pale typu Lodowy i uwalnia ich ukrytą moc."
   },
   "PalAwakening_Material_Dark": {
     "localized_name": "Lśniący kamień mroczny",
-    "description": "Kamień uformowany z energii Drzewa Świata nagromadzonej w ciele Pala. Po przetworzeniu staje się przedmiotem pozwalającym uwolnić ukrytą moc Pali typu ElemIcon_DarkMroczny."
+    "description": "Kamień uformowany z energii Drzewa Świata nagromadzonej w ciele Pala. Po przetworzeniu staje się przedmiotem pozwalającym uwolnić ukrytą moc Pali typu Mroczny."
   },
   "PalAwakening_Material_Dragon": {
     "localized_name": "Lśniący kamień smoczy",
-    "description": "Kamień uformowany z energii Drzewa Świata nagromadzonej w ciele Pala. Po przetworzeniu staje się przedmiotem pozwalającym uwolnić ukrytą moc Pali typu ElemIcon_DragonSmoczy."
+    "description": "Kamień uformowany z energii Drzewa Świata nagromadzonej w ciele Pala. Po przetworzeniu staje się przedmiotem pozwalającym uwolnić ukrytą moc Pali typu Smoczy."
   },
   "PalAwakening_Material_Electric": {
     "localized_name": "Lśniący kamień elektryczny",
-    "description": "Kamień uformowany z energii Drzewa Świata nagromadzonej w ciele Pala. Po przetworzeniu staje się przedmiotem pozwalającym uwolnić ukrytą moc Pali typu ElemIcon_ElectricElektryczny."
+    "description": "Kamień uformowany z energii Drzewa Świata nagromadzonej w ciele Pala. Po przetworzeniu staje się przedmiotem pozwalającym uwolnić ukrytą moc Pali typu Elektryczny."
   },
   "PalAwakening_Material_Fire": {
     "localized_name": "Lśniący kamień ognisty",
-    "description": "Kamień uformowany z energii Drzewa Świata nagromadzonej w ciele Pala. Po przetworzeniu staje się przedmiotem pozwalającym uwolnić ukrytą moc Pali typu ElemIcon_FireOgnisty."
+    "description": "Kamień uformowany z energii Drzewa Świata nagromadzonej w ciele Pala. Po przetworzeniu staje się przedmiotem pozwalającym uwolnić ukrytą moc Pali typu Ognisty."
   },
   "PalAwakening_Material_Grass": {
     "localized_name": "Lśniący kamień roślinny",
-    "description": "Kamień uformowany z energii Drzewa Świata nagromadzonej w ciele Pala. Po przetworzeniu staje się przedmiotem pozwalającym uwolnić ukrytą moc Pali typu ElemIcon_GrassRoślinny."
+    "description": "Kamień uformowany z energii Drzewa Świata nagromadzonej w ciele Pala. Po przetworzeniu staje się przedmiotem pozwalającym uwolnić ukrytą moc Pali typu Roślinny."
   },
   "PalAwakening_Material_Ground": {
     "localized_name": "Lśniący kamień ziemny",
-    "description": "Kamień uformowany z energii Drzewa Świata nagromadzonej w ciele Pala. Po przetworzeniu staje się przedmiotem pozwalającym uwolnić ukrytą moc Pali typu ElemIcon_GroundZiemny."
+    "description": "Kamień uformowany z energii Drzewa Świata nagromadzonej w ciele Pala. Po przetworzeniu staje się przedmiotem pozwalającym uwolnić ukrytą moc Pali typu Ziemny."
   },
   "PalAwakening_Material_Ice": {
     "localized_name": "Lśniący kamień lodowy",
-    "description": "Kamień uformowany z energii Drzewa Świata nagromadzonej w ciele Pala. Po przetworzeniu staje się przedmiotem pozwalającym uwolnić ukrytą moc Pali typu ElemIcon_IceLodowy."
+    "description": "Kamień uformowany z energii Drzewa Świata nagromadzonej w ciele Pala. Po przetworzeniu staje się przedmiotem pozwalającym uwolnić ukrytą moc Pali typu Lodowy."
   },
   "PalAwakening_Material_Neutral": {
     "localized_name": "Lśniący kamień neutralny",
-    "description": "Kamień uformowany z energii Drzewa Świata nagromadzonej w ciele Pala. Po przetworzeniu staje się przedmiotem pozwalającym uwolnić ukrytą moc Pali typu ElemIcon_NeutralNeutralny."
+    "description": "Kamień uformowany z energii Drzewa Świata nagromadzonej w ciele Pala. Po przetworzeniu staje się przedmiotem pozwalającym uwolnić ukrytą moc Pali typu Neutralny."
   },
   "PalAwakening_Material_Water": {
     "localized_name": "Lśniący kamień wodny",
-    "description": "Kamień uformowany z energii Drzewa Świata nagromadzonej w ciele Pala. Po przetworzeniu staje się przedmiotem pozwalającym uwolnić ukrytą moc Pali typu ElemIcon_WaterWodny."
+    "description": "Kamień uformowany z energii Drzewa Świata nagromadzonej w ciele Pala. Po przetworzeniu staje się przedmiotem pozwalającym uwolnić ukrytą moc Pali typu Wodny."
   },
   "PalAwakening_Neutral": {
     "localized_name": "Neutralny kryształ przebudzenia",
-    "description": "Kryształ ze skondensowaną energią Drzewa Świata. Przebudza Pale typu ElemIcon_NeutralNeutralny i uwalnia ich ukrytą moc."
+    "description": "Kryształ ze skondensowaną energią Drzewa Świata. Przebudza Pale typu Neutralny i uwalnia ich ukrytą moc."
   },
   "PalAwakening_Water": {
     "localized_name": "Wodny kryształ przebudzenia",
-    "description": "Kryształ ze skondensowaną energią Drzewa Świata. Przebudza Pale typu ElemIcon_WaterWodny i uwalnia ich ukrytą moc."
+    "description": "Kryształ ze skondensowaną energią Drzewa Świata. Przebudza Pale typu Wodny i uwalnia ich ukrytą moc."
   },
   "PalCrystal_Ex": {
     "localized_name": "Części starożytnej cywilizacji",
@@ -6441,7 +6441,7 @@
   },
   "PalEgg_MutationPal": {
     "localized_name": "Huge Mutated Egg",
-    "description": "-"
+    "description": "[WIP] Description not finalized. A Huge Mutated Egg. You can feel the restless aura of a strange soul, as if a monster is about to be born. Place it in a Egg Incubator to hatch it."
   },
   "PalEgg_MutationPal_01": {
     "localized_name": "Zmutowane jajo",
@@ -7017,7 +7017,7 @@
   },
   "Pal_crystal_L": {
     "localized_name": "Bryła Paldium",
-    "description": "-"
+    "description": "Crystals of PAL crystal"
   },
   "Pal_crystal_S": {
     "localized_name": "Fragment Paldium",
@@ -7176,8 +7176,8 @@
     "description": "Roślina kwitnąca kolorowymi kwiatami. Można z niej zrobić Podejrzany sok i Dziwny sok."
   },
   "Potage": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Potage",
+    "description": "Potage"
   },
   "Potato": {
     "localized_name": "Ziemniak",
@@ -7188,8 +7188,8 @@
     "description": "Głęboko smażony w tłuszczu Ziemniak to baza tego dania. Jak już zaczniesz jeść, to nie będziesz w stanie przestać. Jego zjedzenie spowalnia spadek wartości SAN przez pewien czas."
   },
   "PotatoSeedPotatoes": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "PotatoSeedPotatoes",
+    "description": "PotatoSeedPotatoes"
   },
   "PotatoSeeds": {
     "localized_name": "Nasiona ziemniaków",
@@ -7500,16 +7500,16 @@
     "description": "Potężny magnes wykorzystywany w zaawansowanym odzysku. Dzięki silnemu przyciąganiu umożliwia wydobycie porzuconych zasobów i materiałów z morskiego dna."
   },
   "Sandwich": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Sandwich",
+    "description": "Sandwich"
   },
   "Sapphire": {
     "localized_name": "Szafir",
     "description": "Klejnot, który błyszczy na niebiesko. Można go sprzedać kupcowi za wysoką cenę."
   },
   "SeafoodSoup": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Seafood Soup",
+    "description": "Seafood Soup"
   },
   "Seafood_Salada": {
     "localized_name": "Sałatka z owocami morza",
@@ -8008,8 +8008,8 @@
     "description": "Siodło umożliwiające bezpieczną jazdę na Palu Necromus."
   },
   "SkillUnlock_BlackFurDragon": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Dragostrophe's Shotgun",
+    "description": "A shotgun for Dragostrophe to hold."
   },
   "SkillUnlock_BlackGriffon": {
     "localized_name": "Siodło dla Shadowbeaka",
@@ -8068,8 +8068,8 @@
     "description": "Siodło umożliwiające bezpieczną jazdę na Palu Xenolord."
   },
   "SkillUnlock_DarkMutant": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "en_text's Power Converter",
+    "description": "A tool for safely riding DarkMutant."
   },
   "SkillUnlock_Deer": {
     "localized_name": "Siodło dla Eikthyrdeera",
@@ -8096,8 +8096,8 @@
     "description": "Gdy Galeclaw znajduje się w twoim zespole, wpływa na osiągi szybowca."
   },
   "SkillUnlock_ElecLion": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Boltmane Saddle",
+    "description": "A tool for safely riding Boltmane."
   },
   "SkillUnlock_ElecPanda": {
     "localized_name": "Minigun Grizzbolta",
@@ -8645,7 +8645,7 @@
   },
   "SkyHeavyBullet": {
     "localized_name": "Sunreach Single-Shot Ammo",
-    "description": "-"
+    "description": "[WIP] Description not finalized. Ammo for the Prototype Shotgun, Tactical Grenade Launcher, and similar weapons."
   },
   "SkyIslandOre": {
     "localized_name": "Solit",
@@ -8653,7 +8653,7 @@
   },
   "SkyLightBullet": {
     "localized_name": "Sunreach Rapid-Fire Ammo",
-    "description": "-"
+    "description": "[WIP] Description not finalized. Ammo for the Combat SMG, Heavy Assault Rifle, and similar weapons."
   },
   "SkyShotgun": {
     "localized_name": "Strzelba prototypowa",
@@ -8872,8 +8872,8 @@
     "description": "Materiał do wytwarzania broni, zbroi i innego wyposażenia z Palmetalu. Dodatek Paldium w stopie zapewnia większą wytrzymałość."
   },
   "Stew": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Stew",
+    "description": "Stew"
   },
   "StewedIceDeer": {
     "localized_name": "Potrawka z Reindrixa",
@@ -9136,8 +9136,8 @@
     "description": "Broń wiązkowa przeznaczona do walki na krótkim dystansie. Wystrzeliwuje skompresowaną energię w postaci rozproszonej wiązki."
   },
   "Wine": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Wine",
+    "description": "Wine"
   },
   "WingGlider": {
     "localized_name": "Skrzydłoplecak",
@@ -9361,23 +9361,23 @@
   },
   "YakushimaHeadEquip001": {
     "localized_name": "Bajkowa maska",
-    "description": "[Tides of Terraria] Hełm, którego podstawowym materiałem jest Bajkowa sztabka. Przepełniony boską mocą, zmniejsza obrażenia, które zadają |Meowmere|, |Excalibur|, |Terraostrze| i |Legendarny Meowmere|."
+    "description": "[Tides of Terraria] Hełm, którego podstawowym materiałem jest Bajkowa sztabka. Przepełniony boską mocą, zmniejsza obrażenia, które zadają \"Meowmere\", \"Excalibur\", \"Terraostrze\" i \"Legendarny Meowmere\"."
   },
   "YakushimaHeadEquip001_2": {
     "localized_name": "Bajkowa maska",
-    "description": "[Tides of Terraria] Hełm, którego podstawowym materiałem jest Bajkowa sztabka. Przepełniony boską mocą, zmniejsza obrażenia, które zadają |Meowmere|, |Excalibur|, |Terraostrze| i |Legendarny Meowmere|."
+    "description": "[Tides of Terraria] Hełm, którego podstawowym materiałem jest Bajkowa sztabka. Przepełniony boską mocą, zmniejsza obrażenia, które zadają \"Meowmere\", \"Excalibur\", \"Terraostrze\" i \"Legendarny Meowmere\"."
   },
   "YakushimaHeadEquip001_3": {
     "localized_name": "Bajkowa maska",
-    "description": "[Tides of Terraria] Hełm, którego podstawowym materiałem jest Bajkowa sztabka. Przepełniony boską mocą, zmniejsza obrażenia, które zadają |Meowmere|, |Excalibur|, |Terraostrze| i |Legendarny Meowmere|."
+    "description": "[Tides of Terraria] Hełm, którego podstawowym materiałem jest Bajkowa sztabka. Przepełniony boską mocą, zmniejsza obrażenia, które zadają \"Meowmere\", \"Excalibur\", \"Terraostrze\" i \"Legendarny Meowmere\"."
   },
   "YakushimaHeadEquip001_4": {
     "localized_name": "Bajkowa maska",
-    "description": "[Tides of Terraria] Hełm, którego podstawowym materiałem jest Bajkowa sztabka. Przepełniony boską mocą, zmniejsza obrażenia, które zadają |Meowmere|, |Excalibur|, |Terraostrze| i |Legendarny Meowmere|."
+    "description": "[Tides of Terraria] Hełm, którego podstawowym materiałem jest Bajkowa sztabka. Przepełniony boską mocą, zmniejsza obrażenia, które zadają \"Meowmere\", \"Excalibur\", \"Terraostrze\" i \"Legendarny Meowmere\"."
   },
   "YakushimaHeadEquip001_5": {
     "localized_name": "Bajkowa maska",
-    "description": "[Tides of Terraria] Hełm, którego podstawowym materiałem jest Bajkowa sztabka. Przepełniony boską mocą, zmniejsza obrażenia, które zadają |Meowmere|, |Excalibur|, |Terraostrze| i |Legendarny Meowmere|."
+    "description": "[Tides of Terraria] Hełm, którego podstawowym materiałem jest Bajkowa sztabka. Przepełniony boską mocą, zmniejsza obrażenia, które zadają \"Meowmere\", \"Excalibur\", \"Terraostrze\" i \"Legendarny Meowmere\"."
   },
   "YakushimaHeadEquip002": {
     "localized_name": "Bajkowe nakrycie głowy",
@@ -9488,183 +9488,183 @@
     "description": null
   },
   "AirGrapplingGun": {
-    "localized_name": "-",
+    "localized_name": "AirGrapplingGun",
     "description": null
   },
   "Baked_Potato": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Baked_Potato",
+    "description": null
   },
   "Bat_NPC": {
-    "localized_name": "-",
+    "localized_name": "Bat_NPC",
     "description": null
   },
   "CaptureRope": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "CaptureRope",
+    "description": null
   },
   "CashFang": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "CashFang",
+    "description": null
   },
   "CashScales": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "CashScales",
+    "description": null
   },
   "ClawsPendant": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "ClawsPendant",
+    "description": null
   },
   "ClothHat": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "ClothHat",
+    "description": null
   },
   "Corn": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Corn",
+    "description": null
   },
   "ElectronicCircuit": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "ElectronicCircuit",
+    "description": null
   },
   "EnergyDrink": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "EnergyDrink",
+    "description": null
   },
   "FangNecklace": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "FangNecklace",
+    "description": null
   },
   "FarmCrop_Tmp": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "FarmCrop_Tmp",
+    "description": null
   },
   "FishMeat": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "FishMeat",
+    "description": null
   },
   "FishMeat2": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "FishMeat2",
+    "description": null
   },
   "Flint": {
-    "localized_name": "-",
+    "localized_name": "Flint",
     "description": "Materiał potrzebny do rozpalenia ognia. Czasem można go znaleźć podczas wydobywania skał."
   },
   "Gasoline": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "IronOre": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "Kitsunebi_Fire": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "LargeBullet": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "Launcher_Meat": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "MateItem01": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "PAL_Growth_Stone_L": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "PAL_Growth_Stone_M": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "PAL_Growth_Stone_S": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "PAL_Growth_Stone_XL": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "PalSphere_Debug": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "PenguinLauncher": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "Pickaxe_Tier_03": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "Potato_old": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "Propellant": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "Pumpkin": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "RecurveBow": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "Sand": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "Scales": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "Scales2": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "Seed_Tmp": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "Sharkkid_Scale": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "Shield_05": {
-    "localized_name": "-",
+    "localized_name": "Gasoline",
     "description": null
   },
+  "IronOre": {
+    "localized_name": "IronOre",
+    "description": null
+  },
+  "Kitsunebi_Fire": {
+    "localized_name": "Kitsunebi_Fire",
+    "description": null
+  },
+  "LargeBullet": {
+    "localized_name": "LargeBullet",
+    "description": null
+  },
+  "Launcher_Meat": {
+    "localized_name": "Launcher_Meat",
+    "description": null
+  },
+  "MateItem01": {
+    "localized_name": "MateItem01",
+    "description": null
+  },
+  "PAL_Growth_Stone_L": {
+    "localized_name": "PAL_Growth_Stone_L",
+    "description": "A mysterious stone that can strengthen the pal. By offering it to the statue of the goddess, it brings out her hidden talents."
+  },
+  "PAL_Growth_Stone_M": {
+    "localized_name": "PAL_Growth_Stone_M",
+    "description": "A mysterious stone that can strengthen the pal. By offering it to the statue of the goddess, it brings out her hidden talents."
+  },
+  "PAL_Growth_Stone_S": {
+    "localized_name": "PAL_Growth_Stone_S",
+    "description": "A mysterious stone that can strengthen the pal. By offering it to the statue of the goddess, it brings out her hidden talents."
+  },
+  "PAL_Growth_Stone_XL": {
+    "localized_name": "PAL_Growth_Stone_XL",
+    "description": "A mysterious stone that can strengthen the pal. By offering it to the statue of the goddess, it brings out her hidden talents."
+  },
+  "PalSphere_Debug": {
+    "localized_name": "Pal Sphere",
+    "description": null
+  },
+  "PenguinLauncher": {
+    "localized_name": "PenguinLauncher",
+    "description": null
+  },
+  "Pickaxe_Tier_03": {
+    "localized_name": "Pickaxe_Tier_03",
+    "description": null
+  },
+  "Potato_old": {
+    "localized_name": "Potato_old",
+    "description": null
+  },
+  "Propellant": {
+    "localized_name": "Propellant",
+    "description": null
+  },
+  "Pumpkin": {
+    "localized_name": "Pumpkin",
+    "description": null
+  },
+  "RecurveBow": {
+    "localized_name": "RecurveBow",
+    "description": null
+  },
+  "Sand": {
+    "localized_name": "Sand",
+    "description": null
+  },
+  "Scales": {
+    "localized_name": "Scales",
+    "description": null
+  },
+  "Scales2": {
+    "localized_name": "Scales2",
+    "description": null
+  },
+  "Seed_Tmp": {
+    "localized_name": "Seed_Tmp",
+    "description": null
+  },
+  "Sharkkid_Scale": {
+    "localized_name": "Sharkkid_Scale",
+    "description": null
+  },
+  "Shield_05": {
+    "localized_name": "Ultra tarcza",
+    "description": "Dziwna tarcza stworzona przy użyciu technologii Paldium. Automatycznie się naprawia, jeśli przez jakiś czas nie otrzymuje obrażeń. W wyniku dalszych eksperymentów osiągnięto doskonałą jakość."
+  },
   "Silicon": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Silicon",
+    "description": null
   },
   "SmallBullet": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "SmallBullet",
+    "description": null
   },
   "SniperRifle_Default": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "SniperRifle_Default",
+    "description": null
   },
   "ThrowStone": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "ThrowStone",
+    "description": null
   },
   "VenisonBoiledInTomato": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "VenisonBoiledInTomato",
+    "description": null
   },
   "WaterBucket": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "WaterBucket",
+    "description": null
   }
 }

@@ -229,7 +229,7 @@
   },
   "BreedFarm": {
     "localized_name": "Zuchtfarm",
-    "description": "Hier kannst du zwei Pals (♂ und ♀) hinschicken, um sie Eier legen zu lassen. Als Motivation zum Eierlegen wird „Torte| benötigt."
+    "description": "Hier kannst du zwei Pals (♂ und ♀) hinschicken, um sie Eier legen zu lassen. Als Motivation zum Eierlegen wird „Torte\" benötigt."
   },
   "BuildableGoddessStatue": {
     "localized_name": "Statue der Kraft",
@@ -349,7 +349,7 @@
   },
   "Crusher": {
     "localized_name": "Zerkleinerer",
-    "description": "Eine Anlage zum Zerkleinern und Umwandeln von Stein und Holz. Um das Wasserrad zu drehen, benötigt man einen Pal, der „Gießen| beherrscht."
+    "description": "Eine Anlage zum Zerkleinern und Umwandeln von Stein und Holz. Um das Wasserrad zu drehen, benötigt man einen Pal, der „Gießen\" beherrscht."
   },
   "CrystalPit": {
     "localized_name": "Hexoquarzmine",
@@ -541,7 +541,7 @@
   },
   "FlourMill": {
     "localized_name": "Mühle",
-    "description": "Eine Anlage, um aus Weizen Mehl zu mahlen. Um das Wasserrad zu drehen, benötigt man einen Pal, der „Gießen| beherrscht."
+    "description": "Eine Anlage, um aus Weizen Mehl zu mahlen. Um das Wasserrad zu drehen, benötigt man einen Pal, der „Gießen\" beherrscht."
   },
   "FlowerBed": {
     "localized_name": "Blumenbeet",
@@ -809,7 +809,7 @@
   },
   "IceCrusher": {
     "localized_name": "Gefrierzerkleinerer",
-    "description": "Eine Anlage zum Zerkleinern und Umwandeln von Erz. Für den Betrieb benötigt man Strom sowie einen Pal, der „Kühlung| beherrscht. Sehr effizient."
+    "description": "Eine Anlage zum Zerkleinern und Umwandeln von Erz. Für den Betrieb benötigt man Strom sowie einen Pal, der „Kühlung\" beherrscht. Sehr effizient."
   },
   "IceHorseStatue": {
     "localized_name": "Frostallion-Statue",
@@ -1793,19 +1793,19 @@
   },
   "TrafficSign01_Iron": {
     "localized_name": "Verkehrsschild „Keine Pals“",
-    "description": "Ein dekoratives Verkehrsschild „Keine Pals|. Heutzutage hält sich keiner mehr dran."
+    "description": "Ein dekoratives Verkehrsschild „Keine Pals\". Heutzutage hält sich keiner mehr dran."
   },
   "TrafficSign02_Iron": {
     "localized_name": "Verkehrsschild „Vorfahrt gewähren“",
-    "description": "Ein dekoratives Verkehrsschild „Vorfahrt gewähren|. Heutzutage hält sich keiner mehr dran."
+    "description": "Ein dekoratives Verkehrsschild „Vorfahrt gewähren\". Heutzutage hält sich keiner mehr dran."
   },
   "TrafficSign03_Iron": {
     "localized_name": "Verkehrsschild „Vorsicht, Eikthyrdeer“",
-    "description": "Ein dekoratives Verkehrsschild „Vorsicht, Eikthyrdeer|. Zu Zeiten der antiken Zivilisation soll es öfters zu Wildunfällen zwischen Eikthyrdeer und anderen Pals gekommen sein."
+    "description": "Ein dekoratives Verkehrsschild „Vorsicht, Eikthyrdeer\". Zu Zeiten der antiken Zivilisation soll es öfters zu Wildunfällen zwischen Eikthyrdeer und anderen Pals gekommen sein."
   },
   "TrafficSign04_Iron": {
     "localized_name": "Verkehrsschild „Vorsicht, Mammorest“",
-    "description": "Ein dekoratives Verkehrsschild „Vorsicht, Mammorest|. Zu Zeiten der antiken Zivilisation soll es öfters tödliche Unfälle mit wütenden Mammorest gegeben haben."
+    "description": "Ein dekoratives Verkehrsschild „Vorsicht, Mammorest\". Zu Zeiten der antiken Zivilisation soll es öfters tödliche Unfälle mit wütenden Mammorest gegeben haben."
   },
   "TransmissionTower": {
     "localized_name": "Strommast",

@@ -349,7 +349,7 @@
   },
   "Crusher": {
     "localized_name": "Mesin Penghancur",
-    "description": "Fasilitas untuk menghancurkan Batu dan Kayu lalu mengubahnya menjadi material lain. Membutuhkan Pal yang memiliki keahlian |Penyiraman| untuk menggerakkan kincir air."
+    "description": "Fasilitas untuk menghancurkan Batu dan Kayu lalu mengubahnya menjadi material lain. Membutuhkan Pal yang memiliki keahlian \"Penyiraman\" untuk menggerakkan kincir air."
   },
   "CrystalPit": {
     "localized_name": "Lokasi Tambang Kuarsa Hexo",
@@ -376,16 +376,16 @@
     "description": "Bendera Kelompok Penduduk Langit Jatuh Untuk Dekorasi."
   },
   "Decal_PalSticker_PinkCat": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Tuppanyan sticker",
+    "description": null
   },
   "DefenseBowGun": {
     "localized_name": "Busur Silang Statis",
-    "description": "Fasilitas pertahanan yang digunakan untuk menempatkan Pal agar bersiap menghadapi pertempuran. Jika menempatkan Pal dengan kemampuan |Pekerjaan Tangan|, mereka akan terus mempertahankan markas dengan menggunakan panah otomatis."
+    "description": "Fasilitas pertahanan yang digunakan untuk menempatkan Pal agar bersiap menghadapi pertempuran. Jika menempatkan Pal dengan kemampuan \"Pekerjaan Tangan\", mereka akan terus mempertahankan markas dengan menggunakan panah otomatis."
   },
   "DefenseMachinegun": {
     "localized_name": "Senapan Mesin Statis",
-    "description": "Fasilitas pertahanan yang digunakan untuk menempatkan Pal agar bersiap menghadapi pertempuran. Jika menempatkan Pal dengan kemampuan |Pekerjaan Tangan|, mereka akan terus mempertahankan markas dengan menggunakan senapan mesin."
+    "description": "Fasilitas pertahanan yang digunakan untuk menempatkan Pal agar bersiap menghadapi pertempuran. Jika menempatkan Pal dengan kemampuan \"Pekerjaan Tangan\", mereka akan terus mempertahankan markas dengan menggunakan senapan mesin."
   },
   "DefenseMachinegun_AutoTurret": {
     "localized_name": "Turret Kuno",
@@ -393,7 +393,7 @@
   },
   "DefenseMissile": {
     "localized_name": "Peluncur Rudal Statis",
-    "description": "Fasilitas pertahanan yang digunakan untuk menempatkan Pal agar bersiap menghadapi pertempuran. Jika menempatkan Pal dengan kemampuan |Pekerjaan Tangan|, mereka akan terus mempertahankan markas dengan menggunakan peluncur rudal."
+    "description": "Fasilitas pertahanan yang digunakan untuk menempatkan Pal agar bersiap menghadapi pertempuran. Jika menempatkan Pal dengan kemampuan \"Pekerjaan Tangan\", mereka akan terus mempertahankan markas dengan menggunakan peluncur rudal."
   },
   "DefenseWait": {
     "localized_name": "Karung Pasir",
@@ -541,7 +541,7 @@
   },
   "FlourMill": {
     "localized_name": "Penggiling Tepung",
-    "description": "Fasilitas untuk menggiling Gandum untuk membuat Tepung Gandum. Membutuhkan Pal yang memiliki keahlian |Penyiraman| untuk menggerakkan kincir air."
+    "description": "Fasilitas untuk menggiling Gandum untuk membuat Tepung Gandum. Membutuhkan Pal yang memiliki keahlian \"Penyiraman\" untuk menggerakkan kincir air."
   },
   "FlowerBed": {
     "localized_name": "Petak Bunga",
@@ -809,7 +809,7 @@
   },
   "IceCrusher": {
     "localized_name": "Mesin Penghancur Berpendingin",
-    "description": "Fasilitas untuk menghancurkan Bijih Logam lalu mengubahnya menjadi material lain. Untuk menggerakkannya membutuhkan sumber daya listrik dan Pal yang memiliki keahlian |Pendinginan|, tetapi ini sangat efektif."
+    "description": "Fasilitas untuk menghancurkan Bijih Logam lalu mengubahnya menjadi material lain. Untuk menggerakkannya membutuhkan sumber daya listrik dan Pal yang memiliki keahlian \"Pendinginan\", tetapi ini sangat efektif."
   },
   "IceHorseStatue": {
     "localized_name": "Patung Frostallion",
@@ -1292,8 +1292,8 @@
     "description": "Karpet panjang yang antik untuk dekorasi."
   },
   "Rug_Wood": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Fur rug",
+    "description": null
   },
   "SF_Chair": {
     "localized_name": "Kursi Laboratorium",
@@ -1832,12 +1832,12 @@
     "description": "Perangkap yang akan membekukan Pal yang menginjaknya. Pal yang membeku akan meningkatkan peluang keberhasilan Bola."
   },
   "Trap_MovingPanel": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Moving Panels",
+    "description": "A description of the moving panel"
   },
   "Trap_Noose": {
     "localized_name": "Perangkap Gantung",
-    "description": "Perangkap untuk menangkap Pal yang lewat. Peluang Sphere berhasil menangkap Pal  yang tertangkap akan meningkat. Hanya efektif pada Pal kecil."
+    "description": "Perangkap untuk menangkap Pal yang lewat. Peluang Sphere berhasil menangkap Pal yang tertangkap akan meningkat. Hanya efektif pada Pal kecil."
   },
   "WallSignboard": {
     "localized_name": "Papan Nama Dinding",
@@ -1984,11 +1984,11 @@
     "description": "Kursi lantai Jepang untuk dekorasi. Gunakan saat membuat bangunan bergaya Jepang."
   },
   "JapaneseStyle_TriangleStairsCorner_02": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "JapaneseStyle_TriangleStairsCorner_02",
+    "description": null
   },
   "WoodCreator": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "WoodCreator",
+    "description": null
   }
 }

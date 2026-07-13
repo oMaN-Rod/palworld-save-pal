@@ -129,7 +129,7 @@
   },
   "Arrow_Fire": {
     "localized_name": "Flèche de feu",
-    "description": "Une Flèche de feu à utiliser avec un arc. Inflige des dégâts de type ElemIcon_FireFeu à la cible touchée. Fabrication possible à : Établi de fortune."
+    "description": "Une Flèche de feu à utiliser avec un arc. Inflige des dégâts de type Feu à la cible touchée. Fabrication possible à : Établi de fortune."
   },
   "Arrow_Poison": {
     "localized_name": "Flèche empoisonnée",

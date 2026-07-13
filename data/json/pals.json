@@ -55005,7 +55005,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_salesperson_icon_normal"
   },
   "Arena_Legend_1": {
@@ -55067,7 +55067,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_arena_legend_1_icon_normal"
   },
   "Arena_Legend_10": {
@@ -55129,7 +55129,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_arena_legend_10_icon_normal"
   },
   "Arena_Legend_11": {
@@ -55191,7 +55191,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_arena_legend_11_icon_normal"
   },
   "Arena_Legend_12": {
@@ -55253,7 +55253,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_arena_legend_12_icon_normal"
   },
   "Arena_Legend_13": {
@@ -55315,7 +55315,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_arena_legend_13_icon_normal"
   },
   "Arena_Legend_14": {
@@ -55377,7 +55377,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_arena_legend_14_icon_normal"
   },
   "Arena_Legend_15": {
@@ -55439,7 +55439,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_arena_legend_15_icon_normal"
   },
   "Arena_Legend_16": {
@@ -55501,7 +55501,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_arena_legend_16_icon_normal"
   },
   "Arena_Legend_17": {
@@ -55563,7 +55563,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_arena_legend_17_icon_normal"
   },
   "Arena_Legend_18": {
@@ -55625,7 +55625,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_arena_legend_18_icon_normal"
   },
   "Arena_Legend_19": {
@@ -55687,7 +55687,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_arena_legend_19_icon_normal"
   },
   "Arena_Legend_2": {
@@ -55749,7 +55749,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_arena_legend_2_icon_normal"
   },
   "Arena_Legend_20": {
@@ -55811,7 +55811,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_arena_legend_20_icon_normal"
   },
   "Arena_Legend_3": {
@@ -55873,7 +55873,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_arena_legend_3_icon_normal"
   },
   "Arena_Legend_4": {
@@ -55935,7 +55935,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_arena_legend_4_icon_normal"
   },
   "Arena_Legend_5": {
@@ -55997,7 +55997,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_arena_legend_5_icon_normal"
   },
   "Arena_Legend_6": {
@@ -56059,7 +56059,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_arena_legend_6_icon_normal"
   },
   "Arena_Legend_7": {
@@ -56121,7 +56121,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_arena_legend_7_icon_normal"
   },
   "Arena_Legend_8": {
@@ -56183,7 +56183,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_arena_legend_8_icon_normal"
   },
   "Arena_Legend_9": {
@@ -56245,7 +56245,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_arena_legend_9_icon_normal"
   },
   "ArmorWoodlouse": {
@@ -56309,7 +56309,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_armorwoodlouse_icon_normal"
   },
   "BeardedDragon": {
@@ -56373,7 +56373,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_beardeddragon_icon_normal"
   },
   "BlueWoolRabbit": {
@@ -56437,7 +56437,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_bluewoolrabbit_icon_normal"
   },
   "CandleWitch": {
@@ -56502,7 +56502,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_candlewitch_icon_normal"
   },
   "CuteOrca": {
@@ -56566,7 +56566,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_cuteorca_icon_normal"
   },
   "DarkMutant": {
@@ -56630,7 +56630,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_dummy_icon"
   },
   "DesertBoss": {
@@ -56692,7 +56692,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_desertboss_icon_normal"
   },
   "ElecSnail_Fire": {
@@ -56756,7 +56756,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_elecsnail_fire_icon_normal"
   },
   "ElectricBoss": {
@@ -56818,7 +56818,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_electricboss_icon_normal"
   },
   "Emote_Tester": {
@@ -56880,7 +56880,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_female_mobucitizen_icon_normal"
   },
   "ForestBoss": {
@@ -57006,7 +57006,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_frozenbear_icon_normal"
   },
   "GrassDragon": {
@@ -57070,7 +57070,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_grassdragon_icon_normal"
   },
   "IceVeilDragon": {
@@ -57135,7 +57135,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_iceveildragon_icon_normal"
   },
   "KingCrab": {
@@ -57199,7 +57199,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_kingcrab_icon_normal"
   },
   "LeafBird": {
@@ -57263,7 +57263,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_leafbird_icon_normal"
   },
   "MedjedBird": {
@@ -57327,7 +57327,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_medjedbird_icon_normal"
   },
   "MexicanSalamander": {
@@ -57392,7 +57392,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_mexicansalamander_icon_normal"
   },
   "Monkey_Ice": {
@@ -57456,7 +57456,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_monkey_ice_icon_normal"
   },
   "MonochromeMushroom": {
@@ -57521,7 +57521,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_monochromemushroom_icon_normal"
   },
   "Negotiator": {
@@ -57583,7 +57583,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_male_people02_icon_normal"
   },
   "PinkKangaroo": {
@@ -57647,7 +57647,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_dummy_icon"
   },
   "RockCheetah": {
@@ -57711,7 +57711,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_rockcheetah_icon_normal"
   },
   "SakurajimaBoss": {
@@ -57837,7 +57837,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_snakequeen_icon_normal"
   },
   "SnowBoss": {
@@ -57963,7 +57963,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_strawhatcat_icon_normal"
   },
   "TestAssassin": {
@@ -58025,7 +58025,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_female_mobucitizen_icon_normal"
   },
   "TestNPC": {
@@ -58087,7 +58087,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_testnpc_icon_normal"
   },
   "VikingBoss": {
@@ -58214,7 +58214,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_volcanicturtle_icon_normal"
   },
   "WaterLizard": {
@@ -58278,7 +58278,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_waterlizard_icon_normal"
   },
   "WorldTree_Hunter_MissileLauncher_test": {
@@ -58340,7 +58340,7 @@
     },
     "skill_set": {},
     "passive_skills": [],
-    "disabled": false,
+    "disabled": true,
     "icon": "t_worldtree_hunter_missilelauncher_test_icon_normal"
   }
 }

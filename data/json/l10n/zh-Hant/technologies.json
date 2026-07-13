@@ -1205,7 +1205,7 @@
   },
   "OperatingTable": {
     "localized_name": "帕魯手術台",
-    "description": "zh_Hant_Text"
+    "description": null
   },
   "OverheatRifle": {
     "localized_name": "過熱步槍",

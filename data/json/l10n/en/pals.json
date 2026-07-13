@@ -541,7 +541,7 @@
   },
   "DarkMechaDragon": {
     "localized_name": "Xenolord",
-    "description": "-Destination reached. Priority: Locate entity |Supersonic Dragon| -Note: Conquest deadline exceeded by <://Error_Code:126DC> years. -Update: No conquest traces found. Naturalization confirmed. Commence elimination protocol. -Staff Memo: Refrain from forgetting or consuming critical data!"
+    "description": "-Destination reached. Priority: Locate entity \"Supersonic Dragon\" -Note: Conquest deadline exceeded by <://Error_Code:126DC> years. -Update: No conquest traces found. Naturalization confirmed. Commence elimination protocol. -Staff Memo: Refrain from forgetting or consuming critical data!"
   },
   "DarkScorpion": {
     "localized_name": "Menasting",
@@ -577,7 +577,7 @@
   },
   "DrillGame": {
     "localized_name": "Digtoise",
-    "description": "A Digtoise possessing the strongest shell and the only drill capable of piercing it, ponders the contradictions of the world in the popular children's tale, |Digtoise's Fable|."
+    "description": "A Digtoise possessing the strongest shell and the only drill capable of piercing it, ponders the contradictions of the world in the popular children's tale, \"Digtoise's Fable\"."
   },
   "Eagle": {
     "localized_name": "Galeclaw",
@@ -925,11 +925,11 @@
   },
   "FlowerDinosaur": {
     "localized_name": "Dinossom",
-    "description": "A Pal who once angered cannot be pacified. It rages on and on like an inferno. The phrase |step on a Dinossom's tail| has come to mean enraging someone."
+    "description": "A Pal who once angered cannot be pacified. It rages on and on like an inferno. The phrase \"step on a Dinossom's tail\" has come to mean enraging someone."
   },
   "FlowerDinosaur_Electric": {
     "localized_name": "Dinossom Lux",
-    "description": "Though struck by lightning, it lives on. The phrase |struck by a Dinossom Lux's bolt| has come to mean narrowly escaping death."
+    "description": "Though struck by lightning, it lives on. The phrase \"struck by a Dinossom Lux's bolt\" has come to mean narrowly escaping death."
   },
   "FlowerDoll": {
     "localized_name": "Petallia",
@@ -1945,7 +1945,7 @@
   },
   "MimicDog": {
     "localized_name": "Mimog",
-    "description": "There was once a tradition of handing out an award to the person who met their end in the most foolish way. The first award was given for |being unaware of Mimog, opening the chest, and being bitten to death.|"
+    "description": "There was once a tradition of handing out an award to the person who met their end in the most foolish way. The first award was given for \"being unaware of Mimog, opening the chest, and being bitten to death.\""
   },
   "MobuCitizen": {
     "localized_name": "Islander",
@@ -2145,7 +2145,7 @@
   },
   "PREDATOR_DrillGame": {
     "localized_name": "Digtoise",
-    "description": "A Digtoise possessing the strongest shell and the only drill capable of piercing it, ponders the contradictions of the world in the popular children's tale, |Digtoise's Fable|."
+    "description": "A Digtoise possessing the strongest shell and the only drill capable of piercing it, ponders the contradictions of the world in the popular children's tale, \"Digtoise's Fable\"."
   },
   "PREDATOR_FairyDragon": {
     "localized_name": "Elphidran",
@@ -2157,7 +2157,7 @@
   },
   "PREDATOR_FlowerDinosaur": {
     "localized_name": "Dinossom",
-    "description": "A Pal who once angered cannot be pacified. It rages on and on like an inferno. The phrase |step on a Dinossom's tail| has come to mean enraging someone."
+    "description": "A Pal who once angered cannot be pacified. It rages on and on like an inferno. The phrase \"step on a Dinossom's tail\" has come to mean enraging someone."
   },
   "PREDATOR_FlowerRabbit_Quest": {
     "localized_name": "Flopie",
@@ -2249,7 +2249,7 @@
   },
   "PREDATOR_PurpleSpider": {
     "localized_name": "Tarantriss",
-    "description": "Extremely sticky and clingy. The more it's resisted, the more tenacious it becomes. Such is its |personality.|"
+    "description": "Extremely sticky and clingy. The more it's resisted, the more tenacious it becomes. Such is its \"personality.\""
   },
   "PREDATOR_RedArmorBird": {
     "localized_name": "Ragnahawk",
@@ -2473,7 +2473,7 @@
   },
   "PurpleSpider": {
     "localized_name": "Tarantriss",
-    "description": "Extremely sticky and clingy. The more it's resisted, the more tenacious it becomes. Such is its |personality.|"
+    "description": "Extremely sticky and clingy. The more it's resisted, the more tenacious it becomes. Such is its \"personality.\""
   },
   "QueenBee": {
     "localized_name": "Elizabee",
@@ -2773,11 +2773,11 @@
   },
   "SakuraSaurus": {
     "localized_name": "Broncherry",
-    "description": "Its scent drastically changes before and after pairing. It exudes a pleasing aroma after finding a partner, which is called the |Fragrance of First Love.|"
+    "description": "Its scent drastically changes before and after pairing. It exudes a pleasing aroma after finding a partner, which is called the \"Fragrance of First Love.\""
   },
   "SakuraSaurus_Water": {
     "localized_name": "Broncherry Aqua",
-    "description": "Its scent drastically changes before and after pairing. It exudes a pleasing aroma before finding a partner, which is called the |Perfume of Purity.|"
+    "description": "Its scent drastically changes before and after pairing. It exudes a pleasing aroma before finding a partner, which is called the \"Perfume of Purity.\""
   },
   "SalesPerson": {
     "localized_name": "Wandering Merchant",
@@ -2805,7 +2805,7 @@
   },
   "SamuraiDog": {
     "localized_name": "Pupperai",
-    "description": "Pupperai territorial disputes begin with a staredown and end in a single, quick strike. Training them to |stay| is risky business, as the |go| command triggers that same attack instinct."
+    "description": "Pupperai territorial disputes begin with a staredown and end in a single, quick strike. Training them to \"stay\" is risky business, as the \"go\" command triggers that same attack instinct."
   },
   "Scientist_FlameThrower": {
     "localized_name": "PAL Genetic Research Unit Executioner",
@@ -3037,7 +3037,7 @@
   },
   "VioletFairy": {
     "localized_name": "Vaelet",
-    "description": "The castle was filled with the king's favorite flowers. A great battle ensued, and flames approached the castle. Amidst the chaos, the spirit of a flower appeared. - From the fairy tale, |The King's Flower.|"
+    "description": "The castle was filled with the king's favorite flowers. A great battle ensued, and flames approached the castle. Amidst the chaos, the spirit of a flower appeared. - From the fairy tale, \"The King's Flower.\""
   },
   "VisitingMerchant": {
     "localized_name": "Visitor",
@@ -3097,7 +3097,7 @@
   },
   "WhiteDeer": {
     "localized_name": "Celesdir",
-    "description": "Ancient texts refer to it as the |Beast of Salvation.| The light emitted by Celesdir purifies everything, literally causing things to vanish from existence without leaving a trace."
+    "description": "Ancient texts refer to it as the \"Beast of Salvation.\" The light emitted by Celesdir purifies everything, literally causing things to vanish from existence without leaving a trace."
   },
   "WhiteDeer_Dark": {
     "localized_name": "Celesdir Noct",
@@ -3153,7 +3153,7 @@
   },
   "WizardOwl": {
     "localized_name": "Hoocrates",
-    "description": "Often lost in thought, it sometimes finds it difficult to sleep. |I think, therefore I am.|"
+    "description": "Often lost in thought, it sometimes finds it difficult to sleep. \"I think, therefore I am.\""
   },
   "WoolFox": {
     "localized_name": "Cremis",
@@ -3445,7 +3445,7 @@
   },
   "WaterLizard": {
     "localized_name": "WaterLizard",
-    "description": "-"
+    "description": null
   },
   "WorldTree_Hunter_MissileLauncher_test": {
     "localized_name": "WorldTree_Hunter_MissileLauncher_test",

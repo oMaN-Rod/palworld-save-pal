@@ -13,7 +13,7 @@
   },
   "Main_BuildPalBox": {
     "localized_name": "初始据点",
-    "description": "按<keyGuideIcon id=|OpenConstructionMenu| iconScale=|0.7|/>打开建造菜单，在空旷的土地上建造帕鲁终端吧。 这里将是你与帕鲁共同生活的第一个据点。 妥善经营据点，将它打造成日后冒险的大本营，等你踏上前往高塔的旅途时，它必将成为你强有力的后盾。 务必慎重选择建造地点。"
+    "description": "打开建造菜单，在空旷的土地上建造帕鲁终端吧。 这里将是你与帕鲁共同生活的第一个据点。 妥善经营据点，将它打造成日后冒险的大本营，等你踏上前往高塔的旅途时，它必将成为你强有力的后盾。 务必慎重选择建造地点。"
   },
   "Main_BuildWorkBench_Old": {
     "localized_name": "工作的起点",

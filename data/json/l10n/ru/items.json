@@ -484,20 +484,20 @@
     "description": "Animal Skin"
   },
   "AnimalSkin2": {
-    "localized_name": "AnimalSkin2",
-    "description": null
+    "localized_name": "Animal Skin",
+    "description": "Animal Skin"
   },
   "Antibiotic_Good": {
-    "localized_name": "Antibiotic_Good",
-    "description": null
+    "localized_name": "Antibiotic Good",
+    "description": "Antibiotic Good"
   },
   "Antibiotic_Normal": {
-    "localized_name": "Antibiotic_Normal",
-    "description": null
+    "localized_name": "Antibiotic Normal",
+    "description": "Antibiotic Normal"
   },
   "Antibiotic_Super": {
-    "localized_name": "Antibiotic_Super",
-    "description": null
+    "localized_name": "Antibiotic Super",
+    "description": "Antibiotic Super"
   },
   "Arrow": {
     "localized_name": "Стрела",
@@ -505,7 +505,7 @@
   },
   "Arrow_Fire": {
     "localized_name": "Огненная стрела",
-    "description": "Огненная стрела для стрельбы из лука. При попадании наносит урон ElemIcon_FireОгонь. Создаётся на Примитивный верстак."
+    "description": "Огненная стрела для стрельбы из лука. При попадании наносит урон Огонь. Создаётся на Примитивный верстак."
   },
   "Arrow_Poison": {
     "localized_name": "Ядовитая стрела",
@@ -732,8 +732,8 @@
     "description": "Универсальный продукт, вкусный как в сыром, так и в жареном виде. Растет на всей территории острова."
   },
   "Berries2": {
-    "localized_name": "Berries2",
-    "description": null
+    "localized_name": "Red Berries",
+    "description": "A versatile ingredient that is delicious raw or cooked. They can be found anywhere on the island."
   },
   "BerrySeeds": {
     "localized_name": "Семена ягод",
@@ -1521,7 +1521,7 @@
   },
   "Blueprint_Head001_5": {
     "localized_name": "Чертеж королевской короны 5",
-    "description": "При наличии предмета открывается рецепт для |Королевская корона (Легендарный)|. Его можно создать на |Примитивный верстак|."
+    "description": "При наличии предмета открывается рецепт для \"Королевская корона (Легендарный)\". Его можно создать на \"Примитивный верстак\"."
   },
   "Blueprint_Head002_1": {
     "localized_name": "Чертёж золотой короны 1",
@@ -1561,7 +1561,7 @@
   },
   "Blueprint_Head003_5": {
     "localized_name": "Чертежи длинноухой повязки 5",
-    "description": "Если у вас есть это, рецепт для |Ободок с длинными ушами （Легендарный）| открывается. Вы можете создать его на |Примитивный верстак|."
+    "description": "Если у вас есть это, рецепт для \"Ободок с длинными ушами （Легендарный）\" открывается. Вы можете создать его на \"Примитивный верстак\"."
   },
   "Blueprint_Head004_1": {
     "localized_name": "Чертёж ведьминого колпака 1",
@@ -1601,7 +1601,7 @@
   },
   "Blueprint_Head005_5": {
     "localized_name": "Чертежи мягкой шляпы 5",
-    "description": "Если вы владеете этим, рецепт |Шляпа-федора (Легендарный)| будет открыт. Можно сделать на |Примитивный верстак|."
+    "description": "Если вы владеете этим, рецепт \"Шляпа-федора (Легендарный)\" будет открыт. Можно сделать на \"Примитивный верстак\"."
   },
   "Blueprint_Head006_1": {
     "localized_name": "Чертёж шлема 1",
@@ -1641,7 +1641,7 @@
   },
   "Blueprint_Head007_5": {
     "localized_name": "5 чертежей шляпы из шелка",
-    "description": "Если у вас есть, рецепт |Цилиндр （Легендарный）| становится доступным. Вы можете сделать его на |Примитивный верстак|."
+    "description": "Если у вас есть, рецепт \"Цилиндр （Легендарный）\" становится доступным. Вы можете сделать его на \"Примитивный верстак\"."
   },
   "Blueprint_Head008_1": {
     "localized_name": "Чертёж треуголки 1",
@@ -1661,7 +1661,7 @@
   },
   "Blueprint_Head008_5": {
     "localized_name": "Чертеж треугольной шляпы 5",
-    "description": "Если у вас есть, вы разблокируете рецепт |Треуголка （Легендарный）|. Вы можете создать его в |Примитивный верстак|."
+    "description": "Если у вас есть, вы разблокируете рецепт \"Треуголка （Легендарный）\". Вы можете создать его в \"Примитивный верстак\"."
   },
   "Blueprint_Head009_1": {
     "localized_name": "Чертёж шляпы исследователя 1",
@@ -1681,7 +1681,7 @@
   },
   "Blueprint_Head009_5": {
     "localized_name": "Схема шляпы исследователя 5",
-    "description": "Владея этим, открывается рецепт для |Шляпа исследователя (Легендарный)|. Можно создать на |Примитивный верстак|."
+    "description": "Владея этим, открывается рецепт для \"Шляпа исследователя (Легендарный)\". Можно создать на \"Примитивный верстак\"."
   },
   "Blueprint_Head010_1": {
     "localized_name": "Чертёж академической шапочки 1",
@@ -1701,7 +1701,7 @@
   },
   "Blueprint_Head010_5": {
     "localized_name": "Чертеж шляпы университета 5",
-    "description": "Если это у вас, рецепт для |Академическая шапочка （Легендарный）| будет разблокирован. Вы можете собрать это на |Примитивный верстак|."
+    "description": "Если это у вас, рецепт для \"Академическая шапочка （Легендарный）\" будет разблокирован. Вы можете собрать это на \"Примитивный верстак\"."
   },
   "Blueprint_Head011_1": {
     "localized_name": "Чертёж шляпы земледельца 1",
@@ -1721,7 +1721,7 @@
   },
   "Blueprint_Head011_5": {
     "localized_name": "Чертежи сельскохозяйственной шляпы 5",
-    "description": "Если у вас есть, рецепт на |Шляпа земледельца (Легендарный)| будет доступен. Можно создать его на |Примитивный верстак|."
+    "description": "Если у вас есть, рецепт на \"Шляпа земледельца (Легендарный)\" будет доступен. Можно создать его на \"Примитивный верстак\"."
   },
   "Blueprint_Head012_1": {
     "localized_name": "Чертёж шляпы-котелка 1",
@@ -1741,7 +1741,7 @@
   },
   "Blueprint_Head012_5": {
     "localized_name": "Чертеж болеро шляпы 5",
-    "description": "Если у вас есть, вы открываете рецепт |Шляпа-котелок (Легендарный)|. Вы можете создать его на |Примитивный верстак|."
+    "description": "Если у вас есть, вы открываете рецепт \"Шляпа-котелок (Легендарный)\". Вы можете создать его на \"Примитивный верстак\"."
   },
   "Blueprint_Head013_1": {
     "localized_name": "Чертёж шляпы Токотоко 1",
@@ -1761,7 +1761,7 @@
   },
   "Blueprint_Head013_5": {
     "localized_name": "5 чертежей шляпы Курттури",
-    "description": "Владение этим открывает рецепт |Шляпа Токотоко (Легендарный)|. Можно создать на |Примитивный верстак|."
+    "description": "Владение этим открывает рецепт \"Шляпа Токотоко (Легендарный)\". Можно создать на \"Примитивный верстак\"."
   },
   "Blueprint_Head014_1": {
     "localized_name": "Чертёж шляпы ухмыляющегося Токотоко 1",
@@ -1781,7 +1781,7 @@
   },
   "Blueprint_Head014_5": {
     "localized_name": "Улыбчивый чертеж шляпы 5",
-    "description": "Если вы его имеете, рецепт для |Шляпа ухмыляющегося Токотоко （Легендарный）| становится доступным. Вы можете создать его на |Примитивный верстак|."
+    "description": "Если вы его имеете, рецепт для \"Шляпа ухмыляющегося Токотоко （Легендарный）\" становится доступным. Вы можете создать его на \"Примитивный верстак\"."
   },
   "Blueprint_Head015_1": {
     "localized_name": "Чертёж шляпы Гумосса 1",
@@ -3469,7 +3469,7 @@
   },
   "BossDefeatReward_Suzaku": {
     "localized_name": "Медаль за победу над Судзаку",
-    "description": "Медаль за победу над  Судзаку, прозванной Хозяин небес. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
+    "description": "Медаль за победу над Судзаку, прозванной Хозяин небес. Просто находясь в инвентаре, навсегда увеличивает характеристики ваших Палов."
   },
   "BossDefeatReward_ThunderBird": {
     "localized_name": "Медаль за победу над Райберд",
@@ -3716,8 +3716,8 @@
     "description": "Claw"
   },
   "Claws2": {
-    "localized_name": "Claws2",
-    "description": null
+    "localized_name": "Claw",
+    "description": "Claw"
   },
   "Cloth": {
     "localized_name": "Ткань",
@@ -4160,8 +4160,8 @@
     "description": "Fang"
   },
   "Fang2": {
-    "localized_name": "Fang2",
-    "description": null
+    "localized_name": "Fang",
+    "description": "Fang"
   },
   "Fiber": {
     "localized_name": "Волокно",
@@ -5476,8 +5476,8 @@
     "description": "Кожа - можно получить с некоторых Палов. Используется как материал для изготовления снаряжения."
   },
   "Leather2": {
-    "localized_name": "Leather2",
-    "description": null
+    "localized_name": "Leather",
+    "description": "Leather taken from a Pal, it serves as a defensive material. It can be obtained from certain Pals."
   },
   "Lettuce": {
     "localized_name": "Латук",
@@ -5537,7 +5537,7 @@
   },
   "LuxuryOmelette": {
     "localized_name": "LuxuryOmelette",
-    "description": null
+    "description": "LuxuryOmelette"
   },
   "LvUP_01": {
     "localized_name": "Кристалл обучения",
@@ -5556,7 +5556,7 @@
     "description": "Патрон для Machingun и аналогичного оружия."
   },
   "MagnumBullet": {
-    "localized_name": "Патрон |Магнум|",
+    "localized_name": "Патрон \"Магнум\"",
     "description": "Патрон для Magnum и аналогичного оружия."
   },
   "MakeshiftAssaultRifle": {
@@ -5660,8 +5660,8 @@
     "description": "Мясо Пала. Настолько свежее, что человек может есть его в сыром виде."
   },
   "Meat2": {
-    "localized_name": "Meat2",
-    "description": null
+    "localized_name": "Meat",
+    "description": "Pal meat. It’s so fresh that even a human could safely eat it raw."
   },
   "MeatAndPotatoes": {
     "localized_name": "Никудзяга из Эрмурга",
@@ -5669,7 +5669,7 @@
   },
   "MeatCutterKnife": {
     "localized_name": "Нож для разделки мяса",
-    "description": "Нож для разделки призванных Палов. Во время использования команда |Погладить| меняется на |Разделать|. Разделка Палов необратима."
+    "description": "Нож для разделки призванных Палов. Во время использования команда \"Погладить\" меняется на \"Разделать\". Разделка Палов необратима."
   },
   "MeatSauce": {
     "localized_name": "Мясной соус",
@@ -6205,75 +6205,75 @@
   },
   "PalAwakening_Dark": {
     "localized_name": "Тёмный кристалл пробуждения",
-    "description": "Кристалл, содержащий энергию Мирового Древа. Пробуждает Пала ElemIcon_DarkТьма и раскрывает его потенциал."
+    "description": "Кристалл, содержащий энергию Мирового Древа. Пробуждает Пала Тьма и раскрывает его потенциал."
   },
   "PalAwakening_Dragon": {
     "localized_name": "Драконий кристалл пробуждения",
-    "description": "Кристалл, содержащий энергию Мирового Древа. Пробуждает Пала ElemIcon_DragonДракон и раскрывает его потенциал."
+    "description": "Кристалл, содержащий энергию Мирового Древа. Пробуждает Пала Дракон и раскрывает его потенциал."
   },
   "PalAwakening_Electric": {
     "localized_name": "Молниеносный кристалл пробуждения",
-    "description": "Кристалл, содержащий энергию Мирового Древа. Пробуждает Пала ElemIcon_ElectricМолния и раскрывает его потенциал."
+    "description": "Кристалл, содержащий энергию Мирового Древа. Пробуждает Пала Молния и раскрывает его потенциал."
   },
   "PalAwakening_Fire": {
     "localized_name": "Огненный кристалл пробуждения",
-    "description": "Кристалл, содержащий энергию Мирового Древа. Пробуждает Пала ElemIcon_FireОгонь и раскрывает его потенциал."
+    "description": "Кристалл, содержащий энергию Мирового Древа. Пробуждает Пала Огонь и раскрывает его потенциал."
   },
   "PalAwakening_Grass": {
     "localized_name": "Травяной кристалл пробуждения",
-    "description": "Кристалл, содержащий энергию Мирового Древа. Пробуждает Пала ElemIcon_GrassТрава и раскрывает его потенциал."
+    "description": "Кристалл, содержащий энергию Мирового Древа. Пробуждает Пала Трава и раскрывает его потенциал."
   },
   "PalAwakening_Ground": {
     "localized_name": "Земной кристалл пробуждения",
-    "description": "Кристалл, содержащий энергию Мирового Древа. Пробуждает Пала ElemIcon_GroundЗемля и раскрывает его потенциал."
+    "description": "Кристалл, содержащий энергию Мирового Древа. Пробуждает Пала Земля и раскрывает его потенциал."
   },
   "PalAwakening_Ice": {
     "localized_name": "Ледяной кристалл пробуждения",
-    "description": "Кристалл, содержащий энергию Мирового Древа. Пробуждает Пала ElemIcon_IceЛед и раскрывает его потенциал."
+    "description": "Кристалл, содержащий энергию Мирового Древа. Пробуждает Пала Лед и раскрывает его потенциал."
   },
   "PalAwakening_Material_Dark": {
     "localized_name": "Темный самоцвет",
-    "description": "Камень, образованный из энергии Мирового Древа, накопленной в теле Пала. После обработки становится предметом, раскрывающим скрытый потенциал Пала ElemIcon_DarkТьма."
+    "description": "Камень, образованный из энергии Мирового Древа, накопленной в теле Пала. После обработки становится предметом, раскрывающим скрытый потенциал Пала Тьма."
   },
   "PalAwakening_Material_Dragon": {
     "localized_name": "Драконий самоцвет",
-    "description": "Камень, образованный из энергии Мирового Древа, накопленной в теле Пала. После обработки становится предметом, раскрывающим скрытый потенциал Пала ElemIcon_DragonДракон."
+    "description": "Камень, образованный из энергии Мирового Древа, накопленной в теле Пала. После обработки становится предметом, раскрывающим скрытый потенциал Пала Дракон."
   },
   "PalAwakening_Material_Electric": {
     "localized_name": "Грозовой самоцвет",
-    "description": "Камень, образованный из энергии Мирового Древа, накопленной в теле Пала. После обработки становится предметом, раскрывающим скрытый потенциал Пала ElemIcon_ElectricМолния."
+    "description": "Камень, образованный из энергии Мирового Древа, накопленной в теле Пала. После обработки становится предметом, раскрывающим скрытый потенциал Пала Молния."
   },
   "PalAwakening_Material_Fire": {
     "localized_name": "Огненный самоцвет",
-    "description": "Камень, образованный из энергии Мирового Древа, накопленной в теле Пала. После обработки становится предметом, раскрывающим скрытый потенциал Пала ElemIcon_FireОгонь."
+    "description": "Камень, образованный из энергии Мирового Древа, накопленной в теле Пала. После обработки становится предметом, раскрывающим скрытый потенциал Пала Огонь."
   },
   "PalAwakening_Material_Grass": {
     "localized_name": "Травяной самоцвет",
-    "description": "Камень, образованный из энергии Мирового Древа, накопленной в теле Пала. После обработки становится предметом, раскрывающим скрытый потенциал Пала ElemIcon_GrassТрава."
+    "description": "Камень, образованный из энергии Мирового Древа, накопленной в теле Пала. После обработки становится предметом, раскрывающим скрытый потенциал Пала Трава."
   },
   "PalAwakening_Material_Ground": {
     "localized_name": "Земной самоцвет",
-    "description": "Камень, образованный из энергии Мирового Древа, накопленной в теле Пала. После обработки становится предметом, раскрывающим скрытый потенциал Пала ElemIcon_GroundЗемля."
+    "description": "Камень, образованный из энергии Мирового Древа, накопленной в теле Пала. После обработки становится предметом, раскрывающим скрытый потенциал Пала Земля."
   },
   "PalAwakening_Material_Ice": {
     "localized_name": "Ледяной самоцвет",
-    "description": "Камень, образованный из энергии Мирового Древа, накопленной в теле Пала. После обработки становится предметом, раскрывающим скрытый потенциал Пала ElemIcon_IceЛед."
+    "description": "Камень, образованный из энергии Мирового Древа, накопленной в теле Пала. После обработки становится предметом, раскрывающим скрытый потенциал Пала Лед."
   },
   "PalAwakening_Material_Neutral": {
     "localized_name": "Нейтральный самоцвет",
-    "description": "Камень, образованный из энергии Мирового Древа, накопленной в теле Пала. После обработки становится предметом, раскрывающим скрытый потенциал Пала ElemIcon_NeutralНейтральный."
+    "description": "Камень, образованный из энергии Мирового Древа, накопленной в теле Пала. После обработки становится предметом, раскрывающим скрытый потенциал Пала Нейтральный."
   },
   "PalAwakening_Material_Water": {
     "localized_name": "Водный самоцвет",
-    "description": "Камень, образованный из энергии Мирового Древа, накопленной в теле Пала. После обработки становится предметом, раскрывающим скрытый потенциал Пала ElemIcon_WaterВода."
+    "description": "Камень, образованный из энергии Мирового Древа, накопленной в теле Пала. После обработки становится предметом, раскрывающим скрытый потенциал Пала Вода."
   },
   "PalAwakening_Neutral": {
     "localized_name": "Нейтральный кристалл пробуждения",
-    "description": "Кристалл, содержащий энергию Мирового Древа. Пробуждает Пала ElemIcon_NeutralНейтральный и раскрывает его потенциал."
+    "description": "Кристалл, содержащий энергию Мирового Древа. Пробуждает Пала Нейтральный и раскрывает его потенциал."
   },
   "PalAwakening_Water": {
     "localized_name": "Водный кристалл пробуждения",
-    "description": "Кристалл, содержащий энергию Мирового Древа. Пробуждает Пала ElemIcon_WaterВода и раскрывает его потенциал."
+    "description": "Кристалл, содержащий энергию Мирового Древа. Пробуждает Пала Вода и раскрывает его потенциал."
   },
   "PalCrystal_Ex": {
     "localized_name": "Деталь древней цивилизации",
@@ -6441,7 +6441,7 @@
   },
   "PalEgg_MutationPal": {
     "localized_name": "Huge Mutated Egg",
-    "description": "-"
+    "description": "[WIP] Description not finalized. A Huge Mutated Egg. You can feel the restless aura of a strange soul, as if a monster is about to be born. Place it in a Egg Incubator to hatch it."
   },
   "PalEgg_MutationPal_01": {
     "localized_name": "Мутировавшее яйцо",
@@ -7189,7 +7189,7 @@
   },
   "PotatoSeedPotatoes": {
     "localized_name": "PotatoSeedPotatoes",
-    "description": null
+    "description": "PotatoSeedPotatoes"
   },
   "PotatoSeeds": {
     "localized_name": "Семенной картофель",
@@ -8009,7 +8009,7 @@
   },
   "SkillUnlock_BlackFurDragon": {
     "localized_name": "Dragostrophe's Shotgun",
-    "description": "A shotgun for BlackFurDragon to hold."
+    "description": "A shotgun for Dragostrophe to hold."
   },
   "SkillUnlock_BlackGriffon": {
     "localized_name": "Седло Шэдоубика",
@@ -8097,7 +8097,7 @@
   },
   "SkillUnlock_ElecLion": {
     "localized_name": "Boltmane Saddle",
-    "description": "A tool for safely riding ElecLion."
+    "description": "A tool for safely riding Boltmane."
   },
   "SkillUnlock_ElecPanda": {
     "localized_name": "Миниган Гриззболта",
@@ -8645,7 +8645,7 @@
   },
   "SkyHeavyBullet": {
     "localized_name": "Sunreach Single-Shot Ammo",
-    "description": "-"
+    "description": "[WIP] Description not finalized. Ammo for the Prototype Shotgun, Tactical Grenade Launcher, and similar weapons."
   },
   "SkyIslandOre": {
     "localized_name": "Соллайт",
@@ -8653,7 +8653,7 @@
   },
   "SkyLightBullet": {
     "localized_name": "Sunreach Rapid-Fire Ammo",
-    "description": "-"
+    "description": "[WIP] Description not finalized. Ammo for the Combat SMG, Heavy Assault Rifle, and similar weapons."
   },
   "SkyShotgun": {
     "localized_name": "Прототипный дробовик",
@@ -9552,8 +9552,8 @@
     "description": "Используется для разжигания огня. Можно обнаружить при добыче камня."
   },
   "Gasoline": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Gasoline",
+    "description": null
   },
   "IronOre": {
     "localized_name": "IronOre",
@@ -9608,8 +9608,8 @@
     "description": null
   },
   "Propellant": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Propellant",
+    "description": null
   },
   "Pumpkin": {
     "localized_name": "Pumpkin",
@@ -9640,8 +9640,8 @@
     "description": null
   },
   "Shield_05": {
-    "localized_name": "Shield_05",
-    "description": null
+    "localized_name": "Ультращит",
+    "description": "Необычный щит, созданный с помощью палдиумных технологий. Автоматически восстанавливается, если некоторое время не получает урона. Многочисленные испытания позволили достичь непревзойдённого качества."
   },
   "Silicon": {
     "localized_name": "Силикон",

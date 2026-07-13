@@ -577,7 +577,7 @@
   },
   "DrillGame": {
     "localized_name": "Digtoise",
-    "description": "Es gibt eine Fabel namens „Der Bohrer des Digtoise|, in der das Digtoise mit dem allerhärtesten Panzer und dem allerstärksten Bohrer über Paradoxa nachdenkt."
+    "description": "Es gibt eine Fabel namens „Der Bohrer des Digtoise\", in der das Digtoise mit dem allerhärtesten Panzer und dem allerstärksten Bohrer über Paradoxa nachdenkt."
   },
   "Eagle": {
     "localized_name": "Galeclaw",
@@ -925,11 +925,11 @@
   },
   "FlowerDinosaur": {
     "localized_name": "Dinossom",
-    "description": "Wenn dieser Pal einmal wütend wird, kann ihn nichts und niemand mehr bändigen. Der Ausdruck „einem Dinossom auf den Schwanz treten| bedeutet, jemanden extrem zu verärgern."
+    "description": "Wenn dieser Pal einmal wütend wird, kann ihn nichts und niemand mehr bändigen. Der Ausdruck „einem Dinossom auf den Schwanz treten\" bedeutet, jemanden extrem zu verärgern."
   },
   "FlowerDinosaur_Electric": {
     "localized_name": "Dinossom Lux",
-    "description": "Wurde einst von einem Blitz getroffen und überlebte nur knapp. Der Ausdruck „wie ein Dinossom Lux, das vom Blitz getroffen wurde| bedeutet, dem Tod auf wundersame Weise zu entkommen."
+    "description": "Wurde einst von einem Blitz getroffen und überlebte nur knapp. Der Ausdruck „wie ein Dinossom Lux, das vom Blitz getroffen wurde\" bedeutet, dem Tod auf wundersame Weise zu entkommen."
   },
   "FlowerDoll": {
     "localized_name": "Petallia",
@@ -1597,7 +1597,7 @@
   },
   "LazyDragon_Electric": {
     "localized_name": "Relaxaurus Lux",
-    "description": "„Hachja|, sagte Relaxaurus. „Wird Zeit, dass ich mich ändere.| In dem Augenblick durchfuhr ein elektrischer Schlag seinen Körper!"
+    "description": "„Hachja\", sagte Relaxaurus. „Wird Zeit, dass ich mich ändere.\" In dem Augenblick durchfuhr ein elektrischer Schlag seinen Körper!"
   },
   "LazyDragon_Electric_Tower": {
     "localized_name": "Relaxaurus Lux",
@@ -2145,7 +2145,7 @@
   },
   "PREDATOR_DrillGame": {
     "localized_name": "Digtoise",
-    "description": "Es gibt eine Fabel namens „Der Bohrer des Digtoise|, in der das Digtoise mit dem allerhärtesten Panzer und dem allerstärksten Bohrer über Paradoxa nachdenkt."
+    "description": "Es gibt eine Fabel namens „Der Bohrer des Digtoise\", in der das Digtoise mit dem allerhärtesten Panzer und dem allerstärksten Bohrer über Paradoxa nachdenkt."
   },
   "PREDATOR_FairyDragon": {
     "localized_name": "Elphidran",
@@ -2157,7 +2157,7 @@
   },
   "PREDATOR_FlowerDinosaur": {
     "localized_name": "Dinossom",
-    "description": "Wenn dieser Pal einmal wütend wird, kann ihn nichts und niemand mehr bändigen. Der Ausdruck „einem Dinossom auf den Schwanz treten| bedeutet, jemanden extrem zu verärgern."
+    "description": "Wenn dieser Pal einmal wütend wird, kann ihn nichts und niemand mehr bändigen. Der Ausdruck „einem Dinossom auf den Schwanz treten\" bedeutet, jemanden extrem zu verärgern."
   },
   "PREDATOR_FlowerRabbit_Quest": {
     "localized_name": "Flopie",
@@ -2773,11 +2773,11 @@
   },
   "SakuraSaurus": {
     "localized_name": "Broncherry",
-    "description": "Ihr Körperduft vor und nach der Paarung unterscheidet sich beträchtlich. Der Duft, nachdem sie einen Partner gefunden haben, wird auch „der Duft der ersten Liebe| genannt."
+    "description": "Ihr Körperduft vor und nach der Paarung unterscheidet sich beträchtlich. Der Duft, nachdem sie einen Partner gefunden haben, wird auch „der Duft der ersten Liebe\" genannt."
   },
   "SakuraSaurus_Water": {
     "localized_name": "Broncherry Aqua",
-    "description": "Ihr Körperduft vor und nach der Paarung unterscheidet sich beträchtlich. Der Duft, bevor sie einen Partner gefunden haben, wird auch „der Duft der Unschuld| genannt."
+    "description": "Ihr Körperduft vor und nach der Paarung unterscheidet sich beträchtlich. Der Duft, bevor sie einen Partner gefunden haben, wird auch „der Duft der Unschuld\" genannt."
   },
   "SalesPerson": {
     "localized_name": "Fahrender Händler",
@@ -3040,7 +3040,7 @@
     "description": "Im Schloss blühten all die Lieblingsblumen des Königs. Eines Tages gab es eine große Schlacht, und ein Feuer drohte das Schloss einzunehmen. Da erschien plötzlich eine Blumenfee. – Aus dem Märchen: „Die Blume des Königs“"
   },
   "VisitingMerchant": {
-    "localized_name": "VisitingMerchant",
+    "localized_name": "Visitor",
     "description": null
   },
   "Visitor_Hunter_Rifle": {
@@ -3072,7 +3072,7 @@
     "description": "Bei ausgeglichenen Individuen bleibt die Temperatur der Flüssigkeit auf ihrem Rücken stabil. Aufregung führt zu Temperaturschwankungen, wodurch sie schlimmstenfalls verdampft oder gefriert, was einen plötzlichen Tod nach sich zieht."
   },
   "WeaponsDealer": {
-    "localized_name": "WeaponsDealer",
+    "localized_name": "Weapons Dealer",
     "description": null
   },
   "WeaselDragon": {
@@ -3445,7 +3445,7 @@
   },
   "WaterLizard": {
     "localized_name": "WaterLizard",
-    "description": "-"
+    "description": null
   },
   "WorldTree_Hunter_MissileLauncher_test": {
     "localized_name": "WorldTree_Hunter_MissileLauncher_test",

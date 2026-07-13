@@ -505,7 +505,7 @@
   },
   "Arrow_Fire": {
     "localized_name": "Fire Arrow",
-    "description": "Fire Arrows for use with bows. Deals ElemIcon_FireFire damage on contact. Can be crafted at Primitive Workbench."
+    "description": "Fire Arrows for use with bows. Deals Fire damage on contact. Can be crafted at Primitive Workbench."
   },
   "Arrow_Poison": {
     "localized_name": "Poison Arrow",
@@ -1541,7 +1541,7 @@
   },
   "Blueprint_Head002_5": {
     "localized_name": "Blueprint for Golden Crown 5",
-    "description": "Possessing it will unlock the recipe for |Golden Crown (Legendary)|. It can be crafted at the |Primitive Workbench|."
+    "description": "Possessing it will unlock the recipe for \"Golden Crown (Legendary)\". It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head003_1": {
     "localized_name": "Long-Eared Headband Schematic 1",
@@ -1581,7 +1581,7 @@
   },
   "Blueprint_Head004_5": {
     "localized_name": "Design of Witch Hat No. 5",
-    "description": "When possessed, it unlocks the recipe for |Witch Hat (Legendary)|. It can be crafted at the |Primitive Workbench|."
+    "description": "When possessed, it unlocks the recipe for \"Witch Hat (Legendary)\". It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head005_1": {
     "localized_name": "Soft Hat Schematic 1",
@@ -1601,7 +1601,7 @@
   },
   "Blueprint_Head005_5": {
     "localized_name": "Blueprint of Soft Hat 5",
-    "description": "Owning it will unlock the recipe for |Soft Hat (Legendary)|. You can craft it at the |Primitive Workbench|."
+    "description": "Owning it will unlock the recipe for \"Soft Hat (Legendary)\". You can craft it at the \"Primitive Workbench\"."
   },
   "Blueprint_Head006_1": {
     "localized_name": "Helmet Schematic 1",
@@ -1621,7 +1621,7 @@
   },
   "Blueprint_Head006_5": {
     "localized_name": "Blueprint of Helmet 5",
-    "description": "When in possession, the recipe for |Helmet (Legendary)| is unlocked. It can be crafted at the |Primitive Workbench|."
+    "description": "When in possession, the recipe for \"Helmet (Legendary)\" is unlocked. It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head007_1": {
     "localized_name": "Silk Hat Schematic 1",
@@ -1641,7 +1641,7 @@
   },
   "Blueprint_Head007_5": {
     "localized_name": "5 Schematic Diagrams of the Silk Hat",
-    "description": "When owned, the recipe for |Silk Hat (Legendary)| becomes available. It can be crafted at the |Primitive Workbench|."
+    "description": "When owned, the recipe for \"Silk Hat (Legendary)\" becomes available. It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head008_1": {
     "localized_name": "Tricorne Schematic 1",
@@ -1661,7 +1661,7 @@
   },
   "Blueprint_Head008_5": {
     "localized_name": "Blueprint of the Tricorn Hat 5",
-    "description": "When possessed, the recipe for |Tricorne (Legendary)| becomes available. It can be crafted at the |Primitive Workbench|."
+    "description": "When possessed, the recipe for \"Tricorne (Legendary)\" becomes available. It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head009_1": {
     "localized_name": "Exploration Cap Schematic 1",
@@ -1681,7 +1681,7 @@
   },
   "Blueprint_Head009_5": {
     "localized_name": "Blueprint of Exploration Hat 5",
-    "description": "When owned, the recipe for |Explorer Cap (Legendary)| is unlocked. It can be crafted at the |Primitive Workbench|."
+    "description": "When owned, the recipe for \"Explorer Cap (Legendary)\" is unlocked. It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head010_1": {
     "localized_name": "Graduation Cap Schematic 1",
@@ -1701,7 +1701,7 @@
   },
   "Blueprint_Head010_5": {
     "localized_name": "Blueprint 5 of University Hat",
-    "description": "If you possess it, the recipe for |Graduation Cap (Legendary)| will be unlocked. It can be crafted at the |Primitive Workbench|."
+    "description": "If you possess it, the recipe for \"Graduation Cap (Legendary)\" will be unlocked. It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head011_1": {
     "localized_name": "Farming Hat Schematic 1",
@@ -1721,7 +1721,7 @@
   },
   "Blueprint_Head011_5": {
     "localized_name": "5 Diagrams of Agricultural Hat",
-    "description": "Owning it will unlock the recipe for |Farming Hat (Legendary)|. It can be crafted at the |Primitive Workbench|."
+    "description": "Owning it will unlock the recipe for \"Farming Hat (Legendary)\". It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head012_1": {
     "localized_name": "Bowler Hat Schematic 1",
@@ -1741,7 +1741,7 @@
   },
   "Blueprint_Head012_5": {
     "localized_name": "Blueprint of Bowler Hat 5",
-    "description": "When owned, the recipe for |Bowler Hat （Legendary）| will be unlocked. It can be crafted at the |Primitive Workbench|."
+    "description": "When owned, the recipe for \"Bowler Hat （Legendary）\" will be unlocked. It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head013_1": {
     "localized_name": "Tocotoco Cap Schematic 1",
@@ -1761,7 +1761,7 @@
   },
   "Blueprint_Head013_5": {
     "localized_name": "Design Plan 5 for the Crutchli Hat",
-    "description": "When you possess it, the recipe for |Tocotoco Cap (Legendary)| is unlocked. You can craft it at the |Primitive Workbench|."
+    "description": "When you possess it, the recipe for \"Tocotoco Cap (Legendary)\" is unlocked. You can craft it at the \"Primitive Workbench\"."
   },
   "Blueprint_Head014_1": {
     "localized_name": "Grinning Tocotoco Cap Schematic 1",
@@ -1781,7 +1781,7 @@
   },
   "Blueprint_Head014_5": {
     "localized_name": "Grinning Curly Hat Blueprint 5",
-    "description": "Possession of this will unlock the recipe for |Grinning Tocotoco Cap (Legendary)|. It can be crafted at the |Primitive Workbench|."
+    "description": "Possession of this will unlock the recipe for \"Grinning Tocotoco Cap (Legendary)\". It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head015_1": {
     "localized_name": "Gumoss Cap Schematic 1",
@@ -1801,7 +1801,7 @@
   },
   "Blueprint_Head015_5": {
     "localized_name": "5 Blueprints of Naemochi Hat",
-    "description": "When owned, the recipe for |Gumoss Cap (Legendary)| is unlocked. It can be crafted at the |Primitive Workbench|."
+    "description": "When owned, the recipe for \"Gumoss Cap (Legendary)\" is unlocked. It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head016_1": {
     "localized_name": "Penking Cap Schematic 1",
@@ -1821,7 +1821,7 @@
   },
   "Blueprint_Head016_5": {
     "localized_name": "Blueprint of Capppen Hat 5",
-    "description": "Owning it will unlock the recipe for |Penking Cap(Legendary)|. It can be crafted on the |Primitive Workbench|."
+    "description": "Owning it will unlock the recipe for \"Penking Cap(Legendary)\". It can be crafted on the \"Primitive Workbench\"."
   },
   "Blueprint_Head017_1": {
     "localized_name": "Katress Cap Schematic 1",
@@ -1841,7 +1841,7 @@
   },
   "Blueprint_Head017_5": {
     "localized_name": "Design Blueprint of Clemence Hat 5",
-    "description": "When in inventory, unlocks recipe for Head017 2 (Common). Can be crafted at Primitive Workbench."
+    "description": null
   },
   "Blueprint_HeadEquip025_1": {
     "localized_name": "Leezpunk Hood Schematic 1",
@@ -5349,35 +5349,35 @@
   },
   "KeySphere_01": {
     "localized_name": "Key Sphere of Envy",
-    "description": "A relic of an ancient civilization that once flourished in this land. Although its true nature remains unknown, recent research suggests that it may have been part of a massive device. |The sin of envying humanity's prosperity and bringing about its downfall.|"
+    "description": "A relic of an ancient civilization that once flourished in this land. Although its true nature remains unknown, recent research suggests that it may have been part of a massive device. \"The sin of envying humanity's prosperity and bringing about its downfall.\""
   },
   "KeySphere_02": {
     "localized_name": "Key Sphere of Pride",
-    "description": "A relic of an ancient civilization that once flourished in this land. Although its true nature remains unknown, recent research suggests that it may have been part of a massive device. |The sin of arrogantly seeking coexistence, and bringing forth the Calamity.|"
+    "description": "A relic of an ancient civilization that once flourished in this land. Although its true nature remains unknown, recent research suggests that it may have been part of a massive device. \"The sin of arrogantly seeking coexistence, and bringing forth the Calamity.\""
   },
   "KeySphere_03": {
     "localized_name": "Key Sphere of Greed",
-    "description": "A relic of an ancient civilization that once flourished in this land. Although its true nature remains unknown, recent research suggests that it may have been part of a massive device. |The sin of rejecting one's fate, seeking the bonds of another.|"
+    "description": "A relic of an ancient civilization that once flourished in this land. Although its true nature remains unknown, recent research suggests that it may have been part of a massive device. \"The sin of rejecting one's fate, seeking the bonds of another.\""
   },
   "KeySphere_04": {
     "localized_name": "Key Sphere of Sloth",
-    "description": "A relic of an ancient civilization that once flourished in this land. Although its true nature remains unknown, recent research suggests that it may have been part of a massive device. |The sin of abandoning one's humanity, descending the path to ruin.|"
+    "description": "A relic of an ancient civilization that once flourished in this land. Although its true nature remains unknown, recent research suggests that it may have been part of a massive device. \"The sin of abandoning one's humanity, descending the path to ruin.\""
   },
   "KeySphere_05": {
     "localized_name": "Key Sphere of Gluttony",
-    "description": "A relic of an ancient civilization that once flourished in this land. Although its true nature remains unknown, recent research suggests that it may have been part of a massive device. |The sin of devouring the lifeblood of the stars, yet never knowing satiety.|"
+    "description": "A relic of an ancient civilization that once flourished in this land. Although its true nature remains unknown, recent research suggests that it may have been part of a massive device. \"The sin of devouring the lifeblood of the stars, yet never knowing satiety.\""
   },
   "KeySphere_06": {
     "localized_name": "Key Sphere of Lust",
-    "description": "A relic of an ancient civilization that once flourished in this land. Although its true nature remains unknown, recent research suggests that it may have been part of a massive device. |The sin of seeking forbidden truth beyond the veil, transcending the bounds of human reason.|"
+    "description": "A relic of an ancient civilization that once flourished in this land. Although its true nature remains unknown, recent research suggests that it may have been part of a massive device. \"The sin of seeking forbidden truth beyond the veil, transcending the bounds of human reason.\""
   },
   "KeySphere_07": {
     "localized_name": "Key Sphere of Wrath",
-    "description": "A relic of an ancient civilization that once flourished in this land. Although its true nature remains unknown, recent research suggests that it may have been part of a massive device. |The sin of surrendering oneself to wrath, spreading death without end.|"
+    "description": "A relic of an ancient civilization that once flourished in this land. Although its true nature remains unknown, recent research suggests that it may have been part of a massive device. \"The sin of surrendering oneself to wrath, spreading death without end.\""
   },
   "KeySphere_08": {
     "localized_name": "Key Sphere of Original Sin",
-    "description": "A relic of an ancient civilization that once flourished in this land. Although its true nature remains unknown, recent research suggests that it may have been part of a massive device. |The sin of being born while denying all life in creation.|"
+    "description": "A relic of an ancient civilization that once flourished in this land. Although its true nature remains unknown, recent research suggests that it may have been part of a massive device. \"The sin of being born while denying all life in creation.\""
   },
   "Lantern": {
     "localized_name": "Hip Lantern",
@@ -5969,7 +5969,7 @@
   },
   "Otomo_ATFire_ElementBoost_1": {
     "localized_name": "Flame Emperor's Baton",
-    "description": "An accessory that raises the Attack of the Pal fighting alongside you. It also significantly increases their  Fire damage."
+    "description": "An accessory that raises the Attack of the Pal fighting alongside you. It also significantly increases their Fire damage."
   },
   "Otomo_ATIce_ElementBoost_1": {
     "localized_name": "Ice Emperor's Baton",
@@ -6017,7 +6017,7 @@
   },
   "Otomo_DFFire_ElementBoost_1": {
     "localized_name": "Blazamut's Talisman",
-    "description": "An accessory that raises the Defense of the Pal fighting alongside you. It also significantly increases their  Fire damage."
+    "description": "An accessory that raises the Defense of the Pal fighting alongside you. It also significantly increases their Fire damage."
   },
   "Otomo_DFIce_ElementBoost_1": {
     "localized_name": "Frostallion's Talisman",
@@ -6205,75 +6205,75 @@
   },
   "PalAwakening_Dark": {
     "localized_name": "Dark Awakening Crystal",
-    "description": "A crystal formed from condensed World Tree energy. It awakens ElemIcon_DarkDark Pals, releasing their hidden power."
+    "description": "A crystal formed from condensed World Tree energy. It awakens Dark Pals, releasing their hidden power."
   },
   "PalAwakening_Dragon": {
     "localized_name": "Dragon Awakening Crystal",
-    "description": "A crystal formed from condensed World Tree energy. It awakens ElemIcon_DragonDragon Pals, releasing their hidden power."
+    "description": "A crystal formed from condensed World Tree energy. It awakens Dragon Pals, releasing their hidden power."
   },
   "PalAwakening_Electric": {
     "localized_name": "Electric Awakening Crystal",
-    "description": "A crystal formed from condensed World Tree energy. It awakens ElemIcon_ElectricElectric Pals, releasing their hidden power."
+    "description": "A crystal formed from condensed World Tree energy. It awakens Electric Pals, releasing their hidden power."
   },
   "PalAwakening_Fire": {
     "localized_name": "Fire Awakening Crystal",
-    "description": "A crystal formed from condensed World Tree energy. It awakens ElemIcon_FireFire Pals, releasing their hidden power."
+    "description": "A crystal formed from condensed World Tree energy. It awakens Fire Pals, releasing their hidden power."
   },
   "PalAwakening_Grass": {
     "localized_name": "Grass Awakening Crystal",
-    "description": "A crystal formed from condensed World Tree energy. It awakens ElemIcon_GrassGrass Pals, releasing their hidden power."
+    "description": "A crystal formed from condensed World Tree energy. It awakens Grass Pals, releasing their hidden power."
   },
   "PalAwakening_Ground": {
     "localized_name": "Ground Awakening Crystal",
-    "description": "A crystal formed from condensed World Tree energy. It awakens ElemIcon_GroundGround Pals, releasing their hidden power."
+    "description": "A crystal formed from condensed World Tree energy. It awakens Ground Pals, releasing their hidden power."
   },
   "PalAwakening_Ice": {
     "localized_name": "Ice Awakening Crystal",
-    "description": "A crystal formed from condensed World Tree energy. It awakens ElemIcon_IceIce Pals, releasing their hidden power."
+    "description": "A crystal formed from condensed World Tree energy. It awakens Ice Pals, releasing their hidden power."
   },
   "PalAwakening_Material_Dark": {
     "localized_name": "Dark Radiant Gem",
-    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of ElemIcon_DarkDark Pals."
+    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of Dark Pals."
   },
   "PalAwakening_Material_Dragon": {
     "localized_name": "Dragon Radiant Gem",
-    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of ElemIcon_DragonDragon Pals."
+    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of Dragon Pals."
   },
   "PalAwakening_Material_Electric": {
     "localized_name": "Electric Radiant Gem",
-    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of ElemIcon_ElectricElectric Pals."
+    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of Electric Pals."
   },
   "PalAwakening_Material_Fire": {
     "localized_name": "Fire Radiant Gem",
-    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of ElemIcon_FireFire Pals."
+    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of Fire Pals."
   },
   "PalAwakening_Material_Grass": {
     "localized_name": "Grass Radiant Gem",
-    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of ElemIcon_GrassGrass Pals."
+    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of Grass Pals."
   },
   "PalAwakening_Material_Ground": {
     "localized_name": "Ground Radiant Gem",
-    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of ElemIcon_GroundGround Pals."
+    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of Ground Pals."
   },
   "PalAwakening_Material_Ice": {
     "localized_name": "Ice Radiant Gem",
-    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of ElemIcon_IceIce Pals."
+    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of Ice Pals."
   },
   "PalAwakening_Material_Neutral": {
     "localized_name": "Neutral Radiant Gem",
-    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of ElemIcon_NeutralNeutral Pals."
+    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of Neutral Pals."
   },
   "PalAwakening_Material_Water": {
     "localized_name": "Water Radiant Gem",
-    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of ElemIcon_WaterWater Pals."
+    "description": "A gem formed as World Tree energy accumulates within a Pal’s body. When processed, it becomes an item that releases the hidden power of Water Pals."
   },
   "PalAwakening_Neutral": {
     "localized_name": "Neutral Awakening Crystal",
-    "description": "A crystal formed from condensed World Tree energy. It awakens ElemIcon_NeutralNeutral Pals, releasing their hidden power."
+    "description": "A crystal formed from condensed World Tree energy. It awakens Neutral Pals, releasing their hidden power."
   },
   "PalAwakening_Water": {
     "localized_name": "Water Awakening Crystal",
-    "description": "A crystal formed from condensed World Tree energy. It awakens ElemIcon_WaterWater Pals, releasing their hidden power."
+    "description": "A crystal formed from condensed World Tree energy. It awakens Water Pals, releasing their hidden power."
   },
   "PalCrystal_Ex": {
     "localized_name": "Ancient Civilization Parts",
@@ -9552,8 +9552,8 @@
     "description": "A material required to start a fire. Can sometimes be found when excavating rocks."
   },
   "Gasoline": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Gasoline",
+    "description": null
   },
   "IronOre": {
     "localized_name": "IronOre",
@@ -9608,8 +9608,8 @@
     "description": null
   },
   "Propellant": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Propellant",
+    "description": null
   },
   "Pumpkin": {
     "localized_name": "Pumpkin",
@@ -9640,8 +9640,8 @@
     "description": null
   },
   "Shield_05": {
-    "localized_name": "Shield_05",
-    "description": null
+    "localized_name": "Ultra Shield",
+    "description": "Strange shield made with Paldium technology. It automatically repairs itself after not taking damage for a while. As a result of further experiments, ultimate quality has been achieved."
   },
   "Silicon": {
     "localized_name": "Silicon",

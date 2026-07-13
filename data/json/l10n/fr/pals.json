@@ -389,7 +389,7 @@
   },
   "BluePlatypus": {
     "localized_name": "Fuack",
-    "description": "Peut créer des vagues à la demande grâce à l'eau qu'il produit. Il utilise son propre corps comme planche de surf pour aller plus vite,  mais les collisions fatales sont monnaie courante."
+    "description": "Peut créer des vagues à la demande grâce à l'eau qu'il produit. Il utilise son propre corps comme planche de surf pour aller plus vite, mais les collisions fatales sont monnaie courante."
   },
   "BluePlatypus_Fire": {
     "localized_name": "Fuack Ignis",
@@ -541,7 +541,7 @@
   },
   "DarkMechaDragon": {
     "localized_name": "Xenolord",
-    "description": "- Arrivée à destination. Spécimen : priorité à la recherche du |Dragon Météore|. - Remarque : le délai de soumission est dépassé de <://Error_Code:126DC> années. - Mise à jour : aucune trace de soumission trouvée. Naturalisation confirmée. L'élimination commence. - Note interne : Ne pas oublier ni consommer d’informations critiques !"
+    "description": "- Arrivée à destination. Spécimen : priorité à la recherche du \"Dragon Météore\". - Remarque : le délai de soumission est dépassé de <://Error_Code:126DC> années. - Mise à jour : aucune trace de soumission trouvée. Naturalisation confirmée. L'élimination commence. - Note interne : Ne pas oublier ni consommer d’informations critiques !"
   },
   "DarkScorpion": {
     "localized_name": "Menasting",
@@ -2913,7 +2913,7 @@
   },
   "StuffedShark": {
     "localized_name": "Finsider",
-    "description": "On dirait qu'il y a quelque chose qui se cache dans son costume,  mais lorsque l'on y plonge la main, il n'y a rien. Pire encore, on peut y enfoncer la main de plus en plus profondément. Peut-être que l'univers tout entier se cache ici."
+    "description": "On dirait qu'il y a quelque chose qui se cache dans son costume, mais lorsque l'on y plonge la main, il n'y a rien. Pire encore, on peut y enfoncer la main de plus en plus profondément. Peut-être que l'univers tout entier se cache ici."
   },
   "StuffedShark_Fire": {
     "localized_name": "Finsider Ignis",
@@ -3040,7 +3040,7 @@
     "description": "Le château était rempli des fleurs préférées du roi. Une grande bataille s'ensuivit et le feu gagna le château. C'est alors que l'esprit d'une unique fleur apparut. - Tiré du conte de fées « La Fleur du Roi »."
   },
   "VisitingMerchant": {
-    "localized_name": "VisitingMerchant",
+    "localized_name": "Visitor",
     "description": null
   },
   "Visitor_Hunter_Rifle": {
@@ -3072,7 +3072,7 @@
     "description": "Chez les individus en bonne santé, la température du fluide qui parcourt leur dos reste stable. Lorsqu’ils s’emballent, cet équilibre se dérègle, provoquant vaporisation ou solidification. Dans les cas les plus graves, cela peut entraîner une mort subite."
   },
   "WeaponsDealer": {
-    "localized_name": "WeaponsDealer",
+    "localized_name": "Weapons Dealer",
     "description": null
   },
   "WeaselDragon": {
@@ -3445,7 +3445,7 @@
   },
   "WaterLizard": {
     "localized_name": "WaterLizard",
-    "description": "-"
+    "description": null
   },
   "WorldTree_Hunter_MissileLauncher_test": {
     "localized_name": "WorldTree_Hunter_MissileLauncher_test",

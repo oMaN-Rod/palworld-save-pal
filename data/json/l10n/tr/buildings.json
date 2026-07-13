@@ -25,11 +25,11 @@
   },
   "AncientRelicRecycler": {
     "localized_name": "Antik Medeniyet Kalıntı Dönüştürücüsü",
-    "description": "Kayıp bir medeniyetin teknolojisi devşirilerek yapılmış, antik bir madde dönüştürme cihazı. |Antik Medeniyet Kalıntıları|nda bırakılan teknolojiyi çözerek, onları yeni formlara yüceltir. Kalıntıları israf etmeden kullanmak için tasarlanmış, son derece özel bir tesistir."
+    "description": "Kayıp bir medeniyetin teknolojisi devşirilerek yapılmış, antik bir madde dönüştürme cihazı. \"Antik Medeniyet Kalıntıları\"nda bırakılan teknolojiyi çözerek, onları yeni formlara yüceltir. Kalıntıları israf etmeden kullanmak için tasarlanmış, son derece özel bir tesistir."
   },
   "AncientWorkBench": {
     "localized_name": "Antik Medeniyet Tezgahı",
-    "description": "Tüm eşyaların tek bir yerde üretilebildiği, Pal'lara özel çok amaçlı bir tesis. Oyuncu burada çalışamaz ve üretim hızı standart tesislerle aynıdır. Gelişmiş bir ekipman olduğu için, işletilmesi yüksek |El İşçiliği| ve |İlaç Üretimi| yeteneğine sahip Pal'lar gerektirir."
+    "description": "Tüm eşyaların tek bir yerde üretilebildiği, Pal'lara özel çok amaçlı bir tesis. Oyuncu burada çalışamaz ve üretim hızı standart tesislerle aynıdır. Gelişmiş bir ekipman olduğu için, işletilmesi yüksek \"El İşçiliği\" ve \"İlaç Üretimi\" yeteneğine sahip Pal'lar gerektirir."
   },
   "Ancient_AirConditioner": {
     "localized_name": "Antik Medeniyet Klima Ünitesi",
@@ -376,8 +376,8 @@
     "description": "Dekoratif Feybreak Halkının Grup Bayrağı."
   },
   "Decal_PalSticker_PinkCat": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Tuppanyan sticker",
+    "description": null
   },
   "DefenseBowGun": {
     "localized_name": "Sabitlenmiş Arbalet",
@@ -1292,8 +1292,8 @@
     "description": "Dekoratif antika uzun halı."
   },
   "Rug_Wood": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Fur rug",
+    "description": null
   },
   "SF_Chair": {
     "localized_name": "Araştırma Odası Tipi Sandalye",
@@ -1832,8 +1832,8 @@
     "description": "Üzerine basan Pal'ları donduran bir tuzak. Donmuş Pal'ları küreyle yakalama oranı artar."
   },
   "Trap_MovingPanel": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Moving Panels",
+    "description": "A description of the moving panel"
   },
   "Trap_Noose": {
     "localized_name": "Asılı Tuzak",
@@ -1984,11 +1984,11 @@
     "description": "Dekoratif yer sandalyesi. Japon tarzı binalar için mükemmel."
   },
   "JapaneseStyle_TriangleStairsCorner_02": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "JapaneseStyle_TriangleStairsCorner_02",
+    "description": null
   },
   "WoodCreator": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "WoodCreator",
+    "description": null
   }
 }

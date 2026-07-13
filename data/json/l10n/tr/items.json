@@ -28,7 +28,7 @@
     "description": "Kuşanıldığında oyuncunun havadayken üç kez ileri atılma yapmasına olanak tanıyan bir aksesuar."
   },
   "Accessory_AirDash4": {
-    "localized_name": "-",
+    "localized_name": "Quadruple Air Dash Boots",
     "description": "Kuşanıldığında oyuncunun havadayken dört kez ileri atılma yapmasına olanak tanıyan bir aksesuar."
   },
   "Accessory_AquaResist_1": {
@@ -480,24 +480,24 @@
     "description": "Unutulmuş bir çağa ait, uzun zaman önce kaybedilmiş teknolojileri içeren bir kitap. Kadim Teknoloji Puanları elde etmek için kullanılabilir."
   },
   "AnimalSkin": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Animal Skin",
+    "description": "Animal Skin"
   },
   "AnimalSkin2": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Animal Skin",
+    "description": "Animal Skin"
   },
   "Antibiotic_Good": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Antibiotic Good",
+    "description": "Antibiotic Good"
   },
   "Antibiotic_Normal": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Antibiotic Normal",
+    "description": "Antibiotic Normal"
   },
   "Antibiotic_Super": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Antibiotic Super",
+    "description": "Antibiotic Super"
   },
   "Arrow": {
     "localized_name": "Ok",
@@ -505,7 +505,7 @@
   },
   "Arrow_Fire": {
     "localized_name": "Ateş Oku",
-    "description": "Yayla fırlatmak için kullanılan bir Ateş Oku. İsabet ettiği hedefe ElemIcon_FireAteş hasarı verir. İlkel Tezgâh kullanılarak üretilebilir."
+    "description": "Yayla fırlatmak için kullanılan bir Ateş Oku. İsabet ettiği hedefe Ateş hasarı verir. İlkel Tezgâh kullanılarak üretilebilir."
   },
   "Arrow_Poison": {
     "localized_name": "Zehirli Ok",
@@ -572,12 +572,12 @@
     "description": "Ağaç kesmek için kullanılan bir balta. Dayanıklılığı ve keskinliği daha da artırılmıştır. Zorlu bölgelerde yetişen kaliteli ağaçlardan sert kereste elde edebilir."
   },
   "Axe_Tier_03": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Axe4",
+    "description": "Axe4"
   },
   "BLT": {
     "localized_name": "Pastırmalı Sandviç",
-    "description": "-"
+    "description": "A dish where bacon, Lettuce, Tomato are sandwiched in Bread. Consumption increases Attack by +15% for a while."
   },
   "BaconEggs": {
     "localized_name": "Rushoar Pastırmalı Yumurta",
@@ -724,16 +724,16 @@
     "description": "Aşırı çevre koşullarında uzun yıllar boyunca aşınarak fosilleşmiş hayvan kemiği. Etini kaybetmiş olsa bile hâlâ güçlü bir varlık hissi yayar."
   },
   "Beer": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Beer",
+    "description": "Beer"
   },
   "Berries": {
     "localized_name": "Kırmızı Meyveler",
     "description": "Hem çiğ hem pişmiş şekilde çok lezzetli olan, çok yönlü bir gıda malzemesi. Adanın her yerinde bulunabilir."
   },
   "Berries2": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Red Berries",
+    "description": "A versatile ingredient that is delicious raw or cooked. They can be found anywhere on the island."
   },
   "BerrySeeds": {
     "localized_name": "Meyve Tohumları",
@@ -1520,8 +1520,8 @@
     "description": "Envanterdeyken Hükümdar Tacı (Destansı) tarifini açar. İlkel Tezgâh ile üretilebilir."
   },
   "Blueprint_Head001_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Blueprint of the King's Crown 5",
+    "description": "When in inventory, unlocks recipe for Monarch's Crown (Legendary). Can be crafted at Primitive Workbench."
   },
   "Blueprint_Head002_1": {
     "localized_name": "Altın Taç Şeması 1",
@@ -1540,8 +1540,8 @@
     "description": "Envanterdeyken Altın Taç (Destansı) tarifini açar. İlkel Tezgâh ile üretilebilir."
   },
   "Blueprint_Head002_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Blueprint for Golden Crown 5",
+    "description": "Possessing it will unlock the recipe for \"Golden Crown (Legendary)\". It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head003_1": {
     "localized_name": "Uzun Kulaklı Kafa Bandı Şeması 1",
@@ -1560,8 +1560,8 @@
     "description": "Envanterdeyken Uzun Kulaklı Kafa Bandı (Destansı) tarifini açar. İlkel Tezgâh ile üretilebilir."
   },
   "Blueprint_Head003_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "5 Blueprints of Long-eared Headband",
+    "description": "Possessing it will unlock the recipe for 'Long-Eared Headband (Legendary)'. It can be crafted at the 'Primitive Workbench'."
   },
   "Blueprint_Head004_1": {
     "localized_name": "Cadı Şapkası Şeması 1",
@@ -1580,8 +1580,8 @@
     "description": "Envanterdeyken Cadı Şapkası (Destansı) tarifini açar. İlkel Tezgâh ile üretilebilir."
   },
   "Blueprint_Head004_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Design of Witch Hat No. 5",
+    "description": "When possessed, it unlocks the recipe for \"Witch Hat (Legendary)\". It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head005_1": {
     "localized_name": "Yumuşak Şapka Şeması 1",
@@ -1600,8 +1600,8 @@
     "description": "Envanterdeyken Yumuşak Şapka (Destansı) tarifini açar. İlkel Tezgâh ile üretilebilir."
   },
   "Blueprint_Head005_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Blueprint of Soft Hat 5",
+    "description": "Owning it will unlock the recipe for \"Soft Hat (Legendary)\". You can craft it at the \"Primitive Workbench\"."
   },
   "Blueprint_Head006_1": {
     "localized_name": "Kask Şeması 1",
@@ -1620,8 +1620,8 @@
     "description": "Envanterdeyken Kask (Destansı) tarifini açar. İlkel Tezgâh ile üretilebilir."
   },
   "Blueprint_Head006_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Blueprint of Helmet 5",
+    "description": "When in possession, the recipe for \"Helmet (Legendary)\" is unlocked. It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head007_1": {
     "localized_name": "İpek Şapka Şeması 1",
@@ -1640,8 +1640,8 @@
     "description": "Envanterdeyken İpek Şapka (Destansı) tarifini açar. İlkel Tezgâh ile üretilebilir."
   },
   "Blueprint_Head007_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "5 Schematic Diagrams of the Silk Hat",
+    "description": "When owned, the recipe for \"Silk Hat (Legendary)\" becomes available. It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head008_1": {
     "localized_name": "Üç Köşeli Şapka Şeması 1",
@@ -1660,8 +1660,8 @@
     "description": "Envanterdeyken Üç Köşeli Şapka (Destansı) tarifini açar. İlkel Tezgâh ile üretilebilir."
   },
   "Blueprint_Head008_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Blueprint of the Tricorn Hat 5",
+    "description": "When possessed, the recipe for \"Tricorne (Legendary)\" becomes available. It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head009_1": {
     "localized_name": "Keşif Başlığı Şeması 1",
@@ -1680,8 +1680,8 @@
     "description": "Envanterdeyken Kâşif Başlığı (Destansı) tarifini açar. İlkel Tezgâh ile üretilebilir."
   },
   "Blueprint_Head009_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Blueprint of Exploration Hat 5",
+    "description": "When owned, the recipe for \"Explorer Cap (Legendary)\" is unlocked. It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head010_1": {
     "localized_name": "Mezuniyet Kepi Şeması 1",
@@ -1700,8 +1700,8 @@
     "description": "Envanterdeyken Mezuniyet Kepi (Destansı) tarifini açar. İlkel Tezgâh ile üretilebilir."
   },
   "Blueprint_Head010_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Blueprint 5 of University Hat",
+    "description": "If you possess it, the recipe for \"Graduation Cap (Legendary)\" will be unlocked. It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head011_1": {
     "localized_name": "Çiftçi Şapkası Şeması 1",
@@ -1720,8 +1720,8 @@
     "description": "Envanterdeyken Çiftçi Şapkası (Destansı) tarifini açar. İlkel Tezgâh ile üretilebilir."
   },
   "Blueprint_Head011_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "5 Diagrams of Agricultural Hat",
+    "description": "Owning it will unlock the recipe for \"Farming Hat (Legendary)\". It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head012_1": {
     "localized_name": "Melon Şapka Şeması 1",
@@ -1740,8 +1740,8 @@
     "description": "Envanterdeyken Melon Şapka (Destansı) tarifini açar. İlkel Tezgâh ile üretilebilir."
   },
   "Blueprint_Head012_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Blueprint of Bowler Hat 5",
+    "description": "When owned, the recipe for \"Bowler Hat （Legendary）\" will be unlocked. It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head013_1": {
     "localized_name": "Tocotoco Şapkası Şeması 1",
@@ -1760,8 +1760,8 @@
     "description": "Envanterdeyken Tocotoco Şapkası (Destansı) tarifini açar. İlkel Tezgâh ile üretilebilir."
   },
   "Blueprint_Head013_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Design Plan 5 for the Crutchli Hat",
+    "description": "When you possess it, the recipe for \"Tocotoco Cap (Legendary)\" is unlocked. You can craft it at the \"Primitive Workbench\"."
   },
   "Blueprint_Head014_1": {
     "localized_name": "Sırıtan Tocotoco Şapkası Şeması 1",
@@ -1780,8 +1780,8 @@
     "description": "Envanterdeyken Sırıtan Tocotoco Şapkası (Destansı) tarifini açar. İlkel Tezgâh ile üretilebilir."
   },
   "Blueprint_Head014_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Grinning Curly Hat Blueprint 5",
+    "description": "Possession of this will unlock the recipe for \"Grinning Tocotoco Cap (Legendary)\". It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head015_1": {
     "localized_name": "Gumoss Şapkası Şeması 1",
@@ -1800,8 +1800,8 @@
     "description": "Envanterdeyken Gumoss Şapkası (Destansı) tarifini açar. İlkel Tezgâh ile üretilebilir."
   },
   "Blueprint_Head015_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "5 Blueprints of Naemochi Hat",
+    "description": "When owned, the recipe for \"Gumoss Cap (Legendary)\" is unlocked. It can be crafted at the \"Primitive Workbench\"."
   },
   "Blueprint_Head016_1": {
     "localized_name": "Penking Şapkası Şeması 1",
@@ -1820,8 +1820,8 @@
     "description": "Envanterdeyken Penking Şapkası (Destansı) tarifini açar. İlkel Tezgâh ile üretilebilir."
   },
   "Blueprint_Head016_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Blueprint of Capppen Hat 5",
+    "description": "Owning it will unlock the recipe for \"Penking Cap(Legendary)\". It can be crafted on the \"Primitive Workbench\"."
   },
   "Blueprint_Head017_1": {
     "localized_name": "Katress Şapkası Şeması 1",
@@ -1840,8 +1840,8 @@
     "description": "Envanterdeyken Katress Şapkası (Destansı) tarifini açar. İlkel Tezgâh ile üretilebilir."
   },
   "Blueprint_Head017_5": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Design Blueprint of Clemence Hat 5",
+    "description": null
   },
   "Blueprint_HeadEquip025_1": {
     "localized_name": "Leezpunk Başlığı Şeması 1",
@@ -2189,43 +2189,43 @@
   },
   "Blueprint_Octavia001_Armor_5": {
     "localized_name": "V1 Zırhı Şeması 4",
-    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, |V1 Zırhı (Efsanevi)| tarifinin kilidi açılır. |Üretim Montaj Hattı| kullanılarak üretilebilir."
+    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, \"V1 Zırhı (Efsanevi)\" tarifinin kilidi açılır. \"Üretim Montaj Hattı\" kullanılarak üretilebilir."
   },
   "Blueprint_Octavia002_Armor_5": {
     "localized_name": "V2 Zırhı Şeması 4",
-    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, |V2 Zırhı (Efsanevi)| tarifinin kilidi açılır. |Üretim Montaj Hattı II| kullanılarak üretilebilir."
+    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, \"V2 Zırhı (Efsanevi)\" tarifinin kilidi açılır. \"Üretim Montaj Hattı II\" kullanılarak üretilebilir."
   },
   "Blueprint_OctaviaRevolver_2": {
     "localized_name": "Nişancı Tabancası Şeması 1",
-    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, |Nişancı Tabancası (Sıra Dışı)| tarifinin kilidi açılır. |Silah Montaj Hattı| kullanılarak üretilebilir."
+    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, \"Nişancı Tabancası (Sıra Dışı)\" tarifinin kilidi açılır. \"Silah Montaj Hattı\" kullanılarak üretilebilir."
   },
   "Blueprint_OctaviaRevolver_3": {
     "localized_name": "Nişancı Tabancası Şeması 2",
-    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, |Nişancı Tabancası (Nadir)| tarifinin kilidi açılır. |Silah Montaj Hattı| kullanılarak üretilebilir."
+    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, \"Nişancı Tabancası (Nadir)\" tarifinin kilidi açılır. \"Silah Montaj Hattı\" kullanılarak üretilebilir."
   },
   "Blueprint_OctaviaRevolver_4": {
     "localized_name": "Nişancı Tabancası Şeması 3",
-    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, |Nişancı Tabancası (Destansı)| tarifinin kilidi açılır. |Silah Montaj Hattı| kullanılarak üretilebilir."
+    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, \"Nişancı Tabancası (Destansı)\" tarifinin kilidi açılır. \"Silah Montaj Hattı\" kullanılarak üretilebilir."
   },
   "Blueprint_OctaviaRevolver_5": {
     "localized_name": "Nişancı Tabancası Şeması 4",
-    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, |Nişancı Tabancası (Efsanevi)| tarifinin kilidi açılır. |Silah Montaj Hattı| kullanılarak üretilebilir."
+    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, \"Nişancı Tabancası (Efsanevi)\" tarifinin kilidi açılır. \"Silah Montaj Hattı\" kullanılarak üretilebilir."
   },
   "Blueprint_OctaviaShotgun_2": {
     "localized_name": "Çekirdek Atan Pompalı Tüfek Şeması 1",
-    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, |Çekirdek Atan Pompalı Tüfek (Sıra Dışı)| tarifinin kilidi açılır. |Silah Montaj Hattı II| kullanılarak üretilebilir."
+    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, \"Çekirdek Atan Pompalı Tüfek (Sıra Dışı)\" tarifinin kilidi açılır. \"Silah Montaj Hattı II\" kullanılarak üretilebilir."
   },
   "Blueprint_OctaviaShotgun_3": {
     "localized_name": "Çekirdek Atan Pompalı Tüfek Şeması 2",
-    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, |Çekirdek Atan Pompalı Tüfek (Nadir)| tarifinin kilidi açılır. |Silah Montaj Hattı II| kullanılarak üretilebilir."
+    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, \"Çekirdek Atan Pompalı Tüfek (Nadir)\" tarifinin kilidi açılır. \"Silah Montaj Hattı II\" kullanılarak üretilebilir."
   },
   "Blueprint_OctaviaShotgun_4": {
     "localized_name": "Çekirdek Atan Pompalı Tüfek Şeması 3",
-    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, |Çekirdek Atan Pompalı Tüfek (Destansı)| tarifinin kilidi açılır. |Silah Montaj Hattı II| kullanılarak üretilebilir."
+    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, \"Çekirdek Atan Pompalı Tüfek (Destansı)\" tarifinin kilidi açılır. \"Silah Montaj Hattı II\" kullanılarak üretilebilir."
   },
   "Blueprint_OctaviaShotgun_5": {
     "localized_name": "Çekirdek Atan Pompalı Tüfek Şeması 4",
-    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, |Çekirdek Atan Pompalı Tüfek (Efsanevi)| tarifinin kilidi açılır. |Silah Montaj Hattı II| kullanılarak üretilebilir."
+    "description": "[ULTRAKILL İş Birliği] Sahip olunduğunda, \"Çekirdek Atan Pompalı Tüfek (Efsanevi)\" tarifinin kilidi açılır. \"Silah Montaj Hattı II\" kullanılarak üretilebilir."
   },
   "Blueprint_OldRevolver_2": {
     "localized_name": "Eski Altıpatlar Şeması 1",
@@ -3693,7 +3693,7 @@
   },
   "CheeseBurger": {
     "localized_name": "Çizburger",
-    "description": "-"
+    "description": "A meal made with a Hamburger with cheese squeezed between it. Upon consumption, it increases the satiety level for a certain period as well as Defense +10%."
   },
   "Cheeseburger_2": {
     "localized_name": "Mozzarina Çizburger",
@@ -3712,12 +3712,12 @@
     "description": "Yer altında gömülü bir metal türü. Belirli adalarda Metal Dedektörü sayesinde tespit edilebilir."
   },
   "Claws": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Claw",
+    "description": "Claw"
   },
   "Claws2": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Claw",
+    "description": "Claw"
   },
   "Cloth": {
     "localized_name": "Kumaş",
@@ -3904,8 +3904,8 @@
     "description": "Bir ocakta saflaştırıldığında külçe hâline gelir. Mağaralarda ve diğer yerlerde bulunabilir."
   },
   "CornSoup": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Corn Soup",
+    "description": "Corn Soup"
   },
   "Corrosive_Solvent": {
     "localized_name": "Korozyon Çözücü",
@@ -3920,8 +3920,8 @@
     "description": "Sebzelerin ve etin, baharatlarla birlikte kaynatılmasıyla yapılan bir yemek. Yoğun lezzeti, iri ama yumuşacık et parçalarıyla daha da öne çıkar. Yediğinde Saldırı değerin bir süreliğine %25 artar."
   },
   "Curry_old": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Curry",
+    "description": "Curry"
   },
   "DecalGun_1": {
     "localized_name": "Çıkartma Tabancası 1",
@@ -4061,7 +4061,7 @@
   },
   "Elixir_hp_Yakushima": {
     "localized_name": "Yaşam Kristali",
-    "description": "[Terraria İş Birliği] Kullanıldığında, |HP| statüsünü kalıcı olarak biraz artırır. Eğer statü zaten maksimuma ulaşmışsa ya da bir Pal üzerinde kullanılırsa hiçbir etkisi olmaz."
+    "description": "[Terraria İş Birliği] Kullanıldığında, \"HP\" statüsünü kalıcı olarak biraz artırır. Eğer statü zaten maksimuma ulaşmışsa ya da bir Pal üzerinde kullanılırsa hiçbir etkisi olmaz."
   },
   "Elixir_stamina_01": {
     "localized_name": "Dayanıklılık İlacı",
@@ -4156,12 +4156,12 @@
     "description": "Roketatar ve benzeri silahlarda kullanılan mühimmat. Silah Montaj Hattı II kullanılarak üretilebilir."
   },
   "Fang": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Fang",
+    "description": "Fang"
   },
   "Fang2": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Fang",
+    "description": "Fang"
   },
   "Fiber": {
     "localized_name": "Lif",
@@ -4232,20 +4232,20 @@
     "description": "Pal yakalayabilen bir olta. İleri Seviye Olta (Pengullet)'ye göre daha dayanıklıdır ve biraz daha iyi performans sunar."
   },
   "FishingRod_Good": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Fishing Rod_Good",
+    "description": "Fishing Rod_Good"
   },
   "FishingRod_Legendary": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Fishing Rod_Legendary",
+    "description": "Fishing Rod_Legendary"
   },
   "FishingRod_Old": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Fishing Rod_Old",
+    "description": "Fishing Rod_Old"
   },
   "FishingRod_Super": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Fishing Rod_Super",
+    "description": "Fishing Rod_Super"
   },
   "FlameThrower": {
     "localized_name": "Alev Makinesi",
@@ -4329,7 +4329,7 @@
   },
   "FriedVegetables": {
     "localized_name": "Kızartılmış Sebzeler",
-    "description": "-"
+    "description": "A dish prepared by stir frying Lettuce and Raw Meat. When eaten, it will temporarily increase Attack by +10%."
   },
   "Fruit__defense_01": {
     "localized_name": "Sağlamlık Meyvesi",
@@ -4504,8 +4504,8 @@
     "description": "Gökyüzünde süzülmek için kullanılan bir planör. Performansı daha da geliştirilerek hız ve kaldırma kapasitesi artırılmıştır."
   },
   "Grape": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Grape",
+    "description": "Grape"
   },
   "GrapplingGun": {
     "localized_name": "Halat Tabancası",
@@ -4556,8 +4556,8 @@
     "description": "Geniş etki alanlı patlamalara sebep olan el bombaları fırlatır. Çok sayıda düşmanla mücadele ederken kullanışlıdır."
   },
   "GrilledFish": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Grilled Fish",
+    "description": "Grilled Fish"
   },
   "GrilledMeat": {
     "localized_name": "Izgara Et",
@@ -4592,8 +4592,8 @@
     "description": "Düşmanları otomatik olarak izleyerek takip eden füzeler ateşler. Füzeler çarpma anında patlar, geniş bir alana hasar verir."
   },
   "Gunpowder": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Gunpowder",
+    "description": "Gunpowder"
   },
   "Gunpowder2": {
     "localized_name": "Barut",
@@ -4605,7 +4605,7 @@
   },
   "Hamburger": {
     "localized_name": "Hamburger",
-    "description": "-"
+    "description": "A dish where a hamburger, Lettuce the Tomato are contained in the Bread. When eaten, it boosts one's stomach fullness and Attack by +10% for a while."
   },
   "Hamburger_2": {
     "localized_name": "Mozzarina Hamburger",
@@ -5204,8 +5204,8 @@
     "description": "Beegarde balı. Tatlı ve lezzetlidir."
   },
   "Hop": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Hop",
+    "description": "Hop"
   },
   "Horn": {
     "localized_name": "Boynuz",
@@ -5213,7 +5213,7 @@
   },
   "HotDog": {
     "localized_name": "Sosisli Sandviç",
-    "description": "-"
+    "description": "A culinary dinner sandwiching a sausage in an Bread. Consumption leads to an improved sense of fullness for a specific period."
   },
   "HotDog_2": {
     "localized_name": "Rushoar Sosisli Sandviç",
@@ -5476,8 +5476,8 @@
     "description": "Bir Pal'dan alınan Deri. Savunma malzemesi olarak kullanılır. Belirli Pal'lardan elde edilebilir."
   },
   "Leather2": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Leather",
+    "description": "Leather taken from a Pal, it serves as a defensive material. It can be obtained from certain Pals."
   },
   "Lettuce": {
     "localized_name": "Marul",
@@ -5488,8 +5488,8 @@
     "description": "Büyüyüp Marul veren tohumlar. Ekim yapmaya başlamak için olmazsa olmazdır. Bir tüccardan satın alınabilir."
   },
   "LightzHelmet": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Lightz Helmet",
+    "description": "Lightz Helmet"
   },
   "Lotus_attack_01": {
     "localized_name": "Güç Lotusu (K)",
@@ -5536,8 +5536,8 @@
     "description": "Zayıf Düşmüş ve Depresyonda tedavisinde etkili Yüksek Kaliteli Tıbbi Malzemeler. Ne yazık ki iyileştirici bir etkileri bulunmuyor."
   },
   "LuxuryOmelette": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "LuxuryOmelette",
+    "description": "LuxuryOmelette"
   },
   "LvUP_01": {
     "localized_name": "Eğitim Kristali",
@@ -5660,8 +5660,8 @@
     "description": "Pal eti. O kadar taze ki bir insan bile güvenli bir şekilde, çiğ çiğ yiyebilir."
   },
   "Meat2": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Meat",
+    "description": "Pal meat. It’s so fresh that even a human could safely eat it raw."
   },
   "MeatAndPotatoes": {
     "localized_name": "Galeclaw'lu Nikujaga",
@@ -5673,7 +5673,7 @@
   },
   "MeatSauce": {
     "localized_name": "Bolonez Sosu",
-    "description": "-"
+    "description": "A pasta dish combined with meat sauce. Eating it makes it difficult for sanity to decrease and provides Attack +10% for a while."
   },
   "Meat_BerryGoat": {
     "localized_name": "Caprity Eti",
@@ -5817,7 +5817,7 @@
   },
   "MushroomStew": {
     "localized_name": "Mantar Yahnisi",
-    "description": "-"
+    "description": "A stew made with Mushroom. Consumption elevates work speed and offers Attack +10% for a particular duration."
   },
   "Musket": {
     "localized_name": "Misket Tüfeği",
@@ -5848,8 +5848,8 @@
     "description": "Geceleri çölde bulunabilen bir kum. Belirli aksesuarları ve diğer eşyaları üretmek için bir malzeme olarak kullanılır."
   },
   "NightVisionGoggles": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Night Vision Goggles",
+    "description": "Night Vision Goggles"
   },
   "Octavia001_Armor": {
     "localized_name": "V1 Zırhı",
@@ -6205,75 +6205,75 @@
   },
   "PalAwakening_Dark": {
     "localized_name": "Karanlık Uyandırış Kristali",
-    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. ElemIcon_DarkKaranlık İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
+    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. Karanlık İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
   },
   "PalAwakening_Dragon": {
     "localized_name": "Ejder Uyandırış Kristali",
-    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. ElemIcon_DragonEjderha İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
+    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. Ejderha İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
   },
   "PalAwakening_Electric": {
     "localized_name": "Yıldırım Uyandırış Kristali",
-    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. ElemIcon_ElectricElektrik İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
+    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. Elektrik İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
   },
   "PalAwakening_Fire": {
     "localized_name": "Ateş Uyandırış Kristali",
-    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. ElemIcon_FireAteş İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
+    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. Ateş İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
   },
   "PalAwakening_Grass": {
     "localized_name": "Doğa Uyandırış Kristali",
-    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. ElemIcon_GrassÇimen İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
+    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. Çimen İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
   },
   "PalAwakening_Ground": {
     "localized_name": "Toprak Uyandırış Kristali",
-    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. ElemIcon_GroundToprak İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
+    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. Toprak İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
   },
   "PalAwakening_Ice": {
     "localized_name": "Buz Uyandırış Kristali",
-    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. ElemIcon_IceBuz İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
+    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. Buz İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
   },
   "PalAwakening_Material_Dark": {
     "localized_name": "Karanlık Parlaktaş",
-    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, ElemIcon_DarkKaranlık Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
+    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, Karanlık Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
   },
   "PalAwakening_Material_Dragon": {
     "localized_name": "Ejderha Parlaktaş",
-    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, ElemIcon_DragonEjderha Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
+    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, Ejderha Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
   },
   "PalAwakening_Material_Electric": {
     "localized_name": "Elektrik Parlaktaş",
-    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, ElemIcon_ElectricElektrik Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
+    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, Elektrik Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
   },
   "PalAwakening_Material_Fire": {
     "localized_name": "Alev Parlaktaş",
-    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, ElemIcon_FireAteş Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
+    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, Ateş Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
   },
   "PalAwakening_Material_Grass": {
     "localized_name": "Bitki Parlaktaş",
-    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, ElemIcon_GrassÇimen Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
+    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, Çimen Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
   },
   "PalAwakening_Material_Ground": {
     "localized_name": "Toprak Parlaktaş",
-    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, ElemIcon_GroundToprak Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
+    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, Toprak Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
   },
   "PalAwakening_Material_Ice": {
     "localized_name": "Buz Parlaktaş",
-    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, ElemIcon_IceBuz Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
+    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, Buz Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
   },
   "PalAwakening_Material_Neutral": {
     "localized_name": "Özelliksiz Parlaktaş",
-    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, ElemIcon_NeutralNötr Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
+    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, Nötr Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
   },
   "PalAwakening_Material_Water": {
     "localized_name": "Su Parlaktaş",
-    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, ElemIcon_WaterSu Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
+    "description": "Dünya Ağacı’nın enerjisinin Pal’ın bedeninde birikmesiyle oluşmuş taş. İşlendiğinde, Su Pal’ın gizli gücünü açığa çıkaran bir eşyaya dönüşür."
   },
   "PalAwakening_Neutral": {
     "localized_name": "Nötr Uyandırış Kristali",
-    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. ElemIcon_NeutralNötr İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
+    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. Nötr İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
   },
   "PalAwakening_Water": {
     "localized_name": "Su Uyandırış Kristali",
-    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. ElemIcon_WaterSu İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
+    "description": "Gizemli bir ahşabın işlenmesiyle elde edilmiş, hafifçe ışık yayan levha. Su İnsan aklını aşan bir güç barındırır ve en üst düzey çekirdek malzeme olarak kullanılır."
   },
   "PalCrystal_Ex": {
     "localized_name": "Kadim Medeniyet Parçaları",
@@ -6441,7 +6441,7 @@
   },
   "PalEgg_MutationPal": {
     "localized_name": "Huge Mutated Egg",
-    "description": "-"
+    "description": "[WIP] Description not finalized. A Huge Mutated Egg. You can feel the restless aura of a strange soul, as if a monster is about to be born. Place it in a Egg Incubator to hatch it."
   },
   "PalEgg_MutationPal_01": {
     "localized_name": "Aniden Dönüşmüş",
@@ -7017,7 +7017,7 @@
   },
   "Pal_crystal_L": {
     "localized_name": "Paldiyum Parçası",
-    "description": "-"
+    "description": "Crystals of PAL crystal"
   },
   "Pal_crystal_S": {
     "localized_name": "Paldiyum Kırığı",
@@ -7176,8 +7176,8 @@
     "description": "Rengârenk çiçekler açan bir bitki. Şüpheli Özüt ve Tuhaf Özüt yapmak için kullanılabilir."
   },
   "Potage": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Potage",
+    "description": "Potage"
   },
   "Potato": {
     "localized_name": "Patates",
@@ -7188,8 +7188,8 @@
     "description": "Derin yağda kızartılmış Patates ile yapılan bir yemek. Yemeye bir kez başladıktan sonra durması zordur. Yediğinde AKL değerin bir süreliğine daha yavaş azalır."
   },
   "PotatoSeedPotatoes": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "PotatoSeedPotatoes",
+    "description": "PotatoSeedPotatoes"
   },
   "PotatoSeeds": {
     "localized_name": "Patates Tohumları",
@@ -7500,16 +7500,16 @@
     "description": "İleri düzey kurtarma için gerekli güçlü mıknatıs. Güçlü manyetik kuvvetiyle deniz tabanında kalan kaynakları ve malzemeleri çekip çıkarabilir."
   },
   "Sandwich": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Sandwich",
+    "description": "Sandwich"
   },
   "Sapphire": {
     "localized_name": "Safir",
     "description": "Mavi renkte parlayan bir mücevher. Bir tüccara yüksek fiyattan satılabilir."
   },
   "SeafoodSoup": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Seafood Soup",
+    "description": "Seafood Soup"
   },
   "Seafood_Salada": {
     "localized_name": "Deniz Ürünleri Salatası",
@@ -8008,8 +8008,8 @@
     "description": "Güvenle Necromus sürebilmek için bir eyer."
   },
   "SkillUnlock_BlackFurDragon": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Dragostrophe's Shotgun",
+    "description": "A shotgun for Dragostrophe to hold."
   },
   "SkillUnlock_BlackGriffon": {
     "localized_name": "Shadowbeak Eyeri",
@@ -8068,8 +8068,8 @@
     "description": "Güvenle Xenolord sürebilmek için bir eyer."
   },
   "SkillUnlock_DarkMutant": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "en_text's Power Converter",
+    "description": "A tool for safely riding DarkMutant."
   },
   "SkillUnlock_Deer": {
     "localized_name": "Eikthyrdeer Eyeri",
@@ -8096,8 +8096,8 @@
     "description": "Takımında varkenGaleclawelindeyse, planörün performansı değişir."
   },
   "SkillUnlock_ElecLion": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Boltmane Saddle",
+    "description": "A tool for safely riding Boltmane."
   },
   "SkillUnlock_ElecPanda": {
     "localized_name": "Grizzbolt'un Mitralyözü",
@@ -8645,7 +8645,7 @@
   },
   "SkyHeavyBullet": {
     "localized_name": "Sunreach Single-Shot Ammo",
-    "description": "-"
+    "description": "[WIP] Description not finalized. Ammo for the Prototype Shotgun, Tactical Grenade Launcher, and similar weapons."
   },
   "SkyIslandOre": {
     "localized_name": "Güneş Taşı",
@@ -8653,7 +8653,7 @@
   },
   "SkyLightBullet": {
     "localized_name": "Sunreach Rapid-Fire Ammo",
-    "description": "-"
+    "description": "[WIP] Description not finalized. Ammo for the Combat SMG, Heavy Assault Rifle, and similar weapons."
   },
   "SkyShotgun": {
     "localized_name": "Prototip Pompalı Tüfek",
@@ -8872,8 +8872,8 @@
     "description": "Pal Metali kullanarak silah ve zırh yapmak için gerekli malzeme. Palziumun alaşıma eklenmesiyle daha güçlü hâle getirilmiştir."
   },
   "Stew": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Stew",
+    "description": "Stew"
   },
   "StewedIceDeer": {
     "localized_name": "Reindrix Yahnisi",
@@ -9136,8 +9136,8 @@
     "description": "Yakın dövüşe özel bir ışın silahıdır. Sıkıştırılmış enerjiyi yayılma ışını olarak ateşler."
   },
   "Wine": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Wine",
+    "description": "Wine"
   },
   "WingGlider": {
     "localized_name": "Kanat Paketi",
@@ -9361,23 +9361,23 @@
   },
   "YakushimaHeadEquip001": {
     "localized_name": "Kutsal Maske",
-    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup, |Meowmere|, |Excalibur|, |Terra Kılıcı| ve |Efsanevi Myaomea| ile verilen hasarı artırır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup, \"Meowmere\", \"Excalibur\", \"Terra Kılıcı\" ve \"Efsanevi Myaomea\" ile verilen hasarı artırır."
   },
   "YakushimaHeadEquip001_2": {
     "localized_name": "Kutsal Maske",
-    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup, |Meowmere|, |Excalibur|, |Terra Kılıcı| ve |Efsanevi Myaomea| ile verilen hasarı artırır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup, \"Meowmere\", \"Excalibur\", \"Terra Kılıcı\" ve \"Efsanevi Myaomea\" ile verilen hasarı artırır."
   },
   "YakushimaHeadEquip001_3": {
     "localized_name": "Kutsal Maske",
-    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup, |Meowmere|, |Excalibur|, |Terra Kılıcı| ve |Efsanevi Myaomea| ile verilen hasarı artırır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup, \"Meowmere\", \"Excalibur\", \"Terra Kılıcı\" ve \"Efsanevi Myaomea\" ile verilen hasarı artırır."
   },
   "YakushimaHeadEquip001_4": {
     "localized_name": "Kutsal Maske",
-    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup, |Meowmere|, |Excalibur|, |Terra Kılıcı| ve |Efsanevi Myaomea| ile verilen hasarı artırır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup, \"Meowmere\", \"Excalibur\", \"Terra Kılıcı\" ve \"Efsanevi Myaomea\" ile verilen hasarı artırır."
   },
   "YakushimaHeadEquip001_5": {
     "localized_name": "Kutsal Maske",
-    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup, |Meowmere|, |Excalibur|, |Terra Kılıcı| ve |Efsanevi Myaomea| ile verilen hasarı artırır."
+    "description": "[Terraria İş Birliği] Kutsal Külçeile yapılmış başlık. Kutsal bir güçle donatılmış olup, \"Meowmere\", \"Excalibur\", \"Terra Kılıcı\" ve \"Efsanevi Myaomea\" ile verilen hasarı artırır."
   },
   "YakushimaHeadEquip002": {
     "localized_name": "Kutsal Başlık",
@@ -9488,183 +9488,183 @@
     "description": null
   },
   "AirGrapplingGun": {
-    "localized_name": "-",
+    "localized_name": "AirGrapplingGun",
     "description": null
   },
   "Baked_Potato": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Baked_Potato",
+    "description": null
   },
   "Bat_NPC": {
-    "localized_name": "-",
+    "localized_name": "Bat_NPC",
     "description": null
   },
   "CaptureRope": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "CaptureRope",
+    "description": null
   },
   "CashFang": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "CashFang",
+    "description": null
   },
   "CashScales": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "CashScales",
+    "description": null
   },
   "ClawsPendant": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "ClawsPendant",
+    "description": null
   },
   "ClothHat": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "ClothHat",
+    "description": null
   },
   "Corn": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Corn",
+    "description": null
   },
   "ElectronicCircuit": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "ElectronicCircuit",
+    "description": null
   },
   "EnergyDrink": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "EnergyDrink",
+    "description": null
   },
   "FangNecklace": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "FangNecklace",
+    "description": null
   },
   "FarmCrop_Tmp": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "FarmCrop_Tmp",
+    "description": null
   },
   "FishMeat": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "FishMeat",
+    "description": null
   },
   "FishMeat2": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "FishMeat2",
+    "description": null
   },
   "Flint": {
-    "localized_name": "-",
+    "localized_name": "Flint",
     "description": "Ateş yakmak için gereken bir malzeme. Bazen taşlar kazılırken bulunabilir."
   },
   "Gasoline": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "IronOre": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "Kitsunebi_Fire": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "LargeBullet": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "Launcher_Meat": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "MateItem01": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "PAL_Growth_Stone_L": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "PAL_Growth_Stone_M": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "PAL_Growth_Stone_S": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "PAL_Growth_Stone_XL": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "PalSphere_Debug": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "PenguinLauncher": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "Pickaxe_Tier_03": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "Potato_old": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "Propellant": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "Pumpkin": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "RecurveBow": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "Sand": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "Scales": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "Scales2": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "Seed_Tmp": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "Sharkkid_Scale": {
-    "localized_name": "-",
-    "description": "-"
-  },
-  "Shield_05": {
-    "localized_name": "-",
+    "localized_name": "Gasoline",
     "description": null
   },
+  "IronOre": {
+    "localized_name": "IronOre",
+    "description": null
+  },
+  "Kitsunebi_Fire": {
+    "localized_name": "Kitsunebi_Fire",
+    "description": null
+  },
+  "LargeBullet": {
+    "localized_name": "LargeBullet",
+    "description": null
+  },
+  "Launcher_Meat": {
+    "localized_name": "Launcher_Meat",
+    "description": null
+  },
+  "MateItem01": {
+    "localized_name": "MateItem01",
+    "description": null
+  },
+  "PAL_Growth_Stone_L": {
+    "localized_name": "PAL_Growth_Stone_L",
+    "description": "A mysterious stone that can strengthen the pal. By offering it to the statue of the goddess, it brings out her hidden talents."
+  },
+  "PAL_Growth_Stone_M": {
+    "localized_name": "PAL_Growth_Stone_M",
+    "description": "A mysterious stone that can strengthen the pal. By offering it to the statue of the goddess, it brings out her hidden talents."
+  },
+  "PAL_Growth_Stone_S": {
+    "localized_name": "PAL_Growth_Stone_S",
+    "description": "A mysterious stone that can strengthen the pal. By offering it to the statue of the goddess, it brings out her hidden talents."
+  },
+  "PAL_Growth_Stone_XL": {
+    "localized_name": "PAL_Growth_Stone_XL",
+    "description": "A mysterious stone that can strengthen the pal. By offering it to the statue of the goddess, it brings out her hidden talents."
+  },
+  "PalSphere_Debug": {
+    "localized_name": "Pal Sphere",
+    "description": null
+  },
+  "PenguinLauncher": {
+    "localized_name": "PenguinLauncher",
+    "description": null
+  },
+  "Pickaxe_Tier_03": {
+    "localized_name": "Pickaxe_Tier_03",
+    "description": null
+  },
+  "Potato_old": {
+    "localized_name": "Potato_old",
+    "description": null
+  },
+  "Propellant": {
+    "localized_name": "Propellant",
+    "description": null
+  },
+  "Pumpkin": {
+    "localized_name": "Pumpkin",
+    "description": null
+  },
+  "RecurveBow": {
+    "localized_name": "RecurveBow",
+    "description": null
+  },
+  "Sand": {
+    "localized_name": "Sand",
+    "description": null
+  },
+  "Scales": {
+    "localized_name": "Scales",
+    "description": null
+  },
+  "Scales2": {
+    "localized_name": "Scales2",
+    "description": null
+  },
+  "Seed_Tmp": {
+    "localized_name": "Seed_Tmp",
+    "description": null
+  },
+  "Sharkkid_Scale": {
+    "localized_name": "Sharkkid_Scale",
+    "description": null
+  },
+  "Shield_05": {
+    "localized_name": "Ultra Kalkan",
+    "description": "Paldiyum teknolojisiyle üretilmiş tuhaf bir kalkan. Bir süre hasar almadığında otomatik olarak kendini onarır. Yapılan ileri deneyler sonucunda en üst kaliteye ulaşıldı."
+  },
   "Silicon": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Silicon",
+    "description": null
   },
   "SmallBullet": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "SmallBullet",
+    "description": null
   },
   "SniperRifle_Default": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "SniperRifle_Default",
+    "description": null
   },
   "ThrowStone": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "ThrowStone",
+    "description": null
   },
   "VenisonBoiledInTomato": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "VenisonBoiledInTomato",
+    "description": null
   },
   "WaterBucket": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "WaterBucket",
+    "description": null
   }
 }

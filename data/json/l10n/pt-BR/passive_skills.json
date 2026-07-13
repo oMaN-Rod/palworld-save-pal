@@ -597,15 +597,15 @@
   },
   "Deffence_up2": {
     "localized_name": "Corpo Fechado",
-    "description": "Defesa +{EffectValue1}% Anula atordoamento"
+    "description": "Defesa +20% Anula atordoamento"
   },
   "Deffence_up2_2": {
     "localized_name": "Peso Pesado",
-    "description": "Defesa +{EffectValue1}% Anula lançamento para longe"
+    "description": "Defesa +20% Anula lançamento para longe"
   },
   "Deffence_up3": {
     "localized_name": "Corpo de Diamante",
-    "description": "Defesa +{EffectValue1}% Anula atordoamento Anula lançamento para longe"
+    "description": "Defesa +30% Anula atordoamento Anula lançamento para longe"
   },
   "Defuser_ExplosiveSpore_EquipSkill": {
     "localized_name": "Redução de Dano por Explosão",
@@ -613,7 +613,7 @@
   },
   "ElementBoost_Aqua_1_PAL": {
     "localized_name": "Brincando com Água",
-    "description": "Aumenta o dano de ataques de água em {EffectValue1}%."
+    "description": "Aumenta o dano de ataques de água em 10%."
   },
   "ElementBoost_Aqua_2_PAL": {
     "localized_name": "Realeza Marinha",
@@ -629,7 +629,7 @@
   },
   "ElementBoost_Dark_1_PAL": {
     "localized_name": "Véu de Escuridão",
-    "description": "Aumenta o dano de ataques de escuridão em {EffectValue1}%."
+    "description": "Aumenta o dano de ataques de escuridão em 10%."
   },
   "ElementBoost_Dark_2_BossDefeat": {
     "localized_name": "Aumento Médio de Dano de Escuridão",
@@ -665,7 +665,7 @@
   },
   "ElementBoost_Dragon_1_PAL": {
     "localized_name": "Casta Dracônica",
-    "description": "Aumenta o dano de ataques dracônicos em {EffectValue1}%."
+    "description": "Aumenta o dano de ataques dracônicos em 10%."
   },
   "ElementBoost_Dragon_2_BossDefeat": {
     "localized_name": "Aumento Médio de Dano Dracônico",
@@ -701,7 +701,7 @@
   },
   "ElementBoost_Earth_1_PAL": {
     "localized_name": "Força da Terra",
-    "description": "Aumenta o dano de ataques de terra em {EffectValue1}%."
+    "description": "Aumenta o dano de ataques de terra em 10%."
   },
   "ElementBoost_Earth_2_BossDefeat": {
     "localized_name": "Aumento Médio de Dano de Terra",
@@ -765,7 +765,7 @@
   },
   "ElementBoost_Fire_1_PAL": {
     "localized_name": "Brincando com Fogo",
-    "description": "Aumenta o dano de ataques de fogo em {EffectValue1}%."
+    "description": "Aumenta o dano de ataques de fogo em 10%."
   },
   "ElementBoost_Fire_2_BossDefeat": {
     "localized_name": "Aumento Médio de Dano de Fogo",
@@ -801,7 +801,7 @@
   },
   "ElementBoost_Ice_1_PAL": {
     "localized_name": "Sangue Frio",
-    "description": "Aumenta o dano de ataques de gelo em {EffectValue1}%."
+    "description": "Aumenta o dano de ataques de gelo em 10%."
   },
   "ElementBoost_Ice_2_BossDefeat": {
     "localized_name": "Aumento Médio de Dano de Gelo",
@@ -837,7 +837,7 @@
   },
   "ElementBoost_Leaf_1_PAL": {
     "localized_name": "Aroma Verdejante",
-    "description": "Aumenta o dano de ataques de grama em {EffectValue1}%."
+    "description": "Aumenta o dano de ataques de grama em 10%."
   },
   "ElementBoost_Leaf_2_BossDefeat": {
     "localized_name": "Aumento Médio de Dano de Grama",
@@ -873,7 +873,7 @@
   },
   "ElementBoost_Normal_1_PAL": {
     "localized_name": "Território do Nada",
-    "description": "Aumenta o dano de ataques não elementais em {EffectValue1}%."
+    "description": "Aumenta o dano de ataques não elementais em 10%."
   },
   "ElementBoost_Normal_2_BossDefeat": {
     "localized_name": "Aumento Médio de Dano Não Elemental",
@@ -901,7 +901,7 @@
   },
   "ElementBoost_Thunder_1_PAL": {
     "localized_name": "Capacitor",
-    "description": "Aumenta o dano de ataques elétricos em {EffectValue1}%."
+    "description": "Aumenta o dano de ataques elétricos em 10%."
   },
   "ElementBoost_Thunder_2_PAL": {
     "localized_name": "Regente de Raio",
@@ -941,7 +941,7 @@
   },
   "ElementResist_Aqua_1_PAL": {
     "localized_name": "Impermeabilização",
-    "description": "Reduz o dano por ataques de água em {EffectValue1}%."
+    "description": "Reduz o dano por ataques de água em 10%."
   },
   "ElementResist_Aqua_2": {
     "localized_name": "Redução de Dano de Água Nv. 2",
@@ -961,7 +961,7 @@
   },
   "ElementResist_Dark_1_PAL": {
     "localized_name": "De Bem com a Vida",
-    "description": "Reduz o dano por ataques de escuridão em {EffectValue1}%."
+    "description": "Reduz o dano por ataques de escuridão em 10%."
   },
   "ElementResist_Dark_2": {
     "localized_name": "Redução de Dano de Escuridão Nv. 2",
@@ -981,7 +981,7 @@
   },
   "ElementResist_Dragon_1_PAL": {
     "localized_name": "Matador de Dragões",
-    "description": "Reduz o dano por ataques dracônicos em {EffectValue1}%."
+    "description": "Reduz o dano por ataques dracônicos em 10%."
   },
   "ElementResist_Dragon_2": {
     "localized_name": "Redução de Dano Dracônico Nv. 2",
@@ -1001,7 +1001,7 @@
   },
   "ElementResist_Earth_1_PAL": {
     "localized_name": "Reforço Antissísmico",
-    "description": "Reduz o dano por ataques de terra em {EffectValue1}%."
+    "description": "Reduz o dano por ataques de terra em 10%."
   },
   "ElementResist_Earth_2": {
     "localized_name": "Redução de Dano de Terra Nv. 2",
@@ -1021,7 +1021,7 @@
   },
   "ElementResist_Fire_1_PAL": {
     "localized_name": "Um Bom Bronzeado",
-    "description": "Reduz o dano por ataques de fogo em {EffectValue1}%."
+    "description": "Reduz o dano por ataques de fogo em 10%."
   },
   "ElementResist_Fire_2": {
     "localized_name": "Redução de Dano de Fogo Nv. 2",
@@ -1041,7 +1041,7 @@
   },
   "ElementResist_Ice_1_PAL": {
     "localized_name": "Corpo Quente",
-    "description": "Reduz o dano por ataques de gelo em {EffectValue1}%."
+    "description": "Reduz o dano por ataques de gelo em 10%."
   },
   "ElementResist_Ice_2": {
     "localized_name": "Redução de Dano de Gelo Nv. 2",
@@ -1061,7 +1061,7 @@
   },
   "ElementResist_Leaf_1_PAL": {
     "localized_name": "Efeito Herbicida",
-    "description": "Reduz o dano por ataques de grama em {EffectValue1}%."
+    "description": "Reduz o dano por ataques de grama em 10%."
   },
   "ElementResist_Leaf_2": {
     "localized_name": "Redução de Dano de Grama Nv. 2",
@@ -1081,7 +1081,7 @@
   },
   "ElementResist_Normal_1_PAL": {
     "localized_name": "Anormal",
-    "description": "Reduz o dano por ataques não elementais em {EffectValue1}%."
+    "description": "Reduz o dano por ataques não elementais em 10%."
   },
   "ElementResist_Normal_2": {
     "localized_name": "Redução de Dano Não Elemental Nv. 2",
@@ -1101,7 +1101,7 @@
   },
   "ElementResist_Thunder_1_PAL": {
     "localized_name": "Isolamento Elétrico",
-    "description": "Reduz o dano por ataques elétricos em {EffectValue1}%."
+    "description": "Reduz o dano por ataques elétricos em 10%."
   },
   "ElementResist_Thunder_2": {
     "localized_name": "Redução de Dano Elétrico Nv. 2",
@@ -1133,7 +1133,7 @@
   },
   "GYM_NAME_Meadow": {
     "localized_name": "Dirigente dos Caçadores Clandestinos de Rayne",
-    "description": "Ataque +{EffectValue1}% Velocidade de movimento +{EffectValue2}%"
+    "description": "Ataque +20% Velocidade de movimento +10%"
   },
   "GYM_NAME_Sakurajima": {
     "localized_name": "Chefe do Bando das Flores e da Lua",
@@ -1245,7 +1245,7 @@
   },
   "MutationPal_ExplosionResist": {
     "localized_name": "Blindagem Pesada",
-    "description": "Dano por explosão anulado"
+    "description": null
   },
   "MutationPal_Immortal": {
     "localized_name": "Imortalidade",
@@ -1253,7 +1253,7 @@
   },
   "MutationPal_Mutant": {
     "localized_name": "Constituição Peculiar",
-    "description": "Confere ao jogador e seus Pals: cura automática de PV +50.0% Defesa +{EffectValue4}% Dano por condição negativa de veneno anulado Dano por condição negativa de queimadura anulado"
+    "description": null
   },
   "NightOwl": {
     "localized_name": "Notivaguismo",
@@ -1273,7 +1273,7 @@
   },
   "Nushi": {
     "localized_name": "Senhor das Águas",
-    "description": "Aumenta o dano de ataques de água em {EffectValue1}%. Aumenta o dano de ataques de gelo em {EffectValue1}%. Aumenta a defesa em {EffectValue1}%."
+    "description": "Aumenta o dano de ataques de água em 20%. Aumenta o dano de ataques de gelo em 20%. Aumenta a defesa em 20%."
   },
   "OctaviaArmorVampire": {
     "localized_name": "Combustível Sangrento",
@@ -1545,23 +1545,23 @@
   },
   "TrainerATK_UP_1": {
     "localized_name": "Comandante Intrépido",
-    "description": "Aumenta seu ataque em {EffectValue1}%."
+    "description": "Aumenta seu ataque em 10%."
   },
   "TrainerDEF_UP_1": {
     "localized_name": "Estrategista Inabalável",
-    "description": "Aumenta sua defesa em {EffectValue1}%."
+    "description": "Aumenta sua defesa em 10%."
   },
   "TrainerLogging_up1": {
     "localized_name": "Lenhador Líder",
-    "description": "Aumenta sua eficiência ao cortar árvores em {EffectValue1}%."
+    "description": "Aumenta sua eficiência ao cortar árvores em 25%."
   },
   "TrainerMining_up1": {
     "localized_name": "Mineiro-Chefe",
-    "description": "Aumenta sua eficiência de garimpo em {EffectValue1}%."
+    "description": "Aumenta sua eficiência de garimpo em 25%."
   },
   "TrainerWorkSpeed_UP_1": {
     "localized_name": "Motivador",
-    "description": "Aumenta sua velocidade de trabalho em {EffectValue1}%."
+    "description": "Aumenta sua velocidade de trabalho em 25%."
   },
   "Vampire": {
     "localized_name": "Vampiro",
@@ -1617,31 +1617,31 @@
   },
   "WorldTree_ATK": {
     "localized_name": "Espada Sagrada de Dois Gumes",
-    "description": "Ataque +{EffectValue1}% Defesa {EffectValue2}% Evita que madeira ou rochas da Árvore Mundial desapareçam ao se aproximar"
+    "description": "Ataque +50% Defesa -30% Evita que madeira ou rochas da Árvore Mundial desapareçam ao se aproximar"
   },
   "WorldTree_ATK_DEF": {
     "localized_name": "Deus da Destruição",
-    "description": "Ataque +{EffectValue1}% Defesa +{EffectValue2}% PV máximo {EffectValue3}% Evita que madeira ou rochas da Árvore Mundial desapareçam ao se aproximar"
+    "description": "Ataque +40% Defesa +20% PV máximo -50% Evita que madeira ou rochas da Árvore Mundial desapareçam ao se aproximar"
   },
   "WorldTree_CraftSpeed": {
     "localized_name": "Mão Demoníaca",
-    "description": "Velocidade de trabalho +{EffectValue1}% Redução de SAN +15% Evita que madeira ou rochas da Árvore Mundial desapareçam ao se aproximar"
+    "description": "Velocidade de trabalho +90% Redução de SAN +15% Evita que madeira ou rochas da Árvore Mundial desapareçam ao se aproximar"
   },
   "WorldTree_DEF": {
     "localized_name": "Muralha de Músculos da Terra Santa",
-    "description": "Defesa +{EffectValue1}% Ataque {EffectValue2}% Evita que madeira ou rochas da Árvore Mundial desapareçam ao se aproximar"
+    "description": "Defesa +50% Ataque -30% Evita que madeira ou rochas da Árvore Mundial desapareçam ao se aproximar"
   },
   "WorldTree_FullStomach": {
     "localized_name": "Viveiro da Árvore Divina",
-    "description": "Manutenção de fartura +50% PV {EffectValue2}% Evita que madeira ou rochas da Árvore Mundial desapareçam ao se aproximar"
+    "description": "Manutenção de fartura +50% PV -20% Evita que madeira ou rochas da Árvore Mundial desapareçam ao se aproximar"
   },
   "WorldTree_MoveSpeed": {
     "localized_name": "Salto Dimensional",
-    "description": "Velocidade de movimento +{EffectValue1}% Redução de fartura +15% Evita que madeira ou rochas da Árvore Mundial desapareçam ao se aproximar"
+    "description": "Velocidade de movimento +50% Redução de fartura +15% Evita que madeira ou rochas da Árvore Mundial desapareçam ao se aproximar"
   },
   "WorldTree_Sanity": {
     "localized_name": "Sábio Ermitão",
-    "description": "Manutenção de SAN +50% Velocidade de trabalho {EffectValue2}% Evita que madeira ou rochas da Árvore Mundial desapareçam ao se aproximar"
+    "description": "Manutenção de SAN +50% Velocidade de trabalho -20% Evita que madeira ou rochas da Árvore Mundial desapareçam ao se aproximar"
   },
   "YakushimaDagameBoost_Magic_Equip": {
     "localized_name": "Força Sagrada: Magia",

@@ -484,20 +484,20 @@
     "description": "Animal Skin"
   },
   "AnimalSkin2": {
-    "localized_name": "AnimalSkin2",
-    "description": null
+    "localized_name": "Animal Skin",
+    "description": "Animal Skin"
   },
   "Antibiotic_Good": {
-    "localized_name": "Antibiotic_Good",
-    "description": null
+    "localized_name": "Antibiotic Good",
+    "description": "Antibiotic Good"
   },
   "Antibiotic_Normal": {
-    "localized_name": "Antibiotic_Normal",
-    "description": null
+    "localized_name": "Antibiotic Normal",
+    "description": "Antibiotic Normal"
   },
   "Antibiotic_Super": {
-    "localized_name": "Antibiotic_Super",
-    "description": null
+    "localized_name": "Antibiotic Super",
+    "description": "Antibiotic Super"
   },
   "Arrow": {
     "localized_name": "Flecha",
@@ -505,7 +505,7 @@
   },
   "Arrow_Fire": {
     "localized_name": "Flecha incendiaria",
-    "description": "Flecha incendiaria para disparar con un arco. Inflige daño de ElemIcon_FireFuego al rival. Se puede fabricar en una «Mesa de trabajo primitiva»."
+    "description": "Flecha incendiaria para disparar con un arco. Inflige daño de Fuego al rival. Se puede fabricar en una «Mesa de trabajo primitiva»."
   },
   "Arrow_Poison": {
     "localized_name": "Flecha envenenada",
@@ -732,8 +732,8 @@
     "description": "Ingrediente versátil que está riquísimo tanto crudo como asado. Te lo encontrarás por todas partes mientras caminas por la isla."
   },
   "Berries2": {
-    "localized_name": "Berries2",
-    "description": null
+    "localized_name": "Red Berries",
+    "description": "A versatile ingredient that is delicious raw or cooked. They can be found anywhere on the island."
   },
   "BerrySeeds": {
     "localized_name": "Semillas de bayas",
@@ -1521,7 +1521,7 @@
   },
   "Blueprint_Head001_5": {
     "localized_name": "Diseño de la corona del rey 5",
-    "description": "Al poseerlo, se desbloquea la receta para |Corona (Legendario)|. Puede ser fabricado en |Mesa de trabajo primitiva|."
+    "description": "Al poseerlo, se desbloquea la receta para \"Corona (Legendario)\". Puede ser fabricado en \"Mesa de trabajo primitiva\"."
   },
   "Blueprint_Head002_1": {
     "localized_name": "Plano de corona de oro 1",
@@ -1581,7 +1581,7 @@
   },
   "Blueprint_Head004_5": {
     "localized_name": "Planos del sombrero de bruja 5",
-    "description": "Al poseerlo, se desbloquea la receta de |Sombrero de bruja (Legendario)|. Se puede fabricar en el |Mesa de trabajo primitiva|."
+    "description": "Al poseerlo, se desbloquea la receta de \"Sombrero de bruja (Legendario)\". Se puede fabricar en el \"Mesa de trabajo primitiva\"."
   },
   "Blueprint_Head005_1": {
     "localized_name": "Plano de fedora 1",
@@ -1601,7 +1601,7 @@
   },
   "Blueprint_Head005_5": {
     "localized_name": "Plano de sombrero suave 5",
-    "description": "Si lo posees, se desbloqueará la receta para |Fedora (Legendario)|. Se puede crear en |Mesa de trabajo primitiva|."
+    "description": "Si lo posees, se desbloqueará la receta para \"Fedora (Legendario)\". Se puede crear en \"Mesa de trabajo primitiva\"."
   },
   "Blueprint_Head006_1": {
     "localized_name": "Plano de casco 1",
@@ -1621,7 +1621,7 @@
   },
   "Blueprint_Head006_5": {
     "localized_name": "Planos de casco 5",
-    "description": "Si lo posees, se desbloqueará la receta de |Casco (Legendario)|. Puedes crearlo en |Mesa de trabajo primitiva|."
+    "description": "Si lo posees, se desbloqueará la receta de \"Casco (Legendario)\". Puedes crearlo en \"Mesa de trabajo primitiva\"."
   },
   "Blueprint_Head007_1": {
     "localized_name": "Plano de sombrero de seda 1",
@@ -1641,7 +1641,7 @@
   },
   "Blueprint_Head007_5": {
     "localized_name": "Plano de sombrero de seda 5",
-    "description": "Al poseerlo, se desbloquea la receta para |Sombrero de seda (Legendario)|. Se puede crear en |Mesa de trabajo primitiva|."
+    "description": "Al poseerlo, se desbloquea la receta para \"Sombrero de seda (Legendario)\". Se puede crear en \"Mesa de trabajo primitiva\"."
   },
   "Blueprint_Head008_1": {
     "localized_name": "Plano de tricornio 1",
@@ -1661,7 +1661,7 @@
   },
   "Blueprint_Head008_5": {
     "localized_name": "Diseño del sombrero de tres picos 5",
-    "description": "Al poseerlo, se desbloquea la receta de |Tricornio (Legendario)|. Se puede elaborar en |Mesa de trabajo primitiva|."
+    "description": "Al poseerlo, se desbloquea la receta de \"Tricornio (Legendario)\". Se puede elaborar en \"Mesa de trabajo primitiva\"."
   },
   "Blueprint_Head009_1": {
     "localized_name": "Plano de sombrero de explorador 1",
@@ -1681,7 +1681,7 @@
   },
   "Blueprint_Head009_5": {
     "localized_name": "Diseño de sombrero de exploración 5",
-    "description": "Al poseerlo, se desbloquea la receta para |Sombrero de explorador (Legendario)|. Se puede elaborar en |Mesa de trabajo primitiva|."
+    "description": "Al poseerlo, se desbloquea la receta para \"Sombrero de explorador (Legendario)\". Se puede elaborar en \"Mesa de trabajo primitiva\"."
   },
   "Blueprint_Head010_1": {
     "localized_name": "Plano de birrete 1",
@@ -1701,7 +1701,7 @@
   },
   "Blueprint_Head010_5": {
     "localized_name": "Planos del sombrero de la universidad 5",
-    "description": "Al poseerlo, se desbloquea la receta de |Birrete (Legendario)|. Se puede elaborar en |Mesa de trabajo primitiva|."
+    "description": "Al poseerlo, se desbloquea la receta de \"Birrete (Legendario)\". Se puede elaborar en \"Mesa de trabajo primitiva\"."
   },
   "Blueprint_Head011_1": {
     "localized_name": "Plano de sombrero agrícola 1",
@@ -1721,7 +1721,7 @@
   },
   "Blueprint_Head011_5": {
     "localized_name": "Diseño de sombrero de agricultura 5",
-    "description": "Al poseerlo, se desbloqueará la receta para |Sombrero agrícola (Legendario)|. Se puede elaborar en |Mesa de trabajo primitiva|."
+    "description": "Al poseerlo, se desbloqueará la receta para \"Sombrero agrícola (Legendario)\". Se puede elaborar en \"Mesa de trabajo primitiva\"."
   },
   "Blueprint_Head012_1": {
     "localized_name": "Plano de bombín 1",
@@ -1741,7 +1741,7 @@
   },
   "Blueprint_Head012_5": {
     "localized_name": "Planos del sombrero de bombín 5",
-    "description": "Al poseerlo, se desbloquea la receta para |Bombín (Legendario)|. Se puede crear en |Mesa de trabajo primitiva|."
+    "description": "Al poseerlo, se desbloquea la receta para \"Bombín (Legendario)\". Se puede crear en \"Mesa de trabajo primitiva\"."
   },
   "Blueprint_Head013_1": {
     "localized_name": "Plano de gorro de Tocotoco 1",
@@ -1761,7 +1761,7 @@
   },
   "Blueprint_Head013_5": {
     "localized_name": "Diseño de sombrero de Clurituli 5",
-    "description": "Al poseerlo, se desbloquea la receta para |Gorro de Tocotoco (Legendario)|. Se puede crear en |Mesa de trabajo primitiva|."
+    "description": "Al poseerlo, se desbloquea la receta para \"Gorro de Tocotoco (Legendario)\". Se puede crear en \"Mesa de trabajo primitiva\"."
   },
   "Blueprint_Head014_1": {
     "localized_name": "Plano de gorro de Tocotoco sonriente 1",
@@ -1781,7 +1781,7 @@
   },
   "Blueprint_Head014_5": {
     "localized_name": "Diseño de sombrero de sonrisa traviesa 5",
-    "description": "Al poseerlo, se desbloquea la receta para |Gorro de Tocotoco sonriente (Legendario)|. Se puede elaborar en |Mesa de trabajo primitiva|."
+    "description": "Al poseerlo, se desbloquea la receta para \"Gorro de Tocotoco sonriente (Legendario)\". Se puede elaborar en \"Mesa de trabajo primitiva\"."
   },
   "Blueprint_Head015_1": {
     "localized_name": "Plano de gorro de Gumoss 1",
@@ -1801,7 +1801,7 @@
   },
   "Blueprint_Head015_5": {
     "localized_name": "Diseño del sombrero Naemochi 5",
-    "description": "Al poseerlo, se desbloqueará la receta de |Gorro de Gumoss (Legendario)|. Puedes fabricarlo en |Mesa de trabajo primitiva|."
+    "description": "Al poseerlo, se desbloqueará la receta de \"Gorro de Gumoss (Legendario)\". Puedes fabricarlo en \"Mesa de trabajo primitiva\"."
   },
   "Blueprint_Head016_1": {
     "localized_name": "Plano de gorro de Penking 1",
@@ -1821,7 +1821,7 @@
   },
   "Blueprint_Head016_5": {
     "localized_name": "Diseño del sombrero de Cappeen 5",
-    "description": "Al poseerlo, se desbloqueará la receta de |Gorro de Penking (Legendario)|. Se puede crear en |Mesa de trabajo primitiva|."
+    "description": "Al poseerlo, se desbloqueará la receta de \"Gorro de Penking (Legendario)\". Se puede crear en \"Mesa de trabajo primitiva\"."
   },
   "Blueprint_Head017_1": {
     "localized_name": "Plano de gorro de Katress 1",
@@ -3716,8 +3716,8 @@
     "description": "Claw"
   },
   "Claws2": {
-    "localized_name": "Claws2",
-    "description": null
+    "localized_name": "Claw",
+    "description": "Claw"
   },
   "Cloth": {
     "localized_name": "Tela",
@@ -4160,8 +4160,8 @@
     "description": "Fang"
   },
   "Fang2": {
-    "localized_name": "Fang2",
-    "description": null
+    "localized_name": "Fang",
+    "description": "Fang"
   },
   "Fiber": {
     "localized_name": "Fibra",
@@ -4333,15 +4333,15 @@
   },
   "Fruit__defense_01": {
     "localized_name": "Fruto resistente",
-    "description": "Un fruto valiosísimo y muy difícil de conseguir. Aumenta ligeramente el talento de |Defensa| de un Pal."
+    "description": "Un fruto valiosísimo y muy difícil de conseguir. Aumenta ligeramente el talento de \"Defensa\" de un Pal."
   },
   "Fruit_attack_01": {
     "localized_name": "Fruto hercúleo",
-    "description": "Un fruto valiosísimo y muy difícil de conseguir. Aumenta ligeramente el talento de |Ataque| de un Pal."
+    "description": "Un fruto valiosísimo y muy difícil de conseguir. Aumenta ligeramente el talento de \"Ataque\" de un Pal."
   },
   "Fruit_hp_01": {
     "localized_name": "Fruto vital",
-    "description": "Un fruto valiosísimo y muy difícil de conseguir. Aumenta ligeramente el talento de |PV| de un Pal."
+    "description": "Un fruto valiosísimo y muy difícil de conseguir. Aumenta ligeramente el talento de \"PV\" de un Pal."
   },
   "FurArmor": {
     "localized_name": "Armadura de pelaje",
@@ -5476,8 +5476,8 @@
     "description": "Cuero de Pal, muy útil como material de equipo defensivo. Puede obtenerse de algunos Pals."
   },
   "Leather2": {
-    "localized_name": "Leather2",
-    "description": null
+    "localized_name": "Leather",
+    "description": "Leather taken from a Pal, it serves as a defensive material. It can be obtained from certain Pals."
   },
   "Lettuce": {
     "localized_name": "Lechuga",
@@ -5537,7 +5537,7 @@
   },
   "LuxuryOmelette": {
     "localized_name": "LuxuryOmelette",
-    "description": null
+    "description": "LuxuryOmelette"
   },
   "LvUP_01": {
     "localized_name": "Cristal de entrenamiento",
@@ -5660,8 +5660,8 @@
     "description": "Carne de Pal. Está lo bastante fresca como para que un humano se la coma cruda."
   },
   "Meat2": {
-    "localized_name": "Meat2",
-    "description": null
+    "localized_name": "Meat",
+    "description": "Pal meat. It’s so fresh that even a human could safely eat it raw."
   },
   "MeatAndPotatoes": {
     "localized_name": "Estofado de Galeclaw",
@@ -6205,75 +6205,75 @@
   },
   "PalAwakening_Dark": {
     "localized_name": "Cristal del despertar oscuro",
-    "description": "Cristal en el que se condensa la energía del Árbol del Mundo. Despierta a los Pals de ElemIcon_DarkOscuridad y libera su poder oculto."
+    "description": "Cristal en el que se condensa la energía del Árbol del Mundo. Despierta a los Pals de Oscuridad y libera su poder oculto."
   },
   "PalAwakening_Dragon": {
     "localized_name": "Cristal del despertar dragontino",
-    "description": "Cristal en el que se condensa la energía del Árbol del Mundo. Despierta a los Pals de tipo ElemIcon_DragonDragón y libera su poder oculto."
+    "description": "Cristal en el que se condensa la energía del Árbol del Mundo. Despierta a los Pals de tipo Dragón y libera su poder oculto."
   },
   "PalAwakening_Electric": {
     "localized_name": "Cristal del despertar de rayo",
-    "description": "Cristal en el que se condensa la energía del Árbol del Mundo. Despierta a los Pals de ElemIcon_ElectricRayo y libera su poder oculto."
+    "description": "Cristal en el que se condensa la energía del Árbol del Mundo. Despierta a los Pals de Rayo y libera su poder oculto."
   },
   "PalAwakening_Fire": {
     "localized_name": "Cristal del despertar de fuego",
-    "description": "Cristal en el que se condensa la energía del Árbol del Mundo. Despierta a los Pals de ElemIcon_FireFuego y libera su poder oculto."
+    "description": "Cristal en el que se condensa la energía del Árbol del Mundo. Despierta a los Pals de Fuego y libera su poder oculto."
   },
   "PalAwakening_Grass": {
     "localized_name": "Cristal del despertar de planta",
-    "description": "Cristal en el que se condensa la energía del Árbol del Mundo. Despierta a los Pals de ElemIcon_GrassPlanta y libera su poder oculto."
+    "description": "Cristal en el que se condensa la energía del Árbol del Mundo. Despierta a los Pals de Planta y libera su poder oculto."
   },
   "PalAwakening_Ground": {
     "localized_name": "Cristal del despertar de tierra",
-    "description": "Cristal en el que se condensa la energía del Árbol del Mundo. Despierta a los Pals de ElemIcon_GroundTierra y libera su poder oculto."
+    "description": "Cristal en el que se condensa la energía del Árbol del Mundo. Despierta a los Pals de Tierra y libera su poder oculto."
   },
   "PalAwakening_Ice": {
     "localized_name": "Cristal del despertar de hielo",
-    "description": "Cristal en el que se condensa la energía del Árbol del Mundo. Despierta a los Pals de ElemIcon_IceHielo y libera su poder oculto."
+    "description": "Cristal en el que se condensa la energía del Árbol del Mundo. Despierta a los Pals de Hielo y libera su poder oculto."
   },
   "PalAwakening_Material_Dark": {
     "localized_name": "Augita oscura",
-    "description": "Piedra fruto de la energía del Árbol del Mundo, acumulada en el interior de un Pal. Al procesarla, se convierte en un objeto capaz de liberar el poder oculto de un Pal de ElemIcon_DarkOscuridad."
+    "description": "Piedra fruto de la energía del Árbol del Mundo, acumulada en el interior de un Pal. Al procesarla, se convierte en un objeto capaz de liberar el poder oculto de un Pal de Oscuridad."
   },
   "PalAwakening_Material_Dragon": {
     "localized_name": "Augita dragontina",
-    "description": "Piedra fruto de la energía del Árbol del Mundo, acumulada en el interior de un Pal. Al procesarla, se convierte en un objeto capaz de liberar el poder oculto de un Pal de tipo ElemIcon_DragonDragón."
+    "description": "Piedra fruto de la energía del Árbol del Mundo, acumulada en el interior de un Pal. Al procesarla, se convierte en un objeto capaz de liberar el poder oculto de un Pal de tipo Dragón."
   },
   "PalAwakening_Material_Electric": {
     "localized_name": "Augita de rayo",
-    "description": "Piedra fruto de la energía del Árbol del Mundo, acumulada en el interior de un Pal. Al procesarla, se convierte en un objeto capaz de liberar el poder oculto de un Pal de ElemIcon_ElectricRayo."
+    "description": "Piedra fruto de la energía del Árbol del Mundo, acumulada en el interior de un Pal. Al procesarla, se convierte en un objeto capaz de liberar el poder oculto de un Pal de Rayo."
   },
   "PalAwakening_Material_Fire": {
     "localized_name": "Augita de fuego",
-    "description": "Piedra fruto de la energía del Árbol del Mundo, acumulada en el interior de un Pal. Al procesarla, se convierte en un objeto capaz de liberar el poder oculto de un Pal de ElemIcon_FireFuego."
+    "description": "Piedra fruto de la energía del Árbol del Mundo, acumulada en el interior de un Pal. Al procesarla, se convierte en un objeto capaz de liberar el poder oculto de un Pal de Fuego."
   },
   "PalAwakening_Material_Grass": {
     "localized_name": "Augita de planta",
-    "description": "Piedra fruto de la energía del Árbol del Mundo, acumulada en el interior de un Pal. Al procesarla, se convierte en un objeto capaz de liberar el poder oculto de un Pal de ElemIcon_GrassPlanta."
+    "description": "Piedra fruto de la energía del Árbol del Mundo, acumulada en el interior de un Pal. Al procesarla, se convierte en un objeto capaz de liberar el poder oculto de un Pal de Planta."
   },
   "PalAwakening_Material_Ground": {
     "localized_name": "Augita de tierra",
-    "description": "Piedra fruto de la energía del Árbol del Mundo, acumulada en el interior de un Pal. Al procesarla, se convierte en un objeto capaz de liberar el poder oculto de un Pal de ElemIcon_GroundTierra."
+    "description": "Piedra fruto de la energía del Árbol del Mundo, acumulada en el interior de un Pal. Al procesarla, se convierte en un objeto capaz de liberar el poder oculto de un Pal de Tierra."
   },
   "PalAwakening_Material_Ice": {
     "localized_name": "Augita de hielo",
-    "description": "Piedra fruto de la energía del Árbol del Mundo, acumulada en el interior de un Pal. Al procesarla, se convierte en un objeto capaz de liberar el poder oculto de un Pal de ElemIcon_IceHielo."
+    "description": "Piedra fruto de la energía del Árbol del Mundo, acumulada en el interior de un Pal. Al procesarla, se convierte en un objeto capaz de liberar el poder oculto de un Pal de Hielo."
   },
   "PalAwakening_Material_Neutral": {
     "localized_name": "Augita neutra",
-    "description": "Piedra fruto de la energía del Árbol del Mundo, acumulada en el interior de un Pal. Al procesarla, se convierte en un objeto capaz de liberar el poder oculto de un Pal de tipo ElemIcon_NeutralNo elemental."
+    "description": "Piedra fruto de la energía del Árbol del Mundo, acumulada en el interior de un Pal. Al procesarla, se convierte en un objeto capaz de liberar el poder oculto de un Pal de tipo No elemental."
   },
   "PalAwakening_Material_Water": {
     "localized_name": "Augita de agua",
-    "description": "Piedra fruto de la energía del Árbol del Mundo, acumulada en el interior de un Pal. Al procesarla, se convierte en un objeto capaz de liberar el poder oculto de un Pal de ElemIcon_WaterAgua."
+    "description": "Piedra fruto de la energía del Árbol del Mundo, acumulada en el interior de un Pal. Al procesarla, se convierte en un objeto capaz de liberar el poder oculto de un Pal de Agua."
   },
   "PalAwakening_Neutral": {
     "localized_name": "Cristal del despertar neutro",
-    "description": "Cristal en el que se condensa la energía del Árbol del Mundo. Despierta a los Pals de tipo ElemIcon_NeutralNo elemental y libera su poder oculto."
+    "description": "Cristal en el que se condensa la energía del Árbol del Mundo. Despierta a los Pals de tipo No elemental y libera su poder oculto."
   },
   "PalAwakening_Water": {
     "localized_name": "Cristal del despertar de agua",
-    "description": "Cristal en el que se condensa la energía del Árbol del Mundo. Despierta a los Pals de ElemIcon_WaterAgua y libera su poder oculto."
+    "description": "Cristal en el que se condensa la energía del Árbol del Mundo. Despierta a los Pals de Agua y libera su poder oculto."
   },
   "PalCrystal_Ex": {
     "localized_name": "Componente de civilización antigua",
@@ -6441,7 +6441,7 @@
   },
   "PalEgg_MutationPal": {
     "localized_name": "Huge Mutated Egg",
-    "description": "-"
+    "description": "[WIP] Description not finalized. A Huge Mutated Egg. You can feel the restless aura of a strange soul, as if a monster is about to be born. Place it in a Egg Incubator to hatch it."
   },
   "PalEgg_MutationPal_01": {
     "localized_name": "Huevo metamorfo",
@@ -7189,7 +7189,7 @@
   },
   "PotatoSeedPotatoes": {
     "localized_name": "PotatoSeedPotatoes",
-    "description": null
+    "description": "PotatoSeedPotatoes"
   },
   "PotatoSeeds": {
     "localized_name": "Semillas de patata",
@@ -8645,7 +8645,7 @@
   },
   "SkyHeavyBullet": {
     "localized_name": "Sunreach Single-Shot Ammo",
-    "description": "-"
+    "description": "[WIP] Description not finalized. Ammo for the Prototype Shotgun, Tactical Grenade Launcher, and similar weapons."
   },
   "SkyIslandOre": {
     "localized_name": "Soralita",
@@ -8653,7 +8653,7 @@
   },
   "SkyLightBullet": {
     "localized_name": "Sunreach Rapid-Fire Ammo",
-    "description": "-"
+    "description": "[WIP] Description not finalized. Ammo for the Combat SMG, Heavy Assault Rifle, and similar weapons."
   },
   "SkyShotgun": {
     "localized_name": "Escopeta prototipo",
@@ -9552,8 +9552,8 @@
     "description": "Material necesario para hacer fuego. Se encuentra al picar piedras."
   },
   "Gasoline": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Gasoline",
+    "description": null
   },
   "IronOre": {
     "localized_name": "IronOre",
@@ -9608,8 +9608,8 @@
     "description": null
   },
   "Propellant": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Propellant",
+    "description": null
   },
   "Pumpkin": {
     "localized_name": "Pumpkin",
@@ -9640,8 +9640,8 @@
     "description": null
   },
   "Shield_05": {
-    "localized_name": "Shield_05",
-    "description": null
+    "localized_name": "Ultraescudo",
+    "description": "Escudo misterioso creado con tecnología Paldium. Si no recibe ataques en un tiempo, se repara solo. Tras muchos experimentos, se ha convertido en un artículo de calidad absolutamente inmejorable."
   },
   "Silicon": {
     "localized_name": "Silicio",

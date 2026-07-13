@@ -1205,7 +1205,7 @@
   },
   "OperatingTable": {
     "localized_name": "帕鲁手术台",
-    "description": "zh_Hans_Text"
+    "description": null
   },
   "OverheatRifle": {
     "localized_name": "过热步枪",

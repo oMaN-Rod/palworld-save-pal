@@ -3361,7 +3361,7 @@
     "sort_id": 9999,
     "icon": "t_itemicon_food_beer",
     "corruption_factor": 0.027777778,
-    "disabled": false
+    "disabled": true
   },
   "Berries": {
     "group": "Food",
@@ -15382,7 +15382,7 @@
     "price": 1,
     "sort_id": 9999,
     "icon": "t_itemicon_material_fang",
-    "disabled": false
+    "disabled": true
   },
   "Fang2": {
     "group": "Common",
@@ -16961,7 +16961,7 @@
     "sort_id": 9999,
     "icon": "t_itemicon_food_grape",
     "corruption_factor": 0.055555556,
-    "disabled": false
+    "disabled": true
   },
   "GrapplingGun": {
     "group": "Weapon",
@@ -17382,7 +17382,7 @@
     "price": 1,
     "sort_id": 9999,
     "icon": "t_itemicon_material_gunpowder",
-    "disabled": false
+    "disabled": true
   },
   "Gunpowder2": {
     "group": "Common",
@@ -20551,7 +20551,7 @@
     "sort_id": 9999,
     "icon": "t_itemicon_food_hop",
     "corruption_factor": 0.027777778,
-    "disabled": false
+    "disabled": true
   },
   "Horn": {
     "group": "Common",
@@ -22038,7 +22038,7 @@
     "sort_id": 9999,
     "icon": "t_itemicon_food_luxuryomelette",
     "corruption_factor": 0.027777778,
-    "disabled": false
+    "disabled": true
   },
   "LvUP_01": {
     "group": "Common",
@@ -28908,7 +28908,7 @@
     "price": 50,
     "sort_id": 9999,
     "icon": "t_itemicon_consume_seed_tmp",
-    "disabled": false
+    "disabled": true
   },
   "PotatoSeeds": {
     "group": "Common",
@@ -30301,7 +30301,7 @@
     "sort_id": 9999,
     "icon": "t_itemicon_food_sandwich",
     "corruption_factor": 0.027777778,
-    "disabled": false
+    "disabled": true
   },
   "Sapphire": {
     "group": "Common",
@@ -32299,7 +32299,7 @@
     "price": 0,
     "sort_id": 9999,
     "icon": "t_dummy_icon",
-    "disabled": false
+    "disabled": true
   },
   "SkillUnlock_Deer": {
     "group": "KeyItem",
@@ -35427,7 +35427,7 @@
     "sort_id": 9999,
     "icon": "t_itemicon_food_stew",
     "corruption_factor": 0.027777778,
-    "disabled": false
+    "disabled": true
   },
   "StewedIceDeer": {
     "group": "Food",
@@ -36471,7 +36471,7 @@
     "sort_id": 9999,
     "icon": "t_itemicon_food_wine",
     "corruption_factor": 0.027777778,
-    "disabled": false
+    "disabled": true
   },
   "WingGlider": {
     "group": "Glider",
@@ -38023,7 +38023,7 @@
       "durability": 0,
       "passive_skills": []
     },
-    "disabled": false
+    "disabled": true
   },
   "Baked_Potato": {
     "group": "Food",
@@ -38037,7 +38037,7 @@
     "sort_id": 9999,
     "icon": "t_itemicon_baked_potato",
     "corruption_factor": 0.027777778,
-    "disabled": false
+    "disabled": true
   },
   "Bat_NPC": {
     "group": "Weapon",
@@ -38056,7 +38056,7 @@
       "passive_skills": []
     },
     "damage": 100,
-    "disabled": false
+    "disabled": true
   },
   "CaptureRope": {
     "group": "None",
@@ -38070,7 +38070,7 @@
     "sort_id": 9999,
     "icon": "t_itemicon_capturerope",
     "damage": 1000,
-    "disabled": false
+    "disabled": true
   },
   "CashFang": {
     "group": "Common",
@@ -38083,7 +38083,7 @@
     "price": 1,
     "sort_id": 9999,
     "icon": "t_itemicon_cashfang",
-    "disabled": false
+    "disabled": true
   },
   "CashScales": {
     "group": "Common",
@@ -38096,7 +38096,7 @@
     "price": 1,
     "sort_id": 9999,
     "icon": "t_itemicon_cashscales",
-    "disabled": false
+    "disabled": true
   },
   "ClawsPendant": {
     "group": "Accessory",
@@ -38114,7 +38114,7 @@
       "passive_skills": []
     },
     "defense": 5,
-    "disabled": false
+    "disabled": true
   },
   "ClothHat": {
     "group": "Head",
@@ -38133,7 +38133,7 @@
       "passive_skills": []
     },
     "defense": 5,
-    "disabled": false
+    "disabled": true
   },
   "Corn": {
     "group": "Food",
@@ -38147,7 +38147,7 @@
     "sort_id": 9999,
     "icon": "t_itemicon_food_corn",
     "corruption_factor": 0.055555556,
-    "disabled": false
+    "disabled": true
   },
   "ElectronicCircuit": {
     "group": "Common",
@@ -38160,7 +38160,7 @@
     "price": 1,
     "sort_id": 9999,
     "icon": "t_itemicon_material_electroniccircuit",
-    "disabled": false
+    "disabled": true
   },
   "EnergyDrink": {
     "group": "Common",
@@ -38174,7 +38174,7 @@
     "sort_id": 9999,
     "icon": "t_itemicon_energydrink",
     "corruption_factor": 0.055555556,
-    "disabled": false
+    "disabled": true
   },
   "FangNecklace": {
     "group": "Accessory",
@@ -38192,7 +38192,7 @@
       "passive_skills": []
     },
     "damage": 5,
-    "disabled": false
+    "disabled": true
   },
   "FarmCrop_Tmp": {
     "group": "None",
@@ -38206,7 +38206,7 @@
     "sort_id": 9999,
     "icon": "t_itemicon_farmcrop_tmp",
     "corruption_factor": 0.055555556,
-    "disabled": false
+    "disabled": true
   },
   "FishMeat": {
     "group": "Food",
@@ -38220,7 +38220,7 @@
     "sort_id": 9999,
     "icon": "t_itemicon_food_fishmeat",
     "corruption_factor": 0.33333334,
-    "disabled": false
+    "disabled": true
   },
   "FishMeat2": {
     "group": "Food",
@@ -38234,7 +38234,7 @@
     "sort_id": 9999,
     "icon": "t_itemicon_fishmeat2",
     "corruption_factor": 0.8333333,
-    "disabled": false
+    "disabled": true
   },
   "Flint": {
     "group": "Common",
@@ -38247,7 +38247,7 @@
     "price": 1,
     "sort_id": 9999,
     "icon": "t_itemicon_material_flint",
-    "disabled": false
+    "disabled": true
   },
   "Gasoline": {
     "group": "Common",
@@ -38273,7 +38273,7 @@
     "price": 1,
     "sort_id": 9999,
     "icon": "tex_miningicons_97_t",
-    "disabled": false
+    "disabled": true
   },
   "Kitsunebi_Fire": {
     "group": "Common",
@@ -38286,7 +38286,7 @@
     "price": 1,
     "sort_id": 9999,
     "icon": "t_itemicon_kitsunebi_fire",
-    "disabled": false
+    "disabled": true
   },
   "LargeBullet": {
     "group": "Common",
@@ -38299,7 +38299,7 @@
     "price": 1,
     "sort_id": 9999,
     "icon": "t_itemicon_ammo_riflebullet",
-    "disabled": false
+    "disabled": true
   },
   "Launcher_Meat": {
     "group": "Weapon",
@@ -38319,7 +38319,7 @@
       "passive_skills": []
     },
     "damage": 20,
-    "disabled": false
+    "disabled": true
   },
   "MateItem01": {
     "group": "Common",
@@ -38332,7 +38332,7 @@
     "price": 1,
     "sort_id": 9999,
     "icon": "t_itemicon_mateitem01",
-    "disabled": false
+    "disabled": true
   },
   "PAL_Growth_Stone_L": {
     "group": "Common",
@@ -38345,7 +38345,7 @@
     "price": 1,
     "sort_id": 9999,
     "icon": "t_itemicon_pal_growth_stone_l",
-    "disabled": false
+    "disabled": true
   },
   "PAL_Growth_Stone_M": {
     "group": "Common",
@@ -38358,7 +38358,7 @@
     "price": 1,
     "sort_id": 9999,
     "icon": "t_itemicon_pal_growth_stone_m",
-    "disabled": false
+    "disabled": true
   },
   "PAL_Growth_Stone_S": {
     "group": "Common",
@@ -38371,7 +38371,7 @@
     "price": 1,
     "sort_id": 9999,
     "icon": "t_itemicon_pal_growth_stone_s",
-    "disabled": false
+    "disabled": true
   },
   "PAL_Growth_Stone_XL": {
     "group": "Common",
@@ -38384,7 +38384,7 @@
     "price": 1,
     "sort_id": 9999,
     "icon": "t_itemicon_pal_growth_stone_xl",
-    "disabled": false
+    "disabled": true
   },
   "PalSphere_Debug": {
     "group": "Common",
@@ -38397,7 +38397,7 @@
     "price": 1,
     "sort_id": 9999,
     "icon": "t_itemicon_palsphere_debug",
-    "disabled": false
+    "disabled": true
   },
   "PenguinLauncher": {
     "group": "Weapon",
@@ -38417,7 +38417,7 @@
       "passive_skills": []
     },
     "damage": 10000,
-    "disabled": false
+    "disabled": true
   },
   "Pickaxe_Tier_03": {
     "group": "Weapon",
@@ -38438,7 +38438,7 @@
       ]
     },
     "damage": 75,
-    "disabled": false
+    "disabled": true
   },
   "Potato_old": {
     "group": "Food",
@@ -38452,7 +38452,7 @@
     "sort_id": 9999,
     "icon": "t_itemicon_potato_old",
     "corruption_factor": 0.055555556,
-    "disabled": false
+    "disabled": true
   },
   "Propellant": {
     "group": "Common",
@@ -38465,7 +38465,7 @@
     "price": 1,
     "sort_id": 9999,
     "icon": "t_itemicon_propellant",
-    "disabled": false
+    "disabled": true
   },
   "Pumpkin": {
     "group": "Food",
@@ -38479,7 +38479,7 @@
     "sort_id": 9999,
     "icon": "t_itemicon_food_pumpkin",
     "corruption_factor": 0.055555556,
-    "disabled": false
+    "disabled": true
   },
   "RecurveBow": {
     "group": "Weapon",
@@ -38499,7 +38499,7 @@
       "passive_skills": []
     },
     "damage": 40,
-    "disabled": false
+    "disabled": true
   },
   "Sand": {
     "group": "Common",
@@ -38512,7 +38512,7 @@
     "price": 1,
     "sort_id": 9999,
     "icon": "tex_bagsandboxes_86_t",
-    "disabled": false
+    "disabled": true
   },
   "Scales": {
     "group": "Common",
@@ -38525,7 +38525,7 @@
     "price": 1,
     "sort_id": 9999,
     "icon": "t_itemicon_material_scales",
-    "disabled": false
+    "disabled": true
   },
   "Scales2": {
     "group": "Common",
@@ -38538,7 +38538,7 @@
     "price": 1,
     "sort_id": 9999,
     "icon": "t_itemicon_material_scales2",
-    "disabled": false
+    "disabled": true
   },
   "Seed_Tmp": {
     "group": "None",
@@ -38551,7 +38551,7 @@
     "price": 1,
     "sort_id": 9999,
     "icon": "t_itemicon_seed_tmp",
-    "disabled": false
+    "disabled": true
   },
   "Sharkkid_Scale": {
     "group": "Common",
@@ -38564,7 +38564,7 @@
     "price": 1,
     "sort_id": 9999,
     "icon": "tex_necromancericons_44_t",
-    "disabled": false
+    "disabled": true
   },
   "Shield_05": {
     "group": "Shield",
@@ -38608,7 +38608,7 @@
     "price": 1,
     "sort_id": 9999,
     "icon": "t_itemicon_ammo_smallbullet",
-    "disabled": false
+    "disabled": true
   },
   "SniperRifle_Default": {
     "group": "None",
@@ -38628,7 +38628,7 @@
       "passive_skills": []
     },
     "damage": 1000,
-    "disabled": false
+    "disabled": true
   },
   "ThrowStone": {
     "group": "Weapon",
@@ -38642,7 +38642,7 @@
     "sort_id": 9999,
     "icon": "t_itemicon_throwstone",
     "damage": 50,
-    "disabled": false
+    "disabled": true
   },
   "VenisonBoiledInTomato": {
     "group": "Food",
@@ -38656,7 +38656,7 @@
     "sort_id": 9999,
     "icon": "t_itemicon_venisonboiledintomato",
     "corruption_factor": 0.027777778,
-    "disabled": false
+    "disabled": true
   },
   "WaterBucket": {
     "group": "Common",
@@ -38669,6 +38669,6 @@
     "price": 1,
     "sort_id": 9999,
     "icon": "t_itemicon_consume_waterbucket",
-    "disabled": false
+    "disabled": true
   }
 }

@@ -349,7 +349,7 @@
   },
   "Crusher": {
     "localized_name": "Máy Nghiền",
-    "description": "Cơ sở có thể nghiền Đá hoặc Gỗ để chuyển đổi thành nguyên liệu khác. Cần Pal có năng lực |tưới nước| để quay bánh xe nước."
+    "description": "Cơ sở có thể nghiền Đá hoặc Gỗ để chuyển đổi thành nguyên liệu khác. Cần Pal có năng lực \"tưới nước\" để quay bánh xe nước."
   },
   "CrystalPit": {
     "localized_name": "Mỏ Khai Thác Thạch Anh Lục Giác",
@@ -376,8 +376,8 @@
     "description": "Cờ hiệu của cư dân Feybreak dùng để trang trí."
   },
   "Decal_PalSticker_PinkCat": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Tuppanyan sticker",
+    "description": null
   },
   "DefenseBowGun": {
     "localized_name": "Nỏ Săn Lắp Ráp",
@@ -541,7 +541,7 @@
   },
   "FlourMill": {
     "localized_name": "Máy Xay Bột",
-    "description": "Cơ sở có thể nghiền Lúa Mì để sản xuất Bột Mì. Cần Pal có năng lực |tưới nước| để quay bánh xe nước."
+    "description": "Cơ sở có thể nghiền Lúa Mì để sản xuất Bột Mì. Cần Pal có năng lực \"tưới nước\" để quay bánh xe nước."
   },
   "FlowerBed": {
     "localized_name": "Bồn Hoa",
@@ -809,7 +809,7 @@
   },
   "IceCrusher": {
     "localized_name": "Máy Nghiền Đông Lạnh",
-    "description": "Cơ sở có thể nghiền Quặng Kim Loại để chuyển đổi thành nguyên liệu khác. Cần cung cấp điện và Pal có năng lực |làm mát| để hoạt động, nhưng cơ sở này làm việc rất hiệu quả."
+    "description": "Cơ sở có thể nghiền Quặng Kim Loại để chuyển đổi thành nguyên liệu khác. Cần cung cấp điện và Pal có năng lực \"làm mát\" để hoạt động, nhưng cơ sở này làm việc rất hiệu quả."
   },
   "IceHorseStatue": {
     "localized_name": "Tượng Frostallion",
@@ -1292,8 +1292,8 @@
     "description": "Thảm dài cổ dùng để trang trí."
   },
   "Rug_Wood": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Fur rug",
+    "description": null
   },
   "SF_Chair": {
     "localized_name": "Ghế Kiểu Phòng Nghiên Cứu",
@@ -1832,8 +1832,8 @@
     "description": "Bẫy làm Pal bị đóng băng khi đạp phải. Pal bị đóng băng sẽ dễ bị bắt bằng quả cầu Pal hơn."
   },
   "Trap_MovingPanel": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Moving Panels",
+    "description": "A description of the moving panel"
   },
   "Trap_Noose": {
     "localized_name": "Bẫy Treo",
@@ -1984,11 +1984,11 @@
     "description": "Ghế tựa Nhật Bản dùng để trang trí. Hãy sử dụng khi xây dựng theo phong cách Nhật Bản."
   },
   "JapaneseStyle_TriangleStairsCorner_02": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "JapaneseStyle_TriangleStairsCorner_02",
+    "description": null
   },
   "WoodCreator": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "WoodCreator",
+    "description": null
   }
 }

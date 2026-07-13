@@ -356,7 +356,7 @@
     "description": "據傳牠和聖光騎士本為一體， 是分離後的負面情感所構成的存在， 但牠的瞳孔深處仍留有一絲慈悲。"
   },
   "BlackFurDragon": {
-    "localized_name": "zh_Hant_Text",
+    "localized_name": "Dragostrophe",
     "description": "來自深淵的靜寂之身。 汝不得立於此獸之背。 汝不得面朝此獸呼喊。"
   },
   "BlackGriffon": {
@@ -588,8 +588,8 @@
     "description": "牠在旱季時相當神經質，總是一觸即發。 只要和夥伴之間有些小摩擦， 就會演變成火花四射的爭吵。"
   },
   "ElecLion": {
-    "localized_name": "zh_Hant_Text",
-    "description": "zh_Hant_Text"
+    "localized_name": "Boltmane",
+    "description": "The more it moves, the more it heats up and the hair tips increasingly glow brighter. At its peak, it becomes so dazzling that you risk blindness if you stare at it directly."
   },
   "ElecLizard": {
     "localized_name": "電懶懶",
@@ -2480,7 +2480,7 @@
     "description": "統治騎士蜂的天選之后。 在能為偉大女王效力的喜悅驅動下， 為牠辛勤工作，至死方休的僕人可謂絡繹不絕。"
   },
   "QuestMan": {
-    "localized_name": "-",
+    "localized_name": "Quest Client",
     "description": null
   },
   "Quest_Farmer03_PinkCat": {
@@ -3040,7 +3040,7 @@
     "description": "城堡裡開滿了國王最喜歡的花朵。 但大型戰爭爆發，戰火即將波及城堡。 這時，一隻花朵精靈憑空出現了。 ──摘自童話《國王的花朵》。"
   },
   "VisitingMerchant": {
-    "localized_name": "-",
+    "localized_name": "Visitor",
     "description": null
   },
   "Visitor_Hunter_Rifle": {
@@ -3072,7 +3072,7 @@
     "description": "健康的個體，背部物質的溫度也會十分穩定。 但一旦心跳過快，溫度就會失去穩定。 最壞的情況會引發氣化或凝固現象， 最後突然休克而死。"
   },
   "WeaponsDealer": {
-    "localized_name": "-",
+    "localized_name": "Weapons Dealer",
     "description": null
   },
   "WeaselDragon": {
@@ -3324,24 +3324,24 @@
     "description": null
   },
   "BeardedDragon": {
-    "localized_name": "zh_Hant_Text",
-    "description": "zh_Hant_Text"
+    "localized_name": "BeardedDragon",
+    "description": "This Pal is under investigation."
   },
   "BlueWoolRabbit": {
     "localized_name": "BlueWoolRabbit",
     "description": null
   },
   "CandleWitch": {
-    "localized_name": "zh_Hant_Text",
-    "description": "zh_Hant_Text"
+    "localized_name": "Unidentified Pal",
+    "description": null
   },
   "CuteOrca": {
     "localized_name": "CuteOrca",
     "description": null
   },
   "DarkMutant": {
-    "localized_name": "zh_Hant_Text",
-    "description": "當zh_Hant_Text練就精湛技法， 只需刃光一閃便能斬斷時空，讓空間產生裂縫。 據說部分帕魯就是從這空間裂縫中出現的。"
+    "localized_name": "DarkMutant",
+    "description": "當DarkMutant練就精湛技法， 只需刃光一閃便能斬斷時空，讓空間產生裂縫。 據說部分帕魯就是從這空間裂縫中出現的。"
   },
   "DesertBoss": {
     "localized_name": "DesertBoss",
@@ -3368,8 +3368,8 @@
     "description": null
   },
   "GrassDragon": {
-    "localized_name": "zh_Hant_Text",
-    "description": "zh_Hant_Text"
+    "localized_name": "GrassDragon",
+    "description": "This Pal is under investigation."
   },
   "IceVeilDragon": {
     "localized_name": "IceVeilDragon",
@@ -3404,7 +3404,7 @@
     "description": null
   },
   "PinkKangaroo": {
-    "localized_name": "zh_Hant_Text",
+    "localized_name": "PinkKangaroo",
     "description": null
   },
   "RockCheetah": {
@@ -3424,8 +3424,8 @@
     "description": null
   },
   "StrawHatCat": {
-    "localized_name": "zh_Hant_Text",
-    "description": "zh_Hant_Text"
+    "localized_name": "Unidentified Pal",
+    "description": null
   },
   "TestAssassin": {
     "localized_name": "TestAssassin",
@@ -3440,12 +3440,12 @@
     "description": null
   },
   "VolcanicTurtle": {
-    "localized_name": "zh_Hant_Text",
-    "description": "zh_Hant_Text"
+    "localized_name": "Unidentified Pal",
+    "description": null
   },
   "WaterLizard": {
-    "localized_name": "zh_Hant_Text",
-    "description": "-"
+    "localized_name": "WaterLizard",
+    "description": null
   },
   "WorldTree_Hunter_MissileLauncher_test": {
     "localized_name": "WorldTree_Hunter_MissileLauncher_test",

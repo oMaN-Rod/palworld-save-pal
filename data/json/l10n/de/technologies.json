@@ -129,7 +129,7 @@
   },
   "Arrow_Fire": {
     "localized_name": "Feuerpfeil",
-    "description": "Ein Feuerpfeil, der mit einem Bogen verschossen werden kann. Fügt getroffenen Zielen ElemIcon_FireFeuerschaden zu. Kann mithilfe von „Primitive Werkbank“ gefertigt werden."
+    "description": "Ein Feuerpfeil, der mit einem Bogen verschossen werden kann. Fügt getroffenen Zielen Feuerschaden zu. Kann mithilfe von „Primitive Werkbank“ gefertigt werden."
   },
   "Arrow_Poison": {
     "localized_name": "Giftpfeil",

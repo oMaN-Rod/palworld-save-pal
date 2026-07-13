@@ -269,7 +269,7 @@
   },
   "Baphomet": {
     "localized_name": "Incineram",
-    "description": "Es un cazador nocturno que se lleva a  su territorio a todas sus presas. No es difícil imaginarse el destino que les depara a los Pals que captura."
+    "description": "Es un cazador nocturno que se lleva a su territorio a todas sus presas. No es difícil imaginarse el destino que les depara a los Pals que captura."
   },
   "Baphomet_Dark": {
     "localized_name": "Incineram Noct",
@@ -577,7 +577,7 @@
   },
   "DrillGame": {
     "localized_name": "Digtoise",
-    "description": "Existe una historia llamada |Los taladros de Digtoise|. Es una historia acerca de Digtoise que posee el caparazón y taladro más fuertes, reflexionando sobre las contradicciones de la vida."
+    "description": "Existe una historia llamada \"Los taladros de Digtoise\". Es una historia acerca de Digtoise que posee el caparazón y taladro más fuertes, reflexionando sobre las contradicciones de la vida."
   },
   "Eagle": {
     "localized_name": "Galeclaw",
@@ -589,7 +589,7 @@
   },
   "ElecLion": {
     "localized_name": "Boltmane",
-    "description": "-"
+    "description": "The more it moves, the more it heats up and the hair tips increasingly glow brighter. At its peak, it becomes so dazzling that you risk blindness if you stare at it directly."
   },
   "ElecLizard": {
     "localized_name": "Slowatt",
@@ -925,11 +925,11 @@
   },
   "FlowerDinosaur": {
     "localized_name": "Dinossom",
-    "description": "Una vez monta en cólera es imposible apaciguarlo, y sus llamas arrasan con todo. De hecho, la expresión |pisarle la cola a un Dinossom| significa hacer enfadar a alguien."
+    "description": "Una vez monta en cólera es imposible apaciguarlo, y sus llamas arrasan con todo. De hecho, la expresión \"pisarle la cola a un Dinossom\" significa hacer enfadar a alguien."
   },
   "FlowerDinosaur_Electric": {
     "localized_name": "Dinossom Lux",
-    "description": "Este Pal fue alcanzado por un rayo, pero logró sobrevivir. De hecho, la expresión |caerle un rayo a un Dinossom Lux| significa escapar de la muerte por los pelos."
+    "description": "Este Pal fue alcanzado por un rayo, pero logró sobrevivir. De hecho, la expresión \"caerle un rayo a un Dinossom Lux\" significa escapar de la muerte por los pelos."
   },
   "FlowerDoll": {
     "localized_name": "Petallia",
@@ -1545,7 +1545,7 @@
   },
   "KingBahamut_Dragon": {
     "localized_name": "Blazamut Ryu",
-    "description": "Eones atrás emergió de las entrañas de la tierra. Sus impías llamas colericas no desaparecieron hasta consumir la isla por completo. Se lo conocía como la |llama eterna|."
+    "description": "Eones atrás emergió de las entrañas de la tierra. Sus impías llamas colericas no desaparecieron hasta consumir la isla por completo. Se lo conocía como la \"llama eterna\"."
   },
   "KingSunfish": {
     "localized_name": "Solmora",
@@ -1597,7 +1597,7 @@
   },
   "LazyDragon_Electric": {
     "localized_name": "Relaxaurus Lux",
-    "description": "En ese momento, Relaxaurus pensó: |Creo que ha llegado la hora de cambiar|. ¡Y una descarga eléctrica recorrió todo su cuerpo!"
+    "description": "En ese momento, Relaxaurus pensó: \"Creo que ha llegado la hora de cambiar\". ¡Y una descarga eléctrica recorrió todo su cuerpo!"
   },
   "LazyDragon_Electric_Tower": {
     "localized_name": "Relaxaurus Lux",
@@ -1945,7 +1945,7 @@
   },
   "MimicDog": {
     "localized_name": "Mimog",
-    "description": "En uno de los reinos antiguos de esta isla, existía la tradición de dar un premio a la persona que sufriera la muerte más estúpida del año. Una de las muertes más memorables se recoge en el epitafio: |No se percató del Mimog y murió a mordiscos tras abrir la caja|."
+    "description": "En uno de los reinos antiguos de esta isla, existía la tradición de dar un premio a la persona que sufriera la muerte más estúpida del año. Una de las muertes más memorables se recoge en el epitafio: \"No se percató del Mimog y murió a mordiscos tras abrir la caja\"."
   },
   "MobuCitizen": {
     "localized_name": "Isleño",
@@ -1961,7 +1961,7 @@
   },
   "Monkey": {
     "localized_name": "Tanzee",
-    "description": "Antiguamente usaban objetos largos y delgados, como las ramas de los árboles, a modo de arma, pero su relación con los humanos los llevó a cambiarlas por |armas de fuego| mucho más efectivas."
+    "description": "Antiguamente usaban objetos largos y delgados, como las ramas de los árboles, a modo de arma, pero su relación con los humanos los llevó a cambiarlas por \"armas de fuego\" mucho más efectivas."
   },
   "Monkey_Fire": {
     "localized_name": "Tanzee Ignis",
@@ -2109,7 +2109,7 @@
   },
   "OctopusGirl_Neutral": {
     "localized_name": "Gloopie Primo",
-    "description": "Si van a dormir juntos, asegúrate de repasar la agenda del día   siguiente. Las marcas de sus ventosas pueden parecer mordidas, y si te succiona mientras duerme, podría generar preocupaciones innecesarias."
+    "description": "Si van a dormir juntos, asegúrate de repasar la agenda del día siguiente. Las marcas de sus ventosas pueden parecer mordidas, y si te succiona mientras duerme, podría generar preocupaciones innecesarias."
   },
   "OniGhostGirl": {
     "localized_name": "Bakemi",
@@ -2145,7 +2145,7 @@
   },
   "PREDATOR_DrillGame": {
     "localized_name": "Digtoise",
-    "description": "Existe una historia llamada |Los taladros de Digtoise|. Es una historia acerca de Digtoise que posee el caparazón y taladro más fuertes, reflexionando sobre las contradicciones de la vida."
+    "description": "Existe una historia llamada \"Los taladros de Digtoise\". Es una historia acerca de Digtoise que posee el caparazón y taladro más fuertes, reflexionando sobre las contradicciones de la vida."
   },
   "PREDATOR_FairyDragon": {
     "localized_name": "Elphidran",
@@ -2157,7 +2157,7 @@
   },
   "PREDATOR_FlowerDinosaur": {
     "localized_name": "Dinossom",
-    "description": "Una vez monta en cólera es imposible apaciguarlo, y sus llamas arrasan con todo. De hecho, la expresión |pisarle la cola a un Dinossom| significa hacer enfadar a alguien."
+    "description": "Una vez monta en cólera es imposible apaciguarlo, y sus llamas arrasan con todo. De hecho, la expresión \"pisarle la cola a un Dinossom\" significa hacer enfadar a alguien."
   },
   "PREDATOR_FlowerRabbit_Quest": {
     "localized_name": "Flopie",
@@ -2269,7 +2269,7 @@
   },
   "PREDATOR_SifuDog": {
     "localized_name": "Dogen",
-    "description": "Medita sin descanso para ser más altruista. Tras enfrentarse a sus mundanos deseos y sentirse como nuevo se pega un festín y piensa... |Ya he vuelto a comer demasiado|."
+    "description": "Medita sin descanso para ser más altruista. Tras enfrentarse a sus mundanos deseos y sentirse como nuevo se pega un festín y piensa... \"Ya he vuelto a comer demasiado\"."
   },
   "PREDATOR_SnakeGirl": {
     "localized_name": "Venusa",
@@ -2480,7 +2480,7 @@
     "description": "La reina elegida que gobierna a las Beegarde. No hay nada que complazca más a los soldados que trabajar para su reina, y no dejarán de hacerlo hasta morir."
   },
   "QuestMan": {
-    "localized_name": "-",
+    "localized_name": "Quest Client",
     "description": null
   },
   "Quest_Farmer03_PinkCat": {
@@ -2773,11 +2773,11 @@
   },
   "SakuraSaurus": {
     "localized_name": "Broncherry",
-    "description": "Su olor corporal cambia mucho antes y después del apareamiento. El que emana tras encontrar a su compañero se considera bueno, y por eso se le llama |el aroma del primer amor|."
+    "description": "Su olor corporal cambia mucho antes y después del apareamiento. El que emana tras encontrar a su compañero se considera bueno, y por eso se le llama \"el aroma del primer amor\"."
   },
   "SakuraSaurus_Water": {
     "localized_name": "Broncherry Aqua",
-    "description": "Su olor corporal cambia mucho antes y después del apareamiento. El que emana antes de encontrar a su compañero se considera bueno, y por eso se le llama |el aroma de la pureza|."
+    "description": "Su olor corporal cambia mucho antes y después del apareamiento. El que emana antes de encontrar a su compañero se considera bueno, y por eso se le llama \"el aroma de la pureza\"."
   },
   "SalesPerson": {
     "localized_name": "Vendedor ambulante",
@@ -2869,7 +2869,7 @@
   },
   "SifuDog": {
     "localized_name": "Dogen",
-    "description": "Medita sin descanso para ser más altruista. Tras enfrentarse a sus mundanos deseos y sentirse como nuevo se pega un festín y piensa... |Ya he vuelto a comer demasiado|."
+    "description": "Medita sin descanso para ser más altruista. Tras enfrentarse a sus mundanos deseos y sentirse como nuevo se pega un festín y piensa... \"Ya he vuelto a comer demasiado\"."
   },
   "SkyDragon": {
     "localized_name": "Quivern",
@@ -3037,10 +3037,10 @@
   },
   "VioletFairy": {
     "localized_name": "Vaelet",
-    "description": "Había una vez, un castillo lleno de las flores favoritas del rey. Cierto día, se produjo una gran batalla, y el fuego amenazaba con consumir el castillo. Entonces, apareció el espíritu de una de las flores. Extracto del cuento |Las flores del rey|."
+    "description": "Había una vez, un castillo lleno de las flores favoritas del rey. Cierto día, se produjo una gran batalla, y el fuego amenazaba con consumir el castillo. Entonces, apareció el espíritu de una de las flores. Extracto del cuento \"Las flores del rey\"."
   },
   "VisitingMerchant": {
-    "localized_name": "-",
+    "localized_name": "Visitor",
     "description": null
   },
   "Visitor_Hunter_Rifle": {
@@ -3072,7 +3072,7 @@
     "description": "En los Pals sanos, la temperatura de la sustancia que fluye por su espalda es estable. Cuando se acelera su corazón, la temperatura pierde estabilidad, y en el peor de los casos puede provocar evaporación o solidificación, causando una muerte súbita por shock."
   },
   "WeaponsDealer": {
-    "localized_name": "-",
+    "localized_name": "Weapons Dealer",
     "description": null
   },
   "WeaselDragon": {
@@ -3097,7 +3097,7 @@
   },
   "WhiteDeer": {
     "localized_name": "Celesdir",
-    "description": "Los antiguos manuscritos lo llaman la |bestia de la salvación|. La luz emitida por Celesdir lo purifica todo. Cuando desaparece de este mundo lo hace, literalmente, sin dejar rastro."
+    "description": "Los antiguos manuscritos lo llaman la \"bestia de la salvación\". La luz emitida por Celesdir lo purifica todo. Cuando desaparece de este mundo lo hace, literalmente, sin dejar rastro."
   },
   "WhiteDeer_Dark": {
     "localized_name": "Celesdir Noct",
@@ -3153,7 +3153,7 @@
   },
   "WizardOwl": {
     "localized_name": "Hoocrates",
-    "description": "A veces se pierde de tal modo en sus propios pensamientos que es incapaz de dormirse. |Cogito ergo sum|."
+    "description": "A veces se pierde de tal modo en sus propios pensamientos que es incapaz de dormirse. \"Cogito ergo sum\"."
   },
   "WoolFox": {
     "localized_name": "Cremis",
@@ -3325,7 +3325,7 @@
   },
   "BeardedDragon": {
     "localized_name": "BeardedDragon",
-    "description": "-"
+    "description": "This Pal is under investigation."
   },
   "BlueWoolRabbit": {
     "localized_name": "BlueWoolRabbit",
@@ -3369,7 +3369,7 @@
   },
   "GrassDragon": {
     "localized_name": "GrassDragon",
-    "description": "-"
+    "description": "This Pal is under investigation."
   },
   "IceVeilDragon": {
     "localized_name": "IceVeilDragon",
@@ -3445,7 +3445,7 @@
   },
   "WaterLizard": {
     "localized_name": "WaterLizard",
-    "description": "-"
+    "description": null
   },
   "WorldTree_Hunter_MissileLauncher_test": {
     "localized_name": "WorldTree_Hunter_MissileLauncher_test",

@@ -129,7 +129,7 @@
   },
   "Arrow_Fire": {
     "localized_name": "Ognista strzała",
-    "description": "Ognista strzała do użycia z łukiem. Zadaje trafionemu celowi obrażenia ElemIcon_FireOgnisty. Do wytworzenia potrzeba: Prymitywny stół warsztatowy."
+    "description": "Ognista strzała do użycia z łukiem. Zadaje trafionemu celowi obrażenia Ognisty. Do wytworzenia potrzeba: Prymitywny stół warsztatowy."
   },
   "Arrow_Poison": {
     "localized_name": "Zatruta strzała",
@@ -1125,7 +1125,7 @@
   },
   "MeatCutterKnife": {
     "localized_name": "Tasak",
-    "description": "Nóż do uboju Pali. Po wyposażeniu komenda |Pogłaszcz| zostaje zastąpiona przez |Ubij|. Zlikwidowane Pale znikają na zawsze."
+    "description": "Nóż do uboju Pali. Po wyposażeniu komenda \"Pogłaszcz\" zostaje zastąpiona przez \"Ubij\". Zlikwidowane Pale znikają na zawsze."
   },
   "MedicalPalBed_04": {
     "localized_name": "Duże łóżko dla Pala",

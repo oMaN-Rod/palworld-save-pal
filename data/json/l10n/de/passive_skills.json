@@ -597,15 +597,15 @@
   },
   "Deffence_up2": {
     "localized_name": "Stämmiger Wuchs",
-    "description": "Verteidigung +{EffectValue1} % Betäubungsimmunität"
+    "description": "Verteidigung +20 % Betäubungsimmunität"
   },
   "Deffence_up2_2": {
     "localized_name": "Schwergewicht",
-    "description": "Verteidigung +{EffectValue1} % Rückstoßimmunität"
+    "description": "Verteidigung +20 % Rückstoßimmunität"
   },
   "Deffence_up3": {
     "localized_name": "Diamantkörper",
-    "description": "Verteidigung +{EffectValue1} % Betäubungsimmunität Rückstoßimmunität"
+    "description": "Verteidigung +30 % Betäubungsimmunität Rückstoßimmunität"
   },
   "Defuser_ExplosiveSpore_EquipSkill": {
     "localized_name": "Immunität gegen Explosionsschaden",
@@ -613,7 +613,7 @@
   },
   "ElementBoost_Aqua_1_PAL": {
     "localized_name": "Wasserratte",
-    "description": "Wasserangriffsschaden +{EffectValue1} %"
+    "description": "Wasserangriffsschaden +10 %"
   },
   "ElementBoost_Aqua_2_PAL": {
     "localized_name": "Gebieter der Meere",
@@ -629,7 +629,7 @@
   },
   "ElementBoost_Dark_1_PAL": {
     "localized_name": "Grufti",
-    "description": "Schattenangriffsschaden +{EffectValue1} %"
+    "description": "Schattenangriffsschaden +10 %"
   },
   "ElementBoost_Dark_2_BossDefeat": {
     "localized_name": "Schattenschadenssteigerung (M)",
@@ -665,7 +665,7 @@
   },
   "ElementBoost_Dragon_1_PAL": {
     "localized_name": "Drachengeborener",
-    "description": "Drachenangriffsschaden +{EffectValue1} %"
+    "description": "Drachenangriffsschaden +10 %"
   },
   "ElementBoost_Dragon_2_BossDefeat": {
     "localized_name": "Drachenschadenssteigerung (M)",
@@ -701,7 +701,7 @@
   },
   "ElementBoost_Earth_1_PAL": {
     "localized_name": "Macht von Gaia",
-    "description": "Erdangriffsschaden +{EffectValue1} %"
+    "description": "Erdangriffsschaden +10 %"
   },
   "ElementBoost_Earth_2_BossDefeat": {
     "localized_name": "Erdschadenssteigerung (M)",
@@ -765,7 +765,7 @@
   },
   "ElementBoost_Fire_1_PAL": {
     "localized_name": "Pyromane",
-    "description": "Feuerangriffsschaden +{EffectValue1} %"
+    "description": "Feuerangriffsschaden +10 %"
   },
   "ElementBoost_Fire_2_BossDefeat": {
     "localized_name": "Feuerschadenssteigerung (M)",
@@ -801,7 +801,7 @@
   },
   "ElementBoost_Ice_1_PAL": {
     "localized_name": "Kaltblütig",
-    "description": "Eisangriffsschaden +{EffectValue1} %"
+    "description": "Eisangriffsschaden +10 %"
   },
   "ElementBoost_Ice_2_BossDefeat": {
     "localized_name": "Eisschadenssteigerung (M)",
@@ -837,7 +837,7 @@
   },
   "ElementBoost_Leaf_1_PAL": {
     "localized_name": "Grüner Daumen",
-    "description": "Grasangriffsschaden +{EffectValue1} %"
+    "description": "Grasangriffsschaden +10 %"
   },
   "ElementBoost_Leaf_2_BossDefeat": {
     "localized_name": "Grasschadenssteigerung (M)",
@@ -873,7 +873,7 @@
   },
   "ElementBoost_Normal_1_PAL": {
     "localized_name": "Neutralisator",
-    "description": "Neutralangriffsschaden +{EffectValue1} %"
+    "description": "Neutralangriffsschaden +10 %"
   },
   "ElementBoost_Normal_2_BossDefeat": {
     "localized_name": "Neutralschadenssteigerung (M)",
@@ -901,7 +901,7 @@
   },
   "ElementBoost_Thunder_1_PAL": {
     "localized_name": "Dynamo",
-    "description": "Elektroangriffsschaden +{EffectValue1} %"
+    "description": "Elektroangriffsschaden +10 %"
   },
   "ElementBoost_Thunder_2_PAL": {
     "localized_name": "Meister des Donners",
@@ -941,7 +941,7 @@
   },
   "ElementResist_Aqua_1_PAL": {
     "localized_name": "Imprägniert",
-    "description": "Wasserschaden −{EffectValue1} %"
+    "description": "Wasserschaden −10 %"
   },
   "ElementResist_Aqua_2": {
     "localized_name": "Wasserschadensminderung Lv. 2",
@@ -961,7 +961,7 @@
   },
   "ElementResist_Dark_1_PAL": {
     "localized_name": "Frohnatur",
-    "description": "Schattenschaden −{EffectValue1} %"
+    "description": "Schattenschaden −10 %"
   },
   "ElementResist_Dark_2": {
     "localized_name": "Schattenschadensminderung Lv. 2",
@@ -981,7 +981,7 @@
   },
   "ElementResist_Dragon_1_PAL": {
     "localized_name": "Drachentöter",
-    "description": "Drachenschaden −{EffectValue1} %"
+    "description": "Drachenschaden −10 %"
   },
   "ElementResist_Dragon_2": {
     "localized_name": "Drachenschadensminderung Lv. 2",
@@ -1001,7 +1001,7 @@
   },
   "ElementResist_Earth_1_PAL": {
     "localized_name": "Erdbebensicher",
-    "description": "Erdschaden −{EffectValue1} %"
+    "description": "Erdschaden −10 %"
   },
   "ElementResist_Earth_2": {
     "localized_name": "Erdschadensminderung Lv. 2",
@@ -1021,7 +1021,7 @@
   },
   "ElementResist_Fire_1_PAL": {
     "localized_name": "Cooler Typ",
-    "description": "Feuerschaden −{EffectValue1} %"
+    "description": "Feuerschaden −10 %"
   },
   "ElementResist_Fire_2": {
     "localized_name": "Feuerschadensminderung Lv. 2",
@@ -1041,7 +1041,7 @@
   },
   "ElementResist_Ice_1_PAL": {
     "localized_name": "Hitzkopf",
-    "description": "Eisschaden −{EffectValue1} %"
+    "description": "Eisschaden −10 %"
   },
   "ElementResist_Ice_2": {
     "localized_name": "Eisschadensminderung Lv. 2",
@@ -1061,7 +1061,7 @@
   },
   "ElementResist_Leaf_1_PAL": {
     "localized_name": "Herbizid",
-    "description": "Grasschaden −{EffectValue1} %"
+    "description": "Grasschaden −10 %"
   },
   "ElementResist_Leaf_2": {
     "localized_name": "Grasschadensminderung Lv. 2",
@@ -1081,7 +1081,7 @@
   },
   "ElementResist_Normal_1_PAL": {
     "localized_name": "Neutralitätspakt",
-    "description": "Neutralschaden −{EffectValue1} %"
+    "description": "Neutralschaden −10 %"
   },
   "ElementResist_Normal_2": {
     "localized_name": "Neutralschadensminderung Lv. 2",
@@ -1101,7 +1101,7 @@
   },
   "ElementResist_Thunder_1_PAL": {
     "localized_name": "Blitzableiter",
-    "description": "Elektroschaden −{EffectValue1} %"
+    "description": "Elektroschaden −10 %"
   },
   "ElementResist_Thunder_2": {
     "localized_name": "Elektroschadensminderung Lv. 2",
@@ -1133,7 +1133,7 @@
   },
   "GYM_NAME_Meadow": {
     "localized_name": "Chefin des Rayne-Syndikats",
-    "description": "Angriff +{EffectValue1} % Bewegungstempo +{EffectValue2} %"
+    "description": "Angriff +20 % Bewegungstempo +10 %"
   },
   "GYM_NAME_Sakurajima": {
     "localized_name": "Oberhaupt der Gesellschaft des Blumenmondes",
@@ -1245,7 +1245,7 @@
   },
   "MutationPal_ExplosionResist": {
     "localized_name": "Bollwerk",
-    "description": "Immunität gegen Explosionsschaden"
+    "description": null
   },
   "MutationPal_Immortal": {
     "localized_name": "Unsterblich",
@@ -1253,7 +1253,7 @@
   },
   "MutationPal_Mutant": {
     "localized_name": "Anomalie",
-    "description": "Natürliche LP-Wiederherstellung (Pals und Spieler) +50.0 % Verteidigung +{EffectValue4} % Immunität gegen Giftschaden Immunität gegen Verbrennungsschaden"
+    "description": null
   },
   "NightOwl": {
     "localized_name": "Nachteule",
@@ -1273,7 +1273,7 @@
   },
   "Nushi": {
     "localized_name": "Teichfürst",
-    "description": "Wasserangriffsschaden +{EffectValue1} % Eisangriffsschaden +{EffectValue1} % Verteidigung +{EffectValue1} %"
+    "description": "Wasserangriffsschaden +20 % Eisangriffsschaden +20 % Verteidigung +20 %"
   },
   "OctaviaArmorVampire": {
     "localized_name": "Bluttreibstoff",
@@ -1545,23 +1545,23 @@
   },
   "TrainerATK_UP_1": {
     "localized_name": "Angriffsstratege",
-    "description": "Spieler ANG +{EffectValue1} %"
+    "description": "Spieler ANG +10 %"
   },
   "TrainerDEF_UP_1": {
     "localized_name": "Festungskommandant",
-    "description": "Spieler VTD +{EffectValue1} %"
+    "description": "Spieler VTD +10 %"
   },
   "TrainerLogging_up1": {
     "localized_name": "Forstmeister",
-    "description": "Spieler Effizienz (Holzfällen) +{EffectValue1} %"
+    "description": "Spieler Effizienz (Holzfällen) +25 %"
   },
   "TrainerMining_up1": {
     "localized_name": "Oberbergmann",
-    "description": "Spieler Effizienz (Bergbau) +{EffectValue1} %"
+    "description": "Spieler Effizienz (Bergbau) +25 %"
   },
   "TrainerWorkSpeed_UP_1": {
     "localized_name": "Motivationscoach",
-    "description": "Spieler Arbeitstempo +{EffectValue1} %"
+    "description": "Spieler Arbeitstempo +25 %"
   },
   "Vampire": {
     "localized_name": "Vampir",
@@ -1617,31 +1617,31 @@
   },
   "WorldTree_ATK": {
     "localized_name": "Weiheklinge",
-    "description": "Angriff +{EffectValue1} % Verteidigung {EffectValue2} % Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
+    "description": "Angriff +50 % Verteidigung -30 % Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
   },
   "WorldTree_ATK_DEF": {
     "localized_name": "Avatar der Zerstörung",
-    "description": "Angriff +{EffectValue1} % Verteidigung +{EffectValue2} % Max. LP {EffectValue3} % Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
+    "description": "Angriff +40 % Verteidigung +20 % Max. LP -50 % Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
   },
   "WorldTree_CraftSpeed": {
     "localized_name": "Teufelshände",
-    "description": "Arbeitstempo +{EffectValue1} % GEI sinkt um 15,0 % schneller. Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
+    "description": "Arbeitstempo +90 % GEI sinkt um 15,0 % schneller. Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
   },
   "WorldTree_DEF": {
     "localized_name": "Sakralleib",
-    "description": "Verteidigung +{EffectValue1} % Angriff {EffectValue2} % Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
+    "description": "Verteidigung +50 % Angriff -30 % Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
   },
   "WorldTree_FullStomach": {
     "localized_name": "Weltenkeim",
-    "description": "Sattheit sinkt um 50,0 % langsamer. LP {EffectValue2} % Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
+    "description": "Sattheit sinkt um 50,0 % langsamer. LP -20 % Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
   },
   "WorldTree_MoveSpeed": {
     "localized_name": "Dimensionsriss",
-    "description": "Bewegungstempo +{EffectValue1} % Sattheit sinkt um 15,0 % schneller. Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
+    "description": "Bewegungstempo +50 % Sattheit sinkt um 15,0 % schneller. Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
   },
   "WorldTree_Sanity": {
     "localized_name": "Erleuchteter",
-    "description": "GEI sinkt um 50,0 % langsamer. Arbeitstempo {EffectValue2} % Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
+    "description": "GEI sinkt um 50,0 % langsamer. Arbeitstempo -20 % Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
   },
   "YakushimaDagameBoost_Magic_Equip": {
     "localized_name": "Heilige Macht: Magie",

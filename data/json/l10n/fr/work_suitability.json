@@ -20,7 +20,7 @@
     "description": null
   },
   "Handcraft": {
-    "localized_name": "Travaux manuels",
+    "localized_name": "Artisanat",
     "description": null
   },
   "Mining": {
@@ -28,7 +28,7 @@
     "description": null
   },
   "MonsterFarm": {
-    "localized_name": "Ferme",
+    "localized_name": "Exploitation",
     "description": null
   },
   "OilExtraction": {

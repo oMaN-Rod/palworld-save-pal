@@ -356,7 +356,7 @@
     "description": "曾与圣光骑士同为一体。 虽是分离后的负面情感所构成的存在， 但其眼眸深处仍留有着一丝慈悲。"
   },
   "BlackFurDragon": {
-    "localized_name": "zh_Hans_Text",
+    "localized_name": "Dragostrophe",
     "description": "来自深渊的静寂之身。 汝不得立于此兽之背。 汝不得面朝此兽呼喊。"
   },
   "BlackGriffon": {
@@ -588,8 +588,8 @@
     "description": "它在旱季时期容易精神紧绷，总是一触即发。 一旦和同伴发生摩擦， 就会演变成电火花四溅的大战。"
   },
   "ElecLion": {
-    "localized_name": "zh_Hans_Text",
-    "description": "zh_Hans_Text"
+    "localized_name": "Boltmane",
+    "description": "The more it moves, the more it heats up and the hair tips increasingly glow brighter. At its peak, it becomes so dazzling that you risk blindness if you stare at it directly."
   },
   "ElecLizard": {
     "localized_name": "电懒懒",
@@ -2480,7 +2480,7 @@
     "description": "它是统御骑士蜂的天选女王。 为伟大女王效力的喜悦 让无数甘愿为其劳动至死的仆人络绎不绝。"
   },
   "QuestMan": {
-    "localized_name": "-",
+    "localized_name": "Quest Client",
     "description": null
   },
   "Quest_Farmer03_PinkCat": {
@@ -3324,24 +3324,24 @@
     "description": null
   },
   "BeardedDragon": {
-    "localized_name": "zh_Hans_Text",
-    "description": "zh_Hans_Text"
+    "localized_name": "BeardedDragon",
+    "description": "This Pal is under investigation."
   },
   "BlueWoolRabbit": {
     "localized_name": "BlueWoolRabbit",
     "description": null
   },
   "CandleWitch": {
-    "localized_name": "zh_Hans_Text",
-    "description": "zh_Hans_Text"
+    "localized_name": "Unidentified Pal",
+    "description": null
   },
   "CuteOrca": {
     "localized_name": "CuteOrca",
     "description": null
   },
   "DarkMutant": {
-    "localized_name": "zh_Hans_Text",
-    "description": "当zh_Hans_Text将它的技艺锻炼至精湛娴熟境界， 它的刃光一闪甚至能斩断时空，让空间产生裂缝。 据说部分帕鲁就是从这空间裂缝中出现的。"
+    "localized_name": "DarkMutant",
+    "description": "当DarkMutant将它的技艺锻炼至精湛娴熟境界， 它的刃光一闪甚至能斩断时空，让空间产生裂缝。 据说部分帕鲁就是从这空间裂缝中出现的。"
   },
   "DesertBoss": {
     "localized_name": "DesertBoss",
@@ -3368,8 +3368,8 @@
     "description": null
   },
   "GrassDragon": {
-    "localized_name": "zh_Hans_Text",
-    "description": "zh_Hans_Text"
+    "localized_name": "GrassDragon",
+    "description": "This Pal is under investigation."
   },
   "IceVeilDragon": {
     "localized_name": "IceVeilDragon",
@@ -3404,7 +3404,7 @@
     "description": null
   },
   "PinkKangaroo": {
-    "localized_name": "zh_Hans_Text",
+    "localized_name": "PinkKangaroo",
     "description": null
   },
   "RockCheetah": {
@@ -3424,8 +3424,8 @@
     "description": null
   },
   "StrawHatCat": {
-    "localized_name": "zh_Hans_Text",
-    "description": "zh_Hans_Text"
+    "localized_name": "Unidentified Pal",
+    "description": null
   },
   "TestAssassin": {
     "localized_name": "TestAssassin",
@@ -3440,12 +3440,12 @@
     "description": null
   },
   "VolcanicTurtle": {
-    "localized_name": "zh_Hans_Text",
-    "description": "zh_Hans_Text"
+    "localized_name": "Unidentified Pal",
+    "description": null
   },
   "WaterLizard": {
-    "localized_name": "zh_Hans_Text",
-    "description": "-"
+    "localized_name": "WaterLizard",
+    "description": null
   },
   "WorldTree_Hunter_MissileLauncher_test": {
     "localized_name": "WorldTree_Hunter_MissileLauncher_test",

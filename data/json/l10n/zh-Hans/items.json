@@ -484,20 +484,20 @@
     "description": "Animal Skin"
   },
   "AnimalSkin2": {
-    "localized_name": "AnimalSkin2",
-    "description": null
+    "localized_name": "Animal Skin",
+    "description": "Animal Skin"
   },
   "Antibiotic_Good": {
-    "localized_name": "Antibiotic_Good",
-    "description": null
+    "localized_name": "Antibiotic Good",
+    "description": "Antibiotic Good"
   },
   "Antibiotic_Normal": {
-    "localized_name": "Antibiotic_Normal",
-    "description": null
+    "localized_name": "Antibiotic Normal",
+    "description": "Antibiotic Normal"
   },
   "Antibiotic_Super": {
-    "localized_name": "Antibiotic_Super",
-    "description": null
+    "localized_name": "Antibiotic Super",
+    "description": "Antibiotic Super"
   },
   "Arrow": {
     "localized_name": "箭",
@@ -505,7 +505,7 @@
   },
   "Arrow_Fire": {
     "localized_name": "火箭",
-    "description": "弓射击时用的火箭。 可以对敌人造成ElemIcon_Fire火属性伤害。 可在「原始的作业台」制作。"
+    "description": "弓射击时用的火箭。 可以对敌人造成火属性伤害。 可在「原始的作业台」制作。"
   },
   "Arrow_Poison": {
     "localized_name": "毒箭",
@@ -732,8 +732,8 @@
     "description": "不论生吃还是烤熟都很美味的万能食材。 走在岛上随处可见。"
   },
   "Berries2": {
-    "localized_name": "Berries2",
-    "description": null
+    "localized_name": "Red Berries",
+    "description": "A versatile ingredient that is delicious raw or cooked. They can be found anywhere on the island."
   },
   "BerrySeeds": {
     "localized_name": "野莓种子",
@@ -1541,7 +1541,7 @@
   },
   "Blueprint_Head002_5": {
     "localized_name": "金冠设计图5",
-    "description": "拥有它将解锁「金冠 （传奇）」的配方。 可以在|原始的作业台|里制作。"
+    "description": "拥有它将解锁「金冠 （传奇）」的配方。 可以在「原始的作业台」里制作。"
   },
   "Blueprint_Head003_1": {
     "localized_name": "长耳发箍设计图1",
@@ -1601,7 +1601,7 @@
   },
   "Blueprint_Head005_5": {
     "localized_name": "软帽设计图纸5",
-    "description": "拥有它后，「费多拉帽（传奇）|的配方将被解锁。 可以在|原始的作业台|中进行制作。"
+    "description": "拥有它后，「费多拉帽（传奇）」的配方将被解锁。 可以在「原始的作业台」中进行制作。"
   },
   "Blueprint_Head006_1": {
     "localized_name": "安全帽设计图1",
@@ -1621,7 +1621,7 @@
   },
   "Blueprint_Head006_5": {
     "localized_name": "头盔设计图5",
-    "description": "拥有它后，「安全帽 （传奇）|的配方就被解锁了。 可以在|原始的作业台|进行工艺制作。"
+    "description": "拥有它后，「安全帽 （传奇）」的配方就被解锁了。 可以在「原始的作业台」进行工艺制作。"
   },
   "Blueprint_Head007_1": {
     "localized_name": "大礼帽设计图1",
@@ -1641,7 +1641,7 @@
   },
   "Blueprint_Head007_5": {
     "localized_name": "丝绸高帽子的设计图5",
-    "description": "拥有它后，将会解锁| 大礼帽（传奇）」的配方。 可在「原始的作业台 |中进行手工制作。"
+    "description": "拥有它后，将会解锁「 大礼帽（传奇）」的配方。 可在「原始的作业台 」中进行手工制作。"
   },
   "Blueprint_Head008_1": {
     "localized_name": "三角帽设计图1",
@@ -1661,7 +1661,7 @@
   },
   "Blueprint_Head008_5": {
     "localized_name": "三角帽设计图纸5",
-    "description": "拥有它，就可以解锁“三角帽 （传奇）|的配方。可以在“原始的作业台|中进行制作。"
+    "description": "拥有它，就可以解锁“三角帽 （传奇）”的配方。可以在“原始的作业台”中进行制作。"
   },
   "Blueprint_Head009_1": {
     "localized_name": "探险帽设计图1",
@@ -1681,7 +1681,7 @@
   },
   "Blueprint_Head009_5": {
     "localized_name": "探险帽设计图5",
-    "description": "拥有后，可以解锁「探险帽（传奇）」的配方。可以在|原始的作业台|进行制作。"
+    "description": "拥有后，可以解锁「探险帽（传奇）」的配方。可以在「原始的作业台」进行制作。"
   },
   "Blueprint_Head010_1": {
     "localized_name": "学士帽设计图1",
@@ -1701,7 +1701,7 @@
   },
   "Blueprint_Head010_5": {
     "localized_name": "大学帽设计图5",
-    "description": "持有它后，解锁了「学士帽(传奇)|的配方。在|原始的作业台|中可以制作。"
+    "description": "持有它后，解锁了「学士帽(传奇)」的配方。在「原始的作业台」中可以制作。"
   },
   "Blueprint_Head011_1": {
     "localized_name": "农夫帽设计图1",
@@ -1721,7 +1721,7 @@
   },
   "Blueprint_Head011_5": {
     "localized_name": "农业帽子设计图5",
-    "description": "拥有后，将解锁「农夫帽 （传奇）」的配方。 可以在|原始的作业台|进行手工制作。"
+    "description": "拥有后，将解锁「农夫帽 （传奇）」的配方。 可以在「原始的作业台」进行手工制作。"
   },
   "Blueprint_Head012_1": {
     "localized_name": "圆顶礼帽的设计图1",
@@ -1741,7 +1741,7 @@
   },
   "Blueprint_Head012_5": {
     "localized_name": "圆顶礼帽的设计图5",
-    "description": "持有它后， 「圆顶礼帽 （传奇）|的配方会被解锁。 可以在|原始的作业台|中进行制作。"
+    "description": "持有它后， 「圆顶礼帽 （传奇）」的配方会被解锁。 可以在「原始的作业台」中进行制作。"
   },
   "Blueprint_Head013_1": {
     "localized_name": "炸蛋鸟帽设计图1",
@@ -1761,7 +1761,7 @@
   },
   "Blueprint_Head013_5": {
     "localized_name": "的设计图5",
-    "description": "拥有它后，「炸蛋鸟帽 （传奇）|的配方就会被解锁。 您可以在“原始的作业台|上进行制作。"
+    "description": "拥有它后，「炸蛋鸟帽 （传奇）」的配方就会被解锁。 您可以在“原始的作业台”上进行制作。"
   },
   "Blueprint_Head014_1": {
     "localized_name": "笑脸炸蛋鸟帽设计图1",
@@ -1781,7 +1781,7 @@
   },
   "Blueprint_Head014_5": {
     "localized_name": "咧咧微笑螺旋帽的设计图5",
-    "description": "持有后，会解锁「笑脸炸蛋鸟帽 （传奇）」的配方。 可以在“原始的作业台|中进行制作。"
+    "description": "持有后，会解锁「笑脸炸蛋鸟帽 （传奇）」的配方。 可以在“原始的作业台”中进行制作。"
   },
   "Blueprint_Head015_1": {
     "localized_name": "叶泥泥帽设计图1",
@@ -1801,7 +1801,7 @@
   },
   "Blueprint_Head015_5": {
     "localized_name": "纳恩魔帽设计图5",
-    "description": "拥有它之后，“叶泥泥帽 （传奇）|的配方将被解锁。 可以在“原始的作业台|进行手工制作。"
+    "description": "拥有它之后，“叶泥泥帽 （传奇）”的配方将被解锁。 可以在“原始的作业台”进行手工制作。"
   },
   "Blueprint_Head016_1": {
     "localized_name": "企丸王帽设计图1",
@@ -3716,8 +3716,8 @@
     "description": "Claw"
   },
   "Claws2": {
-    "localized_name": "Claws2",
-    "description": null
+    "localized_name": "Claw",
+    "description": "Claw"
   },
   "Cloth": {
     "localized_name": "布",
@@ -4160,8 +4160,8 @@
     "description": "Fang"
   },
   "Fang2": {
-    "localized_name": "Fang2",
-    "description": null
+    "localized_name": "Fang",
+    "description": "Fang"
   },
   "Fiber": {
     "localized_name": "纤维",
@@ -5476,8 +5476,8 @@
     "description": "源自帕鲁的皮革，可用来制作防具。 可从部分帕鲁身上取得。"
   },
   "Leather2": {
-    "localized_name": "Leather2",
-    "description": null
+    "localized_name": "Leather",
+    "description": "Leather taken from a Pal, it serves as a defensive material. It can be obtained from certain Pals."
   },
   "Lettuce": {
     "localized_name": "生菜",
@@ -5537,7 +5537,7 @@
   },
   "LuxuryOmelette": {
     "localized_name": "LuxuryOmelette",
-    "description": null
+    "description": "LuxuryOmelette"
   },
   "LvUP_01": {
     "localized_name": "修炼结晶",
@@ -5660,8 +5660,8 @@
     "description": "帕鲁的肉。 十分新鲜，几乎可供人类生食。"
   },
   "Meat2": {
-    "localized_name": "Meat2",
-    "description": null
+    "localized_name": "Meat",
+    "description": "Pal meat. It’s so fresh that even a human could safely eat it raw."
   },
   "MeatAndPotatoes": {
     "localized_name": "土豆炖天擒鸟肉",
@@ -6205,75 +6205,75 @@
   },
   "PalAwakening_Dark": {
     "localized_name": "暗之觉醒晶石",
-    "description": "浓缩了世界树能量的结晶。 可以让ElemIcon_Dark暗属性的帕鲁觉醒，解放其隐藏的能力。"
+    "description": "浓缩了世界树能量的结晶。 可以让暗属性的帕鲁觉醒，解放其隐藏的能力。"
   },
   "PalAwakening_Dragon": {
     "localized_name": "龙之觉醒晶石",
-    "description": "浓缩了世界树能量的结晶。 可以让ElemIcon_Dragon龙属性的帕鲁觉醒，解放其隐藏的能力。"
+    "description": "浓缩了世界树能量的结晶。 可以让龙属性的帕鲁觉醒，解放其隐藏的能力。"
   },
   "PalAwakening_Electric": {
     "localized_name": "雷之觉醒晶石",
-    "description": "浓缩了世界树能量的结晶。 可以让ElemIcon_Electric雷属性的帕鲁觉醒，解放其隐藏的能力。"
+    "description": "浓缩了世界树能量的结晶。 可以让雷属性的帕鲁觉醒，解放其隐藏的能力。"
   },
   "PalAwakening_Fire": {
     "localized_name": "火之觉醒晶石",
-    "description": "浓缩了世界树能量的结晶。 可以让ElemIcon_Fire火属性的帕鲁觉醒，解放其隐藏的能力。"
+    "description": "浓缩了世界树能量的结晶。 可以让火属性的帕鲁觉醒，解放其隐藏的能力。"
   },
   "PalAwakening_Grass": {
     "localized_name": "草之觉醒晶石",
-    "description": "浓缩了世界树能量的结晶。 可以让ElemIcon_Grass草属性的帕鲁觉醒，解放其隐藏的能力。"
+    "description": "浓缩了世界树能量的结晶。 可以让草属性的帕鲁觉醒，解放其隐藏的能力。"
   },
   "PalAwakening_Ground": {
     "localized_name": "地之觉醒晶石",
-    "description": "浓缩了世界树能量的结晶。 可以让ElemIcon_Ground地属性的帕鲁觉醒，解放其隐藏的能力。"
+    "description": "浓缩了世界树能量的结晶。 可以让地属性的帕鲁觉醒，解放其隐藏的能力。"
   },
   "PalAwakening_Ice": {
     "localized_name": "冰之觉醒晶石",
-    "description": "浓缩了世界树能量的结晶。 可以让ElemIcon_Ice冰属性的帕鲁觉醒，解放其隐藏的能力。"
+    "description": "浓缩了世界树能量的结晶。 可以让冰属性的帕鲁觉醒，解放其隐藏的能力。"
   },
   "PalAwakening_Material_Dark": {
     "localized_name": "暗之辉石",
-    "description": "世界树的能量积聚在帕鲁体内形成的石头。 加工后可以制成道具， 解放ElemIcon_Dark暗属性帕鲁体内隐藏的能力。"
+    "description": "世界树的能量积聚在帕鲁体内形成的石头。 加工后可以制成道具， 解放暗属性帕鲁体内隐藏的能力。"
   },
   "PalAwakening_Material_Dragon": {
     "localized_name": "龙之辉石",
-    "description": "世界树的能量积聚在帕鲁体内形成的石头。 加工后可以制成道具， 解放ElemIcon_Dragon龙属性帕鲁体内隐藏的能力。"
+    "description": "世界树的能量积聚在帕鲁体内形成的石头。 加工后可以制成道具， 解放龙属性帕鲁体内隐藏的能力。"
   },
   "PalAwakening_Material_Electric": {
     "localized_name": "雷之辉石",
-    "description": "世界树的能量积聚在帕鲁体内形成的石头。 加工后可以制成道具， 解放ElemIcon_Electric雷属性帕鲁体内隐藏的能力。"
+    "description": "世界树的能量积聚在帕鲁体内形成的石头。 加工后可以制成道具， 解放雷属性帕鲁体内隐藏的能力。"
   },
   "PalAwakening_Material_Fire": {
     "localized_name": "火之辉石",
-    "description": "世界树的能量积聚在帕鲁体内形成的石头。 加工后可以制成道具， 解放ElemIcon_Fire火属性帕鲁体内隐藏的能力。"
+    "description": "世界树的能量积聚在帕鲁体内形成的石头。 加工后可以制成道具， 解放火属性帕鲁体内隐藏的能力。"
   },
   "PalAwakening_Material_Grass": {
     "localized_name": "草之辉石",
-    "description": "世界树的能量积聚在帕鲁体内形成的石头。 加工后可以制成道具， 解放ElemIcon_Grass草属性帕鲁体内隐藏的能力。"
+    "description": "世界树的能量积聚在帕鲁体内形成的石头。 加工后可以制成道具， 解放草属性帕鲁体内隐藏的能力。"
   },
   "PalAwakening_Material_Ground": {
     "localized_name": "地之辉石",
-    "description": "世界树的能量积聚在帕鲁体内形成的石头。 加工后可以制成道具， 解放ElemIcon_Ground地属性帕鲁体内隐藏的能力。"
+    "description": "世界树的能量积聚在帕鲁体内形成的石头。 加工后可以制成道具， 解放地属性帕鲁体内隐藏的能力。"
   },
   "PalAwakening_Material_Ice": {
     "localized_name": "冰之辉石",
-    "description": "世界树的能量积聚在帕鲁体内形成的石头。 加工后可以制成道具， 解放ElemIcon_Ice冰属性帕鲁体内隐藏的能力。"
+    "description": "世界树的能量积聚在帕鲁体内形成的石头。 加工后可以制成道具， 解放冰属性帕鲁体内隐藏的能力。"
   },
   "PalAwakening_Material_Neutral": {
     "localized_name": "无之辉石",
-    "description": "世界树的能量积聚在帕鲁体内形成的石头。 加工后可以制成道具， 觉醒ElemIcon_Neutral无属性帕鲁体内隐藏的能力。"
+    "description": "世界树的能量积聚在帕鲁体内形成的石头。 加工后可以制成道具， 觉醒无属性帕鲁体内隐藏的能力。"
   },
   "PalAwakening_Material_Water": {
     "localized_name": "水之辉石",
-    "description": "世界树的能量积聚在帕鲁体内形成的石头。 加工后可以制成道具， 解放ElemIcon_Water水属性帕鲁体内隐藏的能力。"
+    "description": "世界树的能量积聚在帕鲁体内形成的石头。 加工后可以制成道具， 解放水属性帕鲁体内隐藏的能力。"
   },
   "PalAwakening_Neutral": {
     "localized_name": "无之觉醒晶石",
-    "description": "浓缩了世界树能量的结晶。 可以让ElemIcon_Neutral无属性的帕鲁觉醒，解放其隐藏的能力。"
+    "description": "浓缩了世界树能量的结晶。 可以让无属性的帕鲁觉醒，解放其隐藏的能力。"
   },
   "PalAwakening_Water": {
     "localized_name": "水之觉醒晶石",
-    "description": "浓缩了世界树能量的结晶。 可以让ElemIcon_Water水属性的帕鲁觉醒，解放其隐藏的能力。"
+    "description": "浓缩了世界树能量的结晶。 可以让水属性的帕鲁觉醒，解放其隐藏的能力。"
   },
   "PalCrystal_Ex": {
     "localized_name": "古代文明部件",
@@ -6440,8 +6440,8 @@
     "description": "巨大新绿帕鲁蛋。 能感受到深绿灵魂的蓬勃生气，彷彿某种奇特生物即将破壳而出。 把它放进帕鲁蛋孵化器裡孵化吧。"
   },
   "PalEgg_MutationPal": {
-    "localized_name": "zh_Hans_Text",
-    "description": "[WIP] Description not finalized. A zh_Hans_Text. You can feel the restless aura of a strange soul, as if a monster is about to be born. Place it in a 帕鲁蛋孵化器 to hatch it."
+    "localized_name": "巨大突变帕鲁蛋",
+    "description": "[WIP] Description not finalized. A Huge Mutated Egg. You can feel the restless aura of a strange soul, as if a monster is about to be born. Place it in a Egg Incubator to hatch it."
   },
   "PalEgg_MutationPal_01": {
     "localized_name": "突变帕鲁蛋",
@@ -7189,7 +7189,7 @@
   },
   "PotatoSeedPotatoes": {
     "localized_name": "PotatoSeedPotatoes",
-    "description": null
+    "description": "PotatoSeedPotatoes"
   },
   "PotatoSeeds": {
     "localized_name": "土豆种薯",
@@ -8009,7 +8009,7 @@
   },
   "SkillUnlock_BlackFurDragon": {
     "localized_name": "Shadora shot弹枪",
-    "description": "|在「帕鲁装备制作台」中， 「Shadora shot弹枪」能够被制作。"
+    "description": "「在「帕鲁装备制作台」中， 「Shadora shot弹枪」能够被制作。"
   },
   "SkillUnlock_BlackGriffon": {
     "localized_name": "异构格里芬的鞍具",
@@ -8097,7 +8097,7 @@
   },
   "SkillUnlock_ElecLion": {
     "localized_name": "里约贤者马鞍",
-    "description": "zh_Hans_Text"
+    "description": "A tool for safely riding Boltmane."
   },
   "SkillUnlock_ElecPanda": {
     "localized_name": "暴电熊的机关枪",
@@ -8644,16 +8644,16 @@
     "description": "用烈阳金属锭制造的榴弹发射器。 提升了弹道稳定性，可实现高精度远程轰炸。"
   },
   "SkyHeavyBullet": {
-    "localized_name": "zh_Hans_Text",
-    "description": "[WIP] Description not finalized. Ammo for the 原型霰弹枪, 战术榴弹发射器, and similar weapons."
+    "localized_name": "Sunreach Single-Shot Ammo",
+    "description": "[WIP] Description not finalized. Ammo for the Prototype Shotgun, Tactical Grenade Launcher, and similar weapons."
   },
   "SkyIslandOre": {
     "localized_name": "烈阳金属",
     "description": "只有在天阳乡才能开采到的稀有矿石。 密度极高的母岩有着神秘的花纹，其中蕴含着光辉。"
   },
   "SkyLightBullet": {
-    "localized_name": "zh_Hans_Text",
-    "description": "[WIP] Description not finalized. Ammo for the 战斗冲锋枪, 重型突击步枪, and similar weapons."
+    "localized_name": "Sunreach Rapid-Fire Ammo",
+    "description": "[WIP] Description not finalized. Ammo for the Combat SMG, Heavy Assault Rifle, and similar weapons."
   },
   "SkyShotgun": {
     "localized_name": "原型霰弹枪",
@@ -9552,8 +9552,8 @@
     "description": "生火时必不可少的素材。 偶尔可在挖石头时发现。"
   },
   "Gasoline": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Gasoline",
+    "description": null
   },
   "IronOre": {
     "localized_name": "IronOre",
@@ -9608,8 +9608,8 @@
     "description": null
   },
   "Propellant": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Propellant",
+    "description": null
   },
   "Pumpkin": {
     "localized_name": "Pumpkin",
@@ -9640,8 +9640,8 @@
     "description": null
   },
   "Shield_05": {
-    "localized_name": "Shield_05",
-    "description": null
+    "localized_name": "超级护盾",
+    "description": "以帕鲁矿技术制成的神奇护盾。 一定时间不受攻击时可自动修复。 在进一步多次实验后，结果实现了究极的品质。"
   },
   "Silicon": {
     "localized_name": "硅",

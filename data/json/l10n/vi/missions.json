@@ -13,7 +13,7 @@
   },
   "Main_BuildPalBox": {
     "localized_name": "Căn Cứ Khởi Đầu",
-    "description": "Mở Menu Xây Dựng bằng <keyGuideIcon id=|OpenConstructionMenu| iconScale=|0.7|/>, sau đó thử đặt Palbox trên một khu đất rộng. Đây là căn cứ đầu tiên của bạn và Pal, và cũng là điểm khởi đầu cho chuyến thám hiểm. Nếu chuẩn bị tốt, đó sẽ là chỗ dựa vững chắc khi tiến đến các tòa tháp sau này. Hãy chọn vị trí cẩn thận."
+    "description": "Mở Menu Xây Dựng, sau đó thử đặt Palbox trên một khu đất rộng. Đây là căn cứ đầu tiên của bạn và Pal, và cũng là điểm khởi đầu cho chuyến thám hiểm. Nếu chuẩn bị tốt, đó sẽ là chỗ dựa vững chắc khi tiến đến các tòa tháp sau này. Hãy chọn vị trí cẩn thận."
   },
   "Main_BuildWorkBench_Old": {
     "localized_name": "Bắt Đầu Làm Việc",
@@ -41,7 +41,7 @@
   },
   "Main_CaptureSheepBall_Old": {
     "localized_name": "Pal Yếu Nhất",
-    "description": "Đảo Palpagos là thế giới của kẻ mạnh, nơi |cá lớn nuốt cá bé|. SheepBall là loài Pal nằm dưới đáy chuỗi thức ăn và rất dễ bắt. Tuy nhiên, với sự khéo léo, chúng có thể hỗ trợ bạn thực hiện nhiều công việc khác nhau. Đầu tiên, hãy thử bắt 5 con SheepBall. Chúng sẽ là những cộng sự đáng tin cậy cho bước khởi đầu để mở rộng căn cứ. Bạn cũng có thể thu được những vật liệu thiết yếu để sinh tồn từ Lamball , như Lông Cừu hoặc Thịt Cừu Lamball . Để tồn tại trong thế giới khắc nghiệt này, bạn phải tận dụng mọi thứ có thể."
+    "description": "Đảo Palpagos là thế giới của kẻ mạnh, nơi \"cá lớn nuốt cá bé\". SheepBall là loài Pal nằm dưới đáy chuỗi thức ăn và rất dễ bắt. Tuy nhiên, với sự khéo léo, chúng có thể hỗ trợ bạn thực hiện nhiều công việc khác nhau. Đầu tiên, hãy thử bắt 5 con SheepBall. Chúng sẽ là những cộng sự đáng tin cậy cho bước khởi đầu để mở rộng căn cứ. Bạn cũng có thể thu được những vật liệu thiết yếu để sinh tồn từ Lamball , như Lông Cừu hoặc Thịt Cừu Lamball . Để tồn tại trong thế giới khắc nghiệt này, bạn phải tận dụng mọi thứ có thể."
   },
   "Main_CatchPal": {
     "localized_name": "Bắt giữ Pal",
@@ -433,7 +433,7 @@
   },
   "Sub_StrongOldMan03": {
     "localized_name": "Kẻ Đại Diện",
-    "description": "Bạn gặp lại Harold lần nữa, nhưng lần này ống ấy có vẻ trầm lặng hơn thường lệ. Nhiệm vụ ông ấy nhận từ ngôi làng gần đó là khống chế một Pal đang phát điên. Với vẻ mặt đượm buồn, Harold đã mô tả chi tiết nhiệm vụ và đưa ra một đề xuất. |Bạn có thể đảm nhận nhiệm vụ này không?| Khi bạn đồng ý, Harold lộ rõ vẻ nhẹ nhõm trong giây lát… nhưng một nỗi buồn sâu thẳm vẫn hiện lên trên khuôn mặt ủ rũ của ông ấy."
+    "description": "Bạn gặp lại Harold lần nữa, nhưng lần này ống ấy có vẻ trầm lặng hơn thường lệ. Nhiệm vụ ông ấy nhận từ ngôi làng gần đó là khống chế một Pal đang phát điên. Với vẻ mặt đượm buồn, Harold đã mô tả chi tiết nhiệm vụ và đưa ra một đề xuất. \"Bạn có thể đảm nhận nhiệm vụ này không?\" Khi bạn đồng ý, Harold lộ rõ vẻ nhẹ nhõm trong giây lát… nhưng một nỗi buồn sâu thẳm vẫn hiện lên trên khuôn mặt ủ rũ của ông ấy."
   },
   "Sub_StrongOldMan04": {
     "localized_name": "Quá Khứ",

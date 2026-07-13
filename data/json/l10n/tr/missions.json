@@ -13,7 +13,7 @@
   },
   "Main_BuildPalBox": {
     "localized_name": "Başlangıç Üssü",
-    "description": "<keyGuideIcon id=|OpenConstructionMenu| iconScale=|0.7|/>ile inşa menüsünü aç vePal Kutusuöğesini büyük bir arazi parçasına yerleştir. Bu senin ve Pal'ın ilk üssü olacak ve eğer onu seferinin başlangıç noktası olarak hazırlarsan, sonunda kuleye doğru yola çıktığında sana çok yardımcı olacaktır. Konumu dikkatlice seç."
+    "description": "İnşa menüsünü aç ve Pal Kutusu öğesini büyük bir arazi parçasına yerleştir. Bu senin ve Pal'ın ilk üssü olacak ve eğer onu seferinin başlangıç noktası olarak hazırlarsan, sonunda kuleye doğru yola çıktığında sana çok yardımcı olacaktır. Konumu dikkatlice seç."
   },
   "Main_BuildWorkBench_Old": {
     "localized_name": "Çalışmanın başlangıç noktası",
@@ -45,7 +45,7 @@
   },
   "Main_CatchPal": {
     "localized_name": "Pal'ın Lütfu",
-    "description": "Pal KüresiÜretimi ve Pal Yakalama: Muhtemelen fark etmişsindir ama bu adada çok sayıda bilinmeyen canlı yaşıyor. |Pal| olarak adlandırılan bu varlıkların, kendilerine özgü zengin ekolojik özelliklere ve yüksek zekaya sahip oldukları, araştırma faaliyetlerimizde bize büyük ölçüde yardımcı olabilecekleri anlaşıldı. Pallar, |Pal Küresi| adı verilen bir araç kullanılarak yakalanabilir. Hangi prensiple çalıştığı bilinmiyor ama... yakalanan Pallar, temel olarak insanlara itaatkar varlıklar haline gelir. Pal KüresiMenüden Teknoloji ekranını açıpüretim yöntemini kontrol ettikten sonra, materyal olarak gerekenPaldiyum Kırığıcevherini elde et. Bu mavi parlayan gizemli cevherler, genellikle su kenarlarında oluşuyor gibi görünüyor. ardından,İlkel TezgâhüzerindePal Küresiüretirsen, yakalama hazırlığın tamamlanmış olur. Yakalama esnasında, hedefin canını mümkün olduğunca azaltmak dirençlerini zayıflatır ve başarı oranını artırır. Ayrıca çoğu Pal karşı saldırıya geçeceği için, ekipmanların tam değilken düşük savaş gücüne sahip küçük Palları hedeflemelisin."
+    "description": "Pal KüresiÜretimi ve Pal Yakalama: Muhtemelen fark etmişsindir ama bu adada çok sayıda bilinmeyen canlı yaşıyor. \"Pal\" olarak adlandırılan bu varlıkların, kendilerine özgü zengin ekolojik özelliklere ve yüksek zekaya sahip oldukları, araştırma faaliyetlerimizde bize büyük ölçüde yardımcı olabilecekleri anlaşıldı. Pallar, \"Pal Küresi\" adı verilen bir araç kullanılarak yakalanabilir. Hangi prensiple çalıştığı bilinmiyor ama... yakalanan Pallar, temel olarak insanlara itaatkar varlıklar haline gelir. Pal KüresiMenüden Teknoloji ekranını açıpüretim yöntemini kontrol ettikten sonra, materyal olarak gerekenPaldiyum Kırığıcevherini elde et. Bu mavi parlayan gizemli cevherler, genellikle su kenarlarında oluşuyor gibi görünüyor. ardından,İlkel TezgâhüzerindePal Küresiüretirsen, yakalama hazırlığın tamamlanmış olur. Yakalama esnasında, hedefin canını mümkün olduğunca azaltmak dirençlerini zayıflatır ve başarı oranını artırır. Ayrıca çoğu Pal karşı saldırıya geçeceği için, ekipmanların tam değilken düşük savaş gücüne sahip küçük Palları hedeflemelisin."
   },
   "Main_CollectCrystal": {
     "localized_name": "Paldiyum",
@@ -61,7 +61,7 @@
   },
   "Main_CraftPalGear": {
     "localized_name": "Pal Teçhizatı Üretimi",
-    "description": "Küçük yerleşkenin liderinden, Palpagos Adası'nın geçmişi hakkında bilgi edinmek istiyorsan Kaçakçı Grubu liderinin tek kızı olan |Zoe|yi ziyaret etmen önerildi. Ancak önce liderin dediği gibi,Foxparksyakalayıp |Pal Gear| (Pal Ekipmanı) yaparak kuleye gitme hazırlıklarını tamamlamalısın."
+    "description": "Küçük yerleşkenin liderinden, Palpagos Adası'nın geçmişi hakkında bilgi edinmek istiyorsan Kaçakçı Grubu liderinin tek kızı olan \"Zoe\"yi ziyaret etmen önerildi. Ancak önce liderin dediği gibi,Foxparksyakalayıp \"Pal Gear\" (Pal Ekipmanı) yaparak kuleye gitme hazırlıklarını tamamlamalısın."
   },
   "Main_CraftPalSphere": {
     "localized_name": "Tuzak",
@@ -89,7 +89,7 @@
   },
   "Main_DefeatForestBoss": {
     "localized_name": "Sen, Pal'a zarar vermeyeceksin",
-    "description": "Sen, Zoe Rayne'i yendin ve |Kıskançlık Anahtar Küresi|ni ele geçirdin. Bir sonraki hedefin Pal Koruma Birliği'nin kulesi."
+    "description": "Sen, Zoe Rayne'i yendin ve \"Kıskançlık Anahtar Küresi\"ni ele geçirdin. Bir sonraki hedefin Pal Koruma Birliği'nin kulesi."
   },
   "Main_DefeatGrassBoss": {
     "localized_name": "Kız ve Kule",
@@ -101,23 +101,23 @@
   },
   "Main_DefeatSakurajimaBoss": {
     "localized_name": "Bu gece sake çok lezzetli",
-    "description": "Sen, Victor Ashford'u yendin ve |Oburluk Anahtar Küresi|ni ele geçirdin. Bir sonraki hedefin Ay Çiçeği Müritleri'nin kulesi."
+    "description": "Sen, Victor Ashford'u yendin ve \"Oburluk Anahtar Küresi\"ni ele geçirdin. Bir sonraki hedefin Ay Çiçeği Müritleri'nin kulesi."
   },
   "Main_DefeatSkyIslandBoss": {
     "localized_name": "Bin yıl gibi gelen bir gün, bahar geldiğinde",
-    "description": "Sen, Bjorn Seligson'u yendin ve |Öfke Anahtar Küresi|ni ele geçirdin. Bir sonraki hedefin Ahit Kulesi."
+    "description": "Sen, Bjorn Seligson'u yendin ve \"Öfke Anahtar Küresi\"ni ele geçirdin. Bir sonraki hedefin Ahit Kulesi."
   },
   "Main_DefeatSnowyMountainBoss": {
     "localized_name": "Pal Bağlama Deneyi",
-    "description": "Sen, Marcus Dryden'ı yendin ve Açgözlülük Anahtar Küresi|ni ele geçirdin. Bir sonraki hedefin Genetik Araştırma Birimi'nin kulesi."
+    "description": "Sen, Marcus Dryden'ı yendin ve \"Açgözlülük Anahtar Küresi\"ni ele geçirdin. Bir sonraki hedefin Genetik Araştırma Birimi'nin kulesi."
   },
   "Main_DefeatVikingBoss": {
     "localized_name": "Tüm sorumluluğu üstlenen kişi",
-    "description": "Sen, Saya Kurosaki'yi yendin ve |Şehvet Anahtar Küresi|ni ele geçirdin. Bir sonraki hedefin Feybreak Kulesi."
+    "description": "Sen, Saya Kurosaki'yi yendin ve \"Şehvet Anahtar Küresi\"ni ele geçirdin. Bir sonraki hedefin Feybreak Kulesi."
   },
   "Main_DefeatVolcanoBoss": {
     "localized_name": "Mutlak Zafer Saplantısı",
-    "description": "Sen, Lily Everhart'ı yendin ve |Kibir Anahtar Küresi|ni ele geçirdin. Bir sonraki hedefin Ebedi Ateş Yoldaşlığı'nın kulesi."
+    "description": "Sen, Lily Everhart'ı yendin ve \"Kibir Anahtar Küresi\"ni ele geçirdin. Bir sonraki hedefin Ebedi Ateş Yoldaşlığı'nın kulesi."
   },
   "Main_DefeatWildBoss": {
     "localized_name": "İlk Boss İmhası",
@@ -161,7 +161,7 @@
   },
   "Main_RayneSyndicate": {
     "localized_name": "Rayne Örgütü",
-    "description": "eterli hazırlıkları yaptın. Kaçakçı Grubu'nun kulesine yönel ve |Zoe| ile görüşmeye git."
+    "description": "eterli hazırlıkları yaptın. Kaçakçı Grubu'nun kulesine yönel ve \"Zoe\" ile görüşmeye git."
   },
   "Main_ReachWorldTree": {
     "localized_name": "Dünya Ağacı'na",
@@ -321,7 +321,7 @@
   },
   "Sub_Nomad02": {
     "localized_name": "Pırıl pırıl ve pürüzsüz",
-    "description": "Gece parıltılarına |gece yıldızı kumu| deniyormuş. Güneş battıktan sonra gizlice parlamaya başlıyorlar. Eğer fazla varsa, benimle paylaşır mısın? 10 tane yeterli olur."
+    "description": "Gece parıltılarına \"gece yıldızı kumu\" deniyormuş. Güneş battıktan sonra gizlice parlamaya başlıyorlar. Eğer fazla varsa, benimle paylaşır mısın? 10 tane yeterli olur."
   },
   "Sub_Nomad03": {
     "localized_name": "Zindan Arayışı",
@@ -433,7 +433,7 @@
   },
   "Sub_StrongOldMan03": {
     "localized_name": "Temsilci",
-    "description": "Harold ile tekrar karşılaştın ancak her zamanki neşesinden eser yok. Yakındaki bir köyden aldığı görev, kontrolden çıkmış bir Pal'ın etkisiz hale getirilmesi üzerine. Karanlık bir ifadeyle görevin detaylarını anlatan Harold, bir teklifte bulundu. |Bu görevi sen üstlenmez misin?| Sen teklifi kabul edince Harold bir anlığına rahatlamış gibi göründü ama... Başını hafifçe öne eğdiğinde, yüzündeki gölge daha da derinleşmişti."
+    "description": "Harold ile tekrar karşılaştın ancak her zamanki neşesinden eser yok. Yakındaki bir köyden aldığı görev, kontrolden çıkmış bir Pal'ın etkisiz hale getirilmesi üzerine. Karanlık bir ifadeyle görevin detaylarını anlatan Harold, bir teklifte bulundu. \"Bu görevi sen üstlenmez misin?\" Sen teklifi kabul edince Harold bir anlığına rahatlamış gibi göründü ama... Başını hafifçe öne eğdiğinde, yüzündeki gölge daha da derinleşmişti."
   },
   "Sub_StrongOldMan04": {
     "localized_name": "Geçmiş",

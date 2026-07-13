@@ -801,7 +801,8 @@
     "hp": 2000,
     "defense": 2,
     "deterioration_damage": 0.08,
-    "icon": "t_icon_buildobject_banyan_big"
+    "icon": "t_icon_buildobject_banyan_big",
+    "disabled": true
   },
   "Barrel01_Iron": {
     "type_a": "Furniture",
@@ -2305,7 +2306,8 @@
     "hp": 1000000,
     "defense": 100,
     "deterioration_damage": 0.0,
-    "icon": "t_icon_buildobject_damagedscarecrow_test"
+    "icon": "t_icon_buildobject_damagedscarecrow_test",
+    "disabled": true
   },
   "DarkIsland_Banner": {
     "type_a": "Furniture",
@@ -2381,7 +2383,8 @@
     "hp": 2000,
     "defense": 2,
     "deterioration_damage": 0.08,
-    "icon": "t_icon_buildobject_decal_palsticker_pinkcat"
+    "icon": "t_icon_buildobject_decal_palsticker_pinkcat",
+    "disabled": true
   },
   "DefenseBowGun": {
     "type_a": "Defense",
@@ -2469,7 +2472,8 @@
     "hp": 10000,
     "defense": 3,
     "deterioration_damage": 0.2,
-    "icon": "t_icon_buildobject_defensemachinegun_autoturret"
+    "icon": "t_icon_buildobject_defensemachinegun_autoturret",
+    "disabled": true
   },
   "DefenseMissile": {
     "type_a": "Defense",
@@ -11261,7 +11265,8 @@
     "hp": 500,
     "defense": 1,
     "deterioration_damage": 0.0,
-    "icon": "t_icon_buildobject_trap_movingpanel"
+    "icon": "t_icon_buildobject_trap_movingpanel",
+    "disabled": true
   },
   "Trap_Noose": {
     "type_a": "Defense",
@@ -12113,7 +12118,8 @@
     "hp": 500,
     "defense": 4,
     "deterioration_damage": 0.005,
-    "icon": "t_icon_buildobject_japanesestyle_trianglestairscorner_02"
+    "icon": "t_icon_buildobject_japanesestyle_trianglestairscorner",
+    "disabled": true
   },
   "WoodCreator": {
     "type_a": "Other",
@@ -12137,6 +12143,7 @@
     "hp": 4000,
     "defense": 6,
     "deterioration_damage": 0.16,
-    "icon": "t_icon_buildobject_woodcreator"
+    "icon": "t_icon_buildobject_woodcreator",
+    "disabled": true
   }
 }

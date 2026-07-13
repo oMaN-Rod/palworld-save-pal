@@ -349,7 +349,7 @@
   },
   "Crusher": {
     "localized_name": "Pressa",
-    "description": "Una struttura per ridurre in polvere Pietra o Legno e ottenere così altri tipi di risorse. Sono necessari Pal competenti nell'attività |Irrigazione| per usare la ruota idraulica."
+    "description": "Una struttura per ridurre in polvere Pietra o Legno e ottenere così altri tipi di risorse. Sono necessari Pal competenti nell'attività \"Irrigazione\" per usare la ruota idraulica."
   },
   "CrystalPit": {
     "localized_name": "Cava di exoquarzo",
@@ -381,11 +381,11 @@
   },
   "DefenseBowGun": {
     "localized_name": "Balestra a postazione fissa",
-    "description": "Struttura difensiva che può essere utilizzata in combattimento da un Pal. Un Pal competente nell'attività |lavoro manuale| potrà proteggere la base con la balestra."
+    "description": "Struttura difensiva che può essere utilizzata in combattimento da un Pal. Un Pal competente nell'attività \"lavoro manuale\" potrà proteggere la base con la balestra."
   },
   "DefenseMachinegun": {
     "localized_name": "Mitragliatrice a postazione fissa",
-    "description": "Struttura difensiva che può essere utilizzata in combattimento da un Pal. Un Pal competente nell'attività |lavoro manuale| potrà proteggere la base con la mitragliatrice."
+    "description": "Struttura difensiva che può essere utilizzata in combattimento da un Pal. Un Pal competente nell'attività \"lavoro manuale\" potrà proteggere la base con la mitragliatrice."
   },
   "DefenseMachinegun_AutoTurret": {
     "localized_name": "Torretta dell'antica civiltà",
@@ -393,7 +393,7 @@
   },
   "DefenseMissile": {
     "localized_name": "Lanciarazzi a postazione fissa",
-    "description": "Struttura difensiva che può essere utilizzata in combattimento da un Pal. Un Pal competente nell'attività |lavoro manuale| potrà proteggere la base con il lanciarazzi."
+    "description": "Struttura difensiva che può essere utilizzata in combattimento da un Pal. Un Pal competente nell'attività \"lavoro manuale\" potrà proteggere la base con il lanciarazzi."
   },
   "DefenseWait": {
     "localized_name": "Sacco di sabbia",
@@ -425,7 +425,7 @@
   },
   "DismantlingConveyor": {
     "localized_name": "Smantella-Pal",
-    "description": "Una macchina da sogno che |smantella| automaticamente i Pal inseriti."
+    "description": "Una macchina da sogno che \"smantella\" automaticamente i Pal inseriti."
   },
   "DisplayCharacter": {
     "localized_name": "Gabbia di osservazione",
@@ -541,7 +541,7 @@
   },
   "FlourMill": {
     "localized_name": "Mulino",
-    "description": "Una struttura dove lavorare il Grano così da ottenere Farina di grano. Sono necessari Pal competenti nell'attività |Irrigazione| per usare la ruota idraulica."
+    "description": "Una struttura dove lavorare il Grano così da ottenere Farina di grano. Sono necessari Pal competenti nell'attività \"Irrigazione\" per usare la ruota idraulica."
   },
   "FlowerBed": {
     "localized_name": "Aiuola fiorita",
@@ -809,7 +809,7 @@
   },
   "IceCrusher": {
     "localized_name": "Macinatore criogenico",
-    "description": "Una struttura per ridurre in polvere Minerale metallico e ottenere così altri tipi di risorse. Richiede Pal competenti nell'attività |Refrigerazione| e il collegamento all'alimentazione, ma è davvero efficiente."
+    "description": "Una struttura per ridurre in polvere Minerale metallico e ottenere così altri tipi di risorse. Richiede Pal competenti nell'attività \"Refrigerazione\" e il collegamento all'alimentazione, ma è davvero efficiente."
   },
   "IceHorseStatue": {
     "localized_name": "Statua di Frostallion",
@@ -1465,7 +1465,7 @@
   },
   "Shishiodoshi": {
     "localized_name": "Shishi-odoshi",
-    "description": "Dispositivo di bambù |shishi-odoshi| per l'arredo. Adatto ad arredare edifici in stile giapponese."
+    "description": "Dispositivo di bambù \"shishi-odoshi\" per l'arredo. Adatto ad arredare edifici in stile giapponese."
   },
   "Shrine_Lantern": {
     "localized_name": "Lanterna da giardino",
@@ -1977,11 +1977,11 @@
   },
   "Zabuton": {
     "localized_name": "Zabuton",
-    "description": "Sedile |zabuton| per l'arredo. Adatto ad arredare edifici in stile giapponese."
+    "description": "Sedile \"zabuton\" per l'arredo. Adatto ad arredare edifici in stile giapponese."
   },
   "Zaisu": {
     "localized_name": "Zaisu",
-    "description": "Sedile |zaisu| per l'arredo. Adatto ad arredare edifici in stile giapponese."
+    "description": "Sedile \"zaisu\" per l'arredo. Adatto ad arredare edifici in stile giapponese."
   },
   "JapaneseStyle_TriangleStairsCorner_02": {
     "localized_name": "JapaneseStyle_TriangleStairsCorner_02",

@@ -10446,7 +10446,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "AccuracyIncrease": {
     "rank": 1,
@@ -10475,7 +10475,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "AccuracySuperDecrease": {
     "rank": 1,
@@ -10504,7 +10504,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "BulletSpeed_H": {
     "rank": 1,
@@ -10528,7 +10528,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "BulletSpeed_L": {
     "rank": 1,
@@ -10552,7 +10552,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "CollectItem": {
     "rank": 1,
@@ -10576,7 +10576,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "CollectItem_CuteFox": {
     "rank": 1,
@@ -10600,7 +10600,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "CraftSpeed*3": {
     "rank": 9,
@@ -10624,7 +10624,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "CraftSpeed*5": {
     "rank": 9,
@@ -10648,7 +10648,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "GiveADark": {
     "rank": 1,
@@ -10672,7 +10672,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "GiveADragon": {
     "rank": 1,
@@ -10696,7 +10696,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "GiveAEarth": {
     "rank": 1,
@@ -10720,7 +10720,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "GiveAElectricity": {
     "rank": 1,
@@ -10744,7 +10744,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "GiveAFire": {
     "rank": 1,
@@ -10768,7 +10768,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "GiveAIce": {
     "rank": 1,
@@ -10792,7 +10792,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "GiveALeaf": {
     "rank": 1,
@@ -10816,7 +10816,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "GiveAWater": {
     "rank": 1,
@@ -10840,7 +10840,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "Logging_up1": {
     "rank": 1,
@@ -10864,7 +10864,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "Logging_up1_Otomo_only": {
     "rank": 1,
@@ -10888,7 +10888,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "Logging_up2": {
     "rank": 2,
@@ -10912,7 +10912,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "Logging_up2_Otomo_only": {
     "rank": 2,
@@ -10936,7 +10936,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "Logging_up3": {
     "rank": 3,
@@ -10960,7 +10960,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "Logging_up4": {
     "rank": 4,
@@ -10984,7 +10984,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "Logging_up5": {
     "rank": 5,
@@ -11008,7 +11008,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "MeleeAttack_down1": {
     "rank": 1,
@@ -11032,7 +11032,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "MeleeAttack_down2": {
     "rank": 1,
@@ -11056,7 +11056,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "MeleeAttack_up1": {
     "rank": 3,
@@ -11080,7 +11080,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "MeleeAttack_up2": {
     "rank": 4,
@@ -11104,7 +11104,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "Mining_up1": {
     "rank": 1,
@@ -11128,7 +11128,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "Mining_up1_Otomo_only": {
     "rank": 1,
@@ -11152,7 +11152,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "Mining_up2": {
     "rank": 2,
@@ -11176,7 +11176,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "Mining_up2_Otomo_only": {
     "rank": 2,
@@ -11200,7 +11200,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "Mining_up3": {
     "rank": 3,
@@ -11224,7 +11224,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "Mining_up4": {
     "rank": 4,
@@ -11248,7 +11248,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "Mining_up5": {
     "rank": 5,
@@ -11272,7 +11272,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "Mute_1": {
     "rank": 1,
@@ -11296,7 +11296,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "Mute_2": {
     "rank": 2,
@@ -11320,7 +11320,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "Mute_3": {
     "rank": 3,
@@ -11344,7 +11344,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "Mute_4": {
     "rank": 4,
@@ -11368,7 +11368,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "Mute_5": {
     "rank": 5,
@@ -11392,7 +11392,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "PAL_ElementPassive_Test": {
     "rank": 1,
@@ -11416,7 +11416,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "PAL_TribePassive_Test": {
     "rank": 1,
@@ -11445,7 +11445,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "RecoilDecrease": {
     "rank": 1,
@@ -11469,7 +11469,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "RecoilIncrease": {
     "rank": 1,
@@ -11493,7 +11493,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "ShotAttack_down1": {
     "rank": -1,
@@ -11517,7 +11517,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "ShotAttack_down2": {
     "rank": -3,
@@ -11541,7 +11541,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "ShotAttack_up1": {
     "rank": 2,
@@ -11565,7 +11565,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "ShotAttack_up2": {
     "rank": 3,
@@ -11589,7 +11589,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "StealExpert_1": {
     "rank": 1,
@@ -11613,7 +11613,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "StealExpert_2": {
     "rank": 2,
@@ -11637,7 +11637,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "StealExpert_3": {
     "rank": 3,
@@ -11661,7 +11661,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "StealExpert_4": {
     "rank": 4,
@@ -11685,7 +11685,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "Support_down1": {
     "rank": -1,
@@ -11709,7 +11709,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "Support_down2": {
     "rank": -3,
@@ -11733,7 +11733,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "Support_up1": {
     "rank": 2,
@@ -11757,7 +11757,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "Support_up2": {
     "rank": 0,
@@ -11781,7 +11781,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "TestExplosive_H": {
     "rank": 1,
@@ -11805,7 +11805,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "TestExplosive_L": {
     "rank": 1,
@@ -11829,7 +11829,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "TestHoming_H": {
     "rank": 1,
@@ -11853,7 +11853,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "TestHoming_L": {
     "rank": 1,
@@ -11877,7 +11877,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "TestSkill1": {
     "rank": 1,
@@ -11901,7 +11901,7 @@
     "add_melee_weapon": true,
     "add_armor": true,
     "add_accessory": true,
-    "disabled": false
+    "disabled": true
   },
   "TestSkill2": {
     "rank": 1,
@@ -11925,7 +11925,7 @@
     "add_melee_weapon": true,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "TestSkill3": {
     "rank": 1,
@@ -11949,7 +11949,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "TestSkill4": {
     "rank": 1,
@@ -11973,7 +11973,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "TestSkill5": {
     "rank": 1,
@@ -11997,7 +11997,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "TestSkill6": {
     "rank": 1,
@@ -12021,7 +12021,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "TestSkill7": {
     "rank": 1,
@@ -12055,7 +12055,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "TestSkill8": {
     "rank": 1,
@@ -12089,7 +12089,7 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   },
   "MoveSpeed_up_1_Otomo_Only_Equip": {
     "rank": 1,
@@ -12113,6 +12113,6 @@
     "add_melee_weapon": false,
     "add_armor": false,
     "add_accessory": false,
-    "disabled": false
+    "disabled": true
   }
 }

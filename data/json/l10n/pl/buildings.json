@@ -376,8 +376,8 @@
     "description": "Dekoracyjna flaga ludu Feybreak."
   },
   "Decal_PalSticker_PinkCat": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Tuppanyan sticker",
+    "description": null
   },
   "DefenseBowGun": {
     "localized_name": "Stacjonarna kusza",
@@ -1292,8 +1292,8 @@
     "description": "Antyczny podłużny dekoracyjny dywan."
   },
   "Rug_Wood": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Fur rug",
+    "description": null
   },
   "SF_Chair": {
     "localized_name": "Krzesło w stylu laboratoryjnym",
@@ -1792,20 +1792,20 @@
     "description": "Dekoracyjna sygnalizacja świetlna."
   },
   "TrafficSign01_Iron": {
-    "localized_name": "Znak „Palom wstęp wzbroniony|",
-    "description": "Dekoracyjny znak „Palom wstęp wzbrioniony|. Używany w starożytności, dziś nie pełni już żadnej realnej funkcji."
+    "localized_name": "Znak „Palom wstęp wzbroniony\"",
+    "description": "Dekoracyjny znak „Palom wstęp wzbrioniony\". Używany w starożytności, dziś nie pełni już żadnej realnej funkcji."
   },
   "TrafficSign02_Iron": {
-    "localized_name": "Znak „Stop|",
-    "description": "Dekoracyjny znak „Stop|. Używany w starożytności, dziś nie pełni już żadnej realnej funkcji."
+    "localized_name": "Znak „Stop\"",
+    "description": "Dekoracyjny znak „Stop\". Używany w starożytności, dziś nie pełni już żadnej realnej funkcji."
   },
   "TrafficSign03_Iron": {
-    "localized_name": "Znak „Uwaga Eikthyrdeery|",
-    "description": "Dekoracyjny znak „Uwaga Eikthyrdeery|. W starożytności często dochodziło do zderzeń między Eikthyrdeerami a innymi Palami."
+    "localized_name": "Znak „Uwaga Eikthyrdeery\"",
+    "description": "Dekoracyjny znak „Uwaga Eikthyrdeery\". W starożytności często dochodziło do zderzeń między Eikthyrdeerami a innymi Palami."
   },
   "TrafficSign04_Iron": {
-    "localized_name": "Znak „Uwaga Mammoresty|",
-    "description": "Dekoracyjny znak „Uwaga Mammoresty|. W starożytności często ginęli ci, którzy rozwścieczyli Mammoresta."
+    "localized_name": "Znak „Uwaga Mammoresty\"",
+    "description": "Dekoracyjny znak „Uwaga Mammoresty\". W starożytności często ginęli ci, którzy rozwścieczyli Mammoresta."
   },
   "TransmissionTower": {
     "localized_name": "Słup elektryczny",
@@ -1832,8 +1832,8 @@
     "description": "Pułapka zamrażająca Pala, który na nią nadepnie. Zamrożenie zwiększa szansę na jego schwytanie za pomocą sfery."
   },
   "Trap_MovingPanel": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Moving Panels",
+    "description": "A description of the moving panel"
   },
   "Trap_Noose": {
     "localized_name": "Wnyki",
@@ -1984,11 +1984,11 @@
     "description": "Dekoracyjne krzesło podłogowe. Doskonale pasuje do budowli w japońskim stylu."
   },
   "JapaneseStyle_TriangleStairsCorner_02": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "JapaneseStyle_TriangleStairsCorner_02",
+    "description": null
   },
   "WoodCreator": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "WoodCreator",
+    "description": null
   }
 }

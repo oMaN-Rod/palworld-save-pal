@@ -13,7 +13,7 @@
   },
   "Main_BuildPalBox": {
     "localized_name": "Punkt startowy",
-    "description": "Otwórz menu budowania przez <keyGuideIcon id=|OpenConstructionMenu| iconScale=|0.7|/> i spróbuj postawić Palbox na otwartym terenie. To będzie twoja pierwsza baza — wspólna przestrzeń dla ciebie i twoich Pali. Jeśli dobrze ją przygotujesz, stanie się ważnym punktem wypadowym w drodze ku wieży. Wybierz miejsce rozważnie."
+    "description": "Otwórz menu budowania i spróbuj postawić Palbox na otwartym terenie. To będzie twoja pierwsza baza — wspólna przestrzeń dla ciebie i twoich Pali. Jeśli dobrze ją przygotujesz, stanie się ważnym punktem wypadowym w drodze ku wieży. Wybierz miejsce rozważnie."
   },
   "Main_BuildWorkBench_Old": {
     "localized_name": "Start pracy",

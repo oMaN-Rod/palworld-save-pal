@@ -589,7 +589,7 @@
   },
   "ElecLion": {
     "localized_name": "Boltmane",
-    "description": "-"
+    "description": "The more it moves, the more it heats up and the hair tips increasingly glow brighter. At its peak, it becomes so dazzling that you risk blindness if you stare at it directly."
   },
   "ElecLizard": {
     "localized_name": "Slowatt",
@@ -2480,7 +2480,7 @@
     "description": "Wybrana królowa, by przewodzić Beegarde. Niekończący się strumień sług ustawia się w kolejce, by dostąpić zaszczytu harowania aż po grób dla swej królowej."
   },
   "QuestMan": {
-    "localized_name": "-",
+    "localized_name": "Quest Client",
     "description": null
   },
   "Quest_Farmer03_PinkCat": {
@@ -3040,7 +3040,7 @@
     "description": "„Zamek wypełniony był ulubionymi kwiatami króla. Wybuchła wielka bitwa, a płomienie zbliżały się do zamku. Wśród chaosu pojawił się duch kwiatu.” – Z baśni „Kwiat króla”"
   },
   "VisitingMerchant": {
-    "localized_name": "-",
+    "localized_name": "Visitor",
     "description": null
   },
   "Visitor_Hunter_Rifle": {
@@ -3072,7 +3072,7 @@
     "description": "U zdrowych osobników temperatura substancji płynącej przez grzbiet jest stabilna. Gdy serce zaczyna bić szybciej, temperatura się rozregulowuje, a w najgorszym razie dochodzi do parowania lub krzepnięcia i nagłej śmierci z powodu wstrząsu."
   },
   "WeaponsDealer": {
-    "localized_name": "-",
+    "localized_name": "Weapons Dealer",
     "description": null
   },
   "WeaselDragon": {
@@ -3325,7 +3325,7 @@
   },
   "BeardedDragon": {
     "localized_name": "BeardedDragon",
-    "description": "-"
+    "description": "This Pal is under investigation."
   },
   "BlueWoolRabbit": {
     "localized_name": "BlueWoolRabbit",
@@ -3369,7 +3369,7 @@
   },
   "GrassDragon": {
     "localized_name": "GrassDragon",
-    "description": "-"
+    "description": "This Pal is under investigation."
   },
   "IceVeilDragon": {
     "localized_name": "IceVeilDragon",
@@ -3445,7 +3445,7 @@
   },
   "WaterLizard": {
     "localized_name": "WaterLizard",
-    "description": "-"
+    "description": null
   },
   "WorldTree_Hunter_MissileLauncher_test": {
     "localized_name": "WorldTree_Hunter_MissileLauncher_test",

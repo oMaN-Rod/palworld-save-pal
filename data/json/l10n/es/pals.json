@@ -1545,7 +1545,7 @@
   },
   "KingBahamut_Dragon": {
     "localized_name": "Blazamut Ryu",
-    "description": "Eones atrás emergió de las entrañas de la tierra. Sus impías llamas iracundas no desaparecieron hasta consumir la isla por completo. Se lo conocía pues como la |llama eterna|."
+    "description": "Eones atrás emergió de las entrañas de la tierra. Sus impías llamas iracundas no desaparecieron hasta consumir la isla por completo. Se lo conocía pues como la \"llama eterna\"."
   },
   "KingSunfish": {
     "localized_name": "Solmora",
@@ -1945,7 +1945,7 @@
   },
   "MimicDog": {
     "localized_name": "Mimog",
-    "description": "En uno de las reinos antiguos de esta isla, existía la tradición de dar un premio a la persona que sufriera la muerte más estúpida del año. Una de las muertes más memorables se recoge en el epitafio: |No se percató del Mimog y murió a mordiscos tras abrir la caja|."
+    "description": "En uno de las reinos antiguos de esta isla, existía la tradición de dar un premio a la persona que sufriera la muerte más estúpida del año. Una de las muertes más memorables se recoge en el epitafio: \"No se percató del Mimog y murió a mordiscos tras abrir la caja\"."
   },
   "MobuCitizen": {
     "localized_name": "Isleño",
@@ -3037,10 +3037,10 @@
   },
   "VioletFairy": {
     "localized_name": "Vaelet",
-    "description": "Había una vez, un castillo lleno de las flores favoritas del rey. Cierto día, se produjo una gran batalla, y el fuego amenazaba con consumir el castillo. Entonces, apareció el espíritu de una de las flores. Extracto del cuento |Las flores del rey|."
+    "description": "Había una vez, un castillo lleno de las flores favoritas del rey. Cierto día, se produjo una gran batalla, y el fuego amenazaba con consumir el castillo. Entonces, apareció el espíritu de una de las flores. Extracto del cuento \"Las flores del rey\"."
   },
   "VisitingMerchant": {
-    "localized_name": "VisitingMerchant",
+    "localized_name": "Visitor",
     "description": null
   },
   "Visitor_Hunter_Rifle": {
@@ -3072,7 +3072,7 @@
     "description": "Los especímenes sanos mantienen una temperatura estable gracias a la sustancia que fluye por su lomo. Cuando el corazón se les acelera, su temperatura se descuadra. En el peor de los casos, esto puede provocar una vaporización o una solidificación que podría derivar en una muerte repentina del sujeto por el shock."
   },
   "WeaponsDealer": {
-    "localized_name": "WeaponsDealer",
+    "localized_name": "Weapons Dealer",
     "description": null
   },
   "WeaselDragon": {
@@ -3097,7 +3097,7 @@
   },
   "WhiteDeer": {
     "localized_name": "Celesdir",
-    "description": "Los antiguos manuscritos lo llaman la |bestia de la salvación|. La luz emitida por Celesdir lo purifica todo. Cuando desaparece de este mundo lo hace, literalmente, sin dejar rastro."
+    "description": "Los antiguos manuscritos lo llaman la \"bestia de la salvación\". La luz emitida por Celesdir lo purifica todo. Cuando desaparece de este mundo lo hace, literalmente, sin dejar rastro."
   },
   "WhiteDeer_Dark": {
     "localized_name": "Celesdir Noct",
@@ -3445,7 +3445,7 @@
   },
   "WaterLizard": {
     "localized_name": "WaterLizard",
-    "description": "-"
+    "description": null
   },
   "WorldTree_Hunter_MissileLauncher_test": {
     "localized_name": "WorldTree_Hunter_MissileLauncher_test",

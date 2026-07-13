@@ -125,19 +125,19 @@
   },
   "Arrow": {
     "localized_name": "Flecha",
-    "description": "Flecha para disparar con un arco. Puede fabricarse en |Mesa de trabajo primitiva|."
+    "description": "Flecha para disparar con un arco. Puede fabricarse en \"Mesa de trabajo primitiva\"."
   },
   "Arrow_Fire": {
     "localized_name": "Flecha ígnea",
-    "description": "Flecha ígnea para disparar con un arco. Inflige daño de ElemIcon_FireFuego al objetivo impactado. Puede fabricarse en |Mesa de trabajo primitiva|."
+    "description": "Flecha ígnea para disparar con un arco. Inflige daño de Fuego al objetivo impactado. Puede fabricarse en \"Mesa de trabajo primitiva\"."
   },
   "Arrow_Poison": {
     "localized_name": "Flecha envenenada",
-    "description": "Flecha envenenada para disparar con arco. Inflige Veneno al objetivo impactado. Puede fabricarse en |Mesa de trabajo primitiva|."
+    "description": "Flecha envenenada para disparar con arco. Inflige Veneno al objetivo impactado. Puede fabricarse en \"Mesa de trabajo primitiva\"."
   },
   "AssaultRifleBullet": {
     "localized_name": "Balas de rifle de asalto",
-    "description": "Munición para usar con |Rifle de asalto| y otras armas similares. Necesitarás una |Fábrica de producción en cadena de armas| para su fabricación."
+    "description": "Munición para usar con \"Rifle de asalto\" y otras armas similares. Necesitarás una \"Fábrica de producción en cadena de armas\" para su fabricación."
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "Bolsa de cebo pequeña",
@@ -189,79 +189,79 @@
   },
   "Battle_Armor_Grade_01_Cloth": {
     "localized_name": "Ropa de tela",
-    "description": "Prenda hecha con |Tela|. Te mantendrá caliente en las frías noches. Puede fabricarse en |Mesa de trabajo primitiva|."
+    "description": "Prenda hecha con \"Tela\". Te mantendrá caliente en las frías noches. Puede fabricarse en \"Mesa de trabajo primitiva\"."
   },
   "Battle_Armor_Grade_01_Cloth_Cold": {
     "localized_name": "Vestimenta étnica para climas fríos",
-    "description": "Ropa de tela elaborada en una región fría. Protege del frío que congela hasta los huesos. Puede fabricarse en |Mesa de trabajo primitiva|."
+    "description": "Ropa de tela elaborada en una región fría. Protege del frío que congela hasta los huesos. Puede fabricarse en \"Mesa de trabajo primitiva\"."
   },
   "Battle_Armor_Grade_01_Cloth_Heat": {
     "localized_name": "Vestimenta étnica tropical",
-    "description": "Ropa de tela elaborada en una región cálida. Posee una alta resistencia al calor. Puede fabricarse en |Mesa de trabajo primitiva|."
+    "description": "Ropa de tela elaborada en una región cálida. Posee una alta resistencia al calor. Puede fabricarse en \"Mesa de trabajo primitiva\"."
   },
   "Battle_Armor_Grade_02_Fur": {
     "localized_name": "Armadura de piel",
-    "description": "Armadura hecha de Cuero. De durabilidad y propiedades defensivas superiores. Puede fabricarse en |Mesa de trabajo de alta calidad|."
+    "description": "Armadura hecha de Cuero. De durabilidad y propiedades defensivas superiores. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
   },
   "Battle_Armor_Grade_02_Fur_Cold": {
     "localized_name": "Armadura de piel resistente al frío",
-    "description": "Armadura de piel elaborada en una región fría. Protege del frío que congela hasta los huesos. Puede fabricarse en |Mesa de trabajo de alta calidad|."
+    "description": "Armadura de piel elaborada en una región fría. Protege del frío que congela hasta los huesos. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
   },
   "Battle_Armor_Grade_02_Fur_Heat": {
     "localized_name": "Armadura de piel resistente al calor",
-    "description": "Armadura de piel elaborada en una región cálida. Posee una alta resistencia al calor. Puede fabricarse en |Mesa de trabajo de alta calidad|."
+    "description": "Armadura de piel elaborada en una región cálida. Posee una alta resistencia al calor. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
   },
   "Battle_Armor_Grade_03_Copper": {
     "localized_name": "Armadura de metal",
-    "description": "Armadura de metal. De peso y capacidad defensiva decente. Puede fabricarse en |Mesa de trabajo de alta calidad|."
+    "description": "Armadura de metal. De peso y capacidad defensiva decente. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
   },
   "Battle_Armor_Grade_03_Copper_Cold": {
     "localized_name": "Armadura de metal resistente al frío",
-    "description": "Armadura de metal mejorada. Protege del frío que congela hasta los huesos. Puede fabricarse en |Mesa de trabajo de alta calidad|."
+    "description": "Armadura de metal mejorada. Protege del frío que congela hasta los huesos. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
   },
   "Battle_Armor_Grade_03_Copper_Heat": {
     "localized_name": "Armadura de metal resistente al calor",
-    "description": "Armadura de metal mejorada. Posee una alta resistencia al calor. Puede fabricarse en |Mesa de trabajo de alta calidad|."
+    "description": "Armadura de metal mejorada. Posee una alta resistencia al calor. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
   },
   "Battle_Armor_Grade_03_Iron": {
     "localized_name": "Armadura de metal refinado",
-    "description": "Armadura hecha de metal refinado. Es muy pesada porque cuenta con un poder defensivo considerable. Puede fabricarse en |Mesa de trabajo de alta calidad|."
+    "description": "Armadura hecha de metal refinado. Es muy pesada porque cuenta con un poder defensivo considerable. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
   },
   "Battle_Armor_Grade_03_Iron_Cold": {
     "localized_name": "Armadura de metal refinado resistente al frío",
-    "description": "Armadura de metal refinado mejorada. Protege del frío que congela hasta los huesos. Puede fabricarse en |Fábrica de producción en cadena|."
+    "description": "Armadura de metal refinado mejorada. Protege del frío que congela hasta los huesos. Puede fabricarse en \"Fábrica de producción en cadena\"."
   },
   "Battle_Armor_Grade_03_Iron_Heat": {
     "localized_name": "Armadura de metal refinado resistente al calor",
-    "description": "Armadura de metal refinado mejorada. Posee una alta resistencia al calor. Puede fabricarse en |Fábrica de producción en cadena|."
+    "description": "Armadura de metal refinado mejorada. Posee una alta resistencia al calor. Puede fabricarse en \"Fábrica de producción en cadena\"."
   },
   "Battle_Armor_Grade_04_Steal": {
     "localized_name": "Armadura de Paluminium",
-    "description": "Armadura hecha de Lingote de Paluminium. Ofrece una defensa increíble, pero es muy pesada. Puede fabricarse en |Mesa de trabajo de alta calidad|."
+    "description": "Armadura hecha de Lingote de Paluminium. Ofrece una defensa increíble, pero es muy pesada. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
   },
   "Battle_Armor_Grade_04_Steal_Cold": {
     "localized_name": "Armadura de Paluminium resistente al frío",
-    "description": "Armadura de Paluminium mejorada. Protege del frío que congela hasta los huesos. Puede fabricarse en |Fábrica de producción en cadena II|."
+    "description": "Armadura de Paluminium mejorada. Protege del frío que congela hasta los huesos. Puede fabricarse en \"Fábrica de producción en cadena II\"."
   },
   "Battle_Armor_Grade_04_Steal_Heat": {
     "localized_name": "Armadura de Paluminium resistente al calor",
-    "description": "Armadura de Paluminium mejorada. Posee una alta resistencia al calor. Puede fabricarse en |Fábrica de producción en cadena II|."
+    "description": "Armadura de Paluminium mejorada. Posee una alta resistencia al calor. Puede fabricarse en \"Fábrica de producción en cadena II\"."
   },
   "Battle_Armor_Grade_05_Plastic": {
     "localized_name": "Armadura de plastiacero",
-    "description": "Armadura hecha de Plastiacero. Mejora la defensa y es liviana. Puede fabricarse en |Fábrica de producción en cadena II|."
+    "description": "Armadura hecha de Plastiacero. Mejora la defensa y es liviana. Puede fabricarse en \"Fábrica de producción en cadena II\"."
   },
   "Battle_Armor_Grade_05_Plastic_Cold": {
     "localized_name": "Armadura de plastiacero resistente al frío",
-    "description": "Armadura de plastiacero mejorada. Protege del frío que congela hasta los huesos. Puede fabricarse en |Fábrica de producción en cadena II|."
+    "description": "Armadura de plastiacero mejorada. Protege del frío que congela hasta los huesos. Puede fabricarse en \"Fábrica de producción en cadena II\"."
   },
   "Battle_Armor_Grade_05_Plastic_Heat": {
     "localized_name": "Armadura de plastiacero resistente al calor",
-    "description": "Armadura de plastiacero mejorada. Posee una alta resistencia al calor. Puede fabricarse en |Fábrica de producción en cadena II|."
+    "description": "Armadura de plastiacero mejorada. Posee una alta resistencia al calor. Puede fabricarse en \"Fábrica de producción en cadena II\"."
   },
   "Battle_Armor_Grade_05_Plastic_Weight": {
     "localized_name": "Armadura de plastiacero ligera",
-    "description": "Armadura de plastiacero mejorada. Aumenta el límite de peso que puedes cargar. Puede fabricarse en |Fábrica de producción en cadena II|."
+    "description": "Armadura de plastiacero mejorada. Aumenta el límite de peso que puedes cargar. Puede fabricarse en \"Fábrica de producción en cadena II\"."
   },
   "Battle_Cloth": {
     "localized_name": "Tela",
@@ -269,15 +269,15 @@
   },
   "Battle_Defense_BowGun": {
     "localized_name": "Ballesta fija",
-    "description": "Si se asigna un Pal con la aptitud |Trabajo manual|, usará la ballesta para proteger la base."
+    "description": "Si se asigna un Pal con la aptitud \"Trabajo manual\", usará la ballesta para proteger la base."
   },
   "Battle_Defense_MachineGun": {
     "localized_name": "Ametralladora fija",
-    "description": "Si se asigna un Pal con la aptitud |Trabajo manual|, usará la ballesta para proteger la base."
+    "description": "Si se asigna un Pal con la aptitud \"Trabajo manual\", usará la ballesta para proteger la base."
   },
   "Battle_Defense_Missile": {
     "localized_name": "Lanzamisiles fijo",
-    "description": "Si se asigna un Pal con la aptitud |Trabajo manual|, usará el lanzamisiles para proteger la base."
+    "description": "Si se asigna un Pal con la aptitud \"Trabajo manual\", usará el lanzamisiles para proteger la base."
   },
   "Battle_Glider_Grade_01": {
     "localized_name": "Paracaídas normal",
@@ -285,39 +285,39 @@
   },
   "Battle_Glider_Grade_02": {
     "localized_name": "Mega planeador",
-    "description": "Planeador de producción en masa con velocidad decente. Necesitarás una |Mesa de trabajo de alta calidad| para su elaboración."
+    "description": "Planeador de producción en masa con velocidad decente. Necesitarás una \"Mesa de trabajo de alta calidad\" para su elaboración."
   },
   "Battle_Glider_Grade_03": {
     "localized_name": "Giga planeador",
-    "description": "Planeador de alto rendimiento con gran velocidad. Necesitarás una |Fábrica de producción en cadena| para su elaboración."
+    "description": "Planeador de alto rendimiento con gran velocidad. Necesitarás una \"Fábrica de producción en cadena\" para su elaboración."
   },
   "Battle_Glider_Grade_04": {
     "localized_name": "Tera planeador",
-    "description": "Planeador mejorado con mayor velocidad y sustentación. Necesitarás una |Fábrica de producción en cadena II| para su elaboración."
+    "description": "Planeador mejorado con mayor velocidad y sustentación. Necesitarás una \"Fábrica de producción en cadena II\" para su elaboración."
   },
   "Battle_GunPowder_Grade_02": {
     "localized_name": "Pólvora",
-    "description": "Pólvora necesaria para disparar balas. También es esencial al fabricar munición. Puede crearse en una |Mesa de trabajo de alta calidad|."
+    "description": "Pólvora necesaria para disparar balas. También es esencial al fabricar munición. Puede crearse en una \"Mesa de trabajo de alta calidad\"."
   },
   "Battle_Helm_Grade_02_Fur": {
     "localized_name": "Adorno de plumas para el cabello",
-    "description": "Un bonito adorno de plumas para el pelo. Da la sensación de que protegen a su portador de las heridas mortales en la cabeza. Puede fabricarse en |Mesa de trabajo primitiva|."
+    "description": "Un bonito adorno de plumas para el pelo. Da la sensación de que protegen a su portador de las heridas mortales en la cabeza. Puede fabricarse en \"Mesa de trabajo primitiva\"."
   },
   "Battle_Helm_Grade_03_Copper": {
     "localized_name": "Yelmo de metal",
-    "description": "Casco de metal. Equipo defensivo confiable para la cabeza y la mente. Puede fabricarse en |Mesa de trabajo de alta calidad|."
+    "description": "Casco de metal. Equipo defensivo confiable para la cabeza y la mente. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
   },
   "Battle_Helm_Grade_04_Iron": {
     "localized_name": "Yelmo de metal refinado",
-    "description": "Casco hecho de metal refinado. El brillo del metal pulido le otorga aún más valor. Puede fabricarse en |Fábrica de producción en cadena|."
+    "description": "Casco hecho de metal refinado. El brillo del metal pulido le otorga aún más valor. Puede fabricarse en \"Fábrica de producción en cadena\"."
   },
   "Battle_Helm_Grade_05_Steal": {
     "localized_name": "Yelmo de Paluminium",
-    "description": "Casco hecho de Lingote de Paluminium. Una pieza de calidad superior, símbolo de los guerreros más selectos. Puede fabricarse en |Fábrica de producción en cadena II|."
+    "description": "Casco hecho de Lingote de Paluminium. Una pieza de calidad superior, símbolo de los guerreros más selectos. Puede fabricarse en \"Fábrica de producción en cadena II\"."
   },
   "Battle_Helm_Grade_06_Plastic": {
     "localized_name": "Casco de plastiacero",
-    "description": "Casco hecho de Plastiacero. Mejora la defensa y es liviana. Puede fabricarse en |Fábrica de producción en cadena II|."
+    "description": "Casco hecho de Plastiacero. Mejora la defensa y es liviana. Puede fabricarse en \"Fábrica de producción en cadena II\"."
   },
   "Battle_MeleeWeapon_Axe_Steal": {
     "localized_name": "Hacha de Paluminium",
@@ -337,15 +337,15 @@
   },
   "Battle_MeleeWeapon_Sword": {
     "localized_name": "Espada",
-    "description": "Espada de combate cuerpo a cuerpo. Su filo es excelente, pero acercarse al enemigo conlleva riesgos. Puede fabricarse en |Mesa de creación de armas|."
+    "description": "Espada de combate cuerpo a cuerpo. Su filo es excelente, pero acercarse al enemigo conlleva riesgos. Puede fabricarse en \"Mesa de creación de armas\"."
   },
   "Battle_RangeWeapon_AssaultRifle": {
     "localized_name": "Rifle de asalto",
-    "description": "Un Rifle de asalto de fuego rápido con el que puedes acorralar al enemigo. Como es de disparo rápido y potente, es el arma perfecta contra rivales poderosos. Puede fabricarse en |Fábrica de producción en cadena de armas|."
+    "description": "Un Rifle de asalto de fuego rápido con el que puedes acorralar al enemigo. Como es de disparo rápido y potente, es el arma perfecta contra rivales poderosos. Puede fabricarse en \"Fábrica de producción en cadena de armas\"."
   },
   "Battle_RangeWeapon_Bow1": {
     "localized_name": "Arco anticuado",
-    "description": "Un arma primitiva de ataque a distancia. Está hecha de materiales improvisados, por lo que no es muy potente. Puede fabricarse en |Mesa de trabajo primitiva|."
+    "description": "Un arma primitiva de ataque a distancia. Está hecha de materiales improvisados, por lo que no es muy potente. Puede fabricarse en \"Mesa de trabajo primitiva\"."
   },
   "Battle_RangeWeapon_Bow3": {
     "localized_name": "Arco de tres flechas",
@@ -353,7 +353,7 @@
   },
   "Battle_RangeWeapon_BowGun": {
     "localized_name": "Ballesta",
-    "description": "Puede disparar una |Flecha| sin esfuerzo. Lleva tiempo prepararlo, pero el disparo es muy potente. Puede fabricarse en |Mesa de trabajo de alta calidad|."
+    "description": "Puede disparar una \"Flecha\" sin esfuerzo. Lleva tiempo prepararlo, pero el disparo es muy potente. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
   },
   "Battle_RangeWeapon_CompoundBow": {
     "localized_name": "Arco compuesto",
@@ -361,19 +361,19 @@
   },
   "Battle_RangeWeapon_FlameThrower": {
     "localized_name": "Lanzallamas",
-    "description": "Lanzallamas que dispara fuego de largo alcance. Puede incendiar a los objetivos alcanzados. Puede fabricarse en |Fábrica de producción en cadena de armas II|."
+    "description": "Lanzallamas que dispara fuego de largo alcance. Puede incendiar a los objetivos alcanzados. Puede fabricarse en \"Fábrica de producción en cadena de armas II\"."
   },
   "Battle_RangeWeapon_GatlingGun": {
     "localized_name": "Ametralladora Gatling",
-    "description": "Ametralladora Gatling capaz hacer disparos rápidos y continuos. Su fuego de supresión puede convertir al enemigo en un colador. Puede fabricarse en |Fábrica de producción en cadena de armas II|."
+    "description": "Ametralladora Gatling capaz hacer disparos rápidos y continuos. Su fuego de supresión puede convertir al enemigo en un colador. Puede fabricarse en \"Fábrica de producción en cadena de armas II\"."
   },
   "Battle_RangeWeapon_GrenadeLauncher": {
     "localized_name": "Lanzagranadas",
-    "description": "Lanza una granada que causa una explosión de amplio alcance. Es útil contra múltiples enemigos. Puede fabricarse en |Fábrica de producción en cadena de armas II|."
+    "description": "Lanza una granada que causa una explosión de amplio alcance. Es útil contra múltiples enemigos. Puede fabricarse en \"Fábrica de producción en cadena de armas II\"."
   },
   "Battle_RangeWeapon_GuidedMissileLauncher": {
     "localized_name": "Lanzamisiles",
-    "description": "Lanza un misil teledirigido que sigue al enemigo automáticamente. Explota al impactar causando daño en área. Puede fabricarse en |Fábrica de producción en cadena de armas II|."
+    "description": "Lanza un misil teledirigido que sigue al enemigo automáticamente. Explota al impactar causando daño en área. Puede fabricarse en \"Fábrica de producción en cadena de armas II\"."
   },
   "Battle_RangeWeapon_HandGun": {
     "localized_name": "Pistola",
@@ -381,11 +381,11 @@
   },
   "Battle_RangeWeapon_HomingSphereLauncher": {
     "localized_name": "Lanzador de esferas teledirigidas",
-    "description": "Sirve para disparar esferas. Las esferas lanzadas persiguen a los Pals. Puede fabricarse en |Fábrica de producción en cadena de armas II|."
+    "description": "Sirve para disparar esferas. Las esferas lanzadas persiguen a los Pals. Puede fabricarse en \"Fábrica de producción en cadena de armas II\"."
   },
   "Battle_RangeWeapon_LaserRifle": {
     "localized_name": "Rifle láser",
-    "description": "Arma láser. Con gran potencia de disparo y fácil de manejar. Puede fabricarse en |Fábrica de producción en cadena de armas II|."
+    "description": "Arma láser. Con gran potencia de disparo y fácil de manejar. Puede fabricarse en \"Fábrica de producción en cadena de armas II\"."
   },
   "Battle_RangeWeapon_OldRevolver": {
     "localized_name": "Revólver antiguo",
@@ -397,7 +397,7 @@
   },
   "Battle_RangeWeapon_RocketLauncher": {
     "localized_name": "Lanzacohetes",
-    "description": "Lanzacohetes para bombardear con fuerza a larga distancia. Puede fabricarse en |Fábrica de producción en cadena de armas II|."
+    "description": "Lanzacohetes para bombardear con fuerza a larga distancia. Puede fabricarse en \"Fábrica de producción en cadena de armas II\"."
   },
   "Battle_RangeWeapon_SemiAutoRifle": {
     "localized_name": "Rifle semiautomático",
@@ -409,19 +409,19 @@
   },
   "Battle_RangeWeapon_ShotGun": {
     "localized_name": "Escopeta de doble cañón",
-    "description": "Escopeta poderosa en combates cercanos. Puede disparar 2 veces seguidas. El cargador es pequeño, pero tiene mucha potencia de disparo. Se fabrica en una |Fábrica de producción en cadena de armas|."
+    "description": "Escopeta poderosa en combates cercanos. Puede disparar 2 veces seguidas. El cargador es pequeño, pero tiene mucha potencia de disparo. Se fabrica en una \"Fábrica de producción en cadena de armas\"."
   },
   "Battle_RangeWeapon_ShotGun_Multi": {
     "localized_name": "Escopeta de bombeo",
-    "description": "Una escopeta mejorada con mayor capacidad de carga y más potencia. Su DPS a corta distancia es excepcional. Puede fabricarse en |Fábrica de producción en cadena de armas|."
+    "description": "Una escopeta mejorada con mayor capacidad de carga y más potencia. Su DPS a corta distancia es excepcional. Puede fabricarse en \"Fábrica de producción en cadena de armas\"."
   },
   "Battle_RangeWeapon_SphereLauncher": {
     "localized_name": "Lanzaesferas dispersor",
-    "description": "Un nuevo tipo de lanzador que dispara una gran cantidad de esferas a la vez. Permite capturar a una manada de Pals. Puede fabricarse en |Fábrica de producción en cadena de armas|."
+    "description": "Un nuevo tipo de lanzador que dispara una gran cantidad de esferas a la vez. Permite capturar a una manada de Pals. Puede fabricarse en \"Fábrica de producción en cadena de armas\"."
   },
   "Battle_RangeWeapon_SphereLauncher_Once": {
     "localized_name": "Lanzaesferas de tiro único",
-    "description": "Un lanzador diseñado para disparar esferas. Permite capturar Pals a mayor distancia. Puede fabricarse en |Mesa de creación de armas|."
+    "description": "Un lanzador diseñado para disparar esferas. Permite capturar Pals a mayor distancia. Puede fabricarse en \"Mesa de creación de armas\"."
   },
   "Battle_RangeWeapon_SubmachineGun": {
     "localized_name": "Subfusil",
@@ -457,7 +457,7 @@
   },
   "BreedFarm": {
     "localized_name": "Criadero",
-    "description": "Al asignar un Pal macho y uno hembra, pueden producir huevos. Para reproducirse, es necesario tener un |Pastel|."
+    "description": "Al asignar un Pal macho y uno hembra, pueden producir huevos. Para reproducirse, es necesario tener un \"Pastel\"."
   },
   "BronzeSword": {
     "localized_name": "Espada primitiva",
@@ -513,7 +513,7 @@
   },
   "Cloth2": {
     "localized_name": "Tela superior",
-    "description": "Tela superior tejido con gran cantidad de Lana. Es útil para fabricar equipo defensivo de alta calidad. Necesitarás una |Mesa de trabajo de alta calidad| para su fabricación."
+    "description": "Tela superior tejido con gran cantidad de Lana. Es útil para fabricar equipo defensivo de alta calidad. Necesitarás una \"Mesa de trabajo de alta calidad\" para su fabricación."
   },
   "CompositeDesk": {
     "localized_name": "Mesa de dibujo técnico",
@@ -541,7 +541,7 @@
   },
   "Crusher": {
     "localized_name": "Trituradora",
-    "description": "Instalación que permite triturar |Piedra| y |Madera| para convertirlos en otros materiales. Se necesita un Pal con la aptitud |riego| que haga girar la rueda de agua."
+    "description": "Instalación que permite triturar \"Piedra\" y \"Madera\" para convertirlos en otros materiales. Se necesita un Pal con la aptitud \"riego\" que haga girar la rueda de agua."
   },
   "CrystalPit": {
     "localized_name": "Cantera de Hexecuarzo",
@@ -593,7 +593,7 @@
   },
   "ElecBaton": {
     "localized_name": "Bastón paralizante",
-    "description": "Arma de corta distancia con la que puedes paralizar al rival. Un Pal paralizado será más fácil de capturar. Puede fabricarse en |Mesa de trabajo de alta calidad|."
+    "description": "Arma de corta distancia con la que puedes paralizar al rival. Un Pal paralizado será más fácil de capturar. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
   },
   "ElectricArcAssaultRifle": {
     "localized_name": "Rifle de plasma",
@@ -693,7 +693,7 @@
   },
   "FlourMill": {
     "localized_name": "Molino",
-    "description": "Instalación que muele |Trigo| para producir |Harina de trigo|. Se necesita un Pal con habilidad de |riego| para hacer girar la rueda de agua."
+    "description": "Instalación que muele \"Trigo\" para producir \"Harina de trigo\". Se necesita un Pal con habilidad de \"riego\" para hacer girar la rueda de agua."
   },
   "FlowerBed": {
     "localized_name": "Jardín de flores",
@@ -953,11 +953,11 @@
   },
   "HandTorch": {
     "localized_name": "Antorcha portátil",
-    "description": "Ilumina las noches oscuras y protege del frío. También puede utilizarse en combate cuerpo a cuerpo. Puede fabricarse en |Mesa de trabajo primitiva|."
+    "description": "Ilumina las noches oscuras y protege del frío. También puede utilizarse en combate cuerpo a cuerpo. Puede fabricarse en \"Mesa de trabajo primitiva\"."
   },
   "HandgunBullet": {
     "localized_name": "Balas para pistola",
-    "description": "Munición para usar con |Pistola| y otras armas similares. Necesitarás una |Mesa de creación de armas| para su fabricación."
+    "description": "Munición para usar con \"Pistola\" y otras armas similares. Necesitarás una \"Mesa de creación de armas\" para su fabricación."
   },
   "Headstone": {
     "localized_name": "Lápida",
@@ -997,19 +997,19 @@
   },
   "Infra_ElectronicCircuit": {
     "localized_name": "Placa de circuito impreso",
-    "description": "|Placa de circuito impreso| necesaria para fabricar armas de precisión. Puede crearse en una |Fábrica de producción en cadena|."
+    "description": "\"Placa de circuito impreso\" necesaria para fabricar armas de precisión. Puede crearse en una \"Fábrica de producción en cadena\"."
   },
   "Infra_ItemChest_Grade_01": {
     "localized_name": "Cofre de madera",
-    "description": "Contenedor de almacenamiento. Si se coloca en la base, los Pals con la aptitud |Transporte| moverán los objetos automáticamente."
+    "description": "Contenedor de almacenamiento. Si se coloca en la base, los Pals con la aptitud \"Transporte\" moverán los objetos automáticamente."
   },
   "Infra_ItemChest_Grade_02": {
     "localized_name": "Cofre de metal",
-    "description": "Permite almacenar más objetos y es más resistente. Los Pals con la aptitud |Transporte| moverán los objetos automáticamente."
+    "description": "Permite almacenar más objetos y es más resistente. Los Pals con la aptitud \"Transporte\" moverán los objetos automáticamente."
   },
   "Infra_ItemChest_Grade_03": {
     "localized_name": "Cofre de metal refinado",
-    "description": "Permite almacenar aún más objetos y es mucho más resistente. Los Pals con la aptitud |Transporte| moverán los objetos automáticamente."
+    "description": "Permite almacenar aún más objetos y es mucho más resistente. Los Pals con la aptitud \"Transporte\" moverán los objetos automáticamente."
   },
   "Infra_MachineParts": {
     "localized_name": "Clavos",
@@ -1093,11 +1093,11 @@
   },
   "LauncherBullet": {
     "localized_name": "Balas de cohete",
-    "description": "Munición para usar con |Lanzacohetes| y otras armas similares. Necesitarás una |Fábrica de producción en cadena de armas II| para su fabricación."
+    "description": "Munición para usar con \"Lanzacohetes\" y otras armas similares. Necesitarás una \"Fábrica de producción en cadena de armas II\" para su fabricación."
   },
   "Launcher_Meteor": {
     "localized_name": "Lanzameteoros",
-    "description": "Un arma que te hará decir: |¡Cielos, que macizo!|, fabricada a partir de un meteorito auténtico. Al topar contra algo explota como lo haría un meteorito. Puede fabricarse en |Fábrica de producción en cadena de armas|."
+    "description": "Un arma que te hará decir: \"¡Cielos, que macizo!\", fabricada a partir de un meteorito auténtico. Al topar contra algo explota como lo haría un meteorito. Puede fabricarse en \"Fábrica de producción en cadena de armas\"."
   },
   "MakeshiftAssaultRifle": {
     "localized_name": "Rifle de asalto deteriorado",
@@ -1105,7 +1105,7 @@
   },
   "MakeshiftHandgun": {
     "localized_name": "Pistola chatarra",
-    "description": "Pistola hecha a mano con chatarra. Es adecuada para combates a corta distancia, pero solo puede disparar una vez por recarga. Necesitarás una |Mesa de creación de armas| para su fabricación."
+    "description": "Pistola hecha a mano con chatarra. Es adecuada para combates a corta distancia, pero solo puede disparar una vez por recarga. Necesitarás una \"Mesa de creación de armas\" para su fabricación."
   },
   "MakeshiftShotgun": {
     "localized_name": "Escopeta deteriorada",
@@ -1125,7 +1125,7 @@
   },
   "MeatCutterKnife": {
     "localized_name": "Cuchillo de carnicero",
-    "description": "Cuchillo para hacer pedazos a Pals invocados. Cuando te lo equipes, la opción |acariciar| cambiará a |despedazar|. Los Pals que despedaces no regresarán."
+    "description": "Cuchillo para hacer pedazos a Pals invocados. Cuando te lo equipes, la opción \"acariciar\" cambiará a \"despedazar\". Los Pals que despedaces no regresarán."
   },
   "MedicalPalBed_04": {
     "localized_name": "Cama Pal grande",
@@ -1177,7 +1177,7 @@
   },
   "Musket": {
     "localized_name": "Mosquete",
-    "description": "Arma de fuego antigua y sencilla. Su disparo es potente, pero la recarga es lenta. Puede fabricarse en |Mesa de creación de armas|."
+    "description": "Arma de fuego antigua y sencilla. Su disparo es potente, pero la recarga es lenta. Puede fabricarse en \"Mesa de creación de armas\"."
   },
   "NinjaFlagSet": {
     "localized_name": "Set de bandera del Clan Flor Lunar",
@@ -1289,11 +1289,11 @@
   },
   "Product_Axe_Grade_02": {
     "localized_name": "Hacha de metal",
-    "description": "Hacha metálica capaz de talar madera dura. También es eficaz contra los árboles resistentes del interior del continente. Puede fabricarse en |Mesa de trabajo de alta calidad|."
+    "description": "Hacha metálica capaz de talar madera dura. También es eficaz contra los árboles resistentes del interior del continente. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
   },
   "Product_Axe_Grade_03": {
     "localized_name": "Hacha de metal refinado",
-    "description": "Hacha capaz de recolectar Madera dura de árboles que crecen en zonas extremas como volcanes o desiertos. Puede fabricarse en |Fábrica de producción en cadena|."
+    "description": "Hacha capaz de recolectar Madera dura de árboles que crecen en zonas extremas como volcanes o desiertos. Puede fabricarse en \"Fábrica de producción en cadena\"."
   },
   "Product_CoalPit": {
     "localized_name": "Mina de carbón",
@@ -1309,7 +1309,7 @@
   },
   "Product_Cooking_Grade_03": {
     "localized_name": "Cocina eléctrica",
-    "description": "Aunque requiere electricidad, permite cocinar de forma más avanzada y eficiente. Se requiere un Pal con la aptitud |Encendido de fuego|."
+    "description": "Aunque requiere electricidad, permite cocinar de forma más avanzada y eficiente. Se requiere un Pal con la aptitud \"Encendido de fuego\"."
   },
   "Product_CopperPit": {
     "localized_name": "Mina de metal",
@@ -1321,19 +1321,19 @@
   },
   "Product_Factory_Hard_Grade_01": {
     "localized_name": "Mesa de trabajo de alta calidad",
-    "description": "Más rápido que |Mesa de trabajo primitiva|. Para usarla necesitarás un Pal con la aptitud |Trabajo manual|."
+    "description": "Más rápido que \"Mesa de trabajo primitiva\". Para usarla necesitarás un Pal con la aptitud \"Trabajo manual\"."
   },
   "Product_Factory_Hard_Grade_02": {
     "localized_name": "Fábrica de producción en cadena",
-    "description": "Requiere electricidad, pero permite fabricar más tipos de objetos más rápidamente. Para usarla necesitarás un Pal con la aptitud |Trabajo manual|."
+    "description": "Requiere electricidad, pero permite fabricar más tipos de objetos más rápidamente. Para usarla necesitarás un Pal con la aptitud \"Trabajo manual\"."
   },
   "Product_Factory_Hard_Grade_03": {
     "localized_name": "Fábrica de producción en cadena II",
-    "description": "Requiere electricidad, pero permite fabricar aún más objetos de forma más veloz. Para usarla necesitarás un Pal con la aptitud |Trabajo manual|."
+    "description": "Requiere electricidad, pero permite fabricar aún más objetos de forma más veloz. Para usarla necesitarás un Pal con la aptitud \"Trabajo manual\"."
   },
   "Product_Farm_Berries": {
     "localized_name": "Plantación de bayas",
-    "description": "Una plantación de producción de bayas. Se requiere un Pal con las aptitudes |Siembra|, |Riego| y |Recolección| para trabajar."
+    "description": "Una plantación de producción de bayas. Se requiere un Pal con las aptitudes \"Siembra\", \"Riego\" y \"Recolección\" para trabajar."
   },
   "Product_Farm_Carrot": {
     "localized_name": "Plantación de zanahorias",
@@ -1341,7 +1341,7 @@
   },
   "Product_Farm_Lettuce": {
     "localized_name": "Plantación de lechuga",
-    "description": "Plantación para cultivar lechugas. Se requiere un Pal con las aptitudes |Siembra|, |Riego| y |Recolección|."
+    "description": "Plantación para cultivar lechugas. Se requiere un Pal con las aptitudes \"Siembra\", \"Riego\" y \"Recolección\"."
   },
   "Product_Farm_Onion": {
     "localized_name": "Plantación de cebollas",
@@ -1353,11 +1353,11 @@
   },
   "Product_Farm_tomato": {
     "localized_name": "Plantación de tomates",
-    "description": "Plantación para cultivar tomates. Se requiere un Pal con las aptitudes |Siembra|, |Riego| y |Recolección|."
+    "description": "Plantación para cultivar tomates. Se requiere un Pal con las aptitudes \"Siembra\", \"Riego\" y \"Recolección\"."
   },
   "Product_Farm_wheat": {
     "localized_name": "Plantación de trigo",
-    "description": "Una plantación de trigo, la materia prima de Pan. Se requiere un Pal con las aptitudes |Siembra|, |Riego| y |Recolección|."
+    "description": "Una plantación de trigo, la materia prima de Pan. Se requiere un Pal con las aptitudes \"Siembra\", \"Riego\" y \"Recolección\"."
   },
   "Product_Ingot_Grade_01_Copper": {
     "localized_name": "Horno primitivo",
@@ -1369,15 +1369,15 @@
   },
   "Product_Ingot_Grade_03_Steal": {
     "localized_name": "Horno eléctrico",
-    "description": "Permite fundir |Lingote de Paluminium|."
+    "description": "Permite fundir \"Lingote de Paluminium\"."
   },
   "Product_Medicine_Grade_01": {
     "localized_name": "Puesto médico medieval",
-    "description": "Te permitirá fabricar medicinas simples. Para usarla necesitarás un Pal con la aptitud |Farmacología|."
+    "description": "Te permitirá fabricar medicinas simples. Para usarla necesitarás un Pal con la aptitud \"Farmacología\"."
   },
   "Product_Medicine_Grade_02": {
     "localized_name": "Puesto médico eléctrico",
-    "description": "Requiere electricidad, pero podrás fabricar medicinas de nivel superior. Para usarla necesitarás un Pal con la aptitud |Farmacología|."
+    "description": "Requiere electricidad, pero podrás fabricar medicinas de nivel superior. Para usarla necesitarás un Pal con la aptitud \"Farmacología\"."
   },
   "Product_Pickaxe_Grade_01": {
     "localized_name": "Pico de piedra",
@@ -1385,11 +1385,11 @@
   },
   "Product_Pickaxe_Grade_02": {
     "localized_name": "Pico de metal",
-    "description": "Pico para minería. Al estar hecho de metal, tiene una mayor durabilidad y es más eficiente. Puede fabricarse en |Mesa de trabajo de alta calidad|."
+    "description": "Pico para minería. Al estar hecho de metal, tiene una mayor durabilidad y es más eficiente. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
   },
   "Product_Pickaxe_Grade_03": {
     "localized_name": "Pico de metal refinado",
-    "description": "Pico para minería. Es más duradero y eficiente. Puede fabricarse en |Fábrica de producción en cadena|."
+    "description": "Pico para minería. Es más duradero y eficiente. Puede fabricarse en \"Fábrica de producción en cadena\"."
   },
   "Product_QuartzPit": {
     "localized_name": "Mina de cuarzo puro",
@@ -1397,7 +1397,7 @@
   },
   "Product_StationDeforest": {
     "localized_name": "Zona de tala",
-    "description": "Instalación para producir madera en la base. Se requiere un Pal con la aptitud |Tala|."
+    "description": "Instalación para producir madera en la base. Se requiere un Pal con la aptitud \"Tala\"."
   },
   "Product_StationDeforest2": {
     "localized_name": "Zona de tala II",
@@ -1405,7 +1405,7 @@
   },
   "Product_StonePit": {
     "localized_name": "Cantera",
-    "description": "Instalación para producir piedra en la base. Se requiere un Pal con la aptitud |Minería|."
+    "description": "Instalación para producir piedra en la base. Se requiere un Pal con la aptitud \"Minería\"."
   },
   "Product_SulfurPit": {
     "localized_name": "Mina de azufre",
@@ -1413,15 +1413,15 @@
   },
   "Product_WeaponFactory_Dirty_Grade_01": {
     "localized_name": "Mesa de creación de armas",
-    "description": "Instalación para fabricar armas mecánicas simples. Se requiere un Pal con la aptitud |Trabajo manual|."
+    "description": "Instalación para fabricar armas mecánicas simples. Se requiere un Pal con la aptitud \"Trabajo manual\"."
   },
   "Product_WeaponFactory_Dirty_Grade_02": {
     "localized_name": "Fábrica de producción en cadena de armas",
-    "description": "Requiere electricidad, pero podrás fabricar armas y municiones más rápidamente. Para usarla necesitarás un Pal con la aptitud |Trabajo manual|."
+    "description": "Requiere electricidad, pero podrás fabricar armas y municiones más rápidamente. Para usarla necesitarás un Pal con la aptitud \"Trabajo manual\"."
   },
   "Product_WeaponFactory_Dirty_Grade_03": {
     "localized_name": "Fábrica de producción en cadena de armas II",
-    "description": "Requiere electricidad, pero podrás fabricar armas y municiones aún más rápidamente. Se requiere un Pal con la aptitud |Trabajo manual|."
+    "description": "Requiere electricidad, pero podrás fabricar armas y municiones aún más rápidamente. Se requiere un Pal con la aptitud \"Trabajo manual\"."
   },
   "Product_WorkBench_SkillUnlock": {
     "localized_name": "Mesa de fabricación de Equipamiento Pal",
@@ -1441,11 +1441,11 @@
   },
   "RifleBullet": {
     "localized_name": "Balas de rifle",
-    "description": "Munición para usar con rifles y armas similares. Puede fabricarse en |Mesa de creación de armas|."
+    "description": "Munición para usar con rifles y armas similares. Puede fabricarse en \"Mesa de creación de armas\"."
   },
   "RoughBullet": {
     "localized_name": "Munición de baja calidad",
-    "description": "Munición para usar con |Mosquete|, |Pistola chatarra| y otras armas similares. Necesitarás una |Mesa de creación de armas| para su fabricación."
+    "description": "Munición para usar con \"Mosquete\", \"Pistola chatarra\" y otras armas similares. Necesitarás una \"Mesa de creación de armas\" para su fabricación."
   },
   "SFArmor": {
     "localized_name": "Armadura de hexolita",
@@ -1497,19 +1497,19 @@
   },
   "Shield_02": {
     "localized_name": "Megaescudo",
-    "description": "Un escudo misterioso mejorado con tecnología de Paldium. Tiene mayor defensa. Necesitarás una |Mesa de trabajo de alta calidad| para su elaboración."
+    "description": "Un escudo misterioso mejorado con tecnología de Paldium. Tiene mayor defensa. Necesitarás una \"Mesa de trabajo de alta calidad\" para su elaboración."
   },
   "Shield_03": {
     "localized_name": "Gigaescudo",
-    "description": "Un escudo misterioso aún más potente gracias a la tecnología Paldium. Necesitarás una |Fábrica de producción en cadena| para su elaboración."
+    "description": "Un escudo misterioso aún más potente gracias a la tecnología Paldium. Necesitarás una \"Fábrica de producción en cadena\" para su elaboración."
   },
   "Shield_04": {
     "localized_name": "Teraescudo",
-    "description": "Un escudo de la más alta calidad obtenido tras múltiples pruebas. Necesitarás una |Fábrica de producción en cadena II| para su elaboración."
+    "description": "Un escudo de la más alta calidad obtenido tras múltiples pruebas. Necesitarás una \"Fábrica de producción en cadena II\" para su elaboración."
   },
   "Shield_05": {
     "localized_name": "Ultraescudo",
-    "description": "Un escudo definitivo creado tras incontables experimentos con tecnología Paldium. Necesitarás una |Fábrica de producción en cadena II| para su elaboración."
+    "description": "Un escudo definitivo creado tras incontables experimentos con tecnología Paldium. Necesitarás una \"Fábrica de producción en cadena II\" para su elaboración."
   },
   "Shield_07": {
     "localized_name": "Escudo ancestral",
@@ -1521,7 +1521,7 @@
   },
   "ShotGunBullet": {
     "localized_name": "Balas de escopeta",
-    "description": "Munición para usar con escopetas y armas similares. Puede fabricarse en |Mesa de creación de armas|."
+    "description": "Munición para usar con escopetas y armas similares. Puede fabricarse en \"Mesa de creación de armas\"."
   },
   "Signboard": {
     "localized_name": "Cartel",
@@ -2093,7 +2093,7 @@
   },
   "Spa": {
     "localized_name": "Baño termal",
-    "description": "El Pal entra en un |Baño termal| y recupera COR."
+    "description": "El Pal entra en un \"Baño termal\" y recupera COR."
   },
   "Spa2": {
     "localized_name": "Baño termal de lujo",
@@ -2109,11 +2109,11 @@
   },
   "Spear_2": {
     "localized_name": "Lanza de metal",
-    "description": "Lanza útil para el combate cuerpo a cuerpo. Hecha de metal, mejora el poder de ataque. Puede fabricarse en |Mesa de trabajo de alta calidad|."
+    "description": "Lanza útil para el combate cuerpo a cuerpo. Hecha de metal, mejora el poder de ataque. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
   },
   "Spear_3": {
     "localized_name": "Lanza de metal refinado",
-    "description": "Lanza útil para el combate cuerpo a cuerpo. Hecha de metal refinado, mejora el poder de ataque. Puede fabricarse en |Fábrica de producción en cadena|."
+    "description": "Lanza útil para el combate cuerpo a cuerpo. Hecha de metal refinado, mejora el poder de ataque. Puede fabricarse en \"Fábrica de producción en cadena\"."
   },
   "Spear_ForestBoss": {
     "localized_name": "Lanza de Lily",
@@ -2141,39 +2141,39 @@
   },
   "Special_PalSphere_Grade_02": {
     "localized_name": "Megaesfera",
-    "description": "Objeto para atrapar Pals. Son de buena calidad y permiten atrapar una mayor variedad de Pals. Puede fabricarse en |Mesa de elaboración de esferas|."
+    "description": "Objeto para atrapar Pals. Son de buena calidad y permiten atrapar una mayor variedad de Pals. Puede fabricarse en \"Mesa de elaboración de esferas\"."
   },
   "Special_PalSphere_Grade_03": {
     "localized_name": "Gigaesfera",
-    "description": "Objeto para atrapar Pals. Permite capturar Pals relativamente fuertes. Puede fabricarse en |Mesa de elaboración de esferas|."
+    "description": "Objeto para atrapar Pals. Permite capturar Pals relativamente fuertes. Puede fabricarse en \"Mesa de elaboración de esferas\"."
   },
   "Special_PalSphere_Grade_04": {
     "localized_name": "Teraesfera",
-    "description": "Objeto para atrapar Pals. Permite capturar Pals bastante fuertes. Puede fabricarse en |Fábrica de producción en cadena de esferas|."
+    "description": "Objeto para atrapar Pals. Permite capturar Pals bastante fuertes. Puede fabricarse en \"Fábrica de producción en cadena de esferas\"."
   },
   "Special_PalSphere_Grade_05": {
     "localized_name": "Ultraesfera",
-    "description": "Objeto para atrapar Pals. Es bastante efectiva y no hay muchos Pals que logran escapar de ella. Puede fabricarse en |Fábrica de producción en cadena de esferas II|."
+    "description": "Objeto para atrapar Pals. Es bastante efectiva y no hay muchos Pals que logran escapar de ella. Puede fabricarse en \"Fábrica de producción en cadena de esferas II\"."
   },
   "Special_PalSphere_Grade_06": {
     "localized_name": "Mitoesfera",
-    "description": "Objeto para atrapar Pals. Es muy efectiva y apenas hay Pals que logran escapar de ella. Puede fabricarse en |Fábrica de producción en cadena de esferas II|."
+    "description": "Objeto para atrapar Pals. Es muy efectiva y apenas hay Pals que logran escapar de ella. Puede fabricarse en \"Fábrica de producción en cadena de esferas II\"."
   },
   "Special_PalSphere_Grade_07": {
     "localized_name": "Esfera definitiva",
-    "description": "Herramienta que permite capturar Pals al lanzarla. Extremadamente eficaz, puede capturar casi todos los Pals. Puede fabricarse en |Fábrica de producción en cadena de esferas II|."
+    "description": "Herramienta que permite capturar Pals al lanzarla. Extremadamente eficaz, puede capturar casi todos los Pals. Puede fabricarse en \"Fábrica de producción en cadena de esferas II\"."
   },
   "Special_SphereFactory_Black_Grade_01": {
     "localized_name": "Mesa de elaboración de esferas",
-    "description": "Mesa de trabajo para fabricar esferas de captura de Pals. Se requiere un Pal con la aptitud |Trabajo manual| para poder usarse."
+    "description": "Mesa de trabajo para fabricar esferas de captura de Pals. Se requiere un Pal con la aptitud \"Trabajo manual\" para poder usarse."
   },
   "Special_SphereFactory_Black_Grade_02": {
     "localized_name": "Fábrica de producción en cadena de esferas",
-    "description": "Permite producir |Palesfera| más rápidamente. Se requiere un Pal con la aptitud |Trabajo manual|."
+    "description": "Permite producir \"Palesfera\" más rápidamente. Se requiere un Pal con la aptitud \"Trabajo manual\"."
   },
   "Special_SphereFactory_Black_Grade_03": {
     "localized_name": "Fábrica de producción en cadena de esferas II",
-    "description": "Permite producir |Palesfera| aún más rápido. Se requiere un Pal con la aptitud |Trabajo manual|."
+    "description": "Permite producir \"Palesfera\" aún más rápido. Se requiere un Pal con la aptitud \"Trabajo manual\"."
   },
   "SphereFactory_Black_04": {
     "localized_name": "Fábrica de esferas de alta tecnología",
@@ -2341,7 +2341,7 @@
   },
   "Workbench": {
     "localized_name": "Mesa de trabajo primitiva",
-    "description": "|Mesa de trabajo primitiva| para fabricar objetos simples. Si tienes un Pal con la aptitud |Trabajo manual|, te ayudará con el trabajo."
+    "description": "\"Mesa de trabajo primitiva\" para fabricar objetos simples. Si tienes un Pal con la aptitud \"Trabajo manual\", te ayudará con el trabajo."
   },
   "WorldTreeIngot": {
     "localized_name": "Lingote de palxite",

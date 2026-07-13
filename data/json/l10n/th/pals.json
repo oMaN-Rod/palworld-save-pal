@@ -577,7 +577,7 @@
   },
   "DrillGame": {
     "localized_name": "Digtoise",
-    "description": "มีเรื่องเล่าชื่อ |สว่านของDigtoise| เป็นปริศนาธรรมให้ขบคิดเกี่ยวกับ ความลักลั่นย้อนแย้งของDigtoiseที่มีเกราะและสว่านที่แข็งแกร่งที่สุด"
+    "description": "มีเรื่องเล่าชื่อ \"สว่านของDigtoise\" เป็นปริศนาธรรมให้ขบคิดเกี่ยวกับ ความลักลั่นย้อนแย้งของDigtoiseที่มีเกราะและสว่านที่แข็งแกร่งที่สุด"
   },
   "Eagle": {
     "localized_name": "Galeclaw",
@@ -589,7 +589,7 @@
   },
   "ElecLion": {
     "localized_name": "Boltmane",
-    "description": "-"
+    "description": "The more it moves, the more it heats up and the hair tips increasingly glow brighter. At its peak, it becomes so dazzling that you risk blindness if you stare at it directly."
   },
   "ElecLizard": {
     "localized_name": "Slowatt",
@@ -925,11 +925,11 @@
   },
   "FlowerDinosaur": {
     "localized_name": "Dinossom",
-    "description": "ถ้าโกรธขึ้นมาจะอาละวาดเหมือนเพลิงผลาญรับมือไม่ไหว สำนวนที่ว่า |เหยียบหางDinossom| หมายถึงทำให้ใครบางคนโกรธมาก"
+    "description": "ถ้าโกรธขึ้นมาจะอาละวาดเหมือนเพลิงผลาญรับมือไม่ไหว สำนวนที่ว่า \"เหยียบหางDinossom\" หมายถึงทำให้ใครบางคนโกรธมาก"
   },
   "FlowerDinosaur_Electric": {
     "localized_name": "Dinossom Lux",
-    "description": "แม้จะโดนฟ้าผ่าแต่ก็ยังรอดชีวิต สำนวนที่ว่า |ฟ้าผ่าDinossom Lux| หมายถึงรอดตายฉิวเฉียด"
+    "description": "แม้จะโดนฟ้าผ่าแต่ก็ยังรอดชีวิต สำนวนที่ว่า \"ฟ้าผ่าDinossom Lux\" หมายถึงรอดตายฉิวเฉียด"
   },
   "FlowerDoll": {
     "localized_name": "Petallia",
@@ -1545,7 +1545,7 @@
   },
   "KingBahamut_Dragon": {
     "localized_name": "Blazamut Ryu",
-    "description": "ปรากฎกายขึ้นมาจากใต้พิภพในอดีตอันไกลโพ้น เปลวเพลิงลุกโชนไร้ความปรานี ไฟจะไม่มอดดับจนกว่าจะเผาไหม้ทั่วทั้งเกาะ รู้จักกันในนาม |เพลิงนิรันดร์|"
+    "description": "ปรากฎกายขึ้นมาจากใต้พิภพในอดีตอันไกลโพ้น เปลวเพลิงลุกโชนไร้ความปรานี ไฟจะไม่มอดดับจนกว่าจะเผาไหม้ทั่วทั้งเกาะ รู้จักกันในนาม \"เพลิงนิรันดร์\""
   },
   "KingSunfish": {
     "localized_name": "Solmora",
@@ -1945,7 +1945,7 @@
   },
   "MimicDog": {
     "localized_name": "Mimog",
-    "description": "ณ อาณาจักรที่เคยตั้งอยู่บนเกาะในอดีต มีธรรมเนียมมอบรางวัลให้กับผู้ที่ตายได้งี่เง่าที่สุดในปีนั้น สาเหตุการตายแรกสุดที่ได้จารึกไว้คือ |เปิดกล่องแล้วโดนกัดตายเพราะไม่รู้ว่านั่นคือMimog|"
+    "description": "ณ อาณาจักรที่เคยตั้งอยู่บนเกาะในอดีต มีธรรมเนียมมอบรางวัลให้กับผู้ที่ตายได้งี่เง่าที่สุดในปีนั้น สาเหตุการตายแรกสุดที่ได้จารึกไว้คือ \"เปิดกล่องแล้วโดนกัดตายเพราะไม่รู้ว่านั่นคือMimog\""
   },
   "MobuCitizen": {
     "localized_name": "ชาวเกาะ",
@@ -1961,7 +1961,7 @@
   },
   "Monkey": {
     "localized_name": "Tanzee",
-    "description": "แรกเริ่มเดิมทีมันใช้แท่งเรียวยาวเช่นกิ่งไม้เป็นอาวุธ แต่เมื่อคลุกคลีกับมนุษย์ ก็ไม่ได้ใช้อีก เพราะมันพบ |ปืน| ที่ทั้งเรียวยาวและมีประสิทธิภาพยิ่งกว่าแล้ว"
+    "description": "แรกเริ่มเดิมทีมันใช้แท่งเรียวยาวเช่นกิ่งไม้เป็นอาวุธ แต่เมื่อคลุกคลีกับมนุษย์ ก็ไม่ได้ใช้อีก เพราะมันพบ \"ปืน\" ที่ทั้งเรียวยาวและมีประสิทธิภาพยิ่งกว่าแล้ว"
   },
   "Monkey_Fire": {
     "localized_name": "Tanzee Ignis",
@@ -2145,7 +2145,7 @@
   },
   "PREDATOR_DrillGame": {
     "localized_name": "Digtoise",
-    "description": "มีเรื่องเล่าชื่อ |สว่านของDigtoise| เป็นปริศนาธรรมให้ขบคิดเกี่ยวกับ ความลักลั่นย้อนแย้งของDigtoiseที่มีเกราะและสว่านที่แข็งแกร่งที่สุด"
+    "description": "มีเรื่องเล่าชื่อ \"สว่านของDigtoise\" เป็นปริศนาธรรมให้ขบคิดเกี่ยวกับ ความลักลั่นย้อนแย้งของDigtoiseที่มีเกราะและสว่านที่แข็งแกร่งที่สุด"
   },
   "PREDATOR_FairyDragon": {
     "localized_name": "Elphidran",
@@ -2157,7 +2157,7 @@
   },
   "PREDATOR_FlowerDinosaur": {
     "localized_name": "Dinossom",
-    "description": "ถ้าโกรธขึ้นมาจะอาละวาดเหมือนเพลิงผลาญรับมือไม่ไหว สำนวนที่ว่า |เหยียบหางDinossom| หมายถึงทำให้ใครบางคนโกรธมาก"
+    "description": "ถ้าโกรธขึ้นมาจะอาละวาดเหมือนเพลิงผลาญรับมือไม่ไหว สำนวนที่ว่า \"เหยียบหางDinossom\" หมายถึงทำให้ใครบางคนโกรธมาก"
   },
   "PREDATOR_FlowerRabbit_Quest": {
     "localized_name": "Flopie",
@@ -2249,7 +2249,7 @@
   },
   "PREDATOR_PurpleSpider": {
     "localized_name": "Tarantriss",
-    "description": "เหนียวหนืดหนึบหนับเป็นอย่างยิ่ง ยิ่งอาละวาดยิ่งเกาะติดแน่น เช่นเดียวกับ |นิสัย| ของมัน"
+    "description": "เหนียวหนืดหนึบหนับเป็นอย่างยิ่ง ยิ่งอาละวาดยิ่งเกาะติดแน่น เช่นเดียวกับ \"นิสัย\" ของมัน"
   },
   "PREDATOR_RedArmorBird": {
     "localized_name": "Ragnahawk",
@@ -2473,14 +2473,14 @@
   },
   "PurpleSpider": {
     "localized_name": "Tarantriss",
-    "description": "เหนียวหนืดหนึบหนับเป็นอย่างยิ่ง ยิ่งอาละวาดยิ่งเกาะติดแน่น เช่นเดียวกับ |นิสัย| ของมัน"
+    "description": "เหนียวหนืดหนึบหนับเป็นอย่างยิ่ง ยิ่งอาละวาดยิ่งเกาะติดแน่น เช่นเดียวกับ \"นิสัย\" ของมัน"
   },
   "QueenBee": {
     "localized_name": "Elizabee",
     "description": "ราชินีผู้ถูกเลือกให้ปกครองBeegarde มีทาสรับใช้ที่ยินดีที่ทำงานเพื่อราชินีผู้ยิ่งใหญ่ จนตัวตายอยู่ไม่ขาดสาย"
   },
   "QuestMan": {
-    "localized_name": "-",
+    "localized_name": "Quest Client",
     "description": null
   },
   "Quest_Farmer03_PinkCat": {
@@ -2773,11 +2773,11 @@
   },
   "SakuraSaurus": {
     "localized_name": "Broncherry",
-    "description": "กลิ่นกายตอนก่อนจับคู่ต่างกันกับตอนหลังจับคู่เป็นอย่างมาก หลังเจอคู่จะกลายเป็นกลิ่นหอม เรียกว่า |กลิ่นรักแรก|"
+    "description": "กลิ่นกายตอนก่อนจับคู่ต่างกันกับตอนหลังจับคู่เป็นอย่างมาก หลังเจอคู่จะกลายเป็นกลิ่นหอม เรียกว่า \"กลิ่นรักแรก\""
   },
   "SakuraSaurus_Water": {
     "localized_name": "Broncherry Aqua",
-    "description": "กลิ่นกายตอนก่อนจับคู่ต่างกันกับตอนหลังจับคู่เป็นอย่างมาก ก่อนเจอคู่จะกลายเป็นกลิ่นหอม เรียกว่า |กลิ่นบริสุทธิ์|"
+    "description": "กลิ่นกายตอนก่อนจับคู่ต่างกันกับตอนหลังจับคู่เป็นอย่างมาก ก่อนเจอคู่จะกลายเป็นกลิ่นหอม เรียกว่า \"กลิ่นบริสุทธิ์\""
   },
   "SalesPerson": {
     "localized_name": "พ่อค้าเร่",
@@ -3037,10 +3037,10 @@
   },
   "VioletFairy": {
     "localized_name": "Vaelet",
-    "description": "ที่ปราสาทมีดอกไม้ที่พระราชาชอบอยู่มากมาย เกิดการต่อสู้ครั้งใหญ่ขึ้น มีไฟลามมายังปราสาท ตอนนั้นเอง มีภูตดอกไม้ตนหนึ่งปรากฏกายขึ้น - จากนิทานเรื่อง |ดอกไม้ของพระราชา|"
+    "description": "ที่ปราสาทมีดอกไม้ที่พระราชาชอบอยู่มากมาย เกิดการต่อสู้ครั้งใหญ่ขึ้น มีไฟลามมายังปราสาท ตอนนั้นเอง มีภูตดอกไม้ตนหนึ่งปรากฏกายขึ้น - จากนิทานเรื่อง \"ดอกไม้ของพระราชา\""
   },
   "VisitingMerchant": {
-    "localized_name": "-",
+    "localized_name": "Visitor",
     "description": null
   },
   "Visitor_Hunter_Rifle": {
@@ -3072,7 +3072,7 @@
     "description": "ตัวไหนสุขภาพดีเหลวก็ไหลผ่านสันหลังได้ปกติดี แต่ในกรณีที่ใจเต้นรัว อุณหภูมิอาจจะผิดเพี้ยน และขั้นร้ายสุด อาจะช็อกเสียชีวิตกระทันหันจากการระเหยและแข็งตัว"
   },
   "WeaponsDealer": {
-    "localized_name": "-",
+    "localized_name": "Weapons Dealer",
     "description": null
   },
   "WeaselDragon": {
@@ -3097,7 +3097,7 @@
   },
   "WhiteDeer": {
     "localized_name": "Celesdir",
-    "description": "ในตำราโบราณมีบันทึกไว้ว่าเป็น |สัตว์ผู้ช่วยเหลือ| เพราะแสงที่Celesdirเปล่งออกมา ชำระล้างได้ทุกสิ่ง ชำระและล้างตรงตามตัวอักษร คือหายไปจากโลกนี้ ไม่ทิ้งร่องรอย"
+    "description": "ในตำราโบราณมีบันทึกไว้ว่าเป็น \"สัตว์ผู้ช่วยเหลือ\" เพราะแสงที่Celesdirเปล่งออกมา ชำระล้างได้ทุกสิ่ง ชำระและล้างตรงตามตัวอักษร คือหายไปจากโลกนี้ ไม่ทิ้งร่องรอย"
   },
   "WhiteDeer_Dark": {
     "localized_name": "Celesdir Noct",
@@ -3153,7 +3153,7 @@
   },
   "WizardOwl": {
     "localized_name": "Hoocrates",
-    "description": "มักจะจมอยู่กับความคิด คิดมากจนนอนไม่หลับ |ฉันคิดฉันจึงมีอยู่|"
+    "description": "มักจะจมอยู่กับความคิด คิดมากจนนอนไม่หลับ \"ฉันคิดฉันจึงมีอยู่\""
   },
   "WoolFox": {
     "localized_name": "Cremis",
@@ -3325,7 +3325,7 @@
   },
   "BeardedDragon": {
     "localized_name": "BeardedDragon",
-    "description": "-"
+    "description": "This Pal is under investigation."
   },
   "BlueWoolRabbit": {
     "localized_name": "BlueWoolRabbit",
@@ -3369,7 +3369,7 @@
   },
   "GrassDragon": {
     "localized_name": "GrassDragon",
-    "description": "-"
+    "description": "This Pal is under investigation."
   },
   "IceVeilDragon": {
     "localized_name": "IceVeilDragon",
@@ -3445,7 +3445,7 @@
   },
   "WaterLizard": {
     "localized_name": "WaterLizard",
-    "description": "-"
+    "description": null
   },
   "WorldTree_Hunter_MissileLauncher_test": {
     "localized_name": "WorldTree_Hunter_MissileLauncher_test",

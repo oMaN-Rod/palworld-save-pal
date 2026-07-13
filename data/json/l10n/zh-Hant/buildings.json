@@ -1985,10 +1985,10 @@
   },
   "JapaneseStyle_TriangleStairsCorner_02": {
     "localized_name": "JapaneseStyle_TriangleStairsCorner_02",
-    "description": "zh_Hant_Text"
+    "description": null
   },
   "WoodCreator": {
     "localized_name": "WoodCreator",
-    "description": "zh_Hant_Text"
+    "description": null
   }
 }

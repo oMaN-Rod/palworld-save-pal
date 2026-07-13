@@ -376,16 +376,16 @@
     "description": "Bandera decorativa del pueblo de Tenraku."
   },
   "Decal_PalSticker_PinkCat": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Tuppanyan sticker",
+    "description": null
   },
   "DefenseBowGun": {
     "localized_name": "Ballesta fija",
-    "description": "Una instalación defensiva donde se colocan Pals para prepararse para el combate. Al asignar un Pal con la aptitud |trabajo manual|, usará la ballesta para proteger la base."
+    "description": "Una instalación defensiva donde se colocan Pals para prepararse para el combate. Al asignar un Pal con la aptitud \"trabajo manual\", usará la ballesta para proteger la base."
   },
   "DefenseMachinegun": {
     "localized_name": "Ametralladora fija",
-    "description": "Una instalación defensiva donde se colocan Pals para prepararse para el combate. Al asignar un Pal con la aptitud |trabajo manual|, usará la ametralladora para proteger la base."
+    "description": "Una instalación defensiva donde se colocan Pals para prepararse para el combate. Al asignar un Pal con la aptitud \"trabajo manual\", usará la ametralladora para proteger la base."
   },
   "DefenseMachinegun_AutoTurret": {
     "localized_name": "Torreta de la civilización antigua",
@@ -393,7 +393,7 @@
   },
   "DefenseMissile": {
     "localized_name": "Lanzamisiles fijo",
-    "description": "Una instalación defensiva donde se colocan Pals para prepararse para el combate. Al asignar un Pal con la aptitud |trabajo manual|, usará el lanzamisiles para proteger la base."
+    "description": "Una instalación defensiva donde se colocan Pals para prepararse para el combate. Al asignar un Pal con la aptitud \"trabajo manual\", usará el lanzamisiles para proteger la base."
   },
   "DefenseWait": {
     "localized_name": "Bolsa de arena",
@@ -1292,8 +1292,8 @@
     "description": "Alfombra alargada antigua decorativa."
   },
   "Rug_Wood": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Fur rug",
+    "description": null
   },
   "SF_Chair": {
     "localized_name": "Silla estilo laboratorio",
@@ -1832,8 +1832,8 @@
     "description": "Trampa que congela al Pal que la pisa. Los Pals congelados son más fáciles de capturar con la esfera."
   },
   "Trap_MovingPanel": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Moving Panels",
+    "description": "A description of the moving panel"
   },
   "Trap_Noose": {
     "localized_name": "Trampa colgante",
@@ -1984,11 +1984,11 @@
     "description": "Silla de suelo decorativa. Ideal para construcciones con estilo japonés."
   },
   "JapaneseStyle_TriangleStairsCorner_02": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "JapaneseStyle_TriangleStairsCorner_02",
+    "description": null
   },
   "WoodCreator": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "WoodCreator",
+    "description": null
   }
 }

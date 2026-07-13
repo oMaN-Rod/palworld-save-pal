@@ -484,20 +484,20 @@
     "description": "Animal Skin"
   },
   "AnimalSkin2": {
-    "localized_name": "AnimalSkin2",
-    "description": null
+    "localized_name": "Animal Skin",
+    "description": "Animal Skin"
   },
   "Antibiotic_Good": {
-    "localized_name": "Antibiotic_Good",
-    "description": null
+    "localized_name": "Antibiotic Good",
+    "description": "Antibiotic Good"
   },
   "Antibiotic_Normal": {
-    "localized_name": "Antibiotic_Normal",
-    "description": null
+    "localized_name": "Antibiotic Normal",
+    "description": "Antibiotic Normal"
   },
   "Antibiotic_Super": {
-    "localized_name": "Antibiotic_Super",
-    "description": null
+    "localized_name": "Antibiotic Super",
+    "description": "Antibiotic Super"
   },
   "Arrow": {
     "localized_name": "箭矢",
@@ -505,7 +505,7 @@
   },
   "Arrow_Fire": {
     "localized_name": "火箭矢",
-    "description": "弓射擊時用的火箭矢。 可以對敵人造成ElemIcon_Fire火屬性傷害。 可在「初階工作台」製作。"
+    "description": "弓射擊時用的火箭矢。 可以對敵人造成火屬性傷害。 可在「初階工作台」製作。"
   },
   "Arrow_Poison": {
     "localized_name": "毒箭矢",
@@ -732,8 +732,8 @@
     "description": "生吃或烘烤後享用都很美味，可謂萬能食材。 島上四處皆能找到。"
   },
   "Berries2": {
-    "localized_name": "Berries2",
-    "description": null
+    "localized_name": "Red Berries",
+    "description": "A versatile ingredient that is delicious raw or cooked. They can be found anywhere on the island."
   },
   "BerrySeeds": {
     "localized_name": "莓果種子",
@@ -1741,7 +1741,7 @@
   },
   "Blueprint_Head012_5": {
     "localized_name": "波勒帽的設計圖5",
-    "description": "擁有它時，|博勒帽 （傳奇）|的配方將會解鎖。 可以在|初階工作台|裡進行工藝製作。"
+    "description": "擁有它時，「博勒帽 （傳奇）」的配方將會解鎖。 可以在「初階工作台」裡進行工藝製作。"
   },
   "Blueprint_Head013_1": {
     "localized_name": "炸蛋鳥帽設計圖1",
@@ -1761,7 +1761,7 @@
   },
   "Blueprint_Head013_5": {
     "localized_name": "庫魯特里帽的設計圖5",
-    "description": "持有它，會解鎖| 炸蛋鳥帽 （傳奇）|的配方。 可以在| 初階工作台 |上進行工藝製作。"
+    "description": "持有它，會解鎖「 炸蛋鳥帽 （傳奇）」的配方。 可以在「 初階工作台 」上進行工藝製作。"
   },
   "Blueprint_Head014_1": {
     "localized_name": "笑臉炸蛋鳥帽設計圖1",
@@ -3716,8 +3716,8 @@
     "description": "Claw"
   },
   "Claws2": {
-    "localized_name": "Claws2",
-    "description": null
+    "localized_name": "Claw",
+    "description": "Claw"
   },
   "Cloth": {
     "localized_name": "布",
@@ -4160,8 +4160,8 @@
     "description": "Fang"
   },
   "Fang2": {
-    "localized_name": "Fang2",
-    "description": null
+    "localized_name": "Fang",
+    "description": "Fang"
   },
   "Fiber": {
     "localized_name": "纖維",
@@ -5476,8 +5476,8 @@
     "description": "源自帕魯的皮革，可用來製作防具。 可從部分帕魯身上取得。"
   },
   "Leather2": {
-    "localized_name": "Leather2",
-    "description": null
+    "localized_name": "Leather",
+    "description": "Leather taken from a Pal, it serves as a defensive material. It can be obtained from certain Pals."
   },
   "Lettuce": {
     "localized_name": "萵苣",
@@ -5537,7 +5537,7 @@
   },
   "LuxuryOmelette": {
     "localized_name": "LuxuryOmelette",
-    "description": null
+    "description": "LuxuryOmelette"
   },
   "LvUP_01": {
     "localized_name": "修練結晶",
@@ -5660,8 +5660,8 @@
     "description": "帕魯的肉。 新鮮到人類都能生吃，不怕鬧肚子。"
   },
   "Meat2": {
-    "localized_name": "Meat2",
-    "description": null
+    "localized_name": "Meat",
+    "description": "Pal meat. It’s so fresh that even a human could safely eat it raw."
   },
   "MeatAndPotatoes": {
     "localized_name": "馬鈴薯燉天擒鳥肉",
@@ -6205,75 +6205,75 @@
   },
   "PalAwakening_Dark": {
     "localized_name": "暗之覺醒晶石",
-    "description": "濃縮了世界樹能量的結晶。 可以讓ElemIcon_Dark暗屬性的帕魯覺醒，解放其隱藏的能力。"
+    "description": "濃縮了世界樹能量的結晶。 可以讓暗屬性的帕魯覺醒，解放其隱藏的能力。"
   },
   "PalAwakening_Dragon": {
     "localized_name": "龍之覺醒晶石",
-    "description": "濃縮了世界樹能量的結晶。 可以讓ElemIcon_Dragon龍屬性的帕魯覺醒，解放其隱藏的能力。"
+    "description": "濃縮了世界樹能量的結晶。 可以讓龍屬性的帕魯覺醒，解放其隱藏的能力。"
   },
   "PalAwakening_Electric": {
     "localized_name": "雷之覺醒晶石",
-    "description": "濃縮了世界樹能量的結晶。 可以讓ElemIcon_Electric雷屬性的帕魯覺醒，解放其隱藏的能力。"
+    "description": "濃縮了世界樹能量的結晶。 可以讓雷屬性的帕魯覺醒，解放其隱藏的能力。"
   },
   "PalAwakening_Fire": {
     "localized_name": "火之覺醒晶石",
-    "description": "濃縮了世界樹能量的結晶。 可以讓ElemIcon_Fire火屬性的帕魯覺醒，解放其隱藏的能力。"
+    "description": "濃縮了世界樹能量的結晶。 可以讓火屬性的帕魯覺醒，解放其隱藏的能力。"
   },
   "PalAwakening_Grass": {
     "localized_name": "草之覺醒晶石",
-    "description": "濃縮了世界樹能量的結晶。 可以讓ElemIcon_Grass草屬性的帕魯覺醒，解放其隱藏的能力。"
+    "description": "濃縮了世界樹能量的結晶。 可以讓草屬性的帕魯覺醒，解放其隱藏的能力。"
   },
   "PalAwakening_Ground": {
     "localized_name": "地之覺醒晶石",
-    "description": "濃縮了世界樹能量的結晶。 可以讓ElemIcon_Ground地屬性的帕魯覺醒，解放其隱藏的能力。"
+    "description": "濃縮了世界樹能量的結晶。 可以讓地屬性的帕魯覺醒，解放其隱藏的能力。"
   },
   "PalAwakening_Ice": {
     "localized_name": "冰之覺醒晶石",
-    "description": "濃縮了世界樹能量的結晶。 可以讓ElemIcon_Ice冰屬性的帕魯覺醒，解放其隱藏的能力。"
+    "description": "濃縮了世界樹能量的結晶。 可以讓冰屬性的帕魯覺醒，解放其隱藏的能力。"
   },
   "PalAwakening_Material_Dark": {
     "localized_name": "暗之輝石",
-    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放ElemIcon_Dark暗屬性帕魯體內隱藏的能力。"
+    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放暗屬性帕魯體內隱藏的能力。"
   },
   "PalAwakening_Material_Dragon": {
     "localized_name": "龍之輝石",
-    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放ElemIcon_Dragon龍屬性帕魯體內隱藏的能力。"
+    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放龍屬性帕魯體內隱藏的能力。"
   },
   "PalAwakening_Material_Electric": {
     "localized_name": "雷之輝石",
-    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放ElemIcon_Electric雷屬性帕魯體內隱藏的能力。"
+    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放雷屬性帕魯體內隱藏的能力。"
   },
   "PalAwakening_Material_Fire": {
     "localized_name": "火之輝石",
-    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放ElemIcon_Fire火屬性帕魯體內隱藏的能力。"
+    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放火屬性帕魯體內隱藏的能力。"
   },
   "PalAwakening_Material_Grass": {
     "localized_name": "草之輝石",
-    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放ElemIcon_Grass草屬性帕魯體內隱藏的能力。"
+    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放草屬性帕魯體內隱藏的能力。"
   },
   "PalAwakening_Material_Ground": {
     "localized_name": "地之輝石",
-    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放ElemIcon_Ground地屬性帕魯體內隱藏的能力。"
+    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放地屬性帕魯體內隱藏的能力。"
   },
   "PalAwakening_Material_Ice": {
     "localized_name": "冰之輝石",
-    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放ElemIcon_Ice冰屬性帕魯體內隱藏的能力。"
+    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放冰屬性帕魯體內隱藏的能力。"
   },
   "PalAwakening_Material_Neutral": {
     "localized_name": "無之輝石",
-    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放ElemIcon_Neutral無屬性帕魯體內隱藏的能力。"
+    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放無屬性帕魯體內隱藏的能力。"
   },
   "PalAwakening_Material_Water": {
     "localized_name": "水之輝石",
-    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放ElemIcon_Water水屬性帕魯體內隱藏的能力。"
+    "description": "世界樹的能量積聚在帕魯體內形成的石頭。 加工後可以製成道具， 解放水屬性帕魯體內隱藏的能力。"
   },
   "PalAwakening_Neutral": {
     "localized_name": "無之覺醒晶石",
-    "description": "濃縮了世界樹能量的結晶。 可以讓ElemIcon_Neutral無屬性的帕魯覺醒，解放其隱藏的能力。"
+    "description": "濃縮了世界樹能量的結晶。 可以讓無屬性的帕魯覺醒，解放其隱藏的能力。"
   },
   "PalAwakening_Water": {
     "localized_name": "水之覺醒晶石",
-    "description": "濃縮了世界樹能量的結晶。 可以讓ElemIcon_Water水屬性的帕魯覺醒，解放其隱藏的能力。"
+    "description": "濃縮了世界樹能量的結晶。 可以讓水屬性的帕魯覺醒，解放其隱藏的能力。"
   },
   "PalCrystal_Ex": {
     "localized_name": "古代文明部件",
@@ -6440,8 +6440,8 @@
     "description": "巨大新綠帕魯蛋。 能感受到深綠靈魂的蓬勃生氣，彷彿某種奇特生物即將破殼而出。 把它放進帕魯蛋孵化器裡孵化吧。"
   },
   "PalEgg_MutationPal": {
-    "localized_name": "zh_Hant_Text",
-    "description": "[WIP] Description not finalized. A zh_Hant_Text. You can feel the restless aura of a strange soul, as if a monster is about to be born. Place it in a 帕魯蛋孵化器 to hatch it."
+    "localized_name": "巨大突變帕魯蛋",
+    "description": "[WIP] Description not finalized. A Huge Mutated Egg. You can feel the restless aura of a strange soul, as if a monster is about to be born. Place it in a Egg Incubator to hatch it."
   },
   "PalEgg_MutationPal_01": {
     "localized_name": "突變帕魯蛋",
@@ -7189,7 +7189,7 @@
   },
   "PotatoSeedPotatoes": {
     "localized_name": "PotatoSeedPotatoes",
-    "description": null
+    "description": "PotatoSeedPotatoes"
   },
   "PotatoSeeds": {
     "localized_name": "馬鈴薯種薯",
@@ -8009,7 +8009,7 @@
   },
   "SkillUnlock_BlackFurDragon": {
     "localized_name": "シャドーラ的<>{ショットガン}<>",
-    "description": "A shotgun for zh_Hant_Text to hold."
+    "description": "A shotgun for Dragostrophe to hold."
   },
   "SkillUnlock_BlackGriffon": {
     "localized_name": "異構格里芬專用鞍具",
@@ -8069,7 +8069,7 @@
   },
   "SkillUnlock_DarkMutant": {
     "localized_name": "達克內西斯的",
-    "description": "A tool for safely riding zh_Hant_Text."
+    "description": "A tool for safely riding DarkMutant."
   },
   "SkillUnlock_Deer": {
     "localized_name": "紫霞鹿專用鞍具",
@@ -8097,7 +8097,7 @@
   },
   "SkillUnlock_ElecLion": {
     "localized_name": "利奧薩奇的鞍座",
-    "description": "zh_Hant_Text"
+    "description": "A tool for safely riding Boltmane."
   },
   "SkillUnlock_ElecPanda": {
     "localized_name": "暴電熊專用機關槍",
@@ -8644,16 +8644,16 @@
     "description": "用烈陽金屬錠製造的榴彈發射器。 提升了彈道穩定性，可實現高精度遠程轟炸。"
   },
   "SkyHeavyBullet": {
-    "localized_name": "zh_Hant_Text",
-    "description": "[WIP] Description not finalized. Ammo for the 原型散彈槍, 戰術榴彈發射器, and similar weapons."
+    "localized_name": "Sunreach Single-Shot Ammo",
+    "description": "[WIP] Description not finalized. Ammo for the Prototype Shotgun, Tactical Grenade Launcher, and similar weapons."
   },
   "SkyIslandOre": {
     "localized_name": "烈陽金屬",
     "description": "只有在天陽鄉才能開採到的稀有礦石。 密度極高的母岩有著神秘的花紋，其中蘊含著光輝。"
   },
   "SkyLightBullet": {
-    "localized_name": "zh_Hant_Text",
-    "description": "[WIP] Description not finalized. Ammo for the 戰鬥衝鋒槍, 重型突擊步槍, and similar weapons."
+    "localized_name": "Sunreach Rapid-Fire Ammo",
+    "description": "[WIP] Description not finalized. Ammo for the Combat SMG, Heavy Assault Rifle, and similar weapons."
   },
   "SkyShotgun": {
     "localized_name": "原型散彈槍",
@@ -9552,8 +9552,8 @@
     "description": "生火時會用到的素材。 偶爾能在挖掘石頭時找到。"
   },
   "Gasoline": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Gasoline",
+    "description": null
   },
   "IronOre": {
     "localized_name": "IronOre",
@@ -9608,8 +9608,8 @@
     "description": null
   },
   "Propellant": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Propellant",
+    "description": null
   },
   "Pumpkin": {
     "localized_name": "Pumpkin",
@@ -9640,8 +9640,8 @@
     "description": null
   },
   "Shield_05": {
-    "localized_name": "Shield_05",
-    "description": null
+    "localized_name": "超級護盾",
+    "description": "以帕魯礦技術打造的神奇護盾。 只要一段時間沒受到攻擊，就會自我修復。 經過更進一步的無數試驗，實現了究極的品質。"
   },
   "Silicon": {
     "localized_name": "矽",

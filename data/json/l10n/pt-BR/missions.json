@@ -13,7 +13,7 @@
   },
   "Main_BuildPalBox": {
     "localized_name": "A primeira base",
-    "description": "Abra o menu de construção com <keyGuideIcon id=|OpenConstructionMenu| iconScale=|0.7|/> e experimente construir [Caixa de Pal] em uma área ampla. Essa será a primeira base para você e seus Pals. Prepare-a como um ponto de partida para suas expedições e ela sem dúvida será uma grande ajuda quando você finalmente for se aventurar até a torre. Mas escolha o local de construção com bastante cuidado."
+    "description": "Abra o menu de construção e experimente construir [Caixa de Pal] em uma área ampla. Essa será a primeira base para você e seus Pals. Prepare-a como um ponto de partida para suas expedições e ela sem dúvida será uma grande ajuda quando você finalmente for se aventurar até a torre. Mas escolha o local de construção com bastante cuidado."
   },
   "Main_BuildWorkBench_Old": {
     "localized_name": "O trabalho começa aqui",
@@ -45,7 +45,7 @@
   },
   "Main_CatchPal": {
     "localized_name": "Captura de Pals",
-    "description": "Produção de Esfera de Pal e captura de Pals: Imagino que você já deva ter percebido, mas há uma grande quantidade de criaturas estranhas habitando esta ilha. Essas criaturas, chamadas de |Pals”, têm inteligência e hábitos bastante particulares. Percebemos que elas podem ser muito úteis à nossa exploração. Pals podem ser capturados utilizando ferramentas conhecidas como |Esfera de Pal|. Não sabemos o princípio por trás disso, mas… Pals capturados geralmente se tornam submissos a humanos. Depois de abrir a tela de tecnologia no menu e conferir o método de produção de Esfera de Pal, obtenha os minérios de Fragmento de Palúdio necessários para criá-las. Esse minério fantástico que brilha com uma luz azul parece se formar com frequência à beira da água. Em seguida, vá até a Bancada Primitiva para produzir Esfera de Pal e estará tudo pronto para começar a capturar Pals. Enfraquecer o alvo tanto quanto possível faz com que ele resista menos à captura, aumentando a chance de sucesso. Além disso, observe que muitos Pals podem também contra-atacar. Por isso, enquanto não houver equipamentos adequados, é recomendado ir atrás apenas de Pals fracos e pequenos."
+    "description": "Produção de Esfera de Pal e captura de Pals: Imagino que você já deva ter percebido, mas há uma grande quantidade de criaturas estranhas habitando esta ilha. Essas criaturas, chamadas de \"Pals\", têm inteligência e hábitos bastante particulares. Percebemos que elas podem ser muito úteis à nossa exploração. Pals podem ser capturados utilizando ferramentas conhecidas como \"Esfera de Pal\". Não sabemos o princípio por trás disso, mas… Pals capturados geralmente se tornam submissos a humanos. Depois de abrir a tela de tecnologia no menu e conferir o método de produção de Esfera de Pal, obtenha os minérios de Fragmento de Palúdio necessários para criá-las. Esse minério fantástico que brilha com uma luz azul parece se formar com frequência à beira da água. Em seguida, vá até a Bancada Primitiva para produzir Esfera de Pal e estará tudo pronto para começar a capturar Pals. Enfraquecer o alvo tanto quanto possível faz com que ele resista menos à captura, aumentando a chance de sucesso. Além disso, observe que muitos Pals podem também contra-atacar. Por isso, enquanto não houver equipamentos adequados, é recomendado ir atrás apenas de Pals fracos e pequenos."
   },
   "Main_CollectCrystal": {
     "localized_name": "Palúdio",
@@ -57,7 +57,7 @@
   },
   "Main_CraftMealPouch": {
     "localized_name": "A fome é o maior inimigo",
-    "description": "A fome é seu maior inimigo. Você nunca deve se esquecer das refeições, não importa a situação. Se tiver [Saco de Ração Pequeno], você e seus Pals poderão se alimentar mais facilmente. Até um pequeno truque como este sem dúvida pode se tornar uma grande ajuda nas suas explorações e batalhas. Observe que, assim como os equipamentos de Pal, o armazenamento de [Saco de Ração Pequeno] é feito em |Itens importantes|, ao lado do inventário."
+    "description": "A fome é seu maior inimigo. Você nunca deve se esquecer das refeições, não importa a situação. Se tiver [Saco de Ração Pequeno], você e seus Pals poderão se alimentar mais facilmente. Até um pequeno truque como este sem dúvida pode se tornar uma grande ajuda nas suas explorações e batalhas. Observe que, assim como os equipamentos de Pal, o armazenamento de [Saco de Ração Pequeno] é feito em \"Itens importantes\", ao lado do inventário."
   },
   "Main_CraftPalGear": {
     "localized_name": "Produção de equipamentos de Pal",
@@ -77,7 +77,7 @@
   },
   "Main_Craft_PalGear": {
     "localized_name": "Habilidades de companheiro",
-    "description": "Todos os Pals possuem uma |habilidade de companheiro|, com propriedades diferentes dependendo do tipo de Pal. Alguns Pals podem ser equipados e controlados diretamente por você, ou até usados como meio de transporte. Comece desbloqueando a tecnologia [Fábrica de Equipamentos de Pal] e coloque na sua base. Em seguida, desbloqueie a tecnologia [Arreios de Foxparks] e inicie a produção em [Fábrica de Equipamentos de Pal]. Diferentemente de equipamentos e itens normais, os equipamentos de Pal são armazenadas em |Itens importantes|, ao lado do inventário."
+    "description": "Todos os Pals possuem uma \"habilidade de companheiro\", com propriedades diferentes dependendo do tipo de Pal. Alguns Pals podem ser equipados e controlados diretamente por você, ou até usados como meio de transporte. Comece desbloqueando a tecnologia [Fábrica de Equipamentos de Pal] e coloque na sua base. Em seguida, desbloqueie a tecnologia [Arreios de Foxparks] e inicie a produção em [Fábrica de Equipamentos de Pal]. Diferentemente de equipamentos e itens normais, os equipamentos de Pal são armazenadas em \"Itens importantes\", ao lado do inventário."
   },
   "Main_DefeatDesertBoss": {
     "localized_name": "Regente do Areal",
@@ -433,7 +433,7 @@
   },
   "Sub_StrongOldMan03": {
     "localized_name": "Representante",
-    "description": "Você encontrou Harold novamente, mas ele não parece tão animado como de costume. O trabalho que ele aceitou de uma vila próxima desta vez foi o de eliminar um Pal revoltado. Harold explicou o conteúdo de sua missão com um rosto melancólico. |Você não poderia cuidar desse trabalho no meu lugar?| Quando você concordou em ajudá-lo, ele logo mostrou uma expressão de alívio. Mas… Você também pôde notar uma melancolia ainda mais profunda no seu perfil um tanto cabisbaixo."
+    "description": "Você encontrou Harold novamente, mas ele não parece tão animado como de costume. O trabalho que ele aceitou de uma vila próxima desta vez foi o de eliminar um Pal revoltado. Harold explicou o conteúdo de sua missão com um rosto melancólico. \"Você não poderia cuidar desse trabalho no meu lugar?\" Quando você concordou em ajudá-lo, ele logo mostrou uma expressão de alívio. Mas… Você também pôde notar uma melancolia ainda mais profunda no seu perfil um tanto cabisbaixo."
   },
   "Sub_StrongOldMan04": {
     "localized_name": "O passado",

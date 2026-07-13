@@ -541,7 +541,7 @@
   },
   "DarkMechaDragon": {
     "localized_name": "Xenolord",
-    "description": "-Hedefe ulaşıldı. Öncelik: |Süpersonik Ejderha| varlığının yerini tespit et -Not: Fetih için son tarih <://Error_Code:126DC> sene aşıldı. -Güncelleme: Fetih emarelerine rastlanmadı. Yerlileşme onaylandı. Ortadan kaldırma protokolünü başlat. -Personele Not: Kritik verileri unutmaktan veya tüketmekten kaçın!"
+    "description": "-Hedefe ulaşıldı. Öncelik: \"Süpersonik Ejderha\" varlığının yerini tespit et -Not: Fetih için son tarih <://Error_Code:126DC> sene aşıldı. -Güncelleme: Fetih emarelerine rastlanmadı. Yerlileşme onaylandı. Ortadan kaldırma protokolünü başlat. -Personele Not: Kritik verileri unutmaktan veya tüketmekten kaçın!"
   },
   "DarkScorpion": {
     "localized_name": "Menasting",
@@ -577,7 +577,7 @@
   },
   "DrillGame": {
     "localized_name": "Digtoise",
-    "description": "En güçlü kabuğa ve onu delebilecek tek matkaba sahip bir Digtoise, popüler çocuk masalı |Digtoise Hikâyesi| ile dünyanın çelişkilerine kafa yorar."
+    "description": "En güçlü kabuğa ve onu delebilecek tek matkaba sahip bir Digtoise, popüler çocuk masalı \"Digtoise Hikâyesi\" ile dünyanın çelişkilerine kafa yorar."
   },
   "Eagle": {
     "localized_name": "Galeclaw",
@@ -589,7 +589,7 @@
   },
   "ElecLion": {
     "localized_name": "Boltmane",
-    "description": "-"
+    "description": "The more it moves, the more it heats up and the hair tips increasingly glow brighter. At its peak, it becomes so dazzling that you risk blindness if you stare at it directly."
   },
   "ElecLizard": {
     "localized_name": "Slowatt",
@@ -925,11 +925,11 @@
   },
   "FlowerDinosaur": {
     "localized_name": "Dinossom",
-    "description": "Öfkelendiğinde bir daha sakinleştirilemeyen bir Pal. Korkunç hiddeti katlanarak artar. |Kuyruğuna basılmış Dinossom gibi| deyimi, öfkeden çılgına dönen kişileri anlatmak için kullanılır."
+    "description": "Öfkelendiğinde bir daha sakinleştirilemeyen bir Pal. Korkunç hiddeti katlanarak artar. \"Kuyruğuna basılmış Dinossom gibi\" deyimi, öfkeden çılgına dönen kişileri anlatmak için kullanılır."
   },
   "FlowerDinosaur_Electric": {
     "localized_name": "Dinossom Lux",
-    "description": "Bir yıldırım tarafından çarpılmasına rağmen hayattadır. |Dinossom Lux şimşeği çarpmış gibi| deyimi, ölümün kıyısından dönmek anlamında kullanılır."
+    "description": "Bir yıldırım tarafından çarpılmasına rağmen hayattadır. \"Dinossom Lux şimşeği çarpmış gibi\" deyimi, ölümün kıyısından dönmek anlamında kullanılır."
   },
   "FlowerDoll": {
     "localized_name": "Petallia",
@@ -1565,7 +1565,7 @@
   },
   "Kirin_Ice": {
     "localized_name": "Univolt Cryst",
-    "description": "Geçmişte, kış tanrısının elçisi olduğuna inanılır ve insanlar tarafından avlanmazdı. Ancak, buzun üzerinde ayağı kayıp kapaklandığı anın birileri tarafından görülmesiyle İnanç yerle bir oldu ve kelimenin tam anlamıyla bir |yük hayvanı| konumuna düştü."
+    "description": "Geçmişte, kış tanrısının elçisi olduğuna inanılır ve insanlar tarafından avlanmazdı. Ancak, buzun üzerinde ayağı kayıp kapaklandığı anın birileri tarafından görülmesiyle İnanç yerle bir oldu ve kelimenin tam anlamıyla bir \"yük hayvanı\" konumuna düştü."
   },
   "Kitsunebi": {
     "localized_name": "Foxparks",
@@ -1597,7 +1597,7 @@
   },
   "LazyDragon_Electric": {
     "localized_name": "Relaxaurus Lux",
-    "description": "Bir gün Relaxaurus türünün bir üyesinin aklına bir fikir gelmiş. |Belki de bir şeyleri değiştirmenin zamanı geldi.| diye düşünmüş. Tam da o sırada bir elektrik şoku tüm vücudunu etkisi altına almış!"
+    "description": "Bir gün Relaxaurus türünün bir üyesinin aklına bir fikir gelmiş. \"Belki de bir şeyleri değiştirmenin zamanı geldi.\" diye düşünmüş. Tam da o sırada bir elektrik şoku tüm vücudunu etkisi altına almış!"
   },
   "LazyDragon_Electric_Tower": {
     "localized_name": "Relaxaurus Lux",
@@ -1945,7 +1945,7 @@
   },
   "MimicDog": {
     "localized_name": "Mimog",
-    "description": "Eskiden bir geleneğe göre ölümüyle en aptalca şekilde karşılaşan kişiye bir ödül verilirdi. İlk ödül |Mimog türünden habersiz olarak sandığı açan ve ısırılarak ölen| kişiye verilmişti."
+    "description": "Eskiden bir geleneğe göre ölümüyle en aptalca şekilde karşılaşan kişiye bir ödül verilirdi. İlk ödül \"Mimog türünden habersiz olarak sandığı açan ve ısırılarak ölen\" kişiye verilmişti."
   },
   "MobuCitizen": {
     "localized_name": "Ada Sakini",
@@ -2145,7 +2145,7 @@
   },
   "PREDATOR_DrillGame": {
     "localized_name": "Digtoise",
-    "description": "En güçlü kabuğa ve onu delebilecek tek matkaba sahip bir Digtoise, popüler çocuk masalı |Digtoise Hikâyesi| ile dünyanın çelişkilerine kafa yorar."
+    "description": "En güçlü kabuğa ve onu delebilecek tek matkaba sahip bir Digtoise, popüler çocuk masalı \"Digtoise Hikâyesi\" ile dünyanın çelişkilerine kafa yorar."
   },
   "PREDATOR_FairyDragon": {
     "localized_name": "Elphidran",
@@ -2157,7 +2157,7 @@
   },
   "PREDATOR_FlowerDinosaur": {
     "localized_name": "Dinossom",
-    "description": "Öfkelendiğinde bir daha sakinleştirilemeyen bir Pal. Korkunç hiddeti katlanarak artar. |Kuyruğuna basılmış Dinossom gibi| deyimi, öfkeden çılgına dönen kişileri anlatmak için kullanılır."
+    "description": "Öfkelendiğinde bir daha sakinleştirilemeyen bir Pal. Korkunç hiddeti katlanarak artar. \"Kuyruğuna basılmış Dinossom gibi\" deyimi, öfkeden çılgına dönen kişileri anlatmak için kullanılır."
   },
   "PREDATOR_FlowerRabbit_Quest": {
     "localized_name": "Flopie",
@@ -2249,7 +2249,7 @@
   },
   "PREDATOR_PurpleSpider": {
     "localized_name": "Tarantriss",
-    "description": "Son derece yapışkan ve ilgi meraklısı. Ne kadar direnç görürse o kadar ısrarcı olur. |Kişiliği| de böyledir."
+    "description": "Son derece yapışkan ve ilgi meraklısı. Ne kadar direnç görürse o kadar ısrarcı olur. \"Kişiliği\" de böyledir."
   },
   "PREDATOR_RedArmorBird": {
     "localized_name": "Ragnahawk",
@@ -2473,14 +2473,14 @@
   },
   "PurpleSpider": {
     "localized_name": "Tarantriss",
-    "description": "Son derece yapışkan ve ilgi meraklısı. Ne kadar direnç görürse o kadar ısrarcı olur. |Kişiliği| de böyledir."
+    "description": "Son derece yapışkan ve ilgi meraklısı. Ne kadar direnç görürse o kadar ısrarcı olur. \"Kişiliği\" de böyledir."
   },
   "QueenBee": {
     "localized_name": "Elizabee",
     "description": "Beegarde türüne hükmetmesi için seçilmiş bir kraliçe. Kraliçelerine hizmet etmenin zevki için ölene dek çalışmaya istekli kölelerinin sayısı sonsuzdur."
   },
   "QuestMan": {
-    "localized_name": "-",
+    "localized_name": "Quest Client",
     "description": null
   },
   "Quest_Farmer03_PinkCat": {
@@ -2773,11 +2773,11 @@
   },
   "SakuraSaurus": {
     "localized_name": "Broncherry",
-    "description": "Kokusu çiftleşmenin öncesinde ve sonrasında büyük ölçüde değişir. Bir partner bulduğunda keyif verici bir aroma salgılar. Bu aromaya |İlk Aşkın Kokusu| denir."
+    "description": "Kokusu çiftleşmenin öncesinde ve sonrasında büyük ölçüde değişir. Bir partner bulduğunda keyif verici bir aroma salgılar. Bu aromaya \"İlk Aşkın Kokusu\" denir."
   },
   "SakuraSaurus_Water": {
     "localized_name": "Broncherry Aqua",
-    "description": "Kokusu çiftleşmenin öncesinde ve sonrasında büyük ölçüde değişir. Bir partner bulmadan önce keyif verici bir aroma salgılar. Bu aromaya |Masumiyet Parfümü| denir."
+    "description": "Kokusu çiftleşmenin öncesinde ve sonrasında büyük ölçüde değişir. Bir partner bulmadan önce keyif verici bir aroma salgılar. Bu aromaya \"Masumiyet Parfümü\" denir."
   },
   "SalesPerson": {
     "localized_name": "Gezgin Tüccar",
@@ -2865,7 +2865,7 @@
   },
   "Sheepball": {
     "localized_name": "Lamball",
-    "description": "|Tepelere doğru yapılan tırmanışlar genelde bu Pal'ın aşağı yuvarlanmasıyla biter. Bu durumda başı döner ve hareket edemez, böylece yakalanması ve öldürülmesi kolaylaşır. Bu Pal, besin zincirinin en altına dek yuvarlanmıştır.|"
+    "description": "\"Tepelere doğru yapılan tırmanışlar genelde bu Pal'ın aşağı yuvarlanmasıyla biter. Bu durumda başı döner ve hareket edemez, böylece yakalanması ve öldürülmesi kolaylaşır. Bu Pal, besin zincirinin en altına dek yuvarlanmıştır.\""
   },
   "SifuDog": {
     "localized_name": "Dogen",
@@ -3037,10 +3037,10 @@
   },
   "VioletFairy": {
     "localized_name": "Vaelet",
-    "description": "Saray, kralın en sevdiği çiçeklerle doluydu. Büyük bir savaş çıktı ve alevler saraya yaklaştı. Kaosun ortasında, bir çiçeğin ruhu ortaya çıktı. - |Kralın Çiçeği| adlı peri masalından"
+    "description": "Saray, kralın en sevdiği çiçeklerle doluydu. Büyük bir savaş çıktı ve alevler saraya yaklaştı. Kaosun ortasında, bir çiçeğin ruhu ortaya çıktı. - \"Kralın Çiçeği\" adlı peri masalından"
   },
   "VisitingMerchant": {
-    "localized_name": "-",
+    "localized_name": "Visitor",
     "description": null
   },
   "Visitor_Hunter_Rifle": {
@@ -3072,7 +3072,7 @@
     "description": "Sağlıklı bir bireyde, sırtından akan maddenin sıcaklığı dengededir. Heyecanlandığında ise sıcaklık dengesi bozulur en kötü durumda bu madde buharlaşma ya da katılaşmaya yol açar ve aniden şoka girerek ölmesine neden olabilir."
   },
   "WeaponsDealer": {
-    "localized_name": "-",
+    "localized_name": "Weapons Dealer",
     "description": null
   },
   "WeaselDragon": {
@@ -3097,7 +3097,7 @@
   },
   "WhiteDeer": {
     "localized_name": "Celesdir",
-    "description": "Kadim metinler bu Pal'dan |Kurtuluşun Yaratığı| olarak bahseder. Celesdir tarafından yayılan ışık her şeyi arındırır; hiçbir iz bırakmayarak ortadan kaybolmalarını sağlayarak onları gerçek anlamda yok eder."
+    "description": "Kadim metinler bu Pal'dan \"Kurtuluşun Yaratığı\" olarak bahseder. Celesdir tarafından yayılan ışık her şeyi arındırır; hiçbir iz bırakmayarak ortadan kaybolmalarını sağlayarak onları gerçek anlamda yok eder."
   },
   "WhiteDeer_Dark": {
     "localized_name": "Celesdir Noct",
@@ -3153,7 +3153,7 @@
   },
   "WizardOwl": {
     "localized_name": "Hoocrates",
-    "description": "Çoğu zaman düşüncelere dalmış hâldedir ve bazen uyumakta bile zorlanır. |Düşünüyorum, öyleyse varım.|"
+    "description": "Çoğu zaman düşüncelere dalmış hâldedir ve bazen uyumakta bile zorlanır. \"Düşünüyorum, öyleyse varım.\""
   },
   "WoolFox": {
     "localized_name": "Cremis",
@@ -3325,7 +3325,7 @@
   },
   "BeardedDragon": {
     "localized_name": "BeardedDragon",
-    "description": "-"
+    "description": "This Pal is under investigation."
   },
   "BlueWoolRabbit": {
     "localized_name": "BlueWoolRabbit",
@@ -3369,7 +3369,7 @@
   },
   "GrassDragon": {
     "localized_name": "GrassDragon",
-    "description": "-"
+    "description": "This Pal is under investigation."
   },
   "IceVeilDragon": {
     "localized_name": "IceVeilDragon",
@@ -3445,7 +3445,7 @@
   },
   "WaterLizard": {
     "localized_name": "WaterLizard",
-    "description": "-"
+    "description": null
   },
   "WorldTree_Hunter_MissileLauncher_test": {
     "localized_name": "WorldTree_Hunter_MissileLauncher_test",

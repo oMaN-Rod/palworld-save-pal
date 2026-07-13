@@ -484,20 +484,20 @@
     "description": "Animal Skin"
   },
   "AnimalSkin2": {
-    "localized_name": "AnimalSkin2",
-    "description": null
+    "localized_name": "Animal Skin",
+    "description": "Animal Skin"
   },
   "Antibiotic_Good": {
-    "localized_name": "Antibiotic_Good",
-    "description": null
+    "localized_name": "Antibiotic Good",
+    "description": "Antibiotic Good"
   },
   "Antibiotic_Normal": {
-    "localized_name": "Antibiotic_Normal",
-    "description": null
+    "localized_name": "Antibiotic Normal",
+    "description": "Antibiotic Normal"
   },
   "Antibiotic_Super": {
-    "localized_name": "Antibiotic_Super",
-    "description": null
+    "localized_name": "Antibiotic Super",
+    "description": "Antibiotic Super"
   },
   "Arrow": {
     "localized_name": "Pfeil",
@@ -505,7 +505,7 @@
   },
   "Arrow_Fire": {
     "localized_name": "Feuerpfeil",
-    "description": "Ein Feuerpfeil, der mit einem Bogen verschossen werden kann. Fügt getroffenen Zielen ElemIcon_FireFeuerschaden zu. Kann mithilfe von „Primitive Werkbank“ gefertigt werden."
+    "description": "Ein Feuerpfeil, der mit einem Bogen verschossen werden kann. Fügt getroffenen Zielen Feuerschaden zu. Kann mithilfe von „Primitive Werkbank“ gefertigt werden."
   },
   "Arrow_Poison": {
     "localized_name": "Giftpfeil",
@@ -732,8 +732,8 @@
     "description": "Eine vielseitige Zutat, die sowohl roh als auch verarbeitet schmeckt. Überall auf dem Archipel zu finden."
   },
   "Berries2": {
-    "localized_name": "Berries2",
-    "description": null
+    "localized_name": "Red Berries",
+    "description": "A versatile ingredient that is delicious raw or cooked. They can be found anywhere on the island."
   },
   "BerrySeeds": {
     "localized_name": "Beerensamen",
@@ -1105,7 +1105,7 @@
   },
   "Blueprint_CandleStand": {
     "localized_name": "Feierlicher Leuchter: Bauplan",
-    "description": "Wenn sich dieser Bauplan im Lager oder Inventar befindet, wird die Anleitung für |Feierlicher Leuchter| freigeschaltet."
+    "description": "Wenn sich dieser Bauplan im Lager oder Inventar befindet, wird die Anleitung für \"Feierlicher Leuchter\" freigeschaltet."
   },
   "Blueprint_ChargeLaserRifle_2": {
     "localized_name": "Teslagewehr: Bauplan 1",
@@ -1189,11 +1189,11 @@
   },
   "Blueprint_ConservationGroupBannerA": {
     "localized_name": "Liga der Palfreunde-Flagge: Bauplan",
-    "description": "Wenn sich dieser Bauplan im Lager oder Inventar befindet, wird die Anleitung für |Liga der Palfreunde-Flagge“ freigeschaltet."
+    "description": "Wenn sich dieser Bauplan im Lager oder Inventar befindet, wird die Anleitung für \"Liga der Palfreunde-Flagge“ freigeschaltet."
   },
   "Blueprint_ConservationGroupBannerB": {
     "localized_name": "Liga der Palfreunde-Querbanner: Bauplan",
-    "description": "Wenn sich dieser Bauplan im Lager oder Inventar befindet, wird die Anleitung für |Liga der Palfreunde-Banner“ freigeschaltet."
+    "description": "Wenn sich dieser Bauplan im Lager oder Inventar befindet, wird die Anleitung für \"Liga der Palfreunde-Banner“ freigeschaltet."
   },
   "Blueprint_CopperArmorCold_2": {
     "localized_name": "Kälteresistente Metallrüstung: Bauplan 1",
@@ -1341,7 +1341,7 @@
   },
   "Blueprint_FireStand": {
     "localized_name": "Zeremonieller Leuchter: Bauplan",
-    "description": "Wenn sich dieser Bauplan im Lager oder Inventar befindet, wird die Anleitung für |Zeremonieller Leuchter| freigeschaltet."
+    "description": "Wenn sich dieser Bauplan im Lager oder Inventar befindet, wird die Anleitung für \"Zeremonieller Leuchter\" freigeschaltet."
   },
   "Blueprint_FishingRod_01_2": {
     "localized_name": "Anfänger-Angelrute (Gumoss): Bauplan",
@@ -1469,7 +1469,7 @@
   },
   "Blueprint_GuardianDogStatue": {
     "localized_name": "Yakumo-Statue: Bauplan",
-    "description": "Wenn sich dieser Bauplan im Lager oder Inventar befindet, wird die Anleitung für |Yakumo-Statue| freigeschaltet."
+    "description": "Wenn sich dieser Bauplan im Lager oder Inventar befindet, wird die Anleitung für \"Yakumo-Statue\" freigeschaltet."
   },
   "Blueprint_GuidedMissileLauncher_2": {
     "localized_name": "Raketenwerfer: Bauplan 1",
@@ -1541,7 +1541,7 @@
   },
   "Blueprint_Head002_5": {
     "localized_name": "Entwurf für die Goldkrone 5",
-    "description": "Wenn Sie es besitzen, wird das Rezept für |Goldkrone (Legendär)| freigeschaltet. Es kann bei |Primitive Werkbank| hergestellt werden."
+    "description": "Wenn Sie es besitzen, wird das Rezept für \"Goldkrone (Legendär)\" freigeschaltet. Es kann bei \"Primitive Werkbank\" hergestellt werden."
   },
   "Blueprint_Head003_1": {
     "localized_name": "Hasenohren-Haarreif: Bauplan 1",
@@ -1561,7 +1561,7 @@
   },
   "Blueprint_Head003_5": {
     "localized_name": "Designplan für das Langohr-Haarband 5",
-    "description": "Besitzt man es, wird das Rezept für |Hasenohren-Haarreif (Legendär)| freigeschaltet. Es kann bei |Primitive Werkbank| hergestellt werden."
+    "description": "Besitzt man es, wird das Rezept für \"Hasenohren-Haarreif (Legendär)\" freigeschaltet. Es kann bei \"Primitive Werkbank\" hergestellt werden."
   },
   "Blueprint_Head004_1": {
     "localized_name": "Hexenhut: Bauplan 1",
@@ -1581,7 +1581,7 @@
   },
   "Blueprint_Head004_5": {
     "localized_name": "Designplan für den Hexenhut 5",
-    "description": "Wenn Sie es besitzen, wird das Rezept für |Hexenhut (Legendär)| freigeschaltet. Es kann bei |Primitive Werkbank| hergestellt werden."
+    "description": "Wenn Sie es besitzen, wird das Rezept für \"Hexenhut (Legendär)\" freigeschaltet. Es kann bei \"Primitive Werkbank\" hergestellt werden."
   },
   "Blueprint_Head005_1": {
     "localized_name": "Krempenhut: Bauplan 1",
@@ -1601,7 +1601,7 @@
   },
   "Blueprint_Head005_5": {
     "localized_name": "Designplan für weiche Hüte 5",
-    "description": "Wenn Sie es besitzen, wird das Rezept für |Krempenhut| (Legendär) freigeschaltet. Sie können es an der |Primitive Werkbank| herstellen."
+    "description": "Wenn Sie es besitzen, wird das Rezept für \"Krempenhut\" (Legendär) freigeschaltet. Sie können es an der \"Primitive Werkbank\" herstellen."
   },
   "Blueprint_Head006_1": {
     "localized_name": "Helm: Bauplan 1",
@@ -1621,7 +1621,7 @@
   },
   "Blueprint_Head006_5": {
     "localized_name": "Helmpläne 5",
-    "description": "Wenn Sie es besitzen, wird das Rezept für |Helm| （Legendär） freigeschaltet. Es kann an der |Primitive Werkbank| hergestellt werden."
+    "description": "Wenn Sie es besitzen, wird das Rezept für \"Helm\" （Legendär） freigeschaltet. Es kann an der \"Primitive Werkbank\" hergestellt werden."
   },
   "Blueprint_Head007_1": {
     "localized_name": "Zylinderhut: Bauplan 1",
@@ -1641,7 +1641,7 @@
   },
   "Blueprint_Head007_5": {
     "localized_name": "Blaupause für einen Zylinderhut 5",
-    "description": "Wenn du es besitzt, wird das Rezept für |Zylinderhut (Legendär)| freigeschaltet. Es kann an der |Primitive Werkbank| hergestellt werden."
+    "description": "Wenn du es besitzt, wird das Rezept für \"Zylinderhut (Legendär)\" freigeschaltet. Es kann an der \"Primitive Werkbank\" hergestellt werden."
   },
   "Blueprint_Head008_1": {
     "localized_name": "Dreispitz: Bauplan 1",
@@ -1661,7 +1661,7 @@
   },
   "Blueprint_Head008_5": {
     "localized_name": "Design für einen Dreieckshut 5",
-    "description": "Wenn du es besitzt, wird das Rezept für |Dreispitz (Legendär)| freigeschaltet. Es kann an der |Primitive Werkbank| gefertigt werden."
+    "description": "Wenn du es besitzt, wird das Rezept für \"Dreispitz (Legendär)\" freigeschaltet. Es kann an der \"Primitive Werkbank\" gefertigt werden."
   },
   "Blueprint_Head009_1": {
     "localized_name": "Tropenhelm: Bauplan 1",
@@ -1681,7 +1681,7 @@
   },
   "Blueprint_Head009_5": {
     "localized_name": "Plan für den Entdeckerhut 5",
-    "description": "Wenn Sie es besitzen, wird das Rezept für |Tropenhelm (Legendär)| freigeschaltet. Es kann bei |Primitive Werkbank| hergestellt werden."
+    "description": "Wenn Sie es besitzen, wird das Rezept für \"Tropenhelm (Legendär)\" freigeschaltet. Es kann bei \"Primitive Werkbank\" hergestellt werden."
   },
   "Blueprint_Head010_1": {
     "localized_name": "Doktorhut: Bauplan 1",
@@ -1701,7 +1701,7 @@
   },
   "Blueprint_Head010_5": {
     "localized_name": "Universitätshut Designplan 5",
-    "description": "Wenn man es besitzt, wird das Rezept für |Doktorhut (Legendär)| freigeschaltet. Es kann bei |Primitive Werkbank| hergestellt werden."
+    "description": "Wenn man es besitzt, wird das Rezept für \"Doktorhut (Legendär)\" freigeschaltet. Es kann bei \"Primitive Werkbank\" hergestellt werden."
   },
   "Blueprint_Head011_1": {
     "localized_name": "Bauernhut: Bauplan 1",
@@ -1721,7 +1721,7 @@
   },
   "Blueprint_Head011_5": {
     "localized_name": "Bauernhut Baupläne 5",
-    "description": "Wenn du es besitzt, wird das Rezept für |Bauernhut (Legendär)| freigeschaltet. Es kann am |Primitive Werkbank| hergestellt werden."
+    "description": "Wenn du es besitzt, wird das Rezept für \"Bauernhut (Legendär)\" freigeschaltet. Es kann am \"Primitive Werkbank\" hergestellt werden."
   },
   "Blueprint_Head012_1": {
     "localized_name": "Melone: Bauplan 1",
@@ -1741,7 +1741,7 @@
   },
   "Blueprint_Head012_5": {
     "localized_name": "5 Entwürfe für Bowlerhüte",
-    "description": "Wenn Sie es besitzen, wird das Rezept für |Melone (Legendär)| freigeschaltet. Sie können es am |Primitive Werkbank| herstellen."
+    "description": "Wenn Sie es besitzen, wird das Rezept für \"Melone (Legendär)\" freigeschaltet. Sie können es am \"Primitive Werkbank\" herstellen."
   },
   "Blueprint_Head013_1": {
     "localized_name": "Tocotoco-Hut: Bauplan 1",
@@ -1761,7 +1761,7 @@
   },
   "Blueprint_Head013_5": {
     "localized_name": "Designzeichnung 5 des Kürsenhuts",
-    "description": "Wenn du es besitzt, wird das Rezept für |Tocotoco-Hut (Legendär)| freigeschaltet. Es kann am |Primitive Werkbank| hergestellt werden."
+    "description": "Wenn du es besitzt, wird das Rezept für \"Tocotoco-Hut (Legendär)\" freigeschaltet. Es kann am \"Primitive Werkbank\" hergestellt werden."
   },
   "Blueprint_Head014_1": {
     "localized_name": "Verschmitzter Tocotoco-Hut: Bauplan 1",
@@ -1781,7 +1781,7 @@
   },
   "Blueprint_Head014_5": {
     "localized_name": "Grinsendes Krepphut-Designschema 5",
-    "description": "Wenn Sie es besitzen, wird das Rezept für |Verschmitzter Tocotoco-Hut (Legendär) freigeschaltet. Sie können es am |Primitive Werkbank| herstellen."
+    "description": "Wenn Sie es besitzen, wird das Rezept für \"Verschmitzter Tocotoco-Hut (Legendär) freigeschaltet. Sie können es am \"Primitive Werkbank\" herstellen."
   },
   "Blueprint_Head015_1": {
     "localized_name": "Gumoss-Hut: Bauplan 1",
@@ -1801,7 +1801,7 @@
   },
   "Blueprint_Head015_5": {
     "localized_name": "Fünf Entwurfpläne für die Naemochi-Mütze",
-    "description": "Wenn Sie es besitzen, wird das Rezept für |Gumoss-Hut (Legendär)| freigeschaltet. Es kann bei |Primitive Werkbank| hergestellt werden."
+    "description": "Wenn Sie es besitzen, wird das Rezept für \"Gumoss-Hut (Legendär)\" freigeschaltet. Es kann bei \"Primitive Werkbank\" hergestellt werden."
   },
   "Blueprint_Head016_1": {
     "localized_name": "Penking-Hut: Bauplan 1",
@@ -1821,7 +1821,7 @@
   },
   "Blueprint_Head016_5": {
     "localized_name": "Entwurfsplan für die Cappenmütze 5",
-    "description": "Wenn du es besitzt, wird das Rezept für |Penking-Hut (Legendär)| freigeschaltet. Es kann am |Primitive Werkbank| hergestellt werden."
+    "description": "Wenn du es besitzt, wird das Rezept für \"Penking-Hut (Legendär)\" freigeschaltet. Es kann am \"Primitive Werkbank\" hergestellt werden."
   },
   "Blueprint_Head017_1": {
     "localized_name": "Katress-Hut: Bauplan 1",
@@ -2029,7 +2029,7 @@
   },
   "Blueprint_LanternTop": {
     "localized_name": "Lampion: Bauplan",
-    "description": "Wenn sich dieser Bauplan im Lager oder Inventar befindet, wird die Anleitung für |Lampion| freigeschaltet."
+    "description": "Wenn sich dieser Bauplan im Lager oder Inventar befindet, wird die Anleitung für \"Lampion\" freigeschaltet."
   },
   "Blueprint_LaserGatlingGun_2": {
     "localized_name": "Laser-Gatlinggewehr: Bauplan 1",
@@ -2085,7 +2085,7 @@
   },
   "Blueprint_LilyQueenStatue": {
     "localized_name": "Lyleen-Statue: Bauplan",
-    "description": "Wenn sich dieser Bauplan im Lager oder Inventar befindet, wird die Anleitung für |Lyleen-Statue“ freigeschaltet."
+    "description": "Wenn sich dieser Bauplan im Lager oder Inventar befindet, wird die Anleitung für \"Lyleen-Statue“ freigeschaltet."
   },
   "Blueprint_MakeshiftAssaultRifle_2": {
     "localized_name": "Schrottreifes Sturmgewehr: Bauplan 1",
@@ -2649,7 +2649,7 @@
   },
   "Blueprint_Shrine_Lantern": {
     "localized_name": "Bauplan: Tempellaterne",
-    "description": "Wenn sich dieser Bauplan im Lager oder Inventar befindet, wird die Anleitung für |Tempellaterne| freigeschaltet."
+    "description": "Wenn sich dieser Bauplan im Lager oder Inventar befindet, wird die Anleitung für \"Tempellaterne\" freigeschaltet."
   },
   "Blueprint_SingleShotRifle_2": {
     "localized_name": "Einzelschuss-Gewehr: Bauplan 1",
@@ -2869,7 +2869,7 @@
   },
   "Blueprint_WallTorch02": {
     "localized_name": "Feierliche Wandfackel: Bauplan",
-    "description": "Wenn sich dieser Bauplan im Lager oder Inventar befindet, wird die Anleitung für |Feierliche Wandfackel| freigeschaltet."
+    "description": "Wenn sich dieser Bauplan im Lager oder Inventar befindet, wird die Anleitung für \"Feierliche Wandfackel\" freigeschaltet."
   },
   "Blueprint_WeakerBow_2": {
     "localized_name": "Alter Bogen: Bauplan 1",
@@ -2909,11 +2909,11 @@
   },
   "Blueprint_Wire_Fence": {
     "localized_name": "Maschendrahtzaun: Bauplan",
-    "description": "Wenn sich dieser Bauplan im Lager oder Inventar befindet, wird die Anleitung für |Maschendrahtzaun| freigeschaltet."
+    "description": "Wenn sich dieser Bauplan im Lager oder Inventar befindet, wird die Anleitung für \"Maschendrahtzaun\" freigeschaltet."
   },
   "Blueprint_WoodenBarricade": {
     "localized_name": "Holzbarrikade: Bauplan",
-    "description": "Wenn sich dieser Bauplan im Lager oder Inventar befindet, wird die Anleitung für |Holzbarrikade| freigeschaltet."
+    "description": "Wenn sich dieser Bauplan im Lager oder Inventar befindet, wird die Anleitung für \"Holzbarrikade\" freigeschaltet."
   },
   "Blueprint_YakushimaArmor001": {
     "localized_name": "Heiliger Plattenpanzer: Bauplan",
@@ -3716,8 +3716,8 @@
     "description": "Claw"
   },
   "Claws2": {
-    "localized_name": "Claws2",
-    "description": null
+    "localized_name": "Claw",
+    "description": "Claw"
   },
   "Cloth": {
     "localized_name": "Stoff",
@@ -4160,8 +4160,8 @@
     "description": "Fang"
   },
   "Fang2": {
-    "localized_name": "Fang2",
-    "description": null
+    "localized_name": "Fang",
+    "description": "Fang"
   },
   "Fiber": {
     "localized_name": "Fasern",
@@ -5476,8 +5476,8 @@
     "description": "Von Pals gewonnenes Leder, das als Material für Rüstungen verwendet werden kann. Lässt sich nur von bestimmten Pals gewinnen."
   },
   "Leather2": {
-    "localized_name": "Leather2",
-    "description": null
+    "localized_name": "Leather",
+    "description": "Leather taken from a Pal, it serves as a defensive material. It can be obtained from certain Pals."
   },
   "Lettuce": {
     "localized_name": "Kopfsalat",
@@ -5537,7 +5537,7 @@
   },
   "LuxuryOmelette": {
     "localized_name": "LuxuryOmelette",
-    "description": null
+    "description": "LuxuryOmelette"
   },
   "LvUP_01": {
     "localized_name": "Kristall der Erkenntnis",
@@ -5660,8 +5660,8 @@
     "description": "Palfleisch. Ist so frisch, dass es ohne Probleme auch roh verzehrt werden kann."
   },
   "Meat2": {
-    "localized_name": "Meat2",
-    "description": null
+    "localized_name": "Meat",
+    "description": "Pal meat. It’s so fresh that even a human could safely eat it raw."
   },
   "MeatAndPotatoes": {
     "localized_name": "Galeclaw-Nikujaga",
@@ -6205,75 +6205,75 @@
   },
   "PalAwakening_Dark": {
     "localized_name": "Schattenerweckungskristall",
-    "description": "Ein mit der Energie des Weltenbaums angereicherter Kristall. Erweckt Pals vom Typ ElemIcon_DarkSchatten und entfesselt ihr verborgenes Potenzial."
+    "description": "Ein mit der Energie des Weltenbaums angereicherter Kristall. Erweckt Pals vom Typ Schatten und entfesselt ihr verborgenes Potenzial."
   },
   "PalAwakening_Dragon": {
     "localized_name": "Drachenerweckungskristall",
-    "description": "Ein mit der Energie des Weltenbaums angereicherter Kristall. Erweckt Pals vom Typ ElemIcon_DragonDrache und entfesselt ihr verborgenes Potenzial."
+    "description": "Ein mit der Energie des Weltenbaums angereicherter Kristall. Erweckt Pals vom Typ Drache und entfesselt ihr verborgenes Potenzial."
   },
   "PalAwakening_Electric": {
     "localized_name": "Elektroerweckungskristall",
-    "description": "Ein mit der Energie des Weltenbaums angereicherter Kristall. Erweckt Pals vom Typ ElemIcon_ElectricElektro und entfesselt ihr verborgenes Potenzial."
+    "description": "Ein mit der Energie des Weltenbaums angereicherter Kristall. Erweckt Pals vom Typ Elektro und entfesselt ihr verborgenes Potenzial."
   },
   "PalAwakening_Fire": {
     "localized_name": "Feuererweckungskristall",
-    "description": "Ein mit der Energie des Weltenbaums angereicherter Kristall. Erweckt Pals vom Typ ElemIcon_FireFeuer und entfesselt ihr verborgenes Potenzial."
+    "description": "Ein mit der Energie des Weltenbaums angereicherter Kristall. Erweckt Pals vom Typ Feuer und entfesselt ihr verborgenes Potenzial."
   },
   "PalAwakening_Grass": {
     "localized_name": "Graserweckungskristall",
-    "description": "Ein mit der Energie des Weltenbaums angereicherter Kristall. Erweckt Pals vom Typ ElemIcon_GrassGras und entfesselt ihr verborgenes Potenzial."
+    "description": "Ein mit der Energie des Weltenbaums angereicherter Kristall. Erweckt Pals vom Typ Gras und entfesselt ihr verborgenes Potenzial."
   },
   "PalAwakening_Ground": {
     "localized_name": "Erderweckungskristall",
-    "description": "Ein mit der Energie des Weltenbaums angereicherter Kristall. Erweckt Pals vom Typ ElemIcon_GroundErde und entfesselt ihr verborgenes Potenzial."
+    "description": "Ein mit der Energie des Weltenbaums angereicherter Kristall. Erweckt Pals vom Typ Erde und entfesselt ihr verborgenes Potenzial."
   },
   "PalAwakening_Ice": {
     "localized_name": "Eiserweckungskristall",
-    "description": "Ein mit der Energie des Weltenbaums angereicherter Kristall. Erweckt Pals vom Typ ElemIcon_IceEis und entfesselt ihr verborgenes Potenzial."
+    "description": "Ein mit der Energie des Weltenbaums angereicherter Kristall. Erweckt Pals vom Typ Eis und entfesselt ihr verborgenes Potenzial."
   },
   "PalAwakening_Material_Dark": {
     "localized_name": "Schattenbezoar",
-    "description": "Ein Stein, der sich bildet, wenn sich im Körper eines Pals Weltenbaumenergie anreichert. Durch Verarbeitung wird daraus ein Gegenstand, mit dem sich das verborgene Potenzial von Pals vom Typ ElemIcon_DarkSchatten entfesseln lässt."
+    "description": "Ein Stein, der sich bildet, wenn sich im Körper eines Pals Weltenbaumenergie anreichert. Durch Verarbeitung wird daraus ein Gegenstand, mit dem sich das verborgene Potenzial von Pals vom Typ Schatten entfesseln lässt."
   },
   "PalAwakening_Material_Dragon": {
     "localized_name": "Drachenbezoar",
-    "description": "Ein Stein, der sich bildet, wenn sich im Körper eines Pals Weltenbaumenergie anreichert. Durch Verarbeitung wird daraus ein Gegenstand, mit dem sich das verborgene Potenzial von Pals vom Typ ElemIcon_DragonDrache entfesseln lässt."
+    "description": "Ein Stein, der sich bildet, wenn sich im Körper eines Pals Weltenbaumenergie anreichert. Durch Verarbeitung wird daraus ein Gegenstand, mit dem sich das verborgene Potenzial von Pals vom Typ Drache entfesseln lässt."
   },
   "PalAwakening_Material_Electric": {
     "localized_name": "Elektrobezoar",
-    "description": "Ein Stein, der sich bildet, wenn sich im Körper eines Pals Weltenbaumenergie anreichert. Durch Verarbeitung wird daraus ein Gegenstand, mit dem sich das verborgene Potenzial von Pals vom Typ ElemIcon_ElectricElektro entfesseln lässt."
+    "description": "Ein Stein, der sich bildet, wenn sich im Körper eines Pals Weltenbaumenergie anreichert. Durch Verarbeitung wird daraus ein Gegenstand, mit dem sich das verborgene Potenzial von Pals vom Typ Elektro entfesseln lässt."
   },
   "PalAwakening_Material_Fire": {
     "localized_name": "Feuerbezoar",
-    "description": "Ein Stein, der sich bildet, wenn sich im Körper eines Pals Weltenbaumenergie anreichert. Durch Verarbeitung wird daraus ein Gegenstand, mit dem sich das verborgene Potenzial von Pals vom Typ ElemIcon_FireFeuer entfesseln lässt."
+    "description": "Ein Stein, der sich bildet, wenn sich im Körper eines Pals Weltenbaumenergie anreichert. Durch Verarbeitung wird daraus ein Gegenstand, mit dem sich das verborgene Potenzial von Pals vom Typ Feuer entfesseln lässt."
   },
   "PalAwakening_Material_Grass": {
     "localized_name": "Grasbezoar",
-    "description": "Ein Stein, der sich bildet, wenn sich im Körper eines Pals Weltenbaumenergie anreichert. Durch Verarbeitung wird daraus ein Gegenstand, mit dem sich das verborgene Potenzial von Pals vom Typ ElemIcon_GrassGras entfesseln lässt."
+    "description": "Ein Stein, der sich bildet, wenn sich im Körper eines Pals Weltenbaumenergie anreichert. Durch Verarbeitung wird daraus ein Gegenstand, mit dem sich das verborgene Potenzial von Pals vom Typ Gras entfesseln lässt."
   },
   "PalAwakening_Material_Ground": {
     "localized_name": "Erdbezoar",
-    "description": "Ein Stein, der sich bildet, wenn sich im Körper eines Pals Weltenbaumenergie anreichert. Durch Verarbeitung wird daraus ein Gegenstand, mit dem sich das verborgene Potenzial von Pals vom Typ ElemIcon_GroundErde entfesseln lässt."
+    "description": "Ein Stein, der sich bildet, wenn sich im Körper eines Pals Weltenbaumenergie anreichert. Durch Verarbeitung wird daraus ein Gegenstand, mit dem sich das verborgene Potenzial von Pals vom Typ Erde entfesseln lässt."
   },
   "PalAwakening_Material_Ice": {
     "localized_name": "Eisbezoar",
-    "description": "Ein Stein, der sich bildet, wenn sich im Körper eines Pals Weltenbaumenergie anreichert. Durch Verarbeitung wird daraus ein Gegenstand, mit dem sich das verborgene Potenzial von Pals vom Typ ElemIcon_IceEis entfesseln lässt."
+    "description": "Ein Stein, der sich bildet, wenn sich im Körper eines Pals Weltenbaumenergie anreichert. Durch Verarbeitung wird daraus ein Gegenstand, mit dem sich das verborgene Potenzial von Pals vom Typ Eis entfesseln lässt."
   },
   "PalAwakening_Material_Neutral": {
     "localized_name": "Neutralbezoar",
-    "description": "Ein Stein, der sich bildet, wenn sich im Körper eines Pals Weltenbaumenergie anreichert. Durch Verarbeitung wird daraus ein Gegenstand, mit dem sich das verborgene Potenzial von Pals vom Typ ElemIcon_NeutralNeutral entfesseln lässt."
+    "description": "Ein Stein, der sich bildet, wenn sich im Körper eines Pals Weltenbaumenergie anreichert. Durch Verarbeitung wird daraus ein Gegenstand, mit dem sich das verborgene Potenzial von Pals vom Typ Neutral entfesseln lässt."
   },
   "PalAwakening_Material_Water": {
     "localized_name": "Wasserbezoar",
-    "description": "Ein Stein, der sich bildet, wenn sich im Körper eines Pals Weltenbaumenergie anreichert. Durch Verarbeitung wird daraus ein Gegenstand, mit dem sich das verborgene Potenzial von Pals vom Typ ElemIcon_WaterWasser entfesseln lässt."
+    "description": "Ein Stein, der sich bildet, wenn sich im Körper eines Pals Weltenbaumenergie anreichert. Durch Verarbeitung wird daraus ein Gegenstand, mit dem sich das verborgene Potenzial von Pals vom Typ Wasser entfesseln lässt."
   },
   "PalAwakening_Neutral": {
     "localized_name": "Neutraler Erweckungskristall",
-    "description": "Ein mit der Energie des Weltenbaums angereicherter Kristall. Erweckt Pals vom Typ ElemIcon_NeutralNeutral und entfesselt ihr verborgenes Potenzial."
+    "description": "Ein mit der Energie des Weltenbaums angereicherter Kristall. Erweckt Pals vom Typ Neutral und entfesselt ihr verborgenes Potenzial."
   },
   "PalAwakening_Water": {
     "localized_name": "Wassererweckungskristall",
-    "description": "Ein mit der Energie des Weltenbaums angereicherter Kristall. Erweckt Pals vom Typ ElemIcon_WaterWasser und entfesselt ihr verborgenes Potenzial."
+    "description": "Ein mit der Energie des Weltenbaums angereicherter Kristall. Erweckt Pals vom Typ Wasser und entfesselt ihr verborgenes Potenzial."
   },
   "PalCrystal_Ex": {
     "localized_name": "Antikes Bauteil",
@@ -6441,7 +6441,7 @@
   },
   "PalEgg_MutationPal": {
     "localized_name": "Huge Mutated Egg",
-    "description": "-"
+    "description": "[WIP] Description not finalized. A Huge Mutated Egg. You can feel the restless aura of a strange soul, as if a monster is about to be born. Place it in a Egg Incubator to hatch it."
   },
   "PalEgg_MutationPal_01": {
     "localized_name": "Mutiertes Ei",
@@ -7189,7 +7189,7 @@
   },
   "PotatoSeedPotatoes": {
     "localized_name": "PotatoSeedPotatoes",
-    "description": null
+    "description": "PotatoSeedPotatoes"
   },
   "PotatoSeeds": {
     "localized_name": "Saatkartoffeln",
@@ -8645,7 +8645,7 @@
   },
   "SkyHeavyBullet": {
     "localized_name": "Sunreach Single-Shot Ammo",
-    "description": "-"
+    "description": "[WIP] Description not finalized. Ammo for the Prototype Shotgun, Tactical Grenade Launcher, and similar weapons."
   },
   "SkyIslandOre": {
     "localized_name": "Soralit",
@@ -8653,7 +8653,7 @@
   },
   "SkyLightBullet": {
     "localized_name": "Sunreach Rapid-Fire Ammo",
-    "description": "-"
+    "description": "[WIP] Description not finalized. Ammo for the Combat SMG, Heavy Assault Rifle, and similar weapons."
   },
   "SkyShotgun": {
     "localized_name": "Experimentelle Flinte",
@@ -9552,8 +9552,8 @@
     "description": "Kann zum Entfachen von Feuer verwendet werden. Lässt sich manchmal beim Abbau von Steinen finden."
   },
   "Gasoline": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Gasoline",
+    "description": null
   },
   "IronOre": {
     "localized_name": "IronOre",
@@ -9608,8 +9608,8 @@
     "description": null
   },
   "Propellant": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Propellant",
+    "description": null
   },
   "Pumpkin": {
     "localized_name": "Pumpkin",
@@ -9640,8 +9640,8 @@
     "description": null
   },
   "Shield_05": {
-    "localized_name": "Shield_05",
-    "description": null
+    "localized_name": "Ultraschild",
+    "description": "Ein mithilfe von Paldiumtechnologie entwickelter, mysteriöser Schild. Regeneriert sich automatisch, wenn er einige Zeit lang keinen Schaden nimmt. Dieses ultimative Modell übertrifft alles bisher Dagewesene."
   },
   "Silicon": {
     "localized_name": "Silizium",

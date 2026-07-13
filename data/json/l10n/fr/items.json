@@ -484,20 +484,20 @@
     "description": "Animal Skin"
   },
   "AnimalSkin2": {
-    "localized_name": "AnimalSkin2",
-    "description": null
+    "localized_name": "Animal Skin",
+    "description": "Animal Skin"
   },
   "Antibiotic_Good": {
-    "localized_name": "Antibiotic_Good",
-    "description": null
+    "localized_name": "Antibiotic Good",
+    "description": "Antibiotic Good"
   },
   "Antibiotic_Normal": {
-    "localized_name": "Antibiotic_Normal",
-    "description": null
+    "localized_name": "Antibiotic Normal",
+    "description": "Antibiotic Normal"
   },
   "Antibiotic_Super": {
-    "localized_name": "Antibiotic_Super",
-    "description": null
+    "localized_name": "Antibiotic Super",
+    "description": "Antibiotic Super"
   },
   "Arrow": {
     "localized_name": "Flèche",
@@ -505,7 +505,7 @@
   },
   "Arrow_Fire": {
     "localized_name": "Flèche de feu",
-    "description": "Une flèche de feu à utiliser avec un arc. Inflige des dégâts de type ElemIcon_FireFeu à la cible touchée. Fabrication possible à : Établi de fortune."
+    "description": "Une flèche de feu à utiliser avec un arc. Inflige des dégâts de type Feu à la cible touchée. Fabrication possible à : Établi de fortune."
   },
   "Arrow_Poison": {
     "localized_name": "Flèche empoisonnée",
@@ -732,8 +732,8 @@
     "description": "Un ingrédient polyvalent, délicieux aussi bien cru que cuit. On en trouve facilement partout sur l’île."
   },
   "Berries2": {
-    "localized_name": "Berries2",
-    "description": null
+    "localized_name": "Red Berries",
+    "description": "A versatile ingredient that is delicious raw or cooked. They can be found anywhere on the island."
   },
   "BerrySeeds": {
     "localized_name": "Graines de baies",
@@ -1541,7 +1541,7 @@
   },
   "Blueprint_Head002_5": {
     "localized_name": "Plan de la Couronne d'Or 5",
-    "description": "Lorsque vous en possédez un, la recette pour |Couronne dorée （Légendaire）| est débloquée. Elle peut être confectionnée sur le ｢Établi de fortune｣."
+    "description": "Lorsque vous en possédez un, la recette pour \"Couronne dorée （Légendaire）\" est débloquée. Elle peut être confectionnée sur le ｢Établi de fortune｣."
   },
   "Blueprint_Head003_1": {
     "localized_name": "Plan de bandeau à longues oreilles 1",
@@ -1581,7 +1581,7 @@
   },
   "Blueprint_Head004_5": {
     "localized_name": "Plan du chapeau de sorcière 5",
-    "description": "Lorsque vous possédez, la recette de |Chapeau de sorcière (Légendaire)| est débloquée. Vous pouvez la fabriquer à l' |Établi de fortune|."
+    "description": "Lorsque vous possédez, la recette de \"Chapeau de sorcière (Légendaire)\" est débloquée. Vous pouvez la fabriquer à l' \"Établi de fortune\"."
   },
   "Blueprint_Head005_1": {
     "localized_name": "Plan de chapeau souple 1",
@@ -1601,7 +1601,7 @@
   },
   "Blueprint_Head005_5": {
     "localized_name": "Plan de chapeau mou 5",
-    "description": "En possédant cela, la recette de |Chapeau souple (Légendaire)| est déverrouillée. Vous pouvez le fabriquer à la |Établi de fortune|."
+    "description": "En possédant cela, la recette de \"Chapeau souple (Légendaire)\" est déverrouillée. Vous pouvez le fabriquer à la \"Établi de fortune\"."
   },
   "Blueprint_Head006_1": {
     "localized_name": "Plan de casque 1",
@@ -1621,7 +1621,7 @@
   },
   "Blueprint_Head006_5": {
     "localized_name": "Plan de casque 5",
-    "description": "Lorsqu'ils sont en possession, la recette pour |Casque （Légendaire）| est débloquée. Il peut être fabriqué à |｢Établi de fortune｣|."
+    "description": "Lorsqu'ils sont en possession, la recette pour \"Casque （Légendaire）\" est débloquée. Il peut être fabriqué à \"｢Établi de fortune｣\"."
   },
   "Blueprint_Head007_1": {
     "localized_name": "Plan de haut-de-forme 1",
@@ -1641,7 +1641,7 @@
   },
   "Blueprint_Head007_5": {
     "localized_name": "Plan de chapeau de soie 5",
-    "description": "En possession de cela, la recette de |Haut-de-forme (Légendaire)| est déverrouillée. Il peut être fabriqué à la | Établi de fortune|."
+    "description": "En possession de cela, la recette de \"Haut-de-forme (Légendaire)\" est déverrouillée. Il peut être fabriqué à la \" Établi de fortune\"."
   },
   "Blueprint_Head008_1": {
     "localized_name": "Plan de tricorne 1",
@@ -1661,7 +1661,7 @@
   },
   "Blueprint_Head008_5": {
     "localized_name": "Plan du tricorne 5",
-    "description": "Lorsque vous possédez, la recette pour |Tricorne (Légendaire)| est débloquée. Vous pouvez la fabriquer dans |Établi de fortune|."
+    "description": "Lorsque vous possédez, la recette pour \"Tricorne (Légendaire)\" est débloquée. Vous pouvez la fabriquer dans \"Établi de fortune\"."
   },
   "Blueprint_Head009_1": {
     "localized_name": "Plan de chapeau d’explorateur 1",
@@ -1681,7 +1681,7 @@
   },
   "Blueprint_Head009_5": {
     "localized_name": "Schéma du chapeau d'exploration 5",
-    "description": "En possession, la recette pour |Chapeau d’explorateur (Légendaire)| est débloquée. Peut être fabriqué à |Établi de fortune|."
+    "description": "En possession, la recette pour \"Chapeau d’explorateur (Légendaire)\" est débloquée. Peut être fabriqué à \"Établi de fortune\"."
   },
   "Blueprint_Head010_1": {
     "localized_name": "Plan de chapeau de diplômé 1",
@@ -1701,7 +1701,7 @@
   },
   "Blueprint_Head010_5": {
     "localized_name": "Plan de conception du chapeau d'université 5",
-    "description": "Lorsque vous possédez, la recette pour |Chapeau de diplômé (Légendaire)| est déverrouillée. On peut le créer avec |Établi de fortune|."
+    "description": "Lorsque vous possédez, la recette pour \"Chapeau de diplômé (Légendaire)\" est déverrouillée. On peut le créer avec \"Établi de fortune\"."
   },
   "Blueprint_Head011_1": {
     "localized_name": "Plan de chapeau de paille 1",
@@ -1721,7 +1721,7 @@
   },
   "Blueprint_Head011_5": {
     "localized_name": "Schéma de Chapeau d'Agriculture 5",
-    "description": "Lorsque vous le possédez, la recette pour |Chapeau de paille (Légendaire)| est déverrouillée. Vous pouvez le fabriquer à |Établi de fortune|."
+    "description": "Lorsque vous le possédez, la recette pour \"Chapeau de paille (Légendaire)\" est déverrouillée. Vous pouvez le fabriquer à \"Établi de fortune\"."
   },
   "Blueprint_Head012_1": {
     "localized_name": "Plan de chapeau melon 1",
@@ -1781,7 +1781,7 @@
   },
   "Blueprint_Head014_5": {
     "localized_name": "Schéma de bonnet de lutin souriant 5",
-    "description": "Lorsque vous possédez, la recette de |Chapeau Tocotoco souriant (Légendaire)| est déverrouillée. Vous pouvez le fabriquer à |Établi de fortune|."
+    "description": "Lorsque vous possédez, la recette de \"Chapeau Tocotoco souriant (Légendaire)\" est déverrouillée. Vous pouvez le fabriquer à \"Établi de fortune\"."
   },
   "Blueprint_Head015_1": {
     "localized_name": "Plan de chapeau Gumoss 1",
@@ -1801,7 +1801,7 @@
   },
   "Blueprint_Head015_5": {
     "localized_name": "5 plans de chapeau Naemochi",
-    "description": "Lorsque vous possédez, la recette de |Chapeau Gumoss （Légendaire）| est déverrouillée. Vous pouvez la fabriquer sur |Établi de fortune|."
+    "description": "Lorsque vous possédez, la recette de \"Chapeau Gumoss （Légendaire）\" est déverrouillée. Vous pouvez la fabriquer sur \"Établi de fortune\"."
   },
   "Blueprint_Head016_1": {
     "localized_name": "Plan de chapeau Penking 1",
@@ -3716,8 +3716,8 @@
     "description": "Claw"
   },
   "Claws2": {
-    "localized_name": "Claws2",
-    "description": null
+    "localized_name": "Claw",
+    "description": "Claw"
   },
   "Cloth": {
     "localized_name": "Tissu",
@@ -4160,8 +4160,8 @@
     "description": "Fang"
   },
   "Fang2": {
-    "localized_name": "Fang2",
-    "description": null
+    "localized_name": "Fang",
+    "description": "Fang"
   },
   "Fiber": {
     "localized_name": "Fibre",
@@ -5476,8 +5476,8 @@
     "description": "Du cuir obtenu à partir de certains Pals. Matériau utilisé pour fabriquer des armures."
   },
   "Leather2": {
-    "localized_name": "Leather2",
-    "description": null
+    "localized_name": "Leather",
+    "description": "Leather taken from a Pal, it serves as a defensive material. It can be obtained from certain Pals."
   },
   "Lettuce": {
     "localized_name": "Laitue",
@@ -5537,7 +5537,7 @@
   },
   "LuxuryOmelette": {
     "localized_name": "LuxuryOmelette",
-    "description": null
+    "description": "LuxuryOmelette"
   },
   "LvUP_01": {
     "localized_name": "Cristal de formation",
@@ -5660,8 +5660,8 @@
     "description": "De la viande de Pal. Si fraîche qu'elle pourrait être consommée crue par les humains."
   },
   "Meat2": {
-    "localized_name": "Meat2",
-    "description": null
+    "localized_name": "Meat",
+    "description": "Pal meat. It’s so fresh that even a human could safely eat it raw."
   },
   "MeatAndPotatoes": {
     "localized_name": "Nikujaga de Galeclaw",
@@ -6205,75 +6205,75 @@
   },
   "PalAwakening_Dark": {
     "localized_name": "Cristal d'éveil tenebra",
-    "description": "Un cristal concentrant l’énergie de l’Arbre-Monde. Éveille les Pals de type ElemIcon_DarkTénèbres et libère leur pouvoir caché."
+    "description": "Un cristal concentrant l’énergie de l’Arbre-Monde. Éveille les Pals de type Ténèbres et libère leur pouvoir caché."
   },
   "PalAwakening_Dragon": {
     "localized_name": "Cristal d'éveil draco",
-    "description": "Un cristal concentrant l’énergie de l’Arbre-Monde. Éveille les Pals de type ElemIcon_DragonDragon et libère leur pouvoir caché."
+    "description": "Un cristal concentrant l’énergie de l’Arbre-Monde. Éveille les Pals de type Dragon et libère leur pouvoir caché."
   },
   "PalAwakening_Electric": {
     "localized_name": "Cristal d'éveil fulgura",
-    "description": "Un cristal concentrant l’énergie de l’Arbre-Monde. Éveille les Pals de type ElemIcon_ElectricÉlectricité et libère leur pouvoir caché."
+    "description": "Un cristal concentrant l’énergie de l’Arbre-Monde. Éveille les Pals de type Électricité et libère leur pouvoir caché."
   },
   "PalAwakening_Fire": {
     "localized_name": "Cristal d'éveil ignis",
-    "description": "Un cristal concentrant l’énergie de l’Arbre-Monde. Éveille les Pals de type ElemIcon_FireFeu et libère leur pouvoir caché."
+    "description": "Un cristal concentrant l’énergie de l’Arbre-Monde. Éveille les Pals de type Feu et libère leur pouvoir caché."
   },
   "PalAwakening_Grass": {
     "localized_name": "Cristal d'éveil herba",
-    "description": "Un cristal concentrant l’énergie de l’Arbre-Monde. Éveille les Pals de type ElemIcon_GrassHerbe et libère leur pouvoir caché."
+    "description": "Un cristal concentrant l’énergie de l’Arbre-Monde. Éveille les Pals de type Herbe et libère leur pouvoir caché."
   },
   "PalAwakening_Ground": {
     "localized_name": "Cristal d'éveil terra",
-    "description": "Un cristal concentrant l’énergie de l’Arbre-Monde. Éveille les Pals de type ElemIcon_GroundTerre et libère leur pouvoir caché."
+    "description": "Un cristal concentrant l’énergie de l’Arbre-Monde. Éveille les Pals de type Terre et libère leur pouvoir caché."
   },
   "PalAwakening_Ice": {
     "localized_name": "Cristal d'éveil glacia",
-    "description": "Un cristal concentrant l’énergie de l’Arbre-Monde. Éveille les Pals de type ElemIcon_IceGlace et libère leur pouvoir caché."
+    "description": "Un cristal concentrant l’énergie de l’Arbre-Monde. Éveille les Pals de type Glace et libère leur pouvoir caché."
   },
   "PalAwakening_Material_Dark": {
     "localized_name": "Éclat tenebra",
-    "description": "Une pierre formée par l’énergie de l’Arbre-Monde accumulée dans le corps des Pals. Une fois travaillée, elle permet de créer un objet capable de libérer le pouvoir caché des Pals de type ElemIcon_DarkTénèbres."
+    "description": "Une pierre formée par l’énergie de l’Arbre-Monde accumulée dans le corps des Pals. Une fois travaillée, elle permet de créer un objet capable de libérer le pouvoir caché des Pals de type Ténèbres."
   },
   "PalAwakening_Material_Dragon": {
     "localized_name": "Éclat draco",
-    "description": "Une pierre formée par l’énergie de l’Arbre-Monde accumulée dans le corps des Pals. Une fois travaillée, elle permet de créer un objet capable de libérer le pouvoir caché des Pals de type ElemIcon_DragonDragon."
+    "description": "Une pierre formée par l’énergie de l’Arbre-Monde accumulée dans le corps des Pals. Une fois travaillée, elle permet de créer un objet capable de libérer le pouvoir caché des Pals de type Dragon."
   },
   "PalAwakening_Material_Electric": {
     "localized_name": "Éclat fulgura",
-    "description": "Une pierre formée par l’énergie de l’Arbre-Monde accumulée dans le corps des Pals. Une fois travaillée, elle permet de créer un objet capable de libérer le pouvoir caché des Pals de type ElemIcon_ElectricÉlectricité."
+    "description": "Une pierre formée par l’énergie de l’Arbre-Monde accumulée dans le corps des Pals. Une fois travaillée, elle permet de créer un objet capable de libérer le pouvoir caché des Pals de type Électricité."
   },
   "PalAwakening_Material_Fire": {
     "localized_name": "Éclat ignis",
-    "description": "Une pierre formée par l’énergie de l’Arbre-Monde accumulée dans le corps des Pals. Une fois travaillée, elle permet de créer un objet capable de libérer le pouvoir caché des Pals de type ElemIcon_FireFeu."
+    "description": "Une pierre formée par l’énergie de l’Arbre-Monde accumulée dans le corps des Pals. Une fois travaillée, elle permet de créer un objet capable de libérer le pouvoir caché des Pals de type Feu."
   },
   "PalAwakening_Material_Grass": {
     "localized_name": "Éclat herba",
-    "description": "Une pierre formée par l’énergie de l’Arbre-Monde accumulée dans le corps des Pals. Une fois travaillée, elle permet de créer un objet capable de libérer le pouvoir caché des Pals de type ElemIcon_GrassHerbe."
+    "description": "Une pierre formée par l’énergie de l’Arbre-Monde accumulée dans le corps des Pals. Une fois travaillée, elle permet de créer un objet capable de libérer le pouvoir caché des Pals de type Herbe."
   },
   "PalAwakening_Material_Ground": {
     "localized_name": "Éclat terra",
-    "description": "Une pierre formée par l’énergie de l’Arbre-Monde accumulée dans le corps des Pals. Une fois travaillée, elle permet de créer un objet capable de libérer le pouvoir caché des Pals de type ElemIcon_GroundTerre."
+    "description": "Une pierre formée par l’énergie de l’Arbre-Monde accumulée dans le corps des Pals. Une fois travaillée, elle permet de créer un objet capable de libérer le pouvoir caché des Pals de type Terre."
   },
   "PalAwakening_Material_Ice": {
     "localized_name": "Éclat glacia",
-    "description": "Une pierre formée par l’énergie de l’Arbre-Monde accumulée dans le corps des Pals. Une fois travaillée, elle permet de créer un objet capable de libérer le pouvoir caché des Pals de type ElemIcon_IceGlace."
+    "description": "Une pierre formée par l’énergie de l’Arbre-Monde accumulée dans le corps des Pals. Une fois travaillée, elle permet de créer un objet capable de libérer le pouvoir caché des Pals de type Glace."
   },
   "PalAwakening_Material_Neutral": {
     "localized_name": "Éclat neutra",
-    "description": "Une pierre formée par l’énergie de l’Arbre-Monde accumulée dans le corps des Pals. Une fois travaillée, elle permet de créer un objet capable de libérer le pouvoir caché des Pals de type ElemIcon_NeutralNon élém.."
+    "description": "Une pierre formée par l’énergie de l’Arbre-Monde accumulée dans le corps des Pals. Une fois travaillée, elle permet de créer un objet capable de libérer le pouvoir caché des Pals de type Non élém.."
   },
   "PalAwakening_Material_Water": {
     "localized_name": "Éclat aqua",
-    "description": "Une pierre formée par l’énergie de l’Arbre-Monde accumulée dans le corps des Pals. Une fois travaillée, elle permet de créer un objet capable de libérer le pouvoir caché des Pals de type ElemIcon_WaterEau."
+    "description": "Une pierre formée par l’énergie de l’Arbre-Monde accumulée dans le corps des Pals. Une fois travaillée, elle permet de créer un objet capable de libérer le pouvoir caché des Pals de type Eau."
   },
   "PalAwakening_Neutral": {
     "localized_name": "Cristal d'éveil neutra",
-    "description": "Un cristal concentrant l’énergie de l’Arbre-Monde. Éveille les Pals de type ElemIcon_NeutralNon élém. et libère leur pouvoir caché."
+    "description": "Un cristal concentrant l’énergie de l’Arbre-Monde. Éveille les Pals de type Non élém. et libère leur pouvoir caché."
   },
   "PalAwakening_Water": {
     "localized_name": "Cristal d'éveil aqua",
-    "description": "Un cristal concentrant l’énergie de l’Arbre-Monde. Éveille les Pals de type ElemIcon_WaterEau et libère leur pouvoir caché."
+    "description": "Un cristal concentrant l’énergie de l’Arbre-Monde. Éveille les Pals de type Eau et libère leur pouvoir caché."
   },
   "PalCrystal_Ex": {
     "localized_name": "Fragments d'une civilisation antique",
@@ -6441,7 +6441,7 @@
   },
   "PalEgg_MutationPal": {
     "localized_name": "Huge Mutated Egg",
-    "description": "-"
+    "description": "[WIP] Description not finalized. A Huge Mutated Egg. You can feel the restless aura of a strange soul, as if a monster is about to be born. Place it in a Egg Incubator to hatch it."
   },
   "PalEgg_MutationPal_01": {
     "localized_name": "Œuf mutant",
@@ -7189,7 +7189,7 @@
   },
   "PotatoSeedPotatoes": {
     "localized_name": "PotatoSeedPotatoes",
-    "description": null
+    "description": "PotatoSeedPotatoes"
   },
   "PotatoSeeds": {
     "localized_name": "Semence de pomme de terre",
@@ -8645,7 +8645,7 @@
   },
   "SkyHeavyBullet": {
     "localized_name": "Sunreach Single-Shot Ammo",
-    "description": "-"
+    "description": "[WIP] Description not finalized. Ammo for the Prototype Shotgun, Tactical Grenade Launcher, and similar weapons."
   },
   "SkyIslandOre": {
     "localized_name": "Soralite",
@@ -8653,7 +8653,7 @@
   },
   "SkyLightBullet": {
     "localized_name": "Sunreach Rapid-Fire Ammo",
-    "description": "-"
+    "description": "[WIP] Description not finalized. Ammo for the Combat SMG, Heavy Assault Rifle, and similar weapons."
   },
   "SkyShotgun": {
     "localized_name": "Fusil à pompe astral",
@@ -9552,8 +9552,8 @@
     "description": "Un matériau requis pour allumer des feux. On en trouve parfois en creusant la pierre."
   },
   "Gasoline": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Gasoline",
+    "description": null
   },
   "IronOre": {
     "localized_name": "IronOre",
@@ -9608,8 +9608,8 @@
     "description": null
   },
   "Propellant": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Propellant",
+    "description": null
   },
   "Pumpkin": {
     "localized_name": "Pumpkin",
@@ -9640,8 +9640,8 @@
     "description": null
   },
   "Shield_05": {
-    "localized_name": "Shield_05",
-    "description": null
+    "localized_name": "Ultra bouclier",
+    "description": "Un bouclier mystérieux issu de la technologie du paldium. Se régénère de lui-même lorsqu'il ne subit pas d'attaque. Toute l'expérience accumulée lui confère une qualité sans précédent."
   },
   "Silicon": {
     "localized_name": "Silicium",

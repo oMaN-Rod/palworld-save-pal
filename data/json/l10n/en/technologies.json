@@ -129,7 +129,7 @@
   },
   "Arrow_Fire": {
     "localized_name": "Fire Arrow",
-    "description": "Fire Arrows for use with bows. Deals ElemIcon_FireFire damage on contact. Can be crafted at Primitive Workbench."
+    "description": "Fire Arrows for use with bows. Deals Fire damage on contact. Can be crafted at Primitive Workbench."
   },
   "Arrow_Poison": {
     "localized_name": "Poison Arrow",
