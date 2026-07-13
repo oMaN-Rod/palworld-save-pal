@@ -90,9 +90,8 @@ fn main() {
         .init();
 
     tauri::Builder::default()
-        // Replaces desktop.py's temp-dir lock file (desktop.py:273-381):
-        // a second launch triggers this callback in the FIRST instance,
-        // which focuses the existing window; the second process exits.
+        // Single instance: a second launch fires this callback in the FIRST
+        // instance, which focuses its window; the second process then exits.
         .plugin(tauri_plugin_single_instance::init(|app, _argv, _cwd| {
             if let Some(main_window) = app.get_webview_window("main") {
                 let _ = main_window.unminimize();
@@ -114,8 +113,7 @@ fn main() {
             };
 
             // start_server binds the listener before returning, so once this
-            // await completes the URL below is live — no sleep, no polling
-            // (replaces desktop.py:440's time.sleep(2)).
+            // await completes the URL below is live — no sleep, no polling.
             let server_handle =
                 tauri::async_runtime::block_on(psp_server::start_server(server_config))?;
             let server_url: tauri::Url = format!("http://{}", server_handle.addr).parse()?;
@@ -139,7 +137,6 @@ fn main() {
                 .expect("server state mutex poisoned")
                 .replace(server_handle);
 
-            // desktop.py:231-237 — title, 1366x768, min 1366x768.
             WebviewWindowBuilder::new(&app_handle, "main", WebviewUrl::External(webview_url))
                 .title(format!("Palworld Save Pal v{}", env!("CARGO_PKG_VERSION")))
                 .inner_size(1366.0, 768.0)
@@ -152,8 +149,8 @@ fn main() {
         .expect("failed to build Palworld Save Pal desktop app")
         .run(|app, event| {
             if let RunEvent::Exit = event {
-                // Graceful shutdown (replaces desktop.py on_closed + psutil
-                // child cleanup — the server is in-process, nothing to kill).
+                // The server runs in-process, so exiting just means awaiting its
+                // graceful shutdown — there is no child process to kill.
                 let taken = app
                     .state::<EmbeddedServer>()
                     .0
