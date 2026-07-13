@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { EntryState, type Player } from '$types';
-	import { staticIcons } from '$types/icons';
+	import { ASSET_DATA_PATH, staticIcons } from '$types/icons';
 	import { getModalState } from '$states';
 	import { NumberSliderModal } from '$components/modals';
 	import { CornerDotButton } from '$components/ui';
 	import { relicData } from '$lib/data';
 	import type { RelicRankData } from '$lib/data/relic.svelte';
+	import { assetLoader } from '$utils';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
@@ -21,20 +22,33 @@
 	let workSpeed = $derived(100 + player.status_point_list.work_speed * 50);
 	let weight = $derived(300 + player.status_point_list.weight * 50);
 
-	// The five stats with known display formulas, rendered above. Everything else in
-	// status_point_list is a relic-backed rank. Iterating the keys the save actually
-	// has matters: writes are mutate-only, so offering to edit a missing row would
-	// silently no-op.
-	const HERO_STATS = ['max_hp', 'max_sp', 'attack', 'work_speed', 'weight'];
+	// Game order (the EPalRelicType enum order), which is the order the game's own
+	// Buildup menu uses. NOT alphabetical.
+	const RELIC_ORDER = [
+		'capture_power',
+		'hunger_reduction',
+		'swim_speed',
+		'food_decay_reduction',
+		'jump_power',
+		'glider_speed',
+		'climb_speed',
+		'status_ailment_resist',
+		'stamina_reduction',
+		'sphere_homing',
+		'exp_bonus',
+		'rainbow_passive_rate',
+		'move_speed'
+	];
 
-	// The status stat is `capture_rate`; its relic type is `capture_power`.
-	function relicKeyFor(stat: string): string {
-		return stat === 'capture_rate' ? 'capture_power' : stat;
+	// The status stat is `capture_rate`; its relic type is `capture_power`. Every other
+	// relic key IS the status key.
+	function statKeyFor(relicKey: string): string {
+		return relicKey === 'capture_power' ? 'capture_rate' : relicKey;
 	}
 
 	// Stays `{}` while the fetch is in flight, and if it fails. Either way we do not
 	// know any rank's cap, and every rank editor stays disabled until we do -- see
-	// `updateExtraStat`.
+	// `updateRelicStat`.
 	let relics: Record<string, RelicRankData> = $state({});
 	$effect(() => {
 		relicData
@@ -43,44 +57,48 @@
 			.catch((error) => console.error('Failed to load relic data; rank editing disabled', error));
 	});
 
-	const extraStats = $derived(
-		Object.keys(player.status_point_list ?? {})
-			.filter((key) => !HERO_STATS.includes(key))
-			.sort()
-	);
+	// All 13 categories, always -- not just the ones the save has a row for. A stat with
+	// no row is a stat at rank 0; the backend appends the row when it is first raised
+	// above 0. Empty until relic data loads, which keeps every editor disabled.
+	const relicStats = $derived(RELIC_ORDER.filter((key) => relics[key] !== undefined));
 
-	function maxRankFor(stat: string): number | undefined {
-		return relics[relicKeyFor(stat)]?.max_rank;
+	// The reader omits rows the save does not have, so an absent key means rank 0.
+	function rankOf(relicKey: string): number {
+		return player.status_point_list[statKeyFor(relicKey)] ?? 0;
 	}
 
-	function effectFor(stat: string): number | undefined {
-		const entry = relics[relicKeyFor(stat)];
-		const rank = player.status_point_list[stat];
-		if (!entry || !rank || rank < 1 || rank > entry.effect_rate.length) return undefined;
+	function maxRankFor(relicKey: string): number | undefined {
+		return relics[relicKey]?.max_rank;
+	}
+
+	function effectFor(relicKey: string): number | undefined {
+		const entry = relics[relicKey];
+		const rank = rankOf(relicKey);
+		if (!entry || rank < 1 || rank > entry.effect_rate.length) return undefined;
 		const effect = entry.effect_rate[rank - 1];
 		// capture_power's effect rate is 0 at every rank: show the rank, no percentage.
 		return effect > 0 ? effect : undefined;
 	}
 
-	async function updateExtraStat(stat: string) {
-		const max = maxRankFor(stat);
+	async function updateRelicStat(relicKey: string) {
+		const max = maxRankFor(relicKey);
 		// No cap, no edit. Opening the slider without a `max` would let it fall back to
 		// its default of 50 and write, say, sphere_homing = 50 when the real max_rank is
 		// 4 -- exactly the invalid save state the cap exists to prevent. Relic data is
 		// still loading, or its fetch failed; the button is disabled either way, and this
 		// is the guard that makes the write impossible rather than merely unlikely.
 		if (max === undefined) return;
+		const entry = relics[relicKey];
 		// @ts-ignore
 		const result = await modal.showModal<number>(NumberSliderModal, {
-			title: m.edit_entity({ entity: stat }),
-			value: player.status_point_list[stat],
+			title: m.edit_entity({ entity: entry.localized_name }),
+			value: rankOf(relicKey),
 			min: 0,
 			max
 		});
 		if (result === undefined || result === null) return;
 		// The modal already clamps to `max`; this is a backstop.
-		const value = Math.min(Math.max(result, 0), max);
-		player.status_point_list[stat] = value;
+		player.status_point_list[statKeyFor(relicKey)] = Math.min(Math.max(result, 0), max);
 		player.state = EntryState.MODIFIED;
 	}
 
@@ -165,23 +183,29 @@
 	</button>
 {/snippet}
 
-{#snippet rankButton(stat: string)}
-	{@const max = maxRankFor(stat)}
-	{@const effect = effectFor(stat)}
+{#snippet relicButton(relicKey: string)}
+	{@const entry = relics[relicKey]}
+	{@const max = maxRankFor(relicKey)}
+	{@const effect = effectFor(relicKey)}
 	<!-- Read-only until we know this rank's cap: the row still shows the current value,
 	     but an edit that cannot be clamped must not be reachable. -->
 	<button
 		class="hover:ring-secondary-500 bg-surface-600/50 flex w-full items-center space-x-2 rounded-sm py-2 pr-2 hover:ring disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:ring-0"
 		disabled={max === undefined}
-		onclick={() => updateExtraStat(stat)}
+		title={entry.description}
+		onclick={() => updateRelicStat(relicKey)}
 	>
-		<span class="grow pl-2 text-start">{stat}</span>
+		<img
+			src={assetLoader.loadImage(`${ASSET_DATA_PATH}/img/relic_${relicKey}.webp`)}
+			alt={entry.localized_name}
+			class="mx-2 h-6 w-6"
+		/>
+		<span class="grow text-start">{entry.localized_name}</span>
 		{#if effect !== undefined}
 			<span class="opacity-80">+{effect}%</span>
 		{/if}
 		<span>
-			{player.status_point_list[stat]}{#if max !== undefined}<span class="opacity-60">/{max}</span
-				>{/if}
+			{rankOf(relicKey)}{#if max !== undefined}<span class="opacity-60">/{max}</span>{/if}
 		</span>
 	</button>
 {/snippet}
@@ -192,8 +216,8 @@
 	{@render statButton('attack', staticIcons.attackIcon, m.attack(), attack)}
 	{@render statButton('workSpeed', staticIcons.workSpeedIcon, m.workspeed(), workSpeed)}
 	{@render statButton('weight', staticIcons.weightIcon, m.weight(), weight)}
-	{#each extraStats as stat (stat)}
-		{@render rankButton(stat)}
+	{#each relicStats as relicKey (relicKey)}
+		{@render relicButton(relicKey)}
 	{/each}
 	<CornerDotButton id="max-player-stats" class="w-24" label={m.max()} onClick={handleMaxPlayerStats} />
 </div>

@@ -7,6 +7,9 @@ export interface RelicRankData {
 	per_rank: number[];
 	/** Bonus granted at each rank; index 0 is rank 1. */
 	effect_rate: number[];
+	/** The game's own display name, e.g. "Satiety Duration" for hunger_reduction. */
+	localized_name: string;
+	description: string;
 }
 
 class RelicDataHandler {
