@@ -465,3 +465,18 @@ fn read_level_only() -> uesave::Save {
     let level_bytes = fixture_file("world1/Level.sav");
     psp_core::savio::read_sav_bytes(&level_bytes).expect("parse level")
 }
+
+/// Writing the same session twice must produce identical bytes. The python
+/// implementation could not do this: its custom encoder mutated the property dict
+/// during serialization, so it had to deep-copy the whole save before each write.
+/// `uesave` writes from a borrow, so no such guard is needed -- this pins that.
+#[test]
+fn writing_the_same_session_twice_is_byte_identical() {
+    let session = common::load_fixture_session("world1");
+    let first = session.level_sav_bytes().expect("first write");
+    let second = session.level_sav_bytes().expect("second write");
+    assert_eq!(
+        first, second,
+        "a second write of an unmodified session must be byte-identical"
+    );
+}
