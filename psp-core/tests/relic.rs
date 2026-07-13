@@ -125,7 +125,10 @@ fn max_rank_and_effect_for_rank() {
     // Out of range.
     assert_eq!(relic::effect_for_rank(&data, "swim_speed", 21), None);
     // capture_power grants no percentage at any rank.
-    assert_eq!(relic::effect_for_rank(&data, "capture_power", 10), Some(0.0));
+    assert_eq!(
+        relic::effect_for_rank(&data, "capture_power", 10),
+        Some(0.0)
+    );
 }
 
 /// A real save must never carry a StatusPoint above the stat's max rank. This pins

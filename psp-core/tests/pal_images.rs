@@ -106,7 +106,10 @@ fn every_pal_key_has_an_image_asset() {
 
     let mut missing: Vec<String> = Vec::new();
     for (key, value) in map.iter() {
-        let is_pal = value.get("is_pal").and_then(|v| v.as_bool()).unwrap_or(false);
+        let is_pal = value
+            .get("is_pal")
+            .and_then(|v| v.as_bool())
+            .unwrap_or(false);
         if !is_pal {
             // Non-pal entries (humans/NPCs) never reach a per-key image
             // lookup in the UI; they render a shared "commonhuman" icon.
@@ -150,7 +153,6 @@ fn every_pal_key_has_an_image_asset() {
     assert!(
         stale.is_empty(),
         "these KNOWN_MISSING_ART entries now have art and should be removed \
-         from the allow-list in psp-core/tests/pal_images.rs: {:?}",
-        stale
+         from the allow-list in psp-core/tests/pal_images.rs: {stale:?}"
     );
 }

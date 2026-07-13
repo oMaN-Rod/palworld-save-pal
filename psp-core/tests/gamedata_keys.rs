@@ -15,7 +15,11 @@ fn pals_json_keys_are_upper_camel_and_boss_prefixes_are_uppercase() {
     let pals = data.get("pals").expect("pals.json present");
     let map = pals.as_object().expect("pals.json is an object");
 
-    assert!(map.len() > 100, "expected a full pal catalog, got {}", map.len());
+    assert!(
+        map.len() > 100,
+        "expected a full pal catalog, got {}",
+        map.len()
+    );
 
     // `PalLookup::lower_to_canonical` (gamedata.rs) folds every key to
     // lowercase for `pal_data_for`'s case-insensitive lookup. If pals.json

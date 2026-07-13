@@ -20,7 +20,10 @@ pub const RELIC_TYPE_MAP: [(&str, &str); 13] = [
     ("EPalRelicType::JumpPower", "jump_power"),
     ("EPalRelicType::GliderSpeed", "glider_speed"),
     ("EPalRelicType::ClimbSpeed", "climb_speed"),
-    ("EPalRelicType::StatusAilmentResist", "status_ailment_resist"),
+    (
+        "EPalRelicType::StatusAilmentResist",
+        "status_ailment_resist",
+    ),
     ("EPalRelicType::StaminaReduction", "stamina_reduction"),
     ("EPalRelicType::SphereHoming", "sphere_homing"),
     ("EPalRelicType::ExpBonus", "exp_bonus"),

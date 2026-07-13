@@ -5,6 +5,10 @@ use uuid::Uuid;
 
 /// Loads the private corpus save named by `PSP_TEST_SAVE_DIR`, or `None`
 /// (skipping) when that env var is unset.
+///
+/// Each test binary compiles this module separately, so a helper only some of
+/// them call still reads as dead code in the others.
+#[allow(dead_code)]
 pub fn load_corpus_session() -> Option<SaveSession> {
     let Ok(save_dir) = std::env::var("PSP_TEST_SAVE_DIR") else {
         eprintln!("PSP_TEST_SAVE_DIR not set; skipping corpus test");
