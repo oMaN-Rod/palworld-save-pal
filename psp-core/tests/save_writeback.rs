@@ -612,7 +612,7 @@ fn relic_possess_num_only_counts_newly_collected_effigies() {
     let base = player::build_player_dto(&session, &data, player_id)
         .unwrap()
         .unwrap();
-    let start = base.relic_possess_num;
+    let start = base.effigy_possess_num;
 
     // Fast-travel unlocks alone must not touch the relic counter.
     let mut dto = base.clone();
@@ -625,7 +625,7 @@ fn relic_possess_num_only_counts_newly_collected_effigies() {
         .unwrap()
         .unwrap();
     assert_eq!(
-        after_ft.relic_possess_num, start,
+        after_ft.effigy_possess_num, start,
         "unlocking fast-travel points must not change RelicPossessNum"
     );
 
@@ -639,7 +639,7 @@ fn relic_possess_num_only_counts_newly_collected_effigies() {
         .unwrap()
         .unwrap();
     assert_eq!(
-        after_two.relic_possess_num,
+        after_two.effigy_possess_num,
         start + 2,
         "collecting 2 new effigies must grant exactly 2 relics"
     );
@@ -652,7 +652,7 @@ fn relic_possess_num_only_counts_newly_collected_effigies() {
         .unwrap()
         .unwrap();
     assert_eq!(
-        after_resave.relic_possess_num, after_two.relic_possess_num,
+        after_resave.effigy_possess_num, after_two.effigy_possess_num,
         "an unchanged resave must not change RelicPossessNum"
     );
 
@@ -666,7 +666,7 @@ fn relic_possess_num_only_counts_newly_collected_effigies() {
         .unwrap()
         .unwrap();
     assert_eq!(
-        after_third.relic_possess_num,
+        after_third.effigy_possess_num,
         start + 3,
         "one newly collected effigy must grant exactly one relic"
     );

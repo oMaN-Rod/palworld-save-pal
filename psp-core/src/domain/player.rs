@@ -337,7 +337,7 @@ pub fn build_player_dto(
     let collected_effigies = record_data
         .map(|record| unlock_flag_keys(record, "RelicObtainForInstanceFlag"))
         .unwrap_or_default();
-    let relic_possess_num = record_data
+    let effigy_possess_num = record_data
         .and_then(|record| record.0.get(&PropertyKey::from("RelicPossessNum")))
         .and_then(props::as_i32)
         .unwrap_or(0) as i64;
@@ -490,7 +490,7 @@ pub fn build_player_dto(
         current_missions,
         unlocked_fast_travel_points: Some(unlocked_fast_travel_points),
         collected_effigies: Some(collected_effigies),
-        relic_possess_num,
+        effigy_possess_num,
         location,
         last_online_time,
         dps,

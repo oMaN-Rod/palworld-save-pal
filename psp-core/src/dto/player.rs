@@ -81,7 +81,7 @@ pub struct PlayerDto {
     #[serde(default)]
     pub collected_effigies: Option<Vec<String>>,
     #[serde(default)]
-    pub relic_possess_num: i64, // output-only
+    pub effigy_possess_num: i64, // output-only
     #[serde(default)]
     pub location: Option<WorldMapPointDto>, // output-only
     #[serde(default)]
@@ -214,7 +214,7 @@ mod tests {
             current_missions: vec![],
             unlocked_fast_travel_points: None,
             collected_effigies: None,
-            relic_possess_num: 0,
+            effigy_possess_num: 0,
             location: None,
             last_online_time: None,
             dps: None,
@@ -252,7 +252,7 @@ mod tests {
                 "current_missions",
                 "unlocked_fast_travel_points",
                 "collected_effigies",
-                "relic_possess_num",
+                "effigy_possess_num",
                 "location",
                 "last_online_time",
                 "dps",
