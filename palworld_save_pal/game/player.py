@@ -224,14 +224,19 @@ class Player(BaseModel):
         status_point_list = PalObjects.get_array_property(
             self._save_parameter["GotStatusPointList"]
         )
-        return {
-            PalObjects.StatusNameMap[
-                PalObjects.get_value(item["StatusName"])
-            ]: PalObjects.get_value(item["StatusPoint"])
-            for item in status_point_list
-            if "StatusName" in item
-            and PalObjects.get_value(item["StatusName"]) in PalObjects.StatusNameMap
-        }
+        result: Dict[str, int] = {}
+        for item in status_point_list:
+            if "StatusName" not in item:
+                continue
+            status_name = PalObjects.get_value(item["StatusName"])
+            if status_name == "None":
+                continue
+            mapped_name = PalObjects.StatusNameMap.get(status_name)
+            if mapped_name is None:
+                logger.warning("Skipping unknown status point name: %s", status_name)
+                continue
+            result[mapped_name] = PalObjects.get_value(item["StatusPoint"])
+        return result
 
     @status_point_list.setter
     def status_point_list(self, value: Dict[str, int]):
@@ -260,14 +265,17 @@ class Player(BaseModel):
         ext_status_point_list = PalObjects.get_array_property(
             self._save_parameter["GotExStatusPointList"]
         )
-        return {
-            PalObjects.ExStatusNameMap[
-                PalObjects.get_value(item["StatusName"])
-            ]: PalObjects.get_value(item["StatusPoint"])
-            for item in ext_status_point_list
-            if "StatusName" in item
-            and PalObjects.get_value(item["StatusName"]) in PalObjects.ExStatusNameMap
-        }
+        result: Dict[str, int] = {}
+        for item in ext_status_point_list:
+            if "StatusName" not in item:
+                continue
+            status_name = PalObjects.get_value(item["StatusName"])
+            mapped_name = PalObjects.ExStatusNameMap.get(status_name)
+            if mapped_name is None:
+                logger.warning("Skipping unknown ex status point name: %s", status_name)
+                continue
+            result[mapped_name] = PalObjects.get_value(item["StatusPoint"])
+        return result
 
     @ext_status_point_list.setter
     def ext_status_point_list(self, value: Dict[str, int]):
