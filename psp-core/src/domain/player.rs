@@ -710,7 +710,9 @@ fn apply_player_dto(
             apply_unlock_flags(&mut loaded.sav, "FastTravelPointUnlockFlag", points);
         }
         if let Some(effigies) = &dto.collected_effigies {
-            apply_unlock_flags(&mut loaded.sav, "RelicObtainForInstanceFlag", effigies);
+            let newly_collected =
+                apply_unlock_flags(&mut loaded.sav, "RelicObtainForInstanceFlag", effigies);
+            apply_effigy_relic_counters(&mut loaded.sav, newly_collected);
         }
     }
     // Resolve every container id from the player's own save data first, then
@@ -821,18 +823,20 @@ fn apply_status_points(
     }
 }
 
-/// Fully replaces the flag map's entries (every key set to `true`) and adds
-/// `keys.len()` to `RelicPossessNum` -- which therefore grows on every write,
-/// by design, rather than being recomputed.
+/// Replaces the flag map's entries, every key set to `true`, and returns how many
+/// of them were not already `true`.
 ///
-/// A real save can legitimately carry a `RecordData` with neither `flag_name`
-/// nor `RelicPossessNum` present. Both are created here, each preceded by an
-/// `ensure_schema` at the `SaveData.RecordData.<name>` path, because uesave's
-/// writer refuses to serialize a property with no registered schema.
-fn apply_unlock_flags(player_sav: &mut uesave::Save, flag_name: &str, keys: &[String]) {
+/// This function does not touch any relic counter. `RelicPossessNum` is an
+/// effigy-only concern and is handled by `apply_effigy_relic_counters`; folding it
+/// in here is what made fast-travel unlocks increment a relic count.
+///
+/// A real save can legitimately carry a `RecordData` with no `flag_name` key. It
+/// is created here, preceded by an `ensure_schema` at the
+/// `SaveData.RecordData.<name>` path, because uesave's writer refuses to serialize
+/// a property with no registered schema.
+fn apply_unlock_flags(player_sav: &mut uesave::Save, flag_name: &str, keys: &[String]) -> usize {
     let record_data_key = PropertyKey::from("RecordData");
     let flag_key = PropertyKey::from(flag_name);
-    let relic_key = PropertyKey::from("RelicPossessNum");
 
     let has_record_data = save_data_props(player_sav)
         .ok()
@@ -840,51 +844,112 @@ fn apply_unlock_flags(player_sav: &mut uesave::Save, flag_name: &str, keys: &[St
         .and_then(props::struct_props)
         .is_some();
     if !has_record_data {
-        return;
+        return 0;
     }
 
-    let record_data_contains = |key: &PropertyKey| {
-        save_data_props(player_sav)
-            .ok()
-            .and_then(|save_data| save_data.0.get(&record_data_key))
-            .and_then(props::struct_props)
-            .map(|record_data| record_data.0.contains_key(key))
-            .unwrap_or(false)
-    };
-    let flag_already_present = record_data_contains(&flag_key);
-    let relic_already_present = record_data_contains(&relic_key);
+    let flag_already_present = save_data_props(player_sav)
+        .ok()
+        .and_then(|save_data| save_data.0.get(&record_data_key))
+        .and_then(props::struct_props)
+        .map(|record_data| record_data.0.contains_key(&flag_key))
+        .unwrap_or(false);
 
-    if !flag_already_present || !relic_already_present {
+    if !flag_already_present {
         if let Some(prefix) = props::schema_prefix_ending_with(player_sav, "RecordData") {
-            if !flag_already_present {
-                props::ensure_schema(
-                    player_sav,
-                    format!("{prefix}RecordData.{flag_name}"),
-                    uesave::PropertyTagPartial {
-                        id: None,
-                        data: uesave::PropertyTagDataPartial::Map {
-                            key_type: Box::new(uesave::PropertyTagDataPartial::Other(
-                                uesave::PropertyType::NameProperty,
-                            )),
-                            value_type: Box::new(uesave::PropertyTagDataPartial::Other(
-                                uesave::PropertyType::BoolProperty,
-                            )),
-                        },
+            props::ensure_schema(
+                player_sav,
+                format!("{prefix}RecordData.{flag_name}"),
+                uesave::PropertyTagPartial {
+                    id: None,
+                    data: uesave::PropertyTagDataPartial::Map {
+                        key_type: Box::new(uesave::PropertyTagDataPartial::Other(
+                            uesave::PropertyType::NameProperty,
+                        )),
+                        value_type: Box::new(uesave::PropertyTagDataPartial::Other(
+                            uesave::PropertyType::BoolProperty,
+                        )),
                     },
-                );
-            }
-            if !relic_already_present {
-                props::ensure_schema(
-                    player_sav,
-                    format!("{prefix}RecordData.RelicPossessNum"),
-                    uesave::PropertyTagPartial {
-                        id: None,
-                        data: uesave::PropertyTagDataPartial::Other(
-                            uesave::PropertyType::IntProperty,
-                        ),
-                    },
-                );
-            }
+                },
+            );
+        }
+    }
+
+    let Ok(save_data) = save_data_props_mut(player_sav) else {
+        return 0;
+    };
+    let Some(record_data) = save_data
+        .0
+        .get_mut(&record_data_key)
+        .and_then(props::struct_props_mut)
+    else {
+        return 0;
+    };
+
+    // Which keys were already true? Anything else in `keys` is newly unlocked.
+    let previously_true: std::collections::BTreeSet<String> = record_data
+        .0
+        .get(&flag_key)
+        .and_then(props::map_entries)
+        .map(|entries| {
+            entries
+                .iter()
+                .filter(|entry| props::as_bool(&entry.value).unwrap_or(false))
+                .filter_map(|entry| props::as_str(&entry.key).map(str::to_string))
+                .collect()
+        })
+        .unwrap_or_default();
+
+    let newly_unlocked = keys
+        .iter()
+        .filter(|key| !previously_true.contains(*key))
+        .count();
+
+    let entries: Vec<uesave::MapEntry> = keys
+        .iter()
+        .map(|key| uesave::MapEntry {
+            key: props::name_property(key),
+            value: props::bool_property(true),
+        })
+        .collect();
+    record_data.insert(flag_name, Property::Map(entries));
+
+    newly_unlocked
+}
+
+/// Adds `newly_collected` to `RelicPossessNum` -- the count of *unspent* effigy
+/// relics the player holds.
+///
+/// Only ever called for effigies. It grows only when effigies are newly collected,
+/// so an unchanged resave is a no-op. It is never decremented: the game has no
+/// "un-collect", and a relic already spent on a rank cannot be un-spent.
+///
+/// A save predating the field carries no `RelicPossessNum`; it is created here,
+/// preceded by an `ensure_schema`, because uesave's writer refuses to serialize a
+/// property with no registered schema.
+fn apply_effigy_relic_counters(player_sav: &mut uesave::Save, newly_collected: usize) {
+    if newly_collected == 0 {
+        return;
+    }
+    let record_data_key = PropertyKey::from("RecordData");
+    let relic_key = PropertyKey::from("RelicPossessNum");
+
+    let relic_already_present = save_data_props(player_sav)
+        .ok()
+        .and_then(|save_data| save_data.0.get(&record_data_key))
+        .and_then(props::struct_props)
+        .map(|record_data| record_data.0.contains_key(&relic_key))
+        .unwrap_or(false);
+
+    if !relic_already_present {
+        if let Some(prefix) = props::schema_prefix_ending_with(player_sav, "RecordData") {
+            props::ensure_schema(
+                player_sav,
+                format!("{prefix}RecordData.RelicPossessNum"),
+                uesave::PropertyTagPartial {
+                    id: None,
+                    data: uesave::PropertyTagDataPartial::Other(uesave::PropertyType::IntProperty),
+                },
+            );
         }
     }
 
@@ -898,22 +963,15 @@ fn apply_unlock_flags(player_sav: &mut uesave::Save, flag_name: &str, keys: &[St
     else {
         return;
     };
-    let entries: Vec<uesave::MapEntry> = keys
-        .iter()
-        .map(|key| uesave::MapEntry {
-            key: props::name_property(key),
-            value: props::bool_property(true),
-        })
-        .collect();
-    record_data.insert(flag_name, Property::Map(entries));
+
     let current = record_data
         .0
-        .get(&PropertyKey::from("RelicPossessNum"))
+        .get(&relic_key)
         .and_then(props::as_i32)
         .unwrap_or(0);
     record_data.insert(
         "RelicPossessNum",
-        props::int_property(current.saturating_add(keys.len() as i32)),
+        props::int_property(current.saturating_add(newly_collected as i32)),
     );
 }
 

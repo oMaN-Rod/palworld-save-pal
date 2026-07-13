@@ -596,3 +596,78 @@ fn update_pals_across_the_whole_corpus_never_panics() {
     modified.insert(*pal_id, edited);
     pal::update_pals(&mut session, &data, &modified, &null_progress()).unwrap();
 }
+
+/// `RelicPossessNum` counts *unspent effigy relics*. It must change only when
+/// effigies are newly collected: never for fast-travel unlocks, and never on an
+/// unchanged resave.
+#[test]
+fn relic_possess_num_only_counts_newly_collected_effigies() {
+    let mut session = common::load_fixture_session("world1");
+    let data = game_data();
+    let player_id: Uuid = WORLD1_PLAYER_O.parse().unwrap();
+    player::get_player_details(&mut session, &data, player_id, &null_progress())
+        .unwrap()
+        .unwrap();
+
+    let base = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    let start = base.relic_possess_num;
+
+    // Fast-travel unlocks alone must not touch the relic counter.
+    let mut dto = base.clone();
+    dto.unlocked_fast_travel_points = Some(vec!["FT_A".into(), "FT_B".into(), "FT_C".into()]);
+    dto.collected_effigies = Some(vec![]);
+    let mut m = OrderedMap::new();
+    m.insert(player_id, dto);
+    player::update_players(&mut session, &data, &m, &null_progress()).unwrap();
+    let after_ft = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    assert_eq!(
+        after_ft.relic_possess_num, start,
+        "unlocking fast-travel points must not change RelicPossessNum"
+    );
+
+    // Collecting 2 new effigies grants exactly 2.
+    let mut dto = after_ft.clone();
+    dto.collected_effigies = Some(vec!["EF_1".into(), "EF_2".into()]);
+    let mut m = OrderedMap::new();
+    m.insert(player_id, dto);
+    player::update_players(&mut session, &data, &m, &null_progress()).unwrap();
+    let after_two = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    assert_eq!(
+        after_two.relic_possess_num,
+        start + 2,
+        "collecting 2 new effigies must grant exactly 2 relics"
+    );
+
+    // An unchanged resave must be a no-op.
+    let mut m = OrderedMap::new();
+    m.insert(player_id, after_two.clone());
+    player::update_players(&mut session, &data, &m, &null_progress()).unwrap();
+    let after_resave = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    assert_eq!(
+        after_resave.relic_possess_num, after_two.relic_possess_num,
+        "an unchanged resave must not change RelicPossessNum"
+    );
+
+    // Collecting 1 more (keeping the existing 2) grants exactly 1.
+    let mut dto = after_resave.clone();
+    dto.collected_effigies = Some(vec!["EF_1".into(), "EF_2".into(), "EF_3".into()]);
+    let mut m = OrderedMap::new();
+    m.insert(player_id, dto);
+    player::update_players(&mut session, &data, &m, &null_progress()).unwrap();
+    let after_third = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    assert_eq!(
+        after_third.relic_possess_num,
+        start + 3,
+        "one newly collected effigy must grant exactly one relic"
+    );
+}
