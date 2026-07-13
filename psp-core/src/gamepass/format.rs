@@ -1,6 +1,5 @@
-//! Binary codec for containers.index files.
-//! Format documented in the phase plan; source of truth:
-//! palworld_save_pal/utils/gamepass/container_types.py.
+//! Binary codec for wgs `containers.index` files and their `container.<seq>` file lists.
+//! All integers are little-endian; all strings are UTF-16LE.
 
 use std::io::{Read, Write};
 use std::path::Path;
@@ -34,8 +33,8 @@ impl Filetime {
     }
 }
 
-/// Directory / blob file name for a GUID: little-endian mixed byte order, hex uppercase.
-/// Python equivalent: `uuid.bytes_le.hex().upper()`.
+/// Directory / blob file name for a GUID: uppercase hex of the GUID's mixed-endian
+/// (`bytes_le`) byte order, which is what Windows writes on disk.
 pub fn guid_file_name(id: &uuid::Uuid) -> String {
     id.to_bytes_le()
         .iter()
@@ -87,8 +86,7 @@ fn write_utf16_string(writer: &mut impl Write, value: &str) -> Result<(), CoreEr
 }
 
 /// Fixed-width `char_count` UTF-16LE code units, NUL-padded; trailing NULs are
-/// stripped on read. Port of `ContainerFileList._read_utf16_fixed_string`
-/// (container_types.py:161-164).
+/// stripped on read.
 fn read_utf16_fixed(reader: &mut impl Read, char_count: usize) -> Result<String, CoreError> {
     let mut bytes = vec![0u8; char_count * 2];
     reader.read_exact(&mut bytes)?;
@@ -101,8 +99,6 @@ fn read_utf16_fixed(reader: &mut impl Read, char_count: usize) -> Result<String,
     Ok(value.trim_end_matches('\0').to_string())
 }
 
-/// Port of `ContainerFileList._write_utf16_fixed_string`
-/// (container_types.py:166-171).
 fn write_utf16_fixed(
     writer: &mut impl Write,
     value: &str,
@@ -267,15 +263,9 @@ impl ContainerIndex {
         Ok(())
     }
 
-    /// Latest container per key ("Level", "LevelMeta", "LocalData", "WorldOption",
-    /// "Players-<HEX>", "Players-<HEX>_dps") for one save id.
-    /// Port of ContainerIndex.get_save_containers (container_types.py:333-368).
-    ///
-    /// Returns `OrderedMap` rather than `indexmap::IndexMap`: this port
-    /// deliberately keeps `indexmap` out of `psp-core`'s direct
-    /// dependencies (see `dto::ordered_map`'s module doc), and insertion
-    /// order is all this call site needs — "latest per key" only cares
-    /// about the value under each key winning updates, not about sorting.
+    /// Latest container per key (`Level`, `LevelMeta`, `LocalData`, `WorldOption`,
+    /// `Players-<HEX>`, `Players-<HEX>_dps`) for one save id. "Latest" is highest
+    /// `seq`, breaking ties on newest `mtime`.
     pub fn latest_save_containers(&self, save_id: &str) -> OrderedMap<String, ContainerEntry> {
         let prefix = format!("{save_id}-");
         let mut latest: OrderedMap<String, ContainerEntry> = OrderedMap::new();
@@ -316,7 +306,8 @@ impl ContainerIndex {
     }
 }
 
-/// One file inside a container: fixed-width name + blob loaded from a sibling file.
+/// One file inside a container: fixed-width name + blob loaded from a sibling
+/// file named after `file_uuid`.
 #[derive(Debug, Clone, PartialEq)]
 pub struct ContainerBlob {
     pub name: String,
@@ -331,9 +322,9 @@ pub struct ContainerFileList {
 }
 
 impl ContainerFileList {
-    /// Port of ContainerFileList.from_stream (container_types.py:102-137).
     /// `list_path` must be `<container dir>/container.<seq>`; blob payloads are read
-    /// from sibling files named by the file GUID; missing blobs are skipped.
+    /// from sibling files named by the file GUID. Missing blobs are skipped rather
+    /// than erroring — a half-written container should still yield its other files.
     pub fn read_from_file(list_path: &Path) -> Result<Self, CoreError> {
         let file_name = list_path
             .file_name()
@@ -363,14 +354,13 @@ impl ContainerFileList {
         for _ in 0..file_count {
             let name = read_utf16_fixed_64(&mut reader)?;
             let mut cloud_uuid = [0u8; 16];
-            reader.read_exact(&mut cloud_uuid)?; // skipped, always zeros
+            reader.read_exact(&mut cloud_uuid)?; // cloud UUID: unused, always zeros on disk
             let mut uuid_bytes = [0u8; 16];
             reader.read_exact(&mut uuid_bytes)?;
             let file_uuid = uuid::Uuid::from_bytes(uuid_bytes);
 
             let blob_path = parent_dir.join(guid_file_name(&file_uuid));
             if !blob_path.exists() {
-                // Python logs a warning and skips the entry.
                 continue;
             }
             let data = std::fs::read(&blob_path)?;
@@ -405,7 +395,7 @@ mod tests {
     #[test]
     // The literal below groups digits as `<seconds>_<1e7-scaled fraction>` to make
     // the expected value legible against `from_unix_seconds`'s multiply-by-1e7
-    // math, not in the conventional thousands grouping clippy expects.
+    // math, not in the thousands grouping clippy expects.
     #[allow(clippy::inconsistent_digit_grouping)]
     fn filetime_round_trips_unix_seconds() {
         let filetime = Filetime::from_unix_seconds(1720000000.5);
@@ -415,7 +405,6 @@ mod tests {
 
     #[test]
     fn guid_file_name_uses_little_endian_hex_uppercase() {
-        // Python: uuid.UUID("01020304-0506-0708-090a-0b0c0d0e0f10").bytes_le.hex().upper()
         let id = Uuid::from_u128(0x0102030405060708090a0b0c0d0e0f10);
         assert_eq!(guid_file_name(&id), "0403020106050807090A0B0C0D0E0F10");
     }
@@ -492,10 +481,7 @@ mod tests {
             .is_some());
     }
 
-    /// Reads a real wgs `containers.index` pulled from the gamepass backup
-    /// corpus, when present, and asserts it parses with the expected
-    /// version and a non-empty container list. Skipped (not failed) when
-    /// the corpus isn't checked out, so CI without it still passes.
+    /// Skipped, not failed, when the gamepass backup corpus isn't checked out.
     #[test]
     fn reads_real_containers_index_from_corpus_when_present() {
         let corpus_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
@@ -513,11 +499,9 @@ mod tests {
             !index.containers.is_empty(),
             "expected at least one container entry"
         );
-        // Structural round-trip: write-then-read must reproduce an equal
-        // ContainerIndex. (Not asserting exact byte equality: the reserved
-        // u64 in each entry is discarded on read and re-written as zero,
-        // so a real-world file with a non-zero reserved value wouldn't
-        // survive a byte-for-byte round trip even though it decodes fine.)
+        // Structural, not byte-for-byte: each entry's reserved u64 is discarded on
+        // read and written back as zero, so a file with a non-zero reserved value
+        // decodes fine but wouldn't survive a byte-identical round trip.
         let mut rewritten = Vec::new();
         index.write(&mut rewritten).unwrap();
         let round_tripped = ContainerIndex::read(&mut Cursor::new(&rewritten)).unwrap();

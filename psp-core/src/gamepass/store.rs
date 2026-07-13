@@ -1,5 +1,4 @@
 //! Filesystem operations over a wgs container directory.
-//! Port of palworld_save_pal/utils/gamepass/container_utils.py.
 
 use std::collections::HashMap;
 use std::path::{Path, PathBuf};
@@ -12,7 +11,7 @@ use crate::gamepass::format::{
 };
 use crate::gamepass::PlayerSavBytes;
 
-/// Python: re.compile(r"[0-9A-F]{16}_[0-9A-F]{32}$")
+/// wgs names its container dirs `<16 hex>_<32 hex>`, uppercase only.
 pub fn is_wgs_container_dir_name(name: &str) -> bool {
     let bytes = name.as_bytes();
     bytes.len() == 49
@@ -23,8 +22,8 @@ pub fn is_wgs_container_dir_name(name: &str) -> bool {
             .all(|c| c.is_ascii_digit() || (b'A'..=b'F').contains(c))
 }
 
-/// The Packages dir of the Xbox Palworld install. Env hook PSP_GAMEPASS_PACKAGES_ROOT
-/// lets tests point at a synthetic tree (inert in production).
+/// The Packages dir of the Xbox Palworld install, under `%LOCALAPPDATA%`.
+/// PSP_GAMEPASS_PACKAGES_ROOT lets tests point at a synthetic tree instead.
 fn default_packages_root() -> PathBuf {
     if let Ok(root) = std::env::var("PSP_GAMEPASS_PACKAGES_ROOT") {
         return PathBuf::from(root);
@@ -39,7 +38,6 @@ pub fn find_container_dir() -> Result<PathBuf, CoreError> {
     find_container_dir_under(&default_packages_root())
 }
 
-/// Port of find_container_path (container_utils.py:29-37). Error strings must match.
 pub fn find_container_dir_under(packages_root: &Path) -> Result<PathBuf, CoreError> {
     if !packages_root.exists() {
         return Err(CoreError::Other(
@@ -60,7 +58,7 @@ pub fn find_container_dir_under(packages_root: &Path) -> Result<PathBuf, CoreErr
     ))
 }
 
-/// Cwd-relative "backups" like the Python app, overridable for tests.
+/// Cwd-relative `backups` dir; override with PSP_BACKUPS_ROOT.
 pub fn backups_root() -> PathBuf {
     std::env::var("PSP_BACKUPS_ROOT")
         .map(PathBuf::from)
@@ -80,7 +78,6 @@ pub(crate) fn copy_dir_recursive(source: &Path, destination: &Path) -> Result<()
     Ok(())
 }
 
-/// Port of backup_container_path (container_utils.py:40-50).
 pub fn backup_container_dir(
     container_dir: &Path,
     backups_root: &Path,
@@ -96,10 +93,9 @@ pub fn backup_container_dir(
     Ok(backup_path)
 }
 
-/// Reads the payload for a container entry: iterates `container.*` files in name order
-/// and returns the first blob of the last non-empty file list, with that list's seq.
-/// (Python reads every `container.*` file and keeps the last `files[0].data`;
-/// select_gamepass_save additionally records the seq — local_file_handler.py:277-285.)
+/// Reads a container entry's payload: the first blob of its newest non-empty
+/// `container.<seq>` file list, with that list's seq. `None` when the blob dir is
+/// absent or holds no usable file list.
 pub fn read_first_blob(
     container_dir: &Path,
     entry: &ContainerEntry,
@@ -108,11 +104,9 @@ pub fn read_first_blob(
     if !blob_dir.exists() {
         return Ok(None);
     }
-    // Parse the numeric seq from each `container.<N>` name and visit them in
-    // ascending numeric order. String sorting would rank "container.10" before
-    // "container.2", silently returning a stale blob once a dir reaches 10+
-    // file lists; the numeric seq is the authoritative "latest" (it mirrors
-    // ContainerEntry.seq in containers.index).
+    // Visit file lists in ascending NUMERIC seq. String sorting ranks
+    // "container.10" before "container.2" and would return a stale blob once a
+    // dir reaches 10+ revisions; the seq is the authoritative "latest" marker.
     let mut list_paths: Vec<(u32, PathBuf)> = std::fs::read_dir(&blob_dir)?
         .flatten()
         .map(|dir_entry| dir_entry.path())
@@ -155,9 +149,9 @@ pub(crate) fn write_container_file_list(
     Ok(())
 }
 
-/// Port of create_new_container (container_utils.py:121-173): fresh container GUID dir,
-/// container.1 with a single file, blob beside it; returns the new index entry
-/// (seq=1, flag=5, mtime=now). NOT appended to any index — callers do that.
+/// Writes a fresh GUID-named container dir holding `container.1` and one blob, and
+/// returns its index entry (seq 1; flag 5 = local-only, i.e. no cloud id). The entry
+/// is NOT appended to any index — callers do that.
 pub fn create_container(
     container_dir: &Path,
     save_id: &str,
@@ -180,10 +174,9 @@ pub fn create_container(
     })
 }
 
-/// Port of clean_file_name (container_utils.py:176-183):
-/// removes "-Slot<digits>*-" (replaced by "-") and a trailing "-<exactly 2 digits>".
+/// Collapses `-Slot<digits>-` to `-` and drops a trailing `-<exactly 2 digits>`,
+/// the slot/revision decorations the game adds to container names.
 pub fn clean_container_file_name(name: &str) -> String {
-    // re.sub(r"-Slot\d*-", "-", name)
     let mut without_slot = String::with_capacity(name.len());
     let mut rest = name;
     while let Some(start) = rest.find("-Slot") {
@@ -203,7 +196,6 @@ pub fn clean_container_file_name(name: &str) -> String {
     }
     without_slot.push_str(rest);
 
-    // re.sub(r"-(\d{2})$", "", s)
     let bytes = without_slot.as_bytes();
     if bytes.len() >= 3
         && bytes[bytes.len() - 3] == b'-'
@@ -215,17 +207,13 @@ pub fn clean_container_file_name(name: &str) -> String {
     without_slot
 }
 
-/// Port of copy_container (container_utils.py:186-273). Copies every file of the source
-/// container into a fresh container dir under `dest_dir`, renaming to `new_save_id`.
-/// LevelMeta payloads get the world name rewritten; player payloads are replaced when
-/// `replacement_player_data` is provided.
+/// Copies every file of the source container into a fresh container dir under
+/// `dest_dir`, renamed to `new_save_id`. LevelMeta payloads get the world name
+/// rewritten; player payloads are replaced when `replacement_player_data` is given.
 ///
-/// Reads and aggregates every `container.*` file list found in the source blob dir
-/// (matching Python's `os.listdir` loop, which extends `source_files` from every
-/// revision it finds rather than selecting a single "latest" one) — this is NOT a
-/// latest-revision pick, so the numeric-vs-lexicographic seq pitfall documented on
-/// `read_first_blob` doesn't apply here; `list_paths.sort()` below only makes the
-/// aggregation order deterministic, it never discards a revision.
+/// Aggregates ALL `container.*` revisions rather than picking a latest one, so the
+/// numeric-vs-lexicographic seq pitfall on `read_first_blob` doesn't apply: the sort
+/// below only makes aggregation order deterministic, it never discards a revision.
 pub fn copy_container(
     source: &ContainerEntry,
     source_dir: &Path,
@@ -251,7 +239,6 @@ pub fn copy_container(
         source_files.push(ContainerFileList::read_from_file(&list_path)?);
     }
 
-    // Python: source_name.replace(source_name.split("-")[0], new_save_id), then cleaned.
     let old_save_id = source
         .container_name
         .split('-')
@@ -297,9 +284,8 @@ pub fn copy_container(
     })
 }
 
-/// Port of cleanup_container_path (container_utils.py:53-108): removes container dirs
-/// that are empty, have an empty file list, or have no matching index entry; matching
-/// index entries of removed dirs are dropped from the index.
+/// Removes container dirs that are empty, have an empty file list, or have no index
+/// entry, dropping any matching index entry along with them.
 pub fn cleanup_container_dir(
     index: &mut ContainerIndex,
     container_dir: &Path,
@@ -347,20 +333,13 @@ pub fn cleanup_container_dir(
     Ok(())
 }
 
-/// Port of save_modified_gamepass (container_utils.py:276-333): writes a modified save
-/// under a NEW save id — new Level container plus copies of every other original
-/// container (player payloads replaced, LevelMeta world name rewritten) — then
-/// refreshes the index mtime and rewrites containers.index.
+/// Writes a modified save under a NEW save id — a new Level container plus copies of
+/// every other original container (player payloads replaced, LevelMeta world name
+/// rewritten) — then refreshes the index mtime and rewrites containers.index.
 ///
-/// Does NOT run cleanup; the Python caller runs `cleanup_container_path` separately
-/// before this (Task 11 mirrors that order).
-///
-/// `original_containers` is `OrderedMap`, not `indexmap::IndexMap`: this port keeps
-/// `indexmap` out of `psp-core`'s direct dependencies (see `dto::ordered_map`'s module
-/// doc). The values passed in by callers come from `ContainerIndex::latest_save_containers`
-/// (Task 5), which already performs the numeric-seq/mtime "latest" selection — this
-/// function only iterates the already-resolved result and never re-derives "latest"
-/// itself.
+/// The old save's containers are left in place; callers run `cleanup_container_dir`
+/// beforehand if they want them gone. `original_containers` must already be the
+/// resolved "latest" set from `ContainerIndex::latest_save_containers`.
 pub fn save_modified_gamepass(
     index: &mut ContainerIndex,
     container_dir: &Path,
@@ -387,7 +366,7 @@ pub fn save_modified_gamepass(
                         .get(&player_uuid)
                         .and_then(|player| player.sav.clone());
                 }
-                Err(_) => continue, // Python logs "Invalid player UUID in key" and skips
+                Err(_) => continue, // unparseable player uuid in the container name
             }
         } else if key.contains("_dps") {
             let raw_id = key
@@ -445,7 +424,6 @@ fn delete_matching_containers(
     Ok(doomed.len())
 }
 
-/// Port of delete_gamepass_save_handler's container removal (convert_handler.py:680-730).
 pub fn delete_save_containers(
     container_dir: &Path,
     save_id: &str,
@@ -457,7 +435,6 @@ pub fn delete_save_containers(
     })
 }
 
-/// Port of delete_gamepass_player_handler's container removal (convert_handler.py:733-791).
 pub fn delete_player_containers(
     container_dir: &Path,
     save_id: &str,
@@ -481,9 +458,8 @@ mod tests {
     /// tests reading production defaults (cargo runs tests in parallel threads).
     static ENV_GUARD: Mutex<()> = Mutex::new(());
 
-    /// Writes a `container.<seq>` file list (single file) plus its blob into
-    /// `blob_dir`, letting a test control the seq (production `create_container`
-    /// only ever writes `container.1`).
+    /// Writes a `container.<seq>` file list plus its blob at a caller-chosen seq;
+    /// `create_container` itself only ever writes `container.1`.
     fn write_file_list_at_seq(blob_dir: &Path, seq: u32, name: &str, data: &[u8]) {
         std::fs::create_dir_all(blob_dir).unwrap();
         let file_uuid = uuid::Uuid::new_v4();
@@ -499,7 +475,6 @@ mod tests {
 
     #[test]
     fn wgs_dir_name_matcher_mirrors_python_regex() {
-        // Python: re.compile(r"[0-9A-F]{16}_[0-9A-F]{32}$")
         assert!(is_wgs_container_dir_name(
             "000900000487F3B6_0000000000000000000000006B210A9C"
         ));
@@ -599,10 +574,8 @@ mod tests {
         assert!(source.join("containers.index").exists()); // source untouched
     }
 
-    /// Reads a real wgs `container.<seq>` file list and its blobs from the gamepass
-    /// backup corpus, when present. Strong validation the fixed-64 name codec and blob
-    /// naming match the real Xbox on-disk format, not just a synthetic round trip.
-    /// Skipped (not failed) when the corpus isn't checked out.
+    /// Validates the fixed-64 name codec and GUID blob naming against real Xbox
+    /// on-disk bytes. Skipped, not failed, when the corpus isn't checked out.
     #[test]
     fn reads_real_container_file_list_and_blobs_from_corpus_when_present() {
         let container_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join(
@@ -615,7 +588,6 @@ mod tests {
             );
             return;
         }
-        // Find one blob subdir under the container dir that has a container.<seq> file.
         let blob_dir = std::fs::read_dir(&container_dir)
             .unwrap()
             .flatten()
@@ -637,9 +609,8 @@ mod tests {
 
     #[test]
     fn read_first_blob_picks_numeric_latest_seq_not_lexicographic() {
-        // container.10 is the true latest, but sorts BEFORE container.2 as a
-        // string ("container.10" < "container.2"). Old lexicographic sort would
-        // visit .10 then .2 and keep .2's stale blob; numeric ordering keeps .10.
+        // container.10 is the true latest but sorts BEFORE container.2 as a string,
+        // so a lexicographic visit order would keep .2's stale blob.
         let temp = tempfile::tempdir().unwrap();
         let entry = create_container(temp.path(), "AAAA", b"seq1", "Data", "Level").unwrap();
         let blob_dir = temp.path().join(crate::gamepass::format::guid_file_name(
@@ -682,7 +653,6 @@ mod tests {
 
     #[test]
     fn clean_container_file_name_strips_slot_and_trailing_counter() {
-        // Python: re.sub(r"-Slot\d*-", "-", s) then re.sub(r"-(\d{2})$", "", s)
         assert_eq!(
             clean_container_file_name("AAAA-Slot1-Players-0123"),
             "AAAA-Players-0123"
@@ -693,7 +663,7 @@ mod tests {
             "AAAA-Level-123"
         ); // 3 digits: no match
         assert_eq!(clean_container_file_name("AAAA-Level"), "AAAA-Level");
-        assert_eq!(clean_container_file_name("AAAA-Slot-Level"), "AAAA-Level"); // \d* allows zero digits
+        assert_eq!(clean_container_file_name("AAAA-Slot-Level"), "AAAA-Level"); // zero digits still matches
     }
 
     #[test]
@@ -835,7 +805,7 @@ mod tests {
             crate::gamepass::scan::world_name_from_level_meta(&meta_blob).unwrap(),
             "Renamed World"
         );
-        // Old containers remain (cleanup is a separate pass in Python too).
+        // Old containers remain: cleanup is a separate pass.
         assert!(!reloaded
             .latest_save_containers("OLDID000OLDID000OLDID000OLDID000")
             .is_empty());

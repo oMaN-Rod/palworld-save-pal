@@ -1,5 +1,4 @@
-//! Gamepass save discovery (FileManager.parse_gamepass_saves, file_manager.py:261-392)
-//! and LevelMeta world-name access.
+//! Gamepass save discovery and LevelMeta world-name access.
 
 use std::collections::HashMap;
 use std::path::Path;
@@ -12,29 +11,16 @@ use crate::gamepass::store;
 use crate::savio;
 use crate::session;
 
-/// Returns the LevelMeta `WorldName`, or `"Unknown World"` when the property
-/// is absent or empty — port of `FileManager.read_level_meta`
-/// (file_manager.py:252-258). Reads through `savio::read_sav_bytes`, the
-/// same compressed-layer read every other `.sav` in this port goes through
-/// (registers `palworld_types()` and handles PlM/Oodle, PlZ/zlib, and CNK
-/// payloads alike), so a real Xbox LevelMeta.sav parses here regardless of
-/// which compression format it was written in. Property navigation is
-/// shared with `session::world_name_from_meta_properties`
-/// (`SaveManager._load_world_name`'s fallback-`"Unknown"` cousin) via
-/// `session::world_name_property`, not reimplemented — the two Python
-/// originals read the identical `SaveData.WorldName` path and differ only
-/// in their fallback text.
+/// Returns the LevelMeta `WorldName`, or `"Unknown World"` when the property is
+/// absent or empty. `savio::read_sav_bytes` handles PlM/Oodle, PlZ/zlib and CNK
+/// alike, so a real Xbox LevelMeta.sav parses whichever way it was compressed.
 pub fn world_name_from_level_meta(level_meta_sav: &[u8]) -> Result<String, CoreError> {
     let save = savio::read_sav_bytes(level_meta_sav)?;
     Ok(session::world_name_property(&save.root.properties)
         .unwrap_or_else(|| "Unknown World".to_string()))
 }
 
-/// Sets `SaveData.WorldName` and re-emits as PlM/Oodle (save-type `0x31`),
-/// matching `SaveManager().sav(level_meta)` as used by
-/// `rename_gamepass_world` / `copy_container`. Property mutation is shared
-/// with `SaveSession::set_world_name` via `session::set_world_name_property`
-/// — this function only adds the standalone read/write bookends around it.
+/// Sets `SaveData.WorldName` and re-emits as PlM/Oodle (save-type `0x31`).
 pub fn set_world_name_in_level_meta(
     level_meta_sav: &[u8],
     world_name: &str,
@@ -44,25 +30,12 @@ pub fn set_world_name_in_level_meta(
     savio::write_sav_bytes(&save)
 }
 
-/// Port of `FileManager.parse_gamepass_saves` (file_manager.py:261-392).
-///
-/// Returns `OrderedMap`, not `indexmap::IndexMap`: this port deliberately
-/// keeps `indexmap` out of `psp-core`'s direct dependencies (see
-/// `dto::ordered_map`'s module doc and `session.rs`'s `loaded_players` doc
-/// comment for the project-wide reconciliation). Insertion order still
-/// matches Python's `saves` dict, which follows `latest_containers`'
-/// insertion order — itself the first-appearance order of each save id
-/// while scanning `container_index.containers` — so results are collected
-/// into `saves` in exactly that order below.
+/// Discovers every save in a wgs container dir. Saves come back in first-appearance
+/// order within `containers.index`; a save with no readable LevelMeta is skipped.
 pub fn scan_saves(container_dir: &Path) -> Result<OrderedMap<String, GamepassSaveData>, CoreError> {
     let index = ContainerIndex::read_from_dir(container_dir)?;
 
-    // Every container entry grouped by save id, plus the first-seen order of
-    // each save id — port of Python's `all_containers_by_save` dict, whose
-    // insertion order the outer `saves` result also follows. The grouping
-    // itself (which entries land under which save id) doesn't depend on
-    // iteration order, so a plain `HashMap` holds the groups; `save_order`
-    // is the separate ordered list that actually drives output order.
+    // The HashMap only groups entries; `save_order` is what fixes output order.
     let mut save_order: Vec<String> = Vec::new();
     let mut containers_by_save: HashMap<String, Vec<ContainerEntry>> = HashMap::new();
     for entry in &index.containers {
@@ -92,25 +65,14 @@ pub fn scan_saves(container_dir: &Path) -> Result<OrderedMap<String, GamepassSav
             continue;
         }
 
-        // Read the LevelMeta blob via `store::read_first_blob`, which selects
-        // the NUMERICALLY-latest `container.<seq>` revision's first file (see
-        // its doc comment / the `read_first_blob_picks_numeric_latest_seq_not_
-        // lexicographic` regression test). This deliberately deviates from
-        // `file_manager.py:318-328`, which reads whichever entry `os.listdir`
-        // happens to yield first and then unconditionally `break`s — a
-        // nondeterministic, potentially-stale pick (and outright wrong once a
-        // blob dir has >=10 revisions, where a lexicographic sort ranks
-        // "container.10" before "container.2"). Numeric-latest is both
-        // deterministic and correct, so it is used here instead of mirroring
-        // Python's listdir order. A save whose LevelMeta blob is missing or
-        // unreadable is skipped (`continue`), matching Python's own `continue`
-        // on that condition.
+        // read_first_blob picks the numerically-latest `container.<seq>` revision;
+        // a lexicographic pick would read the stale seq 1 once a dir hits 10+.
         let world_name = match store::read_first_blob(container_dir, level_meta_entry)? {
             Some((_seq, blob)) => match world_name_from_level_meta(&blob) {
                 Ok(name) => name,
-                Err(_) => continue, // unreadable meta: skip this save
+                Err(_) => continue,
             },
-            None => continue, // no readable container file / blob: skip this save
+            None => continue,
         };
 
         let player_count = latest
@@ -179,19 +141,14 @@ mod tests {
         dir
     }
 
-    /// Path to a real gamepass `LevelMeta.sav` in the on-disk backup corpus,
-    /// used as a valid base for tests that need to synthesize `.sav` bytes
-    /// with a specific `WorldName` via `set_world_name_in_level_meta`.
     fn corpus_level_meta_path() -> std::path::PathBuf {
         std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join(
             "../backups/gamepass/000900000487F3B6_0000000000000000000000006B210A9C_20260325231642/4F64BAB699AE4B4A97A5862116E07C6D/LevelMeta.sav",
         )
     }
 
-    /// A valid `LevelMeta.sav` byte payload to use as a base for tests that
-    /// re-stamp its `WorldName`: prefers the `PSP_PY_TESTDATA` fixture, falls
-    /// back to the gamepass backup corpus, and skips (returns `None`) when
-    /// neither is available.
+    /// A real `LevelMeta.sav` to re-stamp in tests: the `PSP_PY_TESTDATA` fixture
+    /// if set, else the gamepass backup corpus, else `None` (skip the test).
     fn base_level_meta_bytes_or_skip() -> Option<Vec<u8>> {
         if let Some(testdata) = python_testdata_dir() {
             if let Ok(bytes) = std::fs::read(testdata.join("LevelMeta.sav")) {
@@ -210,10 +167,8 @@ mod tests {
         None
     }
 
-    /// Writes an extra `container.<seq>` file list (single file) plus its
-    /// blob into an existing LevelMeta blob dir, letting a test add a higher
-    /// revision than the fixture builder's `container.1`. Mirrors
-    /// `store.rs`'s own `write_file_list_at_seq` test helper.
+    /// Adds a `container.<seq>` file list plus its blob to an existing blob dir,
+    /// so a test can stage a revision above the fixture builder's `container.1`.
     fn write_extra_container_revision(
         blob_dir: &std::path::Path,
         seq: u32,
@@ -304,15 +259,8 @@ mod tests {
         assert!(scan_saves(&container_dir).unwrap().is_empty());
     }
 
-    /// A LevelMeta blob dir with revisions `container.1` (world "OLD") and
-    /// `container.10` (world "NEW") must surface the NUMERICALLY-latest
-    /// revision's world name ("NEW"), not the lexicographically-first
-    /// (`"container.1" < "container.10"` as strings, so a naive
-    /// `read_dir().sort().first()` reads the STALE seq-1 blob). This is the
-    /// exact pitfall `store::read_first_blob` already guards against with
-    /// numeric-seq selection; `scan_saves` must reuse that, not reintroduce
-    /// a lexicographic sort. FAILS (returns "OLD") under a lexicographic
-    /// pick; passes once selection is numeric-latest.
+    /// Regression: `"container.1" < "container.10"` as strings, so a lexicographic
+    /// revision pick reads the stale seq-1 blob and yields "OLD" instead of "NEW".
     #[test]
     fn scan_saves_reads_numerically_latest_level_meta_revision_not_lexicographic() {
         let Some(base_meta) = base_level_meta_bytes_or_skip() else {
@@ -320,7 +268,6 @@ mod tests {
         };
         let old_meta = set_world_name_in_level_meta(&base_meta, "OLD").unwrap();
         let new_meta = set_world_name_in_level_meta(&base_meta, "NEW").unwrap();
-        // Sanity: the two synthesized metas really do carry the distinct names.
         assert_eq!(world_name_from_level_meta(&old_meta).unwrap(), "OLD");
         assert_eq!(world_name_from_level_meta(&new_meta).unwrap(), "NEW");
 
@@ -350,16 +297,8 @@ mod tests {
         );
     }
 
-    /// Reads a real gamepass `LevelMeta.sav` pulled from the on-disk gamepass
-    /// backup corpus (not the synthetic `python_testdata_dir()` fixture,
-    /// which is skipped when `PSP_PY_TESTDATA` is unset) and asserts the
-    /// world name comes back non-empty. Real Xbox `Level.sav` files in this
-    /// corpus are CNK-compressed; this specific `LevelMeta.sav` happens to
-    /// already be PlM/Oodle, but both are real Xbox-produced payloads read
-    /// through the exact same `savio::read_sav_bytes` -> `palworld_types()`
-    /// path production code uses, so this still validates that path
-    /// end-to-end against real (not synthetic) data. Skipped, not failed,
-    /// when the corpus isn't checked out.
+    /// Reads a real Xbox-produced `LevelMeta.sav` (PlM/Oodle) rather than a fixture.
+    /// Skipped, not failed, when the gamepass backup corpus isn't checked out.
     #[test]
     fn world_name_from_real_gamepass_level_meta_corpus_when_present() {
         let level_meta_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join(

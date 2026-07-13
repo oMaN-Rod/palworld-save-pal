@@ -1,6 +1,4 @@
 //! Steam↔gamepass conversion plumbing.
-//! Port of convert_handler.py (recompress_to_steam, _convert_gamepass_save_to_steam,
-//! _standalone_gamepass_to_steam, _standalone_steam_to_gamepass).
 
 use std::io::Cursor;
 use std::path::{Path, PathBuf};
@@ -11,7 +9,8 @@ use crate::gamepass::format::{ContainerEntry, ContainerIndex};
 use crate::gamepass::store::{backup_container_dir, create_container, read_first_blob};
 use crate::progress::ProgressSink;
 
-/// Port of recompress_to_steam (convert_handler.py:38-44).
+/// Re-emits a save as PlM/Oodle, the format Steam expects. Xbox saves arrive as
+/// PlZ (zlib) or CNK; already-PlM input passes through byte-identical.
 pub fn recompress_to_plm(data: &[u8]) -> Result<Vec<u8>, CoreError> {
     if data.len() > 12 && &data[8..12] == b"PlM1" {
         return Ok(data.to_vec());
@@ -22,9 +21,8 @@ pub fn recompress_to_plm(data: &[u8]) -> Result<Vec<u8>, CoreError> {
         .map_err(|error| CoreError::Parse(error.to_string()))
 }
 
-/// Selects the exact progress strings the two Python code paths emit:
-/// SelectedSave = _convert_gamepass_save_to_steam (convert_handler.py:213-234),
-/// AllSaves     = _standalone_gamepass_to_steam   (convert_handler.py:558-578).
+/// Picks which progress strings `extract_containers_to_steam_dir` emits: converting
+/// one chosen save, or one of many (where the save id is worth naming).
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ExtractLabels {
     SelectedSave,
@@ -61,11 +59,6 @@ impl ExtractLabels {
 }
 
 /// Writes one gamepass save as a steam save directory; returns `<output_root>/<save_id>`.
-///
-/// `containers` is `OrderedMap`, not `indexmap::IndexMap`: this port deliberately keeps
-/// `indexmap` out of `psp-core`'s direct dependencies (see `dto::ordered_map`'s module
-/// doc). Callers pass the result of `ContainerIndex::latest_save_containers` (Task 5),
-/// which already returns `OrderedMap` — no conversion needed at the call site.
 pub fn extract_containers_to_steam_dir(
     container_dir: &Path,
     save_id: &str,
@@ -81,7 +74,7 @@ pub fn extract_containers_to_steam_dir(
 
     for (key, entry) in containers.iter() {
         let Some((_seq, payload)) = read_first_blob(container_dir, entry)? else {
-            continue; // missing dir or empty file list: Python logs and skips
+            continue; // missing blob dir or empty file list
         };
         if let Some(player_id) = key.strip_prefix("Players-") {
             progress(&format!("Extracting player {player_id}..."));
@@ -100,9 +93,8 @@ pub fn extract_containers_to_steam_dir(
     Ok(save_dir)
 }
 
-/// First-seen-order unique save ids from container names ("<id>-<suffix>").
-/// Python builds this with an unordered `set()` (convert_handler.py:502-506); this is
-/// a deliberate deterministic improvement, not a parity gap — see Task 13's parity note.
+/// Unique save ids from container names (`<id>-<suffix>`), in first-seen order so
+/// bulk conversions process saves deterministically.
 pub fn unique_save_ids(index: &ContainerIndex) -> Vec<String> {
     let mut seen: Vec<String> = Vec::new();
     for entry in &index.containers {
@@ -115,9 +107,9 @@ pub fn unique_save_ids(index: &ContainerIndex) -> Vec<String> {
     seen
 }
 
-/// Port of _standalone_steam_to_gamepass after index read (convert_handler.py:618-664):
-/// backup, drop EggTest ghosts, create Level/LevelMeta/player containers under a fresh
-/// uppercase dashless uuid4 save id, write the index. Progress strings must match.
+/// Backs up the container dir, drops `EggTest` ghost entries, then writes Level,
+/// LevelMeta and player containers under a fresh save id. Save ids are uppercase
+/// dashless uuid4 — the form the game itself writes into container names.
 pub fn import_steam_dir_to_gamepass(
     source_dir: &Path,
     container_dir: &Path,
@@ -215,7 +207,6 @@ mod tests {
 
         let plm_bytes = recompress_to_plm(&plz_bytes).unwrap();
         assert_eq!(&plm_bytes[8..12], b"PlM1");
-        // Same GVAS payload after decompression.
         let original_gvas =
             uesave::compression::decompress_save(&mut std::io::Cursor::new(plz_bytes.as_slice()))
                 .unwrap();
@@ -224,15 +215,12 @@ mod tests {
                 .unwrap();
         assert_eq!(original_gvas, recompressed_gvas);
 
-        // Already PlM: byte-identical pass-through.
         assert_eq!(recompress_to_plm(&plm_bytes).unwrap(), plm_bytes);
     }
 
-    /// Recompresses a REAL Xbox gamepass `Level.sav` (CNK-compressed, pulled from the
-    /// on-disk backup corpus) to PlM and asserts the GVAS payload survives unchanged.
-    /// This is the actual CNK->PlM Xbox conversion path validated end-to-end against
-    /// real data, not just the synthetic/PlZ testdata fixture. Skipped, not failed,
-    /// when the corpus isn't checked out.
+    /// Exercises the CNK->PlM path against a real Xbox `Level.sav` (the committed
+    /// testdata is PlZ, so only the corpus covers CNK). Skipped, not failed, when
+    /// the corpus isn't checked out.
     #[test]
     fn recompress_to_plm_converts_real_gamepass_cnk_level_to_plm() {
         let level_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join(
@@ -336,7 +324,6 @@ mod tests {
         };
         let temp = tempfile::tempdir().unwrap();
 
-        // Steam-style source dir from the committed test saves.
         let source_dir = temp.path().join("steam-src");
         std::fs::create_dir_all(source_dir.join("Players")).unwrap();
         std::fs::copy(testdata.join("Level.sav"), source_dir.join("Level.sav")).unwrap();

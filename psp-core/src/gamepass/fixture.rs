@@ -99,11 +99,9 @@ pub fn build_wgs_tree(root: &Path, saves: &[SyntheticSave]) -> Result<PathBuf, C
     Ok(container_dir)
 }
 
-/// Committed real saves in the Python reference repo (PlZ/zlib format):
-/// Level.sav, LevelMeta.sav, LocalData.sav, WorldOption.sav,
-/// 00000000000000000000000000000001.sav (player). Override with PSP_PY_TESTDATA.
-/// Default resolves from the crate dir (psp-core or psp-server) to the
-/// sibling checkout of palworld-save-tools.
+/// Directory of real PlZ/zlib saves (Level.sav, LevelMeta.sav, LocalData.sav,
+/// WorldOption.sav, 00000000000000000000000000000001.sav). Defaults to a sibling
+/// checkout of palworld-save-tools; override with PSP_PY_TESTDATA.
 pub fn python_testdata_dir() -> Option<PathBuf> {
     let dir = std::env::var("PSP_PY_TESTDATA")
         .map(PathBuf::from)
