@@ -3,6 +3,7 @@ import { getStoredSessionId, markReattachPending } from '$lib/utils/sessionPersi
 import { getUpsState } from '$states/upsState.svelte';
 import { MessageType } from '$types';
 import { activeSkillsData } from './activeSkills.svelte';
+import { bosses } from './bosses.svelte';
 import { buildingsData } from './buildings.svelte';
 import { elementsData } from './elements.svelte';
 import { expData } from './exp.svelte';
@@ -35,6 +36,7 @@ export const bootstrap = async () => {
 	await mapObjects.reset();
 	await fastTravelPoints.reset();
 	await effigies.reset();
+	await bosses.reset();
 	await labResearchData.reset();
 	await missionsData.reset();
 	await relicData.reset();

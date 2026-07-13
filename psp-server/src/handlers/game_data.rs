@@ -233,6 +233,12 @@ pub async fn handle_get_map_objects(ctx: &mut HandlerCtx<'_>) -> Result<(), Hand
     Ok(())
 }
 
+pub async fn handle_get_bosses(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
+    let payload = raw_file(&ctx.app.game_data, "bosses");
+    ctx.emitter.emit(MessageType::GetBosses, &payload);
+    Ok(())
+}
+
 pub async fn handle_get_fast_travel_points(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let payload = raw_file(&ctx.app.game_data, "fast_travel_points");
     ctx.emitter.emit(MessageType::GetFastTravelPoints, &payload);
@@ -551,6 +557,14 @@ mod tests {
         let frame = run_handler!(test, handle_get_map_objects);
         assert_eq!(frame["type"], "get_map_objects");
         assert_eq!(frame["data"], json!({}));
+    }
+
+    #[tokio::test]
+    async fn get_bosses_returns_the_raw_file() {
+        let mut test = TestContext::new(write_fixture_tree).await;
+        let frame = run_handler!(test, handle_get_bosses);
+        assert_eq!(frame["type"], "get_bosses");
+        assert!(frame["data"].is_object(), "bosses payload must be an object");
     }
 
     #[tokio::test]

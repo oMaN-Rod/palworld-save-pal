@@ -133,6 +133,7 @@ async fn route(
             handlers::game_data::handle_get_friendship_data(ctx).await
         }
         MessageType::GetMapObjects => handlers::game_data::handle_get_map_objects(ctx).await,
+        MessageType::GetBosses => handlers::game_data::handle_get_bosses(ctx).await,
         MessageType::GetFastTravelPoints => {
             handlers::game_data::handle_get_fast_travel_points(ctx).await
         }

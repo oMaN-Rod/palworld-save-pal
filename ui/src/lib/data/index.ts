@@ -1,4 +1,5 @@
 import { activeSkillsData } from './activeSkills.svelte';
+import { bosses } from './bosses.svelte';
 import { buildingsData } from './buildings.svelte';
 import { effigies } from './effigies.svelte';
 import { elementsData } from './elements.svelte';
@@ -19,6 +20,7 @@ import { workSuitabilityData } from './workSuitability.svelte';
 
 export {
 	activeSkillsData,
+	bosses,
 	buildingsData,
 	effigies,
 	elementsData,

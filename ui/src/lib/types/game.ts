@@ -248,6 +248,15 @@ export type Effigy = {
 	z: number;
 };
 
+export type Boss = {
+	spawner_id: string;
+	character_id: string;
+	level: number;
+	x: number;
+	y: number;
+	z: number;
+};
+
 export type MapUnlockPoint = {
 	guid: string;
 	x: number;

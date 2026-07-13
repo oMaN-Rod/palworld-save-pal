@@ -52,6 +52,7 @@ export enum MessageType {
 	GET_BUILDINGS = 'get_buildings',
 	GET_RAW_DATA = 'get_raw_data',
 	GET_MAP_OBJECTS = 'get_map_objects',
+	GET_BOSSES = 'get_bosses',
 	GET_FAST_TRAVEL_POINTS = 'get_fast_travel_points',
 	GET_EFFIGIES = 'get_effigies',
 	DELETE_GUILD = 'delete_guild',
