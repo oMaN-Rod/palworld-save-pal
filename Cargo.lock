@@ -3482,7 +3482,7 @@ dependencies = [
 
 [[package]]
 name = "psp-core"
-version = "0.17.3"
+version = "1.0.0"
 dependencies = [
  "chrono",
  "cityhasher",
@@ -3497,7 +3497,7 @@ dependencies = [
 
 [[package]]
 name = "psp-db"
-version = "0.17.3"
+version = "1.0.0"
 dependencies = [
  "chrono",
  "serde",
@@ -3512,7 +3512,7 @@ dependencies = [
 
 [[package]]
 name = "psp-desktop"
-version = "0.17.3"
+version = "1.0.0"
 dependencies = [
  "anyhow",
  "psp-server",
@@ -3526,7 +3526,7 @@ dependencies = [
 
 [[package]]
 name = "psp-server"
-version = "0.17.3"
+version = "1.0.0"
 dependencies = [
  "anyhow",
  "async-trait",
