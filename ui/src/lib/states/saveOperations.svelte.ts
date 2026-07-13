@@ -88,6 +88,7 @@ export function processGuilds(state: AppState) {
 		}
 		if (guild.guild_chest && guild.guild_chest.state === EntryState.MODIFIED) {
 			guild.guild_chest.state = EntryState.NONE;
+			guild.state = EntryState.MODIFIED;
 		} else if (guildClone.guild_chest) {
 			guildClone.guild_chest = undefined;
 		}
