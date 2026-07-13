@@ -129,11 +129,11 @@
   },
   "Arrow_Fire": {
     "localized_name": "Fire Arrow",
-    "description": "Fire Arrows for use with bows. Deals <img id=|ElemIcon_Fire|/><uiCommon id=|COMMON_ELEMENT_NAME_Fire| style=|Elem_Fire|/> damage on contact. Can be crafted at Primitive Workbench."
+    "description": "Fire Arrows for use with bows. Deals Fire damage on contact. Can be crafted at Primitive Workbench."
   },
   "Arrow_Poison": {
     "localized_name": "Poison Arrow",
-    "description": "Poison Arrows for use with bows. Afflicts target with <uiCommon id=|ADDITIONAL_EFFECT_Poison| style=|Effect_Poison|/> on contact. Can be crafted at Primitive Workbench."
+    "description": "Poison Arrows for use with bows. Afflicts target with Poison on contact. Can be crafted at Primitive Workbench."
   },
   "AssaultRifleBullet": {
     "localized_name": "Assault Rifle Ammo",
@@ -301,7 +301,7 @@
   },
   "Battle_Helm_Grade_02_Fur": {
     "localized_name": "Feathered Hair Band",
-    "description": "A beautiful feathered headband. Though improbable, it somehow seems to protect its wearer from lethal head injuries. Can be crafted at Workbench."
+    "description": "A beautiful feathered headband. Though improbable, it somehow seems to protect its wearer from lethal head injuries. Can be crafted at Primitive Workbench."
   },
   "Battle_Helm_Grade_03_Copper": {
     "localized_name": "Metal Helm",
@@ -360,7 +360,7 @@
     "description": "A modernized bow. Capable of firing more powerful arrows."
   },
   "Battle_RangeWeapon_FlameThrower": {
-    "localized_name": "FlameThrower",
+    "localized_name": "Flamethrower",
     "description": "Flamethrower that fires long-range flames. Can set the enemy on fire. Can be crafted at Weapon Assembly Line II."
   },
   "Battle_RangeWeapon_GatlingGun": {
@@ -505,7 +505,7 @@
   },
   "ChargeLaserRifleBullet": {
     "localized_name": "Charge Rifle Ammo",
-    "description": "en text"
+    "description": null
   },
   "Clinic": {
     "localized_name": "Clinic",
@@ -629,7 +629,7 @@
   },
   "EnergyShotgunBullet": {
     "localized_name": "Energy Shotgun Ammo",
-    "description": "en text"
+    "description": null
   },
   "EnergyStorage_Electric": {
     "localized_name": "Accumulator",
@@ -1213,7 +1213,7 @@
   },
   "OverheatRifleBullet": {
     "localized_name": "Overheat Rifle Ammo",
-    "description": "en text"
+    "description": null
   },
   "PALBOX": {
     "localized_name": "Palbox",
@@ -1229,7 +1229,7 @@
   },
   "PalDopingShotBullet": {
     "localized_name": "Boost Gun Ammo",
-    "description": "en text"
+    "description": null
   },
   "PalDopingShot_2": {
     "localized_name": "Megaboost Gun",
@@ -2292,7 +2292,7 @@
     "description": "No key? No problem! These tools will allow you to try and pry open any treasure chest that would normally require a Gold Key."
   },
   "WallSignboard": {
-    "localized_name": "WallSignBoard",
+    "localized_name": "Wall-Mounted Sign",
     "description": "A signboard to write on. Can be hung on walls."
   },
   "WallTorch": {

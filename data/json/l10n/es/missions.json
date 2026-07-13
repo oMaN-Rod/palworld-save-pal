@@ -13,7 +13,7 @@
   },
   "Main_BuildPalBox": {
     "localized_name": "Primera base",
-    "description": "Abre el menú de Construcción en <keyGuideIcon id=|OpenConstructionMenu| iconScale=|0.7|/> e intenta colocar una Caja Pal en una zona amplia. Esta será tu primera base y, si la estableces como punto de partida de tus expediciones, te será de gran ayuda cuando llegues por fin a las torres. Elige su ubicación con cuidado."
+    "description": "Abre el menú de Construcción e intenta colocar una Caja Pal en una zona amplia. Esta será tu primera base y, si la estableces como punto de partida de tus expediciones, te será de gran ayuda cuando llegues por fin a las torres. Elige su ubicación con cuidado."
   },
   "Main_BuildWorkBench_Old": {
     "localized_name": "Inicio del trabajo",

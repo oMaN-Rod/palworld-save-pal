@@ -131,6 +131,10 @@
     "localized_name": "Arcade-Automat",
     "description": "Ein dekorativer Arcade-Automat. Ist leider kaputt. Spielen kannst du damit nicht."
   },
+  "Banyan_Big": {
+    "localized_name": "Banyan_Big",
+    "description": null
+  },
   "Barrel01_Iron": {
     "localized_name": "Rote Metalltonne",
     "description": "Eine dekorative rote Metalltonne."
@@ -225,7 +229,7 @@
   },
   "BreedFarm": {
     "localized_name": "Zuchtfarm",
-    "description": "Hier kannst du zwei Pals (♂ und ♀) hinschicken, um sie Eier legen zu lassen. Als Motivation zum Eierlegen wird „Torte| benötigt."
+    "description": "Hier kannst du zwei Pals (♂ und ♀) hinschicken, um sie Eier legen zu lassen. Als Motivation zum Eierlegen wird „Torte\" benötigt."
   },
   "BuildableGoddessStatue": {
     "localized_name": "Statue der Kraft",
@@ -345,7 +349,7 @@
   },
   "Crusher": {
     "localized_name": "Zerkleinerer",
-    "description": "Eine Anlage zum Zerkleinern und Umwandeln von Stein und Holz. Um das Wasserrad zu drehen, benötigt man einen Pal, der „Gießen| beherrscht."
+    "description": "Eine Anlage zum Zerkleinern und Umwandeln von Stein und Holz. Um das Wasserrad zu drehen, benötigt man einen Pal, der „Gießen\" beherrscht."
   },
   "CrystalPit": {
     "localized_name": "Hexoquarzmine",
@@ -359,6 +363,10 @@
     "localized_name": "Übungsdummy",
     "description": "Ein Übungsdummy in Gestalt eines Pengullet. Zum Aufstellen benötigst du viel Platz."
   },
+  "DamagedScarecrow_Test": {
+    "localized_name": "DamagedScarecrow_Test",
+    "description": null
+  },
   "DarkIsland_Banner": {
     "localized_name": "Hochbanner der Feybreak",
     "description": "Ein dekoratives Hochbanner der Feybreak."
@@ -368,8 +376,8 @@
     "description": "Eine dekorative Standarte der Feybreak."
   },
   "Decal_PalSticker_PinkCat": {
-    "localized_name": "de_Text",
-    "description": "de_Text"
+    "localized_name": "Tuppanyan sticker",
+    "description": null
   },
   "DefenseBowGun": {
     "localized_name": "Stationäre Armbrust",
@@ -533,7 +541,7 @@
   },
   "FlourMill": {
     "localized_name": "Mühle",
-    "description": "Eine Anlage, um aus Weizen Mehl zu mahlen. Um das Wasserrad zu drehen, benötigt man einen Pal, der „Gießen| beherrscht."
+    "description": "Eine Anlage, um aus Weizen Mehl zu mahlen. Um das Wasserrad zu drehen, benötigt man einen Pal, der „Gießen\" beherrscht."
   },
   "FlowerBed": {
     "localized_name": "Blumenbeet",
@@ -548,7 +556,7 @@
     "description": "Ein dekorativer fernöstlicher Schreibtisch. Passt perfekt zu Gebäuden im fernöstlichen Stil."
   },
   "FurnitureBush01_Flower": {
-    "localized_name": "Künstlicher blühender Strauch A",
+    "localized_name": "Künstlicher blühender Strauch A",
     "description": "Ein dekorativer künstlicher blühender Strauch. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureBush01_Green": {
@@ -568,7 +576,7 @@
     "description": "Ein dekorativer künstlicher Goldlaubstrauch. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureBush02_Flower": {
-    "localized_name": "Künstlicher blühender Strauch B",
+    "localized_name": "Künstlicher blühender Strauch B",
     "description": "Ein dekorativer künstlicher blühender Strauch. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureStone01": {
@@ -576,99 +584,99 @@
     "description": "Ein dekorativer künstlicher Felsen. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureTree01_Bamboo": {
-    "localized_name": "Künstlicher Bambus A",
+    "localized_name": "Künstlicher Bambus A",
     "description": "Ein dekorativer künstlicher Bambus. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureTree01_Cherry": {
-    "localized_name": "Künstlicher Kirschbaum A",
+    "localized_name": "Künstlicher Kirschbaum A",
     "description": "Ein dekorativer künstlicher Kirschbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureTree01_Desert": {
-    "localized_name": "Künstlicher Wüstenbaum A",
+    "localized_name": "Künstlicher Wüstenbaum A",
     "description": "Ein dekorativer künstlicher Wüstenbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureTree01_Green": {
-    "localized_name": "Künstlicher Baum A",
+    "localized_name": "Künstlicher Baum A",
     "description": "Ein dekorativer künstlicher Baum. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureTree01_Red": {
-    "localized_name": "Künstlicher Rotlaubbaum A",
+    "localized_name": "Künstlicher Rotlaubbaum A",
     "description": "Ein dekorativer künstlicher Rotlaubbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureTree01_Snow": {
-    "localized_name": "Künstlicher schneebedeckter Baum A",
+    "localized_name": "Künstlicher schneebedeckter Baum A",
     "description": "Ein dekorativer künstlicher schneebedeckter Baum. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureTree01_Tropical": {
-    "localized_name": "Künstlicher Tropenbaum A",
+    "localized_name": "Künstlicher Tropenbaum A",
     "description": "Ein dekorativer künstlicher Tropenbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureTree01_Yellow": {
-    "localized_name": "Künstlicher Goldlaubbaum A",
+    "localized_name": "Künstlicher Goldlaubbaum A",
     "description": "Ein dekorativer künstlicher Goldlaubbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureTree02_Bamboo": {
-    "localized_name": "Künstlicher Bambus B",
+    "localized_name": "Künstlicher Bambus B",
     "description": "Ein dekorativer künstlicher Bambus. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureTree02_Cherry": {
-    "localized_name": "Künstlicher Kirschbaum B",
+    "localized_name": "Künstlicher Kirschbaum B",
     "description": "Ein dekorativer künstlicher Kirschbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureTree02_Desert": {
-    "localized_name": "Künstlicher Wüstenbaum B",
+    "localized_name": "Künstlicher Wüstenbaum B",
     "description": "Ein dekorativer künstlicher Wüstenbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureTree02_Green": {
-    "localized_name": "Künstlicher Baum B",
+    "localized_name": "Künstlicher Baum B",
     "description": "Ein dekorativer künstlicher Baum. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureTree02_Red": {
-    "localized_name": "Künstlicher Rotlaubbaum B",
+    "localized_name": "Künstlicher Rotlaubbaum B",
     "description": "Ein dekorativer künstlicher Rotlaubbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureTree02_Snow": {
-    "localized_name": "Künstlicher schneebedeckter Baum B",
+    "localized_name": "Künstlicher schneebedeckter Baum B",
     "description": "Ein dekorativer künstlicher schneebedeckter Baum. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureTree02_Tropical": {
-    "localized_name": "Künstlicher Tropenbaum B",
+    "localized_name": "Künstlicher Tropenbaum B",
     "description": "Ein dekorativer künstlicher Tropenbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureTree02_Yellow": {
-    "localized_name": "Künstlicher Goldlaubbaum B",
+    "localized_name": "Künstlicher Goldlaubbaum B",
     "description": "Ein dekorativer künstlicher Goldlaubbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureTree03_Bamboo": {
-    "localized_name": "Künstlicher Bambus C",
+    "localized_name": "Künstlicher Bambus C",
     "description": "Ein dekorativer künstlicher Bambus. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureTree03_Cherry": {
-    "localized_name": "Künstlicher Kirschbaum C",
+    "localized_name": "Künstlicher Kirschbaum C",
     "description": "Ein dekorativer künstlicher Kirschbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureTree03_Desert": {
-    "localized_name": "Künstlicher Wüstenbaum C",
+    "localized_name": "Künstlicher Wüstenbaum C",
     "description": "Ein dekorativer künstlicher Wüstenbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureTree03_Green": {
-    "localized_name": "Künstlicher Baum C",
+    "localized_name": "Künstlicher Baum C",
     "description": "Ein dekorativer künstlicher Baum. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureTree03_Red": {
-    "localized_name": "Künstlicher Rotlaubbaum C",
+    "localized_name": "Künstlicher Rotlaubbaum C",
     "description": "Ein dekorativer künstlicher Rotlaubbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureTree03_Snow": {
-    "localized_name": "Künstlicher schneebedeckter Baum C",
+    "localized_name": "Künstlicher schneebedeckter Baum C",
     "description": "Ein dekorativer künstlicher schneebedeckter Baum. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureTree03_Tropical": {
-    "localized_name": "Künstlicher Tropenbaum C",
+    "localized_name": "Künstlicher Tropenbaum C",
     "description": "Ein dekorativer künstlicher Tropenbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "FurnitureTree03_Yellow": {
-    "localized_name": "Künstlicher Goldlaubbaum C",
+    "localized_name": "Künstlicher Goldlaubbaum C",
     "description": "Ein dekorativer künstlicher Goldlaubbaum. Von diesem Bauwerk können keine Materialien gewonnen werden."
   },
   "GarbageBag_Iron": {
@@ -735,6 +743,10 @@
     "localized_name": "Glasfundament",
     "description": "Ein Fundament, worauf du Wände oder Gebäude errichten kannst. Ist aus Hartglas und dadurch sehr robust."
   },
+  "Glass_pillars": {
+    "localized_name": "Glassäule",
+    "description": "Eine Säule zum Abstützen von Gebäuden. Ist aus Hartglas und dadurch sehr robust."
+  },
   "Glass_roof": {
     "localized_name": "Glasdach",
     "description": "Ein Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Hartglas und dadurch sehr robust."
@@ -757,7 +769,7 @@
   },
   "GoalSoccer_Iron": {
     "localized_name": "Fußballtor",
-    "description": "Ein dekoratives Fußballtor. Auch wenn du ein SheepBall reinbolzt, kriegst du keine EP."
+    "description": "Ein dekoratives Fußballtor. Auch wenn du ein Lamball reinbolzt, kriegst du keine EP."
   },
   "GuardianDogStatue": {
     "localized_name": "Yakumo-Statue",
@@ -797,7 +809,7 @@
   },
   "IceCrusher": {
     "localized_name": "Gefrierzerkleinerer",
-    "description": "Eine Anlage zum Zerkleinern und Umwandeln von Erz. Für den Betrieb benötigt man Strom sowie einen Pal, der „Kühlung| beherrscht. Sehr effizient."
+    "description": "Eine Anlage zum Zerkleinern und Umwandeln von Erz. Für den Betrieb benötigt man Strom sowie einen Pal, der „Kühlung\" beherrscht. Sehr effizient."
   },
   "IceHorseStatue": {
     "localized_name": "Frostallion-Statue",
@@ -1111,6 +1123,10 @@
     "localized_name": "Metallfundament",
     "description": "Ein Fundament, worauf du Wände oder Gebäude errichten kannst. Ist aus Metall und dadurch extrem solide."
   },
+  "Metal_pillars": {
+    "localized_name": "Metallsäule",
+    "description": "Eine Säule zum Abstützen von Gebäuden. Ist aus Metall und dadurch extrem solide."
+  },
   "Metal_roof": {
     "localized_name": "Metalldach",
     "description": "Ein Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Metall und dadurch extrem solide."
@@ -1276,8 +1292,8 @@
     "description": "Ein dekorativer, langer viktorianischer Teppich."
   },
   "Rug_Wood": {
-    "localized_name": "de_Text",
-    "description": "de_Text"
+    "localized_name": "Fur rug",
+    "description": null
   },
   "SF_Chair": {
     "localized_name": "Stuhl im Laborstil",
@@ -1346,6 +1362,10 @@
   "SF_foundation": {
     "localized_name": "Futuristisches Fundament",
     "description": "Ein Fundament, worauf du Wände oder Gebäude errichten kannst. Für Liebhaber steriler Futuristik."
+  },
+  "SF_pillars": {
+    "localized_name": "Futuristische Säule",
+    "description": "Eine Säule zum Abstützen von Gebäuden. Für Liebhaber steriler Futuristik."
   },
   "SF_roof": {
     "localized_name": "Futuristisches Dach",
@@ -1611,6 +1631,10 @@
     "localized_name": "Steinfundament",
     "description": "Ein Fundament, worauf du Wände oder Gebäude errichten kannst. Ist aus Stein und dadurch ziemlich robust."
   },
+  "Stone_pillar": {
+    "localized_name": "Steinsäule",
+    "description": "Eine Säule zum Abstützen von Gebäuden. Ist aus Stein und dadurch ziemlich robust."
+  },
   "Stone_roof": {
     "localized_name": "Steindach",
     "description": "Ein Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Stein und dadurch ziemlich robust."
@@ -1769,19 +1793,19 @@
   },
   "TrafficSign01_Iron": {
     "localized_name": "Verkehrsschild „Keine Pals“",
-    "description": "Ein dekoratives Verkehrsschild „Keine Pals|. Heutzutage hält sich keiner mehr dran."
+    "description": "Ein dekoratives Verkehrsschild „Keine Pals\". Heutzutage hält sich keiner mehr dran."
   },
   "TrafficSign02_Iron": {
     "localized_name": "Verkehrsschild „Vorfahrt gewähren“",
-    "description": "Ein dekoratives Verkehrsschild „Vorfahrt gewähren|. Heutzutage hält sich keiner mehr dran."
+    "description": "Ein dekoratives Verkehrsschild „Vorfahrt gewähren\". Heutzutage hält sich keiner mehr dran."
   },
   "TrafficSign03_Iron": {
     "localized_name": "Verkehrsschild „Vorsicht, Eikthyrdeer“",
-    "description": "Ein dekoratives Verkehrsschild „Vorsicht, Eikthyrdeer|. Zu Zeiten der antiken Zivilisation soll es öfters zu Wildunfällen zwischen Eikthyrdeer und anderen Pals gekommen sein."
+    "description": "Ein dekoratives Verkehrsschild „Vorsicht, Eikthyrdeer\". Zu Zeiten der antiken Zivilisation soll es öfters zu Wildunfällen zwischen Eikthyrdeer und anderen Pals gekommen sein."
   },
   "TrafficSign04_Iron": {
     "localized_name": "Verkehrsschild „Vorsicht, Mammorest“",
-    "description": "Ein dekoratives Verkehrsschild „Vorsicht, Mammorest|. Zu Zeiten der antiken Zivilisation soll es öfters tödliche Unfälle mit wütenden Mammorest gegeben haben."
+    "description": "Ein dekoratives Verkehrsschild „Vorsicht, Mammorest\". Zu Zeiten der antiken Zivilisation soll es öfters tödliche Unfälle mit wütenden Mammorest gegeben haben."
   },
   "TransmissionTower": {
     "localized_name": "Strommast",
@@ -1808,8 +1832,8 @@
     "description": "Tritt ein Pal in diese Falle, friert er ein. Eingefrorene Pals haben eine höhere Fangrate."
   },
   "Trap_MovingPanel": {
-    "localized_name": "de_Text",
-    "description": "de_Text"
+    "localized_name": "Moving Panels",
+    "description": "A description of the moving panel"
   },
   "Trap_Noose": {
     "localized_name": "Schlingenfalle",
@@ -1919,6 +1943,10 @@
     "localized_name": "Leiter",
     "description": "Wenn du mal etwas höher hinaus willst."
   },
+  "Wooden_pillar": {
+    "localized_name": "Holzsäule",
+    "description": "Eine Säule zum Abstützen von Gebäuden. Ist aus Holz und nicht sonderlich stabil."
+  },
   "Wooden_roof": {
     "localized_name": "Holzdach",
     "description": "Ein Dach, mit dem du Wände überdachen kannst und das dir Schutz vor den Elementen bietet. Ist aus Holz und nicht sonderlich stabil."
@@ -1954,5 +1982,13 @@
   "Zaisu": {
     "localized_name": "Bodensessel",
     "description": "Ein dekorativer Bodensessel. Passt perfekt zu Gebäuden im fernöstlichen Stil."
+  },
+  "JapaneseStyle_TriangleStairsCorner_02": {
+    "localized_name": "JapaneseStyle_TriangleStairsCorner_02",
+    "description": null
+  },
+  "WoodCreator": {
+    "localized_name": "WoodCreator",
+    "description": null
   }
 }

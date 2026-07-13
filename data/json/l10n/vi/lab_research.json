@@ -73,7 +73,7 @@
   },
   "Cool5": {
     "localized_name": "Phát Triển Người Tuyết",
-    "description": null
+    "description": "Mở Khóa Kỹ Thuật \"Người Tuyết\""
   },
   "Deforest1": {
     "localized_name": "Công Việc Đốn Gỗ Cấp 1",
@@ -145,7 +145,7 @@
   },
   "Deforest4": {
     "localized_name": "Phát Triển Gốc Cây Và Rìu",
-    "description": null
+    "description": "Mở Khóa Kỹ Thuật \"Gốc Cây Và Rìu\""
   },
   "EmitFlame1": {
     "localized_name": "Công Việc Nhóm Lửa Cấp 1",
@@ -225,7 +225,7 @@
   },
   "EmitFlame5": {
     "localized_name": "Phát Triển Bệ Đuốc Thiêng",
-    "description": null
+    "description": "Mở Khóa Kỹ Thuật \"Bệ Đuốc Thiêng\""
   },
   "GenerateEnergy1": {
     "localized_name": "Công Việc Phát Điện Cấp 1",
@@ -297,7 +297,7 @@
   },
   "GenerateEnergy5": {
     "localized_name": "Phát Triển Tháp Truyền Điện",
-    "description": null
+    "description": "Mở Khóa Kỹ Thuật \"Tháp Truyền Điện\""
   },
   "Handcraft1": {
     "localized_name": "Tốc Độ Công Việc Thủ Công Cấp 1",
@@ -385,7 +385,7 @@
   },
   "Handcraft5": {
     "localized_name": "Phát Triển Hộp Dụng Cụ Lớn",
-    "description": null
+    "description": "Mở Khóa Kỹ Thuật \"Hộp Dụng Cụ Lớn\""
   },
   "Medicine1": {
     "localized_name": "Công Việc Chế Thuốc Cấp 1",
@@ -445,7 +445,7 @@
   },
   "Medicine4": {
     "localized_name": "Phát Triển Vạc Phù Thủy",
-    "description": null
+    "description": "Mở Khóa Kỹ Thuật \"Vạc Phù Thủy\""
   },
   "Mining1": {
     "localized_name": "Công Việc Khai Thác Cấp 1",
@@ -521,7 +521,7 @@
   },
   "Mining5": {
     "localized_name": "Chế Tạo Xe Đẩy Khai Thác Mỏ",
-    "description": null
+    "description": "Mở Khóa Kỹ Thuật \"Xe Đẩy Khai Thác Mỏ\""
   },
   "Seeding1": {
     "localized_name": "Công Việc Gieo Hạt Cấp 1",
@@ -593,11 +593,11 @@
   },
   "Seeding4": {
     "localized_name": "Phát Triển Bồn Hoa",
-    "description": null
+    "description": "Mở Khóa Kỹ Thuật \"Bồn Hoa\""
   },
   "Seeding5": {
     "localized_name": "Phát Triển Silo",
-    "description": null
+    "description": "Mở Khóa Kỹ Thuật \"Silo\""
   },
   "Watering1": {
     "localized_name": "Công Việc Tưới Nước Cấp 1",
@@ -669,6 +669,6 @@
   },
   "Watering5": {
     "localized_name": "Phát Triển Đài Phun Nước",
-    "description": null
+    "description": "Mở Khóa Kỹ Thuật \"Đài Phun Nước\""
   }
 }

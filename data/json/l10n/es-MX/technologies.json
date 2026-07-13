@@ -1,1 +1,2354 @@
-{}
+{
+  "AIcore": {
+    "localized_name": "Núcleo de IA",
+    "description": null
+  },
+  "Accessory_AirDash1": {
+    "localized_name": "Botas de propulsión aérea",
+    "description": null
+  },
+  "Accessory_AirDash2": {
+    "localized_name": "Botas de propulsión aérea doble",
+    "description": null
+  },
+  "Accessory_AirDash3": {
+    "localized_name": "Botas de triple propulsión aérea",
+    "description": null
+  },
+  "Accessory_ExplosionResist": {
+    "localized_name": "Ropa interior resistente a explosiones",
+    "description": null
+  },
+  "Accessory_JumpCount_Increase1": {
+    "localized_name": "Botas de salto doble",
+    "description": null
+  },
+  "Accessory_JumpCount_Increase2": {
+    "localized_name": "Botas de salto triple",
+    "description": null
+  },
+  "Accessory_JumpPower_Increase": {
+    "localized_name": "Cinturón antigravedad",
+    "description": null
+  },
+  "Accessory_Nonkilling": {
+    "localized_name": "Anillo de clemencia",
+    "description": null
+  },
+  "Accessory_TalentChecker": {
+    "localized_name": "Talentolentes",
+    "description": null
+  },
+  "AdditionalInventory_001": {
+    "localized_name": "Estuche de expansión pequeño",
+    "description": null
+  },
+  "AdditionalInventory_002": {
+    "localized_name": "Estuche de expansión decente",
+    "description": null
+  },
+  "AdditionalInventory_003": {
+    "localized_name": "Estuche de expansión grande",
+    "description": null
+  },
+  "AdditionalInventory_004": {
+    "localized_name": "Estuche de expansión gigante",
+    "description": null
+  },
+  "Altar": {
+    "localized_name": "Altar de invocación",
+    "description": null
+  },
+  "AncientArmor": {
+    "localized_name": "Armadura antigua",
+    "description": "Armadura antigua forjada a partir de Lingote de Soralite. Está impregnada con lo mejor de una civilización perdida y presume una defensa abrumadora. Es el equipo defensivo definitivo, capaz de enfrentarse incluso a amenazas de nivel apocalíptico."
+  },
+  "AncientArmorCold": {
+    "localized_name": "Armadura antigua resistente al frío",
+    "description": "Armadura antigua mejorado. Gracias a la tecnología antigua, su resistencia al frío fue aún más reforzada, permitiendo mantener el rendimiento incluso en tierras heladas."
+  },
+  "AncientArmorHeat": {
+    "localized_name": "Armadura antigua resistente al calor",
+    "description": "Armadura antigua mejorado. Gracias a la tecnología antigua, su resistencia al calor fue aún más reforzada, permitiendo soportar ambientes abrasadores."
+  },
+  "AncientArmorWeight": {
+    "localized_name": "Armadura antigua ligera",
+    "description": "Armadura antigua mejorado. Incorpora mecanismos auxiliares antiguos que permiten cargar todavía más suministros."
+  },
+  "AncientBlastFurnace": {
+    "localized_name": "Horno de la civilización antigua",
+    "description": "Horno especial basado en tecnología de la civilización antigua que puede refinar todo tipo de lingotes. Refina al derretir materiales con calor de fuego y enfriarlos de golpe con el poder del hielo. Para funcionar, necesita Pals con aptitud para encender fuego y para enfriar."
+  },
+  "AncientCookingStove": {
+    "localized_name": "Cocina de la civilización antigua",
+    "description": "Cocina de la civilización antigua capaz de preparar desde platos ya conocidos hasta nuevas recetas desconocidas. Acumula calor con fuego y se finaliza con trabajo manual para completar cualquier platillo. Para funcionar, requiere Pals con alta aptitud de encendido de fuego y trabajo manual."
+  },
+  "AncientElectricGenerator": {
+    "localized_name": "Generador de la civilización antigua",
+    "description": "Generador eléctrico de ultra alta eficiencia que restaura una tecnología antigua perdida. Puede producir una enorme cantidad de electricidad, pero durante su funcionamiento existe el riesgo de sobrecalentamiento. Para operarlo se requieren Pals con alta aptitud para producción eléctrica, además de Pals con aptitud para riego."
+  },
+  "AncientFarmBlock": {
+    "localized_name": "Cultivador de la civilización antigua",
+    "description": "Cultivador de la civilización antigua que, gracias al poder del Árbol del Mundo, puede hacer crecer todas las plantas de la Isla Palápagos. Es mucho más pequeño que una plantación de bayas y puede colocarse incluso en interiores, aunque el proceso de cultivo sigue siendo el mismo de siempre. Para funcionar, requiere Pals con alta aptitud en siembra y riego."
+  },
+  "AncientHelmet": {
+    "localized_name": "Yelmo antiguo",
+    "description": "Casco antiguo forjado a partir de Lingote de Soralite. Alberga la sabiduría heredada a través de eras eternas y protege firmemente a quien lo porta. Su capacidad defensiva supera con creces la del equipo moderno."
+  },
+  "AncientMultiProduct": {
+    "localized_name": "Generador de materiales de la civilización antigua",
+    "description": "Generador de la civilización antigua que utiliza el poder del Árbol del Mundo para producir toda clase de madera y minerales. Puedes elegir el recurso que quieras obtener, aunque la eficiencia de extracción en sí no cambia respecto a las instalaciones convencionales. Debido a su compleja estructura, solo se puede asignar 1 Pal."
+  },
+  "AncientRelicRecycler": {
+    "localized_name": "Convertidor de Reliquias de la la civilización antigua",
+    "description": null
+  },
+  "AncientWorkBench": {
+    "localized_name": "Mesa de trabajo de la civilización antigua",
+    "description": "Instalación compuesta exclusiva para Pals donde puede fabricarse cualquier objeto en un solo lugar. El jugador no puede trabajar en ella, y la velocidad de fabricación no difiere de la del equipamiento habitual. Como es una instalación avanzada, requiere Pals con alta aptitud de trabajo manual y producción de medicinas para funcionar."
+  },
+  "Ancient_Clinic": {
+    "localized_name": "Clínica de la civilización antigua",
+    "description": null
+  },
+  "Ancient_Houseset": {
+    "localized_name": "Set de Construcción de civilización antigua",
+    "description": "Conjunto de construcción de una base con estructuras de la civilización antigua. Incluye base, muros, techos, escaleras y otros elementos necesarios para construir una casa."
+  },
+  "Ancient_MedicalPalBed": {
+    "localized_name": "Cama para Pals de la civilización antigua",
+    "description": null
+  },
+  "Ancient_Spa": {
+    "localized_name": "Baños termales de la civilización antigua",
+    "description": null
+  },
+  "Arrow": {
+    "localized_name": "Flecha",
+    "description": "Flecha para disparar con un arco. Puede fabricarse en \"Mesa de trabajo primitiva\"."
+  },
+  "Arrow_Fire": {
+    "localized_name": "Flecha ígnea",
+    "description": "Flecha ígnea para disparar con un arco. Inflige daño de Fuego al objetivo impactado. Puede fabricarse en \"Mesa de trabajo primitiva\"."
+  },
+  "Arrow_Poison": {
+    "localized_name": "Flecha envenenada",
+    "description": "Flecha envenenada para disparar con arco. Inflige Veneno al objetivo impactado. Puede fabricarse en \"Mesa de trabajo primitiva\"."
+  },
+  "AssaultRifleBullet": {
+    "localized_name": "Balas de rifle de asalto",
+    "description": "Munición para usar con \"Rifle de asalto\" y otras armas similares. Necesitarás una \"Fábrica de producción en cadena de armas\" para su fabricación."
+  },
+  "AutoMealPouch_Tier1": {
+    "localized_name": "Bolsa de cebo pequeña",
+    "description": null
+  },
+  "AutoMealPouch_Tier2": {
+    "localized_name": "Bolsa de cebo decente",
+    "description": null
+  },
+  "AutoMealPouch_Tier3": {
+    "localized_name": "Bolsa de cebo grande",
+    "description": null
+  },
+  "AutoMealPouch_Tier4": {
+    "localized_name": "Bolsa de cebo gigante",
+    "description": null
+  },
+  "AutoMealPouch_Tier5": {
+    "localized_name": "Bolsa de cebo colosal",
+    "description": null
+  },
+  "BaseCampBattleDirector": {
+    "localized_name": "Campana de alarma",
+    "description": "Campana que permite cambiar el estado de alerta de los Pals en la base. Puedes alternar libremente entre modo de combate contra enemigos y modo de trabajo."
+  },
+  "BaseCampItemDispenser": {
+    "localized_name": "Dispensador de objetos",
+    "description": null
+  },
+  "BaseCampWorkHard": {
+    "localized_name": "Puesto de vigilancia",
+    "description": null
+  },
+  "BaseCampWorkHard02": {
+    "localized_name": "Puesto de vigilancia de lujo",
+    "description": null
+  },
+  "BaseCampWorkHard03": {
+    "localized_name": "Puesto de vigilancia de la civilización antigua",
+    "description": null
+  },
+  "BaseCampWorkerExtraStation": {
+    "localized_name": "Terminal de control de la Caja Pal",
+    "description": null
+  },
+  "Bat3": {
+    "localized_name": "Bate de metal",
+    "description": null
+  },
+  "Battle_Armor_Grade_01_Cloth": {
+    "localized_name": "Ropa de tela",
+    "description": "Prenda hecha con \"Tela\". Te mantendrá caliente en las frías noches. Puede fabricarse en \"Mesa de trabajo primitiva\"."
+  },
+  "Battle_Armor_Grade_01_Cloth_Cold": {
+    "localized_name": "Vestimenta étnica para climas fríos",
+    "description": "Ropa de tela elaborada en una región fría. Protege del frío que congela hasta los huesos. Puede fabricarse en \"Mesa de trabajo primitiva\"."
+  },
+  "Battle_Armor_Grade_01_Cloth_Heat": {
+    "localized_name": "Vestimenta étnica tropical",
+    "description": "Ropa de tela elaborada en una región cálida. Posee una alta resistencia al calor. Puede fabricarse en \"Mesa de trabajo primitiva\"."
+  },
+  "Battle_Armor_Grade_02_Fur": {
+    "localized_name": "Armadura de piel",
+    "description": "Armadura hecha de Cuero. De durabilidad y propiedades defensivas superiores. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
+  },
+  "Battle_Armor_Grade_02_Fur_Cold": {
+    "localized_name": "Armadura de piel resistente al frío",
+    "description": "Armadura de piel elaborada en una región fría. Protege del frío que congela hasta los huesos. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
+  },
+  "Battle_Armor_Grade_02_Fur_Heat": {
+    "localized_name": "Armadura de piel resistente al calor",
+    "description": "Armadura de piel elaborada en una región cálida. Posee una alta resistencia al calor. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
+  },
+  "Battle_Armor_Grade_03_Copper": {
+    "localized_name": "Armadura de metal",
+    "description": "Armadura de metal. De peso y capacidad defensiva decente. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
+  },
+  "Battle_Armor_Grade_03_Copper_Cold": {
+    "localized_name": "Armadura de metal resistente al frío",
+    "description": "Armadura de metal mejorada. Protege del frío que congela hasta los huesos. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
+  },
+  "Battle_Armor_Grade_03_Copper_Heat": {
+    "localized_name": "Armadura de metal resistente al calor",
+    "description": "Armadura de metal mejorada. Posee una alta resistencia al calor. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
+  },
+  "Battle_Armor_Grade_03_Iron": {
+    "localized_name": "Armadura de metal refinado",
+    "description": "Armadura hecha de metal refinado. Es muy pesada porque cuenta con un poder defensivo considerable. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
+  },
+  "Battle_Armor_Grade_03_Iron_Cold": {
+    "localized_name": "Armadura de metal refinado resistente al frío",
+    "description": "Armadura de metal refinado mejorada. Protege del frío que congela hasta los huesos. Puede fabricarse en \"Fábrica de producción en cadena\"."
+  },
+  "Battle_Armor_Grade_03_Iron_Heat": {
+    "localized_name": "Armadura de metal refinado resistente al calor",
+    "description": "Armadura de metal refinado mejorada. Posee una alta resistencia al calor. Puede fabricarse en \"Fábrica de producción en cadena\"."
+  },
+  "Battle_Armor_Grade_04_Steal": {
+    "localized_name": "Armadura de Paluminium",
+    "description": "Armadura hecha de Lingote de Paluminium. Ofrece una defensa increíble, pero es muy pesada. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
+  },
+  "Battle_Armor_Grade_04_Steal_Cold": {
+    "localized_name": "Armadura de Paluminium resistente al frío",
+    "description": "Armadura de Paluminium mejorada. Protege del frío que congela hasta los huesos. Puede fabricarse en \"Fábrica de producción en cadena II\"."
+  },
+  "Battle_Armor_Grade_04_Steal_Heat": {
+    "localized_name": "Armadura de Paluminium resistente al calor",
+    "description": "Armadura de Paluminium mejorada. Posee una alta resistencia al calor. Puede fabricarse en \"Fábrica de producción en cadena II\"."
+  },
+  "Battle_Armor_Grade_05_Plastic": {
+    "localized_name": "Armadura de plastiacero",
+    "description": "Armadura hecha de Plastiacero. Mejora la defensa y es liviana. Puede fabricarse en \"Fábrica de producción en cadena II\"."
+  },
+  "Battle_Armor_Grade_05_Plastic_Cold": {
+    "localized_name": "Armadura de plastiacero resistente al frío",
+    "description": "Armadura de plastiacero mejorada. Protege del frío que congela hasta los huesos. Puede fabricarse en \"Fábrica de producción en cadena II\"."
+  },
+  "Battle_Armor_Grade_05_Plastic_Heat": {
+    "localized_name": "Armadura de plastiacero resistente al calor",
+    "description": "Armadura de plastiacero mejorada. Posee una alta resistencia al calor. Puede fabricarse en \"Fábrica de producción en cadena II\"."
+  },
+  "Battle_Armor_Grade_05_Plastic_Weight": {
+    "localized_name": "Armadura de plastiacero ligera",
+    "description": "Armadura de plastiacero mejorada. Aumenta el límite de peso que puedes cargar. Puede fabricarse en \"Fábrica de producción en cadena II\"."
+  },
+  "Battle_Cloth": {
+    "localized_name": "Tela",
+    "description": null
+  },
+  "Battle_Defense_BowGun": {
+    "localized_name": "Ballesta fija",
+    "description": "Si se asigna un Pal con la aptitud \"Trabajo manual\", usará la ballesta para proteger la base."
+  },
+  "Battle_Defense_MachineGun": {
+    "localized_name": "Ametralladora fija",
+    "description": "Si se asigna un Pal con la aptitud \"Trabajo manual\", usará la ballesta para proteger la base."
+  },
+  "Battle_Defense_Missile": {
+    "localized_name": "Lanzamisiles fijo",
+    "description": "Si se asigna un Pal con la aptitud \"Trabajo manual\", usará el lanzamisiles para proteger la base."
+  },
+  "Battle_Glider_Grade_01": {
+    "localized_name": "Paracaídas normal",
+    "description": "Planeador para deslizarse por el aire. Es simple y no alcanza gran velocidad."
+  },
+  "Battle_Glider_Grade_02": {
+    "localized_name": "Mega planeador",
+    "description": "Planeador de producción en masa con velocidad decente. Necesitarás una \"Mesa de trabajo de alta calidad\" para su elaboración."
+  },
+  "Battle_Glider_Grade_03": {
+    "localized_name": "Giga planeador",
+    "description": "Planeador de alto rendimiento con gran velocidad. Necesitarás una \"Fábrica de producción en cadena\" para su elaboración."
+  },
+  "Battle_Glider_Grade_04": {
+    "localized_name": "Tera planeador",
+    "description": "Planeador mejorado con mayor velocidad y sustentación. Necesitarás una \"Fábrica de producción en cadena II\" para su elaboración."
+  },
+  "Battle_GunPowder_Grade_02": {
+    "localized_name": "Pólvora",
+    "description": "Pólvora necesaria para disparar balas. También es esencial al fabricar munición. Puede crearse en una \"Mesa de trabajo de alta calidad\"."
+  },
+  "Battle_Helm_Grade_02_Fur": {
+    "localized_name": "Adorno de plumas para el cabello",
+    "description": "Un bonito adorno de plumas para el pelo. Da la sensación de que protegen a su portador de las heridas mortales en la cabeza. Puede fabricarse en \"Mesa de trabajo primitiva\"."
+  },
+  "Battle_Helm_Grade_03_Copper": {
+    "localized_name": "Yelmo de metal",
+    "description": "Casco de metal. Equipo defensivo confiable para la cabeza y la mente. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
+  },
+  "Battle_Helm_Grade_04_Iron": {
+    "localized_name": "Yelmo de metal refinado",
+    "description": "Casco hecho de metal refinado. El brillo del metal pulido le otorga aún más valor. Puede fabricarse en \"Fábrica de producción en cadena\"."
+  },
+  "Battle_Helm_Grade_05_Steal": {
+    "localized_name": "Yelmo de Paluminium",
+    "description": "Casco hecho de Lingote de Paluminium. Una pieza de calidad superior, símbolo de los guerreros más selectos. Puede fabricarse en \"Fábrica de producción en cadena II\"."
+  },
+  "Battle_Helm_Grade_06_Plastic": {
+    "localized_name": "Casco de plastiacero",
+    "description": "Casco hecho de Plastiacero. Mejora la defensa y es liviana. Puede fabricarse en \"Fábrica de producción en cadena II\"."
+  },
+  "Battle_MeleeWeapon_Axe_Steal": {
+    "localized_name": "Hacha de Paluminium",
+    "description": null
+  },
+  "Battle_MeleeWeapon_Bat": {
+    "localized_name": "Garrote de madera",
+    "description": "Garrote de madera para combate cuerpo a cuerpo. Tal vez puedas noquear a Pals pequeños a golpes."
+  },
+  "Battle_MeleeWeapon_Bat2": {
+    "localized_name": "Bate",
+    "description": null
+  },
+  "Battle_MeleeWeapon_Pickaxe_Steal": {
+    "localized_name": "Pico de Paluminium",
+    "description": null
+  },
+  "Battle_MeleeWeapon_Sword": {
+    "localized_name": "Espada",
+    "description": "Espada de combate cuerpo a cuerpo. Su filo es excelente, pero acercarse al enemigo conlleva riesgos. Puede fabricarse en \"Mesa de creación de armas\"."
+  },
+  "Battle_RangeWeapon_AssaultRifle": {
+    "localized_name": "Rifle de asalto",
+    "description": "Un Rifle de asalto de fuego rápido con el que puedes acorralar al enemigo. Como es de disparo rápido y potente, es el arma perfecta contra rivales poderosos. Puede fabricarse en \"Fábrica de producción en cadena de armas\"."
+  },
+  "Battle_RangeWeapon_Bow1": {
+    "localized_name": "Arco anticuado",
+    "description": "Un arma primitiva de ataque a distancia. Está hecha de materiales improvisados, por lo que no es muy potente. Puede fabricarse en \"Mesa de trabajo primitiva\"."
+  },
+  "Battle_RangeWeapon_Bow3": {
+    "localized_name": "Arco de tres flechas",
+    "description": "Arco mejorado que dispara 3 flechas a la vez. Gracias a un poder misterioso, solo se consume una Flecha por disparo."
+  },
+  "Battle_RangeWeapon_BowGun": {
+    "localized_name": "Ballesta",
+    "description": "Puede disparar una \"Flecha\" sin esfuerzo. Lleva tiempo prepararlo, pero el disparo es muy potente. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
+  },
+  "Battle_RangeWeapon_CompoundBow": {
+    "localized_name": "Arco compuesto",
+    "description": null
+  },
+  "Battle_RangeWeapon_FlameThrower": {
+    "localized_name": "Lanzallamas",
+    "description": "Lanzallamas que dispara fuego de largo alcance. Puede incendiar a los objetivos alcanzados. Puede fabricarse en \"Fábrica de producción en cadena de armas II\"."
+  },
+  "Battle_RangeWeapon_GatlingGun": {
+    "localized_name": "Ametralladora Gatling",
+    "description": "Ametralladora Gatling capaz hacer disparos rápidos y continuos. Su fuego de supresión puede convertir al enemigo en un colador. Puede fabricarse en \"Fábrica de producción en cadena de armas II\"."
+  },
+  "Battle_RangeWeapon_GrenadeLauncher": {
+    "localized_name": "Lanzagranadas",
+    "description": "Lanza una granada que causa una explosión de amplio alcance. Es útil contra múltiples enemigos. Puede fabricarse en \"Fábrica de producción en cadena de armas II\"."
+  },
+  "Battle_RangeWeapon_GuidedMissileLauncher": {
+    "localized_name": "Lanzamisiles",
+    "description": "Lanza un misil teledirigido que sigue al enemigo automáticamente. Explota al impactar causando daño en área. Puede fabricarse en \"Fábrica de producción en cadena de armas II\"."
+  },
+  "Battle_RangeWeapon_HandGun": {
+    "localized_name": "Pistola",
+    "description": "Pistola con capacidad de carga y cadencia de disparo mejoradas. Tiene mayor daño por segundo que la Pistola chatarra. Se fabrica en una Mesa de creación de armas."
+  },
+  "Battle_RangeWeapon_HomingSphereLauncher": {
+    "localized_name": "Lanzador de esferas teledirigidas",
+    "description": "Sirve para disparar esferas. Las esferas lanzadas persiguen a los Pals. Puede fabricarse en \"Fábrica de producción en cadena de armas II\"."
+  },
+  "Battle_RangeWeapon_LaserRifle": {
+    "localized_name": "Rifle láser",
+    "description": "Arma láser. Con gran potencia de disparo y fácil de manejar. Puede fabricarse en \"Fábrica de producción en cadena de armas II\"."
+  },
+  "Battle_RangeWeapon_OldRevolver": {
+    "localized_name": "Revólver antiguo",
+    "description": null
+  },
+  "Battle_RangeWeapon_Rifle": {
+    "localized_name": "Rifle de tiro único",
+    "description": "Rifle de un solo disparo. Requiere tiempo para recargar. Tiene poca capacidad de carga, pero el disparo es muy potente. Se fabrica en una Fábrica de producción en cadena de armas."
+  },
+  "Battle_RangeWeapon_RocketLauncher": {
+    "localized_name": "Lanzacohetes",
+    "description": "Lanzacohetes para bombardear con fuerza a larga distancia. Puede fabricarse en \"Fábrica de producción en cadena de armas II\"."
+  },
+  "Battle_RangeWeapon_SemiAutoRifle": {
+    "localized_name": "Rifle semiautomático",
+    "description": null
+  },
+  "Battle_RangeWeapon_SemiAutoShotgun": {
+    "localized_name": "Escopeta semiautomática",
+    "description": null
+  },
+  "Battle_RangeWeapon_ShotGun": {
+    "localized_name": "Escopeta de doble cañón",
+    "description": "Escopeta poderosa en combates cercanos. Puede disparar 2 veces seguidas. El cargador es pequeño, pero tiene mucha potencia de disparo. Se fabrica en una \"Fábrica de producción en cadena de armas\"."
+  },
+  "Battle_RangeWeapon_ShotGun_Multi": {
+    "localized_name": "Escopeta de bombeo",
+    "description": "Una escopeta mejorada con mayor capacidad de carga y más potencia. Su DPS a corta distancia es excepcional. Puede fabricarse en \"Fábrica de producción en cadena de armas\"."
+  },
+  "Battle_RangeWeapon_SphereLauncher": {
+    "localized_name": "Lanzaesferas dispersor",
+    "description": "Un nuevo tipo de lanzador que dispara una gran cantidad de esferas a la vez. Permite capturar a una manada de Pals. Puede fabricarse en \"Fábrica de producción en cadena de armas\"."
+  },
+  "Battle_RangeWeapon_SphereLauncher_Once": {
+    "localized_name": "Lanzaesferas de tiro único",
+    "description": "Un lanzador diseñado para disparar esferas. Permite capturar Pals a mayor distancia. Puede fabricarse en \"Mesa de creación de armas\"."
+  },
+  "Battle_RangeWeapon_SubmachineGun": {
+    "localized_name": "Subfusil",
+    "description": null
+  },
+  "BeamLauncher": {
+    "localized_name": "Lanzador de rayos",
+    "description": "Lanzador que dispara un haz de alta densidad y provoca explosiones en un área amplia. Al disparar en ráfaga, hay que tener cuidado con el sobrecalentamiento."
+  },
+  "BeamLauncherBullet": {
+    "localized_name": "Munición de lanzador de rayos",
+    "description": null
+  },
+  "BeamSword": {
+    "localized_name": "Espada de haz",
+    "description": null
+  },
+  "BelieverFlagSet": {
+    "localized_name": "Set de bandera de la Asociación Pro-Pal",
+    "description": "Set con Bandera de la Asociación Pro-Pal YEstandarte de la Asociación Pro-Pal . Prueba de haber superado a la Asociación Pro-Pal."
+  },
+  "Bio_Battery": {
+    "localized_name": "Batería biológica",
+    "description": null
+  },
+  "Bio_Coolant": {
+    "localized_name": "Refrigerante criogénico extremo",
+    "description": null
+  },
+  "BlastFurnace4": {
+    "localized_name": "Horno enorme",
+    "description": null
+  },
+  "BreedFarm": {
+    "localized_name": "Criadero",
+    "description": "Al asignar un Pal macho y uno hembra, pueden producir huevos. Para reproducirse, es necesario tener un \"Pastel\"."
+  },
+  "BronzeSword": {
+    "localized_name": "Espada primitiva",
+    "description": "Espada de combate cuerpo a cuerpo. ¡Su filo no debe subestimarse! Acercarse al enemigo conlleva riesgos."
+  },
+  "BuildableGoddessStatue": {
+    "localized_name": "Estatua de Poder",
+    "description": "Al hacer una ofrenda, puedes fortalecer al jugador y al Pal."
+  },
+  "Cake02": {
+    "localized_name": "Pastel de hongos",
+    "description": null
+  },
+  "Cake03": {
+    "localized_name": "Pastel de verduras",
+    "description": null
+  },
+  "Cake04": {
+    "localized_name": "Pastel de verduras de lujo",
+    "description": null
+  },
+  "Cake05": {
+    "localized_name": "Pastel especial",
+    "description": null
+  },
+  "CarbonFiber": {
+    "localized_name": "Fibra de carbono",
+    "description": null
+  },
+  "Cauldron": {
+    "localized_name": "Caldero de bruja",
+    "description": null
+  },
+  "CeilingLamp": {
+    "localized_name": "Lámpara de techo",
+    "description": "Puede colocarse en el techo."
+  },
+  "Cement": {
+    "localized_name": "Cemento",
+    "description": null
+  },
+  "ChargeLaserRifle": {
+    "localized_name": "Cañón de carga",
+    "description": null
+  },
+  "ChargeLaserRifleBullet": {
+    "localized_name": "Munición para cañón de carga",
+    "description": null
+  },
+  "Clinic": {
+    "localized_name": "Clínica",
+    "description": null
+  },
+  "Cloth2": {
+    "localized_name": "Tela superior",
+    "description": "Tela superior tejido con gran cantidad de Lana. Es útil para fabricar equipo defensivo de alta calidad. Necesitarás una \"Mesa de trabajo de alta calidad\" para su fabricación."
+  },
+  "CompositeDesk": {
+    "localized_name": "Mesa de dibujo técnico",
+    "description": null
+  },
+  "Computer": {
+    "localized_name": "Computadora",
+    "description": null
+  },
+  "Cooler": {
+    "localized_name": "Refrigerador de hielo",
+    "description": "Enfría los alrededores, ayudando a resistir el calor."
+  },
+  "CoolerBox": {
+    "localized_name": "Conservadora",
+    "description": null
+  },
+  "CoolerPalFoodBox": {
+    "localized_name": "Comedero refrigerado",
+    "description": null
+  },
+  "Corrosive_Solvent": {
+    "localized_name": "Solvente corrosivo",
+    "description": null
+  },
+  "Crusher": {
+    "localized_name": "Trituradora",
+    "description": "Instalación que permite triturar \"Piedra\" y \"Madera\" para convertirlos en otros materiales. Se necesita un Pal con la aptitud \"riego\" que haga girar la rueda de agua."
+  },
+  "CrystalPit": {
+    "localized_name": "Cantera de Hexecuarzo",
+    "description": null
+  },
+  "DamagedScarecrow": {
+    "localized_name": "Espantapájaros de entrenamiento",
+    "description": "Un espantapájaros de entrenamiento con forma de Pengullet."
+  },
+  "DarkIslandFlagSet": {
+    "localized_name": "Set de banderas del pueblo de Tenraku",
+    "description": "Set de Bandera del pueblo de Tenraku y Estandarte vertical del pueblo de Tenraku. Prueba de haber superado a los ciudadanos de Tenraku."
+  },
+  "DecalGunSet": {
+    "localized_name": "Set de calcopistolas",
+    "description": "Set de calcopistolas. Puedes crear una pistola misteriosa que deja pegatinas de Pals al impactar, así como su munición."
+  },
+  "DefenseWait": {
+    "localized_name": "Bolsa de arena",
+    "description": "Los Pals asignados aquí trabajarán como centinelas para defender la base de enemigos externos."
+  },
+  "DefenseWall": {
+    "localized_name": "Muralla de piedra",
+    "description": "Muralla gigante para evitar la entrada de enemigos."
+  },
+  "DefenseWall_Metal": {
+    "localized_name": "Muralla metálica",
+    "description": "Muralla gigante para impedir el ingreso de enemigos. Está hecha de metal, por lo que es muy resistente."
+  },
+  "DefenseWall_Wood": {
+    "localized_name": "Muralla de madera",
+    "description": "Muralla gigante para impedir el ingreso de enemigos. Es de madera, por lo que es frágil."
+  },
+  "DimensionPalStorage": {
+    "localized_name": "Almacenamiento dimensional Pal",
+    "description": null
+  },
+  "DismantlingConveyor": {
+    "localized_name": "Cinta de despiece Pal",
+    "description": null
+  },
+  "DisplayCharacter": {
+    "localized_name": "Jaula de observación",
+    "description": "Jaula decorativa para exhibir a un Pal capturado. Los Pals dentro no pueden combatir ni trabajar, pero tampoco pasan hambre."
+  },
+  "DroneLauncher": {
+    "localized_name": "Lanzador de drones",
+    "description": "Lanzador que despliega drones de ataque autónomos. Puede desplegar hasta 8 unidades, realizando una supresión continua."
+  },
+  "ElecBaton": {
+    "localized_name": "Bastón paralizante",
+    "description": "Arma de corta distancia con la que puedes paralizar al rival. Un Pal paralizado será más fácil de capturar. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
+  },
+  "ElectricArcAssaultRifle": {
+    "localized_name": "Rifle de plasma",
+    "description": "Rifle cuyas descargas eléctricas se propagan desde el punto de impacto y encadenan a varios enemigos."
+  },
+  "ElectricArcAssaultRifleBullet": {
+    "localized_name": "Munición de rifle de plasma",
+    "description": null
+  },
+  "ElectricCooler": {
+    "localized_name": "Refrigerador eléctrico",
+    "description": "Aire acondicionado mejorado por electricidad, cubre un área más amplia con mayor potencia."
+  },
+  "ElectricGenerator_Large": {
+    "localized_name": "Generador grande",
+    "description": null
+  },
+  "ElectricHeater": {
+    "localized_name": "Calefactor eléctrico",
+    "description": "Calefacción mejorada por electricidad, cubre un área más amplia con mayor potencia."
+  },
+  "EnergyLauncherBullet": {
+    "localized_name": "Cartucho de plasma",
+    "description": null
+  },
+  "EnergyRocketLauncher": {
+    "localized_name": "Cañón de plasma",
+    "description": null
+  },
+  "EnergyShotgun": {
+    "localized_name": "Escopeta de energía",
+    "description": null
+  },
+  "EnergyShotgunBullet": {
+    "localized_name": "Munición para escopeta de energía",
+    "description": null
+  },
+  "EnergyStorage_Electric": {
+    "localized_name": "Condensador eléctrico",
+    "description": null
+  },
+  "Expedition": {
+    "localized_name": "Estación de expedición Pal",
+    "description": null
+  },
+  "Factory_Hard_04": {
+    "localized_name": "Fábrica de trabajo de alta tecnología",
+    "description": null
+  },
+  "Factory_Money": {
+    "localized_name": "Fábrica de monedas de oro",
+    "description": null
+  },
+  "Farm_SkillFruits": {
+    "localized_name": "Plantación de Frutas del saber",
+    "description": null
+  },
+  "FireCultFlagSet": {
+    "localized_name": "Set de bandera de los fieles de la Llama Eterna",
+    "description": "Set con Bandera de los fieles de la Llama Eterna y Estandarte de los fieles de la Llama Eterna. Prueba de haber superado a los fieles de la Llama Eterna."
+  },
+  "FishingBait_2": {
+    "localized_name": "Cebo de pesca de alta calidad",
+    "description": null
+  },
+  "FishingBait_3": {
+    "localized_name": "Cebo de pesca lujoso",
+    "description": null
+  },
+  "FishingBait_3_A": {
+    "localized_name": "Cebo de pesca encantador",
+    "description": null
+  },
+  "FishingPond1": {
+    "localized_name": "Estanque de pesca",
+    "description": null
+  },
+  "FishingPond2": {
+    "localized_name": "Estanque de pesca grande",
+    "description": null
+  },
+  "FishingRod_02_1": {
+    "localized_name": "Caña de pescar intermedia (Cattiva)",
+    "description": null
+  },
+  "FishingRod_03_1": {
+    "localized_name": "Caña de pescar avanzada (Pengullet)",
+    "description": null
+  },
+  "FishingSet1": {
+    "localized_name": "Set de pesca principiante",
+    "description": "Set de caña y cebo de pesca para principiantes. Al elaborar ambos, podrás pescar Pals en zonas con agua."
+  },
+  "FlamethrowerBullet": {
+    "localized_name": "Combustible de lanzallamas",
+    "description": null
+  },
+  "FlourMill": {
+    "localized_name": "Molino",
+    "description": "Instalación que muele \"Trigo\" para producir \"Harina de trigo\". Se necesita un Pal con habilidad de \"riego\" para hacer girar la rueda de agua."
+  },
+  "FlowerBed": {
+    "localized_name": "Jardín de flores",
+    "description": null
+  },
+  "Fountain": {
+    "localized_name": "Fuente",
+    "description": null
+  },
+  "FragGrenade": {
+    "localized_name": "Granada de fragmentación",
+    "description": null
+  },
+  "FragGrenade_Dark": {
+    "localized_name": "Granada oscura",
+    "description": null
+  },
+  "FragGrenade_Dragon": {
+    "localized_name": "Granada de dragón",
+    "description": null
+  },
+  "FragGrenade_Elec": {
+    "localized_name": "Granada eléctrica",
+    "description": null
+  },
+  "FragGrenade_Fire": {
+    "localized_name": "Granada incendiaria",
+    "description": null
+  },
+  "FragGrenade_Ground": {
+    "localized_name": "Granada terrestre",
+    "description": null
+  },
+  "FragGrenade_Ice": {
+    "localized_name": "Granada de congelación",
+    "description": null
+  },
+  "FragGrenade_Leaf": {
+    "localized_name": "Granada vegetal",
+    "description": null
+  },
+  "FragGrenade_Super": {
+    "localized_name": "Granada mejorada",
+    "description": null
+  },
+  "FragGrenade_Water": {
+    "localized_name": "Granada acuática",
+    "description": null
+  },
+  "FurnitureSet_1": {
+    "localized_name": "Set de muebles de salón de madera",
+    "description": "Set decorativo de muebles. Colócalo en la sala y disfruta de la vida con tus Pals."
+  },
+  "FurnitureSet_10": {
+    "localized_name": "Set de barricadas",
+    "description": "Set decorativo de muebles. Colócalo donde desees bloquear el paso."
+  },
+  "FurnitureSet_11": {
+    "localized_name": "Set de control de carretera",
+    "description": "Set decorativo de muebles. No hay caminos, por lo que no sirve para dirigir el tránsito."
+  },
+  "FurnitureSet_12": {
+    "localized_name": "Set de señales de tránsito",
+    "description": "Set decorativo de muebles. No hay caminos, por lo que no sirve para dirigir el tránsito."
+  },
+  "FurnitureSet_13": {
+    "localized_name": "Set de mesas y sillas de metal",
+    "description": "Set decorativo de muebles. Disfruta la vida con tus Pals en construcciones de metal."
+  },
+  "FurnitureSet_14": {
+    "localized_name": "Set de mesa palo fierro",
+    "description": "Set decorativo de muebles. Disfruta la vida con tus Pals en construcciones de metal."
+  },
+  "FurnitureSet_15": {
+    "localized_name": "Set de pianos",
+    "description": "Set decorativo de muebles. Colócalo en tu base para crear una vida más completa."
+  },
+  "FurnitureSet_16": {
+    "localized_name": "Set de espejos antiguos",
+    "description": "Set decorativo de muebles. Mírate para revisar tu apariencia."
+  },
+  "FurnitureSet_17": {
+    "localized_name": "Set de alfombras",
+    "description": "Set decorativo de muebles. Colócalo sobre una base para darle una sensación de hogar."
+  },
+  "FurnitureSet_18": {
+    "localized_name": "Set de sofás antiguos",
+    "description": "Set decorativo de muebles. Ideal para crear una base con sensación de lujo."
+  },
+  "FurnitureSet_19": {
+    "localized_name": "Set de sillas antiguas",
+    "description": "Set decorativo de muebles. Úsalo junto a un escritorio antiguo."
+  },
+  "FurnitureSet_2": {
+    "localized_name": "Set de muebles de almacenamiento para taberna de madera",
+    "description": "Set de muebles de almacenamiento de madera al estilo de una taberna. Podrás guardar objetos en ellos."
+  },
+  "FurnitureSet_20": {
+    "localized_name": "Set de bañeras antiguas",
+    "description": "Set decorativo de muebles. Crea un baño al estilo antiguo."
+  },
+  "FurnitureSet_21": {
+    "localized_name": "Set de almacenamiento antiguo",
+    "description": "Set de muebles de almacenamiento antiguos. Puedes guardar objetos en ellos."
+  },
+  "FurnitureSet_22": {
+    "localized_name": "Set de alacenas antiguas",
+    "description": "Set de gabinetes antiguos de almacenamiento. Puedes guardar objetos en ellos."
+  },
+  "FurnitureSet_23": {
+    "localized_name": "Set de relojes",
+    "description": "Set decorativo de muebles. No permiten consultar la hora."
+  },
+  "FurnitureSet_24": {
+    "localized_name": "Set de escritorios antiguos",
+    "description": "Set decorativo de muebles. Úsalo junto a sillas antiguas."
+  },
+  "FurnitureSet_25": {
+    "localized_name": "Set de retretes",
+    "description": "Set decorativo de muebles. No se puede usar para hacer tus necesidades."
+  },
+  "FurnitureSet_26": {
+    "localized_name": "Set de muebles recreativos",
+    "description": "Set decorativo de muebles. Los Pals seguirán trabajando sin parar."
+  },
+  "FurnitureSet_27": {
+    "localized_name": "Set de farolas",
+    "description": "Set de faroles decorativos. Se necesita electricidad para encenderlos."
+  },
+  "FurnitureSet_28": {
+    "localized_name": "Set de chimeneas",
+    "description": "Set de chimeneas de ladrillo decorativas. Es necesario encender el fuego."
+  },
+  "FurnitureSet_29": {
+    "localized_name": "Set de lámparas antiguas",
+    "description": "Set de lámparas antiguas decorativas. Se necesita electricidad para encenderlas."
+  },
+  "FurnitureSet_3": {
+    "localized_name": "Set de muebles para taberna de madera",
+    "description": "Set decorativo de muebles. Colócalo al estilo de una taberna y disfruta de la vida con tus Pals."
+  },
+  "FurnitureSet_30": {
+    "localized_name": "Set de estantes de metal",
+    "description": "Set de estanterías metálicas. Puedes guardar objetos en ellas."
+  },
+  "FurnitureSet_31": {
+    "localized_name": "Set de muebles de exterior",
+    "description": "Set decorativo de muebles. Contiene mobiliario ideal para exteriores."
+  },
+  "FurnitureSet_32": {
+    "localized_name": "Set de muebles antiguos de lujo",
+    "description": "Set decorativo de muebles. Contiene mobiliario de aspecto lujoso."
+  },
+  "FurnitureSet_4": {
+    "localized_name": "Set de plantas ornamentales de pared",
+    "description": "Set decorativo de muebles. Decora tu base colocando plantas en las paredes."
+  },
+  "FurnitureSet_5": {
+    "localized_name": "Set de bidones",
+    "description": "Set decorativo de muebles. No es posible meterse en el barril tipo baño."
+  },
+  "FurnitureSet_6": {
+    "localized_name": "Set de contenedores de almacenamiento",
+    "description": "Set de muebles tipo contenedor. Puedes guardar objetos en ellos."
+  },
+  "FurnitureSet_7": {
+    "localized_name": "Set de asientos de cuero",
+    "description": "Set decorativo de muebles. Revestidos en cuero, ofrecen una apariencia elegante."
+  },
+  "FurnitureSet_8": {
+    "localized_name": "Set de señales de salida de emergencia",
+    "description": "Set decorativo de muebles. Se dice que eran muy valorados en tiempos de civilizaciones antiguas."
+  },
+  "FurnitureSet_9": {
+    "localized_name": "Set de plantas ornamentales",
+    "description": "Set decorativo de muebles. Decora tu base con plantas."
+  },
+  "FurnitureSet_Japanese": {
+    "localized_name": "Set de muebles de estilo japonés",
+    "description": "Set de muebles decorativos estilo japonés. Construye una base con estética tradicional japonesa."
+  },
+  "FurnitureTree_Bamboo": {
+    "localized_name": "Set de bambú decorativo",
+    "description": "Set decorativo de bambú. Coloca bambú y crea una base con estilo de bosque de bambú. No se pueden obtener materiales de esta estructura."
+  },
+  "FurnitureTree_Cherry": {
+    "localized_name": "Set de cerezos decorativos",
+    "description": "Set decorativo de cerezos. Coloca árboles y crea una base con estilo de Isla Sakura. No se pueden obtener materiales de esta estructura."
+  },
+  "FurnitureTree_Desert": {
+    "localized_name": "Set de árboles del desierto decorativos",
+    "description": "Set decorativo de árboles del desierto. Coloca árboles y crea una base con estilo desértico. No se pueden obtener materiales de esta estructura."
+  },
+  "FurnitureTree_Green": {
+    "localized_name": "Set de árboles decorativos",
+    "description": "Set decorativo de árboles. Coloca árboles y crea una base con estilo natural. No se pueden obtener materiales de esta estructura."
+  },
+  "FurnitureTree_Red": {
+    "localized_name": "Set de árboles de otoño decorativos",
+    "description": "Set decorativo de árboles de otoño rojos. Coloca árboles y crea una base con estilo natural. No se pueden obtener materiales de esta estructura."
+  },
+  "FurnitureTree_Snow": {
+    "localized_name": "Set de árboles nevados decorativos",
+    "description": "Set decorativo de árboles nevados. Coloca árboles y crea una base con estilo de montaña nevada. No se pueden obtener materiales de esta estructura."
+  },
+  "FurnitureTree_Tropical": {
+    "localized_name": "Set de árboles tropicales decorativos",
+    "description": "Set decorativo de árboles tropicales. Coloca árboles y crea una base con estilo tropical. No se pueden obtener materiales de esta estructura."
+  },
+  "FurnitureTree_Yellow": {
+    "localized_name": "Set de árboles de otoño amarillos decorativos",
+    "description": "Set decorativo de árboles de otoño amarillos. Coloca árboles y crea una base con estilo natural. No se pueden obtener materiales de esta estructura."
+  },
+  "GasMask": {
+    "localized_name": "Máscara contra niebla corrosiva",
+    "description": null
+  },
+  "GatlingBullet": {
+    "localized_name": "Munición de ametralladora Gatling",
+    "description": null
+  },
+  "Glass_houseset": {
+    "localized_name": "Set de construcción de cristal",
+    "description": "Set de construcción para base de vidrio. Permite construir casas con cimientos, muros, techos y escaleras de vidrio."
+  },
+  "GlobalPalStorage": {
+    "localized_name": "Caja Pal global",
+    "description": null
+  },
+  "GrapplingGun": {
+    "localized_name": "Pistola de agarre",
+    "description": null
+  },
+  "GrapplingGun2": {
+    "localized_name": "Megapistola de agarre",
+    "description": null
+  },
+  "GrapplingGun3": {
+    "localized_name": "Gigapistola de agarre",
+    "description": null
+  },
+  "GrapplingGun4": {
+    "localized_name": "Terapistola de agarre",
+    "description": null
+  },
+  "GrapplingGun5": {
+    "localized_name": "Ultra pistola de agarre",
+    "description": null
+  },
+  "GrenadeBullet": {
+    "localized_name": "Munición de granada",
+    "description": null
+  },
+  "GuildChest": {
+    "localized_name": "Cofre de gremio",
+    "description": null
+  },
+  "HandTorch": {
+    "localized_name": "Antorcha portátil",
+    "description": "Ilumina las noches oscuras y protege del frío. También puede utilizarse en combate cuerpo a cuerpo. Puede fabricarse en \"Mesa de trabajo primitiva\"."
+  },
+  "HandgunBullet": {
+    "localized_name": "Balas para pistola",
+    "description": "Munición para usar con \"Pistola\" y otras armas similares. Necesitarás una \"Mesa de creación de armas\" para su fabricación."
+  },
+  "Headstone": {
+    "localized_name": "Lápida",
+    "description": null
+  },
+  "Heater": {
+    "localized_name": "Calefactor de fuego",
+    "description": "Calienta los alrededores, ayudando a resistir el frío."
+  },
+  "HighGrade_Processed_Wood": {
+    "localized_name": "Tabla de madera de alta calidad",
+    "description": null
+  },
+  "Homeward": {
+    "localized_name": "Nubarrón del retorno",
+    "description": null
+  },
+  "HugeKitchen": {
+    "localized_name": "Cocina grande",
+    "description": null
+  },
+  "HunterFlagSet": {
+    "localized_name": "Set de bandera de los Cazadores Furtivos",
+    "description": "Set con Bandera de los Furtivos y Estandarte de los Furtivos. Prueba de haber superado a los Furtivos."
+  },
+  "IceCrusher": {
+    "localized_name": "Trituradora de congelación",
+    "description": null
+  },
+  "IceHorseStatue": {
+    "localized_name": "Estatua de Frostallion",
+    "description": null
+  },
+  "Infra_ElectricGenerator_Grade_01": {
+    "localized_name": "Generador eléctrico",
+    "description": "Permite a los Pals eléctricos de la base almacenar electricidad, lo que habilita el uso de instalaciones que requieren energía."
+  },
+  "Infra_ElectronicCircuit": {
+    "localized_name": "Placa de circuito impreso",
+    "description": "\"Placa de circuito impreso\" necesaria para fabricar armas de precisión. Puede crearse en una \"Fábrica de producción en cadena\"."
+  },
+  "Infra_ItemChest_Grade_01": {
+    "localized_name": "Cofre de madera",
+    "description": "Contenedor de almacenamiento. Si se coloca en la base, los Pals con la aptitud \"Transporte\" moverán los objetos automáticamente."
+  },
+  "Infra_ItemChest_Grade_02": {
+    "localized_name": "Cofre de metal",
+    "description": "Permite almacenar más objetos y es más resistente. Los Pals con la aptitud \"Transporte\" moverán los objetos automáticamente."
+  },
+  "Infra_ItemChest_Grade_03": {
+    "localized_name": "Cofre de metal refinado",
+    "description": "Permite almacenar aún más objetos y es mucho más resistente. Los Pals con la aptitud \"Transporte\" moverán los objetos automáticamente."
+  },
+  "Infra_MachineParts": {
+    "localized_name": "Clavos",
+    "description": null
+  },
+  "Infra_PalBed_Grade_01": {
+    "localized_name": "Cama Pal de paja",
+    "description": "Los Pals en la base pueden dormir en una cama Pal por la noche y recuperar COR. Sin cama Pal, no dormirán bien y no recuperarán COR."
+  },
+  "Infra_PalBed_Grade_02": {
+    "localized_name": "Cama Pal acolchada",
+    "description": "Los Pals descansan mejor y recuperan más PV y COR mientras duermen. Mejora la eficiencia de la recuperación."
+  },
+  "Infra_PlayerBed_Grade_01": {
+    "localized_name": "Cama de mala calidad",
+    "description": "Cama donde los humanos pueden dormir para recuperar sus PV. Dormir por la noche hará avanzar el tiempo hasta la mañana. Solo se puede usar si se construye bajo techo."
+  },
+  "Infra_PlayerBed_Grade_02": {
+    "localized_name": "Cama de buena calidad",
+    "description": "Cama mullida con mejor recuperación. Solo se puede usar si se construye bajo techo."
+  },
+  "ItemBooth": {
+    "localized_name": "Mercado (objeto)",
+    "description": null
+  },
+  "ItemChest_04": {
+    "localized_name": "Cofre de alta tecnología",
+    "description": null
+  },
+  "JapaneseStyle_houseset": {
+    "localized_name": "Set de construcción estilo japonés",
+    "description": "Set de construcción estilo japonés. Incluye cimientos, muros, techos y escaleras para construir tu hogar."
+  },
+  "JetDragonStatue": {
+    "localized_name": "Estatua de Jetragon",
+    "description": null
+  },
+  "Katana": {
+    "localized_name": "Katana",
+    "description": null
+  },
+  "Lab": {
+    "localized_name": "Laboratorio de trabajo Pal",
+    "description": null
+  },
+  "Lamp": {
+    "localized_name": "Lámpara fija",
+    "description": "Ilumina más eficientemente gracias a la electricidad."
+  },
+  "Lantern": {
+    "localized_name": "Linterna de cintura",
+    "description": null
+  },
+  "Lantern_High": {
+    "localized_name": "Linterna de cintura mejorada",
+    "description": null
+  },
+  "LargeCeilingLamp": {
+    "localized_name": "Lámpara de techo grande",
+    "description": "Puede colocarse en el techo y cubre un área amplia."
+  },
+  "LargeLamp": {
+    "localized_name": "Lámpara fija grande",
+    "description": "Versión más grande que ilumina un área aún mayor."
+  },
+  "LaserBullet": {
+    "localized_name": "Cartucho de energía",
+    "description": null
+  },
+  "LaserGatlingBullet": {
+    "localized_name": "Cartucho de láser Gatling",
+    "description": null
+  },
+  "LaserGatlingGun": {
+    "localized_name": "Ametralladora Gatling láser",
+    "description": null
+  },
+  "LaserMiningTool": {
+    "localized_name": "Cortador de plasma múltiple",
+    "description": "Cortador de plasma portátil que concentra y dispara energía de plasma. Sirve para una amplia variedad de tareas, desde extraer minerales hasta talar árboles."
+  },
+  "LauncherBullet": {
+    "localized_name": "Balas de cohete",
+    "description": "Munición para usar con \"Lanzacohetes\" y otras armas similares. Necesitarás una \"Fábrica de producción en cadena de armas II\" para su fabricación."
+  },
+  "Launcher_Meteor": {
+    "localized_name": "Lanzameteoros",
+    "description": "Un arma que te hará decir: \"¡Cielos, que macizo!\", fabricada a partir de un meteorito auténtico. Al topar contra algo explota como lo haría un meteorito. Puede fabricarse en \"Fábrica de producción en cadena de armas\"."
+  },
+  "MakeshiftAssaultRifle": {
+    "localized_name": "Rifle de asalto deteriorado",
+    "description": null
+  },
+  "MakeshiftHandgun": {
+    "localized_name": "Pistola chatarra",
+    "description": "Pistola hecha a mano con chatarra. Es adecuada para combates a corta distancia, pero solo puede disparar una vez por recarga. Necesitarás una \"Mesa de creación de armas\" para su fabricación."
+  },
+  "MakeshiftShotgun": {
+    "localized_name": "Escopeta deteriorada",
+    "description": null
+  },
+  "MakeshiftSubmachineGun": {
+    "localized_name": "Subfusil deteriorado",
+    "description": null
+  },
+  "ManganeseIngot": {
+    "localized_name": "Lingote de Coralum",
+    "description": null
+  },
+  "ManualElectricGenerator": {
+    "localized_name": "Generador eléctrico manual",
+    "description": null
+  },
+  "MeatCutterKnife": {
+    "localized_name": "Cuchillo de carnicero",
+    "description": "Cuchillo para hacer pedazos a Pals invocados. Cuando te lo equipes, la opción \"acariciar\" cambiará a \"despedazar\". Los Pals que despedaces no regresarán."
+  },
+  "MedicalPalBed_04": {
+    "localized_name": "Cama Pal grande",
+    "description": null
+  },
+  "MedicalPalBed_05": {
+    "localized_name": "Cápsula Pal de alta tecnología",
+    "description": null
+  },
+  "MedicineFacility_03": {
+    "localized_name": "Puesto médico de alta tecnología",
+    "description": null
+  },
+  "MetalDetector": {
+    "localized_name": "Detector de metales",
+    "description": null
+  },
+  "Metal_Gate": {
+    "localized_name": "Portón de metal",
+    "description": "Una puerta de metal por la que pueden pasar Pals grandes."
+  },
+  "Metal_houseset": {
+    "localized_name": "Set de construcción de metal",
+    "description": "Conjunto de construcción en metal para crear una base. Incluye base, muros, techos, escaleras y otros elementos necesarios para construir una casa."
+  },
+  "MiningTool": {
+    "localized_name": "Vagón minero",
+    "description": null
+  },
+  "MissileBullet": {
+    "localized_name": "Munición de misil",
+    "description": null
+  },
+  "MonsterFarm": {
+    "localized_name": "Corral para ganado",
+    "description": "Un establo para pastar Pals como ovejas o gallinas. Si asignas un Pal con una aptitud para el establo, producirá objetos automáticamente."
+  },
+  "MultiElectricHatchingPalEgg": {
+    "localized_name": "Incubadora eléctrica grande",
+    "description": null
+  },
+  "MultiElectricHatchingPalEggWithBreed": {
+    "localized_name": "Mezclador de la civilización antigua",
+    "description": null
+  },
+  "MultiHatchingPalEgg": {
+    "localized_name": "Incubadora grande",
+    "description": null
+  },
+  "Musket": {
+    "localized_name": "Mosquete",
+    "description": "Arma de fuego antigua y sencilla. Su disparo es potente, pero la recarga es lenta. Puede fabricarse en \"Mesa de creación de armas\"."
+  },
+  "NinjaFlagSet": {
+    "localized_name": "Set de bandera del Clan Flor Lunar",
+    "description": "Set con Bandera del Clan Flor Lunar y Estandarte del Clan Flor Lunar. Prueba de haber superado al Clan Flor Lunar."
+  },
+  "OctaviaSet01": {
+    "localized_name": "Set de Colaboración ULTRAKILL 1",
+    "description": "[Colaboración con ULTRAKILL] Set de Armadura V1y Revólver Marksman."
+  },
+  "OctaviaSet02": {
+    "localized_name": "Set de Colaboración ULTRAKILL 2",
+    "description": "[Colaboración con ULTRAKILL] Set de Armadura V2y Escopeta de Expulsión de Núcleo."
+  },
+  "OilPump": {
+    "localized_name": "Extractor de crudo",
+    "description": null
+  },
+  "OilPump02": {
+    "localized_name": "Extractor de petróleo de alta presión",
+    "description": null
+  },
+  "OlympicCauldron": {
+    "localized_name": "Antorcha olímpica",
+    "description": null
+  },
+  "OperatingTable": {
+    "localized_name": "Mesa de operaciones Pal",
+    "description": null
+  },
+  "OverheatRifle": {
+    "localized_name": "Rifle de sobrecalentamiento",
+    "description": null
+  },
+  "OverheatRifleBullet": {
+    "localized_name": "Balas para rifle de sobrecalentamiento",
+    "description": null
+  },
+  "PALBOX": {
+    "localized_name": "Caja Pal",
+    "description": "Instalación para almacenar Pals capturados. Los Pals dentro del contenedor recuperan PV gradualmente. El área alrededor de esta instalación se convierte en tu base."
+  },
+  "PalBooth": {
+    "localized_name": "Mercado (Pal)",
+    "description": null
+  },
+  "PalDopingShot": {
+    "localized_name": "Pistola propulsora",
+    "description": null
+  },
+  "PalDopingShotBullet": {
+    "localized_name": "Balas de pistola propulsora",
+    "description": null
+  },
+  "PalDopingShot_2": {
+    "localized_name": "Pistola megapropulsora",
+    "description": null
+  },
+  "PalFoodBox": {
+    "localized_name": "Comedero",
+    "description": "Si colocas comida, los Pals de la base vendrán aquí a alimentarse."
+  },
+  "PalHealingGrenade": {
+    "localized_name": "Granada de curación Pal",
+    "description": null
+  },
+  "PalMedicineBox": {
+    "localized_name": "Estante para medicinas",
+    "description": null
+  },
+  "PalRevive": {
+    "localized_name": "Elixir de resurrección",
+    "description": null
+  },
+  "PalSphere_Ancient_1": {
+    "localized_name": "Esfera de Sol",
+    "description": "Objeto para atrapar Pals. Es una esfera de alto nivel que, en la civilización antigua, consolidó la convivencia con los Pals."
+  },
+  "PalSphere_Ancient_2": {
+    "localized_name": "Esfera antigua",
+    "description": "Objeto para atrapar Pals. Es la esfera definitiva, creada como el punto culminante de la civilización antigua al incorporar el poder del Árbol del Mundo."
+  },
+  "PalSphere_Exotic": {
+    "localized_name": "Infinitoesfera",
+    "description": null
+  },
+  "Plastic": {
+    "localized_name": "Plastiacero",
+    "description": null
+  },
+  "PoliceFlagSet": {
+    "localized_name": "Set de bandera de Los Vigilantes",
+    "description": "Set con Bandera de Los Vigilantes y Estandarte de Los Vigilantes. Prueba de haber superado a los Vigilantes."
+  },
+  "Polymer": {
+    "localized_name": "Polímero",
+    "description": null
+  },
+  "Potion_Extreme": {
+    "localized_name": "Poción curativa suprema",
+    "description": null
+  },
+  "Processed_Wood": {
+    "localized_name": "Tabla de madera",
+    "description": null
+  },
+  "Product_Axe_Grade_01": {
+    "localized_name": "Hacha de piedra",
+    "description": "Hacha para cortar madera. Al estar hecha de piedra, no corta muy bien."
+  },
+  "Product_Axe_Grade_02": {
+    "localized_name": "Hacha de metal",
+    "description": "Hacha metálica capaz de talar madera dura. También es eficaz contra los árboles resistentes del interior del continente. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
+  },
+  "Product_Axe_Grade_03": {
+    "localized_name": "Hacha de metal refinado",
+    "description": "Hacha capaz de recolectar Madera dura de árboles que crecen en zonas extremas como volcanes o desiertos. Puede fabricarse en \"Fábrica de producción en cadena\"."
+  },
+  "Product_CoalPit": {
+    "localized_name": "Mina de carbón",
+    "description": null
+  },
+  "Product_Cooking_Grade_01": {
+    "localized_name": "Fogata",
+    "description": "Te permitirá cocinar platillos sencillos y proporciona algo de calor y luz."
+  },
+  "Product_Cooking_Grade_02": {
+    "localized_name": "Olla",
+    "description": "Ampliará la variedad de recetas disponibles y te permitirá cocinar de manera más eficiente."
+  },
+  "Product_Cooking_Grade_03": {
+    "localized_name": "Cocina eléctrica",
+    "description": "Aunque requiere electricidad, permite cocinar de forma más avanzada y eficiente. Se requiere un Pal con la aptitud \"Encendido de fuego\"."
+  },
+  "Product_CopperPit": {
+    "localized_name": "Mina de metal",
+    "description": null
+  },
+  "Product_CopperPit_2": {
+    "localized_name": "Mina de metal II",
+    "description": null
+  },
+  "Product_Factory_Hard_Grade_01": {
+    "localized_name": "Mesa de trabajo de alta calidad",
+    "description": "Más rápido que \"Mesa de trabajo primitiva\". Para usarla necesitarás un Pal con la aptitud \"Trabajo manual\"."
+  },
+  "Product_Factory_Hard_Grade_02": {
+    "localized_name": "Fábrica de producción en cadena",
+    "description": "Requiere electricidad, pero permite fabricar más tipos de objetos más rápidamente. Para usarla necesitarás un Pal con la aptitud \"Trabajo manual\"."
+  },
+  "Product_Factory_Hard_Grade_03": {
+    "localized_name": "Fábrica de producción en cadena II",
+    "description": "Requiere electricidad, pero permite fabricar aún más objetos de forma más veloz. Para usarla necesitarás un Pal con la aptitud \"Trabajo manual\"."
+  },
+  "Product_Farm_Berries": {
+    "localized_name": "Plantación de bayas",
+    "description": "Una plantación de producción de bayas. Se requiere un Pal con las aptitudes \"Siembra\", \"Riego\" y \"Recolección\" para trabajar."
+  },
+  "Product_Farm_Carrot": {
+    "localized_name": "Plantación de zanahorias",
+    "description": null
+  },
+  "Product_Farm_Lettuce": {
+    "localized_name": "Plantación de lechuga",
+    "description": "Plantación para cultivar lechugas. Se requiere un Pal con las aptitudes \"Siembra\", \"Riego\" y \"Recolección\"."
+  },
+  "Product_Farm_Onion": {
+    "localized_name": "Plantación de cebollas",
+    "description": null
+  },
+  "Product_Farm_Potato": {
+    "localized_name": "Plantación de papas",
+    "description": null
+  },
+  "Product_Farm_tomato": {
+    "localized_name": "Plantación de tomates",
+    "description": "Plantación para cultivar tomates. Se requiere un Pal con las aptitudes \"Siembra\", \"Riego\" y \"Recolección\"."
+  },
+  "Product_Farm_wheat": {
+    "localized_name": "Plantación de trigo",
+    "description": "Una plantación de trigo, la materia prima de Pan. Se requiere un Pal con las aptitudes \"Siembra\", \"Riego\" y \"Recolección\"."
+  },
+  "Product_Ingot_Grade_01_Copper": {
+    "localized_name": "Horno primitivo",
+    "description": "Te permitirá fundir Mineral de metal y fabricar lingotes."
+  },
+  "Product_Ingot_Grade_02_Iron": {
+    "localized_name": "Horno mejorado",
+    "description": "Te permitirá fundir Lingote de metal refinado."
+  },
+  "Product_Ingot_Grade_03_Steal": {
+    "localized_name": "Horno eléctrico",
+    "description": "Permite fundir \"Lingote de Paluminium\"."
+  },
+  "Product_Medicine_Grade_01": {
+    "localized_name": "Puesto médico medieval",
+    "description": "Te permitirá fabricar medicinas simples. Para usarla necesitarás un Pal con la aptitud \"Farmacología\"."
+  },
+  "Product_Medicine_Grade_02": {
+    "localized_name": "Puesto médico eléctrico",
+    "description": "Requiere electricidad, pero podrás fabricar medicinas de nivel superior. Para usarla necesitarás un Pal con la aptitud \"Farmacología\"."
+  },
+  "Product_Pickaxe_Grade_01": {
+    "localized_name": "Pico de piedra",
+    "description": "Pico para minería. Al estar hecho de piedra, no es muy eficaz."
+  },
+  "Product_Pickaxe_Grade_02": {
+    "localized_name": "Pico de metal",
+    "description": "Pico para minería. Al estar hecho de metal, tiene una mayor durabilidad y es más eficiente. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
+  },
+  "Product_Pickaxe_Grade_03": {
+    "localized_name": "Pico de metal refinado",
+    "description": "Pico para minería. Es más duradero y eficiente. Puede fabricarse en \"Fábrica de producción en cadena\"."
+  },
+  "Product_QuartzPit": {
+    "localized_name": "Mina de cuarzo puro",
+    "description": null
+  },
+  "Product_StationDeforest": {
+    "localized_name": "Zona de tala",
+    "description": "Instalación para producir madera en la base. Se requiere un Pal con la aptitud \"Tala\"."
+  },
+  "Product_StationDeforest2": {
+    "localized_name": "Zona de tala II",
+    "description": null
+  },
+  "Product_StonePit": {
+    "localized_name": "Cantera",
+    "description": "Instalación para producir piedra en la base. Se requiere un Pal con la aptitud \"Minería\"."
+  },
+  "Product_SulfurPit": {
+    "localized_name": "Mina de azufre",
+    "description": null
+  },
+  "Product_WeaponFactory_Dirty_Grade_01": {
+    "localized_name": "Mesa de creación de armas",
+    "description": "Instalación para fabricar armas mecánicas simples. Se requiere un Pal con la aptitud \"Trabajo manual\"."
+  },
+  "Product_WeaponFactory_Dirty_Grade_02": {
+    "localized_name": "Fábrica de producción en cadena de armas",
+    "description": "Requiere electricidad, pero podrás fabricar armas y municiones más rápidamente. Para usarla necesitarás un Pal con la aptitud \"Trabajo manual\"."
+  },
+  "Product_WeaponFactory_Dirty_Grade_03": {
+    "localized_name": "Fábrica de producción en cadena de armas II",
+    "description": "Requiere electricidad, pero podrás fabricar armas y municiones aún más rápidamente. Se requiere un Pal con la aptitud \"Trabajo manual\"."
+  },
+  "Product_WorkBench_SkillUnlock": {
+    "localized_name": "Mesa de fabricación de Equipamiento Pal",
+    "description": "Mesa de trabajo para fabricar herramientas y usar las habilidades de compañero de los Pals."
+  },
+  "Refrigerator": {
+    "localized_name": "Refrigerador",
+    "description": null
+  },
+  "ReinforcedArrow": {
+    "localized_name": "Flecha mejorada",
+    "description": null
+  },
+  "RepairBench": {
+    "localized_name": "Mesa de reparación",
+    "description": "Permite reparar armas o herramientas dañadas."
+  },
+  "RifleBullet": {
+    "localized_name": "Balas de rifle",
+    "description": "Munición para usar con rifles y armas similares. Puede fabricarse en \"Mesa de creación de armas\"."
+  },
+  "RoughBullet": {
+    "localized_name": "Munición de baja calidad",
+    "description": "Munición para usar con \"Mosquete\", \"Pistola chatarra\" y otras armas similares. Necesitarás una \"Mesa de creación de armas\" para su fabricación."
+  },
+  "SFArmor": {
+    "localized_name": "Armadura de hexolita",
+    "description": null
+  },
+  "SFArmorCold": {
+    "localized_name": "Armadura de hexolita resistente al frío",
+    "description": null
+  },
+  "SFArmorHeat": {
+    "localized_name": "Armadura de hexolita resistente al calor",
+    "description": null
+  },
+  "SFArmorWeight": {
+    "localized_name": "Armadura de hexolita ligera",
+    "description": null
+  },
+  "SFArrow": {
+    "localized_name": "Flecha superior",
+    "description": null
+  },
+  "SFBow": {
+    "localized_name": "Arco superior",
+    "description": null
+  },
+  "SFHelmet": {
+    "localized_name": "Casco de hexolita",
+    "description": null
+  },
+  "SF_houseset": {
+    "localized_name": "Set de construcción futurista",
+    "description": "Set de construcción de estilo futurista. Incluye cimientos, muros, techos y escaleras para construir tu hogar."
+  },
+  "Salvage_TreasureBoxKey02": {
+    "localized_name": "Imán de pesca fuerte",
+    "description": null
+  },
+  "SanityDecrease1": {
+    "localized_name": "Generador de ondas α",
+    "description": null
+  },
+  "ScientistFlagSet": {
+    "localized_name": "Set de bandera del Escuadrón de Investigación Genética",
+    "description": "Set con Bandera del Escuadrón de Investigación Genética y Estandarte del Escuadrón de Investigación Genética. Prueba de haber superado al Escuadrón de Investigación Genética."
+  },
+  "Shield_01": {
+    "localized_name": "Escudo normal",
+    "description": "Un misterioso escudo creado con tecnología Paldium. Se repara automáticamente si no recibe ataques por un tiempo."
+  },
+  "Shield_02": {
+    "localized_name": "Megaescudo",
+    "description": "Un escudo misterioso mejorado con tecnología de Paldium. Tiene mayor defensa. Necesitarás una \"Mesa de trabajo de alta calidad\" para su elaboración."
+  },
+  "Shield_03": {
+    "localized_name": "Gigaescudo",
+    "description": "Un escudo misterioso aún más potente gracias a la tecnología Paldium. Necesitarás una \"Fábrica de producción en cadena\" para su elaboración."
+  },
+  "Shield_04": {
+    "localized_name": "Teraescudo",
+    "description": "Un escudo de la más alta calidad obtenido tras múltiples pruebas. Necesitarás una \"Fábrica de producción en cadena II\" para su elaboración."
+  },
+  "Shield_05": {
+    "localized_name": "Ultraescudo",
+    "description": "Un escudo definitivo creado tras incontables experimentos con tecnología Paldium. Necesitarás una \"Fábrica de producción en cadena II\" para su elaboración."
+  },
+  "Shield_07": {
+    "localized_name": "Escudo ancestral",
+    "description": null
+  },
+  "Shield_SF": {
+    "localized_name": "Escudo superior",
+    "description": null
+  },
+  "ShotGunBullet": {
+    "localized_name": "Balas de escopeta",
+    "description": "Munición para usar con escopetas y armas similares. Puede fabricarse en \"Mesa de creación de armas\"."
+  },
+  "Signboard": {
+    "localized_name": "Cartel",
+    "description": "Permite escribir texto."
+  },
+  "Silo": {
+    "localized_name": "Silo",
+    "description": null
+  },
+  "SkillUnlock_Alpaca": {
+    "localized_name": "Silla de montar de Melpaca",
+    "description": null
+  },
+  "SkillUnlock_AmaterasuWolf": {
+    "localized_name": "Silla de montar de Kitsun",
+    "description": null
+  },
+  "SkillUnlock_AmaterasuWolf_Dark": {
+    "localized_name": "Silla de montar de Kitsun Noct",
+    "description": null
+  },
+  "SkillUnlock_BadCatgirl": {
+    "localized_name": "Escopeta de Nyafia",
+    "description": null
+  },
+  "SkillUnlock_BirdDragon": {
+    "localized_name": "Silla de montar de Vanwyrm",
+    "description": null
+  },
+  "SkillUnlock_BirdDragon_Ice": {
+    "localized_name": "Silla de montar de Vanwyrm Cryst",
+    "description": null
+  },
+  "SkillUnlock_BlackCentaur": {
+    "localized_name": "Silla de montar de Necromus",
+    "description": null
+  },
+  "SkillUnlock_BlackGriffon": {
+    "localized_name": "Silla de montar de Shadowbeak",
+    "description": null
+  },
+  "SkillUnlock_BlackMetalDragon": {
+    "localized_name": "Silla de montar de Astegon",
+    "description": null
+  },
+  "SkillUnlock_BlackPuppy": {
+    "localized_name": "Arnés de Smokie",
+    "description": null
+  },
+  "SkillUnlock_BlueDragon": {
+    "localized_name": "Silla de montar de Azurobe",
+    "description": null
+  },
+  "SkillUnlock_BlueDragon_Ice": {
+    "localized_name": "Silla de montar de Azurobe Cryst",
+    "description": null
+  },
+  "SkillUnlock_BlueSkyDragon": {
+    "localized_name": "Silla de montar de Shaolong",
+    "description": null
+  },
+  "SkillUnlock_BlueThunderHorse": {
+    "localized_name": "Silla de montar de Azurmane",
+    "description": null
+  },
+  "SkillUnlock_Boar": {
+    "localized_name": "Silla de montar de Rushoar",
+    "description": null
+  },
+  "SkillUnlock_Carbunclo": {
+    "localized_name": "Subfusil de Lifmunk",
+    "description": null
+  },
+  "SkillUnlock_ColorfulBird": {
+    "localized_name": "Guantes de Tocotoco",
+    "description": null
+  },
+  "SkillUnlock_CubeTurtle": {
+    "localized_name": "Silla de montar de Tetroise",
+    "description": null
+  },
+  "SkillUnlock_CubeTurtle_Neutral": {
+    "localized_name": "Silla de montar de Tetroise Primo",
+    "description": null
+  },
+  "SkillUnlock_DarkMechaDragon": {
+    "localized_name": "Silla de montar de Xenolord",
+    "description": null
+  },
+  "SkillUnlock_Deer": {
+    "localized_name": "Silla de montar de Eikthyrdeer",
+    "description": null
+  },
+  "SkillUnlock_Deer_Ground": {
+    "localized_name": "Silla de montar de Eikthyrdeer Terra",
+    "description": null
+  },
+  "SkillUnlock_DomeArmorDragon": {
+    "localized_name": "Silla de montar de Aegidron",
+    "description": null
+  },
+  "SkillUnlock_ElecPanda": {
+    "localized_name": "Ametralladora de Grizzbolt",
+    "description": null
+  },
+  "SkillUnlock_FairyDragon": {
+    "localized_name": "Silla de montar de Elphidran",
+    "description": null
+  },
+  "SkillUnlock_FairyDragon_Water": {
+    "localized_name": "Silla de montar de Elphidran Aqua",
+    "description": null
+  },
+  "SkillUnlock_FeatherOstrich": {
+    "localized_name": "Silla de montar de Dazemu",
+    "description": null
+  },
+  "SkillUnlock_FengyunDeeper": {
+    "localized_name": "Silla de montar de Fenglope",
+    "description": null
+  },
+  "SkillUnlock_FengyunDeeper_Electric": {
+    "localized_name": "Silla de montar de Fenglope Lux",
+    "description": null
+  },
+  "SkillUnlock_FireKirin": {
+    "localized_name": "Silla de montar de Pyrin",
+    "description": null
+  },
+  "SkillUnlock_FireKirin_Dark": {
+    "localized_name": "Silla de montar de Pyrin Noct",
+    "description": null
+  },
+  "SkillUnlock_FlameBuffalo": {
+    "localized_name": "Silla de montar de Arsox",
+    "description": null
+  },
+  "SkillUnlock_FlowerDinosaur": {
+    "localized_name": "Silla de montar de Dinossom",
+    "description": null
+  },
+  "SkillUnlock_FlowerDinosaur_Electric": {
+    "localized_name": "Silla de montar de Dinossom Lux",
+    "description": null
+  },
+  "SkillUnlock_Garm": {
+    "localized_name": "Arnés con silla de montar de Direhowl",
+    "description": null
+  },
+  "SkillUnlock_GhostAnglerfish": {
+    "localized_name": "Silla de montar de Ghangler",
+    "description": null
+  },
+  "SkillUnlock_GhostAnglerfish_Fire": {
+    "localized_name": "Silla de montar de Ghangler Ignis",
+    "description": null
+  },
+  "SkillUnlock_GhostBeast": {
+    "localized_name": "Silla de montar de Maraith",
+    "description": null
+  },
+  "SkillUnlock_GhostDragon": {
+    "localized_name": "Silla de montar de Eidrolon",
+    "description": null
+  },
+  "SkillUnlock_GhostDragon_Fire": {
+    "localized_name": "Silla de montar de Eidrolon Ignis",
+    "description": null
+  },
+  "SkillUnlock_GoldenHorse": {
+    "localized_name": "Silla de montar de Gildane",
+    "description": null
+  },
+  "SkillUnlock_GrassGolem": {
+    "localized_name": "Silla de montar de Dualith",
+    "description": null
+  },
+  "SkillUnlock_GrassGolem_Dark": {
+    "localized_name": "Silla de montar de Dualith Noct",
+    "description": null
+  },
+  "SkillUnlock_GrassMammoth": {
+    "localized_name": "Silla de montar de Mammorest",
+    "description": null
+  },
+  "SkillUnlock_GrassMammoth_Ice": {
+    "localized_name": "Silla de montar de Mammorest Cryst",
+    "description": null
+  },
+  "SkillUnlock_GrassPanda": {
+    "localized_name": "Lanzagranadas de Mossanda",
+    "description": null
+  },
+  "SkillUnlock_GrassPanda_Electric": {
+    "localized_name": "Lanzagranadas de Mossanda Lux",
+    "description": null
+  },
+  "SkillUnlock_GuardianDog": {
+    "localized_name": "Silla de montar de Yakumo",
+    "description": null
+  },
+  "SkillUnlock_HadesBird": {
+    "localized_name": "Silla de montar de Helzephyr",
+    "description": null
+  },
+  "SkillUnlock_HadesBird_Electric": {
+    "localized_name": "Silla de montar de Helzephyr Lux",
+    "description": null
+  },
+  "SkillUnlock_HawkBird": {
+    "localized_name": "Silla de montar de Nitewing",
+    "description": null
+  },
+  "SkillUnlock_Horus": {
+    "localized_name": "Silla de montar de Faleris",
+    "description": null
+  },
+  "SkillUnlock_Horus_Water": {
+    "localized_name": "Silla de montar de Faleris Aqua",
+    "description": null
+  },
+  "SkillUnlock_IceDeer": {
+    "localized_name": "Silla de montar de Reindrix",
+    "description": null
+  },
+  "SkillUnlock_IceHorse": {
+    "localized_name": "Silla de montar de Frostallion",
+    "description": null
+  },
+  "SkillUnlock_IceHorse_Dark": {
+    "localized_name": "Silla de montar de Frostallion Noct",
+    "description": null
+  },
+  "SkillUnlock_IceNarwhal": {
+    "localized_name": "Silla de montar de Whalaska",
+    "description": null
+  },
+  "SkillUnlock_IceNarwhal_Fire": {
+    "localized_name": "Silla de montar de Whalaska Ignis",
+    "description": null
+  },
+  "SkillUnlock_IceSeal": {
+    "localized_name": "Silla de montar de Polapup",
+    "description": null
+  },
+  "SkillUnlock_IceSeal_Ground": {
+    "localized_name": "Silla de montar de Polapup Terra",
+    "description": null
+  },
+  "SkillUnlock_JetDragon": {
+    "localized_name": "Lanzamisiles de Jetragon",
+    "description": null
+  },
+  "SkillUnlock_KingAlpaca": {
+    "localized_name": "Silla de montar de Kingpaca",
+    "description": null
+  },
+  "SkillUnlock_KingAlpaca_Ice": {
+    "localized_name": "Silla de montar de Kingpaca Cryst",
+    "description": null
+  },
+  "SkillUnlock_KingBahamut": {
+    "localized_name": "Silla de montar de Blazamut",
+    "description": null
+  },
+  "SkillUnlock_KingBahamut_Dragon": {
+    "localized_name": "Silla de montar de Blazamut Ryu",
+    "description": null
+  },
+  "SkillUnlock_KingSunfish": {
+    "localized_name": "Silla de montar de Solmora",
+    "description": null
+  },
+  "SkillUnlock_KingSunfish_Thunder": {
+    "localized_name": "Silla de montar de Solmora Lux",
+    "description": null
+  },
+  "SkillUnlock_Kirin": {
+    "localized_name": "Silla de montar de Univolt",
+    "description": null
+  },
+  "SkillUnlock_Kirin_Ice": {
+    "localized_name": "Silla de montar de Univolt Cryst",
+    "description": null
+  },
+  "SkillUnlock_Kitsunebi": {
+    "localized_name": "Arnés de Foxparks",
+    "description": null
+  },
+  "SkillUnlock_Kitsunebi_Ice": {
+    "localized_name": "Arnés de Foxparks Cryst",
+    "description": null
+  },
+  "SkillUnlock_LazyDragon": {
+    "localized_name": "Lanzamisiles de Relaxaurus",
+    "description": null
+  },
+  "SkillUnlock_LazyDragon_Electric": {
+    "localized_name": "Lanzamisiles de Relaxaurus Lux",
+    "description": null
+  },
+  "SkillUnlock_LegendDeer": {
+    "localized_name": "Silla de montar de Hartalis",
+    "description": null
+  },
+  "SkillUnlock_LotusDragon": {
+    "localized_name": "Silla de montar de Ophydia",
+    "description": null
+  },
+  "SkillUnlock_Manticore": {
+    "localized_name": "Silla de montar de Blazehowl",
+    "description": null
+  },
+  "SkillUnlock_Manticore_Dark": {
+    "localized_name": "Silla de montar de Blazehowl Noct",
+    "description": null
+  },
+  "SkillUnlock_Monkey": {
+    "localized_name": "Rifle de asalto de Tanzee",
+    "description": null
+  },
+  "SkillUnlock_Monkey_Fire": {
+    "localized_name": "Rifle de asalto de Tanzee Ignis",
+    "description": null
+  },
+  "SkillUnlock_MoonQueen": {
+    "localized_name": "Silla de montar de Selyne",
+    "description": null
+  },
+  "SkillUnlock_MopKing": {
+    "localized_name": "Silla de montar de Sweepa",
+    "description": null
+  },
+  "SkillUnlock_MushroomDragon": {
+    "localized_name": "Silla de montar de Shroomer",
+    "description": null
+  },
+  "SkillUnlock_MushroomDragon_Dark": {
+    "localized_name": "Silla de montar de Shroomer Noct",
+    "description": null
+  },
+  "SkillUnlock_NaughtyCat": {
+    "localized_name": "Silla de montar de Grintale",
+    "description": null
+  },
+  "SkillUnlock_NightBlueHorse": {
+    "localized_name": "Silla de montar de Starryon",
+    "description": null
+  },
+  "SkillUnlock_NightBlueHorse_Neutral": {
+    "localized_name": "Silla de montar de Starryon Primo",
+    "description": null
+  },
+  "SkillUnlock_Penguin": {
+    "localized_name": "Lanzacohetes de Pengullet",
+    "description": null
+  },
+  "SkillUnlock_Penguin_Electric": {
+    "localized_name": "Lanzacohetes de Pengullet Lux",
+    "description": null
+  },
+  "SkillUnlock_Plesiosaur": {
+    "localized_name": "Silla de montar de Braloha",
+    "description": null
+  },
+  "SkillUnlock_PoseidonOrca": {
+    "localized_name": "Silla de montar de Neptilius",
+    "description": null
+  },
+  "SkillUnlock_PurpleSpider": {
+    "localized_name": "Silla de montar de Tarantriss",
+    "description": null
+  },
+  "SkillUnlock_RedArmorBird": {
+    "localized_name": "Silla de montar de Ragnahawk",
+    "description": null
+  },
+  "SkillUnlock_SaintCentaur": {
+    "localized_name": "Silla de montar de Paladius",
+    "description": null
+  },
+  "SkillUnlock_SakuraSaurus": {
+    "localized_name": "Silla de montar de Broncherry",
+    "description": null
+  },
+  "SkillUnlock_SakuraSaurus_Water": {
+    "localized_name": "Silla de montar de Broncherry Aqua",
+    "description": null
+  },
+  "SkillUnlock_Serpent": {
+    "localized_name": "Silla de montar de Surfent",
+    "description": null
+  },
+  "SkillUnlock_Serpent_Ground": {
+    "localized_name": "Silla de montar de Surfent Terra",
+    "description": null
+  },
+  "SkillUnlock_SkyDragon": {
+    "localized_name": "Silla de montar de Quivern",
+    "description": null
+  },
+  "SkillUnlock_SkyDragon_Grass": {
+    "localized_name": "Silla de montar de Quivern Botan",
+    "description": null
+  },
+  "SkillUnlock_SnowTigerBeastman": {
+    "localized_name": "Martillo de Bastigor",
+    "description": null
+  },
+  "SkillUnlock_SumoDog": {
+    "localized_name": "Silla de montar de Bulldosu",
+    "description": null
+  },
+  "SkillUnlock_Suzaku": {
+    "localized_name": "Silla de montar de Suzaku",
+    "description": null
+  },
+  "SkillUnlock_Suzaku_Water": {
+    "localized_name": "Silla de montar de Suzaku Aqua",
+    "description": null
+  },
+  "SkillUnlock_ThiefBird": {
+    "localized_name": "Silla de montar de Roujay",
+    "description": null
+  },
+  "SkillUnlock_ThunderBird": {
+    "localized_name": "Silla de montar de Beakon",
+    "description": null
+  },
+  "SkillUnlock_ThunderBird_Ice": {
+    "localized_name": "Silla de montar de Beakon Cryst",
+    "description": null
+  },
+  "SkillUnlock_ThunderDog": {
+    "localized_name": "Silla de montar de Rayhound",
+    "description": null
+  },
+  "SkillUnlock_ThunderFluffyBird": {
+    "localized_name": "Silla de montar de Dynamoff",
+    "description": null
+  },
+  "SkillUnlock_Thunderdog_Ice": {
+    "localized_name": "Silla de montar de Rayhound Cryst",
+    "description": null
+  },
+  "SkillUnlock_TropicalOstrich": {
+    "localized_name": "Silla de montar de Palumba",
+    "description": null
+  },
+  "SkillUnlock_Umihebi": {
+    "localized_name": "Silla de montar de Jormuntide",
+    "description": null
+  },
+  "SkillUnlock_Umihebi_Fire": {
+    "localized_name": "Silla de montar de Jormuntide Ignis",
+    "description": null
+  },
+  "SkillUnlock_VolcanicMonster": {
+    "localized_name": "Silla de montar de Reptyro",
+    "description": null
+  },
+  "SkillUnlock_VolcanicMonster_Ice": {
+    "localized_name": "Silla de montar de Reptyro Cryst",
+    "description": null
+  },
+  "SkillUnlock_VolcanoDragon": {
+    "localized_name": "Silla de montar de Moldron",
+    "description": null
+  },
+  "SkillUnlock_VolcanoDragon_Ice": {
+    "localized_name": "Silla de montar de Moldron Cryst",
+    "description": null
+  },
+  "SkillUnlock_WeaselDragon": {
+    "localized_name": "Silla de montar de Chillet",
+    "description": null
+  },
+  "SkillUnlock_WeaselDragon_Fire": {
+    "localized_name": "Silla de montar de Chillet Ignis",
+    "description": null
+  },
+  "SkillUnlock_WhiteAlienDragon": {
+    "localized_name": "Silla de montar de Xenogard",
+    "description": null
+  },
+  "SkillUnlock_WhiteDeer": {
+    "localized_name": "Silla de montar de Celesdir",
+    "description": null
+  },
+  "SkillUnlock_WhiteDeer_Dark": {
+    "localized_name": "Silla de montar de Celesdir Noct",
+    "description": null
+  },
+  "SkillUnlock_WhiteShieldDragon": {
+    "localized_name": "Silla de montar de Silvegis",
+    "description": null
+  },
+  "SkillUnlock_Yeti": {
+    "localized_name": "Silla de montar de Wumpo",
+    "description": null
+  },
+  "SkillUnlock_Yeti_Grass": {
+    "localized_name": "Silla de montar de Wumpo Botan",
+    "description": null
+  },
+  "SkinChange": {
+    "localized_name": "Dispositivo de cambio de look Pal",
+    "description": null
+  },
+  "SkyAssaultRifle": {
+    "localized_name": "Rifle de asalto pesado",
+    "description": "Rifle de asalto fabricado con lingotes de soralite. Mantiene su versatilidad, pero fue mejorado para utilizar munición de mayor potencia."
+  },
+  "SkyAssaultRifleBullet": {
+    "localized_name": "Munición de rifle de asalto pesado",
+    "description": null
+  },
+  "SkyBeamSword": {
+    "localized_name": "Espada láser",
+    "description": "Espada de haz fabricado con lingotes de soralite. Arma de corta distancia que corta al objetivo al instante gracias a su hoja de energía de alta potencia."
+  },
+  "SkyBow": {
+    "localized_name": "Arco mecánico",
+    "description": "Arco fabricado con lingotes de soralite. Su velocidad inicial y poder de penetración aumentaron considerablemente, permitiendo disparos de largo alcance con gran precisión."
+  },
+  "SkyBowArrow": {
+    "localized_name": "Flechas de arco mecánico",
+    "description": null
+  },
+  "SkyGrenadeLauncher": {
+    "localized_name": "Lanzagranadas táctico",
+    "description": "Lanzagranadas fabricado con lingotes de soralite. La estabilidad de su trayectoria ha mejorado, permitiendo bombardeos precisos a larga distancia."
+  },
+  "SkyGrenadeLauncherBullet": {
+    "localized_name": "Munición de lanzagranadas táctico",
+    "description": null
+  },
+  "SkyIslandFlagSet": {
+    "localized_name": "Set de banderas del pacto celestial",
+    "description": "Set de Bandera del Pacto celestial y Estandarte vertical del Pacto celestial. Prueba de haber superado al pacto celestial."
+  },
+  "SkyIslandOrePit": {
+    "localized_name": "Cantera de soralite",
+    "description": null
+  },
+  "SkyShotgun": {
+    "localized_name": "Escopeta prototipo",
+    "description": "Escopeta fabricada con lingotes de soralite. Desata un poder de fuego abrumador a corta distancia, y su cargador especial también le otorga gran capacidad de combate sostenido."
+  },
+  "SkyShotgunBullet": {
+    "localized_name": "Munición de escopeta prototipo",
+    "description": null
+  },
+  "SkySubmachineGun": {
+    "localized_name": "Subfusil de combate",
+    "description": "Subfusil fabricado con lingotes de soralite. Su cargador y munición mejorados aumentan su capacidad de supresión."
+  },
+  "SkySubmachineGunBullet": {
+    "localized_name": "Munición de subfusil de combate",
+    "description": null
+  },
+  "SkyislandIngot": {
+    "localized_name": "Lingote de Soralite",
+    "description": null
+  },
+  "Snowman": {
+    "localized_name": "Muñeco de nieve",
+    "description": null
+  },
+  "Spa": {
+    "localized_name": "Baño termal",
+    "description": "El Pal entra en un \"Baño termal\" y recupera COR."
+  },
+  "Spa2": {
+    "localized_name": "Baño termal de lujo",
+    "description": "El Pal que entra aquí recupera aún más COR."
+  },
+  "Spa3": {
+    "localized_name": "Baño termal estilo japonés",
+    "description": null
+  },
+  "Spear": {
+    "localized_name": "Lanza de piedra",
+    "description": null
+  },
+  "Spear_2": {
+    "localized_name": "Lanza de metal",
+    "description": "Lanza útil para el combate cuerpo a cuerpo. Hecha de metal, mejora el poder de ataque. Puede fabricarse en \"Mesa de trabajo de alta calidad\"."
+  },
+  "Spear_3": {
+    "localized_name": "Lanza de metal refinado",
+    "description": "Lanza útil para el combate cuerpo a cuerpo. Hecha de metal refinado, mejora el poder de ataque. Puede fabricarse en \"Fábrica de producción en cadena\"."
+  },
+  "Spear_ForestBoss": {
+    "localized_name": "Lanza de Lily",
+    "description": null
+  },
+  "Spear_ForestBoss2": {
+    "localized_name": "Lanza mejorada de Lily",
+    "description": "Una versión mejorada de la lanza favorita de Lily. Les abrirá un agujero a quienes traten mal a los Pals."
+  },
+  "Special_ElectricHatchingPalEgg": {
+    "localized_name": "Incubadora eléctrica",
+    "description": null
+  },
+  "Special_HatchingPalEgg": {
+    "localized_name": "Incubadora",
+    "description": "Si colocas un huevo de Pal, podrás incubarlo."
+  },
+  "Special_PalRankUp": {
+    "localized_name": "Cápsula de concentrado Pal",
+    "description": "Te permitirá fusionar varios Pals del mismo tipo en uno de mayor rango."
+  },
+  "Special_PalSphere_Grade_01": {
+    "localized_name": "Palesfera",
+    "description": "Herramienta arrojadiza para capturar Pals. Es un modelo de producción masiva y solo sirve con Pals de bajo nivel."
+  },
+  "Special_PalSphere_Grade_02": {
+    "localized_name": "Megaesfera",
+    "description": "Objeto para atrapar Pals. Son de buena calidad y permiten atrapar una mayor variedad de Pals. Puede fabricarse en \"Mesa de elaboración de esferas\"."
+  },
+  "Special_PalSphere_Grade_03": {
+    "localized_name": "Gigaesfera",
+    "description": "Objeto para atrapar Pals. Permite capturar Pals relativamente fuertes. Puede fabricarse en \"Mesa de elaboración de esferas\"."
+  },
+  "Special_PalSphere_Grade_04": {
+    "localized_name": "Teraesfera",
+    "description": "Objeto para atrapar Pals. Permite capturar Pals bastante fuertes. Puede fabricarse en \"Fábrica de producción en cadena de esferas\"."
+  },
+  "Special_PalSphere_Grade_05": {
+    "localized_name": "Ultraesfera",
+    "description": "Objeto para atrapar Pals. Es bastante efectiva y no hay muchos Pals que logran escapar de ella. Puede fabricarse en \"Fábrica de producción en cadena de esferas II\"."
+  },
+  "Special_PalSphere_Grade_06": {
+    "localized_name": "Mitoesfera",
+    "description": "Objeto para atrapar Pals. Es muy efectiva y apenas hay Pals que logran escapar de ella. Puede fabricarse en \"Fábrica de producción en cadena de esferas II\"."
+  },
+  "Special_PalSphere_Grade_07": {
+    "localized_name": "Esfera definitiva",
+    "description": "Herramienta que permite capturar Pals al lanzarla. Extremadamente eficaz, puede capturar casi todos los Pals. Puede fabricarse en \"Fábrica de producción en cadena de esferas II\"."
+  },
+  "Special_SphereFactory_Black_Grade_01": {
+    "localized_name": "Mesa de elaboración de esferas",
+    "description": "Mesa de trabajo para fabricar esferas de captura de Pals. Se requiere un Pal con la aptitud \"Trabajo manual\" para poder usarse."
+  },
+  "Special_SphereFactory_Black_Grade_02": {
+    "localized_name": "Fábrica de producción en cadena de esferas",
+    "description": "Permite producir \"Palesfera\" más rápidamente. Se requiere un Pal con la aptitud \"Trabajo manual\"."
+  },
+  "Special_SphereFactory_Black_Grade_03": {
+    "localized_name": "Fábrica de producción en cadena de esferas II",
+    "description": "Permite producir \"Palesfera\" aún más rápido. Se requiere un Pal con la aptitud \"Trabajo manual\"."
+  },
+  "SphereFactory_Black_04": {
+    "localized_name": "Fábrica de esferas de alta tecnología",
+    "description": null
+  },
+  "SphereModule_Curve": {
+    "localized_name": "Módulo curvo",
+    "description": null
+  },
+  "SphereModule_Curve2": {
+    "localized_name": "Módulo deslizante",
+    "description": null
+  },
+  "SphereModule_Heavy": {
+    "localized_name": "Módulo de peso pesado",
+    "description": null
+  },
+  "SphereModule_Homing": {
+    "localized_name": "Módulo teledirigido",
+    "description": null
+  },
+  "SphereModule_Sniper": {
+    "localized_name": "Módulo de francotirador",
+    "description": null
+  },
+  "SphereModule_Sniper2": {
+    "localized_name": "Módulo de francotirador II",
+    "description": null
+  },
+  "StainlessSteel": {
+    "localized_name": "Hexolita",
+    "description": null
+  },
+  "Stone_Gate": {
+    "localized_name": "Portón de piedra",
+    "description": "Una puerta de piedra por la que pueden pasar Pals grandes."
+  },
+  "Stone_houseset": {
+    "localized_name": "Set de construcción de piedra",
+    "description": "Conjunto de construcción en piedra para crear una base. Incluye base, muros, techos, escaleras y otros elementos necesarios para construir una casa."
+  },
+  "Stump": {
+    "localized_name": "Tocón con hacha",
+    "description": null
+  },
+  "Supplement": {
+    "localized_name": "Suplemento nutricional",
+    "description": null
+  },
+  "TableCircular": {
+    "localized_name": "Set de mesa ordenada",
+    "description": "Set decorativo de mesa ordenada. Crea una base limpia y ordenada."
+  },
+  "TableDresser01_Stone": {
+    "localized_name": "Tocador antiguo",
+    "description": null
+  },
+  "Thermal_Core": {
+    "localized_name": "Núcleo de ultra alta temperatura",
+    "description": null
+  },
+  "ToolBoxV1": {
+    "localized_name": "Caja de herramientas grande",
+    "description": null
+  },
+  "Torch": {
+    "localized_name": "Antorcha fija",
+    "description": "Ilumina el área alrededor cuando se instala en la base."
+  },
+  "TransmissionTower": {
+    "localized_name": "Torre eléctrica",
+    "description": null
+  },
+  "Trap_LegHold": {
+    "localized_name": "Trampa para bestias (pequeña)",
+    "description": "Detiene al objetivo que la pisa. Solo es efectiva contra Pals pequeños o humanos."
+  },
+  "Trap_LegHold_Big": {
+    "localized_name": "Trampa para bestias (grande)",
+    "description": "Detiene al objetivo que la pisa. Solo es efectiva contra Pals grandes."
+  },
+  "Trap_MineAttack": {
+    "localized_name": "Mina terrestre",
+    "description": "Explota automáticamente cuando el enemigo la pisa."
+  },
+  "Trap_MineElecShock": {
+    "localized_name": "Mina eléctrica",
+    "description": "Electrocuta a quien la pisa. Los Pals electrocutados son más fáciles de capturar."
+  },
+  "Trap_MineFreeze": {
+    "localized_name": "Mina de hielo",
+    "description": "Congela a quien la pisa. Los Pals congelados son más fáciles de capturar."
+  },
+  "Trap_Noose": {
+    "localized_name": "Trampa colgante",
+    "description": "Una trampa que atrapa a los Pals pequeños o humanos que pasen por ella."
+  },
+  "UnlockEquipmentSlot_Weapon_01": {
+    "localized_name": "Soporte adicional de armas",
+    "description": null
+  },
+  "UnlockEquipmentSlot_Weapon_02": {
+    "localized_name": "Soporte adicional de armas 2",
+    "description": null
+  },
+  "Unlock_Picking_Tier1": {
+    "localized_name": "Herramienta de recolecta sencilla",
+    "description": null
+  },
+  "Unlock_Picking_Tier2": {
+    "localized_name": "Herramienta de recolecta superior",
+    "description": null
+  },
+  "Unlock_Picking_Tier3": {
+    "localized_name": "Herramienta de recolecta profesional",
+    "description": null
+  },
+  "WallSignboard": {
+    "localized_name": "Cartel de pared",
+    "description": null
+  },
+  "WallTorch": {
+    "localized_name": "Antorcha de pared",
+    "description": "Puede colocarse en una pared."
+  },
+  "WaterBuildKit": {
+    "localized_name": "Kit de construcción acuática",
+    "description": "Herramienta para construir sobre el agua. Permite colocar una base directamente en la superficie."
+  },
+  "WeaponFactory_Dirty_04": {
+    "localized_name": "Fábrica de armas de alta tecnología",
+    "description": null
+  },
+  "WidePenetrateShotgun": {
+    "localized_name": "Dispersor de rayos",
+    "description": "Arma de haz especializada en combate a corta distancia. Dispara energía comprimida en forma de haz disperso."
+  },
+  "WidePenetrateShotgunBullet": {
+    "localized_name": "Munición de dispersor de rayos",
+    "description": null
+  },
+  "WingGlider": {
+    "localized_name": "Mochila alada",
+    "description": "Dispositivo alado que se equipa en la espalda para volar. Consume Celda alada para generar impulso."
+  },
+  "WingGlider_Fuel": {
+    "localized_name": "Celda alada",
+    "description": "Energía utilizada para volar con Mochila alada."
+  },
+  "Wood_Gate": {
+    "localized_name": "Portón de madera",
+    "description": "Una puerta de madera por la que pueden pasar Pals grandes."
+  },
+  "Wooden_houseset": {
+    "localized_name": "Set de construcción de madera",
+    "description": "Conjunto de construcción en madera para crear una base. Incluye base, muros, techos, escaleras y otros elementos necesarios para construir una casa."
+  },
+  "Wooden_ladder": {
+    "localized_name": "Escalera",
+    "description": null
+  },
+  "WorkSpeedIncrease1": {
+    "localized_name": "Generador de ondas β",
+    "description": null
+  },
+  "Workbench": {
+    "localized_name": "Mesa de trabajo primitiva",
+    "description": "\"Mesa de trabajo primitiva\" para fabricar objetos simples. Si tienes un Pal con la aptitud \"Trabajo manual\", te ayudará con el trabajo."
+  },
+  "WorldTreeIngot": {
+    "localized_name": "Lingote de palxite",
+    "description": "La aleación suprema creada al fusionar Soralite y Palxite. Es un material extremadamente raro en el que cristalizan la tecnología de la civilización antigua y el poder del Árbol del Mundo. Es indispensable para dar forma al mejor equipo y a las mejores construcciones."
+  },
+  "YakushimaBlade": {
+    "localized_name": "Filomiau",
+    "description": null
+  }
+}

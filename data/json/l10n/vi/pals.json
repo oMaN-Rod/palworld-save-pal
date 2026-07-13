@@ -417,7 +417,7 @@
   },
   "BrownRabbit": {
     "localized_name": "Lapiron",
-    "description": "Pal lắng nghe tiếng vọng của đại ngàn để tránh những nơi địa hình hiểm trở. Thế nhưng, cứ gặp phải nơi |không hợp vía| là nó lại bị đánh lừa, vấp ngã liên miên tại chỗ đó."
+    "description": "Pal lắng nghe tiếng vọng của đại ngàn để tránh những nơi địa hình hiểm trở. Thế nhưng, cứ gặp phải nơi \"không hợp vía\" là nó lại bị đánh lừa, vấp ngã liên miên tại chỗ đó."
   },
   "CactusDoll": {
     "localized_name": "Needoll",
@@ -477,7 +477,7 @@
   },
   "ChickenPal": {
     "localized_name": "Chikipi",
-    "description": "Thật yếu ớt, mà lại ngon khó cưỡng. So với SheepBall, đây là một trong những Pal yếu nhất. Săn bao nhiêu cũng không hết, chúng cứ mọc ra từ đâu ấy."
+    "description": "Thật yếu ớt, mà lại ngon khó cưỡng. So với Lamball, đây là một trong những Pal yếu nhất. Săn bao nhiêu cũng không hết, chúng cứ mọc ra từ đâu ấy."
   },
   "ClioneTwins": {
     "localized_name": "Amione",
@@ -577,7 +577,7 @@
   },
   "DrillGame": {
     "localized_name": "Digtoise",
-    "description": "Có một câu chuyện mang tên |Mũi Khoan Của Digtoise|. Đây là câu chuyện ngụ ngôn kể về Digtoise, sinh vật sở hữu chiếc mai kiên cố và một mũi khoan lợi hại, cứ mãi trăn trở về một nghịch lý của cuộc đời."
+    "description": "Có một câu chuyện mang tên \"Mũi Khoan Của Digtoise\". Đây là câu chuyện ngụ ngôn kể về Digtoise, sinh vật sở hữu chiếc mai kiên cố và một mũi khoan lợi hại, cứ mãi trăn trở về một nghịch lý của cuộc đời."
   },
   "Eagle": {
     "localized_name": "Galeclaw",
@@ -589,7 +589,7 @@
   },
   "ElecLion": {
     "localized_name": "Boltmane",
-    "description": "-"
+    "description": "The more it moves, the more it heats up and the hair tips increasingly glow brighter. At its peak, it becomes so dazzling that you risk blindness if you stare at it directly."
   },
   "ElecLizard": {
     "localized_name": "Slowatt",
@@ -925,11 +925,11 @@
   },
   "FlowerDinosaur": {
     "localized_name": "Dinossom",
-    "description": "Khi cơn giận bùng phát, không ai có thể cản được, Pal sẽ hung hãn như ngọn lửa dữ. Câu nói |Giẫm phải đuôi Dinossom| dùng để chỉ việc làm ai đó cực kỳ tức giận."
+    "description": "Khi cơn giận bùng phát, không ai có thể cản được, Pal sẽ hung hãn như ngọn lửa dữ. Câu nói \"Giẫm phải đuôi Dinossom\" dùng để chỉ việc làm ai đó cực kỳ tức giận."
   },
   "FlowerDinosaur_Electric": {
     "localized_name": "Dinossom Lux",
-    "description": "Dù bị sét đánh nhưng Pal vẫn giữ được mạng sống. Câu nói |Sét đánh Dinossom Lux| dùng để chỉ việc thoát chết trong gang tấc."
+    "description": "Dù bị sét đánh nhưng Pal vẫn giữ được mạng sống. Câu nói \"Sét đánh Dinossom Lux\" dùng để chỉ việc thoát chết trong gang tấc."
   },
   "FlowerDoll": {
     "localized_name": "Petallia",
@@ -1065,7 +1065,7 @@
   },
   "GhostAnglerfish": {
     "localized_name": "Ghangler",
-    "description": "Dùng mồi giả phát sáng rực rỡ để chiếu rọi những nơi tối tăm. Những Pal lạc đường bị thu hút bởi ánh sáng này sẽ chẳng còn lối thoát nếu bị GhostAnglerFish phát hiện. Nó sẽ dẫn lối cho đến khi những Pal này về nhà an toàn."
+    "description": "Dùng mồi giả phát sáng rực rỡ để chiếu rọi những nơi tối tăm. Những Pal lạc đường bị thu hút bởi ánh sáng này sẽ chẳng còn lối thoát nếu bị Ghangler phát hiện. Nó sẽ dẫn lối cho đến khi những Pal này về nhà an toàn."
   },
   "GhostAnglerfish_Fire": {
     "localized_name": "Ghangler Ignis",
@@ -1117,7 +1117,7 @@
   },
   "GrassGolem": {
     "localized_name": "Dualith",
-    "description": "Trong một cơ thể, tồn tại hai ý thức. Đôi khi, chúng sẽ cãi vã chỉ vì |bất đồng phương hướng|. Cho đến khi đôi bên chịu làm hòa, chẳng ai có thể đoán được bộ giáp đó sẽ đi về hướng nào!"
+    "description": "Trong một cơ thể, tồn tại hai ý thức. Đôi khi, chúng sẽ cãi vã chỉ vì \"bất đồng phương hướng\". Cho đến khi đôi bên chịu làm hòa, chẳng ai có thể đoán được bộ giáp đó sẽ đi về hướng nào!"
   },
   "GrassGolem_Dark": {
     "localized_name": "Dualith Noct",
@@ -1485,7 +1485,7 @@
   },
   "IceSeal": {
     "localized_name": "Polapup",
-    "description": "Kẻ trượt nhanh nhất trên tuyết chính là thủ lĩnh. Đôi khi, có những con nhảy lên quá đà rồi đột nhiên rơi thẳng từ trên trời xuống Vào mùa tranh chức |boss|, cảnh tượng này càng thường xuyên hơn. Dự báo thời tiết: Nắng nhẹ, lác đác vài Polapup rơi xuống."
+    "description": "Kẻ trượt nhanh nhất trên tuyết chính là thủ lĩnh. Đôi khi, có những con nhảy lên quá đà rồi đột nhiên rơi thẳng từ trên trời xuống Vào mùa tranh chức \"boss\", cảnh tượng này càng thường xuyên hơn. Dự báo thời tiết: Nắng nhẹ, lác đác vài Polapup rơi xuống."
   },
   "IceSeal_Ground": {
     "localized_name": "Polapup Terra",
@@ -1505,7 +1505,7 @@
   },
   "JellyfishGhost": {
     "localized_name": "Jellroy",
-    "description": "Một Pal có ngoại hình rất giống với Jelliette. Thỉnh thoảng nó lại xuất hiện để |đóng thế| cho Jelliette khi người bạn này không thể có mặt. Nhập vai hoàn hảo đến mức không ai có thể nhận ra."
+    "description": "Một Pal có ngoại hình rất giống với Jelliette. Thỉnh thoảng nó lại xuất hiện để \"đóng thế\" cho Jelliette khi người bạn này không thể có mặt. Nhập vai hoàn hảo đến mức không ai có thể nhận ra."
   },
   "JetDragon": {
     "localized_name": "Jetragon",
@@ -1545,7 +1545,7 @@
   },
   "KingBahamut_Dragon": {
     "localized_name": "Blazamut Ryu",
-    "description": "Tù rất lâu về trước, Pal đã trỗi dậy từ lòng đất. Bằng ngọn lửa dữ dội không chút thương xót Pal thiêu đốt toàn bộ hòn đảo đến khi không còn gì sót lại. Đó chính là |Ngọn Lửa Bất Diệt|."
+    "description": "Tù rất lâu về trước, Pal đã trỗi dậy từ lòng đất. Bằng ngọn lửa dữ dội không chút thương xót Pal thiêu đốt toàn bộ hòn đảo đến khi không còn gì sót lại. Đó chính là \"Ngọn Lửa Bất Diệt\"."
   },
   "KingSunfish": {
     "localized_name": "Solmora",
@@ -1565,7 +1565,7 @@
   },
   "Kirin_Ice": {
     "localized_name": "Univolt Cryst",
-    "description": "Từng được tôn sùng là sứ giả của thần mùa đông, không ai dám săn bắn. Thế nhưng, chỉ vì một cú trượt ngã trên băng bị người đời nhìn thấy mà đức tin ấy đã sụp đổ. Từ thần thú, |trượt chân| thành kiếp ngựa kéo xe không hơn không kém."
+    "description": "Từng được tôn sùng là sứ giả của thần mùa đông, không ai dám săn bắn. Thế nhưng, chỉ vì một cú trượt ngã trên băng bị người đời nhìn thấy mà đức tin ấy đã sụp đổ. Từ thần thú, \"trượt chân\" thành kiếp ngựa kéo xe không hơn không kém."
   },
   "Kitsunebi": {
     "localized_name": "Foxparks",
@@ -1617,7 +1617,7 @@
   },
   "LilyQueen": {
     "localized_name": "Lyleen",
-    "description": "Đây là một loài Pal hiền lành, đầy lòng nhân ái. Pal chăm sóc những Pal nhỏ đã mất cha mẹ. Cách Pal dạy dỗ là dùng SolarBeam với toàn bộ sức mạnh."
+    "description": "Đây là một loài Pal hiền lành, đầy lòng nhân ái. Pal chăm sóc những Pal nhỏ đã mất cha mẹ. Cách Pal dạy dỗ là dùng Năng Lượng Mặt Trời với toàn bộ sức mạnh."
   },
   "LilyQueen_Dark": {
     "localized_name": "Lyleen Noct",
@@ -1633,7 +1633,7 @@
   },
   "LizardMan_Fire": {
     "localized_name": "Leezpunk Ignis",
-    "description": "Pal có một nỗi ám ảnh kỳ lạ với dáng đứng của mình. Nó luôn cố gắng tìm ra kiểu tạo dáng |nóng| nhất chủ nhân của Pal thì cứ phải xem những tư thế |nóng bỏng| đến phát ngán."
+    "description": "Pal có một nỗi ám ảnh kỳ lạ với dáng đứng của mình. Nó luôn cố gắng tìm ra kiểu tạo dáng \"nóng\" nhất chủ nhân của Pal thì cứ phải xem những tư thế \"nóng bỏng\" đến phát ngán."
   },
   "LizardMan_Oilrig": {
     "localized_name": "Leezpunk",
@@ -1945,7 +1945,7 @@
   },
   "MimicDog": {
     "localized_name": "Mimog",
-    "description": "Ở một vương quốc cổ xưa nọ trên đảo có một truyền thống trao giải cho kẻ có cái chết ngớ ngẩn nhất trong năm. Nguyên nhân tử vong đáng nhớ đầu tiên là |Không nhận ra Mimog, mở hộp và bị cắn chết|."
+    "description": "Ở một vương quốc cổ xưa nọ trên đảo có một truyền thống trao giải cho kẻ có cái chết ngớ ngẩn nhất trong năm. Nguyên nhân tử vong đáng nhớ đầu tiên là \"Không nhận ra Mimog, mở hộp và bị cắn chết\"."
   },
   "MobuCitizen": {
     "localized_name": "Dân Đảo",
@@ -1961,7 +1961,7 @@
   },
   "Monkey": {
     "localized_name": "Tanzee",
-    "description": "Ngày xưa, Pal dùng những vật thon dài như cành cây làm vũ khí. Khi tiếp xúc với con người, Pal đã không còn dùng nữa. Vì nó đã phát hiện ra |món vũ khí' thon dài và hiệu quả hơn."
+    "description": "Ngày xưa, Pal dùng những vật thon dài như cành cây làm vũ khí. Khi tiếp xúc với con người, Pal đã không còn dùng nữa. Vì nó đã phát hiện ra \"món vũ khí' thon dài và hiệu quả hơn."
   },
   "Monkey_Fire": {
     "localized_name": "Tanzee Ignis",
@@ -1997,7 +1997,7 @@
   },
   "MushroomDragon": {
     "localized_name": "Shroomer",
-    "description": "Khi hít phải một lượng lớn bào tử của Pal này, bạn sẽ rơi vào một trạng thái mơ màng. Đôi khi, Shroomer đứng yên bất động không phải Pal đang ngụy trang thành nấm mà là do Pal đang |phê| bào tử của chính mình."
+    "description": "Khi hít phải một lượng lớn bào tử của Pal này, bạn sẽ rơi vào một trạng thái mơ màng. Đôi khi, Shroomer đứng yên bất động không phải Pal đang ngụy trang thành nấm mà là do Pal đang \"phê\" bào tử của chính mình."
   },
   "MushroomDragon_Dark": {
     "localized_name": "Shroomer Noct",
@@ -2061,7 +2061,7 @@
   },
   "NightLady_Dark": {
     "localized_name": "Bellanoir Libero",
-    "description": "Dục vọng một khi được thả ra thì không thể kìm hãm được nữa. Ta muốn một |ta| khác nhìn vào |ta|. Người chị em dõi mắt nhìn, những kẻ đã gieo rắc tai ương cho thế giới, cuối cùng đã bị đẩy vào khe nứt và nhắm mắt xuôi tay."
+    "description": "Dục vọng một khi được thả ra thì không thể kìm hãm được nữa. Ta muốn một \"ta\" khác nhìn vào \"ta\". Người chị em dõi mắt nhìn, những kẻ đã gieo rắc tai ương cho thế giới, cuối cùng đã bị đẩy vào khe nứt và nhắm mắt xuôi tay."
   },
   "Ninja01_Tower": {
     "localized_name": "Genin Phái Tsukihana",
@@ -2105,15 +2105,15 @@
   },
   "OctopusGirl": {
     "localized_name": "Gloopie",
-    "description": "Trước khi đi ngủ cùng cô ấy, nhớ kiểm tra lịch trình ngày hôm sau nhé. Dấu vết từ giác hút của cô ấy trông hệt như dấu hôn. Lỡ mà bị hút khi đang lơ mơ, đảm bảo sẽ có khối chuyện hiểu nhầm |khó đỡ| đấy!"
+    "description": "Trước khi đi ngủ cùng cô ấy, nhớ kiểm tra lịch trình ngày hôm sau nhé. Dấu vết từ giác hút của cô ấy trông hệt như dấu hôn. Lỡ mà bị hút khi đang lơ mơ, đảm bảo sẽ có khối chuyện hiểu nhầm \"khó đỡ\" đấy!"
   },
   "OctopusGirl_Neutral": {
     "localized_name": "Gloopie Primo",
-    "description": "Nếu định ngủ cùng nó, hãy nhớ kiểm tra lịch trình ngày mai nhé. Dấu vết từ giác hút của nó trông rất giống vết cắn lỡ mà bị nó |đóng dấu| lúc đang lơ mơ, đảm bảo sẽ có khối chuyện hiểu lầm tai hại."
+    "description": "Nếu định ngủ cùng nó, hãy nhớ kiểm tra lịch trình ngày mai nhé. Dấu vết từ giác hút của nó trông rất giống vết cắn lỡ mà bị nó \"đóng dấu\" lúc đang lơ mơ, đảm bảo sẽ có khối chuyện hiểu lầm tai hại."
   },
   "OniGhostGirl": {
     "localized_name": "Bakemi",
-    "description": "Thích hù dọa người là bản năng, nhưng chẳng dọa được ai vì quá dễ thương. Ai gặp cũng giả vờ |hết hồn| để chiều lòng chúng, nên giờ đây Bakemi đã trở thành sứ giả gieo rắc nụ cười thay vì nỗi sợ."
+    "description": "Thích hù dọa người là bản năng, nhưng chẳng dọa được ai vì quá dễ thương. Ai gặp cũng giả vờ \"hết hồn\" để chiều lòng chúng, nên giờ đây Bakemi đã trở thành sứ giả gieo rắc nụ cười thay vì nỗi sợ."
   },
   "POLICE_HawkBird": {
     "localized_name": "Kỵ Sĩ Đội Tự Vệ",
@@ -2145,7 +2145,7 @@
   },
   "PREDATOR_DrillGame": {
     "localized_name": "Digtoise",
-    "description": "Có một câu chuyện mang tên |Mũi Khoan Của Digtoise|. Đây là câu chuyện ngụ ngôn kể về Digtoise, sinh vật sở hữu chiếc mai kiên cố và một mũi khoan lợi hại, cứ mãi trăn trở về một nghịch lý của cuộc đời."
+    "description": "Có một câu chuyện mang tên \"Mũi Khoan Của Digtoise\". Đây là câu chuyện ngụ ngôn kể về Digtoise, sinh vật sở hữu chiếc mai kiên cố và một mũi khoan lợi hại, cứ mãi trăn trở về một nghịch lý của cuộc đời."
   },
   "PREDATOR_FairyDragon": {
     "localized_name": "Elphidran",
@@ -2157,7 +2157,7 @@
   },
   "PREDATOR_FlowerDinosaur": {
     "localized_name": "Dinossom",
-    "description": "Khi cơn giận bùng phát, không ai có thể cản được, Pal sẽ hung hãn như ngọn lửa dữ. Câu nói |Giẫm phải đuôi Dinossom| dùng để chỉ việc làm ai đó cực kỳ tức giận."
+    "description": "Khi cơn giận bùng phát, không ai có thể cản được, Pal sẽ hung hãn như ngọn lửa dữ. Câu nói \"Giẫm phải đuôi Dinossom\" dùng để chỉ việc làm ai đó cực kỳ tức giận."
   },
   "PREDATOR_FlowerRabbit_Quest": {
     "localized_name": "Flopie",
@@ -2225,7 +2225,7 @@
   },
   "PREDATOR_MushroomDragon": {
     "localized_name": "Shroomer",
-    "description": "Khi hít phải một lượng lớn bào tử của Pal này, bạn sẽ rơi vào một trạng thái mơ màng. Đôi khi, Shroomer đứng yên bất động không phải Pal đang ngụy trang thành nấm mà là do Pal đang |phê| bào tử của chính mình."
+    "description": "Khi hít phải một lượng lớn bào tử của Pal này, bạn sẽ rơi vào một trạng thái mơ màng. Đôi khi, Shroomer đứng yên bất động không phải Pal đang ngụy trang thành nấm mà là do Pal đang \"phê\" bào tử của chính mình."
   },
   "PREDATOR_MysteryMask": {
     "localized_name": "Omascul",
@@ -2237,7 +2237,7 @@
   },
   "PREDATOR_PandaGirl": {
     "localized_name": "Leafan",
-    "description": "Để luyện thành võ công gia truyền, mỗi ngày chỉ có tập luyện và tập luyện! Yêu đương gì tầm này, không được! Mỗi ngày chỉ có rèn với luyện! Thời cơ đến rồi! |Tấn công| người trong mộng thôi! Để rồi chỉ có thất tình! Tuyệt chiêu yêu đương chưa từng được học! Chỉ có vấn vương!"
+    "description": "Để luyện thành võ công gia truyền, mỗi ngày chỉ có tập luyện và tập luyện! Yêu đương gì tầm này, không được! Mỗi ngày chỉ có rèn với luyện! Thời cơ đến rồi! \"Tấn công\" người trong mộng thôi! Để rồi chỉ có thất tình! Tuyệt chiêu yêu đương chưa từng được học! Chỉ có vấn vương!"
   },
   "PREDATOR_PinkLizard": {
     "localized_name": "Lovander",
@@ -2249,7 +2249,7 @@
   },
   "PREDATOR_PurpleSpider": {
     "localized_name": "Tarantriss",
-    "description": "Pal rất dính, bám siêu dính. Càng cố giãy giụa, Pal lại càng dính chặt hơn. Đó là |tính cách| của nó."
+    "description": "Pal rất dính, bám siêu dính. Càng cố giãy giụa, Pal lại càng dính chặt hơn. Đó là \"tính cách\" của nó."
   },
   "PREDATOR_RedArmorBird": {
     "localized_name": "Ragnahawk",
@@ -2328,7 +2328,7 @@
     "description": null
   },
   "PalPassive_Doctor": {
-    "localized_name": "Dân Đảo",
+    "localized_name": "Tiến Sĩ Brawn",
     "description": null
   },
   "PalTrader": {
@@ -2337,7 +2337,7 @@
   },
   "PandaGirl": {
     "localized_name": "Leafan",
-    "description": "Để luyện thành võ công gia truyền, mỗi ngày chỉ có tập luyện và tập luyện! Yêu đương gì tầm này, không được! Mỗi ngày chỉ có rèn với luyện! Thời cơ đến rồi! |Tấn công| người trong mộng thôi! Để rồi chỉ có thất tình! Tuyệt chiêu yêu đương chưa từng được học! Chỉ có vấn vương!"
+    "description": "Để luyện thành võ công gia truyền, mỗi ngày chỉ có tập luyện và tập luyện! Yêu đương gì tầm này, không được! Mỗi ngày chỉ có rèn với luyện! Thời cơ đến rồi! \"Tấn công\" người trong mộng thôi! Để rồi chỉ có thất tình! Tuyệt chiêu yêu đương chưa từng được học! Chỉ có vấn vương!"
   },
   "Penguin": {
     "localized_name": "Pengullet",
@@ -2473,14 +2473,14 @@
   },
   "PurpleSpider": {
     "localized_name": "Tarantriss",
-    "description": "Pal rất dính, bám siêu dính. Càng cố giãy giụa, Pal lại càng dính chặt hơn. Đó là |tính cách| của nó."
+    "description": "Pal rất dính, bám siêu dính. Càng cố giãy giụa, Pal lại càng dính chặt hơn. Đó là \"tính cách\" của nó."
   },
   "QueenBee": {
     "localized_name": "Elizabee",
     "description": "Pal là nữ hoàng được chọn để thống lĩnh loài Beegarde. Niềm vinh hạnh được phục vụ cho nữ hoàng vĩ đại khiến cho vô số tôi tớ sẵn lòng làm việc cho đến chết."
   },
   "QuestMan": {
-    "localized_name": "-",
+    "localized_name": "Quest Client",
     "description": null
   },
   "Quest_Farmer03_PinkCat": {
@@ -2624,7 +2624,7 @@
     "description": null
   },
   "Reward_BossDefeat": {
-    "localized_name": "Vệ Binh",
+    "localized_name": "Thợ Săn Pal Kỳ Cựu",
     "description": null
   },
   "Reward_Emote_A_01": {
@@ -2712,7 +2712,7 @@
     "description": null
   },
   "Reward_Paldex": {
-    "localized_name": "Vệ Binh",
+    "localized_name": "Nhà Nghiên Cứu Sinh Thái Pal",
     "description": null
   },
   "Reward_Paldex_v02": {
@@ -2773,11 +2773,11 @@
   },
   "SakuraSaurus": {
     "localized_name": "Broncherry",
-    "description": "Mùi hương cơ thể của Pal thay đổi đáng kể trước và sau khi ghép đôi. Mùi hương sau khi tìm được bạn đời được cho là rất dễ chịu, được gọi là |Hương tình đầu|."
+    "description": "Mùi hương cơ thể của Pal thay đổi đáng kể trước và sau khi ghép đôi. Mùi hương sau khi tìm được bạn đời được cho là rất dễ chịu, được gọi là \"Hương tình đầu\"."
   },
   "SakuraSaurus_Water": {
     "localized_name": "Broncherry Aqua",
-    "description": "Mùi hương cơ thể của Pal thay đổi đáng kể trước và sau khi ghép đôi. Mùi hương trước khi tìm được bạn đời được cho là rất dễ chịu, được gọi là |Hương thuần khiết|."
+    "description": "Mùi hương cơ thể của Pal thay đổi đáng kể trước và sau khi ghép đôi. Mùi hương trước khi tìm được bạn đời được cho là rất dễ chịu, được gọi là \"Hương thuần khiết\"."
   },
   "SalesPerson": {
     "localized_name": "Thương Nhân Lang Thang",
@@ -2805,7 +2805,7 @@
   },
   "SamuraiDog": {
     "localized_name": "Pupperai",
-    "description": "Cuộc chiến tranh giành lãnh thổ của Pupperai bắt đầu bằng màn lườm nguýt và kết thúc trong một đòn chớp nhoáng. Nhân tiện, tốt nhất là đừng dạy lệnh |Chờ| cho những con đã thuần hóa. Bởi sau câu lệnh |Lên!|, phản xạ bản năng sẽ bộc phát và hậu quả là không thể cứu vãn."
+    "description": "Cuộc chiến tranh giành lãnh thổ của Pupperai bắt đầu bằng màn lườm nguýt và kết thúc trong một đòn chớp nhoáng. Nhân tiện, tốt nhất là đừng dạy lệnh \"Chờ\" cho những con đã thuần hóa. Bởi sau câu lệnh \"Lên!\", phản xạ bản năng sẽ bộc phát và hậu quả là không thể cứu vãn."
   },
   "Scientist_FlameThrower": {
     "localized_name": "Tổ Hành Động, Đơn Vị Nghiên Cứu Gen Pal",
@@ -2889,7 +2889,7 @@
   },
   "SmallYeti": {
     "localized_name": "Snugloo",
-    "description": "|Nhìn vào mắt của Snugloo| là một câu thành ngữ dùng để chỉ việc tìm kiếm bản chất ẩn giấu của sự vật. Nhưng chẳng hiểu vì sao mà từ trước đến nay, chưa một nhà nghiên cứu nào từng tìm hiểu xem Snugloo có mắt hay không."
+    "description": "\"Nhìn vào mắt của Snugloo\" là một câu thành ngữ dùng để chỉ việc tìm kiếm bản chất ẩn giấu của sự vật. Nhưng chẳng hiểu vì sao mà từ trước đến nay, chưa một nhà nghiên cứu nào từng tìm hiểu xem Snugloo có mắt hay không."
   },
   "SnakeGirl": {
     "localized_name": "Venusa",
@@ -2901,7 +2901,7 @@
   },
   "SnowTigerBeastman": {
     "localized_name": "Bastigor",
-    "description": "Cứ thấy cái gì tròn tròn, Pal lại muốn đấm cho một phát. Đối với SnowTigerBeastMan, điều khó khăn thứ hai sau đấu tranh sinh tồn chính là hoàn thành một người tuyết."
+    "description": "Cứ thấy cái gì tròn tròn, Pal lại muốn đấm cho một phát. Đối với Bastigor, điều khó khăn thứ hai sau đấu tranh sinh tồn chính là hoàn thành một người tuyết."
   },
   "SoldierBee": {
     "localized_name": "Beegarde",
@@ -2957,7 +2957,7 @@
   },
   "ThiefBird": {
     "localized_name": "Roujay",
-    "description": "Loài Pal này có tật chôm chỉa, thường lợi dụng lúc đối phương không để ý để trộm đồ. Nhưng dù có bị bắt quả tang thì cũng chẳng sao. Chỉ cần nhanh tay |trộm| luôn đôi mắt của khổ chủ, đằng nào họ cũng có thấy gì nữa đâu mà bắt tội."
+    "description": "Loài Pal này có tật chôm chỉa, thường lợi dụng lúc đối phương không để ý để trộm đồ. Nhưng dù có bị bắt quả tang thì cũng chẳng sao. Chỉ cần nhanh tay \"trộm\" luôn đôi mắt của khổ chủ, đằng nào họ cũng có thấy gì nữa đâu mà bắt tội."
   },
   "ThunderBird": {
     "localized_name": "Beakon",
@@ -2973,7 +2973,7 @@
   },
   "ThunderDog_Ice": {
     "localized_name": "Rayhound Cryst",
-    "description": "Khi chạy hết tốc lực trên tuyết, chúng sẽ tạo ra bão tuyết mịt mù. Chẳng ai nhìn thấy ai thế là những cú |đụng xe| giữa Rayhound Cryst cứ thế xảy ra như cơm bữa."
+    "description": "Khi chạy hết tốc lực trên tuyết, chúng sẽ tạo ra bão tuyết mịt mù. Chẳng ai nhìn thấy ai thế là những cú \"đụng xe\" giữa Rayhound Cryst cứ thế xảy ra như cơm bữa."
   },
   "ThunderDragonMan": {
     "localized_name": "Orserk",
@@ -3037,10 +3037,10 @@
   },
   "VioletFairy": {
     "localized_name": "Vaelet",
-    "description": "Trong lâu đài có rất nhiều loài hoa mà nhà vua yêu thích. Một cuộc chiến lớn đã xảy ra và ngọn lửa đã lan đến lâu đài. Rồi có một nàng tiên hoa xuất hiện. – Theo truyện cổ tích |Hoa của nhà vua|."
+    "description": "Trong lâu đài có rất nhiều loài hoa mà nhà vua yêu thích. Một cuộc chiến lớn đã xảy ra và ngọn lửa đã lan đến lâu đài. Rồi có một nàng tiên hoa xuất hiện. – Theo truyện cổ tích \"Hoa của nhà vua\"."
   },
   "VisitingMerchant": {
-    "localized_name": "-",
+    "localized_name": "Visitor",
     "description": null
   },
   "Visitor_Hunter_Rifle": {
@@ -3072,7 +3072,7 @@
     "description": "Những cá thể khỏe mạnh có nhiệt độ dòng chất lỏng chảy trên lưng rất ổn định. Nhưng chỉ cần chúng cảm thấy bồn chồn, nhiệt độ sẽ nhảy loạn xạ. Tệ nhất là cơ thể chúng sẽ bị bốc hơi hoặc đông cứng, dẫn đến đột tử."
   },
   "WeaponsDealer": {
-    "localized_name": "-",
+    "localized_name": "Weapons Dealer",
     "description": null
   },
   "WeaselDragon": {
@@ -3097,7 +3097,7 @@
   },
   "WhiteDeer": {
     "localized_name": "Celesdir",
-    "description": "Trong các tài liệu cổ ghi rằng loài Pal này là |Thần thú cứu rỗi|. Ánh sáng phát ra từ Celesdir giúp thanh tẩy vạn vật. Theo nghĩa đen, mọi thứ sẽ biến mất khỏi thế gian không một dấu vết."
+    "description": "Trong các tài liệu cổ ghi rằng loài Pal này là \"Thần thú cứu rỗi\". Ánh sáng phát ra từ Celesdir giúp thanh tẩy vạn vật. Theo nghĩa đen, mọi thứ sẽ biến mất khỏi thế gian không một dấu vết."
   },
   "WhiteDeer_Dark": {
     "localized_name": "Celesdir Noct",
@@ -3133,11 +3133,11 @@
   },
   "WindChimes": {
     "localized_name": "Hangyu",
-    "description": "Đôi tay to vật vã của Pal có thể bẻ gãy cả sắt thép. Ngày xưa, người ta hay trói những tên tội phạm nguy hiểm ở quảng trường rồi thả Windchimes đến xé xác chúng, một kiểu hành hình vô cùng dã man."
+    "description": "Đôi tay to vật vã của Pal có thể bẻ gãy cả sắt thép. Ngày xưa, người ta hay trói những tên tội phạm nguy hiểm ở quảng trường rồi thả Hangyu đến xé xác chúng, một kiểu hành hình vô cùng dã man."
   },
   "WindChimes_Ice": {
     "localized_name": "Hangyu Cryst",
-    "description": "Đôi tay to vật vã của Pal có thể phá tan cả tảng băng. Ngày xưa, người ta hay trói những tên tội phạm nguy hiểm ở quảng trường rồi thả Windchimes_Ice đến giật tóc chúng, một kiểu hành hình man rợ để làm gương."
+    "description": "Đôi tay to vật vã của Pal có thể phá tan cả tảng băng. Ngày xưa, người ta hay trói những tên tội phạm nguy hiểm ở quảng trường rồi thả Hangyu Cryst đến giật tóc chúng, một kiểu hành hình man rợ để làm gương."
   },
   "WingGolem": {
     "localized_name": "Knocklem",
@@ -3153,11 +3153,11 @@
   },
   "WizardOwl": {
     "localized_name": "Hoocrates",
-    "description": "Pal thường hay đắm chìm trong suy tư nghĩ nhiều quá nên thành ra mất ngủ. |Cogito, ergo sum| (Tôi tư duy, tôi tồn tại)."
+    "description": "Pal thường hay đắm chìm trong suy tư nghĩ nhiều quá nên thành ra mất ngủ. \"Cogito, ergo sum\" (Tôi tư duy, tôi tồn tại)."
   },
   "WoolFox": {
     "localized_name": "Cremis",
-    "description": "Chất lượng lông của Pal tốt hơn SheepBall. Tính cách cũng phù hợp để nuôi làm gia súc hơn SheepBall. Ấy vậy mà xưa nay, Pal luôn được cưng nựng như một loài thú cưng. Đúng là dễ thương là chân lý."
+    "description": "Chất lượng lông của Pal tốt hơn Lamball. Tính cách cũng phù hợp để nuôi làm gia súc hơn Lamball. Ấy vậy mà xưa nay, Pal luôn được cưng nựng như một loài thú cưng. Đúng là dễ thương là chân lý."
   },
   "WorldTreeDragon": {
     "localized_name": "Astralym",
@@ -3234,5 +3234,221 @@
   "Yeti_Grass": {
     "localized_name": "Wumpo Botan",
     "description": "Để khám phá chân tướng, các nhà nghiên cứu đã cắt cỏ trên người Pal nhưng hóa ra bên trong trống rỗng chỉ còn trơ lại mớ cỏ."
+  },
+  "ArenaShop": {
+    "localized_name": "ArenaShop",
+    "description": null
+  },
+  "Arena_Legend_1": {
+    "localized_name": "Arena_Legend_1",
+    "description": null
+  },
+  "Arena_Legend_10": {
+    "localized_name": "Arena_Legend_10",
+    "description": null
+  },
+  "Arena_Legend_11": {
+    "localized_name": "Arena_Legend_11",
+    "description": null
+  },
+  "Arena_Legend_12": {
+    "localized_name": "Arena_Legend_12",
+    "description": null
+  },
+  "Arena_Legend_13": {
+    "localized_name": "Arena_Legend_13",
+    "description": null
+  },
+  "Arena_Legend_14": {
+    "localized_name": "Arena_Legend_14",
+    "description": null
+  },
+  "Arena_Legend_15": {
+    "localized_name": "Arena_Legend_15",
+    "description": null
+  },
+  "Arena_Legend_16": {
+    "localized_name": "Arena_Legend_16",
+    "description": null
+  },
+  "Arena_Legend_17": {
+    "localized_name": "Arena_Legend_17",
+    "description": null
+  },
+  "Arena_Legend_18": {
+    "localized_name": "Arena_Legend_18",
+    "description": null
+  },
+  "Arena_Legend_19": {
+    "localized_name": "Arena_Legend_19",
+    "description": null
+  },
+  "Arena_Legend_2": {
+    "localized_name": "Arena_Legend_2",
+    "description": null
+  },
+  "Arena_Legend_20": {
+    "localized_name": "Arena_Legend_20",
+    "description": null
+  },
+  "Arena_Legend_3": {
+    "localized_name": "Arena_Legend_3",
+    "description": null
+  },
+  "Arena_Legend_4": {
+    "localized_name": "Arena_Legend_4",
+    "description": null
+  },
+  "Arena_Legend_5": {
+    "localized_name": "Arena_Legend_5",
+    "description": null
+  },
+  "Arena_Legend_6": {
+    "localized_name": "Arena_Legend_6",
+    "description": null
+  },
+  "Arena_Legend_7": {
+    "localized_name": "Arena_Legend_7",
+    "description": null
+  },
+  "Arena_Legend_8": {
+    "localized_name": "Arena_Legend_8",
+    "description": null
+  },
+  "Arena_Legend_9": {
+    "localized_name": "Arena_Legend_9",
+    "description": null
+  },
+  "ArmorWoodlouse": {
+    "localized_name": "ArmorWoodlouse",
+    "description": null
+  },
+  "BeardedDragon": {
+    "localized_name": "BeardedDragon",
+    "description": "This Pal is under investigation."
+  },
+  "BlueWoolRabbit": {
+    "localized_name": "BlueWoolRabbit",
+    "description": null
+  },
+  "CandleWitch": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "CuteOrca": {
+    "localized_name": "CuteOrca",
+    "description": null
+  },
+  "DarkMutant": {
+    "localized_name": "DarkMutant",
+    "description": "Với kỹ năng thượng thừa, tia chớp của DarkMutant có thể cắt đứt cả chiều không gian, tạo ra các vết nứt thời không. Có giả thuyết cho rằng một số Pal đã xuất hiện từ những vết nứt đó."
+  },
+  "DesertBoss": {
+    "localized_name": "DesertBoss",
+    "description": null
+  },
+  "ElecSnail_Fire": {
+    "localized_name": "ElecSnail_Fire",
+    "description": null
+  },
+  "ElectricBoss": {
+    "localized_name": "ElectricBoss",
+    "description": null
+  },
+  "Emote_Tester": {
+    "localized_name": "Emote_Tester",
+    "description": null
+  },
+  "ForestBoss": {
+    "localized_name": "Lily & Lyleen",
+    "description": null
+  },
+  "FrozenBear": {
+    "localized_name": "FrozenBear",
+    "description": null
+  },
+  "GrassDragon": {
+    "localized_name": "GrassDragon",
+    "description": "This Pal is under investigation."
+  },
+  "IceVeilDragon": {
+    "localized_name": "IceVeilDragon",
+    "description": null
+  },
+  "KingCrab": {
+    "localized_name": "KingCrab",
+    "description": null
+  },
+  "LeafBird": {
+    "localized_name": "LeafBird",
+    "description": null
+  },
+  "MedjedBird": {
+    "localized_name": "MedjedBird",
+    "description": null
+  },
+  "MexicanSalamander": {
+    "localized_name": "MexicanSalamander",
+    "description": null
+  },
+  "Monkey_Ice": {
+    "localized_name": "Monkey_Ice",
+    "description": null
+  },
+  "MonochromeMushroom": {
+    "localized_name": "MonochromeMushroom",
+    "description": null
+  },
+  "Negotiator": {
+    "localized_name": "Negotiator",
+    "description": null
+  },
+  "PinkKangaroo": {
+    "localized_name": "PinkKangaroo",
+    "description": null
+  },
+  "RockCheetah": {
+    "localized_name": "RockCheetah",
+    "description": null
+  },
+  "SakurajimaBoss": {
+    "localized_name": "Saya & Selyne",
+    "description": null
+  },
+  "SnakeQueen": {
+    "localized_name": "SnakeQueen",
+    "description": null
+  },
+  "SnowBoss": {
+    "localized_name": "Victor & Shadowbeak",
+    "description": null
+  },
+  "StrawHatCat": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "TestAssassin": {
+    "localized_name": "TestAssassin",
+    "description": null
+  },
+  "TestNPC": {
+    "localized_name": "TestNPC",
+    "description": null
+  },
+  "VikingBoss": {
+    "localized_name": "Bjorn & Bastigor",
+    "description": null
+  },
+  "VolcanicTurtle": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "WaterLizard": {
+    "localized_name": "WaterLizard",
+    "description": null
+  },
+  "WorldTree_Hunter_MissileLauncher_test": {
+    "localized_name": "WorldTree_Hunter_MissileLauncher_test",
+    "description": null
   }
 }

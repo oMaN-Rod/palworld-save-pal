@@ -756,6 +756,7 @@ export const passiveSkillTier = (tier: number): string => {
 export interface PassiveSkillDetails {
 	rank: number;
 	effects: SkillEffect[];
+	disabled?: boolean;
 }
 
 export interface PassiveSkill extends Skill {
@@ -871,6 +872,7 @@ export enum BuildingTypeB {
 export type Building = {
 	localized_name: string;
 	description: string;
+	disabled?: boolean;
 	type_a: BuildingTypeA;
 	type_b: BuildingTypeB;
 	rank: number;

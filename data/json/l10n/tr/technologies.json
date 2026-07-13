@@ -1,0 +1,2354 @@
+{
+  "AIcore": {
+    "localized_name": "AI Çekirdeği",
+    "description": null
+  },
+  "Accessory_AirDash1": {
+    "localized_name": "Havada İleri Atılma Botları",
+    "description": null
+  },
+  "Accessory_AirDash2": {
+    "localized_name": "Havada Çifte İleri Atılma Botları",
+    "description": null
+  },
+  "Accessory_AirDash3": {
+    "localized_name": "Üçlü Hava Atlayış Botları",
+    "description": null
+  },
+  "Accessory_ExplosionResist": {
+    "localized_name": "Patlama Önleyici İç Çamaşırı",
+    "description": null
+  },
+  "Accessory_JumpCount_Increase1": {
+    "localized_name": "Çifte Zıplama Botları",
+    "description": null
+  },
+  "Accessory_JumpCount_Increase2": {
+    "localized_name": "Üçlü Zıplama Botları",
+    "description": null
+  },
+  "Accessory_JumpPower_Increase": {
+    "localized_name": "Anti Yer Çekimi Kemeri",
+    "description": null
+  },
+  "Accessory_Nonkilling": {
+    "localized_name": "Merhamet Yüzüğü",
+    "description": null
+  },
+  "Accessory_TalentChecker": {
+    "localized_name": "Beceri Gözlüğü",
+    "description": null
+  },
+  "AdditionalInventory_001": {
+    "localized_name": "Küçük Kese",
+    "description": null
+  },
+  "AdditionalInventory_002": {
+    "localized_name": "Orta Kese",
+    "description": null
+  },
+  "AdditionalInventory_003": {
+    "localized_name": "Büyük Kese",
+    "description": null
+  },
+  "AdditionalInventory_004": {
+    "localized_name": "Kocaman Kese",
+    "description": null
+  },
+  "Altar": {
+    "localized_name": "Çağırma Sunağı",
+    "description": null
+  },
+  "AncientArmor": {
+    "localized_name": "Kadim Zırh",
+    "description": "Solrayt Külçesimateryalinden dövülmüş antik zırh. Kayıp bir medeniyetin tüm ustalığı cömertçe buna aktarılmıştır ve büyüleyici bir savunma gücüne sahiptir. Kıyamet düzeyindeki tehditlere bile göğüs gerebilen nihai koruyucu donanımdır."
+  },
+  "AncientArmorCold": {
+    "localized_name": "Soğuğa Dayanıklı Kadim Zırh",
+    "description": "GeliştirilmişKadim Zırh. Antik teknoloji sayesinde soğuk direnci daha da artırılmıştır, dondurucu soğuklarda bile gücünü korur."
+  },
+  "AncientArmorHeat": {
+    "localized_name": "Isıya Dayanıklı Kadim Zırh",
+    "description": "GeliştirilmişKadim Zırh. Antik teknoloji sayesinde ısı direnci daha da artırılmıştır, yakıcı sıcaklıktaki ortamlara bile dayanır."
+  },
+  "AncientArmorWeight": {
+    "localized_name": "Hafif Kadim Zırh",
+    "description": "GeliştirilmişKadim Zırh. çine antik bir destek mekanizması yerleştirilmiştir, böylece daha fazla eşya/erzak taşımanıza olanak tanır."
+  },
+  "AncientBlastFurnace": {
+    "localized_name": "Antik Medeniyet Ocağı",
+    "description": "Antik medeniyet teknolojisi kullanılarak tasarlanmış, tüm külçeleri rafine edebilen özel bir ocak. Malzemeleri ateşin ısısıyla eritir ve buzun gücüyle anında dondurup sertleştirerek rafine işlemini gerçekleştirir. Çalışması için \"Ateş Yakma\" ve \"Soğutma\" yeteneğine sahip Pal'lar gerekir."
+  },
+  "AncientCookingStove": {
+    "localized_name": "Antik Medeniyet Mutfağı",
+    "description": "Mevcut tariflerden bilinmeyen yeni lezzetlere kadar her şeyi üretebilen antik medeniyet mutfağı. Isıyı ateşle depolar ve el işçiliğiyle her türlü yemeği tamamlar. İşletilmesi için üst düzey \"Ateş Yakma\" ve \"El İşçiliği\" yeteneğine sahip Pal'lar gereklidir."
+  },
+  "AncientElectricGenerator": {
+    "localized_name": "Antik Medeniyet Jeneratörü",
+    "description": "Kayıp kadim teknolojinin yeniden oluşturulmasıyla geliştirilmiş, son derece yüksek verimli bir jeneratör. Muazzam miktarda elektrik üretebilir, ancak çalışırken aşırı ısınma riski taşır. Kullanımı için yüksek seviyede elektrik üretimi uygunluğuna sahip Pal’ların yanı sıra, sulama uygunluğuna sahip Pal’lar da gereklidir."
+  },
+  "AncientFarmBlock": {
+    "localized_name": "Antik Medeniyet Yetiştiricisi",
+    "description": "Dünya Ağacı'nın gücüyle Palpagos Adası'ndaki her türlü bitkiyi yetiştirebilen antik medeniyet saksısı. Meyve bahçelerinden çok daha küçüktür ve iç mekana yerleştirilebilir, ancak yetiştirme süreci geleneksel yöntemle aynıdır. Çalışması için üst düzey \"Tohum Ekme\" ve \"Sulama\" yeteneğine sahip Pal'lar gerekir."
+  },
+  "AncientHelmet": {
+    "localized_name": "Kadim Miğfer",
+    "description": "Solrayt Külçesimateryalinden dövülmüş antik miğfer. Sonsuz zamanın ötesinden miras kalan bir bilgeliği barındırır ve takan kişiyi sarsılmaz bir şekilde korur. Savunma performansı, modern ekipmanların çok ötesindedir."
+  },
+  "AncientMultiProduct": {
+    "localized_name": "Antik Medeniyet Madde Oluşturucusu",
+    "description": "Dünya Ağacı'nın gücünü kullanarak her türlü odun ve cevheri üretebilen antik medeniyet jeneratörü. İstediğiniz kaynağı seçip elde edebilirsiniz ancak madencilik verimliliği geleneksel tesislerden farklı değildir. Karmaşık yapısı nedeniyle buraya yalnızca 1 Pal atanabilir."
+  },
+  "AncientRelicRecycler": {
+    "localized_name": "Antik Medeniyet Kalıntı Dönüştürücüsü",
+    "description": null
+  },
+  "AncientWorkBench": {
+    "localized_name": "Antik Medeniyet Tezgahı",
+    "description": "Tüm eşyaların tek bir yerde üretilebildiği, Pal'lara özel çok amaçlı bir tesis. Oyuncu burada çalışamaz ve üretim hızı standart tesislerle aynıdır. Gelişmiş bir ekipman olduğu için, işletilmesi yüksek \"El İşçiliği\" ve \"İlaç Üretimi\" yeteneğine sahip Pal'lar gerektirir."
+  },
+  "Ancient_Clinic": {
+    "localized_name": "Antik Medeniyet Kliniği",
+    "description": null
+  },
+  "Ancient_Houseset": {
+    "localized_name": "Antik Medeniyet Yapı Seti",
+    "description": "Kadim uygarlık mimarisiyle üs inşa etmek için bir set. Temel, duvar, çatı ve merdiven gibi bir ev inşa etmek için gerekli olan şeylerin inşasını mümkün kılar."
+  },
+  "Ancient_MedicalPalBed": {
+    "localized_name": "Antik Medeniyet Pal Yatağı",
+    "description": null
+  },
+  "Ancient_Spa": {
+    "localized_name": "Kadim Teknoloji Kaplıcası",
+    "description": null
+  },
+  "Arrow": {
+    "localized_name": "Ok",
+    "description": "Yay ile fırlatılmak üzere kullanılan bir Ok. İlkel Tezgâh kullanılarak üretilebilir."
+  },
+  "Arrow_Fire": {
+    "localized_name": "Ateş Oku",
+    "description": "Yay ile fırlatılmak üzere kullanılan bir Ateş Oku. İsabet ettiği hedefe Ateş hasar verir. İlkel Tezgâh kullanılarak üretilebilir."
+  },
+  "Arrow_Poison": {
+    "localized_name": "Zehirli Ok",
+    "description": "Yay ile fırlatılmak üzere kullanılan bir Zehirli Ok. İsabet ettiği hedefe Zehirlenmehasar verir. İlkel Tezgâh kullanılarak üretilebilir."
+  },
+  "AssaultRifleBullet": {
+    "localized_name": "Taarruz Tüfeği Mermisi",
+    "description": "Taarruz Tüfeği gibi silahlarda kullanılan mühimmat. Silah Montaj Hattı kullanılarak üretilebilir."
+  },
+  "AutoMealPouch_Tier1": {
+    "localized_name": "Küçük Yem Çantası",
+    "description": null
+  },
+  "AutoMealPouch_Tier2": {
+    "localized_name": "Orta Yem Çantası",
+    "description": null
+  },
+  "AutoMealPouch_Tier3": {
+    "localized_name": "Büyük Yem Çantası",
+    "description": null
+  },
+  "AutoMealPouch_Tier4": {
+    "localized_name": "Kocaman Yem Çantası",
+    "description": null
+  },
+  "AutoMealPouch_Tier5": {
+    "localized_name": "Devasa Yem Çantası",
+    "description": null
+  },
+  "BaseCampBattleDirector": {
+    "localized_name": "Alarm Zili",
+    "description": "Üsteki Pal'ları alarm durumuna sokan bir zil. Pal davranışını istediğin zaman ister işgalci düşmanlara saldırmak olarak ister tamamen işe odaklanmak olarak belirleyebilirsin."
+  },
+  "BaseCampItemDispenser": {
+    "localized_name": "Eşya Geri Alma Makinesi",
+    "description": null
+  },
+  "BaseCampWorkHard": {
+    "localized_name": "İzleme Kürsüsü",
+    "description": null
+  },
+  "BaseCampWorkHard02": {
+    "localized_name": "Yüksek Kaliteli Gözlem Kulesi",
+    "description": null
+  },
+  "BaseCampWorkHard03": {
+    "localized_name": "Antik Medeniyet Gözetleme Kulesi",
+    "description": null
+  },
+  "BaseCampWorkerExtraStation": {
+    "localized_name": "Palbox Kontrol Terminali",
+    "description": null
+  },
+  "Bat3": {
+    "localized_name": "Metal Beyzbol Sopası",
+    "description": null
+  },
+  "Battle_Armor_Grade_01_Cloth": {
+    "localized_name": "Kumaş Kıyafet",
+    "description": "Kumaş kullanılarak yapılmış bir kıyafet. Soğuk gecelere karşı korur. İlkel Tezgâh kullanılarak üretilebilir."
+  },
+  "Battle_Armor_Grade_01_Cloth_Cold": {
+    "localized_name": "Tundra Kıyafeti",
+    "description": "Soğuk bölgelerde üretilen bir Kumaş Kıyafet. Dondurucu soğuklara karşı koruma sağlar. İlkel Tezgâh kullanılarak üretilebilir."
+  },
+  "Battle_Armor_Grade_01_Cloth_Heat": {
+    "localized_name": "Tropik Kıyafet",
+    "description": "Sıcak bölgelerde üretilen Kumaş Kıyafet. Yüksek ısı direncine sahiptir. İlkel Tezgâh kullanılarak üretilebilir."
+  },
+  "Battle_Armor_Grade_02_Fur": {
+    "localized_name": "Post Zırh",
+    "description": "Deri kullanılarak yapılmış bir zırh. Dayanıklılığı ve savunma gücü arttırılmıştır. Yüksek Kaliteli Çalışma Tezgâhı kullanılarak üretilebilir."
+  },
+  "Battle_Armor_Grade_02_Fur_Cold": {
+    "localized_name": "Soğuğa Dayanıklı Post Zırh",
+    "description": "Soğuk bölgelerde üretilen bir Post Zırh. Dondurucu soğuklara karşı koruma sağlar. Yüksek Kaliteli Çalışma Tezgâhı kullanılarak üretilebilir."
+  },
+  "Battle_Armor_Grade_02_Fur_Heat": {
+    "localized_name": "Sıcağa Dayanıklı Post Zırh",
+    "description": "Sıcak bölgelerde üretilen bir Post Zırh. Yüksek ısı direncine sahiptir. Yüksek Kaliteli Çalışma Tezgâhı kullanılarak üretilebilir."
+  },
+  "Battle_Armor_Grade_03_Copper": {
+    "localized_name": "Metal Zırh",
+    "description": "Metalden yapılmış bir zırh. Orta düzeyde savunma gücüne ve orta düzeyde ağırlığa sahiptir. Yüksek Kaliteli Çalışma Tezgâhı kullanılarak üretilebilir."
+  },
+  "Battle_Armor_Grade_03_Copper_Cold": {
+    "localized_name": "Soğuğa Dayanıklı Metal Zırh",
+    "description": "Geliştirilmiş bir Metal Zırh. Dondurucu soğuklara karşı koruma sağlar. Yüksek Kaliteli Çalışma Tezgâhı kullanılarak üretilebilir."
+  },
+  "Battle_Armor_Grade_03_Copper_Heat": {
+    "localized_name": "Sıcağa Dayanıklı Metal Zırh",
+    "description": "Geliştirilmiş bir Metal Zırh. Yüksek ısı direncine sahiptir. Yüksek Kaliteli Çalışma Tezgâhı kullanılarak üretilebilir."
+  },
+  "Battle_Armor_Grade_03_Iron": {
+    "localized_name": "Saf Metal Zırh",
+    "description": "Yüksek kaliteli metalden yapılmış bir zırh. Oldukça yüksek savunma gücüne sahip olduğu için ağırdır. Üretim Montaj Hattı kullanılarak üretilebilir."
+  },
+  "Battle_Armor_Grade_03_Iron_Cold": {
+    "localized_name": "Soğuğa Dayanıklı Saf Metal Zırh",
+    "description": "Geliştirilmiş bir Saf Metal Zırh. Dondurucu soğuklara karşı koruma sağlar. Üretim Montaj Hattı kullanılarak üretilebilir."
+  },
+  "Battle_Armor_Grade_03_Iron_Heat": {
+    "localized_name": "Sıcağa Dayanıklı Saf Metal Zırh",
+    "description": "Geliştirilmiş bir Saf Metal Zırh. Yüksek ısı direncine sahiptir. Üretim Montaj Hattı kullanılarak üretilebilir."
+  },
+  "Battle_Armor_Grade_04_Steal": {
+    "localized_name": "Pal Metali Zırh",
+    "description": "Pal Metali Külçe kullanılarak yapılmış bir zırh. Olağanüstü savunma gücüne sahiptir, ancak çok ağırdır. Üretim Montaj Hattı II kullanılarak üretilebilir."
+  },
+  "Battle_Armor_Grade_04_Steal_Cold": {
+    "localized_name": "Soğuğa Dayanıklı Pal Metali Zırh",
+    "description": "Geliştirilmiş bir Pal Metali Zırh. Dondurucu soğuklara karşı koruma sağlar. Üretim Montaj Hattı II kullanılarak üretilebilir."
+  },
+  "Battle_Armor_Grade_04_Steal_Heat": {
+    "localized_name": "Sıcağa Dayanıklı Pal Metali Zırh",
+    "description": "Geliştirilmiş bir Pal Metali Zırh. Yüksek ısı direncine sahiptir. Üretim Montaj Hattı II kullanılarak üretilebilir."
+  },
+  "Battle_Armor_Grade_05_Plastic": {
+    "localized_name": "Plastiçelik Zırh",
+    "description": "Plastiçelik kullanılarak yapılmış bir zırh. Savunma gücü arttırılmış olmasının yanı sıra hafifletilmeyi de başarmıştır. Üretim Montaj Hattı II kullanılarak üretilebilir."
+  },
+  "Battle_Armor_Grade_05_Plastic_Cold": {
+    "localized_name": "Soğuğa Dayanıklı Plastiçelik Zırh",
+    "description": "Geliştirilmiş bir Plastiçelik Zırh. Dondurucu soğuklara karşı koruma sağlar. Üretim Montaj Hattı II kullanılarak üretilebilir."
+  },
+  "Battle_Armor_Grade_05_Plastic_Heat": {
+    "localized_name": "Sıcağa Dayanıklı Plastiçelik Zırh",
+    "description": "Geliştirilmiş bir Plastiçelik Zırh. Yüksek ısı direncine sahiptir. Üretim Montaj Hattı II kullanılarak üretilebilir."
+  },
+  "Battle_Armor_Grade_05_Plastic_Weight": {
+    "localized_name": "İnce Plastiçelik Zırh",
+    "description": "Geliştirilmiş bir Plastiçelik Zırh. Oyuncunun taşıma kapasitesi artar. Üretim Montaj Hattı II kullanılarak üretilebilir.."
+  },
+  "Battle_Cloth": {
+    "localized_name": "Kumaş",
+    "description": null
+  },
+  "Battle_Defense_BowGun": {
+    "localized_name": "Sabitlenmiş Arbalet",
+    "description": "El İşi iş uygunluğu olan bir Pal'ı, arbaleti kullanarak üssü koruması için ata."
+  },
+  "Battle_Defense_MachineGun": {
+    "localized_name": "Sabitlenmiş Makineli Tüfek",
+    "description": "\"El İşi\" yeteneğine sahip bir Pal görevlendirilirse, makineli tüfeği ustalıkla kullanarak üssü korumaya devam edecektir."
+  },
+  "Battle_Defense_Missile": {
+    "localized_name": "Sabitlenmiş Füzeatar",
+    "description": "El İşi iş uygunluğu olan bir Pal'ı, füzeatarı kullanarak üssü koruması için ata."
+  },
+  "Battle_Glider_Grade_01": {
+    "localized_name": "Normal Paraşüt",
+    "description": "Gökyüzünde süzülmek için kullanılan bir planör. Ucuz malzemelerle yapıldığından çok hızlı değildir."
+  },
+  "Battle_Glider_Grade_02": {
+    "localized_name": "Mega Planör",
+    "description": "Gökyüzünde süzülmek için kullanılan bir planör. Seri üretilmiş ticari bir model olduğundan yeterince hızlıdır. Yüksek Kaliteli Çalışma Tezgâhı ile yapılabilir."
+  },
+  "Battle_Glider_Grade_03": {
+    "localized_name": "Giga Planör",
+    "description": "Gökyüzünde süzülmek için kullanılan bir planör. Geliştirilmiş tasarımıyla yüksek hızlarda süzülebilir. Üretim Montaj Hattı ile yapılabilir."
+  },
+  "Battle_Glider_Grade_04": {
+    "localized_name": "Hiper Planör",
+    "description": "Gökyüzünde süzülmek için kullanılan bir planör. Performansı daha da geliştirilerek hız ve kaldırma kapasitesi artırılmıştır. Üretim Montaj Hattı II ile yapılabilir."
+  },
+  "Battle_GunPowder_Grade_02": {
+    "localized_name": "Barut",
+    "description": "Mühimmatı ateşlemek için kullanılan Barut. Mermi yapmak için gereklidir. Yüksek Kaliteli Çalışma Tezgâhı ile yapılabilir."
+  },
+  "Battle_Helm_Grade_02_Fur": {
+    "localized_name": "Tüylü Saç Bandı",
+    "description": "Güzel tüylerden yapılmış bir saç aksesuarı. Nedense başa alınan ölümcül darbeleri engelliyormuş gibi hissettirir. İlkel Tezgâh kullanılarak üretilebilir."
+  },
+  "Battle_Helm_Grade_03_Copper": {
+    "localized_name": "Metal Kask",
+    "description": "Metalden yapılmış bir miğfer. Düşüncelerini korumaya devam eden, güvenilir ve iç rahatlatıcı bir savunma ekipmanıdır. Yüksek Kaliteli Çalışma Tezgâhı kullanılarak üretilebilir."
+  },
+  "Battle_Helm_Grade_04_Iron": {
+    "localized_name": "Saf Metal Kask",
+    "description": "Yüksek kaliteli metalden yapılmış bir miğfer. İyice parlatılmış metalin ışıltısı, taşıyan kişinin değerini arttırır. Üretim Montaj Hattı kullanılarak üretilebilir."
+  },
+  "Battle_Helm_Grade_05_Steal": {
+    "localized_name": "Pal Metali Kask",
+    "description": "Pal Metali Külçe kullanılarak yapılmış bir miğfer. Herkesin imreneceği üstün kaliteye sahip, taşıyanın seçkin bir savaşçı olduğunu gösteren bir simgedir. Üretim Montaj Hattı II kullanılarak üretilebilir."
+  },
+  "Battle_Helm_Grade_06_Plastic": {
+    "localized_name": "Plastiçelik Kask",
+    "description": "Plastiçelik kullanılarak yapılmış bir miğfer. Savunma gücü arttırılmış olmasının yanı sıra daha hafif hâle getirilmiştir. Üretim Montaj Hattı II kullanılarak üretilebilir."
+  },
+  "Battle_MeleeWeapon_Axe_Steal": {
+    "localized_name": "Pal Metali Balta",
+    "description": null
+  },
+  "Battle_MeleeWeapon_Bat": {
+    "localized_name": "Tahta Sopa",
+    "description": "Yakın menzilli dövüşler için bir Tahta Sopa. İhtiyaç hâlinde küçük bir Pal'ın pestilini çıkarabilir."
+  },
+  "Battle_MeleeWeapon_Bat2": {
+    "localized_name": "Beyzbol Sopası",
+    "description": null
+  },
+  "Battle_MeleeWeapon_Pickaxe_Steal": {
+    "localized_name": "Pal Metali Kazma",
+    "description": null
+  },
+  "Battle_MeleeWeapon_Sword": {
+    "localized_name": "Kılıç",
+    "description": "Yakın dövüş için kullanılan bir Kılıç. Keskinliği olağanüstüdür! Ancak düşmana yaklaşmayı gerektirdiği için oldukça tehlikelidir. Silah Tezgâhı kullanılarak üretilebilir."
+  },
+  "Battle_RangeWeapon_AssaultRifle": {
+    "localized_name": "Taarruz Tüfeği",
+    "description": "Ezici ateş hızıyla düşmanları bastıran bir Taarruz Tüfeği. Güçlü rakiplere karşı yapılan savaşlar için biçilmiş kaftandır. Silah Montaj Hattı kullanılarak üretilebilir."
+  },
+  "Battle_RangeWeapon_Bow1": {
+    "localized_name": "Eski Yay",
+    "description": "İlkel bir menzilli silah. Parça parça bir araya getirilerek yapıldığı için gücü düşüktür. İlkel Tezgâh kullanılarak üretilebilir."
+  },
+  "Battle_RangeWeapon_Bow3": {
+    "localized_name": "Üç Oklu Yay",
+    "description": "Aynı anda üç okun atılmasına olanak tanıyan geliştirilmiş bir yay. Tuhaf bir mekanizma sayesinde, atış yapıldığında sadece tek bir Ok harcar."
+  },
+  "Battle_RangeWeapon_BowGun": {
+    "localized_name": "Arbalet",
+    "description": "Ok i güç harcamadan ateşleyebilir. Doldurması zaman alır, ancak son derece güçlü bir atış yapar. Yüksek Kaliteli Çalışma Tezgâhı kullanılarak üretilebilir."
+  },
+  "Battle_RangeWeapon_CompoundBow": {
+    "localized_name": "Alaşım Yay",
+    "description": null
+  },
+  "Battle_RangeWeapon_FlameThrower": {
+    "localized_name": "Alev Makinesi",
+    "description": "Uzun menzilli alevler fırlatan bir Alev Makinesi. İsabet ettiği hedefleri yakabilir. Silah Montaj Hattı II kullanılarak üretilebilir."
+  },
+  "Battle_RangeWeapon_GatlingGun": {
+    "localized_name": "Gatling Tüfeği",
+    "description": "Yüksek ateş hızına sahip bir Gatling silahı. Tarama ateşiyle düşmanları delik deşik edebilir. Silah Montaj Hattı II kullanılarak üretilebilir."
+  },
+  "Battle_RangeWeapon_GrenadeLauncher": {
+    "localized_name": "Bombaatar",
+    "description": "Geniş çaplı bir patlamaya neden olan el bombaları fırlatabilir. Çok sayıda düşmana karşı mücadelede kullanışlıdır. Silah Montaj Hattı II kullanılarak üretilebilir."
+  },
+  "Battle_RangeWeapon_GuidedMissileLauncher": {
+    "localized_name": "Güdümlü Füzeatar",
+    "description": "Düşmanı otomatik olarak hedef alıp takip eden füzeler fırlatabilir. Füzeler hedefe ulaştığında patlar ve geniş bir alana hasar verir. Silah Montaj Hattı II kullanılarak üretilebilir."
+  },
+  "Battle_RangeWeapon_HandGun": {
+    "localized_name": "Tabanca",
+    "description": "Hızlı atış özelliklerine sahip gelişmiş kapasiteli bir tabanca. Eğreti Tabanca ile kıyaslandığında daha yüksek anlık silah gücü vardır. Silah Tezgâhı ile üretilir."
+  },
+  "Battle_RangeWeapon_HomingSphereLauncher": {
+    "localized_name": "Güdümlü Küre Atıcı",
+    "description": "Küre fırlatmak için kullanılan bir fırlatıcı. Fırlatılan küreler Pal’ları takip eder. Silah Montaj Hattı II kullanılarak üretilebilir."
+  },
+  "Battle_RangeWeapon_LaserRifle": {
+    "localized_name": "Lazer Tüfeği",
+    "description": "Lazer ateşleyen bir silah. Ateş gücü yüksektir ve kullanımı kolaydır. Silah Montaj Hattı II kullanılarak üretilebilir."
+  },
+  "Battle_RangeWeapon_OldRevolver": {
+    "localized_name": "Eski Altıpatlar",
+    "description": null
+  },
+  "Battle_RangeWeapon_Rifle": {
+    "localized_name": "Tek Atışlı Tüfek",
+    "description": "Tek atışlı bir tüfek. Doldurması zaman alır. Kapasitesindeki eksiği saf güçle telafi eder. Silah Montaj Hattı ile üretilir."
+  },
+  "Battle_RangeWeapon_RocketLauncher": {
+    "localized_name": "Roketatar",
+    "description": "Uzun mesafeden güçlü bombardıman yapabilen bir Roketatar. Silah Montaj Hattı II kullanılarak üretilebilir."
+  },
+  "Battle_RangeWeapon_SemiAutoRifle": {
+    "localized_name": "Yarı Otomatik Tüfek",
+    "description": null
+  },
+  "Battle_RangeWeapon_SemiAutoShotgun": {
+    "localized_name": "Yarı Otomatik Av Tüfeği",
+    "description": null
+  },
+  "Battle_RangeWeapon_ShotGun": {
+    "localized_name": "Çifte Av Tüfeği",
+    "description": "Yakın menzilde büyük tahribat yaratır. İki kez ateşlendikten sonra yeniden doldurulması gerekir. Sınırlı mermi kapasitesine rağmen etkisi güçlüdür. Silah Montaj Hattı ile üretilir."
+  },
+  "Battle_RangeWeapon_ShotGun_Multi": {
+    "localized_name": "Pompalı Av Tüfeği",
+    "description": "Mermi kapasitesi arttırılarak daha güçlü hâle getirilmiş bir pompalı tüfek. Yakın mesafedeki hasar çıkışı eşsizdir. Silah Montaj Hattı kullanılarak üretilebilir."
+  },
+  "Battle_RangeWeapon_SphereLauncher": {
+    "localized_name": "Saçılan Küre Atıcı",
+    "description": "Çok sayıda küreyi aynı anda fırlatabilen yeni nesil bir fırlatıcı. Pal sürülerini toplu hâlde yakalamayı mümkün kılar. Silah Montaj Hattı kullanılarak üretilebilir."
+  },
+  "Battle_RangeWeapon_SphereLauncher_Once": {
+    "localized_name": "Tek Atışlı Küre Atıcı",
+    "description": "Küre fırlatmak için kullanılan bir fırlatıcı. Daha uzaktaki Pal’ları bile yakalayabilir. Silah Tezgâhı kullanılarak üretilebilir."
+  },
+  "Battle_RangeWeapon_SubmachineGun": {
+    "localized_name": "Hafif Makineli Tüfek",
+    "description": null
+  },
+  "BeamLauncher": {
+    "localized_name": "Işın Fırlatıcı",
+    "description": "Yüksek yoğunluklu ışın fırlatarak geniş bir alanda patlamaya neden olan bir fırlatıcı. [ Seri atış yaparken aşırı ısınmaya dikkat edilmelidir."
+  },
+  "BeamLauncherBullet": {
+    "localized_name": "Işın Fırlatıcı Mermisi",
+    "description": null
+  },
+  "BeamSword": {
+    "localized_name": "Enerji Kılıcı",
+    "description": null
+  },
+  "BelieverFlagSet": {
+    "localized_name": "Hür Pal İttifakı Flama Seti",
+    "description": "Hür Pal İttifakı Örgüt Bayrağıile Hür Pal İttifakı Dikey Flamasıseti. Hür Pal İttifakını alt ettiğinin kanıtıdır."
+  },
+  "Bio_Battery": {
+    "localized_name": "Biyobatteri",
+    "description": null
+  },
+  "Bio_Coolant": {
+    "localized_name": "Kriyojenik Soğutucu",
+    "description": null
+  },
+  "BlastFurnace4": {
+    "localized_name": "Devasa Ocak",
+    "description": null
+  },
+  "BreedFarm": {
+    "localized_name": "Üretim Çiftliği",
+    "description": "Yumurtalar üretmek için bir erkek ve bir dişi Pal ata. Çiftleşme için Pasta gereklidir."
+  },
+  "BronzeSword": {
+    "localized_name": "İlkel Kılıç",
+    "description": "Yakın menzilli dövüşler için. Yüzü son keskindir! Bir kalemden keskin olduğu açık.Üretmek için gerekir."
+  },
+  "BuildableGoddessStatue": {
+    "localized_name": "Güç Heykeli",
+    "description": "Oyuncunun ve Pal'larının istatistiklerini geliştirmek için adaklar sun."
+  },
+  "Cake02": {
+    "localized_name": "Mantar Keki",
+    "description": null
+  },
+  "Cake03": {
+    "localized_name": "Sebzeli Kek",
+    "description": null
+  },
+  "Cake04": {
+    "localized_name": "Lüks Sebze Pastası",
+    "description": null
+  },
+  "Cake05": {
+    "localized_name": "Özel Kek",
+    "description": null
+  },
+  "CarbonFiber": {
+    "localized_name": "Karbon Fiber",
+    "description": null
+  },
+  "Cauldron": {
+    "localized_name": "Cadı Kazanı",
+    "description": null
+  },
+  "CeilingLamp": {
+    "localized_name": "Tavan Lambası",
+    "description": "Tavana monte edilebilir."
+  },
+  "Cement": {
+    "localized_name": "Çimento",
+    "description": null
+  },
+  "ChargeLaserRifle": {
+    "localized_name": "Şarjlı Tüfek",
+    "description": null
+  },
+  "ChargeLaserRifleBullet": {
+    "localized_name": "Şarjlı Tüfek Mermisi",
+    "description": null
+  },
+  "Clinic": {
+    "localized_name": "Muayenehane",
+    "description": null
+  },
+  "Cloth2": {
+    "localized_name": "Yüksek Kaliteli Kumaş",
+    "description": "Büyük miktarda Yün ile dokunur. Yüksek kaliteli zırh yapmak için gereklidir. Yüksek Kaliteli Çalışma Tezgâhı ile yapılabilir."
+  },
+  "CompositeDesk": {
+    "localized_name": "Çizim Masası",
+    "description": null
+  },
+  "Computer": {
+    "localized_name": "Bilgisayar",
+    "description": null
+  },
+  "Cooler": {
+    "localized_name": "Soğutucu",
+    "description": "Çevredeki alanı soğutur ve sıcağa karşı korur."
+  },
+  "CoolerBox": {
+    "localized_name": "Soğutucu Kutu",
+    "description": null
+  },
+  "CoolerPalFoodBox": {
+    "localized_name": "Soğuk Yiyecek Kutusu",
+    "description": null
+  },
+  "Corrosive_Solvent": {
+    "localized_name": "Korozyon Çözücü",
+    "description": null
+  },
+  "Crusher": {
+    "localized_name": "Öğütücü",
+    "description": "Diğer malzemelerle takas etmek için Taş ve Odun öğüten bir tesis. Su türbinin dönmesi için Sulama iş uygunluğuna sahip bir Pal gerekir."
+  },
+  "CrystalPit": {
+    "localized_name": "Hexoquartz Madeni",
+    "description": null
+  },
+  "DamagedScarecrow": {
+    "localized_name": "Antrenman Mankeni",
+    "description": "Pengullet şeklinde bir antrenman mankeni."
+  },
+  "DarkIslandFlagSet": {
+    "localized_name": "Feybreak Halkının Bayrak Seti",
+    "description": "Feybreak Halkının Grup Bayrağı ve Feybreak Halkının Dikey Sancağı seti. Feybreak halkını alt ettiğinin kanıtıdır."
+  },
+  "DecalGunSet": {
+    "localized_name": "Çıkartma Tabancası Seti",
+    "description": "Çıkartma tabancası seti. Ateşlendiği yere bir Pal çıkartması yapan tuhaf bir silahın üretimine olanak tanır. Gerekli cephane de üretilebilir."
+  },
+  "DefenseWait": {
+    "localized_name": "Kum Çuvalı",
+    "description": "Buraya atanan Pal'lar yaklaşan düşmanlara karşı nöbet tutar."
+  },
+  "DefenseWall": {
+    "localized_name": "Taş Savunma Duvarı",
+    "description": "Düşman işgallerine karşı koruma sağlayan büyük savunma duvarı."
+  },
+  "DefenseWall_Metal": {
+    "localized_name": "Metal Savunma Duvarı",
+    "description": "Düşman müdahalesini engellemek için yapılmış devasa savunma duvarı. Metalden yapılmıştır, son derece sağlamdır."
+  },
+  "DefenseWall_Wood": {
+    "localized_name": "Tahta Savunma Duvarı",
+    "description": "Düşman müdahalesini engellemek için yapılmış devasa savunma duvarı. Tahtadan yapıldığı için kolay kırılır."
+  },
+  "DimensionPalStorage": {
+    "localized_name": "Boyutsal Pal Deposu",
+    "description": null
+  },
+  "DismantlingConveyor": {
+    "localized_name": "Pal Parçalama Bandı",
+    "description": null
+  },
+  "DisplayCharacter": {
+    "localized_name": "Sergileme Kafesi",
+    "description": "Yakaladığın Pal'ları izlemek için bir yapı. İçindeki Pal'lar savaşa veya üretime katılamaz ancak karınları da acıkmaz."
+  },
+  "DroneLauncher": {
+    "localized_name": "Dron Fırlatıcı",
+    "description": "Otonom saldırı gerçekleştiren dronlar fırlatan bir fırlatıcı. Aynı anda 8 birime kadar konuşlandırılabilir ve sürekli baskı ateşi sağlar."
+  },
+  "ElecBaton": {
+    "localized_name": "Elektroşok Sopası",
+    "description": "Vurduğunda elektrik çarpması etkisi veren bir yakın dövüş silahı. Elektrik çarpmasına uğrayan Pal daha kolay yakalanır. Yüksek Kaliteli Çalışma Tezgâhı kullanılarak üretilebilir."
+  },
+  "ElectricArcAssaultRifle": {
+    "localized_name": "Plazma Tüfeği",
+    "description": "Merminin çarptığı noktadan elektrik yayan ve birden fazla düşmana zincirleme hasar veren tüfek."
+  },
+  "ElectricArcAssaultRifleBullet": {
+    "localized_name": "Plazma Tüfeği Mermisi",
+    "description": null
+  },
+  "ElectricCooler": {
+    "localized_name": "Elektrikli Soğutucu",
+    "description": "Çevredeki alanı soğutur ve sıcağa karşı korur. Menzili ve soğutma özelliği artırıldı."
+  },
+  "ElectricGenerator_Large": {
+    "localized_name": "Büyük Güç Jeneratörü",
+    "description": null
+  },
+  "ElectricHeater": {
+    "localized_name": "Elektrikli Isıtıcı",
+    "description": "Çevredeki alanı ısıtır ve soğuğa karşı korur. Menzili ve ısıtma özelliği artırıldı."
+  },
+  "EnergyLauncherBullet": {
+    "localized_name": "Plazma Kartuşu",
+    "description": null
+  },
+  "EnergyRocketLauncher": {
+    "localized_name": "Plazma Topu",
+    "description": null
+  },
+  "EnergyShotgun": {
+    "localized_name": "Enerji Tüfeği",
+    "description": null
+  },
+  "EnergyShotgunBullet": {
+    "localized_name": "Enerji Tüfeği Mermisi",
+    "description": null
+  },
+  "EnergyStorage_Electric": {
+    "localized_name": "Akümülatör",
+    "description": null
+  },
+  "Expedition": {
+    "localized_name": "Pal Seferi İstasyonu",
+    "description": null
+  },
+  "Factory_Hard_04": {
+    "localized_name": "Gelişmiş medeniyetin iş fabrikası",
+    "description": null
+  },
+  "Factory_Money": {
+    "localized_name": "Altın Para Montaj Hattı",
+    "description": null
+  },
+  "Farm_SkillFruits": {
+    "localized_name": "Yetenek Meyvesi Bahçesi",
+    "description": null
+  },
+  "FireCultFlagSet": {
+    "localized_name": "Ölümsüz Ateş Kardeşliği Flama Seti",
+    "description": "Ölümsüz Ateş Kardeşliği Örgüt Bayrağıile Ölümsüz Ateş Kardeşliği Dikey Flamasıseti. Ölümsüz Ateş Kardeşliğini alt ettiğinin kanıtıdır."
+  },
+  "FishingBait_2": {
+    "localized_name": "Kaliteli Balık Yemi",
+    "description": null
+  },
+  "FishingBait_3": {
+    "localized_name": "Lüks Balık Yemi",
+    "description": null
+  },
+  "FishingBait_3_A": {
+    "localized_name": "Çekici Balık Yemi",
+    "description": null
+  },
+  "FishingPond1": {
+    "localized_name": "Balık tutma alanı",
+    "description": null
+  },
+  "FishingPond2": {
+    "localized_name": "Büyük balık tutma alanı",
+    "description": null
+  },
+  "FishingRod_02_1": {
+    "localized_name": "Orta Seviye Olta (Cattiva)",
+    "description": null
+  },
+  "FishingRod_03_1": {
+    "localized_name": "İleri Seviye Olta (Pengullet)",
+    "description": null
+  },
+  "FishingSet1": {
+    "localized_name": "Başlangıç Seviyesi Olta Takımı",
+    "description": "Başlangıç seviyesindekilere yönelik olta ve yem seti. Olta ve yemi hazırladıktan sonra, su kenarında Pal yakalamak mümkün olur."
+  },
+  "FlamethrowerBullet": {
+    "localized_name": "Alev Makinesi Yakıtı",
+    "description": null
+  },
+  "FlourMill": {
+    "localized_name": "Değirmen",
+    "description": "Un üretmek için Buğday öğüten bir tesis. Su türbinin dönmesi için Sulama iş uygunluğuna sahip bir Pal gerekir."
+  },
+  "FlowerBed": {
+    "localized_name": "Çiçek Tarhı",
+    "description": null
+  },
+  "Fountain": {
+    "localized_name": "Çeşme",
+    "description": null
+  },
+  "FragGrenade": {
+    "localized_name": "El Bombası",
+    "description": null
+  },
+  "FragGrenade_Dark": {
+    "localized_name": "Karanlık Bomba",
+    "description": null
+  },
+  "FragGrenade_Dragon": {
+    "localized_name": "Ejderha Bombası",
+    "description": null
+  },
+  "FragGrenade_Elec": {
+    "localized_name": "Şok Bombası",
+    "description": null
+  },
+  "FragGrenade_Fire": {
+    "localized_name": "Yangın Bombası",
+    "description": null
+  },
+  "FragGrenade_Ground": {
+    "localized_name": "Toprak Bombası",
+    "description": null
+  },
+  "FragGrenade_Ice": {
+    "localized_name": "Buz Bombası",
+    "description": null
+  },
+  "FragGrenade_Leaf": {
+    "localized_name": "Çimen Bombası",
+    "description": null
+  },
+  "FragGrenade_Super": {
+    "localized_name": "El Bombası Mk2",
+    "description": null
+  },
+  "FragGrenade_Water": {
+    "localized_name": "Su Bombası",
+    "description": null
+  },
+  "FurnitureSet_1": {
+    "localized_name": "Ahşap Salon Mobilyası Seti",
+    "description": "Dekoratif mobilya seti. Yaşam alanına mobilyalar yerleştirerek Pal'larınla hayatın tadını çıkar."
+  },
+  "FurnitureSet_10": {
+    "localized_name": "Barikat Seti",
+    "description": "Dekoratif mobilya seti. Girilmesini istemediğin yerlerin önüne koy."
+  },
+  "FurnitureSet_11": {
+    "localized_name": "Trafik Kontrol Seti",
+    "description": "Dekoratif mobilya seti. Yol yoksa trafik kuralı da yoktur."
+  },
+  "FurnitureSet_12": {
+    "localized_name": "Yol İşareti Seti",
+    "description": "Dekoratif mobilya seti. Yol yoksa trafik kuralı da yoktur."
+  },
+  "FurnitureSet_13": {
+    "localized_name": "Metal Sandalye ve Çalışma Masası Seti",
+    "description": "Dekoratif mobilya seti. Metal yapılarla birlikte kullan ve Pal'larınla hayatın tadını çıkar."
+  },
+  "FurnitureSet_14": {
+    "localized_name": "Ahşap-Demir Masa Seti",
+    "description": "Dekoratif mobilya seti. Metal yapılarla birlikte kullan ve Pal'larınla hayatın tadını çıkar."
+  },
+  "FurnitureSet_15": {
+    "localized_name": "Piyano Mobilya Seti",
+    "description": "Dekoratif mobilya seti. Üssüne yerleştir ve lüks bir hayatın hayallerini kur."
+  },
+  "FurnitureSet_16": {
+    "localized_name": "Antika Ayna Seti",
+    "description": "Dekoratif mobilya seti. İyi göründüğünden emin olmak için tasarlandı."
+  },
+  "FurnitureSet_17": {
+    "localized_name": "Halı Seti",
+    "description": "Dekoratif mobilya seti. Üssüne bir ev havası katmak için bir zemine yerleştir."
+  },
+  "FurnitureSet_18": {
+    "localized_name": "Antika Kanepe Seti",
+    "description": "Dekoratif mobilya seti. Üssüne lüks havası katacak."
+  },
+  "FurnitureSet_19": {
+    "localized_name": "Antika Sandalye Seti",
+    "description": "Dekoratif mobilya seti. Antika bir çalışma masasıyla birlikte kullan."
+  },
+  "FurnitureSet_2": {
+    "localized_name": "Ahşap Taverna Deposu Mobilya Seti",
+    "description": "Tavernalara yakışacak bir dolap seti. Eşya depolanabilir."
+  },
+  "FurnitureSet_20": {
+    "localized_name": "Antika Banyo Seti",
+    "description": "Dekoratif mobilya seti. Gerçekten temizlik için kullanılamaz."
+  },
+  "FurnitureSet_21": {
+    "localized_name": "Antika Depolama Seti",
+    "description": "Antika depolama mobilyası seti. Eşya depolanabilir."
+  },
+  "FurnitureSet_22": {
+    "localized_name": "Antika Depolama Dolabı Seti",
+    "description": "Antika depolama dolabı seti. Eşya depolanabilir."
+  },
+  "FurnitureSet_23": {
+    "localized_name": "Saat Seti",
+    "description": "Dekoratif mobilya seti. Zamanı gerçekten göstermez."
+  },
+  "FurnitureSet_24": {
+    "localized_name": "Antika Çalışma Masası Seti",
+    "description": "Dekoratif mobilya seti. Antika bir sandalyeyle birlikte kullan."
+  },
+  "FurnitureSet_25": {
+    "localized_name": "Banyo Seti",
+    "description": "Dekoratif mobilya seti. Orijinal amacıyla kullanılamaz."
+  },
+  "FurnitureSet_26": {
+    "localized_name": "Eğlence Mobilyası Seti",
+    "description": "Dekoratif mobilya seti. Pal'ların çalışmaya devam edecek."
+  },
+  "FurnitureSet_27": {
+    "localized_name": "Sokak Lambası Seti",
+    "description": "Aydınlatma sağlayan bir sokak lambası seti. Elektrik olmadan çalışmaz."
+  },
+  "FurnitureSet_28": {
+    "localized_name": "Şömine Seti",
+    "description": "Aydınlatma sağlayan, tuğladan bir şömine seti. İçinde ateş yakılmalıdır."
+  },
+  "FurnitureSet_29": {
+    "localized_name": "Antika Lamba Seti",
+    "description": "Aydınlatma sağlayan, antika bir lamba seti. Elektrik olmadan çalışmaz."
+  },
+  "FurnitureSet_3": {
+    "localized_name": "Ahşap Taverna Mobilya Seti",
+    "description": "Dekoratif mobilya seti. Kendine bir bar kur ve Pal'larınla hayatın tadını çıkar."
+  },
+  "FurnitureSet_30": {
+    "localized_name": "Metal Raf Seti",
+    "description": "Metal raf seti. Eşya depolanabilir."
+  },
+  "FurnitureSet_31": {
+    "localized_name": "Bahçe Mobilyası Seti",
+    "description": "Dekoratif mobilya seti. Üssünün dışını güzelleştirir."
+  },
+  "FurnitureSet_32": {
+    "localized_name": "Antika Yüksek Kaliteli Mobilya Seti",
+    "description": "Dekoratif mobilya seti. Üssüne şık bir hava katar."
+  },
+  "FurnitureSet_4": {
+    "localized_name": "Duvara Asılı Ev Bitkisi Seti",
+    "description": "Dekoratif mobilya seti. Üssünün duvarlarına bitkiler yerleştirerek renk kat."
+  },
+  "FurnitureSet_5": {
+    "localized_name": "Metal Fıçı Seti",
+    "description": "Dekoratif mobilya seti. Taşkınlık yapmaya uygun değildir."
+  },
+  "FurnitureSet_6": {
+    "localized_name": "Depolama Konteynerleri Seti",
+    "description": "Depolama mobilyası seti. Eşya depolanabilir."
+  },
+  "FurnitureSet_7": {
+    "localized_name": "Deri Sandalye Seti",
+    "description": "Dekoratif mobilya seti. Lüks deri kullanılmıştır."
+  },
+  "FurnitureSet_8": {
+    "localized_name": "Acil Durum Çıkışı İşareti Seti",
+    "description": "Dekoratif mobilya seti. Daha medeni bir dünyaya ait paha biçilemez bir sanat eseridir."
+  },
+  "FurnitureSet_9": {
+    "localized_name": "Ev Bitkisi Seti",
+    "description": "Dekoratif mobilya seti. Üssünün çevresine bitkiler yerleştirerek renk kat."
+  },
+  "FurnitureSet_Japanese": {
+    "localized_name": "Japon Tarzı Mobilya Seti",
+    "description": "Japon tarzı dekoratif mobilya seti. Üssünü geleneksel bir Japon evine dönüştür."
+  },
+  "FurnitureTree_Bamboo": {
+    "localized_name": "Model Bambu Seti",
+    "description": "Dekoratif model bambu seti. Ağaçları yerleştirerek bambu ormanı tarzında bir üs inşa et. Bu yapıdan malzeme elde edilemez."
+  },
+  "FurnitureTree_Cherry": {
+    "localized_name": "Model Tropikal Ağaç Seti",
+    "description": "Dekoratif model kiraz çiçeği seti. Ağaçları yerleştirerek Sakurajima tarzı bir üs inşa et. Bu yapıdan malzeme elde edilemez."
+  },
+  "FurnitureTree_Desert": {
+    "localized_name": "Model Çöl Ağacı Seti",
+    "description": "Dekoratif model çöl ağacı seti. Ağaçları yerleştirerek çöl tarzında bir üs inşa et. Bu yapıdan malzeme elde edilemez."
+  },
+  "FurnitureTree_Green": {
+    "localized_name": "Model Ağaç Seti",
+    "description": "Dekoratif model ağaç seti. Ağaçları yerleştirerek doğa temalı bir üs inşa et. Bu yapıdan malzeme elde edilemez."
+  },
+  "FurnitureTree_Red": {
+    "localized_name": "Model Sonbahar Ağaç Seti",
+    "description": "Dekoratif model sonbahar ağaç seti. Ağaçları yerleştirerek doğa temalı bir üs inşa et. Bu yapıdan malzeme elde edilemez."
+  },
+  "FurnitureTree_Snow": {
+    "localized_name": "Model Karla Kaplı Ağaç Seti",
+    "description": "Dekoratif model karlı ağaç seti. Ağaçları yerleştirerek karlı dağ tarzında bir üs inşa et. Bu yapıdan malzeme elde edilemez."
+  },
+  "FurnitureTree_Tropical": {
+    "localized_name": "Model Karlı Ağaç Seti",
+    "description": "Dekoratif model tropikal ağaç seti. Ağaçları yerleştirerek tropikal tarzda bir üs inşa et. Bu yapıdan malzeme elde edilemez."
+  },
+  "FurnitureTree_Yellow": {
+    "localized_name": "Model Sakura Seti",
+    "description": "Dekoratif model sarı yapraklı ağaç seti. Ağaçları yerleştirerek doğa temalı bir üs inşa et. Bu yapıdan malzeme elde edilemez."
+  },
+  "GasMask": {
+    "localized_name": "Aşındırıcı Sis Maskesi",
+    "description": null
+  },
+  "GatlingBullet": {
+    "localized_name": "Gatling Tüfeği Mermisi",
+    "description": null
+  },
+  "Glass_houseset": {
+    "localized_name": "Cam Yapı Seti",
+    "description": "Cam kullanarak üsler inşa etmek için bir set. Cam zeminler, duvarlar, tavanlar, merdivenler ve sığınaklar için gereken diğer şeyleri inşa etmene olanak tanır."
+  },
+  "GlobalPalStorage": {
+    "localized_name": "Global Pal Kutusu",
+    "description": null
+  },
+  "GrapplingGun": {
+    "localized_name": "Halat Tabancası",
+    "description": null
+  },
+  "GrapplingGun2": {
+    "localized_name": "Mega Halat Tabancası",
+    "description": null
+  },
+  "GrapplingGun3": {
+    "localized_name": "Giga Halat Tabancası",
+    "description": null
+  },
+  "GrapplingGun4": {
+    "localized_name": "Hiper Halat Tabancası",
+    "description": null
+  },
+  "GrapplingGun5": {
+    "localized_name": "Ultra Kancalı Silah",
+    "description": null
+  },
+  "GrenadeBullet": {
+    "localized_name": "Bomba Mermisi",
+    "description": null
+  },
+  "GuildChest": {
+    "localized_name": "Lonca Sandığı",
+    "description": null
+  },
+  "HandTorch": {
+    "localized_name": "Elde Tutulan Meşale",
+    "description": "Gece karanlığını aydınlatır ve soğuktan korunmanızı sağlar. Ayrıca sınırlı da olsa yakın dövüşte kullanılabilir. İlkel Tezgâh kullanılarak üretilebilir."
+  },
+  "HandgunBullet": {
+    "localized_name": "Tabanca Mermisi",
+    "description": "Tabanca gibi silahlarda kullanılan mühimmat. Silah Tezgâhı kullanılarak üretilebilir."
+  },
+  "Headstone": {
+    "localized_name": "Mezar Taşı",
+    "description": null
+  },
+  "Heater": {
+    "localized_name": "Isıtıcı",
+    "description": "Çevredeki alanı ısıtır ve soğuğa karşı korur."
+  },
+  "HighGrade_Processed_Wood": {
+    "localized_name": "Yüksek Kaliteli Ahşap Levha",
+    "description": null
+  },
+  "Homeward": {
+    "localized_name": "Eve Götüren Yıldırım Bulutu",
+    "description": null
+  },
+  "HugeKitchen": {
+    "localized_name": "Büyük Ölçekli Taş Fırın",
+    "description": null
+  },
+  "HunterFlagSet": {
+    "localized_name": "Kaçak Avcılar Çetesi Flama Seti",
+    "description": "Kaçak Avcılar Çetesi Örgüt Bayrağıile Kaçak Avcılar Çetesi Dikey Flamasıseti. Kaçak Avcılar Çetesini alt ettiğinin kanıtıdır."
+  },
+  "IceCrusher": {
+    "localized_name": "Soğutmalı Öğütücü",
+    "description": null
+  },
+  "IceHorseStatue": {
+    "localized_name": "Buzul Heykeli",
+    "description": null
+  },
+  "Infra_ElectricGenerator_Grade_01": {
+    "localized_name": "Güç Jeneratörü",
+    "description": "Üsteki Elektrik Pal'ları artık elektrik depolayabilir, böylece elektrikli tesis ve araçlar kullanılabilir."
+  },
+  "Infra_ElectronicCircuit": {
+    "localized_name": "Devre Kartı",
+    "description": "Hassas ekipmanlar yapmak için gerekli Devre Kartı. Üretim Montaj Hattı ile yapılabilir."
+  },
+  "Infra_ItemChest_Grade_01": {
+    "localized_name": "Tahta Sandık",
+    "description": "Eşya depolamak için kullanılır. Bir üsse yerleştirdiğinde Taşıma iş uygunluğuna sahip Pal'lar eşyaları otomatik olarak buraya taşır."
+  },
+  "Infra_ItemChest_Grade_02": {
+    "localized_name": "Metal Sandık",
+    "description": "Daha fazla eşya depolamak için kullanılır. Taşıma iş uygunluğuna sahip Pal'lar eşyaları otomatik olarak buraya taşır."
+  },
+  "Infra_ItemChest_Grade_03": {
+    "localized_name": "Saf Metal Sandık",
+    "description": "Çok daha fazla eşya depolamak için kullanılır. Taşıma iş uygunluğuna sahip Pal'lar eşyaları otomatik olarak buraya taşır."
+  },
+  "Infra_MachineParts": {
+    "localized_name": "Çivi",
+    "description": null
+  },
+  "Infra_PalBed_Grade_01": {
+    "localized_name": "Saman Pal Yatağı",
+    "description": "Üsteki Pal'lar geceleri Pal yataklarda uyurken AKL değerlerini geri kazanır. Pal yatağı olmayan Pal'lar rahat uyuyamazlar ve AKL değerlerini geri kazanmazlar."
+  },
+  "Infra_PalBed_Grade_02": {
+    "localized_name": "Yumuşak Pal Yatağı",
+    "description": "Pal'lar daha rahat uyur, uyurken geri kazandıkları Can ve AKL miktarı artar."
+  },
+  "Infra_PlayerBed_Grade_01": {
+    "localized_name": "Uyduruk Yatak",
+    "description": "İnsan yatağı. Uyumak Canını geri kazandırır. Gece uyuduğunda zaman sabaha kadar ilerler. Bir çatının altına inşa edilmediği sürece uyuyamazsın."
+  },
+  "Infra_PlayerBed_Grade_02": {
+    "localized_name": "İyi Yatak",
+    "description": "İyileştirme özelliği geliştirilmiş yumuşak bir yatak. Bir çatının altına inşa edilmediği sürece uyuyamazsın."
+  },
+  "ItemBooth": {
+    "localized_name": "Bit Pazarı (Eşyalar)",
+    "description": null
+  },
+  "ItemChest_04": {
+    "localized_name": "Gelişmiş Sandık",
+    "description": null
+  },
+  "JapaneseStyle_houseset": {
+    "localized_name": "Japon Tarzı Yapı Seti",
+    "description": "Japon tarzı mimari kullanarak üsler inşa etmek için bir set. Japon tarzı zeminler, duvarlar, tavanlar, merdivenler ve sığınaklar için gereken diğer şeyleri inşa etmene olanak tanır."
+  },
+  "JetDragonStatue": {
+    "localized_name": "Jedrun Heykeli",
+    "description": null
+  },
+  "Katana": {
+    "localized_name": "Katana",
+    "description": null
+  },
+  "Lab": {
+    "localized_name": "Pal İş Gücü Araştırma Laboratuvarı",
+    "description": null
+  },
+  "Lamp": {
+    "localized_name": "Lamba",
+    "description": "Bir üsteki karanlık yerleri aydınlatır."
+  },
+  "Lantern": {
+    "localized_name": "Bel Feneri",
+    "description": null
+  },
+  "Lantern_High": {
+    "localized_name": "Güçlendirilmiş Bel Feneri",
+    "description": null
+  },
+  "LargeCeilingLamp": {
+    "localized_name": "Büyük Tavan Lambası",
+    "description": "Geniş bir alanı aydınlatmak için tavana monte edilebilir."
+  },
+  "LargeLamp": {
+    "localized_name": "Sabitlenmiş Büyük Lamba",
+    "description": "Boyut olarak daha büyüktür ve daha geniş alanı aydınlatır."
+  },
+  "LaserBullet": {
+    "localized_name": "Enerji Kartuşu",
+    "description": null
+  },
+  "LaserGatlingBullet": {
+    "localized_name": "Lazer Gatling Kartuşu",
+    "description": null
+  },
+  "LaserGatlingGun": {
+    "localized_name": "Lazer Gatling Tüfeği",
+    "description": null
+  },
+  "LaserMiningTool": {
+    "localized_name": "Çoklu Plazma Kesici",
+    "description": "Plazma enerjisini odaklayıp yansıtabilen taşınabilir bir plazma kesici. Maden kazmaktan ağaç kesmeye kadar geniş bir kullanım alanına sahiptir."
+  },
+  "LauncherBullet": {
+    "localized_name": "Roket Mermisi",
+    "description": "Roketatar gibi silahlarda kullanılan mühimmat. Silah Montaj Hattı II da üretilebilir."
+  },
+  "Launcher_Meteor": {
+    "localized_name": "Meteoratar",
+    "description": "Göktaşından işlenerek yapılmış sıra dışı bir silah. Hedefe ulaştığında tıpkı bir göktaşı gibi patlayarak büyük bir patlama yaratır. Silah Montaj Hattı kullanılarak üretilebilir."
+  },
+  "MakeshiftAssaultRifle": {
+    "localized_name": "Eğreti Taarruz Tüfeği",
+    "description": null
+  },
+  "MakeshiftHandgun": {
+    "localized_name": "Eğreti Tabanca",
+    "description": "Yedek parçalarla üretilmiş bir tabanca. Yakın dövüş için nispeten uygundur ancak sadece bir kez ateşlendikten sonra yeniden doldurulması gerekir. Silah Tezgâhı ile üretilir."
+  },
+  "MakeshiftShotgun": {
+    "localized_name": "Eğreti Av Tüfeği",
+    "description": null
+  },
+  "MakeshiftSubmachineGun": {
+    "localized_name": "Eğreti Hafif Makineli Tüfek",
+    "description": null
+  },
+  "ManganeseIngot": {
+    "localized_name": "Koralum Külçesi",
+    "description": null
+  },
+  "ManualElectricGenerator": {
+    "localized_name": "İnsan Enerjili Jeneratör",
+    "description": null
+  },
+  "MeatCutterKnife": {
+    "localized_name": "Satır",
+    "description": "Pal'ları parçalamak için bir bıçak. Kuşanıldığında Okşa komutu Parçala hâline gelir. Parçalanan Pal'lar sonsuza dek ortadan kalkar."
+  },
+  "MedicalPalBed_04": {
+    "localized_name": "Büyük Pal Yatağı",
+    "description": null
+  },
+  "MedicalPalBed_05": {
+    "localized_name": "Pal Kapsülü",
+    "description": null
+  },
+  "MedicineFacility_03": {
+    "localized_name": "Gelişmiş İlaç Tezgâhı",
+    "description": null
+  },
+  "MetalDetector": {
+    "localized_name": "Metal Dedektörü",
+    "description": null
+  },
+  "Metal_Gate": {
+    "localized_name": "Demir Giriş Kapısı",
+    "description": "Metalden yapılmış, büyük Pal'ların geçmesine olanak tanıyacak kadar geniş bir giriş kapısı."
+  },
+  "Metal_houseset": {
+    "localized_name": "Metal Yapı Seti",
+    "description": "Metal kullanarak üsler inşa etmek için bir set. Metal zeminler, duvarlar, tavanlar, merdivenler ve sığınaklar için gereken diğer şeyleri inşa etmene olanak tanır."
+  },
+  "MiningTool": {
+    "localized_name": "Maden Vagonu",
+    "description": null
+  },
+  "MissileBullet": {
+    "localized_name": "Füze Mermisi",
+    "description": null
+  },
+  "MonsterFarm": {
+    "localized_name": "Ağıl",
+    "description": "Koyun ve kümes hayvanı benzeri Pal'ları yetiştirmek için çiftlik. Otomatik olarak ürün üretmek için çiftliğe doğru iş uygunluğuna sahip Pal'lar ata."
+  },
+  "MultiElectricHatchingPalEgg": {
+    "localized_name": "Büyük Ölçekli Elektrikli Kuluçka Makinesi",
+    "description": null
+  },
+  "MultiElectricHatchingPalEggWithBreed": {
+    "localized_name": "Antik Medeniyet Birleştiricisi",
+    "description": null
+  },
+  "MultiHatchingPalEgg": {
+    "localized_name": "Büyük Yumurta Kuluçka Makinesi",
+    "description": null
+  },
+  "Musket": {
+    "localized_name": "Misket Tüfeği",
+    "description": "Eski tip ve sade bir silah. Tek atışı güçlüdür, ancak yeniden doldurulması zaman alır. Silah Tezgâhı kullanılarak üretilebilir."
+  },
+  "NinjaFlagSet": {
+    "localized_name": "Ay Goncası Flama Seti",
+    "description": "Ay Goncası Örgüt Bayrağıile Ay Goncası Dikey Flamasıseti. Ay Goncasını alt ettiğinin kanıtıdır."
+  },
+  "OctaviaSet01": {
+    "localized_name": "ULTRAKILL İş Birliği Seti 1",
+    "description": "[ULTRAKILL İş Birliği] V1 Zırhıve Nişancı Tabancasıseti."
+  },
+  "OctaviaSet02": {
+    "localized_name": "ULTRAKILL İş Birliği Seti 2",
+    "description": "[ULTRAKILL İş Birliği] V2 Zırhıve Çekirdek Atan Pompalı Tüfekseti."
+  },
+  "OilPump": {
+    "localized_name": "Ham Petrol Çıkarıcı",
+    "description": null
+  },
+  "OilPump02": {
+    "localized_name": "Ham Petrol Çıkarıcı - Yüksek Basınçlı Model",
+    "description": null
+  },
+  "OlympicCauldron": {
+    "localized_name": "Ateş Kazanı",
+    "description": null
+  },
+  "OperatingTable": {
+    "localized_name": "Pal Ameliyat Masası",
+    "description": null
+  },
+  "OverheatRifle": {
+    "localized_name": "Aşırı Isınan Tüfek",
+    "description": null
+  },
+  "OverheatRifleBullet": {
+    "localized_name": "Aşırı Isınan Tüfek Mermisi",
+    "description": null
+  },
+  "PALBOX": {
+    "localized_name": "Pal Kutusu",
+    "description": "Yakalanan Pal'ları saklayan bir tesis. İçindeki Pal'lar, zaman içinde Canlarını geri kazanır. Bu yapının etrafındaki bölge, üssün hâline gelir."
+  },
+  "PalBooth": {
+    "localized_name": "Bit Pazarı (Pal'lar)",
+    "description": null
+  },
+  "PalDopingShot": {
+    "localized_name": "Hız Artırıcı Silah",
+    "description": null
+  },
+  "PalDopingShotBullet": {
+    "localized_name": "Takviye Tabancası Mermisi",
+    "description": null
+  },
+  "PalDopingShot_2": {
+    "localized_name": "Takviye Silahı",
+    "description": null
+  },
+  "PalFoodBox": {
+    "localized_name": "Yem Kutusu",
+    "description": "Üsteki Pal'lar buraya koyduğun yiyecekleri yer."
+  },
+  "PalHealingGrenade": {
+    "localized_name": "Pal İyileştirme Bombası",
+    "description": null
+  },
+  "PalMedicineBox": {
+    "localized_name": "İlaç Dolabı",
+    "description": null
+  },
+  "PalRevive": {
+    "localized_name": "Canlandırma İlacı",
+    "description": null
+  },
+  "PalSphere_Ancient_1": {
+    "localized_name": "Sol-Küre",
+    "description": "Fırlatıldığında Pal'ları yakalayan bir eşya. Antik medeniyette Pal'lar ile bir arada yaşamayı sağlamlaştıran üst düzey bir küre."
+  },
+  "PalSphere_Ancient_2": {
+    "localized_name": "Kadim Küre",
+    "description": "Fırlatıldığında Pal'ları yakalayan bir eşya. Dünya Ağacı'nın gücünü emen ve antik medeniyetin zirve noktası olarak yaratılan nihai küre."
+  },
+  "PalSphere_Exotic": {
+    "localized_name": "Egzotik Küre",
+    "description": null
+  },
+  "Plastic": {
+    "localized_name": "Plastiçelik",
+    "description": null
+  },
+  "PoliceFlagSet": {
+    "localized_name": "PASG Flama Seti",
+    "description": "PASG Örgüt Bayrağıile PASG Dikey Flamasıseti. PASG’yi alt ettiğinin kanıtıdır."
+  },
+  "Polymer": {
+    "localized_name": "Polimer",
+    "description": null
+  },
+  "Potion_Extreme": {
+    "localized_name": "Gelişmiş İyileştirici İlaç",
+    "description": null
+  },
+  "Processed_Wood": {
+    "localized_name": "Ahşap Levha",
+    "description": null
+  },
+  "Product_Axe_Grade_01": {
+    "localized_name": "Taş Balta",
+    "description": "Odun kesmek için bir balta. Taştan yapılmıştır, çok keskin değildir."
+  },
+  "Product_Axe_Grade_02": {
+    "localized_name": "Metal Balta",
+    "description": "Sert ağaçların kesimi için de uygun olan metal bir balta. Kıtanın derinliklerinde yetişen dayanıklı ağaçlarda da etkilidir. Yüksek Kaliteli Çalışma Tezgâhı kullanılarak üretilebilir."
+  },
+  "Product_Axe_Grade_03": {
+    "localized_name": "Saf Metal Balta",
+    "description": "Volkanik bölgeler ve çöller gibi zorlu ortamlarda yetişen ağaçlardan Kalın kereste‘yi elde edebilen bir balta. Üretim Montaj Hattı kullanılarak üretilebilir."
+  },
+  "Product_CoalPit": {
+    "localized_name": "Kömür Madeni",
+    "description": null
+  },
+  "Product_Cooking_Grade_01": {
+    "localized_name": "Kamp Ateşi",
+    "description": "Basit yemekler yapmak veya bir parça sıcaklık ve aydınlık vermesi için kullanılır."
+  },
+  "Product_Cooking_Grade_02": {
+    "localized_name": "Kazan",
+    "description": "Daha fazla yemek çeşidini verimli bir şekilde hazırlamak için kullanılır."
+  },
+  "Product_Cooking_Grade_03": {
+    "localized_name": "Elektrikli Mutfak",
+    "description": "Elektrik gerektirir ama yüksek kaliteli yiyecekleri daha verimli hazırlayabilir. Tutuşturma iş uygunluğuna sahip Pal'lar gerektirir."
+  },
+  "Product_CopperPit": {
+    "localized_name": "Cevher Maden Alanı",
+    "description": null
+  },
+  "Product_CopperPit_2": {
+    "localized_name": "Cevher Maden Alanı II",
+    "description": null
+  },
+  "Product_Factory_Hard_Grade_01": {
+    "localized_name": "Yüksek Kaliteli Çalışma Tezgâhı",
+    "description": "İlkel Tezgâh ile kıyaslandığında daha yüksek bir üretim hızı sunar. El İşi özelliğine sahip Pal'lar gerektirir."
+  },
+  "Product_Factory_Hard_Grade_02": {
+    "localized_name": "Üretim Montaj Hattı",
+    "description": "Elektrik gerektirir ama eşyaları daha yüksek bir hızla üretir. El İşi özelliğine sahip Pal'lar gerektirir."
+  },
+  "Product_Factory_Hard_Grade_03": {
+    "localized_name": "Üretim Montaj Hattı II",
+    "description": "Elektrik gerektirir ama eşyaları çok daha yüksek bir hızla üretir. El İşi özelliğine sahip Pal'lar gerektirir."
+  },
+  "Product_Farm_Berries": {
+    "localized_name": "Meyve Tarlası",
+    "description": "Bir üsse meyve yetiştirebilir. Ekim, Sulama ve Toplama iş uygunluklarına sahip Pal'lar gerektirir."
+  },
+  "Product_Farm_Carrot": {
+    "localized_name": "Havuç Tarlası",
+    "description": null
+  },
+  "Product_Farm_Lettuce": {
+    "localized_name": "Marul Tarlası",
+    "description": "Marul yetiştirmek için bir tarla. Ekim, Sulama ve Toplama iş uygunluklarına sahip Pal'lar gerektirir."
+  },
+  "Product_Farm_Onion": {
+    "localized_name": "Soğan Tarlası",
+    "description": null
+  },
+  "Product_Farm_Potato": {
+    "localized_name": "Patates Tarlası",
+    "description": null
+  },
+  "Product_Farm_tomato": {
+    "localized_name": "Domates Tarlası",
+    "description": "Domates yetiştirmek için bir tarla. Ekim, Sulama ve Toplama iş uygunluklarına sahip Pal'lar gerektirir."
+  },
+  "Product_Farm_wheat": {
+    "localized_name": "Buğday Tarlası",
+    "description": "\"Ekmek\"in hammaddesi olan buğdayı üreten bir çiftlik. Orada çalışmak için, \"Ekim\", \"Sulama\" ve \"Toplama\" yeteneklerine sahip Pal’lara ihtiyaç var."
+  },
+  "Product_Ingot_Grade_01_Copper": {
+    "localized_name": "İlkel Ocak",
+    "description": "\"Cevher\"i işleyerek külçesi üretilebilir hale gelir."
+  },
+  "Product_Ingot_Grade_02_Iron": {
+    "localized_name": "Geliştirilmiş Ocak",
+    "description": "Saf Külçe üretmek için Cevher ve Kömür kullanır."
+  },
+  "Product_Ingot_Grade_03_Steal": {
+    "localized_name": "Elektrikli Ocak",
+    "description": "Pal Metali Külçe saflaştırma işlemlerine olanak tanır."
+  },
+  "Product_Medicine_Grade_01": {
+    "localized_name": "Orta Çağ İlaç Tezgâhı",
+    "description": "Basit ilaçlar üretir. İlaç Üretimi özelliğine sahip Pal'lar gerektirir."
+  },
+  "Product_Medicine_Grade_02": {
+    "localized_name": "Elektrikli İlaç Tezgâhı",
+    "description": "Elektrik gerektirir ama yüksek kaliteli ilaçlar üretebilir. İlaç Üretimi özelliğine sahip Pal'lar gerektirir."
+  },
+  "Product_Pickaxe_Grade_01": {
+    "localized_name": "Taş Kazma",
+    "description": "Madencilik için kullanılan bir kazma. Taştan yapılmıştır, verimliliği kuşkuludur."
+  },
+  "Product_Pickaxe_Grade_02": {
+    "localized_name": "Metal Kazma",
+    "description": "Madencilik için kullanılan bir kazma. Metalden yapıldığı için dayanıklılığı ve verimliliği arttırılmıştır. Yüksek Kaliteli Çalışma Tezgâhı kullanılarak üretilebilir."
+  },
+  "Product_Pickaxe_Grade_03": {
+    "localized_name": "Saf Metal Kazma",
+    "description": "Madencilik için kullanılan bir kazma. Metalden yapıldığı için dayanıklılığı ve verimliliği arttırılmıştır. Üretim Montaj Hattı kullanılarak üretilebilir."
+  },
+  "Product_QuartzPit": {
+    "localized_name": "Saf Kuvars Madeni",
+    "description": null
+  },
+  "Product_StationDeforest": {
+    "localized_name": "Odunculuk Kampı",
+    "description": "Bir üsse odun üretebilir. Odunculuk iş uygunluğuna sahip Pal'lar gerektirir."
+  },
+  "Product_StationDeforest2": {
+    "localized_name": "Odun Kesim Sahası Ⅱ",
+    "description": null
+  },
+  "Product_StonePit": {
+    "localized_name": "Taş Ocağı",
+    "description": "Bir üsse taş üretebilir. Madencilik iş uygunluğuna sahip Pal'lar gerektirir."
+  },
+  "Product_SulfurPit": {
+    "localized_name": "Kükürt Madeni",
+    "description": null
+  },
+  "Product_WeaponFactory_Dirty_Grade_01": {
+    "localized_name": "Silah Tezgâhı",
+    "description": "Basit mekanik silahlar üretir. El İşi iş uygunluğuna sahip Pal'lar gerektirir."
+  },
+  "Product_WeaponFactory_Dirty_Grade_02": {
+    "localized_name": "Silah Montaj Hattı",
+    "description": "Elektrik gerektirir ama silahları ve cephaneleri daha yüksek bir hızla üretir. El İşi özelliğine sahip Pal'lar gerektirir."
+  },
+  "Product_WeaponFactory_Dirty_Grade_03": {
+    "localized_name": "Silah Montaj Hattı II",
+    "description": "Elektrik gerektirir ama silahları ve cephaneleri çok daha yüksek bir hızla üretir. El İşi özelliğine sahip Pal'lar gerektirir."
+  },
+  "Product_WorkBench_SkillUnlock": {
+    "localized_name": "Pal Teçhizatı Tezgâhı",
+    "description": "Pal'ların Partner Yeteneklerini kullanmasına olanak tanıyan eşyalar üretir."
+  },
+  "Refrigerator": {
+    "localized_name": "Buzdolabı",
+    "description": null
+  },
+  "ReinforcedArrow": {
+    "localized_name": "Güçlendirilmiş Ok",
+    "description": null
+  },
+  "RepairBench": {
+    "localized_name": "Tamir Tezgâhı",
+    "description": "Hasarlı silah ve aletleri onarır."
+  },
+  "RifleBullet": {
+    "localized_name": "Tüfek Mermisi",
+    "description": "Tüfek ve benzeri silahlarda kullanılan mühimmat. Silah Tezgâhı kullanılarak üretilebilir."
+  },
+  "RoughBullet": {
+    "localized_name": "Kaba Mermi",
+    "description": "Misket Tüfeği ve Eğreti Tabanca gibi silahlarda kullanılan mühimmat. Silah Tezgâhı kullanılarak üretilebilir."
+  },
+  "SFArmor": {
+    "localized_name": "Heksolit Zırh",
+    "description": null
+  },
+  "SFArmorCold": {
+    "localized_name": "Soğuğa Dayanıklı Heksolit Zırh",
+    "description": null
+  },
+  "SFArmorHeat": {
+    "localized_name": "Sıcağa Dayanıklı Heksolit Zırh",
+    "description": null
+  },
+  "SFArmorWeight": {
+    "localized_name": "İnce Heksolit Zırh",
+    "description": null
+  },
+  "SFArrow": {
+    "localized_name": "Gelişmiş Ok",
+    "description": null
+  },
+  "SFBow": {
+    "localized_name": "Gelişmiş Yay",
+    "description": null
+  },
+  "SFHelmet": {
+    "localized_name": "Heksolit Kask",
+    "description": null
+  },
+  "SF_houseset": {
+    "localized_name": "Fütüristik yapı seti",
+    "description": "Fütüristik tarzı mimariyle üs kurmak için bir set. Temel, duvar, çatı, merdiven gibi, ev inşa etmek için gerekli olan her şeyi inşa etmeye olanak sağlar."
+  },
+  "Salvage_TreasureBoxKey02": {
+    "localized_name": "Güçlü Balıkçılık Mıknatısı",
+    "description": null
+  },
+  "SanityDecrease1": {
+    "localized_name": "Alfa Dalga Jeneratörü",
+    "description": null
+  },
+  "ScientistFlagSet": {
+    "localized_name": "PAL Genetik Araştırma Birimi Flama Seti",
+    "description": "PAL Genetik Araştırma Birimi Örgüt Bayrağıile PAL Genetik Araştırma Birimi Dikey Flamasıseti. PAL Genetik Araştırma Birimini alt ettiğinin kanıtıdır."
+  },
+  "Shield_01": {
+    "localized_name": "Yaygın Kalkan",
+    "description": "Paldiyum teknolojisiyle üretilmiş tuhaf bir kalkan. Bir süre hasar almadığında otomatik olarak kendini onarır."
+  },
+  "Shield_02": {
+    "localized_name": "Mega Kalkan",
+    "description": "Paldiyum teknolojisiyle üretilmiş tuhaf bir kalkan. Yeni model daha da geliştirildi ve savunma düzeyi artırıldı. Yüksek Kaliteli Çalışma Tezgâhı ile yapılabilir."
+  },
+  "Shield_03": {
+    "localized_name": "Giga Kalkan",
+    "description": "Paldiyum teknolojisiyle üretilmiş tuhaf bir kalkan. Yapılan modifikasyonlar, kalkanın etkililiğini daha da artırdı. Üretim Montaj Hattı ile yapılabilir."
+  },
+  "Shield_04": {
+    "localized_name": "Hiper Kalkan",
+    "description": "Paldiyum teknolojisiyle üretilmiş tuhaf bir kalkan. Tekrar tekrar yapılan testler sayesinde en yüksek kaliteye erişildi. Üretim Montaj Hattı II ile yapılabilir."
+  },
+  "Shield_05": {
+    "localized_name": "Ultra Kalkan",
+    "description": "Paldiyum teknolojisiyle üretilmiş tuhaf bir kalkan. Yapılan ileri deneyler sonucunda en üst kaliteye ulaşıldı. Üretim Montaj Hattı II ile yapılabilir."
+  },
+  "Shield_07": {
+    "localized_name": "Kadim Kalkan",
+    "description": null
+  },
+  "Shield_SF": {
+    "localized_name": "Gelişmiş Kalkan",
+    "description": null
+  },
+  "ShotGunBullet": {
+    "localized_name": "Av Tüfeği Fişeği",
+    "description": "Pompalı tüfek ve benzeri silahlarda kullanılan mühimmat. Silah Tezgâhı kullanılarak üretilebilir."
+  },
+  "Signboard": {
+    "localized_name": "Tabela",
+    "description": "Üzerine yazı yazılabilir."
+  },
+  "Silo": {
+    "localized_name": "Silo",
+    "description": null
+  },
+  "SkillUnlock_Alpaca": {
+    "localized_name": "Melpaca Eyeri",
+    "description": null
+  },
+  "SkillUnlock_AmaterasuWolf": {
+    "localized_name": "Kitsun Eyeri",
+    "description": null
+  },
+  "SkillUnlock_AmaterasuWolf_Dark": {
+    "localized_name": "Kitsun Noct Eyeri",
+    "description": null
+  },
+  "SkillUnlock_BadCatgirl": {
+    "localized_name": "Nyafia'nın Av Tüfeği",
+    "description": null
+  },
+  "SkillUnlock_BirdDragon": {
+    "localized_name": "Vanwyrm Eyeri",
+    "description": null
+  },
+  "SkillUnlock_BirdDragon_Ice": {
+    "localized_name": "Vanwyrm Cryst Eyeri",
+    "description": null
+  },
+  "SkillUnlock_BlackCentaur": {
+    "localized_name": "Necromus Eyeri",
+    "description": null
+  },
+  "SkillUnlock_BlackGriffon": {
+    "localized_name": "Shadowbeak Eyeri",
+    "description": null
+  },
+  "SkillUnlock_BlackMetalDragon": {
+    "localized_name": "Astegon Eyeri",
+    "description": null
+  },
+  "SkillUnlock_BlackPuppy": {
+    "localized_name": "Smokie'nin Koşum Takımı",
+    "description": null
+  },
+  "SkillUnlock_BlueDragon": {
+    "localized_name": "Azurobe Eyeri",
+    "description": null
+  },
+  "SkillUnlock_BlueDragon_Ice": {
+    "localized_name": "Azurobe Cryst’in eyeri",
+    "description": null
+  },
+  "SkillUnlock_BlueSkyDragon": {
+    "localized_name": "Shaolong Eyeri",
+    "description": null
+  },
+  "SkillUnlock_BlueThunderHorse": {
+    "localized_name": "Azurmane Eyeri",
+    "description": null
+  },
+  "SkillUnlock_Boar": {
+    "localized_name": "Rushoar Eyeri",
+    "description": null
+  },
+  "SkillUnlock_Carbunclo": {
+    "localized_name": "Lifmunk'un Hafif Makineli Tüfeği",
+    "description": null
+  },
+  "SkillUnlock_ColorfulBird": {
+    "localized_name": "Tocotoco'nun Eldivenleri",
+    "description": null
+  },
+  "SkillUnlock_CubeTurtle": {
+    "localized_name": "Tetroise Eyeri",
+    "description": null
+  },
+  "SkillUnlock_CubeTurtle_Neutral": {
+    "localized_name": "Tetroise Primo Eyeri",
+    "description": null
+  },
+  "SkillUnlock_DarkMechaDragon": {
+    "localized_name": "Xenolord Eyeri",
+    "description": null
+  },
+  "SkillUnlock_Deer": {
+    "localized_name": "Eikthyrdeer Eyeri",
+    "description": null
+  },
+  "SkillUnlock_Deer_Ground": {
+    "localized_name": "Eikthyrdeer Terra Eyeri",
+    "description": null
+  },
+  "SkillUnlock_DomeArmorDragon": {
+    "localized_name": "Aegidron Eyeri",
+    "description": null
+  },
+  "SkillUnlock_ElecPanda": {
+    "localized_name": "Grizzbolt'un Mitralyözü",
+    "description": null
+  },
+  "SkillUnlock_FairyDragon": {
+    "localized_name": "Elphidran Eyeri",
+    "description": null
+  },
+  "SkillUnlock_FairyDragon_Water": {
+    "localized_name": "Elphidran Aqua Eyeri",
+    "description": null
+  },
+  "SkillUnlock_FeatherOstrich": {
+    "localized_name": "Dazemu Eyeri",
+    "description": null
+  },
+  "SkillUnlock_FengyunDeeper": {
+    "localized_name": "Fenglope Eyeri",
+    "description": null
+  },
+  "SkillUnlock_FengyunDeeper_Electric": {
+    "localized_name": "Fenglope Lux Eyeri",
+    "description": null
+  },
+  "SkillUnlock_FireKirin": {
+    "localized_name": "Pyrin Eyeri",
+    "description": null
+  },
+  "SkillUnlock_FireKirin_Dark": {
+    "localized_name": "Pyrin Noct Eyeri",
+    "description": null
+  },
+  "SkillUnlock_FlameBuffalo": {
+    "localized_name": "Arsox Eyeri",
+    "description": null
+  },
+  "SkillUnlock_FlowerDinosaur": {
+    "localized_name": "Dinossom Eyeri",
+    "description": null
+  },
+  "SkillUnlock_FlowerDinosaur_Electric": {
+    "localized_name": "Dinossom Lux Eyeri",
+    "description": null
+  },
+  "SkillUnlock_Garm": {
+    "localized_name": "Direhowl'un Eyerli Koşum Takımı",
+    "description": null
+  },
+  "SkillUnlock_GhostAnglerfish": {
+    "localized_name": "Ghangler'ın eyeri",
+    "description": null
+  },
+  "SkillUnlock_GhostAnglerfish_Fire": {
+    "localized_name": "Ghangler Ignis’in eyeri",
+    "description": null
+  },
+  "SkillUnlock_GhostBeast": {
+    "localized_name": "Maraith Eyeri",
+    "description": null
+  },
+  "SkillUnlock_GhostDragon": {
+    "localized_name": "Eidrolon Eyeri",
+    "description": null
+  },
+  "SkillUnlock_GhostDragon_Fire": {
+    "localized_name": "Eidrolon Ignis Eyeri",
+    "description": null
+  },
+  "SkillUnlock_GoldenHorse": {
+    "localized_name": "Gildane Eyeri",
+    "description": null
+  },
+  "SkillUnlock_GrassGolem": {
+    "localized_name": "Dualith Eyeri",
+    "description": null
+  },
+  "SkillUnlock_GrassGolem_Dark": {
+    "localized_name": "Dualith Noct Eyeri",
+    "description": null
+  },
+  "SkillUnlock_GrassMammoth": {
+    "localized_name": "Mammorest Eyeri",
+    "description": null
+  },
+  "SkillUnlock_GrassMammoth_Ice": {
+    "localized_name": "Mammorest Cryst Eyeri",
+    "description": null
+  },
+  "SkillUnlock_GrassPanda": {
+    "localized_name": "Mossanda'nın Bombaatarı",
+    "description": null
+  },
+  "SkillUnlock_GrassPanda_Electric": {
+    "localized_name": "Mossanda Lux'un Bombaatarı",
+    "description": null
+  },
+  "SkillUnlock_GuardianDog": {
+    "localized_name": "Yakumo Eyeri",
+    "description": null
+  },
+  "SkillUnlock_HadesBird": {
+    "localized_name": "Helzephyr Eyeri",
+    "description": null
+  },
+  "SkillUnlock_HadesBird_Electric": {
+    "localized_name": "Helzephyr Lux Eyeri",
+    "description": null
+  },
+  "SkillUnlock_HawkBird": {
+    "localized_name": "Nitewing Eyeri",
+    "description": null
+  },
+  "SkillUnlock_Horus": {
+    "localized_name": "Faleris Eyeri",
+    "description": null
+  },
+  "SkillUnlock_Horus_Water": {
+    "localized_name": "Faleris Aqua Eyeri",
+    "description": null
+  },
+  "SkillUnlock_IceDeer": {
+    "localized_name": "Reindrix Eyeri",
+    "description": null
+  },
+  "SkillUnlock_IceHorse": {
+    "localized_name": "Frostallion Eyeri",
+    "description": null
+  },
+  "SkillUnlock_IceHorse_Dark": {
+    "localized_name": "Frostallion Noct Eyeri",
+    "description": null
+  },
+  "SkillUnlock_IceNarwhal": {
+    "localized_name": "Whalaska'nın eyeri",
+    "description": null
+  },
+  "SkillUnlock_IceNarwhal_Fire": {
+    "localized_name": "Whalaska Ignis’in eyeri",
+    "description": null
+  },
+  "SkillUnlock_IceSeal": {
+    "localized_name": "Polapup’un Eyeri",
+    "description": null
+  },
+  "SkillUnlock_IceSeal_Ground": {
+    "localized_name": "Polapup Terra Eyeri",
+    "description": null
+  },
+  "SkillUnlock_JetDragon": {
+    "localized_name": "Jetragon'un Füzeatarı",
+    "description": null
+  },
+  "SkillUnlock_KingAlpaca": {
+    "localized_name": "Kingpaca Eyeri",
+    "description": null
+  },
+  "SkillUnlock_KingAlpaca_Ice": {
+    "localized_name": "Kingpaca Cryst Eyeri",
+    "description": null
+  },
+  "SkillUnlock_KingBahamut": {
+    "localized_name": "Blazamut Eyeri",
+    "description": null
+  },
+  "SkillUnlock_KingBahamut_Dragon": {
+    "localized_name": "Blazamut Ryu Eyeri",
+    "description": null
+  },
+  "SkillUnlock_KingSunfish": {
+    "localized_name": "Solmora Eyeri",
+    "description": null
+  },
+  "SkillUnlock_KingSunfish_Thunder": {
+    "localized_name": "Solmora Lux Eyeri",
+    "description": null
+  },
+  "SkillUnlock_Kirin": {
+    "localized_name": "Univolt Eyeri",
+    "description": null
+  },
+  "SkillUnlock_Kirin_Ice": {
+    "localized_name": "Univolt Cryst Eyeri",
+    "description": null
+  },
+  "SkillUnlock_Kitsunebi": {
+    "localized_name": "Foxparks'ın Koşum Takımı",
+    "description": null
+  },
+  "SkillUnlock_Kitsunebi_Ice": {
+    "localized_name": "Foxparks Cryst'in Koşum Takımı",
+    "description": null
+  },
+  "SkillUnlock_LazyDragon": {
+    "localized_name": "Relaxaurus'un Füzeatarı",
+    "description": null
+  },
+  "SkillUnlock_LazyDragon_Electric": {
+    "localized_name": "Relaxaurus Lux'un Füzeatarı",
+    "description": null
+  },
+  "SkillUnlock_LegendDeer": {
+    "localized_name": "Hartalis Eyeri",
+    "description": null
+  },
+  "SkillUnlock_LotusDragon": {
+    "localized_name": "Ophydia Eyeri",
+    "description": null
+  },
+  "SkillUnlock_Manticore": {
+    "localized_name": "Blazehowl Eyeri",
+    "description": null
+  },
+  "SkillUnlock_Manticore_Dark": {
+    "localized_name": "Blazehowl Noct Eyeri",
+    "description": null
+  },
+  "SkillUnlock_Monkey": {
+    "localized_name": "Tanzee'nin Taarruz Tüfeği",
+    "description": null
+  },
+  "SkillUnlock_Monkey_Fire": {
+    "localized_name": "Tanzee Ignis'in Taarruz Tüfeği",
+    "description": null
+  },
+  "SkillUnlock_MoonQueen": {
+    "localized_name": "Selyne Eyeri",
+    "description": null
+  },
+  "SkillUnlock_MopKing": {
+    "localized_name": "Sweepa Eyeri",
+    "description": null
+  },
+  "SkillUnlock_MushroomDragon": {
+    "localized_name": "Shroomer Eyeri",
+    "description": null
+  },
+  "SkillUnlock_MushroomDragon_Dark": {
+    "localized_name": "Shroomer Noct Eyeri",
+    "description": null
+  },
+  "SkillUnlock_NaughtyCat": {
+    "localized_name": "Grintale Eyeri",
+    "description": null
+  },
+  "SkillUnlock_NightBlueHorse": {
+    "localized_name": "Starryon Eyeri",
+    "description": null
+  },
+  "SkillUnlock_NightBlueHorse_Neutral": {
+    "localized_name": "Starryon Primo Eyeri",
+    "description": null
+  },
+  "SkillUnlock_Penguin": {
+    "localized_name": "Pengullet Roketatarı",
+    "description": null
+  },
+  "SkillUnlock_Penguin_Electric": {
+    "localized_name": "Pengullet Lux’un roketatarı",
+    "description": null
+  },
+  "SkillUnlock_Plesiosaur": {
+    "localized_name": "Braloha’nın eyeri",
+    "description": null
+  },
+  "SkillUnlock_PoseidonOrca": {
+    "localized_name": "Neptilius’un eyeri",
+    "description": null
+  },
+  "SkillUnlock_PurpleSpider": {
+    "localized_name": "Tarantriss Eyeri",
+    "description": null
+  },
+  "SkillUnlock_RedArmorBird": {
+    "localized_name": "Ragnahawk Eyeri",
+    "description": null
+  },
+  "SkillUnlock_SaintCentaur": {
+    "localized_name": "Paladius Eyeri",
+    "description": null
+  },
+  "SkillUnlock_SakuraSaurus": {
+    "localized_name": "Broncherry Eyeri",
+    "description": null
+  },
+  "SkillUnlock_SakuraSaurus_Water": {
+    "localized_name": "Broncherry Aqua Eyeri",
+    "description": null
+  },
+  "SkillUnlock_Serpent": {
+    "localized_name": "Surfent Eyeri",
+    "description": null
+  },
+  "SkillUnlock_Serpent_Ground": {
+    "localized_name": "Surfent Terra Eyeri",
+    "description": null
+  },
+  "SkillUnlock_SkyDragon": {
+    "localized_name": "Quivern Eyeri",
+    "description": null
+  },
+  "SkillUnlock_SkyDragon_Grass": {
+    "localized_name": "Quivern Botan Eyeri",
+    "description": null
+  },
+  "SkillUnlock_SnowTigerBeastman": {
+    "localized_name": "Bastigor'un Çekici",
+    "description": null
+  },
+  "SkillUnlock_SumoDog": {
+    "localized_name": "Bulldosu Eyeri",
+    "description": null
+  },
+  "SkillUnlock_Suzaku": {
+    "localized_name": "Suzaku Eyeri",
+    "description": null
+  },
+  "SkillUnlock_Suzaku_Water": {
+    "localized_name": "Suzaku Aqua Eyeri",
+    "description": null
+  },
+  "SkillUnlock_ThiefBird": {
+    "localized_name": "Roujay Eyeri",
+    "description": null
+  },
+  "SkillUnlock_ThunderBird": {
+    "localized_name": "Beakon Eyeri",
+    "description": null
+  },
+  "SkillUnlock_ThunderBird_Ice": {
+    "localized_name": "Beakon Cryst Eyeri",
+    "description": null
+  },
+  "SkillUnlock_ThunderDog": {
+    "localized_name": "Rayhound Eyeri",
+    "description": null
+  },
+  "SkillUnlock_ThunderFluffyBird": {
+    "localized_name": "Dynamoff Eyeri",
+    "description": null
+  },
+  "SkillUnlock_Thunderdog_Ice": {
+    "localized_name": "Rayhound Cryst Eyeri",
+    "description": null
+  },
+  "SkillUnlock_TropicalOstrich": {
+    "localized_name": "Palumba’nın eyeri",
+    "description": null
+  },
+  "SkillUnlock_Umihebi": {
+    "localized_name": "Jormuntide Eyeri",
+    "description": null
+  },
+  "SkillUnlock_Umihebi_Fire": {
+    "localized_name": "Jormuntide Ignis Eyeri",
+    "description": null
+  },
+  "SkillUnlock_VolcanicMonster": {
+    "localized_name": "Reptyro Eyeri",
+    "description": null
+  },
+  "SkillUnlock_VolcanicMonster_Ice": {
+    "localized_name": "Reptyro Cryst Eyeri",
+    "description": null
+  },
+  "SkillUnlock_VolcanoDragon": {
+    "localized_name": "Moldron Eyeri",
+    "description": null
+  },
+  "SkillUnlock_VolcanoDragon_Ice": {
+    "localized_name": "Moldron Cryst Eyeri",
+    "description": null
+  },
+  "SkillUnlock_WeaselDragon": {
+    "localized_name": "Chillet Eyeri",
+    "description": null
+  },
+  "SkillUnlock_WeaselDragon_Fire": {
+    "localized_name": "Chillet Ignis Eyeri",
+    "description": null
+  },
+  "SkillUnlock_WhiteAlienDragon": {
+    "localized_name": "Xenogard Eyeri",
+    "description": null
+  },
+  "SkillUnlock_WhiteDeer": {
+    "localized_name": "Celesdir Eyeri",
+    "description": null
+  },
+  "SkillUnlock_WhiteDeer_Dark": {
+    "localized_name": "Celesdir Noct Eyeri",
+    "description": null
+  },
+  "SkillUnlock_WhiteShieldDragon": {
+    "localized_name": "Silvegis Eyeri",
+    "description": null
+  },
+  "SkillUnlock_Yeti": {
+    "localized_name": "Wumpo Eyeri",
+    "description": null
+  },
+  "SkillUnlock_Yeti_Grass": {
+    "localized_name": "Wumpo Botan Eyeri",
+    "description": null
+  },
+  "SkinChange": {
+    "localized_name": "Pal Kostüm Tesisi",
+    "description": null
+  },
+  "SkyAssaultRifle": {
+    "localized_name": "Ağır Taarruz Tüfeği",
+    "description": "Solknight külçesi (Sol-rite Ingot) kullanılarak yapılmış kullanılarak yapılmış saldırı tüfeği. Çok yönlülüğünü korurken, daha yüksek güçlü mühimmat kullanabilmesi için güçlendirilmiştir."
+  },
+  "SkyAssaultRifleBullet": {
+    "localized_name": "Ağır Taarruz Tüfeği Mermisi",
+    "description": null
+  },
+  "SkyBeamSword": {
+    "localized_name": "Lazer Kılıç",
+    "description": "Solknight külçesi (Sol-rite Ingot) kullanılarak yapılmışEnerji Kılıcı. Yüksek çıkışlı enerji bıçağı sayesinde hedefi anında kesip atan bir yakın dövüş silahı."
+  },
+  "SkyBow": {
+    "localized_name": "Mekanik Yay",
+    "description": "Solknight külçesi (Sol-rite Ingot) kullanılarak yapılmış bir yay. Okun çıkış hızı ve delme gücü büyük ölçüde artırılmıştır, yüksek hassasiyetli uzun menzilli atışlar yapmayı sağlar."
+  },
+  "SkyBowArrow": {
+    "localized_name": "Mekanik Yay Oku",
+    "description": null
+  },
+  "SkyGrenadeLauncher": {
+    "localized_name": "Taktiksel Bomba Atar",
+    "description": "Solknight külçesi (Sol-rite Ingot) kullanılarak yapılmış bomba atar. Balistik istikrarı artırılmış olup, uzun mesafelere hassas bombardıman yapılmasına olanak tanır."
+  },
+  "SkyGrenadeLauncherBullet": {
+    "localized_name": "Taktik El Bombası Atar Mermisi",
+    "description": null
+  },
+  "SkyIslandFlagSet": {
+    "localized_name": "Gök Mavisi İttifak Bayrak Seti",
+    "description": "Gök Mavisi İttifak Grup Bayrağı ve Gök Mavisi İttifak Dikey Sancağı seti. Gök Mavisi İttifakı'nı alt ettiğinin kanıtıdır."
+  },
+  "SkyIslandOrePit": {
+    "localized_name": "Sorlit Kazı Alanı",
+    "description": null
+  },
+  "SkyShotgun": {
+    "localized_name": "Prototip Pompalı Tüfek",
+    "description": "Solknight külçesi (Sol-rite Ingot) kullanılarak yapılmış bir hafif makineli tüfek. Geliştirilmiş şarjör ve mühimmat sayesinde durdurma/baskılama gücü artırılmıştır."
+  },
+  "SkyShotgunBullet": {
+    "localized_name": "Prototip Pompalı Tüfek Mermisi",
+    "description": null
+  },
+  "SkySubmachineGun": {
+    "localized_name": "Muharebe Hafif Makineli Tüfek",
+    "description": "Solknight külçesi (Sol-rite Ingot) kullanılarak yapılmış bir hafif makineli tüfek. Geliştirilmiş şarjör ve mühimmat sayesinde durdurma/baskılama gücü artırılmıştır."
+  },
+  "SkySubmachineGunBullet": {
+    "localized_name": "Hafif Makineli Tüfek Mermisi",
+    "description": null
+  },
+  "SkyislandIngot": {
+    "localized_name": "Solrayt Külçesi",
+    "description": null
+  },
+  "Snowman": {
+    "localized_name": "Kardan Adam",
+    "description": null
+  },
+  "Spa": {
+    "localized_name": "Kaplıca",
+    "description": "Pal'lar bir Kaplıca sayesinde AKL değerlerini geri kazanır."
+  },
+  "Spa2": {
+    "localized_name": "Yüksek Kaliteli Kaplıca",
+    "description": "Pal'lar kaplıcadayken çok miktarda AKL geri kazanır."
+  },
+  "Spa3": {
+    "localized_name": "Japon tarzı kaplıca",
+    "description": null
+  },
+  "Spear": {
+    "localized_name": "Taş Mızrak",
+    "description": null
+  },
+  "Spear_2": {
+    "localized_name": "Metal Mızrak",
+    "description": "Yakın dövüşte kullanışlı bir mızrak. Metalden yapıldığı için saldırı gücü arttırılmıştır. Yüksek Kaliteli Çalışma Tezgâhı kullanılarak üretilebilir."
+  },
+  "Spear_3": {
+    "localized_name": "Saf Metal Mızrak",
+    "description": "Yakın dövüşte kullanışlı bir mızrak. Yüksek kaliteli metalden yapıldığı için saldırı gücü arttırılmıştır. Üretim Montaj Hattı kullanılarak üretilebilir."
+  },
+  "Spear_ForestBoss": {
+    "localized_name": "Lily'nin Mızrağı",
+    "description": null
+  },
+  "Spear_ForestBoss2": {
+    "localized_name": "Lily'nin Mızrağı",
+    "description": "Lily'nin çok sevdiği mızrağın güçlendirilmiş hali. Pal'larını ihmal edenlerin göğsünde delik açar."
+  },
+  "Special_ElectricHatchingPalEgg": {
+    "localized_name": "Elektrikli Kuluçka Makinesi",
+    "description": null
+  },
+  "Special_HatchingPalEgg": {
+    "localized_name": "Kuluçka Makinesi",
+    "description": "İçine bir Pal Yumurtası koyarak kuluçkaya sok."
+  },
+  "Special_PalRankUp": {
+    "localized_name": "Pal Özü Yoğunlaştırıcı",
+    "description": "Aynı türden birkaç tane Pal'ı birleştirerek daha yüksek dereceli bir versiyonu oluşturur."
+  },
+  "Special_PalSphere_Grade_01": {
+    "localized_name": "Pal Küresi",
+    "description": "Fırlatıldığında Pal'ları yakalayan bir eşya. Bu temel model yalnızca düşük seviyeli Pal'larda etkilidir."
+  },
+  "Special_PalSphere_Grade_02": {
+    "localized_name": "Mega Küre",
+    "description": "Fırlatıldığında Pal yakalamaya yarayan bir araç. Performansı arttırılmış olup yakalanabilecek Pal yelpazesi genişletilmiştir. Küre Tezgâhı kullanılarak üretilebilir."
+  },
+  "Special_PalSphere_Grade_03": {
+    "localized_name": "Giga Küre",
+    "description": "Fırlatıldığında Pal yakalamaya yarayan bir araç. Artık belirli ölçüde güçlü Pal'ları da yakalayabilir. Küre Tezgâhı kullanılarak üretilebilir."
+  },
+  "Special_PalSphere_Grade_04": {
+    "localized_name": "Hiper Küre",
+    "description": "Fırlatıldığında Pal yakalamaya yarayan bir araç. Oldukça güçlü Pal'ları da yakalayabilir. Küre Montaj Hattı kullanılarak üretilebilir."
+  },
+  "Special_PalSphere_Grade_05": {
+    "localized_name": "Ultra Küre",
+    "description": "Fırlatıldığında Pal yakalamaya yarayan bir araç. Oldukça yüksek performansa sahiptir ve ondan kaçabilecek Pal sayısı azdır. Küre Montaj Hattı II kullanılarak üretilebilir."
+  },
+  "Special_PalSphere_Grade_06": {
+    "localized_name": "Efsanevi Küre",
+    "description": "Fırlatıldığında Pal yakalamaya yarayan bir araç. Son derece yüksek performansa sahiptir ve ondan kaçabilecek Pal neredeyse yoktur. Küre Montaj Hattı II kullanılarak üretilebilir."
+  },
+  "Special_PalSphere_Grade_07": {
+    "localized_name": "Nihai Küre",
+    "description": "Fırlatıldığında Pal yakalamaya yarayan bir araç. Ezici bir performansa sahiptir ve neredeyse tüm Pal'ları yakalayabilir. Küre Montaj Hattı II kullanılarak üretilebilir."
+  },
+  "Special_SphereFactory_Black_Grade_01": {
+    "localized_name": "Küre Tezgâhı",
+    "description": "Pal'ları yakalamak için kullanılan Küreleri üretir. El İşi iş uygunluğuna sahip Pal'lar gerektirir."
+  },
+  "Special_SphereFactory_Black_Grade_02": {
+    "localized_name": "Küre Montaj Hattı",
+    "description": "Daha hızlı Pal Küresi üretir. El İşi iş uygunluğuna sahip Pal'lar gerektirir."
+  },
+  "Special_SphereFactory_Black_Grade_03": {
+    "localized_name": "Küre Montaj Hattı II",
+    "description": "Çok daha hızlı Pal Küresi üretir. El İşi iş uygunluğuna sahip Pal'lar gerektirir."
+  },
+  "SphereFactory_Black_04": {
+    "localized_name": "Gelişmiş Küre Montaj Hattı",
+    "description": null
+  },
+  "SphereModule_Curve": {
+    "localized_name": "Kavis Modülü",
+    "description": null
+  },
+  "SphereModule_Curve2": {
+    "localized_name": "Falso Modülü",
+    "description": null
+  },
+  "SphereModule_Heavy": {
+    "localized_name": "Yüksek Ağırlık Modülü",
+    "description": null
+  },
+  "SphereModule_Homing": {
+    "localized_name": "Güdümlülük Modülü",
+    "description": null
+  },
+  "SphereModule_Sniper": {
+    "localized_name": "Keskin Nişancı Modülü",
+    "description": null
+  },
+  "SphereModule_Sniper2": {
+    "localized_name": "Keskin Nişancı Modülü II",
+    "description": null
+  },
+  "StainlessSteel": {
+    "localized_name": "Heksolit",
+    "description": null
+  },
+  "Stone_Gate": {
+    "localized_name": "Taş Giriş Kapısı",
+    "description": "Taştan yapılmış, büyük Pal'ların geçmesine olanak tanıyacak kadar geniş bir giriş kapısı."
+  },
+  "Stone_houseset": {
+    "localized_name": "Taş Yapı Seti",
+    "description": "Taş kullanarak üsler inşa etmek için bir set. Taş zeminler, duvarlar, tavanlar, merdivenler ve sığınaklar için gereken diğer şeyleri inşa etmene olanak tanır."
+  },
+  "Stump": {
+    "localized_name": "Kütük ve Balta",
+    "description": null
+  },
+  "Supplement": {
+    "localized_name": "Enerji İksiri",
+    "description": null
+  },
+  "TableCircular": {
+    "localized_name": "Düzenli Masa Seti",
+    "description": "Dekoratif düzenli masa seti. Güzel ve temiz bir üs inşa et."
+  },
+  "TableDresser01_Stone": {
+    "localized_name": "Antika Şifonyer",
+    "description": null
+  },
+  "Thermal_Core": {
+    "localized_name": "Ultra Yüksek Isı Çekirdeği",
+    "description": null
+  },
+  "ToolBoxV1": {
+    "localized_name": "Büyük Alet Çantası",
+    "description": null
+  },
+  "Torch": {
+    "localized_name": "Sabitlenmiş Meşale",
+    "description": "Çevredeki alanı aydınlatmak için bir üsse yerleştir."
+  },
+  "TransmissionTower": {
+    "localized_name": "Elektrik Direği",
+    "description": null
+  },
+  "Trap_LegHold": {
+    "localized_name": "Ayı Tuzağı (Küçük)",
+    "description": "Üzerine basanları hareketsiz bırakır. Sadece küçük Pal'lar veya insanlar üzerinde etkilidir."
+  },
+  "Trap_LegHold_Big": {
+    "localized_name": "Ayı Tuzağı (Büyük)",
+    "description": "Üzerine basanları hareketsiz bırakır. Sadece büyük Pal'lar üzerinde etkilidir."
+  },
+  "Trap_MineAttack": {
+    "localized_name": "Mayın",
+    "description": "Üzerine basıldığında otomatik olarak patlar."
+  },
+  "Trap_MineElecShock": {
+    "localized_name": "Elektrik Mayını",
+    "description": "Üzerine basanlara elektrik verir. Elektriğe kapılan Pal'ları yakalamak daha kolaydır."
+  },
+  "Trap_MineFreeze": {
+    "localized_name": "Buz Mayını",
+    "description": "Üzerine basanları dondurur. Donmuş Pal'ları yakalamak daha kolaydır."
+  },
+  "Trap_Noose": {
+    "localized_name": "Asılı Tuzak",
+    "description": "İçinden geçen Pal'ları yakalar. Sadece küçük Pal'lar ve insanlar üzerinde etkilidir."
+  },
+  "UnlockEquipmentSlot_Weapon_01": {
+    "localized_name": "Ek Silah Yuvası",
+    "description": null
+  },
+  "UnlockEquipmentSlot_Weapon_02": {
+    "localized_name": "Ek Silah Yuvası 2",
+    "description": null
+  },
+  "Unlock_Picking_Tier1": {
+    "localized_name": "Kilit Açma Aracı v1",
+    "description": null
+  },
+  "Unlock_Picking_Tier2": {
+    "localized_name": "Kilit Açma Aracı v2",
+    "description": null
+  },
+  "Unlock_Picking_Tier3": {
+    "localized_name": "Kilit Açma Aracı v3",
+    "description": null
+  },
+  "WallSignboard": {
+    "localized_name": "Duvara Asılı Tabela",
+    "description": null
+  },
+  "WallTorch": {
+    "localized_name": "Duvar Meşalesi",
+    "description": "Çevredeki alanı aydınlatmak için bir duvara yerleştir."
+  },
+  "WaterBuildKit": {
+    "localized_name": "Su üstü yapı kiti",
+    "description": "Su üstünde yapı inşa etmek için kullanılan bir araç. Temelin suyun üzerine yerleştirilebilmesini sağlar."
+  },
+  "WeaponFactory_Dirty_04": {
+    "localized_name": "Gelişmiş medeniyetin silah üretim tesisi",
+    "description": null
+  },
+  "WidePenetrateShotgun": {
+    "localized_name": "Işın Saçıcı",
+    "description": "Yakın mesafe çatışmaları için özelleşmiş bir ışın silahı. Sıkıştırılmış enerjiyi genişleyen (saçılan) bir ışın olarak fırlatır."
+  },
+  "WidePenetrateShotgunBullet": {
+    "localized_name": "Işın Saçıcı Mermisi",
+    "description": null
+  },
+  "WingGlider": {
+    "localized_name": "Kanat Paketi",
+    "description": "Sırta takılıp uçmayı sağlayan kanat şeklinde bir cihaz. Wing Celltüketerek itiş gücü sağlar."
+  },
+  "WingGlider_Fuel": {
+    "localized_name": "Wing Cell",
+    "description": "Kanat Paketiuçuşu için kullanılan enerji."
+  },
+  "Wood_Gate": {
+    "localized_name": "Tahta Giriş Kapısı",
+    "description": "Tahtadan yapılmış, büyük Pal'ların geçmesine olanak tanıyacak kadar geniş bir giriş kapısı."
+  },
+  "Wooden_houseset": {
+    "localized_name": "Tahta Yapı Seti",
+    "description": "Odun kullanarak üsler inşa etmek için bir set. Tahta zeminler, duvarlar, tavanlar, merdivenler ve sığınaklar için gereken diğer şeyleri inşa etmene olanak tanır."
+  },
+  "Wooden_ladder": {
+    "localized_name": "Merdiven",
+    "description": null
+  },
+  "WorkSpeedIncrease1": {
+    "localized_name": "Beta Dalga Jeneratörü",
+    "description": null
+  },
+  "Workbench": {
+    "localized_name": "İlkel Tezgâh",
+    "description": "Basit eşyalar yapmak için bir İlkel Tezgâh. El İşi iş uygunluğuna sahip Pal'lar, üretimin hızlanmasına yardımcı olur."
+  },
+  "WorldTreeIngot": {
+    "localized_name": "Pal kalsit külçe",
+    "description": "Güneş TaşıvePal-kalsit'nin eritilip birleştirilmesiyle oluşturulmuş yüce bir alaşım. Antik medeniyet teknolojisi ve Dünya Ağacı'nın gücünün kristalleşmiş hali olan, son derece nadir bir materyal. En üst seviye ekipman ve yapıları inşa etmek için vazgeçilmezdir."
+  },
+  "YakushimaBlade": {
+    "localized_name": "Meowmere",
+    "description": null
+  }
+}

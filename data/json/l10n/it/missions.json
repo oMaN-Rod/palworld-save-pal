@@ -13,7 +13,7 @@
   },
   "Main_BuildPalBox": {
     "localized_name": "Una base da cui iniziare",
-    "description": "Apri il menu Edificazione da <keyGuideIcon id=|OpenConstructionMenu| iconScale=|0.7|/> e costruisci il Box per Pal in uno spazio ampio. Qui sorgerà la prima base per te e i Pal: sarà il punto d'origine delle spedizioni, e una risorsa fondamentale quando un giorno punterai alle torri. Scegli con attenzione dove edificarla."
+    "description": "Apri il menu Edificazione e costruisci il Box per Pal in uno spazio ampio. Qui sorgerà la prima base per te e i Pal: sarà il punto d'origine delle spedizioni, e una risorsa fondamentale quando un giorno punterai alle torri. Scegli con attenzione dove edificarla."
   },
   "Main_BuildWorkBench_Old": {
     "localized_name": "Dove inizia ogni attività",
@@ -409,7 +409,7 @@
   },
   "Sub_Scholar01": {
     "localized_name": "Sveliamo le leggende!",
-    "description": "Avanti, aiutami a trovare un Pal delle leggende! Il monte dello spirito argenteo a nord, le dune della siccità a est... Sembra che si trovi almeno un Pal delle leggende in ognuno di questi luoghi, come anche ai confini di quella che chiamano |capitale del firmamento|. Se ti inerpichi sulle grandi zone rocciose, potrai guardarti intorno senza ostacoli. Conto su di te!"
+    "description": "Avanti, aiutami a trovare un Pal delle leggende! Il monte dello spirito argenteo a nord, le dune della siccità a est... Sembra che si trovi almeno un Pal delle leggende in ognuno di questi luoghi, come anche ai confini di quella che chiamano \"capitale del firmamento\". Se ti inerpichi sulle grandi zone rocciose, potrai guardarti intorno senza ostacoli. Conto su di te!"
   },
   "Sub_Scholar02": {
     "localized_name": "In cerca di motivazione",
@@ -433,7 +433,7 @@
   },
   "Sub_StrongOldMan03": {
     "localized_name": "Passaggio di consegna",
-    "description": "Hai incontrato nuovamente Harold, ma sembra meno allegro del solito. Ha accettato la missione di abbattere un Pal fuori controllo. Harold, scuro in volto, ti fa una richiesta. |Potresti occupartene tu?| Quando accetti la sua richiesta, Harold appare visibilmente sollevato. Eppure, allo stesso tempo, un'ombra ancora più scura cala sul suo capo reclinato."
+    "description": "Hai incontrato nuovamente Harold, ma sembra meno allegro del solito. Ha accettato la missione di abbattere un Pal fuori controllo. Harold, scuro in volto, ti fa una richiesta. \"Potresti occupartene tu?\" Quando accetti la sua richiesta, Harold appare visibilmente sollevato. Eppure, allo stesso tempo, un'ombra ancora più scura cala sul suo capo reclinato."
   },
   "Sub_StrongOldMan04": {
     "localized_name": "Il passato",

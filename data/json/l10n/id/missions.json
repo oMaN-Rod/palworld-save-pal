@@ -9,11 +9,11 @@
   },
   "Main_BuildHatchingMachine": {
     "localized_name": "Telur Pal",
-    "description": "Diketahui bahwa Pal terlahir dari telur. Karena telur dapat ditemukan di seluruh bagian pulau, perhatikan sekelilingmu dengan baik saat sedang menjelajah. Dengan membesarkan Pal dari telur, kamu mungkin bisa bertemu dengan beragam jenis individu. Suatu saat, pasti akan tiba hari di mana kamu mencari Pal milikmu sendiri. Pertama, buka teknologi Inkubator dan coba letakkan di markas. Setelah memasukkan telur ke dalam Inkubator , kamu harus menunggu sebentar sebelum telur itu menetas."
+    "description": "Diketahui bahwa Pal terlahir dari telur. Karena telur dapat ditemukan di seluruh bagian pulau, perhatikan sekelilingmu dengan baik saat sedang menjelajah. Dengan membesarkan Pal dari telur, kamu mungkin bisa bertemu dengan beragam jenis individu. Suatu saat, pasti akan tiba hari di mana kamu mencari Pal milikmu sendiri. Pertama, buka teknologi Inkubator dan coba letakkan di markas. Setelah memasukkan telur ke dalam Inkubator, kamu harus menunggu sebentar sebelum telur itu menetas."
   },
   "Main_BuildPalBox": {
     "localized_name": "Markas Awal",
-    "description": "Buka menu konstruksi pada <keyGuideIcon id=|OpenConstructionMenu| iconScale=|0.7|/>, lalu coba letakkan Palbox di tanah yang luas. Di sanalah markas pertamamu dan Pal, dan dengan mengaturnya sebagai titik awal ekspedisi, itu akan membantumu ketika tiba saatnya untuk menuju menara. Pilih lokasi peletakannya dengan baik."
+    "description": "Buka menu konstruksi, lalu coba letakkan Palbox di tanah yang luas. Di sanalah markas pertamamu dan Pal, dan dengan mengaturnya sebagai titik awal ekspedisi, itu akan membantumu ketika tiba saatnya untuk menuju menara. Pilih lokasi peletakannya dengan baik."
   },
   "Main_BuildWorkBench_Old": {
     "localized_name": "Titik awal kerja",
@@ -37,19 +37,19 @@
   },
   "Main_CaptureSheepBall": {
     "localized_name": "Pal paling lemah",
-    "description": "PemanfaatanSheepBall: Meskipun SheepBallmemiliki kekuatan tempur yang rendah dan mudah ditangkap, tapi mereka cukup cekatan. Mereka bisa bantu berbagai pekerjaan tangan yang biasanya dilakukan manusia. Sebagai rekan pertama dalam memperluas pangkalan, mereka akan menjadi sosok yang sangat bisa diandalkan. Selain itu, kamu juga bisa mendapatkan material penting untuk kehidupan seperti Wol dan Daging Domba Lamball . Sebaiknya tangkap beberapa Pal ini di awal, agar proses pengembangan pangkalan kamu jadi lebih lancar."
+    "description": "Pemanfaatan SheepBall: Meskipun SheepBall memiliki kekuatan tempur yang rendah dan mudah ditangkap, tapi mereka cukup cekatan. Mereka bisa bantu berbagai pekerjaan tangan yang biasanya dilakukan manusia. Sebagai rekan pertama dalam memperluas pangkalan, mereka akan menjadi sosok yang sangat bisa diandalkan. Selain itu, kamu juga bisa mendapatkan material penting untuk kehidupan seperti Wol dan Daging Domba Lamball. Sebaiknya tangkap beberapa Pal ini di awal, agar proses pengembangan pangkalan kamu jadi lebih lancar."
   },
   "Main_CaptureSheepBall_Old": {
     "localized_name": "Pal Terlemah",
-    "description": "Pulau Palpagos adalah dunia di mana yang kuat yang akan bertahan. Lamball adalah Pal yang berada di posisi paling bawah dalam rantai makanan, dan dapat ditangkap dengan sangat mudah. Akan tetapi, mereka memanfaatkan keterampilan tangannya dengan cekatan, sehingga dapat menggantikanmu melakukan berbagai macam pekerjaan. Pertama, coba tangkap 5 ekorSheepBall. Sebagai teman pertama untuk memperbesar markasmu, kehadiran mereka harusnya cukup membantu. Selain itu, dari Lamball kamu juga bisa mendapatkan material yang diperlukan untuk hidup, seperti Wol dan Daging Domba Lamball . Agar bisa bertahan hidup di dunia yang keras ini, penting untuk memiliki pemikiran untuk menggunakan apa pun yang bisa digunakan."
+    "description": "Pulau Palpagos adalah dunia di mana yang kuat yang akan bertahan. Lamball adalah Pal yang berada di posisi paling bawah dalam rantai makanan, dan dapat ditangkap dengan sangat mudah. Akan tetapi, mereka memanfaatkan keterampilan tangannya dengan cekatan, sehingga dapat menggantikanmu melakukan berbagai macam pekerjaan. Pertama, coba tangkap 5 ekor SheepBall. Sebagai teman pertama untuk memperbesar markasmu, kehadiran mereka harusnya cukup membantu. Selain itu, dari Lamball kamu juga bisa mendapatkan material yang diperlukan untuk hidup, seperti Wol dan Daging Domba Lamball. Agar bisa bertahan hidup di dunia yang keras ini, penting untuk memiliki pemikiran untuk menggunakan apa pun yang bisa digunakan."
   },
   "Main_CatchPal": {
     "localized_name": "Tangkap Pal",
-    "description": "PembuatanPal Spheredan Penangkapan Pal: Kamu pasti sadar, pulau ini dihuni oleh banyak makhluk tak dikenal. Makhluk-makhluk yang disebut |Pal| ini punya karakteristik ekologi yang unik serta kecerdasan tinggi, dan terbukti sangat berguna bagi aktivitas investigasi kita. Pal bisa ditangkap menggunakan alat yang disebutPal Sphere. Meski prinsip kerjanya tidak diketahui, Pal yang telah ditangkap pada dasarnya akan menjadi patuh kepada manusia. Buka layar Teknologi dari menu untuk memeriksa cara pembuatanPal Sphere, lalu kumpulkanPecahan Paldiumyang menjadi bahan bakunya. Bijih aneh yang bersinar biru ini biasanya sering ditemukan di dekat area perairan. Setelah itu, diMeja Kerja PrimitifbuatlahPal Sphere, maka persiapan penangkapan selesai. Saat mencoba menangkap, kurangi kesehatan target sebanyak mungkin untuk melemahkan daya tahannya dan meningkatkan tingkat keberhasilan. Tapi hati-hati, kebanyakan Pal akan melawan. Jadi kalau perlengkapanmu belum siap, mending incar Pal kecil yang kekuatannya lebih rendah dulu."
+    "description": "Pembuatan Pal Sphere dan Penangkapan Pal: Kamu pasti sadar, pulau ini dihuni oleh banyak makhluk tak dikenal. Makhluk-makhluk yang disebut \"Pal\" ini punya karakteristik ekologi yang unik serta kecerdasan tinggi, dan terbukti sangat berguna bagi aktivitas investigasi kita. Pal bisa ditangkap menggunakan alat yang disebut Pal Sphere. Meski prinsip kerjanya tidak diketahui, Pal yang telah ditangkap pada dasarnya akan menjadi patuh kepada manusia. Buka layar Teknologi dari menu untuk memeriksa cara pembuatan Pal Sphere, lalu kumpulkan Pecahan Paldium yang menjadi bahan bakunya. Bijih aneh yang bersinar biru ini biasanya sering ditemukan di dekat area perairan. Setelah itu, di Meja Kerja Primitif buatlah Pal Sphere, maka persiapan penangkapan selesai. Saat mencoba menangkap, kurangi kesehatan target sebanyak mungkin untuk melemahkan daya tahannya dan meningkatkan tingkat keberhasilan. Tapi hati-hati, kebanyakan Pal akan melawan. Jadi kalau perlengkapanmu belum siap, mending incar Pal kecil yang kekuatannya lebih rendah dulu."
   },
   "Main_CollectCrystal": {
     "localized_name": "Paldium",
-    "description": "Di pulau ini, terdapat bijih yang menyembunyikan kekuatan supranatural yang disebut dengan Paldium. Tampaknya ini sangat berhubungan dengan pohon raksasa yang terlihat jauh di sana, tetapi tidak ada yang tahu detailnya. Bijih aneh ini memiliki berbagai kegunaan dan juga merupakan material yang sangat penting untuk Pal Sphere . Diketahui bahwa Paldium bisa ditemukan di dekat air. Cari di tepi air seperti di sepanjang sungai, dan jika kamu menemukan benda yang seperti batu bercahaya biru, cobalah pukul dengan beliung. Perlu dicatat, beliung dapat dibuat di Meja Kerja Primitif dengan menggabungkan Batu dan Kayu."
+    "description": "Di pulau ini, terdapat bijih yang menyembunyikan kekuatan supranatural yang disebut dengan Paldium. Tampaknya ini sangat berhubungan dengan pohon raksasa yang terlihat jauh di sana, tetapi tidak ada yang tahu detailnya. Bijih aneh ini memiliki berbagai kegunaan dan juga merupakan material yang sangat penting untuk Pal Sphere. Diketahui bahwa Paldium bisa ditemukan di dekat air. Cari di tepi air seperti di sepanjang sungai, dan jika kamu menemukan benda yang seperti batu bercahaya biru, cobalah pukul dengan beliung. Perlu dicatat, beliung dapat dibuat di Meja Kerja Primitif dengan menggabungkan Batu dan Kayu."
   },
   "Main_CollectKeySpheres": {
     "localized_name": "Kumpulkan Key Sphere",
@@ -61,7 +61,7 @@
   },
   "Main_CraftPalGear": {
     "localized_name": "Pembuatan Pal Gear",
-    "description": "Kepala desa menyarankan jika kamu ingin tahu masa lalu Kepulauan Palpagos, coba kunjungi Zoe, putri tunggal dari pemimpin gerombolan pemburu liar. Namun, seperti yang dikatakan beliau,Foxparkssebaiknya kamu bersiap menuju menara dengan menangkap dan membuat |Pal Gear| terlebih dahulu."
+    "description": "Kepala desa menyarankan jika kamu ingin tahu masa lalu Kepulauan Palpagos, coba kunjungi Zoe, putri tunggal dari pemimpin gerombolan pemburu liar. Namun, seperti yang dikatakan beliau,Foxparkssebaiknya kamu bersiap menuju menara dengan menangkap dan membuat \"Pal Gear\" terlebih dahulu."
   },
   "Main_CraftPalSphere": {
     "localized_name": "Alat Penangkap",
@@ -81,7 +81,7 @@
   },
   "Main_DefeatDesertBoss": {
     "localized_name": "Penguasa Lubang Pasir",
-    "description": "Kamu berhasil mengalahkan Axel Travers dan memperoleh |Keysphere Kemalasan.| Tujuanmu selanjutnya yakni Menara Palapagos Islands Defense Force (PIDF)."
+    "description": "Kamu berhasil mengalahkan Axel Travers dan memperoleh \"Keysphere Kemalasan.\" Tujuanmu selanjutnya yakni Menara Palapagos Islands Defense Force (PIDF)."
   },
   "Main_DefeatDungeonBoss": {
     "localized_name": "Pal Yang Tersegel",
@@ -89,7 +89,7 @@
   },
   "Main_DefeatForestBoss": {
     "localized_name": "Hei, Jangan Lukai Dia",
-    "description": "Kamu berhasil mengalahkan Zoe Rayne dan memperoleh |Keysphere Iri Hati.| Tujuanmu selanjutnya yakni Menara Aliansi Pal Bebas."
+    "description": "Kamu berhasil mengalahkan Zoe Rayne dan memperoleh \"Keysphere Iri Hati.\" Tujuanmu selanjutnya yakni Menara Aliansi Pal Bebas."
   },
   "Main_DefeatGrassBoss": {
     "localized_name": "Putri dan Menara",
@@ -97,27 +97,27 @@
   },
   "Main_DefeatKingWhale": {
     "localized_name": "Panthalus",
-    "description": "Untuk memasuki Pohon Dunia, kamu perlu bantuan dariPanthalus. Carilah Panthalusdan buktikan kekuatanmu kepadanya."
+    "description": "Untuk memasuki Pohon Dunia, kamu perlu bantuan dari Panthalus. Carilah Panthalus dan buktikan kekuatanmu kepadanya."
   },
   "Main_DefeatSakurajimaBoss": {
     "localized_name": "Malam Ini, Sake-nya Enak",
-    "description": "Kamu berhasil mengalahkan Victor Ashford dan memperoleh |Bola Kunci Kerakusan.| Tujuanmu selanjutnya yakni Menara Klan Moonflower."
+    "description": "Kamu berhasil mengalahkan Victor Ashford dan memperoleh \"Bola Kunci Kerakusan.\" Tujuanmu selanjutnya yakni Menara Klan Moonflower."
   },
   "Main_DefeatSkyIslandBoss": {
     "localized_name": "Satu hari terasa seperti seribu musim gugur, lalu tibalah musim semi",
-    "description": "Kamu berhasil mengalahkan Bjorn Seligsson dan memperoleh |Keysphere Amarah.| Tujuanmu selanjutnya yakni Menara Perjanjian."
+    "description": "Kamu berhasil mengalahkan Bjorn Seligsson dan memperoleh \"Keysphere Amarah.\" Tujuanmu selanjutnya yakni Menara Perjanjian."
   },
   "Main_DefeatSnowyMountainBoss": {
     "localized_name": "Uji Coba Penggabungan Pal",
-    "description": "Kamu berhasil mengalahkan Marcus Dryden dan memperoleh |Keysphere Keserakahan.| Tujuanmu selanjutnya yakni Menara Unit Riset Genetik Pal."
+    "description": "Kamu berhasil mengalahkan Marcus Dryden dan memperoleh \"Keysphere Keserakahan.\" Tujuanmu selanjutnya yakni Menara Unit Riset Genetik Pal."
   },
   "Main_DefeatVikingBoss": {
     "localized_name": "Yang Memikul Semua Tanggung Jawab",
-    "description": "Kamu berhasil mengalahkan Saya Kurosaki dan memperoleh |Keysphere Nafsu.| Tujuanmu selanjutnya yakni Menara Langit Jatuh."
+    "description": "Kamu berhasil mengalahkan Saya Kurosaki dan memperoleh \"Keysphere Nafsu.\" Tujuanmu selanjutnya yakni Menara Langit Jatuh."
   },
   "Main_DefeatVolcanoBoss": {
     "localized_name": "Obsesi Kemenangan Sempurna",
-    "description": "Kamu berhasil mengalahkan Lily Everheart dan memperoleh |Keysphere Kesombongan.| Tujuanmu selanjutnya yakni Menara Persaudaraan Api Abadi."
+    "description": "Kamu berhasil mengalahkan Lily Everheart dan memperoleh \"Keysphere Kesombongan.\" Tujuanmu selanjutnya yakni Menara Persaudaraan Api Abadi."
   },
   "Main_DefeatWildBoss": {
     "localized_name": "Mengalahkan Bos Pertama",
@@ -157,7 +157,7 @@
   },
   "Main_PrepareEquipment": {
     "localized_name": "Siapkan peralatan",
-    "description": "Pembuatan Perlengkapan: Pertama-tama, kami mengolah wol yang didapat dari Lamball di meja kerja menjadi Kain , lalu membuat Pakaian Kain . Selanjutnya, dengan menerapkan kemampuan penyembuhan mandiri milik Paldium, kami mengembangkan Perisai Normal . Terakhir, untuk menjelajahi medan dengan perbedaan ketinggian yang drastis, kami membuat Parasut Normal . Kalau sudah siap semua, kamu bisa melanjutkan investigasi dengan relatif lebih efisien."
+    "description": "Pembuatan Perlengkapan: Pertama-tama, kami mengolah wol yang didapat dari Lamball di meja kerja menjadi Kain, lalu membuat Pakaian Kain. Selanjutnya, dengan menerapkan kemampuan penyembuhan mandiri milik Paldium, kami mengembangkan Perisai Normal. Terakhir, untuk menjelajahi medan dengan perbedaan ketinggian yang drastis, kami membuat Parasut Normal. Kalau sudah siap semua, kamu bisa melanjutkan investigasi dengan relatif lebih efisien."
   },
   "Main_RayneSyndicate": {
     "localized_name": "Gerombolan Rayne",
@@ -293,7 +293,7 @@
   },
   "Sub_HowSurviveWorldTree": {
     "localized_name": "Cara bertahan hidup di Pohon Dunia",
-    "description": "Kumpulkan masing-masing 1 buah Kayu Misterius dan Palxite , lalu laporkan kepada pemberi tugas."
+    "description": "Kumpulkan masing-masing 1 buah Kayu Misterius dan Palxite, lalu laporkan kepada pemberi tugas."
   },
   "Sub_Kigurumi01": {
     "localized_name": "Mari menjadi Depresso!",
@@ -433,7 +433,7 @@
   },
   "Sub_StrongOldMan03": {
     "localized_name": "Agen",
-    "description": "Harold yang kamu temui kembali kali ini tidak seceria biasanya. Tugas yang dia terima dari desa tetangga adalah membasmi Pal yang mengamuk. Sembari menjelaskan detail tugas dengan wajah muram, Harold memberikan sebuah tawaran: |Maukah kamu mengambil tugas ini?| Saat kamu setuju, Harold tampak lega sesaat…… Namun, bayangan yang lebih gelap menyelimuti wajahnya yang sedikit tertunduk."
+    "description": "Harold yang kamu temui kembali kali ini tidak seceria biasanya. Tugas yang dia terima dari desa tetangga adalah membasmi Pal yang mengamuk. Sembari menjelaskan detail tugas dengan wajah muram, Harold memberikan sebuah tawaran: \"Maukah kamu mengambil tugas ini?\" Saat kamu setuju, Harold tampak lega sesaat…… Namun, bayangan yang lebih gelap menyelimuti wajahnya yang sedikit tertunduk."
   },
   "Sub_StrongOldMan04": {
     "localized_name": "Masa lalu",

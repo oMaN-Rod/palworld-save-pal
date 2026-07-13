@@ -597,15 +597,15 @@
   },
   "Deffence_up2": {
     "localized_name": "Krzepkie ciało",
-    "description": "Obrona +20.0% Niewrażliwość na zachwianie"
+    "description": "Obrona +20% Niewrażliwość na zachwianie"
   },
   "Deffence_up2_2": {
     "localized_name": "Waga ciężka",
-    "description": "Obrona+20.0% Niewrażliwość na odrzut"
+    "description": "Obrona+20% Niewrażliwość na odrzut"
   },
   "Deffence_up3": {
     "localized_name": "Diamentowe ciało",
-    "description": "Obrona +30.0% Niewrażliwość na zachwianie Niewrażliwość na odrzut"
+    "description": "Obrona +30% Niewrażliwość na zachwianie Niewrażliwość na odrzut"
   },
   "Defuser_ExplosiveSpore_EquipSkill": {
     "localized_name": "Zmniejszenie obrażeń od wybuchów",
@@ -613,7 +613,7 @@
   },
   "ElementBoost_Aqua_1_PAL": {
     "localized_name": "Hydromaniak",
-    "description": "10.0% wzrostu obrażeń od ataków wodnych."
+    "description": "10% wzrostu obrażeń od ataków wodnych."
   },
   "ElementBoost_Aqua_2_PAL": {
     "localized_name": "Władca mórz",
@@ -629,7 +629,7 @@
   },
   "ElementBoost_Dark_1_PAL": {
     "localized_name": "Welon ciemności",
-    "description": "10.0% wzrostu obrażeń od ataków mrocznych."
+    "description": "10% wzrostu obrażeń od ataków mrocznych."
   },
   "ElementBoost_Dark_2_BossDefeat": {
     "localized_name": "Zwiększenie obrażeń mrocznych (średnie)",
@@ -665,7 +665,7 @@
   },
   "ElementBoost_Dragon_1_PAL": {
     "localized_name": "Krew smoka",
-    "description": "10.0% wzrostu obrażeń od ataków smoczych."
+    "description": "10% wzrostu obrażeń od ataków smoczych."
   },
   "ElementBoost_Dragon_2_BossDefeat": {
     "localized_name": "Zwiększenie obrażeń smoczych (średnie)",
@@ -701,7 +701,7 @@
   },
   "ElementBoost_Earth_1_PAL": {
     "localized_name": "Potęga Gai",
-    "description": "10.0% wzrostu obrażeń od ataków ziemnych."
+    "description": "10% wzrostu obrażeń od ataków ziemnych."
   },
   "ElementBoost_Earth_2_BossDefeat": {
     "localized_name": "Zwiększenie obrażeń ziemnych (średnie)",
@@ -765,7 +765,7 @@
   },
   "ElementBoost_Fire_1_PAL": {
     "localized_name": "Piroman",
-    "description": "10.0% wzrostu obrażeń od ataków ognistych."
+    "description": "10% wzrostu obrażeń od ataków ognistych."
   },
   "ElementBoost_Fire_2_BossDefeat": {
     "localized_name": "Zwiększenie obrażeń od ognia (średnie)",
@@ -801,7 +801,7 @@
   },
   "ElementBoost_Ice_1_PAL": {
     "localized_name": "Zimnokrwisty",
-    "description": "10.0% wzrostu obrażeń od ataków lodowych."
+    "description": "10% wzrostu obrażeń od ataków lodowych."
   },
   "ElementBoost_Ice_2_BossDefeat": {
     "localized_name": "Zwiększenie obrażeń lodowych (średnie)",
@@ -837,7 +837,7 @@
   },
   "ElementBoost_Leaf_1_PAL": {
     "localized_name": "Pachnące liście",
-    "description": "10.0% wzrostu obrażeń od ataków roślinnych."
+    "description": "10% wzrostu obrażeń od ataków roślinnych."
   },
   "ElementBoost_Leaf_2_BossDefeat": {
     "localized_name": "Zwiększenie obrażeń roślinnych (średnie)",
@@ -873,7 +873,7 @@
   },
   "ElementBoost_Normal_1_PAL": {
     "localized_name": "Umysł zen",
-    "description": "10.0% wzrostu obrażeń od ataków neutralnych."
+    "description": "10% wzrostu obrażeń od ataków neutralnych."
   },
   "ElementBoost_Normal_2_BossDefeat": {
     "localized_name": "Zwiększenie obrażeń neutralnych (średnie)",
@@ -901,7 +901,7 @@
   },
   "ElementBoost_Thunder_1_PAL": {
     "localized_name": "Kondensator",
-    "description": "10.0% wzrostu obrażeń od ataków elektrycznych."
+    "description": "10% wzrostu obrażeń od ataków elektrycznych."
   },
   "ElementBoost_Thunder_2_PAL": {
     "localized_name": "Władca błyskawic",
@@ -941,7 +941,7 @@
   },
   "ElementResist_Aqua_1_PAL": {
     "localized_name": "Wodoodporny",
-    "description": "10.0% spadku w otrzymywanych obrażeniach wodnych."
+    "description": "10% spadku w otrzymywanych obrażeniach wodnych."
   },
   "ElementResist_Aqua_2": {
     "localized_name": "Redukcja obrażeń wodnych poziom 2",
@@ -961,7 +961,7 @@
   },
   "ElementResist_Dark_1_PAL": {
     "localized_name": "Radosny",
-    "description": "10.0% spadku w otrzymywanych obrażeniach mrocznych."
+    "description": "10% spadku w otrzymywanych obrażeniach mrocznych."
   },
   "ElementResist_Dark_2": {
     "localized_name": "Redukcja obrażeń mrocznych poziom 2",
@@ -981,7 +981,7 @@
   },
   "ElementResist_Dragon_1_PAL": {
     "localized_name": "Zabójca smoków",
-    "description": "10.0% spadku w otrzymywanych obrażeniach smoczych."
+    "description": "10% spadku w otrzymywanych obrażeniach smoczych."
   },
   "ElementResist_Dragon_2": {
     "localized_name": "Redukcja obrażeń smoczych poziom 2",
@@ -1001,7 +1001,7 @@
   },
   "ElementResist_Earth_1_PAL": {
     "localized_name": "Odporność na trzęsienia ziemi",
-    "description": "10.0% spadku w otrzymywanych obrażeniach ziemnych."
+    "description": "10% spadku w otrzymywanych obrażeniach ziemnych."
   },
   "ElementResist_Earth_2": {
     "localized_name": "Redukcja obrażeń ziemnych poziom 2",
@@ -1021,7 +1021,7 @@
   },
   "ElementResist_Fire_1_PAL": {
     "localized_name": "Miłośnik opalania",
-    "description": "10.0% spadku w otrzymywanych obrażeniach od ognia."
+    "description": "10% spadku w otrzymywanych obrażeniach od ognia."
   },
   "ElementResist_Fire_2": {
     "localized_name": "Redukcja obrażeń od ognia poziom 2",
@@ -1041,7 +1041,7 @@
   },
   "ElementResist_Ice_1_PAL": {
     "localized_name": "Ocieplone ciało",
-    "description": "10.0% spadku w otrzymywanych obrażeniach lodowych."
+    "description": "10% spadku w otrzymywanych obrażeniach lodowych."
   },
   "ElementResist_Ice_2": {
     "localized_name": "Redukcja obrażeń lodowych poziom 2",
@@ -1061,7 +1061,7 @@
   },
   "ElementResist_Leaf_1_PAL": {
     "localized_name": "Roślinna bariera",
-    "description": "10.0% spadku w otrzymywanych obrażeniach roślinnych."
+    "description": "10% spadku w otrzymywanych obrażeniach roślinnych."
   },
   "ElementResist_Leaf_2": {
     "localized_name": "Redukcja obrażeń roślinnych poziom 2",
@@ -1081,7 +1081,7 @@
   },
   "ElementResist_Normal_1_PAL": {
     "localized_name": "Anormalny",
-    "description": "10.0% spadek w otrzymywanych obrażeniach neutralnych."
+    "description": "10% spadek w otrzymywanych obrażeniach neutralnych."
   },
   "ElementResist_Normal_2": {
     "localized_name": "Redukcja obrażeń neutralnych poziom 2",
@@ -1101,7 +1101,7 @@
   },
   "ElementResist_Thunder_1_PAL": {
     "localized_name": "Izolowane ciało",
-    "description": "10.0% spadku w otrzymywanych obrażeniach elektrycznych."
+    "description": "10% spadku w otrzymywanych obrażeniach elektrycznych."
   },
   "ElementResist_Thunder_2": {
     "localized_name": "Redukcja obrażeń elektrycznych poziom 2",
@@ -1133,7 +1133,7 @@
   },
   "GYM_NAME_Meadow": {
     "localized_name": "Oficer Syndykatu Rayne",
-    "description": "Atak +20.0% Prędkość ruchu wzrasta o 10.0%"
+    "description": "Atak +20% Prędkość ruchu wzrasta o 10%"
   },
   "GYM_NAME_Sakurajima": {
     "localized_name": "Przywódca Księżycowych Kwiatów",
@@ -1245,7 +1245,7 @@
   },
   "MutationPal_ExplosionResist": {
     "localized_name": "Ciężki pancerz",
-    "description": "Obrażenia od wybuchów: <Status_Up>Niewrażliwość</>"
+    "description": null
   },
   "MutationPal_Immortal": {
     "localized_name": "Nieśmiertelność",
@@ -1253,7 +1253,7 @@
   },
   "MutationPal_Mutant": {
     "localized_name": "Osobliwa natura",
-    "description": "Naturalna regeneracja HP Pala i gracza +50.0% Obrona +{EffectValue4}% Obrażenia od trucizny: <Status_Up>Niewrażliwość</> Obrażenia od podpalenia: <Status_Up>Niewrażliwość</>"
+    "description": null
   },
   "NightOwl": {
     "localized_name": "Nocny marek",
@@ -1273,7 +1273,7 @@
   },
   "Nushi": {
     "localized_name": "Mistrz łowiska",
-    "description": "20.0% wzrost obrażeń od ataku wodnego 20.0% wzrost obrażeń od ataku lodowego Obrona +20.0%"
+    "description": "20% wzrost obrażeń od ataku wodnego 20% wzrost obrażeń od ataku lodowego Obrona +20%"
   },
   "OctaviaArmorVampire": {
     "localized_name": "Krwawy napęd",
@@ -1305,46 +1305,46 @@
   },
   "PAL_FullStomach_Down_1": {
     "localized_name": "Smakosz",
-    "description": "Głód spada o <NumBlue_13>+10.0%</> wolniej."
+    "description": "Głód spada o +10.0% wolniej."
   },
   "PAL_FullStomach_Down_2": {
     "localized_name": "Fanatyk diety",
-    "description": "Głód spada o <NumBlue_13>+15.0%</> wolniej."
+    "description": "Głód spada o +15.0% wolniej."
   },
   "PAL_FullStomach_Down_3": {
     "localized_name": "Mistrzostwo postu",
-    "description": "Głód spada o <NumBlue_13>+20.0%</> wolniej."
+    "description": "Głód spada o +20.0% wolniej."
   },
   "PAL_FullStomach_Up_1": {
     "localized_name": "Żarłok",
-    "description": "Głód spada o <NumRed_13>+10.0%</> szybciej."
+    "description": "Głód spada o +10.0% szybciej."
   },
   "PAL_FullStomach_Up_2": {
     "localized_name": "Bezdenny żołądek",
-    "description": "Głód spada o <NumRed_13>+15.0%</> szybciej."
+    "description": "Głód spada o +15.0% szybciej."
   },
   "PAL_Sanity_Down_1": {
     "localized_name": "Optymista",
-    "description": "Wartość SAN spada o <NumBlue_13>+10.0%</> wolniej."
+    "description": "Wartość SAN spada o +10.0% wolniej."
   },
   "PAL_Sanity_Down_2": {
     "localized_name": "Pracoholik",
-    "description": "Wartość SAN spada o <NumBlue_13>+15.0%</> wolniej."
+    "description": "Wartość SAN spada o +15.0% wolniej."
   },
   "PAL_Sanity_Down_3": {
     "localized_name": "Serce Niewzruszonego Króla",
-    "description": "Wartość SAN spada o <NumBlue_13>+20.0%</> wolniej."
+    "description": "Wartość SAN spada o +20.0% wolniej."
   },
   "PAL_Sanity_Up_1": {
     "localized_name": "Niestabilny",
-    "description": "Wartość SAN spada o <NumRed_13>+10.0%</> szybciej."
+    "description": "Wartość SAN spada o +10.0% szybciej."
   },
   "PAL_Sanity_Up_2": {
     "localized_name": "Niszczyciel",
-    "description": "Wartość SAN spada o <NumRed_13>+15.0%</> szybciej."
+    "description": "Wartość SAN spada o +15.0% szybciej."
   },
   "PAL_SpiritualInst": {
-    "localized_name": "-",
+    "localized_name": "Mentally unstable",
     "description": null
   },
   "PAL_conceited": {
@@ -1545,23 +1545,23 @@
   },
   "TrainerATK_UP_1": {
     "localized_name": "Straż przednia",
-    "description": "10.0% wzrost ataku gracza."
+    "description": "10% wzrost ataku gracza."
   },
   "TrainerDEF_UP_1": {
     "localized_name": "Strateg twierdzy",
-    "description": "10.0% wzrost obrony gracza."
+    "description": "10% wzrost obrony gracza."
   },
   "TrainerLogging_up1": {
     "localized_name": "Brygadzista wycinek",
-    "description": "25.0% wzrost wydajności wycinki gracza."
+    "description": "25% wzrost wydajności wycinki gracza."
   },
   "TrainerMining_up1": {
     "localized_name": "Brygadzista kopalni",
-    "description": "25.0% wzrost wydajności górnictwa gracza."
+    "description": "25% wzrost wydajności górnictwa gracza."
   },
   "TrainerWorkSpeed_UP_1": {
     "localized_name": "Inspirujący przywódca",
-    "description": "25.0% wzrost prędkości pracy gracza."
+    "description": "25% wzrost prędkości pracy gracza."
   },
   "Vampire": {
     "localized_name": "Wampiryczny",
@@ -1617,31 +1617,31 @@
   },
   "WorldTree_ATK": {
     "localized_name": "Obosieczny święty miecz",
-    "description": "Atak <NumBlue_13>+</>50.0% Obrona -30.0% Nie znika nawet po zbliżeniu się do drzew i skał Drzewa Świata."
+    "description": "Atak +50% Obrona -30% Nie znika nawet po zbliżeniu się do drzew i skał Drzewa Świata."
   },
   "WorldTree_ATK_DEF": {
     "localized_name": "Bóg zniszczenia",
-    "description": "Atak <NumBlue_13>+</>40.0% Obrona <NumBlue_13>+</>20.0% Maks. HP -50.0% Nie znika nawet zbliżeniu się do drzew i skał Drzewa Świata."
+    "description": "Atak +40% Obrona +20% Maks. HP -50% Nie znika nawet zbliżeniu się do drzew i skał Drzewa Świata."
   },
   "WorldTree_CraftSpeed": {
     "localized_name": "Diabelskie dłonie",
-    "description": "Prędkość pracy <NumBlue_13>+</>90.0<NumBlue_13>%</> Szybszy spadek wartości SAN +15% Nie znika nawet po zbliżeniu się do drzew i skał Drzewa Świata."
+    "description": "Prędkość pracy +90% Szybszy spadek wartości SAN +15% Nie znika nawet po zbliżeniu się do drzew i skał Drzewa Świata."
   },
   "WorldTree_DEF": {
     "localized_name": "Żywa tarcza sanktuarium",
-    "description": "Obrona <NumBlue_13>+</>50.0% Atak -30.0% Nie znika nawet po zbliżeniu się do drzew i skał Drzewa Świata."
+    "description": "Obrona +50% Atak -30% Nie znika nawet po zbliżeniu się do drzew i skał Drzewa Świata."
   },
   "WorldTree_FullStomach": {
     "localized_name": "Kolebka Boskiego Drzewa",
-    "description": "Odporność na głód +50% HP -20.0<NumRed_13>%</> Nie znika nawet po zbliżeniu się do drzew i skał Drzewa Świata."
+    "description": "Odporność na głód +50% HP -20% Nie znika nawet po zbliżeniu się do drzew i skał Drzewa Świata."
   },
   "WorldTree_MoveSpeed": {
     "localized_name": "Skok wymiarowy",
-    "description": "Prędkość ruchu <NumBlue_13>+</>50.0<NumBlue_13>%</> Szybszy wzrost głodu +15% Nie znika nawet po zbliżeniu się do drzew i skał Drzewa Świata."
+    "description": "Prędkość ruchu +50% Szybszy wzrost głodu +15% Nie znika nawet po zbliżeniu się do drzew i skał Drzewa Świata."
   },
   "WorldTree_Sanity": {
     "localized_name": "Pustelnik",
-    "description": "Odporność na utratę wartości SAN +50% Prędkość pracy -20.0<NumRed_13>%</> Nie znika nawet po zbliżeniu się do drzew i skał Drzewa Świata."
+    "description": "Odporność na utratę wartości SAN +50% Prędkość pracy -20% Nie znika nawet po zbliżeniu się do drzew i skał Drzewa Świata."
   },
   "YakushimaDagameBoost_Magic_Equip": {
     "localized_name": "Boska moc: Magia",
@@ -1677,6 +1677,282 @@
   },
   "defense_ACC_up4": {
     "localized_name": "Wzmocnienie obrony poziom 4",
+    "description": null
+  },
+  "AccuracyDecrease": {
+    "localized_name": "AccuracyDecrease",
+    "description": null
+  },
+  "AccuracyIncrease": {
+    "localized_name": "AccuracyIncrease",
+    "description": null
+  },
+  "AccuracySuperDecrease": {
+    "localized_name": "AccuracySuperDecrease",
+    "description": null
+  },
+  "BulletSpeed_H": {
+    "localized_name": "BulletSpeed_H",
+    "description": null
+  },
+  "BulletSpeed_L": {
+    "localized_name": "BulletSpeed_L",
+    "description": null
+  },
+  "CollectItem": {
+    "localized_name": "CollectItem",
+    "description": null
+  },
+  "CollectItem_CuteFox": {
+    "localized_name": "CollectItem_CuteFox",
+    "description": null
+  },
+  "CraftSpeed*3": {
+    "localized_name": "CraftSpeed*3",
+    "description": null
+  },
+  "CraftSpeed*5": {
+    "localized_name": "CraftSpeed*5",
+    "description": null
+  },
+  "GiveADark": {
+    "localized_name": "GiveADark",
+    "description": null
+  },
+  "GiveADragon": {
+    "localized_name": "GiveADragon",
+    "description": null
+  },
+  "GiveAEarth": {
+    "localized_name": "GiveAEarth",
+    "description": null
+  },
+  "GiveAElectricity": {
+    "localized_name": "GiveAElectricity",
+    "description": null
+  },
+  "GiveAFire": {
+    "localized_name": "GiveAFire",
+    "description": null
+  },
+  "GiveAIce": {
+    "localized_name": "GiveAIce",
+    "description": null
+  },
+  "GiveALeaf": {
+    "localized_name": "GiveALeaf",
+    "description": null
+  },
+  "GiveAWater": {
+    "localized_name": "GiveAWater",
+    "description": null
+  },
+  "Logging_up1": {
+    "localized_name": "Logging_up1",
+    "description": null
+  },
+  "Logging_up1_Otomo_only": {
+    "localized_name": "Logging_up1_Otomo_only",
+    "description": null
+  },
+  "Logging_up2": {
+    "localized_name": "Logging_up2",
+    "description": null
+  },
+  "Logging_up2_Otomo_only": {
+    "localized_name": "Logging_up2_Otomo_only",
+    "description": null
+  },
+  "Logging_up3": {
+    "localized_name": "Logging_up3",
+    "description": null
+  },
+  "Logging_up4": {
+    "localized_name": "Logging_up4",
+    "description": null
+  },
+  "Logging_up5": {
+    "localized_name": "Logging_up5",
+    "description": null
+  },
+  "MeleeAttack_down1": {
+    "localized_name": "MeleeAttack_down1",
+    "description": null
+  },
+  "MeleeAttack_down2": {
+    "localized_name": "MeleeAttack_down2",
+    "description": null
+  },
+  "MeleeAttack_up1": {
+    "localized_name": "MeleeAttack_up1",
+    "description": null
+  },
+  "MeleeAttack_up2": {
+    "localized_name": "MeleeAttack_up2",
+    "description": null
+  },
+  "Mining_up1": {
+    "localized_name": "Mining_up1",
+    "description": null
+  },
+  "Mining_up1_Otomo_only": {
+    "localized_name": "Mining_up1_Otomo_only",
+    "description": null
+  },
+  "Mining_up2": {
+    "localized_name": "Mining_up2",
+    "description": null
+  },
+  "Mining_up2_Otomo_only": {
+    "localized_name": "Mining_up2_Otomo_only",
+    "description": null
+  },
+  "Mining_up3": {
+    "localized_name": "Mining_up3",
+    "description": null
+  },
+  "Mining_up4": {
+    "localized_name": "Mining_up4",
+    "description": null
+  },
+  "Mining_up5": {
+    "localized_name": "Mining_up5",
+    "description": null
+  },
+  "Mute_1": {
+    "localized_name": "Mute_1",
+    "description": null
+  },
+  "Mute_2": {
+    "localized_name": "Mute_2",
+    "description": null
+  },
+  "Mute_3": {
+    "localized_name": "Mute_3",
+    "description": null
+  },
+  "Mute_4": {
+    "localized_name": "Mute_4",
+    "description": null
+  },
+  "Mute_5": {
+    "localized_name": "Mute_5",
+    "description": null
+  },
+  "PAL_ElementPassive_Test": {
+    "localized_name": "PAL_ElementPassive_Test",
+    "description": null
+  },
+  "PAL_TribePassive_Test": {
+    "localized_name": "PAL_TribePassive_Test",
+    "description": null
+  },
+  "RecoilDecrease": {
+    "localized_name": "RecoilDecrease",
+    "description": null
+  },
+  "RecoilIncrease": {
+    "localized_name": "RecoilIncrease",
+    "description": null
+  },
+  "ShotAttack_down1": {
+    "localized_name": "ShotAttack_down1",
+    "description": null
+  },
+  "ShotAttack_down2": {
+    "localized_name": "ShotAttack_down2",
+    "description": null
+  },
+  "ShotAttack_up1": {
+    "localized_name": "ShotAttack_up1",
+    "description": null
+  },
+  "ShotAttack_up2": {
+    "localized_name": "ShotAttack_up2",
+    "description": null
+  },
+  "StealExpert_1": {
+    "localized_name": "StealExpert_1",
+    "description": null
+  },
+  "StealExpert_2": {
+    "localized_name": "StealExpert_2",
+    "description": null
+  },
+  "StealExpert_3": {
+    "localized_name": "StealExpert_3",
+    "description": null
+  },
+  "StealExpert_4": {
+    "localized_name": "StealExpert_4",
+    "description": null
+  },
+  "Support_down1": {
+    "localized_name": "Support_down1",
+    "description": null
+  },
+  "Support_down2": {
+    "localized_name": "Support_down2",
+    "description": null
+  },
+  "Support_up1": {
+    "localized_name": "Support_up1",
+    "description": null
+  },
+  "Support_up2": {
+    "localized_name": "Support_up2",
+    "description": null
+  },
+  "TestExplosive_H": {
+    "localized_name": "TestExplosive_H",
+    "description": null
+  },
+  "TestExplosive_L": {
+    "localized_name": "TestExplosive_L",
+    "description": null
+  },
+  "TestHoming_H": {
+    "localized_name": "TestHoming_H",
+    "description": null
+  },
+  "TestHoming_L": {
+    "localized_name": "TestHoming_L",
+    "description": null
+  },
+  "TestSkill1": {
+    "localized_name": "TestSkill1",
+    "description": null
+  },
+  "TestSkill2": {
+    "localized_name": "TestSkill2",
+    "description": null
+  },
+  "TestSkill3": {
+    "localized_name": "TestSkill3",
+    "description": null
+  },
+  "TestSkill4": {
+    "localized_name": "TestSkill4",
+    "description": null
+  },
+  "TestSkill5": {
+    "localized_name": "TestSkill5",
+    "description": null
+  },
+  "TestSkill6": {
+    "localized_name": "TestSkill6",
+    "description": null
+  },
+  "TestSkill7": {
+    "localized_name": "TestSkill7",
+    "description": null
+  },
+  "TestSkill8": {
+    "localized_name": "TestSkill8",
+    "description": null
+  },
+  "MoveSpeed_up_1_Otomo_Only_Equip": {
+    "localized_name": "MoveSpeed_up_1_Otomo_Only_Equip",
     "description": null
   }
 }

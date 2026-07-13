@@ -131,6 +131,10 @@
     "localized_name": "Máy Chơi Game Thùng",
     "description": "Máy chơi game thùng dùng để trang trí. Đã hỏng nên không thể chơi được."
   },
+  "Banyan_Big": {
+    "localized_name": "Banyan_Big",
+    "description": null
+  },
   "Barrel01_Iron": {
     "localized_name": "Thùng Phuy Đỏ",
     "description": "Thùng phuy màu đỏ dùng để trang trí."
@@ -345,7 +349,7 @@
   },
   "Crusher": {
     "localized_name": "Máy Nghiền",
-    "description": "Cơ sở có thể nghiền Đá hoặc Gỗ để chuyển đổi thành nguyên liệu khác. Cần Pal có năng lực |tưới nước| để quay bánh xe nước."
+    "description": "Cơ sở có thể nghiền Đá hoặc Gỗ để chuyển đổi thành nguyên liệu khác. Cần Pal có năng lực \"tưới nước\" để quay bánh xe nước."
   },
   "CrystalPit": {
     "localized_name": "Mỏ Khai Thác Thạch Anh Lục Giác",
@@ -359,6 +363,10 @@
     "localized_name": "Hình Nộm Đo Sát Thương",
     "description": "Hình nộm tập luyện mô phỏng Pengullet. Chỉ có thể đặt ở nơi rộng rãi."
   },
+  "DamagedScarecrow_Test": {
+    "localized_name": "DamagedScarecrow_Test",
+    "description": null
+  },
   "DarkIsland_Banner": {
     "localized_name": "Biểu Ngữ Dọc Của Cư Dân Feybreak",
     "description": "Biểu ngữ dọc của cư dân Feybreak dùng để trang trí."
@@ -368,8 +376,8 @@
     "description": "Cờ hiệu của cư dân Feybreak dùng để trang trí."
   },
   "Decal_PalSticker_PinkCat": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Tuppanyan sticker",
+    "description": null
   },
   "DefenseBowGun": {
     "localized_name": "Nỏ Săn Lắp Ráp",
@@ -533,7 +541,7 @@
   },
   "FlourMill": {
     "localized_name": "Máy Xay Bột",
-    "description": "Cơ sở có thể nghiền Lúa Mì để sản xuất Bột Mì. Cần Pal có năng lực |tưới nước| để quay bánh xe nước."
+    "description": "Cơ sở có thể nghiền Lúa Mì để sản xuất Bột Mì. Cần Pal có năng lực \"tưới nước\" để quay bánh xe nước."
   },
   "FlowerBed": {
     "localized_name": "Bồn Hoa",
@@ -735,6 +743,10 @@
     "localized_name": "Nền Nhà Thủy Tinh",
     "description": "Nền nhà để dựng tường và cơ sở vật chất lên trên. Vì làm bằng thủy tinh cứng cáp nên rất chắc chắn."
   },
+  "Glass_pillars": {
+    "localized_name": "Cột Thủy Tinh",
+    "description": "Cột để chống đỡ tòa nhà. Vì làm bằng thủy tinh cứng cáp nên rất chắc chắn."
+  },
   "Glass_roof": {
     "localized_name": "Mái Thủy Tinh",
     "description": "Mái nhà được xây trên tường để che chắn khỏi mưa gió. Vì làm bằng thủy tinh cứng cáp nên rất chắc chắn."
@@ -757,7 +769,7 @@
   },
   "GoalSoccer_Iron": {
     "localized_name": "Khung Thành Bóng Đá",
-    "description": "Khung thành bóng đá dùng để trang trí. Không thể ghi điểm dù có đặt SheepBall vào."
+    "description": "Khung thành bóng đá dùng để trang trí. Không thể ghi điểm dù có đặt Lamball vào."
   },
   "GuardianDogStatue": {
     "localized_name": "Tượng Yakumo",
@@ -797,7 +809,7 @@
   },
   "IceCrusher": {
     "localized_name": "Máy Nghiền Đông Lạnh",
-    "description": "Cơ sở có thể nghiền Quặng Kim Loại để chuyển đổi thành nguyên liệu khác. Cần cung cấp điện và Pal có năng lực |làm mát| để hoạt động, nhưng cơ sở này làm việc rất hiệu quả."
+    "description": "Cơ sở có thể nghiền Quặng Kim Loại để chuyển đổi thành nguyên liệu khác. Cần cung cấp điện và Pal có năng lực \"làm mát\" để hoạt động, nhưng cơ sở này làm việc rất hiệu quả."
   },
   "IceHorseStatue": {
     "localized_name": "Tượng Frostallion",
@@ -1111,6 +1123,10 @@
     "localized_name": "Nền Nhà Kim Loại",
     "description": "Nền nhà để dựng tường và cơ sở vật chất lên trên. Vì làm bằng kim loại nên rất chắc chắn."
   },
+  "Metal_pillars": {
+    "localized_name": "Cột Kim Loại",
+    "description": "Cột để chống đỡ tòa nhà. Vì làm bằng kim loại nên rất chắc chắn."
+  },
   "Metal_roof": {
     "localized_name": "Mái Kim Loại",
     "description": "Mái nhà được xây trên tường để che chắn khỏi mưa gió. Vì làm bằng kim loại nên rất chắc chắn."
@@ -1276,8 +1292,8 @@
     "description": "Thảm dài cổ dùng để trang trí."
   },
   "Rug_Wood": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Fur rug",
+    "description": null
   },
   "SF_Chair": {
     "localized_name": "Ghế Kiểu Phòng Nghiên Cứu",
@@ -1346,6 +1362,10 @@
   "SF_foundation": {
     "localized_name": "Nền Nhà Sạch Sẽ",
     "description": "Nền móng để xây tường và các cơ sở trên đó. Mang phong cách sạch sẽ, hiện đại."
+  },
+  "SF_pillars": {
+    "localized_name": "Cột Nhà Sạch Sẽ",
+    "description": "Cột để chống đỡ tòa nhà. Có thể xây dựng kiến trúc sạch sẽ, mang tính tương lai."
   },
   "SF_roof": {
     "localized_name": "Mái Nhà Sạch Sẽ",
@@ -1611,6 +1631,10 @@
     "localized_name": "Nền Nhà Đá",
     "description": "Nền nhà để dựng tường và cơ sở vật chất lên trên. Vì làm bằng đá nên khá chắc chắn."
   },
+  "Stone_pillar": {
+    "localized_name": "Cột Đá",
+    "description": "Cột để chống đỡ tòa nhà. Vì làm bằng đá nên khá chắc chắn."
+  },
   "Stone_roof": {
     "localized_name": "Mái Đá",
     "description": "Mái nhà được xây trên tường để che chắn khỏi mưa gió. Vì làm bằng đá nên khá chắc chắn."
@@ -1808,8 +1832,8 @@
     "description": "Bẫy làm Pal bị đóng băng khi đạp phải. Pal bị đóng băng sẽ dễ bị bắt bằng quả cầu Pal hơn."
   },
   "Trap_MovingPanel": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Moving Panels",
+    "description": "A description of the moving panel"
   },
   "Trap_Noose": {
     "localized_name": "Bẫy Treo",
@@ -1919,6 +1943,10 @@
     "localized_name": "Thang",
     "description": "Thang giúp leo lên nơi cao hơn một chút."
   },
+  "Wooden_pillar": {
+    "localized_name": "Cột Gỗ",
+    "description": "Cột để chống đỡ tòa nhà. Vì làm bằng gỗ nên dễ vỡ."
+  },
   "Wooden_roof": {
     "localized_name": "Mái Gỗ",
     "description": "Mái nhà được xây trên tường để che chắn khỏi mưa gió. Vì làm bằng gỗ nên dễ vỡ."
@@ -1954,5 +1982,13 @@
   "Zaisu": {
     "localized_name": "Ghế Tựa Nhật Bản",
     "description": "Ghế tựa Nhật Bản dùng để trang trí. Hãy sử dụng khi xây dựng theo phong cách Nhật Bản."
+  },
+  "JapaneseStyle_TriangleStairsCorner_02": {
+    "localized_name": "JapaneseStyle_TriangleStairsCorner_02",
+    "description": null
+  },
+  "WoodCreator": {
+    "localized_name": "WoodCreator",
+    "description": null
   }
 }

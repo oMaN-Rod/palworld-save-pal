@@ -73,7 +73,7 @@
   },
   "Cool5": {
     "localized_name": "Kardan Adam Geliştirmesi",
-    "description": null
+    "description": "Teknoloji Açımı: Kardan Adam"
   },
   "Deforest1": {
     "localized_name": "Odunculuk Görevi Sv.1",
@@ -145,7 +145,7 @@
   },
   "Deforest4": {
     "localized_name": "Kütük ve Balta Geliştirmesi",
-    "description": null
+    "description": "Teknoloji Açımı: Kütük ve Balta"
   },
   "EmitFlame1": {
     "localized_name": "Tutuşturma Görevi Sv.1",
@@ -225,7 +225,7 @@
   },
   "EmitFlame5": {
     "localized_name": "Ateş Kazanı Geliştirmesi",
-    "description": null
+    "description": "Teknoloji Açımı: Ateş Kazanı"
   },
   "GenerateEnergy1": {
     "localized_name": "Elektrik Üretme Görevi Sv.1",
@@ -297,7 +297,7 @@
   },
   "GenerateEnergy5": {
     "localized_name": "Elektrik Direği Geliştirmesi",
-    "description": null
+    "description": "Teknoloji Açımı: Elektrik Direği"
   },
   "Handcraft1": {
     "localized_name": "El İşi Hızı Sv.1",
@@ -385,7 +385,7 @@
   },
   "Handcraft5": {
     "localized_name": "Büyük Alet Çantası Geliştirmesi",
-    "description": null
+    "description": "Teknoloji Açımı: Büyük Alet Çantası"
   },
   "Medicine1": {
     "localized_name": "İlaç Üretimi Görevi Sv.1",
@@ -445,7 +445,7 @@
   },
   "Medicine4": {
     "localized_name": "Cadı Kazanı Geliştirmesi",
-    "description": null
+    "description": "Teknoloji Açımı: Cadı Kazanı"
   },
   "Mining1": {
     "localized_name": "Madencilik Görevi Sv.1",
@@ -521,7 +521,7 @@
   },
   "Mining5": {
     "localized_name": "Maden Vagonu Geliştirme",
-    "description": null
+    "description": "Teknoloji Açımı: Maden Vagonu"
   },
   "Seeding1": {
     "localized_name": "Ekim Görevi Sv.1",
@@ -593,11 +593,11 @@
   },
   "Seeding4": {
     "localized_name": "Çiçek Tarhı Geliştirmesi",
-    "description": null
+    "description": "Teknoloji Açımı: Çiçek Tarhı"
   },
   "Seeding5": {
     "localized_name": "Silo Geliştirmesi",
-    "description": null
+    "description": "Teknoloji Açımı: Silo"
   },
   "Watering1": {
     "localized_name": "Sulama Görevi Sv.1",
@@ -669,6 +669,6 @@
   },
   "Watering5": {
     "localized_name": "Çeşme Geliştirmesi",
-    "description": null
+    "description": "Teknoloji Açımı: Çeşme"
   }
 }

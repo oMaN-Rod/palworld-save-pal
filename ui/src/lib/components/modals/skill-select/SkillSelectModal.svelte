@@ -9,7 +9,7 @@
 	} from '$types';
 	import { Save, X, Delete, TimerReset } from 'lucide-svelte';
 	import { activeSkillsData, elementsData, passiveSkillsData } from '$lib/data';
-	import { assetLoader, calculateFilters } from '$utils';
+	import { assetLoader, skillFilter } from '$utils';
 	import { isSkillAvailableForCharacter } from '$lib/utils/skillFilters';
 	import { ASSET_DATA_PATH, staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';
@@ -41,6 +41,7 @@
 				}));
 		} else {
 			skills = Object.values(passiveSkillsData.passiveSkills)
+				.filter((skill) => !skill.details.disabled)
 				.sort((a, b) => b.details.rank - a.details.rank)
 				.map((s) => ({
 					value: s.id,
@@ -67,17 +68,7 @@
 
 	function getPassiveSkillFilter(skill: PassiveSkill | undefined) {
 		if (!skill) return '';
-		switch (skill?.details.rank) {
-			case 1:
-				return '';
-			case 2:
-			case 3:
-				return calculateFilters('#fcdf19');
-			case 4:
-				return calculateFilters('#68ffd8');
-			default:
-				return calculateFilters('#FF0000');
-		}
+		return skillFilter(skill.details.rank);
 	}
 </script>
 

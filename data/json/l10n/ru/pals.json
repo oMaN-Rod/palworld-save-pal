@@ -356,7 +356,7 @@
     "description": "Некогда этот Пал и Паладиус были единым существом. Считается, что он — воплощение отделившихся негативных эмоций, однако в глубине его глаз теплятся едва заметные угольки сострадания."
   },
   "BlackFurDragon": {
-    "localized_name": "ru_Text",
+    "localized_name": "Dragostrophe",
     "description": "Дитя бездны, само безмолвие. На спину этого зверя не смей взойти. К этому зверю не смей взывать."
   },
   "BlackGriffon": {
@@ -477,7 +477,7 @@
   },
   "ChickenPal": {
     "localized_name": "Чикипи",
-    "description": "Черезвычайно слаб, но при этом невероятно вкусен. Вместе с SheepBall он является одним из самых слабых Палов. Независимо от того, сколько бы ты на них ни охотился, они продолжают появляться снова и снова."
+    "description": "Черезвычайно слаб, но при этом невероятно вкусен. Вместе с Ламболл он является одним из самых слабых Палов. Независимо от того, сколько бы ты на них ни охотился, они продолжают появляться снова и снова."
   },
   "ClioneTwins": {
     "localized_name": "Амиона",
@@ -541,7 +541,7 @@
   },
   "DarkMechaDragon": {
     "localized_name": "Зенолорд",
-    "description": "- Прибытие на место подтверждено. Приоритет: поиск объекта |Метеоритный дракон|. - Примечание: крайний срок подавления истёк <://Error_Code:126DC> лет назад. - Добавлено: следов подавления не обнаружено. Натурализация подтверждена. Начать ликвидацию. - Служебное сообщение: не забывайте и не поедайте важную информацию!"
+    "description": "- Прибытие на место подтверждено. Приоритет: поиск объекта \"Метеоритный дракон\". - Примечание: крайний срок подавления истёк <://Error_Code:126DC> лет назад. - Добавлено: следов подавления не обнаружено. Натурализация подтверждена. Начать ликвидацию. - Служебное сообщение: не забывайте и не поедайте важную информацию!"
   },
   "DarkScorpion": {
     "localized_name": "Менастинг",
@@ -577,7 +577,7 @@
   },
   "DrillGame": {
     "localized_name": "Дигтос",
-    "description": "|Дигтос и бур| — поучительная история о существе с непробиваемым панцирем и мощным буром, которое размышляет о природе противоречий."
+    "description": "\"Дигтос и бур\" — поучительная история о существе с непробиваемым панцирем и мощным буром, которое размышляет о природе противоречий."
   },
   "Eagle": {
     "localized_name": "Эрмург",
@@ -588,8 +588,8 @@
     "description": "В сезон засухи он становится раздражительным и всё время на взводе. Даже малейшее провоцирование может привести к большой драке, даже среди сородичей."
   },
   "ElecLion": {
-    "localized_name": "ru_Text",
-    "description": "ru_Text"
+    "localized_name": "Boltmane",
+    "description": "The more it moves, the more it heats up and the hair tips increasingly glow brighter. At its peak, it becomes so dazzling that you risk blindness if you stare at it directly."
   },
   "ElecLizard": {
     "localized_name": "Слоуватт",
@@ -925,11 +925,11 @@
   },
   "FlowerDinosaur": {
     "localized_name": "Диноссум",
-    "description": "Стоит этому Палу разозлиться — и он выходит из-под контроля, беснуясь, словно пылающее пламя. Выражение |наступить на хвост Диноссум| означает довести кого-то до ярости."
+    "description": "Стоит этому Палу разозлиться — и он выходит из-под контроля, беснуясь, словно пылающее пламя. Выражение \"наступить на хвост Диноссум\" означает довести кого-то до ярости."
   },
   "FlowerDinosaur_Electric": {
     "localized_name": "Диноссум Лакс",
-    "description": "В этого Пала ударила молния — но он чудом выжил. Выражение |в Диноссум Лакс ударила молния| означает чудесное спасение от гибели."
+    "description": "В этого Пала ударила молния — но он чудом выжил. Выражение \"в Диноссум Лакс ударила молния\" означает чудесное спасение от гибели."
   },
   "FlowerDoll": {
     "localized_name": "Петаллия",
@@ -1065,7 +1065,7 @@
   },
   "GhostAnglerfish": {
     "localized_name": "Ганглер",
-    "description": "Сияющей приманкой он озаряет темноту. Заблудшие Палы, привлечённые светом, если попадутся GhostAnglerFish , уже не смогут сбежать. Он будет преследовать их, пока не убедится, что они благополучно добрались домой."
+    "description": "Сияющей приманкой он озаряет темноту. Заблудшие Палы, привлечённые светом, если попадутся Ганглер , уже не смогут сбежать. Он будет преследовать их, пока не убедится, что они благополучно добрались домой."
   },
   "GhostAnglerfish_Fire": {
     "localized_name": "Ганглер Игнис",
@@ -1545,7 +1545,7 @@
   },
   "KingBahamut_Dragon": {
     "localized_name": "Блазамут Рю",
-    "description": "Давно, в глубинах земли, он появился на свет. Его неукротимый пыл сжигал всё без жалости, не стихая, пока не опалил весь остров. Именно так его прозвали — |Вечное пламя|."
+    "description": "Давно, в глубинах земли, он появился на свет. Его неукротимый пыл сжигал всё без жалости, не стихая, пока не опалил весь остров. Именно так его прозвали — \"Вечное пламя\"."
   },
   "KingSunfish": {
     "localized_name": "Солмора",
@@ -1617,7 +1617,7 @@
   },
   "LilyQueen": {
     "localized_name": "Лилин",
-    "description": "Добрый и спокойный Пал, полный любви. Он опекает маленьких Палов, потерявших родителей. Воспитание? Только SolarBeam — со всей силы."
+    "description": "Добрый и спокойный Пал, полный любви. Он опекает маленьких Палов, потерявших родителей. Воспитание? Только Солнечный взрыв — со всей силы."
   },
   "LilyQueen_Dark": {
     "localized_name": "Лилин Нокт",
@@ -1945,7 +1945,7 @@
   },
   "MimicDog": {
     "localized_name": "Мимидог",
-    "description": "Когда-то на этом острове существовало королевство, где ежегодно вручали награду за самую глупую смерть. Первым её получил тот, кто |открыл сундук, не заметив Мимидог, — и был загрызен|."
+    "description": "Когда-то на этом острове существовало королевство, где ежегодно вручали награду за самую глупую смерть. Первым её получил тот, кто \"открыл сундук, не заметив Мимидог, — и был загрызен\"."
   },
   "MobuCitizen": {
     "localized_name": "Житель острова",
@@ -2145,7 +2145,7 @@
   },
   "PREDATOR_DrillGame": {
     "localized_name": "Дигтос",
-    "description": "|Дигтос и бур| — поучительная история о существе с непробиваемым панцирем и мощным буром, которое размышляет о природе противоречий."
+    "description": "\"Дигтос и бур\" — поучительная история о существе с непробиваемым панцирем и мощным буром, которое размышляет о природе противоречий."
   },
   "PREDATOR_FairyDragon": {
     "localized_name": "Элфидран",
@@ -2157,7 +2157,7 @@
   },
   "PREDATOR_FlowerDinosaur": {
     "localized_name": "Диноссум",
-    "description": "Стоит этому Палу разозлиться — и он выходит из-под контроля, беснуясь, словно пылающее пламя. Выражение |наступить на хвост Диноссум| означает довести кого-то до ярости."
+    "description": "Стоит этому Палу разозлиться — и он выходит из-под контроля, беснуясь, словно пылающее пламя. Выражение \"наступить на хвост Диноссум\" означает довести кого-то до ярости."
   },
   "PREDATOR_FlowerRabbit_Quest": {
     "localized_name": "Флопи",
@@ -2249,7 +2249,7 @@
   },
   "PREDATOR_PurpleSpider": {
     "localized_name": "Тарантрисс",
-    "description": "Крайне липкий и навязчивый. Чем сильнее вырывается — тем сильнее прилипает. Таков уж у него… |характер|."
+    "description": "Крайне липкий и навязчивый. Чем сильнее вырывается — тем сильнее прилипает. Таков уж у него… \"характер\"."
   },
   "PREDATOR_RedArmorBird": {
     "localized_name": "Рагнахавк",
@@ -2269,7 +2269,7 @@
   },
   "PREDATOR_SifuDog": {
     "localized_name": "Ванфу",
-    "description": "Они проводят дни в медитации, стремясь достичь состояния небытия. Столкнувшись с мирскими желаниями, ощущают облегчение и набрасываются на еду. Потом думают: |Сегодня я снова переел|."
+    "description": "Они проводят дни в медитации, стремясь достичь состояния небытия. Столкнувшись с мирскими желаниями, ощущают облегчение и набрасываются на еду. Потом думают: \"Сегодня я снова переел\"."
   },
   "PREDATOR_SnakeGirl": {
     "localized_name": "Медуна",
@@ -2328,7 +2328,7 @@
     "description": null
   },
   "PalPassive_Doctor": {
-    "localized_name": "Житель острова",
+    "localized_name": "Доктор Браун",
     "description": null
   },
   "PalTrader": {
@@ -2473,14 +2473,14 @@
   },
   "PurpleSpider": {
     "localized_name": "Тарантрисс",
-    "description": "Крайне липкий и навязчивый. Чем сильнее вырывается — тем сильнее прилипает. Таков уж у него… |характер|."
+    "description": "Крайне липкий и навязчивый. Чем сильнее вырывается — тем сильнее прилипает. Таков уж у него… \"характер\"."
   },
   "QueenBee": {
     "localized_name": "Элизаби",
     "description": "Избранная королева, повелевающая Бигард. Радость служения великой королеве так велика, что её слуги работают до изнеможения и умирают от переутомления — один за другим."
   },
   "QuestMan": {
-    "localized_name": "ru_Text",
+    "localized_name": "Quest Client",
     "description": null
   },
   "Quest_Farmer03_PinkCat": {
@@ -2624,7 +2624,7 @@
     "description": null
   },
   "Reward_BossDefeat": {
-    "localized_name": "Стражник",
+    "localized_name": "Опытный охотник на Палов",
     "description": null
   },
   "Reward_Emote_A_01": {
@@ -2712,7 +2712,7 @@
     "description": null
   },
   "Reward_Paldex": {
-    "localized_name": "Стражник",
+    "localized_name": "Экоисследователь Палов",
     "description": null
   },
   "Reward_Paldex_v02": {
@@ -2773,11 +2773,11 @@
   },
   "SakuraSaurus": {
     "localized_name": "Брончерри",
-    "description": "Запах этого Пала существенно меняется до и после спаривания. После того как он находит партнёра, его аромат считается приятным и называется |ароматом первой любви|."
+    "description": "Запах этого Пала существенно меняется до и после спаривания. После того как он находит партнёра, его аромат считается приятным и называется \"ароматом первой любви\"."
   },
   "SakuraSaurus_Water": {
     "localized_name": "Брончерри Аква",
-    "description": "Запах этого Пала существенно меняется до и после спаривания. До того как он находит партнёра, его аромат считается особенно приятным и имеет название |аромат невинности|."
+    "description": "Запах этого Пала существенно меняется до и после спаривания. До того как он находит партнёра, его аромат считается особенно приятным и имеет название \"аромат невинности\"."
   },
   "SalesPerson": {
     "localized_name": "Бродячий торговец",
@@ -2869,7 +2869,7 @@
   },
   "SifuDog": {
     "localized_name": "Ванфу",
-    "description": "Они проводят дни в медитации, стремясь достичь состояния небытия. Столкнувшись с мирскими желаниями, ощущают облегчение и набрасываются на еду. Потом думают: |Сегодня я снова переел|."
+    "description": "Они проводят дни в медитации, стремясь достичь состояния небытия. Столкнувшись с мирскими желаниями, ощущают облегчение и набрасываются на еду. Потом думают: \"Сегодня я снова переел\"."
   },
   "SkyDragon": {
     "localized_name": "Фэски",
@@ -2901,7 +2901,7 @@
   },
   "SnowTigerBeastman": {
     "localized_name": "Бастигор",
-    "description": "При виде чего-то круглого SnowTigerBeastMan испытывает непреодолимое желание ударить. Самое сложное для него после самого факта существования — это слепить снеговика."
+    "description": "При виде чего-то круглого Бастигор испытывает непреодолимое желание ударить. Самое сложное для него после самого факта существования — это слепить снеговика."
   },
   "SoldierBee": {
     "localized_name": "Бигард",
@@ -3037,10 +3037,10 @@
   },
   "VioletFairy": {
     "localized_name": "Ваэлет",
-    "description": "У замка было много цветов, которые любил король. Разразилась большая битва, и пламя подступило к замку. И тут появилась одна цветочная фея. — Из детской сказки |Цветок короля|"
+    "description": "У замка было много цветов, которые любил король. Разразилась большая битва, и пламя подступило к замку. И тут появилась одна цветочная фея. — Из детской сказки \"Цветок короля\""
   },
   "VisitingMerchant": {
-    "localized_name": "ru_Text",
+    "localized_name": "Visitor",
     "description": null
   },
   "Visitor_Hunter_Rifle": {
@@ -3072,7 +3072,7 @@
     "description": "У здоровых особей температура потока на спине течёт стабильно. При волнении она становится нестабильной, а в худших случаях это вызывает испарение или затвердевание и внезапную смерть от шока."
   },
   "WeaponsDealer": {
-    "localized_name": "ru_Text",
+    "localized_name": "Weapons Dealer",
     "description": null
   },
   "WeaselDragon": {
@@ -3097,7 +3097,7 @@
   },
   "WhiteDeer": {
     "localized_name": "Селесдир",
-    "description": "В древних текстах его называют |Зверем-спасителем|. Свет, который излучает Селесдир, очищает всё вокруг. Буквально — стирает из этого мира без следа."
+    "description": "В древних текстах его называют \"Зверем-спасителем\". Свет, который излучает Селесдир, очищает всё вокруг. Буквально — стирает из этого мира без следа."
   },
   "WhiteDeer_Dark": {
     "localized_name": "Селесдир Нокт",
@@ -3133,11 +3133,11 @@
   },
   "WindChimes": {
     "localized_name": "Хангю",
-    "description": "Его огромные руки способны разорвать даже железо. Когда-то на городской площади проводили варварскую казнь: тяжких преступников приковывали к столбу и позволяли Windchimes разрывать их плоть."
+    "description": "Его огромные руки способны разорвать даже железо. Когда-то на городской площади проводили варварскую казнь: тяжких преступников приковывали к столбу и позволяли Хангю разрывать их плоть."
   },
   "WindChimes_Ice": {
     "localized_name": "Хангю Крист",
-    "description": "Его огромные руки способны разрывать даже ледяные глыбы. Когда-то в центре города устраивали жестокое публичное устрашение: тяжких преступников приковывали к столбу, и Windchimes_Ice вырывал им волосы, наводя ужас на толпу."
+    "description": "Его огромные руки способны разрывать даже ледяные глыбы. Когда-то в центре города устраивали жестокое публичное устрашение: тяжких преступников приковывали к столбу, и Хангю Крист вырывал им волосы, наводя ужас на толпу."
   },
   "WingGolem": {
     "localized_name": "Теранайт",
@@ -3153,11 +3153,11 @@
   },
   "WizardOwl": {
     "localized_name": "Хукрат",
-    "description": "Часто предаётся раздумьям и не может уснуть от собственных мыслей. |Я мыслю, следовательно, я существую|."
+    "description": "Часто предаётся раздумьям и не может уснуть от собственных мыслей. \"Я мыслю, следовательно, я существую\"."
   },
   "WoolFox": {
     "localized_name": "Кремис",
-    "description": "Обладает более качественной шерстью, чем SheepBall, и более спокойным, пригодным для домашнего разведения нравом. Тем не менее, на протяжении всей истории его держали как милого питомца. Милота была выше логики."
+    "description": "Обладает более качественной шерстью, чем Ламболл, и более спокойным, пригодным для домашнего разведения нравом. Тем не менее, на протяжении всей истории его держали как милого питомца. Милота была выше логики."
   },
   "WorldTreeDragon": {
     "localized_name": "Астралим",
@@ -3234,5 +3234,221 @@
   "Yeti_Grass": {
     "localized_name": "Вумпо Ботан",
     "description": "Учёные попытались раскрыть тайну этого Пала и срезали с него всю траву. Но осталась лишь кучка травы — словно изначально внутри никого и не было."
+  },
+  "ArenaShop": {
+    "localized_name": "ArenaShop",
+    "description": null
+  },
+  "Arena_Legend_1": {
+    "localized_name": "Arena_Legend_1",
+    "description": null
+  },
+  "Arena_Legend_10": {
+    "localized_name": "Arena_Legend_10",
+    "description": null
+  },
+  "Arena_Legend_11": {
+    "localized_name": "Arena_Legend_11",
+    "description": null
+  },
+  "Arena_Legend_12": {
+    "localized_name": "Arena_Legend_12",
+    "description": null
+  },
+  "Arena_Legend_13": {
+    "localized_name": "Arena_Legend_13",
+    "description": null
+  },
+  "Arena_Legend_14": {
+    "localized_name": "Arena_Legend_14",
+    "description": null
+  },
+  "Arena_Legend_15": {
+    "localized_name": "Arena_Legend_15",
+    "description": null
+  },
+  "Arena_Legend_16": {
+    "localized_name": "Arena_Legend_16",
+    "description": null
+  },
+  "Arena_Legend_17": {
+    "localized_name": "Arena_Legend_17",
+    "description": null
+  },
+  "Arena_Legend_18": {
+    "localized_name": "Arena_Legend_18",
+    "description": null
+  },
+  "Arena_Legend_19": {
+    "localized_name": "Arena_Legend_19",
+    "description": null
+  },
+  "Arena_Legend_2": {
+    "localized_name": "Arena_Legend_2",
+    "description": null
+  },
+  "Arena_Legend_20": {
+    "localized_name": "Arena_Legend_20",
+    "description": null
+  },
+  "Arena_Legend_3": {
+    "localized_name": "Arena_Legend_3",
+    "description": null
+  },
+  "Arena_Legend_4": {
+    "localized_name": "Arena_Legend_4",
+    "description": null
+  },
+  "Arena_Legend_5": {
+    "localized_name": "Arena_Legend_5",
+    "description": null
+  },
+  "Arena_Legend_6": {
+    "localized_name": "Arena_Legend_6",
+    "description": null
+  },
+  "Arena_Legend_7": {
+    "localized_name": "Arena_Legend_7",
+    "description": null
+  },
+  "Arena_Legend_8": {
+    "localized_name": "Arena_Legend_8",
+    "description": null
+  },
+  "Arena_Legend_9": {
+    "localized_name": "Arena_Legend_9",
+    "description": null
+  },
+  "ArmorWoodlouse": {
+    "localized_name": "ArmorWoodlouse",
+    "description": null
+  },
+  "BeardedDragon": {
+    "localized_name": "BeardedDragon",
+    "description": "This Pal is under investigation."
+  },
+  "BlueWoolRabbit": {
+    "localized_name": "BlueWoolRabbit",
+    "description": null
+  },
+  "CandleWitch": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "CuteOrca": {
+    "localized_name": "CuteOrca",
+    "description": null
+  },
+  "DarkMutant": {
+    "localized_name": "DarkMutant",
+    "description": "Говорят, что DarkMutant одним взмахом открывает разломы в пространстве, разрывая даже границы измерений. Существует теория, что некоторые Палы появились из этих разломов."
+  },
+  "DesertBoss": {
+    "localized_name": "DesertBoss",
+    "description": null
+  },
+  "ElecSnail_Fire": {
+    "localized_name": "ElecSnail_Fire",
+    "description": null
+  },
+  "ElectricBoss": {
+    "localized_name": "ElectricBoss",
+    "description": null
+  },
+  "Emote_Tester": {
+    "localized_name": "Emote_Tester",
+    "description": null
+  },
+  "ForestBoss": {
+    "localized_name": "Лили и Лилин",
+    "description": null
+  },
+  "FrozenBear": {
+    "localized_name": "FrozenBear",
+    "description": null
+  },
+  "GrassDragon": {
+    "localized_name": "GrassDragon",
+    "description": "This Pal is under investigation."
+  },
+  "IceVeilDragon": {
+    "localized_name": "IceVeilDragon",
+    "description": null
+  },
+  "KingCrab": {
+    "localized_name": "KingCrab",
+    "description": null
+  },
+  "LeafBird": {
+    "localized_name": "LeafBird",
+    "description": null
+  },
+  "MedjedBird": {
+    "localized_name": "MedjedBird",
+    "description": null
+  },
+  "MexicanSalamander": {
+    "localized_name": "MexicanSalamander",
+    "description": null
+  },
+  "Monkey_Ice": {
+    "localized_name": "Monkey_Ice",
+    "description": null
+  },
+  "MonochromeMushroom": {
+    "localized_name": "MonochromeMushroom",
+    "description": null
+  },
+  "Negotiator": {
+    "localized_name": "Negotiator",
+    "description": null
+  },
+  "PinkKangaroo": {
+    "localized_name": "PinkKangaroo",
+    "description": null
+  },
+  "RockCheetah": {
+    "localized_name": "RockCheetah",
+    "description": null
+  },
+  "SakurajimaBoss": {
+    "localized_name": "Сая и Селена",
+    "description": null
+  },
+  "SnakeQueen": {
+    "localized_name": "SnakeQueen",
+    "description": null
+  },
+  "SnowBoss": {
+    "localized_name": "Виктор и Шэдоубик",
+    "description": null
+  },
+  "StrawHatCat": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "TestAssassin": {
+    "localized_name": "TestAssassin",
+    "description": null
+  },
+  "TestNPC": {
+    "localized_name": "TestNPC",
+    "description": null
+  },
+  "VikingBoss": {
+    "localized_name": "Бьорн и Бастигор",
+    "description": null
+  },
+  "VolcanicTurtle": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "WaterLizard": {
+    "localized_name": "WaterLizard",
+    "description": null
+  },
+  "WorldTree_Hunter_MissileLauncher_test": {
+    "localized_name": "WorldTree_Hunter_MissileLauncher_test",
+    "description": null
   }
 }

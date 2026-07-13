@@ -8,7 +8,7 @@
 	const categories = [
 		{ label: c.pal, href: '/docs/wiki/pals', id: 'pals' },
 		{ label: c.item, href: '/docs/wiki/items', id: 'items' },
-		{ label: 'Buildings', href: '/docs/wiki/buildings', id: 'buildings' },
+		{ label: m.buildings(), href: '/docs/wiki/buildings', id: 'buildings' },
 		{ label: m.active_skill({ count: 2 }), href: '/docs/wiki/active-skills', id: 'active-skills' },
 		{
 			label: m.passive_skill({ count: 2 }),
@@ -20,8 +20,8 @@
 			href: '/docs/wiki/technologies',
 			id: 'technologies'
 		},
-		{ label: 'Elements', href: '/docs/wiki/elements', id: 'elements' },
-		{ label: 'Work Suitability', href: '/docs/wiki/work-suitability', id: 'work-suitability' }
+		{ label: m.elements(), href: '/docs/wiki/elements', id: 'elements' },
+		{ label: m.work_suitability(), href: '/docs/wiki/work-suitability', id: 'work-suitability' }
 	];
 
 	const activeCategory = $derived.by(() => {

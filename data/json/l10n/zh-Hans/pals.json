@@ -356,7 +356,7 @@
     "description": "曾与圣光骑士同为一体。 虽是分离后的负面情感所构成的存在， 但其眼眸深处仍留有着一丝慈悲。"
   },
   "BlackFurDragon": {
-    "localized_name": "zh_Hans_Text",
+    "localized_name": "Dragostrophe",
     "description": "来自深渊的静寂之身。 汝不得立于此兽之背。 汝不得面朝此兽呼喊。"
   },
   "BlackGriffon": {
@@ -477,7 +477,7 @@
   },
   "ChickenPal": {
     "localized_name": "皮皮鸡",
-    "description": "它非常弱小，却又非常美味。 与SheepBall同样都是极为弱小的帕鲁。 但不论再怎么对这种帕鲁展开围猎，它们也还是会从某处冒出来。"
+    "description": "它非常弱小，却又非常美味。 与棉悠悠同样都是极为弱小的帕鲁。 但不论再怎么对这种帕鲁展开围猎，它们也还是会从某处冒出来。"
   },
   "ClioneTwins": {
     "localized_name": "莉欧·莉涅",
@@ -588,8 +588,8 @@
     "description": "它在旱季时期容易精神紧绷，总是一触即发。 一旦和同伴发生摩擦， 就会演变成电火花四溅的大战。"
   },
   "ElecLion": {
-    "localized_name": "zh_Hans_Text",
-    "description": "zh_Hans_Text"
+    "localized_name": "Boltmane",
+    "description": "The more it moves, the more it heats up and the hair tips increasingly glow brighter. At its peak, it becomes so dazzling that you risk blindness if you stare at it directly."
   },
   "ElecLizard": {
     "localized_name": "电懒懒",
@@ -1065,11 +1065,11 @@
   },
   "GhostAnglerfish": {
     "localized_name": "冥灯鱼",
-    "description": "散发着光芒的拟饵照亮了黑暗。 被这光亮吸引来的帕鲁如果被GhostAnglerFish发现的话，那可是插翅难逃了。 它会一直作为其向导，直到该帕鲁平安返回自己的家。"
+    "description": "散发着光芒的拟饵照亮了黑暗。 被这光亮吸引来的帕鲁如果被冥灯鱼发现的话，那可是插翅难逃了。 它会一直作为其向导，直到该帕鲁平安返回自己的家。"
   },
   "GhostAnglerfish_Fire": {
     "localized_name": "炙灯鱼",
-    "description": "剧烈燃烧的拟饵，在烧烤猎物时也能用上。 被烤肉香气吸引来的帕鲁如果被GhostAnglerFish_Fire发现的话，那可是插翅难逃了。 它会一直热情款待，直到被吸引来的帕鲁肚子吃撑。"
+    "description": "剧烈燃烧的拟饵，在烧烤猎物时也能用上。 被烤肉香气吸引来的帕鲁如果被炙灯鱼发现的话，那可是插翅难逃了。 它会一直热情款待，直到被吸引来的帕鲁肚子吃撑。"
   },
   "GhostBeast": {
     "localized_name": "噬魂兽",
@@ -1617,7 +1617,7 @@
   },
   "LilyQueen": {
     "localized_name": "百合女王",
-    "description": "这是一种充满慈爱且温和的帕鲁。 会照顾失去双亲的小帕鲁们。 管教方式是全力释放SolarBeam。"
+    "description": "这是一种充满慈爱且温和的帕鲁。 会照顾失去双亲的小帕鲁们。 管教方式是全力释放太阳光束。"
   },
   "LilyQueen_Dark": {
     "localized_name": "黑月女王",
@@ -2328,7 +2328,7 @@
     "description": null
   },
   "PalPassive_Doctor": {
-    "localized_name": "岛民",
+    "localized_name": "布朗博士",
     "description": null
   },
   "PalTrader": {
@@ -2480,7 +2480,7 @@
     "description": "它是统御骑士蜂的天选女王。 为伟大女王效力的喜悦 让无数甘愿为其劳动至死的仆人络绎不绝。"
   },
   "QuestMan": {
-    "localized_name": "-",
+    "localized_name": "Quest Client",
     "description": null
   },
   "Quest_Farmer03_PinkCat": {
@@ -2624,7 +2624,7 @@
     "description": null
   },
   "Reward_BossDefeat": {
-    "localized_name": "卫兵",
+    "localized_name": "老手帕鲁猎手",
     "description": null
   },
   "Reward_Emote_A_01": {
@@ -2712,7 +2712,7 @@
     "description": null
   },
   "Reward_Paldex": {
-    "localized_name": "卫兵",
+    "localized_name": "帕鲁生态调查员",
     "description": null
   },
   "Reward_Paldex_v02": {
@@ -2901,7 +2901,7 @@
   },
   "SnowTigerBeastman": {
     "localized_name": "霜牙王",
-    "description": "一旦看见了圆形的物体，就不自觉的想要来上一拳。 对于SnowTigerBeastMan来说，仅次于生存的难题 就是完成堆雪人。"
+    "description": "一旦看见了圆形的物体，就不自觉的想要来上一拳。 对于霜牙王来说，仅次于生存的难题 就是完成堆雪人。"
   },
   "SoldierBee": {
     "localized_name": "骑士蜂",
@@ -3133,11 +3133,11 @@
   },
   "WindChimes": {
     "localized_name": "吊缚灵",
-    "description": "它那巨大的双臂就连铁块都能撕裂。 过去曾有过将犯下重罪的人绑在城镇的广场上， 让Windchimes直接撕下他的肉这种极端残忍的处刑。"
+    "description": "它那巨大的双臂就连铁块都能撕裂。 过去曾有过将犯下重罪的人绑在城镇的广场上， 让吊缚灵直接撕下他的肉这种极端残忍的处刑。"
   },
   "WindChimes_Ice": {
     "localized_name": "冰缚灵",
-    "description": "它那巨大的双臂就连冰砖都能撕碎。 过去曾有过将犯下重罪的人绑在城镇的广场上， 让Windchimes_Ice直接扯下他们的头发， 是种极为残忍的警示性惩罚。"
+    "description": "它那巨大的双臂就连冰砖都能撕碎。 过去曾有过将犯下重罪的人绑在城镇的广场上， 让冰缚灵直接扯下他们的头发， 是种极为残忍的警示性惩罚。"
   },
   "WingGolem": {
     "localized_name": "泰锋",
@@ -3157,7 +3157,7 @@
   },
   "WoolFox": {
     "localized_name": "米露菲",
-    "description": "与SheepBall相较，这种帕鲁的毛质更加优良， 个性也更适合作为家畜。 但历史上这种帕鲁总是被当成宠物。 毕竟可爱就是正义。"
+    "description": "与棉悠悠相较，这种帕鲁的毛质更加优良， 个性也更适合作为家畜。 但历史上这种帕鲁总是被当成宠物。 毕竟可爱就是正义。"
   },
   "WorldTreeDragon": {
     "localized_name": "枯星龙",
@@ -3234,5 +3234,221 @@
   "Yeti_Grass": {
     "localized_name": "绿苔绒怪",
     "description": "研究者为了揭开它的内部结构，而将它身上的草都剃光。 结果只剩下满地杂草， 仿佛从最开始这团草里面就空无一物。"
+  },
+  "ArenaShop": {
+    "localized_name": "ArenaShop",
+    "description": null
+  },
+  "Arena_Legend_1": {
+    "localized_name": "Arena_Legend_1",
+    "description": null
+  },
+  "Arena_Legend_10": {
+    "localized_name": "Arena_Legend_10",
+    "description": null
+  },
+  "Arena_Legend_11": {
+    "localized_name": "Arena_Legend_11",
+    "description": null
+  },
+  "Arena_Legend_12": {
+    "localized_name": "Arena_Legend_12",
+    "description": null
+  },
+  "Arena_Legend_13": {
+    "localized_name": "Arena_Legend_13",
+    "description": null
+  },
+  "Arena_Legend_14": {
+    "localized_name": "Arena_Legend_14",
+    "description": null
+  },
+  "Arena_Legend_15": {
+    "localized_name": "Arena_Legend_15",
+    "description": null
+  },
+  "Arena_Legend_16": {
+    "localized_name": "Arena_Legend_16",
+    "description": null
+  },
+  "Arena_Legend_17": {
+    "localized_name": "Arena_Legend_17",
+    "description": null
+  },
+  "Arena_Legend_18": {
+    "localized_name": "Arena_Legend_18",
+    "description": null
+  },
+  "Arena_Legend_19": {
+    "localized_name": "Arena_Legend_19",
+    "description": null
+  },
+  "Arena_Legend_2": {
+    "localized_name": "Arena_Legend_2",
+    "description": null
+  },
+  "Arena_Legend_20": {
+    "localized_name": "Arena_Legend_20",
+    "description": null
+  },
+  "Arena_Legend_3": {
+    "localized_name": "Arena_Legend_3",
+    "description": null
+  },
+  "Arena_Legend_4": {
+    "localized_name": "Arena_Legend_4",
+    "description": null
+  },
+  "Arena_Legend_5": {
+    "localized_name": "Arena_Legend_5",
+    "description": null
+  },
+  "Arena_Legend_6": {
+    "localized_name": "Arena_Legend_6",
+    "description": null
+  },
+  "Arena_Legend_7": {
+    "localized_name": "Arena_Legend_7",
+    "description": null
+  },
+  "Arena_Legend_8": {
+    "localized_name": "Arena_Legend_8",
+    "description": null
+  },
+  "Arena_Legend_9": {
+    "localized_name": "Arena_Legend_9",
+    "description": null
+  },
+  "ArmorWoodlouse": {
+    "localized_name": "ArmorWoodlouse",
+    "description": null
+  },
+  "BeardedDragon": {
+    "localized_name": "BeardedDragon",
+    "description": "This Pal is under investigation."
+  },
+  "BlueWoolRabbit": {
+    "localized_name": "BlueWoolRabbit",
+    "description": null
+  },
+  "CandleWitch": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "CuteOrca": {
+    "localized_name": "CuteOrca",
+    "description": null
+  },
+  "DarkMutant": {
+    "localized_name": "DarkMutant",
+    "description": "当DarkMutant将它的技艺锻炼至精湛娴熟境界， 它的刃光一闪甚至能斩断时空，让空间产生裂缝。 据说部分帕鲁就是从这空间裂缝中出现的。"
+  },
+  "DesertBoss": {
+    "localized_name": "DesertBoss",
+    "description": null
+  },
+  "ElecSnail_Fire": {
+    "localized_name": "ElecSnail_Fire",
+    "description": null
+  },
+  "ElectricBoss": {
+    "localized_name": "ElectricBoss",
+    "description": null
+  },
+  "Emote_Tester": {
+    "localized_name": "Emote_Tester",
+    "description": null
+  },
+  "ForestBoss": {
+    "localized_name": "莉莉 & 百合女王",
+    "description": null
+  },
+  "FrozenBear": {
+    "localized_name": "FrozenBear",
+    "description": null
+  },
+  "GrassDragon": {
+    "localized_name": "GrassDragon",
+    "description": "This Pal is under investigation."
+  },
+  "IceVeilDragon": {
+    "localized_name": "IceVeilDragon",
+    "description": null
+  },
+  "KingCrab": {
+    "localized_name": "KingCrab",
+    "description": null
+  },
+  "LeafBird": {
+    "localized_name": "LeafBird",
+    "description": null
+  },
+  "MedjedBird": {
+    "localized_name": "MedjedBird",
+    "description": null
+  },
+  "MexicanSalamander": {
+    "localized_name": "MexicanSalamander",
+    "description": null
+  },
+  "Monkey_Ice": {
+    "localized_name": "Monkey_Ice",
+    "description": null
+  },
+  "MonochromeMushroom": {
+    "localized_name": "MonochromeMushroom",
+    "description": null
+  },
+  "Negotiator": {
+    "localized_name": "Negotiator",
+    "description": null
+  },
+  "PinkKangaroo": {
+    "localized_name": "PinkKangaroo",
+    "description": null
+  },
+  "RockCheetah": {
+    "localized_name": "RockCheetah",
+    "description": null
+  },
+  "SakurajimaBoss": {
+    "localized_name": "纱夜 & 辉月伊",
+    "description": null
+  },
+  "SnakeQueen": {
+    "localized_name": "SnakeQueen",
+    "description": null
+  },
+  "SnowBoss": {
+    "localized_name": "维克托 & 异构格里芬",
+    "description": null
+  },
+  "StrawHatCat": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "TestAssassin": {
+    "localized_name": "TestAssassin",
+    "description": null
+  },
+  "TestNPC": {
+    "localized_name": "TestNPC",
+    "description": null
+  },
+  "VikingBoss": {
+    "localized_name": "比约恩 & 霜牙王",
+    "description": null
+  },
+  "VolcanicTurtle": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "WaterLizard": {
+    "localized_name": "WaterLizard",
+    "description": null
+  },
+  "WorldTree_Hunter_MissileLauncher_test": {
+    "localized_name": "WorldTree_Hunter_MissileLauncher_test",
+    "description": null
   }
 }

@@ -9,7 +9,7 @@
 	import { cn } from '$theme';
 	import { PalGender, type PresetProfile, type WorkSuitability } from '$types';
 	import { ASSET_DATA_PATH, staticIcons } from '$types/icons';
-	import { assetLoader, calculateFilters } from '$utils';
+	import { assetLoader, skillFilter } from '$utils';
 	import { Rating } from '@skeletonlabs/skeleton-svelte';
 	import { Lock, Unlock } from 'lucide-svelte';
 
@@ -60,17 +60,7 @@
 	function getPassiveSkillIconFilter(skillId: string): string {
 		const skill = passiveSkillsData.getByKey(skillId);
 		if (!skill || skill.localized_name === 'None') return '';
-		switch (skill.details.rank) {
-			case 1:
-				return '';
-			case 2:
-			case 3:
-				return calculateFilters('#fcdf19');
-			case 4:
-				return calculateFilters('#68ffd8');
-			default:
-				return calculateFilters('#FF0000');
-		}
+		return skillFilter(skill.details.rank);
 	}
 </script>
 

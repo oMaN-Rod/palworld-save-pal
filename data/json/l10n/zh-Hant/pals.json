@@ -356,7 +356,7 @@
     "description": "據傳牠和聖光騎士本為一體， 是分離後的負面情感所構成的存在， 但牠的瞳孔深處仍留有一絲慈悲。"
   },
   "BlackFurDragon": {
-    "localized_name": "zh_Hant_Text",
+    "localized_name": "Dragostrophe",
     "description": "來自深淵的靜寂之身。 汝不得立於此獸之背。 汝不得面朝此獸呼喊。"
   },
   "BlackGriffon": {
@@ -477,7 +477,7 @@
   },
   "ChickenPal": {
     "localized_name": "皮皮雞",
-    "description": "極為弱小，但也極為美味。 和SheepBall並列為最弱小的帕魯。 不管再怎麼捕捉這種帕魯，牠們還是會從某處冒出來。"
+    "description": "極為弱小，但也極為美味。 和棉悠悠並列為最弱小的帕魯。 不管再怎麼捕捉這種帕魯，牠們還是會從某處冒出來。"
   },
   "ClioneTwins": {
     "localized_name": "莉歐·莉涅",
@@ -588,8 +588,8 @@
     "description": "牠在旱季時相當神經質，總是一觸即發。 只要和夥伴之間有些小摩擦， 就會演變成火花四射的爭吵。"
   },
   "ElecLion": {
-    "localized_name": "zh_Hant_Text",
-    "description": "zh_Hant_Text"
+    "localized_name": "Boltmane",
+    "description": "The more it moves, the more it heats up and the hair tips increasingly glow brighter. At its peak, it becomes so dazzling that you risk blindness if you stare at it directly."
   },
   "ElecLizard": {
     "localized_name": "電懶懶",
@@ -1065,11 +1065,11 @@
   },
   "GhostAnglerfish": {
     "localized_name": "冥燈魚",
-    "description": "牠會以散發光芒的擬餌照亮黑暗。 被這光亮吸引來的帕魯如果被GhostAnglerFish發現的話，那可是插翅難逃了。 牠會一直作為其嚮導，直到該帕魯平安返回自己的家。"
+    "description": "牠會以散發光芒的擬餌照亮黑暗。 被這光亮吸引來的帕魯如果被冥燈魚發現的話，那可是插翅難逃了。 牠會一直作為其嚮導，直到該帕魯平安返回自己的家。"
   },
   "GhostAnglerfish_Fire": {
     "localized_name": "炙燈魚",
-    "description": "猛烈燃燒的擬餌，在燒烤獵物時也能用。 被烤肉香氣吸引來的帕魯如果被GhostAnglerFish_Fire發現的話，那可是插翅難逃了。 牠會一直熱情款待，直到被吸引的帕魯肚子吃到撐。"
+    "description": "猛烈燃燒的擬餌，在燒烤獵物時也能用。 被烤肉香氣吸引來的帕魯如果被炙燈魚發現的話，那可是插翅難逃了。 牠會一直熱情款待，直到被吸引的帕魯肚子吃到撐。"
   },
   "GhostBeast": {
     "localized_name": "噬魂獸",
@@ -1617,7 +1617,7 @@
   },
   "LilyQueen": {
     "localized_name": "百合女王",
-    "description": "滿懷慈愛且性格溫和的帕魯。 牠會照顧失去父母的年幼帕魯， 但也會用毫無保留的SolarBeam來管教牠們。"
+    "description": "滿懷慈愛且性格溫和的帕魯。 牠會照顧失去父母的年幼帕魯， 但也會用毫無保留的太陽光束來管教牠們。"
   },
   "LilyQueen_Dark": {
     "localized_name": "黑月女王",
@@ -2328,7 +2328,7 @@
     "description": null
   },
   "PalPassive_Doctor": {
-    "localized_name": "島民",
+    "localized_name": "布朗博士",
     "description": null
   },
   "PalTrader": {
@@ -2480,7 +2480,7 @@
     "description": "統治騎士蜂的天選之后。 在能為偉大女王效力的喜悅驅動下， 為牠辛勤工作，至死方休的僕人可謂絡繹不絕。"
   },
   "QuestMan": {
-    "localized_name": "-",
+    "localized_name": "Quest Client",
     "description": null
   },
   "Quest_Farmer03_PinkCat": {
@@ -2624,7 +2624,7 @@
     "description": null
   },
   "Reward_BossDefeat": {
-    "localized_name": "衛兵",
+    "localized_name": "老手帕魯獵人",
     "description": null
   },
   "Reward_Emote_A_01": {
@@ -2712,7 +2712,7 @@
     "description": null
   },
   "Reward_Paldex": {
-    "localized_name": "衛兵",
+    "localized_name": "帕魯生態調查員",
     "description": null
   },
   "Reward_Paldex_v02": {
@@ -2901,7 +2901,7 @@
   },
   "SnowTigerBeastman": {
     "localized_name": "霜牙王",
-    "description": "一旦看見了圓形的物體，就不自覺的想要來上一拳。 對於SnowTigerBeastMan來說，僅次於生存的難題 就是完成堆雪人。"
+    "description": "一旦看見了圓形的物體，就不自覺的想要來上一拳。 對於霜牙王來說，僅次於生存的難題 就是完成堆雪人。"
   },
   "SoldierBee": {
     "localized_name": "騎士蜂",
@@ -3040,7 +3040,7 @@
     "description": "城堡裡開滿了國王最喜歡的花朵。 但大型戰爭爆發，戰火即將波及城堡。 這時，一隻花朵精靈憑空出現了。 ──摘自童話《國王的花朵》。"
   },
   "VisitingMerchant": {
-    "localized_name": "-",
+    "localized_name": "Visitor",
     "description": null
   },
   "Visitor_Hunter_Rifle": {
@@ -3072,7 +3072,7 @@
     "description": "健康的個體，背部物質的溫度也會十分穩定。 但一旦心跳過快，溫度就會失去穩定。 最壞的情況會引發氣化或凝固現象， 最後突然休克而死。"
   },
   "WeaponsDealer": {
-    "localized_name": "-",
+    "localized_name": "Weapons Dealer",
     "description": null
   },
   "WeaselDragon": {
@@ -3133,11 +3133,11 @@
   },
   "WindChimes": {
     "localized_name": "吊縛靈",
-    "description": "牠那巨大的雙臂就連鋼鐵都能撕裂。 以前犯下重罪者會被綁在城鎮廣場上， 讓Windchimes直接撕下該人的血肉， 是種極為殘忍的刑罰。"
+    "description": "牠那巨大的雙臂就連鋼鐵都能撕裂。 以前犯下重罪者會被綁在城鎮廣場上， 讓吊縛靈直接撕下該人的血肉， 是種極為殘忍的刑罰。"
   },
   "WindChimes_Ice": {
     "localized_name": "冰縛靈",
-    "description": "牠那巨大的雙臂就連冰磚都能撕碎。 以前犯下重罪者會被綁在城鎮廣場上， 讓Windchimes_Ice直接扯下該人的頭髮， 是種極為殘忍的警示性懲罰。"
+    "description": "牠那巨大的雙臂就連冰磚都能撕碎。 以前犯下重罪者會被綁在城鎮廣場上， 讓冰縛靈直接扯下該人的頭髮， 是種極為殘忍的警示性懲罰。"
   },
   "WingGolem": {
     "localized_name": "泰鋒",
@@ -3157,7 +3157,7 @@
   },
   "WoolFox": {
     "localized_name": "米露菲",
-    "description": "與SheepBall相較，這種帕魯的毛質更加優良， 個性也更適合作為家畜。 但歷史上這種帕魯總是被當成寵物。 畢竟可愛就是正義。"
+    "description": "與棉悠悠相較，這種帕魯的毛質更加優良， 個性也更適合作為家畜。 但歷史上這種帕魯總是被當成寵物。 畢竟可愛就是正義。"
   },
   "WorldTreeDragon": {
     "localized_name": "枯星龍",
@@ -3234,5 +3234,221 @@
   "Yeti_Grass": {
     "localized_name": "綠苔絨怪",
     "description": "研究者曾為了揭開牠的真實身分而剃光牠身上的草， 結果只留下了滿地草屑， 就好像這團草裡頭從一開始就空無一物似的。"
+  },
+  "ArenaShop": {
+    "localized_name": "ArenaShop",
+    "description": null
+  },
+  "Arena_Legend_1": {
+    "localized_name": "Arena_Legend_1",
+    "description": null
+  },
+  "Arena_Legend_10": {
+    "localized_name": "Arena_Legend_10",
+    "description": null
+  },
+  "Arena_Legend_11": {
+    "localized_name": "Arena_Legend_11",
+    "description": null
+  },
+  "Arena_Legend_12": {
+    "localized_name": "Arena_Legend_12",
+    "description": null
+  },
+  "Arena_Legend_13": {
+    "localized_name": "Arena_Legend_13",
+    "description": null
+  },
+  "Arena_Legend_14": {
+    "localized_name": "Arena_Legend_14",
+    "description": null
+  },
+  "Arena_Legend_15": {
+    "localized_name": "Arena_Legend_15",
+    "description": null
+  },
+  "Arena_Legend_16": {
+    "localized_name": "Arena_Legend_16",
+    "description": null
+  },
+  "Arena_Legend_17": {
+    "localized_name": "Arena_Legend_17",
+    "description": null
+  },
+  "Arena_Legend_18": {
+    "localized_name": "Arena_Legend_18",
+    "description": null
+  },
+  "Arena_Legend_19": {
+    "localized_name": "Arena_Legend_19",
+    "description": null
+  },
+  "Arena_Legend_2": {
+    "localized_name": "Arena_Legend_2",
+    "description": null
+  },
+  "Arena_Legend_20": {
+    "localized_name": "Arena_Legend_20",
+    "description": null
+  },
+  "Arena_Legend_3": {
+    "localized_name": "Arena_Legend_3",
+    "description": null
+  },
+  "Arena_Legend_4": {
+    "localized_name": "Arena_Legend_4",
+    "description": null
+  },
+  "Arena_Legend_5": {
+    "localized_name": "Arena_Legend_5",
+    "description": null
+  },
+  "Arena_Legend_6": {
+    "localized_name": "Arena_Legend_6",
+    "description": null
+  },
+  "Arena_Legend_7": {
+    "localized_name": "Arena_Legend_7",
+    "description": null
+  },
+  "Arena_Legend_8": {
+    "localized_name": "Arena_Legend_8",
+    "description": null
+  },
+  "Arena_Legend_9": {
+    "localized_name": "Arena_Legend_9",
+    "description": null
+  },
+  "ArmorWoodlouse": {
+    "localized_name": "ArmorWoodlouse",
+    "description": null
+  },
+  "BeardedDragon": {
+    "localized_name": "BeardedDragon",
+    "description": "This Pal is under investigation."
+  },
+  "BlueWoolRabbit": {
+    "localized_name": "BlueWoolRabbit",
+    "description": null
+  },
+  "CandleWitch": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "CuteOrca": {
+    "localized_name": "CuteOrca",
+    "description": null
+  },
+  "DarkMutant": {
+    "localized_name": "DarkMutant",
+    "description": "當DarkMutant練就精湛技法， 只需刃光一閃便能斬斷時空，讓空間產生裂縫。 據說部分帕魯就是從這空間裂縫中出現的。"
+  },
+  "DesertBoss": {
+    "localized_name": "DesertBoss",
+    "description": null
+  },
+  "ElecSnail_Fire": {
+    "localized_name": "ElecSnail_Fire",
+    "description": null
+  },
+  "ElectricBoss": {
+    "localized_name": "ElectricBoss",
+    "description": null
+  },
+  "Emote_Tester": {
+    "localized_name": "Emote_Tester",
+    "description": null
+  },
+  "ForestBoss": {
+    "localized_name": "莉莉 & 百合女王",
+    "description": null
+  },
+  "FrozenBear": {
+    "localized_name": "FrozenBear",
+    "description": null
+  },
+  "GrassDragon": {
+    "localized_name": "GrassDragon",
+    "description": "This Pal is under investigation."
+  },
+  "IceVeilDragon": {
+    "localized_name": "IceVeilDragon",
+    "description": null
+  },
+  "KingCrab": {
+    "localized_name": "KingCrab",
+    "description": null
+  },
+  "LeafBird": {
+    "localized_name": "LeafBird",
+    "description": null
+  },
+  "MedjedBird": {
+    "localized_name": "MedjedBird",
+    "description": null
+  },
+  "MexicanSalamander": {
+    "localized_name": "MexicanSalamander",
+    "description": null
+  },
+  "Monkey_Ice": {
+    "localized_name": "Monkey_Ice",
+    "description": null
+  },
+  "MonochromeMushroom": {
+    "localized_name": "MonochromeMushroom",
+    "description": null
+  },
+  "Negotiator": {
+    "localized_name": "Negotiator",
+    "description": null
+  },
+  "PinkKangaroo": {
+    "localized_name": "PinkKangaroo",
+    "description": null
+  },
+  "RockCheetah": {
+    "localized_name": "RockCheetah",
+    "description": null
+  },
+  "SakurajimaBoss": {
+    "localized_name": "紗夜 & 輝月伊",
+    "description": null
+  },
+  "SnakeQueen": {
+    "localized_name": "SnakeQueen",
+    "description": null
+  },
+  "SnowBoss": {
+    "localized_name": "維克托 & 異構格里芬",
+    "description": null
+  },
+  "StrawHatCat": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "TestAssassin": {
+    "localized_name": "TestAssassin",
+    "description": null
+  },
+  "TestNPC": {
+    "localized_name": "TestNPC",
+    "description": null
+  },
+  "VikingBoss": {
+    "localized_name": "比約恩 & 霜牙王",
+    "description": null
+  },
+  "VolcanicTurtle": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "WaterLizard": {
+    "localized_name": "WaterLizard",
+    "description": null
+  },
+  "WorldTree_Hunter_MissileLauncher_test": {
+    "localized_name": "WorldTree_Hunter_MissileLauncher_test",
+    "description": null
   }
 }

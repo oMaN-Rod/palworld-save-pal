@@ -19,6 +19,10 @@
     "localized_name": "Tugas Mendinginkan Level 4",
     "description": null
   },
+  "Cool1_6": {
+    "localized_name": "Tugas Mendinginkan Level 5",
+    "description": null
+  },
   "Cool2": {
     "localized_name": "Peningkatan Kecepatan Penetasan Level 1",
     "description": null
@@ -36,11 +40,11 @@
     "description": null
   },
   "Cool3": {
-    "localized_name": "Penelitian Pendinginan Level 1",
+    "localized_name": "Tips Penelitian Pendinginan Level 1",
     "description": null
   },
   "Cool3_2": {
-    "localized_name": "Penelitian Pendinginan Level 2",
+    "localized_name": "Tips Penelitian Pendinginan Level 2",
     "description": null
   },
   "Cool3_3": {
@@ -49,6 +53,10 @@
   },
   "Cool3_4": {
     "localized_name": "Peningkatan Pal di Markas Level 2",
+    "description": null
+  },
+  "Cool3_5": {
+    "localized_name": "Peningkatan Pal di Markas Level 3",
     "description": null
   },
   "Cool4": {
@@ -65,7 +73,7 @@
   },
   "Cool5": {
     "localized_name": "Pengembangan Boneka Salju",
-    "description": null
+    "description": "Membuka Teknologi \"Boneka Salju\""
   },
   "Deforest1": {
     "localized_name": "Tugas Menebang Kayu Level 1",
@@ -85,6 +93,10 @@
   },
   "Deforest1_5": {
     "localized_name": "Tugas Menebang Kayu Level 5",
+    "description": null
+  },
+  "Deforest1_6": {
+    "localized_name": "Tugas Menebang Kayu Level 6",
     "description": null
   },
   "Deforest2": {
@@ -127,9 +139,13 @@
     "localized_name": "Peningkatan Pal di Markas Level 2",
     "description": null
   },
+  "Deforest3_5": {
+    "localized_name": "Peningkatan Pal di Markas Level 3",
+    "description": null
+  },
   "Deforest4": {
     "localized_name": "Pengembangan Tunggul dan Kapak",
-    "description": null
+    "description": "Membuka Teknologi \"Tunggul dan Kapak\""
   },
   "EmitFlame1": {
     "localized_name": "Tugas Menyalakan Api Level 1",
@@ -149,6 +165,10 @@
   },
   "EmitFlame1_5": {
     "localized_name": "Tugas Menyalakan Api Level 5",
+    "description": null
+  },
+  "EmitFlame1_6": {
+    "localized_name": "Tugas Menyalakan Api Level 6",
     "description": null
   },
   "EmitFlame2": {
@@ -183,6 +203,10 @@
     "localized_name": "Peningkatan Pal di Markas Level 2",
     "description": null
   },
+  "EmitFlame3_5": {
+    "localized_name": "Peningkatan Pal di Markas Level 3",
+    "description": null
+  },
   "EmitFlame4": {
     "localized_name": "Teknik Memasak Massal Level 1",
     "description": null
@@ -201,7 +225,7 @@
   },
   "EmitFlame5": {
     "localized_name": "Pengembangan Kuali Api",
-    "description": null
+    "description": "Membuka Teknologi \"Kuali Api\""
   },
   "GenerateEnergy1": {
     "localized_name": "Tugas Pembangkit Listrik Level 1",
@@ -221,6 +245,10 @@
   },
   "GenerateEnergy1_5": {
     "localized_name": "Tugas Pembangkit Listrik Level 5",
+    "description": null
+  },
+  "GenerateEnergy1_6": {
+    "localized_name": "Tugas Pembangkit Listrik Level 6",
     "description": null
   },
   "GenerateEnergy2": {
@@ -251,6 +279,10 @@
     "localized_name": "Peningkatan Pal di Markas Level 2",
     "description": null
   },
+  "GenerateEnergy3_5": {
+    "localized_name": "Peningkatan Pal di Markas Level 3",
+    "description": null
+  },
   "GenerateEnergy4": {
     "localized_name": "Penguasaan Penghematan Daya Level 1",
     "description": null
@@ -265,7 +297,7 @@
   },
   "GenerateEnergy5": {
     "localized_name": "Pengembangan Menara Listrik",
-    "description": null
+    "description": "Membuka Teknologi \"Menara Listrik\""
   },
   "Handcraft1": {
     "localized_name": "Kecepatan Pengerjaan Tangan Level 1",
@@ -285,6 +317,10 @@
   },
   "Handcraft1_5": {
     "localized_name": "Kecepatan Pengerjaan Tangan Level 5",
+    "description": null
+  },
+  "Handcraft1_6": {
+    "localized_name": "Kecepatan Pengerjaan Tangan Level 6",
     "description": null
   },
   "Handcraft2": {
@@ -327,6 +363,10 @@
     "localized_name": "Peningkatan Pal di Markas Level 2",
     "description": null
   },
+  "Handcraft3_5": {
+    "localized_name": "Peningkatan Pal di Markas Level 3",
+    "description": null
+  },
   "Handcraft4": {
     "localized_name": "Teknik Replikasi Bola Level 1",
     "description": null
@@ -345,7 +385,7 @@
   },
   "Handcraft5": {
     "localized_name": "Pengembangan Kotak Peralatan Besar",
-    "description": null
+    "description": "Membuka Teknologi \"Kotak Peralatan Besar\""
   },
   "Medicine1": {
     "localized_name": "Tugas Produksi Obat Level 1",
@@ -367,12 +407,16 @@
     "localized_name": "Tugas Produksi Obat Level 5",
     "description": null
   },
+  "Medicine1_6": {
+    "localized_name": "Tugas Produksi Obat Level 6",
+    "description": null
+  },
   "Medicine2": {
-    "localized_name": "Penelitian Produksi Obat Level 1",
+    "localized_name": "Tips Penelitian Produksi Obat Level 1",
     "description": null
   },
   "Medicine2_2": {
-    "localized_name": "Penelitian Produksi Obat Level 2",
+    "localized_name": "Tips Penelitian Produksi Obat Level 2",
     "description": null
   },
   "Medicine2_3": {
@@ -381,6 +425,10 @@
   },
   "Medicine2_4": {
     "localized_name": "Peningkatan Pal di Markas Level 2",
+    "description": null
+  },
+  "Medicine2_5": {
+    "localized_name": "Peningkatan Pal di Markas Level 3",
     "description": null
   },
   "Medicine3": {
@@ -397,7 +445,7 @@
   },
   "Medicine4": {
     "localized_name": "Pengembangan Kuali Penyihir",
-    "description": null
+    "description": "Membuka Teknologi \"Kuali Penyihir\""
   },
   "Mining1": {
     "localized_name": "Tugas Menambang Level 1",
@@ -417,6 +465,10 @@
   },
   "Mining1_5": {
     "localized_name": "Tugas Menambang Level 5",
+    "description": null
+  },
+  "Mining1_6": {
+    "localized_name": "Tugas Menambang Level 6",
     "description": null
   },
   "Mining2": {
@@ -451,6 +503,10 @@
     "localized_name": "Peningkatan Pal di Markas Level 2",
     "description": null
   },
+  "Mining3_5": {
+    "localized_name": "Peningkatan Pal di Markas Level 3",
+    "description": null
+  },
   "Mining4": {
     "localized_name": "Efisiensi Ekstraktor Minyak Mentah Level 1",
     "description": null
@@ -465,7 +521,7 @@
   },
   "Mining5": {
     "localized_name": "Pengembangan Kereta Tambang",
-    "description": null
+    "description": "Membuka Teknologi \"Kereta Tambang\""
   },
   "Seeding1": {
     "localized_name": "Tugas Menanam Bibit Level 1",
@@ -485,6 +541,10 @@
   },
   "Seeding1_5": {
     "localized_name": "Tugas Menanam Bibit Level 5",
+    "description": null
+  },
+  "Seeding1_6": {
+    "localized_name": "Tugas Menanam Bibit Level 6",
     "description": null
   },
   "Seeding2": {
@@ -527,13 +587,17 @@
     "localized_name": "Peningkatan Pal di Markas Level 2",
     "description": null
   },
+  "Seeding3_5": {
+    "localized_name": "Peningkatan Pal di Markas Level 3",
+    "description": null
+  },
   "Seeding4": {
     "localized_name": "Pengembangan Petak Bunga",
-    "description": null
+    "description": "Membuka Teknologi \"Petak Bunga\""
   },
   "Seeding5": {
     "localized_name": "Pengembangan Silo",
-    "description": null
+    "description": "Membuka Teknologi \"Silo\""
   },
   "Watering1": {
     "localized_name": "Tugas Penyiraman Level 1",
@@ -553,6 +617,10 @@
   },
   "Watering1_5": {
     "localized_name": "Tugas Penyiraman Level 5",
+    "description": null
+  },
+  "Watering1_6": {
+    "localized_name": "Tugas Penyiraman Level 6",
     "description": null
   },
   "Watering2": {
@@ -587,6 +655,10 @@
     "localized_name": "Peningkatan Pal di Markas Level 2",
     "description": null
   },
+  "Watering3_5": {
+    "localized_name": "Peningkatan Pal di Markas Level 3",
+    "description": null
+  },
   "Watering4": {
     "localized_name": "Teknik Penghancuran Paldium Level 1",
     "description": null
@@ -597,6 +669,6 @@
   },
   "Watering5": {
     "localized_name": "Pengembangan Air Mancur",
-    "description": null
+    "description": "Membuka Teknologi \"Air Mancur\""
   }
 }

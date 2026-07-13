@@ -131,6 +131,10 @@
     "localized_name": "Carcasa de máquina recreativa",
     "description": "Carcasa de máquina recreativa decorativa. No se puede jugar con ella porque está estropeada."
   },
+  "Banyan_Big": {
+    "localized_name": "Banyan_Big",
+    "description": null
+  },
   "Barrel01_Iron": {
     "localized_name": "Bidón rojo",
     "description": "Bidón rojo decorativo."
@@ -359,6 +363,10 @@
     "localized_name": "Espantapájaros de entrenamiento",
     "description": "Espantapájaros de entrenamiento inspirado en Pengullet. Solo se puede colocar en un espacio amplio."
   },
+  "DamagedScarecrow_Test": {
+    "localized_name": "DamagedScarecrow_Test",
+    "description": null
+  },
   "DarkIsland_Banner": {
     "localized_name": "Estandarte del pueblo de Tenraku",
     "description": "Estandarte del pueblo de Tenraku decorativo."
@@ -368,8 +376,8 @@
     "description": "Bandera del pueblo de Tenraku decorativa."
   },
   "Decal_PalSticker_PinkCat": {
-    "localized_name": "es_Text",
-    "description": "es_Text"
+    "localized_name": "Tuppanyan sticker",
+    "description": null
   },
   "DefenseBowGun": {
     "localized_name": "Ballesta estacionaria",
@@ -735,6 +743,10 @@
     "localized_name": "Base de cristal",
     "description": "Base sobre la que levantar muros o instalaciones. Está hecha de cristal duro y es muy resistente."
   },
+  "Glass_pillars": {
+    "localized_name": "Columna de cristal",
+    "description": "Columna para sostener edificios. Está hecha de cristal duro y es muy resistente."
+  },
   "Glass_roof": {
     "localized_name": "Tejado de cristal",
     "description": "Tejado que se construye sobre un muro para guarecerte de la lluvia y el viento. Está hecho de cristal duro y es muy resistente."
@@ -757,7 +769,7 @@
   },
   "GoalSoccer_Iron": {
     "localized_name": "Portería de fútbol",
-    "description": "Portería de fútbol decorativa. Meter a SheepBall dentro no cuenta como gol."
+    "description": "Portería de fútbol decorativa. Meter a Lamball dentro no cuenta como gol."
   },
   "GuardianDogStatue": {
     "localized_name": "Estatua de Yakumo",
@@ -1111,6 +1123,10 @@
     "localized_name": "Base de metal",
     "description": "Base sobre la que levantar muros o instalaciones. Está hecha de metal y es muy resistente."
   },
+  "Metal_pillars": {
+    "localized_name": "Columna de metal",
+    "description": "Columna para sostener edificios. Está hecha de metal y es muy resistente."
+  },
   "Metal_roof": {
     "localized_name": "Tejado de metal",
     "description": "Tejado que se construye sobre un muro para guarecerte de la lluvia y el viento. Está hecho de metal y es muy resistente."
@@ -1276,8 +1292,8 @@
     "description": "Alfombra antigua alargada decorativa."
   },
   "Rug_Wood": {
-    "localized_name": "es_Text",
-    "description": "es_Text"
+    "localized_name": "Fur rug",
+    "description": null
   },
   "SF_Chair": {
     "localized_name": "Silla estilo laboratorio",
@@ -1346,6 +1362,10 @@
   "SF_foundation": {
     "localized_name": "Base futurista",
     "description": "Base sobre la que levantar muros o instalaciones. De estructura limpia y futurista."
+  },
+  "SF_pillars": {
+    "localized_name": "Columna futurista",
+    "description": "Columna para sostener edificios. De estructura limpia y futurista."
   },
   "SF_roof": {
     "localized_name": "Tejado futurista",
@@ -1611,6 +1631,10 @@
     "localized_name": "Base de piedra",
     "description": "Base sobre la que levantar muros o instalaciones. Está hecha de piedra y es bastante resistente."
   },
+  "Stone_pillar": {
+    "localized_name": "Columna de piedra",
+    "description": "Columna para sostener edificios. Está hecha de piedra y es bastante resistente."
+  },
   "Stone_roof": {
     "localized_name": "Tejado de piedra",
     "description": "Tejado que se construye sobre un muro para guarecerte de la lluvia y el viento. Está hecho de piedra y es bastante resistente."
@@ -1808,8 +1832,8 @@
     "description": "Trampa que congela a los Pals que la pisen. Es más probable capturar a un Pal congelado con una esfera."
   },
   "Trap_MovingPanel": {
-    "localized_name": "es_Text",
-    "description": "es_Text"
+    "localized_name": "Moving Panels",
+    "description": "A description of the moving panel"
   },
   "Trap_Noose": {
     "localized_name": "Trampa de lazo",
@@ -1919,6 +1943,10 @@
     "localized_name": "Escalera",
     "description": "Escalera que ter permite acceder a lugares un poco elevados."
   },
+  "Wooden_pillar": {
+    "localized_name": "Columna de madera",
+    "description": "Columna para sostener edificios. Está hecha de madera y es frágil."
+  },
   "Wooden_roof": {
     "localized_name": "Tejado de madera",
     "description": "Tejado que se construye sobre un muro para guarecerte de la lluvia y el viento. Está hecho de madera y es frágil."
@@ -1954,5 +1982,13 @@
   "Zaisu": {
     "localized_name": "Silla de suelo japonesa",
     "description": "Silla de suelo decorativa. Perfecta combinada con construcciones de estilo japonés."
+  },
+  "JapaneseStyle_TriangleStairsCorner_02": {
+    "localized_name": "JapaneseStyle_TriangleStairsCorner_02",
+    "description": null
+  },
+  "WoodCreator": {
+    "localized_name": "WoodCreator",
+    "description": null
   }
 }

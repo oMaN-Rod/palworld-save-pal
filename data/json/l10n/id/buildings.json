@@ -131,6 +131,10 @@
     "localized_name": "Mesin Permainan Arkade",
     "description": "Hiasan mesin permainan arkade. Rusak dan tidak dapat dimainkan."
   },
+  "Banyan_Big": {
+    "localized_name": "Banyan_Big",
+    "description": null
+  },
   "Barrel01_Iron": {
     "localized_name": "Drum Merah",
     "description": "Drum berwarna merah untuk dekorasi."
@@ -345,7 +349,7 @@
   },
   "Crusher": {
     "localized_name": "Mesin Penghancur",
-    "description": "Fasilitas untuk menghancurkan Batu dan Kayu lalu mengubahnya menjadi material lain. Membutuhkan Pal yang memiliki keahlian |Penyiraman| untuk menggerakkan kincir air."
+    "description": "Fasilitas untuk menghancurkan Batu dan Kayu lalu mengubahnya menjadi material lain. Membutuhkan Pal yang memiliki keahlian \"Penyiraman\" untuk menggerakkan kincir air."
   },
   "CrystalPit": {
     "localized_name": "Lokasi Tambang Kuarsa Hexo",
@@ -359,6 +363,10 @@
     "localized_name": "Boneka Latihan",
     "description": "Boneka untuk latihan yang berbentuk Pengullet. Hanya bisa diletakkan di tempat yang luas."
   },
+  "DamagedScarecrow_Test": {
+    "localized_name": "DamagedScarecrow_Test",
+    "description": null
+  },
   "DarkIsland_Banner": {
     "localized_name": "Spanduk Vertikal Penduduk Langit Jatuh",
     "description": "Spanduk Vertikal Penduduk Langit Jatuh Untuk Dekorasi."
@@ -368,16 +376,16 @@
     "description": "Bendera Kelompok Penduduk Langit Jatuh Untuk Dekorasi."
   },
   "Decal_PalSticker_PinkCat": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Tuppanyan sticker",
+    "description": null
   },
   "DefenseBowGun": {
     "localized_name": "Busur Silang Statis",
-    "description": "Fasilitas pertahanan yang digunakan untuk menempatkan Pal agar bersiap menghadapi pertempuran. Jika menempatkan Pal dengan kemampuan |Pekerjaan Tangan|, mereka akan terus mempertahankan markas dengan menggunakan panah otomatis."
+    "description": "Fasilitas pertahanan yang digunakan untuk menempatkan Pal agar bersiap menghadapi pertempuran. Jika menempatkan Pal dengan kemampuan \"Pekerjaan Tangan\", mereka akan terus mempertahankan markas dengan menggunakan panah otomatis."
   },
   "DefenseMachinegun": {
     "localized_name": "Senapan Mesin Statis",
-    "description": "Fasilitas pertahanan yang digunakan untuk menempatkan Pal agar bersiap menghadapi pertempuran. Jika menempatkan Pal dengan kemampuan |Pekerjaan Tangan|, mereka akan terus mempertahankan markas dengan menggunakan senapan mesin."
+    "description": "Fasilitas pertahanan yang digunakan untuk menempatkan Pal agar bersiap menghadapi pertempuran. Jika menempatkan Pal dengan kemampuan \"Pekerjaan Tangan\", mereka akan terus mempertahankan markas dengan menggunakan senapan mesin."
   },
   "DefenseMachinegun_AutoTurret": {
     "localized_name": "Turret Kuno",
@@ -385,7 +393,7 @@
   },
   "DefenseMissile": {
     "localized_name": "Peluncur Rudal Statis",
-    "description": "Fasilitas pertahanan yang digunakan untuk menempatkan Pal agar bersiap menghadapi pertempuran. Jika menempatkan Pal dengan kemampuan |Pekerjaan Tangan|, mereka akan terus mempertahankan markas dengan menggunakan peluncur rudal."
+    "description": "Fasilitas pertahanan yang digunakan untuk menempatkan Pal agar bersiap menghadapi pertempuran. Jika menempatkan Pal dengan kemampuan \"Pekerjaan Tangan\", mereka akan terus mempertahankan markas dengan menggunakan peluncur rudal."
   },
   "DefenseWait": {
     "localized_name": "Karung Pasir",
@@ -533,7 +541,7 @@
   },
   "FlourMill": {
     "localized_name": "Penggiling Tepung",
-    "description": "Fasilitas untuk menggiling Gandum untuk membuat Tepung Gandum. Membutuhkan Pal yang memiliki keahlian |Penyiraman| untuk menggerakkan kincir air."
+    "description": "Fasilitas untuk menggiling Gandum untuk membuat Tepung Gandum. Membutuhkan Pal yang memiliki keahlian \"Penyiraman\" untuk menggerakkan kincir air."
   },
   "FlowerBed": {
     "localized_name": "Petak Bunga",
@@ -735,6 +743,10 @@
     "localized_name": "Fondasi Kaca",
     "description": "Fondasi untuk membangun tembok atau fasilitas di atasnya. Terbuat dari kaca solid sehingga sangat kokoh."
   },
+  "Glass_pillars": {
+    "localized_name": "Pilar Kaca",
+    "description": "Pilar untuk menopang bangunan. Terbuat dari kaca solid sehingga sangat kokoh."
+  },
   "Glass_roof": {
     "localized_name": "Atap Kaca",
     "description": "Atap yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari kaca solid sehingga sangat kokoh."
@@ -757,7 +769,7 @@
   },
   "GoalSoccer_Iron": {
     "localized_name": "Gawang Sepak Bola",
-    "description": "Gawang sepak bola untuk dekorasi. Memasukkan SheepBall ke dalamnya tidak akan memberimu poin."
+    "description": "Gawang sepak bola untuk dekorasi. Memasukkan Lamball ke dalamnya tidak akan memberimu poin."
   },
   "GuardianDogStatue": {
     "localized_name": "Patung Yakumo",
@@ -797,7 +809,7 @@
   },
   "IceCrusher": {
     "localized_name": "Mesin Penghancur Berpendingin",
-    "description": "Fasilitas untuk menghancurkan Bijih Logam lalu mengubahnya menjadi material lain. Untuk menggerakkannya membutuhkan sumber daya listrik dan Pal yang memiliki keahlian |Pendinginan|, tetapi ini sangat efektif."
+    "description": "Fasilitas untuk menghancurkan Bijih Logam lalu mengubahnya menjadi material lain. Untuk menggerakkannya membutuhkan sumber daya listrik dan Pal yang memiliki keahlian \"Pendinginan\", tetapi ini sangat efektif."
   },
   "IceHorseStatue": {
     "localized_name": "Patung Frostallion",
@@ -1111,6 +1123,10 @@
     "localized_name": "Fondasi Logam",
     "description": "Fondasi untuk membangun tembok atau fasilitas di atasnya. Terbuat dari logam sehingga sangat kokoh."
   },
+  "Metal_pillars": {
+    "localized_name": "Pilar Logam",
+    "description": "Pilar untuk menopang bangunan. Terbuat dari logam sehingga sangat kokoh."
+  },
   "Metal_roof": {
     "localized_name": "Atap Logam",
     "description": "Atap yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari logam sehingga sangat kokoh."
@@ -1276,8 +1292,8 @@
     "description": "Karpet panjang yang antik untuk dekorasi."
   },
   "Rug_Wood": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Fur rug",
+    "description": null
   },
   "SF_Chair": {
     "localized_name": "Kursi Laboratorium",
@@ -1346,6 +1362,10 @@
   "SF_foundation": {
     "localized_name": "Fondasi Bersih",
     "description": "Fondasi untuk membangun tembok atau fasilitas di atasnya. Bisa untuk membuat arsitektur yang bersih dan futuristik."
+  },
+  "SF_pillars": {
+    "localized_name": "Pilar Bersih",
+    "description": "Pilar untuk menyangga bangunan. Bisa untuk membuat arsitektur yang bersih dan futuristik."
   },
   "SF_roof": {
     "localized_name": "Atap Bersih",
@@ -1611,6 +1631,10 @@
     "localized_name": "Fondasi Batu",
     "description": "Fondasi untuk membangun tembok atau fasilitas di atasnya. Terbuat dari batu sehingga cukup kokoh."
   },
+  "Stone_pillar": {
+    "localized_name": "Pilar Batu",
+    "description": "Pilar untuk menopang bangunan. Terbuat dari batu sehingga cukup kokoh."
+  },
   "Stone_roof": {
     "localized_name": "Atap Batu",
     "description": "Atap yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari batu sehingga cukup kokoh."
@@ -1808,8 +1832,8 @@
     "description": "Perangkap yang akan membekukan Pal yang menginjaknya. Pal yang membeku akan meningkatkan peluang keberhasilan Bola."
   },
   "Trap_MovingPanel": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Moving Panels",
+    "description": "A description of the moving panel"
   },
   "Trap_Noose": {
     "localized_name": "Perangkap Gantung",
@@ -1919,6 +1943,10 @@
     "localized_name": "Tangga",
     "description": "Tangga yang bisa kamu gunakan untuk naik ke tempat yang sedikit lebih tinggi."
   },
+  "Wooden_pillar": {
+    "localized_name": "Pilar Kayu",
+    "description": "Pilar untuk menopang bangunan. Terbuat dari kayu sehingga sangat rapuh."
+  },
   "Wooden_roof": {
     "localized_name": "Atap Kayu",
     "description": "Atap yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari kayu sehingga sangat rapuh."
@@ -1954,5 +1982,13 @@
   "Zaisu": {
     "localized_name": "Kursi Lantai Jepang",
     "description": "Kursi lantai Jepang untuk dekorasi. Gunakan saat membuat bangunan bergaya Jepang."
+  },
+  "JapaneseStyle_TriangleStairsCorner_02": {
+    "localized_name": "JapaneseStyle_TriangleStairsCorner_02",
+    "description": null
+  },
+  "WoodCreator": {
+    "localized_name": "WoodCreator",
+    "description": null
   }
 }

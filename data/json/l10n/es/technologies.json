@@ -13,7 +13,7 @@
   },
   "Accessory_AirDash3": {
     "localized_name": "Botas de propulsión aérea triple",
-    "description": "es_Text"
+    "description": null
   },
   "Accessory_ExplosionResist": {
     "localized_name": "Ropa interior blindada",
@@ -129,11 +129,11 @@
   },
   "Arrow_Fire": {
     "localized_name": "Flecha incendiaria",
-    "description": "Flecha incendiaria para disparar con un arco. Inflige daño de <img id=|ElemIcon_Fire|/><uiCommon id=|COMMON_ELEMENT_NAME_Fire| style=|Elem_Fire|/> al rival. Se puede fabricar en una «Mesa de trabajo primitiva»."
+    "description": "Flecha incendiaria para disparar con un arco. Inflige daño de Fuego al rival. Se puede fabricar en una «Mesa de trabajo primitiva»."
   },
   "Arrow_Poison": {
     "localized_name": "Flecha envenenada",
-    "description": "Flecha envenenada para disparar con un arco. Inflige <uiCommon id=|ADDITIONAL_EFFECT_Poison| style=|Effect_Poison|/> al rival. Se puede fabricar en una «Mesa de trabajo primitiva»."
+    "description": "Flecha envenenada para disparar con un arco. Inflige Veneno al rival. Se puede fabricar en una «Mesa de trabajo primitiva»."
   },
   "AssaultRifleBullet": {
     "localized_name": "Balas de rifle de asalto",
@@ -301,7 +301,7 @@
   },
   "Battle_Helm_Grade_02_Fur": {
     "localized_name": "Prendido de plumas",
-    "description": "Un bonito adorno de plumas para el pelo. Da la sensación de que protege a su portador de las heridas mortales en la cabeza. Se puede fabricar en una «Workbench»."
+    "description": "Un bonito adorno de plumas para el pelo. Da la sensación de que protege a su portador de las heridas mortales en la cabeza. Se puede fabricar en una «Mesa de trabajo primitiva»."
   },
   "Battle_Helm_Grade_03_Copper": {
     "localized_name": "Yelmo de metal",
@@ -360,8 +360,8 @@
     "description": "Arco moderno. Puede disparar flechas más potentes."
   },
   "Battle_RangeWeapon_FlameThrower": {
-    "localized_name": "FlameThrower",
-    "description": "Flamethrower que dispara llamas de largo alcance. Puede prender fuego al rival. Se puede fabricar en una «Fábrica de producción en cadena de armas II»."
+    "localized_name": "Lanzallamas",
+    "description": "Lanzallamas que dispara llamas de largo alcance. Puede prender fuego al rival. Se puede fabricar en una «Fábrica de producción en cadena de armas II»."
   },
   "Battle_RangeWeapon_GatlingGun": {
     "localized_name": "Gatling Gun",
@@ -501,11 +501,11 @@
   },
   "ChargeLaserRifle": {
     "localized_name": "Rifle de carga",
-    "description": "es_Text"
+    "description": null
   },
   "ChargeLaserRifleBullet": {
     "localized_name": "Balas de rifle de carga",
-    "description": "es_Text"
+    "description": null
   },
   "Clinic": {
     "localized_name": "Clínica",
@@ -521,7 +521,7 @@
   },
   "Computer": {
     "localized_name": "Ordenador",
-    "description": "es_Text"
+    "description": null
   },
   "Cooler": {
     "localized_name": "Refrigerador rústico",
@@ -625,11 +625,11 @@
   },
   "EnergyShotgun": {
     "localized_name": "Escopeta de energía",
-    "description": "es_Text"
+    "description": null
   },
   "EnergyShotgunBullet": {
     "localized_name": "Balas de escopeta de energía",
-    "description": "es_Text"
+    "description": null
   },
   "EnergyStorage_Electric": {
     "localized_name": "Condensador eléctrico",
@@ -909,7 +909,7 @@
   },
   "GasMask": {
     "localized_name": "Máscara antiniebla corrosiva",
-    "description": "es_Text"
+    "description": null
   },
   "GatlingBullet": {
     "localized_name": "Munición de Gatling Gun",
@@ -1205,15 +1205,15 @@
   },
   "OperatingTable": {
     "localized_name": "Mesa de operaciones Pal",
-    "description": "es_text"
+    "description": null
   },
   "OverheatRifle": {
     "localized_name": "Rifle sobrecalentado",
-    "description": "es_Text"
+    "description": null
   },
   "OverheatRifleBullet": {
     "localized_name": "Balas de rifle sobrecalentado",
-    "description": "es_Text"
+    "description": null
   },
   "PALBOX": {
     "localized_name": "Caja Pal",
@@ -1225,11 +1225,11 @@
   },
   "PalDopingShot": {
     "localized_name": "Pistola propulsora",
-    "description": "es_Text"
+    "description": null
   },
   "PalDopingShotBullet": {
     "localized_name": "Balas de pistola propulsora",
-    "description": "es_Text"
+    "description": null
   },
   "PalDopingShot_2": {
     "localized_name": "Pistola megapropulsora",
@@ -1241,7 +1241,7 @@
   },
   "PalHealingGrenade": {
     "localized_name": "Granada curapals",
-    "description": "es_Text"
+    "description": null
   },
   "PalMedicineBox": {
     "localized_name": "Botiquín",
@@ -2292,7 +2292,7 @@
     "description": "Con esto podrás forzar la cerradura de cofres que requieran Llave de oro. No se romperá por más que lo uses."
   },
   "WallSignboard": {
-    "localized_name": "WallSignBoard",
+    "localized_name": "Cartel para colgar en la pared",
     "description": "Letrero en el que puedes escribir. Puedes colgarlo en la pared."
   },
   "WallTorch": {

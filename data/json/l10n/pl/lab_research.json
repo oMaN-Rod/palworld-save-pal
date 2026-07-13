@@ -73,7 +73,7 @@
   },
   "Cool5": {
     "localized_name": "Projekt: bałwan",
-    "description": null
+    "description": "Odblokowano technologię: bałwan"
   },
   "Deforest1": {
     "localized_name": "Zadanie: ścinanie drzew poziom 1",
@@ -145,7 +145,7 @@
   },
   "Deforest4": {
     "localized_name": "Projekt: pień i siekiera",
-    "description": null
+    "description": "Odblokowano technologię: pień i siekiera"
   },
   "EmitFlame1": {
     "localized_name": "Zadanie: rozpalanie ognia poziom 1",
@@ -225,7 +225,7 @@
   },
   "EmitFlame5": {
     "localized_name": "Projekt: palenisko",
-    "description": null
+    "description": "Odblokowano technologię: palenisko"
   },
   "GenerateEnergy1": {
     "localized_name": "Zadanie: wytwarzanie energii poziom 1",
@@ -297,7 +297,7 @@
   },
   "GenerateEnergy5": {
     "localized_name": "Projekt: słup elektryczny",
-    "description": null
+    "description": "Odblokowano technologię: słup elektryczny"
   },
   "Handcraft1": {
     "localized_name": "Prędkość wytwarzania poziom 1",
@@ -385,7 +385,7 @@
   },
   "Handcraft5": {
     "localized_name": "Projekt: duża skrzynka z narzędziami",
-    "description": null
+    "description": "Odblokowano technologię: duża skrzynka z narzędziami"
   },
   "Medicine1": {
     "localized_name": "Zadanie: produkcja leków poziom 1",
@@ -445,7 +445,7 @@
   },
   "Medicine4": {
     "localized_name": "Projekt: kocioł czarownicy",
-    "description": null
+    "description": "Odblokowano technologię: kocioł czarownicy"
   },
   "Mining1": {
     "localized_name": "Zadanie: wydobycie poziom 1",
@@ -521,7 +521,7 @@
   },
   "Mining5": {
     "localized_name": "Projekt: wózek górniczy",
-    "description": null
+    "description": "Odblokowano technologię: wózek górniczy"
   },
   "Seeding1": {
     "localized_name": "Zadanie: sadzenie poziom 1",
@@ -593,11 +593,11 @@
   },
   "Seeding4": {
     "localized_name": "Projekt: klomb kwiatowy",
-    "description": null
+    "description": "Odblokowano technologię: klomb kwiatowy"
   },
   "Seeding5": {
     "localized_name": "Projekt: silos",
-    "description": null
+    "description": "Odblokowano technologię: silos"
   },
   "Watering1": {
     "localized_name": "Zadanie: podlewanie poziom 1",
@@ -669,6 +669,6 @@
   },
   "Watering5": {
     "localized_name": "Projekt: fontanna",
-    "description": null
+    "description": "Odblokowano technologię: fontanna"
   }
 }

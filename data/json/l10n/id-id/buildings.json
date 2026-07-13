@@ -3,9 +3,137 @@
     "localized_name": "Altar Pemanggilan",
     "description": "Dengan mempersembahkan tablet batu dengan gambar Pal, kamu dapat memanggil Pal yang kuat ke markas. Persiapan yang matang menentukan hidup dan mati dalam pertarungan."
   },
+  "AncientBlastFurnace": {
+    "localized_name": "Tungku Kuno",
+    "description": "Tungku khusus yang menggunakan teknologi peradaban kuno yang dapat melebur jenis batangan logam apa pun. Peleburan dilakukan dengan melelehkan material menggunakan panas api, kemudian langsung didinginkan dan dipadatkan dengan kekuatan es. Untuk mengoperasikannya, diperlukan Pal dengan kemampuan menyalakan api dan pendinginan."
+  },
+  "AncientCookingStove": {
+    "localized_name": "Dapur Kuno",
+    "description": "Dapur peradaban kuno yang dapat membuat berbagai masakan, dari resep yang sudah ada hingga resep yang belum diketahui. Dengan menyimpan panas dari api dan sentuhan akhir dengan tangan, segala jenis hidangan dapat dibuat. Untuk mengoperasikannya, dibutuhkan Pal dengan kemampuan menyalakan api dan kerja manual yang tinggi."
+  },
+  "AncientElectricGenerator": {
+    "localized_name": "Generator Kuno",
+    "description": "Alat pembangkit listrik sangat efisien dari teknologi kuno yang telah punah. Meski dapat menghasilkan listrik yang sangat besar, terdapat risiko kelebihan panas saat alat ini beroperasi. Pal dengan kemampuan pembangkit listrik tingkat tinggi dan penyiraman diperlukan untuk mengoperasikan alat ini."
+  },
+  "AncientFarmBlock": {
+    "localized_name": "Alat Tanam Kuno",
+    "description": "Alat tanam kuno yang memanfaatkan kekuatan Pohon Dunia untuk menumbuhkan semua jenis tanaman di Pulau Palpagos. Ukurannya jauh lebih kecil daripada Ladang Beri dan bisa dipasang di dalam ruangan, tetapi proses budidayanya tetap sama seperti biasa. Untuk mengoperasikannya, diperlukan Pal dengan kecocokan tingkat tinggi untuk menanam benih, menyiram, dan memanen."
+  },
+  "AncientMultiProduct": {
+    "localized_name": "Generator Materi Kuno",
+    "description": "Generator peradaban kuno yang memanfaatkan kekuatan Pohon Dunia untuk menghasilkan berbagai jenis sumber kayu. Kamu bisa memilih sumber daya yang diinginkan, tetapi efisiensi penambangannya sama dengan fasilitas konvensional. Karena strukturnya yang kompleks, hanya 1 Pal yang dapat ditugaskan di sini."
+  },
+  "AncientRelicRecycler": {
+    "localized_name": "Konverter Artefak Peradaban Kuno",
+    "description": "Alat konversi material kuno yang memanfaatkan kembali teknologi dari peradaban yang hilang. Menguraikan teknologi yang tersisa pada 'Artefak Peradaban Kuno' kemudian meningkatkannya ke bentuk baru. Ini adalah alat yang sangat spesial untuk memanfaatkan relik secara efisien."
+  },
+  "AncientWorkBench": {
+    "localized_name": "Meja Kerja Kuno",
+    "description": "Fasilitas terpadu khusus Pal yang dapat memproduksi seluruh item di satu tempat. Pemain tidak dapat bekerja di sini, serta kecepatan produksinya sama dengan peralatan biasa. Karena merupakan fasilitas canggih, pengoperasiannya membutuhkan Pal dengan kemampuan kerja manual dan keahlian farmasi yang tinggi."
+  },
+  "Ancient_AirConditioner": {
+    "localized_name": "Pendingin Ruangan Kuno",
+    "description": null
+  },
+  "Ancient_Clinic": {
+    "localized_name": "Klinik Kuno",
+    "description": "Fasilitas medis tingkat tertinggi yang mereplikasi teknologi pengobatan canggih dari peradaban kuno. Memiliki kapasitas perlindungan yang jauh melampaui klinik biasa. Dengan menugaskan Pal yang terampil dalam bidang farmasi, tingkat sanitasi tertinggi dapat dipertahankan bahkan di fasilitas dengan beban kerja yang berat."
+  },
+  "Ancient_DiagonalWall": {
+    "localized_name": "Dinding Diagonal Kuno",
+    "description": "Dinding diagonal yang dibangun di atas fondasi segitiga untuk mencegah penyusup. Meniru gaya arsitektur peradaban kuno."
+  },
+  "Ancient_DoorWall": {
+    "localized_name": "Dinding Berpintu Kuno",
+    "description": "Pintu yang dibangun di atas fondasi dan berfungsi sebagai pintu masuk. Rekonstruksi gaya arsitektur peradaban kuno."
+  },
+  "Ancient_Fence": {
+    "localized_name": "Pagar Kuno",
+    "description": "Pagar yang dibangun di atas fondasi atau atap untuk mencegah sesuatu terjatuh. Rekonstruksi gaya arsitektur peradaban kuno."
+  },
+  "Ancient_MedicalPalBed": {
+    "localized_name": "Pal Bed Kuno",
+    "description": "Tempat Tidur Pal kelas atas yang dibuat dari pod penyembuh peradaban kuno yang dilapisi kain lembut. Dibandingkan seluruh Tempat Tidur Pal lainnya, alat ini memiliki pemulihan SAN yang paling tinggi dan dapat menghilangkan kelelahan dengan cepat. Ukurannya sama dengan Tempat Tidur Pal Besar, sehingga Pal berukuran besar pun dapat beristirahat dengan nyaman."
+  },
+  "Ancient_Pillars": {
+    "localized_name": "Pilar Kuno",
+    "description": "Tiang-tiang penyangga bangunan. Rekonstruksi gaya arsitektur peradaban kuno."
+  },
+  "Ancient_PyramidRoof": {
+    "localized_name": "Atap Piramida Kuno",
+    "description": "Atap kerucut yang dibangun di atas dinding untuk perlindungan dari hujan dan angin. Rekonstruksi gaya arsitektur peradaban kuno."
+  },
+  "Ancient_SlantedRoof": {
+    "localized_name": "Atap Miring Kuno",
+    "description": "Atap miring yang dibangun di atas dinding untuk perlindungan dari hujan dan angin. Rekonstruksi gaya arsitektur peradaban kuno."
+  },
+  "Ancient_SlopedRoofCorner": {
+    "localized_name": "Atap Miring Segitiga Kuno",
+    "description": "Atap miring segitiga yang dibangun di atas dinding diagonal untuk perlindungan dari hujan dan angin. Rekonstruksi gaya arsitektur peradaban kuno."
+  },
+  "Ancient_SlopedRoofCornerReverse": {
+    "localized_name": "Atap Segitiga Miring Bergaya Kuno (terbalik)",
+    "description": "Atap segitiga miring (terbalik) yang dibangun di atas dinding diagonal untuk melindungi dari angin dan hujan. Bentuknya meniru gaya arsitektur peradaban kuno."
+  },
+  "Ancient_Spa": {
+    "localized_name": "Pemandian Air Panas Peradaban Kuno",
+    "description": "Pemandian Air Panas berteknologi kuno yang berisi air khusus yang tercampur dengan komponen Paldium. Memiliki tingkat pemulihan SAN tertinggi di antara seluruh Pemandian Air Panas, sekaligus memulihkan kekuatan fisik. Ukurannya sama dengan Pemandian Air Panas biasa, dan mampu menyembuhkan Pal yang terluka hingga ke kondisi maksimal."
+  },
+  "Ancient_TriangleFoundation": {
+    "localized_name": "Fondasi Segitiga Kuno",
+    "description": "Fondasi berbentuk segitiga untuk membangun dinding atau struktur di atasnya. Bentuknya meniru gaya arsitektur peradaban kuno."
+  },
+  "Ancient_TriangleRoof": {
+    "localized_name": "Dinding Segitiga Kuno",
+    "description": "Fondasi berbentuk segitiga untuk membangun dinding atau struktur di atasnya. Bentuknya meniru gaya arsitektur peradaban kuno."
+  },
+  "Ancient_TriangleStairsCorner": {
+    "localized_name": "Atap Sudut Kuno",
+    "description": "Atap sudut yang dibangun di atas dinding untuk perlindungan dari hujan dan angin. Rekonstruksi gaya arsitektur peradaban kuno."
+  },
+  "Ancient_TriangleWall": {
+    "localized_name": "Dinding Segitiga Kuno",
+    "description": "Dinding segitiga yang dibangun di atas fondasi. Rekonstruksi gaya arsitektur peradaban kuno."
+  },
+  "Ancient_TriangleWallReverse": {
+    "localized_name": "Dinding Segitiga Kuno (Terbalik)",
+    "description": "Dinding segitiga (terbalik) yang dibangun di atas fondasi. Rekonstruksi gaya arsitektur peradaban kuno."
+  },
+  "Ancient_WallGate": {
+    "localized_name": "Pintu Masuk Jalur Pal Kuno",
+    "description": "Pintu masuk lorong untuk Pal yang dibangun di atas fondasi. Rekonstruksi gaya arsitektur peradaban kuno."
+  },
+  "Ancient_WindowWall": {
+    "localized_name": "Dinding Berjendela Kuno",
+    "description": "Dinding dengan jendela yang dibangun di atas fondasi untuk mencegah penyusup. Rekonstruksi gaya arsitektur peradaban kuno."
+  },
+  "Ancient_foundation": {
+    "localized_name": "Fondasi Kuno",
+    "description": "Fondasi untuk membangun dinding atau struktur lain di atasnya. Rekonstruksi gaya arsitektur peradaban kuno."
+  },
+  "Ancient_roof": {
+    "localized_name": "Atap Kuno",
+    "description": "Atap yang dibangun di atas dinding untuk melindungi dari hujan dan angin. Rekonstruksi gaya arsitektur peradaban kuno."
+  },
+  "Ancient_stair": {
+    "localized_name": "Tangga Kuno",
+    "description": "Tangga yang ditempatkan di bawah fondasi atau atap untuk memungkinkan akses. Rekonstruksi gaya arsitektur peradaban kuno."
+  },
+  "Ancient_wall": {
+    "localized_name": "Dinding Kuno",
+    "description": "Dinding yang dibangun di atas fondasi untuk mencegah penyusup. Rekonstruksi gaya arsitektur peradaban kuno."
+  },
   "Andon": {
     "localized_name": "Lentera Kertas Jepang",
     "description": "Lentera kertas Jepang untuk dekorasi. Gunakan saat membuat bangunan bergaya Jepang."
+  },
+  "ArcadeVideoGame": {
+    "localized_name": "Mesin Permainan Arkade",
+    "description": "Hiasan mesin permainan arkade. Rusak dan tidak dapat dimainkan."
+  },
+  "Banyan_Big": {
+    "localized_name": "Banyan_Big",
+    "description": null
   },
   "Barrel01_Iron": {
     "localized_name": "Drum Merah",
@@ -34,6 +162,14 @@
   "BaseCampWorkHard": {
     "localized_name": "Pos Pengamatan",
     "description": "Dapat memberikan instruksi kerja atau memberi izin/larangan untuk setiap pekerjaan individual pada Pal yang ada di markas."
+  },
+  "BaseCampWorkHard02": {
+    "localized_name": "Pos Pengamatan Berkualitas Tinggi",
+    "description": "Pos pengamatan dengan material dan struktur yang diperbarui sehingga menjadi lebih modern dan kokoh. Selain tetap bisa memberikan perintah kerja seperti biasa, bangunan ini juga membuat SAN Pal di dalam markas berkurang lebih lambat. Lingkungan kerja jadi sedikit lebih baik, sehingga para Pal tidak mudah merasa tidak puas."
+  },
+  "BaseCampWorkHard03": {
+    "localized_name": "Pos Pemantau Kuno",
+    "description": "Menara pengawas berteknologi kuno yang tertanam dengan Paldium Merah. Melalui antarmuka hologram, alat ini memberikan instruksi ke seluruh markas sekaligus menekan penurunan nilai SAN Pal. Gelombang khusus yang menyelimuti markas akan menjaga pikiran Pal tetap tenang meskipun dalam lingkungan kerja yang keras."
   },
   "BaseCampWorkerExtraStation": {
     "localized_name": "Terminal Operasi Palbox",
@@ -81,7 +217,7 @@
   },
   "Box01_Stone": {
     "localized_name": "Tempah Sampah Anyaman Antik",
-    "description": "Tempah sampah anyaman yang antik untuk dekorasi."
+    "description": "Kotak keranjang anyaman antik untuk dekorasi."
   },
   "Box02_Iron": {
     "localized_name": "Kontainer dengan Penutup Kain",
@@ -151,6 +287,10 @@
     "localized_name": "Tabung Ekstraktor Pal",
     "description": "Fasilitas untuk menaikkan peringkat Pal. Pal dapat melampaui batas kemampuan fisiknya dengan memberikannya ekstrak dari Pal sejenis."
   },
+  "Clinic": {
+    "localized_name": "Klinik",
+    "description": "Fasilitas medis dasar untuk mengelola kesehatan para Pal di pangkalan. Dengan menempatkan Pal yang ahli dalam bidang farmasi, penurunan SAN dapat ditekan dan risiko penyakit serta cedera dapat dikurangi. Meskipun ada batas maksimal pada tingkat sanitasi yang bisa dijaga, fasilitas ini merupakan kunci pengelolaan kebersihan di pada tahap awal operasi pangkalan."
+  },
   "Clock01_Stone": {
     "localized_name": "Lemari Jam Antik",
     "description": "Lemari jam antik untuk dekorasi. Rusak, tidak bisa menunjukkan waktu."
@@ -209,7 +349,7 @@
   },
   "Crusher": {
     "localized_name": "Mesin Penghancur",
-    "description": "Fasilitas untuk menghancurkan Batu dan Kayu lalu mengubahnya menjadi material lain. Membutuhkan Pal yang memiliki keahlian |Penyiraman| untuk menggerakkan kincir air."
+    "description": "Fasilitas untuk menghancurkan Batu dan Kayu lalu mengubahnya menjadi material lain. Membutuhkan Pal yang memiliki keahlian \"Penyiraman\" untuk menggerakkan kincir air."
   },
   "CrystalPit": {
     "localized_name": "Lokasi Tambang Kuarsa Hexo",
@@ -223,21 +363,37 @@
     "localized_name": "Boneka Latihan",
     "description": "Boneka untuk latihan yang berbentuk Pengullet. Hanya bisa diletakkan di tempat yang luas."
   },
+  "DamagedScarecrow_Test": {
+    "localized_name": "DamagedScarecrow_Test",
+    "description": null
+  },
+  "DarkIsland_Banner": {
+    "localized_name": "Spanduk Vertikal Penduduk Langit Jatuh",
+    "description": "Spanduk Vertikal Penduduk Langit Jatuh Untuk Dekorasi."
+  },
+  "DarkIsland_Flag": {
+    "localized_name": "Bendera Kelompok Penduduk Langit Jatuh",
+    "description": "Bendera Kelompok Penduduk Langit Jatuh Untuk Dekorasi."
+  },
   "Decal_PalSticker_PinkCat": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Tuppanyan sticker",
+    "description": null
   },
   "DefenseBowGun": {
     "localized_name": "Busur Silang Statis",
-    "description": "Fasilitas pertahanan untuk menempatkan Pal agar siap bertarung. Perlu Anak Panah untuk menggunakannya. Masukkan peluru ke peti supaya Pal yang ditempatkan memuat peluru secara otomatis."
+    "description": "Fasilitas pertahanan yang digunakan untuk menempatkan Pal agar bersiap menghadapi pertempuran. Jika menempatkan Pal dengan kemampuan \"Pekerjaan Tangan\", mereka akan terus mempertahankan markas dengan menggunakan panah otomatis."
   },
   "DefenseMachinegun": {
     "localized_name": "Senapan Mesin Statis",
-    "description": "Fasilitas pertahanan untuk menempatkan Pal agar siap bertarung. Perlu Peluru Senapan untuk menggunakannya. Masukkan peluru ke peti supaya Pal yang ditempatkan memuat peluru secara otomatis."
+    "description": "Fasilitas pertahanan yang digunakan untuk menempatkan Pal agar bersiap menghadapi pertempuran. Jika menempatkan Pal dengan kemampuan \"Pekerjaan Tangan\", mereka akan terus mempertahankan markas dengan menggunakan senapan mesin."
+  },
+  "DefenseMachinegun_AutoTurret": {
+    "localized_name": "Turret Kuno",
+    "description": "Menara tanpa awak dari peradaban kuno dengan ukuran dan daya tembak setara peluncur roket. Tidak memerlukan amunisi maupun peluncuran proyektil oleh Pal, dijalankan sepenuhnya otomatis hanya dengan tenaga listrik. Meskipun sangat kuat, pengoperasiannya membutuhkan daya listrik yang sangat besar."
   },
   "DefenseMissile": {
     "localized_name": "Peluncur Rudal Statis",
-    "description": "Fasilitas pertahanan untuk menempatkan Pal agar siap bertarung. Perlu Bom Roket untuk menggunakannya. Masukkan peluru ke peti supaya Pal yang ditempatkan memuat peluru secara otomatis."
+    "description": "Fasilitas pertahanan yang digunakan untuk menempatkan Pal agar bersiap menghadapi pertempuran. Jika menempatkan Pal dengan kemampuan \"Pekerjaan Tangan\", mereka akan terus mempertahankan markas dengan menggunakan peluncur rudal."
   },
   "DefenseWait": {
     "localized_name": "Karung Pasir",
@@ -325,7 +481,7 @@
   },
   "Factory_Money": {
     "localized_name": "Pabrik Pembuatan Uang",
-    "description": "Pabrik untuk memproduksi Uang. Akibat beban mental, SAN para pekerjanya akan berkurang. Membutuhkan Pal yang bisa melakukan kerajinan tangan."
+    "description": "Sebuah pabrik yang memproduksiUang. Pekerjaannya sangat melelahkan secara mental, menyebabkan para pekerja mengalami penurunan poin SAN. Dibutuhkan seorang Pal yang mampu melakukan pekerjaan manual. Waspadalah, pembangunan pabrik ini dapat menyebabkan tindakan keras dari sekelompok vigilante."
   },
   "FarmBlockV2_Berries": {
     "localized_name": "Ladang Beri",
@@ -385,7 +541,7 @@
   },
   "FlourMill": {
     "localized_name": "Penggiling Tepung",
-    "description": "Fasilitas untuk menggiling Gandum untuk membuat Tepung Gandum. Membutuhkan Pal yang memiliki keahlian |Penyiraman| untuk menggerakkan kincir air."
+    "description": "Fasilitas untuk menggiling Gandum untuk membuat Tepung Gandum. Membutuhkan Pal yang memiliki keahlian \"Penyiraman\" untuk menggerakkan kincir air."
   },
   "FlowerBed": {
     "localized_name": "Petak Bunga",
@@ -398,6 +554,130 @@
   "Fudukue": {
     "localized_name": "Meja Tulis Jepang",
     "description": "Meja tulis Jepang untuk dekorasi. Gunakan saat membuat bangunan bergaya Jepang."
+  },
+  "FurnitureBush01_Flower": {
+    "localized_name": "Model Semak Bertabur Bunga A",
+    "description": "Hiasan model semak bertabur bunga. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureBush01_Green": {
+    "localized_name": "Model Semak",
+    "description": "Hiasan model semak. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureBush01_Snow": {
+    "localized_name": "Model Semak Putih",
+    "description": "Hiasan model semak putih. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureBush01_Tropical": {
+    "localized_name": "Model Semak Tropis",
+    "description": "Hiasan model semak tropis. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureBush01_Yellow": {
+    "localized_name": "Model Semak Berdaun Kuning",
+    "description": "Hiasan model semak berdaun kuning. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureBush02_Flower": {
+    "localized_name": "Model Semak Bertabur Bunga B",
+    "description": "Hiasan model semak bertabur bunga. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureStone01": {
+    "localized_name": "Model Batu",
+    "description": "Hiasan model batu. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureTree01_Bamboo": {
+    "localized_name": "Model Bambu A",
+    "description": "Hiasan model dari bambu. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureTree01_Cherry": {
+    "localized_name": "Model Sakura A",
+    "description": "Hiasan model pohon sakura. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureTree01_Desert": {
+    "localized_name": "Model Pohon Gurun Pasir A",
+    "description": "Hiasan model pohon gurun pasir. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureTree01_Green": {
+    "localized_name": "Model Pohon A",
+    "description": "Hiasan model pohon. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureTree01_Red": {
+    "localized_name": "Model Pohon Maple A",
+    "description": "Hiasan model pohon maple. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureTree01_Snow": {
+    "localized_name": "Model Pohon Berselimut Salju A",
+    "description": "Hiasan model pohon berselimutkan salju. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureTree01_Tropical": {
+    "localized_name": "Model Pohon Tropis A",
+    "description": "Hiasan model pohon tropis. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureTree01_Yellow": {
+    "localized_name": "Model Pohon Berdaun Kuning A",
+    "description": "Hiasan model pohon berdaun kuning. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureTree02_Bamboo": {
+    "localized_name": "Model Bambu B",
+    "description": "Hiasan model dari bambu. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureTree02_Cherry": {
+    "localized_name": "Model Sakura B",
+    "description": "Hiasan model pohon sakura. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureTree02_Desert": {
+    "localized_name": "Model Pohon Gurun Pasir B",
+    "description": "Hiasan model pohon gurun pasir. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureTree02_Green": {
+    "localized_name": "Model Pohon B",
+    "description": "Hiasan model pohon. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureTree02_Red": {
+    "localized_name": "Model Pohon Maple B",
+    "description": "Hiasan model pohon maple. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureTree02_Snow": {
+    "localized_name": "Model Pohon Berselimut Salju B",
+    "description": "Hiasan model pohon berselimutkan salju. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureTree02_Tropical": {
+    "localized_name": "Model Pohon Tropis B",
+    "description": "Hiasan model pohon tropis. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureTree02_Yellow": {
+    "localized_name": "Model Pohon Berdaun Kuning B",
+    "description": "Hiasan model pohon berdaun kuning. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureTree03_Bamboo": {
+    "localized_name": "Model Bambu C",
+    "description": "Hiasan model dari bambu. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureTree03_Cherry": {
+    "localized_name": "Model Sakura C",
+    "description": "Hiasan model pohon sakura. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureTree03_Desert": {
+    "localized_name": "Model Pohon Gurun Pasir C",
+    "description": "Hiasan model pohon gurun pasir. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureTree03_Green": {
+    "localized_name": "Model Pohon C",
+    "description": "Hiasan model pohon. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureTree03_Red": {
+    "localized_name": "Model Pohon Maple C",
+    "description": "Hiasan model pohon maple. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureTree03_Snow": {
+    "localized_name": "Model Pohon Berselimut Salju C",
+    "description": "Hiasan model pohon berselimutkan salju. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureTree03_Tropical": {
+    "localized_name": "Model Pohon Tropis C",
+    "description": "Hiasan model pohon tropis. Tidak ada material yang bisa didapatkan dari struktur ini."
+  },
+  "FurnitureTree03_Yellow": {
+    "localized_name": "Model Pohon Berdaun Kuning C",
+    "description": "Hiasan model pohon berdaun kuning. Tidak ada material yang bisa didapatkan dari struktur ini."
   },
   "GarbageBag_Iron": {
     "localized_name": "Kantong Sampah",
@@ -425,7 +705,11 @@
   },
   "Glass_SlopedRoofCorner": {
     "localized_name": "Atap Kaca Segitiga Miring",
-    "description": "Atap sudut miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari kaca solid sehingga sangat kokoh."
+    "description": "Atap segitiga miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari kaca solid sehingga sangat kokoh."
+  },
+  "Glass_SlopedRoofCornerReverse": {
+    "localized_name": "Atap Kaca Segitiga Miring (terbalik)",
+    "description": "Atap segitiga miring (terbalik) yang dibangun di atas dinding diagonal untuk melindungi dari angin dan hujan. Terbuat dari kaca solid sehingga sangat kokoh."
   },
   "Glass_TriangleFoundation": {
     "localized_name": "Fondasi Kaca Segitiga",
@@ -459,6 +743,10 @@
     "localized_name": "Fondasi Kaca",
     "description": "Fondasi untuk membangun tembok atau fasilitas di atasnya. Terbuat dari kaca solid sehingga sangat kokoh."
   },
+  "Glass_pillars": {
+    "localized_name": "Pilar Kaca",
+    "description": "Pilar untuk menopang bangunan. Terbuat dari kaca solid sehingga sangat kokoh."
+  },
   "Glass_roof": {
     "localized_name": "Atap Kaca",
     "description": "Atap yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari kaca solid sehingga sangat kokoh."
@@ -481,7 +769,7 @@
   },
   "GoalSoccer_Iron": {
     "localized_name": "Gawang Sepak Bola",
-    "description": "Gawang sepak bola untuk dekorasi. Memasukkan SheepBall ke dalamnya tidak akan memberimu poin."
+    "description": "Gawang sepak bola untuk dekorasi. Memasukkan Lamball ke dalamnya tidak akan memberimu poin."
   },
   "GuardianDogStatue": {
     "localized_name": "Patung Yakumo",
@@ -521,7 +809,11 @@
   },
   "IceCrusher": {
     "localized_name": "Mesin Penghancur Berpendingin",
-    "description": "Fasilitas untuk menghancurkan Bijih Logam lalu mengubahnya menjadi material lain. Untuk menggerakkannya membutuhkan sumber daya listrik dan Pal yang memiliki keahlian |Pendinginan|, tetapi ini sangat efektif."
+    "description": "Fasilitas untuk menghancurkan Bijih Logam lalu mengubahnya menjadi material lain. Untuk menggerakkannya membutuhkan sumber daya listrik dan Pal yang memiliki keahlian \"Pendinginan\", tetapi ini sangat efektif."
+  },
+  "IceHorseStatue": {
+    "localized_name": "Patung Frostallion",
+    "description": "Hiasan patung Frostallion."
   },
   "Iron_DiagonalWall": {
     "localized_name": "Tembok Logam Diagonal",
@@ -537,7 +829,11 @@
   },
   "Iron_SlopedRoofCorner": {
     "localized_name": "Atap Logam Segitiga Miring",
-    "description": "Atap sudut miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari logam sehingga sangat kokoh."
+    "description": "Atap segitiga miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari logam sehingga sangat kokoh."
+  },
+  "Iron_SlopedRoofCornerReverse": {
+    "localized_name": "Atap Logam Segitiga Miring (terbalik)",
+    "description": "Atap segitiga miring (terbalik) yang dibangun di atas dinding diagonal untuk melindungi dari angin dan hujan. Terbuat dari logam sehingga sangat kokoh."
   },
   "Iron_TriangleFoundation": {
     "localized_name": "Fondasi Logam Segitiga",
@@ -628,8 +924,12 @@
     "description": "Atap miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Bisa untuk membuat bangunan trendi bergaya Jepang."
   },
   "JapaneseStyle_SlopedRoofCorner": {
-    "localized_name": "Atap Segitiga Miring Bergaya Jepang",
-    "description": "Atap sudut miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Bisa untuk membuat bangunan trendi bergaya Jepang."
+    "localized_name": "Atap Segitiga Miring Gaya Jepang",
+    "description": "Atap segitiga miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Bisa untuk membuat bangunan trendi bergaya Jepang."
+  },
+  "JapaneseStyle_SlopedRoofCornerReverse": {
+    "localized_name": "Atap Segitiga Miring Bergaya Jepang (terbalik)",
+    "description": "Atap segitiga miring (terbalik) yang dibangun di atas dinding diagonal untuk melindungi dari angin dan hujan. Bisa untuk membuat bangunan trendi bergaya Jepang."
   },
   "JapaneseStyle_TriangleFoundation": {
     "localized_name": "Fondasi Segitiga Bergaya Jepang",
@@ -682,6 +982,10 @@
   "JapaneseStyle_wall_01": {
     "localized_name": "Tembok Bergaya Jepang",
     "description": "Tembok yang dibangun di atas fondasi untuk mencegah penyusup masuk. Bisa untuk membuat bangunan trendi bergaya Jepang."
+  },
+  "JetDragonStatue": {
+    "localized_name": "Patung Jetragon",
+    "description": "Hiasan patung Jetragon."
   },
   "Kakejiku": {
     "localized_name": "Lukisan Gantung Jepang",
@@ -819,6 +1123,10 @@
     "localized_name": "Fondasi Logam",
     "description": "Fondasi untuk membangun tembok atau fasilitas di atasnya. Terbuat dari logam sehingga sangat kokoh."
   },
+  "Metal_pillars": {
+    "localized_name": "Pilar Logam",
+    "description": "Pilar untuk menopang bangunan. Terbuat dari logam sehingga sangat kokoh."
+  },
   "Metal_roof": {
     "localized_name": "Atap Logam",
     "description": "Atap yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari logam sehingga sangat kokoh."
@@ -855,6 +1163,10 @@
     "localized_name": "Inkubator Elektrik Besar",
     "description": "Alat untuk mengerami telur Pal. Membutuhkan sumber daya listrik, tetapi ini dapat menjaga suhu yang sesuai dan mengerami beberapa telur sekaligus."
   },
+  "MultiElectricHatchingPalEggWithBreed": {
+    "localized_name": "Alat Pembiakan Kuno",
+    "description": "Fasilitas pembiakan canggih dari peradaban kuno yang dilapisi kaca elektronik. Menangani seluruh proses, mulai dari produksi telur hingga penetasan secara otomatis dan cepat, serta meningkatkan tingkat pewarisan keahlian langka. Karena dikelola dengan kontrol hologram oleh Pal, fasilitas ini tidak memerlukan lahan peternakan yang luas."
+  },
   "MultiHatchingPalEgg": {
     "localized_name": "Inkubator Besar",
     "description": "Alat untuk menetaskan telur Pal. Alat ini menjaga suhu yang sesuai secara otomatis, dan dapat menetaskan beberapa telur sekaligus."
@@ -870,6 +1182,10 @@
   "OilPump": {
     "localized_name": "Ekstraktor Minyak Mentah",
     "description": "Alat yang diperlukan untuk mengekstrak Minyak Mentah dari ladang minyak. Untuk menggerakkannya butuh sumber daya listrik yang besar."
+  },
+  "OilPump02": {
+    "localized_name": "Ekstraktor Minyak Mentah - Tipe Tekanan Tinggi",
+    "description": "Mesin yang memompa dan mengekstraksi Minyak Mentah dari bawah tanah. Dapat menghasilkan Minyak Mentah meski tidak berada di ladang minyak, tapi hanya bisa digunakan pada tanah yang tidak memiliki bangunan. Membutuhkan listrik yang lebih besar dari Ekstraktor Minyak Mentah."
   },
   "OlympicCauldron": {
     "localized_name": "Kuali Api",
@@ -976,8 +1292,8 @@
     "description": "Karpet panjang yang antik untuk dekorasi."
   },
   "Rug_Wood": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Fur rug",
+    "description": null
   },
   "SF_Chair": {
     "localized_name": "Kursi Laboratorium",
@@ -1008,8 +1324,12 @@
     "description": "Atap miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Bisa untuk membuat arsitektur yang bersih dan futuristik."
   },
   "SF_SlopedRoofCorner": {
-    "localized_name": "Atap Sudut Miring Bersih",
-    "description": "Atap sudut miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Bisa untuk membuat arsitektur yang bersih dan futuristik."
+    "localized_name": "Atap Segitiga Miring Rapi",
+    "description": "Atap segitiga miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Bisa untuk membuat arsitektur yang rapi dan futuristik."
+  },
+  "SF_SlopedRoofCornerReverse": {
+    "localized_name": "Atap Segitiga Miring Bersih (terbalik)",
+    "description": "Atap segitiga miring (terbalik) yang dibangun di atas dinding diagonal untuk melindungi dari angin dan hujan. Bisa untuk membuat arsitektur yang bersih dan futuristik."
   },
   "SF_TriangleFoundation": {
     "localized_name": "Fondasi Segitiga Bersih",
@@ -1042,6 +1362,10 @@
   "SF_foundation": {
     "localized_name": "Fondasi Bersih",
     "description": "Fondasi untuk membangun tembok atau fasilitas di atasnya. Bisa untuk membuat arsitektur yang bersih dan futuristik."
+  },
+  "SF_pillars": {
+    "localized_name": "Pilar Bersih",
+    "description": "Pilar untuk menyangga bangunan. Bisa untuk membuat arsitektur yang bersih dan futuristik."
   },
   "SF_roof": {
     "localized_name": "Atap Bersih",
@@ -1167,13 +1491,25 @@
     "localized_name": "Fasilitas Kustomisasi Pal",
     "description": "Fasilitas untuk mengganti Skin. Fasilitas di mana kamu bisa mengubah penampilan khusus Pal. Skin yang didapat dari luar game juga dapat digunakan."
   },
+  "SkyIslandOrePit": {
+    "localized_name": "Tambang Solite",
+    "description": "Fasilitas untuk memproduksiSolite. Pekerjaan menggali Solitesangatlah berat dan membutuhkan kekuatan fisik. Serahkan saja tugas ini pada Pal yang ahli dalam menambang."
+  },
+  "SkyIsland_Banner": {
+    "localized_name": "Spanduk Vertikal Perjanjian Langit Biru",
+    "description": "Spanduk Vertikal Perjanjian Langit Biru Untuk Dekorasi."
+  },
+  "SkyIsland_Flag": {
+    "localized_name": "Bendera Kelompok Perjanjian Langit Biru",
+    "description": "Bendera Kelompok Perjanjian Langit Biru Untuk Dekorasi."
+  },
   "Snowman": {
     "localized_name": "Boneka Salju",
     "description": "Jika diletakkan di markas, akan meningkatkan kecepatan pendinginan. Meletakkan 2 buah atau lebih tidak akan ada efeknya."
   },
   "Sofa01_Iron": {
     "localized_name": "Sofa Kulit untuk 1 orang",
-    "description": "Sofa kulit untuk 1 orang untuk dekorasi."
+    "description": "Sofa kulit dekorasi untuk 1 orang."
   },
   "Sofa01_Stone": {
     "localized_name": "Sofa Antik untuk 1 orang",
@@ -1181,7 +1517,7 @@
   },
   "Sofa02_Iron": {
     "localized_name": "Sofa Kulit untuk 2 orang",
-    "description": "Sofa kulit untuk 2 orang untuk dekorasi."
+    "description": "Sofa kulit dekorasi untuk 2 orang."
   },
   "Sofa02_Stone": {
     "localized_name": "Sofa Antik untuk 2 orang",
@@ -1223,6 +1559,10 @@
     "localized_name": "Lokasi Penebangan Kayu",
     "description": "Fasilitas untuk memproduksi Kayu. Menebang pohon adalah pekerjaan berat dan membutuhkan kekuatan fisik. Serahkan pada Pal yang ahli menebang kayu."
   },
+  "StationDeforest3": {
+    "localized_name": "Lokasi Penebangan Kayu Ⅱ",
+    "description": "Fasilitas untuk memproduksi Kayu Keras. Menebang pohon adalah pekerjaan berat dan membutuhkan kekuatan fisik. Serahkan pada Pal yang ahli menebang kayu."
+  },
   "StonePit": {
     "localized_name": "Tambang Batu",
     "description": "Fasilitas untuk memproduksi Batu. Menambang Batu adalah pekerjaan berat dan membutuhkan kekuatan fisik. Serahkan pada Pal yang ahli menambang."
@@ -1253,7 +1593,11 @@
   },
   "Stone_SlopedRoofCorner": {
     "localized_name": "Atap Batu Segitiga Miring",
-    "description": "Atap sudut miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari batu sehingga cukup kokoh."
+    "description": "Atap segitiga miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari batu sehingga cukup kokoh."
+  },
+  "Stone_SlopedRoofCornerReverse": {
+    "localized_name": "Atap Batu Segitiga Miring (terbalik)",
+    "description": "Atap segitiga miring (terbalik) yang dibangun di atas dinding diagonal untuk melindungi dari angin dan hujan. Terbuat dari batu sehingga cukup kokoh."
   },
   "Stone_TriangleFoundation": {
     "localized_name": "Fondasi Batu Segitiga",
@@ -1286,6 +1630,10 @@
   "Stone_foundation": {
     "localized_name": "Fondasi Batu",
     "description": "Fondasi untuk membangun tembok atau fasilitas di atasnya. Terbuat dari batu sehingga cukup kokoh."
+  },
+  "Stone_pillar": {
+    "localized_name": "Pilar Batu",
+    "description": "Pilar untuk menopang bangunan. Terbuat dari batu sehingga cukup kokoh."
   },
   "Stone_roof": {
     "localized_name": "Atap Batu",
@@ -1339,6 +1687,10 @@
     "localized_name": "Meja Bundar",
     "description": "Meja bundar untuk dekorasi."
   },
+  "TableCircular_Wood_None": {
+    "localized_name": "Meja Bulat Sempurna",
+    "description": "Meja hias bulat sempurna."
+  },
   "TableDresser01_Stone": {
     "localized_name": "Meja Rias Antik",
     "description": "Meja rias untuk memperbaiki penampilan. Dapat mengubah penampilan karaktermu."
@@ -1362,6 +1714,10 @@
   "TableSquare_Wood": {
     "localized_name": "Meja Persegi",
     "description": "Meja persegi untuk dekorasi."
+  },
+  "TableSquare_Wood_None": {
+    "localized_name": "Meja Persegi Sempurna",
+    "description": "Meja hias persegi sempurna."
   },
   "Tansu": {
     "localized_name": "Lemari Jepang",
@@ -1476,8 +1832,8 @@
     "description": "Perangkap yang akan membekukan Pal yang menginjaknya. Pal yang membeku akan meningkatkan peluang keberhasilan Bola."
   },
   "Trap_MovingPanel": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Moving Panels",
+    "description": "A description of the moving panel"
   },
   "Trap_Noose": {
     "localized_name": "Perangkap Gantung",
@@ -1557,7 +1913,11 @@
   },
   "Wooden_SlopedRoofCorner": {
     "localized_name": "Atap Kayu Segitiga Miring",
-    "description": "Atap sudut miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari kayu sehingga sangat rapuh."
+    "description": "Atap segitiga miring yang dibangun di atas tembok untuk melindungi dari angin dan hujan. Terbuat dari kayu sehingga sangat rapuh."
+  },
+  "Wooden_SlopedRoofCornerReverse": {
+    "localized_name": "Atap Kayu Segitiga Miring (terbalik)",
+    "description": "Atap segitiga miring (terbalik) yang dibangun di atas dinding diagonal untuk melindungi dari angin dan hujan. Terbuat dari kayu sehingga rapuh."
   },
   "Wooden_TriangleFoundation": {
     "localized_name": "Fondasi Kayu Segitiga",
@@ -1582,6 +1942,10 @@
   "Wooden_ladder": {
     "localized_name": "Tangga",
     "description": "Tangga yang bisa kamu gunakan untuk naik ke tempat yang sedikit lebih tinggi."
+  },
+  "Wooden_pillar": {
+    "localized_name": "Pilar Kayu",
+    "description": "Pilar untuk menopang bangunan. Terbuat dari kayu sehingga sangat rapuh."
   },
   "Wooden_roof": {
     "localized_name": "Atap Kayu",
@@ -1618,5 +1982,13 @@
   "Zaisu": {
     "localized_name": "Kursi Lantai Jepang",
     "description": "Kursi lantai Jepang untuk dekorasi. Gunakan saat membuat bangunan bergaya Jepang."
+  },
+  "JapaneseStyle_TriangleStairsCorner_02": {
+    "localized_name": "JapaneseStyle_TriangleStairsCorner_02",
+    "description": null
+  },
+  "WoodCreator": {
+    "localized_name": "WoodCreator",
+    "description": null
   }
 }

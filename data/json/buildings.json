@@ -801,6 +801,7 @@
     "hp": 2000,
     "defense": 2,
     "deterioration_damage": 0.08,
+    "icon": "t_icon_buildobject_banyan_big",
     "disabled": true
   },
   "Barrel01_Iron": {
@@ -2305,6 +2306,7 @@
     "hp": 1000000,
     "defense": 100,
     "deterioration_damage": 0.0,
+    "icon": "t_icon_buildobject_damagedscarecrow_test",
     "disabled": true
   },
   "DarkIsland_Banner": {
@@ -2380,7 +2382,9 @@
     "material_sub_type": "EPalMapObjectMaterialSubType::None",
     "hp": 2000,
     "defense": 2,
-    "deterioration_damage": 0.08
+    "deterioration_damage": 0.08,
+    "icon": "t_icon_buildobject_decal_palsticker_pinkcat",
+    "disabled": true
   },
   "DefenseBowGun": {
     "type_a": "Defense",
@@ -2467,7 +2471,9 @@
     "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
     "hp": 10000,
     "defense": 3,
-    "deterioration_damage": 0.2
+    "deterioration_damage": 0.2,
+    "icon": "t_icon_buildobject_defensemachinegun_autoturret",
+    "disabled": true
   },
   "DefenseMissile": {
     "type_a": "Defense",
@@ -4666,13 +4672,12 @@
         "count": 2
       }
     ],
-    "material_type": "EPalMapObjectMaterialType::None",
-    "material_sub_type": "EPalMapObjectMaterialSubType::None",
-    "hp": 0,
-    "defense": 0,
-    "deterioration_damage": 0.0,
-    "icon": "t_icon_buildobject_glass_pillar",
-    "disabled": true
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_glass_pillar"
   },
   "Glass_roof": {
     "type_a": "Foundation",
@@ -6947,7 +6952,8 @@
     "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
     "hp": 2000,
     "defense": 4,
-    "deterioration_damage": 0.02
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_metal_foundation"
   },
   "Metal_pillars": {
     "type_a": "Foundation",
@@ -6966,13 +6972,12 @@
         "count": 2
       }
     ],
-    "material_type": "EPalMapObjectMaterialType::None",
-    "material_sub_type": "EPalMapObjectMaterialSubType::None",
-    "hp": 0,
-    "defense": 0,
-    "deterioration_damage": 0.0,
-    "icon": "t_icon_buildobject_metal_pillar",
-    "disabled": true
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_metal_pillar"
   },
   "Metal_roof": {
     "type_a": "Foundation",
@@ -6995,7 +7000,8 @@
     "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
     "hp": 2000,
     "defense": 4,
-    "deterioration_damage": 0.02
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_metal_roof"
   },
   "Metal_stair": {
     "type_a": "Foundation",
@@ -7018,7 +7024,8 @@
     "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
     "hp": 2000,
     "defense": 4,
-    "deterioration_damage": 0.02
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_metal_stair"
   },
   "Metal_wall": {
     "type_a": "Foundation",
@@ -8441,12 +8448,12 @@
         "count": 1
       }
     ],
-    "material_type": "EPalMapObjectMaterialType::None",
-    "material_sub_type": "EPalMapObjectMaterialSubType::None",
-    "hp": 0,
-    "defense": 0,
-    "deterioration_damage": 0.0,
-    "disabled": true
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Copper",
+    "hp": 2000,
+    "defense": 4,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_sf_pillars"
   },
   "SF_roof": {
     "type_a": "Foundation",
@@ -10089,7 +10096,8 @@
     "material_sub_type": "EPalMapObjectMaterialSubType::Stone",
     "hp": 1000,
     "defense": 3,
-    "deterioration_damage": 0.02
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_stone_foundation"
   },
   "Stone_pillar": {
     "type_a": "Foundation",
@@ -10104,13 +10112,12 @@
         "count": 3
       }
     ],
-    "material_type": "EPalMapObjectMaterialType::None",
-    "material_sub_type": "EPalMapObjectMaterialSubType::None",
-    "hp": 0,
-    "defense": 0,
-    "deterioration_damage": 0.0,
-    "icon": "t_icon_buildobject_stone_pillar",
-    "disabled": true
+    "material_type": "EPalMapObjectMaterialType::Stone",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Stone",
+    "hp": 1000,
+    "defense": 3,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_stone_pillar"
   },
   "Stone_roof": {
     "type_a": "Foundation",
@@ -10129,7 +10136,8 @@
     "material_sub_type": "EPalMapObjectMaterialSubType::Stone",
     "hp": 1000,
     "defense": 3,
-    "deterioration_damage": 0.02
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_stone_roof"
   },
   "Stone_stair": {
     "type_a": "Foundation",
@@ -10148,7 +10156,8 @@
     "material_sub_type": "EPalMapObjectMaterialSubType::Stone",
     "hp": 1000,
     "defense": 3,
-    "deterioration_damage": 0.02
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_stone_stair"
   },
   "Stone_wall": {
     "type_a": "Foundation",
@@ -11255,7 +11264,9 @@
     "material_sub_type": "EPalMapObjectMaterialSubType::None",
     "hp": 500,
     "defense": 1,
-    "deterioration_damage": 0.0
+    "deterioration_damage": 0.0,
+    "icon": "t_icon_buildobject_trap_movingpanel",
+    "disabled": true
   },
   "Trap_Noose": {
     "type_a": "Defense",
@@ -11874,13 +11885,12 @@
         "count": 2
       }
     ],
-    "material_type": "EPalMapObjectMaterialType::None",
-    "material_sub_type": "EPalMapObjectMaterialSubType::None",
-    "hp": 0,
-    "defense": 0,
-    "deterioration_damage": 0.0,
-    "icon": "t_icon_buildobject_wooden_pillar",
-    "disabled": true
+    "material_type": "EPalMapObjectMaterialType::Wood",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Wood",
+    "hp": 500,
+    "defense": 2,
+    "deterioration_damage": 0.02,
+    "icon": "t_icon_buildobject_wooden_pillar"
   },
   "Wooden_roof": {
     "type_a": "Foundation",
@@ -12089,5 +12099,51 @@
     "defense": 2,
     "deterioration_damage": 0.08,
     "icon": "t_icon_buildobject_zaisu"
+  },
+  "JapaneseStyle_TriangleStairsCorner_02": {
+    "type_a": "Foundation",
+    "type_b": "Found_Basic",
+    "rank": 1,
+    "required_build_work_amount": 0.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood_Fine",
+        "count": 4
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Wood",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Wood",
+    "hp": 500,
+    "defense": 4,
+    "deterioration_damage": 0.005,
+    "icon": "t_icon_buildobject_japanesestyle_trianglestairscorner",
+    "disabled": true
+  },
+  "WoodCreator": {
+    "type_a": "Other",
+    "type_b": "Other",
+    "rank": 1,
+    "required_build_work_amount": 1000.0,
+    "required_energy_type": "None",
+    "consume_energy_speed": 0.0,
+    "materials": [
+      {
+        "id": "Wood",
+        "count": 15
+      },
+      {
+        "id": "Stone",
+        "count": 5
+      }
+    ],
+    "material_type": "EPalMapObjectMaterialType::Wood",
+    "material_sub_type": "EPalMapObjectMaterialSubType::Wood",
+    "hp": 4000,
+    "defense": 6,
+    "deterioration_damage": 0.16,
+    "icon": "t_icon_buildobject_woodcreator",
+    "disabled": true
   }
 }

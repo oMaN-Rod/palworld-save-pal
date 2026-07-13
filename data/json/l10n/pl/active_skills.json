@@ -888,8 +888,8 @@
     "description": "Umiejętność wyłączna dla Lyleen. Dzięki uzdrawiającej mocy przywraca zdrowie wszystkim sojusznikom znajdującym się w pobliżu."
   },
   "EPalWazaID::Unique_LilyQueen_WindBarrier": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Wind Barrier",
+    "description": "A skill exclusive to the Lilikin species. Surround yourself with a wind barrier, Returns the blade of wind to the attacking opponent."
   },
   "EPalWazaID::Unique_LotusDragon_LotusBloom": {
     "localized_name": "Rozkwit lotosu",
@@ -1061,7 +1061,7 @@
   },
   "EPalWazaID::Unique_SheepBall_Roll": {
     "localized_name": "Turlaśny atak",
-    "description": "Umiejętność wyłączna dla SheepBall. Zwija się w kulkę, tocząc się po wrogach na swojej drodze. Po zakończeniu ataku kręci mu się w głowie i jest niezdolny do ruchu."
+    "description": "Umiejętność wyłączna dla Lamball. Zwija się w kulkę, tocząc się po wrogach na swojej drodze. Po zakończeniu ataku kręci mu się w głowie i jest niezdolny do ruchu."
   },
   "EPalWazaID::Unique_SifuDog_Counter": {
     "localized_name": "Postawa harmonii",
@@ -1177,11 +1177,11 @@
   },
   "EPalWazaID::Unique_Werewolf_Ice_SnowScratch": {
     "localized_name": "Śnieżny pazur",
-    "description": "Umiejętność wyłączna dla WereWolf_Ice. Skacze naprzód i zadaje dwa ciosy wściekłymi pazurami nasyconymi lodową energią."
+    "description": "Umiejętność wyłączna dla Loupmoon Cryst. Skacze naprzód i zadaje dwa ciosy wściekłymi pazurami nasyconymi lodową energią."
   },
   "EPalWazaID::Unique_Werewolf_Scratch": {
     "localized_name": "Skaczący pazur",
-    "description": "Umiejętność wyłączna dla WereWolf. Skacze naprzód i zadaje dwa ciosy wściekłymi pazurami nasyconymi mroczną energią."
+    "description": "Umiejętność wyłączna dla Loupmoon. Skacze naprzód i zadaje dwa ciosy wściekłymi pazurami nasyconymi mroczną energią."
   },
   "EPalWazaID::Unique_WhiteDeer_Dark_DarkPillar": {
     "localized_name": "Mroczna nowa",
@@ -1294,5 +1294,245 @@
   "EPalWazaID::WindEdge": {
     "localized_name": "Ostrze wiatru",
     "description": "Wystrzeliwuje podmuchy wiatru o kształcie ostrzy, które rozchodzą się jak wachlarz."
+  },
+  "EPalWazaID::BlueThunderHorse_PartnerSkill": {
+    "localized_name": "BlueThunderHorse_PartnerSkill",
+    "description": null
+  },
+  "EPalWazaID::CrossThunder": {
+    "localized_name": "Krzyżujące się błyskawice",
+    "description": "Wytwarza dwie błyskawice, które przemieszczają się w lewo i w prawo, blokując dostęp z obu stron."
+  },
+  "EPalWazaID::EnergyShot": {
+    "localized_name": "Ice Missile",
+    "description": null
+  },
+  "EPalWazaID::FlareTwister": {
+    "localized_name": "Flare Twister",
+    "description": "Creates multiple flame tornadoes. The tornado continues to spin in circles."
+  },
+  "EPalWazaID::Funnel_DreamDemon": {
+    "localized_name": "Funnel_DreamDemon",
+    "description": null
+  },
+  "EPalWazaID::Funnel_RaijinDaughter": {
+    "localized_name": "Funnel_RaijinDaughter",
+    "description": null
+  },
+  "EPalWazaID::Funnel_RaijinDaughter_Water": {
+    "localized_name": "Funnel_RaijinDaughter_Water",
+    "description": null
+  },
+  "EPalWazaID::GrassGolem_Dark_PartnerSkill": {
+    "localized_name": "GrassGolem_Dark_PartnerSkill",
+    "description": null
+  },
+  "EPalWazaID::GrassGolem_PartnerSkill": {
+    "localized_name": "GrassGolem_PartnerSkill",
+    "description": null
+  },
+  "EPalWazaID::HealingTree": {
+    "localized_name": "HealingTree",
+    "description": null
+  },
+  "EPalWazaID::Human_Rolling": {
+    "localized_name": "Human_Rolling",
+    "description": null
+  },
+  "EPalWazaID::Intimidate": {
+    "localized_name": "Intimidate",
+    "description": null
+  },
+  "EPalWazaID::PoseidonOrca_PartnerSkill": {
+    "localized_name": "PoseidonOrca_PartnerSkill",
+    "description": null
+  },
+  "EPalWazaID::PoseidonOrca_PartnerSkill_SpearBullet": {
+    "localized_name": "PoseidonOrca_PartnerSkill_SpearBullet",
+    "description": null
+  },
+  "EPalWazaID::Scratch": {
+    "localized_name": "Scratch",
+    "description": null
+  },
+  "EPalWazaID::SnowStorm": {
+    "localized_name": "SnowStorm",
+    "description": "Zbiera mroźne wiatry, zadając obrażenia pobliskim wrogom, po czym miota w nich zamieć."
+  },
+  "EPalWazaID::Throw": {
+    "localized_name": "Throw",
+    "description": null
+  },
+  "EPalWazaID::TidalWave": {
+    "localized_name": "TidalWave",
+    "description": "Wytwarza małe fale na szerokim obszarze, które spowalniają ruch wroga, po czym uderza go gigantyczną falą."
+  },
+  "EPalWazaID::Unique_BlueSkyDragon_GYM_Act": {
+    "localized_name": "Unique_BlueSkyDragon_GYM_Act",
+    "description": null
+  },
+  "EPalWazaID::Unique_CubeTurtle_CubePress": {
+    "localized_name": "Kamienne zmiażdżenie",
+    "description": "Umiejętność wyłączna dla: Tetroise. Wybija się wysoko w górę, by z impetem zmiażdżyć przeciwników swoją przytłaczającą masą."
+  },
+  "EPalWazaID::Unique_CubeTurtle_Neutral_HolyPress": {
+    "localized_name": "Święte przygniecenie",
+    "description": "Umiejętność wyłączna dla: Tetroise Primo. Wybija się wysoko w górę, by z impetem zmiażdżyć przeciwników swoją przytłaczającą masą. Po uderzeniu rozchodzi się blask, przywołujący dobijający słup światła."
+  },
+  "EPalWazaID::Unique_KingWhale_SuperTidalBore": {
+    "localized_name": "Unique_KingWhale_SuperTidalBore",
+    "description": null
+  },
+  "EPalWazaID::Unique_KingWhale_TidalBore": {
+    "localized_name": "Unique_KingWhale_TidalBore",
+    "description": null
+  },
+  "EPalWazaID::Unique_LegendDeer_BarrierRelease_Grass": {
+    "localized_name": "Unique_LegendDeer_BarrierRelease_Grass",
+    "description": null
+  },
+  "EPalWazaID::Unique_LegendDeer_BarrierRelease_Normal": {
+    "localized_name": "Unique_LegendDeer_BarrierRelease_Normal",
+    "description": null
+  },
+  "EPalWazaID::Unique_LegendDeer_BarrierRelease_Water": {
+    "localized_name": "Unique_LegendDeer_BarrierRelease_Water",
+    "description": null
+  },
+  "EPalWazaID::Unique_LegendDeer_RadiantPurge": {
+    "localized_name": "Unique_LegendDeer_RadiantPurge",
+    "description": null
+  },
+  "EPalWazaID::Unique_LilyQueen_GYM_Act": {
+    "localized_name": "Unique_LilyQueen_GYM_Act",
+    "description": null
+  },
+  "EPalWazaID::Unique_LilyQueen_LilyHealing_Boss": {
+    "localized_name": "Unique_LilyQueen_LilyHealing_Boss",
+    "description": null
+  },
+  "EPalWazaID::Unique_MoonQueen_GYM_Act": {
+    "localized_name": "Unique_MoonQueen_GYM_Act",
+    "description": null
+  },
+  "EPalWazaID::Unique_MoonQueen_GYM_Hard_Act": {
+    "localized_name": "Unique_MoonQueen_GYM_Hard_Act",
+    "description": null
+  },
+  "EPalWazaID::Unique_ThunderDragonMan_GYM_Act": {
+    "localized_name": "Unique_ThunderDragonMan_GYM_Act",
+    "description": null
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_BigBang": {
+    "localized_name": "Unique_WorldTreeDragon_BigBang",
+    "description": null
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_HaloBeam": {
+    "localized_name": "Unique_WorldTreeDragon_HaloBeam",
+    "description": null
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_HaloCutter": {
+    "localized_name": "Unique_WorldTreeDragon_HaloCutter",
+    "description": null
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_LaserGliding": {
+    "localized_name": "Unique_WorldTreeDragon_LaserGliding",
+    "description": null
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_PaldiumCannon": {
+    "localized_name": "Unique_WorldTreeDragon_PaldiumCannon",
+    "description": null
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_PaldiumExplosion": {
+    "localized_name": "Unique_WorldTreeDragon_PaldiumExplosion",
+    "description": null
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_PaldiumRain": {
+    "localized_name": "Unique_WorldTreeDragon_PaldiumRain",
+    "description": null
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_PaldiumShot": {
+    "localized_name": "Unique_WorldTreeDragon_PaldiumShot",
+    "description": null
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_Supernova": {
+    "localized_name": "Unique_WorldTreeDragon_Supernova",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Green_2_PhantasmalBolt": {
+    "localized_name": "Unique_YakushimaBoss001_Green_2_PhantasmalBolt",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Green_2_PhantasmalDeathray": {
+    "localized_name": "Unique_YakushimaBoss001_Green_2_PhantasmalDeathray",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Green_2_PhantasmalEye": {
+    "localized_name": "Unique_YakushimaBoss001_Green_2_PhantasmalEye",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Green_2_PhantasmalSphere": {
+    "localized_name": "Unique_YakushimaBoss001_Green_2_PhantasmalSphere",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Green_PhantasmalBolt": {
+    "localized_name": "Unique_YakushimaBoss001_Green_PhantasmalBolt",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Green_PhantasmalDeathray": {
+    "localized_name": "Unique_YakushimaBoss001_Green_PhantasmalDeathray",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Green_PhantasmalEye": {
+    "localized_name": "Unique_YakushimaBoss001_Green_PhantasmalEye",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Green_PhantasmalSphere": {
+    "localized_name": "Unique_YakushimaBoss001_Green_PhantasmalSphere",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss002_2_PhantasmalBolt": {
+    "localized_name": "Unique_YakushimaBoss002_2_PhantasmalBolt",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss002_2_PhantasmalDeathray": {
+    "localized_name": "Unique_YakushimaBoss002_2_PhantasmalDeathray",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss002_2_PhantasmalEye": {
+    "localized_name": "Unique_YakushimaBoss002_2_PhantasmalEye",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss002_2_PhantasmalSphere": {
+    "localized_name": "Unique_YakushimaBoss002_2_PhantasmalSphere",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss002_PhantasmalBolt": {
+    "localized_name": "Unique_YakushimaBoss002_PhantasmalBolt",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss002_PhantasmalDeathray": {
+    "localized_name": "Unique_YakushimaBoss002_PhantasmalDeathray",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss002_PhantasmalEye": {
+    "localized_name": "Unique_YakushimaBoss002_PhantasmalEye",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss002_PhantasmalSphere": {
+    "localized_name": "Unique_YakushimaBoss002_PhantasmalSphere",
+    "description": null
+  },
+  "EPalWazaID::WaterBalloon": {
+    "localized_name": "WaterBalloon",
+    "description": null
+  },
+  "EPalWazaID::WaterWave": {
+    "localized_name": "WaterWave",
+    "description": "Tworzy ścianę z wodnym wirem, który powoli przesuwa się do przodu."
+  },
+  "EPalWazaID::WorkAttack": {
+    "localized_name": "WorkAttack",
+    "description": null
   }
 }

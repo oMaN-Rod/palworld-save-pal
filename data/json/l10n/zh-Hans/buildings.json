@@ -131,6 +131,10 @@
     "localized_name": "街机游戏机台",
     "description": "装饰用的街机游戏机台。 坏掉了，所以不能玩了。"
   },
+  "Banyan_Big": {
+    "localized_name": "Banyan_Big",
+    "description": null
+  },
   "Barrel01_Iron": {
     "localized_name": "红色铁桶",
     "description": "装饰用的红色铁桶。"
@@ -358,6 +362,10 @@
   "DamagedScarecrow": {
     "localized_name": "受损的稻草人",
     "description": "模仿企丸丸制作的训练用稻草人。 只能放置在较宽敞的地方。"
+  },
+  "DamagedScarecrow_Test": {
+    "localized_name": "DamagedScarecrow_Test",
+    "description": null
   },
   "DarkIsland_Banner": {
     "localized_name": "天坠之民挂旗",
@@ -735,6 +743,10 @@
     "localized_name": "玻璃地基",
     "description": "用于在上面建造墙壁或设施的地基。 以钢化玻璃制成，非常坚固。"
   },
+  "Glass_pillars": {
+    "localized_name": "玻璃立柱",
+    "description": "用来支撑建筑的立柱。 以钢化玻璃制成，非常坚固。"
+  },
   "Glass_roof": {
     "localized_name": "玻璃屋顶",
     "description": "建在墙壁上，用于遮风避雨的屋顶。 以钢化玻璃制成，非常坚固。"
@@ -757,7 +769,7 @@
   },
   "GoalSoccer_Iron": {
     "localized_name": "足球球门",
-    "description": "装饰用的足球球门。 将SheepBall踢进球门也无法得分。"
+    "description": "装饰用的足球球门。 将棉悠悠踢进球门也无法得分。"
   },
   "GuardianDogStatue": {
     "localized_name": "八云犬雕像",
@@ -1111,6 +1123,10 @@
     "localized_name": "金属地基",
     "description": "用于在上面建造墙壁或设施的地基。 以金属制成，非常坚固。"
   },
+  "Metal_pillars": {
+    "localized_name": "金属立柱",
+    "description": "用来支撑建筑的立柱。 以金属制成，非常坚固。"
+  },
   "Metal_roof": {
     "localized_name": "金属屋顶",
     "description": "建在墙壁上，用于遮风避雨的屋顶。 以金属制成，非常坚固。"
@@ -1346,6 +1362,10 @@
   "SF_foundation": {
     "localized_name": "简约地基",
     "description": "用于在上面建造墙壁或设施的地基。 可以建造出近未来风格的简约建筑。"
+  },
+  "SF_pillars": {
+    "localized_name": "简约立柱",
+    "description": "用来支撑建筑的立柱。 可以建造出近未来风格的简约建筑。"
   },
   "SF_roof": {
     "localized_name": "简约屋顶",
@@ -1610,6 +1630,10 @@
   "Stone_foundation": {
     "localized_name": "石制地基",
     "description": "用于在上面建造墙壁或设施的地基。 以石头制成，还算坚固。"
+  },
+  "Stone_pillar": {
+    "localized_name": "石制立柱",
+    "description": "用来支撑建筑的立柱。 以石头制成，还算坚固。"
   },
   "Stone_roof": {
     "localized_name": "石制屋顶",
@@ -1919,6 +1943,10 @@
     "localized_name": "梯子",
     "description": "可以用来爬上高处的梯子。"
   },
+  "Wooden_pillar": {
+    "localized_name": "木制立柱",
+    "description": "用来支撑建筑的立柱。 以木头制成，相当脆弱。"
+  },
   "Wooden_roof": {
     "localized_name": "木制屋顶",
     "description": "建在墙壁上，用于遮风避雨的屋顶。 以木头制成，相当脆弱。"
@@ -1954,5 +1982,13 @@
   "Zaisu": {
     "localized_name": "无腿靠椅",
     "description": "装饰用的无腿椅子。 可在建造和风的建筑时配合使用。"
+  },
+  "JapaneseStyle_TriangleStairsCorner_02": {
+    "localized_name": "JapaneseStyle_TriangleStairsCorner_02",
+    "description": null
+  },
+  "WoodCreator": {
+    "localized_name": "WoodCreator",
+    "description": null
   }
 }

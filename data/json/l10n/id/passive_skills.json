@@ -597,15 +597,15 @@
   },
   "Deffence_up2": {
     "localized_name": "Badan Berotot",
-    "description": "Pertahanan +20.0%, kebal terhadap sentakan"
+    "description": "Pertahanan +20%, kebal terhadap sentakan"
   },
   "Deffence_up2_2": {
     "localized_name": "Kelas Berat",
-    "description": "Pertahanan20.0+%, kebal terhadap efek terpental."
+    "description": "Pertahanan20+%, kebal terhadap efek terpental."
   },
   "Deffence_up3": {
     "localized_name": "Badan Berlian",
-    "description": "Pertahanan +30.0%, kebal terhadap sentakan dan kebal terhadap efek terpental"
+    "description": "Pertahanan +30%, kebal terhadap sentakan dan kebal terhadap efek terpental"
   },
   "Defuser_ExplosiveSpore_EquipSkill": {
     "localized_name": "Pengurangan damage ledakan",
@@ -613,7 +613,7 @@
   },
   "ElementBoost_Aqua_1_PAL": {
     "localized_name": "Suka Bermain Air",
-    "description": "Peningkatan damage serangan elemen air 10.0%"
+    "description": "Peningkatan damage serangan elemen air 10%"
   },
   "ElementBoost_Aqua_2_PAL": {
     "localized_name": "Kaisar Laut",
@@ -629,7 +629,7 @@
   },
   "ElementBoost_Dark_1_PAL": {
     "localized_name": "Tirai Malam",
-    "description": "Peningkatan damage serangan elemen kegelapan 10.0%"
+    "description": "Peningkatan damage serangan elemen kegelapan 10%"
   },
   "ElementBoost_Dark_2_BossDefeat": {
     "localized_name": "Peningkatan Sedang Damage Elemen Kegelapan",
@@ -665,7 +665,7 @@
   },
   "ElementBoost_Dragon_1_PAL": {
     "localized_name": "Keturunan Naga",
-    "description": "Peningkatan damage serangan elemen naga 10.0%"
+    "description": "Peningkatan damage serangan elemen naga 10%"
   },
   "ElementBoost_Dragon_2_BossDefeat": {
     "localized_name": "Peningkatan Sedang Damage Elemen Naga",
@@ -701,7 +701,7 @@
   },
   "ElementBoost_Earth_1_PAL": {
     "localized_name": "Kekuatan Bumi",
-    "description": "Peningkatan damage serangan elemen tanah 10.0%"
+    "description": "Peningkatan damage serangan elemen tanah 10%"
   },
   "ElementBoost_Earth_2_BossDefeat": {
     "localized_name": "Peningkatan Sedang Damage Elemen Tanah",
@@ -765,7 +765,7 @@
   },
   "ElementBoost_Fire_1_PAL": {
     "localized_name": "Suka Bermain Api",
-    "description": "Peningkatan damage serangan elemen api 10.0%"
+    "description": "Peningkatan damage serangan elemen api 10%"
   },
   "ElementBoost_Fire_2_BossDefeat": {
     "localized_name": "Peningkatan Sedang Damage Elemen Api",
@@ -801,7 +801,7 @@
   },
   "ElementBoost_Ice_1_PAL": {
     "localized_name": "Berdarah Dingin",
-    "description": "Peningkatan damage serangan elemen es 10.0%"
+    "description": "Peningkatan damage serangan elemen es 10%"
   },
   "ElementBoost_Ice_2_BossDefeat": {
     "localized_name": "Peningkatan Sedang Damage Elemen Es",
@@ -837,7 +837,7 @@
   },
   "ElementBoost_Leaf_1_PAL": {
     "localized_name": "Aroma Rumput dan Pepohonan",
-    "description": "Peningkatan damage serangan elemen rumput 10.0%"
+    "description": "Peningkatan damage serangan elemen rumput 10%"
   },
   "ElementBoost_Leaf_2_BossDefeat": {
     "localized_name": "Peningkatan Sedang Damage Elemen Rumput",
@@ -873,7 +873,7 @@
   },
   "ElementBoost_Normal_1_PAL": {
     "localized_name": "Kekosongan Pikiran",
-    "description": "Peningkatan damage serangan netral 10.0%"
+    "description": "Peningkatan damage serangan netral 10%"
   },
   "ElementBoost_Normal_2_BossDefeat": {
     "localized_name": "Peningkatan Sedang Damage Netral",
@@ -901,7 +901,7 @@
   },
   "ElementBoost_Thunder_1_PAL": {
     "localized_name": "Kapasitor",
-    "description": "Peningkatan damage serangan elemen petir 10.0%"
+    "description": "Peningkatan damage serangan elemen petir 10%"
   },
   "ElementBoost_Thunder_2_PAL": {
     "localized_name": "Kaisar Petir",
@@ -941,7 +941,7 @@
   },
   "ElementResist_Aqua_1_PAL": {
     "localized_name": "Lapisan Tahan Air",
-    "description": "Pengurangan damage elemen air 10.0%"
+    "description": "Pengurangan damage elemen air 10%"
   },
   "ElementResist_Aqua_2": {
     "localized_name": "Pengurangan Damage Elemen Air Level 2",
@@ -961,7 +961,7 @@
   },
   "ElementResist_Dark_1_PAL": {
     "localized_name": "Karakter Gembira",
-    "description": "Pengurangan damage elemen kegelapan 10.0%"
+    "description": "Pengurangan damage elemen kegelapan 10%"
   },
   "ElementResist_Dark_2": {
     "localized_name": "Pengurangan Damage Elemen Kegelapan Level 2",
@@ -981,7 +981,7 @@
   },
   "ElementResist_Dragon_1_PAL": {
     "localized_name": "Pembasmi Naga",
-    "description": "Pengurangan damage elemen naga 10.0%"
+    "description": "Pengurangan damage elemen naga 10%"
   },
   "ElementResist_Dragon_2": {
     "localized_name": "Pengurangan Damage Elemen Naga Level 2",
@@ -1001,7 +1001,7 @@
   },
   "ElementResist_Earth_1_PAL": {
     "localized_name": "Struktur Tahan Gempa",
-    "description": "Pengurangan damage elemen tanah 10.0%"
+    "description": "Pengurangan damage elemen tanah 10%"
   },
   "ElementResist_Earth_2": {
     "localized_name": "Pengurangan Damage Elemen Tanah Level 2",
@@ -1021,7 +1021,7 @@
   },
   "ElementResist_Fire_1_PAL": {
     "localized_name": "Suka Berjemur",
-    "description": "Pengurangan damage elemen api 10.0%"
+    "description": "Pengurangan damage elemen api 10%"
   },
   "ElementResist_Fire_2": {
     "localized_name": "Pengurangan Damage Elemen Api Level 2",
@@ -1041,7 +1041,7 @@
   },
   "ElementResist_Ice_1_PAL": {
     "localized_name": "Ketahanan Suhu Tinggi",
-    "description": "Pengurangan damage elemen es 10.0%"
+    "description": "Pengurangan damage elemen es 10%"
   },
   "ElementResist_Ice_2": {
     "localized_name": "Pengurangan Damage Elemen Es Level 2",
@@ -1061,7 +1061,7 @@
   },
   "ElementResist_Leaf_1_PAL": {
     "localized_name": "Efek Pencegah Rumput Liar",
-    "description": "Pengurangan damage elemen rumput 10.0%"
+    "description": "Pengurangan damage elemen rumput 10%"
   },
   "ElementResist_Leaf_2": {
     "localized_name": "Pengurangan Damage Elemen Rumput Level 2",
@@ -1081,7 +1081,7 @@
   },
   "ElementResist_Normal_1_PAL": {
     "localized_name": "Abnormal",
-    "description": "Pengurangan damage netral 10.0%"
+    "description": "Pengurangan damage netral 10%"
   },
   "ElementResist_Normal_2": {
     "localized_name": "Pengurangan Damage Netral Level 2",
@@ -1101,7 +1101,7 @@
   },
   "ElementResist_Thunder_1_PAL": {
     "localized_name": "Insulasi",
-    "description": "Pengurangan damage elemen petir 10.0%"
+    "description": "Pengurangan damage elemen petir 10%"
   },
   "ElementResist_Thunder_2": {
     "localized_name": "Pengurangan Damage Elemen Petir Level 2",
@@ -1133,7 +1133,7 @@
   },
   "GYM_NAME_Meadow": {
     "localized_name": "Pemimpin Gerombolan Pemburu Liar Rayne",
-    "description": "Serangan+20.0% Peningkatan Kecepatan Gerakan 10.0%"
+    "description": "Serangan+20% Peningkatan Kecepatan Gerakan 10%"
   },
   "GYM_NAME_Sakurajima": {
     "localized_name": "Pemimpin Bunga Bulan",
@@ -1245,7 +1245,7 @@
   },
   "MutationPal_ExplosionResist": {
     "localized_name": "Baju Zirah Berat",
-    "description": "Kebal terhadap dampak serangan<Status_Up>ledakan</>"
+    "description": null
   },
   "MutationPal_Immortal": {
     "localized_name": "Tak Terkalahkan",
@@ -1253,7 +1253,7 @@
   },
   "MutationPal_Mutant": {
     "localized_name": "Kondisi Tubuh Unik",
-    "description": "Pemulihan HP alami Pal dan pemain +50.0%, pertahanan +{EffectValue4}%, <Status_Up>kebal</> terhadap efek status racun, serta<Status_Up>kebal</>terhadap efek status terbakar"
+    "description": null
   },
   "NightOwl": {
     "localized_name": "Nokturnal",
@@ -1273,7 +1273,7 @@
   },
   "Nushi": {
     "localized_name": "Bos",
-    "description": "Peningkatkan damage serangan elemen air 20.0% Peningkatan damage serangan elemen es 20.0% Pertahanan +20.0%"
+    "description": "Peningkatkan damage serangan elemen air 20% Peningkatan damage serangan elemen es 20% Pertahanan +20%"
   },
   "OctaviaArmorVampire": {
     "localized_name": "Energi Darah",
@@ -1305,46 +1305,46 @@
   },
   "PAL_FullStomach_Down_1": {
     "localized_name": "Makan Sedikit",
-    "description": "Tingkat kenyang berkurang lebih lambat <NumBlue_13>+10,0%</>"
+    "description": "Tingkat kenyang berkurang lebih lambat +10,0%"
   },
   "PAL_FullStomach_Down_2": {
     "localized_name": "Ahli Diet",
-    "description": "Tingkat kenyang berkurang lebih lambat <NumBlue_13>+15,0%</>"
+    "description": "Tingkat kenyang berkurang lebih lambat +15,0%"
   },
   "PAL_FullStomach_Down_3": {
     "localized_name": "Master Puasa",
-    "description": "Tingkat kenyang berkurang lebih lambat <NumBlue_13>+20,0%</>"
+    "description": "Tingkat kenyang berkurang lebih lambat +20,0%"
   },
   "PAL_FullStomach_Up_1": {
     "localized_name": "Rakus",
-    "description": "Tingkat kenyang berkurang lebih cepat <NumRed_13>+10,0%</>"
+    "description": "Tingkat kenyang berkurang lebih cepat +10,0%"
   },
   "PAL_FullStomach_Up_2": {
     "localized_name": "Perut Tak Terbatas",
-    "description": "Tingkat kenyang berkurang lebih cepat <NumRed_13>+15,0%</>"
+    "description": "Tingkat kenyang berkurang lebih cepat +15,0%"
   },
   "PAL_Sanity_Down_1": {
     "localized_name": "Berpikir Positif",
-    "description": "Nilai SAN berkurang lebih lambat <NumBlue_13>+10,0%</>"
+    "description": "Nilai SAN berkurang lebih lambat +10,0%"
   },
   "PAL_Sanity_Down_2": {
     "localized_name": "Gila Kerja",
-    "description": "Nilai SAN berkurang lebih lambat <NumBlue_13>+15,0%</>"
+    "description": "Nilai SAN berkurang lebih lambat +15,0%"
   },
   "PAL_Sanity_Down_3": {
     "localized_name": "Hati Teguh",
-    "description": "Nilai SAN berkurang lebih lambat <NumBlue_13>+20,0%</>"
+    "description": "Nilai SAN berkurang lebih lambat +20,0%"
   },
   "PAL_Sanity_Up_1": {
     "localized_name": "Mental Tidak Stabil",
-    "description": "Nilai SAN berkurang lebih cepat <NumRed_13>+10,0%</>"
+    "description": "Nilai SAN berkurang lebih cepat +10,0%"
   },
   "PAL_Sanity_Up_2": {
     "localized_name": "Menghancurkan Diri",
-    "description": "Nilai SAN berkurang lebih cepat <NumRed_13>+15,0%</>"
+    "description": "Nilai SAN berkurang lebih cepat +15,0%"
   },
   "PAL_SpiritualInst": {
-    "localized_name": "-",
+    "localized_name": "Mentally unstable",
     "description": null
   },
   "PAL_conceited": {
@@ -1545,23 +1545,23 @@
   },
   "TrainerATK_UP_1": {
     "localized_name": "Pemimpin Serangan",
-    "description": "Peningkatan serangan pemain 10.0%"
+    "description": "Peningkatan serangan pemain 10%"
   },
   "TrainerDEF_UP_1": {
     "localized_name": "Ahli Strategi Pertahanan",
-    "description": "Peningkatan pertahanan pemain 10.0%"
+    "description": "Peningkatan pertahanan pemain 10%"
   },
   "TrainerLogging_up1": {
     "localized_name": "Pemimpin Penebang Kayu",
-    "description": "Peningkatan efisiensi penebangan pemain 25.0%"
+    "description": "Peningkatan efisiensi penebangan pemain 25%"
   },
   "TrainerMining_up1": {
     "localized_name": "Kepala Tambang",
-    "description": "Peningkatan efisiensi penambangan pemain 25.0%"
+    "description": "Peningkatan efisiensi penambangan pemain 25%"
   },
   "TrainerWorkSpeed_UP_1": {
     "localized_name": "Motivator",
-    "description": "Peningkatan kecepatan kerja pemain 25.0%"
+    "description": "Peningkatan kecepatan kerja pemain 25%"
   },
   "Vampire": {
     "localized_name": "Vampir",
@@ -1617,31 +1617,31 @@
   },
   "WorldTree_ATK": {
     "localized_name": "Pedang Suci Bermata Dua",
-    "description": "Kekuatan serangan <NumBlue_13>+</>50.0% Kekuatan pertahanan -30.0% Tidak akan menghilang meski mendekati Pohon Dunia atau bebatuan."
+    "description": "Kekuatan serangan +50% Kekuatan pertahanan -30% Tidak akan menghilang meski mendekati Pohon Dunia atau bebatuan."
   },
   "WorldTree_ATK_DEF": {
     "localized_name": "Dewa Penghancur",
-    "description": "Kekuatan serangan <NumBlue_13>+</>40.0% Kekuatan pertahanan <NumBlue_13>+</>20.0% HP Maksimum -50.0% Tidak akan menghilang meski mendekati Pohon Dunia atau bebatuan."
+    "description": "Kekuatan serangan +40% Kekuatan pertahanan +20% HP Maksimum -50% Tidak akan menghilang meski mendekati Pohon Dunia atau bebatuan."
   },
   "WorldTree_CraftSpeed": {
     "localized_name": "Tangan Iblis",
-    "description": "Kecepatan kerja <NumBlue_13>+</>90.0<NumBlue_13>%</> Nilai SAN lebih cepat berkurang <NumRed_13>+15,0%</> Tidak akan menghilang meski mendekati Pohon Dunia atau bebatuan."
+    "description": "Kecepatan kerja +90% Nilai SAN lebih cepat berkurang +15,0% Tidak akan menghilang meski mendekati Pohon Dunia atau bebatuan."
   },
   "WorldTree_DEF": {
     "localized_name": "Dinding Daging Tempat Suci",
-    "description": "Kekuatan pertahanan <NumBlue_13>+</>50.0% Kekuatan serangan -30.0% Tidak akan menghilang meski mendekati Pohon Dunia atau bebatuan."
+    "description": "Kekuatan pertahanan +50% Kekuatan serangan -30% Tidak akan menghilang meski mendekati Pohon Dunia atau bebatuan."
   },
   "WorldTree_FullStomach": {
     "localized_name": "Persemaian Pohon Dewa",
-    "description": "Tingkat kenyang berkurang lebih lambat <NumBlue_13>+50,0%</> HP -20.0<NumRed_13>%</> Tidak akan menghilang meski mendekati Pohon Dunia atau bebatuan."
+    "description": "Tingkat kenyang berkurang lebih lambat +50,0% HP -20% Tidak akan menghilang meski mendekati Pohon Dunia atau bebatuan."
   },
   "WorldTree_MoveSpeed": {
     "localized_name": "Loncatan Dimensi",
-    "description": "Kecepatan bergerak meningkat <NumBlue_13>+</>50.0<NumBlue_13>%</> Tingkat kenyang lebih cepat berkurang <NumRed_13>+15,0%</> Tidak akan menghilang meski mendekati Pohon Dunia atau bebatuan."
+    "description": "Kecepatan bergerak meningkat +50% Tingkat kenyang lebih cepat berkurang +15,0% Tidak akan menghilang meski mendekati Pohon Dunia atau bebatuan."
   },
   "WorldTree_Sanity": {
     "localized_name": "Pertapa",
-    "description": "Nilai SAN berkurang lebih lambat <NumBlue_13>+50,0%</> Kecepatan Kerja -20.0<NumRed_13>%</> Tidak akan menghilang meski mendekati Pohon Dunia atau bebatuan."
+    "description": "Nilai SAN berkurang lebih lambat +50,0% Kecepatan Kerja -20% Tidak akan menghilang meski mendekati Pohon Dunia atau bebatuan."
   },
   "YakushimaDagameBoost_Magic_Equip": {
     "localized_name": "Kekuatan Suci - Sihir",
@@ -1677,6 +1677,282 @@
   },
   "defense_ACC_up4": {
     "localized_name": "Peningkatan Pertahanan Level 4",
+    "description": null
+  },
+  "AccuracyDecrease": {
+    "localized_name": "AccuracyDecrease",
+    "description": null
+  },
+  "AccuracyIncrease": {
+    "localized_name": "AccuracyIncrease",
+    "description": null
+  },
+  "AccuracySuperDecrease": {
+    "localized_name": "AccuracySuperDecrease",
+    "description": null
+  },
+  "BulletSpeed_H": {
+    "localized_name": "BulletSpeed_H",
+    "description": null
+  },
+  "BulletSpeed_L": {
+    "localized_name": "BulletSpeed_L",
+    "description": null
+  },
+  "CollectItem": {
+    "localized_name": "CollectItem",
+    "description": null
+  },
+  "CollectItem_CuteFox": {
+    "localized_name": "CollectItem_CuteFox",
+    "description": null
+  },
+  "CraftSpeed*3": {
+    "localized_name": "CraftSpeed*3",
+    "description": null
+  },
+  "CraftSpeed*5": {
+    "localized_name": "CraftSpeed*5",
+    "description": null
+  },
+  "GiveADark": {
+    "localized_name": "GiveADark",
+    "description": null
+  },
+  "GiveADragon": {
+    "localized_name": "GiveADragon",
+    "description": null
+  },
+  "GiveAEarth": {
+    "localized_name": "GiveAEarth",
+    "description": null
+  },
+  "GiveAElectricity": {
+    "localized_name": "GiveAElectricity",
+    "description": null
+  },
+  "GiveAFire": {
+    "localized_name": "GiveAFire",
+    "description": null
+  },
+  "GiveAIce": {
+    "localized_name": "GiveAIce",
+    "description": null
+  },
+  "GiveALeaf": {
+    "localized_name": "GiveALeaf",
+    "description": null
+  },
+  "GiveAWater": {
+    "localized_name": "GiveAWater",
+    "description": null
+  },
+  "Logging_up1": {
+    "localized_name": "Logging_up1",
+    "description": null
+  },
+  "Logging_up1_Otomo_only": {
+    "localized_name": "Logging_up1_Otomo_only",
+    "description": null
+  },
+  "Logging_up2": {
+    "localized_name": "Logging_up2",
+    "description": null
+  },
+  "Logging_up2_Otomo_only": {
+    "localized_name": "Logging_up2_Otomo_only",
+    "description": null
+  },
+  "Logging_up3": {
+    "localized_name": "Logging_up3",
+    "description": null
+  },
+  "Logging_up4": {
+    "localized_name": "Logging_up4",
+    "description": null
+  },
+  "Logging_up5": {
+    "localized_name": "Logging_up5",
+    "description": null
+  },
+  "MeleeAttack_down1": {
+    "localized_name": "MeleeAttack_down1",
+    "description": null
+  },
+  "MeleeAttack_down2": {
+    "localized_name": "MeleeAttack_down2",
+    "description": null
+  },
+  "MeleeAttack_up1": {
+    "localized_name": "MeleeAttack_up1",
+    "description": null
+  },
+  "MeleeAttack_up2": {
+    "localized_name": "MeleeAttack_up2",
+    "description": null
+  },
+  "Mining_up1": {
+    "localized_name": "Mining_up1",
+    "description": null
+  },
+  "Mining_up1_Otomo_only": {
+    "localized_name": "Mining_up1_Otomo_only",
+    "description": null
+  },
+  "Mining_up2": {
+    "localized_name": "Mining_up2",
+    "description": null
+  },
+  "Mining_up2_Otomo_only": {
+    "localized_name": "Mining_up2_Otomo_only",
+    "description": null
+  },
+  "Mining_up3": {
+    "localized_name": "Mining_up3",
+    "description": null
+  },
+  "Mining_up4": {
+    "localized_name": "Mining_up4",
+    "description": null
+  },
+  "Mining_up5": {
+    "localized_name": "Mining_up5",
+    "description": null
+  },
+  "Mute_1": {
+    "localized_name": "Mute_1",
+    "description": null
+  },
+  "Mute_2": {
+    "localized_name": "Mute_2",
+    "description": null
+  },
+  "Mute_3": {
+    "localized_name": "Mute_3",
+    "description": null
+  },
+  "Mute_4": {
+    "localized_name": "Mute_4",
+    "description": null
+  },
+  "Mute_5": {
+    "localized_name": "Mute_5",
+    "description": null
+  },
+  "PAL_ElementPassive_Test": {
+    "localized_name": "PAL_ElementPassive_Test",
+    "description": null
+  },
+  "PAL_TribePassive_Test": {
+    "localized_name": "PAL_TribePassive_Test",
+    "description": null
+  },
+  "RecoilDecrease": {
+    "localized_name": "RecoilDecrease",
+    "description": null
+  },
+  "RecoilIncrease": {
+    "localized_name": "RecoilIncrease",
+    "description": null
+  },
+  "ShotAttack_down1": {
+    "localized_name": "ShotAttack_down1",
+    "description": null
+  },
+  "ShotAttack_down2": {
+    "localized_name": "ShotAttack_down2",
+    "description": null
+  },
+  "ShotAttack_up1": {
+    "localized_name": "ShotAttack_up1",
+    "description": null
+  },
+  "ShotAttack_up2": {
+    "localized_name": "ShotAttack_up2",
+    "description": null
+  },
+  "StealExpert_1": {
+    "localized_name": "StealExpert_1",
+    "description": null
+  },
+  "StealExpert_2": {
+    "localized_name": "StealExpert_2",
+    "description": null
+  },
+  "StealExpert_3": {
+    "localized_name": "StealExpert_3",
+    "description": null
+  },
+  "StealExpert_4": {
+    "localized_name": "StealExpert_4",
+    "description": null
+  },
+  "Support_down1": {
+    "localized_name": "Support_down1",
+    "description": null
+  },
+  "Support_down2": {
+    "localized_name": "Support_down2",
+    "description": null
+  },
+  "Support_up1": {
+    "localized_name": "Support_up1",
+    "description": null
+  },
+  "Support_up2": {
+    "localized_name": "Support_up2",
+    "description": null
+  },
+  "TestExplosive_H": {
+    "localized_name": "TestExplosive_H",
+    "description": null
+  },
+  "TestExplosive_L": {
+    "localized_name": "TestExplosive_L",
+    "description": null
+  },
+  "TestHoming_H": {
+    "localized_name": "TestHoming_H",
+    "description": null
+  },
+  "TestHoming_L": {
+    "localized_name": "TestHoming_L",
+    "description": null
+  },
+  "TestSkill1": {
+    "localized_name": "TestSkill1",
+    "description": null
+  },
+  "TestSkill2": {
+    "localized_name": "TestSkill2",
+    "description": null
+  },
+  "TestSkill3": {
+    "localized_name": "TestSkill3",
+    "description": null
+  },
+  "TestSkill4": {
+    "localized_name": "TestSkill4",
+    "description": null
+  },
+  "TestSkill5": {
+    "localized_name": "TestSkill5",
+    "description": null
+  },
+  "TestSkill6": {
+    "localized_name": "TestSkill6",
+    "description": null
+  },
+  "TestSkill7": {
+    "localized_name": "TestSkill7",
+    "description": null
+  },
+  "TestSkill8": {
+    "localized_name": "TestSkill8",
+    "description": null
+  },
+  "MoveSpeed_up_1_Otomo_Only_Equip": {
+    "localized_name": "MoveSpeed_up_1_Otomo_Only_Equip",
     "description": null
   }
 }

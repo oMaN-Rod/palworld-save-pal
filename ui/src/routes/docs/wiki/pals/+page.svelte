@@ -89,9 +89,30 @@
 			.map(([key, val]) => [key, getWorkSuitabilityFormattedName(key as WorkSuitability), val]);
 	}
 
-	const allPals = $derived(
-		Object.entries(palsData.pals).filter(([, pal]) => !pal.disabled)
-	);
+	// Variants (raid body parts, gym phases, duplicate generic NPCs) share a
+	// display name; the wiki shows one representative entry per name/elements.
+	function isBetterPalEntry(
+		[aKey, aPal]: [string, PalData],
+		[bKey, bPal]: [string, PalData]
+	): boolean {
+		const aDeck = (aPal.pal_deck_index ?? -1) >= 0 ? 0 : 1;
+		const bDeck = (bPal.pal_deck_index ?? -1) >= 0 ? 0 : 1;
+		if (aDeck !== bDeck) return aDeck < bDeck;
+		if (aKey.length !== bKey.length) return aKey.length < bKey.length;
+		return aKey < bKey;
+	}
+
+	const allPals = $derived.by(() => {
+		const entries = Object.entries(palsData.pals).filter(([, pal]) => !pal.disabled);
+		const best = new Map<string, [string, PalData]>();
+		for (const entry of entries) {
+			const [, pal] = entry;
+			const groupKey = `${pal.localized_name}|${pal.is_pal}|${[...(pal.element_types ?? [])].sort().join(',')}`;
+			const prev = best.get(groupKey);
+			if (!prev || isBetterPalEntry(entry, prev)) best.set(groupKey, entry);
+		}
+		return [...best.values()];
+	});
 
 	const filteredPals = $derived.by(() => {
 		let result = allPals;

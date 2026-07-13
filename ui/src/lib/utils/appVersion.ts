@@ -1,4 +1,8 @@
-export async function isUpdateAvailableOnGitHub(version: string): Promise<boolean> {
+/**
+ * Returns the latest GitHub release version if it's newer than `version`,
+ * or `null` if the app is already up to date.
+ */
+export async function isUpdateAvailableOnGitHub(version: string): Promise<string | null> {
 	try {
 		// Call GitHub API to check for latest release
 		const response = await fetch(
@@ -13,7 +17,7 @@ export async function isUpdateAvailableOnGitHub(version: string): Promise<boolea
 		const latestVersion = data.tag_name.replace(/^v/, '');
 		const currentVersion = version.replace(/^v/, '');
 
-		return isNewerVersion(latestVersion, currentVersion);
+		return isNewerVersion(latestVersion, currentVersion) ? latestVersion : null;
 	} catch (error) {
 		const errorMessage = error instanceof Error ? error.message : String(error);
 		throw new Error(`Failed to check for updates: ${errorMessage}`);

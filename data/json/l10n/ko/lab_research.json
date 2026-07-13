@@ -73,7 +73,7 @@
   },
   "Cool5": {
     "localized_name": "눈사람 개발",
-    "description": null
+    "description": "기술 \"눈사람\" 해제"
   },
   "Deforest1": {
     "localized_name": "벌목 작업 Lv1",
@@ -145,7 +145,7 @@
   },
   "Deforest4": {
     "localized_name": "그루터기와 도끼 개발",
-    "description": null
+    "description": "기술 \"그루터기와 도끼\" 해제"
   },
   "EmitFlame1": {
     "localized_name": "불 피우기 작업 Lv1",
@@ -225,7 +225,7 @@
   },
   "EmitFlame5": {
     "localized_name": "성화대 개발",
-    "description": null
+    "description": "기술 \"성화대\" 해제"
   },
   "GenerateEnergy1": {
     "localized_name": "발전 작업 Lv1",
@@ -297,7 +297,7 @@
   },
   "GenerateEnergy5": {
     "localized_name": "송전탑 개발",
-    "description": null
+    "description": "기술 \"송전탑\" 해제"
   },
   "Handcraft1": {
     "localized_name": "수작업 속도 Lv1",
@@ -385,7 +385,7 @@
   },
   "Handcraft5": {
     "localized_name": "대형 공구함 개발",
-    "description": null
+    "description": "기술 \"대형 공구함\" 해제"
   },
   "Medicine1": {
     "localized_name": "제약 작업 Lv1",
@@ -445,7 +445,7 @@
   },
   "Medicine4": {
     "localized_name": "마녀의 냄비 개발",
-    "description": null
+    "description": "기술 \"마녀의 냄비\" 해제"
   },
   "Mining1": {
     "localized_name": "채굴 작업 Lv1",
@@ -521,7 +521,7 @@
   },
   "Mining5": {
     "localized_name": "채굴 왜건 개발",
-    "description": null
+    "description": "기술 \"채굴 왜건\" 해제"
   },
   "Seeding1": {
     "localized_name": "파종 작업 Lv1",
@@ -593,11 +593,11 @@
   },
   "Seeding4": {
     "localized_name": "화단 개발",
-    "description": null
+    "description": "기술 \"화단\" 해제"
   },
   "Seeding5": {
     "localized_name": "사일로 개발",
-    "description": null
+    "description": "기술 \"사일로\" 해제"
   },
   "Watering1": {
     "localized_name": "관개 작업 Lv1",
@@ -669,6 +669,6 @@
   },
   "Watering5": {
     "localized_name": "분수 개발",
-    "description": null
+    "description": "기술 \"분수\" 해제"
   }
 }

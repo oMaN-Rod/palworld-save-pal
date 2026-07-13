@@ -59,7 +59,13 @@ class AssetLoader {
 	}
 
 	loadImage(path: string, type: AssetType = 'webp'): string {
-		if (!path) return this.unknownIcon;
+		return this.tryImage(path, type) ?? this.unknownIcon;
+	}
+
+	// like loadImage, but reports a miss as undefined so callers can try
+	// another candidate path before settling on the unknown icon
+	private tryImage(path: string, type: AssetType = 'webp'): string | undefined {
+		if (!path) return undefined;
 		return this.load<any>(path.toLowerCase().replaceAll(' ', '_'), type);
 	}
 
@@ -79,28 +85,26 @@ class AssetLoader {
 
 	loadPalImage(character_id: string, is_pal: boolean = true): string {
 		if (!character_id) return this.unknownIcon;
-		character_id = is_pal ? this.cleanseCharacterId(character_id) : 'commonhuman';
-		let image = this.loadImage(`${ASSET_DATA_PATH}/img/${character_id}.webp`);
-		if (image) {
-			return image;
-		} else {
-			image = this.loadMenuImage(character_id, is_pal);
-		}
-		return image || this.unknownIcon;
+		if (!is_pal) return this.loadMenuImage(character_id, false);
+		const id = this.cleanseCharacterId(character_id);
+		return (
+			this.tryImage(`${ASSET_DATA_PATH}/img/${id}.webp`) ?? this.loadMenuImage(character_id, is_pal)
+		);
 	}
 
 	loadMenuImage(character_id: string, is_pal: boolean = true): string {
 		if (!character_id) return this.unknownIcon;
-		character_id = is_pal ? this.cleanseCharacterId(character_id) : 'commonhuman';
-		const image = this.loadImage(`${ASSET_DATA_PATH}/img/t_${character_id}_icon_normal.webp`);
-		if (image) {
-			return image;
-		} else {
-			console.warn(
-				`Failed to load menu image for ${`${ASSET_DATA_PATH}/img/t_${character_id}_icon_normal.webp`}`
-			);
+		if (is_pal) {
+			const id = this.cleanseCharacterId(character_id);
+			return this.tryImage(`${ASSET_DATA_PATH}/img/t_${id}_icon_normal.webp`) ?? this.unknownIcon;
 		}
-		return this.unknownIcon;
+		// humans: prefer the NPC's own portrait, fall back to the generic human icon
+		const id = character_id.toLowerCase();
+		return (
+			this.tryImage(`${ASSET_DATA_PATH}/img/t_${id}_icon_normal.webp`) ??
+			this.tryImage(`${ASSET_DATA_PATH}/img/t_commonhuman_icon_normal.webp`) ??
+			this.unknownIcon
+		);
 	}
 
 	loadSvg(path: string): string | undefined {

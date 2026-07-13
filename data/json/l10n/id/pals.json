@@ -477,7 +477,7 @@
   },
   "ChickenPal": {
     "localized_name": "Chikipi",
-    "description": "Sangat lemah dan sangat lezat. Mereka masuk ke daftar Pal terlemah bersama dengan SheepBall. Berapa banyak pun diburu, mereka akan terus bermunculan dari mana saja."
+    "description": "Sangat lemah dan sangat lezat. Mereka masuk ke daftar Pal terlemah bersama dengan Lamball. Berapa banyak pun diburu, mereka akan terus bermunculan dari mana saja."
   },
   "ClioneTwins": {
     "localized_name": "Amione",
@@ -577,7 +577,7 @@
   },
   "DrillGame": {
     "localized_name": "Digtoise",
-    "description": "Konon ada kisah tentang |BorDigtoise|. Ini adalah kisah moral tentang Digtoise yang memiliki tempurung dan bor terkuat dan selalu memikirkan paradoks cerita anaka-anak."
+    "description": "Konon ada kisah tentang \"BorDigtoise\". Ini adalah kisah moral tentang Digtoise yang memiliki tempurung dan bor terkuat dan selalu memikirkan paradoks cerita anaka-anak."
   },
   "Eagle": {
     "localized_name": "Galeclaw",
@@ -589,7 +589,7 @@
   },
   "ElecLion": {
     "localized_name": "Boltmane",
-    "description": "-"
+    "description": "The more it moves, the more it heats up and the hair tips increasingly glow brighter. At its peak, it becomes so dazzling that you risk blindness if you stare at it directly."
   },
   "ElecLizard": {
     "localized_name": "Slowatt",
@@ -925,11 +925,11 @@
   },
   "FlowerDinosaur": {
     "localized_name": "Dinossom",
-    "description": "Sekali marah, mereka jadi tak terkendali dan mengamuk seperti kesetanan. Peribahasa |menginjak ekor Dinossom| bermakna membuat seseorang marah."
+    "description": "Sekali marah, mereka jadi tak terkendali dan mengamuk seperti kesetanan. Peribahasa \"menginjak ekor Dinossom\" bermakna membuat seseorang marah."
   },
   "FlowerDinosaur_Electric": {
     "localized_name": "Dinossom Lux",
-    "description": "Meski tersambar petir, nyawa mereka selamat. Peribahasa |petir menyambar Dinossom Lux| bermakna lolos dari maut."
+    "description": "Meski tersambar petir, nyawa mereka selamat. Peribahasa \"petir menyambar Dinossom Lux\" bermakna lolos dari maut."
   },
   "FlowerDoll": {
     "localized_name": "Petallia",
@@ -1065,7 +1065,7 @@
   },
   "GhostAnglerfish": {
     "localized_name": "Ghangler",
-    "description": "Umpan buatan yang bercahaya, bisa menerangi kegelapan. Jika para Pal yang tersesat dan bingung ditemukan oleh GhostAnglerFish, mereka tidak akan bisa kabur. Kamu akan dipandu sampai pulang ke rumah dengan selamat."
+    "description": "Umpan buatan yang bercahaya, bisa menerangi kegelapan. Jika para Pal yang tersesat dan bingung ditemukan oleh Ghangler, mereka tidak akan bisa kabur. Kamu akan dipandu sampai pulang ke rumah dengan selamat."
   },
   "GhostAnglerfish_Fire": {
     "localized_name": "Ghangler Ignis",
@@ -1545,7 +1545,7 @@
   },
   "KingBahamut_Dragon": {
     "localized_name": "Blazamut Ryu",
-    "description": "Dahulu kala, mereka muncul dari dalam bumi. Dengan kobaran api yang tiada henti dan tanpa belas kasihan membakar seluruh pulau sampai tidak ada yang tersisa. Ini dikenal dengan |Api Abadi|."
+    "description": "Dahulu kala, mereka muncul dari dalam bumi. Dengan kobaran api yang tiada henti dan tanpa belas kasihan membakar seluruh pulau sampai tidak ada yang tersisa. Ini dikenal dengan \"Api Abadi\"."
   },
   "KingSunfish": {
     "localized_name": "Solmora",
@@ -1617,7 +1617,7 @@
   },
   "LilyQueen": {
     "localized_name": "Lyleen",
-    "description": "Pal lembut yang penuh cinta. Dia merawat Pal-Pal kecil yang kehilangan induknya. Cara mendisiplinkannya adalah menggunakan SolarBeam sekuat tenaga."
+    "description": "Pal lembut yang penuh cinta. Dia merawat Pal-Pal kecil yang kehilangan induknya. Cara mendisiplinkannya adalah menggunakan Ledakan Solar sekuat tenaga."
   },
   "LilyQueen_Dark": {
     "localized_name": "Lyleen Noct",
@@ -1945,7 +1945,7 @@
   },
   "MimicDog": {
     "localized_name": "Mimog",
-    "description": "Di kerajaan yang dulunya ada di pulau ini terdapat tradisi untuk memberikan penghargaan kepada orang yang mati paling bodoh di tahun itu. Alasan kematian pertama yang layak diingat adalah |tidak menyadari adanya Mimog, membuka petinya, dan digigit sampai mati.|"
+    "description": "Di kerajaan yang dulunya ada di pulau ini terdapat tradisi untuk memberikan penghargaan kepada orang yang mati paling bodoh di tahun itu. Alasan kematian pertama yang layak diingat adalah \"tidak menyadari adanya Mimog, membuka petinya, dan digigit sampai mati.\""
   },
   "MobuCitizen": {
     "localized_name": "Penduduk Pulau",
@@ -2145,7 +2145,7 @@
   },
   "PREDATOR_DrillGame": {
     "localized_name": "Digtoise",
-    "description": "Konon ada kisah tentang |BorDigtoise|. Ini adalah kisah moral tentang Digtoise yang memiliki tempurung dan bor terkuat dan selalu memikirkan paradoks cerita anaka-anak."
+    "description": "Konon ada kisah tentang \"BorDigtoise\". Ini adalah kisah moral tentang Digtoise yang memiliki tempurung dan bor terkuat dan selalu memikirkan paradoks cerita anaka-anak."
   },
   "PREDATOR_FairyDragon": {
     "localized_name": "Elphidran",
@@ -2157,7 +2157,7 @@
   },
   "PREDATOR_FlowerDinosaur": {
     "localized_name": "Dinossom",
-    "description": "Sekali marah, mereka jadi tak terkendali dan mengamuk seperti kesetanan. Peribahasa |menginjak ekor Dinossom| bermakna membuat seseorang marah."
+    "description": "Sekali marah, mereka jadi tak terkendali dan mengamuk seperti kesetanan. Peribahasa \"menginjak ekor Dinossom\" bermakna membuat seseorang marah."
   },
   "PREDATOR_FlowerRabbit_Quest": {
     "localized_name": "Flopie",
@@ -2249,7 +2249,7 @@
   },
   "PREDATOR_PurpleSpider": {
     "localized_name": "Tarantriss",
-    "description": "Sangat lengket dan terus menempel. Semakin dilawan malah semakin menempel. Begitulah |kepribadiannya|."
+    "description": "Sangat lengket dan terus menempel. Semakin dilawan malah semakin menempel. Begitulah \"kepribadiannya\"."
   },
   "PREDATOR_RedArmorBird": {
     "localized_name": "Ragnahawk",
@@ -2328,7 +2328,7 @@
     "description": null
   },
   "PalPassive_Doctor": {
-    "localized_name": "Penduduk Pulau",
+    "localized_name": "Profesor Brawn",
     "description": null
   },
   "PalTrader": {
@@ -2473,14 +2473,14 @@
   },
   "PurpleSpider": {
     "localized_name": "Tarantriss",
-    "description": "Sangat lengket dan terus menempel. Semakin dilawan malah semakin menempel. Begitulah |kepribadiannya|."
+    "description": "Sangat lengket dan terus menempel. Semakin dilawan malah semakin menempel. Begitulah \"kepribadiannya\"."
   },
   "QueenBee": {
     "localized_name": "Elizabee",
     "description": "Ratu terpilih yang mengatur para Beegarde. Tidak pernah habis pelayan yang bersedia bekerja sampai mati demi kesenangan melayani ratunya."
   },
   "QuestMan": {
-    "localized_name": "-",
+    "localized_name": "Quest Client",
     "description": null
   },
   "Quest_Farmer03_PinkCat": {
@@ -2624,7 +2624,7 @@
     "description": null
   },
   "Reward_BossDefeat": {
-    "localized_name": "Penjaga",
+    "localized_name": "Pemburu Pal Veteran",
     "description": null
   },
   "Reward_Emote_A_01": {
@@ -2712,7 +2712,7 @@
     "description": null
   },
   "Reward_Paldex": {
-    "localized_name": "Penjaga",
+    "localized_name": "Peneliti Ekologi Pal",
     "description": null
   },
   "Reward_Paldex_v02": {
@@ -2773,11 +2773,11 @@
   },
   "SakuraSaurus": {
     "localized_name": "Broncherry",
-    "description": "Baunya berubah drastis sebelum dan sesudah kawin. Ia mengeluarkan aroma yang wangi setelah menemukan partner yang disebut dengan |Aroma Cinta Pertama|."
+    "description": "Baunya berubah drastis sebelum dan sesudah kawin. Ia mengeluarkan aroma yang wangi setelah menemukan partner yang disebut dengan \"Aroma Cinta Pertama\"."
   },
   "SakuraSaurus_Water": {
     "localized_name": "Broncherry Aqua",
-    "description": "Baunya berubah drastis sebelum dan sesudah kawin. Ia mengeluarkan aroma yang wangi setelah menemukan partner yang disebut dengan |Aroma Kesucian|."
+    "description": "Baunya berubah drastis sebelum dan sesudah kawin. Ia mengeluarkan aroma yang wangi setelah menemukan partner yang disebut dengan \"Aroma Kesucian\"."
   },
   "SalesPerson": {
     "localized_name": "Pedagang Pengembara",
@@ -2805,7 +2805,7 @@
   },
   "SamuraiDog": {
     "localized_name": "Pupperai",
-    "description": "Perang wilayah Pupperai dimulai dengan saling bertatapan dan diikuti oleh serangan kilat. Omong-omong, lebih baik jangan mengajari kata |Tunggu| pada yang telah dijinakkan. Gerakan alaminya setelah kamu memberikan perintah |Jalan| tidak akan dapat dihindari."
+    "description": "Perang wilayah Pupperai dimulai dengan saling bertatapan dan diikuti oleh serangan kilat. Omong-omong, lebih baik jangan mengajari kata \"Tunggu\" pada yang telah dijinakkan. Gerakan alaminya setelah kamu memberikan perintah \"Jalan\" tidak akan dapat dihindari."
   },
   "Scientist_FlameThrower": {
     "localized_name": "Unit Penelitian Genetika, Tim Eksekutif",
@@ -2889,7 +2889,7 @@
   },
   "SmallYeti": {
     "localized_name": "Snugloo",
-    "description": "|Melihat mata Snugloo| adalah ungkapan yang berarti mencari esensi yang tidak terlihat oleh mata. Omong-omong, entah kenapa tidak ada peneliti yang mencoba mencari apakah Snugloo benar-benar memiliki mata."
+    "description": "\"Melihat mata Snugloo\" adalah ungkapan yang berarti mencari esensi yang tidak terlihat oleh mata. Omong-omong, entah kenapa tidak ada peneliti yang mencoba mencari apakah Snugloo benar-benar memiliki mata."
   },
   "SnakeGirl": {
     "localized_name": "Venusa",
@@ -2901,7 +2901,7 @@
   },
   "SnowTigerBeastman": {
     "localized_name": "Bastigor",
-    "description": "Jika ia melihat benda bulat, ia langsung ingin memukulnya tak terkendali. Bagi SnowTigerBeastMan, hal tersulit setelah bertahan hidup adalah membuat boneka salju."
+    "description": "Jika ia melihat benda bulat, ia langsung ingin memukulnya tak terkendali. Bagi Bastigor, hal tersulit setelah bertahan hidup adalah membuat boneka salju."
   },
   "SoldierBee": {
     "localized_name": "Beegarde",
@@ -3037,10 +3037,10 @@
   },
   "VioletFairy": {
     "localized_name": "Vaelet",
-    "description": "Kastilnya penuh dengan bunga kesukaan raja. Pertempuran besar terjadi dan api menghampiri kastil. Di tengah hal itu, sesosok roh bunga muncul. - dari dongeng |Bunga Sang Raja|"
+    "description": "Kastilnya penuh dengan bunga kesukaan raja. Pertempuran besar terjadi dan api menghampiri kastil. Di tengah hal itu, sesosok roh bunga muncul. - dari dongeng \"Bunga Sang Raja\""
   },
   "VisitingMerchant": {
-    "localized_name": "-",
+    "localized_name": "Visitor",
     "description": null
   },
   "Visitor_Hunter_Rifle": {
@@ -3072,7 +3072,7 @@
     "description": "Pada individu yang sehat, suhu zat yang mengalir di punggungnya tetap stabil. Jika sedang gugup, suhunya menjadi tidak stabil, dan dalam skenario terburuk, zat tersebut dapat menguap atau membeku, mengakibatkan syok mendadak dan kematian."
   },
   "WeaponsDealer": {
-    "localized_name": "-",
+    "localized_name": "Weapons Dealer",
     "description": null
   },
   "WeaselDragon": {
@@ -3097,7 +3097,7 @@
   },
   "WhiteDeer": {
     "localized_name": "Celesdir",
-    "description": "Naskah kuno menyebutnya sebagai |Binatang Penyelamat|. Cahaya yang dipancarkan Celesdir memurnikan segalanya. Secara harfiah, ia melenyapkan sesuatu dari dunia ini tanpa jejak."
+    "description": "Naskah kuno menyebutnya sebagai \"Binatang Penyelamat\". Cahaya yang dipancarkan Celesdir memurnikan segalanya. Secara harfiah, ia melenyapkan sesuatu dari dunia ini tanpa jejak."
   },
   "WhiteDeer_Dark": {
     "localized_name": "Celesdir Noct",
@@ -3133,11 +3133,11 @@
   },
   "WindChimes": {
     "localized_name": "Hangyu",
-    "description": "Tangan raksasanya dapat merobek apa pun, bahkan besi sekalipun. Sebagai bentuk hukuman yang sangat keji, para kriminal berat diikat dan dicabik-cabik oleh Windchimes di alun-alun."
+    "description": "Tangan raksasanya dapat merobek apa pun, bahkan besi sekalipun. Sebagai bentuk hukuman yang sangat keji, para kriminal berat diikat dan dicabik-cabik oleh Hangyu di alun-alun."
   },
   "WindChimes_Ice": {
     "localized_name": "Hangyu Cryst",
-    "description": "Tangan raksasanya dapat merobek apa pun, bahkan balok es sekalipun. Sebagai bentuk penghinaan yang sangat keji, para kriminal berat diikat dan rambutnya dicabut helai per helai oleh Windchimes_Ice di alun-alun."
+    "description": "Tangan raksasanya dapat merobek apa pun, bahkan balok es sekalipun. Sebagai bentuk penghinaan yang sangat keji, para kriminal berat diikat dan rambutnya dicabut helai per helai oleh Hangyu Cryst di alun-alun."
   },
   "WingGolem": {
     "localized_name": "Knocklem",
@@ -3153,11 +3153,11 @@
   },
   "WizardOwl": {
     "localized_name": "Hoocrates",
-    "description": "Ia kerap tenggelam dalam pikirannya sendiri. Alhasil, ia sulit tidur karena pikirannya tidak bisa berhenti berputar. |Aku berpikir, maka aku ada.|"
+    "description": "Ia kerap tenggelam dalam pikirannya sendiri. Alhasil, ia sulit tidur karena pikirannya tidak bisa berhenti berputar. \"Aku berpikir, maka aku ada.\""
   },
   "WoolFox": {
     "localized_name": "Cremis",
-    "description": "Kualitas bulunya lebih bagus daripada SheepBall, tingkah lakunya lebih cocok untuk ternak daripada SheepBall. Meskipun begitu, secara historis mereka selalu dijadikan hewan peliharaan. Keistimewaan makhluk lucu."
+    "description": "Kualitas bulunya lebih bagus daripada Lamball, tingkah lakunya lebih cocok untuk ternak daripada Lamball. Meskipun begitu, secara historis mereka selalu dijadikan hewan peliharaan. Keistimewaan makhluk lucu."
   },
   "WorldTreeDragon": {
     "localized_name": "Astralym",
@@ -3234,5 +3234,221 @@
   "Yeti_Grass": {
     "localized_name": "Wumpo Botan",
     "description": "Para peneliti pernah memotong rumputnya untuk mengetahui bentuk aslinya, tetapi pada akhirnya yang tersisa hanyalah rumput, seperti memang tidak ada apa-apa di sana sejak awal."
+  },
+  "ArenaShop": {
+    "localized_name": "ArenaShop",
+    "description": null
+  },
+  "Arena_Legend_1": {
+    "localized_name": "Arena_Legend_1",
+    "description": null
+  },
+  "Arena_Legend_10": {
+    "localized_name": "Arena_Legend_10",
+    "description": null
+  },
+  "Arena_Legend_11": {
+    "localized_name": "Arena_Legend_11",
+    "description": null
+  },
+  "Arena_Legend_12": {
+    "localized_name": "Arena_Legend_12",
+    "description": null
+  },
+  "Arena_Legend_13": {
+    "localized_name": "Arena_Legend_13",
+    "description": null
+  },
+  "Arena_Legend_14": {
+    "localized_name": "Arena_Legend_14",
+    "description": null
+  },
+  "Arena_Legend_15": {
+    "localized_name": "Arena_Legend_15",
+    "description": null
+  },
+  "Arena_Legend_16": {
+    "localized_name": "Arena_Legend_16",
+    "description": null
+  },
+  "Arena_Legend_17": {
+    "localized_name": "Arena_Legend_17",
+    "description": null
+  },
+  "Arena_Legend_18": {
+    "localized_name": "Arena_Legend_18",
+    "description": null
+  },
+  "Arena_Legend_19": {
+    "localized_name": "Arena_Legend_19",
+    "description": null
+  },
+  "Arena_Legend_2": {
+    "localized_name": "Arena_Legend_2",
+    "description": null
+  },
+  "Arena_Legend_20": {
+    "localized_name": "Arena_Legend_20",
+    "description": null
+  },
+  "Arena_Legend_3": {
+    "localized_name": "Arena_Legend_3",
+    "description": null
+  },
+  "Arena_Legend_4": {
+    "localized_name": "Arena_Legend_4",
+    "description": null
+  },
+  "Arena_Legend_5": {
+    "localized_name": "Arena_Legend_5",
+    "description": null
+  },
+  "Arena_Legend_6": {
+    "localized_name": "Arena_Legend_6",
+    "description": null
+  },
+  "Arena_Legend_7": {
+    "localized_name": "Arena_Legend_7",
+    "description": null
+  },
+  "Arena_Legend_8": {
+    "localized_name": "Arena_Legend_8",
+    "description": null
+  },
+  "Arena_Legend_9": {
+    "localized_name": "Arena_Legend_9",
+    "description": null
+  },
+  "ArmorWoodlouse": {
+    "localized_name": "ArmorWoodlouse",
+    "description": null
+  },
+  "BeardedDragon": {
+    "localized_name": "BeardedDragon",
+    "description": "This Pal is under investigation."
+  },
+  "BlueWoolRabbit": {
+    "localized_name": "BlueWoolRabbit",
+    "description": null
+  },
+  "CandleWitch": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "CuteOrca": {
+    "localized_name": "CuteOrca",
+    "description": null
+  },
+  "DarkMutant": {
+    "localized_name": "DarkMutant",
+    "description": "Dikatakan bahwa tebasan DarkMutant yang sangat ahli dapat memutus dimensi dan menciptakan lubang di luar angkasa. Ada spekulasi bahwa beberapa Pal muncul dari sana."
+  },
+  "DesertBoss": {
+    "localized_name": "DesertBoss",
+    "description": null
+  },
+  "ElecSnail_Fire": {
+    "localized_name": "ElecSnail_Fire",
+    "description": null
+  },
+  "ElectricBoss": {
+    "localized_name": "ElectricBoss",
+    "description": null
+  },
+  "Emote_Tester": {
+    "localized_name": "Emote_Tester",
+    "description": null
+  },
+  "ForestBoss": {
+    "localized_name": "Lily & Lyleen",
+    "description": null
+  },
+  "FrozenBear": {
+    "localized_name": "FrozenBear",
+    "description": null
+  },
+  "GrassDragon": {
+    "localized_name": "GrassDragon",
+    "description": "This Pal is under investigation."
+  },
+  "IceVeilDragon": {
+    "localized_name": "IceVeilDragon",
+    "description": null
+  },
+  "KingCrab": {
+    "localized_name": "KingCrab",
+    "description": null
+  },
+  "LeafBird": {
+    "localized_name": "LeafBird",
+    "description": null
+  },
+  "MedjedBird": {
+    "localized_name": "MedjedBird",
+    "description": null
+  },
+  "MexicanSalamander": {
+    "localized_name": "MexicanSalamander",
+    "description": null
+  },
+  "Monkey_Ice": {
+    "localized_name": "Monkey_Ice",
+    "description": null
+  },
+  "MonochromeMushroom": {
+    "localized_name": "MonochromeMushroom",
+    "description": null
+  },
+  "Negotiator": {
+    "localized_name": "Negotiator",
+    "description": null
+  },
+  "PinkKangaroo": {
+    "localized_name": "PinkKangaroo",
+    "description": null
+  },
+  "RockCheetah": {
+    "localized_name": "RockCheetah",
+    "description": null
+  },
+  "SakurajimaBoss": {
+    "localized_name": "Saya & Selyne",
+    "description": null
+  },
+  "SnakeQueen": {
+    "localized_name": "SnakeQueen",
+    "description": null
+  },
+  "SnowBoss": {
+    "localized_name": "Victor & Shadowbeak",
+    "description": null
+  },
+  "StrawHatCat": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "TestAssassin": {
+    "localized_name": "TestAssassin",
+    "description": null
+  },
+  "TestNPC": {
+    "localized_name": "TestNPC",
+    "description": null
+  },
+  "VikingBoss": {
+    "localized_name": "Bjorn & Bastigor",
+    "description": null
+  },
+  "VolcanicTurtle": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "WaterLizard": {
+    "localized_name": "WaterLizard",
+    "description": null
+  },
+  "WorldTree_Hunter_MissileLauncher_test": {
+    "localized_name": "WorldTree_Hunter_MissileLauncher_test",
+    "description": null
   }
 }

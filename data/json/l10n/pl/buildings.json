@@ -131,6 +131,10 @@
     "localized_name": "Automat do gier typu arcade",
     "description": "Ozdobny automat do gier typu arcade. Jest uszkodzony i nie można na nim grać."
   },
+  "Banyan_Big": {
+    "localized_name": "Banyan_Big",
+    "description": null
+  },
   "Barrel01_Iron": {
     "localized_name": "Czerwona metalowa beczka",
     "description": "Metalowa czerwona beczka dekoracyjna."
@@ -359,6 +363,10 @@
     "localized_name": "Manekin treningowy",
     "description": "Manekin treningowy wyglądający jak Pengullet. Może być ustawiony wyłącznie na otwartej przestrzeni."
   },
+  "DamagedScarecrow_Test": {
+    "localized_name": "DamagedScarecrow_Test",
+    "description": null
+  },
   "DarkIsland_Banner": {
     "localized_name": "Pionowy baner ludu Feybreak",
     "description": "Dekoracyjny pionowy baner ludu Feybreak."
@@ -368,8 +376,8 @@
     "description": "Dekoracyjna flaga ludu Feybreak."
   },
   "Decal_PalSticker_PinkCat": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Tuppanyan sticker",
+    "description": null
   },
   "DefenseBowGun": {
     "localized_name": "Stacjonarna kusza",
@@ -735,6 +743,10 @@
     "localized_name": "Szklany fundament",
     "description": "Fundament do stawiania ścian lub innych struktur. Wykonany z przemysłowego szkła, jest całkiem wytrzymały."
   },
+  "Glass_pillars": {
+    "localized_name": "Szklany filar",
+    "description": "Kolumna wspierająca konstrukcję. Wykonana z przemysłowego szkła, jest całkiem wytrzymała."
+  },
   "Glass_roof": {
     "localized_name": "Szklany dach",
     "description": "Dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z przemysłowego szkła, jest całkiem wytrzymały."
@@ -757,7 +769,7 @@
   },
   "GoalSoccer_Iron": {
     "localized_name": "Bramka piłkarska",
-    "description": "Dekoracyjna bramka piłkarska. Wkopanie do niej Pala takiego jak SheepBall nie da ci żadnych punktów."
+    "description": "Dekoracyjna bramka piłkarska. Wkopanie do niej Pala takiego jak Lamball nie da ci żadnych punktów."
   },
   "GuardianDogStatue": {
     "localized_name": "Posąg Yakumo",
@@ -1111,6 +1123,10 @@
     "localized_name": "Metalowy fundament",
     "description": "Fundament do stawiania ścian lub innych struktur. Wykonany z metalu, jest niezwykle wytrzymały."
   },
+  "Metal_pillars": {
+    "localized_name": "Metalowy filar",
+    "description": "Kolumna wspierająca konstrukcję. Wykonana z metalu, jest niezwykle wytrzymała."
+  },
   "Metal_roof": {
     "localized_name": "Metalowy dach",
     "description": "Dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z metalu, jest niezwykle wytrzymały."
@@ -1276,8 +1292,8 @@
     "description": "Antyczny podłużny dekoracyjny dywan."
   },
   "Rug_Wood": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Fur rug",
+    "description": null
   },
   "SF_Chair": {
     "localized_name": "Krzesło w stylu laboratoryjnym",
@@ -1346,6 +1362,10 @@
   "SF_foundation": {
     "localized_name": "Minimalistyczny fundament",
     "description": "Fundament do stawiania ścian lub innych struktur. Umożliwia tworzenie minimalistycznych, nowoczesnych konstrukcji."
+  },
+  "SF_pillars": {
+    "localized_name": "Minimalistyczna kolumna",
+    "description": "Kolumna wspierająca konstrukcję. Umożliwia tworzenie minimalistycznych, modernistycznych konstrukcji."
   },
   "SF_roof": {
     "localized_name": "Minimalistyczny dach",
@@ -1611,6 +1631,10 @@
     "localized_name": "Kamienny fundament",
     "description": "Fundament do stawiania ścian lub innych struktur. Wykonany z kamienia, jest dość wytrzymały."
   },
+  "Stone_pillar": {
+    "localized_name": "Kamienny filar",
+    "description": "Kolumna wspierająca konstrukcję. Wykonana z kamienia, jest dość wytrzymała."
+  },
   "Stone_roof": {
     "localized_name": "Kamienny dach",
     "description": "Dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z kamienia, jest dość wytrzymały."
@@ -1768,20 +1792,20 @@
     "description": "Dekoracyjna sygnalizacja świetlna."
   },
   "TrafficSign01_Iron": {
-    "localized_name": "Znak „Palom wstęp wzbroniony|",
-    "description": "Dekoracyjny znak „Palom wstęp wzbrioniony|. Używany w starożytności, dziś nie pełni już żadnej realnej funkcji."
+    "localized_name": "Znak „Palom wstęp wzbroniony\"",
+    "description": "Dekoracyjny znak „Palom wstęp wzbrioniony\". Używany w starożytności, dziś nie pełni już żadnej realnej funkcji."
   },
   "TrafficSign02_Iron": {
-    "localized_name": "Znak „Stop|",
-    "description": "Dekoracyjny znak „Stop|. Używany w starożytności, dziś nie pełni już żadnej realnej funkcji."
+    "localized_name": "Znak „Stop\"",
+    "description": "Dekoracyjny znak „Stop\". Używany w starożytności, dziś nie pełni już żadnej realnej funkcji."
   },
   "TrafficSign03_Iron": {
-    "localized_name": "Znak „Uwaga Eikthyrdeery|",
-    "description": "Dekoracyjny znak „Uwaga Eikthyrdeery|. W starożytności często dochodziło do zderzeń między Eikthyrdeerami a innymi Palami."
+    "localized_name": "Znak „Uwaga Eikthyrdeery\"",
+    "description": "Dekoracyjny znak „Uwaga Eikthyrdeery\". W starożytności często dochodziło do zderzeń między Eikthyrdeerami a innymi Palami."
   },
   "TrafficSign04_Iron": {
-    "localized_name": "Znak „Uwaga Mammoresty|",
-    "description": "Dekoracyjny znak „Uwaga Mammoresty|. W starożytności często ginęli ci, którzy rozwścieczyli Mammoresta."
+    "localized_name": "Znak „Uwaga Mammoresty\"",
+    "description": "Dekoracyjny znak „Uwaga Mammoresty\". W starożytności często ginęli ci, którzy rozwścieczyli Mammoresta."
   },
   "TransmissionTower": {
     "localized_name": "Słup elektryczny",
@@ -1808,8 +1832,8 @@
     "description": "Pułapka zamrażająca Pala, który na nią nadepnie. Zamrożenie zwiększa szansę na jego schwytanie za pomocą sfery."
   },
   "Trap_MovingPanel": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Moving Panels",
+    "description": "A description of the moving panel"
   },
   "Trap_Noose": {
     "localized_name": "Wnyki",
@@ -1919,6 +1943,10 @@
     "localized_name": "Drabina",
     "description": "Drabina, dzięki której możesz wspiąć się na nieco wyższe miejsce."
   },
+  "Wooden_pillar": {
+    "localized_name": "Drewniany filar",
+    "description": "Kolumna wspierająca konstrukcję. Wykonana z drewna, łatwo się niszczy."
+  },
   "Wooden_roof": {
     "localized_name": "Drewniany dach",
     "description": "Dach stawiany na ścianach, chroniący przed deszczem i wiatrem. Wykonany z drewna, łatwo się niszczy."
@@ -1954,5 +1982,13 @@
   "Zaisu": {
     "localized_name": "Japońskie krzesło podłogowe",
     "description": "Dekoracyjne krzesło podłogowe. Doskonale pasuje do budowli w japońskim stylu."
+  },
+  "JapaneseStyle_TriangleStairsCorner_02": {
+    "localized_name": "JapaneseStyle_TriangleStairsCorner_02",
+    "description": null
+  },
+  "WoodCreator": {
+    "localized_name": "WoodCreator",
+    "description": null
   }
 }

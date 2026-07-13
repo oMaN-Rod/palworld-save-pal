@@ -20,51 +20,51 @@
     "description": "Angriff +10.0 % Feuerschaden −15.0 % Blitzschaden −15.0 %"
   },
   "Attack_ACC_up1": {
-    "localized_name": "ANG-Erhöhung Lv. 1",
+    "localized_name": "ANG-Erhöhung Lv. 1",
     "description": null
   },
   "Attack_ACC_up1_Armor": {
-    "localized_name": "ANG-Erhöhung (S) Lv. 1",
+    "localized_name": "ANG-Erhöhung (S) Lv. 1",
     "description": null
   },
   "Attack_ACC_up1_Otomo_Only_Equip": {
-    "localized_name": "ANG-Erhöhung Lv. 1 (Pals)",
+    "localized_name": "ANG-Erhöhung Lv. 1 (Pals)",
     "description": null
   },
   "Attack_ACC_up2": {
-    "localized_name": "ANG-Erhöhung Lv. 2",
+    "localized_name": "ANG-Erhöhung Lv. 2",
     "description": null
   },
   "Attack_ACC_up2_Armor": {
-    "localized_name": "ANG-Erhöhung (S) Lv. 2",
+    "localized_name": "ANG-Erhöhung (S) Lv. 2",
     "description": null
   },
   "Attack_ACC_up2_Otomo_Only_Equip": {
-    "localized_name": "ANG-Erhöhung Lv. 2 (Pals)",
+    "localized_name": "ANG-Erhöhung Lv. 2 (Pals)",
     "description": null
   },
   "Attack_ACC_up3": {
-    "localized_name": "ANG-Erhöhung Lv. 3",
+    "localized_name": "ANG-Erhöhung Lv. 3",
     "description": null
   },
   "Attack_ACC_up3_Armor": {
-    "localized_name": "ANG-Erhöhung (S) Lv. 3",
+    "localized_name": "ANG-Erhöhung (S) Lv. 3",
     "description": null
   },
   "Attack_ACC_up3_Otomo_Only_Equip": {
-    "localized_name": "ANG-Erhöhung Lv. 3 (Pals)",
+    "localized_name": "ANG-Erhöhung Lv. 3 (Pals)",
     "description": null
   },
   "Attack_ACC_up4": {
-    "localized_name": "ANG-Erhöhung Lv. 4",
+    "localized_name": "ANG-Erhöhung Lv. 4",
     "description": null
   },
   "Attack_ACC_up4_Armor": {
-    "localized_name": "ANG-Erhöhung (S) Lv. 4",
+    "localized_name": "ANG-Erhöhung (S) Lv. 4",
     "description": null
   },
   "Attack_ACC_up4_Otomo_Only_Equip": {
-    "localized_name": "ANG-Erhöhung Lv. 4 (Pals)",
+    "localized_name": "ANG-Erhöhung Lv. 4 (Pals)",
     "description": null
   },
   "AutoHPRegeneRate_Passive": {
@@ -568,19 +568,19 @@
     "description": null
   },
   "Defense_ACC_up1_Otomo_Only_Equip": {
-    "localized_name": "VTD-Erhöhung Lv. 1 (Pals)",
+    "localized_name": "VTD-Erhöhung Lv. 1 (Pals)",
     "description": null
   },
   "Defense_ACC_up2_Otomo_Only_Equip": {
-    "localized_name": "VTD-Erhöhung Lv. 2 (Pals)",
+    "localized_name": "VTD-Erhöhung Lv. 2 (Pals)",
     "description": null
   },
   "Defense_ACC_up3_Otomo_Only_Equip": {
-    "localized_name": "VTD-Erhöhung Lv. 3 (Pals)",
+    "localized_name": "VTD-Erhöhung Lv. 3 (Pals)",
     "description": null
   },
   "Defense_ACC_up4_Otomo_Only_Equip": {
-    "localized_name": "VTD-Erhöhung Lv. 4 (Pals)",
+    "localized_name": "VTD-Erhöhung Lv. 4 (Pals)",
     "description": null
   },
   "Deffence_down1": {
@@ -597,15 +597,15 @@
   },
   "Deffence_up2": {
     "localized_name": "Stämmiger Wuchs",
-    "description": "Verteidigung +20.0 % Betäubungsimmunität"
+    "description": "Verteidigung +20 % Betäubungsimmunität"
   },
   "Deffence_up2_2": {
     "localized_name": "Schwergewicht",
-    "description": "Verteidigung +20.0 % Rückstoßimmunität"
+    "description": "Verteidigung +20 % Rückstoßimmunität"
   },
   "Deffence_up3": {
     "localized_name": "Diamantkörper",
-    "description": "Verteidigung +30.0 % Betäubungsimmunität Rückstoßimmunität"
+    "description": "Verteidigung +30 % Betäubungsimmunität Rückstoßimmunität"
   },
   "Defuser_ExplosiveSpore_EquipSkill": {
     "localized_name": "Immunität gegen Explosionsschaden",
@@ -613,7 +613,7 @@
   },
   "ElementBoost_Aqua_1_PAL": {
     "localized_name": "Wasserratte",
-    "description": "Wasserangriffsschaden +10.0 %"
+    "description": "Wasserangriffsschaden +10 %"
   },
   "ElementBoost_Aqua_2_PAL": {
     "localized_name": "Gebieter der Meere",
@@ -624,19 +624,19 @@
     "description": null
   },
   "ElementBoost_Dark_1_Otomo_Only_Equip": {
-    "localized_name": "Schattenschadenssteigerung Lv. 1 (Pals)",
+    "localized_name": "Schattenschadenssteigerung Lv. 1 (Pals)",
     "description": null
   },
   "ElementBoost_Dark_1_PAL": {
     "localized_name": "Grufti",
-    "description": "Schattenangriffsschaden +10.0 %"
+    "description": "Schattenangriffsschaden +10 %"
   },
   "ElementBoost_Dark_2_BossDefeat": {
     "localized_name": "Schattenschadenssteigerung (M)",
     "description": null
   },
   "ElementBoost_Dark_2_Otomo_Only_Equip": {
-    "localized_name": "Schattenschadenssteigerung Lv. 2 (Pals)",
+    "localized_name": "Schattenschadenssteigerung Lv. 2 (Pals)",
     "description": null
   },
   "ElementBoost_Dark_2_PAL": {
@@ -648,11 +648,11 @@
     "description": null
   },
   "ElementBoost_Dark_3_Otomo_Only_Equip": {
-    "localized_name": "Schattenschadenssteigerung Lv. 3 (Pals)",
+    "localized_name": "Schattenschadenssteigerung Lv. 3 (Pals)",
     "description": null
   },
   "ElementBoost_Dark_4_Otomo_Only_Equip": {
-    "localized_name": "Schattenschadenssteigerung Lv. 4 (Pals)",
+    "localized_name": "Schattenschadenssteigerung Lv. 4 (Pals)",
     "description": null
   },
   "ElementBoost_Dragon_1_BossDefeat": {
@@ -660,19 +660,19 @@
     "description": null
   },
   "ElementBoost_Dragon_1_Otomo_Only_Equip": {
-    "localized_name": "Drachenschadenssteigerung Lv. 1 (Pals)",
+    "localized_name": "Drachenschadenssteigerung Lv. 1 (Pals)",
     "description": null
   },
   "ElementBoost_Dragon_1_PAL": {
     "localized_name": "Drachengeborener",
-    "description": "Drachenangriffsschaden +10.0 %"
+    "description": "Drachenangriffsschaden +10 %"
   },
   "ElementBoost_Dragon_2_BossDefeat": {
     "localized_name": "Drachenschadenssteigerung (M)",
     "description": null
   },
   "ElementBoost_Dragon_2_Otomo_Only_Equip": {
-    "localized_name": "Drachenschadenssteigerung Lv. 2 (Pals)",
+    "localized_name": "Drachenschadenssteigerung Lv. 2 (Pals)",
     "description": null
   },
   "ElementBoost_Dragon_2_PAL": {
@@ -684,11 +684,11 @@
     "description": null
   },
   "ElementBoost_Dragon_3_Otomo_Only_Equip": {
-    "localized_name": "Drachenschadenssteigerung Lv. 3 (Pals)",
+    "localized_name": "Drachenschadenssteigerung Lv. 3 (Pals)",
     "description": null
   },
   "ElementBoost_Dragon_4_Otomo_Only_Equip": {
-    "localized_name": "Drachenschadenssteigerung Lv. 4 (Pals)",
+    "localized_name": "Drachenschadenssteigerung Lv. 4 (Pals)",
     "description": null
   },
   "ElementBoost_Earth_1_BossDefeat": {
@@ -696,19 +696,19 @@
     "description": null
   },
   "ElementBoost_Earth_1_Otomo_Only_Equip": {
-    "localized_name": "Erdschadenssteigerung Lv. 1 (Pals)",
+    "localized_name": "Erdschadenssteigerung Lv. 1 (Pals)",
     "description": null
   },
   "ElementBoost_Earth_1_PAL": {
     "localized_name": "Macht von Gaia",
-    "description": "Erdangriffsschaden +10.0 %"
+    "description": "Erdangriffsschaden +10 %"
   },
   "ElementBoost_Earth_2_BossDefeat": {
     "localized_name": "Erdschadenssteigerung (M)",
     "description": null
   },
   "ElementBoost_Earth_2_Otomo_Only_Equip": {
-    "localized_name": "Erdschadenssteigerung Lv. 2 (Pals)",
+    "localized_name": "Erdschadenssteigerung Lv. 2 (Pals)",
     "description": null
   },
   "ElementBoost_Earth_2_PAL": {
@@ -720,11 +720,11 @@
     "description": null
   },
   "ElementBoost_Earth_3_Otomo_Only_Equip": {
-    "localized_name": "Erdschadenssteigerung Lv. 3 (Pals)",
+    "localized_name": "Erdschadenssteigerung Lv. 3 (Pals)",
     "description": null
   },
   "ElementBoost_Earth_4_Otomo_Only_Equip": {
-    "localized_name": "Erdschadenssteigerung Lv. 4 (Pals)",
+    "localized_name": "Erdschadenssteigerung Lv. 4 (Pals)",
     "description": null
   },
   "ElementBoost_Electricity_1_BossDefeat": {
@@ -732,7 +732,7 @@
     "description": null
   },
   "ElementBoost_Electricity_1_Otomo_Only_Equip": {
-    "localized_name": "Elektroschadenssteigerung Lv. 1 (Pals)",
+    "localized_name": "Elektroschadenssteigerung Lv. 1 (Pals)",
     "description": null
   },
   "ElementBoost_Electricity_2_BossDefeat": {
@@ -740,7 +740,7 @@
     "description": null
   },
   "ElementBoost_Electricity_2_Otomo_Only_Equip": {
-    "localized_name": "Elektroschadenssteigerung Lv. 2 (Pals)",
+    "localized_name": "Elektroschadenssteigerung Lv. 2 (Pals)",
     "description": null
   },
   "ElementBoost_Electricity_3_BossDefeat": {
@@ -748,11 +748,11 @@
     "description": null
   },
   "ElementBoost_Electricity_3_Otomo_Only_Equip": {
-    "localized_name": "Elektroschadenssteigerung Lv. 3 (Pals)",
+    "localized_name": "Elektroschadenssteigerung Lv. 3 (Pals)",
     "description": null
   },
   "ElementBoost_Electricity_4_Otomo_Only_Equip": {
-    "localized_name": "Elektroschadenssteigerung Lv. 4 (Pals)",
+    "localized_name": "Elektroschadenssteigerung Lv. 4 (Pals)",
     "description": null
   },
   "ElementBoost_Fire_1_BossDefeat": {
@@ -760,19 +760,19 @@
     "description": null
   },
   "ElementBoost_Fire_1_Otomo_Only_Equip": {
-    "localized_name": "Feuerschadenssteigerung Lv. 1 (Pals)",
+    "localized_name": "Feuerschadenssteigerung Lv. 1 (Pals)",
     "description": null
   },
   "ElementBoost_Fire_1_PAL": {
     "localized_name": "Pyromane",
-    "description": "Feuerangriffsschaden +10.0 %"
+    "description": "Feuerangriffsschaden +10 %"
   },
   "ElementBoost_Fire_2_BossDefeat": {
     "localized_name": "Feuerschadenssteigerung (M)",
     "description": null
   },
   "ElementBoost_Fire_2_Otomo_Only_Equip": {
-    "localized_name": "Feuerschadenssteigerung Lv. 2 (Pals)",
+    "localized_name": "Feuerschadenssteigerung Lv. 2 (Pals)",
     "description": null
   },
   "ElementBoost_Fire_2_PAL": {
@@ -784,11 +784,11 @@
     "description": null
   },
   "ElementBoost_Fire_3_Otomo_Only_Equip": {
-    "localized_name": "Feuerschadenssteigerung Lv. 3 (Pals)",
+    "localized_name": "Feuerschadenssteigerung Lv. 3 (Pals)",
     "description": null
   },
   "ElementBoost_Fire_4_Otomo_Only_Equip": {
-    "localized_name": "Feuerschadenssteigerung Lv. 4 (Pals)",
+    "localized_name": "Feuerschadenssteigerung Lv. 4 (Pals)",
     "description": null
   },
   "ElementBoost_Ice_1_BossDefeat": {
@@ -796,19 +796,19 @@
     "description": null
   },
   "ElementBoost_Ice_1_Otomo_Only_Equip": {
-    "localized_name": "Eisschadenssteigerung Lv. 1 (Pals)",
+    "localized_name": "Eisschadenssteigerung Lv. 1 (Pals)",
     "description": null
   },
   "ElementBoost_Ice_1_PAL": {
     "localized_name": "Kaltblütig",
-    "description": "Eisangriffsschaden +10.0 %"
+    "description": "Eisangriffsschaden +10 %"
   },
   "ElementBoost_Ice_2_BossDefeat": {
     "localized_name": "Eisschadenssteigerung (M)",
     "description": null
   },
   "ElementBoost_Ice_2_Otomo_Only_Equip": {
-    "localized_name": "Eisschadenssteigerung Lv. 2 (Pals)",
+    "localized_name": "Eisschadenssteigerung Lv. 2 (Pals)",
     "description": null
   },
   "ElementBoost_Ice_2_PAL": {
@@ -820,11 +820,11 @@
     "description": null
   },
   "ElementBoost_Ice_3_Otomo_Only_Equip": {
-    "localized_name": "Eisschadenssteigerung Lv. 3 (Pals)",
+    "localized_name": "Eisschadenssteigerung Lv. 3 (Pals)",
     "description": null
   },
   "ElementBoost_Ice_4_Otomo_Only_Equip": {
-    "localized_name": "Eisschadenssteigerung Lv. 4 (Pals)",
+    "localized_name": "Eisschadenssteigerung Lv. 4 (Pals)",
     "description": null
   },
   "ElementBoost_Leaf_1_BossDefeat": {
@@ -832,19 +832,19 @@
     "description": null
   },
   "ElementBoost_Leaf_1_Otomo_Only_Equip": {
-    "localized_name": "Grasschadenssteigerung Lv. 1 (Pals)",
+    "localized_name": "Grasschadenssteigerung Lv. 1 (Pals)",
     "description": null
   },
   "ElementBoost_Leaf_1_PAL": {
     "localized_name": "Grüner Daumen",
-    "description": "Grasangriffsschaden +10.0 %"
+    "description": "Grasangriffsschaden +10 %"
   },
   "ElementBoost_Leaf_2_BossDefeat": {
     "localized_name": "Grasschadenssteigerung (M)",
     "description": null
   },
   "ElementBoost_Leaf_2_Otomo_Only_Equip": {
-    "localized_name": "Grasschadenssteigerung Lv. 2 (Pals)",
+    "localized_name": "Grasschadenssteigerung Lv. 2 (Pals)",
     "description": null
   },
   "ElementBoost_Leaf_2_PAL": {
@@ -856,11 +856,11 @@
     "description": null
   },
   "ElementBoost_Leaf_3_Otomo_Only_Equip": {
-    "localized_name": "Grasschadenssteigerung Lv. 3 (Pals)",
+    "localized_name": "Grasschadenssteigerung Lv. 3 (Pals)",
     "description": null
   },
   "ElementBoost_Leaf_4_Otomo_Only_Equip": {
-    "localized_name": "Grasschadenssteigerung Lv. 4 (Pals)",
+    "localized_name": "Grasschadenssteigerung Lv. 4 (Pals)",
     "description": null
   },
   "ElementBoost_Normal_1_BossDefeat": {
@@ -868,19 +868,19 @@
     "description": null
   },
   "ElementBoost_Normal_1_Otomo_Only_Equip": {
-    "localized_name": "Neutralschadenssteigerung Lv. 1 (Pals)",
+    "localized_name": "Neutralschadenssteigerung Lv. 1 (Pals)",
     "description": null
   },
   "ElementBoost_Normal_1_PAL": {
     "localized_name": "Neutralisator",
-    "description": "Neutralangriffsschaden +10.0 %"
+    "description": "Neutralangriffsschaden +10 %"
   },
   "ElementBoost_Normal_2_BossDefeat": {
     "localized_name": "Neutralschadenssteigerung (M)",
     "description": null
   },
   "ElementBoost_Normal_2_Otomo_Only_Equip": {
-    "localized_name": "Neutralschadenssteigerung Lv. 2 (Pals)",
+    "localized_name": "Neutralschadenssteigerung Lv. 2 (Pals)",
     "description": null
   },
   "ElementBoost_Normal_2_PAL": {
@@ -892,16 +892,16 @@
     "description": null
   },
   "ElementBoost_Normal_3_Otomo_Only_Equip": {
-    "localized_name": "Neutralschadenssteigerung Lv. 3 (Pals)",
+    "localized_name": "Neutralschadenssteigerung Lv. 3 (Pals)",
     "description": null
   },
   "ElementBoost_Normal_4_Otomo_Only_Equip": {
-    "localized_name": "Neutralschadenssteigerung Lv. 4 (Pals)",
+    "localized_name": "Neutralschadenssteigerung Lv. 4 (Pals)",
     "description": null
   },
   "ElementBoost_Thunder_1_PAL": {
     "localized_name": "Dynamo",
-    "description": "Elektroangriffsschaden +10.0 %"
+    "description": "Elektroangriffsschaden +10 %"
   },
   "ElementBoost_Thunder_2_PAL": {
     "localized_name": "Meister des Donners",
@@ -912,7 +912,7 @@
     "description": null
   },
   "ElementBoost_Water_1_Otomo_Only_Equip": {
-    "localized_name": "Wasserschadenssteigerung Lv. 1 (Pals)",
+    "localized_name": "Wasserschadenssteigerung Lv. 1 (Pals)",
     "description": null
   },
   "ElementBoost_Water_2_BossDefeat": {
@@ -920,7 +920,7 @@
     "description": null
   },
   "ElementBoost_Water_2_Otomo_Only_Equip": {
-    "localized_name": "Wasserschadenssteigerung Lv. 2 (Pals)",
+    "localized_name": "Wasserschadenssteigerung Lv. 2 (Pals)",
     "description": null
   },
   "ElementBoost_Water_3_BossDefeat": {
@@ -928,191 +928,191 @@
     "description": null
   },
   "ElementBoost_Water_3_Otomo_Only_Equip": {
-    "localized_name": "Wasserschadenssteigerung Lv. 3 (Pals)",
+    "localized_name": "Wasserschadenssteigerung Lv. 3 (Pals)",
     "description": null
   },
   "ElementBoost_Water_4_Otomo_Only_Equip": {
-    "localized_name": "Wasserschadenssteigerung Lv. 4 (Pals)",
+    "localized_name": "Wasserschadenssteigerung Lv. 4 (Pals)",
     "description": null
   },
   "ElementResist_Aqua_1": {
-    "localized_name": "Wasserschadensminderung Lv. 1",
+    "localized_name": "Wasserschadensminderung Lv. 1",
     "description": null
   },
   "ElementResist_Aqua_1_PAL": {
     "localized_name": "Imprägniert",
-    "description": "Wasserschaden −10.0 %"
+    "description": "Wasserschaden −10 %"
   },
   "ElementResist_Aqua_2": {
-    "localized_name": "Wasserschadensminderung Lv. 2",
+    "localized_name": "Wasserschadensminderung Lv. 2",
     "description": null
   },
   "ElementResist_Aqua_3": {
-    "localized_name": "Wasserschadensminderung Lv. 3",
+    "localized_name": "Wasserschadensminderung Lv. 3",
     "description": null
   },
   "ElementResist_Aqua_4": {
-    "localized_name": "Wasserschadensminderung Lv. 4",
+    "localized_name": "Wasserschadensminderung Lv. 4",
     "description": null
   },
   "ElementResist_Dark_1": {
-    "localized_name": "Schattenschadensminderung Lv. 1",
+    "localized_name": "Schattenschadensminderung Lv. 1",
     "description": null
   },
   "ElementResist_Dark_1_PAL": {
     "localized_name": "Frohnatur",
-    "description": "Schattenschaden −10.0 %"
+    "description": "Schattenschaden −10 %"
   },
   "ElementResist_Dark_2": {
-    "localized_name": "Schattenschadensminderung Lv. 2",
+    "localized_name": "Schattenschadensminderung Lv. 2",
     "description": null
   },
   "ElementResist_Dark_3": {
-    "localized_name": "Schattenschadensminderung Lv. 3",
+    "localized_name": "Schattenschadensminderung Lv. 3",
     "description": null
   },
   "ElementResist_Dark_4": {
-    "localized_name": "Schattenschadensminderung Lv. 4",
+    "localized_name": "Schattenschadensminderung Lv. 4",
     "description": null
   },
   "ElementResist_Dragon_1": {
-    "localized_name": "Drachenschadensminderung Lv. 1",
+    "localized_name": "Drachenschadensminderung Lv. 1",
     "description": null
   },
   "ElementResist_Dragon_1_PAL": {
     "localized_name": "Drachentöter",
-    "description": "Drachenschaden −10.0 %"
+    "description": "Drachenschaden −10 %"
   },
   "ElementResist_Dragon_2": {
-    "localized_name": "Drachenschadensminderung Lv. 2",
+    "localized_name": "Drachenschadensminderung Lv. 2",
     "description": null
   },
   "ElementResist_Dragon_3": {
-    "localized_name": "Drachenschadensminderung Lv. 3",
+    "localized_name": "Drachenschadensminderung Lv. 3",
     "description": null
   },
   "ElementResist_Dragon_4": {
-    "localized_name": "Drachenschadensminderung Lv. 4",
+    "localized_name": "Drachenschadensminderung Lv. 4",
     "description": null
   },
   "ElementResist_Earth_1": {
-    "localized_name": "Erdschadensminderung Lv. 1",
+    "localized_name": "Erdschadensminderung Lv. 1",
     "description": null
   },
   "ElementResist_Earth_1_PAL": {
     "localized_name": "Erdbebensicher",
-    "description": "Erdschaden −10.0 %"
+    "description": "Erdschaden −10 %"
   },
   "ElementResist_Earth_2": {
-    "localized_name": "Erdschadensminderung Lv. 2",
+    "localized_name": "Erdschadensminderung Lv. 2",
     "description": null
   },
   "ElementResist_Earth_3": {
-    "localized_name": "Erdschadensminderung Lv. 3",
+    "localized_name": "Erdschadensminderung Lv. 3",
     "description": null
   },
   "ElementResist_Earth_4": {
-    "localized_name": "Erdschadensminderung Lv. 4",
+    "localized_name": "Erdschadensminderung Lv. 4",
     "description": null
   },
   "ElementResist_Fire_1": {
-    "localized_name": "Feuerschadensminderung Lv. 1",
+    "localized_name": "Feuerschadensminderung Lv. 1",
     "description": null
   },
   "ElementResist_Fire_1_PAL": {
     "localized_name": "Cooler Typ",
-    "description": "Feuerschaden −10.0 %"
+    "description": "Feuerschaden −10 %"
   },
   "ElementResist_Fire_2": {
-    "localized_name": "Feuerschadensminderung Lv. 2",
+    "localized_name": "Feuerschadensminderung Lv. 2",
     "description": null
   },
   "ElementResist_Fire_3": {
-    "localized_name": "Feuerschadensminderung Lv. 3",
+    "localized_name": "Feuerschadensminderung Lv. 3",
     "description": null
   },
   "ElementResist_Fire_4": {
-    "localized_name": "Feuerschadensminderung Lv. 4",
+    "localized_name": "Feuerschadensminderung Lv. 4",
     "description": null
   },
   "ElementResist_Ice_1": {
-    "localized_name": "Eisschadensminderung Lv. 1",
+    "localized_name": "Eisschadensminderung Lv. 1",
     "description": null
   },
   "ElementResist_Ice_1_PAL": {
     "localized_name": "Hitzkopf",
-    "description": "Eisschaden −10.0 %"
+    "description": "Eisschaden −10 %"
   },
   "ElementResist_Ice_2": {
-    "localized_name": "Eisschadensminderung Lv. 2",
+    "localized_name": "Eisschadensminderung Lv. 2",
     "description": null
   },
   "ElementResist_Ice_3": {
-    "localized_name": "Eisschadensminderung Lv. 3",
+    "localized_name": "Eisschadensminderung Lv. 3",
     "description": null
   },
   "ElementResist_Ice_4": {
-    "localized_name": "Eisschadensminderung Lv. 4",
+    "localized_name": "Eisschadensminderung Lv. 4",
     "description": null
   },
   "ElementResist_Leaf_1": {
-    "localized_name": "Grasschadensminderung Lv. 1",
+    "localized_name": "Grasschadensminderung Lv. 1",
     "description": null
   },
   "ElementResist_Leaf_1_PAL": {
     "localized_name": "Herbizid",
-    "description": "Grasschaden −10.0 %"
+    "description": "Grasschaden −10 %"
   },
   "ElementResist_Leaf_2": {
-    "localized_name": "Grasschadensminderung Lv. 2",
+    "localized_name": "Grasschadensminderung Lv. 2",
     "description": null
   },
   "ElementResist_Leaf_3": {
-    "localized_name": "Grasschadensminderung Lv. 3",
+    "localized_name": "Grasschadensminderung Lv. 3",
     "description": null
   },
   "ElementResist_Leaf_4": {
-    "localized_name": "Grasschadensminderung Lv. 4",
+    "localized_name": "Grasschadensminderung Lv. 4",
     "description": null
   },
   "ElementResist_Normal_1": {
-    "localized_name": "Neutralschadensminderung Lv. 1",
+    "localized_name": "Neutralschadensminderung Lv. 1",
     "description": null
   },
   "ElementResist_Normal_1_PAL": {
     "localized_name": "Neutralitätspakt",
-    "description": "Neutralschaden −10.0 %"
+    "description": "Neutralschaden −10 %"
   },
   "ElementResist_Normal_2": {
-    "localized_name": "Neutralschadensminderung Lv. 2",
+    "localized_name": "Neutralschadensminderung Lv. 2",
     "description": null
   },
   "ElementResist_Normal_3": {
-    "localized_name": "Neutralschadensminderung Lv. 3",
+    "localized_name": "Neutralschadensminderung Lv. 3",
     "description": null
   },
   "ElementResist_Normal_4": {
-    "localized_name": "Neutralschadensminderung Lv. 4",
+    "localized_name": "Neutralschadensminderung Lv. 4",
     "description": null
   },
   "ElementResist_Thunder_1": {
-    "localized_name": "Elektroschadensminderung Lv. 1",
+    "localized_name": "Elektroschadensminderung Lv. 1",
     "description": null
   },
   "ElementResist_Thunder_1_PAL": {
     "localized_name": "Blitzableiter",
-    "description": "Elektroschaden −10.0 %"
+    "description": "Elektroschaden −10 %"
   },
   "ElementResist_Thunder_2": {
-    "localized_name": "Elektroschadensminderung Lv. 2",
+    "localized_name": "Elektroschadensminderung Lv. 2",
     "description": null
   },
   "ElementResist_Thunder_3": {
-    "localized_name": "Elektroschadensminderung Lv. 3",
+    "localized_name": "Elektroschadensminderung Lv. 3",
     "description": null
   },
   "ElementResist_Thunder_4": {
-    "localized_name": "Elektroschadensminderung Lv. 4",
+    "localized_name": "Elektroschadensminderung Lv. 4",
     "description": null
   },
   "EternalFlame": {
@@ -1133,7 +1133,7 @@
   },
   "GYM_NAME_Meadow": {
     "localized_name": "Chefin des Rayne-Syndikats",
-    "description": "Angriff +20.0 % Bewegungstempo +10.0 %"
+    "description": "Angriff +20 % Bewegungstempo +10 %"
   },
   "GYM_NAME_Sakurajima": {
     "localized_name": "Oberhaupt der Gesellschaft des Blumenmondes",
@@ -1152,19 +1152,19 @@
     "description": null
   },
   "HP_ACC_up1": {
-    "localized_name": "LP-Erhöhung Lv. 1",
+    "localized_name": "LP-Erhöhung Lv. 1",
     "description": null
   },
   "HP_ACC_up2": {
-    "localized_name": "LP-Erhöhung Lv. 2",
+    "localized_name": "LP-Erhöhung Lv. 2",
     "description": null
   },
   "HP_ACC_up3": {
-    "localized_name": "LP-Erhöhung Lv. 3",
+    "localized_name": "LP-Erhöhung Lv. 3",
     "description": null
   },
   "HP_ACC_up4": {
-    "localized_name": "LP-Erhöhung Lv. 4",
+    "localized_name": "LP-Erhöhung Lv. 4",
     "description": null
   },
   "Invader": {
@@ -1220,7 +1220,7 @@
     "description": null
   },
   "MaxInventoryWeight_up_Equip_4": {
-    "localized_name": "Maximallasterhöhung Lv. 4",
+    "localized_name": "Maximallasterhöhung Lv. 4",
     "description": null
   },
   "MiniNushi": {
@@ -1245,7 +1245,7 @@
   },
   "MutationPal_ExplosionResist": {
     "localized_name": "Bollwerk",
-    "description": "<Status_Up>Immunität</> gegen Explosionsschaden"
+    "description": null
   },
   "MutationPal_Immortal": {
     "localized_name": "Unsterblich",
@@ -1253,7 +1253,7 @@
   },
   "MutationPal_Mutant": {
     "localized_name": "Anomalie",
-    "description": "Natürliche LP-Wiederherstellung (Pals und Spieler) +50.0 % Verteidigung +{EffectValue4} % <Status_Up>Immunität</> gegen Giftschaden <Status_Up>Immunität</> gegen Verbrennungsschaden"
+    "description": null
   },
   "NightOwl": {
     "localized_name": "Nachteule",
@@ -1273,7 +1273,7 @@
   },
   "Nushi": {
     "localized_name": "Teichfürst",
-    "description": "Wasserangriffsschaden +20.0 % Eisangriffsschaden +20.0 % Verteidigung +20.0 %"
+    "description": "Wasserangriffsschaden +20 % Eisangriffsschaden +20 % Verteidigung +20 %"
   },
   "OctaviaArmorVampire": {
     "localized_name": "Bluttreibstoff",
@@ -1305,46 +1305,46 @@
   },
   "PAL_FullStomach_Down_1": {
     "localized_name": "Genügsam",
-    "description": "Sattheit sinkt um <NumBlue_13>10.0 %</> langsamer."
+    "description": "Sattheit sinkt um 10.0 % langsamer."
   },
   "PAL_FullStomach_Down_2": {
     "localized_name": "Fastenprofi",
-    "description": "Sattheit sinkt um <NumBlue_13>15.0 %</> langsamer."
+    "description": "Sattheit sinkt um 15.0 % langsamer."
   },
   "PAL_FullStomach_Down_3": {
     "localized_name": "Asket",
-    "description": "Sattheit sinkt um <NumBlue_13>20.0 %</> langsamer."
+    "description": "Sattheit sinkt um 20.0 % langsamer."
   },
   "PAL_FullStomach_Up_1": {
     "localized_name": "Verfressen",
-    "description": "Sattheit sinkt um <NumRed_13>10.0 %</> schneller."
+    "description": "Sattheit sinkt um 10.0 % schneller."
   },
   "PAL_FullStomach_Up_2": {
     "localized_name": "Endlosmagen",
-    "description": "Sattheit sinkt um <NumRed_13>15.0 %</> schneller."
+    "description": "Sattheit sinkt um 15.0 % schneller."
   },
   "PAL_Sanity_Down_1": {
     "localized_name": "Positive Gedanken",
-    "description": "GEI sinkt um <NumBlue_13>10.0 %</> langsamer."
+    "description": "GEI sinkt um 10.0 % langsamer."
   },
   "PAL_Sanity_Down_2": {
     "localized_name": "Workaholic",
-    "description": "GEI sinkt um <NumBlue_13>15.0 %</> langsamer."
+    "description": "GEI sinkt um 15.0 % langsamer."
   },
   "PAL_Sanity_Down_3": {
     "localized_name": "Unerschütterlich",
-    "description": "GEI sinkt um <NumBlue_13>20.0 %</> langsamer."
+    "description": "GEI sinkt um 20.0 % langsamer."
   },
   "PAL_Sanity_Up_1": {
     "localized_name": "Geistig labil",
-    "description": "GEI sinkt um <NumRed_13>10.0 %</> schneller."
+    "description": "GEI sinkt um 10.0 % schneller."
   },
   "PAL_Sanity_Up_2": {
     "localized_name": "Selbstzerstörerisch",
-    "description": "GEI sinkt um <NumRed_13>15.0 %</> schneller."
+    "description": "GEI sinkt um 15.0 % schneller."
   },
   "PAL_SpiritualInst": {
-    "localized_name": "de_Text",
+    "localized_name": "Mentally unstable",
     "description": null
   },
   "PAL_conceited": {
@@ -1368,15 +1368,15 @@
     "description": null
   },
   "PalExp_Increase_1_Otomo_Only_Equip": {
-    "localized_name": "EP-Bonus Lv. 1 (Pals)",
+    "localized_name": "EP-Bonus Lv. 1 (Pals)",
     "description": null
   },
   "PalExp_Increase_2_Otomo_Only_Equip": {
-    "localized_name": "EP-Bonus Lv. 2 (Pals)",
+    "localized_name": "EP-Bonus Lv. 2 (Pals)",
     "description": null
   },
   "PalExp_Increase_3_Otomo_Only_Equip": {
-    "localized_name": "EP-Bonus Lv. 3 (Pals)",
+    "localized_name": "EP-Bonus Lv. 3 (Pals)",
     "description": null
   },
   "PlayerSP_DecreaseRate_Passive": {
@@ -1468,23 +1468,23 @@
     "description": "Maximale Ausdauer +75.0 % (Gilt nur für reitbare Pals.)"
   },
   "StonDrop_Boost_1": {
-    "localized_name": "Bergbau St. 1",
+    "localized_name": "Bergbau St. 1",
     "description": "Erhöht die Ausbeute beim Abbau von Stein und Erz leicht."
   },
   "StonDrop_Boost_2": {
-    "localized_name": "Bergbau St. 2",
+    "localized_name": "Bergbau St. 2",
     "description": "Erhöht die Ausbeute beim Abbau von Stein und Erz."
   },
   "StonDrop_Boost_3": {
-    "localized_name": "Bergbau St. 3",
+    "localized_name": "Bergbau St. 3",
     "description": "Erhöht die Ausbeute beim Abbau von Stein und Erz deutlich."
   },
   "StonDrop_Boost_4": {
-    "localized_name": "Bergbau St. 4",
+    "localized_name": "Bergbau St. 4",
     "description": "Erhöht die Ausbeute beim Abbau von Stein und Erz beträchtlich."
   },
   "StonDrop_Boost_5": {
-    "localized_name": "Bergbau St. 5",
+    "localized_name": "Bergbau St. 5",
     "description": "Erhöht die Ausbeute beim Abbau von Stein und Erz extrem."
   },
   "StonWoodDrop_Boost": {
@@ -1504,39 +1504,39 @@
     "description": null
   },
   "TemperatureResist_Cold1": {
-    "localized_name": "Kälteresistenz Lv. 1",
+    "localized_name": "Kälteresistenz Lv. 1",
     "description": null
   },
   "TemperatureResist_Cold2": {
-    "localized_name": "Kälteresistenz Lv. 2",
+    "localized_name": "Kälteresistenz Lv. 2",
     "description": null
   },
   "TemperatureResist_Cold3": {
-    "localized_name": "Kälteresistenz Lv. 3",
+    "localized_name": "Kälteresistenz Lv. 3",
     "description": null
   },
   "TemperatureResist_Heat1": {
-    "localized_name": "Hitzeresistenz Lv. 1",
+    "localized_name": "Hitzeresistenz Lv. 1",
     "description": null
   },
   "TemperatureResist_Heat1Cold1": {
-    "localized_name": "Hitzeresistenz Lv. 1 / Kälteresistenz Lv. 1",
+    "localized_name": "Hitzeresistenz Lv. 1 / Kälteresistenz Lv. 1",
     "description": null
   },
   "TemperatureResist_Heat2": {
-    "localized_name": "Hitzeresistenz Lv. 2",
+    "localized_name": "Hitzeresistenz Lv. 2",
     "description": null
   },
   "TemperatureResist_Heat2Cold2": {
-    "localized_name": "Hitzeresistenz Lv. 2 / Kälteresistenz Lv. 2",
+    "localized_name": "Hitzeresistenz Lv. 2 / Kälteresistenz Lv. 2",
     "description": null
   },
   "TemperatureResist_Heat3": {
-    "localized_name": "Hitzeresistenz Lv. 3",
+    "localized_name": "Hitzeresistenz Lv. 3",
     "description": null
   },
   "TemperatureResist_Heat3Cold3": {
-    "localized_name": "Hitzeresistenz Lv. 3 / Kälteresistenz Lv. 3",
+    "localized_name": "Hitzeresistenz Lv. 3 / Kälteresistenz Lv. 3",
     "description": null
   },
   "Test_PalEgg_HatchingSpeed_Up": {
@@ -1545,23 +1545,23 @@
   },
   "TrainerATK_UP_1": {
     "localized_name": "Angriffsstratege",
-    "description": "Spieler ANG +10.0 %"
+    "description": "Spieler ANG +10 %"
   },
   "TrainerDEF_UP_1": {
     "localized_name": "Festungskommandant",
-    "description": "Spieler VTD +10.0 %"
+    "description": "Spieler VTD +10 %"
   },
   "TrainerLogging_up1": {
     "localized_name": "Forstmeister",
-    "description": "Spieler Effizienz (Holzfällen) +25.0 %"
+    "description": "Spieler Effizienz (Holzfällen) +25 %"
   },
   "TrainerMining_up1": {
     "localized_name": "Oberbergmann",
-    "description": "Spieler Effizienz (Bergbau) +25.0 %"
+    "description": "Spieler Effizienz (Bergbau) +25 %"
   },
   "TrainerWorkSpeed_UP_1": {
     "localized_name": "Motivationscoach",
-    "description": "Spieler Arbeitstempo +25.0 %"
+    "description": "Spieler Arbeitstempo +25 %"
   },
   "Vampire": {
     "localized_name": "Vampir",
@@ -1572,23 +1572,23 @@
     "description": null
   },
   "WoodDrop_Boost_1": {
-    "localized_name": "Holzfällen St. 1",
+    "localized_name": "Holzfällen St. 1",
     "description": "Erhöht die Ausbeute beim Holzfällen leicht."
   },
   "WoodDrop_Boost_2": {
-    "localized_name": "Holzfällen St. 2",
+    "localized_name": "Holzfällen St. 2",
     "description": "Erhöht die Ausbeute beim Holzfällen."
   },
   "WoodDrop_Boost_3": {
-    "localized_name": "Holzfällen St. 3",
+    "localized_name": "Holzfällen St. 3",
     "description": "Erhöht die Ausbeute beim Holzfällen deutlich."
   },
   "WoodDrop_Boost_4": {
-    "localized_name": "Holzfällen St. 4",
+    "localized_name": "Holzfällen St. 4",
     "description": "Erhöht die Ausbeute beim Holzfällen beträchtlich."
   },
   "WoodDrop_Boost_5": {
-    "localized_name": "Holzfällen St. 5",
+    "localized_name": "Holzfällen St. 5",
     "description": "Erhöht die Ausbeute beim Holzfällen extrem."
   },
   "WorkSpeed_ACC_up1": {
@@ -1617,31 +1617,31 @@
   },
   "WorldTree_ATK": {
     "localized_name": "Weiheklinge",
-    "description": "Angriff <NumBlue_13>+</>50.0 % Verteidigung -30.0 % Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
+    "description": "Angriff +50 % Verteidigung -30 % Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
   },
   "WorldTree_ATK_DEF": {
     "localized_name": "Avatar der Zerstörung",
-    "description": "Angriff <NumBlue_13>+</>40.0 % Verteidigung <NumBlue_13>+</>20.0 % Max. LP -50.0 % Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
+    "description": "Angriff +40 % Verteidigung +20 % Max. LP -50 % Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
   },
   "WorldTree_CraftSpeed": {
     "localized_name": "Teufelshände",
-    "description": "Arbeitstempo <NumBlue_13>+</>90.0<NumBlue_13> %</> GEI sinkt um <NumRed_13>15,0 % schneller.</> Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
+    "description": "Arbeitstempo +90 % GEI sinkt um 15,0 % schneller. Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
   },
   "WorldTree_DEF": {
     "localized_name": "Sakralleib",
-    "description": "Verteidigung <NumBlue_13>+</>50.0 % Angriff -30.0 % Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
+    "description": "Verteidigung +50 % Angriff -30 % Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
   },
   "WorldTree_FullStomach": {
     "localized_name": "Weltenkeim",
-    "description": "Sattheit sinkt um <NumBlue_13>50,0 %</> langsamer. LP -20.0<NumRed_13> %</> Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
+    "description": "Sattheit sinkt um 50,0 % langsamer. LP -20 % Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
   },
   "WorldTree_MoveSpeed": {
     "localized_name": "Dimensionsriss",
-    "description": "Bewegungstempo <NumBlue_13>+</>50.0<NumBlue_13> %</> Sattheit sinkt um <NumRed_13>15,0 % schneller.</> Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
+    "description": "Bewegungstempo +50 % Sattheit sinkt um 15,0 % schneller. Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
   },
   "WorldTree_Sanity": {
     "localized_name": "Erleuchteter",
-    "description": "GEI sinkt um <NumBlue_13>50,0 %</> langsamer. Arbeitstempo -20.0<NumRed_13> %</> Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
+    "description": "GEI sinkt um 50,0 % langsamer. Arbeitstempo -20 % Bäume und Felsen im Weltenbaum zerfallen nicht, wenn man sich ihnen nähert."
   },
   "YakushimaDagameBoost_Magic_Equip": {
     "localized_name": "Heilige Macht: Magie",
@@ -1664,19 +1664,295 @@
     "description": null
   },
   "defense_ACC_up1": {
-    "localized_name": "VTD-Erhöhung Lv. 1",
+    "localized_name": "VTD-Erhöhung Lv. 1",
     "description": null
   },
   "defense_ACC_up2": {
-    "localized_name": "VTD-Erhöhung Lv. 2",
+    "localized_name": "VTD-Erhöhung Lv. 2",
     "description": null
   },
   "defense_ACC_up3": {
-    "localized_name": "VTD-Erhöhung Lv. 3",
+    "localized_name": "VTD-Erhöhung Lv. 3",
     "description": null
   },
   "defense_ACC_up4": {
-    "localized_name": "VTD-Erhöhung Lv. 4",
+    "localized_name": "VTD-Erhöhung Lv. 4",
+    "description": null
+  },
+  "AccuracyDecrease": {
+    "localized_name": "AccuracyDecrease",
+    "description": null
+  },
+  "AccuracyIncrease": {
+    "localized_name": "AccuracyIncrease",
+    "description": null
+  },
+  "AccuracySuperDecrease": {
+    "localized_name": "AccuracySuperDecrease",
+    "description": null
+  },
+  "BulletSpeed_H": {
+    "localized_name": "BulletSpeed_H",
+    "description": null
+  },
+  "BulletSpeed_L": {
+    "localized_name": "BulletSpeed_L",
+    "description": null
+  },
+  "CollectItem": {
+    "localized_name": "CollectItem",
+    "description": null
+  },
+  "CollectItem_CuteFox": {
+    "localized_name": "CollectItem_CuteFox",
+    "description": null
+  },
+  "CraftSpeed*3": {
+    "localized_name": "CraftSpeed*3",
+    "description": null
+  },
+  "CraftSpeed*5": {
+    "localized_name": "CraftSpeed*5",
+    "description": null
+  },
+  "GiveADark": {
+    "localized_name": "GiveADark",
+    "description": null
+  },
+  "GiveADragon": {
+    "localized_name": "GiveADragon",
+    "description": null
+  },
+  "GiveAEarth": {
+    "localized_name": "GiveAEarth",
+    "description": null
+  },
+  "GiveAElectricity": {
+    "localized_name": "GiveAElectricity",
+    "description": null
+  },
+  "GiveAFire": {
+    "localized_name": "GiveAFire",
+    "description": null
+  },
+  "GiveAIce": {
+    "localized_name": "GiveAIce",
+    "description": null
+  },
+  "GiveALeaf": {
+    "localized_name": "GiveALeaf",
+    "description": null
+  },
+  "GiveAWater": {
+    "localized_name": "GiveAWater",
+    "description": null
+  },
+  "Logging_up1": {
+    "localized_name": "Logging_up1",
+    "description": null
+  },
+  "Logging_up1_Otomo_only": {
+    "localized_name": "Logging_up1_Otomo_only",
+    "description": null
+  },
+  "Logging_up2": {
+    "localized_name": "Logging_up2",
+    "description": null
+  },
+  "Logging_up2_Otomo_only": {
+    "localized_name": "Logging_up2_Otomo_only",
+    "description": null
+  },
+  "Logging_up3": {
+    "localized_name": "Logging_up3",
+    "description": null
+  },
+  "Logging_up4": {
+    "localized_name": "Logging_up4",
+    "description": null
+  },
+  "Logging_up5": {
+    "localized_name": "Logging_up5",
+    "description": null
+  },
+  "MeleeAttack_down1": {
+    "localized_name": "MeleeAttack_down1",
+    "description": null
+  },
+  "MeleeAttack_down2": {
+    "localized_name": "MeleeAttack_down2",
+    "description": null
+  },
+  "MeleeAttack_up1": {
+    "localized_name": "MeleeAttack_up1",
+    "description": null
+  },
+  "MeleeAttack_up2": {
+    "localized_name": "MeleeAttack_up2",
+    "description": null
+  },
+  "Mining_up1": {
+    "localized_name": "Mining_up1",
+    "description": null
+  },
+  "Mining_up1_Otomo_only": {
+    "localized_name": "Mining_up1_Otomo_only",
+    "description": null
+  },
+  "Mining_up2": {
+    "localized_name": "Mining_up2",
+    "description": null
+  },
+  "Mining_up2_Otomo_only": {
+    "localized_name": "Mining_up2_Otomo_only",
+    "description": null
+  },
+  "Mining_up3": {
+    "localized_name": "Mining_up3",
+    "description": null
+  },
+  "Mining_up4": {
+    "localized_name": "Mining_up4",
+    "description": null
+  },
+  "Mining_up5": {
+    "localized_name": "Mining_up5",
+    "description": null
+  },
+  "Mute_1": {
+    "localized_name": "Mute_1",
+    "description": null
+  },
+  "Mute_2": {
+    "localized_name": "Mute_2",
+    "description": null
+  },
+  "Mute_3": {
+    "localized_name": "Mute_3",
+    "description": null
+  },
+  "Mute_4": {
+    "localized_name": "Mute_4",
+    "description": null
+  },
+  "Mute_5": {
+    "localized_name": "Mute_5",
+    "description": null
+  },
+  "PAL_ElementPassive_Test": {
+    "localized_name": "PAL_ElementPassive_Test",
+    "description": null
+  },
+  "PAL_TribePassive_Test": {
+    "localized_name": "PAL_TribePassive_Test",
+    "description": null
+  },
+  "RecoilDecrease": {
+    "localized_name": "RecoilDecrease",
+    "description": null
+  },
+  "RecoilIncrease": {
+    "localized_name": "RecoilIncrease",
+    "description": null
+  },
+  "ShotAttack_down1": {
+    "localized_name": "ShotAttack_down1",
+    "description": null
+  },
+  "ShotAttack_down2": {
+    "localized_name": "ShotAttack_down2",
+    "description": null
+  },
+  "ShotAttack_up1": {
+    "localized_name": "ShotAttack_up1",
+    "description": null
+  },
+  "ShotAttack_up2": {
+    "localized_name": "ShotAttack_up2",
+    "description": null
+  },
+  "StealExpert_1": {
+    "localized_name": "StealExpert_1",
+    "description": null
+  },
+  "StealExpert_2": {
+    "localized_name": "StealExpert_2",
+    "description": null
+  },
+  "StealExpert_3": {
+    "localized_name": "StealExpert_3",
+    "description": null
+  },
+  "StealExpert_4": {
+    "localized_name": "StealExpert_4",
+    "description": null
+  },
+  "Support_down1": {
+    "localized_name": "Support_down1",
+    "description": null
+  },
+  "Support_down2": {
+    "localized_name": "Support_down2",
+    "description": null
+  },
+  "Support_up1": {
+    "localized_name": "Support_up1",
+    "description": null
+  },
+  "Support_up2": {
+    "localized_name": "Support_up2",
+    "description": null
+  },
+  "TestExplosive_H": {
+    "localized_name": "TestExplosive_H",
+    "description": null
+  },
+  "TestExplosive_L": {
+    "localized_name": "TestExplosive_L",
+    "description": null
+  },
+  "TestHoming_H": {
+    "localized_name": "TestHoming_H",
+    "description": null
+  },
+  "TestHoming_L": {
+    "localized_name": "TestHoming_L",
+    "description": null
+  },
+  "TestSkill1": {
+    "localized_name": "TestSkill1",
+    "description": null
+  },
+  "TestSkill2": {
+    "localized_name": "TestSkill2",
+    "description": null
+  },
+  "TestSkill3": {
+    "localized_name": "TestSkill3",
+    "description": null
+  },
+  "TestSkill4": {
+    "localized_name": "TestSkill4",
+    "description": null
+  },
+  "TestSkill5": {
+    "localized_name": "TestSkill5",
+    "description": null
+  },
+  "TestSkill6": {
+    "localized_name": "TestSkill6",
+    "description": null
+  },
+  "TestSkill7": {
+    "localized_name": "TestSkill7",
+    "description": null
+  },
+  "TestSkill8": {
+    "localized_name": "TestSkill8",
+    "description": null
+  },
+  "MoveSpeed_up_1_Otomo_Only_Equip": {
+    "localized_name": "MoveSpeed_up_1_Otomo_Only_Equip",
     "description": null
   }
 }

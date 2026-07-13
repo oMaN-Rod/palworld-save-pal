@@ -13,7 +13,7 @@
   },
   "Accessory_AirDash3": {
     "localized_name": "空中三段衝刺靴",
-    "description": "zh-hant text"
+    "description": null
   },
   "Accessory_ExplosionResist": {
     "localized_name": "防爆內衣",
@@ -301,7 +301,7 @@
   },
   "Battle_Helm_Grade_02_Fur": {
     "localized_name": "羽毛髮飾",
-    "description": "美麗的羽毛髮飾。 不知為何，總覺得它能保護頭部不受致命傷害。 可在「Workbench」製作。"
+    "description": "美麗的羽毛髮飾。 不知為何，總覺得它能保護頭部不受致命傷害。 可在「初階工作台」製作。"
   },
   "Battle_Helm_Grade_03_Copper": {
     "localized_name": "金屬頭盔",
@@ -360,8 +360,8 @@
     "description": "經過現代化改良的弓。 能夠射出威力更強大的箭矢。"
   },
   "Battle_RangeWeapon_FlameThrower": {
-    "localized_name": "FlameThrower",
-    "description": "能夠向遠處噴出火舌的Flamethrower。 可以使攻擊目標陷入點燃狀態。 可在「武器流水線工廠II」製作。"
+    "localized_name": "火焰噴射器",
+    "description": "能夠向遠處噴出火舌的火焰噴射器。 可以使攻擊目標陷入點燃狀態。 可在「武器流水線工廠II」製作。"
   },
   "Battle_RangeWeapon_GatlingGun": {
     "localized_name": "加特林機槍",
@@ -501,11 +501,11 @@
   },
   "ChargeLaserRifle": {
     "localized_name": "充能步槍",
-    "description": "zh-hant text"
+    "description": null
   },
   "ChargeLaserRifleBullet": {
     "localized_name": "充能步槍子彈",
-    "description": "zh-hant text"
+    "description": null
   },
   "Clinic": {
     "localized_name": "診療所",
@@ -521,7 +521,7 @@
   },
   "Computer": {
     "localized_name": "電腦",
-    "description": "zh-hant text"
+    "description": null
   },
   "Cooler": {
     "localized_name": "降溫器",
@@ -625,11 +625,11 @@
   },
   "EnergyShotgun": {
     "localized_name": "能量散彈槍",
-    "description": "zh-hant text"
+    "description": null
   },
   "EnergyShotgunBullet": {
     "localized_name": "能量散彈槍子彈",
-    "description": "zh-hant text"
+    "description": null
   },
   "EnergyStorage_Electric": {
     "localized_name": "蓄電器",
@@ -909,7 +909,7 @@
   },
   "GasMask": {
     "localized_name": "防腐霧面具",
-    "description": "zh-hant text"
+    "description": null
   },
   "GatlingBullet": {
     "localized_name": "加特林子彈",
@@ -1205,15 +1205,15 @@
   },
   "OperatingTable": {
     "localized_name": "帕魯手術台",
-    "description": "zh_Hant_Text"
+    "description": null
   },
   "OverheatRifle": {
     "localized_name": "過熱步槍",
-    "description": "zh-hant text"
+    "description": null
   },
   "OverheatRifleBullet": {
     "localized_name": "過熱步槍子彈",
-    "description": "zh-hant text"
+    "description": null
   },
   "PALBOX": {
     "localized_name": "帕魯終端",
@@ -1225,11 +1225,11 @@
   },
   "PalDopingShot": {
     "localized_name": "強化槍",
-    "description": "zh-hant text"
+    "description": null
   },
   "PalDopingShotBullet": {
     "localized_name": "強化槍子彈",
-    "description": "zh-hant text"
+    "description": null
   },
   "PalDopingShot_2": {
     "localized_name": "高級強化槍",
@@ -1241,7 +1241,7 @@
   },
   "PalHealingGrenade": {
     "localized_name": "帕魯恢復手榴彈",
-    "description": "zh-hant text"
+    "description": null
   },
   "PalMedicineBox": {
     "localized_name": "藥品櫃",
@@ -2292,7 +2292,7 @@
     "description": "持有此道具時，能夠透過撬鎖打開 需要黃金鑰匙才能打開的寶箱。 即使多次使用也不會壞。"
   },
   "WallSignboard": {
-    "localized_name": "WallSignBoard",
+    "localized_name": "壁掛看板",
     "description": "可在這塊告示牌上書寫文字。 可以懸掛在牆壁上。"
   },
   "WallTorch": {

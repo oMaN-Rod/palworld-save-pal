@@ -477,7 +477,7 @@
   },
   "ChickenPal": {
     "localized_name": "Chikipi",
-    "description": "Son derece zayıf ve aşırı lezzetlidir. SheepBall ile birlikte en zayıf Pal'lardan biridir. Ne kadar avlanırlarsa avlansınlar tekrar ortaya çıkmaya devam ederler."
+    "description": "Son derece zayıf ve aşırı lezzetlidir. Lamball ile birlikte en zayıf Pal'lardan biridir. Ne kadar avlanırlarsa avlansınlar tekrar ortaya çıkmaya devam ederler."
   },
   "ClioneTwins": {
     "localized_name": "Amione",
@@ -541,7 +541,7 @@
   },
   "DarkMechaDragon": {
     "localized_name": "Xenolord",
-    "description": "-Hedefe ulaşıldı. Öncelik: |Süpersonik Ejderha| varlığının yerini tespit et -Not: Fetih için son tarih <://Error_Code:126DC> sene aşıldı. -Güncelleme: Fetih emarelerine rastlanmadı. Yerlileşme onaylandı. Ortadan kaldırma protokolünü başlat. -Personele Not: Kritik verileri unutmaktan veya tüketmekten kaçın!"
+    "description": "-Hedefe ulaşıldı. Öncelik: \"Süpersonik Ejderha\" varlığının yerini tespit et -Not: Fetih için son tarih <://Error_Code:126DC> sene aşıldı. -Güncelleme: Fetih emarelerine rastlanmadı. Yerlileşme onaylandı. Ortadan kaldırma protokolünü başlat. -Personele Not: Kritik verileri unutmaktan veya tüketmekten kaçın!"
   },
   "DarkScorpion": {
     "localized_name": "Menasting",
@@ -577,7 +577,7 @@
   },
   "DrillGame": {
     "localized_name": "Digtoise",
-    "description": "En güçlü kabuğa ve onu delebilecek tek matkaba sahip bir Digtoise, popüler çocuk masalı |Digtoise Hikâyesi| ile dünyanın çelişkilerine kafa yorar."
+    "description": "En güçlü kabuğa ve onu delebilecek tek matkaba sahip bir Digtoise, popüler çocuk masalı \"Digtoise Hikâyesi\" ile dünyanın çelişkilerine kafa yorar."
   },
   "Eagle": {
     "localized_name": "Galeclaw",
@@ -589,7 +589,7 @@
   },
   "ElecLion": {
     "localized_name": "Boltmane",
-    "description": "-"
+    "description": "The more it moves, the more it heats up and the hair tips increasingly glow brighter. At its peak, it becomes so dazzling that you risk blindness if you stare at it directly."
   },
   "ElecLizard": {
     "localized_name": "Slowatt",
@@ -925,11 +925,11 @@
   },
   "FlowerDinosaur": {
     "localized_name": "Dinossom",
-    "description": "Öfkelendiğinde bir daha sakinleştirilemeyen bir Pal. Korkunç hiddeti katlanarak artar. |Kuyruğuna basılmış Dinossom gibi| deyimi, öfkeden çılgına dönen kişileri anlatmak için kullanılır."
+    "description": "Öfkelendiğinde bir daha sakinleştirilemeyen bir Pal. Korkunç hiddeti katlanarak artar. \"Kuyruğuna basılmış Dinossom gibi\" deyimi, öfkeden çılgına dönen kişileri anlatmak için kullanılır."
   },
   "FlowerDinosaur_Electric": {
     "localized_name": "Dinossom Lux",
-    "description": "Bir yıldırım tarafından çarpılmasına rağmen hayattadır. |Dinossom Lux şimşeği çarpmış gibi| deyimi, ölümün kıyısından dönmek anlamında kullanılır."
+    "description": "Bir yıldırım tarafından çarpılmasına rağmen hayattadır. \"Dinossom Lux şimşeği çarpmış gibi\" deyimi, ölümün kıyısından dönmek anlamında kullanılır."
   },
   "FlowerDoll": {
     "localized_name": "Petallia",
@@ -1065,7 +1065,7 @@
   },
   "GhostAnglerfish": {
     "localized_name": "Ghangler",
-    "description": "Parlak bir yapay yemle karanlıklar aydınlanır. Bu ışığa kapılıp gelen şaşkın Pal’lar, GhostAnglerFishtarafından fark edildiklerinde artık kaçamazlar. Evlerine sağ salim dönene kadar, nereye giderlerse gitsinler yönlendirilirler."
+    "description": "Parlak bir yapay yemle karanlıklar aydınlanır. Bu ışığa kapılıp gelen şaşkın Pal’lar, Ghanglertarafından fark edildiklerinde artık kaçamazlar. Evlerine sağ salim dönene kadar, nereye giderlerse gitsinler yönlendirilirler."
   },
   "GhostAnglerfish_Fire": {
     "localized_name": "Ghangler Ignis",
@@ -1565,7 +1565,7 @@
   },
   "Kirin_Ice": {
     "localized_name": "Univolt Cryst",
-    "description": "Geçmişte, kış tanrısının elçisi olduğuna inanılır ve insanlar tarafından avlanmazdı. Ancak, buzun üzerinde ayağı kayıp kapaklandığı anın birileri tarafından görülmesiyle İnanç yerle bir oldu ve kelimenin tam anlamıyla bir |yük hayvanı| konumuna düştü."
+    "description": "Geçmişte, kış tanrısının elçisi olduğuna inanılır ve insanlar tarafından avlanmazdı. Ancak, buzun üzerinde ayağı kayıp kapaklandığı anın birileri tarafından görülmesiyle İnanç yerle bir oldu ve kelimenin tam anlamıyla bir \"yük hayvanı\" konumuna düştü."
   },
   "Kitsunebi": {
     "localized_name": "Foxparks",
@@ -1597,7 +1597,7 @@
   },
   "LazyDragon_Electric": {
     "localized_name": "Relaxaurus Lux",
-    "description": "Bir gün Relaxaurus türünün bir üyesinin aklına bir fikir gelmiş. |Belki de bir şeyleri değiştirmenin zamanı geldi.| diye düşünmüş. Tam da o sırada bir elektrik şoku tüm vücudunu etkisi altına almış!"
+    "description": "Bir gün Relaxaurus türünün bir üyesinin aklına bir fikir gelmiş. \"Belki de bir şeyleri değiştirmenin zamanı geldi.\" diye düşünmüş. Tam da o sırada bir elektrik şoku tüm vücudunu etkisi altına almış!"
   },
   "LazyDragon_Electric_Tower": {
     "localized_name": "Relaxaurus Lux",
@@ -1617,7 +1617,7 @@
   },
   "LilyQueen": {
     "localized_name": "Lyleen",
-    "description": "Sevgi dolu, uysal bir Pal. Ebeveynlerini kaybeden küçük Pal'lara göz kulak olur. Yaramazlık yapan Pal'ları terbiye etmek için tüm gücüyle SolarBeam yeteneğini kullanır."
+    "description": "Sevgi dolu, uysal bir Pal. Ebeveynlerini kaybeden küçük Pal'lara göz kulak olur. Yaramazlık yapan Pal'ları terbiye etmek için tüm gücüyle Güneş Patlaması yeteneğini kullanır."
   },
   "LilyQueen_Dark": {
     "localized_name": "Lyleen Noct",
@@ -1945,7 +1945,7 @@
   },
   "MimicDog": {
     "localized_name": "Mimog",
-    "description": "Eskiden bir geleneğe göre ölümüyle en aptalca şekilde karşılaşan kişiye bir ödül verilirdi. İlk ödül |Mimog türünden habersiz olarak sandığı açan ve ısırılarak ölen| kişiye verilmişti."
+    "description": "Eskiden bir geleneğe göre ölümüyle en aptalca şekilde karşılaşan kişiye bir ödül verilirdi. İlk ödül \"Mimog türünden habersiz olarak sandığı açan ve ısırılarak ölen\" kişiye verilmişti."
   },
   "MobuCitizen": {
     "localized_name": "Ada Sakini",
@@ -2145,7 +2145,7 @@
   },
   "PREDATOR_DrillGame": {
     "localized_name": "Digtoise",
-    "description": "En güçlü kabuğa ve onu delebilecek tek matkaba sahip bir Digtoise, popüler çocuk masalı |Digtoise Hikâyesi| ile dünyanın çelişkilerine kafa yorar."
+    "description": "En güçlü kabuğa ve onu delebilecek tek matkaba sahip bir Digtoise, popüler çocuk masalı \"Digtoise Hikâyesi\" ile dünyanın çelişkilerine kafa yorar."
   },
   "PREDATOR_FairyDragon": {
     "localized_name": "Elphidran",
@@ -2157,7 +2157,7 @@
   },
   "PREDATOR_FlowerDinosaur": {
     "localized_name": "Dinossom",
-    "description": "Öfkelendiğinde bir daha sakinleştirilemeyen bir Pal. Korkunç hiddeti katlanarak artar. |Kuyruğuna basılmış Dinossom gibi| deyimi, öfkeden çılgına dönen kişileri anlatmak için kullanılır."
+    "description": "Öfkelendiğinde bir daha sakinleştirilemeyen bir Pal. Korkunç hiddeti katlanarak artar. \"Kuyruğuna basılmış Dinossom gibi\" deyimi, öfkeden çılgına dönen kişileri anlatmak için kullanılır."
   },
   "PREDATOR_FlowerRabbit_Quest": {
     "localized_name": "Flopie",
@@ -2249,7 +2249,7 @@
   },
   "PREDATOR_PurpleSpider": {
     "localized_name": "Tarantriss",
-    "description": "Son derece yapışkan ve ilgi meraklısı. Ne kadar direnç görürse o kadar ısrarcı olur. |Kişiliği| de böyledir."
+    "description": "Son derece yapışkan ve ilgi meraklısı. Ne kadar direnç görürse o kadar ısrarcı olur. \"Kişiliği\" de böyledir."
   },
   "PREDATOR_RedArmorBird": {
     "localized_name": "Ragnahawk",
@@ -2328,7 +2328,7 @@
     "description": null
   },
   "PalPassive_Doctor": {
-    "localized_name": "Ada Sakini",
+    "localized_name": "Dr. Brawn",
     "description": null
   },
   "PalTrader": {
@@ -2473,14 +2473,14 @@
   },
   "PurpleSpider": {
     "localized_name": "Tarantriss",
-    "description": "Son derece yapışkan ve ilgi meraklısı. Ne kadar direnç görürse o kadar ısrarcı olur. |Kişiliği| de böyledir."
+    "description": "Son derece yapışkan ve ilgi meraklısı. Ne kadar direnç görürse o kadar ısrarcı olur. \"Kişiliği\" de böyledir."
   },
   "QueenBee": {
     "localized_name": "Elizabee",
     "description": "Beegarde türüne hükmetmesi için seçilmiş bir kraliçe. Kraliçelerine hizmet etmenin zevki için ölene dek çalışmaya istekli kölelerinin sayısı sonsuzdur."
   },
   "QuestMan": {
-    "localized_name": "-",
+    "localized_name": "Quest Client",
     "description": null
   },
   "Quest_Farmer03_PinkCat": {
@@ -2624,7 +2624,7 @@
     "description": null
   },
   "Reward_BossDefeat": {
-    "localized_name": "Muhafız",
+    "localized_name": "Gedikli Avcı",
     "description": null
   },
   "Reward_Emote_A_01": {
@@ -2712,7 +2712,7 @@
     "description": null
   },
   "Reward_Paldex": {
-    "localized_name": "Muhafız",
+    "localized_name": "Pal Ekolojik Araştırmacısı",
     "description": null
   },
   "Reward_Paldex_v02": {
@@ -2773,11 +2773,11 @@
   },
   "SakuraSaurus": {
     "localized_name": "Broncherry",
-    "description": "Kokusu çiftleşmenin öncesinde ve sonrasında büyük ölçüde değişir. Bir partner bulduğunda keyif verici bir aroma salgılar. Bu aromaya |İlk Aşkın Kokusu| denir."
+    "description": "Kokusu çiftleşmenin öncesinde ve sonrasında büyük ölçüde değişir. Bir partner bulduğunda keyif verici bir aroma salgılar. Bu aromaya \"İlk Aşkın Kokusu\" denir."
   },
   "SakuraSaurus_Water": {
     "localized_name": "Broncherry Aqua",
-    "description": "Kokusu çiftleşmenin öncesinde ve sonrasında büyük ölçüde değişir. Bir partner bulmadan önce keyif verici bir aroma salgılar. Bu aromaya |Masumiyet Parfümü| denir."
+    "description": "Kokusu çiftleşmenin öncesinde ve sonrasında büyük ölçüde değişir. Bir partner bulmadan önce keyif verici bir aroma salgılar. Bu aromaya \"Masumiyet Parfümü\" denir."
   },
   "SalesPerson": {
     "localized_name": "Gezgin Tüccar",
@@ -2865,7 +2865,7 @@
   },
   "Sheepball": {
     "localized_name": "Lamball",
-    "description": "|Tepelere doğru yapılan tırmanışlar genelde bu Pal'ın aşağı yuvarlanmasıyla biter. Bu durumda başı döner ve hareket edemez, böylece yakalanması ve öldürülmesi kolaylaşır. Bu Pal, besin zincirinin en altına dek yuvarlanmıştır.|"
+    "description": "\"Tepelere doğru yapılan tırmanışlar genelde bu Pal'ın aşağı yuvarlanmasıyla biter. Bu durumda başı döner ve hareket edemez, böylece yakalanması ve öldürülmesi kolaylaşır. Bu Pal, besin zincirinin en altına dek yuvarlanmıştır.\""
   },
   "SifuDog": {
     "localized_name": "Dogen",
@@ -2901,7 +2901,7 @@
   },
   "SnowTigerBeastman": {
     "localized_name": "Bastigor",
-    "description": "Yuvarlak bir şey gördüğü anda onu yumruklamak için kontrol edemediği bir dürtüye kapılır. SnowTigerBeastMan için hayatta kalmaktan sonraki en büyük mücadele bir kardan adam yapmaktır."
+    "description": "Yuvarlak bir şey gördüğü anda onu yumruklamak için kontrol edemediği bir dürtüye kapılır. Bastigor için hayatta kalmaktan sonraki en büyük mücadele bir kardan adam yapmaktır."
   },
   "SoldierBee": {
     "localized_name": "Beegarde",
@@ -3037,10 +3037,10 @@
   },
   "VioletFairy": {
     "localized_name": "Vaelet",
-    "description": "Saray, kralın en sevdiği çiçeklerle doluydu. Büyük bir savaş çıktı ve alevler saraya yaklaştı. Kaosun ortasında, bir çiçeğin ruhu ortaya çıktı. - |Kralın Çiçeği| adlı peri masalından"
+    "description": "Saray, kralın en sevdiği çiçeklerle doluydu. Büyük bir savaş çıktı ve alevler saraya yaklaştı. Kaosun ortasında, bir çiçeğin ruhu ortaya çıktı. - \"Kralın Çiçeği\" adlı peri masalından"
   },
   "VisitingMerchant": {
-    "localized_name": "-",
+    "localized_name": "Visitor",
     "description": null
   },
   "Visitor_Hunter_Rifle": {
@@ -3072,7 +3072,7 @@
     "description": "Sağlıklı bir bireyde, sırtından akan maddenin sıcaklığı dengededir. Heyecanlandığında ise sıcaklık dengesi bozulur en kötü durumda bu madde buharlaşma ya da katılaşmaya yol açar ve aniden şoka girerek ölmesine neden olabilir."
   },
   "WeaponsDealer": {
-    "localized_name": "-",
+    "localized_name": "Weapons Dealer",
     "description": null
   },
   "WeaselDragon": {
@@ -3097,7 +3097,7 @@
   },
   "WhiteDeer": {
     "localized_name": "Celesdir",
-    "description": "Kadim metinler bu Pal'dan |Kurtuluşun Yaratığı| olarak bahseder. Celesdir tarafından yayılan ışık her şeyi arındırır; hiçbir iz bırakmayarak ortadan kaybolmalarını sağlayarak onları gerçek anlamda yok eder."
+    "description": "Kadim metinler bu Pal'dan \"Kurtuluşun Yaratığı\" olarak bahseder. Celesdir tarafından yayılan ışık her şeyi arındırır; hiçbir iz bırakmayarak ortadan kaybolmalarını sağlayarak onları gerçek anlamda yok eder."
   },
   "WhiteDeer_Dark": {
     "localized_name": "Celesdir Noct",
@@ -3133,11 +3133,11 @@
   },
   "WindChimes": {
     "localized_name": "Hangyu",
-    "description": "Devasa kollarıyla demiri bile parçalayabilir. Özellikle canice bir infaz yöntemi olarak, bir zamanlar ağır suçlular halka açık bir meydanda bağlanır ve derileri bir Windchimes tarafından kemiklerinden ayrılırdı."
+    "description": "Devasa kollarıyla demiri bile parçalayabilir. Özellikle canice bir infaz yöntemi olarak, bir zamanlar ağır suçlular halka açık bir meydanda bağlanır ve derileri bir Hangyu tarafından kemiklerinden ayrılırdı."
   },
   "WindChimes_Ice": {
     "localized_name": "Hangyu Cryst",
-    "description": "Devasa kollarıyla buz dağlarını bile parçalayabilir. Acımasız bir küçük düşürme cezası olarak bir zamanlar büyük günahkârlar halka açık bir meydanda bağlanır ve saçları bir Windchimes_Ice tarafından yolunurdu."
+    "description": "Devasa kollarıyla buz dağlarını bile parçalayabilir. Acımasız bir küçük düşürme cezası olarak bir zamanlar büyük günahkârlar halka açık bir meydanda bağlanır ve saçları bir Hangyu Cryst tarafından yolunurdu."
   },
   "WingGolem": {
     "localized_name": "Knocklem",
@@ -3153,11 +3153,11 @@
   },
   "WizardOwl": {
     "localized_name": "Hoocrates",
-    "description": "Çoğu zaman düşüncelere dalmış hâldedir ve bazen uyumakta bile zorlanır. |Düşünüyorum, öyleyse varım.|"
+    "description": "Çoğu zaman düşüncelere dalmış hâldedir ve bazen uyumakta bile zorlanır. \"Düşünüyorum, öyleyse varım.\""
   },
   "WoolFox": {
     "localized_name": "Cremis",
-    "description": "SheepBall ile karşılaştırıldığında daha sık bir yünü ve evcilleştirilmeye daha uygun bir kişiliği vardır. Fakat tarihsel olarak her zaman evcil hayvan olarak sahiplenilmiştir. Sevimliliği bir erdem kabul edilir."
+    "description": "Lamball ile karşılaştırıldığında daha sık bir yünü ve evcilleştirilmeye daha uygun bir kişiliği vardır. Fakat tarihsel olarak her zaman evcil hayvan olarak sahiplenilmiştir. Sevimliliği bir erdem kabul edilir."
   },
   "WorldTreeDragon": {
     "localized_name": "Astralym",
@@ -3234,5 +3234,221 @@
   "Yeti_Grass": {
     "localized_name": "Wumpo Botan",
     "description": "Araştırmacılar bir keresinde gerçek formunu açığa çıkarmak için tüm çimenlerini biçti. Sonunda geride sadece çimen kaldı; sanki çimenden başka hiçbir şey yoktu."
+  },
+  "ArenaShop": {
+    "localized_name": "ArenaShop",
+    "description": null
+  },
+  "Arena_Legend_1": {
+    "localized_name": "Arena_Legend_1",
+    "description": null
+  },
+  "Arena_Legend_10": {
+    "localized_name": "Arena_Legend_10",
+    "description": null
+  },
+  "Arena_Legend_11": {
+    "localized_name": "Arena_Legend_11",
+    "description": null
+  },
+  "Arena_Legend_12": {
+    "localized_name": "Arena_Legend_12",
+    "description": null
+  },
+  "Arena_Legend_13": {
+    "localized_name": "Arena_Legend_13",
+    "description": null
+  },
+  "Arena_Legend_14": {
+    "localized_name": "Arena_Legend_14",
+    "description": null
+  },
+  "Arena_Legend_15": {
+    "localized_name": "Arena_Legend_15",
+    "description": null
+  },
+  "Arena_Legend_16": {
+    "localized_name": "Arena_Legend_16",
+    "description": null
+  },
+  "Arena_Legend_17": {
+    "localized_name": "Arena_Legend_17",
+    "description": null
+  },
+  "Arena_Legend_18": {
+    "localized_name": "Arena_Legend_18",
+    "description": null
+  },
+  "Arena_Legend_19": {
+    "localized_name": "Arena_Legend_19",
+    "description": null
+  },
+  "Arena_Legend_2": {
+    "localized_name": "Arena_Legend_2",
+    "description": null
+  },
+  "Arena_Legend_20": {
+    "localized_name": "Arena_Legend_20",
+    "description": null
+  },
+  "Arena_Legend_3": {
+    "localized_name": "Arena_Legend_3",
+    "description": null
+  },
+  "Arena_Legend_4": {
+    "localized_name": "Arena_Legend_4",
+    "description": null
+  },
+  "Arena_Legend_5": {
+    "localized_name": "Arena_Legend_5",
+    "description": null
+  },
+  "Arena_Legend_6": {
+    "localized_name": "Arena_Legend_6",
+    "description": null
+  },
+  "Arena_Legend_7": {
+    "localized_name": "Arena_Legend_7",
+    "description": null
+  },
+  "Arena_Legend_8": {
+    "localized_name": "Arena_Legend_8",
+    "description": null
+  },
+  "Arena_Legend_9": {
+    "localized_name": "Arena_Legend_9",
+    "description": null
+  },
+  "ArmorWoodlouse": {
+    "localized_name": "ArmorWoodlouse",
+    "description": null
+  },
+  "BeardedDragon": {
+    "localized_name": "BeardedDragon",
+    "description": "This Pal is under investigation."
+  },
+  "BlueWoolRabbit": {
+    "localized_name": "BlueWoolRabbit",
+    "description": null
+  },
+  "CandleWitch": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "CuteOrca": {
+    "localized_name": "CuteOrca",
+    "description": null
+  },
+  "DarkMutant": {
+    "localized_name": "DarkMutant",
+    "description": "Bazıları tekniğinde uzmanlaşmış bir DarkMutant tarafından gönderilen bir ışının başka boyutlara delikler açabileceğini söyler. Belirli Pal cinslerinin böyle fenomenler sonucu doğduğuna bile inanılır."
+  },
+  "DesertBoss": {
+    "localized_name": "DesertBoss",
+    "description": null
+  },
+  "ElecSnail_Fire": {
+    "localized_name": "ElecSnail_Fire",
+    "description": null
+  },
+  "ElectricBoss": {
+    "localized_name": "ElectricBoss",
+    "description": null
+  },
+  "Emote_Tester": {
+    "localized_name": "Emote_Tester",
+    "description": null
+  },
+  "ForestBoss": {
+    "localized_name": "Lily & Lyleen",
+    "description": null
+  },
+  "FrozenBear": {
+    "localized_name": "FrozenBear",
+    "description": null
+  },
+  "GrassDragon": {
+    "localized_name": "GrassDragon",
+    "description": "This Pal is under investigation."
+  },
+  "IceVeilDragon": {
+    "localized_name": "IceVeilDragon",
+    "description": null
+  },
+  "KingCrab": {
+    "localized_name": "KingCrab",
+    "description": null
+  },
+  "LeafBird": {
+    "localized_name": "LeafBird",
+    "description": null
+  },
+  "MedjedBird": {
+    "localized_name": "MedjedBird",
+    "description": null
+  },
+  "MexicanSalamander": {
+    "localized_name": "MexicanSalamander",
+    "description": null
+  },
+  "Monkey_Ice": {
+    "localized_name": "Monkey_Ice",
+    "description": null
+  },
+  "MonochromeMushroom": {
+    "localized_name": "MonochromeMushroom",
+    "description": null
+  },
+  "Negotiator": {
+    "localized_name": "Negotiator",
+    "description": null
+  },
+  "PinkKangaroo": {
+    "localized_name": "PinkKangaroo",
+    "description": null
+  },
+  "RockCheetah": {
+    "localized_name": "RockCheetah",
+    "description": null
+  },
+  "SakurajimaBoss": {
+    "localized_name": "Saya & Selyne",
+    "description": null
+  },
+  "SnakeQueen": {
+    "localized_name": "SnakeQueen",
+    "description": null
+  },
+  "SnowBoss": {
+    "localized_name": "Victor & Shadowbeak",
+    "description": null
+  },
+  "StrawHatCat": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "TestAssassin": {
+    "localized_name": "TestAssassin",
+    "description": null
+  },
+  "TestNPC": {
+    "localized_name": "TestNPC",
+    "description": null
+  },
+  "VikingBoss": {
+    "localized_name": "Bjorn & Bastigor",
+    "description": null
+  },
+  "VolcanicTurtle": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "WaterLizard": {
+    "localized_name": "WaterLizard",
+    "description": null
+  },
+  "WorldTree_Hunter_MissileLauncher_test": {
+    "localized_name": "WorldTree_Hunter_MissileLauncher_test",
+    "description": null
   }
 }

@@ -131,6 +131,10 @@
     "localized_name": "Máquina de arcade",
     "description": "Máquina de arcade decorativa. Está averiada y no se puede usar."
   },
+  "Banyan_Big": {
+    "localized_name": "Banyan_Big",
+    "description": null
+  },
   "Barrel01_Iron": {
     "localized_name": "Barril rojo",
     "description": "Barril rojo decorativo."
@@ -359,6 +363,10 @@
     "localized_name": "Espantapájaros de entrenamiento",
     "description": "Espantapájaros de entrenamiento con forma de Pengullet. Solo puede colocarse en un espacio amplio."
   },
+  "DamagedScarecrow_Test": {
+    "localized_name": "DamagedScarecrow_Test",
+    "description": null
+  },
   "DarkIsland_Banner": {
     "localized_name": "Estandarte vertical del pueblo de Tenraku",
     "description": "Estandarte vertical decorativo del pueblo de Tenraku."
@@ -368,16 +376,16 @@
     "description": "Bandera decorativa del pueblo de Tenraku."
   },
   "Decal_PalSticker_PinkCat": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Tuppanyan sticker",
+    "description": null
   },
   "DefenseBowGun": {
     "localized_name": "Ballesta fija",
-    "description": "Una instalación defensiva donde se colocan Pals para prepararse para el combate. Al asignar un Pal con la aptitud |trabajo manual|, usará la ballesta para proteger la base."
+    "description": "Una instalación defensiva donde se colocan Pals para prepararse para el combate. Al asignar un Pal con la aptitud \"trabajo manual\", usará la ballesta para proteger la base."
   },
   "DefenseMachinegun": {
     "localized_name": "Ametralladora fija",
-    "description": "Una instalación defensiva donde se colocan Pals para prepararse para el combate. Al asignar un Pal con la aptitud |trabajo manual|, usará la ametralladora para proteger la base."
+    "description": "Una instalación defensiva donde se colocan Pals para prepararse para el combate. Al asignar un Pal con la aptitud \"trabajo manual\", usará la ametralladora para proteger la base."
   },
   "DefenseMachinegun_AutoTurret": {
     "localized_name": "Torreta de la civilización antigua",
@@ -385,7 +393,7 @@
   },
   "DefenseMissile": {
     "localized_name": "Lanzamisiles fijo",
-    "description": "Una instalación defensiva donde se colocan Pals para prepararse para el combate. Al asignar un Pal con la aptitud |trabajo manual|, usará el lanzamisiles para proteger la base."
+    "description": "Una instalación defensiva donde se colocan Pals para prepararse para el combate. Al asignar un Pal con la aptitud \"trabajo manual\", usará el lanzamisiles para proteger la base."
   },
   "DefenseWait": {
     "localized_name": "Bolsa de arena",
@@ -735,6 +743,10 @@
     "localized_name": "Base de vidrio",
     "description": "Base para construir paredes o instalaciones encima. Está hecha de vidrio reforzado, por lo que es muy resistente."
   },
+  "Glass_pillars": {
+    "localized_name": "Pilar de vidrio",
+    "description": "Pilar para sostener construcciones. Al estar hecho de vidrio reforzado, es muy resistente."
+  },
   "Glass_roof": {
     "localized_name": "Techo de vidrio",
     "description": "Techo construido sobre muros para proteger de la lluvia y el viento. Está hecho de vidrio reforzado, por lo que es muy resistente."
@@ -757,7 +769,7 @@
   },
   "GoalSoccer_Iron": {
     "localized_name": "Arco de fútbol",
-    "description": "Arco de fútbol decorativo. No se puede marcar goles aunque pongas aSheepBall."
+    "description": "Arco de fútbol decorativo. No se puede marcar goles aunque pongas aLamball."
   },
   "GuardianDogStatue": {
     "localized_name": "Estatua de Yakumo",
@@ -1111,6 +1123,10 @@
     "localized_name": "Base de metal",
     "description": "Base para construir paredes y estructuras encima. Al estar hecha de metal, es muy resistente."
   },
+  "Metal_pillars": {
+    "localized_name": "Pilar de metal",
+    "description": "Pilar para sostener construcciones. Al estar hecho de metal, es muy resistente."
+  },
   "Metal_roof": {
     "localized_name": "Tejado de metal",
     "description": "Techo para protegerse de la lluvia y el viento, colocado sobre muros. Al estar hecho de metal, es muy resistente."
@@ -1276,8 +1292,8 @@
     "description": "Alfombra alargada antigua decorativa."
   },
   "Rug_Wood": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Fur rug",
+    "description": null
   },
   "SF_Chair": {
     "localized_name": "Silla estilo laboratorio",
@@ -1346,6 +1362,10 @@
   "SF_foundation": {
     "localized_name": "Base limpia",
     "description": "Base para construir paredes o instalaciones encima. Permite edificaciones limpias y futuristas."
+  },
+  "SF_pillars": {
+    "localized_name": "Pilar limpio",
+    "description": "Pilar para sostener edificios. Permite edificaciones limpias y futuristas."
   },
   "SF_roof": {
     "localized_name": "Techo limpio",
@@ -1611,6 +1631,10 @@
     "localized_name": "Base de piedra",
     "description": "Base para construir paredes y estructuras encima. Al estar hecha de piedra, es razonablemente resistente."
   },
+  "Stone_pillar": {
+    "localized_name": "Pilar de piedra",
+    "description": "Pilar para sostener construcciones. Al estar hecho de piedra, es relativamente resistente."
+  },
   "Stone_roof": {
     "localized_name": "Tejado de piedra",
     "description": "Tejado para protegerse de la lluvia y el viento, colocado sobre muros. Al estar hecho de piedra, es razonablemente resistente."
@@ -1808,8 +1832,8 @@
     "description": "Trampa que congela al Pal que la pisa. Los Pals congelados son más fáciles de capturar con la esfera."
   },
   "Trap_MovingPanel": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Moving Panels",
+    "description": "A description of the moving panel"
   },
   "Trap_Noose": {
     "localized_name": "Trampa colgante",
@@ -1919,6 +1943,10 @@
     "localized_name": "Escalera",
     "description": "Escalera que permite subir a zonas ligeramente elevadas."
   },
+  "Wooden_pillar": {
+    "localized_name": "Pilar de madera",
+    "description": "Pilar para sostener construcciones. Al estar hecho de madera, es frágil."
+  },
   "Wooden_roof": {
     "localized_name": "Tejado de madera",
     "description": "Tejado para protegerse de la lluvia y el viento, colocado sobre muros. Como es de madera, es frágil."
@@ -1954,5 +1982,13 @@
   "Zaisu": {
     "localized_name": "Silla de suelo japonesa",
     "description": "Silla de suelo decorativa. Ideal para construcciones con estilo japonés."
+  },
+  "JapaneseStyle_TriangleStairsCorner_02": {
+    "localized_name": "JapaneseStyle_TriangleStairsCorner_02",
+    "description": null
+  },
+  "WoodCreator": {
+    "localized_name": "WoodCreator",
+    "description": null
   }
 }

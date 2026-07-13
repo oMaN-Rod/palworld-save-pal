@@ -597,15 +597,15 @@
   },
   "Deffence_up2": {
     "localized_name": "頑強肉體",
-    "description": "防禦力+20.0% 免疫硬直"
+    "description": "防禦力+20% 免疫硬直"
   },
   "Deffence_up2_2": {
     "localized_name": "重量級",
-    "description": "防禦力+20.0% 免疫擊退"
+    "description": "防禦力+20% 免疫擊退"
   },
   "Deffence_up3": {
     "localized_name": "金剛之軀",
-    "description": "防禦力+30.0% 免疫硬直 免疫擊退"
+    "description": "防禦力+30% 免疫硬直 免疫擊退"
   },
   "Defuser_ExplosiveSpore_EquipSkill": {
     "localized_name": "爆炸傷害無效",
@@ -613,7 +613,7 @@
   },
   "ElementBoost_Aqua_1_PAL": {
     "localized_name": "喜歡玩水",
-    "description": "提升水屬性攻擊傷害10.0%"
+    "description": "提升水屬性攻擊傷害10%"
   },
   "ElementBoost_Aqua_2_PAL": {
     "localized_name": "海皇",
@@ -629,7 +629,7 @@
   },
   "ElementBoost_Dark_1_PAL": {
     "localized_name": "夜幕",
-    "description": "提升暗屬性攻擊傷害10.0%"
+    "description": "提升暗屬性攻擊傷害10%"
   },
   "ElementBoost_Dark_2_BossDefeat": {
     "localized_name": "增強暗屬性傷害 中",
@@ -665,7 +665,7 @@
   },
   "ElementBoost_Dragon_1_PAL": {
     "localized_name": "龍之血脈",
-    "description": "提升龍屬性攻擊傷害10.0%"
+    "description": "提升龍屬性攻擊傷害10%"
   },
   "ElementBoost_Dragon_2_BossDefeat": {
     "localized_name": "增強龍屬性傷害 中",
@@ -701,7 +701,7 @@
   },
   "ElementBoost_Earth_1_PAL": {
     "localized_name": "大地之力",
-    "description": "提升地屬性攻擊傷害10.0%"
+    "description": "提升地屬性攻擊傷害10%"
   },
   "ElementBoost_Earth_2_BossDefeat": {
     "localized_name": "增強地屬性傷害 中",
@@ -765,7 +765,7 @@
   },
   "ElementBoost_Fire_1_PAL": {
     "localized_name": "喜歡玩火",
-    "description": "提升火屬性攻擊傷害10.0%"
+    "description": "提升火屬性攻擊傷害10%"
   },
   "ElementBoost_Fire_2_BossDefeat": {
     "localized_name": "增強火屬性傷害 中",
@@ -801,7 +801,7 @@
   },
   "ElementBoost_Ice_1_PAL": {
     "localized_name": "冷血",
-    "description": "提升冰屬性攻擊傷害10.0%"
+    "description": "提升冰屬性攻擊傷害10%"
   },
   "ElementBoost_Ice_2_BossDefeat": {
     "localized_name": "增強冰屬性傷害 中",
@@ -837,7 +837,7 @@
   },
   "ElementBoost_Leaf_1_PAL": {
     "localized_name": "草木馨香",
-    "description": "提升草屬性攻擊傷害10.0%"
+    "description": "提升草屬性攻擊傷害10%"
   },
   "ElementBoost_Leaf_2_BossDefeat": {
     "localized_name": "增強草屬性傷害 中",
@@ -873,7 +873,7 @@
   },
   "ElementBoost_Normal_1_PAL": {
     "localized_name": "禪境",
-    "description": "提升無屬性攻擊傷害10.0%"
+    "description": "提升無屬性攻擊傷害10%"
   },
   "ElementBoost_Normal_2_BossDefeat": {
     "localized_name": "增強無屬性傷害 中",
@@ -901,7 +901,7 @@
   },
   "ElementBoost_Thunder_1_PAL": {
     "localized_name": "電容",
-    "description": "提升雷屬性攻擊傷害10.0%"
+    "description": "提升雷屬性攻擊傷害10%"
   },
   "ElementBoost_Thunder_2_PAL": {
     "localized_name": "雷帝",
@@ -941,7 +941,7 @@
   },
   "ElementResist_Aqua_1_PAL": {
     "localized_name": "防水性能",
-    "description": "減輕水屬性傷害10.0%"
+    "description": "減輕水屬性傷害10%"
   },
   "ElementResist_Aqua_2": {
     "localized_name": "減輕水屬性傷害Lv2",
@@ -961,7 +961,7 @@
   },
   "ElementResist_Dark_1_PAL": {
     "localized_name": "陽光開朗",
-    "description": "減輕暗屬性傷害10.0%"
+    "description": "減輕暗屬性傷害10%"
   },
   "ElementResist_Dark_2": {
     "localized_name": "減輕暗屬性傷害Lv2",
@@ -981,7 +981,7 @@
   },
   "ElementResist_Dragon_1_PAL": {
     "localized_name": "屠龍者",
-    "description": "減輕龍屬性傷害10.0%"
+    "description": "減輕龍屬性傷害10%"
   },
   "ElementResist_Dragon_2": {
     "localized_name": "減輕龍屬性傷害Lv2",
@@ -1001,7 +1001,7 @@
   },
   "ElementResist_Earth_1_PAL": {
     "localized_name": "抗震結構",
-    "description": "減輕地屬性傷害10.0%"
+    "description": "減輕地屬性傷害10%"
   },
   "ElementResist_Earth_2": {
     "localized_name": "減輕地屬性傷害Lv2",
@@ -1021,7 +1021,7 @@
   },
   "ElementResist_Fire_1_PAL": {
     "localized_name": "擁抱烈日",
-    "description": "減輕火屬性傷害10.0%"
+    "description": "減輕火屬性傷害10%"
   },
   "ElementResist_Fire_2": {
     "localized_name": "減輕火屬性傷害Lv2",
@@ -1041,7 +1041,7 @@
   },
   "ElementResist_Ice_1_PAL": {
     "localized_name": "高溫體質",
-    "description": "減輕冰屬性傷害10.0%"
+    "description": "減輕冰屬性傷害10%"
   },
   "ElementResist_Ice_2": {
     "localized_name": "減輕冰屬性傷害Lv2",
@@ -1061,7 +1061,7 @@
   },
   "ElementResist_Leaf_1_PAL": {
     "localized_name": "除草效果",
-    "description": "減輕草屬性傷害10.0%"
+    "description": "減輕草屬性傷害10%"
   },
   "ElementResist_Leaf_2": {
     "localized_name": "減輕草屬性傷害Lv2",
@@ -1081,7 +1081,7 @@
   },
   "ElementResist_Normal_1_PAL": {
     "localized_name": "一反常態",
-    "description": "減輕無屬性傷害10.0%"
+    "description": "減輕無屬性傷害10%"
   },
   "ElementResist_Normal_2": {
     "localized_name": "減輕無屬性傷害Lv2",
@@ -1101,7 +1101,7 @@
   },
   "ElementResist_Thunder_1_PAL": {
     "localized_name": "絕緣體",
-    "description": "減輕雷屬性傷害10.0%"
+    "description": "減輕雷屬性傷害10%"
   },
   "ElementResist_Thunder_2": {
     "localized_name": "減輕雷屬性傷害Lv2",
@@ -1133,7 +1133,7 @@
   },
   "GYM_NAME_Meadow": {
     "localized_name": "雷恩盜獵團的幹部",
-    "description": "攻擊+20.0% 提升移動速度10.0%"
+    "description": "攻擊+20% 提升移動速度10%"
   },
   "GYM_NAME_Sakurajima": {
     "localized_name": "月花眾的首領",
@@ -1245,7 +1245,7 @@
   },
   "MutationPal_ExplosionResist": {
     "localized_name": "重裝甲",
-    "description": "<Status_Up>免疫</>爆破傷害"
+    "description": null
   },
   "MutationPal_Immortal": {
     "localized_name": "不死之身",
@@ -1253,7 +1253,7 @@
   },
   "MutationPal_Mutant": {
     "localized_name": "特殊體質",
-    "description": "帕魯和玩家的生命值自然恢復量+50.0% 防禦力+{EffectValue4}% <Status_Up>免疫</>中毒傷害 <Status_Up>免疫</>灼熱傷害"
+    "description": null
   },
   "NightOwl": {
     "localized_name": "夜貓子",
@@ -1273,7 +1273,7 @@
   },
   "Nushi": {
     "localized_name": "湖之主",
-    "description": "提升水屬性攻擊傷害20.0% 提升冰屬性攻擊傷害20.0% 防禦+20.0%"
+    "description": "提升水屬性攻擊傷害20% 提升冰屬性攻擊傷害20% 防禦+20%"
   },
   "OctaviaArmorVampire": {
     "localized_name": "血液燃料",
@@ -1305,46 +1305,46 @@
   },
   "PAL_FullStomach_Down_1": {
     "localized_name": "小鳥胃",
-    "description": "減少飽足度下降速度<NumBlue_13>+10.0%</>"
+    "description": "減少飽足度下降速度+10.0%"
   },
   "PAL_FullStomach_Down_2": {
     "localized_name": "節食大師",
-    "description": "減少飽足度下降速度<NumBlue_13>+15.0%</>"
+    "description": "減少飽足度下降速度+15.0%"
   },
   "PAL_FullStomach_Down_3": {
     "localized_name": "極限絕食",
-    "description": "減少飽足度下降速度<NumBlue_13>+20.0%</>"
+    "description": "減少飽足度下降速度+20.0%"
   },
   "PAL_FullStomach_Up_1": {
     "localized_name": "貪吃",
-    "description": "增加飽足度下降速度<NumRed_13>+10.0%</>"
+    "description": "增加飽足度下降速度+10.0%"
   },
   "PAL_FullStomach_Up_2": {
     "localized_name": "無底之胃",
-    "description": "增加飽足度下降速度<NumRed_13>+15.0%</>"
+    "description": "增加飽足度下降速度+15.0%"
   },
   "PAL_Sanity_Down_1": {
     "localized_name": "正向思考",
-    "description": "減少SAN值下降速度<NumBlue_13>+10.0%</>"
+    "description": "減少SAN值下降速度+10.0%"
   },
   "PAL_Sanity_Down_2": {
     "localized_name": "工作狂",
-    "description": "減少SAN值下降速度<NumBlue_13>+15.0%</>"
+    "description": "減少SAN值下降速度+15.0%"
   },
   "PAL_Sanity_Down_3": {
     "localized_name": "明鏡止水",
-    "description": "減少SAN值下降速度<NumBlue_13>+20.0%</>"
+    "description": "減少SAN值下降速度+20.0%"
   },
   "PAL_Sanity_Up_1": {
     "localized_name": "情緒不穩",
-    "description": "增加SAN值下降速度<NumRed_13>+10.0%</>"
+    "description": "增加SAN值下降速度+10.0%"
   },
   "PAL_Sanity_Up_2": {
     "localized_name": "毀滅欲望",
-    "description": "增加SAN值下降速度<NumRed_13>+15.0%</>"
+    "description": "增加SAN值下降速度+15.0%"
   },
   "PAL_SpiritualInst": {
-    "localized_name": "zh-Hant Text",
+    "localized_name": "Mentally unstable",
     "description": null
   },
   "PAL_conceited": {
@@ -1545,23 +1545,23 @@
   },
   "TrainerATK_UP_1": {
     "localized_name": "突襲指揮官",
-    "description": "提升玩家的攻擊10.0%"
+    "description": "提升玩家的攻擊10%"
   },
   "TrainerDEF_UP_1": {
     "localized_name": "鐵壁軍師",
-    "description": "提升玩家的防禦10.0%"
+    "description": "提升玩家的防禦10%"
   },
   "TrainerLogging_up1": {
     "localized_name": "採伐領袖",
-    "description": "提升玩家的採伐效率25.0%"
+    "description": "提升玩家的採伐效率25%"
   },
   "TrainerMining_up1": {
     "localized_name": "礦山首領",
-    "description": "提升玩家的挖掘效率25.0%"
+    "description": "提升玩家的挖掘效率25%"
   },
   "TrainerWorkSpeed_UP_1": {
     "localized_name": "啦啦隊",
-    "description": "提升玩家的工作速度25.0%"
+    "description": "提升玩家的工作速度25%"
   },
   "Vampire": {
     "localized_name": "吸血鬼",
@@ -1617,31 +1617,31 @@
   },
   "WorldTree_ATK": {
     "localized_name": "雙刃聖劍",
-    "description": "攻擊<NumBlue_13>+</>50.0% 防禦-30.0% 世界樹區域的樹木/礦石不會因接近而消失"
+    "description": "攻擊+50% 防禦-30% 世界樹區域的樹木/礦石不會因接近而消失"
   },
   "WorldTree_ATK_DEF": {
     "localized_name": "破壞神",
-    "description": "攻擊<NumBlue_13>+</>40.0% 防禦<NumBlue_13>+</>20.0% 最大HP-50.0% 世界樹區域的樹木/礦石不會因接近而消失"
+    "description": "攻擊+40% 防禦+20% 最大HP-50% 世界樹區域的樹木/礦石不會因接近而消失"
   },
   "WorldTree_CraftSpeed": {
     "localized_name": "惡魔之手",
-    "description": "工作速度<NumBlue_13>+</>90.0<NumBlue_13>%</> SAN值下降速度加快<NumRed_13>+15.0%</> 世界樹區域的樹木/礦石不會因接近而消失"
+    "description": "工作速度+90% SAN值下降速度加快+15.0% 世界樹區域的樹木/礦石不會因接近而消失"
   },
   "WorldTree_DEF": {
     "localized_name": "守護聖盾",
-    "description": "防禦<NumBlue_13>+</>50.0% 攻擊-30.0% 世界樹區域的樹木/礦石不會因接近而消失"
+    "description": "防禦+50% 攻擊-30% 世界樹區域的樹木/礦石不會因接近而消失"
   },
   "WorldTree_FullStomach": {
     "localized_name": "神樹苗床",
-    "description": "減少飽足度下降速度<NumBlue_13>+50.0%</> 生命值-20.0<NumRed_13>%</> 世界樹區域的樹木/礦石不會因接近而消失"
+    "description": "減少飽足度下降速度+50.0% 生命值-20% 世界樹區域的樹木/礦石不會因接近而消失"
   },
   "WorldTree_MoveSpeed": {
     "localized_name": "次元跳躍",
-    "description": "移動速度提升<NumBlue_13>+</>50.0<NumBlue_13>%</> 飽足度下降速度加速<NumRed_13>+15.0%</> 世界樹區域的樹木/礦石不會因接近而消失"
+    "description": "移動速度提升+50% 飽足度下降速度加速+15.0% 世界樹區域的樹木/礦石不會因接近而消失"
   },
   "WorldTree_Sanity": {
     "localized_name": "仙人",
-    "description": "減少SAN值下降速度<NumBlue_13>+50.0%</> 工作速度-20.0<NumRed_13>%</> 世界樹區域的樹木/礦石不會因接近而消失"
+    "description": "減少SAN值下降速度+50.0% 工作速度-20% 世界樹區域的樹木/礦石不會因接近而消失"
   },
   "YakushimaDagameBoost_Magic_Equip": {
     "localized_name": "神聖之力 魔法",
@@ -1677,6 +1677,282 @@
   },
   "defense_ACC_up4": {
     "localized_name": "提升防禦Lv4",
+    "description": null
+  },
+  "AccuracyDecrease": {
+    "localized_name": "AccuracyDecrease",
+    "description": null
+  },
+  "AccuracyIncrease": {
+    "localized_name": "AccuracyIncrease",
+    "description": null
+  },
+  "AccuracySuperDecrease": {
+    "localized_name": "AccuracySuperDecrease",
+    "description": null
+  },
+  "BulletSpeed_H": {
+    "localized_name": "BulletSpeed_H",
+    "description": null
+  },
+  "BulletSpeed_L": {
+    "localized_name": "BulletSpeed_L",
+    "description": null
+  },
+  "CollectItem": {
+    "localized_name": "CollectItem",
+    "description": null
+  },
+  "CollectItem_CuteFox": {
+    "localized_name": "CollectItem_CuteFox",
+    "description": null
+  },
+  "CraftSpeed*3": {
+    "localized_name": "CraftSpeed*3",
+    "description": null
+  },
+  "CraftSpeed*5": {
+    "localized_name": "CraftSpeed*5",
+    "description": null
+  },
+  "GiveADark": {
+    "localized_name": "GiveADark",
+    "description": null
+  },
+  "GiveADragon": {
+    "localized_name": "GiveADragon",
+    "description": null
+  },
+  "GiveAEarth": {
+    "localized_name": "GiveAEarth",
+    "description": null
+  },
+  "GiveAElectricity": {
+    "localized_name": "GiveAElectricity",
+    "description": null
+  },
+  "GiveAFire": {
+    "localized_name": "GiveAFire",
+    "description": null
+  },
+  "GiveAIce": {
+    "localized_name": "GiveAIce",
+    "description": null
+  },
+  "GiveALeaf": {
+    "localized_name": "GiveALeaf",
+    "description": null
+  },
+  "GiveAWater": {
+    "localized_name": "GiveAWater",
+    "description": null
+  },
+  "Logging_up1": {
+    "localized_name": "Logging_up1",
+    "description": null
+  },
+  "Logging_up1_Otomo_only": {
+    "localized_name": "Logging_up1_Otomo_only",
+    "description": null
+  },
+  "Logging_up2": {
+    "localized_name": "Logging_up2",
+    "description": null
+  },
+  "Logging_up2_Otomo_only": {
+    "localized_name": "Logging_up2_Otomo_only",
+    "description": null
+  },
+  "Logging_up3": {
+    "localized_name": "Logging_up3",
+    "description": null
+  },
+  "Logging_up4": {
+    "localized_name": "Logging_up4",
+    "description": null
+  },
+  "Logging_up5": {
+    "localized_name": "Logging_up5",
+    "description": null
+  },
+  "MeleeAttack_down1": {
+    "localized_name": "MeleeAttack_down1",
+    "description": null
+  },
+  "MeleeAttack_down2": {
+    "localized_name": "MeleeAttack_down2",
+    "description": null
+  },
+  "MeleeAttack_up1": {
+    "localized_name": "MeleeAttack_up1",
+    "description": null
+  },
+  "MeleeAttack_up2": {
+    "localized_name": "MeleeAttack_up2",
+    "description": null
+  },
+  "Mining_up1": {
+    "localized_name": "Mining_up1",
+    "description": null
+  },
+  "Mining_up1_Otomo_only": {
+    "localized_name": "Mining_up1_Otomo_only",
+    "description": null
+  },
+  "Mining_up2": {
+    "localized_name": "Mining_up2",
+    "description": null
+  },
+  "Mining_up2_Otomo_only": {
+    "localized_name": "Mining_up2_Otomo_only",
+    "description": null
+  },
+  "Mining_up3": {
+    "localized_name": "Mining_up3",
+    "description": null
+  },
+  "Mining_up4": {
+    "localized_name": "Mining_up4",
+    "description": null
+  },
+  "Mining_up5": {
+    "localized_name": "Mining_up5",
+    "description": null
+  },
+  "Mute_1": {
+    "localized_name": "Mute_1",
+    "description": null
+  },
+  "Mute_2": {
+    "localized_name": "Mute_2",
+    "description": null
+  },
+  "Mute_3": {
+    "localized_name": "Mute_3",
+    "description": null
+  },
+  "Mute_4": {
+    "localized_name": "Mute_4",
+    "description": null
+  },
+  "Mute_5": {
+    "localized_name": "Mute_5",
+    "description": null
+  },
+  "PAL_ElementPassive_Test": {
+    "localized_name": "合作夥伴技能：屬性被動",
+    "description": null
+  },
+  "PAL_TribePassive_Test": {
+    "localized_name": "合作夥伴技能：種族被動",
+    "description": null
+  },
+  "RecoilDecrease": {
+    "localized_name": "RecoilDecrease",
+    "description": null
+  },
+  "RecoilIncrease": {
+    "localized_name": "RecoilIncrease",
+    "description": null
+  },
+  "ShotAttack_down1": {
+    "localized_name": "ShotAttack_down1",
+    "description": null
+  },
+  "ShotAttack_down2": {
+    "localized_name": "ShotAttack_down2",
+    "description": null
+  },
+  "ShotAttack_up1": {
+    "localized_name": "ShotAttack_up1",
+    "description": null
+  },
+  "ShotAttack_up2": {
+    "localized_name": "ShotAttack_up2",
+    "description": null
+  },
+  "StealExpert_1": {
+    "localized_name": "StealExpert_1",
+    "description": null
+  },
+  "StealExpert_2": {
+    "localized_name": "StealExpert_2",
+    "description": null
+  },
+  "StealExpert_3": {
+    "localized_name": "StealExpert_3",
+    "description": null
+  },
+  "StealExpert_4": {
+    "localized_name": "StealExpert_4",
+    "description": null
+  },
+  "Support_down1": {
+    "localized_name": "Support_down1",
+    "description": null
+  },
+  "Support_down2": {
+    "localized_name": "Support_down2",
+    "description": null
+  },
+  "Support_up1": {
+    "localized_name": "Support_up1",
+    "description": null
+  },
+  "Support_up2": {
+    "localized_name": "Support_up2",
+    "description": null
+  },
+  "TestExplosive_H": {
+    "localized_name": "TestExplosive_H",
+    "description": null
+  },
+  "TestExplosive_L": {
+    "localized_name": "TestExplosive_L",
+    "description": null
+  },
+  "TestHoming_H": {
+    "localized_name": "TestHoming_H",
+    "description": null
+  },
+  "TestHoming_L": {
+    "localized_name": "TestHoming_L",
+    "description": null
+  },
+  "TestSkill1": {
+    "localized_name": "TestSkill1",
+    "description": null
+  },
+  "TestSkill2": {
+    "localized_name": "TestSkill2",
+    "description": null
+  },
+  "TestSkill3": {
+    "localized_name": "TestSkill3",
+    "description": null
+  },
+  "TestSkill4": {
+    "localized_name": "TestSkill4",
+    "description": null
+  },
+  "TestSkill5": {
+    "localized_name": "TestSkill5",
+    "description": null
+  },
+  "TestSkill6": {
+    "localized_name": "TestSkill6",
+    "description": null
+  },
+  "TestSkill7": {
+    "localized_name": "TestSkill7",
+    "description": null
+  },
+  "TestSkill8": {
+    "localized_name": "TestSkill8",
+    "description": null
+  },
+  "MoveSpeed_up_1_Otomo_Only_Equip": {
+    "localized_name": "MoveSpeed_up_1_Otomo_Only_Equip",
     "description": null
   }
 }

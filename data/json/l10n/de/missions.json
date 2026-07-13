@@ -13,7 +13,7 @@
   },
   "Main_BuildPalBox": {
     "localized_name": "Basislager",
-    "description": "Öffne mit <keyGuideIcon id=|OpenConstructionMenu| iconScale=|0.7|/> das Baumenü und platziere die Pal-Box so, dass außen herum reichlich Platz bleibt. Hier wirst du mit deinen Pals dein erstes Lager aufbauen. Ein gutes Lager wird dir die Weiterreise zum Turm wesentlich leichter machen. Wähle den Standort mit Bedacht."
+    "description": "Öffne das Baumenü und platziere die Pal-Box so, dass außen herum reichlich Platz bleibt. Hier wirst du mit deinen Pals dein erstes Lager aufbauen. Ein gutes Lager wird dir die Weiterreise zum Turm wesentlich leichter machen. Wähle den Standort mit Bedacht."
   },
   "Main_BuildWorkBench_Old": {
     "localized_name": "Ran an die Bank",

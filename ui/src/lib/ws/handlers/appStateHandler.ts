@@ -1,7 +1,7 @@
 import { goto } from '$app/navigation';
 import { UpdateAvailableModal } from '$components/modals';
 import { setLocale } from '$i18n/runtime';
-import { getAppState, getModalState } from '$states';
+import { dismissedUpdateVersion, getAppState, getModalState } from '$states';
 import { MessageType } from '$types';
 import { isUpdateAvailableOnGitHub } from '$utils/appVersion';
 import type { WSMessageHandler } from '../types';
@@ -21,11 +21,12 @@ export const getVersionHandler: WSMessageHandler = {
 		const modal = getModalState();
 		appState.version = data;
 
-		// Check for updates
-		const isUpdateAvailable = await isUpdateAvailableOnGitHub(data);
-		if (isUpdateAvailable) {
+		// Check for updates, but only nag once per release
+		const latestVersion = await isUpdateAvailableOnGitHub(data);
+		if (latestVersion && latestVersion !== dismissedUpdateVersion.current) {
+			dismissedUpdateVersion.current = latestVersion;
 			// @ts-ignore-next-line
-			const result = await modal.showModal<string>(UpdateAvailableModal, {});
+			await modal.showModal<string>(UpdateAvailableModal, {});
 		}
 	}
 };

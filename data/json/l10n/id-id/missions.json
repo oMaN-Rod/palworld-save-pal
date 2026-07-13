@@ -3,17 +3,25 @@
     "localized_name": "Markas Yang Nyaman",
     "description": "Agar Pal dapat bekerja secara efektif, sangat penting untuk memperluas markas. Pertama-tama, tingkatkan markas hingga level 7 untuk membuat ruang yang nyaman bagi Pal. Dengan melakukan persiapan, kamu pasti akan memiliki kekuatan yang dibutuhkan untuk menantang menara itu."
   },
+  "Main_BeginAdventure": {
+    "localized_name": "Awal Petualangan",
+    "description": "Kamu sudah mempraktikkan dan menguasai semua item yang tertera pada perangkat. Ayo temui ia lagi."
+  },
   "Main_BuildHatchingMachine": {
     "localized_name": "Telur Pal",
     "description": "Diketahui bahwa Pal terlahir dari telur. Karena telur dapat ditemukan di seluruh bagian pulau, perhatikan sekelilingmu dengan baik saat sedang menjelajah. Dengan membesarkan Pal dari telur, kamu mungkin bisa bertemu dengan beragam jenis individu. Suatu saat, pasti akan tiba hari di mana kamu mencari Pal milikmu sendiri. Pertama, buka teknologi Inkubator dan coba letakkan di markas. Setelah memasukkan telur ke dalam Inkubator, kamu harus menunggu sebentar sebelum telur itu menetas."
   },
   "Main_BuildPalBox": {
     "localized_name": "Markas Awal",
-    "description": "Buka menu konstruksi pada <keyGuideIcon id=|OpenConstructionMenu| iconScale=|0.7|/>, lalu coba letakkan Palbox di tanah yang luas. Di sanalah markas pertamamu dan Pal, dan dengan mengaturnya sebagai titik awal ekspedisi, itu akan membantumu ketika tiba saatnya untuk menuju menara. Pilih lokasi peletakannya dengan baik."
+    "description": "Buka menu konstruksi, lalu coba letakkan Palbox di tanah yang luas. Di sanalah markas pertamamu dan Pal, dan dengan mengaturnya sebagai titik awal ekspedisi, itu akan membantumu ketika tiba saatnya untuk menuju menara. Pilih lokasi peletakannya dengan baik."
   },
-  "Main_BuildWorkBench": {
+  "Main_BuildWorkBench_Old": {
     "localized_name": "Titik awal kerja",
     "description": "Bahan mentah hanyalah sekadar sumber daya. Dengan membangun meja kerja, kamu bisa mendapatkan kemampuan untuk membuat barang-barang yang lebih kompleks. Buka menu konstruksi, pilih Meja Kerja Primitif, dan tentukan lokasi pembangunan. Bangun fasilitas pertama dengan tanganmu sendiri."
+  },
+  "Main_BuildWorkbench": {
+    "localized_name": "Buat meja kerja",
+    "description": "Pengumpulan Kayu dan Pemasangan Meja Kerja Pulau ini kaya akan berbagai sumber daya seperti kayu dan batu. Untuk melakukan penelitian jangka panjang sambil menghemat persediaan yang terbatas, kita harus memanfaatkan sumber daya tersebut. Pertama, kumpulkan kayu. Ambil yang jatuh di tanah atau serang pohon di sekitar untuk mendapatkannya. Setelah itu, jika sudah menemukan tempat yang cukup luas dan aman, tentukan lokasi pembangunan meja kerja lalu buat di sana."
   },
   "Main_Capture30Pal": {
     "localized_name": "Menangkap 30 ekor Pal apa saja",
@@ -28,20 +36,32 @@
     "description": "Dengan melemparkan Pal Sphere ke Pal, kamu bisa menangkap mereka. Tangkap Pal pertamamu dan cobalah rasakan jiwanya. Membuat Pal menjadi lemah akan meningkatkan rasio keberhasilanmu."
   },
   "Main_CaptureSheepBall": {
+    "localized_name": "Pal paling lemah",
+    "description": "Pemanfaatan SheepBall: Meskipun SheepBall memiliki kekuatan tempur yang rendah dan mudah ditangkap, tapi mereka cukup cekatan. Mereka bisa bantu berbagai pekerjaan tangan yang biasanya dilakukan manusia. Sebagai rekan pertama dalam memperluas pangkalan, mereka akan menjadi sosok yang sangat bisa diandalkan. Selain itu, kamu juga bisa mendapatkan material penting untuk kehidupan seperti Wol dan Daging Domba Lamball. Sebaiknya tangkap beberapa Pal ini di awal, agar proses pengembangan pangkalan kamu jadi lebih lancar."
+  },
+  "Main_CaptureSheepBall_Old": {
     "localized_name": "Pal Terlemah",
-    "description": "Pulau Palpagos adalah dunia di mana yang kuat yang akan bertahan. SheepBall adalah Pal yang berada di posisi paling bawah dalam rantai makanan, dan dapat ditangkap dengan sangat mudah. Akan tetapi, mereka memanfaatkan keterampilan tangannya dengan cekatan, sehingga dapat menggantikanmu melakukan berbagai macam pekerjaan. Pertama, coba tangkap 5 ekorSheepBall. Sebagai teman pertama untuk memperbesar markasmu, kehadiran mereka harusnya cukup membantu. Selain itu, dari SheepBall kamu juga bisa mendapatkan material yang diperlukan untuk hidup, seperti Wol dan Daging Domba Lamball. Agar bisa bertahan hidup di dunia yang keras ini, penting untuk memiliki pemikiran untuk menggunakan apa pun yang bisa digunakan."
+    "description": "Pulau Palpagos adalah dunia di mana yang kuat yang akan bertahan. Lamball adalah Pal yang berada di posisi paling bawah dalam rantai makanan, dan dapat ditangkap dengan sangat mudah. Akan tetapi, mereka memanfaatkan keterampilan tangannya dengan cekatan, sehingga dapat menggantikanmu melakukan berbagai macam pekerjaan. Pertama, coba tangkap 5 ekor SheepBall. Sebagai teman pertama untuk memperbesar markasmu, kehadiran mereka harusnya cukup membantu. Selain itu, dari Lamball kamu juga bisa mendapatkan material yang diperlukan untuk hidup, seperti Wol dan Daging Domba Lamball. Agar bisa bertahan hidup di dunia yang keras ini, penting untuk memiliki pemikiran untuk menggunakan apa pun yang bisa digunakan."
+  },
+  "Main_CatchPal": {
+    "localized_name": "Tangkap Pal",
+    "description": "Pembuatan Pal Sphere dan Penangkapan Pal: Kamu pasti sadar, pulau ini dihuni oleh banyak makhluk tak dikenal. Makhluk-makhluk yang disebut \"Pal\" ini punya karakteristik ekologi yang unik serta kecerdasan tinggi, dan terbukti sangat berguna bagi aktivitas investigasi kita. Pal bisa ditangkap menggunakan alat yang disebut Pal Sphere. Meski prinsip kerjanya tidak diketahui, Pal yang telah ditangkap pada dasarnya akan menjadi patuh kepada manusia. Buka layar Teknologi dari menu untuk memeriksa cara pembuatan Pal Sphere, lalu kumpulkan Pecahan Paldium yang menjadi bahan bakunya. Bijih aneh yang bersinar biru ini biasanya sering ditemukan di dekat area perairan. Setelah itu, di Meja Kerja Primitif buatlah Pal Sphere, maka persiapan penangkapan selesai. Saat mencoba menangkap, kurangi kesehatan target sebanyak mungkin untuk melemahkan daya tahannya dan meningkatkan tingkat keberhasilan. Tapi hati-hati, kebanyakan Pal akan melawan. Jadi kalau perlengkapanmu belum siap, mending incar Pal kecil yang kekuatannya lebih rendah dulu."
   },
   "Main_CollectCrystal": {
     "localized_name": "Paldium",
     "description": "Di pulau ini, terdapat bijih yang menyembunyikan kekuatan supranatural yang disebut dengan Paldium. Tampaknya ini sangat berhubungan dengan pohon raksasa yang terlihat jauh di sana, tetapi tidak ada yang tahu detailnya. Bijih aneh ini memiliki berbagai kegunaan dan juga merupakan material yang sangat penting untuk Pal Sphere. Diketahui bahwa Paldium bisa ditemukan di dekat air. Cari di tepi air seperti di sepanjang sungai, dan jika kamu menemukan benda yang seperti batu bercahaya biru, cobalah pukul dengan beliung. Perlu dicatat, beliung dapat dibuat di Meja Kerja Primitif dengan menggabungkan Batu dan Kayu."
   },
-  "Main_CraftKitsunebiGear": {
-    "localized_name": "Skill Partner",
-    "description": "Semua Pal memiliki kemampuan yang disebut dengan Skill Partner, dan memiliki sifat yang berbeda sesuai spesiesnya. Ada Pal yang bisa kamu kendalikan sebagai perlengkapan, dan juga ada Pal yang bisa kamu naiki. Pertama, buka teknologi Meja Produksi Pal Gear, lalu coba letakkan di markas. Kemudian, buka teknologi Tali Kekang Foxparks, lalu buat di Meja Produksi Pal Gear. Pal Gear disimpan di barang berharga yang ada di samping inventori, berbeda dengan perlengkapan dan item biasa."
+  "Main_CollectKeySpheres": {
+    "localized_name": "Kumpulkan Key Sphere",
+    "description": "Menurut Zoe, ada total 8 menara di pulau ini, dan masing-masing kelihatannya berisikan sebuah Key Sphere yang tersegel. Jika berhasil mengumpulkan semua Key Sphere tersebut, mungkin sesuatu akan terungkap."
   },
   "Main_CraftMealPouch": {
     "localized_name": "Lapar Adalah Musuh Terbesar",
     "description": "Lapar adalah musuh terbesar. Apa pun situasinya, jangan lupa untuk makan. Jika kamu memiliki Kantong Makanan Otomatis Kecil, kamu dan Pal milikmu bisa mendapatkan makanan dengan mudah. Ini adalah alat kecil, tetapi bisa menjadi penolong besar dalam penjelajahan dan pertempuran. Perlu diperhatikan, Kantong Makanan Otomatis Kecil sama seperti Pal Gear, ia akan tersimpan di barang berharga di samping inventori."
+  },
+  "Main_CraftPalGear": {
+    "localized_name": "Pembuatan Pal Gear",
+    "description": "Kepala desa menyarankan jika kamu ingin tahu masa lalu Kepulauan Palpagos, coba kunjungi Zoe, putri tunggal dari pemimpin gerombolan pemburu liar. Namun, seperti yang dikatakan beliau,Foxparkssebaiknya kamu bersiap menuju menara dengan menangkap dan membuat \"Pal Gear\" terlebih dahulu."
   },
   "Main_CraftPalSphere": {
     "localized_name": "Alat Penangkap",
@@ -51,9 +71,17 @@
     "localized_name": "Pelindung Paldium",
     "description": "Saat terjadi pertempuran, kamu tidak bisa menghindari serangan selamanya. Dapatkan alat untuk bertahan menggunakan kekuatan Paldium. Buka teknologi Perisai Normal, lalu buat di Meja Kerja Primitif. Kalau kamu menyiapkan diri dari awal, kamu bisa mengatasi serangan tak terduga."
   },
+  "Main_CraftTools": {
+    "localized_name": "Pembuatan kapak dan beliung",
+    "description": "Pembuatan Kapak dan Beliung: Bahan dasar seperti Kayu dan Batu akan terus dibutuhkan dalam jumlah besar ke depannya. Selain memungut yang jatuh di tanah, kamu juga bisa mendapatkannya dengan memukul pohon atau batu menggunakan tangan kosong, tetapi... untuk mengumpulkannya dengan lebih efisien, kamu perlu menyiapkan alat yang sesuai seperti kapak dan beliung. Pertama, periksa resep di meja kerja, lalu kumpulkan beberapa Kayu dan Batu yang dibutuhkan untuk membuat Beliung Batu dan Kapak Batu."
+  },
+  "Main_Craft_PalGear": {
+    "localized_name": "Skill Partner",
+    "description": "Semua Pal memiliki kemampuan yang disebut dengan Skill Partner, dan memiliki sifat yang berbeda sesuai spesiesnya. Ada Pal yang bisa kamu kendalikan sebagai perlengkapan, dan juga ada Pal yang bisa kamu naiki. Pertama, buka teknologi Meja Produksi Pal Gear, lalu coba letakkan di markas. Kemudian, buka teknologi Tali Kekang Foxparks, lalu buat di Meja Produksi Pal Gear. Pal Gear disimpan di barang berharga yang ada di samping inventori, berbeda dengan perlengkapan dan item biasa."
+  },
   "Main_DefeatDesertBoss": {
     "localized_name": "Penguasa Lubang Pasir",
-    "description": "Kelompok Penegak Hukum yang seharusnya menyelamatkan orang lain, sekarang akarnya telah membusuk. Yang menjadi pusatnya adalah seorang laki-laki bernama Marcus Dryden. Dengan dalih menegakkan aturan, dia mendistribusikan obat-obatan, memperkaya dirinya sendiri, dan mengendalikan kekacauan di pulau ini. Wilayah berpasir yang dikuasainya, sekarang sedang tenang, menunggu kedatanganmu kembali sebagai penguasa baru. Datangi Menara Bukit Pasir Dahaga dan hapuskan kebusukan ini dengan tanganmu sendiri."
+    "description": "Kamu berhasil mengalahkan Axel Travers dan memperoleh \"Keysphere Kemalasan.\" Tujuanmu selanjutnya yakni Menara Palapagos Islands Defense Force (PIDF)."
   },
   "Main_DefeatDungeonBoss": {
     "localized_name": "Pal Yang Tersegel",
@@ -61,31 +89,51 @@
   },
   "Main_DefeatForestBoss": {
     "localized_name": "Hei, Jangan Lukai Dia",
-    "description": "Lily Everhart mengajarkan hidup berdampingan dengan Pal, tetapi ia terlalu menyukai Pal. Cintanya yang terlalu dalam akhirnya berubah menjadi doktrin yang menuduh manusia sebagai makhluk yang penuh dosa. Untuk menghentikan tindakannya yang sudah melampaui batas, tidak ada jalan lain selain menghadapinya. Pergi ke Menara Gunung Beku dan hadapi gadis itu."
+    "description": "Kamu berhasil mengalahkan Zoe Rayne dan memperoleh \"Keysphere Iri Hati.\" Tujuanmu selanjutnya yakni Menara Aliansi Pal Bebas."
   },
   "Main_DefeatGrassBoss": {
     "localized_name": "Putri dan Menara",
     "description": "Telah tiba saatnya untuk menantang salah satu menara yang ada di berbagai penjuru pulau. Gadis bernama Zoe Rayne adalah salah satu pelindung menara di pulau ini. Namun, dia sendiri tidak tahu apa sebenarnya misi yang diberikan kepadanya. Meski begitu, ia menerima peran yang diberikan padanya, dan hari ini pun ia tetap berdiri di menara itu. Apa yang ada di balik menara ini? Untuk mencari jawabannya, kamu tiba di sana."
   },
+  "Main_DefeatKingWhale": {
+    "localized_name": "Panthalus",
+    "description": "Untuk memasuki Pohon Dunia, kamu perlu bantuan dari Panthalus. Carilah Panthalus dan buktikan kekuatanmu kepadanya."
+  },
   "Main_DefeatSakurajimaBoss": {
     "localized_name": "Malam Ini, Sake-nya Enak",
-    "description": "Pelindung menara di Pulau Sakurajima adalah Saya Kurosaki. Dia terus menjaganya dalam diam di bawah bulan yang sama, di waktu yang sama. Ternyata belakangan ini, ia bertemu dengan Pal yang disebut sebagai mata pisau dari bulan sabit, dan pada akhirnya mempersiapkan diri untuk memecah kesunyian. Di Menara Bunga Bulan yang ada di Pulau Sakurajima, kita pastikan niat sebenarnya."
+    "description": "Kamu berhasil mengalahkan Victor Ashford dan memperoleh \"Bola Kunci Kerakusan.\" Tujuanmu selanjutnya yakni Menara Klan Moonflower."
+  },
+  "Main_DefeatSkyIslandBoss": {
+    "localized_name": "Satu hari terasa seperti seribu musim gugur, lalu tibalah musim semi",
+    "description": "Kamu berhasil mengalahkan Bjorn Seligsson dan memperoleh \"Keysphere Amarah.\" Tujuanmu selanjutnya yakni Menara Perjanjian."
   },
   "Main_DefeatSnowyMountainBoss": {
     "localized_name": "Uji Coba Penggabungan Pal",
-    "description": "Di sebuah fasilitas, ada bekas uji coba berbahaya yang dilakukan berulang kali. Dalam catatan yang tertinggal, tertulis kata-kata seperti spesies baru dan peningkatan kemampuan. Orang yang muncul di catatan itu adalah Victor Ashford. Dia pasti telah menemukan jawaban. Kamu harus melihat apa yang terjadi dengan tempat ini dan apa hasilnya dengan matamu sendiri. Pergilah ke menara yang ada di puncak Gunung Suci Perak dan hentikan uji cobanya yang berbahaya."
+    "description": "Kamu berhasil mengalahkan Marcus Dryden dan memperoleh \"Keysphere Keserakahan.\" Tujuanmu selanjutnya yakni Menara Unit Riset Genetik Pal."
   },
   "Main_DefeatVikingBoss": {
     "localized_name": "Yang Memikul Semua Tanggung Jawab",
-    "description": "Dahulu, wilayah Feybreak mengalami bencana. Di tengah-tengah itu semua, Bjorn Seligsson membimbing warga, hingga sekarang terus-menerus melindungi menara. Tidak ada yang yakin apa maksud dari |Pada waktu itu| yang diucapkannya. Satu-satunya yang bisa dikatakan adalah, kekuatan dari mereka yang datang ke sini telah menjadi awal suatu perubahan. Pergilah ke menara yang berada di jantung wilayah Feybreak dan selamatkan warga dengan tanganmu sendiri. Hanya kamu yang bisa menghapuskan tanggung jawabnya dari bencana ini."
+    "description": "Kamu berhasil mengalahkan Saya Kurosaki dan memperoleh \"Keysphere Nafsu.\" Tujuanmu selanjutnya yakni Menara Langit Jatuh."
   },
   "Main_DefeatVolcanoBoss": {
-    "localized_name": "Obsesi Menang Mutlak",
-    "description": "Dulu, ada seseorang yang terobsesi dengan kemenangan mutlak dan tidak pernah membiarkan lawannya mendekat. Dia tidak memiliki alasan untuk bertarung. Yang dia inginkan hanyalah bertemu dengan orang yang lebih kuat darinya. Laki-laki yang berdiri di Menara Api Abadi, Axel Travers. Di menara yang ada di kawah Gunung Obsidian, dia menunggumu untuk menantangnya."
+    "localized_name": "Obsesi Kemenangan Sempurna",
+    "description": "Kamu berhasil mengalahkan Lily Everheart dan memperoleh \"Keysphere Kesombongan.\" Tujuanmu selanjutnya yakni Menara Persaudaraan Api Abadi."
   },
   "Main_DefeatWildBoss": {
     "localized_name": "Mengalahkan Bos Pertama",
     "description": "Pal yang kuat memiliki wilayah mereka masing-masing di Pulau Palpagos. Mereka terkadang bisa menjadi ancaman, tapi jika kamu mengalahkannya, mereka akan memberimu banyak pengalaman, dan mereka akan jadi teman yang membanggakan jika kamu berhasil menangkapnya. Bagaimana cara menghadapi mereka, itu tergantung pada dirimu sendiri. Konon di suatu tempat di pulau ini ada Pal yang bernama {targetpal}. Temukan {targetpal}, lalu coba kalahkan atau tangkap mereka."
+  },
+  "Main_DefeatWorldTreeDragon": {
+    "localized_name": "Kebangkitan",
+    "description": "Naga Malapetaka Putih dan tuannya terbangun dari tidur panjangnya. Tidak ada kata-kata yang terucap di antara kalian. Inilah saatnya untuk mengakhiri semuanya."
+  },
+  "Main_DefeatWorldTreeMiddleBoss": {
+    "localized_name": "Jalan menuju jurang kehampaan",
+    "description": "Kamu mendengar rekaman suara yang ditinggalkan oleh seorang penjaga di tempat yang dekat dengan bagian terdalam Pohon Dunia. Ayo cari petunjuk berdasarkan data koordinat yang terlampir."
+  },
+  "Main_EatFood": {
+    "localized_name": "Puaskan lapar",
+    "description": "Penyediaan Makanan: Untuk bertahan dalam jangka panjang, memastikan pasokan makanan yang stabil itu wajib. Untungnya, berbagai Buah Beri Merah yang tersebar di banyak tempat bisa langsung dimakan tanpa diolah, dan beberapa Pal juga bisa dijadikan bahan pangan. Ini memang menyakitkan hati..... tapi ini adalah pengorbanan yang tak bisa dihindari demi kelangsungan hidup."
   },
   "Main_EquipClothArmor": {
     "localized_name": "Melindungi Diri",
@@ -101,15 +149,59 @@
   },
   "Main_OpenSurvivalGuide": {
     "localized_name": "Pengetahuan bertahan hidup yang tertulis",
-    "description": "Hingga saat ini, banyak perintis dan penjelajah yang menantang diri mereka untuk menjelajahi pulau ini dan kehilangan nyawa. Catatan bertahan hidup yang dikumpulkan dari pengetahuan mereka kini telah disinkronkan dengan perangkatmu. Untuk bertahan hidup di dunia yang keras ini, pertama buka menu opsi <keyGuideIcon id=|UIEscape|/>, lalu coba periksa Panduan Bertahan Hidup."
+    "description": "Pendahuluan: Panduan Bertahan Hidup ini disusun berdasarkan pengalaman yang diperoleh tim ekspedisi kami di Pulau Palpagos. Segala hal yang terjadi di pulau ini berada di luar nalar dan pengetahuan umum kita. Jika kamu kebingungan tentang sesuatu, baca panduan ini."
   },
   "Main_PickupWood": {
     "localized_name": "Mengumpulkan material awal",
     "description": "Di antara semua sumber daya yang didapat dari alam, Kayu merupakan material dasar untuk seluruh fasilitas dan peralatan. Kumpulkan Kayu dengan mengambil ranting pohon yang terjatuh atau dengan menyerang pohon terdekat."
   },
+  "Main_PrepareEquipment": {
+    "localized_name": "Siapkan peralatan",
+    "description": "Pembuatan Perlengkapan: Pertama-tama, kami mengolah wol yang didapat dari Lamball di meja kerja menjadi Kain, lalu membuat Pakaian Kain. Selanjutnya, dengan menerapkan kemampuan penyembuhan mandiri milik Paldium, kami mengembangkan Perisai Normal. Terakhir, untuk menjelajahi medan dengan perbedaan ketinggian yang drastis, kami membuat Parasut Normal. Kalau sudah siap semua, kamu bisa melanjutkan investigasi dengan relatif lebih efisien."
+  },
+  "Main_RayneSyndicate": {
+    "localized_name": "Gerombolan Rayne",
+    "description": "Kamu sudah benar-benar siap. Pergilah ke Menara Gerombolan Pemburu Liar dan temui Zoe."
+  },
+  "Main_ReachWorldTree": {
+    "localized_name": "Menuju Pohon Dunia",
+    "description": "Kamu telah menunjukkan kekuatanmu kepada Panthalus dan berhasil mendapatkan persetujuan untuk bekerja sama. Panthalusmerupakan kunci untuk menerobos masuk ke Pohon Dunia. Ayo pergi ke Pohon Dunia dan cari cara untuk masuk ke dalamnya."
+  },
+  "Main_ReturnSmallVillage": {
+    "localized_name": "Key Sphere",
+    "description": "Kamu berhasil memukul mundur gadis yang sepertinya adalah Zoe, dan mengambil sesuatu yang menyerupai Pal Sphere yang terjatuh di sampingnya. Ayo kembali ke pemukiman kecil sekali lagi dan bicara dengan tetua di sana untuk mendengar penjelasannya."
+  },
+  "Main_SmallVillage": {
+    "localized_name": "Pemukiman Kecil",
+    "description": "Kamu telah mempraktikkan dan menguasai semua hal yang ditampilkan di terminal. Berdasarkan informasi dari penyintas tim pendahulu, kelihatannya terdapat sebuah pemukiman di sekitar menara gerombolan pemburu liar. Kalau ketemu, Mungkin kamu bisa mencari pemimpin pemukiman tersebut dan mencoba berbicara dengannya."
+  },
+  "Main_StatusUp": {
+    "localized_name": "Peningkatan Status",
+    "description": "Peningkatan Status: Mendapatkan pengalaman dan meningkatkan kemampuan akan memberimu kekuatan untuk menghadapi tantangan. Setelah naik level, buka Inventori dan tingkatkan status yang diinginkan untuk memungkinkan aktivitas investigasi yang lebih efisien."
+  },
+  "Main_TalkGrassBoss": {
+    "localized_name": "Zoe Rayne",
+    "description": "Katanya, untuk informasi lebih detail, sebaiknya kamu bertanya kepada Zoe. Ayo kita pergi sekali lagi ke Menara Gerombolan Rayne."
+  },
+  "Main_TalkSkyBoss": {
+    "localized_name": "Yang Maha Mengetahui Langit",
+    "description": "Kamu berhasil mengalahkan Auri, tetapi kelihatannya dia masih memiliki tenaga yang tersisa. Rasanya ada sesuatu yang berbeda darinya dibandingkan dengan para pemimpin di menara lainnya. Mungkin ada baiknya bicara dengannya."
+  },
+  "Main_TalkSkyBossAgain": {
+    "localized_name": "Malapetaka",
+    "description": "Auri tampaknya ingin memberikan informasi kepadamu mengenai Pohon Dunia. Sepertinya akan menjadi pembicaraan yang panjang. Kalau kamu sudah memiliki waktu luang, coba berbicara dengannya lagi."
+  },
+  "Main_TalkWorldTreeNPC": {
+    "localized_name": "Perbuatan Berdosa",
+    "description": "Akhirnya, kamu melangkahkan kaki ke dalam Pohon Dunia. Di dalamnya terbentang ruang misterius, tetapi entah mengapa kamu merasakan hawa yang tidak menyenangkan. Setelah melihat-lihat sekeliling, kamu menemukan seseorang."
+  },
+  "Main_TutorialStart": {
+    "localized_name": "Penduduk Pulau Pertama",
+    "description": "Kamu terbangun di pantai yang asing, ingatanmu samar-samar. Di mana dirimu berada, dan siapa kamu......? Saat kamu mencari petunjuk, terlihat sosok di kejauhan."
+  },
   "Main_UnlockFastTravel": {
     "localized_name": "Mengaktifkan Patung Elang Raksasa",
-    "description": "Di daerah ini terdapat alat transportasi kuno peninggalan peradaban kuno yang disebut Patung Elang Raksasa. Jika kamu bisa mengaktifkan alat ini, petualanganmu pasti menjadi lebih mudah. Pertama, sentuh Patung Elang Raksasa yang ada di dekatmu untuk membangun pondasi petualangan. Suatu saat nanti, akan datang waktu untuk menuju menara tinggi di kejauhan itu."
+    "description": "Kepada seluruh anggota tim peneliti: Pulau Palpagos masih diselimuti misteri, tetapi informasi yang ada menunjukkan bahwa terdapat beberapa patung batu yang menyerupai makhluk mirip burung tersebar di seluruh pulau. Patung-patung ini tampaknya terhubung oleh teknologi yang tak diketahui, memungkinkan terjadinya pergerakan instan di antara mereka. Baiknya, mulai penyelidikan dengan membangun pangkalan di sekitar patung-patung ini."
   },
   "Main_UnlockPalBox": {
     "localized_name": "Palbox",
@@ -123,9 +215,17 @@
     "localized_name": "Penanggulangan Keamanan",
     "description": "Di pulau ini terdapat banyak bahaya. Salah satunya adalah tebing. Jika salah langkah, mungkin kamu bukan hanya akan terluka. Buka teknologi Parasut Normal, lalu buat di Meja Kerja Primitif. Jika kamu memilikinya, kamu dapat turun dengan aman bahkan dari tebing tinggi sekalipun."
   },
+  "Main_WorkPal": {
+    "localized_name": "Pekerjakan Pal",
+    "description": "Penggunaan Pal sebagai Tenaga Kerja: Pal yang telah berhasil ditangkap dan dimasukkan ke dalam Pal Sphere bisa dikelola serta dioperasikan secara efisien menggunakan fasilitas bernama Palbox. Pertama, buka menu Teknologi dulu buat cek cara bikin Palbox, lalu pasang di lokasi yang kamu inginkan. Melalui Palbox, kamu bisa menyimpan Pal yang kamu punya, atau memanggil mereka ke area sekitar Palbox. Perlu diingat bahwa Pal yang dipanggil dari Palbox akan beraktivitas dalam radius tertentu di sekitar kotak tersebut, yang mana area itu akan menjadi wilayah pangkalanmu. Pikirkan baik-baik lokasi penempatannya. Menariknya, Pal yang kamu panggil akan kerja sendiri sesuai kemampuan masing-masing. Mereka akan cari tugas yang bisa mereka lakuin tanpa perlu disuruh terus-terusan. Ke depannya, kalau kamu punya lebih banyak jenis Pal, pengelolaan pangkalanmu juga akan makin efisien dan berkembang."
+  },
   "Main_WorkerPal": {
     "localized_name": "Mempekerjakan Pal",
     "description": "Pal akan bekerja bersamamu dan juga menjadi teman yang mendukung markas. Akses Palbox, lalu dari menu pengelolaan, pilih 1 ekor Pal yang sudah kamu tangkap untuk dikeluarkan ke markas."
+  },
+  "Main_WorldTreeAbyss": {
+    "localized_name": "Malapetaka yang Tersegel",
+    "description": "Kamu telah mendengar dari Penjaga Pohon Dunia mengenai apa yang sedang terjadi di Pohon Dunia saat ini, serta karakter sebenarnya dari bencana yang tertidur di bagian terdalam. Waktu kehancuran sudah berada tepat di depan mata."
   },
   "Sub_Angler01": {
     "localized_name": "Hari Memancing yang Sempurna",
@@ -151,6 +251,26 @@
     "localized_name": "Rencana Pengembangbiakan Splatterina",
     "description": "Apa kau sudah mengumpulkan Splatterina untukku? 10 ekor saja cukup untuk dikembangbiakkan. Tolong ya!"
   },
+  "Sub_DeliveryQuartz": {
+    "localized_name": "Kumpulkan Kuarsa Murni",
+    "description": "Kumpulkan 10 buah Kuarsa Murni, lalu berikan kepada pemberi tugas."
+  },
+  "Sub_DeliveryRainbowCrystal": {
+    "localized_name": "Kumpulkan Kuarsa Hexo",
+    "description": "Kumpulkan 10 buah Kuarsa Hexo, lalu berikan kepada pemberi tugas."
+  },
+  "Sub_DeliverySkyIslandOre": {
+    "localized_name": "Kumpulkan Solite",
+    "description": "Kumpulkan 10 buah Solite, lalu berikan kepada pemberi tugas."
+  },
+  "Sub_DeliverySulfur": {
+    "localized_name": "Kumpulkan Belerang",
+    "description": "Kumpulkan 10 buah Belerang, lalu berikan kepada pemberi tugas."
+  },
+  "Sub_DeliveryWood_Fine": {
+    "localized_name": "Kumpulkan Kayu Keras",
+    "description": "Kumpulkan 10 buah Kayu Keras, lalu berikan kepada pemberi tugas."
+  },
   "Sub_Farmer01": {
     "localized_name": "Berkah Pal",
     "description": "Seandainya kau memiliki Pal yang pandai menyiram, maukah kau memberikannya padaku? Aku bisa saja menciduk air sungai, tetapi air yang disiram oleh Pal seperti memiliki sesuatu yang spesial, aku merasa hal tersebut bisa menumbuhkan sayuran jauh lebih baik. Kumohon, pinjamkan kekuatanmu!"
@@ -171,6 +291,10 @@
     "localized_name": "Permintaan Penikmat Makanan yang Sombong",
     "description": "Aku seorang kritikus makanan dan penasihat utama Komunitas Gourmet Palpagos. Dengan seleraku yang tinggi, aku akan mencicipi masakanmu. Tapi, aku rasa pengembara sepertimu tidak akan pernah bisa memuaskanku."
   },
+  "Sub_HowSurviveWorldTree": {
+    "localized_name": "Cara bertahan hidup di Pohon Dunia",
+    "description": "Kumpulkan masing-masing 1 buah Kayu Misterius dan Palxite, lalu laporkan kepada pemberi tugas."
+  },
   "Sub_Kigurumi01": {
     "localized_name": "Mari menjadi Depresso!",
     "description": "Tunggu dulu! Aku bukan Pal! Jangan lemparkan Pal Sphere padaku! ......Ah, ternyata kau! Aku berjanji akan membuatkanmu kostum, ya! Haha! Apakah kau sudah mengumpulkan bahannya? 20 buah Kain Kualitas Tinggi dan 100 buah Kelenjar Racun! Aku membutuhkan banyak Kelenjar Racun untuk membuat warna bulu Depresso yang indah itu."
@@ -178,6 +302,18 @@
   "Sub_Kigurumi01_Replay": {
     "localized_name": "Mari menjadi Depresso!",
     "description": "Tunggu dulu! Aku bukan Pal! Jangan lemparkan Pal Sphere padaku! ......Ah, ternyata kau! Aku berjanji akan membuatkanmu kostum, ya! Haha! Apakah kau sudah mengumpulkan bahannya? 20 buah Kain Kualitas Tinggi dan 100 buah Kelenjar Racun! Aku membutuhkan banyak Kelenjar Racun untuk membuat warna bulu Depresso yang indah itu."
+  },
+  "Sub_LoneWolf01": {
+    "localized_name": "Serigala Sendirian Berjubah Hitam",
+    "description": "Kamu menemukan Kitsun Noct yang terluka dan terjatuh."
+  },
+  "Sub_LoneWolf02": {
+    "localized_name": "Menapak Tilas",
+    "description": "Cari petunjuk yang bisa mengarah pada pemilik Kitsun Noct."
+  },
+  "Sub_LoneWolf03": {
+    "localized_name": "Pedang tanpa sarung",
+    "description": "Kamu menerima permintaan dari desa untuk menangani Pal yang ganas."
   },
   "Sub_Nomad01": {
     "localized_name": "Pendakian Selesai Saat Turun Gunung",
@@ -189,7 +325,7 @@
   },
   "Sub_Nomad03": {
     "localized_name": "Pencarian Dungeon",
-    "description": "Apa kau menemukan Leezpunk atau Leezpunk Ignis? Ayo tukar dengan barang berhargaku!"
+    "description": "Apa kau menemukan Tombat? Ayo tukar dengan item favoritku!"
   },
   "Sub_Nomad04": {
     "localized_name": "Perjalanan Santai",
@@ -248,16 +384,32 @@
     "description": "Orang itu lewat sini. Aku tidak bisa memaafkannya. Hajar dia sampai babak belur dengan tanganmu!"
   },
   "Sub_Ranger03": {
-    "localized_name": "Tarantriss Besar",
-    "description": "Tarantriss besar itu cukup berbahaya. Sebaiknya periksa ulang perlengkapanmu saat menghadapinya."
+    "localized_name": "Faleris Aqua Besar",
+    "description": "Faleris Aqua besar itu cukup berbahaya. Sebaiknya periksa ulang perlengkapanmu sebelum menghadapinya."
   },
   "Sub_Ranger04": {
     "localized_name": "Mengumpulkan Madu di Ladang Bunga",
     "description": "Kau sudah mendapatkan Beegarde atau Elizabee? 3 ekor saja cukup kok!"
   },
+  "Sub_RookieExpeditionTeam01": {
+    "localized_name": "Tim Peneliti Pemula",
+    "description": "Kamu kebetulan menemukan kelompok berjumlah 3 orang yang tampak kelelahan setelah diserang oleh Pal. Ayo kita bantu mereka."
+  },
+  "Sub_RookieExpeditionTeam02": {
+    "localized_name": "Tunas",
+    "description": "Kamu kembali bertemu dengan tim peneliti yang pernah kamu tolong sebelumnya. Tapi, sepertinya Carla tidak ada bersama mereka……."
+  },
+  "Sub_RookieExpeditionTeam03": {
+    "localized_name": "Pertumbuhan",
+    "description": "Kamu kembali bertemu dengan Fia. Tampaknya dia sedang mencari kekuatan."
+  },
+  "Sub_RookieExpeditionTeam04": {
+    "localized_name": "Bunga Semu",
+    "description": "Fia yang kamu temui menyerangmu begitu saja dengan tatapan mata yang kosong. Tidak ada pilihan lain untuk bertahan hidup selain bertarung."
+  },
   "Sub_Scholar01": {
     "localized_name": "Buktikan legenda itu!",
-    "description": "Ayo, temukan Pal legenda! Kita tahu bahwa setidaknya terdapat masing-masing 1 ekor Pal legenda di Gunung Obsidian bagian barat, Gunung Suci Perak bagian utara, Bukit Pasir Dahaga bagian timur, dan di ujung terjauh Feybreak. Dakilah daerah berbatu yang besar itu dan kau akan bisa memandang jauh ke depan. Tolonglah!"
+    "description": "Pergilah dan temukan Pal legendaris! Sejauh yang kutahu, setidaknya ada 1 Pal legendaris di masing-masing wilayah Gunung Suci Perak di utara, Bukit Pasir Kering di timur, dan wilayah paling ujung yang disebut Desa Mentari Surgawi. Naiklah ke batu besar itu dan kamu bisa melihatnya dengan lebih jelas. Tolonglah!"
   },
   "Sub_Scholar02": {
     "localized_name": "Tombol Semangat",
@@ -271,9 +423,29 @@
     "localized_name": "Detektor Logam",
     "description": "Kenapa? Apa kau sudah mengumpulkan Kromit? Kalau saja ada detektor logam, mungkin aku bisa menemukan Kromit yang terkubur di pulau ini."
   },
+  "Sub_StrongOldMan01": {
+    "localized_name": "Pengembara yang Tertawan",
+    "description": "Kamu baru saja menyelamatkan seseorang yang kelihatannya adalah penduduk pulau yang terjebak dalam kandang, tetapi sepertinya anggota gerombolan pemburu liar menyadarinya dan mulai berkumpul. Sekarang, ayo hadapi mereka terlebih dahulu untuk memastikan keselamatan kita."
+  },
+  "Sub_StrongOldMan02": {
+    "localized_name": "Kalahkan buronan berhadiah",
+    "description": "Petualang Harold yang kamu temui lagi tampaknya sedang terdesak di hadapan musuh yang kuat. Ia merasa sangat bersemangat bisa bertarung bersamamu lagi. Ayo bekerja sama dengan Harold untuk mengalahkan buronan tersebut!"
+  },
+  "Sub_StrongOldMan03": {
+    "localized_name": "Agen",
+    "description": "Harold yang kamu temui kembali kali ini tidak seceria biasanya. Tugas yang dia terima dari desa tetangga adalah membasmi Pal yang mengamuk. Sembari menjelaskan detail tugas dengan wajah muram, Harold memberikan sebuah tawaran: \"Maukah kamu mengambil tugas ini?\" Saat kamu setuju, Harold tampak lega sesaat…… Namun, bayangan yang lebih gelap menyelimuti wajahnya yang sedikit tertunduk."
+  },
+  "Sub_StrongOldMan04": {
+    "localized_name": "Masa lalu",
+    "description": "Harold yang berdiri di kaki Pohon Dunia, tampak ingin mengungkapkan sesuatu padamu. Apakah ia ingin menghadapi masa lalunya dan mengakui dosa? Atau, apakah ia ingin meninggalkan jejak dalam ingatan seseorang? Dari raut wajahnya yang dipenuhi tekad itu kau tak bisa memastikannya."
+  },
+  "Sub_StrongOldMan05": {
+    "localized_name": "Saat terakhir Sang Ksatria",
+    "description": "Kau akan menyaksikan akhir dari mereka."
+  },
   "Sub_Zoe01": {
     "localized_name": "Jangan sombong karena kau menang",
-    "description": "Grizzbolt sudah tertangkap? Di Zona Perburuan Terlarang 1 sepertinya banyak Pal kuat lainnya, jadi mungkin mustahil untukmu. Kau harus lebih berusaha lagi jika ingin aku mengakuimu."
+    "description": "Kau sudah menangkap Grizzbolt? Sepertinya di Zona Perburuan Terlarang 1 banyak Pal lain yang kuat, mungkin kau tidak akan sanggup. Kau harus berusaha lebih keras jika ingin aku mengakuimu."
   },
   "Sub_Zoe02": {
     "localized_name": "Aku tidak mempercayaimu",

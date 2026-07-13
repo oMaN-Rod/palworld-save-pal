@@ -131,6 +131,10 @@
     "localized_name": "街機遊戲機台",
     "description": "裝飾用的街機遊戲機台。 壞掉了，所以不能玩了。"
   },
+  "Banyan_Big": {
+    "localized_name": "Banyan_Big",
+    "description": null
+  },
   "Barrel01_Iron": {
     "localized_name": "紅色鐵桶",
     "description": "裝飾用的紅色鐵桶。"
@@ -359,6 +363,10 @@
     "localized_name": "受損的稻草人",
     "description": "以企丸丸為原型，用於訓練的稻草人。 只能放在寬闊的地方。"
   },
+  "DamagedScarecrow_Test": {
+    "localized_name": "DamagedScarecrow_Test",
+    "description": null
+  },
   "DarkIsland_Banner": {
     "localized_name": "天墜之民掛旗",
     "description": "裝飾用的天墜之民掛旗。"
@@ -368,7 +376,7 @@
     "description": "裝飾用的天墜之民團旗。"
   },
   "Decal_PalSticker_PinkCat": {
-    "localized_name": "zh-hant text",
+    "localized_name": "Tuppanyan sticker",
     "description": "tuppanyan貼紙"
   },
   "DefenseBowGun": {
@@ -735,6 +743,10 @@
     "localized_name": "玻璃地基",
     "description": "建築地基，可在上面建造牆壁或設施。 以鋼化玻璃製成，非常堅固。"
   },
+  "Glass_pillars": {
+    "localized_name": "玻璃立柱",
+    "description": "用來支撐建築的立柱。 以鋼化玻璃製成，非常堅固。"
+  },
   "Glass_roof": {
     "localized_name": "玻璃屋頂",
     "description": "建於牆壁上方的屋頂，用於遮擋風雨。 以鋼化玻璃製成，非常堅固。"
@@ -757,7 +769,7 @@
   },
   "GoalSoccer_Iron": {
     "localized_name": "足球球門",
-    "description": "裝飾用的足球球門。 把SheepBall踢進球門也無法得分。"
+    "description": "裝飾用的足球球門。 把棉悠悠踢進球門也無法得分。"
   },
   "GuardianDogStatue": {
     "localized_name": "八雲犬雕像",
@@ -1111,6 +1123,10 @@
     "localized_name": "金屬地基",
     "description": "建築地基，可在上面建造牆壁或設施。 以金屬製成，非常堅固。"
   },
+  "Metal_pillars": {
+    "localized_name": "金屬立柱",
+    "description": "用來支撐建築的立柱。 以金屬製成，非常堅固。"
+  },
   "Metal_roof": {
     "localized_name": "金屬屋頂",
     "description": "建於牆壁上方的屋頂，用於遮擋風雨。 以金屬製成，非常堅固。"
@@ -1276,7 +1292,7 @@
     "description": "裝飾用的古典長型地毯。"
   },
   "Rug_Wood": {
-    "localized_name": "zh-hant text",
+    "localized_name": "Fur rug",
     "description": "毛皮地毯"
   },
   "SF_Chair": {
@@ -1346,6 +1362,10 @@
   "SF_foundation": {
     "localized_name": "簡約地基",
     "description": "建築地基，可在上面建造牆壁或設施。 可以建造出近未來風格的簡約建築。"
+  },
+  "SF_pillars": {
+    "localized_name": "簡約立柱",
+    "description": "用來支撐建築的立柱。 可以建造出近未來風格的簡約建築。"
   },
   "SF_roof": {
     "localized_name": "簡約屋頂",
@@ -1611,6 +1631,10 @@
     "localized_name": "石砌地基",
     "description": "建築地基，可在上面建造牆壁或設施。 以石頭製成，還算堅固。"
   },
+  "Stone_pillar": {
+    "localized_name": "石砌立柱",
+    "description": "用來支撐建築的立柱。 以石頭製成，還算堅固。"
+  },
   "Stone_roof": {
     "localized_name": "石砌屋頂",
     "description": "建於牆壁上方的屋頂，用於遮擋風雨。 以石頭製成，還算堅固。"
@@ -1808,8 +1832,8 @@
     "description": "這種陷阱能讓踩到的帕魯凍結。 被凍結的帕魯更易被帕魯球捕獲。"
   },
   "Trap_MovingPanel": {
-    "localized_name": "zh-hant text",
-    "description": "zh-hant text"
+    "localized_name": "Moving Panels",
+    "description": "A description of the moving panel"
   },
   "Trap_Noose": {
     "localized_name": "套索陷阱",
@@ -1919,6 +1943,10 @@
     "localized_name": "梯子",
     "description": "可以用來爬上高處的梯子。"
   },
+  "Wooden_pillar": {
+    "localized_name": "木造立柱",
+    "description": "用來支撐建築的立柱。 以木頭製成，相當脆弱。"
+  },
   "Wooden_roof": {
     "localized_name": "木造屋頂",
     "description": "建於牆壁上方的屋頂，用於遮擋風雨。 以木頭製成，相當脆弱。"
@@ -1954,5 +1982,13 @@
   "Zaisu": {
     "localized_name": "和室椅",
     "description": "裝飾用的日式椅子。 可在建造和風的建築時配合使用。"
+  },
+  "JapaneseStyle_TriangleStairsCorner_02": {
+    "localized_name": "JapaneseStyle_TriangleStairsCorner_02",
+    "description": null
+  },
+  "WoodCreator": {
+    "localized_name": "WoodCreator",
+    "description": null
   }
 }

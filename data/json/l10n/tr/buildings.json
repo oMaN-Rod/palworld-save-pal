@@ -25,11 +25,11 @@
   },
   "AncientRelicRecycler": {
     "localized_name": "Antik Medeniyet Kalıntı Dönüştürücüsü",
-    "description": "Kayıp bir medeniyetin teknolojisi devşirilerek yapılmış, antik bir madde dönüştürme cihazı. |Antik Medeniyet Kalıntıları|nda bırakılan teknolojiyi çözerek, onları yeni formlara yüceltir. Kalıntıları israf etmeden kullanmak için tasarlanmış, son derece özel bir tesistir."
+    "description": "Kayıp bir medeniyetin teknolojisi devşirilerek yapılmış, antik bir madde dönüştürme cihazı. \"Antik Medeniyet Kalıntıları\"nda bırakılan teknolojiyi çözerek, onları yeni formlara yüceltir. Kalıntıları israf etmeden kullanmak için tasarlanmış, son derece özel bir tesistir."
   },
   "AncientWorkBench": {
     "localized_name": "Antik Medeniyet Tezgahı",
-    "description": "Tüm eşyaların tek bir yerde üretilebildiği, Pal'lara özel çok amaçlı bir tesis. Oyuncu burada çalışamaz ve üretim hızı standart tesislerle aynıdır. Gelişmiş bir ekipman olduğu için, işletilmesi yüksek |El İşçiliği| ve |İlaç Üretimi| yeteneğine sahip Pal'lar gerektirir."
+    "description": "Tüm eşyaların tek bir yerde üretilebildiği, Pal'lara özel çok amaçlı bir tesis. Oyuncu burada çalışamaz ve üretim hızı standart tesislerle aynıdır. Gelişmiş bir ekipman olduğu için, işletilmesi yüksek \"El İşçiliği\" ve \"İlaç Üretimi\" yeteneğine sahip Pal'lar gerektirir."
   },
   "Ancient_AirConditioner": {
     "localized_name": "Antik Medeniyet Klima Ünitesi",
@@ -130,6 +130,10 @@
   "ArcadeVideoGame": {
     "localized_name": "Atari Oyunu Makinesi",
     "description": "Dekoratif oyuncak yakalama makinesi. Bozuktur, oynanamaz."
+  },
+  "Banyan_Big": {
+    "localized_name": "Banyan_Big",
+    "description": null
   },
   "Barrel01_Iron": {
     "localized_name": "Kırmızı Metal Fıçı",
@@ -359,6 +363,10 @@
     "localized_name": "Antrenman Mankeni",
     "description": "Pengullet şeklinde bir antrenman mankeni. Sadece geniş, açık alanlara yerleştirilebilir."
   },
+  "DamagedScarecrow_Test": {
+    "localized_name": "DamagedScarecrow_Test",
+    "description": null
+  },
   "DarkIsland_Banner": {
     "localized_name": "Feybreak Halkının Dikey Sancağı",
     "description": "Dekoratif Feybreak Halkının Dikey Sancağı."
@@ -368,8 +376,8 @@
     "description": "Dekoratif Feybreak Halkının Grup Bayrağı."
   },
   "Decal_PalSticker_PinkCat": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Tuppanyan sticker",
+    "description": null
   },
   "DefenseBowGun": {
     "localized_name": "Sabitlenmiş Arbalet",
@@ -735,6 +743,10 @@
     "localized_name": "Cam Zemin",
     "description": "Üzerine duvarlar inşa edebileceğin veya araç ve tesisler kurabileceğin bir zemin. Endüstriyel camdan yapılmıştır ve epey dayanıklıdır."
   },
+  "Glass_pillars": {
+    "localized_name": "Cam Direk",
+    "description": "Yapıya destek olması için bir sütun. Endüstriyel camdan yapılmıştır ve epey dayanıklıdır."
+  },
   "Glass_roof": {
     "localized_name": "Cam Çatı",
     "description": "Yağmuru ve rüzgârı uzak tutmak için duvarların üzerine inşa edilmiş bir çatı. Endüstriyel camdan yapılmıştır ve epey dayanıklıdır."
@@ -757,7 +769,7 @@
   },
   "GoalSoccer_Iron": {
     "localized_name": "Futbol Kalesi",
-    "description": "Dekoratif futbol kalesi. Vurduğun SheepBall içine girerse golün sayılmaz."
+    "description": "Dekoratif futbol kalesi. Vurduğun Lamball içine girerse golün sayılmaz."
   },
   "GuardianDogStatue": {
     "localized_name": "Yakumo Heykeli",
@@ -1111,6 +1123,10 @@
     "localized_name": "Metal Zemin",
     "description": "Üzerine duvarlar inşa edebileceğin veya araç ve tesisler kurabileceğin bir zemin. Metalden yapılmıştır ve son derece sağlamdır."
   },
+  "Metal_pillars": {
+    "localized_name": "Metal Direk",
+    "description": "Yapıya destek olması için bir sütun. Metalden yapılmıştır ve son derece sağlamdır."
+  },
   "Metal_roof": {
     "localized_name": "Metal Çatı",
     "description": "Yağmuru ve rüzgârı uzak tutmak için duvarların üzerine inşa edilmiş bir çatı. Metalden yapılmıştır ve son derece sağlamdır."
@@ -1276,8 +1292,8 @@
     "description": "Dekoratif antika uzun halı."
   },
   "Rug_Wood": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Fur rug",
+    "description": null
   },
   "SF_Chair": {
     "localized_name": "Araştırma Odası Tipi Sandalye",
@@ -1346,6 +1362,10 @@
   "SF_foundation": {
     "localized_name": "Temiz Temel",
     "description": "Üstüne duvar veya tesisler inşa etmek için bir temel. Temiz ve fütüristik bir mimari inşa etmeye olanak tanır."
+  },
+  "SF_pillars": {
+    "localized_name": "Temiz Sütun",
+    "description": "Binayı desteklemek için kullanılan sütun. Temiz ve fütüristik bir mimari yaratır."
   },
   "SF_roof": {
     "localized_name": "Temiz Çatı",
@@ -1611,6 +1631,10 @@
     "localized_name": "Taş Zemin",
     "description": "Üzerine duvarlar inşa edebileceğin veya araç ve tesisler kurabileceğin bir zemin. Taştan yapılmıştır ve yeteri kadar sağlamdır."
   },
+  "Stone_pillar": {
+    "localized_name": "Taş Direk",
+    "description": "Yapıya destek olması için bir sütun. Taştan yapılmıştır ve yeteri kadar sağlamdır."
+  },
   "Stone_roof": {
     "localized_name": "Taş Çatı",
     "description": "Yağmuru ve rüzgârı uzak tutmak için duvarların üzerine inşa edilmiş bir çatı. Taştan yapılmıştır ve yeteri kadar sağlamdır."
@@ -1808,8 +1832,8 @@
     "description": "Üzerine basan Pal'ları donduran bir tuzak. Donmuş Pal'ları küreyle yakalama oranı artar."
   },
   "Trap_MovingPanel": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Moving Panels",
+    "description": "A description of the moving panel"
   },
   "Trap_Noose": {
     "localized_name": "Asılı Tuzak",
@@ -1919,6 +1943,10 @@
     "localized_name": "Merdiven",
     "description": "Biraz yüksekte yerlere tırmanmana olanak tanıyan bir merdiven."
   },
+  "Wooden_pillar": {
+    "localized_name": "Tahta Direk",
+    "description": "Yapıya destek olması için bir sütun. Tahtadan yapıldığı için kolay kırılır."
+  },
   "Wooden_roof": {
     "localized_name": "Tahta Çatı",
     "description": "Yağmuru ve rüzgârı uzak tutmak için duvarların üzerine inşa edilmiş bir çatı. Tahtadan yapıldığı için kolay kırılır."
@@ -1954,5 +1982,13 @@
   "Zaisu": {
     "localized_name": "Japon Tarzı Yer Sandalyesi",
     "description": "Dekoratif yer sandalyesi. Japon tarzı binalar için mükemmel."
+  },
+  "JapaneseStyle_TriangleStairsCorner_02": {
+    "localized_name": "JapaneseStyle_TriangleStairsCorner_02",
+    "description": null
+  },
+  "WoodCreator": {
+    "localized_name": "WoodCreator",
+    "description": null
   }
 }

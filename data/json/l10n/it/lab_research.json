@@ -73,7 +73,7 @@
   },
   "Cool5": {
     "localized_name": "Sviluppo pupazzo di neve",
-    "description": null
+    "description": "Sblocca la tecnologia \"pupazzo di neve\""
   },
   "Deforest1": {
     "localized_name": "Segheria Liv. 1",
@@ -145,7 +145,7 @@
   },
   "Deforest4": {
     "localized_name": "Sviluppo ceppo e ascia",
-    "description": null
+    "description": "Sblocca la tecnologia \"ceppo e ascia\""
   },
   "EmitFlame1": {
     "localized_name": "Attività sputafuoco Liv. 1",
@@ -225,7 +225,7 @@
   },
   "EmitFlame5": {
     "localized_name": "Sviluppo fiamma olimpica",
-    "description": null
+    "description": "Sblocca la tecnologia \"fiamma olimpica\""
   },
   "GenerateEnergy1": {
     "localized_name": "Generazione energia Liv. 1",
@@ -297,7 +297,7 @@
   },
   "GenerateEnergy5": {
     "localized_name": "Sviluppo torre di trasmissione",
-    "description": null
+    "description": "Sblocca la tecnologia \"torre di trasmissione\""
   },
   "Handcraft1": {
     "localized_name": "Velocità delle attività manuali Liv. 1",
@@ -385,7 +385,7 @@
   },
   "Handcraft5": {
     "localized_name": "Sviluppo grande cassa di attrezzi",
-    "description": null
+    "description": "Sblocca la tecnologia \"grande cassa di attrezzi\""
   },
   "Medicine1": {
     "localized_name": "Realizzazione medicinali Liv. 1",
@@ -445,7 +445,7 @@
   },
   "Medicine4": {
     "localized_name": "Sviluppo calderone da strega",
-    "description": null
+    "description": "Sblocca la tecnologia \"calderone da strega\""
   },
   "Mining1": {
     "localized_name": "Attività mineraria Liv. 1",
@@ -521,7 +521,7 @@
   },
   "Mining5": {
     "localized_name": "Sviluppo vagone minerario",
-    "description": null
+    "description": "Sblocca la tecnologia \"vagone minerario\""
   },
   "Seeding1": {
     "localized_name": "Attività semina Liv. 1",
@@ -593,11 +593,11 @@
   },
   "Seeding4": {
     "localized_name": "Sviluppo aiuola fiorita",
-    "description": null
+    "description": "Sblocca la tecnologia \"aiuola fiorita\""
   },
   "Seeding5": {
     "localized_name": "Sviluppo silo",
-    "description": null
+    "description": "Sblocca la tecnologia \"silo\""
   },
   "Watering1": {
     "localized_name": "Attività irrigazione Liv. 1",
@@ -669,6 +669,6 @@
   },
   "Watering5": {
     "localized_name": "Sviluppo fontana",
-    "description": null
+    "description": "Sblocca la tecnologia \"fontana\""
   }
 }

@@ -597,15 +597,15 @@
   },
   "Deffence_up2": {
     "localized_name": "Kuvvetli Gövde",
-    "description": "Savunma +20.0% sersemlik etkisine karşı bağışıklık."
+    "description": "Savunma +20% sersemlik etkisine karşı bağışıklık."
   },
   "Deffence_up2_2": {
     "localized_name": "Sadık Köpek Kuromaru",
-    "description": "Savunma +20.0% ve savrulma (uçurulma) etkisine karşı bağışıklık."
+    "description": "Savunma +20% ve savrulma (uçurulma) etkisine karşı bağışıklık."
   },
   "Deffence_up3": {
     "localized_name": "Elmas Gövde",
-    "description": "Savunma +30.0% sersemlik etkisine karşı bağışıklık savrulma etkisine karşı bağışıklık."
+    "description": "Savunma +30% sersemlik etkisine karşı bağışıklık savrulma etkisine karşı bağışıklık."
   },
   "Defuser_ExplosiveSpore_EquipSkill": {
     "localized_name": "Patlama Hasarının Azaltılması",
@@ -613,7 +613,7 @@
   },
   "ElementBoost_Aqua_1_PAL": {
     "localized_name": "Hidroman",
-    "description": "Su saldırısı hasarında %10.0 artış."
+    "description": "Su saldırısı hasarında %10 artış."
   },
   "ElementBoost_Aqua_2_PAL": {
     "localized_name": "Denizlerin Lordu",
@@ -629,7 +629,7 @@
   },
   "ElementBoost_Dark_1_PAL": {
     "localized_name": "Karanlık Örtüsü",
-    "description": "Karanlık saldırı hasarında %10.0 artış."
+    "description": "Karanlık saldırı hasarında %10 artış."
   },
   "ElementBoost_Dark_2_BossDefeat": {
     "localized_name": "Karanlık Hasar Geliştirmesi (Orta)",
@@ -665,7 +665,7 @@
   },
   "ElementBoost_Dragon_1_PAL": {
     "localized_name": "Ejderhanın Kanı",
-    "description": "Ejderha saldırısı hasarında %10.0 artış."
+    "description": "Ejderha saldırısı hasarında %10 artış."
   },
   "ElementBoost_Dragon_2_BossDefeat": {
     "localized_name": "Ejderha Hasarı Geliştirmesi (Orta)",
@@ -701,7 +701,7 @@
   },
   "ElementBoost_Earth_1_PAL": {
     "localized_name": "Gaia'nın Gücü",
-    "description": "Toprak saldırısı hasarında %10.0 artış."
+    "description": "Toprak saldırısı hasarında %10 artış."
   },
   "ElementBoost_Earth_2_BossDefeat": {
     "localized_name": "Toprak Hasarı Geliştirmesi (Orta)",
@@ -765,7 +765,7 @@
   },
   "ElementBoost_Fire_1_PAL": {
     "localized_name": "Piroman",
-    "description": "Ateş saldırısı hasarında %10.0 artış."
+    "description": "Ateş saldırısı hasarında %10 artış."
   },
   "ElementBoost_Fire_2_BossDefeat": {
     "localized_name": "Ateş Hasarı Geliştirmesi (Orta)",
@@ -801,7 +801,7 @@
   },
   "ElementBoost_Ice_1_PAL": {
     "localized_name": "Soğuk Kanlı",
-    "description": "Buz saldırısı hasarında %10.0 artış."
+    "description": "Buz saldırısı hasarında %10 artış."
   },
   "ElementBoost_Ice_2_BossDefeat": {
     "localized_name": "Buz Hasarı Geliştirmesi (Orta)",
@@ -837,7 +837,7 @@
   },
   "ElementBoost_Leaf_1_PAL": {
     "localized_name": "Güzel Kokulu Bitkiler",
-    "description": "Çimen saldırısı hasarında %10.0 artış."
+    "description": "Çimen saldırısı hasarında %10 artış."
   },
   "ElementBoost_Leaf_2_BossDefeat": {
     "localized_name": "Çimen Hasarı Geliştirmesi (Orta)",
@@ -873,7 +873,7 @@
   },
   "ElementBoost_Normal_1_PAL": {
     "localized_name": "Zen Zihinli",
-    "description": "Nötr saldırı hasarında %10.0 artış."
+    "description": "Nötr saldırı hasarında %10 artış."
   },
   "ElementBoost_Normal_2_BossDefeat": {
     "localized_name": "Nötr Hasar Geliştirmesi (Orta)",
@@ -901,7 +901,7 @@
   },
   "ElementBoost_Thunder_1_PAL": {
     "localized_name": "Kapasitör",
-    "description": "Şimşek saldırısı hasarında %10.0 artış."
+    "description": "Şimşek saldırısı hasarında %10 artış."
   },
   "ElementBoost_Thunder_2_PAL": {
     "localized_name": "Şimşeklerin Lordu",
@@ -941,7 +941,7 @@
   },
   "ElementResist_Aqua_1_PAL": {
     "localized_name": "Su Geçirmez",
-    "description": "Gelen Su hasarında %10.0 düşüş."
+    "description": "Gelen Su hasarında %10 düşüş."
   },
   "ElementResist_Aqua_2": {
     "localized_name": "Su Hasarı Azaltma Sv. 2",
@@ -961,7 +961,7 @@
   },
   "ElementResist_Dark_1_PAL": {
     "localized_name": "Neşeli",
-    "description": "Gelen Karanlık hasarda %10.0 düşüş."
+    "description": "Gelen Karanlık hasarda %10 düşüş."
   },
   "ElementResist_Dark_2": {
     "localized_name": "Karanlık Hasar Azaltma Sv. 2",
@@ -981,7 +981,7 @@
   },
   "ElementResist_Dragon_1_PAL": {
     "localized_name": "Ejderha Katili",
-    "description": "Gelen Ejderha hasarında %10.0 düşüş."
+    "description": "Gelen Ejderha hasarında %10 düşüş."
   },
   "ElementResist_Dragon_2": {
     "localized_name": "Ejderha Hasarı Azaltma Sv. 2",
@@ -1001,7 +1001,7 @@
   },
   "ElementResist_Earth_1_PAL": {
     "localized_name": "Depreme Dayanıklı",
-    "description": "Gelen Toprak hasarında %10.0 düşüş."
+    "description": "Gelen Toprak hasarında %10 düşüş."
   },
   "ElementResist_Earth_2": {
     "localized_name": "Toprak Hasarı Azaltma Sv. 2",
@@ -1021,7 +1021,7 @@
   },
   "ElementResist_Fire_1_PAL": {
     "localized_name": "Bronzlaşma Meraklısı",
-    "description": "Gelen Ateş hasarında %10.0 düşüş."
+    "description": "Gelen Ateş hasarında %10 düşüş."
   },
   "ElementResist_Fire_2": {
     "localized_name": "Ateş Hasarı Azaltma Sv. 2",
@@ -1041,7 +1041,7 @@
   },
   "ElementResist_Ice_1_PAL": {
     "localized_name": "Isıtılmış Gövde",
-    "description": "Gelen Buz hasarında %10.0 düşüş."
+    "description": "Gelen Buz hasarında %10 düşüş."
   },
   "ElementResist_Ice_2": {
     "localized_name": "Buz Hasarı Azaltma Sv. 2",
@@ -1061,7 +1061,7 @@
   },
   "ElementResist_Leaf_1_PAL": {
     "localized_name": "Botanik Bariyeri",
-    "description": "Gelen Çimen hasarında %10.0 düşüş."
+    "description": "Gelen Çimen hasarında %10 düşüş."
   },
   "ElementResist_Leaf_2": {
     "localized_name": "Çimen Hasarı Azaltma Sv. 2",
@@ -1081,7 +1081,7 @@
   },
   "ElementResist_Normal_1_PAL": {
     "localized_name": "Anormal",
-    "description": "Gelen Nötr hasarda %10.0 düşüş."
+    "description": "Gelen Nötr hasarda %10 düşüş."
   },
   "ElementResist_Normal_2": {
     "localized_name": "Nötr Hasar Azaltma Sv. 2",
@@ -1101,7 +1101,7 @@
   },
   "ElementResist_Thunder_1_PAL": {
     "localized_name": "İzolasyonlu Gövde",
-    "description": "Gelen Şimşek hasarında %10.0 düşüş."
+    "description": "Gelen Şimşek hasarında %10 düşüş."
   },
   "ElementResist_Thunder_2": {
     "localized_name": "Elektrik Hasarı Azaltma Sv. 2",
@@ -1133,7 +1133,7 @@
   },
   "GYM_NAME_Meadow": {
     "localized_name": "Rayne Örgütü Memuru",
-    "description": "Saldırı +%20.0 Hareket Hızı %10.0 artar"
+    "description": "Saldırı +%20 Hareket Hızı %10 artar"
   },
   "GYM_NAME_Sakurajima": {
     "localized_name": "Ay Goncalarının Lideri",
@@ -1245,7 +1245,7 @@
   },
   "MutationPal_ExplosionResist": {
     "localized_name": "Ağır Zırh",
-    "description": "Patlama hasarı<Status_Up>etkisiz</>"
+    "description": null
   },
   "MutationPal_Immortal": {
     "localized_name": "Ölümsüz",
@@ -1253,7 +1253,7 @@
   },
   "MutationPal_Mutant": {
     "localized_name": "Özel Yetenekli Vücut",
-    "description": "Pal ve oyuncunun HP doğal iyileşme miktarı +50.0% Savunma +{EffectValue4}% Zehir durumundaki hasar.<Status_Up>etkisiz</> Yanma durumundaki hasar.<Status_Up>etkisiz</>"
+    "description": null
   },
   "NightOwl": {
     "localized_name": "Gece Kuşu",
@@ -1273,7 +1273,7 @@
   },
   "Nushi": {
     "localized_name": "Efendi",
-    "description": "Su saldırı hasarı %20.0 artar. Buz saldırı hasarı %20.0 artar. Savunma+%20.0"
+    "description": "Su saldırı hasarı %20 artar. Buz saldırı hasarı %20 artar. Savunma+%20"
   },
   "OctaviaArmorVampire": {
     "localized_name": "Kan Yakıtı",
@@ -1305,46 +1305,46 @@
   },
   "PAL_FullStomach_Down_1": {
     "localized_name": "Yemek Seçen",
-    "description": "Açlık <NumBlue_13>+%10,0</> daha yavaş azalır."
+    "description": "Açlık +%10,0 daha yavaş azalır."
   },
   "PAL_FullStomach_Down_2": {
     "localized_name": "Diyetsever",
-    "description": "Açlık <NumBlue_13>+%15,0</> daha yavaş azalır."
+    "description": "Açlık +%15,0 daha yavaş azalır."
   },
   "PAL_FullStomach_Down_3": {
     "localized_name": "Perhiz Üstadı",
-    "description": "Açlık <NumBlue_13>+%20,0</> daha yavaş azalır."
+    "description": "Açlık +%20,0 daha yavaş azalır."
   },
   "PAL_FullStomach_Up_1": {
     "localized_name": "Obur",
-    "description": "Açlık <NumRed_13>+%10,0</> daha hızlı azalır."
+    "description": "Açlık +%10,0 daha hızlı azalır."
   },
   "PAL_FullStomach_Up_2": {
     "localized_name": "Dipsiz Mide",
-    "description": "Açlık <NumRed_13>+%15,0</> daha hızlı azalır."
+    "description": "Açlık +%15,0 daha hızlı azalır."
   },
   "PAL_Sanity_Down_1": {
     "localized_name": "Pozitif Düşünceli",
-    "description": "AKL <NumBlue_13>+%10,0</> daha yavaş azalır."
+    "description": "AKL +%10,0 daha yavaş azalır."
   },
   "PAL_Sanity_Down_2": {
     "localized_name": "İşkolik",
-    "description": "AKL <NumBlue_13>+%15,0</> daha yavaş azalır."
+    "description": "AKL +%15,0 daha yavaş azalır."
   },
   "PAL_Sanity_Down_3": {
     "localized_name": "Kararlı Kralın Kalbi",
-    "description": "AKL <NumBlue_13>+%20,0</> daha yavaş azalır."
+    "description": "AKL +%20,0 daha yavaş azalır."
   },
   "PAL_Sanity_Up_1": {
     "localized_name": "Dengesiz",
-    "description": "AKL <NumRed_13>+%10,0</> daha hızlı azalır."
+    "description": "AKL +%10,0 daha hızlı azalır."
   },
   "PAL_Sanity_Up_2": {
     "localized_name": "Yıkıcı",
-    "description": "AKL <NumRed_13>+%15,0</> daha hızlı azalır."
+    "description": "AKL +%15,0 daha hızlı azalır."
   },
   "PAL_SpiritualInst": {
-    "localized_name": "-",
+    "localized_name": "Mentally unstable",
     "description": null
   },
   "PAL_conceited": {
@@ -1545,23 +1545,23 @@
   },
   "TrainerATK_UP_1": {
     "localized_name": "Öncü",
-    "description": "%10.0 Oyuncu Saldırısı artışı."
+    "description": "%10 Oyuncu Saldırısı artışı."
   },
   "TrainerDEF_UP_1": {
     "localized_name": "Kale Stratejisti",
-    "description": "%10.0 Oyuncu Savunması artışı."
+    "description": "%10 Oyuncu Savunması artışı."
   },
   "TrainerLogging_up1": {
     "localized_name": "Oduncu Kalfası",
-    "description": "%25.0 Oyuncu Odunculuk Verimliliği artışı."
+    "description": "%25 Oyuncu Odunculuk Verimliliği artışı."
   },
   "TrainerMining_up1": {
     "localized_name": "Madenci Kalfası",
-    "description": "%25.0 Oyuncu Madencilik Verimliliği artışı."
+    "description": "%25 Oyuncu Madencilik Verimliliği artışı."
   },
   "TrainerWorkSpeed_UP_1": {
     "localized_name": "Motivasyon Lideri",
-    "description": "%25.0 Oyuncu Çalışma Hızı artışı."
+    "description": "%25 Oyuncu Çalışma Hızı artışı."
   },
   "Vampire": {
     "localized_name": "Vampirik",
@@ -1617,31 +1617,31 @@
   },
   "WorldTree_ATK": {
     "localized_name": "Ağır Sıklet",
-    "description": "Saldırı <NumBlue_13>+</>50.0% Savunma -30.0% Dünya Ağacı'nın ağaçlarına veya kayalarına yaklaşsa bile yok olmaz."
+    "description": "Saldırı +50% Savunma -30% Dünya Ağacı'nın ağaçlarına veya kayalarına yaklaşsa bile yok olmaz."
   },
   "WorldTree_ATK_DEF": {
     "localized_name": "Boyut Sıçrayışı",
-    "description": "Saldırı <NumBlue_13>+</>40.0% Savunma <NumBlue_13>+</>20.0% Maksimum HP -50.0% Dünya Ağacı'nın ağaçlarına veya kayalarına yaklaşsa bile yok olmaz."
+    "description": "Saldırı +40% Savunma +20% Maksimum HP -50% Dünya Ağacı'nın ağaçlarına veya kayalarına yaklaşsa bile yok olmaz."
   },
   "WorldTree_CraftSpeed": {
     "localized_name": "Kutsal Alanın Et Duvarı",
-    "description": "İş Hızı <NumBlue_13>+</>90.0<NumBlue_13>%</> SAN değeri daha hızlı düşer <NumRed_13>%+15.0</> Dünya Ağacı'nın kütüklerine veya kayalarına yaklaşıldığında yok olmaz"
+    "description": "İş Hızı +90% SAN değeri daha hızlı düşer %+15.0 Dünya Ağacı'nın kütüklerine veya kayalarına yaklaşıldığında yok olmaz"
   },
   "WorldTree_DEF": {
     "localized_name": "İki Ucu Keskin Kutsal Kılıç",
-    "description": "Savunma <NumBlue_13>+</>50.0% Saldırı -30.0% Dünya Ağacı'nın ağaçlarına veya kayalarına yaklaşsa bile yok olmaz."
+    "description": "Savunma +50% Saldırı -30% Dünya Ağacı'nın ağaçlarına veya kayalarına yaklaşsa bile yok olmaz."
   },
   "WorldTree_FullStomach": {
     "localized_name": "Şeytanın Eli",
-    "description": "Tokluk değeri daha yavaş düşer <NumBlue_13>+%50.0</> HP -20.0<NumRed_13>%</> Dünya Ağacı'nın kütüklerine veya kayalarına yaklaşıldığında yok olmaz"
+    "description": "Tokluk değeri daha yavaş düşer +%50.0 HP -20% Dünya Ağacı'nın kütüklerine veya kayalarına yaklaşıldığında yok olmaz"
   },
   "WorldTree_MoveSpeed": {
     "localized_name": "Ermiş",
-    "description": "Hareket hızı artışı: <NumBlue_13>+</>50.0<NumBlue_13>%</> Açlık seviyesinin daha hızlı düşmesi <NumRed_13>+%15</> Dünya Ağacı'nın ağaçlarına veya kayalarına yaklaşıldığında yok olmama"
+    "description": "Hareket hızı artışı: +50% Açlık seviyesinin daha hızlı düşmesi +%15 Dünya Ağacı'nın ağaçlarına veya kayalarına yaklaşıldığında yok olmama"
   },
   "WorldTree_Sanity": {
     "localized_name": "Kutsal Ağacın Fidan Yatağı",
-    "description": "SAN değeri daha yavaş düşer <NumBlue_13>+%50.0</> İş Hızı -20.0<NumRed_13>%</> Dünya Ağacı'nın kütüklerine veya kayalarına yaklaşıldığında yok olmaz"
+    "description": "SAN değeri daha yavaş düşer +%50.0 İş Hızı -20% Dünya Ağacı'nın kütüklerine veya kayalarına yaklaşıldığında yok olmaz"
   },
   "YakushimaDagameBoost_Magic_Equip": {
     "localized_name": "Kutsal Güç – Büyü",
@@ -1677,6 +1677,282 @@
   },
   "defense_ACC_up4": {
     "localized_name": "Savunma Arttırma Sv4",
+    "description": null
+  },
+  "AccuracyDecrease": {
+    "localized_name": "AccuracyDecrease",
+    "description": null
+  },
+  "AccuracyIncrease": {
+    "localized_name": "AccuracyIncrease",
+    "description": null
+  },
+  "AccuracySuperDecrease": {
+    "localized_name": "AccuracySuperDecrease",
+    "description": null
+  },
+  "BulletSpeed_H": {
+    "localized_name": "BulletSpeed_H",
+    "description": null
+  },
+  "BulletSpeed_L": {
+    "localized_name": "BulletSpeed_L",
+    "description": null
+  },
+  "CollectItem": {
+    "localized_name": "CollectItem",
+    "description": null
+  },
+  "CollectItem_CuteFox": {
+    "localized_name": "CollectItem_CuteFox",
+    "description": null
+  },
+  "CraftSpeed*3": {
+    "localized_name": "CraftSpeed*3",
+    "description": null
+  },
+  "CraftSpeed*5": {
+    "localized_name": "CraftSpeed*5",
+    "description": null
+  },
+  "GiveADark": {
+    "localized_name": "GiveADark",
+    "description": null
+  },
+  "GiveADragon": {
+    "localized_name": "GiveADragon",
+    "description": null
+  },
+  "GiveAEarth": {
+    "localized_name": "GiveAEarth",
+    "description": null
+  },
+  "GiveAElectricity": {
+    "localized_name": "GiveAElectricity",
+    "description": null
+  },
+  "GiveAFire": {
+    "localized_name": "GiveAFire",
+    "description": null
+  },
+  "GiveAIce": {
+    "localized_name": "GiveAIce",
+    "description": null
+  },
+  "GiveALeaf": {
+    "localized_name": "GiveALeaf",
+    "description": null
+  },
+  "GiveAWater": {
+    "localized_name": "GiveAWater",
+    "description": null
+  },
+  "Logging_up1": {
+    "localized_name": "Logging_up1",
+    "description": null
+  },
+  "Logging_up1_Otomo_only": {
+    "localized_name": "Logging_up1_Otomo_only",
+    "description": null
+  },
+  "Logging_up2": {
+    "localized_name": "Logging_up2",
+    "description": null
+  },
+  "Logging_up2_Otomo_only": {
+    "localized_name": "Logging_up2_Otomo_only",
+    "description": null
+  },
+  "Logging_up3": {
+    "localized_name": "Logging_up3",
+    "description": null
+  },
+  "Logging_up4": {
+    "localized_name": "Logging_up4",
+    "description": null
+  },
+  "Logging_up5": {
+    "localized_name": "Logging_up5",
+    "description": null
+  },
+  "MeleeAttack_down1": {
+    "localized_name": "MeleeAttack_down1",
+    "description": null
+  },
+  "MeleeAttack_down2": {
+    "localized_name": "MeleeAttack_down2",
+    "description": null
+  },
+  "MeleeAttack_up1": {
+    "localized_name": "MeleeAttack_up1",
+    "description": null
+  },
+  "MeleeAttack_up2": {
+    "localized_name": "MeleeAttack_up2",
+    "description": null
+  },
+  "Mining_up1": {
+    "localized_name": "Mining_up1",
+    "description": null
+  },
+  "Mining_up1_Otomo_only": {
+    "localized_name": "Mining_up1_Otomo_only",
+    "description": null
+  },
+  "Mining_up2": {
+    "localized_name": "Mining_up2",
+    "description": null
+  },
+  "Mining_up2_Otomo_only": {
+    "localized_name": "Mining_up2_Otomo_only",
+    "description": null
+  },
+  "Mining_up3": {
+    "localized_name": "Mining_up3",
+    "description": null
+  },
+  "Mining_up4": {
+    "localized_name": "Mining_up4",
+    "description": null
+  },
+  "Mining_up5": {
+    "localized_name": "Mining_up5",
+    "description": null
+  },
+  "Mute_1": {
+    "localized_name": "Mute_1",
+    "description": null
+  },
+  "Mute_2": {
+    "localized_name": "Mute_2",
+    "description": null
+  },
+  "Mute_3": {
+    "localized_name": "Mute_3",
+    "description": null
+  },
+  "Mute_4": {
+    "localized_name": "Mute_4",
+    "description": null
+  },
+  "Mute_5": {
+    "localized_name": "Mute_5",
+    "description": null
+  },
+  "PAL_ElementPassive_Test": {
+    "localized_name": "PAL_ElementPassive_Test",
+    "description": null
+  },
+  "PAL_TribePassive_Test": {
+    "localized_name": "PAL_TribePassive_Test",
+    "description": null
+  },
+  "RecoilDecrease": {
+    "localized_name": "RecoilDecrease",
+    "description": null
+  },
+  "RecoilIncrease": {
+    "localized_name": "RecoilIncrease",
+    "description": null
+  },
+  "ShotAttack_down1": {
+    "localized_name": "ShotAttack_down1",
+    "description": null
+  },
+  "ShotAttack_down2": {
+    "localized_name": "ShotAttack_down2",
+    "description": null
+  },
+  "ShotAttack_up1": {
+    "localized_name": "ShotAttack_up1",
+    "description": null
+  },
+  "ShotAttack_up2": {
+    "localized_name": "ShotAttack_up2",
+    "description": null
+  },
+  "StealExpert_1": {
+    "localized_name": "StealExpert_1",
+    "description": null
+  },
+  "StealExpert_2": {
+    "localized_name": "StealExpert_2",
+    "description": null
+  },
+  "StealExpert_3": {
+    "localized_name": "StealExpert_3",
+    "description": null
+  },
+  "StealExpert_4": {
+    "localized_name": "StealExpert_4",
+    "description": null
+  },
+  "Support_down1": {
+    "localized_name": "Support_down1",
+    "description": null
+  },
+  "Support_down2": {
+    "localized_name": "Support_down2",
+    "description": null
+  },
+  "Support_up1": {
+    "localized_name": "Support_up1",
+    "description": null
+  },
+  "Support_up2": {
+    "localized_name": "Support_up2",
+    "description": null
+  },
+  "TestExplosive_H": {
+    "localized_name": "TestExplosive_H",
+    "description": null
+  },
+  "TestExplosive_L": {
+    "localized_name": "TestExplosive_L",
+    "description": null
+  },
+  "TestHoming_H": {
+    "localized_name": "TestHoming_H",
+    "description": null
+  },
+  "TestHoming_L": {
+    "localized_name": "TestHoming_L",
+    "description": null
+  },
+  "TestSkill1": {
+    "localized_name": "TestSkill1",
+    "description": null
+  },
+  "TestSkill2": {
+    "localized_name": "TestSkill2",
+    "description": null
+  },
+  "TestSkill3": {
+    "localized_name": "TestSkill3",
+    "description": null
+  },
+  "TestSkill4": {
+    "localized_name": "TestSkill4",
+    "description": null
+  },
+  "TestSkill5": {
+    "localized_name": "TestSkill5",
+    "description": null
+  },
+  "TestSkill6": {
+    "localized_name": "TestSkill6",
+    "description": null
+  },
+  "TestSkill7": {
+    "localized_name": "TestSkill7",
+    "description": null
+  },
+  "TestSkill8": {
+    "localized_name": "TestSkill8",
+    "description": null
+  },
+  "MoveSpeed_up_1_Otomo_Only_Equip": {
+    "localized_name": "MoveSpeed_up_1_Otomo_Only_Equip",
     "description": null
   }
 }

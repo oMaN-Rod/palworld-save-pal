@@ -597,15 +597,15 @@
   },
   "Deffence_up2": {
     "localized_name": "Corps Robuste",
-    "description": "Défense +20.0 % Immunité au recul"
+    "description": "Défense +20 % Immunité au recul"
   },
   "Deffence_up2_2": {
     "localized_name": "Poids Lourd",
-    "description": "Défense +20.0 % Immunité aux projections"
+    "description": "Défense +20 % Immunité aux projections"
   },
   "Deffence_up3": {
     "localized_name": "Corps Adamantin",
-    "description": "Défense +30.0 % Immunité au recul Immunité aux projections"
+    "description": "Défense +30 % Immunité au recul Immunité aux projections"
   },
   "Defuser_ExplosiveSpore_EquipSkill": {
     "localized_name": "Dégâts explosifs réduits",
@@ -613,7 +613,7 @@
   },
   "ElementBoost_Aqua_1_PAL": {
     "localized_name": "Hydrophile",
-    "description": "Les dégâts de type Eau augmentent de 10.0 %."
+    "description": "Les dégâts de type Eau augmentent de 10 %."
   },
   "ElementBoost_Aqua_2_PAL": {
     "localized_name": "Seigneur des Mers",
@@ -629,7 +629,7 @@
   },
   "ElementBoost_Dark_1_PAL": {
     "localized_name": "Voile des Ténèbres",
-    "description": "Les dégâts de type Ténèbres augmentent de 10.0 %."
+    "description": "Les dégâts de type Ténèbres augmentent de 10 %."
   },
   "ElementBoost_Dark_2_BossDefeat": {
     "localized_name": "Augmentation des dégâts de ténèbres (moyen)",
@@ -665,7 +665,7 @@
   },
   "ElementBoost_Dragon_1_PAL": {
     "localized_name": "Sang de Dragon",
-    "description": "Les dégâts de type Dragon augmentent de 10.0 %."
+    "description": "Les dégâts de type Dragon augmentent de 10 %."
   },
   "ElementBoost_Dragon_2_BossDefeat": {
     "localized_name": "Augmentation des dégâts de dragon (moyen)",
@@ -701,7 +701,7 @@
   },
   "ElementBoost_Earth_1_PAL": {
     "localized_name": "Force Tellurique",
-    "description": "Les dégâts de type Terre augmentent de 10.0 %."
+    "description": "Les dégâts de type Terre augmentent de 10 %."
   },
   "ElementBoost_Earth_2_BossDefeat": {
     "localized_name": "Augmentation des dégâts de terre (moyen)",
@@ -765,7 +765,7 @@
   },
   "ElementBoost_Fire_1_PAL": {
     "localized_name": "Pyromane",
-    "description": "Les dégâts de type Feu augmentent de 10.0 %."
+    "description": "Les dégâts de type Feu augmentent de 10 %."
   },
   "ElementBoost_Fire_2_BossDefeat": {
     "localized_name": "Augmentation des dégâts de feu (moyen)",
@@ -801,7 +801,7 @@
   },
   "ElementBoost_Ice_1_PAL": {
     "localized_name": "Sang Froid",
-    "description": "Les dégâts de type Glace augmentent de 10.0 %."
+    "description": "Les dégâts de type Glace augmentent de 10 %."
   },
   "ElementBoost_Ice_2_BossDefeat": {
     "localized_name": "Augmentation des dégâts de glace (moyen)",
@@ -837,7 +837,7 @@
   },
   "ElementBoost_Leaf_1_PAL": {
     "localized_name": "Fragrance Boisée",
-    "description": "Les dégâts de type Plante augmentent de 10.0 %."
+    "description": "Les dégâts de type Plante augmentent de 10 %."
   },
   "ElementBoost_Leaf_2_BossDefeat": {
     "localized_name": "Augmentation des dégâts de plante (moyen)",
@@ -873,7 +873,7 @@
   },
   "ElementBoost_Normal_1_PAL": {
     "localized_name": "Esprit Zen",
-    "description": "Les dégâts Non Élémentaires augmentent de 10.0 %."
+    "description": "Les dégâts Non Élémentaires augmentent de 10 %."
   },
   "ElementBoost_Normal_2_BossDefeat": {
     "localized_name": "Augmentation des dégâts non élémentaires (moyen)",
@@ -901,7 +901,7 @@
   },
   "ElementBoost_Thunder_1_PAL": {
     "localized_name": "Condensateur",
-    "description": "Les dégâts de type Foudre augmentent de 10.0 %."
+    "description": "Les dégâts de type Foudre augmentent de 10 %."
   },
   "ElementBoost_Thunder_2_PAL": {
     "localized_name": "Seigneur des Tempêtes",
@@ -941,7 +941,7 @@
   },
   "ElementResist_Aqua_1_PAL": {
     "localized_name": "Imperméabilité",
-    "description": "Les dégâts de type Eau sont réduits de 10.0 %."
+    "description": "Les dégâts de type Eau sont réduits de 10 %."
   },
   "ElementResist_Aqua_2": {
     "localized_name": "Réduction des dégâts d'eau Niv. 2",
@@ -961,7 +961,7 @@
   },
   "ElementResist_Dark_1_PAL": {
     "localized_name": "Lumineux",
-    "description": "Les dégâts de type Ténèbres sont réduits de 10.0 %."
+    "description": "Les dégâts de type Ténèbres sont réduits de 10 %."
   },
   "ElementResist_Dark_2": {
     "localized_name": "Réduction des dégâts de ténèbres Niv. 2",
@@ -981,7 +981,7 @@
   },
   "ElementResist_Dragon_1_PAL": {
     "localized_name": "Tueur de Dragons",
-    "description": "Les dégâts de type Dragon sont réduits de 10.0 %."
+    "description": "Les dégâts de type Dragon sont réduits de 10 %."
   },
   "ElementResist_Dragon_2": {
     "localized_name": "Réduction des dégâts de dragon Niv. 2",
@@ -1001,7 +1001,7 @@
   },
   "ElementResist_Earth_1_PAL": {
     "localized_name": "Parasismique",
-    "description": "Les dégâts de type Terre sont réduits de 10.0 %."
+    "description": "Les dégâts de type Terre sont réduits de 10 %."
   },
   "ElementResist_Earth_2": {
     "localized_name": "Réduction des dégâts de terre Niv. 2",
@@ -1021,7 +1021,7 @@
   },
   "ElementResist_Fire_1_PAL": {
     "localized_name": "Bronzage Naturel",
-    "description": "Les dégâts de type Feu sont réduits de 10.0 %."
+    "description": "Les dégâts de type Feu sont réduits de 10 %."
   },
   "ElementResist_Fire_2": {
     "localized_name": "Réduction des dégâts de feu Niv. 2",
@@ -1041,7 +1041,7 @@
   },
   "ElementResist_Ice_1_PAL": {
     "localized_name": "Sang Chaud",
-    "description": "Les dégâts de type Glace sont réduits de 10.0 %."
+    "description": "Les dégâts de type Glace sont réduits de 10 %."
   },
   "ElementResist_Ice_2": {
     "localized_name": "Réduction des dégâts de glace Niv. 2",
@@ -1061,7 +1061,7 @@
   },
   "ElementResist_Leaf_1_PAL": {
     "localized_name": "Protection Végétale",
-    "description": "Les dégâts de type Plante sont réduits de 10.0 %."
+    "description": "Les dégâts de type Plante sont réduits de 10 %."
   },
   "ElementResist_Leaf_2": {
     "localized_name": "Réduction des dégâts de plante Niv. 2",
@@ -1081,7 +1081,7 @@
   },
   "ElementResist_Normal_1_PAL": {
     "localized_name": "Anormal",
-    "description": "Les dégâts Non Élémentaires sont réduits de 10.0 %."
+    "description": "Les dégâts Non Élémentaires sont réduits de 10 %."
   },
   "ElementResist_Normal_2": {
     "localized_name": "Réduction des dégâts non élémentaires Niv. 2",
@@ -1101,7 +1101,7 @@
   },
   "ElementResist_Thunder_1_PAL": {
     "localized_name": "Isolant",
-    "description": "Les dégâts de type Foudre sont réduits de 10.0 %."
+    "description": "Les dégâts de type Foudre sont réduits de 10 %."
   },
   "ElementResist_Thunder_2": {
     "localized_name": "Réduction des dégâts de foudre Niv. 2",
@@ -1133,7 +1133,7 @@
   },
   "GYM_NAME_Meadow": {
     "localized_name": "Officiel du Syndicat de Rayne",
-    "description": "Attaque +20.0 % Vitesse de déplacement +10.0 %"
+    "description": "Attaque +20 % Vitesse de déplacement +10 %"
   },
   "GYM_NAME_Sakurajima": {
     "localized_name": "Chef du Clan des Fleurs Lunaires",
@@ -1245,7 +1245,7 @@
   },
   "MutationPal_ExplosionResist": {
     "localized_name": "Blindage",
-    "description": "<Status_Up>Immunité</> aux dégâts explosifs"
+    "description": null
   },
   "MutationPal_Immortal": {
     "localized_name": "Immortel",
@@ -1253,7 +1253,7 @@
   },
   "MutationPal_Mutant": {
     "localized_name": "Anomalie",
-    "description": "Restauration automatique des PV des Pals et du joueur +50.0 % Défense +{EffectValue4} % <Status_Up>Immunité</> aux dégâts de Poison <Status_Up>Immunité</> aux dégâts de Brûlure"
+    "description": null
   },
   "NightOwl": {
     "localized_name": "Oiseau de Nuit",
@@ -1273,7 +1273,7 @@
   },
   "Nushi": {
     "localized_name": "Trophée des Flots",
-    "description": "Les dégâts de type Eau augmentent de 20.0 %. Les dégâts de type Glace augmentent de 20.0 %. Défense +20.0 %"
+    "description": "Les dégâts de type Eau augmentent de 20 %. Les dégâts de type Glace augmentent de 20 %. Défense +20 %"
   },
   "OctaviaArmorVampire": {
     "localized_name": "Afflux Sanguin",
@@ -1305,46 +1305,46 @@
   },
   "PAL_FullStomach_Down_1": {
     "localized_name": "Frugal",
-    "description": "Le degré de satiété diminue plus lentement <NumBlue_13>+10.0 %</>"
+    "description": "Le degré de satiété diminue plus lentement +10.0 %"
   },
   "PAL_FullStomach_Down_2": {
     "localized_name": "Nutritionniste",
-    "description": "Le degré de satiété diminue plus lentement <NumBlue_13>+15.0 %</>"
+    "description": "Le degré de satiété diminue plus lentement +15.0 %"
   },
   "PAL_FullStomach_Down_3": {
     "localized_name": "Maîtrise de la Faim",
-    "description": "Le degré de satiété diminue plus lentement <NumBlue_13>+20.0 %</>"
+    "description": "Le degré de satiété diminue plus lentement +20.0 %"
   },
   "PAL_FullStomach_Up_1": {
     "localized_name": "Glouton",
-    "description": "Le degré de satiété diminue rapidement <NumRed_13>+10.0 %</>"
+    "description": "Le degré de satiété diminue rapidement +10.0 %"
   },
   "PAL_FullStomach_Up_2": {
     "localized_name": "Estomac sans Fond",
-    "description": "Le degré de satiété diminue rapidement <NumRed_13>+15.0 %</>"
+    "description": "Le degré de satiété diminue rapidement +15.0 %"
   },
   "PAL_Sanity_Down_1": {
     "localized_name": "Optimiste",
-    "description": "Les points MEN diminuent plus lentement <NumBlue_13>+10.0 %</>"
+    "description": "Les points MEN diminuent plus lentement +10.0 %"
   },
   "PAL_Sanity_Down_2": {
     "localized_name": "Acharné",
-    "description": "Les points MEN diminuent plus lentement <NumBlue_13>+15.0 %</>"
+    "description": "Les points MEN diminuent plus lentement +15.0 %"
   },
   "PAL_Sanity_Down_3": {
     "localized_name": "Inébranlable",
-    "description": "Les points MEN diminuent plus lentement <NumBlue_13>+20.0 %</>"
+    "description": "Les points MEN diminuent plus lentement +20.0 %"
   },
   "PAL_Sanity_Up_1": {
     "localized_name": "Mentalement Instable",
-    "description": "Les points MEN diminuent rapidement <NumRed_13>+10.0 %</>"
+    "description": "Les points MEN diminuent rapidement +10.0 %"
   },
   "PAL_Sanity_Up_2": {
     "localized_name": "Soif de Destruction",
-    "description": "Les points MEN diminuent rapidement <NumRed_13>+15.0 %</>"
+    "description": "Les points MEN diminuent rapidement +15.0 %"
   },
   "PAL_SpiritualInst": {
-    "localized_name": "fr_Text",
+    "localized_name": "Mentally unstable",
     "description": null
   },
   "PAL_conceited": {
@@ -1468,23 +1468,23 @@
     "description": "Endurance maximale + 75.0 % (Pals montures uniquement)"
   },
   "StonDrop_Boost_1": {
-    "localized_name": "Volume d'extraction augmenté niv. 1",
+    "localized_name": "Volume d'extraction augmenté niv. 1",
     "description": "Quantité de pierre/minerai obtenue légèrement accrue"
   },
   "StonDrop_Boost_2": {
-    "localized_name": "Volume d'extraction augmenté niv. 2",
+    "localized_name": "Volume d'extraction augmenté niv. 2",
     "description": "Quantité de pierre/minerai obtenue accrue"
   },
   "StonDrop_Boost_3": {
-    "localized_name": "Volume d'extraction augmenté niv. 3",
+    "localized_name": "Volume d'extraction augmenté niv. 3",
     "description": "Quantité de pierre/minerai obtenue fortement accrue"
   },
   "StonDrop_Boost_4": {
-    "localized_name": "Volume d'extraction augmenté niv. 4",
+    "localized_name": "Volume d'extraction augmenté niv. 4",
     "description": "Quantité de pierre/minerai obtenue considérablement accrue"
   },
   "StonDrop_Boost_5": {
-    "localized_name": "Volume d'extraction augmenté niv. 5",
+    "localized_name": "Volume d'extraction augmenté niv. 5",
     "description": "Quantité de pierre/minerai obtenue de façon drastique"
   },
   "StonWoodDrop_Boost": {
@@ -1545,26 +1545,26 @@
   },
   "TrainerATK_UP_1": {
     "localized_name": "Chef d'Assaut",
-    "description": "L'attaque du joueur augmente de 10.0 %."
+    "description": "L'attaque du joueur augmente de 10 %."
   },
   "TrainerDEF_UP_1": {
     "localized_name": "Stratège de Forteresse",
-    "description": "La défense du joueur augmente de 10.0 %."
+    "description": "La défense du joueur augmente de 10 %."
   },
   "TrainerLogging_up1": {
     "localized_name": "Chef d'Abattage",
-    "description": "La capacité d'abattage du joueur augmente de 25.0 %."
+    "description": "La capacité d'abattage du joueur augmente de 25 %."
   },
   "TrainerMining_up1": {
     "localized_name": "Chef d'Extraction",
-    "description": "La capacité d'extraction du joueur augmente de 25.0 %."
+    "description": "La capacité d'extraction du joueur augmente de 25 %."
   },
   "TrainerWorkSpeed_UP_1": {
     "localized_name": "Motivateur",
-    "description": "La productivité du joueur augmente de 25.0 %."
+    "description": "La productivité du joueur augmente de 25 %."
   },
   "Vampire": {
-    "localized_name": "Vampire",
+    "localized_name": "Vampirique",
     "description": "Absorbe une partie des dégâts infligés pour restaurer ses PV. Ne dort pas et continue à travailler la nuit."
   },
   "Witch": {
@@ -1572,23 +1572,23 @@
     "description": null
   },
   "WoodDrop_Boost_1": {
-    "localized_name": "Volume d'abattage augmenté niv. 1",
+    "localized_name": "Volume d'abattage augmenté niv. 1",
     "description": "Quantité de bois obtenue légèrement accrue"
   },
   "WoodDrop_Boost_2": {
-    "localized_name": "Volume d'abattage augmenté niv. 2",
+    "localized_name": "Volume d'abattage augmenté niv. 2",
     "description": "Quantité de bois obtenue accrue"
   },
   "WoodDrop_Boost_3": {
-    "localized_name": "Volume d'abattage augmenté niv. 3",
+    "localized_name": "Volume d'abattage augmenté niv. 3",
     "description": "Quantité de bois obtenue fortement accrue"
   },
   "WoodDrop_Boost_4": {
-    "localized_name": "Volume d'abattage augmenté niv. 4",
+    "localized_name": "Volume d'abattage augmenté niv. 4",
     "description": "Quantité de bois obtenue considérablement accrue"
   },
   "WoodDrop_Boost_5": {
-    "localized_name": "Volume d'abattage augmenté niv. 5",
+    "localized_name": "Volume d'abattage augmenté niv. 5",
     "description": "Quantité de bois obtenue de façon drastique"
   },
   "WorkSpeed_ACC_up1": {
@@ -1617,31 +1617,31 @@
   },
   "WorldTree_ATK": {
     "localized_name": "Lame du Jugement",
-    "description": "Attaque <NumBlue_13>+</>50.0 % Défense -30.0 % Permet de récolter les arbres et rochers de l'Arbre-Monde sans les faire disparaître."
+    "description": "Attaque +50 % Défense -30 % Permet de récolter les arbres et rochers de l'Arbre-Monde sans les faire disparaître."
   },
   "WorldTree_ATK_DEF": {
     "localized_name": "Dieu de la Destruction",
-    "description": "Attaque <NumBlue_13>+</>40.0 % Défense <NumBlue_13>+</>20.0 % PV max -50.0 % Permet de récolter les arbres et rochers de l'Arbre-Monde sans les faire disparaître."
+    "description": "Attaque +40 % Défense +20 % PV max -50 % Permet de récolter les arbres et rochers de l'Arbre-Monde sans les faire disparaître."
   },
   "WorldTree_CraftSpeed": {
     "localized_name": "Main du Démon",
-    "description": "Vitesse de travail <NumBlue_13>+</>90.0<NumBlue_13> %</> Chute des points MEN accélérée +15 % Permet de récolter les arbres et rochers de l'Arbre-Monde sans les faire disparaître."
+    "description": "Vitesse de travail +90 % Chute des points MEN accélérée +15 % Permet de récolter les arbres et rochers de l'Arbre-Monde sans les faire disparaître."
   },
   "WorldTree_DEF": {
     "localized_name": "Rempart Sacré",
-    "description": "Défense <NumBlue_13>+</>50.0 % Attaque -30.0 % Permet de récolter les arbres et rochers de l'Arbre-Monde sans les faire disparaître."
+    "description": "Défense +50 % Attaque -30 % Permet de récolter les arbres et rochers de l'Arbre-Monde sans les faire disparaître."
   },
   "WorldTree_FullStomach": {
     "localized_name": "Berceau Divin",
-    "description": "Chute du degré de satiété ralentie +50 % PV -20.0<NumRed_13> %</> Permet de récolter les arbres et rochers de l'Arbre-Monde sans les faire disparaître."
+    "description": "Chute du degré de satiété ralentie +50 % PV -20 % Permet de récolter les arbres et rochers de l'Arbre-Monde sans les faire disparaître."
   },
   "WorldTree_MoveSpeed": {
     "localized_name": "Traverse-Mondes",
-    "description": "Vitesse de déplacement augmentée <NumBlue_13>+</>50.0<NumBlue_13> %</> Chute du degré de satiété accélérée +15 % Permet de récolter les arbres et rochers de l'Arbre-Monde sans les faire disparaître."
+    "description": "Vitesse de déplacement augmentée +50 % Chute du degré de satiété accélérée +15 % Permet de récolter les arbres et rochers de l'Arbre-Monde sans les faire disparaître."
   },
   "WorldTree_Sanity": {
     "localized_name": "Sage Immortel",
-    "description": "Chute des points MEN ralentie +50 % Vitesse de travail -20.0<NumRed_13> %</> Permet de récolter les arbres et rochers de l'Arbre-Monde sans les faire disparaître."
+    "description": "Chute des points MEN ralentie +50 % Vitesse de travail -20 % Permet de récolter les arbres et rochers de l'Arbre-Monde sans les faire disparaître."
   },
   "YakushimaDagameBoost_Magic_Equip": {
     "localized_name": "Pouvoir Saint (Magie)",
@@ -1677,6 +1677,282 @@
   },
   "defense_ACC_up4": {
     "localized_name": "Défense augmentée Niv. 4",
+    "description": null
+  },
+  "AccuracyDecrease": {
+    "localized_name": "AccuracyDecrease",
+    "description": null
+  },
+  "AccuracyIncrease": {
+    "localized_name": "AccuracyIncrease",
+    "description": null
+  },
+  "AccuracySuperDecrease": {
+    "localized_name": "AccuracySuperDecrease",
+    "description": null
+  },
+  "BulletSpeed_H": {
+    "localized_name": "BulletSpeed_H",
+    "description": null
+  },
+  "BulletSpeed_L": {
+    "localized_name": "BulletSpeed_L",
+    "description": null
+  },
+  "CollectItem": {
+    "localized_name": "CollectItem",
+    "description": null
+  },
+  "CollectItem_CuteFox": {
+    "localized_name": "CollectItem_CuteFox",
+    "description": null
+  },
+  "CraftSpeed*3": {
+    "localized_name": "CraftSpeed*3",
+    "description": null
+  },
+  "CraftSpeed*5": {
+    "localized_name": "CraftSpeed*5",
+    "description": null
+  },
+  "GiveADark": {
+    "localized_name": "GiveADark",
+    "description": null
+  },
+  "GiveADragon": {
+    "localized_name": "GiveADragon",
+    "description": null
+  },
+  "GiveAEarth": {
+    "localized_name": "GiveAEarth",
+    "description": null
+  },
+  "GiveAElectricity": {
+    "localized_name": "GiveAElectricity",
+    "description": null
+  },
+  "GiveAFire": {
+    "localized_name": "GiveAFire",
+    "description": null
+  },
+  "GiveAIce": {
+    "localized_name": "GiveAIce",
+    "description": null
+  },
+  "GiveALeaf": {
+    "localized_name": "GiveALeaf",
+    "description": null
+  },
+  "GiveAWater": {
+    "localized_name": "GiveAWater",
+    "description": null
+  },
+  "Logging_up1": {
+    "localized_name": "Logging_up1",
+    "description": null
+  },
+  "Logging_up1_Otomo_only": {
+    "localized_name": "Logging_up1_Otomo_only",
+    "description": null
+  },
+  "Logging_up2": {
+    "localized_name": "Logging_up2",
+    "description": null
+  },
+  "Logging_up2_Otomo_only": {
+    "localized_name": "Logging_up2_Otomo_only",
+    "description": null
+  },
+  "Logging_up3": {
+    "localized_name": "Logging_up3",
+    "description": null
+  },
+  "Logging_up4": {
+    "localized_name": "Logging_up4",
+    "description": null
+  },
+  "Logging_up5": {
+    "localized_name": "Logging_up5",
+    "description": null
+  },
+  "MeleeAttack_down1": {
+    "localized_name": "MeleeAttack_down1",
+    "description": null
+  },
+  "MeleeAttack_down2": {
+    "localized_name": "MeleeAttack_down2",
+    "description": null
+  },
+  "MeleeAttack_up1": {
+    "localized_name": "MeleeAttack_up1",
+    "description": null
+  },
+  "MeleeAttack_up2": {
+    "localized_name": "MeleeAttack_up2",
+    "description": null
+  },
+  "Mining_up1": {
+    "localized_name": "Mining_up1",
+    "description": null
+  },
+  "Mining_up1_Otomo_only": {
+    "localized_name": "Mining_up1_Otomo_only",
+    "description": null
+  },
+  "Mining_up2": {
+    "localized_name": "Mining_up2",
+    "description": null
+  },
+  "Mining_up2_Otomo_only": {
+    "localized_name": "Mining_up2_Otomo_only",
+    "description": null
+  },
+  "Mining_up3": {
+    "localized_name": "Mining_up3",
+    "description": null
+  },
+  "Mining_up4": {
+    "localized_name": "Mining_up4",
+    "description": null
+  },
+  "Mining_up5": {
+    "localized_name": "Mining_up5",
+    "description": null
+  },
+  "Mute_1": {
+    "localized_name": "Mute_1",
+    "description": null
+  },
+  "Mute_2": {
+    "localized_name": "Mute_2",
+    "description": null
+  },
+  "Mute_3": {
+    "localized_name": "Mute_3",
+    "description": null
+  },
+  "Mute_4": {
+    "localized_name": "Mute_4",
+    "description": null
+  },
+  "Mute_5": {
+    "localized_name": "Mute_5",
+    "description": null
+  },
+  "PAL_ElementPassive_Test": {
+    "localized_name": "PAL_ElementPassive_Test",
+    "description": null
+  },
+  "PAL_TribePassive_Test": {
+    "localized_name": "PAL_TribePassive_Test",
+    "description": null
+  },
+  "RecoilDecrease": {
+    "localized_name": "RecoilDecrease",
+    "description": null
+  },
+  "RecoilIncrease": {
+    "localized_name": "RecoilIncrease",
+    "description": null
+  },
+  "ShotAttack_down1": {
+    "localized_name": "ShotAttack_down1",
+    "description": null
+  },
+  "ShotAttack_down2": {
+    "localized_name": "ShotAttack_down2",
+    "description": null
+  },
+  "ShotAttack_up1": {
+    "localized_name": "ShotAttack_up1",
+    "description": null
+  },
+  "ShotAttack_up2": {
+    "localized_name": "ShotAttack_up2",
+    "description": null
+  },
+  "StealExpert_1": {
+    "localized_name": "StealExpert_1",
+    "description": null
+  },
+  "StealExpert_2": {
+    "localized_name": "StealExpert_2",
+    "description": null
+  },
+  "StealExpert_3": {
+    "localized_name": "StealExpert_3",
+    "description": null
+  },
+  "StealExpert_4": {
+    "localized_name": "StealExpert_4",
+    "description": null
+  },
+  "Support_down1": {
+    "localized_name": "Support_down1",
+    "description": null
+  },
+  "Support_down2": {
+    "localized_name": "Support_down2",
+    "description": null
+  },
+  "Support_up1": {
+    "localized_name": "Support_up1",
+    "description": null
+  },
+  "Support_up2": {
+    "localized_name": "Support_up2",
+    "description": null
+  },
+  "TestExplosive_H": {
+    "localized_name": "TestExplosive_H",
+    "description": null
+  },
+  "TestExplosive_L": {
+    "localized_name": "TestExplosive_L",
+    "description": null
+  },
+  "TestHoming_H": {
+    "localized_name": "TestHoming_H",
+    "description": null
+  },
+  "TestHoming_L": {
+    "localized_name": "TestHoming_L",
+    "description": null
+  },
+  "TestSkill1": {
+    "localized_name": "TestSkill1",
+    "description": null
+  },
+  "TestSkill2": {
+    "localized_name": "TestSkill2",
+    "description": null
+  },
+  "TestSkill3": {
+    "localized_name": "TestSkill3",
+    "description": null
+  },
+  "TestSkill4": {
+    "localized_name": "TestSkill4",
+    "description": null
+  },
+  "TestSkill5": {
+    "localized_name": "TestSkill5",
+    "description": null
+  },
+  "TestSkill6": {
+    "localized_name": "TestSkill6",
+    "description": null
+  },
+  "TestSkill7": {
+    "localized_name": "TestSkill7",
+    "description": null
+  },
+  "TestSkill8": {
+    "localized_name": "TestSkill8",
+    "description": null
+  },
+  "MoveSpeed_up_1_Otomo_Only_Equip": {
+    "localized_name": "MoveSpeed_up_1_Otomo_Only_Equip",
     "description": null
   }
 }

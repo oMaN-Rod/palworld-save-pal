@@ -73,7 +73,7 @@
   },
   "Cool5": {
     "localized_name": "Разработка снеговика",
-    "description": null
+    "description": "Открывает технологию \"Снеговик\""
   },
   "Deforest1": {
     "localized_name": "Лесозаготовка, ур. 1",
@@ -145,7 +145,7 @@
   },
   "Deforest4": {
     "localized_name": "Разработка пня и топора",
-    "description": null
+    "description": "Открывает технологию \"Пень и топор\""
   },
   "EmitFlame1": {
     "localized_name": "Разведение огня, ур. 1",
@@ -225,7 +225,7 @@
   },
   "EmitFlame5": {
     "localized_name": "Разработка священного огня",
-    "description": null
+    "description": "Открывает технологию \"Священный огонь\""
   },
   "GenerateEnergy1": {
     "localized_name": "Производство энергии, ур. 1",
@@ -297,7 +297,7 @@
   },
   "GenerateEnergy5": {
     "localized_name": "Разработка вышки электропередачи",
-    "description": null
+    "description": "Открывает технологию \"Вышка электропередачи\""
   },
   "Handcraft1": {
     "localized_name": "Скорость ручного труда, ур. 1",
@@ -385,7 +385,7 @@
   },
   "Handcraft5": {
     "localized_name": "Разработка большого ящика инструментов",
-    "description": null
+    "description": "Открывает технологию \"Большой ящик инструментов\""
   },
   "Medicine1": {
     "localized_name": "Изготовление снадобий, ур. 1",
@@ -445,7 +445,7 @@
   },
   "Medicine4": {
     "localized_name": "Разработка ведьминского котла",
-    "description": null
+    "description": "Открывает технологию \"Ведьминский котел\""
   },
   "Mining1": {
     "localized_name": "Добыча руды, ур. 1",
@@ -521,7 +521,7 @@
   },
   "Mining5": {
     "localized_name": "Разработка вагонетки",
-    "description": null
+    "description": "Открывает технологию \"Вагонетка\""
   },
   "Seeding1": {
     "localized_name": "Посев семян, ур. 1",
@@ -593,11 +593,11 @@
   },
   "Seeding4": {
     "localized_name": "Разработка клумбы",
-    "description": null
+    "description": "Открывает технологию \"Клумба\""
   },
   "Seeding5": {
     "localized_name": "Разработка силоса",
-    "description": null
+    "description": "Открывает технологию \"Силоса\""
   },
   "Watering1": {
     "localized_name": "Полив, ур. 1",
@@ -669,6 +669,6 @@
   },
   "Watering5": {
     "localized_name": "Разработка фонтана",
-    "description": null
+    "description": "Открывает технологию \"Фонтан\""
   }
 }

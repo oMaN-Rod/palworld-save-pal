@@ -73,7 +73,7 @@
   },
   "Cool5": {
     "localized_name": "Schneemann-Entwicklung",
-    "description": null
+    "description": "Schaltet die Technologie „Schneemann“ frei."
   },
   "Deforest1": {
     "localized_name": "Holzfälltempo Lv. 1",
@@ -145,7 +145,7 @@
   },
   "Deforest4": {
     "localized_name": "Hackklotz und Beil-Entwicklung",
-    "description": null
+    "description": "Schaltet die Technologie „Hackklotz und Beil“ frei."
   },
   "EmitFlame1": {
     "localized_name": "Feuererzeugungstempo Lv. 1",
@@ -225,7 +225,7 @@
   },
   "EmitFlame5": {
     "localized_name": "„Olympisches Feuer“-Entwicklung",
-    "description": null
+    "description": "Schaltet die Technologie „Olympisches Feuer“ frei."
   },
   "GenerateEnergy1": {
     "localized_name": "Stromerzeugungstempo Lv. 1",
@@ -297,7 +297,7 @@
   },
   "GenerateEnergy5": {
     "localized_name": "Strommast-Entwicklung",
-    "description": null
+    "description": "Schaltet die Technologie „Strommast“ frei."
   },
   "Handcraft1": {
     "localized_name": "Handwerkstempo Lv. 1",
@@ -385,7 +385,7 @@
   },
   "Handcraft5": {
     "localized_name": "„Große Werkzeugkiste“-Entwicklung",
-    "description": null
+    "description": "Schaltet die Technologie „Große Werkzeugkiste“ frei."
   },
   "Medicine1": {
     "localized_name": "Arzneiherstellungstempo Lv. 1",
@@ -445,7 +445,7 @@
   },
   "Medicine4": {
     "localized_name": "Hexenkessel-Entwicklung",
-    "description": null
+    "description": "Schaltet die Technologie „Hexenkessel“ frei."
   },
   "Mining1": {
     "localized_name": "Bergbautempo Lv. 1",
@@ -521,7 +521,7 @@
   },
   "Mining5": {
     "localized_name": "Bergbauwagen-Entwicklung",
-    "description": null
+    "description": "Schaltet die Technologie „Bergbauwagen“ frei."
   },
   "Seeding1": {
     "localized_name": "Aussaattempo Lv. 1",
@@ -593,11 +593,11 @@
   },
   "Seeding4": {
     "localized_name": "Blumenbeet-Entwicklung",
-    "description": null
+    "description": "Schaltet die Technologie „Blumenbeet“ frei."
   },
   "Seeding5": {
     "localized_name": "Silo-Entwicklung",
-    "description": null
+    "description": "Schaltet die Technologie „Silo“ frei."
   },
   "Watering1": {
     "localized_name": "Gießtempo Lv. 1",
@@ -669,6 +669,6 @@
   },
   "Watering5": {
     "localized_name": "Springbrunnen-Entwicklung",
-    "description": null
+    "description": "Schaltet die Technologie „Springbrunnen“ frei."
   }
 }

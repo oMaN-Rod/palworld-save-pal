@@ -24,11 +24,11 @@
     "description": null
   },
   "Leaf": {
-    "localized_name": "Природа",
+    "localized_name": "Трава",
     "description": null
   },
   "Normal": {
-    "localized_name": "Обычный",
+    "localized_name": "Нейтральный",
     "description": null
   },
   "Water": {

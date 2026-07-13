@@ -25,7 +25,7 @@
   },
   "AncientRelicRecycler": {
     "localized_name": "고대 문명 유물 변환기",
-    "description": "잃어버린 문명의 기술을 다른 방향으로 응용한 고대 물질 변환 장치. |고대 문명의 유물|에 남겨진 기술을 해독하고, 새로운 형태로 승화시킬 수 있다. 유물의 활용성을 최대화하기 위해 제작된, 지극히 특수한 설비."
+    "description": "잃어버린 문명의 기술을 다른 방향으로 응용한 고대 물질 변환 장치. \"고대 문명의 유물\"에 남겨진 기술을 해독하고, 새로운 형태로 승화시킬 수 있다. 유물의 활용성을 최대화하기 위해 제작된, 지극히 특수한 설비."
   },
   "AncientWorkBench": {
     "localized_name": "고대 문명 작업대",
@@ -130,6 +130,10 @@
   "ArcadeVideoGame": {
     "localized_name": "아케이드 게임 기체",
     "description": "장식용 아케이드 게임 기체. 망가져서 사용할 수 없다."
+  },
+  "Banyan_Big": {
+    "localized_name": "Banyan_Big",
+    "description": null
   },
   "Barrel01_Iron": {
     "localized_name": "빨간색 드럼통",
@@ -345,7 +349,7 @@
   },
   "Crusher": {
     "localized_name": "파쇄기",
-    "description": "돌 혹은 목재을(를) 분쇄하여 다른 소재로 변환할 수 있는 시설. 물레방아를 돌리는 |관개| 적성의 팰이 필요하다."
+    "description": "돌 혹은 목재을(를) 분쇄하여 다른 소재로 변환할 수 있는 시설. 물레방아를 돌리는 \"관개\" 적성의 팰이 필요하다."
   },
   "CrystalPit": {
     "localized_name": "헥소 석영 채굴장",
@@ -359,6 +363,10 @@
     "localized_name": "피해 측정 허수아비",
     "description": "펭키을(를) 본뜬 훈련용 허수아비. 좁은 곳에는 둘 수 없다."
   },
+  "DamagedScarecrow_Test": {
+    "localized_name": "DamagedScarecrow_Test",
+    "description": null
+  },
   "DarkIsland_Banner": {
     "localized_name": "천락의 민족 휘장",
     "description": "장식용 천락의 민족 휘장."
@@ -368,16 +376,16 @@
     "description": "장식용 천락의 민족 깃발."
   },
   "Decal_PalSticker_PinkCat": {
-    "localized_name": "ko_Text",
-    "description": "ko_Text"
+    "localized_name": "Tuppanyan sticker",
+    "description": null
   },
   "DefenseBowGun": {
     "localized_name": "설치형 쇠뇌",
-    "description": "팰을 배치해 전투에 대비하는 방어 시설. |수작업| 적성을 가진 팰을 배치하면 쇠뇌를 사용해 거점을 수호한다."
+    "description": "팰을 배치해 전투에 대비하는 방어 시설. \"수작업\" 적성을 가진 팰을 배치하면 쇠뇌를 사용해 거점을 수호한다."
   },
   "DefenseMachinegun": {
     "localized_name": "설치형 기관총",
-    "description": "팰을 배치해 전투에 대비하는 방어 시설. |수작업| 적성을 가진 팰을 배치하면 기관총을 사용해 거점을 수호한다."
+    "description": "팰을 배치해 전투에 대비하는 방어 시설. \"수작업\" 적성을 가진 팰을 배치하면 기관총을 사용해 거점을 수호한다."
   },
   "DefenseMachinegun_AutoTurret": {
     "localized_name": "고대 문명 터렛",
@@ -385,7 +393,7 @@
   },
   "DefenseMissile": {
     "localized_name": "설치형 미사일 발사대",
-    "description": "팰을 배치해 전투에 대비하는 방어 시설. |수작업| 적성을 가진 팰을 배치하면 미사일 발사기를 사용해 거점을 수호한다."
+    "description": "팰을 배치해 전투에 대비하는 방어 시설. \"수작업\" 적성을 가진 팰을 배치하면 미사일 발사기를 사용해 거점을 수호한다."
   },
   "DefenseWait": {
     "localized_name": "토양",
@@ -533,7 +541,7 @@
   },
   "FlourMill": {
     "localized_name": "제분기",
-    "description": "밀을(를) 빻아 밀가루을(를) 생산할 수 있는 시설. 물레방아를 돌리는 |관개| 적성의 팰이 필요하다."
+    "description": "밀을(를) 빻아 밀가루을(를) 생산할 수 있는 시설. 물레방아를 돌리는 \"관개\" 적성의 팰이 필요하다."
   },
   "FlowerBed": {
     "localized_name": "화단",
@@ -735,6 +743,10 @@
     "localized_name": "유리 토대",
     "description": "위에 벽이나 시설을 지을 수 있는 토대. 견고한 유리로 만들어서 매우 튼튼하다."
   },
+  "Glass_pillars": {
+    "localized_name": "유리 기둥",
+    "description": "건물을 지탱하기 위해 세우는 기둥. 견고한 유리로 만들어서 매우 튼튼하다."
+  },
   "Glass_roof": {
     "localized_name": "유리 지붕",
     "description": "벽 위에 지어 비바람을 막는 지붕. 견고한 유리로 만들어서 매우 튼튼하다."
@@ -757,7 +769,7 @@
   },
   "GoalSoccer_Iron": {
     "localized_name": "축구 골대",
-    "description": "장식용 축구 골대. SheepBall을(를) 넣어도 점수는 얻지 못한다."
+    "description": "장식용 축구 골대. 도로롱을(를) 넣어도 점수는 얻지 못한다."
   },
   "GuardianDogStatue": {
     "localized_name": "둥실해치 상",
@@ -797,7 +809,7 @@
   },
   "IceCrusher": {
     "localized_name": "동결 분쇄기",
-    "description": "금속 광석을(를) 분쇄하여 다른 소재로 변환할 수 있는 시설. 작업 효율이 높은 대신, 가동하려면 전력 공급 및 |냉각| 적성을 가진 팰이 필요하다."
+    "description": "금속 광석을(를) 분쇄하여 다른 소재로 변환할 수 있는 시설. 작업 효율이 높은 대신, 가동하려면 전력 공급 및 \"냉각\" 적성을 가진 팰이 필요하다."
   },
   "IceHorseStatue": {
     "localized_name": "빙천마 상",
@@ -1111,6 +1123,10 @@
     "localized_name": "금속 토대",
     "description": "위에 벽이나 시설을 지을 수 있는 토대. 금속으로 만들어서 매우 튼튼하다."
   },
+  "Metal_pillars": {
+    "localized_name": "금속 기둥",
+    "description": "식물을 지탱하기 위해 세우는 기둥. 금속으로 만들어서 매우 튼튼하다."
+  },
   "Metal_roof": {
     "localized_name": "금속 지붕",
     "description": "벽 위에 지어 비바람을 막는 지붕. 금속으로 만들어서 매우 튼튼하다."
@@ -1276,8 +1292,8 @@
     "description": "장식용 앤티크 기다란 사각 카펫."
   },
   "Rug_Wood": {
-    "localized_name": "ko_Text",
-    "description": "ko_Text"
+    "localized_name": "Fur rug",
+    "description": null
   },
   "SF_Chair": {
     "localized_name": "연구실 의자",
@@ -1346,6 +1362,10 @@
   "SF_foundation": {
     "localized_name": "미래식 토대",
     "description": "위에 벽이나 시설을 지을 수 있는 토대. 클린한 느낌의 근미래적 건축물을 지을 때 활용하자."
+  },
+  "SF_pillars": {
+    "localized_name": "미래식 기둥",
+    "description": "건물을 지탱하기 위해 세우는 기둥. 클린한 느낌의 근미래적 건축물을 지을 때 활용하자."
   },
   "SF_roof": {
     "localized_name": "미래식 지붕",
@@ -1611,6 +1631,10 @@
     "localized_name": "돌 토대",
     "description": "위에 벽이나 시설을 지을 수 있는 토대. 돌로 만들어서 나름대로 튼튼하다."
   },
+  "Stone_pillar": {
+    "localized_name": "돌 기둥",
+    "description": "식물을 지탱하기 위해 세우는 기둥. 돌로 만들어서 나름대로 튼튼하다."
+  },
   "Stone_roof": {
     "localized_name": "돌 지붕",
     "description": "벽 위에 지어 비바람을 막는 지붕. 돌로 만들어서 나름대로 튼튼하다."
@@ -1808,8 +1832,8 @@
     "description": "밟은 팰을 빙결시키는 덫. 빙결된 팰은 스피어에 잡힐 확률이 상승한다."
   },
   "Trap_MovingPanel": {
-    "localized_name": "ko_Text",
-    "description": "ko_Text"
+    "localized_name": "Moving Panels",
+    "description": "A description of the moving panel"
   },
   "Trap_Noose": {
     "localized_name": "공중 덫",
@@ -1919,6 +1943,10 @@
     "localized_name": "사다리",
     "description": "조금 높은 곳에 올라갈 때 활용하는 사다리."
   },
+  "Wooden_pillar": {
+    "localized_name": "나무 기둥",
+    "description": "식물을 지탱하기 위해 세우는 기둥. 나무로 만들어서 약하다."
+  },
   "Wooden_roof": {
     "localized_name": "나무 지붕",
     "description": "벽 위에 짓는 비바람 방지용 지붕. 나무로 만들어서 약하다."
@@ -1954,5 +1982,13 @@
   "Zaisu": {
     "localized_name": "좌식 의자",
     "description": "장식용 좌식 의자. 일본식 거점을 만들 때 사용하자."
+  },
+  "JapaneseStyle_TriangleStairsCorner_02": {
+    "localized_name": "JapaneseStyle_TriangleStairsCorner_02",
+    "description": null
+  },
+  "WoodCreator": {
+    "localized_name": "WoodCreator",
+    "description": null
   }
 }

@@ -13,7 +13,7 @@
   },
   "Accessory_AirDash3": {
     "localized_name": "Stivali del triplo scatto aereo",
-    "description": "it_Text"
+    "description": null
   },
   "Accessory_ExplosionResist": {
     "localized_name": "Biancheria ad alta resistenza",
@@ -129,11 +129,11 @@
   },
   "Arrow_Fire": {
     "localized_name": "Freccia incendiaria",
-    "description": "Una Freccia incendiaria da scagliare con l'arco. Infligge danni di attributo <img id=|ElemIcon_Fire|/><uiCommon id=|COMMON_ELEMENT_NAME_Fire| style=|Elem_Fire|/> al nemico colpito. Per farla, hai bisogno di: Banco da lavoro primitivo."
+    "description": "Una Freccia incendiaria da scagliare con l'arco. Infligge danni di attributo fuoco al nemico colpito. Per farla, hai bisogno di: Banco da lavoro primitivo."
   },
   "Arrow_Poison": {
     "localized_name": "Freccia avvelenata",
-    "description": "Una Freccia avvelenata da scagliare con l'arco. Infligge lo stato <uiCommon id=|ADDITIONAL_EFFECT_Poison| style=|Effect_Poison|/> al nemico colpito. Per farla, hai bisogno di: Banco da lavoro primitivo."
+    "description": "Una Freccia avvelenata da scagliare con l'arco. Infligge lo stato Veleno al nemico colpito. Per farla, hai bisogno di: Banco da lavoro primitivo."
   },
   "AssaultRifleBullet": {
     "localized_name": "Proiettili per fucile d'assalto",
@@ -269,15 +269,15 @@
   },
   "Battle_Defense_BowGun": {
     "localized_name": "Balestra a postazione fissa",
-    "description": "Un Pal competente nell'attività |Lavoro manuale| potrà proteggere la base con la balestra."
+    "description": "Un Pal competente nell'attività \"Lavoro manuale\" potrà proteggere la base con la balestra."
   },
   "Battle_Defense_MachineGun": {
     "localized_name": "Mitragliatrice a postazione fissa",
-    "description": "Un Pal competente nell'attività |Lavoro manuale| potrà proteggere la base con la mitragliatrice."
+    "description": "Un Pal competente nell'attività \"Lavoro manuale\" potrà proteggere la base con la mitragliatrice."
   },
   "Battle_Defense_Missile": {
     "localized_name": "Lanciarazzi a postazione fissa",
-    "description": "Un Pal competente nell'attività |Lavoro manuale| potrà proteggere la base con il lanciarazzi."
+    "description": "Un Pal competente nell'attività \"Lavoro manuale\" potrà proteggere la base con il lanciarazzi."
   },
   "Battle_Glider_Grade_01": {
     "localized_name": "Paracadute normale",
@@ -301,7 +301,7 @@
   },
   "Battle_Helm_Grade_02_Fur": {
     "localized_name": "Piuma decorativa",
-    "description": "Delle piume decorative per i capelli. Sembrano proteggere la testa da ferite letali, non si sa bene come. Per farle, hai bisogno di: Workbench."
+    "description": "Delle piume decorative per i capelli. Sembrano proteggere la testa da ferite letali, non si sa bene come. Per farle, hai bisogno di: Banco da lavoro primitivo."
   },
   "Battle_Helm_Grade_03_Copper": {
     "localized_name": "Elmo di metallo",
@@ -360,8 +360,8 @@
     "description": "Un arco moderno. Scaglia frecce con forza incredibile."
   },
   "Battle_RangeWeapon_FlameThrower": {
-    "localized_name": "FlameThrower",
-    "description": "Flamethrower capace di generare una vampata di fiamme. Può dare fuoco a chi colpisce. Per farlo, hai bisogno di: Fabbrica per la produzione in serie di armi II."
+    "localized_name": "Lanciafiamme",
+    "description": "Lanciafiamme capace di generare una vampata di fiamme. Può dare fuoco a chi colpisce. Per farlo, hai bisogno di: Fabbrica per la produzione in serie di armi II."
   },
   "Battle_RangeWeapon_GatlingGun": {
     "localized_name": "Mitragliatore gatling",
@@ -501,11 +501,11 @@
   },
   "ChargeLaserRifle": {
     "localized_name": "Fucile a carica",
-    "description": "it_Text"
+    "description": null
   },
   "ChargeLaserRifleBullet": {
     "localized_name": "Proiettili per fucile a carica",
-    "description": "it_Text"
+    "description": null
   },
   "Clinic": {
     "localized_name": "Ambulatorio",
@@ -521,7 +521,7 @@
   },
   "Computer": {
     "localized_name": "Computer",
-    "description": "it_Text"
+    "description": null
   },
   "Cooler": {
     "localized_name": "Raffreddamento a ghiaccio",
@@ -541,7 +541,7 @@
   },
   "Crusher": {
     "localized_name": "Pressa",
-    "description": "Una struttura per ridurre in polvere Pietra o Legno e ottenere così altri tipi di risorse. Sono necessari Pal competenti nell'attività |Irrigazione| per usare la ruota idraulica."
+    "description": "Una struttura per ridurre in polvere Pietra o Legno e ottenere così altri tipi di risorse. Sono necessari Pal competenti nell'attività \"Irrigazione\" per usare la ruota idraulica."
   },
   "CrystalPit": {
     "localized_name": "Cava di exoquarzo",
@@ -581,7 +581,7 @@
   },
   "DismantlingConveyor": {
     "localized_name": "Smantella-Pal",
-    "description": "Una macchina da sogno che |smantella| automaticamente i Pal inseriti."
+    "description": "Una macchina da sogno che \"smantella\" automaticamente i Pal inseriti."
   },
   "DisplayCharacter": {
     "localized_name": "Gabbia di osservazione",
@@ -625,11 +625,11 @@
   },
   "EnergyShotgun": {
     "localized_name": "Fucile a canna liscia energetico",
-    "description": "it_Text"
+    "description": null
   },
   "EnergyShotgunBullet": {
     "localized_name": "Proiettili per fucile a canna liscia energetico",
-    "description": "it_Text"
+    "description": null
   },
   "EnergyStorage_Electric": {
     "localized_name": "Accumulatore elettrico",
@@ -693,7 +693,7 @@
   },
   "FlourMill": {
     "localized_name": "Mulino",
-    "description": "Una struttura dove lavorare il Grano così da ottenere Farina di grano. Sono necessari Pal competenti nell'attività |Irrigazione| per usare la ruota idraulica."
+    "description": "Una struttura dove lavorare il Grano così da ottenere Farina di grano. Sono necessari Pal competenti nell'attività \"Irrigazione\" per usare la ruota idraulica."
   },
   "FlowerBed": {
     "localized_name": "Aiuola fiorita",
@@ -909,7 +909,7 @@
   },
   "GasMask": {
     "localized_name": "Maschera antinebbia marcescente",
-    "description": "it_Text"
+    "description": null
   },
   "GatlingBullet": {
     "localized_name": "Proiettili per gatling",
@@ -985,7 +985,7 @@
   },
   "IceCrusher": {
     "localized_name": "Macinatore criogenico",
-    "description": "Una struttura per ridurre in polvere Minerale metallico e ottenere così altri tipi di risorse. Richiede Pal competenti nell'attività |Refrigerazione| e il collegamento all'alimentazione, ma è davvero efficiente."
+    "description": "Una struttura per ridurre in polvere Minerale metallico e ottenere così altri tipi di risorse. Richiede Pal competenti nell'attività \"Refrigerazione\" e il collegamento all'alimentazione, ma è davvero efficiente."
   },
   "IceHorseStatue": {
     "localized_name": "Statua di Frostallion",
@@ -1001,15 +1001,15 @@
   },
   "Infra_ItemChest_Grade_01": {
     "localized_name": "Forziere di legno",
-    "description": "Permette di custodire oggetti. Se posto nella base, i Pal competenti nell'attività |Trasporto| potranno trasportare automaticamente gli oggetti."
+    "description": "Permette di custodire oggetti. Se posto nella base, i Pal competenti nell'attività \"Trasporto\" potranno trasportare automaticamente gli oggetti."
   },
   "Infra_ItemChest_Grade_02": {
     "localized_name": "Forziere di metallo",
-    "description": "Permette di custodire più oggetti ed è più resistente. I Pal competenti nell'attività |Trasporto| potranno trasportare automaticamente gli oggetti."
+    "description": "Permette di custodire più oggetti ed è più resistente. I Pal competenti nell'attività \"Trasporto\" potranno trasportare automaticamente gli oggetti."
   },
   "Infra_ItemChest_Grade_03": {
     "localized_name": "Forziere di metallo raffinato",
-    "description": "Permette di custodire ancora più oggetti ed è ancora più resistente. I Pal competenti nell'attività |Trasporto| potranno trasportare automaticamente gli oggetti."
+    "description": "Permette di custodire ancora più oggetti ed è ancora più resistente. I Pal competenti nell'attività \"Trasporto\" potranno trasportare automaticamente gli oggetti."
   },
   "Infra_MachineParts": {
     "localized_name": "Chiodo",
@@ -1125,7 +1125,7 @@
   },
   "MeatCutterKnife": {
     "localized_name": "Coltello da macellaio",
-    "description": "Un coltello per eliminare i Pal richiamati. Equipaggiandolo, il comando |Accarezza| cambierà in |Elimina|. Se elimini un Pal, non potrai rivederlo mai più."
+    "description": "Un coltello per eliminare i Pal richiamati. Equipaggiandolo, il comando \"Accarezza\" cambierà in \"Elimina\". Se elimini un Pal, non potrai rivederlo mai più."
   },
   "MedicalPalBed_04": {
     "localized_name": "Enorme letto per Pal",
@@ -1184,11 +1184,11 @@
     "description": "Un set con Vessillo del clan dei fiori di luna e Striscione del clan dei fiori di luna. La prova della vittoria sul clan dei fiori di luna."
   },
   "OctaviaSet01": {
-    "localized_name": "Set |collaborazione con ULTRAKILL| 1",
+    "localized_name": "Set \"collaborazione con ULTRAKILL\" 1",
     "description": "[Collaborazione con ULTRAKILL] Set con Armatura di V1 e Revolver del tiratore."
   },
   "OctaviaSet02": {
-    "localized_name": "Set |collaborazione con ULTRAKILL| 2",
+    "localized_name": "Set \"collaborazione con ULTRAKILL\" 2",
     "description": "[Collaborazione con ULTRAKILL] Set con Armatura di V2 e Fucile a canna liscia sparanuclei."
   },
   "OilPump": {
@@ -1205,15 +1205,15 @@
   },
   "OperatingTable": {
     "localized_name": "Tavolo operatorio per Pal",
-    "description": "it_text"
+    "description": null
   },
   "OverheatRifle": {
     "localized_name": "Fucile a sovraccarico",
-    "description": "it_Text"
+    "description": null
   },
   "OverheatRifleBullet": {
     "localized_name": "Proiettili per fucile a sovraccarico",
-    "description": "it_Text"
+    "description": null
   },
   "PALBOX": {
     "localized_name": "Box per Pal",
@@ -1225,11 +1225,11 @@
   },
   "PalDopingShot": {
     "localized_name": "Pistola potenziante",
-    "description": "it_Text"
+    "description": null
   },
   "PalDopingShotBullet": {
     "localized_name": "Proiettili per pistola potenziante",
-    "description": "it_Text"
+    "description": null
   },
   "PalDopingShot_2": {
     "localized_name": "Mega pistola potenziante",
@@ -1241,7 +1241,7 @@
   },
   "PalHealingGrenade": {
     "localized_name": "Granata cura-Pal",
-    "description": "it_Text"
+    "description": null
   },
   "PalMedicineBox": {
     "localized_name": "Armadietto dei medicinali",
@@ -1309,7 +1309,7 @@
   },
   "Product_Cooking_Grade_03": {
     "localized_name": "Cucina elettrica",
-    "description": "Ha bisogno di elettricità, ma cucina in modo più efficiente. Sono necessari Pal competenti nell'attività |Sputafuoco|."
+    "description": "Ha bisogno di elettricità, ma cucina in modo più efficiente. Sono necessari Pal competenti nell'attività \"Sputafuoco\"."
   },
   "Product_CopperPit": {
     "localized_name": "Cava di metallo",
@@ -1321,19 +1321,19 @@
   },
   "Product_Factory_Hard_Grade_01": {
     "localized_name": "Banco da lavoro di qualità",
-    "description": "Garantisce una velocità di produzione superiore al Banco da lavoro primitivo. Sono necessari Pal competenti nell'attività |Lavoro manuale|."
+    "description": "Garantisce una velocità di produzione superiore al Banco da lavoro primitivo. Sono necessari Pal competenti nell'attività \"Lavoro manuale\"."
   },
   "Product_Factory_Hard_Grade_02": {
     "localized_name": "Fabbrica per la produzione in serie",
-    "description": "Ha bisogno di elettricità, ma permette di costruire tanti tipi di oggetti più rapidamente. Sono necessari Pal competenti nell'attività |Lavoro manuale|."
+    "description": "Ha bisogno di elettricità, ma permette di costruire tanti tipi di oggetti più rapidamente. Sono necessari Pal competenti nell'attività \"Lavoro manuale\"."
   },
   "Product_Factory_Hard_Grade_03": {
     "localized_name": "Fabbrica per la produzione in serie II",
-    "description": "Ha bisogno di elettricità, ma permette di costruire tanti tipi di oggetti ancora più rapidamente. Sono necessari Pal competenti nell'attività |Lavoro manuale|."
+    "description": "Ha bisogno di elettricità, ma permette di costruire tanti tipi di oggetti ancora più rapidamente. Sono necessari Pal competenti nell'attività \"Lavoro manuale\"."
   },
   "Product_Farm_Berries": {
     "localized_name": "Campo di bacche",
-    "description": "Un campo dove coltivare bacche. Sono necessari Pal competenti nelle attività |Semina|, |Irrigazione| e |Raccolta|."
+    "description": "Un campo dove coltivare bacche. Sono necessari Pal competenti nelle attività \"Semina\", \"Irrigazione\" e \"Raccolta\"."
   },
   "Product_Farm_Carrot": {
     "localized_name": "Campo di carote",
@@ -1341,7 +1341,7 @@
   },
   "Product_Farm_Lettuce": {
     "localized_name": "Campo di lattuga",
-    "description": "Un campo dove coltivare lattuga. Sono necessari Pal competenti nelle attività |Semina|, |Irrigazione| e |Raccolta|."
+    "description": "Un campo dove coltivare lattuga. Sono necessari Pal competenti nelle attività \"Semina\", \"Irrigazione\" e \"Raccolta\"."
   },
   "Product_Farm_Onion": {
     "localized_name": "Campo di cipolle",
@@ -1353,11 +1353,11 @@
   },
   "Product_Farm_tomato": {
     "localized_name": "Campo di pomodori",
-    "description": "Un campo dove coltivare pomodori. Sono necessari Pal competenti nelle attività |Semina|, |Irrigazione| e |Raccolta|."
+    "description": "Un campo dove coltivare pomodori. Sono necessari Pal competenti nelle attività \"Semina\", \"Irrigazione\" e \"Raccolta\"."
   },
   "Product_Farm_wheat": {
     "localized_name": "Campo di grano",
-    "description": "Un campo dove coltivare il grano necessario per fare il Pane. Sono necessari Pal competenti nelle attività |Semina|, |Irrigazione| e |Raccolta|."
+    "description": "Un campo dove coltivare il grano necessario per fare il Pane. Sono necessari Pal competenti nelle attività \"Semina\", \"Irrigazione\" e \"Raccolta\"."
   },
   "Product_Ingot_Grade_01_Copper": {
     "localized_name": "Fornace primitiva",
@@ -1369,15 +1369,15 @@
   },
   "Product_Ingot_Grade_03_Steal": {
     "localized_name": "Fornace elettrica",
-    "description": "Permette di raffinare |Lingotto di metallo Pal|."
+    "description": "Permette di raffinare \"Lingotto di metallo Pal\"."
   },
   "Product_Medicine_Grade_01": {
     "localized_name": "Struttura medica medievale",
-    "description": "Permette di produrre medicine semplici. Sono necessari Pal competenti nell'attività |Realizzazione di medicinali|."
+    "description": "Permette di produrre medicine semplici. Sono necessari Pal competenti nell'attività \"Realizzazione di medicinali\"."
   },
   "Product_Medicine_Grade_02": {
     "localized_name": "Struttura medica elettrica",
-    "description": "Serve l'elettricità, ma si possono produrre medicine migliori. Sono necessari Pal competenti nell'attività |Realizzazione di medicinali|."
+    "description": "Serve l'elettricità, ma si possono produrre medicine migliori. Sono necessari Pal competenti nell'attività \"Realizzazione di medicinali\"."
   },
   "Product_Pickaxe_Grade_01": {
     "localized_name": "Piccone di pietra",
@@ -1397,7 +1397,7 @@
   },
   "Product_StationDeforest": {
     "localized_name": "Segheria",
-    "description": "Permette di tagliare legna nella base. Sono necessari Pal competenti nell'attività |Falegnameria|."
+    "description": "Permette di tagliare legna nella base. Sono necessari Pal competenti nell'attività \"Falegnameria\"."
   },
   "Product_StationDeforest2": {
     "localized_name": "Segheria II",
@@ -1405,7 +1405,7 @@
   },
   "Product_StonePit": {
     "localized_name": "Cava di pietra",
-    "description": "Permette di estrarre pietra nella base. Sono necessari Pal competenti nell'attività |Attività mineraria|."
+    "description": "Permette di estrarre pietra nella base. Sono necessari Pal competenti nell'attività \"Attività mineraria\"."
   },
   "Product_SulfurPit": {
     "localized_name": "Cava di zolfo",
@@ -1413,15 +1413,15 @@
   },
   "Product_WeaponFactory_Dirty_Grade_01": {
     "localized_name": "Banco da lavoro per armi",
-    "description": "Una struttura dove realizzare armi piuttosto semplici. Sono necessari Pal competenti nell'attività |Lavoro manuale|."
+    "description": "Una struttura dove realizzare armi piuttosto semplici. Sono necessari Pal competenti nell'attività \"Lavoro manuale\"."
   },
   "Product_WeaponFactory_Dirty_Grade_02": {
     "localized_name": "Fabbrica per la produzione in serie di armi",
-    "description": "Ha bisogno di elettricità, ma permette di costruire armi e proiettili più rapidamente. Sono necessari Pal competenti nell'attività |Lavoro manuale|."
+    "description": "Ha bisogno di elettricità, ma permette di costruire armi e proiettili più rapidamente. Sono necessari Pal competenti nell'attività \"Lavoro manuale\"."
   },
   "Product_WeaponFactory_Dirty_Grade_03": {
     "localized_name": "Fabbrica per la produzione in serie di armi II",
-    "description": "Ha bisogno di elettricità, ma permette di costruire armi e proiettili ancora più rapidamente. Sono necessari Pal competenti nell'attività |Lavoro manuale|."
+    "description": "Ha bisogno di elettricità, ma permette di costruire armi e proiettili ancora più rapidamente. Sono necessari Pal competenti nell'attività \"Lavoro manuale\"."
   },
   "Product_WorkBench_SkillUnlock": {
     "localized_name": "Banco da lavoro per strumenti per Pal",
@@ -2165,15 +2165,15 @@
   },
   "Special_SphereFactory_Black_Grade_01": {
     "localized_name": "Banco da lavoro per sfere",
-    "description": "Un banco da lavoro dove realizzare sfere per catturare Pal. Sono necessari Pal competenti nell'attività |Lavoro manuale|."
+    "description": "Un banco da lavoro dove realizzare sfere per catturare Pal. Sono necessari Pal competenti nell'attività \"Lavoro manuale\"."
   },
   "Special_SphereFactory_Black_Grade_02": {
     "localized_name": "Fabbrica per la produzione in serie di sfere",
-    "description": "Permette di produrre Sfera Pal più rapidamente. Sono necessari Pal competenti nell'attività |Lavoro manuale|."
+    "description": "Permette di produrre Sfera Pal più rapidamente. Sono necessari Pal competenti nell'attività \"Lavoro manuale\"."
   },
   "Special_SphereFactory_Black_Grade_03": {
     "localized_name": "Fabbrica per la produzione in serie di sfere II",
-    "description": "Permette di produrre Sfera Pal ancora più rapidamente. Sono necessari Pal competenti nell'attività |Lavoro manuale|."
+    "description": "Permette di produrre Sfera Pal ancora più rapidamente. Sono necessari Pal competenti nell'attività \"Lavoro manuale\"."
   },
   "SphereFactory_Black_04": {
     "localized_name": "Fabbrica per la produzione di sfere avanzata",
@@ -2292,7 +2292,7 @@
     "description": "Con questo è possibile scassinare i forzieri che avrebbero bisogno di Chiave d'oro. Non si rompe mai, non importa quanto lo usi."
   },
   "WallSignboard": {
-    "localized_name": "WallSignBoard",
+    "localized_name": "Bacheca a muro",
     "description": "Una bacheca su cui scrivere. Può essere appesa al muro."
   },
   "WallTorch": {
@@ -2341,7 +2341,7 @@
   },
   "Workbench": {
     "localized_name": "Banco da lavoro primitivo",
-    "description": "Banco da lavoro primitivo dove realizzare oggetti semplici. Possono farne uso i Pal competenti nell'attività |Lavoro manuale|."
+    "description": "Banco da lavoro primitivo dove realizzare oggetti semplici. Possono farne uso i Pal competenti nell'attività \"Lavoro manuale\"."
   },
   "WorldTreeIngot": {
     "localized_name": "Lingotto di Paloxite",

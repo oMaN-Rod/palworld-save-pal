@@ -53,6 +53,7 @@
 	);
 	const passiveSkillOptions: SelectOption[] = $derived(
 		Object.values(passiveSkillsData.passiveSkills)
+			.filter((pSkill) => !pSkill.details.disabled)
 			.filter(
 				(pSkill) => !Object.values(eggConfig.passive_skills).some((p) => p === pSkill.id)
 			)

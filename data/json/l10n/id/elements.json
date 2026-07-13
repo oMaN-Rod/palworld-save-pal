@@ -1,0 +1,38 @@
+{
+  "Dark": {
+    "localized_name": "Kegelapan",
+    "description": null
+  },
+  "Dragon": {
+    "localized_name": "Naga",
+    "description": null
+  },
+  "Earth": {
+    "localized_name": "Tanah",
+    "description": null
+  },
+  "Electricity": {
+    "localized_name": "Petir",
+    "description": null
+  },
+  "Fire": {
+    "localized_name": "Api",
+    "description": null
+  },
+  "Ice": {
+    "localized_name": "Es",
+    "description": null
+  },
+  "Leaf": {
+    "localized_name": "Rumput",
+    "description": null
+  },
+  "Normal": {
+    "localized_name": "Netral",
+    "description": null
+  },
+  "Water": {
+    "localized_name": "Air",
+    "description": null
+  }
+}

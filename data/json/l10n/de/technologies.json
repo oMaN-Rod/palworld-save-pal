@@ -13,7 +13,7 @@
   },
   "Accessory_AirDash3": {
     "localized_name": "Dreifachluftsprintstiefel",
-    "description": "de_Text"
+    "description": null
   },
   "Accessory_ExplosionResist": {
     "localized_name": "Explosionsresistente Unterwäsche",
@@ -129,11 +129,11 @@
   },
   "Arrow_Fire": {
     "localized_name": "Feuerpfeil",
-    "description": "Ein Feuerpfeil, der mit einem Bogen verschossen werden kann. Fügt getroffenen Zielen <img id=|ElemIcon_Fire|/><uiCommon id=|COMMON_ELEMENT_NAME_Fire| style=|Elem_Fire|/>schaden zu. Kann mithilfe von „Primitive Werkbank“ gefertigt werden."
+    "description": "Ein Feuerpfeil, der mit einem Bogen verschossen werden kann. Fügt getroffenen Zielen Feuerschaden zu. Kann mithilfe von „Primitive Werkbank“ gefertigt werden."
   },
   "Arrow_Poison": {
     "localized_name": "Giftpfeil",
-    "description": "Ein Giftpfeil, der mit einem Bogen verschossen werden kann. Verursacht bei getroffenen Zielen den Statuseffekt „<uiCommon id=|ADDITIONAL_EFFECT_Poison| style=|Effect_Poison|/>“. Kann mithilfe von „Primitive Werkbank“ gefertigt werden."
+    "description": "Ein Giftpfeil, der mit einem Bogen verschossen werden kann. Verursacht bei getroffenen Zielen den Statuseffekt „Vergiften“. Kann mithilfe von „Primitive Werkbank“ gefertigt werden."
   },
   "AssaultRifleBullet": {
     "localized_name": "Sturmgewehrmunition",
@@ -301,7 +301,7 @@
   },
   "Battle_Helm_Grade_02_Fur": {
     "localized_name": "Federhaarschmuck",
-    "description": "Hübsche Haarnadel aus Federn. Schützt möglicherweise irgendwie vor tödlichen Kopfverletzungen. Kann mithilfe von „Workbench“ gefertigt werden."
+    "description": "Hübsche Haarnadel aus Federn. Schützt möglicherweise irgendwie vor tödlichen Kopfverletzungen. Kann mithilfe von „Primitive Werkbank“ gefertigt werden."
   },
   "Battle_Helm_Grade_03_Copper": {
     "localized_name": "Metallhelm",
@@ -360,8 +360,8 @@
     "description": "Ein modernisierter Bogen. Ist in der Lage, stärkere Pfeile zu verschießen."
   },
   "Battle_RangeWeapon_FlameThrower": {
-    "localized_name": "FlameThrower",
-    "description": "Ein Flamethrower mit hoher Reichweite. Kann getroffene Gegner in Brand setzen. Kann mithilfe von „Waffen-Fließbandwerk II“ gefertigt werden."
+    "localized_name": "Flammenwerfer",
+    "description": "Ein Flammenwerfer mit hoher Reichweite. Kann getroffene Gegner in Brand setzen. Kann mithilfe von „Waffen-Fließbandwerk II“ gefertigt werden."
   },
   "Battle_RangeWeapon_GatlingGun": {
     "localized_name": "Gatlinggewehr",
@@ -393,11 +393,11 @@
   },
   "Battle_RangeWeapon_Rifle": {
     "localized_name": "Einzelschuss-Gewehr",
-    "description": "Ein Gewehr mit Einzellademechanismus. Das Nachladen dauert etwas. Hat eine niedrige Feuerrate, aber wenn der eine Schuss sitzt ... Für die Herstellung wird „Waffen-Fließbandwerk“ benötigt."
+    "description": "Ein Gewehr mit Einzellademechanismus. Das Nachladen dauert etwas. Hat eine niedrige Feuerrate, aber wenn der eine Schuss sitzt ... Für die Herstellung wird „Waffen-Fließbandwerk“ benötigt."
   },
   "Battle_RangeWeapon_RocketLauncher": {
     "localized_name": "Panzerfaust",
-    "description": "Wenn man ein weit entferntes Ziel – und alles drumrum – ganz besonders übel zurichten möchte, greift man zur Panzerfaust. Kann mithilfe von „Waffen-Fließbandwerk II“ gefertigt werden."
+    "description": "Wenn man ein weit entferntes Ziel – und alles drumrum – ganz besonders übel zurichten möchte, greift man zur Panzerfaust. Kann mithilfe von „Waffen-Fließbandwerk II“ gefertigt werden."
   },
   "Battle_RangeWeapon_SemiAutoRifle": {
     "localized_name": "Halbautomatisches Gewehr",
@@ -501,11 +501,11 @@
   },
   "ChargeLaserRifle": {
     "localized_name": "Teslagewehr",
-    "description": "de_Text"
+    "description": null
   },
   "ChargeLaserRifleBullet": {
     "localized_name": "Teslagewehrmunition",
-    "description": "de_Text"
+    "description": null
   },
   "Clinic": {
     "localized_name": "Klinik",
@@ -521,7 +521,7 @@
   },
   "Computer": {
     "localized_name": "Computer",
-    "description": "de_Text"
+    "description": null
   },
   "Cooler": {
     "localized_name": "Eiskühler",
@@ -625,11 +625,11 @@
   },
   "EnergyShotgun": {
     "localized_name": "Plasmaflinte",
-    "description": "de_Text"
+    "description": null
   },
   "EnergyShotgunBullet": {
     "localized_name": "Plasmaflintenmunition",
-    "description": "de_Text"
+    "description": null
   },
   "EnergyStorage_Electric": {
     "localized_name": "Speicherbatterie",
@@ -909,7 +909,7 @@
   },
   "GasMask": {
     "localized_name": "Fäulnisnebelmaske",
-    "description": "de_Text"
+    "description": null
   },
   "GatlingBullet": {
     "localized_name": "Gatlinggewehrmunition",
@@ -1205,15 +1205,15 @@
   },
   "OperatingTable": {
     "localized_name": "Pal-OP-Tisch",
-    "description": "de_text"
+    "description": null
   },
   "OverheatRifle": {
     "localized_name": "Überhitzungsgewehr",
-    "description": "de_Text"
+    "description": null
   },
   "OverheatRifleBullet": {
     "localized_name": "Überhitzungsgewehrmunition",
-    "description": "de_Text"
+    "description": null
   },
   "PALBOX": {
     "localized_name": "Pal-Box",
@@ -1225,11 +1225,11 @@
   },
   "PalDopingShot": {
     "localized_name": "Boosterpistole",
-    "description": "de_Text"
+    "description": null
   },
   "PalDopingShotBullet": {
     "localized_name": "Boosterpistolenmunition",
-    "description": "de_Text"
+    "description": null
   },
   "PalDopingShot_2": {
     "localized_name": "Mega-Boosterpistole",
@@ -1241,7 +1241,7 @@
   },
   "PalHealingGrenade": {
     "localized_name": "Pal-Heilgranate",
-    "description": "de_Text"
+    "description": null
   },
   "PalMedicineBox": {
     "localized_name": "Medizinregal",
@@ -2292,7 +2292,7 @@
     "description": "Ermöglicht es, Schatztruhen, die einen Goldschlüssel erfordern, einfach aufzubrechen. Kann beliebig oft benutzt werden."
   },
   "WallSignboard": {
-    "localized_name": "WallSignBoard",
+    "localized_name": "Hängeschild",
     "description": "Ein Schild zum Draufschreiben. Kann an Wänden aufgehängt werden."
   },
   "WallTorch": {

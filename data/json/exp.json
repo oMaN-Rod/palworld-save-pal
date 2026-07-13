@@ -1,702 +1,702 @@
 {
   "1": {
-    "DropEXP": 7,
+    "DropEXP": 10,
     "NextEXP": 0,
     "PalNextEXP": 0,
     "TotalEXP": 0,
     "PalTotalEXP": 0
   },
   "2": {
-    "DropEXP": 9,
-    "NextEXP": 8,
+    "DropEXP": 11,
+    "NextEXP": 50,
     "PalNextEXP": 25,
-    "TotalEXP": 8,
+    "TotalEXP": 50,
     "PalTotalEXP": 25
   },
   "3": {
-    "DropEXP": 11,
-    "NextEXP": 30,
+    "DropEXP": 12,
+    "NextEXP": 150,
     "PalNextEXP": 31,
-    "TotalEXP": 38,
+    "TotalEXP": 200,
     "PalTotalEXP": 56
   },
   "4": {
-    "DropEXP": 13,
-    "NextEXP": 98,
+    "DropEXP": 14,
+    "NextEXP": 200,
     "PalNextEXP": 37,
-    "TotalEXP": 136,
+    "TotalEXP": 400,
     "PalTotalEXP": 93
   },
   "5": {
     "DropEXP": 15,
-    "NextEXP": 180,
+    "NextEXP": 340,
     "PalNextEXP": 45,
-    "TotalEXP": 316,
+    "TotalEXP": 740,
     "PalTotalEXP": 138
   },
   "6": {
-    "DropEXP": 17,
-    "NextEXP": 278,
+    "DropEXP": 22,
+    "NextEXP": 520,
     "PalNextEXP": 69,
-    "TotalEXP": 593,
+    "TotalEXP": 1260,
     "PalTotalEXP": 207
   },
   "7": {
-    "DropEXP": 20,
-    "NextEXP": 395,
+    "DropEXP": 29,
+    "NextEXP": 700,
     "PalNextEXP": 99,
-    "TotalEXP": 988,
+    "TotalEXP": 1960,
     "PalTotalEXP": 306
   },
   "8": {
-    "DropEXP": 23,
-    "NextEXP": 536,
+    "DropEXP": 36,
+    "NextEXP": 900,
     "PalNextEXP": 134,
-    "TotalEXP": 1524,
+    "TotalEXP": 2860,
     "PalTotalEXP": 440
   },
   "9": {
-    "DropEXP": 26,
-    "NextEXP": 705,
+    "DropEXP": 45,
+    "NextEXP": 1150,
     "PalNextEXP": 176,
-    "TotalEXP": 2229,
+    "TotalEXP": 4010,
     "PalTotalEXP": 616
   },
   "10": {
-    "DropEXP": 38,
-    "NextEXP": 908,
+    "DropEXP": 56,
+    "NextEXP": 1500,
     "PalNextEXP": 227,
-    "TotalEXP": 3138,
+    "TotalEXP": 5510,
     "PalTotalEXP": 843
   },
   "11": {
-    "DropEXP": 45,
-    "NextEXP": 1152,
+    "DropEXP": 69,
+    "NextEXP": 1900,
     "PalNextEXP": 288,
-    "TotalEXP": 4290,
+    "TotalEXP": 7410,
     "PalTotalEXP": 1131
   },
   "12": {
-    "DropEXP": 52,
-    "NextEXP": 1444,
+    "DropEXP": 85,
+    "NextEXP": 2400,
     "PalNextEXP": 361,
-    "TotalEXP": 5734,
+    "TotalEXP": 9810,
     "PalTotalEXP": 1492
   },
   "13": {
-    "DropEXP": 58,
-    "NextEXP": 1795,
+    "DropEXP": 103,
+    "NextEXP": 3000,
     "PalNextEXP": 449,
-    "TotalEXP": 7529,
+    "TotalEXP": 12810,
     "PalTotalEXP": 1941
   },
   "14": {
-    "DropEXP": 66,
-    "NextEXP": 2216,
+    "DropEXP": 126,
+    "NextEXP": 3800,
     "PalNextEXP": 554,
-    "TotalEXP": 9745,
+    "TotalEXP": 16610,
     "PalTotalEXP": 2495
   },
   "15": {
-    "DropEXP": 74,
-    "NextEXP": 2721,
+    "DropEXP": 150,
+    "NextEXP": 4677,
     "PalNextEXP": 680,
-    "TotalEXP": 12467,
+    "TotalEXP": 21287,
     "PalTotalEXP": 3175
   },
   "16": {
-    "DropEXP": 84,
-    "NextEXP": 3328,
+    "DropEXP": 167,
+    "NextEXP": 5353,
     "PalNextEXP": 832,
-    "TotalEXP": 15795,
+    "TotalEXP": 26640,
     "PalTotalEXP": 4007
   },
   "17": {
-    "DropEXP": 97,
-    "NextEXP": 4055,
+    "DropEXP": 177,
+    "NextEXP": 5860,
     "PalNextEXP": 1014,
-    "TotalEXP": 19850,
+    "TotalEXP": 32500,
     "PalTotalEXP": 5021
   },
   "18": {
-    "DropEXP": 110,
-    "NextEXP": 4928,
+    "DropEXP": 186,
+    "NextEXP": 6367,
     "PalNextEXP": 1232,
-    "TotalEXP": 24778,
+    "TotalEXP": 38867,
     "PalTotalEXP": 6253
   },
   "19": {
-    "DropEXP": 124,
-    "NextEXP": 5976,
+    "DropEXP": 243,
+    "NextEXP": 8564,
     "PalNextEXP": 1494,
-    "TotalEXP": 30754,
+    "TotalEXP": 47431,
     "PalTotalEXP": 7747
   },
   "20": {
-    "DropEXP": 138,
-    "NextEXP": 7233,
+    "DropEXP": 259,
+    "NextEXP": 9409,
     "PalNextEXP": 1808,
-    "TotalEXP": 37988,
+    "TotalEXP": 56840,
     "PalTotalEXP": 9555
   },
   "21": {
-    "DropEXP": 153,
-    "NextEXP": 8742,
+    "DropEXP": 318,
+    "NextEXP": 11944,
     "PalNextEXP": 2185,
-    "TotalEXP": 46730,
+    "TotalEXP": 68784,
     "PalTotalEXP": 11740
   },
   "22": {
-    "DropEXP": 171,
-    "NextEXP": 10552,
+    "DropEXP": 330,
+    "NextEXP": 12789,
     "PalNextEXP": 2638,
-    "TotalEXP": 57282,
+    "TotalEXP": 81573,
     "PalTotalEXP": 14378
   },
   "23": {
-    "DropEXP": 194,
-    "NextEXP": 12725,
+    "DropEXP": 396,
+    "NextEXP": 15831,
     "PalNextEXP": 3181,
-    "TotalEXP": 70007,
+    "TotalEXP": 97404,
     "PalTotalEXP": 17559
   },
   "24": {
-    "DropEXP": 217,
-    "NextEXP": 15332,
+    "DropEXP": 429,
+    "NextEXP": 17690,
     "PalNextEXP": 3833,
-    "TotalEXP": 85338,
+    "TotalEXP": 115094,
     "PalTotalEXP": 21392
   },
   "25": {
-    "DropEXP": 241,
-    "NextEXP": 18460,
+    "DropEXP": 495,
+    "NextEXP": 21070,
     "PalNextEXP": 4615,
-    "TotalEXP": 103799,
+    "TotalEXP": 136164,
     "PalTotalEXP": 26007
   },
   "26": {
-    "DropEXP": 267,
-    "NextEXP": 22214,
+    "DropEXP": 518,
+    "NextEXP": 22760,
     "PalNextEXP": 5554,
-    "TotalEXP": 126013,
+    "TotalEXP": 158924,
     "PalTotalEXP": 31561
   },
   "27": {
-    "DropEXP": 300,
-    "NextEXP": 26719,
+    "DropEXP": 576,
+    "NextEXP": 26140,
     "PalNextEXP": 6680,
-    "TotalEXP": 152732,
+    "TotalEXP": 185064,
     "PalTotalEXP": 38241
   },
   "28": {
-    "DropEXP": 337,
-    "NextEXP": 32125,
+    "DropEXP": 595,
+    "NextEXP": 27830,
     "PalNextEXP": 8031,
-    "TotalEXP": 184856,
+    "TotalEXP": 212894,
     "PalTotalEXP": 46272
   },
   "29": {
-    "DropEXP": 374,
-    "NextEXP": 38612,
+    "DropEXP": 611,
+    "NextEXP": 29520,
     "PalNextEXP": 9653,
-    "TotalEXP": 223468,
+    "TotalEXP": 242414,
     "PalTotalEXP": 55925
   },
   "30": {
-    "DropEXP": 417,
-    "NextEXP": 46396,
+    "DropEXP": 626,
+    "NextEXP": 31210,
     "PalNextEXP": 11599,
-    "TotalEXP": 269864,
+    "TotalEXP": 273624,
     "PalTotalEXP": 67524
   },
   "31": {
-    "DropEXP": 467,
-    "NextEXP": 55737,
+    "DropEXP": 672,
+    "NextEXP": 34546,
     "PalNextEXP": 13934,
-    "TotalEXP": 325601,
+    "TotalEXP": 308170,
     "PalTotalEXP": 81458
   },
   "32": {
-    "DropEXP": 518,
-    "NextEXP": 66947,
+    "DropEXP": 720,
+    "NextEXP": 38229,
     "PalNextEXP": 16737,
-    "TotalEXP": 392548,
+    "TotalEXP": 346399,
     "PalTotalEXP": 98195
   },
   "33": {
-    "DropEXP": 580,
-    "NextEXP": 80398,
+    "DropEXP": 772,
+    "NextEXP": 42295,
     "PalNextEXP": 20099,
-    "TotalEXP": 472946,
+    "TotalEXP": 388694,
     "PalTotalEXP": 118294
   },
   "34": {
-    "DropEXP": 647,
-    "NextEXP": 96540,
+    "DropEXP": 827,
+    "NextEXP": 46783,
     "PalNextEXP": 24135,
-    "TotalEXP": 569485,
+    "TotalEXP": 435477,
     "PalTotalEXP": 142429
   },
   "35": {
-    "DropEXP": 719,
-    "NextEXP": 115909,
+    "DropEXP": 887,
+    "NextEXP": 51738,
     "PalNextEXP": 28977,
-    "TotalEXP": 685395,
+    "TotalEXP": 487215,
     "PalTotalEXP": 171406
   },
   "36": {
-    "DropEXP": 806,
-    "NextEXP": 139153,
+    "DropEXP": 950,
+    "NextEXP": 57207,
     "PalNextEXP": 34788,
-    "TotalEXP": 824548,
+    "TotalEXP": 544422,
     "PalTotalEXP": 206194
   },
   "37": {
-    "DropEXP": 896,
-    "NextEXP": 167046,
+    "DropEXP": 1018,
+    "NextEXP": 63245,
     "PalNextEXP": 41761,
-    "TotalEXP": 991594,
+    "TotalEXP": 607667,
     "PalTotalEXP": 247955
   },
   "38": {
-    "DropEXP": 1003,
-    "NextEXP": 200517,
+    "DropEXP": 1090,
+    "NextEXP": 69910,
     "PalNextEXP": 50129,
-    "TotalEXP": 1192111,
+    "TotalEXP": 677577,
     "PalTotalEXP": 298084
   },
   "39": {
-    "DropEXP": 1118,
-    "NextEXP": 240683,
+    "DropEXP": 1168,
+    "NextEXP": 77267,
     "PalNextEXP": 60171,
-    "TotalEXP": 1432794,
+    "TotalEXP": 754844,
     "PalTotalEXP": 358255
   },
   "40": {
-    "DropEXP": 1249,
-    "NextEXP": 288881,
+    "DropEXP": 1250,
+    "NextEXP": 85389,
     "PalNextEXP": 72220,
-    "TotalEXP": 1721675,
+    "TotalEXP": 840233,
     "PalTotalEXP": 430475
   },
   "41": {
-    "DropEXP": 1394,
-    "NextEXP": 346719,
+    "DropEXP": 1339,
+    "NextEXP": 94355,
     "PalNextEXP": 86680,
-    "TotalEXP": 2068394,
+    "TotalEXP": 934588,
     "PalTotalEXP": 517155
   },
   "42": {
-    "DropEXP": 1554,
-    "NextEXP": 416125,
+    "DropEXP": 1433,
+    "NextEXP": 104254,
     "PalNextEXP": 104031,
-    "TotalEXP": 2484520,
+    "TotalEXP": 1038842,
     "PalTotalEXP": 621186
   },
   "43": {
-    "DropEXP": 1736,
-    "NextEXP": 499412,
+    "DropEXP": 1534,
+    "NextEXP": 115182,
     "PalNextEXP": 124853,
-    "TotalEXP": 2983932,
+    "TotalEXP": 1154024,
     "PalTotalEXP": 746039
   },
   "44": {
-    "DropEXP": 1940,
-    "NextEXP": 599357,
+    "DropEXP": 1643,
+    "NextEXP": 127245,
     "PalNextEXP": 149839,
-    "TotalEXP": 3583289,
+    "TotalEXP": 1281269,
     "PalTotalEXP": 895878
   },
   "45": {
-    "DropEXP": 2168,
-    "NextEXP": 719290,
+    "DropEXP": 1758,
+    "NextEXP": 140561,
     "PalNextEXP": 179823,
-    "TotalEXP": 4302579,
+    "TotalEXP": 1421830,
     "PalTotalEXP": 1075701
   },
   "46": {
-    "DropEXP": 2422,
-    "NextEXP": 863210,
+    "DropEXP": 1882,
+    "NextEXP": 155260,
     "PalNextEXP": 215803,
-    "TotalEXP": 5165789,
+    "TotalEXP": 1577090,
     "PalTotalEXP": 1291504
   },
   "47": {
-    "DropEXP": 2704,
-    "NextEXP": 1035914,
+    "DropEXP": 2014,
+    "NextEXP": 171487,
     "PalNextEXP": 258979,
-    "TotalEXP": 6201703,
+    "TotalEXP": 1748577,
     "PalTotalEXP": 1550483
   },
   "48": {
-    "DropEXP": 3018,
-    "NextEXP": 1243159,
+    "DropEXP": 2156,
+    "NextEXP": 189400,
     "PalNextEXP": 310790,
-    "TotalEXP": 7444862,
+    "TotalEXP": 1937977,
     "PalTotalEXP": 1861273
   },
   "49": {
-    "DropEXP": 3374,
-    "NextEXP": 1491853,
+    "DropEXP": 2307,
+    "NextEXP": 209174,
     "PalNextEXP": 372963,
-    "TotalEXP": 8936715,
+    "TotalEXP": 2147151,
     "PalTotalEXP": 2234236
   },
   "50": {
-    "DropEXP": 3774,
-    "NextEXP": 1790285,
+    "DropEXP": 2468,
+    "NextEXP": 230983,
     "PalNextEXP": 447571,
-    "TotalEXP": 10727001,
+    "TotalEXP": 2378134,
     "PalTotalEXP": 2681807
   },
   "51": {
-    "DropEXP": 4218,
-    "NextEXP": 2148405,
+    "DropEXP": 2641,
+    "NextEXP": 255059,
     "PalNextEXP": 537101,
-    "TotalEXP": 12875405,
+    "TotalEXP": 2633193,
     "PalTotalEXP": 3218908
   },
   "52": {
-    "DropEXP": 4718,
-    "NextEXP": 2578147,
+    "DropEXP": 2826,
+    "NextEXP": 281635,
     "PalNextEXP": 644537,
-    "TotalEXP": 15453553,
+    "TotalEXP": 2914828,
     "PalTotalEXP": 3863445
   },
   "53": {
-    "DropEXP": 5271,
-    "NextEXP": 3093839,
+    "DropEXP": 3024,
+    "NextEXP": 310972,
     "PalNextEXP": 773460,
-    "TotalEXP": 18547392,
+    "TotalEXP": 3225800,
     "PalTotalEXP": 4636905
   },
   "54": {
-    "DropEXP": 5897,
-    "NextEXP": 3712669,
+    "DropEXP": 3235,
+    "NextEXP": 343356,
     "PalNextEXP": 928167,
-    "TotalEXP": 22260061,
+    "TotalEXP": 3569156,
     "PalTotalEXP": 5565072
   },
   "55": {
-    "DropEXP": 6592,
-    "NextEXP": 4455265,
+    "DropEXP": 3452,
+    "NextEXP": 378104,
     "PalNextEXP": 1113816,
-    "TotalEXP": 26715325,
+    "TotalEXP": 3947260,
     "PalTotalEXP": 6678888
   },
   "56": {
-    "DropEXP": 7374,
-    "NextEXP": 5346379,
+    "DropEXP": 3694,
+    "NextEXP": 417573,
     "PalNextEXP": 1336595,
-    "TotalEXP": 32061705,
+    "TotalEXP": 4364833,
     "PalTotalEXP": 8015483
   },
   "57": {
-    "DropEXP": 8248,
-    "NextEXP": 6415717,
+    "DropEXP": 3945,
+    "NextEXP": 460143,
     "PalNextEXP": 1603929,
-    "TotalEXP": 38477422,
+    "TotalEXP": 4824976,
     "PalTotalEXP": 9619412
   },
   "58": {
-    "DropEXP": 9227,
-    "NextEXP": 7698923,
+    "DropEXP": 4205,
+    "NextEXP": 506239,
     "PalNextEXP": 1924731,
-    "TotalEXP": 46176345,
+    "TotalEXP": 5331215,
     "PalTotalEXP": 11544143
   },
   "59": {
-    "DropEXP": 12227,
-    "NextEXP": 9238769,
+    "DropEXP": 4478,
+    "NextEXP": 556335,
     "PalNextEXP": 2309692,
-    "TotalEXP": 55415114,
+    "TotalEXP": 5887550,
     "PalTotalEXP": 13853835
   },
   "60": {
-    "DropEXP": 15227,
-    "NextEXP": 11086585,
+    "DropEXP": 4765,
+    "NextEXP": 610983,
     "PalNextEXP": 2771646,
-    "TotalEXP": 66501699,
+    "TotalEXP": 6498533,
     "PalTotalEXP": 16625481
   },
   "61": {
-    "DropEXP": 18227,
-    "NextEXP": 13303964,
+    "DropEXP": 5070,
+    "NextEXP": 670817,
     "PalNextEXP": 3325991,
-    "TotalEXP": 79805663,
+    "TotalEXP": 7169350,
     "PalTotalEXP": 19951472
   },
   "62": {
-    "DropEXP": 21227,
-    "NextEXP": 15964819,
+    "DropEXP": 5394,
+    "NextEXP": 736563,
     "PalNextEXP": 3991205,
-    "TotalEXP": 95770482,
+    "TotalEXP": 7905913,
     "PalTotalEXP": 23942677
   },
   "63": {
-    "DropEXP": 24227,
-    "NextEXP": 19157845,
+    "DropEXP": 5742,
+    "NextEXP": 809074,
     "PalNextEXP": 4789461,
-    "TotalEXP": 114928327,
+    "TotalEXP": 8714987,
     "PalTotalEXP": 28732138
   },
   "64": {
-    "DropEXP": 27227,
-    "NextEXP": 22989476,
+    "DropEXP": 6115,
+    "NextEXP": 889276,
     "PalNextEXP": 5747369,
-    "TotalEXP": 137917803,
+    "TotalEXP": 9604263,
     "PalTotalEXP": 34479507
   },
   "65": {
-    "DropEXP": 30227,
-    "NextEXP": 27587433,
+    "DropEXP": 6516,
+    "NextEXP": 977950,
     "PalNextEXP": 6896858,
-    "TotalEXP": 165505236,
+    "TotalEXP": 10582213,
     "PalTotalEXP": 41376365
   },
   "66": {
-    "DropEXP": 33227,
-    "NextEXP": 33104982,
-    "PalNextEXP": 8276245,
-    "TotalEXP": 198610218,
-    "PalTotalEXP": 49652610
+    "DropEXP": 6946,
+    "NextEXP": 1075818,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 11658031,
+    "PalTotalEXP": 48273223
   },
   "67": {
-    "DropEXP": 36227,
-    "NextEXP": 39726040,
-    "PalNextEXP": 9931510,
-    "TotalEXP": 238336258,
-    "PalTotalEXP": 59584120
+    "DropEXP": 7431,
+    "NextEXP": 1187703,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 12845734,
+    "PalTotalEXP": 55170081
   },
   "68": {
-    "DropEXP": 39227,
-    "NextEXP": 47671310,
-    "PalNextEXP": 11917827,
-    "TotalEXP": 286007568,
-    "PalTotalEXP": 71501947
+    "DropEXP": 7949,
+    "NextEXP": 1311213,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 14156947,
+    "PalTotalEXP": 62066939
   },
   "69": {
-    "DropEXP": 42227,
-    "NextEXP": 57205634,
-    "PalNextEXP": 14301408,
-    "TotalEXP": 343213202,
-    "PalTotalEXP": 85803355
+    "DropEXP": 8504,
+    "NextEXP": 1447560,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 15604507,
+    "PalTotalEXP": 68963797
   },
   "70": {
-    "DropEXP": 45227,
-    "NextEXP": 68646823,
-    "PalNextEXP": 17161706,
-    "TotalEXP": 411860024,
-    "PalTotalEXP": 102965061
+    "DropEXP": 9097,
+    "NextEXP": 1598080,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 17202587,
+    "PalTotalEXP": 75860655
   },
   "71": {
-    "DropEXP": 48227,
-    "NextEXP": 82376249,
-    "PalNextEXP": 20594062,
-    "TotalEXP": 494236274,
-    "PalTotalEXP": 123559123
+    "DropEXP": 9732,
+    "NextEXP": 1764244,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 18966831,
+    "PalTotalEXP": 82757513
   },
   "72": {
-    "DropEXP": 51227,
-    "NextEXP": 98851561,
-    "PalNextEXP": 24712890,
-    "TotalEXP": 593087835,
-    "PalTotalEXP": 148272013
+    "DropEXP": 10411,
+    "NextEXP": 1947679,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 20914510,
+    "PalTotalEXP": 89654371
   },
   "73": {
-    "DropEXP": 54227,
-    "NextEXP": 118621935,
-    "PalNextEXP": 29655484,
-    "TotalEXP": 711709770,
-    "PalTotalEXP": 177927497
+    "DropEXP": 11137,
+    "NextEXP": 2150182,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 23064692,
+    "PalTotalEXP": 96551229
   },
   "74": {
-    "DropEXP": 57227,
-    "NextEXP": 142346384,
-    "PalNextEXP": 35586596,
-    "TotalEXP": 854056155,
-    "PalTotalEXP": 213514093
+    "DropEXP": 11913,
+    "NextEXP": 2373734,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 25438426,
+    "PalTotalEXP": 103448087
   },
   "75": {
-    "DropEXP": 60227,
-    "NextEXP": 170815723,
-    "PalNextEXP": 42703931,
-    "TotalEXP": 1024871878,
-    "PalTotalEXP": 256218024
+    "DropEXP": 12744,
+    "NextEXP": 2620524,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 28058950,
+    "PalTotalEXP": 110344945
   },
   "76": {
-    "DropEXP": 63227,
-    "NextEXP": 204978930,
-    "PalNextEXP": 51244732,
-    "TotalEXP": 1229850808,
-    "PalTotalEXP": 307462756
+    "DropEXP": 13633,
+    "NextEXP": 2892960,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 30951910,
+    "PalTotalEXP": 117241803
   },
   "77": {
-    "DropEXP": 66227,
-    "NextEXP": 245974778,
-    "PalNextEXP": 61493694,
-    "TotalEXP": 1475825586,
-    "PalTotalEXP": 368956450
+    "DropEXP": 14584,
+    "NextEXP": 3193698,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 34145608,
+    "PalTotalEXP": 124138661
   },
   "78": {
-    "DropEXP": 69227,
-    "NextEXP": 295169796,
-    "PalNextEXP": 73792449,
-    "TotalEXP": 1770995381,
-    "PalTotalEXP": 442748899
+    "DropEXP": 15601,
+    "NextEXP": 3525662,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 37671270,
+    "PalTotalEXP": 131035519
   },
   "79": {
-    "DropEXP": 72227,
-    "NextEXP": 354203817,
-    "PalNextEXP": 88550954,
-    "TotalEXP": 2125199198,
-    "PalTotalEXP": 531299853
+    "DropEXP": 16688,
+    "NextEXP": 3892088,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 41563358,
+    "PalTotalEXP": 137932377
   },
   "80": {
-    "DropEXP": 75227,
-    "NextEXP": 425044642,
-    "PalNextEXP": 106261161,
-    "TotalEXP": 2550243840,
-    "PalTotalEXP": 637561014
+    "DropEXP": 17851,
+    "NextEXP": 4296550,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 45859908,
+    "PalTotalEXP": 144829235
   },
   "81": {
-    "DropEXP": 78227,
-    "NextEXP": 510053632,
-    "PalNextEXP": 127513408,
-    "TotalEXP": 3060297472,
-    "PalTotalEXP": 765074422
+    "DropEXP": 6430,
+    "NextEXP": 1597050,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 47456958,
+    "PalTotalEXP": 151726093
   },
   "82": {
-    "DropEXP": 81227,
-    "NextEXP": 612064421,
-    "PalNextEXP": 153016105,
-    "TotalEXP": 3672361893,
-    "PalTotalEXP": 918090527
+    "DropEXP": 7539,
+    "NextEXP": 1932430,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 49389388,
+    "PalTotalEXP": 158622951
   },
   "83": {
-    "DropEXP": 84227,
-    "NextEXP": 734477367,
-    "PalNextEXP": 183619342,
-    "TotalEXP": 4406839260,
-    "PalTotalEXP": 1101709869
+    "DropEXP": 8839,
+    "NextEXP": 2338241,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 51727629,
+    "PalTotalEXP": 165519809
   },
   "84": {
-    "DropEXP": 87227,
-    "NextEXP": 881372903,
-    "PalNextEXP": 220343226,
-    "TotalEXP": 5288212163,
-    "PalTotalEXP": 1322053095
+    "DropEXP": 10364,
+    "NextEXP": 2829272,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 54556901,
+    "PalTotalEXP": 172416667
   },
   "85": {
-    "DropEXP": 90227,
-    "NextEXP": 1057647545,
-    "PalNextEXP": 264411886,
-    "TotalEXP": 6345859708,
-    "PalTotalEXP": 1586464981
+    "DropEXP": 12151,
+    "NextEXP": 3423419,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 57980320,
+    "PalTotalEXP": 179313525
   },
   "86": {
-    "DropEXP": 93227,
-    "NextEXP": 1269177116,
-    "PalNextEXP": 317294279,
-    "TotalEXP": 7615036824,
-    "PalTotalEXP": 1903759260
+    "DropEXP": 14247,
+    "NextEXP": 4142337,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 62122657,
+    "PalTotalEXP": 186210383
   },
   "87": {
-    "DropEXP": 96227,
-    "NextEXP": 1523012601,
-    "PalNextEXP": 380753150,
-    "TotalEXP": 9138049425,
-    "PalTotalEXP": 2147483647
+    "DropEXP": 16705,
+    "NextEXP": 5012227,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 67134884,
+    "PalTotalEXP": 193107241
   },
   "88": {
-    "DropEXP": 99227,
-    "NextEXP": 1827615183,
-    "PalNextEXP": 456903796,
-    "TotalEXP": 10965664608,
-    "PalTotalEXP": 2147483647
+    "DropEXP": 19586,
+    "NextEXP": 6064795,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 73199679,
+    "PalTotalEXP": 200004099
   },
   "89": {
-    "DropEXP": 102227,
-    "NextEXP": 2147483647,
-    "PalNextEXP": 548284571,
-    "TotalEXP": 2147483647,
-    "PalTotalEXP": 2147483647
+    "DropEXP": 22965,
+    "NextEXP": 7338401,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 80538080,
+    "PalTotalEXP": 206900957
   },
   "90": {
-    "DropEXP": 105227,
-    "NextEXP": 2147483647,
-    "PalNextEXP": 657941500,
-    "TotalEXP": 2147483647,
-    "PalTotalEXP": 2147483647
+    "DropEXP": 26926,
+    "NextEXP": 8879465,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 89417545,
+    "PalTotalEXP": 213797815
   },
   "91": {
-    "DropEXP": 108227,
-    "NextEXP": 2147483647,
-    "PalNextEXP": 789529816,
-    "TotalEXP": 2147483647,
-    "PalTotalEXP": 2147483647
+    "DropEXP": 32232,
+    "NextEXP": 10744154,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 100161699,
+    "PalTotalEXP": 220694673
   },
   "92": {
-    "DropEXP": 111227,
-    "NextEXP": 2147483647,
-    "PalNextEXP": 947435794,
-    "TotalEXP": 2147483647,
-    "PalTotalEXP": 2147483647
+    "DropEXP": 39001,
+    "NextEXP": 13000426,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 113162125,
+    "PalTotalEXP": 227591531
   },
   "93": {
-    "DropEXP": 114227,
-    "NextEXP": 2147483647,
-    "PalNextEXP": 1136922969,
-    "TotalEXP": 2147483647,
-    "PalTotalEXP": 2147483647
+    "DropEXP": 47192,
+    "NextEXP": 15730516,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 128892641,
+    "PalTotalEXP": 234488389
   },
   "94": {
-    "DropEXP": 117227,
-    "NextEXP": 2147483647,
-    "PalNextEXP": 1364307578,
-    "TotalEXP": 2147483647,
-    "PalTotalEXP": 2147483647
+    "DropEXP": 57102,
+    "NextEXP": 19033924,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 147926565,
+    "PalTotalEXP": 241385247
   },
   "95": {
-    "DropEXP": 120227,
-    "NextEXP": 2147483647,
-    "PalNextEXP": 1637169109,
-    "TotalEXP": 2147483647,
-    "PalTotalEXP": 2147483647
+    "DropEXP": 69093,
+    "NextEXP": 23031048,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 170957613,
+    "PalTotalEXP": 248282105
   },
   "96": {
-    "DropEXP": 123227,
-    "NextEXP": 2147483647,
-    "PalNextEXP": 1964602946,
-    "TotalEXP": 2147483647,
-    "PalTotalEXP": 2147483647
+    "DropEXP": 83603,
+    "NextEXP": 27867568,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 198825181,
+    "PalTotalEXP": 255178963
   },
   "97": {
-    "DropEXP": 126227,
-    "NextEXP": 2147483647,
-    "PalNextEXP": 2147483647,
-    "TotalEXP": 2147483647,
-    "PalTotalEXP": 2147483647
+    "DropEXP": 101159,
+    "NextEXP": 33719758,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 232544939,
+    "PalTotalEXP": 262075821
   },
   "98": {
-    "DropEXP": 129227,
-    "NextEXP": 2147483647,
-    "PalNextEXP": 2147483647,
-    "TotalEXP": 2147483647,
-    "PalTotalEXP": 2147483647
+    "DropEXP": 122403,
+    "NextEXP": 40800906,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 273345845,
+    "PalTotalEXP": 268972679
   },
   "99": {
-    "DropEXP": 132227,
-    "NextEXP": 2147483647,
-    "PalNextEXP": 2147483647,
-    "TotalEXP": 2147483647,
-    "PalTotalEXP": 2147483647
+    "DropEXP": 148107,
+    "NextEXP": 49369096,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 322714941,
+    "PalTotalEXP": 275869537
   },
   "100": {
-    "DropEXP": 135227,
-    "NextEXP": 2147483647,
-    "PalNextEXP": 2147483647,
-    "TotalEXP": 2147483647,
-    "PalTotalEXP": 2147483647
+    "DropEXP": 179210,
+    "NextEXP": 59736607,
+    "PalNextEXP": 6896858,
+    "TotalEXP": 382451548,
+    "PalTotalEXP": 282766395
   }
 }

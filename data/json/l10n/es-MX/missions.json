@@ -13,7 +13,7 @@
   },
   "Main_BuildPalBox": {
     "localized_name": "Primera base",
-    "description": "Abre el menú de construcción con <keyGuideIcon id=|OpenConstructionMenu| iconScale=|0.7|/> y coloca una Caja Pal en un terreno amplio. Esa será tu primera base junto a tus Pals, y si lo acondicionas bien, se convertirá en tu base para futuras expediciones a las torres. Elige con cuidado el lugar de instalación."
+    "description": "Abre el menú de construcción y coloca una Caja Pal en un terreno amplio. Esa será tu primera base junto a tus Pals, y si lo acondicionas bien, se convertirá en tu base para futuras expediciones a las torres. Elige con cuidado el lugar de instalación."
   },
   "Main_BuildWorkBench_Old": {
     "localized_name": "Punto de partida del trabajo",

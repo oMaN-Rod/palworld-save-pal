@@ -25,7 +25,7 @@
   },
   "AncientRelicRecycler": {
     "localized_name": "Conversor de Relíquias Antigas",
-    "description": "Mecanismo de conversão de materiais da antiguidade que reaproveita técnicas de uma civilização perdida. Pode desvendar tecnologias deixadas na forma de |relíquias da civilização antiga| para dar a elas uma nova forma aprimorada. É um recurso indispensável para poder aproveitar relíquias sem nenhum desperdício."
+    "description": "Mecanismo de conversão de materiais da antiguidade que reaproveita técnicas de uma civilização perdida. Pode desvendar tecnologias deixadas na forma de \"relíquias da civilização antiga\" para dar a elas uma nova forma aprimorada. É um recurso indispensável para poder aproveitar relíquias sem nenhum desperdício."
   },
   "AncientWorkBench": {
     "localized_name": "Bancada da Civilização Antiga",
@@ -130,6 +130,10 @@
   "ArcadeVideoGame": {
     "localized_name": "Máquina de Fliperama",
     "description": "Máquina de fliperama para decoração. Não serve para jogar, pois está quebrada."
+  },
+  "Banyan_Big": {
+    "localized_name": "Banyan_Big",
+    "description": null
   },
   "Barrel01_Iron": {
     "localized_name": "Tonel Vermelho",
@@ -359,6 +363,10 @@
     "localized_name": "Boneco de Pancada",
     "description": "Boneco para treino inspirado num Pengullet. Só pode ser colocado em espaços amplos."
   },
+  "DamagedScarecrow_Test": {
+    "localized_name": "DamagedScarecrow_Test",
+    "description": null
+  },
   "DarkIsland_Banner": {
     "localized_name": "Faixa Vertical do Povo Decaído",
     "description": "Faixa vertical do Povo Decaído para decoração."
@@ -368,8 +376,8 @@
     "description": "Estandarte do Povo Decaído para decoração."
   },
   "Decal_PalSticker_PinkCat": {
-    "localized_name": "pt-BR_Text",
-    "description": "pt-BR_Text"
+    "localized_name": "Tuppanyan sticker",
+    "description": null
   },
   "DefenseBowGun": {
     "localized_name": "Besta Fixa",
@@ -735,6 +743,10 @@
     "localized_name": "Fundação de Vidro",
     "description": "Fundação para erigir muros ou instalações. É bastante resistente, pois é feita de vidro reforçado."
   },
+  "Glass_pillars": {
+    "localized_name": "Pilar de Vidro",
+    "description": "Pilar para sustentar a construção. É bastante resistente, pois é feito de vidro reforçado."
+  },
   "Glass_roof": {
     "localized_name": "Telhado de Vidro",
     "description": "Telhado erguido sobre o muro para oferecer proteção contra vento e chuva. É bastante resistente, pois é feito de vidro reforçado."
@@ -757,7 +769,7 @@
   },
   "GoalSoccer_Iron": {
     "localized_name": "Rede de Futebol",
-    "description": "Rede de futebol para decoração. O placar não aumenta mesmo que chute um SheepBall para dentro."
+    "description": "Rede de futebol para decoração. O placar não aumenta mesmo que chute um Lamball para dentro."
   },
   "GuardianDogStatue": {
     "localized_name": "Estátua de Yakumo",
@@ -1111,6 +1123,10 @@
     "localized_name": "Fundação de Metal",
     "description": "Fundação para erigir muros ou instalações. É bastante resistente, pois é feita de metal."
   },
+  "Metal_pillars": {
+    "localized_name": "Pilar de Metal",
+    "description": "Pilar para sustentar a construção. É bastante resistente pois é feito de metal."
+  },
   "Metal_roof": {
     "localized_name": "Telhado de Metal",
     "description": "Telhado erguido sobre o muro para oferecer proteção contra vento e chuva. É bastante resistente, pois é feito de metal."
@@ -1276,8 +1292,8 @@
     "description": "Tapete comprido antigo para decoração."
   },
   "Rug_Wood": {
-    "localized_name": "pt-BR_Text",
-    "description": "pt-BR_Text"
+    "localized_name": "Fur rug",
+    "description": null
   },
   "SF_Chair": {
     "localized_name": "Cadeira de Laboratório",
@@ -1346,6 +1362,10 @@
   "SF_foundation": {
     "localized_name": "Fundação Despojada",
     "description": "Fundação para erigir muros ou instalações. Permite criar construções neofuturistas e despojadas."
+  },
+  "SF_pillars": {
+    "localized_name": "Pilar Despojado",
+    "description": "Pilar para sustentar a construção. Permite criar construções neofuturistas e despojadas."
   },
   "SF_roof": {
     "localized_name": "Telhado Despojado",
@@ -1611,6 +1631,10 @@
     "localized_name": "Fundação de Pedra",
     "description": "Fundação para erigir muros ou instalações. É um tanto resistente, pois é feita de pedra."
   },
+  "Stone_pillar": {
+    "localized_name": "Pilar de Pedra",
+    "description": "Pilar para sustentar a construção. É um tanto resistente pois é feito de pedra."
+  },
   "Stone_roof": {
     "localized_name": "Telhado de Pedra",
     "description": "Telhado erguido sobre o muro para oferecer proteção contra vento e chuva. É um tanto resistente, pois é feito de pedra."
@@ -1808,8 +1832,8 @@
     "description": "Armadilha que congela Pals que pisarem nela. A chance de capturar um Pal congelado com uma esfera aumenta."
   },
   "Trap_MovingPanel": {
-    "localized_name": "pt-BR_Text",
-    "description": "pt-BR_Text"
+    "localized_name": "Moving Panels",
+    "description": "A description of the moving panel"
   },
   "Trap_Noose": {
     "localized_name": "Armadilha de Laço",
@@ -1919,6 +1943,10 @@
     "localized_name": "Escada",
     "description": "Escada para subir em lugares um pouco altos."
   },
+  "Wooden_pillar": {
+    "localized_name": "Pilar de Madeira",
+    "description": "Pilar para sustentar a construção. É frágil por ser feito de madeira."
+  },
   "Wooden_roof": {
     "localized_name": "Telhado de Madeira",
     "description": "Telhado erguido sobre o muro para oferecer proteção contra vento e chuva. É frágil, pois é feito de madeira."
@@ -1954,5 +1982,13 @@
   "Zaisu": {
     "localized_name": "Cadeira sem pernas",
     "description": "Cadeira sem pernas para decoração. Use isto para criar construções em estilo japonês."
+  },
+  "JapaneseStyle_TriangleStairsCorner_02": {
+    "localized_name": "JapaneseStyle_TriangleStairsCorner_02",
+    "description": null
+  },
+  "WoodCreator": {
+    "localized_name": "WoodCreator",
+    "description": null
   }
 }

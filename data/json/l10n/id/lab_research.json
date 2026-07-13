@@ -73,7 +73,7 @@
   },
   "Cool5": {
     "localized_name": "Pengembangan Boneka Salju",
-    "description": null
+    "description": "Membuka Teknologi \"Boneka Salju\""
   },
   "Deforest1": {
     "localized_name": "Tugas Menebang Kayu Level 1",
@@ -145,7 +145,7 @@
   },
   "Deforest4": {
     "localized_name": "Pengembangan Tunggul dan Kapak",
-    "description": null
+    "description": "Membuka Teknologi \"Tunggul dan Kapak\""
   },
   "EmitFlame1": {
     "localized_name": "Tugas Menyalakan Api Level 1",
@@ -225,7 +225,7 @@
   },
   "EmitFlame5": {
     "localized_name": "Pengembangan Kuali Api",
-    "description": null
+    "description": "Membuka Teknologi \"Kuali Api\""
   },
   "GenerateEnergy1": {
     "localized_name": "Tugas Pembangkit Listrik Level 1",
@@ -297,7 +297,7 @@
   },
   "GenerateEnergy5": {
     "localized_name": "Pengembangan Menara Listrik",
-    "description": null
+    "description": "Membuka Teknologi \"Menara Listrik\""
   },
   "Handcraft1": {
     "localized_name": "Kecepatan Pengerjaan Tangan Level 1",
@@ -385,7 +385,7 @@
   },
   "Handcraft5": {
     "localized_name": "Pengembangan Kotak Peralatan Besar",
-    "description": null
+    "description": "Membuka Teknologi \"Kotak Peralatan Besar\""
   },
   "Medicine1": {
     "localized_name": "Tugas Produksi Obat Level 1",
@@ -445,7 +445,7 @@
   },
   "Medicine4": {
     "localized_name": "Pengembangan Kuali Penyihir",
-    "description": null
+    "description": "Membuka Teknologi \"Kuali Penyihir\""
   },
   "Mining1": {
     "localized_name": "Tugas Menambang Level 1",
@@ -521,7 +521,7 @@
   },
   "Mining5": {
     "localized_name": "Pengembangan Kereta Tambang",
-    "description": null
+    "description": "Membuka Teknologi \"Kereta Tambang\""
   },
   "Seeding1": {
     "localized_name": "Tugas Menanam Bibit Level 1",
@@ -593,11 +593,11 @@
   },
   "Seeding4": {
     "localized_name": "Pengembangan Petak Bunga",
-    "description": null
+    "description": "Membuka Teknologi \"Petak Bunga\""
   },
   "Seeding5": {
     "localized_name": "Pengembangan Silo",
-    "description": null
+    "description": "Membuka Teknologi \"Silo\""
   },
   "Watering1": {
     "localized_name": "Tugas Penyiraman Level 1",
@@ -669,6 +669,6 @@
   },
   "Watering5": {
     "localized_name": "Pengembangan Air Mancur",
-    "description": null
+    "description": "Membuka Teknologi \"Air Mancur\""
   }
 }

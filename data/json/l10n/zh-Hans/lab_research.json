@@ -73,7 +73,7 @@
   },
   "Cool5": {
     "localized_name": "雪人研发",
-    "description": null
+    "description": "解锁科技「雪人」"
   },
   "Deforest1": {
     "localized_name": "伐木工作Lv1",
@@ -145,7 +145,7 @@
   },
   "Deforest4": {
     "localized_name": "树桩和斧头研发",
-    "description": null
+    "description": "解锁科技「树桩和斧头」"
   },
   "EmitFlame1": {
     "localized_name": "生火工作Lv1",
@@ -225,7 +225,7 @@
   },
   "EmitFlame5": {
     "localized_name": "圣火台研发",
-    "description": null
+    "description": "解锁科技「圣火台」"
   },
   "GenerateEnergy1": {
     "localized_name": "发电工作Lv1",
@@ -297,7 +297,7 @@
   },
   "GenerateEnergy5": {
     "localized_name": "输电塔研发",
-    "description": null
+    "description": "解锁科技「输电塔」"
   },
   "Handcraft1": {
     "localized_name": "手工作业速度Lv1",
@@ -385,7 +385,7 @@
   },
   "Handcraft5": {
     "localized_name": "大型工具箱研发",
-    "description": null
+    "description": "解锁科技「大型工具箱」"
   },
   "Medicine1": {
     "localized_name": "制药工作Lv1",
@@ -445,7 +445,7 @@
   },
   "Medicine4": {
     "localized_name": "魔女之釜研发",
-    "description": null
+    "description": "解锁科技「魔女之釜」"
   },
   "Mining1": {
     "localized_name": "采矿工作Lv1",
@@ -521,7 +521,7 @@
   },
   "Mining5": {
     "localized_name": "矿车研发",
-    "description": null
+    "description": "解锁科技「矿车」"
   },
   "Seeding1": {
     "localized_name": "播种工作Lv1",
@@ -593,11 +593,11 @@
   },
   "Seeding4": {
     "localized_name": "花坛研发",
-    "description": null
+    "description": "解锁科技「花坛」"
   },
   "Seeding5": {
     "localized_name": "筒仓研发",
-    "description": null
+    "description": "解锁科技「筒仓」"
   },
   "Watering1": {
     "localized_name": "浇水工作Lv1",
@@ -669,6 +669,6 @@
   },
   "Watering5": {
     "localized_name": "喷泉研发",
-    "description": null
+    "description": "解锁科技「喷泉」"
   }
 }

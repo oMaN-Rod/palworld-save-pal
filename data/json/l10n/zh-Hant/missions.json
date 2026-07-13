@@ -13,7 +13,7 @@
   },
   "Main_BuildPalBox": {
     "localized_name": "初始據點",
-    "description": "按下<keyGuideIcon id=|OpenConstructionMenu| iconScale=|0.7|/>開啟建造選單，在空曠的土地上建造帕魯終端吧。 這裡將是你與帕魯共同生活的第一個據點。 妥善經營據點，將它打造成往後冒險時的大本營，等你踏上前往高塔的旅途時，它必將成為你強有力的後盾。 務必慎重選擇建造地點。"
+    "description": "開啟建造選單，在空曠的土地上建造帕魯終端吧。 這裡將是你與帕魯共同生活的第一個據點。 妥善經營據點，將它打造成往後冒險時的大本營，等你踏上前往高塔的旅途時，它必將成為你強有力的後盾。 務必慎重選擇建造地點。"
   },
   "Main_BuildWorkBench_Old": {
     "localized_name": "工作的起點",

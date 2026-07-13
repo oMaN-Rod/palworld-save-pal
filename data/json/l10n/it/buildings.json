@@ -131,6 +131,10 @@
     "localized_name": "Cabinato arcade",
     "description": "Un cabinato arcade da arredo. È rotto, quindi non ci si può giocare."
   },
+  "Banyan_Big": {
+    "localized_name": "Banyan_Big",
+    "description": null
+  },
   "Barrel01_Iron": {
     "localized_name": "Barile in metallo rosso",
     "description": "Barile in metallo rosso per l'arredo."
@@ -345,7 +349,7 @@
   },
   "Crusher": {
     "localized_name": "Pressa",
-    "description": "Una struttura per ridurre in polvere Pietra o Legno e ottenere così altri tipi di risorse. Sono necessari Pal competenti nell'attività |Irrigazione| per usare la ruota idraulica."
+    "description": "Una struttura per ridurre in polvere Pietra o Legno e ottenere così altri tipi di risorse. Sono necessari Pal competenti nell'attività \"Irrigazione\" per usare la ruota idraulica."
   },
   "CrystalPit": {
     "localized_name": "Cava di exoquarzo",
@@ -359,6 +363,10 @@
     "localized_name": "Spaventapasseri danneggiato",
     "description": "Fantoccio da allenamento con le fattezze di Pengullet. Serve uno spazio molto grande."
   },
+  "DamagedScarecrow_Test": {
+    "localized_name": "DamagedScarecrow_Test",
+    "description": null
+  },
   "DarkIsland_Banner": {
     "localized_name": "Striscione del popolo della rovina",
     "description": "Striscione del popolo della rovina per l'arredo."
@@ -368,16 +376,16 @@
     "description": "Vessillo del popolo della rovina per l'arredo."
   },
   "Decal_PalSticker_PinkCat": {
-    "localized_name": "it_Text",
-    "description": "it_Text"
+    "localized_name": "Tuppanyan sticker",
+    "description": null
   },
   "DefenseBowGun": {
     "localized_name": "Balestra a postazione fissa",
-    "description": "Struttura difensiva che può essere utilizzata in combattimento da un Pal. Un Pal competente nell'attività |lavoro manuale| potrà proteggere la base con la balestra."
+    "description": "Struttura difensiva che può essere utilizzata in combattimento da un Pal. Un Pal competente nell'attività \"lavoro manuale\" potrà proteggere la base con la balestra."
   },
   "DefenseMachinegun": {
     "localized_name": "Mitragliatrice a postazione fissa",
-    "description": "Struttura difensiva che può essere utilizzata in combattimento da un Pal. Un Pal competente nell'attività |lavoro manuale| potrà proteggere la base con la mitragliatrice."
+    "description": "Struttura difensiva che può essere utilizzata in combattimento da un Pal. Un Pal competente nell'attività \"lavoro manuale\" potrà proteggere la base con la mitragliatrice."
   },
   "DefenseMachinegun_AutoTurret": {
     "localized_name": "Torretta dell'antica civiltà",
@@ -385,7 +393,7 @@
   },
   "DefenseMissile": {
     "localized_name": "Lanciarazzi a postazione fissa",
-    "description": "Struttura difensiva che può essere utilizzata in combattimento da un Pal. Un Pal competente nell'attività |lavoro manuale| potrà proteggere la base con il lanciarazzi."
+    "description": "Struttura difensiva che può essere utilizzata in combattimento da un Pal. Un Pal competente nell'attività \"lavoro manuale\" potrà proteggere la base con il lanciarazzi."
   },
   "DefenseWait": {
     "localized_name": "Sacco di sabbia",
@@ -417,7 +425,7 @@
   },
   "DismantlingConveyor": {
     "localized_name": "Smantella-Pal",
-    "description": "Una macchina da sogno che |smantella| automaticamente i Pal inseriti."
+    "description": "Una macchina da sogno che \"smantella\" automaticamente i Pal inseriti."
   },
   "DisplayCharacter": {
     "localized_name": "Gabbia di osservazione",
@@ -533,7 +541,7 @@
   },
   "FlourMill": {
     "localized_name": "Mulino",
-    "description": "Una struttura dove lavorare il Grano così da ottenere Farina di grano. Sono necessari Pal competenti nell'attività |Irrigazione| per usare la ruota idraulica."
+    "description": "Una struttura dove lavorare il Grano così da ottenere Farina di grano. Sono necessari Pal competenti nell'attività \"Irrigazione\" per usare la ruota idraulica."
   },
   "FlowerBed": {
     "localized_name": "Aiuola fiorita",
@@ -735,6 +743,10 @@
     "localized_name": "Fondamenta in vetro",
     "description": "Fondamenta su cui edificare muri e strutture. Sono in vetro incredibilmente resistente."
   },
+  "Glass_pillars": {
+    "localized_name": "Pilastro in vetro",
+    "description": "Un pilastro per sostenere l'edificio. È in vetro incredibilmente resistente."
+  },
   "Glass_roof": {
     "localized_name": "Tetto in vetro",
     "description": "Un tetto edificato su dei muri per proteggersi dagli elementi. È in vetro incredibilmente resistente."
@@ -757,7 +769,7 @@
   },
   "GoalSoccer_Iron": {
     "localized_name": "Porta da calcio",
-    "description": "Una porta da calcio per l'arredo. Non si fanno punti, neanche lanciandoci dentro SheepBall."
+    "description": "Una porta da calcio per l'arredo. Non si fanno punti, neanche lanciandoci dentro Lamball."
   },
   "GuardianDogStatue": {
     "localized_name": "Statua di Yakumo",
@@ -797,7 +809,7 @@
   },
   "IceCrusher": {
     "localized_name": "Macinatore criogenico",
-    "description": "Una struttura per ridurre in polvere Minerale metallico e ottenere così altri tipi di risorse. Richiede Pal competenti nell'attività |Refrigerazione| e il collegamento all'alimentazione, ma è davvero efficiente."
+    "description": "Una struttura per ridurre in polvere Minerale metallico e ottenere così altri tipi di risorse. Richiede Pal competenti nell'attività \"Refrigerazione\" e il collegamento all'alimentazione, ma è davvero efficiente."
   },
   "IceHorseStatue": {
     "localized_name": "Statua di Frostallion",
@@ -1111,6 +1123,10 @@
     "localized_name": "Fondamenta in metallo",
     "description": "Fondamenta su cui edificare muri e strutture. Sono in metallo, quindi sono molto resistenti."
   },
+  "Metal_pillars": {
+    "localized_name": "Pilastro in metallo",
+    "description": "Un pilastro per sostenere un edificio. È in metallo, quindi è molto resistente."
+  },
   "Metal_roof": {
     "localized_name": "Tetto in metallo",
     "description": "Un tetto edificato su dei muri per proteggersi dagli elementi. È in metallo, quindi è molto resistente."
@@ -1276,8 +1292,8 @@
     "description": "Tappeto lungo d'antiquariato per l'arredo."
   },
   "Rug_Wood": {
-    "localized_name": "it_Text",
-    "description": "it_Text"
+    "localized_name": "Fur rug",
+    "description": null
   },
   "SF_Chair": {
     "localized_name": "Sedia da laboratorio",
@@ -1346,6 +1362,10 @@
   "SF_foundation": {
     "localized_name": "Fondamenta lucide",
     "description": "Fondamenta su cui edificare muri e strutture. Sono lucide e hanno uno stile futuristico."
+  },
+  "SF_pillars": {
+    "localized_name": "Pilastro lucido",
+    "description": "Un pilastro per sostenere edifici. Lucido, dallo stile futuristico."
   },
   "SF_roof": {
     "localized_name": "Tetto lucido",
@@ -1445,7 +1465,7 @@
   },
   "Shishiodoshi": {
     "localized_name": "Shishi-odoshi",
-    "description": "Dispositivo di bambù |shishi-odoshi| per l'arredo. Adatto ad arredare edifici in stile giapponese."
+    "description": "Dispositivo di bambù \"shishi-odoshi\" per l'arredo. Adatto ad arredare edifici in stile giapponese."
   },
   "Shrine_Lantern": {
     "localized_name": "Lanterna da giardino",
@@ -1610,6 +1630,10 @@
   "Stone_foundation": {
     "localized_name": "Fondamenta in pietra",
     "description": "Fondamenta su cui edificare muri e strutture. Sono in pietra, quindi sono abbastanza resistenti."
+  },
+  "Stone_pillar": {
+    "localized_name": "Pilastro in pietra",
+    "description": "Un pilastro per sostenere un edificio. È in pietra, quindi è abbastanza resistente."
   },
   "Stone_roof": {
     "localized_name": "Tetto in pietra",
@@ -1808,8 +1832,8 @@
     "description": "I Pal che la calpestano vengono congelati. I Pal congelati sono più facili da catturare."
   },
   "Trap_MovingPanel": {
-    "localized_name": "it_Text",
-    "description": "it_Text"
+    "localized_name": "Moving Panels",
+    "description": "A description of the moving panel"
   },
   "Trap_Noose": {
     "localized_name": "Trappola sospesa",
@@ -1919,6 +1943,10 @@
     "localized_name": "Scaletta",
     "description": "Una scaletta con cui raggiungere punti un po' più in alto."
   },
+  "Wooden_pillar": {
+    "localized_name": "Pilastro in legno",
+    "description": "Un pilastro per sostenere un edificio. È in legno, quindi è piuttosto fragile."
+  },
   "Wooden_roof": {
     "localized_name": "Tetto in legno",
     "description": "Un tetto edificato su dei muri per proteggersi dagli elementi. È in legno, quindi è piuttosto fragile."
@@ -1949,10 +1977,18 @@
   },
   "Zabuton": {
     "localized_name": "Zabuton",
-    "description": "Sedile |zabuton| per l'arredo. Adatto ad arredare edifici in stile giapponese."
+    "description": "Sedile \"zabuton\" per l'arredo. Adatto ad arredare edifici in stile giapponese."
   },
   "Zaisu": {
     "localized_name": "Zaisu",
-    "description": "Sedile |zaisu| per l'arredo. Adatto ad arredare edifici in stile giapponese."
+    "description": "Sedile \"zaisu\" per l'arredo. Adatto ad arredare edifici in stile giapponese."
+  },
+  "JapaneseStyle_TriangleStairsCorner_02": {
+    "localized_name": "JapaneseStyle_TriangleStairsCorner_02",
+    "description": null
+  },
+  "WoodCreator": {
+    "localized_name": "WoodCreator",
+    "description": null
   }
 }

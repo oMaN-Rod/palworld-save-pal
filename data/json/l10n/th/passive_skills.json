@@ -597,15 +597,15 @@
   },
   "Deffence_up2": {
     "localized_name": "ร่างบึกบึน",
-    "description": "การป้องกัน +20.0% ไม่มีสะดุ้ง"
+    "description": "การป้องกัน +20% ไม่มีสะดุ้ง"
   },
   "Deffence_up2_2": {
     "localized_name": "ระดับเฮฟวี่เวท",
-    "description": "ป้องกัน+20.0% ต้านการกระเด็น"
+    "description": "ป้องกัน+20% ต้านการกระเด็น"
   },
   "Deffence_up3": {
     "localized_name": "กายเพชร",
-    "description": "การป้องกัน +30.0% ไม่มีสะดุ้ง ไม่มีกระเด็น"
+    "description": "การป้องกัน +30% ไม่มีสะดุ้ง ไม่มีกระเด็น"
   },
   "Defuser_ExplosiveSpore_EquipSkill": {
     "localized_name": "ลดความเสียหายธาตุมังกร%",
@@ -613,7 +613,7 @@
   },
   "ElementBoost_Aqua_1_PAL": {
     "localized_name": "ชอบเล่นน้ำ",
-    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำ10.0%"
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำ10%"
   },
   "ElementBoost_Aqua_2_PAL": {
     "localized_name": "เจ้าสมุทร",
@@ -629,7 +629,7 @@
   },
   "ElementBoost_Dark_1_PAL": {
     "localized_name": "ม่านราตรี",
-    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด10.0%"
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด10%"
   },
   "ElementBoost_Dark_2_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุความมืด ปานกลาง",
@@ -665,7 +665,7 @@
   },
   "ElementBoost_Dragon_1_PAL": {
     "localized_name": "สายเลือดมังกร",
-    "description": "เพิ่มความเสียหายการโจมตีธาตุมังกร10.0%"
+    "description": "เพิ่มความเสียหายการโจมตีธาตุมังกร10%"
   },
   "ElementBoost_Dragon_2_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุมังกร ปานกลาง",
@@ -701,7 +701,7 @@
   },
   "ElementBoost_Earth_1_PAL": {
     "localized_name": "พลังพสุธา",
-    "description": "เพิ่มความเสียหายการโจมตีธาตุดิน10.0%"
+    "description": "เพิ่มความเสียหายการโจมตีธาตุดิน10%"
   },
   "ElementBoost_Earth_2_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุดิน ปานกลาง",
@@ -765,7 +765,7 @@
   },
   "ElementBoost_Fire_1_PAL": {
     "localized_name": "ชอบเล่นไฟ",
-    "description": "เพิ่มความเสียหายการโจมตีธาตุไฟ10.0%"
+    "description": "เพิ่มความเสียหายการโจมตีธาตุไฟ10%"
   },
   "ElementBoost_Fire_2_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุไฟ ปานกลาง",
@@ -801,7 +801,7 @@
   },
   "ElementBoost_Ice_1_PAL": {
     "localized_name": "เลือดเย็น",
-    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำแข็ง10.0%"
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำแข็ง10%"
   },
   "ElementBoost_Ice_2_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุน้ำแข็ง ปานกลาง",
@@ -837,7 +837,7 @@
   },
   "ElementBoost_Leaf_1_PAL": {
     "localized_name": "กลิ่นใบหญ้า",
-    "description": "เพิ่มความเสียหายการโจมตีธาตุพืช10.0%"
+    "description": "เพิ่มความเสียหายการโจมตีธาตุพืช10%"
   },
   "ElementBoost_Leaf_2_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุพืช ปานกลาง",
@@ -873,7 +873,7 @@
   },
   "ElementBoost_Normal_1_PAL": {
     "localized_name": "อนัตตา",
-    "description": "เพิ่มความเสียหายการโจมตีไร้ธาตุ10.0%"
+    "description": "เพิ่มความเสียหายการโจมตีไร้ธาตุ10%"
   },
   "ElementBoost_Normal_2_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายไร้ธาตุ ปานกลาง",
@@ -901,7 +901,7 @@
   },
   "ElementBoost_Thunder_1_PAL": {
     "localized_name": "ตัวเก็บประจุ",
-    "description": "เพิ่มความเสียหายการโจมตีธาตุสายฟ้า10.0%"
+    "description": "เพิ่มความเสียหายการโจมตีธาตุสายฟ้า10%"
   },
   "ElementBoost_Thunder_2_PAL": {
     "localized_name": "เจ้าแห่งอัสนี",
@@ -941,7 +941,7 @@
   },
   "ElementResist_Aqua_1_PAL": {
     "localized_name": "กันน้ำ",
-    "description": "ลดความเสียหายธาตุน้ำ10.0%"
+    "description": "ลดความเสียหายธาตุน้ำ10%"
   },
   "ElementResist_Aqua_2": {
     "localized_name": "ลดความเสียหายธาตุน้ำ Lv2",
@@ -961,7 +961,7 @@
   },
   "ElementResist_Dark_1_PAL": {
     "localized_name": "คนมืดมน",
-    "description": "ลดความเสียหายธาตุความมืด10.0%"
+    "description": "ลดความเสียหายธาตุความมืด10%"
   },
   "ElementResist_Dark_2": {
     "localized_name": "ลดความเสียหายธาตุความมืด Lv2",
@@ -981,7 +981,7 @@
   },
   "ElementResist_Dragon_1_PAL": {
     "localized_name": "ดรากอนคิลเลอร์",
-    "description": "ลดความเสียหายธาตุมังกร10.0%"
+    "description": "ลดความเสียหายธาตุมังกร10%"
   },
   "ElementResist_Dragon_2": {
     "localized_name": "ลดความเสียหายธาตุมังกร Lv2",
@@ -1001,7 +1001,7 @@
   },
   "ElementResist_Earth_1_PAL": {
     "localized_name": "ต้านแผ่นดินไหว",
-    "description": "ลดความเสียหายธาตุดิน10.0%"
+    "description": "ลดความเสียหายธาตุดิน10%"
   },
   "ElementResist_Earth_2": {
     "localized_name": "ลดความเสียหายธาตุดิน Lv2",
@@ -1021,7 +1021,7 @@
   },
   "ElementResist_Fire_1_PAL": {
     "localized_name": "ชอบอาบแดด",
-    "description": "ลดความเสียหายธาตุไฟ10.0%"
+    "description": "ลดความเสียหายธาตุไฟ10%"
   },
   "ElementResist_Fire_2": {
     "localized_name": "ลดความเสียหายธาตุไฟ Lv2",
@@ -1041,7 +1041,7 @@
   },
   "ElementResist_Ice_1_PAL": {
     "localized_name": "ตัวอุ่น",
-    "description": "ลดความเสียหายธาตุน้ำแข็ง10.0%"
+    "description": "ลดความเสียหายธาตุน้ำแข็ง10%"
   },
   "ElementResist_Ice_2": {
     "localized_name": "ลดความเสียหายธาตุน้ำแข็ง Lv2",
@@ -1061,7 +1061,7 @@
   },
   "ElementResist_Leaf_1_PAL": {
     "localized_name": "ต้านวัชพืช",
-    "description": "ลดความเสียหายธาตุพืช10.0%"
+    "description": "ลดความเสียหายธาตุพืช10%"
   },
   "ElementResist_Leaf_2": {
     "localized_name": "ลดความเสียหายธาตุพืช Lv2",
@@ -1081,7 +1081,7 @@
   },
   "ElementResist_Normal_1_PAL": {
     "localized_name": "วิสามัญ",
-    "description": "ลดความเสียหายไร้ธาตุ10.0%"
+    "description": "ลดความเสียหายไร้ธาตุ10%"
   },
   "ElementResist_Normal_2": {
     "localized_name": "ลดความเสียหายไร้ธาตุ Lv2",
@@ -1101,7 +1101,7 @@
   },
   "ElementResist_Thunder_1_PAL": {
     "localized_name": "ฉนวนไฟฟ้า",
-    "description": "ลดความเสียหายธาตุสายฟ้า10.0%"
+    "description": "ลดความเสียหายธาตุสายฟ้า10%"
   },
   "ElementResist_Thunder_2": {
     "localized_name": "ลดความเสียหายธาตุสายฟ้า Lv2",
@@ -1133,7 +1133,7 @@
   },
   "GYM_NAME_Meadow": {
     "localized_name": "ผู้บริหารขบวนการพรานเถื่อน",
-    "description": "พลังโจมตี+20.0% เพิ่มความเร็วเคลื่อนที่10.0%"
+    "description": "พลังโจมตี+20% เพิ่มความเร็วเคลื่อนที่10%"
   },
   "GYM_NAME_Sakurajima": {
     "localized_name": "กลุ่มบุปผาจันทรา ผู้นำ",
@@ -1245,7 +1245,7 @@
   },
   "MutationPal_ExplosionResist": {
     "localized_name": "เกราะเสริมแกร่ง",
-    "description": "ดาเมจระเบิด<Status_Up>ไม่ได้ผล</>"
+    "description": null
   },
   "MutationPal_Immortal": {
     "localized_name": "ผู้ไร้พ่าย",
@@ -1253,7 +1253,7 @@
   },
   "MutationPal_Mutant": {
     "localized_name": "ร่างกายพิเศษ",
-    "description": "ปริมาณการฟื้นคืนค่าพลังชีวิตโดยธรรมชาติของพาลเเละผู้เล่น+50.0% ป้องกัน+{EffectValue4}% ความเสียหายจากสถานะพิษ<Status_Up>ป้องกันได้</> ความเสียหายจากสถานะเพลิง<Status_Up>ป้องกันได้</>"
+    "description": null
   },
   "NightOwl": {
     "localized_name": "อยู่จนดึก",
@@ -1273,7 +1273,7 @@
   },
   "Nushi": {
     "localized_name": "เจ้าถิ่น",
-    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำ20.0% เพิ่มความเสียหายการโจมตีธาตุน้ำแข็ง20.0% พลังป้องกัน+20.0%"
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำ20% เพิ่มความเสียหายการโจมตีธาตุน้ำแข็ง20% พลังป้องกัน+20%"
   },
   "OctaviaArmorVampire": {
     "localized_name": "บลัดฟิวเอล",
@@ -1305,46 +1305,46 @@
   },
   "PAL_FullStomach_Down_1": {
     "localized_name": "กินน้อย",
-    "description": "ค่าความอิ่มลดช้าลง <NumBlue_13>+10.0%</>"
+    "description": "ค่าความอิ่มลดช้าลง +10.0%"
   },
   "PAL_FullStomach_Down_2": {
     "localized_name": "ไดเอ็ตมาสเตอร์",
-    "description": "ค่าความอิ่มลดช้าลง <NumBlue_13>+15.0%</>"
+    "description": "ค่าความอิ่มลดช้าลง +15.0%"
   },
   "PAL_FullStomach_Down_3": {
     "localized_name": "จอมอดอาหาร",
-    "description": "ค่าความอิ่มลดช้าลง <NumBlue_13>+20.0%</>"
+    "description": "ค่าความอิ่มลดช้าลง +20.0%"
   },
   "PAL_FullStomach_Up_1": {
     "localized_name": "ตะกละ",
-    "description": "ค่าความอิ่มลดเร็วขึ้น <NumRed_13>+10.0%</>"
+    "description": "ค่าความอิ่มลดเร็วขึ้น +10.0%"
   },
   "PAL_FullStomach_Up_2": {
     "localized_name": "กระเพาะหลุมดำ",
-    "description": "ค่าความอิ่มลดเร็วขึ้น <NumRed_13>+15.0%</>"
+    "description": "ค่าความอิ่มลดเร็วขึ้น +15.0%"
   },
   "PAL_Sanity_Down_1": {
     "localized_name": "ความคิดแง่บวก",
-    "description": "ค่า SAN ลดช้าลง <NumBlue_13>+10.0%</>"
+    "description": "ค่า SAN ลดช้าลง +10.0%"
   },
   "PAL_Sanity_Down_2": {
     "localized_name": "บ้างาน",
-    "description": "ค่า SAN ลดช้าลง <NumBlue_13>+15.0%</>"
+    "description": "ค่า SAN ลดช้าลง +15.0%"
   },
   "PAL_Sanity_Down_3": {
     "localized_name": "ใจสงบนิ่งไม่หวั่นไหว",
-    "description": "ค่า SAN ลดช้าลง <NumBlue_13>+20.0%</>"
+    "description": "ค่า SAN ลดช้าลง +20.0%"
   },
   "PAL_Sanity_Up_1": {
     "localized_name": "อารมณ์สวิง",
-    "description": "ค่า SAN ลดเร็วขึ้น <NumRed_13>+10.0%</>"
+    "description": "ค่า SAN ลดเร็วขึ้น +10.0%"
   },
   "PAL_Sanity_Up_2": {
     "localized_name": "แนวคิดทำลายล้าง",
-    "description": "ค่า SAN ลดเร็วขึ้น <NumRed_13>+15.0%</>"
+    "description": "ค่า SAN ลดเร็วขึ้น +15.0%"
   },
   "PAL_SpiritualInst": {
-    "localized_name": "-",
+    "localized_name": "Mentally unstable",
     "description": null
   },
   "PAL_conceited": {
@@ -1545,23 +1545,23 @@
   },
   "TrainerATK_UP_1": {
     "localized_name": "ผู้สั่งการบุก",
-    "description": "เพิ่งพลังโจมตีของผู้เล่น10.0%"
+    "description": "เพิ่งพลังโจมตีของผู้เล่น10%"
   },
   "TrainerDEF_UP_1": {
     "localized_name": "เสนาธิการประจำป้อม",
-    "description": "เพิ่งพลังป้องกันของผู้เล่น10.0%"
+    "description": "เพิ่งพลังป้องกันของผู้เล่น10%"
   },
   "TrainerLogging_up1": {
     "localized_name": "หัวหน้าคนตัดไม้",
-    "description": "เพิ่งประสิทธิภาพการตัดไม้ของผู้เล่น25.0%"
+    "description": "เพิ่งประสิทธิภาพการตัดไม้ของผู้เล่น25%"
   },
   "TrainerMining_up1": {
     "localized_name": "หัวหน้าเหมือง",
-    "description": "เพิ่งประสิทธิภาพการขุดแร่ของผู้เล่น25.0%"
+    "description": "เพิ่งประสิทธิภาพการขุดแร่ของผู้เล่น25%"
   },
   "TrainerWorkSpeed_UP_1": {
     "localized_name": "ผู้ปลุกขวัญ",
-    "description": "เพิ่งความเร็วการทำงานของผู้เล่น25.0%"
+    "description": "เพิ่งความเร็วการทำงานของผู้เล่น25%"
   },
   "Vampire": {
     "localized_name": "ผีดูดเลือด",
@@ -1613,35 +1613,35 @@
   },
   "WorkSuitabilityAddRank_MonsterFarm_2": {
     "localized_name": "เจ้าของฟาร์ม",
-    "description": "ความถนัดงาน+2のฟาร์ม"
+    "description": "ความถนัดงาน+2ของฟาร์ม"
   },
   "WorldTree_ATK": {
     "localized_name": "ดาบศักดิ์สิทธิ์สองคม",
-    "description": "การโจมตี<NumBlue_13>+</>50.0% % การป้องกัน-30.0% ต้นไม้โลก - จะไม่หายไปเมื่อเข้าใกล้พฤกษาโลกหรือหิน"
+    "description": "การโจมตี+50% % การป้องกัน-30% ต้นไม้โลก - จะไม่หายไปเมื่อเข้าใกล้พฤกษาโลกหรือหิน"
   },
   "WorldTree_ATK_DEF": {
     "localized_name": "เทพเเห่งการทำลายล้าง",
-    "description": "การโจมตี<NumBlue_13>+</>40.0% +% การป้องกัน<NumBlue_13>+</>20.0% HPสูงสุด-50.0% จะไม่หายไปเมื่อเข้าใกล้พฤกษาโลกหรือหิน"
+    "description": "การโจมตี+40% +% การป้องกัน+20% HPสูงสุด-50% จะไม่หายไปเมื่อเข้าใกล้พฤกษาโลกหรือหิน"
   },
   "WorldTree_CraftSpeed": {
     "localized_name": "มือปีศาจ",
-    "description": "ความเร็วในการทำงาน <NumBlue_13> +</>90.0<NumBlue_13>%</> ค่า SAN ลดลงได้ง่าย <NumRed_13>+15.0%</> ต้นไม้และหินในโลกจะไม่หายไปเมื่อเข้าใกล้"
+    "description": "ความเร็วในการทำงาน +90% ค่า SAN ลดลงได้ง่าย +15.0% ต้นไม้และหินในโลกจะไม่หายไปเมื่อเข้าใกล้"
   },
   "WorldTree_DEF": {
     "localized_name": "โล่มนุษย์แห่งพื้นที่ศักดิ์สิทธิ์",
-    "description": "การป้องกัน<NumBlue_13>+</>50.0% % การโจมตี-30.0% ต้นไม้โลก - จะไม่หายไปเมื่อเข้าใกล้พฤกษาโลกหรือหิน"
+    "description": "การป้องกัน+50% % การโจมตี-30% ต้นไม้โลก - จะไม่หายไปเมื่อเข้าใกล้พฤกษาโลกหรือหิน"
   },
   "WorldTree_FullStomach": {
     "localized_name": "แปลงเพาะต้นไม้",
-    "description": "ความพอใจลดลงช้า <NumBlue_13>+50.0%</> HP -20.0<NumRed_13>%</> ไม่หายไปเมื่อเข้าใกล้พฤษาโลกต้นไม้หรือหิน"
+    "description": "ความพอใจลดลงช้า +50.0% HP -20% ไม่หายไปเมื่อเข้าใกล้พฤษาโลกต้นไม้หรือหิน"
   },
   "WorldTree_MoveSpeed": {
     "localized_name": "กระโดดข้ามมิติ",
-    "description": "ความเร็วในการเคลื่อนที่เพิ่มขึ้น <NumBlue_13>+</>50.0<NumBlue_13>%</> ความหิวลดลงง่ายขึ้น <NumRed_13>+15.0%</> จะไม่หายไปเมื่อเข้าใกล้พฤกษาโลกหรือหิน"
+    "description": "ความเร็วในการเคลื่อนที่เพิ่มขึ้น +50% ความหิวลดลงง่ายขึ้น +15.0% จะไม่หายไปเมื่อเข้าใกล้พฤกษาโลกหรือหิน"
   },
   "WorldTree_Sanity": {
     "localized_name": "ฤาษี",
-    "description": "ค่า SAN ลดลงช้า <NumBlue_13>+50.0%</> ความเร็วในการทำงาน -20.0<NumRed_13> %</> จะไม่หายไปเมื่อเข้าใกล้พฤกษาโลกหรือหิน"
+    "description": "ค่า SAN ลดลงช้า +50.0% ความเร็วในการทำงาน -20 % จะไม่หายไปเมื่อเข้าใกล้พฤกษาโลกหรือหิน"
   },
   "YakushimaDagameBoost_Magic_Equip": {
     "localized_name": "พลังศักดิ์สิทธิ์-เวทย์มนต์",
@@ -1677,6 +1677,282 @@
   },
   "defense_ACC_up4": {
     "localized_name": "เพิ่มพลังป้องกัน Lv4",
+    "description": null
+  },
+  "AccuracyDecrease": {
+    "localized_name": "AccuracyDecrease",
+    "description": null
+  },
+  "AccuracyIncrease": {
+    "localized_name": "AccuracyIncrease",
+    "description": null
+  },
+  "AccuracySuperDecrease": {
+    "localized_name": "AccuracySuperDecrease",
+    "description": null
+  },
+  "BulletSpeed_H": {
+    "localized_name": "BulletSpeed_H",
+    "description": null
+  },
+  "BulletSpeed_L": {
+    "localized_name": "BulletSpeed_L",
+    "description": null
+  },
+  "CollectItem": {
+    "localized_name": "CollectItem",
+    "description": null
+  },
+  "CollectItem_CuteFox": {
+    "localized_name": "CollectItem_CuteFox",
+    "description": null
+  },
+  "CraftSpeed*3": {
+    "localized_name": "CraftSpeed*3",
+    "description": null
+  },
+  "CraftSpeed*5": {
+    "localized_name": "CraftSpeed*5",
+    "description": null
+  },
+  "GiveADark": {
+    "localized_name": "GiveADark",
+    "description": null
+  },
+  "GiveADragon": {
+    "localized_name": "GiveADragon",
+    "description": null
+  },
+  "GiveAEarth": {
+    "localized_name": "GiveAEarth",
+    "description": null
+  },
+  "GiveAElectricity": {
+    "localized_name": "GiveAElectricity",
+    "description": null
+  },
+  "GiveAFire": {
+    "localized_name": "GiveAFire",
+    "description": null
+  },
+  "GiveAIce": {
+    "localized_name": "GiveAIce",
+    "description": null
+  },
+  "GiveALeaf": {
+    "localized_name": "GiveALeaf",
+    "description": null
+  },
+  "GiveAWater": {
+    "localized_name": "GiveAWater",
+    "description": null
+  },
+  "Logging_up1": {
+    "localized_name": "Logging_up1",
+    "description": null
+  },
+  "Logging_up1_Otomo_only": {
+    "localized_name": "Logging_up1_Otomo_only",
+    "description": null
+  },
+  "Logging_up2": {
+    "localized_name": "Logging_up2",
+    "description": null
+  },
+  "Logging_up2_Otomo_only": {
+    "localized_name": "Logging_up2_Otomo_only",
+    "description": null
+  },
+  "Logging_up3": {
+    "localized_name": "Logging_up3",
+    "description": null
+  },
+  "Logging_up4": {
+    "localized_name": "Logging_up4",
+    "description": null
+  },
+  "Logging_up5": {
+    "localized_name": "Logging_up5",
+    "description": null
+  },
+  "MeleeAttack_down1": {
+    "localized_name": "MeleeAttack_down1",
+    "description": null
+  },
+  "MeleeAttack_down2": {
+    "localized_name": "MeleeAttack_down2",
+    "description": null
+  },
+  "MeleeAttack_up1": {
+    "localized_name": "MeleeAttack_up1",
+    "description": null
+  },
+  "MeleeAttack_up2": {
+    "localized_name": "MeleeAttack_up2",
+    "description": null
+  },
+  "Mining_up1": {
+    "localized_name": "Mining_up1",
+    "description": null
+  },
+  "Mining_up1_Otomo_only": {
+    "localized_name": "Mining_up1_Otomo_only",
+    "description": null
+  },
+  "Mining_up2": {
+    "localized_name": "Mining_up2",
+    "description": null
+  },
+  "Mining_up2_Otomo_only": {
+    "localized_name": "Mining_up2_Otomo_only",
+    "description": null
+  },
+  "Mining_up3": {
+    "localized_name": "Mining_up3",
+    "description": null
+  },
+  "Mining_up4": {
+    "localized_name": "Mining_up4",
+    "description": null
+  },
+  "Mining_up5": {
+    "localized_name": "Mining_up5",
+    "description": null
+  },
+  "Mute_1": {
+    "localized_name": "Mute_1",
+    "description": null
+  },
+  "Mute_2": {
+    "localized_name": "Mute_2",
+    "description": null
+  },
+  "Mute_3": {
+    "localized_name": "Mute_3",
+    "description": null
+  },
+  "Mute_4": {
+    "localized_name": "Mute_4",
+    "description": null
+  },
+  "Mute_5": {
+    "localized_name": "Mute_5",
+    "description": null
+  },
+  "PAL_ElementPassive_Test": {
+    "localized_name": "PAL_ElementPassive_Test",
+    "description": null
+  },
+  "PAL_TribePassive_Test": {
+    "localized_name": "PAL_TribePassive_Test",
+    "description": null
+  },
+  "RecoilDecrease": {
+    "localized_name": "RecoilDecrease",
+    "description": null
+  },
+  "RecoilIncrease": {
+    "localized_name": "RecoilIncrease",
+    "description": null
+  },
+  "ShotAttack_down1": {
+    "localized_name": "ShotAttack_down1",
+    "description": null
+  },
+  "ShotAttack_down2": {
+    "localized_name": "ShotAttack_down2",
+    "description": null
+  },
+  "ShotAttack_up1": {
+    "localized_name": "ShotAttack_up1",
+    "description": null
+  },
+  "ShotAttack_up2": {
+    "localized_name": "ShotAttack_up2",
+    "description": null
+  },
+  "StealExpert_1": {
+    "localized_name": "StealExpert_1",
+    "description": null
+  },
+  "StealExpert_2": {
+    "localized_name": "StealExpert_2",
+    "description": null
+  },
+  "StealExpert_3": {
+    "localized_name": "StealExpert_3",
+    "description": null
+  },
+  "StealExpert_4": {
+    "localized_name": "StealExpert_4",
+    "description": null
+  },
+  "Support_down1": {
+    "localized_name": "Support_down1",
+    "description": null
+  },
+  "Support_down2": {
+    "localized_name": "Support_down2",
+    "description": null
+  },
+  "Support_up1": {
+    "localized_name": "Support_up1",
+    "description": null
+  },
+  "Support_up2": {
+    "localized_name": "Support_up2",
+    "description": null
+  },
+  "TestExplosive_H": {
+    "localized_name": "TestExplosive_H",
+    "description": null
+  },
+  "TestExplosive_L": {
+    "localized_name": "TestExplosive_L",
+    "description": null
+  },
+  "TestHoming_H": {
+    "localized_name": "TestHoming_H",
+    "description": null
+  },
+  "TestHoming_L": {
+    "localized_name": "TestHoming_L",
+    "description": null
+  },
+  "TestSkill1": {
+    "localized_name": "TestSkill1",
+    "description": null
+  },
+  "TestSkill2": {
+    "localized_name": "TestSkill2",
+    "description": null
+  },
+  "TestSkill3": {
+    "localized_name": "TestSkill3",
+    "description": null
+  },
+  "TestSkill4": {
+    "localized_name": "TestSkill4",
+    "description": null
+  },
+  "TestSkill5": {
+    "localized_name": "TestSkill5",
+    "description": null
+  },
+  "TestSkill6": {
+    "localized_name": "TestSkill6",
+    "description": null
+  },
+  "TestSkill7": {
+    "localized_name": "TestSkill7",
+    "description": null
+  },
+  "TestSkill8": {
+    "localized_name": "TestSkill8",
+    "description": null
+  },
+  "MoveSpeed_up_1_Otomo_Only_Equip": {
+    "localized_name": "MoveSpeed_up_1_Otomo_Only_Equip",
     "description": null
   }
 }

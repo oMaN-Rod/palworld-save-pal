@@ -13,7 +13,7 @@
   },
   "Accessory_AirDash3": {
     "localized_name": "트리플 에어 대시 부츠",
-    "description": "ko_Text"
+    "description": null
   },
   "Accessory_ExplosionResist": {
     "localized_name": "방폭 속옷",
@@ -125,19 +125,19 @@
   },
   "Arrow": {
     "localized_name": "화살",
-    "description": "활로 발사하는 화살. |원시적인 작업대|에서 제작할 수 있다."
+    "description": "활로 발사하는 화살. \"원시적인 작업대\"에서 제작할 수 있다."
   },
   "Arrow_Fire": {
     "localized_name": "불화살",
-    "description": "활로 발사하는 불화살. 적중한 상대에게 <img id=|ElemIcon_Fire|/><uiCommon id=|COMMON_ELEMENT_NAME_Fire| style=|Elem_Fire|/> 피해를 준다. |원시적인 작업대|에서 제작할 수 있다."
+    "description": "활로 발사하는 불화살. 적중한 상대에게 화염 속성 피해를 준다. \"원시적인 작업대\"에서 제작할 수 있다."
   },
   "Arrow_Poison": {
     "localized_name": "독화살",
-    "description": "활로 발사하는 독화살. 적중한 상대에게 <uiCommon id=|ADDITIONAL_EFFECT_Poison| style=|Effect_Poison|/> 피해를 준다. |원시적인 작업대|에서 제작할 수 있다."
+    "description": "활로 발사하는 독화살. 적중한 상대에게 독 피해를 준다. \"원시적인 작업대\"에서 제작할 수 있다."
   },
   "AssaultRifleBullet": {
     "localized_name": "돌격 소총 탄약",
-    "description": "|돌격 소총| 등에 사용하는 탄. |무기라인 공장|에서 제작할 수 있다."
+    "description": "\"돌격 소총\" 등에 사용하는 탄. \"무기라인 공장\"에서 제작할 수 있다."
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "소형 먹이 주머니",
@@ -189,79 +189,79 @@
   },
   "Battle_Armor_Grade_01_Cloth": {
     "localized_name": "천 옷",
-    "description": "|천|(으)로 만든 옷. 밤의 한기를 막아준다. |원시적인 작업대|에서 제작할 수 있다."
+    "description": "\"천\"(으)로 만든 옷. 밤의 한기를 막아준다. \"원시적인 작업대\"에서 제작할 수 있다."
   },
   "Battle_Armor_Grade_01_Cloth_Cold": {
     "localized_name": "한랭 지방 민속 의상",
-    "description": "한랭 지역에서 생산한 |천 옷|. 몸이 얼 정도의 추위를 막아준다. |원시적인 작업대|에서 제작할 수 있다."
+    "description": "한랭 지역에서 생산한 \"천 옷\". 몸이 얼 정도의 추위를 막아준다. \"원시적인 작업대\"에서 제작할 수 있다."
   },
   "Battle_Armor_Grade_01_Cloth_Heat": {
     "localized_name": "열대 지방 민속 의상",
-    "description": "더운 지역에서 생산한 |천 옷|. 뛰어난 내열성을 자랑한다. |원시적인 작업대|에서 제작할 수 있다."
+    "description": "더운 지역에서 생산한 \"천 옷\". 뛰어난 내열성을 자랑한다. \"원시적인 작업대\"에서 제작할 수 있다."
   },
   "Battle_Armor_Grade_02_Fur": {
     "localized_name": "가죽 갑옷",
-    "description": "|가죽|으로 만든 갑옷. 내구도와 방어력 모두 향상됐다. |상급 작업대|에서 제작할 수 있다."
+    "description": "\"가죽\"으로 만든 갑옷. 내구도와 방어력 모두 향상됐다. \"상급 작업대\"에서 제작할 수 있다."
   },
   "Battle_Armor_Grade_02_Fur_Cold": {
     "localized_name": "내한 모피 갑옷",
-    "description": "한랭 지역에서 생산한 |가죽 갑옷|. 몸이 얼 정도의 추위를 막아준다. |상급 작업대|에서 제작할 수 있다."
+    "description": "한랭 지역에서 생산한 \"가죽 갑옷\". 몸이 얼 정도의 추위를 막아준다. \"상급 작업대\"에서 제작할 수 있다."
   },
   "Battle_Armor_Grade_02_Fur_Heat": {
     "localized_name": "내열 모피 갑옷",
-    "description": "더운 지역에서 생산한 |가죽 갑옷|. 뛰어난 내열성을 자랑한다. |상급 작업대|에서 제작할 수 있다."
+    "description": "더운 지역에서 생산한 \"가죽 갑옷\". 뛰어난 내열성을 자랑한다. \"상급 작업대\"에서 제작할 수 있다."
   },
   "Battle_Armor_Grade_03_Copper": {
     "localized_name": "금속 갑옷",
-    "description": "금속으로 만든 갑옷. 적당한 무게에 적당한 방어력을 갖췄다. |상급 작업대|에서 제작할 수 있다."
+    "description": "금속으로 만든 갑옷. 적당한 무게에 적당한 방어력을 갖췄다. \"상급 작업대\"에서 제작할 수 있다."
   },
   "Battle_Armor_Grade_03_Copper_Cold": {
     "localized_name": "내한 금속 갑옷",
-    "description": "개량형 |금속 갑옷|. 몸이 얼 정도의 추위를 막아준다. |상급 작업대|에서 제작할 수 있다."
+    "description": "개량형 \"금속 갑옷\". 몸이 얼 정도의 추위를 막아준다. \"상급 작업대\"에서 제작할 수 있다."
   },
   "Battle_Armor_Grade_03_Copper_Heat": {
     "localized_name": "내열 금속 갑옷",
-    "description": "개량형 |금속 갑옷|. 뛰어난 내열성을 자랑한다. |상급 작업대|에서 제작할 수 있다."
+    "description": "개량형 \"금속 갑옷\". 뛰어난 내열성을 자랑한다. \"상급 작업대\"에서 제작할 수 있다."
   },
   "Battle_Armor_Grade_03_Iron": {
     "localized_name": "제련 금속 갑옷",
-    "description": "고급 금속으로 만든 갑옷. 상당한 방어력을 자랑하는 만큼 무겁다. |작업라인 공장|에서 제작할 수 있다."
+    "description": "고급 금속으로 만든 갑옷. 상당한 방어력을 자랑하는 만큼 무겁다. \"작업라인 공장\"에서 제작할 수 있다."
   },
   "Battle_Armor_Grade_03_Iron_Cold": {
     "localized_name": "내한 제련 금속 갑옷",
-    "description": "개량형 |제련 금속 갑옷|. 몸이 얼 정도의 추위를 막아준다. |작업라인 공장|에서 제작할 수 있다."
+    "description": "개량형 \"제련 금속 갑옷\". 몸이 얼 정도의 추위를 막아준다. \"작업라인 공장\"에서 제작할 수 있다."
   },
   "Battle_Armor_Grade_03_Iron_Heat": {
     "localized_name": "내열 제련 금속 갑옷",
-    "description": "개량형 |제련 금속 갑옷|. 뛰어난 내열성을 자랑한다. |작업라인 공장|에서 제작할 수 있다."
+    "description": "개량형 \"제련 금속 갑옷\". 뛰어난 내열성을 자랑한다. \"작업라인 공장\"에서 제작할 수 있다."
   },
   "Battle_Armor_Grade_04_Steal": {
     "localized_name": "팰 금속 갑옷",
-    "description": "|팰 금속 주괴|(으)로 만든 갑옷. 터무니없는 방어력을 자랑하지만 매우 무겁다. |작업라인 공장 Ⅱ|에서 제작할 수 있다."
+    "description": "\"팰 금속 주괴\"(으)로 만든 갑옷. 터무니없는 방어력을 자랑하지만 매우 무겁다. \"작업라인 공장 Ⅱ\"에서 제작할 수 있다."
   },
   "Battle_Armor_Grade_04_Steal_Cold": {
     "localized_name": "내한 팰 금속 갑옷",
-    "description": "개량형 |팰 금속 갑옷|. 몸이 얼 정도의 추위를 막아준다. |작업라인 공장 Ⅱ|에서 제작할 수 있다."
+    "description": "개량형 \"팰 금속 갑옷\". 몸이 얼 정도의 추위를 막아준다. \"작업라인 공장 Ⅱ\"에서 제작할 수 있다."
   },
   "Battle_Armor_Grade_04_Steal_Heat": {
     "localized_name": "내열 팰 금속 갑옷",
-    "description": "개량형 |팰 금속 갑옷|. 뛰어난 내열성을 자랑한다. |작업라인 공장 Ⅱ|에서 제작할 수 있다."
+    "description": "개량형 \"팰 금속 갑옷\". 뛰어난 내열성을 자랑한다. \"작업라인 공장 Ⅱ\"에서 제작할 수 있다."
   },
   "Battle_Armor_Grade_05_Plastic": {
     "localized_name": "플라스틸 갑옷",
-    "description": "플라스틸(으)로 만든 갑옷. 방어력 향상은 물론 경량화에도 성공했다. |작업라인 공장 Ⅱ|에서 제작할 수 있다."
+    "description": "플라스틸(으)로 만든 갑옷. 방어력 향상은 물론 경량화에도 성공했다. \"작업라인 공장 Ⅱ\"에서 제작할 수 있다."
   },
   "Battle_Armor_Grade_05_Plastic_Cold": {
     "localized_name": "내한 플라스틸 갑옷",
-    "description": "개량형 |플라스틸 갑옷|. 몸이 얼 정도의 추위를 막아준다. |작업라인 공장 Ⅱ|에서 제작할 수 있다."
+    "description": "개량형 \"플라스틸 갑옷\". 몸이 얼 정도의 추위를 막아준다. \"작업라인 공장 Ⅱ\"에서 제작할 수 있다."
   },
   "Battle_Armor_Grade_05_Plastic_Heat": {
     "localized_name": "내열 플라스틸 갑옷",
-    "description": "개량형 |플라스틸 갑옷|. 뛰어난 내열성을 자랑한다. |작업라인 공장 Ⅱ|에서 제작할 수 있다."
+    "description": "개량형 \"플라스틸 갑옷\". 뛰어난 내열성을 자랑한다. \"작업라인 공장 Ⅱ\"에서 제작할 수 있다."
   },
   "Battle_Armor_Grade_05_Plastic_Weight": {
     "localized_name": "경량 플라스틸 갑옷",
-    "description": "개량형 |플라스틸 갑옷|. 플레이어의 소지 중량 제한이 증가한다. |작업라인 공장 Ⅱ|에서 제작할 수 있다."
+    "description": "개량형 \"플라스틸 갑옷\". 플레이어의 소지 중량 제한이 증가한다. \"작업라인 공장 Ⅱ\"에서 제작할 수 있다."
   },
   "Battle_Cloth": {
     "localized_name": "천",
@@ -269,15 +269,15 @@
   },
   "Battle_Defense_BowGun": {
     "localized_name": "설치형 쇠뇌",
-    "description": "|수작업| 적성을 가진 팰을 배치하면 쇠뇌를 사용해 거점을 수호한다."
+    "description": "\"수작업\" 적성을 가진 팰을 배치하면 쇠뇌를 사용해 거점을 수호한다."
   },
   "Battle_Defense_MachineGun": {
     "localized_name": "설치형 기관총",
-    "description": "|수작업| 적성을 가진 팰을 배치하면 기관총을 사용해 거점을 수호한다."
+    "description": "\"수작업\" 적성을 가진 팰을 배치하면 기관총을 사용해 거점을 수호한다."
   },
   "Battle_Defense_Missile": {
     "localized_name": "설치형 미사일 발사대",
-    "description": "|수작업| 적성을 가진 팰을 배치하면 미사일 발사기를 사용해 거점을 수호한다."
+    "description": "\"수작업\" 적성을 가진 팰을 배치하면 미사일 발사기를 사용해 거점을 수호한다."
   },
   "Battle_Glider_Grade_01": {
     "localized_name": "일반 낙하산",
@@ -301,23 +301,23 @@
   },
   "Battle_Helm_Grade_02_Fur": {
     "localized_name": "깃털 머리 장식",
-    "description": "아름다운 날개 머리 장식. 어쩐지 머리 쪽 치명상을 막아줄 것만 같다. |Workbench|에서 제작할 수 있다."
+    "description": "아름다운 날개 머리 장식. 어쩐지 머리 쪽 치명상을 막아줄 것만 같다. \"원시적인 작업대\"에서 제작할 수 있다."
   },
   "Battle_Helm_Grade_03_Copper": {
     "localized_name": "금속 투구",
-    "description": "금속으로 만든 투구. 사고 능력을 지켜주는 신뢰와 안심의 방어구다. |상급 작업대|에서 제작할 수 있다."
+    "description": "금속으로 만든 투구. 사고 능력을 지켜주는 신뢰와 안심의 방어구다. \"상급 작업대\"에서 제작할 수 있다."
   },
   "Battle_Helm_Grade_04_Iron": {
     "localized_name": "제련 금속 투구",
-    "description": "고급 금속으로 만든 투구. 반짝반짝 윤을 낸 금속 덕분에 자신의 가치가 상승한다. |작업라인 공장|에서 제작할 수 있다."
+    "description": "고급 금속으로 만든 투구. 반짝반짝 윤을 낸 금속 덕분에 자신의 가치가 상승한다. \"작업라인 공장\"에서 제작할 수 있다."
   },
   "Battle_Helm_Grade_05_Steal": {
     "localized_name": "팰 금속 투구",
-    "description": "팰 금속 주괴(으)로 만든 투구. 누구나 부러워할 최상의 품질, 착용자를 선택하는 전사의 증거. |작업라인 공장 Ⅱ|에서 제작할 수 있다."
+    "description": "팰 금속 주괴(으)로 만든 투구. 누구나 부러워할 최상의 품질, 착용자를 선택하는 전사의 증거. \"작업라인 공장 Ⅱ\"에서 제작할 수 있다."
   },
   "Battle_Helm_Grade_06_Plastic": {
     "localized_name": "플라스틸 투구",
-    "description": "플라스틸(으)로 만든 투구. 방어력 향상은 물론 경량화에도 성공했다. |작업라인 공장 Ⅱ|에서 제작할 수 있다."
+    "description": "플라스틸(으)로 만든 투구. 방어력 향상은 물론 경량화에도 성공했다. \"작업라인 공장 Ⅱ\"에서 제작할 수 있다."
   },
   "Battle_MeleeWeapon_Axe_Steal": {
     "localized_name": "팰 금속 도끼",
@@ -337,15 +337,15 @@
   },
   "Battle_MeleeWeapon_Sword": {
     "localized_name": "검",
-    "description": "휘두르는 맛이 일품인 근접 전투용 검. 적에게 접근하는 위험을 감수해야 한다. |무기 제작대|에서 제작할 수 있다."
+    "description": "휘두르는 맛이 일품인 근접 전투용 검. 적에게 접근하는 위험을 감수해야 한다. \"무기 제작대\"에서 제작할 수 있다."
   },
   "Battle_RangeWeapon_AssaultRifle": {
     "localized_name": "돌격 소총",
-    "description": "압도적인 연사력으로 적을 제압하는 돌격 소총. 강력한 상대와 싸우기에 안성맞춤이다. |무기라인 공장|에서 제작할 수 있다."
+    "description": "압도적인 연사력으로 적을 제압하는 돌격 소총. 강력한 상대와 싸우기에 안성맞춤이다. \"무기라인 공장\"에서 제작할 수 있다."
   },
   "Battle_RangeWeapon_Bow1": {
     "localized_name": "오래된 활",
-    "description": "원시적인 원거리 공격 무기. 이것저것 긁어모아 만든 탓에 위력은 떨어진다. |원시적인 작업대|에서 제작할 수 있다."
+    "description": "원시적인 원거리 공격 무기. 이것저것 긁어모아 만든 탓에 위력은 떨어진다. \"원시적인 작업대\"에서 제작할 수 있다."
   },
   "Battle_RangeWeapon_Bow3": {
     "localized_name": "삼연궁",
@@ -353,39 +353,39 @@
   },
   "Battle_RangeWeapon_BowGun": {
     "localized_name": "쇠뇌",
-    "description": "힘들이지 않고 |화살|을(를) 쏠 수 있다. 장전 시간이 걸리지만 강력한 한 발을 쏜다. |상급 작업대|에서 제작할 수 있다."
+    "description": "힘들이지 않고 \"화살\"을(를) 쏠 수 있다. 장전 시간이 걸리지만 강력한 한 발을 쏜다. \"상급 작업대\"에서 제작할 수 있다."
   },
   "Battle_RangeWeapon_CompoundBow": {
     "localized_name": "기계식 활",
     "description": "근대화를 거친 활. 더욱 강력한 화살을 발사할 수 있다."
   },
   "Battle_RangeWeapon_FlameThrower": {
-    "localized_name": "FlameThrower",
-    "description": "긴 사정거리의 불을 뿜는 Flamethrower. 적중한 상대에게 화상을 입힐 수 있다. |무기라인 공장 Ⅱ|에서 제작할 수 있다."
+    "localized_name": "화염방사기",
+    "description": "긴 사정거리의 불을 뿜는 화염방사기. 적중한 상대에게 화상을 입힐 수 있다. \"무기라인 공장 Ⅱ\"에서 제작할 수 있다."
   },
   "Battle_RangeWeapon_GatlingGun": {
     "localized_name": "개틀링 건",
-    "description": "고속 연사로 제압 사격을 할 수 있는 개틀링 건. 사격 범위에 들어온 목표를 벌집으로 만들 수 있다. |무기라인 공장 Ⅱ|에서 제작할 수 있다."
+    "description": "고속 연사로 제압 사격을 할 수 있는 개틀링 건. 사격 범위에 들어온 목표를 벌집으로 만들 수 있다. \"무기라인 공장 Ⅱ\"에서 제작할 수 있다."
   },
   "Battle_RangeWeapon_GrenadeLauncher": {
     "localized_name": "유탄 발사기",
-    "description": "광범위한 폭발을 일으키는 유탄을 발사한다. 많은 적을 상대할 때 유용하다. |무기라인 공장 Ⅱ|에서 제작할 수 있다."
+    "description": "광범위한 폭발을 일으키는 유탄을 발사한다. 많은 적을 상대할 때 유용하다. \"무기라인 공장 Ⅱ\"에서 제작할 수 있다."
   },
   "Battle_RangeWeapon_GuidedMissileLauncher": {
     "localized_name": "미사일 발사기",
-    "description": "적을 자동으로 포착해 추적하는 마사일을 발사한다. 미사일은 적중 시 폭발하여 광범위한 피해를 준다. |무기라인 공장 Ⅱ|에서 제작할 수 있다."
+    "description": "적을 자동으로 포착해 추적하는 마사일을 발사한다. 미사일은 적중 시 폭발하여 광범위한 피해를 준다. \"무기라인 공장 Ⅱ\"에서 제작할 수 있다."
   },
   "Battle_RangeWeapon_HandGun": {
     "localized_name": "핸드건",
-    "description": "장전 수와 연사성이 강화된 권총. 순간 화력이 즉석 핸드건보다도 강하다. |무기 제작대|에서 제작할 수 있다."
+    "description": "장전 수와 연사성이 강화된 권총. 순간 화력이 즉석 핸드건보다도 강하다. \"무기 제작대\"에서 제작할 수 있다."
   },
   "Battle_RangeWeapon_HomingSphereLauncher": {
     "localized_name": "유도형 스피어 발사기",
-    "description": "스피어를 조준해 쏠 수 있는 발사기. 발사된 스피어가 팰을 추적한다. |무기라인 공장 Ⅱ|에서 제작할 수 있다."
+    "description": "스피어를 조준해 쏠 수 있는 발사기. 발사된 스피어가 팰을 추적한다. \"무기라인 공장 Ⅱ\"에서 제작할 수 있다."
   },
   "Battle_RangeWeapon_LaserRifle": {
     "localized_name": "레이저 소총",
-    "description": "레이저를 발사하는 무기. 다루기 쉬우며 화력도 높다. |무기라인 공장 Ⅱ|에서 제작할 수 있다."
+    "description": "레이저를 발사하는 무기. 다루기 쉬우며 화력도 높다. \"무기라인 공장 Ⅱ\"에서 제작할 수 있다."
   },
   "Battle_RangeWeapon_OldRevolver": {
     "localized_name": "낡은 리볼버",
@@ -393,11 +393,11 @@
   },
   "Battle_RangeWeapon_Rifle": {
     "localized_name": "단발식 소총",
-    "description": "삽탄에 다소 시간이 걸리는 단발식 소총. 장전 수는 적지만 한 발 한 발이 강력하다. |무기라인 공장|에서 제작할 수 있다."
+    "description": "삽탄에 다소 시간이 걸리는 단발식 소총. 장전 수는 적지만 한 발 한 발이 강력하다. \"무기라인 공장\"에서 제작할 수 있다."
   },
   "Battle_RangeWeapon_RocketLauncher": {
     "localized_name": "로켓 발사기",
-    "description": "원거리에서 강력한 폭격을 할 수 있는 로켓 발사기. |무기라인 공장 Ⅱ|에서 제작할 수 있다."
+    "description": "원거리에서 강력한 폭격을 할 수 있는 로켓 발사기. \"무기라인 공장 Ⅱ\"에서 제작할 수 있다."
   },
   "Battle_RangeWeapon_SemiAutoRifle": {
     "localized_name": "반자동 소총",
@@ -409,19 +409,19 @@
   },
   "Battle_RangeWeapon_ShotGun": {
     "localized_name": "쌍발 산탄총",
-    "description": "근거리에서 맹위를 떨치는 산탄총. 2발을 연사할 수 있다. 장전 수는 적지만 고화력이다. |무기라인 공장|에서 제작할 수 있다."
+    "description": "근거리에서 맹위를 떨치는 산탄총. 2발을 연사할 수 있다. 장전 수는 적지만 고화력이다. \"무기라인 공장\"에서 제작할 수 있다."
   },
   "Battle_RangeWeapon_ShotGun_Multi": {
     "localized_name": "펌프식 산탄총",
-    "description": "장전 수가 증가해 강력해진 산탄총. 근거리 DPS가 수준급이다. |무기라인 공장|에서 제작할 수 있다."
+    "description": "장전 수가 증가해 강력해진 산탄총. 근거리 DPS가 수준급이다. \"무기라인 공장\"에서 제작할 수 있다."
   },
   "Battle_RangeWeapon_SphereLauncher": {
     "localized_name": "확산형 스피어 발사기",
-    "description": "대량의 스피어를 동시에 발사하는 신형 발사기. 팰 무리를 남획할 수 있다. |무기라인 공장|에서 제작할 수 있다."
+    "description": "대량의 스피어를 동시에 발사하는 신형 발사기. 팰 무리를 남획할 수 있다. \"무기라인 공장\"에서 제작할 수 있다."
   },
   "Battle_RangeWeapon_SphereLauncher_Once": {
     "localized_name": "단발형 스피어 발사기",
-    "description": "스피어를 조준해 쏠 수 있는 발사기. 더 멀리 있는 팰도 포획할 수 있다. |무기 제작대|에서 제작할 수 있다."
+    "description": "스피어를 조준해 쏠 수 있는 발사기. 더 멀리 있는 팰도 포획할 수 있다. \"무기 제작대\"에서 제작할 수 있다."
   },
   "Battle_RangeWeapon_SubmachineGun": {
     "localized_name": "기관단총",
@@ -501,11 +501,11 @@
   },
   "ChargeLaserRifle": {
     "localized_name": "충전식 소총",
-    "description": "ko_Text"
+    "description": null
   },
   "ChargeLaserRifleBullet": {
     "localized_name": "충전식 소총 탄약",
-    "description": "ko_Text"
+    "description": null
   },
   "Clinic": {
     "localized_name": "진료소",
@@ -521,7 +521,7 @@
   },
   "Computer": {
     "localized_name": "컴퓨터",
-    "description": "ko_Text"
+    "description": null
   },
   "Cooler": {
     "localized_name": "얼음 냉방기",
@@ -541,7 +541,7 @@
   },
   "Crusher": {
     "localized_name": "파쇄기",
-    "description": "돌 혹은 목재을(를) 분쇄하여 다른 소재로 변환할 수 있는 시설. 물레방아를 돌리는 |관개| 적성의 팰이 필요하다."
+    "description": "돌 혹은 목재을(를) 분쇄하여 다른 소재로 변환할 수 있는 시설. 물레방아를 돌리는 \"관개\" 적성의 팰이 필요하다."
   },
   "CrystalPit": {
     "localized_name": "헥소 석영 채굴장",
@@ -593,7 +593,7 @@
   },
   "ElecBaton": {
     "localized_name": "기절 배턴",
-    "description": "때려서 감전 상태에 빠뜨리는 근접 무기. 감전된 팰은 포획하기 수월해진다. |상급 작업대|에서 제작할 수 있다."
+    "description": "때려서 감전 상태에 빠뜨리는 근접 무기. 감전된 팰은 포획하기 수월해진다. \"상급 작업대\"에서 제작할 수 있다."
   },
   "ElectricArcAssaultRifle": {
     "localized_name": "플라즈마 소총",
@@ -625,11 +625,11 @@
   },
   "EnergyShotgun": {
     "localized_name": "에너지 산탄총",
-    "description": "ko_Text"
+    "description": null
   },
   "EnergyShotgunBullet": {
     "localized_name": "에너지 산탄총 탄약",
-    "description": "ko_Text"
+    "description": null
   },
   "EnergyStorage_Electric": {
     "localized_name": "축전기",
@@ -693,7 +693,7 @@
   },
   "FlourMill": {
     "localized_name": "제분기",
-    "description": "밀을(를) 빻아 밀가루을(를) 생산할 수 있는 시설. 물레방아를 돌리는 |관개| 적성의 팰이 필요하다."
+    "description": "밀을(를) 빻아 밀가루을(를) 생산할 수 있는 시설. 물레방아를 돌리는 \"관개\" 적성의 팰이 필요하다."
   },
   "FlowerBed": {
     "localized_name": "화단",
@@ -909,7 +909,7 @@
   },
   "GasMask": {
     "localized_name": "부식 안개 마스크",
-    "description": "ko_Text"
+    "description": null
   },
   "GatlingBullet": {
     "localized_name": "개틀링탄",
@@ -953,11 +953,11 @@
   },
   "HandTorch": {
     "localized_name": "휴대형 횃불",
-    "description": "어둠을 밝히고 추위를 녹여 준다. 어느 정도 근접 전투도 가능하다. |원시적인 작업대|에서 제작할 수 있다."
+    "description": "어둠을 밝히고 추위를 녹여 준다. 어느 정도 근접 전투도 가능하다. \"원시적인 작업대\"에서 제작할 수 있다."
   },
   "HandgunBullet": {
     "localized_name": "핸드건 탄약",
-    "description": "|핸드건| 등에 사용하는 탄. |무기 제작대|에서 제작할 수 있다."
+    "description": "\"핸드건\" 등에 사용하는 탄. \"무기 제작대\"에서 제작할 수 있다."
   },
   "Headstone": {
     "localized_name": "묘석",
@@ -985,7 +985,7 @@
   },
   "IceCrusher": {
     "localized_name": "동결 분쇄기",
-    "description": "금속 광석을(를) 분쇄하여 다른 소재로 변환할 수 있는 시설. 작업 효율이 높은 대신, 가동하려면 전력 공급 및 |냉각| 적성을 가진 팰이 필요하다."
+    "description": "금속 광석을(를) 분쇄하여 다른 소재로 변환할 수 있는 시설. 작업 효율이 높은 대신, 가동하려면 전력 공급 및 \"냉각\" 적성을 가진 팰이 필요하다."
   },
   "IceHorseStatue": {
     "localized_name": "빙천마 상",
@@ -1001,15 +1001,15 @@
   },
   "Infra_ItemChest_Grade_01": {
     "localized_name": "나무 궤짝",
-    "description": "아이템을 수납할 수 있다. 거점에 배치하면 |운반| 적성을 가진 팰이 아이템을 자동으로 운반한다."
+    "description": "아이템을 수납할 수 있다. 거점에 배치하면 \"운반\" 적성을 가진 팰이 아이템을 자동으로 운반한다."
   },
   "Infra_ItemChest_Grade_02": {
     "localized_name": "금속 상자",
-    "description": "더 많은 아이템을 수납할 수 있으며 내구도도 상승했다. |운반| 적성을 가진 팰이 아이템을 자동으로 운반한다."
+    "description": "더 많은 아이템을 수납할 수 있으며 내구도도 상승했다. \"운반\" 적성을 가진 팰이 아이템을 자동으로 운반한다."
   },
   "Infra_ItemChest_Grade_03": {
     "localized_name": "제련 금속 상자",
-    "description": "훨씬 많은 아이템을 수납할 수 있으며 내구도도 상승했다. |운반| 적성을 가진 팰이 아이템을 자동으로 운반한다."
+    "description": "훨씬 많은 아이템을 수납할 수 있으며 내구도도 상승했다. \"운반\" 적성을 가진 팰이 아이템을 자동으로 운반한다."
   },
   "Infra_MachineParts": {
     "localized_name": "못",
@@ -1093,11 +1093,11 @@
   },
   "LauncherBullet": {
     "localized_name": "로켓탄",
-    "description": "|로켓 발사기| 등에 사용하는 탄. |무기라인 공장 Ⅱ|에서 제작할 수 있다."
+    "description": "\"로켓 발사기\" 등에 사용하는 탄. \"무기라인 공장 Ⅱ\"에서 제작할 수 있다."
   },
   "Launcher_Meteor": {
     "localized_name": "메테오 발사기",
-    "description": "운석을 가공하여 만든 아주 유별난 무기. 착탄 시 운석과도 같은 폭발을 일으킨다. |무기라인 공장|에서 제작할 수 있다."
+    "description": "운석을 가공하여 만든 아주 유별난 무기. 착탄 시 운석과도 같은 폭발을 일으킨다. \"무기라인 공장\"에서 제작할 수 있다."
   },
   "MakeshiftAssaultRifle": {
     "localized_name": "낡은 돌격 소총",
@@ -1105,7 +1105,7 @@
   },
   "MakeshiftHandgun": {
     "localized_name": "즉석 핸드건",
-    "description": "잡다한 재료로 직접 만든 단발식 권총. 비교적 근거리 전투에 적합하지만, 1발씩밖에 쏘지 못한다. |무기 제작대|에서 제작할 수 있다."
+    "description": "잡다한 재료로 직접 만든 단발식 권총. 비교적 근거리 전투에 적합하지만, 1발씩밖에 쏘지 못한다. \"무기 제작대\"에서 제작할 수 있다."
   },
   "MakeshiftShotgun": {
     "localized_name": "낡은 산탄총",
@@ -1125,7 +1125,7 @@
   },
   "MeatCutterKnife": {
     "localized_name": "푸주칼",
-    "description": "소환 중인 팰을 해체할 수 있는 칼. 장착 중에는 |쓰다듬기|가 |해체|로 변경된다. 해체한 팰은 두 번 다시 돌아오지 않는다."
+    "description": "소환 중인 팰을 해체할 수 있는 칼. 장착 중에는 \"쓰다듬기\"가 \"해체\"로 변경된다. 해체한 팰은 두 번 다시 돌아오지 않는다."
   },
   "MedicalPalBed_04": {
     "localized_name": "대형 팰 침대",
@@ -1177,7 +1177,7 @@
   },
   "Musket": {
     "localized_name": "머스킷",
-    "description": "오래된 느낌의 간소한 총. 한 발의 위력은 강하지만, 재장전이 오래 걸린다. |무기 제작대|에서 제작할 수 있다."
+    "description": "오래된 느낌의 간소한 총. 한 발의 위력은 강하지만, 재장전이 오래 걸린다. \"무기 제작대\"에서 제작할 수 있다."
   },
   "NinjaFlagSet": {
     "localized_name": "달꽃단 깃발 세트",
@@ -1205,15 +1205,15 @@
   },
   "OperatingTable": {
     "localized_name": "팰 수술대",
-    "description": "ko_Text"
+    "description": null
   },
   "OverheatRifle": {
     "localized_name": "전자동 소총",
-    "description": "ko_Text"
+    "description": null
   },
   "OverheatRifleBullet": {
     "localized_name": "전자동 소총 탄약",
-    "description": "ko_Text"
+    "description": null
   },
   "PALBOX": {
     "localized_name": "팰 상자",
@@ -1225,11 +1225,11 @@
   },
   "PalDopingShot": {
     "localized_name": "부스트 건",
-    "description": "ko_Text"
+    "description": null
   },
   "PalDopingShotBullet": {
     "localized_name": "부스트 건 탄약",
-    "description": "ko_Text"
+    "description": null
   },
   "PalDopingShot_2": {
     "localized_name": "메가 부스트 건",
@@ -1241,7 +1241,7 @@
   },
   "PalHealingGrenade": {
     "localized_name": "팰 회복 수류탄",
-    "description": "ko_Text"
+    "description": null
   },
   "PalMedicineBox": {
     "localized_name": "약 선반",
@@ -1289,11 +1289,11 @@
   },
   "Product_Axe_Grade_02": {
     "localized_name": "금속 도끼",
-    "description": "단단한 나무도 벌목할 수 있는 금속제 도끼. 대륙 안쪽에서 자라는 튼튼한 나무 또한 베는 것이 가능하다. |상급 작업대|에서 제작할 수 있다."
+    "description": "단단한 나무도 벌목할 수 있는 금속제 도끼. 대륙 안쪽에서 자라는 튼튼한 나무 또한 베는 것이 가능하다. \"상급 작업대\"에서 제작할 수 있다."
   },
   "Product_Axe_Grade_03": {
     "localized_name": "제련 금속 도끼",
-    "description": "화산과 사막 등 가혹한 지역에서 자라는 나무로부터 |단단한 목재|을(를) 채취할 수 있는 도끼. |작업라인 공장|에서 제작할 수 있다."
+    "description": "화산과 사막 등 가혹한 지역에서 자라는 나무로부터 \"단단한 목재\"을(를) 채취할 수 있는 도끼. \"작업라인 공장\"에서 제작할 수 있다."
   },
   "Product_CoalPit": {
     "localized_name": "석탄 채굴장",
@@ -1309,7 +1309,7 @@
   },
   "Product_Cooking_Grade_03": {
     "localized_name": "전기 부엌",
-    "description": "전기가 필요하지만, 고도로 효율적인 조리를 할 수 있게 된다. 작업하려면 |불 피우기| 적성을 가진 팰이 필요하다."
+    "description": "전기가 필요하지만, 고도로 효율적인 조리를 할 수 있게 된다. 작업하려면 \"불 피우기\" 적성을 가진 팰이 필요하다."
   },
   "Product_CopperPit": {
     "localized_name": "금속 채굴장",
@@ -1321,19 +1321,19 @@
   },
   "Product_Factory_Hard_Grade_01": {
     "localized_name": "상급 작업대",
-    "description": "|원시적인 작업대|보다도 생산 속도가 빠르다. 작업하려면 |수작업| 적성을 가진 팰이 필요하다."
+    "description": "\"원시적인 작업대\"보다도 생산 속도가 빠르다. 작업하려면 \"수작업\" 적성을 가진 팰이 필요하다."
   },
   "Product_Factory_Hard_Grade_02": {
     "localized_name": "작업라인 공장",
-    "description": "전기가 필요하지만 보다 빠르게 다양한 아이템을 생산할 수 있게 된다. 작업하려면 |수작업| 적성을 가진 팰이 필요하다."
+    "description": "전기가 필요하지만 보다 빠르게 다양한 아이템을 생산할 수 있게 된다. 작업하려면 \"수작업\" 적성을 가진 팰이 필요하다."
   },
   "Product_Factory_Hard_Grade_03": {
     "localized_name": "작업라인 공장 Ⅱ",
-    "description": "전기가 필요하지만 더욱 빠르게 다양한 아이템을 생산할 수 있게 된다. 작업하려면 |수작업| 적성을 가진 팰이 필요하다."
+    "description": "전기가 필요하지만 더욱 빠르게 다양한 아이템을 생산할 수 있게 된다. 작업하려면 \"수작업\" 적성을 가진 팰이 필요하다."
   },
   "Product_Farm_Berries": {
     "localized_name": "열매 농원",
-    "description": "열매를 생산하는 농원. 작업하려면 |씨뿌리기|, |물 주기|, |채집| 적성을 가진 팰이 필요하다."
+    "description": "열매를 생산하는 농원. 작업하려면 \"씨뿌리기\", \"물 주기\", \"채집\" 적성을 가진 팰이 필요하다."
   },
   "Product_Farm_Carrot": {
     "localized_name": "당근 농원",
@@ -1341,7 +1341,7 @@
   },
   "Product_Farm_Lettuce": {
     "localized_name": "양상추 농원",
-    "description": "양상추를 생산하는 농원. 작업하려면 |씨뿌리기|, |물 주기|, |채집| 적성을 가진 팰이 필요하다."
+    "description": "양상추를 생산하는 농원. 작업하려면 \"씨뿌리기\", \"물 주기\", \"채집\" 적성을 가진 팰이 필요하다."
   },
   "Product_Farm_Onion": {
     "localized_name": "양파 농원",
@@ -1353,15 +1353,15 @@
   },
   "Product_Farm_tomato": {
     "localized_name": "토마토 농원",
-    "description": "토마토를 생산하는 농원. 작업하려면 |씨뿌리기|, |물 주기|, |채집| 적성을 가진 팰이 필요하다."
+    "description": "토마토를 생산하는 농원. 작업하려면 \"씨뿌리기\", \"물 주기\", \"채집\" 적성을 가진 팰이 필요하다."
   },
   "Product_Farm_wheat": {
     "localized_name": "밀 농원",
-    "description": "|빵|의 원료인 밀을 생산하는 농원. 작업하려면 |씨뿌리기|, |물 주기|, |채집| 적성을 가진 팰이 필요하다."
+    "description": "\"빵\"의 원료인 밀을 생산하는 농원. 작업하려면 \"씨뿌리기\", \"물 주기\", \"채집\" 적성을 가진 팰이 필요하다."
   },
   "Product_Ingot_Grade_01_Copper": {
     "localized_name": "원시적인 화로",
-    "description": "|금속 광석|을(를) 제련해 주괴를 만들 수 있게 된다."
+    "description": "\"금속 광석\"을(를) 제련해 주괴를 만들 수 있게 된다."
   },
   "Product_Ingot_Grade_02_Iron": {
     "localized_name": "개선된 화로",
@@ -1373,11 +1373,11 @@
   },
   "Product_Medicine_Grade_01": {
     "localized_name": "중세 제약대",
-    "description": "간단한 약을 만들 수 있게 된다. 작업하려면 |제약| 적성을 가진 팰이 필요하다."
+    "description": "간단한 약을 만들 수 있게 된다. 작업하려면 \"제약\" 적성을 가진 팰이 필요하다."
   },
   "Product_Medicine_Grade_02": {
     "localized_name": "전기 제약대",
-    "description": "전기가 필요하지만 보다 높은 단계의 약을 만들 수 있게 된다. 작업하려면 |제약| 적성을 가진 팰이 필요하다."
+    "description": "전기가 필요하지만 보다 높은 단계의 약을 만들 수 있게 된다. 작업하려면 \"제약\" 적성을 가진 팰이 필요하다."
   },
   "Product_Pickaxe_Grade_01": {
     "localized_name": "돌 곡괭이",
@@ -1385,11 +1385,11 @@
   },
   "Product_Pickaxe_Grade_02": {
     "localized_name": "금속 곡괭이",
-    "description": "채굴용 곡괭이. 금속으로 만들어 내구도와 효율이 향상됐다. |상급 작업대|에서 제작할 수 있다."
+    "description": "채굴용 곡괭이. 금속으로 만들어 내구도와 효율이 향상됐다. \"상급 작업대\"에서 제작할 수 있다."
   },
   "Product_Pickaxe_Grade_03": {
     "localized_name": "제련 금속 곡괭이",
-    "description": "채굴용 곡괭이. 내구도와 효율이 더욱 향상됐다. |작업라인 공장|에서 제작할 수 있다."
+    "description": "채굴용 곡괭이. 내구도와 효율이 더욱 향상됐다. \"작업라인 공장\"에서 제작할 수 있다."
   },
   "Product_QuartzPit": {
     "localized_name": "순수한 석영 채굴장",
@@ -1397,7 +1397,7 @@
   },
   "Product_StationDeforest": {
     "localized_name": "벌목장",
-    "description": "거점에서 나무를 생산할 수 있게 된다. 작업하려면 |벌목| 적성을 가진 팰이 필요하다."
+    "description": "거점에서 나무를 생산할 수 있게 된다. 작업하려면 \"벌목\" 적성을 가진 팰이 필요하다."
   },
   "Product_StationDeforest2": {
     "localized_name": "벌목장 Ⅱ",
@@ -1405,7 +1405,7 @@
   },
   "Product_StonePit": {
     "localized_name": "채석장",
-    "description": "거점에서 돌을 생산할 수 있게 된다. 작업하려면 |채굴| 적성을 가진 팰이 필요하다."
+    "description": "거점에서 돌을 생산할 수 있게 된다. 작업하려면 \"채굴\" 적성을 가진 팰이 필요하다."
   },
   "Product_SulfurPit": {
     "localized_name": "유황 채굴장",
@@ -1417,11 +1417,11 @@
   },
   "Product_WeaponFactory_Dirty_Grade_02": {
     "localized_name": "무기라인 공장",
-    "description": "전기가 필요하지만 보다 빠르게 무기나 탄약을 생산할 수 있게 된다. 작업하려면 |수작업| 적성을 가진 팰이 필요하다."
+    "description": "전기가 필요하지만 보다 빠르게 무기나 탄약을 생산할 수 있게 된다. 작업하려면 \"수작업\" 적성을 가진 팰이 필요하다."
   },
   "Product_WeaponFactory_Dirty_Grade_03": {
     "localized_name": "무기라인 공장 Ⅱ",
-    "description": "전기가 필요하지만 더욱 빠르게 무기나 탄약을 생산할 수 있게 된다. 작업하려면 |수작업| 적성을 가진 팰이 필요하다."
+    "description": "전기가 필요하지만 더욱 빠르게 무기나 탄약을 생산할 수 있게 된다. 작업하려면 \"수작업\" 적성을 가진 팰이 필요하다."
   },
   "Product_WorkBench_SkillUnlock": {
     "localized_name": "팰 장비 제작대",
@@ -1441,11 +1441,11 @@
   },
   "RifleBullet": {
     "localized_name": "소총 탄약",
-    "description": "소총 등에 사용하는 탄. |무기 제작대|에서 제작할 수 있다."
+    "description": "소총 등에 사용하는 탄. \"무기 제작대\"에서 제작할 수 있다."
   },
   "RoughBullet": {
     "localized_name": "조악한 탄약",
-    "description": "|머스킷|, |즉석 핸드건| 등에 사용하는 탄. |무기 제작대|에서 제작할 수 있다."
+    "description": "\"머스킷\", \"즉석 핸드건\" 등에 사용하는 탄. \"무기 제작대\"에서 제작할 수 있다."
   },
   "SFArmor": {
     "localized_name": "헥소라이트 갑옷",
@@ -1497,19 +1497,19 @@
   },
   "Shield_02": {
     "localized_name": "메가 방패",
-    "description": "팰지움 기술로 탄생한 신비한 방패. 시제품을 개선해 방어력이 증가했다. |상급 작업대|에서 만들 수 있다."
+    "description": "팰지움 기술로 탄생한 신비한 방패. 시제품을 개선해 방어력이 증가했다. \"상급 작업대\"에서 만들 수 있다."
   },
   "Shield_03": {
     "localized_name": "기가 방패",
-    "description": "팰지움 기술로 탄생한 신비한 방패. 개량을 거쳐 성능이 더욱 향상됐다. |작업라인 공장|에서 제작할 수 있다."
+    "description": "팰지움 기술로 탄생한 신비한 방패. 개량을 거쳐 성능이 더욱 향상됐다. \"작업라인 공장\"에서 제작할 수 있다."
   },
   "Shield_04": {
     "localized_name": "테라 방패",
-    "description": "팰지움 기술로 탄생한 신비한 방패. 실험을 거듭한 결과 품질 면에서 최고봉에 도달했다. |작업라인 공장 Ⅱ|에서 제작할 수 있다."
+    "description": "팰지움 기술로 탄생한 신비한 방패. 실험을 거듭한 결과 품질 면에서 최고봉에 도달했다. \"작업라인 공장 Ⅱ\"에서 제작할 수 있다."
   },
   "Shield_05": {
     "localized_name": "울트라 방패",
-    "description": "팰지움 기술로 탄생한 신비한 방패. 실험을 더욱 거듭한 결과 품질 면에서 궁극에 도달했다. |작업라인 공장 Ⅱ|에서 제작할 수 있다."
+    "description": "팰지움 기술로 탄생한 신비한 방패. 실험을 더욱 거듭한 결과 품질 면에서 궁극에 도달했다. \"작업라인 공장 Ⅱ\"에서 제작할 수 있다."
   },
   "Shield_07": {
     "localized_name": "고대 방패",
@@ -1521,7 +1521,7 @@
   },
   "ShotGunBullet": {
     "localized_name": "산탄총 탄약",
-    "description": "산탄총 등에 사용하는 탄. |무기 제작대|에서 제작할 수 있다."
+    "description": "산탄총 등에 사용하는 탄. \"무기 제작대\"에서 제작할 수 있다."
   },
   "Signboard": {
     "localized_name": "간판",
@@ -2093,7 +2093,7 @@
   },
   "Spa": {
     "localized_name": "온천",
-    "description": "팰이 |온천|에 들어가 SAN 수치를 회복한다."
+    "description": "팰이 \"온천\"에 들어가 SAN 수치를 회복한다."
   },
   "Spa2": {
     "localized_name": "고급 온천",
@@ -2109,11 +2109,11 @@
   },
   "Spear_2": {
     "localized_name": "금속 창",
-    "description": "근접 전투에서 유용한 창. 금속으로 만들어 공격력이 더 높다. |상급 작업대|에서 제작할 수 있다."
+    "description": "근접 전투에서 유용한 창. 금속으로 만들어 공격력이 더 높다. \"상급 작업대\"에서 제작할 수 있다."
   },
   "Spear_3": {
     "localized_name": "제련 금속 창",
-    "description": "근접 전투에서 유용한 창. 고급 금속으로 만들어 공격력이 더욱 향상되었다. |작업라인 공장|에서 제작할 수 있다."
+    "description": "근접 전투에서 유용한 창. 고급 금속으로 만들어 공격력이 더욱 향상되었다. \"작업라인 공장\"에서 제작할 수 있다."
   },
   "Spear_ForestBoss": {
     "localized_name": "릴리의 창",
@@ -2141,39 +2141,39 @@
   },
   "Special_PalSphere_Grade_02": {
     "localized_name": "메가 스피어",
-    "description": "던져서 팰을 포획하는 도구. 성능이 향상돼 포획 가능한 팰의 범위가 넓어졌다. |스피어 제작대|에서 제작할 수 있다."
+    "description": "던져서 팰을 포획하는 도구. 성능이 향상돼 포획 가능한 팰의 범위가 넓어졌다. \"스피어 제작대\"에서 제작할 수 있다."
   },
   "Special_PalSphere_Grade_03": {
     "localized_name": "기가 스피어",
-    "description": "던져서 팰을 포획하는 도구. 어느 정도 강력한 팰도 잡을 수 있다. |스피어 제작대|에서 제작할 수 있다."
+    "description": "던져서 팰을 포획하는 도구. 어느 정도 강력한 팰도 잡을 수 있다. \"스피어 제작대\"에서 제작할 수 있다."
   },
   "Special_PalSphere_Grade_04": {
     "localized_name": "테라 스피어",
-    "description": "던져서 팰을 포획하는 도구. 꽤 강력한 팰도 잡을 수 있다. |스피어라인 공장|에서 제작할 수 있다."
+    "description": "던져서 팰을 포획하는 도구. 꽤 강력한 팰도 잡을 수 있다. \"스피어라인 공장\"에서 제작할 수 있다."
   },
   "Special_PalSphere_Grade_05": {
     "localized_name": "울트라 스피어",
-    "description": "던져서 팰을 포획하는 도구. 상당한 성능 덕에 도망칠 수 있는 팰이 별로 없다. |스피어라인 공장 Ⅱ|에서 제작할 수 있다."
+    "description": "던져서 팰을 포획하는 도구. 상당한 성능 덕에 도망칠 수 있는 팰이 별로 없다. \"스피어라인 공장 Ⅱ\"에서 제작할 수 있다."
   },
   "Special_PalSphere_Grade_06": {
     "localized_name": "전설 스피어",
-    "description": "던져서 팰을 포획하는 도구. 포획 성능이 크게 향상되어, 도망칠 수 있는 팰은 거의 없을 정도이다. |스피어라인 공장 Ⅱ|에서 제작할 수 있다."
+    "description": "던져서 팰을 포획하는 도구. 포획 성능이 크게 향상되어, 도망칠 수 있는 팰은 거의 없을 정도이다. \"스피어라인 공장 Ⅱ\"에서 제작할 수 있다."
   },
   "Special_PalSphere_Grade_07": {
     "localized_name": "얼티밋 스피어",
-    "description": "던져서 팰을 포획하는 도구. 압도적인 성능을 자랑하며, 거의 모든 팰을 잡을 수 있다. |스피어라인 공장 Ⅱ|에서 제작할 수 있다."
+    "description": "던져서 팰을 포획하는 도구. 압도적인 성능을 자랑하며, 거의 모든 팰을 잡을 수 있다. \"스피어라인 공장 Ⅱ\"에서 제작할 수 있다."
   },
   "Special_SphereFactory_Black_Grade_01": {
     "localized_name": "스피어 제작대",
-    "description": "팰 포획용 스피어 제작 작업대. 제작하려면 |수작업| 적성을 가진 팰이 필요하다."
+    "description": "팰 포획용 스피어 제작 작업대. 제작하려면 \"수작업\" 적성을 가진 팰이 필요하다."
   },
   "Special_SphereFactory_Black_Grade_02": {
     "localized_name": "스피어라인 공장",
-    "description": "빠르게 |팰 스피어|을(를) 생산할 수 있게 된다. 작업하려면 |수작업| 적성을 가진 팰이 필요하다."
+    "description": "빠르게 \"팰 스피어\"을(를) 생산할 수 있게 된다. 작업하려면 \"수작업\" 적성을 가진 팰이 필요하다."
   },
   "Special_SphereFactory_Black_Grade_03": {
     "localized_name": "스피어라인 공장 Ⅱ",
-    "description": "더욱 빠르게 |팰 스피어|을(를) 생산할 수 있게 된다. 작업하려면 |수작업| 적성을 가진 팰이 필요하다."
+    "description": "더욱 빠르게 \"팰 스피어\"을(를) 생산할 수 있게 된다. 작업하려면 \"수작업\" 적성을 가진 팰이 필요하다."
   },
   "SphereFactory_Black_04": {
     "localized_name": "고도 문명 스피어 공장",
@@ -2292,7 +2292,7 @@
     "description": "가지고 있으면 금 열쇠필요한 보물 상자의 자물쇠를 억지로 딸 수 있게 된다. 아무리 많이 써도 고장 나지 않는다."
   },
   "WallSignboard": {
-    "localized_name": "WallSignBoard",
+    "localized_name": "벽걸이 간판",
     "description": "문자를 쓸 수 있는 간판. 벽에 걸 수 있다."
   },
   "WallTorch": {
@@ -2341,7 +2341,7 @@
   },
   "Workbench": {
     "localized_name": "원시적인 작업대",
-    "description": "간단한 아이템을 제작하는 |원시적인 작업대|. |수작업| 적성을 가진 팰이 있다면 작업을 도와준다."
+    "description": "간단한 아이템을 제작하는 \"원시적인 작업대\". \"수작업\" 적성을 가진 팰이 있다면 작업을 도와준다."
   },
   "WorldTreeIngot": {
     "localized_name": "팰키사이트 주괴",

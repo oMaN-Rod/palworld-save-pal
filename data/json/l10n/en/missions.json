@@ -13,7 +13,7 @@
   },
   "Main_BuildPalBox": {
     "localized_name": "Starting Base",
-    "description": "Open the Build menu with <keyGuideIcon id=|OpenConstructionMenu| iconScale=|0.7|/> and place a Palbox on a wide, open stretch of land. This will be your first base with your Pals—your launch point for future expeditions. If you maintain it well, it will become a vital stronghold when the time comes to face a tower, so choose your location carefully."
+    "description": "Open the Build menu and place a Palbox on a wide, open stretch of land. This will be your first base with your Pals—your launch point for future expeditions. If you maintain it well, it will become a vital stronghold when the time comes to face a tower, so choose your location carefully."
   },
   "Main_BuildWorkBench_Old": {
     "localized_name": "Base of Operations",
@@ -45,7 +45,7 @@
   },
   "Main_CatchPal": {
     "localized_name": "Catching a Pal",
-    "description": "Making Pal Spheres and Capturing Pals As you may have noticed, this island is home to a variety of strange creatures. Known as |Pals,| these intelligent creatures come in a wide range of shapes and sizes. Of course, our activities here would benefit greatly if we were able to harness their abilities. Pals can be captured by a |Pal Sphere|. While the exact principles are still unclear, it's possible to tame any Pal by catching it with a Sphere. First, check the Technology screen for details, then obtain the Paldium Fragment required for crafting. This strange ore glows with a pale blue light, and is often found near sources of water. Once you finish building your Spheres on a Workbench, you're set to go. Make sure to wear down the Pal you want to capture. Lowering their Health will increase the chances of a successful capture. That being said, most Pals will resist capture, and will fight back. Start by focusing on smaller, weaker Pals until you get better equipment."
+    "description": "Making Pal Spheres and Capturing Pals As you may have noticed, this island is home to a variety of strange creatures. Known as \"Pals,\" these intelligent creatures come in a wide range of shapes and sizes. Of course, our activities here would benefit greatly if we were able to harness their abilities. Pals can be captured by a \"Pal Sphere\". While the exact principles are still unclear, it's possible to tame any Pal by catching it with a Sphere. First, check the Technology screen for details, then obtain the Paldium Fragment required for crafting. This strange ore glows with a pale blue light, and is often found near sources of water. Once you finish building your Spheres on a Workbench, you're set to go. Make sure to wear down the Pal you want to capture. Lowering their Health will increase the chances of a successful capture. That being said, most Pals will resist capture, and will fight back. Start by focusing on smaller, weaker Pals until you get better equipment."
   },
   "Main_CollectCrystal": {
     "localized_name": "Paldium",

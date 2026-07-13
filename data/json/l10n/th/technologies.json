@@ -1,1 +1,2354 @@
-{}
+{
+  "AIcore": {
+    "localized_name": "แกน AI",
+    "description": null
+  },
+  "Accessory_AirDash1": {
+    "localized_name": "บู๊ตแดชกลางอากาศ",
+    "description": null
+  },
+  "Accessory_AirDash2": {
+    "localized_name": "บู๊ตแดชกลางอากาศสองขั้น",
+    "description": null
+  },
+  "Accessory_AirDash3": {
+    "localized_name": "บู๊ตแดชกลางอากาศสามชั้น",
+    "description": null
+  },
+  "Accessory_ExplosionResist": {
+    "localized_name": "เสื้อในกันระเบิด",
+    "description": null
+  },
+  "Accessory_JumpCount_Increase1": {
+    "localized_name": "บู๊ตกระโดดสองขั้น",
+    "description": null
+  },
+  "Accessory_JumpCount_Increase2": {
+    "localized_name": "บู๊ตกระโดดสามขั้น",
+    "description": null
+  },
+  "Accessory_JumpPower_Increase": {
+    "localized_name": "เข็มขัดต้านแรงโน้มถ่วง",
+    "description": null
+  },
+  "Accessory_Nonkilling": {
+    "localized_name": "แหวนออมมือ",
+    "description": null
+  },
+  "Accessory_TalentChecker": {
+    "localized_name": "แว่นศักยภาพ",
+    "description": null
+  },
+  "AdditionalInventory_001": {
+    "localized_name": "กระเป๋าขยายช่องขนาดเล็ก",
+    "description": null
+  },
+  "AdditionalInventory_002": {
+    "localized_name": "กระเป๋าขยายช่องขนาดกลาง",
+    "description": null
+  },
+  "AdditionalInventory_003": {
+    "localized_name": "กระเป๋าขยายช่องขนาดใหญ่",
+    "description": null
+  },
+  "AdditionalInventory_004": {
+    "localized_name": "กระเป๋าขยายช่องขนาดใหญ่มาก",
+    "description": null
+  },
+  "Altar": {
+    "localized_name": "แท่นอัญเชิญ",
+    "description": null
+  },
+  "AncientArmor": {
+    "localized_name": "เกราะโบราณ",
+    "description": "เกราะโบราณที่ทำจากโลหะหลอมแท่ง Solite ใช้เทคโนโลยีของอารยธรรมที่หายสาบสูญ ทำให้ป้องกันได้ดีมาก แข็งแกร่งพอจะสู้กับภัยร้ายแรงระดับใหญ่ได้ เป็นเกราะขั้นสุดยอด"
+  },
+  "AncientArmorCold": {
+    "localized_name": "เกราะโบราณทนความเย็น",
+    "description": "เกราะโบราณได้รับการปรับปรุงให้ดีขึ้น ด้วยเทคโนโลยีโบราณ ทำให้กันหนาวได้ดียิ่งขึ้น แม้อยู่ในที่หนาวจัด ก็ยังคงประสิทธิภาพได้"
+  },
+  "AncientArmorHeat": {
+    "localized_name": "เกราะโบราณทนความร้อน",
+    "description": "เกราะโบราณได้รับการปรับปรุงให้ดีขึ้น ด้วยเทคโนโลยีโบราณ ทำให้ทนความร้อนได้มากขึ้น แม้อยู่ในสภาพแวดล้อมที่ร้อนจัด"
+  },
+  "AncientArmorWeight": {
+    "localized_name": "เกราะโบราณน้ำหนักเบา",
+    "description": "เกราะโบราณได้รับการปรับปรุงให้ดีขึ้น ติดตั้งระบบช่วยเสริมแบบโบราณ ทำให้ขนของได้มากขึ้น"
+  },
+  "AncientBlastFurnace": {
+    "localized_name": "เตาหลอมแห่งอารยธรรมโบราณ",
+    "description": "เตาหลอมพิเศษจากเทคโนโลยีโบราณ ใช้หลอมแท่งโลหะทุกชนิด ใช้ความร้อนจากไฟหลอม แล้วใช้ความเย็นแช่แข็งให้แข็งตัวเร็ว ต้องใช้พาลที่ควบคุมไฟและพาลที่ควบคุมความเย็นในการทำงาน"
+  },
+  "AncientCookingStove": {
+    "localized_name": "ห้องครัวสมัยอารยธรรมโบราณ",
+    "description": "เสามารถสร้างได้ตั้งแต่อาหารที่มีอยู่เดิมไปจนถึงเมนูใหม่ที่ไม่เคยมีมาก่อน ครัวแห่งอารยธรรมโบราณ กักเก็บความร้อนด้วยเปลวไฟ และใช้การทำงานด้วยมือเพื่อปรุงแต่งขั้นสุดท้าย ทำให้อาหารทุกชนิดเสร็จสมบูรณ์ ในการใช้งาน จำเป็นต้องมีพาลที่มีความถนัดด้านการก่อไฟระดับสูง และความถนัดด้านงานฝีมือด้วยมือ"
+  },
+  "AncientElectricGenerator": {
+    "localized_name": "เครื่องผลิตไฟฟ้าแห่งอารยธรรมโบราณ",
+    "description": "เครื่องผลิตไฟฟ้าประสิทธิภาพสูงจากเทคโนโลยีโบราณที่สูญหายไป ผลิตไฟฟ้าได้มหาศาล แต่มีความเสี่ยงที่จะเกิดความร้อนสูงเกินไประหว่างการทำงาน นอกเหนือจากพาลที่มีความสามารถในการผลิตพลังงานสูงแล้ว การเดินเครื่องยังต้องการพาลที่มีความสามารถในการรดน้ำด้วย"
+  },
+  "AncientFarmBlock": {
+    "localized_name": "เครื่องเพาะปลูกแห่งอารยธรรมโบราณ",
+    "description": "เครื่องปลูกพืชจากอารยธรรมโบราณใช้พลังของพฤกษาโลก ปลูกพืชทุกชนิดของเกาะได้ ขนาดเล็กตั้งในบ้านได้ แต่ขั้นตอนการปลูกเหมือนเดิม ต้องใช้พาลที่เก่งเรื่องหว่านเมล็ดและรดน้ำในการทำงาน"
+  },
+  "AncientHelmet": {
+    "localized_name": "หมวกเกราะโบราณ",
+    "description": "หมวกเกราะโบราณที่ถูกทำขึ้นจากโลหะหลอมแท่ง Solite สั่งสมภูมิปัญญาที่สืบทอดมาอย่างยาวนาน ช่วยปกป้องผู้สวมใส่อย่างแข็งแกร่ง พลังป้องกันเหนือกว่าอุปกรณ์สมัยใหม่มาก"
+  },
+  "AncientMultiProduct": {
+    "localized_name": "เครื่องสร้างสสารแห่งอารยธรรมโบราณ",
+    "description": "เครื่องสร้างทรัพยากรแห่งอารยธรรมโบราณ ที่ใช้พลังแห่งพฤกษาโลกเพื่อผลิตไม้และแร่ธาตุทุกชนิด สามารถเลือกรับทรัพยากรที่ต้องการได้ตามใจชอบ แต่ประสิทธิภาพในการขุดแร่จะไม่ต่างจากสิ่งปลูกสร้างทั่วไป เนื่องจากมีโครงสร้างที่ซับซ้อน จึงสามารถมอบหมายงานให้พาลได้เพียง 1 ตัวเท่านั้น"
+  },
+  "AncientRelicRecycler": {
+    "localized_name": "เครื่องแลกเปลี่ยนโบราณวัตถุสมัยอารยธรรมโบราณ",
+    "description": null
+  },
+  "AncientWorkBench": {
+    "localized_name": "โต๊ะทำงานฝีมือแห่งอารยธรรมโบราณ",
+    "description": "สถานที่ผลิตสำหรับพาล ใช้ทำไอเทมได้ทุกอย่างในที่เดียว ผู้เล่นใช้งานเองไม่ได้ และความเร็วก็เท่ากับเครื่องปกติ ต้องใช้พาลที่มีฝีมือการปรุงยาระดับสูงถึงจะใช้งานได้"
+  },
+  "Ancient_Clinic": {
+    "localized_name": "ห้องตรวจแห่งอารยธรรมโบราณ",
+    "description": null
+  },
+  "Ancient_Houseset": {
+    "localized_name": "เซ็ตสิ่งก่อสร้างอารยธรรมโบราณ",
+    "description": "เซ็ตสิ่งปลูกสร้างจากอารยธรรมโบราณ สำหรับใช้สร้างรากฐาน สามารถสร้างได้ทั้งพื้น ผนัง หลังคา บันได มีครบทุกอย่างที่ต้องใช้ในการสร้างบ้าน"
+  },
+  "Ancient_MedicalPalBed": {
+    "localized_name": "ช่องทางเดินพาลแห่งอารยธรรมโบราณ",
+    "description": null
+  },
+  "Ancient_Spa": {
+    "localized_name": "ออนเซ็นอารยธรรมโบราณ",
+    "description": null
+  },
+  "Arrow": {
+    "localized_name": "ลูกศร",
+    "description": "ลูกศรสำหรับยิงกับธนู สามารถสร้างได้ด้วยโต๊ะทำงานดึกดำบรรพ์"
+  },
+  "Arrow_Fire": {
+    "localized_name": "ลูกศรไฟ",
+    "description": "ลูกศรไฟไว้สำหรับยิงด้วยธนู สร้างดาเมจธาตุไฟแก่ฝ่ายที่ถูกโดนสามารถสร้างได้ด้วย โต๊ะทำงานดึกดำบรรพ์"
+  },
+  "Arrow_Poison": {
+    "localized_name": "ลูกศรพิษ",
+    "description": "ลูกศรพิษไว้สำหรับยิงด้วยธนู สร้างดาเมจติดพิษแก่ฝ่ายที่ถูกโดน สามารถสร้างได้ด้วยโต๊ะทำงานดึกดำบรรพ์"
+  },
+  "AssaultRifleBullet": {
+    "localized_name": "กระสุนปืนไรเฟิลจู่โจม",
+    "description": "กระสุนที่ใช้กับอาวุธจำพวกปืนไรเฟิลจู่โจม สร้างได้ด้วยไลน์ผลิตอาวุธ"
+  },
+  "AutoMealPouch_Tier1": {
+    "localized_name": "ถุงอาหารสัตว์ขนาดเล็ก",
+    "description": null
+  },
+  "AutoMealPouch_Tier2": {
+    "localized_name": "ถุงอาหารสัตว์ขนาดกลาง",
+    "description": null
+  },
+  "AutoMealPouch_Tier3": {
+    "localized_name": "ถุงอาหารสัตว์ขนาดใหญ่",
+    "description": null
+  },
+  "AutoMealPouch_Tier4": {
+    "localized_name": "ถุงอาหารสัตว์ขนาดใหญ่มาก",
+    "description": null
+  },
+  "AutoMealPouch_Tier5": {
+    "localized_name": "ถุงอาหารสัตว์ขนาดใหญ่พิเศษ",
+    "description": null
+  },
+  "BaseCampBattleDirector": {
+    "localized_name": "ระฆังเตือน",
+    "description": "ระฆังไว้เปลี่ยนสถานะระวังภัยของพาลในฐาน สลับสถานะระหว่าง สถานะโจมตีตอบโต้ศัตรูภายนอก กับตั้งใจทำงาน ได้ตามต้องการ"
+  },
+  "BaseCampItemDispenser": {
+    "localized_name": "เครื่องหยิบไอเทม",
+    "description": null
+  },
+  "BaseCampWorkHard": {
+    "localized_name": "แท่นสังเกตการณ์",
+    "description": null
+  },
+  "BaseCampWorkHard02": {
+    "localized_name": "แท่นสังเกตุการณ์คุณภาพดี",
+    "description": null
+  },
+  "BaseCampWorkHard03": {
+    "localized_name": "หอสังเกตการณ์แห่งอารยธรรมโบราณ",
+    "description": null
+  },
+  "BaseCampWorkerExtraStation": {
+    "localized_name": "อุปกรณ์ควบคุมกล่องพาล",
+    "description": null
+  },
+  "Bat3": {
+    "localized_name": "กระบองเหล็ก",
+    "description": null
+  },
+  "Battle_Armor_Grade_01_Cloth": {
+    "localized_name": "ชุดผ้า",
+    "description": "ชุดที่ทำจากผ้า ใช้กันความหนาวเย็นเวลากลางคืนได้ สามารถสร้างได้ด้วยโต๊ะทำงานดึกดำบรรพ์"
+  },
+  "Battle_Armor_Grade_01_Cloth_Cold": {
+    "localized_name": "ชุดชนเผ่าเขตหนาว",
+    "description": "ชุดผ้าที่ผลิตขึ้นในเขตเย็นจัด ช่วยให้รอดพ้นความหนาวจนแข็ง สร้างได้ด้วยโต๊ะทำงานดึกดำบรรพ์"
+  },
+  "Battle_Armor_Grade_01_Cloth_Heat": {
+    "localized_name": "ชุดชนเผ่าเขตร้อน",
+    "description": "ชุดผ้าที่ผลิตขึ้นในเขตร้อนจัด มีคุณสมบัติกันร้อนได้ดี สร้างได้ด้วยโต๊ะทำงานดึกดำบรรพ์"
+  },
+  "Battle_Armor_Grade_02_Fur": {
+    "localized_name": "ชุดเกราะขนสัตว์",
+    "description": "ชุดเกราะที่ทำจากหนัง ความทนทานและพลังป้องกันสูงขึ้น สร้างได้ด้วยโต๊ะทำงานคุณภาพดี"
+  },
+  "Battle_Armor_Grade_02_Fur_Cold": {
+    "localized_name": "ชุดเกราะขนสัตว์กันหนาว",
+    "description": "ชุดเกราะขนสัตว์ที่ผลิตขึ้นในเขตเย็นจัด ช่วยให้รอดพ้นความหนาวจนแข็ง สร้างได้ด้วยโต๊ะทำงานคุณภาพดี"
+  },
+  "Battle_Armor_Grade_02_Fur_Heat": {
+    "localized_name": "ชุดเกราะขนสัตว์กันร้อน",
+    "description": "ชุดเกราะขนสัตว์ที่ผลิตขึ้นในเขตร้อน มีคุณสมบัติกันร้อนได้ดี สร้างได้ด้วยโต๊ะทำงานคุณภาพดี"
+  },
+  "Battle_Armor_Grade_03_Copper": {
+    "localized_name": "ชุดเกราะโลหะ",
+    "description": "ชุดเกราะที่ทำจากโลหะ พลังป้องกันสูงพอตัว แต่ก็หนักพอตัว สร้างได้ด้วยโต๊ะทำงานคุณภาพดี"
+  },
+  "Battle_Armor_Grade_03_Copper_Cold": {
+    "localized_name": "ชุดเกราะโลหะกันหนาว",
+    "description": "รุ่นปรับปรุงชุดเกราะโลหะช่วยให้รอดพ้นความหนาวจนแข็ง สร้างได้ด้วยโต๊ะทำงานคุณภาพดี"
+  },
+  "Battle_Armor_Grade_03_Copper_Heat": {
+    "localized_name": "ชุดเกราะโลหะกันร้อน",
+    "description": "รุ่นปรับปรุงชุดเกราะโลหะมีคุณสมบัติกันร้อนได้ดี สร้างได้ด้วยโต๊ะทำงานคุณภาพดี"
+  },
+  "Battle_Armor_Grade_03_Iron": {
+    "localized_name": "ชุดเกราะโลหะถลุง",
+    "description": "ชุดเกราะที่ทำจากโลหะคุณภาพดี พลังป้องกันสูงมากแต่ก็หนักตามไปด้วย สร้างได้ด้วยไลน์ผลิต"
+  },
+  "Battle_Armor_Grade_03_Iron_Cold": {
+    "localized_name": "ชุดเกราะโลหะถลุงกันหนาว",
+    "description": "รุ่นปรับปรุงชุดเกราะโลหะถลุงช่วยให้รอดพ้นความหนาวจนแข็ง สร้างได้ด้วยไลน์ผลิต"
+  },
+  "Battle_Armor_Grade_03_Iron_Heat": {
+    "localized_name": "ชุดเกราะโลหะถลุงกันร้อน",
+    "description": "รุ่นปรับปรุงชุดเกราะโลหะถลุงมีคุณสมบัติกันร้อนได้ดี สร้างได้ด้วยไลน์ผลิต"
+  },
+  "Battle_Armor_Grade_04_Steal": {
+    "localized_name": "ชุดเกราะพาลเมทัล",
+    "description": "ชุดเกราะที่ทำจากก้อนพาลเมทัล พลังป้องกันมหาศาล แต่หนักมาก สร้างได้ด้วยไลน์ผลิต Ⅱ"
+  },
+  "Battle_Armor_Grade_04_Steal_Cold": {
+    "localized_name": "ชุดเกราะพาลเมทัลกันหนาว",
+    "description": "รุ่นปรับปรุงชุดเกราะพาลเมทัลช่วยให้รอดพ้นความหนาวจนแข็ง สร้างได้ด้วยไลน์ผลิต Ⅱ"
+  },
+  "Battle_Armor_Grade_04_Steal_Heat": {
+    "localized_name": "ชุดเกราะพาลเมทัลกันร้อน",
+    "description": "รุ่นปรับปรุงชุดเกราะพาลเมทัลมีคุณสมบัติกันร้อนได้ดี สร้างได้ด้วยไลน์ผลิต Ⅱ"
+  },
+  "Battle_Armor_Grade_05_Plastic": {
+    "localized_name": "ชุดเกราะพลาสตีล",
+    "description": "ชุดเกราะที่ทำจากพลาสตีล นอกจากพลังป้องกันจะสูงขึ้นแล้ว น้ำหนักยังเบาลงด้วย สร้างได้ด้วยไลน์ผลิต Ⅱ"
+  },
+  "Battle_Armor_Grade_05_Plastic_Cold": {
+    "localized_name": "ชุดเกราะพลาสตีลกันหนาว",
+    "description": "รุ่นปรับปรุงชุดเกราะพลาสตีลช่วยให้รอดพ้นความหนาวจนแข็ง สร้างได้ด้วยไลน์ผลิต Ⅱ"
+  },
+  "Battle_Armor_Grade_05_Plastic_Heat": {
+    "localized_name": "ชุดเกราะพลาสตีลกันร้อน",
+    "description": "รุ่นปรับปรุงชุดเกราะพลาสตีลมีคุณสมบัติกันร้อนได้ดี สร้างได้ด้วยไลน์ผลิต Ⅱ"
+  },
+  "Battle_Armor_Grade_05_Plastic_Weight": {
+    "localized_name": "ชุดเกราะพลาสตีลน้ำหนักเบา",
+    "description": "รุ่นปรับปรุงชุดเกราะพลาสตีลเพิ่มปริมาณความจุสูงสุดของผู้เล่น สร้างได้ด้วยไลน์ผลิต Ⅱ"
+  },
+  "Battle_Cloth": {
+    "localized_name": "ผ้า",
+    "description": null
+  },
+  "Battle_Defense_BowGun": {
+    "localized_name": "หน้าไม้แบบตั้งพื้น",
+    "description": "เมื่อจัดพาลที่มีความถนัด \"งานฝีมือ\" มาไว้ที่นี่ พาลจะใช้หน้าไม้อย่างอิสระ คอยปกป้องฐาน"
+  },
+  "Battle_Defense_MachineGun": {
+    "localized_name": "ปืนกลมือแบบตั้งพื้น",
+    "description": "เมื่อจัดพาลที่มีความถนัด \"งานฝีมือ\" มาไว้ที่นี่ พาลจะใช้ปืนกลอย่างอิสระ คอยปกป้องฐาน"
+  },
+  "Battle_Defense_Missile": {
+    "localized_name": "เครื่องยิงมิสไซล์แบบตั้งพื้น",
+    "description": "เมื่อจัดพาลที่มีความถนัด \"งานฝีมือ\" มาไว้ที่นี่ พาลจะใช้เครื่องยิงมิสไซล์อย่างอิสระ คอยปกป้องฐาน"
+  },
+  "Battle_Glider_Grade_01": {
+    "localized_name": "ร่มชูชีพธรรมดา",
+    "description": "เครื่องร่อนไว้ใช้กางและร่อนบนท้องฟ้า เป็นของที่ทำขึ้นมาอย่างง่าย ๆ เลยร่อนได้ไม่เร็ว"
+  },
+  "Battle_Glider_Grade_02": {
+    "localized_name": "เครื่องร่อนชั้นดี",
+    "description": "เครื่องร่อนไว้ใช้กางและร่อนบนท้องฟ้า เป็นรุ่นผลิตเป็นจำนวนมาก ร่อนได้เร็วพอประมาณ สร้างได้ที่ \"โต๊ะทำงานคุณภาพดี\""
+  },
+  "Battle_Glider_Grade_03": {
+    "localized_name": "เครื่องร่อนชั้นสูง",
+    "description": "เครื่องร่อนไว้ใช้กางและร่อนบนท้องฟ้า คุณภาพดีขึ้น ร่อนได้เร็วมาก สร้างได้ที่ \"ไลน์ผลิต\""
+  },
+  "Battle_Glider_Grade_04": {
+    "localized_name": "เครื่องร่อนชั้นพิเศษ",
+    "description": "เครื่องร่อนไว้ใช้กางและร่อนบนท้องฟ้า คุณภาพสูงมาก ร่อนได้เร็วและสูงขึ้นกว่าเดิม สร้างได้ที่ \"ไลน์ผลิต Ⅱ\""
+  },
+  "Battle_GunPowder_Grade_02": {
+    "localized_name": "ดินปืน",
+    "description": "\"ดินปืน\" ที่ใช้เวลายิงปืน วัสดุจำเป็นในการสร้างลูกกระสุน สร้างได้ที่ \"โต๊ะทำงานคุณภาพดี\""
+  },
+  "Battle_Helm_Grade_02_Fur": {
+    "localized_name": "ขนนกติดผม",
+    "description": "เครื่องประดับผมจากขนนกสวยงาม ไม่รู้ทำไมเมื่อติดแล้วรู้สึกว่าช่วยกันบาดแผลถึงตายที่บริเวณศีรษะได้ สร้างได้ด้วยโต๊ะทำงานดึกดำบรรพ์"
+  },
+  "Battle_Helm_Grade_03_Copper": {
+    "localized_name": "หมวกเกราะโลหะ",
+    "description": "หมวกเกราะที่ทำจากโลหะ เครื่องป้องกันที่สวมแล้วสบายใจและมั่นใจว่าจะคอยปกป้องสติของคุณเสมอ สร้างได้ด้วยโต๊ะทำงานคุณภาพดี"
+  },
+  "Battle_Helm_Grade_04_Iron": {
+    "localized_name": "หมวกเกราะโลหะถลุง",
+    "description": "หมวกเกราะที่ทำจากโลหะคุณภาพดี โลหะที่ขัดจนเงาวาวช่วยเพิ่มความมั่นใจให้ผู้สวมใส่ สร้างได้ด้วยไลน์ผลิต"
+  },
+  "Battle_Helm_Grade_05_Steal": {
+    "localized_name": "หมวกเกราะพาลเมทัล",
+    "description": "หมวกเกราะที่ทำจากก้อนพาลเมทัล คุณภาพดีจนใคร ๆ ก็อิจฉา เป็นหลักฐานว่านักรบที่สวมใส่คือคนเลือกเป็น สร้างได้ด้วยไลน์ผลิต Ⅱ"
+  },
+  "Battle_Helm_Grade_06_Plastic": {
+    "localized_name": "หมวกเกราะพลาสตีล",
+    "description": "ชุดเกราะที่ทำจากพลาสตีล นอกจากพลังป้องกันจะสูงขึ้นแล้ว น้ำหนักยังเบาลงด้วย สร้างได้ด้วยไลน์ผลิต Ⅱ"
+  },
+  "Battle_MeleeWeapon_Axe_Steal": {
+    "localized_name": "ขวานพาลเมทัล",
+    "description": null
+  },
+  "Battle_MeleeWeapon_Bat": {
+    "localized_name": "กระบองไม้",
+    "description": "กระบองไม้สำหรับสู้ระยะประชิด อาจจะใช้ทุบปราบพาลขนาดเล็กได้"
+  },
+  "Battle_MeleeWeapon_Bat2": {
+    "localized_name": "ไม้เบสบอล",
+    "description": null
+  },
+  "Battle_MeleeWeapon_Pickaxe_Steal": {
+    "localized_name": "อีเต้อพาลเมทัล",
+    "description": null
+  },
+  "Battle_MeleeWeapon_Sword": {
+    "localized_name": "ดาบ",
+    "description": "ดาบสำหรับสู้ระยะประชิด คมจัด! ต้องเข้าประชิดศัตรู เลยเสี่ยงมาก สร้างได้ด้วยแท่นผลิตอาวุธ"
+  },
+  "Battle_RangeWeapon_AssaultRifle": {
+    "localized_name": "ปืนไรเฟิลจู่โจม",
+    "description": "ปืนไรเฟิลจู่โจมที่ยิงต่อเนื่องกดดันศัตรูได้ดีมาก อาวุธแนะนำสำหรับต่อกรกับศัตรูแข็งแกร่ง สร้างได้ด้วยไลน์ผลิตอาวุธ"
+  },
+  "Battle_RangeWeapon_Bow1": {
+    "localized_name": "ธนูเก่า",
+    "description": "อาวุธดึกดำบรรพ์สำหรับสู้ระยะไกล เป็นการประกอบตามมีตามเกิด ความรุนแรงจึงต่ำ สามารถสร้างได้ด้วยโต๊ะทำงานดึกดำบรรพ์"
+  },
+  "Battle_RangeWeapon_Bow3": {
+    "localized_name": "ธนูสามดอก",
+    "description": "ธนูที่ปรับปรุงให้ยิงลูกศรได้ 3 ดอกพร้อมกัน มีพลังมหัศจรรย์ที่ทำให้การยิงแต่ละครั้งจะเสียลูกศรไปเพียง 1 ดอกเท่านั้น"
+  },
+  "Battle_RangeWeapon_BowGun": {
+    "localized_name": "หน้าไม้",
+    "description": "ไม่ต้องใส่แรงก็ยิง \"ลูกศร\" ได้ เสียเวลาบรรจุลูกศรหน่อย แต่โจมตีได้รุนแรง สร้างได้ด้วยโต๊ะทำงานคุณภาพดี"
+  },
+  "Battle_RangeWeapon_CompoundBow": {
+    "localized_name": "ธนูทดกำลัง",
+    "description": null
+  },
+  "Battle_RangeWeapon_FlameThrower": {
+    "localized_name": "เครื่องพ่นไฟ",
+    "description": "เครื่องพ่นไฟที่ใช้พ่นไฟได้ไกล ฝ่ายที่โดนยิงจะลุกเป็นไฟ สร้างได้ด้วยไลน์ผลิตอาวุธ Ⅱ"
+  },
+  "Battle_RangeWeapon_GatlingGun": {
+    "localized_name": "ปืนแก็ตลิง",
+    "description": "ปืนแก็ตลิงที่ยิงได้รวดเร็วจนใช้ยิงกดดันศัตรูได้ แค่ยิงกดดันก็ทำให้ศัตรูเป็นรังผึ้งได้เลย สร้างได้ด้วยไลน์ผลิตอาวุธ Ⅱ"
+  },
+  "Battle_RangeWeapon_GrenadeLauncher": {
+    "localized_name": "เครื่องยิงลูกระเบิด",
+    "description": "ใช้ยิงลูกระเบิด ให้ระเบิดเป็นวงกว้าง มีประโยชน์เวลาสู้กับศัตรูจำนวนมาก สร้างได้ด้วยไลน์ผลิตอาวุธ Ⅱ"
+  },
+  "Battle_RangeWeapon_GuidedMissileLauncher": {
+    "localized_name": "เครื่องยิงมิสไซล์",
+    "description": "ใช้ยิงมิสไซล์ไล่ล่าศัตรูอัตโนมัติ เมื่อกระสุนเข้าเป้า มิสไซล์จะสร้างความเสียหายเป็นวงกว้าง สร้างได้ด้วยไลน์ผลิตอาวุธ Ⅱ"
+  },
+  "Battle_RangeWeapon_HandGun": {
+    "localized_name": "ปืนพก",
+    "description": "ปืนพกที่บรรจุกระสุนได้เยอะขึ้น และยิงต่อเนื่องได้ดีขึ้น ปืนพกกิ๊กก๊อกความรุนแรงชั่วพริบตาสูงกว่า สร้างได้ที่ \"แท่นผลิตอาวุธ\""
+  },
+  "Battle_RangeWeapon_HomingSphereLauncher": {
+    "localized_name": "โฮมมิงสเฟียร์ลันเชอร์",
+    "description": "เครื่องยิงสเฟียร์ สเฟียร์ที่ยิงออกไปจะไล่ตามพาล สร้างได้ด้วยไลน์ผลิตอาวุธ Ⅱ"
+  },
+  "Battle_RangeWeapon_LaserRifle": {
+    "localized_name": "ปืนเลเซอร์ไรเฟิล",
+    "description": "อาวุธที่ยิงแสงเลเซอร์ ใช้ง่าย พลังรุนแรง สร้างได้ด้วยไลน์ผลิตอาวุธ Ⅱ"
+  },
+  "Battle_RangeWeapon_OldRevolver": {
+    "localized_name": "ปืนลูกโม่เก่า",
+    "description": null
+  },
+  "Battle_RangeWeapon_Rifle": {
+    "localized_name": "ปืนไรเฟิลบรรจุเดี่ยว",
+    "description": "ปืนไรเฟิลแบบกระสุนเดี่ยว ใช้เวลาบรรจุกระสุนนาน แม้จำนวนกระสุนน้อย แต่เวลายิงแต่ละนัดรุนแรงมาก สร้างที่ได้ \"ไลน์ผลิตอาวุธ\""
+  },
+  "Battle_RangeWeapon_RocketLauncher": {
+    "localized_name": "ร็อกเก็ตลันเชอร์",
+    "description": "ร็อกเก็ตลันเชอร์ที่ทำให้โจมตีด้วยระเบิดรุนแรงได้จากที่ไกล ๆ สร้างได้ด้วยไลน์ผลิตอาวุธ Ⅱ"
+  },
+  "Battle_RangeWeapon_SemiAutoRifle": {
+    "localized_name": "ปืนไรเฟิลกึ่งอัตโนมัติ",
+    "description": null
+  },
+  "Battle_RangeWeapon_SemiAutoShotgun": {
+    "localized_name": "ปืนลูกซองกึ่งอัตโนมัติ",
+    "description": null
+  },
+  "Battle_RangeWeapon_ShotGun": {
+    "localized_name": "ปืนลูกซองลำกล้องคู่",
+    "description": "ปืนลูกซองที่ยิงในระยะใกล้ได้อย่างดุดัน ยิงต่อเนื่องได้ 2 นัด บรรจุกระสุนได้น้อย แต่พลังรุนแรงมาก สร้างได้ที่ \"ไลน์ผลิตอาวุธ\""
+  },
+  "Battle_RangeWeapon_ShotGun_Multi": {
+    "localized_name": "ปืนลูกซองแบบโยนลำ",
+    "description": "ปืนลูกซองที่อานุภาพรุนแรงขึ้นเพราะบรรจุกระสุนได้มากขึ้น สร้างความเสียหายในการต่อสู้ระยะใกล้ DPS ได้ดีมาก สร้างได้ด้วยไลน์ผลิตอาวุธ"
+  },
+  "Battle_RangeWeapon_SphereLauncher": {
+    "localized_name": "สเฟียร์ลันเชอร์แบบดาวกระจาย",
+    "description": "เครื่องยิงรุ่นใหม่ที่ใช้ยิงสเฟียร์ได้หลายลูกพร้อมกัน กว้านจับพาลทั้งฝูงได้ในคราวเดียว สร้างได้ด้วยไลน์ผลิตอาวุธ"
+  },
+  "Battle_RangeWeapon_SphereLauncher_Once": {
+    "localized_name": "สเฟียร์ลันเชอร์แบบบรรจุเดี่ยว",
+    "description": "เครื่องยิงสเฟียร์ ใช้จับพาลได้ไกลขึ้นกว่าเดิม สร้างได้ด้วยแท่นผลิตอาวุธ"
+  },
+  "Battle_RangeWeapon_SubmachineGun": {
+    "localized_name": "ปืนกลมือ",
+    "description": null
+  },
+  "BeamLauncher": {
+    "localized_name": "ตัวปล่อยลำแสง",
+    "description": "เครื่องยิงลำแสงความหนาแน่นสูงที่สร้างการระเบิดเป็นวงกว้างเมื่อใช้งานยิงต่อเนื่อง แต่ถ้ายิงรัวมากๆอาจเกิดความร้อนที่สูงเกินไป"
+  },
+  "BeamLauncherBullet": {
+    "localized_name": "ลูกกระสุนปืนตัวปล่อยแสง",
+    "description": null
+  },
+  "BeamSword": {
+    "localized_name": "บีมซอร์ด",
+    "description": null
+  },
+  "BelieverFlagSet": {
+    "localized_name": "เซ็ตธงองค์กรผู้พิทักษ์พาล",
+    "description": "เซ็ตที่ประกอบไปด้วยธงประจำกลุ่มองค์กรผู้พิทักษ์พาลกับ ม่านเเนวตั้งขององค์กรผู้พิทักษ์พาล หลักฐานเเห่งชัยชนะเหนือองค์กรผู้พิทักษ์พาล"
+  },
+  "Bio_Battery": {
+    "localized_name": "แบตเตอรี่ชีวภาพ",
+    "description": null
+  },
+  "Bio_Coolant": {
+    "localized_name": "ตัวกลางแช่เย็นที่อุณหภูมิต่ำยิ่งยวด",
+    "description": null
+  },
+  "BlastFurnace4": {
+    "localized_name": "เตาขนาดใหญ่",
+    "description": null
+  },
+  "BreedFarm": {
+    "localized_name": "ฟาร์มขยายพันธุ์",
+    "description": "เมื่อส่งพาลตัวผู้และตัวเมียคู่หนึ่งไปที่ฟาร์มขยายพันธุ์ พาลจะออกไข่ จำเป็นต้องใส่ \"เค้ก\" เข้าไปเพื่อขยายพันธุ์"
+  },
+  "BronzeSword": {
+    "localized_name": "ดาบดึกดำบรรพ์",
+    "description": "ดาบสำหรับต่อสู้ระยะประชิด คมใช้ได้เลย อย่าประมาท แต่ถ้าเราต้องเข้าใกล้ศัตรู ก็เสี่ยงเอาเรื่องเหมือนกัน"
+  },
+  "BuildableGoddessStatue": {
+    "localized_name": "รูปปั้นหินแห่งพลัง",
+    "description": "เพิ่มพลังให้ผู้เล่น และพาลได้ ด้วยการถวายสิ่งของ"
+  },
+  "Cake02": {
+    "localized_name": "เค้กเห็ด",
+    "description": null
+  },
+  "Cake03": {
+    "localized_name": "เค้กผัก",
+    "description": null
+  },
+  "Cake04": {
+    "localized_name": "เค้กผักชั้นเลิศ",
+    "description": null
+  },
+  "Cake05": {
+    "localized_name": "เค้กสุดพิเศษ",
+    "description": null
+  },
+  "CarbonFiber": {
+    "localized_name": "เส้นใยคาร์บอน",
+    "description": null
+  },
+  "Cauldron": {
+    "localized_name": "หม้อแม่มด",
+    "description": null
+  },
+  "CeilingLamp": {
+    "localized_name": "โคมติดเพดาน",
+    "description": "แขวนเพดานได้"
+  },
+  "Cement": {
+    "localized_name": "ซีเมนต์",
+    "description": null
+  },
+  "ChargeLaserRifle": {
+    "localized_name": "ชาร์จไรเฟิล",
+    "description": null
+  },
+  "ChargeLaserRifleBullet": {
+    "localized_name": "กระสุนชาร์จไรเฟิล",
+    "description": null
+  },
+  "Clinic": {
+    "localized_name": "ห้องตรวจ",
+    "description": null
+  },
+  "Cloth2": {
+    "localized_name": "ผ้าคุณภาพดี",
+    "description": "\"ผ้าคุณภาพดี\" ที่ทอจาก \"ขนแกะ\" จำนวนมาก วัสดุจำเป็นในการทำเครื่องป้องกันคุณภาพดี สร้างได้จาก \"โต๊ะทำงานคุณภาพดี\""
+  },
+  "CompositeDesk": {
+    "localized_name": "โต๊ะเขียนแบบ",
+    "description": null
+  },
+  "Computer": {
+    "localized_name": "คอมพิวเตอร์",
+    "description": null
+  },
+  "Cooler": {
+    "localized_name": "แอร์น้ำแข็ง",
+    "description": "ทำให้พื้นที่โดยรอบเย็นสบาย ใช้คลายร้อนได้"
+  },
+  "CoolerBox": {
+    "localized_name": "กล่องเก็บความเย็น",
+    "description": null
+  },
+  "CoolerPalFoodBox": {
+    "localized_name": "กล่องอาหารสัตว์เก็บความเย็น",
+    "description": null
+  },
+  "Corrosive_Solvent": {
+    "localized_name": "ตัวทำละลายที่มีฤทธิ์กัดกร่อน",
+    "description": null
+  },
+  "Crusher": {
+    "localized_name": "เครื่องป่น",
+    "description": "เครื่องมือไว้ป่นหินและไม้ เพื่อเปลี่ยนเป็นวัสดุอื่น ทำงานด้วยกังหันน้ำ จึงต้องใช้พาลที่ถนัด \"รดน้ำ\""
+  },
+  "CrystalPit": {
+    "localized_name": "เหมืองเฮ็กโซควอตซ์",
+    "description": null
+  },
+  "DamagedScarecrow": {
+    "localized_name": "หุ่นฝึกซ้อม",
+    "description": "หุ่นฝึกซ้อมรูปPengullet"
+  },
+  "DarkIslandFlagSet": {
+    "localized_name": "เซ็ตธงของชาวสวรรค์ล่ม",
+    "description": "เซ็ตที่ประกอบไปด้วยธงกลุ่มชาวสวรรค์ล่มกับ แบนเนอร์ชาวสวรรค์ล่ม หลักฐานเเห่งชัยชนะเหนือชาวสวรรค์ล่ม"
+  },
+  "DecalGunSet": {
+    "localized_name": "เซ็ตปืนวาดภาพ",
+    "description": "เซ็ตปืนวาดภาพ ปลดล็อกเพื่อสร้างปืนพิสดารและกระสุน ที่จะปั๊มรูปพาลตรงจุดที่ยิง"
+  },
+  "DefenseWait": {
+    "localized_name": "กระสอบทราย",
+    "description": "พาลที่จัดมาไว้ที่นี่ จะทำงานเป็นยามเฝ้าระวังศัตรูภายนอก"
+  },
+  "DefenseWall": {
+    "localized_name": "กำแพงหิน",
+    "description": "กำแพงขนาดใหญ่ไว้ป้องกันศัตรูบุกรุก"
+  },
+  "DefenseWall_Metal": {
+    "localized_name": "กำแพงโลหะ",
+    "description": "กำแพงขนาดใหญ่ไว้ป้องกันศัตรูบุกรุก ทนทานมากเพราะทำจากโลหะ"
+  },
+  "DefenseWall_Wood": {
+    "localized_name": "กำแพงไม้",
+    "description": "กำแพงขนาดใหญ่ไว้ป้องกันศัตรูบุกรุก เปราะบางเพราะทำจากไม้"
+  },
+  "DimensionPalStorage": {
+    "localized_name": "ช่องมิติเก็บพาล",
+    "description": null
+  },
+  "DismantlingConveyor": {
+    "localized_name": "สายพานแยกส่วนพาล",
+    "description": null
+  },
+  "DisplayCharacter": {
+    "localized_name": "กรงสัตว์เลี้ยง",
+    "description": "กรงไว้ใส่พาลที่จับมา เอาไว้ดูเล่น พาลที่อยู่ในกรงจะไม่ต่อสู้ และไม่ทำงาน แต่ก็จะไม่หิว"
+  },
+  "DroneLauncher": {
+    "localized_name": "ตัวปล่อยโดรน",
+    "description": "เครื่องยิงโดรนจู่โจมอัตโนมัติ สามารถส่งโดรนออกมาได้สูงสุดถึง 8 เครื่อง โจมตีได้ต่อเนื่อง เพื่อกดดันศัตรู"
+  },
+  "ElecBaton": {
+    "localized_name": "กระบองไฟฟ้า",
+    "description": "อาวุธระยะประชิด ทุบตีศัตรูให้อยู่ในสถานะไฟช็อต พาลที่โดนไฟช็อตจะจับได้ง่ายขึ้น สามารถสร้างได้ด้วยโต๊ะทำงานคุณภาพดี"
+  },
+  "ElectricArcAssaultRifle": {
+    "localized_name": "ปืนไรเฟิลพลาสม่า",
+    "description": "ปืนไรเฟิลที่ปล่อยกระแสไฟฟ้าวิ่งจากจุดกระทบ และลามต่อเนื่องไปยังศัตรูหลายตัว"
+  },
+  "ElectricArcAssaultRifleBullet": {
+    "localized_name": "ลูกกระสุนปืนไรเฟิลพลาสมา",
+    "description": null
+  },
+  "ElectricCooler": {
+    "localized_name": "แอร์ไฟฟ้า",
+    "description": "แอร์ที่ใช้ไฟฟ้า เพิ่มความแรง สร้างความเย็นเป็นบริเวณกว้างขึ้น"
+  },
+  "ElectricGenerator_Large": {
+    "localized_name": "เครื่องกำเนิดไฟฟ้าขนาดใหญ่",
+    "description": null
+  },
+  "ElectricHeater": {
+    "localized_name": "ฮีตเตอร์ไฟฟ้า",
+    "description": "ฮีตเตอร์ที่ใช้ไฟฟ้า เพิ่มความแรง สร้างความร้อนเป็นบริเวณกว้างขึ้น"
+  },
+  "EnergyLauncherBullet": {
+    "localized_name": "ตลับพลังงานพลาสมา",
+    "description": null
+  },
+  "EnergyRocketLauncher": {
+    "localized_name": "ปืนใหญ่พลาสมา",
+    "description": null
+  },
+  "EnergyShotgun": {
+    "localized_name": "ปืนลูกซองพลังงาน",
+    "description": null
+  },
+  "EnergyShotgunBullet": {
+    "localized_name": "กระสุนปืนลูกซองพลังงาน",
+    "description": null
+  },
+  "EnergyStorage_Electric": {
+    "localized_name": "ตัวเก็บประจุ",
+    "description": null
+  },
+  "Expedition": {
+    "localized_name": "สถานีส่งพาลเดินทางไกล",
+    "description": null
+  },
+  "Factory_Hard_04": {
+    "localized_name": "โรงงานอารยธรรมระดับสูง",
+    "description": null
+  },
+  "Factory_Money": {
+    "localized_name": "โรงงานผลิตเหรียญทอง",
+    "description": null
+  },
+  "Farm_SkillFruits": {
+    "localized_name": "สวนผลทักษะ",
+    "description": null
+  },
+  "FireCultFlagSet": {
+    "localized_name": "เซ็ตธงภราดรเพลิงนิรันดร์",
+    "description": "เซ็ตที่ประกอบไปด้วยธงประจำกลุ่มภราดรเพลิงนิรันดร์กับ ม่านเเนวตั้งของภราดรเพลิงนิรันดร์ หลักฐานเเห่งชัยชนะเหนือภราดรเพลิงนิรันดร์"
+  },
+  "FishingBait_2": {
+    "localized_name": "เหยื่อตกปลาคุณภาพดี",
+    "description": null
+  },
+  "FishingBait_3": {
+    "localized_name": "เหยื่อตกปลาคุณภาพสูง",
+    "description": null
+  },
+  "FishingBait_3_A": {
+    "localized_name": "เหยื่อตกปลาเสน่หหา",
+    "description": null
+  },
+  "FishingPond1": {
+    "localized_name": "บ่อตกปลา",
+    "description": null
+  },
+  "FishingPond2": {
+    "localized_name": "บ่อตกปลาขนาดใหญ่",
+    "description": null
+  },
+  "FishingRod_02_1": {
+    "localized_name": "คันเบ็ดตกปลาระดับกลาง (Cattiva)",
+    "description": null
+  },
+  "FishingRod_03_1": {
+    "localized_name": "คันเบ็ดตกปลาระดับสูง (Pengullet)",
+    "description": null
+  },
+  "FishingSet1": {
+    "localized_name": "เซ็ตตกปลาระดับมือสมัครเล่น",
+    "description": "เซ็ตคันเบ็ดและเหยื่อตกปลาสำหรับมือสมัครเล่น หากเตรียมคันเบ็ดกับเหยื่อตกปลาเรียบร้อยเเล้วจะสามารถไปตกพาลได้บริเวณริมเเหล่งน้ำ"
+  },
+  "FlamethrowerBullet": {
+    "localized_name": "เชื้อเพลิงเครื่องพ่นไฟ",
+    "description": null
+  },
+  "FlourMill": {
+    "localized_name": "เครื่องโม่แป้ง",
+    "description": "เครื่องมือไว้โม่ข้าวสาลี ผลิตแป้งสาลี ทำงานด้วยกังหันน้ำ จึงต้องใช้พาลที่ถนัด \"รดน้ำ\""
+  },
+  "FlowerBed": {
+    "localized_name": "กระถางดอกไม้",
+    "description": null
+  },
+  "Fountain": {
+    "localized_name": "น้ำพุ",
+    "description": null
+  },
+  "FragGrenade": {
+    "localized_name": "ระเบิดมือ",
+    "description": null
+  },
+  "FragGrenade_Dark": {
+    "localized_name": "ระเบิดความมืด",
+    "description": null
+  },
+  "FragGrenade_Dragon": {
+    "localized_name": "ระเบิดมังกร",
+    "description": null
+  },
+  "FragGrenade_Elec": {
+    "localized_name": "ระเบิดสายฟ้า",
+    "description": null
+  },
+  "FragGrenade_Fire": {
+    "localized_name": "ระเบิดเพลิง",
+    "description": null
+  },
+  "FragGrenade_Ground": {
+    "localized_name": "ระเบิดพสุธา",
+    "description": null
+  },
+  "FragGrenade_Ice": {
+    "localized_name": "ระเบิดเยือกแข็ง",
+    "description": null
+  },
+  "FragGrenade_Leaf": {
+    "localized_name": "ระเบิดพฤกษา",
+    "description": null
+  },
+  "FragGrenade_Super": {
+    "localized_name": "ระเบิดมือดัดแปลง",
+    "description": null
+  },
+  "FragGrenade_Water": {
+    "localized_name": "ระเบิดวารี",
+    "description": null
+  },
+  "FurnitureSet_1": {
+    "localized_name": "เซ็ตห้องนั่งเล่นไม้",
+    "description": "เซ็ตเครื่องเรือนสำหรับตกแต่ง วางไว้ที่ห้องนั่งเล่น เพลิดเพลินกับการใช้ชีวิตร่วมกับพาล"
+  },
+  "FurnitureSet_10": {
+    "localized_name": "เซ็ตรั้วกั้น",
+    "description": "เซ็ตเครื่องเรือนสำหรับตกแต่ง ติดตั้งไว้ตามสถานที่ที่ไม่อยากให้มีคนผ่าน"
+  },
+  "FurnitureSet_11": {
+    "localized_name": "เซ็ตอุปกรณ์จราจร",
+    "description": "เซ็ตเครื่องเรือนสำหรับตกแต่ง ที่นี่ไม่มีถนน จึงจัดการจราจรไม่ได้"
+  },
+  "FurnitureSet_12": {
+    "localized_name": "เซ็ตป้ายจราจร",
+    "description": "เซ็ตเครื่องเรือนสำหรับตกแต่ง ที่นี่ไม่มีถนน จึงจัดการจราจรไม่ได้"
+  },
+  "FurnitureSet_13": {
+    "localized_name": "เซ็ตโต๊ะเก้าอี้โลหะ",
+    "description": "เซ็ตเครื่องเรือนสำหรับตกแต่ง ตกแต่งให้เข้ากับสิ่งปลูกสร้างโลหะ เพลิดเพลินกับการใช้ชีวิตร่วมกับพาล"
+  },
+  "FurnitureSet_14": {
+    "localized_name": "เซ็ตโต๊ะไม้ผสมเหล็ก",
+    "description": "เซ็ตเครื่องเรือนสำหรับตกแต่ง ตกแต่งให้เข้ากับสิ่งปลูกสร้างโลหะ เพลิดเพลินกับการใช้ชีวิตร่วมกับพาล"
+  },
+  "FurnitureSet_15": {
+    "localized_name": "เซ็ตเปียโน",
+    "description": "เซ็ตเครื่องเรือนสำหรับตกแต่ง ตกแต่งฐาน แสดงความอู้ฟู่"
+  },
+  "FurnitureSet_16": {
+    "localized_name": "เซ็ตกระจกเงาแบบโบราณ",
+    "description": "เซ็ตเครื่องเรือนสำหรับตกแต่ง ตรวจสอบความเรียบร้อยของตัวเองกันเถอะ"
+  },
+  "FurnitureSet_17": {
+    "localized_name": "เซ็ตพรม",
+    "description": "เซ็ตเครื่องเรือนสำหรับตกแต่ง ติดตั้งไว้ที่พื้น ให้ความรู้สึกว่ามีคนอยู่อาศัย"
+  },
+  "FurnitureSet_18": {
+    "localized_name": "เซ็ตโซฟาแบบโบราณ",
+    "description": "เซ็ตเครื่องเรือนสำหรับตกแต่ง ทำให้ฐานดูหรูหรา"
+  },
+  "FurnitureSet_19": {
+    "localized_name": "เซ็ตเก้าอี้แบบโบราณ",
+    "description": "เซ็ตเครื่องเรือนสำหรับตกแต่ง จัดวางให้เข้าชุดกับโต๊ะแบบโบราณ"
+  },
+  "FurnitureSet_2": {
+    "localized_name": "เซ็ตห้องเก็บเหล้าไม้",
+    "description": "เซ็ตเครื่องเรือนเก็บไอเทมผลิตจากไม้ ที่ให้บรรยากาศเหมือนร้านเหล้า ใช้เก็บไอเทมได้"
+  },
+  "FurnitureSet_20": {
+    "localized_name": "เซ็ตห้องน้ำแบบโบราณ",
+    "description": "เซ็ตเครื่องเรือนสำหรับตกแต่ง ตกแต่งให้เป็นห้องอาบน้ำแบบโบราณ"
+  },
+  "FurnitureSet_21": {
+    "localized_name": "เซ็ตที่เก็บของแบบโบราณ",
+    "description": "เซ็ตเครื่องเรือนเก็บของแบบโบราณ ใช้เก็บไอเทมได้"
+  },
+  "FurnitureSet_22": {
+    "localized_name": "เซ็ตตู้เก็บของแบบโบราณ",
+    "description": "เซ็ตตู้เก็บของแบบโบราณ ใช้เก็บไอเทมได้"
+  },
+  "FurnitureSet_23": {
+    "localized_name": "เซ็ตนาฬิกา",
+    "description": "เซ็ตเครื่องเรือนสำหรับตกแต่ง ใช้ดูเวลาไม่ได้"
+  },
+  "FurnitureSet_24": {
+    "localized_name": "เซ็ตโต๊ะแบบโบราณ",
+    "description": "เซ็ตเครื่องเรือนสำหรับตกแต่ง จัดวางให้เข้าชุดกับเก้าอี้แบบโบราณ"
+  },
+  "FurnitureSet_25": {
+    "localized_name": "เซ็ตสุขา",
+    "description": "เซ็ตเครื่องเรือนสำหรับตกแต่ง ทำธุระที่นี่ไม่ได้"
+  },
+  "FurnitureSet_26": {
+    "localized_name": "เซ็ตนันทนาการ",
+    "description": "เซ็ตเครื่องเรือนสำหรับตกแต่ง พวกพาลจะทำงานไปเรื่อย ๆ"
+  },
+  "FurnitureSet_27": {
+    "localized_name": "เซ็ตไฟทาง",
+    "description": "เซ็ตไฟถนน ใช้เป็นแหล่งกำเนิดแสงได้ จำเป็นต้องใช้ไฟฟ้าเพื่อส่องสว่าง"
+  },
+  "FurnitureSet_28": {
+    "localized_name": "เซ็ตเตาผิง",
+    "description": "เซ็ตเตาผิงอิฐแดงที่ใช้เป็นแหล่งกำเนิดแสงได้ จำเป็นต้องจุดไฟ"
+  },
+  "FurnitureSet_29": {
+    "localized_name": "เซ็ตโคมแบบโบราณ",
+    "description": "เซ็ตโคมแบบโบราณใช้เป็นแหล่งกำเนิดแสงได้ จำเป็นต้องใช้ไฟฟ้าเพื่อส่องสว่าง"
+  },
+  "FurnitureSet_3": {
+    "localized_name": "เซ็ตร้านเหล้าไม้",
+    "description": "เซ็ตเครื่องเรือนสำหรับตกแต่ง ตกแต่งให้ได้บรรยากาศร้านเหล้า ใช้ชีวิตอย่างเพลิดเพลินร่วมกับพาล"
+  },
+  "FurnitureSet_30": {
+    "localized_name": "เซ็ตชั้นโลหะ",
+    "description": "เซ็ตชั้นโลหะ ใช้เก็บไอเทมได้"
+  },
+  "FurnitureSet_31": {
+    "localized_name": "เซ็ตเครื่องเรือนกลางแจ้ง",
+    "description": "เซ็ตเครื่องเรือนสำหรับตกแต่ง มีเครื่องเรือนสำหรับวางกลางแจ้งครบครัน"
+  },
+  "FurnitureSet_32": {
+    "localized_name": "เซ็ตเครื่องเรือนหรูหราแบบโบราณ",
+    "description": "เซ็ตเครื่องเรือนสำหรับตกแต่ง มีเครื่องเรือนหรูหราครบครัน"
+  },
+  "FurnitureSet_4": {
+    "localized_name": "เซ็ตไม้ประดับแขวนผนัง",
+    "description": "เซ็ตเครื่องเรือนสำหรับตกแต่ง ประดับพืชไว้ตามกำแพง เพื่อสร้างสีสันให้ฐาน"
+  },
+  "FurnitureSet_5": {
+    "localized_name": "เซ็ตถังเหล็ก",
+    "description": "เซ็ตเครื่องเรือนสำหรับตกแต่ง ใช้ถังเหล็กอาบน้ำไม่ได้"
+  },
+  "FurnitureSet_6": {
+    "localized_name": "เซ็ตคอนเทนเนอร์",
+    "description": "เซ็ตเครื่องเรือนคอนเทนเนอร์ ใช้เก็บไอเทมได้"
+  },
+  "FurnitureSet_7": {
+    "localized_name": "เซ็ตเก้าอี้บุหนัง",
+    "description": "เซ็ตเครื่องเรือนสำหรับตกแต่ง เครื่องเรือนบุหนังให้ความรู้สึกหรูหรา"
+  },
+  "FurnitureSet_8": {
+    "localized_name": "เซ็ตป้ายทางออกฉุกเฉิน",
+    "description": "เซ็ตเครื่องเรือนสำหรับตกแต่ง ว่ากันว่าเป็นของล้ำค่าในยุคอารยธรรมเฟื่องฟู"
+  },
+  "FurnitureSet_9": {
+    "localized_name": "เซ็ตไม้ประดับ",
+    "description": "เซ็ตเครื่องเรือนสำหรับตกแต่ง ประดับพืช สร้างสีสันให้ฐาน"
+  },
+  "FurnitureSet_Japanese": {
+    "localized_name": "เซ็ตเครื่องเรือนสไตล์ญี่ปุ่น",
+    "description": "เซ็ตเครื่องเรือนสำหรับตกแต่งสไตล์ญี่ปุ่น ตกแต่งฐานให้เป็นสไตล์ญี่ปุ่น"
+  },
+  "FurnitureTree_Bamboo": {
+    "localized_name": "เซ็ตต้นไผ่จำลอง",
+    "description": "เซ็ตต้นไผ่จำลองสำหรับตกแต่ง จัดวางต้นไม้เพื่อสร้างฐานที่ดูเป็นธรรมชาติ ไม่สามารถหาวัสดุจากโครงสร้างนี้ได้"
+  },
+  "FurnitureTree_Cherry": {
+    "localized_name": "เซ็ตซากุระจำลอง",
+    "description": "เซ็ตซากุระจำลองสำหรับตกแต่ง จัดวางต้นไม้เพื่อสร้างฐานที่ดูเป็นธรรมชาติ ไม่สามารถหาวัสดุจากโครงสร้างนี้ได้"
+  },
+  "FurnitureTree_Desert": {
+    "localized_name": "เซ็ตต้นไม้แห่งทะเลทรายจำลอง",
+    "description": "เซ็ตต้นไม้ทะเลทรายจำลองสำหรับตกแต่ง จัดวางต้นไม้เพื่อสร้างฐานที่ดูเป็นธรรมชาติ ไม่สามารถหาวัสดุจากโครงสร้างนี้ได้"
+  },
+  "FurnitureTree_Green": {
+    "localized_name": "เซ็ตต้นไม้จำลอง",
+    "description": "เซ็ตต้นไม้จำลองสำหรับตกแต่ง จัดวางต้นไม้เพื่อสร้างฐานที่ดูเป็นธรรมชาติ ไม่สามารถหาวัสดุจากโครงสร้างนี้ได้"
+  },
+  "FurnitureTree_Red": {
+    "localized_name": "เซ็ตต้นไม้ใบไม้แดงจำลอง",
+    "description": "เซ็ตต้นไม้ใบไม้แดงสำหรับตกแต่ง จัดวางต้นไม้เพื่อสร้างฐานที่ดูเป็นธรรมชาติ ไม่สามารถหาวัสดุจากโครงสร้างนี้ได้"
+  },
+  "FurnitureTree_Snow": {
+    "localized_name": "เซ็ตต้นไม้หิมะปกคลุมจำลอง",
+    "description": "เซ็ตต้นไม้หิมะปกคลุมจำลองสำหรับตกแต่ง จัดวางต้นไม้เพื่อสร้างฐานที่ดูเป็นธรรมชาติ ไม่สามารถหาวัสดุจากโครงสร้างนี้ได้"
+  },
+  "FurnitureTree_Tropical": {
+    "localized_name": "เซ็ตต้นไม้แห่งแดนใต้จำลอง",
+    "description": "เซ็ตต้นไม้แห่งแดนใต้จำลองสำหรับตกแต่ง จัดวางต้นไม้เพื่อสร้างฐานที่ดูเป็นธรรมชาติ ไม่สามารถหาวัสดุจากโครงสร้างนี้ได้"
+  },
+  "FurnitureTree_Yellow": {
+    "localized_name": "เซ็ตต้นไม้ใบไม้เหลืองจำลอง",
+    "description": "เซ็ตต้นไม้ใบไม้เหลืองจำลองสำหรับตกแต่ง จัดวางต้นไม้เพื่อสร้างฐานที่ดูเป็นธรรมชาติ ไม่สามารถหาวัสดุจากโครงสร้างนี้ได้"
+  },
+  "GasMask": {
+    "localized_name": "หน้ากากป้องกันการกัดกร่อน",
+    "description": null
+  },
+  "GatlingBullet": {
+    "localized_name": "กระสุนปืนแก็ตลิง",
+    "description": null
+  },
+  "Glass_houseset": {
+    "localized_name": "เซ็ตปลูกสร้างกระจกใส",
+    "description": "เซ็ตสร้างฐานด้วยวัสดุกระจกใส ปลดล็อกเพื่อสร้างสิ่งจำเป็นในการก่อสร้างบ้าน เช่น พื้น ผนัง หลังคา หรือบันได ที่ทำจากกระจกใส"
+  },
+  "GlobalPalStorage": {
+    "localized_name": "กล่องพาลสากล",
+    "description": null
+  },
+  "GrapplingGun": {
+    "localized_name": "ปืนยิงตะขอ",
+    "description": null
+  },
+  "GrapplingGun2": {
+    "localized_name": "ปืนยิงตะขอชั้นดี",
+    "description": null
+  },
+  "GrapplingGun3": {
+    "localized_name": "ปืนยิงตะขอชั้นสูง",
+    "description": null
+  },
+  "GrapplingGun4": {
+    "localized_name": "ปืนยิงตะขอชั้นพิเศษ",
+    "description": null
+  },
+  "GrapplingGun5": {
+    "localized_name": "ปืนยิงตะขอชั้นสุดยอด",
+    "description": null
+  },
+  "GrenadeBullet": {
+    "localized_name": "กระสุนระเบิด",
+    "description": null
+  },
+  "GuildChest": {
+    "localized_name": "หีบกิลด์",
+    "description": null
+  },
+  "HandTorch": {
+    "localized_name": "คบเพลิงพกพา",
+    "description": "ใช้ส่องสว่างตอนกลางคืน และป้อนกันความหนาวเย็น พอจะใช้สู้ระยะประชิดได้เช่นกัน สร้างได้ด้วยโต๊ะทำงานดึกดำบรรพ์"
+  },
+  "HandgunBullet": {
+    "localized_name": "กระสุนปืนพก",
+    "description": "กระสุนที่ใช้กับอาวุธจำพวกปืนพก สร้างได้ด้วยแท่นผลิตอาวุธ"
+  },
+  "Headstone": {
+    "localized_name": "ป้ายหลุมศพ",
+    "description": null
+  },
+  "Heater": {
+    "localized_name": "ฮีตเตอร์ไฟ",
+    "description": "ทำให้พื้นที่โดยรอบอบอุ่น ใช้กันหนาวเวลากลางคืนได้"
+  },
+  "HighGrade_Processed_Wood": {
+    "localized_name": "แผ่นไม้ชั้นสูง",
+    "description": null
+  },
+  "Homeward": {
+    "localized_name": "เมฆฟ้าคะนองหวนคืน",
+    "description": null
+  },
+  "HugeKitchen": {
+    "localized_name": "ครัวขนาดใหญ่",
+    "description": null
+  },
+  "HunterFlagSet": {
+    "localized_name": "เซ็ตธงขบวนการพรานเถื่อน",
+    "description": "เซ็ตที่ประกอบไปด้วยธงประจำกลุ่มขบวนการพรานเถื่อนกับ ม่านเเนวตั้งของขบวนการพรานเถื่อน หลักฐานเเห่งชัยชนะเหนือขบวนการพรานเถื่อน"
+  },
+  "IceCrusher": {
+    "localized_name": "เครื่องป่นเยือกแข็ง",
+    "description": null
+  },
+  "IceHorseStatue": {
+    "localized_name": "รูปปั้น Frostallion",
+    "description": null
+  },
+  "Infra_ElectricGenerator_Grade_01": {
+    "localized_name": "เครื่องกำเนิดไฟฟ้า",
+    "description": "เครื่องเก็บไฟฟ้าจากพาลธาตุไฟฟ้าในฐาน ทำให้ใช้งานสิ่งปลูกสร้างที่ใช้ไฟฟ้าได้"
+  },
+  "Infra_ElectronicCircuit": {
+    "localized_name": "แผงวงจร",
+    "description": "\"แผงวงจร\" จำเป็นในการสร้างเครื่องจักรความแม่นยำสูง ใช้สร้าง \"ไลน์ผลิต\" ได้"
+  },
+  "Infra_ItemChest_Grade_01": {
+    "localized_name": "หีบไม้",
+    "description": "ใช้เก็บไอเทมได้ เมื่อตั้งไว้ที่ฐาน พาลที่มีความถนัด \"ขนส่ง\" จะขนไอเทมไปเอง"
+  },
+  "Infra_ItemChest_Grade_02": {
+    "localized_name": "หีบโลหะ",
+    "description": "ใช้เก็บไอเทมได้มากขึ้น และทนทานขึ้น พาลที่มีความถนัด \"ขนส่ง\" จะขนไอเทมไปเอง"
+  },
+  "Infra_ItemChest_Grade_03": {
+    "localized_name": "หีบโลหะถลุง",
+    "description": "ใช้เก็บไอเทมได้มากยิ่งขึ้น และทนทานยิ่งขึ้น พาลที่มีความถนัด \"ขนส่ง\" จะขนไอเทมไปเอง"
+  },
+  "Infra_MachineParts": {
+    "localized_name": "ตะปู",
+    "description": null
+  },
+  "Infra_PalBed_Grade_01": {
+    "localized_name": "เตียงฟางสำหรับพาล",
+    "description": "พาลในฐานจะนอนบนเตียงพาลในเวลากลางคืนเพื่อฟื้นฟูค่า SAN หากไม่มีเตียงพาล จะนอนไม่สบายและไม่สามารถฟื้นฟูค่า SAN ได้"
+  },
+  "Infra_PalBed_Grade_02": {
+    "localized_name": "เตียงนุ่มสำหรับพาล",
+    "description": "เตียงสำหรับพวกพาล ที่ทำให้หลับสบายขึ้น และอัตราการฟื้นค่า SAN และ HP ขณะนอนหลับก็จะสูงขึ้น"
+  },
+  "Infra_PlayerBed_Grade_01": {
+    "localized_name": "เตียงคุณภาพต่ำ",
+    "description": "เตียงสำหรับมนุษย์ ช่วยฟื้นฟู HP ขณะนอนหลับ เมื่อเข้านอนตอนกลางคืน เวลาจะข้ามไปที่ตอนเช้า ถ้าไม่มีสิ่งปลูกสร้างที่มีหลังคา จะเข้านอนไม่ได้"
+  },
+  "Infra_PlayerBed_Grade_02": {
+    "localized_name": "เตียงคุณภาพสูง",
+    "description": "เตียงนุ่มนิ่ม ที่เพิ่มประสิทธิภาพการฟื้นฟู ถ้าไม่มีสิ่งปลูกสร้างที่มีหลังคา จะเข้านอนไม่ได้"
+  },
+  "ItemBooth": {
+    "localized_name": "ตลานัด (ไอเทม)",
+    "description": null
+  },
+  "ItemChest_04": {
+    "localized_name": "หีบอารยธรรมระดับสูง",
+    "description": null
+  },
+  "JapaneseStyle_houseset": {
+    "localized_name": "เซ็ตปลูกสร้างสไตล์ญี่ปุ่น",
+    "description": "เซ็ตสร้างฐานด้วยสิ่งปลูกสร้างสไตล์ญี่ปุ่น ปลดล็อกเพื่อสร้างสิ่งจำเป็นในการก่อสร้างบ้าน เช่น พื้น ผนัง หลังคา หรือบันได"
+  },
+  "JetDragonStatue": {
+    "localized_name": "รูปปั้น Jetragon",
+    "description": null
+  },
+  "Katana": {
+    "localized_name": "ดาบคาตานะ",
+    "description": null
+  },
+  "Lab": {
+    "localized_name": "ศูนย์วิจัยแรงงานพาล",
+    "description": null
+  },
+  "Lamp": {
+    "localized_name": "โคมตั้งพื้น",
+    "description": "ใช้ไฟฟ้า ทำให้ฐานสว่างขึ้นกว่าเดิม"
+  },
+  "Lantern": {
+    "localized_name": "ตะเกียงแขวนเอว",
+    "description": null
+  },
+  "Lantern_High": {
+    "localized_name": "ตะเกียงแขวนเอวเสริมพลัง",
+    "description": null
+  },
+  "LargeCeilingLamp": {
+    "localized_name": "โคมติดเพดานขนาดใหญ่",
+    "description": "ใช้แขวนเพดาน ส่องสว่างได้กว้าง"
+  },
+  "LargeLamp": {
+    "localized_name": "โคมตั้งพื้นขนาดใหญ่",
+    "description": "ขนาดใหญ่ขึ้น ส่องสว่างได้กว้างขึ้น"
+  },
+  "LaserBullet": {
+    "localized_name": "ตลับพลังงาน",
+    "description": null
+  },
+  "LaserGatlingBullet": {
+    "localized_name": "ตลับพลังงานปืนเลเซอร์แก็ตลิง",
+    "description": null
+  },
+  "LaserGatlingGun": {
+    "localized_name": "ปืนเลเซอร์แก็ตลิง",
+    "description": null
+  },
+  "LaserMiningTool": {
+    "localized_name": "เครื่องตัดพลาสมาหลายรูปแบบ",
+    "description": "เครื่องตัดพลาสม่าแบบพกพา ที่รวมพลังงานพลาสม่าแล้วยิงออกไปได้ ใช้ได้สารพัด ตั้งแต่ขุดแร่ไปจนถึงตัดไม้"
+  },
+  "LauncherBullet": {
+    "localized_name": "กระสุนจรวด",
+    "description": "กระสุนที่ใช้กับอาวุธจำพวกร็อกเก็ตลันเชอร์ สร้างได้ด้วยไลน์ผลิตอาวุธ Ⅱ"
+  },
+  "Launcher_Meteor": {
+    "localized_name": "มีทีออร์ลันเชอร์",
+    "description": "อาวุธเหลือเชื่อที่ทำจากอุกกาบาต เมื่อกระสุนเข้าเป้าจะเกิดระเบิดเหมือนอุกกาบาตตก สร้างได้ด้วยไลน์ผลิตอาวุธ"
+  },
+  "MakeshiftAssaultRifle": {
+    "localized_name": "ปืนไรเฟิลจู่โจมกิ๊กก๊อก",
+    "description": null
+  },
+  "MakeshiftHandgun": {
+    "localized_name": "ปืนพกกิ๊กก๊อก",
+    "description": "ปืนพกที่ประดิษฐ์จากเศษขยะ ค่อนข้างเหมาะกับการต่อสู้ระยะประชิด แต่ยิงได้ทีละนัด สร้างได้ที่ \"แท่นผลิตอาวุธ\""
+  },
+  "MakeshiftShotgun": {
+    "localized_name": "ปืนลูกซองกิ๊กก๊อก",
+    "description": null
+  },
+  "MakeshiftSubmachineGun": {
+    "localized_name": "ปืนกลมือกิ๊กก๊อก",
+    "description": null
+  },
+  "ManganeseIngot": {
+    "localized_name": "ก้อนโลหะเเร่โครัม",
+    "description": null
+  },
+  "ManualElectricGenerator": {
+    "localized_name": "เครื่องกำเนิดไฟฟ้ากำลังคน",
+    "description": null
+  },
+  "MeatCutterKnife": {
+    "localized_name": "มีดหั่นเนื้อ",
+    "description": "มีดที่ใช้ชำแหละพาลที่เรียกออกมาได้ ระหว่างสวมใส่ คำสั่ง \"ลูบ\" จะกลายเป็น \"ชำแหละ\" พาลที่ชำแหละจะไม่กลับคืนมาอีก"
+  },
+  "MedicalPalBed_04": {
+    "localized_name": "เตียงใหญ่สำหรับพาล",
+    "description": null
+  },
+  "MedicalPalBed_05": {
+    "localized_name": "แคปซูลพาลของอารยธรรมระดับสูง",
+    "description": null
+  },
+  "MedicineFacility_03": {
+    "localized_name": "โต๊ะผลิตยาของอารยธรรมระดับสูง",
+    "description": null
+  },
+  "MetalDetector": {
+    "localized_name": "เครื่องตรวจจับโลหะ",
+    "description": null
+  },
+  "Metal_Gate": {
+    "localized_name": "ประตูรั้วโลหะ",
+    "description": "ประตูรั้วโลหะที่พาลขนาดใหญ่ก็ผ่านได้"
+  },
+  "Metal_houseset": {
+    "localized_name": "เซ็ตปลูกสร้างโลหะ",
+    "description": "เซ็ตสร้างฐานด้วยวัสดุโลหะ ปลดล็อกเพื่อสร้างสิ่งจำเป็นในการก่อสร้างบ้าน เช่น พื้น ผนัง หลังคา หรือบันได ที่ทำจากโลหะ"
+  },
+  "MiningTool": {
+    "localized_name": "รถขุดแร่",
+    "description": null
+  },
+  "MissileBullet": {
+    "localized_name": "กระสุนมิสไซล์",
+    "description": null
+  },
+  "MonsterFarm": {
+    "localized_name": "ฟาร์มปศุสัตว์",
+    "description": "ฟาร์มไว้ปล่อยพาลประเภทไก่ หรือ แกะ ถ้าส่งพาลที่มีถนัดทำงานในฟาร์มมารับผิดชอบที่นี่ จะได้ไอเทมมากขึ้น"
+  },
+  "MultiElectricHatchingPalEgg": {
+    "localized_name": "เครื่องฟักไข่ไฟฟ้าขนาดใหญ่",
+    "description": null
+  },
+  "MultiElectricHatchingPalEggWithBreed": {
+    "localized_name": "เครื่องผสมพันธุ์แห่งอารยธรรมโบราณ",
+    "description": null
+  },
+  "MultiHatchingPalEgg": {
+    "localized_name": "เครื่องฟักไข่ขนาดใหญ่",
+    "description": null
+  },
+  "Musket": {
+    "localized_name": "ปืนคาบศิลา",
+    "description": "ปืนอย่างง่ายและเก่าโทรม การยิงแต่ละนัดรุนแรงก็จริง แต่เสียเวลาบรรจุกระสุนใหม่ สร้างได้ด้วยแท่นผลิตอาวุธ"
+  },
+  "NinjaFlagSet": {
+    "localized_name": "เซ็ตธงกลุ่มบุปผาจันทรา",
+    "description": "เซ็ตที่ประกอบไปด้วยธงประจำกลุ่มบุปผาจันทรากับ ม่านเเนวตั้งของกลุ่มบุปผาจันทรา หลักฐานเเห่งชัยชนะเหนือกลุ่มบุปผาจันทรา"
+  },
+  "OctaviaSet01": {
+    "localized_name": "เซ็ตคอลแลบ ULTRAKILL 1",
+    "description": "[คอลแลบULTRAKILL] ชุดเกราะ V1กับ ปืนลูกโม่ของนักแม่นปืนเซ็ต"
+  },
+  "OctaviaSet02": {
+    "localized_name": "เซ็ตคอลแลบ ULTRAKILL 2",
+    "description": "[คอลแลบ ULTRAKILL] ชุดเกราะ V2กับ ปืนลูกซองปลดแกนพลังงานเซ็ต"
+  },
+  "OilPump": {
+    "localized_name": "เครื่องสกัดน้ำมันดิบ",
+    "description": null
+  },
+  "OilPump02": {
+    "localized_name": "เครื่องสกัดน้ำมันดิบแรงดันสูง",
+    "description": null
+  },
+  "OlympicCauldron": {
+    "localized_name": "กระถางไฟศักดิ์สิทธิ์",
+    "description": null
+  },
+  "OperatingTable": {
+    "localized_name": "โต๊ะผ่าตัดพาล",
+    "description": null
+  },
+  "OverheatRifle": {
+    "localized_name": "โอเวอร์ฮีตไรเฟิล",
+    "description": null
+  },
+  "OverheatRifleBullet": {
+    "localized_name": "กระสุนโอเวอร์ฮีตไรเฟิล",
+    "description": null
+  },
+  "PALBOX": {
+    "localized_name": "กล่องพาล",
+    "description": "ที่เก็บพาลที่จับได้ พาลที่อยู่ในกล่องจะฟื้นฟู HP ทีละน้อย พื้นที่รอบสิ่งปลูกสร้างนี้จะถือเป็นฐาน"
+  },
+  "PalBooth": {
+    "localized_name": "ตลานัด (พาล)",
+    "description": null
+  },
+  "PalDopingShot": {
+    "localized_name": "บูสต์กัน",
+    "description": null
+  },
+  "PalDopingShotBullet": {
+    "localized_name": "กระสุนบูสต์กัน",
+    "description": null
+  },
+  "PalDopingShot_2": {
+    "localized_name": "เมกาบูสต์กัน",
+    "description": null
+  },
+  "PalFoodBox": {
+    "localized_name": "กล่องอาหารสัตว์",
+    "description": "หากใส่อาหารไว้ พาลที่ฐานจะมากินอาหารที่นี่"
+  },
+  "PalHealingGrenade": {
+    "localized_name": "ระเบิดฟื้นฟูพาล",
+    "description": null
+  },
+  "PalMedicineBox": {
+    "localized_name": "ตู้ยา",
+    "description": null
+  },
+  "PalRevive": {
+    "localized_name": "ยาฟื้นคืนชีพ",
+    "description": null
+  },
+  "PalSphere_Ancient_1": {
+    "localized_name": "โซลสเฟียร์",
+    "description": "ไอเทมขว้างไว้จับพาล เป็นลูกบอลระดับสูง ทำให้จับได้ง่ายขึ้น"
+  },
+  "PalSphere_Ancient_2": {
+    "localized_name": "โซลสเฟียร์โบราณ",
+    "description": "ไอเทมขว้างไว้จับพาล ใช้พลังจากต้นไม้ เป็นลูกบอลขั้นสุดยอด จับได้ง่ายมาก"
+  },
+  "PalSphere_Exotic": {
+    "localized_name": "อินฟินิตี้สเฟียร์",
+    "description": null
+  },
+  "Plastic": {
+    "localized_name": "พลาสตีล",
+    "description": null
+  },
+  "PoliceFlagSet": {
+    "localized_name": "เซ็ตธงสันติบาล",
+    "description": "เซ็ตที่ประกอบไปด้วยธงประจำกลุ่มสันติบาลกับ ม่านเเนวตั้งของสันติบาล หลักฐานเเห่งชัยชนะเหนือสันติบาล"
+  },
+  "Polymer": {
+    "localized_name": "โพลิเมอร์",
+    "description": null
+  },
+  "Potion_Extreme": {
+    "localized_name": "ยาฟื้นพลังระดับสูงสุด",
+    "description": null
+  },
+  "Processed_Wood": {
+    "localized_name": "แผ่นไม้",
+    "description": null
+  },
+  "Product_Axe_Grade_01": {
+    "localized_name": "ขวานหิน",
+    "description": "ขวานตัดไม้ ทำจากหิน เลยไม่คมนัก"
+  },
+  "Product_Axe_Grade_02": {
+    "localized_name": "ขวานโลหะ",
+    "description": "ขวานโลหะที่สามารถตัดไม้เนื้อแข็งได้ มีประสิทธิภาพกับต้นไม้ใหญ่ที่เติบโตในพื้นที่ห่างไกลของทวีป สามารถสร้างได้ด้วยโต๊ะทำงานคุณภาพดี"
+  },
+  "Product_Axe_Grade_03": {
+    "localized_name": "ขวานโลหะถลุง",
+    "description": "ขวานที่สามารถเก็บเกี่ยว ไม้เนื้อแข็งได้จากต้นไม้ที่เติบโตในภูมิประเทศที่ยากลำบาก เช่น ภูเขาไฟและทะเลทราย สามารถสร้างได้ด้วย ไลน์ผลิต"
+  },
+  "Product_CoalPit": {
+    "localized_name": "เหมืองถ่านหิน",
+    "description": null
+  },
+  "Product_Cooking_Grade_01": {
+    "localized_name": "กองไฟ",
+    "description": "กองไฟนอกจากกจะทำให้ประกอบอาหารอย่างง่ายได้แล้ว ยังสร้างความอบอุ่น และแสงสว่างเล็กน้อย"
+  },
+  "Product_Cooking_Grade_02": {
+    "localized_name": "หม้อปรุงอาหาร",
+    "description": "เตาทำอาหารทำให้ประกอบอาหารได้หลากหลายขึ้น และมีประสิทธิภาพขึ้น"
+  },
+  "Product_Cooking_Grade_03": {
+    "localized_name": "ครัวไฟฟ้า",
+    "description": "ต้องใช้ไฟฟ้า แต่ทำให้ประกอบอาหารได้รวดเร็วและมีประสิทธิภาพขึ้น ต้องใช้พาลที่ถนัด \"จุดไฟ\" มาทำงาน"
+  },
+  "Product_CopperPit": {
+    "localized_name": "เหมืองเหล็ก",
+    "description": null
+  },
+  "Product_CopperPit_2": {
+    "localized_name": "เหมืองเหล็ก Ⅱ",
+    "description": null
+  },
+  "Product_Factory_Hard_Grade_01": {
+    "localized_name": "โต๊ะทำงานคุณภาพดี",
+    "description": "อัตราการผลิตสูงกว่า \"โต๊ะทำงานดึกดำบรรพ์\" ต้องใช้พาลที่ถนัด \"งานฝีมือ\" มาทำงาน"
+  },
+  "Product_Factory_Hard_Grade_02": {
+    "localized_name": "ไลน์ผลิต",
+    "description": "ต้องใช้ไฟฟ้า แต่ทำให้ผลิตไอเทมต่าง ๆ ได้รวดเร็วขึ้น ต้องใช้พาลที่ถนัด \"งานฝีมือ\" มาทำงาน"
+  },
+  "Product_Factory_Hard_Grade_03": {
+    "localized_name": "ไลน์ผลิต Ⅱ",
+    "description": "ต้องใช้ไฟฟ้า แต่ทำให้ผลิตไอเทมต่าง ๆ ได้รวดเร็วยิ่งขึ้น ต้องใช้พาลที่ถนัด \"งานฝีมือ\" มาทำงาน"
+  },
+  "Product_Farm_Berries": {
+    "localized_name": "สวนเบอร์รี",
+    "description": "สวนไว้ปลูกเบอร์รี ต้องใช้พาลที่ถนัด \"หว่านเมล็ด\" \"รดน้ำ\" \"สะสม\" มาทำงาน"
+  },
+  "Product_Farm_Carrot": {
+    "localized_name": "สวนแคร์รอต",
+    "description": null
+  },
+  "Product_Farm_Lettuce": {
+    "localized_name": "สวนผักกาด",
+    "description": "สวนไว้ปลูกผักกาด ต้องใช้พาลที่ถนัด \"หว่านเมล็ด\" \"รดน้ำ\" \"สะสม\" มาทำงาน"
+  },
+  "Product_Farm_Onion": {
+    "localized_name": "สวนหัวหอม",
+    "description": null
+  },
+  "Product_Farm_Potato": {
+    "localized_name": "สวนมันฝรั่ง",
+    "description": null
+  },
+  "Product_Farm_tomato": {
+    "localized_name": "สวนมะเขือเทศ",
+    "description": "สวนไว้ปลูกมะเขือเทศ ต้องใช้พาลที่ถนัด \"หว่านเมล็ด\" \"รดน้ำ\" \"สะสม\" มาทำงาน"
+  },
+  "Product_Farm_wheat": {
+    "localized_name": "ทุ่งข้าวสาลี",
+    "description": "สวนไว้ปลูกข้าวสาลีที่เป็นวัตถุดิบของขนมปัง ต้องใช้พาลที่ถนัด \"หว่านเมล็ด\" \"รดน้ำ\" \"สะสม\" มาทำงาน"
+  },
+  "Product_Ingot_Grade_01_Copper": {
+    "localized_name": "เตาดึกดำบรรพ์",
+    "description": "สามารถเเปรรูปหินแร่โลหะ เพื่อผลิตก้อนโลหะ"
+  },
+  "Product_Ingot_Grade_02_Iron": {
+    "localized_name": "เตารุ่นปรับปรุง",
+    "description": "ทำให้ถลุง \"ก้อนโลหะถลุง\" ได้"
+  },
+  "Product_Ingot_Grade_03_Steal": {
+    "localized_name": "เตาไฟฟ้า",
+    "description": "ทำให้ถลุง \"ก้อนพาลเมทัล\" ได้"
+  },
+  "Product_Medicine_Grade_01": {
+    "localized_name": "โต๊ะผลิตยายุคกลาง",
+    "description": "ที่ผลิตยาอย่างง่าย ต้องใช้พาลที่ถนัด \"ผลิตยา\" มาทำงาน"
+  },
+  "Product_Medicine_Grade_02": {
+    "localized_name": "โต๊ะผลิตยาไฟฟ้า",
+    "description": "ต้องใช้ไฟฟ้า แต่ทำให้ผลิตยาที่มีคุณภาพสูงขึ้นได้ ต้องใช้พาลที่ถนัด \"ผลิตยา\" มาทำงาน"
+  },
+  "Product_Pickaxe_Grade_01": {
+    "localized_name": "อีเต้อหิน",
+    "description": "อีเต้อสำหรับขุด ทำจากหิน ประสิทธิภาพจึงไม่ดีนัก"
+  },
+  "Product_Pickaxe_Grade_02": {
+    "localized_name": "อีเต้อโลหะ",
+    "description": "พลั่วสำหรับขุดแร่ ทำจากโลหะ จึงทนทานและใช้งานได้ดีขึ้น สามารถสร้างได้ด้วย โต๊ะทำงานคุณภาพดี"
+  },
+  "Product_Pickaxe_Grade_03": {
+    "localized_name": "อีเต้อโลหะถลุง",
+    "description": "พลั่วสำหรับขุด มีความทนทานและประสิทธิภาพสูงยิ่งขึ้น สามารถสร้างได้ด้วยไลน์ผลิต"
+  },
+  "Product_QuartzPit": {
+    "localized_name": "เหมืองควอตซ์บริสุทธิ์",
+    "description": null
+  },
+  "Product_StationDeforest": {
+    "localized_name": "ลานตัดไม้",
+    "description": "สถานที่ไว้ผลิตไม้ที่ฐาน ต้องใช้พาลที่ถนัด \"ตัดไม้\" มาทำงาน"
+  },
+  "Product_StationDeforest2": {
+    "localized_name": "ลานตัดไม้ Ⅱ",
+    "description": null
+  },
+  "Product_StonePit": {
+    "localized_name": "เหมืองหิน",
+    "description": "สถานที่ไว้ผลิตหินที่ฐาน ต้องใช้พาลที่ถนัด \"ขุดแร่\" มาทำงาน"
+  },
+  "Product_SulfurPit": {
+    "localized_name": "เหมืองกำมะถัน",
+    "description": null
+  },
+  "Product_WeaponFactory_Dirty_Grade_01": {
+    "localized_name": "แท่นผลิตอาวุธ",
+    "description": "ที่ผลิตอาวุธจักรกลอย่างง่าย ต้องใช้พาลที่ถนัด \"งานฝีมือ\" มาทำงาน"
+  },
+  "Product_WeaponFactory_Dirty_Grade_02": {
+    "localized_name": "ไลน์ผลิตอาวุธ",
+    "description": "ต้องใช้ไฟฟ้า แต่ทำให้ผลิตดินปืนและอาวุธได้รวดเร็วขึ้น ต้องใช้พาลที่ถนัด \"งานฝีมือ\" มาทำงาน"
+  },
+  "Product_WeaponFactory_Dirty_Grade_03": {
+    "localized_name": "ไลน์ผลิตอาวุธ Ⅱ",
+    "description": "ต้องใช้ไฟฟ้า แต่ทำให้ผลิตดินปืนและอาวุธได้รวดเร็วยิ่งขึ้น ต้องใช้พาลที่ถนัด \"งานฝีมือ\" มาทำงาน"
+  },
+  "Product_WorkBench_SkillUnlock": {
+    "localized_name": "โต๊ะสร้างพาลเกียร์",
+    "description": "ใช้สร้างอุปกรณ์ สำหรับเปิดใช้งานสกิลพาร์ตเนอร์ของพาล"
+  },
+  "Refrigerator": {
+    "localized_name": "ตู้เย็น",
+    "description": null
+  },
+  "ReinforcedArrow": {
+    "localized_name": "ลูกศรเสริมแรง",
+    "description": null
+  },
+  "RepairBench": {
+    "localized_name": "โต๊ะซ่อมแซม",
+    "description": "ที่ซ่อมอุปกรณ์ หรืออาวุธที่เสียหาย"
+  },
+  "RifleBullet": {
+    "localized_name": "กระสุนไรเฟิล",
+    "description": "กระสุนที่ใช้กับอาวุธจำพวกไรเฟิล สามารถสร้างได้ด้วยแท่นผลิตอาวุธ"
+  },
+  "RoughBullet": {
+    "localized_name": "กระสุนคุณภาพต่ำ",
+    "description": "กระสุนปืนคาบศิลาที่ใช้กับอาวุธจำพวกปืนพกกิ๊กก๊อกกับ สร้างได้ด้วยแท่นผลิตอาวุธ"
+  },
+  "SFArmor": {
+    "localized_name": "ชุดเกราะเฮ็กโซไลต์",
+    "description": null
+  },
+  "SFArmorCold": {
+    "localized_name": "ชุดเกราะเฮ็กโซไลต์กันหนาว",
+    "description": null
+  },
+  "SFArmorHeat": {
+    "localized_name": "ชุดเกราะเฮ็กโซไลต์กันร้อน",
+    "description": null
+  },
+  "SFArmorWeight": {
+    "localized_name": "ชุดเกราะเฮ็กโซไลต์น้ำหนักเบา",
+    "description": null
+  },
+  "SFArrow": {
+    "localized_name": "ลูกศรเหนือระดับ",
+    "description": null
+  },
+  "SFBow": {
+    "localized_name": "ธนูเหนือระดับ",
+    "description": null
+  },
+  "SFHelmet": {
+    "localized_name": "หมวกเกราะเฮ็กโซไลต์",
+    "description": null
+  },
+  "SF_houseset": {
+    "localized_name": "เซ็ตปลูกสร้างสไตล์อนาคต",
+    "description": "เซ็ตสร้างฐานด้วยสิ่งปลูกสร้างสไตล์อนาคต ปลดล็อกเพื่อสร้างสิ่งจำเป็นในการก่อสร้างบ้าน เช่น พื้น ผนัง หลังคา หรือบันได"
+  },
+  "Salvage_TreasureBoxKey02": {
+    "localized_name": "เบ็ดแม่เหล็กแรงสูง",
+    "description": null
+  },
+  "SanityDecrease1": {
+    "localized_name": "เครื่องกำเนิดคลื่นอัลฟา",
+    "description": null
+  },
+  "ScientistFlagSet": {
+    "localized_name": "เซ็ตธงกองกำลังวิจัยพันธุกรรม",
+    "description": "เซ็ตที่ประกอบไปด้วยธงประจำกลุ่มกองกำลังวิจัยพันธุกรรมกับ ม่านเเนวตั้งของกองกำลังวิจัยพันธุกรรม หลักฐานเเห่งชัยชนะเหนือกองกำลังวิจัยพันธุกรรม"
+  },
+  "Shield_01": {
+    "localized_name": "โล่ธรรมดา",
+    "description": "โล่มหัศจรรย์ที่เกิดจากเทคโนโลยีพาลเดียม หากไม่โดนโจมตีเป็นระยะเวลาหนึ่ง จะซ่อมแซมตนเอง"
+  },
+  "Shield_02": {
+    "localized_name": "โล่ชั้นดี",
+    "description": "โล่มหัศจรรย์ที่เกิดจากเทคโนโลยีพาลเดียม ปรับปรุงจากสินค้าตัวอย่าง เพิ่มพลังป้องกัน สร้างได้ที่ \"โต๊ะทำงานคุณภาพดี\""
+  },
+  "Shield_03": {
+    "localized_name": "โล่ชั้นสูง",
+    "description": "โล่มหัศจรรย์ที่เกิดจากเทคโนโลยีพาลเดียม ปรับปรุงเพิ่มประสิทธิภาพให้สูงขึ้น สร้างได้ที่ \"ไลน์ผลิต\""
+  },
+  "Shield_04": {
+    "localized_name": "โล่ชั้นพิเศษ",
+    "description": "โล่มหัศจรรย์ที่เกิดจากเทคโนโลยีพาลเดียม สร้างไอเทมที่มีคุณภาพสูงได้สำเร็จ เป็นผลจากการทดลองหลายครั้ง สร้างได้ที่ \"ไลน์ผลิต Ⅱ\""
+  },
+  "Shield_05": {
+    "localized_name": "โล่ชั้นสูงพิเศษ",
+    "description": "โล่มหัศจรรย์ที่เกิดจากเทคโนโลยีพาลเดียม สร้างไอเทมที่มีคุณภาพสูงที่สุดได้สำเร็จ เป็นผลจากการทดลองซ้ำแล้วซ้ำเล่า สร้างได้ที่ \"ไลน์ผลิต Ⅱ\""
+  },
+  "Shield_07": {
+    "localized_name": "โล่เครื่องยนต์",
+    "description": null
+  },
+  "Shield_SF": {
+    "localized_name": "โล่เหนือระดับ",
+    "description": null
+  },
+  "ShotGunBullet": {
+    "localized_name": "กระสุนปืนลูกซอง",
+    "description": "กระสุนที่ใช้กับอาวุธจำพวกปืนลูกซอง สามารถสร้างได้ด้วยแท่นผลิตอาวุธ"
+  },
+  "Signboard": {
+    "localized_name": "ป้าย",
+    "description": "ป้ายไว้เขียนตัวอักษร"
+  },
+  "Silo": {
+    "localized_name": "ไซโล",
+    "description": null
+  },
+  "SkillUnlock_Alpaca": {
+    "localized_name": "อานของ Melpaca",
+    "description": null
+  },
+  "SkillUnlock_AmaterasuWolf": {
+    "localized_name": "อานของ Kitsun",
+    "description": null
+  },
+  "SkillUnlock_AmaterasuWolf_Dark": {
+    "localized_name": "อานของ Kitsun Noct",
+    "description": null
+  },
+  "SkillUnlock_BadCatgirl": {
+    "localized_name": "ปืนลูกซองของ Nyafia",
+    "description": null
+  },
+  "SkillUnlock_BirdDragon": {
+    "localized_name": "อานของ Vanwyrm",
+    "description": null
+  },
+  "SkillUnlock_BirdDragon_Ice": {
+    "localized_name": "อานของ Vanwyrm Cryst",
+    "description": null
+  },
+  "SkillUnlock_BlackCentaur": {
+    "localized_name": "อานของ Necromus",
+    "description": null
+  },
+  "SkillUnlock_BlackGriffon": {
+    "localized_name": "อานของ Shadowbeak",
+    "description": null
+  },
+  "SkillUnlock_BlackMetalDragon": {
+    "localized_name": "อานของ Astegon",
+    "description": null
+  },
+  "SkillUnlock_BlackPuppy": {
+    "localized_name": "สายจูงของ Smokie",
+    "description": null
+  },
+  "SkillUnlock_BlueDragon": {
+    "localized_name": "อานของ Azurobe",
+    "description": null
+  },
+  "SkillUnlock_BlueDragon_Ice": {
+    "localized_name": "อานของ Azurobe Cryst",
+    "description": null
+  },
+  "SkillUnlock_BlueSkyDragon": {
+    "localized_name": "อานของ Shaolong",
+    "description": null
+  },
+  "SkillUnlock_BlueThunderHorse": {
+    "localized_name": "อานของ Azurmane",
+    "description": null
+  },
+  "SkillUnlock_Boar": {
+    "localized_name": "อานของ Rushoar",
+    "description": null
+  },
+  "SkillUnlock_Carbunclo": {
+    "localized_name": "ปืนกลมือของ Lifmunk",
+    "description": null
+  },
+  "SkillUnlock_ColorfulBird": {
+    "localized_name": "ถุงมือของ Tocotoco",
+    "description": null
+  },
+  "SkillUnlock_CubeTurtle": {
+    "localized_name": "อานของ Tetroise",
+    "description": null
+  },
+  "SkillUnlock_CubeTurtle_Neutral": {
+    "localized_name": "อานของ Tetroise Primo",
+    "description": null
+  },
+  "SkillUnlock_DarkMechaDragon": {
+    "localized_name": "อานของ Xenolord",
+    "description": null
+  },
+  "SkillUnlock_Deer": {
+    "localized_name": "อานของ Eikthyrdeer",
+    "description": null
+  },
+  "SkillUnlock_Deer_Ground": {
+    "localized_name": "อานของ Eikthyrdeer Terra",
+    "description": null
+  },
+  "SkillUnlock_DomeArmorDragon": {
+    "localized_name": "อานของ Aegidron",
+    "description": null
+  },
+  "SkillUnlock_ElecPanda": {
+    "localized_name": "มินิกันของ Grizzbolt",
+    "description": null
+  },
+  "SkillUnlock_FairyDragon": {
+    "localized_name": "อานของ Elphidran",
+    "description": null
+  },
+  "SkillUnlock_FairyDragon_Water": {
+    "localized_name": "อานของ Elphidran Aqua",
+    "description": null
+  },
+  "SkillUnlock_FeatherOstrich": {
+    "localized_name": "อานของ Dazemu",
+    "description": null
+  },
+  "SkillUnlock_FengyunDeeper": {
+    "localized_name": "อานของ Fenglope",
+    "description": null
+  },
+  "SkillUnlock_FengyunDeeper_Electric": {
+    "localized_name": "อานของ Fenglope Lux",
+    "description": null
+  },
+  "SkillUnlock_FireKirin": {
+    "localized_name": "อานของ Pyrin",
+    "description": null
+  },
+  "SkillUnlock_FireKirin_Dark": {
+    "localized_name": "อานของ Pyrin Noct",
+    "description": null
+  },
+  "SkillUnlock_FlameBuffalo": {
+    "localized_name": "อานของ Arsox",
+    "description": null
+  },
+  "SkillUnlock_FlowerDinosaur": {
+    "localized_name": "อานของ Dinossom",
+    "description": null
+  },
+  "SkillUnlock_FlowerDinosaur_Electric": {
+    "localized_name": "อานของ Dinossom Lux",
+    "description": null
+  },
+  "SkillUnlock_Garm": {
+    "localized_name": "สายจูงติดอานของ Direhowl",
+    "description": null
+  },
+  "SkillUnlock_GhostAnglerfish": {
+    "localized_name": "อานของ Ghangler",
+    "description": null
+  },
+  "SkillUnlock_GhostAnglerfish_Fire": {
+    "localized_name": "อานของ Ghangler Ignis",
+    "description": null
+  },
+  "SkillUnlock_GhostBeast": {
+    "localized_name": "อานของ Maraith",
+    "description": null
+  },
+  "SkillUnlock_GhostDragon": {
+    "localized_name": "อานของ Eidrolon",
+    "description": null
+  },
+  "SkillUnlock_GhostDragon_Fire": {
+    "localized_name": "อานของ Eidrolon Ignis",
+    "description": null
+  },
+  "SkillUnlock_GoldenHorse": {
+    "localized_name": "อานของ Gildane",
+    "description": null
+  },
+  "SkillUnlock_GrassGolem": {
+    "localized_name": "อานของ Dualith",
+    "description": null
+  },
+  "SkillUnlock_GrassGolem_Dark": {
+    "localized_name": "อานของ Dualith Noct",
+    "description": null
+  },
+  "SkillUnlock_GrassMammoth": {
+    "localized_name": "อานของ Mammorest",
+    "description": null
+  },
+  "SkillUnlock_GrassMammoth_Ice": {
+    "localized_name": "อานของ Mammorest Cryst",
+    "description": null
+  },
+  "SkillUnlock_GrassPanda": {
+    "localized_name": "เครื่องยิงลูกระเบิดของ Mossanda",
+    "description": null
+  },
+  "SkillUnlock_GrassPanda_Electric": {
+    "localized_name": "เครื่องยิงลูกระเบิดของ Mossanda Lux",
+    "description": null
+  },
+  "SkillUnlock_GuardianDog": {
+    "localized_name": "อานของ Yakumo",
+    "description": null
+  },
+  "SkillUnlock_HadesBird": {
+    "localized_name": "อานของ Helzephyr",
+    "description": null
+  },
+  "SkillUnlock_HadesBird_Electric": {
+    "localized_name": "อานของ Helzephyr Lux",
+    "description": null
+  },
+  "SkillUnlock_HawkBird": {
+    "localized_name": "อานของ Nitewing",
+    "description": null
+  },
+  "SkillUnlock_Horus": {
+    "localized_name": "อานของ Faleris",
+    "description": null
+  },
+  "SkillUnlock_Horus_Water": {
+    "localized_name": "อานของ Faleris Aqua",
+    "description": null
+  },
+  "SkillUnlock_IceDeer": {
+    "localized_name": "อานของ Reindrix",
+    "description": null
+  },
+  "SkillUnlock_IceHorse": {
+    "localized_name": "อานของ Frostallion",
+    "description": null
+  },
+  "SkillUnlock_IceHorse_Dark": {
+    "localized_name": "อานของ Frostallion Noct",
+    "description": null
+  },
+  "SkillUnlock_IceNarwhal": {
+    "localized_name": "อานของ Whalaska",
+    "description": null
+  },
+  "SkillUnlock_IceNarwhal_Fire": {
+    "localized_name": "อานของ Whalaska Ignis",
+    "description": null
+  },
+  "SkillUnlock_IceSeal": {
+    "localized_name": "อานของ Polapup",
+    "description": null
+  },
+  "SkillUnlock_IceSeal_Ground": {
+    "localized_name": "อานของ Polapup Terra",
+    "description": null
+  },
+  "SkillUnlock_JetDragon": {
+    "localized_name": "เครื่องยิงมิสไซล์ของ Jetragon",
+    "description": null
+  },
+  "SkillUnlock_KingAlpaca": {
+    "localized_name": "อานของ Kingpaca",
+    "description": null
+  },
+  "SkillUnlock_KingAlpaca_Ice": {
+    "localized_name": "อานของ Kingpaca Cryst",
+    "description": null
+  },
+  "SkillUnlock_KingBahamut": {
+    "localized_name": "อานของ Blazamut",
+    "description": null
+  },
+  "SkillUnlock_KingBahamut_Dragon": {
+    "localized_name": "อานของ Blazamut Ryu",
+    "description": null
+  },
+  "SkillUnlock_KingSunfish": {
+    "localized_name": "อานของ Solmara",
+    "description": null
+  },
+  "SkillUnlock_KingSunfish_Thunder": {
+    "localized_name": "อานของ Solmora Lux",
+    "description": null
+  },
+  "SkillUnlock_Kirin": {
+    "localized_name": "อานของ Univolt",
+    "description": null
+  },
+  "SkillUnlock_Kirin_Ice": {
+    "localized_name": "อานของ Univolt Cryst",
+    "description": null
+  },
+  "SkillUnlock_Kitsunebi": {
+    "localized_name": "สายจูงของ Foxparks",
+    "description": null
+  },
+  "SkillUnlock_Kitsunebi_Ice": {
+    "localized_name": "สายจูงของ Foxparks Cryst",
+    "description": null
+  },
+  "SkillUnlock_LazyDragon": {
+    "localized_name": "เครื่องยิงมิสไซล์ของ Relaxaurus",
+    "description": null
+  },
+  "SkillUnlock_LazyDragon_Electric": {
+    "localized_name": "เครื่องยิงมิสไซล์ของ Relaxaurus Lux",
+    "description": null
+  },
+  "SkillUnlock_LegendDeer": {
+    "localized_name": "อานของ Hartalis",
+    "description": null
+  },
+  "SkillUnlock_LotusDragon": {
+    "localized_name": "อานของ Ophydia",
+    "description": null
+  },
+  "SkillUnlock_Manticore": {
+    "localized_name": "อานของ Blazehowl",
+    "description": null
+  },
+  "SkillUnlock_Manticore_Dark": {
+    "localized_name": "อานของ Blazehowl Noct",
+    "description": null
+  },
+  "SkillUnlock_Monkey": {
+    "localized_name": "ปืนไรเฟิลจู่โจมของ Tanzee",
+    "description": null
+  },
+  "SkillUnlock_Monkey_Fire": {
+    "localized_name": "ปืนอัสซอลต์ไรเฟิลของ Tanzee Ignis",
+    "description": null
+  },
+  "SkillUnlock_MoonQueen": {
+    "localized_name": "อานของ Selyne",
+    "description": null
+  },
+  "SkillUnlock_MopKing": {
+    "localized_name": "อานของ Sweepa",
+    "description": null
+  },
+  "SkillUnlock_MushroomDragon": {
+    "localized_name": "อานของ Shroomer",
+    "description": null
+  },
+  "SkillUnlock_MushroomDragon_Dark": {
+    "localized_name": "อานของ Shroomer Noct",
+    "description": null
+  },
+  "SkillUnlock_NaughtyCat": {
+    "localized_name": "อานของ Grintale",
+    "description": null
+  },
+  "SkillUnlock_NightBlueHorse": {
+    "localized_name": "อานของ Starryon",
+    "description": null
+  },
+  "SkillUnlock_NightBlueHorse_Neutral": {
+    "localized_name": "อานของ Starryon Primo",
+    "description": null
+  },
+  "SkillUnlock_Penguin": {
+    "localized_name": "ร็อกเก็ตลันเชอร์ของ Pengullet",
+    "description": null
+  },
+  "SkillUnlock_Penguin_Electric": {
+    "localized_name": "ร็อกเก็ตลันเชอร์ของ Pengullet Lux",
+    "description": null
+  },
+  "SkillUnlock_Plesiosaur": {
+    "localized_name": "อานของ Braloha",
+    "description": null
+  },
+  "SkillUnlock_PoseidonOrca": {
+    "localized_name": "อานของ Neptilius",
+    "description": null
+  },
+  "SkillUnlock_PurpleSpider": {
+    "localized_name": "อานของ Tarantriss",
+    "description": null
+  },
+  "SkillUnlock_RedArmorBird": {
+    "localized_name": "อานของ Ragnahawk",
+    "description": null
+  },
+  "SkillUnlock_SaintCentaur": {
+    "localized_name": "อานของ Paladius",
+    "description": null
+  },
+  "SkillUnlock_SakuraSaurus": {
+    "localized_name": "อานของ Broncherry",
+    "description": null
+  },
+  "SkillUnlock_SakuraSaurus_Water": {
+    "localized_name": "อานของ Broncherry Aqua",
+    "description": null
+  },
+  "SkillUnlock_Serpent": {
+    "localized_name": "อานของ Surfent",
+    "description": null
+  },
+  "SkillUnlock_Serpent_Ground": {
+    "localized_name": "อานของ Surfent Terra",
+    "description": null
+  },
+  "SkillUnlock_SkyDragon": {
+    "localized_name": "อานของ Quivern",
+    "description": null
+  },
+  "SkillUnlock_SkyDragon_Grass": {
+    "localized_name": "อานของ Quivern Botan",
+    "description": null
+  },
+  "SkillUnlock_SnowTigerBeastman": {
+    "localized_name": "อานของ Bastigor",
+    "description": null
+  },
+  "SkillUnlock_SumoDog": {
+    "localized_name": "อานของ Bulldosu",
+    "description": null
+  },
+  "SkillUnlock_Suzaku": {
+    "localized_name": "อานของ Suzaku",
+    "description": null
+  },
+  "SkillUnlock_Suzaku_Water": {
+    "localized_name": "อานของ Suzaku Aqua",
+    "description": null
+  },
+  "SkillUnlock_ThiefBird": {
+    "localized_name": "อานของ Roujay",
+    "description": null
+  },
+  "SkillUnlock_ThunderBird": {
+    "localized_name": "อานของ Beakon",
+    "description": null
+  },
+  "SkillUnlock_ThunderBird_Ice": {
+    "localized_name": "อานของ Beakon Cryst",
+    "description": null
+  },
+  "SkillUnlock_ThunderDog": {
+    "localized_name": "อานของ Rayhound",
+    "description": null
+  },
+  "SkillUnlock_ThunderFluffyBird": {
+    "localized_name": "อานของ Dynamoff",
+    "description": null
+  },
+  "SkillUnlock_Thunderdog_Ice": {
+    "localized_name": "อานของ Rayhound Cryst",
+    "description": null
+  },
+  "SkillUnlock_TropicalOstrich": {
+    "localized_name": "อานของ Palumba",
+    "description": null
+  },
+  "SkillUnlock_Umihebi": {
+    "localized_name": "อานของ Jormuntide",
+    "description": null
+  },
+  "SkillUnlock_Umihebi_Fire": {
+    "localized_name": "อานของ Jormuntide Ignis",
+    "description": null
+  },
+  "SkillUnlock_VolcanicMonster": {
+    "localized_name": "อานของ Reptyro",
+    "description": null
+  },
+  "SkillUnlock_VolcanicMonster_Ice": {
+    "localized_name": "อานของ Reptyro Cryst",
+    "description": null
+  },
+  "SkillUnlock_VolcanoDragon": {
+    "localized_name": "อาน Moldron",
+    "description": null
+  },
+  "SkillUnlock_VolcanoDragon_Ice": {
+    "localized_name": "อานของ Moldron Cryst",
+    "description": null
+  },
+  "SkillUnlock_WeaselDragon": {
+    "localized_name": "อานของ Chillet",
+    "description": null
+  },
+  "SkillUnlock_WeaselDragon_Fire": {
+    "localized_name": "อานของ Chillet Ignis",
+    "description": null
+  },
+  "SkillUnlock_WhiteAlienDragon": {
+    "localized_name": "อานของ Xenogard",
+    "description": null
+  },
+  "SkillUnlock_WhiteDeer": {
+    "localized_name": "อานของ Celesdir",
+    "description": null
+  },
+  "SkillUnlock_WhiteDeer_Dark": {
+    "localized_name": "อานของ Celesdir Noct",
+    "description": null
+  },
+  "SkillUnlock_WhiteShieldDragon": {
+    "localized_name": "อานของ Silvegis",
+    "description": null
+  },
+  "SkillUnlock_Yeti": {
+    "localized_name": "อานของ Wumpo",
+    "description": null
+  },
+  "SkillUnlock_Yeti_Grass": {
+    "localized_name": "อานของ Wumpo Botan",
+    "description": null
+  },
+  "SkinChange": {
+    "localized_name": "เครื่องแต่งตัวพาล",
+    "description": null
+  },
+  "SkyAssaultRifle": {
+    "localized_name": "ปืนไรเฟิลจู่โจม",
+    "description": "“ปืนไรเฟิลจู่โจมที่ทำจากแท่งโลหะที่หลอมจากแร่โซลไลต์ ยังใช้งานได้หลากหลาย และเสริมให้ใช้กระสุนที่แรงขึ้นได้"
+  },
+  "SkyAssaultRifleBullet": {
+    "localized_name": "ลูกกระสุนปืนไรเฟิลจู่โจม",
+    "description": null
+  },
+  "SkyBeamSword": {
+    "localized_name": "ดาบเลเซอร์",
+    "description": "บีมซอร์ดที่ถูกสร้างขึ้นแท่งจากโลหะที่หลอมจากแร่โซลไลต์ ใช้ใบมีดพลังงานสูง จัดการเป้าหมายได้ทันที"
+  },
+  "SkyBow": {
+    "localized_name": "ธนูกลไก",
+    "description": "ธนูที่ทำจาก แท่งโลหะที่หลอมจากแร่โซลไลต์ แรงยิงและพลังทะลุทะลวงสูง ทำให้ยิงระยะไกลได้แม่นยำขึ้น"
+  },
+  "SkyBowArrow": {
+    "localized_name": "ลูกธนูกลไก",
+    "description": null
+  },
+  "SkyGrenadeLauncher": {
+    "localized_name": "เครื่องยิงระเบิดเชิงยุทธวิธี",
+    "description": "เครื่องยิงลูกระเบิดที่ทำจากแท่งโลหะที่หลอมจากแร่โซลไลต์ วิถีกระสุนแม่นยำมากขึ้น ทำให้ยิงไกลได้ดี"
+  },
+  "SkyGrenadeLauncherBullet": {
+    "localized_name": "ลูกกระสุนเครื่องยิงระเบิดเชิงยุทธวิธี",
+    "description": null
+  },
+  "SkyIslandFlagSet": {
+    "localized_name": "เซ็ตธงของผู้นำแห่งพันธสัญญาใต้เงาฟ้า",
+    "description": "เซ็ตที่ประกอบไปด้วยธงกลุ่มผู้นำแห่งพันธสัญญาใต้เงาฟ้ากับ แบนเนอร์ผู้นำแห่งพันธสัญญาใต้เงาฟ้า หลักฐานเเห่งชัยชนะเหนือผู้นำแห่งพันธสัญญาใต้เงาฟ้า"
+  },
+  "SkyIslandOrePit": {
+    "localized_name": "เหมืองขุดแร่โซลไลท์",
+    "description": null
+  },
+  "SkyShotgun": {
+    "localized_name": "ปืนลูกซองรุ่นต้นแบบ",
+    "description": "ปืนลูกซองที่ทำจากแท่งโลหะที่หลอมจากแร่โซลไลต์ ยิงระยะใกล้แรงมาก และแม็กกาซีนแบบพิเศษ ทำให้ยิงต่อเนื่องได้นานขึ้น"
+  },
+  "SkyShotgunBullet": {
+    "localized_name": "ลูกกระสุนปืนลูกซองรุ่นต้นแบบ",
+    "description": null
+  },
+  "SkySubmachineGun": {
+    "localized_name": "ปืนกลมือ",
+    "description": "ปืนกลมือที่ทำจากแท่งโลหะที่หลอมจากแร่โซลไลต์ ใช้แม็กกาซีนและกระสุนที่ปรับปรุงแล้ว ทำให้ยิงได้ดีขึ้น"
+  },
+  "SkySubmachineGunBullet": {
+    "localized_name": "ลูกกระสุนปืนกลมือสำหรับการต่อสู้",
+    "description": null
+  },
+  "SkyislandIngot": {
+    "localized_name": "โลหะหลอมแท่ง Solite",
+    "description": null
+  },
+  "Snowman": {
+    "localized_name": "ตุ๊กตาหิมะ",
+    "description": null
+  },
+  "Spa": {
+    "localized_name": "บ่อน้ำพุร้อน",
+    "description": "พาลลงแช่ \"บ่อน้ำพุร้อน\" ฟื้นฟูค่า SAN"
+  },
+  "Spa2": {
+    "localized_name": "บ่อน้ำพุร้อนคุณภาพดี",
+    "description": "ค่า SAN ของพาลที่ลงแช่ฟื้นฟูมากกว่าเดิม"
+  },
+  "Spa3": {
+    "localized_name": "บ่อน้ำพุร้อนสไตล์ญี่ปุ่น",
+    "description": null
+  },
+  "Spear": {
+    "localized_name": "หอกหิน",
+    "description": null
+  },
+  "Spear_2": {
+    "localized_name": "หอกโลหะ",
+    "description": "หอกที่มีประโยชน์เวลาสู้ระยะประชิด ทำจากโลหะ พลังโจมตีสูงขึ้น สร้างได้ด้วยโต๊ะทำงานคุณภาพดี"
+  },
+  "Spear_3": {
+    "localized_name": "หอกโลหะถลุง",
+    "description": "หอกที่มีประโยชน์เวลาสู้ระยะประชิด ทำจากโลหะเกรดเอ พลังโจมตีสูงขึ้น สร้างได้ด้วยไลน์ผลิต"
+  },
+  "Spear_ForestBoss": {
+    "localized_name": "หอกของ Lily",
+    "description": null
+  },
+  "Spear_ForestBoss2": {
+    "localized_name": "หอกของLily ร่างเสริมพลัง",
+    "description": "หอกคู่ใจของ Lily ที่ได้รับการเสริมพลัง เอาไว้เจาะพวกที่ไม่เห็นหัวให้เป็นรู"
+  },
+  "Special_ElectricHatchingPalEgg": {
+    "localized_name": "เครื่องฟักไข่ไฟฟ้า",
+    "description": null
+  },
+  "Special_HatchingPalEgg": {
+    "localized_name": "เครื่องฟักไข่",
+    "description": "เมื่อใส่ไข่พาลเข้าไปในเครื่อง จะฟักไข่พาลได้"
+  },
+  "Special_PalRankUp": {
+    "localized_name": "แคปซูลควบแน่นพาล",
+    "description": "ควบแน่นพาลชนิดเดียวกันหลายตัว สร้างเป็นสารสกัด ใช้เพิ่มแรงก์ให้พาล"
+  },
+  "Special_PalSphere_Grade_01": {
+    "localized_name": "พาลสเฟียร์",
+    "description": "อุปกรณ์ที่ใช้ขว้างจับพาล เป็นรุ่นผลิตเป็นจำนวนมาก ใช้ได้กับพาลเลเวลต่ำเท่านั้น"
+  },
+  "Special_PalSphere_Grade_02": {
+    "localized_name": "เมกาสเฟียร์",
+    "description": "อุปกรณ์ที่ใช้ขว้างจับพาล คุณภาพดีขึ้น ใช้จับพาลได้หลากหลายขึ้น สร้างได้ด้วยโต๊ะสร้างสเฟียร์"
+  },
+  "Special_PalSphere_Grade_03": {
+    "localized_name": "กิกาสเฟียร์",
+    "description": "อุปกรณ์ที่ใช้ขว้างจับพาล ใช้จับพาลที่แข็งแกร่งพอตัวได้ สร้างได้ด้วยโต๊ะสร้างสเฟียร์"
+  },
+  "Special_PalSphere_Grade_04": {
+    "localized_name": "เทราสเฟียร์",
+    "description": "อุปกรณ์ที่ใช้ขว้างจับพาล ใช้จับพาลที่ค่อนข้างแข็งแกร่งได้ สร้างได้ด้วยไลน์ผลิตสเฟียร์"
+  },
+  "Special_PalSphere_Grade_05": {
+    "localized_name": "อัลตราสเฟียร์",
+    "description": "อุปกรณ์ที่ใช้ขว้างจับพาล คุณภาพสูง มีพาลไม่กี่ชนิดที่หนีจากสเฟียร์นี้ได้ สร้างได้ด้วยไลน์ผลิตสเฟียร์ Ⅱ"
+  },
+  "Special_PalSphere_Grade_06": {
+    "localized_name": "เลเจนด์สเฟียร์",
+    "description": "อุปกรณ์ที่ใช้ขว้างจับพาล คุณภาพสูงมาก แทบที่ไม่พาลที่หนีจากเสฟียร์นี้ได้ สร้างได้ด้วยไลน์ผลิตสเฟียร์ Ⅱ"
+  },
+  "Special_PalSphere_Grade_07": {
+    "localized_name": "อัลติเมตสเฟียร์",
+    "description": "อุปกรณ์ที่ใช้ขว้างจับพาล ประสิทธิภาพสูงเป็นอย่างยิ่ง แทบจะจับพาลได้ทุกชนิด สร้างได้ด้วยไลน์ผลิตสเฟียร์ Ⅱ"
+  },
+  "Special_SphereFactory_Black_Grade_01": {
+    "localized_name": "โต๊ะสร้างสเฟียร์",
+    "description": "โต๊ะทำงานสำหรับสร้างสเฟียร์ ต้องใช้พาลที่ถนัด \"งานฝีมือ\" มาทำงาน"
+  },
+  "Special_SphereFactory_Black_Grade_02": {
+    "localized_name": "ไลน์ผลิตสเฟียร์",
+    "description": "โรงงานที่ผลิต \"พาลสเฟียร์\" ได้รวดเร็วขึ้น ต้องใช้พาลที่ถนัด \"งานฝีมือ\" มาทำงาน"
+  },
+  "Special_SphereFactory_Black_Grade_03": {
+    "localized_name": "ไลน์ผลิตสเฟียร์ Ⅱ",
+    "description": "โรงงานที่ผลิต \"พาลสเฟียร์\" ได้รวดเร็วยิ่งขึ้น ต้องใช้พาลที่ถนัด \"งานฝีมือ\" มาทำงาน"
+  },
+  "SphereFactory_Black_04": {
+    "localized_name": "โรงงานสเฟียร์ของอารยธรรมระดับสูง",
+    "description": null
+  },
+  "SphereModule_Curve": {
+    "localized_name": "เคิร์ฟโมดูล",
+    "description": null
+  },
+  "SphereModule_Curve2": {
+    "localized_name": "สไลเดอร์โมดูล",
+    "description": null
+  },
+  "SphereModule_Heavy": {
+    "localized_name": "เฮฟวี่เวตโมดูล",
+    "description": null
+  },
+  "SphereModule_Homing": {
+    "localized_name": "โฮมมิงโมดูล",
+    "description": null
+  },
+  "SphereModule_Sniper": {
+    "localized_name": "สไนเปอร์โมดูล",
+    "description": null
+  },
+  "SphereModule_Sniper2": {
+    "localized_name": "สไนเปอร์โมดูล II",
+    "description": null
+  },
+  "StainlessSteel": {
+    "localized_name": "เฮ็กโซไลต์",
+    "description": null
+  },
+  "Stone_Gate": {
+    "localized_name": "ประตูรั้วหิน",
+    "description": "ประตูรั้วหินที่พาลขนาดใหญ่ก็ผ่านได้"
+  },
+  "Stone_houseset": {
+    "localized_name": "เซ็ตปลูกสร้างหิน",
+    "description": "เซ็ตสร้างฐานด้วยวัสดุหิน ปลดล็อกเพื่อสร้างสิ่งจำเป็นในการก่อสร้างบ้าน เช่น พื้น ผนัง หลังคา หรือบันได ที่ทำจากหิน"
+  },
+  "Stump": {
+    "localized_name": "ตอไม้และขวานตัดไม้",
+    "description": null
+  },
+  "Supplement": {
+    "localized_name": "อาหารเสริม",
+    "description": null
+  },
+  "TableCircular": {
+    "localized_name": "เซ็ตโต๊ะที่เก็บเป็นระเบียบ",
+    "description": "เซ็ตโต๊ะที่เก็บเป็นระเบียบสำหรับตกแต่ง จัดวางต้นไม้เพื่อสร้างฐานที่ดูเป็นธรรมชาติ ไม่สามารถหาวัสดุจากโครงสร้างนี้ได้"
+  },
+  "TableDresser01_Stone": {
+    "localized_name": "โต๊ะเครื่องแป้งแบบโบราณ",
+    "description": null
+  },
+  "Thermal_Core": {
+    "localized_name": "แกนเก็บความร้อนยิ่งยวด",
+    "description": null
+  },
+  "ToolBoxV1": {
+    "localized_name": "กล่องเครื่องมือขนาดใหญ่",
+    "description": null
+  },
+  "Torch": {
+    "localized_name": "คบเพลิงตั้งพื้น",
+    "description": "ติดตั้งไว้ที่ฐาน ทำให้บริเวณโดยรอบสว่างขึ้น"
+  },
+  "TransmissionTower": {
+    "localized_name": "เสาไฟฟ้า",
+    "description": null
+  },
+  "Trap_LegHold": {
+    "localized_name": "กับดักสัตว์ (เล็ก)",
+    "description": "กับดักไว้หยุดผู้ที่เหยียบกับดัก ใช้ได้กับพาลขนาดเล็กและมนุษย์เท่านั้น"
+  },
+  "Trap_LegHold_Big": {
+    "localized_name": "กับดักสัตว์ (ใหญ่)",
+    "description": "กับดักไว้หยุดผู้ที่เหยียบกับดัก ใช้ได้กับพาลขนาดใหญ่เท่านั้น"
+  },
+  "Trap_MineAttack": {
+    "localized_name": "กับระเบิด",
+    "description": "เมื่อศัตรูเหยียบ จะระเบิดโดยอัตโนมัติ"
+  },
+  "Trap_MineElecShock": {
+    "localized_name": "กับดักไฟฟ้า",
+    "description": "กับดักที่ช็อตไฟใส่ผู้ที่เหยียบ พาลที่โดนไฟช็อตจะมีโอกาสจับสำเร็จสูงขึ้น"
+  },
+  "Trap_MineFreeze": {
+    "localized_name": "กับดักเยือกแข็ง",
+    "description": "กับดักที่แช่แข็งผู้ที่เหยียบ พาลที่โดนแช่แข็งจะมีโอกาสจับสำเร็จสูงขึ้น"
+  },
+  "Trap_Noose": {
+    "localized_name": "บ่วงดักสัตว์",
+    "description": "กับดักไว้จับพาลที่เดินผ่านกับดัก ใช้ได้กับพาลขนาดเล็กและมนุษย์เท่านั้น"
+  },
+  "UnlockEquipmentSlot_Weapon_01": {
+    "localized_name": "ซองใส่อาวุธเพิ่มเติม",
+    "description": null
+  },
+  "UnlockEquipmentSlot_Weapon_02": {
+    "localized_name": "ช่องใส่อาวุธเพิ่มเติม 2",
+    "description": null
+  },
+  "Unlock_Picking_Tier1": {
+    "localized_name": "อุปกรณ์สะเดาะกุญแจอย่างง่าย",
+    "description": null
+  },
+  "Unlock_Picking_Tier2": {
+    "localized_name": "อุปกรณ์สะเดาะกุญแจคุณภาพดี",
+    "description": null
+  },
+  "Unlock_Picking_Tier3": {
+    "localized_name": "อุปกรณ์สะเดาะกุญแจมือโปร",
+    "description": null
+  },
+  "WallSignboard": {
+    "localized_name": "ป้ายแขวนผนัง",
+    "description": null
+  },
+  "WallTorch": {
+    "localized_name": "คบเพลิงแขวนผนัง",
+    "description": "แขวนผนังได้"
+  },
+  "WaterBuildKit": {
+    "localized_name": "ชุดปลูกสร้างบนน้ำ",
+    "description": "เครื่องมือสำหรับก่อสร้างบนผิวน้ำ ทำให้สามารถวางฐาน บนผิวน้ำได้"
+  },
+  "WeaponFactory_Dirty_04": {
+    "localized_name": "โรงงานอาวุธอารยธรรมระดับสูง",
+    "description": null
+  },
+  "WidePenetrateShotgun": {
+    "localized_name": "ลำแสงกระจายพยุหะ",
+    "description": "อาวุธลำแสงที่เน้นการต่อสู้ระยะประชิดโดยเฉพาะ ยิงพลังงานออกมาเป็นลำแสงแบบกระจาย"
+  },
+  "WidePenetrateShotgunBullet": {
+    "localized_name": "ลูกกระสุนปืนของลำแสงกระจาย",
+    "description": null
+  },
+  "WingGlider": {
+    "localized_name": "Wing Pack",
+    "description": "อุปกรณ์ประเภทปีกสำหรับสวมที่หลังเพื่อใช้ในการบิน วิงเซลล์ขับเคลื่อนด้วยการใช้พลังงาน"
+  },
+  "WingGlider_Fuel": {
+    "localized_name": "วิงเซลล์",
+    "description": "พลังงานที่ใช้สำหรับการบินWing Pack"
+  },
+  "Wood_Gate": {
+    "localized_name": "ประตูรั้วไม้",
+    "description": "ประตูรั้วไม้ที่พาลขนาดใหญ่ก็ผ่านได้"
+  },
+  "Wooden_houseset": {
+    "localized_name": "เซ็ตปลูกสร้างไม้",
+    "description": "เซ็ตสร้างฐานด้วยวัสดุไม้ ปลดล็อกเพื่อสร้างสิ่งจำเป็นในการก่อสร้างบ้าน เช่น พื้น ผนัง หลังคา หรือบันได ที่ทำจากไม้"
+  },
+  "Wooden_ladder": {
+    "localized_name": "บันได",
+    "description": null
+  },
+  "WorkSpeedIncrease1": {
+    "localized_name": "เครื่องกำเนิดคลื่นเบตา",
+    "description": null
+  },
+  "Workbench": {
+    "localized_name": "โต๊ะทำงานดึกดำบรรพ์",
+    "description": "\"โต๊ะทำงานดึกดำบรรพ์\" สำหรับสร้างไอเทมอย่างง่าย ถ้ามีพาลที่มีความถนัด \"งานฝีมือ\" พาลจะมาช่วยงาน"
+  },
+  "WorldTreeIngot": {
+    "localized_name": "ก้อนโลหะพาลไซต์",
+    "description": "โลหะผสมขั้นสุดยอดหลอมแสงโซลาร์และพาลไซต์ รวมพลังเทคโนโลยีโบราณกับพลังของพฤกษาโลก เป็นวัสดุหายากมาก ใช้ทำอุปกรณ์และสิ่งก่อสร้างระดับสูง"
+  },
+  "YakushimaBlade": {
+    "localized_name": "เหมียวแมร์",
+    "description": null
+  }
+}

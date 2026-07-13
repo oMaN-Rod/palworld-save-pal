@@ -73,7 +73,7 @@
   },
   "Cool5": {
     "localized_name": "Desenvolvimento de Boneco de Neve",
-    "description": null
+    "description": "Desbloqueia a tecnologia \"Boneco de Neve\"."
   },
   "Deforest1": {
     "localized_name": "Trabalho de Corte de Árvores Nv. 1",
@@ -145,7 +145,7 @@
   },
   "Deforest4": {
     "localized_name": "Desenvolvimento de Toco e Machado",
-    "description": null
+    "description": "Desbloqueia a tecnologia \"Toco e Machado\"."
   },
   "EmitFlame1": {
     "localized_name": "Trabalho de Acender Fogo Nv. 1",
@@ -225,7 +225,7 @@
   },
   "EmitFlame5": {
     "localized_name": "Desenvolvimento de Pira da Chama Sagrada",
-    "description": null
+    "description": "Desbloqueia a tecnologia \"Pira da Chama Sagrada\"."
   },
   "GenerateEnergy1": {
     "localized_name": "Trabalho de Geração de Energia Nv. 1",
@@ -297,7 +297,7 @@
   },
   "GenerateEnergy5": {
     "localized_name": "Desenvolvimento de Torre de Transmissão",
-    "description": null
+    "description": "Desbloqueia a tecnologia \"Torre de Transmissão\"."
   },
   "Handcraft1": {
     "localized_name": "Velocidade de Trabalho Manual Nv. 1",
@@ -385,7 +385,7 @@
   },
   "Handcraft5": {
     "localized_name": "Desenvolvimento de Caixa de Ferramentas Grande",
-    "description": null
+    "description": "Desbloqueia a tecnologia \"Caixa de Ferramentas Grande\"."
   },
   "Medicine1": {
     "localized_name": "Trabalho de Manipulação de Remédios Nv. 1",
@@ -445,7 +445,7 @@
   },
   "Medicine4": {
     "localized_name": "Desenvolvimento de Caldeirão de Bruxa",
-    "description": null
+    "description": "Desbloqueia a tecnologia \"Caldeirão de Bruxa\"."
   },
   "Mining1": {
     "localized_name": "Trabalho de Garimpo Nv. 1",
@@ -521,7 +521,7 @@
   },
   "Mining5": {
     "localized_name": "Desenvolvimento de Vagoneta de Garimpo",
-    "description": null
+    "description": "Desbloqueia a tecnologia \"Vagoneta de Garimpo\""
   },
   "Seeding1": {
     "localized_name": "Trabalho de Plantio Nv. 1",
@@ -593,11 +593,11 @@
   },
   "Seeding4": {
     "localized_name": "Desenvolvimento de Canteiro de Flores",
-    "description": null
+    "description": "Desbloqueia a tecnologia \"Canteiro de Flores\"."
   },
   "Seeding5": {
     "localized_name": "Desenvolvimento de Silo",
-    "description": null
+    "description": "Desbloqueia a tecnologia \"Silo\"."
   },
   "Watering1": {
     "localized_name": "Trabalho de Rega Nv. 1",
@@ -669,6 +669,6 @@
   },
   "Watering5": {
     "localized_name": "Desenvolvimento de Chafariz",
-    "description": null
+    "description": "Desbloqueia a tecnologia \"Chafariz\"."
   }
 }

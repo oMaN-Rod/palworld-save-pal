@@ -4365,5 +4365,629 @@
         "value_ex": 0.0
       }
     ]
+  },
+  "EPalWazaID::BlueThunderHorse_PartnerSkill": {
+    "element": "Electricity",
+    "type": "Melee",
+    "power": 30,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 55.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 30,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::CrossThunder": {
+    "element": "Electricity",
+    "type": "Shot",
+    "power": 1,
+    "min_range": 500,
+    "max_range": 1000,
+    "cool_time": 7.0,
+    "effects": []
+  },
+  "EPalWazaID::EnergyShot": {
+    "element": "Ice",
+    "type": "Shot",
+    "power": 1,
+    "min_range": 1000,
+    "max_range": 5000,
+    "cool_time": 5.0,
+    "effects": []
+  },
+  "EPalWazaID::FlareTwister": {
+    "element": "Fire",
+    "type": "Shot",
+    "power": 130,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 8.0,
+    "effects": [
+      {
+        "type": "Burn",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Funnel_DreamDemon": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 20,
+    "min_range": 1000,
+    "max_range": 5000,
+    "cool_time": 5.0,
+    "effects": [
+      {
+        "type": "Darkness",
+        "value": 5,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Funnel_RaijinDaughter": {
+    "element": "Electricity",
+    "type": "Shot",
+    "power": 30,
+    "min_range": 500,
+    "max_range": 3000,
+    "cool_time": 8.0,
+    "effects": [
+      {
+        "type": "Electrical",
+        "value": 10,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Funnel_RaijinDaughter_Water": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 30,
+    "min_range": 500,
+    "max_range": 3000,
+    "cool_time": 8.0,
+    "effects": []
+  },
+  "EPalWazaID::GrassGolem_Dark_PartnerSkill": {
+    "element": "Dark",
+    "type": "Shot",
+    "power": 600,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 0.0,
+    "effects": []
+  },
+  "EPalWazaID::GrassGolem_PartnerSkill": {
+    "element": "Leaf",
+    "type": "Shot",
+    "power": 600,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 0.0,
+    "effects": []
+  },
+  "EPalWazaID::HealingTree": {
+    "element": "Leaf",
+    "type": "Shot",
+    "power": 1,
+    "min_range": 0,
+    "max_range": 4000,
+    "cool_time": 2.0,
+    "effects": []
+  },
+  "EPalWazaID::Human_Rolling": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 0,
+    "min_range": 0,
+    "max_range": 0,
+    "cool_time": 1.0,
+    "effects": []
+  },
+  "EPalWazaID::Intimidate": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 1,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 1.0,
+    "effects": [
+      {
+        "type": "Stun",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::PoseidonOrca_PartnerSkill": {
+    "element": "Water",
+    "type": "Melee",
+    "power": 60,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 55.0,
+    "effects": [
+      {
+        "type": "Wetness",
+        "value": 30,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::PoseidonOrca_PartnerSkill_SpearBullet": {
+    "element": "Water",
+    "type": "Shot",
+    "power": 50,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 55.0,
+    "effects": [
+      {
+        "type": "Wetness",
+        "value": 30,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Scratch": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 100,
+    "min_range": 0,
+    "max_range": 200,
+    "cool_time": 2.0,
+    "effects": [
+      {
+        "type": "Stun",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::SnowStorm": {
+    "element": "Ice",
+    "type": "Shot",
+    "power": 1,
+    "min_range": 100,
+    "max_range": 1000,
+    "cool_time": 5.0,
+    "effects": [
+      {
+        "type": "Freeze",
+        "value": 20,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Throw": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 60,
+    "min_range": 1000,
+    "max_range": 2500,
+    "cool_time": 1.0,
+    "effects": []
+  },
+  "EPalWazaID::TidalWave": {
+    "element": "Water",
+    "type": "Shot",
+    "power": 1,
+    "min_range": 100,
+    "max_range": 1000,
+    "cool_time": 15.0,
+    "effects": [
+      {
+        "type": "Wetness",
+        "value": 80,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_BlueSkyDragon_GYM_Act": {
+    "element": "Water",
+    "type": "Shot",
+    "power": 700,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 0.0,
+    "effects": [
+      {
+        "type": "Wetness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_CubeTurtle_CubePress": {
+    "element": "Earth",
+    "type": "Shot",
+    "power": 600,
+    "min_range": 500,
+    "max_range": 4000,
+    "cool_time": 30.0,
+    "effects": [
+      {
+        "type": "Muddy",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_CubeTurtle_Neutral_HolyPress": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 700,
+    "min_range": 500,
+    "max_range": 4000,
+    "cool_time": 30.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_KingWhale_SuperTidalBore": {
+    "element": "Water",
+    "type": "Shot",
+    "power": 1000,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 30.0,
+    "effects": [
+      {
+        "type": "Wetness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_KingWhale_TidalBore": {
+    "element": "Water",
+    "type": "Shot",
+    "power": 1000,
+    "min_range": 0,
+    "max_range": 6000,
+    "cool_time": 30.0,
+    "effects": [
+      {
+        "type": "Wetness",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_LegendDeer_BarrierRelease_Grass": {
+    "element": "Leaf",
+    "type": "Melee",
+    "power": 220,
+    "min_range": 500,
+    "max_range": 8000,
+    "cool_time": 1.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_LegendDeer_BarrierRelease_Normal": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 300,
+    "min_range": 500,
+    "max_range": 8000,
+    "cool_time": 1.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_LegendDeer_BarrierRelease_Water": {
+    "element": "Water",
+    "type": "Melee",
+    "power": 220,
+    "min_range": 500,
+    "max_range": 8000,
+    "cool_time": 1.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_LegendDeer_RadiantPurge": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 1250,
+    "min_range": 0,
+    "max_range": 8000,
+    "cool_time": 1.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_LilyQueen_GYM_Act": {
+    "element": "Leaf",
+    "type": "Shot",
+    "power": 1,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 60.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_LilyQueen_LilyHealing_Boss": {
+    "element": "Leaf",
+    "type": "Shot",
+    "power": 0,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 300.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_MoonQueen_GYM_Act": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 1,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 300.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_MoonQueen_GYM_Hard_Act": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 1,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 300.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_ThunderDragonMan_GYM_Act": {
+    "element": "Electricity",
+    "type": "Shot",
+    "power": 1,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 30.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_BigBang": {
+    "element": "None",
+    "type": "Shot",
+    "power": 900,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 60.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_HaloBeam": {
+    "element": "None",
+    "type": "Shot",
+    "power": 750,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 20.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_HaloCutter": {
+    "element": "None",
+    "type": "Shot",
+    "power": 600,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 10.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_LaserGliding": {
+    "element": "None",
+    "type": "Shot",
+    "power": 550,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 5.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_PaldiumCannon": {
+    "element": "None",
+    "type": "Shot",
+    "power": 700,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 20.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_PaldiumExplosion": {
+    "element": "None",
+    "type": "Shot",
+    "power": 800,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 60.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_PaldiumRain": {
+    "element": "None",
+    "type": "Shot",
+    "power": 500,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 5.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_PaldiumShot": {
+    "element": "None",
+    "type": "Shot",
+    "power": 400,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 5.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_Supernova": {
+    "element": "None",
+    "type": "Shot",
+    "power": 1000,
+    "min_range": 0,
+    "max_range": 9999,
+    "cool_time": 99.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Green_2_PhantasmalBolt": {
+    "element": "None",
+    "type": "Shot",
+    "power": 40,
+    "min_range": 0,
+    "max_range": 2000,
+    "cool_time": 45.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Green_2_PhantasmalDeathray": {
+    "element": "None",
+    "type": "Shot",
+    "power": 200,
+    "min_range": 0,
+    "max_range": 2000,
+    "cool_time": 45.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Green_2_PhantasmalEye": {
+    "element": "None",
+    "type": "Shot",
+    "power": 10,
+    "min_range": 0,
+    "max_range": 2000,
+    "cool_time": 45.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Green_2_PhantasmalSphere": {
+    "element": "None",
+    "type": "Shot",
+    "power": 90,
+    "min_range": 0,
+    "max_range": 2000,
+    "cool_time": 45.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Green_PhantasmalBolt": {
+    "element": "None",
+    "type": "Shot",
+    "power": 40,
+    "min_range": 0,
+    "max_range": 2000,
+    "cool_time": 45.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Green_PhantasmalDeathray": {
+    "element": "None",
+    "type": "Shot",
+    "power": 200,
+    "min_range": 0,
+    "max_range": 2000,
+    "cool_time": 45.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Green_PhantasmalEye": {
+    "element": "None",
+    "type": "Shot",
+    "power": 10,
+    "min_range": 0,
+    "max_range": 2000,
+    "cool_time": 45.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Green_PhantasmalSphere": {
+    "element": "None",
+    "type": "Shot",
+    "power": 90,
+    "min_range": 0,
+    "max_range": 2000,
+    "cool_time": 45.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_YakushimaBoss002_2_PhantasmalBolt": {
+    "element": "None",
+    "type": "Shot",
+    "power": 80,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 45.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_YakushimaBoss002_2_PhantasmalDeathray": {
+    "element": "None",
+    "type": "Shot",
+    "power": 450,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 45.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_YakushimaBoss002_2_PhantasmalEye": {
+    "element": "None",
+    "type": "Shot",
+    "power": 25,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 45.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_YakushimaBoss002_2_PhantasmalSphere": {
+    "element": "None",
+    "type": "Shot",
+    "power": 180,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 45.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_YakushimaBoss002_PhantasmalBolt": {
+    "element": "None",
+    "type": "Shot",
+    "power": 80,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 45.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_YakushimaBoss002_PhantasmalDeathray": {
+    "element": "None",
+    "type": "Shot",
+    "power": 450,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 45.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_YakushimaBoss002_PhantasmalEye": {
+    "element": "None",
+    "type": "Shot",
+    "power": 25,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 45.0,
+    "effects": []
+  },
+  "EPalWazaID::Unique_YakushimaBoss002_PhantasmalSphere": {
+    "element": "None",
+    "type": "Shot",
+    "power": 180,
+    "min_range": 0,
+    "max_range": 5000,
+    "cool_time": 45.0,
+    "effects": []
+  },
+  "EPalWazaID::WaterBalloon": {
+    "element": "Water",
+    "type": "Shot",
+    "power": 90,
+    "min_range": 100,
+    "max_range": 3000,
+    "cool_time": 4.0,
+    "effects": []
+  },
+  "EPalWazaID::WaterWave": {
+    "element": "Water",
+    "type": "Shot",
+    "power": 1,
+    "min_range": 700,
+    "max_range": 1500,
+    "cool_time": 5.0,
+    "effects": []
+  },
+  "EPalWazaID::WorkAttack": {
+    "element": "Normal",
+    "type": "Melee",
+    "power": 100,
+    "min_range": 0,
+    "max_range": 500,
+    "cool_time": 1.0,
+    "effects": []
   }
 }

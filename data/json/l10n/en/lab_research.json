@@ -73,7 +73,7 @@
   },
   "Cool5": {
     "localized_name": "Snowman Development",
-    "description": null
+    "description": "Technology Unlock: Snowman"
   },
   "Deforest1": {
     "localized_name": "Lumbering Lv1",
@@ -145,7 +145,7 @@
   },
   "Deforest4": {
     "localized_name": "Stump and Axe Development",
-    "description": null
+    "description": "Unlock Technology: Stump and Axe"
   },
   "EmitFlame1": {
     "localized_name": "Kindling Lv1",
@@ -225,7 +225,7 @@
   },
   "EmitFlame5": {
     "localized_name": "Flame Cauldron Development",
-    "description": null
+    "description": "Unlock Technology: Flame Cauldron"
   },
   "GenerateEnergy1": {
     "localized_name": "Generating Electricity Lv1",
@@ -297,7 +297,7 @@
   },
   "GenerateEnergy5": {
     "localized_name": "Electric Pylon Development",
-    "description": null
+    "description": "Unlock Technology: Electric Pylon"
   },
   "Handcraft1": {
     "localized_name": "Handiwork Speed Lv1",
@@ -385,7 +385,7 @@
   },
   "Handcraft5": {
     "localized_name": "Large Toolbox Development",
-    "description": null
+    "description": "Unlock Technology: Large Toolbox"
   },
   "Medicine1": {
     "localized_name": "Medicine Production Task Lv1",
@@ -445,7 +445,7 @@
   },
   "Medicine4": {
     "localized_name": "Witch's Cauldron Development",
-    "description": null
+    "description": "Technology Unlock: Witch's Cauldron"
   },
   "Mining1": {
     "localized_name": "Mining Lv1",
@@ -521,7 +521,7 @@
   },
   "Mining5": {
     "localized_name": "Mining Cart Development",
-    "description": null
+    "description": "Unlock Technology: Mining Cart"
   },
   "Seeding1": {
     "localized_name": "Planting Lv1",
@@ -593,11 +593,11 @@
   },
   "Seeding4": {
     "localized_name": "Flower Bed Development",
-    "description": null
+    "description": "Unlock Technology: Flower Bed"
   },
   "Seeding5": {
     "localized_name": "Silo Development",
-    "description": null
+    "description": "Unlock Technology: Silo"
   },
   "Watering1": {
     "localized_name": "Watering Lv1",
@@ -669,6 +669,6 @@
   },
   "Watering5": {
     "localized_name": "Fountain Development",
-    "description": null
+    "description": "Unlock Technology: Fountain"
   }
 }

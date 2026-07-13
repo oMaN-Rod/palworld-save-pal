@@ -13,7 +13,7 @@
   },
   "Accessory_AirDash3": {
     "localized_name": "Bottes de triple ruée aérienne",
-    "description": "fr_Text"
+    "description": null
   },
   "Accessory_ExplosionResist": {
     "localized_name": "Sous-vêtement anti-explosion",
@@ -129,11 +129,11 @@
   },
   "Arrow_Fire": {
     "localized_name": "Flèche de feu",
-    "description": "Une Flèche de feu à utiliser avec un arc. Inflige des dégâts de type <img id=|ElemIcon_Fire|/><uiCommon id=|COMMON_ELEMENT_NAME_Fire| style=|Elem_Fire|/> à la cible touchée. Fabrication possible à : Établi de fortune."
+    "description": "Une Flèche de feu à utiliser avec un arc. Inflige des dégâts de type Feu à la cible touchée. Fabrication possible à : Établi de fortune."
   },
   "Arrow_Poison": {
     "localized_name": "Flèche empoisonnée",
-    "description": "Une Flèche empoisonnée à utiliser avec un arc. Inflige <uiCommon id=|ADDITIONAL_EFFECT_Poison| style=|Effect_Poison|/> à la cible touchée. Fabrication possible à : Établi de fortune."
+    "description": "Une Flèche empoisonnée à utiliser avec un arc. Inflige Empoisonnement à la cible touchée. Fabrication possible à : Établi de fortune."
   },
   "AssaultRifleBullet": {
     "localized_name": "Balles de fusil d'assaut",
@@ -301,7 +301,7 @@
   },
   "Battle_Helm_Grade_02_Fur": {
     "localized_name": "Barrette à plumes",
-    "description": "Une jolie broche à plumes. Elle semble protéger des coups fatals à la tête. Fabrication possible à : Workbench."
+    "description": "Une jolie broche à plumes. Elle semble protéger des coups fatals à la tête. Fabrication possible à : Établi de fortune."
   },
   "Battle_Helm_Grade_03_Copper": {
     "localized_name": "Heaume en métal",
@@ -360,8 +360,8 @@
     "description": "Un arc modernisé. Permet de tirer des flèches avec une puissance accrue."
   },
   "Battle_RangeWeapon_FlameThrower": {
-    "localized_name": "FlameThrower",
-    "description": "Un Flamethrower capable de projeter du feu sur une longue distance. Permet d'embraser les ennemis. Fabrication possible à : Chaîne de production d’armes II."
+    "localized_name": "Lance-flammes",
+    "description": "Un Lance-flammes capable de projeter du feu sur une longue distance. Permet d'embraser les ennemis. Fabrication possible à : Chaîne de production d’armes II."
   },
   "Battle_RangeWeapon_GatlingGun": {
     "localized_name": "Gatling",
@@ -501,11 +501,11 @@
   },
   "ChargeLaserRifle": {
     "localized_name": "Fusil chargé",
-    "description": "fr_Text"
+    "description": null
   },
   "ChargeLaserRifleBullet": {
     "localized_name": "Balles de fusil chargé",
-    "description": "fr_Text"
+    "description": null
   },
   "Clinic": {
     "localized_name": "Clinique",
@@ -521,7 +521,7 @@
   },
   "Computer": {
     "localized_name": "Ordinateur",
-    "description": "fr_Text"
+    "description": null
   },
   "Cooler": {
     "localized_name": "Climatiseur",
@@ -541,7 +541,7 @@
   },
   "Crusher": {
     "localized_name": "Concasseur",
-    "description": "Une installation permettant de broyer Pierre et Bois pour obtenir d'autres matériaux. La capacité « arrosage » est requise pour utiliser le moulin à eau."
+    "description": "Une installation permettant de broyer Pierre et Bois pour obtenir d'autres matériaux. La capacité « arrosage » est requise pour utiliser le moulin à eau."
   },
   "CrystalPit": {
     "localized_name": "Mine d’hexoquartz",
@@ -625,11 +625,11 @@
   },
   "EnergyShotgun": {
     "localized_name": "Fusil à pompe énergétique",
-    "description": "fr_Text"
+    "description": null
   },
   "EnergyShotgunBullet": {
     "localized_name": "Cartouches de fusil à pompe énergétique",
-    "description": "fr_Text"
+    "description": null
   },
   "EnergyStorage_Electric": {
     "localized_name": "Condensateur",
@@ -693,7 +693,7 @@
   },
   "FlourMill": {
     "localized_name": "Broyeur",
-    "description": "Une installation permettant de moudre le Blé pour produire de la Farine. La capacité « arrosage » est requise pour utiliser le moulin à eau."
+    "description": "Une installation permettant de moudre le Blé pour produire de la Farine. La capacité « arrosage » est requise pour utiliser le moulin à eau."
   },
   "FlowerBed": {
     "localized_name": "Parterre",
@@ -864,7 +864,7 @@
     "description": "Un ensemble de meubles décoratifs. Leur revêtement en cuir donne un côté luxueux."
   },
   "FurnitureSet_8": {
-    "localized_name": "Ensemble de panneaux « Sortie de secours »",
+    "localized_name": "Ensemble de panneaux « Sortie de secours »",
     "description": "Un ensemble de meubles décoratifs. De véritables trésors à une époque."
   },
   "FurnitureSet_9": {
@@ -909,7 +909,7 @@
   },
   "GasMask": {
     "localized_name": "Masque anti-corrosion",
-    "description": "fr_Text"
+    "description": null
   },
   "GatlingBullet": {
     "localized_name": "Munitions de gatling",
@@ -1205,15 +1205,15 @@
   },
   "OperatingTable": {
     "localized_name": "Table d'opération pour Pals",
-    "description": "fr_text"
+    "description": null
   },
   "OverheatRifle": {
     "localized_name": "Fusil à surchauffe",
-    "description": "fr_Text"
+    "description": null
   },
   "OverheatRifleBullet": {
     "localized_name": "Balles de fusil à surchauffe",
-    "description": "fr_Text"
+    "description": null
   },
   "PALBOX": {
     "localized_name": "Boîte à Pal",
@@ -1225,11 +1225,11 @@
   },
   "PalDopingShot": {
     "localized_name": "Pistolet dopant",
-    "description": "fr_Text"
+    "description": null
   },
   "PalDopingShotBullet": {
     "localized_name": "Balles de pistolet dopant",
-    "description": "fr_Text"
+    "description": null
   },
   "PalDopingShot_2": {
     "localized_name": "Méga pistolet dopant",
@@ -1241,7 +1241,7 @@
   },
   "PalHealingGrenade": {
     "localized_name": "Grenade de régénération de Pal",
-    "description": "fr_Text"
+    "description": null
   },
   "PalMedicineBox": {
     "localized_name": "Étagère à remèdes",
@@ -1289,11 +1289,11 @@
   },
   "Product_Axe_Grade_02": {
     "localized_name": "Hache en métal",
-    "description": "Une hache en métal pouvant couper jusqu'aux bois les plus durs. Efficace pour abattre les arbres robustes poussant dans les zones reculées du continent. Fabrication possible à : Établi de qualité."
+    "description": "Une hache en métal pouvant couper jusqu'aux bois les plus durs. Efficace pour abattre les arbres robustes poussant dans les zones reculées du continent. Fabrication possible à : Établi de qualité."
   },
   "Product_Axe_Grade_03": {
     "localized_name": "Hache en métal raffiné",
-    "description": "Une hache permettant de récolter le Bois robuste issu des arbres qui poussent dans les régions hostiles telles que les volcans ou encore les déserts. Fabrication possible à : Chaîne de production."
+    "description": "Une hache permettant de récolter le Bois robuste issu des arbres qui poussent dans les régions hostiles telles que les volcans ou encore les déserts. Fabrication possible à : Chaîne de production."
   },
   "Product_CoalPit": {
     "localized_name": "Mine de charbon",
@@ -1369,7 +1369,7 @@
   },
   "Product_Ingot_Grade_03_Steal": {
     "localized_name": "Fournaise électrique",
-    "description": "Permet de raffiner : Lingot de paluminium."
+    "description": "Permet de raffiner : Lingot de paluminium."
   },
   "Product_Medicine_Grade_01": {
     "localized_name": "Table pharmaceutique archaïque",
@@ -2292,7 +2292,7 @@
     "description": "Le posséder permet de crocheter les coffres nécessitant une Clé en or. Peut être utilisé à volonté sans se casser."
   },
   "WallSignboard": {
-    "localized_name": "WallSignBoard",
+    "localized_name": "Pancarte murale",
     "description": "Un panneau sur lequel on peut écrire. Peut être accroché aux murs."
   },
   "WallTorch": {

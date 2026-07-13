@@ -477,7 +477,7 @@
   },
   "ChickenPal": {
     "localized_name": "Chikipi",
-    "description": "Pal tanto debole quanto delizioso. Tra i più deboli insieme a SheepBall. Sono prede praticamente inesauribili."
+    "description": "Pal tanto debole quanto delizioso. Tra i più deboli insieme a Lamball. Sono prede praticamente inesauribili."
   },
   "ClioneTwins": {
     "localized_name": "Amione",
@@ -525,7 +525,7 @@
   },
   "DarkAlien": {
     "localized_name": "Xenovader",
-    "description": "Produce energia trasmettendo informazioni e poi dimenticandosele. Pare che trasmetta regolarmente informazioni a qualcuno. |Rispondete. Bersaglio individuato. Procedere alla distruzione.|"
+    "description": "Produce energia trasmettendo informazioni e poi dimenticandosele. Pare che trasmetta regolarmente informazioni a qualcuno. \"Rispondete. Bersaglio individuato. Procedere alla distruzione.\""
   },
   "DarkAlien_Oilrig": {
     "localized_name": "Xenovader",
@@ -577,7 +577,7 @@
   },
   "DrillGame": {
     "localized_name": "Digtoise",
-    "description": "Esiste una favola chiamata |La trivella di Digtoise|. Parla di un Digtoise che riflette sulla contraddizione che nasce da una trivella capace di perforare ogni cosa e da una corazza impenetrabile."
+    "description": "Esiste una favola chiamata \"La trivella di Digtoise\". Parla di un Digtoise che riflette sulla contraddizione che nasce da una trivella capace di perforare ogni cosa e da una corazza impenetrabile."
   },
   "Eagle": {
     "localized_name": "Galeclaw",
@@ -589,7 +589,7 @@
   },
   "ElecLion": {
     "localized_name": "Boltmane",
-    "description": "it_Text"
+    "description": "The more it moves, the more it heats up and the hair tips increasingly glow brighter. At its peak, it becomes so dazzling that you risk blindness if you stare at it directly."
   },
   "ElecLizard": {
     "localized_name": "Slowatt",
@@ -925,11 +925,11 @@
   },
   "FlowerDinosaur": {
     "localized_name": "Dinossom",
-    "description": "Una volta che si scatena, è inarrestabile. Da qui il detto |Pestare la coda a Dinossom|, che significa far arrabbiare qualcuno."
+    "description": "Una volta che si scatena, è inarrestabile. Da qui il detto \"Pestare la coda a Dinossom\", che significa far arrabbiare qualcuno."
   },
   "FlowerDinosaur_Electric": {
     "localized_name": "Dinossom Lux",
-    "description": "È sopravvissuto alla caduta di un fulmine. Da qui il detto |Come un fulmine che cade su Dinossom Lux|, che significa scampare alla morte."
+    "description": "È sopravvissuto alla caduta di un fulmine. Da qui il detto \"Come un fulmine che cade su Dinossom Lux\", che significa scampare alla morte."
   },
   "FlowerDoll": {
     "localized_name": "Petallia",
@@ -1049,11 +1049,11 @@
   },
   "GYM_WorldTreeDragon": {
     "localized_name": "Zenara & Astralym",
-    "description": "L'ombra di un Pal misterioso che approdò a Palpagos in un lontano passato. Definito |calamità|, seminò distruzione prima di venire sigillato per un lunghissimo periodo. È infine stato definitivamente sconfitto dall'invincibile Addestra-Pal."
+    "description": "L'ombra di un Pal misterioso che approdò a Palpagos in un lontano passato. Definito \"calamità\", seminò distruzione prima di venire sigillato per un lunghissimo periodo. È infine stato definitivamente sconfitto dall'invincibile Addestra-Pal."
   },
   "GYM_WorldTreeDragon_2": {
     "localized_name": "Zenara & Astralym",
-    "description": "L'ombra di un Pal misterioso che approdò a Palpagos in un lontano passato. Definito |calamità|, seminò distruzione prima di venire sigillato per un lunghissimo periodo. È infine stato definitivamente sconfitto dall'invincibile Addestra-Pal."
+    "description": "L'ombra di un Pal misterioso che approdò a Palpagos in un lontano passato. Definito \"calamità\", seminò distruzione prima di venire sigillato per un lunghissimo periodo. È infine stato definitivamente sconfitto dall'invincibile Addestra-Pal."
   },
   "Ganesha": {
     "localized_name": "Teafant",
@@ -1065,7 +1065,7 @@
   },
   "GhostAnglerfish": {
     "localized_name": "Ghangler",
-    "description": "Fa uso della sua esca scintillante per illuminare le tenebre. Quando un Pal attirato dalla luce incrocia lo sguardo di GhostAnglerFish, è già troppo tardi. Il suo destino sarà venire riaccompagnato a casa, volente o nolente."
+    "description": "Fa uso della sua esca scintillante per illuminare le tenebre. Quando un Pal attirato dalla luce incrocia lo sguardo di Ghangler, è già troppo tardi. Il suo destino sarà venire riaccompagnato a casa, volente o nolente."
   },
   "GhostAnglerfish_Fire": {
     "localized_name": "Ghangler Ignis",
@@ -1617,7 +1617,7 @@
   },
   "LilyQueen": {
     "localized_name": "Lyleen",
-    "description": "Un Pal pacifico e affettuoso. Si prende cura dei cuccioli di Pal rimasti orfani. La sua specialità è il SolarBeam a tutta potenza."
+    "description": "Un Pal pacifico e affettuoso. Si prende cura dei cuccioli di Pal rimasti orfani. La sua specialità è il Raggio solare a tutta potenza."
   },
   "LilyQueen_Dark": {
     "localized_name": "Lyleen Noct",
@@ -1945,7 +1945,7 @@
   },
   "MimicDog": {
     "localized_name": "Mimog",
-    "description": "Si narra che, in un antico regno dell'isola, fosse tradizione attribuire un premio alla morte più stupida dell'anno. La prima causa di morte premiata di cui si ha notizia fu: |Dilaniato a morsi da un Mimog mentre cercava di guardare nella scatola|."
+    "description": "Si narra che, in un antico regno dell'isola, fosse tradizione attribuire un premio alla morte più stupida dell'anno. La prima causa di morte premiata di cui si ha notizia fu: \"Dilaniato a morsi da un Mimog mentre cercava di guardare nella scatola\"."
   },
   "MobuCitizen": {
     "localized_name": "Abitante dell'isola",
@@ -2145,7 +2145,7 @@
   },
   "PREDATOR_DrillGame": {
     "localized_name": "Digtoise",
-    "description": "Esiste una favola chiamata |La trivella di Digtoise|. Parla di un Digtoise che riflette sulla contraddizione che nasce da una trivella capace di perforare ogni cosa e da una corazza impenetrabile."
+    "description": "Esiste una favola chiamata \"La trivella di Digtoise\". Parla di un Digtoise che riflette sulla contraddizione che nasce da una trivella capace di perforare ogni cosa e da una corazza impenetrabile."
   },
   "PREDATOR_FairyDragon": {
     "localized_name": "Elphidran",
@@ -2157,7 +2157,7 @@
   },
   "PREDATOR_FlowerDinosaur": {
     "localized_name": "Dinossom",
-    "description": "Una volta che si scatena, è inarrestabile. Da qui il detto |Pestare la coda a Dinossom|, che significa far arrabbiare qualcuno."
+    "description": "Una volta che si scatena, è inarrestabile. Da qui il detto \"Pestare la coda a Dinossom\", che significa far arrabbiare qualcuno."
   },
   "PREDATOR_FlowerRabbit_Quest": {
     "localized_name": "Flopie",
@@ -2328,7 +2328,7 @@
     "description": null
   },
   "PalPassive_Doctor": {
-    "localized_name": "Abitante dell'isola",
+    "localized_name": "Professor Brawn",
     "description": null
   },
   "PalTrader": {
@@ -2480,7 +2480,7 @@
     "description": "La regina dei Beegarde. Servirla è un privilegio: infinite schiere di sudditi devoti lavorano per lei fino alla morte."
   },
   "QuestMan": {
-    "localized_name": "it_Text",
+    "localized_name": "Quest Client",
     "description": null
   },
   "Quest_Farmer03_PinkCat": {
@@ -2624,7 +2624,7 @@
     "description": null
   },
   "Reward_BossDefeat": {
-    "localized_name": "Guardia",
+    "localized_name": "Cacciatore di Pal veterano",
     "description": null
   },
   "Reward_Emote_A_01": {
@@ -2712,7 +2712,7 @@
     "description": null
   },
   "Reward_Paldex": {
-    "localized_name": "Guardia",
+    "localized_name": "Studioso della vita dei Pal",
     "description": null
   },
   "Reward_Paldex_v02": {
@@ -2773,11 +2773,11 @@
   },
   "SakuraSaurus": {
     "localized_name": "Broncherry",
-    "description": "Il suo odore cambia dopo l'accoppiamento. Quello che secerne dopo aver trovato un partner è noto come |il profumo del primo amore|."
+    "description": "Il suo odore cambia dopo l'accoppiamento. Quello che secerne dopo aver trovato un partner è noto come \"il profumo del primo amore\"."
   },
   "SakuraSaurus_Water": {
     "localized_name": "Broncherry Aqua",
-    "description": "Il suo odore cambia dopo l'accoppiamento. Quello che secerne prima di aver trovato un partner è noto come |il profumo della purezza|."
+    "description": "Il suo odore cambia dopo l'accoppiamento. Quello che secerne prima di aver trovato un partner è noto come \"il profumo della purezza\"."
   },
   "SalesPerson": {
     "localized_name": "Mercante itinerante",
@@ -2805,7 +2805,7 @@
   },
   "SamuraiDog": {
     "localized_name": "Pupperai",
-    "description": "Le lotte territoriali tra Pupperai iniziano con un semplice sguardo. Se li si vuole crescere, è meglio fare attenzione ai comandi che gli si insegna. Se gli dici |Qua la zampa!|, potrebbero sfoderare la lama istintivamente."
+    "description": "Le lotte territoriali tra Pupperai iniziano con un semplice sguardo. Se li si vuole crescere, è meglio fare attenzione ai comandi che gli si insegna. Se gli dici \"Qua la zampa!\", potrebbero sfoderare la lama istintivamente."
   },
   "Scientist_FlameThrower": {
     "localized_name": "Squadra per la ricerca genetica - Esecutori",
@@ -2889,7 +2889,7 @@
   },
   "SmallYeti": {
     "localized_name": "Snugloo",
-    "description": "|Scrutare Snugloo negli occhi.| Questa espressione significa vedere qualcosa al di là delle apparenze. Ironicamente, nessun ricercatore ha mai avuto il coraggio di cercare gli occhi di Snugloo."
+    "description": "\"Scrutare Snugloo negli occhi.\" Questa espressione significa vedere qualcosa al di là delle apparenze. Ironicamente, nessun ricercatore ha mai avuto il coraggio di cercare gli occhi di Snugloo."
   },
   "SnakeGirl": {
     "localized_name": "Venusa",
@@ -2901,7 +2901,7 @@
   },
   "SnowTigerBeastman": {
     "localized_name": "Bastigor",
-    "description": "Quando vede qualcosa di tondo, lo colpisce istintivamente. Per SnowTigerBeastMan la cosa più difficile al mondo è riuscire a finire un pupazzo di neve."
+    "description": "Quando vede qualcosa di tondo, lo colpisce istintivamente. Per Bastigor la cosa più difficile al mondo è riuscire a finire un pupazzo di neve."
   },
   "SoldierBee": {
     "localized_name": "Beegarde",
@@ -2941,7 +2941,7 @@
   },
   "SwordCutlassfish": {
     "localized_name": "Skutlass",
-    "description": "Una forma di vita inconcepibile! Si apre in due per sguainare la spina dorsale e usarla per dilaniare i nemici. Se però non ricompone subito il corpo, perde rapidamente le forze. I giovani esemplari fanno a gara a chi resta |sguainato| più a lungo, un gioco decisamente rischioso."
+    "description": "Una forma di vita inconcepibile! Si apre in due per sguainare la spina dorsale e usarla per dilaniare i nemici. Se però non ricompone subito il corpo, perde rapidamente le forze. I giovani esemplari fanno a gara a chi resta \"sguainato\" più a lungo, un gioco decisamente rischioso."
   },
   "SwordCutlassfish_Fire": {
     "localized_name": "Skutlass Ignis",
@@ -3037,10 +3037,10 @@
   },
   "VioletFairy": {
     "localized_name": "Vaelet",
-    "description": "Nel castello c'erano tutti i fiori preferiti del re. Durante una grande battaglia, il castello prese fuoco. In quel momento apparve lo spirito di un fiore. - Estratto della fiaba |Il fiore del re|."
+    "description": "Nel castello c'erano tutti i fiori preferiti del re. Durante una grande battaglia, il castello prese fuoco. In quel momento apparve lo spirito di un fiore. - Estratto della fiaba \"Il fiore del re\"."
   },
   "VisitingMerchant": {
-    "localized_name": "it_Text",
+    "localized_name": "Visitor",
     "description": null
   },
   "Visitor_Hunter_Rifle": {
@@ -3072,7 +3072,7 @@
     "description": "Quando un esemplare è in salute, la materia che scorre sulla sua schiena ha una temperatura stabile. Quando si emoziona, perde il controllo della sua temperatura e, nel peggiore dei casi, muore per gli improvvisi sbalzi di vaporizzazione e solidificazione."
   },
   "WeaponsDealer": {
-    "localized_name": "it_Text",
+    "localized_name": "Weapons Dealer",
     "description": null
   },
   "WeaselDragon": {
@@ -3093,11 +3093,11 @@
   },
   "WhiteAlienDragon": {
     "localized_name": "Xenogard",
-    "description": "Produce energia mangiando informazioni. Pare che trasmetta regolarmente informazioni a qualcuno. |Pronto? Ho mangiato l'informazione di prima senza ascoltarla. Qual era il messaggio?|"
+    "description": "Produce energia mangiando informazioni. Pare che trasmetta regolarmente informazioni a qualcuno. \"Pronto? Ho mangiato l'informazione di prima senza ascoltarla. Qual era il messaggio?\""
   },
   "WhiteDeer": {
     "localized_name": "Celesdir",
-    "description": "Nei testi antichi, è definito |bestia della salvezza|. La luce emessa da Celesdir può purificare ogni cosa. Nel senso che la disintegra spazzandola via da questo mondo."
+    "description": "Nei testi antichi, è definito \"bestia della salvezza\". La luce emessa da Celesdir può purificare ogni cosa. Nel senso che la disintegra spazzandola via da questo mondo."
   },
   "WhiteDeer_Dark": {
     "localized_name": "Celesdir Noct",
@@ -3133,11 +3133,11 @@
   },
   "WindChimes": {
     "localized_name": "Hangyu",
-    "description": "Le sue braccia enormi piegano persino il ferro. Un metodo di condanna molto brutale prevedeva il legare i criminali nella pubblica piazza per farli fare a pezzi da un Windchimes."
+    "description": "Le sue braccia enormi piegano persino il ferro. Un metodo di condanna molto brutale prevedeva il legare i criminali nella pubblica piazza per farli fare a pezzi da un Hangyu."
   },
   "WindChimes_Ice": {
     "localized_name": "Hangyu Cryst",
-    "description": "Le sue braccia enormi frantumano persino i blocchi di ghiaccio. Una punizione molto brutale prevedeva il legare i criminali nella pubblica piazza per fargli strappare i capelli da un Windchimes_Ice."
+    "description": "Le sue braccia enormi frantumano persino i blocchi di ghiaccio. Una punizione molto brutale prevedeva il legare i criminali nella pubblica piazza per fargli strappare i capelli da un Hangyu Cryst."
   },
   "WingGolem": {
     "localized_name": "Knocklem",
@@ -3157,11 +3157,11 @@
   },
   "WoolFox": {
     "localized_name": "Cremis",
-    "description": "Rispetto a SheepBall ha un vello migliore e una predisposizione maggiore per l'allevamento. Eppure, storicamente è stato allevato come Pal da compagnia. Questo perché la carineria è giustizia, come tutti sanno."
+    "description": "Rispetto a Lamball ha un vello migliore e una predisposizione maggiore per l'allevamento. Eppure, storicamente è stato allevato come Pal da compagnia. Questo perché la carineria è giustizia, come tutti sanno."
   },
   "WorldTreeDragon": {
     "localized_name": "Astralym",
-    "description": "L'ombra di un Pal misterioso che approdò a Palpagos in un lontano passato. Definito |calamità|, seminò distruzione prima di venire sigillato per un lunghissimo periodo. È infine stato definitivamente sconfitto dall'invincibile Addestra-Pal."
+    "description": "L'ombra di un Pal misterioso che approdò a Palpagos in un lontano passato. Definito \"calamità\", seminò distruzione prima di venire sigillato per un lunghissimo periodo. È infine stato definitivamente sconfitto dall'invincibile Addestra-Pal."
   },
   "YakushimaBoss001": {
     "localized_name": "Occhio di Cthulhu",
@@ -3234,5 +3234,221 @@
   "Yeti_Grass": {
     "localized_name": "Wumpo Botan",
     "description": "Un ricercatore ha tosato la sua erba per vedere il suo vero aspetto. Alla fine non è rimasto nulla, come se fosse fatto solo d'erba."
+  },
+  "ArenaShop": {
+    "localized_name": "ArenaShop",
+    "description": null
+  },
+  "Arena_Legend_1": {
+    "localized_name": "Arena_Legend_1",
+    "description": null
+  },
+  "Arena_Legend_10": {
+    "localized_name": "Arena_Legend_10",
+    "description": null
+  },
+  "Arena_Legend_11": {
+    "localized_name": "Arena_Legend_11",
+    "description": null
+  },
+  "Arena_Legend_12": {
+    "localized_name": "Arena_Legend_12",
+    "description": null
+  },
+  "Arena_Legend_13": {
+    "localized_name": "Arena_Legend_13",
+    "description": null
+  },
+  "Arena_Legend_14": {
+    "localized_name": "Arena_Legend_14",
+    "description": null
+  },
+  "Arena_Legend_15": {
+    "localized_name": "Arena_Legend_15",
+    "description": null
+  },
+  "Arena_Legend_16": {
+    "localized_name": "Arena_Legend_16",
+    "description": null
+  },
+  "Arena_Legend_17": {
+    "localized_name": "Arena_Legend_17",
+    "description": null
+  },
+  "Arena_Legend_18": {
+    "localized_name": "Arena_Legend_18",
+    "description": null
+  },
+  "Arena_Legend_19": {
+    "localized_name": "Arena_Legend_19",
+    "description": null
+  },
+  "Arena_Legend_2": {
+    "localized_name": "Arena_Legend_2",
+    "description": null
+  },
+  "Arena_Legend_20": {
+    "localized_name": "Arena_Legend_20",
+    "description": null
+  },
+  "Arena_Legend_3": {
+    "localized_name": "Arena_Legend_3",
+    "description": null
+  },
+  "Arena_Legend_4": {
+    "localized_name": "Arena_Legend_4",
+    "description": null
+  },
+  "Arena_Legend_5": {
+    "localized_name": "Arena_Legend_5",
+    "description": null
+  },
+  "Arena_Legend_6": {
+    "localized_name": "Arena_Legend_6",
+    "description": null
+  },
+  "Arena_Legend_7": {
+    "localized_name": "Arena_Legend_7",
+    "description": null
+  },
+  "Arena_Legend_8": {
+    "localized_name": "Arena_Legend_8",
+    "description": null
+  },
+  "Arena_Legend_9": {
+    "localized_name": "Arena_Legend_9",
+    "description": null
+  },
+  "ArmorWoodlouse": {
+    "localized_name": "ArmorWoodlouse",
+    "description": null
+  },
+  "BeardedDragon": {
+    "localized_name": "BeardedDragon",
+    "description": "This Pal is under investigation."
+  },
+  "BlueWoolRabbit": {
+    "localized_name": "BlueWoolRabbit",
+    "description": null
+  },
+  "CandleWitch": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "CuteOrca": {
+    "localized_name": "CuteOrca",
+    "description": null
+  },
+  "DarkMutant": {
+    "localized_name": "DarkMutant",
+    "description": "Quando DarkMutant è all'apice della forza, si dice che possa squarciare persino le dimensioni. Si teorizza che certi Pal siano arrivati da questi squarci."
+  },
+  "DesertBoss": {
+    "localized_name": "DesertBoss",
+    "description": null
+  },
+  "ElecSnail_Fire": {
+    "localized_name": "ElecSnail_Fire",
+    "description": null
+  },
+  "ElectricBoss": {
+    "localized_name": "ElectricBoss",
+    "description": null
+  },
+  "Emote_Tester": {
+    "localized_name": "Emote_Tester",
+    "description": null
+  },
+  "ForestBoss": {
+    "localized_name": "Lily & Lyleen",
+    "description": null
+  },
+  "FrozenBear": {
+    "localized_name": "FrozenBear",
+    "description": null
+  },
+  "GrassDragon": {
+    "localized_name": "GrassDragon",
+    "description": "This Pal is under investigation."
+  },
+  "IceVeilDragon": {
+    "localized_name": "IceVeilDragon",
+    "description": null
+  },
+  "KingCrab": {
+    "localized_name": "KingCrab",
+    "description": null
+  },
+  "LeafBird": {
+    "localized_name": "LeafBird",
+    "description": null
+  },
+  "MedjedBird": {
+    "localized_name": "MedjedBird",
+    "description": null
+  },
+  "MexicanSalamander": {
+    "localized_name": "MexicanSalamander",
+    "description": null
+  },
+  "Monkey_Ice": {
+    "localized_name": "Monkey_Ice",
+    "description": null
+  },
+  "MonochromeMushroom": {
+    "localized_name": "MonochromeMushroom",
+    "description": null
+  },
+  "Negotiator": {
+    "localized_name": "Negotiator",
+    "description": null
+  },
+  "PinkKangaroo": {
+    "localized_name": "PinkKangaroo",
+    "description": null
+  },
+  "RockCheetah": {
+    "localized_name": "RockCheetah",
+    "description": null
+  },
+  "SakurajimaBoss": {
+    "localized_name": "Saya & Selyne",
+    "description": null
+  },
+  "SnakeQueen": {
+    "localized_name": "SnakeQueen",
+    "description": null
+  },
+  "SnowBoss": {
+    "localized_name": "Victor & Shadowbeak",
+    "description": null
+  },
+  "StrawHatCat": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "TestAssassin": {
+    "localized_name": "TestAssassin",
+    "description": null
+  },
+  "TestNPC": {
+    "localized_name": "TestNPC",
+    "description": null
+  },
+  "VikingBoss": {
+    "localized_name": "Bjorn & Bastigor",
+    "description": null
+  },
+  "VolcanicTurtle": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "WaterLizard": {
+    "localized_name": "WaterLizard",
+    "description": null
+  },
+  "WorldTree_Hunter_MissileLauncher_test": {
+    "localized_name": "WorldTree_Hunter_MissileLauncher_test",
+    "description": null
   }
 }

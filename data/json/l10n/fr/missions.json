@@ -13,7 +13,7 @@
   },
   "Main_BuildPalBox": {
     "localized_name": "Première base",
-    "description": "Ouvre le menu de construction avec <keyGuideIcon id=|OpenConstructionMenu| iconScale=|0.7|/> et installe une Boîte à Pal sur un terrain dégagé. Ce sera ton premier camp de base avec les Pals — un point de départ pour tes expéditions. Prends soin de l’aménager, car un jour, lorsque tu viseras les tours au loin, ce lieu deviendra un précieux soutien. Choisis son emplacement avec sagesse."
+    "description": "Ouvre le menu de construction et installe une Boîte à Pal sur un terrain dégagé. Ce sera ton premier camp de base avec les Pals — un point de départ pour tes expéditions. Prends soin de l’aménager, car un jour, lorsque tu viseras les tours au loin, ce lieu deviendra un précieux soutien. Choisis son emplacement avec sagesse."
   },
   "Main_BuildWorkBench_Old": {
     "localized_name": "Début du travail",
@@ -25,11 +25,11 @@
   },
   "Main_Capture30Pal": {
     "localized_name": "Capturer 30 Pals",
-    "description": "Ce terminal possède une fonctionnalité appelée le |Palpédia|, qui collecte des informations sur les Pals. Tu peux y stocker jusqu'à 12 données par type de Pal. Capturer davantage de Pals t'apportera des points d'expérience supplémentaires. Commence par capturer 30 Pals. Avec une équipe aux capacités variées, ces alliés deviendront sans doute tes plus grands atouts face à des ennemis redoutables."
+    "description": "Ce terminal possède une fonctionnalité appelée le \"Palpédia\", qui collecte des informations sur les Pals. Tu peux y stocker jusqu'à 12 données par type de Pal. Capturer davantage de Pals t'apportera des points d'expérience supplémentaires. Commence par capturer 30 Pals. Avec une équipe aux capacités variées, ces alliés deviendront sans doute tes plus grands atouts face à des ennemis redoutables."
   },
   "Main_CaptureDeerGround": {
     "localized_name": "Zone de Chasse interdite",
-    "description": "Il existe plusieurs zones appelées |zones interdites de chasse| autour de l'île de Palpagos, où l'on trouve des êtres possédant des caractéristiques différentes de celles des Pals habituels. Parmi eux, le Pal nommé {targetpal} est réputé pour posséder une puissance exceptionnelle. Capturer un {targetpal} signifie ouvrir de nouvelles possibilités."
+    "description": "Il existe plusieurs zones appelées \"zones interdites de chasse\" autour de l'île de Palpagos, où l'on trouve des êtres possédant des caractéristiques différentes de celles des Pals habituels. Parmi eux, le Pal nommé {targetpal} est réputé pour posséder une puissance exceptionnelle. Capturer un {targetpal} signifie ouvrir de nouvelles possibilités."
   },
   "Main_CapturePal": {
     "localized_name": "Premier Pal",
@@ -57,7 +57,7 @@
   },
   "Main_CraftMealPouch": {
     "localized_name": "La faim est notre pire ennemi",
-    "description": "La faim est le plus grand ennemi. En toutes circonstances, tu ne dois jamais oublier de prendre un repas. Avec un Petit sac de nourriture, toi et tes Pals pourrez vous nourrir plus facilement. De telles petites astuces seront d'une grande aide lors de tes explorations et combats. Note que le Petit sac de nourriture est stocké dans la section |objets clés|, juste à côté de l'inventaire, à l'instar des Pals."
+    "description": "La faim est le plus grand ennemi. En toutes circonstances, tu ne dois jamais oublier de prendre un repas. Avec un Petit sac de nourriture, toi et tes Pals pourrez vous nourrir plus facilement. De telles petites astuces seront d'une grande aide lors de tes explorations et combats. Note que le Petit sac de nourriture est stocké dans la section \"objets clés\", juste à côté de l'inventaire, à l'instar des Pals."
   },
   "Main_CraftPalGear": {
     "localized_name": "Fabrication d'équipement de Pal.",

@@ -73,7 +73,7 @@
   },
   "Cool5": {
     "localized_name": "Desarrollo de muñeco de nieve",
-    "description": null
+    "description": "Tecnología: desbloqueo de «muñeco de nieve»"
   },
   "Deforest1": {
     "localized_name": "Tala, nv. 1",
@@ -145,7 +145,7 @@
   },
   "Deforest4": {
     "localized_name": "Desarrollo de tocón con hacha",
-    "description": null
+    "description": "Tecnología: desbloqueo de «tocón con hacha»"
   },
   "EmitFlame1": {
     "localized_name": "Encender fuego, nv. 1",
@@ -225,7 +225,7 @@
   },
   "EmitFlame5": {
     "localized_name": "Desarrollo de la llama olímpica",
-    "description": null
+    "description": "Tecnología: desbloqueo de «llama olímpica»"
   },
   "GenerateEnergy1": {
     "localized_name": "Producción eléctrica, nv. 1",
@@ -297,7 +297,7 @@
   },
   "GenerateEnergy5": {
     "localized_name": "Desarrollo de la torre eléctrica",
-    "description": null
+    "description": "Tecnología: desbloqueo de «torre eléctrica»"
   },
   "Handcraft1": {
     "localized_name": "Vel. de trabajo, nv. 1",
@@ -385,7 +385,7 @@
   },
   "Handcraft5": {
     "localized_name": "Desarrollo de caja de herramientas grande",
-    "description": null
+    "description": "Tecnología: desbloqueo de «caja de herramientas grande»"
   },
   "Medicine1": {
     "localized_name": "Elaboración de medicinas, nv. 1",
@@ -445,7 +445,7 @@
   },
   "Medicine4": {
     "localized_name": "Desarrollo de caldero de bruja",
-    "description": null
+    "description": "Tecnología: desbloqueo de «caldero de bruja»"
   },
   "Mining1": {
     "localized_name": "Minería, nv. 1",
@@ -521,7 +521,7 @@
   },
   "Mining5": {
     "localized_name": "Desarrollo de vagoneta minera",
-    "description": null
+    "description": "Tecnología: desbloqueo de «Vagoneta minera»"
   },
   "Seeding1": {
     "localized_name": "Siembra, nv. 1",
@@ -593,11 +593,11 @@
   },
   "Seeding4": {
     "localized_name": "Desarrollo de parterre de flores",
-    "description": null
+    "description": "Tecnología: desbloqueo de «parterre de flores»"
   },
   "Seeding5": {
     "localized_name": "Desarrollo de Silo",
-    "description": null
+    "description": "Tecnología: desbloqueo de «Silo»"
   },
   "Watering1": {
     "localized_name": "Riego, nv. 1",
@@ -669,6 +669,6 @@
   },
   "Watering5": {
     "localized_name": "Desarrollo de fuente",
-    "description": null
+    "description": "Tecnología: desbloqueo de «fuente»"
   }
 }

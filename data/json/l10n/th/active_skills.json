@@ -728,7 +728,7 @@
     "description": "สกิลเฉพาะตัวของDualith แยกแขนซ้ายออกจากร่างหลัก แล้วกวาดโจมตีศัตรูจากนั้นจะยิงแขนขวา ออกไปโจมตีต่อ"
   },
   "EPalWazaID::Unique_GrassMinotaur_BullRush": {
-    "localized_name": "พุ่งชน・คลั่ง",
+    "localized_name": "พุ่งชน คลั่ง",
     "description": "สกิลเฉพาะตัวของElgrove ปลุกเร้าพลังอย่างรุนแรง แล้วพุ่งชนธาตุพืชด้วยความโกรธ 4 ครั้งติดต่อกัน"
   },
   "EPalWazaID::Unique_GrassMinotaur_BullRush_Lower": {
@@ -888,8 +888,8 @@
     "description": "สกิลเฉพาะตัวของ Lyleen ฟื้นฟู HP ให้กับเพื่อนร่วมทีมทั้งหมดในพื้นที่ด้วยพลังแห่งการเยียวยา"
   },
   "EPalWazaID::Unique_LilyQueen_WindBarrier": {
-    "localized_name": "-",
-    "description": "-"
+    "localized_name": "Wind Barrier",
+    "description": "A skill exclusive to the Lilikin species. Surround yourself with a wind barrier, Returns the blade of wind to the attacking opponent."
   },
   "EPalWazaID::Unique_LotusDragon_LotusBloom": {
     "localized_name": "ดอกบัวบานสะพรั่ง",
@@ -1061,7 +1061,7 @@
   },
   "EPalWazaID::Unique_SheepBall_Roll": {
     "localized_name": "ขนแกะกลมกลิ้ง",
-    "description": "สกิลเฉพาะตัวของ SheepBall กลิ้งหลุน ๆ ไล่ตามศัตรู หลังโจมตีจะตาลายจนขยับไม่ได้"
+    "description": "สกิลเฉพาะตัวของ Lamball กลิ้งหลุน ๆ ไล่ตามศัตรู หลังโจมตีจะตาลายจนขยับไม่ได้"
   },
   "EPalWazaID::Unique_SifuDog_Counter": {
     "localized_name": "ตั้งรับสุดตัว",
@@ -1177,11 +1177,11 @@
   },
   "EPalWazaID::Unique_Werewolf_Ice_SnowScratch": {
     "localized_name": "สโนว์คลอว์",
-    "description": "สกิลเฉพาะตัวของ WereWolf_Ice กระโจนไปด้านหน้า ข่วนศัตรู 2 ครั้งอย่างรวดเร็ว การโจมตีนี้มีพลังธาตุน้ำแข็งแฝงอยู่"
+    "description": "สกิลเฉพาะตัวของ Loupmoon Cryst กระโจนไปด้านหน้า ข่วนศัตรู 2 ครั้งอย่างรวดเร็ว การโจมตีนี้มีพลังธาตุน้ำแข็งแฝงอยู่"
   },
   "EPalWazaID::Unique_Werewolf_Scratch": {
     "localized_name": "จัมปิงคลอว์",
-    "description": "สกิลเฉพาะตัวของ WereWolf กระโจนไปด้านหน้า ข่วนศัตรู 2 ครั้งอย่างรวดเร็ว การโจมตีนี้มีพลังธาตุความมืดแฝงอยู่"
+    "description": "สกิลเฉพาะตัวของ Loupmoon กระโจนไปด้านหน้า ข่วนศัตรู 2 ครั้งอย่างรวดเร็ว การโจมตีนี้มีพลังธาตุความมืดแฝงอยู่"
   },
   "EPalWazaID::Unique_WhiteDeer_Dark_DarkPillar": {
     "localized_name": "โนวาแห่งความมืด",
@@ -1205,7 +1205,7 @@
   },
   "EPalWazaID::Unique_WingGolem_Fire_FlameCutter": {
     "localized_name": "คัตเตอร์เพลิง",
-    "description": "ทักษะเฉพาะตัวของKnocklem Ignis ง้างแขนสุดแรงแล้วขว้าง |วงเพลิง| จากแผ่นหลังออกไป วงเพลิงจะบินเป็นวิถีโค้งคล้ายการวาดวงกลม"
+    "description": "ทักษะเฉพาะตัวของKnocklem Ignis ง้างแขนสุดแรงแล้วขว้าง \"วงเพลิง\" จากแผ่นหลังออกไป วงเพลิงจะบินเป็นวิถีโค้งคล้ายการวาดวงกลม"
   },
   "EPalWazaID::Unique_WingGolem_RoundCutter": {
     "localized_name": "กราวด์คัตเตอร์",
@@ -1294,5 +1294,245 @@
   "EPalWazaID::WindEdge": {
     "localized_name": "วินด์เอดจ์",
     "description": "ซัดใบมีดลมคมกริบออกไปเป็นรูปพัด"
+  },
+  "EPalWazaID::BlueThunderHorse_PartnerSkill": {
+    "localized_name": "BlueThunderHorse_PartnerSkill",
+    "description": null
+  },
+  "EPalWazaID::CrossThunder": {
+    "localized_name": "ครอสธันเดอร์",
+    "description": "สร้างการโจมตีสายฟ้าจาก 2 ทาง ขนาบข้างศัตรู"
+  },
+  "EPalWazaID::EnergyShot": {
+    "localized_name": "Ice Missile",
+    "description": null
+  },
+  "EPalWazaID::FlareTwister": {
+    "localized_name": "Flare Twister",
+    "description": "Creates multiple flame tornadoes. The tornado continues to spin in circles."
+  },
+  "EPalWazaID::Funnel_DreamDemon": {
+    "localized_name": "Funnel_DreamDemon",
+    "description": null
+  },
+  "EPalWazaID::Funnel_RaijinDaughter": {
+    "localized_name": "Funnel_RaijinDaughter",
+    "description": null
+  },
+  "EPalWazaID::Funnel_RaijinDaughter_Water": {
+    "localized_name": "Funnel_RaijinDaughter_Water",
+    "description": null
+  },
+  "EPalWazaID::GrassGolem_Dark_PartnerSkill": {
+    "localized_name": "GrassGolem_Dark_PartnerSkill",
+    "description": null
+  },
+  "EPalWazaID::GrassGolem_PartnerSkill": {
+    "localized_name": "GrassGolem_PartnerSkill",
+    "description": null
+  },
+  "EPalWazaID::HealingTree": {
+    "localized_name": "HealingTree",
+    "description": null
+  },
+  "EPalWazaID::Human_Rolling": {
+    "localized_name": "Human_Rolling",
+    "description": null
+  },
+  "EPalWazaID::Intimidate": {
+    "localized_name": "Intimidate",
+    "description": null
+  },
+  "EPalWazaID::PoseidonOrca_PartnerSkill": {
+    "localized_name": "PoseidonOrca_PartnerSkill",
+    "description": null
+  },
+  "EPalWazaID::PoseidonOrca_PartnerSkill_SpearBullet": {
+    "localized_name": "PoseidonOrca_PartnerSkill_SpearBullet",
+    "description": null
+  },
+  "EPalWazaID::Scratch": {
+    "localized_name": "Scratch",
+    "description": null
+  },
+  "EPalWazaID::SnowStorm": {
+    "localized_name": "SnowStorm",
+    "description": "รวมพลังไอเย็นมาไว้รอบตัว โจมตีใส่ศัตรูใกล้เคียง ก่อนปล่อยพายุหิมะใส่ศัตรู"
+  },
+  "EPalWazaID::Throw": {
+    "localized_name": "Throw",
+    "description": null
+  },
+  "EPalWazaID::TidalWave": {
+    "localized_name": "TidalWave",
+    "description": "สร้างคลื่นลูกเล็กทั่วบริเวณ หน่วงความเคลื่อนไหวศัตรู ก่อนโจมตีศัตรูด้วยคลื่นลูกใหญ่"
+  },
+  "EPalWazaID::Unique_BlueSkyDragon_GYM_Act": {
+    "localized_name": "Unique_BlueSkyDragon_GYM_Act",
+    "description": null
+  },
+  "EPalWazaID::Unique_CubeTurtle_CubePress": {
+    "localized_name": "ศิลาบดทับ",
+    "description": "สกิลเฉพาะตัวของTetroise กระโดดลอยขึ้นกลางอากาศ ก่อนทิ้งตัวลงด้วยน้ำหนักมหาศาล เพื่อบดขยี้ศัตรู"
+  },
+  "EPalWazaID::Unique_CubeTurtle_Neutral_HolyPress": {
+    "localized_name": "แรงกดศักดิ์สิทธิ์",
+    "description": "สกิลเฉพาะตัวของTetroise Primo กระโดดลอยขึ้นกลางอากาศแล้วทิ้งตัวลงบดขยี้ศัตรู จากนั้นพลังแสงจะกระจายออกไป และตามด้วย เสาแสงโจมตีซ้ำ"
+  },
+  "EPalWazaID::Unique_KingWhale_SuperTidalBore": {
+    "localized_name": "Unique_KingWhale_SuperTidalBore",
+    "description": null
+  },
+  "EPalWazaID::Unique_KingWhale_TidalBore": {
+    "localized_name": "Unique_KingWhale_TidalBore",
+    "description": null
+  },
+  "EPalWazaID::Unique_LegendDeer_BarrierRelease_Grass": {
+    "localized_name": "Unique_LegendDeer_BarrierRelease_Grass",
+    "description": null
+  },
+  "EPalWazaID::Unique_LegendDeer_BarrierRelease_Normal": {
+    "localized_name": "Unique_LegendDeer_BarrierRelease_Normal",
+    "description": null
+  },
+  "EPalWazaID::Unique_LegendDeer_BarrierRelease_Water": {
+    "localized_name": "Unique_LegendDeer_BarrierRelease_Water",
+    "description": null
+  },
+  "EPalWazaID::Unique_LegendDeer_RadiantPurge": {
+    "localized_name": "Unique_LegendDeer_RadiantPurge",
+    "description": null
+  },
+  "EPalWazaID::Unique_LilyQueen_GYM_Act": {
+    "localized_name": "Unique_LilyQueen_GYM_Act",
+    "description": null
+  },
+  "EPalWazaID::Unique_LilyQueen_LilyHealing_Boss": {
+    "localized_name": "Unique_LilyQueen_LilyHealing_Boss",
+    "description": null
+  },
+  "EPalWazaID::Unique_MoonQueen_GYM_Act": {
+    "localized_name": "Unique_MoonQueen_GYM_Act",
+    "description": null
+  },
+  "EPalWazaID::Unique_MoonQueen_GYM_Hard_Act": {
+    "localized_name": "Unique_MoonQueen_GYM_Hard_Act",
+    "description": null
+  },
+  "EPalWazaID::Unique_ThunderDragonMan_GYM_Act": {
+    "localized_name": "Unique_ThunderDragonMan_GYM_Act",
+    "description": null
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_BigBang": {
+    "localized_name": "Unique_WorldTreeDragon_BigBang",
+    "description": null
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_HaloBeam": {
+    "localized_name": "Unique_WorldTreeDragon_HaloBeam",
+    "description": null
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_HaloCutter": {
+    "localized_name": "Unique_WorldTreeDragon_HaloCutter",
+    "description": null
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_LaserGliding": {
+    "localized_name": "Unique_WorldTreeDragon_LaserGliding",
+    "description": null
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_PaldiumCannon": {
+    "localized_name": "Unique_WorldTreeDragon_PaldiumCannon",
+    "description": null
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_PaldiumExplosion": {
+    "localized_name": "Unique_WorldTreeDragon_PaldiumExplosion",
+    "description": null
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_PaldiumRain": {
+    "localized_name": "Unique_WorldTreeDragon_PaldiumRain",
+    "description": null
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_PaldiumShot": {
+    "localized_name": "Unique_WorldTreeDragon_PaldiumShot",
+    "description": null
+  },
+  "EPalWazaID::Unique_WorldTreeDragon_Supernova": {
+    "localized_name": "Unique_WorldTreeDragon_Supernova",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Green_2_PhantasmalBolt": {
+    "localized_name": "Unique_YakushimaBoss001_Green_2_PhantasmalBolt",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Green_2_PhantasmalDeathray": {
+    "localized_name": "Unique_YakushimaBoss001_Green_2_PhantasmalDeathray",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Green_2_PhantasmalEye": {
+    "localized_name": "Unique_YakushimaBoss001_Green_2_PhantasmalEye",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Green_2_PhantasmalSphere": {
+    "localized_name": "Unique_YakushimaBoss001_Green_2_PhantasmalSphere",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Green_PhantasmalBolt": {
+    "localized_name": "Unique_YakushimaBoss001_Green_PhantasmalBolt",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Green_PhantasmalDeathray": {
+    "localized_name": "Unique_YakushimaBoss001_Green_PhantasmalDeathray",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Green_PhantasmalEye": {
+    "localized_name": "Unique_YakushimaBoss001_Green_PhantasmalEye",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss001_Green_PhantasmalSphere": {
+    "localized_name": "Unique_YakushimaBoss001_Green_PhantasmalSphere",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss002_2_PhantasmalBolt": {
+    "localized_name": "Unique_YakushimaBoss002_2_PhantasmalBolt",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss002_2_PhantasmalDeathray": {
+    "localized_name": "Unique_YakushimaBoss002_2_PhantasmalDeathray",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss002_2_PhantasmalEye": {
+    "localized_name": "Unique_YakushimaBoss002_2_PhantasmalEye",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss002_2_PhantasmalSphere": {
+    "localized_name": "Unique_YakushimaBoss002_2_PhantasmalSphere",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss002_PhantasmalBolt": {
+    "localized_name": "Unique_YakushimaBoss002_PhantasmalBolt",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss002_PhantasmalDeathray": {
+    "localized_name": "Unique_YakushimaBoss002_PhantasmalDeathray",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss002_PhantasmalEye": {
+    "localized_name": "Unique_YakushimaBoss002_PhantasmalEye",
+    "description": null
+  },
+  "EPalWazaID::Unique_YakushimaBoss002_PhantasmalSphere": {
+    "localized_name": "Unique_YakushimaBoss002_PhantasmalSphere",
+    "description": null
+  },
+  "EPalWazaID::WaterBalloon": {
+    "localized_name": "WaterBalloon",
+    "description": null
+  },
+  "EPalWazaID::WaterWave": {
+    "localized_name": "WaterWave",
+    "description": "สร้างกำแพงวังน้ำวนขึ้นตรงหน้า และพัดไปด้านหน้าอย่างช้า ๆ"
+  },
+  "EPalWazaID::WorkAttack": {
+    "localized_name": "WorkAttack",
+    "description": null
   }
 }

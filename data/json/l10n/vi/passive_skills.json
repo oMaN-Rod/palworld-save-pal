@@ -597,15 +597,15 @@
   },
   "Deffence_up2": {
     "localized_name": "Thân Thể Cường Tráng",
-    "description": "Phòng thủ +20.0% Trạng thái choáng bị vô hiệu"
+    "description": "Phòng thủ +20% Trạng thái choáng bị vô hiệu"
   },
   "Deffence_up2_2": {
     "localized_name": "Hạng Nặng",
-    "description": "Phòng Thủ+20.0% Thổi bay bị vô hiệu"
+    "description": "Phòng Thủ+20% Thổi bay bị vô hiệu"
   },
   "Deffence_up3": {
     "localized_name": "Thân Thể Kim Cương",
-    "description": "Phòng thủ +30.0% Trạng thái choáng bị vô hiệu Thổi bay bị vô hiệu"
+    "description": "Phòng thủ +30% Trạng thái choáng bị vô hiệu Thổi bay bị vô hiệu"
   },
   "Defuser_ExplosiveSpore_EquipSkill": {
     "localized_name": "Giảm Sát Thương Nổ",
@@ -613,7 +613,7 @@
   },
   "ElementBoost_Aqua_1_PAL": {
     "localized_name": "Ưa Nước",
-    "description": "Sát thương tấn công hệ nước tăng 10.0%"
+    "description": "Sát thương tấn công hệ nước tăng 10%"
   },
   "ElementBoost_Aqua_2_PAL": {
     "localized_name": "Hải Vương",
@@ -629,7 +629,7 @@
   },
   "ElementBoost_Dark_1_PAL": {
     "localized_name": "Bức Màn Bóng Đêm",
-    "description": "Sát thương tấn công hệ bóng tối tăng 10.0%"
+    "description": "Sát thương tấn công hệ bóng tối tăng 10%"
   },
   "ElementBoost_Dark_2_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Vừa)",
@@ -665,7 +665,7 @@
   },
   "ElementBoost_Dragon_1_PAL": {
     "localized_name": "Dòng Máu Loài Rồng",
-    "description": "Sát thương tấn công hệ rồng tăng 10.0%"
+    "description": "Sát thương tấn công hệ rồng tăng 10%"
   },
   "ElementBoost_Dragon_2_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Rồng (Vừa)",
@@ -701,7 +701,7 @@
   },
   "ElementBoost_Earth_1_PAL": {
     "localized_name": "Sức Mạnh Từ Đất Mẹ",
-    "description": "Sát thương tấn công hệ đất tăng 10.0%"
+    "description": "Sát thương tấn công hệ đất tăng 10%"
   },
   "ElementBoost_Earth_2_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Đất (Vừa)",
@@ -765,7 +765,7 @@
   },
   "ElementBoost_Fire_1_PAL": {
     "localized_name": "Ưa Lửa",
-    "description": "Sát thương tấn công hệ lửa tăng 10.0%"
+    "description": "Sát thương tấn công hệ lửa tăng 10%"
   },
   "ElementBoost_Fire_2_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Lửa (Vừa)",
@@ -801,7 +801,7 @@
   },
   "ElementBoost_Ice_1_PAL": {
     "localized_name": "Máu Lạnh",
-    "description": "Sát thương tấn công hệ băng tăng 10.0%"
+    "description": "Sát thương tấn công hệ băng tăng 10%"
   },
   "ElementBoost_Ice_2_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Băng (Vừa)",
@@ -837,7 +837,7 @@
   },
   "ElementBoost_Leaf_1_PAL": {
     "localized_name": "Lá Xanh Hương Nồng",
-    "description": "Sát thương tấn công hệ cỏ tăng 10.0%"
+    "description": "Sát thương tấn công hệ cỏ tăng 10%"
   },
   "ElementBoost_Leaf_2_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Cỏ (Vừa)",
@@ -873,7 +873,7 @@
   },
   "ElementBoost_Normal_1_PAL": {
     "localized_name": "Tâm Thiền",
-    "description": "Sát thương tấn công hệ thường tăng 10.0%"
+    "description": "Sát thương tấn công hệ thường tăng 10%"
   },
   "ElementBoost_Normal_2_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Thường (Vừa)",
@@ -901,7 +901,7 @@
   },
   "ElementBoost_Thunder_1_PAL": {
     "localized_name": "Tụ Điện",
-    "description": "Sát thương tấn công hệ sấm tăng 10.0%"
+    "description": "Sát thương tấn công hệ sấm tăng 10%"
   },
   "ElementBoost_Thunder_2_PAL": {
     "localized_name": "Lôi Đế",
@@ -941,7 +941,7 @@
   },
   "ElementResist_Aqua_1_PAL": {
     "localized_name": "Chống Thấm Nước",
-    "description": "Sát thương hệ nước giảm 10.0%"
+    "description": "Sát thương hệ nước giảm 10%"
   },
   "ElementResist_Aqua_2": {
     "localized_name": "Giảm Sát Thương Hệ Nước Cấp 2",
@@ -961,7 +961,7 @@
   },
   "ElementResist_Dark_1_PAL": {
     "localized_name": "Lạc Quan Vui Vẻ",
-    "description": "Sát thương hệ bóng tối giảm 10.0%"
+    "description": "Sát thương hệ bóng tối giảm 10%"
   },
   "ElementResist_Dark_2": {
     "localized_name": "Giảm Sát Thương Hệ Bóng Tối Cấp 2",
@@ -981,7 +981,7 @@
   },
   "ElementResist_Dragon_1_PAL": {
     "localized_name": "Kẻ Hạ Gục Rồng",
-    "description": "Sát thương hệ rồng giảm 10.0%"
+    "description": "Sát thương hệ rồng giảm 10%"
   },
   "ElementResist_Dragon_2": {
     "localized_name": "Giảm Sát Thương Hệ Rồng Cấp 2",
@@ -1001,7 +1001,7 @@
   },
   "ElementResist_Earth_1_PAL": {
     "localized_name": "Chống Động Đất",
-    "description": "Sát thương hệ đất giảm 10.0%"
+    "description": "Sát thương hệ đất giảm 10%"
   },
   "ElementResist_Earth_2": {
     "localized_name": "Giảm Sát Thương Hệ Đất Cấp 2",
@@ -1021,7 +1021,7 @@
   },
   "ElementResist_Fire_1_PAL": {
     "localized_name": "Ưa Nắng",
-    "description": "Sát thương hệ lửa giảm 10.0%"
+    "description": "Sát thương hệ lửa giảm 10%"
   },
   "ElementResist_Fire_2": {
     "localized_name": "Giảm Sát Thương Hệ Lửa Cấp 2",
@@ -1041,7 +1041,7 @@
   },
   "ElementResist_Ice_1_PAL": {
     "localized_name": "Thân Nhiệt Cao",
-    "description": "Sát thương hệ băng giảm 10.0%"
+    "description": "Sát thương hệ băng giảm 10%"
   },
   "ElementResist_Ice_2": {
     "localized_name": "Giảm Sát Thương Hệ Băng Cấp 2",
@@ -1061,7 +1061,7 @@
   },
   "ElementResist_Leaf_1_PAL": {
     "localized_name": "Phòng Tuyến Cỏ Cây",
-    "description": "Sát thương hệ cỏ giảm 10.0%"
+    "description": "Sát thương hệ cỏ giảm 10%"
   },
   "ElementResist_Leaf_2": {
     "localized_name": "Giảm Sát Thương Hệ Cỏ Cấp 2",
@@ -1081,7 +1081,7 @@
   },
   "ElementResist_Normal_1_PAL": {
     "localized_name": "Bất Thường",
-    "description": "Sát thương hệ thường giảm 10.0%"
+    "description": "Sát thương hệ thường giảm 10%"
   },
   "ElementResist_Normal_2": {
     "localized_name": "Giảm Sát Thương Hệ Thường Cấp 2",
@@ -1101,7 +1101,7 @@
   },
   "ElementResist_Thunder_1_PAL": {
     "localized_name": "Thân Cách Điện",
-    "description": "Sát thương hệ sấm giảm 10.0%"
+    "description": "Sát thương hệ sấm giảm 10%"
   },
   "ElementResist_Thunder_2": {
     "localized_name": "Giảm Sát Thương Hệ Sấm Cấp 2",
@@ -1133,7 +1133,7 @@
   },
   "GYM_NAME_Meadow": {
     "localized_name": "Thủ Lĩnh Tổ Chức Săn Trộm Rayne",
-    "description": "Tấn công +20.0% Tăng tốc độ di chuyển 10.0%"
+    "description": "Tấn công +20% Tăng tốc độ di chuyển 10%"
   },
   "GYM_NAME_Sakurajima": {
     "localized_name": "Thủ Lĩnh Hoa Mặt Trăng",
@@ -1245,7 +1245,7 @@
   },
   "MutationPal_ExplosionResist": {
     "localized_name": "Thiết Giáp Hạng Nặng",
-    "description": "Sát thương do nổ<Status_Up>Vô hiệu</>"
+    "description": null
   },
   "MutationPal_Immortal": {
     "localized_name": "Thân Thể Bất Tử",
@@ -1253,7 +1253,7 @@
   },
   "MutationPal_Mutant": {
     "localized_name": "Thể Chất Đặc Dị",
-    "description": "Lượng hồi phục Máu tự nhiên của Pal và người chơi +50.0% Phòng Thủ +{EffectValue4}% Sát thương do trúng độc<Status_Up>Vô hiệu</> Sát thương do thiêu đốt<Status_Up>Vô hiệu</>"
+    "description": null
   },
   "NightOwl": {
     "localized_name": "Cú Đêm",
@@ -1273,7 +1273,7 @@
   },
   "Nushi": {
     "localized_name": "Thủ Lĩnh",
-    "description": "Tăng sát thương tấn công hệ Nước 20.0% Tăng sát thương tấn công hệ Băng 20.0% Phòng thủ+20.0%"
+    "description": "Tăng sát thương tấn công hệ Nước 20% Tăng sát thương tấn công hệ Băng 20% Phòng thủ+20%"
   },
   "OctaviaArmorVampire": {
     "localized_name": "Nhiên Liệu Máu",
@@ -1305,46 +1305,46 @@
   },
   "PAL_FullStomach_Down_1": {
     "localized_name": "Ăn Nhẹ",
-    "description": "No lâu <NumBlue_13>+10,0%</>"
+    "description": "No lâu +10,0%"
   },
   "PAL_FullStomach_Down_2": {
     "localized_name": "Ăn Kiêng",
-    "description": "No lâu <NumBlue_13>+15,0%</>"
+    "description": "No lâu +15,0%"
   },
   "PAL_FullStomach_Down_3": {
     "localized_name": "Nhịn Ăn Thành Thạo",
-    "description": "No lâu <NumBlue_13>+20,0%</>"
+    "description": "No lâu +20,0%"
   },
   "PAL_FullStomach_Up_1": {
     "localized_name": "Háu Ăn",
-    "description": "Nhanh đói <NumRed_13>+10,0%</>"
+    "description": "Nhanh đói +10,0%"
   },
   "PAL_FullStomach_Up_2": {
     "localized_name": "Dạ Dày Vô Hạn",
-    "description": "Nhanh đói <NumRed_13>+15,0%</>"
+    "description": "Nhanh đói +15,0%"
   },
   "PAL_Sanity_Down_1": {
     "localized_name": "Suy Nghĩ Tích Cực",
-    "description": "Minh mẫn giảm chậm hơn <NumBlue_13>+10,0%</>"
+    "description": "Minh mẫn giảm chậm hơn +10,0%"
   },
   "PAL_Sanity_Down_2": {
     "localized_name": "Cuồng Si Công Việc",
-    "description": "Minh mẫn giảm chậm hơn <NumBlue_13>+15,0%</>"
+    "description": "Minh mẫn giảm chậm hơn +15,0%"
   },
   "PAL_Sanity_Down_3": {
     "localized_name": "Bất Động Minh Vương Tâm",
-    "description": "Minh mẫn giảm chậm hơn <NumBlue_13>+20,0%</>"
+    "description": "Minh mẫn giảm chậm hơn +20,0%"
   },
   "PAL_Sanity_Up_1": {
     "localized_name": "Tinh Thần Bất Ổn",
-    "description": "Minh mẫn giảm nhanh hơn <NumRed_13>+10,0%</>"
+    "description": "Minh mẫn giảm nhanh hơn +10,0%"
   },
   "PAL_Sanity_Up_2": {
     "localized_name": "Quấy Phá",
-    "description": "Minh mẫn giảm nhanh hơn <NumRed_13>+15,0%</>"
+    "description": "Minh mẫn giảm nhanh hơn +15,0%"
   },
   "PAL_SpiritualInst": {
-    "localized_name": "-",
+    "localized_name": "Mentally unstable",
     "description": null
   },
   "PAL_conceited": {
@@ -1545,23 +1545,23 @@
   },
   "TrainerATK_UP_1": {
     "localized_name": "Kẻ Tiên Phong",
-    "description": "Tấn công của người chơi tăng 10.0%"
+    "description": "Tấn công của người chơi tăng 10%"
   },
   "TrainerDEF_UP_1": {
     "localized_name": "Quân Sư Phòng Thủ",
-    "description": "Phòng thủ của người chơi tăng 10.0%"
+    "description": "Phòng thủ của người chơi tăng 10%"
   },
   "TrainerLogging_up1": {
     "localized_name": "Quản Đốc Khai Thác Gỗ",
-    "description": "Hiệu quả đốn gỗ của người chơi tăng 25.0%"
+    "description": "Hiệu quả đốn gỗ của người chơi tăng 25%"
   },
   "TrainerMining_up1": {
     "localized_name": "Quản Đốc Mỏ",
-    "description": "Hiệu quả khai thác của người chơi tăng 25.0%"
+    "description": "Hiệu quả khai thác của người chơi tăng 25%"
   },
   "TrainerWorkSpeed_UP_1": {
     "localized_name": "Thúc Đẩy Động Lực",
-    "description": "Tốc độ làm việc của người chơi tăng 25.0%"
+    "description": "Tốc độ làm việc của người chơi tăng 25%"
   },
   "Vampire": {
     "localized_name": "Ma Cà Rồng",
@@ -1609,39 +1609,39 @@
   },
   "WorkSuitabilityAddRank_MonsterFarm_1": {
     "localized_name": "Đứa Trẻ Trang Trại",
-    "description": "Năng lực làm việc<NumBlue_13> của Làm Nông +1</>"
+    "description": null
   },
   "WorkSuitabilityAddRank_MonsterFarm_2": {
     "localized_name": "Chủ Nhân Trang Trại",
-    "description": "Năng lực làm việc<NumBlue_13> của Làm Nông +2</>"
+    "description": null
   },
   "WorldTree_ATK": {
     "localized_name": "Thánh Kiếm Hai Lưỡi",
-    "description": "Tấn công <NumBlue_13>+</>50.0% Phòng thủ -30.0% Cây và đá tại khu vực Cây Thế Giới không biến mất khi bạn đến gần"
+    "description": "Tấn công +50% Phòng thủ -30% Cây và đá tại khu vực Cây Thế Giới không biến mất khi bạn đến gần"
   },
   "WorldTree_ATK_DEF": {
     "localized_name": "Thần Hủy Diệt",
-    "description": "Tấn công <NumBlue_13>+</>40.0% Phòng thủ <NumBlue_13>+</>20.0% Máu tối đa -50.0% Cây và đá tại khu vực Cây Thế Giới không biến mất khi bạn đến gần"
+    "description": "Tấn công +40% Phòng thủ +20% Máu tối đa -50% Cây và đá tại khu vực Cây Thế Giới không biến mất khi bạn đến gần"
   },
   "WorldTree_CraftSpeed": {
     "localized_name": "Bàn Tay Ác Quỷ",
-    "description": "Tốc độ làm việc <NumBlue_13>+</>90.0<NumBlue_13>%</> Chỉ số Minh Mẫn giảm nhanh <NumRed_13>+15,0%</> Cây và đá tại khu vực Cây Thế Giới không biến mất khi bạn đến gần"
+    "description": "Tốc độ làm việc +90% Chỉ số Minh Mẫn giảm nhanh +15,0% Cây và đá tại khu vực Cây Thế Giới không biến mất khi bạn đến gần"
   },
   "WorldTree_DEF": {
     "localized_name": "Thành Trì Thịt Sống",
-    "description": "Phòng thủ <NumBlue_13>+</>50.0% Tấn công -30.0% Cây và đá tại khu vực Cây Thế Giới không biến mất khi bạn đến gần"
+    "description": "Phòng thủ +50% Tấn công -30% Cây và đá tại khu vực Cây Thế Giới không biến mất khi bạn đến gần"
   },
   "WorldTree_FullStomach": {
     "localized_name": "Vườn Ươm Cây Thần",
-    "description": "Mức Độ No giảm chậm <NumBlue_13>+50,0%</> Máu -20.0<NumRed_13>%</> Cây và đá tại khu vực Cây Thế Giới không biến mất khi bạn đến gần"
+    "description": "Mức Độ No giảm chậm +50,0% Máu -20% Cây và đá tại khu vực Cây Thế Giới không biến mất khi bạn đến gần"
   },
   "WorldTree_MoveSpeed": {
     "localized_name": "Cú Nhảy Không Gian",
-    "description": "Tốc độ di chuyển tăng <NumBlue_13>+</>50.0<NumBlue_13>%</> Mức Độ No giảm nhanh <NumRed_13>+15,0%</> Cây và đá tại khu vực Cây Thế Giới không biến mất khi bạn đến gần"
+    "description": "Tốc độ di chuyển tăng +50% Mức Độ No giảm nhanh +15,0% Cây và đá tại khu vực Cây Thế Giới không biến mất khi bạn đến gần"
   },
   "WorldTree_Sanity": {
     "localized_name": "Tiên Nhân",
-    "description": "Chỉ số Minh Mẫn giảm chậm <NumBlue_13>+50,0%</> Tốc độ làm việc -20.0<NumRed_13>%</> Cây và đá tại khu vực Cây Thế Giới không biến mất khi bạn đến gần"
+    "description": "Chỉ số Minh Mẫn giảm chậm +50,0% Tốc độ làm việc -20% Cây và đá tại khu vực Cây Thế Giới không biến mất khi bạn đến gần"
   },
   "YakushimaDagameBoost_Magic_Equip": {
     "localized_name": "Sức Mạnh Thần Thánh: Phép Thuật",
@@ -1677,6 +1677,282 @@
   },
   "defense_ACC_up4": {
     "localized_name": "Tăng Phòng Thủ Lv4",
+    "description": null
+  },
+  "AccuracyDecrease": {
+    "localized_name": "AccuracyDecrease",
+    "description": null
+  },
+  "AccuracyIncrease": {
+    "localized_name": "AccuracyIncrease",
+    "description": null
+  },
+  "AccuracySuperDecrease": {
+    "localized_name": "AccuracySuperDecrease",
+    "description": null
+  },
+  "BulletSpeed_H": {
+    "localized_name": "BulletSpeed_H",
+    "description": null
+  },
+  "BulletSpeed_L": {
+    "localized_name": "BulletSpeed_L",
+    "description": null
+  },
+  "CollectItem": {
+    "localized_name": "CollectItem",
+    "description": null
+  },
+  "CollectItem_CuteFox": {
+    "localized_name": "CollectItem_CuteFox",
+    "description": null
+  },
+  "CraftSpeed*3": {
+    "localized_name": "CraftSpeed*3",
+    "description": null
+  },
+  "CraftSpeed*5": {
+    "localized_name": "CraftSpeed*5",
+    "description": null
+  },
+  "GiveADark": {
+    "localized_name": "GiveADark",
+    "description": null
+  },
+  "GiveADragon": {
+    "localized_name": "GiveADragon",
+    "description": null
+  },
+  "GiveAEarth": {
+    "localized_name": "GiveAEarth",
+    "description": null
+  },
+  "GiveAElectricity": {
+    "localized_name": "GiveAElectricity",
+    "description": null
+  },
+  "GiveAFire": {
+    "localized_name": "GiveAFire",
+    "description": null
+  },
+  "GiveAIce": {
+    "localized_name": "GiveAIce",
+    "description": null
+  },
+  "GiveALeaf": {
+    "localized_name": "GiveALeaf",
+    "description": null
+  },
+  "GiveAWater": {
+    "localized_name": "GiveAWater",
+    "description": null
+  },
+  "Logging_up1": {
+    "localized_name": "Logging_up1",
+    "description": null
+  },
+  "Logging_up1_Otomo_only": {
+    "localized_name": "Logging_up1_Otomo_only",
+    "description": null
+  },
+  "Logging_up2": {
+    "localized_name": "Logging_up2",
+    "description": null
+  },
+  "Logging_up2_Otomo_only": {
+    "localized_name": "Logging_up2_Otomo_only",
+    "description": null
+  },
+  "Logging_up3": {
+    "localized_name": "Logging_up3",
+    "description": null
+  },
+  "Logging_up4": {
+    "localized_name": "Logging_up4",
+    "description": null
+  },
+  "Logging_up5": {
+    "localized_name": "Logging_up5",
+    "description": null
+  },
+  "MeleeAttack_down1": {
+    "localized_name": "MeleeAttack_down1",
+    "description": null
+  },
+  "MeleeAttack_down2": {
+    "localized_name": "MeleeAttack_down2",
+    "description": null
+  },
+  "MeleeAttack_up1": {
+    "localized_name": "MeleeAttack_up1",
+    "description": null
+  },
+  "MeleeAttack_up2": {
+    "localized_name": "MeleeAttack_up2",
+    "description": null
+  },
+  "Mining_up1": {
+    "localized_name": "Mining_up1",
+    "description": null
+  },
+  "Mining_up1_Otomo_only": {
+    "localized_name": "Mining_up1_Otomo_only",
+    "description": null
+  },
+  "Mining_up2": {
+    "localized_name": "Mining_up2",
+    "description": null
+  },
+  "Mining_up2_Otomo_only": {
+    "localized_name": "Mining_up2_Otomo_only",
+    "description": null
+  },
+  "Mining_up3": {
+    "localized_name": "Mining_up3",
+    "description": null
+  },
+  "Mining_up4": {
+    "localized_name": "Mining_up4",
+    "description": null
+  },
+  "Mining_up5": {
+    "localized_name": "Mining_up5",
+    "description": null
+  },
+  "Mute_1": {
+    "localized_name": "Mute_1",
+    "description": null
+  },
+  "Mute_2": {
+    "localized_name": "Mute_2",
+    "description": null
+  },
+  "Mute_3": {
+    "localized_name": "Mute_3",
+    "description": null
+  },
+  "Mute_4": {
+    "localized_name": "Mute_4",
+    "description": null
+  },
+  "Mute_5": {
+    "localized_name": "Mute_5",
+    "description": null
+  },
+  "PAL_ElementPassive_Test": {
+    "localized_name": "PAL_ElementPassive_Test",
+    "description": null
+  },
+  "PAL_TribePassive_Test": {
+    "localized_name": "PAL_TribePassive_Test",
+    "description": null
+  },
+  "RecoilDecrease": {
+    "localized_name": "RecoilDecrease",
+    "description": null
+  },
+  "RecoilIncrease": {
+    "localized_name": "RecoilIncrease",
+    "description": null
+  },
+  "ShotAttack_down1": {
+    "localized_name": "ShotAttack_down1",
+    "description": null
+  },
+  "ShotAttack_down2": {
+    "localized_name": "ShotAttack_down2",
+    "description": null
+  },
+  "ShotAttack_up1": {
+    "localized_name": "ShotAttack_up1",
+    "description": null
+  },
+  "ShotAttack_up2": {
+    "localized_name": "ShotAttack_up2",
+    "description": null
+  },
+  "StealExpert_1": {
+    "localized_name": "StealExpert_1",
+    "description": null
+  },
+  "StealExpert_2": {
+    "localized_name": "StealExpert_2",
+    "description": null
+  },
+  "StealExpert_3": {
+    "localized_name": "StealExpert_3",
+    "description": null
+  },
+  "StealExpert_4": {
+    "localized_name": "StealExpert_4",
+    "description": null
+  },
+  "Support_down1": {
+    "localized_name": "Support_down1",
+    "description": null
+  },
+  "Support_down2": {
+    "localized_name": "Support_down2",
+    "description": null
+  },
+  "Support_up1": {
+    "localized_name": "Support_up1",
+    "description": null
+  },
+  "Support_up2": {
+    "localized_name": "Support_up2",
+    "description": null
+  },
+  "TestExplosive_H": {
+    "localized_name": "TestExplosive_H",
+    "description": null
+  },
+  "TestExplosive_L": {
+    "localized_name": "TestExplosive_L",
+    "description": null
+  },
+  "TestHoming_H": {
+    "localized_name": "TestHoming_H",
+    "description": null
+  },
+  "TestHoming_L": {
+    "localized_name": "TestHoming_L",
+    "description": null
+  },
+  "TestSkill1": {
+    "localized_name": "TestSkill1",
+    "description": null
+  },
+  "TestSkill2": {
+    "localized_name": "TestSkill2",
+    "description": null
+  },
+  "TestSkill3": {
+    "localized_name": "TestSkill3",
+    "description": null
+  },
+  "TestSkill4": {
+    "localized_name": "TestSkill4",
+    "description": null
+  },
+  "TestSkill5": {
+    "localized_name": "TestSkill5",
+    "description": null
+  },
+  "TestSkill6": {
+    "localized_name": "TestSkill6",
+    "description": null
+  },
+  "TestSkill7": {
+    "localized_name": "TestSkill7",
+    "description": null
+  },
+  "TestSkill8": {
+    "localized_name": "TestSkill8",
+    "description": null
+  },
+  "MoveSpeed_up_1_Otomo_Only_Equip": {
+    "localized_name": "MoveSpeed_up_1_Otomo_Only_Equip",
     "description": null
   }
 }

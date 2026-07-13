@@ -477,7 +477,7 @@
   },
   "ChickenPal": {
     "localized_name": "Chikipi",
-    "description": "อ่อนแอมาก และอร่อยมาก พาลที่อ่อนแอสุด ๆ ใกล้เคียงกับSheepBall ไม่ว่าจะล่าไปมากแค่ไหน มันก็ยังโผล่มาเรื่อย ๆ"
+    "description": "อ่อนแอมาก และอร่อยมาก พาลที่อ่อนแอสุด ๆ ใกล้เคียงกับLamball ไม่ว่าจะล่าไปมากแค่ไหน มันก็ยังโผล่มาเรื่อย ๆ"
   },
   "ClioneTwins": {
     "localized_name": "Amione",
@@ -577,7 +577,7 @@
   },
   "DrillGame": {
     "localized_name": "Digtoise",
-    "description": "มีเรื่องเล่าชื่อ |สว่านของDigtoise| เป็นปริศนาธรรมให้ขบคิดเกี่ยวกับ ความลักลั่นย้อนแย้งของDigtoiseที่มีเกราะและสว่านที่แข็งแกร่งที่สุด"
+    "description": "มีเรื่องเล่าชื่อ \"สว่านของDigtoise\" เป็นปริศนาธรรมให้ขบคิดเกี่ยวกับ ความลักลั่นย้อนแย้งของDigtoiseที่มีเกราะและสว่านที่แข็งแกร่งที่สุด"
   },
   "Eagle": {
     "localized_name": "Galeclaw",
@@ -589,7 +589,7 @@
   },
   "ElecLion": {
     "localized_name": "Boltmane",
-    "description": "-"
+    "description": "The more it moves, the more it heats up and the hair tips increasingly glow brighter. At its peak, it becomes so dazzling that you risk blindness if you stare at it directly."
   },
   "ElecLizard": {
     "localized_name": "Slowatt",
@@ -925,11 +925,11 @@
   },
   "FlowerDinosaur": {
     "localized_name": "Dinossom",
-    "description": "ถ้าโกรธขึ้นมาจะอาละวาดเหมือนเพลิงผลาญรับมือไม่ไหว สำนวนที่ว่า |เหยียบหางDinossom| หมายถึงทำให้ใครบางคนโกรธมาก"
+    "description": "ถ้าโกรธขึ้นมาจะอาละวาดเหมือนเพลิงผลาญรับมือไม่ไหว สำนวนที่ว่า \"เหยียบหางDinossom\" หมายถึงทำให้ใครบางคนโกรธมาก"
   },
   "FlowerDinosaur_Electric": {
     "localized_name": "Dinossom Lux",
-    "description": "แม้จะโดนฟ้าผ่าแต่ก็ยังรอดชีวิต สำนวนที่ว่า |ฟ้าผ่าDinossom Lux| หมายถึงรอดตายฉิวเฉียด"
+    "description": "แม้จะโดนฟ้าผ่าแต่ก็ยังรอดชีวิต สำนวนที่ว่า \"ฟ้าผ่าDinossom Lux\" หมายถึงรอดตายฉิวเฉียด"
   },
   "FlowerDoll": {
     "localized_name": "Petallia",
@@ -1065,7 +1065,7 @@
   },
   "GhostAnglerfish": {
     "localized_name": "Ghangler",
-    "description": "เหยื่อประกายเเสงที่ขับไล่ความมืดมิด จะเชื้อเชิญเหล่าพาลที่หลงทางมา พอพบกับGhostAnglerFishก็สายไปเเล้วที่จะหนี ก็จะโดนนำพาไปถึงบ้านเก่าอย่างปลอดภัยเลยล่ะ"
+    "description": "เหยื่อประกายเเสงที่ขับไล่ความมืดมิด จะเชื้อเชิญเหล่าพาลที่หลงทางมา พอพบกับGhanglerก็สายไปเเล้วที่จะหนี ก็จะโดนนำพาไปถึงบ้านเก่าอย่างปลอดภัยเลยล่ะ"
   },
   "GhostAnglerfish_Fire": {
     "localized_name": "Ghangler Ignis",
@@ -1545,7 +1545,7 @@
   },
   "KingBahamut_Dragon": {
     "localized_name": "Blazamut Ryu",
-    "description": "ปรากฎกายขึ้นมาจากใต้พิภพในอดีตอันไกลโพ้น เปลวเพลิงลุกโชนไร้ความปรานี ไฟจะไม่มอดดับจนกว่าจะเผาไหม้ทั่วทั้งเกาะ รู้จักกันในนาม |เพลิงนิรันดร์|"
+    "description": "ปรากฎกายขึ้นมาจากใต้พิภพในอดีตอันไกลโพ้น เปลวเพลิงลุกโชนไร้ความปรานี ไฟจะไม่มอดดับจนกว่าจะเผาไหม้ทั่วทั้งเกาะ รู้จักกันในนาม \"เพลิงนิรันดร์\""
   },
   "KingSunfish": {
     "localized_name": "Solmora",
@@ -1617,7 +1617,7 @@
   },
   "LilyQueen": {
     "localized_name": "Lyleen",
-    "description": "พาลผู้อ่อนโยนเปี่ยมด้วยเมตตา คอยดูแลเหล่าพาลเด็ก ๆ ที่สูญเสียพ่อแม่ วิธีอบรมคือยิงSolarBeamใส่เต็มพิกัด"
+    "description": "พาลผู้อ่อนโยนเปี่ยมด้วยเมตตา คอยดูแลเหล่าพาลเด็ก ๆ ที่สูญเสียพ่อแม่ วิธีอบรมคือยิงโซลาร์บลาสต์ใส่เต็มพิกัด"
   },
   "LilyQueen_Dark": {
     "localized_name": "Lyleen Noct",
@@ -1945,7 +1945,7 @@
   },
   "MimicDog": {
     "localized_name": "Mimog",
-    "description": "ณ อาณาจักรที่เคยตั้งอยู่บนเกาะในอดีต มีธรรมเนียมมอบรางวัลให้กับผู้ที่ตายได้งี่เง่าที่สุดในปีนั้น สาเหตุการตายแรกสุดที่ได้จารึกไว้คือ |เปิดกล่องแล้วโดนกัดตายเพราะไม่รู้ว่านั่นคือMimog|"
+    "description": "ณ อาณาจักรที่เคยตั้งอยู่บนเกาะในอดีต มีธรรมเนียมมอบรางวัลให้กับผู้ที่ตายได้งี่เง่าที่สุดในปีนั้น สาเหตุการตายแรกสุดที่ได้จารึกไว้คือ \"เปิดกล่องแล้วโดนกัดตายเพราะไม่รู้ว่านั่นคือMimog\""
   },
   "MobuCitizen": {
     "localized_name": "ชาวเกาะ",
@@ -1961,7 +1961,7 @@
   },
   "Monkey": {
     "localized_name": "Tanzee",
-    "description": "แรกเริ่มเดิมทีมันใช้แท่งเรียวยาวเช่นกิ่งไม้เป็นอาวุธ แต่เมื่อคลุกคลีกับมนุษย์ ก็ไม่ได้ใช้อีก เพราะมันพบ |ปืน| ที่ทั้งเรียวยาวและมีประสิทธิภาพยิ่งกว่าแล้ว"
+    "description": "แรกเริ่มเดิมทีมันใช้แท่งเรียวยาวเช่นกิ่งไม้เป็นอาวุธ แต่เมื่อคลุกคลีกับมนุษย์ ก็ไม่ได้ใช้อีก เพราะมันพบ \"ปืน\" ที่ทั้งเรียวยาวและมีประสิทธิภาพยิ่งกว่าแล้ว"
   },
   "Monkey_Fire": {
     "localized_name": "Tanzee Ignis",
@@ -2145,7 +2145,7 @@
   },
   "PREDATOR_DrillGame": {
     "localized_name": "Digtoise",
-    "description": "มีเรื่องเล่าชื่อ |สว่านของDigtoise| เป็นปริศนาธรรมให้ขบคิดเกี่ยวกับ ความลักลั่นย้อนแย้งของDigtoiseที่มีเกราะและสว่านที่แข็งแกร่งที่สุด"
+    "description": "มีเรื่องเล่าชื่อ \"สว่านของDigtoise\" เป็นปริศนาธรรมให้ขบคิดเกี่ยวกับ ความลักลั่นย้อนแย้งของDigtoiseที่มีเกราะและสว่านที่แข็งแกร่งที่สุด"
   },
   "PREDATOR_FairyDragon": {
     "localized_name": "Elphidran",
@@ -2157,7 +2157,7 @@
   },
   "PREDATOR_FlowerDinosaur": {
     "localized_name": "Dinossom",
-    "description": "ถ้าโกรธขึ้นมาจะอาละวาดเหมือนเพลิงผลาญรับมือไม่ไหว สำนวนที่ว่า |เหยียบหางDinossom| หมายถึงทำให้ใครบางคนโกรธมาก"
+    "description": "ถ้าโกรธขึ้นมาจะอาละวาดเหมือนเพลิงผลาญรับมือไม่ไหว สำนวนที่ว่า \"เหยียบหางDinossom\" หมายถึงทำให้ใครบางคนโกรธมาก"
   },
   "PREDATOR_FlowerRabbit_Quest": {
     "localized_name": "Flopie",
@@ -2249,7 +2249,7 @@
   },
   "PREDATOR_PurpleSpider": {
     "localized_name": "Tarantriss",
-    "description": "เหนียวหนืดหนึบหนับเป็นอย่างยิ่ง ยิ่งอาละวาดยิ่งเกาะติดแน่น เช่นเดียวกับ |นิสัย| ของมัน"
+    "description": "เหนียวหนืดหนึบหนับเป็นอย่างยิ่ง ยิ่งอาละวาดยิ่งเกาะติดแน่น เช่นเดียวกับ \"นิสัย\" ของมัน"
   },
   "PREDATOR_RedArmorBird": {
     "localized_name": "Ragnahawk",
@@ -2328,7 +2328,7 @@
     "description": null
   },
   "PalPassive_Doctor": {
-    "localized_name": "ชาวเกาะ",
+    "localized_name": "ศาสตราจารย์ Brawn",
     "description": null
   },
   "PalTrader": {
@@ -2473,14 +2473,14 @@
   },
   "PurpleSpider": {
     "localized_name": "Tarantriss",
-    "description": "เหนียวหนืดหนึบหนับเป็นอย่างยิ่ง ยิ่งอาละวาดยิ่งเกาะติดแน่น เช่นเดียวกับ |นิสัย| ของมัน"
+    "description": "เหนียวหนืดหนึบหนับเป็นอย่างยิ่ง ยิ่งอาละวาดยิ่งเกาะติดแน่น เช่นเดียวกับ \"นิสัย\" ของมัน"
   },
   "QueenBee": {
     "localized_name": "Elizabee",
     "description": "ราชินีผู้ถูกเลือกให้ปกครองBeegarde มีทาสรับใช้ที่ยินดีที่ทำงานเพื่อราชินีผู้ยิ่งใหญ่ จนตัวตายอยู่ไม่ขาดสาย"
   },
   "QuestMan": {
-    "localized_name": "-",
+    "localized_name": "Quest Client",
     "description": null
   },
   "Quest_Farmer03_PinkCat": {
@@ -2624,7 +2624,7 @@
     "description": null
   },
   "Reward_BossDefeat": {
-    "localized_name": "ทหารยาม",
+    "localized_name": "พาลฮันเตอร์มือโปร",
     "description": null
   },
   "Reward_Emote_A_01": {
@@ -2712,7 +2712,7 @@
     "description": null
   },
   "Reward_Paldex": {
-    "localized_name": "ทหารยาม",
+    "localized_name": "นักนิเวศวิทยาพาล",
     "description": null
   },
   "Reward_Paldex_v02": {
@@ -2773,11 +2773,11 @@
   },
   "SakuraSaurus": {
     "localized_name": "Broncherry",
-    "description": "กลิ่นกายตอนก่อนจับคู่ต่างกันกับตอนหลังจับคู่เป็นอย่างมาก หลังเจอคู่จะกลายเป็นกลิ่นหอม เรียกว่า |กลิ่นรักแรก|"
+    "description": "กลิ่นกายตอนก่อนจับคู่ต่างกันกับตอนหลังจับคู่เป็นอย่างมาก หลังเจอคู่จะกลายเป็นกลิ่นหอม เรียกว่า \"กลิ่นรักแรก\""
   },
   "SakuraSaurus_Water": {
     "localized_name": "Broncherry Aqua",
-    "description": "กลิ่นกายตอนก่อนจับคู่ต่างกันกับตอนหลังจับคู่เป็นอย่างมาก ก่อนเจอคู่จะกลายเป็นกลิ่นหอม เรียกว่า |กลิ่นบริสุทธิ์|"
+    "description": "กลิ่นกายตอนก่อนจับคู่ต่างกันกับตอนหลังจับคู่เป็นอย่างมาก ก่อนเจอคู่จะกลายเป็นกลิ่นหอม เรียกว่า \"กลิ่นบริสุทธิ์\""
   },
   "SalesPerson": {
     "localized_name": "พ่อค้าเร่",
@@ -2901,7 +2901,7 @@
   },
   "SnowTigerBeastman": {
     "localized_name": "Bastigor",
-    "description": "เวลาเห็นอะไรกลม ๆ จะอยากต่อยจนทนไม่ไหว สำหรับSnowTigerBeastManแล้วสิ่งที่ลำบากรองจากการมีชีวิต คือการปั้นตุ๊กตาหิมะให้เสร็จ"
+    "description": "เวลาเห็นอะไรกลม ๆ จะอยากต่อยจนทนไม่ไหว สำหรับBastigorแล้วสิ่งที่ลำบากรองจากการมีชีวิต คือการปั้นตุ๊กตาหิมะให้เสร็จ"
   },
   "SoldierBee": {
     "localized_name": "Beegarde",
@@ -3037,10 +3037,10 @@
   },
   "VioletFairy": {
     "localized_name": "Vaelet",
-    "description": "ที่ปราสาทมีดอกไม้ที่พระราชาชอบอยู่มากมาย เกิดการต่อสู้ครั้งใหญ่ขึ้น มีไฟลามมายังปราสาท ตอนนั้นเอง มีภูตดอกไม้ตนหนึ่งปรากฏกายขึ้น - จากนิทานเรื่อง |ดอกไม้ของพระราชา|"
+    "description": "ที่ปราสาทมีดอกไม้ที่พระราชาชอบอยู่มากมาย เกิดการต่อสู้ครั้งใหญ่ขึ้น มีไฟลามมายังปราสาท ตอนนั้นเอง มีภูตดอกไม้ตนหนึ่งปรากฏกายขึ้น - จากนิทานเรื่อง \"ดอกไม้ของพระราชา\""
   },
   "VisitingMerchant": {
-    "localized_name": "-",
+    "localized_name": "Visitor",
     "description": null
   },
   "Visitor_Hunter_Rifle": {
@@ -3072,7 +3072,7 @@
     "description": "ตัวไหนสุขภาพดีเหลวก็ไหลผ่านสันหลังได้ปกติดี แต่ในกรณีที่ใจเต้นรัว อุณหภูมิอาจจะผิดเพี้ยน และขั้นร้ายสุด อาจะช็อกเสียชีวิตกระทันหันจากการระเหยและแข็งตัว"
   },
   "WeaponsDealer": {
-    "localized_name": "-",
+    "localized_name": "Weapons Dealer",
     "description": null
   },
   "WeaselDragon": {
@@ -3097,7 +3097,7 @@
   },
   "WhiteDeer": {
     "localized_name": "Celesdir",
-    "description": "ในตำราโบราณมีบันทึกไว้ว่าเป็น |สัตว์ผู้ช่วยเหลือ| เพราะแสงที่Celesdirเปล่งออกมา ชำระล้างได้ทุกสิ่ง ชำระและล้างตรงตามตัวอักษร คือหายไปจากโลกนี้ ไม่ทิ้งร่องรอย"
+    "description": "ในตำราโบราณมีบันทึกไว้ว่าเป็น \"สัตว์ผู้ช่วยเหลือ\" เพราะแสงที่Celesdirเปล่งออกมา ชำระล้างได้ทุกสิ่ง ชำระและล้างตรงตามตัวอักษร คือหายไปจากโลกนี้ ไม่ทิ้งร่องรอย"
   },
   "WhiteDeer_Dark": {
     "localized_name": "Celesdir Noct",
@@ -3133,11 +3133,11 @@
   },
   "WindChimes": {
     "localized_name": "Hangyu",
-    "description": "แขนใหญ่ฉีกได้กระทั่งเหล็ก โทษประหารที่โหดร้ายแบบหนึ่งคือ จะจับนักโทษฉกรรจ์มัดไว้ที่ลานเมือง และให้Windchimesฉีกเนื้อนักโทษ"
+    "description": "แขนใหญ่ฉีกได้กระทั่งเหล็ก โทษประหารที่โหดร้ายแบบหนึ่งคือ จะจับนักโทษฉกรรจ์มัดไว้ที่ลานเมือง และให้Hangyuฉีกเนื้อนักโทษ"
   },
   "WindChimes_Ice": {
     "localized_name": "Hangyu Cryst",
-    "description": "แขนใหญ่ฉีกได้กระทั่งก้อนน้ำแข็ง โทษประจานที่โหดร้ายแบบหนึ่งคือWindchimes_Iceจะจับนักโทษร้ายแรงมัดไว้ที่ลานเมือง และให้ กระชากผมนักโทษให้ชาวเมืองดู"
+    "description": "แขนใหญ่ฉีกได้กระทั่งก้อนน้ำแข็ง โทษประจานที่โหดร้ายแบบหนึ่งคือHangyu Crystจะจับนักโทษร้ายแรงมัดไว้ที่ลานเมือง และให้ กระชากผมนักโทษให้ชาวเมืองดู"
   },
   "WingGolem": {
     "localized_name": "Knocklem",
@@ -3153,11 +3153,11 @@
   },
   "WizardOwl": {
     "localized_name": "Hoocrates",
-    "description": "มักจะจมอยู่กับความคิด คิดมากจนนอนไม่หลับ |ฉันคิดฉันจึงมีอยู่|"
+    "description": "มักจะจมอยู่กับความคิด คิดมากจนนอนไม่หลับ \"ฉันคิดฉันจึงมีอยู่\""
   },
   "WoolFox": {
     "localized_name": "Cremis",
-    "description": "คุณภาพขนดีกว่าSheepBall นิสัยเหมาะเป็นสัตว์ปศุสัตว์มากกว่าSheepBall แต่ตามประวัติศาสตร์คนเลี้ยงมันเป็นพาลสัตว์เลี้ยงมาตลอด ความน่ารักคือที่สุด"
+    "description": "คุณภาพขนดีกว่าLamball นิสัยเหมาะเป็นสัตว์ปศุสัตว์มากกว่าLamball แต่ตามประวัติศาสตร์คนเลี้ยงมันเป็นพาลสัตว์เลี้ยงมาตลอด ความน่ารักคือที่สุด"
   },
   "WorldTreeDragon": {
     "localized_name": "Astralym",
@@ -3234,5 +3234,221 @@
   "Yeti_Grass": {
     "localized_name": "Wumpo Botan",
     "description": "นักวิจัยถางหญ้าเพื่อจะเปิดเผยตัวจริงของมัน แต่กลับเหลือเพียงแค่หญ้า ราวกับในกองหญ้านั้นไม่เคยมีอะไรเลยมาตั้งแต่ต้น"
+  },
+  "ArenaShop": {
+    "localized_name": "ArenaShop",
+    "description": null
+  },
+  "Arena_Legend_1": {
+    "localized_name": "Arena_Legend_1",
+    "description": null
+  },
+  "Arena_Legend_10": {
+    "localized_name": "Arena_Legend_10",
+    "description": null
+  },
+  "Arena_Legend_11": {
+    "localized_name": "Arena_Legend_11",
+    "description": null
+  },
+  "Arena_Legend_12": {
+    "localized_name": "Arena_Legend_12",
+    "description": null
+  },
+  "Arena_Legend_13": {
+    "localized_name": "Arena_Legend_13",
+    "description": null
+  },
+  "Arena_Legend_14": {
+    "localized_name": "Arena_Legend_14",
+    "description": null
+  },
+  "Arena_Legend_15": {
+    "localized_name": "Arena_Legend_15",
+    "description": null
+  },
+  "Arena_Legend_16": {
+    "localized_name": "Arena_Legend_16",
+    "description": null
+  },
+  "Arena_Legend_17": {
+    "localized_name": "Arena_Legend_17",
+    "description": null
+  },
+  "Arena_Legend_18": {
+    "localized_name": "Arena_Legend_18",
+    "description": null
+  },
+  "Arena_Legend_19": {
+    "localized_name": "Arena_Legend_19",
+    "description": null
+  },
+  "Arena_Legend_2": {
+    "localized_name": "Arena_Legend_2",
+    "description": null
+  },
+  "Arena_Legend_20": {
+    "localized_name": "Arena_Legend_20",
+    "description": null
+  },
+  "Arena_Legend_3": {
+    "localized_name": "Arena_Legend_3",
+    "description": null
+  },
+  "Arena_Legend_4": {
+    "localized_name": "Arena_Legend_4",
+    "description": null
+  },
+  "Arena_Legend_5": {
+    "localized_name": "Arena_Legend_5",
+    "description": null
+  },
+  "Arena_Legend_6": {
+    "localized_name": "Arena_Legend_6",
+    "description": null
+  },
+  "Arena_Legend_7": {
+    "localized_name": "Arena_Legend_7",
+    "description": null
+  },
+  "Arena_Legend_8": {
+    "localized_name": "Arena_Legend_8",
+    "description": null
+  },
+  "Arena_Legend_9": {
+    "localized_name": "Arena_Legend_9",
+    "description": null
+  },
+  "ArmorWoodlouse": {
+    "localized_name": "ArmorWoodlouse",
+    "description": null
+  },
+  "BeardedDragon": {
+    "localized_name": "BeardedDragon",
+    "description": "This Pal is under investigation."
+  },
+  "BlueWoolRabbit": {
+    "localized_name": "BlueWoolRabbit",
+    "description": null
+  },
+  "CandleWitch": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "CuteOrca": {
+    "localized_name": "CuteOrca",
+    "description": null
+  },
+  "DarkMutant": {
+    "localized_name": "DarkMutant",
+    "description": "ว่ากันว่าประกายแสงของDarkMutantที่เชี่ยวชาญทักษะ สะบั้นได้กระทั่งมิติ ก่อให้เกิดรอยแยกของปริภูมิ บางทฤษฎีกล่าวว่าพาลบางส่วนปรากฏตัวจากรอยแยกนั้น"
+  },
+  "DesertBoss": {
+    "localized_name": "DesertBoss",
+    "description": null
+  },
+  "ElecSnail_Fire": {
+    "localized_name": "ElecSnail_Fire",
+    "description": null
+  },
+  "ElectricBoss": {
+    "localized_name": "ElectricBoss",
+    "description": null
+  },
+  "Emote_Tester": {
+    "localized_name": "Emote_Tester",
+    "description": null
+  },
+  "ForestBoss": {
+    "localized_name": "Lily & Lyleen",
+    "description": null
+  },
+  "FrozenBear": {
+    "localized_name": "FrozenBear",
+    "description": null
+  },
+  "GrassDragon": {
+    "localized_name": "GrassDragon",
+    "description": "This Pal is under investigation."
+  },
+  "IceVeilDragon": {
+    "localized_name": "IceVeilDragon",
+    "description": null
+  },
+  "KingCrab": {
+    "localized_name": "KingCrab",
+    "description": null
+  },
+  "LeafBird": {
+    "localized_name": "LeafBird",
+    "description": null
+  },
+  "MedjedBird": {
+    "localized_name": "MedjedBird",
+    "description": null
+  },
+  "MexicanSalamander": {
+    "localized_name": "MexicanSalamander",
+    "description": null
+  },
+  "Monkey_Ice": {
+    "localized_name": "Monkey_Ice",
+    "description": null
+  },
+  "MonochromeMushroom": {
+    "localized_name": "MonochromeMushroom",
+    "description": null
+  },
+  "Negotiator": {
+    "localized_name": "Negotiator",
+    "description": null
+  },
+  "PinkKangaroo": {
+    "localized_name": "PinkKangaroo",
+    "description": null
+  },
+  "RockCheetah": {
+    "localized_name": "RockCheetah",
+    "description": null
+  },
+  "SakurajimaBoss": {
+    "localized_name": "Saya & Selyne",
+    "description": null
+  },
+  "SnakeQueen": {
+    "localized_name": "SnakeQueen",
+    "description": null
+  },
+  "SnowBoss": {
+    "localized_name": "Victor & Shadowbeak",
+    "description": null
+  },
+  "StrawHatCat": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "TestAssassin": {
+    "localized_name": "TestAssassin",
+    "description": null
+  },
+  "TestNPC": {
+    "localized_name": "TestNPC",
+    "description": null
+  },
+  "VikingBoss": {
+    "localized_name": "Bjorn & Bastigor",
+    "description": null
+  },
+  "VolcanicTurtle": {
+    "localized_name": "Unidentified Pal",
+    "description": null
+  },
+  "WaterLizard": {
+    "localized_name": "WaterLizard",
+    "description": null
+  },
+  "WorldTree_Hunter_MissileLauncher_test": {
+    "localized_name": "WorldTree_Hunter_MissileLauncher_test",
+    "description": null
   }
 }
