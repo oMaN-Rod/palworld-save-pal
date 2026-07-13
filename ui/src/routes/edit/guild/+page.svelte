@@ -586,29 +586,6 @@
 		activeTab = 'guildChest';
 	}
 
-	function handleResizeGuildChest(newSlotNum: number) {
-		if (!playerGuild?.guild_chest) return;
-		const chest = playerGuild.guild_chest;
-		const oldSlots = chest.slots;
-		let chestSlots = [];
-		for (let i = 0; i < newSlotNum; i++) {
-			const slot = oldSlots.find((slot) => slot.slot_index === i);
-			if (!slot) {
-				chestSlots.push({
-					static_id: 'None',
-					slot_index: i,
-					count: 0,
-					dynamic_item: undefined
-				});
-			} else {
-				chestSlots.push(slot);
-			}
-		}
-		chest.slot_num = newSlotNum;
-		chest.slots = chestSlots;
-		chest.state = EntryState.MODIFIED;
-	}
-
 	function getItemBackground(rarity: Rarity): string {
 		switch (rarity) {
 			case Rarity.Uncommon:
@@ -1186,14 +1163,6 @@
 										src={guildChestIcon}
 										alt="Storage Container Icon"
 										class="ml-8 max-h-48 max-w-48 2xl:max-h-64 2xl:max-w-64"
-									/>
-									<Input
-										type="number"
-										label={m.available_slots()}
-										value={playerGuild.guild_chest.slot_num}
-										min={0}
-										max={9999}
-										onValueChange={(v: number) => handleResizeGuildChest(v)}
 									/>
 									<StoragePresets
 										container={playerGuild.guild_chest}
