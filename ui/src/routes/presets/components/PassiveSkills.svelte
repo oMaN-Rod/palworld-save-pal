@@ -2,7 +2,7 @@
 	import { passiveSkillsData } from '$lib/data';
 	import type { PresetProfile } from '$types';
 	import { ASSET_DATA_PATH } from '$types/icons';
-	import { assetLoader, calculateFilters } from '$utils';
+	import { assetLoader, skillFilter } from '$utils';
 
 	let { preset = $bindable() } = $props<{
 		preset: PresetProfile;
@@ -22,17 +22,7 @@
 	function getPassiveSkillIconFilter(skillId: string): string {
 		const skill = passiveSkillsData.getByKey(skillId);
 		if (!skill || skill.localized_name === 'None') return '';
-		switch (skill.details.rank) {
-			case 1:
-				return '';
-			case 2:
-			case 3:
-				return calculateFilters('#fcdf19');
-			case 4:
-				return calculateFilters('#68ffd8');
-			default:
-				return calculateFilters('#FF0000');
-		}
+		return skillFilter(skill.details.rank);
 	}
 </script>
 

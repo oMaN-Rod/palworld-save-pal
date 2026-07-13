@@ -72,7 +72,9 @@
 		}
 	}
 
-	const allBuildings = $derived(Object.entries(buildingsData.buildings));
+	const allBuildings = $derived(
+		Object.entries(buildingsData.buildings).filter(([, building]) => !building.disabled)
+	);
 
 	const filteredBuildings = $derived.by(() => {
 		let result = allBuildings;

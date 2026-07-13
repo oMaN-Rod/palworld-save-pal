@@ -4,8 +4,8 @@
 	import { elementsData, presetsData, activeSkillsData, passiveSkillsData } from '$lib/data';
 	import { getModalState } from '$states';
 	import { cn } from '$theme';
-	import { type PassiveSkill, type PresetProfile, type SelectOption } from '$types';
-	import { assetLoader, calculateFilters, deepCopy } from '$utils';
+	import { type PresetProfile, type SelectOption } from '$types';
+	import { assetLoader, deepCopy, skillBorderClass, skillFilter } from '$utils';
 	import { c } from '$utils/commonTranslations';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { Play, Trash } from 'lucide-svelte';
@@ -98,34 +98,13 @@
 	function getPassiveSkillIconFilter(skillId: string): string {
 		const skill = passiveSkillsData.getByKey(skillId);
 		if (!skill || skill.localized_name === 'None') return '';
-		const passiveSkill = skill as PassiveSkill;
-		switch (passiveSkill.details.rank) {
-			case 1:
-				return '';
-			case 2:
-			case 3:
-				return calculateFilters('#fcdf19');
-			case 4:
-				return calculateFilters('#68ffd8');
-			default:
-				return calculateFilters('#FF0000');
-		}
+		return skillFilter(skill.details.rank);
 	}
 
 	function getPassiveSkillBorderClass(skillId: string): string {
 		const skill = passiveSkillsData.getByKey(skillId);
 		if (!skill) return '';
-		switch (skill.details.rank) {
-			case 1:
-				return 'border-l-surface-600';
-			case 2:
-			case 3:
-				return 'border-l-[#fcdf19]';
-			case 4:
-				return 'border-l-[#68ffd8]';
-			default:
-				return 'border-l-[#FF0000]';
-		}
+		return skillBorderClass(skill.details.rank);
 	}
 </script>
 

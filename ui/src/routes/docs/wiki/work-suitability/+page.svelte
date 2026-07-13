@@ -28,14 +28,22 @@
 	function getPalsWithWork(
 		workType: WorkSuitability
 	): { name: string; level: number; characterKey: string }[] {
-		return Object.entries(palsData.pals)
+		const pals = Object.entries(palsData.pals)
 			.filter(([, pal]) => pal.is_pal && !pal.disabled && pal.work_suitability[workType] > 0)
+			// canonical (shortest) key first so variants dedupe onto the base pal
+			.sort(([a], [b]) => a.length - b.length || a.localeCompare(b))
 			.map(([characterKey, pal]) => ({
 				name: pal.localized_name,
 				level: pal.work_suitability[workType],
 				characterKey
-			}))
-			.sort((a, b) => b.level - a.level);
+			}));
+		// Variants share a display name; keep the highest-ranked entry.
+		const best = new Map<string, { name: string; level: number; characterKey: string }>();
+		for (const p of pals) {
+			const prev = best.get(p.name);
+			if (!prev || p.level > prev.level) best.set(p.name, p);
+		}
+		return [...best.values()].sort((a, b) => b.level - a.level);
 	}
 </script>
 

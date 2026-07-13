@@ -18,15 +18,21 @@
 	function getPalsWithElement(
 		element: ElementType
 	): { name: string; characterKey: string; elements: ElementType[] }[] {
-		return Object.entries(palsData.pals)
+		const pals = Object.entries(palsData.pals)
 			.filter(
 				([, pal]) => pal.is_pal && !pal.disabled && pal.element_types?.includes(element)
 			)
+			// canonical (shortest) key first so variants dedupe onto the base pal
+			.sort(([a], [b]) => a.length - b.length || a.localeCompare(b))
 			.map(([characterKey, pal]) => ({
 				name: pal.localized_name,
 				characterKey,
 				elements: pal.element_types
-			}))
+			}));
+		// Variants (Predator/Raid/Summon copies) share a display name; show one.
+		const seen = new Set<string>();
+		return pals
+			.filter((p) => (seen.has(p.name) ? false : (seen.add(p.name), true)))
 			.sort((a, b) => a.name.localeCompare(b.name));
 	}
 </script>

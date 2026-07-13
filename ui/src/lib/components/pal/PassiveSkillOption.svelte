@@ -2,7 +2,7 @@
 	import { passiveSkillsData } from '$lib/data';
 	import { type SelectOption } from '$types';
 	import { ASSET_DATA_PATH } from '$types/icons';
-	import { assetLoader, calculateFilters } from '$utils';
+	import { assetLoader, skillFilter } from '$utils';
 
 	let { option } = $props<{
 		option: SelectOption;
@@ -12,19 +12,7 @@
 	const icon = $derived(
 		assetLoader.loadImage(`${ASSET_DATA_PATH}/img/rank_${passiveSkill?.details.rank}.webp`)
 	);
-	const filter = $derived.by(() => {
-		switch (passiveSkill?.details.rank) {
-			case 1:
-				return '';
-			case 2:
-			case 3:
-				return calculateFilters('#fcdf19');
-			case 4:
-				return calculateFilters('#68ffd8');
-			default:
-				return calculateFilters('#FF0000');
-		}
-	});
+	const filter = $derived(skillFilter(passiveSkill?.details.rank ?? 1));
 </script>
 
 <div class="flex flex-row">

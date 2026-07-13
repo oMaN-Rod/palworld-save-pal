@@ -220,7 +220,13 @@
 							</td>
 							<td class="text-surface-400 font-mono text-xs">{key}</td>
 							<td>
-								<img src={getElementIcon(skill.details.element)} alt="" class="h-4 w-4 shrink-0" />
+								{#if getElementIcon(skill.details.element)}
+									<img
+										src={getElementIcon(skill.details.element)}
+										alt=""
+										class="h-4 w-4 shrink-0"
+									/>
+								{/if}
 							</td>
 							<td class="text-right">{skill.details.cool_time}s</td>
 							<td class="text-right">{skill.details.power}</td>

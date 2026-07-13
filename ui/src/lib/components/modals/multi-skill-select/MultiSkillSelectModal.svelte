@@ -34,6 +34,7 @@
 				}));
 		} else {
 			return Object.values(passiveSkillsData.passiveSkills)
+				.filter((pSkill) => !pSkill.details.disabled)
 				.filter((pSkill) => !Object.values(pal.passive_skills).some((p) => p === pSkill.id))
 				.filter((pSkill) => !values.some((v) => v === pSkill.id))
 				.sort((a, b) => b.details.rank - a.details.rank)

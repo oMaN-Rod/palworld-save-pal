@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { passiveSkillsData } from '$lib/data';
+	import type { PassiveSkill } from '$types';
 	import { WikiSearch } from '$components/docs';
 	import * as m from '$i18n/messages';
 	import { assetLoader, skillFilter } from '$utils';
@@ -53,7 +54,32 @@
 		}
 	}
 
-	const allSkills = $derived(Object.entries(passiveSkillsData.passiveSkills));
+	// Many BossDefeatReward_<Pal> keys (one per boss, for save-file
+	// compatibility) share an identical generic name/rank/effect set, e.g.
+	// 16 separate keys all called "Dark Damage Enhancement (Small)". Collapse
+	// those to one representative row here; skill-select modals elsewhere
+	// keep every key so a save's specific boss-reward passive stays pickable.
+	function isBetterSkillEntry(
+		[aKey]: [string, PassiveSkill],
+		[bKey]: [string, PassiveSkill]
+	): boolean {
+		if (aKey.length !== bKey.length) return aKey.length < bKey.length;
+		return aKey < bKey;
+	}
+
+	const allSkills = $derived.by(() => {
+		const entries = Object.entries(passiveSkillsData.passiveSkills).filter(
+			([, skill]) => !skill.details.disabled
+		);
+		const best = new Map<string, [string, PassiveSkill]>();
+		for (const entry of entries) {
+			const [, skill] = entry;
+			const groupKey = `${skill.localized_name}|${skill.details.rank}|${JSON.stringify(skill.details.effects)}`;
+			const prev = best.get(groupKey);
+			if (!prev || isBetterSkillEntry(entry, prev)) best.set(groupKey, entry);
+		}
+		return [...best.values()];
+	});
 
 	const filteredSkills = $derived.by(() => {
 		let result = allSkills;
