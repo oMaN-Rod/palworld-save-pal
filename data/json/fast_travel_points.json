@@ -1,611 +1,1130 @@
 {
   "01ACCA6E4BDAA68220821FB05AB54E4D": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -383183.16,
     "y": -210790.92,
     "z": 819.82,
-    "id": "FTPoint7",
-    "localized_name": "Beach of Everlasting Summer"
+    "localized_name": "Beach of Everlasting Summer",
+    "id": "FTPoint7"
   },
-  "099440764403D1508D9BADADF4848697": {
-    "x": 81169.95,
-    "y": 90254.09,
-    "z": 70518.78,
-    "id": "FTPoint19"
+  "04CB216B487AD789C47E2DBA08B0B49F": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": 69604.09,
+    "y": 196989.27,
+    "z": 20226.29,
+    "localized_name": "Thawtide Cape",
+    "id": "FTPoint113"
   },
-  "0B9C64E849BA38D328DD28AA02FE30BB": {
-    "x": -889646.3,
-    "y": -435717.28,
-    "z": 25751.7,
-    "id": "FTPoint77"
+  "0EBF6F3D441ACA707517B9B7BAA6590D": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -771309.94,
+    "y": 8647.21,
+    "z": 43073.56,
+    "localized_name": "Farcry Marsh",
+    "id": "SkyIsland_E"
   },
   "10F777FB4B9BFA0CAD790887D87DDBC2": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -503990.0,
     "y": -214380.0,
     "z": -1830.0,
-    "id": "FTPoint71",
-    "localized_name": "Scorched Ashland"
+    "localized_name": "Scorched Ashland",
+    "id": "FTPoint71"
   },
   "15314BE94E2FB8D018D5749BE9A318F0": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -248770.11,
     "y": 126205.84,
     "z": 5847.36,
-    "id": "FTPoint41",
-    "localized_name": "Cinnamoth Forest"
+    "localized_name": "Cinnamoth Forest",
+    "id": "FTPoint41"
+  },
+  "15BD61D9481EE7F63CB32BB4E10A05CA": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -131353.92,
+    "y": 54481.74,
+    "z": -2063.93,
+    "localized_name": "Isle of Murmurs Beach",
+    "id": "FTPoint91"
+  },
+  "16B14E084BBB4C71E9D07A9DC84B80BD": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": 512111.75,
+    "y": -510662.66,
+    "z": 43480.0,
+    "localized_name": "The Verdant Rootpath",
+    "id": "WorldTree_A"
   },
   "16C7164C43E2B96BEDCC6696E2E592F7": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -257951.39,
     "y": 151247.84,
     "z": 7.66,
-    "id": "FTPoint31",
-    "localized_name": "Ancient Ritual Site"
+    "localized_name": "Ancient Ritual Site",
+    "id": "FTPoint31"
   },
   "1749FBB34126AB7711670481717C9FEC": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -25915.37,
     "y": -78926.16,
     "z": 3126.56,
-    "id": "FTPoint68",
-    "localized_name": "Cherry Blossom Crossroads"
+    "localized_name": "Cherry Blossom Crossroads",
+    "id": "FTPoint68"
   },
   "1BDEABA240B1699541C17F83E59E61DF": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -103434.98,
     "y": 234761.17,
     "z": 19438.46,
-    "id": "FTPoint37",
-    "localized_name": "Free Pal Alliance Tower Entrance"
+    "localized_name": "Frostbound Mountains Summit",
+    "id": "FTPoint37"
+  },
+  "20B16780488A8F23A80502BC608A0192": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -415272.22,
+    "y": -162408.61,
+    "z": 14643.45,
+    "localized_name": "Dry Dunes",
+    "id": "FTPoint111"
+  },
+  "211BCB174B47C566C6F92E9CEB999F98": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": 107940.74,
+    "y": -28036.3,
+    "z": 24447.9,
+    "localized_name": "Garden Beneath the Astral Mountains",
+    "id": "FTPoint114"
   },
   "22095BFA48A46172F8D154B2EBEB7493": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": 102159.82,
     "y": 48527.03,
     "z": 28428.29,
-    "id": "FTPoint18",
-    "localized_name": "Land of Absolute Zero"
+    "localized_name": "Land of Absolute Zero",
+    "id": "FTPoint18"
   },
   "23B9E99C4A454B99220AF7B4A58FD8DE": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -326403.84,
     "y": 55136.73,
     "z": 6871.98,
-    "id": "FTPoint25",
-    "localized_name": "Ascetic Falls"
+    "localized_name": "Ascetic Falls",
+    "id": "FTPoint25"
   },
   "23F4D1CB454D1E23F252C29447F5A384": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -572461.56,
     "y": -287224.06,
     "z": 45.33,
-    "id": "FTPoint81",
-    "localized_name": "Shield Dragon Tunnel"
+    "localized_name": "Shield Dragon Tunnel",
+    "id": "FTPoint81"
+  },
+  "26F321B44481BC01C5174D9D38409597": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -758105.0,
+    "y": -61810.0,
+    "z": 28905.0,
+    "localized_name": "The Azure Tapestry",
+    "id": "SkyIsland_D"
   },
   "27508F284B175C5C2B9BFC85AD773E4F": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -209326.02,
     "y": -249227.56,
     "z": -2089.96,
+    "localized_name": "Phantom Isle",
     "id": "FTPoint88"
   },
   "28D514E74B51FD9EB078A891DB0787C2": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -167684.92,
     "y": 167519.23,
     "z": 9175.6,
-    "id": "FTPoint32",
-    "localized_name": "Mount Flopie Summit"
+    "localized_name": "Mount Flopie Summit",
+    "id": "FTPoint32"
+  },
+  "2913E38E4924F762AF9B129303898A31": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": 178736.56,
+    "y": 305772.44,
+    "z": -1604.74,
+    "localized_name": "Seaward Passage",
+    "id": "FTPoint106"
   },
   "2A2B744B41AC79964DAE6B89CAC51FC3": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": 8000.53,
     "y": 111770.55,
     "z": 2554.38,
-    "id": "FTPoint17",
-    "localized_name": "Unthawable Lake"
+    "localized_name": "Unthawable Lake",
+    "id": "FTPoint17"
   },
   "2BC5E46049E69D3549CFB58948BE3288": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -50300.98,
     "y": 287392.38,
     "z": 295.79,
-    "id": "FTPoint11",
-    "localized_name": "Sand Dunes Entrance"
+    "localized_name": "Sand Dunes Entrance",
+    "id": "FTPoint11"
   },
   "2DE1702048A1D4A82126168C49BE51A9": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -177770.0,
     "y": 265010.0,
     "z": 873.17,
-    "id": "FTPoint39",
-    "localized_name": "Mossanda Forest"
+    "localized_name": "Mossanda Forest",
+    "id": "FTPoint39"
   },
   "2EC07ACC4505CB726DE38A84246CA999": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -414446.72,
     "y": -24603.32,
     "z": 3560.09,
-    "id": "FTPoint4",
-    "localized_name": "Ancient Civilization Ruins"
+    "localized_name": "Ancient Civilization Ruins",
+    "id": "FTPoint4"
   },
   "2EE8ACF447C0CFC2C3C11E948E691448": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": 168489.0,
     "y": 221797.6,
     "z": -2020.14,
+    "localized_name": "Isle of the Glacial Core",
     "id": "FTPoint86"
   },
+  "2F3A56DA4022EB1E43D3439ECEE2AA2C": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": 12156.85,
+    "y": 249201.39,
+    "z": 2949.06,
+    "localized_name": "Windwatch Outlook",
+    "id": "FTPoint108"
+  },
+  "321E111B4B7AA9D901864F87404A70F2": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": 524166.12,
+    "y": -567334.4,
+    "z": 25453.11,
+    "localized_name": "Whimsical Wisteria Grove",
+    "id": "WorldTree_B"
+  },
+  "341551F747D44FA84DB87F8C8D2DCB48": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -43926.75,
+    "y": -173600.95,
+    "z": 934.48,
+    "localized_name": "Sakurajima: West Coast",
+    "id": "FTPoint116"
+  },
   "3697999C458BF8A3C7973382969FBDF9": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": 35588.66,
     "y": 321331.25,
     "z": 623.05,
-    "id": "FTPoint12",
-    "localized_name": "Duneshelter"
+    "localized_name": "Duneshelter",
+    "id": "FTPoint12"
+  },
+  "37878F614B4EB008307DBBBDC7B79505": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -311508.88,
+    "y": 76832.29,
+    "z": 7803.83,
+    "localized_name": "Windscream Valley",
+    "id": "FTPoint95"
   },
   "3A0F123947BE045BC415C6B061A5285A": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -195236.17,
     "y": 36718.49,
     "z": 8293.61,
-    "id": "FTPoint44",
-    "localized_name": "Sealed Realm of the Winged Tyrant"
+    "localized_name": "Sealed Realm of the Myriad Flames",
+    "id": "FTPoint44"
   },
   "3A84A3DD43C34B936CE6F18842A6FE1D": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -671901.25,
     "y": -172407.56,
     "z": -443.95,
-    "id": "FTPoint80",
-    "localized_name": "Emberstone Plateau"
+    "localized_name": "Emberstone Plateau",
+    "id": "FTPoint80"
   },
   "3E8E504B4A3975FD3862E1BC85A5D4F6": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -376750.0,
     "y": 124630.0,
     "z": 2270.0,
-    "id": "FTPoint53",
-    "localized_name": "Sea Breeze Archipelago Church"
+    "localized_name": "Sea Breeze Archipelago Church",
+    "id": "FTPoint53"
   },
   "41727100495D21DC905D309C53989914": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -302825.0,
     "y": 241060.0,
     "z": -1089.69,
-    "id": "FTPoint28",
-    "localized_name": "Fort Ruins"
+    "localized_name": "Fort Ruins",
+    "id": "FTPoint28"
   },
   "41E36D9A4B2BA79A3AD1B7B83B16F77D": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -137210.0,
     "y": -91340.0,
     "z": -2090.0,
-    "id": "FTPoint49",
-    "localized_name": "Forgotten Island"
+    "localized_name": "Isle of Silence",
+    "id": "FTPoint49"
+  },
+  "4618840B4FE6381FC6982AA5282F9614": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -810648.44,
+    "y": -393963.72,
+    "z": 5908.76,
+    "localized_name": "Silent Lake",
+    "id": "FTPoint126"
+  },
+  "4667D69047622BF7A9FFD788D24B6131": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -119900.85,
+    "y": 351109.22,
+    "z": -789.14,
+    "localized_name": "Dustview Coast",
+    "id": "FTPoint97"
   },
   "4669582D4081BF550AFB66A05D043A3D": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": 117624.25,
     "y": 400134.78,
     "z": -1931.7,
-    "id": "FTPoint13",
-    "localized_name": "Deep Sand Dunes"
+    "localized_name": "Deep Sand Dunes",
+    "id": "FTPoint13"
   },
   "49C3516D459F15C70ABEE88CD7F4D331": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -25522.21,
     "y": -118365.34,
     "z": 6257.67,
-    "id": "FTPoint67",
-    "localized_name": "Moonflower Tower Entrance"
+    "localized_name": "Moonflower Tower Entrance",
+    "id": "FTPoint67"
+  },
+  "4B2462954566096EB1EB74A0B48E5C5D": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": 592964.0,
+    "y": -625779.6,
+    "z": 17596.23,
+    "localized_name": "Remnant Riverside",
+    "id": "WorldTree_C_2"
+  },
+  "4C1930B54689C3825400F6B3954FC07B": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -651722.9,
+    "y": -373365.22,
+    "z": 30373.21,
+    "localized_name": "Crimson Labyrinth",
+    "id": "FTPoint121"
   },
   "4CCF456A440C6CD5F2347AAA3E163F21": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -117215.02,
     "y": 446689.97,
     "z": -1887.3,
-    "id": "FTPoint63",
-    "localized_name": "Arena Entrance"
+    "localized_name": "Arena Entrance",
+    "id": "FTPoint63"
   },
   "4D2F204549AB656CA1EA4B8E39C484F3": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -125290.0,
     "y": 201720.0,
     "z": 6920.0,
-    "id": "FTPoint36",
-    "localized_name": "Snowy Mountain Crossroads"
+    "localized_name": "Snowy Mountain Crossroads",
+    "id": "FTPoint36"
+  },
+  "4DA12CD449AA1A3DB7C6CABF9D6EA90D": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -105662.5,
+    "y": 400797.0,
+    "z": 5159.21,
+    "localized_name": "Sandbar of Solitude",
+    "id": "FTPoint104"
+  },
+  "4DB2FF944B1E545F41FBC6AF86BEBEB5": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -259198.7,
+    "y": -59353.41,
+    "z": 10128.57,
+    "localized_name": "Mount Obsidian - Second Ascent",
+    "id": "FTPoint109"
   },
   "513E166044565A0BD3360F94142577E8": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -282110.0,
     "y": 355570.0,
     "z": -1940.0,
-    "id": "FTPoint56",
-    "localized_name": "Marsh Island"
+    "localized_name": "Marsh Island",
+    "id": "FTPoint56"
   },
   "52E1E065410F78AF13B18CB1136EC8D6": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -197915.22,
     "y": 438001.44,
     "z": -2064.68,
+    "localized_name": "Isle of Decayed Treasures",
     "id": "FTPoint89"
   },
   "5669E36645C97EE9F38D308738ED30A7": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -558410.44,
     "y": 121112.1,
     "z": -1587.23,
+    "localized_name": "Frostbitten Isle",
     "id": "FTPoint87"
   },
   "596996B948716D3FD2283C8B5C6E829C": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -450320.0,
     "y": 112630.0,
     "z": -2090.0,
-    "id": "FTPoint52",
-    "localized_name": "Sea Breeze Archipelago - Castaway Beach"
+    "localized_name": "Sea Breeze Archipelago - Castaway Beach",
+    "id": "FTPoint52"
   },
   "5970E8E648D2A83AFDFF7C9151D9BEF5": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -367707.78,
     "y": -114950.9,
     "z": 61380.66,
-    "id": "FTPoint3",
-    "localized_name": "Eternal Pyre Tower Entrance"
+    "localized_name": "Eternal Pyre Tower Entrance",
+    "id": "FTPoint3"
+  },
+  "59AABD184966FE16E9BA8EA0BD0EFDED": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -509887.22,
+    "y": -299269.03,
+    "z": 718.6,
+    "localized_name": "Hill Entrance",
+    "id": "FTPoint118"
+  },
+  "59D857664636366A726EB39EF372B315": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": 621850.0,
+    "y": -742575.0,
+    "z": 23205.0,
+    "localized_name": "Abandoned Laboratory",
+    "id": "WorldTree_lab"
   },
   "5F426B49469368B0C131D3A6DB8F7831": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -465895.0,
     "y": -62137.75,
     "z": -1834.44,
-    "id": "FTPoint5",
-    "localized_name": "Fisherman's Point"
+    "localized_name": "Fisherman's Point",
+    "id": "FTPoint5"
   },
   "603ED0CD4CFB9AFDC9E11F805594CCE5": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -317777.2,
     "y": 212103.31,
     "z": -762.55,
-    "id": "FTPoint45",
-    "localized_name": "Rayne Syndicate Tower Entrance"
+    "localized_name": "Rayne Syndicate Tower Entrance",
+    "id": "FTPoint45"
+  },
+  "618F02C546F191912D42398685A2BBA2": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -301681.94,
+    "y": -5184.11,
+    "z": 524.72,
+    "localized_name": "Heatwave Gate",
+    "id": "FTPoint112"
   },
   "6231802D40C81C00445379AE238D9F90": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -170718.69,
     "y": 409753.16,
     "z": 4049.16,
-    "id": "FTPoint57",
-    "localized_name": "Eastern Wild Island"
+    "localized_name": "Eastern Wild Island",
+    "id": "FTPoint57"
   },
   "6282FE1E4029EDCDB14135AA4C171E4C": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -314840.0,
     "y": 186850.0,
     "z": 3270.0,
-    "id": "FTPoint22",
-    "localized_name": "Desolate Church"
+    "localized_name": "Desolate Church",
+    "id": "FTPoint22"
+  },
+  "630C0726466D28CDB94B368AD12BFE63": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": 477460.0,
+    "y": -724635.0,
+    "z": 19817.89,
+    "localized_name": "Lacrymal Shoal",
+    "id": "WorldTree_M"
   },
   "65B10BB14ABDA9C2109167B21901D195": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": 29780.53,
     "y": 406913.2,
     "z": 15662.84,
-    "id": "FTPoint9",
-    "localized_name": "PIDF Tower Entrance"
+    "localized_name": "PIDF Tower Entrance",
+    "id": "FTPoint9"
+  },
+  "69A3B9E64018BA4C158BDDA7CD713463": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -714540.9,
+    "y": -458346.56,
+    "z": -2080.56,
+    "localized_name": "Oilfield Overlook",
+    "id": "FTPoint124"
   },
   "6B05B93C445473B5A9597A90CEBFF27B": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -591120.0,
     "y": -484260.0,
     "z": 6808.79,
-    "id": "FTPoint79",
-    "localized_name": "Deserted Ash Plateau"
+    "localized_name": "Deserted Ash Plateau",
+    "id": "FTPoint79"
   },
   "6D227CD3475783FB16D797B206DD8C13": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -760285.44,
     "y": -354966.22,
     "z": 4300.47,
-    "id": "FTPoint75",
-    "localized_name": "The Oculus Gate, Tower in Sight"
+    "localized_name": "The Oculus Gate, Tower in Sight",
+    "id": "FTPoint75"
   },
   "6DB6B7B2431CA2EFFFC88EB45805BA6A": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -294830.0,
     "y": 152240.0,
     "z": 190.0,
-    "id": "FTPoint61",
-    "localized_name": "Bridge of the Twin Knights"
+    "localized_name": "Bridge of the Twin Knights",
+    "id": "FTPoint61"
   },
   "6E03F8464BAD9E458B843AA30BE1CC8F": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -358785.0,
     "y": 267940.0,
     "z": 7910.0,
-    "id": "FTPoint23",
-    "localized_name": "Plateau of Beginnings"
+    "localized_name": "Hill of Beginnings",
+    "id": "FTPoint23"
+  },
+  "6FBBBA0F4CDDB97C81C58C917E8927BD": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": 602911.06,
+    "y": -680562.44,
+    "z": 21863.08,
+    "localized_name": "Boreal Summit",
+    "id": "WorldTree_I"
+  },
+  "714B5DDC402A89D7FC703C9B0B2BF274": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -829095.7,
+    "y": -19262.85,
+    "z": 37892.62,
+    "localized_name": "Crystalline Archipelago",
+    "id": "SkyIsland_B"
   },
   "7170881D44249E90902F728E240493AF": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -265980.0,
     "y": 268690.0,
     "z": -1970.0,
-    "id": "FTPoint55",
-    "localized_name": "Islandhopper Coast"
+    "localized_name": "Islandhopper Coast",
+    "id": "FTPoint55"
   },
   "71C4B2B2407F2BBBD77572A20C7FF0F5": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -80506.16,
     "y": 141464.77,
     "z": 8140.14,
-    "id": "FTPoint15",
-    "localized_name": "No Man's Trail"
+    "localized_name": "No Man's Trail",
+    "id": "FTPoint15"
   },
   "72626BD0492AD65E59BDB499C9BED99A": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -699510.0,
     "y": -389030.0,
     "z": 32620.0,
-    "id": "FTPoint78",
-    "localized_name": "Scorched Hill"
+    "localized_name": "Scorched Hill",
+    "id": "FTPoint78"
   },
   "74270C2F45B8DCA66B6A1FAAA911D024": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -319000.0,
     "y": 127170.0,
     "z": -2049.45,
-    "id": "FTPoint62",
-    "localized_name": "Ravine Entrance"
+    "localized_name": "Ravine Entrance",
+    "id": "FTPoint62"
   },
   "75BD9923489E2A4EBCED5A81175D5928": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": 6.0,
     "y": -0.0,
     "z": 6588.96,
-    "id": "FTPoint48",
-    "localized_name": "Pristine Snow Field"
+    "localized_name": "Pristine Snow Field",
+    "id": "FTPoint48"
   },
   "76B000914943BADDC56BCFBAE2BF051E": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -130060.38,
     "y": -53406.69,
     "z": 1715.63,
-    "id": "FTPoint59",
-    "localized_name": "Forgotten Island Church Ruins"
+    "localized_name": "Isle of Silence Church Ruins",
+    "id": "FTPoint59"
+  },
+  "77699B11460416B57ADEDFB989B78E68": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -108666.75,
+    "y": 79119.87,
+    "z": 395.51,
+    "localized_name": "Deserted Islet",
+    "id": "Boss_KingWhale"
   },
   "79C561B747335A7A0A8FBF9FAE280E62": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -283781.0,
     "y": 59352.68,
     "z": 5251.39,
-    "id": "FTPoint29",
-    "localized_name": "Sealed Realm of the Thunder Dragon"
+    "localized_name": "Sealed Realm of the Swordmaster",
+    "id": "FTPoint29"
   },
-  "7C5E91514F6E84B0C1DEFFB52C7C4DBA": {
-    "x": -236773.34,
-    "y": -100042.35,
-    "z": 516.51,
-    "id": "FTPoint8",
-    "localized_name": "Ruined Fortress City"
+  "80729706432E53B2A3D07C82D14C8749": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -771223.4,
+    "y": -441798.28,
+    "z": -337.43,
+    "localized_name": "Shady Mushroom Cliffs",
+    "id": "FTPoint125"
+  },
+  "825ED1AD422E5E0C94332C835B74D3B4": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -38212.0,
+    "y": 406147.06,
+    "z": 10096.22,
+    "localized_name": "Desert Backbone",
+    "id": "FTPoint103"
+  },
+  "82C086DB44672C9D828F19B3A383BE70": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -725188.75,
+    "y": -238441.89,
+    "z": 7291.7,
+    "localized_name": "Wildlands Floodgate",
+    "id": "FTPoint123"
+  },
+  "837C6214424040FCEF9D48BA20E248BA": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -287201.44,
+    "y": -217568.95,
+    "z": 2651.38,
+    "localized_name": "Mount Obsidian Trail",
+    "id": "FTPoint110"
+  },
+  "839048604D716A58A64781A9A342B717": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": 518900.25,
+    "y": -671976.2,
+    "z": 27418.05,
+    "localized_name": "Gilded City Ruins",
+    "id": "WorldTree_N"
   },
   "866881DB443444AA7F4E7C8E5DCDAA29": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -250506.48,
     "y": 341109.6,
     "z": 2293.32,
-    "id": "FTPoint60",
-    "localized_name": "Marsh Island Church Ruins"
+    "localized_name": "Marsh Island Church Ruins",
+    "id": "FTPoint60"
+  },
+  "8C1EE640439F980EA6BA3D9B256D4FAD": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -644486.0,
+    "y": -276536.5,
+    "z": 11481.62,
+    "localized_name": "Crystallized Great Tree",
+    "id": "FTPoint122"
   },
   "8CA5E9774FF1BBC1156ABCA09E616480": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -374180.0,
     "y": 63960.0,
     "z": -1920.0,
-    "id": "FTPoint54",
-    "localized_name": "Small Cove"
+    "localized_name": "Small Cove",
+    "id": "FTPoint54"
   },
   "902C96F44BC84002E39B52ACBFC61452": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -798776.8,
     "y": -479574.8,
     "z": -2050.26,
-    "id": "FTPoint83",
-    "localized_name": "Feybreak Shipwreck"
+    "localized_name": "Feybreak Shipwreck",
+    "id": "FTPoint83"
   },
   "916CC96142D38225BD3C9290D6321073": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -588140.0,
     "y": -253780.0,
     "z": 720.0,
-    "id": "FTPoint72",
-    "localized_name": "Stone Pillar Cave Entrance"
+    "localized_name": "Stone Pillar Cave Entrance",
+    "id": "FTPoint72"
   },
   "91DAC6F34D2A9FD7F01471B5166C6C02": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -170400.0,
     "y": -29240.0,
     "z": -1930.0,
-    "id": "FTPoint51",
-    "localized_name": "Kelpsea Hill"
+    "localized_name": "Kelpsea Hill",
+    "id": "FTPoint51"
   },
   "923B781345D2AB7ECED6BABD6E97ECE8": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -237610.0,
     "y": 190610.0,
     "z": 3987.78,
-    "id": "FTPoint34",
-    "localized_name": "Hypocrite Hill"
+    "localized_name": "Hypocrite Hill",
+    "id": "FTPoint34"
   },
   "9521FEBF4A6D0D02AE9F80AE9513B99C": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -888080.0,
     "y": -433080.0,
     "z": 19030.0,
-    "id": "FTPoint76",
-    "localized_name": "Feybreak Tower Entrance"
+    "localized_name": "Feybreak Tower Entrance",
+    "id": "FTPoint76"
   },
   "979BF2044C8E8FE559B598A95A83EDE3": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -346617.56,
     "y": 191706.6,
     "z": -308.71,
-    "id": "FTPoint24",
-    "localized_name": "Small Settlement"
+    "localized_name": "Small Settlement",
+    "id": "FTPoint24"
   },
   "9FBB93D84811BE424A37C391DBFBB476": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -278468.03,
     "y": 212679.42,
     "z": -910.32,
-    "id": "FTPoint27",
-    "localized_name": "Sealed Realm of the Frozen Wings"
+    "localized_name": "Sealed Realm of the Frozen Wings",
+    "id": "FTPoint27"
+  },
+  "9FDF4C7C4CEB40E103E989A1C34A245D": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": 600577.56,
+    "y": -599143.06,
+    "z": 29241.38,
+    "localized_name": "Corroded Hollow",
+    "id": "WorldTree_D"
   },
   "A136990F4E2C1C96C0384BA260CD0BC3": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -63520.73,
     "y": -55005.94,
     "z": -1711.81,
-    "id": "FTPoint64",
-    "localized_name": "Sakurajima - Mushroom Wetlands"
+    "localized_name": "Sakurajima - Mushroom Wetlands",
+    "id": "FTPoint64"
+  },
+  "A166CA6F4C1D191AA59951AD1CA49A92": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -603491.1,
+    "y": -338965.25,
+    "z": 16584.99,
+    "localized_name": "Scarlet Outlook",
+    "id": "FTPoint120"
   },
   "A1BC65AA445619EF338E0388BC010648": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -349535.5,
     "y": -4035.11,
     "z": 859.37,
-    "id": "FTPoint26",
-    "localized_name": "Foot of the Volcano"
+    "localized_name": "Foot of the Volcano",
+    "id": "FTPoint26"
   },
   "A277AE6341EF40D84D711EA52303353F": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -115430.0,
     "y": 289090.0,
     "z": 3045.16,
-    "id": "FTPoint38",
-    "localized_name": "Sealed Realm of the Swift"
+    "localized_name": "Sealed Realm of the Swift",
+    "id": "FTPoint38"
   },
-  "A893B952423E429AA45A06B615A582FA": {
-    "x": -29488.74,
-    "y": -116237.95,
-    "z": 12938.32,
-    "id": "FTPoint66"
+  "A51FC0C147435750046C48B254793A8B": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -265220.0,
+    "y": 173530.0,
+    "z": 5810.0,
+    "localized_name": "Free Pal Alliance Tower Entrance",
+    "id": "Boss_Forest"
+  },
+  "A5664AB74E0D030D03BF2DAF87C67A0F": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": 501010.0,
+    "y": -748555.0,
+    "z": 41485.0,
+    "localized_name": "Within the Seal",
+    "id": "WorldTree_LastBoss"
   },
   "ACAE5FB04D48DE4197443E9C0993086B": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -151783.97,
     "y": 213200.86,
     "z": 3277.12,
-    "id": "FTPoint35",
-    "localized_name": "Sealed Realm of the Guardian"
+    "localized_name": "Sealed Realm of the Mystic",
+    "id": "FTPoint35"
+  },
+  "AEBCC3FF41ACF9252B3499A89E0BAD55": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -777490.0,
+    "y": -40589.0,
+    "z": 60158.0,
+    "localized_name": "Azure Covenant Tower Entrance",
+    "id": "SkyIsland_BOSS"
   },
   "AECFED0D41AFEE11F30B4F9687BC3243": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -327531.78,
     "y": -70410.55,
     "z": 18970.02,
-    "id": "FTPoint1",
-    "localized_name": "Mount Obsidian - Midpoint"
+    "localized_name": "Mount Obsidian - Midpoint",
+    "id": "FTPoint1"
   },
   "B001852C491FF5E70C4747BFF9972924": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -218636.78,
     "y": 58528.14,
     "z": 3731.15,
-    "id": "FTPoint30",
-    "localized_name": "Investigator's Fork"
+    "localized_name": "Investigator's Fork",
+    "id": "FTPoint30"
+  },
+  "B03880F34C398AEE56A024B8E510649D": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -266957.53,
+    "y": 93228.6,
+    "z": 5259.84,
+    "localized_name": "Whisperwind Cliffs",
+    "id": "FTPoint93"
+  },
+  "B0609E19416F6731E997F89CF9B66A14": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -421434.34,
+    "y": 29307.67,
+    "z": 1858.37,
+    "localized_name": "Sea Breeze Coast",
+    "id": "FTPoint96"
+  },
+  "B34E33AD445D619D70AD6BBDBF7CDE4D": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -811466.56,
+    "y": -85874.31,
+    "z": 46247.59,
+    "localized_name": "Waterlily Gorge",
+    "id": "SkyIsland_C"
   },
   "B44AA24445864494E7569597ACCAEFC6": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -215388.52,
     "y": 8854.22,
     "z": 13174.68,
-    "id": "FTPoint43",
-    "localized_name": "Deep Bamboo Thicket"
+    "localized_name": "Deep Bamboo Thicket",
+    "id": "FTPoint43"
   },
-  "B639B7ED4EE18A7AA09BA189EA703032": {
-    "x": -361899.3,
-    "y": -112096.12,
-    "z": 67925.78,
-    "id": "FTPoint2"
+  "B795E2B14189A7D1EEAD6E97E89C91B7": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -886234.25,
+    "y": -483745.94,
+    "z": -1122.67,
+    "localized_name": "Exile's Cape",
+    "id": "FTPoint129"
+  },
+  "BD9306974C7C85C4B76B318D2A397F4C": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": 14388.18,
+    "y": 476545.6,
+    "z": -1918.26,
+    "localized_name": "Desiccated Coast",
+    "id": "FTPoint101"
   },
   "BF8B123244ADB794A06EA8A10503FBDD": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -219172.86,
     "y": 226394.84,
     "z": -1956.38,
-    "id": "FTPoint40",
-    "localized_name": "Gobfin's Turf"
+    "localized_name": "Gobfin's Turf",
+    "id": "FTPoint40"
+  },
+  "C2A21FB148CA559F4814029637CEF75F": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": 125988.7,
+    "y": 274597.84,
+    "z": 752.67,
+    "localized_name": "Frozen Dune Cape",
+    "id": "FTPoint107"
+  },
+  "C2EC8AFD4C5D84F814ED2E9E54E498FC": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -818013.06,
+    "y": 59827.72,
+    "z": 46837.62,
+    "localized_name": "Enchanted Firmament",
+    "id": "SkyIsland_A"
   },
   "C4D494924DAB97D9E30AFB92B6029307": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": 32787.1,
     "y": -81420.33,
     "z": -2019.84,
-    "id": "FTPoint69",
-    "localized_name": "Sakurajima - Northern Rock Field"
+    "localized_name": "Sakurajima - Northern Rock Field",
+    "id": "FTPoint69"
+  },
+  "C5C2695D4EA3C55C419D7A8C8D184631": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -160345.17,
+    "y": 98540.79,
+    "z": 2792.8,
+    "localized_name": "Anubis Dunes",
+    "id": "FTPoint92"
+  },
+  "C5F1A3CA46EAE25B999783B3ECC569ED": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": 483205.0,
+    "y": -672790.0,
+    "z": 18210.0,
+    "localized_name": "Spore Cloister",
+    "id": "WorldTree_L"
+  },
+  "C6A854194E8AF1B5CEF381A1A276CB92": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -156482.23,
+    "y": 317415.3,
+    "z": -2033.77,
+    "localized_name": "Altar of the Windcaller",
+    "id": "FTPoint98"
   },
   "C808C5844EB34E9EDA773AA209CEBA01": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -2188.8,
     "y": -148545.86,
     "z": 2988.48,
-    "id": "FTPoint70",
-    "localized_name": "Secluded Cemetery"
+    "localized_name": "Secluded Cemetery",
+    "id": "FTPoint70"
+  },
+  "C94EC2744732C721BA6144802FD11EC2": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": 191211.2,
+    "y": 375334.7,
+    "z": 964.79,
+    "localized_name": "The Furthest Flats",
+    "id": "FTPoint105"
+  },
+  "CAC914F54EE678E09CF8ECA4D81E60A0": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -506737.8,
+    "y": -396063.44,
+    "z": 2103.63,
+    "localized_name": "Curved Redrock",
+    "id": "FTPoint119"
+  },
+  "CD9FE0D4490874187ED9919D0E4D2A09": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -237086.58,
+    "y": -100489.86,
+    "z": 515.74,
+    "localized_name": "Ruined Fortress City",
+    "id": "FTPoint8"
   },
   "CF5FAE4A487231DDD8487C9B19453128": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -33882.15,
     "y": 564292.5,
     "z": -2102.58,
+    "localized_name": "Oasis Isle",
     "id": "FTPoint85"
   },
-  "D27AFCAD472164F000D33A8D8B61FE8B": {
-    "x": -321844.94,
-    "y": 209097.66,
-    "z": 6676.63,
-    "id": "FTPoint46"
+  "D758455B40BC4D1A8ABB3EB62DD009D3": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": 570652.3,
+    "y": -558439.5,
+    "z": 22368.93,
+    "localized_name": "Dusty Ravine",
+    "id": "WorldTree_C_1"
+  },
+  "D786C6324A293AB1560774B15B998290": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": 491660.0,
+    "y": -593705.0,
+    "z": 17375.0,
+    "localized_name": "Alluvion Lakefront",
+    "id": "WorldTree_E"
   },
   "DC0ECF9241B4410C59EE619F56D1106A": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -119037.29,
     "y": 138340.36,
     "z": -1220.29,
-    "id": "FTPoint14",
-    "localized_name": "Cold Shore"
+    "localized_name": "Cold Shore",
+    "id": "FTPoint14"
+  },
+  "DC7376744AEDB97BBEB044AA3AACAB26": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -865524.3,
+    "y": -352355.03,
+    "z": -123.57,
+    "localized_name": "Azure Cliffs",
+    "id": "FTPoint127"
+  },
+  "DD7137634D024A8FCFE6CB9F08887F86": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -38097.32,
+    "y": 53412.52,
+    "z": 278.39,
+    "localized_name": "Garden Beneath the Cliffs",
+    "id": "FTPoint115"
   },
   "DDBBFFAF43D9219AE68DF98744DF0831": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -342035.0,
     "y": 236885.0,
     "z": -1751.61,
-    "id": "FTPoint21",
-    "localized_name": "Grassy Behemoth Hills"
+    "localized_name": "Grassy Behemoth Hills",
+    "id": "FTPoint21"
   },
   "DEAA0D38438D8CF02BC7CC82621B33B0": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -792350.0,
     "y": -251110.0,
     "z": -540.0,
-    "id": "FTPoint73",
-    "localized_name": "Loess Plains"
+    "localized_name": "Loess Plains",
+    "id": "FTPoint73"
   },
   "DF9FB9CB41B43052A9C74FA79A826A50": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -338560.0,
     "y": 107660.0,
     "z": -1390.0,
-    "id": "FTPoint42",
-    "localized_name": "Sealed Realm of the Swordmaster"
+    "localized_name": "Sealed Realm of the Ardent",
+    "id": "FTPoint42"
   },
   "E0819EFB41581AEAC3A029B0EE2FE195": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": 89644.01,
     "y": 94542.2,
     "z": 67275.08,
-    "id": "FTPoint20",
-    "localized_name": "PAL Genetic Research Unit Tower Entrance"
+    "localized_name": "PAL Genetic Research Unit Tower Entrance",
+    "id": "FTPoint20"
   },
   "E74D687D4CAAF5EA085E0B8A76F8B652": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -335853.84,
     "y": 335361.28,
     "z": -2090.06,
+    "localized_name": "Sunlit Isle",
     "id": "FTPoint84"
   },
-  "E88379634CB5B6117DA2E7B8810BFE0A": {
-    "x": -110130.67,
-    "y": 241503.55,
-    "z": 25535.5,
-    "id": "FTPoint47"
+  "E8A85FF544C205E1B04F7E93109B8197": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -71914.8,
+    "y": 472172.2,
+    "z": -2019.31,
+    "localized_name": "Thirst's End",
+    "id": "FTPoint102"
+  },
+  "EC4896F44C4C9BD993DAE2B2C1F31BBA": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -74928.58,
+    "y": 212787.06,
+    "z": 9490.94,
+    "localized_name": "Verdant Stream",
+    "id": "FTPoint100"
   },
   "EC94023A4CA571FF0FD19E90944F4231": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -39402.43,
     "y": 159611.86,
     "z": 17025.17,
-    "id": "FTPoint16",
-    "localized_name": "Icy Weasel Hill"
+    "localized_name": "Icy Weasel Hill",
+    "id": "FTPoint16"
   },
   "F1A1AB834E138B2A938D0AA90E9A65E3": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -86709.57,
     "y": -140441.75,
     "z": -2031.0,
-    "id": "FTPoint65",
-    "localized_name": "Sakurajima - Southern Sandbar"
+    "localized_name": "Sakurajima - Southern Sandbar",
+    "id": "FTPoint65"
   },
   "F31B78014AD3954185416DA155E50CCD": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -698514.94,
     "y": -322880.4,
     "z": 15540.0,
-    "id": "FTPoint74",
-    "localized_name": "Hidden Passage to the Oculus Gate"
+    "localized_name": "Hidden Passage to the Oculus Gate",
+    "id": "FTPoint74"
+  },
+  "F34810714796CFCEB04D7C8F7B41493D": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -224958.11,
+    "y": 285919.22,
+    "z": -1124.72,
+    "localized_name": "Mossanda Inner Coast",
+    "id": "FTPoint99"
   },
   "F382ADAE4259150BF994FF873ECF242B": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -88645.85,
     "y": -3922.88,
     "z": -876.45,
-    "id": "FTPoint50",
-    "localized_name": "Ice Wind Island"
+    "localized_name": "Isle of Murmurs",
+    "id": "FTPoint50"
+  },
+  "F3C0FFDE41C2BF4EFD8A068986C6B02E": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -236840.52,
+    "y": 34772.58,
+    "z": 13438.9,
+    "localized_name": "Whisperwind Hill",
+    "id": "FTPoint94"
   },
   "F6AFBCDA4D7AF6C373407DBC8556FBAE": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -488718.2,
     "y": -35724.94,
     "z": -2096.69,
+    "localized_name": "Sealed Realm of Terraria",
     "id": "FTPoint90"
   },
   "F6C005A14B38FE0B57F1C7869FD899CB": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -221399.27,
     "y": 330684.53,
     "z": -1744.81,
-    "id": "FTPoint58",
-    "localized_name": "Natural Bridge"
+    "localized_name": "Natural Bridge",
+    "id": "FTPoint58"
+  },
+  "F88417694DF90381B2B21D9E039B2CCD": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -923275.1,
+    "y": -385109.12,
+    "z": -258.76,
+    "localized_name": "Amethyst Outcrop",
+    "id": "FTPoint128"
   },
   "F8DF603B4C750B37D943C9AF6A911946": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -221230.0,
     "y": 165130.0,
     "z": -40.0,
-    "id": "FTPoint33",
-    "localized_name": "Lake Center"
+    "localized_name": "Lake Center",
+    "id": "FTPoint33"
   },
   "F8E5CB8143F4FA2F6213E6B454569F87": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -416557.53,
     "y": -90012.16,
     "z": 23301.87,
-    "id": "FTPoint6",
-    "localized_name": "Mount Obsidian - Anubis Statue"
+    "localized_name": "Mount Obsidian - Anubis Statue",
+    "id": "FTPoint6"
   },
-  "FE90632845114C7FBFA4669D071E285F": {
-    "x": 29655.42,
-    "y": 413476.84,
-    "z": 22226.78,
-    "id": "FTPoint10"
+  "FC8F024D40741A133EB9DA88201AE7F0": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -578061.0,
+    "y": -158216.08,
+    "z": 7648.47,
+    "localized_name": "Crimson Cliffs",
+    "id": "FTPoint117"
   }
 }

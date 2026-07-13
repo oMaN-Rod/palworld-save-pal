@@ -162,6 +162,8 @@ mod tests {
             "l10n/en/ui",
             "ui/en",
             "exp",
+            "bosses",
+            "relics",
         ] {
             assert!(game_data.get(key).is_some(), "missing game data key {key}");
         }

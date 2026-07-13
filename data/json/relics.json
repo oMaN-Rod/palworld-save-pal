@@ -1,0 +1,2837 @@
+{
+  "002C8A3349443E442D477BBCCCDC0B16": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": 138070.0,
+    "y": 98190.0,
+    "z": 48520.0,
+    "relic_type": "jump_power"
+  },
+  "00457007467EB67682B01C803F05D60F": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -762729.0,
+    "y": 5168.0,
+    "z": 43249.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "007757BA4C6E20E4BB052284FAAC5FCA": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 513620.0,
+    "y": -692960.0,
+    "z": 31540.0,
+    "relic_type": "capture_power"
+  },
+  "013FF2FC4DDCCC22C290A09264F499BC": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -311347.9,
+    "y": 30955.1,
+    "z": 6853.1,
+    "relic_type": "capture_power"
+  },
+  "02AF43A94CA238543A95AEB6BA70A8EF": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 583460.0,
+    "y": -626300.0,
+    "z": 18090.0,
+    "relic_type": "stamina_reduction"
+  },
+  "02B78ABD4D73CE8403312380DC5D3A08": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -810720.0,
+    "y": -22400.0,
+    "z": 37800.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "03018C744099CEFE3F7D31A019C3CF5F": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -168370.0,
+    "y": 35570.0,
+    "z": 540.0,
+    "relic_type": "hunger_reduction"
+  },
+  "030A86174A276F5993284F85BA4B6409": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": -18370.0,
+    "y": 35380.0,
+    "z": 7720.0,
+    "relic_type": "jump_power"
+  },
+  "03FBB5A245425AC390F331ABF38B53D6": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -3910.0,
+    "y": -164200.0,
+    "z": -1920.0,
+    "relic_type": "glider_speed"
+  },
+  "04707DE846F38C0E9E7BCCAFA9AC9261": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -49480.0,
+    "y": -109990.0,
+    "z": -1120.0,
+    "relic_type": "glider_speed"
+  },
+  "04FE47374849876D3339BAA610391880": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -122963.32,
+    "y": 241358.67,
+    "z": 10543.11,
+    "relic_type": "capture_power"
+  },
+  "0518F6424A75CAB98439E9A32A20469E": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -357120.0,
+    "y": 31380.0,
+    "z": 170.0,
+    "relic_type": "hunger_reduction"
+  },
+  "0547DB424A9C200ED2EED1B9DABACCF6": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -393209.9,
+    "y": -206295.75,
+    "z": 186.75,
+    "relic_type": "capture_power"
+  },
+  "05C3B4084382710BC11949A2EB6EDD31": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 161910.0,
+    "y": 380520.0,
+    "z": 2380.0,
+    "relic_type": "capture_power"
+  },
+  "0601D9B648D547A6B127D998DDADF026": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -805107.0,
+    "y": -109978.0,
+    "z": 55320.74,
+    "relic_type": "status_ailment_resist"
+  },
+  "065326544F0F759E8B4F73AAFC51D320": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 511550.0,
+    "y": -509510.0,
+    "z": 44390.0,
+    "relic_type": "stamina_reduction"
+  },
+  "077DB4C045F1AD79A50C38959D401337": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 523930.0,
+    "y": -718530.0,
+    "z": 40240.0,
+    "relic_type": "stamina_reduction"
+  },
+  "07919A9F41E7F3F85EA79BBF511C295B": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 24000.05,
+    "y": -90318.12,
+    "z": -988.06,
+    "relic_type": "capture_power"
+  },
+  "0AB95D904B0114AF3080BBACD7877192": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -812670.0,
+    "y": 62770.0,
+    "z": 46870.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "0ACD187A471A98E6176CB1BFA87A6697": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -65160.0,
+    "y": -17150.0,
+    "z": -1700.0,
+    "relic_type": "glider_speed"
+  },
+  "0CC8297B43C4BB5A7937B09F347EEB87": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -254730.0,
+    "y": -120200.0,
+    "z": 9570.0,
+    "relic_type": "swim_speed"
+  },
+  "0D0BF38A4E8EF27A57F81CB5154C4633": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -339168.3,
+    "y": 184004.11,
+    "z": 804.94,
+    "relic_type": "capture_power"
+  },
+  "0D135F004915D8CCB54F04BE5D5F8124": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -251193.53,
+    "y": 51458.06,
+    "z": -1452.04,
+    "relic_type": "capture_power"
+  },
+  "0EE0DA3D45057D1D4AC1579BABAB07E6": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -729500.0,
+    "y": -92910.0,
+    "z": 48220.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "0F1F4A08413591CD03E008A861A09525": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -267271.56,
+    "y": 5157.44,
+    "z": -1113.24,
+    "relic_type": "capture_power"
+  },
+  "0F672746491B829BF0B44FBF212C0066": {
+    "class": "BP_LevelObject_Relic_LazyDragon_C",
+    "x": 159960.0,
+    "y": 91220.0,
+    "z": 51250.0,
+    "relic_type": "exp_bonus"
+  },
+  "112FF3FE406DFA679B469AA6080CF501": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -564930.0,
+    "y": -230160.0,
+    "z": 3000.51,
+    "relic_type": "climb_speed"
+  },
+  "126AF85646BB318D346031B03D867560": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": 9380.0,
+    "y": 123290.0,
+    "z": 6830.0,
+    "relic_type": "jump_power"
+  },
+  "12EC7D1F499BDD807EAFDD93009FEDD0": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": -29460.0,
+    "y": 169950.0,
+    "z": 17260.0,
+    "relic_type": "jump_power"
+  },
+  "14234DC74933E98E9EE1C2881D606558": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -651870.0,
+    "y": -222000.0,
+    "z": 17650.0,
+    "relic_type": "climb_speed"
+  },
+  "144D469D4F900991969D7291AF6E8378": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -335209.72,
+    "y": 155303.55,
+    "z": -150.86,
+    "relic_type": "capture_power"
+  },
+  "1549A6CC45AD5ADE996FB39F74B6810F": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -805820.0,
+    "y": -102910.0,
+    "z": 48720.0,
+    "relic_type": "capture_power"
+  },
+  "167BD4A64E90E2D83B0EB6B9E5A9D66E": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 472460.0,
+    "y": -651270.0,
+    "z": 19980.0,
+    "relic_type": "capture_power"
+  },
+  "184EBC0644B9C8923DF26588FF8E7130": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -720810.0,
+    "y": -359460.0,
+    "z": 620.0,
+    "relic_type": "climb_speed"
+  },
+  "18C85CF341284CB6097E6A849801BCEC": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": 23170.0,
+    "y": 93760.0,
+    "z": 7540.0,
+    "relic_type": "jump_power"
+  },
+  "19149C8A449DE8C4912BFFB481ED3197": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -184840.0,
+    "y": 117270.0,
+    "z": -2050.0,
+    "relic_type": "hunger_reduction"
+  },
+  "191D80C346B731293D17898CE7B2693C": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": 3650.0,
+    "y": 179700.0,
+    "z": 11160.0,
+    "relic_type": "jump_power"
+  },
+  "198F8B5A4DAE4871FD77159B02F039E6": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 476870.0,
+    "y": -675760.0,
+    "z": 21470.0,
+    "relic_type": "stamina_reduction"
+  },
+  "199521824B81B5669F558DAB155E229F": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": 44170.0,
+    "y": 199960.0,
+    "z": 7780.0,
+    "relic_type": "jump_power"
+  },
+  "19A530564F83F895127D029DDD163DC3": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -729332.1,
+    "y": -357029.22,
+    "z": 12863.82,
+    "relic_type": "capture_power"
+  },
+  "1A21D84546A590DC085951811F052AE4": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -69650.0,
+    "y": 191650.0,
+    "z": -1360.0,
+    "relic_type": "hunger_reduction"
+  },
+  "1ADC7A1E4B1A95106DEC11B0A7EFF5B0": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": -60940.0,
+    "y": 371890.0,
+    "z": 2110.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "1BA43F074DF2D70C608201B4492EE8B0": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": 136200.0,
+    "y": 338080.0,
+    "z": 1940.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "1BAA36434BBEB31E642A37924374F50C": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -30873.05,
+    "y": -63353.16,
+    "z": -723.4,
+    "relic_type": "capture_power"
+  },
+  "1BABD4DE4A4E73352670AD837CDFB032": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 476170.0,
+    "y": -724450.0,
+    "z": 19870.0,
+    "relic_type": "capture_power"
+  },
+  "1D1B53924D75C41B88EB498D493A8EDB": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -247320.0,
+    "y": -37190.0,
+    "z": 1110.0,
+    "relic_type": "swim_speed"
+  },
+  "1D22696E4A22F0971CD872B4E1F17C1B": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -441338.44,
+    "y": -35181.28,
+    "z": -1947.45,
+    "relic_type": "capture_power"
+  },
+  "1E15689D486E45F63DD3888A01096A6B": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -270319.34,
+    "y": 66094.72,
+    "z": 418.05,
+    "relic_type": "capture_power"
+  },
+  "1F4B6F624B807B9DBBFA45AA4C06CD4E": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -398954.66,
+    "y": -88981.43,
+    "z": 31367.57,
+    "relic_type": "capture_power"
+  },
+  "1FE0AA944D1D727FB6632BAF31F1E5C1": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": 119140.0,
+    "y": 408730.0,
+    "z": -2090.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "1FF09CAA4AB426B88A5691849B4541F7": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": 154130.0,
+    "y": 9330.0,
+    "z": 23360.0,
+    "relic_type": "jump_power"
+  },
+  "225AE7CB416393A11C016581B32E0EC7": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -814680.0,
+    "y": -383050.0,
+    "z": 8251.94,
+    "relic_type": "climb_speed"
+  },
+  "22EDC7084124092A25C12682DF70B1C8": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": 111360.0,
+    "y": 360140.0,
+    "z": 7890.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "236E7DD447C9BD09C08D319E5CF6EDCF": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -608479.4,
+    "y": -126420.77,
+    "z": -2094.95,
+    "relic_type": "capture_power"
+  },
+  "238ABE074AE025AE80E3C2AF7B6DDC4C": {
+    "class": "BP_LevelObject_Relic_GuardianDog_C",
+    "x": 615960.0,
+    "y": -735710.0,
+    "z": 22740.0,
+    "relic_type": "rainbow_passive_rate"
+  },
+  "24AC69DD45C2989A803C02890CE5E336": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -592896.4,
+    "y": -169670.72,
+    "z": -459.62,
+    "relic_type": "capture_power"
+  },
+  "259191A04F8F152EFDD23595F52F7C89": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 571080.0,
+    "y": -559860.0,
+    "z": 28330.0,
+    "relic_type": "capture_power"
+  },
+  "263D2E92426C5C8F90D242A32AAE7683": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 487040.0,
+    "y": -582320.0,
+    "z": 17530.0,
+    "relic_type": "capture_power"
+  },
+  "26B6D16944F2D72BF7F112AD3A65F404": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -265770.0,
+    "y": -154860.0,
+    "z": 20830.0,
+    "relic_type": "swim_speed"
+  },
+  "277F80A4470F57BC9AACBA91DD894EEC": {
+    "class": "BP_LevelObject_Relic_GuardianDog_C",
+    "x": -793670.56,
+    "y": 28823.3,
+    "z": 49936.91,
+    "relic_type": "rainbow_passive_rate"
+  },
+  "27B2044E4DECA02FF793A19592783949": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 485810.0,
+    "y": -581270.0,
+    "z": 21200.0,
+    "relic_type": "stamina_reduction"
+  },
+  "27E0B8FA45C43FE7003164BCC65BBA4D": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -176630.0,
+    "y": -22150.0,
+    "z": 2840.0,
+    "relic_type": "hunger_reduction"
+  },
+  "28CB901F4D4603075D1939A8CAAE14A7": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -345872.16,
+    "y": 143002.52,
+    "z": 1216.9,
+    "relic_type": "capture_power"
+  },
+  "295A5FC1429C4727D17E92ACBE9746A0": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -570220.0,
+    "y": -173120.0,
+    "z": 3850.0,
+    "relic_type": "climb_speed"
+  },
+  "29F4B89E4A773320FD1DCFB562CF47EF": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -35890.0,
+    "y": 550570.0,
+    "z": -2076.95,
+    "relic_type": "capture_power"
+  },
+  "2A8C4D5F4321B255640E46A446964495": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": 3610.0,
+    "y": 388720.0,
+    "z": 1310.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "2B05D46B4777203BE63B7AA893DCC1CE": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -847130.0,
+    "y": -432930.0,
+    "z": 4730.0,
+    "relic_type": "climb_speed"
+  },
+  "2B421ADA4514F88BCF191BA9281076EF": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -870010.0,
+    "y": -413650.0,
+    "z": 13630.0,
+    "relic_type": "climb_speed"
+  },
+  "2C45D349426B352E86D09D9B8584CDDB": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -244510.0,
+    "y": 74600.0,
+    "z": -1270.0,
+    "relic_type": "hunger_reduction"
+  },
+  "2C7DCADA45814AE63CCE09AC7EDD38DE": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 487060.0,
+    "y": -745540.0,
+    "z": 20626.61,
+    "relic_type": "stamina_reduction"
+  },
+  "2D875799472A12AB13D53F9DB5F7870F": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -793330.0,
+    "y": 4170.0,
+    "z": 39950.0,
+    "relic_type": "capture_power"
+  },
+  "2DB7E54844E5A67A1A20258F66C86F32": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -260590.0,
+    "y": -60160.0,
+    "z": 11240.0,
+    "relic_type": "swim_speed"
+  },
+  "2DE430864B68D7614DF23695F6AAE9BC": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 569300.0,
+    "y": -609230.0,
+    "z": 23180.0,
+    "relic_type": "stamina_reduction"
+  },
+  "2E0FBCA14849F0F559D090A7F6A734B9": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 495450.0,
+    "y": -710690.0,
+    "z": 37190.0,
+    "relic_type": "capture_power"
+  },
+  "307C6D7449880602B928FDAC09DFBA5B": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -39940.0,
+    "y": -149880.0,
+    "z": -1970.0,
+    "relic_type": "glider_speed"
+  },
+  "30CE394347741F55E161038548849ACA": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -233370.0,
+    "y": -88310.0,
+    "z": 570.0,
+    "relic_type": "swim_speed"
+  },
+  "30D134AB41CFD20CCE28EEBC4E31C61F": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -769970.0,
+    "y": -305300.0,
+    "z": 9026.6,
+    "relic_type": "climb_speed"
+  },
+  "3104D410475C7E6BD798EE92F1BE4C45": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -425590.0,
+    "y": -14550.0,
+    "z": -1708.93,
+    "relic_type": "swim_speed"
+  },
+  "32F6C2BC4D45F586B95B1096259D5A22": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": 64620.0,
+    "y": 438550.0,
+    "z": -1630.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "3328B8C0499212D833C316B3210B3A87": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -120630.0,
+    "y": -135290.0,
+    "z": -1900.0,
+    "relic_type": "glider_speed"
+  },
+  "33829598432660A7393869B3E73A9C65": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -57183.66,
+    "y": -174532.38,
+    "z": 73.56,
+    "relic_type": "capture_power"
+  },
+  "343EF98D40FF15E40DD4CCACC96343A9": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -77440.0,
+    "y": -96090.0,
+    "z": -2070.0,
+    "relic_type": "glider_speed"
+  },
+  "3621201A4893F01C9A6478B5DEB9AD37": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 446020.0,
+    "y": -739140.0,
+    "z": 26590.0,
+    "relic_type": "stamina_reduction"
+  },
+  "362CD8914499751D2C363294EA06BDFB": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -324270.0,
+    "y": -118760.0,
+    "z": 43710.0,
+    "relic_type": "swim_speed"
+  },
+  "3756EA4E49FC727B61583AAD0A6FBE82": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -225371.64,
+    "y": -103211.82,
+    "z": -1156.05,
+    "relic_type": "capture_power"
+  },
+  "37951C794E86A97ACBA55C83DD816D28": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 534010.0,
+    "y": -623630.0,
+    "z": 11850.0,
+    "relic_type": "stamina_reduction"
+  },
+  "3847D9C84D56600AFA1185BF2017C30C": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -123372.08,
+    "y": 254804.31,
+    "z": 6407.23,
+    "relic_type": "capture_power"
+  },
+  "39D807FA4FC0C027616EA693FB4AE4B4": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": 153970.0,
+    "y": 285020.0,
+    "z": -870.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "3A860F064749C5EE0190E18E90189AC8": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -176707.25,
+    "y": 165453.42,
+    "z": 5995.3,
+    "relic_type": "capture_power"
+  },
+  "3B7064E0488FEE9BC1BAC887FA92FDD5": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -99829.62,
+    "y": 122773.38,
+    "z": -103.39,
+    "relic_type": "capture_power"
+  },
+  "3BA4ED4149BBC946404C7DA4BE528E6A": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -752078.44,
+    "y": -82057.9,
+    "z": 46201.08,
+    "relic_type": "status_ailment_resist"
+  },
+  "3BEAD93C444A52F725E72FA673F8CE42": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 20805.26,
+    "y": 296330.5,
+    "z": 7776.55,
+    "relic_type": "capture_power"
+  },
+  "3C9CCBEB48860DE5AEF3AFBD8C1395CB": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -31411.73,
+    "y": -28139.62,
+    "z": -2097.8,
+    "relic_type": "capture_power"
+  },
+  "3CC54EE94CDBA7071ECC5FA31FE1C67E": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -786660.0,
+    "y": -34190.0,
+    "z": 30310.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "3F32194747AE9B883B1A9985BE584392": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -244672.3,
+    "y": 114650.34,
+    "z": 4147.71,
+    "relic_type": "capture_power"
+  },
+  "3F5A1D384A30BA5AC6CF52A4ECCAF1D4": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -63840.0,
+    "y": -82160.0,
+    "z": -2050.0,
+    "relic_type": "glider_speed"
+  },
+  "3FBC3E624F32A6DA78672A85DAD6677F": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": -105240.0,
+    "y": 138940.0,
+    "z": 450.0,
+    "relic_type": "jump_power"
+  },
+  "3FC6043F4D8029BA5A8EEA82AA5A5F8D": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -559820.0,
+    "y": -362810.0,
+    "z": 22460.0,
+    "relic_type": "climb_speed"
+  },
+  "4033D8964DF51E820083DA8349DD0821": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": 131880.0,
+    "y": 317520.0,
+    "z": 5830.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "416E04734D82DB11908448BFF42D61AC": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 75319.81,
+    "y": 464887.22,
+    "z": -2012.43,
+    "relic_type": "capture_power"
+  },
+  "41A7781C480638C0D940158A24381E14": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": -33550.0,
+    "y": 272520.0,
+    "z": -1170.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "41F03E9D4CF93547CA5806A21CCB3B6D": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -301715.5,
+    "y": 89024.09,
+    "z": -1998.28,
+    "relic_type": "capture_power"
+  },
+  "42DC77FB45BB23C83DAAE6B1F3F517E7": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -472013.25,
+    "y": -81182.28,
+    "z": -2071.42,
+    "relic_type": "capture_power"
+  },
+  "464C46984B941859E29354B3382CC2AC": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -366560.0,
+    "y": -222270.0,
+    "z": -860.0,
+    "relic_type": "swim_speed"
+  },
+  "47717EE44C700E8C7F47418DEBD8E221": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": 52970.0,
+    "y": 44790.0,
+    "z": 17260.0,
+    "relic_type": "jump_power"
+  },
+  "47BAA52D4C73959A9D71E490F49C941B": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -273910.0,
+    "y": -133790.0,
+    "z": 36860.0,
+    "relic_type": "swim_speed"
+  },
+  "485681334C29882164C712B7D37693AF": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": -12490.0,
+    "y": 460970.0,
+    "z": 250.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "49438D0747707510808340AB4456B46B": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -457620.0,
+    "y": -113800.0,
+    "z": -1350.0,
+    "relic_type": "swim_speed"
+  },
+  "496E36EF449ABEE121F3FFB57E1B2204": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -751550.0,
+    "y": -87070.0,
+    "z": 54380.0,
+    "relic_type": "capture_power"
+  },
+  "4985D9564F9D5C17954A1B8A44E08269": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -26300.37,
+    "y": -88939.81,
+    "z": 3713.23,
+    "relic_type": "capture_power"
+  },
+  "49E856994E39C5B552F32AAA2F549E1D": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": -25370.0,
+    "y": 286320.0,
+    "z": 4560.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "4A576517406FF3CF3CDED796CE66FED0": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -162710.0,
+    "y": 156190.0,
+    "z": 5150.0,
+    "relic_type": "hunger_reduction"
+  },
+  "4A5D64F94EE659355F6B76B50926B5E3": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -298610.0,
+    "y": -8360.0,
+    "z": 400.0,
+    "relic_type": "swim_speed"
+  },
+  "4A67B45943D38C899E9DBFA6EE436E22": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -170706.95,
+    "y": 50483.02,
+    "z": 191.04,
+    "relic_type": "capture_power"
+  },
+  "4AE069374FE1BE1882C84EBA1F34DF8B": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 595060.0,
+    "y": -654580.0,
+    "z": 12400.0,
+    "relic_type": "stamina_reduction"
+  },
+  "4B599D174EC243045D391985DD202F31": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -820520.0,
+    "y": -13650.0,
+    "z": 36760.0,
+    "relic_type": "capture_power"
+  },
+  "4B80EA6A48055D7D99F889BC1EA77B3C": {
+    "class": "BP_LevelObject_Relic_LazyDragon_C",
+    "x": -20440.0,
+    "y": -132160.0,
+    "z": 5980.0,
+    "relic_type": "exp_bonus"
+  },
+  "4C05E4D14A5D9493F184938FEC8DAE0B": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -833910.0,
+    "y": -78770.0,
+    "z": 43030.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "4D1D2D0643AB1058F118C18B06A804F4": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -114369.9,
+    "y": 377329.84,
+    "z": -1035.36,
+    "relic_type": "capture_power"
+  },
+  "4DBA14414EE6FBE734A02BABC5C4F32B": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -451761.8,
+    "y": -71656.48,
+    "z": 2071.06,
+    "relic_type": "capture_power"
+  },
+  "4EB1487E4901F4CBD0B78DB2969D1C1D": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": 89730.0,
+    "y": 68030.0,
+    "z": 40940.0,
+    "relic_type": "jump_power"
+  },
+  "4F9239674E242374696B838601E94C19": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -221216.3,
+    "y": -185877.44,
+    "z": -1905.27,
+    "relic_type": "capture_power"
+  },
+  "50AFB874425DEB2736483498A47342C1": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -39340.0,
+    "y": -166540.0,
+    "z": 1290.0,
+    "relic_type": "glider_speed"
+  },
+  "515F64F047AE5F0A1ACDA1A20CB050FC": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 5974.93,
+    "y": 362868.44,
+    "z": -1240.33,
+    "relic_type": "capture_power"
+  },
+  "52BAD1D3401CC7FE16CC6183E040FA40": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -417110.0,
+    "y": -151170.0,
+    "z": 14930.0,
+    "relic_type": "swim_speed"
+  },
+  "53BC659C4BF6436B628692BAB7152083": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": 97050.0,
+    "y": -35980.0,
+    "z": 28770.0,
+    "relic_type": "jump_power"
+  },
+  "53C2C9B940F9E28FFA2A37998126002D": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -91500.0,
+    "y": 246590.0,
+    "z": 19520.0,
+    "relic_type": "hunger_reduction"
+  },
+  "550EDF6940B6ED14E7766ABEAF65F0C9": {
+    "class": "BP_LevelObject_Relic_LazyDragon_C",
+    "x": 40790.0,
+    "y": 388870.0,
+    "z": 2180.0,
+    "relic_type": "exp_bonus"
+  },
+  "55267EAE43F5EC301C9AF2A98CBC0C6A": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -580480.0,
+    "y": -292190.0,
+    "z": 14670.0,
+    "relic_type": "climb_speed"
+  },
+  "56199DC142544C1E931F559BD71CA6C3": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -778550.0,
+    "y": -462420.0,
+    "z": 9871.58,
+    "relic_type": "climb_speed"
+  },
+  "57AEBC7B4225C07755DF4BB2D2B5CC24": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -188890.0,
+    "y": 251370.0,
+    "z": -1470.0,
+    "relic_type": "hunger_reduction"
+  },
+  "59798CA34C58B235E83551BBC728F674": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -316030.0,
+    "y": -221990.0,
+    "z": -410.0,
+    "relic_type": "swim_speed"
+  },
+  "5A1C5AAC4CE7509B66A8BFBF8672731F": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -816830.0,
+    "y": -2350.0,
+    "z": 38290.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "5A83C71946985F46CAC3F59100099BE1": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -772070.0,
+    "y": -397300.0,
+    "z": 7820.0,
+    "relic_type": "climb_speed"
+  },
+  "5AC086654E0956BDEFB3FE9251CA7429": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -842940.0,
+    "y": -32440.0,
+    "z": 47780.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "5AD0BE414CEFBA290E53DA816EB10A58": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -396200.0,
+    "y": -30690.0,
+    "z": 10240.0,
+    "relic_type": "swim_speed"
+  },
+  "5BFE9FAC4EC6570C2C6102922CDD691C": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -167820.19,
+    "y": 244594.11,
+    "z": -1719.71,
+    "relic_type": "capture_power"
+  },
+  "5D3FAB0C4221315FAAA28F92CBA07874": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -666777.75,
+    "y": -296914.56,
+    "z": 1621.19,
+    "relic_type": "capture_power"
+  },
+  "5EF659654F666F8C28C20CA85691D089": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 13358.7,
+    "y": 36095.48,
+    "z": 17528.4,
+    "relic_type": "capture_power"
+  },
+  "5F91D8544B3693B4A323E49BD374D9E7": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -161650.0,
+    "y": 153000.0,
+    "z": 1540.0,
+    "relic_type": "hunger_reduction"
+  },
+  "5FA638D64D45419369DE1C97E3D2ABE4": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -15718.59,
+    "y": -123831.95,
+    "z": 6008.73,
+    "relic_type": "capture_power"
+  },
+  "5FBF958B47BBC707484FBD8C054ADE2E": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -743640.0,
+    "y": -15540.0,
+    "z": 42760.0,
+    "relic_type": "capture_power"
+  },
+  "600B61B04057D1B55442AB89E6499502": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -813100.0,
+    "y": 41850.0,
+    "z": 50380.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "6052C86448A270C6EAE93391D6ADA77C": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 497090.0,
+    "y": -647840.0,
+    "z": 16250.0,
+    "relic_type": "capture_power"
+  },
+  "61A7FF7343DF8368E1E6098925FF4960": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -323221.72,
+    "y": 92608.07,
+    "z": -1866.45,
+    "relic_type": "capture_power"
+  },
+  "6269CE914FA3BE71FF8C0CBC165989EA": {
+    "class": "BP_LevelObject_Relic_Mutant_C",
+    "x": -110780.0,
+    "y": 324060.0,
+    "z": -1700.0,
+    "relic_type": "sphere_homing"
+  },
+  "631A5BCF415A81ABF98598B6EF83EB0A": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 87402.38,
+    "y": 62371.13,
+    "z": 43502.52,
+    "relic_type": "capture_power"
+  },
+  "639F4DDA4D7E7DAABEF0358335835AE9": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -38440.0,
+    "y": -63780.0,
+    "z": -630.0,
+    "relic_type": "glider_speed"
+  },
+  "63D60306458A491003F0719143172E5C": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -790410.0,
+    "y": 8200.0,
+    "z": 40540.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "63DFCAE9461F068493612B861BEDE094": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -2724.12,
+    "y": -101344.16,
+    "z": 877.27,
+    "relic_type": "capture_power"
+  },
+  "6638945F4B26A1D2EA04D9BD011B359E": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -623477.56,
+    "y": -228131.78,
+    "z": 4738.51,
+    "relic_type": "capture_power"
+  },
+  "66D7AD804F44D66D9D877ABEC77DA500": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -638559.25,
+    "y": -346189.44,
+    "z": 12257.61,
+    "relic_type": "capture_power"
+  },
+  "677502114E722F46D7666BB897355A45": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -753200.0,
+    "y": -26060.0,
+    "z": 28860.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "677F4E8847E539D6372DF1977044E166": {
+    "class": "BP_LevelObject_Relic_LazyDragon_C",
+    "x": -409330.0,
+    "y": -97700.0,
+    "z": 25730.0,
+    "relic_type": "exp_bonus"
+  },
+  "67C386864D394305CCF366BD2CEEE3D7": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -142710.0,
+    "y": 341980.0,
+    "z": -1720.0,
+    "relic_type": "hunger_reduction"
+  },
+  "67EC8C1A432CCAA5D042E8B1AFD508A2": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -307780.0,
+    "y": -118180.0,
+    "z": 36660.0,
+    "relic_type": "swim_speed"
+  },
+  "68BCAA004522AAF3D8CC3BA7D281CB47": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": -9390.0,
+    "y": 291840.0,
+    "z": 14420.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "68FA589346D6CA6FD1C498B9C3DE2992": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -797526.44,
+    "y": -74016.04,
+    "z": 58129.47,
+    "relic_type": "status_ailment_resist"
+  },
+  "6A4E8926421B3ACB05423D80A4B45D1E": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -168085.8,
+    "y": 251818.27,
+    "z": 17497.85,
+    "relic_type": "capture_power"
+  },
+  "6A8633B546D6CCFF2AA7F6984087A1EE": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": 156890.0,
+    "y": 46140.0,
+    "z": 23420.0,
+    "relic_type": "jump_power"
+  },
+  "6AC77A2146CA0E3246C732AADC7F35A8": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -659810.0,
+    "y": -290910.0,
+    "z": 1510.0,
+    "relic_type": "climb_speed"
+  },
+  "6B126A9B42B3BD19E90C58A594A0C657": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -247190.0,
+    "y": -123170.0,
+    "z": 8420.0,
+    "relic_type": "capture_power"
+  },
+  "6C8680F3416FEFDAA9D0DFA5DAC408B1": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -571482.8,
+    "y": -289720.78,
+    "z": 447.9,
+    "relic_type": "capture_power"
+  },
+  "6C95343C41621B8AA11E8BA3308667D8": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -272316.8,
+    "y": 326450.25,
+    "z": -1882.31,
+    "relic_type": "capture_power"
+  },
+  "6CA64B00492057D6B5D82D96C534472F": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -294814.9,
+    "y": 212861.92,
+    "z": -663.2,
+    "relic_type": "capture_power"
+  },
+  "6D668C844129793E30B5F395EEDEBF96": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -266489.38,
+    "y": 53997.2,
+    "z": 6497.21,
+    "relic_type": "capture_power"
+  },
+  "6DF591234CACF474A68749BF080AC5BA": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -379832.34,
+    "y": 269566.94,
+    "z": -2115.68,
+    "relic_type": "capture_power"
+  },
+  "6E97A40944415B2E8451858C50613591": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -230035.34,
+    "y": 282109.0,
+    "z": 15626.43,
+    "relic_type": "capture_power"
+  },
+  "6E9DA1D94E1F502D90E8419132CE00C9": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -76850.0,
+    "y": -68220.0,
+    "z": -960.0,
+    "relic_type": "glider_speed"
+  },
+  "6E9E854341332FDF79074C97C5A8C5A7": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -341720.0,
+    "y": -90930.0,
+    "z": 21960.0,
+    "relic_type": "swim_speed"
+  },
+  "6F26D2E4425759859DBCBD870AAF0083": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": -39520.0,
+    "y": 116950.0,
+    "z": 16710.0,
+    "relic_type": "jump_power"
+  },
+  "6F6D56CC4F96DAE4E749DB8D1EA13E28": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -286910.0,
+    "y": 110730.0,
+    "z": -2010.0,
+    "relic_type": "hunger_reduction"
+  },
+  "7083643D4CCFE3FF924B7E8464126CC0": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -308236.6,
+    "y": 151805.16,
+    "z": -596.64,
+    "relic_type": "capture_power"
+  },
+  "7196345E496A2264FD10DFBBFFE8CA5B": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -257769.03,
+    "y": -204290.3,
+    "z": 3802.64,
+    "relic_type": "capture_power"
+  },
+  "75F2D9CE44A49B342673EDA14C56531E": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 63373.85,
+    "y": 34058.39,
+    "z": 15500.03,
+    "relic_type": "capture_power"
+  },
+  "76EF4D324A3F479CD2FFDE860C015C53": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": 36580.0,
+    "y": 271050.0,
+    "z": 1160.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "77036F7840E3CF7491FA3681B0E3D47E": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -795780.0,
+    "y": 50060.0,
+    "z": 51080.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "778AC97F48FC15DE10EFBC83AA93528B": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -836733.9,
+    "y": -436815.38,
+    "z": 10938.07,
+    "relic_type": "capture_power"
+  },
+  "77D091714EF84E5574FF6D9822133B36": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -41340.0,
+    "y": -19460.0,
+    "z": -1750.0,
+    "relic_type": "glider_speed"
+  },
+  "783435C54E08EECC6AD2ECB02FC3CEB0": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": 82390.0,
+    "y": 283820.0,
+    "z": 3320.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "79479C394743C7953D28FF887E333D30": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 172923.05,
+    "y": 260092.39,
+    "z": -1898.45,
+    "relic_type": "capture_power"
+  },
+  "7AD0DC6643089BAAB0F0FC81608BB834": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": 86670.0,
+    "y": 77140.0,
+    "z": 56570.0,
+    "relic_type": "jump_power"
+  },
+  "7B3AA6BD4A60381E9E683F9F9FD21CF9": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -212417.38,
+    "y": 115026.09,
+    "z": -1714.92,
+    "relic_type": "capture_power"
+  },
+  "7C2629AB46A4B48B0B155386A51D0085": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -37470.0,
+    "y": 442920.0,
+    "z": 10548.36,
+    "relic_type": "capture_power"
+  },
+  "7D2A798E4789F3E40138CC959560521B": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": -109050.0,
+    "y": 496610.0,
+    "z": -2100.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "7D3CF5BF4FF77D0868278693EE0419A7": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -840380.0,
+    "y": 5090.0,
+    "z": 42460.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "7D4700144B8B45B598681EA44E8A6E27": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -460340.0,
+    "y": -85870.0,
+    "z": 2600.0,
+    "relic_type": "swim_speed"
+  },
+  "7E0B8F4C4042C4AF6F2BF3B5252798F5": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 589620.0,
+    "y": -737510.0,
+    "z": 19840.0,
+    "relic_type": "stamina_reduction"
+  },
+  "7EFC4C6043F6395176DC259A22FE333B": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -36530.0,
+    "y": -129680.0,
+    "z": 3320.0,
+    "relic_type": "glider_speed"
+  },
+  "7F589A664D52E372164F8CA86573939E": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": 110820.0,
+    "y": -14340.0,
+    "z": 22780.0,
+    "relic_type": "jump_power"
+  },
+  "8050FAF84E82BE1F3AEAC8BA3ED5EA27": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 547190.0,
+    "y": -627000.0,
+    "z": 18300.0,
+    "relic_type": "stamina_reduction"
+  },
+  "81118C5049718D266612669DF7304116": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -53225.36,
+    "y": 390773.53,
+    "z": 5039.89,
+    "relic_type": "capture_power"
+  },
+  "81138D074970CDF0995EC5AAAEAA2B53": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 583580.0,
+    "y": -588460.0,
+    "z": 29080.0,
+    "relic_type": "stamina_reduction"
+  },
+  "81E32E2443E153C6566D7997DB1641C8": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -211442.88,
+    "y": -11077.08,
+    "z": 5300.46,
+    "relic_type": "capture_power"
+  },
+  "826B740443BA5FBC6243158CD8EF0E37": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -279662.22,
+    "y": 165160.98,
+    "z": -1440.45,
+    "relic_type": "capture_power"
+  },
+  "82C7859D438F9EC3781D8A9D09752138": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -141739.11,
+    "y": 253601.6,
+    "z": -1937.23,
+    "relic_type": "capture_power"
+  },
+  "82F627CD4F695F0A5E7A62BB727EDF33": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -697430.0,
+    "y": -360000.0,
+    "z": 32820.0,
+    "relic_type": "climb_speed"
+  },
+  "84F2663B4DB056F9611813ABD0A35266": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 534460.0,
+    "y": -731820.0,
+    "z": 20410.0,
+    "relic_type": "capture_power"
+  },
+  "85EE559A4C3806FB292BD488055327CE": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -838150.0,
+    "y": -19220.0,
+    "z": 39260.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "8639D59447BC04FED463BDAF636A16A0": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": -94030.0,
+    "y": 414520.0,
+    "z": -730.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "86429A604769CB8333A0E0A5C3C25482": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -118800.0,
+    "y": 169000.0,
+    "z": 210.0,
+    "relic_type": "hunger_reduction"
+  },
+  "865B21D541401445212352819BC7A290": {
+    "class": "BP_LevelObject_Relic_Mutant_C",
+    "x": -257580.0,
+    "y": 185030.0,
+    "z": 11500.0,
+    "relic_type": "sphere_homing"
+  },
+  "86C32CA14B78E33B7885AE9FEC13D917": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -64421.47,
+    "y": 95773.88,
+    "z": -1268.06,
+    "relic_type": "capture_power"
+  },
+  "88F0B95F412950EE61CEEAB6411CB8D1": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -838520.0,
+    "y": -8810.0,
+    "z": 49350.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "88F75FA241F8874B0C5045A2E995F013": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": 78140.0,
+    "y": 222490.0,
+    "z": 20950.0,
+    "relic_type": "jump_power"
+  },
+  "8987C41241A34D905E1C739F155DA6B3": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -40640.0,
+    "y": -79040.0,
+    "z": 180.0,
+    "relic_type": "glider_speed"
+  },
+  "8A90507C4072E64608261F823D164154": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -227330.0,
+    "y": -122400.0,
+    "z": 2308.43,
+    "relic_type": "swim_speed"
+  },
+  "8AB69DBE4E703513F9424D8162B75864": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -450064.38,
+    "y": -107654.67,
+    "z": 3674.53,
+    "relic_type": "capture_power"
+  },
+  "8AFD78F64DE3EE0FA32CC29CF08A144F": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 613210.0,
+    "y": -682200.0,
+    "z": 23680.0,
+    "relic_type": "stamina_reduction"
+  },
+  "8BCDE3654504C5823162BE83EB674216": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -311674.97,
+    "y": 188520.72,
+    "z": 3268.61,
+    "relic_type": "capture_power"
+  },
+  "8D1596D04C7BE0B7FD432CA56ABBADF9": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -807550.0,
+    "y": 46200.0,
+    "z": 46610.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "8E26D917486BF1D961EB17B9E76FE985": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -36635.74,
+    "y": -154496.88,
+    "z": 2569.94,
+    "relic_type": "capture_power"
+  },
+  "8F458616455579EDECE13294B3BF9334": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 522170.0,
+    "y": -673611.75,
+    "z": 27467.8,
+    "relic_type": "stamina_reduction"
+  },
+  "8F51CB8F4F95387C33A04E8B2B782958": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -1194.59,
+    "y": 166765.62,
+    "z": 5712.19,
+    "relic_type": "capture_power"
+  },
+  "8F9AF6BF4D3F2760C495638F5C343452": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": 25150.0,
+    "y": 111360.0,
+    "z": 3700.0,
+    "relic_type": "jump_power"
+  },
+  "8FAD3FBD49B687BFF4E10798C03DC1A7": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": -16270.0,
+    "y": 248250.0,
+    "z": -250.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "8FB8E8C24E33845E1D9B559C540903A0": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -203150.0,
+    "y": 287220.0,
+    "z": 40.0,
+    "relic_type": "hunger_reduction"
+  },
+  "90A3E5C240CF6231BE2598B82B1D4A85": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -319590.0,
+    "y": 44590.0,
+    "z": 2940.0,
+    "relic_type": "hunger_reduction"
+  },
+  "90F20D7743A97B7C6506AC96E607B784": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": -59500.0,
+    "y": 349920.0,
+    "z": -1950.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "9187FE9C481291FC66C5A19FD0B2D88E": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -775140.0,
+    "y": -65190.0,
+    "z": 27030.0,
+    "relic_type": "capture_power"
+  },
+  "9198EC04474F00F88726329A4BADA694": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": 29500.0,
+    "y": -109230.0,
+    "z": -1590.0,
+    "relic_type": "glider_speed"
+  },
+  "92FD41DD46D97AD3752D289C7157C43C": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": 105640.0,
+    "y": 290470.0,
+    "z": 11810.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "94F35AC94A2094A39D129E870028072B": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 84690.0,
+    "y": 259530.0,
+    "z": -1387.9,
+    "relic_type": "capture_power"
+  },
+  "96A9DC2C462063F64AB985827FA2D999": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -321830.0,
+    "y": 5240.0,
+    "z": 2540.0,
+    "relic_type": "swim_speed"
+  },
+  "96CC3E4B4BD6E40490B6A9A3FE231E33": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -99850.0,
+    "y": 338010.0,
+    "z": -1950.0,
+    "relic_type": "hunger_reduction"
+  },
+  "97436FF6416F9419E06E8ABE9C200E45": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 512130.0,
+    "y": -525350.0,
+    "z": 34150.0,
+    "relic_type": "capture_power"
+  },
+  "9756C138453B468C3B26448D2167EF38": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -241360.0,
+    "y": -14430.0,
+    "z": -1750.0,
+    "relic_type": "hunger_reduction"
+  },
+  "9A2253484EF695D98D7487986C2164FB": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 84166.0,
+    "y": 71646.0,
+    "z": 52031.42,
+    "relic_type": "capture_power"
+  },
+  "9A97B77840CDB73CB06569A80199F078": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -355920.0,
+    "y": 90270.0,
+    "z": -2030.0,
+    "relic_type": "hunger_reduction"
+  },
+  "9C354F5C4182BA6D3EB689B7693A0A0D": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -134415.73,
+    "y": 298847.34,
+    "z": 7184.13,
+    "relic_type": "capture_power"
+  },
+  "9C37027E4C89F228939D64B56D49ED4D": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -261650.0,
+    "y": 186730.0,
+    "z": 780.0,
+    "relic_type": "hunger_reduction"
+  },
+  "9C445E4F44B038F7574D45AB0D36BF58": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": 131050.0,
+    "y": 63690.0,
+    "z": 29030.0,
+    "relic_type": "jump_power"
+  },
+  "9C7C81E449689EED3EABBA8F46C202EC": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -144980.0,
+    "y": 217390.0,
+    "z": 2720.0,
+    "relic_type": "hunger_reduction"
+  },
+  "9CDDF78F4DD4EBC66F4E1E9643E6495A": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 549530.0,
+    "y": -758090.0,
+    "z": 31599.31,
+    "relic_type": "stamina_reduction"
+  },
+  "9D9B6A92482673D82B5CE2B26260AC8E": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -502430.0,
+    "y": -384330.0,
+    "z": 60.0,
+    "relic_type": "climb_speed"
+  },
+  "9E6E13AD452C095A4C8F94851A58D937": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 32445.77,
+    "y": 114013.63,
+    "z": 6206.59,
+    "relic_type": "capture_power"
+  },
+  "9EA2C4664606625B152E5AB5361F1BE6": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -51440.0,
+    "y": -87750.0,
+    "z": 140.0,
+    "relic_type": "glider_speed"
+  },
+  "9F6730EA455E05EA64DEDD98ED7455D6": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": 180560.0,
+    "y": 385170.0,
+    "z": -2100.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "A001F0EB4ECCB02C21E7C8AE207671B5": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -55100.0,
+    "y": -11450.0,
+    "z": -1170.0,
+    "relic_type": "glider_speed"
+  },
+  "A0565AD5451E8EA26CCC04B6C43CE0B3": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -829440.0,
+    "y": 52170.0,
+    "z": 50200.0,
+    "relic_type": "capture_power"
+  },
+  "A0E2AB764338CE9B9A549D8E09467A7A": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -312657.4,
+    "y": 63055.14,
+    "z": 4052.01,
+    "relic_type": "capture_power"
+  },
+  "A106CA3A4132921D1421788A0E372503": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -272060.0,
+    "y": -209210.0,
+    "z": 2870.0,
+    "relic_type": "swim_speed"
+  },
+  "A1533F8C44FC716D3BF84680DBBD8189": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": -67410.0,
+    "y": 112370.0,
+    "z": 7820.0,
+    "relic_type": "jump_power"
+  },
+  "A1E20D7147BB192340FDC2B48BA964D6": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -748650.0,
+    "y": -395270.0,
+    "z": 36460.0,
+    "relic_type": "climb_speed"
+  },
+  "A360858E448AF927AF914D8E9D74E416": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -337495.0,
+    "y": 229740.0,
+    "z": -1856.3,
+    "relic_type": "capture_power"
+  },
+  "A3901924413BDAC32B37EDA4CDC24DF9": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -223491.4,
+    "y": -51539.64,
+    "z": 1245.16,
+    "relic_type": "capture_power"
+  },
+  "A39AEA08429D0D78062320A84EE37242": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -822996.2,
+    "y": -455299.3,
+    "z": 2472.04,
+    "relic_type": "capture_power"
+  },
+  "A4482C2E4A353DD3C8339D950781FCB5": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 547360.0,
+    "y": -655140.0,
+    "z": 35630.0,
+    "relic_type": "stamina_reduction"
+  },
+  "A48EDF9248901537AF02AEA417B6C7E2": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 103584.43,
+    "y": -39480.15,
+    "z": 27130.6,
+    "relic_type": "capture_power"
+  },
+  "A4A3C7B34A4486AB4E97F5BF853766B9": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": 12640.0,
+    "y": -11770.0,
+    "z": 6580.0,
+    "relic_type": "jump_power"
+  },
+  "A52ABF464C3063FE669825BD3E8C6867": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -22468.65,
+    "y": -131751.64,
+    "z": 5774.23,
+    "relic_type": "capture_power"
+  },
+  "A6623D2C4055A63AFFCE39B7C90207CC": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -832250.0,
+    "y": -80950.0,
+    "z": 44570.0,
+    "relic_type": "capture_power"
+  },
+  "A7B892CB4581D24E943A6983411DFC42": {
+    "class": "BP_LevelObject_Relic_Mutant_C",
+    "x": -145050.0,
+    "y": 89690.0,
+    "z": -210.0,
+    "relic_type": "sphere_homing"
+  },
+  "A91E67B04785D8A35B7D31B43E73887F": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -457470.0,
+    "y": -153860.0,
+    "z": -1830.0,
+    "relic_type": "swim_speed"
+  },
+  "A9589829471FDB190D97DC89537CE11F": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -363806.78,
+    "y": 273023.88,
+    "z": 15330.0,
+    "relic_type": "capture_power"
+  },
+  "A968F46848B45292962B4198B36CEF78": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -251718.06,
+    "y": 103839.81,
+    "z": -839.95,
+    "relic_type": "capture_power"
+  },
+  "AA0B92D9461DE587567AC69CD0D94DEA": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -511450.0,
+    "y": -385230.0,
+    "z": -710.0,
+    "relic_type": "climb_speed"
+  },
+  "AA55509E4E80064DCB6F7EB58E60763C": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -198800.0,
+    "y": 134470.0,
+    "z": -1810.0,
+    "relic_type": "hunger_reduction"
+  },
+  "AAB827314368ED4AF24A50B7A82CFEFD": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -244030.0,
+    "y": -65120.0,
+    "z": 1380.0,
+    "relic_type": "swim_speed"
+  },
+  "AC11511749840668F167998F57F9CF79": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 608820.0,
+    "y": -729750.0,
+    "z": 7500.0,
+    "relic_type": "stamina_reduction"
+  },
+  "ACAAADBE493C143A48C8809E3D93B8FD": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -310470.0,
+    "y": -51430.0,
+    "z": 17850.0,
+    "relic_type": "swim_speed"
+  },
+  "AD08F00A4BB0F78AC8B5F1AC32BDA248": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 596763.3,
+    "y": -729617.1,
+    "z": 21618.41,
+    "relic_type": "capture_power"
+  },
+  "AD5B95FD4DDD1F208ECF08B2AFCBAF0F": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -21300.0,
+    "y": 208570.0,
+    "z": -2008.12,
+    "relic_type": "capture_power"
+  },
+  "AD6F4C8E4D257C7ED4608AB2F6CA8BF1": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -835680.0,
+    "y": 56120.0,
+    "z": 47350.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "AE3184594C1EFB5B732C059E1C15A7EA": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": 128670.0,
+    "y": 270960.0,
+    "z": -1640.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "AE48D0D44E4F73CDF9E26A83E70A1120": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 79798.17,
+    "y": -28012.62,
+    "z": 19396.44,
+    "relic_type": "capture_power"
+  },
+  "AEC6234A4075A195914E5080A42E97D4": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -330213.25,
+    "y": -78304.17,
+    "z": 18992.21,
+    "relic_type": "capture_power"
+  },
+  "AEF1BB4C4BB9E48AA2A9FEA81710642D": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 7327.3,
+    "y": -148580.77,
+    "z": 2492.39,
+    "relic_type": "capture_power"
+  },
+  "AF1E84884297BF6B3A04DDA834081DED": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -771490.0,
+    "y": -28050.0,
+    "z": 31000.0,
+    "relic_type": "capture_power"
+  },
+  "AF9415FF405293DA3EB134AEE3ADEE0A": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -253480.95,
+    "y": 127130.92,
+    "z": 4604.55,
+    "relic_type": "capture_power"
+  },
+  "B077AFD44059109C629881BE83C2F39B": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -262533.38,
+    "y": 137185.0,
+    "z": -673.81,
+    "relic_type": "capture_power"
+  },
+  "B0BC175A43531898929F879E7A4CA27D": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -35090.0,
+    "y": 126840.0,
+    "z": 10050.0,
+    "relic_type": "capture_power"
+  },
+  "B134272240DB1ABD46F9F89819768A60": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": 5750.0,
+    "y": -124110.0,
+    "z": 1800.0,
+    "relic_type": "glider_speed"
+  },
+  "B2AC7F584D263BDDD1BFF5AA1433CC9D": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -840290.0,
+    "y": -48800.0,
+    "z": 46850.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "B3602FA34F2F3A09A8D2A1AF895253C5": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 571460.0,
+    "y": -551830.0,
+    "z": 22170.0,
+    "relic_type": "stamina_reduction"
+  },
+  "B4283FC847577F08AF9815BA9EDCF8D5": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -219204.39,
+    "y": 131607.97,
+    "z": 6546.47,
+    "relic_type": "capture_power"
+  },
+  "B4DD779543C216E122613684C512F1EE": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -806370.0,
+    "y": -70850.0,
+    "z": 39320.0,
+    "relic_type": "capture_power"
+  },
+  "B5B0B91E466D4D58B74F6FA676754DA5": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 572700.0,
+    "y": -578520.0,
+    "z": 20430.0,
+    "relic_type": "stamina_reduction"
+  },
+  "B689B22B4B6C3D78E267959157625A11": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": 18930.0,
+    "y": 237830.0,
+    "z": -150.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "B6E9DEC74A8491EA288C64A7925D755D": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -403680.0,
+    "y": -106880.0,
+    "z": 33070.0,
+    "relic_type": "swim_speed"
+  },
+  "B73A17B94D501B7627F7DFBDC438830C": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -841200.0,
+    "y": -34110.0,
+    "z": 41020.0,
+    "relic_type": "capture_power"
+  },
+  "B756349E4BD388F457A72A89A9F754B1": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": 125450.0,
+    "y": 43700.0,
+    "z": 32520.0,
+    "relic_type": "jump_power"
+  },
+  "B8372AD54629CEEA1F395FBD7147F289": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -777090.0,
+    "y": 57250.0,
+    "z": 41710.0,
+    "relic_type": "capture_power"
+  },
+  "B879AD684DC976C70009A9BF3FB62CE8": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -572100.0,
+    "y": -399660.0,
+    "z": -2050.0,
+    "relic_type": "climb_speed"
+  },
+  "B89906D04B24E78D995F22AC92521647": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -794820.0,
+    "y": -107900.0,
+    "z": 49020.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "B8C66EBC4C132EA10AE6B3A215458B80": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -288426.22,
+    "y": 141552.4,
+    "z": -1218.98,
+    "relic_type": "capture_power"
+  },
+  "B95E8C944B40AFED6461DF8103BD0C68": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": -44770.0,
+    "y": 438420.0,
+    "z": 12900.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "B9E61EAF4C5B95443268AFBB0442CF88": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -590410.0,
+    "y": -486200.0,
+    "z": 7610.0,
+    "relic_type": "climb_speed"
+  },
+  "BB1320054376E3E5A2F5318E7DF6C9D5": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 93630.24,
+    "y": 7813.88,
+    "z": 24636.51,
+    "relic_type": "capture_power"
+  },
+  "BBFBAC454088B8EFE93DFDBDCD9F54B9": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": 22000.0,
+    "y": 103460.0,
+    "z": 2780.0,
+    "relic_type": "jump_power"
+  },
+  "BC2F61674EB0B738F09BCB9E215A05DA": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 442000.0,
+    "y": -692300.0,
+    "z": 19300.0,
+    "relic_type": "capture_power"
+  },
+  "BC657573438DF164C8F61C883E233D5F": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -741021.75,
+    "y": -102582.99,
+    "z": 54830.26,
+    "relic_type": "status_ailment_resist"
+  },
+  "BC6DC8B249B060D90AB132931E64781D": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -247440.0,
+    "y": 260930.0,
+    "z": 1000.0,
+    "relic_type": "hunger_reduction"
+  },
+  "BC93D4C94691FCC415BA7FB88AB7EF7E": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -833940.0,
+    "y": 22380.0,
+    "z": 43660.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "C171A0FB4B7A7DBB248B36B0FBA693B5": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -174405.39,
+    "y": 171382.86,
+    "z": 3415.49,
+    "relic_type": "capture_power"
+  },
+  "C1AFE622464C5BF0D698D38F9D69FE3F": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -346038.66,
+    "y": 280366.38,
+    "z": -1104.35,
+    "relic_type": "capture_power"
+  },
+  "C20023FA4C2E06F9807ACB8525065855": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -230880.0,
+    "y": 9040.0,
+    "z": 7210.0,
+    "relic_type": "hunger_reduction"
+  },
+  "C28B5DEE4EE2942F6E93D6AE8D14FDDF": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -795815.56,
+    "y": -490104.88,
+    "z": -2087.76,
+    "relic_type": "capture_power"
+  },
+  "C3583F4E4C391CB080DD8CB14CF56B1F": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 610150.0,
+    "y": -626490.0,
+    "z": 23840.0,
+    "relic_type": "capture_power"
+  },
+  "C3D58E3046102506205D5EA0447A49F2": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -619190.0,
+    "y": -353480.0,
+    "z": 7160.0,
+    "relic_type": "climb_speed"
+  },
+  "C424CC2C4553EF32C75220BFF07A17E0": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": 177760.0,
+    "y": 280970.0,
+    "z": 1260.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "C43FD5DA46EB488FA540A3B1A671377A": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 544880.0,
+    "y": -594820.0,
+    "z": 14520.0,
+    "relic_type": "stamina_reduction"
+  },
+  "C4DC4BD5420FAECDF570C69A7BB76315": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -18670.0,
+    "y": -50530.0,
+    "z": -1960.0,
+    "relic_type": "glider_speed"
+  },
+  "C57C4CB2433B59C108A8DFA0B2677435": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -349638.6,
+    "y": -7258.2,
+    "z": 3458.43,
+    "relic_type": "capture_power"
+  },
+  "C8C21B0146CF197B384A0DA265E8D688": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -117922.18,
+    "y": 234327.5,
+    "z": 14357.3,
+    "relic_type": "capture_power"
+  },
+  "C91C7E2641E860FC2F2FDF81149DF63F": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -369870.0,
+    "y": -49330.0,
+    "z": 15650.0,
+    "relic_type": "swim_speed"
+  },
+  "C984C2AF4B08141209F292A94070C2F0": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -368181.75,
+    "y": -129752.98,
+    "z": 56241.13,
+    "relic_type": "capture_power"
+  },
+  "C988032F41A70D7254DBFE8C1A54B79F": {
+    "class": "BP_LevelObject_Relic_GuardianDog_C",
+    "x": -761030.0,
+    "y": -357740.0,
+    "z": 13310.0,
+    "relic_type": "rainbow_passive_rate"
+  },
+  "CAB5ABEC4E8762AB68CE3C936C353E03": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -2533.35,
+    "y": -128554.23,
+    "z": 3889.92,
+    "relic_type": "capture_power"
+  },
+  "CAF156F54CCFF99B95680EB4EAC87131": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -872080.0,
+    "y": -374080.0,
+    "z": -1570.0,
+    "relic_type": "climb_speed"
+  },
+  "CC66A8AA4246ECCCD0CF148FE329E94E": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -798490.0,
+    "y": 27550.0,
+    "z": 53230.0,
+    "relic_type": "capture_power"
+  },
+  "CD0005DC4B97063B002F13A1C70C3070": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -927026.2,
+    "y": -403247.66,
+    "z": -2096.46,
+    "relic_type": "capture_power"
+  },
+  "CD4C02AB44171188A552CDB5AE6209F3": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 498510.0,
+    "y": -602090.0,
+    "z": 31950.0,
+    "relic_type": "stamina_reduction"
+  },
+  "CE18F94A4EB82EE49C8CC89776D5D42A": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -125688.01,
+    "y": 265536.03,
+    "z": 4191.68,
+    "relic_type": "capture_power"
+  },
+  "CE5FD82F48F7858D69588B98E702DC77": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -600050.0,
+    "y": -490560.0,
+    "z": -1690.0,
+    "relic_type": "climb_speed"
+  },
+  "CEF5FDA743217E26AF996DB991F95A4A": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -826120.0,
+    "y": -96960.0,
+    "z": 49730.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "CF9A0804478698E22C89C38DA792EECA": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -776370.0,
+    "y": 41610.0,
+    "z": 43460.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "D036C10448DCA4F9C51920AB0477C0D5": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -414270.0,
+    "y": -211450.0,
+    "z": -410.0,
+    "relic_type": "swim_speed"
+  },
+  "D170338E40E76E9424252E80A650FE0E": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 557770.0,
+    "y": -730290.0,
+    "z": 24047.13,
+    "relic_type": "stamina_reduction"
+  },
+  "D1C4E3694D9FBDC8EC006D8D34F761D3": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -39432.48,
+    "y": -146954.39,
+    "z": 845.31,
+    "relic_type": "capture_power"
+  },
+  "D2506521436592CEDFEBB59E32086F86": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -464655.66,
+    "y": -55120.86,
+    "z": -1958.54,
+    "relic_type": "capture_power"
+  },
+  "D274983D40AA45F0D7BF7A85E4933BBF": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -55500.0,
+    "y": -47200.0,
+    "z": -1780.0,
+    "relic_type": "glider_speed"
+  },
+  "D2F62D2044B6ED23F0716AB7D7B1229A": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -29760.0,
+    "y": -109580.0,
+    "z": 2970.0,
+    "relic_type": "glider_speed"
+  },
+  "D31A23B841921E07753E73BD11AC9A37": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -699730.0,
+    "y": -324580.0,
+    "z": 16970.0,
+    "relic_type": "climb_speed"
+  },
+  "D3C4474B43682BCF2257AA842E431A7A": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": 216740.0,
+    "y": 302670.0,
+    "z": -2110.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "D43F22AE48EBCB504EE00E8476788DC0": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -566500.0,
+    "y": -151680.0,
+    "z": 5390.0,
+    "relic_type": "climb_speed"
+  },
+  "D48FB2064A3F7B182645868B33FE103D": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -764070.0,
+    "y": -116230.0,
+    "z": 53790.0,
+    "relic_type": "capture_power"
+  },
+  "D4CFD08B4BF70C8F9A0C968B63BB0EEB": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -65670.0,
+    "y": 4620.0,
+    "z": -1690.0,
+    "relic_type": "glider_speed"
+  },
+  "D5668B56464412953B46188B055120F4": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -751900.0,
+    "y": -64560.0,
+    "z": 28910.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "D583232C4570323172BE9ABD43658A4F": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -749300.0,
+    "y": -1770.0,
+    "z": 42250.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "D5A1894143AA84A238320BA4A36C4887": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -39670.0,
+    "y": -47310.0,
+    "z": -1130.0,
+    "relic_type": "glider_speed"
+  },
+  "D5A743E343C9D04A80DCE68F2B6F6243": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 201322.67,
+    "y": 300351.3,
+    "z": -1234.98,
+    "relic_type": "capture_power"
+  },
+  "D6B00DCE4BE2EE5716E3338E8972B1A8": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -903490.0,
+    "y": -413810.0,
+    "z": -340.0,
+    "relic_type": "climb_speed"
+  },
+  "D761573D47EF8715185A4EAA7C5516E7": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -63420.0,
+    "y": -6190.0,
+    "z": -1770.0,
+    "relic_type": "glider_speed"
+  },
+  "D8E69F7C4D62570A8E02A6A1874A29E3": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -704669.2,
+    "y": -386894.9,
+    "z": 34831.25,
+    "relic_type": "capture_power"
+  },
+  "D8F3653E47C06372CDAF7395DD2BB9ED": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -31603.01,
+    "y": -174971.92,
+    "z": -1727.41,
+    "relic_type": "capture_power"
+  },
+  "DA1938814973E31858C870A27AE08BD0": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -316086.1,
+    "y": 169211.53,
+    "z": -1919.75,
+    "relic_type": "capture_power"
+  },
+  "DA4F5D90418D6EF0636B7095D69E0224": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": -94880.0,
+    "y": 365480.0,
+    "z": -350.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "DB520EC04A7872206EEB8CBEFA2EC36D": {
+    "class": "BP_LevelObject_Relic_Mutant_C",
+    "x": -89530.0,
+    "y": 270350.0,
+    "z": 18810.0,
+    "relic_type": "sphere_homing"
+  },
+  "DB7F2A254F9B5B8A8D60169798EB142C": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": 26890.0,
+    "y": 400750.0,
+    "z": 12090.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "DD1050D940059084A7F9BEA41C2975AC": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 407710.0,
+    "y": -742460.0,
+    "z": 19040.0,
+    "relic_type": "capture_power"
+  },
+  "DD2CEEE44CFCB77C8D296A9F9E0EEBAF": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -777430.0,
+    "y": -3440.0,
+    "z": 39260.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "DD7E16D246DA13F780A9C8946232702B": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 149874.27,
+    "y": 79632.49,
+    "z": 43860.91,
+    "relic_type": "capture_power"
+  },
+  "DE0C2D9F4EA4EA8FBBEE0C9E3C07239C": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -89166.8,
+    "y": 375571.2,
+    "z": 2909.01,
+    "relic_type": "capture_power"
+  },
+  "DE7FB06344959655F1DB8B92D721E3BA": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 628840.0,
+    "y": -735760.0,
+    "z": 22739.1,
+    "relic_type": "stamina_reduction"
+  },
+  "DE9700F4486E864099AC32843CF30545": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": 32920.0,
+    "y": -86950.0,
+    "z": -1820.0,
+    "relic_type": "glider_speed"
+  },
+  "E1BA35114E5CA60F7B653B8424CF041C": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -763477.8,
+    "y": 35179.83,
+    "z": 42028.72,
+    "relic_type": "capture_power"
+  },
+  "E2993A454694F6F1116D599D74829D9D": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -84330.0,
+    "y": -160450.0,
+    "z": -1470.0,
+    "relic_type": "glider_speed"
+  },
+  "E34EF97C4B21C0A9F35397B55D11F147": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -619910.0,
+    "y": -135650.0,
+    "z": 950.0,
+    "relic_type": "climb_speed"
+  },
+  "E4286D164A8925DFC09D0FBFDA2B3698": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -313237.38,
+    "y": 215705.83,
+    "z": 1841.32,
+    "relic_type": "capture_power"
+  },
+  "E430975543459ED5CF7F4D9CD848A5C1": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -211180.0,
+    "y": -80990.0,
+    "z": -2090.0,
+    "relic_type": "swim_speed"
+  },
+  "E4BFE4784D0F646845604BB190DEFDFE": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 98100.0,
+    "y": 77360.0,
+    "z": 49537.39,
+    "relic_type": "capture_power"
+  },
+  "E4CCA3164C726E1322ACF4A59F349723": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -116367.92,
+    "y": 236065.12,
+    "z": 16003.05,
+    "relic_type": "capture_power"
+  },
+  "E4DC895A4809CAD321E4F1B0A762D780": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -285110.0,
+    "y": 152310.0,
+    "z": 1840.0,
+    "relic_type": "hunger_reduction"
+  },
+  "E53C4DDC47F735F570CAE5A1FC9D24A0": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -268230.0,
+    "y": 116820.0,
+    "z": 570.0,
+    "relic_type": "hunger_reduction"
+  },
+  "E5C36AA548AAA06EB5DD0E93B8B26C96": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": -9580.0,
+    "y": 66220.0,
+    "z": 17040.0,
+    "relic_type": "jump_power"
+  },
+  "E6FA06E2406EA5A19DDC13B6CDC75583": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -43289.69,
+    "y": 222904.34,
+    "z": 2910.0,
+    "relic_type": "capture_power"
+  },
+  "E7187E95416339D08476229E4FCB4C82": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -305320.0,
+    "y": 37250.0,
+    "z": 2220.0,
+    "relic_type": "hunger_reduction"
+  },
+  "E80B33514769E9858FCABDA9EE97DC18": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -216770.0,
+    "y": 237000.0,
+    "z": -880.0,
+    "relic_type": "hunger_reduction"
+  },
+  "E8CBD63B487144868C3CC29E4C003620": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": -102650.0,
+    "y": 147770.0,
+    "z": -301.03,
+    "relic_type": "jump_power"
+  },
+  "E937F3FD4EAAA1F3410D80B5642000E4": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 404510.0,
+    "y": -727990.0,
+    "z": 23150.0,
+    "relic_type": "stamina_reduction"
+  },
+  "EC03C1284556F4B3FEA106AAE359042E": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 602090.0,
+    "y": -567400.0,
+    "z": 30530.0,
+    "relic_type": "stamina_reduction"
+  },
+  "EC20140543804F88E0943F9A5C1765EB": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -361760.56,
+    "y": 181721.6,
+    "z": 2366.44,
+    "relic_type": "capture_power"
+  },
+  "EC25A49D404EFF603DF52B933E59EC46": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -891380.0,
+    "y": -467810.0,
+    "z": 14030.0,
+    "relic_type": "climb_speed"
+  },
+  "EC86B1A74A62A2EC3D22BAA46500FD88": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 28540.93,
+    "y": 78688.37,
+    "z": 25258.16,
+    "relic_type": "capture_power"
+  },
+  "ECE41F48405D99D3ACD6BEAFCEDFDBEA": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -769310.0,
+    "y": -450000.0,
+    "z": -80.0,
+    "relic_type": "climb_speed"
+  },
+  "ED393E6945F92DCBBBF80C8856F7A2CF": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -639045.0,
+    "y": -221154.42,
+    "z": 24480.62,
+    "relic_type": "capture_power"
+  },
+  "ED828F1B4784F83546088C959C05A069": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 493160.0,
+    "y": -596380.0,
+    "z": 18290.0,
+    "relic_type": "stamina_reduction"
+  },
+  "ED9336044B9061AFFD5784AB307D995F": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 500040.0,
+    "y": -595150.0,
+    "z": 26170.0,
+    "relic_type": "stamina_reduction"
+  },
+  "EE5650754259BE7072E7789BF533C53D": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -229410.61,
+    "y": 74031.38,
+    "z": -1345.88,
+    "relic_type": "capture_power"
+  },
+  "EF0F4E8442F209EF9627CB8ADF551270": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 539960.0,
+    "y": -713800.0,
+    "z": 27835.95,
+    "relic_type": "stamina_reduction"
+  },
+  "EFCF4A3E4E552497FA666BBB82E82100": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -131854.39,
+    "y": -123072.77,
+    "z": -1703.93,
+    "relic_type": "capture_power"
+  },
+  "F0E02EC346D296B6ECC978B039EBFF0D": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": -61820.0,
+    "y": 445360.0,
+    "z": 11690.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "F11F522A4EE469085AF5A2ACFCFA229C": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 583720.0,
+    "y": -599440.0,
+    "z": 23000.0,
+    "relic_type": "capture_power"
+  },
+  "F1A8B51C439AC856E60D16B7D5616339": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -75960.0,
+    "y": -132870.0,
+    "z": -1940.0,
+    "relic_type": "glider_speed"
+  },
+  "F1F8A8B74C1C0B9A53C96FBFBFB8690D": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 203189.7,
+    "y": 368586.12,
+    "z": -757.69,
+    "relic_type": "capture_power"
+  },
+  "F24EED1E4FA885DD80FDD382316CB0F9": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": -78240.0,
+    "y": 163260.0,
+    "z": 7460.0,
+    "relic_type": "jump_power"
+  },
+  "F253C6A541748C266D9FB5AADD2B65F5": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": -72050.0,
+    "y": 126140.0,
+    "z": 7820.0,
+    "relic_type": "jump_power"
+  },
+  "F264EEF64876384BB7E9E1956600A40E": {
+    "class": "BP_LevelObject_Relic_GuardianDog_C",
+    "x": 501830.0,
+    "y": -718800.0,
+    "z": 30460.0,
+    "relic_type": "rainbow_passive_rate"
+  },
+  "F33784CE48D17D4D659AEDA0F068BFC5": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": -76050.0,
+    "y": 101920.0,
+    "z": 840.0,
+    "relic_type": "jump_power"
+  },
+  "F3B4F2724A77FC980D06CBBBF24C86B9": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 96670.0,
+    "y": 294990.0,
+    "z": 12270.08,
+    "relic_type": "capture_power"
+  },
+  "F50DDCC848745DFDF67BEEA9B3547AEA": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -544490.0,
+    "y": -286940.0,
+    "z": -30.0,
+    "relic_type": "climb_speed"
+  },
+  "F548605E47658298D821EFB342E672EC": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -38180.0,
+    "y": -27950.0,
+    "z": -1580.0,
+    "relic_type": "glider_speed"
+  },
+  "F5A3D1924C8298C032D3DA8DEEAD48C7": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": -54330.0,
+    "y": 413080.0,
+    "z": 16750.0,
+    "relic_type": "food_decay_reduction"
+  },
+  "F5B8F2904363D32224AB06B7CEAAA859": {
+    "class": "BP_LevelObject_Relic_NegativeKoala_C",
+    "x": -776180.0,
+    "y": -55950.0,
+    "z": 29470.0,
+    "relic_type": "status_ailment_resist"
+  },
+  "F5F7532A41E4FA4A5AEA8DA23FD8C927": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -397320.12,
+    "y": 235532.6,
+    "z": -2088.56,
+    "relic_type": "capture_power"
+  },
+  "F664E5D3430197466B429DB8087A40BA": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -46171.17,
+    "y": -145089.39,
+    "z": 1037.38,
+    "relic_type": "capture_power"
+  },
+  "F715C8ED4EA61C8886C78097878B9233": {
+    "class": "BP_LevelObject_Relic_Monkey_C",
+    "x": -740560.0,
+    "y": -246540.0,
+    "z": 4520.0,
+    "relic_type": "climb_speed"
+  },
+  "F746AFCF46DAEF6A8110AD809BBB0EA2": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -16760.0,
+    "y": -114480.0,
+    "z": 5080.0,
+    "relic_type": "glider_speed"
+  },
+  "F85B89174DA21B1C3466E7955E81BD71": {
+    "class": "BP_LevelObject_Relic_PinkCat_C",
+    "x": 596020.0,
+    "y": -684650.0,
+    "z": 23700.0,
+    "relic_type": "stamina_reduction"
+  },
+  "F8C928554A80DEBF93C25FAC6E5AD604": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -284318.72,
+    "y": 235440.81,
+    "z": -1865.11,
+    "relic_type": "capture_power"
+  },
+  "F9441EDD491AB9286C65A695BE0281CC": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": -118280.0,
+    "y": 127920.0,
+    "z": -830.0,
+    "relic_type": "jump_power"
+  },
+  "F9E1E7CF47FBC7AB72B7FD939DB12DED": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -242960.0,
+    "y": -192720.0,
+    "z": 2960.0,
+    "relic_type": "swim_speed"
+  },
+  "FA3A6F7C41BA29D39EFB6489915E177C": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -106400.0,
+    "y": 291550.0,
+    "z": 3290.0,
+    "relic_type": "hunger_reduction"
+  },
+  "FC2BAE134481292D6662AB8A048366A6": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": 504520.0,
+    "y": -560010.0,
+    "z": 33150.0,
+    "relic_type": "capture_power"
+  },
+  "FC884FFA41F8BDEFD0D705ADA621F09E": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -655858.56,
+    "y": -463511.1,
+    "z": 226.6,
+    "relic_type": "capture_power"
+  },
+  "FC945A764F185C344D80E8B1651010B5": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -36650.0,
+    "y": -69910.0,
+    "z": 960.0,
+    "relic_type": "glider_speed"
+  },
+  "FCC945244F2DAEC68C0F8791647808B5": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -367430.0,
+    "y": 19600.0,
+    "z": -1960.0,
+    "relic_type": "swim_speed"
+  },
+  "FD26F8E24062DD098B3C9C8DDD1FA6BF": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -61750.0,
+    "y": 268730.0,
+    "z": 5640.0,
+    "relic_type": "hunger_reduction"
+  },
+  "FDE408BB4BCC31CA6742738292074069": {
+    "class": "BP_LevelObject_Relic_FlameBambi_C",
+    "x": -93370.0,
+    "y": 116180.0,
+    "z": 360.0,
+    "relic_type": "jump_power"
+  },
+  "FE5BCA2A491D8C6F7131DDA6FECEA4C0": {
+    "class": "BP_LevelObject_Relic_LeafMomonga_C",
+    "x": -41470.0,
+    "y": -157590.0,
+    "z": -450.0,
+    "relic_type": "glider_speed"
+  },
+  "FEBE2E8E448C73CDD27E65B9EEAFBEFB": {
+    "class": "BP_LevelObject_Relic_Penguin_C",
+    "x": -435830.0,
+    "y": -62690.0,
+    "z": 6010.0,
+    "relic_type": "swim_speed"
+  },
+  "FF20D9AF402A1212B07BD9855C3ABE1A": {
+    "class": "BP_LevelObject_Relic_C",
+    "x": -762176.4,
+    "y": -339917.84,
+    "z": 36308.08,
+    "relic_type": "capture_power"
+  },
+  "FFBA90EB4408E8B124A8F18AB7E4C25B": {
+    "class": "BP_LevelObject_Relic_SheepBall_C",
+    "x": -243870.0,
+    "y": 131430.0,
+    "z": 1250.0,
+    "relic_type": "hunger_reduction"
+  },
+  "FFC9C90642A597D1745C53B919632C89": {
+    "class": "BP_LevelObject_Relic_IceCrocodile_C",
+    "x": 87490.0,
+    "y": 354630.0,
+    "z": 4830.0,
+    "relic_type": "food_decay_reduction"
+  }
+}
