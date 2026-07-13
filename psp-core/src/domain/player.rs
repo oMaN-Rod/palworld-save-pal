@@ -16,14 +16,27 @@ use uesave::{Properties, Property, PropertyKey, StructValue, ValueVec};
 use super::{containers, pal, world};
 
 /// The save stores stat names as Japanese strings; this maps them to the
-/// English keys the DTO exposes.
-pub const STATUS_NAME_MAP: [(&str, &str); 6] = [
+/// English keys the DTO exposes. The last 12 arrived with Palworld 1.0 and are
+/// granted by relics; an older save simply has no row for them.
+pub const STATUS_NAME_MAP: [(&str, &str); 18] = [
     ("最大HP", "max_hp"),
     ("最大SP", "max_sp"),
     ("攻撃力", "attack"),
     ("所持重量", "weight"),
     ("捕獲率", "capture_rate"),
     ("作業速度", "work_speed"),
+    ("空腹率低減", "hunger_reduction"),
+    ("泳ぎ速度", "swim_speed"),
+    ("食料腐敗低減", "food_decay_reduction"),
+    ("ジャンプ力", "jump_power"),
+    ("滑空速度", "glider_speed"),
+    ("崖登り速度", "climb_speed"),
+    ("状態異常耐性", "status_ailment_resist"),
+    ("経験値ボーナス", "exp_bonus"),
+    ("虹パッシブ率", "rainbow_passive_rate"),
+    ("移動速度アップ", "move_speed"),
+    ("パルスフィアホーミング", "sphere_homing"),
+    ("スタミナ消費軽減", "stamina_reduction"),
 ];
 /// `STATUS_NAME_MAP` minus `capture_rate`, which the extended stat list has no
 /// entry for.
