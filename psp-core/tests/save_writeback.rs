@@ -12,6 +12,11 @@ use uuid::Uuid;
 
 const WORLD1_PLAYER_O: &str = "8c2f1930-0000-0000-0000-000000000000";
 const WORLD1_GUILD_WITH_BASE: &str = "54491484-4e6c-7327-70b2-868f350929f6";
+/// `v1_relics` "zBlasters": possess map holds CapturePower alone.
+const V1_PLAYER_CAPTURE_POWER_ONLY: &str = "62b176f8-0000-0000-0000-000000000000";
+/// `v1_relics` "espat": 12 relic types, most at 0 unspent, ranks bought in nearly all --
+/// the real save proving a 0-valued key is a normal state.
+const V1_PLAYER_MANY_RELIC_RANKS: &str = "e1530496-0000-0000-0000-000000000000";
 
 fn game_data() -> GameData {
     let json_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../data/json");
@@ -1116,5 +1121,124 @@ fn v1_save_gains_no_bare_named_quest_property() {
     assert!(
         !names.contains("OrderedQuestArray"),
         "must not invent a bare OrderedQuestArray on a 1.0 save"
+    );
+}
+
+/// A rank granted for a relic type with no `RelicPossessNumMap` key is invisible in game.
+/// In every real 1.0 save, `rank > 0` implies a key. The value is unspent relics and may
+/// legitimately be 0, so the key is created at 0 rather than handing out free relics.
+#[test]
+fn granting_a_relic_rank_creates_its_possess_map_key() {
+    let mut session = common::load_fixture_session("v1_relics");
+    let data = game_data();
+    // A 1.0 player whose map carries CapturePower alone.
+    let player_id: Uuid = V1_PLAYER_CAPTURE_POWER_ONLY.parse().unwrap();
+    // Only a lazily loaded player has a `.sav` to inspect or write.
+    player::get_player_details(&mut session, &data, player_id, &null_progress())
+        .unwrap()
+        .unwrap();
+
+    let before = common::relic_possess_num_map(&common::player_sav_json(&session, player_id));
+    assert_eq!(
+        before.keys().collect::<Vec<_>>(),
+        vec![common::CAPTURE_POWER_RELIC],
+        "fixture sanity: this player's possess map must hold CapturePower alone"
+    );
+    let capture_power_before = before[common::CAPTURE_POWER_RELIC];
+
+    let mut dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    dto.status_point_list.insert("swim_speed".to_string(), 5);
+    dto.status_point_list.insert("climb_speed".to_string(), 0);
+
+    let mut m = OrderedMap::new();
+    m.insert(player_id, dto);
+    player::update_players(&mut session, &data, &m, &null_progress()).unwrap();
+
+    let after = common::relic_possess_num_map(&common::player_sav_json(&session, player_id));
+
+    assert_eq!(
+        after.get("EPalRelicType::SwimSpeed").copied(),
+        Some(0),
+        "granting a swim_speed rank must create RelicPossessNumMap[SwimSpeed] at 0 -- \
+         without the key the game never lists the stat"
+    );
+    assert!(
+        !after.contains_key("EPalRelicType::ClimbSpeed"),
+        "a rank-0 stat must not create a key"
+    );
+    assert_eq!(
+        after.get(common::CAPTURE_POWER_RELIC).copied(),
+        Some(capture_power_before),
+        "an existing count is the player's real unspent relics -- never rewrite it"
+    );
+
+    let dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    assert_eq!(dto.status_point_list.get("swim_speed").copied(), Some(5));
+}
+
+/// An unchanged resave of a real 1.0 save must add no keys: every rank it carries
+/// already has one.
+#[test]
+fn resaving_a_relic_player_unchanged_adds_no_possess_map_keys() {
+    let mut session = common::load_fixture_session("v1_relics");
+    let data = game_data();
+    let player_id: Uuid = V1_PLAYER_MANY_RELIC_RANKS.parse().unwrap();
+    // Only a lazily loaded player has a `.sav` to inspect or write.
+    player::get_player_details(&mut session, &data, player_id, &null_progress())
+        .unwrap()
+        .unwrap();
+
+    let before = common::relic_possess_num_map(&common::player_sav_json(&session, player_id));
+    assert!(
+        before.len() > 1,
+        "fixture sanity: this player must carry several relic types"
+    );
+
+    let dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    let mut m = OrderedMap::new();
+    m.insert(player_id, dto);
+    player::update_players(&mut session, &data, &m, &null_progress()).unwrap();
+
+    let after = common::relic_possess_num_map(&common::player_sav_json(&session, player_id));
+    assert_eq!(
+        after, before,
+        "an unchanged resave must leave RelicPossessNumMap byte-identical"
+    );
+}
+
+/// A pre-1.0 save has no `RelicPossessNumMap`; granting a relic rank must not invent one.
+#[test]
+fn granting_a_relic_rank_on_a_pre_1_0_save_invents_no_possess_map() {
+    let mut session = common::load_fixture_session("world1");
+    let data = game_data();
+    let player_id: Uuid = WORLD1_PLAYER_O.parse().unwrap();
+    // Only a lazily loaded player has a `.sav` to inspect or write.
+    player::get_player_details(&mut session, &data, player_id, &null_progress())
+        .unwrap()
+        .unwrap();
+
+    assert!(
+        common::relic_possess_num_map(&common::player_sav_json(&session, player_id)).is_empty(),
+        "fixture sanity: a pre-1.0 save carries no RelicPossessNumMap"
+    );
+
+    let mut dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    dto.status_point_list.insert("swim_speed".to_string(), 5);
+
+    let mut m = OrderedMap::new();
+    m.insert(player_id, dto);
+    player::update_players(&mut session, &data, &m, &null_progress()).unwrap();
+
+    assert!(
+        common::relic_possess_num_map(&common::player_sav_json(&session, player_id)).is_empty(),
+        "a pre-1.0 save must not gain a RelicPossessNumMap"
     );
 }

@@ -13,7 +13,7 @@ use crate::session::{parse_palworld_save, LoadedPlayer, SaveSession, WorldCaches
 use chrono::Timelike;
 use uesave::{Properties, Property, PropertyKey, StructValue, ValueVec};
 
-use super::{containers, pal, world};
+use super::{containers, pal, relic, world};
 
 /// The save stores stat names as Japanese strings; this maps them to the
 /// English keys the DTO exposes. The last 12 arrived with Palworld 1.0 and are
@@ -753,6 +753,8 @@ fn apply_player_dto(
             let delta = apply_unlock_flags(&mut loaded.sav, "RelicObtainForInstanceFlag", effigies);
             apply_effigy_relic_counters(&mut loaded.sav, effigies, delta);
         }
+        // Must follow the effigy counters, which own the CapturePower entry.
+        ensure_relic_possess_map_keys(&mut loaded.sav, &dto.status_point_list);
     }
     // Resolve every container id from the player's own save data first, then
     // apply. Common MUST be applied before essential: essential's
@@ -1182,6 +1184,74 @@ fn apply_effigy_relic_counters(
             })
             .unwrap_or(0);
         record_data.insert("RelicBonusExpTableIndex", props::int_property(total));
+    }
+}
+
+/// The `EPalRelicType::*` backing `stat_key`, or `None` for a stat no relic backs.
+/// Resolved through the Japanese `StatusName` rather than by name: `capture_power`'s
+/// stat is `capture_rate`.
+fn relic_type_for_stat(stat_key: &str) -> Option<&'static str> {
+    let (relic_key, _) = relic::RELIC_TYPE_TO_STATUS_NAME
+        .iter()
+        .find(|(_, japanese_name)| {
+            STATUS_NAME_MAP
+                .iter()
+                .any(|(japanese, english)| japanese == japanese_name && *english == stat_key)
+        })?;
+    relic::RELIC_TYPE_MAP
+        .iter()
+        .find(|(_, key)| key == relic_key)
+        .map(|(enum_name, _)| *enum_name)
+}
+
+/// Creates a `RelicPossessNumMap` key, at `0`, for every relic-backed stat granted a rank.
+/// The Statue of Power lists a relic stat only when this map has its key: the rank in
+/// `GotStatusPointList` is otherwise stored and never shown. Confirmed in game.
+///
+/// The value is *unspent relics held*, not the rank, so `0` grants visibility without
+/// granting relics -- the normal state of a player who spent what they collected.
+/// Existing counts are left alone; `apply_effigy_relic_counters` owns CapturePower.
+///
+/// Rank `0` creates nothing: the UI sends every relic key on every save.
+/// Conditional on the map existing, so a pre-1.0 save never gains one.
+fn ensure_relic_possess_map_keys(player_sav: &mut uesave::Save, points: &OrderedMap<String, i64>) {
+    let Ok(save_data) = save_data_props_mut(player_sav) else {
+        return;
+    };
+    let Some(record_data) = save_data
+        .0
+        .get_mut(&PropertyKey::from("RecordData"))
+        .and_then(props::struct_props_mut)
+    else {
+        return;
+    };
+    let Some(entries) = record_data
+        .0
+        .get_mut(&PropertyKey::from("RelicPossessNumMap"))
+        .and_then(props::map_entries_mut)
+    else {
+        return;
+    };
+
+    for (stat_key, rank) in points.iter() {
+        if *rank <= 0 {
+            continue;
+        }
+        let Some(relic_type) = relic_type_for_stat(stat_key) else {
+            continue;
+        };
+        if entries
+            .iter()
+            .any(|entry| relic_type_name(&entry.key) == Some(relic_type))
+        {
+            continue;
+        }
+        // The map's declared key type is EnumProperty; a NameProperty would not read
+        // back as a relic type.
+        entries.push(uesave::MapEntry {
+            key: props::enum_property(relic_type),
+            value: props::int_property(0),
+        });
     }
 }
 
