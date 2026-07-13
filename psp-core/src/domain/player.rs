@@ -812,11 +812,19 @@ fn apply_player_dto(
             // Fast travel has no relic counter of any kind; the delta is deliberately dropped.
             apply_unlock_flags(&mut loaded.sav, "FastTravelPointUnlockFlag", points);
         }
+        // Gated on `collected_effigies`, not `collected_relics`: the flat map is written
+        // from the former, and CapturePower's by-type entry must keep mirroring it. The
+        // frontend round-trips the whole DTO, so both arrive together or neither does.
         if let Some(effigies) = &dto.collected_effigies {
             let delta = apply_unlock_flags(&mut loaded.sav, "RelicObtainForInstanceFlag", effigies);
-            apply_effigy_relic_counters(&mut loaded.sav, effigies, delta);
+            apply_relic_counters(
+                &mut loaded.sav,
+                effigies,
+                delta,
+                dto.collected_relics.as_ref(),
+            );
         }
-        // Must follow the effigy counters, which own the CapturePower entry.
+        // Must follow the relic counters, which own every type's possess-map entry.
         ensure_relic_possess_map_keys(&mut loaded.sav, &dto.status_point_list);
     }
     // Resolve every container id from the player's own save data first, then
@@ -958,7 +966,7 @@ struct FlagDelta {
 /// `true` set changed (see `FlagDelta`).
 ///
 /// This function does not touch any relic counter. `RelicPossessNum` is an
-/// effigy-only concern and is handled by `apply_effigy_relic_counters`; folding it
+/// effigy-only concern and is handled by `apply_relic_counters`; folding it
 /// in here is what made fast-travel unlocks increment a relic count.
 ///
 /// A real save can legitimately carry a `RecordData` with no `flag_name` key. It
@@ -1072,45 +1080,106 @@ fn relic_type_name(property: &Property) -> Option<&str> {
     props::as_enum(property).or_else(|| props::as_str(property))
 }
 
-/// Applies `delta` to `RelicPossessNum` -- the count of *unspent* effigy relics the
-/// player holds -- and, on a Palworld 1.0 save, keeps the structures the game
-/// actually reads in agreement with it.
+/// The `Flags` map to write for one relic type, and how the `true` set changed.
 ///
-/// The counter moves by `added - removed`, floored at 0. Un-collecting matters
-/// because the worldmap UI splices an effigy out of the set on a single click: were
-/// only additions counted, an off/on toggle cycle would leave the flags identical
-/// but ratchet the counter up by one every time. Removal giving a relic back also
-/// makes this symmetric with the frontend, which already decrements the inventory
-/// `Relic` item when an effigy is un-collected.
+/// The map keeps `keys` in the caller's order, exactly as `apply_unlock_flags` writes the
+/// flat map: the two must stay byte-comparable for CapturePower. Only the DELTA dedupes --
+/// `keys` is untrusted DTO input, and a repeated guid must not count as two collections.
+fn relic_flag_write(
+    keys: &[String],
+    previously_true: &std::collections::BTreeSet<String>,
+) -> (Vec<uesave::MapEntry>, FlagDelta) {
+    let now_true: std::collections::BTreeSet<&str> = keys.iter().map(String::as_str).collect();
+    let delta = FlagDelta {
+        added: now_true
+            .iter()
+            .filter(|key| !previously_true.contains(**key))
+            .count(),
+        removed: previously_true
+            .iter()
+            .filter(|key| !now_true.contains(key.as_str()))
+            .count(),
+    };
+    let flags = keys
+        .iter()
+        .map(|key| uesave::MapEntry {
+            key: props::name_property(key),
+            value: props::bool_property(true),
+        })
+        .collect();
+    (flags, delta)
+}
+
+/// The `true` keys of a by-type entry's `Flags` map.
+fn entry_true_flags(entry: &Properties) -> std::collections::BTreeSet<String> {
+    entry
+        .0
+        .get(&PropertyKey::from("Flags"))
+        .and_then(props::map_entries)
+        .map(|entries| {
+            entries
+                .iter()
+                .filter(|flag| props::as_bool(&flag.value).unwrap_or(false))
+                .filter_map(|flag| props::as_str(&flag.key).map(str::to_string))
+                .collect()
+        })
+        .unwrap_or_default()
+}
+
+/// Writes the player's collected relics back, for ALL 12 Palworld 1.0 relic types, and
+/// keeps every counter the game reads in agreement with them.
 ///
-/// The floor is not cosmetic: a relic already spent on a rank cannot be un-spent, so
-/// a real save holds fewer unspent relics than it has effigy flags, and un-collecting
+/// Each type's unspent-relic count moves by THAT TYPE'S OWN net delta (`added - removed`),
+/// floored at 0. Un-collecting matters because the worldmap UI splices a relic out of the
+/// set on a single click: were only additions counted, an off/on toggle cycle would leave
+/// the flags identical but ratchet the counter up by one every time. Removal giving a relic
+/// back also makes this symmetric with the frontend, which already decrements the inventory
+/// `Relic` item when one is un-collected.
+///
+/// The floor is not cosmetic: a relic already spent on a rank cannot be un-spent, so a real
+/// save holds fewer unspent relics of a type than it has flags for it, and un-collecting
 /// them all must stop at 0 rather than go negative.
 ///
-/// An unchanged resave has `added == removed == 0` and so leaves the counter alone.
+/// An unchanged resave has `added == removed == 0` for every type, and so leaves every
+/// counter alone.
 ///
-/// A 1.0 save carries `RelicObtainForInstanceFlagByType`, `RelicPossessNumMap` and
-/// `RelicBonusExpTableIndex` alongside the legacy pair, and
-/// `bCaptureCompletionRelicFixupDone` is already `true`, so the game's one-time
-/// migration has run and will never re-derive them from our legacy writes. These
-/// invariants hold in every real 1.0 save examined, and are restored here:
-///   flat flags              == the CapturePower by-type flag set
-///   RelicPossessNum         == RelicPossessNumMap[CapturePower]
-///   RelicBonusExpTableIndex == total true flags across ALL by-type entries
+/// # The CapturePower special case is REAL, not a leftover
 ///
-/// There is deliberately no `delta.is_zero()` early return: a save whose structures
-/// are already out of sync must get repaired on resave, even when the edit changed no
-/// flags.
+/// Pre-1.0, the Lifmunk Effigy was the only relic, so 1.0 kept the two legacy flat fields as
+/// CapturePower-ONLY mirrors and put all 12 types in the by-type structures. That asymmetry
+/// is the save format, and is preserved exactly:
+///   RelicObtainForInstanceFlag == the CapturePower by-type flag set   (NOT all types)
+///   RelicPossessNum            == RelicPossessNumMap[CapturePower]    (NOT the total)
+///   RelicBonusExpTableIndex    == total true flags across ALL by-type entries
+/// `bCaptureCompletionRelicFixupDone` is already `true` in every real 1.0 save, so the
+/// game's one-time migration has run and will never re-derive these for us.
 ///
-/// A pre-1.0 save has none of the three, and every update below is conditional on
-/// the property already existing, so we never invent them. `RelicPossessNum` itself
-/// is the one property we may create -- but only when the delta is positive, so an
-/// unchanged resave of a pre-1.0 save stays a strict no-op, and a removal-only edit
-/// never conjures a `0` into a save that never carried the field.
-fn apply_effigy_relic_counters(
+/// CapturePower's flags and delta therefore come from `effigies`/`delta` -- the very list
+/// `apply_unlock_flags` just wrote into the flat map -- and NOT from
+/// `collected_relics["capture_power"]`. A DTO whose two views of CapturePower disagreed
+/// would otherwise desync the flat map from the by-type entry.
+///
+/// # Nothing is invented
+///
+/// Every write is conditional on the property already existing, so a pre-1.0 save -- which
+/// has none of the by-type structures -- comes through untouched. Two consequences worth
+/// stating, because they are invisible from the code:
+///   - `RelicObtainForInstanceFlagByType` is SPARSE: the game appends a type's entry lazily,
+///     on first collection. So a missing entry is normal, and collecting a type's first
+///     relic must CREATE one -- but only when there is a guid to write, never an empty
+///     entry. Appending needs no `ensure_schema`: `.Type` and `.Flags` schemas are present
+///     whenever the array itself is.
+///   - `RelicPossessNum` is the one property we may create, and only when the delta is
+///     positive -- so an unchanged resave of a pre-1.0 save stays a strict no-op, and a
+///     removal-only edit never conjures a `0` into a save that never carried the field.
+///
+/// There is deliberately no `delta.is_zero()` early return: a save whose structures are
+/// already out of sync must get repaired on resave, even when the edit changed no flags.
+fn apply_relic_counters(
     player_sav: &mut uesave::Save,
     effigies: &[String],
     delta: FlagDelta,
+    collected_relics: Option<&BTreeMap<String, Vec<String>>>,
 ) {
     // Relics given back on removal, netted against those granted by new collections.
     let net = delta.added as i64 - delta.removed as i64;
@@ -1119,6 +1188,20 @@ fn apply_effigy_relic_counters(
     let by_type_key = PropertyKey::from("RelicObtainForInstanceFlagByType");
     let possess_map_key = PropertyKey::from("RelicPossessNumMap");
     let exp_index_key = PropertyKey::from("RelicBonusExpTableIndex");
+    let type_key = PropertyKey::from("Type");
+
+    // Every type to write, in `RELIC_TYPE_MAP` order so an appended entry lands
+    // deterministically. CapturePower is always present and always driven by `effigies`.
+    let targets: Vec<(&'static str, &[String])> = relic::RELIC_TYPE_MAP
+        .iter()
+        .filter_map(|(enum_name, key)| {
+            if *enum_name == CAPTURE_POWER_RELIC {
+                return Some((*enum_name, effigies));
+            }
+            let guids = collected_relics?.get(*key)?;
+            Some((*enum_name, guids.as_slice()))
+        })
+        .collect();
 
     let relic_already_present = save_data_props(player_sav)
         .ok()
@@ -1171,47 +1254,62 @@ fn apply_effigy_relic_counters(
         None
     };
 
-    // Mirror the flat flags into the CapturePower by-type entry, when present.
+    // Write each type's by-type `Flags`, collecting its own net delta. CapturePower's
+    // delta is the caller's -- taken from the flat map that must keep mirroring it --
+    // so it is deliberately not re-derived from the by-type entry here.
+    let mut nets: BTreeMap<&'static str, i64> = BTreeMap::new();
     if let Some(by_type) = record_data
         .0
         .get_mut(&by_type_key)
         .and_then(props::struct_values_mut)
     {
-        for value in by_type.iter_mut() {
-            let StructValue::Struct(entry) = value else {
-                continue;
-            };
-            let is_capture_power = entry
-                .0
-                .get(&PropertyKey::from("Type"))
-                .and_then(relic_type_name)
-                == Some(CAPTURE_POWER_RELIC);
-            if !is_capture_power {
-                continue;
+        for (relic_type, keys) in &targets {
+            let existing = by_type.iter_mut().find_map(|value| match value {
+                StructValue::Struct(entry)
+                    if entry.0.get(&type_key).and_then(relic_type_name) == Some(relic_type) =>
+                {
+                    Some(entry)
+                }
+                _ => None,
+            });
+
+            match existing {
+                Some(entry) => {
+                    let (flags, entry_delta) = relic_flag_write(keys, &entry_true_flags(entry));
+                    entry.insert("Flags", Property::Map(flags));
+                    nets.insert(
+                        relic_type,
+                        entry_delta.added as i64 - entry_delta.removed as i64,
+                    );
+                }
+                // No entry: the array is sparse, so this type has never been collected.
+                // An empty guid list must leave it that way rather than append an empty
+                // entry the game never wrote.
+                None if !keys.is_empty() => {
+                    let (flags, entry_delta) =
+                        relic_flag_write(keys, &std::collections::BTreeSet::new());
+                    let mut entry = Properties::default();
+                    entry.insert("Type", props::enum_property(relic_type));
+                    entry.insert("Flags", Property::Map(flags));
+                    by_type.push(StructValue::Struct(entry));
+                    nets.insert(relic_type, entry_delta.added as i64);
+                }
+                None => {}
             }
-            let flags: Vec<uesave::MapEntry> = effigies
-                .iter()
-                .map(|key| uesave::MapEntry {
-                    key: props::name_property(key),
-                    value: props::bool_property(true),
-                })
-                .collect();
-            entry.insert("Flags", Property::Map(flags));
-            break;
         }
     }
 
-    // RelicPossessNumMap[CapturePower] mirrors the scalar, when present. `possess` is
-    // `None` only when the legacy scalar is absent *and* nothing was newly collected --
-    // there is no value to mirror then, and writing the `0` default would zero a real
-    // map entry. (Unreachable in every real save examined, where the scalar always
-    // exists alongside the map, but the map write must not depend on that.)
-    if let Some(possess) = possess {
-        if let Some(entries) = record_data
-            .0
-            .get_mut(&possess_map_key)
-            .and_then(props::map_entries_mut)
-        {
+    if let Some(entries) = record_data
+        .0
+        .get_mut(&possess_map_key)
+        .and_then(props::map_entries_mut)
+    {
+        // RelicPossessNumMap[CapturePower] mirrors the scalar. `possess` is `None` only
+        // when the legacy scalar is absent *and* nothing was newly collected -- there is no
+        // value to mirror then, and writing the `0` default would zero a real map entry.
+        // (Unreachable in every real save examined, where the scalar always exists alongside
+        // the map, but the map write must not depend on that.)
+        if let Some(possess) = possess {
             match entries
                 .iter_mut()
                 .find(|entry| relic_type_name(&entry.key) == Some(CAPTURE_POWER_RELIC))
@@ -1223,6 +1321,35 @@ fn apply_effigy_relic_counters(
                     key: props::enum_property(CAPTURE_POWER_RELIC),
                     value: props::int_property(possess),
                 }),
+            }
+        }
+
+        // Every other type moves by its own net delta, floored at 0. A type with no key
+        // yet gains one only when it ends up holding relics: a 0 here would be a key the
+        // game never wrote. (`ensure_relic_possess_map_keys` separately creates 0-keys for
+        // ranked stats -- a different concern, and it runs after this.)
+        for (relic_type, net) in nets {
+            if relic_type == CAPTURE_POWER_RELIC {
+                continue;
+            }
+            let existing = entries
+                .iter_mut()
+                .find(|entry| relic_type_name(&entry.key) == Some(relic_type));
+            match existing {
+                Some(entry) => {
+                    let current = props::as_i32(&entry.value).unwrap_or(0);
+                    let updated = (current as i64 + net).clamp(0, i32::MAX as i64) as i32;
+                    entry.value = props::int_property(updated);
+                }
+                None => {
+                    let updated = net.clamp(0, i32::MAX as i64) as i32;
+                    if updated > 0 {
+                        entries.push(uesave::MapEntry {
+                            key: props::enum_property(relic_type),
+                            value: props::int_property(updated),
+                        });
+                    }
+                }
             }
         }
     }
@@ -1273,7 +1400,7 @@ fn relic_type_for_stat(stat_key: &str) -> Option<&'static str> {
 ///
 /// The value is *unspent relics held*, not the rank, so `0` grants visibility without
 /// granting relics -- the normal state of a player who spent what they collected.
-/// Existing counts are left alone; `apply_effigy_relic_counters` owns CapturePower.
+/// Existing counts are left alone; `apply_relic_counters` owns every collected type.
 ///
 /// Rank `0` creates nothing: the UI sends every relic key on every save.
 /// Conditional on the map existing, so a pre-1.0 save never gains one.
@@ -1648,7 +1775,7 @@ mod tests {
         GameData::load(&json_dir).expect("data dir")
     }
 
-    /// The documented invariant (`apply_effigy_relic_counters`'s doc comment):
+    /// The documented invariant (`apply_relic_counters`'s doc comment):
     /// the legacy flat flags equal the CapturePower by-type flag set. Checked
     /// here against a real 1.0 save, not synthetic data.
     #[test]

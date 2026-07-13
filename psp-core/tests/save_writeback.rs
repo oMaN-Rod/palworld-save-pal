@@ -975,6 +975,306 @@ fn effigy_unlock_does_not_add_1_0_relic_fields_to_a_pre_1_0_save() {
     );
 }
 
+/// Palworld 1.0's other 11 relic types live ONLY in the by-type structures. Collecting one
+/// must move that type's `Flags` and its own `RelicPossessNumMap` entry, and must leave the
+/// legacy CapturePower-only mirrors (`RelicObtainForInstanceFlag`, `RelicPossessNum`)
+/// completely untouched.
+///
+/// `StaminaReduction` is deliberately a type this player has NO by-type entry for. The game
+/// appends an entry lazily, on first collection of that type, so the write path has to
+/// create it -- every fixture player is missing at least one of the 12.
+#[test]
+fn collecting_a_typed_relic_updates_only_that_type() {
+    let mut session = common::load_fixture_session("v1_relics");
+    let data = game_data();
+    let player_id: Uuid = V1_PLAYER_MANY_RELIC_RANKS.parse().unwrap();
+    player::get_player_details(&mut session, &data, player_id, &null_progress())
+        .unwrap()
+        .unwrap();
+
+    let before = common::player_sav_json(&session, player_id);
+    let flat_before = common::relic_flat_flags(&before);
+    let possess_before = common::relic_possess_num(&before);
+    let by_type_before = common::relic_by_type_flags(&before);
+    let possess_map_before = common::relic_possess_num_map(&before);
+    assert!(
+        !flat_before.is_empty(),
+        "fixture sanity: this player must already carry effigies"
+    );
+    assert!(
+        !by_type_before.contains_key("EPalRelicType::StaminaReduction"),
+        "fixture sanity: this player must have NO StaminaReduction by-type entry, so that \
+         the write path is forced to create one"
+    );
+
+    let mut dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    let mut relics = dto.collected_relics.clone().unwrap_or_default();
+    relics.insert(
+        "stamina_reduction".to_string(),
+        vec!["NEW_STAMINA_RELIC".to_string()],
+    );
+    dto.collected_relics = Some(relics);
+    let mut m = OrderedMap::new();
+    m.insert(player_id, dto);
+    player::update_players(&mut session, &data, &m, &null_progress()).unwrap();
+
+    let after = common::player_sav_json(&session, player_id);
+    let by_type_after = common::relic_by_type_flags(&after);
+    let possess_map_after = common::relic_possess_num_map(&after);
+
+    assert_eq!(
+        by_type_after.get("EPalRelicType::StaminaReduction"),
+        Some(&BTreeSet::from(["NEW_STAMINA_RELIC".to_string()])),
+        "the collected relic's guid must land in the StaminaReduction by-type flag set"
+    );
+    assert_eq!(
+        possess_map_after
+            .get("EPalRelicType::StaminaReduction")
+            .copied(),
+        Some(1),
+        "RelicPossessNumMap[StaminaReduction] must move by StaminaReduction's OWN net delta"
+    );
+
+    // The legacy pair mirrors CapturePower alone, and nothing about CapturePower changed.
+    assert_eq!(
+        common::relic_flat_flags(&after),
+        flat_before,
+        "collecting a non-effigy relic must not touch the flat RelicObtainForInstanceFlag map"
+    );
+    assert_eq!(
+        common::relic_possess_num(&after),
+        possess_before,
+        "collecting a non-effigy relic must not touch the scalar RelicPossessNum"
+    );
+    assert_eq!(
+        possess_map_after.get(common::CAPTURE_POWER_RELIC).copied(),
+        possess_map_before
+            .get(common::CAPTURE_POWER_RELIC)
+            .copied(),
+        "RelicPossessNumMap[CapturePower] must still mirror the untouched scalar"
+    );
+
+    // Every other type comes through byte-for-byte: a per-type delta must not leak sideways.
+    for (ty, flags) in &by_type_before {
+        assert_eq!(
+            by_type_after.get(ty),
+            Some(flags),
+            "relic type {ty} must keep its flag set unchanged when another type is collected"
+        );
+    }
+    for (ty, count) in &possess_map_before {
+        assert_eq!(
+            possess_map_after.get(ty),
+            Some(count),
+            "RelicPossessNumMap[{ty}] must be unchanged when another type is collected"
+        );
+    }
+}
+
+/// `RelicBonusExpTableIndex` is the total true flag count across ALL by-type entries --
+/// not CapturePower's alone. A typed relic write must move it too.
+#[test]
+fn relic_bonus_exp_table_index_counts_every_type_after_a_typed_relic_write() {
+    let mut session = common::load_fixture_session("v1_relics");
+    let data = game_data();
+    let player_id: Uuid = V1_PLAYER_MANY_RELIC_RANKS.parse().unwrap();
+    player::get_player_details(&mut session, &data, player_id, &null_progress())
+        .unwrap()
+        .unwrap();
+
+    let before = common::player_sav_json(&session, player_id);
+    let total_before: usize = common::relic_by_type_flags(&before)
+        .values()
+        .map(BTreeSet::len)
+        .sum();
+    let capture_power_before = common::relic_by_type_flags(&before)
+        .get(common::CAPTURE_POWER_RELIC)
+        .map(BTreeSet::len)
+        .unwrap_or(0);
+    assert!(
+        total_before > capture_power_before,
+        "fixture sanity: the player must carry non-CapturePower flags, else 'all types' is vacuous"
+    );
+
+    let mut dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    let mut relics = dto.collected_relics.clone().unwrap_or_default();
+    relics.insert(
+        "stamina_reduction".to_string(),
+        vec!["NEW_STAMINA_RELIC".to_string()],
+    );
+    dto.collected_relics = Some(relics);
+    let mut m = OrderedMap::new();
+    m.insert(player_id, dto);
+    player::update_players(&mut session, &data, &m, &null_progress()).unwrap();
+
+    let after = common::player_sav_json(&session, player_id);
+    let total_after: usize = common::relic_by_type_flags(&after)
+        .values()
+        .map(BTreeSet::len)
+        .sum();
+    assert_eq!(
+        total_after,
+        total_before + 1,
+        "the one newly collected relic must appear in the by-type totals"
+    );
+    assert_eq!(
+        common::relic_bonus_exp_table_index(&after) as usize,
+        total_after,
+        "RelicBonusExpTableIndex must equal the total true flags across ALL relic types"
+    );
+}
+
+/// A relic already spent on a rank cannot be un-spent, so a type's possess count must floor
+/// at 0 rather than go negative -- the same invariant the effigy scalar has. This player
+/// holds 0 unspent GliderSpeed relics while carrying GliderSpeed flags, so un-collecting
+/// them all asks for a negative count.
+#[test]
+fn removing_typed_relics_floors_that_types_possess_count_at_zero() {
+    let mut session = common::load_fixture_session("v1_relics");
+    let data = game_data();
+    let player_id: Uuid = V1_PLAYER_MANY_RELIC_RANKS.parse().unwrap();
+    player::get_player_details(&mut session, &data, player_id, &null_progress())
+        .unwrap()
+        .unwrap();
+
+    let before = common::player_sav_json(&session, player_id);
+    let glider_flags = common::relic_by_type_flags(&before)
+        .get("EPalRelicType::GliderSpeed")
+        .cloned()
+        .unwrap_or_default();
+    let glider_possess = common::relic_possess_num_map(&before)
+        .get("EPalRelicType::GliderSpeed")
+        .copied()
+        .unwrap_or(0);
+    assert!(
+        glider_flags.len() as i64 > glider_possess,
+        "fixture sanity: this player must have spent GliderSpeed relics ({} flags, {glider_possess} \
+         unspent), else the floor is never exercised",
+        glider_flags.len()
+    );
+
+    let mut dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    let mut relics = dto.collected_relics.clone().unwrap_or_default();
+    relics.insert("glider_speed".to_string(), vec![]);
+    dto.collected_relics = Some(relics);
+    let mut m = OrderedMap::new();
+    m.insert(player_id, dto);
+    player::update_players(&mut session, &data, &m, &null_progress()).unwrap();
+
+    let after = common::player_sav_json(&session, player_id);
+    assert_eq!(
+        common::relic_by_type_flags(&after)
+            .get("EPalRelicType::GliderSpeed")
+            .cloned()
+            .unwrap_or_default(),
+        BTreeSet::new(),
+        "un-collecting every GliderSpeed relic must clear that type's flags"
+    );
+    assert_eq!(
+        common::relic_possess_num_map(&after)
+            .get("EPalRelicType::GliderSpeed")
+            .copied(),
+        Some(0),
+        "RelicPossessNumMap[GliderSpeed] must floor at 0, never go negative"
+    );
+    assert_eq!(
+        common::relic_bonus_exp_table_index(&after) as usize,
+        common::relic_by_type_flags(&after)
+            .values()
+            .map(BTreeSet::len)
+            .sum::<usize>(),
+        "the exp index must still equal the total flags across all types after a removal"
+    );
+}
+
+/// A pre-1.0 save has no by-type relic structures at all. A DTO carrying typed relics --
+/// which the frontend sends on every save -- must not conjure them into existence.
+#[test]
+fn typed_relic_write_does_not_add_1_0_relic_fields_to_a_pre_1_0_save() {
+    let mut session = common::load_fixture_session("world1");
+    let data = game_data();
+    let player_id: Uuid = WORLD1_PLAYER_O.parse().unwrap();
+    player::get_player_details(&mut session, &data, player_id, &null_progress())
+        .unwrap()
+        .unwrap();
+    let mut dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    dto.collected_effigies = Some(vec!["EF_1".into()]);
+    let mut relics: BTreeMap<String, Vec<String>> = BTreeMap::new();
+    relics.insert(
+        "stamina_reduction".to_string(),
+        vec!["NEW_STAMINA_RELIC".to_string()],
+    );
+    relics.insert("capture_power".to_string(), vec!["EF_1".to_string()]);
+    dto.collected_relics = Some(relics);
+    let mut m = OrderedMap::new();
+    m.insert(player_id, dto);
+    player::update_players(&mut session, &data, &m, &null_progress()).unwrap();
+
+    let sav = common::player_sav_json(&session, player_id);
+    let text = serde_json::to_string(&sav).unwrap();
+    assert!(
+        !text.contains("RelicObtainForInstanceFlagByType"),
+        "must not add RelicObtainForInstanceFlagByType to a pre-1.0 save"
+    );
+    assert!(
+        !text.contains("RelicPossessNumMap"),
+        "must not add RelicPossessNumMap to a pre-1.0 save"
+    );
+    assert!(
+        !text.contains("RelicBonusExpTableIndex"),
+        "must not add RelicBonusExpTableIndex to a pre-1.0 save"
+    );
+    assert!(
+        !text.contains("NEW_STAMINA_RELIC"),
+        "a typed relic must not leak into a pre-1.0 save's flat effigy flag map"
+    );
+}
+
+/// An unchanged resave of a 1.0 save must leave every relic structure exactly as it was.
+/// The by-type write path rewrites `Flags` for each type on every save, so a bug that
+/// reordered, dropped or duplicated a type would show up here first.
+#[test]
+fn unchanged_resave_of_a_1_0_save_leaves_every_relic_structure_identical() {
+    let mut session = common::load_fixture_session("v1_relics");
+    let data = game_data();
+    let player_id: Uuid = V1_PLAYER_MANY_RELIC_RANKS.parse().unwrap();
+    player::get_player_details(&mut session, &data, player_id, &null_progress())
+        .unwrap()
+        .unwrap();
+
+    let before = common::player_sav_json(&session, player_id);
+    let flat_before = common::relic_flat_flags(&before);
+    let by_type_before = common::relic_by_type_flags(&before);
+    let possess_before = common::relic_possess_num(&before);
+    let possess_map_before = common::relic_possess_num_map(&before);
+    let exp_index_before = common::relic_bonus_exp_table_index(&before);
+
+    let dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    let mut m = OrderedMap::new();
+    m.insert(player_id, dto);
+    player::update_players(&mut session, &data, &m, &null_progress()).unwrap();
+
+    let after = common::player_sav_json(&session, player_id);
+    assert_eq!(common::relic_flat_flags(&after), flat_before);
+    assert_eq!(common::relic_by_type_flags(&after), by_type_before);
+    assert_eq!(common::relic_possess_num(&after), possess_before);
+    assert_eq!(common::relic_possess_num_map(&after), possess_map_before);
+    assert_eq!(
+        common::relic_bonus_exp_table_index(&after),
+        exp_index_before
+    );
+}
+
 /// Palworld 1.0 renamed both quest arrays to `<Base>_FullRelease`. This 1.0
 /// fixture player genuinely carries 19 completed and 13 current quests -- reading
 /// the pre-1.0 names finds neither and reports both as empty.

@@ -83,11 +83,15 @@ pub struct PlayerDto {
     #[serde(default)]
     pub collected_effigies: Option<Vec<String>>,
     /// Collected relic instance-flag keys per relic type (bare key from
-    /// `relic::RELIC_TYPE_MAP`), read from `RelicObtainForInstanceFlagByType`.
-    /// `collected_relics["capture_power"]` equals `collected_effigies` on a 1.0
-    /// save. A pre-1.0 save reads as an empty map.
+    /// `relic::RELIC_TYPE_MAP`), read from and written back to
+    /// `RelicObtainForInstanceFlagByType`.
+    ///
+    /// `collected_relics["capture_power"]` equals `collected_effigies` on a 1.0 save. On
+    /// write, CapturePower is taken from `collected_effigies` -- the list that also drives
+    /// the legacy flat flag map -- so this key is read-only in practice. A pre-1.0 save
+    /// reads as an empty map, and writing one back invents nothing.
     #[serde(default)]
-    pub collected_relics: Option<BTreeMap<String, Vec<String>>>, // output-only
+    pub collected_relics: Option<BTreeMap<String, Vec<String>>>,
     /// `NormalBossDefeatFlag` + `TowerBossDefeatFlag` keys merged, read-only:
     /// the UI only needs "is this boss defeated" for the map overlay.
     #[serde(default)]
