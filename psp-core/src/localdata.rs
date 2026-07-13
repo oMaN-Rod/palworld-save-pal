@@ -108,7 +108,8 @@ pub fn unlock_world_map(local_data_sav: &[u8]) -> Result<MapUnlockOutcome, CoreE
 
     if !found_a_mask {
         return Err(CoreError::Other(
-            "Neither WorldMapMaskTextureV4 nor WorldMapUISaveDataMap found in SaveData".to_string(),
+            "No non-empty WorldMapMaskTextureV4 or WorldMapUISaveDataMap mask found in SaveData"
+                .to_string(),
         ));
     }
 
@@ -139,13 +140,15 @@ mod tests {
         Some(dir)
     }
 
-    /// A real committed gamepass `LevelMeta.sav`. It carries a `SaveData`
-    /// struct, so the hermetic test below can graft a synthetic mask into a
-    /// real GVAS tree; the corpus has no `LocalData.sav`.
-    fn corpus_level_meta_path() -> std::path::PathBuf {
-        std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join(
-            "../backups/gamepass/000900000487F3B6_0000000000000000000000006B210A9C_20260325231642/4F64BAB699AE4B4A97A5862116E07C6D/LevelMeta.sav",
-        )
+    /// A real, git-tracked `LevelMeta.sav` (the world1 fixture, also used by
+    /// `psp-server/tests/phase4_ws.rs`). It carries a `SaveData` struct, so the
+    /// hermetic tests below can graft a synthetic mask into a real GVAS tree;
+    /// it has no `LocalData.sav` of its own. Unlike the `backups/gamepass`
+    /// corpus, this fixture is committed, so tests using it run unconditionally
+    /// on a clean checkout / CI.
+    fn fixture_level_meta_path() -> std::path::PathBuf {
+        std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../tests/fixtures/saves/world1/LevelMeta.sav")
     }
 
     fn mask_bytes(local_data_sav: &[u8]) -> Vec<u8> {
@@ -222,15 +225,7 @@ mod tests {
     /// non-zero and already-zero bytes so the cleared count is discriminating.
     #[test]
     fn unlock_world_map_zeroes_synthetic_mask_grafted_into_real_savedata() {
-        let level_meta_path = corpus_level_meta_path();
-        if !level_meta_path.exists() {
-            eprintln!(
-                "SKIP: corpus LevelMeta.sav not found ({})",
-                level_meta_path.display()
-            );
-            return;
-        }
-        let meta_bytes = std::fs::read(&level_meta_path).unwrap();
+        let meta_bytes = std::fs::read(fixture_level_meta_path()).unwrap();
 
         // The schema must be registered for the brand-new property or the
         // writer fails with MissingPropertySchema.
@@ -373,13 +368,8 @@ mod tests {
             .collect()
     }
 
-    fn corpus_level_meta_or_skip() -> Option<Vec<u8>> {
-        let path = corpus_level_meta_path();
-        if !path.exists() {
-            eprintln!("SKIP: corpus LevelMeta.sav not found ({})", path.display());
-            return None;
-        }
-        Some(std::fs::read(&path).unwrap())
+    fn fixture_level_meta_bytes() -> Vec<u8> {
+        std::fs::read(fixture_level_meta_path()).unwrap()
     }
 
     /// A 1.0-only save: `WorldMapUISaveDataMap` present, legacy field ABSENT.
@@ -387,9 +377,7 @@ mod tests {
     /// not be an error.
     #[test]
     fn unlock_world_map_zeroes_every_world_map_ui_save_data_map_entry() {
-        let Some(meta_bytes) = corpus_level_meta_or_skip() else {
-            return;
-        };
+        let meta_bytes = fixture_level_meta_bytes();
         let mut save = savio::read_sav_bytes(&meta_bytes).unwrap();
         graft_world_map_ui_save_data_map(
             &mut save,
@@ -422,9 +410,7 @@ mod tests {
     /// A save carrying BOTH shapes: the cleared count sums across all of them.
     #[test]
     fn unlock_world_map_sums_cleared_bytes_across_legacy_and_ui_map() {
-        let Some(meta_bytes) = corpus_level_meta_or_skip() else {
-            return;
-        };
+        let meta_bytes = fixture_level_meta_bytes();
         let mut save = savio::read_sav_bytes(&meta_bytes).unwrap();
         graft_world_map_ui_save_data_map(
             &mut save,
@@ -446,16 +432,23 @@ mod tests {
     }
 
     /// Neither mask structure present — a genuinely unrecognised save, which
-    /// must still error rather than silently succeed.
+    /// must still error rather than silently succeed. Asserts on the error
+    /// MESSAGE, not just the `CoreError::Other` variant, since the "SaveData
+    /// not found" branch returns that same variant and would falsely pass a
+    /// variant-only check.
     #[test]
     fn unlock_world_map_errors_when_no_mask_structure_exists() {
-        let Some(meta_bytes) = corpus_level_meta_or_skip() else {
-            return;
-        };
-        // The corpus LevelMeta.sav has a SaveData struct but no mask of either
+        let meta_bytes = fixture_level_meta_bytes();
+        // The fixture LevelMeta.sav has a SaveData struct but no mask of either
         // shape, so it stands in for an unrecognised save as-is.
         let error = unlock_world_map(&meta_bytes).unwrap_err();
-        assert!(matches!(error, crate::error::CoreError::Other(_)));
+        let crate::error::CoreError::Other(message) = error else {
+            panic!("expected CoreError::Other, got {error:?}");
+        };
+        assert_eq!(
+            message,
+            "No non-empty WorldMapMaskTextureV4 or WorldMapUISaveDataMap mask found in SaveData"
+        );
     }
 
     /// End-to-end against a real Xbox `LocalData.sav` from the on-disk gamepass
