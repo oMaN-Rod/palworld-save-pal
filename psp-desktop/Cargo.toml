@@ -3,6 +3,13 @@ name = "psp-desktop"
 version.workspace = true
 edition.workspace = true
 
+# The package stays `psp-desktop` (workspace members, `-p psp-desktop`, the
+# Dockerfile and CI working-dirs all key off it); only the emitted binary is
+# `psp`. Keep this in step with `mainBinaryName` in tauri.conf.json.
+[[bin]]
+name = "psp"
+path = "src/main.rs"
+
 [build-dependencies]
 tauri-build = { workspace = true }
 

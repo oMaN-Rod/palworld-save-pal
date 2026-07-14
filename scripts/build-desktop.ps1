@@ -1,8 +1,8 @@
 # Builds the Windows desktop artifacts into dist/:
 #   PalworldSavePal-<version>-windows.msi              MSI installer
-#   PalworldSavePal-<version>-windows-standalone.zip   portable (psp-desktop.exe + ui_build + data)
+#   PalworldSavePal-<version>-windows-standalone.zip   portable (psp.exe + ui_build + data)
 #
-# The portable build runs extract-and-run: launch psp-desktop.exe from the
+# The portable build runs extract-and-run: launch psp.exe from the
 # extracted folder — it serves the bundled ui_build/ and keeps its psp-rs.db
 # alongside the exe. Requires the Microsoft Edge WebView2 runtime (present on
 # up-to-date Windows 10/11).
@@ -43,7 +43,7 @@ Copy-Item $msi.FullName (Join-Path $dist "PalworldSavePal-$version-windows.msi")
 $staging = Join-Path $dist "PalworldSavePal"
 if (Test-Path $staging) { Remove-Item -Recurse -Force $staging }
 New-Item -ItemType Directory -Force -Path $staging | Out-Null
-Copy-Item "target/release/psp-desktop.exe" (Join-Path $staging "psp-desktop.exe")
+Copy-Item "target/release/psp.exe" (Join-Path $staging "psp.exe")
 Copy-Item -Recurse "ui_build" (Join-Path $staging "ui_build")
 Copy-Item -Recurse "data" (Join-Path $staging "data")
 

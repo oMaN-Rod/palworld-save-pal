@@ -77,7 +77,7 @@ jobs:
           # extract-and-run (keeps its DB alongside the exe).
           $staging = "dist/PalworldSavePal"
           New-Item -ItemType Directory -Force $staging | Out-Null
-          Copy-Item target/release/psp-desktop.exe "$staging/psp-desktop.exe"
+          Copy-Item target/release/psp.exe "$staging/psp.exe"
           Copy-Item -Recurse ui_build "$staging/ui_build"
           Copy-Item -Recurse data "$staging/data"
           Compress-Archive -Path $staging -DestinationPath "dist/PalworldSavePal-$tag-windows-standalone.zip"
