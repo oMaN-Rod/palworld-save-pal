@@ -131,6 +131,7 @@
   "close_drawer": "Tutup laci",
   "close_toast": "Tutup roti panggang",
   "collect_all_effigies": "Kumpulkan semua Patung",
+  "collect_all_relics": "Kumpulkan semua relik yang terlihat di peta ini",
   "collected": "Dikumpulkan",
   "collection": [
     {
@@ -170,6 +171,7 @@
   "current_missions": "Misi Saat Ini",
   "current_save_file": "File Tersimpan Saat Ini",
   "debug": "Debug",
+  "defeated": "Dikalahkan",
   "docs": "Dokumen",
   "docs_wiki": "Wiki",
   "docs_guides": "Pemandu",
@@ -453,6 +455,7 @@
   "none": "Tidak ada",
   "not_collected": "Tidak Terkumpul",
   "normal": "Normal",
+  "not_defeated": "Belum dikalahkan",
   "note": "Catatan",
   "notes_optional": "Catatan (opsional)",
   "nuke_all_presets": "Hapus semua preset",
@@ -555,6 +558,7 @@
   "ready_to_fill": "Siap mengisi {target} dengan {count} {pals} .",
   "refresh": "Segarkan (Hapus perubahan yang belum disimpan)",
   "refresh_entity": "Segarkan {entity}",
+  "relics": "Relik",
   "remove": "Menghapus",
   "remove_all_from_collections": "Hapus semua {pals} yang dipilih dari koleksi mereka",
   "remove_from_collection": "Hapus dari koleksi",

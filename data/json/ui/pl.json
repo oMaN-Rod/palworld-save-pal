@@ -131,6 +131,7 @@
   "close_drawer": "Zamknij szufladę",
   "close_toast": "Zamknij tost",
   "collect_all_effigies": "Zbierz wszystkie kukły",
+  "collect_all_relics": "Zbierz wszystkie widoczne relikty na tej mapie",
   "collected": "Zebrane",
   "collection": [
     {
@@ -170,6 +171,7 @@
   "current_missions": "Aktualne misje",
   "current_save_file": "Aktualny plik zapisu",
   "debug": "Odpluskwić",
+  "defeated": "Pokonany",
   "docs": "Dokumenty",
   "docs_wiki": "Wiki",
   "docs_guides": "Przewodniki",
@@ -453,6 +455,7 @@
   "none": "Nic",
   "not_collected": "Nie zebrano",
   "normal": "Normalna",
+  "not_defeated": "Niepokonany",
   "note": "Notatka",
   "notes_optional": "Notatki (opcjonalnie)",
   "nuke_all_presets": "Zniszcz wszystkie ustawienia wstępne",
@@ -555,6 +558,7 @@
   "ready_to_fill": "Gotowy wypełnić {target} {count} {pals} .",
   "refresh": "Odśwież (usuń niezapisane zmiany)",
   "refresh_entity": "Odśwież {entity}",
+  "relics": "Relikty",
   "remove": "Usunąć",
   "remove_all_from_collections": "Usuń wszystkich wybranych {pals} z ich kolekcji",
   "remove_from_collection": "Usuń z kolekcji",

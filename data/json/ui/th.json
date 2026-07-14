@@ -131,6 +131,7 @@
   "close_drawer": "ปิดลิ้นชัก",
   "close_toast": "ปิดขนมปังปิ้ง",
   "collect_all_effigies": "รวบรวมหุ่นจำลองทั้งหมด",
+  "collect_all_relics": "รวบรวมโบราณวัตถุทั้งหมดที่มองเห็นบนแผนที่นี้",
   "collected": "รวบรวม",
   "collection": [
     {
@@ -170,6 +171,7 @@
   "current_missions": "ภารกิจปัจจุบัน",
   "current_save_file": "ไฟล์บันทึกปัจจุบัน",
   "debug": "ดีบัก",
+  "defeated": "เอาชนะแล้ว",
   "docs": "เอกสาร",
   "docs_wiki": "วิกิ",
   "docs_guides": "คู่มือ",
@@ -453,6 +455,7 @@
   "none": "ไม่มี",
   "not_collected": "ไม่ได้เก็บรวบรวม",
   "normal": "ปกติ",
+  "not_defeated": "ยังไม่ได้เอาชนะ",
   "note": "บันทึก",
   "notes_optional": "หมายเหตุ (ไม่บังคับ)",
   "nuke_all_presets": "ลบพรีเซ็ตทั้งหมด",
@@ -555,6 +558,7 @@
   "ready_to_fill": "พร้อมที่จะเติมเต็ม {target} ด้วย {count} {pals} แล้ว",
   "refresh": "รีเฟรช (ล้างการเปลี่ยนแปลงที่ยังไม่ได้บันทึก)",
   "refresh_entity": "รีเฟรช {entity}",
+  "relics": "โบราณวัตถุ",
   "remove": "ลบ",
   "remove_all_from_collections": "ลบ {pals} ที่เลือกทั้งหมดออกจากคอลเลกชันของพวกเขา",
   "remove_from_collection": "นำออกจากคอลเลกชัน",

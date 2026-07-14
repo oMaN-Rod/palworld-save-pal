@@ -131,6 +131,7 @@
   "close_drawer": "서랍을 닫으세요",
   "close_toast": "토스트 닫기",
   "collect_all_effigies": "모든 형상을 수집하세요",
+  "collect_all_relics": "이 지도에 보이는 모든 유물 수집",
   "collected": "모은",
   "collection": [
     {
@@ -170,6 +171,7 @@
   "current_missions": "현재 임무",
   "current_save_file": "현재 저장 파일",
   "debug": "디버그",
+  "defeated": "처치함",
   "docs": "문서",
   "docs_wiki": "위키",
   "docs_guides": "가이드",
@@ -453,6 +455,7 @@
   "none": "없음",
   "not_collected": "수집되지 않음",
   "normal": "정상",
+  "not_defeated": "미처치",
   "note": "메모",
   "notes_optional": "참고 (선택 사항)",
   "nuke_all_presets": "모든 사전 설정을 삭제합니다",
@@ -555,6 +558,7 @@
   "ready_to_fill": "{target} {count} 명의 {pals} 로 채울 준비가 되었습니다.",
   "refresh": "새로 고침(저장되지 않은 변경 사항 삭제)",
   "refresh_entity": "{entity} 새로 고침하세요",
+  "relics": "유물",
   "remove": "제거하다",
   "remove_all_from_collections": "선택한 {pals} 해당 컬렉션에서 모두 제거합니다.",
   "remove_from_collection": "컬렉션에서 제거",

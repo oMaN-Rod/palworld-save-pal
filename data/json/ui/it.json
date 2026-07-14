@@ -131,6 +131,7 @@
   "close_drawer": "Chiudi cassetto",
   "close_toast": "Brindisi ravvicinato",
   "collect_all_effigies": "Colleziona tutte le effigi",
+  "collect_all_relics": "Colleziona tutti i cimeli visibili su questa mappa",
   "collected": "Raccolto",
   "collection": [
     {
@@ -170,6 +171,7 @@
   "current_missions": "Missioni in corso",
   "current_save_file": "File di salvataggio corrente",
   "debug": "Debug",
+  "defeated": "Sconfitto",
   "docs": "Documenti",
   "docs_wiki": "Wiki",
   "docs_guides": "Guide",
@@ -453,6 +455,7 @@
   "none": "Nessuno",
   "not_collected": "Non raccolto",
   "normal": "Normale",
+  "not_defeated": "Non sconfitto",
   "note": "Nota",
   "notes_optional": "Note (facoltative)",
   "nuke_all_presets": "Elimina tutte le impostazioni predefinite",
@@ -555,6 +558,7 @@
   "ready_to_fill": "Pronto a riempire {target} con {count} {pals} .",
   "refresh": "Aggiorna (Annulla le modifiche non salvate)",
   "refresh_entity": "Aggiorna {entity}",
+  "relics": "Cimeli",
   "remove": "Rimuovere",
   "remove_all_from_collections": "Rimuovi tutti {pals} selezionati dalle loro collezioni",
   "remove_from_collection": "Rimuovi dalla collezione",

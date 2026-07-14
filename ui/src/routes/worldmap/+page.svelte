@@ -108,10 +108,20 @@
 			})
 		);
 	});
-	const fastTravelCount = $derived(Object.keys(fastTravelPoints.points).length);
-	const fastTravelUnlockedCount = $derived(
-		appState.selectedPlayer?.unlocked_fast_travel_points?.length
+	// Every count below is scoped to the active map area, matching what Map.svelte draws.
+	const areaFastTravelGuids = $derived(
+		new Set(
+			Object.entries(fastTravelPoints.points)
+				.filter(([, point]) => mapOf(point.x, point.y) === activeArea)
+				.map(([guid]) => guid.toUpperCase())
+		)
 	);
+	const fastTravelCount = $derived(areaFastTravelGuids.size);
+	const fastTravelUnlockedCount = $derived.by(() => {
+		const unlocked = appState.selectedPlayer?.unlocked_fast_travel_points;
+		if (!unlocked) return undefined;
+		return unlocked.filter((guid) => areaFastTravelGuids.has(guid.toUpperCase())).length;
+	});
 	const relicTypeStats = $derived.by(() => {
 		const player = appState.selectedPlayer;
 		const collectedSets: Record<string, Set<string>> = {};
@@ -142,19 +152,17 @@
 		Object.values(relicTypeStats).reduce((acc, entry) => acc + entry.collected, 0)
 	);
 	const isRelicTypeVisible = (type: string) => mapOptions.relicTypes?.[type] !== false;
-	const dungeonCount = $derived.by(() => {
-		return Object.values(mapObjects.points).filter((point) => point.type === 'dungeon').length || 0;
+	const areaMapObjectCounts = $derived.by(() => {
+		const counts: Record<string, number> = {};
+		for (const point of Object.values(mapObjects.points)) {
+			if (mapOf(point.x, point.y) !== activeArea) continue;
+			counts[point.type] = (counts[point.type] ?? 0) + 1;
+		}
+		return counts;
 	});
-	const alphaPalCount = $derived.by(() => {
-		return (
-			Object.values(mapObjects.points).filter((point) => point.type === 'alpha_pal').length || 0
-		);
-	});
-	const predatorPalCount = $derived.by(() => {
-		return (
-			Object.values(mapObjects.points).filter((point) => point.type === 'predator_pal').length || 0
-		);
-	});
+	const dungeonCount = $derived(areaMapObjectCounts['dungeon'] ?? 0);
+	const alphaPalCount = $derived(areaMapObjectCounts['alpha_pal'] ?? 0);
+	const predatorPalCount = $derived(areaMapObjectCounts['predator_pal'] ?? 0);
 	const bossCount = $derived(
 		Object.values(bosses.points).filter((b) => mapOf(b.x, b.y) === activeArea).length
 	);

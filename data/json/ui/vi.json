@@ -131,6 +131,7 @@
   "close_drawer": "Đóng ngăn kéo lại",
   "close_toast": "Đóng bánh mì nướng",
   "collect_all_effigies": "Thu thập tất cả các hình nộm",
+  "collect_all_relics": "Thu thập tất cả di vật hiển thị trên bản đồ này",
   "collected": "Đã thu thập",
   "collection": [
     {
@@ -170,6 +171,7 @@
   "current_missions": "Nhiệm vụ hiện tại",
   "current_save_file": "Tệp lưu hiện tại",
   "debug": "Gỡ lỗi",
+  "defeated": "Đã đánh bại",
   "docs": "Bác sĩ",
   "docs_wiki": "Wiki",
   "docs_guides": "Hướng dẫn",
@@ -453,6 +455,7 @@
   "none": "Không có",
   "not_collected": "Chưa được thu thập",
   "normal": "Bình thường",
+  "not_defeated": "Chưa đánh bại",
   "note": "Ghi chú",
   "notes_optional": "Ghi chú (tùy chọn)",
   "nuke_all_presets": "Xóa tất cả cài đặt sẵn",
@@ -555,6 +558,7 @@
   "ready_to_fill": "Sẵn sàng bổ sung {count} {target} {pals} .",
   "refresh": "Làm mới (Xóa các thay đổi chưa được lưu)",
   "refresh_entity": "Làm mới {entity}",
+  "relics": "Di Vật",
   "remove": "Di dời",
   "remove_all_from_collections": "Xóa tất cả {pals} đã chọn khỏi bộ sưu tập của họ",
   "remove_from_collection": "Xóa khỏi bộ sưu tập",

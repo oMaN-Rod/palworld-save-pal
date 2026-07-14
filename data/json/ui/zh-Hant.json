@@ -131,6 +131,7 @@
   "close_drawer": "關上抽屜。",
   "close_toast": "烤麵包機",
   "collect_all_effigies": "收集所有雕像",
+  "collect_all_relics": "收集此地圖上所有可見的遺物",
   "collected": "集",
   "collection": [
     {
@@ -170,6 +171,7 @@
   "current_missions": "目前任務",
   "current_save_file": "目前儲存文件",
   "debug": "偵錯",
+  "defeated": "已擊敗",
   "docs": "文件",
   "docs_wiki": "維基百科",
   "docs_guides": "指南",
@@ -453,6 +455,7 @@
   "none": "沒有任何",
   "not_collected": "未收集",
   "normal": "普通的",
+  "not_defeated": "未擊敗",
   "note": "筆記",
   "notes_optional": "備註（可選）",
   "nuke_all_presets": "核彈所有預設",
@@ -555,6 +558,7 @@
   "ready_to_fill": "準備用{count} {pals}填滿{target} 。",
   "refresh": "刷新（清除未儲存的變更）",
   "refresh_entity": "重新整理{entity}",
+  "relics": "遺物",
   "remove": "消除",
   "remove_all_from_collections": "從好友清單中移除所有選定的{pals}",
   "remove_from_collection": "從收藏中移除",

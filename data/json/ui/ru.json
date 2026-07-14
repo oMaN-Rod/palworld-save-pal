@@ -131,6 +131,7 @@
   "close_drawer": "Закрыть ящик",
   "close_toast": "Закрыть тост",
   "collect_all_effigies": "Соберите все чучела",
+  "collect_all_relics": "Собрать все видимые реликвии на этой карте",
   "collected": "Собрано",
   "collection": [
     {
@@ -170,6 +171,7 @@
   "current_missions": "Текущие миссии",
   "current_save_file": "Текущий файл сохранения",
   "debug": "Отлаживать",
+  "defeated": "Побеждён",
   "docs": "Документы",
   "docs_wiki": "Вики",
   "docs_guides": "Гиды",
@@ -453,6 +455,7 @@
   "none": "Никто",
   "not_collected": "Не собрано",
   "normal": "Нормальный",
+  "not_defeated": "Не побеждён",
   "note": "Примечание",
   "notes_optional": "Примечания (необязательно)",
   "nuke_all_presets": "Уничтожить все предустановленные параметры",
@@ -555,6 +558,7 @@
   "ready_to_fill": "Готово заполнить {target} {count} {pals} .",
   "refresh": "Обновить (Удалить несохраненные изменения)",
   "refresh_entity": "Обновить {entity}",
+  "relics": "Реликвии",
   "remove": "Удалять",
   "remove_all_from_collections": "Удалить всех выбранных {pals} из их коллекций",
   "remove_from_collection": "Удалить из коллекции",

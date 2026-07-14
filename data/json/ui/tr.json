@@ -131,6 +131,7 @@
   "close_drawer": "Çekmeceyi kapatın",
   "close_toast": "Tostu kapat",
   "collect_all_effigies": "Tüm kuklaları toplayın",
+  "collect_all_relics": "Bu haritada görünen tüm kalıntıları topla",
   "collected": "Toplandı",
   "collection": [
     {
@@ -170,6 +171,7 @@
   "current_missions": "Mevcut Görevler",
   "current_save_file": "Geçerli Kayıt Dosyası",
   "debug": "Hata ayıklama",
+  "defeated": "Yenildi",
   "docs": "Belgeler",
   "docs_wiki": "Viki",
   "docs_guides": "Rehberler",
@@ -453,6 +455,7 @@
   "none": "Hiçbiri",
   "not_collected": "Toplanmadı",
   "normal": "Normal",
+  "not_defeated": "Yenilmedi",
   "note": "Not",
   "notes_optional": "Notlar (isteğe bağlı)",
   "nuke_all_presets": "Nuke tüm ön ayarları",
@@ -555,6 +558,7 @@
   "ready_to_fill": "{target} numaralı alanı {count} {pals} doldurmaya hazırız.",
   "refresh": "Yenile (Kaydedilmemiş değişiklikleri temizle)",
   "refresh_entity": "{entity} yenile",
+  "relics": "Kalıntılar",
   "remove": "Kaldırmak",
   "remove_all_from_collections": "Seçilen tüm {pals} koleksiyonlarından kaldırın.",
   "remove_from_collection": "Koleksiyondan kaldır",

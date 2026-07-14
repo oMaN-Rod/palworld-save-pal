@@ -131,6 +131,7 @@
   "close_drawer": "Fechar gaveta",
   "close_toast": "Fechar brinde",
   "collect_all_effigies": "Colecione todas as efígies",
+  "collect_all_relics": "Colete todas as relíquias visíveis neste mapa",
   "collected": "Coletado",
   "collection": [
     {
@@ -170,6 +171,7 @@
   "current_missions": "Missões atuais",
   "current_save_file": "Arquivo de salvamento atual",
   "debug": "Depurar",
+  "defeated": "Derrotado",
   "docs": "Documentos",
   "docs_wiki": "Wiki",
   "docs_guides": "Guias",
@@ -453,6 +455,7 @@
   "none": "Nenhum",
   "not_collected": "Não coletado",
   "normal": "Normal",
+  "not_defeated": "Não derrotado",
   "note": "Observação",
   "notes_optional": "Notas (opcional)",
   "nuke_all_presets": "Eliminar todas as predefinições",
@@ -555,6 +558,7 @@
   "ready_to_fill": "Pronto para preencher {target} com {count} {pals} .",
   "refresh": "Atualizar (Excluir alterações não salvas)",
   "refresh_entity": "Atualizar {entity}",
+  "relics": "Relíquias",
   "remove": "Remover",
   "remove_all_from_collections": "Remover todos os {pals} selecionados de suas coleções",
   "remove_from_collection": "Remover da coleção",

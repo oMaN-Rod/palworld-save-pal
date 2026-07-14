@@ -134,7 +134,6 @@
   "cloning_count_pals": "Cloning {count} {pals}",
   "close_drawer": "Close drawer",
   "close_toast": "Close toast",
-  "collect_all_effigies": "Collect all Effigies",
   "collect_all_relics": "Collect all visible relics on this map",
   "collected": "Collected",
   "collection": [
@@ -176,6 +175,7 @@
   "current_save_file": "Current Save File",
   "debug": "Debug",
   "debug_mode": "Debug Mode",
+  "defeated": "Defeated",
   "defense": "Defense",
   "delete": "Delete",
   "delete_count_entities_confirm": "Are you sure you want to delete the {count} selected {entity}?",
@@ -471,6 +471,7 @@
   "none": "None",
   "normal": "Normal",
   "not_collected": "Not Collected",
+  "not_defeated": "Not defeated",
   "note": "Note",
   "notes_optional": "Notes (optional)",
   "nuke_all_presets": "Nuke all preset",

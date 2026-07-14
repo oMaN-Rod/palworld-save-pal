@@ -79,6 +79,27 @@ export function mapToWorld(mapX: number, mapY: number): { x: number; y: number }
 	};
 }
 
+/** `BOSS_Horus_Water` -> `Horus_Water`, the key the pal data is stored under. */
+export function bossPalKey(characterId: string | undefined): string | null {
+	if (!characterId || characterId === 'None') return null;
+	const key = characterId.replace(/^boss_/i, '');
+	return key.length > 0 ? key : null;
+}
+
+/** Last-resort title for the human bosses, whose character_id is literally "None".
+ *  `BOSS_Female_Soldier03` -> `Female Soldier 03`, `REGION_Oilrig_1` -> `Oilrig 1`. */
+export function humanizeSpawnerId(spawnerId: string | undefined): string {
+	if (!spawnerId) return 'Unknown';
+	const name = spawnerId
+		.replace(/^(BOSS|REGION)_/i, '')
+		.replace(/_/g, ' ')
+		.replace(/([a-z])([A-Z])/g, '$1 $2')
+		.replace(/([A-Za-z])(\d)/g, '$1 $2')
+		.replace(/\s+/g, ' ')
+		.trim();
+	return name.length > 0 ? name : 'Unknown';
+}
+
 export function pixelToGameCoords(
 	pixelX: number,
 	pixelY: number,
@@ -86,5 +107,6 @@ export function pixelToGameCoords(
 ): { gameX: number; gameY: number } {
 	const { worldX, worldY } = pixelToWorld(pixelX, pixelY, area);
 	const mapCoords = worldToMap(worldX, worldY);
-	return { gameX: mapCoords.x, gameY: mapCoords.y };
+	// Tooltips all render `worldToMap(...).y * -1`; the readout must match them.
+	return { gameX: mapCoords.x, gameY: mapCoords.y * -1 };
 }
