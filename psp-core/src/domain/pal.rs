@@ -848,8 +848,12 @@ fn save_parameter_schemas() -> Vec<(String, uesave::PropertyTagDataPartial)> {
 
     let byte = || Data::Byte(None);
     let other = |t: PropertyType| Data::Other(t);
+    // Resolve the name the way the READER does, rather than hand-picking a
+    // `StructType` variant: a known type keeps its own variant, anything else
+    // becomes a plain named struct. Guessing wrong makes uesave write the payload
+    // with the wrong codec, and the save no longer parses back.
     let named_struct = |name: &str| Data::Struct {
-        struct_type: StructType::Struct(Some(name.to_string())),
+        struct_type: StructType::from(name),
         id: uesave::FGuid::nil(),
     };
     let plain_struct = |struct_type: StructType| Data::Struct {

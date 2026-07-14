@@ -27,16 +27,16 @@ pub fn ensure_container_schemas(level: &mut uesave::Save) {
     use uesave::{PropertyTagDataPartial as Data, PropertyTagPartial, PropertyType, StructType};
 
     let byte_array = || Data::Array(Box::new(Data::Byte(None)));
-    let raw_struct = |name: &str| Data::Struct {
-        struct_type: StructType::Raw(name.to_string()),
+    // `StructType::from` resolves a name the way the READER does: a known Palworld
+    // type (`PalCharacterContainer`, ...) becomes its own variant, anything else a
+    // plain named struct. Hand-picking `Raw` here instead marks the type unknown,
+    // and uesave then writes the payload with the wrong codec -- a save that no
+    // longer parses back.
+    let pal_struct = |name: &str| Data::Struct {
+        struct_type: StructType::from(name),
         id: uesave::FGuid::nil(),
     };
-    let struct_array = |name: &str| {
-        Data::Array(Box::new(Data::Struct {
-            struct_type: StructType::Struct(Some(name.to_string())),
-            id: uesave::FGuid::nil(),
-        }))
-    };
+    let struct_array = |name: &str| Data::Array(Box::new(pal_struct(name)));
 
     let entries: [(&str, Data); 9] = [
         (
@@ -49,7 +49,7 @@ pub fn ensure_container_schemas(level: &mut uesave::Save) {
         ),
         (
             "worldSaveData.CharacterContainerSaveData.Slots.RawData",
-            raw_struct("PalCharacterContainer"),
+            pal_struct("PalCharacterContainer"),
         ),
         (
             "worldSaveData.CharacterContainerSaveData.Slots.CustomVersionData",
@@ -61,7 +61,7 @@ pub fn ensure_container_schemas(level: &mut uesave::Save) {
         ),
         (
             "worldSaveData.ItemContainerSaveData.Slots.RawData",
-            raw_struct("PalItemContainerSlots"),
+            pal_struct("PalItemContainerSlots"),
         ),
         (
             "worldSaveData.ItemContainerSaveData.Slots.CustomVersionData",
@@ -69,7 +69,7 @@ pub fn ensure_container_schemas(level: &mut uesave::Save) {
         ),
         (
             "worldSaveData.DynamicItemSaveData.RawData",
-            raw_struct("PalDynamicItem"),
+            pal_struct("PalDynamicItem"),
         ),
         (
             "worldSaveData.DynamicItemSaveData.CustomVersionData",

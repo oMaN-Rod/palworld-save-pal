@@ -4,6 +4,11 @@
 //!
 //! These pin the save shapes that hit that in the wild: no pal at all, no insane
 //! pal, and an empty `_dps.sav`.
+//!
+//! Every one of them asserts the bytes PARSE BACK, never merely that the write
+//! returned `Ok`. A primed tag that disagrees with the real one serializes happily
+//! and produces a save neither this app nor the game can read -- which is exactly
+//! what shipped when these tests only checked that serialization succeeded.
 
 mod common;
 
@@ -11,10 +16,22 @@ use psp_core::domain::{pal, player};
 use psp_core::dto::ordered_map::OrderedMap;
 use psp_core::gamedata::GameData;
 use psp_core::progress::null_progress;
+use psp_core::session::SaveSession;
 
 fn game_data() -> GameData {
     let json_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../data/json");
     GameData::load(&json_dir).expect("data dir")
+}
+
+/// Serializes `Level.sav` and reads it straight back. Writing bytes the reader
+/// chokes on is the failure this guards -- `level_sav_bytes()` alone cannot see it.
+fn written_level_parses_back(session: &SaveSession, what: &str) {
+    let bytes = session
+        .level_sav_bytes()
+        .unwrap_or_else(|e| panic!("level.sav must serialize after {what}: {e}"));
+    if let Err(e) = psp_core::savio::read_sav_bytes(&bytes) {
+        panic!("level.sav written after {what} does not parse back: {e}");
+    }
 }
 
 /// Schemas as the file recorded them. The session primes on load, so the gaps these
@@ -62,9 +79,7 @@ fn player_edit_serializes_on_a_save_that_holds_no_pal() {
     modified.insert(id, dto);
     player::update_players(&mut session, &data, &modified, &null_progress()).expect("update");
 
-    session
-        .level_sav_bytes()
-        .expect("level.sav must serialize after a player edit");
+    written_level_parses_back(&session, "a player edit");
 }
 
 /// Healing re-introduces `SanityValue`, which no save records until a pal actually
@@ -84,9 +99,7 @@ fn healing_serializes_on_a_save_where_no_pal_is_insane() {
         pal::heal_all_player_pals(&mut session, &data, id).expect("heal");
     }
 
-    session
-        .level_sav_bytes()
-        .expect("level.sav must serialize after healing");
+    written_level_parses_back(&session, "healing");
 }
 
 /// The new character-map entry and the container slot pointing at it are both built
@@ -107,9 +120,11 @@ fn adding_the_first_pal_to_a_world_that_has_none_serializes() {
     pal::add_player_pal(&mut session, &data, id, "Lamball", "Fluffy", pal_box, None)
         .expect("add pal");
 
-    session
-        .level_sav_bytes()
-        .expect("level.sav must serialize after adding the first pal");
+    // The new pal's character-container slot is a `PalCharacterContainer` RawData.
+    // A world with no pal has empty `Slots`, so no tag for it was ever recorded and
+    // the primer supplies one -- a wrong tag here writes a save the game silently
+    // drops the pal from, and that this app then cannot reopen.
+    written_level_parses_back(&session, "adding the first pal");
 }
 
 /// A `_dps.sav`'s slots are empty until a pal is stored, so its `GotStatusPointList`
@@ -142,7 +157,10 @@ fn adding_a_dps_pal_serializes_when_the_dps_slots_are_empty() {
     pal::add_player_dps_pal(&mut session, &data, id, "Lamball", "Fluffy", None)
         .expect("add dps pal");
 
-    session
+    let files = session
         .player_sav_bytes()
         .expect("_dps.sav must serialize after adding a pal");
+    let (_, dps) = files.get(&id).expect("player is loaded");
+    let dps = dps.as_ref().expect("player has a _dps.sav");
+    psp_core::savio::read_sav_bytes(dps).expect("_dps.sav must parse back after adding a pal");
 }
