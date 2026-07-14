@@ -24,7 +24,10 @@
 		calculateFilters,
 		formatNickname,
 		deepCopy,
-		applyPalPreset
+		applyPalPreset,
+		selectedStorageIndexes,
+		storageIndexOf,
+		withoutStorageIndexes
 	} from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
@@ -548,17 +551,13 @@
 		});
 
 		if (appState.selectedPlayer && appState.selectedPlayer.dps && confirmed) {
-			const palIndexes = Object.entries(appState.selectedPlayer.dps)
-				.filter(([_, pal]) => selectedPals.includes(pal.instance_id))
-				.map(([index]) => index);
+			const palIndexes = selectedStorageIndexes(appState.selectedPlayer.dps, selectedPals);
 			send(MessageType.DELETE_DPS_PALS, {
 				player_id: appState.selectedPlayer.uid,
 				pal_indexes: palIndexes
 			});
 
-			appState.selectedPlayer.dps = Object.fromEntries(
-				Object.entries(appState.selectedPlayer.dps).filter(([idx, _]) => !palIndexes.includes(idx))
-			);
+			appState.selectedPlayer.dps = withoutStorageIndexes(appState.selectedPlayer.dps, palIndexes);
 		}
 
 		selectedPals = [];
@@ -572,18 +571,13 @@
 			cancelText: m.cancel()
 		});
 		if (appState.selectedPlayer && appState.selectedPlayer.dps && confirmed) {
-			const palIndex = Object.entries(appState.selectedPlayer.dps).find(
-				([_, p]) => p.instance_id === pal.instance_id
-			);
+			const palIndex = storageIndexOf(appState.selectedPlayer.dps, pal.instance_id);
+			if (palIndex === undefined) return;
 			send(MessageType.DELETE_DPS_PALS, {
 				player_id: appState.selectedPlayer.uid,
-				pal_indexes: [palIndex![0]]
+				pal_indexes: [palIndex]
 			});
-			appState.selectedPlayer.dps = Object.fromEntries(
-				Object.entries(appState.selectedPlayer.dps).filter(
-					([_, p]) => p.instance_id !== pal.instance_id
-				)
-			);
+			appState.selectedPlayer.dps = withoutStorageIndexes(appState.selectedPlayer.dps, [palIndex]);
 		}
 	}
 
@@ -887,7 +881,12 @@
 		<div>
 			<!-- Pager -->
 			<div id="dps-pager" class="mb-4 flex items-center justify-center space-x-4">
-				<Button  class="rounded-full font-bold p-0!" variant="ghost" size="md" onclick={decrementPage}>
+				<Button
+					class="rounded-full p-0! font-bold"
+					variant="ghost"
+					size="md"
+					onclick={decrementPage}
+				>
 					<img src={staticIcons.qIcon} alt={m.previous()} class="h-10 w-10" />
 				</Button>
 
@@ -907,7 +906,7 @@
 					{/each}
 				</div>
 
-				<Button class="rounded-sm font-bold p-0!" variant="ghost" size="md" onclick={incrementPage}>
+				<Button class="rounded-sm p-0! font-bold" variant="ghost" size="md" onclick={incrementPage}>
 					<img src={staticIcons.eIcon} alt={m.next()} class="h-10 w-10" />
 				</Button>
 			</div>

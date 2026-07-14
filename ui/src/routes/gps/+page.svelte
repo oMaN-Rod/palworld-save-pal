@@ -25,7 +25,10 @@
 		calculateFilters,
 		formatNickname,
 		deepCopy,
-		applyPalPreset
+		applyPalPreset,
+		selectedStorageIndexes,
+		storageIndexOf,
+		withoutStorageIndexes
 	} from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
@@ -456,22 +459,18 @@
 		});
 
 		if (appState.gps && confirmed) {
-			const palIndexes = Object.entries(appState.gps)
-				.filter(([_, pal]) => selectedPals.includes(pal.instance_id))
-				.map(([index]) => index);
+			const palIndexes = selectedStorageIndexes(appState.gps, selectedPals);
 			send(MessageType.DELETE_GPS_PALS, {
 				pal_indexes: palIndexes
 			});
 
-			appState.gps = Object.fromEntries(
-				Object.entries(appState.gps).filter(([idx, _]) => !palIndexes.includes(idx))
-			);
+			appState.gps = withoutStorageIndexes(appState.gps, palIndexes);
 		}
 
 		selectedPals = [];
 	}
 
-	async function handleDeletePal(pal: Pal) {		
+	async function handleDeletePal(pal: Pal) {
 		const confirmed = await modal.showConfirmModal({
 			title: m.delete_entity({ entity: c.pal }),
 			message: m.delete_entity_by_name_confirm({ name: pal.nickname || pal.name }),
@@ -479,15 +478,12 @@
 			cancelText: m.cancel()
 		});
 		if (appState.gps && confirmed) {
-			const palIndex = Object.entries(appState.gps).find(
-				([_, p]) => p.instance_id === pal.instance_id
-			);
+			const palIndex = storageIndexOf(appState.gps, pal.instance_id);
+			if (palIndex === undefined) return;
 			send(MessageType.DELETE_GPS_PALS, {
-				pal_indexes: [palIndex![0]]
+				pal_indexes: [palIndex]
 			});
-			appState.gps = Object.fromEntries(
-				Object.entries(appState.gps).filter(([_, p]) => p.instance_id !== pal.instance_id)
-			);
+			appState.gps = withoutStorageIndexes(appState.gps, [palIndex]);
 		}
 	}
 
@@ -946,7 +942,12 @@
 		<div>
 			<!-- Pager -->
 			<div class="mb-4 flex items-center justify-center space-x-4">
-				<Button  class="rounded-full font-bold p-0!" variant="ghost" size="md" onclick={decrementPage}>
+				<Button
+					class="rounded-full p-0! font-bold"
+					variant="ghost"
+					size="md"
+					onclick={decrementPage}
+				>
 					<img src={staticIcons.qIcon} alt="Previous" class="h-10 w-10" />
 				</Button>
 
@@ -966,7 +967,7 @@
 					{/each}
 				</div>
 
-				<Button class="rounded-sm font-bold p-0!" variant="ghost" size="md" onclick={incrementPage}>
+				<Button class="rounded-sm p-0! font-bold" variant="ghost" size="md" onclick={incrementPage}>
 					<img src={staticIcons.eIcon} alt="Next" class="h-10 w-10" />
 				</Button>
 			</div>
