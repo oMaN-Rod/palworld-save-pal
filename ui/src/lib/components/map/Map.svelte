@@ -294,8 +294,9 @@
 			click={handleMapClick}
 			controls={{ fullscreen: true }}
 		>
-			<!-- World map background -->
-			<Layer.Static url={mapImg.maps[area]} {extent} />
+			{#each MAP_AREA_ORDER as candidate}
+				<Layer.Static url={mapImg.maps[candidate]} {extent} visible={area === candidate} />
+			{/each}
 
 			<!-- Origin marker layer -->
 			{#if showOrigin && area === 'MainMap'}
