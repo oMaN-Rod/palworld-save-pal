@@ -1,20 +1,20 @@
 import { sendAndWait } from '$lib/utils/websocketUtils';
-import { MessageType, type Effigy } from '$types';
+import { MessageType, type Relic } from '$types';
 
-export class Effigies {
+export class Relics {
 	private loading = false;
 
-	points: Record<string, Effigy> = $state({});
+	points: Record<string, Relic> = $state({});
 
 	private async ensureLoaded(): Promise<void> {
 		if (Object.keys(this.points).length === 0 && !this.loading) {
 			try {
 				this.loading = true;
-				this.points = await sendAndWait(MessageType.GET_EFFIGIES);
+				this.points = await sendAndWait(MessageType.GET_RELICS);
 				this.loading = false;
 			} catch (error) {
 				this.loading = false;
-				console.error('Error fetching effigies:', error);
+				console.error('Error fetching relics:', error);
 				throw error;
 			}
 		}
@@ -24,7 +24,7 @@ export class Effigies {
 		}
 	}
 
-	async getEffigies(): Promise<Record<string, Effigy>> {
+	async getRelics(): Promise<Record<string, Relic>> {
 		await this.ensureLoaded();
 		return this.points;
 	}
@@ -35,4 +35,4 @@ export class Effigies {
 	}
 }
 
-export const effigies = new Effigies();
+export const relics = new Relics();

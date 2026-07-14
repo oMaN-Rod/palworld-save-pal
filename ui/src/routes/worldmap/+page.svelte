@@ -10,15 +10,15 @@
 		type MapArea
 	} from '$components/map/utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
-	import { mapImg } from '$components/map/styles';
+	import { mapImg, relicTypeIcon } from '$components/map/styles';
 	import Target from '@lucide/svelte/icons/target';
 	import Unlock from '@lucide/svelte/icons/unlock';
 	import Users from '@lucide/svelte/icons/users';
 	import MapIcon from '@lucide/svelte/icons/map';
 	import Building from '@lucide/svelte/icons/building';
-	import { mapObjects, fastTravelPoints, effigies, bosses } from '$lib/data';
+	import { mapObjects, fastTravelPoints, relics, relicData, bosses } from '$lib/data';
 	import type { Map as OLMap } from 'ol';
-	import type { Base, GuildSummary, MapUnlockPoint, Player } from '$types';
+	import type { Base, GuildSummary, MapUnlockPoint, Player, RelicPoint } from '$types';
 	import { assetLoader } from '$utils';
 	import { EditBaseModal } from '$components/modals';
 	import { EntryState, MessageType } from '$types';
@@ -41,7 +41,9 @@
 		showPlayers: boolean;
 		showBases: boolean;
 		showFastTravel: boolean;
-		showEffigies: boolean;
+		showRelics: boolean;
+		/** Per-relic-type visibility; a missing key means visible. */
+		relicTypes: Record<string, boolean>;
 		showDungeons: boolean;
 		showBosses: boolean;
 		showAlphaPals: boolean;
@@ -54,7 +56,8 @@
 		showPlayers: true,
 		showBases: true,
 		showFastTravel: true,
-		showEffigies: true,
+		showRelics: true,
+		relicTypes: {},
 		showDungeons: true,
 		showBosses: true,
 		showAlphaPals: true,
@@ -108,8 +111,35 @@
 	const fastTravelUnlockedCount = $derived(
 		appState.selectedPlayer?.unlocked_fast_travel_points?.length
 	);
-	const effigyCount = $derived(Object.keys(effigies.points).length);
-	const effigyCollectedCount = $derived(appState.selectedPlayer?.collected_effigies?.length);
+	const relicTypeStats = $derived.by(() => {
+		const collectedSets: Record<string, Set<string>> = {};
+		for (const [type, guids] of Object.entries(appState.selectedPlayer?.collected_relics ?? {})) {
+			collectedSets[type] = new Set(guids.map((guid) => guid.toUpperCase()));
+		}
+		const stats: Record<string, { total: number; collected: number }> = {};
+		for (const [guid, relic] of Object.entries(relics.points)) {
+			if (mapOf(relic.x, relic.y) !== activeArea) continue;
+			const entry = (stats[relic.relic_type] ??= { total: 0, collected: 0 });
+			entry.total++;
+			if (collectedSets[relic.relic_type]?.has(guid.toUpperCase())) entry.collected++;
+		}
+		return stats;
+	});
+
+	// Game order (relic_data.json), restricted to types that exist on this map.
+	const relicTypeList = $derived.by(() => {
+		const present = Object.keys(relicTypeStats);
+		const ordered = Object.keys(relicData.relicData).filter((type) => present.includes(type));
+		return [...ordered, ...present.filter((type) => !ordered.includes(type))];
+	});
+
+	const relicCount = $derived(
+		Object.values(relicTypeStats).reduce((acc, entry) => acc + entry.total, 0)
+	);
+	const relicCollectedCount = $derived(
+		Object.values(relicTypeStats).reduce((acc, entry) => acc + entry.collected, 0)
+	);
+	const isRelicTypeVisible = (type: string) => mapOptions.relicTypes?.[type] !== false;
 	const dungeonCount = $derived.by(() => {
 		return Object.values(mapObjects.points).filter((point) => point.type === 'dungeon').length || 0;
 	});
@@ -238,19 +268,32 @@
 		player.state = EntryState.MODIFIED;
 	}
 
-	function handleToggleEffigy(point: MapUnlockPoint) {
+	const CAPTURE_POWER = 'capture_power';
+
+	// CapturePower relics ARE the Lifmunk Effigies: the save write path prefers
+	// collected_effigies over collected_relics.capture_power, so mirror one onto
+	// the other and keep the Relic item count in step.
+	function syncCapturePower(player: Player, delta: number) {
+		player.collected_effigies = [...(player.collected_relics?.[CAPTURE_POWER] ?? [])];
+		updateRelicCount(player, delta);
+	}
+
+	function handleToggleRelic(point: RelicPoint) {
 		const player = appState.selectedPlayer;
 		if (!player) return;
-		const collected = player.collected_effigies ?? [];
+		const byType = player.collected_relics ?? {};
+		const collected = byType[point.relic_type] ?? [];
 		const index = collected.findIndex((guid) => guid.toUpperCase() === point.guid.toUpperCase());
 		if (index >= 0) {
 			collected.splice(index, 1);
-			updateRelicCount(player, -1);
 		} else {
 			collected.push(point.guid);
-			updateRelicCount(player, 1);
 		}
-		player.collected_effigies = collected;
+		byType[point.relic_type] = collected;
+		player.collected_relics = byType;
+		if (point.relic_type === CAPTURE_POWER) {
+			syncCapturePower(player, index >= 0 ? -1 : 1);
+		}
 		player.state = EntryState.MODIFIED;
 	}
 
@@ -267,15 +310,29 @@
 		player.state = EntryState.MODIFIED;
 	}
 
-	function handleCollectAllEffigies() {
+	// Only the active map area and the currently visible types, so this can never
+	// write GUIDs the user cannot see.
+	function handleCollectAllRelics() {
 		const player = appState.selectedPlayer;
 		if (!player) return;
-		const collected = player.collected_effigies ?? [];
-		const existing = new Set(collected.map((guid) => guid.toUpperCase()));
-		const toAdd = Object.keys(effigies.points).filter((guid) => !existing.has(guid.toUpperCase()));
-		if (toAdd.length === 0) return;
-		player.collected_effigies = [...collected, ...toAdd];
-		updateRelicCount(player, toAdd.length);
+		const byType = player.collected_relics ?? {};
+		let capturePowerAdded = 0;
+		let added = 0;
+		for (const [guid, relic] of Object.entries(relics.points)) {
+			if (mapOf(relic.x, relic.y) !== activeArea) continue;
+			if (!isRelicTypeVisible(relic.relic_type)) continue;
+			const collected = byType[relic.relic_type] ?? [];
+			if (collected.some((existing) => existing.toUpperCase() === guid.toUpperCase())) continue;
+			collected.push(guid);
+			byType[relic.relic_type] = collected;
+			added++;
+			if (relic.relic_type === CAPTURE_POWER) capturePowerAdded++;
+		}
+		if (added === 0) return;
+		player.collected_relics = byType;
+		if (capturePowerAdded > 0) {
+			syncCapturePower(player, capturePowerAdded);
+		}
 		player.state = EntryState.MODIFIED;
 	}
 
@@ -387,17 +444,17 @@
 							</span>
 						</button>
 						<button
-							class="flex items-center space-x-2 {(mapOptions.showEffigies ?? true)
+							class="flex items-center space-x-2 {(mapOptions.showRelics ?? true)
 								? ''
 								: 'opacity-25'} "
-							onclick={() => (mapOptions.showEffigies = !(mapOptions.showEffigies ?? true))}
+							onclick={() => (mapOptions.showRelics = !(mapOptions.showRelics ?? true))}
 						>
-							<img src={mapImg.effigy} alt={m.effigies()} class="mr-2 h-6 w-6" />
-							<span>{m.effigy()}</span>
+							<img src={mapImg.effigy} alt={m.relics()} class="mr-2 h-6 w-6" />
+							<span>{m.relics()}</span>
 							<span class="text-surface-500 text-xs">
-								{effigyCollectedCount !== undefined
-									? `${effigyCollectedCount}/${effigyCount}`
-									: effigyCount}
+								{appState.selectedPlayer
+									? `${relicCollectedCount}/${relicCount}`
+									: relicCount}
 							</span>
 						</button>
 						{#if appState.saveFile}
@@ -452,6 +509,37 @@
 							<span class="text-surface-500 text-xs">{predatorPalCount}</span>
 						</button>
 					</div>
+					{#if (mapOptions.showRelics ?? true) && relicTypeList.length > 0}
+						<div class="border-surface-700 grid grid-cols-2 gap-2 rounded-sm border p-2">
+							{#each relicTypeList as relicType (relicType)}
+								{@const stats = relicTypeStats[relicType]}
+								<button
+									class="flex items-center space-x-2 {isRelicTypeVisible(relicType)
+										? ''
+										: 'opacity-25'}"
+									onclick={() =>
+										(mapOptions.relicTypes = {
+											...(mapOptions.relicTypes ?? {}),
+											[relicType]: !isRelicTypeVisible(relicType)
+										})}
+								>
+									<img
+										src={relicTypeIcon(relicType)}
+										alt={relicData.relicData[relicType]?.localized_name ?? relicType}
+										class="mr-1 h-5 w-5"
+									/>
+									<span class="truncate text-xs">
+										{relicData.relicData[relicType]?.localized_name ?? relicType}
+									</span>
+									<span class="text-surface-500 text-xs">
+										{appState.selectedPlayer
+											? `${stats.collected}/${stats.total}`
+											: stats.total}
+									</span>
+								</button>
+							{/each}
+						</div>
+					{/if}
 				</div>
 				{#if appState.saveFile}
 					<div class="flex flex-col gap-2">
@@ -622,16 +710,17 @@
 					showPlayers={mapOptions.showPlayers}
 					showBases={mapOptions.showBases}
 					showFastTravel={mapOptions.showFastTravel}
-					showEffigies={mapOptions.showEffigies ?? true}
+					showRelics={mapOptions.showRelics ?? true}
+					relicTypes={mapOptions.relicTypes ?? {}}
 					showDungeons={mapOptions.showDungeons}
 					showBosses={mapOptions.showBosses ?? true}
 					showAlphaPals={mapOptions.showAlphaPals}
 					showPredatorPals={mapOptions.showPredatorPals}
 					onEditBase={handleEditBase}
 					onToggleFastTravel={handleToggleFastTravel}
-					onToggleEffigy={handleToggleEffigy}
+					onToggleRelic={handleToggleRelic}
 					onUnlockAllFastTravel={handleUnlockAllFastTravel}
-					onCollectAllEffigies={handleCollectAllEffigies}
+					onCollectAllRelics={handleCollectAllRelics}
 				/>
 			{/if}
 		</div>

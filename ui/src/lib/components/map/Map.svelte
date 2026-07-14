@@ -19,14 +19,14 @@
 		mapImg,
 		baseIconStyle,
 		fastTravelStyle,
-		effigyStyle,
+		relicStyle,
 		dungeonIconStyle,
 		bossStyle,
 		originIconStyle,
 		originLineStyle,
 		playerIconStyle
 	} from './styles';
-	import { mapObjects, fastTravelPoints, effigies, bosses } from '$lib/data';
+	import { mapObjects, fastTravelPoints, relics, relicData, bosses } from '$lib/data';
 	import { assetLoader } from '$utils';
 	import 'svelte-openlayers/styles.css';
 	import PlayerPopup from './PlayerPopup.svelte';
@@ -37,8 +37,8 @@
 	import BasePopup from './BasePopup.svelte';
 	import FastTravelHover from './FastTravelHover.svelte';
 	import FastTravelPopup from './FastTravelPopup.svelte';
-	import EffigyHover from './EffigyHover.svelte';
-	import EffigyPopup from './EffigyPopup.svelte';
+	import RelicHover from './RelicHover.svelte';
+	import RelicPopup from './RelicPopup.svelte';
 	import DungeonHover from './DungeonHover.svelte';
 	import DungeonPopup from './DungeonPopup.svelte';
 	import BossHover from './BossHover.svelte';
@@ -47,7 +47,7 @@
 	import PalPopup from './PalPopup.svelte';
 	import { onMount } from 'svelte';
 	import ContextMenu from 'ol-contextmenu';
-	import type { MapUnlockPoint } from '$types';
+	import type { MapUnlockPoint, RelicPoint } from '$types';
 	import * as m from '$i18n/messages';
 
 	// Props to control which markers to display
@@ -59,16 +59,17 @@
 		showPlayers = true,
 		showBases = true,
 		showFastTravel = true,
-		showEffigies = true,
+		showRelics = true,
+		relicTypes = {},
 		showDungeons = true,
 		showBosses = true,
 		showAlphaPals = true,
 		showPredatorPals = true,
 		onEditBase,
 		onToggleFastTravel,
-		onToggleEffigy,
+		onToggleRelic,
 		onUnlockAllFastTravel,
-		onCollectAllEffigies
+		onCollectAllRelics
 	}: {
 		map?: OLMap | null;
 		area?: MapArea;
@@ -77,16 +78,18 @@
 		showPlayers?: boolean;
 		showBases?: boolean;
 		showFastTravel?: boolean;
-		showEffigies?: boolean;
+		showRelics?: boolean;
+		/** Per-relic-type visibility; a missing key means visible. */
+		relicTypes?: Record<string, boolean>;
 		showDungeons?: boolean;
 		showBosses?: boolean;
 		showAlphaPals?: boolean;
 		showPredatorPals?: boolean;
 		onEditBase?: (base: any) => void;
 		onToggleFastTravel?: (point: MapUnlockPoint) => void;
-		onToggleEffigy?: (point: MapUnlockPoint) => void;
+		onToggleRelic?: (point: RelicPoint) => void;
 		onUnlockAllFastTravel?: () => void;
-		onCollectAllEffigies?: () => void;
+		onCollectAllRelics?: () => void;
 	} = $props();
 
 	const appState = getAppState();
@@ -149,17 +152,26 @@
 			.filter((p) => mapOf(p.x, p.y) === area);
 	});
 
-	const effigyPointList = $derived.by(() => {
-		const collected = new Set(
-			(selectedPlayer?.collected_effigies ?? []).map((guid) => guid.toUpperCase())
-		);
-		return Object.entries(effigies.points)
+	const collectedRelicGuids = $derived.by(() => {
+		const byType: Record<string, Set<string>> = {};
+		for (const [type, guids] of Object.entries(selectedPlayer?.collected_relics ?? {})) {
+			byType[type] = new Set(guids.map((guid) => guid.toUpperCase()));
+		}
+		return byType;
+	});
+
+	const relicPointList: RelicPoint[] = $derived.by(() => {
+		return Object.entries(relics.points)
+			.filter(([, point]) => relicTypes[point.relic_type] !== false)
 			.map(([guid, point]) => ({
 				guid,
 				x: point.x,
 				y: point.y,
-				localized_name: m.effigy(),
-				unlocked: selectedPlayer ? collected.has(guid.toUpperCase()) : undefined
+				relic_type: point.relic_type,
+				localized_name: relicData.relicData[point.relic_type]?.localized_name ?? point.relic_type,
+				unlocked: selectedPlayer
+					? (collectedRelicGuids[point.relic_type]?.has(guid.toUpperCase()) ?? false)
+					: undefined
 			}))
 			.filter((p) => mapOf(p.x, p.y) === area);
 	});
@@ -220,8 +232,8 @@
 				onToggleFastTravel?.(feature.get('data') as MapUnlockPoint);
 				return;
 			}
-			if (featureType === 'effigy') {
-				onToggleEffigy?.(feature.get('data') as MapUnlockPoint);
+			if (featureType === 'relic') {
+				onToggleRelic?.(feature.get('data') as RelicPoint);
 				return;
 			}
 		}
@@ -369,20 +381,20 @@
 				</Layer.Vector>
 			{/if}
 
-			<!-- Lifmunk Effigy markers layer -->
-			{#if showEffigies}
+			<!-- Relic markers layer (all EPalRelicType, incl. Lifmunk Effigies) -->
+			{#if showRelics}
 				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
-					{#each effigyPointList as point (point.guid)}
+					{#each relicPointList as point (point.guid)}
 						<Feature.Point
 							coordinates={worldToPixel(point.x, point.y, area)}
-							style={effigyStyle}
-							properties={{ type: 'effigy', data: point }}
+							style={relicStyle}
+							properties={{ type: 'relic', data: point }}
 						>
 							<Overlay.Hover {positioning} {offset} class={hoverClass}>
-								<EffigyHover {point} />
+								<RelicHover {point} />
 							</Overlay.Hover>
 							<Overlay.Popup {positioning} {offset}>
-								<EffigyPopup {point} />
+								<RelicPopup {point} />
 							</Overlay.Popup>
 						</Feature.Point>
 					{/each}
@@ -490,11 +502,11 @@
 			<button
 				type="button"
 				class="map-action-btn"
-				title={m.collect_all_effigies()}
-				aria-label={m.collect_all_effigies()}
-				onclick={() => onCollectAllEffigies?.()}
+				title={m.collect_all_relics()}
+				aria-label={m.collect_all_relics()}
+				onclick={() => onCollectAllRelics?.()}
 			>
-				<img src={mapImg.effigy} alt={m.effigies()} />
+				<img src={mapImg.effigy} alt={m.relics()} />
 			</button>
 		</div>
 	{/if}

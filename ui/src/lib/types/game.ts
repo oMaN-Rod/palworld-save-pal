@@ -250,6 +250,15 @@ export type Effigy = {
 	z: number;
 };
 
+/** An entry of relics.json; `relic_type` is a bare EPalRelicType key. */
+export type Relic = {
+	class: string;
+	x: number;
+	y: number;
+	z: number;
+	relic_type: string;
+};
+
 export type Boss = {
 	spawner_id: string;
 	character_id: string;
@@ -266,6 +275,8 @@ export type MapUnlockPoint = {
 	localized_name: string;
 	unlocked?: boolean;
 };
+
+export type RelicPoint = MapUnlockPoint & { relic_type: string };
 
 export type BaseDTO = {
 	id: string;

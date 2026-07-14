@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { Card } from '$components/ui';
-	import type { MapUnlockPoint } from '$types';
+	import type { RelicPoint } from '$types';
 	import { worldToMap } from './utils';
 	import { Globe, Map, Check, X } from 'lucide-svelte';
-	import { mapImg } from './styles';
+	import { relicTypeIcon } from './styles';
 	import * as m from '$i18n/messages';
 
 	let {
 		point
 	}: {
-		point: MapUnlockPoint;
+		point: RelicPoint;
 	} = $props();
 
 	const mapCoords = $derived(worldToMap(point.x, point.y));
@@ -19,9 +19,13 @@
 	<div class="pointer-events-auto space-y-3">
 		<div class="border-b pb-3">
 			<div class="flex items-start gap-2">
-				<img src={mapImg.effigy} alt={m.effigy()} class="mt-1 h-5 w-5 shrink-0" />
+				<img
+					src={relicTypeIcon(point.relic_type)}
+					alt={point.localized_name}
+					class="mt-1 h-5 w-5 shrink-0"
+				/>
 				<div class="min-w-0 flex-1">
-					<h3 class="text-foreground truncate text-lg font-bold">{m.effigy()}</h3>
+					<h3 class="text-foreground truncate text-lg font-bold">{point.localized_name}</h3>
 				</div>
 			</div>
 		</div>

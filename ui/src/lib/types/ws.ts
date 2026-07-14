@@ -55,6 +55,7 @@ export enum MessageType {
 	GET_BOSSES = 'get_bosses',
 	GET_FAST_TRAVEL_POINTS = 'get_fast_travel_points',
 	GET_EFFIGIES = 'get_effigies',
+	GET_RELICS = 'get_relics',
 	DELETE_GUILD = 'delete_guild',
 	DELETE_PLAYER = 'delete_player',
 	NUKE_PRESETS = 'nuke_presets',

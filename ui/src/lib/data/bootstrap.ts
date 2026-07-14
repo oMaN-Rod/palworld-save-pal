@@ -10,7 +10,6 @@ import { expData } from './exp.svelte';
 import { friendshipData } from './friendship.svelte';
 import { itemsData } from './items.svelte';
 import { labResearchData } from './labResearch.svelte';
-import { effigies } from './effigies.svelte';
 import { fastTravelPoints } from './fastTravelPoints.svelte';
 import { mapObjects } from './mapObjects.svelte';
 import { missionsData } from './missions.svelte';
@@ -18,6 +17,7 @@ import { palsData } from './pals.svelte';
 import { passiveSkillsData } from './passiveSkills.svelte';
 import { presetsData } from './presets.svelte';
 import { relicData } from './relic.svelte';
+import { relics } from './relics.svelte';
 import { technologiesData } from './technologies.svelte';
 import { workSuitabilityData } from './workSuitability.svelte';
 
@@ -35,7 +35,7 @@ export const bootstrap = async () => {
 	await buildingsData.reset();
 	await mapObjects.reset();
 	await fastTravelPoints.reset();
-	await effigies.reset();
+	await relics.reset();
 	await bosses.reset();
 	await labResearchData.reset();
 	await missionsData.reset();

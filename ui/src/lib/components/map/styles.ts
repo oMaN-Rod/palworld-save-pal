@@ -159,31 +159,37 @@ export const fastTravelLockedIconStyle = createIconStyle({
 	opacity: 0.6
 });
 
-export const effigyIconStyle = new Style({
-	image: new Icon({
-		src: mapImg.effigy,
-		scale: 0.1,
-		anchor: [0.5, 0.5]
-	})
-});
-
-export const effigyLockedIconStyle = new Style({
-	image: new Icon({
-		src: mapImg.effigy,
-		scale: 0.1,
-		anchor: [0.5, 0.5],
-		opacity: 0.60
-	})
-});
-
 export const fastTravelStyle = (feature: FeatureLike) => {
 	const data = feature.get('data');
 	return data?.unlocked === false ? fastTravelLockedIconStyle : fastTravelIconStyle;
 };
 
-export const effigyStyle = (feature: FeatureLike) => {
+/** Per-type relic icon, reusing the relic-stat art (`relic_<type>.webp`). */
+export function relicTypeIcon(relicType: string): string {
+	return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/relic_${relicType}.webp`);
+}
+
+const relicStyleCache: Record<string, Style> = {};
+
+function relicIconStyle(relicType: string, collected: boolean): Style {
+	const cacheKey = `${relicType}:${collected}`;
+	const cached = relicStyleCache[cacheKey];
+	if (cached) return cached;
+	const style = new Style({
+		image: new Icon({
+			src: relicTypeIcon(relicType),
+			scale: 0.5,
+			anchor: [0.5, 0.5],
+			opacity: collected ? 1 : 0.6
+		})
+	});
+	relicStyleCache[cacheKey] = style;
+	return style;
+}
+
+export const relicStyle = (feature: FeatureLike) => {
 	const data = feature.get('data');
-	return data?.unlocked === false ? effigyLockedIconStyle : effigyIconStyle;
+	return relicIconStyle(data?.relic_type ?? 'capture_power', data?.unlocked !== false);
 };
 
 export const dungeonIconStyle = createIconStyle({

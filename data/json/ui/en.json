@@ -135,6 +135,7 @@
   "close_drawer": "Close drawer",
   "close_toast": "Close toast",
   "collect_all_effigies": "Collect all Effigies",
+  "collect_all_relics": "Collect all visible relics on this map",
   "collected": "Collected",
   "collection": [
     {
@@ -573,6 +574,7 @@
   "ready_to_fill": "Ready to fill {target} with {count} {pals}.",
   "refresh": "Refresh (Purge unsaved changes)",
   "refresh_entity": "Refresh {entity}",
+  "relics": "Relics",
   "remove": "Remove",
   "remove_all_from_collections": "Remove all selected {pals} from their collections",
   "remove_from_collection": "Remove from collection",

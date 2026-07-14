@@ -1,20 +1,28 @@
 <script lang="ts">
-	import type { MapUnlockPoint } from '$types';
+	import type { RelicPoint } from '$types';
 	import { worldToMap } from './utils';
+	import { relicTypeIcon } from './styles';
 	import { Globe, Map, Check, X } from 'lucide-svelte';
 	import * as m from '$i18n/messages';
 
 	let {
 		point
 	}: {
-		point: MapUnlockPoint;
+		point: RelicPoint;
 	} = $props();
 
 	const mapCoords = $derived(worldToMap(point.x, point.y));
 </script>
 
 <div class="popup-content">
-	<h3 class="text-lg font-bold">{m.effigy()}</h3>
+	<div class="flex items-center gap-2">
+		<img
+			src={relicTypeIcon(point.relic_type)}
+			alt={point.localized_name}
+			class="h-5 w-5 shrink-0"
+		/>
+		<h3 class="text-lg font-bold">{point.localized_name}</h3>
+	</div>
 	<div class="mt-2 space-y-1">
 		{#if point.unlocked !== undefined}
 			<div class="flex items-center gap-2">
@@ -59,6 +67,5 @@
 
 	.popup-content h3 {
 		margin-top: 0;
-		margin-bottom: 8px;
 	}
 </style>

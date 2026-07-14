@@ -239,6 +239,14 @@ pub async fn handle_get_bosses(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerEr
     Ok(())
 }
 
+/// All 405 collectible relics of every `EPalRelicType`; `effigies` is the
+/// CapturePower subset of this same table.
+pub async fn handle_get_relics(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
+    let payload = raw_file(&ctx.app.game_data, "relics");
+    ctx.emitter.emit(MessageType::GetRelics, &payload);
+    Ok(())
+}
+
 pub async fn handle_get_fast_travel_points(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let payload = raw_file(&ctx.app.game_data, "fast_travel_points");
     ctx.emitter.emit(MessageType::GetFastTravelPoints, &payload);
@@ -439,6 +447,11 @@ mod tests {
         )
         .unwrap();
         fs::write(json_dir.join("effigies.json"), r#"{"Eff1": {"x": 2}}"#).unwrap();
+        fs::write(
+            json_dir.join("relics.json"),
+            r#"{"Rel1": {"x": 3, "relic_type": "jump_power"}}"#,
+        )
+        .unwrap();
     }
 
     macro_rules! run_handler {
@@ -565,6 +578,17 @@ mod tests {
         let frame = run_handler!(test, handle_get_bosses);
         assert_eq!(frame["type"], "get_bosses");
         assert!(frame["data"].is_object(), "bosses payload must be an object");
+    }
+
+    #[tokio::test]
+    async fn get_relics_returns_the_raw_file() {
+        let mut test = TestContext::new(write_fixture_tree).await;
+        let frame = run_handler!(test, handle_get_relics);
+        assert_eq!(frame["type"], "get_relics");
+        assert_eq!(
+            frame["data"]["Rel1"],
+            json!({"x": 3, "relic_type": "jump_power"})
+        );
     }
 
     #[tokio::test]
