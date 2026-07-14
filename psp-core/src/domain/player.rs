@@ -823,6 +823,14 @@ fn apply_player_dto(
                 delta,
                 dto.collected_relics.as_ref(),
             );
+        } else if dto.collected_relics.is_some() {
+            // A malformed payload: the frontend always sends both together (see comment
+            // above), so `collected_relics` with no `collected_effigies` silently drops
+            // every typed relic on this save rather than erroring.
+            tracing::warn!(
+                %player_id,
+                "collected_relics present without collected_effigies; dropping typed relic write"
+            );
         }
         // Must follow the relic counters, which own every type's possess-map entry.
         ensure_relic_possess_map_keys(&mut loaded.sav, &dto.status_point_list);
@@ -1042,8 +1050,12 @@ fn apply_unlock_flags(
                 .collect()
         })
         .unwrap_or_default();
-    // `keys` is untrusted input and may repeat a key; dedupe so a duplicate cannot be
-    // counted as two additions (the map write below collapses it to one entry anyway).
+    // `keys` is untrusted input and may repeat a key; dedupe here so a duplicate cannot
+    // be counted as two additions. The map write below does NOT dedupe -- a repeated key
+    // lands in `RelicObtainForInstanceFlag` as two `MapEntry`s with the same name. That
+    // differs from `relic_flag_write`'s `Flags` map, which does dedupe its write, because
+    // a duplicate there would inflate `RelicBonusExpTableIndex` by one per repeat (see
+    // that function's comment).
     let now_true: std::collections::BTreeSet<&str> = keys.iter().map(String::as_str).collect();
 
     let delta = FlagDelta {
@@ -1082,9 +1094,12 @@ fn relic_type_name(property: &Property) -> Option<&str> {
 
 /// The `Flags` map to write for one relic type, and how the `true` set changed.
 ///
-/// The map keeps `keys` in the caller's order, exactly as `apply_unlock_flags` writes the
-/// flat map: the two must stay byte-comparable for CapturePower. Only the DELTA dedupes --
-/// `keys` is untrusted DTO input, and a repeated guid must not count as two collections.
+/// The map keeps `keys` in CALLER order (first-seen), exactly as `apply_unlock_flags`
+/// writes the flat map -- order is deliberate, not incidental, so a caller that sorted
+/// or reordered `keys` would silently change save bytes. Both the delta AND the map
+/// itself dedupe a repeated guid: `RelicBonusExpTableIndex` (see `apply_relic_counters`)
+/// counts `Flags` ENTRIES, so a duplicate map entry would inflate it by one per repeat.
+/// `keys` is untrusted DTO input, so this dedupe is load-bearing, not defensive-only.
 fn relic_flag_write(
     keys: &[String],
     previously_true: &std::collections::BTreeSet<String>,
@@ -1100,8 +1115,10 @@ fn relic_flag_write(
             .filter(|key| !now_true.contains(key.as_str()))
             .count(),
     };
+    let mut seen = std::collections::BTreeSet::new();
     let flags = keys
         .iter()
+        .filter(|key| seen.insert(key.as_str()))
         .map(|key| uesave::MapEntry {
             key: props::name_property(key),
             value: props::bool_property(true),
@@ -1167,8 +1184,11 @@ fn entry_true_flags(entry: &Properties) -> std::collections::BTreeSet<String> {
 ///   - `RelicObtainForInstanceFlagByType` is SPARSE: the game appends a type's entry lazily,
 ///     on first collection. So a missing entry is normal, and collecting a type's first
 ///     relic must CREATE one -- but only when there is a guid to write, never an empty
-///     entry. Appending needs no `ensure_schema`: `.Type` and `.Flags` schemas are present
-///     whenever the array itself is.
+///     entry. In every real save examined, appending needs no `ensure_schema` of its own:
+///     `.Type` and `.Flags` are learned from an existing element whenever the array itself
+///     is present. That is a property of the GAME's writer, not one this code can assume,
+///     so the append is preceded by a defensive `ensure_schema` for both, guarding the
+///     array-present-but-empty shape uesave would otherwise reject on first append.
 ///   - `RelicPossessNum` is the one property we may create, and only when the delta is
 ///     positive -- so an unchanged resave of a pre-1.0 save stays a strict no-op, and a
 ///     removal-only edit never conjures a `0` into a save that never carried the field.
@@ -1221,6 +1241,48 @@ fn apply_relic_counters(
                 uesave::PropertyTagPartial {
                     id: None,
                     data: uesave::PropertyTagDataPartial::Other(uesave::PropertyType::IntProperty),
+                },
+            );
+        }
+    }
+
+    // `RelicObtainForInstanceFlagByType`'s element fields (`.Type`, `.Flags`) are normally
+    // learned from an existing element at read time, which is why the append below has
+    // never needed an `ensure_schema` of its own -- every real save examined already has
+    // at least one entry. That is a property of the GAME's writer, not something this code
+    // can rely on: an array present with zero entries (arguably still a valid, if unseen,
+    // save shape) would hit uesave's "missing property schema" error on the first append.
+    // `ensure_schema` is a no-op once a schema is already recorded, so this costs nothing
+    // on every real save, where the schema is already there.
+    let by_type_already_present = save_data_props(player_sav)
+        .ok()
+        .and_then(|save_data| save_data.0.get(&record_data_key))
+        .and_then(props::struct_props)
+        .map(|record_data| record_data.0.contains_key(&by_type_key))
+        .unwrap_or(false);
+    if by_type_already_present {
+        if let Some(prefix) = props::schema_prefix_ending_with(player_sav, "RecordData") {
+            props::ensure_schema(
+                player_sav,
+                format!("{prefix}RecordData.RelicObtainForInstanceFlagByType.Type"),
+                uesave::PropertyTagPartial {
+                    id: None,
+                    data: uesave::PropertyTagDataPartial::Enum("EPalRelicType".to_string(), None),
+                },
+            );
+            props::ensure_schema(
+                player_sav,
+                format!("{prefix}RecordData.RelicObtainForInstanceFlagByType.Flags"),
+                uesave::PropertyTagPartial {
+                    id: None,
+                    data: uesave::PropertyTagDataPartial::Map {
+                        key_type: Box::new(uesave::PropertyTagDataPartial::Other(
+                            uesave::PropertyType::NameProperty,
+                        )),
+                        value_type: Box::new(uesave::PropertyTagDataPartial::Other(
+                            uesave::PropertyType::BoolProperty,
+                        )),
+                    },
                 },
             );
         }

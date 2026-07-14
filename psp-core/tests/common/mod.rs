@@ -239,6 +239,48 @@ pub fn relic_bonus_exp_table_index(sav: &serde_json::Value) -> i64 {
         .unwrap_or(0)
 }
 
+/// Ordered variant of `relic_flat_flags`: an on-disk-ordered `Vec` rather than a
+/// `BTreeSet`. `relic_flat_flags`'s set comparison would pass even if a write silently
+/// sorted or reordered the map -- this is the helper that actually catches that.
+#[allow(dead_code)]
+pub fn relic_flat_flags_ordered(sav: &serde_json::Value) -> Vec<String> {
+    let Some(entries) = find(sav, "RelicObtainForInstanceFlag").and_then(|v| v.as_array()) else {
+        return Vec::new();
+    };
+    entries
+        .iter()
+        .filter(|e| e["value"].as_bool() == Some(true))
+        .filter_map(|e| e["key"].as_str().map(str::to_string))
+        .collect()
+}
+
+/// Ordered variant of `relic_by_type_flags`: each type's `Flags` as an on-disk-ordered
+/// `Vec` rather than a `BTreeSet`. See `relic_flat_flags_ordered`.
+#[allow(dead_code)]
+pub fn relic_by_type_flags_ordered(sav: &serde_json::Value) -> BTreeMap<String, Vec<String>> {
+    let mut out = BTreeMap::new();
+    let Some(entries) = find(sav, "RelicObtainForInstanceFlagByType").and_then(|v| v.as_array())
+    else {
+        return out;
+    };
+    for entry in entries {
+        let Some(ty) = find(entry, "Type").and_then(|v| v.as_str()) else {
+            continue;
+        };
+        let flags: Vec<String> = find(entry, "Flags")
+            .and_then(|v| v.as_array())
+            .map(|f| {
+                f.iter()
+                    .filter(|e| e["value"].as_bool() == Some(true))
+                    .filter_map(|e| e["key"].as_str().map(str::to_string))
+                    .collect()
+            })
+            .unwrap_or_default();
+        out.insert(ty.to_string(), flags);
+    }
+    out
+}
+
 /// The first fixture player that actually carries the 1.0 by-type relic
 /// structures. Loads each player's details, since only a loaded player has a
 /// `.sav` to inspect.

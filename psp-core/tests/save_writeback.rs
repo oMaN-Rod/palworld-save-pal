@@ -1275,6 +1275,233 @@ fn unchanged_resave_of_a_1_0_save_leaves_every_relic_structure_identical() {
     );
 }
 
+/// The set-based comparisons above (`relic_flat_flags`/`relic_by_type_flags` return
+/// `BTreeSet`s) would pass even if a write silently sorted or reordered a flag map. Order
+/// is deliberately CALLER order, not sorted -- see `relic_flag_write`'s comment -- and this
+/// compares the raw on-disk `Vec`s, which an accidental reorder would actually fail.
+#[test]
+fn unchanged_resave_of_a_1_0_save_preserves_flag_order() {
+    let mut session = common::load_fixture_session("v1_relics");
+    let data = game_data();
+    let player_id: Uuid = V1_PLAYER_MANY_RELIC_RANKS.parse().unwrap();
+    player::get_player_details(&mut session, &data, player_id, &null_progress())
+        .unwrap()
+        .unwrap();
+
+    let before = common::player_sav_json(&session, player_id);
+    let flat_before = common::relic_flat_flags_ordered(&before);
+    let by_type_before = common::relic_by_type_flags_ordered(&before);
+    assert!(
+        flat_before.len() > 1,
+        "fixture sanity: need at least 2 flags for order to be a meaningful check"
+    );
+    assert!(
+        by_type_before.values().any(|flags| flags.len() > 1),
+        "fixture sanity: need at least one by-type entry with 2+ flags"
+    );
+
+    let dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    let mut m = OrderedMap::new();
+    m.insert(player_id, dto);
+    player::update_players(&mut session, &data, &m, &null_progress()).unwrap();
+
+    let after = common::player_sav_json(&session, player_id);
+    assert_eq!(
+        common::relic_flat_flags_ordered(&after),
+        flat_before,
+        "an unchanged resave must preserve RelicObtainForInstanceFlag's on-disk order"
+    );
+    assert_eq!(
+        common::relic_by_type_flags_ordered(&after),
+        by_type_before,
+        "an unchanged resave must preserve every by-type Flags map's on-disk order"
+    );
+}
+
+/// `relic_flag_write` dedupes the `Flags` map it builds, not just the delta it reports:
+/// `RelicBonusExpTableIndex` counts `Flags` map ENTRIES, so a caller-supplied duplicate
+/// guid that survived into the map would inflate the index by one per repeat, even though
+/// it represents a single collected relic.
+#[test]
+fn duplicate_guid_in_collected_relics_does_not_inflate_exp_table_index() {
+    let mut session = common::load_fixture_session("v1_relics");
+    let data = game_data();
+    let player_id: Uuid = V1_PLAYER_MANY_RELIC_RANKS.parse().unwrap();
+    player::get_player_details(&mut session, &data, player_id, &null_progress())
+        .unwrap()
+        .unwrap();
+
+    let before = common::player_sav_json(&session, player_id);
+    let total_before: usize = common::relic_by_type_flags(&before)
+        .values()
+        .map(BTreeSet::len)
+        .sum();
+    assert!(
+        !common::relic_by_type_flags(&before).contains_key("EPalRelicType::StaminaReduction"),
+        "fixture sanity: this player must have NO StaminaReduction by-type entry"
+    );
+
+    let mut dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    let mut relics = dto.collected_relics.clone().unwrap_or_default();
+    relics.insert(
+        "stamina_reduction".to_string(),
+        vec![
+            "DUPLICATE_STAMINA_RELIC".to_string(),
+            "DUPLICATE_STAMINA_RELIC".to_string(),
+        ],
+    );
+    dto.collected_relics = Some(relics);
+    let mut m = OrderedMap::new();
+    m.insert(player_id, dto);
+    player::update_players(&mut session, &data, &m, &null_progress()).unwrap();
+
+    let after = common::player_sav_json(&session, player_id);
+    assert_eq!(
+        common::relic_by_type_flags(&after)
+            .get("EPalRelicType::StaminaReduction")
+            .cloned()
+            .unwrap_or_default(),
+        BTreeSet::from(["DUPLICATE_STAMINA_RELIC".to_string()]),
+        "a duplicate guid must collapse to a single Flags entry"
+    );
+    let total_after: usize = common::relic_by_type_flags(&after)
+        .values()
+        .map(BTreeSet::len)
+        .sum();
+    assert_eq!(
+        total_after,
+        total_before + 1,
+        "a duplicate guid must add exactly one flag total, not two"
+    );
+    assert_eq!(
+        common::relic_bonus_exp_table_index(&after) as usize,
+        total_after,
+        "RelicBonusExpTableIndex must not be inflated by the duplicate guid"
+    );
+    assert_eq!(
+        common::relic_possess_num_map(&after)
+            .get("EPalRelicType::StaminaReduction")
+            .copied(),
+        Some(1),
+        "RelicPossessNumMap[StaminaReduction] must move by 1, not 2, for one duplicated guid"
+    );
+}
+
+/// `RelicObtainForInstanceFlagByType`'s element schemas (`.Type`, `.Flags`) are normally
+/// learned by uesave from an existing element at read time. Every real save examined
+/// already has at least one entry once the property exists at all, so the append path has
+/// never needed its own `ensure_schema`. That is a property of the GAME's writer, though,
+/// not something this code can assume -- an array present with zero entries is a
+/// structurally valid shape nothing rules out. This test grafts exactly that shape onto a
+/// real 1.0 fixture (clearing the array AND stripping the schemas an existing element
+/// would have taught uesave) and forces the very first append by collecting a typed relic.
+#[test]
+fn typed_relic_write_creates_first_entry_in_an_empty_by_type_array() {
+    let mut session = common::load_fixture_session("v1_relics");
+    let data = game_data();
+    let player_id: Uuid = V1_PLAYER_MANY_RELIC_RANKS.parse().unwrap();
+    player::get_player_details(&mut session, &data, player_id, &null_progress())
+        .unwrap()
+        .unwrap();
+
+    {
+        let loaded = session.loaded_players.get_mut(&player_id).unwrap();
+        let save_data_property = loaded
+            .sav
+            .root
+            .properties
+            .0
+            .get_mut(&uesave::PropertyKey::from("SaveData"))
+            .expect("player has SaveData");
+        let save_data =
+            psp_core::props::struct_props_mut(save_data_property).expect("SaveData is a struct");
+        let record_data_property = save_data
+            .0
+            .get_mut(&uesave::PropertyKey::from("RecordData"))
+            .expect("player has RecordData");
+        let record_data = psp_core::props::struct_props_mut(record_data_property)
+            .expect("RecordData is a struct");
+        let by_type_property = record_data
+            .0
+            .get_mut(&uesave::PropertyKey::from(
+                "RelicObtainForInstanceFlagByType",
+            ))
+            .expect("fixture sanity: player has RelicObtainForInstanceFlagByType");
+        let by_type_values = psp_core::props::struct_values_mut(by_type_property)
+            .expect("RelicObtainForInstanceFlagByType is a struct array");
+        assert!(
+            !by_type_values.is_empty(),
+            "fixture sanity: the array must start non-empty, so clearing it is a real edit"
+        );
+        by_type_values.clear();
+
+        // Strip the `.Type`/`.Flags` schemas an existing element would otherwise have
+        // taught uesave, reproducing an array that has never held an entry.
+        let mut stripped_schemas = uesave::PropertySchemas::new();
+        for (path, tag) in loaded.sav.schemas.schemas() {
+            if path.ends_with(".RelicObtainForInstanceFlagByType.Type")
+                || path.ends_with(".RelicObtainForInstanceFlagByType.Flags")
+            {
+                continue;
+            }
+            stripped_schemas.record(path.clone(), tag.clone());
+        }
+        loaded.sav.schemas = stripped_schemas;
+    }
+    {
+        let loaded = session.loaded_players.get(&player_id).unwrap();
+        assert!(
+            !loaded
+                .sav
+                .schemas
+                .schemas()
+                .keys()
+                .any(|path| path.ends_with(".RelicObtainForInstanceFlagByType.Type")
+                    || path.ends_with(".RelicObtainForInstanceFlagByType.Flags")),
+            "test setup: .Type/.Flags schemas must be stripped"
+        );
+    }
+
+    let mut dto = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    assert!(
+        dto.collected_relics
+            .as_ref()
+            .and_then(|r| r.get("stamina_reduction"))
+            .is_none_or(Vec::is_empty),
+        "fixture sanity: no StaminaReduction relics before the edit, since the array was \
+         just cleared"
+    );
+    let mut relics = dto.collected_relics.clone().unwrap_or_default();
+    relics.insert(
+        "stamina_reduction".to_string(),
+        vec!["NEW_STAMINA_RELIC".to_string()],
+    );
+    dto.collected_relics = Some(relics);
+    let mut m = OrderedMap::new();
+    m.insert(player_id, dto);
+    player::update_players(&mut session, &data, &m, &null_progress()).unwrap();
+
+    let player_files = session.player_sav_bytes().expect(
+        "collecting a relic must serialize even when RelicObtainForInstanceFlagByType starts \
+         with zero entries and no learned .Type/.Flags schema",
+    );
+    let (sav_bytes, _dps_bytes) = player_files.get(&player_id).expect("player serialized");
+    let reparsed = psp_core::savio::read_sav_bytes(sav_bytes).expect("reparse written .sav");
+    let sav_json = serde_json::to_value(&reparsed).expect("sav to json");
+    let by_type_after = common::relic_by_type_flags(&sav_json);
+    assert_eq!(
+        by_type_after.get("EPalRelicType::StaminaReduction"),
+        Some(&BTreeSet::from(["NEW_STAMINA_RELIC".to_string()])),
+        "the first-ever append into the empty array must create the StaminaReduction entry"
+    );
+}
+
 /// Palworld 1.0 renamed both quest arrays to `<Base>_FullRelease`. This 1.0
 /// fixture player genuinely carries 19 completed and 13 current quests -- reading
 /// the pre-1.0 names finds neither and reports both as empty.
