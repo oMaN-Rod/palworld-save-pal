@@ -1,0 +1,54 @@
+{
+  "capture_power": {
+    "localized_name": "โอกาสจับสำเร็จ",
+    "description": "เพิ่มพลังการจับของสเฟียร์ที่ใช้งาน"
+  },
+  "hunger_reduction": {
+    "localized_name": "ความอิ่มนาน",
+    "description": "ทำให้ผู้เล่นหิวได้ยากขึ้น"
+  },
+  "swim_speed": {
+    "localized_name": "พลังในการว่ายน้ำ",
+    "description": "เพิ่มความเร็วในการว่ายน้ำ แลพลดการใช้สเตมินาขณะว่ายน้ำ"
+  },
+  "food_decay_reduction": {
+    "localized_name": "บันทึกวัตถุดิบ",
+    "description": "ทำให้อาหารในช่องเก็บของเน่าเสียได้ยากขึ้น"
+  },
+  "jump_power": {
+    "localized_name": "พลังในการกระโดด",
+    "description": "เพิ่มพลังกระโดดของผู้เล่น"
+  },
+  "glider_speed": {
+    "localized_name": "สมรรถนะการร่อน",
+    "description": "เพิ่มความเร็วในการร่อน และลดการใช้สเตมิน่าขณะใช้งานเครื่องร่อน"
+  },
+  "climb_speed": {
+    "localized_name": "การปีนหน้าผา",
+    "description": "เพิ่มความเร็วในการปีนผา และลดการใช้สเตมินาขณะปีนผา"
+  },
+  "status_ailment_resist": {
+    "localized_name": "การต้านทานสถานะผิดปกติ",
+    "description": "ทำให้ผู้เล่นติดสถานะผิดปกติได้ยากขึ้น"
+  },
+  "stamina_reduction": {
+    "localized_name": "สเตมิน่า",
+    "description": "ลดการใช้สเตมิน่าขณะที่ผู้เล่นและพาลที่ขี่อยู่กำลังวิ่ง"
+  },
+  "sphere_homing": {
+    "localized_name": "การติดตามเป้าหมายของสเฟียร์",
+    "description": "เมื่อโยนสเฟียร์ มันจะพุ่งติดตามเป้าหมายโดยอัตโนมัติ"
+  },
+  "exp_bonus": {
+    "localized_name": "ค่าประสบการณ์ในการจับ",
+    "description": "เพิ่มค่าประสบการณ์ที่ได้รับ (ยกเว้นโบนัสประสบการณ์บางส่วน)"
+  },
+  "rainbow_passive_rate": {
+    "localized_name": "โชคลาภสีรุ้ง",
+    "description": "เพิ่มโอกาสที่พาลป่าจะมีสกิลติดตัวที่ดีขึ้น"
+  },
+  "move_speed": {
+    "localized_name": "เพิ่มความเร็วในการเคลื่อนย้าย",
+    "description": "เพิ่มความเร็วในการเคลื่อนย้ายของผู้เล่น"
+  }
+}

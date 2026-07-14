@@ -1,0 +1,54 @@
+{
+  "capture_power": {
+    "localized_name": "Capacità cattura",
+    "description": "Migliora la capacità di cattura delle sfere usate."
+  },
+  "hunger_reduction": {
+    "localized_name": "Sazietà",
+    "description": "Ti fa patire meno la fame."
+  },
+  "swim_speed": {
+    "localized_name": "Nuoto",
+    "description": "Migliora la velocità e la resistenza durante il nuoto, riducendo il consumo di energia."
+  },
+  "food_decay_reduction": {
+    "localized_name": "Conservazione del cibo",
+    "description": "Rallenta la rapidità a cui il cibo deteriora nell'inventario."
+  },
+  "jump_power": {
+    "localized_name": "Salto",
+    "description": "Aumenta l'altezza dei salti del tuo personaggio."
+  },
+  "glider_speed": {
+    "localized_name": "Volo",
+    "description": "Migliora la velocità e la resistenza durante il volo in aliante, riducendo il consumo di energia."
+  },
+  "climb_speed": {
+    "localized_name": "Arrampicata",
+    "description": "Migliora la velocità e la resistenza durante l'arrampicata, riducendo il consumo di energia."
+  },
+  "status_ailment_resist": {
+    "localized_name": "Resistenza alle alterazioni",
+    "description": "Riduce la possibilità di subire alterazioni di stato."
+  },
+  "stamina_reduction": {
+    "localized_name": "Resistenza fisica",
+    "description": "Aumenta la resistenza durante la corsa del tuo personaggio o del Pal che monta, riducendo il consumo di energia."
+  },
+  "sphere_homing": {
+    "localized_name": "Sfere traccianti",
+    "description": "Le sfere lanciate inseguono il bersaglio."
+  },
+  "exp_bonus": {
+    "localized_name": "Esperienza ottenuta",
+    "description": "Aumenta l'esperienza ottenuta. (Esclusi certi punti esperienza bonus)"
+  },
+  "rainbow_passive_rate": {
+    "localized_name": "Arcobaleno portafortuna",
+    "description": "Aumenta la possibilità di imbattersi in Pal selvatici con abilità passive migliori."
+  },
+  "move_speed": {
+    "localized_name": "Velocità di movimento",
+    "description": "Aumenta la velocità di movimento del tuo personaggio."
+  }
+}

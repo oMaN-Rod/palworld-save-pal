@@ -1,9 +1,11 @@
 import { goto } from '$app/navigation';
+import { page } from '$app/state';
 import { palsData } from '$lib/data';
 import { getAppState } from '$states';
 import type { Guild, GuildSummary, Player, PlayerSummary } from '$types';
 import { MessageType } from '$types';
 import type { WSMessageHandler } from '../types';
+import { resolvePlayerDetailsRouting } from './lazyLoad.utils';
 
 export const getPlayerSummariesHandler: WSMessageHandler = {
 	type: MessageType.GET_PLAYER_SUMMARIES,
@@ -11,7 +13,10 @@ export const getPlayerSummariesHandler: WSMessageHandler = {
 		const appState = getAppState();
 		console.log('Received player summaries', Object.keys(data).length);
 		appState.playerSummaries = data;
-		goto('/edit');
+		// Only navigate to /edit if not already on /bulk page
+		if (!page.url.pathname.startsWith('/bulk')) {
+			goto('/edit');
+		}
 	}
 };
 
@@ -26,7 +31,7 @@ export const getGuildSummariesHandler: WSMessageHandler = {
 
 export const getPlayerDetailsResponseHandler: WSMessageHandler = {
 	type: MessageType.GET_PLAYER_DETAILS_RESPONSE,
-	async handle(data: { player: Player; player_id: string } | { error: string }) {
+	async handle(data: { player: Player; player_id: string; origin?: string } | { error: string }) {
 		const appState = getAppState();
 
 		if ('error' in data) {
@@ -35,7 +40,7 @@ export const getPlayerDetailsResponseHandler: WSMessageHandler = {
 			return;
 		}
 
-		const { player, player_id } = data;
+		const { player, player_id, origin } = data;
 		console.log('Received player details for', player.nickname);
 
 		// Process pals to add localized names
@@ -49,19 +54,30 @@ export const getPlayerDetailsResponseHandler: WSMessageHandler = {
 			});
 		}
 
-		// Add to players cache
+		// Add to players cache. Read the stored (proxied) value back for
+		// selectedPlayer/bulkDetailPlayer so they are the SAME reactive proxy
+		// as players[player_id]; assigning the raw `player` yields a separate
+		// proxy, so edits that set `selectedPlayer.state` never reach the
+		// players[] entry saveState iterates.
 		appState.players[player_id] = player;
+		const stored = appState.players[player_id];
 
 		// Update summary to show as loaded
 		if (appState.playerSummaries[player_id]) {
 			appState.playerSummaries[player_id].loaded = true;
 		}
 
-		// Set as selected player
-		appState.selectedPlayer = player;
-		appState.selectedPlayerUid = player_id;
 		appState.loadingPlayer = false;
-		goto('/edit/player');
+
+		const routing = resolvePlayerDetailsRouting(origin);
+		if (routing.target === 'bulkDetail') {
+			appState.bulkDetailPlayer = stored;
+			return;
+		}
+
+		appState.selectedPlayer = stored;
+		appState.selectedPlayerUid = player_id;
+		if (routing.navigateTo) goto(routing.navigateTo);
 	}
 };
 
@@ -73,14 +89,18 @@ export const getGuildDetailsResponseHandler: WSMessageHandler = {
 		if ('error' in data) {
 			console.error('Failed to load guild details:', data.error);
 			appState.loadingGuild = false;
+			appState.bulkGuildRequestPending = false;
 			return;
 		}
 
 		const { guild, guild_id } = data;
 		console.log('Received guild details for', guild.name);
 
-		// Add to guilds cache
+		// Add to guilds cache, then reference the stored (proxied) value so
+		// bulkDetailGuild is the SAME reactive proxy as guilds[guild_id] (a raw
+		// assignment yields a separate proxy — see the player handler above).
 		appState.guilds[guild_id] = guild;
+		const storedGuild = appState.guilds[guild_id];
 
 		// Update summary to show as loaded
 		if (appState.guildSummaries[guild_id]) {
@@ -88,6 +108,10 @@ export const getGuildDetailsResponseHandler: WSMessageHandler = {
 		}
 
 		appState.loadingGuild = false;
+		if (appState.bulkGuildRequestPending) {
+			appState.bulkDetailGuild = storedGuild;
+			appState.bulkGuildRequestPending = false;
+		}
 	}
 };
 

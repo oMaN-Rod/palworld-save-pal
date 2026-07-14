@@ -9,6 +9,7 @@ import Input from './input/Input.svelte';
 import ItemHeader from './item-header/ItemHeader.svelte';
 import KeyboardShortcut from './keyboard-shortcut/KeyboardShortcut.svelte';
 import List from './list/List.svelte';
+import Popover from './popover/Popover.svelte';
 import Progress from './progress/Progress.svelte';
 import SectionHeader from './section-header/SectionHeader.svelte';
 import Select from './select/Select.svelte';
@@ -19,7 +20,9 @@ import Monaco from './monaco/Monaco.svelte';
 import Nuke from './icons/Nuke.svelte';
 import Spinner from './spinner/Spinner.svelte';
 import Stopwatch from './stopwatch/Stopwatch.svelte';
+import Table from './table/Table.svelte';
 import Toast from './toast/Toast.svelte';
+import Loading from './loading/Loading.svelte';
 
 export {
 	Button,
@@ -39,9 +42,12 @@ export {
 	Modal,
 	Monaco,
 	Nuke,
+	Popover,
 	Spinner,
 	Stopwatch,
+	Table,
 	Toast,
 	Tooltip,
-	TooltipButton
+	TooltipButton,
+	Loading
 };

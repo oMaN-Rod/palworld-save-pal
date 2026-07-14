@@ -12,6 +12,10 @@
 	import { page } from '$app/state';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
+	import {
+		setStoredSelectedPlayerUid,
+		clearStoredSelectedPlayerUid
+	} from '$lib/utils/sessionPersistence';
 
 	const { children } = $props();
 	const ws = getSocketState();
@@ -26,6 +30,26 @@
 	// switching themes swaps the active color palette (client-side only).
 	$effect(() => {
 		document.body.dataset.theme = theme.current;
+	});
+
+	// Mirror the selected player to sessionStorage so a refresh can re-select it.
+	$effect(() => {
+		if (appState.selectedPlayerUid) {
+			setStoredSelectedPlayerUid(appState.selectedPlayerUid);
+		} else {
+			clearStoredSelectedPlayerUid();
+		}
+	});
+
+	// Best-effort autosave flush on refresh/close; no prompt, fire-and-forget.
+	$effect(() => {
+		function handleBeforeUnload(): void {
+			if (appState.saveFile) {
+				appState.saveState();
+			}
+		}
+		window.addEventListener('beforeunload', handleBeforeUnload);
+		return () => window.removeEventListener('beforeunload', handleBeforeUnload);
 	});
 
 	onMount(async () => {

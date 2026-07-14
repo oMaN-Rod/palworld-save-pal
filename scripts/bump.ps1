@@ -1,60 +1,33 @@
-# Bump version script for palworld_save_pal
+# Bumps the project version.
+#
+# Single source of truth: the [workspace.package] version in Cargo.toml. Every
+# crate inherits it (version.workspace = true), the get_version wire reply is
+# CARGO_PKG_VERSION, and the Tauri bundle version derives from Cargo (no version
+# in tauri.conf.json), so this one line drives the whole project.
 param(
-    [string]$Version = $null,
+    [string]$Version,
     [switch]$Help
 )
 
-if ($Help) {
-    Write-Host "Usage: .\build-desktop.ps1 [-Version <version>] [-Help]"
-    Write-Host ""
-    Write-Host "Parameters:"
-    Write-Host "  -Version <version>  Set the version number (e.g., '1.0.0')"
-    Write-Host "  -Help              Show this help message"
-    Write-Host ""
-    exit 0
+if ($Help -or -not $Version) {
+    Write-Host "Usage: .\scripts\bump.ps1 <version>   e.g. .\scripts\bump.ps1 0.18.0"
+    Write-Host "Bumps the [workspace.package] version in Cargo.toml."
+    if ($Help) { exit 0 } else { exit 1 }
 }
 
-Set-Location -Path (Join-Path $PSScriptRoot "..")
-
-# Function to update version in a file
-function Update-Version {
-    param(
-        [string]$FilePath,
-        [string]$NewVersion,
-        [string]$Pattern,
-        [string]$Replacement
-    )
-    
-    if (Test-Path $FilePath) {
-        $content = Get-Content -Path $FilePath -Raw
-        $newContent = $content -replace $Pattern, $Replacement
-        Set-Content -Path $FilePath -Value $newContent -NoNewline
-        Write-Host "Updated version to $NewVersion in $FilePath"
-    }
-    else {
-        Write-Warning "File not found: $FilePath"
-    }
+if ($Version -notmatch '^\d+\.\d+\.\d+(-[a-zA-Z0-9\-\.]+)?(\+[a-zA-Z0-9\-\.]+)?$') {
+    Write-Error "Invalid version '$Version'. Use semantic versioning, e.g. 0.18.0"
+    exit 1
 }
 
-# Get or set version
-if ($Version) {
-    # Validate version format (basic semver check)
-    if ($Version -notmatch '^\d+\.\d+\.\d+(-[a-zA-Z0-9\-\.]+)?(\+[a-zA-Z0-9\-\.]+)?$') {
-        Write-Error "Invalid version format. Please use semantic versioning (e.g., '1.0.0', '1.0.0-beta', '1.0.0+build.1')"
-        exit 1
-    }
-    
-    Write-Host "Updating version to $Version..."
-    
-    # Update __version__.py
-    Update-Version -FilePath ".\palworld_save_pal\__version__.py" -NewVersion $Version -Pattern '__version__ = "[^"]*"' -Replacement "__version__ = `"$Version`""
-    
-    # Update pyproject.toml
-    Update-Version -FilePath ".\pyproject.toml" -NewVersion $Version -Pattern 'version = "[^"]*"' -Replacement "version = `"$Version`""
-    
-    $version = $Version
+$cargoToml = Join-Path $PSScriptRoot "..\Cargo.toml"
+$content = Get-Content -Path $cargoToml -Raw
+# Only the [workspace.package] line starts with `version = ` at column 0;
+# dependency versions live inside `{ ... }` tables and are never anchored here.
+if ($content -notmatch '(?m)^version = "[^"]*"') {
+    Write-Error "Could not find the [workspace.package] version line in $cargoToml"
+    exit 1
 }
-else {
-    # Read current version
-    $version = (Get-Content -Path ".\palworld_save_pal\__version__.py" | Select-String -Pattern "__version__").Line.Split('"')[1]
-}
+$updated = $content -replace '(?m)^version = "[^"]*"', "version = `"$Version`""
+Set-Content -Path $cargoToml -Value $updated -NoNewline
+Write-Host "Bumped project version to $Version (Cargo.toml [workspace.package])"

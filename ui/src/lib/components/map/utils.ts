@@ -1,88 +1,112 @@
-// Constants for coordinate conversion from the PalworldCoordinateConverter class
-export const WORLD_MIN_X = -999940.0;
-export const WORLD_MIN_Y = -738920.0;
-export const WORLD_MAX_X = 447900.0;
-export const WORLD_MAX_Y = 708920.0;
+export type MapArea = 'MainMap' | 'Tree';
 
-// Translation values from the coordinate converter
-export const TRANSLATION_X = 123930.0;
-export const TRANSLATION_Y = 157935.0;
+/** Bounds and textures from the game's DT_WorldMapUIData. Tree is listed first
+ *  because it carries WorldMapPriority 1: where the rectangles overlap, it wins. */
+export const MAP_AREAS: Record<MapArea, {
+	texture: string;
+	min: { x: number; y: number };
+	max: { x: number; y: number };
+}> = {
+	Tree: {
+		texture: 't_treemap.webp',
+		min: { x: 347351.5, y: -818197.0 },
+		max: { x: 689148.5, y: -476400.0 }
+	},
+	MainMap: {
+		texture: 't_worldmap.webp',
+		min: { x: -1099400.0, y: -724400.0 },
+		max: { x: 349400.0, y: 724400.0 }
+	}
+};
 
-// Scale factor for coordinate conversion
-export const SCALE = 459.0;
+export const MAP_AREA_ORDER: MapArea[] = ['MainMap', 'Tree'];
 
-// Map image size
 export const MAP_SIZE = 8192;
 
-// Game map coordinate ranges (based on the conversion of world coordinates)
-export const GAME_MIN_X = -1951;
-export const GAME_MIN_Y = -1893;
-export const GAME_MAX_X = 1198;
-export const GAME_MAX_Y = 1243;
+export const DEFAULT_MAP_AREA: MapArea = 'MainMap';
 
-// The game origin is located at (0, 0) in game coordinates
-export const ORIGIN_GAME_X = 0;
-export const ORIGIN_GAME_Y = 0;
+// The in-game coordinate readout (the numbers shown in the game's own UI) is a
+// separate concern from pixel placement and keeps its original constants.
+export const TRANSLATION_X = 123930.0;
+export const TRANSLATION_Y = 157935.0;
+export const SCALE = 459.0;
 
-// Calculate map width and height in game coordinates
-export const MAP_WIDTH = GAME_MAX_X - GAME_MIN_X;
-export const MAP_HEIGHT = GAME_MAX_Y - GAME_MIN_Y;
+export function cmPerPx(area: MapArea): number {
+	const { min, max } = MAP_AREAS[area];
+	return (max.x - min.x) / MAP_SIZE;
+}
 
-// Calculated transformation parameters for correct mapping
-// These values map the game coordinates to the pixel display coordinates
-export const TRANSFORM_A = MAP_SIZE / MAP_WIDTH; // Scale factor for X
-export const TRANSFORM_B = 5075.45; // Offset for X (calculated to position origin correctly)
-export const TRANSFORM_C = -MAP_SIZE / MAP_HEIGHT; // Scale factor for Y (negative for Y-axis inversion)
-export const TRANSFORM_D = 4960.62; // Offset for Y (calculated to position origin correctly)
+/** Map horizontal axis is world +Y; map vertical axis is world -X. In OpenLayers'
+ *  y-up pixel extent that flip cancels, leaving pixelY = (worldX - min.x) / cm. */
+export function worldToPixel(worldX: number, worldY: number, area: MapArea): [number, number] {
+	const { min } = MAP_AREAS[area];
+	const cm = cmPerPx(area);
+	return [(worldY - min.y) / cm, (worldX - min.x) / cm];
+}
 
-// Fixed: Y-coordinate is now inverted with * -1
+export function pixelToWorld(
+	pixelX: number,
+	pixelY: number,
+	area: MapArea
+): { worldX: number; worldY: number } {
+	const { min } = MAP_AREAS[area];
+	const cm = cmPerPx(area);
+	return { worldX: pixelY * cm + min.x, worldY: pixelX * cm + min.y };
+}
+
+/** Which map a world position belongs to — the game's own rule, priority order. */
+export function mapOf(worldX: number, worldY: number): MapArea | null {
+	for (const area of Object.keys(MAP_AREAS) as MapArea[]) {
+		const { min, max } = MAP_AREAS[area];
+		if (worldX >= min.x && worldX <= max.x && worldY >= min.y && worldY <= max.y) {
+			return area;
+		}
+	}
+	return null;
+}
+
 export function worldToMap(worldX: number, worldY: number): { x: number; y: number } {
-	const mapX = Math.round((worldY - TRANSLATION_Y) / SCALE);
-	const mapY = Math.round((worldX + TRANSLATION_X) / SCALE) * -1;
-	return { x: mapX, y: mapY };
+	return {
+		x: Math.round((worldY - TRANSLATION_Y) / SCALE),
+		y: Math.round((worldX + TRANSLATION_X) / SCALE) * -1
+	};
 }
 
-// Since we've inverted Y in worldToMap, we need to invert it again here
 export function mapToWorld(mapX: number, mapY: number): { x: number; y: number } {
-	const worldX = mapY * -1 * SCALE - TRANSLATION_X; // Note the inversion of Y
-	const worldY = mapX * SCALE + TRANSLATION_Y;
-	return { x: worldX, y: worldY };
+	return {
+		x: mapY * -1 * SCALE - TRANSLATION_X,
+		y: mapX * SCALE + TRANSLATION_Y
+	};
 }
 
-// Convert world coordinates to pixel coordinates for OpenLayers
-// Returns [x, y] in pixel coordinates
-export function worldToPixel(worldX: number, worldY: number): [number, number] {
-	const mapCoords = worldToMap(worldX, worldY);
-	// Transform game coordinates to pixel coordinates
-	const pixelX = TRANSFORM_A * mapCoords.x + TRANSFORM_B;
-	const pixelY = TRANSFORM_C * mapCoords.y + TRANSFORM_D;
-	return [pixelX, pixelY];
+/** `BOSS_Horus_Water` -> `Horus_Water`, the key the pal data is stored under. */
+export function bossPalKey(characterId: string | undefined): string | null {
+	if (!characterId || characterId === 'None') return null;
+	const key = characterId.replace(/^boss_/i, '');
+	return key.length > 0 ? key : null;
 }
 
-// Convert pixel coordinates to world coordinates
-export function pixelToWorld(pixelX: number, pixelY: number): { worldX: number; worldY: number } {
-	// Convert from pixel to game coordinates
-	// Reverse the transformation: x_game = (x_pixel - TRANSFORM_B) / TRANSFORM_A
-	const gameX = (pixelX - TRANSFORM_B) / TRANSFORM_A;
-	const gameY = (pixelY - TRANSFORM_D) / TRANSFORM_C;
-
-	// Then convert from game coordinates to world coordinates
-	const worldCoords = mapToWorld(gameX, gameY);
-	return { worldX: worldCoords.x, worldY: worldCoords.y };
+/** Last-resort title for the human bosses, whose character_id is literally "None".
+ *  `BOSS_Female_Soldier03` -> `Female Soldier 03`, `REGION_Oilrig_1` -> `Oilrig 1`. */
+export function humanizeSpawnerId(spawnerId: string | undefined): string {
+	if (!spawnerId) return 'Unknown';
+	const name = spawnerId
+		.replace(/^(BOSS|REGION)_/i, '')
+		.replace(/_/g, ' ')
+		.replace(/([a-z])([A-Z])/g, '$1 $2')
+		.replace(/([A-Za-z])(\d)/g, '$1 $2')
+		.replace(/\s+/g, ' ')
+		.trim();
+	return name.length > 0 ? name : 'Unknown';
 }
 
-// Convert pixel coordinates to game (map) coordinates for display
 export function pixelToGameCoords(
 	pixelX: number,
-	pixelY: number
+	pixelY: number,
+	area: MapArea
 ): { gameX: number; gameY: number } {
-	const gameX = (pixelX - TRANSFORM_B) / TRANSFORM_A;
-	const gameY = ((pixelY - TRANSFORM_D) / TRANSFORM_C) * -1;
-	return { gameX: Math.round(gameX), gameY: Math.round(gameY) };
-}
-
-// Convert map (game) coordinates to pixel coordinates
-export function mapToPixel(mapX: number, mapY: number): [number, number] {
-	const worldCoords = mapToWorld(mapX, mapY);
-	return worldToPixel(worldCoords.x, worldCoords.y);
+	const { worldX, worldY } = pixelToWorld(pixelX, pixelY, area);
+	const mapCoords = worldToMap(worldX, worldY);
+	// Tooltips all render `worldToMap(...).y * -1`; the readout must match them.
+	return { gameX: mapCoords.x, gameY: mapCoords.y * -1 };
 }

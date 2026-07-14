@@ -2,7 +2,7 @@
 	import { Button, ItemHeader, Progress, Tooltip } from '$components/ui';
 	import { getAppState, getToastState, getModalState } from '$states';
 	import { EntryState, type ItemContainerSlot, type ItemContainer } from '$types';
-	import { ASSET_DATA_PATH } from '$lib/constants';
+	import { ASSET_DATA_PATH, MAX_LEVEL } from '$lib/constants';
 	import { itemsData, expData } from '$lib/data';
 	import { Tabs, Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { PlayerStats, PlayerHealthBadge } from '$components/player';
@@ -38,7 +38,7 @@
 	const toast = getToastState();
 	const modal = getModalState();
 
-	const max_level = $derived(appState.settings.cheat_mode ? 99 : 80);
+	const max_level = $derived(appState.settings.cheat_mode ? 99 : MAX_LEVEL);
 
 	const defaultItem = {
 		id: '',

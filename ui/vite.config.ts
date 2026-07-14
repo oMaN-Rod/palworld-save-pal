@@ -13,6 +13,10 @@ export default defineConfig({
 		sveltekit()
 	],
 	server: {
+		// tauri.conf.json devUrl points here; fail loudly rather than drifting to
+		// another port and leaving the desktop webview on a dead URL.
+		port: 5173,
+		strictPort: true,
 		proxy: {
 			'/api': {
 				target: 'http://localhost:5174',

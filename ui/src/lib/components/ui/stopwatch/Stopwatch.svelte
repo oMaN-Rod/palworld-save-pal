@@ -3,10 +3,10 @@
 
 	type Props = {
 		seconds: number;
-		size?: string;
+		class?: string;
 	};
 
-	let { seconds = $bindable(), size = 'text-3xl' }: Props = $props();
+	let { seconds = $bindable(), class:_class = 'text-3xl' }: Props = $props();
 
 	const hh = $derived(Math.floor(seconds / 3600));
 	const mm = $derived(Math.floor((seconds % 3600) / 60));
@@ -16,7 +16,7 @@
 <NumberFlowGroup>
 	<div
 		style="font-variant-numeric: tabular-nums; --number-flow-char-height: 0.85em"
-		class="flex items-baseline font-semibold {size}"
+		class="flex items-baseline font-semibold {_class}"
 	>
 		<NumberFlow value={hh} format={{ minimumIntegerDigits: 2 }} />
 		<NumberFlow

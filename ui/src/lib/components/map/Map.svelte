@@ -6,24 +6,28 @@
 	import {
 		pixelToWorld,
 		pixelToGameCoords,
-		MAP_SIZE,
 		mapToWorld,
-		ORIGIN_GAME_X,
-		ORIGIN_GAME_Y,
-		worldToPixel
+		worldToPixel,
+		mapOf,
+		MAP_SIZE,
+		DEFAULT_MAP_AREA,
+		MAP_AREA_ORDER,
+		type MapArea
 	} from './utils';
+	import { relicsByType } from './relics';
 	import {
 		createPalIconStyle,
 		mapImg,
 		baseIconStyle,
 		fastTravelStyle,
-		effigyStyle,
+		relicStyle,
 		dungeonIconStyle,
+		bossStyle,
 		originIconStyle,
 		originLineStyle,
 		playerIconStyle
 	} from './styles';
-	import { mapObjects, fastTravelPoints, effigies } from '$lib/data';
+	import { mapObjects, fastTravelPoints, relics, relicData, bosses } from '$lib/data';
 	import { assetLoader } from '$utils';
 	import 'svelte-openlayers/styles.css';
 	import PlayerPopup from './PlayerPopup.svelte';
@@ -34,48 +38,59 @@
 	import BasePopup from './BasePopup.svelte';
 	import FastTravelHover from './FastTravelHover.svelte';
 	import FastTravelPopup from './FastTravelPopup.svelte';
-	import EffigyHover from './EffigyHover.svelte';
-	import EffigyPopup from './EffigyPopup.svelte';
+	import RelicHover from './RelicHover.svelte';
+	import RelicPopup from './RelicPopup.svelte';
 	import DungeonHover from './DungeonHover.svelte';
 	import DungeonPopup from './DungeonPopup.svelte';
+	import BossHover from './BossHover.svelte';
+	import BossPopup from './BossPopup.svelte';
 	import PalHover from './PalHover.svelte';
 	import PalPopup from './PalPopup.svelte';
 	import { onMount } from 'svelte';
 	import ContextMenu from 'ol-contextmenu';
-	import type { MapUnlockPoint } from '$types';
+	import type { MapUnlockPoint, RelicPoint } from '$types';
 	import * as m from '$i18n/messages';
 
 	// Props to control which markers to display
 	let {
 		map = $bindable(),
+		area = DEFAULT_MAP_AREA,
+		onAreaChange,
 		showOrigin = false,
 		showPlayers = true,
 		showBases = true,
 		showFastTravel = true,
-		showEffigies = true,
+		showRelics = true,
+		relicTypes = {},
 		showDungeons = true,
+		showBosses = true,
 		showAlphaPals = true,
 		showPredatorPals = true,
 		onEditBase,
 		onToggleFastTravel,
-		onToggleEffigy,
+		onToggleRelic,
 		onUnlockAllFastTravel,
-		onCollectAllEffigies
+		onCollectAllRelics
 	}: {
 		map?: OLMap | null;
+		area?: MapArea;
+		onAreaChange?: (area: MapArea) => void;
 		showOrigin?: boolean;
 		showPlayers?: boolean;
 		showBases?: boolean;
 		showFastTravel?: boolean;
-		showEffigies?: boolean;
+		showRelics?: boolean;
+		/** Per-relic-type visibility; a missing key means visible. */
+		relicTypes?: Record<string, boolean>;
 		showDungeons?: boolean;
+		showBosses?: boolean;
 		showAlphaPals?: boolean;
 		showPredatorPals?: boolean;
 		onEditBase?: (base: any) => void;
 		onToggleFastTravel?: (point: MapUnlockPoint) => void;
-		onToggleEffigy?: (point: MapUnlockPoint) => void;
+		onToggleRelic?: (point: RelicPoint) => void;
 		onUnlockAllFastTravel?: () => void;
-		onCollectAllEffigies?: () => void;
+		onCollectAllRelics?: () => void;
 	} = $props();
 
 	const appState = getAppState();
@@ -92,23 +107,29 @@
 	const hoverClass = 'bg-transparent! p-0 shadow-none!';
 
 	const defaultCenter = () => {
-		const worldCoords = mapToWorld(ORIGIN_GAME_X, ORIGIN_GAME_Y);
-		return worldToPixel(worldCoords.x, worldCoords.y);
+		const worldCoords = mapToWorld(0, 0);
+		return worldToPixel(worldCoords.x, worldCoords.y, area);
 	};
 
 	const originPixelCoords = $derived.by(() => {
-		const worldCoords = mapToWorld(ORIGIN_GAME_X, ORIGIN_GAME_Y);
-		return worldToPixel(worldCoords.x, worldCoords.y);
+		const worldCoords = mapToWorld(0, 0);
+		return worldToPixel(worldCoords.x, worldCoords.y, area);
 	});
 
 	// Derived data
-	const players = $derived(Object.values(appState.players || {}));
+	const players = $derived(
+		Object.values(appState.players || {}).filter(
+			(player) => player.location && mapOf(player.location.x, player.location.y) === area
+		)
+	);
 	const bases = $derived.by(() => {
 		const guilds = Object.values(appState.guilds || {});
 		return guilds.reduce((acc, guild) => {
 			if (guild.bases) {
 				Object.values(guild.bases).forEach((base) => {
-					acc.push({ base, guildName: guild.name });
+					if (base.location && mapOf(base.location.x, base.location.y) === area) {
+						acc.push({ base, guildName: guild.name });
+					}
 				});
 			}
 			return acc;
@@ -121,48 +142,73 @@
 		const unlocked = new Set(
 			(selectedPlayer?.unlocked_fast_travel_points ?? []).map((guid) => guid.toUpperCase())
 		);
-		return Object.entries(fastTravelPoints.points).map(([guid, point]) => ({
-			guid,
-			x: point.x,
-			y: point.y,
-			localized_name: point.localized_name ?? point.id,
-			unlocked: selectedPlayer ? unlocked.has(guid.toUpperCase()) : undefined
-		}));
+		return Object.entries(fastTravelPoints.points)
+			.map(([guid, point]) => ({
+				guid,
+				x: point.x,
+				y: point.y,
+				localized_name: point.localized_name ?? point.id,
+				unlocked: selectedPlayer ? unlocked.has(guid.toUpperCase()) : undefined
+			}))
+			.filter((p) => mapOf(p.x, p.y) === area);
 	});
-	$inspect(fastTravelPointList);
 
-	const effigyPointList = $derived.by(() => {
-		const collected = new Set(
-			(selectedPlayer?.collected_effigies ?? []).map((guid) => guid.toUpperCase())
-		);
-		return Object.entries(effigies.points).map(([guid, point]) => ({
-			guid,
-			x: point.x,
-			y: point.y,
-			localized_name: m.effigy(),
-			unlocked: selectedPlayer ? collected.has(guid.toUpperCase()) : undefined
-		}));
+	const collectedRelicGuids = $derived.by(() => {
+		const byType: Record<string, Set<string>> = {};
+		for (const [type, guids] of Object.entries(selectedPlayer ? relicsByType(selectedPlayer) : {})) {
+			byType[type] = new Set(guids.map((guid) => guid.toUpperCase()));
+		}
+		return byType;
+	});
+
+	const relicPointList: RelicPoint[] = $derived.by(() => {
+		return Object.entries(relics.points)
+			.filter(([, point]) => relicTypes[point.relic_type] !== false)
+			.map(([guid, point]) => ({
+				guid,
+				x: point.x,
+				y: point.y,
+				relic_type: point.relic_type,
+				localized_name: relicData.relicData[point.relic_type]?.localized_name ?? point.relic_type,
+				unlocked: selectedPlayer
+					? (collectedRelicGuids[point.relic_type]?.has(guid.toUpperCase()) ?? false)
+					: undefined
+			}))
+			.filter((p) => mapOf(p.x, p.y) === area);
 	});
 
 	const dungeonPoints = $derived.by(() => {
 		if (!mapObjects) return [];
-		return mapObjects.points.filter((p) => p.type === 'dungeon');
+		return mapObjects.points
+			.filter((p) => p.type === 'dungeon')
+			.filter((p) => mapOf(p.x, p.y) === area);
 	});
 
 	const alphaPalPoints = $derived.by(() => {
 		if (!mapObjects) return [];
-		return mapObjects.points.filter((p) => p.type === 'alpha_pal');
+		return mapObjects.points
+			.filter((p) => p.type === 'alpha_pal')
+			.filter((p) => mapOf(p.x, p.y) === area);
+	});
+
+	const bossPoints = $derived.by(() => {
+		const defeated = new Set(selectedPlayer?.defeated_bosses ?? []);
+		return Object.entries(bosses.points)
+			.map(([rowKey, boss]) => ({ ...boss, rowKey, defeated: defeated.has(boss.spawner_id) }))
+			.filter((boss) => mapOf(boss.x, boss.y) === area);
 	});
 
 	const predatorPalPoints = $derived.by(() => {
 		if (!mapObjects) return [];
-		return mapObjects.points.filter((p) => p.type === 'predator_pal');
+		return mapObjects.points
+			.filter((p) => p.type === 'predator_pal')
+			.filter((p) => mapOf(p.x, p.y) === area);
 	});
 
 	// Origin coordinates
 	const originCoords = $derived.by(() => {
-		const worldCoords = mapToWorld(ORIGIN_GAME_X, ORIGIN_GAME_Y);
-		return worldToPixel(worldCoords.x, worldCoords.y);
+		const worldCoords = mapToWorld(0, 0);
+		return worldToPixel(worldCoords.x, worldCoords.y, area);
 	});
 
 	// Overlay reveal state
@@ -174,8 +220,8 @@
 
 	function handlePointerMove(evt: MapBrowserEvent<PointerEvent | KeyboardEvent | WheelEvent>) {
 		const [pixelX, pixelY] = evt.coordinate;
-		const { worldX, worldY } = pixelToWorld(pixelX, pixelY);
-		const { gameX, gameY } = pixelToGameCoords(pixelX, pixelY);
+		const { worldX, worldY } = pixelToWorld(pixelX, pixelY, area);
+		const { gameX, gameY } = pixelToGameCoords(pixelX, pixelY, area);
 		coordDisplayText = `World: ${Math.round(worldX)}, ${Math.round(worldY)}<br>Map: ${gameX}, ${gameY}`;
 	}
 
@@ -187,8 +233,8 @@
 				onToggleFastTravel?.(feature.get('data') as MapUnlockPoint);
 				return;
 			}
-			if (featureType === 'effigy') {
-				onToggleEffigy?.(feature.get('data') as MapUnlockPoint);
+			if (featureType === 'relic') {
+				onToggleRelic?.(feature.get('data') as RelicPoint);
 				return;
 			}
 		}
@@ -248,11 +294,12 @@
 			click={handleMapClick}
 			controls={{ fullscreen: true }}
 		>
-			<!-- World map background -->
-			<Layer.Static url={mapImg.worldMap} {extent} />
+			{#each MAP_AREA_ORDER as candidate}
+				<Layer.Static url={mapImg.maps[candidate]} {extent} visible={area === candidate} />
+			{/each}
 
 			<!-- Origin marker layer -->
-			{#if showOrigin}
+			{#if showOrigin && area === 'MainMap'}
 				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
 					<Feature.Point coordinates={originCoords} style={originIconStyle}>
 						<Overlay.Hover {positioning} {offset} class={hoverClass}>
@@ -280,7 +327,7 @@
 					{#each players as player}
 						{#if player.location}
 							<Feature.Point
-								coordinates={worldToPixel(player.location.x, player.location.y)}
+								coordinates={worldToPixel(player.location.x, player.location.y, area)}
 								style={playerIconStyle}
 								properties={{ type: 'player', data: player }}
 							>
@@ -301,8 +348,8 @@
 				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
 					{#each bases as { base, guildName }}
 						<Feature.Point
-							coordinates={worldToPixel(base.location.x, base.location.y)}
-							style={baseIconStyle}
+							coordinates={worldToPixel(base.location.x, base.location.y, area)}
+							style={baseIconStyle(area)}
 							properties={{ type: 'base', data: base }}
 						>
 							<Overlay.Hover {positioning} {offset} class={hoverClass}>
@@ -321,7 +368,7 @@
 				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
 					{#each fastTravelPointList as point (point.guid)}
 						<Feature.Point
-							coordinates={worldToPixel(point.x, point.y)}
+							coordinates={worldToPixel(point.x, point.y, area)}
 							style={fastTravelStyle}
 							properties={{ type: 'fast_travel', data: point }}
 						>
@@ -336,20 +383,20 @@
 				</Layer.Vector>
 			{/if}
 
-			<!-- Lifmunk Effigy markers layer -->
-			{#if showEffigies}
+			<!-- Relic markers layer (all EPalRelicType, incl. Lifmunk Effigies) -->
+			{#if showRelics}
 				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
-					{#each effigyPointList as point (point.guid)}
+					{#each relicPointList as point (point.guid)}
 						<Feature.Point
-							coordinates={worldToPixel(point.x, point.y)}
-							style={effigyStyle}
-							properties={{ type: 'effigy', data: point }}
+							coordinates={worldToPixel(point.x, point.y, area)}
+							style={relicStyle}
+							properties={{ type: 'relic', data: point }}
 						>
 							<Overlay.Hover {positioning} {offset} class={hoverClass}>
-								<EffigyHover {point} />
+								<RelicHover {point} />
 							</Overlay.Hover>
 							<Overlay.Popup {positioning} {offset}>
-								<EffigyPopup {point} />
+								<RelicPopup {point} />
 							</Overlay.Popup>
 						</Feature.Point>
 					{/each}
@@ -361,7 +408,7 @@
 				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
 					{#each dungeonPoints as point}
 						<Feature.Point
-							coordinates={worldToPixel(point.x, point.y)}
+							coordinates={worldToPixel(point.x, point.y, area)}
 							style={dungeonIconStyle}
 							properties={{ type: 'dungeon', data: point }}
 						>
@@ -376,6 +423,26 @@
 				</Layer.Vector>
 			{/if}
 
+			<!-- Boss markers layer -->
+			{#if showBosses}
+				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
+					{#each bossPoints as point (point.rowKey)}
+						<Feature.Point
+							coordinates={worldToPixel(point.x, point.y, area)}
+							style={bossStyle}
+							properties={{ type: 'boss', data: point }}
+						>
+							<Overlay.Hover {positioning} {offset} class={hoverClass}>
+								<BossHover {point} />
+							</Overlay.Hover>
+							<Overlay.Popup {positioning} {offset}>
+								<BossPopup {point} />
+							</Overlay.Popup>
+						</Feature.Point>
+					{/each}
+				</Layer.Vector>
+			{/if}
+
 			<!-- Alpha Pal markers layer -->
 			{#if showAlphaPals}
 				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
@@ -383,7 +450,7 @@
 						{@const palImage = assetLoader.loadMenuImage(point.pal)}
 						{@const palStyle = createPalIconStyle(palImage, '#ffffff', map)}
 						<Feature.Point
-							coordinates={worldToPixel(point.x, point.y)}
+							coordinates={worldToPixel(point.x, point.y, area)}
 							style={palStyle}
 							properties={{ type: 'alpha_pal', data: point }}
 						>
@@ -405,7 +472,7 @@
 						{@const palImage = assetLoader.loadMenuImage(point.pal)}
 						{@const palStyle = createPalIconStyle(palImage, '#ef4444', map)}
 						<Feature.Point
-							coordinates={worldToPixel(point.x, point.y)}
+							coordinates={worldToPixel(point.x, point.y, area)}
 							style={palStyle}
 							properties={{ type: 'predator_pal', data: point }}
 						>
@@ -434,17 +501,33 @@
 			>
 				<img src={mapImg.fastTravel} alt={m.fast_travel()} />
 			</button>
-			<button
-				type="button"
-				class="map-action-btn"
-				title={m.collect_all_effigies()}
-				aria-label={m.collect_all_effigies()}
-				onclick={() => onCollectAllEffigies?.()}
-			>
-				<img src={mapImg.effigy} alt={m.effigies()} />
-			</button>
+			<!-- Never offer a bulk write for pins the user cannot see. -->
+			{#if showRelics}
+				<button
+					type="button"
+					class="map-action-btn"
+					title={m.collect_all_relics()}
+					aria-label={m.collect_all_relics()}
+					onclick={() => onCollectAllRelics?.()}
+				>
+					<img src={mapImg.effigy} alt={m.relics()} />
+				</button>
+			{/if}
 		</div>
 	{/if}
+
+	<div class="map-area-switch">
+		{#each MAP_AREA_ORDER as candidate}
+			<button
+				type="button"
+				class="map-area-btn"
+				class:active={area === candidate}
+				onclick={() => onAreaChange?.(candidate)}
+			>
+				{candidate === 'MainMap' ? m.map_area_mainmap() : m.map_area_tree()}
+			</button>
+		{/each}
+	</div>
 
 	<!-- Coordinate display overlay -->
 	<div class="coordinate-display" bind:this={coordDisplayElement}>
@@ -529,5 +612,37 @@
 		background: none;
 		box-shadow: none !important;
 		filter: none !important;
+	}
+
+	.map-area-switch {
+		position: absolute;
+		top: 8px;
+		left: 50%;
+		transform: translateX(-50%);
+		display: flex;
+		gap: 2px;
+		padding: 2px;
+		background: color-mix(in srgb, var(--color-surface-900) 85%, transparent);
+		backdrop-filter: blur(8px);
+		border: 1px solid color-mix(in srgb, var(--color-surface-700) 40%, transparent);
+		border-radius: 4px;
+		z-index: 1000;
+	}
+
+	.map-area-btn {
+		padding: 4px 12px;
+		border-radius: 3px;
+		color: white;
+		font-size: 13px;
+		cursor: pointer;
+		transition: background-color 0.15s ease-out;
+	}
+
+	.map-area-btn:hover {
+		background: color-mix(in srgb, var(--color-secondary-500) 25%, transparent);
+	}
+
+	.map-area-btn.active {
+		background: color-mix(in srgb, var(--color-secondary-500) 45%, transparent);
 	}
 </style>

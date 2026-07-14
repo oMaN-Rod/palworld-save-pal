@@ -1,0 +1,47 @@
+[package]
+name = "psp-server"
+version.workspace = true
+edition.workspace = true
+
+[features]
+# Desktop-only native file dialogs (rfd). Off by default so the server/Docker
+# build stays headless — rfd's Linux backend (ashpd) pulls wayland system libs.
+# psp-desktop enables it.
+desktop = ["dep:rfd"]
+
+[dependencies]
+psp-core = { workspace = true }
+psp-db = { workspace = true }
+uesave = { workspace = true }
+axum = { workspace = true }
+tokio = { workspace = true }
+tower-http = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+sqlx = { workspace = true }
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+clap = { workspace = true }
+futures = { workspace = true }
+percent-encoding = { workspace = true }
+zip = { workspace = true }
+uuid = { workspace = true }
+base64 = { workspace = true }
+chrono = { workspace = true }
+rfd = { workspace = true, optional = true }
+opener = { workspace = true }
+reqwest = { workspace = true }
+async-trait = { workspace = true }
+sysinfo = { workspace = true }
+futures-util = { workspace = true }
+bollard = { workspace = true }
+
+[dev-dependencies]
+tokio-tungstenite = { workspace = true }
+tempfile = { workspace = true }
+pretty_assertions = { workspace = true }
+tower = { workspace = true }
+http-body-util = { workspace = true }
+psp-core = { path = "../psp-core", features = ["test-fixtures"] }

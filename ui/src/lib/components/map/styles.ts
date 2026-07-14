@@ -5,7 +5,7 @@ import type { FeatureLike } from 'ol/Feature';
 import { Fill, Icon, Stroke, Style } from 'ol/style';
 import CircleStyle from 'ol/style/Circle';
 import { createIconStyle, createStyle } from 'svelte-openlayers';
-import { SCALE, TRANSFORM_A } from './utils';
+import { cmPerPx, type MapArea } from './utils';
 import compass from '$lib/assets/img/compass.webp';
 
 const ASSET_DATA_PATH = '/src/lib/assets';
@@ -35,7 +35,10 @@ export const mapImg = {
 	oilRig: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_oilrig.webp`),
 	tower: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_tower.webp`),
 	arrow: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_prt_compass_arrow.webp`),
-	worldMap: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_worldmap.webp`, 'webp')
+	maps: {
+		MainMap: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_worldmap.webp`, 'webp'),
+		Tree: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_treemap.webp`, 'webp')
+	} as Record<MapArea, string>
 };
 
 export function createPalIconStyle(
@@ -115,12 +118,11 @@ export const playerIconStyle = createIconStyle({
 	anchorYUnits: 'fraction'
 });
 
-export const baseIconStyle = (feature: FeatureLike, resolution: number) => {
+export const baseIconStyle = (area: MapArea) => (feature: FeatureLike, resolution: number) => {
 	const props = feature.getProperties();
 	const base = props.data as Base;
 	const areaRange = base.area_range || 3500;
-	const mapPixelRadius = (areaRange / SCALE) * Math.abs(TRANSFORM_A);
-	const screenRadius = mapPixelRadius / resolution;
+	const screenRadius = areaRange / cmPerPx(area) / resolution;
 	return [
 		createIconStyle({
 			src: mapImg.baseCamp,
@@ -157,31 +159,37 @@ export const fastTravelLockedIconStyle = createIconStyle({
 	opacity: 0.6
 });
 
-export const effigyIconStyle = new Style({
-	image: new Icon({
-		src: mapImg.effigy,
-		scale: 0.1,
-		anchor: [0.5, 0.5]
-	})
-});
-
-export const effigyLockedIconStyle = new Style({
-	image: new Icon({
-		src: mapImg.effigy,
-		scale: 0.1,
-		anchor: [0.5, 0.5],
-		opacity: 0.60
-	})
-});
-
 export const fastTravelStyle = (feature: FeatureLike) => {
 	const data = feature.get('data');
 	return data?.unlocked === false ? fastTravelLockedIconStyle : fastTravelIconStyle;
 };
 
-export const effigyStyle = (feature: FeatureLike) => {
+/** Per-type relic icon, reusing the relic-stat art (`relic_<type>.webp`). */
+export function relicTypeIcon(relicType: string): string {
+	return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/relic_${relicType}.webp`);
+}
+
+const relicStyleCache: Record<string, Style> = {};
+
+function relicIconStyle(relicType: string, collected: boolean): Style {
+	const cacheKey = `${relicType}:${collected}`;
+	const cached = relicStyleCache[cacheKey];
+	if (cached) return cached;
+	const style = new Style({
+		image: new Icon({
+			src: relicTypeIcon(relicType),
+			scale: 0.5,
+			anchor: [0.5, 0.5],
+			opacity: collected ? 1 : 0.6
+		})
+	});
+	relicStyleCache[cacheKey] = style;
+	return style;
+}
+
+export const relicStyle = (feature: FeatureLike) => {
 	const data = feature.get('data');
-	return data?.unlocked === false ? effigyLockedIconStyle : effigyIconStyle;
+	return relicIconStyle(data?.relic_type ?? 'capture_power', data?.unlocked !== false);
 };
 
 export const dungeonIconStyle = createIconStyle({
@@ -191,6 +199,29 @@ export const dungeonIconStyle = createIconStyle({
 	anchorXUnits: 'fraction',
 	anchorYUnits: 'fraction'
 });
+
+export const bossIconStyle = createIconStyle({
+	src: mapImg.boss,
+	scale: 1,
+	anchor: [0.5, 0.5],
+	anchorXUnits: 'fraction',
+	anchorYUnits: 'fraction',
+	opacity: 1
+});
+
+export const bossDefeatedIconStyle = createIconStyle({
+	src: mapImg.boss,
+	scale: 1,
+	anchor: [0.5, 0.5],
+	anchorXUnits: 'fraction',
+	anchorYUnits: 'fraction',
+	opacity: 0.6
+});
+
+export const bossStyle = (feature: FeatureLike) => {
+	const data = feature.get('data');
+	return data?.defeated === true ? bossDefeatedIconStyle : bossIconStyle;
+};
 
 export const originIconStyle = createStyle({
 	image: {

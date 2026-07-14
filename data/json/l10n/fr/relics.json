@@ -1,0 +1,54 @@
+{
+  "capture_power": {
+    "localized_name": "Taux de capture",
+    "description": "Améliore le taux de capture des sphères."
+  },
+  "hunger_reduction": {
+    "localized_name": "Satiété",
+    "description": "Réduit la sensation de faim."
+  },
+  "swim_speed": {
+    "localized_name": "Nage",
+    "description": "Augmente la vitesse de nage et réduit la consommation d'endurance."
+  },
+  "food_decay_reduction": {
+    "localized_name": "Conservation alimentaire",
+    "description": "Ralentit la décomposition des aliments dans l'inventaire."
+  },
+  "jump_power": {
+    "localized_name": "Saut",
+    "description": "Augmente la hauteur de saut."
+  },
+  "glider_speed": {
+    "localized_name": "Vol plané",
+    "description": "Augmente la vitesse de vol du planeur et réduit la consommation d'endurance."
+  },
+  "climb_speed": {
+    "localized_name": "Escalade",
+    "description": "Augmente la vitesse d'escalade et réduit la consommation d'endurance."
+  },
+  "status_ailment_resist": {
+    "localized_name": "Résistance aux altérations d'état",
+    "description": "Réduit les risques d’altérations d’état."
+  },
+  "stamina_reduction": {
+    "localized_name": "Endurance",
+    "description": "Réduit la consommation d’endurance du Pals monté."
+  },
+  "sphere_homing": {
+    "localized_name": "Précision des sphères",
+    "description": "Augmente la précision des lancers de sphères."
+  },
+  "exp_bonus": {
+    "localized_name": "Gain d’EXP",
+    "description": "Augmente l'EXP obtenue (hors certains bonus d'EXP)"
+  },
+  "rainbow_passive_rate": {
+    "localized_name": "Porte-bonheur irisé",
+    "description": "Augmente les chances que les Pals sauvages aient une bonne Compétence Passive."
+  },
+  "move_speed": {
+    "localized_name": "Vitesse de déplacement",
+    "description": "Augmente la vitesse de déplacement du joueur."
+  }
+}

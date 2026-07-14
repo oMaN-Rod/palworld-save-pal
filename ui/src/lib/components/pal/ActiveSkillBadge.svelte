@@ -1,21 +1,22 @@
 <script lang="ts">
 	import { activeSkillsData, elementsData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { getAppState, getModalState } from '$states';
+	import { getModalState } from '$states';
 	import { SkillSelectModal } from '$components/modals';
 	import { Tooltip } from '$components/ui';
+	import type { Pal } from '$types';
 	import { TimerReset, HelpCircle } from 'lucide-svelte';
 	import { assetLoader } from '$utils';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
-	let { skill = 'Empty', onSkillUpdate } = $props<{
+	let { skill = 'Empty', pal, onSkillUpdate } = $props<{
 		skill: string;
+		pal?: Pal;
 		onSkillUpdate?: (newSkill: string, oldSkill: string) => void;
 	}>();
 
-	const appState = getAppState();
 	const modal = getModalState();
 
 	let { activeSkill, element, elementIconWhite, elementIcon } = $derived.by(() => {
@@ -39,7 +40,7 @@
 			type: 'Active',
 			value: skill,
 			title: m.select_entity({ entity: c.activeSkill }),
-			pal: appState.selectedPal
+			pal
 		});
 		if (!result) return;
 		onSkillUpdate(result, skill);

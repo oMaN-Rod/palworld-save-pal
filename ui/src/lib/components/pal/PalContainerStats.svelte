@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ASSET_DATA_PATH } from '$lib/constants';
+	import { ASSET_DATA_PATH, MAX_LEVEL } from '$lib/constants';
 	import { elementsData, palsData } from '$lib/data';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { staticIcons } from '$types/icons';
@@ -104,7 +104,7 @@
 		}
 
 		const max = Math.max(...levels);
-		const maxLevel = appState.settings.cheat_mode ? 255 : 60;
+		const maxLevel = appState.settings.cheat_mode ? 255 : MAX_LEVEL;
 
 		return {
 			average: levels.reduce((sum: number, level: number) => sum + level, 0) / levels.length,

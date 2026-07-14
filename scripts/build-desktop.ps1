@@ -1,180 +1,56 @@
-# Build and Run Script for PALWorld Save Pal
-param(
-    [string]$Version = $null,
-    [switch]$Help
-)
+# Builds the Windows desktop artifacts into dist/:
+#   PalworldSavePal-<version>-windows.msi              MSI installer
+#   PalworldSavePal-<version>-windows-standalone.zip   portable (psp.exe + ui_build + data)
+#
+# The portable build runs extract-and-run: launch psp.exe from the
+# extracted folder — it serves the bundled ui_build/ and keeps its psp-rs.db
+# alongside the exe. Requires the Microsoft Edge WebView2 runtime (present on
+# up-to-date Windows 10/11).
+#
+# Usage: .\scripts\build-desktop.ps1 [-SkipUi]   (-SkipUi if ui_build is current)
+param([switch]$SkipUi)
+$ErrorActionPreference = "Stop"
+$repoRoot = Split-Path -Parent $PSScriptRoot
+Set-Location $repoRoot
 
-if ($Help) {
-    Write-Host "Usage: .\build-desktop.ps1 [-Version <version>] [-Help]"
-    Write-Host ""
-    Write-Host "Parameters:"
-    Write-Host "  -Version <version>  Set the version number (e.g., '1.0.0')"
-    Write-Host "  -Help              Show this help message"
-    Write-Host ""
-    Write-Host "If no version is specified, the current version from __version__.py will be used."
-    exit 0
+if (-not (Get-Command "cargo-tauri" -ErrorAction SilentlyContinue) -and
+    -not (cargo tauri --version 2>$null)) {
+    throw "cargo-tauri not found. Install it: cargo install tauri-cli --version '^2' --locked"
 }
 
-Set-Location -Path (Join-Path $PSScriptRoot "..")
+$version = (Select-String -Path "Cargo.toml" -Pattern '^version = "([^"]*)"').Matches[0].Groups[1].Value
+Write-Host "Building Palworld Save Pal desktop v$version (windows)"
 
-# Function to update version in a file
-function Update-Version {
-    param(
-        [string]$FilePath,
-        [string]$NewVersion,
-        [string]$Pattern,
-        [string]$Replacement
-    )
-    
-    if (Test-Path $FilePath) {
-        $content = Get-Content -Path $FilePath -Raw
-        $newContent = $content -replace $Pattern, $Replacement
-        Set-Content -Path $FilePath -Value $newContent -NoNewline
-        Write-Host "Updated version to $NewVersion in $FilePath"
-    }
-    else {
-        Write-Warning "File not found: $FilePath"
-    }
+if (-not $SkipUi) {
+    & (Join-Path $PSScriptRoot "build-ui-desktop.ps1")
 }
 
-# Get or set version
-if ($Version) {
-    # Validate version format (basic semver check)
-    if ($Version -notmatch '^\d+\.\d+\.\d+(-[a-zA-Z0-9\-\.]+)?(\+[a-zA-Z0-9\-\.]+)?$') {
-        Write-Error "Invalid version format. Please use semantic versioning (e.g., '1.0.0', '1.0.0-beta', '1.0.0+build.1')"
-        exit 1
-    }
-    
-    Write-Host "Updating version to $Version..."
-    
-    # Update __version__.py
-    Update-Version -FilePath ".\palworld_save_pal\__version__.py" -NewVersion $Version -Pattern '__version__ = "[^"]*"' -Replacement "__version__ = `"$Version`""
-    
-    # Update pyproject.toml
-    Update-Version -FilePath ".\pyproject.toml" -NewVersion $Version -Pattern 'version = "[^"]*"' -Replacement "version = `"$Version`""
-    
-    $version = $Version
+Push-Location "psp-desktop"
+try {
+    cargo tauri build --bundles msi
+    if ($LASTEXITCODE -ne 0) { throw "cargo tauri build failed" }
 }
-else {
-    # Read current version
-    $version = (Get-Content -Path ".\palworld_save_pal\__version__.py" | Select-String -Pattern "__version__").Line.Split('"')[1]
-}
+finally { Pop-Location }
 
-Write-Host "Building PALWorld Save Pal Desktop App version $version"
+$dist = Join-Path $repoRoot "dist"
+New-Item -ItemType Directory -Force -Path $dist | Out-Null
 
-$distDir = ".\dist\psp-windows-$version"
-if (Test-Path -Path $distDir) {
-    Write-Host "Removing existing distribution directory $distDir"
-    Remove-Item -Path $distDir -Recurse -Force
-}
-New-Item -Path $distDir -ItemType Directory | Out-Null
-Write-Host "Created $distDir"
+# MSI installer.
+$msi = Get-ChildItem "target/release/bundle/msi/*.msi" | Select-Object -First 1
+Copy-Item $msi.FullName (Join-Path $dist "PalworldSavePal-$version-windows.msi")
 
-# Build Front end
+# Portable standalone: exe + ui_build + data in one folder, zipped.
+$staging = Join-Path $dist "PalworldSavePal"
+if (Test-Path $staging) { Remove-Item -Recurse -Force $staging }
+New-Item -ItemType Directory -Force -Path $staging | Out-Null
+Copy-Item "target/release/psp.exe" (Join-Path $staging "psp.exe")
+Copy-Item -Recurse "ui_build" (Join-Path $staging "ui_build")
+Copy-Item -Recurse "data" (Join-Path $staging "data")
 
-if (Test-Path -Path ".\build\") {
-    Write-Host "Removing existing build directory .\build\"
-    Remove-Item -Path ".\build\" -Recurse -Force
-}
+$zip = Join-Path $dist "PalworldSavePal-$version-windows-standalone.zip"
+if (Test-Path $zip) { Remove-Item -Force $zip }
+Compress-Archive -Path $staging -DestinationPath $zip
+Remove-Item -Recurse -Force $staging
 
-if (Test-Path -Path ".\ui_build\") {
-    Write-Host "Removing existing ui_build directory .\ui_build\"
-    Remove-Item -Path ".\ui_build\" -Recurse -Force
-}
-
-@"
-PUBLIC_WS_URL=127.0.0.1:5174/ws
-PUBLIC_DESKTOP_MODE=true
-"@ | Set-Content -Path ".\ui\.env"
-
-Set-Location -Path ".\ui"
-
-# Function to check if a command exists
-function Test-Command($command) {
-    $oldPreference = $ErrorActionPreference
-    $ErrorActionPreference = 'stop'
-    try {
-        if (Get-Command $command) { return $true }
-    }
-    catch { return $false }
-    finally { $ErrorActionPreference = $oldPreference }
-}
-
-# Determine which package manager to use
-$packageManager = if (Test-Command 'bun') {
-    'bun'
-}
-elseif (Test-Command 'npm') {
-    'npm'
-}
-elseif (Test-Command 'yarn') {
-    'yarn'
-}
-else {
-    Write-Error "No suitable package manager found. Please install Bun, npm, or Yarn."
-    exit 1
-}
-
-Write-Host "Using $packageManager as the package manager."
-
-# Install dependencies
-Write-Host "Installing dependencies..."
-& $packageManager install
-
-if ($LASTEXITCODE -ne 0) {
-    Write-Error "$packageManager install failed. Exiting."
-    exit 1
-}
-
-# Build the frontend
-Write-Host "Building the frontend..."
-& $packageManager run build
-
-if ($LASTEXITCODE -ne 0) {
-    Write-Error "$packageManager run build failed. Exiting."
-    exit 1
-}
-
-Set-Location -Path ".."
-
-Write-Host "Building standalone..."
-
-# Build standalone executable
-python setup.py build
-
-if ($LASTEXITCODE -ne 0) {
-    Write-Error "cx_Freeze build failed. Exiting."
-    exit 1
-}
-
-Write-Host "Building installer..."
-# Create MSI installer
-python setup.py bdist_msi
-
-if ($LASTEXITCODE -ne 0) {
-    Write-Error "cx_Freeze build failed. Exiting."
-    exit 1
-}
-
-Write-Host "Copying files to distribution directory..."
-Copy-Item -Path ".\build\exe.win-amd64-*\*" -Destination $distDir -Recurse -Force
-
-Write-Host "Cleaning up..."
-Remove-Item -Path ".\ui_build\" -Recurse -Force
-
-# Create ZIP archive of the distribution files
-$zipPath = ".\dist\PalworldSavePal-$version-win-standalone.zip"
-Write-Host "Creating ZIP archive at $zipPath..."
-if (Test-Command '7za') {
-    & 7za a -tzip $zipPath "$distDir\*" -mx=9
-    if ($LASTEXITCODE -ne 0) {
-        Write-Error "7za failed to create the ZIP archive. Exiting."
-        exit 1
-    }
-    Write-Host "Created ZIP archive using 7za."
-}
-else {
-    Compress-Archive -Path "$distDir\*" -DestinationPath $zipPath -Force
-}
-
-Write-Host "Done building the desktop app."
+Write-Host "Done. Artifacts in dist/:"
+Get-ChildItem $dist -Filter "PalworldSavePal-$version-windows*" | ForEach-Object { Write-Host "  $($_.Name)" }

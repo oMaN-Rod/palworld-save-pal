@@ -201,7 +201,7 @@
 		if (!palData) return;
 		for (const [key, value] of Object.entries(palData.work_suitability)) {
 			if (value === 0) continue;
-			appState.selectedPal.work_suitability[key as WorkSuitability] = Math.min(5 - value, 4);
+			appState.selectedPal.work_suitability[key as WorkSuitability] = Math.min(10 - value, 9);
 		}
 		appState.selectedPal.state = EntryState.MODIFIED;
 	}
@@ -277,7 +277,7 @@
 {#snippet activeSkillsBody()}
 	<div class="flex max-h-36 flex-col space-y-2 overflow-y-auto">
 		{#each activeSkills as skill}
-			<ActiveSkillBadge {skill} onSkillUpdate={handleUpdateActiveSkill} />
+			<ActiveSkillBadge {skill} pal={appState.selectedPal} onSkillUpdate={handleUpdateActiveSkill} />
 		{/each}
 	</div>
 {/snippet}
@@ -320,7 +320,7 @@
 {#snippet passiveSkillsBody()}
 	<div class="grid max-h-24 grid-cols-2 gap-2 overflow-y-auto">
 		{#each passiveSkills as skill}
-			<PassiveSkillBadge {skill} onSkillUpdate={handleUpdatePassiveSkill} />
+			<PassiveSkillBadge {skill} pal={appState.selectedPal} onSkillUpdate={handleUpdatePassiveSkill} />
 		{/each}
 	</div>
 {/snippet}

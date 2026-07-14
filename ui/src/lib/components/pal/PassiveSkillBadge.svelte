@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { passiveSkillsData } from '$lib/data';
-	import type { PassiveSkill } from '$types';
+	import type { Pal, PassiveSkill } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { SkillSelectModal } from '$components/modals';
-	import { getAppState, getModalState } from '$states';
+	import { getModalState } from '$states';
 	import { Tooltip } from '$components/ui';
 	import { assetLoader, calculateFilters, skillBorderClass, skillFilter, skillOpacity } from '$utils';
 	import { cn } from '$theme';
@@ -12,11 +12,11 @@
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
-	let { skill, onSkillUpdate } = $props<{
+	let { skill, pal, onSkillUpdate } = $props<{
 		skill: string | undefined;
+		pal?: Pal;
 		onSkillUpdate?: (newSkill: string, oldSkill: string) => void;
 	}>();
-	const appState = getAppState();
 	const modal = getModalState();
 
 	let skillData = $derived(passiveSkillsData.getByKey(skill));
@@ -56,7 +56,7 @@
 			type: 'Passive',
 			value: skill,
 			title: m.select_entity({ entity: c.passiveSkill }),
-			pal: appState.selectedPal
+			pal
 		});
 		if (!result) return;
 		onSkillUpdate(result, skill);

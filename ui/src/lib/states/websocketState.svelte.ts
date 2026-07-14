@@ -25,22 +25,25 @@ class SocketState {
 
 		this.#websocket.onmessage = async (event) => {
 			const data = JSON.parse(event.data);
-			this.#message = data;
-			if (!this.#message) return;
+			if (!data) return;
 
-			if (this.#message.type && this.#messageQueue.has(this.#message.type)) {
-				const resolve = this.#messageQueue.get(this.#message.type);
+			// Resolve queued sendAndWait calls with the raw parsed data: routing it
+			// through the #message $state proxy makes every consumer read through a
+			// deeply reactive proxy (thousands of tracked reads for large payloads).
+			if (data.type && this.#messageQueue.has(data.type)) {
+				const resolve = this.#messageQueue.get(data.type);
 				if (resolve) {
-					resolve(this.#message);
-					this.#messageQueue.delete(this.#message.type);
+					resolve(data);
+					this.#messageQueue.delete(data.type);
 					return;
 				}
 			}
 
-			const messageSnapshot = $state.snapshot(this.#message);
-			console.log(`Received message: ${this.#message.type}`, messageSnapshot);
+			this.#message = data;
 
-			await this.#dispatcher.dispatch(this.#message, context);
+			console.log(`Received message: ${data.type}`, data);
+
+			await this.#dispatcher.dispatch(data, context);
 		};
 
 		this.#websocket.onclose = () => {

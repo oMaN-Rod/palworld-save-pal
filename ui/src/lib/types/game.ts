@@ -28,6 +28,7 @@ export interface PlayerSummary {
 	level?: number;
 	guild_id?: string;
 	pal_count: number;
+	last_online_time?: string;
 	loaded: boolean;
 }
 
@@ -37,7 +38,33 @@ export interface GuildSummary {
 	admin_player_uid?: string;
 	player_count: number;
 	base_count: number;
+	level?: number;
+	pal_count: number;
 	loaded: boolean;
+}
+
+export interface PalSummary {
+	instance_id: string;
+	character_id: string;
+	character_key: string;
+	nickname?: string;
+	owner_uid?: string;
+	owner_name?: string;
+	guild_id?: string;
+	base_id?: string;
+	gender?: string;
+	level: number;
+	hp: number;
+	stomach: number;
+	rank: number;
+	exp: number;
+	talent_hp: number;
+	talent_shot: number;
+	talent_defense: number;
+	rank_hp: number;
+	rank_attack: number;
+	rank_defense: number;
+	rank_craftspeed: number;
 }
 
 export type EggConfig = {
@@ -100,6 +127,8 @@ export type StatusPointList = {
 	weight: number;
 	capture_rate: number;
 	work_speed: number;
+	// Palworld 1.0 relic-backed ranks. Absent on pre-1.0 saves.
+	[key: string]: number;
 };
 
 export type ExStatusPointList = {
@@ -153,7 +182,7 @@ export type Player = {
 	stomach: number;
 	sanity: number;
 	status_point_list: StatusPointList;
-	ex_status_point_list: ExStatusPointList;
+	ext_status_point_list: ExStatusPointList;
 	guild_id: string;
 	technologies: string[];
 	technology_points: number;
@@ -164,6 +193,8 @@ export type Player = {
 	completed_missions: string[];
 	unlocked_fast_travel_points: string[];
 	collected_effigies: string[];
+	collected_relics: Record<string, string[]>;
+	defeated_bosses: string[];
 };
 
 export type GuildLabResearchInfo = {
@@ -213,7 +244,19 @@ export type FastTravelPoint = {
 	localized_name?: string;
 };
 
-export type Effigy = {
+/** An entry of relics.json; `relic_type` is a bare EPalRelicType key. */
+export type Relic = {
+	class: string;
+	x: number;
+	y: number;
+	z: number;
+	relic_type: string;
+};
+
+export type Boss = {
+	spawner_id: string;
+	character_id: string;
+	level: number;
 	x: number;
 	y: number;
 	z: number;
@@ -226,6 +269,8 @@ export type MapUnlockPoint = {
 	localized_name: string;
 	unlocked?: boolean;
 };
+
+export type RelicPoint = MapUnlockPoint & { relic_type: string };
 
 export type BaseDTO = {
 	id: string;

@@ -1,0 +1,54 @@
+{
+  "capture_power": {
+    "localized_name": "Skuteczność przechwytywania",
+    "description": "Zwiększa skuteczność przechwytywania używanych Sfer."
+  },
+  "hunger_reduction": {
+    "localized_name": "Sytość",
+    "description": "Gracz wolniej odczuwa głód."
+  },
+  "swim_speed": {
+    "localized_name": "Umiejętność pływania",
+    "description": "Zwiększa prędkość pływania gracza i zmniejsza zużycie wytrzymałości podczas pływania."
+  },
+  "food_decay_reduction": {
+    "localized_name": "Przechowywanie żywności",
+    "description": "Spowalnia psucie się żywności w ekwipunku."
+  },
+  "jump_power": {
+    "localized_name": "Siła skoku",
+    "description": "Zwiększa siłę skoku gracza."
+  },
+  "glider_speed": {
+    "localized_name": "Szybowanie",
+    "description": "Zwiększa prędkość szybowania i zmniejsza zużycie wytrzymałości podczas korzystania z szybowca."
+  },
+  "climb_speed": {
+    "localized_name": "Wspinaczka",
+    "description": "Zwiększa prędkość wspinaczki i zmniejsza zużycie wytrzymałości podczas wspinania się."
+  },
+  "status_ailment_resist": {
+    "localized_name": "Odporność na efekty statusu",
+    "description": "Zmniejsza podatność gracza na negatywne efekty statusu."
+  },
+  "stamina_reduction": {
+    "localized_name": "Wytrzymałość",
+    "description": "Zmniejsza zużycie wytrzymałości podczas biegu gracza i dosiadanego Pala."
+  },
+  "sphere_homing": {
+    "localized_name": "Namierzanie Sfer",
+    "description": "Sprawia, że rzucone Sfery namierzają cel."
+  },
+  "exp_bonus": {
+    "localized_name": "Zdobywanie EXP",
+    "description": "Zwiększa ilość otrzymywanego EXP. (Nie dotyczy części bonusowego EXP)."
+  },
+  "rainbow_passive_rate": {
+    "localized_name": "Tęczowe szczęście",
+    "description": "Zwiększa szansę no to, że dzikie Pale będą mieć lepsze umiejętności pasywne."
+  },
+  "move_speed": {
+    "localized_name": "Prędkość poruszania się",
+    "description": "Zwiększa prędkość poruszania się gracza."
+  }
+}

@@ -1,7 +1,5 @@
 # Palworld Save Pal
 
-> **Note**: This project was put together for fun and to kick the tires on Sveltekit 5 and Skeleton UI Next. Things may be broken or not work as expected.
-
 ⚠️ **Backup your save files before using this tool!!** ⚠️
 
 Palworld Save Pal is a tool for managing and analyzing save files.
@@ -12,13 +10,12 @@ Palworld Save Pal is a tool for managing and analyzing save files.
   - [📋 Table of Contents](#-table-of-contents)
   - [🚀 Installation](#-installation)
   - [🎮 Usage](#-usage)
+  - [🦀 Rust backend migration](#-rust-backend-migration)
   - [🐳 Docker](#-docker)
   - [👨‍💻 Developer Guide](#-developer-guide)
     - [Web](#web)
     - [Desktop App](#desktop-app)
     - [Build Desktop App](#build-desktop-app)
-      - [Using build script](#using-build-script)
-      - [Manual build](#manual-build)
   - [🔥 Features](#-features)
     - [General](#general)
     - [Pals](#pals)
@@ -39,6 +36,28 @@ Grab the latest release from the [releases](https://github.com/oMaN-Rod/palworld
 ## 🎮 Usage
 
 Details for using Palworld Save Pal can be found in the [User Guide](https://github.com/oMaN-Rod/palworld-save-pal/wiki/%F0%9F%8E%AE-Usage)
+
+## 🦀 Rust backend migration
+
+The backend is now a single Rust binary (`psp-server`) — the Python/FastAPI
+backend is retired. The UI, save-editing features, and WebSocket API are
+unchanged.
+
+**Your existing database (`psp.db`) is imported automatically.** On first
+start, if a legacy `psp.db` sits next to the new database file
+(`psp-rs.db`) and no new database exists yet, your settings, presets,
+Universal Pal Storage, and server configs are imported; the legacy file is
+backed up, never modified, and the import runs only once.
+
+- Desktop: nothing to do — the app finds your existing `psp.db`.
+- Docker: copy your old `psp.db` into the `./db/` folder (see the Docker
+  section) before first start.
+
+**Breaking change:** JSON files exported by the old Python tooling
+(palworld-save-tools `convert.py` output) can no longer be converted back to
+`.sav` via `POST /api/convert/json-to-sav` or the Raw editor. Re-export the
+save with this version first — `sav → json → sav` round-trips are only
+supported within the same tooling generation.
 
 ## 🐳 Docker
 
@@ -75,16 +94,15 @@ To run Palworld Save Pal using Docker:
             context: .
             dockerfile: Dockerfile
             args:
-              # Change this to the URL of your public server
+              # Change this to the host:port browsers will use to reach the server
               - PUBLIC_WS_URL=127.0.0.1:5174/ws
           ports:
             - "5174:5174"
           volumes:
             - ./data:/app/data
-            - ./palworld_save_pal:/app/palworld_save_pal
-          environment:
-            - PORT=5174
-          command: python psp.py
+            # Persists psp-rs.db (settings, presets, UPS). To import a legacy
+            # Python psp.db, copy it to ./db/psp.db before first start.
+            - ./db:/app/db
       ```
 
    2. Build the docker container:
@@ -95,100 +113,48 @@ To run Palworld Save Pal using Docker:
 
 ## 👨‍💻 Developer Guide
 
-For developers who want to contribute to Palworld Save Pal:
+Desktop (Windows/Linux/Mac) is the primary way Palworld Save Pal ships;
+Docker/web is also supported. The backend is a Rust workspace at the repo
+root — see [docs/rust-dev-guide.md](docs/rust-dev-guide.md) for the full
+guide.
 
 ### Web
 
-1. Set up the development environment:
+`dev:web` starts the Vite dev server and the Rust backend together:
 
-   ```bash
-   uv sync
-   source .venv/bin/activate
-   ```
+```bash
+cd ui
+bun install
+bun run dev:web
+```
 
-2. Run the application in development mode:
-
-   ```bash
-   cd ui
-   bun install
-   bun run dev:web
-   ```
-
-3. Open your browser and navigate to `http://127.0.0.1:5173`
+Then open `http://127.0.0.1:5173`.
 
 ### Desktop App
 
-1. Set the environment variable for the svelte SPA `ui/.env`.
+Run the app in dev mode with hot-reload — Tauri starts the Vite dev server for
+you (requires the Tauri CLI: `cargo install tauri-cli --version "^2" --locked`):
 
-   ```env
-   PUBLIC_WS_URL=127.0.0.1:5174/ws
-   PUBLIC_DESKTOP_MODE=true
-   ```
-
-2. Activate python environment
-
-   ```powershell
-   uv sync
-   .venv\Scripts\activate
-   ```
-
-3. Run the desktop app:
-
-   ```powershell
-   cd ui
-   bun install
-   bun run dev:desktop
-   ```
+```bash
+cd ui && bun install && cd ..
+cd psp-desktop
+cargo tauri dev
+```
 
 ### Build Desktop App
 
-> Activate the environment
+Use the platform build script — it builds the UI, runs `cargo tauri build`, and
+collects the shipped artifacts into `dist/`:
 
 ```powershell
-uv sync
-.venv\Scripts\activate
-```
-
-#### Using build script
-
-```powershell
+# Windows: MSI installer + portable standalone zip
 .\scripts\build-desktop.ps1
 ```
 
-#### Manual build
-
-1. Set the environment variable for the svelte SPA `ui/.env`.
-
-   ```env
-   PUBLIC_WS_URL=127.0.0.1:5174/ws
-   PUBLIC_DESKTOP_MODE=true
-   ```
-
-2. Build the SPA (replace bun with your package manager of choice). This will create a build directory in the project root containing the static files for the SPA:
-
-   ```powershell
-   cd ui
-   bun install
-   bun run build
-   cd ..
-   mkdir dist
-   ```
-
-3. Build standalone executable:
-
-   ```powershell
-   python setup.py build
-   ```
-
-or
-
-3. Build installer:
-
-   ```powershell
-   python setup.py bdist_msi
-   ```
-
-> **Note:** The `dist` folder will contain the executable and the SPA build files, the data folder contains json files with game data, all need to be distributed together.
+```bash
+# macOS (.dmg) / Linux (.deb)
+./scripts/build-desktop.sh
+```
 
 ## 🔥 Features
 
@@ -283,8 +249,9 @@ MIT License (do whatever you want with it).
 These are projects I've found that specifically target Palworld save files, each was helpful in some way during the development of this project:
 
 - [PalEdit](https://github.com/EternalWraith/PalEdit) - PSP was inspired by it.
-- [palworld-save-tools](https://github.com/cheahjs/palworld-save-tools) - PSP uses this tool for handling save files, can be used directly to convert to/from json.
-- [palworld-uesave-rs](https://github.com/DKingAlpha/palworld-uesave-rs) - I originally considered building this app using Tauri, opted for using Python, but this project was helpful.
+- [uesave-rs](https://github.com/oMaN-Rod/uesave-rs) - The Rust library the current backend uses to read and write Palworld save files.
+- [palworld-save-tools](https://github.com/cheahjs/palworld-save-tools) - Python library for parsing Palworld saves; PSP's original Python backend was built on it.
+- [palworld-uesave-rs](https://github.com/DKingAlpha/palworld-uesave-rs) - An early reference while exploring save parsing.
 - [Palworld Pal Editor](https://github.com/KrisCris/Palworld-Pal-Editor) - Also served as a reference for Palworld Save Pal, adopted some of this projects approach.
 - [PalWorldSaveTools](https://github.com/deafdudecomputers/PalWorldSaveTools) - Has a bunch of useful features for parsing, editing, and converting save files.
 

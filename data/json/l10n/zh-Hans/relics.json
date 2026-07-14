@@ -1,0 +1,54 @@
+{
+  "capture_power": {
+    "localized_name": "捕获力",
+    "description": "玩家使用的帕鲁球捕获率将提升。"
+  },
+  "hunger_reduction": {
+    "localized_name": "耐饿能力",
+    "description": "玩家将更不易感到饥饿。"
+  },
+  "swim_speed": {
+    "localized_name": "游泳能力",
+    "description": "玩家的游泳速度将提升，且耐力消耗降低。"
+  },
+  "food_decay_reduction": {
+    "localized_name": "食物保存",
+    "description": "物品栏内的食物将更不易腐坏。"
+  },
+  "jump_power": {
+    "localized_name": "跳跃力",
+    "description": "玩家的跳跃力将提升。"
+  },
+  "glider_speed": {
+    "localized_name": "滑翔能力",
+    "description": "玩家在使用滑翔伞时的速度将提升，且耐力消耗降低。"
+  },
+  "climb_speed": {
+    "localized_name": "攀爬能力",
+    "description": "玩家的攀爬速度将提升，且耐力消耗降低。"
+  },
+  "status_ailment_resist": {
+    "localized_name": "异常状态抵抗",
+    "description": "玩家将更不易陷入异常状态。"
+  },
+  "stamina_reduction": {
+    "localized_name": "持久力",
+    "description": "玩家与骑乘帕鲁奔跑时的耐力消耗将降低。"
+  },
+  "sphere_homing": {
+    "localized_name": "帕鲁球追踪",
+    "description": "玩家投掷帕鲁球时，将会自动追踪目标。"
+  },
+  "exp_bonus": {
+    "localized_name": "经验值获取",
+    "description": "玩家获得的经验值将增加。（部分奖励经验值除外）"
+  },
+  "rainbow_passive_rate": {
+    "localized_name": "虹彩之运",
+    "description": "野生帕鲁拥有高品质被动技能的概率将提升。"
+  },
+  "move_speed": {
+    "localized_name": "移动速度",
+    "description": "玩家的移动速度将提升。"
+  }
+}

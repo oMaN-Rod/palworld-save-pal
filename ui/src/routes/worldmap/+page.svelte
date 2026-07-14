@@ -1,15 +1,25 @@
 <script lang="ts">
-	import { Map } from '$components';
 	import { PlayerList } from '$components/player';
-	import { Button, Combobox } from '$components/ui';
+	import { Button, Combobox, Loading } from '$components/ui';
 	import { getAppState, getModalState, getToastState } from '$states';
-	import { worldToPixel, worldToMap } from '$components/map/utils';
+	import {
+		worldToPixel,
+		worldToMap,
+		mapOf,
+		DEFAULT_MAP_AREA,
+		type MapArea
+	} from '$components/map/utils';
+	import { collectRelics, relicsByType, toggleRelic } from '$components/map/relics';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
-	import { mapImg } from '$components/map/styles';
-	import { Target, Unlock, Users, Building, Loader2, Map as MapIcon } from 'lucide-svelte';
-	import { mapObjects, fastTravelPoints, effigies } from '$lib/data';
+	import { mapImg, relicTypeIcon } from '$components/map/styles';
+	import Target from '@lucide/svelte/icons/target';
+	import Unlock from '@lucide/svelte/icons/unlock';
+	import Users from '@lucide/svelte/icons/users';
+	import MapIcon from '@lucide/svelte/icons/map';
+	import Building from '@lucide/svelte/icons/building';
+	import { mapObjects, fastTravelPoints, relics, relicData, bosses } from '$lib/data';
 	import type { Map as OLMap } from 'ol';
-	import type { Base, GuildSummary, MapUnlockPoint, Player } from '$types';
+	import type { Base, GuildSummary, MapUnlockPoint, Player, RelicPoint } from '$types';
 	import { assetLoader } from '$utils';
 	import { EditBaseModal } from '$components/modals';
 	import { EntryState, MessageType } from '$types';
@@ -27,27 +37,35 @@
 	let selectedGuildId = $state('');
 
 	type MapOptions = {
+		area: MapArea;
 		showOrigin: boolean;
 		showPlayers: boolean;
 		showBases: boolean;
 		showFastTravel: boolean;
-		showEffigies: boolean;
+		showRelics: boolean;
+		/** Per-relic-type visibility; a missing key means visible. */
+		relicTypes: Record<string, boolean>;
 		showDungeons: boolean;
+		showBosses: boolean;
 		showAlphaPals: boolean;
 		showPredatorPals: boolean;
 	};
 
 	const mapOptionsState = persistedState<MapOptions>('mapOptions', {
+		area: DEFAULT_MAP_AREA,
 		showOrigin: false,
 		showPlayers: true,
 		showBases: true,
 		showFastTravel: true,
-		showEffigies: true,
+		showRelics: true,
+		relicTypes: {},
 		showDungeons: true,
+		showBosses: true,
 		showAlphaPals: true,
 		showPredatorPals: true
 	});
 	const mapOptions = $derived(mapOptionsState.current);
+	const activeArea = $derived(mapOptions.area ?? DEFAULT_MAP_AREA);
 	const toast = getToastState();
 	let section = $state(['players']);
 	let map: OLMap | null = $state(null);
@@ -90,30 +108,72 @@
 			})
 		);
 	});
-	const fastTravelCount = $derived(Object.keys(fastTravelPoints.points).length);
-	const fastTravelUnlockedCount = $derived(
-		appState.selectedPlayer?.unlocked_fast_travel_points?.length
+	// Every count below is scoped to the active map area, matching what Map.svelte draws.
+	const areaFastTravelGuids = $derived(
+		new Set(
+			Object.entries(fastTravelPoints.points)
+				.filter(([, point]) => mapOf(point.x, point.y) === activeArea)
+				.map(([guid]) => guid.toUpperCase())
+		)
 	);
-	const effigyCount = $derived(Object.keys(effigies.points).length);
-	const effigyCollectedCount = $derived(appState.selectedPlayer?.collected_effigies?.length);
-	const dungeonCount = $derived.by(() => {
-		return Object.values(mapObjects.points).filter((point) => point.type === 'dungeon').length || 0;
+	const fastTravelCount = $derived(areaFastTravelGuids.size);
+	const fastTravelUnlockedCount = $derived.by(() => {
+		const unlocked = appState.selectedPlayer?.unlocked_fast_travel_points;
+		if (!unlocked) return undefined;
+		return unlocked.filter((guid) => areaFastTravelGuids.has(guid.toUpperCase())).length;
 	});
-	const alphaPalCount = $derived.by(() => {
-		return (
-			Object.values(mapObjects.points).filter((point) => point.type === 'alpha_pal').length || 0
-		);
+	const relicTypeStats = $derived.by(() => {
+		const player = appState.selectedPlayer;
+		const collectedSets: Record<string, Set<string>> = {};
+		for (const [type, guids] of Object.entries(player ? relicsByType(player) : {})) {
+			collectedSets[type] = new Set(guids.map((guid) => guid.toUpperCase()));
+		}
+		const stats: Record<string, { total: number; collected: number }> = {};
+		for (const [guid, relic] of Object.entries(relics.points)) {
+			if (mapOf(relic.x, relic.y) !== activeArea) continue;
+			const entry = (stats[relic.relic_type] ??= { total: 0, collected: 0 });
+			entry.total++;
+			if (collectedSets[relic.relic_type]?.has(guid.toUpperCase())) entry.collected++;
+		}
+		return stats;
 	});
-	const predatorPalCount = $derived.by(() => {
-		return (
-			Object.values(mapObjects.points).filter((point) => point.type === 'predator_pal').length || 0
-		);
+
+	// Game order (relic_data.json), restricted to types that exist on this map.
+	const relicTypeList = $derived.by(() => {
+		const present = Object.keys(relicTypeStats);
+		const ordered = Object.keys(relicData.relicData).filter((type) => present.includes(type));
+		return [...ordered, ...present.filter((type) => !ordered.includes(type))];
 	});
+
+	const relicCount = $derived(
+		Object.values(relicTypeStats).reduce((acc, entry) => acc + entry.total, 0)
+	);
+	const relicCollectedCount = $derived(
+		Object.values(relicTypeStats).reduce((acc, entry) => acc + entry.collected, 0)
+	);
+	const isRelicTypeVisible = (type: string) => mapOptions.relicTypes?.[type] !== false;
+	const areaMapObjectCounts = $derived.by(() => {
+		const counts: Record<string, number> = {};
+		for (const point of Object.values(mapObjects.points)) {
+			if (mapOf(point.x, point.y) !== activeArea) continue;
+			counts[point.type] = (counts[point.type] ?? 0) + 1;
+		}
+		return counts;
+	});
+	const dungeonCount = $derived(areaMapObjectCounts['dungeon'] ?? 0);
+	const alphaPalCount = $derived(areaMapObjectCounts['alpha_pal'] ?? 0);
+	const predatorPalCount = $derived(areaMapObjectCounts['predator_pal'] ?? 0);
+	const bossCount = $derived(
+		Object.values(bosses.points).filter((b) => mapOf(b.x, b.y) === activeArea).length
+	);
 	const anubisImg = $derived(assetLoader.loadMenuImage('anubis'));
 	const starryonImg = $derived(assetLoader.loadMenuImage('nightbluehorse'));
 
 	function panTo(x: number, y: number) {
-		const coords = worldToPixel(x, y);
+		const area = mapOf(x, y);
+		if (!area) return;
+		mapOptions.area = area;
+		const coords = worldToPixel(x, y, area);
 		map?.getView().animate({ center: coords, zoom: 5, duration: 500 });
 	}
 	function handlePlayerFocus(player: Player) {
@@ -218,19 +278,11 @@
 		player.state = EntryState.MODIFIED;
 	}
 
-	function handleToggleEffigy(point: MapUnlockPoint) {
+	function handleToggleRelic(point: RelicPoint) {
 		const player = appState.selectedPlayer;
 		if (!player) return;
-		const collected = player.collected_effigies ?? [];
-		const index = collected.findIndex((guid) => guid.toUpperCase() === point.guid.toUpperCase());
-		if (index >= 0) {
-			collected.splice(index, 1);
-			updateRelicCount(player, -1);
-		} else {
-			collected.push(point.guid);
-			updateRelicCount(player, 1);
-		}
-		player.collected_effigies = collected;
+		const delta = toggleRelic(player, point);
+		if (delta !== 0) updateRelicCount(player, delta);
 		player.state = EntryState.MODIFIED;
 	}
 
@@ -247,15 +299,19 @@
 		player.state = EntryState.MODIFIED;
 	}
 
-	function handleCollectAllEffigies() {
+	// Only the active map area and the currently visible types, so this can never
+	// write GUIDs the user cannot see.
+	function handleCollectAllRelics() {
 		const player = appState.selectedPlayer;
 		if (!player) return;
-		const collected = player.collected_effigies ?? [];
-		const existing = new Set(collected.map((guid) => guid.toUpperCase()));
-		const toAdd = Object.keys(effigies.points).filter((guid) => !existing.has(guid.toUpperCase()));
-		if (toAdd.length === 0) return;
-		player.collected_effigies = [...collected, ...toAdd];
-		updateRelicCount(player, toAdd.length);
+		if (!(mapOptions.showRelics ?? true)) return;
+		const visible = Object.entries(relics.points)
+			.filter(([, relic]) => mapOf(relic.x, relic.y) === activeArea)
+			.filter(([, relic]) => isRelicTypeVisible(relic.relic_type))
+			.map(([guid, relic]) => ({ guid, relic_type: relic.relic_type }));
+		const { added, capturePowerAdded } = collectRelics(player, visible);
+		if (added === 0) return;
+		if (capturePowerAdded > 0) updateRelicCount(player, capturePowerAdded);
 		player.state = EntryState.MODIFIED;
 	}
 
@@ -320,22 +376,11 @@
 
 <div class="relative h-full overflow-hidden">
 	{#if dismissLoading || !loadingComplete}
-		<div class="loading-overlay" class:loading-dismiss={loadingComplete}>
-			<div class="loading-content">
-				<div class="relative">
-					<Loader2
-						size={64}
-						class="text-secondary-400 animate-spin"
-						style="filter: drop-shadow(0 0 20px color-mix(in srgb, var(--color-secondary-400) 50%, transparent));"
-					/>
-					<MapIcon size={24} class="text-secondary-300 absolute inset-0 m-auto" />
-				</div>
-				<p class="loading-text">INITIALIZING MAP</p>
-				<div class="loading-bar-track">
-					<div class="loading-bar-fill" class:loading-bar-done={loadingComplete}></div>
-				</div>
-			</div>
-		</div>
+		<Loading
+			loadingComplete={loadingComplete}
+			label={m.initializing_entity({entity: m.map()})}
+			icon={MapIcon}
+			iconSize={24} />
 	{/if}
 
 	<div class="grid h-full grid-cols-[420px_1fr] gap-2" class:page-blurred={!loadingComplete}>
@@ -378,17 +423,17 @@
 							</span>
 						</button>
 						<button
-							class="flex items-center space-x-2 {(mapOptions.showEffigies ?? true)
+							class="flex items-center space-x-2 {(mapOptions.showRelics ?? true)
 								? ''
 								: 'opacity-25'} "
-							onclick={() => (mapOptions.showEffigies = !(mapOptions.showEffigies ?? true))}
+							onclick={() => (mapOptions.showRelics = !(mapOptions.showRelics ?? true))}
 						>
-							<img src={mapImg.effigy} alt={m.effigies()} class="mr-2 h-6 w-6" />
-							<span>{m.effigy()}</span>
+							<img src={mapImg.effigy} alt={m.relics()} class="mr-2 h-6 w-6" />
+							<span>{m.relics()}</span>
 							<span class="text-surface-500 text-xs">
-								{effigyCollectedCount !== undefined
-									? `${effigyCollectedCount}/${effigyCount}`
-									: effigyCount}
+								{appState.selectedPlayer
+									? `${relicCollectedCount}/${relicCount}`
+									: relicCount}
 							</span>
 						</button>
 						{#if appState.saveFile}
@@ -419,6 +464,14 @@
 							<span class="text-surface-500 text-xs">{dungeonCount}</span>
 						</button>
 						<button
+							class="flex items-center space-x-2 {(mapOptions.showBosses ?? true) ? '' : 'opacity-25'}"
+							onclick={() => (mapOptions.showBosses = !(mapOptions.showBosses ?? true))}
+						>
+							<img src={mapImg.boss} alt={m.bosses()} class="mr-2 h-6 w-6" />
+							<span>{m.bosses()}</span>
+							<span class="text-surface-500 text-xs">{bossCount}</span>
+						</button>
+						<button
 							class="flex items-center space-x-2 {mapOptions.showAlphaPals ? '' : 'opacity-25'}"
 							onclick={() => (mapOptions.showAlphaPals = !mapOptions.showAlphaPals)}
 						>
@@ -435,6 +488,37 @@
 							<span class="text-surface-500 text-xs">{predatorPalCount}</span>
 						</button>
 					</div>
+					{#if (mapOptions.showRelics ?? true) && relicTypeList.length > 0}
+						<div class="border-surface-700 grid grid-cols-2 gap-2 rounded-sm border p-2">
+							{#each relicTypeList as relicType (relicType)}
+								{@const stats = relicTypeStats[relicType]}
+								<button
+									class="flex items-center space-x-2 {isRelicTypeVisible(relicType)
+										? ''
+										: 'opacity-25'}"
+									onclick={() =>
+										(mapOptions.relicTypes = {
+											...(mapOptions.relicTypes ?? {}),
+											[relicType]: !isRelicTypeVisible(relicType)
+										})}
+								>
+									<img
+										src={relicTypeIcon(relicType)}
+										alt={relicData.relicData[relicType]?.localized_name ?? relicType}
+										class="mr-1 h-5 w-5"
+									/>
+									<span class="truncate text-xs">
+										{relicData.relicData[relicType]?.localized_name ?? relicType}
+									</span>
+									<span class="text-surface-500 text-xs">
+										{appState.selectedPlayer
+											? `${stats.collected}/${stats.total}`
+											: stats.total}
+									</span>
+								</button>
+							{/each}
+						</div>
+					{/if}
 				</div>
 				{#if appState.saveFile}
 					<div class="flex flex-col gap-2">
@@ -599,134 +683,25 @@
 			{#if MapComponent}
 				<MapComponent
 					bind:map
+					area={activeArea}
+					onAreaChange={(next) => (mapOptions.area = next)}
 					showOrigin={mapOptions.showOrigin}
 					showPlayers={mapOptions.showPlayers}
 					showBases={mapOptions.showBases}
 					showFastTravel={mapOptions.showFastTravel}
-					showEffigies={mapOptions.showEffigies ?? true}
+					showRelics={mapOptions.showRelics ?? true}
+					relicTypes={mapOptions.relicTypes ?? {}}
 					showDungeons={mapOptions.showDungeons}
+					showBosses={mapOptions.showBosses ?? true}
 					showAlphaPals={mapOptions.showAlphaPals}
 					showPredatorPals={mapOptions.showPredatorPals}
 					onEditBase={handleEditBase}
 					onToggleFastTravel={handleToggleFastTravel}
-					onToggleEffigy={handleToggleEffigy}
+					onToggleRelic={handleToggleRelic}
 					onUnlockAllFastTravel={handleUnlockAllFastTravel}
-					onCollectAllEffigies={handleCollectAllEffigies}
+					onCollectAllRelics={handleCollectAllRelics}
 				/>
 			{/if}
 		</div>
 	</div>
 </div>
-
-<style>
-	.loading-overlay {
-		position: absolute;
-		inset: 0;
-		z-index: 100;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background: color-mix(in srgb, var(--color-surface-950) 95%, transparent);
-		backdrop-filter: blur(4px);
-		transition:
-			opacity 0.5s ease-out,
-			transform 0.5s ease-out,
-			filter 0.3s ease-out;
-	}
-
-	.loading-overlay.loading-dismiss {
-		opacity: 0;
-		transform: scale(1.05);
-		filter: blur(2px);
-		pointer-events: none;
-	}
-
-	.loading-content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 1.5rem;
-		animation: loading-float 2s ease-in-out infinite;
-	}
-
-	@keyframes loading-float {
-		0%,
-		100% {
-			transform: translateY(0);
-		}
-		50% {
-			transform: translateY(-8px);
-		}
-	}
-
-	.loading-text {
-		color: color-mix(in srgb, var(--color-secondary-400) 70%, transparent);
-		font-size: 0.75rem;
-		letter-spacing: 0.2em;
-		text-transform: uppercase;
-		animation: loading-pulse 1.5s ease-in-out infinite;
-		position: relative;
-	}
-
-	.loading-text::after {
-		content: '';
-		position: absolute;
-		bottom: -4px;
-		left: 0;
-		width: 100%;
-		height: 1px;
-		background: linear-gradient(90deg, transparent, var(--color-secondary-400), transparent);
-		animation: loading-scan 2s ease-in-out infinite;
-	}
-
-	@keyframes loading-pulse {
-		0%,
-		100% {
-			opacity: 0.6;
-		}
-		50% {
-			opacity: 1;
-		}
-	}
-
-	@keyframes loading-scan {
-		0% {
-			transform: scaleX(0.3);
-			opacity: 0;
-		}
-		50% {
-			transform: scaleX(1);
-			opacity: 1;
-		}
-		100% {
-			transform: scaleX(0.3);
-			opacity: 0;
-		}
-	}
-
-	.loading-bar-track {
-		width: 200px;
-		height: 2px;
-		background: color-mix(in srgb, var(--color-secondary-400) 15%, transparent);
-		border-radius: 1px;
-		overflow: hidden;
-	}
-
-	.loading-bar-fill {
-		height: 100%;
-		width: 0%;
-		background: var(--color-secondary-400);
-		border-radius: 1px;
-		transition: width 0.3s ease-out;
-	}
-
-	.loading-bar-fill.loading-bar-done {
-		width: 100%;
-	}
-
-	.page-blurred {
-		filter: blur(2px);
-		transition: filter 0.5s ease-out;
-		pointer-events: none;
-	}
-</style>

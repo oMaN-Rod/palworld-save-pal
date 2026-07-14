@@ -1,0 +1,20 @@
+[package]
+name = "psp-core"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+uuid = { workspace = true }
+uesave = { workspace = true }
+chrono = { workspace = true }
+tracing = { workspace = true }
+cityhasher = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }
+
+[features]
+test-fixtures = []

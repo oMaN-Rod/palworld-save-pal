@@ -15,7 +15,7 @@
 	import { cn } from '$theme';
 	import { getAppState, getModalState, getNavigationState, getToastState } from '$states';
 	import { BicepsFlexed, Bug, Edit, Play, Save } from 'lucide-svelte';
-	import { assetLoader, handleMaxOutPal, canBeLucky, canBeAlpha } from '$utils';
+	import { assetLoader, handleMaxOutPal, editLucky, editAlpha } from '$utils';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';
 	import { c, p } from '$lib/utils/commonTranslations';
@@ -89,32 +89,17 @@
 	}
 
 	function handleEditLucky() {
-		const [type, valid] = canBeLucky(pal.character_id);
+		const [type, valid] = editLucky(pal);
 		if (!valid) {
 			toast.add(m.pal_cannot_be_trait({ type, trait: m.lucky() }), undefined, 'warning');
-			return;
-		}
-		if (pal) {
-			pal.is_lucky = !pal.is_lucky;
-			pal.is_boss = pal.is_lucky ? false : pal.is_boss;
-			formatBossCharacterId();
-			pal.state = EntryState.MODIFIED;
 		}
 	}
 
 	function handleEditAlpha() {
-		const [type, valid] = canBeAlpha(pal.character_id);
+		const [type, valid] = editAlpha(pal);
 		if (!valid) {
-			pal.is_boss = false;
-			pal.is_lucky = false;
-			pal.state = EntryState.MODIFIED;
 			toast.add(m.pal_cannot_be_trait({ type, trait: m.alpha() }), undefined, 'warning');
-			return;
 		}
-		pal.is_boss = !pal.is_boss;
-		pal.is_lucky = pal.is_boss ? false : pal.is_lucky;
-		formatBossCharacterId();
-		pal.state = EntryState.MODIFIED;
 	}
 
 	async function handleSelectPreset() {

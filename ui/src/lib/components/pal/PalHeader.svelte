@@ -11,6 +11,7 @@
 	import type { ValueChangeDetails } from '@zag-js/rating-group';
 	import * as m from '$i18n/messages';
 	import PalActionButtons from './PalActionButtons.svelte';
+	import { MAX_LEVEL } from '$lib/constants';
 
 	let {
 		pal = $bindable(),
@@ -24,7 +25,7 @@
 
 	const appState = getAppState();
 
-	const max_level = $derived(appState.settings.cheat_mode ? 255 : 80);
+	const max_level = $derived(appState.settings.cheat_mode ? 255 : MAX_LEVEL);
 	const max_rank = $derived(appState.settings.cheat_mode ? 255 : 5);
 
 	let palLevelProgressToNext: number = $state(0);

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { mapToWorld, ORIGIN_GAME_X, ORIGIN_GAME_Y } from './utils';
+	import { mapToWorld } from './utils';
 	import { Globe, Map } from 'lucide-svelte';
 </script>
 
@@ -12,10 +12,7 @@
 			<div class="min-w-0 flex-1">
 				<div class="text-muted-foreground text-xs font-medium">World Coords</div>
 				<div class="font-mono text-xs">
-					{mapToWorld(ORIGIN_GAME_X, ORIGIN_GAME_Y).x.toFixed(2)}, {mapToWorld(
-						ORIGIN_GAME_X,
-						ORIGIN_GAME_Y
-					).y.toFixed(2)}
+					{mapToWorld(0, 0).x.toFixed(2)}, {mapToWorld(0, 0).y.toFixed(2)}
 				</div>
 			</div>
 		</div>
@@ -24,7 +21,7 @@
 			<div class="min-w-0 flex-1">
 				<div class="text-muted-foreground text-xs font-medium">Map Coords</div>
 				<div class="font-mono text-xs">
-					{ORIGIN_GAME_X}, {ORIGIN_GAME_Y}
+					0, 0
 				</div>
 			</div>
 		</div>
