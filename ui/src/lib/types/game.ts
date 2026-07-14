@@ -244,12 +244,6 @@ export type FastTravelPoint = {
 	localized_name?: string;
 };
 
-export type Effigy = {
-	x: number;
-	y: number;
-	z: number;
-};
-
 /** An entry of relics.json; `relic_type` is a bare EPalRelicType key. */
 export type Relic = {
 	class: string;

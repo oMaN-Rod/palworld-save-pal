@@ -9,6 +9,7 @@
 		DEFAULT_MAP_AREA,
 		type MapArea
 	} from '$components/map/utils';
+	import { collectRelics, relicsByType, toggleRelic } from '$components/map/relics';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { mapImg, relicTypeIcon } from '$components/map/styles';
 	import Target from '@lucide/svelte/icons/target';
@@ -112,8 +113,9 @@
 		appState.selectedPlayer?.unlocked_fast_travel_points?.length
 	);
 	const relicTypeStats = $derived.by(() => {
+		const player = appState.selectedPlayer;
 		const collectedSets: Record<string, Set<string>> = {};
-		for (const [type, guids] of Object.entries(appState.selectedPlayer?.collected_relics ?? {})) {
+		for (const [type, guids] of Object.entries(player ? relicsByType(player) : {})) {
 			collectedSets[type] = new Set(guids.map((guid) => guid.toUpperCase()));
 		}
 		const stats: Record<string, { total: number; collected: number }> = {};
@@ -268,32 +270,11 @@
 		player.state = EntryState.MODIFIED;
 	}
 
-	const CAPTURE_POWER = 'capture_power';
-
-	// CapturePower relics ARE the Lifmunk Effigies: the save write path prefers
-	// collected_effigies over collected_relics.capture_power, so mirror one onto
-	// the other and keep the Relic item count in step.
-	function syncCapturePower(player: Player, delta: number) {
-		player.collected_effigies = [...(player.collected_relics?.[CAPTURE_POWER] ?? [])];
-		updateRelicCount(player, delta);
-	}
-
 	function handleToggleRelic(point: RelicPoint) {
 		const player = appState.selectedPlayer;
 		if (!player) return;
-		const byType = player.collected_relics ?? {};
-		const collected = byType[point.relic_type] ?? [];
-		const index = collected.findIndex((guid) => guid.toUpperCase() === point.guid.toUpperCase());
-		if (index >= 0) {
-			collected.splice(index, 1);
-		} else {
-			collected.push(point.guid);
-		}
-		byType[point.relic_type] = collected;
-		player.collected_relics = byType;
-		if (point.relic_type === CAPTURE_POWER) {
-			syncCapturePower(player, index >= 0 ? -1 : 1);
-		}
+		const delta = toggleRelic(player, point);
+		if (delta !== 0) updateRelicCount(player, delta);
 		player.state = EntryState.MODIFIED;
 	}
 
@@ -315,24 +296,14 @@
 	function handleCollectAllRelics() {
 		const player = appState.selectedPlayer;
 		if (!player) return;
-		const byType = player.collected_relics ?? {};
-		let capturePowerAdded = 0;
-		let added = 0;
-		for (const [guid, relic] of Object.entries(relics.points)) {
-			if (mapOf(relic.x, relic.y) !== activeArea) continue;
-			if (!isRelicTypeVisible(relic.relic_type)) continue;
-			const collected = byType[relic.relic_type] ?? [];
-			if (collected.some((existing) => existing.toUpperCase() === guid.toUpperCase())) continue;
-			collected.push(guid);
-			byType[relic.relic_type] = collected;
-			added++;
-			if (relic.relic_type === CAPTURE_POWER) capturePowerAdded++;
-		}
+		if (!(mapOptions.showRelics ?? true)) return;
+		const visible = Object.entries(relics.points)
+			.filter(([, relic]) => mapOf(relic.x, relic.y) === activeArea)
+			.filter(([, relic]) => isRelicTypeVisible(relic.relic_type))
+			.map(([guid, relic]) => ({ guid, relic_type: relic.relic_type }));
+		const { added, capturePowerAdded } = collectRelics(player, visible);
 		if (added === 0) return;
-		player.collected_relics = byType;
-		if (capturePowerAdded > 0) {
-			syncCapturePower(player, capturePowerAdded);
-		}
+		if (capturePowerAdded > 0) updateRelicCount(player, capturePowerAdded);
 		player.state = EntryState.MODIFIED;
 	}
 

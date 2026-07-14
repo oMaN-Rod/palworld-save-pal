@@ -14,6 +14,7 @@
 		MAP_AREA_ORDER,
 		type MapArea
 	} from './utils';
+	import { relicsByType } from './relics';
 	import {
 		createPalIconStyle,
 		mapImg,
@@ -154,7 +155,7 @@
 
 	const collectedRelicGuids = $derived.by(() => {
 		const byType: Record<string, Set<string>> = {};
-		for (const [type, guids] of Object.entries(selectedPlayer?.collected_relics ?? {})) {
+		for (const [type, guids] of Object.entries(selectedPlayer ? relicsByType(selectedPlayer) : {})) {
 			byType[type] = new Set(guids.map((guid) => guid.toUpperCase()));
 		}
 		return byType;
@@ -499,15 +500,18 @@
 			>
 				<img src={mapImg.fastTravel} alt={m.fast_travel()} />
 			</button>
-			<button
-				type="button"
-				class="map-action-btn"
-				title={m.collect_all_relics()}
-				aria-label={m.collect_all_relics()}
-				onclick={() => onCollectAllRelics?.()}
-			>
-				<img src={mapImg.effigy} alt={m.relics()} />
-			</button>
+			<!-- Never offer a bulk write for pins the user cannot see. -->
+			{#if showRelics}
+				<button
+					type="button"
+					class="map-action-btn"
+					title={m.collect_all_relics()}
+					aria-label={m.collect_all_relics()}
+					onclick={() => onCollectAllRelics?.()}
+				>
+					<img src={mapImg.effigy} alt={m.relics()} />
+				</button>
+			{/if}
 		</div>
 	{/if}
 
