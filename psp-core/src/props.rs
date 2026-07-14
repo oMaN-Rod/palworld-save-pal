@@ -327,6 +327,18 @@ pub fn ensure_schema(save: &mut uesave::Save, path: String, tag: uesave::Propert
     }
 }
 
+/// Copies every schema `source` recorded and `target` lacks.
+///
+/// Schemas are per-`Save` but a schema path is just the chain of property names, so
+/// a subtree grafted across saves keeps its path -- and carries properties the
+/// target may never have had a tag for. `target`'s own tags always win: only they
+/// describe how the target was actually read.
+pub fn merge_schemas(target: &mut uesave::Save, source: &uesave::Save) {
+    for (path, tag) in source.schemas.schemas().clone() {
+        ensure_schema(target, path, tag);
+    }
+}
+
 /// `old` -> `new`, `new` -> `old`, anything else `None`. Both sides are parsed
 /// `Uuid`s, so the match ignores hyphenation and case in the source text.
 fn swap_uuid_value(value: uuid::Uuid, old: uuid::Uuid, new: uuid::Uuid) -> Option<uuid::Uuid> {

@@ -26,7 +26,7 @@ pub fn set_world_name_in_level_meta(
     world_name: &str,
 ) -> Result<Vec<u8>, CoreError> {
     let mut save = savio::read_sav_bytes(level_meta_sav)?;
-    session::set_world_name_property(&mut save.root.properties, world_name)?;
+    session::set_world_name_property(&mut save, world_name)?;
     savio::write_sav_bytes(&save)
 }
 

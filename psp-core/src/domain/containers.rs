@@ -16,6 +16,77 @@ use crate::props;
 use crate::session::{SaveSession, WorldCaches};
 use uesave::{ByteArray, Properties, Property, PropertyKey, StructValue, ValueVec};
 
+/// An egg carries a pal's `SaveParameter` names under the dynamic item's `RawData`.
+pub const EGG_SAVE_PARAMETER_PREFIX: &str =
+    "worldSaveData.DynamicItemSaveData.RawData.SaveParameter";
+
+/// A schema path carries no array index, so an array that is empty on disk records
+/// no element schema at all -- and a world with no pal, or a player with no weapon,
+/// is exactly the one that cannot accept the first one written.
+pub fn ensure_container_schemas(level: &mut uesave::Save) {
+    use uesave::{PropertyTagDataPartial as Data, PropertyTagPartial, PropertyType, StructType};
+
+    let byte_array = || Data::Array(Box::new(Data::Byte(None)));
+    let raw_struct = |name: &str| Data::Struct {
+        struct_type: StructType::Raw(name.to_string()),
+        id: uesave::FGuid::nil(),
+    };
+    let struct_array = |name: &str| {
+        Data::Array(Box::new(Data::Struct {
+            struct_type: StructType::Struct(Some(name.to_string())),
+            id: uesave::FGuid::nil(),
+        }))
+    };
+
+    let entries: [(&str, Data); 9] = [
+        (
+            "worldSaveData.CharacterContainerSaveData.Slots",
+            struct_array("PalCharacterSlotSaveData"),
+        ),
+        (
+            "worldSaveData.CharacterContainerSaveData.Slots.SlotIndex",
+            Data::Other(PropertyType::IntProperty),
+        ),
+        (
+            "worldSaveData.CharacterContainerSaveData.Slots.RawData",
+            raw_struct("PalCharacterContainer"),
+        ),
+        (
+            "worldSaveData.CharacterContainerSaveData.Slots.CustomVersionData",
+            byte_array(),
+        ),
+        (
+            "worldSaveData.ItemContainerSaveData.Slots",
+            struct_array("PalItemSlotSaveData"),
+        ),
+        (
+            "worldSaveData.ItemContainerSaveData.Slots.RawData",
+            raw_struct("PalItemContainerSlots"),
+        ),
+        (
+            "worldSaveData.ItemContainerSaveData.Slots.CustomVersionData",
+            byte_array(),
+        ),
+        (
+            "worldSaveData.DynamicItemSaveData.RawData",
+            raw_struct("PalDynamicItem"),
+        ),
+        (
+            "worldSaveData.DynamicItemSaveData.CustomVersionData",
+            byte_array(),
+        ),
+    ];
+    for (path, data) in entries {
+        props::ensure_schema(
+            level,
+            path.to_string(),
+            PropertyTagPartial { id: None, data },
+        );
+    }
+
+    crate::domain::pal::ensure_save_parameter_schemas(level, EGG_SAVE_PARAMETER_PREFIX);
+}
+
 use super::world;
 
 /// Internal read view, not a wire type — `dto::container::CharacterContainerDto`

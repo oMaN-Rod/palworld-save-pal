@@ -277,11 +277,7 @@ pub fn get_player_details(
     progress("Loading pals...");
     session.loaded_players.insert(
         player_id,
-        LoadedPlayer {
-            uid: player_id,
-            sav: player_sav,
-            dps: player_dps,
-        },
+        LoadedPlayer::new(player_id, player_sav, player_dps),
     );
     if let Some(summary) = session.player_summaries.get_mut(&player_id) {
         summary.loaded = true;
@@ -633,10 +629,9 @@ pub fn update_player_technologies(
             props::int_property(boss_points.clamp(i32::MIN as i64, i32::MAX as i64) as i32),
         );
     }
-    // This path does not go through `apply_player_dto`, so it must register the
-    // `bossTechnologyPoint` schema itself or the resave fails. Idempotent.
+    // Not routed through `apply_player_dto`, so it primes itself. Idempotent.
     if wrote_boss_points {
-        ensure_boss_technology_point_schema(&mut loaded.sav);
+        ensure_player_sav_schemas(&mut loaded.sav);
     }
     Ok(())
 }
@@ -801,7 +796,7 @@ fn apply_player_dto(
         // The three writes above can each land on a property the save carries no
         // schema for; register those now. Each needs `&mut loaded.sav` for its
         // `.schemas` table, so the `save_data` borrow must already have ended.
-        ensure_boss_technology_point_schema(&mut loaded.sav);
+        ensure_player_sav_schemas(&mut loaded.sav);
         ensure_player_quest_array_schemas(
             &mut loaded.sav,
             &completed_quest_array,
@@ -1507,39 +1502,41 @@ fn ensure_relic_possess_map_keys(player_sav: &mut uesave::Save, points: &Ordered
     }
 }
 
-/// Registers the `SaveData.bossTechnologyPoint` schema when the player's `.sav`
-/// carries none, so the unconditional write survives `uesave::Save::write` --
-/// which rejects any property with no schema at its exact dotted path.
-///
-/// A save predating the field has `SaveData.TechnologyPoint` but not
-/// `bossTechnologyPoint`, so the prefix is derived from that sibling. The
-/// `.TechnologyPoint` match is unambiguous: `bossTechnologyPoint` is preceded by
-/// `s`, not `.`. A `.sav` with no `TechnologyPoint` schema at all is a silent
-/// no-op; the writer surfaces a clear error rather than this panicking.
-fn ensure_boss_technology_point_schema(player_sav: &mut uesave::Save) {
-    if let Some(prefix) = props::schema_prefix_ending_with(player_sav, ".TechnologyPoint") {
+pub const PLAYER_SAVE_DATA_PREFIX: &str = "SaveData";
+
+/// A `.sav` from a character who never opened the tech tree carries no
+/// `TechnologyPoint`, which used to be the anchor these paths were derived from --
+/// so its absence both broke the write and disabled the primer meant to fix it.
+pub fn ensure_player_sav_schemas(player_sav: &mut uesave::Save) {
+    use uesave::{PropertyTagDataPartial as Data, PropertyTagPartial, PropertyType};
+
+    let entries = [
+        ("TechnologyPoint", Data::Other(PropertyType::IntProperty)),
+        (
+            "bossTechnologyPoint",
+            Data::Other(PropertyType::IntProperty),
+        ),
+        (
+            "UnlockedRecipeTechnologyNames",
+            Data::Array(Box::new(Data::Other(PropertyType::NameProperty))),
+        ),
+    ];
+    for (name, data) in entries {
         props::ensure_schema(
             player_sav,
-            format!("{prefix}.bossTechnologyPoint"),
-            uesave::PropertyTagPartial {
-                id: None,
-                data: uesave::PropertyTagDataPartial::Other(uesave::PropertyType::IntProperty),
-            },
+            format!("{PLAYER_SAVE_DATA_PREFIX}.{name}"),
+            PropertyTagPartial { id: None, data },
         );
     }
 }
 
-/// Same missing-schema gap as `ensure_boss_technology_point_schema`, for the two
-/// quest arrays: a player who has never started or completed a quest carries no
-/// schema for either, and the writer rejects the unconditional write.
+/// A player who has never started or completed a quest carries no schema for either
+/// array. Element fields are looked up at a flat `<ArrayPath>.<FieldName>` path, so
+/// the ordered array's four need entries of their own.
 ///
-/// `uesave` looks each struct-array element field up at a flat
-/// `<ArrayPath>.<FieldName>` path, so the ordered array's four element fields each
-/// need their own schema entry, not just the array itself.
-///
-/// The two array names are the ones `apply_player_dto` resolved from the save, so
-/// a 1.0 save registers `SaveData.OrderedQuestArray_FullRelease.QuestName` and a
-/// pre-1.0 save the bare form -- the schema must follow the name that was written.
+/// The names are the ones `apply_player_dto` resolved from the save -- a 1.0 save
+/// spells the ordered array `OrderedQuestArray_FullRelease`, a pre-1.0 save the bare
+/// form -- so the schema must follow the name that was actually written.
 fn ensure_player_quest_array_schemas(
     player_sav: &mut uesave::Save,
     completed_quest_array: &str,
@@ -1547,11 +1544,8 @@ fn ensure_player_quest_array_schemas(
 ) {
     use uesave::{PropertyTagDataPartial, PropertyTagPartial, PropertyType, StructType};
 
-    let Some(prefix) = props::schema_prefix_ending_with(player_sav, ".TechnologyPoint") else {
-        return;
-    };
     let tag = |data: PropertyTagDataPartial| PropertyTagPartial { id: None, data };
-    let path = |name: &str| format!("{prefix}.{name}");
+    let path = |name: &str| format!("{PLAYER_SAVE_DATA_PREFIX}.{name}");
 
     props::ensure_schema(
         player_sav,
@@ -1847,8 +1841,9 @@ mod tests {
         let ids: Vec<uuid::Uuid> = session.player_file_refs.keys().copied().collect();
         let mut checked = 0;
         for id in ids {
-            let Some(dto) = get_player_details(&mut session, &data, id, &crate::progress::null_progress())
-                .unwrap()
+            let Some(dto) =
+                get_player_details(&mut session, &data, id, &crate::progress::null_progress())
+                    .unwrap()
             else {
                 continue;
             };
@@ -1882,8 +1877,9 @@ mod tests {
         let ids: Vec<uuid::Uuid> = session.player_file_refs.keys().copied().collect();
         let mut checked = 0;
         for id in ids {
-            let Some(dto) = get_player_details(&mut session, &data, id, &crate::progress::null_progress())
-                .unwrap()
+            let Some(dto) =
+                get_player_details(&mut session, &data, id, &crate::progress::null_progress())
+                    .unwrap()
             else {
                 continue;
             };

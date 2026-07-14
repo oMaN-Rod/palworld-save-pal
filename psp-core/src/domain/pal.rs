@@ -827,100 +827,156 @@ pub fn new_pal_entry(
     }
 }
 
-/// Registers write schemas for every property `apply_pal_dto`/
-/// `heal_save_parameter`/`new_pal_entry` can introduce on a pal that never
-/// carried it: `uesave` refuses to write a property whose exact path has no
-/// recorded schema.
-///
-/// `IsRarePal` is registered as `Other(BoolProperty)`, not a `Bool` variant:
-/// `PropertyTagDataPartial` has no `Bool`, and `uesave` maps the two onto
-/// each other when it reads and writes the tag.
-///
-/// Properties only ever written under a spelling already on disk (`OwnedTime`,
-/// `GotStatusPointList`, ...) need no registration.
-pub fn ensure_pal_property_schemas(level: &mut uesave::Save) {
-    use uesave::{PropertyTagDataPartial, PropertyTagPartial, PropertyType, StructType};
+pub const LEVEL_SAVE_PARAMETER_PREFIX: &str =
+    "worldSaveData.CharacterSaveParameterMap.RawData.SaveParameter";
+/// `_dps.sav` and `GlobalPalStorage.sav` share one slot layout.
+pub const SLOT_SAVE_PARAMETER_PREFIX: &str = "SaveParameterArray.SaveParameter";
 
-    let Some(prefix) = props::schema_prefix_ending_with(level, "SaveParameter.CharacterID") else {
-        return;
+/// Every `SaveParameter` property this app can write, with the tag `uesave` records
+/// for it when reading a save that has it.
+///
+/// A property at its default value is absent from a Palworld save, and `uesave`
+/// schemas only what it read, so a write must not depend on what the file happened
+/// to carry: every name is registered up front rather than discovered.
+///
+/// `IsRarePal`/`IsPlayer` are `Other(BoolProperty)` because `PropertyTagDataPartial`
+/// has no `Bool`; `uesave` maps the two onto each other. Nested struct leaves are
+/// paths of their own (`Hp` is not enough -- `Hp.Value` too), as are array element
+/// fields, which no save records while the array is empty.
+fn save_parameter_schemas() -> Vec<(String, uesave::PropertyTagDataPartial)> {
+    use uesave::{PropertyTagDataPartial as Data, PropertyType, StructType};
+
+    let byte = || Data::Byte(None);
+    let other = |t: PropertyType| Data::Other(t);
+    let named_struct = |name: &str| Data::Struct {
+        struct_type: StructType::Struct(Some(name.to_string())),
+        id: uesave::FGuid::nil(),
     };
-    let tag = |data: PropertyTagDataPartial| PropertyTagPartial { id: None, data };
-    let path = |name: &str| format!("{prefix}SaveParameter.{name}");
+    let plain_struct = |struct_type: StructType| Data::Struct {
+        struct_type,
+        id: uesave::FGuid::nil(),
+    };
+    let struct_array = |name: &str| Data::Array(Box::new(named_struct(name)));
 
-    let scalar_entries: [(&str, PropertyTagDataPartial); 10] = [
+    let mut entries: Vec<(String, Data)> = vec![
+        ("CharacterID".into(), other(PropertyType::NameProperty)),
+        ("Gender".into(), Data::Enum("EPalGenderType".into(), None)),
+        ("IsRarePal".into(), other(PropertyType::BoolProperty)),
+        ("IsPlayer".into(), other(PropertyType::BoolProperty)),
+        ("Level".into(), byte()),
+        ("Rank".into(), byte()),
+        ("Rank_HP".into(), byte()),
+        ("Rank_Attack".into(), byte()),
+        ("Rank_Defence".into(), byte()),
+        ("Rank_CraftSpeed".into(), byte()),
+        ("Talent_HP".into(), byte()),
+        ("Talent_Shot".into(), byte()),
+        ("Talent_Defense".into(), byte()),
+        ("Exp".into(), other(PropertyType::Int64Property)),
+        ("FriendshipPoint".into(), other(PropertyType::IntProperty)),
+        ("SanityValue".into(), other(PropertyType::FloatProperty)),
+        ("FullStomach".into(), other(PropertyType::FloatProperty)),
+        ("NickName".into(), other(PropertyType::StrProperty)),
+        ("FilteredNickName".into(), other(PropertyType::StrProperty)),
+        // Written as "Hp" on every path, even on a save that spells it "HP".
+        ("Hp".into(), named_struct("FixedPoint64")),
+        ("Hp.Value".into(), other(PropertyType::Int64Property)),
+        ("OwnedTime".into(), plain_struct(StructType::DateTime)),
+        ("OwnerPlayerUId".into(), plain_struct(StructType::Guid)),
         (
-            "IsRarePal",
-            PropertyTagDataPartial::Other(PropertyType::BoolProperty),
+            "OldOwnerPlayerUIds".into(),
+            Data::Array(Box::new(plain_struct(StructType::Guid))),
         ),
         (
-            "FriendshipPoint",
-            PropertyTagDataPartial::Other(PropertyType::IntProperty),
+            "LastJumpedLocation".into(),
+            plain_struct(StructType::Vector),
         ),
         (
-            "Exp",
-            PropertyTagDataPartial::Other(PropertyType::Int64Property),
+            "EquipWaza".into(),
+            Data::Array(Box::new(Data::Enum(String::new(), None))),
         ),
-        ("Rank", PropertyTagDataPartial::Byte(None)),
-        ("Level", PropertyTagDataPartial::Byte(None)),
         (
-            "SanityValue",
-            PropertyTagDataPartial::Other(PropertyType::FloatProperty),
+            "MasteredWaza".into(),
+            Data::Array(Box::new(Data::Enum(String::new(), None))),
         ),
-        ("Rank_HP", PropertyTagDataPartial::Byte(None)),
-        ("Rank_Attack", PropertyTagDataPartial::Byte(None)),
-        ("Rank_Defence", PropertyTagDataPartial::Byte(None)),
-        ("Rank_CraftSpeed", PropertyTagDataPartial::Byte(None)),
+        (
+            "PassiveSkillList".into(),
+            Data::Array(Box::new(other(PropertyType::NameProperty))),
+        ),
+        (
+            "GotWorkSuitabilityAddRankList".into(),
+            struct_array("PalWorkSuitabilityInfo"),
+        ),
+        (
+            "GotWorkSuitabilityAddRankList.WorkSuitability".into(),
+            Data::Enum("EPalWorkSuitability".into(), None),
+        ),
+        (
+            "GotWorkSuitabilityAddRankList.Rank".into(),
+            other(PropertyType::IntProperty),
+        ),
+        // An egg's SaveParameter carries this; a pal's may not.
+        (
+            "FoodRegeneEffectInfo".into(),
+            named_struct("PalFoodRegeneInfo"),
+        ),
+        (
+            "FoodRegeneEffectInfo.EffectTime".into(),
+            other(PropertyType::IntProperty),
+        ),
     ];
-    for (name, data) in scalar_entries {
-        props::ensure_schema(level, path(name), tag(data));
+
+    // Both lists share the element struct; their rows are created from scratch.
+    for list in ["GotStatusPointList", "GotExStatusPointList"] {
+        entries.push((list.into(), struct_array("PalGotStatusPoint")));
+        entries.push((
+            format!("{list}.StatusName"),
+            other(PropertyType::NameProperty),
+        ));
+        entries.push((
+            format!("{list}.StatusPoint"),
+            other(PropertyType::IntProperty),
+        ));
     }
 
-    props::ensure_schema(
-        level,
-        path("MasteredWaza"),
-        tag(PropertyTagDataPartial::Array(Box::new(
-            PropertyTagDataPartial::Enum(String::new(), None),
-        ))),
-    );
-
-    props::ensure_schema(
-        level,
-        path("GotWorkSuitabilityAddRankList"),
-        tag(PropertyTagDataPartial::Array(Box::new(
-            PropertyTagDataPartial::Struct {
-                struct_type: StructType::Struct(Some("PalWorkSuitabilityInfo".to_string())),
-                id: uesave::FGuid::nil(),
-            },
-        ))),
-    );
-    props::ensure_schema(
-        level,
-        path("GotWorkSuitabilityAddRankList.WorkSuitability"),
-        tag(PropertyTagDataPartial::Enum(
-            "EPalWorkSuitability".to_string(),
-            None,
-        )),
-    );
-    props::ensure_schema(
-        level,
-        path("GotWorkSuitabilityAddRankList.Rank"),
-        tag(PropertyTagDataPartial::Other(PropertyType::IntProperty)),
-    );
-
-    // Pals on disk spell the slot key "SlotId", so only those paths have a
-    // recorded schema; `new_pal_entry` writes "SlotID". Clone each recorded
-    // tag onto its all-caps sibling rather than hand-building a `StructType`.
-    let slot_id_paths = [
-        ("SlotID", "SlotId"),
-        ("SlotID.ContainerId", "SlotId.ContainerId"),
-        ("SlotID.ContainerId.ID", "SlotId.ContainerId.ID"),
-        ("SlotID.SlotIndex", "SlotId.SlotIndex"),
-    ];
-    for (dest, source) in slot_id_paths {
-        if let Some(recorded) = level.schemas.get(&path(source)).cloned() {
-            props::ensure_schema(level, path(dest), recorded);
-        }
+    // Real saves spell the slot key "SlotId"; `new_pal_entry` writes "SlotID".
+    for slot in ["SlotId", "SlotID"] {
+        entries.push((slot.into(), named_struct("PalCharacterSlotId")));
+        entries.push((
+            format!("{slot}.ContainerId"),
+            named_struct("PalContainerId"),
+        ));
+        entries.push((
+            format!("{slot}.ContainerId.ID"),
+            plain_struct(StructType::Guid),
+        ));
+        entries.push((
+            format!("{slot}.SlotIndex"),
+            other(PropertyType::IntProperty),
+        ));
     }
+
+    entries
+}
+
+/// Never overwrites a tag the real save recorded, so a file that already carries a
+/// property keeps its own on-disk shape.
+pub fn ensure_save_parameter_schemas(save: &mut uesave::Save, prefix: &str) {
+    for (name, data) in save_parameter_schemas() {
+        props::ensure_schema(
+            save,
+            format!("{prefix}.{name}"),
+            uesave::PropertyTagPartial { id: None, data },
+        );
+    }
+}
+
+pub fn ensure_pal_property_schemas(level: &mut uesave::Save) {
+    ensure_save_parameter_schemas(level, LEVEL_SAVE_PARAMETER_PREFIX);
+}
+
+pub fn ensure_slot_pal_schemas(save: &mut uesave::Save) {
+    ensure_save_parameter_schemas(save, SLOT_SAVE_PARAMETER_PREFIX);
 }
 
 /// Guards every op that needs a loaded player. The message text is part of

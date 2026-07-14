@@ -78,6 +78,10 @@ pub fn transfer_player(
         ));
     }
 
+    // A transfer grafts whole source subtrees onto the target -- character-map entry,
+    // pals, containers -- carrying properties the target may have no tag for.
+    props::merge_schemas(&mut target.level, &source.level);
+
     let source_instance_id = {
         let gvas = source
             .loaded_players
@@ -128,11 +132,7 @@ pub fn transfer_player(
         };
         target.loaded_players.insert(
             target_player_uid,
-            LoadedPlayer {
-                uid: target_player_uid,
-                sav,
-                dps,
-            },
+            LoadedPlayer::new(target_player_uid, sav, dps),
         );
         target.player_file_refs.insert(target_player_uid, file_ref);
         source_instance_id
@@ -237,7 +237,7 @@ pub(crate) fn ensure_player_gvas_loaded(
     };
     session
         .loaded_players
-        .insert(uid, LoadedPlayer { uid, sav, dps });
+        .insert(uid, LoadedPlayer::new(uid, sav, dps));
     Ok(())
 }
 
@@ -367,22 +367,6 @@ fn transfer_player_containers(
     Ok(())
 }
 
-/// Registers the `SaveData.bossTechnologyPoint` schema off its always-present
-/// sibling `TechnologyPoint`. `transfer_tech` can introduce that property on a
-/// target that never carried it, which would otherwise fail `Save::write`.
-fn ensure_boss_tech_schema(sav: &mut Save) {
-    if let Some(prefix) = props::schema_prefix_ending_with(sav, ".TechnologyPoint") {
-        props::ensure_schema(
-            sav,
-            format!("{prefix}.bossTechnologyPoint"),
-            uesave::PropertyTagPartial {
-                id: None,
-                data: uesave::PropertyTagDataPartial::Other(uesave::PropertyType::IntProperty),
-            },
-        );
-    }
-}
-
 fn transfer_tech(
     source: &SaveSession,
     source_uid: Uuid,
@@ -414,6 +398,24 @@ fn transfer_tech(
             save_data.0.get(&PropertyKey::from("RecordData")).cloned(),
         )
     };
+
+    // `RecordData` is grafted wholesale below; a target `.sav` carrying none of its
+    // own has a tag for nothing beneath it.
+    let source_sav_schemas = source
+        .loaded_players
+        .get(&source_uid)
+        .map(|gvas| gvas.sav.schemas.clone());
+
+    {
+        let Some(loaded) = target.loaded_players.get_mut(&target_uid) else {
+            return Ok(());
+        };
+        if let Some(schemas) = &source_sav_schemas {
+            for (path, tag) in schemas.schemas().clone() {
+                props::ensure_schema(&mut loaded.sav, path, tag);
+            }
+        }
+    }
 
     let wrote_boss = boss_technology_point.is_some();
     {
@@ -461,7 +463,7 @@ fn transfer_tech(
             .loaded_players
             .get_mut(&target_uid)
             .expect("checked present above");
-        ensure_boss_tech_schema(&mut loaded.sav);
+        player::ensure_player_sav_schemas(&mut loaded.sav);
     }
     Ok(())
 }

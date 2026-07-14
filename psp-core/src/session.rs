@@ -73,6 +73,18 @@ pub struct LoadedPlayer {
     pub dps: Option<uesave::Save>,
 }
 
+impl LoadedPlayer {
+    /// Primes both files' write schemas at the parse, so no edit path can forget to.
+    pub fn new(uid: Uuid, mut sav: uesave::Save, dps: Option<uesave::Save>) -> Self {
+        crate::domain::player::ensure_player_sav_schemas(&mut sav);
+        let dps = dps.map(|mut dps| {
+            crate::domain::pal::ensure_slot_pal_schemas(&mut dps);
+            dps
+        });
+        Self { uid, sav, dps }
+    }
+}
+
 /// Lazily built lookup caches over `SaveSession::level`'s world tree. Every
 /// field starts `None` and is populated on first use by `domain::world`.
 ///
@@ -178,17 +190,27 @@ pub(crate) fn world_name_from_meta_properties(properties: &uesave::Properties) -
     world_name_property(properties).unwrap_or_else(|| "Unknown".to_string())
 }
 
-/// Sets `SaveData.WorldName` on a LevelMeta (or Level) property tree in place.
-/// Shared by `SaveSession::set_world_name` and
-/// `gamepass::scan::set_world_name_in_level_meta`.
+/// Sets `SaveData.WorldName` on a LevelMeta (or Level) save in place. Shared by
+/// `SaveSession::set_world_name` and `gamepass::scan::set_world_name_in_level_meta`.
+///
+/// Takes the whole `Save`, not its properties: a save whose world was never named
+/// recorded no `WorldName` schema, and this write creates the property.
 pub(crate) fn set_world_name_property(
-    properties: &mut uesave::Properties,
+    save: &mut uesave::Save,
     new_name: &str,
 ) -> Result<(), CoreError> {
-    let save_data = props::get_mut(properties, &["SaveData"])
+    let save_data = props::get_mut(&mut save.root.properties, &["SaveData"])
         .and_then(props::struct_props_mut)
         .ok_or_else(|| CoreError::Parse("LevelMeta SaveData missing".into()))?;
     save_data.insert("WorldName", props::str_property(new_name));
+    props::ensure_schema(
+        save,
+        "SaveData.WorldName".to_string(),
+        uesave::PropertyTagPartial {
+            id: None,
+            data: uesave::PropertyTagDataPartial::Other(uesave::PropertyType::StrProperty),
+        },
+    );
     Ok(())
 }
 
@@ -279,7 +301,11 @@ impl SaveSession {
         if emit_top_level_progress {
             progress("Loading Level.sav...");
         }
-        let level = parse_palworld_save(level_sav_bytes)?;
+        let mut level = parse_palworld_save(level_sav_bytes)?;
+        // Priming at the parse, not at each mutation site, is what keeps a later edit
+        // from depending on which properties this particular file happened to carry.
+        crate::domain::pal::ensure_pal_property_schemas(&mut level);
+        crate::domain::containers::ensure_container_schemas(&mut level);
 
         let (world_name, level_meta) = match level_meta_bytes {
             Some(meta_bytes) => {
@@ -437,7 +463,7 @@ impl SaveSession {
                 "No LevelMeta GvasFile has been loaded.".to_string(),
             ));
         };
-        set_world_name_property(&mut meta.root.properties, new_name)?;
+        set_world_name_property(meta, new_name)?;
         self.world_name = new_name.to_string();
         Ok(())
     }

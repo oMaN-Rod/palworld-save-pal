@@ -103,12 +103,13 @@ impl SaveSession {
         sav_bytes: &[u8],
         game_data: &GameData,
     ) -> Result<&BTreeMap<i32, PalDto>, CoreError> {
-        let save = crate::session::parse_palworld_save(sav_bytes)?;
+        let mut save = crate::session::parse_palworld_save(sav_bytes)?;
         let slots = gps_slots(&save).ok_or_else(|| {
             CoreError::Parse("GlobalPalStorage SaveParameterArray missing".into())
         })?;
         self.gps.pals = collect_gps_pals(slots, game_data);
         self.gps.slot_count = slots.len();
+        crate::domain::pal::ensure_slot_pal_schemas(&mut save);
         self.gps.save = Some(save);
         self.gps.loaded = true;
         Ok(&self.gps.pals)
