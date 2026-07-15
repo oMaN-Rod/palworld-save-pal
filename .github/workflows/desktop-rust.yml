@@ -59,7 +59,7 @@ jobs:
           workspaces: palworld-save-pal
 
       - name: Install Tauri CLI
-        run: cargo install tauri-cli --version "^2" --locked
+        run: cargo install tauri-cli --version "^2" --locked --force
 
       - name: Build Tauri bundles
         working-directory: palworld-save-pal/psp-desktop
