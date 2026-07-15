@@ -25,6 +25,6 @@ export default defineConfig({
 		}
 	},
 	test: {
-		include: ['src/**/*.{test,spec}.{js,ts}', 'static/**/*.{png,json}']
+		include: ['src/**/*.{test,spec}.{js,ts}']
 	}
 });
