@@ -1,5 +1,4 @@
-import { page } from '$app/state';
-import { getAppState } from '$states';
+import { getAppState, getPalEditorState } from '$states';
 import type { TourDefinition } from './types';
 
 export const editTour: TourDefinition = {
@@ -626,7 +625,7 @@ export const editTour: TourDefinition = {
 		},
 		{
 			checkpoint: {
-				condition: () => !!getAppState().selectedPal && page.url.pathname === '/edit/pal',
+				condition: () => !!getAppState().selectedPal && getPalEditorState().isOpen,
 				advanceDelayMs: 600
 			},
 			popover: {
