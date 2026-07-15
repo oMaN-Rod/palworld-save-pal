@@ -3,7 +3,7 @@
 	import { type Pal } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { cn } from '$theme';
-	import { getAppState, getNavigationState } from '$states';
+	import { getAppState, getPalEditorState } from '$states';
 	import PalInfoPopup from './PalInfoPopup.svelte';
 	import StatusBadge from './StatusBadge.svelte';
 	import { palsData } from '$lib/data';
@@ -37,7 +37,7 @@
 	}>();
 
 	const appState = getAppState();
-	const nav = getNavigationState();
+	const palEditor = getPalEditorState();
 
 	const cardClass = $derived(
 		cn(
@@ -112,8 +112,7 @@
 
 	function handlePalSelect() {
 		if (!pal || pal.character_id === 'None') return;
-		appState.selectedPal = pal;
-		nav.saveAndNavigate('/edit/pal');
+		palEditor.open(pal);
 	}
 </script>
 

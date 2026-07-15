@@ -7,7 +7,7 @@
 		getUpsState,
 		getModalState,
 		getAppState,
-		getNavigationState,
+		getPalEditorState,
 		getToastState
 	} from '$states';
 	import type { UPSPal, Pal, AddToCollectionResult } from '$types';
@@ -22,7 +22,7 @@
 	const upsState = getUpsState();
 	const modal = getModalState();
 	const appState = getAppState();
-	const nav = getNavigationState();
+	const palEditor = getPalEditorState();
 	const toast = getToastState();
 
 	const pal = $derived.by<Pal>(() => {
@@ -91,8 +91,7 @@
 			__ups_source: true,
 			__ups_id: upsPal.id
 		};
-		appState.selectedPal = palWithMetadata;
-		nav.saveAndNavigate('/edit/pal');
+		palEditor.open(palWithMetadata);
 	}
 
 	function handleKeydown(event: KeyboardEvent) {

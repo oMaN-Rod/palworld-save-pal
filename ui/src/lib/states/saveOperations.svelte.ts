@@ -1,11 +1,12 @@
 import { goto } from '$app/navigation';
 import { TextInputModal } from '$components';
 import { send, sendAndWait } from '$lib/utils/websocketUtils';
-import { getNavigationState, upsState } from '$states';
+import { upsState } from '$states';
 import type { GuildDTO, ItemContainer, UPSPal } from '$types';
 import { EntryState, MessageType, type Pal, type Player } from '$types';
 import { deepCopy } from '$utils';
 import { getModalState } from './modalState.svelte';
+import { getPalEditorState } from './palEditorState.svelte';
 import type { AppState } from './appState.svelte';
 
 interface ModifiedData {
@@ -100,7 +101,6 @@ export function processGuilds(state: AppState) {
 }
 
 export async function addNewUpspal(state: AppState, pal: Pal) {
-	const nav = getNavigationState();
 	const palDto = {
 		instance_id: '00000000-0000-0000-0000-000000000000',
 		owner_uid: null,
@@ -154,11 +154,9 @@ export async function addNewUpspal(state: AppState, pal: Pal) {
 		__ups_new: false
 	};
 
-	state.selectedPal = palWithMetadata;
 	upsState.pals = [...upsState.pals, upsPal];
 	upsState.pagination.totalCount++;
-	nav.activeTab = 'pal';
-	nav.saveAndNavigate('/edit/pal');
+	getPalEditorState().open(palWithMetadata);
 }
 
 export async function saveUpspalChanges(pal: Pal) {

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { List, Loading, Spinner, Tooltip } from '$components/ui';
-	import { getAppState } from '$states';
-	import { goto } from '$app/navigation';
+	import { getAppState, getPalEditorState } from '$states';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 	import { X } from 'lucide-svelte';
@@ -18,14 +17,14 @@
 	let { expanded = false, onclose }: { expanded?: boolean; onclose?: () => void } = $props();
 
 	const appState = getAppState();
+	const palEditor = getPalEditorState();
 	const player = $derived(appState.bulkDetailPlayer);
 	const maxHp = $derived(player ? 500 + player.status_point_list.max_hp * 100 : 0);
 
 	function editPal(palId: string) {
 		const targetPal = player?.pals?.[palId];
 		if (!targetPal) return;
-		appState.selectedPal = targetPal;
-		goto('/edit/pal');
+		palEditor.open(targetPal);
 	}
 </script>
 
