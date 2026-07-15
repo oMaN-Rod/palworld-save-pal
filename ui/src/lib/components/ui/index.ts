@@ -16,6 +16,7 @@ import Select from './select/Select.svelte';
 import TooltipButton from './tooltip-button/TooltipButton.svelte';
 import Tooltip from './tooltip/Tooltip.svelte';
 import Modal from './modal/Modal.svelte';
+import PalEditorOverlay from './modal/PalEditorOverlay.svelte';
 import Monaco from './monaco/Monaco.svelte';
 import Nuke from './icons/Nuke.svelte';
 import Spinner from './spinner/Spinner.svelte';
@@ -40,6 +41,7 @@ export {
 	SectionHeader,
 	Select,
 	Modal,
+	PalEditorOverlay,
 	Monaco,
 	Nuke,
 	Popover,

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import { NavBar } from '$components/layout';
-	import { Toast, Modal, Spinner } from '$components/ui';
+	import { Toast, Modal, Spinner, PalEditorOverlay } from '$components/ui';
 	import { bootstrap } from '$lib/data/bootstrap';
 	import { getAppState, getSocketState, theme } from '$states';
 	import { goto } from '$app/navigation';
@@ -78,3 +78,4 @@
 		</div>
 	</div>
 </Modal>
+<PalEditorOverlay />
