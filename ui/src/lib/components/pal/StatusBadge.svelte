@@ -37,6 +37,10 @@
 
 	const modal = getModalState();
 
+	const iconSlotClass = $derived(
+		showActions ? 'flex h-9 w-9 shrink-0 items-center justify-center' : 'w-9 shrink-0'
+	);
+
 	const levels = Object.values(friendshipData.friendshipData).sort((a, b) => a.rank - b.rank);
 	const trustCurrent = $derived(pal?.friendship_point ?? 0);
 
@@ -112,75 +116,93 @@
 </script>
 
 {#if pal}
-	<div class="mb-2 flex items-center">
-		{#if showActions}
-			<Tooltip label={m.edit_entity({ entity: m.trust_level() })}>
-				<Button variant="ghost" size="icon" type="button" class="mr-2" onclick={showTrustEditModal} aria-label="Edit Trust">
-					<img src={staticIcons.trustIcon} alt="Trust" class="h-6 w-6" />
-				</Button>
+	<div class="my-0 flex items-center gap-2">
+		<div class={iconSlotClass}>
+			{#if showActions}
+				<Tooltip label={m.edit_entity({ entity: m.trust_level() })}>
+					<Button
+						variant="ghost"
+						size="icon"
+						type="button"
+						onclick={showTrustEditModal}
+						aria-label="Edit Trust"
+					>
+						<img src={staticIcons.trustIcon} alt="Trust" />
+					</Button>
+				</Tooltip>
+			{/if}
+		</div>
+		<div class="min-w-0 flex-1">
+			<Tooltip baseClass="w-full">
+				<Progress
+					value={levelProgress.current}
+					max={levelProgress.max}
+					height={healthHeight}
+					trailingLabel={`Lv.${currentLevel}`}
+					color="bg-[#db7c90]"
+				/>
+				{#snippet popup()}
+					<span>{m.trust()}: {trustCurrent.toLocaleString()}</span>
+					{#if currentLevel < 10}
+						<span> / {levelProgress.nextLevelMin.toLocaleString()}</span>
+					{:else}
+						<span> ({m.max_level()})</span>
+					{/if}
+					<br />
+					<span
+						>{m.progress()}: {((levelProgress.current / levelProgress.max) * 100).toFixed(1)}%</span
+					>
+				{/snippet}
 			</Tooltip>
-		{/if}
-		<Tooltip baseClass="w-full">
+		</div>
+	</div>
+	<div class="my-0 flex items-center gap-2">
+		<div class={iconSlotClass}>
+			{#if showActions}
+				<Tooltip>
+					<Button variant="ghost" size="icon" onclick={handleHeal} aria-label="Health">
+						<img src={staticIcons.hpIcon} alt="Health" />
+					</Button>
+					{#snippet popup()}
+						<span>HP</span>
+						{Math.round(pal.hp / 1000)}/{palMaxHp / 1000}
+					{/snippet}
+				</Tooltip>
+			{/if}
+		</div>
+		<div class="min-w-0 flex-1">
 			<Progress
-				value={levelProgress.current}
-				max={levelProgress.max}
+				bind:value={pal.hp}
+				max={palMaxHp}
 				height={healthHeight}
-				trailingLabel={`Lv.${currentLevel}`}
-				color="bg-[#db7c90]"
+				color="green"
+				dividend={1000}
 			/>
-			{#snippet popup()}
-				<span>{m.trust()}: {trustCurrent.toLocaleString()}</span>
-				{#if currentLevel < 10}
-					<span> / {levelProgress.nextLevelMin.toLocaleString()}</span>
-				{:else}
-					<span> ({m.max_level()})</span>
-				{/if}
-				<br />
-				<span
-					>{m.progress()}: {((levelProgress.current / levelProgress.max) * 100).toFixed(1)}%</span
-				>
-			{/snippet}
-		</Tooltip>
+		</div>
 	</div>
-	<div class="flex items-center">
-		{#if showActions}
-			<Tooltip>
-				<Button variant="ghost" size="icon" onclick={handleHeal} aria-label="Health">
-					<img src={staticIcons.hpIcon} alt="Health" class="mr-2 h-6 w-6" />
-				</Button>
-				{#snippet popup()}
-					<span>HP</span>
-					{Math.round(pal.hp / 1000)}/{palMaxHp / 1000}
-				{/snippet}
-			</Tooltip>
-		{/if}
-		<Progress
-			bind:value={pal.hp}
-			max={palMaxHp}
-			height={healthHeight}
-			color="green"
-			dividend={1000}
-		/>
-	</div>
-	<div class="flex flex-row items-center">
-		{#if showActions}
-			<Tooltip>
-				<Button variant="ghost" size="icon" class="mr-2" onclick={handleEat} aria-label="Food">
-					<img src={staticIcons.foodIcon} alt="Food" class="h-6 w-6" />
-				</Button>
-				{#snippet popup()}
-					<span>{m.feed()}</span>
-					{Math.round(pal.stomach)}/{maxStomach}
-				{/snippet}
-			</Tooltip>
-		{/if}
-		<Progress
-			bind:value={pal.stomach}
-			max={maxStomach}
-			height={stomachHeight}
-			color="orange"
-			showLabel={showStomachLabel}
-		/>
+	<div class="my-0 flex items-center gap-2">
+		<div class={iconSlotClass}>
+			{#if showActions}
+				<Tooltip>
+					<Button variant="ghost" size="icon" onclick={handleEat} aria-label="Food">
+						<img src={staticIcons.foodIcon} alt="Food" />
+					</Button>
+					{#snippet popup()}
+						<span>{m.feed()}</span>
+						{Math.round(pal.stomach)}/{maxStomach}
+					{/snippet}
+				</Tooltip>
+			{/if}
+		</div>
+		<div class="min-w-0 flex-1">
+			<Progress
+				bind:value={pal.stomach}
+				max={maxStomach}
+				height={stomachHeight}
+				color="orange"
+				showLabel={showStomachLabel}
+			/>
+		</div>
 	</div>
 	{#if showActions}
 		<div

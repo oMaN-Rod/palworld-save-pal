@@ -394,7 +394,7 @@
 {#if appState.selectedPal}
 	<div class="flex h-full overflow-auto p-2">
 		<div class="flex grow flex-col">
-			<div id="pal-header" class="w-full shrink-0 2xl:w-2/3">
+			<div id="pal-header" class="w-3/4 shrink-0 2xl:w-2/3">
 				<PalHeader bind:pal={appState.selectedPal} />
 			</div>
 			<div class="flex grow">
@@ -499,7 +499,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="w-full overflow-auto p-2 2xl:w-1/3">
+		<div class="overflow-auto p-2 w-1/3">
 			<div class="hidden flex-col space-y-2 2xl:flex">
 				<div id="pal-status">
 					<StatusBadge bind:pal={appState.selectedPal} />

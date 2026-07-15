@@ -41,11 +41,11 @@
 		aria-modal="true"
 		tabindex="-1"
 	>
-		<div class="bg-surface-900 relative h-[90vh] w-[90vw] overflow-hidden rounded-sm">
+		<div class="bg-surface-950 relative h-[90vh] w-[90vw] overflow-hidden rounded-sm">
 			<Button
 				variant="ghost"
 				size="icon"
-				class="absolute top-2 right-2 z-10 text-2xl leading-none"
+				class="absolute -top-2 -right-2 z-10 text-2xl leading-none"
 				onclick={() => palEditor.close()}
 			>
 				×
