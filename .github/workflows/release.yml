@@ -168,6 +168,7 @@ jobs:
         uses: Swatinem/rust-cache@v2
         with:
           workspaces: palworld-save-pal
+          prefix-key: "v0-rust-ubuntu-2204"
 
       - name: Install Tauri CLI
         run: cargo install tauri-cli --version "^2" --locked --force
