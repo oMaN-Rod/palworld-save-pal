@@ -101,27 +101,90 @@ pub async fn handle_export_preset(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     let presets = psp_db::presets::get_all(&ctx.app.db).await?;
-    if !presets.contains_key(&data.preset_id) {
+    let Some(preset) = presets.get(&data.preset_id) else {
         ctx.emitter.emit(
             MessageType::Error,
             &format!("Preset {} not found", data.preset_id),
         );
         return Ok(());
+    };
+    if !ctx.app.config.desktop_mode {
+        ctx.emitter
+            .emit(MessageType::Error, &"File dialog not available");
+        return Ok(());
     }
-    if ctx.app.config.desktop_mode {
-        // TODO: native save dialog.
-    }
-    ctx.emitter
-        .emit(MessageType::Error, &"File dialog not available");
+
+    let request = crate::desktop_dialogs::FileSaveRequest {
+        filter_name: "Preset Files",
+        filter_extensions: &["json"],
+        suggested_file_name: format!("{}.json", data.preset_name),
+        initial_directory: None,
+    };
+    let Some(path) = ctx.app.dialogs.save_file(request).await else {
+        ctx.emitter
+            .emit(MessageType::NoFileSelected, &"No file selected");
+        return Ok(());
+    };
+
+    let contents = serde_json::to_string_pretty(preset)?;
+    std::fs::write(&path, contents)
+        .map_err(|e| HandlerError::Other(format!("Failed to write preset file: {e}")))?;
+
+    ctx.emitter.emit(
+        MessageType::ExportPreset,
+        &serde_json::json!({
+            "message": format!("Preset {} exported successfully", data.preset_name),
+            "file_path": path,
+        }),
+    );
     Ok(())
 }
 
-pub async fn handle_import_preset(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
-    if ctx.app.config.desktop_mode {
-        // TODO: native open dialog + id-stripping import.
+/// Drops the identifiers a freshly imported preset must not keep: the top-level
+/// `id` (so `add` mints a new one), the derived `pal_preset_id`, and any nested
+/// `pal_preset.id`.
+fn strip_preset_ids(preset: &mut serde_json::Value) {
+    if let Some(object) = preset.as_object_mut() {
+        object.remove("id");
+        object.remove("pal_preset_id");
+        if let Some(pal_preset) = object.get_mut("pal_preset").and_then(|v| v.as_object_mut()) {
+            pal_preset.remove("id");
+        }
     }
-    ctx.emitter
-        .emit(MessageType::Error, &"File dialog not available");
+}
+
+pub async fn handle_import_preset(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
+    if !ctx.app.config.desktop_mode {
+        ctx.emitter
+            .emit(MessageType::Error, &"File dialog not available");
+        return Ok(());
+    }
+
+    let request = crate::desktop_dialogs::FileDialogRequest {
+        filter_name: "Preset Files",
+        filter_extensions: &["json"],
+        initial_directory: None,
+    };
+    let Some(path) = ctx.app.dialogs.pick_file(request).await else {
+        ctx.emitter
+            .emit(MessageType::NoFileSelected, &"No file selected");
+        return Ok(());
+    };
+
+    let contents = std::fs::read_to_string(&path)
+        .map_err(|e| HandlerError::Other(format!("Failed to read preset file: {e}")))?;
+    let mut preset: serde_json::Value = serde_json::from_str(&contents)?;
+    strip_preset_ids(&mut preset);
+
+    let preset_id = psp_db::presets::add(&ctx.app.db, preset).await?;
+    ctx.emitter.emit(
+        MessageType::ImportPreset,
+        &serde_json::json!({
+            "message": "Preset imported successfully",
+            "preset_id": preset_id,
+            "file_path": path,
+        }),
+    );
     Ok(())
 }
 

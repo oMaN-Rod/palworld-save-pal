@@ -13,10 +13,20 @@ pub struct FileDialogRequest {
     pub initial_directory: Option<PathBuf>,
 }
 
+/// A "save as" dialog: like `FileDialogRequest` but seeds the dialog with a
+/// suggested file name the user can accept or override.
+pub struct FileSaveRequest {
+    pub filter_name: &'static str,
+    pub filter_extensions: &'static [&'static str],
+    pub suggested_file_name: String,
+    pub initial_directory: Option<PathBuf>,
+}
+
 pub type DialogFuture = Pin<Box<dyn Future<Output = Option<PathBuf>> + Send>>;
 
 pub trait FileDialogProvider: Send + Sync {
     fn pick_file(&self, request: FileDialogRequest) -> DialogFuture;
+    fn save_file(&self, request: FileSaveRequest) -> DialogFuture;
 }
 
 /// Web mode: dialogs are never invoked; returns None if called anyway.
@@ -24,6 +34,10 @@ pub struct NullDialogProvider;
 
 impl FileDialogProvider for NullDialogProvider {
     fn pick_file(&self, _request: FileDialogRequest) -> DialogFuture {
+        Box::pin(async { None })
+    }
+
+    fn save_file(&self, _request: FileSaveRequest) -> DialogFuture {
         Box::pin(async { None })
     }
 }
@@ -51,17 +65,45 @@ impl FileDialogProvider for RfdDialogProvider {
                 .map(|handle| handle.path().to_path_buf())
         })
     }
+
+    fn save_file(&self, request: FileSaveRequest) -> DialogFuture {
+        Box::pin(async move {
+            let mut dialog = rfd::AsyncFileDialog::new()
+                .add_filter(request.filter_name, request.filter_extensions)
+                .add_filter("All files", &["*"])
+                .set_file_name(request.suggested_file_name);
+            if let Some(directory) = &request.initial_directory {
+                if directory.is_dir() {
+                    dialog = dialog.set_directory(directory);
+                }
+            }
+            dialog
+                .save_file()
+                .await
+                .map(|handle| handle.path().to_path_buf())
+        })
+    }
 }
 
 /// Test double: pops pre-queued answers in order; None simulates a canceled dialog.
+/// `pick_file` and `save_file` draw from separate queues.
 pub struct QueuedDialogProvider {
-    queued_responses: Mutex<VecDeque<Option<PathBuf>>>,
+    queued_pick_responses: Mutex<VecDeque<Option<PathBuf>>>,
+    queued_save_responses: Mutex<VecDeque<Option<PathBuf>>>,
 }
 
 impl QueuedDialogProvider {
-    pub fn new(responses: Vec<Option<PathBuf>>) -> Self {
+    pub fn new(pick_responses: Vec<Option<PathBuf>>) -> Self {
+        Self::new_with_saves(pick_responses, Vec::new())
+    }
+
+    pub fn new_with_saves(
+        pick_responses: Vec<Option<PathBuf>>,
+        save_responses: Vec<Option<PathBuf>>,
+    ) -> Self {
         Self {
-            queued_responses: Mutex::new(responses.into()),
+            queued_pick_responses: Mutex::new(pick_responses.into()),
+            queued_save_responses: Mutex::new(save_responses.into()),
         }
     }
 }
@@ -69,7 +111,17 @@ impl QueuedDialogProvider {
 impl FileDialogProvider for QueuedDialogProvider {
     fn pick_file(&self, _request: FileDialogRequest) -> DialogFuture {
         let response = self
-            .queued_responses
+            .queued_pick_responses
+            .lock()
+            .expect("queued dialog mutex poisoned")
+            .pop_front()
+            .flatten();
+        Box::pin(async move { response })
+    }
+
+    fn save_file(&self, _request: FileSaveRequest) -> DialogFuture {
+        let response = self
+            .queued_save_responses
             .lock()
             .expect("queued dialog mutex poisoned")
             .pop_front()
@@ -256,6 +308,28 @@ mod tests {
         assert_eq!(
             provider.pick_file(dialog_request_for("steam", None)).await,
             None
+        );
+    }
+
+    #[tokio::test]
+    async fn queued_provider_draws_pick_and_save_from_separate_queues() {
+        let provider = QueuedDialogProvider::new_with_saves(
+            vec![Some(PathBuf::from("/pick/in.json"))],
+            vec![Some(PathBuf::from("/save/out.json"))],
+        );
+        let save_request = FileSaveRequest {
+            filter_name: "Preset Files",
+            filter_extensions: &["json"],
+            suggested_file_name: "out.json".to_string(),
+            initial_directory: None,
+        };
+        assert_eq!(
+            provider.save_file(save_request).await,
+            Some(PathBuf::from("/save/out.json"))
+        );
+        assert_eq!(
+            provider.pick_file(dialog_request_for("steam", None)).await,
+            Some(PathBuf::from("/pick/in.json"))
         );
     }
 }
