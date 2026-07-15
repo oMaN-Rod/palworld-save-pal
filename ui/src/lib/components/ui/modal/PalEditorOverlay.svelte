@@ -36,6 +36,7 @@
 		class="pal-editor-overlay fixed inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm"
 		transition:fade={{ duration: 200 }}
 		onclick={handleOutsideClick}
+		onkeydown={handleKeydown}
 		role="dialog"
 		aria-modal="true"
 		tabindex="-1"
