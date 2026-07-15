@@ -11,6 +11,7 @@ use std::path::PathBuf;
 use uesave::{PropertyKey, StructValue};
 
 use crate::domain::pal;
+use crate::dto::ordered_map::OrderedMap;
 use crate::dto::pal::PalDto;
 use crate::error::CoreError;
 use crate::gamedata::GameData;
@@ -334,6 +335,57 @@ impl SaveSession {
         }
     }
 
+    /// Applies each DTO in `modified_gps_pals` onto its `SaveParameterArray`
+    /// slot, addressed by slot index. A DTO whose slot is out of range or not a
+    /// struct is skipped. Mirrors `domain::pal::update_dps_pals`: the same
+    /// `apply_pal_dto` slot machinery, since GPS slots share the DPS layout.
+    pub fn update_gps_pals(
+        &mut self,
+        game_data: &GameData,
+        modified_gps_pals: &OrderedMap<i32, PalDto>,
+        progress: &crate::progress::ProgressSink,
+    ) -> Result<(), CoreError> {
+        if !self.gps.loaded {
+            return Err(CoreError::Other(
+                "GPS Gvas file is not initialized.".to_string(),
+            ));
+        }
+        {
+            let save = self
+                .gps
+                .save
+                .as_mut()
+                .expect("gps.loaded implies save is Some");
+            let Some(slots) = gps_slots_mut(save) else {
+                return Ok(());
+            };
+            for (slot_index, dto) in modified_gps_pals.iter() {
+                let display_name = dto
+                    .nickname
+                    .clone()
+                    .unwrap_or_else(|| dto.character_id.clone());
+                progress(&format!("Updating GPS pal {display_name}"));
+                if *slot_index < 0 || *slot_index as usize >= slots.len() {
+                    continue;
+                }
+                let StructValue::Struct(slot_props) = &mut slots[*slot_index as usize] else {
+                    continue;
+                };
+                if let Some(save_parameter) = slot_props
+                    .0
+                    .get_mut(&PropertyKey::from("SaveParameter"))
+                    .and_then(props::struct_props_mut)
+                {
+                    pal::apply_pal_dto(save_parameter, dto, true, game_data);
+                }
+            }
+        }
+        // Re-derive the touched entries from the just-written slots.
+        self.rebuild_gps_save(game_data)?;
+        progress("Saving changes to file");
+        Ok(())
+    }
+
     /// Re-derives `gps.pals`/`gps.slot_count` from the live property tree.
     /// The mutators keep both in sync already; this is the defensive resync
     /// the save-to-disk path can run first.
@@ -599,6 +651,59 @@ mod tests {
         session.rebuild_gps_save(&data).unwrap();
 
         assert_eq!(session.gps_pals().unwrap().len(), 2);
+    }
+
+    #[test]
+    fn update_gps_pals_applies_the_dto_onto_the_occupied_slot() {
+        let (mut session, data) = gps_fixture_session();
+        // Seed a plain (non-rare) pal into empty slot 0 so the edit round-trip
+        // is not confounded by the lucky pal's BOSS_ prefix normalization.
+        let (seeded, slot) = session
+            .add_gps_pal(&data, "SheepBall", "TestSheep", Some(0))
+            .unwrap()
+            .expect("slot 0 is empty");
+        assert_eq!(slot, 0);
+
+        let mut edited = seeded.clone();
+        edited.nickname = Some("GPS Edited".to_string());
+        edited.level = 42;
+        let mut modified: OrderedMap<i32, PalDto> = OrderedMap::new();
+        modified.insert(0, edited);
+
+        let progress: crate::progress::ProgressSink = std::sync::Arc::new(|_: &str| {});
+        session.update_gps_pals(&data, &modified, &progress).unwrap();
+
+        let updated = &session.gps_pals().unwrap()[&0];
+        assert_eq!(updated.nickname.as_deref(), Some("GPS Edited"));
+        assert_eq!(updated.level, 42);
+        assert_eq!(updated.character_id, "SheepBall");
+        assert_eq!(updated.instance_id, seeded.instance_id);
+    }
+
+    #[test]
+    fn update_gps_pals_skips_an_out_of_range_slot_without_panicking() {
+        let (mut session, data) = gps_fixture_session();
+        let dto = session.gps_pals().unwrap()[&1].clone();
+        let mut modified: OrderedMap<i32, PalDto> = OrderedMap::new();
+        modified.insert(999, dto);
+
+        let progress: crate::progress::ProgressSink = std::sync::Arc::new(|_: &str| {});
+        session.update_gps_pals(&data, &modified, &progress).unwrap();
+
+        assert_eq!(session.gps_pals().unwrap().len(), 1);
+        assert!(session.gps_pals().unwrap().contains_key(&1));
+    }
+
+    #[test]
+    fn update_gps_pals_errors_when_not_loaded() {
+        let level = minimal_save(Properties::default());
+        let mut session = SaveSession::new_for_tests(SaveKind::InMemory, level);
+        let data = game_data();
+        let progress: crate::progress::ProgressSink = std::sync::Arc::new(|_: &str| {});
+        let error = session
+            .update_gps_pals(&data, &OrderedMap::new(), &progress)
+            .unwrap_err();
+        assert_eq!(error.to_string(), "GPS Gvas file is not initialized.");
     }
 
     #[test]

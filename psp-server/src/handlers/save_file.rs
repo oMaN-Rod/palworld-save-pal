@@ -645,9 +645,8 @@ pub async fn handle_update_save_file(
     if let Some(modified_dps_pals) = data.modified_dps_pals.filter(|map| !map.is_empty()) {
         pal::update_dps_pals(session, game_data, &modified_dps_pals, &progress)?;
     }
-    if data.modified_gps_pals.is_some_and(|map| !map.is_empty()) {
-        // Reached only after the sections above have applied.
-        return Err(HandlerError::Other("No GPS pals to update.".to_string()));
+    if let Some(modified_gps_pals) = data.modified_gps_pals.filter(|map| !map.is_empty()) {
+        session.update_gps_pals(game_data, &modified_gps_pals, &progress)?;
     }
 
     ctx.emitter
@@ -702,6 +701,15 @@ pub async fn handle_download_save_file(ctx: &mut HandlerCtx<'_>) -> Result<(), H
                     .map_err(|zip_error| HandlerError::Other(zip_error.to_string()))?;
                 zip_writer.write_all(dps_bytes).map_err(CoreError::Io)?;
             }
+        }
+        // Non-nested layout: GlobalPalStorage.sav sits beside Level.sav, the
+        // shape `build_zip_layout` reads back on a re-upload. Only present when
+        // GPS was loaded and possibly edited.
+        if let Some(gps_bytes) = session.gps_sav_bytes()? {
+            zip_writer
+                .start_file("GlobalPalStorage.sav", options)
+                .map_err(|zip_error| HandlerError::Other(zip_error.to_string()))?;
+            zip_writer.write_all(&gps_bytes).map_err(CoreError::Io)?;
         }
         zip_writer
             .finish()
@@ -790,6 +798,28 @@ fn backup_save_directory(
     Ok(())
 }
 
+/// Overwrites the loaded `GlobalPalStorage.sav` in place when GPS was loaded
+/// and edited; a no-op when GPS was never opened (`gps_sav_bytes` is `None`).
+///
+/// GPS lives beside the world directory, NOT inside it, so the world-dir
+/// backup does not cover it — a sibling `.backup` copy is taken first. Repeated
+/// saves overwrite that copy, so it protects the last state, not the original.
+fn write_gps_if_loaded(session: &SaveSession, progress: &ProgressSink) -> Result<(), HandlerError> {
+    let Some(gps_bytes) = session.gps_sav_bytes()? else {
+        return Ok(());
+    };
+    let Some(gps_path) = session.gps.file_path.as_ref() else {
+        return Ok(());
+    };
+    progress("Writing Global Pal Storage file");
+    if gps_path.exists() {
+        std::fs::copy(gps_path, format!("{}.backup", gps_path.display()))
+            .map_err(CoreError::Io)?;
+    }
+    std::fs::write(gps_path, &gps_bytes).map_err(CoreError::Io)?;
+    Ok(())
+}
+
 /// Write half of `save_modded_steam_save`, split out so the backup+overwrite
 /// path is testable against a `TempDir` without touching the user's real
 /// save_dir or the process CWD. `Level.sav` goes to `level_path` (which may
@@ -828,6 +858,7 @@ fn write_steam_modded_save(
                 .map_err(CoreError::Io)?;
         }
     }
+    write_gps_if_loaded(session, progress)?;
     Ok(())
 }
 
