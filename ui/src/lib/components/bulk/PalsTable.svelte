@@ -4,15 +4,14 @@
 	import { PawPrint, Trash2, Trash } from '@lucide/svelte';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
-	import { getAppState, getModalState, getToastState } from '$states';
+	import { getAppState, getModalState, getToastState, getPalEditorState } from '$states';
 	import { send, sendAndWait } from '$lib/utils/websocketUtils';
 	import { MessageType, type PalSummary } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { palsData, elementsData } from '$lib/data';
 	import { assetLoader } from '$utils';
-	import { filterBySearch } from './bulk.utils';
+	import { filterBySearch, resolveBulkPal } from './bulk.utils';
 	import BulkSelectionBanner from './BulkSelectionBanner.svelte';
-	import PalDetailPanel from './PalDetailPanel.svelte';
 
 	let { selected = $bindable(new Set<string>()) }: { selected?: Set<string> } = $props();
 
@@ -21,12 +20,14 @@
 	const appState = getAppState();
 	const modal = getModalState();
 	const toast = getToastState();
-	let detailOpen = $state(false);
-	let detailPalId = $state<string | null>(null);
+	const palEditor = getPalEditorState();
+	let pendingPalId = $state<string | null>(null);
+	let openedFromTable = $state(false);
 
-	function openDetail(row: PalRow) {
-		detailPalId = row.instance_id;
-		detailOpen = true;
+	function openEditor(row: PalRow) {
+		pendingPalId = row.instance_id;
+		openedFromTable = true;
+		palEditor.openLoading();
 		if (row.owner_uid) {
 			appState.bulkDetailPlayer = undefined;
 			appState.loadPlayerDetailsForBulk(row.owner_uid);
@@ -36,10 +37,23 @@
 		}
 	}
 
-	function closeDetail() {
-		detailOpen = false;
-		detailPalId = null;
-	}
+	const resolvedPal = $derived(
+		resolveBulkPal(appState.bulkDetailPlayer, appState.bulkDetailGuild, pendingPalId)
+	);
+
+	$effect(() => {
+		if (pendingPalId && resolvedPal) {
+			palEditor.resolve(resolvedPal);
+			pendingPalId = null;
+		}
+	});
+
+	$effect(() => {
+		if (!palEditor.isOpen && openedFromTable) {
+			openedFromTable = false;
+			loadSummaries();
+		}
+	});
 
 	// $state.raw: rows are read-only display data, reassigned wholesale on refetch.
 	// Deep-proxying 1700+ rows makes the allRows map take seconds in dev.
@@ -195,7 +209,7 @@
 				rowKey={(row) => row.instance_id}
 				pageSize={15}
 				bind:selected
-				onrowclick={openDetail}
+				onrowclick={openEditor}
 			>
 				{#snippet cell({ row, column })}
 					{#if column.key === 'nickname'}
@@ -237,5 +251,4 @@
 			</Table>
 		{/if}
 	</div>
-	<PalDetailPanel expanded={detailOpen} palId={detailPalId} onclose={closeDetail} />
 </div>

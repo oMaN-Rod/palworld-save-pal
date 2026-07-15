@@ -1,4 +1,4 @@
-import type { GuildSummary, PlayerSummary } from '$types';
+import type { Guild, GuildSummary, Pal, Player, PlayerSummary } from '$types';
 
 export interface PlayerRow {
 	uid: string;
@@ -69,4 +69,20 @@ export function inactivePlayerUids(rows: PlayerRow[], minDays: number, nowMs: nu
 
 export function emptyGuildIds(rows: GuildRow[]): string[] {
 	return rows.filter((row) => row.player_count === 0).map((row) => row.id);
+}
+
+export function resolveBulkPal(
+	player: Player | undefined,
+	guild: Guild | undefined,
+	palId: string | null
+): Pal | undefined {
+	if (!palId) return undefined;
+	const fromPlayer = player?.pals?.[palId];
+	if (fromPlayer) return fromPlayer;
+	const bases = guild?.bases ?? {};
+	for (const base of Object.values(bases)) {
+		const fromBase = base?.pals?.[palId];
+		if (fromBase) return fromBase;
+	}
+	return undefined;
 }

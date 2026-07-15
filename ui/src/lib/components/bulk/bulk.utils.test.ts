@@ -6,7 +6,8 @@ import {
 	daysSince,
 	emptyGuildIds,
 	filterBySearch,
-	inactivePlayerUids
+	inactivePlayerUids,
+	resolveBulkPal
 } from './bulk.utils';
 
 const guilds: GuildSummary[] = [
@@ -68,5 +69,21 @@ describe('inactivePlayerUids', () => {
 describe('emptyGuildIds', () => {
 	it('selects guilds with zero members', () => {
 		expect(emptyGuildIds(buildGuildRows(guilds))).toEqual(['g2']);
+	});
+});
+
+describe('resolveBulkPal', () => {
+	const pal = { instance_id: 'x1' } as never;
+	it('finds a player-owned pal by id', () => {
+		const player = { pals: { x1: pal } } as never;
+		expect(resolveBulkPal(player, undefined, 'x1')).toBe(pal);
+	});
+	it('finds a guild/base pal by id', () => {
+		const guild = { bases: { b1: { pals: { x1: pal } } } } as never;
+		expect(resolveBulkPal(undefined, guild, 'x1')).toBe(pal);
+	});
+	it('returns undefined when the id is null or absent', () => {
+		expect(resolveBulkPal(undefined, undefined, 'x1')).toBeUndefined();
+		expect(resolveBulkPal({ pals: {} } as never, undefined, null)).toBeUndefined();
 	});
 });
