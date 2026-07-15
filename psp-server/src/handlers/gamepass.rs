@@ -8,7 +8,7 @@
 //! `settings.save_dir` (the desktop dialog's chosen path) and loads the save
 //! into `ctx.session.save`.
 
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 use serde::{Deserialize, Serialize};
 
@@ -352,6 +352,126 @@ pub struct ConvertSaveFormatData {
     pub save_id: Option<String>,
 }
 
+/// A canceled convert dialog: answers under `convert_save_format` (not a shared
+/// `no_file_selected` type) so the tools UI's `sendAndWait`, which correlates by
+/// message type, resolves quietly.
+fn emit_convert_canceled(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
+    ctx.emitter.emit(
+        MessageType::ConvertSaveFormat,
+        &serde_json::json!({"canceled": true}),
+    );
+    Ok(())
+}
+
+/// A soft convert failure under the same `convert_save_format` type.
+fn emit_convert_error(ctx: &mut HandlerCtx<'_>, message: String) -> Result<(), HandlerError> {
+    ctx.emitter
+        .emit(MessageType::ConvertSaveFormat, &serde_json::json!({"error": message}));
+    Ok(())
+}
+
+async fn resolve_convert_dir(
+    save_type: &str,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<Option<String>, String> {
+    let saved_dir = psp_db::settings::saved_save_dir(&ctx.app.db)
+        .await
+        .map_err(|error| error.to_string())?;
+    let request = crate::desktop_dialogs::dialog_request_for(save_type, saved_dir.as_deref());
+    let Some(selected) = ctx.app.dialogs.pick_file(request).await else {
+        return Ok(None);
+    };
+    crate::desktop_dialogs::validate_selected_file(
+        save_type,
+        &selected,
+        &crate::desktop_dialogs::application_root(),
+    )?;
+    let dir = selected
+        .parent()
+        .map(|parent| parent.to_string_lossy().into_owned())
+        .ok_or_else(|| "Selected file has no parent directory.".to_string())?;
+    Ok(Some(dir))
+}
+
+async fn resolve_convert_output_dir(ctx: &mut HandlerCtx<'_>) -> Result<Option<PathBuf>, String> {
+    let saved_dir = psp_db::settings::saved_save_dir(&ctx.app.db)
+        .await
+        .map_err(|error| error.to_string())?;
+    Ok(ctx.app.dialogs.pick_folder(saved_dir.map(PathBuf::from)).await)
+}
+
+async fn extract_named_gamepass_save_to_steam(
+    save_id: &str,
+    output_dir: &Path,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let progress = ctx.emitter.progress_sink();
+    progress("Finding GamePass container path...");
+    let container_dir = match store::find_container_dir() {
+        Ok(dir) => dir,
+        Err(error) => {
+            return emit_convert_error(
+                ctx,
+                format!("Could not find GamePass installation: {error}"),
+            )
+        }
+    };
+    progress("Reading GamePass container index...");
+    let index = ContainerIndex::read_from_dir(&container_dir)?;
+    let containers = index.latest_save_containers(save_id);
+    if containers.get("Level").is_none() {
+        return emit_convert_error(ctx, format!("Save {save_id} not found in GamePass containers."));
+    }
+    let save_dir = gamepass_convert::extract_containers_to_steam_dir(
+        &container_dir,
+        save_id,
+        &containers,
+        output_dir,
+        gamepass_convert::ExtractLabels::SelectedSave,
+        &progress,
+    )?;
+    progress("Conversion complete!");
+    let save_dir = save_dir.to_string_lossy().into_owned();
+    ctx.emitter.emit(
+        MessageType::ConvertSaveFormat,
+        &serde_json::json!({
+            "message": format!("GamePass save extracted to Steam format at: {save_dir}"),
+            "output_path": save_dir,
+        }),
+    );
+    Ok(())
+}
+
+async fn write_loaded_save_to_steam_dir(
+    output_dir: &Path,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let progress = ctx.emitter.progress_sink();
+    progress("Writing Steam save...");
+    let session = ctx
+        .session
+        .save
+        .as_ref()
+        .ok_or_else(|| HandlerError::Other("No save file loaded".to_string()))?;
+    let save_info = psp_core::session::TransferSaveInfo {
+        level_sav: output_dir.join("Level.sav"),
+        level_meta: Some(output_dir.join("LevelMeta.sav")),
+        players_dir: output_dir.join("Players"),
+        save_dir: output_dir.to_path_buf(),
+    };
+    crate::handlers::save_file::write_transfer_target_save(session, &save_info)?;
+    progress("Conversion complete!");
+    let output = output_dir.to_string_lossy().into_owned();
+    ctx.emitter.emit(
+        MessageType::ConvertSaveFormat,
+        &serde_json::json!({
+            "message": format!("Save converted to Steam format at: {output}"),
+            "output_path": output,
+        }),
+    );
+    Ok(())
+}
+
 /// Branch order is load-bearing: a `save_id` + "steam" request means "extract
 /// the named gamepass save", which outranks the standalone source/output pair,
 /// which in turn outranks converting the currently loaded save.
@@ -359,28 +479,56 @@ pub async fn handle_convert_save_format(
     data: ConvertSaveFormatData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    if data.save_id.is_some() && data.target_format == "steam" {
-        // Extracting a named save needs a native output-dir dialog.
-        ctx.emitter.emit(
-            MessageType::ConvertSaveFormat,
-            &serde_json::json!({"error": "Desktop mode required."}),
-        );
-        return Ok(());
+    if let Some(save_id) = data.save_id.clone() {
+        if data.target_format == "steam" {
+            if !ctx.app.config.desktop_mode {
+                ctx.emitter.emit(
+                    MessageType::ConvertSaveFormat,
+                    &serde_json::json!({"error": "Desktop mode required."}),
+                );
+                return Ok(());
+            }
+            let output_dir = match resolve_convert_output_dir(ctx).await {
+                Ok(Some(dir)) => dir,
+                Ok(None) => return emit_convert_canceled(ctx),
+                Err(message) => return emit_convert_error(ctx, message),
+            };
+            return extract_named_gamepass_save_to_steam(&save_id, &output_dir, ctx).await;
+        }
     }
-    if data.source_path.as_deref() == Some("__select__")
-        || data.output_path.as_deref() == Some("__select__")
-    {
-        // "__select__" asks for a native file dialog; without one there is no
-        // path to convert.
-        ctx.emitter.emit(
-            MessageType::ConvertSaveFormat,
-            &serde_json::json!({"error": "No file selected."}),
-        );
-        return Ok(());
+    let source_is_select = data.source_path.as_deref() == Some("__select__");
+    let output_is_select = data.output_path.as_deref() == Some("__select__");
+    let mut source_path = data.source_path.clone();
+    let mut output_path = data.output_path.clone();
+    if source_is_select || output_is_select {
+        if !ctx.app.config.desktop_mode {
+            ctx.emitter.emit(
+                MessageType::ConvertSaveFormat,
+                &serde_json::json!({"error": "No file selected."}),
+            );
+            return Ok(());
+        }
+        let (source_type, output_type) = if data.target_format == "gamepass" {
+            ("steam", "gamepass")
+        } else {
+            ("gamepass", "steam")
+        };
+        if source_is_select {
+            match resolve_convert_dir(source_type, ctx).await {
+                Ok(Some(dir)) => source_path = Some(dir),
+                Ok(None) => return emit_convert_canceled(ctx),
+                Err(message) => return emit_convert_error(ctx, message),
+            }
+        }
+        if output_is_select {
+            match resolve_convert_dir(output_type, ctx).await {
+                Ok(Some(dir)) => output_path = Some(dir),
+                Ok(None) => return emit_convert_canceled(ctx),
+                Err(message) => return emit_convert_error(ctx, message),
+            }
+        }
     }
-    if let (Some(source_path), Some(output_path)) =
-        (data.source_path.clone(), data.output_path.clone())
-    {
+    if let (Some(source_path), Some(output_path)) = (source_path, output_path) {
         return convert_standalone(&source_path, &output_path, &data.target_format, ctx).await;
     }
     if ctx.session.save.is_some() {
@@ -526,13 +674,21 @@ async fn convert_loaded_save(
                 return Ok(());
             }
             // Writing the steam layout needs a native output-dir dialog.
-            ctx.emitter.emit(
-                MessageType::ConvertSaveFormat,
-                &serde_json::json!({
-                    "error": "Desktop mode required for Steam directory selection."
-                }),
-            );
-            Ok(())
+            if !ctx.app.config.desktop_mode {
+                ctx.emitter.emit(
+                    MessageType::ConvertSaveFormat,
+                    &serde_json::json!({
+                        "error": "Desktop mode required for Steam directory selection."
+                    }),
+                );
+                return Ok(());
+            }
+            let output_dir = match resolve_convert_output_dir(ctx).await {
+                Ok(Some(dir)) => dir,
+                Ok(None) => return emit_convert_canceled(ctx),
+                Err(message) => return emit_convert_error(ctx, message),
+            };
+            write_loaded_save_to_steam_dir(&output_dir, ctx).await
         }
         other => {
             ctx.emitter.emit(

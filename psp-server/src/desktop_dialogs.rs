@@ -27,6 +27,7 @@ pub type DialogFuture = Pin<Box<dyn Future<Output = Option<PathBuf>> + Send>>;
 pub trait FileDialogProvider: Send + Sync {
     fn pick_file(&self, request: FileDialogRequest) -> DialogFuture;
     fn save_file(&self, request: FileSaveRequest) -> DialogFuture;
+    fn pick_folder(&self, initial_directory: Option<PathBuf>) -> DialogFuture;
 }
 
 /// Web mode: dialogs are never invoked; returns None if called anyway.
@@ -38,6 +39,10 @@ impl FileDialogProvider for NullDialogProvider {
     }
 
     fn save_file(&self, _request: FileSaveRequest) -> DialogFuture {
+        Box::pin(async { None })
+    }
+
+    fn pick_folder(&self, _initial_directory: Option<PathBuf>) -> DialogFuture {
         Box::pin(async { None })
     }
 }
@@ -83,6 +88,21 @@ impl FileDialogProvider for RfdDialogProvider {
                 .map(|handle| handle.path().to_path_buf())
         })
     }
+
+    fn pick_folder(&self, initial_directory: Option<PathBuf>) -> DialogFuture {
+        Box::pin(async move {
+            let mut dialog = rfd::AsyncFileDialog::new();
+            if let Some(directory) = &initial_directory {
+                if directory.is_dir() {
+                    dialog = dialog.set_directory(directory);
+                }
+            }
+            dialog
+                .pick_folder()
+                .await
+                .map(|handle| handle.path().to_path_buf())
+        })
+    }
 }
 
 /// Test double: pops pre-queued answers in order; None simulates a canceled dialog.
@@ -90,20 +110,36 @@ impl FileDialogProvider for RfdDialogProvider {
 pub struct QueuedDialogProvider {
     queued_pick_responses: Mutex<VecDeque<Option<PathBuf>>>,
     queued_save_responses: Mutex<VecDeque<Option<PathBuf>>>,
+    queued_folder_responses: Mutex<VecDeque<Option<PathBuf>>>,
 }
 
 impl QueuedDialogProvider {
     pub fn new(pick_responses: Vec<Option<PathBuf>>) -> Self {
-        Self::new_with_saves(pick_responses, Vec::new())
+        Self::new_with_all(pick_responses, Vec::new(), Vec::new())
     }
 
     pub fn new_with_saves(
         pick_responses: Vec<Option<PathBuf>>,
         save_responses: Vec<Option<PathBuf>>,
     ) -> Self {
+        Self::new_with_all(pick_responses, save_responses, Vec::new())
+    }
+
+    /// Folder-pick answers only; `pick_file`/`save_file` queues stay empty.
+    pub fn new_with_folders(folder_responses: Vec<Option<PathBuf>>) -> Self {
+        Self::new_with_all(Vec::new(), Vec::new(), folder_responses)
+    }
+
+    /// Seeds all three queues; each dialog kind draws from its own.
+    pub fn new_with_all(
+        pick_responses: Vec<Option<PathBuf>>,
+        save_responses: Vec<Option<PathBuf>>,
+        folder_responses: Vec<Option<PathBuf>>,
+    ) -> Self {
         Self {
             queued_pick_responses: Mutex::new(pick_responses.into()),
             queued_save_responses: Mutex::new(save_responses.into()),
+            queued_folder_responses: Mutex::new(folder_responses.into()),
         }
     }
 }
@@ -122,6 +158,16 @@ impl FileDialogProvider for QueuedDialogProvider {
     fn save_file(&self, _request: FileSaveRequest) -> DialogFuture {
         let response = self
             .queued_save_responses
+            .lock()
+            .expect("queued dialog mutex poisoned")
+            .pop_front()
+            .flatten();
+        Box::pin(async move { response })
+    }
+
+    fn pick_folder(&self, _initial_directory: Option<PathBuf>) -> DialogFuture {
+        let response = self
+            .queued_folder_responses
             .lock()
             .expect("queued dialog mutex poisoned")
             .pop_front()
