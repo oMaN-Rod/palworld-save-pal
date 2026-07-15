@@ -163,6 +163,28 @@ fn load_steam_save_for_transfer(
     Ok((session, save_info))
 }
 
+async fn resolve_transfer_source_path(ctx: &mut HandlerCtx<'_>) -> Result<Option<String>, String> {
+    let saved_dir = psp_db::settings::saved_save_dir(&ctx.app.db)
+        .await
+        .map_err(|error| error.to_string())?;
+    let request = crate::desktop_dialogs::dialog_request_for("steam", saved_dir.as_deref());
+    let Some(selected) = ctx.app.dialogs.pick_file(request).await else {
+        return Ok(None);
+    };
+    crate::desktop_dialogs::validate_selected_file(
+        "steam",
+        &selected,
+        &crate::desktop_dialogs::application_root(),
+    )?;
+
+    if let Some(parent_dir) = selected.parent() {
+        psp_db::settings::update_save_dir(&ctx.app.db, &parent_dir.to_string_lossy())
+            .await
+            .map_err(|error| error.to_string())?;
+    }
+    Ok(Some(selected.to_string_lossy().into_owned()))
+}
+
 /// `role` selects whether the loaded save becomes `ctx.session.source` (the
 /// default) or a standalone `ctx.session.transfer_target`. EVERY failure answers
 /// `{"error": ...}` under this same wire type, never the hard `error` frame —
@@ -178,20 +200,38 @@ pub async fn handle_load_source_save(
         );
         return Ok(());
     }
-    if data.path == "__select__" {
-        // "__select__" asks for a native folder dialog.
-        ctx.emitter.emit(
-            MessageType::LoadSourceSave,
-            &serde_json::json!({"error": "Desktop mode required for file selection."}),
-        );
-        return Ok(());
-    }
+    let resolved_path = if data.path == "__select__" {
+        if !ctx.app.config.desktop_mode {
+            ctx.emitter.emit(
+                MessageType::LoadSourceSave,
+                &serde_json::json!({"error": "Desktop mode required for file selection."}),
+            );
+            return Ok(());
+        }
+        match resolve_transfer_source_path(ctx).await {
+            Ok(Some(path)) => path,
+            Ok(None) => {
+                ctx.emitter.emit(
+                    MessageType::LoadSourceSave,
+                    &serde_json::json!({"canceled": true}),
+                );
+                return Ok(());
+            }
+            Err(message) => {
+                ctx.emitter
+                    .emit(MessageType::LoadSourceSave, &serde_json::json!({"error": message}));
+                return Ok(());
+            }
+        }
+    } else {
+        data.path.clone()
+    };
 
     let is_target = data.role == "target";
     let label = if is_target { "target" } else { "source" };
     let progress = ctx.emitter.progress_sink();
 
-    match load_steam_save_for_transfer(&data.path, label, &progress) {
+    match load_steam_save_for_transfer(&resolved_path, label, &progress) {
         Ok((session, save_info)) => {
             let player_count = session.player_summaries.len();
             let world_name = session.world_name.clone();
