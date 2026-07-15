@@ -13,6 +13,7 @@ import NukeUpsConfirmModal from './nuke-ups-confirm/NukeUpsConfirmModal.svelte';
 import NumberInputModal from './number-input/NumberInputModal.svelte';
 import NumberSliderModal from './number-slider/NumberSliderModal.svelte';
 import OpenFolder from './open-folder/OpenFolder.svelte';
+import PalEditModal from './pal-edit/PalEditModal.svelte';
 import PresetConfigModal from './pal-preset-config/PalPresetConfigModal.svelte';
 import PalPresetSelectModal from './pal-preset-select/PalPresetSelectModal.svelte';
 import PalSelectModal from './pal-select/PalSelectModal.svelte';
@@ -37,6 +38,7 @@ export {
 	NumberInputModal,
 	NumberSliderModal,
 	OpenFolder,
+	PalEditModal,
 	PalPresetSelectModal,
 	PalSelectModal,
 	PresetConfigModal,
