@@ -20,12 +20,13 @@ jobs:
             artifact_name: desktop-macos
             artifact_paths: |
               palworld-save-pal/target/release/bundle/dmg/*.dmg
-          - os: ubuntu-latest
-            bundles: deb,rpm
+          - os: ubuntu-22.04
+            bundles: deb,rpm,appimage
             artifact_name: desktop-linux
             artifact_paths: |
               palworld-save-pal/target/release/bundle/deb/*.deb
               palworld-save-pal/target/release/bundle/rpm/*.rpm
+              palworld-save-pal/target/release/bundle/appimage/*.AppImage
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout palworld-save-pal
@@ -34,7 +35,7 @@ jobs:
           path: palworld-save-pal
 
       - name: Install Linux system dependencies
-        if: matrix.os == 'ubuntu-latest'
+        if: matrix.os == 'ubuntu-22.04'
         run: |
           sudo apt-get update
           sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev

@@ -7,7 +7,7 @@ name: Build and Release
 #   PalworldSavePal-<tag>-windows.msi              (MSI installer)
 #   PalworldSavePal-<tag>-windows-standalone.zip   (portable: exe + ui + data)
 #   PalworldSavePal-<tag>-macos.dmg                (DMG)
-#   PalworldSavePal-<tag>-linux.deb                (Debian package)
+#   PalworldSavePal-<tag>-linux.AppImage           (cross-distro AppImage)
 
 on:
   workflow_dispatch:
@@ -139,7 +139,7 @@ jobs:
           if-no-files-found: error
 
   build-linux:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout palworld-save-pal
         uses: actions/checkout@v4
@@ -174,15 +174,17 @@ jobs:
 
       - name: Build Tauri bundles
         working-directory: palworld-save-pal/psp-desktop
-        run: cargo tauri build --bundles deb
+        run: cargo tauri build --bundles deb,appimage
 
-      - name: Collect and rename installer
+      - name: Collect and rename installers
         working-directory: palworld-save-pal
         run: |
           tag="${{ github.event.inputs.version }}"
           mkdir -p dist
           deb=$(ls target/release/bundle/deb/*.deb | head -n 1)
           cp "$deb" "dist/PalworldSavePal-$tag-linux.deb"
+          appimage=$(ls target/release/bundle/appimage/*.AppImage | head -n 1)
+          cp "$appimage" "dist/PalworldSavePal-$tag-linux.AppImage"
 
       - name: Upload Linux artifacts
         uses: actions/upload-artifact@v4

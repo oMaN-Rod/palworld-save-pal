@@ -30,9 +30,9 @@ jobs:
           - variant: macos
             asset: PalworldSavePal-{tag}-macos.dmg
             group_id: "2308174"
-          # Debian package -> the "linux" Nexus group (2308171)
-          - variant: linux_deb
-            asset: PalworldSavePal-{tag}-linux.deb
+          # AppImage -> the "linux" Nexus group (2308171)
+          - variant: linux_appimage
+            asset: PalworldSavePal-{tag}-linux.AppImage
             group_id: "2308171"
     steps:
       - name: Resolve tag and version
