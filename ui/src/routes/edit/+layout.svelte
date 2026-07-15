@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { DebugButton } from '$components/layout';
 	import { PlayerList } from '$components/player';
-	import { getAppState, getModalState } from '$states';
+	import { getAppState, getModalState, getPalEditorState } from '$states';
 	import { goto } from '$app/navigation';
 	import { MessageType, type Player } from '$types';
 	import { KeyboardShortcut, Nuke, Tooltip } from '$components/ui';
@@ -13,6 +13,7 @@
 
 	const appState = getAppState();
 	const modal = getModalState();
+	const palEditor = getPalEditorState();
 
 	const keyboardShortcuts: Record<string, string> = {
 		KeyL: 'player',
@@ -21,7 +22,6 @@
 		KeyD: 'dps',
 		KeyG: 'guild',
 		KeyM: 'missions',
-		KeyP: 'pal',
 		KeyS: 'gps'
 	};
 
@@ -46,6 +46,14 @@
 			event.shiftKey ||
 			modal.isOpen
 		) {
+			return;
+		}
+
+		if (event.code === 'KeyP') {
+			if (appState.selectedPal) {
+				event.preventDefault();
+				palEditor.open();
+			}
 			return;
 		}
 
@@ -115,9 +123,6 @@
 			{#if appState.selectedPlayer}
 				<KeyboardShortcut id="guild-tab" text={m.guild({ count: 1 })} key="G" href="/edit/guild" />
 				<KeyboardShortcut id="missions-tab" text={m.missions()} key="M" href="/edit/missions" />
-			{/if}
-			{#if appState.selectedPal}
-				<KeyboardShortcut id="pal-tab" text={c.pal} key="P" href="/edit/pal" />
 			{/if}
 		</div>
 		<a
