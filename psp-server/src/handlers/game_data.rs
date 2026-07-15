@@ -129,14 +129,18 @@ pub async fn handle_get_missions(ctx: &mut HandlerCtx<'_>) -> Result<(), Handler
     let mut merged = Map::new();
     for (mission_id, details) in base {
         let l10n_entry = localization.get(&mission_id);
+        let quest_type = details
+            .get("quest_type")
+            .and_then(Value::as_str)
+            .map(|raw| raw.strip_prefix("EPalQuestType::").unwrap_or(raw))
+            .unwrap_or("Main");
         merged.insert(
             mission_id.clone(),
             json!({
                 "id": mission_id,
                 "localized_name": string_or(l10n_entry, "localized_name", &mission_id),
                 "description": string_or(l10n_entry, "description", ""),
-                "quest_type": details.get("quest_type").cloned()
-                    .unwrap_or_else(|| Value::String("Main".into())),
+                "quest_type": quest_type,
                 "rewards": details.get("rewards").cloned().unwrap_or_else(|| json!({})),
             }),
         );
@@ -377,7 +381,7 @@ mod tests {
         .unwrap();
         fs::write(
             json_dir.join("missions.json"),
-            r#"{"M1": {"quest_type": "Side", "rewards": {"gold": 5}}, "M2": {}}"#,
+            r#"{"M1": {"quest_type": "EPalQuestType::Sub", "rewards": {"gold": 5}}, "M2": {}}"#,
         )
         .unwrap();
         fs::write(json_dir.join("l10n/en/missions.json"), r#"{}"#).unwrap();
@@ -539,7 +543,7 @@ mod tests {
         assert_eq!(
             frame["data"]["M1"],
             json!({"id": "M1", "localized_name": "M1", "description": "",
-                   "quest_type": "Side", "rewards": {"gold": 5}})
+                   "quest_type": "Sub", "rewards": {"gold": 5}})
         );
         assert_eq!(
             frame["data"]["M2"],
