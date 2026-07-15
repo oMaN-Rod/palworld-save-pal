@@ -44,7 +44,8 @@
 			event.altKey ||
 			event.metaKey ||
 			event.shiftKey ||
-			modal.isOpen
+			modal.isOpen ||
+			palEditor.isOpen
 		) {
 			return;
 		}
