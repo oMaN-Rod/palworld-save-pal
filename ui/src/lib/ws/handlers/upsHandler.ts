@@ -1,6 +1,8 @@
+import { m } from '$i18n/messages';
 import { getToastState, getUpsState } from '$states';
 import type { UPSCollection, UPSPal, UPSPalsResponse, UPSStats, UPSTag } from '$types';
 import { MessageType } from '$types';
+import { c } from '$utils/commonTranslations';
 import type { WSMessageHandler } from '$ws/types';
 
 export const getUpsPalsHandler: WSMessageHandler = {
@@ -74,19 +76,26 @@ export const deleteUpsPalsHandler: WSMessageHandler = {
 
 			if (data.deleted_count === data.requested_count) {
 				toastState.add(
-					`Deleted ${data.deleted_count} pal${data.deleted_count > 1 ? 's' : ''}`,
-					'Success',
+					m.deleted_entity({
+						count: data.deleted_count,
+						entity: m.pal({ count: data.deleted_count })
+					}),
+					m.success(),
 					'success'
 				);
 			} else {
 				toastState.add(
-					`Deleted ${data.deleted_count} of ${data.requested_count} requested pals`,
-					'Partial',
+					m.deleted_partial({
+						count: data.deleted_count,
+						total: data.requested_count,
+						pals: m.pal({ count: data.deleted_count })
+					}),
+					m.warning(),
 					'warning'
 				);
 			}
 		} else {
-			toastState.add('No pals were deleted', 'Error', 'error');
+			toastState.add(m.no_pals_deleted({ pals: c.pals }), m.error(), 'error');
 		}
 	}
 };
@@ -116,10 +125,12 @@ export const exportUpsPalHandler: WSMessageHandler = {
 		error?: string;
 	}) {
 		if (data.success) {
-			let message = `Exported pal to ${data.destination_type.toUpperCase()}`;
-			if (data.destination_slot !== undefined) {
-				message += ` slot ${data.destination_slot}`;
-			}
+			const target = data.destination_type.toUpperCase();
+			const message =
+				data.destination_slot !== undefined
+					? m.exported_pal_to_target_slot({ pal: c.pal, target, slot: data.destination_slot })
+					: m.exported_pal_to_target({ pal: c.pal, target });
+			getToastState().add(message, m.success(), 'success');
 		}
 	}
 };
@@ -133,7 +144,7 @@ export const cloneToUpsHandler: WSMessageHandler = {
 		errors?: string[];
 	}) {
 		const upsState = getUpsState();
-		const toastState = getToastState();
+		const toast = getToastState();
 
 		if (data.success && data.cloned_count > 0) {
 			// Refresh the pals list to show new cloned pals and collections
@@ -141,25 +152,17 @@ export const cloneToUpsHandler: WSMessageHandler = {
 			await upsState.loadCollections();
 			await upsState.loadStats(); // Update stats after cloning
 
-			if (data.cloned_count === data.total_requested) {
-				toastState.add(
-					`Successfully cloned ${data.cloned_count} pal${data.cloned_count > 1 ? 's' : ''} to UPS`,
-					'Success',
-					'success'
-				);
-			} else {
-				toastState.add(
-					`Cloned ${data.cloned_count} of ${data.total_requested} pals to UPS${data.errors ? `. Errors: ${data.errors.length}` : ''}`,
-					'Partial',
-					'warning'
-				);
-			}
+			toast.add(
+				m.successfully_cloned_pals_to_entity({
+					count: data.cloned_count,
+					pals: m.pal({ count: data.cloned_count }),
+					entity: c.universalPalStorage
+				}),
+				m.success(),
+				'success'
+			);
 		} else {
-			const errorMsg =
-				data.errors && data.errors.length > 0
-					? `Clone failed: ${data.errors[0]}${data.errors.length > 1 ? ` (and ${data.errors.length - 1} more)` : ''}`
-					: 'Clone to UPS failed';
-			toastState.add(errorMsg, 'Error', 'error');
+			toast.add(m.clone_to_entity_failed({ entity: c.universalPalStorage }), m.error(), 'error');
 		}
 	}
 };
@@ -177,7 +180,7 @@ export const importToUpsHandler: WSMessageHandler = {
 			// Refresh collections to update pal_count
 			await upsState.loadCollections();
 		} else {
-			toastState.add(`Import failed: ${data.error || 'Unknown error'}`, 'Error', 'error');
+			toastState.add(m.import_to_entity_failed({ entity: c.universalPalStorage }), m.error(), 'error');
 		}
 	}
 };
@@ -198,7 +201,11 @@ export const createUpsCollectionHandler: WSMessageHandler = {
 
 		if (data.collection) {
 			upsState.collections = [...upsState.collections, data.collection];
-			toastState.add(`Created collection "${data.collection.name}"`, 'Success', 'success');
+			toastState.add(
+				m.created_entity_named({ entity: c.collection, name: data.collection.name }),
+				m.success(),
+				'success'
+			);
 		}
 	}
 };
@@ -210,10 +217,14 @@ export const updateUpsCollectionHandler: WSMessageHandler = {
 		const toastState = getToastState();
 
 		if (data.collection) {
-			const index = upsState.collections.findIndex((c) => c.id === data.collection.id);
+			const index = upsState.collections.findIndex((col) => col.id === data.collection.id);
 			if (index >= 0) {
 				upsState.collections[index] = data.collection;
-				toastState.add(`Updated collection "${data.collection.name}"`, 'Success', 'success');
+				toastState.add(
+					m.updated_entity_named({ entity: c.collection, name: data.collection.name }),
+					m.success(),
+					'success'
+				);
 			}
 		}
 	}
@@ -227,8 +238,8 @@ export const deleteUpsCollectionHandler: WSMessageHandler = {
 
 		if (data.success) {
 			// Remove collection from list
-			const collection = upsState.collections.find((c) => c.id === data.collection_id);
-			upsState.collections = upsState.collections.filter((c) => c.id !== data.collection_id);
+			const collection = upsState.collections.find((col) => col.id === data.collection_id);
+			upsState.collections = upsState.collections.filter((col) => col.id !== data.collection_id);
 
 			// Clear filter if it was set to this collection
 			if (upsState.filters.collectionId === data.collection_id) {
@@ -236,12 +247,14 @@ export const deleteUpsCollectionHandler: WSMessageHandler = {
 			}
 
 			toastState.add(
-				`Deleted collection ${collection ? `"${collection.name}"` : ''}`,
-				'Success',
+				collection
+					? m.deleted_entity_named({ entity: c.collection, name: collection.name })
+					: m.deleted_entity_only({ entity: c.collection }),
+				m.success(),
 				'success'
 			);
 		} else {
-			toastState.add('Failed to delete collection', 'Error', 'error');
+			toastState.add(m.delete_entity_failed({ entity: c.collection }), m.error(), 'error');
 		}
 	}
 };
@@ -268,7 +281,11 @@ export const createUpsTagHandler: WSMessageHandler = {
 			} else {
 				upsState.tags = [...upsState.tags, data.tag];
 			}
-			toastState.add(`Created tag "${data.tag.name}"`, 'Success', 'success');
+			toastState.add(
+				m.created_entity_named({ entity: c.tag, name: data.tag.name }),
+				m.success(),
+				'success'
+			);
 		}
 	}
 };
@@ -285,7 +302,11 @@ export const updateUpsTagHandler: WSMessageHandler = {
 			if (index >= 0) {
 				upsState.tags[index] = data.tag;
 			}
-			toastState.add(`Updated tag "${data.tag.name}"`, 'Success', 'success');
+			toastState.add(
+				m.updated_entity_named({ entity: c.tag, name: data.tag.name }),
+				m.success(),
+				'success'
+			);
 		}
 	}
 };
@@ -302,7 +323,11 @@ export const deleteUpsTagHandler: WSMessageHandler = {
 			upsState.tags = upsState.tags.filter((t) => t.id !== data.tag_id);
 
 			if (deletedTag) {
-				toastState.add(`Deleted tag "${deletedTag.name}"`, 'Success', 'success');
+				toastState.add(
+					m.deleted_entity_named({ entity: c.tag, name: deletedTag.name }),
+					m.success(),
+					'success'
+				);
 			}
 		}
 	}

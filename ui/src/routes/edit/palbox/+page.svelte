@@ -487,15 +487,6 @@
 				tags.length > 0 ? tags : undefined,
 				notes || undefined
 			);
-
-			toast.add(
-				m.successfully_cloned_pal_to_entity({
-					pal: pal.nickname || pal.name,
-					entity: c.universalPalStorage
-				}),
-				m.success(),
-				'success'
-			);
 		} catch (error) {
 			console.error('Clone to UPS failed:', error);
 			toast.add(m.clone_to_entity_failed({ entity: c.universalPalStorage }), m.error(), 'error');
@@ -533,16 +524,6 @@
 				collectionId,
 				tags.length > 0 ? tags : undefined,
 				notes || undefined
-			);
-
-			toast.add(
-				m.successfully_cloned_pals_to_entity({
-					count: palsToClone.length,
-					pals: m.pal({ count: palsToClone.length }),
-					entity: c.universalPalStorage
-				}),
-				m.success(),
-				'success'
 			);
 
 			selectedPals = [];
