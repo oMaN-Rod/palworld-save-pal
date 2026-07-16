@@ -7,6 +7,7 @@ pub mod gamedata;
 pub mod gamepass;
 pub mod localdata;
 pub mod palbin;
+pub mod paths;
 pub mod progress;
 pub mod props;
 pub mod savio;

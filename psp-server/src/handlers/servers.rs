@@ -466,8 +466,7 @@ async fn create_server_impl(
         emitter.emit(MessageType::CreateServer, &result);
     } else {
         emit_creation_progress(emitter, "Validating server configuration...");
-        let base_path = std::env::current_dir()
-            .map_err(|error| error.to_string())?
+        let base_path = psp_core::paths::app_root()
             .join("servers")
             .join(&data.container_name);
         let new_server = NewServer {

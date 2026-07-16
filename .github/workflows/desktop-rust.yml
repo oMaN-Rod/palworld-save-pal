@@ -66,6 +66,13 @@ jobs:
         working-directory: palworld-save-pal/psp-desktop
         run: cargo tauri build --bundles ${{ matrix.bundles }}
 
+      - name: Strip host-graphics libs from AppImage
+        if: matrix.os == 'ubuntu-22.04'
+        working-directory: palworld-save-pal
+        run: |
+          appimage=$(ls target/release/bundle/appimage/*.AppImage | head -n 1)
+          bash scripts/appimage-strip-graphics.sh "$appimage"
+
       - name: Upload installers
         uses: actions/upload-artifact@v4
         with:

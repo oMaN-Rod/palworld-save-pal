@@ -905,8 +905,10 @@ pub(crate) fn write_transfer_target_save(
     Ok(())
 }
 
-/// CWD-relative backup root for Steam saves.
-const STEAM_BACKUP_BASE: &str = "backups/steam";
+/// Backup root for Steam saves, anchored to the app root (`backups/steam`).
+fn steam_backup_base() -> std::path::PathBuf {
+    psp_core::paths::app_root().join("backups").join("steam")
+}
 
 /// `data` is a bare world-name string, used only by the GamePass branch. It MUST
 /// stay `Option<String>`: the frontend sends `null` for Steam saves, and a
@@ -946,7 +948,7 @@ async fn save_modded_steam_save(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerE
         session,
         &level_path,
         Path::new(&save_dir),
-        Path::new(STEAM_BACKUP_BASE),
+        &steam_backup_base(),
         &progress,
     )?;
 
