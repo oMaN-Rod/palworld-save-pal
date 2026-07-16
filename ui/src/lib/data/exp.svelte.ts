@@ -7,6 +7,12 @@ interface ExpData {
 	PalNextEXP: number;
 	TotalEXP: number;
 	PalTotalEXP: number;
+	// Per-action EXP yields from DT_PalExpTable (Palworld 1.x). Reference data
+	// only -- these are not persisted per-character, so leveling never writes them.
+	BuildEXP: number;
+	CraftEXP: number;
+	PalBuildEXP: number;
+	PalCraftEXP: number;
 }
 
 class ExpDataHandler {
@@ -32,6 +38,20 @@ class ExpDataHandler {
 		}
 	}
 
+	get maxLevel(): number {
+		let max = 1;
+		for (const key of Object.keys(this.expData)) {
+			const level = Number(key);
+			if (Number.isFinite(level) && level > max) max = level;
+		}
+		return max;
+	}
+
+	private rowFor(level: number): ExpData {
+		const clamped = Math.min(Math.max(Math.trunc(level), 1), this.maxLevel);
+		return this.expData[clamped.toString()];
+	}
+
 	async getExpData(): Promise<Record<string, ExpData>> {
 		await this.ensureLoaded();
 		return this.expData;
@@ -39,29 +59,30 @@ class ExpDataHandler {
 
 	async getExpDataByLevel(level: number): Promise<ExpData> {
 		await this.ensureLoaded();
-		return this.expData[level.toString()];
+		return this.rowFor(level);
 	}
 
 	async getLevelForExp(exp: number): Promise<number> {
 		await this.ensureLoaded();
-		for (let level = 1; level <= 100; level++) {
+		const max = this.maxLevel;
+		for (let level = 1; level <= max; level++) {
 			const levelData = this.expData[level.toString()];
 			if (exp < levelData.PalTotalEXP) {
 				return level - 1;
 			}
 		}
-		return 100;
+		return max;
 	}
 
 	async getExpForLevel(level: number): Promise<number> {
 		await this.ensureLoaded();
-		const levelData = this.expData[level.toString()];
+		const levelData = this.rowFor(level);
 		return levelData.PalTotalEXP - levelData.PalNextEXP;
 	}
 
 	async getExpProgress(level: number, exp: number): Promise<number> {
 		await this.ensureLoaded();
-		const levelData = this.expData[level.toString()];
+		const levelData = this.rowFor(level);
 		const lowerBound = levelData.PalTotalEXP - levelData.PalNextEXP;
 		const upperBound = levelData.PalTotalEXP;
 		return (exp - lowerBound) / (upperBound - lowerBound);
@@ -69,8 +90,7 @@ class ExpDataHandler {
 
 	async getNextLevelExp(level: number): Promise<number> {
 		await this.ensureLoaded();
-		const levelData = this.expData[level.toString()];
-		return levelData.PalNextEXP;
+		return this.rowFor(level).PalNextEXP;
 	}
 
 	async reset(): Promise<void> {
