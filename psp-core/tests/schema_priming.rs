@@ -12,8 +12,10 @@
 
 mod common;
 
-use psp_core::domain::{pal, player};
+use psp_core::domain::{containers, pal, player};
+use psp_core::dto::container::DynamicItemDto;
 use psp_core::dto::ordered_map::OrderedMap;
+use psp_core::dto::pal::PalGender;
 use psp_core::gamedata::GameData;
 use psp_core::progress::null_progress;
 use psp_core::session::SaveSession;
@@ -125,6 +127,43 @@ fn adding_the_first_pal_to_a_world_that_has_none_serializes() {
     // the primer supplies one -- a wrong tag here writes a save the game silently
     // drops the pal from, and that this app then cannot reopen.
     written_level_parses_back(&session, "adding the first pal");
+}
+
+/// An egg carries a pal's `SaveParameter` under `DynamicItemSaveData.RawData`. A save
+/// with no egg records no schema for that `SaveParameter` struct *node* (only its
+/// children are primed), so writing the first egg failed with
+/// `missing property schema for path: worldSaveData.DynamicItemSaveData.RawData.SaveParameter`.
+#[test]
+fn adding_an_egg_serializes_on_a_save_that_holds_no_egg() {
+    assert!(
+        !raw_schema_paths("world2", "Level.sav")
+            .iter()
+            .any(|k| k == "worldSaveData.DynamicItemSaveData.RawData.SaveParameter"),
+        "fixture precondition: world2 must record no egg SaveParameter node schema"
+    );
+    let mut session = common::load_fixture_session("world2");
+
+    let egg = DynamicItemDto {
+        local_id: uuid::Uuid::from_u128(0x0123_4567_89ab_cdef),
+        modified: true,
+        character_id: Some("Lamball".to_string()),
+        character_key: None,
+        durability: None,
+        passive_skill_list: None,
+        remaining_bullets: None,
+        r#type: Some("egg".to_string()),
+        static_id: Some("PalEgg_Normal_01".to_string()),
+        gender: Some(PalGender::Female),
+        active_skills: Some(vec![]),
+        learned_skills: Some(vec![]),
+        passive_skills: Some(vec![]),
+        talent_hp: Some(50),
+        talent_shot: Some(50),
+        talent_defense: Some(50),
+    };
+    containers::upsert_dynamic_item(&mut session, &egg, "PalEgg_Normal_01").expect("add egg");
+
+    written_level_parses_back(&session, "adding an egg");
 }
 
 /// A `_dps.sav`'s slots are empty until a pal is stored, so its `GotStatusPointList`

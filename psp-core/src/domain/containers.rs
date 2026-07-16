@@ -38,7 +38,7 @@ pub fn ensure_container_schemas(level: &mut uesave::Save) {
     };
     let struct_array = |name: &str| Data::Array(Box::new(pal_struct(name)));
 
-    let entries: [(&str, Data); 9] = [
+    let entries: [(&str, Data); 10] = [
         (
             "worldSaveData.CharacterContainerSaveData.Slots",
             struct_array("PalCharacterSlotSaveData"),
@@ -70,6 +70,15 @@ pub fn ensure_container_schemas(level: &mut uesave::Save) {
         (
             "worldSaveData.DynamicItemSaveData.RawData",
             pal_struct("PalDynamicItem"),
+        ),
+        // An egg's `SaveParameter` struct node. A save with no egg records only
+        // its children (via `ensure_save_parameter_schemas` below), never this
+        // node -- so the first egg written failed to serialize. Real saves that
+        // hold an egg record it as `PalIndividualCharacterSaveParameter`, the
+        // same type a pal's `CharacterSaveParameterMap` SaveParameter carries.
+        (
+            EGG_SAVE_PARAMETER_PREFIX,
+            pal_struct("PalIndividualCharacterSaveParameter"),
         ),
         (
             "worldSaveData.DynamicItemSaveData.CustomVersionData",
