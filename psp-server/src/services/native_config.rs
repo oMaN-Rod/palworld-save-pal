@@ -392,29 +392,105 @@ pub fn split_option_settings(options: &str) -> Vec<String> {
     pairs
 }
 
-/// Reads the server's own DefaultPalWorldSettings.ini (shipped at the install
-/// root), falling back to [`hardcoded_defaults`] when it is missing or malformed.
-pub fn parse_default_settings(default_ini_path: &Path) -> Vec<(String, String)> {
-    let Ok(contents) = std::fs::read_to_string(default_ini_path) else {
-        return hardcoded_defaults();
-    };
-    let Some(start_index) = contents.find("OptionSettings=(") else {
-        return hardcoded_defaults();
-    };
+/// Parses the `OptionSettings=(...)` list from an ini file. Returns `None` when
+/// the file is missing or has no OptionSettings line.
+pub fn parse_option_settings_ini(path: &Path) -> Option<Vec<(String, String)>> {
+    let contents = std::fs::read_to_string(path).ok()?;
+    let start_index = contents.find("OptionSettings=(")?;
     let after_open = start_index + "OptionSettings=(".len();
-    let Some(close_offset) = contents[after_open..].find(')') else {
-        return hardcoded_defaults();
-    };
+    let close_offset = contents[after_open..].find(')')?;
     let options = &contents[after_open..after_open + close_offset];
-    let mut defaults = Vec::new();
+    let mut pairs = Vec::new();
     for pair in split_option_settings(options) {
         if let Some((key, value)) = pair.split_once('=') {
             if !key.trim().is_empty() {
-                defaults.push((key.trim().to_string(), value.trim().to_string()));
+                pairs.push((key.trim().to_string(), value.trim().to_string()));
             }
         }
     }
-    defaults
+    Some(pairs)
+}
+
+/// Reads the server's own DefaultPalWorldSettings.ini (shipped at the install
+/// root), falling back to [`hardcoded_defaults`] when it is missing or malformed.
+pub fn parse_default_settings(default_ini_path: &Path) -> Vec<(String, String)> {
+    parse_option_settings_ini(default_ini_path).unwrap_or_else(hardcoded_defaults)
+}
+
+pub fn ini_to_env_key(ini_key: &str) -> Option<&'static str> {
+    ENV_TO_INI
+        .iter()
+        .find(|(_, ini)| *ini == ini_key)
+        .map(|(env, _)| *env)
+}
+
+#[derive(Debug, Default, Clone)]
+pub struct ImportedServerConfig {
+    pub server_name: String,
+    pub server_description: String,
+    pub server_password: String,
+    pub admin_password: String,
+    pub max_players: i64,
+    pub game_port: i64,
+    pub rest_api_port: i64,
+    pub env_vars: serde_json::Map<String, serde_json::Value>,
+}
+
+fn ini_value_to_env(ini_key: &str, value: &str) -> String {
+    let trimmed = value.trim();
+    if STRING_INI_KEYS.contains(&ini_key) {
+        return trimmed.trim_matches('"').to_string();
+    }
+    if BOOL_INI_KEYS.contains(&ini_key) {
+        return match trimmed.to_ascii_lowercase().as_str() {
+            "true" => "true".to_string(),
+            "false" => "false".to_string(),
+            other => other.to_string(),
+        };
+    }
+    trimmed.to_string()
+}
+
+/// Reads the active `PalWorldSettings.ini`. Known keys become explicit fields +
+/// reverse-mapped `env_vars` (for the settings UI); unmapped keys are ignored
+/// here but preserved on disk by `build_palworld_settings_content`.
+pub fn parse_server_config_from_ini(install_path: &str) -> ImportedServerConfig {
+    let ini_path = config_dir(install_path).join("PalWorldSettings.ini");
+    let pairs = parse_option_settings_ini(&ini_path).unwrap_or_default();
+
+    let get = |wanted: &str| -> Option<&str> {
+        pairs
+            .iter()
+            .find(|(key, _)| key == wanted)
+            .map(|(_, value)| value.as_str())
+    };
+    let unquote = |value: Option<&str>| value.unwrap_or("").trim_matches('"').to_string();
+    let parse_i64 = |value: Option<&str>, fallback: i64| -> i64 {
+        value
+            .and_then(|v| v.trim().parse::<i64>().ok())
+            .unwrap_or(fallback)
+    };
+
+    let mut env_vars = serde_json::Map::new();
+    for (ini_key, value) in &pairs {
+        if let Some(env_key) = ini_to_env_key(ini_key) {
+            env_vars.insert(
+                env_key.to_string(),
+                serde_json::Value::String(ini_value_to_env(ini_key, value)),
+            );
+        }
+    }
+
+    ImportedServerConfig {
+        server_name: unquote(get("ServerName")),
+        server_description: unquote(get("ServerDescription")),
+        server_password: unquote(get("ServerPassword")),
+        admin_password: unquote(get("AdminPassword")),
+        max_players: parse_i64(get("ServerPlayerMaxNum"), 16),
+        game_port: parse_i64(get("PublicPort"), 8211),
+        rest_api_port: parse_i64(get("RESTAPIPort"), 8212),
+        env_vars,
+    }
 }
 
 fn upsert(defaults: &mut Vec<(String, String)>, key: &str, value: String) {
@@ -428,11 +504,14 @@ fn upsert(defaults: &mut Vec<(String, String)>, key: &str, value: String) {
     }
 }
 
-/// Precedence: shipped defaults, then mapped `env_vars`, then the explicit server
-/// fields, which always win.
+/// Precedence: active ini, else shipped defaults, else hardcoded defaults; then
+/// mapped `env_vars`, then the explicit server fields, which always win.
 pub fn build_palworld_settings_content(record: &ServerRecord) -> String {
-    let default_ini_path = Path::new(&record.install_path).join("DefaultPalWorldSettings.ini");
-    let mut settings = parse_default_settings(&default_ini_path);
+    let active_ini = config_dir(&record.install_path).join("PalWorldSettings.ini");
+    let default_ini = Path::new(&record.install_path).join("DefaultPalWorldSettings.ini");
+    let mut settings = parse_option_settings_ini(&active_ini)
+        .or_else(|| parse_option_settings_ini(&default_ini))
+        .unwrap_or_else(hardcoded_defaults);
 
     for (env_key, env_value) in record.env_vars.0.iter() {
         if is_docker_only_key(env_key) {
@@ -752,6 +831,27 @@ mod tests {
     }
 
     #[test]
+    fn build_content_preserves_unknown_keys_from_active_ini() {
+        let scratch = tempfile::tempdir().unwrap();
+        let install = scratch.path().to_string_lossy().to_string();
+        // Active ini contains a key PSP does not map.
+        let cfg = config_dir(&install);
+        std::fs::create_dir_all(&cfg).unwrap();
+        std::fs::write(
+            cfg.join("PalWorldSettings.ini"),
+            "[/Script/Pal.PalGameWorldSettings]\nOptionSettings=(ServerName=\"Old\",ExpRate=1.000000,MyCustomKey=42)\n",
+        )
+        .unwrap();
+
+        let record = native_record(&install); // existing test helper in this module
+        let content = build_palworld_settings_content(&record);
+        // Unmapped key survives...
+        assert!(content.contains("MyCustomKey=42"));
+        // ...while PSP-owned explicit fields still override.
+        assert!(content.contains("ServerName=\"My Native Server\""));
+    }
+
+    #[test]
     fn build_content_falls_back_to_hardcoded_defaults() {
         let scratch = tempfile::tempdir().unwrap();
         let mut record = native_record(&scratch.path().to_string_lossy());
@@ -762,6 +862,50 @@ mod tests {
         assert!(content.contains("BanListURL=\"https://b.palworldgame.com/api/banlist.txt\""));
         assert!(content.contains("CrossplayPlatforms=(Steam,Xbox,PS5,Mac)"));
         assert!(content.contains("ServerPassword=\"\""));
+    }
+
+    #[test]
+    fn ini_to_env_key_inverts_known_keys() {
+        assert_eq!(ini_to_env_key("ExpRate"), Some("EXP_RATE"));
+        assert_eq!(ini_to_env_key("ServerName"), Some("SERVER_NAME"));
+        assert_eq!(ini_to_env_key("TotallyUnknown"), None);
+    }
+
+    #[test]
+    fn parse_server_config_reads_explicit_fields_ports_and_env() {
+        let scratch = tempfile::tempdir().unwrap();
+        let install = scratch.path().to_string_lossy().to_string();
+        let cfg = config_dir(&install);
+        std::fs::create_dir_all(&cfg).unwrap();
+        std::fs::write(
+            cfg.join("PalWorldSettings.ini"),
+            "[/Script/Pal.PalGameWorldSettings]\nOptionSettings=(ServerName=\"My Imported\",ServerDescription=\"Desc\",AdminPassword=\"pw\",ServerPassword=\"guest\",ServerPlayerMaxNum=24,PublicPort=9911,RESTAPIPort=9912,ExpRate=3.000000,bIsPvP=True,MyCustomKey=42)\n",
+        )
+        .unwrap();
+
+        let parsed = parse_server_config_from_ini(&install);
+        assert_eq!(parsed.server_name, "My Imported");
+        assert_eq!(parsed.server_description, "Desc");
+        assert_eq!(parsed.admin_password, "pw");
+        assert_eq!(parsed.server_password, "guest");
+        assert_eq!(parsed.max_players, 24);
+        assert_eq!(parsed.game_port, 9911);
+        assert_eq!(parsed.rest_api_port, 9912);
+        // known keys reverse-mapped and normalized (quotes stripped, bools lowercased)
+        assert_eq!(parsed.env_vars.get("EXP_RATE").unwrap(), "3.000000");
+        assert_eq!(parsed.env_vars.get("IS_PVP").unwrap(), "true");
+        // unknown ini key is not surfaced as an env var
+        assert!(!parsed.env_vars.values().any(|v| v == "42"));
+    }
+
+    #[test]
+    fn parse_server_config_uses_defaults_when_ini_missing() {
+        let scratch = tempfile::tempdir().unwrap();
+        let parsed = parse_server_config_from_ini(&scratch.path().to_string_lossy());
+        assert_eq!(parsed.game_port, 8211);
+        assert_eq!(parsed.rest_api_port, 8212);
+        assert_eq!(parsed.max_players, 16);
+        assert!(parsed.server_name.is_empty());
     }
 
     #[test]

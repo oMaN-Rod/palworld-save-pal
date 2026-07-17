@@ -154,6 +154,19 @@ pub async fn get_server(
     Ok(record)
 }
 
+pub async fn server_with_install_path(
+    pool: &SqlitePool,
+    install_path: &str,
+) -> Result<Option<ServerRecord>, DbError> {
+    let record = sqlx::query_as::<_, ServerRecord>(&format!(
+        "SELECT {SELECT_COLUMNS} FROM servers WHERE install_path = ?"
+    ))
+    .bind(install_path)
+    .fetch_optional(pool)
+    .await?;
+    Ok(record)
+}
+
 pub async fn list_servers(pool: &SqlitePool) -> Result<Vec<ServerRecord>, DbError> {
     let records = sqlx::query_as::<_, ServerRecord>(&format!(
         "SELECT {SELECT_COLUMNS} FROM servers ORDER BY created_at"

@@ -2,9 +2,14 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { getServerState, getModalState } from '$states';
 	import { Button, Card } from '$components/ui';
-	import { ServerCard, ServerDetailPanel, CreateServerModal } from '$components/servers';
-	import { Plus, Server } from 'lucide-svelte';
-	import type { CreateServerData, Server as ServerType } from '$types';
+	import {
+		ServerCard,
+		ServerDetailPanel,
+		CreateServerModal,
+		ImportServerModal
+	} from '$components/servers';
+	import { Plus, Server, Download } from 'lucide-svelte';
+	import type { CreateServerData, ImportServerData, Server as ServerType } from '$types';
 
 	const serverState = getServerState();
 	const modal = getModalState();
@@ -73,6 +78,16 @@
 			await serverState.createServer(result);
 		}
 	}
+
+	async function handleImport() {
+		// @ts-ignore
+		const result = await modal.showModal<ImportServerData | null>(ImportServerModal, {
+			title: 'Import Existing Server'
+		});
+		if (result) {
+			await serverState.importServer(result);
+		}
+	}
 </script>
 
 <div class="flex h-full min-h-screen w-full gap-4 p-4">
@@ -80,10 +95,21 @@
 	<div class="flex w-80 shrink-0 flex-col gap-4">
 		<div class="flex items-center justify-between">
 			<h2 class="text-primary-400 text-xl font-bold">Servers</h2>
-			<Button variant="primary" size="sm" class="flex items-center gap-2" onclick={handleCreate}>
-				<Plus size={14} />
-				New
-			</Button>
+			<div class="flex items-center gap-2">
+				<Button
+					variant="secondary"
+					size="sm"
+					class="flex items-center gap-2"
+					onclick={handleImport}
+				>
+					<Download size={14} />
+					Import
+				</Button>
+				<Button variant="primary" size="sm" class="flex items-center gap-2" onclick={handleCreate}>
+					<Plus size={14} />
+					New
+				</Button>
+			</div>
 		</div>
 
 		{#if creationProgress}

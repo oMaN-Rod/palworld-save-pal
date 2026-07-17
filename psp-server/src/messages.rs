@@ -174,6 +174,7 @@ define_message_types! {
     LoadServerSave => "load_server_save",
     GetServerStats => "get_server_stats",
     ServerCreationProgress => "server_creation_progress",
+    ImportServer => "import_server",
     // Session persistence
     ReattachSession => "reattach_session",
     EjectSession => "eject_session",
@@ -313,16 +314,17 @@ mod tests {
         "load_server_save",
         "get_server_stats",
         "server_creation_progress",
+        "import_server",
     ];
 
-    /// Session-persistence types, which sit after the other 126 in declaration
+    /// Session-persistence types, which sit after the other 127 in declaration
     /// order.
     const FEATURE_ADDITION_WIRE_NAMES: &[&str] =
         &["reattach_session", "eject_session", "session_not_found"];
 
     #[test]
-    fn exactly_126_message_types() {
-        assert_eq!(EXPECTED_WIRE_NAMES.len(), 126);
+    fn exactly_127_message_types() {
+        assert_eq!(EXPECTED_WIRE_NAMES.len(), 127);
         assert_eq!(
             MessageType::ALL.len(),
             EXPECTED_WIRE_NAMES.len() + FEATURE_ADDITION_WIRE_NAMES.len()

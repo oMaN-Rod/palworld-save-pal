@@ -11,6 +11,12 @@ import {
 } from '$lib/types';
 import { isReady, send, sendAndWait } from '$lib/utils/websocketUtils';
 
+function toCollectionId(value: unknown): number | undefined {
+	if (value === undefined || value === null || value === '') return undefined;
+	const n = Number(value);
+	return Number.isFinite(n) ? n : undefined;
+}
+
 export interface UPSState {
 	pals: UPSPal[];
 	collections: UPSCollection[];
@@ -92,7 +98,7 @@ class UPSStateClass {
 				search_query: this.filters.search || undefined,
 				character_id_filter:
 					this.filters.characterId !== 'All' ? this.filters.characterId : undefined,
-				collection_id: this.filters.collectionId,
+				collection_id: toCollectionId(this.filters.collectionId),
 				tags: this.filters.tags.length > 0 ? this.filters.tags : undefined,
 				element_types: this.filters.elementTypes.length > 0 ? this.filters.elementTypes : undefined,
 				pal_types: this.filters.palTypes.length > 0 ? this.filters.palTypes : undefined,
@@ -243,14 +249,19 @@ class UPSStateClass {
 		updates: Partial<Pick<UPSPal, 'nickname' | 'collection_id' | 'tags' | 'notes'>>
 	): Promise<void> {
 		try {
+			const normalizedUpdates =
+				'collection_id' in updates
+					? { ...updates, collection_id: toCollectionId(updates.collection_id) }
+					: updates;
+
 			const upsPal = await sendAndWait(MessageType.UPDATE_UPS_PAL, {
 				pal_id: palId,
-				updates
+				updates: normalizedUpdates
 			});
 
 			const index = this.pals.findIndex((p) => p.id === palId);
 			if (index >= 0) {
-				this.pals[index] = { ...this.pals[index], ...updates };
+				this.pals[index] = { ...this.pals[index], ...normalizedUpdates };
 			}
 
 			// Refresh collections if collection assignment changed
@@ -343,7 +354,7 @@ class UPSStateClass {
 				source_pal_id: sourcePalId,
 				source_slot: sourceSlot,
 				source_player_uid: sourcePlayerUid,
-				collection_id: collectionId,
+				collection_id: toCollectionId(collectionId),
 				tags: tags,
 				notes: notes
 			};
@@ -371,7 +382,7 @@ class UPSStateClass {
 				pal_ids: palIds,
 				source_type: sourceType,
 				source_player_uid: sourcePlayerUid,
-				collection_id: collectionId,
+				collection_id: toCollectionId(collectionId),
 				tags: tags,
 				notes: notes
 			});
@@ -436,7 +447,7 @@ class UPSStateClass {
 				search_query: this.filters.search || undefined,
 				character_id_filter:
 					this.filters.characterId !== 'All' ? this.filters.characterId : undefined,
-				collection_id: this.filters.collectionId,
+				collection_id: toCollectionId(this.filters.collectionId),
 				tags: this.filters.tags.length > 0 ? this.filters.tags : undefined,
 				element_types: this.filters.elementTypes.length > 0 ? this.filters.elementTypes : undefined,
 				pal_types: this.filters.palTypes.length > 0 ? this.filters.palTypes : undefined

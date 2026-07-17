@@ -348,6 +348,9 @@ async fn route(
         MessageType::CreateServer => {
             handlers::servers::handle_create_server(serde_json::from_value(data)?, ctx).await
         }
+        MessageType::ImportServer => {
+            handlers::servers::handle_import_server(serde_json::from_value(data)?, ctx).await
+        }
         MessageType::UpdateServer => {
             handlers::servers::handle_update_server(serde_json::from_value(data)?, ctx).await
         }

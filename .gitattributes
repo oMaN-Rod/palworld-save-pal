@@ -7,3 +7,9 @@
 # but has been modified" -- even though the SQL is identical. Every existing
 # database was migrated from LF files, so LF is the checksum that must hold.
 *.sql text eol=lf
+
+# Shell scripts must stay LF: CI runs them with `bash scripts/*.sh`, and a
+# trailing CRLF makes `set -o pipefail` (and shebang resolution) fail with
+# "invalid option name". `core.autocrlf=true` on Windows would otherwise rewrite
+# committed scripts to CRLF.
+*.sh text eol=lf

@@ -46,6 +46,25 @@ export const createServerHandler: WSMessageHandler = {
 	}
 };
 
+export const importServerHandler: WSMessageHandler = {
+	type: MessageType.IMPORT_SERVER,
+	async handle(data: Server & { notifications?: string[] }) {
+		const state = getServerState();
+		const toast = getToastState();
+		const idx = state.servers.findIndex((s) => s.id === data.id);
+		if (idx >= 0) {
+			state.servers[idx] = data;
+		} else {
+			state.servers = [...state.servers, data];
+		}
+		state.selectedServer = data;
+		toast.add(`Server "${data.name}" imported successfully`, 'Success', 'success');
+		for (const note of data.notifications ?? []) {
+			toast.add(note, 'Notice', 'default');
+		}
+	}
+};
+
 export const serverCreationProgressHandler: WSMessageHandler = {
 	type: MessageType.SERVER_CREATION_PROGRESS,
 	async handle(data: { message: string }) {
@@ -185,5 +204,6 @@ export const serverHandlers = [
 	installServerModHandler,
 	detectWorkshopDirHandler,
 	getServerStatsHandler,
-	serverCreationProgressHandler
+	serverCreationProgressHandler,
+	importServerHandler
 ];

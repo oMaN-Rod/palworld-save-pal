@@ -177,6 +177,12 @@ jobs:
         working-directory: palworld-save-pal/psp-desktop
         run: cargo tauri build --bundles deb,appimage
 
+      - name: Strip host-graphics libs from AppImage
+        working-directory: palworld-save-pal
+        run: |
+          appimage=$(ls target/release/bundle/appimage/*.AppImage | head -n 1)
+          bash scripts/appimage-strip-graphics.sh "$appimage"
+
       - name: Collect and rename installers
         working-directory: palworld-save-pal
         run: |

@@ -40,9 +40,11 @@ fn resolve_asset_dirs(app: &tauri::AppHandle) -> anyhow::Result<AssetDirs> {
         if bundled_ui.join("index.html").is_file() {
             let app_data_dir = app.path().app_data_dir()?;
             std::fs::create_dir_all(&app_data_dir)?;
-            // backups/ and open_folder("psp_root") resolve against cwd
-            // (psp-server convention); point it at the writable app data dir.
-            std::env::set_current_dir(&app_data_dir)?;
+            // backups/, servers/ and open_folder("psp_root") resolve against
+            // PSP_APP_ROOT; point it at the writable app data dir. Do NOT chdir
+            // here: the AppImage's bundled WebKit spawns its helper processes via
+            // a cwd-relative path, so changing the cwd crashes the webview.
+            std::env::set_var("PSP_APP_ROOT", &app_data_dir);
             return Ok(AssetDirs {
                 ui_dir: bundled_ui,
                 data_dir: resource_dir.join("data"),
@@ -57,9 +59,10 @@ fn resolve_asset_dirs(app: &tauri::AppHandle) -> anyhow::Result<AssetDirs> {
         tauri::is_dev() || repo_root.join("ui_build").join("index.html").is_file(),
         "ui_build/index.html not found — run scripts/build-ui-desktop before `cargo run -p psp-desktop`, from the repo root"
     );
-    // backups/ and open_folder("psp_root") resolve against cwd; `tauri dev` runs
-    // the binary from the crate dir, so pin it back to the repo root.
-    std::env::set_current_dir(&repo_root)?;
+    // backups/, servers/ and open_folder("psp_root") resolve against
+    // PSP_APP_ROOT; `tauri dev` runs the binary from the crate dir, so anchor
+    // them at the repo root.
+    std::env::set_var("PSP_APP_ROOT", &repo_root);
     Ok(AssetDirs {
         ui_dir: repo_root.join("ui_build"),
         data_dir: repo_root.join("data"),
@@ -81,7 +84,28 @@ fn choose_webview_url(
     dev_url.filter(|_| allow_dev_server).unwrap_or(server_url)
 }
 
+/// WebKitGTK's DMABUF renderer leaves the WebView blank-white on many virtual
+/// GPUs (VMs) and quirky driver combos — the page's JS still runs, nothing
+/// paints. We default the renderer off on Linux so the window always shows,
+/// but only when the user hasn't set `WEBKIT_DISABLE_DMABUF_RENDERER` themselves.
+/// Returns the value to export, or `None` to leave the environment untouched.
+#[cfg(any(target_os = "linux", test))]
+fn dmabuf_disable_value(current: Option<std::ffi::OsString>) -> Option<&'static str> {
+    match current {
+        Some(_) => None,
+        None => Some("1"),
+    }
+}
+
 fn main() {
+    // Must run before any WebKitGTK init (webview build), which reads this env
+    // var when it spawns the web process. Keeps the WebView from rendering blank
+    // on Linux VMs / virtual GPUs.
+    #[cfg(target_os = "linux")]
+    if let Some(value) = dmabuf_disable_value(std::env::var_os("WEBKIT_DISABLE_DMABUF_RENDERER")) {
+        std::env::set_var("WEBKIT_DISABLE_DMABUF_RENDERER", value);
+    }
+
     tracing_subscriber::fmt()
         .with_env_filter(
             tracing_subscriber::EnvFilter::try_from_default_env()
@@ -166,10 +190,22 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
-    use super::choose_webview_url;
+    use super::{choose_webview_url, dmabuf_disable_value};
 
     fn url(s: &str) -> tauri::Url {
         s.parse().expect("valid url")
+    }
+
+    #[test]
+    fn defaults_dmabuf_renderer_off_when_user_left_it_unset() {
+        assert_eq!(dmabuf_disable_value(None), Some("1"));
+    }
+
+    #[test]
+    fn respects_an_explicit_user_dmabuf_choice() {
+        // User forcing it on (0) or off (1) must win — never clobbered.
+        assert_eq!(dmabuf_disable_value(Some("0".into())), None);
+        assert_eq!(dmabuf_disable_value(Some("1".into())), None);
     }
 
     #[test]

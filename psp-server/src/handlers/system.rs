@@ -60,8 +60,8 @@ pub struct OpenFolderData {
     pub folder_type: String,
 }
 
-/// `app_root` is the process working directory — the desktop shell sets cwd to
-/// a writable per-user dir at startup, which is where `backups/` is written.
+/// `app_root` is the writable base dir — the desktop shell exports `PSP_APP_ROOT`
+/// pointing at a per-user dir, which is where `backups/` is written.
 pub fn folder_path_for(folder_type: &str, app_root: &Path) -> Option<PathBuf> {
     match folder_type {
         "backups" => Some(app_root.join("backups")),
@@ -95,7 +95,7 @@ pub async fn handle_open_folder(
         // emit a frame a web client would never see the button for.
         return Ok(());
     }
-    let app_root = std::env::current_dir().map_err(psp_core::error::CoreError::Io)?;
+    let app_root = psp_core::paths::app_root();
     let resolved = folder_path_for(&data.folder_type, &app_root);
     match resolved {
         Some(folder_path) if folder_path.exists() => {

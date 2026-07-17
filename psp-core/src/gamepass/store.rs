@@ -58,11 +58,11 @@ pub fn find_container_dir_under(packages_root: &Path) -> Result<PathBuf, CoreErr
     ))
 }
 
-/// Cwd-relative `backups` dir; override with PSP_BACKUPS_ROOT.
+/// `backups` under the app root; override with PSP_BACKUPS_ROOT.
 pub fn backups_root() -> PathBuf {
     std::env::var("PSP_BACKUPS_ROOT")
         .map(PathBuf::from)
-        .unwrap_or_else(|_| PathBuf::from("backups"))
+        .unwrap_or_else(|_| crate::paths::app_root().join("backups"))
 }
 
 pub(crate) fn copy_dir_recursive(source: &Path, destination: &Path) -> Result<(), CoreError> {

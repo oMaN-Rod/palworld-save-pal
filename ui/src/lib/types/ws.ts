@@ -138,7 +138,8 @@ export enum MessageType {
 	DETECT_WORKSHOP_DIR = 'detect_workshop_dir',
 	LOAD_SERVER_SAVE = 'load_server_save',
 	GET_SERVER_STATS = 'get_server_stats',
-	SERVER_CREATION_PROGRESS = 'server_creation_progress'
+	SERVER_CREATION_PROGRESS = 'server_creation_progress',
+	IMPORT_SERVER = 'import_server'
 }
 
 interface UpdateSaveFileData {
