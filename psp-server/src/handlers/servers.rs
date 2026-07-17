@@ -2227,4 +2227,54 @@ mod tests {
         assert_eq!(messages[0]["type"], "error");
         assert_eq!(messages[0]["data"]["message"], "This server is already registered");
     }
+
+    #[tokio::test]
+    async fn import_reassigns_conflicting_ports_and_leaves_ini_untouched() {
+        let mut env = TestEnv::new().await;
+        // Occupy 9911 (game) and 9912 (rest) via an existing server.
+        let mut occupant = docker_new_server("occupant");
+        occupant.game_port = 9911;
+        occupant.query_port = 27015;
+        occupant.rest_api_port = 9912;
+        psp_db::servers::create_server(&env.app.db, occupant).await.unwrap();
+
+        let install_dir = env._scratch.path().join("Conflict");
+        let install = write_importable_install(
+            &install_dir,
+            "ServerName=\"Conflict\",PublicPort=9911,RESTAPIPort=9912,MyCustomKey=7",
+        );
+        let data = ImportServerData {
+            install_path: install.clone(),
+            name: String::new(),
+            query_port: Some(27015), // also conflicts with occupant's query port
+            launch_args: None,
+            workshop_dir: Some(String::new()),
+        };
+        let mut ctx = env.ctx();
+        handle_import_server(data, &mut ctx).await.unwrap();
+
+        let messages = env.drain();
+        let d = &messages.iter().find(|m| m["type"] == "import_server").unwrap()["data"];
+        assert_ne!(d["game_port"], 9911);
+        assert_ne!(d["rest_api_port"], 9912);
+        assert_ne!(d["query_port"], 27015);
+        let notes = d["notifications"].as_array().unwrap();
+        assert_eq!(notes.len(), 3);
+
+        // The ini on disk still holds the ORIGINAL ports (import wrote nothing).
+        let ini = std::fs::read_to_string(
+            install_dir.join("Pal").join("Saved").join("Config").join("WindowsServer").join("PalWorldSettings.ini"),
+        )
+        .unwrap();
+        assert!(ini.contains("PublicPort=9911"));
+        assert!(ini.contains("MyCustomKey=7"));
+    }
+
+    #[test]
+    fn reassign_import_ports_leaves_free_ports_unchanged() {
+        let allocated: std::collections::HashSet<u16> = [8211u16].into_iter().collect();
+        let ((game, query, rest), notes) = reassign_import_ports(9000, 9001, 9002, &allocated);
+        assert_eq!((game, query, rest), (9000, 9001, 9002));
+        assert!(notes.is_empty());
+    }
 }
