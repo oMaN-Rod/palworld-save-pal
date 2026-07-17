@@ -6,6 +6,7 @@
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { cn } from '$theme';
 	import {
+		fieldFor,
 		groupsForTab,
 		worldOptionTabs,
 		type WoTab,
@@ -56,17 +57,23 @@
 
 	function sameValue(a: WoValue, b: WoValue): boolean {
 		if (Array.isArray(a) && Array.isArray(b)) {
-			return a.length === b.length && a.every((item, i) => item === b[i]);
+			if (a.length !== b.length) return false;
+			const sortedA = [...a].sort();
+			const sortedB = [...b].sort();
+			return sortedA.every((item, i) => item === sortedB[i]);
 		}
 		return a === b;
 	}
 
-	// The patch IS the minimal diff: an edit back to the stored value drops out.
+	// The patch IS the minimal diff: an edit back to the stored value (or, for an
+	// absent key, back to the field default) drops out.
 	const patch = $derived.by(() =>
 		Object.entries(edited)
 			.filter(([key, value]) => {
 				const stored = present.get(key);
-				return stored === undefined || !sameValue(stored, value);
+				const baseline = stored !== undefined ? stored : fieldFor(key)?.default;
+				// If we can't resolve a baseline (unknown key), keep it rather than silently drop.
+				return baseline === undefined || !sameValue(baseline, value);
 			})
 			.map(([key, value]) => ({ key, value }))
 	);
