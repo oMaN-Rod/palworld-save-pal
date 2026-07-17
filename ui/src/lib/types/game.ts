@@ -288,7 +288,13 @@ export type GuildDTO = {
 
 export type SaveFileType = 'gamepass' | 'steam';
 
-export type SaveFile = { name: string; type: SaveFileType; world_name?: string; size?: number };
+export type SaveFile = {
+	name: string;
+	type: SaveFileType;
+	world_name?: string;
+	size?: number;
+	world_option_present: boolean;
+};
 export interface DynamicItem {
 	local_id: string;
 	static_id?: string;

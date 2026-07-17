@@ -139,7 +139,11 @@ export enum MessageType {
 	LOAD_SERVER_SAVE = 'load_server_save',
 	GET_SERVER_STATS = 'get_server_stats',
 	SERVER_CREATION_PROGRESS = 'server_creation_progress',
-	IMPORT_SERVER = 'import_server'
+	IMPORT_SERVER = 'import_server',
+
+	// World Options
+	GET_WORLD_OPTION = 'get_world_option',
+	UPDATE_WORLD_OPTION = 'update_world_option'
 }
 
 interface UpdateSaveFileData {
