@@ -209,11 +209,13 @@ fn mask_ignored_paths(message_type: &str, value: &mut Value) {
     }
     mask_ups_list_frames(message_type, value);
     mask_gps_response_frame(message_type, value);
-    // `session_id` post-dates the fixtures, so it is DROPPED rather than masked:
-    // a mask can't reconcile a key that is absent on the recorded side.
+    // `session_id` and `world_option_present` post-date the fixtures, so they are
+    // DROPPED rather than masked: a mask can't reconcile a key that is absent on
+    // the recorded side.
     if message_type == "loaded_save_files" {
         if let Some(data) = value.get_mut("data").and_then(Value::as_object_mut) {
             data.remove("session_id");
+            data.remove("world_option_present");
         }
     }
 }

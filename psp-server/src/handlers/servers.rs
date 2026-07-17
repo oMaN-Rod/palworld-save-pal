@@ -1256,6 +1256,7 @@ async fn load_server_save_impl(data: ServerIdData, ctx: &mut HandlerCtx<'_>) -> 
             "type": "steam",
             "size": session.size,
             "has_gps": has_gps,
+            "world_option_present": session.world_option.is_some(),
             "server_id": record.id,
             "server_name": record.name,
             "session_id": session_id.to_string(),

@@ -45,6 +45,8 @@ pub(crate) struct LoadedSaveFilesData {
     r#type: &'static str,
     size: u64,
     has_gps: bool,
+    /// The single fact the WorldOption button gates on, across all three platforms.
+    world_option_present: bool,
     /// The id the session was registered under, so the frontend can reattach
     /// after a refresh.
     session_id: String,
@@ -67,6 +69,7 @@ impl LoadedSaveFilesData {
             r#type: session.save_type_label,
             size: session.size,
             has_gps: session.gps_available(),
+            world_option_present: session.world_option.is_some(),
             session_id: session_id.to_string(),
         }
     }
@@ -359,6 +362,7 @@ pub async fn handle_select_save(
         r#type: "steam",
         size: session.size,
         has_gps: layout.global_pal_storage_sav.is_some(),
+        world_option_present: session.world_option.is_some(),
         session_id: session_id.to_string(),
     };
     ctx.emitter.emit(MessageType::LoadedSaveFiles, &payload);
@@ -618,6 +622,7 @@ pub async fn handle_load_zip_file(
         r#type: "steam",
         size: session.size,
         has_gps: gps_file_path.is_some(),
+        world_option_present: session.world_option.is_some(),
         session_id: session_id.to_string(),
     };
     ctx.emitter.emit(MessageType::LoadedSaveFiles, &payload);

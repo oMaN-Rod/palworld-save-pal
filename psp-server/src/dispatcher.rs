@@ -387,6 +387,11 @@ async fn route(
         MessageType::EjectSession => {
             handlers::session::handle_eject_session(serde_json::from_value(data)?, ctx).await
         }
+        MessageType::GetWorldOption => handlers::world_option::handle_get_world_option(ctx).await,
+        MessageType::UpdateWorldOption => {
+            handlers::world_option::handle_update_world_option(serde_json::from_value(data)?, ctx)
+                .await
+        }
         other => {
             tracing::warn!(
                 message_type = other.as_wire(),

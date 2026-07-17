@@ -15,6 +15,8 @@ struct SyncLoadedSaveFilesData {
     r#type: &'static str,
     size: u64,
     has_gps: bool,
+    /// The single fact the WorldOption button gates on, across all three platforms.
+    world_option_present: bool,
 }
 
 /// Frame order is the contract: `get_settings` first, then — only when a save
@@ -49,6 +51,7 @@ pub async fn handle_sync_app_state(ctx: &mut HandlerCtx<'_>) -> Result<(), Handl
         r#type: session.save_type_label,
         size: session.size,
         has_gps: session.gps_available(),
+        world_option_present: session.world_option.is_some(),
     };
     ctx.emitter.emit(MessageType::LoadedSaveFiles, &payload);
     emit_summary_messages(session, ctx.emitter);

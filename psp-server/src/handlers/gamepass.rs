@@ -340,6 +340,7 @@ pub async fn handle_select_gamepass_save(
         "type": "gamepass",
         "size": session.size,
         "has_gps": false,
+        "world_option_present": session.world_option.is_some(),
         "session_id": session_id.to_string(),
     });
     ctx.emitter
