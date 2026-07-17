@@ -712,3 +712,6 @@ mod tests {
         .unwrap());
     }
 }
+
+#[cfg(test)]
+mod world_option_corpus;
