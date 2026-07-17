@@ -130,41 +130,14 @@ pub fn scan_saves(container_dir: &Path) -> Result<OrderedMap<String, GamepassSav
 mod tests {
     use super::*;
     use crate::gamepass::fixture::{
-        build_wgs_tree, python_testdata_dir, SyntheticPlayer, SyntheticSave,
+        build_wgs_tree, reference_saves_dir, SyntheticPlayer, SyntheticSave,
     };
 
-    fn testdata_or_skip() -> Option<std::path::PathBuf> {
-        let dir = python_testdata_dir();
-        if dir.is_none() {
-            eprintln!("SKIP: python testdata not found (set PSP_PY_TESTDATA)");
-        }
-        dir
-    }
-
-    fn corpus_level_meta_path() -> std::path::PathBuf {
-        std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join(
-            "../backups/gamepass/000900000487F3B6_0000000000000000000000006B210A9C_20260325231642/4F64BAB699AE4B4A97A5862116E07C6D/LevelMeta.sav",
-        )
-    }
-
-    /// A real `LevelMeta.sav` to re-stamp in tests: the `PSP_PY_TESTDATA` fixture
-    /// if set, else the gamepass backup corpus, else `None` (skip the test).
-    fn base_level_meta_bytes_or_skip() -> Option<Vec<u8>> {
-        if let Some(testdata) = python_testdata_dir() {
-            if let Ok(bytes) = std::fs::read(testdata.join("LevelMeta.sav")) {
-                return Some(bytes);
-            }
-        }
-        let corpus = corpus_level_meta_path();
-        if corpus.exists() {
-            if let Ok(bytes) = std::fs::read(&corpus) {
-                return Some(bytes);
-            }
-        }
-        eprintln!(
-            "SKIP: no base LevelMeta.sav available (set PSP_PY_TESTDATA or provide gamepass corpus)"
-        );
-        None
+    /// A real, committed `LevelMeta.sav` (upstream PlZ reference corpus) to
+    /// re-stamp in tests. Always present, so the tests using it run on a clean
+    /// checkout rather than skipping.
+    fn base_level_meta_bytes() -> Vec<u8> {
+        std::fs::read(reference_saves_dir().join("LevelMeta.sav")).unwrap()
     }
 
     /// Adds a `container.<seq>` file list plus its blob to an existing blob dir,
@@ -189,10 +162,7 @@ mod tests {
 
     #[test]
     fn world_name_round_trips_through_level_meta() {
-        let Some(testdata) = testdata_or_skip() else {
-            return;
-        };
-        let meta_bytes = std::fs::read(testdata.join("LevelMeta.sav")).unwrap();
+        let meta_bytes = base_level_meta_bytes();
         let original_name = world_name_from_level_meta(&meta_bytes).unwrap();
         assert!(!original_name.is_empty());
 
@@ -203,10 +173,7 @@ mod tests {
 
     #[test]
     fn scan_saves_builds_gamepass_save_data() {
-        let Some(testdata) = testdata_or_skip() else {
-            return;
-        };
-        let meta_bytes = std::fs::read(testdata.join("LevelMeta.sav")).unwrap();
+        let meta_bytes = base_level_meta_bytes();
         let expected_world = world_name_from_level_meta(&meta_bytes).unwrap();
 
         let temp = tempfile::tempdir().unwrap();
@@ -263,9 +230,7 @@ mod tests {
     /// revision pick reads the stale seq-1 blob and yields "OLD" instead of "NEW".
     #[test]
     fn scan_saves_reads_numerically_latest_level_meta_revision_not_lexicographic() {
-        let Some(base_meta) = base_level_meta_bytes_or_skip() else {
-            return;
-        };
+        let base_meta = base_level_meta_bytes();
         let old_meta = set_world_name_in_level_meta(&base_meta, "OLD").unwrap();
         let new_meta = set_world_name_in_level_meta(&base_meta, "NEW").unwrap();
         assert_eq!(world_name_from_level_meta(&old_meta).unwrap(), "OLD");
@@ -297,25 +262,19 @@ mod tests {
         );
     }
 
-    /// Reads a real Xbox-produced `LevelMeta.sav` (PlM/Oodle) rather than a fixture.
-    /// Skipped, not failed, when the gamepass backup corpus isn't checked out.
+    /// Reads world name from a real PlM/Oodle-compressed `LevelMeta.sav` (the
+    /// committed world1 fixture), covering the Oodle decompression path that the
+    /// PlZ reference corpus does not exercise.
     #[test]
-    fn world_name_from_real_gamepass_level_meta_corpus_when_present() {
-        let level_meta_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join(
-            "../backups/gamepass/000900000487F3B6_0000000000000000000000006B210A9C_20260325231642/4F64BAB699AE4B4A97A5862116E07C6D/LevelMeta.sav",
-        );
-        if !level_meta_path.exists() {
-            eprintln!(
-                "skipping world_name_from_real_gamepass_level_meta_corpus_when_present: {} not found",
-                level_meta_path.display()
-            );
-            return;
-        }
+    fn world_name_from_oodle_level_meta() {
+        let level_meta_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../tests/fixtures/saves/world1/LevelMeta.sav");
         let meta_bytes = std::fs::read(&level_meta_path).unwrap();
+        assert_eq!(&meta_bytes[8..12], b"PlM1", "world1 LevelMeta is PlM/Oodle");
         let world_name = world_name_from_level_meta(&meta_bytes).unwrap();
         assert!(
             !world_name.is_empty(),
-            "expected a non-empty world name from the real gamepass LevelMeta.sav"
+            "expected a non-empty world name from the Oodle LevelMeta.sav"
         );
     }
 }

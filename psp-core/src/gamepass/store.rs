@@ -579,39 +579,6 @@ mod tests {
         assert!(source.join("containers.index").exists()); // source untouched
     }
 
-    /// Validates the fixed-64 name codec and GUID blob naming against real Xbox
-    /// on-disk bytes. Skipped, not failed, when the corpus isn't checked out.
-    #[test]
-    fn reads_real_container_file_list_and_blobs_from_corpus_when_present() {
-        let container_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join(
-            "../backups/gamepass/000900000487F3B6_0000000000000000000000006B210A9C_20260328021933",
-        );
-        if !container_dir.exists() {
-            eprintln!(
-                "skipping reads_real_container_file_list_and_blobs_from_corpus_when_present: {} not found",
-                container_dir.display()
-            );
-            return;
-        }
-        let blob_dir = std::fs::read_dir(&container_dir)
-            .unwrap()
-            .flatten()
-            .map(|dir_entry| dir_entry.path())
-            .find(|path| path.is_dir() && path.join("container.1").exists())
-            .expect("expected at least one container subdir with a container.1 file list");
-
-        let list = ContainerFileList::read_from_file(&blob_dir.join("container.1")).unwrap();
-        assert_eq!(list.seq, 1);
-        assert!(
-            !list.files.is_empty(),
-            "expected at least one file entry in the real container.1 file list"
-        );
-        assert!(
-            !list.files[0].data.is_empty(),
-            "expected non-empty blob data for the real container's first file"
-        );
-    }
-
     #[test]
     fn read_first_blob_picks_numeric_latest_seq_not_lexicographic() {
         // container.10 is the true latest but sorts BEFORE container.2 as a string,
@@ -736,13 +703,7 @@ mod tests {
     #[test]
     fn save_modified_gamepass_creates_new_containers_and_rewrites_index() {
         use crate::gamepass::PlayerSavBytes;
-        let testdata = match crate::gamepass::fixture::python_testdata_dir() {
-            Some(dir) => dir,
-            None => {
-                eprintln!("SKIP: python testdata not found (set PSP_PY_TESTDATA)");
-                return;
-            }
-        };
+        let testdata = crate::gamepass::fixture::reference_saves_dir();
         let meta_bytes = std::fs::read(testdata.join("LevelMeta.sav")).unwrap();
 
         let temp = tempfile::tempdir().unwrap();

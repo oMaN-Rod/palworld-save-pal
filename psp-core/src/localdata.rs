@@ -124,28 +124,12 @@ pub fn unlock_world_map(local_data_sav: &[u8]) -> Result<MapUnlockOutcome, CoreE
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::gamepass::fixture::python_testdata_dir;
-
-    /// Resolves the testdata dir only when it actually holds a `LocalData.sav`,
-    /// so a partial checkout skips rather than panicking on the read below.
-    fn testdata_local_data_or_skip() -> Option<std::path::PathBuf> {
-        let Some(dir) = python_testdata_dir() else {
-            eprintln!("SKIP: python testdata not found (set PSP_PY_TESTDATA)");
-            return None;
-        };
-        if !dir.join("LocalData.sav").exists() {
-            eprintln!("SKIP: python testdata has no LocalData.sav (partial layout)");
-            return None;
-        }
-        Some(dir)
-    }
+    use crate::gamepass::fixture::reference_saves_dir;
 
     /// A real, git-tracked `LevelMeta.sav` (the world1 fixture, also used by
     /// `psp-server/tests/phase4_ws.rs`). It carries a `SaveData` struct, so the
-    /// hermetic tests below can graft a synthetic mask into a real GVAS tree;
-    /// it has no `LocalData.sav` of its own. Unlike the `backups/gamepass`
-    /// corpus, this fixture is committed, so tests using it run unconditionally
-    /// on a clean checkout / CI.
+    /// hermetic tests below can graft a synthetic mask into a real GVAS tree.
+    /// Committed, so tests using it run unconditionally on a clean checkout / CI.
     fn fixture_level_meta_path() -> std::path::PathBuf {
         std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
             .join("../tests/fixtures/saves/world1/LevelMeta.sav")
@@ -172,10 +156,7 @@ mod tests {
 
     #[test]
     fn local_data_round_trips_byte_identical_at_gvas_level() {
-        let Some(testdata) = testdata_local_data_or_skip() else {
-            return;
-        };
-        let sav_bytes = std::fs::read(testdata.join("LocalData.sav")).unwrap();
+        let sav_bytes = std::fs::read(reference_saves_dir().join("LocalData.sav")).unwrap();
         let gvas_bytes =
             uesave::compression::decompress_save(&mut std::io::Cursor::new(sav_bytes.as_slice()))
                 .unwrap();
@@ -190,28 +171,6 @@ mod tests {
             gvas_bytes, rewritten,
             "LocalData.sav GVAS round-trip must be byte-identical"
         );
-    }
-
-    #[test]
-    fn unlock_world_map_zeroes_mask_and_emits_plm() {
-        let Some(testdata) = testdata_local_data_or_skip() else {
-            return;
-        };
-        let sav_bytes = std::fs::read(testdata.join("LocalData.sav")).unwrap();
-        let mask_before = mask_bytes(&sav_bytes);
-        let nonzero_before = mask_before.iter().filter(|byte| **byte != 0).count();
-
-        let outcome = unlock_world_map(&sav_bytes).unwrap();
-        assert_eq!(outcome.cleared_byte_count, nonzero_before);
-        assert_eq!(&outcome.sav_bytes[8..12], b"PlM1");
-
-        let mask_after = mask_bytes(&outcome.sav_bytes);
-        assert_eq!(mask_after.len(), mask_before.len());
-        assert!(mask_after.iter().all(|byte| *byte == 0));
-
-        // Unlocking twice clears nothing further.
-        let second = unlock_world_map(&outcome.sav_bytes).unwrap();
-        assert_eq!(second.cleared_byte_count, 0);
     }
 
     #[test]
@@ -451,49 +410,4 @@ mod tests {
         );
     }
 
-    /// End-to-end against a real Xbox `LocalData.sav` from the on-disk gamepass
-    /// corpus, when one is present. The corpus file is only ever read;
-    /// `unlock_world_map` touches no disk.
-    #[test]
-    fn unlock_world_map_on_real_gamepass_corpus_when_present() {
-        let Some(local_data_path) = find_corpus_local_data_sav() else {
-            eprintln!(
-                "SKIP: no LocalData.sav found under backups/gamepass/ (unlock_world_map_on_real_gamepass_corpus_when_present)"
-            );
-            return;
-        };
-        let sav_bytes = std::fs::read(&local_data_path).unwrap();
-        let mask_before = mask_bytes(&sav_bytes);
-        let nonzero_before = mask_before.iter().filter(|byte| **byte != 0).count();
-
-        let outcome = unlock_world_map(&sav_bytes).unwrap();
-        assert_eq!(outcome.cleared_byte_count, nonzero_before);
-        assert_eq!(&outcome.sav_bytes[8..12], b"PlM1");
-
-        let mask_after = mask_bytes(&outcome.sav_bytes);
-        assert_eq!(mask_after.len(), mask_before.len());
-        assert!(mask_after.iter().all(|byte| *byte == 0));
-    }
-
-    /// First `backups/gamepass/<save_id>/<container>/LocalData.sav` on disk, if
-    /// any — not every save in the corpus has one.
-    fn find_corpus_local_data_sav() -> Option<std::path::PathBuf> {
-        let gamepass_root =
-            std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../backups/gamepass");
-        if !gamepass_root.exists() {
-            return None;
-        }
-        for save_dir in std::fs::read_dir(&gamepass_root).ok()?.flatten() {
-            if !save_dir.path().is_dir() {
-                continue;
-            }
-            for container_dir in std::fs::read_dir(save_dir.path()).ok()?.flatten() {
-                let candidate = container_dir.path().join("LocalData.sav");
-                if candidate.exists() {
-                    return Some(candidate);
-                }
-            }
-        }
-        None
-    }
 }

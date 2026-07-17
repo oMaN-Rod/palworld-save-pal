@@ -99,18 +99,13 @@ pub fn build_wgs_tree(root: &Path, saves: &[SyntheticSave]) -> Result<PathBuf, C
     Ok(container_dir)
 }
 
-/// Directory of real PlZ/zlib saves (Level.sav, LevelMeta.sav, LocalData.sav,
-/// WorldOption.sav, 00000000000000000000000000000001.sav). Defaults to a sibling
-/// checkout of palworld-save-tools; override with PSP_PY_TESTDATA.
-pub fn python_testdata_dir() -> Option<PathBuf> {
-    let dir = std::env::var("PSP_PY_TESTDATA")
-        .map(PathBuf::from)
-        .unwrap_or_else(|_| PathBuf::from("../../palworld-save-tools/tests/testdata"));
-    if dir.join("Level.sav").exists() {
-        Some(dir)
-    } else {
-        None
-    }
+/// Committed directory of real PlZ/zlib reference saves (`Level.sav`,
+/// `LevelMeta.sav`, `LocalData.sav`, `00000000000000000000000000000001.sav`),
+/// copied from the upstream palworld-save-tools public test corpus. Replaces the
+/// former external sibling-checkout dependency, so the tests that read these
+/// bytes run unconditionally on a clean checkout instead of silently skipping.
+pub fn reference_saves_dir() -> PathBuf {
+    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../tests/fixtures/reference_saves")
 }
 
 #[cfg(test)]

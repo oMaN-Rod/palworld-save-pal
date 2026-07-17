@@ -28,17 +28,11 @@ pub fn json_to_sav_bytes(json_bytes: &[u8]) -> Result<Vec<u8>, CoreError> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::gamepass::fixture::python_testdata_dir;
+    use crate::gamepass::fixture::reference_saves_dir;
 
     #[test]
     fn sav_json_sav_round_trip_preserves_gvas_bytes() {
-        let testdata = match python_testdata_dir() {
-            Some(dir) => dir,
-            None => {
-                eprintln!("SKIP: python testdata not found (set PSP_PY_TESTDATA)");
-                return;
-            }
-        };
+        let testdata = reference_saves_dir();
         let sav_bytes =
             std::fs::read(testdata.join("00000000000000000000000000000001.sav")).unwrap();
 
@@ -65,16 +59,10 @@ mod tests {
     }
 
     #[test]
-    fn corpus_level_meta_round_trip() {
-        let corpus_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join(
-            "../backups/gamepass/000900000487F3B6_0000000000000000000000006B210A9C_20260325231642/4F64BAB699AE4B4A97A5862116E07C6D/LevelMeta.sav",
-        );
-        if !corpus_path.exists() {
-            eprintln!("SKIP: corpus LevelMeta.sav not found at {corpus_path:?}");
-            return;
-        }
-
-        let sav_bytes = std::fs::read(&corpus_path).unwrap();
+    fn level_meta_round_trip_preserves_gvas_bytes() {
+        let sav_bytes =
+            std::fs::read(crate::gamepass::fixture::reference_saves_dir().join("LevelMeta.sav"))
+                .unwrap();
 
         let json = sav_to_json_string(&sav_bytes).unwrap();
         assert!(json.starts_with('{'), "JSON should start with '{{");
