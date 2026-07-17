@@ -1333,6 +1333,30 @@ pub(crate) mod test_env {
             }
         }
 
+        /// Like `new()`, but with `desktop_mode: true` and a `QueuedDialogProvider`
+        /// that returns `folders` in order for folder-picker calls.
+        pub(crate) async fn new_desktop_with_folders(
+            folders: Vec<Option<std::path::PathBuf>>,
+        ) -> Self {
+            let mut env = Self::new().await;
+            let mut config = env.app.config.clone();
+            config.desktop_mode = true;
+            let (live_connections, _live_connections_rx) = tokio::sync::watch::channel(0usize);
+            let app = std::sync::Arc::new(AppState {
+                config,
+                game_data: env.app.game_data.clone(),
+                db: env.app.db.clone(),
+                dialogs: Arc::new(crate::desktop_dialogs::QueuedDialogProvider::new_with_folders(
+                    folders,
+                )),
+                live_connections,
+                server_services: env.app.server_services.clone(),
+                sessions: std::sync::Mutex::new(crate::SessionStore::default()),
+            });
+            env.app = app;
+            env
+        }
+
         pub(crate) fn ctx(&mut self) -> crate::dispatcher::HandlerCtx<'_> {
             crate::dispatcher::HandlerCtx {
                 session: &mut self.session,
@@ -2268,6 +2292,33 @@ mod tests {
         .unwrap();
         assert!(ini.contains("PublicPort=9911"));
         assert!(ini.contains("MyCustomKey=7"));
+    }
+
+    #[tokio::test]
+    async fn import_resolves_select_sentinel_via_folder_dialog() {
+        let scratch = tempfile::tempdir().unwrap();
+        let install_dir = scratch.path().join("Picked");
+        let install = write_importable_install(
+            &install_dir,
+            "ServerName=\"Picked\",PublicPort=9931,RESTAPIPort=9932",
+        );
+
+        let mut env = TestEnv::new_desktop_with_folders(vec![Some(install_dir.clone())]).await;
+        let data = ImportServerData {
+            install_path: "__select__".to_string(),
+            name: "Chosen Name".to_string(),
+            query_port: None,
+            launch_args: None,
+            workshop_dir: Some(String::new()),
+        };
+        let mut ctx = env.ctx();
+        handle_import_server(data, &mut ctx).await.unwrap();
+
+        let messages = env.drain();
+        let d = &messages.iter().find(|m| m["type"] == "import_server").unwrap()["data"];
+        assert_eq!(d["install_path"], install);
+        assert_eq!(d["name"], "Chosen Name");
+        assert_eq!(d["game_port"], 9931);
     }
 
     #[test]
