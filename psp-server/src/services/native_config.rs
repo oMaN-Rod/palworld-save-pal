@@ -504,11 +504,14 @@ fn upsert(defaults: &mut Vec<(String, String)>, key: &str, value: String) {
     }
 }
 
-/// Precedence: shipped defaults, then mapped `env_vars`, then the explicit server
-/// fields, which always win.
+/// Precedence: active ini, else shipped defaults, else hardcoded defaults; then
+/// mapped `env_vars`, then the explicit server fields, which always win.
 pub fn build_palworld_settings_content(record: &ServerRecord) -> String {
-    let default_ini_path = Path::new(&record.install_path).join("DefaultPalWorldSettings.ini");
-    let mut settings = parse_default_settings(&default_ini_path);
+    let active_ini = config_dir(&record.install_path).join("PalWorldSettings.ini");
+    let default_ini = Path::new(&record.install_path).join("DefaultPalWorldSettings.ini");
+    let mut settings = parse_option_settings_ini(&active_ini)
+        .or_else(|| parse_option_settings_ini(&default_ini))
+        .unwrap_or_else(hardcoded_defaults);
 
     for (env_key, env_value) in record.env_vars.0.iter() {
         if is_docker_only_key(env_key) {
@@ -825,6 +828,27 @@ mod tests {
         assert!(content.contains("RESTAPIPort=8312"));
         assert!(content.contains("ServerPassword=\"guest\""));
         assert!(!content.contains("UpdateOnBoot"));
+    }
+
+    #[test]
+    fn build_content_preserves_unknown_keys_from_active_ini() {
+        let scratch = tempfile::tempdir().unwrap();
+        let install = scratch.path().to_string_lossy().to_string();
+        // Active ini contains a key PSP does not map.
+        let cfg = config_dir(&install);
+        std::fs::create_dir_all(&cfg).unwrap();
+        std::fs::write(
+            cfg.join("PalWorldSettings.ini"),
+            "[/Script/Pal.PalGameWorldSettings]\nOptionSettings=(ServerName=\"Old\",ExpRate=1.000000,MyCustomKey=42)\n",
+        )
+        .unwrap();
+
+        let record = native_record(&install); // existing test helper in this module
+        let content = build_palworld_settings_content(&record);
+        // Unmapped key survives...
+        assert!(content.contains("MyCustomKey=42"));
+        // ...while PSP-owned explicit fields still override.
+        assert!(content.contains("ServerName=\"My Native Server\""));
     }
 
     #[test]
