@@ -159,12 +159,10 @@ fn every_fixture_guild_loads_without_panicking() {
     assert_eq!(guild_count, 3, "world1 has 2 guilds, world2 has 1");
 }
 
-/// The same sweep against the private corpus, when `PSP_TEST_SAVE_DIR` is set.
+/// The same sweep against the committed `v1_relics` corpus fixture.
 #[test]
 fn every_corpus_guild_loads_without_panicking() {
-    let Some(mut session) = common::load_corpus_session() else {
-        return;
-    };
+    let mut session = common::load_corpus_session();
     let data = game_data();
     let guild_ids: Vec<Uuid> = session.guild_summaries.keys().copied().collect();
     assert!(!guild_ids.is_empty());

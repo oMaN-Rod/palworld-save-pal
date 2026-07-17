@@ -579,9 +579,7 @@ fn update_guilds_full_round_trip_bases_and_chest() {
 
 #[test]
 fn update_pals_across_the_whole_corpus_never_panics() {
-    let Some(mut session) = common::load_corpus_session() else {
-        return;
-    };
+    let mut session = common::load_corpus_session();
     let data = game_data();
     let Some(&player_id) = session.player_summaries.keys().next() else {
         return;

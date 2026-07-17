@@ -815,13 +815,11 @@ fn delete_item_containers_cascades_its_dynamic_item_and_invalidates_both_indexes
 }
 
 /// The same cross-entity property the synthetic two-player guild proves,
-/// spot-checked against whatever real save `PSP_TEST_SAVE_DIR` names: deleting
+/// spot-checked against the committed `v1_relics` corpus fixture: deleting
 /// a non-admin player leaves every other player's entry untouched.
 #[test]
 fn delete_non_admin_player_round_trips_against_an_optional_real_corpus_save() {
-    let Some(mut session) = common::load_corpus_session() else {
-        return;
-    };
+    let mut session = common::load_corpus_session();
     let data = game_data();
     let player_ids: Vec<Uuid> = session.player_summaries.keys().copied().collect();
 

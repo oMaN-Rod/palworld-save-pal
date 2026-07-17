@@ -1399,9 +1399,7 @@ fn dps_ops_gracefully_return_none_when_the_player_has_no_dps_file() {
 
 #[test]
 fn add_and_delete_player_pal_round_trips_across_the_whole_corpus() {
-    let Some(mut session) = common::load_corpus_session() else {
-        return;
-    };
+    let mut session = common::load_corpus_session();
     let data = game_data();
     let Some(&player_id) = session.player_summaries.keys().next() else {
         return;

@@ -730,15 +730,13 @@ mod tests {
         assert!(session.gps_sav_bytes().unwrap().is_none());
     }
 
-    /// Set PSP_TEST_GPS_SAV to a real `GlobalPalStorage.sav` to exercise the
-    /// actual parse/compression path; skips cleanly otherwise.
+    /// Exercises the actual parse/compression path against the committed
+    /// `GlobalPalStorage.sav` fixture. Never skips.
     #[test]
     fn gps_load_add_clone_delete_round_trips_against_a_real_file() {
-        let Some(gps_path) = std::env::var_os("PSP_TEST_GPS_SAV") else {
-            eprintln!("PSP_TEST_GPS_SAV not set, skipping");
-            return;
-        };
-        let gps_bytes = std::fs::read(gps_path).expect("fixture readable");
+        let gps_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../tests/fixtures/saves/GlobalPalStorage.sav");
+        let gps_bytes = std::fs::read(gps_path).expect("read committed GlobalPalStorage.sav fixture");
         let data = game_data();
         let level = minimal_save(Properties::default());
         let mut session = SaveSession::new_for_tests(SaveKind::InMemory, level);

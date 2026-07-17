@@ -656,12 +656,10 @@ fn container_mutation_never_moves_any_containers_index_position() {
 
 /// The same mutate/reread shape as
 /// `apply_dto_round_trips_through_reader_on_a_real_pal`, but across every pal
-/// in whatever save `PSP_TEST_SAVE_DIR` names rather than one fixture pal.
+/// in the committed `v1_relics` corpus fixture rather than one fixture pal.
 #[test]
 fn apply_dto_round_trips_through_reader_across_the_whole_corpus() {
-    let Some(mut session) = common::load_corpus_session() else {
-        return;
-    };
+    let mut session = common::load_corpus_session();
     let data = game_data();
     pal::ensure_pal_property_schemas(&mut session.level);
 

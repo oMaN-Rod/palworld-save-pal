@@ -254,12 +254,10 @@ fn player_details_second_player_real_field_values() {
     assert_eq!(details.technologies.len(), 7);
 }
 
-/// Broad but shallow coverage of whatever save `PSP_TEST_SAVE_DIR` names.
+/// Broad but shallow coverage of the committed `v1_relics` corpus fixture.
 #[test]
 fn every_corpus_player_loads_without_panicking() {
-    let Some(mut session) = common::load_corpus_session() else {
-        return;
-    };
+    let mut session = common::load_corpus_session();
     let data = game_data();
     let player_ids: Vec<Uuid> = session.player_summaries.keys().copied().collect();
     assert!(!player_ids.is_empty());

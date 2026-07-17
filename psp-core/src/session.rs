@@ -665,16 +665,12 @@ mod load_tests {
     use super::*;
     use crate::progress::null_progress;
 
-    /// Full integration test against a real Steam save directory.
-    /// Set PSP_TEST_SAVE_DIR to a directory containing Level.sav,
-    /// LevelMeta.sav and Players/. Skipped when unset.
+    /// Full integration test against the committed `v1_relics` Steam save
+    /// fixture (Level.sav, LevelMeta.sav and Players/). Never skips.
     #[test]
     fn test_load_real_steam_save() {
-        let Some(save_dir) = std::env::var_os("PSP_TEST_SAVE_DIR") else {
-            eprintln!("PSP_TEST_SAVE_DIR not set, skipping");
-            return;
-        };
-        let save_dir = std::path::PathBuf::from(save_dir);
+        let save_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../tests/fixtures/saves/v1_relics");
         let level_sav_bytes = std::fs::read(save_dir.join("Level.sav")).unwrap();
         let level_meta_bytes = std::fs::read(save_dir.join("LevelMeta.sav")).ok();
 

@@ -90,9 +90,7 @@ fn session_with_character_map_entries(entries: Vec<MapEntry>) -> SaveSession {
 
 #[test]
 fn every_corpus_pal_reads_into_a_dto() {
-    let Some(session) = common::load_corpus_session() else {
-        return;
-    };
+    let session = common::load_corpus_session();
     let data = game_data();
     let entries = world::character_map(&session.level).unwrap();
     let mut pal_count = 0;
@@ -114,9 +112,7 @@ fn every_corpus_pal_reads_into_a_dto() {
 
 #[test]
 fn pal_summaries_match_python_defaults() {
-    let Some(session) = common::load_corpus_session() else {
-        return;
-    };
+    let session = common::load_corpus_session();
     let data = game_data();
     let summaries = pal::pal_summaries(&session, &data).unwrap();
     let entries = world::character_map(&session.level).unwrap();

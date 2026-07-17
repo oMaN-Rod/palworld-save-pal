@@ -369,30 +369,13 @@ async fn test_no_file_selected_produces_no_response() {
     server.shutdown().await;
 }
 
-/// Skip notice for the `PSP_TEST_SAVE_DIR`-gated tests, which PASS when the
-/// fixture dir is unset. The test harness swallows `eprintln!` on a passing
-/// test unless `--nocapture` is given; writing straight to `std::io::stderr()`
-/// bypasses that capture hook, so the notice shows up in a plain `cargo test`.
-fn print_save_dir_skip_notice(test_name: &str) {
-    use std::io::Write;
-    let _ = writeln!(
-        std::io::stderr(),
-        "SKIPPED: {test_name} -- PSP_TEST_SAVE_DIR is not set, so the \
-         load-path frame-ORDER assertions in this test did not run. Set \
-         PSP_TEST_SAVE_DIR to a real Steam save directory (Level.sav + \
-         Players/) to exercise them."
-    );
-}
-
-/// Full flow against a real save. Set PSP_TEST_SAVE_DIR to a Steam save
-/// directory (contains Level.sav + Players/). Skipped when unset.
+/// Full flow against the committed `v1_relics` Steam save fixture (Level.sav +
+/// Players/). Never skips.
 #[tokio::test]
 async fn test_select_save_full_emission_order() {
-    let Some(save_dir) = std::env::var_os("PSP_TEST_SAVE_DIR") else {
-        print_save_dir_skip_notice("test_select_save_full_emission_order");
-        return;
-    };
-    let level_sav_path = std::path::Path::new(&save_dir).join("Level.sav");
+    let save_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../tests/fixtures/saves/v1_relics");
+    let level_sav_path = save_dir.join("Level.sav");
 
     let (server, _scratch) = start_test_server().await;
     let mut socket = connect(server.addr).await;
@@ -457,15 +440,12 @@ async fn test_select_save_full_emission_order() {
     server.shutdown().await;
 }
 
-/// Full flow for load_zip_file against a real save, zipped up on the fly.
-/// Skipped when PSP_TEST_SAVE_DIR is unset, same as the select_save version.
+/// Full flow for load_zip_file against the committed `v1_relics` save fixture,
+/// zipped up on the fly. Never skips.
 #[tokio::test]
 async fn test_load_zip_file_full_emission_order() {
-    let Some(save_dir) = std::env::var_os("PSP_TEST_SAVE_DIR") else {
-        print_save_dir_skip_notice("test_load_zip_file_full_emission_order");
-        return;
-    };
-    let save_dir = std::path::PathBuf::from(save_dir);
+    let save_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../tests/fixtures/saves/v1_relics");
     let level_sav = std::fs::read(save_dir.join("Level.sav")).unwrap();
     let mut entries: Vec<(String, Vec<u8>)> = vec![("Level.sav".to_string(), level_sav)];
     let players_dir = save_dir.join("Players");
@@ -481,7 +461,7 @@ async fn test_load_zip_file_full_emission_order() {
             has_player = true;
         }
     }
-    assert!(has_player, "PSP_TEST_SAVE_DIR must contain a player .sav");
+    assert!(has_player, "v1_relics fixture must contain a player .sav");
 
     let entry_refs: Vec<(&str, &[u8])> = entries
         .iter()
