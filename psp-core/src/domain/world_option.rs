@@ -12,6 +12,8 @@
 
 use uesave::{PropertyTagDataPartial, PropertyTagPartial, PropertyType};
 
+use crate::error::CoreError;
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum WoKind {
     Bool,
@@ -209,8 +211,6 @@ fn settings_properties(save: &uesave::Save) -> Option<&uesave::Properties> {
         .and_then(crate::props::struct_props)
 }
 
-// Consumer (`apply_patch`) lands in the next commit; drop this attribute then.
-#[allow(dead_code)]
 fn settings_properties_mut(save: &mut uesave::Save) -> Option<&mut uesave::Properties> {
     crate::props::get_mut(&mut save.root.properties, &[OPTION_WORLD_DATA, SETTINGS])
         .and_then(crate::props::struct_props_mut)
@@ -257,6 +257,108 @@ pub fn read_version(save: &uesave::Save) -> i32 {
     crate::props::get(&save.root.properties, &["Version"])
         .and_then(crate::props::as_i32)
         .unwrap_or_default()
+}
+
+#[derive(Debug, Clone)]
+pub struct WorldOptionPatch {
+    pub key: String,
+    pub value: serde_json::Value,
+}
+
+fn kind_error(key: &str, expected: &str) -> CoreError {
+    CoreError::Parse(format!(
+        "WorldOption setting '{key}' expects {expected}"
+    ))
+}
+
+/// Decodes wire JSON into a `Property` per the table. Rejects anything the table
+/// disagrees with, so a malformed client patch can never write a wrong-typed
+/// property into a real save.
+fn decode_value(key: &str, kind: WoKind, value: &serde_json::Value) -> Result<uesave::Property, CoreError> {
+    Ok(match kind {
+        WoKind::Bool => crate::props::bool_property(
+            value.as_bool().ok_or_else(|| kind_error(key, "a boolean"))?,
+        ),
+        WoKind::Int => crate::props::int_property(
+            value
+                .as_i64()
+                .and_then(|n| i32::try_from(n).ok())
+                .ok_or_else(|| kind_error(key, "a 32-bit integer"))?,
+        ),
+        WoKind::Float => crate::props::float_property(
+            value.as_f64().ok_or_else(|| kind_error(key, "a number"))? as f32,
+        ),
+        WoKind::Str => crate::props::str_property(
+            value.as_str().ok_or_else(|| kind_error(key, "a string"))?,
+        ),
+        WoKind::Name => crate::props::name_property(
+            value.as_str().ok_or_else(|| kind_error(key, "a string"))?,
+        ),
+        WoKind::Enum(enum_name) => {
+            let text = value.as_str().ok_or_else(|| kind_error(key, "a string"))?;
+            // Fully-qualified only: a bare "Custom" would write a value the game
+            // cannot read back.
+            if !text.starts_with(&format!("{enum_name}::")) {
+                return Err(kind_error(key, &format!("a fully-qualified {enum_name}:: variant")));
+            }
+            crate::props::enum_property(text)
+        }
+        WoKind::EnumArray => crate::props::enum_array_property(decode_string_array(key, value)?),
+        WoKind::NameArray => crate::props::name_array_property(decode_string_array(key, value)?),
+    })
+}
+
+fn decode_string_array(key: &str, value: &serde_json::Value) -> Result<Vec<String>, CoreError> {
+    value
+        .as_array()
+        .ok_or_else(|| kind_error(key, "an array of strings"))?
+        .iter()
+        .map(|item| {
+            item.as_str()
+                .map(str::to_string)
+                .ok_or_else(|| kind_error(key, "an array of strings"))
+        })
+        .collect()
+}
+
+/// Applies only the keys in `patch` -- the patch IS the minimal diff. Returns
+/// whether anything actually changed; the caller uses that as its dirty flag, so a
+/// no-op patch never triggers a rewrite of the user's file.
+///
+/// Adding a key the source file omitted is safe because `ensure_world_option_schemas`
+/// primed every schema at parse.
+pub fn apply_patch(save: &mut uesave::Save, patch: &[WorldOptionPatch]) -> Result<bool, CoreError> {
+    if patch.is_empty() {
+        return Ok(false);
+    }
+
+    // Decode everything before mutating, so a rejected entry leaves the save untouched.
+    let mut decoded: Vec<(&str, uesave::Property)> = Vec::with_capacity(patch.len());
+    for entry in patch {
+        let kind = kind_for(&entry.key).ok_or_else(|| {
+            CoreError::Parse(format!("Unknown WorldOption setting '{}'", entry.key))
+        })?;
+        decoded.push((entry.key.as_str(), decode_value(&entry.key, kind, &entry.value)?));
+    }
+
+    let properties = settings_properties_mut(save)
+        .ok_or_else(|| CoreError::Parse("WorldOption OptionWorldData.Settings missing".into()))?;
+
+    let mut dirty = false;
+    for (key, property) in decoded {
+        let unchanged = properties
+            .0
+            .get(&uesave::PropertyKey::from(key))
+            .is_some_and(|existing| *existing == property);
+        if unchanged {
+            continue;
+        }
+        // IndexMap::insert replaces in place for a present key (preserving GVAS
+        // order) and appends for a new one.
+        properties.insert(key, property);
+        dirty = true;
+    }
+    Ok(dirty)
 }
 
 #[cfg(test)]
@@ -460,5 +562,106 @@ mod tests {
     fn read_version_reads_the_root_version_property() {
         let save = settings_save(vec![]);
         assert_eq!(read_version(&save), 101);
+    }
+
+    fn patch(key: &str, value: serde_json::Value) -> WorldOptionPatch {
+        WorldOptionPatch { key: key.to_string(), value }
+    }
+
+    #[test]
+    fn apply_patch_updates_a_present_key_in_place_without_reordering() {
+        let mut save = settings_save(vec![
+            ("ExpRate", crate::props::float_property(1.0)),
+            ("bIsPvP", crate::props::bool_property(false)),
+        ]);
+
+        let dirty = apply_patch(&mut save, &[patch("ExpRate", serde_json::json!(5.0))]).unwrap();
+
+        assert!(dirty);
+        let entries = read_settings(&save);
+        assert_eq!(entries.len(), 2);
+        assert_eq!(entries[0].key, "ExpRate", "position must be preserved");
+        assert_eq!(entries[0].value, serde_json::json!(5.0));
+        assert_eq!(entries[1].key, "bIsPvP");
+    }
+
+    #[test]
+    fn apply_patch_adds_an_absent_key() {
+        let mut save = settings_save(vec![("ExpRate", crate::props::float_property(1.0))]);
+
+        let dirty = apply_patch(&mut save, &[patch("bEnableVoiceChat", serde_json::json!(true))]).unwrap();
+
+        assert!(dirty);
+        let entries = read_settings(&save);
+        assert_eq!(entries.len(), 2, "absent key must be added, not ignored");
+        assert_eq!(entries[1].key, "bEnableVoiceChat");
+        assert_eq!(entries[1].value, serde_json::json!(true));
+    }
+
+    #[test]
+    fn apply_empty_patch_is_not_dirty() {
+        let mut save = settings_save(vec![("ExpRate", crate::props::float_property(1.0))]);
+        assert!(!apply_patch(&mut save, &[]).unwrap());
+    }
+
+    #[test]
+    fn apply_patch_writing_an_identical_value_is_not_dirty() {
+        let mut save = settings_save(vec![("ExpRate", crate::props::float_property(1.0))]);
+        // A no-op edit must not trigger a rewrite of the user's file.
+        assert!(!apply_patch(&mut save, &[patch("ExpRate", serde_json::json!(1.0))]).unwrap());
+    }
+
+    #[test]
+    fn apply_patch_rejects_unknown_key() {
+        let mut save = settings_save(vec![]);
+        let error = apply_patch(&mut save, &[patch("NoSuchSetting", serde_json::json!(1))]).unwrap_err();
+        assert!(format!("{error}").contains("NoSuchSetting"));
+    }
+
+    #[test]
+    fn apply_patch_rejects_value_of_wrong_kind() {
+        let mut save = settings_save(vec![("ExpRate", crate::props::float_property(1.0))]);
+        let error = apply_patch(&mut save, &[patch("ExpRate", serde_json::json!("nope"))]).unwrap_err();
+        assert!(format!("{error}").contains("ExpRate"));
+    }
+
+    #[test]
+    fn apply_patch_rejects_bare_enum_variant() {
+        let mut save = settings_save(vec![]);
+        // Enum values must be fully qualified in both directions.
+        let error = apply_patch(&mut save, &[patch("Difficulty", serde_json::json!("Custom"))]).unwrap_err();
+        assert!(format!("{error}").contains("Difficulty"));
+    }
+
+    #[test]
+    fn apply_patch_accepts_fully_qualified_enum_variant() {
+        let mut save = settings_save(vec![]);
+        let dirty = apply_patch(
+            &mut save,
+            &[patch("Difficulty", serde_json::json!("EPalOptionWorldDifficulty::Custom"))],
+        )
+        .unwrap();
+        assert!(dirty);
+        assert_eq!(
+            read_settings(&save)[0].value,
+            serde_json::json!("EPalOptionWorldDifficulty::Custom")
+        );
+    }
+
+    #[test]
+    fn apply_patch_round_trips_arrays() {
+        let mut save = settings_save(vec![]);
+        apply_patch(
+            &mut save,
+            &[
+                patch("CrossplayPlatforms", serde_json::json!(["EPalAllowConnectPlatform::Steam"])),
+                patch("DenyTechnologyList", serde_json::json!(["AIcore", "Accessory_AirDash1"])),
+            ],
+        )
+        .unwrap();
+
+        let entries = read_settings(&save);
+        assert_eq!(entries[0].value, serde_json::json!(["EPalAllowConnectPlatform::Steam"]));
+        assert_eq!(entries[1].value, serde_json::json!(["AIcore", "Accessory_AirDash1"]));
     }
 }
