@@ -209,6 +209,8 @@ fn settings_properties(save: &uesave::Save) -> Option<&uesave::Properties> {
         .and_then(crate::props::struct_props)
 }
 
+// Consumer (`apply_patch`) lands in the next commit; drop this attribute then.
+#[allow(dead_code)]
 fn settings_properties_mut(save: &mut uesave::Save) -> Option<&mut uesave::Properties> {
     crate::props::get_mut(&mut save.root.properties, &[OPTION_WORLD_DATA, SETTINGS])
         .and_then(crate::props::struct_props_mut)
