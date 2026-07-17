@@ -664,4 +664,51 @@ mod tests {
         assert_eq!(entries[0].value, serde_json::json!(["EPalAllowConnectPlatform::Steam"]));
         assert_eq!(entries[1].value, serde_json::json!(["AIcore", "Accessory_AirDash1"]));
     }
+
+    #[test]
+    fn apply_patch_rejects_mixed_patch_without_mutating_anything() {
+        // Test with VALID entry first, then INVALID entry
+        let mut save = settings_save(vec![("ExpRate", crate::props::float_property(1.0))]);
+        let error = apply_patch(
+            &mut save,
+            &[
+                patch("ExpRate", serde_json::json!(9.0)),
+                patch("NoSuchSetting", serde_json::json!(1)),
+            ],
+        )
+        .unwrap_err();
+        assert!(format!("{error}").contains("NoSuchSetting"));
+        // Verify the valid entry was NOT applied because we decode-then-mutate
+        let entries = read_settings(&save);
+        assert_eq!(entries[0].value, serde_json::json!(1.0), "ExpRate must not be mutated when patch is rejected");
+
+        // Test with INVALID entry first, then VALID entry
+        let mut save = settings_save(vec![("ExpRate", crate::props::float_property(1.0))]);
+        let error = apply_patch(
+            &mut save,
+            &[
+                patch("NoSuchSetting", serde_json::json!(1)),
+                patch("ExpRate", serde_json::json!(9.0)),
+            ],
+        )
+        .unwrap_err();
+        assert!(format!("{error}").contains("NoSuchSetting"));
+        // Verify the valid entry was NOT applied even though it comes second
+        let entries = read_settings(&save);
+        assert_eq!(entries[0].value, serde_json::json!(1.0), "ExpRate must not be mutated when patch is rejected");
+    }
+
+    #[test]
+    fn apply_patch_writing_an_identical_enum_value_is_not_dirty() {
+        let mut save = settings_save(vec![(
+            "Difficulty",
+            crate::props::enum_property("EPalOptionWorldDifficulty::Custom"),
+        )]);
+        // A no-op edit on an enum must not trigger a rewrite of the user's file.
+        assert!(!apply_patch(
+            &mut save,
+            &[patch("Difficulty", serde_json::json!("EPalOptionWorldDifficulty::Custom"))]
+        )
+        .unwrap());
+    }
 }
