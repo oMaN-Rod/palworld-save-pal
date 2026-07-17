@@ -1,7 +1,10 @@
 //! Round-trip and drift guards over the real WorldOption corpus.
 //!
-//! The corpus spans 87..=119-key files: real saves are SPARSE, and `Version` (always
-//! 101) does not discriminate. Skips when the python testdata checkout is absent.
+//! The corpus is 7 committed fixtures under `tests/fixtures/world_option/`, copied
+//! from real saves. It spans 89..=119 keys (observed counts: 89, 108, 119, 119, 119,
+//! 119, 119): real saves are SPARSE, and `Version` (always 101) does not discriminate.
+//! Real saves in the wild have been seen as low as 87 keys, though no fixture here
+//! goes that low.
 
 use std::collections::BTreeMap;
 use std::path::PathBuf;
@@ -11,24 +14,29 @@ use super::{
     tag_for, WoKind, WorldOptionPatch, WORLD_OPTION_SETTINGS,
 };
 
-/// Every `<dir>/WorldOption.sav` under the python testdata tree.
+/// The 7 committed `tests/fixtures/world_option/*.sav` fixtures, sorted.
+///
+/// Panics if the fixture directory is missing or does not contain exactly 7 `.sav`
+/// files, so a broken checkout fails loudly instead of silently skipping tests.
 fn corpus() -> Vec<PathBuf> {
-    let Some(base) = crate::gamepass::fixture::python_testdata_dir() else {
-        return Vec::new();
-    };
-    let Some(parent) = base.parent() else {
-        return Vec::new();
-    };
-    let mut found = Vec::new();
-    if let Ok(entries) = std::fs::read_dir(parent) {
-        for entry in entries.flatten() {
-            let candidate = entry.path().join("WorldOption.sav");
-            if candidate.exists() {
-                found.push(candidate);
-            }
-        }
-    }
+    let dir =
+        std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../tests/fixtures/world_option");
+
+    let mut found: Vec<PathBuf> = std::fs::read_dir(&dir)
+        .unwrap_or_else(|e| panic!("WorldOption fixture dir missing: {dir:?}: {e}"))
+        .flatten()
+        .map(|entry| entry.path())
+        .filter(|path| path.extension().is_some_and(|ext| ext == "sav"))
+        .collect();
     found.sort();
+
+    assert_eq!(
+        found.len(),
+        7,
+        "expected exactly 7 WorldOption fixtures in {dir:?}, found {}: {found:?}",
+        found.len()
+    );
+
     found
 }
 
@@ -39,10 +47,6 @@ fn decompress(bytes: &[u8]) -> Vec<u8> {
 #[test]
 fn empty_patch_round_trip_preserves_gvas_payload_byte_for_byte() {
     let files = corpus();
-    if files.is_empty() {
-        eprintln!("SKIP: python testdata not found (set PSP_PY_TESTDATA)");
-        return;
-    }
 
     for path in &files {
         let original_bytes = std::fs::read(path).unwrap();
@@ -67,10 +71,6 @@ fn empty_patch_round_trip_preserves_gvas_payload_byte_for_byte() {
 #[test]
 fn corpus_spans_sparse_and_full_saves() {
     let files = corpus();
-    if files.is_empty() {
-        eprintln!("SKIP: python testdata not found (set PSP_PY_TESTDATA)");
-        return;
-    }
 
     let mut counts: Vec<usize> = files
         .iter()
@@ -93,10 +93,6 @@ fn corpus_spans_sparse_and_full_saves() {
 #[test]
 fn world_option_table_matches_corpus() {
     let files = corpus();
-    if files.is_empty() {
-        eprintln!("SKIP: python testdata not found (set PSP_PY_TESTDATA)");
-        return;
-    }
 
     // path suffix -> serialized tag, unioned across the corpus.
     let mut recorded: BTreeMap<String, String> = BTreeMap::new();
@@ -138,10 +134,6 @@ fn world_option_table_matches_corpus() {
 #[test]
 fn editing_an_absent_key_on_a_sparse_save_writes_cleanly() {
     let files = corpus();
-    if files.is_empty() {
-        eprintln!("SKIP: python testdata not found (set PSP_PY_TESTDATA)");
-        return;
-    }
 
     // The sparsest file in the corpus: the one that actually exercises priming.
     let sparsest = files
