@@ -329,6 +329,7 @@ pub async fn handle_select_save(
         "steam",
         &level_sav_bytes,
         level_meta_bytes.as_deref(),
+        None,
         player_file_refs,
         layout.global_pal_storage_sav.clone(),
         // Emit the leading generic "Loading Level.sav..." progress frame.
@@ -566,6 +567,7 @@ pub async fn handle_load_zip_file(
         "steam",
         &level_sav_bytes,
         level_meta_bytes.as_deref(),
+        None,
         player_file_refs,
         gps_file_path.clone(),
         // Emit the leading generic "Loading Level.sav..." progress frame.
@@ -1519,6 +1521,7 @@ mod tests {
             "steam",
             &level_bytes,
             Some(&meta_bytes),
+            None,
             BTreeMap::new(),
             None,
             true,

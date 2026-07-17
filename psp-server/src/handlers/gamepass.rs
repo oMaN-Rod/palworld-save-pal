@@ -309,6 +309,7 @@ pub async fn handle_select_gamepass_save(
         "gamepass",
         &level_sav,
         level_meta.as_deref(),
+        None,
         player_file_refs,
         None,
         // Emit the leading generic "Loading Level.sav..." progress frame.

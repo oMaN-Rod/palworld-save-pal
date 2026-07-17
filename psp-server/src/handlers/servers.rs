@@ -1228,6 +1228,7 @@ async fn load_server_save_impl(data: ServerIdData, ctx: &mut HandlerCtx<'_>) -> 
         "steam",
         &level_sav_bytes,
         level_meta_bytes.as_deref(),
+        None,
         player_file_refs,
         layout.global_pal_storage_sav.clone(),
         // Emit the leading generic "Loading Level.sav..." progress frame.

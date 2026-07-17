@@ -129,6 +129,11 @@ pub struct SaveSession {
     /// `loaded_save_files.size` wire contract the frontend expects.
     pub size: u64,
     pub level_meta: Option<uesave::Save>,
+    pub world_option: Option<uesave::Save>,
+    /// Gates every write. A user who never opens the editor must not have
+    /// WorldOption.sav rewritten: re-compressing yields an identical GVAS payload but
+    /// not necessarily identical bytes.
+    pub world_option_dirty: bool,
     pub player_file_refs: BTreeMap<Uuid, PlayerFileData>,
     pub player_sav_cache: HashMap<Uuid, uesave::Save>,
     pub player_summaries: BTreeMap<Uuid, PlayerSummary>,
@@ -254,6 +259,8 @@ impl SaveSession {
             save_type_label: "steam",
             size: 0,
             level_meta: None,
+            world_option: None,
+            world_option_dirty: false,
             player_file_refs: BTreeMap::new(),
             player_sav_cache: HashMap::new(),
             player_summaries: BTreeMap::new(),
@@ -293,6 +300,7 @@ impl SaveSession {
         save_type_label: &'static str,
         level_sav_bytes: &[u8],
         level_meta_bytes: Option<&[u8]>,
+        world_option_bytes: Option<&[u8]>,
         player_file_refs: BTreeMap<Uuid, PlayerFileData>,
         gps_file_path: Option<PathBuf>,
         emit_top_level_progress: bool,
@@ -320,6 +328,22 @@ impl SaveSession {
             }
         };
 
+        // A broken WorldOption must not cost the user their world: Level.sav is the
+        // world, WorldOption is config. Degrade to absent + warn instead of failing
+        // the load (this is why it does NOT use `error_to_raw(false)` semantics).
+        let world_option = world_option_bytes.and_then(|bytes| {
+            match parse_palworld_save(bytes) {
+                Ok(mut save) => {
+                    crate::domain::world_option::ensure_world_option_schemas(&mut save);
+                    Some(save)
+                }
+                Err(error) => {
+                    tracing::warn!("WorldOption.sav failed to parse, ignoring: {error}");
+                    None
+                }
+            }
+        });
+
         let size = level_sav_bytes.len() as u64 + 33;
 
         let mut session = SaveSession::new_for_tests(kind, level);
@@ -328,6 +352,8 @@ impl SaveSession {
         session.save_type_label = save_type_label;
         session.size = size;
         session.level_meta = level_meta;
+        session.world_option = world_option;
+        session.world_option_dirty = false;
         session.player_file_refs = player_file_refs;
         session.gps.file_path = gps_file_path;
 
@@ -465,6 +491,43 @@ impl SaveSession {
         };
         set_world_name_property(meta, new_name)?;
         self.world_name = new_name.to_string();
+        Ok(())
+    }
+
+    pub fn world_option_dto(&self) -> crate::dto::world_option::WorldOptionDto {
+        use crate::domain::world_option;
+        match &self.world_option {
+            Some(save) => crate::dto::world_option::WorldOptionDto {
+                present: true,
+                version: world_option::read_version(save),
+                settings: world_option::read_settings(save)
+                    .into_iter()
+                    .map(|entry| crate::dto::world_option::WorldOptionEntryDto {
+                        key: entry.key,
+                        kind: entry.kind.wire_tag().to_string(),
+                        value: entry.value,
+                    })
+                    .collect(),
+            },
+            None => crate::dto::world_option::WorldOptionDto {
+                present: false,
+                version: 0,
+                settings: Vec::new(),
+            },
+        }
+    }
+
+    pub fn apply_world_option_patch(
+        &mut self,
+        patch: &[crate::domain::world_option::WorldOptionPatch],
+    ) -> Result<(), CoreError> {
+        let save = self
+            .world_option
+            .as_mut()
+            .ok_or_else(|| CoreError::Other("No WorldOption.sav loaded".to_string()))?;
+        if crate::domain::world_option::apply_patch(save, patch)? {
+            self.world_option_dirty = true;
+        }
         Ok(())
     }
 
@@ -653,6 +716,7 @@ mod load_tests {
             "steam",
             &level_sav_bytes,
             level_meta_bytes.as_deref(),
+            None,
             player_file_refs,
             None,
             true,
@@ -682,6 +746,7 @@ mod load_tests {
             "bad".to_string(),
             "steam",
             b"this is not a save file at all",
+            None,
             None,
             std::collections::BTreeMap::new(),
             None,
@@ -730,6 +795,8 @@ mod load_tests {
         assert_eq!("steam", session.save_type_label);
         assert_eq!(0, session.size);
         assert!(session.level_meta.is_none());
+        assert!(session.world_option.is_none());
+        assert!(!session.world_option_dirty);
         assert!(session.player_file_refs.is_empty());
         assert!(session.player_sav_cache.is_empty());
         assert!(session.player_summaries.is_empty());

@@ -361,6 +361,23 @@ pub fn apply_patch(save: &mut uesave::Save, patch: &[WorldOptionPatch]) -> Resul
     Ok(dirty)
 }
 
+impl WoKind {
+    /// Lowercase wire tag. Must match `WoFieldKind` in
+    /// `ui/src/lib/components/worldoption/worldOptionFields.ts`.
+    pub fn wire_tag(self) -> &'static str {
+        match self {
+            WoKind::Bool => "bool",
+            WoKind::Int => "int",
+            WoKind::Float => "float",
+            WoKind::Str => "str",
+            WoKind::Name => "name",
+            WoKind::Enum(_) => "enum",
+            WoKind::EnumArray => "enum_array",
+            WoKind::NameArray => "name_array",
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

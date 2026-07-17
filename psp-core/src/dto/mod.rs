@@ -6,3 +6,4 @@ pub mod pal;
 pub mod player;
 pub mod settings;
 pub mod summary;
+pub mod world_option;
