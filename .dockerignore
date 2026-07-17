@@ -1,13 +1,8 @@
 .git
-.venv
 .claude
 .superpowers
 .remember
-.pytest_cache
-.ruff_cache
 .vscode
-__pycache__
-**/__pycache__
 backups
 build
 dist
