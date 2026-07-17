@@ -2180,4 +2180,51 @@ mod tests {
         assert_eq!(listed[0].server_type, "native");
         assert!(listed[0].pid.is_none());
     }
+
+    #[tokio::test]
+    async fn import_server_missing_exe_errors() {
+        let mut env = TestEnv::new().await;
+        let empty = env._scratch.path().join("empty");
+        std::fs::create_dir_all(&empty).unwrap();
+        let data = ImportServerData {
+            install_path: empty.to_string_lossy().into_owned(),
+            name: String::new(),
+            query_port: None,
+            launch_args: None,
+            workshop_dir: Some(String::new()),
+        };
+        let mut ctx = env.ctx();
+        handle_import_server(data, &mut ctx).await.unwrap();
+        let messages = env.drain();
+        assert_eq!(messages[0]["type"], "error");
+        assert_eq!(
+            messages[0]["data"]["message"],
+            "PalServer.exe not found in the selected folder"
+        );
+    }
+
+    #[tokio::test]
+    async fn import_server_duplicate_install_path_errors() {
+        let mut env = TestEnv::new().await;
+        let install_dir = env._scratch.path().join("Dup");
+        let install = write_importable_install(&install_dir, "ServerName=\"Dup\",PublicPort=9921,RESTAPIPort=9922");
+        // Pre-register the same install path.
+        let mut existing = docker_new_server("dup");
+        existing.server_type = "native".to_string();
+        existing.install_path = install.clone();
+        psp_db::servers::create_server(&env.app.db, existing).await.unwrap();
+
+        let data = ImportServerData {
+            install_path: install.clone(),
+            name: String::new(),
+            query_port: None,
+            launch_args: None,
+            workshop_dir: Some(String::new()),
+        };
+        let mut ctx = env.ctx();
+        handle_import_server(data, &mut ctx).await.unwrap();
+        let messages = env.drain();
+        assert_eq!(messages[0]["type"], "error");
+        assert_eq!(messages[0]["data"]["message"], "This server is already registered");
+    }
 }
