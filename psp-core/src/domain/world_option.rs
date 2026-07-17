@@ -196,6 +196,67 @@ pub const WORLD_OPTION_SETTINGS: &[(&str, WoKind)] = &[
     ("bUseAuth", WoKind::Bool),
 ];
 
+#[derive(Debug, Clone)]
+pub struct WorldOptionEntry {
+    pub key: String,
+    pub kind: WoKind,
+    pub value: serde_json::Value,
+}
+
+/// The `Settings` property bag, or `None` on a save that isn't a WorldOption.
+fn settings_properties(save: &uesave::Save) -> Option<&uesave::Properties> {
+    crate::props::get(&save.root.properties, &[OPTION_WORLD_DATA, SETTINGS])
+        .and_then(crate::props::struct_props)
+}
+
+fn settings_properties_mut(save: &mut uesave::Save) -> Option<&mut uesave::Properties> {
+    crate::props::get_mut(&mut save.root.properties, &[OPTION_WORLD_DATA, SETTINGS])
+        .and_then(crate::props::struct_props_mut)
+}
+
+/// Encodes one property as wire JSON. Returns `None` when the stored property's
+/// shape disagrees with the table -- an untrusted save is allowed to be wrong.
+fn encode_value(kind: WoKind, property: &uesave::Property) -> Option<serde_json::Value> {
+    Some(match kind {
+        WoKind::Bool => serde_json::json!(crate::props::as_bool(property)?),
+        WoKind::Int => serde_json::json!(crate::props::as_i32(property)?),
+        WoKind::Float => serde_json::json!(crate::props::as_f32(property)?),
+        WoKind::Str | WoKind::Name => serde_json::json!(crate::props::as_str(property)?),
+        WoKind::Enum(_) => serde_json::json!(crate::props::as_enum(property)?),
+        WoKind::EnumArray => serde_json::json!(crate::props::enum_values(property)?),
+        WoKind::NameArray => serde_json::json!(crate::props::name_values(property)?),
+    })
+}
+
+/// Present keys only, in GVAS order. Keys absent from `WORLD_OPTION_SETTINGS` (a
+/// future Palworld setting) are skipped here but left untouched in the tree, so they
+/// round-trip on write rather than being dropped.
+pub fn read_settings(save: &uesave::Save) -> Vec<WorldOptionEntry> {
+    let Some(properties) = settings_properties(save) else {
+        return Vec::new();
+    };
+    properties
+        .into_iter()
+        .filter_map(|(property_key, property)| {
+            let key = property_key.1.as_str();
+            let kind = kind_for(key)?;
+            let value = encode_value(kind, property)?;
+            Some(WorldOptionEntry {
+                key: key.to_string(),
+                kind,
+                value,
+            })
+        })
+        .collect()
+}
+
+/// The root `Version` property. Display-only; never written.
+pub fn read_version(save: &uesave::Save) -> i32 {
+    crate::props::get(&save.root.properties, &["Version"])
+        .and_then(crate::props::as_i32)
+        .unwrap_or_default()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -282,5 +343,120 @@ mod tests {
         assert!(matches!(kind_for("DenyTechnologyList"), Some(WoKind::NameArray)));
         assert!(matches!(kind_for("CrossplayPlatforms"), Some(WoKind::EnumArray)));
         assert!(kind_for("NoSuchSetting").is_none());
+    }
+
+    fn settings_save(entries: Vec<(&str, uesave::Property)>) -> uesave::Save {
+        let mut settings = uesave::Properties::default();
+        for (key, value) in entries {
+            settings.insert(key, value);
+        }
+        let mut owd = uesave::Properties::default();
+        owd.insert(SETTINGS, uesave::Property::Struct(uesave::StructValue::Struct(settings)));
+        let mut root = uesave::Properties::default();
+        root.insert("Version", crate::props::int_property(101));
+        root.insert(
+            OPTION_WORLD_DATA,
+            uesave::Property::Struct(uesave::StructValue::Struct(owd)),
+        );
+        uesave::Save {
+            header: uesave::Header {
+                magic: 0,
+                save_game_version: 0,
+                package_version: uesave::PackageVersion { ue4: 0, ue5: None },
+                engine_version_major: 0,
+                engine_version_minor: 0,
+                engine_version_patch: 0,
+                engine_version_build: 0,
+                engine_version: String::new(),
+                custom_version: None,
+            },
+            schemas: uesave::PropertySchemas::default(),
+            root: uesave::Root {
+                save_game_type: String::new(),
+                properties: root,
+            },
+            extra: Vec::new(),
+        }
+    }
+
+    #[test]
+    fn read_settings_returns_only_present_keys_in_gvas_order() {
+        let save = settings_save(vec![
+            ("ExpRate", crate::props::float_property(20.0)),
+            ("bIsPvP", crate::props::bool_property(true)),
+            ("ServerName", crate::props::str_property("My Server")),
+        ]);
+
+        let entries = read_settings(&save);
+
+        assert_eq!(entries.len(), 3, "absent keys must not be synthesized");
+        assert_eq!(entries[0].key, "ExpRate");
+        assert_eq!(entries[0].value, serde_json::json!(20.0));
+        assert_eq!(entries[1].key, "bIsPvP");
+        assert_eq!(entries[1].value, serde_json::json!(true));
+        assert_eq!(entries[2].key, "ServerName");
+        assert_eq!(entries[2].value, serde_json::json!("My Server"));
+    }
+
+    #[test]
+    fn read_settings_encodes_enums_fully_qualified() {
+        let save = settings_save(vec![(
+            "Difficulty",
+            crate::props::enum_property("EPalOptionWorldDifficulty::Custom"),
+        )]);
+
+        let entries = read_settings(&save);
+
+        assert_eq!(entries[0].value, serde_json::json!("EPalOptionWorldDifficulty::Custom"));
+    }
+
+    #[test]
+    fn read_settings_encodes_arrays_as_string_lists() {
+        let save = settings_save(vec![
+            (
+                "CrossplayPlatforms",
+                crate::props::enum_array_property(vec![
+                    "EPalAllowConnectPlatform::Steam".to_string(),
+                    "EPalAllowConnectPlatform::Xbox".to_string(),
+                ]),
+            ),
+            (
+                "DenyTechnologyList",
+                crate::props::name_array_property(vec!["AIcore".to_string()]),
+            ),
+        ]);
+
+        let entries = read_settings(&save);
+
+        assert_eq!(
+            entries[0].value,
+            serde_json::json!(["EPalAllowConnectPlatform::Steam", "EPalAllowConnectPlatform::Xbox"])
+        );
+        assert_eq!(entries[1].value, serde_json::json!(["AIcore"]));
+    }
+
+    #[test]
+    fn read_settings_skips_keys_absent_from_the_table() {
+        let save = settings_save(vec![
+            ("ExpRate", crate::props::float_property(1.0)),
+            ("SomeFutureSetting", crate::props::bool_property(true)),
+        ]);
+
+        let entries = read_settings(&save);
+
+        assert_eq!(entries.len(), 1);
+        assert_eq!(entries[0].key, "ExpRate");
+    }
+
+    #[test]
+    fn read_settings_on_a_save_without_option_world_data_is_empty() {
+        let save = settings_save(vec![]);
+        assert!(read_settings(&save).is_empty());
+    }
+
+    #[test]
+    fn read_version_reads_the_root_version_property() {
+        let save = settings_save(vec![]);
+        assert_eq!(read_version(&save), 101);
     }
 }
