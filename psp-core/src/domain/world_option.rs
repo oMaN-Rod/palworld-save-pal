@@ -3,7 +3,7 @@
 //! `WORLD_OPTION_SETTINGS` is the single source of truth for every setting's GVAS
 //! type and its write schema. The table was generated from the real testdata corpus
 //! (7 files, zero tag conflicts) rather than hand-written -- see the spec's Risks
-//! section. `world_option_table_matches_corpus` in `tests/world_option_corpus.rs`
+//! section. `world_option_table_matches_corpus` in `world_option_corpus.rs`
 //! is what keeps it honest when Palworld ships new settings.
 //!
 //! The file is SPARSE: real saves carry anywhere from 87 to 119 of these keys, and
