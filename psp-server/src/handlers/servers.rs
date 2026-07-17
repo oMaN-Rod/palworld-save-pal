@@ -3,6 +3,7 @@
 //! Error convention: business failures emit message type `error` with data
 //! `{"message": "<text>"}` — no `trace` key — and the handler returns `Ok(())`.
 //! Only payload-parse failures take the `HandlerError` path.
+use std::collections::HashSet;
 use std::path::Path;
 
 use serde_json::Value;
@@ -526,6 +527,182 @@ pub async fn handle_create_server(
 ) -> Result<(), HandlerError> {
     if let Err(message) = create_server_impl(data, ctx).await {
         emit_business_error(ctx.emitter, format!("Failed to create server: {message}"));
+    }
+    Ok(())
+}
+
+#[derive(Debug, serde::Deserialize)]
+pub struct ImportServerData {
+    pub install_path: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub query_port: Option<i64>,
+    #[serde(default)]
+    pub launch_args: Option<String>,
+    #[serde(default)]
+    pub workshop_dir: Option<String>,
+}
+
+fn assign_port(label: &str, wanted: i64, taken: &mut HashSet<u16>, notes: &mut Vec<String>) -> i64 {
+    let mut got = wanted;
+    while taken.contains(&(got as u16)) {
+        got += 1;
+    }
+    taken.insert(got as u16);
+    if got != wanted {
+        notes.push(format!(
+            "{label} port {wanted} was already in use; assigned {got} instead."
+        ));
+    }
+    got
+}
+
+fn reassign_import_ports(
+    game: i64,
+    query: i64,
+    rest: i64,
+    allocated: &HashSet<u16>,
+) -> ((i64, i64, i64), Vec<String>) {
+    let mut taken = allocated.clone();
+    let mut notes = Vec::new();
+    let game_new = assign_port("Game", game, &mut taken, &mut notes);
+    let query_new = assign_port("Query", query, &mut taken, &mut notes);
+    let rest_new = assign_port("REST API", rest, &mut taken, &mut notes);
+    ((game_new, query_new, rest_new), notes)
+}
+
+fn import_slug(name: &str) -> String {
+    let mut slug = String::new();
+    let mut prev_dash = false;
+    for ch in name.to_lowercase().chars() {
+        if ch.is_ascii_alphanumeric() {
+            slug.push(ch);
+            prev_dash = false;
+        } else if !slug.is_empty() && !prev_dash {
+            slug.push('-');
+            prev_dash = true;
+        }
+    }
+    let trimmed = slug.trim_matches('-').to_string();
+    if trimmed.is_empty() {
+        "imported-server".to_string()
+    } else {
+        trimmed
+    }
+}
+
+async fn import_server_impl(data: ImportServerData, ctx: &mut HandlerCtx<'_>) -> Result<(), String> {
+    let emitter = ctx.emitter;
+    let db = &ctx.app.db;
+
+    // 1. Resolve the install folder (native dialog in desktop mode).
+    let install_path = if data.install_path == "__select__" {
+        if !ctx.app.config.desktop_mode {
+            emit_business_error(emitter, "Desktop mode is required to browse for a folder".to_string());
+            return Ok(());
+        }
+        match ctx.app.dialogs.pick_folder(None).await {
+            Some(path) => path.to_string_lossy().into_owned(),
+            None => return Ok(()), // user canceled — no error frame
+        }
+    } else {
+        data.install_path.clone()
+    };
+
+    // 2. Must be a real server install.
+    if !Path::new(&install_path).join("PalServer.exe").exists() {
+        emit_business_error(emitter, "PalServer.exe not found in the selected folder".to_string());
+        return Ok(());
+    }
+
+    // 3. Reject already-registered installs.
+    if psp_db::servers::server_with_install_path(db, &install_path)
+        .await
+        .map_err(|error| error.to_string())?
+        .is_some()
+    {
+        emit_business_error(emitter, "This server is already registered".to_string());
+        return Ok(());
+    }
+
+    // 4. Parse the owner's existing config.
+    let config = native_config::parse_server_config_from_ini(&install_path);
+
+    // 5. Reassign conflicting ports in the DB only (non-destructive).
+    let allocated = psp_db::servers::allocated_ports(db)
+        .await
+        .map_err(|error| error.to_string())?;
+    let query_port = data.query_port.unwrap_or(27015);
+    let ((game_port, query_port, rest_api_port), notifications) =
+        reassign_import_ports(config.game_port, query_port, config.rest_api_port, &allocated);
+
+    // 6. Best-effort detection (optional).
+    let steamcmd_path = native_process::find_steamcmd().unwrap_or_default();
+    let mut workshop_dir = data.workshop_dir.clone().unwrap_or_default();
+    if workshop_dir.is_empty() {
+        workshop_dir = native_mods::find_steam_workshop_dir().unwrap_or_default();
+    }
+
+    // Display name: user value, else parsed ServerName, else folder basename.
+    let name = if data.name.trim().is_empty() {
+        if !config.server_name.is_empty() {
+            config.server_name.clone()
+        } else {
+            Path::new(&install_path)
+                .file_name()
+                .map(|n| n.to_string_lossy().into_owned())
+                .unwrap_or_else(|| "Imported Server".to_string())
+        }
+    } else {
+        data.name.trim().to_string()
+    };
+
+    let new_server = NewServer {
+        name: name.clone(),
+        container_name: import_slug(&name),
+        image_name: String::new(),
+        server_type: "native".to_string(),
+        game_port,
+        query_port,
+        rest_api_port,
+        data_volume_name: String::new(),
+        saves_path: native_config::saves_path(&install_path),
+        mods_path: native_config::mods_path(&install_path),
+        logicmods_path: native_config::logicmods_path(&install_path),
+        nativemods_path: native_config::nativemods_path(&install_path),
+        install_path: install_path.clone(),
+        steamcmd_path,
+        launch_args: data.launch_args.clone().unwrap_or_default(),
+        workshop_dir,
+        server_name: config.server_name,
+        server_description: config.server_description,
+        server_password: config.server_password,
+        admin_password: config.admin_password,
+        max_players: config.max_players,
+        env_vars: config.env_vars,
+    };
+
+    let record = psp_db::servers::create_server(db, new_server)
+        .await
+        .map_err(|error| error.to_string())?;
+
+    let mut result = server_to_wire_json(&record);
+    result["status"] =
+        serde_json::to_value(native_process::process_status(record.pid)).expect("serializes");
+    result["player_count"] = Value::from(0);
+    result["total_players"] = Value::from(count_total_players(&record.saves_path));
+    result["notifications"] = Value::from(notifications);
+    emitter.emit(MessageType::ImportServer, &result);
+    Ok(())
+}
+
+pub async fn handle_import_server(
+    data: ImportServerData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    if let Err(message) = import_server_impl(data, ctx).await {
+        emit_business_error(ctx.emitter, format!("Failed to import server: {message}"));
     }
     Ok(())
 }
@@ -1938,5 +2115,69 @@ mod tests {
                 std::fs::copy(entry.path(), target).unwrap();
             }
         }
+    }
+
+    fn write_importable_install(root: &std::path::Path, option_settings: &str) -> String {
+        std::fs::create_dir_all(root).unwrap();
+        std::fs::write(root.join("PalServer.exe"), b"x").unwrap();
+        let cfg = root.join("Pal").join("Saved").join("Config").join("WindowsServer");
+        std::fs::create_dir_all(&cfg).unwrap();
+        std::fs::write(
+            cfg.join("PalWorldSettings.ini"),
+            format!("[/Script/Pal.PalGameWorldSettings]\nOptionSettings=({option_settings})\n"),
+        )
+        .unwrap();
+        root.to_string_lossy().into_owned()
+    }
+
+    #[tokio::test]
+    async fn import_server_inserts_native_row_non_destructively() {
+        let mut env = TestEnv::new().await;
+        let install_dir = env._scratch.path().join("MyServer");
+        let install = write_importable_install(
+            &install_dir,
+            "ServerName=\"Imported\",PublicPort=9911,RESTAPIPort=9912,ServerPlayerMaxNum=20,ExpRate=2.000000,MyCustomKey=42",
+        );
+
+        let data = ImportServerData {
+            install_path: install.clone(),
+            name: String::new(),
+            query_port: None,
+            launch_args: None,
+            workshop_dir: Some(String::new()),
+        };
+        let mut ctx = env.ctx();
+        handle_import_server(data, &mut ctx).await.unwrap();
+
+        let messages = env.drain();
+        let imported = messages
+            .iter()
+            .find(|m| m["type"] == "import_server")
+            .expect("import_server frame");
+        let d = &imported["data"];
+        assert_eq!(d["server_type"], "native");
+        assert_eq!(d["name"], "Imported");
+        assert_eq!(d["server_name"], "Imported");
+        assert_eq!(d["game_port"], 9911);
+        assert_eq!(d["rest_api_port"], 9912);
+        assert_eq!(d["max_players"], 20);
+        assert!(d["pid"].is_null());
+        assert_eq!(d["env_vars"]["EXP_RATE"], "2.000000");
+        assert_eq!(d["notifications"], serde_json::json!([]));
+
+        // Non-destructive: we did not rewrite the ini (custom key + original port intact).
+        let ini = std::fs::read_to_string(
+            install_dir
+                .join("Pal").join("Saved").join("Config").join("WindowsServer")
+                .join("PalWorldSettings.ini"),
+        )
+        .unwrap();
+        assert!(ini.contains("MyCustomKey=42"));
+        assert!(ini.contains("PublicPort=9911"));
+
+        let listed = psp_db::servers::list_servers(&env.app.db).await.unwrap();
+        assert_eq!(listed.len(), 1);
+        assert_eq!(listed[0].server_type, "native");
+        assert!(listed[0].pid.is_none());
     }
 }
