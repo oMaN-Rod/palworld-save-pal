@@ -1,7 +1,9 @@
 //! Round-trip and drift guards over the real WorldOption corpus.
 //!
-//! The corpus spans 87..=119-key files: real saves are SPARSE, and `Version` (always
-//! 101) does not discriminate. Skips when the python testdata checkout is absent.
+//! The corpus (7 testdata files) spans 89..=119 keys: real saves are SPARSE, and
+//! `Version` (always 101) does not discriminate. A real user's live save has been seen
+//! as low as 87 keys, though no testdata file goes that low. Skips when the python
+//! testdata checkout is absent.
 
 use std::collections::BTreeMap;
 use std::path::PathBuf;
@@ -11,16 +13,38 @@ use super::{
     tag_for, WoKind, WorldOptionPatch, WORLD_OPTION_SETTINGS,
 };
 
+/// True if `dir` directly contains at least one `<child>/WorldOption.sav`.
+fn has_world_option_children(dir: &std::path::Path) -> bool {
+    std::fs::read_dir(dir)
+        .map(|entries| entries.flatten().any(|e| e.path().join("WorldOption.sav").exists()))
+        .unwrap_or(false)
+}
+
 /// Every `<dir>/WorldOption.sav` under the python testdata tree.
+///
+/// This does not use `python_testdata_dir()`: that helper only returns `Some` when
+/// `<dir>/Level.sav` exists directly under it, but the testdata root
+/// (`tests/testdata/`) has no root-level `Level.sav` -- only its per-save
+/// subdirectories do. Reusing that probe here would make this corpus empty by
+/// default. Instead, resolve `PSP_PY_TESTDATA` (or the same default relative path)
+/// ourselves, and tolerate it pointing either at the testdata root or at a single
+/// save subdirectory (an older, undocumented convention some setups still use).
 fn corpus() -> Vec<PathBuf> {
-    let Some(base) = crate::gamepass::fixture::python_testdata_dir() else {
-        return Vec::new();
+    let configured = std::env::var("PSP_PY_TESTDATA")
+        .map(PathBuf::from)
+        .unwrap_or_else(|_| PathBuf::from("../../palworld-save-tools/tests/testdata"));
+
+    let root = if has_world_option_children(&configured) {
+        configured
+    } else {
+        match configured.parent() {
+            Some(parent) if has_world_option_children(parent) => parent.to_path_buf(),
+            _ => return Vec::new(),
+        }
     };
-    let Some(parent) = base.parent() else {
-        return Vec::new();
-    };
+
     let mut found = Vec::new();
-    if let Ok(entries) = std::fs::read_dir(parent) {
+    if let Ok(entries) = std::fs::read_dir(&root) {
         for entry in entries.flatten() {
             let candidate = entry.path().join("WorldOption.sav");
             if candidate.exists() {
