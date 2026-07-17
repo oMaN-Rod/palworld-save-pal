@@ -173,6 +173,37 @@ fn editing_an_absent_key_on_a_sparse_save_writes_cleanly() {
     assert_eq!(read_settings(&reparsed).len(), before + 1);
 }
 
+/// Pins the gamepass container plumbing that Task 8 depends on: a WorldOption
+/// container built by `fixture::build_wgs_tree` round-trips byte-for-byte through
+/// `format::ContainerIndex` and `store::read_first_blob`.
+#[test]
+fn gamepass_fixture_round_trips_world_option_container() {
+    let files = corpus();
+    let world_option_bytes = std::fs::read(&files[0]).unwrap();
+
+    let temp = tempfile::tempdir().unwrap();
+    let save = crate::gamepass::fixture::SyntheticSave {
+        save_id: "0123456789ABCDEF0123456789ABCDEF".to_string(),
+        level_sav: b"LEVEL".to_vec(),
+        level_meta: Some(b"META".to_vec()),
+        local_data: None,
+        world_option: Some(world_option_bytes.clone()),
+        players: vec![],
+    };
+    let container_dir = crate::gamepass::fixture::build_wgs_tree(temp.path(), &[save]).unwrap();
+
+    let index = crate::gamepass::format::ContainerIndex::read_from_dir(&container_dir).unwrap();
+    let latest = index.latest_save_containers("0123456789ABCDEF0123456789ABCDEF");
+    let entry = latest
+        .get("WorldOption")
+        .expect("WorldOption container must be discoverable");
+
+    let (_seq, blob) = crate::gamepass::store::read_first_blob(&container_dir, entry)
+        .unwrap()
+        .unwrap();
+    assert_eq!(blob, world_option_bytes);
+}
+
 /// A type-correct value for `key`, so the test doesn't depend on which key is absent.
 fn default_json_for(key: &str) -> serde_json::Value {
     match kind_for(key).unwrap() {
