@@ -1,4 +1,11 @@
-import type { Server, ServerMod, ServerApiResponse, ContainerStats, CreateServerData } from '$types';
+import type {
+	Server,
+	ServerMod,
+	ServerApiResponse,
+	ContainerStats,
+	CreateServerData,
+	ImportServerData
+} from '$types';
 import { MessageType } from '$types';
 import { send, sendAndWait } from '$utils/websocketUtils';
 
@@ -26,6 +33,10 @@ class ServerState {
 
 	async createServer(data: CreateServerData): Promise<void> {
 		send(MessageType.CREATE_SERVER, data);
+	}
+
+	async importServer(data: ImportServerData): Promise<void> {
+		send(MessageType.IMPORT_SERVER, data);
 	}
 
 	async updateServer(serverId: number, updates: Record<string, any>): Promise<void> {

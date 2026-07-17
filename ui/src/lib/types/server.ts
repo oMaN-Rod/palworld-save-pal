@@ -70,6 +70,14 @@ export interface CreateServerData {
 	workshop_dir?: string;
 }
 
+export interface ImportServerData {
+	install_path: string;
+	name: string;
+	query_port?: number;
+	launch_args?: string;
+	workshop_dir?: string;
+}
+
 export interface ContainerStats {
 	cpu_percent: number;
 	mem_usage_mb: number;
