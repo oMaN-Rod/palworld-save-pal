@@ -1,6 +1,6 @@
 use psp_db::servers::{
-    allocated_ports, create_server, delete_server, get_server, list_servers, update_server,
-    NewServer,
+    allocated_ports, create_server, delete_server, get_server, list_servers,
+    server_with_install_path, update_server, NewServer,
 };
 
 async fn test_pool() -> (sqlx::SqlitePool, tempfile::TempDir) {
@@ -200,4 +200,20 @@ async fn create_server_rejects_duplicate_container_name() {
     create_server(&pool, sample_server("dup")).await.unwrap();
     let result = create_server(&pool, sample_server("dup")).await;
     assert!(result.is_err(), "container_name is UNIQUE in the schema");
+}
+
+#[tokio::test]
+async fn server_with_install_path_finds_matching_row() {
+    let (pool, _dir) = test_pool().await;
+    let mut new_server = sample_server("native-import");
+    new_server.install_path = "C:\\PalServers\\World".to_string();
+    let created = create_server(&pool, new_server).await.unwrap();
+
+    let found = server_with_install_path(&pool, "C:\\PalServers\\World")
+        .await
+        .unwrap();
+    assert_eq!(found.map(|r| r.id), Some(created.id));
+
+    let missing = server_with_install_path(&pool, "C:\\Nope").await.unwrap();
+    assert!(missing.is_none());
 }
