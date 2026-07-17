@@ -717,6 +717,16 @@ pub async fn handle_download_save_file(ctx: &mut HandlerCtx<'_>) -> Result<(), H
         zip_writer
             .write_all(&level_sav_bytes)
             .map_err(CoreError::Io)?;
+        // Included whenever present, dirty or not: the download zip IS the user's
+        // copy of the save, so omitting an unmodified file would lose it.
+        if let Some(world_option) = &session.world_option {
+            zip_writer
+                .start_file("WorldOption.sav", options)
+                .map_err(|zip_error| HandlerError::Other(zip_error.to_string()))?;
+            zip_writer
+                .write_all(&psp_core::savio::write_sav_bytes(world_option)?)
+                .map_err(CoreError::Io)?;
+        }
         for (player_id, (sav_bytes, dps_bytes)) in &player_files {
             let stem = download_player_stem(player_id);
             zip_writer
@@ -874,6 +884,19 @@ fn write_steam_modded_save(
         .level_meta_sav_bytes()?
         .ok_or_else(|| HandlerError::Other("No LevelMeta GvasFile has been loaded.".to_string()))?;
     std::fs::write(save_dir.join("LevelMeta.sav"), &level_meta_bytes).map_err(CoreError::Io)?;
+
+    // Gated on dirty: an untouched WorldOption must not be rewritten. The save_dir
+    // backup taken above already covers this file.
+    if session.world_option_dirty {
+        if let Some(world_option) = &session.world_option {
+            progress("Saving WorldOption.sav...");
+            std::fs::write(
+                save_dir.join("WorldOption.sav"),
+                psp_core::savio::write_sav_bytes(world_option)?,
+            )
+            .map_err(CoreError::Io)?;
+        }
+    }
 
     progress("Writing player files");
     let players_dir = save_dir.join("Players");
@@ -1061,6 +1084,12 @@ async fn write_modded_gamepass_containers(
         })
         .collect();
 
+    // Only re-emit when the user actually changed something.
+    let modified_world_option = match (&session.world_option, session.world_option_dirty) {
+        (Some(save), true) => Some(psp_core::savio::write_sav_bytes(save)?),
+        _ => None,
+    };
+
     progress("Creating new containers for modified save...");
     store::save_modified_gamepass(
         &mut index,
@@ -1070,6 +1099,7 @@ async fn write_modded_gamepass_containers(
         &player_map,
         &original_containers,
         world_name,
+        modified_world_option.as_deref(),
     )?;
     progress("Modded save created");
     Ok(())
