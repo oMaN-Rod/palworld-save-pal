@@ -271,7 +271,7 @@ fn delete_guild_removes_group_extra_and_base_entries_but_leaves_the_chest_orphan
             .unwrap()
             .iter()
             .any(|e| container_id_key(e) == Some(chest_id)),
-        "PYTHON BUG (reproduced deliberately, see delete_guild_and_players's own doc \
+        "save-file fidelity (see delete_guild_and_players's own doc \
          comment): the guild's own item-storage container is never added to \
          container_ids_to_delete, so it survives delete_guild_and_players as an \
          orphaned ItemContainerSaveData entry"
@@ -646,12 +646,10 @@ fn delete_player_leaves_the_deleted_players_own_pal_guild_handle_dangling() {
             .individual_character_handle_ids
             .iter()
             .any(|h| props::guid_to_uuid(&h.instance_id) == member_pal_id),
-        "PYTHON BUG (reproduced deliberately for byte parity, not on the known list, \
+        "save-file fidelity (byte-identical save output, \
          see delete_player_and_pals_for_guild's own doc comment): the deleted \
          player's own pal's individual_character_handle_ids entry must remain \
-         dangling in the guild's raw tail, exactly matching real Python's \
-         _delete_player_and_pals -> _delete_pal_by_id call chain, which never \
-         reaches Guild.delete_character_handle"
+         dangling in the guild's raw tail"
     );
 }
 

@@ -353,7 +353,7 @@ mod tests {
     }
 
     #[test]
-    fn parse_info_json_mod_type_matches_python_install_rule_edge_cases() {
+    fn parse_info_json_mod_type_install_rule_edge_cases() {
         // InstallRule present but the first rule has no Type: mod_type is the
         // empty string, NOT "unknown".
         let no_type = tempfile::tempdir().unwrap();

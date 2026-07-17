@@ -1923,7 +1923,7 @@ mod tests {
     /// the prune pass advances its index even after a removal. Pinned because a
     /// `Vec::retain` "fix" would drop all of them and change the written save.
     #[test]
-    fn apply_status_points_reproduces_pythons_consecutive_none_row_skip() {
+    fn apply_status_points_skips_every_other_consecutive_none_row() {
         let mut save_parameter = Properties::default();
         save_parameter.insert(
             "GotStatusPointList",

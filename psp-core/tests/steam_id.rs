@@ -30,7 +30,7 @@ fn conversions_match_python_reference_vectors() {
 }
 
 #[test]
-fn input_parsing_matches_python() {
+fn input_parsing_accepts_all_supported_formats() {
     assert_eq!(
         psp_core::steam_id::parse_steam_input(
             "https://steamcommunity.com/profiles/76561198000000001/"

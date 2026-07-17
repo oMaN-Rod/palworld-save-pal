@@ -249,7 +249,7 @@ fn move_pal_updates_slot_membership() {
     assert_eq!(moved.instance_id, pal_id);
     assert_eq!(
         moved.storage_id, pal_box.id,
-        "PARITY-BUG-1: ContainerId never changes on move, only SlotIndex does"
+        "save-file fidelity: ContainerId never changes on move, only SlotIndex does"
     );
     let after = player::build_player_dto(&session, &data, player_id)
         .unwrap()
@@ -481,7 +481,7 @@ fn add_guild_pal_at_slot_zero_succeeds_and_leaves_owner_player_uid_present() {
         None,
     )
     .unwrap()
-    .expect("Base.add_pal's `is None` check accepts slot 0 -- no PARITY-BUG-2 here");
+    .expect("an available first slot (index 0) is accepted here, so the box-full quirk does not apply");
 
     assert_eq!(new_pal.storage_slot, 0);
     assert_eq!(new_pal.storage_id, worker_container_id);
@@ -921,7 +921,7 @@ fn clone_bug_fixture() -> (SaveSession, GameData, Uuid, PalDto) {
 /// is wrongly reported as full. Deliberately preserved for save-file fidelity
 /// with the game, not fixed.
 #[test]
-fn clone_pal_at_slot_zero_is_deliberately_treated_as_full_parity_bug_2() {
+fn clone_pal_at_slot_zero_is_reported_as_box_full() {
     let (mut session, data, pal_box_id, source_dto) = clone_bug_fixture();
     let entry_count_before = world::character_map(&session.level).unwrap().len();
     let container_index = world::build_character_container_index(&session.level);
@@ -938,9 +938,8 @@ fn clone_pal_at_slot_zero_is_deliberately_treated_as_full_parity_bug_2() {
 
     assert!(
         result.is_none(),
-        "PARITY-BUG-2: a genuinely available first slot (index 0) must be \
-         wrongly reported as \"pal box full\", matching Player.clone_pal's \
-         `if not storage_slot: return` in player.py"
+        "save-file fidelity: a genuinely available first slot (index 0) must be \
+         wrongly reported as \"pal box full\", matching the game's on-disk behaviour"
     );
     assert_eq!(
         world::character_map(&session.level).unwrap().len(),
@@ -1169,8 +1168,8 @@ fn add_player_dps_pal_into_a_recycled_slot_inherits_a_stale_is_rare_pal_flag() {
         new_pal.is_lucky,
         Some(true),
         "reset() never touches IsRarePal -- a recycled slot's stale lucky \
-         flag survives into the freshly created pal (found-but-not-on-the-\
-         PARITY-BUG-list Python quirk; see this task's report)"
+         flag survives into the freshly created pal (a found-but-unlisted \
+         save-fidelity quirk; see this task's report)"
     );
 }
 

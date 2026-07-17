@@ -336,7 +336,7 @@ fn apply_dto_storage_slot_round_trips_and_storage_id_never_changes_container_id(
     assert_eq!(reread.storage_slot, new_slot, "SlotIndex must round-trip");
     assert_eq!(
         reread.storage_id, original_container_id,
-        "PARITY-BUG-1: storage_id must never change ContainerId, even when the DTO carries a different one"
+        "save-file fidelity: storage_id must never change ContainerId, even when the DTO carries a different one"
     );
 }
 

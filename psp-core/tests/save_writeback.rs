@@ -68,7 +68,7 @@ fn update_pals_edit_then_reread() {
 /// through the write-back path. The DTO must request a genuinely different
 /// container, or the assertion would hold either way and prove nothing.
 #[test]
-fn update_pals_preserves_parity_bug_1_container_id_never_moves() {
+fn update_pals_keeps_container_id_stable_on_move() {
     let mut session = common::load_fixture_session("world1");
     let data = game_data();
     let player_id: Uuid = WORLD1_PLAYER_O.parse().unwrap();
@@ -100,7 +100,7 @@ fn update_pals_preserves_parity_bug_1_container_id_never_moves() {
     let updated = reread.pals.get(pal_id).expect("pal still present");
     assert_eq!(
         updated.storage_id, original_container_id,
-        "PARITY-BUG-1: ContainerId must never change, even when the DTO's \
+        "save-file fidelity: ContainerId must never change, even when the DTO's \
          storage_id field asks for a genuinely DIFFERENT container"
     );
     assert_eq!(updated.storage_slot, source.storage_slot + 1);

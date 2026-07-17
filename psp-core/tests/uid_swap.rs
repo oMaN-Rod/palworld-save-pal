@@ -153,8 +153,7 @@ fn deep_swap_over_real_level_sav_properties_changes_nothing() {
 
     assert_eq!(
         before, after,
-        "the deep ownership-key swap must be a no-op on real save data \
-         (parity with Python's real-save-inert _deep_swap_uids)"
+        "the deep ownership-key swap must be a no-op on real save data"
     );
 }
 

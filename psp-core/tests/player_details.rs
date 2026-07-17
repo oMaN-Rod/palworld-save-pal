@@ -129,7 +129,7 @@ fn dps_save(slots: Vec<StructValue>) -> Save {
 }
 
 #[test]
-fn ticks_conversion_matches_python() {
+fn ticks_conversion_is_correct() {
     assert_eq!(
         player::ticks_to_isoformat(638_000_000_000_000_000),
         "2022-09-28T22:13:20"
