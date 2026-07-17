@@ -107,6 +107,7 @@ fn parse_player_file_stem(stem: &str) -> Option<(Uuid, bool)> {
 pub(crate) struct SteamSaveLayout {
     pub(crate) level_sav: PathBuf,
     pub(crate) level_meta: Option<PathBuf>,
+    pub(crate) world_option: Option<PathBuf>,
     pub(crate) players_dir: PathBuf,
     pub(crate) global_pal_storage_sav: Option<PathBuf>,
 }
@@ -138,6 +139,11 @@ pub(crate) fn validate_steam_save_directory(
     let level_meta_path = save_dir.join("LevelMeta.sav");
     let level_meta = level_meta_path.exists().then_some(level_meta_path);
 
+    // Optional, exactly like LevelMeta: a world without one simply has no
+    // editable options.
+    let world_option_path = save_dir.join("WorldOption.sav");
+    let world_option = world_option_path.exists().then_some(world_option_path);
+
     let has_player_sav = std::fs::read_dir(&players_dir)
         .map_err(CoreError::Io)?
         .filter_map(|dir_entry| dir_entry.ok())
@@ -161,6 +167,7 @@ pub(crate) fn validate_steam_save_directory(
     Ok(SteamSaveLayout {
         level_sav,
         level_meta,
+        world_option,
         players_dir,
         global_pal_storage_sav,
     })
@@ -317,6 +324,10 @@ pub async fn handle_select_save(
         Some(meta_path) => Some(std::fs::read(meta_path).map_err(CoreError::Io)?),
         None => None,
     };
+    let world_option_bytes = match &layout.world_option {
+        Some(world_option_path) => Some(std::fs::read(world_option_path).map_err(CoreError::Io)?),
+        None => None,
+    };
     let (player_file_refs, player_discovery_order) =
         discover_player_file_refs(&layout.players_dir)?;
 
@@ -329,7 +340,7 @@ pub async fn handle_select_save(
         "steam",
         &level_sav_bytes,
         level_meta_bytes.as_deref(),
-        None,
+        world_option_bytes.as_deref(),
         player_file_refs,
         layout.global_pal_storage_sav.clone(),
         // Emit the leading generic "Loading Level.sav..." progress frame.
@@ -395,6 +406,7 @@ struct ZipLayout {
     save_id: String,
     level_sav_name: String,
     level_meta_name: String,
+    world_option_name: String,
     players_folder: String,
     gps_name: String,
 }
@@ -427,6 +439,11 @@ fn resolve_zip_layout(file_list: &[String]) -> ZipLayout {
             format!("{save_id}/LevelMeta.sav")
         } else {
             "LevelMeta.sav".to_string()
+        },
+        world_option_name: if nested {
+            format!("{save_id}/WorldOption.sav")
+        } else {
+            "WorldOption.sav".to_string()
         },
         players_folder: if nested {
             format!("{save_id}/Players/")
@@ -507,6 +524,16 @@ pub async fn handle_load_zip_file(
     } else {
         None
     };
+    // Optional. Unlike other unrecognized entries, this one is retained: the
+    // editor needs it and the download zip must round-trip it.
+    let world_option_bytes = if file_list
+        .iter()
+        .any(|name| name == &layout.world_option_name)
+    {
+        Some(read_entry(&layout.world_option_name)?)
+    } else {
+        None
+    };
 
     // Zip encounter order, not a UUID sort: the wire "players" array follows
     // this, same as the Steam directory scan.
@@ -567,7 +594,7 @@ pub async fn handle_load_zip_file(
         "steam",
         &level_sav_bytes,
         level_meta_bytes.as_deref(),
-        None,
+        world_option_bytes.as_deref(),
         player_file_refs,
         gps_file_path.clone(),
         // Emit the leading generic "Loading Level.sav..." progress frame.
@@ -1257,6 +1284,46 @@ mod tests {
     }
 
     #[test]
+    fn validate_steam_save_directory_finds_optional_world_option() {
+        let temp_dir = tempfile::tempdir().unwrap();
+        let save_dir = temp_dir.path().join("MyWorld");
+        std::fs::create_dir_all(save_dir.join("Players")).unwrap();
+        std::fs::write(save_dir.join("Level.sav"), b"L").unwrap();
+        std::fs::write(
+            save_dir.join("Players").join(format!("{PLAYER_ONE}.sav")),
+            b"P",
+        )
+        .unwrap();
+        std::fs::write(save_dir.join("WorldOption.sav"), b"W").unwrap();
+
+        let level_sav_path = save_dir.join("Level.sav");
+        let layout = validate_steam_save_directory(&level_sav_path.to_string_lossy()).unwrap();
+
+        assert_eq!(Some(save_dir.join("WorldOption.sav")), layout.world_option);
+    }
+
+    #[test]
+    fn validate_steam_save_directory_tolerates_missing_world_option() {
+        let temp_dir = tempfile::tempdir().unwrap();
+        let save_dir = temp_dir.path().join("MyWorld");
+        std::fs::create_dir_all(save_dir.join("Players")).unwrap();
+        std::fs::write(save_dir.join("Level.sav"), b"L").unwrap();
+        std::fs::write(
+            save_dir.join("Players").join(format!("{PLAYER_ONE}.sav")),
+            b"P",
+        )
+        .unwrap();
+
+        let level_sav_path = save_dir.join("Level.sav");
+        let layout = validate_steam_save_directory(&level_sav_path.to_string_lossy()).unwrap();
+
+        assert_eq!(
+            None, layout.world_option,
+            "WorldOption is optional, like LevelMeta"
+        );
+    }
+
+    #[test]
     fn test_discover_player_file_refs_pairs_sav_and_dps_and_skips_invalid_names() {
         let temp_dir = tempfile::tempdir().unwrap();
         std::fs::write(temp_dir.path().join(format!("{PLAYER_ONE}.sav")), b"x").unwrap();
@@ -1377,6 +1444,18 @@ mod tests {
         assert_eq!("MyWorld", layout.save_id);
         assert_eq!("MyWorld/Level.sav", layout.level_sav_name);
         assert_eq!("MyWorld/Players/", layout.players_folder);
+    }
+
+    #[test]
+    fn resolve_zip_layout_names_world_option_for_flat_and_nested() {
+        let flat = resolve_zip_layout(&["Level.sav".to_string(), "Players/x.sav".to_string()]);
+        assert_eq!("WorldOption.sav", flat.world_option_name);
+
+        let nested = resolve_zip_layout(&[
+            "MySave/Level.sav".to_string(),
+            "MySave/Players/x.sav".to_string(),
+        ]);
+        assert_eq!("MySave/WorldOption.sav", nested.world_option_name);
     }
 
     /// Security-critical: a traversal-shaped top-level entry name can never
