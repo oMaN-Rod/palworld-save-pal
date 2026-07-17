@@ -73,6 +73,17 @@ const rate = (key: string, label: string, def: number): WoField => ({
 	max: 100,
 	step: 0.1
 });
+// Engine-scale floats (distances in cm, intervals in seconds) whose values run far
+// above a rate multiplier. No upper cap: there is no sensible universal bound, and a
+// low `max` would clamp a legitimate value like 15000 down on edit.
+const bigFloat = (key: string, label: string, def: number): WoField => ({
+	key,
+	label,
+	kind: 'float',
+	default: def,
+	min: 0,
+	step: 1
+});
 const bool = (key: string, label: string, def: boolean): WoField => ({
 	key,
 	label,
@@ -318,8 +329,8 @@ export const worldOptionGroups: WoGroup[] = [
 		tab: 'advanced',
 		keys: [
 			bool('bEnableVoiceChat', 'Enable Voice Chat', false),
-			rate('VoiceChatMaxVolumeDistance', 'Max Volume Distance', 3000),
-			rate('VoiceChatZeroVolumeDistance', 'Zero Volume Distance', 15000)
+			bigFloat('VoiceChatMaxVolumeDistance', 'Max Volume Distance', 3000),
+			bigFloat('VoiceChatZeroVolumeDistance', 'Zero Volume Distance', 15000)
 		]
 	},
 	{
@@ -346,10 +357,10 @@ export const worldOptionGroups: WoGroup[] = [
 		title: 'Performance',
 		tab: 'advanced',
 		keys: [
-			rate('ServerReplicatePawnCullDistance', 'Pawn Cull Distance', 15000),
+			bigFloat('ServerReplicatePawnCullDistance', 'Pawn Cull Distance', 15000),
 			rate('ItemContainerForceMarkDirtyInterval', 'Container Mark-Dirty Interval', 1),
 			rate('PlayerDataPalStorageUpdateCheckTickInterval', 'Pal Storage Check Interval', 1),
-			rate('AutoTransferMasterCheckIntervalSeconds', 'Master Transfer Check (s)', 3600),
+			bigFloat('AutoTransferMasterCheckIntervalSeconds', 'Master Transfer Check (s)', 3600),
 			int('AutoTransferMasterThresholdDays', 'Master Transfer Threshold (days)', 14)
 		]
 	},
