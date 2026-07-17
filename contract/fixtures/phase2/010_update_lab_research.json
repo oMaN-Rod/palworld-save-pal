@@ -1,0 +1,23 @@
+{
+  "request": {
+    "type": "update_lab_research",
+    "data": {
+      "guild_id": "54491484-4e6c-7327-70b2-868f350929f6",
+      "research_updates": [
+        {
+          "research_id": "Research_Tech_01",
+          "work_amount": 250.0
+        }
+      ]
+    }
+  },
+  "responses": [
+    {
+      "type": "update_lab_research",
+      "data": {
+        "success": true,
+        "guild_id": "54491484-4e6c-7327-70b2-868f350929f6"
+      }
+    }
+  ]
+}

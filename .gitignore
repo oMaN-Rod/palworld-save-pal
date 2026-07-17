@@ -55,5 +55,4 @@ data/json/settings.json
 
 # Rust workspace build output
 /target
-/parity/fixtures/
-/parity/tmp/
+/contract/tmp/

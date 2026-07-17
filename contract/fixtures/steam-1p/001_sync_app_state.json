@@ -1,0 +1,64 @@
+{
+  "request": {
+    "type": "sync_app_state",
+    "data": null
+  },
+  "responses": [
+    {
+      "type": "get_settings",
+      "data": {
+        "language": "en",
+        "save_dir": "C:\\Users\\OmarRodriguez\\AppData\\Local\\Pal\\Saved\\SaveGames",
+        "clone_prefix": "©️",
+        "new_pal_prefix": "🆕",
+        "debug_mode": false,
+        "cheat_mode": false
+      }
+    },
+    {
+      "type": "loaded_save_files",
+      "data": {
+        "level": "D:\\project\\unreal-palworld-save-tools\\palworld-save-pal\\tests\\fixtures\\saves\\world2\\Level.sav",
+        "players": [
+          "8c2f1930-0000-0000-0000-000000000000"
+        ],
+        "guilds": [
+          "2373902a-47ff-8521-4586-d99394020dd0"
+        ],
+        "world_name": "Autosave_W",
+        "type": "steam",
+        "size": 37739,
+        "has_gps": true
+      }
+    },
+    {
+      "type": "get_player_summaries",
+      "data": {
+        "8c2f1930-0000-0000-0000-000000000000": {
+          "uid": "8c2f1930-0000-0000-0000-000000000000",
+          "nickname": "O",
+          "level": 2,
+          "guild_id": "2373902a-47ff-8521-4586-d99394020dd0",
+          "pal_count": 0,
+          "last_online_time": "2026-04-07T16:40:37.487999",
+          "loaded": false
+        }
+      }
+    },
+    {
+      "type": "get_guild_summaries",
+      "data": {
+        "2373902a-47ff-8521-4586-d99394020dd0": {
+          "id": "2373902a-47ff-8521-4586-d99394020dd0",
+          "name": "Unnamed Guild",
+          "admin_player_uid": "8c2f1930-0000-0000-0000-000000000000",
+          "player_count": 1,
+          "base_count": 0,
+          "level": 1,
+          "pal_count": 0,
+          "loaded": false
+        }
+      }
+    }
+  ]
+}
