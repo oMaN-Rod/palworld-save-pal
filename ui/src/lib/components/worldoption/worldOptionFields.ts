@@ -189,7 +189,7 @@ export const worldOptionGroups: WoGroup[] = [
 			rate('NightTimeSpeedRate', 'Night Speed Rate', 1),
 			rate('ExpRate', 'EXP Rate', 1),
 			rate('WorkSpeedRate', 'Work Speed Rate', 1),
-			rate('autoSaveSpan', 'Auto Save Span (s)', 30)
+			bigFloat('autoSaveSpan', 'Auto Save Span (s)', 30)
 		]
 	},
 	{
@@ -204,7 +204,7 @@ export const worldOptionGroups: WoGroup[] = [
 			rate('PalStaminaDecreaceRate', 'Pal Stamina Depletion', 1),
 			rate('PalAutoHPRegeneRate', 'Pal HP Regen', 1),
 			rate('PalAutoHpRegeneRateInSleep', 'Pal HP Regen (sleep)', 1),
-			rate('PalEggDefaultHatchingTime', 'Egg Hatching Time (h)', 72),
+			bigFloat('PalEggDefaultHatchingTime', 'Egg Hatching Time (h)', 72),
 			rate('MonsterFarmActionSpeedRate', 'Monster Farm Speed', 1),
 			bool('EnablePredatorBossPal', 'Enable Predator Boss Pals', true)
 		]
@@ -273,7 +273,7 @@ export const worldOptionGroups: WoGroup[] = [
 			int('BaseCampMaxNumInGuild', 'Max Base Camps / Guild', 4),
 			int('BaseCampWorkerMaxNum', 'Max Base Workers', 15),
 			bool('bAutoResetGuildNoOnlinePlayers', 'Auto Reset Inactive Guilds', false),
-			rate('AutoResetGuildTimeNoOnlinePlayers', 'Auto Reset After (h)', 72),
+			bigFloat('AutoResetGuildTimeNoOnlinePlayers', 'Auto Reset After (h)', 72),
 			int('GuildRejoinCooldownMinutes', 'Guild Rejoin Cooldown (min)', 0),
 			int('MaxGuildsPerFrame', 'Max Guilds Per Frame', 10)
 		]
