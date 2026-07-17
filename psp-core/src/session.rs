@@ -1005,4 +1005,130 @@ mod load_tests {
         assert!(matches!(truncated_error, CoreError::Parse(_)));
         assert!(truncated_error.to_string().contains("io error"));
     }
+
+    /// Load the lexicographically first fixture from tests/fixtures/world_option/.
+    fn load_world_option_fixture() -> Result<uesave::Save, CoreError> {
+        let fixture_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../tests/fixtures/world_option/19804164.sav");
+        let bytes = std::fs::read(&fixture_path)
+            .map_err(|e| CoreError::Other(format!("Failed to read fixture: {e}")))?;
+        let mut save = crate::savio::read_sav_bytes(&bytes)?;
+        crate::domain::world_option::ensure_world_option_schemas(&mut save);
+        Ok(save)
+    }
+
+    #[test]
+    fn apply_world_option_patch_sets_dirty_only_on_real_change() {
+        let world_option = load_world_option_fixture().unwrap();
+        let mut session = SaveSession::new_for_tests(SaveKind::InMemory, minimal_uesave_save(uesave::Properties::default()));
+        session.world_option = Some(world_option);
+        session.world_option_dirty = false;
+
+        // Assert dirty is false initially
+        assert!(!session.world_option_dirty);
+
+        // Read a current setting to know what value exists
+        let current_settings = crate::domain::world_option::read_settings(
+            session.world_option.as_ref().unwrap(),
+        );
+        assert!(!current_settings.is_empty(), "fixture must have at least one setting");
+        let first_setting = &current_settings[0];
+        let original_value = first_setting.value.clone();
+
+        // Create a genuinely different value based on the setting's type
+        let different_value = match first_setting.kind {
+            crate::domain::world_option::WoKind::Bool => serde_json::json!(!original_value.as_bool().unwrap()),
+            crate::domain::world_option::WoKind::Int => {
+                let current = original_value.as_i64().unwrap_or(0);
+                serde_json::json!(current + 1)
+            }
+            crate::domain::world_option::WoKind::Float => {
+                let current = original_value.as_f64().unwrap_or(0.0);
+                serde_json::json!(current + 1.0)
+            }
+            crate::domain::world_option::WoKind::Str => serde_json::json!("different_value"),
+            crate::domain::world_option::WoKind::Name => serde_json::json!("different_name"),
+            crate::domain::world_option::WoKind::Enum(name) => {
+                // Pick a different variant; if it's "Custom", use "Easy", otherwise use "Custom"
+                let current_str = original_value.as_str().unwrap_or("");
+                let new_variant = if current_str.contains("Custom") { "Easy" } else { "Custom" };
+                serde_json::json!(format!("{}::{}", name, new_variant))
+            }
+            crate::domain::world_option::WoKind::EnumArray => serde_json::json!(["SomeValue"]),
+            crate::domain::world_option::WoKind::NameArray => serde_json::json!(["SomeName"]),
+        };
+
+        // Apply a patch with a genuinely different value
+        let patch = crate::domain::world_option::WorldOptionPatch {
+            key: first_setting.key.clone(),
+            value: different_value,
+        };
+        let result = session.apply_world_option_patch(&[patch]);
+        assert!(result.is_ok(), "patch should succeed: {result:?}");
+        assert!(session.world_option_dirty, "dirty should be true after real change");
+
+        // Now test the no-op case with a fresh session
+        let world_option = load_world_option_fixture().unwrap();
+        let mut session = SaveSession::new_for_tests(SaveKind::InMemory, minimal_uesave_save(uesave::Properties::default()));
+        session.world_option = Some(world_option);
+        session.world_option_dirty = false;
+
+        // Apply a patch with the EXISTING value (no-op)
+        let patch = crate::domain::world_option::WorldOptionPatch {
+            key: first_setting.key.clone(),
+            value: original_value,
+        };
+        let result = session.apply_world_option_patch(&[patch]);
+        assert!(result.is_ok(), "no-op patch should succeed");
+        assert!(!session.world_option_dirty, "dirty should remain false on no-op change");
+    }
+
+    #[test]
+    fn apply_world_option_patch_errors_when_no_world_option_loaded() {
+        let mut session = SaveSession::new_for_tests(SaveKind::InMemory, minimal_uesave_save(uesave::Properties::default()));
+        session.world_option = None;
+
+        let patch = crate::domain::world_option::WorldOptionPatch {
+            key: "ExpRate".to_string(),
+            value: serde_json::json!(1.0),
+        };
+        let result = session.apply_world_option_patch(&[patch]);
+        assert!(result.is_err(), "should error when world_option is None");
+        match result.unwrap_err() {
+            CoreError::Other(msg) => {
+                assert!(msg.contains("No WorldOption.sav loaded"));
+            }
+            other => panic!("expected CoreError::Other, got {other:?}"),
+        }
+    }
+
+    #[test]
+    fn load_degrades_gracefully_on_corrupt_world_option() {
+        let level_fixture_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../tests/fixtures/saves/v1_relics/Level.sav");
+        let valid_level_bytes = std::fs::read(&level_fixture_path)
+            .expect("failed to read Level.sav fixture");
+
+        let corrupt_world_option_bytes = b"not a real sav";
+
+        let session = SaveSession::load(
+            SaveKind::InMemory,
+            "test_corrupt".to_string(),
+            "steam",
+            &valid_level_bytes,
+            None,
+            Some(corrupt_world_option_bytes),
+            std::collections::BTreeMap::new(),
+            None,
+            false,
+            &null_progress(),
+        );
+
+        // Load must succeed (corrupt WorldOption does not fail the whole load)
+        assert!(session.is_ok(), "load should succeed despite corrupt WorldOption");
+
+        let session = session.unwrap();
+        // The session's world_option should be None (degraded to absent)
+        assert!(session.world_option.is_none(), "corrupted WorldOption should be degraded to None");
+    }
 }
