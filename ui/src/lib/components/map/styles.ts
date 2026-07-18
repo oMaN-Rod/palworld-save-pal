@@ -163,7 +163,7 @@ export const fastTravelLockedIconStyle = createIconStyle({
 
 export const watchTowerIconStyle = createIconStyle({
 	src: mapImg.watchTower,
-	scale: 0.9,
+	scale: 0.6,
 	anchor: [0.5, 0.5],
 	anchorXUnits: 'fraction',
 	anchorYUnits: 'fraction',
@@ -172,7 +172,7 @@ export const watchTowerIconStyle = createIconStyle({
 
 export const watchTowerLockedIconStyle = createIconStyle({
 	src: mapImg.watchTower,
-	scale: 0.9,
+	scale: 0.6,
 	anchor: [0.5, 0.5],
 	anchorXUnits: 'fraction',
 	anchorYUnits: 'fraction',
