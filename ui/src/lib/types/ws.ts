@@ -60,6 +60,7 @@ export enum MessageType {
 	NUKE_PRESETS = 'nuke_presets',
 	EXPORT_PRESET = 'export_preset',
 	IMPORT_PRESET = 'import_preset',
+	EXPORT_PRESETS = 'export_presets',
 	GET_LAB_RESEARCH = 'get_lab_research',
 	UPDATE_LAB_RESEARCH = 'update_lab_research',
 	RENAME_WORLD = 'rename_world',

@@ -185,6 +185,22 @@
 		await presetsData.exportPreset(preset.id, activeTab, preset.name);
 	}
 
+	async function handleExportSelected() {
+		if (selectedPresets.length === 0) return;
+		if (selectedPresets.length === 1) {
+			const preset = selectedPresets[0];
+			await presetsData.exportPreset(preset.id, preset.type, preset.name);
+			return;
+		}
+		await presetsData.exportPresets(
+			selectedPresets.map((preset) => ({
+				preset_id: preset.id,
+				preset_type: preset.type,
+				preset_name: preset.name
+			}))
+		);
+	}
+
 	async function handleImportPreset() {
 		await presetsData.importPreset();
 	}
@@ -266,6 +282,15 @@
 					buttonClass="hover:bg-secondary-500/50"
 				>
 					<Upload size={20} />
+				</TooltipButton>
+
+				<TooltipButton
+					popupLabel={m.export_selected()}
+					onclick={handleExportSelected}
+					buttonClass="hover:bg-primary-500/50"
+					disabled={selectedPresets.length === 0}
+				>
+					<Download size={20} />
 				</TooltipButton>
 
 				<TooltipButton
