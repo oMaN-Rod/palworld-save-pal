@@ -843,6 +843,7 @@
   "unlock_all": "Unlock All",
   "unlock_all_category_research": "Unlock All {category} Research",
   "unlock_all_fast_travel": "Unlock all Fast Travel points",
+  "unlock_all_watchtowers": "Unlock all Watchtowers",
   "unlock_full_map": "Unlock Full Map",
   "unlock_map": "Unlock Map",
   "unlock_map_confirm": "This will unlock the entire map by modifying your LocalData.sav file. You will need to select your LocalData.sav file. Continue?",
@@ -860,6 +861,7 @@
   "ups_already_empty": "UPS was already empty",
   "used_slots": "Used Slots",
   "warning": "Warning",
+  "watchtower": "Watchtower",
   "weapon": [
     {
       "declarations": [
