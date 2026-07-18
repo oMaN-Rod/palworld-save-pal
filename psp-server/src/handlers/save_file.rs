@@ -1135,6 +1135,79 @@ pub async fn handle_rename_world(
 }
 
 #[derive(Debug, serde::Deserialize)]
+pub struct SaveEditedSavData {
+    /// The uesave JSON the editor holds in Monaco.
+    pub json: String,
+    /// Seeds the "Save As" dialog's filename; the loaded save's name.
+    #[serde(default)]
+    pub file_name: Option<String>,
+}
+
+/// The JSON editor's Save button in desktop mode: the webview ignores browser
+/// `<a download>`, so the edited uesave JSON is converted to a `.sav` and
+/// written to a native-picked path. Answers on its OWN `save_edited_sav` type
+/// for success, cancel, AND soft failure alike — never a bare `error` or
+/// `no_file_selected` — so the editor's `sendAndWait`, which correlates by
+/// message type, always resolves.
+pub async fn handle_save_edited_sav(
+    data: SaveEditedSavData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    if !ctx.app.config.desktop_mode {
+        ctx.emitter.emit(
+            MessageType::SaveEditedSav,
+            &json!({"error": "Desktop mode required."}),
+        );
+        return Ok(());
+    }
+
+    // Convert BEFORE prompting: a bad edit must not open a save dialog only to
+    // fail after the user has already picked a location.
+    let sav_bytes = match psp_core::convert::json_to_sav_bytes(data.json.as_bytes()) {
+        Ok(bytes) => bytes,
+        Err(error) => {
+            ctx.emitter.emit(
+                MessageType::SaveEditedSav,
+                &json!({"error": format!("Invalid save JSON: {error}")}),
+            );
+            return Ok(());
+        }
+    };
+
+    let request = crate::desktop_dialogs::FileSaveRequest {
+        filter_name: "Save Files",
+        filter_extensions: &["sav"],
+        suggested_file_name: data
+            .file_name
+            .filter(|name| !name.is_empty())
+            .unwrap_or_else(|| "modified_save.sav".to_string()),
+        initial_directory: None,
+    };
+    let Some(path) = ctx.app.dialogs.save_file(request).await else {
+        ctx.emitter
+            .emit(MessageType::SaveEditedSav, &json!({"canceled": true}));
+        return Ok(());
+    };
+
+    if let Err(error) = std::fs::write(&path, &sav_bytes) {
+        ctx.emitter.emit(
+            MessageType::SaveEditedSav,
+            &json!({"error": format!("Failed to write save file: {error}")}),
+        );
+        return Ok(());
+    }
+
+    ctx.emitter.emit(
+        MessageType::SaveEditedSav,
+        &json!({
+            "message": "Save file written successfully",
+            "file_path": path,
+        }),
+    );
+    Ok(())
+}
+
+#[derive(Debug, serde::Deserialize)]
 pub struct ConvertSavFileData {
     /// The frontend sends the file as a JSON array of ints.
     pub file_data: Vec<u8>,

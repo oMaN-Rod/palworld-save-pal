@@ -42,6 +42,7 @@ export enum MessageType {
 	EJECT_SESSION = 'eject_session',
 	SESSION_NOT_FOUND = 'session_not_found',
 	SAVE_MODDED_SAVE = 'save_modded_save',
+	SAVE_EDITED_SAV = 'save_edited_sav',
 	GET_SETTINGS = 'get_settings',
 	UPDATE_SETTINGS = 'update_settings',
 	GET_UI_COMMON = 'get_ui_common',

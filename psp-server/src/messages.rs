@@ -183,6 +183,7 @@ define_message_types! {
     GetWorldOption => "get_world_option",
     UpdateWorldOption => "update_world_option",
     ExportPresets => "export_presets",
+    SaveEditedSav => "save_edited_sav",
 }
 
 #[cfg(test)]
@@ -330,6 +331,7 @@ mod tests {
         "get_world_option",
         "update_world_option",
         "export_presets",
+        "save_edited_sav",
     ];
 
     #[test]

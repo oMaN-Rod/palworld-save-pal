@@ -225,6 +225,9 @@ async fn route(
         MessageType::SaveModdedSave => {
             handlers::save_file::handle_save_modded_save(serde_json::from_value(data)?, ctx).await
         }
+        MessageType::SaveEditedSav => {
+            handlers::save_file::handle_save_edited_sav(serde_json::from_value(data)?, ctx).await
+        }
         MessageType::RenameWorld => {
             handlers::save_file::handle_rename_world(serde_json::from_value(data)?, ctx).await
         }
