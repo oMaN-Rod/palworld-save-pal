@@ -257,12 +257,14 @@
 
 			<div class="flex items-center space-x-2">
 				<div class="grow">
-					<Select
-						options={sortOptions}
-						value={activeConfig.mode}
-						onChange={(v) => setMode(activeTypeKey, v as PresetSortMode)}
-						label={m.sort_by()}
-					/>
+					{#key activeTypeKey}
+						<Select
+							options={sortOptions}
+							value={activeConfig.mode}
+							onChange={(v) => setMode(activeTypeKey, v as PresetSortMode)}
+							label={m.sort_by()}
+						/>
+					{/key}
 				</div>
 
 				{#if activeConfig.mode === 'name'}
