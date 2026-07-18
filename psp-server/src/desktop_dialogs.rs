@@ -179,6 +179,21 @@ impl QueuedDialogProvider {
             queued_folder_responses: Mutex::new(VecDeque::new()),
         }
     }
+
+    /// Seeds both the save queue (for export) and the multi-file pick queue
+    /// (for import), so a single provider can drive an export-then-import
+    /// round trip in one test. `pick_file`/`pick_folder` queues stay empty.
+    pub fn new_with_saves_and_pick_files(
+        save_responses: Vec<Option<PathBuf>>,
+        pick_files_responses: Vec<Option<Vec<PathBuf>>>,
+    ) -> Self {
+        Self {
+            queued_pick_responses: Mutex::new(VecDeque::new()),
+            queued_pick_files_responses: Mutex::new(pick_files_responses.into()),
+            queued_save_responses: Mutex::new(save_responses.into()),
+            queued_folder_responses: Mutex::new(VecDeque::new()),
+        }
+    }
 }
 
 impl FileDialogProvider for QueuedDialogProvider {
