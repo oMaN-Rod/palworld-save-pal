@@ -153,3 +153,101 @@ async fn item_edit_survives_update_save_modded_save_and_reload() {
 
     server.handle.shutdown().await;
 }
+
+/// GUID for WatchTower_11 (`BP_LevelObject_UnlockMapPoint_C`) from
+/// `data/json/fast_travel_points.json`. Unlocking it writes into the save's
+/// `FastTravelPointUnlockFlag` map; this test proves that flag survives a
+/// full write -> reload cycle via `unlocked_fast_travel_points`.
+const WATCHTOWER_11_GUID: &str = "0C0AF9F34C0491BCAD80B1BF355B9A98";
+
+#[tokio::test]
+async fn watchtower_unlock_survives_update_save_modded_save_and_reload() {
+    let temp_root = tempfile::tempdir().unwrap();
+    let world1_copy = temp_root.path().join("world1");
+    copy_dir_recursive(
+        &repo_root().join("tests/fixtures/saves/world1"),
+        &world1_copy,
+    );
+    let level_sav_path = world1_copy.join("Level.sav").to_string_lossy().into_owned();
+
+    let server = common::start_test_server().await;
+    let db_path = server._temp_dir.path().join("psp-rs.db");
+    let db = psp_db::open(&db_path).await.expect("open test db");
+    psp_db::settings::update_save_dir(&db, &world1_copy.to_string_lossy())
+        .await
+        .expect("set save_dir to temp world1 copy");
+
+    let mut socket = common::connect(&server).await;
+
+    select_save(&mut socket, &level_sav_path).await;
+
+    let mut player = load_player(&mut socket, WORLD1_PLAYER_O).await;
+    let existing: Vec<String> = player["unlocked_fast_travel_points"]
+        .as_array()
+        .map(|points| {
+            points
+                .iter()
+                .map(|point| point.as_str().unwrap_or_default().to_string())
+                .collect()
+        })
+        .unwrap_or_default();
+    assert!(
+        !existing
+            .iter()
+            .any(|point| point.eq_ignore_ascii_case(WATCHTOWER_11_GUID)),
+        "sanity check failed: world1 fixture player already has watchtower unlocked: {existing:?}"
+    );
+
+    let player_object = player.as_object_mut().expect("player is an object");
+    let points = player_object
+        .entry("unlocked_fast_travel_points")
+        .or_insert_with(|| json!([]));
+    if points.is_null() {
+        *points = json!([]);
+    }
+    points
+        .as_array_mut()
+        .expect("unlocked_fast_travel_points is an array")
+        .push(json!(WATCHTOWER_11_GUID));
+
+    common::send_json(
+        &mut socket,
+        json!({"type": "update_save_file",
+               "data": {"modified_players": {WORLD1_PLAYER_O: player}}}),
+    )
+    .await;
+    let update_frames = recv_until(&mut socket, "update_save_file").await;
+    assert_eq!(update_frames.last().unwrap()["data"], "Changes saved");
+
+    common::send_json(
+        &mut socket,
+        json!({"type": "save_modded_save", "data": null}),
+    )
+    .await;
+    let save_frames = recv_until(&mut socket, "save_modded_save").await;
+    assert_eq!(
+        save_frames.last().unwrap()["data"],
+        "Modded save file saved successfully"
+    );
+
+    // Re-load fresh from the same path on disk: the unlocked watchtower must
+    // still be there, proving it round-tripped through FastTravelPointUnlockFlag.
+    select_save(&mut socket, &level_sav_path).await;
+    let reloaded_player = load_player(&mut socket, WORLD1_PLAYER_O).await;
+    let reloaded_points = reloaded_player["unlocked_fast_travel_points"]
+        .as_array()
+        .expect("reloaded player has unlocked_fast_travel_points");
+    let found = reloaded_points.iter().any(|point| {
+        point
+            .as_str()
+            .map(|s| s.to_ascii_uppercase() == WATCHTOWER_11_GUID.to_ascii_uppercase())
+            .unwrap_or(false)
+    });
+    assert!(
+        found,
+        "watchtower GUID {WATCHTOWER_11_GUID} must survive update_save_file -> \
+         save_modded_save -> reload from disk, got points: {reloaded_points:?}"
+    );
+
+    server.handle.shutdown().await;
+}
