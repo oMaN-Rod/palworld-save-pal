@@ -3,7 +3,7 @@
 	import { Button, List, TooltipButton } from '$components/ui';
 	import { itemsData, presetsData } from '$lib/data';
 	import type { ItemContainer, ItemContainerSlot, PresetProfile } from '$lib/types';
-	import { getModalState } from '$states';
+	import { getModalState, sortPresets } from '$states';
 	import { EntryState } from '$types';
 	import { deepCopy } from '$utils';
 	import {
@@ -35,14 +35,17 @@
 	let selectAll: boolean = $state(false);
 
 	let filteredPresets: ExtendedPresetProfile[] = $derived.by(() => {
-		return Object.entries(presetsData.presetProfiles)
-			.filter(
-				([_, preset]) =>
-					preset.type === 'storage' &&
-					preset.storage_container &&
-					(preset.storage_container.slots?.length ?? 0) <= container.slots.length
-			)
-			.map(([id, preset]) => ({ ...preset, id }));
+		return sortPresets(
+			Object.entries(presetsData.presetProfiles)
+				.filter(
+					([_, preset]) =>
+						preset.type === 'storage' &&
+						preset.storage_container &&
+						(preset.storage_container.slots?.length ?? 0) <= container.slots.length
+				)
+				.map(([id, preset]) => ({ ...preset, id })),
+			'storage'
+		);
 	});
 
 	async function handleApplyPreset() {
