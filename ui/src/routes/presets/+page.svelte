@@ -11,8 +11,17 @@
 		sortPresets
 	} from '$states';
 	import type { PresetTypeKey, PresetSortMode } from '$states';
-	import { debounce } from '$utils';
-	import { Trash, RefreshCcw, Download, Upload, ArrowDownAZ, ArrowUpAZ } from 'lucide-svelte';
+	import { debounce, moveIds } from '$utils';
+	import {
+		Trash,
+		RefreshCcw,
+		Download,
+		Upload,
+		ArrowDownAZ,
+		ArrowUpAZ,
+		ChevronUp,
+		ChevronDown
+	} from 'lucide-svelte';
 	import { cn } from '$theme';
 	import { MessageType, type PresetProfile } from '$types';
 	import { staticIcons } from '$types/icons';
@@ -69,35 +78,52 @@
 	const activeSkillPresets = $derived(presetsOfType('active_skills'));
 	const storagePresets = $derived(presetsOfType('storage'));
 
-	const filteredPresets = $derived.by(() => {
-		let presets: ExtendedPresetProfile[] = [];
-
+	const activePresets = $derived.by(() => {
 		switch (activeTab) {
 			case 'pal':
-				presets = palPresets;
-				break;
+				return palPresets;
 			case 'inventory':
-				presets = inventoryPresets;
-				break;
+				return inventoryPresets;
 			case 'passive':
-				presets = passiveSkillPresets;
-				break;
+				return passiveSkillPresets;
 			case 'active':
-				presets = activeSkillPresets;
-				break;
+				return activeSkillPresets;
 			case 'storage':
-				presets = storagePresets;
-				break;
+				return storagePresets;
 		}
+		return [];
+	});
 
+	const filteredPresets = $derived.by(() => {
+		let presets = activePresets;
 		if (searchQuery) {
 			presets = presets.filter((preset) =>
 				preset.name.toLowerCase().includes(searchQuery.toLowerCase())
 			);
 		}
-
 		return sortPresets(presets, activeTypeKey);
 	});
+
+	// Reordering acts on the full (unfiltered) order; disabled while searching so
+	// hidden presets keep their place. First move auto-switches the tab to custom
+	// mode, seeding the custom order from what is currently displayed.
+	function moveSelected(direction: 'up' | 'down') {
+		if (searchQuery || selectedPresets.length === 0) return;
+		const ordered = sortPresets(activePresets, activeTypeKey).map((preset) => preset.id);
+		const selectedIds = new Set(selectedPresets.map((preset) => preset.id));
+		const moved = moveIds(ordered, selectedIds, direction);
+		setMode(activeTypeKey, 'custom');
+		setCustomOrder(activeTypeKey, moved);
+	}
+
+	function handlePanelKeydown(event: KeyboardEvent) {
+		if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
+		const target = event.target as HTMLElement;
+		if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') return;
+		if (searchQuery || selectedPresets.length === 0) return;
+		event.preventDefault();
+		moveSelected(event.key === 'ArrowUp' ? 'up' : 'down');
+	}
 
 	async function handleDeletePresets() {
 		if (selectedPresets.length === 0) return;
@@ -240,7 +266,7 @@
 		class="grid h-full w-full grid-cols-[minmax(200px,320px)_1fr] lg:grid-cols-[280px_1fr] xl:grid-cols-[320px_1fr]"
 	>
 		<!-- Left Controls -->
-		<div class="shrink-0 space-y-2 overflow-y-auto p-4">
+		<div class="shrink-0 space-y-2 overflow-y-auto p-4" onkeydown={handlePanelKeydown} role="none">
 			<div class="flex items-center space-x-2">
 				<div class="grow">
 					<Input bind:value={searchQuery} placeholder={m.search_presets()} inputClass="w-full" />
@@ -310,6 +336,26 @@
 					disabled={selectedPresets.length === 0}
 				>
 					<Trash size={20} />
+				</TooltipButton>
+
+				<div class="bg-surface-700/50 mx-1 w-px self-stretch"></div>
+
+				<TooltipButton
+					popupLabel={m.move_up()}
+					onclick={() => moveSelected('up')}
+					buttonClass="hover:bg-secondary-500/50"
+					disabled={selectedPresets.length === 0 || !!searchQuery}
+				>
+					<ChevronUp size={20} />
+				</TooltipButton>
+
+				<TooltipButton
+					popupLabel={m.move_down()}
+					onclick={() => moveSelected('down')}
+					buttonClass="hover:bg-secondary-500/50"
+					disabled={selectedPresets.length === 0 || !!searchQuery}
+				>
+					<ChevronDown size={20} />
 				</TooltipButton>
 			</div>
 

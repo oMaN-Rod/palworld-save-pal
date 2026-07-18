@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { orderPresets, type PresetSortConfig } from './presetSort';
+import { moveIds, orderPresets, type PresetSortConfig } from './presetSort';
 
 type P = { id: string; name: string };
 const list: P[] = [
@@ -55,5 +55,39 @@ describe('orderPresets', () => {
 		const input = [...list];
 		orderPresets(input, cfg({ mode: 'name', direction: 'desc' }));
 		expect(input.map((p) => p.id)).toEqual(['b', 'a', 'c']);
+	});
+});
+
+describe('moveIds', () => {
+	const set = (...ids: string[]) => new Set(ids);
+
+	it('moves a contiguous block up past the neighbor above', () => {
+		expect(moveIds(['a', 'b', 'c', 'd'], set('b', 'c'), 'up')).toEqual(['b', 'c', 'a', 'd']);
+	});
+
+	it('moves a contiguous block down past the neighbor below', () => {
+		expect(moveIds(['a', 'b', 'c', 'd'], set('a', 'b'), 'down')).toEqual(['c', 'a', 'b', 'd']);
+	});
+
+	it('moves non-contiguous selected items independently (up)', () => {
+		expect(moveIds(['a', 'b', 'c', 'd'], set('b', 'd'), 'up')).toEqual(['b', 'a', 'd', 'c']);
+	});
+
+	it('keeps a top-anchored block in place when moving up', () => {
+		expect(moveIds(['a', 'b', 'c', 'd'], set('a', 'b'), 'up')).toEqual(['a', 'b', 'c', 'd']);
+	});
+
+	it('keeps a bottom-anchored block in place when moving down', () => {
+		expect(moveIds(['a', 'b', 'c', 'd'], set('c', 'd'), 'down')).toEqual(['a', 'b', 'c', 'd']);
+	});
+
+	it('is a no-op when nothing is selected', () => {
+		expect(moveIds(['a', 'b', 'c'], set(), 'up')).toEqual(['a', 'b', 'c']);
+	});
+
+	it('does not mutate the input array', () => {
+		const input = ['a', 'b', 'c'];
+		moveIds(input, set('c'), 'up');
+		expect(input).toEqual(['a', 'b', 'c']);
 	});
 });
