@@ -1,9 +1,17 @@
 <script lang="ts">
 	import { presetsData } from '$lib/data';
-	import { Button, List, TooltipButton, Input, Tooltip } from '$components/ui';
-	import { getModalState, getToastState } from '$states';
+	import { Button, List, TooltipButton, Input, Tooltip, Select } from '$components/ui';
+	import {
+		getModalState,
+		getToastState,
+		getConfig,
+		setMode,
+		setDirection,
+		sortPresets
+	} from '$states';
+	import type { PresetTypeKey, PresetSortMode } from '$states';
 	import { debounce } from '$utils';
-	import { Trash, RefreshCcw, Download, Upload } from 'lucide-svelte';
+	import { Trash, RefreshCcw, Download, Upload, ArrowDownAZ, ArrowUpAZ } from 'lucide-svelte';
 	import { cn } from '$theme';
 	import { MessageType, type PresetProfile } from '$types';
 	import { staticIcons } from '$types/icons';
@@ -28,65 +36,37 @@
 	let searchQuery = $state('');
 	let selectedPresets: ExtendedPresetProfile[] = $state([]);
 
+	const TAB_TYPE: Record<PresetType, PresetTypeKey> = {
+		pal: 'pal_preset',
+		inventory: 'inventory',
+		passive: 'passive_skills',
+		active: 'active_skills',
+		storage: 'storage'
+	};
+	const activeTypeKey = $derived(TAB_TYPE[activeTab]);
+	const activeConfig = $derived(getConfig(activeTypeKey));
+
+	const sortOptions = $derived([
+		{ value: 'name', label: m.name() },
+		{ value: 'custom', label: m.sort_custom() }
+	]);
+
 	const presetsClass = $derived(
 		// @ts-ignore
 		activeTab === 'active' || activeTab === 'passive' ? 'grid grid-cols-2' : 'flex flex-col'
 	);
 
-	const palPresets = $derived(
-		Object.values(presetsData.presetProfiles)
-			.filter((p) => p.type === 'pal_preset')
-			.map((preset) => ({
-				...preset,
-				id: Object.keys(presetsData.presetProfiles)[
-					Object.values(presetsData.presetProfiles).findIndex((p) => p === preset)
-				]
-			}))
-	);
+	function presetsOfType(type: PresetProfile['type']): ExtendedPresetProfile[] {
+		return Object.entries(presetsData.presetProfiles)
+			.filter(([, preset]) => preset.type === type)
+			.map(([id, preset]) => ({ ...preset, id }));
+	}
 
-	const inventoryPresets = $derived(
-		Object.values(presetsData.presetProfiles)
-			.filter((p) => p.type === 'inventory')
-			.map((preset) => ({
-				...preset,
-				id: Object.keys(presetsData.presetProfiles)[
-					Object.values(presetsData.presetProfiles).findIndex((p) => p === preset)
-				]
-			}))
-	);
-
-	const passiveSkillPresets = $derived(
-		Object.values(presetsData.presetProfiles)
-			.filter((p) => p.type === 'passive_skills')
-			.map((preset) => ({
-				...preset,
-				id: Object.keys(presetsData.presetProfiles)[
-					Object.values(presetsData.presetProfiles).findIndex((p) => p === preset)
-				]
-			}))
-	);
-
-	const activeSkillPresets = $derived(
-		Object.values(presetsData.presetProfiles)
-			.filter((p) => p.type === 'active_skills')
-			.map((preset) => ({
-				...preset,
-				id: Object.keys(presetsData.presetProfiles)[
-					Object.values(presetsData.presetProfiles).findIndex((p) => p === preset)
-				]
-			}))
-	);
-
-	const storagePresets = $derived(
-		Object.values(presetsData.presetProfiles)
-			.filter((p) => p.type === 'storage')
-			.map((preset) => ({
-				...preset,
-				id: Object.keys(presetsData.presetProfiles)[
-					Object.values(presetsData.presetProfiles).findIndex((p) => p === preset)
-				]
-			}))
-	);
+	const palPresets = $derived(presetsOfType('pal_preset'));
+	const inventoryPresets = $derived(presetsOfType('inventory'));
+	const passiveSkillPresets = $derived(presetsOfType('passive_skills'));
+	const activeSkillPresets = $derived(presetsOfType('active_skills'));
+	const storagePresets = $derived(presetsOfType('storage'));
 
 	const filteredPresets = $derived.by(() => {
 		let presets: ExtendedPresetProfile[] = [];
@@ -115,7 +95,7 @@
 			);
 		}
 
-		return presets;
+		return sortPresets(presets, activeTypeKey);
 	});
 
 	async function handleDeletePresets() {
@@ -273,6 +253,31 @@
 				>
 					<RefreshCcw class="h-6 w-6" />
 				</TooltipButton>
+			</div>
+
+			<div class="flex items-center space-x-2">
+				<div class="grow">
+					<Select
+						options={sortOptions}
+						value={activeConfig.mode}
+						onChange={(v) => setMode(activeTypeKey, v as PresetSortMode)}
+						label={m.sort_by()}
+					/>
+				</div>
+
+				{#if activeConfig.mode === 'name'}
+					<TooltipButton
+						popupLabel={activeConfig.direction === 'asc' ? m.sort_descending() : m.sort_ascending()}
+						onclick={() =>
+							setDirection(activeTypeKey, activeConfig.direction === 'asc' ? 'desc' : 'asc')}
+					>
+						{#if activeConfig.direction === 'asc'}
+							<ArrowDownAZ class="h-6 w-6" />
+						{:else}
+							<ArrowUpAZ class="h-6 w-6" />
+						{/if}
+					</TooltipButton>
+				{/if}
 			</div>
 
 			<div class="border-surface-700/50 bg-surface-900 flex gap-1 rounded-sm border p-1">
