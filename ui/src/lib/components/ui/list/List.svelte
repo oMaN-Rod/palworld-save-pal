@@ -2,6 +2,7 @@
 	import { cn } from '$theme';
 	import type { Snippet } from 'svelte';
 	import { Checkbox, Tooltip } from '$components/ui';
+	import { GripVertical } from 'lucide-svelte';
 
 	let {
 		items = $bindable([]),
@@ -21,6 +22,8 @@
 		listItemPopup,
 		onselect = (item: T) => {},
 		idKey = 'id',
+		reorderable = false,
+		onReorder,
 		...additionalProps
 	} = $props<{
 		items: T[];
@@ -40,6 +43,8 @@
 		listItemPopup?: Snippet<[T]>;
 		onselect?: (item: T) => void;
 		idKey?: string;
+		reorderable?: boolean;
+		onReorder?: (orderedIds: (string | number)[]) => void;
 		[key: string]: any;
 	}>();
 
@@ -124,6 +129,30 @@
 		return (!onlyHighlightChecked && item === selectedItem) || selectedItemsSet.has(key);
 	}
 
+	let dragSourceIndex: number | null = $state(null);
+
+	function handleDragStart(index: number) {
+		dragSourceIndex = index;
+	}
+
+	function handleDragOver(event: DragEvent) {
+		if (reorderable && dragSourceIndex !== null) {
+			event.preventDefault();
+		}
+	}
+
+	function handleDrop(index: number) {
+		if (!reorderable || dragSourceIndex === null || dragSourceIndex === index) {
+			dragSourceIndex = null;
+			return;
+		}
+		const reordered = [...items];
+		const [moved] = reordered.splice(dragSourceIndex, 1);
+		reordered.splice(index, 0, moved);
+		dragSourceIndex = null;
+		onReorder?.(reordered.map(getItemKey));
+	}
+
 	$effect(() => {
 		if (items.length > 0) {
 			selectAll = selectedItemsSet.size === items.length;
@@ -143,8 +172,22 @@
 		</div>
 	</div>
 	<ul class={listClass}>
-		{#each items as item (getItemKey(item))}
-			<li class={cn(itemClass, isSelected(item) ? 'bg-secondary-500/25' : '')}>
+		{#each items as item, i (getItemKey(item))}
+			<li
+				class={cn(itemClass, isSelected(item) ? 'bg-secondary-500/25' : '')}
+				ondragover={handleDragOver}
+				ondrop={() => handleDrop(i)}
+			>
+				{#if reorderable}
+					<span
+						class="text-surface-400 mr-1 cursor-grab active:cursor-grabbing"
+						draggable="true"
+						ondragstart={() => handleDragStart(i)}
+						aria-label="Drag to reorder"
+					>
+						<GripVertical class="h-4 w-4" />
+					</span>
+				{/if}
 				{#if canSelect}
 					<Checkbox
 						checked={selectedItemsSet.has(getItemKey(item))}
