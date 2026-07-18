@@ -153,6 +153,29 @@ fn strip_preset_ids(preset: &mut serde_json::Value) {
     }
 }
 
+/// Imports every preset in `value` — a single object, or an array of objects —
+/// stripping identifiers so each is added with a fresh id. Non-object entries
+/// are skipped. Returns the number of presets added.
+async fn import_preset_value(
+    db: &sqlx::SqlitePool,
+    value: serde_json::Value,
+) -> Result<usize, HandlerError> {
+    let items = match value {
+        serde_json::Value::Array(items) => items,
+        other => vec![other],
+    };
+    let mut imported = 0;
+    for mut preset in items {
+        if !preset.is_object() {
+            continue;
+        }
+        strip_preset_ids(&mut preset);
+        psp_db::presets::add(db, preset).await?;
+        imported += 1;
+    }
+    Ok(imported)
+}
+
 pub async fn handle_import_preset(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     if !ctx.app.config.desktop_mode {
         ctx.emitter
@@ -233,5 +256,33 @@ mod tests {
         .unwrap();
         let second_frame = test.next_frame_json();
         assert_eq!(second_frame["data"].as_object().unwrap().len(), 1);
+    }
+
+    #[tokio::test]
+    async fn import_preset_value_adds_single_object_and_strips_id() {
+        let test = TestContext::new(|_json_dir| {}).await;
+        let value = serde_json::json!({
+            "id": "old-id", "name": "Solo", "type": "inventory"
+        });
+        let added = import_preset_value(&test.app.db, value).await.unwrap();
+        assert_eq!(added, 1);
+
+        let presets = psp_db::presets::get_all(&test.app.db).await.unwrap();
+        assert_eq!(presets.len(), 1);
+        let (new_id, preset) = presets.iter().next().unwrap();
+        assert_ne!(new_id, "old-id");
+        assert_eq!(preset["name"], "Solo");
+    }
+
+    #[tokio::test]
+    async fn import_preset_value_adds_every_item_in_array() {
+        let test = TestContext::new(|_json_dir| {}).await;
+        let value = serde_json::json!([
+            {"name": "A", "type": "inventory"},
+            {"name": "B", "type": "inventory"},
+        ]);
+        let added = import_preset_value(&test.app.db, value).await.unwrap();
+        assert_eq!(added, 2);
+        assert_eq!(psp_db::presets::get_all(&test.app.db).await.unwrap().len(), 2);
     }
 }
