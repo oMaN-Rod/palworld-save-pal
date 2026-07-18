@@ -237,6 +237,7 @@ export type MapObject = {
 };
 
 export type FastTravelPoint = {
+	class: string;
 	x: number;
 	y: number;
 	z: number;
@@ -267,6 +268,7 @@ export type MapUnlockPoint = {
 	x: number;
 	y: number;
 	localized_name: string;
+	class?: string;
 	unlocked?: boolean;
 };
 
