@@ -185,30 +185,103 @@ pub async fn handle_import_preset(ctx: &mut HandlerCtx<'_>) -> Result<(), Handle
 
     let request = crate::desktop_dialogs::FileDialogRequest {
         filter_name: "Preset Files",
-        filter_extensions: &["json"],
+        filter_extensions: &["zip", "json"],
         initial_directory: None,
     };
-    let Some(path) = ctx.app.dialogs.pick_file(request).await else {
+    let Some(paths) = ctx.app.dialogs.pick_files(request).await else {
         ctx.emitter
             .emit(MessageType::NoFileSelected, &"No file selected");
         return Ok(());
     };
+    if paths.is_empty() {
+        ctx.emitter
+            .emit(MessageType::NoFileSelected, &"No file selected");
+        return Ok(());
+    }
 
-    let contents = std::fs::read_to_string(&path)
-        .map_err(|e| HandlerError::Other(format!("Failed to read preset file: {e}")))?;
-    let mut preset: serde_json::Value = serde_json::from_str(&contents)?;
-    strip_preset_ids(&mut preset);
+    let mut imported = 0usize;
+    let mut skipped = 0usize;
+    for path in &paths {
+        let is_zip = path
+            .extension()
+            .and_then(|ext| ext.to_str())
+            .map(|ext| ext.eq_ignore_ascii_case("zip"))
+            .unwrap_or(false);
+        if is_zip {
+            match import_zip(&ctx.app.db, path).await {
+                Ok((added, bad)) => {
+                    imported += added;
+                    skipped += bad;
+                }
+                Err(_) => skipped += 1,
+            }
+        } else {
+            let parsed = std::fs::read_to_string(path)
+                .ok()
+                .and_then(|contents| serde_json::from_str::<serde_json::Value>(&contents).ok());
+            match parsed {
+                Some(value) => match import_preset_value(&ctx.app.db, value).await {
+                    Ok(added) => imported += added,
+                    Err(_) => skipped += 1,
+                },
+                None => skipped += 1,
+            }
+        }
+    }
 
-    let preset_id = psp_db::presets::add(&ctx.app.db, preset).await?;
+    let message = if skipped > 0 {
+        format!("{imported} presets imported, {skipped} skipped")
+    } else {
+        format!("{imported} presets imported successfully")
+    };
     ctx.emitter.emit(
         MessageType::ImportPreset,
-        &serde_json::json!({
-            "message": "Preset imported successfully",
-            "preset_id": preset_id,
-            "file_path": path,
-        }),
+        &serde_json::json!({ "message": message, "count": imported }),
     );
     Ok(())
+}
+
+/// Reads every `.json` entry from a zip archive and imports it. Returns
+/// `(imported, skipped)`. Entries are fully read before any async add so no
+/// non-`Send` zip handle is held across an await point.
+async fn import_zip(
+    db: &sqlx::SqlitePool,
+    path: &std::path::Path,
+) -> Result<(usize, usize), HandlerError> {
+    use std::io::Read;
+    let bytes = std::fs::read(path)
+        .map_err(|e| HandlerError::Other(format!("Failed to read preset archive: {e}")))?;
+    let mut archive = zip::ZipArchive::new(std::io::Cursor::new(bytes))
+        .map_err(|e| HandlerError::Other(e.to_string()))?;
+
+    let mut values = Vec::new();
+    let mut skipped = 0usize;
+    for index in 0..archive.len() {
+        let mut entry = archive
+            .by_index(index)
+            .map_err(|e| HandlerError::Other(e.to_string()))?;
+        if entry.is_dir() || !entry.name().to_ascii_lowercase().ends_with(".json") {
+            continue;
+        }
+        let mut contents = String::new();
+        if entry.read_to_string(&mut contents).is_err() {
+            skipped += 1;
+            continue;
+        }
+        match serde_json::from_str::<serde_json::Value>(&contents) {
+            Ok(value) => values.push(value),
+            Err(_) => skipped += 1,
+        }
+    }
+
+    let mut imported = 0usize;
+    for value in values {
+        match import_preset_value(db, value).await {
+            Ok(added) => imported += added,
+            Err(_) => skipped += 1,
+        }
+    }
+    Ok((imported, skipped))
 }
 
 #[cfg(test)]

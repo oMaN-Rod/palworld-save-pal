@@ -85,7 +85,7 @@ async fn import_preset_strips_id_and_adds() {
     .expect("write import fixture");
 
     let server = common::start_desktop_test_server(std::sync::Arc::new(
-        QueuedDialogProvider::new(vec![Some(import_path.clone())]),
+        QueuedDialogProvider::new_with_pick_files(vec![Some(vec![import_path.clone()])]),
     ))
     .await;
     let mut socket = common::connect(&server).await;
@@ -94,19 +94,78 @@ async fn import_preset_strips_id_and_adds() {
 
     let reply = common::next_json(&mut socket).await;
     assert_eq!(reply["type"], "import_preset");
-    let new_id = reply["data"]["preset_id"].as_str().expect("preset_id string");
-    assert_ne!(new_id, "old-fixed-id");
-    assert_eq!(
-        reply["data"]["file_path"],
-        import_path.to_string_lossy().as_ref()
-    );
+    assert_eq!(reply["data"]["count"], 1);
 
     common::send_json(&mut socket, serde_json::json!({"type": "get_presets", "data": null})).await;
     let presets = common::next_json(&mut socket).await;
-    let imported = &presets["data"][new_id];
-    assert_eq!(imported["name"], "Imported");
+    let imported = presets["data"]
+        .as_object()
+        .unwrap()
+        .values()
+        .find(|p| p["name"] == "Imported")
+        .expect("imported preset present");
     assert_eq!(imported["type"], "inventory");
-    assert_eq!(imported["id"], new_id);
+    assert_ne!(imported["id"], "old-fixed-id");
+
+    server.handle.shutdown().await;
+}
+
+#[tokio::test]
+async fn import_preset_reads_zip_and_json_array() {
+    use std::io::Write;
+    let scratch = tempfile::tempdir().expect("tempdir");
+
+    // A zip with two preset entries.
+    let zip_path = scratch.path().join("bundle.zip");
+    {
+        let file = std::fs::File::create(&zip_path).unwrap();
+        let mut writer = zip::ZipWriter::new(file);
+        let options = zip::write::SimpleFileOptions::default();
+        writer.start_file("Zed.json", options).unwrap();
+        writer
+            .write_all(
+                serde_json::json!({"name": "Zed", "type": "inventory"})
+                    .to_string()
+                    .as_bytes(),
+            )
+            .unwrap();
+        writer.start_file("Yan.json", options).unwrap();
+        writer
+            .write_all(
+                serde_json::json!({"name": "Yan", "type": "inventory"})
+                    .to_string()
+                    .as_bytes(),
+            )
+            .unwrap();
+        writer.finish().unwrap();
+    }
+
+    // A json file holding an array of two presets.
+    let array_path = scratch.path().join("array.json");
+    std::fs::write(
+        &array_path,
+        serde_json::json!([
+            {"name": "Arr1", "type": "inventory"},
+            {"name": "Arr2", "type": "inventory"},
+        ])
+        .to_string(),
+    )
+    .unwrap();
+
+    let server = common::start_desktop_test_server(std::sync::Arc::new(
+        QueuedDialogProvider::new_with_pick_files(vec![Some(vec![zip_path, array_path])]),
+    ))
+    .await;
+    let mut socket = common::connect(&server).await;
+
+    common::send_json(&mut socket, serde_json::json!({"type": "import_preset", "data": null})).await;
+    let reply = common::next_json(&mut socket).await;
+    assert_eq!(reply["type"], "import_preset");
+    assert_eq!(reply["data"]["count"], 4);
+
+    common::send_json(&mut socket, serde_json::json!({"type": "get_presets", "data": null})).await;
+    let presets = common::next_json(&mut socket).await;
+    assert_eq!(presets["data"].as_object().unwrap().len(), 4);
 
     server.handle.shutdown().await;
 }
@@ -114,7 +173,7 @@ async fn import_preset_strips_id_and_adds() {
 #[tokio::test]
 async fn import_preset_canceled_emits_no_file_selected() {
     let server = common::start_desktop_test_server(std::sync::Arc::new(
-        QueuedDialogProvider::new(vec![None]),
+        QueuedDialogProvider::new_with_pick_files(vec![None]),
     ))
     .await;
     let mut socket = common::connect(&server).await;
