@@ -319,7 +319,7 @@
 				bind:selectedItems={selectedPresets}
 				multiple={true}
 				headerClass="grid w-full grid-cols-[auto_1fr_auto] gap-2 rounded-sm"
-				reorderable={activeConfig.mode === 'custom'}
+				reorderable={activeConfig.mode === 'custom' && !searchQuery}
 				onReorder={(ids) => setCustomOrder(activeTypeKey, ids as string[])}
 			>
 				{#snippet listHeader()}
