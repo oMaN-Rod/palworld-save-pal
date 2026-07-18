@@ -171,6 +171,48 @@ async fn import_preset_reads_zip_and_json_array() {
 }
 
 #[tokio::test]
+async fn export_presets_writes_zip_of_selected() {
+    let scratch = tempfile::tempdir().expect("tempdir");
+    let zip_path = scratch.path().join("presets.zip");
+
+    let server = common::start_desktop_test_server(std::sync::Arc::new(
+        QueuedDialogProvider::new_with_saves(vec![], vec![Some(zip_path.clone())]),
+    ))
+    .await;
+    let mut socket = common::connect(&server).await;
+
+    let id_a = add_inventory_preset(&mut socket, "Alpha").await;
+    let id_b = add_inventory_preset(&mut socket, "Beta").await;
+
+    common::send_json(
+        &mut socket,
+        serde_json::json!({"type": "export_presets", "data": [
+            {"preset_id": id_a, "preset_type": "inventory", "preset_name": "Alpha"},
+            {"preset_id": id_b, "preset_type": "inventory", "preset_name": "Beta"},
+        ]}),
+    )
+    .await;
+
+    let reply = common::next_json(&mut socket).await;
+    assert_eq!(reply["type"], "export_presets");
+    assert_eq!(
+        reply["data"]["file_path"],
+        zip_path.to_string_lossy().as_ref()
+    );
+
+    let file = std::fs::File::open(&zip_path).expect("zip written");
+    let mut archive = zip::ZipArchive::new(file).expect("valid zip");
+    assert_eq!(archive.len(), 2);
+    let mut names: Vec<String> = (0..archive.len())
+        .map(|i| archive.by_index(i).unwrap().name().to_string())
+        .collect();
+    names.sort();
+    assert_eq!(names, vec!["Alpha.json".to_string(), "Beta.json".to_string()]);
+
+    server.handle.shutdown().await;
+}
+
+#[tokio::test]
 async fn import_preset_canceled_emits_no_file_selected() {
     let server = common::start_desktop_test_server(std::sync::Arc::new(
         QueuedDialogProvider::new_with_pick_files(vec![None]),

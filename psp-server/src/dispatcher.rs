@@ -156,6 +156,9 @@ async fn route(
         MessageType::ExportPreset => {
             handlers::presets::handle_export_preset(serde_json::from_value(data)?, ctx).await
         }
+        MessageType::ExportPresets => {
+            handlers::presets::handle_export_presets(serde_json::from_value(data)?, ctx).await
+        }
         MessageType::ImportPreset => handlers::presets::handle_import_preset(ctx).await,
         MessageType::SelectSave => {
             handlers::save_file::handle_select_save(serde_json::from_value(data)?, ctx).await

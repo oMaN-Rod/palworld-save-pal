@@ -182,6 +182,7 @@ define_message_types! {
     // World options
     GetWorldOption => "get_world_option",
     UpdateWorldOption => "update_world_option",
+    ExportPresets => "export_presets",
 }
 
 #[cfg(test)]
@@ -328,6 +329,7 @@ mod tests {
         "session_not_found",
         "get_world_option",
         "update_world_option",
+        "export_presets",
     ];
 
     #[test]

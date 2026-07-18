@@ -140,6 +140,99 @@ pub async fn handle_export_preset(
     Ok(())
 }
 
+/// Turns a preset name into a safe, unique `<name>.json` zip entry. Path/reserved
+/// characters and controls become `_`; blank names become `preset`; collisions
+/// get a `-2`, `-3`, … suffix.
+fn zip_entry_name(name: &str, used: &mut std::collections::HashSet<String>) -> String {
+    let sanitized: String = name
+        .chars()
+        .map(|c| {
+            if c.is_control() || matches!(c, '/' | '\\' | ':' | '*' | '?' | '"' | '<' | '>' | '|') {
+                '_'
+            } else {
+                c
+            }
+        })
+        .collect();
+    let base = if sanitized.trim().is_empty() {
+        "preset".to_string()
+    } else {
+        sanitized
+    };
+    let mut candidate = format!("{base}.json");
+    let mut n = 2;
+    while used.contains(&candidate) {
+        candidate = format!("{base}-{n}.json");
+        n += 1;
+    }
+    used.insert(candidate.clone());
+    candidate
+}
+
+/// Bulk export: writes one `<name>.json` per requested preset into a single zip.
+/// Missing preset ids are skipped. Like the single export, requires desktop mode.
+pub async fn handle_export_presets(
+    data: Vec<ExportPresetData>,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    if !ctx.app.config.desktop_mode {
+        ctx.emitter
+            .emit(MessageType::Error, &"File dialog not available");
+        return Ok(());
+    }
+    let presets = psp_db::presets::get_all(&ctx.app.db).await?;
+
+    let request = crate::desktop_dialogs::FileSaveRequest {
+        filter_name: "Preset Archives",
+        filter_extensions: &["zip"],
+        suggested_file_name: "presets.zip".to_string(),
+        initial_directory: None,
+    };
+    let Some(path) = ctx.app.dialogs.save_file(request).await else {
+        ctx.emitter
+            .emit(MessageType::NoFileSelected, &"No file selected");
+        return Ok(());
+    };
+
+    use std::io::Write;
+    let mut cursor = std::io::Cursor::new(Vec::new());
+    let mut used_names: std::collections::HashSet<String> = std::collections::HashSet::new();
+    let mut exported = 0usize;
+    {
+        let mut zip_writer = zip::ZipWriter::new(&mut cursor);
+        let options = zip::write::SimpleFileOptions::default()
+            .compression_method(zip::CompressionMethod::Deflated);
+        for item in &data {
+            let Some(preset) = presets.get(&item.preset_id) else {
+                continue;
+            };
+            let entry_name = zip_entry_name(&item.preset_name, &mut used_names);
+            zip_writer
+                .start_file(entry_name, options)
+                .map_err(|e| HandlerError::Other(e.to_string()))?;
+            let contents = serde_json::to_string_pretty(preset)?;
+            zip_writer
+                .write_all(contents.as_bytes())
+                .map_err(|e| HandlerError::Other(format!("Failed to write preset entry: {e}")))?;
+            exported += 1;
+        }
+        zip_writer
+            .finish()
+            .map_err(|e| HandlerError::Other(e.to_string()))?;
+    }
+    std::fs::write(&path, cursor.into_inner())
+        .map_err(|e| HandlerError::Other(format!("Failed to write preset archive: {e}")))?;
+
+    ctx.emitter.emit(
+        MessageType::ExportPresets,
+        &serde_json::json!({
+            "message": format!("{exported} presets exported successfully"),
+            "file_path": path,
+        }),
+    );
+    Ok(())
+}
+
 /// Drops the identifiers a freshly imported preset must not keep: the top-level
 /// `id` (so `add` mints a new one), the derived `pal_preset_id`, and any nested
 /// `pal_preset.id`.
@@ -357,5 +450,15 @@ mod tests {
         let added = import_preset_value(&test.app.db, value).await.unwrap();
         assert_eq!(added, 2);
         assert_eq!(psp_db::presets::get_all(&test.app.db).await.unwrap().len(), 2);
+    }
+
+    #[test]
+    fn zip_entry_name_dedupes_and_sanitizes() {
+        let mut used = std::collections::HashSet::new();
+        assert_eq!(zip_entry_name("Melee", &mut used), "Melee.json");
+        assert_eq!(zip_entry_name("Melee", &mut used), "Melee-2.json");
+        assert_eq!(zip_entry_name("Melee", &mut used), "Melee-3.json");
+        assert_eq!(zip_entry_name("a/b:c", &mut used), "a_b_c.json");
+        assert_eq!(zip_entry_name("   ", &mut used), "preset.json");
     }
 }
