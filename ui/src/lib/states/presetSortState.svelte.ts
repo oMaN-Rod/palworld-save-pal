@@ -28,14 +28,18 @@ export function getConfig(type: PresetTypeKey): PresetSortConfig {
 }
 
 export function setMode(type: PresetTypeKey, mode: PresetSortMode): void {
+	if (getConfig(type).mode === mode) return;
 	presetSort.current = { ...presetSort.current, [type]: { ...getConfig(type), mode } };
 }
 
 export function setDirection(type: PresetTypeKey, direction: SortDirection): void {
+	if (getConfig(type).direction === direction) return;
 	presetSort.current = { ...presetSort.current, [type]: { ...getConfig(type), direction } };
 }
 
 export function setCustomOrder(type: PresetTypeKey, ids: string[]): void {
+	const current = getConfig(type).customOrder;
+	if (current.length === ids.length && current.every((id, i) => id === ids[i])) return;
 	presetSort.current = { ...presetSort.current, [type]: { ...getConfig(type), customOrder: ids } };
 }
 
