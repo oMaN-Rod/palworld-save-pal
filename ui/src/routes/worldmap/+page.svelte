@@ -447,8 +447,8 @@
 							</span>
 						</button>
 						<button
-							class="flex items-center space-x-2 {mapOptions.showWatchtower ? '' : 'opacity-25'} "
-							onclick={() => (mapOptions.showWatchtower = !mapOptions.showWatchtower)}
+							class="flex items-center space-x-2 {(mapOptions.showWatchtower ?? true) ? '' : 'opacity-25'} "
+							onclick={() => (mapOptions.showWatchtower = !(mapOptions.showWatchtower ?? true))}
 						>
 							<img src={mapImg.watchTower} alt={m.watchtower()} class="mr-2 h-6 w-6" />
 							<span>{m.watchtower()}</span>
@@ -725,7 +725,7 @@
 					showPlayers={mapOptions.showPlayers}
 					showBases={mapOptions.showBases}
 					showFastTravel={mapOptions.showFastTravel}
-					showWatchtower={mapOptions.showWatchtower}
+					showWatchtower={mapOptions.showWatchtower ?? true}
 					showRelics={mapOptions.showRelics ?? true}
 					relicTypes={mapOptions.relicTypes ?? {}}
 					showDungeons={mapOptions.showDungeons}
