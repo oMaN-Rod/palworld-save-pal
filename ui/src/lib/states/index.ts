@@ -4,6 +4,7 @@ export * from './modalState.svelte';
 export * from './navigationState.svelte';
 export * from './palEditorState.svelte';
 export * from './themeState.svelte';
+export * from './presetSortState.svelte';
 export * from './toastState.svelte';
 export * from './upsState.svelte';
 export * from './serverState.svelte';
