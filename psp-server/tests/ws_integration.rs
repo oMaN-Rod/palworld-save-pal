@@ -225,3 +225,30 @@ async fn update_settings_persists_and_answers_with_get_settings() {
     );
     handle.shutdown().await;
 }
+
+#[tokio::test]
+async fn get_fast_travel_points_merges_l10n_and_preserves_class() {
+    let temp_dir = tempfile::tempdir().unwrap();
+    let handle = start_test_server(&temp_dir).await;
+    let mut socket = connect(&handle).await;
+
+    socket
+        .send(Message::Text(r#"{"type":"get_fast_travel_points"}"#.into()))
+        .await
+        .unwrap();
+    let response = next_json(&mut socket).await;
+    assert_eq!(response["type"], "get_fast_travel_points");
+
+    // A regular tower fast travel point: name merged from l10n/en, class preserved.
+    let tower = &response["data"]["01ACCA6E4BDAA68220821FB05AB54E4D"];
+    assert_eq!(tower["class"], "BP_LevelObject_TowerFastTravelPoint_C");
+    assert_eq!(tower["localized_name"], "Beach of Everlasting Summer");
+    assert_eq!(tower["id"], "FTPoint7");
+
+    // A watchtower: same merge path, distinct class.
+    let watchtower = &response["data"]["0C0AF9F34C0491BCAD80B1BF355B9A98"];
+    assert_eq!(watchtower["class"], "BP_LevelObject_UnlockMapPoint_C");
+    assert_eq!(watchtower["localized_name"], "Deep Bamboo Thicket Watchtower");
+
+    handle.shutdown().await;
+}
