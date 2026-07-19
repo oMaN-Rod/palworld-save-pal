@@ -5,7 +5,7 @@ use psp_core::dto::guild::GuildLabResearchInfo;
 use psp_core::error::CoreError;
 use psp_core::gamedata::GameData;
 use psp_core::session::{SaveKind, SaveSession};
-use uesave::{
+use psp_core::ue::{
     Header, MapEntry, PackageVersion, Properties, Property, PropertySchemas, Root, Save,
     StructValue,
 };
@@ -276,7 +276,7 @@ fn update_lab_research_with_no_lab_data_is_a_silent_no_op() {
 fn raw_tail_bytes(
     session: &SaveSession,
     guild_id: Uuid,
-) -> uesave::games::palworld::PalGroupVariant {
+) -> psp_core::ue::games::palworld::PalGroupVariant {
     let entries = world::group_map(&session.level).unwrap();
     let entry_index = guild::guild_entry_index(session, guild_id)
         .unwrap()

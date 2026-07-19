@@ -69,13 +69,13 @@ pub type PlayerSaveBytes = (Vec<u8>, Option<Vec<u8>>);
 /// cached once parsed so a later edit doesn't re-read the file.
 pub struct LoadedPlayer {
     pub uid: Uuid,
-    pub sav: uesave::Save,
-    pub dps: Option<uesave::Save>,
+    pub sav: crate::ue::Save,
+    pub dps: Option<crate::ue::Save>,
 }
 
 impl LoadedPlayer {
     /// Primes both files' write schemas at the parse, so no edit path can forget to.
-    pub fn new(uid: Uuid, mut sav: uesave::Save, dps: Option<uesave::Save>) -> Self {
+    pub fn new(uid: Uuid, mut sav: crate::ue::Save, dps: Option<crate::ue::Save>) -> Self {
         crate::domain::player::ensure_player_sav_schemas(&mut sav);
         let dps = dps.map(|mut dps| {
             crate::domain::pal::ensure_slot_pal_schemas(&mut dps);
@@ -120,7 +120,7 @@ pub struct WorldCaches {
 pub struct SaveSession {
     pub kind: SaveKind,
     pub world_name: String,
-    pub level: uesave::Save,
+    pub level: crate::ue::Save,
     /// The save's on-disk path (Steam) or GamePass save id — a stable
     /// identifier on the wire.
     pub save_id: String,
@@ -128,14 +128,14 @@ pub struct SaveSession {
     /// `level_sav_bytes.len() + 33`. The 33-byte offset is part of the
     /// `loaded_save_files.size` wire contract the frontend expects.
     pub size: u64,
-    pub level_meta: Option<uesave::Save>,
-    pub world_option: Option<uesave::Save>,
+    pub level_meta: Option<crate::ue::Save>,
+    pub world_option: Option<crate::ue::Save>,
     /// Gates every write. A user who never opens the editor must not have
     /// WorldOption.sav rewritten: re-compressing yields an identical GVAS payload but
     /// not necessarily identical bytes.
     pub world_option_dirty: bool,
     pub player_file_refs: BTreeMap<Uuid, PlayerFileData>,
-    pub player_sav_cache: HashMap<Uuid, uesave::Save>,
+    pub player_sav_cache: HashMap<Uuid, crate::ue::Save>,
     pub player_summaries: BTreeMap<Uuid, PlayerSummary>,
     pub guild_summaries: BTreeMap<Uuid, GuildSummary>,
     /// GVAS-file order of `player_summaries` / `guild_summaries`
@@ -173,9 +173,10 @@ pub struct SaveSession {
 /// `SaveReader`'s default `error_to_raw(false)` is deliberate: on an editor
 /// path an unparseable property must be a hard error, not silently degraded to
 /// raw bytes that would be written back as-is.
-pub(crate) fn parse_palworld_save(bytes: &[u8]) -> Result<uesave::Save, CoreError> {
-    uesave::SaveReader::new()
-        .types(uesave::games::palworld::palworld_types())
+pub(crate) fn parse_palworld_save(bytes: &[u8]) -> Result<crate::ue::Save, CoreError> {
+    crate::ue::SaveReader::new()
+        .game::<crate::ue::Palworld>()
+        .types(crate::ue::games::palworld::palworld_types())
         .read(Cursor::new(bytes))
         .map_err(|parse_error| CoreError::Parse(parse_error.to_string()))
 }
@@ -184,14 +185,14 @@ pub(crate) fn parse_palworld_save(bytes: &[u8]) -> Result<uesave::Save, CoreErro
 /// when the property is absent or empty. Callers supply their own placeholder:
 /// `world_name_from_meta_properties` uses `"Unknown"`,
 /// `gamepass::scan::world_name_from_level_meta` uses `"Unknown World"`.
-pub(crate) fn world_name_property(properties: &uesave::Properties) -> Option<String> {
+pub(crate) fn world_name_property(properties: &crate::ue::Properties) -> Option<String> {
     props::get(properties, &["SaveData", "WorldName"])
         .and_then(props::as_str)
         .filter(|name| !name.is_empty())
         .map(|name| name.to_string())
 }
 
-pub(crate) fn world_name_from_meta_properties(properties: &uesave::Properties) -> String {
+pub(crate) fn world_name_from_meta_properties(properties: &crate::ue::Properties) -> String {
     world_name_property(properties).unwrap_or_else(|| "Unknown".to_string())
 }
 
@@ -201,7 +202,7 @@ pub(crate) fn world_name_from_meta_properties(properties: &uesave::Properties) -
 /// Takes the whole `Save`, not its properties: a save whose world was never named
 /// recorded no `WorldName` schema, and this write creates the property.
 pub(crate) fn set_world_name_property(
-    save: &mut uesave::Save,
+    save: &mut crate::ue::Save,
     new_name: &str,
 ) -> Result<(), CoreError> {
     let save_data = props::get_mut(&mut save.root.properties, &["SaveData"])
@@ -211,9 +212,9 @@ pub(crate) fn set_world_name_property(
     props::ensure_schema(
         save,
         "SaveData.WorldName".to_string(),
-        uesave::PropertyTagPartial {
+        crate::ue::PropertyTagPartial {
             id: None,
-            data: uesave::PropertyTagDataPartial::Other(uesave::PropertyType::StrProperty),
+            data: crate::ue::PropertyTagDataPartial::Other(crate::ue::PropertyType::StrProperty),
         },
     );
     Ok(())
@@ -223,7 +224,7 @@ pub(crate) fn set_world_name_property(
 /// field within the key (e.g. `CharacterSaveParameterMap`'s key struct has
 /// both `PlayerUId` and `InstanceId`), or `None` when the key itself is a
 /// bare `Guid` (e.g. `GroupSaveDataMap`, `GuildExtraSaveDataMap`).
-fn map_entry_key_uuid(entry: &uesave::MapEntry, nested_field: Option<&str>) -> Option<Uuid> {
+fn map_entry_key_uuid(entry: &crate::ue::MapEntry, nested_field: Option<&str>) -> Option<Uuid> {
     match nested_field {
         None => props::as_uuid(&entry.key),
         Some(field) => props::get_in(&entry.key, &[field]).and_then(props::as_uuid),
@@ -234,7 +235,7 @@ fn map_entry_key_uuid(entry: &uesave::MapEntry, nested_field: Option<&str>) -> O
 /// can't be resolved to a `Uuid` are skipped, so one malformed entry never
 /// fails the whole load.
 fn build_position_index(
-    entries: &[uesave::MapEntry],
+    entries: &[crate::ue::MapEntry],
     nested_field: Option<&str>,
 ) -> HashMap<Uuid, usize> {
     entries
@@ -250,7 +251,7 @@ impl SaveSession {
     /// Builds a `SaveSession` with only `kind` and `level` set; every other
     /// field gets an empty placeholder. `load` builds on this too, so a new
     /// field only needs a default in one place.
-    pub fn new_for_tests(kind: SaveKind, level: uesave::Save) -> Self {
+    pub fn new_for_tests(kind: SaveKind, level: crate::ue::Save) -> Self {
         SaveSession {
             kind,
             world_name: String::new(),
@@ -403,20 +404,20 @@ impl SaveSession {
         crate::transfer::ensure_player_gvas_loaded(self, player_uid)
     }
 
-    pub fn world_properties(&self) -> Result<&uesave::Properties, CoreError> {
+    pub fn world_properties(&self) -> Result<&crate::ue::Properties, CoreError> {
         props::get(&self.level.root.properties, &["worldSaveData"])
             .and_then(props::struct_properties)
             .ok_or_else(|| CoreError::Parse("worldSaveData missing from Level.sav".to_string()))
     }
 
-    fn required_map(&self, name: &str) -> Result<&[uesave::MapEntry], CoreError> {
+    fn required_map(&self, name: &str) -> Result<&[crate::ue::MapEntry], CoreError> {
         props::get(self.world_properties()?, &[name])
             .and_then(props::map_entries)
             .map(Vec::as_slice)
             .ok_or_else(|| CoreError::Parse(format!("{name} missing from worldSaveData")))
     }
 
-    fn optional_map(&self, name: &str) -> Option<&[uesave::MapEntry]> {
+    fn optional_map(&self, name: &str) -> Option<&[crate::ue::MapEntry]> {
         props::get(self.world_properties().ok()?, &[name])
             .and_then(props::map_entries)
             .map(Vec::as_slice)
@@ -424,29 +425,29 @@ impl SaveSession {
 
     /// `CharacterSaveParameterMap` — every player and pal. Absent only in a
     /// malformed save.
-    pub fn character_map(&self) -> Result<&[uesave::MapEntry], CoreError> {
+    pub fn character_map(&self) -> Result<&[crate::ue::MapEntry], CoreError> {
         self.required_map("CharacterSaveParameterMap")
     }
 
-    pub fn item_container_map(&self) -> Result<&[uesave::MapEntry], CoreError> {
+    pub fn item_container_map(&self) -> Result<&[crate::ue::MapEntry], CoreError> {
         self.required_map("ItemContainerSaveData")
     }
 
-    pub fn character_container_map(&self) -> Result<&[uesave::MapEntry], CoreError> {
+    pub fn character_container_map(&self) -> Result<&[crate::ue::MapEntry], CoreError> {
         self.required_map("CharacterContainerSaveData")
     }
 
-    pub fn group_map(&self) -> Result<&[uesave::MapEntry], CoreError> {
+    pub fn group_map(&self) -> Result<&[crate::ue::MapEntry], CoreError> {
         self.required_map("GroupSaveDataMap")
     }
 
     /// `BaseCampSaveData` — absent in saves that never had a base built.
-    pub fn base_camp_map(&self) -> Option<&[uesave::MapEntry]> {
+    pub fn base_camp_map(&self) -> Option<&[crate::ue::MapEntry]> {
         self.optional_map("BaseCampSaveData")
     }
 
     /// `GuildExtraSaveDataMap` — same optionality as `base_camp_map`.
-    pub fn guild_extra_map(&self) -> Option<&[uesave::MapEntry]> {
+    pub fn guild_extra_map(&self) -> Option<&[crate::ue::MapEntry]> {
         self.optional_map("GuildExtraSaveDataMap")
     }
 
@@ -534,7 +535,7 @@ impl SaveSession {
     /// `&mut` access to `Level.sav`'s ROOT properties — one level above
     /// `worldSaveData`, which is only one top-level entry among siblings.
     /// `props::swap_uuid_values_deep` must walk the whole root.
-    pub fn level_properties_mut(&mut self) -> &mut uesave::Properties {
+    pub fn level_properties_mut(&mut self) -> &mut crate::ue::Properties {
         &mut self.level.root.properties
     }
 
@@ -542,7 +543,7 @@ impl SaveSession {
     /// and `SaveData.IndividualId.PlayerUId`, and `first` into `second`'s. A
     /// no-op for whichever uid has no loaded GVAS.
     pub fn swap_player_gvas_uids(&mut self, first: uuid::Uuid, second: uuid::Uuid) {
-        fn set_player_uid(sav: &mut uesave::Save, new_uid: uuid::Uuid) {
+        fn set_player_uid(sav: &mut crate::ue::Save, new_uid: uuid::Uuid) {
             let Ok(save_data) = crate::domain::player::save_data_props_mut(sav) else {
                 return;
             };
@@ -754,7 +755,7 @@ mod load_tests {
 
     #[test]
     fn test_invalidate_performance_caches_clears_every_field() {
-        let level = minimal_uesave_save(uesave::Properties::default());
+        let level = minimal_uesave_save(crate::ue::Properties::default());
         let mut session = SaveSession::new_for_tests(SaveKind::InMemory, level);
         session.caches = WorldCaches {
             character_index: Some(std::collections::HashMap::from([(Uuid::nil(), 0)])),
@@ -782,7 +783,7 @@ mod load_tests {
     /// `SaveSession` (including `load`), so pin every field it defaults.
     #[test]
     fn test_new_for_tests_sets_kind_and_level_and_defaults_everything_else() {
-        let level = minimal_uesave_save(uesave::Properties::default());
+        let level = minimal_uesave_save(crate::ue::Properties::default());
         let session = SaveSession::new_for_tests(SaveKind::InMemory, level);
 
         assert!(matches!(session.kind, SaveKind::InMemory));
@@ -820,23 +821,23 @@ mod load_tests {
     fn test_world_name_falls_back_to_unknown_when_save_data_absent() {
         assert_eq!(
             "Unknown",
-            world_name_from_meta_properties(&uesave::Properties::default())
+            world_name_from_meta_properties(&crate::ue::Properties::default())
         );
     }
 
     #[test]
     fn test_world_name_falls_back_to_unknown_when_world_name_absent() {
-        let mut properties = uesave::Properties::default();
-        properties.insert("SaveData", struct_property(uesave::Properties::default()));
+        let mut properties = crate::ue::Properties::default();
+        properties.insert("SaveData", struct_property(crate::ue::Properties::default()));
 
         assert_eq!("Unknown", world_name_from_meta_properties(&properties));
     }
 
     #[test]
     fn test_world_name_falls_back_to_unknown_when_world_name_empty() {
-        let mut save_data = uesave::Properties::default();
-        save_data.insert("WorldName", uesave::Property::Str(String::new()));
-        let mut properties = uesave::Properties::default();
+        let mut save_data = crate::ue::Properties::default();
+        save_data.insert("WorldName", crate::ue::Property::Str(String::new()));
+        let mut properties = crate::ue::Properties::default();
         properties.insert("SaveData", struct_property(save_data));
 
         assert_eq!("Unknown", world_name_from_meta_properties(&properties));
@@ -844,22 +845,22 @@ mod load_tests {
 
     #[test]
     fn test_world_name_uses_present_non_empty_value() {
-        let mut save_data = uesave::Properties::default();
-        save_data.insert("WorldName", uesave::Property::Str("My World".to_string()));
-        let mut properties = uesave::Properties::default();
+        let mut save_data = crate::ue::Properties::default();
+        save_data.insert("WorldName", crate::ue::Property::Str("My World".to_string()));
+        let mut properties = crate::ue::Properties::default();
         properties.insert("SaveData", struct_property(save_data));
 
         assert_eq!("My World", world_name_from_meta_properties(&properties));
     }
 
-    /// A `uesave::Save` carrying only root `properties`; the header/schema
+    /// A `crate::ue::Save` carrying only root `properties`; the header/schema
     /// fields only matter to the (de)serializer, which these tests never touch.
-    fn minimal_uesave_save(properties: uesave::Properties) -> uesave::Save {
-        uesave::Save {
-            header: uesave::Header {
+    fn minimal_uesave_save(properties: crate::ue::Properties) -> crate::ue::Save {
+        crate::ue::Save {
+            header: crate::ue::Header {
                 magic: 0,
                 save_game_version: 0,
-                package_version: uesave::PackageVersion { ue4: 0, ue5: None },
+                package_version: crate::ue::PackageVersion { ue4: 0, ue5: None },
                 engine_version_major: 0,
                 engine_version_minor: 0,
                 engine_version_patch: 0,
@@ -867,8 +868,8 @@ mod load_tests {
                 engine_version: String::new(),
                 custom_version: None,
             },
-            schemas: uesave::PropertySchemas::default(),
-            root: uesave::Root {
+            schemas: crate::ue::PropertySchemas::default(),
+            root: crate::ue::Root {
                 save_game_type: String::new(),
                 properties,
             },
@@ -876,7 +877,7 @@ mod load_tests {
         }
     }
 
-    fn session_with_level_properties(root_properties: uesave::Properties) -> SaveSession {
+    fn session_with_level_properties(root_properties: crate::ue::Properties) -> SaveSession {
         let mut session =
             SaveSession::new_for_tests(SaveKind::InMemory, minimal_uesave_save(root_properties));
         session.world_name = "Test".to_string();
@@ -884,17 +885,17 @@ mod load_tests {
         session
     }
 
-    fn struct_property(properties: uesave::Properties) -> uesave::Property {
-        uesave::Property::Struct(uesave::StructValue::Struct(properties))
+    fn struct_property(properties: crate::ue::Properties) -> crate::ue::Property {
+        crate::ue::Property::Struct(crate::ue::StructValue::Struct(properties))
     }
 
-    fn empty_map_property() -> uesave::Property {
-        uesave::Property::Map(Vec::new())
+    fn empty_map_property() -> crate::ue::Property {
+        crate::ue::Property::Map(Vec::new())
     }
 
     #[test]
     fn test_world_properties_missing_from_level_returns_parse_error() {
-        let session = session_with_level_properties(uesave::Properties::default());
+        let session = session_with_level_properties(crate::ue::Properties::default());
 
         match session.world_properties().unwrap_err() {
             CoreError::Parse(message) => {
@@ -908,14 +909,14 @@ mod load_tests {
     /// missing map, never panic.
     #[test]
     fn test_required_maps_missing_from_world_save_data_return_named_parse_errors() {
-        let mut root_properties = uesave::Properties::default();
+        let mut root_properties = crate::ue::Properties::default();
         root_properties.insert(
             "worldSaveData",
-            struct_property(uesave::Properties::default()),
+            struct_property(crate::ue::Properties::default()),
         );
         let session = session_with_level_properties(root_properties);
 
-        let cases: [(Result<&[uesave::MapEntry], CoreError>, &str); 4] = [
+        let cases: [(Result<&[crate::ue::MapEntry], CoreError>, &str); 4] = [
             (session.character_map(), "CharacterSaveParameterMap"),
             (session.item_container_map(), "ItemContainerSaveData"),
             (
@@ -939,10 +940,10 @@ mod load_tests {
     /// must come back `None`, never an `Err`.
     #[test]
     fn test_optional_maps_absent_from_world_save_data_return_none_not_error() {
-        let mut root_properties = uesave::Properties::default();
+        let mut root_properties = crate::ue::Properties::default();
         root_properties.insert(
             "worldSaveData",
-            struct_property(uesave::Properties::default()),
+            struct_property(crate::ue::Properties::default()),
         );
         let session = session_with_level_properties(root_properties);
 
@@ -952,10 +953,10 @@ mod load_tests {
 
     #[test]
     fn test_optional_maps_present_in_world_save_data_return_their_entries() {
-        let mut world_save_data = uesave::Properties::default();
+        let mut world_save_data = crate::ue::Properties::default();
         world_save_data.insert("BaseCampSaveData", empty_map_property());
         world_save_data.insert("GuildExtraSaveDataMap", empty_map_property());
-        let mut root_properties = uesave::Properties::default();
+        let mut root_properties = crate::ue::Properties::default();
         root_properties.insert("worldSaveData", struct_property(world_save_data));
         let session = session_with_level_properties(root_properties);
 
@@ -1003,7 +1004,7 @@ mod load_tests {
     }
 
     /// Load the lexicographically first fixture from tests/fixtures/world_option/.
-    fn load_world_option_fixture() -> Result<uesave::Save, CoreError> {
+    fn load_world_option_fixture() -> Result<crate::ue::Save, CoreError> {
         let fixture_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
             .join("../tests/fixtures/world_option/19804164.sav");
         let bytes = std::fs::read(&fixture_path)
@@ -1016,7 +1017,7 @@ mod load_tests {
     #[test]
     fn apply_world_option_patch_sets_dirty_only_on_real_change() {
         let world_option = load_world_option_fixture().unwrap();
-        let mut session = SaveSession::new_for_tests(SaveKind::InMemory, minimal_uesave_save(uesave::Properties::default()));
+        let mut session = SaveSession::new_for_tests(SaveKind::InMemory, minimal_uesave_save(crate::ue::Properties::default()));
         session.world_option = Some(world_option);
         session.world_option_dirty = false;
 
@@ -1065,7 +1066,7 @@ mod load_tests {
 
         // Now test the no-op case with a fresh session
         let world_option = load_world_option_fixture().unwrap();
-        let mut session = SaveSession::new_for_tests(SaveKind::InMemory, minimal_uesave_save(uesave::Properties::default()));
+        let mut session = SaveSession::new_for_tests(SaveKind::InMemory, minimal_uesave_save(crate::ue::Properties::default()));
         session.world_option = Some(world_option);
         session.world_option_dirty = false;
 
@@ -1081,7 +1082,7 @@ mod load_tests {
 
     #[test]
     fn apply_world_option_patch_errors_when_no_world_option_loaded() {
-        let mut session = SaveSession::new_for_tests(SaveKind::InMemory, minimal_uesave_save(uesave::Properties::default()));
+        let mut session = SaveSession::new_for_tests(SaveKind::InMemory, minimal_uesave_save(crate::ue::Properties::default()));
         session.world_option = None;
 
         let patch = crate::domain::world_option::WorldOptionPatch {

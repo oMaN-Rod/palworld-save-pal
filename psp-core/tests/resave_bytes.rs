@@ -156,7 +156,7 @@ fn edit_one_pal_leaves_guild_tails_byte_identical() {
     let mut session = common::load_fixture_session("world1");
     let data = game_data();
 
-    let untouched_tails: Vec<(uuid::Uuid, uesave::games::palworld::PalGroupVariant)> =
+    let untouched_tails: Vec<(uuid::Uuid, psp_core::ue::games::palworld::PalGroupVariant)> =
         psp_core::domain::world::group_map(&session.level)
             .unwrap()
             .iter()
@@ -334,7 +334,7 @@ fn edited_player_level_sav_bytes_succeeds_and_edit_round_trips() {
         .expect("reloaded player entry has a save parameter");
     let level_after = save_parameter
         .0
-        .get(&uesave::PropertyKey::from("Level"))
+        .get(&psp_core::ue::PropertyKey::from("Level"))
         .expect("Level property present");
     assert_eq!(
         level_after,
@@ -460,7 +460,7 @@ fn add_guild_pal_then_resave_succeeds_and_pal_round_trips() {
     );
 }
 
-fn read_level_only() -> uesave::Save {
+fn read_level_only() -> psp_core::ue::Save {
     let level_bytes = fixture_file("world1/Level.sav");
     psp_core::savio::read_sav_bytes(&level_bytes).expect("parse level")
 }

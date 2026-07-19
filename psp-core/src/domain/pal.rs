@@ -5,7 +5,7 @@
 
 use std::collections::HashSet;
 
-use uesave::{MapEntry, Properties, Property, PropertyKey, StructValue, ValueVec};
+use crate::ue::{MapEntry, Properties, Property, PropertyKey, StructValue, ValueVec};
 
 use crate::dto::ordered_map::OrderedMap;
 use crate::dto::pal::{format_character_key, PalDto, PalGender, WORK_SUITABILITIES};
@@ -784,10 +784,10 @@ pub fn new_pal_entry(
     );
     save_parameter.insert(
         "LastJumpedLocation",
-        Property::Struct(StructValue::Vector(uesave::Vector {
-            x: uesave::Double(0.0),
-            y: uesave::Double(0.0),
-            z: uesave::Double(7088.5),
+        Property::Struct(StructValue::Vector(crate::ue::Vector {
+            x: crate::ue::Double(0.0),
+            y: crate::ue::Double(0.0),
+            z: crate::ue::Double(7088.5),
         })),
     );
 
@@ -797,7 +797,7 @@ pub fn new_pal_entry(
         Property::Struct(StructValue::Struct(save_parameter)),
     );
 
-    let character_data = uesave::games::palworld::PalCharacterData {
+    let character_data = crate::ue::games::palworld::PalCharacterData {
         object: object_props,
         unknown_bytes: [0, 0, 0, 0],
         group_id: props::uuid_to_guid(group_id.unwrap_or(props::EMPTY_UUID)),
@@ -812,11 +812,11 @@ pub fn new_pal_entry(
     let mut value_props = Properties::default();
     value_props.insert(
         "RawData",
-        Property::Struct(StructValue::PalCharacterData(character_data)),
+        Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(character_data))),
     );
     value_props.insert(
         "CustomVersionData",
-        Property::Array(ValueVec::Byte(uesave::ByteArray::Byte(
+        Property::Array(ValueVec::Byte(crate::ue::ByteArray::Byte(
             CUSTOM_VERSION_DATA.to_vec(),
         ))),
     );
@@ -843,22 +843,22 @@ pub const SLOT_SAVE_PARAMETER_PREFIX: &str = "SaveParameterArray.SaveParameter";
 /// has no `Bool`; `uesave` maps the two onto each other. Nested struct leaves are
 /// paths of their own (`Hp` is not enough -- `Hp.Value` too), as are array element
 /// fields, which no save records while the array is empty.
-fn save_parameter_schemas() -> Vec<(String, uesave::PropertyTagDataPartial)> {
-    use uesave::{PropertyTagDataPartial as Data, PropertyType, StructType};
+fn save_parameter_schemas() -> Vec<(String, crate::ue::PropertyTagDataPartial)> {
+    use crate::ue::{PropertyTagDataPartial as Data, PropertyType, StructType};
 
     let byte = || Data::Byte(None);
     let other = |t: PropertyType| Data::Other(t);
     // Resolve the name the way the READER does, rather than hand-picking a
-    // `StructType` variant: a known type keeps its own variant, anything else
-    // becomes a plain named struct. Guessing wrong makes uesave write the payload
-    // with the wrong codec, and the save no longer parses back.
+    // `StructType` variant: a Palworld game struct becomes a `StructType::Game`,
+    // anything else a plain named struct. Guessing wrong makes uesave write the
+    // payload with the wrong codec, and the save no longer parses back.
     let named_struct = |name: &str| Data::Struct {
-        struct_type: StructType::from(name),
-        id: uesave::FGuid::nil(),
+        struct_type: crate::ue::struct_type_for(name),
+        id: crate::ue::FGuid::nil(),
     };
     let plain_struct = |struct_type: StructType| Data::Struct {
         struct_type,
-        id: uesave::FGuid::nil(),
+        id: crate::ue::FGuid::nil(),
     };
     let struct_array = |name: &str| Data::Array(Box::new(named_struct(name)));
 
@@ -965,21 +965,21 @@ fn save_parameter_schemas() -> Vec<(String, uesave::PropertyTagDataPartial)> {
 
 /// Never overwrites a tag the real save recorded, so a file that already carries a
 /// property keeps its own on-disk shape.
-pub fn ensure_save_parameter_schemas(save: &mut uesave::Save, prefix: &str) {
+pub fn ensure_save_parameter_schemas(save: &mut crate::ue::Save, prefix: &str) {
     for (name, data) in save_parameter_schemas() {
         props::ensure_schema(
             save,
             format!("{prefix}.{name}"),
-            uesave::PropertyTagPartial { id: None, data },
+            crate::ue::PropertyTagPartial { id: None, data },
         );
     }
 }
 
-pub fn ensure_pal_property_schemas(level: &mut uesave::Save) {
+pub fn ensure_pal_property_schemas(level: &mut crate::ue::Save) {
     ensure_save_parameter_schemas(level, LEVEL_SAVE_PARAMETER_PREFIX);
 }
 
-pub fn ensure_slot_pal_schemas(save: &mut uesave::Save) {
+pub fn ensure_slot_pal_schemas(save: &mut crate::ue::Save) {
     ensure_save_parameter_schemas(save, SLOT_SAVE_PARAMETER_PREFIX);
 }
 
@@ -1048,7 +1048,7 @@ fn append_guild_handle(
     if let Some(group_data) = super::guild_tail::entry_group_data_mut(&mut entries[entry_index]) {
         group_data
             .individual_character_handle_ids
-            .push(uesave::games::palworld::PalInstanceId {
+            .push(crate::ue::games::palworld::PalInstanceId {
                 guid: props::uuid_to_guid(props::EMPTY_UUID),
                 instance_id: props::uuid_to_guid(instance_id),
             });
@@ -1559,7 +1559,7 @@ fn pal_owned_by_player(
 /// would wrongly forbid deleting a pal right after adding it. The `Slots`
 /// array still correctly rejects a pal belonging to a different base.
 fn pal_in_character_container(
-    level: &uesave::Save,
+    level: &crate::ue::Save,
     container_index: usize,
     pal_id: uuid::Uuid,
 ) -> bool {
@@ -2188,15 +2188,15 @@ pub fn update_dps_pals(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use uesave::games::palworld::PalCharacterData;
-    use uesave::{Byte, Properties, Property, StructValue};
+    use crate::ue::games::palworld::PalCharacterData;
+    use crate::ue::{Byte, Properties, Property, StructValue};
 
     fn game_data() -> GameData {
         let json_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../data/json");
         GameData::load(&json_dir).expect("data dir")
     }
 
-    fn fguid(text: &str) -> uesave::FGuid {
+    fn fguid(text: &str) -> crate::ue::FGuid {
         serde_json::from_value(serde_json::Value::String(text.to_string())).unwrap()
     }
 
@@ -2207,7 +2207,7 @@ mod tests {
     fn character_entry(
         instance_id: &str,
         save_parameter: Properties,
-        group_id: uesave::FGuid,
+        group_id: crate::ue::FGuid,
     ) -> MapEntry {
         let mut key_properties = Properties::default();
         key_properties.insert(
@@ -2230,7 +2230,7 @@ mod tests {
         let mut value_properties = Properties::default();
         value_properties.insert(
             "RawData",
-            Property::Struct(StructValue::PalCharacterData(character_data)),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(character_data))),
         );
 
         MapEntry {
@@ -2266,11 +2266,11 @@ mod tests {
             "SaveParameterArray",
             Property::Array(ValueVec::Struct(vec![StructValue::Struct(slot_props)])),
         );
-        let dps_save = uesave::Save {
-            header: uesave::Header {
+        let dps_save = crate::ue::Save {
+            header: crate::ue::Header {
                 magic: 0,
                 save_game_version: 0,
-                package_version: uesave::PackageVersion { ue4: 0, ue5: None },
+                package_version: crate::ue::PackageVersion { ue4: 0, ue5: None },
                 engine_version_major: 0,
                 engine_version_minor: 0,
                 engine_version_patch: 0,
@@ -2278,18 +2278,18 @@ mod tests {
                 engine_version: String::new(),
                 custom_version: None,
             },
-            schemas: uesave::PropertySchemas::default(),
-            root: uesave::Root {
+            schemas: crate::ue::PropertySchemas::default(),
+            root: crate::ue::Root {
                 save_game_type: String::new(),
                 properties: dps_root_properties,
             },
             extra: Vec::new(),
         };
-        let level = uesave::Save {
-            header: uesave::Header {
+        let level = crate::ue::Save {
+            header: crate::ue::Header {
                 magic: 0,
                 save_game_version: 0,
-                package_version: uesave::PackageVersion { ue4: 0, ue5: None },
+                package_version: crate::ue::PackageVersion { ue4: 0, ue5: None },
                 engine_version_major: 0,
                 engine_version_minor: 0,
                 engine_version_patch: 0,
@@ -2297,8 +2297,8 @@ mod tests {
                 engine_version: String::new(),
                 custom_version: None,
             },
-            schemas: uesave::PropertySchemas::default(),
-            root: uesave::Root {
+            schemas: crate::ue::PropertySchemas::default(),
+            root: crate::ue::Root {
                 save_game_type: String::new(),
                 properties: Properties::default(),
             },
@@ -2310,11 +2310,11 @@ mod tests {
             crate::session::LoadedPlayer {
                 uid: owner_id,
                 sav: {
-                    let mut sav = uesave::Save {
-                        header: uesave::Header {
+                    let mut sav = crate::ue::Save {
+                        header: crate::ue::Header {
                             magic: 0,
                             save_game_version: 0,
-                            package_version: uesave::PackageVersion { ue4: 0, ue5: None },
+                            package_version: crate::ue::PackageVersion { ue4: 0, ue5: None },
                             engine_version_major: 0,
                             engine_version_minor: 0,
                             engine_version_patch: 0,
@@ -2322,8 +2322,8 @@ mod tests {
                             engine_version: String::new(),
                             custom_version: None,
                         },
-                        schemas: uesave::PropertySchemas::default(),
-                        root: uesave::Root {
+                        schemas: crate::ue::PropertySchemas::default(),
+                        root: crate::ue::Root {
                             save_game_type: String::new(),
                             properties: Properties::default(),
                         },
@@ -2481,7 +2481,7 @@ mod tests {
 
         let mut only_hunger_and_sanity = Properties::default();
         only_hunger_and_sanity.insert("HungerType", Property::Bool(true));
-        only_hunger_and_sanity.insert("SanityValue", Property::Float(uesave::Float(50.0)));
+        only_hunger_and_sanity.insert("SanityValue", Property::Float(crate::ue::Float(50.0)));
         let dto = read_save_parameter_dto(&only_hunger_and_sanity, instance_id, false, &data);
         assert!(
             !dto.is_sick,
@@ -2567,7 +2567,7 @@ mod tests {
         let nil_group_entry = character_entry(
             "11111111-2222-3333-4444-555555555555",
             save_parameter.clone(),
-            uesave::FGuid::nil(),
+            crate::ue::FGuid::nil(),
         );
         let dto = pal_dto_from_entry(&nil_group_entry, &data).unwrap();
         assert!(dto.group_id.is_none());
@@ -2627,7 +2627,7 @@ mod tests {
     #[test]
     fn pal_dto_from_dps_slot_returns_none_for_a_non_struct_slot() {
         let data = game_data();
-        assert!(pal_dto_from_dps_slot(&StructValue::Guid(uesave::FGuid::nil()), &data).is_none());
+        assert!(pal_dto_from_dps_slot(&StructValue::Guid(crate::ue::FGuid::nil()), &data).is_none());
     }
 
     #[test]
@@ -2681,7 +2681,7 @@ mod tests {
         let data = game_data();
         let mut save_parameter = Properties::default();
         save_parameter.insert("CharacterID", Property::Name("Anubis".to_string()));
-        save_parameter.insert("FullStomach", Property::Float(uesave::Float(f32::NAN)));
+        save_parameter.insert("FullStomach", Property::Float(crate::ue::Float(f32::NAN)));
         let instance_id = uuid::Uuid::nil();
 
         let dto = read_save_parameter_dto(&save_parameter, instance_id, false, &data);
@@ -2711,7 +2711,7 @@ mod tests {
             "CharacterID",
             Property::Name("TotallyMadeUpCreature".to_string()),
         );
-        save_parameter.insert("FullStomach", Property::Float(uesave::Float(f32::INFINITY)));
+        save_parameter.insert("FullStomach", Property::Float(crate::ue::Float(f32::INFINITY)));
         let instance_id = uuid::Uuid::nil();
 
         let dto = read_save_parameter_dto(&save_parameter, instance_id, false, &data);

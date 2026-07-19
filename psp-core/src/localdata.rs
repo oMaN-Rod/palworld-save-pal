@@ -16,7 +16,7 @@
 //!
 //! "Unlocked" means every byte of every mask present is zero.
 
-use uesave::{ByteArray, Property, PropertyKey, StructValue, ValueVec};
+use crate::ue::{ByteArray, Property, PropertyKey, StructValue, ValueVec};
 
 use crate::error::CoreError;
 use crate::savio;
@@ -136,18 +136,18 @@ mod tests {
     }
 
     fn mask_bytes(local_data_sav: &[u8]) -> Vec<u8> {
-        let save = uesave::Save::read_with_types(
-            &mut std::io::Cursor::new(local_data_sav),
-            uesave::games::palworld::palworld_types(),
-        )
-        .unwrap();
-        let uesave::Property::Struct(uesave::StructValue::Struct(save_data)) =
-            &save.root.properties.0[&uesave::PropertyKey::from("SaveData")]
+        let save = crate::ue::SaveReader::new()
+            .game::<crate::ue::Palworld>()
+            .types(crate::ue::games::palworld::palworld_types())
+            .read(std::io::Cursor::new(local_data_sav))
+            .unwrap();
+        let crate::ue::Property::Struct(crate::ue::StructValue::Struct(save_data)) =
+            &save.root.properties.0[&crate::ue::PropertyKey::from("SaveData")]
         else {
             panic!("SaveData missing");
         };
-        let uesave::Property::Array(uesave::ValueVec::Byte(uesave::ByteArray::Byte(bytes))) =
-            &save_data.0[&uesave::PropertyKey::from("WorldMapMaskTextureV4")]
+        let crate::ue::Property::Array(crate::ue::ValueVec::Byte(crate::ue::ByteArray::Byte(bytes))) =
+            &save_data.0[&crate::ue::PropertyKey::from("WorldMapMaskTextureV4")]
         else {
             panic!("WorldMapMaskTextureV4 missing or not a byte array");
         };
@@ -158,13 +158,13 @@ mod tests {
     fn local_data_round_trips_byte_identical_at_gvas_level() {
         let sav_bytes = std::fs::read(reference_saves_dir().join("LocalData.sav")).unwrap();
         let gvas_bytes =
-            uesave::compression::decompress_save(&mut std::io::Cursor::new(sav_bytes.as_slice()))
+            crate::ue::compression::decompress_save(&mut std::io::Cursor::new(sav_bytes.as_slice()))
                 .unwrap();
-        let save = uesave::Save::read_with_types(
-            &mut std::io::Cursor::new(sav_bytes.as_slice()),
-            uesave::games::palworld::palworld_types(),
-        )
-        .unwrap();
+        let save = crate::ue::SaveReader::new()
+            .game::<crate::ue::Palworld>()
+            .types(crate::ue::games::palworld::palworld_types())
+            .read(std::io::Cursor::new(sav_bytes.as_slice()))
+            .unwrap();
         let mut rewritten = Vec::new();
         save.write(&mut rewritten).unwrap();
         assert_eq!(
@@ -201,10 +201,10 @@ mod tests {
         crate::props::ensure_schema(
             &mut save,
             "SaveData.WorldMapMaskTextureV4".to_string(),
-            uesave::PropertyTagPartial {
+            crate::ue::PropertyTagPartial {
                 id: None,
-                data: uesave::PropertyTagDataPartial::Array(Box::new(
-                    uesave::PropertyTagDataPartial::Byte(None),
+                data: crate::ue::PropertyTagDataPartial::Array(Box::new(
+                    crate::ue::PropertyTagDataPartial::Byte(None),
                 )),
             },
         );
@@ -227,7 +227,7 @@ mod tests {
     /// whose keys are `Property::Name` ("MainMap"/"Tree") and whose values are
     /// bare user structs carrying a single `MaskTextureData` byte array.
     fn graft_world_map_ui_save_data_map(
-        save: &mut uesave::Save,
+        save: &mut crate::ue::Save,
         entries: &[(&str, Vec<u8>)],
         legacy_mask: Option<Vec<u8>>,
     ) {
@@ -244,12 +244,12 @@ mod tests {
             let map_entries = entries
                 .iter()
                 .map(|(name, bytes)| {
-                    let mut value = uesave::Properties::default();
+                    let mut value = crate::ue::Properties::default();
                     value.insert(
                         "MaskTextureData",
                         Property::Array(ValueVec::Byte(ByteArray::Byte(bytes.clone()))),
                     );
-                    uesave::MapEntry {
+                    crate::ue::MapEntry {
                         key: Property::Name((*name).to_string()),
                         value: Property::Struct(StructValue::Struct(value)),
                     }
@@ -261,10 +261,10 @@ mod tests {
         crate::props::ensure_schema(
             save,
             "SaveData.WorldMapMaskTextureV4".to_string(),
-            uesave::PropertyTagPartial {
+            crate::ue::PropertyTagPartial {
                 id: None,
-                data: uesave::PropertyTagDataPartial::Array(Box::new(
-                    uesave::PropertyTagDataPartial::Byte(None),
+                data: crate::ue::PropertyTagDataPartial::Array(Box::new(
+                    crate::ue::PropertyTagDataPartial::Byte(None),
                 )),
             },
         );
@@ -275,15 +275,15 @@ mod tests {
         crate::props::ensure_schema(
             save,
             "SaveData.WorldMapUISaveDataMap".to_string(),
-            uesave::PropertyTagPartial {
+            crate::ue::PropertyTagPartial {
                 id: None,
-                data: uesave::PropertyTagDataPartial::Map {
-                    key_type: Box::new(uesave::PropertyTagDataPartial::Other(
-                        uesave::PropertyType::NameProperty,
+                data: crate::ue::PropertyTagDataPartial::Map {
+                    key_type: Box::new(crate::ue::PropertyTagDataPartial::Other(
+                        crate::ue::PropertyType::NameProperty,
                     )),
-                    value_type: Box::new(uesave::PropertyTagDataPartial::Struct {
-                        struct_type: uesave::StructType::Struct(None),
-                        id: uesave::FGuid::default(),
+                    value_type: Box::new(crate::ue::PropertyTagDataPartial::Struct {
+                        struct_type: crate::ue::StructType::Struct(None),
+                        id: crate::ue::FGuid::default(),
                     }),
                 },
             },
@@ -291,10 +291,10 @@ mod tests {
         crate::props::ensure_schema(
             save,
             "SaveData.WorldMapUISaveDataMap.MaskTextureData".to_string(),
-            uesave::PropertyTagPartial {
+            crate::ue::PropertyTagPartial {
                 id: None,
-                data: uesave::PropertyTagDataPartial::Array(Box::new(
-                    uesave::PropertyTagDataPartial::Byte(None),
+                data: crate::ue::PropertyTagDataPartial::Array(Box::new(
+                    crate::ue::PropertyTagDataPartial::Byte(None),
                 )),
             },
         );

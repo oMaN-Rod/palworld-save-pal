@@ -41,7 +41,7 @@ fn corpus() -> Vec<PathBuf> {
 }
 
 fn decompress(bytes: &[u8]) -> Vec<u8> {
-    uesave::compression::decompress_save(&mut std::io::Cursor::new(bytes)).unwrap()
+    crate::ue::compression::decompress_save(&mut std::io::Cursor::new(bytes)).unwrap()
 }
 
 #[test]

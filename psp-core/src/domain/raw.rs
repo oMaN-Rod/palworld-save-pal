@@ -80,8 +80,8 @@ impl SaveSession {
 mod tests {
     use super::*;
     use crate::session::SaveKind;
-    use uesave::games::palworld::PalCharacterData;
-    use uesave::{
+    use crate::ue::games::palworld::PalCharacterData;
+    use crate::ue::{
         Header, MapEntry, PackageVersion, Properties, Property, PropertySchemas, Root, Save,
         StructValue,
     };
@@ -141,13 +141,13 @@ mod tests {
         let character_data = PalCharacterData {
             object,
             unknown_bytes: [0; 4],
-            group_id: uesave::FGuid::nil(),
+            group_id: crate::ue::FGuid::nil(),
             trailing_bytes: [0; 4],
         };
         let mut value_properties = Properties::default();
         value_properties.insert(
             "RawData",
-            Property::Struct(StructValue::PalCharacterData(character_data)),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(character_data))),
         );
 
         MapEntry {

@@ -12,7 +12,7 @@ use crate::props;
 use crate::session::{parse_palworld_save, LoadedPlayer, SaveSession, WorldCaches};
 use chrono::Timelike;
 use std::collections::BTreeMap;
-use uesave::{Properties, Property, PropertyKey, StructValue, ValueVec};
+use crate::ue::{Properties, Property, PropertyKey, StructValue, ValueVec};
 
 use super::{containers, pal, relic, world};
 
@@ -93,7 +93,7 @@ fn quest_array_name(save_data: &Properties, base: &str) -> String {
     }
 }
 
-pub(crate) fn save_data_props(player_sav: &uesave::Save) -> Result<&Properties, CoreError> {
+pub(crate) fn save_data_props(player_sav: &crate::ue::Save) -> Result<&Properties, CoreError> {
     props::struct_props(
         player_sav
             .root
@@ -585,7 +585,7 @@ pub fn build_player_dto(
 }
 
 pub(crate) fn save_data_props_mut(
-    player_sav: &mut uesave::Save,
+    player_sav: &mut crate::ue::Save,
 ) -> Result<&mut Properties, CoreError> {
     props::struct_props_mut(
         player_sav
@@ -977,7 +977,7 @@ struct FlagDelta {
 /// `SaveData.RecordData.<name>` path, because uesave's writer refuses to serialize
 /// a property with no registered schema.
 fn apply_unlock_flags(
-    player_sav: &mut uesave::Save,
+    player_sav: &mut crate::ue::Save,
     flag_name: &str,
     keys: &[String],
 ) -> FlagDelta {
@@ -1005,14 +1005,14 @@ fn apply_unlock_flags(
             props::ensure_schema(
                 player_sav,
                 format!("{prefix}RecordData.{flag_name}"),
-                uesave::PropertyTagPartial {
+                crate::ue::PropertyTagPartial {
                     id: None,
-                    data: uesave::PropertyTagDataPartial::Map {
-                        key_type: Box::new(uesave::PropertyTagDataPartial::Other(
-                            uesave::PropertyType::NameProperty,
+                    data: crate::ue::PropertyTagDataPartial::Map {
+                        key_type: Box::new(crate::ue::PropertyTagDataPartial::Other(
+                            crate::ue::PropertyType::NameProperty,
                         )),
-                        value_type: Box::new(uesave::PropertyTagDataPartial::Other(
-                            uesave::PropertyType::BoolProperty,
+                        value_type: Box::new(crate::ue::PropertyTagDataPartial::Other(
+                            crate::ue::PropertyType::BoolProperty,
                         )),
                     },
                 },
@@ -1064,9 +1064,9 @@ fn apply_unlock_flags(
             .count(),
     };
 
-    let entries: Vec<uesave::MapEntry> = keys
+    let entries: Vec<crate::ue::MapEntry> = keys
         .iter()
-        .map(|key| uesave::MapEntry {
+        .map(|key| crate::ue::MapEntry {
             key: props::name_property(key),
             value: props::bool_property(true),
         })
@@ -1098,7 +1098,7 @@ fn relic_type_name(property: &Property) -> Option<&str> {
 fn relic_flag_write(
     keys: &[String],
     previously_true: &std::collections::BTreeSet<String>,
-) -> (Vec<uesave::MapEntry>, FlagDelta) {
+) -> (Vec<crate::ue::MapEntry>, FlagDelta) {
     let now_true: std::collections::BTreeSet<&str> = keys.iter().map(String::as_str).collect();
     let delta = FlagDelta {
         added: now_true
@@ -1114,7 +1114,7 @@ fn relic_flag_write(
     let flags = keys
         .iter()
         .filter(|key| seen.insert(key.as_str()))
-        .map(|key| uesave::MapEntry {
+        .map(|key| crate::ue::MapEntry {
             key: props::name_property(key),
             value: props::bool_property(true),
         })
@@ -1191,7 +1191,7 @@ fn entry_true_flags(entry: &Properties) -> std::collections::BTreeSet<String> {
 /// There is deliberately no `delta.is_zero()` early return: a save whose structures are
 /// already out of sync must get repaired on resave, even when the edit changed no flags.
 fn apply_relic_counters(
-    player_sav: &mut uesave::Save,
+    player_sav: &mut crate::ue::Save,
     effigies: &[String],
     delta: FlagDelta,
     collected_relics: Option<&BTreeMap<String, Vec<String>>>,
@@ -1233,9 +1233,9 @@ fn apply_relic_counters(
             props::ensure_schema(
                 player_sav,
                 format!("{prefix}RecordData.RelicPossessNum"),
-                uesave::PropertyTagPartial {
+                crate::ue::PropertyTagPartial {
                     id: None,
-                    data: uesave::PropertyTagDataPartial::Other(uesave::PropertyType::IntProperty),
+                    data: crate::ue::PropertyTagDataPartial::Other(crate::ue::PropertyType::IntProperty),
                 },
             );
         }
@@ -1260,22 +1260,22 @@ fn apply_relic_counters(
             props::ensure_schema(
                 player_sav,
                 format!("{prefix}RecordData.RelicObtainForInstanceFlagByType.Type"),
-                uesave::PropertyTagPartial {
+                crate::ue::PropertyTagPartial {
                     id: None,
-                    data: uesave::PropertyTagDataPartial::Enum("EPalRelicType".to_string(), None),
+                    data: crate::ue::PropertyTagDataPartial::Enum("EPalRelicType".to_string(), None),
                 },
             );
             props::ensure_schema(
                 player_sav,
                 format!("{prefix}RecordData.RelicObtainForInstanceFlagByType.Flags"),
-                uesave::PropertyTagPartial {
+                crate::ue::PropertyTagPartial {
                     id: None,
-                    data: uesave::PropertyTagDataPartial::Map {
-                        key_type: Box::new(uesave::PropertyTagDataPartial::Other(
-                            uesave::PropertyType::NameProperty,
+                    data: crate::ue::PropertyTagDataPartial::Map {
+                        key_type: Box::new(crate::ue::PropertyTagDataPartial::Other(
+                            crate::ue::PropertyType::NameProperty,
                         )),
-                        value_type: Box::new(uesave::PropertyTagDataPartial::Other(
-                            uesave::PropertyType::BoolProperty,
+                        value_type: Box::new(crate::ue::PropertyTagDataPartial::Other(
+                            crate::ue::PropertyType::BoolProperty,
                         )),
                     },
                 },
@@ -1374,7 +1374,7 @@ fn apply_relic_counters(
                 Some(entry) => entry.value = props::int_property(possess),
                 // The map's declared key type is EnumProperty, so a fresh key must be one
                 // too -- a NameProperty here would not read back as a relic type.
-                None => entries.push(uesave::MapEntry {
+                None => entries.push(crate::ue::MapEntry {
                     key: props::enum_property(CAPTURE_POWER_RELIC),
                     value: props::int_property(possess),
                 }),
@@ -1401,7 +1401,7 @@ fn apply_relic_counters(
                 None => {
                     let updated = net.clamp(0, i32::MAX as i64) as i32;
                     if updated > 0 {
-                        entries.push(uesave::MapEntry {
+                        entries.push(crate::ue::MapEntry {
                             key: props::enum_property(relic_type),
                             value: props::int_property(updated),
                         });
@@ -1461,7 +1461,7 @@ fn relic_type_for_stat(stat_key: &str) -> Option<&'static str> {
 ///
 /// Rank `0` creates nothing: the UI sends every relic key on every save.
 /// Conditional on the map existing, so a pre-1.0 save never gains one.
-fn ensure_relic_possess_map_keys(player_sav: &mut uesave::Save, points: &OrderedMap<String, i64>) {
+fn ensure_relic_possess_map_keys(player_sav: &mut crate::ue::Save, points: &OrderedMap<String, i64>) {
     let Ok(save_data) = save_data_props_mut(player_sav) else {
         return;
     };
@@ -1495,7 +1495,7 @@ fn ensure_relic_possess_map_keys(player_sav: &mut uesave::Save, points: &Ordered
         }
         // The map's declared key type is EnumProperty; a NameProperty would not read
         // back as a relic type.
-        entries.push(uesave::MapEntry {
+        entries.push(crate::ue::MapEntry {
             key: props::enum_property(relic_type),
             value: props::int_property(0),
         });
@@ -1507,8 +1507,8 @@ pub const PLAYER_SAVE_DATA_PREFIX: &str = "SaveData";
 /// A `.sav` from a character who never opened the tech tree carries no
 /// `TechnologyPoint`, which used to be the anchor these paths were derived from --
 /// so its absence both broke the write and disabled the primer meant to fix it.
-pub fn ensure_player_sav_schemas(player_sav: &mut uesave::Save) {
-    use uesave::{PropertyTagDataPartial as Data, PropertyTagPartial, PropertyType};
+pub fn ensure_player_sav_schemas(player_sav: &mut crate::ue::Save) {
+    use crate::ue::{PropertyTagDataPartial as Data, PropertyTagPartial, PropertyType};
 
     let entries = [
         ("TechnologyPoint", Data::Other(PropertyType::IntProperty)),
@@ -1538,11 +1538,11 @@ pub fn ensure_player_sav_schemas(player_sav: &mut uesave::Save) {
 /// spells the ordered array `OrderedQuestArray_FullRelease`, a pre-1.0 save the bare
 /// form -- so the schema must follow the name that was actually written.
 fn ensure_player_quest_array_schemas(
-    player_sav: &mut uesave::Save,
+    player_sav: &mut crate::ue::Save,
     completed_quest_array: &str,
     ordered_quest_array: &str,
 ) {
-    use uesave::{PropertyTagDataPartial, PropertyTagPartial, PropertyType, StructType};
+    use crate::ue::{PropertyTagDataPartial, PropertyTagPartial, PropertyType, StructType};
 
     let tag = |data: PropertyTagDataPartial| PropertyTagPartial { id: None, data };
     let path = |name: &str| format!("{PLAYER_SAVE_DATA_PREFIX}.{name}");
@@ -1561,7 +1561,7 @@ fn ensure_player_quest_array_schemas(
         tag(PropertyTagDataPartial::Array(Box::new(
             PropertyTagDataPartial::Struct {
                 struct_type: StructType::Struct(Some("PalOrderedQuestSaveData".to_string())),
-                id: uesave::FGuid::nil(),
+                id: crate::ue::FGuid::nil(),
             },
         ))),
     );

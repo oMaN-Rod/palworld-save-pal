@@ -15,9 +15,9 @@ pub fn recompress_to_plm(data: &[u8]) -> Result<Vec<u8>, CoreError> {
     if data.len() > 12 && &data[8..12] == b"PlM1" {
         return Ok(data.to_vec());
     }
-    let gvas_bytes = uesave::compression::decompress_save(&mut Cursor::new(data))
+    let gvas_bytes = crate::ue::compression::decompress_save(&mut Cursor::new(data))
         .map_err(|error| CoreError::Parse(error.to_string()))?;
-    uesave::compression::compress_save(&gvas_bytes, uesave::compression::CompressionFormat::Oodle)
+    crate::ue::compression::compress_save(&gvas_bytes, crate::ue::compression::CompressionFormat::Oodle)
         .map_err(|error| CoreError::Parse(error.to_string()))
 }
 
@@ -197,10 +197,10 @@ mod tests {
         let plm_bytes = recompress_to_plm(&plz_bytes).unwrap();
         assert_eq!(&plm_bytes[8..12], b"PlM1");
         let original_gvas =
-            uesave::compression::decompress_save(&mut std::io::Cursor::new(plz_bytes.as_slice()))
+            crate::ue::compression::decompress_save(&mut std::io::Cursor::new(plz_bytes.as_slice()))
                 .unwrap();
         let recompressed_gvas =
-            uesave::compression::decompress_save(&mut std::io::Cursor::new(plm_bytes.as_slice()))
+            crate::ue::compression::decompress_save(&mut std::io::Cursor::new(plm_bytes.as_slice()))
                 .unwrap();
         assert_eq!(original_gvas, recompressed_gvas);
 

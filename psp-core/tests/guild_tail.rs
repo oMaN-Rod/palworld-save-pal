@@ -92,8 +92,8 @@ fn accessors_handle_pre_update_guilds_built_from_the_constructor() {
 }
 
 fn collect_guild_data(
-    level: &uesave::Save,
-) -> Vec<(Uuid, uesave::games::palworld::PalGroupVariant)> {
+    level: &psp_core::ue::Save,
+) -> Vec<(Uuid, psp_core::ue::games::palworld::PalGroupVariant)> {
     world::group_map(level)
         .unwrap()
         .iter()

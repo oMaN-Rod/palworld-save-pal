@@ -10,7 +10,7 @@
 //! the `Version` property (always 101) does not discriminate. Presence is read from
 //! the data, never inferred.
 
-use uesave::{PropertyTagDataPartial, PropertyTagPartial, PropertyType};
+use crate::ue::{PropertyTagDataPartial, PropertyTagPartial, PropertyType};
 
 use crate::error::CoreError;
 
@@ -70,7 +70,7 @@ pub fn tag_for(kind: WoKind) -> PropertyTagPartial {
 /// what lets a later edit add a setting the source file omitted. `props::ensure_schema`
 /// never overwrites a schema read from the real save, so this is safe to call on any
 /// file.
-pub fn ensure_world_option_schemas(save: &mut uesave::Save) {
+pub fn ensure_world_option_schemas(save: &mut crate::ue::Save) {
     for (key, kind) in WORLD_OPTION_SETTINGS {
         crate::props::ensure_schema(save, settings_schema_path(key), tag_for(*kind));
     }
@@ -206,19 +206,19 @@ pub struct WorldOptionEntry {
 }
 
 /// The `Settings` property bag, or `None` on a save that isn't a WorldOption.
-fn settings_properties(save: &uesave::Save) -> Option<&uesave::Properties> {
+fn settings_properties(save: &crate::ue::Save) -> Option<&crate::ue::Properties> {
     crate::props::get(&save.root.properties, &[OPTION_WORLD_DATA, SETTINGS])
         .and_then(crate::props::struct_props)
 }
 
-fn settings_properties_mut(save: &mut uesave::Save) -> Option<&mut uesave::Properties> {
+fn settings_properties_mut(save: &mut crate::ue::Save) -> Option<&mut crate::ue::Properties> {
     crate::props::get_mut(&mut save.root.properties, &[OPTION_WORLD_DATA, SETTINGS])
         .and_then(crate::props::struct_props_mut)
 }
 
 /// Encodes one property as wire JSON. Returns `None` when the stored property's
 /// shape disagrees with the table -- an untrusted save is allowed to be wrong.
-fn encode_value(kind: WoKind, property: &uesave::Property) -> Option<serde_json::Value> {
+fn encode_value(kind: WoKind, property: &crate::ue::Property) -> Option<serde_json::Value> {
     Some(match kind {
         WoKind::Bool => serde_json::json!(crate::props::as_bool(property)?),
         WoKind::Int => serde_json::json!(crate::props::as_i32(property)?),
@@ -233,7 +233,7 @@ fn encode_value(kind: WoKind, property: &uesave::Property) -> Option<serde_json:
 /// Present keys only, in GVAS order. Keys absent from `WORLD_OPTION_SETTINGS` (a
 /// future Palworld setting) are skipped here but left untouched in the tree, so they
 /// round-trip on write rather than being dropped.
-pub fn read_settings(save: &uesave::Save) -> Vec<WorldOptionEntry> {
+pub fn read_settings(save: &crate::ue::Save) -> Vec<WorldOptionEntry> {
     let Some(properties) = settings_properties(save) else {
         return Vec::new();
     };
@@ -253,7 +253,7 @@ pub fn read_settings(save: &uesave::Save) -> Vec<WorldOptionEntry> {
 }
 
 /// The root `Version` property. Display-only; never written.
-pub fn read_version(save: &uesave::Save) -> i32 {
+pub fn read_version(save: &crate::ue::Save) -> i32 {
     crate::props::get(&save.root.properties, &["Version"])
         .and_then(crate::props::as_i32)
         .unwrap_or_default()
@@ -274,7 +274,7 @@ fn kind_error(key: &str, expected: &str) -> CoreError {
 /// Decodes wire JSON into a `Property` per the table. Rejects anything the table
 /// disagrees with, so a malformed client patch can never write a wrong-typed
 /// property into a real save.
-fn decode_value(key: &str, kind: WoKind, value: &serde_json::Value) -> Result<uesave::Property, CoreError> {
+fn decode_value(key: &str, kind: WoKind, value: &serde_json::Value) -> Result<crate::ue::Property, CoreError> {
     Ok(match kind {
         WoKind::Bool => crate::props::bool_property(
             value.as_bool().ok_or_else(|| kind_error(key, "a boolean"))?,
@@ -327,13 +327,13 @@ fn decode_string_array(key: &str, value: &serde_json::Value) -> Result<Vec<Strin
 ///
 /// Adding a key the source file omitted is safe because `ensure_world_option_schemas`
 /// primed every schema at parse.
-pub fn apply_patch(save: &mut uesave::Save, patch: &[WorldOptionPatch]) -> Result<bool, CoreError> {
+pub fn apply_patch(save: &mut crate::ue::Save, patch: &[WorldOptionPatch]) -> Result<bool, CoreError> {
     if patch.is_empty() {
         return Ok(false);
     }
 
     // Decode everything before mutating, so a rejected entry leaves the save untouched.
-    let mut decoded: Vec<(&str, uesave::Property)> = Vec::with_capacity(patch.len());
+    let mut decoded: Vec<(&str, crate::ue::Property)> = Vec::with_capacity(patch.len());
     for entry in patch {
         let kind = kind_for(&entry.key).ok_or_else(|| {
             CoreError::Parse(format!("Unknown WorldOption setting '{}'", entry.key))
@@ -348,7 +348,7 @@ pub fn apply_patch(save: &mut uesave::Save, patch: &[WorldOptionPatch]) -> Resul
     for (key, property) in decoded {
         let unchanged = properties
             .0
-            .get(&uesave::PropertyKey::from(key))
+            .get(&crate::ue::PropertyKey::from(key))
             .is_some_and(|existing| *existing == property);
         if unchanged {
             continue;
@@ -422,8 +422,8 @@ mod tests {
         // Enum("", None) -- NOT "EPalAllowConnectPlatform".
         let tag = tag_for(WoKind::EnumArray);
         match tag.data {
-            uesave::PropertyTagDataPartial::Array(inner) => match *inner {
-                uesave::PropertyTagDataPartial::Enum(name, second) => {
+            crate::ue::PropertyTagDataPartial::Array(inner) => match *inner {
+                crate::ue::PropertyTagDataPartial::Enum(name, second) => {
                     assert_eq!(name, "");
                     assert_eq!(second, None);
                 }
@@ -437,9 +437,9 @@ mod tests {
     fn tag_for_name_array_is_array_of_name_property() {
         let tag = tag_for(WoKind::NameArray);
         match tag.data {
-            uesave::PropertyTagDataPartial::Array(inner) => assert!(matches!(
+            crate::ue::PropertyTagDataPartial::Array(inner) => assert!(matches!(
                 *inner,
-                uesave::PropertyTagDataPartial::Other(uesave::PropertyType::NameProperty)
+                crate::ue::PropertyTagDataPartial::Other(crate::ue::PropertyType::NameProperty)
             )),
             other => panic!("expected Array, got {other:?}"),
         }
@@ -449,7 +449,7 @@ mod tests {
     fn tag_for_enum_carries_name_and_none_second_field() {
         let tag = tag_for(WoKind::Enum("EPalOptionWorldDifficulty"));
         match tag.data {
-            uesave::PropertyTagDataPartial::Enum(name, second) => {
+            crate::ue::PropertyTagDataPartial::Enum(name, second) => {
                 assert_eq!(name, "EPalOptionWorldDifficulty");
                 assert_eq!(second, None);
             }
@@ -466,24 +466,24 @@ mod tests {
         assert!(kind_for("NoSuchSetting").is_none());
     }
 
-    fn settings_save(entries: Vec<(&str, uesave::Property)>) -> uesave::Save {
-        let mut settings = uesave::Properties::default();
+    fn settings_save(entries: Vec<(&str, crate::ue::Property)>) -> crate::ue::Save {
+        let mut settings = crate::ue::Properties::default();
         for (key, value) in entries {
             settings.insert(key, value);
         }
-        let mut owd = uesave::Properties::default();
-        owd.insert(SETTINGS, uesave::Property::Struct(uesave::StructValue::Struct(settings)));
-        let mut root = uesave::Properties::default();
+        let mut owd = crate::ue::Properties::default();
+        owd.insert(SETTINGS, crate::ue::Property::Struct(crate::ue::StructValue::Struct(settings)));
+        let mut root = crate::ue::Properties::default();
         root.insert("Version", crate::props::int_property(101));
         root.insert(
             OPTION_WORLD_DATA,
-            uesave::Property::Struct(uesave::StructValue::Struct(owd)),
+            crate::ue::Property::Struct(crate::ue::StructValue::Struct(owd)),
         );
-        uesave::Save {
-            header: uesave::Header {
+        crate::ue::Save {
+            header: crate::ue::Header {
                 magic: 0,
                 save_game_version: 0,
-                package_version: uesave::PackageVersion { ue4: 0, ue5: None },
+                package_version: crate::ue::PackageVersion { ue4: 0, ue5: None },
                 engine_version_major: 0,
                 engine_version_minor: 0,
                 engine_version_patch: 0,
@@ -491,8 +491,8 @@ mod tests {
                 engine_version: String::new(),
                 custom_version: None,
             },
-            schemas: uesave::PropertySchemas::default(),
-            root: uesave::Root {
+            schemas: crate::ue::PropertySchemas::default(),
+            root: crate::ue::Root {
                 save_game_type: String::new(),
                 properties: root,
             },

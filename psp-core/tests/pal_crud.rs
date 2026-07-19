@@ -6,7 +6,7 @@ use psp_core::error::CoreError;
 use psp_core::gamedata::GameData;
 use psp_core::progress::null_progress;
 use psp_core::session::{LoadedPlayer, SaveKind, SaveSession};
-use uesave::{
+use psp_core::ue::{
     Header, MapEntry, PackageVersion, Properties, Property, PropertySchemas, Root, Save,
     StructValue, ValueVec,
 };
@@ -526,9 +526,9 @@ fn worker_director_blob(container_id: Uuid) -> Vec<u8> {
     blob
 }
 
-fn zero_transform() -> uesave::games::palworld::PalTransform {
-    use uesave::{Double, Quat, Vector};
-    uesave::games::palworld::PalTransform {
+fn zero_transform() -> psp_core::ue::games::palworld::PalTransform {
+    use psp_core::ue::{Double, Quat, Vector};
+    psp_core::ue::games::palworld::PalTransform {
         rotation: Quat {
             x: Double(0.0),
             y: Double(0.0),
@@ -549,8 +549,8 @@ fn zero_transform() -> uesave::games::palworld::PalTransform {
 }
 
 fn base_camp_entry(base_id: Uuid, guild_id: Uuid, worker_container_id: Uuid) -> MapEntry {
-    use uesave::games::palworld::PalBaseCamp;
-    use uesave::ByteArray;
+    use psp_core::ue::games::palworld::PalBaseCamp;
+    use psp_core::ue::ByteArray;
     let camp = PalBaseCamp {
         id: psp_core::props::uuid_to_guid(base_id),
         name: String::new(),
@@ -559,7 +559,7 @@ fn base_camp_entry(base_id: Uuid, guild_id: Uuid, worker_container_id: Uuid) -> 
         area_range: 0.0,
         group_id_belong_to: psp_core::props::uuid_to_guid(guild_id),
         fast_travel_local_transform: zero_transform(),
-        owner_map_object_instance_id: uesave::FGuid::nil(),
+        owner_map_object_instance_id: psp_core::ue::FGuid::nil(),
         trailing_bytes: [0; 4],
     };
     let mut worker_properties = Properties::default();
@@ -572,7 +572,7 @@ fn base_camp_entry(base_id: Uuid, guild_id: Uuid, worker_container_id: Uuid) -> 
     let mut value_properties = Properties::default();
     value_properties.insert(
         "RawData",
-        Property::Struct(StructValue::PalBaseCamp(Box::new(camp))),
+        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::BaseCamp(Box::new(camp)))),
     );
     value_properties.insert(
         "WorkerDirector",
@@ -585,7 +585,7 @@ fn base_camp_entry(base_id: Uuid, guild_id: Uuid, worker_container_id: Uuid) -> 
 }
 
 fn guild_group_entry(guild_id: Uuid) -> MapEntry {
-    use uesave::games::palworld::PalGroupData;
+    use psp_core::ue::games::palworld::PalGroupData;
     let mut value_properties = Properties::default();
     value_properties.insert(
         "GroupType",
@@ -595,13 +595,13 @@ fn guild_group_entry(guild_id: Uuid) -> MapEntry {
         group_id: psp_core::props::uuid_to_guid(guild_id),
         group_name: String::new(),
         individual_character_handle_ids: vec![],
-        data: uesave::games::palworld::PalGroupVariant::Guild(
+        data: psp_core::ue::games::palworld::PalGroupVariant::Guild(
             psp_core::domain::guild_tail::pre_update_guild(1, "", uuid::Uuid::nil(), &[]),
         ),
     };
     value_properties.insert(
         "RawData",
-        Property::Struct(StructValue::PalGroupData(group_data)),
+        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::GroupData(group_data))),
     );
     MapEntry {
         key: guid_property(guild_id),
@@ -687,7 +687,7 @@ fn clone_guild_pal_invalidates_caches_and_the_rebuilt_index_reflects_both_the_cl
         if let Some(save_parameter) = world::entry_save_parameter_mut(entry) {
             if let Some(slot_property) = save_parameter
                 .0
-                .shift_remove(&uesave::PropertyKey::from("SlotID"))
+                .shift_remove(&psp_core::ue::PropertyKey::from("SlotID"))
             {
                 save_parameter.insert("SlotId", slot_property);
             }
@@ -804,16 +804,16 @@ fn player_character_entry(player_id: Uuid) -> MapEntry {
         "SaveParameter",
         Property::Struct(StructValue::Struct(save_parameter)),
     );
-    let character_data = uesave::games::palworld::PalCharacterData {
+    let character_data = psp_core::ue::games::palworld::PalCharacterData {
         object: object_props,
         unknown_bytes: [0; 4],
-        group_id: uesave::FGuid::nil(),
+        group_id: psp_core::ue::FGuid::nil(),
         trailing_bytes: [0; 4],
     };
     let mut value_props = Properties::default();
     value_props.insert(
         "RawData",
-        Property::Struct(StructValue::PalCharacterData(character_data)),
+        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::CharacterData(character_data))),
     );
     MapEntry {
         key: Property::Struct(StructValue::Struct(key_props)),
@@ -1071,7 +1071,7 @@ fn dps_fixture() -> (SaveSession, GameData, Uuid) {
     };
     if let Some(save_parameter) = lucky_slot
         .0
-        .get_mut(&uesave::PropertyKey::from("SaveParameter"))
+        .get_mut(&psp_core::ue::PropertyKey::from("SaveParameter"))
         .and_then(psp_core::props::struct_props_mut)
     {
         save_parameter.insert("IsRarePal", Property::Bool(true));
@@ -1190,7 +1190,7 @@ fn dps_fixture_for_stomach() -> (SaveSession, GameData, Uuid) {
     };
     if let Some(save_parameter) = recycled_slot_props
         .0
-        .get_mut(&uesave::PropertyKey::from("SaveParameter"))
+        .get_mut(&psp_core::ue::PropertyKey::from("SaveParameter"))
         .and_then(psp_core::props::struct_props_mut)
     {
         save_parameter.insert("FullStomach", psp_core::props::float_property(999.0));
@@ -1311,7 +1311,7 @@ fn delete_player_dps_pals_resets_the_slot_and_clears_the_outer_instance_id() {
             .root
             .properties
             .0
-            .get(&uesave::PropertyKey::from("SaveParameterArray"))
+            .get(&psp_core::ue::PropertyKey::from("SaveParameterArray"))
             .unwrap(),
     )
     .unwrap();
@@ -1327,7 +1327,7 @@ fn delete_player_dps_pals_resets_the_slot_and_clears_the_outer_instance_id() {
             .root
             .properties
             .0
-            .get(&uesave::PropertyKey::from("SaveParameterArray"))
+            .get(&psp_core::ue::PropertyKey::from("SaveParameterArray"))
             .unwrap(),
     )
     .unwrap();
@@ -1337,7 +1337,7 @@ fn delete_player_dps_pals_resets_the_slot_and_clears_the_outer_instance_id() {
     let save_parameter = psp_core::props::struct_props(
         slot_props
             .0
-            .get(&uesave::PropertyKey::from("SaveParameter"))
+            .get(&psp_core::ue::PropertyKey::from("SaveParameter"))
             .unwrap(),
     )
     .unwrap();

@@ -193,10 +193,10 @@ fn apply_dto_stale_is_boss_flag_does_not_add_boss_prefix_or_inflate_hp() {
 #[test]
 fn apply_dto_stale_is_boss_false_on_a_real_boss_pal_still_gets_boosted_hp() {
     let data = game_data();
-    let mut save_parameter = uesave::Properties::default();
+    let mut save_parameter = psp_core::ue::Properties::default();
     save_parameter.insert(
         "CharacterID",
-        uesave::Property::Name("BOSS_SheepBall".to_string()),
+        psp_core::ue::Property::Name("BOSS_SheepBall".to_string()),
     );
     let instance_id = uuid::Uuid::nil();
     let mut dto = pal::read_save_parameter_dto(&save_parameter, instance_id, false, &data);
@@ -345,17 +345,17 @@ fn apply_dto_storage_slot_round_trips_and_storage_id_never_changes_container_id(
 #[test]
 fn heal_save_parameter_clears_sickness_and_resets_sanity_and_stomach() {
     let data = game_data();
-    let mut save_parameter = uesave::Properties::default();
+    let mut save_parameter = psp_core::ue::Properties::default();
     save_parameter.insert(
         "CharacterID",
-        uesave::Property::Name("Sheepball".to_string()),
+        psp_core::ue::Property::Name("Sheepball".to_string()),
     );
     save_parameter.insert(
         "PalReviveTimer",
-        uesave::Property::Float(uesave::Float(30.0)),
+        psp_core::ue::Property::Float(psp_core::ue::Float(30.0)),
     );
-    save_parameter.insert("WorkerSick", uesave::Property::Bool(true));
-    save_parameter.insert("SanityValue", uesave::Property::Float(uesave::Float(12.0)));
+    save_parameter.insert("WorkerSick", psp_core::ue::Property::Bool(true));
+    save_parameter.insert("SanityValue", psp_core::ue::Property::Float(psp_core::ue::Float(12.0)));
 
     pal::heal_save_parameter(&mut save_parameter, "Sheepball", &data);
 
@@ -543,7 +543,7 @@ fn ensure_pal_property_schemas_covers_work_suitability_and_rank_fields_freshly_i
         for name in STRIPPED {
             save_parameter
                 .0
-                .shift_remove(&uesave::PropertyKey::from(name));
+                .shift_remove(&psp_core::ue::PropertyKey::from(name));
         }
     }
     {

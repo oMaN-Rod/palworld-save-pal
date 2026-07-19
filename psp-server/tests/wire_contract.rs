@@ -294,7 +294,7 @@ fn decode_download_zip_members(response: &Value) -> std::collections::BTreeMap<S
 /// container framing is what legitimately differs between the two zips; the
 /// GVAS INSIDE is what must match.
 fn decompress_sav_container(sav_bytes: &[u8]) -> Vec<u8> {
-    uesave::compression::decompress_save(&mut std::io::Cursor::new(sav_bytes))
+    psp_core::ue::compression::decompress_save(&mut std::io::Cursor::new(sav_bytes))
         .expect("sav container decompresses to GVAS")
 }
 
@@ -311,7 +311,7 @@ fn decompress_sav_container(sav_bytes: &[u8]) -> Vec<u8> {
 /// an order-preserving `IndexMap`), the guild's `GuildExtraSaveDataMap`, and
 /// every `Players/*.sav` (which carry no `worldSaveData` at all).
 fn normalized_member_gvas(compressed_sav: &[u8]) -> Vec<u8> {
-    use uesave::{Property, PropertyKey, StructValue};
+    use psp_core::ue::{Property, PropertyKey, StructValue};
     let mut save = psp_core::savio::read_sav_bytes(compressed_sav).expect("parse sav container");
     if let Some(Property::Struct(StructValue::Struct(world_save_data))) = save
         .root
@@ -324,7 +324,7 @@ fn normalized_member_gvas(compressed_sav: &[u8]) -> Vec<u8> {
             .shift_remove(&PropertyKey::from("MapObjectSaveData"));
     }
     let recompressed = psp_core::savio::write_sav_bytes(&save).expect("re-serialize sav container");
-    uesave::compression::decompress_save(&mut std::io::Cursor::new(recompressed))
+    psp_core::ue::compression::decompress_save(&mut std::io::Cursor::new(recompressed))
         .expect("decompress re-serialized sav container")
 }
 

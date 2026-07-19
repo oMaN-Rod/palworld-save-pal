@@ -4,7 +4,7 @@ use psp_core::domain::{player, world};
 use psp_core::gamedata::GameData;
 use psp_core::progress::null_progress;
 use psp_core::session::{LoadedPlayer, PlayerFileData, SaveKind, SaveSession};
-use uesave::{
+use psp_core::ue::{
     Header, MapEntry, PackageVersion, Properties, Property, PropertySchemas, Root, Save,
     StructValue, ValueVec,
 };
@@ -58,16 +58,16 @@ fn player_character_entry(
 
     let mut object = Properties::default();
     object.insert("SaveParameter", struct_property(save_parameter));
-    let character_data = uesave::games::palworld::PalCharacterData {
+    let character_data = psp_core::ue::games::palworld::PalCharacterData {
         object,
         unknown_bytes: [0; 4],
-        group_id: uesave::FGuid::nil(),
+        group_id: psp_core::ue::FGuid::nil(),
         trailing_bytes: [0; 4],
     };
     let mut value_properties = Properties::default();
     value_properties.insert(
         "RawData",
-        Property::Struct(StructValue::PalCharacterData(character_data)),
+        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::CharacterData(character_data))),
     );
 
     MapEntry {
@@ -304,7 +304,7 @@ fn player_details_second_call_reuses_the_cached_loaded_sav_without_reparsing() {
         .root
         .properties
         .0
-        .get_mut(&uesave::PropertyKey::from("Timestamp"))
+        .get_mut(&psp_core::ue::PropertyKey::from("Timestamp"))
         .unwrap();
     *timestamp = Property::Struct(StructValue::DateTime(0));
 

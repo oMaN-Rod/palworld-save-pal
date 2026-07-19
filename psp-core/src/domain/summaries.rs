@@ -8,7 +8,7 @@ use crate::palbin;
 use crate::progress::ProgressSink;
 use crate::props;
 use crate::session::{parse_palworld_save, SaveSession};
-use uesave::games::palworld::PalGuildGroup;
+use crate::ue::games::palworld::PalGuildGroup;
 use uuid::Uuid;
 
 use super::guild_tail;
@@ -18,10 +18,10 @@ const GROUP_TYPE_GUILD: &str = "EPalGroupType::Guild";
 /// `entry.value.RawData(.PalCharacterData).object.SaveParameter` — the
 /// property bag every other accessor in this module reads from. A missing or
 /// mistyped link anywhere in the chain yields `None`; callers skip the entry.
-pub(crate) fn save_parameter(entry: &uesave::MapEntry) -> Option<&uesave::Properties> {
+pub(crate) fn save_parameter(entry: &crate::ue::MapEntry) -> Option<&crate::ue::Properties> {
     let value_properties = props::struct_properties(&entry.value)?;
     let raw_data = props::get(value_properties, &["RawData"])?;
-    let uesave::Property::Struct(uesave::StructValue::PalCharacterData(character_data)) = raw_data
+    let crate::ue::Property::Struct(crate::ue::StructValue::Game(crate::ue::PalStruct::CharacterData(character_data))) = raw_data
     else {
         return None;
     };
@@ -29,20 +29,20 @@ pub(crate) fn save_parameter(entry: &uesave::MapEntry) -> Option<&uesave::Proper
 }
 
 /// `IsPlayer`, defaulting to `false` when the property is absent.
-pub(crate) fn is_player_entry(save_parameter: &uesave::Properties) -> bool {
+pub(crate) fn is_player_entry(save_parameter: &crate::ue::Properties) -> bool {
     props::get(save_parameter, &["IsPlayer"])
         .and_then(props::as_bool)
         .unwrap_or(false)
 }
 
-fn player_uid_from_key(entry: &uesave::MapEntry) -> Option<Uuid> {
+fn player_uid_from_key(entry: &crate::ue::MapEntry) -> Option<Uuid> {
     props::get_in(&entry.key, &["PlayerUId"]).and_then(props::as_uuid)
 }
 
 /// A `GroupSaveDataMap` entry's decoded guild, when it is a Guild-type group
 /// whose `RawData` decodes cleanly. A nil guild id is deliberately kept here;
 /// only `build_guild_summaries` filters it out.
-fn guild_tail_entry(entry: &uesave::MapEntry) -> Option<(Uuid, &PalGuildGroup)> {
+fn guild_tail_entry(entry: &crate::ue::MapEntry) -> Option<(Uuid, &PalGuildGroup)> {
     let value_properties = props::struct_properties(&entry.value)?;
     let group_type = props::get(value_properties, &["GroupType"]).and_then(props::as_enum)?;
     if group_type != GROUP_TYPE_GUILD {
@@ -50,14 +50,14 @@ fn guild_tail_entry(entry: &uesave::MapEntry) -> Option<(Uuid, &PalGuildGroup)> 
     }
     let guild_id = props::as_uuid(&entry.key)?;
     let raw_data = props::get(value_properties, &["RawData"])?;
-    let uesave::Property::Struct(uesave::StructValue::PalGroupData(group_data)) = raw_data else {
+    let crate::ue::Property::Struct(crate::ue::StructValue::Game(crate::ue::PalStruct::GroupData(group_data))) = raw_data else {
         return None;
     };
     let guild = guild_tail::as_guild(group_data)?;
     Some((guild_id, guild))
 }
 
-pub(crate) fn build_player_guild_map(group_entries: &[uesave::MapEntry]) -> HashMap<Uuid, Uuid> {
+pub(crate) fn build_player_guild_map(group_entries: &[crate::ue::MapEntry]) -> HashMap<Uuid, Uuid> {
     let mut player_guild_map = HashMap::new();
     for entry in group_entries {
         let Some((guild_id, guild)) = guild_tail_entry(entry) else {
@@ -72,7 +72,7 @@ pub(crate) fn build_player_guild_map(group_entries: &[uesave::MapEntry]) -> Hash
 
 /// Counts every non-player character entry against its `OwnerPlayerUId`,
 /// including the nil UUID (wild/unowned pals get their own bucket).
-pub(crate) fn build_pal_owner_counts(character_entries: &[uesave::MapEntry]) -> HashMap<Uuid, i64> {
+pub(crate) fn build_pal_owner_counts(character_entries: &[crate::ue::MapEntry]) -> HashMap<Uuid, i64> {
     let mut owner_counts = HashMap::new();
     for entry in character_entries {
         let Some(parameters) = save_parameter(entry) else {
@@ -93,8 +93,8 @@ pub(crate) fn build_pal_owner_counts(character_entries: &[uesave::MapEntry]) -> 
 /// Player character entries with a non-nil `PlayerUId`, paired with their
 /// save parameter bag.
 pub(crate) fn collect_player_entries(
-    character_entries: &[uesave::MapEntry],
-) -> Vec<(Uuid, &uesave::Properties)> {
+    character_entries: &[crate::ue::MapEntry],
+) -> Vec<(Uuid, &crate::ue::Properties)> {
     let mut players = Vec::new();
     for entry in character_entries {
         let Some(parameters) = save_parameter(entry) else {
@@ -112,7 +112,7 @@ pub(crate) fn collect_player_entries(
 
 /// Player-facing nickname: `NickName` if present and non-empty, otherwise
 /// `"Player (<uid8>)"`.
-fn player_nickname(uid: Uuid, save_parameter: &uesave::Properties) -> String {
+fn player_nickname(uid: Uuid, save_parameter: &crate::ue::Properties) -> String {
     props::get(save_parameter, &["NickName"])
         .and_then(props::as_str)
         .filter(|name| !name.is_empty())
@@ -124,7 +124,7 @@ fn player_nickname(uid: Uuid, save_parameter: &uesave::Properties) -> String {
 /// `.sav`, which this function does no I/O to read.
 pub(crate) fn build_player_summary(
     uid: Uuid,
-    save_parameter: &uesave::Properties,
+    save_parameter: &crate::ue::Properties,
     player_guild_map: &HashMap<Uuid, Uuid>,
     pal_owner_counts: &HashMap<Uuid, i64>,
     last_online_time: Option<chrono::NaiveDateTime>,
@@ -149,7 +149,7 @@ pub(crate) fn build_player_summary(
 /// A player save's `Timestamp` (.NET ticks) as a datetime. Zero ticks means
 /// "never online", not the year 1 -- a save that has never been played writes
 /// `0` rather than omitting the property.
-fn last_online_time_from_root(properties: &uesave::Properties) -> Option<chrono::NaiveDateTime> {
+fn last_online_time_from_root(properties: &crate::ue::Properties) -> Option<chrono::NaiveDateTime> {
     props::get(properties, &["Timestamp"])
         .and_then(props::as_datetime_ticks)
         .filter(|&ticks| ticks != 0)
@@ -160,7 +160,7 @@ fn last_online_time_from_root(properties: &uesave::Properties) -> Option<chrono:
 /// must not fail the whole save load.
 fn parse_player_save_and_timestamp(
     sav_bytes: &[u8],
-) -> (Option<uesave::Save>, Option<chrono::NaiveDateTime>) {
+) -> (Option<crate::ue::Save>, Option<chrono::NaiveDateTime>) {
     let Ok(save) = parse_palworld_save(sav_bytes) else {
         return (None, None);
     };
@@ -171,13 +171,13 @@ fn parse_player_save_and_timestamp(
 /// Worker-container ids for every base belonging to `guild_id`. A base whose
 /// `WorkerDirector` blob fails to decode contributes no container id rather
 /// than aborting the count.
-fn guild_worker_container_ids(base_camp_entries: &[uesave::MapEntry], guild_id: Uuid) -> Vec<Uuid> {
+fn guild_worker_container_ids(base_camp_entries: &[crate::ue::MapEntry], guild_id: Uuid) -> Vec<Uuid> {
     let mut container_ids = Vec::new();
     for base_entry in base_camp_entries {
         let Some(value_properties) = props::struct_properties(&base_entry.value) else {
             continue;
         };
-        let Some(uesave::Property::Struct(uesave::StructValue::PalBaseCamp(camp))) =
+        let Some(crate::ue::Property::Struct(crate::ue::StructValue::Game(crate::ue::PalStruct::BaseCamp(camp)))) =
             props::get(value_properties, &["RawData"])
         else {
             continue;
@@ -197,14 +197,14 @@ fn guild_worker_container_ids(base_camp_entries: &[uesave::MapEntry], guild_id: 
     container_ids
 }
 
-fn base_count_for_guild(base_camp_entries: &[uesave::MapEntry], guild_id: Uuid) -> i64 {
+fn base_count_for_guild(base_camp_entries: &[crate::ue::MapEntry], guild_id: Uuid) -> i64 {
     base_camp_entries
         .iter()
         .filter(|base_entry| {
             props::struct_properties(&base_entry.value)
                 .and_then(|value_properties| props::get(value_properties, &["RawData"]))
                 .and_then(|raw_data| match raw_data {
-                    uesave::Property::Struct(uesave::StructValue::PalBaseCamp(camp)) => {
+                    crate::ue::Property::Struct(crate::ue::StructValue::Game(crate::ue::PalStruct::BaseCamp(camp))) => {
                         Some(props::fguid_to_uuid(&camp.group_id_belong_to))
                     }
                     _ => None,
@@ -217,8 +217,8 @@ fn base_count_for_guild(base_camp_entries: &[uesave::MapEntry], guild_id: Uuid) 
 /// Pals working at any of `guild_id`'s bases: those slotted into one of its
 /// bases' worker containers.
 fn count_guild_base_pals(
-    base_camp_entries: Option<&[uesave::MapEntry]>,
-    character_entries: &[uesave::MapEntry],
+    base_camp_entries: Option<&[crate::ue::MapEntry]>,
+    character_entries: &[crate::ue::MapEntry],
     guild_id: Uuid,
 ) -> i64 {
     let Some(base_camp_entries) = base_camp_entries.filter(|entries| !entries.is_empty()) else {
@@ -251,9 +251,9 @@ fn count_guild_base_pals(
 /// `guilds` array must preserve — the `BTreeMap` itself always iterates in
 /// `Uuid`-sorted order and cannot answer that question.
 pub(crate) fn build_guild_summaries(
-    group_entries: &[uesave::MapEntry],
-    base_camp_entries: Option<&[uesave::MapEntry]>,
-    character_entries: &[uesave::MapEntry],
+    group_entries: &[crate::ue::MapEntry],
+    base_camp_entries: Option<&[crate::ue::MapEntry]>,
+    character_entries: &[crate::ue::MapEntry],
 ) -> (BTreeMap<Uuid, GuildSummary>, Vec<Uuid>) {
     let mut summaries = BTreeMap::new();
     let mut order = Vec::new();
@@ -371,10 +371,10 @@ pub fn extract_summaries(
 mod tests {
     use super::*;
     use crate::palbin::test_bytes::shuffle_guid_bytes;
-    use uesave::games::palworld::{
+    use crate::ue::games::palworld::{
         PalBaseCamp, PalCharacterData, PalGroupData, PalGroupVariant, PalGuildGroup, PalTransform,
     };
-    use uesave::{
+    use crate::ue::{
         ByteArray, Double, MapEntry, Properties, Property, Quat, StructValue, ValueVec, Vector,
     };
 
@@ -385,7 +385,7 @@ mod tests {
     const BASE_ID: &str = "44444444-4444-4444-4444-444444444444";
     const CONTAINER_ID: &str = "55555555-5555-5555-5555-555555555555";
 
-    fn fguid(text: &str) -> uesave::FGuid {
+    fn fguid(text: &str) -> crate::ue::FGuid {
         serde_json::from_value(serde_json::Value::String(text.to_string())).unwrap()
     }
 
@@ -410,13 +410,13 @@ mod tests {
         let character_data = PalCharacterData {
             object,
             unknown_bytes: [0; 4],
-            group_id: uesave::FGuid::nil(),
+            group_id: crate::ue::FGuid::nil(),
             trailing_bytes: [0; 4],
         };
         let mut value_properties = Properties::default();
         value_properties.insert(
             "RawData",
-            Property::Struct(StructValue::PalCharacterData(character_data)),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(character_data))),
         );
 
         MapEntry {
@@ -429,7 +429,7 @@ mod tests {
         let mut save_parameter = Properties::default();
         save_parameter.insert("IsPlayer", Property::Bool(true));
         save_parameter.insert("NickName", Property::Str(nickname.to_string()));
-        save_parameter.insert("Level", Property::Byte(uesave::Byte::Byte(level)));
+        save_parameter.insert("Level", Property::Byte(crate::ue::Byte::Byte(level)));
         character_entry(player_uid, player_uid, save_parameter)
     }
 
@@ -470,7 +470,7 @@ mod tests {
         };
         value_properties.insert(
             "RawData",
-            Property::Struct(StructValue::PalGroupData(group_data)),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::GroupData(group_data))),
         );
         MapEntry {
             key: guid_property(guild_id),
@@ -527,7 +527,7 @@ mod tests {
             area_range: 0.0,
             group_id_belong_to: fguid(guild_id),
             fast_travel_local_transform: zero_transform(),
-            owner_map_object_instance_id: uesave::FGuid::nil(),
+            owner_map_object_instance_id: crate::ue::FGuid::nil(),
             trailing_bytes: [0; 4],
         };
         let mut worker_blob = vec![0u8; 118];
@@ -545,7 +545,7 @@ mod tests {
         let mut value_properties = Properties::default();
         value_properties.insert(
             "RawData",
-            Property::Struct(StructValue::PalBaseCamp(Box::new(camp))),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::BaseCamp(Box::new(camp)))),
         );
         value_properties.insert(
             "WorkerDirector",
@@ -667,11 +667,11 @@ mod tests {
 mod extraction_tests {
     use super::*;
     use std::sync::{Arc, Mutex};
-    use uesave::{MapEntry, Properties, Property, StructValue};
+    use crate::ue::{MapEntry, Properties, Property, StructValue};
 
     const PLAYER_ONE: &str = "11111111-1111-1111-1111-111111111111";
 
-    fn fguid(text: &str) -> uesave::FGuid {
+    fn fguid(text: &str) -> crate::ue::FGuid {
         serde_json::from_value(serde_json::Value::String(text.to_string())).unwrap()
     }
 
@@ -687,16 +687,16 @@ mod extraction_tests {
             "SaveParameter",
             Property::Struct(StructValue::Struct(save_parameter)),
         );
-        let character_data = uesave::games::palworld::PalCharacterData {
+        let character_data = crate::ue::games::palworld::PalCharacterData {
             object,
             unknown_bytes: [0; 4],
-            group_id: uesave::FGuid::nil(),
+            group_id: crate::ue::FGuid::nil(),
             trailing_bytes: [0; 4],
         };
         let mut value_properties = Properties::default();
         value_properties.insert(
             "RawData",
-            Property::Struct(StructValue::PalCharacterData(character_data)),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(character_data))),
         );
         let mut key_properties = Properties::default();
         key_properties.insert(
@@ -764,12 +764,12 @@ mod extraction_tests {
         assert!(last_online_time_from_root(&Properties::default()).is_none());
     }
 
-    fn minimal_uesave_save(properties: uesave::Properties) -> uesave::Save {
-        uesave::Save {
-            header: uesave::Header {
+    fn minimal_uesave_save(properties: crate::ue::Properties) -> crate::ue::Save {
+        crate::ue::Save {
+            header: crate::ue::Header {
                 magic: 0,
                 save_game_version: 0,
-                package_version: uesave::PackageVersion { ue4: 0, ue5: None },
+                package_version: crate::ue::PackageVersion { ue4: 0, ue5: None },
                 engine_version_major: 0,
                 engine_version_minor: 0,
                 engine_version_patch: 0,
@@ -777,8 +777,8 @@ mod extraction_tests {
                 engine_version: String::new(),
                 custom_version: None,
             },
-            schemas: uesave::PropertySchemas::default(),
-            root: uesave::Root {
+            schemas: crate::ue::PropertySchemas::default(),
+            root: crate::ue::Root {
                 save_game_type: String::new(),
                 properties,
             },
@@ -838,16 +838,16 @@ mod extraction_tests {
             "SaveParameter",
             Property::Struct(StructValue::Struct(save_parameter)),
         );
-        let character_data = uesave::games::palworld::PalCharacterData {
+        let character_data = crate::ue::games::palworld::PalCharacterData {
             object,
             unknown_bytes: [0; 4],
-            group_id: uesave::FGuid::nil(),
+            group_id: crate::ue::FGuid::nil(),
             trailing_bytes: [0; 4],
         };
         let mut value_properties = Properties::default();
         value_properties.insert(
             "RawData",
-            Property::Struct(StructValue::PalCharacterData(character_data)),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(character_data))),
         );
         let mut key_properties = Properties::default();
         key_properties.insert("PlayerUId", guid_property(player_uid));
