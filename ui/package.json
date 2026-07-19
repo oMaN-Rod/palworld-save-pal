@@ -68,7 +68,7 @@
 		"clsx": "^2.1.1",
 		"cockatiel": "^3.2.1",
 		"driver.js": "^1.4.0",
-		"lucide-svelte": "^0.469.0",
+		"lucide-svelte": "^1.0.1",
 		"monaco-editor": "^0.55.1",
 		"ol": "^10.7.0",
 		"ol-contextmenu": "^6.0.0",
