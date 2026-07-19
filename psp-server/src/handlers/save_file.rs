@@ -800,6 +800,7 @@ fn is_player_save_file(file_name: &str) -> bool {
     stem.len() == 32 && stem.bytes().all(|byte| byte.is_ascii_hexdigit())
 }
 
+#[cfg(test)]
 fn copy_dir_recursive(src: &Path, dst: &Path) -> std::io::Result<()> {
     std::fs::create_dir_all(dst)?;
     for dir_entry in std::fs::read_dir(src)? {
