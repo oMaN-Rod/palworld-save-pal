@@ -14,7 +14,7 @@ use crate::error::CoreError;
 use crate::gamedata::GameData;
 use crate::props;
 use crate::session::{SaveSession, WorldCaches};
-use uesave::{ByteArray, Properties, Property, PropertyKey, StructValue, ValueVec};
+use crate::ue::{ByteArray, Properties, Property, PropertyKey, StructValue, ValueVec};
 
 /// An egg carries a pal's `SaveParameter` names under the dynamic item's `RawData`.
 pub const EGG_SAVE_PARAMETER_PREFIX: &str =
@@ -23,18 +23,18 @@ pub const EGG_SAVE_PARAMETER_PREFIX: &str =
 /// A schema path carries no array index, so an array that is empty on disk records
 /// no element schema at all -- and a world with no pal, or a player with no weapon,
 /// is exactly the one that cannot accept the first one written.
-pub fn ensure_container_schemas(level: &mut uesave::Save) {
-    use uesave::{PropertyTagDataPartial as Data, PropertyTagPartial, PropertyType, StructType};
+pub fn ensure_container_schemas(level: &mut crate::ue::Save) {
+    use crate::ue::{PropertyTagDataPartial as Data, PropertyTagPartial, PropertyType};
 
     let byte_array = || Data::Array(Box::new(Data::Byte(None)));
-    // `StructType::from` resolves a name the way the READER does: a known Palworld
-    // type (`PalCharacterContainer`, ...) becomes its own variant, anything else a
-    // plain named struct. Hand-picking `Raw` here instead marks the type unknown,
-    // and uesave then writes the payload with the wrong codec -- a save that no
-    // longer parses back.
+    // `struct_type_for` resolves a name the way the READER does: a Palworld game
+    // struct (`PalCharacterContainer`, ...) becomes a `StructType::Game`, anything
+    // else a plain named struct. Hand-picking `Raw` here instead marks the type
+    // unknown, and uesave then writes the payload with the wrong codec -- a save
+    // that no longer parses back.
     let pal_struct = |name: &str| Data::Struct {
-        struct_type: StructType::from(name),
-        id: uesave::FGuid::nil(),
+        struct_type: crate::ue::struct_type_for(name),
+        id: crate::ue::FGuid::nil(),
     };
     let struct_array = |name: &str| Data::Array(Box::new(pal_struct(name)));
 
@@ -106,14 +106,14 @@ pub struct CharacterContainerView {
     pub slots: Vec<CharacterContainerSlotDto>,
 }
 
-fn container_value_props(level: &uesave::Save, entry_index: usize) -> Option<&Properties> {
+fn container_value_props(level: &crate::ue::Save, entry_index: usize) -> Option<&Properties> {
     let entries = world::character_container_map(level).ok()?;
     props::struct_props(&entries.get(entry_index)?.value)
 }
 
 /// A slot's occupant is `RawData.instance_id`; the nil GUID means empty.
 pub fn read_character_container(
-    level: &uesave::Save,
+    level: &crate::ue::Save,
     entry_index: usize,
 ) -> Option<CharacterContainerView> {
     let entries = world::character_container_map(level).ok()?;
@@ -138,7 +138,7 @@ pub fn read_character_container(
                 .and_then(props::as_i32)
                 .unwrap_or(0);
             let pal_id = match slot_props.0.get(&PropertyKey::from("RawData")) {
-                Some(Property::Struct(StructValue::PalCharacterContainer(raw))) => {
+                Some(Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterContainer(raw)))) => {
                     let id = props::guid_to_uuid(&raw.instance_id);
                     (id != props::EMPTY_UUID).then_some(id)
                 }
@@ -157,7 +157,7 @@ pub fn read_character_container(
 /// Returns the assigned slot index, or `None` when the container is full.
 /// Without a `requested_slot`, the first free index below `SlotNum` is used.
 pub fn character_container_add_pal(
-    level: &mut uesave::Save,
+    level: &mut crate::ue::Save,
     entry_index: usize,
     pal_id: uuid::Uuid,
     requested_slot: Option<i32>,
@@ -189,14 +189,14 @@ pub fn character_container_add_pal(
     slot_props.insert("SlotIndex", props::int_property(assigned));
     slot_props.insert(
         "RawData",
-        Property::Struct(StructValue::PalCharacterContainer(
-            uesave::games::palworld::PalCharacterContainer {
+        Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterContainer(
+            crate::ue::games::palworld::PalCharacterContainer {
                 player_uid: props::uuid_to_guid(props::EMPTY_UUID),
                 instance_id: props::uuid_to_guid(pal_id),
                 permission_tribe_id: 0,
                 trailing_bytes: None,
             },
-        )),
+        ))),
     );
     slot_values.push(StructValue::Struct(slot_props));
     Ok(Some(assigned))
@@ -204,7 +204,7 @@ pub fn character_container_add_pal(
 
 /// Removes the first slot holding `pal_id`; an absent `pal_id` is a no-op.
 pub fn character_container_remove_pal(
-    level: &mut uesave::Save,
+    level: &mut crate::ue::Save,
     entry_index: usize,
     pal_id: uuid::Uuid,
 ) -> Result<(), CoreError> {
@@ -227,7 +227,7 @@ pub fn character_container_remove_pal(
         };
         matches!(
             slot_props.0.get(&PropertyKey::from("RawData")),
-            Some(Property::Struct(StructValue::PalCharacterContainer(raw)))
+            Some(Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterContainer(raw))))
                 if props::guid_to_uuid(&raw.instance_id) == pal_id
         )
     }) {
@@ -239,7 +239,7 @@ pub fn character_container_remove_pal(
 /// Reads a container's slots, resolving each slot's dynamic item (if any).
 /// `game_data` is used only by the Egg branch of `read_dynamic_item`.
 pub fn read_item_container(
-    level: &uesave::Save,
+    level: &crate::ue::Save,
     session_caches: &mut WorldCaches,
     game_data: &GameData,
     container_id: uuid::Uuid,
@@ -267,7 +267,7 @@ pub fn read_item_container(
             let StructValue::Struct(slot_props) = slot_value else {
                 continue;
             };
-            let Some(Property::Struct(StructValue::PalItemContainerSlots(raw_slot))) =
+            let Some(Property::Struct(StructValue::Game(crate::ue::PalStruct::ItemContainerSlots(raw_slot)))) =
                 slot_props.0.get(&PropertyKey::from("RawData"))
             else {
                 continue;
@@ -314,7 +314,7 @@ pub fn read_item_container(
 /// a dynamic item whose payload matches none of the egg/armor/weapon layouts;
 /// its DTO carries only `type` and `static_id`.
 fn read_dynamic_item(
-    level: &uesave::Save,
+    level: &crate::ue::Save,
     dynamic_entry_index: usize,
     local_id: uuid::Uuid,
     game_data: &GameData,
@@ -323,7 +323,7 @@ fn read_dynamic_item(
     let StructValue::Struct(item_props) = values.get(dynamic_entry_index)? else {
         return None;
     };
-    let Some(Property::Struct(StructValue::PalDynamicItem(dynamic_item))) =
+    let Some(Property::Struct(StructValue::Game(crate::ue::PalStruct::DynamicItem(dynamic_item)))) =
         item_props.0.get(&PropertyKey::from("RawData"))
     else {
         return None;
@@ -349,14 +349,14 @@ fn read_dynamic_item(
     };
 
     match &dynamic_item.item_type {
-        uesave::games::palworld::PalDynamicItemType::Unknown { .. } => {
+        crate::ue::games::palworld::PalDynamicItemType::Unknown { .. } => {
             dto.r#type = Some("unknown".to_string());
         }
-        uesave::games::palworld::PalDynamicItemType::Armor { durability, .. } => {
+        crate::ue::games::palworld::PalDynamicItemType::Armor { durability, .. } => {
             dto.r#type = Some("armor".to_string());
             dto.durability = Some(*durability as f64);
         }
-        uesave::games::palworld::PalDynamicItemType::Weapon {
+        crate::ue::games::palworld::PalDynamicItemType::Weapon {
             durability,
             remaining_bullets,
             passive_skill_list,
@@ -367,7 +367,7 @@ fn read_dynamic_item(
             dto.remaining_bullets = Some(*remaining_bullets as i64);
             dto.passive_skill_list = Some(passive_skill_list.clone());
         }
-        uesave::games::palworld::PalDynamicItemType::Egg {
+        crate::ue::games::palworld::PalDynamicItemType::Egg {
             character_id,
             object,
             ..
@@ -421,7 +421,7 @@ const DYNAMIC_ITEM_EGG_CUSTOM_VERSION_DATA: [u8; 44] = [
 ];
 
 fn container_slots_mut(
-    level: &mut uesave::Save,
+    level: &mut crate::ue::Save,
     entry_index: usize,
 ) -> Option<&mut Vec<StructValue>> {
     let entries = world::item_container_map_mut(level).ok()?;
@@ -432,12 +432,12 @@ fn container_slots_mut(
 fn raw_container_slot(
     slot: &StructValue,
     slot_index: i32,
-) -> Option<&uesave::games::palworld::PalItemContainerSlot> {
+) -> Option<&crate::ue::games::palworld::PalItemContainerSlot> {
     let StructValue::Struct(slot_props) = slot else {
         return None;
     };
     match slot_props.0.get(&PropertyKey::from("RawData")) {
-        Some(Property::Struct(StructValue::PalItemContainerSlots(raw)))
+        Some(Property::Struct(StructValue::Game(crate::ue::PalStruct::ItemContainerSlots(raw))))
             if raw.slot_index == slot_index =>
         {
             Some(raw)
@@ -449,7 +449,7 @@ fn raw_container_slot(
 /// `None` when no slot at `slot_index` exists, or its dynamic id is the nil
 /// GUID (a plain, non-dynamic item).
 fn raw_slot_local_id(
-    level: &uesave::Save,
+    level: &crate::ue::Save,
     entry_index: usize,
     slot_index: i32,
 ) -> Option<uuid::Uuid> {
@@ -464,7 +464,7 @@ fn raw_slot_local_id(
 }
 
 fn set_raw_slot_local_id(
-    level: &mut uesave::Save,
+    level: &mut crate::ue::Save,
     entry_index: usize,
     slot_index: i32,
     local_id: uuid::Uuid,
@@ -476,7 +476,7 @@ fn set_raw_slot_local_id(
         let StructValue::Struct(slot_props) = slot else {
             continue;
         };
-        if let Some(Property::Struct(StructValue::PalItemContainerSlots(raw))) =
+        if let Some(Property::Struct(StructValue::Game(crate::ue::PalStruct::ItemContainerSlots(raw)))) =
             slot_props.0.get_mut(&PropertyKey::from("RawData"))
         {
             if raw.slot_index == slot_index {
@@ -488,7 +488,7 @@ fn set_raw_slot_local_id(
 }
 
 /// Removes the first `Slots` entry at `slot_index`; an absent index is a no-op.
-fn remove_raw_slot(level: &mut uesave::Save, entry_index: usize, slot_index: i32) {
+fn remove_raw_slot(level: &mut crate::ue::Save, entry_index: usize, slot_index: i32) {
     let Some(slots) = container_slots_mut(level, entry_index) else {
         return;
     };
@@ -503,7 +503,7 @@ fn remove_raw_slot(level: &mut uesave::Save, entry_index: usize, slot_index: i32
 /// Updates an existing slot's `count`/`static_id`, or appends a fresh one.
 /// Never touches the slot's dynamic id — the caller sets that separately, once
 /// the dynamic item's final local id is known (see `apply_item_container_dto`).
-fn upsert_raw_slot(level: &mut uesave::Save, entry_index: usize, slot: &ItemContainerSlotDto) {
+fn upsert_raw_slot(level: &mut crate::ue::Save, entry_index: usize, slot: &ItemContainerSlotDto) {
     let Some(slots) = container_slots_mut(level, entry_index) else {
         return;
     };
@@ -512,7 +512,7 @@ fn upsert_raw_slot(level: &mut uesave::Save, entry_index: usize, slot: &ItemCont
             return None;
         };
         match slot_props.0.get_mut(&PropertyKey::from("RawData")) {
-            Some(Property::Struct(StructValue::PalItemContainerSlots(raw)))
+            Some(Property::Struct(StructValue::Game(crate::ue::PalStruct::ItemContainerSlots(raw))))
                 if raw.slot_index == slot.slot_index =>
             {
                 Some(raw)
@@ -530,20 +530,20 @@ fn upsert_raw_slot(level: &mut uesave::Save, entry_index: usize, slot: &ItemCont
             let mut slot_props = Properties::default();
             slot_props.insert(
                 "RawData",
-                Property::Struct(StructValue::PalItemContainerSlots(
-                    uesave::games::palworld::PalItemContainerSlot {
+                Property::Struct(StructValue::Game(crate::ue::PalStruct::ItemContainerSlots(
+                    crate::ue::games::palworld::PalItemContainerSlot {
                         slot_index: slot.slot_index,
                         count: slot.count,
-                        item: uesave::games::palworld::PalItemId {
+                        item: crate::ue::games::palworld::PalItemId {
                             static_id,
-                            dynamic_id: uesave::games::palworld::PalDynamicId {
-                                created_world_id: uesave::FGuid::nil(),
+                            dynamic_id: crate::ue::games::palworld::PalDynamicId {
+                                created_world_id: crate::ue::FGuid::nil(),
                                 local_id_in_created_world: props::uuid_to_guid(props::EMPTY_UUID),
                             },
                         },
                         trailing_bytes: vec![0u8; 16],
                     },
-                )),
+                ))),
             );
             slot_props.insert(
                 "CustomVersionData",
@@ -626,12 +626,12 @@ fn remove_dynamic_item(session: &mut SaveSession, local_id: uuid::Uuid) -> Resul
 fn existing_item_type(
     values: &[StructValue],
     position: usize,
-) -> Option<&uesave::games::palworld::PalDynamicItemType> {
+) -> Option<&crate::ue::games::palworld::PalDynamicItemType<crate::ue::Arch>> {
     let StructValue::Struct(item_props) = values.get(position)? else {
         return None;
     };
     match item_props.0.get(&PropertyKey::from("RawData")) {
-        Some(Property::Struct(StructValue::PalDynamicItem(existing))) => Some(&existing.item_type),
+        Some(Property::Struct(StructValue::Game(crate::ue::PalStruct::DynamicItem(existing)))) => Some(&existing.item_type),
         _ => None,
     }
 }
@@ -694,9 +694,9 @@ fn build_egg_save_parameter(dto: &DynamicItemDto) -> Properties {
 /// save. A type change (or a new item) therefore zero-fills them.
 fn build_dynamic_item_type(
     dto: &DynamicItemDto,
-    existing: Option<&uesave::games::palworld::PalDynamicItemType>,
-) -> uesave::games::palworld::PalDynamicItemType {
-    use uesave::games::palworld::PalDynamicItemType;
+    existing: Option<&crate::ue::games::palworld::PalDynamicItemType<crate::ue::Arch>>,
+) -> crate::ue::games::palworld::PalDynamicItemType<crate::ue::Arch> {
+    use crate::ue::games::palworld::PalDynamicItemType;
 
     match dto.r#type.as_deref() {
         Some("armor") => {
@@ -823,7 +823,7 @@ pub fn upsert_dynamic_item(
         Some(position) => {
             let values = world::dynamic_item_values_mut(&mut session.level)?;
             if let Some(StructValue::Struct(item_props)) = values.get_mut(position) {
-                if let Some(Property::Struct(StructValue::PalDynamicItem(existing))) =
+                if let Some(Property::Struct(StructValue::Game(crate::ue::PalStruct::DynamicItem(existing)))) =
                     item_props.0.get_mut(&PropertyKey::from("RawData"))
                 {
                     existing.item_type = item_type;
@@ -834,16 +834,16 @@ pub fn upsert_dynamic_item(
             let mut item_props = Properties::default();
             item_props.insert(
                 "RawData",
-                Property::Struct(StructValue::PalDynamicItem(Box::new(
-                    uesave::games::palworld::PalDynamicItem {
-                        id: uesave::games::palworld::PalDynamicId {
-                            created_world_id: uesave::FGuid::nil(),
+                Property::Struct(StructValue::Game(crate::ue::PalStruct::DynamicItem(Box::new(
+                    crate::ue::games::palworld::PalDynamicItem {
+                        id: crate::ue::games::palworld::PalDynamicId {
+                            created_world_id: crate::ue::FGuid::nil(),
                             local_id_in_created_world: props::uuid_to_guid(dto.local_id),
                         },
                         static_id: slot_static_id.to_string(),
                         item_type,
                     },
-                ))),
+                )))),
             );
             let custom_version_data: Option<&[u8]> = match dto.r#type.as_deref() {
                 Some("weapon") | Some("armor") => {
@@ -997,7 +997,7 @@ pub fn apply_base_dto(
     let Some(value_props) = props::struct_props_mut(&mut entry.value) else {
         return Ok(());
     };
-    if let Some(Property::Struct(StructValue::PalBaseCamp(base_camp))) =
+    if let Some(Property::Struct(StructValue::Game(crate::ue::PalStruct::BaseCamp(base_camp)))) =
         value_props.0.get_mut(&PropertyKey::from("RawData"))
     {
         if let Some(name) = &dto.name {
@@ -1050,7 +1050,7 @@ pub fn delete_item_containers(
                         let StructValue::Struct(slot_props) = slot_value else {
                             continue;
                         };
-                        if let Some(Property::Struct(StructValue::PalItemContainerSlots(raw))) =
+                        if let Some(Property::Struct(StructValue::Game(crate::ue::PalStruct::ItemContainerSlots(raw)))) =
                             slot_props.0.get(&PropertyKey::from("RawData"))
                         {
                             let local_id =
@@ -1101,7 +1101,7 @@ pub fn delete_character_containers(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use uesave::{Header, PackageVersion, PropertySchemas, Root, Save, ValueVec};
+    use crate::ue::{Header, PackageVersion, PropertySchemas, Root, Save, ValueVec};
 
     fn minimal_save(properties: Properties) -> Save {
         Save {
@@ -1138,14 +1138,14 @@ mod tests {
         slot_props.insert("SlotIndex", props::int_property(slot_index));
         slot_props.insert(
             "RawData",
-            Property::Struct(StructValue::PalCharacterContainer(
-                uesave::games::palworld::PalCharacterContainer {
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterContainer(
+                crate::ue::games::palworld::PalCharacterContainer {
                     player_uid: props::uuid_to_guid(props::EMPTY_UUID),
                     instance_id: props::uuid_to_guid(pal_id),
                     permission_tribe_id: 0,
                     trailing_bytes: None,
                 },
-            )),
+            ))),
         );
         StructValue::Struct(slot_props)
     }
@@ -1169,7 +1169,7 @@ mod tests {
         let mut world_save_data = Properties::default();
         world_save_data.insert(
             "CharacterContainerSaveData",
-            Property::Map(vec![uesave::MapEntry {
+            Property::Map(vec![crate::ue::MapEntry {
                 key: struct_property(key_props),
                 value: struct_property(value_props),
             }]),
@@ -1306,11 +1306,11 @@ mod tests {
         world_save_data.insert(
             "CharacterContainerSaveData",
             Property::Map(vec![
-                uesave::MapEntry {
+                crate::ue::MapEntry {
                     key: struct_property(first_key),
                     value: struct_property(first_value),
                 },
-                uesave::MapEntry {
+                crate::ue::MapEntry {
                     key: struct_property(second_key),
                     value: struct_property(second_value),
                 },
@@ -1349,20 +1349,20 @@ mod tests {
         let mut slot_props = Properties::default();
         slot_props.insert(
             "RawData",
-            Property::Struct(StructValue::PalItemContainerSlots(
-                uesave::games::palworld::PalItemContainerSlot {
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::ItemContainerSlots(
+                crate::ue::games::palworld::PalItemContainerSlot {
                     slot_index,
                     count,
-                    item: uesave::games::palworld::PalItemId {
+                    item: crate::ue::games::palworld::PalItemId {
                         static_id: static_id.to_string(),
-                        dynamic_id: uesave::games::palworld::PalDynamicId {
-                            created_world_id: uesave::FGuid::nil(),
+                        dynamic_id: crate::ue::games::palworld::PalDynamicId {
+                            created_world_id: crate::ue::FGuid::nil(),
                             local_id_in_created_world: props::uuid_to_guid(local_id),
                         },
                     },
                     trailing_bytes: Vec::new(),
                 },
-            )),
+            ))),
         );
         StructValue::Struct(slot_props)
     }
@@ -1370,11 +1370,11 @@ mod tests {
     fn dynamic_item_entry(
         local_id: uuid::Uuid,
         static_id: &str,
-        item_type: uesave::games::palworld::PalDynamicItemType,
+        item_type: crate::ue::games::palworld::PalDynamicItemType<crate::ue::Arch>,
     ) -> StructValue {
-        let dynamic_item = uesave::games::palworld::PalDynamicItem {
-            id: uesave::games::palworld::PalDynamicId {
-                created_world_id: uesave::FGuid::nil(),
+        let dynamic_item = crate::ue::games::palworld::PalDynamicItem {
+            id: crate::ue::games::palworld::PalDynamicId {
+                created_world_id: crate::ue::FGuid::nil(),
                 local_id_in_created_world: props::uuid_to_guid(local_id),
             },
             static_id: static_id.to_string(),
@@ -1383,7 +1383,7 @@ mod tests {
         let mut item_props = Properties::default();
         item_props.insert(
             "RawData",
-            Property::Struct(StructValue::PalDynamicItem(Box::new(dynamic_item))),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::DynamicItem(Box::new(dynamic_item)))),
         );
         StructValue::Struct(item_props)
     }
@@ -1403,7 +1403,7 @@ mod tests {
         let mut world_save_data = Properties::default();
         world_save_data.insert(
             "ItemContainerSaveData",
-            Property::Map(vec![uesave::MapEntry {
+            Property::Map(vec![crate::ue::MapEntry {
                 key: struct_property(key_props),
                 value: struct_property(value_props),
             }]),
@@ -1523,7 +1523,7 @@ mod tests {
         let weapon = dynamic_item_entry(
             local_id,
             "SFBow_5",
-            uesave::games::palworld::PalDynamicItemType::Weapon {
+            crate::ue::games::palworld::PalDynamicItemType::Weapon {
                 leading_bytes: [0; 4],
                 durability: 80.5,
                 remaining_bullets: 12,
@@ -1567,7 +1567,7 @@ mod tests {
         let armor = dynamic_item_entry(
             local_id,
             "HeadEquip041",
-            uesave::games::palworld::PalDynamicItemType::Armor {
+            crate::ue::games::palworld::PalDynamicItemType::Armor {
                 leading_bytes: [0; 4],
                 durability: 42.0,
                 trailing_bytes: [0; 4],
@@ -1602,7 +1602,7 @@ mod tests {
         let unknown = dynamic_item_entry(
             local_id,
             "Weird",
-            uesave::games::palworld::PalDynamicItemType::Unknown {
+            crate::ue::games::palworld::PalDynamicItemType::Unknown {
                 trailer: vec![1, 2, 3],
             },
         );
@@ -1650,7 +1650,7 @@ mod tests {
         let egg = dynamic_item_entry(
             local_id,
             "EggSheepBall",
-            uesave::games::palworld::PalDynamicItemType::Egg {
+            crate::ue::games::palworld::PalDynamicItemType::Egg {
                 leading_bytes: [0; 4],
                 character_id: "SheepBall".to_string(),
                 object,
@@ -1698,7 +1698,7 @@ mod tests {
         let egg = dynamic_item_entry(
             local_id,
             "EggSheepBall",
-            uesave::games::palworld::PalDynamicItemType::Egg {
+            crate::ue::games::palworld::PalDynamicItemType::Egg {
                 leading_bytes: [0; 4],
                 character_id: "SheepBall".to_string(),
                 object: Properties::default(),
@@ -1825,7 +1825,7 @@ mod tests {
         let weapon = dynamic_item_entry(
             local_id,
             "SFBow_5",
-            uesave::games::palworld::PalDynamicItemType::Weapon {
+            crate::ue::games::palworld::PalDynamicItemType::Weapon {
                 leading_bytes: [0; 4],
                 durability: 80.0,
                 remaining_bullets: 12,
@@ -1894,11 +1894,11 @@ mod tests {
         world_save_data.insert(
             "ItemContainerSaveData",
             Property::Map(vec![
-                uesave::MapEntry {
+                crate::ue::MapEntry {
                     key: struct_property(key_common),
                     value: struct_property(value_common),
                 },
-                uesave::MapEntry {
+                crate::ue::MapEntry {
                     key: struct_property(key_essential),
                     value: struct_property(value_essential),
                 },
@@ -1968,11 +1968,11 @@ mod tests {
         world_save_data.insert(
             "ItemContainerSaveData",
             Property::Map(vec![
-                uesave::MapEntry {
+                crate::ue::MapEntry {
                     key: struct_property(key_common),
                     value: struct_property(value_common),
                 },
-                uesave::MapEntry {
+                crate::ue::MapEntry {
                     key: struct_property(key_essential),
                     value: struct_property(value_essential),
                 },
@@ -2134,7 +2134,7 @@ mod tests {
         let egg = dynamic_item_entry(
             local_id,
             "EggSheepBall",
-            uesave::games::palworld::PalDynamicItemType::Egg {
+            crate::ue::games::palworld::PalDynamicItemType::Egg {
                 leading_bytes: [0; 4],
                 character_id: "SheepBall".to_string(),
                 object,
@@ -2191,23 +2191,23 @@ mod tests {
     }
 
     /// `PalMapModel.initial_transform_cache` needs a value; no test inspects it.
-    fn zero_map_transform() -> uesave::games::palworld::PalTransform {
-        uesave::games::palworld::PalTransform {
-            rotation: uesave::Quat {
-                x: uesave::Double(0.0),
-                y: uesave::Double(0.0),
-                z: uesave::Double(0.0),
-                w: uesave::Double(1.0),
+    fn zero_map_transform() -> crate::ue::games::palworld::PalTransform {
+        crate::ue::games::palworld::PalTransform {
+            rotation: crate::ue::Quat {
+                x: crate::ue::Double(0.0),
+                y: crate::ue::Double(0.0),
+                z: crate::ue::Double(0.0),
+                w: crate::ue::Double(1.0),
             },
-            translation: uesave::Vector {
-                x: uesave::Double(0.0),
-                y: uesave::Double(0.0),
-                z: uesave::Double(0.0),
+            translation: crate::ue::Vector {
+                x: crate::ue::Double(0.0),
+                y: crate::ue::Double(0.0),
+                z: crate::ue::Double(0.0),
             },
-            scale: uesave::Vector {
-                x: uesave::Double(1.0),
-                y: uesave::Double(1.0),
-                z: uesave::Double(1.0),
+            scale: crate::ue::Vector {
+                x: crate::ue::Double(1.0),
+                y: crate::ue::Double(1.0),
+                z: crate::ue::Double(1.0),
             },
         }
     }
@@ -2216,21 +2216,21 @@ mod tests {
     /// an `ItemContainer` module — the shape `guild::base_storage_container_ids`
     /// enumerates to decide base ownership.
     fn map_object_owning_container(base_id: uuid::Uuid, container_id: uuid::Uuid) -> StructValue {
-        let model = uesave::games::palworld::PalMapModel {
-            instance_id: uesave::FGuid::nil(),
-            concrete_model_instance_id: uesave::FGuid::nil(),
+        let model = crate::ue::games::palworld::PalMapModel {
+            instance_id: crate::ue::FGuid::nil(),
+            concrete_model_instance_id: crate::ue::FGuid::nil(),
             base_camp_id_belong_to: props::uuid_to_guid(base_id),
-            group_id_belong_to: uesave::FGuid::nil(),
-            hp: uesave::games::palworld::PalMapObjectHp { current: 0, max: 0 },
+            group_id_belong_to: crate::ue::FGuid::nil(),
+            hp: crate::ue::games::palworld::PalMapObjectHp { current: 0, max: 0 },
             initial_transform_cache: zero_map_transform(),
-            repair_work_id: uesave::FGuid::nil(),
-            owner_spawner_level_object_instance_id: uesave::FGuid::nil(),
-            owner_instance_id: uesave::FGuid::nil(),
-            build_player_uid: uesave::FGuid::nil(),
+            repair_work_id: crate::ue::FGuid::nil(),
+            owner_spawner_level_object_instance_id: crate::ue::FGuid::nil(),
+            owner_instance_id: crate::ue::FGuid::nil(),
+            build_player_uid: crate::ue::FGuid::nil(),
             interact_restrict_type: 0,
             deterioration_damage: 0.0,
-            stage_instance_id_belong_to: uesave::games::palworld::PalStageInstanceId {
-                id: uesave::FGuid::nil(),
+            stage_instance_id_belong_to: crate::ue::games::palworld::PalStageInstanceId {
+                id: crate::ue::FGuid::nil(),
                 valid: 0,
             },
             unknown_bytes: vec![],
@@ -2238,12 +2238,12 @@ mod tests {
         let mut model_props = Properties::default();
         model_props.insert(
             "RawData",
-            Property::Struct(StructValue::PalMapModel(Box::new(model))),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::MapModel(Box::new(model)))),
         );
 
-        let module = uesave::games::palworld::PalMapConcreteModelModule {
+        let module = crate::ue::games::palworld::PalMapConcreteModelModule {
             module_type: "EPalMapObjectConcreteModelModuleType::ItemContainer".to_string(),
-            data: uesave::games::palworld::PalMapConcreteModelModuleData::ItemContainer {
+            data: crate::ue::games::palworld::PalMapConcreteModelModuleData::ItemContainer {
                 target_container_id: props::uuid_to_guid(container_id),
                 slot_attribute_indexes: vec![],
                 all_slot_attribute: vec![],
@@ -2256,9 +2256,9 @@ mod tests {
         let mut module_value_props = Properties::default();
         module_value_props.insert(
             "RawData",
-            Property::Struct(StructValue::PalMapConcreteModelModule(module)),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::MapConcreteModelModule(module))),
         );
-        let module_entries = vec![uesave::MapEntry {
+        let module_entries = vec![crate::ue::MapEntry {
             key: Property::Enum("EPalMapObjectConcreteModelModuleType::ItemContainer".to_string()),
             value: Property::Struct(StructValue::Struct(module_value_props)),
         }];
@@ -2298,11 +2298,11 @@ mod tests {
         world_save_data.insert(
             "ItemContainerSaveData",
             Property::Map(vec![
-                uesave::MapEntry {
+                crate::ue::MapEntry {
                     key: struct_property(key_owned),
                     value: struct_property(value_owned),
                 },
-                uesave::MapEntry {
+                crate::ue::MapEntry {
                     key: struct_property(key_foreign),
                     value: struct_property(value_foreign),
                 },

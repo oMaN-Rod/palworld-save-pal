@@ -1,0 +1,714 @@
+@import 'tailwindcss';
+
+@source '../node_modules/@skeletonlabs/skeleton-svelte/dist';
+
+@import '@skeletonlabs/skeleton';
+@import '@skeletonlabs/skeleton/optional/presets';
+
+/*
+ * Themes are color palettes only. All layout, typography, spacing, glows and
+ * animations are shared and defined in this file, so switching themes only
+ * swaps the color palette. To add a new theme, drop in a `[data-theme='name']`
+ * palette file, import it here, and register it in the theme selector.
+ */
+@import './dark.css';
+@import './light.css';
+@import './frontier.css';
+@import './grizzbolt.css';
+@import './sakurajima.css';
+@import './wildlands.css';
+@import './ancient.css';
+@import './lamball.css';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+	--spacing-18: 72px;
+	--color-tech-500: rgb(24, 97, 171);
+	--color-ancient-tech-500: rgb(131, 40, 201);
+
+	/*
+	 * Glow tokens are palette-driven via color-mix so every theme gets glows in
+	 * its own colors. The legacy color names map to semantic palette roles:
+	 *   cyan/paldium -> primary, gold -> secondary, ancient -> tertiary,
+	 *   toxic -> success, amber -> warning, red -> error.
+	 */
+	--shadow-glow-cyan:
+		0 0 8px color-mix(in srgb, var(--color-primary-300) 40%, transparent),
+		0 0 20px color-mix(in srgb, var(--color-primary-300) 15%, transparent);
+	--shadow-glow-paldium:
+		0 0 12px color-mix(in srgb, var(--color-primary-300) 35%, transparent),
+		0 0 30px color-mix(in srgb, var(--color-primary-300) 12%, transparent);
+	--shadow-glow-paldium-sm: 0 0 6px color-mix(in srgb, var(--color-primary-300) 30%, transparent);
+	--shadow-glow-ancient:
+		0 0 12px color-mix(in srgb, var(--color-tertiary-400) 35%, transparent),
+		0 0 30px color-mix(in srgb, var(--color-tertiary-400) 12%, transparent);
+	--shadow-glow-ancient-sm: 0 0 6px color-mix(in srgb, var(--color-tertiary-400) 30%, transparent);
+	--shadow-glow-toxic:
+		0 0 12px color-mix(in srgb, var(--color-success-400) 35%, transparent),
+		0 0 30px color-mix(in srgb, var(--color-success-400) 12%, transparent);
+	--shadow-glow-toxic-sm: 0 0 6px color-mix(in srgb, var(--color-success-400) 30%, transparent);
+	--shadow-glow-gold:
+		0 0 8px color-mix(in srgb, var(--color-secondary-500) 40%, transparent),
+		0 0 20px color-mix(in srgb, var(--color-secondary-500) 15%, transparent);
+	--shadow-glow-red:
+		0 0 8px color-mix(in srgb, var(--color-error-500) 40%, transparent),
+		0 0 20px color-mix(in srgb, var(--color-error-500) 15%, transparent);
+	--shadow-glow-amber:
+		0 0 8px color-mix(in srgb, var(--color-warning-500) 40%, transparent),
+		0 0 20px color-mix(in srgb, var(--color-warning-500) 15%, transparent);
+}
+
+/*
+ * Shared theme configuration (layout, typography, spacing). Identical for every
+ * theme — only the color palette differs between themes. Color references below
+ * resolve against the active palette.
+ */
+[data-theme] {
+	--spacing: 0.25rem;
+	--text-scaling: 1;
+	--base-font-color: var(--color-surface-950);
+	--base-font-color-dark: var(--color-surface-50);
+	--base-font-family: 'Inter', 'Montserrat', system-ui, sans-serif;
+	--base-font-size: inherit;
+	--base-line-height: inherit;
+	--base-font-weight: normal;
+	--base-font-style: normal;
+	--base-letter-spacing: 0em;
+	--heading-font-color: var(--color-surface-950);
+	--heading-font-color-dark: var(--color-surface-50);
+	--heading-font-family: 'Inter', 'Montserrat', system-ui, sans-serif;
+	--heading-font-weight: 700;
+	--heading-font-style: normal;
+	--heading-letter-spacing: 0.08em;
+	--anchor-font-color: var(--color-primary-400);
+	--anchor-font-color-dark: var(--color-primary-400);
+	--anchor-font-family: inherit;
+	--anchor-font-size: inherit;
+	--anchor-line-height: inherit;
+	--anchor-font-weight: normal;
+	--anchor-font-style: normal;
+	--anchor-letter-spacing: inherit;
+	--anchor-text-decoration: none;
+	--anchor-text-decoration-hover: underline;
+	--anchor-text-decoration-active: none;
+	--anchor-text-decoration-focus: none;
+	--body-background-color: var(--color-surface-50);
+	--body-background-color-dark: var(--color-surface-950);
+	--radius-base: 4px;
+	--radius-container: 6px;
+	--default-border-width: 1px;
+	--default-ring-width: 1px;
+	--outline-width-default: 1px;
+	--default-divide-width: 1px;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+*/
+@layer base {
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-gray-200, currentColor);
+	}
+
+	::-webkit-scrollbar {
+		width: 6px;
+		height: 6px;
+	}
+	::-webkit-scrollbar-track {
+		background: var(--color-surface-950);
+	}
+	::-webkit-scrollbar-thumb {
+		background: var(--color-surface-700);
+		border-radius: 3px;
+	}
+	::-webkit-scrollbar-thumb:hover {
+		background: var(--color-primary-700);
+	}
+}
+
+body {
+	background-color: var(--color-surface-950);
+	color: var(--color-surface-50);
+	font-family: var(--base-font-family);
+	height: 100%;
+	overflow: hidden;
+	background-image:
+		radial-gradient(
+			ellipse 80% 60% at 50% -20%,
+			color-mix(in srgb, var(--color-primary-300) 3%, transparent) 0%,
+			transparent 60%
+		),
+		radial-gradient(
+			ellipse 60% 40% at 80% 100%,
+			color-mix(in srgb, var(--color-tertiary-400) 2%, transparent) 0%,
+			transparent 60%
+		);
+	background-attachment: fixed;
+}
+
+::selection {
+	background: color-mix(in srgb, var(--color-primary-300) 20%, transparent);
+	color: var(--color-surface-50);
+}
+
+.floating {
+	width: max-content;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@keyframes slideUp {
+	0% {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+@keyframes slideDown {
+	0% {
+		opacity: 0;
+		transform: translateY(-8px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+@keyframes circuit-pulse {
+	0%,
+	100% {
+		opacity: 0.6;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1.05);
+	}
+}
+@keyframes shimmer {
+	0% {
+		background-position: -200% 0;
+	}
+	100% {
+		background-position: 200% 0;
+	}
+}
+
+.animate-fade-in {
+	animation: fadeIn 0.2s ease-out;
+}
+.animate-slide-up {
+	animation: slideUp 0.25s ease-out;
+}
+.animate-slide-down {
+	animation: slideDown 0.2s ease-out;
+}
+.animate-circuit-pulse {
+	animation: circuit-pulse 2s ease-in-out infinite;
+}
+.animate-shimmer {
+	background: linear-gradient(
+		90deg,
+		transparent 25%,
+		color-mix(in srgb, var(--color-primary-300) 5%, transparent) 50%,
+		transparent 75%
+	);
+	background-size: 200% 100%;
+	animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.hover-lift {
+	transition:
+		transform 0.15s ease,
+		box-shadow 0.15s ease;
+}
+.hover-lift:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+@layer utilities {
+	.text-muted {
+		color: var(--color-text-muted);
+	}
+
+	.text-muted-foreground {
+		color: var(--color-text-muted-foreground);
+	}
+}
+
+.card {
+	background: color-mix(in srgb, var(--color-surface-800) 75%, transparent);
+	border: 1px solid color-mix(in srgb, var(--color-surface-600) 35%, transparent);
+	border-radius: 6px;
+	padding: 1.25rem;
+	box-shadow:
+		0 1px 3px rgba(0, 0, 0, 0.3),
+		inset 0 1px 0 rgba(255, 255, 255, 0.03);
+	backdrop-filter: blur(8px);
+}
+
+.card-header {
+	font-size: 1rem;
+	font-weight: 700;
+	color: var(--color-surface-50);
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	margin-bottom: 0.75rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 1px solid color-mix(in srgb, var(--color-surface-700) 30%, transparent);
+	text-shadow: 0 0 20px color-mix(in srgb, var(--color-primary-300) 10%, transparent);
+}
+
+.nav-rail {
+	border-right: 1px solid color-mix(in srgb, var(--color-surface-700) 40%, transparent);
+	background: color-mix(in srgb, var(--color-surface-900) 95%, transparent);
+	backdrop-filter: blur(12px);
+}
+
+.nav-rail [data-testid='nav-tile'] {
+	border-radius: 4px;
+	transition: all 0.15s ease;
+	color: var(--color-surface-500);
+	position: relative;
+}
+
+.nav-rail [data-testid='nav-tile']:hover {
+	background: color-mix(in srgb, var(--color-surface-800) 50%, transparent) !important;
+	color: var(--color-surface-200) !important;
+}
+
+.nav-rail [data-testid='nav-tile']:hover svg {
+	filter: drop-shadow(0 0 4px color-mix(in srgb, var(--color-secondary-500) 25%, transparent));
+}
+
+.nav-rail .active-nav-tile {
+	background: color-mix(in srgb, var(--color-secondary-500) 15%, transparent) !important;
+	color: var(--color-secondary-300) !important;
+	border-left: 2px solid var(--color-secondary-400);
+	border-radius: 0 4px 4px 0;
+	box-shadow:
+		0 0 12px color-mix(in srgb, var(--color-secondary-500) 10%, transparent),
+		inset 0 0 12px color-mix(in srgb, var(--color-secondary-500) 3%, transparent);
+}
+
+.nav-rail .active-nav-tile svg {
+	filter: drop-shadow(0 0 6px color-mix(in srgb, var(--color-secondary-500) 50%, transparent));
+}
+
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 0.5rem 1rem;
+	font-size: 0.875rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	border-radius: 4px;
+	transition: all 0.15s ease;
+	cursor: pointer;
+}
+.btn:active:not(:disabled) {
+	transform: scale(0.97);
+}
+.btn-primary {
+	background: var(--color-primary-500);
+	color: var(--color-primary-contrast-500);
+}
+.btn-primary:hover {
+	background: var(--color-primary-400);
+	box-shadow: 0 0 12px color-mix(in srgb, var(--color-primary-300) 25%, transparent);
+}
+.btn-secondary {
+	background: var(--color-secondary-500);
+	color: var(--color-secondary-contrast-500);
+	box-shadow: 0 0 12px color-mix(in srgb, var(--color-secondary-500) 25%, transparent);
+}
+.btn-secondary:hover {
+	background: var(--color-secondary-400);
+	box-shadow: 0 0 20px color-mix(in srgb, var(--color-secondary-500) 40%, transparent);
+}
+.btn-danger {
+	background: var(--color-error-500);
+	color: var(--color-error-contrast-500);
+}
+.btn-danger:hover {
+	background: var(--color-error-400);
+	box-shadow: 0 0 12px color-mix(in srgb, var(--color-error-500) 25%, transparent);
+}
+.btn-neutral {
+	background: var(--color-surface-700);
+}
+.btn-neutral:hover {
+	background: var(--color-surface-600);
+}
+.btn-ghost {
+	background: transparent;
+}
+.btn-ghost:hover {
+	background: color-mix(in srgb, var(--color-secondary-500) 25%, transparent);
+}
+.btn-outline {
+	background: transparent;
+	border: 1px solid var(--color-surface-600);
+}
+.btn-outline:hover {
+	background: color-mix(in srgb, var(--color-secondary-500) 10%, transparent);
+}
+.btn-sm {
+	padding: 0.25rem 0.5rem;
+	font-size: 0.75rem;
+}
+.btn-lg {
+	padding: 0.625rem 1.5rem;
+}
+.btn-icon {
+	padding: 0.5rem;
+}
+
+.glass-panel {
+	background: color-mix(in srgb, var(--color-surface-800) 70%, transparent);
+	border: 1px solid color-mix(in srgb, var(--color-surface-600) 30%, transparent);
+	backdrop-filter: blur(12px);
+	border-radius: 6px;
+}
+
+.icon-glow-paldium svg {
+	filter: drop-shadow(0 0 6px color-mix(in srgb, var(--color-primary-300) 50%, transparent));
+}
+.icon-glow-ancient svg {
+	filter: drop-shadow(0 0 6px color-mix(in srgb, var(--color-tertiary-400) 50%, transparent));
+}
+.icon-glow-toxic svg {
+	filter: drop-shadow(0 0 6px color-mix(in srgb, var(--color-success-400) 50%, transparent));
+}
+
+.auto-save-indicator {
+	position: absolute;
+	right: 0.5rem;
+	top: 0.25rem;
+	display: flex;
+	flex-shrink: 0;
+	flex-direction: row;
+	align-items: center;
+	background: color-mix(in srgb, var(--color-surface-800) 90%, transparent);
+	border: 1px solid color-mix(in srgb, var(--color-surface-700) 50%, transparent);
+	border-radius: 999px;
+	padding: 0.5rem 1rem;
+	backdrop-filter: blur(8px);
+	gap: 0.5rem;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.auto-save-indicator span {
+	font-size: 0.875rem;
+	font-weight: 700;
+	color: var(--color-secondary-400);
+}
+
+.editor-wrapper {
+	height: calc(100vh - 72px);
+	--jse-theme: dark;
+	--jse-theme-color: var(--color-surface-900);
+	--jse-theme-color-highlight: var(--color-primary-400);
+	--jse-background-color: var(--color-surface-900);
+	--jse-text-color: var(--color-surface-100);
+	--jse-text-color-inverse: var(--color-surface-600);
+
+	--jse-main-border: 1px solid var(--color-surface-700);
+	--jse-menu-color: var(--color-surface-50);
+	--jse-modal-background: var(--color-surface-800);
+	--jse-modal-overlay-background: rgba(0, 0, 0, 0.6);
+	--jse-modal-code-background: var(--color-surface-800);
+
+	--jse-tooltip-color: var(--jse-text-color);
+	--jse-tooltip-background: var(--color-surface-700);
+	--jse-tooltip-border: 1px solid var(--color-surface-600);
+	--jse-tooltip-action-button-color: inherit;
+	--jse-tooltip-action-button-background: var(--color-surface-600);
+
+	--jse-panel-background: var(--color-surface-800);
+	--jse-panel-background-border: 1px solid var(--color-surface-700);
+	--jse-panel-color: var(--jse-text-color);
+	--jse-panel-color-readonly: var(--color-surface-500);
+	--jse-panel-border: 1px solid var(--color-surface-700);
+	--jse-panel-button-color-highlight: var(--color-surface-50);
+	--jse-panel-button-background-highlight: var(--color-surface-600);
+
+	--jse-navigation-bar-background: var(--color-surface-700);
+	--jse-navigation-bar-background-highlight: var(--color-surface-600);
+	--jse-navigation-bar-dropdown-color: var(--jse-text-color);
+
+	--jse-context-menu-background: var(--color-surface-800);
+	--jse-context-menu-background-highlight: var(--color-surface-700);
+	--jse-context-menu-separator-color: var(--color-surface-600);
+	--jse-context-menu-color: var(--jse-text-color);
+	--jse-context-menu-pointer-background: var(--color-surface-600);
+	--jse-context-menu-pointer-background-highlight: var(--color-surface-500);
+	--jse-context-menu-pointer-color: var(--jse-context-menu-color);
+
+	--jse-key-color: var(--color-primary-300);
+	--jse-value-color: var(--jse-text-color);
+	--jse-value-color-number: var(--color-tertiary-400);
+	--jse-value-color-boolean: var(--color-primary-400);
+	--jse-value-color-null: var(--color-primary-500);
+	--jse-value-color-string: var(--color-warning-400);
+	--jse-value-color-url: var(--color-warning-400);
+	--jse-delimiter-color: var(--color-surface-400);
+	--jse-edit-outline: 1px solid var(--color-primary-400);
+
+	--jse-selection-background-color: var(--color-surface-700);
+	--jse-selection-background-inactive-color: var(--color-surface-800);
+	--jse-hover-background-color: var(--color-surface-700);
+	--jse-active-line-background-color: color-mix(in srgb, var(--color-primary-300) 3%, transparent);
+	--jse-search-match-background-color: var(--color-surface-700);
+
+	--jse-collapsed-items-background-color: var(--color-surface-800);
+	--jse-collapsed-items-selected-background-color: var(--color-surface-700);
+	--jse-collapsed-items-link-color: var(--color-surface-300);
+	--jse-collapsed-items-link-color-highlight: var(--color-secondary-400);
+
+	--jse-search-match-color: rgba(230, 170, 0, 0.3);
+	--jse-search-match-outline: 1px solid rgba(230, 170, 0, 0.5);
+	--jse-search-match-active-color: rgba(230, 170, 0, 0.4);
+	--jse-search-match-active-outline: 1px solid rgba(230, 170, 0, 0.6);
+
+	--jse-tag-background: var(--color-surface-700);
+	--jse-tag-color: var(--color-surface-200);
+
+	--jse-table-header-background: var(--color-surface-800);
+	--jse-table-header-background-highlight: var(--color-surface-700);
+	--jse-table-row-odd-background: rgba(255, 255, 255, 0.03);
+
+	--jse-input-background: var(--color-surface-900);
+	--jse-input-border: var(--jse-main-border);
+	--jse-button-background: var(--color-surface-600);
+	--jse-button-background-highlight: var(--color-surface-500);
+	--jse-button-color: var(--color-surface-50);
+	--jse-button-secondary-background: var(--color-surface-800);
+	--jse-button-secondary-background-highlight: var(--color-surface-700);
+	--jse-button-secondary-background-disabled: var(--color-surface-600);
+	--jse-button-secondary-color: var(--jse-text-color);
+	--jse-a-color: var(--color-primary-400);
+	--jse-a-color-highlight: var(--color-primary-300);
+
+	--jse-svelte-select-background: var(--color-surface-800);
+	--jse-svelte-select-border: 1px solid var(--color-surface-700);
+	--list-background: var(--color-surface-800);
+	--item-hover-bg: var(--color-surface-700);
+	--multi-item-bg: var(--color-surface-700);
+	--input-color: var(--color-surface-100);
+	--multi-clear-bg: var(--color-surface-600);
+	--multi-item-clear-icon-color: var(--color-surface-100);
+	--multi-item-outline: 1px solid var(--color-surface-600);
+	--list-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+
+	--jse-color-picker-background: var(--color-surface-700);
+	--jse-color-picker-border-box-shadow: var(--color-surface-600) 0 0 0 1px;
+}
+
+/* Prose styles for markdown guides */
+.prose-psp {
+	color: var(--color-surface-50);
+
+	& h1,
+	& h2,
+	& h3,
+	& h4 {
+		color: var(--color-surface-50);
+		font-weight: 700;
+		scroll-margin-top: 1rem;
+	}
+
+	& h1 {
+		font-size: 1.875rem;
+		margin-bottom: 1rem;
+	}
+
+	& h2 {
+		font-size: 1.5rem;
+		margin-top: 2rem;
+		margin-bottom: 0.75rem;
+		padding-bottom: 0.25rem;
+		border-bottom: 1px solid var(--color-surface-700);
+	}
+
+	& h3 {
+		font-size: 1.25rem;
+		margin-top: 1.5rem;
+		margin-bottom: 0.5rem;
+	}
+
+	& p {
+		margin-bottom: 1rem;
+		line-height: 1.75;
+	}
+
+	& a {
+		color: var(--color-primary-500);
+		text-decoration: underline;
+	}
+
+	& code {
+		background: var(--color-surface-800);
+		padding: 0.125rem 0.375rem;
+		border-radius: 0.25rem;
+		font-size: 0.875rem;
+	}
+
+	& pre {
+		background: var(--color-surface-900);
+		border: 1px solid var(--color-surface-700);
+		border-radius: 0.5rem;
+		padding: 1rem;
+		overflow-x: auto;
+		margin-bottom: 1rem;
+	}
+
+	& pre code {
+		background: none;
+		padding: 0;
+	}
+
+	& ul,
+	& ol {
+		margin-bottom: 1rem;
+		padding-left: 1.5rem;
+	}
+
+	& ul {
+		list-style-type: disc;
+	}
+
+	& ol {
+		list-style-type: decimal;
+	}
+
+	& li {
+		margin-bottom: 0.25rem;
+		line-height: 1.75;
+	}
+
+	& blockquote {
+		border-left: 4px solid var(--color-primary-500);
+		padding-left: 1rem;
+		margin-bottom: 1rem;
+		color: var(--color-surface-300);
+		font-style: italic;
+	}
+
+	& table {
+		width: 100%;
+		border-collapse: collapse;
+		margin-bottom: 1rem;
+	}
+
+	& th,
+	& td {
+		border: 1px solid var(--color-surface-700);
+		padding: 0.5rem 0.75rem;
+		text-align: left;
+	}
+
+	& th {
+		background: var(--color-surface-800);
+		font-weight: 600;
+	}
+
+	& img {
+		border-radius: 0.5rem;
+		max-width: 500px;
+		max-height: 400px;
+		cursor: zoom-in;
+		transition: opacity 0.15s;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+	}
+
+	& img:hover {
+		opacity: 0.85;
+	}
+
+	& hr {
+		border-color: var(--color-surface-700);
+		margin: 2rem 0;
+	}
+}
+
+/* Driver.js tour theme */
+
+/*
+ * Driver.js forces `overflow: hidden` on the parent of the active element,
+ * which clips absolutely-positioned child popups (e.g. Combobox dropdowns).
+ * Override so checkpoint steps relying on popups stay usable.
+ */
+.driver-active :has(> .driver-active-element) {
+	overflow: visible !important;
+}
+
+.driver-popover {
+	background-color: var(--color-surface-800) !important;
+	color: var(--color-surface-50) !important;
+	border: 1px solid var(--color-surface-600) !important;
+	border-radius: 0.5rem !important;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+.driver-popover .driver-popover-title {
+	color: var(--color-surface-50) !important;
+	font-size: 1rem !important;
+	font-weight: 600 !important;
+}
+
+.driver-popover .driver-popover-description {
+	color: var(--color-surface-300) !important;
+	font-size: 0.875rem !important;
+}
+
+.driver-popover .driver-popover-progress-text {
+	color: var(--color-surface-400) !important;
+}
+
+.driver-popover button.driver-popover-prev-btn {
+	background-color: var(--color-surface-700) !important;
+	color: var(--color-surface-200) !important;
+	border: 1px solid var(--color-surface-600) !important;
+	border-radius: 0.375rem !important;
+	text-shadow: none !important;
+}
+
+.driver-popover button.driver-popover-next-btn,
+.driver-popover button.driver-popover-close-btn {
+	background-color: var(--color-primary-500) !important;
+	color: white !important;
+	border: none !important;
+	border-radius: 0.375rem !important;
+	text-shadow: none !important;
+}
+
+.driver-popover .driver-popover-arrow-side-left.driver-popover-arrow,
+.driver-popover .driver-popover-arrow-side-right.driver-popover-arrow,
+.driver-popover .driver-popover-arrow-side-top.driver-popover-arrow,
+.driver-popover .driver-popover-arrow-side-bottom.driver-popover-arrow {
+	border-color: var(--color-surface-800) !important;
+}

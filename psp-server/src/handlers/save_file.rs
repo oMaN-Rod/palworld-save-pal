@@ -45,6 +45,8 @@ pub(crate) struct LoadedSaveFilesData {
     r#type: &'static str,
     size: u64,
     has_gps: bool,
+    /// The single fact the WorldOption button gates on, across all three platforms.
+    world_option_present: bool,
     /// The id the session was registered under, so the frontend can reattach
     /// after a refresh.
     session_id: String,
@@ -67,6 +69,7 @@ impl LoadedSaveFilesData {
             r#type: session.save_type_label,
             size: session.size,
             has_gps: session.gps_available(),
+            world_option_present: session.world_option.is_some(),
             session_id: session_id.to_string(),
         }
     }
@@ -107,6 +110,7 @@ fn parse_player_file_stem(stem: &str) -> Option<(Uuid, bool)> {
 pub(crate) struct SteamSaveLayout {
     pub(crate) level_sav: PathBuf,
     pub(crate) level_meta: Option<PathBuf>,
+    pub(crate) world_option: Option<PathBuf>,
     pub(crate) players_dir: PathBuf,
     pub(crate) global_pal_storage_sav: Option<PathBuf>,
 }
@@ -138,6 +142,11 @@ pub(crate) fn validate_steam_save_directory(
     let level_meta_path = save_dir.join("LevelMeta.sav");
     let level_meta = level_meta_path.exists().then_some(level_meta_path);
 
+    // Optional, exactly like LevelMeta: a world without one simply has no
+    // editable options.
+    let world_option_path = save_dir.join("WorldOption.sav");
+    let world_option = world_option_path.exists().then_some(world_option_path);
+
     let has_player_sav = std::fs::read_dir(&players_dir)
         .map_err(CoreError::Io)?
         .filter_map(|dir_entry| dir_entry.ok())
@@ -161,6 +170,7 @@ pub(crate) fn validate_steam_save_directory(
     Ok(SteamSaveLayout {
         level_sav,
         level_meta,
+        world_option,
         players_dir,
         global_pal_storage_sav,
     })
@@ -317,6 +327,10 @@ pub async fn handle_select_save(
         Some(meta_path) => Some(std::fs::read(meta_path).map_err(CoreError::Io)?),
         None => None,
     };
+    let world_option_bytes = match &layout.world_option {
+        Some(world_option_path) => Some(std::fs::read(world_option_path).map_err(CoreError::Io)?),
+        None => None,
+    };
     let (player_file_refs, player_discovery_order) =
         discover_player_file_refs(&layout.players_dir)?;
 
@@ -329,6 +343,7 @@ pub async fn handle_select_save(
         "steam",
         &level_sav_bytes,
         level_meta_bytes.as_deref(),
+        world_option_bytes.as_deref(),
         player_file_refs,
         layout.global_pal_storage_sav.clone(),
         // Emit the leading generic "Loading Level.sav..." progress frame.
@@ -347,6 +362,7 @@ pub async fn handle_select_save(
         r#type: "steam",
         size: session.size,
         has_gps: layout.global_pal_storage_sav.is_some(),
+        world_option_present: session.world_option.is_some(),
         session_id: session_id.to_string(),
     };
     ctx.emitter.emit(MessageType::LoadedSaveFiles, &payload);
@@ -394,6 +410,7 @@ struct ZipLayout {
     save_id: String,
     level_sav_name: String,
     level_meta_name: String,
+    world_option_name: String,
     players_folder: String,
     gps_name: String,
 }
@@ -426,6 +443,11 @@ fn resolve_zip_layout(file_list: &[String]) -> ZipLayout {
             format!("{save_id}/LevelMeta.sav")
         } else {
             "LevelMeta.sav".to_string()
+        },
+        world_option_name: if nested {
+            format!("{save_id}/WorldOption.sav")
+        } else {
+            "WorldOption.sav".to_string()
         },
         players_folder: if nested {
             format!("{save_id}/Players/")
@@ -506,6 +528,16 @@ pub async fn handle_load_zip_file(
     } else {
         None
     };
+    // Optional. Unlike other unrecognized entries, this one is retained: the
+    // editor needs it and the download zip must round-trip it.
+    let world_option_bytes = if file_list
+        .iter()
+        .any(|name| name == &layout.world_option_name)
+    {
+        Some(read_entry(&layout.world_option_name)?)
+    } else {
+        None
+    };
 
     // Zip encounter order, not a UUID sort: the wire "players" array follows
     // this, same as the Steam directory scan.
@@ -566,6 +598,7 @@ pub async fn handle_load_zip_file(
         "steam",
         &level_sav_bytes,
         level_meta_bytes.as_deref(),
+        world_option_bytes.as_deref(),
         player_file_refs,
         gps_file_path.clone(),
         // Emit the leading generic "Loading Level.sav..." progress frame.
@@ -589,6 +622,7 @@ pub async fn handle_load_zip_file(
         r#type: "steam",
         size: session.size,
         has_gps: gps_file_path.is_some(),
+        world_option_present: session.world_option.is_some(),
         session_id: session_id.to_string(),
     };
     ctx.emitter.emit(MessageType::LoadedSaveFiles, &payload);
@@ -688,6 +722,16 @@ pub async fn handle_download_save_file(ctx: &mut HandlerCtx<'_>) -> Result<(), H
         zip_writer
             .write_all(&level_sav_bytes)
             .map_err(CoreError::Io)?;
+        // Included whenever present, dirty or not: the download zip IS the user's
+        // copy of the save, so omitting an unmodified file would lose it.
+        if let Some(world_option) = &session.world_option {
+            zip_writer
+                .start_file("WorldOption.sav", options)
+                .map_err(|zip_error| HandlerError::Other(zip_error.to_string()))?;
+            zip_writer
+                .write_all(&psp_core::savio::write_sav_bytes(world_option)?)
+                .map_err(CoreError::Io)?;
+        }
         for (player_id, (sav_bytes, dps_bytes)) in &player_files {
             let stem = download_player_stem(player_id);
             zip_writer
@@ -745,6 +789,18 @@ fn save_modded_player_stem(player_id: &Uuid) -> String {
     player_id.simple().to_string().to_uppercase()
 }
 
+/// A `Players/` entry that is a genuine player save: a 32-char hex UUID stem,
+/// optionally suffixed `_dps`, ending in `.sav`. Everything else in that
+/// directory (junk `.sav`, non-hex stems, subfolders) is excluded from backups.
+fn is_player_save_file(file_name: &str) -> bool {
+    let Some(stem) = file_name.strip_suffix(".sav") else {
+        return false;
+    };
+    let stem = stem.strip_suffix("_dps").unwrap_or(stem);
+    stem.len() == 32 && stem.bytes().all(|byte| byte.is_ascii_hexdigit())
+}
+
+#[cfg(test)]
 fn copy_dir_recursive(src: &Path, dst: &Path) -> std::io::Result<()> {
     std::fs::create_dir_all(dst)?;
     for dir_entry in std::fs::read_dir(src)? {
@@ -760,7 +816,19 @@ fn copy_dir_recursive(src: &Path, dst: &Path) -> std::io::Result<()> {
     Ok(())
 }
 
-/// Copies `save_dir` to `{backup_base}/{basename}_{%Y-%m-%d-%H-%M}`, appending a
+/// World-save files a backup keeps. Only these top-level names are copied;
+/// anything else in the directory is skipped so stray user files never bloat
+/// the backups root. Each is optional (copied only if present); load-time
+/// validation guarantees `Level.sav`, the rest may be absent.
+const BACKUP_ROOT_FILES: [&str; 4] = [
+    "Level.sav",
+    "LevelMeta.sav",
+    "LocalData.sav",
+    "WorldOption.sav",
+];
+
+/// Selectively copies whitelisted root files and validated `Players/` saves from
+/// `save_dir` to `{backup_base}/{basename}_{%Y-%m-%d-%H-%M}`, appending a
 /// `_{%S}` suffix on collision. `backup_base` is a parameter (not a constant) so
 /// tests can point it at a `TempDir` instead of the real backups root. A missing
 /// `save_dir` reports "skipping backup" rather than failing.
@@ -782,19 +850,38 @@ fn backup_save_directory(
     }
 
     progress("Backing up save directory... 🤓");
-    if save_dir.exists() {
-        copy_dir_recursive(save_dir, &backup_path).map_err(CoreError::Io)?;
-    } else {
+    if !save_dir.exists() {
         progress(&format!(
             "Save directory {} not found, skipping backup",
             save_dir.display()
         ));
+        return Ok(());
     }
 
-    let nested_backup_dir = backup_path.join("backup");
-    if nested_backup_dir.exists() {
-        std::fs::remove_dir_all(&nested_backup_dir).map_err(CoreError::Io)?;
+    std::fs::create_dir_all(&backup_path).map_err(CoreError::Io)?;
+    for name in BACKUP_ROOT_FILES {
+        let source = save_dir.join(name);
+        if source.is_file() {
+            std::fs::copy(&source, backup_path.join(name)).map_err(CoreError::Io)?;
+        }
     }
+
+    let players_dir = save_dir.join("Players");
+    if players_dir.is_dir() {
+        let backup_players_dir = backup_path.join("Players");
+        std::fs::create_dir_all(&backup_players_dir).map_err(CoreError::Io)?;
+        for entry in std::fs::read_dir(&players_dir).map_err(CoreError::Io)? {
+            let entry = entry.map_err(CoreError::Io)?;
+            let entry_path = entry.path();
+            let file_name = entry.file_name();
+            let file_name = file_name.to_string_lossy();
+            if entry_path.is_file() && is_player_save_file(&file_name) {
+                std::fs::copy(&entry_path, backup_players_dir.join(&*file_name))
+                    .map_err(CoreError::Io)?;
+            }
+        }
+    }
+
     Ok(())
 }
 
@@ -845,6 +932,19 @@ fn write_steam_modded_save(
         .level_meta_sav_bytes()?
         .ok_or_else(|| HandlerError::Other("No LevelMeta GvasFile has been loaded.".to_string()))?;
     std::fs::write(save_dir.join("LevelMeta.sav"), &level_meta_bytes).map_err(CoreError::Io)?;
+
+    // Gated on dirty: an untouched WorldOption must not be rewritten. The save_dir
+    // backup taken above already covers this file.
+    if session.world_option_dirty {
+        if let Some(world_option) = &session.world_option {
+            progress("Saving WorldOption.sav...");
+            std::fs::write(
+                save_dir.join("WorldOption.sav"),
+                psp_core::savio::write_sav_bytes(world_option)?,
+            )
+            .map_err(CoreError::Io)?;
+        }
+    }
 
     progress("Writing player files");
     let players_dir = save_dir.join("Players");
@@ -1032,6 +1132,12 @@ async fn write_modded_gamepass_containers(
         })
         .collect();
 
+    // Only re-emit when the user actually changed something.
+    let modified_world_option = match (&session.world_option, session.world_option_dirty) {
+        (Some(save), true) => Some(psp_core::savio::write_sav_bytes(save)?),
+        _ => None,
+    };
+
     progress("Creating new containers for modified save...");
     store::save_modified_gamepass(
         &mut index,
@@ -1041,6 +1147,7 @@ async fn write_modded_gamepass_containers(
         &player_map,
         &original_containers,
         world_name,
+        modified_world_option.as_deref(),
     )?;
     progress("Modded save created");
     Ok(())
@@ -1066,6 +1173,79 @@ pub async fn handle_rename_world(
     ctx.emitter.emit(
         MessageType::RenameWorld,
         &format!("World renamed from '{old_world_name}' to '{new_world_name}'"),
+    );
+    Ok(())
+}
+
+#[derive(Debug, serde::Deserialize)]
+pub struct SaveEditedSavData {
+    /// The uesave JSON the editor holds in Monaco.
+    pub json: String,
+    /// Seeds the "Save As" dialog's filename; the loaded save's name.
+    #[serde(default)]
+    pub file_name: Option<String>,
+}
+
+/// The JSON editor's Save button in desktop mode: the webview ignores browser
+/// `<a download>`, so the edited uesave JSON is converted to a `.sav` and
+/// written to a native-picked path. Answers on its OWN `save_edited_sav` type
+/// for success, cancel, AND soft failure alike — never a bare `error` or
+/// `no_file_selected` — so the editor's `sendAndWait`, which correlates by
+/// message type, always resolves.
+pub async fn handle_save_edited_sav(
+    data: SaveEditedSavData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    if !ctx.app.config.desktop_mode {
+        ctx.emitter.emit(
+            MessageType::SaveEditedSav,
+            &json!({"error": "Desktop mode required."}),
+        );
+        return Ok(());
+    }
+
+    // Convert BEFORE prompting: a bad edit must not open a save dialog only to
+    // fail after the user has already picked a location.
+    let sav_bytes = match psp_core::convert::json_to_sav_bytes(data.json.as_bytes()) {
+        Ok(bytes) => bytes,
+        Err(error) => {
+            ctx.emitter.emit(
+                MessageType::SaveEditedSav,
+                &json!({"error": format!("Invalid save JSON: {error}")}),
+            );
+            return Ok(());
+        }
+    };
+
+    let request = crate::desktop_dialogs::FileSaveRequest {
+        filter_name: "Save Files",
+        filter_extensions: &["sav"],
+        suggested_file_name: data
+            .file_name
+            .filter(|name| !name.is_empty())
+            .unwrap_or_else(|| "modified_save.sav".to_string()),
+        initial_directory: None,
+    };
+    let Some(path) = ctx.app.dialogs.save_file(request).await else {
+        ctx.emitter
+            .emit(MessageType::SaveEditedSav, &json!({"canceled": true}));
+        return Ok(());
+    };
+
+    if let Err(error) = std::fs::write(&path, &sav_bytes) {
+        ctx.emitter.emit(
+            MessageType::SaveEditedSav,
+            &json!({"error": format!("Failed to write save file: {error}")}),
+        );
+        return Ok(());
+    }
+
+    ctx.emitter.emit(
+        MessageType::SaveEditedSav,
+        &json!({
+            "message": "Save file written successfully",
+            "file_path": path,
+        }),
     );
     Ok(())
 }
@@ -1255,6 +1435,46 @@ mod tests {
     }
 
     #[test]
+    fn validate_steam_save_directory_finds_optional_world_option() {
+        let temp_dir = tempfile::tempdir().unwrap();
+        let save_dir = temp_dir.path().join("MyWorld");
+        std::fs::create_dir_all(save_dir.join("Players")).unwrap();
+        std::fs::write(save_dir.join("Level.sav"), b"L").unwrap();
+        std::fs::write(
+            save_dir.join("Players").join(format!("{PLAYER_ONE}.sav")),
+            b"P",
+        )
+        .unwrap();
+        std::fs::write(save_dir.join("WorldOption.sav"), b"W").unwrap();
+
+        let level_sav_path = save_dir.join("Level.sav");
+        let layout = validate_steam_save_directory(&level_sav_path.to_string_lossy()).unwrap();
+
+        assert_eq!(Some(save_dir.join("WorldOption.sav")), layout.world_option);
+    }
+
+    #[test]
+    fn validate_steam_save_directory_tolerates_missing_world_option() {
+        let temp_dir = tempfile::tempdir().unwrap();
+        let save_dir = temp_dir.path().join("MyWorld");
+        std::fs::create_dir_all(save_dir.join("Players")).unwrap();
+        std::fs::write(save_dir.join("Level.sav"), b"L").unwrap();
+        std::fs::write(
+            save_dir.join("Players").join(format!("{PLAYER_ONE}.sav")),
+            b"P",
+        )
+        .unwrap();
+
+        let level_sav_path = save_dir.join("Level.sav");
+        let layout = validate_steam_save_directory(&level_sav_path.to_string_lossy()).unwrap();
+
+        assert_eq!(
+            None, layout.world_option,
+            "WorldOption is optional, like LevelMeta"
+        );
+    }
+
+    #[test]
     fn test_discover_player_file_refs_pairs_sav_and_dps_and_skips_invalid_names() {
         let temp_dir = tempfile::tempdir().unwrap();
         std::fs::write(temp_dir.path().join(format!("{PLAYER_ONE}.sav")), b"x").unwrap();
@@ -1377,6 +1597,18 @@ mod tests {
         assert_eq!("MyWorld/Players/", layout.players_folder);
     }
 
+    #[test]
+    fn resolve_zip_layout_names_world_option_for_flat_and_nested() {
+        let flat = resolve_zip_layout(&["Level.sav".to_string(), "Players/x.sav".to_string()]);
+        assert_eq!("WorldOption.sav", flat.world_option_name);
+
+        let nested = resolve_zip_layout(&[
+            "MySave/Level.sav".to_string(),
+            "MySave/Players/x.sav".to_string(),
+        ]);
+        assert_eq!("MySave/WorldOption.sav", nested.world_option_name);
+    }
+
     /// Security-critical: a traversal-shaped top-level entry name can never
     /// leave `save_id` holding a '/'. That is what makes `zip_gps_temp_path`
     /// safe, and it breaks the moment `resolve_zip_layout` takes more than the
@@ -1431,6 +1663,32 @@ mod tests {
         );
         // Guard the divergence directly: same uuid, opposite case.
         assert_ne!(save_modded_player_stem(&uid), download_player_stem(&uid));
+    }
+
+    #[test]
+    fn is_player_save_file_accepts_uuid_saves_and_rejects_junk() {
+        assert!(is_player_save_file(
+            "00000000000000000000000000000001.sav"
+        ));
+        assert!(is_player_save_file(
+            "0123456789ABCDEFfedcba9876543210.sav"
+        ));
+        assert!(is_player_save_file(
+            "00000000000000000000000000000001_dps.sav"
+        ));
+
+        assert!(!is_player_save_file("notes.sav")); // non-hex stem
+        assert!(!is_player_save_file("0000.sav")); // too short
+        assert!(!is_player_save_file(
+            "00000000000000000000000000000001.txt"
+        )); // wrong extension
+        assert!(!is_player_save_file(
+            "0000000000000000000000000000000G.sav"
+        )); // non-hex digit
+        assert!(!is_player_save_file(
+            "00000000000000000000000000000001"
+        )); // no extension
+        assert!(!is_player_save_file("_dps.sav")); // empty hex stem
     }
 
     /// `OrderedMap<i32, _>` must round-trip the string-keyed JSON objects the
@@ -1496,6 +1754,64 @@ mod tests {
         assert!(created.is_empty(), "no backup dir should be created");
     }
 
+    /// Only whitelisted files reach the backup; stray root files, unknown
+    /// subfolders, and non-UUID `Players/` entries are excluded.
+    #[test]
+    fn backup_save_directory_copies_only_whitelisted_files() {
+        let temp_dir = tempfile::tempdir().unwrap();
+        let save_dir = temp_dir.path().join("world");
+        let players_dir = save_dir.join("Players");
+        std::fs::create_dir_all(&players_dir).unwrap();
+
+        // Whitelisted contents.
+        std::fs::write(save_dir.join("Level.sav"), b"level").unwrap();
+        std::fs::write(save_dir.join("LevelMeta.sav"), b"meta").unwrap();
+        std::fs::write(save_dir.join("LocalData.sav"), b"local").unwrap();
+        std::fs::write(save_dir.join("WorldOption.sav"), b"option").unwrap();
+        let player = "00000000000000000000000000000001.sav";
+        let player_dps = "00000000000000000000000000000001_dps.sav";
+        std::fs::write(players_dir.join(player), b"p").unwrap();
+        std::fs::write(players_dir.join(player_dps), b"pd").unwrap();
+
+        // Decoys that must NOT be backed up.
+        std::fs::write(save_dir.join("readme.txt"), b"junk").unwrap();
+        std::fs::create_dir_all(save_dir.join("mods")).unwrap();
+        std::fs::write(save_dir.join("mods/foo.pak"), b"pak").unwrap();
+        std::fs::write(players_dir.join("notes.sav"), b"junk").unwrap();
+        std::fs::create_dir_all(players_dir.join("junk")).unwrap();
+        std::fs::write(players_dir.join("junk/inner.sav"), b"junk").unwrap();
+
+        let backup_base = temp_dir.path().join("backups/steam");
+        backup_save_directory(
+            &save_dir,
+            &backup_base,
+            &psp_core::progress::null_progress(),
+        )
+        .unwrap();
+
+        let backup_dirs: Vec<PathBuf> = std::fs::read_dir(&backup_base)
+            .unwrap()
+            .filter_map(|entry| entry.ok())
+            .map(|entry| entry.path())
+            .collect();
+        assert_eq!(1, backup_dirs.len(), "one backup dir expected");
+        let backup = &backup_dirs[0];
+
+        // Whitelist present.
+        assert!(backup.join("Level.sav").is_file());
+        assert!(backup.join("LevelMeta.sav").is_file());
+        assert!(backup.join("LocalData.sav").is_file());
+        assert!(backup.join("WorldOption.sav").is_file());
+        assert!(backup.join("Players").join(player).is_file());
+        assert!(backup.join("Players").join(player_dps).is_file());
+
+        // Decoys absent.
+        assert!(!backup.join("readme.txt").exists());
+        assert!(!backup.join("mods").exists());
+        assert!(!backup.join("Players").join("notes.sav").exists());
+        assert!(!backup.join("Players").join("junk").exists());
+    }
+
     /// Hermetic full write-path test: the `world1` fixture is copied into a
     /// `TempDir` and BOTH the session level_path and save_dir point at that
     /// copy, so nothing can touch the user's real save_dir, the committed
@@ -1519,6 +1835,7 @@ mod tests {
             "steam",
             &level_bytes,
             Some(&meta_bytes),
+            None,
             BTreeMap::new(),
             None,
             true,

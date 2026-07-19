@@ -83,7 +83,7 @@ mod tests {
     }
 
     #[test]
-    fn emit_error_matches_python_shape() {
+    fn emit_error_has_expected_envelope_shape() {
         let (sender, mut receiver) = tokio::sync::mpsc::unbounded_channel();
         let emitter = Emitter::new(sender);
         emitter.emit_error("boom", "trace-lines");

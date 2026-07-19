@@ -40,15 +40,14 @@ fn untouched_level_resaves_byte_identical() {
     );
 }
 
-/// The same gate widened to whatever larger real save `PSP_TEST_SAVE_DIR`
-/// names, catching byte drift the one small fixture might not exercise.
+/// The same gate widened to the larger committed `v1_relics` corpus, catching
+/// byte drift the one small fixture might not exercise.
 #[test]
 fn untouched_corpus_level_resaves_byte_identical() {
-    let Some(session) = common::load_corpus_session() else {
-        return;
-    };
+    let session = common::load_corpus_session();
     let original = std::fs::read(
-        std::path::Path::new(&std::env::var("PSP_TEST_SAVE_DIR").unwrap()).join("Level.sav"),
+        std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../tests/fixtures/saves/v1_relics/Level.sav"),
     )
     .expect("read corpus Level.sav");
     let rewritten = session.level_sav_bytes().expect("write corpus level sav");
@@ -157,7 +156,7 @@ fn edit_one_pal_leaves_guild_tails_byte_identical() {
     let mut session = common::load_fixture_session("world1");
     let data = game_data();
 
-    let untouched_tails: Vec<(uuid::Uuid, uesave::games::palworld::PalGroupVariant)> =
+    let untouched_tails: Vec<(uuid::Uuid, psp_core::ue::games::palworld::PalGroupVariant)> =
         psp_core::domain::world::group_map(&session.level)
             .unwrap()
             .iter()
@@ -335,7 +334,7 @@ fn edited_player_level_sav_bytes_succeeds_and_edit_round_trips() {
         .expect("reloaded player entry has a save parameter");
     let level_after = save_parameter
         .0
-        .get(&uesave::PropertyKey::from("Level"))
+        .get(&psp_core::ue::PropertyKey::from("Level"))
         .expect("Level property present");
     assert_eq!(
         level_after,
@@ -461,7 +460,7 @@ fn add_guild_pal_then_resave_succeeds_and_pal_round_trips() {
     );
 }
 
-fn read_level_only() -> uesave::Save {
+fn read_level_only() -> psp_core::ue::Save {
     let level_bytes = fixture_file("world1/Level.sav");
     psp_core::savio::read_sav_bytes(&level_bytes).expect("parse level")
 }

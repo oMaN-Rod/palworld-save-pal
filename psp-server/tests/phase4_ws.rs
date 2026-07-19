@@ -452,18 +452,18 @@ async fn convert_sav_file_round_trips_over_ws() {
 /// Reads `SaveData.WorldMapMaskTextureV4` back out of a `LocalData.sav`-shaped
 /// GVAS blob, so the mask can be inspected before and after the handler runs.
 fn mask_bytes(local_data_sav: &[u8]) -> Vec<u8> {
-    let save = uesave::Save::read_with_types(
-        &mut std::io::Cursor::new(local_data_sav),
-        uesave::games::palworld::palworld_types(),
-    )
-    .unwrap();
-    let uesave::Property::Struct(uesave::StructValue::Struct(save_data)) =
-        &save.root.properties.0[&uesave::PropertyKey::from("SaveData")]
+    let save = psp_core::ue::SaveReader::new()
+        .game::<psp_core::ue::Palworld>()
+        .types(psp_core::ue::games::palworld::palworld_types())
+        .read(std::io::Cursor::new(local_data_sav))
+        .unwrap();
+    let psp_core::ue::Property::Struct(psp_core::ue::StructValue::Struct(save_data)) =
+        &save.root.properties.0[&psp_core::ue::PropertyKey::from("SaveData")]
     else {
         panic!("SaveData missing");
     };
-    let uesave::Property::Array(uesave::ValueVec::Byte(uesave::ByteArray::Byte(bytes))) =
-        &save_data.0[&uesave::PropertyKey::from("WorldMapMaskTextureV4")]
+    let psp_core::ue::Property::Array(psp_core::ue::ValueVec::Byte(psp_core::ue::ByteArray::Byte(bytes))) =
+        &save_data.0[&psp_core::ue::PropertyKey::from("WorldMapMaskTextureV4")]
     else {
         panic!("WorldMapMaskTextureV4 missing or not a byte array");
     };
@@ -489,7 +489,7 @@ async fn unlock_map_zeroes_mask_and_backs_up() {
             psp_core::props::struct_props_mut(save_data).expect("SaveData must be a struct");
         save_data.insert(
             "WorldMapMaskTextureV4",
-            uesave::Property::Array(uesave::ValueVec::Byte(uesave::ByteArray::Byte(vec![
+            psp_core::ue::Property::Array(psp_core::ue::ValueVec::Byte(psp_core::ue::ByteArray::Byte(vec![
                 1, 2, 3, 0, 4,
             ]))),
         );
@@ -497,10 +497,10 @@ async fn unlock_map_zeroes_mask_and_backs_up() {
     psp_core::props::ensure_schema(
         &mut save,
         "SaveData.WorldMapMaskTextureV4".to_string(),
-        uesave::PropertyTagPartial {
+        psp_core::ue::PropertyTagPartial {
             id: None,
-            data: uesave::PropertyTagDataPartial::Array(Box::new(
-                uesave::PropertyTagDataPartial::Byte(None),
+            data: psp_core::ue::PropertyTagDataPartial::Array(Box::new(
+                psp_core::ue::PropertyTagDataPartial::Byte(None),
             )),
         },
     );

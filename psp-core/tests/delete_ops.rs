@@ -7,7 +7,7 @@ use psp_core::gamedata::GameData;
 use psp_core::progress::null_progress;
 use psp_core::props;
 use psp_core::session::{LoadedPlayer, PlayerFileData, SaveKind, SaveSession};
-use uesave::{
+use psp_core::ue::{
     Header, MapEntry, PackageVersion, Properties, Property, PropertyKey, PropertySchemas, Root,
     Save, StructValue, ValueVec,
 };
@@ -271,7 +271,7 @@ fn delete_guild_removes_group_extra_and_base_entries_but_leaves_the_chest_orphan
             .unwrap()
             .iter()
             .any(|e| container_id_key(e) == Some(chest_id)),
-        "PYTHON BUG (reproduced deliberately, see delete_guild_and_players's own doc \
+        "save-file fidelity (see delete_guild_and_players's own doc \
          comment): the guild's own item-storage container is never added to \
          container_ids_to_delete, so it survives delete_guild_and_players as an \
          orphaned ItemContainerSaveData entry"
@@ -300,16 +300,16 @@ fn player_character_entry(player_id: Uuid) -> MapEntry {
         "SaveParameter",
         Property::Struct(StructValue::Struct(save_parameter)),
     );
-    let character_data = uesave::games::palworld::PalCharacterData {
+    let character_data = psp_core::ue::games::palworld::PalCharacterData {
         object: object_props,
         unknown_bytes: [0; 4],
-        group_id: uesave::FGuid::nil(),
+        group_id: psp_core::ue::FGuid::nil(),
         trailing_bytes: [0; 4],
     };
     let mut value_props = Properties::default();
     value_props.insert(
         "RawData",
-        Property::Struct(StructValue::PalCharacterData(character_data)),
+        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::CharacterData(character_data))),
     );
     MapEntry {
         key: Property::Struct(StructValue::Struct(key_props)),
@@ -338,14 +338,14 @@ fn character_container_entry_with_pal(container_id: Uuid, slot_num: i32, pal_id:
     slot_props.insert("SlotIndex", props::int_property(0));
     slot_props.insert(
         "RawData",
-        Property::Struct(StructValue::PalCharacterContainer(
-            uesave::games::palworld::PalCharacterContainer {
+        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::CharacterContainer(
+            psp_core::ue::games::palworld::PalCharacterContainer {
                 player_uid: props::uuid_to_guid(props::EMPTY_UUID),
                 instance_id: props::uuid_to_guid(pal_id),
                 permission_tribe_id: 0,
                 trailing_bytes: None,
             },
-        )),
+        ))),
     );
     value_props.insert(
         "Slots",
@@ -382,28 +382,28 @@ fn player_sav_with_containers(pal_box_id: Uuid, otomo_id: Uuid) -> Save {
 fn guild_group_entry(
     guild_id: Uuid,
     handle_ids: &[Uuid],
-    guild: uesave::games::palworld::PalGuildGroup,
+    guild: psp_core::ue::games::palworld::PalGuildGroup,
 ) -> MapEntry {
     let mut value_properties = Properties::default();
     value_properties.insert(
         "GroupType",
         Property::Enum("EPalGroupType::Guild".to_string()),
     );
-    let group_data = uesave::games::palworld::PalGroupData {
+    let group_data = psp_core::ue::games::palworld::PalGroupData {
         group_id: props::uuid_to_guid(guild_id),
         group_name: String::new(),
         individual_character_handle_ids: handle_ids
             .iter()
-            .map(|id| uesave::games::palworld::PalInstanceId {
+            .map(|id| psp_core::ue::games::palworld::PalInstanceId {
                 guid: props::uuid_to_guid(props::EMPTY_UUID),
                 instance_id: props::uuid_to_guid(*id),
             })
             .collect(),
-        data: uesave::games::palworld::PalGroupVariant::Guild(guild),
+        data: psp_core::ue::games::palworld::PalGroupVariant::Guild(guild),
     };
     value_properties.insert(
         "RawData",
-        Property::Struct(StructValue::PalGroupData(group_data)),
+        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::GroupData(group_data))),
     );
     MapEntry {
         key: guid_property(guild_id),
@@ -529,7 +529,7 @@ fn two_player_guild_session(guild_loaded: bool) -> TwoPlayerGuild {
     }
 }
 
-fn group_data_for(session: &SaveSession, guild_id: Uuid) -> &uesave::games::palworld::PalGroupData {
+fn group_data_for(session: &SaveSession, guild_id: Uuid) -> &psp_core::ue::games::palworld::PalGroupData {
     let entries = world::group_map(&session.level).unwrap();
     let entry = entries
         .iter()
@@ -646,12 +646,10 @@ fn delete_player_leaves_the_deleted_players_own_pal_guild_handle_dangling() {
             .individual_character_handle_ids
             .iter()
             .any(|h| props::guid_to_uuid(&h.instance_id) == member_pal_id),
-        "PYTHON BUG (reproduced deliberately for byte parity, not on the known list, \
+        "save-file fidelity (byte-identical save output, \
          see delete_player_and_pals_for_guild's own doc comment): the deleted \
          player's own pal's individual_character_handle_ids entry must remain \
-         dangling in the guild's raw tail, exactly matching real Python's \
-         _delete_player_and_pals -> _delete_pal_by_id call chain, which never \
-         reaches Guild.delete_character_handle"
+         dangling in the guild's raw tail"
     );
 }
 
@@ -711,20 +709,20 @@ fn item_container_entry_with_dynamic_slot(container_id: Uuid, local_id: Uuid) ->
     slot_props.insert("SlotIndex", props::int_property(0));
     slot_props.insert(
         "RawData",
-        Property::Struct(StructValue::PalItemContainerSlots(
-            uesave::games::palworld::PalItemContainerSlot {
+        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::ItemContainerSlots(
+            psp_core::ue::games::palworld::PalItemContainerSlot {
                 slot_index: 0,
                 count: 1,
-                item: uesave::games::palworld::PalItemId {
+                item: psp_core::ue::games::palworld::PalItemId {
                     static_id: "WeaponFire_Bow".to_string(),
-                    dynamic_id: uesave::games::palworld::PalDynamicId {
-                        created_world_id: uesave::FGuid::nil(),
+                    dynamic_id: psp_core::ue::games::palworld::PalDynamicId {
+                        created_world_id: psp_core::ue::FGuid::nil(),
                         local_id_in_created_world: props::uuid_to_guid(local_id),
                     },
                 },
                 trailing_bytes: vec![0u8; 16],
             },
-        )),
+        ))),
     );
     let mut value_props = Properties::default();
     value_props.insert("SlotNum", props::int_property(1));
@@ -742,16 +740,16 @@ fn dynamic_item_value(local_id: Uuid) -> StructValue {
     let mut item_props = Properties::default();
     item_props.insert(
         "RawData",
-        Property::Struct(StructValue::PalDynamicItem(Box::new(
-            uesave::games::palworld::PalDynamicItem {
-                id: uesave::games::palworld::PalDynamicId {
-                    created_world_id: uesave::FGuid::nil(),
+        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::DynamicItem(Box::new(
+            psp_core::ue::games::palworld::PalDynamicItem {
+                id: psp_core::ue::games::palworld::PalDynamicId {
+                    created_world_id: psp_core::ue::FGuid::nil(),
                     local_id_in_created_world: props::uuid_to_guid(local_id),
                 },
                 static_id: "WeaponFire_Bow".to_string(),
-                item_type: uesave::games::palworld::PalDynamicItemType::Unknown { trailer: vec![] },
+                item_type: psp_core::ue::games::palworld::PalDynamicItemType::Unknown { trailer: vec![] },
             },
-        ))),
+        )))),
     );
     StructValue::Struct(item_props)
 }
@@ -815,13 +813,11 @@ fn delete_item_containers_cascades_its_dynamic_item_and_invalidates_both_indexes
 }
 
 /// The same cross-entity property the synthetic two-player guild proves,
-/// spot-checked against whatever real save `PSP_TEST_SAVE_DIR` names: deleting
+/// spot-checked against the committed `v1_relics` corpus fixture: deleting
 /// a non-admin player leaves every other player's entry untouched.
 #[test]
 fn delete_non_admin_player_round_trips_against_an_optional_real_corpus_save() {
-    let Some(mut session) = common::load_corpus_session() else {
-        return;
-    };
+    let mut session = common::load_corpus_session();
     let data = game_data();
     let player_ids: Vec<Uuid> = session.player_summaries.keys().copied().collect();
 

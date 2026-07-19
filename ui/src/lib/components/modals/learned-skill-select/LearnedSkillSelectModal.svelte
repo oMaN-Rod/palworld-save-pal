@@ -21,6 +21,7 @@
 	let activeSkills = $derived(Object.values(activeSkillsData.activeSkills));
 	let selectOptions = $derived(
 		activeSkills
+			.filter((skill) => isSkillAvailableForCharacter(skill.id, pal.character_key))
 			.sort((a, b) => a.details.element.localeCompare(b.details.element))
 			.map((skill) => ({
 				value: skill.id,
@@ -55,7 +56,7 @@
 		const elementSkills = activeSkills
 			.filter((skill) => {
 				const matchesElement = palData.element_types.some((type) => skill.details.element === type);
-				return matchesElement && isSkillAvailableForCharacter(skill.id, pal.character_key);
+				return matchesElement;
 			})
 			.map((item) => item.id)
 			.filter((skillId) => !learnedSkills.some((skill) => skill.id === skillId))
@@ -66,9 +67,7 @@
 
 	function handleLearnAll() {
 		const allSkillIds = selectOptions
-			.filter((item) => !item.value.includes('Unique'))
-			.map((item) => item.value);
-
+			.map((option) => option.value);
 		learnedSkills = allSkillIds.map((skillId) => ({ id: skillId }));
 	}
 

@@ -1,16 +1,3 @@
-# Python
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-.Python
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-*.so
-
 # IDEs and editors
 .idea/
 .vscode/
@@ -57,25 +44,9 @@ node_modules/
 dist/
 build/
 ui_build/
-*.egg-info/
-*.egg
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# pyenv
-.python-version
 
 # dotenv
 .env
-
-# virtualenv
-.venv
-venv/
-ENV/
-
-# pytest
-.pytest_cache/
 
 backups/
 data/json/settings.json
@@ -84,5 +55,4 @@ data/json/settings.json
 
 # Rust workspace build output
 /target
-/parity/fixtures/
-/parity/tmp/
+/contract/tmp/

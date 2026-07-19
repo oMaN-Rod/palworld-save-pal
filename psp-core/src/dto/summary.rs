@@ -136,14 +136,14 @@ mod tests {
     }
 
     #[test]
-    fn test_ticks_to_isoformat_matches_cpython() {
+    fn test_ticks_to_isoformat_formats_correctly() {
         assert_eq!("2024-01-04T21:20:00", iso(638400000000000000));
         assert_eq!("2025-04-15T23:40:12.345680", iso(638803572123456789));
         assert_eq!("1970-01-01T00:00:00", iso(621355968000000000));
     }
 
     #[test]
-    fn test_ticks_to_isoformat_matches_cpython_precision_regression() {
+    fn test_ticks_to_isoformat_preserves_sub_second_precision() {
         // Each tick value below is one where a naive `ticks as f64` division
         // drifts by several microseconds; they guard the quotient/remainder
         // split in `ticks_to_datetime`.

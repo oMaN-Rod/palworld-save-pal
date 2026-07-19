@@ -1,0 +1,22 @@
+{
+  "request": {
+    "type": "set_technology_data",
+    "data": {
+      "playerID": "8c2f1930-0000-0000-0000-000000000000",
+      "technologies": [
+        "Workbench",
+        "HandTorch"
+      ],
+      "techPoints": 42,
+      "ancientTechPoints": 7
+    }
+  },
+  "responses": [
+    {
+      "type": "set_technology_data",
+      "data": {
+        "success": true
+      }
+    }
+  ]
+}

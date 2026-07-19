@@ -68,7 +68,7 @@ fn update_pals_edit_then_reread() {
 /// through the write-back path. The DTO must request a genuinely different
 /// container, or the assertion would hold either way and prove nothing.
 #[test]
-fn update_pals_preserves_parity_bug_1_container_id_never_moves() {
+fn update_pals_keeps_container_id_stable_on_move() {
     let mut session = common::load_fixture_session("world1");
     let data = game_data();
     let player_id: Uuid = WORLD1_PLAYER_O.parse().unwrap();
@@ -100,7 +100,7 @@ fn update_pals_preserves_parity_bug_1_container_id_never_moves() {
     let updated = reread.pals.get(pal_id).expect("pal still present");
     assert_eq!(
         updated.storage_id, original_container_id,
-        "PARITY-BUG-1: ContainerId must never change, even when the DTO's \
+        "save-file fidelity: ContainerId must never change, even when the DTO's \
          storage_id field asks for a genuinely DIFFERENT container"
     );
     assert_eq!(updated.storage_slot, source.storage_slot + 1);
@@ -393,20 +393,20 @@ fn update_players_full_dto_survives_missing_quest_array_schema() {
             .root
             .properties
             .0
-            .get_mut(&uesave::PropertyKey::from("SaveData"))
+            .get_mut(&psp_core::ue::PropertyKey::from("SaveData"))
             .expect("player has SaveData");
         let save_data =
             psp_core::props::struct_props_mut(save_data_property).expect("SaveData is a struct");
         save_data
             .0
-            .shift_remove(&uesave::PropertyKey::from("CompletedQuestArray"));
+            .shift_remove(&psp_core::ue::PropertyKey::from("CompletedQuestArray"));
         save_data
             .0
-            .shift_remove(&uesave::PropertyKey::from("OrderedQuestArray"));
+            .shift_remove(&psp_core::ue::PropertyKey::from("OrderedQuestArray"));
 
-        // Each player `.sav` is its own standalone `uesave::Save`, so dropping
+        // Each player `.sav` is its own standalone `psp_core::ue::Save`, so dropping
         // these schemas here cannot affect any other player.
-        let mut stripped_schemas = uesave::PropertySchemas::new();
+        let mut stripped_schemas = psp_core::ue::PropertySchemas::new();
         for (path, tag) in loaded.sav.schemas.schemas() {
             if path.ends_with(".CompletedQuestArray")
                 || path.ends_with(".OrderedQuestArray")
@@ -471,7 +471,7 @@ fn update_players_full_dto_survives_missing_quest_array_schema() {
         .and_then(psp_core::props::struct_values)
         .expect("OrderedQuestArray round trips as a Struct array");
     assert_eq!(ordered.len(), 1);
-    let uesave::StructValue::Struct(quest) = &ordered[0] else {
+    let psp_core::ue::StructValue::Struct(quest) = &ordered[0] else {
         panic!("OrderedQuestArray element must be a Struct");
     };
     let quest_name = psp_core::props::get(quest, &["QuestName"])
@@ -579,9 +579,7 @@ fn update_guilds_full_round_trip_bases_and_chest() {
 
 #[test]
 fn update_pals_across_the_whole_corpus_never_panics() {
-    let Some(mut session) = common::load_corpus_session() else {
-        return;
-    };
+    let mut session = common::load_corpus_session();
     let data = game_data();
     let Some(&player_id) = session.player_summaries.keys().next() else {
         return;
@@ -1415,19 +1413,19 @@ fn typed_relic_write_creates_first_entry_in_an_empty_by_type_array() {
             .root
             .properties
             .0
-            .get_mut(&uesave::PropertyKey::from("SaveData"))
+            .get_mut(&psp_core::ue::PropertyKey::from("SaveData"))
             .expect("player has SaveData");
         let save_data =
             psp_core::props::struct_props_mut(save_data_property).expect("SaveData is a struct");
         let record_data_property = save_data
             .0
-            .get_mut(&uesave::PropertyKey::from("RecordData"))
+            .get_mut(&psp_core::ue::PropertyKey::from("RecordData"))
             .expect("player has RecordData");
         let record_data = psp_core::props::struct_props_mut(record_data_property)
             .expect("RecordData is a struct");
         let by_type_property = record_data
             .0
-            .get_mut(&uesave::PropertyKey::from(
+            .get_mut(&psp_core::ue::PropertyKey::from(
                 "RelicObtainForInstanceFlagByType",
             ))
             .expect("fixture sanity: player has RelicObtainForInstanceFlagByType");
@@ -1441,7 +1439,7 @@ fn typed_relic_write_creates_first_entry_in_an_empty_by_type_array() {
 
         // Strip the `.Type`/`.Flags` schemas an existing element would otherwise have
         // taught uesave, reproducing an array that has never held an entry.
-        let mut stripped_schemas = uesave::PropertySchemas::new();
+        let mut stripped_schemas = psp_core::ue::PropertySchemas::new();
         for (path, tag) in loaded.sav.schemas.schemas() {
             if path.ends_with(".RelicObtainForInstanceFlagByType.Type")
                 || path.ends_with(".RelicObtainForInstanceFlagByType.Flags")

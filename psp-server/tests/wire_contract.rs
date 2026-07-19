@@ -1,18 +1,17 @@
-//! Replays recorded request/response fixtures against an in-process server and
-//! asserts each response sequence still matches, frame for frame and in order.
-//! The fixtures are generated locally, so with none on disk (a fresh clone, or
-//! CI) the replay test skips loudly on stderr and passes; the comparators and
-//! masks it relies on are unit-tested below regardless.
+//! Replays the committed request/response fixtures under `contract/fixtures/`
+//! against an in-process server and asserts each response sequence still
+//! matches, frame for frame and in order. The fixtures are committed golden
+//! snapshots of the wire protocol the Svelte frontend consumes, so this suite
+//! is a regression net against ACCIDENTAL protocol drift. It FAILS loudly if
+//! the committed corpus is missing rather than skipping, so it can never pass
+//! with zero coverage. The comparators and masks it relies on are unit-tested
+//! below regardless.
 //!
-//! These fixtures were originally recorded from a Python implementation of
-//! this server, to prove the Rust port matched it byte-for-byte. That
-//! implementation is gone from this repo and the fixtures can never be
-//! re-recorded from it. Their surviving job is different: they are golden
-//! snapshots of the wire protocol the Svelte frontend depends on, so this
-//! suite is now a regression net against ACCIDENTAL protocol drift, not a
-//! Python parity check. Fixtures that only echoed static `data/json` content
-//! (and so broke on every game-data patch without exercising any port logic)
-//! have been retired; what remains covers real request/response behaviour.
+//! Provenance: the snapshots were first captured from a now-retired reference
+//! implementation and can no longer be re-captured here, so they are maintained
+//! as committed golden inputs. Fixtures that only echoed static `data/json`
+//! content (and so broke on every game-data patch without exercising real
+//! request/response behaviour) are not part of this corpus.
 
 use std::path::PathBuf;
 use std::time::Duration;
@@ -73,7 +72,7 @@ where
         Ok(Some(Ok(frame))) => Err(format!(
             "fixture {fixture_name} (request type {request_type:?}) — Rust emitted a SURPLUS \
              frame beyond the {expected_frame_count} frame(s) the fixture recorded (Rust sent \
-             MORE frames than Python did for this request)\n--- surplus frame ---\n{frame:?}"
+             MORE frames than the fixture recorded for this request)\n--- surplus frame ---\n{frame:?}"
         )),
         _ => Ok(()),
     }
@@ -89,7 +88,7 @@ where
 /// A static pointer can only reach a FIXED path, so array- and map-shaped
 /// payloads get dedicated walkers instead (`mask_ups_list_frames`,
 /// `mask_gps_response_frame`, `compare_get_presets_equivalent`).
-const PARITY_IGNORED_PATHS: &[(&str, &str)] = &[
+const IGNORED_PATHS: &[(&str, &str)] = &[
     // A freshly-created pal's InstanceId is a fresh uuid4. ONLY that field is
     // masked; every other field of the new pal (character_id, nickname,
     // container id, storage_slot, every stat) is still compared strictly.
@@ -200,7 +199,7 @@ fn mask_gps_response_frame(message_type: &str, value: &mut Value) {
 /// place. A pointer that isn't present in `value` is left alone (the frame may
 /// legitimately not carry it, e.g. a `warning` instead of an `add_pal`).
 fn mask_ignored_paths(message_type: &str, value: &mut Value) {
-    for (masked_type, pointer) in PARITY_IGNORED_PATHS {
+    for (masked_type, pointer) in IGNORED_PATHS {
         if *masked_type == message_type {
             if let Some(target) = value.pointer_mut(pointer) {
                 *target = Value::String("<masked>".to_string());
@@ -209,11 +208,13 @@ fn mask_ignored_paths(message_type: &str, value: &mut Value) {
     }
     mask_ups_list_frames(message_type, value);
     mask_gps_response_frame(message_type, value);
-    // `session_id` post-dates the fixtures, so it is DROPPED rather than masked:
-    // a mask can't reconcile a key that is absent on the recorded side.
+    // `session_id` and `world_option_present` post-date the fixtures, so they are
+    // DROPPED rather than masked: a mask can't reconcile a key that is absent on
+    // the recorded side.
     if message_type == "loaded_save_files" {
         if let Some(data) = value.get_mut("data").and_then(Value::as_object_mut) {
             data.remove("session_id");
+            data.remove("world_option_present");
         }
     }
 }
@@ -243,85 +244,6 @@ fn mask_gamepass_backup_progress_line(
         return;
     }
     value["data"] = Value::String("<masked>".to_string());
-}
-
-/// The gamepass corpus's shared on-disk state, written once when the corpus is
-/// captured and read by every replay: `wgs/` (the LIVE container tree, which
-/// `save_modded_save` mutates on each replay), `wgs-pristine/` (the snapshot it
-/// is restored from), `LocalData.sav` (the working copy `unlock_map` zeroes IN
-/// PLACE) and `LocalData.sav.pristine` (its untouched original).
-fn gamepass_tmp_root() -> PathBuf {
-    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .parent()
-        .expect("psp-server crate dir has a parent (rust/)")
-        .join("parity")
-        .join("tmp")
-        .join("gamepass")
-}
-
-fn copy_dir_recursive(source: &std::path::Path, destination: &std::path::Path) {
-    std::fs::create_dir_all(destination).unwrap();
-    for entry in std::fs::read_dir(source).unwrap() {
-        let entry = entry.unwrap();
-        let dest_path = destination.join(entry.file_name());
-        if entry.file_type().unwrap().is_dir() {
-            copy_dir_recursive(&entry.path(), &dest_path);
-        } else {
-            std::fs::copy(entry.path(), &dest_path).unwrap();
-        }
-    }
-}
-
-/// Resets every piece of the gamepass corpus's shared on-disk state a previous
-/// replay may have mutated. Returns `false`, resetting nothing, when the corpus
-/// has never been captured on this machine — the caller then skips it, exactly
-/// like a corpus with no fixtures.
-fn reset_gamepass_corpus_filesystem_state() -> bool {
-    let tmp_root = gamepass_tmp_root();
-    if !tmp_root.exists() {
-        return false;
-    }
-
-    let container_dir = tmp_root
-        .join("wgs")
-        .join("0009000000000000_00000000000000000000000000000000");
-    if container_dir.exists() {
-        std::fs::remove_dir_all(&container_dir).unwrap();
-    }
-    let pristine_wgs = tmp_root.join("wgs-pristine");
-    if pristine_wgs.exists() {
-        copy_dir_recursive(&pristine_wgs, &container_dir);
-    }
-
-    // convert_save_format writes fresh output here on every replay; clear it so
-    // no stale run lingers.
-    let steam_out = tmp_root.join("steam-out");
-    if steam_out.exists() {
-        std::fs::remove_dir_all(&steam_out).unwrap();
-    }
-
-    // unlock_map mutates LocalData.sav IN PLACE; restore it from the untouched
-    // copy written alongside it at capture time.
-    let pristine_local_data = tmp_root.join("LocalData.sav.pristine");
-    if pristine_local_data.exists() {
-        std::fs::copy(&pristine_local_data, tmp_root.join("LocalData.sav")).unwrap();
-    }
-
-    true
-}
-
-/// Reads the gamepass container directory out of the FIRST fixture's recorded
-/// `select_save` request (`data.path` = "<container_dir>/containers.index")
-/// instead of re-resolving it. `loaded_save_files.level` is built from
-/// `settings.save_dir`, so it must match the recorded string byte-for-byte;
-/// recomputing the directory would risk a spurious drive-letter-case or
-/// path-separator mismatch on Windows.
-fn gamepass_save_dir_from_first_fixture(fixture_paths: &[PathBuf]) -> Option<String> {
-    let first = fixture_paths.first()?;
-    let fixture: Value = serde_json::from_str(&std::fs::read_to_string(first).ok()?).ok()?;
-    let path = fixture["request"]["data"]["path"].as_str()?;
-    let (container_dir, _file_name) = path.rsplit_once(['/', '\\'])?;
-    Some(container_dir.to_string())
 }
 
 /// Splits a `download_save_file` filename `<world>_<YYYYMMDD>_<HHMMSS>.zip` into
@@ -372,7 +294,7 @@ fn decode_download_zip_members(response: &Value) -> std::collections::BTreeMap<S
 /// container framing is what legitimately differs between the two zips; the
 /// GVAS INSIDE is what must match.
 fn decompress_sav_container(sav_bytes: &[u8]) -> Vec<u8> {
-    uesave::compression::decompress_save(&mut std::io::Cursor::new(sav_bytes))
+    psp_core::ue::compression::decompress_save(&mut std::io::Cursor::new(sav_bytes))
         .expect("sav container decompresses to GVAS")
 }
 
@@ -389,7 +311,7 @@ fn decompress_sav_container(sav_bytes: &[u8]) -> Vec<u8> {
 /// an order-preserving `IndexMap`), the guild's `GuildExtraSaveDataMap`, and
 /// every `Players/*.sav` (which carry no `worldSaveData` at all).
 fn normalized_member_gvas(compressed_sav: &[u8]) -> Vec<u8> {
-    use uesave::{Property, PropertyKey, StructValue};
+    use psp_core::ue::{Property, PropertyKey, StructValue};
     let mut save = psp_core::savio::read_sav_bytes(compressed_sav).expect("parse sav container");
     if let Some(Property::Struct(StructValue::Struct(world_save_data))) = save
         .root
@@ -402,7 +324,7 @@ fn normalized_member_gvas(compressed_sav: &[u8]) -> Vec<u8> {
             .shift_remove(&PropertyKey::from("MapObjectSaveData"));
     }
     let recompressed = psp_core::savio::write_sav_bytes(&save).expect("re-serialize sav container");
-    uesave::compression::decompress_save(&mut std::io::Cursor::new(recompressed))
+    psp_core::ue::compression::decompress_save(&mut std::io::Cursor::new(recompressed))
         .expect("decompress re-serialized sav container")
 }
 
@@ -469,9 +391,9 @@ fn compare_download_equivalent(
                 .position(|(a, b)| a != b);
             return Err(format!(
                 "{fixture_name}: normalised GVAS of zip member {name:?} differs between \
-                 Python (capture) and Rust (replay) — expected {} bytes, got {} bytes, first \
-                 differing byte at offset {:?}. (MapObjectSaveData is already excluded — see \
-                 normalized_member_gvas.) This is a REAL edit-parity divergence, NOT a \
+                 the recorded fixture (capture) and Rust (replay) — expected {} bytes, got {} \
+                 bytes, first differing byte at offset {:?}. (MapObjectSaveData is already \
+                 excluded — see normalized_member_gvas.) This is a REAL edit divergence, NOT a \
                  maskable field.",
                 expected_gvas.len(),
                 actual_gvas.len(),
@@ -486,14 +408,14 @@ fn compare_download_equivalent(
 /// and the replayed ones express the SAME save subtree in two different,
 /// non-comparable JSON dialects. These are compared structurally instead of
 /// value-exactly — see `compare_raw_data_structural`.
-const PARITY_STRUCTURAL_TYPES: &[&str] = &["get_raw_data"];
+const STRUCTURAL_TYPES: &[&str] = &["get_raw_data"];
 
 /// Sentinel substituted for a structurally-compared `data` field, so the
 /// strict-equality pass afterwards doesn't re-fail on the two necessarily
 /// different payloads.
 const MASKED_STRUCTURAL_DATA: &str = "<structural>";
 
-/// Structural comparator for `PARITY_STRUCTURAL_TYPES`. Errs when either side's
+/// Structural comparator for `STRUCTURAL_TYPES`. Errs when either side's
 /// `data` isn't a JSON object, or when the replayed side is empty though the
 /// recorded one was not — proof on the wire that a target failed to resolve.
 /// Contents beyond that are deliberately UNCHECKED (the two dialects differ).
@@ -512,7 +434,7 @@ fn compare_raw_data_structural(
         return Err(format!(
             "{fixture_name}: expected get_raw_data data was non-empty ({} key(s)) but the \
              actual (Rust) data is empty -- the Rust handler failed to resolve a target \
-             Python resolved",
+             the fixture recorded as resolved",
             expected_data.len()
         ));
     }
@@ -623,7 +545,7 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
         port: 0,
         ui_dir: temp_dir.path().join("ui"),
         data_dir: PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data"),
-        db_path: temp_dir.path().join("parity.db"),
+        db_path: temp_dir.path().join("contract.db"),
         desktop_mode: false,
     })
     .await
@@ -639,33 +561,7 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
             .collect();
         fixture_paths.sort();
 
-        // The gamepass corpus needs its container tree reset to the pristine
-        // snapshot, and settings.save_dir pointed at the directory its own
-        // fixtures were recorded against. save_dir is GLOBAL state shared by
-        // every corpus this one server replays, so the previous value is
-        // restored below rather than leaking into the corpora that follow.
-        let mut previous_save_dir: Option<String> = None;
-        if corpus_dir.file_name().and_then(|name| name.to_str()) == Some("gamepass")
-            && reset_gamepass_corpus_filesystem_state()
-        {
-            if let Some(save_dir) = gamepass_save_dir_from_first_fixture(&fixture_paths) {
-                let gamepass_db_pool = psp_db::open(&temp_dir.path().join("parity.db"))
-                    .await
-                    .expect("open replay server's own sqlite db for gamepass save_dir setup");
-                previous_save_dir = Some(
-                    psp_db::settings::get_settings(&gamepass_db_pool)
-                        .await
-                        .expect("read settings.save_dir before overwriting it")
-                        .save_dir,
-                );
-                psp_db::settings::update_save_dir(&gamepass_db_pool, &save_dir)
-                    .await
-                    .expect("persist gamepass container dir into settings.save_dir");
-                gamepass_db_pool.close().await;
-            }
-        }
-
-        let (mut socket, _) = connect_async(format!("ws://{}/ws/parity-replay", handle.addr))
+        let (mut socket, _) = connect_async(format!("ws://{}/ws/contract-replay", handle.addr))
             .await
             .unwrap();
 
@@ -721,7 +617,7 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
                         panic!("{message}");
                     }
                     value["data"] = Value::String(MASKED_PRESET_ID.to_string());
-                } else if PARITY_STRUCTURAL_TYPES.contains(&response_message_type.as_str()) {
+                } else if STRUCTURAL_TYPES.contains(&response_message_type.as_str()) {
                     if let Err(message) = compare_raw_data_structural(
                         &fixture_path.display().to_string(),
                         expected_frame,
@@ -754,7 +650,7 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
                     value["type"].as_str().unwrap_or(&request_type).to_string();
                 if response_message_type == "get_presets" {
                     value["data"] = Value::String(MASKED_PRESET_ID.to_string());
-                } else if PARITY_STRUCTURAL_TYPES.contains(&response_message_type.as_str()) {
+                } else if STRUCTURAL_TYPES.contains(&response_message_type.as_str()) {
                     value["data"] = Value::String(MASKED_STRUCTURAL_DATA.to_string());
                 }
                 mask_ignored_paths(&response_message_type, value);
@@ -771,43 +667,25 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
             fixtures_replayed += 1;
         }
         socket.close(None).await.ok();
-
-        if let Some(save_dir) = previous_save_dir {
-            let restore_pool = psp_db::open(&temp_dir.path().join("parity.db"))
-                .await
-                .expect("open replay server's own sqlite db to restore settings.save_dir");
-            psp_db::settings::update_save_dir(&restore_pool, &save_dir)
-                .await
-                .expect("restore settings.save_dir after the gamepass corpus");
-            restore_pool.close().await;
-        }
     }
     handle.shutdown().await;
     fixtures_replayed
 }
 
-/// Replays every recorded wire fixture and fails on any deviation: a
-/// regression net for the request/response protocol the frontend consumes,
-/// not a comparison against the now-deleted Python implementation.
+/// Replays every committed wire fixture and fails on any deviation: a
+/// regression net for the request/response protocol the frontend consumes.
 #[tokio::test]
 async fn replay_recorded_wire_fixtures() {
-    let fixtures_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../parity/fixtures");
+    let fixtures_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../contract/fixtures");
     let fixtures_replayed = replay_all_fixtures(&fixtures_root).await;
-    if fixtures_replayed == 0 {
-        // This test PASSES when there are no fixtures, and the harness swallows
-        // `eprintln!` on a passing test unless `--nocapture` is given. Writing
-        // straight to `std::io::stderr()` bypasses that capture hook, so the
-        // skip note shows up in a plain `cargo test` run.
-        use std::io::Write;
-        let _ = writeln!(
-            std::io::stderr(),
-            "SKIPPED: no parity fixtures at {} — fixtures are local-only, \
-             gitignored, and can never be re-captured (their Python source \
-             is gone from this repo); this is expected on a fresh clone/CI \
-             (see parity/README.md)",
-            fixtures_root.display()
-        );
-    }
+    // The golden corpus is committed, so zero replayed fixtures means it went
+    // missing -- a hard failure, never a silent green with no coverage.
+    assert!(
+        fixtures_replayed > 0,
+        "no committed wire-contract fixtures replayed from {} -- the golden \
+         corpus under contract/fixtures/ must be present (see contract/README.md)",
+        fixtures_root.display()
+    );
 }
 
 /// Proves the harness discriminates at all: with no fixtures on disk, the test
@@ -992,7 +870,7 @@ fn compare_raw_data_structural_errs_when_actual_is_empty_but_expected_was_not() 
 
     let error =
         compare_raw_data_structural("fixtures/tools/005_get_raw_data.json", &expected, &actual)
-            .expect_err("an unresolved Rust target when Python resolved one must be reported");
+            .expect_err("an unresolved Rust target the fixture recorded as resolved must be reported");
     assert!(
         error.contains("fixtures/tools/005_get_raw_data.json"),
         "error must name the offending fixture; got: {error}"
@@ -1610,9 +1488,9 @@ fn compare_get_presets_equivalent_errs_when_pal_preset_association_differs() {
 }
 
 /// The single-object UPS frames must mask EXACTLY their timestamp /
-/// instance-id fields and nothing else. The UPS fixtures are local-only, so the
-/// live replay skips them in CI and these synthetic checks are the standing
-/// proof the masking is right.
+/// instance-id fields and nothing else. The committed replay corpus does not
+/// cover UPS, so these synthetic checks are the standing proof the masking is
+/// right.
 #[test]
 fn mask_ignored_paths_masks_ups_single_object_frames() {
     let mut add = serde_json::json!({
@@ -1805,8 +1683,8 @@ fn ups_pal_list_masking_is_neither_too_weak_nor_too_strong() {
 /// `mask_gps_response_frame` must mask EXACTLY `instance_id` in every pal of the
 /// slot-keyed map and leave everything else alone: other pal fields, the slot
 /// keys, the no-save / no-gps-file shapes (no pal map to walk), and any other
-/// message type. The GPS corpus needs a save this checkout does not carry, so
-/// the live replay skips it and these synthetic checks stand in for it.
+/// message type. The committed replay corpus does not cover GPS, so these
+/// synthetic checks stand in for it.
 #[test]
 fn mask_gps_response_frame_masks_only_instance_id_per_slot() {
     let mut response = serde_json::json!({

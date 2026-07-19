@@ -1,7 +1,7 @@
 mod common;
 
 use psp_core::domain::world;
-use uesave::{Property, StructValue};
+use psp_core::ue::{Property, StructValue};
 
 /// Real-save validation of `PalDynamicItem.id.local_id_in_created_world`, the
 /// field path `build_dynamic_item_index` keys by. world1 carries ~43 real
@@ -36,7 +36,7 @@ fn dynamic_item_index_resolves_every_real_entry_by_local_id_in_created_world() {
         let StructValue::Struct(item_props) = &entries[position] else {
             panic!("indexed position {position} is not a StructValue::Struct");
         };
-        let Some(Property::Struct(StructValue::PalDynamicItem(dynamic_item))) =
+        let Some(Property::Struct(StructValue::Game(psp_core::ue::PalStruct::DynamicItem(dynamic_item)))) =
             psp_core::props::get(item_props, &["RawData"])
         else {
             panic!("indexed position {position} has no PalDynamicItem RawData");
@@ -52,9 +52,7 @@ fn dynamic_item_index_resolves_every_real_entry_by_local_id_in_created_world() {
 
 #[test]
 fn character_index_finds_every_pal_and_player() {
-    let Some(session) = common::load_corpus_session() else {
-        return;
-    };
+    let session = common::load_corpus_session();
     let index = world::build_character_index(&session.level);
     let entries = world::character_map(&session.level).unwrap();
     assert_eq!(
@@ -70,9 +68,11 @@ fn character_index_finds_every_pal_and_player() {
 
 #[test]
 fn player_entries_are_flagged() {
-    let Some(session) = common::load_corpus_session() else {
-        return;
-    };
+    // A complete fixture (every player-flagged map entry has a committed
+    // `.sav`), so this can assert exact equality -- catching both under- and
+    // over-flagging. The rich `v1_relics` corpus is trimmed (ghost player
+    // entries with no `.sav`), where flagged > loaded, so it can't be used here.
+    let session = common::load_fixture_session("world1");
     let entries = world::character_map(&session.level).unwrap();
     let player_count = entries.iter().filter(|e| world::entry_is_player(e)).count();
     assert_eq!(player_count, session.player_summaries.len());
@@ -80,9 +80,7 @@ fn player_entries_are_flagged() {
 
 #[test]
 fn invalidation_clears_all_caches() {
-    let Some(mut session) = common::load_corpus_session() else {
-        return;
-    };
+    let mut session = common::load_corpus_session();
     session.caches.character_index = Some(world::build_character_index(&session.level));
     session.caches.item_container_index = Some(world::build_item_container_index(&session.level));
     session.invalidate_performance_caches();
@@ -102,9 +100,7 @@ fn invalidation_clears_all_caches() {
 /// gone".
 #[test]
 fn stale_character_index_after_removal_would_resolve_the_wrong_entry() {
-    let Some(mut session) = common::load_corpus_session() else {
-        return;
-    };
+    let mut session = common::load_corpus_session();
     let entries_before_removal = world::character_map(&session.level).unwrap();
     // A single-entry corpus leaves nothing behind at position 0 to be the
     // "different existing entry" this test is about.

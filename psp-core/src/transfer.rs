@@ -2,15 +2,15 @@
 //!
 //! A guild's data is split across two representations: `group_id` and
 //! `individual_character_handle_ids` are typed fields on
-//! `uesave::games::palworld::PalGroupData`, while `players`, `guild_name`,
+//! `crate::ue::games::palworld::PalGroupData`, while `players`, `guild_name`,
 //! `admin_player_uid`, `base_ids`, `base_camp_level` and
 //! `map_object_instance_ids_base_camp_points` live in the opaque
 //! `PalGroupData.remaining_data` tail, decoded by `domain::guild_tail`.
 
 use std::collections::HashSet;
 
-use uesave::games::palworld::PalInstanceId;
-use uesave::{MapEntry, Properties, Property, PropertyKey, Save, StructValue, ValueVec};
+use crate::ue::games::palworld::PalInstanceId;
+use crate::ue::{MapEntry, Properties, Property, PropertyKey, Save, StructValue, ValueVec};
 use uuid::Uuid;
 
 use crate::domain::guild_tail::{self, GuildPlayerInfo};
@@ -113,7 +113,7 @@ pub fn transfer_player(
 
     let target_instance_id = if spawn_mode {
         progress("Spawning player into target save...");
-        // `uesave::Save` is not `Clone`, so an independent copy of the source
+        // `crate::ue::Save` is not `Clone`, so an independent copy of the source
         // player is obtained by re-parsing its own bytes.
         let Some(file_ref) = source.player_file_refs.get(&source_player_uid).cloned() else {
             return Err(TransferError::Rejected(

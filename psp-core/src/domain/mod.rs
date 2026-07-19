@@ -10,5 +10,6 @@ pub mod relic;
 pub mod summaries;
 pub mod uid_swap;
 pub mod world;
+pub mod world_option;
 
 pub use raw::RawTarget;

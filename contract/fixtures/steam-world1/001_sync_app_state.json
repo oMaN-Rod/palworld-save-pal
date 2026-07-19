@@ -1,0 +1,85 @@
+{
+  "request": {
+    "type": "sync_app_state",
+    "data": null
+  },
+  "responses": [
+    {
+      "type": "get_settings",
+      "data": {
+        "language": "en",
+        "save_dir": "C:\\Users\\OmarRodriguez\\AppData\\Local\\Pal\\Saved\\SaveGames",
+        "clone_prefix": "©️",
+        "new_pal_prefix": "🆕",
+        "debug_mode": false,
+        "cheat_mode": false
+      }
+    },
+    {
+      "type": "loaded_save_files",
+      "data": {
+        "level": "D:\\project\\unreal-palworld-save-tools\\palworld-save-pal\\tests\\fixtures\\saves\\world1\\Level.sav",
+        "players": [
+          "8c2f1930-0000-0000-0000-000000000000",
+          "43797f87-0000-0000-0000-000000000000"
+        ],
+        "guilds": [
+          "54491484-4e6c-7327-70b2-868f350929f6",
+          "004e71b6-4166-2b71-eb6a-539ae931ca34"
+        ],
+        "world_name": "Autosave_W",
+        "type": "steam",
+        "size": 112912,
+        "has_gps": true
+      }
+    },
+    {
+      "type": "get_player_summaries",
+      "data": {
+        "8c2f1930-0000-0000-0000-000000000000": {
+          "uid": "8c2f1930-0000-0000-0000-000000000000",
+          "nickname": "O",
+          "level": 65,
+          "guild_id": "54491484-4e6c-7327-70b2-868f350929f6",
+          "pal_count": 11,
+          "last_online_time": "2026-04-07T16:36:46.740997",
+          "loaded": false
+        },
+        "43797f87-0000-0000-0000-000000000000": {
+          "uid": "43797f87-0000-0000-0000-000000000000",
+          "nickname": "sky",
+          "level": 2,
+          "guild_id": "004e71b6-4166-2b71-eb6a-539ae931ca34",
+          "pal_count": 0,
+          "last_online_time": "2026-04-07T16:36:46.740997",
+          "loaded": false
+        }
+      }
+    },
+    {
+      "type": "get_guild_summaries",
+      "data": {
+        "54491484-4e6c-7327-70b2-868f350929f6": {
+          "id": "54491484-4e6c-7327-70b2-868f350929f6",
+          "name": "Unnamed Guild",
+          "admin_player_uid": "8c2f1930-0000-0000-0000-000000000000",
+          "player_count": 1,
+          "base_count": 1,
+          "level": 1,
+          "pal_count": 0,
+          "loaded": false
+        },
+        "004e71b6-4166-2b71-eb6a-539ae931ca34": {
+          "id": "004e71b6-4166-2b71-eb6a-539ae931ca34",
+          "name": "Unnamed Guild",
+          "admin_player_uid": "43797f87-0000-0000-0000-000000000000",
+          "player_count": 1,
+          "base_count": 0,
+          "level": 1,
+          "pal_count": 0,
+          "loaded": false
+        }
+      }
+    }
+  ]
+}

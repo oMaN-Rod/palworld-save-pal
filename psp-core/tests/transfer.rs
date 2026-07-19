@@ -118,31 +118,11 @@ fn world1_true_spawn_mode_inserts_cloned_player() {
     );
 }
 
-/// The same assertions against an external corpus, when `PSP_TEST_LEVEL_SAV`
-/// points at one.
+/// The same assertions against the committed `v1_relics` corpus fixture.
 #[test]
 fn corpus_spawn_mode_transfer_copies_player_into_target() {
-    let level_path = match std::env::var("PSP_TEST_LEVEL_SAV") {
-        Ok(path) => path,
-        Err(_) => {
-            eprintln!("skipping: PSP_TEST_LEVEL_SAV not set");
-            return;
-        }
-    };
-    // `PSP_TEST_LEVEL_SAV` names a Level.sav; `load_corpus_session` reads
-    // `PSP_TEST_SAVE_DIR`. Point the corpus loader at the Level.sav's directory
-    // when only PSP_TEST_LEVEL_SAV is provided.
-    if std::env::var("PSP_TEST_SAVE_DIR").is_err() {
-        if let Some(parent) = std::path::Path::new(&level_path).parent() {
-            std::env::set_var("PSP_TEST_SAVE_DIR", parent);
-        }
-    }
-    let Some(mut source) = common::load_corpus_session() else {
-        return;
-    };
-    let Some(mut target) = common::load_corpus_session() else {
-        return;
-    };
+    let mut source = common::load_corpus_session();
+    let mut target = common::load_corpus_session();
 
     assert_unknown_source_rejected(&mut source, &mut target);
 

@@ -1,0 +1,46 @@
+{
+  "request": {
+    "type": "delete_guild",
+    "data": {
+      "guild_id": "54491484-4e6c-7327-70b2-868f350929f6",
+      "origin": "edit"
+    }
+  },
+  "responses": [
+    {
+      "type": "progress_message",
+      "data": "Deleting guild Unnamed Guild with 1 players"
+    },
+    {
+      "type": "progress_message",
+      "data": "Deleting player O with 12 pals"
+    },
+    {
+      "type": "progress_message",
+      "data": "Deleting 7 pals of player O from PalBox"
+    },
+    {
+      "type": "progress_message",
+      "data": "Deleting 5 pals of player O from Party"
+    },
+    {
+      "type": "progress_message",
+      "data": "Deleting base 4bb24de8-4965-af19-f596-e296089e8ab0"
+    },
+    {
+      "type": "progress_message",
+      "data": "Deleting item containers of guild Unnamed Guild"
+    },
+    {
+      "type": "progress_message",
+      "data": "Deleting character containers of guild Unnamed Guild"
+    },
+    {
+      "type": "delete_guild",
+      "data": {
+        "guild_id": "54491484-4e6c-7327-70b2-868f350929f6",
+        "origin": "edit"
+      }
+    }
+  ]
+}

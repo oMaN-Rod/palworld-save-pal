@@ -1,0 +1,18 @@
+{
+  "request": {
+    "type": "delete_player",
+    "data": {
+      "player_id": "8c2f1930-0000-0000-0000-000000000000",
+      "origin": "edit"
+    }
+  },
+  "responses": [
+    {
+      "type": "delete_player",
+      "data": {
+        "player_id": null,
+        "origin": "edit"
+      }
+    }
+  ]
+}

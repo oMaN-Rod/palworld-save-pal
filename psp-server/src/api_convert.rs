@@ -10,9 +10,8 @@ use axum::http::{header, StatusCode};
 use axum::response::{IntoResponse, Response};
 use axum::routing::post;
 use axum::Router;
-use uesave::compression::CompressionFormat;
-use uesave::games::palworld::palworld_types;
-use uesave::{Save, SaveReader};
+use psp_core::ue::games::palworld::palworld_types;
+use psp_core::ue::{Palworld, Save, SaveReader};
 
 use crate::AppState;
 
@@ -50,6 +49,7 @@ async fn sav_to_json(mut multipart: Multipart) -> Response {
     // Blocking parse of a potentially huge save — keep it off the async workers.
     let conversion = tokio::task::spawn_blocking(move || -> Result<String, String> {
         let save = SaveReader::new()
+            .game::<Palworld>()
             .types(palworld_types())
             .read(Cursor::new(file_bytes.as_ref()))
             .map_err(|parse_error| parse_error.to_string())?;
@@ -79,7 +79,7 @@ async fn json_to_sav(body: Bytes) -> Response {
         let save: Save =
             serde_json::from_slice(&body).map_err(|parse_error| parse_error.to_string())?;
         let mut sav_bytes = Vec::new();
-        save.write_compressed(&mut sav_bytes, CompressionFormat::Oodle)
+        save.write_plm(&mut sav_bytes)
             .map_err(|write_error| write_error.to_string())?;
         Ok(sav_bytes)
     })

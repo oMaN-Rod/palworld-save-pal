@@ -153,33 +153,14 @@ fn deep_swap_over_real_level_sav_properties_changes_nothing() {
 
     assert_eq!(
         before, after,
-        "the deep ownership-key swap must be a no-op on real save data \
-         (parity with Python's real-save-inert _deep_swap_uids)"
+        "the deep ownership-key swap must be a no-op on real save data"
     );
 }
 
-/// The same same-uid rejection against an external corpus, when
-/// `PSP_TEST_LEVEL_SAV` points at one.
+/// The same same-uid rejection against the committed `v1_relics` corpus fixture.
 #[test]
 fn corpus_swapping_same_uid_is_rejected() {
-    let level_path = match std::env::var("PSP_TEST_LEVEL_SAV") {
-        Ok(path) => path,
-        Err(_) => {
-            eprintln!("skipping: PSP_TEST_LEVEL_SAV not set");
-            return;
-        }
-    };
-    // `PSP_TEST_LEVEL_SAV` names a Level.sav; `load_corpus_session` reads
-    // `PSP_TEST_SAVE_DIR`. Point the corpus loader at the Level.sav's
-    // directory when only PSP_TEST_LEVEL_SAV is provided.
-    if std::env::var("PSP_TEST_SAVE_DIR").is_err() {
-        if let Some(parent) = std::path::Path::new(&level_path).parent() {
-            std::env::set_var("PSP_TEST_SAVE_DIR", parent);
-        }
-    }
-    let Some(mut session) = common::load_corpus_session() else {
-        return;
-    };
+    let mut session = common::load_corpus_session();
     let uid = *session
         .player_summaries
         .keys()

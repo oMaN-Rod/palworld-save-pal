@@ -115,5 +115,16 @@ async fn export_and_import_preset_require_desktop_dialog() {
     assert_eq!(import_response["type"], "error");
     assert_eq!(import_response["data"], "File dialog not available");
 
+    common::send_json(
+        &mut ws,
+        serde_json::json!({"type": "export_presets", "data": [
+            {"preset_id": preset_id, "preset_type": "inventory", "preset_name": "Kit"}
+        ]}),
+    )
+    .await;
+    let bulk_export_response = common::next_json(&mut ws).await;
+    assert_eq!(bulk_export_response["type"], "error");
+    assert_eq!(bulk_export_response["data"], "File dialog not available");
+
     server.handle.shutdown().await;
 }

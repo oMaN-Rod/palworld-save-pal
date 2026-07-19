@@ -1,0 +1,144 @@
+{
+  "request": {
+    "type": "request_player_details",
+    "data": {
+      "player_id": "43797f87-0000-0000-0000-000000000000",
+      "origin": "edit"
+    }
+  },
+  "responses": [
+    {
+      "type": "progress_message",
+      "data": "Loading player sky..."
+    },
+    {
+      "type": "progress_message",
+      "data": "Loading pals..."
+    },
+    {
+      "type": "get_player_details_response",
+      "data": {
+        "player": {
+          "pals": {},
+          "common_container": {
+            "id": "01644ff7-4d86-e2b5-2c54-d6a0db3d6be7",
+            "type": "CommonContainer",
+            "slots": [
+              {
+                "dynamic_item": null,
+                "slot_index": 0,
+                "count": 2,
+                "static_id": "Wood",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              }
+            ],
+            "key": null,
+            "slot_num": 42
+          },
+          "essential_container": {
+            "id": "4a2eea15-4a3f-2893-ed07-699a5b09378b",
+            "type": "EssentialContainer",
+            "slots": [],
+            "key": null,
+            "slot_num": 200
+          },
+          "weapon_load_out_container": {
+            "id": "67182c81-45bf-c2cc-df43-949d31a1f472",
+            "type": "WeaponLoadOutContainer",
+            "slots": [],
+            "key": null,
+            "slot_num": 4
+          },
+          "player_equipment_armor_container": {
+            "id": "b95d7975-48b9-bd19-b8e3-58977f4770c6",
+            "type": "PlayerEquipArmorContainer",
+            "slots": [],
+            "key": null,
+            "slot_num": 9
+          },
+          "food_equip_container": {
+            "id": "99fdfbba-4f57-e97a-246e-498dfbc78d05",
+            "type": "FoodEquipContainer",
+            "slots": [],
+            "key": null,
+            "slot_num": 5
+          },
+          "pal_box": {
+            "id": "ad98d89e-4c5f-7de6-b63c-44885aa97d0c",
+            "player_uid": "43797f87-0000-0000-0000-000000000000",
+            "type": "PalBox",
+            "size": 960,
+            "slots": []
+          },
+          "party": {
+            "id": "689d4dd2-4082-9766-8682-dcafa68353d6",
+            "player_uid": "43797f87-0000-0000-0000-000000000000",
+            "type": "Party",
+            "size": 5,
+            "slots": []
+          },
+          "guild_id": "004e71b6-4166-2b71-eb6a-539ae931ca34",
+          "uid": "43797f87-0000-0000-0000-000000000000",
+          "instance_id": "09544482-431b-ba45-6187-72abf62e6905",
+          "nickname": "sky",
+          "level": 2,
+          "technologies": [
+            "Workbench",
+            "Product_Axe_Grade_01",
+            "Product_Pickaxe_Grade_01",
+            "HandTorch",
+            "Battle_MeleeWeapon_Bat",
+            "SkinChange",
+            "GlobalPalStorage"
+          ],
+          "technology_points": 7,
+          "boss_technology_points": 0,
+          "exp": 12,
+          "hp": 500000,
+          "stomach": 97.24983215332031,
+          "sanity": 100.0,
+          "status_point_list": {
+            "max_hp": 0,
+            "max_sp": 0,
+            "attack": 0,
+            "weight": 0,
+            "capture_rate": 0,
+            "work_speed": 0
+          },
+          "ext_status_point_list": {
+            "max_hp": 0,
+            "max_sp": 0,
+            "attack": 0,
+            "weight": 0,
+            "work_speed": 0
+          },
+          "pal_box_id": "ad98d89e-4c5f-7de6-b63c-44885aa97d0c",
+          "otomo_container_id": "689d4dd2-4082-9766-8682-dcafa68353d6",
+          "completed_missions": [
+            "Main_UnlockFastTravel",
+            "Main_PickupWood"
+          ],
+          "current_missions": [
+            "Main_GainStatus"
+          ],
+          "unlocked_fast_travel_points": [
+            "41E36D9A4B2BA79A3AD1B7B83B16F77D"
+          ],
+          "collected_effigies": [],
+          "collected_relics": {},
+          "defeated_bosses": [],
+          "effigy_possess_num": 0,
+          "location": {
+            "x": -133201.05165684057,
+            "y": -95647.28115598096,
+            "z": -2000.2567408775794
+          },
+          "last_online_time": "2026-04-07T16:36:46.740997",
+          "dps": null
+        },
+        "player_id": "43797f87-0000-0000-0000-000000000000",
+        "origin": "edit"
+      }
+    }
+  ]
+}
