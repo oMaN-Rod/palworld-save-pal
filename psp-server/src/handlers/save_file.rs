@@ -826,7 +826,8 @@ const BACKUP_ROOT_FILES: [&str; 4] = [
     "WorldOption.sav",
 ];
 
-/// Copies `save_dir` to `{backup_base}/{basename}_{%Y-%m-%d-%H-%M}`, appending a
+/// Selectively copies whitelisted root files and validated `Players/` saves from
+/// `save_dir` to `{backup_base}/{basename}_{%Y-%m-%d-%H-%M}`, appending a
 /// `_{%S}` suffix on collision. `backup_base` is a parameter (not a constant) so
 /// tests can point it at a `TempDir` instead of the real backups root. A missing
 /// `save_dir` reports "skipping backup" rather than failing.
