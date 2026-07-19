@@ -789,6 +789,17 @@ fn save_modded_player_stem(player_id: &Uuid) -> String {
     player_id.simple().to_string().to_uppercase()
 }
 
+/// A `Players/` entry that is a genuine player save: a 32-char hex UUID stem,
+/// optionally suffixed `_dps`, ending in `.sav`. Everything else in that
+/// directory (junk `.sav`, non-hex stems, subfolders) is excluded from backups.
+fn is_player_save_file(file_name: &str) -> bool {
+    let Some(stem) = file_name.strip_suffix(".sav") else {
+        return false;
+    };
+    let stem = stem.strip_suffix("_dps").unwrap_or(stem);
+    stem.len() == 32 && stem.bytes().all(|byte| byte.is_ascii_hexdigit())
+}
+
 fn copy_dir_recursive(src: &Path, dst: &Path) -> std::io::Result<()> {
     std::fs::create_dir_all(dst)?;
     for dir_entry in std::fs::read_dir(src)? {
@@ -1620,6 +1631,32 @@ mod tests {
         );
         // Guard the divergence directly: same uuid, opposite case.
         assert_ne!(save_modded_player_stem(&uid), download_player_stem(&uid));
+    }
+
+    #[test]
+    fn is_player_save_file_accepts_uuid_saves_and_rejects_junk() {
+        assert!(is_player_save_file(
+            "00000000000000000000000000000001.sav"
+        ));
+        assert!(is_player_save_file(
+            "0123456789ABCDEFfedcba9876543210.sav"
+        ));
+        assert!(is_player_save_file(
+            "00000000000000000000000000000001_dps.sav"
+        ));
+
+        assert!(!is_player_save_file("notes.sav")); // non-hex stem
+        assert!(!is_player_save_file("0000.sav")); // too short
+        assert!(!is_player_save_file(
+            "00000000000000000000000000000001.txt"
+        )); // wrong extension
+        assert!(!is_player_save_file(
+            "0000000000000000000000000000000G.sav"
+        )); // non-hex digit
+        assert!(!is_player_save_file(
+            "00000000000000000000000000000001"
+        )); // no extension
+        assert!(!is_player_save_file("_dps.sav")); // empty hex stem
     }
 
     /// `OrderedMap<i32, _>` must round-trip the string-keyed JSON objects the
