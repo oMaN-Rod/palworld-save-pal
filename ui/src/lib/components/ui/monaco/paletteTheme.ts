@@ -6,14 +6,32 @@ export const EDITOR_THEME_NAME = 'psp-editor';
 /** Reads a CSS custom property's value, e.g. `--color-primary-300` → `rgb(...)`. */
 export type VarReader = (name: string) => string;
 
-/** `rgb(1, 112, 243)` (or `rgba(...)`) → `0170f3`. Monaco token foregrounds are
- *  bare 6-digit hex; editor `colors` want a leading `#`, added by the caller. */
-export function rgbToHex(rgb: string): string {
-	const match = rgb.match(/(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
-	if (!match) return '000000';
-	return match
-		.slice(1, 4)
-		.map((channel) => Number(channel).toString(16).padStart(2, '0'))
+/** A CSS color → `0170f3` (bare 6-digit hex; editor `colors` want a leading `#`,
+ *  added by the caller). Handles the forms getComputedStyle actually returns:
+ *  `rgb(1, 112, 243)` and `rgba(...)` in dev, but hex (`#0170f3`) or
+ *  space-separated `rgb(1 112 243)` once production CSS minification (Lightning
+ *  CSS via Tailwind v4) rewrites the theme's `rgb(...)` custom properties. */
+export function rgbToHex(color: string): string {
+	const value = color.trim();
+
+	const hexMatch = value.match(/^#([0-9a-fA-F]{3,8})$/);
+	if (hexMatch) {
+		let digits = hexMatch[1];
+		if (digits.length === 3 || digits.length === 4) {
+			digits = digits
+				.slice(0, 3)
+				.split('')
+				.map((c) => c + c)
+				.join('');
+		}
+		return digits.slice(0, 6).padEnd(6, '0').toLowerCase();
+	}
+
+	const channels = value.match(/\d+(?:\.\d+)?/g);
+	if (!channels || channels.length < 3) return '000000';
+	return channels
+		.slice(0, 3)
+		.map((channel) => Math.round(Number(channel)).toString(16).padStart(2, '0'))
 		.join('');
 }
 
