@@ -1,13 +1,25 @@
 <script lang="ts">
 	import { getAppState } from '$states';
-	import { Card, Tooltip, TooltipButton } from '$components/ui';
-	import { Github } from 'lucide-svelte';
+	import { Card, Tooltip } from '$components/ui';
 	import Saitama from '$lib/assets/img/app/saitama.webp';
+	import githubIcon from '$lib/assets/img/app/github.svg';
+	import discordIcon from '$lib/assets/img/app/discord.svg';
+	import buyMeACoffee from '$lib/assets/img/app/buymeacoffee.png';
+	import { send } from '$utils/websocketUtils';
+	import { MessageType } from '$types';
+	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';
-	import { c } from '$lib/utils/commonTranslations';
-
+	
 	const appState = getAppState();
+	const isDesktopMode = PUBLIC_DESKTOP_MODE === 'true';
+
+	function openLink(event: MouseEvent, url: string) {
+		if (isDesktopMode) {
+			event.preventDefault();
+			send(MessageType.OPEN_URL, url);
+		}
+	}
 
 	function tilt(node: HTMLElement) {
 		function onEnter() {
@@ -54,16 +66,42 @@
 							<img src={Saitama} alt="Saitama" class="inline-block h-48 w-48" />
 						{/snippet}
 					</Tooltip>
-					<div class="flex items-center space-x-2">
-						<span>{m.about_check_out()}</span>
-						<a
-							href="https://github.com/oMaN-Rod/palworld-save-pal"
-							target="_blank"
-							rel="noopener noreferrer"
-							class="text-primary-400 hover:text-primary-300 z-10 hover:underline"><Github /></a
-						>
-						<span>{m.about_for_more_info()}</span>
-					</div>
+				</div>
+			</Card>
+		</div>
+		<div use:tilt class="card-tilt">
+			<Card>
+				<div class="flex gap-2 w-full justify-between px-4">
+					<a
+						href="https://github.com/oMaN-Rod/palworld-save-pal"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="z-10 flex flex-col items-center gap-2 transition-opacity hover:opacity-80"
+						onclick={(event) => openLink(event, 'https://github.com/oMaN-Rod/palworld-save-pal')}
+					>
+						<img src={githubIcon} alt="GitHub" class="h-8 w-8" />
+						<span class="text-xs align-bottom">{m.about_link_github()}</span>
+					</a>
+					<a
+						href="https://discord.gg/YWZFPy9G8J"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="z-10 flex flex-col items-center gap-2 transition-opacity hover:opacity-80"
+						onclick={(event) => openLink(event, 'https://discord.gg/YWZFPy9G8J')}
+					>
+						<img src={discordIcon} alt="Discord" class="h-8 w-8" />
+						<span class="text-xs align-bottom">{m.about_link_discord()}</span>
+					</a>
+					<a
+						href="https://buymeacoffee.com/i_am_o"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="z-10 flex flex-col items-center gap-2 transition-opacity hover:opacity-80"
+						onclick={(event) => openLink(event, 'https://buymeacoffee.com/i_am_o')}
+					>
+						<img src={buyMeACoffee} alt="Buy me a coffee" class="h-8" />
+						<span class="text-xs align-bottom">{m.about_link_support()}</span>
+					</a>
 				</div>
 			</Card>
 		</div>

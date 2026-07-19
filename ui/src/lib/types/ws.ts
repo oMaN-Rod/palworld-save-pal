@@ -33,6 +33,7 @@ export enum MessageType {
 	GET_PALS = 'get_pals',
 	SET_TECHNOLOGY_DATA = 'set_technology_data',
 	OPEN_IN_BROWSER = 'open_in_browser',
+	OPEN_URL = 'open_url',
 	GET_EXP_DATA = 'get_exp_data',
 	GET_RELIC_DATA = 'get_relic_data',
 	GET_VERSION = 'get_version',

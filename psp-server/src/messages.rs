@@ -184,6 +184,7 @@ define_message_types! {
     UpdateWorldOption => "update_world_option",
     ExportPresets => "export_presets",
     SaveEditedSav => "save_edited_sav",
+    OpenUrl => "open_url",
 }
 
 #[cfg(test)]
@@ -332,6 +333,7 @@ mod tests {
         "update_world_option",
         "export_presets",
         "save_edited_sav",
+        "open_url",
     ];
 
     #[test]
@@ -369,6 +371,12 @@ mod tests {
             MessageType::from_wire("update_world_option"),
             Some(MessageType::UpdateWorldOption)
         );
+    }
+
+    #[test]
+    fn open_url_message_round_trips_wire_name() {
+        assert_eq!(MessageType::OpenUrl.as_wire(), "open_url");
+        assert_eq!(MessageType::from_wire("open_url"), Some(MessageType::OpenUrl));
     }
 
     #[test]

@@ -341,6 +341,9 @@ async fn route(
         MessageType::OpenInBrowser => {
             handlers::system::handle_open_in_browser(serde_json::from_value(data)?, ctx).await
         }
+        MessageType::OpenUrl => {
+            handlers::system::handle_open_url(serde_json::from_value(data)?, ctx).await
+        }
         MessageType::ListServers => handlers::servers::handle_list_servers(data, ctx).await,
         MessageType::GetServer => {
             handlers::servers::handle_get_server(serde_json::from_value(data)?, ctx).await

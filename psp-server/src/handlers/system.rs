@@ -139,10 +139,61 @@ pub async fn handle_open_in_browser(
     Ok(())
 }
 
+/// Only http(s) URLs may be handed to `opener`; anything else (a `file://`
+/// path, a `javascript:` payload, an arbitrary scheme) is refused so a WS
+/// message can't coax the host into launching an unexpected handler.
+fn is_openable_url(url: &str) -> bool {
+    url.starts_with("http://") || url.starts_with("https://")
+}
+
+/// Opens an external URL in the OS default browser. The Tauri webview drops
+/// `<a target="_blank">` navigations, so desktop links route here instead;
+/// `opener::open` hands the URL to the host, escaping the webview.
+pub async fn handle_open_url(
+    data: String,
+    _ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let url = data.trim();
+    if !is_openable_url(url) {
+        return Err(HandlerError::Other(format!(
+            "Refusing to open non-http(s) URL: {url}"
+        )));
+    }
+    opener::open(url)
+        .map_err(|open_error| HandlerError::Other(format!("Failed to open URL {url}: {open_error}")))?;
+    Ok(())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
     use crate::test_support::TestContext;
+
+    #[test]
+    fn is_openable_url_accepts_only_http_schemes() {
+        assert!(is_openable_url("http://localhost:5173"));
+        assert!(is_openable_url("https://github.com/oMaN-Rod/palworld-save-pal"));
+        assert!(is_openable_url("https://buymeacoffee.com/i_am_o"));
+
+        assert!(!is_openable_url("file:///etc/passwd"));
+        assert!(!is_openable_url("javascript:alert(1)"));
+        assert!(!is_openable_url("ftp://example.com"));
+        assert!(!is_openable_url("github.com"));
+        assert!(!is_openable_url(""));
+    }
+
+    #[tokio::test]
+    async fn handle_open_url_rejects_non_http_scheme() {
+        let mut test = TestContext::new(|_| {}).await;
+        let mut ctx = HandlerCtx {
+            session: &mut test.session,
+            app: &test.app,
+            emitter: &test.emitter,
+            attachment: None,
+        };
+        let result = handle_open_url("file:///etc/passwd".to_string(), &mut ctx).await;
+        assert!(result.is_err());
+    }
 
     #[tokio::test]
     async fn sync_app_state_without_save_emits_only_settings() {
