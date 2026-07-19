@@ -815,6 +815,17 @@ fn copy_dir_recursive(src: &Path, dst: &Path) -> std::io::Result<()> {
     Ok(())
 }
 
+/// World-save files a backup keeps. Only these top-level names are copied;
+/// anything else in the directory is skipped so stray user files never bloat
+/// the backups root. Each is optional (copied only if present); load-time
+/// validation guarantees `Level.sav`, the rest may be absent.
+const BACKUP_ROOT_FILES: [&str; 4] = [
+    "Level.sav",
+    "LevelMeta.sav",
+    "LocalData.sav",
+    "WorldOption.sav",
+];
+
 /// Copies `save_dir` to `{backup_base}/{basename}_{%Y-%m-%d-%H-%M}`, appending a
 /// `_{%S}` suffix on collision. `backup_base` is a parameter (not a constant) so
 /// tests can point it at a `TempDir` instead of the real backups root. A missing
@@ -837,19 +848,38 @@ fn backup_save_directory(
     }
 
     progress("Backing up save directory... 🤓");
-    if save_dir.exists() {
-        copy_dir_recursive(save_dir, &backup_path).map_err(CoreError::Io)?;
-    } else {
+    if !save_dir.exists() {
         progress(&format!(
             "Save directory {} not found, skipping backup",
             save_dir.display()
         ));
+        return Ok(());
     }
 
-    let nested_backup_dir = backup_path.join("backup");
-    if nested_backup_dir.exists() {
-        std::fs::remove_dir_all(&nested_backup_dir).map_err(CoreError::Io)?;
+    std::fs::create_dir_all(&backup_path).map_err(CoreError::Io)?;
+    for name in BACKUP_ROOT_FILES {
+        let source = save_dir.join(name);
+        if source.is_file() {
+            std::fs::copy(&source, backup_path.join(name)).map_err(CoreError::Io)?;
+        }
     }
+
+    let players_dir = save_dir.join("Players");
+    if players_dir.is_dir() {
+        let backup_players_dir = backup_path.join("Players");
+        std::fs::create_dir_all(&backup_players_dir).map_err(CoreError::Io)?;
+        for entry in std::fs::read_dir(&players_dir).map_err(CoreError::Io)? {
+            let entry = entry.map_err(CoreError::Io)?;
+            let entry_path = entry.path();
+            let file_name = entry.file_name();
+            let file_name = file_name.to_string_lossy();
+            if entry_path.is_file() && is_player_save_file(&file_name) {
+                std::fs::copy(&entry_path, backup_players_dir.join(&*file_name))
+                    .map_err(CoreError::Io)?;
+            }
+        }
+    }
+
     Ok(())
 }
 
@@ -1720,6 +1750,64 @@ mod tests {
         // Nothing was copied: backup_base holds no per-save subdirectory.
         let created: Vec<_> = std::fs::read_dir(&backup_base).unwrap().collect();
         assert!(created.is_empty(), "no backup dir should be created");
+    }
+
+    /// Only whitelisted files reach the backup; stray root files, unknown
+    /// subfolders, and non-UUID `Players/` entries are excluded.
+    #[test]
+    fn backup_save_directory_copies_only_whitelisted_files() {
+        let temp_dir = tempfile::tempdir().unwrap();
+        let save_dir = temp_dir.path().join("world");
+        let players_dir = save_dir.join("Players");
+        std::fs::create_dir_all(&players_dir).unwrap();
+
+        // Whitelisted contents.
+        std::fs::write(save_dir.join("Level.sav"), b"level").unwrap();
+        std::fs::write(save_dir.join("LevelMeta.sav"), b"meta").unwrap();
+        std::fs::write(save_dir.join("LocalData.sav"), b"local").unwrap();
+        std::fs::write(save_dir.join("WorldOption.sav"), b"option").unwrap();
+        let player = "00000000000000000000000000000001.sav";
+        let player_dps = "00000000000000000000000000000001_dps.sav";
+        std::fs::write(players_dir.join(player), b"p").unwrap();
+        std::fs::write(players_dir.join(player_dps), b"pd").unwrap();
+
+        // Decoys that must NOT be backed up.
+        std::fs::write(save_dir.join("readme.txt"), b"junk").unwrap();
+        std::fs::create_dir_all(save_dir.join("mods")).unwrap();
+        std::fs::write(save_dir.join("mods/foo.pak"), b"pak").unwrap();
+        std::fs::write(players_dir.join("notes.sav"), b"junk").unwrap();
+        std::fs::create_dir_all(players_dir.join("junk")).unwrap();
+        std::fs::write(players_dir.join("junk/inner.sav"), b"junk").unwrap();
+
+        let backup_base = temp_dir.path().join("backups/steam");
+        backup_save_directory(
+            &save_dir,
+            &backup_base,
+            &psp_core::progress::null_progress(),
+        )
+        .unwrap();
+
+        let backup_dirs: Vec<PathBuf> = std::fs::read_dir(&backup_base)
+            .unwrap()
+            .filter_map(|entry| entry.ok())
+            .map(|entry| entry.path())
+            .collect();
+        assert_eq!(1, backup_dirs.len(), "one backup dir expected");
+        let backup = &backup_dirs[0];
+
+        // Whitelist present.
+        assert!(backup.join("Level.sav").is_file());
+        assert!(backup.join("LevelMeta.sav").is_file());
+        assert!(backup.join("LocalData.sav").is_file());
+        assert!(backup.join("WorldOption.sav").is_file());
+        assert!(backup.join("Players").join(player).is_file());
+        assert!(backup.join("Players").join(player_dps).is_file());
+
+        // Decoys absent.
+        assert!(!backup.join("readme.txt").exists());
+        assert!(!backup.join("mods").exists());
+        assert!(!backup.join("Players").join("notes.sav").exists());
+        assert!(!backup.join("Players").join("junk").exists());
     }
 
     /// Hermetic full write-path test: the `world1` fixture is copied into a
