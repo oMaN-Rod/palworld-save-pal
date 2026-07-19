@@ -36,6 +36,29 @@ describe('rgbToHex', () => {
 	it('tolerates rgba() and extra whitespace', () => {
 		expect(rgbToHex('rgba( 34 , 34 ,34 , 0.5 )')).toBe('222222');
 	});
+
+	// Production CSS minification (Lightning CSS via Tailwind v4) rewrites the
+	// theme's `rgb(...)` custom properties into these forms, which is what
+	// getComputedStyle returns in a release build.
+	it('parses 6-digit hex', () => {
+		expect(rgbToHex('#559ff8')).toBe('559ff8');
+	});
+
+	it('parses hex with an alpha channel, dropping the alpha', () => {
+		expect(rgbToHex('#559ff8ff')).toBe('559ff8');
+	});
+
+	it('expands shorthand hex', () => {
+		expect(rgbToHex('#5af')).toBe('55aaff');
+	});
+
+	it('parses space-separated rgb()', () => {
+		expect(rgbToHex('rgb(85 159 248)')).toBe('559ff8');
+	});
+
+	it('uppercases and leading/trailing whitespace are tolerated', () => {
+		expect(rgbToHex('  #559FF8  ')).toBe('559ff8');
+	});
 });
 
 describe('buildEditorTheme (dark)', () => {

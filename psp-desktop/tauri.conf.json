@@ -8,6 +8,10 @@
       "script": "bun run dev:desktop",
       "cwd": "../ui"
     },
+    "beforeBuildCommand": {
+      "script": "bun run build:desktop",
+      "cwd": "../ui"
+    },
     "devUrl": "http://localhost:5173",
     "frontendDist": "../ui_build"
   },
