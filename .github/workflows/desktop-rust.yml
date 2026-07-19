@@ -45,10 +45,12 @@ jobs:
         with:
           bun-version: latest
 
-      - name: Build desktop UI
-        working-directory: palworld-save-pal
+      - name: Install UI deps
+        working-directory: palworld-save-pal/ui
         shell: bash
-        run: bash scripts/build-ui-desktop.sh
+        run: bun install
+        # The frontend itself is built by Tauri's beforeBuildCommand
+        # (bun run build:desktop) during "Build Tauri bundles".
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
