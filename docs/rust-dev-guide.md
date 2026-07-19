@@ -30,7 +30,7 @@ cargo run -p psp-server -- --dev        # backend on 127.0.0.1:5174
 (cd psp-desktop && cargo tauri dev)     # desktop app, hot-reload
 cargo fmt --all                         # required before every commit
 cargo clippy --workspace --all-targets -- -D warnings
-cargo test --workspace                  # unit + integration + parity
+cargo test --workspace                  # unit + integration + wire-contract
 ```
 
 Frontend type check: `bun run check` (from `ui/`).
@@ -40,30 +40,30 @@ Frontend type check: `bun run check` (from `ui/`).
 `psp-server --host 0.0.0.0 --port 5174 --ui-dir ./ui --data-dir ./data --db ./psp-rs.db [--dev]`
 
 On first start, a legacy Python `psp.db` found next to the `--db` file is
-backed up and imported (settings, presets, UPS, servers) — once.
+backed up and imported (settings, presets, UPS, servers) — once. This is a
+one-time compatibility path for upgrades from the retired Python build; it runs
+a single time, records a guard, and is inert thereafter.
 
-## Parity harness
+## Wire-contract harness
 
-The wire contract was verified during the port by capture/replay:
-
-1. A capture script drove the (now-retired) **Python** backend over a corpus
-   save and recorded every request → ordered response list into
-   `parity/fixtures/<corpus>/<nn>_<message_type>.json`. The fixtures are
-   committed; re-capturing would require the Python backend and capture
-   script from git history.
-2. `psp-server/tests/parity.rs` starts an in-process Rust server, replays
-   each committed fixture in filename order, and asserts response-sequence
-   equality (`PARITY_IGNORED_PATHS` allowlists justified divergences).
+`psp-server/tests/wire_contract.rs` guards the WebSocket wire protocol the
+Svelte frontend depends on. It starts an in-process Rust server, replays each
+committed fixture under `contract/fixtures/<corpus>/<nnn>_<message_type>.json`
+in filename order, and asserts response-sequence equality
+(`IGNORED_PATHS`, plus dedicated comparators, mask only irreducibly
+nondeterministic values). It is a regression net against accidental protocol
+drift — **not** a comparison against any prior implementation.
 
 Run it alone:
 
 ```bash
-cargo test -p psp-server --test parity -- --nocapture
+cargo test -p psp-server --test wire_contract -- --nocapture
 ```
 
-Fixtures are committed under `parity/fixtures/`; the corpus `.sav` files are
-not (size) — fixtures whose save is absent are skipped, so CI runs a subset
-and the full-corpus run is a local release gate.
+The fixtures are committed golden inputs, so the suite always runs and **fails
+loudly if the corpus is missing** rather than skipping. See
+`contract/README.md` for the fixture format and how to update one when a
+response legitimately changes.
 
 End-to-end request timing (e.g. `select_save`) shows up in the `--dev`
 server logs — no separate perf script is needed.

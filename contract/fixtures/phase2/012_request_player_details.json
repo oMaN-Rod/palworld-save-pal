@@ -1,0 +1,2212 @@
+{
+  "request": {
+    "type": "request_player_details",
+    "data": {
+      "player_id": "8c2f1930-0000-0000-0000-000000000000",
+      "origin": "edit"
+    }
+  },
+  "responses": [
+    {
+      "type": "get_player_details_response",
+      "data": {
+        "player": {
+          "pals": {
+            "b38e7ffd-a271-488a-b584-6cb545a3f439": {
+              "instance_id": "b38e7ffd-a271-488a-b584-6cb545a3f439",
+              "character_id": "JetDragon",
+              "character_key": "jetdragon",
+              "owner_uid": "8c2f1930-0000-0000-0000-000000000000",
+              "is_lucky": false,
+              "is_boss": false,
+              "is_predator": false,
+              "is_tower": false,
+              "gender": "Female",
+              "nickname": "ParityEdited",
+              "filtered_nickname": null,
+              "group_id": "54491484-4e6c-7327-70b2-868f350929f6",
+              "stomach": 600.0,
+              "sanity": 100.0,
+              "hp": 6011000,
+              "level": 33,
+              "exp": 41376365,
+              "rank": 5,
+              "rank_hp": 20,
+              "rank_attack": 20,
+              "rank_defense": 20,
+              "rank_craftspeed": 20,
+              "talent_hp": 100,
+              "talent_shot": 100,
+              "talent_defense": 100,
+              "max_hp": 6011000,
+              "storage_slot": 0,
+              "storage_id": "65a4f103-471b-3102-7bb3-18bcefee294d",
+              "learned_skills": [],
+              "active_skills": [
+                "EPalWazaID::CommetRain",
+                "EPalWazaID::BeamSlicer",
+                "EPalWazaID::DragonMeteor"
+              ],
+              "passive_skills": [
+                "Noukin",
+                "PAL_ALLAttack_up2",
+                "MoveSpeed_up_3",
+                "Legend"
+              ],
+              "work_suitability": {
+                "Collection": 2
+              },
+              "is_sick": false,
+              "friendship_point": 200000
+            },
+            "9817e809-5a57-4bbf-a9ca-3446f118e1f6": {
+              "instance_id": "9817e809-5a57-4bbf-a9ca-3446f118e1f6",
+              "character_id": "WhiteAlienDragon",
+              "character_key": "whitealiendragon",
+              "owner_uid": "8c2f1930-0000-0000-0000-000000000000",
+              "is_lucky": false,
+              "is_boss": false,
+              "is_predator": false,
+              "is_tower": false,
+              "gender": "Female",
+              "nickname": "🆕 Xenogard",
+              "filtered_nickname": null,
+              "group_id": "54491484-4e6c-7327-70b2-868f350929f6",
+              "stomach": 470.0,
+              "sanity": 100.0,
+              "hp": 13345000,
+              "level": 65,
+              "exp": 41376365,
+              "rank": 5,
+              "rank_hp": 20,
+              "rank_attack": 20,
+              "rank_defense": 20,
+              "rank_craftspeed": 20,
+              "talent_hp": 100,
+              "talent_shot": 100,
+              "talent_defense": 100,
+              "max_hp": 10506000,
+              "storage_slot": 1,
+              "storage_id": "65a4f103-471b-3102-7bb3-18bcefee294d",
+              "learned_skills": [],
+              "active_skills": [
+                "EPalWazaID::CommetRain",
+                "EPalWazaID::BeamSlicer",
+                "EPalWazaID::DragonMeteor"
+              ],
+              "passive_skills": [
+                "Deffence_up2",
+                "Deffence_up1",
+                "PAL_masochist",
+                "Legend"
+              ],
+              "work_suitability": {
+                "Mining": 2
+              },
+              "is_sick": false,
+              "friendship_point": 200500
+            },
+            "cb61f17a-9829-44d6-893c-ab7dfbf41383": {
+              "instance_id": "cb61f17a-9829-44d6-893c-ab7dfbf41383",
+              "character_id": "KingBahamut_Dragon",
+              "character_key": "kingbahamut_dragon",
+              "owner_uid": "8c2f1930-0000-0000-0000-000000000000",
+              "is_lucky": false,
+              "is_boss": false,
+              "is_predator": false,
+              "is_tower": false,
+              "gender": "Female",
+              "nickname": "🆕 Blazamut Ryu",
+              "filtered_nickname": null,
+              "group_id": "54491484-4e6c-7327-70b2-868f350929f6",
+              "stomach": 600.0,
+              "sanity": 100.0,
+              "hp": 13182000,
+              "level": 65,
+              "exp": 41376365,
+              "rank": 5,
+              "rank_hp": 20,
+              "rank_attack": 20,
+              "rank_defense": 20,
+              "rank_craftspeed": 20,
+              "talent_hp": 100,
+              "talent_shot": 100,
+              "talent_defense": 100,
+              "max_hp": 10101000,
+              "storage_slot": 2,
+              "storage_id": "65a4f103-471b-3102-7bb3-18bcefee294d",
+              "learned_skills": [],
+              "active_skills": [
+                "EPalWazaID::FireBall",
+                "EPalWazaID::FlareTwister",
+                "EPalWazaID::Eruption"
+              ],
+              "passive_skills": [
+                "Noukin",
+                "PAL_ALLAttack_up2",
+                "Rare",
+                "Legend"
+              ],
+              "work_suitability": {
+                "EmitFlame": 1,
+                "Mining": 1
+              },
+              "is_sick": false,
+              "friendship_point": 200500
+            },
+            "bc917376-67fa-4e28-85a5-59e77e5b9db5": {
+              "instance_id": "bc917376-67fa-4e28-85a5-59e77e5b9db5",
+              "character_id": "Anubis",
+              "character_key": "anubis",
+              "owner_uid": "8c2f1930-0000-0000-0000-000000000000",
+              "is_lucky": false,
+              "is_boss": false,
+              "is_predator": false,
+              "is_tower": false,
+              "gender": "Female",
+              "nickname": "🆕 Anubis",
+              "filtered_nickname": null,
+              "group_id": "54491484-4e6c-7327-70b2-868f350929f6",
+              "stomach": 540.0,
+              "sanity": 100.0,
+              "hp": 13750000,
+              "level": 65,
+              "exp": 41376365,
+              "rank": 5,
+              "rank_hp": 20,
+              "rank_attack": 20,
+              "rank_defense": 20,
+              "rank_craftspeed": 20,
+              "talent_hp": 100,
+              "talent_shot": 100,
+              "talent_defense": 100,
+              "max_hp": 11318000,
+              "storage_slot": 3,
+              "storage_id": "65a4f103-471b-3102-7bb3-18bcefee294d",
+              "learned_skills": [],
+              "active_skills": [
+                "EPalWazaID::Unique_WingGolem_RoundCutter",
+                "EPalWazaID::SandTwister",
+                "EPalWazaID::RockLance"
+              ],
+              "passive_skills": [
+                "CraftSpeed_up1",
+                "CraftSpeed_up2",
+                "CraftSpeed_up3",
+                "Rare"
+              ],
+              "work_suitability": {
+                "Handcraft": 1,
+                "Mining": 2,
+                "Transport": 3
+              },
+              "is_sick": false,
+              "friendship_point": 200500
+            },
+            "8d55a026-e8e2-478c-8efc-bf0516b4605f": {
+              "instance_id": "8d55a026-e8e2-478c-8efc-bf0516b4605f",
+              "character_id": "Umihebi",
+              "character_key": "umihebi",
+              "owner_uid": "8c2f1930-0000-0000-0000-000000000000",
+              "is_lucky": false,
+              "is_boss": false,
+              "is_predator": false,
+              "is_tower": false,
+              "gender": "Female",
+              "nickname": "🆕 Jormuntide",
+              "filtered_nickname": null,
+              "group_id": "54491484-4e6c-7327-70b2-868f350929f6",
+              "stomach": 550.0,
+              "sanity": 100.0,
+              "hp": 14155000,
+              "level": 65,
+              "exp": 41376365,
+              "rank": 5,
+              "rank_hp": 20,
+              "rank_attack": 20,
+              "rank_defense": 20,
+              "rank_craftspeed": 20,
+              "talent_hp": 100,
+              "talent_shot": 100,
+              "talent_defense": 100,
+              "max_hp": 12128000,
+              "storage_slot": 4,
+              "storage_id": "65a4f103-471b-3102-7bb3-18bcefee294d",
+              "learned_skills": [],
+              "active_skills": [
+                "EPalWazaID::HydroPump",
+                "EPalWazaID::WallSplash",
+                "EPalWazaID::WaterBall"
+              ],
+              "passive_skills": [
+                "Noukin",
+                "PAL_ALLAttack_up2",
+                "MoveSpeed_up_3",
+                "Legend"
+              ],
+              "work_suitability": {
+                "Watering": 1
+              },
+              "is_sick": false,
+              "friendship_point": 200500
+            },
+            "0274a5bb-f10c-46b3-9990-f9ed4f8995f8": {
+              "instance_id": "0274a5bb-f10c-46b3-9990-f9ed4f8995f8",
+              "character_id": "Anubis",
+              "character_key": "anubis",
+              "owner_uid": "8c2f1930-0000-0000-0000-000000000000",
+              "is_lucky": false,
+              "is_boss": false,
+              "is_predator": false,
+              "is_tower": false,
+              "gender": "Female",
+              "nickname": "🆕 Anubis",
+              "filtered_nickname": null,
+              "group_id": "54491484-4e6c-7327-70b2-868f350929f6",
+              "stomach": 540.0,
+              "sanity": 100.0,
+              "hp": 13750000,
+              "level": 65,
+              "exp": 41376365,
+              "rank": 5,
+              "rank_hp": 20,
+              "rank_attack": 20,
+              "rank_defense": 20,
+              "rank_craftspeed": 20,
+              "talent_hp": 100,
+              "talent_shot": 100,
+              "talent_defense": 100,
+              "max_hp": 11318000,
+              "storage_slot": 0,
+              "storage_id": "a6cb3db4-4760-f87f-c404-8b87887c0f29",
+              "learned_skills": [],
+              "active_skills": [
+                "EPalWazaID::Unique_WingGolem_RoundCutter",
+                "EPalWazaID::SandTwister",
+                "EPalWazaID::RockLance"
+              ],
+              "passive_skills": [
+                "CraftSpeed_up1",
+                "CraftSpeed_up2",
+                "CraftSpeed_up3",
+                "Rare"
+              ],
+              "work_suitability": {
+                "Handcraft": 1,
+                "Mining": 2,
+                "Transport": 3
+              },
+              "is_sick": false,
+              "friendship_point": 200000
+            },
+            "89e58a43-c378-4bfa-b426-b51d43663376": {
+              "instance_id": "89e58a43-c378-4bfa-b426-b51d43663376",
+              "character_id": "Anubis",
+              "character_key": "anubis",
+              "owner_uid": "8c2f1930-0000-0000-0000-000000000000",
+              "is_lucky": false,
+              "is_boss": false,
+              "is_predator": false,
+              "is_tower": false,
+              "gender": "Female",
+              "nickname": "©️ 🆕 Anubis",
+              "filtered_nickname": null,
+              "group_id": "54491484-4e6c-7327-70b2-868f350929f6",
+              "stomach": 540.0,
+              "sanity": 100.0,
+              "hp": 13750000,
+              "level": 65,
+              "exp": 41376365,
+              "rank": 5,
+              "rank_hp": 20,
+              "rank_attack": 20,
+              "rank_defense": 20,
+              "rank_craftspeed": 20,
+              "talent_hp": 100,
+              "talent_shot": 100,
+              "talent_defense": 100,
+              "max_hp": 11318000,
+              "storage_slot": 1,
+              "storage_id": "a6cb3db4-4760-f87f-c404-8b87887c0f29",
+              "learned_skills": [],
+              "active_skills": [
+                "EPalWazaID::Unique_WingGolem_RoundCutter",
+                "EPalWazaID::SandTwister",
+                "EPalWazaID::RockLance"
+              ],
+              "passive_skills": [
+                "CraftSpeed_up1",
+                "CraftSpeed_up2",
+                "CraftSpeed_up3",
+                "Rare"
+              ],
+              "work_suitability": {
+                "Handcraft": 1,
+                "Mining": 2,
+                "Transport": 3
+              },
+              "is_sick": false,
+              "friendship_point": 200000
+            },
+            "27170535-782e-4d4c-ac9e-6bd1088934ec": {
+              "instance_id": "27170535-782e-4d4c-ac9e-6bd1088934ec",
+              "character_id": "Anubis",
+              "character_key": "anubis",
+              "owner_uid": "8c2f1930-0000-0000-0000-000000000000",
+              "is_lucky": false,
+              "is_boss": false,
+              "is_predator": false,
+              "is_tower": false,
+              "gender": "Female",
+              "nickname": "©️ 🆕 Anubis",
+              "filtered_nickname": null,
+              "group_id": "54491484-4e6c-7327-70b2-868f350929f6",
+              "stomach": 540.0,
+              "sanity": 100.0,
+              "hp": 13750000,
+              "level": 65,
+              "exp": 41376365,
+              "rank": 5,
+              "rank_hp": 20,
+              "rank_attack": 20,
+              "rank_defense": 20,
+              "rank_craftspeed": 20,
+              "talent_hp": 100,
+              "talent_shot": 100,
+              "talent_defense": 100,
+              "max_hp": 11318000,
+              "storage_slot": 2,
+              "storage_id": "a6cb3db4-4760-f87f-c404-8b87887c0f29",
+              "learned_skills": [],
+              "active_skills": [
+                "EPalWazaID::Unique_WingGolem_RoundCutter",
+                "EPalWazaID::SandTwister",
+                "EPalWazaID::RockLance"
+              ],
+              "passive_skills": [
+                "CraftSpeed_up1",
+                "CraftSpeed_up2",
+                "CraftSpeed_up3",
+                "Rare"
+              ],
+              "work_suitability": {
+                "Handcraft": 1,
+                "Mining": 2,
+                "Transport": 3
+              },
+              "is_sick": false,
+              "friendship_point": 200000
+            },
+            "1463ab41-114a-4003-9253-b21f6cacd8ba": {
+              "instance_id": "1463ab41-114a-4003-9253-b21f6cacd8ba",
+              "character_id": "Anubis",
+              "character_key": "anubis",
+              "owner_uid": "8c2f1930-0000-0000-0000-000000000000",
+              "is_lucky": false,
+              "is_boss": false,
+              "is_predator": false,
+              "is_tower": false,
+              "gender": "Female",
+              "nickname": "©️ 🆕 Anubis",
+              "filtered_nickname": null,
+              "group_id": "54491484-4e6c-7327-70b2-868f350929f6",
+              "stomach": 540.0,
+              "sanity": 100.0,
+              "hp": 13750000,
+              "level": 65,
+              "exp": 41376365,
+              "rank": 5,
+              "rank_hp": 20,
+              "rank_attack": 20,
+              "rank_defense": 20,
+              "rank_craftspeed": 20,
+              "talent_hp": 100,
+              "talent_shot": 100,
+              "talent_defense": 100,
+              "max_hp": 11318000,
+              "storage_slot": 3,
+              "storage_id": "a6cb3db4-4760-f87f-c404-8b87887c0f29",
+              "learned_skills": [],
+              "active_skills": [
+                "EPalWazaID::Unique_WingGolem_RoundCutter",
+                "EPalWazaID::SandTwister",
+                "EPalWazaID::RockLance"
+              ],
+              "passive_skills": [
+                "CraftSpeed_up1",
+                "CraftSpeed_up2",
+                "CraftSpeed_up3",
+                "Rare"
+              ],
+              "work_suitability": {
+                "Handcraft": 1,
+                "Mining": 2,
+                "Transport": 3
+              },
+              "is_sick": false,
+              "friendship_point": 200000
+            },
+            "e544aab8-3dc9-425c-965c-17677038f332": {
+              "instance_id": "e544aab8-3dc9-425c-965c-17677038f332",
+              "character_id": "Anubis",
+              "character_key": "anubis",
+              "owner_uid": "8c2f1930-0000-0000-0000-000000000000",
+              "is_lucky": false,
+              "is_boss": false,
+              "is_predator": false,
+              "is_tower": false,
+              "gender": "Female",
+              "nickname": "©️ 🆕 Anubis",
+              "filtered_nickname": null,
+              "group_id": "54491484-4e6c-7327-70b2-868f350929f6",
+              "stomach": 540.0,
+              "sanity": 100.0,
+              "hp": 13750000,
+              "level": 65,
+              "exp": 41376365,
+              "rank": 5,
+              "rank_hp": 20,
+              "rank_attack": 20,
+              "rank_defense": 20,
+              "rank_craftspeed": 20,
+              "talent_hp": 100,
+              "talent_shot": 100,
+              "talent_defense": 100,
+              "max_hp": 11318000,
+              "storage_slot": 4,
+              "storage_id": "a6cb3db4-4760-f87f-c404-8b87887c0f29",
+              "learned_skills": [],
+              "active_skills": [
+                "EPalWazaID::Unique_WingGolem_RoundCutter",
+                "EPalWazaID::SandTwister",
+                "EPalWazaID::RockLance"
+              ],
+              "passive_skills": [
+                "CraftSpeed_up1",
+                "CraftSpeed_up2",
+                "CraftSpeed_up3",
+                "Rare"
+              ],
+              "work_suitability": {
+                "Handcraft": 1,
+                "Mining": 2,
+                "Transport": 3
+              },
+              "is_sick": false,
+              "friendship_point": 200000
+            },
+            "354ba8cf-9977-47a7-b74c-8f05f66417ba": {
+              "instance_id": "354ba8cf-9977-47a7-b74c-8f05f66417ba",
+              "character_id": "Anubis",
+              "character_key": "anubis",
+              "owner_uid": "8c2f1930-0000-0000-0000-000000000000",
+              "is_lucky": false,
+              "is_boss": false,
+              "is_predator": false,
+              "is_tower": false,
+              "gender": "Female",
+              "nickname": "©️ 🆕 Anubis",
+              "filtered_nickname": null,
+              "group_id": "54491484-4e6c-7327-70b2-868f350929f6",
+              "stomach": 540.0,
+              "sanity": 100.0,
+              "hp": 13750000,
+              "level": 65,
+              "exp": 41376365,
+              "rank": 5,
+              "rank_hp": 20,
+              "rank_attack": 20,
+              "rank_defense": 20,
+              "rank_craftspeed": 20,
+              "talent_hp": 100,
+              "talent_shot": 100,
+              "talent_defense": 100,
+              "max_hp": 11318000,
+              "storage_slot": 5,
+              "storage_id": "a6cb3db4-4760-f87f-c404-8b87887c0f29",
+              "learned_skills": [],
+              "active_skills": [
+                "EPalWazaID::Unique_WingGolem_RoundCutter",
+                "EPalWazaID::SandTwister",
+                "EPalWazaID::RockLance"
+              ],
+              "passive_skills": [
+                "CraftSpeed_up1",
+                "CraftSpeed_up2",
+                "CraftSpeed_up3",
+                "Rare"
+              ],
+              "work_suitability": {
+                "Handcraft": 1,
+                "Mining": 2,
+                "Transport": 3
+              },
+              "is_sick": false,
+              "friendship_point": 200000
+            }
+          },
+          "common_container": {
+            "id": "e204737a-49d2-8cb5-526c-598291dc30f6",
+            "type": "CommonContainer",
+            "slots": [
+              {
+                "dynamic_item": null,
+                "slot_index": 0,
+                "count": 77,
+                "static_id": "Wood",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 1,
+                "count": 74,
+                "static_id": "Stone",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 2,
+                "count": 99,
+                "static_id": "Pal_crystal_S",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 3,
+                "count": 997,
+                "static_id": "SFArrow",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              }
+            ],
+            "key": null,
+            "slot_num": 54
+          },
+          "essential_container": {
+            "id": "fee6e243-405f-4089-a645-109b0fe26b93",
+            "type": "EssentialContainer",
+            "slots": [
+              {
+                "dynamic_item": null,
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "SkillUnlock_Alpaca",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "SkillUnlock_Boar",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "SkillUnlock_Carbunclo",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 3,
+                "count": 1,
+                "static_id": "SkillUnlock_Deer",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "SkillUnlock_Deer_Ground",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 5,
+                "count": 1,
+                "static_id": "SkillUnlock_FlyingManta",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 6,
+                "count": 1,
+                "static_id": "SkillUnlock_Garm",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 7,
+                "count": 1,
+                "static_id": "SkillUnlock_Hedgehog",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "SkillUnlock_Hedgehog_Ice",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 9,
+                "count": 1,
+                "static_id": "SkillUnlock_Kitsunebi",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 10,
+                "count": 1,
+                "static_id": "SkillUnlock_Kitsunebi_Ice",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 11,
+                "count": 1,
+                "static_id": "SkillUnlock_Monkey",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 12,
+                "count": 1,
+                "static_id": "SkillUnlock_MopKing",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 13,
+                "count": 1,
+                "static_id": "SkillUnlock_NaughtyCat",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 14,
+                "count": 1,
+                "static_id": "SkillUnlock_Serpent",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 15,
+                "count": 1,
+                "static_id": "SkillUnlock_Serpent_Ground",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 16,
+                "count": 1,
+                "static_id": "SkillUnlock_BirdDragon",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 17,
+                "count": 1,
+                "static_id": "SkillUnlock_BirdDragon_Ice",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 18,
+                "count": 1,
+                "static_id": "SkillUnlock_ColorfulBird",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 19,
+                "count": 1,
+                "static_id": "SkillUnlock_DreamDemon",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 20,
+                "count": 1,
+                "static_id": "SkillUnlock_DrillGame",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 21,
+                "count": 1,
+                "static_id": "SkillUnlock_Eagle",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 22,
+                "count": 1,
+                "static_id": "SkillUnlock_FairyDragon",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 23,
+                "count": 1,
+                "static_id": "SkillUnlock_FairyDragon_Water",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 24,
+                "count": 1,
+                "static_id": "SkillUnlock_FeatherOstrich",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 25,
+                "count": 1,
+                "static_id": "SkillUnlock_FlameBuffalo",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 26,
+                "count": 1,
+                "static_id": "SkillUnlock_FlowerDinosaur",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 27,
+                "count": 1,
+                "static_id": "SkillUnlock_FlowerDinosaur_Electric",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 28,
+                "count": 1,
+                "static_id": "SkillUnlock_FlowerRabbit",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 29,
+                "count": 1,
+                "static_id": "SkillUnlock_GhostBeast",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 30,
+                "count": 1,
+                "static_id": "SkillUnlock_HawkBird",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 31,
+                "count": 1,
+                "static_id": "SkillUnlock_KingAlpaca",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 32,
+                "count": 1,
+                "static_id": "SkillUnlock_KingAlpaca_Ice",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 33,
+                "count": 1,
+                "static_id": "SkillUnlock_Kirin",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 34,
+                "count": 1,
+                "static_id": "SkillUnlock_NegativeOctopus",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 35,
+                "count": 1,
+                "static_id": "SkillUnlock_Penguin",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 36,
+                "count": 1,
+                "static_id": "SkillUnlock_RaijinDaughter",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 37,
+                "count": 1,
+                "static_id": "SkillUnlock_SakuraSaurus",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 38,
+                "count": 1,
+                "static_id": "SkillUnlock_Sakurasaurus_Water",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 39,
+                "count": 1,
+                "static_id": "SkillUnlock_WeaselDragon",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 40,
+                "count": 1,
+                "static_id": "SkillUnlock_WindChimes",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 41,
+                "count": 1,
+                "static_id": "SkillUnlock_WindChimes_Ice",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 42,
+                "count": 1,
+                "static_id": "SkillUnlock_AmaterasuWolf",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 43,
+                "count": 1,
+                "static_id": "SkillUnlock_BlueDragon",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 44,
+                "count": 1,
+                "static_id": "SkillUnlock_FengyunDeeper",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 45,
+                "count": 1,
+                "static_id": "SkillUnlock_FireKirin",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 46,
+                "count": 1,
+                "static_id": "SkillUnlock_FireKirin_Dark",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 47,
+                "count": 1,
+                "static_id": "SkillUnlock_GrassMammoth",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 48,
+                "count": 1,
+                "static_id": "SkillUnlock_GrassMammoth_Ice",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 49,
+                "count": 1,
+                "static_id": "SkillUnlock_GrassPanda",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 50,
+                "count": 1,
+                "static_id": "SkillUnlock_GrassPanda_Electric",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 51,
+                "count": 1,
+                "static_id": "SkillUnlock_GuardianDog",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 52,
+                "count": 1,
+                "static_id": "SkillUnlock_HadesBird",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 53,
+                "count": 1,
+                "static_id": "SkillUnlock_Horus",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 54,
+                "count": 1,
+                "static_id": "SkillUnlock_IceDeer",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 55,
+                "count": 1,
+                "static_id": "SkillUnlock_KingBahamut",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 56,
+                "count": 1,
+                "static_id": "SkillUnlock_Manticore",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 57,
+                "count": 1,
+                "static_id": "SkillUnlock_Manticore_Dark",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 58,
+                "count": 1,
+                "static_id": "SkillUnlock_PurpleSpider",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 59,
+                "count": 1,
+                "static_id": "SkillUnlock_RedArmorBird",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 60,
+                "count": 1,
+                "static_id": "SkillUnlock_SkyDragon",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 61,
+                "count": 1,
+                "static_id": "SkillUnlock_Suzaku",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 62,
+                "count": 1,
+                "static_id": "SkillUnlock_Suzaku_Water",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 63,
+                "count": 1,
+                "static_id": "SkillUnlock_ThunderBird",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 64,
+                "count": 1,
+                "static_id": "SkillUnlock_ThunderDog",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 65,
+                "count": 1,
+                "static_id": "SkillUnlock_Umihebi",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 66,
+                "count": 1,
+                "static_id": "SkillUnlock_Umihebi_Fire",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 67,
+                "count": 1,
+                "static_id": "SkillUnlock_VolcanicMonster",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 68,
+                "count": 1,
+                "static_id": "SkillUnlock_VolcanicMonster_Ice",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 69,
+                "count": 1,
+                "static_id": "SkillUnlock_Yeti",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 70,
+                "count": 1,
+                "static_id": "SkillUnlock_Yeti_Grass",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 71,
+                "count": 1,
+                "static_id": "SkillUnlock_AmaterasuWolf_Dark",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 72,
+                "count": 1,
+                "static_id": "SkillUnlock_BadCatgirl",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 73,
+                "count": 1,
+                "static_id": "SkillUnlock_BlackCentaur",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 74,
+                "count": 1,
+                "static_id": "SkillUnlock_BlackFurDragon",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 75,
+                "count": 1,
+                "static_id": "SkillUnlock_BlackGriffon",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 76,
+                "count": 1,
+                "static_id": "SkillUnlock_BlackMetalDragon",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 77,
+                "count": 1,
+                "static_id": "SkillUnlock_BlackPuppy",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 78,
+                "count": 1,
+                "static_id": "SkillUnlock_BlueThunderHorse",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 79,
+                "count": 1,
+                "static_id": "SkillUnlock_DarkMechaDragon",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 80,
+                "count": 1,
+                "static_id": "SkillUnlock_ElecPanda",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 81,
+                "count": 1,
+                "static_id": "SkillUnlock_FengyunDeeper_Electric",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 82,
+                "count": 1,
+                "static_id": "SkillUnlock_GoldenHorse",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 83,
+                "count": 1,
+                "static_id": "SkillUnlock_HadesBird_Electric",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 84,
+                "count": 1,
+                "static_id": "SkillUnlock_Horus_Water",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 85,
+                "count": 1,
+                "static_id": "SkillUnlock_IceHorse",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 86,
+                "count": 1,
+                "static_id": "SkillUnlock_IceHorse_Dark",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 87,
+                "count": 1,
+                "static_id": "SkillUnlock_JetDragon",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 88,
+                "count": 1,
+                "static_id": "SkillUnlock_KingBahamut_Dragon",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 89,
+                "count": 1,
+                "static_id": "SkillUnlock_LazyDragon",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 90,
+                "count": 1,
+                "static_id": "SkillUnlock_LazyDragon_Electric",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 91,
+                "count": 1,
+                "static_id": "SkillUnlock_MoonQueen",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 92,
+                "count": 1,
+                "static_id": "SkillUnlock_MushroomDragon",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 93,
+                "count": 1,
+                "static_id": "SkillUnlock_MushroomDragon_Dark",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 94,
+                "count": 1,
+                "static_id": "SkillUnlock_NightBlueHorse",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 95,
+                "count": 1,
+                "static_id": "SkillUnlock_RaijinDaughter_Water",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 96,
+                "count": 1,
+                "static_id": "SkillUnlock_SaintCentaur",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 97,
+                "count": 1,
+                "static_id": "SkillUnlock_SkyDragon_Grass",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 98,
+                "count": 1,
+                "static_id": "SkillUnlock_SnowTigerBeastman",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 99,
+                "count": 1,
+                "static_id": "SkillUnlock_WeaselDragon_Fire",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 100,
+                "count": 1,
+                "static_id": "SkillUnlock_WhiteAlienDragon",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 101,
+                "count": 1,
+                "static_id": "SkillUnlock_WhiteDeer",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 102,
+                "count": 1,
+                "static_id": "SkillUnlock_WhiteShieldDragon",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 103,
+                "count": 1,
+                "static_id": "SkillUnlock_ElecLion",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 104,
+                "count": 9999,
+                "static_id": "BossDefeatReward_AmaterasuWolf_Dark",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 105,
+                "count": 9999,
+                "static_id": "BossDefeatReward_Anubis",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 106,
+                "count": 9999,
+                "static_id": "BossDefeatReward_BadCatgirl",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 107,
+                "count": 9999,
+                "static_id": "BossDefeatReward_BerryGoat_Dark",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 108,
+                "count": 9999,
+                "static_id": "BossDefeatReward_BlackMetalDragon",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 109,
+                "count": 9999,
+                "static_id": "BossDefeatReward_BlackPuppy",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 110,
+                "count": 9999,
+                "static_id": "BossDefeatReward_BlueDragon",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 111,
+                "count": 9999,
+                "static_id": "BossDefeatReward_BlueThunderHorse",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 112,
+                "count": 9999,
+                "static_id": "BossDefeatReward_BlueberryFairy",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 113,
+                "count": 9999,
+                "static_id": "BossDefeatReward_CaptainPenguin",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 114,
+                "count": 9999,
+                "static_id": "BossDefeatReward_CatMage",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 115,
+                "count": 9999,
+                "static_id": "BossDefeatReward_CatVampire",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 116,
+                "count": 9999,
+                "static_id": "BossDefeatReward_DarkScorpion",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 117,
+                "count": 9999,
+                "static_id": "BossDefeatReward_DarkScorpion_Ground",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 118,
+                "count": 9999,
+                "static_id": "BossDefeatReward_FairyDragon",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 119,
+                "count": 9999,
+                "static_id": "BossDefeatReward_FengyunDeeper",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 120,
+                "count": 9999,
+                "static_id": "BossDefeatReward_FengyunDeeper_Electric",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 121,
+                "count": 9999,
+                "static_id": "BossDefeatReward_FlowerDinosaur_Electric",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 122,
+                "count": 9999,
+                "static_id": "BossDefeatReward_FlowerDoll",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 123,
+                "count": 9999,
+                "static_id": "BossDefeatReward_GhostRabbit",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 124,
+                "count": 9999,
+                "static_id": "BossDefeatReward_GoldenHorse",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 125,
+                "count": 9999,
+                "static_id": "BossDefeatReward_GrassMammoth",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 126,
+                "count": 9999,
+                "static_id": "BossDefeatReward_GrassPanda_Electric",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 127,
+                "count": 9999,
+                "static_id": "BossDefeatReward_GrassRabbitMan",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 128,
+                "count": 9999,
+                "static_id": "BossDefeatReward_GrimGirl",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 129,
+                "count": 9999,
+                "static_id": "BossDefeatReward_HawkBird",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 130,
+                "count": 9999,
+                "static_id": "BossDefeatReward_HerculesBeetle",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 131,
+                "count": 9999,
+                "static_id": "BossDefeatReward_HerculesBeetle_Ground",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 132,
+                "count": 9999,
+                "static_id": "BossDefeatReward_Horus_Water",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 133,
+                "count": 9999,
+                "static_id": "BossDefeatReward_IceHorse",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 134,
+                "count": 9999,
+                "static_id": "BossDefeatReward_IceHorse_Dark",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 135,
+                "count": 9999,
+                "static_id": "BossDefeatReward_JetDragon",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 136,
+                "count": 9999,
+                "static_id": "BossDefeatReward_KingAlpaca",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 137,
+                "count": 9999,
+                "static_id": "BossDefeatReward_KingAlpaca_Ice",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 138,
+                "count": 9999,
+                "static_id": "BossDefeatReward_KingBahamut",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 139,
+                "count": 9999,
+                "static_id": "BossDefeatReward_Kirin",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 140,
+                "count": 9999,
+                "static_id": "BossDefeatReward_Kitsunebi_Ice",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 141,
+                "count": 9999,
+                "static_id": "BossDefeatReward_LazyCatfish",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 142,
+                "count": 9999,
+                "static_id": "BossDefeatReward_LazyDragon_Electric",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 143,
+                "count": 9999,
+                "static_id": "BossDefeatReward_LilyQueen_Dark",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 144,
+                "count": 9999,
+                "static_id": "BossDefeatReward_MopKing",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 145,
+                "count": 9999,
+                "static_id": "BossDefeatReward_Mutant",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 146,
+                "count": 9999,
+                "static_id": "BossDefeatReward_MysteryMask",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 147,
+                "count": 9999,
+                "static_id": "BossDefeatReward_NaughtyCat",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 148,
+                "count": 9999,
+                "static_id": "BossDefeatReward_NightBlueHorse",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 149,
+                "count": 9999,
+                "static_id": "BossDefeatReward_PinkRabbit_Grass",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 150,
+                "count": 9999,
+                "static_id": "BossDefeatReward_PlantSlime",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 151,
+                "count": 9999,
+                "static_id": "BossDefeatReward_PurpleSpider",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 152,
+                "count": 9999,
+                "static_id": "BossDefeatReward_QueenBee",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 153,
+                "count": 9999,
+                "static_id": "BossDefeatReward_RaijinDaughter_Water",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 154,
+                "count": 9999,
+                "static_id": "BossDefeatReward_Ronin",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 155,
+                "count": 9999,
+                "static_id": "BossDefeatReward_SaintCentaur",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 156,
+                "count": 9999,
+                "static_id": "BossDefeatReward_SakuraSaurus",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 157,
+                "count": 9999,
+                "static_id": "BossDefeatReward_SakuraSaurus_Water",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 158,
+                "count": 9999,
+                "static_id": "BossDefeatReward_SkyDragon",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 159,
+                "count": 9999,
+                "static_id": "BossDefeatReward_Suzaku",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 160,
+                "count": 9999,
+                "static_id": "BossDefeatReward_ThunderBird",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 161,
+                "count": 9999,
+                "static_id": "BossDefeatReward_Umihebi",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 162,
+                "count": 9999,
+                "static_id": "BossDefeatReward_VioletFairy",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 163,
+                "count": 9999,
+                "static_id": "BossDefeatReward_WeaselDragon",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 164,
+                "count": 9999,
+                "static_id": "BossDefeatReward_Werewolf_Ice",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 165,
+                "count": 9999,
+                "static_id": "BossDefeatReward_WhiteDeer",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 166,
+                "count": 9999,
+                "static_id": "BossDefeatReward_WhiteMoth",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 167,
+                "count": 9999,
+                "static_id": "BossDefeatReward_WhiteShieldDragon",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 168,
+                "count": 9999,
+                "static_id": "BossDefeatReward_WhiteTiger_Ground",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 169,
+                "count": 9999,
+                "static_id": "BossDefeatReward_WingGolem",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 170,
+                "count": 9999,
+                "static_id": "BossDefeatReward_Yeti_Grass",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 171,
+                "count": 1,
+                "static_id": "AdditionalInventory_001",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 172,
+                "count": 1,
+                "static_id": "AdditionalInventory_002",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 173,
+                "count": 1,
+                "static_id": "AdditionalInventory_003",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 174,
+                "count": 1,
+                "static_id": "AdditionalInventory_004",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 175,
+                "count": 1,
+                "static_id": "AutoMealPouch_Tier1",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 176,
+                "count": 1,
+                "static_id": "AutoMealPouch_Tier2",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 177,
+                "count": 1,
+                "static_id": "AutoMealPouch_Tier3",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 178,
+                "count": 1,
+                "static_id": "AutoMealPouch_Tier4",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 179,
+                "count": 1,
+                "static_id": "AutoMealPouch_Tier5",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 180,
+                "count": 1,
+                "static_id": "Lantern",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 181,
+                "count": 1,
+                "static_id": "Relic",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 182,
+                "count": 1,
+                "static_id": "UnlockEquipmentSlot_Accessory_01",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 183,
+                "count": 1,
+                "static_id": "UnlockEquipmentSlot_Accessory_02",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 184,
+                "count": 1,
+                "static_id": "Unlock_Picking_Tier1",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 185,
+                "count": 1,
+                "static_id": "Unlock_Picking_Tier2",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              },
+              {
+                "dynamic_item": null,
+                "slot_index": 186,
+                "count": 1,
+                "static_id": "Unlock_Picking_Tier3",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              }
+            ],
+            "key": null,
+            "slot_num": 200
+          },
+          "weapon_load_out_container": {
+            "id": "a31e5794-4bd5-e65b-319f-caa3a518f6f2",
+            "type": "WeaponLoadOutContainer",
+            "slots": [
+              {
+                "dynamic_item": {
+                  "local_id": "1be37f24-07cb-4c2d-85a9-6378d839611d",
+                  "character_id": null,
+                  "character_key": null,
+                  "durability": 1997.0,
+                  "passive_skill_list": [],
+                  "remaining_bullets": 1,
+                  "type": "weapon",
+                  "static_id": "SFBow_5",
+                  "gender": null,
+                  "active_skills": null,
+                  "learned_skills": null,
+                  "passive_skills": null,
+                  "talent_hp": null,
+                  "talent_shot": null,
+                  "talent_defense": null
+                },
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "SFBow_5",
+                "local_id": "1be37f24-07cb-4c2d-85a9-6378d839611d"
+              }
+            ],
+            "key": null,
+            "slot_num": 4
+          },
+          "player_equipment_armor_container": {
+            "id": "b54a327d-415b-851e-739c-9ca02ebc3537",
+            "type": "PlayerEquipArmorContainer",
+            "slots": [
+              {
+                "dynamic_item": {
+                  "local_id": "ea152915-685a-4e28-8076-82d50494ddf5",
+                  "character_id": null,
+                  "character_key": null,
+                  "durability": 5000.0,
+                  "passive_skill_list": null,
+                  "remaining_bullets": null,
+                  "type": "armor",
+                  "static_id": "HeadEquip041",
+                  "gender": null,
+                  "active_skills": null,
+                  "learned_skills": null,
+                  "passive_skills": null,
+                  "talent_hp": null,
+                  "talent_shot": null,
+                  "talent_defense": null
+                },
+                "slot_index": 0,
+                "count": 1,
+                "static_id": "HeadEquip041",
+                "local_id": "ea152915-685a-4e28-8076-82d50494ddf5"
+              },
+              {
+                "dynamic_item": {
+                  "local_id": "2ef95bf5-5d21-4231-94a1-e6bc5d52e0c9",
+                  "character_id": null,
+                  "character_key": null,
+                  "durability": 72000.0,
+                  "passive_skill_list": null,
+                  "remaining_bullets": null,
+                  "type": "armor",
+                  "static_id": "SFArmorWeight_5",
+                  "gender": null,
+                  "active_skills": null,
+                  "learned_skills": null,
+                  "passive_skills": null,
+                  "talent_hp": null,
+                  "talent_shot": null,
+                  "talent_defense": null
+                },
+                "slot_index": 1,
+                "count": 1,
+                "static_id": "SFArmorWeight_5",
+                "local_id": "2ef95bf5-5d21-4231-94a1-e6bc5d52e0c9"
+              },
+              {
+                "dynamic_item": {
+                  "local_id": "265698a7-ebc8-4c5d-9c18-b47add1a16f3",
+                  "character_id": null,
+                  "character_key": null,
+                  "durability": 0.0,
+                  "passive_skill_list": null,
+                  "remaining_bullets": null,
+                  "type": "armor",
+                  "static_id": "Accessory_JumpCount_Increase3",
+                  "gender": null,
+                  "active_skills": null,
+                  "learned_skills": null,
+                  "passive_skills": null,
+                  "talent_hp": null,
+                  "talent_shot": null,
+                  "talent_defense": null
+                },
+                "slot_index": 2,
+                "count": 1,
+                "static_id": "Accessory_JumpCount_Increase3",
+                "local_id": "265698a7-ebc8-4c5d-9c18-b47add1a16f3"
+              },
+              {
+                "dynamic_item": {
+                  "local_id": "23433984-132f-49ec-8955-358e292a70cb",
+                  "character_id": null,
+                  "character_key": null,
+                  "durability": 21000.0,
+                  "passive_skill_list": null,
+                  "remaining_bullets": null,
+                  "type": "armor",
+                  "static_id": "Shield_SF",
+                  "gender": null,
+                  "active_skills": null,
+                  "learned_skills": null,
+                  "passive_skills": null,
+                  "talent_hp": null,
+                  "talent_shot": null,
+                  "talent_defense": null
+                },
+                "slot_index": 4,
+                "count": 1,
+                "static_id": "Shield_SF",
+                "local_id": "23433984-132f-49ec-8955-358e292a70cb"
+              },
+              {
+                "dynamic_item": {
+                  "local_id": "6798bd4f-510d-480e-b562-565fef73e49c",
+                  "character_id": null,
+                  "character_key": null,
+                  "durability": 0.0,
+                  "passive_skill_list": null,
+                  "remaining_bullets": null,
+                  "type": "armor",
+                  "static_id": "Glider_Legendary",
+                  "gender": null,
+                  "active_skills": null,
+                  "learned_skills": null,
+                  "passive_skills": null,
+                  "talent_hp": null,
+                  "talent_shot": null,
+                  "talent_defense": null
+                },
+                "slot_index": 5,
+                "count": 1,
+                "static_id": "Glider_Legendary",
+                "local_id": "6798bd4f-510d-480e-b562-565fef73e49c"
+              },
+              {
+                "dynamic_item": {
+                  "local_id": "a394422e-03cc-4959-b468-d0c32dd7d601",
+                  "character_id": null,
+                  "character_key": null,
+                  "durability": 0.0,
+                  "passive_skill_list": null,
+                  "remaining_bullets": null,
+                  "type": "armor",
+                  "static_id": "SphereModule_Homing",
+                  "gender": null,
+                  "active_skills": null,
+                  "learned_skills": null,
+                  "passive_skills": null,
+                  "talent_hp": null,
+                  "talent_shot": null,
+                  "talent_defense": null
+                },
+                "slot_index": 8,
+                "count": 1,
+                "static_id": "SphereModule_Homing",
+                "local_id": "a394422e-03cc-4959-b468-d0c32dd7d601"
+              }
+            ],
+            "key": null,
+            "slot_num": 9
+          },
+          "food_equip_container": {
+            "id": "ba8f099b-49bc-fd43-57f5-8fa6b49e9e76",
+            "type": "FoodEquipContainer",
+            "slots": [
+              {
+                "dynamic_item": null,
+                "slot_index": 0,
+                "count": 100,
+                "static_id": "Curry",
+                "local_id": "00000000-0000-0000-0000-000000000000"
+              }
+            ],
+            "key": null,
+            "slot_num": 5
+          },
+          "pal_box": {
+            "id": "a6cb3db4-4760-f87f-c404-8b87887c0f29",
+            "player_uid": "8c2f1930-0000-0000-0000-000000000000",
+            "type": "PalBox",
+            "size": 960,
+            "slots": [
+              {
+                "slot_index": 0,
+                "pal_id": "0274a5bb-f10c-46b3-9990-f9ed4f8995f8"
+              },
+              {
+                "slot_index": 1,
+                "pal_id": "89e58a43-c378-4bfa-b426-b51d43663376"
+              },
+              {
+                "slot_index": 2,
+                "pal_id": "27170535-782e-4d4c-ac9e-6bd1088934ec"
+              },
+              {
+                "slot_index": 3,
+                "pal_id": "1463ab41-114a-4003-9253-b21f6cacd8ba"
+              },
+              {
+                "slot_index": 4,
+                "pal_id": "e544aab8-3dc9-425c-965c-17677038f332"
+              },
+              {
+                "slot_index": 5,
+                "pal_id": "354ba8cf-9977-47a7-b74c-8f05f66417ba"
+              }
+            ]
+          },
+          "party": {
+            "id": "65a4f103-471b-3102-7bb3-18bcefee294d",
+            "player_uid": "8c2f1930-0000-0000-0000-000000000000",
+            "type": "Party",
+            "size": 5,
+            "slots": [
+              {
+                "slot_index": 0,
+                "pal_id": "b38e7ffd-a271-488a-b584-6cb545a3f439"
+              },
+              {
+                "slot_index": 1,
+                "pal_id": "9817e809-5a57-4bbf-a9ca-3446f118e1f6"
+              },
+              {
+                "slot_index": 2,
+                "pal_id": "cb61f17a-9829-44d6-893c-ab7dfbf41383"
+              },
+              {
+                "slot_index": 3,
+                "pal_id": "bc917376-67fa-4e28-85a5-59e77e5b9db5"
+              },
+              {
+                "slot_index": 4,
+                "pal_id": "8d55a026-e8e2-478c-8efc-bf0516b4605f"
+              }
+            ]
+          },
+          "guild_id": "54491484-4e6c-7327-70b2-868f350929f6",
+          "uid": "8c2f1930-0000-0000-0000-000000000000",
+          "instance_id": "5669dbff-48ca-5113-6c52-2b939f0fb385",
+          "nickname": "O",
+          "level": 65,
+          "technologies": [
+            "Workbench",
+            "HandTorch"
+          ],
+          "technology_points": 42,
+          "boss_technology_points": 7,
+          "exp": 165505236,
+          "hp": 7855000,
+          "stomach": 83.69901275634766,
+          "sanity": 100.0,
+          "status_point_list": {
+            "max_hp": 50,
+            "max_sp": 50,
+            "attack": 50,
+            "weight": 50,
+            "capture_rate": 0,
+            "work_speed": 50
+          },
+          "ext_status_point_list": {
+            "max_hp": 0,
+            "max_sp": 0,
+            "attack": 0,
+            "weight": 0,
+            "work_speed": 0
+          },
+          "pal_box_id": "a6cb3db4-4760-f87f-c404-8b87887c0f29",
+          "otomo_container_id": "65a4f103-471b-3102-7bb3-18bcefee294d",
+          "completed_missions": [
+            "Main_UnlockFastTravel",
+            "Main_PickupWood"
+          ],
+          "current_missions": [
+            "Main_GainStatus"
+          ],
+          "unlocked_fast_travel_points": [
+            "41E36D9A4B2BA79A3AD1B7B83B16F77D"
+          ],
+          "collected_effigies": [],
+          "collected_relics": {},
+          "defeated_bosses": [],
+          "effigy_possess_num": 0,
+          "location": {
+            "x": 707.447639502036,
+            "y": -136659.84283941242,
+            "z": 2977.1055300651587
+          },
+          "last_online_time": "2026-04-07T16:36:46.740997",
+          "dps": null
+        },
+        "player_id": "8c2f1930-0000-0000-0000-000000000000",
+        "origin": "edit"
+      }
+    }
+  ]
+}

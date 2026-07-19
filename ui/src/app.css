@@ -11,9 +11,14 @@
  * swaps the color palette. To add a new theme, drop in a `[data-theme='name']`
  * palette file, import it here, and register it in the theme selector.
  */
-@import './dark.css';
-@import './light.css';
-@import './frontier.css';
+@import './themes/dark.css';
+@import './themes/light.css';
+@import './themes/frontier.css';
+@import './themes/ancient.css';
+@import './themes/grizzbolt.css';
+@import './themes/lamball.css';
+@import './themes/sakurajima.css';
+@import './themes/wildlands.css';
 
 @custom-variant dark (&:where(.dark, .dark *));
 

@@ -5,40 +5,31 @@ use std::io::Cursor;
 use crate::error::CoreError;
 
 pub fn sav_to_json_string(sav_bytes: &[u8]) -> Result<String, CoreError> {
-    let save = uesave::Save::read_with_types(
-        &mut Cursor::new(sav_bytes),
-        uesave::games::palworld::palworld_types(),
-    )
-    .map_err(|error| CoreError::Parse(error.to_string()))?;
+    let save = crate::ue::SaveReader::new()
+        .game::<crate::ue::Palworld>()
+        .types(crate::ue::games::palworld::palworld_types())
+        .read(Cursor::new(sav_bytes))
+        .map_err(|error| CoreError::Parse(error.to_string()))?;
     serde_json::to_string(&save).map_err(|error| CoreError::Other(error.to_string()))
 }
 
 pub fn json_to_sav_bytes(json_bytes: &[u8]) -> Result<Vec<u8>, CoreError> {
-    let save: uesave::Save =
+    let save: crate::ue::Save =
         serde_json::from_slice(json_bytes).map_err(|error| CoreError::Parse(error.to_string()))?;
     let mut sav_bytes = Vec::new();
-    save.write_compressed(
-        &mut sav_bytes,
-        uesave::compression::CompressionFormat::Oodle,
-    )
-    .map_err(|error| CoreError::Parse(error.to_string()))?;
+    save.write_plm(&mut sav_bytes)
+        .map_err(|error| CoreError::Parse(error.to_string()))?;
     Ok(sav_bytes)
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::gamepass::fixture::python_testdata_dir;
+    use crate::gamepass::fixture::reference_saves_dir;
 
     #[test]
     fn sav_json_sav_round_trip_preserves_gvas_bytes() {
-        let testdata = match python_testdata_dir() {
-            Some(dir) => dir,
-            None => {
-                eprintln!("SKIP: python testdata not found (set PSP_PY_TESTDATA)");
-                return;
-            }
-        };
+        let testdata = reference_saves_dir();
         let sav_bytes =
             std::fs::read(testdata.join("00000000000000000000000000000001.sav")).unwrap();
 
@@ -50,10 +41,10 @@ mod tests {
         assert_eq!(&rebuilt_sav[8..12], b"PlM1");
 
         let original_gvas =
-            uesave::compression::decompress_save(&mut std::io::Cursor::new(sav_bytes.as_slice()))
+            crate::ue::compression::decompress_save(&mut std::io::Cursor::new(sav_bytes.as_slice()))
                 .unwrap();
         let rebuilt_gvas =
-            uesave::compression::decompress_save(&mut std::io::Cursor::new(rebuilt_sav.as_slice()))
+            crate::ue::compression::decompress_save(&mut std::io::Cursor::new(rebuilt_sav.as_slice()))
                 .unwrap();
         assert_eq!(original_gvas, rebuilt_gvas);
     }
@@ -65,16 +56,10 @@ mod tests {
     }
 
     #[test]
-    fn corpus_level_meta_round_trip() {
-        let corpus_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join(
-            "../backups/gamepass/000900000487F3B6_0000000000000000000000006B210A9C_20260325231642/4F64BAB699AE4B4A97A5862116E07C6D/LevelMeta.sav",
-        );
-        if !corpus_path.exists() {
-            eprintln!("SKIP: corpus LevelMeta.sav not found at {corpus_path:?}");
-            return;
-        }
-
-        let sav_bytes = std::fs::read(&corpus_path).unwrap();
+    fn level_meta_round_trip_preserves_gvas_bytes() {
+        let sav_bytes =
+            std::fs::read(crate::gamepass::fixture::reference_saves_dir().join("LevelMeta.sav"))
+                .unwrap();
 
         let json = sav_to_json_string(&sav_bytes).unwrap();
         assert!(json.starts_with('{'), "JSON should start with '{{");
@@ -91,10 +76,10 @@ mod tests {
         );
 
         let original_gvas =
-            uesave::compression::decompress_save(&mut std::io::Cursor::new(sav_bytes.as_slice()))
+            crate::ue::compression::decompress_save(&mut std::io::Cursor::new(sav_bytes.as_slice()))
                 .unwrap();
         let rebuilt_gvas =
-            uesave::compression::decompress_save(&mut std::io::Cursor::new(rebuilt_sav.as_slice()))
+            crate::ue::compression::decompress_save(&mut std::io::Cursor::new(rebuilt_sav.as_slice()))
                 .unwrap();
         assert_eq!(
             original_gvas, rebuilt_gvas,

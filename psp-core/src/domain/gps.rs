@@ -8,7 +8,7 @@
 use std::collections::BTreeMap;
 use std::path::PathBuf;
 
-use uesave::{PropertyKey, StructValue};
+use crate::ue::{PropertyKey, StructValue};
 
 use crate::domain::pal;
 use crate::dto::ordered_map::OrderedMap;
@@ -25,7 +25,7 @@ pub struct GpsState {
     /// Known as soon as the GPS file is located, before it is ever parsed --
     /// `gps_available` is true from that point on.
     pub file_path: Option<PathBuf>,
-    pub save: Option<uesave::Save>,
+    pub save: Option<crate::ue::Save>,
     /// `SaveParameterArray` length: every valid slot index is
     /// `0..slot_count`, occupied or not.
     pub slot_count: usize,
@@ -35,7 +35,7 @@ pub struct GpsState {
     pub loaded: bool,
 }
 
-fn gps_slots(save: &uesave::Save) -> Option<&Vec<StructValue>> {
+fn gps_slots(save: &crate::ue::Save) -> Option<&Vec<StructValue>> {
     props::struct_values(
         save.root
             .properties
@@ -44,7 +44,7 @@ fn gps_slots(save: &uesave::Save) -> Option<&Vec<StructValue>> {
     )
 }
 
-fn gps_slots_mut(save: &mut uesave::Save) -> Option<&mut Vec<StructValue>> {
+fn gps_slots_mut(save: &mut crate::ue::Save) -> Option<&mut Vec<StructValue>> {
     props::struct_values_mut(
         save.root
             .properties
@@ -417,7 +417,7 @@ impl SaveSession {
 mod tests {
     use super::*;
     use crate::session::SaveKind;
-    use uesave::{
+    use crate::ue::{
         Header, PackageVersion, Properties, Property, PropertySchemas, Root, Save, ValueVec,
     };
     use uuid::Uuid;
@@ -730,15 +730,13 @@ mod tests {
         assert!(session.gps_sav_bytes().unwrap().is_none());
     }
 
-    /// Set PSP_TEST_GPS_SAV to a real `GlobalPalStorage.sav` to exercise the
-    /// actual parse/compression path; skips cleanly otherwise.
+    /// Exercises the actual parse/compression path against the committed
+    /// `GlobalPalStorage.sav` fixture. Never skips.
     #[test]
     fn gps_load_add_clone_delete_round_trips_against_a_real_file() {
-        let Some(gps_path) = std::env::var_os("PSP_TEST_GPS_SAV") else {
-            eprintln!("PSP_TEST_GPS_SAV not set, skipping");
-            return;
-        };
-        let gps_bytes = std::fs::read(gps_path).expect("fixture readable");
+        let gps_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../tests/fixtures/saves/GlobalPalStorage.sav");
+        let gps_bytes = std::fs::read(gps_path).expect("read committed GlobalPalStorage.sav fixture");
         let data = game_data();
         let level = minimal_save(Properties::default());
         let mut session = SaveSession::new_for_tests(SaveKind::InMemory, level);

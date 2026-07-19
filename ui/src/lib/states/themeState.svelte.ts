@@ -1,14 +1,27 @@
 import { persistedState } from 'svelte-persisted-state';
 import type { SelectOption } from '$types';
 
-export type ThemeName = 'dark' | 'frontier' | 'light';
+export type ThemeName =
+	| 'dark'
+	| 'frontier'
+	| 'light'
+	| 'grizzbolt'
+	| 'sakurajima'
+	| 'wildlands'
+	| 'ancient'
+	| 'lamball';
 
 export const DEFAULT_THEME: ThemeName = 'dark';
 
 export const themeOptions: SelectOption[] = [
 	{ value: 'dark', label: 'Dark' },
 	{ value: 'frontier', label: 'Frontier' },
-	{ value: 'light', label: 'Light' }
+	{ value: 'light', label: 'Light' },
+	{ value: 'grizzbolt', label: 'Grizzbolt' },
+	{ value: 'sakurajima', label: 'Sakurajima' },
+	{ value: 'wildlands', label: 'Wildlands' },
+	{ value: 'ancient', label: 'Ancient Tech' },
+	{ value: 'lamball', label: 'Lamball' }
 ];
 
 /**

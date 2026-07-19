@@ -8,7 +8,7 @@
 
 /// Looks up a property by name, descending through nested user structs when
 /// `path` has more than one segment.
-pub fn get<'a>(properties: &'a uesave::Properties, path: &[&str]) -> Option<&'a uesave::Property> {
+pub fn get<'a>(properties: &'a crate::ue::Properties, path: &[&str]) -> Option<&'a crate::ue::Property> {
     let (segment, rest) = path.split_first()?;
     let property = properties
         .into_iter()
@@ -21,7 +21,7 @@ pub fn get<'a>(properties: &'a uesave::Properties, path: &[&str]) -> Option<&'a 
 }
 
 /// Like `get`, but starting from a property rather than a `Properties` map.
-pub fn get_in<'a>(property: &'a uesave::Property, path: &[&str]) -> Option<&'a uesave::Property> {
+pub fn get_in<'a>(property: &'a crate::ue::Property, path: &[&str]) -> Option<&'a crate::ue::Property> {
     let mut current = property;
     for segment in path {
         current = get(struct_properties(current)?, &[segment])?;
@@ -33,9 +33,9 @@ pub fn get_in<'a>(property: &'a uesave::Property, path: &[&str]) -> Option<&'a u
 /// of a `PropertyKey` that disambiguates same-named siblings, so it resolves
 /// exactly the node `get` would.
 pub fn get_mut<'a>(
-    properties: &'a mut uesave::Properties,
+    properties: &'a mut crate::ue::Properties,
     path: &[&str],
-) -> Option<&'a mut uesave::Property> {
+) -> Option<&'a mut crate::ue::Property> {
     let (segment, rest) = path.split_first()?;
     let property = properties
         .0
@@ -50,9 +50,9 @@ pub fn get_mut<'a>(
 
 /// Mutable counterpart of `get_in`.
 pub fn get_in_mut<'a>(
-    property: &'a mut uesave::Property,
+    property: &'a mut crate::ue::Property,
     path: &[&str],
-) -> Option<&'a mut uesave::Property> {
+) -> Option<&'a mut crate::ue::Property> {
     let mut current = property;
     for segment in path {
         current = get_mut(struct_props_mut(current)?, &[segment])?;
@@ -62,76 +62,76 @@ pub fn get_in_mut<'a>(
 
 /// The nested `Properties` map of a user-struct property (e.g. `ContainerId`,
 /// whose value is itself a bag of properties).
-pub fn struct_properties(property: &uesave::Property) -> Option<&uesave::Properties> {
+pub fn struct_properties(property: &crate::ue::Property) -> Option<&crate::ue::Properties> {
     match property {
-        uesave::Property::Struct(uesave::StructValue::Struct(properties)) => Some(properties),
+        crate::ue::Property::Struct(crate::ue::StructValue::Struct(properties)) => Some(properties),
         _ => None,
     }
 }
 
 /// A `Str`, `Name`, or `Enum` property's text.
-pub fn as_str(property: &uesave::Property) -> Option<&str> {
+pub fn as_str(property: &crate::ue::Property) -> Option<&str> {
     match property {
-        uesave::Property::Str(text)
-        | uesave::Property::Name(text)
-        | uesave::Property::Enum(text) => Some(text),
+        crate::ue::Property::Str(text)
+        | crate::ue::Property::Name(text)
+        | crate::ue::Property::Enum(text) => Some(text),
         _ => None,
     }
 }
 
-pub fn as_bool(property: &uesave::Property) -> Option<bool> {
+pub fn as_bool(property: &crate::ue::Property) -> Option<bool> {
     match property {
-        uesave::Property::Bool(value) => Some(*value),
+        crate::ue::Property::Bool(value) => Some(*value),
         _ => None,
     }
 }
 
 /// An `Enum` property's fully qualified variant name (e.g.
 /// `"EPalGroupType::Guild"`).
-pub fn as_enum(property: &uesave::Property) -> Option<&str> {
+pub fn as_enum(property: &crate::ue::Property) -> Option<&str> {
     match property {
-        uesave::Property::Enum(value) => Some(value),
+        crate::ue::Property::Enum(value) => Some(value),
         _ => None,
     }
 }
 
 /// A raw `Byte` property's value. Returns `None` for an enum-backed byte
 /// (`Byte::Label`) — use `as_enum` for those.
-pub fn as_byte(property: &uesave::Property) -> Option<u8> {
+pub fn as_byte(property: &crate::ue::Property) -> Option<u8> {
     match property {
-        uesave::Property::Byte(uesave::Byte::Byte(value)) => Some(*value),
+        crate::ue::Property::Byte(crate::ue::Byte::Byte(value)) => Some(*value),
         _ => None,
     }
 }
 
 /// .NET-style ticks from a `DateTime` struct property (the player .sav
 /// "Timestamp").
-pub fn as_datetime_ticks(property: &uesave::Property) -> Option<u64> {
+pub fn as_datetime_ticks(property: &crate::ue::Property) -> Option<u64> {
     match property {
-        uesave::Property::Struct(uesave::StructValue::DateTime(ticks)) => Some(*ticks),
+        crate::ue::Property::Struct(crate::ue::StructValue::DateTime(ticks)) => Some(*ticks),
         _ => None,
     }
 }
 
-pub fn map_entries(property: &uesave::Property) -> Option<&Vec<uesave::MapEntry>> {
+pub fn map_entries(property: &crate::ue::Property) -> Option<&Vec<crate::ue::MapEntry>> {
     match property {
-        uesave::Property::Map(entries) => Some(entries),
+        crate::ue::Property::Map(entries) => Some(entries),
         _ => None,
     }
 }
 
-pub fn map_entries_mut(property: &mut uesave::Property) -> Option<&mut Vec<uesave::MapEntry>> {
+pub fn map_entries_mut(property: &mut crate::ue::Property) -> Option<&mut Vec<crate::ue::MapEntry>> {
     match property {
-        uesave::Property::Map(entries) => Some(entries),
+        crate::ue::Property::Map(entries) => Some(entries),
         _ => None,
     }
 }
 
 /// A byte-array `Array` property's contents (e.g. `RawData`). Returns
 /// `None` for an enum-labeled byte array.
-pub fn as_byte_array(property: &uesave::Property) -> Option<&[u8]> {
+pub fn as_byte_array(property: &crate::ue::Property) -> Option<&[u8]> {
     match property {
-        uesave::Property::Array(uesave::ValueVec::Byte(uesave::ByteArray::Byte(bytes))) => {
+        crate::ue::Property::Array(crate::ue::ValueVec::Byte(crate::ue::ByteArray::Byte(bytes))) => {
             Some(bytes)
         }
         _ => None,
@@ -141,15 +141,15 @@ pub fn as_byte_array(property: &uesave::Property) -> Option<&[u8]> {
 /// `FGuid`'s `Display` already renders Palworld's guid byte order as a
 /// canonical UUID string. Panics only on unreachable input; prefer
 /// `guid_to_uuid` for untrusted save data.
-pub fn fguid_to_uuid(guid: &uesave::FGuid) -> uuid::Uuid {
+pub fn fguid_to_uuid(guid: &crate::ue::FGuid) -> uuid::Uuid {
     guid.to_string()
         .parse()
         .expect("FGuid Display always yields a canonical uuid")
 }
 
-pub fn as_uuid(property: &uesave::Property) -> Option<uuid::Uuid> {
+pub fn as_uuid(property: &crate::ue::Property) -> Option<uuid::Uuid> {
     match property {
-        uesave::Property::Struct(uesave::StructValue::Guid(guid)) => Some(fguid_to_uuid(guid)),
+        crate::ue::Property::Struct(crate::ue::StructValue::Guid(guid)) => Some(fguid_to_uuid(guid)),
         _ => None,
     }
 }
@@ -161,82 +161,82 @@ pub const EMPTY_UUID: uuid::Uuid = uuid::Uuid::nil();
 /// `FGuid` -> `Uuid` without panicking, for untrusted save data. The nil
 /// fallback is unreachable in practice (`FGuid`'s four `u32` fields always
 /// format to 32 hex digits) but a defensive accessor must not panic.
-pub fn guid_to_uuid(guid: &uesave::FGuid) -> uuid::Uuid {
+pub fn guid_to_uuid(guid: &crate::ue::FGuid) -> uuid::Uuid {
     guid.to_string().parse().unwrap_or(uuid::Uuid::nil())
 }
 
 /// `Uuid` -> `FGuid` for writing back into a save. The nil fallback is
 /// likewise unreachable: a `Uuid`'s canonical string is always 32 hex digits,
 /// which `FGuid::parse_str` accepts.
-pub fn uuid_to_guid(value: uuid::Uuid) -> uesave::FGuid {
-    uesave::FGuid::parse_str(&value.to_string()).unwrap_or_else(|_| uesave::FGuid::nil())
+pub fn uuid_to_guid(value: uuid::Uuid) -> crate::ue::FGuid {
+    crate::ue::FGuid::parse_str(&value.to_string()).unwrap_or_else(|_| crate::ue::FGuid::nil())
 }
 
 /// Alias of `struct_properties`.
-pub fn struct_props(property: &uesave::Property) -> Option<&uesave::Properties> {
+pub fn struct_props(property: &crate::ue::Property) -> Option<&crate::ue::Properties> {
     struct_properties(property)
 }
 
-pub fn struct_props_mut(property: &mut uesave::Property) -> Option<&mut uesave::Properties> {
+pub fn struct_props_mut(property: &mut crate::ue::Property) -> Option<&mut crate::ue::Properties> {
     match property {
-        uesave::Property::Struct(uesave::StructValue::Struct(properties)) => Some(properties),
+        crate::ue::Property::Struct(crate::ue::StructValue::Struct(properties)) => Some(properties),
         _ => None,
     }
 }
 
-pub fn as_i32(property: &uesave::Property) -> Option<i32> {
+pub fn as_i32(property: &crate::ue::Property) -> Option<i32> {
     match property {
-        uesave::Property::Int(value) => Some(*value),
+        crate::ue::Property::Int(value) => Some(*value),
         _ => None,
     }
 }
 
 /// Also widens a plain `Int`: the game writes some numeric fields as `Int` or
 /// `Int64` depending on the engine version that produced the save.
-pub fn as_i64(property: &uesave::Property) -> Option<i64> {
+pub fn as_i64(property: &crate::ue::Property) -> Option<i64> {
     match property {
-        uesave::Property::Int64(value) => Some(*value),
-        uesave::Property::Int(value) => Some(*value as i64),
+        crate::ue::Property::Int64(value) => Some(*value),
+        crate::ue::Property::Int(value) => Some(*value as i64),
         _ => None,
     }
 }
 
-pub fn as_f32(property: &uesave::Property) -> Option<f32> {
+pub fn as_f32(property: &crate::ue::Property) -> Option<f32> {
     match property {
-        uesave::Property::Float(uesave::Float(value)) => Some(*value),
+        crate::ue::Property::Float(crate::ue::Float(value)) => Some(*value),
         _ => None,
     }
 }
 
 /// Alias of `as_byte`.
-pub fn as_byte_number(property: &uesave::Property) -> Option<u8> {
+pub fn as_byte_number(property: &crate::ue::Property) -> Option<u8> {
     as_byte(property)
 }
 
-pub fn name_values(property: &uesave::Property) -> Option<&Vec<String>> {
+pub fn name_values(property: &crate::ue::Property) -> Option<&Vec<String>> {
     match property {
-        uesave::Property::Array(uesave::ValueVec::Name(values)) => Some(values),
+        crate::ue::Property::Array(crate::ue::ValueVec::Name(values)) => Some(values),
         _ => None,
     }
 }
 
-pub fn enum_values(property: &uesave::Property) -> Option<&Vec<String>> {
+pub fn enum_values(property: &crate::ue::Property) -> Option<&Vec<String>> {
     match property {
-        uesave::Property::Array(uesave::ValueVec::Enum(values)) => Some(values),
+        crate::ue::Property::Array(crate::ue::ValueVec::Enum(values)) => Some(values),
         _ => None,
     }
 }
 
-pub fn struct_values(property: &uesave::Property) -> Option<&Vec<uesave::StructValue>> {
+pub fn struct_values(property: &crate::ue::Property) -> Option<&Vec<crate::ue::StructValue>> {
     match property {
-        uesave::Property::Array(uesave::ValueVec::Struct(values)) => Some(values),
+        crate::ue::Property::Array(crate::ue::ValueVec::Struct(values)) => Some(values),
         _ => None,
     }
 }
 
-pub fn struct_values_mut(property: &mut uesave::Property) -> Option<&mut Vec<uesave::StructValue>> {
+pub fn struct_values_mut(property: &mut crate::ue::Property) -> Option<&mut Vec<crate::ue::StructValue>> {
     match property {
-        uesave::Property::Array(uesave::ValueVec::Struct(values)) => Some(values),
+        crate::ue::Property::Array(crate::ue::ValueVec::Struct(values)) => Some(values),
         _ => None,
     }
 }
@@ -244,62 +244,62 @@ pub fn struct_values_mut(property: &mut uesave::Property) -> Option<&mut Vec<ues
 /// A `FixedPoint64` stat field: always the bare user struct
 /// `{"Value": Int64(n)}`. Uses `Properties::get`, never the panicking `Index`
 /// impl, since a malformed save may be missing the field.
-pub fn fixed_point64(property: &uesave::Property) -> Option<i64> {
+pub fn fixed_point64(property: &crate::ue::Property) -> Option<i64> {
     let inner = struct_props(property)?;
-    as_i64(inner.0.get(&uesave::PropertyKey::from("Value"))?)
+    as_i64(inner.0.get(&crate::ue::PropertyKey::from("Value"))?)
 }
 
-pub fn guid_property(value: uuid::Uuid) -> uesave::Property {
-    uesave::Property::Struct(uesave::StructValue::Guid(uuid_to_guid(value)))
+pub fn guid_property(value: uuid::Uuid) -> crate::ue::Property {
+    crate::ue::Property::Struct(crate::ue::StructValue::Guid(uuid_to_guid(value)))
 }
 
-pub fn str_property(value: &str) -> uesave::Property {
-    uesave::Property::Str(value.to_string())
+pub fn str_property(value: &str) -> crate::ue::Property {
+    crate::ue::Property::Str(value.to_string())
 }
 
-pub fn name_property(value: &str) -> uesave::Property {
-    uesave::Property::Name(value.to_string())
+pub fn name_property(value: &str) -> crate::ue::Property {
+    crate::ue::Property::Name(value.to_string())
 }
 
 /// `value` must be the fully qualified variant name (e.g.
 /// `"EPalGenderType::Female"`).
-pub fn enum_property(value: &str) -> uesave::Property {
-    uesave::Property::Enum(value.to_string())
+pub fn enum_property(value: &str) -> crate::ue::Property {
+    crate::ue::Property::Enum(value.to_string())
 }
 
-pub fn bool_property(value: bool) -> uesave::Property {
-    uesave::Property::Bool(value)
+pub fn bool_property(value: bool) -> crate::ue::Property {
+    crate::ue::Property::Bool(value)
 }
 
-pub fn int_property(value: i32) -> uesave::Property {
-    uesave::Property::Int(value)
+pub fn int_property(value: i32) -> crate::ue::Property {
+    crate::ue::Property::Int(value)
 }
 
-pub fn int64_property(value: i64) -> uesave::Property {
-    uesave::Property::Int64(value)
+pub fn int64_property(value: i64) -> crate::ue::Property {
+    crate::ue::Property::Int64(value)
 }
 
-pub fn float_property(value: f32) -> uesave::Property {
-    uesave::Property::Float(uesave::Float(value))
+pub fn float_property(value: f32) -> crate::ue::Property {
+    crate::ue::Property::Float(crate::ue::Float(value))
 }
 
-pub fn byte_property(value: u8) -> uesave::Property {
-    uesave::Property::Byte(uesave::Byte::Byte(value))
+pub fn byte_property(value: u8) -> crate::ue::Property {
+    crate::ue::Property::Byte(crate::ue::Byte::Byte(value))
 }
 
-pub fn name_array_property(values: Vec<String>) -> uesave::Property {
-    uesave::Property::Array(uesave::ValueVec::Name(values))
+pub fn name_array_property(values: Vec<String>) -> crate::ue::Property {
+    crate::ue::Property::Array(crate::ue::ValueVec::Name(values))
 }
 
-pub fn enum_array_property(values: Vec<String>) -> uesave::Property {
-    uesave::Property::Array(uesave::ValueVec::Enum(values))
+pub fn enum_array_property(values: Vec<String>) -> crate::ue::Property {
+    crate::ue::Property::Array(crate::ue::ValueVec::Enum(values))
 }
 
 /// Inverse of `fixed_point64`.
-pub fn fixed_point64_property(value: i64) -> uesave::Property {
-    let mut inner = uesave::Properties::default();
-    inner.insert("Value", uesave::Property::Int64(value));
-    uesave::Property::Struct(uesave::StructValue::Struct(inner))
+pub fn fixed_point64_property(value: i64) -> crate::ue::Property {
+    let mut inner = crate::ue::Properties::default();
+    inner.insert("Value", crate::ue::Property::Int64(value));
+    crate::ue::Property::Struct(crate::ue::StructValue::Struct(inner))
 }
 
 // `uesave`'s writer looks up a property's schema by its exact dotted scope path
@@ -311,7 +311,7 @@ pub fn fixed_point64_property(value: i64) -> uesave::Property {
 /// Finds a recorded schema path ending with `suffix` and returns everything
 /// before it — the way to derive a schema for a brand-new property by copying
 /// an existing sibling's shape, since no schema exists at the new path yet.
-pub fn schema_prefix_ending_with(save: &uesave::Save, suffix: &str) -> Option<String> {
+pub fn schema_prefix_ending_with(save: &crate::ue::Save, suffix: &str) -> Option<String> {
     save.schemas
         .schemas()
         .keys()
@@ -321,7 +321,7 @@ pub fn schema_prefix_ending_with(save: &uesave::Save, suffix: &str) -> Option<St
 
 /// Records `tag` at `path` only when no schema exists there yet; never
 /// overwrites one already read from the real save.
-pub fn ensure_schema(save: &mut uesave::Save, path: String, tag: uesave::PropertyTagPartial) {
+pub fn ensure_schema(save: &mut crate::ue::Save, path: String, tag: crate::ue::PropertyTagPartial) {
     if save.schemas.get(&path).is_none() {
         save.schemas.record(path, tag);
     }
@@ -333,7 +333,7 @@ pub fn ensure_schema(save: &mut uesave::Save, path: String, tag: uesave::Propert
 /// a subtree grafted across saves keeps its path -- and carries properties the
 /// target may never have had a tag for. `target`'s own tags always win: only they
 /// describe how the target was actually read.
-pub fn merge_schemas(target: &mut uesave::Save, source: &uesave::Save) {
+pub fn merge_schemas(target: &mut crate::ue::Save, source: &crate::ue::Save) {
     for (path, tag) in source.schemas.schemas().clone() {
         ensure_schema(target, path, tag);
     }
@@ -354,16 +354,16 @@ fn swap_uuid_value(value: uuid::Uuid, old: uuid::Uuid, new: uuid::Uuid) -> Optio
 /// Swaps a single ownership-key leaf in place: a `Str` holding uuid text, or a
 /// `Guid` struct. Any other shape (including a `Str` that isn't valid uuid
 /// text) is left untouched.
-fn swap_leaf_uuid_property(property: &mut uesave::Property, old: uuid::Uuid, new: uuid::Uuid) {
+fn swap_leaf_uuid_property(property: &mut crate::ue::Property, old: uuid::Uuid, new: uuid::Uuid) {
     match property {
-        uesave::Property::Str(text) => {
+        crate::ue::Property::Str(text) => {
             if let Ok(parsed) = text.parse::<uuid::Uuid>() {
                 if let Some(swapped) = swap_uuid_value(parsed, old, new) {
                     *text = swapped.to_string();
                 }
             }
         }
-        uesave::Property::Struct(uesave::StructValue::Guid(guid)) => {
+        crate::ue::Property::Struct(crate::ue::StructValue::Guid(guid)) => {
             if let Some(swapped) = swap_uuid_value(guid_to_uuid(guid), old, new) {
                 *guid = uuid_to_guid(swapped);
             }
@@ -379,23 +379,23 @@ fn swap_leaf_uuid_property(property: &mut uesave::Property, old: uuid::Uuid, new
 /// — see `swap_uuid_values_deep` for why that is correct and must not be
 /// "fixed" by hand-adding typed-struct arms.
 fn swap_uuid_values_deep_in_property(
-    property: &mut uesave::Property,
+    property: &mut crate::ue::Property,
     keys: &[&str],
     old: uuid::Uuid,
     new: uuid::Uuid,
 ) {
     match property {
-        uesave::Property::Struct(uesave::StructValue::Struct(nested)) => {
+        crate::ue::Property::Struct(crate::ue::StructValue::Struct(nested)) => {
             swap_uuid_values_deep(nested, keys, old, new);
         }
-        uesave::Property::Array(uesave::ValueVec::Struct(values)) => {
+        crate::ue::Property::Array(crate::ue::ValueVec::Struct(values)) => {
             for value in values.iter_mut() {
-                if let uesave::StructValue::Struct(nested) = value {
+                if let crate::ue::StructValue::Struct(nested) = value {
                     swap_uuid_values_deep(nested, keys, old, new);
                 }
             }
         }
-        uesave::Property::Map(entries) => {
+        crate::ue::Property::Map(entries) => {
             for entry in entries.iter_mut() {
                 swap_uuid_values_deep_in_property(&mut entry.key, keys, old, new);
                 swap_uuid_values_deep_in_property(&mut entry.value, keys, old, new);
@@ -418,7 +418,7 @@ fn swap_uuid_values_deep_in_property(
 /// `swap_guild_member_uids`, `swap_player_file_refs`). Adding typed-struct
 /// arms here would double-swap those fields.
 pub fn swap_uuid_values_deep(
-    properties: &mut uesave::Properties,
+    properties: &mut crate::ue::Properties,
     keys: &[&str],
     old: uuid::Uuid,
     new: uuid::Uuid,
@@ -434,7 +434,7 @@ pub fn swap_uuid_values_deep(
 #[cfg(test)]
 mod deep_swap_tests {
     use super::*;
-    use uesave::{MapEntry, Properties, Property, StructValue, ValueVec};
+    use crate::ue::{MapEntry, Properties, Property, StructValue, ValueVec};
 
     const OWNERSHIP_KEYS: [&str; 4] = [
         "OwnerPlayerUId",
@@ -576,9 +576,9 @@ mod deep_swap_tests {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use uesave::{Properties, Property, StructValue};
+    use crate::ue::{Properties, Property, StructValue};
 
-    fn fguid(text: &str) -> uesave::FGuid {
+    fn fguid(text: &str) -> crate::ue::FGuid {
         serde_json::from_value(serde_json::Value::String(text.to_string())).unwrap()
     }
 
@@ -627,9 +627,9 @@ mod tests {
 #[cfg(test)]
 mod extension_tests {
     use super::*;
-    use uesave::{ByteArray, Properties, Property, StructValue, ValueVec};
+    use crate::ue::{ByteArray, Properties, Property, StructValue, ValueVec};
 
-    fn fguid(text: &str) -> uesave::FGuid {
+    fn fguid(text: &str) -> crate::ue::FGuid {
         serde_json::from_value(serde_json::Value::String(text.to_string())).unwrap()
     }
 
@@ -678,10 +678,10 @@ mod extension_tests {
             as_enum(&Property::Enum("EPalGroupType::Guild".to_string()))
         );
         assert_eq!(None, as_enum(&Property::Bool(true)));
-        assert_eq!(Some(42), as_byte(&Property::Byte(uesave::Byte::Byte(42))));
+        assert_eq!(Some(42), as_byte(&Property::Byte(crate::ue::Byte::Byte(42))));
         assert_eq!(
             None,
-            as_byte(&Property::Byte(uesave::Byte::Label("None".to_string())))
+            as_byte(&Property::Byte(crate::ue::Byte::Label("None".to_string())))
         );
         assert_eq!(
             Some(638400000000000000),
@@ -713,25 +713,25 @@ mod extension_tests {
 #[cfg(test)]
 mod phase2_tests {
     use super::*;
-    use uesave::{Byte, MapEntry, Properties, Property, StructValue, ValueVec};
+    use crate::ue::{Byte, MapEntry, Properties, Property, StructValue, ValueVec};
 
-    fn fguid(text: &str) -> uesave::FGuid {
+    fn fguid(text: &str) -> crate::ue::FGuid {
         serde_json::from_value(serde_json::Value::String(text.to_string())).unwrap()
     }
 
-    fn sample_tag() -> uesave::PropertyTagPartial {
-        uesave::PropertyTagPartial {
+    fn sample_tag() -> crate::ue::PropertyTagPartial {
+        crate::ue::PropertyTagPartial {
             id: None,
-            data: uesave::PropertyTagDataPartial::Other(uesave::PropertyType::BoolProperty),
+            data: crate::ue::PropertyTagDataPartial::Other(crate::ue::PropertyType::BoolProperty),
         }
     }
 
-    fn empty_save() -> uesave::Save {
-        uesave::Save {
-            header: uesave::Header {
+    fn empty_save() -> crate::ue::Save {
+        crate::ue::Save {
+            header: crate::ue::Header {
                 magic: 0,
                 save_game_version: 0,
-                package_version: uesave::PackageVersion { ue4: 0, ue5: None },
+                package_version: crate::ue::PackageVersion { ue4: 0, ue5: None },
                 engine_version_major: 0,
                 engine_version_minor: 0,
                 engine_version_patch: 0,
@@ -739,8 +739,8 @@ mod phase2_tests {
                 engine_version: String::new(),
                 custom_version: None,
             },
-            schemas: uesave::PropertySchemas::default(),
-            root: uesave::Root {
+            schemas: crate::ue::PropertySchemas::default(),
+            root: crate::ue::Root {
                 save_game_type: String::new(),
                 properties: Properties::default(),
             },
@@ -837,7 +837,7 @@ mod phase2_tests {
 
         let inner = struct_props(&property).expect("Struct property yields Some");
         assert_eq!(
-            as_bool(inner.0.get(&uesave::PropertyKey::from("Added")).unwrap()),
+            as_bool(inner.0.get(&crate::ue::PropertyKey::from("Added")).unwrap()),
             Some(true)
         );
         assert!(struct_props(&Property::Bool(true)).is_none());
@@ -941,9 +941,9 @@ mod phase2_tests {
         ensure_schema(&mut save, "Foo.Bar".to_string(), first_tag.clone());
         assert_eq!(save.schemas.get("Foo.Bar"), Some(&first_tag));
 
-        let second_tag = uesave::PropertyTagPartial {
+        let second_tag = crate::ue::PropertyTagPartial {
             id: None,
-            data: uesave::PropertyTagDataPartial::Other(uesave::PropertyType::IntProperty),
+            data: crate::ue::PropertyTagDataPartial::Other(crate::ue::PropertyType::IntProperty),
         };
         ensure_schema(&mut save, "Foo.Bar".to_string(), second_tag);
         assert_eq!(

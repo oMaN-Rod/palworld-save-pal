@@ -21,10 +21,17 @@ export const loadedSaveFilesHandler: WSMessageHandler = {
 	type: MessageType.LOADED_SAVE_FILES,
 	async handle(data) {
 		const appState = getAppState();
-		const { level, players, world_name, type, has_gps, session_id, size } = data;
+		const { level, players, world_name, type, has_gps, session_id, size, world_option_present } =
+			data;
 		console.log('Loaded save files', level, players, 'has_gps:', has_gps);
 		appState.resetState();
-		appState.saveFile = { name: level, world_name, type, size };
+		appState.saveFile = {
+			name: level,
+			world_name,
+			type,
+			size,
+			world_option_present: world_option_present ?? false
+		};
 		appState.playerSaveFiles = players.map((p: any) => ({ name: p }));
 		appState.hasGpsAvailable = has_gps ?? false;
 

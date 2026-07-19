@@ -61,7 +61,7 @@ async fn meta_get_set_roundtrip() {
 }
 
 #[test]
-fn iso_naive_matches_python_isoformat() {
+fn iso_naive_formats_without_timezone_suffix() {
     let with_micros = chrono::NaiveDate::from_ymd_opt(2026, 1, 2)
         .unwrap()
         .and_hms_micro_opt(3, 4, 5, 123_456)

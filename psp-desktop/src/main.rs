@@ -165,6 +165,10 @@ fn main() {
                 .title(format!("Palworld Save Pal v{}", env!("CARGO_PKG_VERSION")))
                 .inner_size(1366.0, 768.0)
                 .min_inner_size(1366.0, 768.0)
+                // Tauri's OS-level drag-drop handler intercepts drag events and
+                // breaks HTML5 drag-and-drop inside the webview (notably on
+                // Windows/WebView2). Disable it so the presets list drag works.
+                .disable_drag_drop_handler()
                 .build()?;
 
             Ok(())

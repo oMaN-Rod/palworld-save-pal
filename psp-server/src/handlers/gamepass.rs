@@ -248,6 +248,13 @@ pub async fn handle_select_gamepass_save(
     let level_meta =
         store::read_first_blob(&container_dir, level_meta_entry)?.map(|(_seq, bytes)| bytes);
 
+    // Optional: absent container => no editable options, matching the silent-return
+    // contract used for other absent containers.
+    let world_option = match containers.get("WorldOption") {
+        Some(entry) => store::read_first_blob(&container_dir, entry)?.map(|(_seq, bytes)| bytes),
+        None => None,
+    };
+
     // `player_order` records first-seen container order: the wire `players`
     // array must follow it, not the `BTreeMap`'s uuid-sorted order.
     let mut player_order: Vec<uuid::Uuid> = Vec::new();
@@ -309,6 +316,7 @@ pub async fn handle_select_gamepass_save(
         "gamepass",
         &level_sav,
         level_meta.as_deref(),
+        world_option.as_deref(),
         player_file_refs,
         None,
         // Emit the leading generic "Loading Level.sav..." progress frame.
@@ -332,6 +340,7 @@ pub async fn handle_select_gamepass_save(
         "type": "gamepass",
         "size": session.size,
         "has_gps": false,
+        "world_option_present": session.world_option.is_some(),
         "session_id": session_id.to_string(),
     });
     ctx.emitter

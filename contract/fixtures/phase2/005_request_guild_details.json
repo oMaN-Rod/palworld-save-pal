@@ -1,0 +1,1311 @@
+{
+  "request": {
+    "type": "request_guild_details",
+    "data": "54491484-4e6c-7327-70b2-868f350929f6"
+  },
+  "responses": [
+    {
+      "type": "get_guild_details_response",
+      "data": {
+        "guild": {
+          "bases": {
+            "4bb24de8-4965-af19-f596-e296089e8ab0": {
+              "pals": {},
+              "container_id": "a77f85ca-4037-97d8-acef-fcb73f1d931b",
+              "slot_count": 1,
+              "storage_containers": {
+                "3a674a6c-49ca-be4f-333b-b6ba05b0cf3c": {
+                  "id": "3a674a6c-49ca-be4f-333b-b6ba05b0cf3c",
+                  "type": "BaseContainer",
+                  "slots": [
+                    {
+                      "dynamic_item": null,
+                      "slot_index": 0,
+                      "count": 2,
+                      "static_id": "Leather",
+                      "local_id": "00000000-0000-0000-0000-000000000000"
+                    }
+                  ],
+                  "key": "CommonDropItem3D",
+                  "slot_num": 1
+                },
+                "d42e019c-4d5b-2eae-757d-4fb0ad0ed42d": {
+                  "id": "d42e019c-4d5b-2eae-757d-4fb0ad0ed42d",
+                  "type": "BaseContainer",
+                  "slots": [
+                    {
+                      "dynamic_item": null,
+                      "slot_index": 0,
+                      "count": 1,
+                      "static_id": "WheatSeeds",
+                      "local_id": "00000000-0000-0000-0000-000000000000"
+                    }
+                  ],
+                  "key": "CommonDropItem3D",
+                  "slot_num": 1
+                },
+                "3d1c1bb6-477a-29e4-6d6f-c18f2d983416": {
+                  "id": "3d1c1bb6-477a-29e4-6d6f-c18f2d983416",
+                  "type": "BaseContainer",
+                  "slots": [],
+                  "key": "ItemChest",
+                  "slot_num": 10
+                },
+                "d9de85b0-408b-8c24-125c-f5b207cbffa8": {
+                  "id": "d9de85b0-408b-8c24-125c-f5b207cbffa8",
+                  "type": "BaseContainer",
+                  "slots": [
+                    {
+                      "dynamic_item": null,
+                      "slot_index": 0,
+                      "count": 4,
+                      "static_id": "Stone",
+                      "local_id": "00000000-0000-0000-0000-000000000000"
+                    }
+                  ],
+                  "key": "CommonDropItem3D",
+                  "slot_num": 1
+                }
+              },
+              "pal_container": {
+                "id": "a77f85ca-4037-97d8-acef-fcb73f1d931b",
+                "player_uid": "00000000-0000-0000-0000-000000000000",
+                "type": "Base",
+                "size": 1,
+                "slots": []
+              },
+              "id": "4bb24de8-4965-af19-f596-e296089e8ab0",
+              "name": "新規生成拠点テンプレート名0(仮)",
+              "location": {
+                "x": 685.8294149692176,
+                "y": -136953.51467997508,
+                "z": 2886.9534098080685
+              },
+              "area_range": 3500.0
+            }
+          },
+          "guild_chest": {
+            "id": "1b1b065d-4812-11ba-e444-8f84bbbe40fd",
+            "type": "GuildChest",
+            "slots": [],
+            "key": "GuildChest",
+            "slot_num": 54
+          },
+          "lab_research": [
+            {
+              "research_id": "Handcraft1",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft1_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft1_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft1_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft1_5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft2_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft2_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft2_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft2_5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft2_6",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft3_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft3_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft3_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft4_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft4_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft4_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame1",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame1_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame1_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame1_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame1_5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame2_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame2_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame2_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame3_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame3_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame3_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame4_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame4_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame4_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering1",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering1_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering1_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering1_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering1_5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering2_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering2_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering2_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering3_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering3_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering3_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering4_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding1",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding1_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding1_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding1_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding1_5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding2_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding2_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding2_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding2_5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding2_6",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding3_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding3_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding3_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy1",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy1_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy1_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy1_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy1_5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy2_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy2_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy3_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy3_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy3_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy4_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy4_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest1",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest1_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest1_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest1_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest1_5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest2_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest2_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest2_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest2_5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest2_6",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest3_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest3_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest3_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining1",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining1_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining1_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining1_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining1_5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining2_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining2_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining2_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining3_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining3_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining3_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining4_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining4_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool1",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool1_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool1_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool1_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool1_5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool2_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool2_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool2_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool3_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool3_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool3_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool4_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool4_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine1",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine1_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine1_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine1_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine1_5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine2_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine2_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine2_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine3_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine3_3",
+              "work_amount": 0.0
+            }
+          ],
+          "name": "Unnamed Guild",
+          "base_camp_level": 1,
+          "id": "54491484-4e6c-7327-70b2-868f350929f6",
+          "admin_player_uid": "8c2f1930-0000-0000-0000-000000000000",
+          "players": [
+            "8c2f1930-0000-0000-0000-000000000000"
+          ],
+          "container_id": "1b1b065d-4812-11ba-e444-8f84bbbe40fd",
+          "lab_research_data": [
+            {
+              "research_id": "Handcraft1",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft1_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft1_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft1_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft1_5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft2_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft2_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft2_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft2_5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft2_6",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft3_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft3_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft3_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft4_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft4_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Handcraft4_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame1",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame1_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame1_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame1_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame1_5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame2_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame2_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame2_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame3_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame3_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame3_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame4_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame4_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "EmitFlame4_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering1",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering1_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering1_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering1_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering1_5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering2_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering2_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering2_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering3_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering3_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering3_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Watering4_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding1",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding1_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding1_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding1_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding1_5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding2_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding2_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding2_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding2_5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding2_6",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding3_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding3_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Seeding3_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy1",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy1_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy1_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy1_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy1_5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy2_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy2_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy3_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy3_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy3_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy4_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "GenerateEnergy4_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest1",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest1_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest1_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest1_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest1_5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest2_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest2_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest2_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest2_5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest2_6",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest3_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest3_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Deforest3_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining1",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining1_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining1_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining1_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining1_5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining2_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining2_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining2_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining3_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining3_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining3_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining4_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Mining4_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool1",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool1_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool1_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool1_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool1_5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool2_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool2_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool2_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool3_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool3_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool3_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool4_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Cool4_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine1",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine1_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine1_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine1_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine1_5",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine2_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine2_3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine2_4",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine3",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine3_2",
+              "work_amount": 0.0
+            },
+            {
+              "research_id": "Medicine3_3",
+              "work_amount": 0.0
+            }
+          ]
+        },
+        "guild_id": "54491484-4e6c-7327-70b2-868f350929f6"
+      }
+    }
+  ]
+}

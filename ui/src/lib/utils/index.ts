@@ -7,4 +7,5 @@ export * from './modalUtils';
 export * from './pals';
 export * from './palStorage';
 export * from './portal';
+export * from './presetSort';
 export * from './stats';

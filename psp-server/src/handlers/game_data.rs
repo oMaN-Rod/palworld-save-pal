@@ -251,9 +251,29 @@ pub async fn handle_get_relics(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerEr
     Ok(())
 }
 
+/// Localization merged INTO each base entry (same shape as `handle_get_relic_data`),
+/// so every point on the wire keeps `class`/coords/`id` and carries `localized_name`.
+/// Watchtowers (`BP_LevelObject_UnlockMapPoint_C`) flow through unchanged — the
+/// client branches on `class`.
 pub async fn handle_get_fast_travel_points(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
-    let payload = raw_file(&ctx.app.game_data, "fast_travel_points");
-    ctx.emitter.emit(MessageType::GetFastTravelPoints, &payload);
+    let language = current_language(ctx).await?;
+    let base = object_table(&ctx.app.game_data, "fast_travel_points");
+    let localization =
+        object_table(&ctx.app.game_data, &format!("l10n/{language}/fast_travel_points"));
+    let mut merged = Map::new();
+    for (guid, mut entry_value) in base {
+        let entry = entry_value.as_object_mut().ok_or_else(|| {
+            HandlerError::Other(format!("fast_travel_points.json entry {guid} is not an object"))
+        })?;
+        let l10n_entry = localization.get(&guid);
+        entry.insert(
+            "localized_name".into(),
+            string_or(l10n_entry, "localized_name", &guid),
+        );
+        merged.insert(guid, entry_value);
+    }
+    ctx.emitter
+        .emit(MessageType::GetFastTravelPoints, &Value::Object(merged));
     Ok(())
 }
 
@@ -450,6 +470,11 @@ mod tests {
             r#"{"FT1": {"x": 1}}"#,
         )
         .unwrap();
+        fs::write(
+            json_dir.join("l10n/en/fast_travel_points.json"),
+            r#"{"FT1": {"localized_name": "Beach"}}"#,
+        )
+        .unwrap();
         fs::write(json_dir.join("effigies.json"), r#"{"Eff1": {"x": 2}}"#).unwrap();
         fs::write(
             json_dir.join("relics.json"),
@@ -597,7 +622,7 @@ mod tests {
 
     #[tokio::test]
     async fn remaining_raw_forwarders_send_correct_file_and_type() {
-        // These four share raw_file()'s plumbing; pin each one's GameData key
+        // These three share raw_file()'s plumbing; pin each one's GameData key
         // and response type so a mix-up (e.g. friendship_data reading
         // fast_travel_points.json) is caught.
         let mut test = TestContext::new(write_fixture_tree).await;
@@ -610,13 +635,23 @@ mod tests {
         assert_eq!(frame["type"], "get_friendship_data");
         assert_eq!(frame["data"], json!({"1": {"NextFriendshipPoint": 100}}));
 
-        let frame = run_handler!(test, handle_get_fast_travel_points);
-        assert_eq!(frame["type"], "get_fast_travel_points");
-        assert_eq!(frame["data"], json!({"FT1": {"x": 1}}));
-
         let frame = run_handler!(test, handle_get_effigies);
         assert_eq!(frame["type"], "get_effigies");
         assert_eq!(frame["data"], json!({"Eff1": {"x": 2}}));
+    }
+
+    #[tokio::test]
+    async fn fast_travel_points_merge_with_l10n_and_keep_class() {
+        // Unlike the raw forwarders above, fast_travel_points merges l10n
+        // INTO the base entry (same shape as handle_get_relic_data) while
+        // preserving every base field.
+        let mut test = TestContext::new(write_fixture_tree).await;
+        let frame = run_handler!(test, handle_get_fast_travel_points);
+        assert_eq!(frame["type"], "get_fast_travel_points");
+        assert_eq!(
+            frame["data"]["FT1"],
+            json!({"x": 1, "localized_name": "Beach"})
+        );
     }
 
     #[tokio::test]

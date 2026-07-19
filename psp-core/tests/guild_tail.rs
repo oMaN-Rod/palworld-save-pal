@@ -43,12 +43,10 @@ fn every_guild_tail_in_fixture_saves_round_trips_byte_identically() {
     );
 }
 
-/// The same round trip on the private corpus named by `PSP_TEST_SAVE_DIR`.
+/// The same round trip on the committed `v1_relics` corpus fixture.
 #[test]
 fn every_guild_tail_in_corpus_session_round_trips_byte_identically() {
-    let Some(session) = common::load_corpus_session() else {
-        return;
-    };
+    let session = common::load_corpus_session();
     let before = collect_guild_data(&session.level);
     let bytes = session.level_sav_bytes().expect("write corpus level sav");
     let reloaded = psp_core::savio::read_sav_bytes(&bytes).expect("re-read corpus level sav");
@@ -94,8 +92,8 @@ fn accessors_handle_pre_update_guilds_built_from_the_constructor() {
 }
 
 fn collect_guild_data(
-    level: &uesave::Save,
-) -> Vec<(Uuid, uesave::games::palworld::PalGroupVariant)> {
+    level: &psp_core::ue::Save,
+) -> Vec<(Uuid, psp_core::ue::games::palworld::PalGroupVariant)> {
     world::group_map(level)
         .unwrap()
         .iter()

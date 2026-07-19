@@ -1228,6 +1228,7 @@ async fn load_server_save_impl(data: ServerIdData, ctx: &mut HandlerCtx<'_>) -> 
         "steam",
         &level_sav_bytes,
         level_meta_bytes.as_deref(),
+        None,
         player_file_refs,
         layout.global_pal_storage_sav.clone(),
         // Emit the leading generic "Loading Level.sav..." progress frame.
@@ -1255,6 +1256,7 @@ async fn load_server_save_impl(data: ServerIdData, ctx: &mut HandlerCtx<'_>) -> 
             "type": "steam",
             "size": session.size,
             "has_gps": has_gps,
+            "world_option_present": session.world_option.is_some(),
             "server_id": record.id,
             "server_name": record.name,
             "session_id": session_id.to_string(),
@@ -2066,15 +2068,12 @@ mod tests {
             .starts_with("No save data found at "));
     }
 
-    /// Full load path — needs a real world save. Set PSP_TEST_SAVE_DIR to a
-    /// directory containing Level.sav. This is the ONE test here that depends
-    /// on host state outside the repo; it skips itself when unset.
+    /// Full load path against the committed `v1_relics` world save fixture
+    /// (Level.sav + Players/). Never skips.
     #[tokio::test]
     async fn load_server_save_loads_world_and_emits_summaries() {
-        let Ok(source_save_dir) = std::env::var("PSP_TEST_SAVE_DIR") else {
-            eprintln!("skipped: set PSP_TEST_SAVE_DIR to a directory containing Level.sav");
-            return;
-        };
+        let source_save_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../tests/fixtures/saves/v1_relics");
         let mut env = TestEnv::new().await;
         // servers layout: <saves_path>/SaveGames/0/<world>/
         let saves_root = env._scratch.path().join("saves");
@@ -2093,7 +2092,21 @@ mod tests {
         let record = psp_db::servers::create_server(&env.app.db, new_server)
             .await
             .unwrap();
-        let mut ctx = env.ctx();
+        // The full load path registers the loaded session in the store, which
+        // needs a connection attachment; the real ws loop supplies one. Provide
+        // a throwaway arc/id so the load can complete under a synthetic ctx.
+        let mut session_arc: crate::SharedSession =
+            std::sync::Arc::new(tokio::sync::Mutex::new(psp_core::session::Session::new()));
+        let mut current_id: Option<uuid::Uuid> = None;
+        let mut ctx = crate::dispatcher::HandlerCtx {
+            session: &mut env.session,
+            app: &env.app,
+            emitter: &env.emitter,
+            attachment: Some(crate::dispatcher::SessionAttachment {
+                current_id: &mut current_id,
+                arc: &mut session_arc,
+            }),
+        };
         handle_load_server_save(
             ServerIdData {
                 server_id: record.id,

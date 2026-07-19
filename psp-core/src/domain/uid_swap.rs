@@ -22,7 +22,7 @@ const OWNERSHIP_KEYS: [&str; 4] = [
 /// character instance id), the admin uid, and each member's `player_uid`.
 /// Every swap is bidirectional -- old->new AND new->old in the same pass.
 fn swap_guild_member_uids(
-    level: &mut uesave::Save,
+    level: &mut crate::ue::Save,
     old_uid: Uuid,
     new_uid: Uuid,
     old_instance_id: Uuid,

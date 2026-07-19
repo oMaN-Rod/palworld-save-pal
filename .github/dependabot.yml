@@ -1,13 +1,6 @@
 # .github/dependabot.yml
 version: 2
 updates:
-  # Python dependencies
-  - package-ecosystem: "pip"
-    directory: "/"
-    schedule:
-      interval: "monthly"
-    target-branch: "main"
-
   # Node.js dependencies for the Svelte frontend
   - package-ecosystem: "npm"
     directory: "/ui"

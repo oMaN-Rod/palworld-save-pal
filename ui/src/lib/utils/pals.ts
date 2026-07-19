@@ -114,7 +114,7 @@ export async function handleMaxOutPal(pal: Pal, player: Player): Promise<void> {
 		pal.stomach = palData.max_full_stomach;
 		for (const [key, value] of Object.entries(palData.work_suitability)) {
 			if (value === 0) continue;
-			pal.work_suitability[key as WorkSuitability] = Math.min(10 - value, 4);
+			pal.work_suitability[key as WorkSuitability] = Math.min(10 - value, 9);
 		}
 	} else {
 		pal.stomach = 150;

@@ -1,0 +1,12 @@
+{
+  "request": {
+    "type": "rename_world",
+    "data": "Parity World"
+  },
+  "responses": [
+    {
+      "type": "rename_world",
+      "data": "World renamed from 'Autosave_W' to 'Parity World'"
+    }
+  ]
+}

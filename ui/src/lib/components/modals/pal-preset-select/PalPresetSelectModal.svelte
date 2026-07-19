@@ -3,6 +3,7 @@
 	import { type SelectOption } from '$types';
 	import { Lock, Save, X } from 'lucide-svelte';
 	import { presetsData, palsData } from '$lib/data';
+	import { sortPresets } from '$states';
 	import * as m from '$i18n/messages';
 	import { c, p } from '$lib/utils/commonTranslations';
 
@@ -17,7 +18,7 @@
 	}>();
 
 	let selectOptions: SelectOption[] = $derived.by(() => {
-		return Object.entries(presetsData.presetProfiles)
+		const entries = Object.entries(presetsData.presetProfiles)
 			.filter(([_, profile]) => {
 				if (profile.type !== 'pal_preset') return false;
 				if (profile.pal_preset?.lock) {
@@ -35,11 +36,9 @@
 				}
 				return true;
 			})
-			.map(([id, preset]) => ({
-				value: id,
-				label: preset.name
-			}))
-			.sort((a, b) => a.label.localeCompare(b.label));
+			.map(([id, preset]) => ({ id, name: preset.name }));
+
+		return sortPresets(entries, 'pal_preset').map((p) => ({ value: p.id, label: p.name }));
 	});
 	let selectedPreset: string = $state('');
 

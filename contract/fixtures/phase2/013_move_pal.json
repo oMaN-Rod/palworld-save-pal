@@ -1,0 +1,16 @@
+{
+  "request": {
+    "type": "move_pal",
+    "data": {
+      "player_id": "8c2f1930-0000-0000-0000-000000000000",
+      "pal_id": "b38e7ffd-a271-488a-b584-6cb545a3f439",
+      "container_id": "65a4f103-471b-3102-7bb3-18bcefee294d"
+    }
+  },
+  "responses": [
+    {
+      "type": "warning",
+      "data": "Pal container is full"
+    }
+  ]
+}

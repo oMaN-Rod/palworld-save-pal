@@ -2,9 +2,10 @@
 	import { FileDropzone, Card, Tooltip, Button } from '$components/ui';
 	import { MessageType } from '$types';
 	import { getAppState } from '$states';
-	import { Download } from 'lucide-svelte';
+	import { Download, Settings2 } from 'lucide-svelte';
 	import { goto } from '$app/navigation';
 	import { send, pushProgressMessage } from '$lib/utils/websocketUtils';
+	import { openWorldOptionModal } from '$components/worldoption';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
@@ -57,6 +58,12 @@
 							<span>{m.download_modified_save()}</span>
 						{/snippet}
 					</Tooltip>
+					{#if appState.saveFile.world_option_present}
+						<Button variant="secondary" onclick={openWorldOptionModal}>
+							<Settings2 size={16} />
+							World Options
+						</Button>
+					{/if}
 				</div>
 			</div>
 		</Card>

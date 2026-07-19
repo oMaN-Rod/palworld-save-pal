@@ -33,6 +33,7 @@ export enum MessageType {
 	GET_PALS = 'get_pals',
 	SET_TECHNOLOGY_DATA = 'set_technology_data',
 	OPEN_IN_BROWSER = 'open_in_browser',
+	OPEN_URL = 'open_url',
 	GET_EXP_DATA = 'get_exp_data',
 	GET_RELIC_DATA = 'get_relic_data',
 	GET_VERSION = 'get_version',
@@ -42,6 +43,7 @@ export enum MessageType {
 	EJECT_SESSION = 'eject_session',
 	SESSION_NOT_FOUND = 'session_not_found',
 	SAVE_MODDED_SAVE = 'save_modded_save',
+	SAVE_EDITED_SAV = 'save_edited_sav',
 	GET_SETTINGS = 'get_settings',
 	UPDATE_SETTINGS = 'update_settings',
 	GET_UI_COMMON = 'get_ui_common',
@@ -60,6 +62,7 @@ export enum MessageType {
 	NUKE_PRESETS = 'nuke_presets',
 	EXPORT_PRESET = 'export_preset',
 	IMPORT_PRESET = 'import_preset',
+	EXPORT_PRESETS = 'export_presets',
 	GET_LAB_RESEARCH = 'get_lab_research',
 	UPDATE_LAB_RESEARCH = 'update_lab_research',
 	RENAME_WORLD = 'rename_world',
@@ -139,7 +142,11 @@ export enum MessageType {
 	LOAD_SERVER_SAVE = 'load_server_save',
 	GET_SERVER_STATS = 'get_server_stats',
 	SERVER_CREATION_PROGRESS = 'server_creation_progress',
-	IMPORT_SERVER = 'import_server'
+	IMPORT_SERVER = 'import_server',
+
+	// World Options
+	GET_WORLD_OPTION = 'get_world_option',
+	UPDATE_WORLD_OPTION = 'update_world_option'
 }
 
 interface UpdateSaveFileData {

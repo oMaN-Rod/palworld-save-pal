@@ -3,8 +3,8 @@ mod common;
 use psp_core::domain::{pal, world};
 use psp_core::gamedata::GameData;
 use psp_core::session::{SaveKind, SaveSession};
-use uesave::games::palworld::PalCharacterData;
-use uesave::{
+use psp_core::ue::games::palworld::PalCharacterData;
+use psp_core::ue::{
     Header, MapEntry, PackageVersion, Properties, Property, PropertySchemas, Root, Save,
     StructValue,
 };
@@ -41,7 +41,7 @@ fn struct_property(properties: Properties) -> Property {
 }
 
 fn guid_property(text: &str) -> Property {
-    let guid: uesave::FGuid =
+    let guid: psp_core::ue::FGuid =
         serde_json::from_value(serde_json::Value::String(text.to_string())).unwrap();
     Property::Struct(StructValue::Guid(guid))
 }
@@ -62,13 +62,13 @@ fn pal_character_entry(instance_id: &str, save_parameter: Properties) -> MapEntr
     let character_data = PalCharacterData {
         object,
         unknown_bytes: [0; 4],
-        group_id: uesave::FGuid::nil(),
+        group_id: psp_core::ue::FGuid::nil(),
         trailing_bytes: [0; 4],
     };
     let mut value_properties = Properties::default();
     value_properties.insert(
         "RawData",
-        Property::Struct(StructValue::PalCharacterData(character_data)),
+        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::CharacterData(character_data))),
     );
 
     MapEntry {
@@ -90,9 +90,7 @@ fn session_with_character_map_entries(entries: Vec<MapEntry>) -> SaveSession {
 
 #[test]
 fn every_corpus_pal_reads_into_a_dto() {
-    let Some(session) = common::load_corpus_session() else {
-        return;
-    };
+    let session = common::load_corpus_session();
     let data = game_data();
     let entries = world::character_map(&session.level).unwrap();
     let mut pal_count = 0;
@@ -114,9 +112,7 @@ fn every_corpus_pal_reads_into_a_dto() {
 
 #[test]
 fn pal_summaries_match_python_defaults() {
-    let Some(session) = common::load_corpus_session() else {
-        return;
-    };
+    let session = common::load_corpus_session();
     let data = game_data();
     let summaries = pal::pal_summaries(&session, &data).unwrap();
     let entries = world::character_map(&session.level).unwrap();
@@ -253,9 +249,9 @@ fn world1_fixture_base_camp_worker_director_decodes_to_known_real_values() {
 /// be skipped, never panic.
 #[test]
 fn pal_dto_from_entry_returns_none_for_a_malformed_entry() {
-    let malformed = uesave::MapEntry {
-        key: uesave::Property::Bool(true),
-        value: uesave::Property::Bool(true),
+    let malformed = psp_core::ue::MapEntry {
+        key: psp_core::ue::Property::Bool(true),
+        value: psp_core::ue::Property::Bool(true),
     };
     let data = game_data();
 
@@ -266,7 +262,7 @@ fn pal_dto_from_entry_returns_none_for_a_malformed_entry() {
 /// every field in `read_save_parameter_dto` has a default for "key absent".
 #[test]
 fn read_save_parameter_dto_applies_every_default_for_an_empty_save_parameter() {
-    let empty_save_parameter = uesave::Properties::default();
+    let empty_save_parameter = psp_core::ue::Properties::default();
     let data = game_data();
     let instance_id = uuid::Uuid::parse_str("11111111-2222-3333-4444-555555555555").unwrap();
 

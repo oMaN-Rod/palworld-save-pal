@@ -495,7 +495,7 @@ async fn update_then_download_save_file_round_trip() {
             "Sending ZIP file to client... 🚀".to_string(),
         ],
         progress_texts,
-        "download progress strings and order must match Python byte-for-byte"
+        "download progress strings and order are a frontend contract and must not drift"
     );
 
     let download_response = download_frames.last().unwrap();

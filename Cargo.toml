@@ -5,7 +5,7 @@ members = ["psp-core", "psp-db", "psp-server", "psp-desktop"]
 [workspace.package]
 # Single source of truth for the project version (get_version, Tauri bundle,
 # all crates). Bump with scripts/bump.ps1.
-version = "1.1.0"
+version = "1.2.0"
 edition = "2021"
 
 [profile.dev]
@@ -17,7 +17,7 @@ opt-level = 3
 [workspace.dependencies]
 psp-core = { path = "psp-core" }
 psp-db = { path = "psp-db" }
-uesave = { git = "https://github.com/oMaN-Rod/uesave-rs.git", branch = "palworld-v1", features = ["oodle"] }
+uesave = { git = "https://github.com/oMaN-Rod/uesave-rs.git", branch = "pluggable-game-support", features = ["oodle"] }
 axum = { version = "0.8", features = ["ws", "multipart"] }
 tokio = { version = "1", features = ["full"] }
 tower-http = { version = "0.6", features = ["fs"] }

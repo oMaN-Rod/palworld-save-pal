@@ -212,7 +212,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_read_uuid_matches_python_byte_order() {
+    fn test_read_uuid_uses_mixed_endian_byte_order() {
         let raw: Vec<u8> = (0u8..16).collect();
         let parsed = BlobReader::new(&raw).read_uuid().unwrap();
         assert_eq!("03020100-0706-0504-0b0a-09080f0e0d0c", parsed.to_string());

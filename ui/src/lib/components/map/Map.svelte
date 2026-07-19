@@ -50,6 +50,7 @@
 	import ContextMenu from 'ol-contextmenu';
 	import type { MapUnlockPoint, RelicPoint } from '$types';
 	import * as m from '$i18n/messages';
+	import { isWatchtower } from './fastTravel';
 
 	// Props to control which markers to display
 	let {
@@ -60,6 +61,7 @@
 		showPlayers = true,
 		showBases = true,
 		showFastTravel = true,
+		showWatchtower = true,
 		showRelics = true,
 		relicTypes = {},
 		showDungeons = true,
@@ -70,6 +72,7 @@
 		onToggleFastTravel,
 		onToggleRelic,
 		onUnlockAllFastTravel,
+		onUnlockAllWatchtowers,
 		onCollectAllRelics
 	}: {
 		map?: OLMap | null;
@@ -79,6 +82,7 @@
 		showPlayers?: boolean;
 		showBases?: boolean;
 		showFastTravel?: boolean;
+		showWatchtower?: boolean;
 		showRelics?: boolean;
 		/** Per-relic-type visibility; a missing key means visible. */
 		relicTypes?: Record<string, boolean>;
@@ -90,6 +94,7 @@
 		onToggleFastTravel?: (point: MapUnlockPoint) => void;
 		onToggleRelic?: (point: RelicPoint) => void;
 		onUnlockAllFastTravel?: () => void;
+		onUnlockAllWatchtowers?: () => void;
 		onCollectAllRelics?: () => void;
 	} = $props();
 
@@ -147,11 +152,19 @@
 				guid,
 				x: point.x,
 				y: point.y,
+				class: point.class,
 				localized_name: point.localized_name ?? point.id,
 				unlocked: selectedPlayer ? unlocked.has(guid.toUpperCase()) : undefined
 			}))
 			.filter((p) => mapOf(p.x, p.y) === area);
 	});
+
+	// One layer, class-aware visibility: regular points follow showFastTravel,
+	// watchtowers follow showWatchtower. Both keep type: 'fast_travel' so the
+	// click/toggle path is shared.
+	const visibleFastTravelPoints = $derived(
+		fastTravelPointList.filter((p) => (isWatchtower(p) ? showWatchtower : showFastTravel))
+	);
 
 	const collectedRelicGuids = $derived.by(() => {
 		const byType: Record<string, Set<string>> = {};
@@ -363,10 +376,10 @@
 				</Layer.Vector>
 			{/if}
 
-			<!-- Fast travel markers layer -->
-			{#if showFastTravel}
+			<!-- Fast travel + watchtower markers layer -->
+			{#if showFastTravel || showWatchtower}
 				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
-					{#each fastTravelPointList as point (point.guid)}
+					{#each visibleFastTravelPoints as point (point.guid)}
 						<Feature.Point
 							coordinates={worldToPixel(point.x, point.y, area)}
 							style={fastTravelStyle}
@@ -500,6 +513,15 @@
 				onclick={() => onUnlockAllFastTravel?.()}
 			>
 				<img src={mapImg.fastTravel} alt={m.fast_travel()} />
+			</button>
+			<button
+				type="button"
+				class="map-action-btn"
+				title={m.unlock_all_watchtowers()}
+				aria-label={m.unlock_all_watchtowers()}
+				onclick={() => onUnlockAllWatchtowers?.()}
+			>
+				<img src={mapImg.watchTower} alt={m.watchtower()} />
 			</button>
 			<!-- Never offer a bulk write for pins the user cannot see. -->
 			{#if showRelics}

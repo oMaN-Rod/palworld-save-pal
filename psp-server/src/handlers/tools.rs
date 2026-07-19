@@ -151,6 +151,7 @@ fn load_steam_save_for_transfer(
         "steam",
         &level_sav_bytes,
         level_meta_bytes.as_deref(),
+        None,
         player_file_refs,
         layout.global_pal_storage_sav.clone(),
         // The "Loading {label} Level.sav..." frame above is the only leading

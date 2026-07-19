@@ -4,7 +4,7 @@ use psp_core::domain::{player, world};
 use psp_core::gamedata::GameData;
 use psp_core::progress::null_progress;
 use psp_core::session::{LoadedPlayer, PlayerFileData, SaveKind, SaveSession};
-use uesave::{
+use psp_core::ue::{
     Header, MapEntry, PackageVersion, Properties, Property, PropertySchemas, Root, Save,
     StructValue, ValueVec,
 };
@@ -58,16 +58,16 @@ fn player_character_entry(
 
     let mut object = Properties::default();
     object.insert("SaveParameter", struct_property(save_parameter));
-    let character_data = uesave::games::palworld::PalCharacterData {
+    let character_data = psp_core::ue::games::palworld::PalCharacterData {
         object,
         unknown_bytes: [0; 4],
-        group_id: uesave::FGuid::nil(),
+        group_id: psp_core::ue::FGuid::nil(),
         trailing_bytes: [0; 4],
     };
     let mut value_properties = Properties::default();
     value_properties.insert(
         "RawData",
-        Property::Struct(StructValue::PalCharacterData(character_data)),
+        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::CharacterData(character_data))),
     );
 
     MapEntry {
@@ -129,7 +129,7 @@ fn dps_save(slots: Vec<StructValue>) -> Save {
 }
 
 #[test]
-fn ticks_conversion_matches_python() {
+fn ticks_conversion_is_correct() {
     assert_eq!(
         player::ticks_to_isoformat(638_000_000_000_000_000),
         "2022-09-28T22:13:20"
@@ -254,12 +254,10 @@ fn player_details_second_player_real_field_values() {
     assert_eq!(details.technologies.len(), 7);
 }
 
-/// Broad but shallow coverage of whatever save `PSP_TEST_SAVE_DIR` names.
+/// Broad but shallow coverage of the committed `v1_relics` corpus fixture.
 #[test]
 fn every_corpus_player_loads_without_panicking() {
-    let Some(mut session) = common::load_corpus_session() else {
-        return;
-    };
+    let mut session = common::load_corpus_session();
     let data = game_data();
     let player_ids: Vec<Uuid> = session.player_summaries.keys().copied().collect();
     assert!(!player_ids.is_empty());
@@ -306,7 +304,7 @@ fn player_details_second_call_reuses_the_cached_loaded_sav_without_reparsing() {
         .root
         .properties
         .0
-        .get_mut(&uesave::PropertyKey::from("Timestamp"))
+        .get_mut(&psp_core::ue::PropertyKey::from("Timestamp"))
         .unwrap();
     *timestamp = Property::Struct(StructValue::DateTime(0));
 

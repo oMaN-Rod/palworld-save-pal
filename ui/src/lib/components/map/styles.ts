@@ -7,6 +7,7 @@ import CircleStyle from 'ol/style/Circle';
 import { createIconStyle, createStyle } from 'svelte-openlayers';
 import { cmPerPx, type MapArea } from './utils';
 import compass from '$lib/assets/img/compass.webp';
+import { isWatchtower } from './fastTravel';
 
 const ASSET_DATA_PATH = '/src/lib/assets';
 
@@ -32,6 +33,7 @@ export const mapImg = {
 	dungeonLarge: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_dungeon.webp`),
 	effigy: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_relic.webp`),
 	fastTravel: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_fttower.webp`),
+	watchTower: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_ftunlockmap.webp`),
 	oilRig: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_oilrig.webp`),
 	tower: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_tower.webp`),
 	arrow: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_prt_compass_arrow.webp`),
@@ -159,9 +161,31 @@ export const fastTravelLockedIconStyle = createIconStyle({
 	opacity: 0.6
 });
 
+export const watchTowerIconStyle = createIconStyle({
+	src: mapImg.watchTower,
+	scale: 0.6,
+	anchor: [0.5, 0.5],
+	anchorXUnits: 'fraction',
+	anchorYUnits: 'fraction',
+	opacity: 1
+});
+
+export const watchTowerLockedIconStyle = createIconStyle({
+	src: mapImg.watchTower,
+	scale: 0.6,
+	anchor: [0.5, 0.5],
+	anchorXUnits: 'fraction',
+	anchorYUnits: 'fraction',
+	opacity: 0.6
+});
+
 export const fastTravelStyle = (feature: FeatureLike) => {
 	const data = feature.get('data');
-	return data?.unlocked === false ? fastTravelLockedIconStyle : fastTravelIconStyle;
+	const locked = data?.unlocked === false;
+	if (isWatchtower(data ?? {})) {
+		return locked ? watchTowerLockedIconStyle : watchTowerIconStyle;
+	}
+	return locked ? fastTravelLockedIconStyle : fastTravelIconStyle;
 };
 
 /** Per-type relic icon, reusing the relic-stat art (`relic_<type>.webp`). */

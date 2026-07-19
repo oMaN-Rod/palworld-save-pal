@@ -156,6 +156,9 @@ async fn route(
         MessageType::ExportPreset => {
             handlers::presets::handle_export_preset(serde_json::from_value(data)?, ctx).await
         }
+        MessageType::ExportPresets => {
+            handlers::presets::handle_export_presets(serde_json::from_value(data)?, ctx).await
+        }
         MessageType::ImportPreset => handlers::presets::handle_import_preset(ctx).await,
         MessageType::SelectSave => {
             handlers::save_file::handle_select_save(serde_json::from_value(data)?, ctx).await
@@ -221,6 +224,9 @@ async fn route(
         MessageType::DownloadSaveFile => handlers::save_file::handle_download_save_file(ctx).await,
         MessageType::SaveModdedSave => {
             handlers::save_file::handle_save_modded_save(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::SaveEditedSav => {
+            handlers::save_file::handle_save_edited_sav(serde_json::from_value(data)?, ctx).await
         }
         MessageType::RenameWorld => {
             handlers::save_file::handle_rename_world(serde_json::from_value(data)?, ctx).await
@@ -335,6 +341,9 @@ async fn route(
         MessageType::OpenInBrowser => {
             handlers::system::handle_open_in_browser(serde_json::from_value(data)?, ctx).await
         }
+        MessageType::OpenUrl => {
+            handlers::system::handle_open_url(serde_json::from_value(data)?, ctx).await
+        }
         MessageType::ListServers => handlers::servers::handle_list_servers(data, ctx).await,
         MessageType::GetServer => {
             handlers::servers::handle_get_server(serde_json::from_value(data)?, ctx).await
@@ -386,6 +395,11 @@ async fn route(
         }
         MessageType::EjectSession => {
             handlers::session::handle_eject_session(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::GetWorldOption => handlers::world_option::handle_get_world_option(ctx).await,
+        MessageType::UpdateWorldOption => {
+            handlers::world_option::handle_update_world_option(serde_json::from_value(data)?, ctx)
+                .await
         }
         other => {
             tracing::warn!(

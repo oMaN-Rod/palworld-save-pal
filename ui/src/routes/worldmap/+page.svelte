@@ -12,6 +12,7 @@
 	import { collectRelics, relicsByType, toggleRelic } from '$components/map/relics';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { mapImg, relicTypeIcon } from '$components/map/styles';
+	import { isWatchtower } from '$components/map/fastTravel';
 	import Target from '@lucide/svelte/icons/target';
 	import Unlock from '@lucide/svelte/icons/unlock';
 	import Users from '@lucide/svelte/icons/users';
@@ -19,7 +20,7 @@
 	import Building from '@lucide/svelte/icons/building';
 	import { mapObjects, fastTravelPoints, relics, relicData, bosses } from '$lib/data';
 	import type { Map as OLMap } from 'ol';
-	import type { Base, GuildSummary, MapUnlockPoint, Player, RelicPoint } from '$types';
+	import type { Base, FastTravelPoint, GuildSummary, MapUnlockPoint, Player, RelicPoint } from '$types';
 	import { assetLoader } from '$utils';
 	import { EditBaseModal } from '$components/modals';
 	import { EntryState, MessageType } from '$types';
@@ -42,6 +43,7 @@
 		showPlayers: boolean;
 		showBases: boolean;
 		showFastTravel: boolean;
+		showWatchtower: boolean;
 		showRelics: boolean;
 		/** Per-relic-type visibility; a missing key means visible. */
 		relicTypes: Record<string, boolean>;
@@ -57,6 +59,7 @@
 		showPlayers: true,
 		showBases: true,
 		showFastTravel: true,
+		showWatchtower: true,
 		showRelics: true,
 		relicTypes: {},
 		showDungeons: true,
@@ -112,7 +115,14 @@
 	const areaFastTravelGuids = $derived(
 		new Set(
 			Object.entries(fastTravelPoints.points)
-				.filter(([, point]) => mapOf(point.x, point.y) === activeArea)
+				.filter(([, point]) => !isWatchtower(point) && mapOf(point.x, point.y) === activeArea)
+				.map(([guid]) => guid.toUpperCase())
+		)
+	);
+	const areaWatchtowerGuids = $derived(
+		new Set(
+			Object.entries(fastTravelPoints.points)
+				.filter(([, point]) => isWatchtower(point) && mapOf(point.x, point.y) === activeArea)
 				.map(([guid]) => guid.toUpperCase())
 		)
 	);
@@ -121,6 +131,12 @@
 		const unlocked = appState.selectedPlayer?.unlocked_fast_travel_points;
 		if (!unlocked) return undefined;
 		return unlocked.filter((guid) => areaFastTravelGuids.has(guid.toUpperCase())).length;
+	});
+	const watchtowerCount = $derived(areaWatchtowerGuids.size);
+	const watchtowerUnlockedCount = $derived.by(() => {
+		const unlocked = appState.selectedPlayer?.unlocked_fast_travel_points;
+		if (!unlocked) return undefined;
+		return unlocked.filter((guid) => areaWatchtowerGuids.has(guid.toUpperCase())).length;
 	});
 	const relicTypeStats = $derived.by(() => {
 		const player = appState.selectedPlayer;
@@ -286,17 +302,25 @@
 		player.state = EntryState.MODIFIED;
 	}
 
-	function handleUnlockAllFastTravel() {
+	function unlockAllWhere(predicate: (point: FastTravelPoint) => boolean) {
 		const player = appState.selectedPlayer;
 		if (!player) return;
 		const unlocked = player.unlocked_fast_travel_points ?? [];
 		const existing = new Set(unlocked.map((guid) => guid.toUpperCase()));
-		const toAdd = Object.keys(fastTravelPoints.points).filter(
-			(guid) => !existing.has(guid.toUpperCase())
-		);
+		const toAdd = Object.entries(fastTravelPoints.points)
+			.filter(([guid, point]) => predicate(point) && !existing.has(guid.toUpperCase()))
+			.map(([guid]) => guid);
 		if (toAdd.length === 0) return;
 		player.unlocked_fast_travel_points = [...unlocked, ...toAdd];
 		player.state = EntryState.MODIFIED;
+	}
+
+	function handleUnlockAllFastTravel() {
+		unlockAllWhere((point) => !isWatchtower(point));
+	}
+
+	function handleUnlockAllWatchtowers() {
+		unlockAllWhere(isWatchtower);
 	}
 
 	// Only the active map area and the currently visible types, so this can never
@@ -420,6 +444,18 @@
 								{fastTravelUnlockedCount !== undefined
 									? `${fastTravelUnlockedCount}/${fastTravelCount}`
 									: fastTravelCount}
+							</span>
+						</button>
+						<button
+							class="flex items-center space-x-2 {(mapOptions.showWatchtower ?? true) ? '' : 'opacity-25'} "
+							onclick={() => (mapOptions.showWatchtower = !(mapOptions.showWatchtower ?? true))}
+						>
+							<img src={mapImg.watchTower} alt={m.watchtower()} class="mr-2 h-6 w-6" />
+							<span>{m.watchtower()}</span>
+							<span class="text-surface-500 text-xs">
+								{watchtowerUnlockedCount !== undefined
+									? `${watchtowerUnlockedCount}/${watchtowerCount}`
+									: watchtowerCount}
 							</span>
 						</button>
 						<button
@@ -689,6 +725,7 @@
 					showPlayers={mapOptions.showPlayers}
 					showBases={mapOptions.showBases}
 					showFastTravel={mapOptions.showFastTravel}
+					showWatchtower={mapOptions.showWatchtower ?? true}
 					showRelics={mapOptions.showRelics ?? true}
 					relicTypes={mapOptions.relicTypes ?? {}}
 					showDungeons={mapOptions.showDungeons}
@@ -699,6 +736,7 @@
 					onToggleFastTravel={handleToggleFastTravel}
 					onToggleRelic={handleToggleRelic}
 					onUnlockAllFastTravel={handleUnlockAllFastTravel}
+					onUnlockAllWatchtowers={handleUnlockAllWatchtowers}
 					onCollectAllRelics={handleCollectAllRelics}
 				/>
 			{/if}

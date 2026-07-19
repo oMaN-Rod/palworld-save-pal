@@ -1,0 +1,491 @@
+{
+  "01ACCA6E4BDAA68220821FB05AB54E4D": {
+    "localized_name": "常夏海滨"
+  },
+  "04CB216B487AD789C47E2DBA08B0B49F": {
+    "localized_name": "雪融碧岬"
+  },
+  "0C0AF9F34C0491BCAD80B1BF355B9A98": {
+    "localized_name": "竹林深处的瞭望塔"
+  },
+  "0EBF6F3D441ACA707517B9B7BAA6590D": {
+    "localized_name": "云泥湿地"
+  },
+  "10F777FB4B9BFA0CAD790887D87DDBC2": {
+    "localized_name": "燃灰之地"
+  },
+  "11E3E3C44F040B34E3809CB69CD87435": {
+    "localized_name": "风起之岛的瞭望塔"
+  },
+  "15314BE94E2FB8D018D5749BE9A318F0": {
+    "localized_name": "彩蝶之森"
+  },
+  "15BD61D9481EE7F63CB32BB4E10A05CA": {
+    "localized_name": "潺鸣之岛海滨"
+  },
+  "16B14E084BBB4C71E9D07A9DC84B80BD": {
+    "localized_name": "圣绿麓原"
+  },
+  "16C7164C43E2B96BEDCC6696E2E592F7": {
+    "localized_name": "古老的祭祀场"
+  },
+  "1749FBB34126AB7711670481717C9FEC": {
+    "localized_name": "通往樱花的岔路"
+  },
+  "1BDEABA240B1699541C17F83E59E61DF": {
+    "localized_name": "霜冻雪山山顶"
+  },
+  "20B16780488A8F23A80502BC608A0192": {
+    "localized_name": "干燥沙丘"
+  },
+  "211BCB174B47C566C6F92E9CEB999F98": {
+    "localized_name": "灵峰山腰"
+  },
+  "22095BFA48A46172F8D154B2EBEB7493": {
+    "localized_name": "绝对零度之域"
+  },
+  "23B9E99C4A454B99220AF7B4A58FD8DE": {
+    "localized_name": "修行者瀑布"
+  },
+  "23F4D1CB454D1E23F252C29447F5A384": {
+    "localized_name": "盾龙坑道"
+  },
+  "26F321B44481BC01C5174D9D38409597": {
+    "localized_name": "碧落裂隙"
+  },
+  "27508F284B175C5C2B9BFC85AD773E4F": {
+    "localized_name": "亡灵孤岛"
+  },
+  "28D514E74B51FD9EB078A891DB0787C2": {
+    "localized_name": "花兔山 山顶"
+  },
+  "2913E38E4924F762AF9B129303898A31": {
+    "localized_name": "径海回廊"
+  },
+  "2A2B744B41AC79964DAE6B89CAC51FC3": {
+    "localized_name": "永冻湖"
+  },
+  "2BC5E46049E69D3549CFB58948BE3288": {
+    "localized_name": "沙丘入口"
+  },
+  "2DE1702048A1D4A82126168C49BE51A9": {
+    "localized_name": "草熊猫之森"
+  },
+  "2EC07ACC4505CB726DE38A84246CA999": {
+    "localized_name": "古代文明遗址"
+  },
+  "2EE8ACF447C0CFC2C3C11E948E691448": {
+    "localized_name": "冰封孤岛"
+  },
+  "2F3A56DA4022EB1E43D3439ECEE2AA2C": {
+    "localized_name": "候风观景台"
+  },
+  "321E111B4B7AA9D901864F87404A70F2": {
+    "localized_name": "诱藤之林"
+  },
+  "328BCAC94E01988D944C4F85D49E457C": {
+    "localized_name": "黄土平原的瞭望塔"
+  },
+  "341551F747D44FA84DB87F8C8D2DCB48": {
+    "localized_name": "樱花岛：西部海岸"
+  },
+  "3697999C458BF8A3C7973382969FBDF9": {
+    "localized_name": "沙漠之镇"
+  },
+  "37878F614B4EB008307DBBBDC7B79505": {
+    "localized_name": "风啸之谷"
+  },
+  "3A0F123947BE045BC415C6B061A5285A": {
+    "localized_name": "百焰密域"
+  },
+  "3A84A3DD43C34B936CE6F18842A6FE1D": {
+    "localized_name": "余烬熔岩台"
+  },
+  "3BF1495E406AD5F437DA5AA2134954A2": {
+    "localized_name": "干燥沙滩的瞭望塔"
+  },
+  "3E8E504B4A3975FD3862E1BC85A5D4F6": {
+    "localized_name": "潮风群岛的教堂"
+  },
+  "41727100495D21DC905D309C53989914": {
+    "localized_name": "要塞遗迹"
+  },
+  "41E36D9A4B2BA79A3AD1B7B83B16F77D": {
+    "localized_name": "寂静之岛"
+  },
+  "4618840B4FE6381FC6982AA5282F9614": {
+    "localized_name": "寂静之湖"
+  },
+  "4667D69047622BF7A9FFD788D24B6131": {
+    "localized_name": "临沙海岸"
+  },
+  "4669582D4081BF550AFB66A05D043A3D": {
+    "localized_name": "沙丘深处"
+  },
+  "479A228C4032AAF144B3808E753E1690": {
+    "localized_name": "热风荒野的瞭望塔"
+  },
+  "47E04FF245A4FB6F4E1E9C864ED8F2B0": {
+    "localized_name": "黄尘峡谷的瞭望塔"
+  },
+  "49C3516D459F15C70ABEE88CD7F4D331": {
+    "localized_name": "月花众的高塔 入口"
+  },
+  "4B2462954566096EB1EB74A0B48E5C5D": {
+    "localized_name": "亡骸河畔"
+  },
+  "4C1930B54689C3825400F6B3954FC07B": {
+    "localized_name": "赤色迷失森林"
+  },
+  "4C204C3842EAB210A7A9DA9D2CF9CBBE": {
+    "localized_name": "潮风群岛的瞭望塔"
+  },
+  "4CCF456A440C6CD5F2347AAA3E163F21": {
+    "localized_name": "竞技场入口"
+  },
+  "4D2F204549AB656CA1EA4B8E39C484F3": {
+    "localized_name": "通往雪山的岔路"
+  },
+  "4DA12CD449AA1A3DB7C6CABF9D6EA90D": {
+    "localized_name": "孤立沙堤"
+  },
+  "4DB2FF944B1E545F41FBC6AF86BEBEB5": {
+    "localized_name": "黑曜火山第二站"
+  },
+  "513E166044565A0BD3360F94142577E8": {
+    "localized_name": "湿地之岛"
+  },
+  "52E1E065410F78AF13B18CB1136EC8D6": {
+    "localized_name": "尘封宝藏孤岛"
+  },
+  "5669E36645C97EE9F38D308738ED30A7": {
+    "localized_name": "极冻孤岛"
+  },
+  "58A29B814E069D61EC75B1A6E9658FC1": {
+    "localized_name": "东部的荒芜岛屿的瞭望塔"
+  },
+  "596996B948716D3FD2283C8B5C6E829C": {
+    "localized_name": "潮风群岛 漂流者海滨"
+  },
+  "5970E8E648D2A83AFDFF7C9151D9BEF5": {
+    "localized_name": "永炎同心会的高塔 入口"
+  },
+  "59AABD184966FE16E9BA8EA0BD0EFDED": {
+    "localized_name": "高台入口"
+  },
+  "59D857664636366A726EB39EF372B315": {
+    "localized_name": "废弃研究所"
+  },
+  "5F426B49469368B0C131D3A6DB8F7831": {
+    "localized_name": "边远渔村"
+  },
+  "5FA6EB494384E4134BAA589F02A580DC": {
+    "localized_name": "冰封珊瑚丘的瞭望塔"
+  },
+  "603ED0CD4CFB9AFDC9E11F805594CCE5": {
+    "localized_name": "雷恩盗猎集团的高塔 入口"
+  },
+  "618F02C546F191912D42398685A2BBA2": {
+    "localized_name": "热浪海门"
+  },
+  "6231802D40C81C00445379AE238D9F90": {
+    "localized_name": "东部的荒芜岛屿"
+  },
+  "6282FE1E4029EDCDB14135AA4C171E4C": {
+    "localized_name": "破败教会"
+  },
+  "630C0726466D28CDB94B368AD12BFE63": {
+    "localized_name": "圣泪浅滩"
+  },
+  "65B10BB14ABDA9C2109167B21901D195": {
+    "localized_name": "自卫队的高塔 入口"
+  },
+  "6948B7914C8D1701DB7F4081E4D970E5": {
+    "localized_name": "灼热断层的瞭望塔"
+  },
+  "69A3B9E64018BA4C158BDDA7CD713463": {
+    "localized_name": "眺望油田之丘"
+  },
+  "6B05B93C445473B5A9597A90CEBFF27B": {
+    "localized_name": "锈灰高原"
+  },
+  "6D227CD3475783FB16D797B206DD8C13": {
+    "localized_name": "俯瞰高塔的环形门"
+  },
+  "6DB6B7B2431CA2EFFFC88EB45805BA6A": {
+    "localized_name": "双骑士大桥"
+  },
+  "6E03F8464BAD9E458B843AA30BE1CC8F": {
+    "localized_name": "初始台地"
+  },
+  "6FBBBA0F4CDDB97C81C58C917E8927BD": {
+    "localized_name": "圣冰山岭"
+  },
+  "714B5DDC402A89D7FC703C9B0B2BF274": {
+    "localized_name": "结晶群岛"
+  },
+  "7170881D44249E90902F728E240493AF": {
+    "localized_name": "渡岛海岸"
+  },
+  "71C4B2B2407F2BBBD77572A20C7FF0F5": {
+    "localized_name": "无生者山路"
+  },
+  "72626BD0492AD65E59BDB499C9BED99A": {
+    "localized_name": "灼热高台"
+  },
+  "74270C2F45B8DCA66B6A1FAAA911D024": {
+    "localized_name": "溪谷入口"
+  },
+  "75BD9923489E2A4EBCED5A81175D5928": {
+    "localized_name": "纯白雪原"
+  },
+  "76B000914943BADDC56BCFBAE2BF051E": {
+    "localized_name": "寂静之岛的教堂遗址"
+  },
+  "77699B11460416B57ADEDFB989B78E68": {
+    "localized_name": "忘却孤岛"
+  },
+  "79C561B747335A7A0A8FBF9FAE280E62": {
+    "localized_name": "剑豪密域"
+  },
+  "80729706432E53B2A3D07C82D14C8749": {
+    "localized_name": "怪菇崖"
+  },
+  "825ED1AD422E5E0C94332C835B74D3B4": {
+    "localized_name": "沙漠之脊"
+  },
+  "82C086DB44672C9D828F19B3A383BE70": {
+    "localized_name": "荒野水门"
+  },
+  "837C6214424040FCEF9D48BA20E248BA": {
+    "localized_name": "黒曜火山登山道"
+  },
+  "839048604D716A58A64781A9A342B717": {
+    "localized_name": "黄金废都"
+  },
+  "84D48EA34666191781868E809ACBCBCE": {
+    "localized_name": "白银灵峰山腰的瞭望塔"
+  },
+  "866881DB443444AA7F4E7C8E5DCDAA29": {
+    "localized_name": "湿地之岛的教堂遗址"
+  },
+  "8A9AE3B44AD758EDD7FE44BA9B75000B": {
+    "localized_name": "砂岩台地的瞭望塔"
+  },
+  "8C1EE640439F980EA6BA3D9B256D4FAD": {
+    "localized_name": "结晶大树"
+  },
+  "8CA5E9774FF1BBC1156ABCA09E616480": {
+    "localized_name": "小型海湾"
+  },
+  "902C96F44BC84002E39B52ACBFC61452": {
+    "localized_name": "天坠的遇难船"
+  },
+  "916CC96142D38225BD3C9290D6321073": {
+    "localized_name": "石柱洞窟入口"
+  },
+  "91DAC6F34D2A9FD7F01471B5166C6C02": {
+    "localized_name": "小青龙之滨"
+  },
+  "923B781345D2AB7ECED6BABD6E97ECE8": {
+    "localized_name": "伪善者之丘"
+  },
+  "9521FEBF4A6D0D02AE9F80AE9513B99C": {
+    "localized_name": "天坠之塔 入口"
+  },
+  "979BF2044C8E8FE559B598A95A83EDE3": {
+    "localized_name": "小型聚落"
+  },
+  "9FBB93D84811BE424A37C391DBFBB476": {
+    "localized_name": "冰鸟密域"
+  },
+  "9FDF4C7C4CEB40E103E989A1C34A245D": {
+    "localized_name": "侵蚀树洞"
+  },
+  "A136990F4E2C1C96C0384BA260CD0BC3": {
+    "localized_name": "樱花岛：蘑菇湿地"
+  },
+  "A166CA6F4C1D191AA59951AD1CA49A92": {
+    "localized_name": "深红观景台"
+  },
+  "A1BC65AA445619EF338E0388BC010648": {
+    "localized_name": "火山山脚"
+  },
+  "A277AE6341EF40D84D711EA52303353F": {
+    "localized_name": "神速密域"
+  },
+  "A51FC0C147435750046C48B254793A8B": {
+    "localized_name": "帕鲁保护团体的高塔 入口"
+  },
+  "A5664AB74E0D030D03BF2DAF87C67A0F": {
+    "localized_name": "封印之室"
+  },
+  "A9213E6E425F2F696D8B3EB19AA547FE": {
+    "localized_name": "黄金废都的瞭望塔"
+  },
+  "ACAE5FB04D48DE4197443E9C0993086B": {
+    "localized_name": "神秘密域"
+  },
+  "AEBCC3FF41ACF9252B3499A89E0BAD55": {
+    "localized_name": "盟约之塔 入口"
+  },
+  "AECFED0D41AFEE11F30B4F9687BC3243": {
+    "localized_name": "黑曜火山 山腰"
+  },
+  "B001852C491FF5E70C4747BFF9972924": {
+    "localized_name": "探究者歧路"
+  },
+  "B03880F34C398AEE56A024B8E510649D": {
+    "localized_name": "竹鸣崖"
+  },
+  "B0609E19416F6731E997F89CF9B66A14": {
+    "localized_name": "潮风海岸"
+  },
+  "B34E33AD445D619D70AD6BBDBF7CDE4D": {
+    "localized_name": "睡莲峡谷"
+  },
+  "B44AA24445864494E7569597ACCAEFC6": {
+    "localized_name": "竹林深处"
+  },
+  "B795E2B14189A7D1EEAD6E97E89C91B7": {
+    "localized_name": "流亡者海角"
+  },
+  "BD9306974C7C85C4B76B318D2A397F4C": {
+    "localized_name": "干涸海岸"
+  },
+  "BF8B123244ADB794A06EA8A10503FBDD": {
+    "localized_name": "鲨小子的地盘"
+  },
+  "C2A21FB148CA559F4814029637CEF75F": {
+    "localized_name": "冻沙海角"
+  },
+  "C2EC8AFD4C5D84F814ED2E9E54E498FC": {
+    "localized_name": "天空仙境"
+  },
+  "C4D494924DAB97D9E30AFB92B6029307": {
+    "localized_name": "樱花岛：北部矿场"
+  },
+  "C5C2695D4EA3C55C419D7A8C8D184631": {
+    "localized_name": "阿努比斯沙丘"
+  },
+  "C5E2ABA14A8F6D35EF4A81AD47EC19C9": {
+    "localized_name": "焦热台地的瞭望塔"
+  },
+  "C5F1A3CA46EAE25B999783B3ECC569ED": {
+    "localized_name": "孢子回廊"
+  },
+  "C6A854194E8AF1B5CEF381A1A276CB92": {
+    "localized_name": "召唤风暴的祭坛"
+  },
+  "C808C5844EB34E9EDA773AA209CEBA01": {
+    "localized_name": "离岛墓地"
+  },
+  "C94EC2744732C721BA6144802FD11EC2": {
+    "localized_name": "边境白洲"
+  },
+  "CAC914F54EE678E09CF8ECA4D81E60A0": {
+    "localized_name": "弯曲赤岩"
+  },
+  "CCCD29E444CEB548D5B5E589DAF086F2": {
+    "localized_name": "热砂丘陵的瞭望塔"
+  },
+  "CD9FE0D4490874187ED9919D0E4D2A09": {
+    "localized_name": "被毁灭的要塞城市"
+  },
+  "CF5FAE4A487231DDD8487C9B19453128": {
+    "localized_name": "绿洲孤岛"
+  },
+  "D758455B40BC4D1A8ABB3EB62DD009D3": {
+    "localized_name": "黄尘峡谷"
+  },
+  "D786C6324A293AB1560774B15B998290": {
+    "localized_name": "圣瀑湖畔"
+  },
+  "D8C1A86541DACA78B1250AB9B85B7E67": {
+    "localized_name": "弦月湖畔的瞭望塔"
+  },
+  "DC0ECF9241B4410C59EE619F56D1106A": {
+    "localized_name": "寒水之滨"
+  },
+  "DC7376744AEDB97BBEB044AA3AACAB26": {
+    "localized_name": "碧蓝海崖"
+  },
+  "DD7137634D024A8FCFE6CB9F08887F86": {
+    "localized_name": "被遗忘的崖下庭园"
+  },
+  "DDBBFFAF43D9219AE68DF98744DF0831": {
+    "localized_name": "草巨兽山陵"
+  },
+  "DEAA0D38438D8CF02BC7CC82621B33B0": {
+    "localized_name": "黄土平原"
+  },
+  "DEE0F8BB4609C83285CE6CA80B84B679": {
+    "localized_name": "新绿清流的瞭望塔"
+  },
+  "DF9FB9CB41B43052A9C74FA79A826A50": {
+    "localized_name": "灼热密域"
+  },
+  "E0819EFB41581AEAC3A029B0EE2FE195": {
+    "localized_name": "基因研究部队的高塔 入口"
+  },
+  "E74D687D4CAAF5EA085E0B8A76F8B652": {
+    "localized_name": "向阳孤岛"
+  },
+  "E8351DF348B268672F0A219840C6BE47": {
+    "localized_name": "黑曜焦土的瞭望塔"
+  },
+  "E8A85FF544C205E1B04F7E93109B8197": {
+    "localized_name": "枯竭边境"
+  },
+  "E9FC08444BFE7E3EE6E06F84AC8688EC": {
+    "localized_name": "冰鼬山丘的瞭望塔"
+  },
+  "EC4896F44C4C9BD993DAE2B2C1F31BBA": {
+    "localized_name": "新绿清流"
+  },
+  "EC94023A4CA571FF0FD19E90944F4231": {
+    "localized_name": "冰鼬山丘"
+  },
+  "EDE1AB2C44B1846879BB789C3951B2F7": {
+    "localized_name": "翠竹溪谷的瞭望塔"
+  },
+  "F1A1AB834E138B2A938D0AA90E9A65E3": {
+    "localized_name": "樱花岛：南部砂原"
+  },
+  "F31B78014AD3954185416DA155E50CCD": {
+    "localized_name": "通往环形门的密道"
+  },
+  "F34810714796CFCEB04D7C8F7B41493D": {
+    "localized_name": "草熊猫里海岸"
+  },
+  "F382ADAE4259150BF994FF873ECF242B": {
+    "localized_name": "潺鸣之岛"
+  },
+  "F3C0FFDE41C2BF4EFD8A068986C6B02E": {
+    "localized_name": "竹鸣坡"
+  },
+  "F46296FF4274FEDBF32DC5957835A18A": {
+    "localized_name": "樱花岛的瞭望塔"
+  },
+  "F6AFBCDA4D7AF6C373407DBC8556FBAE": {
+    "localized_name": "泰拉瑞亚密域"
+  },
+  "F6C005A14B38FE0B57F1C7869FD899CB": {
+    "localized_name": "天然陆桥"
+  },
+  "F88417694DF90381B2B21D9E039B2CCD": {
+    "localized_name": "紫色孤岬"
+  },
+  "F8DF603B4C750B37D943C9AF6A911946": {
+    "localized_name": "湖心"
+  },
+  "F8E5CB8143F4FA2F6213E6B454569F87": {
+    "localized_name": "黑曜火山的阿努比斯像"
+  },
+  "FC8F024D40741A133EB9DA88201AE7F0": {
+    "localized_name": "赤红悬崖"
+  },
+  "FD235A5B4F02CD76312A459D77398CA6": {
+    "localized_name": "天阳乡的瞭望塔"
+  }
+}

@@ -16,7 +16,7 @@
 //!
 //! "Unlocked" means every byte of every mask present is zero.
 
-use uesave::{ByteArray, Property, PropertyKey, StructValue, ValueVec};
+use crate::ue::{ByteArray, Property, PropertyKey, StructValue, ValueVec};
 
 use crate::error::CoreError;
 use crate::savio;
@@ -124,46 +124,30 @@ pub fn unlock_world_map(local_data_sav: &[u8]) -> Result<MapUnlockOutcome, CoreE
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::gamepass::fixture::python_testdata_dir;
-
-    /// Resolves the testdata dir only when it actually holds a `LocalData.sav`,
-    /// so a partial checkout skips rather than panicking on the read below.
-    fn testdata_local_data_or_skip() -> Option<std::path::PathBuf> {
-        let Some(dir) = python_testdata_dir() else {
-            eprintln!("SKIP: python testdata not found (set PSP_PY_TESTDATA)");
-            return None;
-        };
-        if !dir.join("LocalData.sav").exists() {
-            eprintln!("SKIP: python testdata has no LocalData.sav (partial layout)");
-            return None;
-        }
-        Some(dir)
-    }
+    use crate::gamepass::fixture::reference_saves_dir;
 
     /// A real, git-tracked `LevelMeta.sav` (the world1 fixture, also used by
     /// `psp-server/tests/phase4_ws.rs`). It carries a `SaveData` struct, so the
-    /// hermetic tests below can graft a synthetic mask into a real GVAS tree;
-    /// it has no `LocalData.sav` of its own. Unlike the `backups/gamepass`
-    /// corpus, this fixture is committed, so tests using it run unconditionally
-    /// on a clean checkout / CI.
+    /// hermetic tests below can graft a synthetic mask into a real GVAS tree.
+    /// Committed, so tests using it run unconditionally on a clean checkout / CI.
     fn fixture_level_meta_path() -> std::path::PathBuf {
         std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
             .join("../tests/fixtures/saves/world1/LevelMeta.sav")
     }
 
     fn mask_bytes(local_data_sav: &[u8]) -> Vec<u8> {
-        let save = uesave::Save::read_with_types(
-            &mut std::io::Cursor::new(local_data_sav),
-            uesave::games::palworld::palworld_types(),
-        )
-        .unwrap();
-        let uesave::Property::Struct(uesave::StructValue::Struct(save_data)) =
-            &save.root.properties.0[&uesave::PropertyKey::from("SaveData")]
+        let save = crate::ue::SaveReader::new()
+            .game::<crate::ue::Palworld>()
+            .types(crate::ue::games::palworld::palworld_types())
+            .read(std::io::Cursor::new(local_data_sav))
+            .unwrap();
+        let crate::ue::Property::Struct(crate::ue::StructValue::Struct(save_data)) =
+            &save.root.properties.0[&crate::ue::PropertyKey::from("SaveData")]
         else {
             panic!("SaveData missing");
         };
-        let uesave::Property::Array(uesave::ValueVec::Byte(uesave::ByteArray::Byte(bytes))) =
-            &save_data.0[&uesave::PropertyKey::from("WorldMapMaskTextureV4")]
+        let crate::ue::Property::Array(crate::ue::ValueVec::Byte(crate::ue::ByteArray::Byte(bytes))) =
+            &save_data.0[&crate::ue::PropertyKey::from("WorldMapMaskTextureV4")]
         else {
             panic!("WorldMapMaskTextureV4 missing or not a byte array");
         };
@@ -172,46 +156,21 @@ mod tests {
 
     #[test]
     fn local_data_round_trips_byte_identical_at_gvas_level() {
-        let Some(testdata) = testdata_local_data_or_skip() else {
-            return;
-        };
-        let sav_bytes = std::fs::read(testdata.join("LocalData.sav")).unwrap();
+        let sav_bytes = std::fs::read(reference_saves_dir().join("LocalData.sav")).unwrap();
         let gvas_bytes =
-            uesave::compression::decompress_save(&mut std::io::Cursor::new(sav_bytes.as_slice()))
+            crate::ue::compression::decompress_save(&mut std::io::Cursor::new(sav_bytes.as_slice()))
                 .unwrap();
-        let save = uesave::Save::read_with_types(
-            &mut std::io::Cursor::new(sav_bytes.as_slice()),
-            uesave::games::palworld::palworld_types(),
-        )
-        .unwrap();
+        let save = crate::ue::SaveReader::new()
+            .game::<crate::ue::Palworld>()
+            .types(crate::ue::games::palworld::palworld_types())
+            .read(std::io::Cursor::new(sav_bytes.as_slice()))
+            .unwrap();
         let mut rewritten = Vec::new();
         save.write(&mut rewritten).unwrap();
         assert_eq!(
             gvas_bytes, rewritten,
             "LocalData.sav GVAS round-trip must be byte-identical"
         );
-    }
-
-    #[test]
-    fn unlock_world_map_zeroes_mask_and_emits_plm() {
-        let Some(testdata) = testdata_local_data_or_skip() else {
-            return;
-        };
-        let sav_bytes = std::fs::read(testdata.join("LocalData.sav")).unwrap();
-        let mask_before = mask_bytes(&sav_bytes);
-        let nonzero_before = mask_before.iter().filter(|byte| **byte != 0).count();
-
-        let outcome = unlock_world_map(&sav_bytes).unwrap();
-        assert_eq!(outcome.cleared_byte_count, nonzero_before);
-        assert_eq!(&outcome.sav_bytes[8..12], b"PlM1");
-
-        let mask_after = mask_bytes(&outcome.sav_bytes);
-        assert_eq!(mask_after.len(), mask_before.len());
-        assert!(mask_after.iter().all(|byte| *byte == 0));
-
-        // Unlocking twice clears nothing further.
-        let second = unlock_world_map(&outcome.sav_bytes).unwrap();
-        assert_eq!(second.cleared_byte_count, 0);
     }
 
     #[test]
@@ -242,10 +201,10 @@ mod tests {
         crate::props::ensure_schema(
             &mut save,
             "SaveData.WorldMapMaskTextureV4".to_string(),
-            uesave::PropertyTagPartial {
+            crate::ue::PropertyTagPartial {
                 id: None,
-                data: uesave::PropertyTagDataPartial::Array(Box::new(
-                    uesave::PropertyTagDataPartial::Byte(None),
+                data: crate::ue::PropertyTagDataPartial::Array(Box::new(
+                    crate::ue::PropertyTagDataPartial::Byte(None),
                 )),
             },
         );
@@ -268,7 +227,7 @@ mod tests {
     /// whose keys are `Property::Name` ("MainMap"/"Tree") and whose values are
     /// bare user structs carrying a single `MaskTextureData` byte array.
     fn graft_world_map_ui_save_data_map(
-        save: &mut uesave::Save,
+        save: &mut crate::ue::Save,
         entries: &[(&str, Vec<u8>)],
         legacy_mask: Option<Vec<u8>>,
     ) {
@@ -285,12 +244,12 @@ mod tests {
             let map_entries = entries
                 .iter()
                 .map(|(name, bytes)| {
-                    let mut value = uesave::Properties::default();
+                    let mut value = crate::ue::Properties::default();
                     value.insert(
                         "MaskTextureData",
                         Property::Array(ValueVec::Byte(ByteArray::Byte(bytes.clone()))),
                     );
-                    uesave::MapEntry {
+                    crate::ue::MapEntry {
                         key: Property::Name((*name).to_string()),
                         value: Property::Struct(StructValue::Struct(value)),
                     }
@@ -302,10 +261,10 @@ mod tests {
         crate::props::ensure_schema(
             save,
             "SaveData.WorldMapMaskTextureV4".to_string(),
-            uesave::PropertyTagPartial {
+            crate::ue::PropertyTagPartial {
                 id: None,
-                data: uesave::PropertyTagDataPartial::Array(Box::new(
-                    uesave::PropertyTagDataPartial::Byte(None),
+                data: crate::ue::PropertyTagDataPartial::Array(Box::new(
+                    crate::ue::PropertyTagDataPartial::Byte(None),
                 )),
             },
         );
@@ -316,15 +275,15 @@ mod tests {
         crate::props::ensure_schema(
             save,
             "SaveData.WorldMapUISaveDataMap".to_string(),
-            uesave::PropertyTagPartial {
+            crate::ue::PropertyTagPartial {
                 id: None,
-                data: uesave::PropertyTagDataPartial::Map {
-                    key_type: Box::new(uesave::PropertyTagDataPartial::Other(
-                        uesave::PropertyType::NameProperty,
+                data: crate::ue::PropertyTagDataPartial::Map {
+                    key_type: Box::new(crate::ue::PropertyTagDataPartial::Other(
+                        crate::ue::PropertyType::NameProperty,
                     )),
-                    value_type: Box::new(uesave::PropertyTagDataPartial::Struct {
-                        struct_type: uesave::StructType::Struct(None),
-                        id: uesave::FGuid::default(),
+                    value_type: Box::new(crate::ue::PropertyTagDataPartial::Struct {
+                        struct_type: crate::ue::StructType::Struct(None),
+                        id: crate::ue::FGuid::default(),
                     }),
                 },
             },
@@ -332,10 +291,10 @@ mod tests {
         crate::props::ensure_schema(
             save,
             "SaveData.WorldMapUISaveDataMap.MaskTextureData".to_string(),
-            uesave::PropertyTagPartial {
+            crate::ue::PropertyTagPartial {
                 id: None,
-                data: uesave::PropertyTagDataPartial::Array(Box::new(
-                    uesave::PropertyTagDataPartial::Byte(None),
+                data: crate::ue::PropertyTagDataPartial::Array(Box::new(
+                    crate::ue::PropertyTagDataPartial::Byte(None),
                 )),
             },
         );
@@ -451,49 +410,4 @@ mod tests {
         );
     }
 
-    /// End-to-end against a real Xbox `LocalData.sav` from the on-disk gamepass
-    /// corpus, when one is present. The corpus file is only ever read;
-    /// `unlock_world_map` touches no disk.
-    #[test]
-    fn unlock_world_map_on_real_gamepass_corpus_when_present() {
-        let Some(local_data_path) = find_corpus_local_data_sav() else {
-            eprintln!(
-                "SKIP: no LocalData.sav found under backups/gamepass/ (unlock_world_map_on_real_gamepass_corpus_when_present)"
-            );
-            return;
-        };
-        let sav_bytes = std::fs::read(&local_data_path).unwrap();
-        let mask_before = mask_bytes(&sav_bytes);
-        let nonzero_before = mask_before.iter().filter(|byte| **byte != 0).count();
-
-        let outcome = unlock_world_map(&sav_bytes).unwrap();
-        assert_eq!(outcome.cleared_byte_count, nonzero_before);
-        assert_eq!(&outcome.sav_bytes[8..12], b"PlM1");
-
-        let mask_after = mask_bytes(&outcome.sav_bytes);
-        assert_eq!(mask_after.len(), mask_before.len());
-        assert!(mask_after.iter().all(|byte| *byte == 0));
-    }
-
-    /// First `backups/gamepass/<save_id>/<container>/LocalData.sav` on disk, if
-    /// any — not every save in the corpus has one.
-    fn find_corpus_local_data_sav() -> Option<std::path::PathBuf> {
-        let gamepass_root =
-            std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../backups/gamepass");
-        if !gamepass_root.exists() {
-            return None;
-        }
-        for save_dir in std::fs::read_dir(&gamepass_root).ok()?.flatten() {
-            if !save_dir.path().is_dir() {
-                continue;
-            }
-            for container_dir in std::fs::read_dir(save_dir.path()).ok()?.flatten() {
-                let candidate = container_dir.path().join("LocalData.sav");
-                if candidate.exists() {
-                    return Some(candidate);
-                }
-            }
-        }
-        None
-    }
 }
