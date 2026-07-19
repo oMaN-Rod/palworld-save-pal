@@ -3482,7 +3482,7 @@ dependencies = [
 
 [[package]]
 name = "psp-core"
-version = "1.1.0"
+version = "1.2.0"
 dependencies = [
  "chrono",
  "cityhasher",
@@ -3497,7 +3497,7 @@ dependencies = [
 
 [[package]]
 name = "psp-db"
-version = "1.1.0"
+version = "1.2.0"
 dependencies = [
  "chrono",
  "serde",
@@ -3512,7 +3512,7 @@ dependencies = [
 
 [[package]]
 name = "psp-desktop"
-version = "1.1.0"
+version = "1.2.0"
 dependencies = [
  "anyhow",
  "psp-server",
@@ -3526,7 +3526,7 @@ dependencies = [
 
 [[package]]
 name = "psp-server"
-version = "1.1.0"
+version = "1.2.0"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -5622,7 +5622,7 @@ dependencies = [
 [[package]]
 name = "uesave"
 version = "0.7.1"
-source = "git+https://github.com/oMaN-Rod/uesave-rs.git?branch=pluggable-game-support#7c252d6a91e24e9f3c582b8a4fb11e0cbc367fd6"
+source = "git+https://github.com/oMaN-Rod/uesave-rs.git?branch=pluggable-game-support#a5271781df0ed021d72e5ad6eab1c59d5199451c"
 dependencies = [
  "bitflags 2.13.0",
  "byteorder",
