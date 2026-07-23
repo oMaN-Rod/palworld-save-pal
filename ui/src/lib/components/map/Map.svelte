@@ -70,7 +70,8 @@
 	import MapPopup from './MapPopup.svelte';
 	import Toggle3dControl from './Toggle3dControl.svelte';
 	import StructureFilterControl from './StructureFilterControl.svelte';
-	import type { MapUnlockPoint, RelicPoint } from '$types';
+	import { createStructureLayer, type StructureLayer } from './structureLayer';
+	import type { BaseStructure, MapUnlockPoint, RelicPoint } from '$types';
 	import * as m from '$i18n/messages';
 	import 'maplibre-gl/dist/maplibre-gl.css';
 
@@ -92,8 +93,10 @@
 		showLabels = true,
 		show3d = false,
 		structureTypes = {},
+		renderMode = 'detailed',
 		onToggle3d,
 		onToggleStructureType,
+		onToggleRenderMode,
 		onEditBase,
 		onToggleFastTravel,
 		onToggleRelic,
@@ -120,8 +123,10 @@
 		show3d?: boolean;
 		/** Per-structure-type visibility; a missing key means visible. */
 		structureTypes?: Record<string, boolean>;
+		renderMode?: 'detailed' | 'flat';
 		onToggle3d?: () => void;
 		onToggleStructureType?: (type: string) => void;
+		onToggleRenderMode?: () => void;
 		onEditBase?: (base: any) => void;
 		onToggleFastTravel?: (point: MapUnlockPoint) => void;
 		onToggleRelic?: (point: RelicPoint) => void;
@@ -484,6 +489,98 @@
 		return { type: 'FeatureCollection', features };
 	});
 
+	let structureLayer: StructureLayer | null = null;
+	let pendingStyleHandler: (() => void) | null = null;
+	const detailed = $derived(show3d && renderMode === 'detailed');
+
+	function populateStructureLayer() {
+		if (!structureLayer) return;
+		const all: BaseStructure[] = [];
+		for (const { base } of bases) {
+			const loc = base.location;
+			if (!loc) continue;
+			for (const s of baseStructuresData.for(base.id)) {
+				const typeA = baseStructuresData.footprints[s.map_object_id]?.typeA ?? 'Other';
+				if (structureTypes[typeA] === false) continue;
+				all.push(s);
+			}
+		}
+		structureLayer.update(all, baseStructuresData.footprints, area, verticalScale);
+	}
+
+	$effect(() => {
+		const instance = map;
+		if (!instance) return;
+		if (detailed && !structureLayer) {
+			// MapLibre throws if a layer is added before the style finishes loading; only
+			// keep the reference once addLayer actually succeeds, retrying on `styledata`.
+			const add = () => {
+				if (!instance.isStyleLoaded()) return false;
+				const layer = createStructureLayer({ id: 'structure-3d' });
+				instance.addLayer(layer, instance.getLayer('origin-icons') ? 'origin-icons' : undefined);
+				structureLayer = layer;
+				populateStructureLayer();
+				return true;
+			};
+			// `styledata` fires many times while the style/tiles load and often fires
+			// before isStyleLoaded() flips true, so a one-shot retry can miss every
+			// firing; keep listening until add() succeeds or 3D is toggled off.
+			if (!add() && !pendingStyleHandler) {
+				const onStyle = () => {
+					if (!detailed || structureLayer) {
+						instance.off('styledata', onStyle);
+						pendingStyleHandler = null;
+						return;
+					}
+					if (add()) {
+						instance.off('styledata', onStyle);
+						pendingStyleHandler = null;
+					}
+				};
+				pendingStyleHandler = onStyle;
+				instance.on('styledata', onStyle);
+			}
+		}
+		if (!detailed && structureLayer) {
+			if (instance.getLayer('structure-3d')) instance.removeLayer('structure-3d');
+			structureLayer.dispose();
+			structureLayer = null;
+		}
+		if (!detailed && pendingStyleHandler) {
+			instance.off('styledata', pendingStyleHandler);
+			pendingStyleHandler = null;
+		}
+	});
+
+	$effect(() => {
+		// Read every reactive dependency before any early return: Svelte only tracks
+		// sources a run actually reads, and bailing out immediately would leave this
+		// effect tracking only `detailed`, silently missing later structure data.
+		const isDetailed = detailed;
+		const baseList = bases;
+		const footprints = baseStructuresData.footprints;
+		const types = structureTypes;
+		const currentArea = area;
+		const vScale = verticalScale;
+		let total = 0;
+		for (const { base } of baseList) total += baseStructuresData.for(base.id).length;
+		void footprints;
+		void types;
+		void currentArea;
+		void vScale;
+		void total;
+		if (!isDetailed || !structureLayer) return;
+		populateStructureLayer();
+	});
+
+	$effect(() => {
+		// Read `hovered` before the layer check: optional-chaining would short-circuit
+		// and Svelte would never track it, so the effect would never re-run.
+		const current = hovered;
+		if (!structureLayer) return;
+		structureLayer.setHover(current?.type === 'structure' ? current.key : null);
+	});
+
 	// The wrapper reads maxZoom/pitchWithRotate only at construction, and DragRotateHandler
 	// captures pitchWithRotate too — enable() can never turn pitch back on. So the map is
 	// built pitch-capable and a maxPitch of 0 is what actually keeps 2D flat.
@@ -667,7 +764,7 @@
 							'fill-extrusion-color': structureColor,
 							'fill-extrusion-base': ['*', ['get', 'b'], verticalScale],
 							'fill-extrusion-height': ['*', ['get', 'h'], verticalScale],
-							'fill-extrusion-opacity': 0.9
+							'fill-extrusion-opacity': detailed ? 0.01 : 0.9
 						}}
 					/>
 				</Source.GeoJSON>

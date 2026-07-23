@@ -18,6 +18,7 @@
 	import Users from '@lucide/svelte/icons/users';
 	import MapIcon from '@lucide/svelte/icons/map';
 	import Building from '@lucide/svelte/icons/building';
+	import Boxes from '@lucide/svelte/icons/boxes';
 	import PanelLeft from '@lucide/svelte/icons/panel-left';
 	import PanelLeftClose from '@lucide/svelte/icons/panel-left-close';
 	import { fly } from 'svelte/transition';
@@ -68,6 +69,7 @@
 		showPredatorPals: boolean;
 		showLabels: boolean;
 		enable3d: boolean;
+		structureRenderMode?: 'detailed' | 'flat';
 		panelOpen: boolean;
 	};
 
@@ -87,6 +89,7 @@
 		showPredatorPals: true,
 		showLabels: true,
 		enable3d: false,
+		structureRenderMode: 'detailed',
 		panelOpen: true
 	});
 	const mapOptions = $derived(mapOptionsState.current);
@@ -564,6 +567,22 @@
 									<span class="text-surface-500 text-xs">{loadedBaseCount}/{totalBaseCount}</span>
 								</button>
 							{/if}
+							{#if mapOptions.enable3d}
+								<button
+									class="flex items-center space-x-2 {(mapOptions.structureRenderMode ?? 'detailed') ===
+									'detailed'
+										? ''
+										: 'opacity-25'}"
+									onclick={() =>
+										(mapOptions.structureRenderMode =
+											(mapOptions.structureRenderMode ?? 'detailed') === 'detailed'
+												? 'flat'
+												: 'detailed')}
+								>
+									<Boxes class="mr-2 h-6 w-6" />
+									<span>Detailed structures</span>
+								</button>
+							{/if}
 
 							<button
 								class="flex items-center space-x-2 {mapOptions.showDungeons ? '' : 'opacity-25'}"
@@ -838,8 +857,12 @@
 					showLabels={mapOptions.showLabels ?? true}
 					show3d={mapOptions.enable3d ?? false}
 					structureTypes={mapOptions.structureTypes ?? {}}
+					renderMode={mapOptions.structureRenderMode ?? 'detailed'}
 					onToggle3d={() => (mapOptions.enable3d = !(mapOptions.enable3d ?? false))}
 					onToggleStructureType={handleToggleStructureType}
+					onToggleRenderMode={() =>
+						(mapOptions.structureRenderMode =
+							(mapOptions.structureRenderMode ?? 'detailed') === 'detailed' ? 'flat' : 'detailed')}
 					onEditBase={handleEditBase}
 					onToggleFastTravel={handleToggleFastTravel}
 					onToggleRelic={handleToggleRelic}

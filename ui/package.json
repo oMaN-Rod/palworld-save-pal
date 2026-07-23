@@ -31,6 +31,7 @@
 		"@tailwindcss/vite": "^4.1.11",
 		"@types/eslint": "^9.6.1",
 		"@types/node": "^20.19.9",
+		"@types/three": "^0.185.1",
 		"@types/uuid": "^10.0.0",
 		"concurrently": "^9.2.0",
 		"eslint": "^9.32.0",
@@ -76,6 +77,7 @@
 		"svelte-jsoneditor": "^3.11.0",
 		"svelte-persisted-state": "^1.2.0",
 		"tailwind-merge": "^2.6.0",
+		"three": "^0.185.1",
 		"uuid": "^11.1.0"
 	},
 	"trustedDependencies": [

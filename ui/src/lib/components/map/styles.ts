@@ -47,3 +47,25 @@ export const STRUCTURE_COLORS: Record<string, string> = {
 export function relicTypeIcon(relicType: string): string {
 	return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/relic_${relicType}.webp`);
 }
+
+const MATERIAL_TINT: Record<string, string> = {
+	Wood: '#8a6f4d',
+	Stone: '#8d8d94',
+	Metal: '#6e7f8d',
+	PalMetal: '#5a6b78',
+	Ancient: '#7d9187',
+	Glass: '#bfe8ea'
+};
+
+function mix(a: string, b: string, t: number): string {
+	const pa = [1, 3, 5].map((i) => parseInt(a.slice(i, i + 2), 16));
+	const pb = [1, 3, 5].map((i) => parseInt(b.slice(i, i + 2), 16));
+	const c = pa.map((v, i) => Math.round(v * (1 - t) + pb[i] * t));
+	return `#${c.map((v) => v.toString(16).padStart(2, '0')).join('')}`;
+}
+
+export function structureFillColor(typeA: string, material?: string): string {
+	const base = STRUCTURE_COLORS[typeA] ?? STRUCTURE_COLORS.Other;
+	const tint = material && material !== 'None' ? MATERIAL_TINT[material] : undefined;
+	return tint ? mix(base, tint, 0.5) : base;
+}

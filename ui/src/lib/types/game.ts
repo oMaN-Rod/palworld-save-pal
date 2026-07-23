@@ -184,6 +184,8 @@ export type Footprint = {
 	oy: number;
 	oz: number;
 	typeA: string;
+	archetype?: string;
+	material?: string;
 };
 
 export type Player = {
