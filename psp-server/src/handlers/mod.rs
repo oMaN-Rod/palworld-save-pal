@@ -1,3 +1,4 @@
+pub mod blueprints;
 pub mod game_data;
 pub mod gamepass;
 pub mod gps;

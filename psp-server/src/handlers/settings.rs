@@ -58,6 +58,7 @@ mod tests {
             session: &mut test.session,
             app: &test.app,
             emitter: &test.emitter,
+            blueprints: &mut test.blueprints,
             attachment: None,
         };
         handle_get_settings(&mut ctx).await.unwrap();
@@ -80,6 +81,7 @@ mod tests {
             session: &mut test.session,
             app: &test.app,
             emitter: &test.emitter,
+            blueprints: &mut test.blueprints,
             attachment: None,
         };
         let update: psp_core::dto::settings::SettingsUpdateDto =

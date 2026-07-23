@@ -1294,6 +1294,7 @@ pub(crate) mod test_env {
         pub docker: Arc<MockDocker>,
         pub session: psp_core::session::Session,
         pub emitter: crate::emitter::Emitter,
+        pub blueprints: crate::blueprint_registry::BlueprintRegistry,
         pub receiver: tokio::sync::mpsc::UnboundedReceiver<axum::extract::ws::Message>,
         pub _scratch: tempfile::TempDir,
     }
@@ -1330,6 +1331,7 @@ pub(crate) mod test_env {
                 docker,
                 session: psp_core::session::Session::new(),
                 emitter,
+                blueprints: Default::default(),
                 receiver,
                 _scratch: scratch,
             }
@@ -1364,6 +1366,7 @@ pub(crate) mod test_env {
                 session: &mut self.session,
                 app: &self.app,
                 emitter: &self.emitter,
+                blueprints: &mut self.blueprints,
                 attachment: None,
             }
         }
@@ -2102,6 +2105,7 @@ mod tests {
             session: &mut env.session,
             app: &env.app,
             emitter: &env.emitter,
+            blueprints: &mut env.blueprints,
             attachment: Some(crate::dispatcher::SessionAttachment {
                 current_id: &mut current_id,
                 arc: &mut session_arc,

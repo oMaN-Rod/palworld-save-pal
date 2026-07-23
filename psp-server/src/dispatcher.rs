@@ -17,6 +17,7 @@ pub struct HandlerCtx<'a> {
     pub session: &'a mut Session,
     pub app: &'a Arc<AppState>,
     pub emitter: &'a Emitter,
+    pub blueprints: &'a mut crate::blueprint_registry::BlueprintRegistry,
     /// The connection's store attachment: its current session id and the `Arc`
     /// backing `session`, so a load handler can register/replace it in the
     /// store. `None` in unit tests that build a ctx directly and never load.
@@ -407,6 +408,31 @@ async fn route(
             handlers::world_option::handle_update_world_option(serde_json::from_value(data)?, ctx)
                 .await
         }
+        MessageType::CaptureBaseBlueprint => {
+            handlers::blueprints::handle_capture_base_blueprint(serde_json::from_value(data)?, ctx)
+                .await
+        }
+        MessageType::StoreBlueprint => {
+            handlers::blueprints::handle_store_blueprint(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::ListBlueprints => handlers::blueprints::handle_list_blueprints(ctx).await,
+        MessageType::LoadBlueprint => {
+            handlers::blueprints::handle_load_blueprint(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::ExportBlueprintFile => {
+            handlers::blueprints::handle_export_blueprint_file(serde_json::from_value(data)?, ctx)
+                .await
+        }
+        MessageType::ValidateBlueprintPlacement => {
+            handlers::blueprints::handle_validate_blueprint_placement(
+                serde_json::from_value(data)?,
+                ctx,
+            )
+            .await
+        }
+        MessageType::PlaceBlueprint => {
+            handlers::blueprints::handle_place_blueprint(serde_json::from_value(data)?, ctx).await
+        }
         other => {
             tracing::warn!(
                 message_type = other.as_wire(),
@@ -455,6 +481,7 @@ mod tests {
                 session: &mut test.session,
                 app: &test.app,
                 emitter: &test.emitter,
+                blueprints: &mut test.blueprints,
                 attachment: None,
             },
         )
@@ -472,6 +499,7 @@ mod tests {
                 session: &mut test.session,
                 app: &test.app,
                 emitter: &test.emitter,
+                blueprints: &mut test.blueprints,
                 attachment: None,
             },
         )
@@ -488,6 +516,7 @@ mod tests {
                 session: &mut test.session,
                 app: &test.app,
                 emitter: &test.emitter,
+                blueprints: &mut test.blueprints,
                 attachment: None,
             },
         )
@@ -511,6 +540,7 @@ mod tests {
                 session: &mut test.session,
                 app: &test.app,
                 emitter: &test.emitter,
+                blueprints: &mut test.blueprints,
                 attachment: None,
             },
         )
@@ -528,6 +558,7 @@ mod tests {
                 session: &mut test.session,
                 app: &test.app,
                 emitter: &test.emitter,
+                blueprints: &mut test.blueprints,
                 attachment: None,
             },
         )

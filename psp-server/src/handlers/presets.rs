@@ -398,6 +398,7 @@ mod tests {
             session: &mut test.session,
             app: &test.app,
             emitter: &test.emitter,
+            blueprints: &mut test.blueprints,
             attachment: None,
         })
         .await
@@ -416,6 +417,7 @@ mod tests {
             session: &mut test.session,
             app: &test.app,
             emitter: &test.emitter,
+            blueprints: &mut test.blueprints,
             attachment: None,
         })
         .await

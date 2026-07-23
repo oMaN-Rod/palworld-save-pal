@@ -1,4 +1,5 @@
 pub mod api_convert;
+pub mod blueprint_registry;
 pub mod desktop_dialogs;
 pub mod dispatcher;
 pub mod emitter;
@@ -259,6 +260,7 @@ pub(crate) mod test_support {
         pub app: Arc<AppState>,
         pub session: Session,
         pub emitter: Emitter,
+        pub blueprints: crate::blueprint_registry::BlueprintRegistry,
         pub frames: UnboundedReceiver<Message>,
         /// Held for RAII only: deletes the temp tree on drop.
         pub _temp_dir: tempfile::TempDir,
@@ -301,6 +303,7 @@ pub(crate) mod test_support {
                 app,
                 session: Session::new(),
                 emitter: Emitter::new(sender),
+                blueprints: Default::default(),
                 frames,
                 _temp_dir: temp_dir,
             }

@@ -187,6 +187,14 @@ define_message_types! {
     ExportPresets => "export_presets",
     SaveEditedSav => "save_edited_sav",
     OpenUrl => "open_url",
+    // Blueprints
+    CaptureBaseBlueprint => "capture_base_blueprint",
+    StoreBlueprint => "store_blueprint",
+    ListBlueprints => "list_blueprints",
+    LoadBlueprint => "load_blueprint",
+    ExportBlueprintFile => "export_blueprint_file",
+    ValidateBlueprintPlacement => "validate_blueprint_placement",
+    PlaceBlueprint => "place_blueprint",
 }
 
 #[cfg(test)]
@@ -338,6 +346,13 @@ mod tests {
         "export_presets",
         "save_edited_sav",
         "open_url",
+        "capture_base_blueprint",
+        "store_blueprint",
+        "list_blueprints",
+        "load_blueprint",
+        "export_blueprint_file",
+        "validate_blueprint_placement",
+        "place_blueprint",
     ];
 
     #[test]

@@ -1,3 +1,4 @@
+pub mod blueprints;
 pub mod error;
 pub mod import_legacy;
 pub mod meta;

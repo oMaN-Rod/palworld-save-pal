@@ -189,6 +189,7 @@ mod tests {
             session: &mut test.session,
             app: &test.app,
             emitter: &test.emitter,
+            blueprints: &mut test.blueprints,
             attachment: None,
         };
         let result = handle_open_url("file:///etc/passwd".to_string(), &mut ctx).await;
@@ -206,6 +207,7 @@ mod tests {
             session: &mut test.session,
             app: &test.app,
             emitter: &test.emitter,
+            blueprints: &mut test.blueprints,
             attachment: None,
         };
         handle_sync_app_state(&mut ctx).await.unwrap();
@@ -332,6 +334,7 @@ mod tests {
             session: &mut test.session,
             app: &test.app,
             emitter: &test.emitter,
+            blueprints: &mut test.blueprints,
             attachment: None,
         };
         handle_sync_app_state(&mut ctx).await.unwrap();
