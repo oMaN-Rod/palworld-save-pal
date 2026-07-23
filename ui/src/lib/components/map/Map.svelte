@@ -12,7 +12,8 @@
 		Layer,
 		Control,
 		ImageLoader,
-		FeatureState
+		FeatureState,
+		Terrain
 	} from '$components/maplibre';
 	import { getAppState } from '$states';
 	import {
@@ -62,6 +63,7 @@
 	import { assetLoader } from '$utils';
 	import MapTooltip from './MapTooltip.svelte';
 	import MapPopup from './MapPopup.svelte';
+	import Toggle3dControl from './Toggle3dControl.svelte';
 	import type { MapUnlockPoint, RelicPoint } from '$types';
 	import * as m from '$i18n/messages';
 	import 'maplibre-gl/dist/maplibre-gl.css';
@@ -83,6 +85,7 @@
 		showPredatorPals = true,
 		showLabels = true,
 		show3d = false,
+		onToggle3d,
 		onEditBase,
 		onToggleFastTravel,
 		onToggleRelic,
@@ -107,6 +110,7 @@
 		showPredatorPals?: boolean;
 		showLabels?: boolean;
 		show3d?: boolean;
+		onToggle3d?: () => void;
 		onEditBase?: (base: any) => void;
 		onToggleFastTravel?: (point: MapUnlockPoint) => void;
 		onToggleRelic?: (point: RelicPoint) => void;
@@ -289,7 +293,7 @@
 		}
 	});
 
-	let coordDisplayText = $state('World: 0, 0<br>Map: 0, 0');
+	let coordDisplayText = $state('World: 0, 0<br>Map: 0, 0<br>Zoom: 0');
 	type ScreenPoint = { x: number; y: number };
 
 	let hovered = $state<{
@@ -347,7 +351,7 @@
 		const [px, py] = lngLatToPixel(ev.lngLat.lng, ev.lngLat.lat);
 		const { worldX, worldY } = pixelToWorld(px, py, area);
 		const { gameX, gameY } = pixelToGameCoords(px, py, area);
-		coordDisplayText = `World: ${Math.round(worldX)}, ${Math.round(worldY)}<br>Map: ${gameX}, ${gameY}`;
+		coordDisplayText = `World: ${Math.round(worldX)}, ${Math.round(worldY)}<br>Map: ${gameX}, ${gameY}<br>Zoom: ${zoom.toFixed(2)}`;
 
 		const top = topFeatureAt(ev, INTERACTIVE_LAYERS);
 		if (top) {
@@ -506,6 +510,12 @@
 	>
 		<Control.Navigation position="top-right" showCompass={false} />
 		<Control.Fullscreen position="top-right" />
+		<Toggle3dControl
+			position="top-right"
+			active={show3d}
+			title="3D {m.structures()}"
+			onchange={onToggle3d}
+		/>
 
 		<ImageLoader images={staticIcons}>
 			{#each MAP_AREA_ORDER as candidate}
@@ -517,6 +527,29 @@
 					<Layer.Raster visible={area === candidate} paint={{ 'raster-fade-duration': 300 }} />
 				</Source.Raster>
 			{/each}
+
+			<!-- Each area is baked against its own world extent, and both share one lng/lat
+			     tile namespace, so exactly one DEM may be mounted. #key forces a full
+			     teardown/rebuild on area change rather than mutating a live source. -->
+			{#if show3d}
+				{#key area}
+					<Source.RasterDEM
+						id="dem-{MAP_TILE_DIR[area]}"
+						tiles={[`/maps/dem/${MAP_TILE_DIR[area]}/{z}/{x}/{y}.png`]}
+						tileSize={512}
+						maxzoom={4}
+						encoding="custom"
+						redFactor={512}
+						greenFactor={2}
+						blueFactor={0}
+						baseShift={50000}
+					>
+						<!-- Same cm-to-MapLibre-metre scalar the extrusions below use, so terrain and
+						     buildings share one vertical space and sum correctly. -->
+						<Terrain source="dem-{MAP_TILE_DIR[area]}" exaggeration={verticalScale} />
+					</Source.RasterDEM>
+				{/key}
+			{/if}
 
 			<Source.GeoJSON data={originLinesFC}>
 				<Layer.Line
@@ -552,7 +585,7 @@
 					<Layer.FillExtrusion
 						id="structure-extrusions"
 						beforeId="origin-icons"
-						minzoom={8}
+						minzoom={5}
 						paint={{
 							'fill-extrusion-color': structureColor,
 							'fill-extrusion-base': ['*', ['get', 'b'], verticalScale],

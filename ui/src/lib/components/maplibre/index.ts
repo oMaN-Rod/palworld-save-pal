@@ -1,12 +1,14 @@
 export { default as Map } from './map/Map.svelte';
 export { default as ImageLoader } from './utilities/image-loader/image-loader.svelte';
 export { default as FeatureState } from './utilities/feature-state/feature-state.svelte';
+export { default as Terrain } from './utilities/terrain/terrain.svelte';
 
 import RawSource from './sources/raw/raw-source.svelte';
 import GeoJSONSource from './sources/geojson/geojson-source.svelte';
 import RasterSource from './sources/raster/raster-source.svelte';
+import RasterDEMSource from './sources/raster-dem/raster-dem-source.svelte';
 
-export const Source = { Raw: RawSource, GeoJSON: GeoJSONSource, Raster: RasterSource };
+export const Source = { Raw: RawSource, GeoJSON: GeoJSONSource, Raster: RasterSource, RasterDEM: RasterDEMSource };
 
 import RawLayer from './layers/raw/raw-layer.svelte';
 import SymbolLayer from './layers/symbol/symbol-layer.svelte';
