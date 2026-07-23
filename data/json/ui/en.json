@@ -97,6 +97,7 @@
   "body": "Body",
   "boss": "Boss",
   "bosses": "Bosses",
+  "map_labels": "Labels",
   "box": "Box",
   "bulk_actions": "Bulk Actions",
   "bulk_clone_to_ups_failed": "Bulk clone to UPS failed. Please try again.",

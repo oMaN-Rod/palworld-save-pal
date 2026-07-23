@@ -2,6 +2,17 @@ import { MAP_SIZE } from './utils';
 
 export const MERCATOR_LAT_LIMIT = 85.0511287798;
 
+// Inset from the antimeridian by the same epsilon MapLibre uses internally. Its
+// defaultConstrain passes each maxBounds longitude edge through wrap(x, 0, worldSize),
+// which returns worldSize for both 0 and worldSize -- so edges on exactly +/-180 collapse
+// onto each other, the span becomes zero, and zoom is driven to Infinity.
+const ALMOST_180 = 180 - 1e-10;
+
+export const MAP_MAX_BOUNDS: [[number, number], [number, number]] = [
+	[-ALMOST_180, -MERCATOR_LAT_LIMIT],
+	[ALMOST_180, MERCATOR_LAT_LIMIT]
+];
+
 export function pixelToLngLat(px: number, py: number): [number, number] {
 	const lng = (px / MAP_SIZE) * 360 - 180;
 	const n = Math.PI * ((2 * py) / MAP_SIZE - 1);

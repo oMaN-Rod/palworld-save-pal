@@ -1,9 +1,22 @@
+<script module lang="ts">
+	const HOVER_STATE = { hover: true };
+</script>
+
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import type maplibregl from 'maplibre-gl';
-	import { Map as MLMap, Source, Layer, Control, ImageLoader } from '$components/maplibre';
+	import {
+		Map as MLMap,
+		Source,
+		Layer,
+		Control,
+		ImageLoader,
+		FeatureState
+	} from '$components/maplibre';
 	import { getAppState } from '$states';
 	import {
+		bossPalKey,
+		humanizeSpawnerId,
 		mapOf,
 		mapToWorld,
 		pixelToGameCoords,
@@ -13,7 +26,8 @@
 		MAP_AREA_ORDER,
 		type MapArea
 	} from './utils';
-	import { MERCATOR_LAT_LIMIT, lngLatToPixel, pixelToLngLat } from './mercator';
+	import { MAP_MAX_BOUNDS, lngLatToPixel, pixelToLngLat } from './mercator';
+	import { zoomScaledIconSize } from './expressions';
 	import {
 		buildBaseFC,
 		buildBaseRadiusFC,
@@ -32,7 +46,7 @@
 	import { relicsByType } from './relics';
 	import { isWatchtower } from './fastTravel';
 	import { mapImg } from './styles';
-	import { mapObjects, fastTravelPoints, relics, relicData, bosses } from '$lib/data';
+	import { mapObjects, fastTravelPoints, relics, relicData, bosses, palsData } from '$lib/data';
 	import { assetLoader } from '$utils';
 	import MapTooltip from './MapTooltip.svelte';
 	import MapPopup from './MapPopup.svelte';
@@ -55,6 +69,7 @@
 		showBosses = true,
 		showAlphaPals = true,
 		showPredatorPals = true,
+		showLabels = true,
 		onEditBase,
 		onToggleFastTravel,
 		onToggleRelic,
@@ -77,6 +92,7 @@
 		showBosses?: boolean;
 		showAlphaPals?: boolean;
 		showPredatorPals?: boolean;
+		showLabels?: boolean;
 		onEditBase?: (base: any) => void;
 		onToggleFastTravel?: (point: MapUnlockPoint) => void;
 		onToggleRelic?: (point: RelicPoint) => void;
@@ -180,7 +196,16 @@
 	const bossPoints = $derived.by(() => {
 		const defeated = new Set(selectedPlayer?.defeated_bosses ?? []);
 		return Object.entries(bosses.points)
-			.map(([rowKey, boss]) => ({ ...boss, rowKey, defeated: defeated.has(boss.spawner_id) }))
+			.map(([rowKey, boss]) => {
+				const palKey = bossPalKey(boss.character_id);
+				const palData = palKey ? palsData.getByKey(palKey) : undefined;
+				return {
+					...boss,
+					rowKey,
+					defeated: defeated.has(boss.spawner_id),
+					localized_name: palData?.localized_name || humanizeSpawnerId(boss.spawner_id)
+				};
+			})
 			.filter((boss) => mapOf(boss.x, boss.y) === area);
 	});
 
@@ -251,10 +276,38 @@
 	});
 
 	let coordDisplayText = $state('World: 0, 0<br>Map: 0, 0');
-	let hovered = $state<{ type: MapFeatureType; key: string } | null>(null);
-	let selected = $state<{ type: MapFeatureType; key: string; lngLat: maplibregl.LngLat } | null>(
-		null
-	);
+	type ScreenPoint = { x: number; y: number };
+
+	let hovered = $state<{
+		type: MapFeatureType;
+		key: string;
+		source: string;
+		id: number;
+		point: ScreenPoint | null;
+	} | null>(null);
+	let selected = $state<{
+		type: MapFeatureType;
+		key: string;
+		lngLat: [number, number];
+	} | null>(null);
+
+	// The popup stays pinned to its feature across pan/zoom, so its screen position has
+	// to be reprojected on every map move rather than captured once at click time.
+	let moveTick = $state(0);
+	const selectedPoint = $derived.by(() => {
+		void moveTick;
+		return selected ? projectLngLat(selected.lngLat) : null;
+	});
+
+	function featureLngLat(feature: maplibregl.MapGeoJSONFeature): [number, number] | null {
+		const geometry = feature.geometry;
+		return geometry.type === 'Point' ? (geometry.coordinates as [number, number]) : null;
+	}
+
+	function projectLngLat(lngLat: [number, number]): ScreenPoint | null {
+		const projected = map?.project(lngLat);
+		return projected ? { x: projected.x, y: projected.y } : null;
+	}
 
 	const INTERACTIVE_LAYERS = [
 		'origin-icons',
@@ -283,11 +336,30 @@
 		coordDisplayText = `World: ${Math.round(worldX)}, ${Math.round(worldY)}<br>Map: ${gameX}, ${gameY}`;
 
 		const top = topFeatureAt(ev, INTERACTIVE_LAYERS);
-		hovered = top
-			? { type: top.properties.type as MapFeatureType, key: String(top.properties.key) }
-			: null;
+		if (top) {
+			const source = top.source;
+			const id = Number(top.id);
+			if (hovered?.source !== source || hovered?.id !== id) {
+				const lngLat = featureLngLat(top);
+				hovered = {
+					type: top.properties.type as MapFeatureType,
+					key: String(top.properties.key),
+					source,
+					id,
+					point: lngLat ? projectLngLat(lngLat) : { x: ev.point.x, y: ev.point.y }
+				};
+			}
+		} else if (hovered) {
+			hovered = null;
+		}
 		const canvas = map?.getCanvas();
 		if (canvas) canvas.style.cursor = top ? 'pointer' : '';
+	}
+
+	function handleMouseOut() {
+		hovered = null;
+		const canvas = map?.getCanvas();
+		if (canvas) canvas.style.cursor = '';
 	}
 
 	function handleClick(ev: maplibregl.MapMouseEvent) {
@@ -309,7 +381,7 @@
 				return;
 			}
 		}
-		selected = { type, key, lngLat: ev.lngLat };
+		selected = { type, key, lngLat: featureLngLat(top) ?? [ev.lngLat.lng, ev.lngLat.lat] };
 	}
 
 	function handleContextMenu(ev: maplibregl.MapMouseEvent) {
@@ -331,10 +403,6 @@
 		return pixelToLngLat(px, py);
 	});
 
-	const MAX_BOUNDS: [[number, number], [number, number]] = [
-		[-180, -MERCATOR_LAT_LIMIT],
-		[180, MERCATOR_LAT_LIMIT]
-	];
 </script>
 
 <div class="relative h-full w-full">
@@ -346,13 +414,15 @@
 		zoom={2}
 		minZoom={0}
 		maxZoom={7}
-		maxBounds={MAX_BOUNDS}
+		maxBounds={MAP_MAX_BOUNDS}
 		renderWorldCopies={false}
 		dragRotate={false}
 		pitchWithRotate={false}
 		touchZoomRotate={false}
 		attributionControl={false}
+		onmove={() => moveTick++}
 		onmousemove={handleMouseMove}
+		onmouseout={handleMouseOut}
 		onclick={handleClick}
 		oncontextmenu={handleContextMenu}
 	>
@@ -377,15 +447,15 @@
 				/>
 			</Source.GeoJSON>
 
-			<Source.GeoJSON data={baseRadiusFC}>
-				<Layer.Fill visible={showBases} paint={{ 'fill-color': '#0000ff', 'fill-opacity': 0.1 }} />
+			<Source.GeoJSON id="base-radius-src" data={baseRadiusFC}>
+				<Layer.Fill visible={showBases} paint={{ 'fill-color': '#0000ff', 'fill-opacity': 0.2 }} />
 				<Layer.Line
 					visible={showBases}
 					paint={{ 'line-color': '#0000ff', 'line-width': 2, 'line-dasharray': [4, 8] }}
 				/>
 			</Source.GeoJSON>
 
-			<Source.GeoJSON data={originFC}>
+			<Source.GeoJSON id="origin-src" data={originFC}>
 				<Layer.Symbol
 					id="origin-icons"
 					visible={showOrigin && area === 'MainMap'}
@@ -397,128 +467,178 @@
 				/>
 			</Source.GeoJSON>
 
-			<Source.GeoJSON data={baseFC}>
+			<Source.GeoJSON id="base-src" data={baseFC}>
 				<Layer.Symbol
 					id="base-icons"
 					visible={showBases}
 					layout={{
 						'icon-image': ['get', 'icon'],
 						'icon-allow-overlap': true,
-						'icon-size': ['interpolate', ['linear'], ['zoom'], 2, 0.5, 7, 0.83]
+						'icon-size': zoomScaledIconSize(0.5, 0.83)
 					}}
 				/>
 			</Source.GeoJSON>
 
-			<Source.GeoJSON data={playerFC}>
+			<Source.GeoJSON id="player-src" data={playerFC}>
 				<Layer.Symbol
 					id="player-icons"
 					visible={showPlayers}
 					layout={{
 						'icon-image': ['get', 'icon'],
 						'icon-allow-overlap': true,
-						'icon-size': ['interpolate', ['linear'], ['zoom'], 2, 0.6, 7, 1.0]
+						'icon-size': zoomScaledIconSize(0.6, 1.0)
 					}}
 				/>
 			</Source.GeoJSON>
 
-			<Source.GeoJSON data={fastTravelFC}>
+			<!-- Layers below label icons with a `step` expression on `text-field` rather than a
+			     layer-level `minzoom`, because MapLibre gates a symbol layer's icon and text
+			     together — a `minzoom` here would hide the icon along with the label. -->
+			<Source.GeoJSON id="fast-travel-src" data={fastTravelFC}>
 				<Layer.Symbol
 					id="fast-travel-icons"
 					visible={showFastTravel || showWatchtower}
 					layout={{
 						'icon-image': ['get', 'icon'],
-						'icon-allow-overlap': false,
+						'icon-allow-overlap': true,
 						'symbol-sort-key': ['case', ['get', 'locked'], 1, 2],
-						'icon-size': [
-							'interpolate',
-							['linear'],
-							['zoom'],
-							2,
+						'icon-size': zoomScaledIconSize(
 							['case', ['get', 'watchtower'], 0.36, 0.45],
-							7,
 							['case', ['get', 'watchtower'], 0.6, 0.75]
-						]
+						),
+						'text-field': showLabels ? ['step', ['zoom'], '', 4, ['get', 'name']] : '',
+						'text-size': 11,
+						'text-optional': true,
+						'text-anchor': 'top',
+						'text-offset': [0, 0.8],
+						'text-max-width': 12
 					}}
-					paint={{ 'icon-opacity': ['case', ['get', 'locked'], 0.6, 1] }}
+					paint={{
+						'icon-opacity': [
+							'case',
+							['boolean', ['feature-state', 'hover'], false],
+							1,
+							['get', 'locked'],
+							0.6,
+							1
+						],
+						'text-color': '#ffffff',
+						'text-halo-color': '#000000',
+						'text-halo-width': 1.5
+					}}
 				/>
 			</Source.GeoJSON>
 
-			<Source.GeoJSON data={relicFC}>
+			<Source.GeoJSON id="relic-src" data={relicFC}>
 				<Layer.Symbol
 					id="relic-icons"
 					visible={showRelics}
 					layout={{
 						'icon-image': ['get', 'icon'],
-						'icon-allow-overlap': false,
+						'icon-allow-overlap': true,
 						'symbol-sort-key': ['case', ['get', 'collected'], 2, 1],
-						'icon-size': ['interpolate', ['linear'], ['zoom'], 2, 0.3, 7, 0.5]
+						'icon-size': zoomScaledIconSize(0.3, 0.5)
 					}}
-					paint={{ 'icon-opacity': ['case', ['get', 'collected'], 1, 0.6] }}
+					paint={{
+						'icon-opacity': [
+							'case',
+							['boolean', ['feature-state', 'hover'], false],
+							1,
+							['get', 'collected'],
+							1,
+							0.6
+						]
+					}}
 				/>
 			</Source.GeoJSON>
 
-			<Source.GeoJSON data={dungeonFC}>
+			<Source.GeoJSON id="dungeon-src" data={dungeonFC}>
 				<Layer.Symbol
 					id="dungeon-icons"
 					visible={showDungeons}
 					layout={{
 						'icon-image': ['get', 'icon'],
-						'icon-allow-overlap': false,
-						'icon-size': ['interpolate', ['linear'], ['zoom'], 2, 0.6, 7, 1.0]
+						'icon-allow-overlap': true,
+						'icon-size': zoomScaledIconSize(0.6, 1.0)
 					}}
 				/>
 			</Source.GeoJSON>
 
-			<Source.GeoJSON data={bossFC}>
+			<Source.GeoJSON id="boss-src" data={bossFC}>
 				<Layer.Symbol
 					id="boss-icons"
 					visible={showBosses}
 					layout={{
 						'icon-image': ['get', 'icon'],
-						'icon-allow-overlap': false,
+						'icon-allow-overlap': true,
 						'symbol-sort-key': ['case', ['get', 'defeated'], 2, 1],
-						'icon-size': ['interpolate', ['linear'], ['zoom'], 2, 0.6, 7, 1.0]
+						'icon-size': zoomScaledIconSize(0.6, 1.0),
+						'text-field': showLabels ? ['step', ['zoom'], '', 5, ['get', 'name']] : '',
+						'text-size': 11,
+						'text-optional': true,
+						'text-anchor': 'top',
+						'text-offset': [0, 0.8],
+						'text-max-width': 12
 					}}
-					paint={{ 'icon-opacity': ['case', ['get', 'defeated'], 0.6, 1] }}
+					paint={{
+						'icon-opacity': [
+							'case',
+							['boolean', ['feature-state', 'hover'], false],
+							1,
+							['get', 'defeated'],
+							0.6,
+							1
+						],
+						'text-color': '#ffffff',
+						'text-halo-color': '#000000',
+						'text-halo-width': 1.5
+					}}
 				/>
 			</Source.GeoJSON>
 
-			<Source.GeoJSON data={alphaFC}>
+			<Source.GeoJSON id="alpha-src" data={alphaFC}>
 				<Layer.Symbol
 					id="alpha-icons"
 					visible={showAlphaPals}
 					layout={{
 						'icon-image': ['get', 'icon'],
-						'icon-allow-overlap': false,
-						'icon-size': ['interpolate', ['linear'], ['zoom'], 2, 0.6, 7, 1.0]
+						'icon-allow-overlap': true,
+						'icon-size': zoomScaledIconSize(0.6, 1.0)
 					}}
 				/>
 			</Source.GeoJSON>
 
-			<Source.GeoJSON data={predatorFC}>
+			<Source.GeoJSON id="predator-src" data={predatorFC}>
 				<Layer.Symbol
 					id="predator-icons"
 					visible={showPredatorPals}
 					layout={{
 						'icon-image': ['get', 'icon'],
-						'icon-allow-overlap': false,
-						'icon-size': ['interpolate', ['linear'], ['zoom'], 2, 0.6, 7, 1.0]
+						'icon-allow-overlap': true,
+						'icon-size': zoomScaledIconSize(0.6, 1.0)
 					}}
 				/>
 			</Source.GeoJSON>
 		</ImageLoader>
+
+		{#if hovered}
+			<FeatureState source={hovered.source} id={hovered.id} state={HOVER_STATE} />
+		{/if}
 	</MLMap>
 
-	{#if hovered}
+	{#if hovered?.point}
 		{@const entry = lookup(hovered.type, hovered.key)}
-		<div class="map-hover-card">
+		<div class="map-anchored-card" style="left: {hovered.point.x}px; top: {hovered.point.y}px;">
 			<MapTooltip type={hovered.type} data={entry?.data} guildName={entry?.guildName} />
 		</div>
 	{/if}
 
-	{#if selected}
+	{#if selected && selectedPoint}
 		{@const entry = lookup(selected.type, selected.key)}
-		<div class="map-popup-card">
+		<div
+			class="map-anchored-card map-popup-card"
+			style="left: {selectedPoint.x}px; top: {selectedPoint.y}px;"
+		>
 			<MapPopup type={selected.type} data={entry?.data} guildName={entry?.guildName} />
 			<button type="button" class="map-popup-close" onclick={() => (selected = null)}>×</button>
 		</div>
@@ -584,12 +704,13 @@
 		background-color: #000;
 	}
 
-	.map-hover-card,
-	.map-popup-card {
+	/* left/top are set inline from map.project(); the translate reproduces OpenLayers'
+	   center-left positioning with its [10, 0] offset. */
+	.map-anchored-card {
 		position: absolute;
-		top: 48px;
-		left: 8px;
 		z-index: 1000;
+		transform: translate(12px, -50%);
+		max-width: 320px;
 		pointer-events: none;
 	}
 

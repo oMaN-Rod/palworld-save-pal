@@ -8,7 +8,9 @@
 
 	const ctx = getMapContext();
 
-	let lastAppliedId: string | number | null = null;
+	// Feature ids are unique only within a source, so the previously-applied
+	// target must be tracked as (source, sourceLayer, id), not id alone.
+	let lastApplied: { source: string; sourceLayer?: string; id: string | number } | null = null;
 
 	$effect(() => {
 		const map = ctx.map;
@@ -27,17 +29,28 @@
 			return target;
 		}
 
-		const prevId = untrack(() => lastAppliedId);
+		const prevTarget = untrack(() => lastApplied);
+
+		const targetChanged =
+			prevTarget !== null &&
+			(prevTarget.source !== stableSource ||
+				prevTarget.sourceLayer !== stableSourceLayer ||
+				prevTarget.id !== currentId);
 
 		// Clear previous state by setting all keys to null/false (preserves other components' state)
-		if (prevId !== null && prevId !== undefined && prevId !== currentId) {
+		if (targetChanged) {
 			try {
 				const resetState: Record<string, unknown> = {};
 				const prevState = untrack(() => state);
 				for (const key of Object.keys(prevState)) {
 					resetState[key] = null;
 				}
-				map.setFeatureState(makeTarget(prevId), resetState);
+				const prevIdentifier: FeatureIdentifier = {
+					source: prevTarget!.source,
+					id: prevTarget!.id
+				};
+				if (prevTarget!.sourceLayer) prevIdentifier.sourceLayer = prevTarget!.sourceLayer;
+				map.setFeatureState(prevIdentifier, resetState);
 			} catch {
 				// Source may not exist yet or feature may be gone
 			}
@@ -51,7 +64,10 @@
 			}
 		}
 
-		lastAppliedId = currentId;
+		lastApplied =
+			currentId !== null && currentId !== undefined
+				? { source: stableSource, sourceLayer: stableSourceLayer, id: currentId }
+				: null;
 
 		return () => {
 			if (currentId !== null && currentId !== undefined) {

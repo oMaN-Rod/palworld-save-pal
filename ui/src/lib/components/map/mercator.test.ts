@@ -1,6 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { MAP_SIZE } from './utils';
-import { MERCATOR_LAT_LIMIT, lngLatToPixel, pixelCirclePolygon, pixelToLngLat } from './mercator';
+import {
+	MAP_MAX_BOUNDS,
+	MERCATOR_LAT_LIMIT,
+	lngLatToPixel,
+	pixelCirclePolygon,
+	pixelToLngLat
+} from './mercator';
 
 describe('pixelToLngLat', () => {
 	it('maps the pixel extent onto the whole mercator world', () => {
@@ -58,5 +64,34 @@ describe('pixelCirclePolygon', () => {
 			const dist = Math.hypot(px - cx, py - cy);
 			expect(dist).toBeCloseTo(radius, 3);
 		}
+	});
+});
+
+// MapLibre's defaultConstrain maps each maxBounds longitude edge through
+// wrap(x, 0, worldSize), which returns worldSize for BOTH 0 and worldSize. Edges on
+// exactly +/-180 therefore collapse onto each other, the longitude span becomes zero,
+// and scaleX = screenWidth / 0 drives zoom to Infinity -- producing a singular matrix
+// that makes mat4.invert return null and throws inside the Map constructor.
+describe('MAP_MAX_BOUNDS', () => {
+	const [[west, south], [east, north]] = MAP_MAX_BOUNDS;
+
+	it('keeps longitude edges strictly inside the antimeridian', () => {
+		expect(west).toBeGreaterThan(-180);
+		expect(east).toBeLessThan(180);
+	});
+
+	it('does not place either longitude edge on a wrap boundary', () => {
+		const normalisedX = (lng: number) => (180 + lng) / 360;
+		expect(normalisedX(west)).toBeGreaterThan(0);
+		expect(normalisedX(east)).toBeLessThan(1);
+	});
+
+	it('still spans effectively the whole world', () => {
+		expect(east - west).toBeGreaterThan(359.999);
+	});
+
+	it('constrains latitude to the mercator limit', () => {
+		expect(south).toBe(-MERCATOR_LAT_LIMIT);
+		expect(north).toBe(MERCATOR_LAT_LIMIT);
 	});
 });

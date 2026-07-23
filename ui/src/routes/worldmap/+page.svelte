@@ -52,6 +52,7 @@
 		showBosses: boolean;
 		showAlphaPals: boolean;
 		showPredatorPals: boolean;
+		showLabels: boolean;
 	};
 
 	const mapOptionsState = persistedState<MapOptions>('mapOptions', {
@@ -66,7 +67,8 @@
 		showDungeons: true,
 		showBosses: true,
 		showAlphaPals: true,
-		showPredatorPals: true
+		showPredatorPals: true,
+		showLabels: true
 	});
 	const mapOptions = $derived(mapOptionsState.current);
 	const activeArea = $derived(mapOptions.area ?? DEFAULT_MAP_AREA);
@@ -524,6 +526,13 @@
 							<span>{m.predator_pals(p.pals)}</span>
 							<span class="text-surface-500 text-xs">{predatorPalCount}</span>
 						</button>
+						<button
+							class="flex items-center space-x-2 {(mapOptions.showLabels ?? true) ? '' : 'opacity-25'}"
+							onclick={() => (mapOptions.showLabels = !(mapOptions.showLabels ?? true))}
+						>
+							<img src={mapImg.fastTravel} alt={m.map_labels()} class="mr-2 h-6 w-6" />
+							<span>{m.map_labels()}</span>
+						</button>
 					</div>
 					{#if (mapOptions.showRelics ?? true) && relicTypeList.length > 0}
 						<div class="border-surface-700 grid grid-cols-2 gap-2 rounded-sm border p-2">
@@ -733,6 +742,7 @@
 					showBosses={mapOptions.showBosses ?? true}
 					showAlphaPals={mapOptions.showAlphaPals}
 					showPredatorPals={mapOptions.showPredatorPals}
+					showLabels={mapOptions.showLabels ?? true}
 					onEditBase={handleEditBase}
 					onToggleFastTravel={handleToggleFastTravel}
 					onToggleRelic={handleToggleRelic}

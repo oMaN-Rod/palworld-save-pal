@@ -1,7 +1,10 @@
-// Slices the 8192x8192 world map textures into an XYZ pyramid for MapLibre.
+// Slices the game's 8192x8192 world map textures into an XYZ tile pyramid for MapLibre.
 //
 // Usage:
-//   bun scripts/gen-map-tiles.mjs
+//   bun scripts/gen-map-tiles.mjs <path-to-Exports/Pal/Content>
+//
+// Source: Pal/Texture/UI/Map/T_WorldMap.png and T_TreeMap.png, from the game export
+// (same export root as gen-relic-icons.mjs).
 //
 // 512px tiles, z0..z4. z4 is 16x16 = 8192px, exactly 1:1 with the source.
 // Row 0 is the north edge, matching the XYZ convention MapLibre expects.
@@ -10,13 +13,21 @@ import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import sharp from 'sharp';
 
+const [, , contentRoot] = process.argv;
+if (!contentRoot) {
+	console.error('usage: bun scripts/gen-map-tiles.mjs <path-to-Exports/Pal/Content>');
+	process.exit(1);
+}
+
 const TILE_SIZE = 512;
 const MAX_ZOOM = 4;
 const SOURCE_SIZE = 8192;
 
+const srcDir = join(contentRoot, 'Pal', 'Texture', 'UI', 'Map');
+
 const AREAS = [
-	{ dir: 'mainmap', src: 'ui/src/lib/assets/img/t_worldmap.webp' },
-	{ dir: 'tree', src: 'ui/src/lib/assets/img/t_treemap.webp' }
+	{ dir: 'mainmap', src: join(srcDir, 'T_WorldMap.png') },
+	{ dir: 'tree', src: join(srcDir, 'T_TreeMap.png') }
 ];
 
 let total = 0;

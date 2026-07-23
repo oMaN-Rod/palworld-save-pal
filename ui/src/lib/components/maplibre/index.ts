@@ -1,6 +1,4 @@
 export { default as Map } from './map/Map.svelte';
-export { default as Popup } from './markers/popup/popup.svelte';
-export { default as Tooltip } from './markers/tooltip/tooltip.svelte';
 export { default as ImageLoader } from './utilities/image-loader/image-loader.svelte';
 export { default as FeatureState } from './utilities/feature-state/feature-state.svelte';
 
