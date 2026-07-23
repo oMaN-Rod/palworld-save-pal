@@ -1,5 +1,7 @@
 import DebugButton from './DebugButton.svelte';
 import Drawer from './Drawer.svelte';
-import NavBar from './NavBar.svelte';
+import Sidebar from './NavBar.svelte';
 
-export { DebugButton, Drawer, NavBar };
+export { DebugButton, Drawer, Sidebar };
+// Deprecated alias — NavBar.svelte now renders the grouped sidebar.
+export { Sidebar as NavBar };

@@ -79,7 +79,7 @@
 
 	function elementColor(element: string): string {
 		const el = elementsData.elements[element];
-		return el?.color || '#888';
+		return el?.color || 'var(--color-surface-500)';
 	}
 
 	const allSkills = $derived(Object.entries(activeSkillsData.activeSkills));

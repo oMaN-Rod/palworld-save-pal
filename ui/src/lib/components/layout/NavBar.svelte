@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { getAppState, getModalState } from '$states';
-	import { Navigation } from '@skeletonlabs/skeleton-svelte';
 
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { OpenFolder, SettingsModal } from '$components/modals';
@@ -14,10 +13,11 @@
 	import {
 		activeNavId,
 		navItems,
+		navGroups,
 		type NavAction,
 		type NavContext,
 		type NavItem,
-		type NavSection
+		type NavGroup
 	} from './navItems';
 
 	let appState = getAppState();
@@ -27,8 +27,14 @@
 	const desktop = PUBLIC_DESKTOP_MODE === 'true';
 	const ctx = $derived<NavContext>({ appState, desktop, expanded: expanded.current });
 
-	function itemsFor(section: NavSection): NavItem[] {
+	function itemsFor(section: 'header' | 'footer'): NavItem[] {
 		return navItems.filter((item) => item.section === section && (item.visible?.(ctx) ?? true));
+	}
+
+	function tilesForGroup(group: NavGroup): NavItem[] {
+		return navItems.filter(
+			(item) => item.section === 'tiles' && item.group === group && (item.visible?.(ctx) ?? true)
+		);
 	}
 
 	function runAction(action: NavAction): void {
@@ -86,43 +92,109 @@
 	}
 </script>
 
-{#snippet tile(item: NavItem)}
-	{@const Icon = item.icon(ctx)}
-	<Navigation.Tile
-		id={item.id}
-		labelExpanded={item.label?.()}
-		expandedClasses="text-xs 2xl:text-base"
-		title={(item.title ?? item.label)?.()}
-		href={item.href}
-		onclick={item.action ? () => runAction(item.action!) : undefined}
-		active={item.href ? 'active-nav-tile' : undefined}
-	>
-		<Icon class="h-4 w-4 2xl:h-6 2xl:w-6"/>
-	</Navigation.Tile>
-{/snippet}
+<aside class="sidebar flex flex-col" class:collapsed={!expanded.current}>
+	<!-- Header: logo + title + collapse toggle -->
+	<div class="sidebar-header">
+		<div class="flex items-center gap-2.5 overflow-hidden">
+			<img
+				src="/psp.png"
+				alt="PSP"
+				class="h-7 w-7 flex-shrink-0 rounded object-contain animate-breathe"
+			/>
+			{#if expanded.current}
+				<span class="sidebar-label heading-gradient text-lg font-extrabold tracking-tight whitespace-nowrap">
+					Palworld Save Pals
+				</span>
+			{/if}
+		</div>
+		{#if expanded.current}
+			<button
+				class="ml-auto text-surface-500 hover:text-surface-200 transition-fast p-1"
+				title={m.toggle_entity({ entity: '' })}
+				onclick={() => runAction('toggle-expanded')}
+			>
+				<!-- icon resolved inline to avoid dynamic-component overhead for a single chevron -->
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6" /></svg>
+			</button>
+		{:else}
+			<button
+				class="mx-auto text-surface-500 hover:text-surface-200 transition-fast p-1"
+				title={m.toggle_entity({ entity: '' })}
+				onclick={() => runAction('toggle-expanded')}
+			>
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
+			</button>
+		{/if}
+	</div>
 
-<Navigation.Rail
-	width="48px"
-	widthExpanded="w-auto"
-	value={activeTile}
-	onValueChange={() => appState.saveState()}
-	expanded={expanded.current}
-	background="bg-surface-900"
-	classes="nav-rail"
->
-	{#snippet header()}
-		{#each itemsFor('header') as item (item.id)}
-			{@render tile(item)}
+	<!-- Body: grouped nav items -->
+	<nav class="flex-1 overflow-y-auto py-2">
+		{#each navGroups as group (group.id)}
+			{@const tiles = tilesForGroup(group.id)}
+			{#if tiles.length > 0}
+				{#if expanded.current}
+					<div class="nav-group-label">{group.label}</div>
+				{/if}
+				{#each tiles as item (item.id)}
+					{@const Icon = item.icon(ctx)}
+					{@const isActive = item.id === activeTile}
+						{@const needsSave = item.href && item.href !== '/' && item.href !== '/file' && item.href !== '/upload' && item.href !== '/about' && item.href !== '/docs'}
+					<a
+						href={item.href}
+						class="nav-link nav-link-{isActive ? 'active' : 'inactive'}"
+						class:nav-link-disabled={needsSave && !appState.saveFile}
+						title={(item.title ?? item.label)?.()}
+						onclick={item.action ? () => runAction(item.action!) : undefined}
+					>
+						<Icon class="h-4 w-4 flex-shrink-0" />
+						{#if expanded.current}
+							<span class="sidebar-label truncate">{item.label?.()}</span>
+						{/if}
+					</a>
+				{/each}
+			{/if}
 		{/each}
-	{/snippet}
-	{#snippet tiles()}
-		{#each itemsFor('tiles') as item (item.id)}
-			{@render tile(item)}
-		{/each}
-	{/snippet}
-	{#snippet footer()}
-		{#each itemsFor('footer') as item (item.id)}
-			{@render tile(item)}
-		{/each}
-	{/snippet}
-</Navigation.Rail>
+	</nav>
+
+	<!-- Footer: action items (save/eject from header section + open-folder/settings) -->
+	<div class="border-t border-surface-700/30 py-2 flex-shrink-0">
+		{#if expanded.current}
+			<!-- save + eject action buttons (header section) -->
+			{#each itemsFor('header').filter((i) => i.id !== 'menu') as item (item.id)}
+				{@const Icon = item.icon(ctx)}
+				<button
+					class="nav-link nav-link-inactive w-full text-left"
+					title={(item.title ?? item.label)?.()}
+					onclick={() => runAction(item.action!)}
+				>
+					<Icon class="h-4 w-4 flex-shrink-0" />
+					<span class="sidebar-label truncate">{item.label?.()}</span>
+				</button>
+			{/each}
+			<!-- footer actions (open-folder/settings) -->
+			{#each itemsFor('footer') as item (item.id)}
+				{@const Icon = item.icon(ctx)}
+				<button
+					class="nav-link nav-link-inactive w-full text-left"
+					title={(item.title ?? item.label)?.()}
+					onclick={() => runAction(item.action!)}
+				>
+					<Icon class="h-4 w-4 flex-shrink-0" />
+					<span class="sidebar-label truncate">{item.label?.()}</span>
+				</button>
+			{/each}
+		{:else}
+			<!-- collapsed: icon-only -->
+			{#each [...itemsFor('header').filter((i) => i.id !== 'menu'), ...itemsFor('footer')] as item (item.id)}
+				{@const Icon = item.icon(ctx)}
+				<button
+					class="nav-link nav-link-inactive mx-auto"
+					title={(item.title ?? item.label)?.()}
+					onclick={() => runAction(item.action!)}
+				>
+					<Icon class="h-4 w-4 flex-shrink-0" />
+				</button>
+			{/each}
+		{/if}
+	</div>
+</aside>

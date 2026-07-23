@@ -779,7 +779,7 @@
 													'flex items-center gap-1 rounded-md border px-3 py-1 text-sm',
 													upsState.filters.sortBy === sortOption.key
 														? 'bg-primary-500 border-primary-500 text-white'
-														: 'dark:bg-surface-800 border-surface-300 dark:border-surface-700 bg-white'
+														: 'dark:bg-surface-800 border-surface-300 dark:border-surface-700 bg-surface-900'
 												)}
 												onclick={() => handleSort(sortOption.key as UPSSortBy)}
 											>

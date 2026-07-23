@@ -59,7 +59,7 @@
 		<!-- Trust Level Display -->
 		<div class="flex items-center justify-between">
 			<span class="text-sm text-surface-50/80">{m.friendship_rank()}</span>
-			<span class="rounded-full bg-[#db7c90] px-3 py-1 text-sm font-bold text-white">
+			<span class="rounded-full bg-tertiary-500 px-3 py-1 text-sm font-bold text-tertiary-contrast-500">
 				Lv.{currentRank}
 			</span>
 		</div>
@@ -118,7 +118,7 @@
 		-webkit-appearance: none;
 		width: 100%;
 		height: 6px;
-		background: #444;
+		background: var(--color-surface-700);
 		border-radius: 3px;
 		outline: none;
 	}
@@ -129,8 +129,8 @@
 		width: 16px;
 		height: 16px;
 		border-radius: 9999px;
-		background: #db7c90;
-		border: 2px solid white;
+		background: var(--color-tertiary-400);
+		border: 2px solid var(--color-surface-50);
 		cursor: pointer;
 		transition: transform 0.2s ease;
 	}
@@ -139,8 +139,8 @@
 		width: 16px;
 		height: 16px;
 		border-radius: 9999px;
-		background: #db7c90;
-		border: 2px solid white;
+		background: var(--color-tertiary-400);
+		border: 2px solid var(--color-surface-50);
 		cursor: pointer;
 		transition: transform 0.2s ease;
 	}

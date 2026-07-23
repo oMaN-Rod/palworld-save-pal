@@ -52,10 +52,10 @@
 											'#2d717e'
 										)}"
 									></div>
-									<span class="relative z-10 text-xl font-bold text-[#c1f2fc]">EXP</span>
+									<span class="relative z-10 text-xl font-bold text-primary-200">EXP</span>
 								</div>
 							</div>
-							<span class="text-xl font-bold text-[#c1f2fc]">
+							<span class="text-xl font-bold text-primary-200">
 								+{mission.rewards.exp.toLocaleString()}
 							</span>
 						</div>
