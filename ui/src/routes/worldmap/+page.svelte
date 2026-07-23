@@ -18,6 +18,7 @@
 	import Users from '@lucide/svelte/icons/users';
 	import MapIcon from '@lucide/svelte/icons/map';
 	import Building from '@lucide/svelte/icons/building';
+	import Box from '@lucide/svelte/icons/box';
 	import { mapObjects, fastTravelPoints, relics, relicData, bosses } from '$lib/data';
 	import type maplibregl from 'maplibre-gl';
 	import { pixelToLngLat } from '$components/map/mercator';
@@ -53,6 +54,7 @@
 		showAlphaPals: boolean;
 		showPredatorPals: boolean;
 		showLabels: boolean;
+		show3d: boolean;
 	};
 
 	const mapOptionsState = persistedState<MapOptions>('mapOptions', {
@@ -68,7 +70,8 @@
 		showBosses: true,
 		showAlphaPals: true,
 		showPredatorPals: true,
-		showLabels: true
+		showLabels: true,
+		show3d: false
 	});
 	const mapOptions = $derived(mapOptionsState.current);
 	const activeArea = $derived(mapOptions.area ?? DEFAULT_MAP_AREA);
@@ -533,6 +536,13 @@
 							<img src={mapImg.fastTravel} alt={m.map_labels()} class="mr-2 h-6 w-6" />
 							<span>{m.map_labels()}</span>
 						</button>
+						<button
+							class="flex items-center space-x-2 {(mapOptions.show3d ?? false) ? '' : 'opacity-25'}"
+							onclick={() => (mapOptions.show3d = !(mapOptions.show3d ?? false))}
+						>
+							<Box class="mr-2 h-6 w-6" />
+							<span>3D {m.structures()}</span>
+						</button>
 					</div>
 					{#if (mapOptions.showRelics ?? true) && relicTypeList.length > 0}
 						<div class="border-surface-700 grid grid-cols-2 gap-2 rounded-sm border p-2">
@@ -743,6 +753,7 @@
 					showAlphaPals={mapOptions.showAlphaPals}
 					showPredatorPals={mapOptions.showPredatorPals}
 					showLabels={mapOptions.showLabels ?? true}
+					show3d={mapOptions.show3d ?? false}
 					onEditBase={handleEditBase}
 					onToggleFastTravel={handleToggleFastTravel}
 					onToggleRelic={handleToggleRelic}

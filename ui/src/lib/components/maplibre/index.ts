@@ -12,6 +12,7 @@ import RawLayer from './layers/raw/raw-layer.svelte';
 import SymbolLayer from './layers/symbol/symbol-layer.svelte';
 import LineLayer from './layers/line/line-layer.svelte';
 import FillLayer from './layers/fill/fill-layer.svelte';
+import FillExtrusionLayer from './layers/fill-extrusion/fill-extrusion-layer.svelte';
 import RasterLayer from './layers/raster/raster-layer.svelte';
 
 export const Layer = {
@@ -19,6 +20,7 @@ export const Layer = {
 	Symbol: SymbolLayer,
 	Line: LineLayer,
 	Fill: FillLayer,
+	FillExtrusion: FillExtrusionLayer,
 	Raster: RasterLayer
 };
 

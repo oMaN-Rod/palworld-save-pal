@@ -6,6 +6,7 @@
 	import { OpenFolder, SettingsModal } from '$components/modals';
 	import { MessageType } from '$types';
 	import { send } from '$lib/utils/websocketUtils';
+	import { baseStructuresData } from '$lib/data';
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
 	import * as m from '$i18n/messages';
@@ -74,6 +75,7 @@
 			send(MessageType.EJECT_SESSION, { session_id: sessionId });
 		}
 		appState.resetState();
+		baseStructuresData.reset();
 		clearSessionPersistence();
 		await goto('/file');
 	}

@@ -12,6 +12,7 @@
 
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { DEFAULT_FOOTPRINT, blueprintStemFromAssetPath, parseBoxComponent } from './lib/footprints.mjs';
 
 const [, , contentRoot] = process.argv;
@@ -72,7 +73,7 @@ for (const id of Object.keys(buildObjects)) {
 
 const skipped = unresolvedMasterIds.filter((id) => !footprints[id]).length;
 
-const outPath = join('data', 'json', 'map_object_footprints.json');
+const outPath = fileURLToPath(new URL('../data/json/map_object_footprints.json', import.meta.url));
 writeFileSync(outPath, `${JSON.stringify(footprints, null, '\t')}\n`);
 console.log(`wrote ${Object.keys(footprints).length} footprints to ${outPath}`);
 console.log(`skipped ${skipped} ids with no blueprint or no collision box, ${defaulted} defaulted`);

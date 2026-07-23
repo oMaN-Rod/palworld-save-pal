@@ -1,5 +1,6 @@
 import { getAppState, getToastState } from '$states';
 import { MessageType } from '$types';
+import { baseStructuresData } from '$lib/data';
 import {
 	clearSessionPersistence,
 	consumeReattachPending,
@@ -25,6 +26,7 @@ export const loadedSaveFilesHandler: WSMessageHandler = {
 			data;
 		console.log('Loaded save files', level, players, 'has_gps:', has_gps);
 		appState.resetState();
+		baseStructuresData.reset();
 		appState.saveFile = {
 			name: level,
 			world_name,
@@ -108,6 +110,7 @@ export const selectGamepassSaveHandler: WSMessageHandler = {
 	async handle(data, { goto }) {
 		const appState = getAppState();
 		appState.resetState();
+		baseStructuresData.reset();
 		appState.gamepassSaves = data;
 		await goto('/file');
 	}

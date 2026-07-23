@@ -480,14 +480,21 @@
 		}
 	});
 
+	// Every write here must be conditional. MapLibre fires `move` even when a camera
+	// call changed nothing (jumpTo fires it unconditionally), so an unconditional
+	// `center = [c.lng, c.lat]` allocates a fresh array on each no-op event and
+	// registers as a state change, re-entering any effect bound to it.
 	function syncFromMap() {
 		if (!ctx.map) return;
 		syncing = true;
 		const c = ctx.map.getCenter();
-		center = [c.lng, c.lat];
-		zoom = ctx.map.getZoom();
-		bearing = ctx.map.getBearing();
-		pitch = ctx.map.getPitch();
+		if (center[0] !== c.lng || center[1] !== c.lat) center = [c.lng, c.lat];
+		const z = ctx.map.getZoom();
+		if (zoom !== z) zoom = z;
+		const b = ctx.map.getBearing();
+		if (bearing !== b) bearing = b;
+		const p = ctx.map.getPitch();
+		if (pitch !== p) pitch = p;
 		syncing = false;
 	}
 

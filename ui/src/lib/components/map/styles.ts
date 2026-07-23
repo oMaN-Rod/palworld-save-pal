@@ -29,6 +29,20 @@ export const mapImg = {
 	arrow: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_prt_compass_arrow.webp`)
 };
 
+/** Fixed rather than theme-derived: no theme palette carries ten distinguishable hues. */
+export const STRUCTURE_COLORS: Record<string, string> = {
+	Foundation: '#8d99ae',
+	Furniture: '#c98b5e',
+	Product: '#4d8fac',
+	Storage: '#7a6a9c',
+	Infrastructure: '#5c8a68',
+	Pal: '#d4a13a',
+	Light: '#d9cf6b',
+	Defense: '#b5544a',
+	Food: '#7fa84e',
+	Other: '#6b7280'
+};
+
 /** Per-type relic icon, reusing the relic-stat art (`relic_<type>.webp`). */
 export function relicTypeIcon(relicType: string): string {
 	return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/relic_${relicType}.webp`);

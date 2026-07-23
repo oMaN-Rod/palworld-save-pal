@@ -3,8 +3,9 @@
 </script>
 
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, untrack } from 'svelte';
 	import type maplibregl from 'maplibre-gl';
+	import type { ExpressionSpecification } from '@maplibre/maplibre-gl-style-spec';
 	import {
 		Map as MLMap,
 		Source,
@@ -22,11 +23,12 @@
 		pixelToGameCoords,
 		pixelToWorld,
 		worldToPixel,
+		cmPerPx,
 		DEFAULT_MAP_AREA,
 		MAP_AREA_ORDER,
 		type MapArea
 	} from './utils';
-	import { MAP_MAX_BOUNDS, lngLatToPixel, pixelToLngLat } from './mercator';
+	import { MAP_MAX_BOUNDS, lngLatToPixel, pixelToLngLat, verticalScaleFactor } from './mercator';
 	import { zoomScaledIconSize } from './expressions';
 	import {
 		buildBaseFC,
@@ -38,15 +40,25 @@
 		buildOriginFC,
 		buildPlayerFC,
 		buildRelicFC,
+		buildStructureFC,
 		emptyFC,
-		type MapFeatureType
+		type MapFeatureType,
+		type StructureFC
 	} from './features';
 	import { PAL_BORDER_ALPHA, PAL_BORDER_PREDATOR, renderPalIcon, staticIconUrls } from './icons';
 	import { palIconId } from './iconIds';
 	import { relicsByType } from './relics';
 	import { isWatchtower } from './fastTravel';
-	import { mapImg } from './styles';
-	import { mapObjects, fastTravelPoints, relics, relicData, bosses, palsData } from '$lib/data';
+	import { mapImg, STRUCTURE_COLORS } from './styles';
+	import {
+		mapObjects,
+		fastTravelPoints,
+		relics,
+		relicData,
+		bosses,
+		palsData,
+		baseStructuresData
+	} from '$lib/data';
 	import { assetLoader } from '$utils';
 	import MapTooltip from './MapTooltip.svelte';
 	import MapPopup from './MapPopup.svelte';
@@ -70,6 +82,7 @@
 		showAlphaPals = true,
 		showPredatorPals = true,
 		showLabels = true,
+		show3d = false,
 		onEditBase,
 		onToggleFastTravel,
 		onToggleRelic,
@@ -93,6 +106,7 @@
 		showAlphaPals?: boolean;
 		showPredatorPals?: boolean;
 		showLabels?: boolean;
+		show3d?: boolean;
 		onEditBase?: (base: any) => void;
 		onToggleFastTravel?: (point: MapUnlockPoint) => void;
 		onToggleRelic?: (point: RelicPoint) => void;
@@ -397,11 +411,75 @@
 		}
 	});
 
-	const defaultCenter = $derived.by(() => {
+	function areaCenter(target: MapArea): [number, number] {
 		const world = mapToWorld(0, 0);
-		const [px, py] = worldToPixel(world.x, world.y, area);
+		const [px, py] = worldToPixel(world.x, world.y, target);
 		return pixelToLngLat(px, py);
+	}
+
+	let center = $state<[number, number]>(untrack(() => areaCenter(area)));
+	let zoom = $state(2);
+
+	$effect(() => {
+		center = areaCenter(area);
 	});
+
+	const verticalScale = $derived(verticalScaleFactor(center[1], cmPerPx(area)));
+
+	$effect(() => {
+		if (!show3d || zoom < 8) return;
+		const instance = map;
+		if (!instance) return;
+		void center;
+		const bounds = instance.getBounds();
+		baseStructuresData.loadFootprints();
+		for (const { base } of bases) {
+			const loc = base.location;
+			if (!loc) continue;
+			const [px, py] = worldToPixel(loc.x, loc.y, area);
+			if (!bounds.contains(pixelToLngLat(px, py))) continue;
+			baseStructuresData.load(base.id);
+		}
+	});
+
+	const structureFC = $derived.by<StructureFC>(() => {
+		const features: StructureFC['features'] = [];
+		if (!show3d) return { type: 'FeatureCollection', features };
+		for (const { base } of bases) {
+			const loc = base.location;
+			if (!loc) continue;
+			const structures = baseStructuresData.for(base.id);
+			if (structures.length === 0) continue;
+			const fc = buildStructureFC(structures, baseStructuresData.footprints, loc.z, area);
+			for (const feature of fc.features) features.push({ ...feature, id: features.length });
+		}
+		return { type: 'FeatureCollection', features };
+	});
+
+	// The wrapper reads maxZoom/pitchWithRotate only at construction, and DragRotateHandler
+	// captures pitchWithRotate too — enable() can never turn pitch back on. So the map is
+	// built pitch-capable and a maxPitch of 0 is what actually keeps 2D flat.
+	$effect(() => {
+		const instance = map;
+		if (!instance) return;
+		instance.setMaxZoom(show3d ? 11 : 7);
+		instance.setMaxPitch(show3d ? 60 : 0);
+		if (show3d) {
+			instance.dragRotate.enable();
+		} else {
+			instance.dragRotate.disable();
+			// setBearing delegates to jumpTo, which fires `move` even when nothing
+			// changes, so calling it unconditionally manufactures map events.
+			if (instance.getBearing() !== 0) instance.setBearing(0);
+		}
+	});
+
+	const structureColor: ExpressionSpecification = [
+		'match',
+		['get', 'typeA'],
+		...(Object.entries(STRUCTURE_COLORS).flat() as [string, string, ...string[]]),
+		STRUCTURE_COLORS.Other
+	];
 
 </script>
 
@@ -410,15 +488,15 @@
 		bind:map
 		class="h-full w-full"
 		style={EMPTY_STYLE}
-		center={defaultCenter}
-		zoom={2}
+		bind:center
+		bind:zoom
 		minZoom={0}
 		maxZoom={7}
 		maxBounds={MAP_MAX_BOUNDS}
 		renderWorldCopies={false}
-		dragRotate={false}
-		pitchWithRotate={false}
-		touchZoomRotate={false}
+		dragRotate={show3d}
+		pitchWithRotate={true}
+		touchZoomRotate={show3d}
 		attributionControl={false}
 		onmove={() => moveTick++}
 		onmousemove={handleMouseMove}
@@ -466,6 +544,24 @@
 					}}
 				/>
 			</Source.GeoJSON>
+
+			<!-- Declared after `origin-icons` so the anchor exists at mount, and anchored to it so
+			     toggling 3D on at runtime inserts beneath the icon layers instead of on top. -->
+			{#if show3d}
+				<Source.GeoJSON id="structure-src" data={structureFC}>
+					<Layer.FillExtrusion
+						id="structure-extrusions"
+						beforeId="origin-icons"
+						minzoom={8}
+						paint={{
+							'fill-extrusion-color': structureColor,
+							'fill-extrusion-base': ['*', ['get', 'b'], verticalScale],
+							'fill-extrusion-height': ['*', ['get', 'h'], verticalScale],
+							'fill-extrusion-opacity': 0.9
+						}}
+					/>
+				</Source.GeoJSON>
+			{/if}
 
 			<Source.GeoJSON id="base-src" data={baseFC}>
 				<Layer.Symbol
