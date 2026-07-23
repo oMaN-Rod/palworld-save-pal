@@ -1,58 +1,45 @@
 <script lang="ts">
-	import { View, Map, Layer, Feature, Overlay } from 'svelte-openlayers';
-	import { Projection } from 'ol/proj.js';
-	import type { Map as OLMap, MapBrowserEvent } from 'ol';
+	import { onMount } from 'svelte';
+	import type maplibregl from 'maplibre-gl';
+	import { Map as MLMap, Source, Layer, Control, ImageLoader } from '$components/maplibre';
 	import { getAppState } from '$states';
 	import {
-		pixelToWorld,
-		pixelToGameCoords,
-		mapToWorld,
-		worldToPixel,
 		mapOf,
-		MAP_SIZE,
+		mapToWorld,
+		pixelToGameCoords,
+		pixelToWorld,
+		worldToPixel,
 		DEFAULT_MAP_AREA,
 		MAP_AREA_ORDER,
 		type MapArea
 	} from './utils';
-	import { relicsByType } from './relics';
+	import { MERCATOR_LAT_LIMIT, lngLatToPixel, pixelToLngLat } from './mercator';
 	import {
-		createPalIconStyle,
-		mapImg,
-		baseIconStyle,
-		fastTravelStyle,
-		relicStyle,
-		dungeonIconStyle,
-		bossStyle,
-		originIconStyle,
-		originLineStyle,
-		playerIconStyle
-	} from './styles';
+		buildBaseFC,
+		buildBaseRadiusFC,
+		buildBossFC,
+		buildFastTravelFC,
+		buildMapObjectFC,
+		buildOriginCrosshairFC,
+		buildOriginFC,
+		buildPlayerFC,
+		buildRelicFC,
+		emptyFC,
+		type MapFeatureType
+	} from './features';
+	import { PAL_BORDER_ALPHA, PAL_BORDER_PREDATOR, renderPalIcon, staticIconUrls } from './icons';
+	import { palIconId } from './iconIds';
+	import { relicsByType } from './relics';
+	import { isWatchtower } from './fastTravel';
+	import { mapImg } from './styles';
 	import { mapObjects, fastTravelPoints, relics, relicData, bosses } from '$lib/data';
 	import { assetLoader } from '$utils';
-	import 'svelte-openlayers/styles.css';
-	import PlayerPopup from './PlayerPopup.svelte';
-	import PlayerHover from './PlayerHover.svelte';
-	import OriginHover from './OriginHover.svelte';
-	import OriginPopup from './OriginPopup.svelte';
-	import BaseHover from './BaseHover.svelte';
-	import BasePopup from './BasePopup.svelte';
-	import FastTravelHover from './FastTravelHover.svelte';
-	import FastTravelPopup from './FastTravelPopup.svelte';
-	import RelicHover from './RelicHover.svelte';
-	import RelicPopup from './RelicPopup.svelte';
-	import DungeonHover from './DungeonHover.svelte';
-	import DungeonPopup from './DungeonPopup.svelte';
-	import BossHover from './BossHover.svelte';
-	import BossPopup from './BossPopup.svelte';
-	import PalHover from './PalHover.svelte';
-	import PalPopup from './PalPopup.svelte';
-	import { onMount } from 'svelte';
-	import ContextMenu from 'ol-contextmenu';
+	import MapTooltip from './MapTooltip.svelte';
+	import MapPopup from './MapPopup.svelte';
 	import type { MapUnlockPoint, RelicPoint } from '$types';
 	import * as m from '$i18n/messages';
-	import { isWatchtower } from './fastTravel';
+	import 'maplibre-gl/dist/maplibre-gl.css';
 
-	// Props to control which markers to display
 	let {
 		map = $bindable(),
 		area = DEFAULT_MAP_AREA,
@@ -75,7 +62,7 @@
 		onUnlockAllWatchtowers,
 		onCollectAllRelics
 	}: {
-		map?: OLMap | null;
+		map?: maplibregl.Map;
 		area?: MapArea;
 		onAreaChange?: (area: MapArea) => void;
 		showOrigin?: boolean;
@@ -100,28 +87,14 @@
 
 	const appState = getAppState();
 
-	// Map extent and projection setup
-	const extent: [number, number, number, number] = [0, 0, MAP_SIZE, MAP_SIZE];
-	const projection = new Projection({
-		code: 'palworld-map',
-		units: 'pixels',
-		extent
-	});
-	const offset = [10, 0] as [number, number];
-	const positioning = 'center-left';
-	const hoverClass = 'bg-transparent! p-0 shadow-none!';
+	const MAP_TILE_DIR: Record<MapArea, string> = { MainMap: 'mainmap', Tree: 'tree' };
 
-	const defaultCenter = () => {
-		const worldCoords = mapToWorld(0, 0);
-		return worldToPixel(worldCoords.x, worldCoords.y, area);
+	const EMPTY_STYLE: maplibregl.StyleSpecification = {
+		version: 8,
+		sources: {},
+		layers: [{ id: 'background', type: 'background', paint: { 'background-color': '#000000' } }]
 	};
 
-	const originPixelCoords = $derived.by(() => {
-		const worldCoords = mapToWorld(0, 0);
-		return worldToPixel(worldCoords.x, worldCoords.y, area);
-	});
-
-	// Derived data
 	const players = $derived(
 		Object.values(appState.players || {}).filter(
 			(player) => player.location && mapOf(player.location.x, player.location.y) === area
@@ -143,6 +116,8 @@
 
 	const selectedPlayer = $derived(appState.selectedPlayer);
 
+	// `unlocked` is deliberately tri-state: undefined when no player is selected, so
+	// downstream `=== false` checks leave those pins at full opacity rather than locked.
 	const fastTravelPointList = $derived.by(() => {
 		const unlocked = new Set(
 			(selectedPlayer?.unlocked_fast_travel_points ?? []).map((guid) => guid.toUpperCase())
@@ -190,19 +165,17 @@
 			.filter((p) => mapOf(p.x, p.y) === area);
 	});
 
-	const dungeonPoints = $derived.by(() => {
-		if (!mapObjects) return [];
-		return mapObjects.points
-			.filter((p) => p.type === 'dungeon')
-			.filter((p) => mapOf(p.x, p.y) === area);
-	});
-
-	const alphaPalPoints = $derived.by(() => {
-		if (!mapObjects) return [];
-		return mapObjects.points
-			.filter((p) => p.type === 'alpha_pal')
-			.filter((p) => mapOf(p.x, p.y) === area);
-	});
+	const dungeonPoints = $derived(
+		mapObjects.points.filter((p) => p.type === 'dungeon').filter((p) => mapOf(p.x, p.y) === area)
+	);
+	const alphaPalPoints = $derived(
+		mapObjects.points.filter((p) => p.type === 'alpha_pal').filter((p) => mapOf(p.x, p.y) === area)
+	);
+	const predatorPalPoints = $derived(
+		mapObjects.points
+			.filter((p) => p.type === 'predator_pal')
+			.filter((p) => mapOf(p.x, p.y) === area)
+	);
 
 	const bossPoints = $derived.by(() => {
 		const defeated = new Set(selectedPlayer?.defeated_bosses ?? []);
@@ -211,60 +184,137 @@
 			.filter((boss) => mapOf(boss.x, boss.y) === area);
 	});
 
-	const predatorPalPoints = $derived.by(() => {
-		if (!mapObjects) return [];
-		return mapObjects.points
-			.filter((p) => p.type === 'predator_pal')
-			.filter((p) => mapOf(p.x, p.y) === area);
+	const originFC = $derived(showOrigin && area === 'MainMap' ? buildOriginFC(area) : emptyFC());
+	const originLinesFC = $derived(buildOriginCrosshairFC(area));
+	const playerFC = $derived(buildPlayerFC(players as never, area));
+	const baseFC = $derived(buildBaseFC(bases, area));
+	const baseRadiusFC = $derived(buildBaseRadiusFC(bases, area));
+	const fastTravelFC = $derived(buildFastTravelFC(visibleFastTravelPoints as never, area));
+	const relicFC = $derived(buildRelicFC(relicPointList, area));
+	const dungeonFC = $derived(buildMapObjectFC(dungeonPoints, 'dungeon', area));
+	const alphaFC = $derived(buildMapObjectFC(alphaPalPoints, 'alpha_pal', area));
+	const predatorFC = $derived(buildMapObjectFC(predatorPalPoints, 'predator_pal', area));
+	const bossFC = $derived(buildBossFC(bossPoints as never, area));
+
+	const byKey = $derived.by(() => {
+		const table = new Map<string, { data: any; guildName?: string }>();
+		for (const p of players) table.set(`player:${p.uid}`, { data: p });
+		for (const { base, guildName } of bases) table.set(`base:${base.id}`, { data: base, guildName });
+		for (const p of visibleFastTravelPoints) table.set(`fast_travel:${p.guid}`, { data: p });
+		for (const p of relicPointList) table.set(`relic:${p.guid}`, { data: p });
+		for (const p of dungeonPoints) table.set(`dungeon:dungeon:${p.x}:${p.y}`, { data: p });
+		for (const p of alphaPalPoints) table.set(`alpha_pal:alpha_pal:${p.x}:${p.y}`, { data: p });
+		for (const p of predatorPalPoints)
+			table.set(`predator_pal:predator_pal:${p.x}:${p.y}`, { data: p });
+		for (const b of bossPoints) table.set(`boss:${b.rowKey}`, { data: b });
+		table.set('origin:origin', { data: null });
+		return table;
 	});
 
-	// Origin coordinates
-	const originCoords = $derived.by(() => {
-		const worldCoords = mapToWorld(0, 0);
-		return worldToPixel(worldCoords.x, worldCoords.y, area);
-	});
-
-	// Overlay reveal state
-	let overlaysReady = $state(false);
-
-	// Coordinate display state
-	let coordDisplayElement: HTMLDivElement | null = $state(null);
-	let coordDisplayText = $state('Coordinates: 0, 0');
-
-	function handlePointerMove(evt: MapBrowserEvent<PointerEvent | KeyboardEvent | WheelEvent>) {
-		const [pixelX, pixelY] = evt.coordinate;
-		const { worldX, worldY } = pixelToWorld(pixelX, pixelY, area);
-		const { gameX, gameY } = pixelToGameCoords(pixelX, pixelY, area);
-		coordDisplayText = `World: ${Math.round(worldX)}, ${Math.round(worldY)}<br>Map: ${gameX}, ${gameY}`;
+	function lookup(type: string, key: string) {
+		return byKey.get(`${type}:${key}`);
 	}
 
-	function handleMapClick(evt: MapBrowserEvent<PointerEvent | KeyboardEvent | WheelEvent>) {
-		const feature = map?.forEachFeatureAtPixel(evt.pixel, (ft) => ft);
-		if (feature && selectedPlayer) {
-			const featureType = feature.get('type');
-			if (featureType === 'fast_travel') {
-				onToggleFastTravel?.(feature.get('data') as MapUnlockPoint);
+	const staticIcons = staticIconUrls();
+
+	const palIcons = $derived.by(() => {
+		const wanted = new Map<string, { url: string; border: string }>();
+		for (const p of alphaPalPoints) {
+			wanted.set(palIconId(p.pal, false), {
+				url: assetLoader.loadMenuImage(p.pal),
+				border: PAL_BORDER_ALPHA
+			});
+		}
+		for (const p of predatorPalPoints) {
+			wanted.set(palIconId(p.pal, true), {
+				url: assetLoader.loadMenuImage(p.pal),
+				border: PAL_BORDER_PREDATOR
+			});
+		}
+		return wanted;
+	});
+
+	const registeredPalIcons = new Set<string>();
+
+	$effect(() => {
+		const instance = map;
+		if (!instance) return;
+		for (const [id, { url, border }] of palIcons) {
+			if (registeredPalIcons.has(id)) continue;
+			registeredPalIcons.add(id);
+			renderPalIcon(url, border)
+				.then((image) => {
+					if (!instance.hasImage(id)) instance.addImage(id, image);
+				})
+				.catch(() => registeredPalIcons.delete(id));
+		}
+	});
+
+	let coordDisplayText = $state('World: 0, 0<br>Map: 0, 0');
+	let hovered = $state<{ type: MapFeatureType; key: string } | null>(null);
+	let selected = $state<{ type: MapFeatureType; key: string; lngLat: maplibregl.LngLat } | null>(
+		null
+	);
+
+	const INTERACTIVE_LAYERS = [
+		'origin-icons',
+		'player-icons',
+		'base-icons',
+		'fast-travel-icons',
+		'relic-icons',
+		'dungeon-icons',
+		'boss-icons',
+		'alpha-icons',
+		'predator-icons'
+	];
+
+	function topFeatureAt(ev: maplibregl.MapMouseEvent, layerIds: string[]) {
+		const instance = map;
+		if (!instance) return null;
+		const layers = layerIds.filter((id) => instance.getLayer(id));
+		if (layers.length === 0) return null;
+		return instance.queryRenderedFeatures(ev.point, { layers })[0] ?? null;
+	}
+
+	function handleMouseMove(ev: maplibregl.MapMouseEvent) {
+		const [px, py] = lngLatToPixel(ev.lngLat.lng, ev.lngLat.lat);
+		const { worldX, worldY } = pixelToWorld(px, py, area);
+		const { gameX, gameY } = pixelToGameCoords(px, py, area);
+		coordDisplayText = `World: ${Math.round(worldX)}, ${Math.round(worldY)}<br>Map: ${gameX}, ${gameY}`;
+
+		const top = topFeatureAt(ev, INTERACTIVE_LAYERS);
+		hovered = top
+			? { type: top.properties.type as MapFeatureType, key: String(top.properties.key) }
+			: null;
+		const canvas = map?.getCanvas();
+		if (canvas) canvas.style.cursor = top ? 'pointer' : '';
+	}
+
+	function handleClick(ev: maplibregl.MapMouseEvent) {
+		const top = topFeatureAt(ev, INTERACTIVE_LAYERS);
+		if (!top) {
+			selected = null;
+			return;
+		}
+		const type = top.properties.type as MapFeatureType;
+		const key = String(top.properties.key);
+
+		if (selectedPlayer) {
+			if (type === 'fast_travel') {
+				onToggleFastTravel?.(lookup(type, key)?.data as MapUnlockPoint);
 				return;
 			}
-			if (featureType === 'relic') {
-				onToggleRelic?.(feature.get('data') as RelicPoint);
+			if (type === 'relic') {
+				onToggleRelic?.(lookup(type, key)?.data as RelicPoint);
 				return;
 			}
 		}
+		selected = { type, key, lngLat: ev.lngLat };
 	}
 
-	function getHorizontalOriginLineStrings(): number[][] {
-		return [
-			[0, originPixelCoords[1]],
-			[MAP_SIZE, originPixelCoords[1]]
-		];
-	}
-
-	function getVerticalOriginLineStrings(): number[][] {
-		return [
-			[originPixelCoords[0], 0],
-			[originPixelCoords[0], MAP_SIZE]
-		];
+	function handleContextMenu(ev: maplibregl.MapMouseEvent) {
+		const top = topFeatureAt(ev, ['base-icons']);
+		if (top) onEditBase?.(lookup('base', String(top.properties.key))?.data);
 	}
 
 	onMount(() => {
@@ -273,234 +323,206 @@
 				appState.selectPlayerLazy(player.uid);
 			}
 		}
-		setTimeout(() => {
-			if (map) {
-				const baseContextMenu = new ContextMenu({
-					width: 180,
-					defaultItems: false,
-					items: []
-				});
-				baseContextMenu.on('open', (evt: any) => {
-					const feature = map?.forEachFeatureAtPixel(evt.pixel, (ft) => ft);
-					if (feature && feature.get('type') === 'base') {
-						onEditBase?.(feature.get('data'));
-					}
-					baseContextMenu.closeMenu();
-				});
-				map.addControl(baseContextMenu);
-			}
-		}, 1000);
-
-		const readyTimer = setTimeout(() => {
-			overlaysReady = true;
-		}, 400);
-		return () => clearTimeout(readyTimer);
 	});
+
+	const defaultCenter = $derived.by(() => {
+		const world = mapToWorld(0, 0);
+		const [px, py] = worldToPixel(world.x, world.y, area);
+		return pixelToLngLat(px, py);
+	});
+
+	const MAX_BOUNDS: [[number, number], [number, number]] = [
+		[-180, -MERCATOR_LAT_LIMIT],
+		[180, MERCATOR_LAT_LIMIT]
+	];
 </script>
 
 <div class="relative h-full w-full">
-	<View center={defaultCenter()} zoom={3} maxZoom={8} {projection} {extent}>
-		<Map
-			bind:map
-			class="h-full w-full"
-			pointermove={handlePointerMove}
-			click={handleMapClick}
-			controls={{ fullscreen: true }}
-		>
+	<MLMap
+		bind:map
+		class="h-full w-full"
+		style={EMPTY_STYLE}
+		center={defaultCenter}
+		zoom={2}
+		minZoom={0}
+		maxZoom={7}
+		maxBounds={MAX_BOUNDS}
+		renderWorldCopies={false}
+		dragRotate={false}
+		pitchWithRotate={false}
+		touchZoomRotate={false}
+		attributionControl={false}
+		onmousemove={handleMouseMove}
+		onclick={handleClick}
+		oncontextmenu={handleContextMenu}
+	>
+		<Control.Navigation position="top-right" showCompass={false} />
+		<Control.Fullscreen position="top-right" />
+
+		<ImageLoader images={staticIcons}>
 			{#each MAP_AREA_ORDER as candidate}
-				<Layer.Static url={mapImg.maps[candidate]} {extent} visible={area === candidate} />
+				<Source.Raster
+					tiles={[`/maps/${MAP_TILE_DIR[candidate]}/{z}/{x}/{y}.webp`]}
+					tileSize={512}
+					maxzoom={4}
+				>
+					<Layer.Raster visible={area === candidate} paint={{ 'raster-fade-duration': 300 }} />
+				</Source.Raster>
 			{/each}
 
-			<!-- Origin marker layer -->
-			{#if showOrigin && area === 'MainMap'}
-				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
-					<Feature.Point coordinates={originCoords} style={originIconStyle}>
-						<Overlay.Hover {positioning} {offset} class={hoverClass}>
-							<OriginHover />
-						</Overlay.Hover>
-						<Overlay.Popup {positioning} {offset}>
-							<OriginPopup />
-						</Overlay.Popup>
-					</Feature.Point>
-					<Feature.LineString
-						coordinates={getHorizontalOriginLineStrings()}
-						style={originLineStyle}
-					/>
+			<Source.GeoJSON data={originLinesFC}>
+				<Layer.Line
+					visible={showOrigin && area === 'MainMap'}
+					paint={{ 'line-color': '#ffffff', 'line-width': 0.5, 'line-dasharray': [4, 8] }}
+				/>
+			</Source.GeoJSON>
 
-					<Feature.LineString
-						coordinates={getVerticalOriginLineStrings()}
-						style={originLineStyle}
-					/>
-				</Layer.Vector>
-			{/if}
+			<Source.GeoJSON data={baseRadiusFC}>
+				<Layer.Fill visible={showBases} paint={{ 'fill-color': '#0000ff', 'fill-opacity': 0.1 }} />
+				<Layer.Line
+					visible={showBases}
+					paint={{ 'line-color': '#0000ff', 'line-width': 2, 'line-dasharray': [4, 8] }}
+				/>
+			</Source.GeoJSON>
 
-			<!-- Player markers layer -->
-			{#if showPlayers}
-				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
-					{#each players as player}
-						{#if player.location}
-							<Feature.Point
-								coordinates={worldToPixel(player.location.x, player.location.y, area)}
-								style={playerIconStyle}
-								properties={{ type: 'player', data: player }}
-							>
-								<Overlay.Hover {positioning} {offset} class={hoverClass}>
-									<PlayerHover {player} />
-								</Overlay.Hover>
-								<Overlay.Popup {positioning} {offset}>
-									<PlayerPopup {player} />
-								</Overlay.Popup>
-							</Feature.Point>
-						{/if}
-					{/each}
-				</Layer.Vector>
-			{/if}
+			<Source.GeoJSON data={originFC}>
+				<Layer.Symbol
+					id="origin-icons"
+					visible={showOrigin && area === 'MainMap'}
+					layout={{
+						'icon-image': ['get', 'icon'],
+						'icon-allow-overlap': true,
+						'icon-size': ['interpolate', ['linear'], ['zoom'], 2, 0.6, 7, 1.0]
+					}}
+				/>
+			</Source.GeoJSON>
 
-			<!-- Base markers layer -->
-			{#if showBases}
-				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
-					{#each bases as { base, guildName }}
-						<Feature.Point
-							coordinates={worldToPixel(base.location.x, base.location.y, area)}
-							style={baseIconStyle(area)}
-							properties={{ type: 'base', data: base }}
-						>
-							<Overlay.Hover {positioning} {offset} class={hoverClass}>
-								<BaseHover {base} {guildName} />
-							</Overlay.Hover>
-							<Overlay.Popup {positioning} {offset}>
-								<BasePopup {base} {guildName} />
-							</Overlay.Popup>
-						</Feature.Point>
-					{/each}
-				</Layer.Vector>
-			{/if}
+			<Source.GeoJSON data={baseFC}>
+				<Layer.Symbol
+					id="base-icons"
+					visible={showBases}
+					layout={{
+						'icon-image': ['get', 'icon'],
+						'icon-allow-overlap': true,
+						'icon-size': ['interpolate', ['linear'], ['zoom'], 2, 0.5, 7, 0.83]
+					}}
+				/>
+			</Source.GeoJSON>
 
-			<!-- Fast travel + watchtower markers layer -->
-			{#if showFastTravel || showWatchtower}
-				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
-					{#each visibleFastTravelPoints as point (point.guid)}
-						<Feature.Point
-							coordinates={worldToPixel(point.x, point.y, area)}
-							style={fastTravelStyle}
-							properties={{ type: 'fast_travel', data: point }}
-						>
-							<Overlay.Hover {positioning} {offset} class={hoverClass}>
-								<FastTravelHover {point} />
-							</Overlay.Hover>
-							<Overlay.Popup {positioning} {offset}>
-								<FastTravelPopup {point} />
-							</Overlay.Popup>
-						</Feature.Point>
-					{/each}
-				</Layer.Vector>
-			{/if}
+			<Source.GeoJSON data={playerFC}>
+				<Layer.Symbol
+					id="player-icons"
+					visible={showPlayers}
+					layout={{
+						'icon-image': ['get', 'icon'],
+						'icon-allow-overlap': true,
+						'icon-size': ['interpolate', ['linear'], ['zoom'], 2, 0.6, 7, 1.0]
+					}}
+				/>
+			</Source.GeoJSON>
 
-			<!-- Relic markers layer (all EPalRelicType, incl. Lifmunk Effigies) -->
-			{#if showRelics}
-				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
-					{#each relicPointList as point (point.guid)}
-						<Feature.Point
-							coordinates={worldToPixel(point.x, point.y, area)}
-							style={relicStyle}
-							properties={{ type: 'relic', data: point }}
-						>
-							<Overlay.Hover {positioning} {offset} class={hoverClass}>
-								<RelicHover {point} />
-							</Overlay.Hover>
-							<Overlay.Popup {positioning} {offset}>
-								<RelicPopup {point} />
-							</Overlay.Popup>
-						</Feature.Point>
-					{/each}
-				</Layer.Vector>
-			{/if}
+			<Source.GeoJSON data={fastTravelFC}>
+				<Layer.Symbol
+					id="fast-travel-icons"
+					visible={showFastTravel || showWatchtower}
+					layout={{
+						'icon-image': ['get', 'icon'],
+						'icon-allow-overlap': false,
+						'symbol-sort-key': ['case', ['get', 'locked'], 1, 2],
+						'icon-size': [
+							'interpolate',
+							['linear'],
+							['zoom'],
+							2,
+							['case', ['get', 'watchtower'], 0.36, 0.45],
+							7,
+							['case', ['get', 'watchtower'], 0.6, 0.75]
+						]
+					}}
+					paint={{ 'icon-opacity': ['case', ['get', 'locked'], 0.6, 1] }}
+				/>
+			</Source.GeoJSON>
 
-			<!-- Dungeon markers layer -->
-			{#if showDungeons}
-				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
-					{#each dungeonPoints as point}
-						<Feature.Point
-							coordinates={worldToPixel(point.x, point.y, area)}
-							style={dungeonIconStyle}
-							properties={{ type: 'dungeon', data: point }}
-						>
-							<Overlay.Hover {positioning} {offset} class={hoverClass}>
-								<DungeonHover {point} />
-							</Overlay.Hover>
-							<Overlay.Popup {positioning} {offset}>
-								<DungeonPopup {point} />
-							</Overlay.Popup>
-						</Feature.Point>
-					{/each}
-				</Layer.Vector>
-			{/if}
+			<Source.GeoJSON data={relicFC}>
+				<Layer.Symbol
+					id="relic-icons"
+					visible={showRelics}
+					layout={{
+						'icon-image': ['get', 'icon'],
+						'icon-allow-overlap': false,
+						'symbol-sort-key': ['case', ['get', 'collected'], 2, 1],
+						'icon-size': ['interpolate', ['linear'], ['zoom'], 2, 0.3, 7, 0.5]
+					}}
+					paint={{ 'icon-opacity': ['case', ['get', 'collected'], 1, 0.6] }}
+				/>
+			</Source.GeoJSON>
 
-			<!-- Boss markers layer -->
-			{#if showBosses}
-				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
-					{#each bossPoints as point (point.rowKey)}
-						<Feature.Point
-							coordinates={worldToPixel(point.x, point.y, area)}
-							style={bossStyle}
-							properties={{ type: 'boss', data: point }}
-						>
-							<Overlay.Hover {positioning} {offset} class={hoverClass}>
-								<BossHover {point} />
-							</Overlay.Hover>
-							<Overlay.Popup {positioning} {offset}>
-								<BossPopup {point} />
-							</Overlay.Popup>
-						</Feature.Point>
-					{/each}
-				</Layer.Vector>
-			{/if}
+			<Source.GeoJSON data={dungeonFC}>
+				<Layer.Symbol
+					id="dungeon-icons"
+					visible={showDungeons}
+					layout={{
+						'icon-image': ['get', 'icon'],
+						'icon-allow-overlap': false,
+						'icon-size': ['interpolate', ['linear'], ['zoom'], 2, 0.6, 7, 1.0]
+					}}
+				/>
+			</Source.GeoJSON>
 
-			<!-- Alpha Pal markers layer -->
-			{#if showAlphaPals}
-				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
-					{#each alphaPalPoints as point}
-						{@const palImage = assetLoader.loadMenuImage(point.pal)}
-						{@const palStyle = createPalIconStyle(palImage, '#ffffff', map)}
-						<Feature.Point
-							coordinates={worldToPixel(point.x, point.y, area)}
-							style={palStyle}
-							properties={{ type: 'alpha_pal', data: point }}
-						>
-							<Overlay.Hover {positioning} {offset} class={hoverClass}>
-								<PalHover {point} isPredator={false} />
-							</Overlay.Hover>
-							<Overlay.Popup {positioning} {offset}>
-								<PalPopup {point} isPredator={false} />
-							</Overlay.Popup>
-						</Feature.Point>
-					{/each}
-				</Layer.Vector>
-			{/if}
+			<Source.GeoJSON data={bossFC}>
+				<Layer.Symbol
+					id="boss-icons"
+					visible={showBosses}
+					layout={{
+						'icon-image': ['get', 'icon'],
+						'icon-allow-overlap': false,
+						'symbol-sort-key': ['case', ['get', 'defeated'], 2, 1],
+						'icon-size': ['interpolate', ['linear'], ['zoom'], 2, 0.6, 7, 1.0]
+					}}
+					paint={{ 'icon-opacity': ['case', ['get', 'defeated'], 0.6, 1] }}
+				/>
+			</Source.GeoJSON>
 
-			<!-- Predator Pal markers layer -->
-			{#if showPredatorPals}
-				<Layer.Vector opacity={overlaysReady ? 1 : 0}>
-					{#each predatorPalPoints as point}
-						{@const palImage = assetLoader.loadMenuImage(point.pal)}
-						{@const palStyle = createPalIconStyle(palImage, '#ef4444', map)}
-						<Feature.Point
-							coordinates={worldToPixel(point.x, point.y, area)}
-							style={palStyle}
-							properties={{ type: 'predator_pal', data: point }}
-						>
-							<Overlay.Hover {positioning} {offset} class={hoverClass}>
-								<PalHover {point} isPredator={true} />
-							</Overlay.Hover>
-							<Overlay.Popup {positioning} {offset}>
-								<PalPopup {point} isPredator={true} />
-							</Overlay.Popup>
-						</Feature.Point>
-					{/each}
-				</Layer.Vector>
-			{/if}
-		</Map>
-	</View>
+			<Source.GeoJSON data={alphaFC}>
+				<Layer.Symbol
+					id="alpha-icons"
+					visible={showAlphaPals}
+					layout={{
+						'icon-image': ['get', 'icon'],
+						'icon-allow-overlap': false,
+						'icon-size': ['interpolate', ['linear'], ['zoom'], 2, 0.6, 7, 1.0]
+					}}
+				/>
+			</Source.GeoJSON>
+
+			<Source.GeoJSON data={predatorFC}>
+				<Layer.Symbol
+					id="predator-icons"
+					visible={showPredatorPals}
+					layout={{
+						'icon-image': ['get', 'icon'],
+						'icon-allow-overlap': false,
+						'icon-size': ['interpolate', ['linear'], ['zoom'], 2, 0.6, 7, 1.0]
+					}}
+				/>
+			</Source.GeoJSON>
+		</ImageLoader>
+	</MLMap>
+
+	{#if hovered}
+		{@const entry = lookup(hovered.type, hovered.key)}
+		<div class="map-hover-card">
+			<MapTooltip type={hovered.type} data={entry?.data} guildName={entry?.guildName} />
+		</div>
+	{/if}
+
+	{#if selected}
+		{@const entry = lookup(selected.type, selected.key)}
+		<div class="map-popup-card">
+			<MapPopup type={selected.type} data={entry?.data} guildName={entry?.guildName} />
+			<button type="button" class="map-popup-close" onclick={() => (selected = null)}>×</button>
+		</div>
+	{/if}
 
 	<!-- Player bulk actions -->
 	{#if selectedPlayer}
@@ -552,27 +574,38 @@
 	</div>
 
 	<!-- Coordinate display overlay -->
-	<div class="coordinate-display" bind:this={coordDisplayElement}>
+	<div class="coordinate-display">
 		{@html coordDisplayText}
 	</div>
 </div>
 
 <style>
-	:global(.ol-map-root) {
-		background-color: #000 !important;
+	:global(.maplibregl-canvas-container) {
+		background-color: #000;
 	}
 
-	:global(.ol-tooltip) {
-		background-color: color-mix(in srgb, var(--color-surface-900) 90%, transparent) !important;
-		color: white !important;
-		border-radius: 4px;
-		backdrop-filter: blur(4px);
-		margin: 0 0 0 12px;
-		border: 1px solid color-mix(in srgb, var(--color-surface-700) 40%, transparent);
+	.map-hover-card,
+	.map-popup-card {
+		position: absolute;
+		top: 48px;
+		left: 8px;
+		z-index: 1000;
+		pointer-events: none;
 	}
 
-	:global(.click-popup) {
-		z-index: 100;
+	.map-popup-card {
+		pointer-events: auto;
+	}
+
+	.map-popup-close {
+		position: absolute;
+		top: 4px;
+		right: 4px;
+		width: 20px;
+		height: 20px;
+		line-height: 1;
+		color: white;
+		cursor: pointer;
 	}
 
 	.map-actions {
@@ -628,12 +661,6 @@
 		line-height: 1.4;
 		pointer-events: none;
 		z-index: 1000;
-	}
-	:global(.ol-ctx-menu-container) {
-		background-color: transparent !important;
-		background: none;
-		box-shadow: none !important;
-		filter: none !important;
 	}
 
 	.map-area-switch {

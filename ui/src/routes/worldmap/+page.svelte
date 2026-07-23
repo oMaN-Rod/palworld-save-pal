@@ -19,7 +19,8 @@
 	import MapIcon from '@lucide/svelte/icons/map';
 	import Building from '@lucide/svelte/icons/building';
 	import { mapObjects, fastTravelPoints, relics, relicData, bosses } from '$lib/data';
-	import type { Map as OLMap } from 'ol';
+	import type maplibregl from 'maplibre-gl';
+	import { pixelToLngLat } from '$components/map/mercator';
 	import type { Base, FastTravelPoint, GuildSummary, MapUnlockPoint, Player, RelicPoint } from '$types';
 	import { assetLoader } from '$utils';
 	import { EditBaseModal } from '$components/modals';
@@ -71,7 +72,7 @@
 	const activeArea = $derived(mapOptions.area ?? DEFAULT_MAP_AREA);
 	const toast = getToastState();
 	let section = $state(['players']);
-	let map: OLMap | null = $state(null);
+	let map: maplibregl.Map | undefined = $state(undefined);
 
 	const mapLoader = import('$components/map/Map.svelte');
 
@@ -189,8 +190,8 @@
 		const area = mapOf(x, y);
 		if (!area) return;
 		mapOptions.area = area;
-		const coords = worldToPixel(x, y, area);
-		map?.getView().animate({ center: coords, zoom: 5, duration: 500 });
+		const [px, py] = worldToPixel(x, y, area);
+		map?.flyTo({ center: pixelToLngLat(px, py), zoom: 4, duration: 500 });
 	}
 	function handlePlayerFocus(player: Player) {
 		if (!player.location) return;

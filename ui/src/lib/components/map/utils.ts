@@ -1,19 +1,16 @@
 export type MapArea = 'MainMap' | 'Tree';
 
-/** Bounds and textures from the game's DT_WorldMapUIData. Tree is listed first
+/** Bounds from the game's DT_WorldMapUIData. Tree is listed first
  *  because it carries WorldMapPriority 1: where the rectangles overlap, it wins. */
 export const MAP_AREAS: Record<MapArea, {
-	texture: string;
 	min: { x: number; y: number };
 	max: { x: number; y: number };
 }> = {
 	Tree: {
-		texture: 't_treemap.webp',
 		min: { x: 347351.5, y: -818197.0 },
 		max: { x: 689148.5, y: -476400.0 }
 	},
 	MainMap: {
-		texture: 't_worldmap.webp',
 		min: { x: -1099400.0, y: -724400.0 },
 		max: { x: 349400.0, y: 724400.0 }
 	}

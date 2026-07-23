@@ -341,3 +341,18 @@ async fn redirect_leaves_unreserved_characters_unescaped() {
         .unwrap();
     assert_eq!(location, "/?path=/pals/a~b.c-d_e");
 }
+
+#[tokio::test]
+async fn map_tile_paths_bypass_the_spa_redirect() {
+    let temp_dir = tempfile::tempdir().unwrap();
+    let router = test_router(&temp_dir).await;
+    let response = router
+        .oneshot(
+            Request::get("/maps/mainmap/9/999/999.webp")
+                .body(Body::empty())
+                .unwrap(),
+        )
+        .await
+        .unwrap();
+    assert_eq!(response.status(), StatusCode::NOT_FOUND);
+}
