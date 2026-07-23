@@ -2,8 +2,11 @@
 
 pub mod capture;
 pub mod gvas;
+pub mod place;
+pub mod remap;
 pub mod scrub;
 pub mod transform;
+pub mod validate;
 
 use serde::{Deserialize, Serialize};
 

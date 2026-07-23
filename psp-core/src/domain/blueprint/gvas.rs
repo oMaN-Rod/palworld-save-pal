@@ -9,8 +9,8 @@ use crate::props;
 use crate::savio;
 use crate::ue::games::palworld::{PalDynamicItemType, PalMapConcreteModelVariant, PalTransform};
 use crate::ue::{
-    Byte, FGuid, MapEntry, PalStruct, PropertyKey, PropertyTagDataPartial, PropertyTagPartial,
-    PropertyType, Save, StructType, StructValue, ValueVec,
+    Byte, FGuid, MapEntry, PalStruct, PropertyKey, PropertySchemas, PropertyTagDataPartial,
+    PropertyTagPartial, PropertyType, Save, StructType, StructValue, ValueVec,
 };
 use crate::ue::{Properties, Property};
 
@@ -113,6 +113,21 @@ pub fn to_save(blueprint: &BaseBlueprint) -> Result<Save, CoreError> {
         structures.push(StructValue::Struct(element));
     }
 
+    set_property(
+        &mut save,
+        &mut weak,
+        WORLD_SAVE_DATA,
+        Property::Struct(StructValue::Struct(world_properties(structures, blueprint))),
+    )?;
+
+    Ok(save)
+}
+
+/// The blueprint's payload as one `worldSaveData` struct. `structures` is
+/// passed in because the two callers disagree about it: the wire form adds
+/// `MapObjectId` and `RelativeTransform` to each element, while
+/// `placement_schemas` must describe only what a real `Level.sav` will hold.
+fn world_properties(structures: Vec<StructValue>, blueprint: &BaseBlueprint) -> Properties {
     let mut world = Properties::default();
     world.insert(MAP_OBJECT_SAVE_DATA, Property::Array(ValueVec::Struct(structures)));
     world.insert(ITEM_CONTAINER_SAVE_DATA, Property::Map(blueprint.item_containers.clone()));
@@ -129,15 +144,42 @@ pub fn to_save(blueprint: &BaseBlueprint) -> Result<Save, CoreError> {
     if let Some(base_camp) = &blueprint.base_camp {
         world.insert(BASE_CAMP_SAVE_DATA, base_camp_property(base_camp));
     }
+    world
+}
 
-    set_property(
+/// Every schema tag the blueprint's own properties imply, keyed at the paths a
+/// real `Level.sav` uses for them -- which is exactly why this module borrows
+/// the game's property names (see `WORLD_SAVE_DATA`).
+///
+/// uesave records a schema only for a property it actually READ, so a
+/// destination save that never held one of these properties has no tag to write
+/// it back with and `Save::write` fails with `MissingPropertySchema` -- after
+/// the placement has already been applied, leaving the user unable to save at
+/// all. `place` merges these into the destination before appending anything,
+/// with the destination's own tags always winning.
+pub fn placement_schemas(blueprint: &BaseBlueprint) -> Result<PropertySchemas, CoreError> {
+    let mut save = Save {
+        header: blueprint.source_header.clone(),
+        schemas: PropertySchemas::default(),
+        root: crate::ue::Root {
+            save_game_type: SAVE_GAME_TYPE.to_string(),
+            properties: Properties::default(),
+        },
+        extra: Vec::new(),
+    };
+    let structures = blueprint
+        .structures
+        .iter()
+        .map(|structure| StructValue::Struct(structure.properties.clone()))
+        .collect();
+    prime(
         &mut save,
-        &mut weak,
+        &mut Observations::new(),
         WORLD_SAVE_DATA,
-        Property::Struct(StructValue::Struct(world)),
+        WORLD_SAVE_DATA,
+        &Property::Struct(StructValue::Struct(world_properties(structures, blueprint))),
     )?;
-
-    Ok(save)
+    Ok(save.schemas)
 }
 
 pub fn from_save(save: &Save) -> Result<BaseBlueprint, CoreError> {

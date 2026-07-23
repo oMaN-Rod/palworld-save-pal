@@ -290,6 +290,62 @@ fn asking_for_workers_does_not_capture_caged_pals() {
     );
 }
 
+/// The base camp's `WorkerDirector` is the only thing naming the base's worker
+/// container, so the container has to travel at every layer or a placed base
+/// ends up with none. A layer that takes no pals must still take none: the
+/// slots come along for their capacity, emptied of the source world's pal
+/// instance ids.
+#[test]
+fn a_layer_without_worker_pals_captures_the_container_but_none_of_its_pals() {
+    let session = common::load_fixture_session("v1_relics");
+    let base_id = common::fixture_base_id(&session);
+
+    let base_entry = psp_core::domain::world::base_camp_map(&session.level)
+        .expect("base camp map")
+        .and_then(|entries| {
+            entries.iter().find(|entry| psp_core::props::as_uuid(&entry.key) == Some(base_id))
+        })
+        .expect("fixture base camp entry must exist");
+    let (_guild_id, worker_container_id) = guild::base_guild_and_container(base_entry)
+        .expect("fixture base must resolve a worker container");
+    let source_entry = psp_core::domain::world::character_container_map(&session.level)
+        .expect("character containers")
+        .iter()
+        .find(|entry| capture::container_entry_id(entry) == Some(worker_container_id))
+        .expect("the worker container must be in the save");
+    let (source_slots, source_pals) = common::container_slot_census(source_entry);
+    assert!(
+        source_slots > 0 && source_pals > 0,
+        "the fixture's worker container must have slots and pals in them, or an emptied copy \
+         is indistinguishable from the original: {source_pals} of {source_slots}"
+    );
+
+    for (layer, options, expected_pals) in [
+        ("blueprint", CaptureOptions::blueprint(), 0),
+        ("configured", CaptureOptions::configured(), 0),
+        ("full", CaptureOptions::full(), source_pals),
+    ] {
+        let blueprint = capture::capture(&session, base_id, options, "Home").expect("capture");
+        let worker = blueprint
+            .character_containers
+            .iter()
+            .find(|entry| capture::container_entry_id(entry) == Some(worker_container_id))
+            .unwrap_or_else(|| panic!("{layer}: the base's worker container must be captured"));
+        assert_eq!(
+            common::container_slot_census(worker),
+            (source_slots, expected_pals),
+            "{layer}: the captured worker container must keep the base's capacity and hold only \
+             the pals this layer asked for"
+        );
+        assert_eq!(
+            blueprint.characters.is_empty(),
+            expected_pals == 0,
+            "{layer}: an emptied worker container must come with no captured pals, and a filled \
+             one with some"
+        );
+    }
+}
+
 #[test]
 fn base_identity_is_dropped_when_not_requested() {
     let session = common::load_fixture_session("v1_relics");
@@ -302,4 +358,32 @@ fn base_identity_is_dropped_when_not_requested() {
         blueprint.header.source_base.is_empty(),
         "the source base name must be withheld unless base_identity was requested"
     );
+}
+
+/// The world name names the save a blueprint came from, which identifies its
+/// author's world as squarely as the base name recorded beside it -- and it
+/// reaches the header at every layer unless something gates it. Pinned at all
+/// three presets, since a leak the default preset alone avoids is still a leak.
+#[test]
+fn the_source_world_is_withheld_unless_base_identity_is_requested() {
+    let session = common::load_fixture_session("v1_relics");
+    let base_id = common::fixture_base_id(&session);
+
+    // The control: read off the session, not off any capture. Without a world
+    // name to withhold, an empty header field would prove nothing.
+    let world_name = session.world_name.clone();
+    assert!(!world_name.is_empty(), "setup: the fixture save must carry a world name");
+
+    for (layer, options) in [
+        ("blueprint", CaptureOptions::blueprint()),
+        ("configured", CaptureOptions::configured()),
+        ("full", CaptureOptions::full()),
+    ] {
+        let blueprint = capture::capture(&session, base_id, options, "Home").expect("capture");
+        assert_eq!(
+            blueprint.header.source_world,
+            if options.base_identity { world_name.clone() } else { String::new() },
+            "{layer}: the source world name must travel only with the base identity"
+        );
+    }
 }

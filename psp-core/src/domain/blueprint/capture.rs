@@ -9,9 +9,12 @@ use crate::error::CoreError;
 use crate::props;
 use crate::session::SaveSession;
 use crate::ue::games::palworld::{
-    PalMapConcreteModelModuleData, PalMapConcreteModelVariant, PalMapModel, PalTransform,
+    PalConnector, PalMapConcreteModel, PalMapConcreteModelModule, PalMapConcreteModelModuleData,
+    PalMapConcreteModelVariant, PalMapModel, PalTransform,
 };
-use crate::ue::{FGuid, MapEntry, PalStruct, Properties, Property, PropertyKey, StructValue, ValueVec};
+use crate::ue::{
+    Arch, FGuid, MapEntry, PalStruct, Properties, Property, PropertyKey, StructValue, ValueVec,
+};
 
 /// `true` only when `MapObjectId` is still a `Property::Name` -- the
 /// regression the Task 3/6 amendment exists to prevent (`MapObjectId`
@@ -29,6 +32,163 @@ fn map_object_model(object_props: &Properties) -> Option<&PalMapModel> {
         Property::Struct(StructValue::Game(PalStruct::MapModel(model))) => Some(model),
         _ => None,
     }
+}
+
+/// Mutable counterpart of `map_object_model`, for remapping.
+pub(crate) fn map_object_model_mut(object_props: &mut Properties) -> Option<&mut PalMapModel> {
+    let model = object_props
+        .0
+        .get_mut(&PropertyKey::from("Model"))
+        .and_then(props::struct_props_mut)?;
+    match model.0.get_mut(&PropertyKey::from("RawData"))? {
+        Property::Struct(StructValue::Game(PalStruct::MapModel(model))) => Some(model),
+        _ => None,
+    }
+}
+
+fn map_object_concrete_model(object_props: &Properties) -> Option<&PalMapConcreteModel<Arch>> {
+    let concrete =
+        object_props.0.get(&PropertyKey::from("ConcreteModel")).and_then(props::struct_props)?;
+    match concrete.0.get(&PropertyKey::from("RawData"))? {
+        Property::Struct(StructValue::Game(PalStruct::MapConcreteModel(model))) => Some(model),
+        _ => None,
+    }
+}
+
+/// Mutable counterpart of `map_object_concrete_model`, for remapping. Unlike
+/// `with_concrete_variant_mut` this reaches the `ConcreteModel` struct itself
+/// (its own `instance_id`/`model_instance_id`), not the model-type-specific
+/// `model_data` variant nested inside it.
+pub(crate) fn map_object_concrete_model_mut(
+    object_props: &mut Properties,
+) -> Option<&mut PalMapConcreteModel<Arch>> {
+    let concrete = object_props
+        .0
+        .get_mut(&PropertyKey::from("ConcreteModel"))
+        .and_then(props::struct_props_mut)?;
+    match concrete.0.get_mut(&PropertyKey::from("RawData"))? {
+        Property::Struct(StructValue::Game(PalStruct::MapConcreteModel(model))) => Some(model),
+        _ => None,
+    }
+}
+
+/// Mutable access to a structure's `Model.Connector.RawData`, present only on
+/// structures that can be wired to a neighbor (conveyors, pipes, ...).
+pub(crate) fn map_object_connector_mut(object_props: &mut Properties) -> Option<&mut PalConnector> {
+    let model =
+        object_props.0.get_mut(&PropertyKey::from("Model")).and_then(props::struct_props_mut)?;
+    let connector = model
+        .0
+        .get_mut(&PropertyKey::from("Connector"))
+        .and_then(props::struct_props_mut)?;
+    match connector.0.get_mut(&PropertyKey::from("RawData"))? {
+        Property::Struct(StructValue::Game(PalStruct::Connector(connector))) => Some(connector),
+        _ => None,
+    }
+}
+
+/// Visits the typed `RawData` of every module in a structure's
+/// `ConcreteModel.ModuleMap`, the traversal capture, scrub and remap all need.
+pub(crate) fn for_each_module_raw(
+    properties: &Properties,
+    mut visit: impl FnMut(&PalMapConcreteModelModule),
+) {
+    let Some(concrete) =
+        properties.0.get(&PropertyKey::from("ConcreteModel")).and_then(props::struct_props)
+    else {
+        return;
+    };
+    let Some(module_entries) =
+        concrete.0.get(&PropertyKey::from("ModuleMap")).and_then(props::map_entries)
+    else {
+        return;
+    };
+    for module in module_entries {
+        let Some(module_props) = props::struct_props(&module.value) else { continue };
+        if let Some(Property::Struct(StructValue::Game(PalStruct::MapConcreteModelModule(raw)))) =
+            module_props.0.get(&PropertyKey::from("RawData"))
+        {
+            visit(raw);
+        }
+    }
+}
+
+/// Mutable counterpart of `for_each_module_raw`.
+pub(crate) fn for_each_module_raw_mut(
+    properties: &mut Properties,
+    mut visit: impl FnMut(&mut PalMapConcreteModelModule),
+) {
+    let Some(concrete) = properties
+        .0
+        .get_mut(&PropertyKey::from("ConcreteModel"))
+        .and_then(props::struct_props_mut)
+    else {
+        return;
+    };
+    let Some(module_entries) = concrete
+        .0
+        .get_mut(&PropertyKey::from("ModuleMap"))
+        .and_then(props::map_entries_mut)
+    else {
+        return;
+    };
+    for module in module_entries {
+        let Some(module_props) = props::struct_props_mut(&mut module.value) else { continue };
+        if let Some(Property::Struct(StructValue::Game(PalStruct::MapConcreteModelModule(raw)))) =
+            module_props.0.get_mut(&PropertyKey::from("RawData"))
+        {
+            visit(raw);
+        }
+    }
+}
+
+/// Every structure's `Model.RawData.instance_id` -- the identity that must be
+/// unique and freshly generated before a blueprint is placed. One entry per
+/// structure that has a `Model` at all.
+pub fn structure_instance_ids(blueprint: &BaseBlueprint) -> Vec<Uuid> {
+    blueprint
+        .structures
+        .iter()
+        .filter_map(|s| map_object_model(&s.properties).map(|m| props::guid_to_uuid(&m.instance_id)))
+        .collect()
+}
+
+/// Every structure's `ConcreteModel.RawData.instance_id`, one entry per
+/// structure that has a `ConcreteModel` at all.
+pub fn structure_concrete_instance_ids(blueprint: &BaseBlueprint) -> Vec<Uuid> {
+    blueprint
+        .structures
+        .iter()
+        .filter_map(|s| {
+            map_object_concrete_model(&s.properties).map(|c| props::guid_to_uuid(&c.instance_id))
+        })
+        .collect()
+}
+
+/// A `WorkSaveData` element's `RawData.base_data.id` -- the work's own
+/// identity. `None` for a work type that serializes no work base.
+pub fn work_base_id(value: &StructValue) -> Option<Uuid> {
+    let StructValue::Struct(work_props) = value else { return None };
+    match work_props.0.get(&PropertyKey::from("RawData"))? {
+        Property::Struct(StructValue::Game(PalStruct::Work(raw))) => {
+            raw.base_data.as_ref().map(|base| props::guid_to_uuid(&base.id))
+        }
+        _ => None,
+    }
+}
+
+/// `true` when a structure's `Model.RawData.concrete_model_instance_id`
+/// still names its own `ConcreteModel.RawData.instance_id` (or both are nil).
+/// Used to catch a remap that regenerates one side of the pair but not the
+/// other.
+pub fn model_concrete_reference_resolves(structure: &BlueprintStructure) -> bool {
+    let model_side = map_object_model(&structure.properties)
+        .map(|m| props::guid_to_uuid(&m.concrete_model_instance_id))
+        .unwrap_or(Uuid::nil());
+    let concrete_side = map_object_concrete_model(&structure.properties)
+        .map(|c| props::guid_to_uuid(&c.instance_id))
+        .unwrap_or(Uuid::nil());
+    model_side == concrete_side
 }
 
 pub fn first_build_player_uid(blueprint: &BaseBlueprint) -> Option<Uuid> {
@@ -93,26 +253,41 @@ pub fn structure_concrete_player_uids(properties: &Properties) -> Vec<Uuid> {
             PalMapConcreteModelVariant::PalEgg(model) => {
                 uids.push(props::guid_to_uuid(&model.pickupdable_player_uid));
             }
-            _ => {}
+            // Exhaustive for the same reason `scrub_concrete_variant` is: a
+            // variant newly given a player uid there but missed here would be
+            // invisible to the tests that verify the scrub, which is worse than
+            // no test at all.
+            PalMapConcreteModelVariant::CharacterTeamMission(_)
+            | PalMapConcreteModelVariant::FarmSkillFruits(_)
+            | PalMapConcreteModelVariant::SupplyStorage(_)
+            | PalMapConcreteModelVariant::EnergyStorage(_)
+            | PalMapConcreteModelVariant::ConvertItem(_)
+            | PalMapConcreteModelVariant::PickupItemOnLevel(_)
+            | PalMapConcreteModelVariant::ItemDropOnDamag(_)
+            | PalMapConcreteModelVariant::DefenseBulletLauncher(_)
+            | PalMapConcreteModelVariant::GenerateEnergy(_)
+            | PalMapConcreteModelVariant::FarmBlockV2(_)
+            | PalMapConcreteModelVariant::FastTravelPoint(_)
+            | PalMapConcreteModelVariant::ShippingItem(_)
+            | PalMapConcreteModelVariant::ProductItem(_)
+            | PalMapConcreteModelVariant::RecoverOtomo(_)
+            | PalMapConcreteModelVariant::HatchingEgg(_)
+            | PalMapConcreteModelVariant::TreasureBox(_)
+            | PalMapConcreteModelVariant::BreedFarm(_)
+            | PalMapConcreteModelVariant::Lamp(_)
+            | PalMapConcreteModelVariant::Torch(_)
+            | PalMapConcreteModelVariant::BaseCampPoint(_)
+            | PalMapConcreteModelVariant::Unknown(_) => {}
         }
     }
 
-    if let Some(module_entries) =
-        concrete.0.get(&PropertyKey::from("ModuleMap")).and_then(props::map_entries)
-    {
-        for module in module_entries {
-            let Some(module_props) = props::struct_props(&module.value) else { continue };
-            if let Some(Property::Struct(StructValue::Game(PalStruct::MapConcreteModelModule(raw)))) =
-                module_props.0.get(&PropertyKey::from("RawData"))
-            {
-                if let PalMapConcreteModelModuleData::PasswordLock { player_infos, .. } = &raw.data {
-                    for info in player_infos {
-                        uids.push(props::guid_to_uuid(&info.player_uid));
-                    }
-                }
+    for_each_module_raw(properties, |raw| {
+        if let PalMapConcreteModelModuleData::PasswordLock { player_infos, .. } = &raw.data {
+            for info in player_infos {
+                uids.push(props::guid_to_uuid(&info.player_uid));
             }
         }
-    }
+    });
 
     uids
 }
@@ -149,12 +324,26 @@ pub fn capture(
     options: CaptureOptions,
     name: &str,
 ) -> Result<BaseBlueprint, CoreError> {
-    let mut blueprint = capture_unscrubbed(session, base_id, options, name)?;
+    let mut blueprint = capture_inner(session, base_id, options, name)?;
     scrub::scrub_blueprint(&mut blueprint);
     Ok(blueprint)
 }
 
+/// What `capture` scrubs, before it does. Exists for the positive controls that
+/// prove the scrub works, and is reachable only from a build that asked for
+/// test fixtures: an ordinary consumer one identifier away from it would ship a
+/// blueprint carrying the source save's players.
+#[cfg(any(test, feature = "test-fixtures"))]
 pub fn capture_unscrubbed(
+    session: &SaveSession,
+    base_id: Uuid,
+    options: CaptureOptions,
+    name: &str,
+) -> Result<BaseBlueprint, CoreError> {
+    capture_inner(session, base_id, options, name)
+}
+
+fn capture_inner(
     session: &SaveSession,
     base_id: Uuid,
     options: CaptureOptions,
@@ -227,21 +416,28 @@ pub fn capture_unscrubbed(
         }
     }
 
+    // The worker container travels at every layer, emptied when the layer takes
+    // no pals: the base camp's `WorkerDirector` is what names it, so a base
+    // placed without one has no worker container at all -- its workers resolve
+    // to a nil id.
     let mut character_containers = Vec::new();
     let mut character_instance_ids: Vec<Uuid> = Vec::new();
-    if options.worker_pals {
-        if let Some(base_entry) = base_camp_entry(session, base_id)? {
-            if let Some((_guild_id, worker_container_id)) = guild::base_guild_and_container(base_entry) {
-                let entries = world::character_container_map(&session.level)?;
-                if let Some(entry) =
-                    entries.iter().find(|entry| container_entry_id(entry) == Some(worker_container_id))
-                {
+    if let Some(base_entry) = base_camp_entry(session, base_id)? {
+        if let Some((_guild_id, worker_container_id)) = guild::base_guild_and_container(base_entry) {
+            let entries = world::character_container_map(&session.level)?;
+            if let Some(entry) =
+                entries.iter().find(|entry| container_entry_id(entry) == Some(worker_container_id))
+            {
+                let mut worker_container = entry.clone();
+                if options.worker_pals {
                     push_unique(
                         &mut character_instance_ids,
                         &character_container_slot_instance_ids(entry),
                     );
-                    character_containers.push(entry.clone());
+                } else {
+                    empty_character_container_slots(&mut worker_container);
                 }
+                character_containers.push(worker_container);
             }
         }
     }
@@ -278,7 +474,11 @@ pub fn capture_unscrubbed(
             uesave_struct_version: env!("CARGO_PKG_VERSION").to_string(),
             manifest: options,
             name: name.to_string(),
-            source_world: session.world_name.clone(),
+            source_world: if options.base_identity {
+                session.world_name.clone()
+            } else {
+                String::new()
+            },
             source_base: if options.base_identity { base_name } else { String::new() },
             created_at: 0,
             structure_count: structures.len() as u32,
@@ -309,33 +509,15 @@ fn push_unique(target: &mut Vec<Uuid>, ids: &[Uuid]) {
 fn module_target_container_ids(properties: &Properties) -> (Vec<Uuid>, Vec<Uuid>) {
     let mut item_ids = Vec::new();
     let mut character_ids = Vec::new();
-    let Some(concrete) =
-        properties.0.get(&PropertyKey::from("ConcreteModel")).and_then(props::struct_props)
-    else {
-        return (item_ids, character_ids);
-    };
-    let Some(module_entries) =
-        concrete.0.get(&PropertyKey::from("ModuleMap")).and_then(props::map_entries)
-    else {
-        return (item_ids, character_ids);
-    };
-    for module in module_entries {
-        let Some(module_props) = props::struct_props(&module.value) else { continue };
-        let Some(Property::Struct(StructValue::Game(PalStruct::MapConcreteModelModule(raw)))) =
-            module_props.0.get(&PropertyKey::from("RawData"))
-        else {
-            continue;
-        };
-        match &raw.data {
-            PalMapConcreteModelModuleData::ItemContainer { target_container_id, .. } => {
-                item_ids.push(props::guid_to_uuid(target_container_id));
-            }
-            PalMapConcreteModelModuleData::CharacterContainer { target_container_id, .. } => {
-                character_ids.push(props::guid_to_uuid(target_container_id));
-            }
-            _ => {}
+    for_each_module_raw(properties, |raw| match &raw.data {
+        PalMapConcreteModelModuleData::ItemContainer { target_container_id, .. } => {
+            item_ids.push(props::guid_to_uuid(target_container_id));
         }
-    }
+        PalMapConcreteModelModuleData::CharacterContainer { target_container_id, .. } => {
+            character_ids.push(props::guid_to_uuid(target_container_id));
+        }
+        _ => {}
+    });
     (item_ids, character_ids)
 }
 
@@ -369,7 +551,7 @@ pub fn container_slot_dynamic_item_ids(entry: &MapEntry) -> Vec<Uuid> {
 
 /// The non-nil `instance_id` of every occupied slot in a
 /// `CharacterContainerSaveData` entry.
-fn character_container_slot_instance_ids(entry: &MapEntry) -> Vec<Uuid> {
+pub(crate) fn character_container_slot_instance_ids(entry: &MapEntry) -> Vec<Uuid> {
     let mut ids = Vec::new();
     let Some(value_props) = props::struct_props(&entry.value) else { return ids };
     let Some(slots) = props::get(value_props, &["Slots"]).and_then(props::struct_values) else {
@@ -387,6 +569,25 @@ fn character_container_slot_instance_ids(entry: &MapEntry) -> Vec<Uuid> {
         }
     }
     ids
+}
+
+/// Empties every slot of a `CharacterContainerSaveData` entry without removing
+/// any: the slot count is the base's worker capacity, which the blueprint keeps
+/// even at a layer that takes none of the pals occupying them.
+fn empty_character_container_slots(entry: &mut MapEntry) {
+    let Some(value_props) = props::struct_props_mut(&mut entry.value) else { return };
+    let Some(slots) = props::get_mut(value_props, &["Slots"]).and_then(props::struct_values_mut)
+    else {
+        return;
+    };
+    for slot in slots {
+        let StructValue::Struct(slot_props) = slot else { continue };
+        if let Some(Property::Struct(StructValue::Game(PalStruct::CharacterContainer(raw)))) =
+            slot_props.0.get_mut(&PropertyKey::from("RawData"))
+        {
+            raw.instance_id = FGuid::nil();
+        }
+    }
 }
 
 /// A `DynamicItemSaveData` element's `RawData.id.local_id_in_created_world`.
@@ -519,39 +720,16 @@ fn clear_access_config(properties: &mut Properties) {
         _ => {}
     });
 
-    let Some(concrete) = properties
-        .0
-        .get_mut(&PropertyKey::from("ConcreteModel"))
-        .and_then(props::struct_props_mut)
-    else {
-        return;
-    };
-    let Some(module_entries) = concrete
-        .0
-        .get_mut(&PropertyKey::from("ModuleMap"))
-        .and_then(props::map_entries_mut)
-    else {
-        return;
-    };
-    for module in module_entries {
-        let Some(module_props) = props::struct_props_mut(&mut module.value) else {
-            continue;
-        };
-        if let Some(Property::Struct(StructValue::Game(PalStruct::MapConcreteModelModule(raw)))) =
-            module_props.0.get_mut(&PropertyKey::from("RawData"))
-        {
-            match &mut raw.data {
-                PalMapConcreteModelModuleData::PasswordLock { password, player_infos, .. } => {
-                    password.clear();
-                    player_infos.clear();
-                }
-                PalMapConcreteModelModuleData::Switch { switch_state, .. } => {
-                    *switch_state = 0;
-                }
-                _ => {}
-            }
+    for_each_module_raw_mut(properties, |raw| match &mut raw.data {
+        PalMapConcreteModelModuleData::PasswordLock { password, player_infos, .. } => {
+            password.clear();
+            player_infos.clear();
         }
-    }
+        PalMapConcreteModelModuleData::Switch { switch_state, .. } => {
+            *switch_state = 0;
+        }
+        _ => {}
+    });
 }
 
 fn apply_layer_gating(properties: &mut Properties, options: CaptureOptions) {

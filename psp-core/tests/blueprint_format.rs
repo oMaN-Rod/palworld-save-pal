@@ -1,10 +1,19 @@
 mod common;
 
+use psp_core::domain::blueprint::place::{self, PlacementRequest};
+use psp_core::domain::blueprint::validate::{Anchor, PlacementMode};
 use psp_core::domain::blueprint::{BaseBlueprint, BlueprintHeader, CaptureOptions, SCHEMA_VERSION};
 use psp_core::domain::blueprint::{capture, gvas};
+use psp_core::session::SaveSession;
+use psp_core::ue::games::palworld::PalTransform;
 use psp_core::ue::{
-    Byte, MapEntry, PalStruct, Properties, Property, PropertyKey, StructValue,
+    Byte, Double, MapEntry, PalStruct, Properties, Property, PropertyKey, Quat, StructValue, Vector,
 };
+
+/// How many structures the `v1_relics` fixture's richest base carries. Pinned
+/// so a cycle that loses or duplicates structures cannot pass by comparing two
+/// equally wrong numbers against each other.
+const FIXTURE_BASE_STRUCTURES: usize = 543;
 
 /// How many of the blueprint's payloads are still TYPED Palworld structs
 /// rather than opaque byte arrays. Byte-identical round trips prove nothing
@@ -436,5 +445,349 @@ fn json_from_a_save_that_is_not_a_blueprint_is_refused() {
         message.contains("PspBaseBlueprint"),
         "the error must name the expected format marker, got: {message}"
     );
+}
+
+fn new_base_request(anchor: Anchor, guild_id: uuid::Uuid, owner: uuid::Uuid) -> PlacementRequest {
+    PlacementRequest {
+        anchor,
+        mode: PlacementMode::NewBase { guild_id },
+        owner_player_uid: owner,
+        override_warnings: true,
+    }
+}
+
+/// Deliberately not a multiple of a right angle: a quarter turn permutes axes
+/// and swaps signs, so a rotation applied twice, or not at all, can land on the
+/// same coordinates by coincidence.
+const PLACEMENT_YAW: f64 = 1.1;
+const PLACEMENT_X: f64 = 400_000.0;
+const PLACEMENT_Y: f64 = 400_000.0;
+const PLACEMENT_Z: f64 = 1000.0;
+
+fn anchor_far_from_everything() -> Anchor {
+    Anchor {
+        x: PLACEMENT_X,
+        y: PLACEMENT_Y,
+        z: PLACEMENT_Z,
+        yaw_radians: PLACEMENT_YAW,
+    }
+}
+
+/// Hamilton product, written out here rather than reached for in `transform`:
+/// an expectation computed with the code under test is not an expectation.
+/// Components are `(x, y, z, w)`.
+fn hamilton(a: (f64, f64, f64, f64), b: (f64, f64, f64, f64)) -> (f64, f64, f64, f64) {
+    let (ax, ay, az, aw) = a;
+    let (bx, by, bz, bw) = b;
+    (
+        aw * bx + ax * bw + ay * bz - az * by,
+        aw * by - ax * bz + ay * bw + az * bx,
+        aw * bz + ax * by - ay * bx + az * bw,
+        aw * bw - ax * bx - ay * by - az * bz,
+    )
+}
+
+fn quat_parts(q: &psp_core::ue::Quat) -> (f64, f64, f64, f64) {
+    (q.x.0, q.y.0, q.z.0, q.w.0)
+}
+
+/// Every structure the placed base owns, as the WORLD transform `place` wrote
+/// into `Model.RawData.initial_transform_cache`, in on-disk order.
+///
+/// Reading this rather than recapturing is what makes the anchor rotation
+/// testable at all: `to_relative` and `to_world` are each other's inverse, so a
+/// capture-place-recapture cycle returns the original offsets even when the
+/// rotation step is removed from both sides.
+fn placed_world_transforms(session: &SaveSession, base_id: uuid::Uuid) -> Vec<PalTransform> {
+    let Ok(Some(values)) = psp_core::domain::world::map_object_values(&session.level) else {
+        return Vec::new();
+    };
+    values
+        .iter()
+        .filter_map(|value| {
+            let StructValue::Struct(object_props) = value else { return None };
+            let model = object_props
+                .0
+                .get(&PropertyKey::from("Model"))
+                .and_then(psp_core::props::struct_props)?;
+            match model.0.get(&PropertyKey::from("RawData")) {
+                Some(Property::Struct(StructValue::Game(PalStruct::MapModel(raw)))) => {
+                    (psp_core::props::guid_to_uuid(&raw.base_camp_id_belong_to) == base_id)
+                        .then(|| raw.initial_transform_cache.clone())
+                }
+                _ => None,
+            }
+        })
+        .collect()
+}
+
+/// The whole pipeline in one cycle: capture, place at a different anchor under a
+/// non-zero yaw, then capture the placed base again. A blueprint IS the set of
+/// offsets from its anchor, so the cycle re-derives every one of them --
+/// translation, rotation and scale -- against a new anchor, and separately
+/// checks the world transforms the placement actually wrote against offsets
+/// rotated by this test's own trigonometry. The geometry survives both or the
+/// blueprint is not portable.
+///
+/// One structure is given a rotation about X and a lopsided scale before
+/// placement. The fixture's own structures are all yawed, and yaw quaternions
+/// commute with the anchor's, which would leave the rotation checks unable to
+/// tell `anchor * relative` from `relative * anchor`.
+#[test]
+fn capture_place_recapture_preserves_structure_geometry() {
+    let mut session = common::load_fixture_session("v1_relics");
+    let base_id = common::fixture_base_id(&session);
+    let mut original =
+        capture::capture(&session, base_id, CaptureOptions::full(), "Home").expect("capture");
+    let guild_id = common::fixture_guild_id(&session);
+    let owner = common::fixture_player_uid(&session);
+    common::set_world_option_int(&mut session, "BaseCampMaxNumInGuild", 99);
+
+    assert_eq!(
+        original.structures.len(),
+        FIXTURE_BASE_STRUCTURES,
+        "setup: the fixture base's structure count"
+    );
+
+    let quarter = std::f64::consts::FRAC_1_SQRT_2;
+    let tilted = &mut original.structures[0].relative_transform;
+    tilted.rotation = Quat {
+        x: Double(quarter),
+        y: Double(0.0),
+        z: Double(0.0),
+        w: Double(quarter),
+    };
+    tilted.scale = Vector { x: Double(2.0), y: Double(3.0), z: Double(0.5) };
+    let anchor_quat = {
+        let half = PLACEMENT_YAW / 2.0;
+        (0.0, 0.0, half.sin(), half.cos())
+    };
+    let tilted_quat = quat_parts(&original.structures[0].relative_transform.rotation);
+    assert!(
+        hamilton(anchor_quat, tilted_quat) != hamilton(tilted_quat, anchor_quat),
+        "setup: the tilted structure must not commute with the anchor, \
+         or the rotation checks cannot see operand order"
+    );
+
+    let spread = original
+        .structures
+        .iter()
+        .map(|s| {
+            s.relative_transform
+                .translation
+                .x
+                .0
+                .hypot(s.relative_transform.translation.y.0)
+        })
+        .fold(0.0f64, f64::max);
+    assert!(
+        spread > 1000.0,
+        "setup: the base must be spread out around its anchor, or comparing offsets is vacuous, \
+         widest offset {spread} cm"
+    );
+
+    let result = place::place(
+        &mut session,
+        &original,
+        &new_base_request(anchor_far_from_everything(), guild_id, owner),
+        &common::game_data(),
+    )
+    .expect("placement");
+    let new_base_id = result.base_id.expect("new base id");
+
+    let recaptured =
+        capture::capture(&session, new_base_id, CaptureOptions::full(), "Home").expect("recapture");
+
+    assert_eq!(
+        recaptured.structures.len(),
+        original.structures.len(),
+        "no structure may be lost through a place-recapture cycle"
+    );
+
+    let mut original_types: Vec<&str> = original
+        .structures
+        .iter()
+        .map(|s| s.map_object_id.as_str())
+        .collect();
+    let mut recaptured_types: Vec<&str> = recaptured
+        .structures
+        .iter()
+        .map(|s| s.map_object_id.as_str())
+        .collect();
+    original_types.sort_unstable();
+    recaptured_types.sort_unstable();
+    assert_eq!(original_types, recaptured_types, "structure types must survive");
+
+    let mut worst = 0.0f64;
+    let mut worst_rotation = 0.0f64;
+    let mut worst_scale = 0.0f64;
+    for (a, b) in original.structures.iter().zip(&recaptured.structures) {
+        assert_eq!(
+            a.map_object_id, b.map_object_id,
+            "a placed base must recapture in the order it was placed"
+        );
+        let (p, q) = (&a.relative_transform.translation, &b.relative_transform.translation);
+        worst = worst
+            .max((p.x.0 - q.x.0).abs())
+            .max((p.y.0 - q.y.0).abs())
+            .max((p.z.0 - q.z.0).abs());
+
+        let (r, s) = (
+            quat_parts(&a.relative_transform.rotation),
+            quat_parts(&b.relative_transform.rotation),
+        );
+        worst_rotation = worst_rotation
+            .max((r.0 - s.0).abs())
+            .max((r.1 - s.1).abs())
+            .max((r.2 - s.2).abs())
+            .max((r.3 - s.3).abs());
+
+        let (u, v) = (&a.relative_transform.scale, &b.relative_transform.scale);
+        worst_scale = worst_scale
+            .max((u.x.0 - v.x.0).abs())
+            .max((u.y.0 - v.y.0).abs())
+            .max((u.z.0 - v.z.0).abs());
+    }
+    assert!(
+        worst < 0.1,
+        "every structure's offset from its anchor must survive the cycle, worst drift {worst} cm"
+    );
+    assert!(
+        worst_rotation < 1e-9,
+        "every structure's orientation must survive the cycle, worst drift {worst_rotation}"
+    );
+    assert!(
+        worst_scale < 1e-9,
+        "every structure's scale must survive the cycle, worst drift {worst_scale}"
+    );
+
+    // What the placement actually wrote, against offsets this test rotates
+    // itself. The cycle above is an inverse pair and cannot see a rotation that
+    // was dropped from both halves of it.
+    let placed = placed_world_transforms(&session, new_base_id);
+    assert_eq!(
+        placed.len(),
+        original.structures.len(),
+        "the placed base must own one map object per blueprint structure"
+    );
+    let (sin, cos) = PLACEMENT_YAW.sin_cos();
+    let mut worst_world = 0.0f64;
+    let mut worst_world_rotation = 0.0f64;
+    for (structure, world) in original.structures.iter().zip(&placed) {
+        let offset = &structure.relative_transform.translation;
+        let expected = (
+            PLACEMENT_X + cos * offset.x.0 - sin * offset.y.0,
+            PLACEMENT_Y + sin * offset.x.0 + cos * offset.y.0,
+            PLACEMENT_Z + offset.z.0,
+        );
+        worst_world = worst_world
+            .max((world.translation.x.0 - expected.0).abs())
+            .max((world.translation.y.0 - expected.1).abs())
+            .max((world.translation.z.0 - expected.2).abs());
+
+        let expected_rotation =
+            hamilton(anchor_quat, quat_parts(&structure.relative_transform.rotation));
+        let actual = quat_parts(&world.rotation);
+        worst_world_rotation = worst_world_rotation
+            .max((actual.0 - expected_rotation.0).abs())
+            .max((actual.1 - expected_rotation.1).abs())
+            .max((actual.2 - expected_rotation.2).abs())
+            .max((actual.3 - expected_rotation.3).abs());
+    }
+    assert!(
+        worst_world < 0.1,
+        "every placed structure must sit at its offset rotated into the anchor's frame, \
+         worst drift {worst_world} cm"
+    );
+    assert!(
+        worst_world_rotation < 1e-9,
+        "every placed structure must be turned with the anchor, \
+         worst drift {worst_world_rotation}"
+    );
+}
+
+/// Capture -> encode -> decode -> place -> serialize -> reparse, for BOTH
+/// encodings. Comparing encoded sizes is what let a `.psp` decode that produced
+/// zero typed structures pass while JSON produced every one of them, so this
+/// compares the typed struct census and then places what it decoded: a
+/// blueprint whose `Model.RawData` is an opaque byte array cannot be rebound to
+/// a base at all, and the placed base comes back empty.
+#[test]
+fn a_blueprint_decoded_from_either_encoding_still_places() {
+    let source = common::load_fixture_session("v1_relics");
+    let base_id = common::fixture_base_id(&source);
+    let original =
+        capture::capture(&source, base_id, CaptureOptions::full(), "Home").expect("capture");
+    let expected = typed_counts(&original);
+
+    assert_eq!(
+        original.structures.len(),
+        FIXTURE_BASE_STRUCTURES,
+        "setup: the fixture base's structure count"
+    );
+    assert_eq!(
+        expected.models, FIXTURE_BASE_STRUCTURES,
+        "setup: every captured structure must carry a typed Model.RawData"
+    );
+    assert!(
+        expected.concrete_models > 0 && expected.works > 0 && expected.characters > 0,
+        "setup: the fixture must carry typed structs of every kind, got {expected:?}"
+    );
+
+    for (label, decoded) in [
+        (
+            "psp",
+            gvas::from_psp_bytes(&gvas::to_psp_bytes(&original).expect("psp encode"))
+                .expect("psp decode"),
+        ),
+        (
+            "json",
+            gvas::from_json(&gvas::to_json(&original).expect("json encode")).expect("json decode"),
+        ),
+    ] {
+        assert_eq!(
+            typed_counts(&decoded),
+            expected,
+            "{label}: the decode must keep every typed Palworld struct"
+        );
+
+        let mut target = common::load_fixture_session("v1_relics");
+        let guild_id = common::fixture_guild_id(&target);
+        let owner = common::fixture_player_uid(&target);
+        let objects_before = common::all_map_object_instance_ids(&target).len();
+
+        let result = place::place(
+            &mut target,
+            &decoded,
+            &new_base_request(anchor_far_from_everything(), guild_id, owner),
+            &common::game_data(),
+        )
+        .unwrap_or_else(|error| panic!("{label}: a decoded blueprint must still place: {error}"));
+        let new_base_id = result.base_id.expect("new base id");
+        assert_eq!(
+            result.structures_placed as usize,
+            FIXTURE_BASE_STRUCTURES,
+            "{label}: every structure must be placed"
+        );
+
+        let bytes = target.level_sav_bytes().unwrap_or_else(|error| {
+            panic!("{label}: the destination must still serialize: {error}")
+        });
+        let reparsed = psp_core::savio::read_sav_bytes(&bytes)
+            .unwrap_or_else(|error| panic!("{label}: the written level must parse back: {error}"));
+        let reloaded =
+            SaveSession::new_for_tests(psp_core::session::SaveKind::InMemory, reparsed);
+
+        assert_eq!(
+            common::all_map_object_instance_ids(&reloaded).len(),
+            objects_before + FIXTURE_BASE_STRUCTURES,
+            "{label}: every placed structure must survive the serialize/reparse round trip"
+        );
+        assert_eq!(
+            psp_core::domain::guild::base_structures(&reloaded, new_base_id).len(),
+            FIXTURE_BASE_STRUCTURES,
+            "{label}: every placed structure must be bound to the base the placement founded"
+        );
+    }
 }
 

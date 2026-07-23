@@ -15,6 +15,9 @@ cityhasher = { workspace = true }
 
 [dev-dependencies]
 tempfile = { workspace = true }
+# The integration tests link psp-core as an external crate, so `cfg(test)` does
+# not reach it; this is what makes the `test-fixtures` surface visible to them.
+psp-core = { path = ".", features = ["test-fixtures"] }
 
 [features]
 test-fixtures = []

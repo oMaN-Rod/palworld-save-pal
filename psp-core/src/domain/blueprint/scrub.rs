@@ -5,7 +5,7 @@
 
 use uuid::Uuid;
 
-use super::BaseBlueprint;
+use super::{capture, BaseBlueprint, CaptureOptions};
 use crate::domain::world;
 use crate::props;
 use crate::ue::games::palworld::{PalMapConcreteModelModuleData, PalMapConcreteModelVariant};
@@ -89,39 +89,28 @@ fn scrub_concrete_variant(variant: &mut PalMapConcreteModelVariant<crate::ue::Ar
 }
 
 /// Zeroes `player_uid` on every `PalPlayerLockInfo` inside a `PasswordLock`
-/// module. Runs unconditionally, regardless of what `CaptureOptions` asked
-/// for: `capture::clear_access_config` also drops the whole lock when the
-/// user did not request access config, but this is the backstop that must
-/// hold on every preset, including ones that keep the lock.
-fn scrub_module_map(properties: &mut Properties) {
-    let Some(concrete) = properties
-        .0
-        .get_mut(&PropertyKey::from("ConcreteModel"))
-        .and_then(props::struct_props_mut)
-    else {
-        return;
-    };
-    let Some(module_entries) = concrete
-        .0
-        .get_mut(&PropertyKey::from("ModuleMap"))
-        .and_then(props::map_entries_mut)
-    else {
-        return;
-    };
-    for module in module_entries {
-        let Some(module_props) = props::struct_props_mut(&mut module.value) else {
-            continue;
-        };
-        if let Some(Property::Struct(StructValue::Game(PalStruct::MapConcreteModelModule(raw)))) =
-            module_props.0.get_mut(&PropertyKey::from("RawData"))
+/// module, and clears the lock's own `password` unless the capture is a full
+/// snapshot. The uid scrub runs unconditionally, regardless of what
+/// `CaptureOptions` asked for: `capture::clear_access_config` also drops the
+/// whole lock when the user did not request access config, but this is the
+/// backstop that must hold on every preset, including ones that keep the lock.
+///
+/// The password is a secret the source save's players share, and a blueprint is
+/// a file its author hands to strangers, so `configured` -- which keeps the
+/// lock -- must not keep what opens it.
+fn scrub_module_map(properties: &mut Properties, keep_password: bool) {
+    capture::for_each_module_raw_mut(properties, |raw| {
+        if let PalMapConcreteModelModuleData::PasswordLock { password, player_infos, .. } =
+            &mut raw.data
         {
-            if let PalMapConcreteModelModuleData::PasswordLock { player_infos, .. } = &mut raw.data {
-                for info in player_infos {
-                    info.player_uid = zero();
-                }
+            for info in player_infos {
+                info.player_uid = zero();
+            }
+            if !keep_password {
+                password.clear();
             }
         }
-    }
+    });
 }
 
 fn scrub_concrete(properties: &mut Properties) {
@@ -160,14 +149,25 @@ fn scrub_character_container_entry(entry: &mut MapEntry) {
     }
 }
 
-/// Zeroes a `CharacterSaveParameterMap` entry's key `PlayerUId`, the
-/// `SaveParameter` bag's `OwnerPlayerUId`, and clears `OldOwnerPlayerUIds`.
+/// Zeroes a `CharacterSaveParameterMap` entry's key `PlayerUId`, the typed
+/// `PalCharacterData.group_id`, the `SaveParameter` bag's `OwnerPlayerUId` and
+/// `LastNickNameModifierPlayerUid`, and clears `OldOwnerPlayerUIds`.
 fn scrub_character_entry(entry: &mut MapEntry) {
     world::set_entry_player_uid(entry, Uuid::nil());
+    if let Some(data) = world::entry_character_data_mut(entry) {
+        data.group_id = zero();
+    }
     let Some(save_parameter) = world::entry_save_parameter_mut(entry) else {
         return;
     };
     save_parameter.insert("OwnerPlayerUId", props::guid_property(Uuid::nil()));
+    // Only a pal someone renamed carries this, so it is overwritten in place
+    // rather than inserted: a property the entry never held has no write schema
+    // in the destination, and adding one would break the save on write.
+    let last_modifier = PropertyKey::from("LastNickNameModifierPlayerUid");
+    if save_parameter.0.contains_key(&last_modifier) {
+        save_parameter.insert("LastNickNameModifierPlayerUid", props::guid_property(Uuid::nil()));
+    }
     if let Some(Property::Array(ValueVec::Struct(values))) =
         save_parameter.0.get_mut(&PropertyKey::from("OldOwnerPlayerUIds"))
     {
@@ -186,10 +186,11 @@ fn scrub_base_camp(base_camp: &mut Properties) {
 }
 
 pub fn scrub_blueprint(blueprint: &mut BaseBlueprint) {
+    let keep_password = blueprint.header.manifest == CaptureOptions::full();
     for structure in &mut blueprint.structures {
         scrub_model(&mut structure.properties);
         scrub_concrete(&mut structure.properties);
-        scrub_module_map(&mut structure.properties);
+        scrub_module_map(&mut structure.properties, keep_password);
     }
     for entry in &mut blueprint.character_containers {
         scrub_character_container_entry(entry);

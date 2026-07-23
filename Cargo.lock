@@ -3486,6 +3486,7 @@ version = "1.2.0"
 dependencies = [
  "chrono",
  "cityhasher",
+ "psp-core",
  "serde",
  "serde_json",
  "tempfile",
