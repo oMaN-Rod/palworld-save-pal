@@ -8,6 +8,7 @@
 	import DungeonPopup from './DungeonPopup.svelte';
 	import BossPopup from './BossPopup.svelte';
 	import PalPopup from './PalPopup.svelte';
+	import StructurePopup from './StructurePopup.svelte';
 
 	let { type, data, guildName }: { type: MapFeatureType; data: any; guildName?: string } = $props();
 </script>
@@ -30,4 +31,6 @@
 	<PalPopup point={data} isPredator={false} />
 {:else if type === 'predator_pal'}
 	<PalPopup point={data} isPredator={true} />
+{:else if type === 'structure' && data}
+	<StructurePopup structure={data} />
 {/if}

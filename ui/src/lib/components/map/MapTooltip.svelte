@@ -8,6 +8,7 @@
 	import DungeonHover from './DungeonHover.svelte';
 	import BossHover from './BossHover.svelte';
 	import PalHover from './PalHover.svelte';
+	import StructureHover from './StructureHover.svelte';
 
 	let { type, data, guildName }: { type: MapFeatureType; data: any; guildName?: string } = $props();
 </script>
@@ -30,4 +31,6 @@
 	<PalHover point={data} isPredator={false} />
 {:else if type === 'predator_pal'}
 	<PalHover point={data} isPredator={true} />
+{:else if type === 'structure' && data}
+	<StructureHover structure={data} />
 {/if}

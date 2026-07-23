@@ -31,7 +31,8 @@ export type MapFeatureType =
 	| 'dungeon'
 	| 'boss'
 	| 'alpha_pal'
-	| 'predator_pal';
+	| 'predator_pal'
+	| 'structure';
 
 export type MapFeatureProps = {
 	key: string;
@@ -64,9 +65,9 @@ export type PointFC = { type: 'FeatureCollection'; features: PointFeature[] };
 export type PolygonFC = { type: 'FeatureCollection'; features: PolygonFeature[] };
 export type LineFC = { type: 'FeatureCollection'; features: LineFeature[] };
 
-type StructureFeature = {
+export type StructureFeature = {
 	type: 'Feature';
-	id: number;
+	id?: string;
 	geometry: { type: 'Polygon'; coordinates: [number, number][][] };
 	properties: { key: string; type: 'structure'; typeA: string; b: number; h: number };
 };
@@ -293,7 +294,7 @@ export function buildStructureFC(
 	baseCampZ: number,
 	area: MapArea
 ): StructureFC {
-	const features = structures.map((s, index) => {
+	const features = structures.map((s) => {
 		const fp = footprints[s.map_object_id] ?? DEFAULT_STRUCTURE_FOOTPRINT;
 		const cos = Math.cos(s.yaw);
 		const sin = Math.sin(s.yaw);
@@ -318,7 +319,6 @@ export function buildStructureFC(
 
 		return {
 			type: 'Feature' as const,
-			id: index,
 			geometry: { type: 'Polygon' as const, coordinates: [ring] },
 			properties: {
 				key: s.instance_id,
@@ -331,4 +331,16 @@ export function buildStructureFC(
 	});
 
 	return { type: 'FeatureCollection', features };
+}
+
+export function structureCentroid(feature: StructureFeature): [number, number] {
+	// The ring is closed: its 5th point duplicates the 1st, so it must be excluded from the mean.
+	const ring = feature.geometry.coordinates[0].slice(0, 4);
+	let x = 0;
+	let y = 0;
+	for (const [lng, lat] of ring) {
+		x += lng;
+		y += lat;
+	}
+	return [x / ring.length, y / ring.length];
 }

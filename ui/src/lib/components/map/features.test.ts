@@ -8,6 +8,7 @@ import {
 	buildRelicFC,
 	buildStructureFC,
 	emptyFC,
+	structureCentroid,
 	type StructureFC
 } from './features';
 import type { MapObject, MapUnlockPoint, RelicPoint } from '$types';
@@ -263,5 +264,46 @@ describe('buildStructureFC', () => {
 
 		expect(fc.features).toHaveLength(1);
 		expect(fc.features[0].properties.typeA).toBe('Other');
+	});
+});
+
+describe('structureCentroid', () => {
+	it('returns the mean of the ring corners, ignoring the closing point', () => {
+		const fc = buildStructureFC([structure()], { Box: footprint }, 1000, 'MainMap');
+		const [lng, lat] = structureCentroid(fc.features[0]);
+		const ring = fc.features[0].geometry.coordinates[0].slice(0, 4);
+		const mx = ring.reduce((a, [x]) => a + x, 0) / 4;
+		const my = ring.reduce((a, [, y]) => a + y, 0) / 4;
+		expect(lng).toBeCloseTo(mx, 12);
+		expect(lat).toBeCloseTo(my, 12);
+	});
+
+	it('sits inside the footprint it describes', () => {
+		const fc = buildStructureFC([structure()], { Box: footprint }, 1000, 'MainMap');
+		const ring = fc.features[0].geometry.coordinates[0];
+		const [lng, lat] = structureCentroid(fc.features[0]);
+		const xs = ring.map(([x]) => x);
+		const ys = ring.map(([, y]) => y);
+		expect(lng).toBeGreaterThan(Math.min(...xs));
+		expect(lng).toBeLessThan(Math.max(...xs));
+		expect(lat).toBeGreaterThan(Math.min(...ys));
+		expect(lat).toBeLessThan(Math.max(...ys));
+	});
+});
+
+describe('buildStructureFC identity', () => {
+	it('does not assign positional ids, so promoteId can own identity', () => {
+		const fc = buildStructureFC([structure(), structure({ instance_id: 'i2' })], { Box: footprint }, 1000, 'MainMap');
+		for (const f of fc.features) expect(f.id).toBeUndefined();
+	});
+
+	it('keys every feature on its instance id', () => {
+		const fc = buildStructureFC(
+			[structure({ instance_id: 'aaa' }), structure({ instance_id: 'bbb' })],
+			{ Box: footprint },
+			1000,
+			'MainMap'
+		);
+		expect(fc.features.map((f) => f.properties.key)).toEqual(['aaa', 'bbb']);
 	});
 });

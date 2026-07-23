@@ -1,10 +1,12 @@
 <script module lang="ts">
 	const HOVER_STATE = { hover: true };
+	const STRUCTURE_MIN_ZOOM = 5;
 </script>
 
 <script lang="ts">
 	import { onMount, untrack } from 'svelte';
 	import type maplibregl from 'maplibre-gl';
+	import type { FilterSpecification } from 'maplibre-gl';
 	import type { ExpressionSpecification } from '@maplibre/maplibre-gl-style-spec';
 	import {
 		Map as MLMap,
@@ -43,8 +45,10 @@
 		buildRelicFC,
 		buildStructureFC,
 		emptyFC,
+		structureCentroid,
 		type MapFeatureType,
-		type StructureFC
+		type StructureFC,
+		type StructureFeature
 	} from './features';
 	import { PAL_BORDER_ALPHA, PAL_BORDER_PREDATOR, renderPalIcon, staticIconUrls } from './icons';
 	import { palIconId } from './iconIds';
@@ -58,12 +62,14 @@
 		relicData,
 		bosses,
 		palsData,
-		baseStructuresData
+		baseStructuresData,
+		buildingsData
 	} from '$lib/data';
 	import { assetLoader } from '$utils';
 	import MapTooltip from './MapTooltip.svelte';
 	import MapPopup from './MapPopup.svelte';
 	import Toggle3dControl from './Toggle3dControl.svelte';
+	import StructureFilterControl from './StructureFilterControl.svelte';
 	import type { MapUnlockPoint, RelicPoint } from '$types';
 	import * as m from '$i18n/messages';
 	import 'maplibre-gl/dist/maplibre-gl.css';
@@ -85,7 +91,9 @@
 		showPredatorPals = true,
 		showLabels = true,
 		show3d = false,
+		structureTypes = {},
 		onToggle3d,
+		onToggleStructureType,
 		onEditBase,
 		onToggleFastTravel,
 		onToggleRelic,
@@ -110,7 +118,10 @@
 		showPredatorPals?: boolean;
 		showLabels?: boolean;
 		show3d?: boolean;
+		/** Per-structure-type visibility; a missing key means visible. */
+		structureTypes?: Record<string, boolean>;
 		onToggle3d?: () => void;
+		onToggleStructureType?: (type: string) => void;
 		onEditBase?: (base: any) => void;
 		onToggleFastTravel?: (point: MapUnlockPoint) => void;
 		onToggleRelic?: (point: RelicPoint) => void;
@@ -250,6 +261,13 @@
 		for (const p of predatorPalPoints)
 			table.set(`predator_pal:predator_pal:${p.x}:${p.y}`, { data: p });
 		for (const b of bossPoints) table.set(`boss:${b.rowKey}`, { data: b });
+		if (show3d) {
+			for (const { base } of bases) {
+				for (const s of baseStructuresData.for(base.id)) {
+					table.set(`structure:${s.instance_id}`, { data: s });
+				}
+			}
+		}
 		table.set('origin:origin', { data: null });
 		return table;
 	});
@@ -300,7 +318,7 @@
 		type: MapFeatureType;
 		key: string;
 		source: string;
-		id: number;
+		id: string | number;
 		point: ScreenPoint | null;
 	} | null>(null);
 	let selected = $state<{
@@ -319,7 +337,11 @@
 
 	function featureLngLat(feature: maplibregl.MapGeoJSONFeature): [number, number] | null {
 		const geometry = feature.geometry;
-		return geometry.type === 'Point' ? (geometry.coordinates as [number, number]) : null;
+		if (geometry.type === 'Point') return geometry.coordinates as [number, number];
+		if (geometry.type === 'Polygon') {
+			return structureCentroid(feature as unknown as StructureFeature);
+		}
+		return null;
 	}
 
 	function projectLngLat(lngLat: [number, number]): ScreenPoint | null {
@@ -336,7 +358,8 @@
 		'dungeon-icons',
 		'boss-icons',
 		'alpha-icons',
-		'predator-icons'
+		'predator-icons',
+		'structure-extrusions'
 	];
 
 	function topFeatureAt(ev: maplibregl.MapMouseEvent, layerIds: string[]) {
@@ -356,7 +379,7 @@
 		const top = topFeatureAt(ev, INTERACTIVE_LAYERS);
 		if (top) {
 			const source = top.source;
-			const id = Number(top.id);
+			const id = top.id as string | number;
 			if (hovered?.source !== source || hovered?.id !== id) {
 				const lngLat = featureLngLat(top);
 				hovered = {
@@ -431,12 +454,13 @@
 	const verticalScale = $derived(verticalScaleFactor(center[1], cmPerPx(area)));
 
 	$effect(() => {
-		if (!show3d || zoom < 8) return;
+		if (!show3d || zoom < STRUCTURE_MIN_ZOOM) return;
 		const instance = map;
 		if (!instance) return;
 		void center;
 		const bounds = instance.getBounds();
 		baseStructuresData.loadFootprints();
+		buildingsData.ensureLoaded().catch(() => {});
 		for (const { base } of bases) {
 			const loc = base.location;
 			if (!loc) continue;
@@ -455,7 +479,7 @@
 			const structures = baseStructuresData.for(base.id);
 			if (structures.length === 0) continue;
 			const fc = buildStructureFC(structures, baseStructuresData.footprints, loc.z, area);
-			for (const feature of fc.features) features.push({ ...feature, id: features.length });
+			features.push(...fc.features);
 		}
 		return { type: 'FeatureCollection', features };
 	});
@@ -479,11 +503,52 @@
 	});
 
 	const structureColor: ExpressionSpecification = [
-		'match',
-		['get', 'typeA'],
-		...(Object.entries(STRUCTURE_COLORS).flat() as [string, string, ...string[]]),
-		STRUCTURE_COLORS.Other
+		'case',
+		['boolean', ['feature-state', 'hover'], false],
+		'#ffffff',
+		[
+			'match',
+			['get', 'typeA'],
+			...(Object.entries(STRUCTURE_COLORS).flat() as [string, string, ...string[]]),
+			STRUCTURE_COLORS.Other
+		]
 	];
+
+	const structureTypeList = Object.keys(STRUCTURE_COLORS);
+	let structureFilterOpen = $state(false);
+
+	const structureFilter = $derived.by<FilterSpecification | undefined>(() => {
+		const hidden = Object.entries(structureTypes)
+			.filter(([, visible]) => visible === false)
+			.map(([type]) => type);
+		if (hidden.length === 0) return undefined;
+		return ['!', ['in', ['get', 'typeA'], ['literal', hidden]]];
+	});
+
+	// A selected/hovered structure can stop being rendered three ways - 3D toggled off,
+	// its type filtered out, or the underlying data reset by a save load - so both refs
+	// are re-validated together whenever any of those can happen.
+	$effect(() => {
+		if (!show3d) {
+			structureFilterOpen = false;
+			if (selected?.type === 'structure') selected = null;
+			if (hovered?.type === 'structure') hovered = null;
+			return;
+		}
+		const structureType = (key: string) => {
+			const data = byKey.get(`structure:${key}`)?.data;
+			if (!data) return undefined;
+			return baseStructuresData.footprints[data.map_object_id]?.typeA ?? 'Other';
+		};
+		if (selected?.type === 'structure') {
+			const type = structureType(selected.key);
+			if (!type || structureTypes[type] === false) selected = null;
+		}
+		if (hovered?.type === 'structure') {
+			const type = structureType(hovered.key);
+			if (!type || structureTypes[type] === false) hovered = null;
+		}
+	});
 
 </script>
 
@@ -516,6 +581,17 @@
 			title="3D {m.structures()}"
 			onchange={onToggle3d}
 		/>
+		{#if show3d}
+			<StructureFilterControl
+				position="top-right"
+				types={structureTypeList}
+				enabled={structureTypes}
+				open={structureFilterOpen}
+				onToggleOpen={() => (structureFilterOpen = !structureFilterOpen)}
+				ontoggle={(type) => onToggleStructureType?.(type)}
+				title={m.structure_types()}
+			/>
+		{/if}
 
 		<ImageLoader images={staticIcons}>
 			{#each MAP_AREA_ORDER as candidate}
@@ -581,11 +657,12 @@
 			<!-- Declared after `origin-icons` so the anchor exists at mount, and anchored to it so
 			     toggling 3D on at runtime inserts beneath the icon layers instead of on top. -->
 			{#if show3d}
-				<Source.GeoJSON id="structure-src" data={structureFC}>
+				<Source.GeoJSON id="structure-src" data={structureFC} promoteId="key">
 					<Layer.FillExtrusion
 						id="structure-extrusions"
 						beforeId="origin-icons"
-						minzoom={5}
+						minzoom={STRUCTURE_MIN_ZOOM}
+						filter={structureFilter}
 						paint={{
 							'fill-extrusion-color': structureColor,
 							'fill-extrusion-base': ['*', ['get', 'b'], verticalScale],
@@ -666,7 +743,7 @@
 						'icon-image': ['get', 'icon'],
 						'icon-allow-overlap': true,
 						'symbol-sort-key': ['case', ['get', 'collected'], 2, 1],
-						'icon-size': zoomScaledIconSize(0.3, 0.5)
+						'icon-size': zoomScaledIconSize(0.4, 0.6)
 					}}
 					paint={{
 						'icon-opacity': [
@@ -860,7 +937,7 @@
 
 	.map-actions {
 		position: absolute;
-		bottom: 56px;
+		bottom: 72px;
 		right: 8px;
 		display: flex;
 		flex-direction: column;

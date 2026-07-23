@@ -18,10 +18,21 @@
 	import Users from '@lucide/svelte/icons/users';
 	import MapIcon from '@lucide/svelte/icons/map';
 	import Building from '@lucide/svelte/icons/building';
+	import PanelLeft from '@lucide/svelte/icons/panel-left';
+	import PanelLeftClose from '@lucide/svelte/icons/panel-left-close';
+	import { fly } from 'svelte/transition';
+	import { cubicOut } from 'svelte/easing';
 	import { mapObjects, fastTravelPoints, relics, relicData, bosses } from '$lib/data';
 	import type maplibregl from 'maplibre-gl';
 	import { pixelToLngLat } from '$components/map/mercator';
-	import type { Base, FastTravelPoint, GuildSummary, MapUnlockPoint, Player, RelicPoint } from '$types';
+	import type {
+		Base,
+		FastTravelPoint,
+		GuildSummary,
+		MapUnlockPoint,
+		Player,
+		RelicPoint
+	} from '$types';
 	import { assetLoader } from '$utils';
 	import { EditBaseModal } from '$components/modals';
 	import { EntryState, MessageType } from '$types';
@@ -32,6 +43,7 @@
 	import { SectionHeader } from '$components/ui';
 	import * as m from '$i18n/messages';
 	import { c, p } from '$lib/utils/commonTranslations';
+	import { Eye, EyeOff } from '@lucide/svelte';
 
 	const appState = getAppState();
 	const modal = getModalState();
@@ -48,12 +60,15 @@
 		showRelics: boolean;
 		/** Per-relic-type visibility; a missing key means visible. */
 		relicTypes: Record<string, boolean>;
+		/** Per-structure-type visibility; a missing key means visible. */
+		structureTypes: Record<string, boolean>;
 		showDungeons: boolean;
 		showBosses: boolean;
 		showAlphaPals: boolean;
 		showPredatorPals: boolean;
 		showLabels: boolean;
-		show3d: boolean;
+		enable3d: boolean;
+		panelOpen: boolean;
 	};
 
 	const mapOptionsState = persistedState<MapOptions>('mapOptions', {
@@ -65,15 +80,19 @@
 		showWatchtower: true,
 		showRelics: true,
 		relicTypes: {},
+		structureTypes: {},
 		showDungeons: true,
 		showBosses: true,
 		showAlphaPals: true,
 		showPredatorPals: true,
 		showLabels: true,
-		show3d: false
+		enable3d: false,
+		panelOpen: true
 	});
 	const mapOptions = $derived(mapOptionsState.current);
 	const activeArea = $derived(mapOptions.area ?? DEFAULT_MAP_AREA);
+	const panelOpen = $derived(mapOptions.panelOpen ?? true);
+	const PANEL_W = 420;
 	const toast = getToastState();
 	let section = $state(['players']);
 	let map: maplibregl.Map | undefined = $state(undefined);
@@ -202,9 +221,15 @@
 		panTo(player.location.x, player.location.y);
 	}
 
+	// PlayerList re-fires onselect every time it mounts, and the options panel now
+	// mounts on each open, so the automatic pan is limited to once per player. The
+	// per-player focus button calls handlePlayerFocus directly and always re-centres.
+	let autoPannedUid: string | undefined;
+
 	function handlePlayerLoaded(player: Player) {
 		selectedPlayerUid = player.uid;
-		if (player.location) {
+		if (player.location && autoPannedUid !== player.uid) {
+			autoPannedUid = player.uid;
 			handlePlayerFocus(player);
 		}
 	}
@@ -307,6 +332,11 @@
 		player.state = EntryState.MODIFIED;
 	}
 
+	function handleToggleStructureType(type: string) {
+		const visible = mapOptions.structureTypes?.[type] !== false;
+		mapOptions.structureTypes = { ...(mapOptions.structureTypes ?? {}), [type]: !visible };
+	}
+
 	function unlockAllWhere(predicate: (point: FastTravelPoint) => boolean) {
 		const player = appState.selectedPlayer;
 		if (!player) return;
@@ -365,6 +395,19 @@
 		}
 	}
 
+	async function handleToggleAll(show: boolean) {
+		function toggleRecursive(obj: Record<string, any>) {
+			for (const key in obj) {
+				if (typeof obj[key] === 'boolean' && key.includes('show')) {
+					obj[key] = show;
+				} else if (obj[key] !== null && typeof obj[key] === 'object') {
+					toggleRecursive(obj[key]);
+				}
+			}
+		}
+		toggleRecursive(mapOptions);
+	}
+
 	let loadingComplete = $state(false);
 	let dismissLoading = $state(false);
 	let MapComponent: typeof import('$components/map/Map.svelte').default | undefined = $state();
@@ -406,328 +449,374 @@
 <div class="relative h-full overflow-hidden">
 	{#if dismissLoading || !loadingComplete}
 		<Loading
-			loadingComplete={loadingComplete}
-			label={m.initializing_entity({entity: m.map()})}
+			{loadingComplete}
+			label={m.initializing_entity({ entity: m.map() })}
 			icon={MapIcon}
-			iconSize={24} />
+			iconSize={24}
+		/>
 	{/if}
 
-	<div class="grid h-full grid-cols-[420px_1fr] gap-2" class:page-blurred={!loadingComplete}>
-		<div class="flex flex-col gap-4 p-4">
-			<div class="flex flex-col gap-4">
-				<div class="flex flex-col gap-2">
-					<div class="flex items-center">
-						<SectionHeader text={m.map_options()}>
-							{#snippet action()}
-								<Button
-									variant="ghost"
-									size="sm"
-									class="flex items-center gap-2"
-									onclick={handleUnlockMap}
-								>
-									<Unlock class="h-4 w-4" />
-									<span>{m.unlock_map()}</span>
-								</Button>
-							{/snippet}
-						</SectionHeader>
-					</div>
-					<div class="grid grid-cols-2 gap-2">
-						<button
-							class="flex items-center space-x-2 {mapOptions.showOrigin ? '' : 'opacity-25'}"
-							onclick={() => (mapOptions.showOrigin = !mapOptions.showOrigin)}
-						>
-							<Target class="mr-2 h-6 w-6" />
-							<span>{m.origin()}</span>
-						</button>
-						<button
-							class="flex items-center space-x-2 {mapOptions.showFastTravel ? '' : 'opacity-25'} "
-							onclick={() => (mapOptions.showFastTravel = !mapOptions.showFastTravel)}
-						>
-							<img src={mapImg.fastTravel} alt={m.fast_travel()} class="mr-2 h-6 w-6" />
-							<span>{m.fast_travel()}</span>
-							<span class="text-surface-500 text-xs">
-								{fastTravelUnlockedCount !== undefined
-									? `${fastTravelUnlockedCount}/${fastTravelCount}`
-									: fastTravelCount}
-							</span>
-						</button>
-						<button
-							class="flex items-center space-x-2 {(mapOptions.showWatchtower ?? true) ? '' : 'opacity-25'} "
-							onclick={() => (mapOptions.showWatchtower = !(mapOptions.showWatchtower ?? true))}
-						>
-							<img src={mapImg.watchTower} alt={m.watchtower()} class="mr-2 h-6 w-6" />
-							<span>{m.watchtower()}</span>
-							<span class="text-surface-500 text-xs">
-								{watchtowerUnlockedCount !== undefined
-									? `${watchtowerUnlockedCount}/${watchtowerCount}`
-									: watchtowerCount}
-							</span>
-						</button>
-						<button
-							class="flex items-center space-x-2 {(mapOptions.showRelics ?? true)
-								? ''
-								: 'opacity-25'} "
-							onclick={() => (mapOptions.showRelics = !(mapOptions.showRelics ?? true))}
-						>
-							<img src={mapImg.effigy} alt={m.relics()} class="mr-2 h-6 w-6" />
-							<span>{m.relics()}</span>
-							<span class="text-surface-500 text-xs">
-								{appState.selectedPlayer
-									? `${relicCollectedCount}/${relicCount}`
-									: relicCount}
-							</span>
-						</button>
-						{#if appState.saveFile}
+	<div class="relative h-full" class:page-blurred={!loadingComplete}>
+		{#if panelOpen}
+			<aside
+				class="bg-surface-900/95 absolute top-2 bottom-2 left-2 z-10 flex w-[420px] flex-col gap-4 overflow-y-auto rounded-lg p-4 shadow-lg"
+				transition:fly={{ x: -(PANEL_W + 16), duration: 300, easing: cubicOut }}
+			>
+				<div class="flex flex-col gap-4">
+					<div class="flex flex-col gap-2">
+						<div class="flex items-center">
+							<SectionHeader text={m.map_options()}>
+								{#snippet action()}
+									<Button
+										variant="ghost"
+										size="sm"
+										class="flex items-center gap-2"
+										onclick={handleUnlockMap}
+									>
+										<Unlock class="h-4 w-4" />
+										<span>{m.unlock_map()}</span>
+									</Button>
+								{/snippet}
+							</SectionHeader>
+						</div>
+						
+						<div class="grid grid-cols-2 border-b-2 border-b-surface-800 pb-2">
 							<button
-								class="flex items-center space-x-2 {mapOptions.showPlayers ? '' : 'opacity-25'}"
-								onclick={() => (mapOptions.showPlayers = !mapOptions.showPlayers)}
+								class="flex items-center space-x-2"
+								onclick={() => handleToggleAll(true)}
 							>
-								<img src={mapImg.player} alt={m.player({ count: 2 })} class="mr-2 h-6 w-6" />
-								<span>{m.player({ count: 1 })}</span>
-								<span class="text-surface-500 text-xs">{loadedPlayerCount}/{totalPlayerCount}</span>
+								<Eye class="mr-2 h-4 w-4" />
+								<span class="text-sm">Show All</span>
 							</button>
 							<button
-								class="flex items-center space-x-2 {mapOptions.showBases ? '' : 'opacity-25'}"
-								onclick={() => (mapOptions.showBases = !mapOptions.showBases)}
+								class="flex items-center space-x-2"
+								onclick={() => handleToggleAll(false)}
 							>
-								<img src={mapImg.baseCamp} alt={m.base({ count: 2 })} class="mr-2 h-6 w-6" />
-								<span>{m.base({ count: 2 })}</span>
-								<span class="text-surface-500 text-xs">{loadedBaseCount}/{totalBaseCount}</span>
+								<EyeOff class="mr-2 h-4 w-4" />
+								<span class="text-sm">Hide All</span>
 							</button>
-						{/if}
-
-						<button
-							class="flex items-center space-x-2 {mapOptions.showDungeons ? '' : 'opacity-25'}"
-							onclick={() => (mapOptions.showDungeons = !mapOptions.showDungeons)}
-						>
-							<img src={mapImg.dungeon} alt={m.dungeons()} class="mr-2 h-6 w-6" />
-							<span>{m.dungeons()}</span>
-							<span class="text-surface-500 text-xs">{dungeonCount}</span>
-						</button>
-						<button
-							class="flex items-center space-x-2 {(mapOptions.showBosses ?? true) ? '' : 'opacity-25'}"
-							onclick={() => (mapOptions.showBosses = !(mapOptions.showBosses ?? true))}
-						>
-							<img src={mapImg.boss} alt={m.bosses()} class="mr-2 h-6 w-6" />
-							<span>{m.bosses()}</span>
-							<span class="text-surface-500 text-xs">{bossCount}</span>
-						</button>
-						<button
-							class="flex items-center space-x-2 {mapOptions.showAlphaPals ? '' : 'opacity-25'}"
-							onclick={() => (mapOptions.showAlphaPals = !mapOptions.showAlphaPals)}
-						>
-							<img src={anubisImg} alt={m.alpha_pal(p.pals)} class="mr-2 h-6 w-6" />
-							<span>{m.alpha_pal(p.pals)}</span>
-							<span class="text-surface-500 text-xs">{alphaPalCount}</span>
-						</button>
-						<button
-							class="flex items-center space-x-2 {mapOptions.showPredatorPals ? '' : 'opacity-25'}"
-							onclick={() => (mapOptions.showPredatorPals = !mapOptions.showPredatorPals)}
-						>
-							<img src={starryonImg} alt={m.predator_pals(p.pals)} class="mr-2 h-6 w-6" />
-							<span>{m.predator_pals(p.pals)}</span>
-							<span class="text-surface-500 text-xs">{predatorPalCount}</span>
-						</button>
-						<button
-							class="flex items-center space-x-2 {(mapOptions.showLabels ?? true) ? '' : 'opacity-25'}"
-							onclick={() => (mapOptions.showLabels = !(mapOptions.showLabels ?? true))}
-						>
-							<img src={mapImg.fastTravel} alt={m.map_labels()} class="mr-2 h-6 w-6" />
-							<span>{m.map_labels()}</span>
-						</button>
-					</div>
-					{#if (mapOptions.showRelics ?? true) && relicTypeList.length > 0}
-						<div class="border-surface-700 grid grid-cols-2 gap-2 rounded-sm border p-2">
-							{#each relicTypeList as relicType (relicType)}
-								{@const stats = relicTypeStats[relicType]}
+						</div>
+						<div class="grid grid-cols-2 gap-2">
+							<button
+								class="flex items-center space-x-2 {mapOptions.showOrigin ? '' : 'opacity-25'}"
+								onclick={() => (mapOptions.showOrigin = !mapOptions.showOrigin)}
+							>
+								<Target class="mr-2 h-6 w-6" />
+								<span>{m.origin()}</span>
+							</button>
+							<button
+								class="flex items-center space-x-2 {mapOptions.showFastTravel ? '' : 'opacity-25'} "
+								onclick={() => (mapOptions.showFastTravel = !mapOptions.showFastTravel)}
+							>
+								<img src={mapImg.fastTravel} alt={m.fast_travel()} class="mr-2 h-6 w-6" />
+								<span>{m.fast_travel()}</span>
+								<span class="text-surface-500 text-xs">
+									{fastTravelUnlockedCount !== undefined
+										? `${fastTravelUnlockedCount}/${fastTravelCount}`
+										: fastTravelCount}
+								</span>
+							</button>
+							<button
+								class="flex items-center space-x-2 {(mapOptions.showWatchtower ?? true)
+									? ''
+									: 'opacity-25'} "
+								onclick={() => (mapOptions.showWatchtower = !(mapOptions.showWatchtower ?? true))}
+							>
+								<img src={mapImg.watchTower} alt={m.watchtower()} class="mr-2 h-6 w-6" />
+								<span>{m.watchtower()}</span>
+								<span class="text-surface-500 text-xs">
+									{watchtowerUnlockedCount !== undefined
+										? `${watchtowerUnlockedCount}/${watchtowerCount}`
+										: watchtowerCount}
+								</span>
+							</button>
+							<button
+								class="flex items-center space-x-2 {(mapOptions.showRelics ?? true)
+									? ''
+									: 'opacity-25'} "
+								onclick={() => (mapOptions.showRelics = !(mapOptions.showRelics ?? true))}
+							>
+								<img src={mapImg.effigy} alt={m.relics()} class="mr-2 h-6 w-6" />
+								<span>{m.relics()}</span>
+								<span class="text-surface-500 text-xs">
+									{appState.selectedPlayer ? `${relicCollectedCount}/${relicCount}` : relicCount}
+								</span>
+							</button>
+							{#if appState.saveFile}
 								<button
-									class="flex items-center space-x-2 {isRelicTypeVisible(relicType)
-										? ''
-										: 'opacity-25'}"
-									onclick={() =>
-										(mapOptions.relicTypes = {
-											...(mapOptions.relicTypes ?? {}),
-											[relicType]: !isRelicTypeVisible(relicType)
-										})}
+									class="flex items-center space-x-2 {mapOptions.showPlayers ? '' : 'opacity-25'}"
+									onclick={() => (mapOptions.showPlayers = !mapOptions.showPlayers)}
 								>
-									<img
-										src={relicTypeIcon(relicType)}
-										alt={relicData.relicData[relicType]?.localized_name ?? relicType}
-										class="mr-1 h-5 w-5"
-									/>
-									<span class="truncate text-xs">
-										{relicData.relicData[relicType]?.localized_name ?? relicType}
-									</span>
-									<span class="text-surface-500 text-xs">
-										{appState.selectedPlayer
-											? `${stats.collected}/${stats.total}`
-											: stats.total}
-									</span>
+									<img src={mapImg.player} alt={m.player({ count: 2 })} class="mr-2 h-6 w-6" />
+									<span>{m.player({ count: 1 })}</span>
+									<span class="text-surface-500 text-xs"
+										>{loadedPlayerCount}/{totalPlayerCount}</span
+									>
 								</button>
-							{/each}
+								<button
+									class="flex items-center space-x-2 {mapOptions.showBases ? '' : 'opacity-25'}"
+									onclick={() => (mapOptions.showBases = !mapOptions.showBases)}
+								>
+									<img src={mapImg.baseCamp} alt={m.base({ count: 2 })} class="mr-2 h-6 w-6" />
+									<span>{m.base({ count: 2 })}</span>
+									<span class="text-surface-500 text-xs">{loadedBaseCount}/{totalBaseCount}</span>
+								</button>
+							{/if}
+
+							<button
+								class="flex items-center space-x-2 {mapOptions.showDungeons ? '' : 'opacity-25'}"
+								onclick={() => (mapOptions.showDungeons = !mapOptions.showDungeons)}
+							>
+								<img src={mapImg.dungeon} alt={m.dungeons()} class="mr-2 h-6 w-6" />
+								<span>{m.dungeons()}</span>
+								<span class="text-surface-500 text-xs">{dungeonCount}</span>
+							</button>
+							<button
+								class="flex items-center space-x-2 {(mapOptions.showBosses ?? true)
+									? ''
+									: 'opacity-25'}"
+								onclick={() => (mapOptions.showBosses = !(mapOptions.showBosses ?? true))}
+							>
+								<img src={mapImg.boss} alt={m.bosses()} class="mr-2 h-6 w-6" />
+								<span>{m.bosses()}</span>
+								<span class="text-surface-500 text-xs">{bossCount}</span>
+							</button>
+							<button
+								class="flex items-center space-x-2 {mapOptions.showAlphaPals ? '' : 'opacity-25'}"
+								onclick={() => (mapOptions.showAlphaPals = !mapOptions.showAlphaPals)}
+							>
+								<img src={anubisImg} alt={m.alpha_pal(p.pals)} class="mr-2 h-6 w-6" />
+								<span>{m.alpha_pal(p.pals)}</span>
+								<span class="text-surface-500 text-xs">{alphaPalCount}</span>
+							</button>
+							<button
+								class="flex items-center space-x-2 {mapOptions.showPredatorPals
+									? ''
+									: 'opacity-25'}"
+								onclick={() => (mapOptions.showPredatorPals = !mapOptions.showPredatorPals)}
+							>
+								<img src={starryonImg} alt={m.predator_pals(p.pals)} class="mr-2 h-6 w-6" />
+								<span>{m.predator_pals(p.pals)}</span>
+								<span class="text-surface-500 text-xs">{predatorPalCount}</span>
+							</button>
+							<button
+								class="flex items-center space-x-2 {(mapOptions.showLabels ?? true)
+									? ''
+									: 'opacity-25'}"
+								onclick={() => (mapOptions.showLabels = !(mapOptions.showLabels ?? true))}
+							>
+								<img src={mapImg.fastTravel} alt={m.map_labels()} class="mr-2 h-6 w-6" />
+								<span>{m.map_labels()}</span>
+							</button>
 						</div>
-					{/if}
-				</div>
-				{#if appState.saveFile}
-					<div class="flex flex-col gap-2">
-						<div class="flex items-center gap-2">
-							<Users class="h-4 w-4" />
-							<span class="text-sm font-medium">{m.load_player()}</span>
-						</div>
-						<PlayerList
-							selected={selectedPlayerUid}
-							onselect={handlePlayerLoaded}
-							redirect={false}
-						/>
-					</div>
-					<div class="flex flex-col gap-2">
-						<div class="flex items-center gap-2">
-							<Building class="h-4 w-4" />
-							<span class="text-sm font-medium">{m.load_guild_bases()}</span>
-						</div>
-						{#if appState.loadingGuild}
-							<div class="text-surface-400 my-2 flex items-center gap-2 px-3 py-2 text-sm">
-								<svg class="h-4 w-4 animate-spin" viewBox="0 0 24 24">
-									<circle
-										class="opacity-25"
-										cx="12"
-										cy="12"
-										r="10"
-										stroke="currentColor"
-										stroke-width="4"
-										fill="none"
-									></circle>
-									<path
-										class="opacity-75"
-										fill="currentColor"
-										d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-									></path>
-								</svg>
-								{m.loading_entity({ entity: m.guild({ count: 1 }) })}
+						{#if (mapOptions.showRelics ?? true) && relicTypeList.length > 0}
+							<div class="border-surface-700 grid grid-cols-2 gap-2 rounded-sm border p-2">
+								{#each relicTypeList as relicType (relicType)}
+									{@const stats = relicTypeStats[relicType]}
+									<button
+										class="flex items-center space-x-2 {isRelicTypeVisible(relicType)
+											? ''
+											: 'opacity-25'}"
+										onclick={() =>
+											(mapOptions.relicTypes = {
+												...(mapOptions.relicTypes ?? {}),
+												[relicType]: !isRelicTypeVisible(relicType)
+											})}
+									>
+										<img
+											src={relicTypeIcon(relicType)}
+											alt={relicData.relicData[relicType]?.localized_name ?? relicType}
+											class="mr-1 h-5 w-5"
+										/>
+										<span class="truncate text-xs">
+											{relicData.relicData[relicType]?.localized_name ?? relicType}
+										</span>
+										<span class="text-surface-500 text-xs">
+											{appState.selectedPlayer ? `${stats.collected}/${stats.total}` : stats.total}
+										</span>
+									</button>
+								{/each}
 							</div>
-						{:else}
-							<Combobox
-								value={selectedGuildId}
-								options={guildSelectOptions}
-								placeholder={m.select_entity({ entity: m.guild({ count: 1 }) })}
-								onChange={(value) => handleGuildSelect(value as string)}
-								selectClass="w-full"
-							/>
 						{/if}
-						<p class="text-surface-500 text-xs">{m.select_guild_to_load_bases()}</p>
 					</div>
-
-					<Accordion
-						value={section}
-						onValueChange={(e: ValueChangeDetails) => (section = e.value)}
-						collapsible
-					>
-						{#if mapOptions.showPlayers}
-							<Accordion.Item value="players" controlHover="hover:bg-secondary-500/25">
-								{#snippet control()}
-									<h2 class="text-lg font-bold">
-										{m.loaded_entity({ entity: m.player({ count: 2 }) })}
-									</h2>
-								{/snippet}
-								{#snippet panel()}
-									{#if loadedPlayerCount > 0}
-										<div class="max-h-64 space-y-2 overflow-y-auto">
-											{#each players as player}
-												{#if player.location}
-													{@const mapCoords = worldToMap(player.location.x, player.location.y)}
-													<button
-														class="bg-surface-800 hover:bg-secondary-500/25 w-full rounded-sm p-2 text-start"
-														onclick={() => handlePlayerFocus(player)}
-													>
-														<div class="truncate font-bold">{player.nickname}</div>
-														<div class="text-xs">
-															{m.level()}: {player.level} | {m.hp()}: {player.hp}
-														</div>
-														<div class="text-surface-400 text-xs">
-															{m.location()}: {Math.round(mapCoords.x)}, {Math.round(mapCoords.y)}
-														</div>
-														<div class="text-surface-400 text-xs">
-															{m.last_online()}: {new Date(
-																player.last_online_time
-															).toLocaleString()}
-														</div>
-													</button>
-												{/if}
-											{/each}
-										</div>
-									{:else}
-										<p class="text-surface-500 text-sm">
-											{m.no_players_loaded()}
-										</p>
-									{/if}
-								{/snippet}
-							</Accordion.Item>
-						{/if}
-						{#if mapOptions.showBases}
-							<Accordion.Item value="bases" controlHover="hover:bg-secondary-500/25">
-								{#snippet control()}
-									<h2 class="text-lg font-bold">
-										{m.loaded_entity({ entity: m.base({ count: 2 }) })}
-									</h2>
-								{/snippet}
-								{#snippet panel()}
-									{#if loadedBaseCount > 0}
-										<div class="max-h-64 space-y-2 overflow-y-auto">
-											{#each Object.values(bases) as base}
-												{#if base.location}
-													<button
-														class="bg-surface-800 hover:bg-secondary-500/25 mb-2 w-full rounded-sm p-2 text-start"
-														onclick={() => handleBaseFocus(base)}
-														oncontextmenu={(e) => {
-															e.preventDefault();
-															handleEditBase(base);
-														}}
-													>
-														<div class="truncate font-bold">{base.name}</div>
-														<div class="text-surface-400 text-xs">
-															{m.id()}: {base.id}
-														</div>
-														<div class="text-surface-400 text-xs">
-															{m.location()}: {worldToMap(base.location.x, base.location.y).x}, {worldToMap(
-																base.location.x,
-																base.location.y
-															).y}
-														</div>
-													</button>
-												{/if}
-											{/each}
-										</div>
-									{:else}
-										<p class="text-surface-500 text-sm">
-											{m.no_bases_loaded()}
-										</p>
-									{/if}
-								{/snippet}
-							</Accordion.Item>
-						{/if}
-					</Accordion>
-				{/if}
-
-				<div class="mt-auto flex flex-col gap-2">
-					<p class="text-surface-500 text-sm">{m.click_map_coordinates()}</p>
-					<div class="flex flex-col">
-						<div class="flex items-center gap-2">
-							<img src={staticIcons.leftClickIcon} alt="Left Click" class=" h-6 w-6" />
-							<span class="text-surface-500 text-xs">{m.left_click_focus()}</span>
+					{#if appState.saveFile}
+						<div class="flex flex-col gap-2">
+							<div class="flex items-center gap-2">
+								<Users class="h-4 w-4" />
+								<span class="text-sm font-medium">{m.load_player()}</span>
+							</div>
+							<PlayerList
+								selected={selectedPlayerUid}
+								onselect={handlePlayerLoaded}
+								redirect={false}
+							/>
 						</div>
-						<div class="flex items-center gap-2">
-							<img src={staticIcons.leftClickIcon} alt="Left Click" class=" h-6 w-6" />
-							<span class="text-surface-500 text-xs">{m.click_toggle_point()}</span>
+						<div class="flex flex-col gap-2">
+							<div class="flex items-center gap-2">
+								<Building class="h-4 w-4" />
+								<span class="text-sm font-medium">{m.load_guild_bases()}</span>
+							</div>
+							{#if appState.loadingGuild}
+								<div class="text-surface-400 my-2 flex items-center gap-2 px-3 py-2 text-sm">
+									<svg class="h-4 w-4 animate-spin" viewBox="0 0 24 24">
+										<circle
+											class="opacity-25"
+											cx="12"
+											cy="12"
+											r="10"
+											stroke="currentColor"
+											stroke-width="4"
+											fill="none"
+										></circle>
+										<path
+											class="opacity-75"
+											fill="currentColor"
+											d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+										></path>
+									</svg>
+									{m.loading_entity({ entity: m.guild({ count: 1 }) })}
+								</div>
+							{:else}
+								<Combobox
+									value={selectedGuildId}
+									options={guildSelectOptions}
+									placeholder={m.select_entity({ entity: m.guild({ count: 1 }) })}
+									onChange={(value) => handleGuildSelect(value as string)}
+									selectClass="w-full"
+								/>
+							{/if}
+							<p class="text-surface-500 text-xs">{m.select_guild_to_load_bases()}</p>
 						</div>
-						<div class="flex items-center gap-2">
-							<img src={staticIcons.rightClickIcon} alt="Right Click" class=" h-6 w-6" />
-							<span class="text-surface-500 text-xs">{m.right_click_edit_base()}</span>
+
+						<Accordion
+							value={section}
+							onValueChange={(e: ValueChangeDetails) => (section = e.value)}
+							collapsible
+						>
+							{#if mapOptions.showPlayers}
+								<Accordion.Item value="players" controlHover="hover:bg-secondary-500/25">
+									{#snippet control()}
+										<h2 class="text-lg font-bold">
+											{m.loaded_entity({ entity: m.player({ count: 2 }) })}
+										</h2>
+									{/snippet}
+									{#snippet panel()}
+										{#if loadedPlayerCount > 0}
+											<div class="max-h-64 space-y-2 overflow-y-auto">
+												{#each players as player}
+													{#if player.location}
+														{@const mapCoords = worldToMap(player.location.x, player.location.y)}
+														<button
+															class="bg-surface-800 hover:bg-secondary-500/25 w-full rounded-sm p-2 text-start"
+															onclick={() => handlePlayerFocus(player)}
+														>
+															<div class="truncate font-bold">{player.nickname}</div>
+															<div class="text-xs">
+																{m.level()}: {player.level} | {m.hp()}: {player.hp}
+															</div>
+															<div class="text-surface-400 text-xs">
+																{m.location()}: {Math.round(mapCoords.x)}, {Math.round(mapCoords.y)}
+															</div>
+															<div class="text-surface-400 text-xs">
+																{m.last_online()}: {new Date(
+																	player.last_online_time
+																).toLocaleString()}
+															</div>
+														</button>
+													{/if}
+												{/each}
+											</div>
+										{:else}
+											<p class="text-surface-500 text-sm">
+												{m.no_players_loaded()}
+											</p>
+										{/if}
+									{/snippet}
+								</Accordion.Item>
+							{/if}
+							{#if mapOptions.showBases}
+								<Accordion.Item value="bases" controlHover="hover:bg-secondary-500/25">
+									{#snippet control()}
+										<h2 class="text-lg font-bold">
+											{m.loaded_entity({ entity: m.base({ count: 2 }) })}
+										</h2>
+									{/snippet}
+									{#snippet panel()}
+										{#if loadedBaseCount > 0}
+											<div class="max-h-64 space-y-2 overflow-y-auto">
+												{#each Object.values(bases) as base}
+													{#if base.location}
+														<button
+															class="bg-surface-800 hover:bg-secondary-500/25 mb-2 w-full rounded-sm p-2 text-start"
+															onclick={() => handleBaseFocus(base)}
+															oncontextmenu={(e) => {
+																e.preventDefault();
+																handleEditBase(base);
+															}}
+														>
+															<div class="truncate font-bold">{base.name}</div>
+															<div class="text-surface-400 text-xs">
+																{m.id()}: {base.id}
+															</div>
+															<div class="text-surface-400 text-xs">
+																{m.location()}: {worldToMap(base.location.x, base.location.y).x}, {worldToMap(
+																	base.location.x,
+																	base.location.y
+																).y}
+															</div>
+														</button>
+													{/if}
+												{/each}
+											</div>
+										{:else}
+											<p class="text-surface-500 text-sm">
+												{m.no_bases_loaded()}
+											</p>
+										{/if}
+									{/snippet}
+								</Accordion.Item>
+							{/if}
+						</Accordion>
+					{/if}
+
+					<div class="mt-auto flex flex-col gap-2">
+						<p class="text-surface-500 text-sm">{m.click_map_coordinates()}</p>
+						<div class="flex flex-col">
+							<div class="flex items-center gap-2">
+								<img src={staticIcons.leftClickIcon} alt="Left Click" class=" h-6 w-6" />
+								<span class="text-surface-500 text-xs">{m.left_click_focus()}</span>
+							</div>
+							<div class="flex items-center gap-2">
+								<img src={staticIcons.leftClickIcon} alt="Left Click" class=" h-6 w-6" />
+								<span class="text-surface-500 text-xs">{m.click_toggle_point()}</span>
+							</div>
+							<div class="flex items-center gap-2">
+								<img src={staticIcons.rightClickIcon} alt="Right Click" class=" h-6 w-6" />
+								<span class="text-surface-500 text-xs">{m.right_click_edit_base()}</span>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-		<div class="relative h-full w-full overflow-hidden">
+			</aside>
+		{/if}
+
+		<button
+			type="button"
+			class="bg-surface-900/95 hover:bg-surface-800 absolute top-2 z-20 rounded-lg p-2 shadow-lg transition-[left] duration-300 ease-out"
+			style:left="{panelOpen ? PANEL_W + 16 : 8}px"
+			title={m.map_options()}
+			aria-label={m.map_options()}
+			aria-expanded={panelOpen}
+			onclick={() => (mapOptions.panelOpen = !panelOpen)}
+		>
+			{#if panelOpen}
+				<PanelLeftClose class="h-5 w-5" />
+			{:else}
+				<PanelLeft class="h-5 w-5" />
+			{/if}
+		</button>
+
+		<div class="absolute inset-0">
 			{#if MapComponent}
 				<MapComponent
 					bind:map
@@ -745,8 +834,10 @@
 					showAlphaPals={mapOptions.showAlphaPals}
 					showPredatorPals={mapOptions.showPredatorPals}
 					showLabels={mapOptions.showLabels ?? true}
-					show3d={mapOptions.show3d ?? false}
-					onToggle3d={() => (mapOptions.show3d = !(mapOptions.show3d ?? false))}
+					show3d={mapOptions.enable3d ?? false}
+					structureTypes={mapOptions.structureTypes ?? {}}
+					onToggle3d={() => (mapOptions.enable3d = !(mapOptions.enable3d ?? false))}
+					onToggleStructureType={handleToggleStructureType}
 					onEditBase={handleEditBase}
 					onToggleFastTravel={handleToggleFastTravel}
 					onToggleRelic={handleToggleRelic}

@@ -8,7 +8,7 @@ class Buildings {
 
 	buildings: Record<string, Building> = $state({});
 
-	private async ensureLoaded(): Promise<void> {
+	async ensureLoaded(): Promise<void> {
 		if (Object.keys(this.buildings).length === 0 && !this.loading) {
 			try {
 				this.loading = true;
