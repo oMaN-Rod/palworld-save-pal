@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { getAppState } from '$states';
-	import { Card } from '$components/ui';
-	import githubIcon from '$lib/assets/img/app/github.svg';
-	import discordIcon from '$lib/assets/img/app/discord.svg';
-	import buyMeACoffee from '$lib/assets/img/app/buymeacoffee.png';
-	import { send } from '$utils/websocketUtils';
+		import { Card, Tooltip } from '$components/ui';
+		import githubIcon from '$lib/assets/img/app/github.svg';
+		import discordIcon from '$lib/assets/img/app/discord.svg';
+		import buyMeACoffee from '$lib/assets/img/app/buymeacoffee.png';
+		import Saitama from '$lib/assets/img/app/saitama.webp';
+		import { send } from '$utils/websocketUtils';
 	import { MessageType } from '$types';
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { staticIcons } from '$types/icons';
@@ -103,7 +104,12 @@
 				</div>
 				<hr class="border-surface-500" />
 				<div class="mt-2 flex flex-col space-y-2">
-					<p>{@html m.about_built_by()}</p>
+					<Tooltip position="left" background="bg-transparent">
+						<p>{@html m.about_built_by()}</p>
+						{#snippet popup()}
+							<img src={Saitama} alt="Saitama" class="inline-block h-48 w-48" />
+						{/snippet}
+					</Tooltip>
 				</div>
 			</Card>
 		</div>
