@@ -161,6 +161,31 @@ export type WorldMapPoint = {
 	z: number;
 };
 
+export type BaseStructure = {
+	instance_id: string;
+	map_object_id: string;
+	x: number;
+	y: number;
+	z: number;
+	yaw: number;
+	scale_x: number;
+	scale_y: number;
+	scale_z: number;
+	hp_current: number;
+	hp_max: number;
+	build_player_uid: string;
+};
+
+export type Footprint = {
+	sx: number;
+	sy: number;
+	sz: number;
+	ox: number;
+	oy: number;
+	oz: number;
+	typeA: string;
+};
+
 export type Player = {
 	uid: string;
 	nickname: string;

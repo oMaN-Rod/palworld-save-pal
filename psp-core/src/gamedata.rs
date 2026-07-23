@@ -164,6 +164,7 @@ mod tests {
             "exp",
             "bosses",
             "relics",
+            "map_object_footprints",
         ] {
             assert!(game_data.get(key).is_some(), "missing game data key {key}");
         }

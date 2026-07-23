@@ -3,7 +3,7 @@
 use std::collections::HashMap;
 
 use crate::dto::container::{CharacterContainerDto, ItemContainerDto};
-use crate::dto::guild::{BaseDto, GuildDto, GuildLabResearchInfo};
+use crate::dto::guild::{BaseDto, BaseStructureDto, GuildDto, GuildLabResearchInfo};
 use crate::dto::ordered_map::OrderedMap;
 use crate::dto::pal::PalDto;
 use crate::dto::player::WorldMapPointDto;
@@ -151,22 +151,79 @@ fn map_object_properties_by_base_id(
         let StructValue::Struct(object_props) = map_object else {
             continue;
         };
-        let Some(model_props) = object_props
-            .0
-            .get(&PropertyKey::from("Model"))
-            .and_then(props::struct_props)
-        else {
-            continue;
-        };
-        let Some(Property::Struct(StructValue::Game(crate::ue::PalStruct::MapModel(model)))) =
-            model_props.0.get(&PropertyKey::from("RawData"))
-        else {
+        let Some(model) = map_object_model(object_props) else {
             continue;
         };
         let base_id = props::guid_to_uuid(&model.base_camp_id_belong_to);
         index.entry(base_id).or_default().push(object_props);
     }
     index
+}
+
+/// A `MapObjectSaveData` element's typed `Model.RawData`.
+fn map_object_model(
+    object_props: &Properties,
+) -> Option<&crate::ue::games::palworld::PalMapModel> {
+    let model_props = object_props
+        .0
+        .get(&PropertyKey::from("Model"))
+        .and_then(props::struct_props)?;
+    match model_props.0.get(&PropertyKey::from("RawData"))? {
+        Property::Struct(StructValue::Game(crate::ue::PalStruct::MapModel(model))) => Some(model),
+        _ => None,
+    }
+}
+
+/// The placed structures of `base_id`, as read-only geometry for the world map.
+///
+/// An element that carries no `MapObjectId` or no typed `Model.RawData` is
+/// skipped: one malformed entry must not cost the caller the rest of the base.
+pub fn base_structures(session: &SaveSession, base_id: uuid::Uuid) -> Vec<BaseStructureDto> {
+    let Ok(Some(map_objects)) = world::map_object_values(&session.level) else {
+        return Vec::new();
+    };
+    let index = map_object_properties_by_base_id(map_objects);
+    let Some(objects) = index.get(&base_id) else {
+        return Vec::new();
+    };
+    objects
+        .iter()
+        .filter_map(|object_props| {
+            let map_object_id = object_props
+                .0
+                .get(&PropertyKey::from("MapObjectId"))
+                .and_then(props::as_str)?
+                .to_string();
+            let model = map_object_model(object_props)?;
+            let transform = &model.initial_transform_cache;
+            Some(BaseStructureDto {
+                instance_id: props::guid_to_uuid(&model.instance_id).to_string(),
+                map_object_id,
+                x: transform.translation.x.0,
+                y: transform.translation.y.0,
+                z: transform.translation.z.0,
+                yaw: yaw_from_quat(
+                    transform.rotation.x.0,
+                    transform.rotation.y.0,
+                    transform.rotation.z.0,
+                    transform.rotation.w.0,
+                ),
+                scale_x: transform.scale.x.0,
+                scale_y: transform.scale.y.0,
+                scale_z: transform.scale.z.0,
+                hp_current: model.hp.current as i64,
+                hp_max: model.hp.max as i64,
+                build_player_uid: props::guid_to_uuid(&model.build_player_uid).to_string(),
+            })
+        })
+        .collect()
+}
+
+/// Flattens a placed structure's rotation quaternion to its yaw about Z.
+/// Placed structures are yaw-only in practice, so the pitch/roll terms carry
+/// nothing the map can render.
+fn yaw_from_quat(x: f64, y: f64, z: f64, w: f64) -> f64 {
+    (2.0 * (w * z + x * y)).atan2(1.0 - 2.0 * (y * y + z * z))
 }
 
 /// `target_container_id` from an ItemContainer module's typed `RawData`.
@@ -1355,5 +1412,135 @@ mod tests {
         ));
         let empty = StructValue::Struct(Properties::default());
         assert!(!should_delete_map_object(&empty, None, &[]));
+    }
+
+    // ---- base_structures ----
+
+    const OTHER_BASE_ID: &str = "88888888-8888-8888-8888-888888888888";
+    const STRUCTURE_INSTANCE_ID: &str = "a1a1a1a1-1111-2222-3333-444444444444";
+    const STRUCTURE_BUILDER_ID: &str = "b2b2b2b2-1111-2222-3333-444444444444";
+
+    fn world_level(map_objects: Vec<StructValue>) -> Save {
+        let mut world_save_data = Properties::default();
+        world_save_data.insert("MapObjectSaveData", Property::Array(ValueVec::Struct(map_objects)));
+        let mut root_properties = Properties::default();
+        root_properties.insert(
+            "worldSaveData",
+            Property::Struct(StructValue::Struct(world_save_data)),
+        );
+        minimal_save(root_properties)
+    }
+
+    fn level_with_map_object(
+        base_id: &str,
+        map_object_id: &str,
+        translation: (f64, f64, f64),
+    ) -> Save {
+        let mut model = zero_map_model(SDM_NIL, STRUCTURE_BUILDER_ID);
+        model.instance_id = fguid(STRUCTURE_INSTANCE_ID);
+        // `concrete_model_instance_id` deliberately differs from `instance_id`:
+        // reading the wrong one must be visible.
+        model.concrete_model_instance_id = fguid(OTHER_BASE_ID);
+        model.base_camp_id_belong_to = fguid(base_id);
+        model.hp = crate::ue::games::palworld::PalMapObjectHp {
+            current: 40,
+            max: 100,
+        };
+        model.initial_transform_cache.translation = Vector {
+            x: Double(translation.0),
+            y: Double(translation.1),
+            z: Double(translation.2),
+        };
+        // Three distinct scale values, so an axis swap in the reader fails.
+        model.initial_transform_cache.scale = Vector {
+            x: Double(2.0),
+            y: Double(3.0),
+            z: Double(4.0),
+        };
+
+        let mut model_props = Properties::default();
+        model_props.insert(
+            "RawData",
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::MapModel(Box::new(model)))),
+        );
+        let mut object_props = Properties::default();
+        object_props.insert("MapObjectId", Property::Name(map_object_id.to_string()));
+        object_props.insert("Model", Property::Struct(StructValue::Struct(model_props)));
+
+        world_level(vec![StructValue::Struct(object_props)])
+    }
+
+    #[test]
+    fn yaw_from_quat_reads_zero_for_identity() {
+        assert_eq!(0.0, yaw_from_quat(0.0, 0.0, 0.0, 1.0));
+    }
+
+    #[test]
+    fn yaw_from_quat_reads_ninety_degrees_for_quarter_turn_about_z() {
+        let half = std::f64::consts::FRAC_PI_4;
+        let yaw = yaw_from_quat(0.0, 0.0, half.sin(), half.cos());
+
+        assert!((yaw - std::f64::consts::FRAC_PI_2).abs() < 1e-9);
+    }
+
+    #[test]
+    fn base_structures_returns_translation_and_scale_for_each_entry() {
+        let session = SaveSession::new_for_tests(
+            SaveKind::InMemory,
+            level_with_map_object(BASE_ID, "PalBoxV2", (100.0, 200.0, 300.0)),
+        );
+
+        let structures = base_structures(&session, BASE_ID.parse().unwrap());
+
+        assert_eq!(1, structures.len());
+        assert_eq!(STRUCTURE_INSTANCE_ID, structures[0].instance_id);
+        assert_eq!("PalBoxV2", structures[0].map_object_id);
+        assert_eq!(100.0, structures[0].x);
+        assert_eq!(200.0, structures[0].y);
+        assert_eq!(300.0, structures[0].z);
+        assert_eq!(0.0, structures[0].yaw);
+        assert_eq!(2.0, structures[0].scale_x);
+        assert_eq!(3.0, structures[0].scale_y);
+        assert_eq!(4.0, structures[0].scale_z);
+        assert_eq!(40, structures[0].hp_current);
+        assert_eq!(100, structures[0].hp_max);
+        assert_eq!(STRUCTURE_BUILDER_ID, structures[0].build_player_uid);
+    }
+
+    #[test]
+    fn base_structures_excludes_entries_belonging_to_another_base() {
+        let session = SaveSession::new_for_tests(
+            SaveKind::InMemory,
+            level_with_map_object(BASE_ID, "PalBoxV2", (0.0, 0.0, 0.0)),
+        );
+
+        assert!(base_structures(&session, OTHER_BASE_ID.parse().unwrap()).is_empty());
+    }
+
+    #[test]
+    fn base_structures_is_empty_when_the_world_has_no_map_objects() {
+        let session =
+            SaveSession::new_for_tests(SaveKind::InMemory, minimal_save(Properties::default()));
+
+        assert!(base_structures(&session, BASE_ID.parse().unwrap()).is_empty());
+    }
+
+    #[test]
+    fn base_structures_skips_an_entry_whose_map_object_id_is_missing() {
+        let mut model = zero_map_model(SDM_NIL, SDM_NIL);
+        model.base_camp_id_belong_to = fguid(BASE_ID);
+        let mut model_props = Properties::default();
+        model_props.insert(
+            "RawData",
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::MapModel(Box::new(model)))),
+        );
+        let mut object_props = Properties::default();
+        object_props.insert("Model", Property::Struct(StructValue::Struct(model_props)));
+        let session = SaveSession::new_for_tests(
+            SaveKind::InMemory,
+            world_level(vec![StructValue::Struct(object_props)]),
+        );
+
+        assert!(base_structures(&session, BASE_ID.parse().unwrap()).is_empty());
     }
 }

@@ -52,6 +52,8 @@ export enum MessageType {
 	GET_SAVE_TYPE = 'get_save_type',
 	GET_WORK_SUITABILITY = 'get_work_suitability',
 	GET_BUILDINGS = 'get_buildings',
+	GET_MAP_OBJECT_FOOTPRINTS = 'get_map_object_footprints',
+	GET_BASE_STRUCTURES = 'get_base_structures',
 	GET_RAW_DATA = 'get_raw_data',
 	GET_MAP_OBJECTS = 'get_map_objects',
 	GET_BOSSES = 'get_bosses',

@@ -85,6 +85,8 @@ define_message_types! {
     // Game data retrieval
     GetActiveSkills => "get_active_skills",
     GetBuildings => "get_buildings",
+    GetMapObjectFootprints => "get_map_object_footprints",
+    GetBaseStructures => "get_base_structures",
     GetElements => "get_elements",
     GetExpData => "get_exp_data",
     GetRelicData => "get_relic_data",
@@ -241,6 +243,8 @@ mod tests {
         "get_gps_response",
         "get_active_skills",
         "get_buildings",
+        "get_map_object_footprints",
+        "get_base_structures",
         "get_elements",
         "get_exp_data",
         "get_relic_data",
@@ -337,8 +341,8 @@ mod tests {
     ];
 
     #[test]
-    fn exactly_127_message_types() {
-        assert_eq!(EXPECTED_WIRE_NAMES.len(), 127);
+    fn exactly_129_message_types() {
+        assert_eq!(EXPECTED_WIRE_NAMES.len(), 129);
         assert_eq!(
             MessageType::ALL.len(),
             EXPECTED_WIRE_NAMES.len() + FEATURE_ADDITION_WIRE_NAMES.len()

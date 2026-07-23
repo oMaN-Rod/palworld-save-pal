@@ -6,7 +6,9 @@ import {
 	buildFastTravelFC,
 	buildMapObjectFC,
 	buildRelicFC,
-	emptyFC
+	buildStructureFC,
+	emptyFC,
+	type StructureFC
 } from './features';
 import type { MapObject, MapUnlockPoint, RelicPoint } from '$types';
 
@@ -152,5 +154,114 @@ describe('area filtering', () => {
 describe('MAP_SIZE sanity', () => {
 	it('is the extent the mercator mapping assumes', () => {
 		expect(MAP_SIZE).toBe(8192);
+	});
+});
+
+const footprint = { sx: 400, sy: 200, sz: 300, ox: 0, oy: 0, oz: 0, typeA: 'Storage' };
+
+const structure = (over = {}) => ({
+	instance_id: 'i1', map_object_id: 'Box',
+	x: 0, y: 0, z: 1000, yaw: 0,
+	scale_x: 1, scale_y: 1, scale_z: 1,
+	hp_current: 850, hp_max: 1000, build_player_uid: 'player-1',
+	...over
+});
+
+describe('buildStructureFC', () => {
+	it('emits one closed five-point ring per structure', () => {
+		const fc = buildStructureFC([structure()], { Box: footprint }, 1000, 'MainMap');
+
+		expect(fc.features).toHaveLength(1);
+		const ring = fc.features[0].geometry.coordinates[0];
+		expect(ring).toHaveLength(5);
+		expect(ring[0]).toEqual(ring[4]);
+	});
+
+	it('anchors height above the base camp z', () => {
+		const fc = buildStructureFC([structure({ z: 1150 })], { Box: footprint }, 1000, 'MainMap');
+
+		expect(fc.features[0].properties.b).toBeCloseTo(0, 6);
+		expect(fc.features[0].properties.h).toBeCloseTo(300, 6);
+	});
+
+	it('lifts a structure stacked above the base camp z', () => {
+		const fc = buildStructureFC([structure({ z: 1450 })], { Box: footprint }, 1000, 'MainMap');
+
+		expect(fc.features[0].properties.b).toBeCloseTo(300, 6);
+		expect(fc.features[0].properties.h).toBeCloseTo(600, 6);
+	});
+
+	it('never emits a negative base', () => {
+		const fc = buildStructureFC([structure({ z: -50000 })], { Box: footprint }, 1000, 'MainMap');
+
+		expect(fc.features[0].properties.b).toBe(0);
+	});
+
+	it('scales the box by the saved scale', () => {
+		const plain = buildStructureFC([structure()], { Box: footprint }, 1000, 'MainMap');
+		const doubled = buildStructureFC(
+			[structure({ scale_z: 2 })], { Box: footprint }, 1000, 'MainMap'
+		);
+
+		expect(doubled.features[0].properties.h - doubled.features[0].properties.b).toBeCloseTo(
+			(plain.features[0].properties.h - plain.features[0].properties.b) * 2, 6
+		);
+	});
+
+	// Spans are measured in PIXELS, not degrees. These structures project to roughly
+	// 68 degrees latitude, where a degree of latitude covers far more pixels than a
+	// degree of longitude - so comparing raw lng/lat spans would be off by ~2.7x.
+	const pixelSpans = (fc: StructureFC) => {
+		const pts = fc.features[0].geometry.coordinates[0]
+			.slice(0, 4)
+			.map(([lng, lat]) => lngLatToPixel(lng, lat));
+		const xs = pts.map(([px]) => px);
+		const ys = pts.map(([, py]) => py);
+		return [Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys)];
+	};
+
+	it('swaps the footprint axes under a quarter turn', () => {
+		const [plainX, plainY] = pixelSpans(
+			buildStructureFC([structure()], { Box: footprint }, 1000, 'MainMap')
+		);
+		const [yawedX, yawedY] = pixelSpans(
+			buildStructureFC([structure({ yaw: Math.PI / 2 })], { Box: footprint }, 1000, 'MainMap')
+		);
+
+		expect(yawedX).toBeCloseTo(plainY, 6);
+		expect(yawedY).toBeCloseTo(plainX, 6);
+	});
+
+	// Sign check. The axis swap in worldToPixel is a reflection, so a +90 degree world
+	// yaw must read as -90 degrees in pixel space. A span comparison alone cannot catch
+	// an inverted sign - only the direction the mount offset swings can.
+	it('rotates the mount offset in the correct direction', () => {
+		const offsetBox = { ...footprint, ox: 100, oy: 0 };
+		const centre = (fc: StructureFC) => {
+			const pts = fc.features[0].geometry.coordinates[0]
+				.slice(0, 4)
+				.map(([lng, lat]) => lngLatToPixel(lng, lat));
+			return [
+				pts.reduce((acc, [px]) => acc + px, 0) / 4,
+				pts.reduce((acc, [, py]) => acc + py, 0) / 4
+			];
+		};
+
+		const [ux, uy] = centre(
+			buildStructureFC([structure()], { Box: offsetBox }, 1000, 'MainMap')
+		);
+		const [rx, ry] = centre(
+			buildStructureFC([structure({ yaw: Math.PI / 2 })], { Box: offsetBox }, 1000, 'MainMap')
+		);
+
+		expect(rx).toBeGreaterThan(ux);
+		expect(ry).toBeLessThan(uy);
+	});
+
+	it('falls back to the default box for an unknown map object id', () => {
+		const fc = buildStructureFC([structure({ map_object_id: 'Nope' })], {}, 1000, 'MainMap');
+
+		expect(fc.features).toHaveLength(1);
+		expect(fc.features[0].properties.typeA).toBe('Other');
 	});
 });

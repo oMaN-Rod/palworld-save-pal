@@ -5,7 +5,8 @@ import {
 	MERCATOR_LAT_LIMIT,
 	lngLatToPixel,
 	pixelCirclePolygon,
-	pixelToLngLat
+	pixelToLngLat,
+	verticalScaleFactor
 } from './mercator';
 
 describe('pixelToLngLat', () => {
@@ -93,5 +94,34 @@ describe('MAP_MAX_BOUNDS', () => {
 	it('constrains latitude to the mercator limit', () => {
 		expect(south).toBe(-MERCATOR_LAT_LIMIT);
 		expect(north).toBe(MERCATOR_LAT_LIMIT);
+	});
+});
+
+// MapLibre derives its metres-to-pixels factor from the viewport centre latitude
+// (mercator_transform.ts: _pixelPerMeter), not per feature, so one scalar per frame
+// is both necessary and sufficient. worldSize cancels, so the factor is zoom-independent.
+describe('verticalScaleFactor', () => {
+	const MAIN_MAP_CM_PER_PX = 1448800 / MAP_SIZE;
+
+	it('scales a centimetre to mercator metres at the equator', () => {
+		expect(verticalScaleFactor(0, MAIN_MAP_CM_PER_PX)).toBeCloseTo(27.6608, 3);
+	});
+
+	it('halves at sixty degrees, following cos(lat)', () => {
+		const equator = verticalScaleFactor(0, MAIN_MAP_CM_PER_PX);
+		expect(verticalScaleFactor(60, MAIN_MAP_CM_PER_PX)).toBeCloseTo(equator / 2, 6);
+	});
+
+	it('is symmetric about the equator', () => {
+		expect(verticalScaleFactor(-40, MAIN_MAP_CM_PER_PX)).toBeCloseTo(
+			verticalScaleFactor(40, MAIN_MAP_CM_PER_PX), 12
+		);
+	});
+
+	it('grows as the mapped area shrinks', () => {
+		const tree = (689148.5 - 347351.5) / MAP_SIZE;
+		expect(verticalScaleFactor(0, tree)).toBeGreaterThan(
+			verticalScaleFactor(0, MAIN_MAP_CM_PER_PX)
+		);
 	});
 });

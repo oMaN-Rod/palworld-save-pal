@@ -1,4 +1,12 @@
-import type { Base, MapObject, MapUnlockPoint, RelicPoint, WorldMapPoint } from '$types';
+import type {
+	Base,
+	BaseStructure,
+	Footprint,
+	MapObject,
+	MapUnlockPoint,
+	RelicPoint,
+	WorldMapPoint
+} from '$types';
 import { pixelCirclePolygon, pixelToLngLat } from './mercator';
 import { cmPerPx, mapOf, MAP_SIZE, mapToWorld, worldToPixel, type MapArea } from './utils';
 import { isWatchtower } from './fastTravel';
@@ -55,6 +63,15 @@ type LineFeature = {
 export type PointFC = { type: 'FeatureCollection'; features: PointFeature[] };
 export type PolygonFC = { type: 'FeatureCollection'; features: PolygonFeature[] };
 export type LineFC = { type: 'FeatureCollection'; features: LineFeature[] };
+
+type StructureFeature = {
+	type: 'Feature';
+	id: number;
+	geometry: { type: 'Polygon'; coordinates: [number, number][][] };
+	properties: { key: string; type: 'structure'; typeA: string; b: number; h: number };
+};
+
+export type StructureFC = { type: 'FeatureCollection'; features: StructureFeature[] };
 
 export type PlayerLike = { uid: string; nickname?: string; location?: WorldMapPoint | null };
 export type BaseEntry = { base: Base; guildName?: string };
@@ -264,4 +281,54 @@ export function buildOriginCrosshairFC(area: MapArea): LineFC {
 			}
 		]
 	};
+}
+
+export const DEFAULT_STRUCTURE_FOOTPRINT: Footprint = {
+	sx: 100, sy: 100, sz: 100, ox: 0, oy: 0, oz: 0, typeA: 'Other'
+};
+
+export function buildStructureFC(
+	structures: BaseStructure[],
+	footprints: Record<string, Footprint>,
+	baseCampZ: number,
+	area: MapArea
+): StructureFC {
+	const features = structures.map((s, index) => {
+		const fp = footprints[s.map_object_id] ?? DEFAULT_STRUCTURE_FOOTPRINT;
+		const cos = Math.cos(s.yaw);
+		const sin = Math.sin(s.yaw);
+
+		const cx = s.x + fp.ox * s.scale_x * cos - fp.oy * s.scale_y * sin;
+		const cy = s.y + fp.ox * s.scale_x * sin + fp.oy * s.scale_y * cos;
+		const hx = (fp.sx * s.scale_x) / 2;
+		const hy = (fp.sy * s.scale_y) / 2;
+		const height = fp.sz * s.scale_z;
+
+		const ring = [
+			[-hx, -hy], [hx, -hy], [hx, hy], [-hx, hy], [-hx, -hy]
+		].map(([dx, dy]) => {
+			const wx = cx + dx * cos - dy * sin;
+			const wy = cy + dx * sin + dy * cos;
+			const [px, py] = worldToPixel(wx, wy, area);
+			return pixelToLngLat(px, py);
+		});
+
+		const bottom = s.z + fp.oz * s.scale_z - height / 2;
+		const base = Math.max(0, bottom - baseCampZ);
+
+		return {
+			type: 'Feature' as const,
+			id: index,
+			geometry: { type: 'Polygon' as const, coordinates: [ring] },
+			properties: {
+				key: s.instance_id,
+				type: 'structure' as const,
+				typeA: fp.typeA,
+				b: base,
+				h: base + height
+			}
+		};
+	});
+
+	return { type: 'FeatureCollection', features };
 }

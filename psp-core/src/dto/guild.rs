@@ -16,6 +16,24 @@ pub struct GuildLabResearchInfo {
     pub work_amount: f64,
 }
 
+/// One placed structure of a base, in world units. Field declaration order is a
+/// wire contract: `serde` serializes in declaration order.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct BaseStructureDto {
+    pub instance_id: String,
+    pub map_object_id: String,
+    pub x: f64,
+    pub y: f64,
+    pub z: f64,
+    pub yaw: f64,
+    pub scale_x: f64,
+    pub scale_y: f64,
+    pub scale_z: f64,
+    pub hp_current: i64,
+    pub hp_max: i64,
+    pub build_player_uid: String,
+}
+
 /// `storage_containers` is a plain map defaulting to empty rather than an
 /// `Option`: no consumer distinguishes an absent map from an empty one.
 #[derive(Debug, Clone, Serialize, Deserialize)]

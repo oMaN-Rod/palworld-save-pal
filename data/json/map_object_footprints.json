@@ -1,0 +1,8705 @@
+{
+	"BlastFurnace": {
+		"sx": 168.3994,
+		"sy": 100,
+		"sz": 82.34652,
+		"ox": 48.75562,
+		"oy": -1.1544029e-7,
+		"oz": 45.04518,
+		"typeA": "Product"
+	},
+	"BlastFurnace2": {
+		"sx": 170.87259,
+		"sy": 108.758172,
+		"sz": 213.62709,
+		"ox": 32.79647,
+		"oy": 0,
+		"oz": 115.51743,
+		"typeA": "Product"
+	},
+	"BlastFurnace3": {
+		"sx": 255.89038,
+		"sy": 160,
+		"sz": 305.99918,
+		"ox": 28.065083,
+		"oy": -3.4296468e-7,
+		"oz": 162.75034,
+		"typeA": "Product"
+	},
+	"BlastFurnace4": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 400,
+		"ox": 4.0472295e-7,
+		"oy": -3.410605e-13,
+		"oz": 205,
+		"typeA": "Product"
+	},
+	"BlastFurnace5": {
+		"sx": 800,
+		"sy": 800,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 100,
+		"typeA": "Other"
+	},
+	"CampFire": {
+		"sx": 95,
+		"sy": 195,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 30,
+		"typeA": "Food"
+	},
+	"CharacterRankUp": {
+		"sx": 540,
+		"sy": 400,
+		"sz": 105,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Pal"
+	},
+	"CookingStove": {
+		"sx": 57,
+		"sy": 58.5,
+		"sz": 70,
+		"ox": 0,
+		"oy": 0,
+		"oz": 50,
+		"typeA": "Food"
+	},
+	"DamagableRock_PV": {
+		"sx": 440,
+		"sy": 320,
+		"sz": 300,
+		"ox": -10,
+		"oy": 0,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"DamagableRock0001": {
+		"sx": 200,
+		"sy": 140,
+		"sz": 120,
+		"ox": -10,
+		"oy": 0,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"DamagableRock0002": {
+		"sx": 440,
+		"sy": 320,
+		"sz": 300,
+		"ox": -5,
+		"oy": 5,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"DamagableRock0003": {
+		"sx": 360,
+		"sy": 260,
+		"sz": 200,
+		"ox": 10,
+		"oy": -20,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"DamagableRock0004": {
+		"sx": 400,
+		"sy": 280,
+		"sz": 200,
+		"ox": -10,
+		"oy": 5,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"DamagableRock0005": {
+		"sx": 300,
+		"sy": 360,
+		"sz": 300,
+		"ox": -10,
+		"oy": 0,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"DamagableRock0017": {
+		"sx": 80,
+		"sy": 110,
+		"sz": 80,
+		"ox": -7,
+		"oy": -5,
+		"oz": 28,
+		"typeA": "Other"
+	},
+	"DamagableRock0006": {
+		"sx": 400,
+		"sy": 280,
+		"sz": 200,
+		"ox": -10,
+		"oy": 0,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"DamagableRock0007": {
+		"sx": 320,
+		"sy": 320,
+		"sz": 200,
+		"ox": 0,
+		"oy": 0,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"DamagableRock0008": {
+		"sx": 320,
+		"sy": 320,
+		"sz": 300,
+		"ox": -10,
+		"oy": 0,
+		"oz": 70,
+		"typeA": "Other"
+	},
+	"DamagableRock0009": {
+		"sx": 440,
+		"sy": 320,
+		"sz": 300,
+		"ox": -10,
+		"oy": 0,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"DamagableRock0010": {
+		"sx": 360,
+		"sy": 360,
+		"sz": 200,
+		"ox": 0,
+		"oy": -20,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"DamagableRock0011": {
+		"sx": 400,
+		"sy": 320,
+		"sz": 300,
+		"ox": 0,
+		"oy": -20,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"DamagableRock0012": {
+		"sx": 420,
+		"sy": 280,
+		"sz": 200,
+		"ox": -50,
+		"oy": -20,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"DamagableRock0013": {
+		"sx": 260,
+		"sy": 180,
+		"sz": 140,
+		"ox": -10,
+		"oy": 0,
+		"oz": 20,
+		"typeA": "Other"
+	},
+	"DamagableRock0014": {
+		"sx": 540,
+		"sy": 360,
+		"sz": 300,
+		"ox": -10,
+		"oy": 0,
+		"oz": 110,
+		"typeA": "Other"
+	},
+	"DamagableRock0015": {
+		"sx": 440,
+		"sy": 320,
+		"sz": 300,
+		"ox": -10,
+		"oy": 0,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"DamagableRock0016": {
+		"sx": 440,
+		"sy": 320,
+		"sz": 300,
+		"ox": -10,
+		"oy": 0,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"DeathPenaltyChest": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 60,
+		"ox": 0,
+		"oy": 0,
+		"oz": 30,
+		"typeA": "Other"
+	},
+	"DefenseGatlingGun": {
+		"sx": 295,
+		"sy": 295,
+		"sz": 155,
+		"ox": 0,
+		"oy": 0,
+		"oz": 80,
+		"typeA": "Other"
+	},
+	"DefenseMachinegun": {
+		"sx": 400,
+		"sy": 400,
+		"sz": 155,
+		"ox": 0,
+		"oy": 0,
+		"oz": 80,
+		"typeA": "Defense"
+	},
+	"DefenseMinigun": {
+		"sx": 400,
+		"sy": 400,
+		"sz": 155,
+		"ox": 0,
+		"oy": 0,
+		"oz": 80,
+		"typeA": "Other"
+	},
+	"DefenseBowGun": {
+		"sx": 400,
+		"sy": 400,
+		"sz": 155,
+		"ox": 0,
+		"oy": 0,
+		"oz": 80,
+		"typeA": "Defense"
+	},
+	"DefenseMissile": {
+		"sx": 400,
+		"sy": 400,
+		"sz": 155,
+		"ox": 0,
+		"oy": 0,
+		"oz": 80,
+		"typeA": "Defense"
+	},
+	"DefenseWait": {
+		"sx": 195,
+		"sy": 195,
+		"sz": 5,
+		"ox": 0,
+		"oy": 0,
+		"oz": 5,
+		"typeA": "Defense"
+	},
+	"ElectricGenerator": {
+		"sx": 270,
+		"sy": 270,
+		"sz": 230,
+		"ox": 0,
+		"oy": 0,
+		"oz": 120,
+		"typeA": "Infrastructure"
+	},
+	"ElectricGenerator_Slave": {
+		"sx": 270,
+		"sy": 270,
+		"sz": 230,
+		"ox": 0,
+		"oy": 0,
+		"oz": 120,
+		"typeA": "Other"
+	},
+	"ElectricGenerator2": {
+		"sx": 270,
+		"sy": 270,
+		"sz": 230,
+		"ox": 0,
+		"oy": 0,
+		"oz": 120,
+		"typeA": "Other"
+	},
+	"ElectricGenerator3": {
+		"sx": 270,
+		"sy": 270,
+		"sz": 230,
+		"ox": 0,
+		"oy": 0,
+		"oz": 120,
+		"typeA": "Other"
+	},
+	"ElectricKitchen": {
+		"sx": 76.311112,
+		"sy": 164.29457,
+		"sz": 176.3333,
+		"ox": 1.8284812,
+		"oy": 0,
+		"oz": 95.263535,
+		"typeA": "Food"
+	},
+	"HugeKitchen": {
+		"sx": 160,
+		"sy": 164.29457,
+		"sz": 176.3333,
+		"ox": 1.8284812,
+		"oy": 0,
+		"oz": 95.263535,
+		"typeA": "Food"
+	},
+	"Factory_Comfortable_01": {
+		"sx": 431.86984,
+		"sy": 638.0913,
+		"sz": 95,
+		"ox": 0,
+		"oy": -40,
+		"oz": 60,
+		"typeA": "Other"
+	},
+	"Factory_Comfortable_02": {
+		"sx": 431.86984,
+		"sy": 638.0913,
+		"sz": 95,
+		"ox": 0,
+		"oy": -40,
+		"oz": 60,
+		"typeA": "Other"
+	},
+	"Factory_Hard_01": {
+		"sx": 169.40388,
+		"sy": 220,
+		"sz": 137.76825,
+		"ox": 29.931633,
+		"oy": 1.2710642e-7,
+		"oz": 75.152756,
+		"typeA": "Product"
+	},
+	"Factory_Hard_02": {
+		"sx": 195,
+		"sy": 1000,
+		"sz": 95,
+		"ox": 0,
+		"oy": -10,
+		"oz": 60,
+		"typeA": "Product"
+	},
+	"Factory_Hard_03": {
+		"sx": 195,
+		"sy": 1460,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Product"
+	},
+	"Factory_Hard_04": {
+		"sx": 195,
+		"sy": 1200,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Product"
+	},
+	"FarmBlockV2_Grade01": {
+		"sx": 495,
+		"sy": 495,
+		"sz": 8,
+		"ox": 0,
+		"oy": 0,
+		"oz": 10,
+		"typeA": "Other"
+	},
+	"FarmBlockV2_Grade02": {
+		"sx": 495,
+		"sy": 495,
+		"sz": 8,
+		"ox": 0,
+		"oy": 0,
+		"oz": 10,
+		"typeA": "Other"
+	},
+	"FarmBlockV2_Grade03": {
+		"sx": 495,
+		"sy": 495,
+		"sz": 8,
+		"ox": 0,
+		"oy": 0,
+		"oz": 10,
+		"typeA": "Other"
+	},
+	"FarmBlockV2_wheet": {
+		"sx": 495,
+		"sy": 495,
+		"sz": 8,
+		"ox": 0,
+		"oy": 0,
+		"oz": 10,
+		"typeA": "Food"
+	},
+	"FarmBlockV2_tomato": {
+		"sx": 495,
+		"sy": 495,
+		"sz": 8,
+		"ox": 0,
+		"oy": 0,
+		"oz": 8,
+		"typeA": "Food"
+	},
+	"FarmBlockV2_Lettuce": {
+		"sx": 495,
+		"sy": 495,
+		"sz": 8,
+		"ox": 0,
+		"oy": 0,
+		"oz": 10,
+		"typeA": "Food"
+	},
+	"FarmBlockV2_Berries": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 8,
+		"ox": 0,
+		"oy": 0,
+		"oz": 10,
+		"typeA": "Food"
+	},
+	"FastTravelPoint": {
+		"sx": 200,
+		"sy": 100,
+		"sz": 125,
+		"ox": -50,
+		"oy": 0,
+		"oz": 65,
+		"typeA": "Infrastructure"
+	},
+	"HighTechKitchen": {
+		"sx": 57,
+		"sy": 58.5,
+		"sz": 70,
+		"ox": 0,
+		"oy": 0,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"ItemChest": {
+		"sx": 66,
+		"sy": 88,
+		"sz": 72,
+		"ox": 0,
+		"oy": -1,
+		"oz": 38,
+		"typeA": "Storage"
+	},
+	"ItemChest_02": {
+		"sx": 88,
+		"sy": 120,
+		"sz": 80,
+		"ox": 0,
+		"oy": 0,
+		"oz": 42,
+		"typeA": "Storage"
+	},
+	"ItemChest_03": {
+		"sx": 103.5437,
+		"sy": 140,
+		"sz": 200,
+		"ox": 0,
+		"oy": 0,
+		"oz": 105,
+		"typeA": "Storage"
+	},
+	"Dev_ItemChest": {
+		"sx": 80,
+		"sy": 140,
+		"sz": 72,
+		"ox": 0,
+		"oy": 0,
+		"oz": 37,
+		"typeA": "Other"
+	},
+	"MedicalPalBed": {
+		"sx": 230,
+		"sy": 230,
+		"sz": 75,
+		"ox": 0,
+		"oy": 0,
+		"oz": 45,
+		"typeA": "Other"
+	},
+	"MedicalPalBed_02": {
+		"sx": 230,
+		"sy": 230,
+		"sz": 75,
+		"ox": 0,
+		"oy": 0,
+		"oz": 45,
+		"typeA": "Infrastructure"
+	},
+	"MedicalPalBed_03": {
+		"sx": 230,
+		"sy": 230,
+		"sz": 75,
+		"ox": 0,
+		"oy": 0,
+		"oz": 45,
+		"typeA": "Infrastructure"
+	},
+	"MedicalPalBed_04": {
+		"sx": 380,
+		"sy": 380,
+		"sz": 75,
+		"ox": 0,
+		"oy": 0,
+		"oz": 45,
+		"typeA": "Infrastructure"
+	},
+	"MedicineFacility_01": {
+		"sx": 189.919892,
+		"sy": 122.96051,
+		"sz": 118.254006,
+		"ox": 37.717472,
+		"oy": -2.5187643,
+		"oz": 61.130417,
+		"typeA": "Product"
+	},
+	"MedicineFacility_02": {
+		"sx": 100,
+		"sy": 180,
+		"sz": 170,
+		"ox": -0.18455674,
+		"oy": -2.518765,
+		"oz": 90,
+		"typeA": "Product"
+	},
+	"MedicineFacility_03": {
+		"sx": 120,
+		"sy": 240,
+		"sz": 170,
+		"ox": -0.18455674,
+		"oy": -2.518765,
+		"oz": 90,
+		"typeA": "Product"
+	},
+	"PalBoxV2": {
+		"sx": 500,
+		"sy": 400,
+		"sz": 390,
+		"ox": -150,
+		"oy": 0,
+		"oz": 200,
+		"typeA": "Pal"
+	},
+	"DisplayCharacter": {
+		"sx": 1000,
+		"sy": 900,
+		"sz": 795,
+		"ox": 0,
+		"oy": 0,
+		"oz": 420,
+		"typeA": "Pal"
+	},
+	"PlayerBed": {
+		"sx": 250,
+		"sy": 174,
+		"sz": 115,
+		"ox": 0,
+		"oy": 0,
+		"oz": 65,
+		"typeA": "Other"
+	},
+	"PlayerBed_02": {
+		"sx": 250,
+		"sy": 174,
+		"sz": 115,
+		"ox": 0,
+		"oy": 0,
+		"oz": 65,
+		"typeA": "Infrastructure"
+	},
+	"PlayerBed_03": {
+		"sx": 250,
+		"sy": 174,
+		"sz": 115,
+		"ox": 0,
+		"oy": 0,
+		"oz": 65,
+		"typeA": "Infrastructure"
+	},
+	"ShippingItemBox": {
+		"sx": 150,
+		"sy": 280,
+		"sz": 72,
+		"ox": 0,
+		"oy": 0,
+		"oz": 37,
+		"typeA": "Other"
+	},
+	"SphereFactory_Black_01": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 100,
+		"ox": 0,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Product"
+	},
+	"SphereFactory_Black_02": {
+		"sx": 195,
+		"sy": 1000,
+		"sz": 95,
+		"ox": 0,
+		"oy": -10,
+		"oz": 60,
+		"typeA": "Product"
+	},
+	"SphereFactory_Black_03": {
+		"sx": 195,
+		"sy": 1460,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Product"
+	},
+	"SphereFactory_Black_04": {
+		"sx": 195,
+		"sy": 1200,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Product"
+	},
+	"SphereFactory_White_01": {
+		"sx": 200,
+		"sy": 260,
+		"sz": 275,
+		"ox": 0,
+		"oy": 0,
+		"oz": 140,
+		"typeA": "Other"
+	},
+	"SphereFactory_White_02": {
+		"sx": 200,
+		"sy": 260,
+		"sz": 275,
+		"ox": 0,
+		"oy": 0,
+		"oz": 140,
+		"typeA": "Other"
+	},
+	"SphereFactory_White_03": {
+		"sx": 200,
+		"sy": 260,
+		"sz": 275,
+		"ox": 0,
+		"oy": 0,
+		"oz": 140,
+		"typeA": "Other"
+	},
+	"Stonehouse1": {
+		"sx": 1549.0082,
+		"sy": 858.0114,
+		"sz": 600,
+		"ox": 35,
+		"oy": 140,
+		"oz": 385,
+		"typeA": "Other"
+	},
+	"StonePit": {
+		"sx": 480,
+		"sy": 650,
+		"sz": 190,
+		"ox": 0,
+		"oy": 0,
+		"oz": 100,
+		"typeA": "Product"
+	},
+	"Strawhouse1": {
+		"sx": 920,
+		"sy": 600,
+		"sz": 600,
+		"ox": 0,
+		"oy": 20,
+		"oz": 305,
+		"typeA": "Other"
+	},
+	"WeaponFactory_Clean_01": {
+		"sx": 95,
+		"sy": 195,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Other"
+	},
+	"WeaponFactory_Clean_02": {
+		"sx": 95,
+		"sy": 195,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Other"
+	},
+	"WeaponFactory_Clean_03": {
+		"sx": 95,
+		"sy": 195,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Other"
+	},
+	"WeaponFactory_Dirty_01": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 100,
+		"ox": 0,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Product"
+	},
+	"WeaponFactory_Dirty_02": {
+		"sx": 195,
+		"sy": 1000,
+		"sz": 95,
+		"ox": 0,
+		"oy": -10,
+		"oz": 60,
+		"typeA": "Product"
+	},
+	"WeaponFactory_Dirty_03": {
+		"sx": 195,
+		"sy": 1460,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Product"
+	},
+	"WeaponFactory_Dirty_04": {
+		"sx": 195,
+		"sy": 1200,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Product"
+	},
+	"Well": {
+		"sx": 220,
+		"sy": 195,
+		"sz": 280,
+		"ox": 0,
+		"oy": 0,
+		"oz": 143,
+		"typeA": "Other"
+	},
+	"Woodhouse1": {
+		"sx": 920,
+		"sy": 600,
+		"sz": 600,
+		"ox": 0,
+		"oy": 20,
+		"oz": 305,
+		"typeA": "Other"
+	},
+	"WorkBench": {
+		"sx": 171.85378,
+		"sy": 156,
+		"sz": 95,
+		"ox": 33.275246,
+		"oy": -2.0000002,
+		"oz": 60,
+		"typeA": "Product"
+	},
+	"RecoverOtomo": {
+		"sx": 176,
+		"sy": 176,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Other"
+	},
+	"HatchingPalEgg": {
+		"sx": 195,
+		"sy": 195,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Pal"
+	},
+	"StationDeforest2": {
+		"sx": 480,
+		"sy": 650,
+		"sz": 190,
+		"ox": 0,
+		"oy": 0,
+		"oz": 100,
+		"typeA": "Product"
+	},
+	"WorkBench_SkillUnlock": {
+		"sx": 171.68292,
+		"sy": 138,
+		"sz": 95,
+		"ox": 28.843542,
+		"oy": 1.9999993,
+		"oz": 60,
+		"typeA": "Product"
+	},
+	"WorkBench_SkillCard": {
+		"sx": 95,
+		"sy": 195,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Other"
+	},
+	"Wooden_foundation": {
+		"sx": 320,
+		"sy": 320,
+		"sz": 400,
+		"ox": 0.0000013193637,
+		"oy": -6.5938366e-12,
+		"oz": -195,
+		"typeA": "Foundation"
+	},
+	"Wooden_wall": {
+		"sx": 0.02,
+		"sy": 312,
+		"sz": 194,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 152.5,
+		"typeA": "Foundation"
+	},
+	"Wooden_roof": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 25,
+		"ox": 0,
+		"oy": 0,
+		"oz": -7.5,
+		"typeA": "Foundation"
+	},
+	"Wooden_stair": {
+		"sx": 312,
+		"sy": 312,
+		"sz": 260,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Foundation"
+	},
+	"Wooden_DoorWall": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 184,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 158.80435,
+		"typeA": "Foundation"
+	},
+	"Stone_foundation": {
+		"sx": 320,
+		"sy": 320,
+		"sz": 400,
+		"ox": 0,
+		"oy": 0,
+		"oz": -195,
+		"typeA": "Foundation"
+	},
+	"Stone_wall": {
+		"sx": 0.02,
+		"sy": 312,
+		"sz": 194,
+		"ox": 0,
+		"oy": 0,
+		"oz": 152.5,
+		"typeA": "Foundation"
+	},
+	"Stone_roof": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 25,
+		"ox": 0,
+		"oy": 0,
+		"oz": -7.5,
+		"typeA": "Foundation"
+	},
+	"Stone_stair": {
+		"sx": 312,
+		"sy": 312,
+		"sz": 260,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Foundation"
+	},
+	"Stone_DoorWall": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 184,
+		"ox": 0,
+		"oy": 0,
+		"oz": 158.80435,
+		"typeA": "Foundation"
+	},
+	"Metal_foundation": {
+		"sx": 320,
+		"sy": 320,
+		"sz": 400,
+		"ox": 0,
+		"oy": 0,
+		"oz": -195,
+		"typeA": "Foundation"
+	},
+	"Metal_wall": {
+		"sx": 0.02,
+		"sy": 312,
+		"sz": 194,
+		"ox": 0,
+		"oy": 0,
+		"oz": 152.5,
+		"typeA": "Foundation"
+	},
+	"Metal_roof": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 25,
+		"ox": 3.0432517e-7,
+		"oy": 0,
+		"oz": -7.5,
+		"typeA": "Foundation"
+	},
+	"Metal_stair": {
+		"sx": 312,
+		"sy": 312,
+		"sz": 260,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Foundation"
+	},
+	"Metal_DoorWall": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 184,
+		"ox": 0,
+		"oy": 0,
+		"oz": 158.80435,
+		"typeA": "Foundation"
+	},
+	"BuildableGoddessStatue": {
+		"sx": 160,
+		"sy": 160,
+		"sz": 240,
+		"ox": 0,
+		"oy": 0,
+		"oz": 130,
+		"typeA": "Pal"
+	},
+	"Spa": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 75,
+		"ox": 0,
+		"oy": 0,
+		"oz": 45,
+		"typeA": "Infrastructure"
+	},
+	"Spa2": {
+		"sx": 500,
+		"sy": 600,
+		"sz": 75,
+		"ox": 0,
+		"oy": 0,
+		"oz": 45,
+		"typeA": "Infrastructure"
+	},
+	"DefenseWall_Wood": {
+		"sx": 2,
+		"sy": 220,
+		"sz": 1400,
+		"ox": 1.1368684e-13,
+		"oy": 2.1937177e-7,
+		"oz": 110,
+		"typeA": "Defense"
+	},
+	"DefenseWall": {
+		"sx": 2,
+		"sy": 220,
+		"sz": 1400,
+		"ox": 0,
+		"oy": 0,
+		"oz": 110,
+		"typeA": "Defense"
+	},
+	"DefenseWall_Metal": {
+		"sx": 2,
+		"sy": 220,
+		"sz": 1400,
+		"ox": 0,
+		"oy": 0,
+		"oz": 110,
+		"typeA": "Defense"
+	},
+	"Heater": {
+		"sx": 70,
+		"sy": 70,
+		"sz": 100,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Infrastructure"
+	},
+	"ElectricHeater": {
+		"sx": 240,
+		"sy": 240,
+		"sz": 437.28046,
+		"ox": 0,
+		"oy": 0,
+		"oz": 230,
+		"typeA": "Infrastructure"
+	},
+	"Cooler": {
+		"sx": 70,
+		"sy": 70,
+		"sz": 90,
+		"ox": 0,
+		"oy": 0,
+		"oz": 47.5,
+		"typeA": "Infrastructure"
+	},
+	"ElectricCooler": {
+		"sx": 240,
+		"sy": 240,
+		"sz": 465.55726,
+		"ox": 0,
+		"oy": 0,
+		"oz": 240,
+		"typeA": "Infrastructure"
+	},
+	"Torch": {
+		"sx": 30,
+		"sy": 30,
+		"sz": 110,
+		"ox": 0,
+		"oy": -5,
+		"oz": 57.5,
+		"typeA": "Light"
+	},
+	"WallTorch": {
+		"sx": 30,
+		"sy": 30,
+		"sz": 60,
+		"ox": 0,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Light"
+	},
+	"Lamp": {
+		"sx": 50,
+		"sy": 50,
+		"sz": 160,
+		"ox": 0,
+		"oy": -5,
+		"oz": 85,
+		"typeA": "Light"
+	},
+	"CeilingLamp": {
+		"sx": 50,
+		"sy": 50,
+		"sz": 40,
+		"ox": 0,
+		"oy": 0,
+		"oz": -20,
+		"typeA": "Light"
+	},
+	"LargeLamp": {
+		"sx": 50,
+		"sy": 50,
+		"sz": 220,
+		"ox": 5.5112986e-7,
+		"oy": -5,
+		"oz": 115,
+		"typeA": "Light"
+	},
+	"LargeCeilingLamp": {
+		"sx": 80,
+		"sy": 50,
+		"sz": 20,
+		"ox": 0,
+		"oy": 0,
+		"oz": -15,
+		"typeA": "Light"
+	},
+	"Crusher": {
+		"sx": 240,
+		"sy": 240,
+		"sz": 240,
+		"ox": -55.468987,
+		"oy": 31.115536,
+		"oz": 125,
+		"typeA": "Product"
+	},
+	"WoodCrusher": {
+		"sx": 240,
+		"sy": 160,
+		"sz": 240,
+		"ox": -79.825935,
+		"oy": 0,
+		"oz": 125,
+		"typeA": "Other"
+	},
+	"FlourMill": {
+		"sx": 252.94096,
+		"sy": 220,
+		"sz": 240,
+		"ox": -53.02954,
+		"oy": 5.8337398,
+		"oz": 124.99999,
+		"typeA": "Product"
+	},
+	"Trap_LegHold_Big": {
+		"sx": 140,
+		"sy": 140,
+		"sz": 60,
+		"ox": 0,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Defense"
+	},
+	"Trap_Noose": {
+		"sx": 240,
+		"sy": 160,
+		"sz": 300,
+		"ox": 0,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Defense"
+	},
+	"Trap_MineElecShock": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 60,
+		"ox": 0,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Defense"
+	},
+	"Trap_MineFreeze": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 60,
+		"ox": 0,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Defense"
+	},
+	"Trap_MineAttack": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 60,
+		"ox": 0,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Defense"
+	},
+	"BreedFarm": {
+		"sx": 1600,
+		"sy": 1600,
+		"sz": 190,
+		"ox": 0,
+		"oy": 0,
+		"oz": 100,
+		"typeA": "Pal"
+	},
+	"Wood_Gate": {
+		"sx": 100,
+		"sy": 800,
+		"sz": 640,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 325,
+		"typeA": "Defense"
+	},
+	"Stone_Gate": {
+		"sx": 100,
+		"sy": 800,
+		"sz": 640,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 325,
+		"typeA": "Defense"
+	},
+	"Metal_Gate": {
+		"sx": 100,
+		"sy": 800,
+		"sz": 640,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 325,
+		"typeA": "Defense"
+	},
+	"RepairBench": {
+		"sx": 95,
+		"sy": 144.07906,
+		"sz": 116.3156,
+		"ox": 8.069157,
+		"oy": -7.013227e-8,
+		"oz": 65,
+		"typeA": "Product"
+	},
+	"ToolBoxV1": {
+		"sx": 120,
+		"sy": 120,
+		"sz": 90,
+		"ox": 0,
+		"oy": 0,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"ToolBoxV2": {
+		"sx": 70,
+		"sy": 142,
+		"sz": 95,
+		"ox": 0,
+		"oy": -2,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"Fountain": {
+		"sx": 140,
+		"sy": 142,
+		"sz": 95,
+		"ox": 0,
+		"oy": -2,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"Silo": {
+		"sx": 110,
+		"sy": 110,
+		"sz": 90,
+		"ox": 0,
+		"oy": -2,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"TransmissionTower": {
+		"sx": 120,
+		"sy": 120,
+		"sz": 90,
+		"ox": 0,
+		"oy": -2,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"FlowerBed": {
+		"sx": 120,
+		"sy": 180,
+		"sz": 80,
+		"ox": 2.842171e-14,
+		"oy": 4.052501,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"Stump": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 90,
+		"ox": 0,
+		"oy": -2,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"MiningTool": {
+		"sx": 120,
+		"sy": 142,
+		"sz": 95,
+		"ox": -15.580169,
+		"oy": -2,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"Cauldron": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 95,
+		"ox": 0,
+		"oy": -2,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"Snowman": {
+		"sx": 80,
+		"sy": 120,
+		"sz": 95,
+		"ox": 0,
+		"oy": -2,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"OlympicCauldron": {
+		"sx": 70,
+		"sy": 142,
+		"sz": 95,
+		"ox": 0,
+		"oy": -2,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"BaseCampWorkHard": {
+		"sx": 190,
+		"sy": 186.369308,
+		"sz": 160,
+		"ox": 15.892151,
+		"oy": -2,
+		"oz": 83,
+		"typeA": "Pal"
+	},
+	"CoolerBox": {
+		"sx": 80,
+		"sy": 71.791054,
+		"sz": 74.111694,
+		"ox": 6.398531,
+		"oy": -0.99999994,
+		"oz": 46.614,
+		"typeA": "Storage"
+	},
+	"Refrigerator": {
+		"sx": 140,
+		"sy": 110,
+		"sz": 180,
+		"ox": 3.897719,
+		"oy": -1.0000007,
+		"oz": 109.19514,
+		"typeA": "Storage"
+	},
+	"DamagedScarecrow": {
+		"sx": 600,
+		"sy": 600,
+		"sz": 200,
+		"ox": 2.9841019e-9,
+		"oy": 0,
+		"oz": 105,
+		"typeA": "Other"
+	},
+	"Signboard": {
+		"sx": 80,
+		"sy": 120,
+		"sz": 80,
+		"ox": 0,
+		"oy": -2,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"BaseCampBattleDirector": {
+		"sx": 56,
+		"sy": 174,
+		"sz": 260,
+		"ox": 0,
+		"oy": 0,
+		"oz": 135,
+		"typeA": "Defense"
+	},
+	"MonsterFarm": {
+		"sx": 1000,
+		"sy": 1000,
+		"sz": 190,
+		"ox": 0,
+		"oy": 0,
+		"oz": 100,
+		"typeA": "Pal"
+	},
+	"Wood_WindowWall": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 214,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 157.5,
+		"typeA": "Foundation"
+	},
+	"Stone_WindowWall": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 214,
+		"ox": 0,
+		"oy": 0,
+		"oz": 157.5,
+		"typeA": "Foundation"
+	},
+	"Metal_WindowWall": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 214,
+		"ox": 0,
+		"oy": 0,
+		"oz": 157.5,
+		"typeA": "Foundation"
+	},
+	"Wood_TriangleWall": {
+		"sx": 0.2,
+		"sy": 120,
+		"sz": 72.207108,
+		"ox": -3.9790393e-13,
+		"oy": 100.50986,
+		"oz": 79.11247,
+		"typeA": "Foundation"
+	},
+	"Stone_TriangleWall": {
+		"sx": 0.2,
+		"sy": 120,
+		"sz": 72.207108,
+		"ox": 0,
+		"oy": 100.50986,
+		"oz": 79.11247,
+		"typeA": "Foundation"
+	},
+	"Metal_TriangleWall": {
+		"sx": 0.2,
+		"sy": 120,
+		"sz": 72.207108,
+		"ox": 0,
+		"oy": 100.50986,
+		"oz": 79.11247,
+		"typeA": "Foundation"
+	},
+	"Wood_SlantedRoof": {
+		"sx": 260,
+		"sy": 260,
+		"sz": 200,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Foundation"
+	},
+	"Stone_SlantedRoof": {
+		"sx": 260,
+		"sy": 260,
+		"sz": 200,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Foundation"
+	},
+	"Metal_SlantedRoof": {
+		"sx": 260,
+		"sy": 260,
+		"sz": 200,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Foundation"
+	},
+	"Table1": {
+		"sx": 120,
+		"sy": 280,
+		"sz": 140,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 75,
+		"typeA": "Other"
+	},
+	"Barrel_Wood": {
+		"sx": 88,
+		"sy": 88,
+		"sz": 90,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 55,
+		"typeA": "Storage"
+	},
+	"Box_Wood": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 90,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 55,
+		"typeA": "Storage"
+	},
+	"Box01_Iron": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 90,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 55,
+		"typeA": "Storage"
+	},
+	"Box02_Iron": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 90,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 55,
+		"typeA": "Storage"
+	},
+	"Shelf_Wood": {
+		"sx": 60,
+		"sy": 140,
+		"sz": 230,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 123,
+		"typeA": "Storage"
+	},
+	"Shelf_Cask_Wood": {
+		"sx": 96,
+		"sy": 276,
+		"sz": 220,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 115,
+		"typeA": "Storage"
+	},
+	"Shelf_Hang01_Wood": {
+		"sx": 42,
+		"sy": 146,
+		"sz": 66,
+		"ox": 23,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Storage"
+	},
+	"Shelf01_Iron": {
+		"sx": 40,
+		"sy": 180,
+		"sz": 190,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 105,
+		"typeA": "Storage"
+	},
+	"Shelf02_Iron": {
+		"sx": 52,
+		"sy": 250,
+		"sz": 66,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 40,
+		"typeA": "Storage"
+	},
+	"Shelf03_Iron": {
+		"sx": 46,
+		"sy": 136,
+		"sz": 200,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 109,
+		"typeA": "Storage"
+	},
+	"Shelf04_Iron": {
+		"sx": 48,
+		"sy": 86,
+		"sz": 200,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 109,
+		"typeA": "Storage"
+	},
+	"Shelf05_Stone": {
+		"sx": 46,
+		"sy": 170,
+		"sz": 106,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 57,
+		"typeA": "Storage"
+	},
+	"Shelf06_Stone": {
+		"sx": 54,
+		"sy": 250,
+		"sz": 106,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 57,
+		"typeA": "Storage"
+	},
+	"Shelf07_Stone": {
+		"sx": 90,
+		"sy": 160,
+		"sz": 256,
+		"ox": 0,
+		"oy": 0,
+		"oz": 133,
+		"typeA": "Storage"
+	},
+	"Shelf01_Wall_Stone": {
+		"sx": 68,
+		"sy": 130,
+		"sz": 100,
+		"ox": 35,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Storage"
+	},
+	"Shelf01_Wall_Iron": {
+		"sx": 46,
+		"sy": 212,
+		"sz": 144.62218,
+		"ox": 24,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Storage"
+	},
+	"Shelf01_Stone": {
+		"sx": 50,
+		"sy": 180,
+		"sz": 314,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 162,
+		"typeA": "Storage"
+	},
+	"Shelf02_Stone": {
+		"sx": 80,
+		"sy": 140,
+		"sz": 222,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 116,
+		"typeA": "Storage"
+	},
+	"Shelf03_Stone": {
+		"sx": 64,
+		"sy": 120,
+		"sz": 84,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 47,
+		"typeA": "Storage"
+	},
+	"Shelf04_Stone": {
+		"sx": 50,
+		"sy": 54,
+		"sz": 76,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 43,
+		"typeA": "Storage"
+	},
+	"Container01_Iron": {
+		"sx": 610,
+		"sy": 244,
+		"sz": 250,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 135,
+		"typeA": "Storage"
+	},
+	"TableSquare_Wood": {
+		"sx": 154,
+		"sy": 290,
+		"sz": 70,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Furniture"
+	},
+	"TableCircular_Wood": {
+		"sx": 160,
+		"sy": 160,
+		"sz": 80,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Furniture"
+	},
+	"Bench_Wood": {
+		"sx": 52,
+		"sy": 200,
+		"sz": 40,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 30,
+		"typeA": "Furniture"
+	},
+	"Stool_Wood": {
+		"sx": 40,
+		"sy": 40,
+		"sz": 40,
+		"ox": 0,
+		"oy": 0,
+		"oz": 30,
+		"typeA": "Furniture"
+	},
+	"Decal_PalSticker_PinkCat": {
+		"sx": 1,
+		"sy": 20,
+		"sz": 20,
+		"ox": 1,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Furniture"
+	},
+	"Stool_High_Wood": {
+		"sx": 36,
+		"sy": 36,
+		"sz": 76,
+		"ox": 0,
+		"oy": 0,
+		"oz": 48,
+		"typeA": "Furniture"
+	},
+	"Counter_Wood": {
+		"sx": 300,
+		"sy": 590,
+		"sz": 90,
+		"ox": 0,
+		"oy": 0,
+		"oz": 55,
+		"typeA": "Furniture"
+	},
+	"Rug_Wood": {
+		"sx": 80,
+		"sy": 100,
+		"sz": 0.2,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 5,
+		"typeA": "Furniture"
+	},
+	"Shelf_Hang02_Wood": {
+		"sx": 30,
+		"sy": 150,
+		"sz": 56,
+		"ox": 16,
+		"oy": 0,
+		"oz": 11,
+		"typeA": "Furniture"
+	},
+	"Ivy01": {
+		"sx": 1,
+		"sy": 60,
+		"sz": 100,
+		"ox": 1,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Furniture"
+	},
+	"Ivy02": {
+		"sx": 1,
+		"sy": 40,
+		"sz": 100,
+		"ox": 1,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Furniture"
+	},
+	"Ivy03": {
+		"sx": 1,
+		"sy": 170,
+		"sz": 30,
+		"ox": 1,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Furniture"
+	},
+	"Chair01_Wood": {
+		"sx": 60,
+		"sy": 56,
+		"sz": 96,
+		"ox": 0,
+		"oy": 0,
+		"oz": 52,
+		"typeA": "Furniture"
+	},
+	"Box01_Stone": {
+		"sx": 42,
+		"sy": 54,
+		"sz": 68,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 39,
+		"typeA": "Furniture"
+	},
+	"Barrel01_Iron": {
+		"sx": 72,
+		"sy": 72,
+		"sz": 96,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 55,
+		"typeA": "Furniture"
+	},
+	"Barrel02_Iron": {
+		"sx": 72,
+		"sy": 72,
+		"sz": 96,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 55,
+		"typeA": "Furniture"
+	},
+	"Barrel03_Iron": {
+		"sx": 72,
+		"sy": 72,
+		"sz": 96,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 55,
+		"typeA": "Furniture"
+	},
+	"CableCoil01_Iron": {
+		"sx": 150,
+		"sy": 150,
+		"sz": 128,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 69,
+		"typeA": "Furniture"
+	},
+	"Chair01_Iron": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 96,
+		"ox": 0,
+		"oy": 0,
+		"oz": 54,
+		"typeA": "Furniture"
+	},
+	"Chair02_Iron": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 64,
+		"ox": 0,
+		"oy": 0,
+		"oz": 37,
+		"typeA": "Furniture"
+	},
+	"Clock01_Wall_Iron": {
+		"sx": 4,
+		"sy": 120,
+		"sz": 76,
+		"ox": 3,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Furniture"
+	},
+	"GarbageBag_Iron": {
+		"sx": 20,
+		"sy": 20,
+		"sz": 20,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 50,
+		"typeA": "Furniture"
+	},
+	"GoalSoccer_Iron": {
+		"sx": 282,
+		"sy": 740,
+		"sz": 244,
+		"ox": 0,
+		"oy": 0,
+		"oz": 127,
+		"typeA": "Furniture"
+	},
+	"MachineGame01_Iron": {
+		"sx": 110,
+		"sy": 132,
+		"sz": 210,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 110,
+		"typeA": "Furniture"
+	},
+	"MachineVending01_Iron": {
+		"sx": 80,
+		"sy": 126,
+		"sz": 210,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 110,
+		"typeA": "Furniture"
+	},
+	"PipeClay01_Iron": {
+		"sx": 420,
+		"sy": 140,
+		"sz": 132,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 72,
+		"typeA": "Furniture"
+	},
+	"SignExit_Ceiling_Iron": {
+		"sx": 16.653674,
+		"sy": 40,
+		"sz": 26,
+		"ox": 0,
+		"oy": 0,
+		"oz": -36,
+		"typeA": "Furniture"
+	},
+	"SignExit_Wall_Iron": {
+		"sx": 18,
+		"sy": 84,
+		"sz": 42,
+		"ox": 10,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Furniture"
+	},
+	"Sofa01_Iron": {
+		"sx": 126,
+		"sy": 120,
+		"sz": 86,
+		"ox": 0,
+		"oy": 0,
+		"oz": 48,
+		"typeA": "Furniture"
+	},
+	"Sofa02_Iron": {
+		"sx": 104,
+		"sy": 250,
+		"sz": 90,
+		"ox": 0,
+		"oy": 0,
+		"oz": 50,
+		"typeA": "Furniture"
+	},
+	"Stool01_Iron": {
+		"sx": 50,
+		"sy": 50,
+		"sz": 52,
+		"ox": 0,
+		"oy": 0,
+		"oz": 31,
+		"typeA": "Furniture"
+	},
+	"TableCircular01_Iron": {
+		"sx": 110,
+		"sy": 110,
+		"sz": 90,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 50,
+		"typeA": "Furniture"
+	},
+	"TableSide01_Iron": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 64,
+		"ox": 0,
+		"oy": 0,
+		"oz": 37,
+		"typeA": "Furniture"
+	},
+	"TableSquare01_Iron": {
+		"sx": 110,
+		"sy": 240,
+		"sz": 74,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Furniture"
+	},
+	"TableSquare02_Iron": {
+		"sx": 110,
+		"sy": 170,
+		"sz": 44,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 27,
+		"typeA": "Furniture"
+	},
+	"Tire01_Iron": {
+		"sx": 96,
+		"sy": 96,
+		"sz": 40,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 25,
+		"typeA": "Furniture"
+	},
+	"TrafficBarricade01_Iron": {
+		"sx": 44,
+		"sy": 156,
+		"sz": 100,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 55,
+		"typeA": "Furniture"
+	},
+	"TrafficBarricade02_Iron": {
+		"sx": 110,
+		"sy": 80,
+		"sz": 156,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 85,
+		"typeA": "Furniture"
+	},
+	"TrafficBarricade03_Iron": {
+		"sx": 56,
+		"sy": 170,
+		"sz": 80,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Furniture"
+	},
+	"TrafficBarricade04_Iron": {
+		"sx": 56,
+		"sy": 170,
+		"sz": 80,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Furniture"
+	},
+	"TrafficBarricade05_Iron": {
+		"sx": 20,
+		"sy": 246,
+		"sz": 104,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 57,
+		"typeA": "Furniture"
+	},
+	"TrafficCone01_Iron": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 96,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 55,
+		"typeA": "Furniture"
+	},
+	"TrafficCone02_Iron": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 116,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 63,
+		"typeA": "Furniture"
+	},
+	"TrafficCone03_Iron": {
+		"sx": 30,
+		"sy": 30,
+		"sz": 80,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Furniture"
+	},
+	"TrafficLight01_Iron": {
+		"sx": 140,
+		"sy": 140,
+		"sz": 620,
+		"ox": 40,
+		"oy": 40,
+		"oz": 320,
+		"typeA": "Furniture"
+	},
+	"BathTub_Stone": {
+		"sx": 120,
+		"sy": 250,
+		"sz": 270,
+		"ox": 0,
+		"oy": 0,
+		"oz": 136,
+		"typeA": "Furniture"
+	},
+	"Chair01_Stone": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 96,
+		"ox": 0,
+		"oy": 0,
+		"oz": 54,
+		"typeA": "Furniture"
+	},
+	"Chair02_Stone": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 102,
+		"ox": 0,
+		"oy": 0,
+		"oz": 57,
+		"typeA": "Furniture"
+	},
+	"Clock01_Stone": {
+		"sx": 36,
+		"sy": 52,
+		"sz": 230,
+		"ox": 0,
+		"oy": 0,
+		"oz": 120,
+		"typeA": "Furniture"
+	},
+	"Curtain01_Wall_Stone": {
+		"sx": 52,
+		"sy": 258,
+		"sz": 280,
+		"ox": 27,
+		"oy": 0,
+		"oz": 10,
+		"typeA": "Furniture"
+	},
+	"Desk01_Stone": {
+		"sx": 110,
+		"sy": 214,
+		"sz": 90,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 50,
+		"typeA": "Furniture"
+	},
+	"Globe01_Stone": {
+		"sx": 140,
+		"sy": 140,
+		"sz": 130,
+		"ox": 0,
+		"oy": 0,
+		"oz": 70,
+		"typeA": "Furniture"
+	},
+	"Mirror01_Stone": {
+		"sx": 42,
+		"sy": 116,
+		"sz": 210,
+		"ox": 0,
+		"oy": 0,
+		"oz": 110,
+		"typeA": "Furniture"
+	},
+	"Mirror02_Stone": {
+		"sx": 22,
+		"sy": 60,
+		"sz": 162,
+		"ox": 0,
+		"oy": 0,
+		"oz": 86,
+		"typeA": "Furniture"
+	},
+	"Mirror01_Wall_Stone": {
+		"sx": 8,
+		"sy": 104,
+		"sz": 246,
+		"ox": 5,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Furniture"
+	},
+	"Partition_Stone": {
+		"sx": 24,
+		"sy": 168,
+		"sz": 190,
+		"ox": 0,
+		"oy": 0,
+		"oz": 100,
+		"typeA": "Furniture"
+	},
+	"Piano01_Stone": {
+		"sx": 220,
+		"sy": 180,
+		"sz": 230,
+		"ox": 0,
+		"oy": 0,
+		"oz": 120,
+		"typeA": "Furniture"
+	},
+	"Piano02_Stone": {
+		"sx": 122,
+		"sy": 180,
+		"sz": 164,
+		"ox": 0,
+		"oy": 0,
+		"oz": 87,
+		"typeA": "Furniture"
+	},
+	"Rug01_Stone": {
+		"sx": 442,
+		"sy": 596,
+		"sz": 1,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 5,
+		"typeA": "Furniture"
+	},
+	"Rug02_Stone": {
+		"sx": 310,
+		"sy": 410,
+		"sz": 1,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 5,
+		"typeA": "Furniture"
+	},
+	"Rug03_Stone": {
+		"sx": 250,
+		"sy": 500,
+		"sz": 1,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 5,
+		"typeA": "Furniture"
+	},
+	"Rug04_Stone": {
+		"sx": 90,
+		"sy": 240,
+		"sz": 1,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 5,
+		"typeA": "Furniture"
+	},
+	"Sofa01_Stone": {
+		"sx": 100,
+		"sy": 120,
+		"sz": 164,
+		"ox": 0,
+		"oy": 0,
+		"oz": 87,
+		"typeA": "Furniture"
+	},
+	"Sofa02_Stone": {
+		"sx": 80,
+		"sy": 250,
+		"sz": 120,
+		"ox": 0,
+		"oy": 0,
+		"oz": 65,
+		"typeA": "Furniture"
+	},
+	"Sofa03_Stone": {
+		"sx": 72,
+		"sy": 98,
+		"sz": 44,
+		"ox": 0,
+		"oy": 0,
+		"oz": 27,
+		"typeA": "Furniture"
+	},
+	"Stool01_Stone": {
+		"sx": 40,
+		"sy": 40,
+		"sz": 40,
+		"ox": 0,
+		"oy": 0,
+		"oz": 30,
+		"typeA": "Furniture"
+	},
+	"Stove01_Stone": {
+		"sx": 160,
+		"sy": 80,
+		"sz": 90,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 50,
+		"typeA": "Furniture"
+	},
+	"TableCircular01_Stone": {
+		"sx": 160,
+		"sy": 200,
+		"sz": 86,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 50,
+		"typeA": "Furniture"
+	},
+	"TableDresser01_Stone": {
+		"sx": 110,
+		"sy": 214,
+		"sz": 90,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 50,
+		"typeA": "Furniture"
+	},
+	"TableSink01_Stone": {
+		"sx": 80,
+		"sy": 150,
+		"sz": 230,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 120,
+		"typeA": "Furniture"
+	},
+	"Toilet01_Stone": {
+		"sx": 84,
+		"sy": 64,
+		"sz": 282,
+		"ox": 0,
+		"oy": 0,
+		"oz": 146,
+		"typeA": "Furniture"
+	},
+	"ToiletHolder01_Stone": {
+		"sx": 20,
+		"sy": 28,
+		"sz": 60,
+		"ox": 0,
+		"oy": 0,
+		"oz": 35,
+		"typeA": "Furniture"
+	},
+	"TowlRack01_Stone": {
+		"sx": 48,
+		"sy": 122,
+		"sz": 130,
+		"ox": 0,
+		"oy": 0,
+		"oz": 70,
+		"typeA": "Furniture"
+	},
+	"Plant01_Plant": {
+		"sx": 46,
+		"sy": 46,
+		"sz": 66,
+		"ox": 0,
+		"oy": 0,
+		"oz": 38,
+		"typeA": "Furniture"
+	},
+	"Plant02_Plant": {
+		"sx": 46,
+		"sy": 46,
+		"sz": 102,
+		"ox": 0,
+		"oy": 0,
+		"oz": 56,
+		"typeA": "Furniture"
+	},
+	"Plant03_Plant": {
+		"sx": 40,
+		"sy": 40,
+		"sz": 102,
+		"ox": 0,
+		"oy": 0,
+		"oz": 56,
+		"typeA": "Furniture"
+	},
+	"Plant04_Plant": {
+		"sx": 32,
+		"sy": 32,
+		"sz": 28,
+		"ox": 0,
+		"oy": 0,
+		"oz": 19,
+		"typeA": "Furniture"
+	},
+	"Light_FloorLamp01": {
+		"sx": 30,
+		"sy": 30,
+		"sz": 220,
+		"ox": 0,
+		"oy": 0,
+		"oz": 115,
+		"typeA": "Light"
+	},
+	"Light_FloorLamp02": {
+		"sx": 30,
+		"sy": 30,
+		"sz": 170,
+		"ox": 0,
+		"oy": 0,
+		"oz": 90,
+		"typeA": "Light"
+	},
+	"Light_LightPole01": {
+		"sx": 36,
+		"sy": 36,
+		"sz": 280,
+		"ox": 0,
+		"oy": 0,
+		"oz": 145,
+		"typeA": "Light"
+	},
+	"Light_LightPole02": {
+		"sx": 50,
+		"sy": 50,
+		"sz": 350,
+		"ox": 0,
+		"oy": 0,
+		"oz": 180,
+		"typeA": "Light"
+	},
+	"Light_LightPole03": {
+		"sx": 40,
+		"sy": 40,
+		"sz": 360,
+		"ox": 0,
+		"oy": 0,
+		"oz": 185,
+		"typeA": "Light"
+	},
+	"Light_LightPole04": {
+		"sx": 30,
+		"sy": 30,
+		"sz": 340,
+		"ox": 0,
+		"oy": 0,
+		"oz": 175,
+		"typeA": "Light"
+	},
+	"Light_FirePlace01": {
+		"sx": 64,
+		"sy": 164,
+		"sz": 120,
+		"ox": 0,
+		"oy": 0,
+		"oz": 65,
+		"typeA": "Light"
+	},
+	"Light_FirePlace02": {
+		"sx": 64,
+		"sy": 164,
+		"sz": 120,
+		"ox": 0,
+		"oy": 0,
+		"oz": 65,
+		"typeA": "Light"
+	},
+	"Light_CandleSticks_Top": {
+		"sx": 120,
+		"sy": 120,
+		"sz": 150,
+		"ox": 0,
+		"oy": 0,
+		"oz": -80,
+		"typeA": "Light"
+	},
+	"Light_CandleSticks_Wall": {
+		"sx": 40,
+		"sy": 50,
+		"sz": 100,
+		"ox": 21,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Light"
+	},
+	"Television01_Iron": {
+		"sx": 60,
+		"sy": 90,
+		"sz": 60,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 35,
+		"typeA": "Furniture"
+	},
+	"Desk01_Iron": {
+		"sx": 96,
+		"sy": 234,
+		"sz": 84,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 47,
+		"typeA": "Furniture"
+	},
+	"TrafficSign01_Iron": {
+		"sx": 10,
+		"sy": 64,
+		"sz": 234,
+		"ox": 0,
+		"oy": 0,
+		"oz": 125,
+		"typeA": "Furniture"
+	},
+	"TrafficSign02_Iron": {
+		"sx": 10,
+		"sy": 64,
+		"sz": 244,
+		"ox": 0,
+		"oy": 0,
+		"oz": 132,
+		"typeA": "Furniture"
+	},
+	"TrafficSign03_Iron": {
+		"sx": 10,
+		"sy": 64,
+		"sz": 244,
+		"ox": 0,
+		"oy": 0,
+		"oz": 132,
+		"typeA": "Furniture"
+	},
+	"TrafficSign04_Iron": {
+		"sx": 10,
+		"sy": 64,
+		"sz": 244,
+		"ox": 0,
+		"oy": 0,
+		"oz": 132,
+		"typeA": "Furniture"
+	},
+	"Chair01_Pal": {
+		"sx": 86,
+		"sy": 80,
+		"sz": 100,
+		"ox": 0,
+		"oy": 0,
+		"oz": 55,
+		"typeA": "Furniture"
+	},
+	"Altar": {
+		"sx": 1400,
+		"sy": 1400,
+		"sz": 480,
+		"ox": -2.5839722e-7,
+		"oy": -0.000003014147,
+		"oz": 310,
+		"typeA": "Pal"
+	},
+	"CopperPit": {
+		"sx": 480,
+		"sy": 650,
+		"sz": 190,
+		"ox": 0,
+		"oy": 0,
+		"oz": 100,
+		"typeA": "Product"
+	},
+	"CopperPit_2": {
+		"sx": 960.08026,
+		"sy": 1249.32946,
+		"sz": 190,
+		"ox": 0,
+		"oy": 0,
+		"oz": 100,
+		"typeA": "Product"
+	},
+	"SulfurPit": {
+		"sx": 480,
+		"sy": 650,
+		"sz": 190,
+		"ox": 0,
+		"oy": 0,
+		"oz": 100,
+		"typeA": "Product"
+	},
+	"CoalPit": {
+		"sx": 480,
+		"sy": 650,
+		"sz": 190,
+		"ox": 0,
+		"oy": 0,
+		"oz": 100,
+		"typeA": "Product"
+	},
+	"IceCrusher": {
+		"sx": 240,
+		"sy": 360,
+		"sz": 240,
+		"ox": -79.29096,
+		"oy": -17.533031,
+		"oz": 125,
+		"typeA": "Product"
+	},
+	"DismantlingConveyor": {
+		"sx": 195,
+		"sy": 1600,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Pal"
+	},
+	"WallSignboard": {
+		"sx": 80,
+		"sy": 120,
+		"sz": 80,
+		"ox": 0,
+		"oy": -2,
+		"oz": 40,
+		"typeA": "Other"
+	},
+	"Glass_foundation": {
+		"sx": 320,
+		"sy": 320,
+		"sz": 400,
+		"ox": 0.0000013193637,
+		"oy": -6.5938366e-12,
+		"oz": -195,
+		"typeA": "Foundation"
+	},
+	"Glass_wall": {
+		"sx": 0.02,
+		"sy": 312,
+		"sz": 194,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 152.5,
+		"typeA": "Foundation"
+	},
+	"Glass_roof": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 25,
+		"ox": 0,
+		"oy": 0,
+		"oz": -7.5,
+		"typeA": "Foundation"
+	},
+	"Glass_stair": {
+		"sx": 312,
+		"sy": 312,
+		"sz": 260,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Foundation"
+	},
+	"Glass_DoorWall": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 184,
+		"ox": 0,
+		"oy": 0,
+		"oz": 158.80435,
+		"typeA": "Foundation"
+	},
+	"Glass_TriangleWall": {
+		"sx": 0.2,
+		"sy": 120,
+		"sz": 72.207108,
+		"ox": 0,
+		"oy": 100.50986,
+		"oz": 79.11247,
+		"typeA": "Foundation"
+	},
+	"Glass_SlantedRoof": {
+		"sx": 260,
+		"sy": 260,
+		"sz": 200,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Foundation"
+	},
+	"Glass_WindowWall": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 214,
+		"ox": 0,
+		"oy": 0,
+		"oz": 157.5,
+		"typeA": "Foundation"
+	},
+	"Wooden_Pillar": {
+		"sx": 0.2,
+		"sy": 0.2,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"Stone_Pillar": {
+		"sx": 0.2,
+		"sy": 0.2,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"Metal_Pillars": {
+		"sx": 0.2,
+		"sy": 0.2,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"Glass_Pillars": {
+		"sx": 0.2,
+		"sy": 0.2,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"SupplyDrop": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 60,
+		"ox": 0,
+		"oy": 0,
+		"oz": 30,
+		"typeA": "Other"
+	},
+	"MeteorDrop_Damagable": {
+		"sx": 260,
+		"sy": 260,
+		"sz": 100,
+		"ox": 0,
+		"oy": -2.842171e-14,
+		"oz": 28,
+		"typeA": "Other"
+	},
+	"ElectricGenerator_Large": {
+		"sx": 400,
+		"sy": 400,
+		"sz": 640,
+		"ox": -0.0000045007264,
+		"oy": -1.4779289e-12,
+		"oz": 330,
+		"typeA": "Infrastructure"
+	},
+	"OilPump": {
+		"sx": 480,
+		"sy": 480,
+		"sz": 500,
+		"ox": 0,
+		"oy": 0,
+		"oz": 300,
+		"typeA": "Product"
+	},
+	"SkinChange": {
+		"sx": 90,
+		"sy": 90,
+		"sz": 170,
+		"ox": 0,
+		"oy": -7.013227e-8,
+		"oz": 90,
+		"typeA": "Pal"
+	},
+	"JapaneseStyle_wall_01": {
+		"sx": 0.02,
+		"sy": 312,
+		"sz": 194,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 152.5,
+		"typeA": "Foundation"
+	},
+	"JapaneseStyle_DoorWall_01": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 184,
+		"ox": 0,
+		"oy": 0,
+		"oz": 158.80435,
+		"typeA": "Foundation"
+	},
+	"JapaneseStyle_DoorWall_02": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 184,
+		"ox": 0,
+		"oy": 0,
+		"oz": 158.80435,
+		"typeA": "Foundation"
+	},
+	"JapaneseStyle_roof_01": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 25,
+		"ox": 0,
+		"oy": 0,
+		"oz": -7.5,
+		"typeA": "Foundation"
+	},
+	"JapaneseStyle_roof_02": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 25,
+		"ox": 0,
+		"oy": 0,
+		"oz": -7.5,
+		"typeA": "Foundation"
+	},
+	"JapaneseStyle_SlantedRoof": {
+		"sx": 260,
+		"sy": 260,
+		"sz": 200,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Foundation"
+	},
+	"JapaneseStyle_TriangleWall": {
+		"sx": 0.2,
+		"sy": 120,
+		"sz": 72.207108,
+		"ox": 0,
+		"oy": 100.50986,
+		"oz": 79.11247,
+		"typeA": "Foundation"
+	},
+	"JapaneseStyle_WindowWall": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 214,
+		"ox": 0,
+		"oy": 0,
+		"oz": 157.5,
+		"typeA": "Foundation"
+	},
+	"JapaneseStyle_foundation": {
+		"sx": 320,
+		"sy": 320,
+		"sz": 400,
+		"ox": 0.0000013193637,
+		"oy": -6.5938366e-12,
+		"oz": -195,
+		"typeA": "Foundation"
+	},
+	"JapaneseStyle_stair": {
+		"sx": 312,
+		"sy": 312,
+		"sz": 260,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Foundation"
+	},
+	"JapaneseStyle_Pillar": {
+		"sx": 2,
+		"sy": 2,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Foundation"
+	},
+	"SanityDecrease1": {
+		"sx": 120,
+		"sy": 120,
+		"sz": 90,
+		"ox": 0,
+		"oy": 0,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"WorkSpeedIncrease1": {
+		"sx": 120,
+		"sy": 120,
+		"sz": 90,
+		"ox": 0,
+		"oy": 0,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"QuartzPit": {
+		"sx": 480,
+		"sy": 650,
+		"sz": 190,
+		"ox": 0,
+		"oy": 0,
+		"oz": 100,
+		"typeA": "Product"
+	},
+	"Factory_Money": {
+		"sx": 195,
+		"sy": 1000,
+		"sz": 95,
+		"ox": 0,
+		"oy": -10,
+		"oz": 60,
+		"typeA": "Product"
+	},
+	"ItemChest_04": {
+		"sx": 150,
+		"sy": 331.12222,
+		"sz": 130,
+		"ox": -6.97812e-8,
+		"oy": 1.3073986e-12,
+		"oz": 75,
+		"typeA": "Storage"
+	},
+	"MedicalPalBed_05": {
+		"sx": 190,
+		"sy": 190,
+		"sz": 290,
+		"ox": -1.04343314e-7,
+		"oy": 1.1368684e-13,
+		"oz": 160,
+		"typeA": "Infrastructure"
+	},
+	"FarmBlockV2_Carrot": {
+		"sx": 495,
+		"sy": 495,
+		"sz": 8,
+		"ox": 0,
+		"oy": 0,
+		"oz": 10,
+		"typeA": "Food"
+	},
+	"FarmBlockV2_Onion": {
+		"sx": 495,
+		"sy": 495,
+		"sz": 8,
+		"ox": 0,
+		"oy": 0,
+		"oz": 10,
+		"typeA": "Food"
+	},
+	"FarmBlockV2_Potato": {
+		"sx": 495,
+		"sy": 495,
+		"sz": 8,
+		"ox": 0,
+		"oy": 0,
+		"oz": 10,
+		"typeA": "Food"
+	},
+	"BaseCampItemDispenser": {
+		"sx": 400,
+		"sy": 860,
+		"sz": 390,
+		"ox": 0,
+		"oy": 0,
+		"oz": 200,
+		"typeA": "Storage"
+	},
+	"GuildChest": {
+		"sx": 90,
+		"sy": 88,
+		"sz": 72,
+		"ox": 0,
+		"oy": -1,
+		"oz": 38,
+		"typeA": "Storage"
+	},
+	"WoodCreator": {
+		"sx": 440,
+		"sy": 440,
+		"sz": 190,
+		"ox": 0,
+		"oy": 0,
+		"oz": 100,
+		"typeA": "Other"
+	},
+	"Expedition": {
+		"sx": 2535.8684,
+		"sy": 986.52466,
+		"sz": 723.13726,
+		"ox": 82.939766,
+		"oy": -2.2738868e-7,
+		"oz": 393,
+		"typeA": "Pal"
+	},
+	"ItemBooth": {
+		"sx": 404,
+		"sy": 420,
+		"sz": 274,
+		"ox": -15,
+		"oy": 0,
+		"oz": 139,
+		"typeA": "Other"
+	},
+	"Lab": {
+		"sx": 270,
+		"sy": 220,
+		"sz": 170,
+		"ox": 0,
+		"oy": 0,
+		"oz": 90,
+		"typeA": "Pal"
+	},
+	"PalBooth": {
+		"sx": 404,
+		"sy": 420,
+		"sz": 274,
+		"ox": -15,
+		"oy": -22,
+		"oz": 139,
+		"typeA": "Other"
+	},
+	"MultiElectricHatchingPalEgg": {
+		"sx": 240,
+		"sy": 330,
+		"sz": 120,
+		"ox": 0,
+		"oy": 0,
+		"oz": 70,
+		"typeA": "Pal"
+	},
+	"OperatingTable": {
+		"sx": 320,
+		"sy": 320,
+		"sz": 240,
+		"ox": 0,
+		"oy": 0,
+		"oz": 140,
+		"typeA": "Pal"
+	},
+	"ManualElectricGenerator": {
+		"sx": 260,
+		"sy": 560,
+		"sz": 354,
+		"ox": 0,
+		"oy": 0,
+		"oz": 180,
+		"typeA": "Infrastructure"
+	},
+	"Farm_SkillFruits": {
+		"sx": 495,
+		"sy": 495,
+		"sz": 380,
+		"ox": 0,
+		"oy": 0,
+		"oz": 198,
+		"typeA": "Food"
+	},
+	"Wooden_ladder": {
+		"sx": 4,
+		"sy": 20,
+		"sz": 220,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Foundation"
+	},
+	"PalMedicineBox": {
+		"sx": 30,
+		"sy": 80,
+		"sz": 160,
+		"ox": 0,
+		"oy": 0,
+		"oz": 82,
+		"typeA": "Infrastructure"
+	},
+	"EnergyStorage_Electric": {
+		"sx": 105.665032,
+		"sy": 110.025368,
+		"sz": 210,
+		"ox": 0,
+		"oy": 2.3794655e-9,
+		"oz": 108,
+		"typeA": "Infrastructure"
+	},
+	"DamagableRock0018": {
+		"sx": 120,
+		"sy": 120,
+		"sz": 120,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Other"
+	},
+	"Headstone": {
+		"sx": 80,
+		"sy": 120,
+		"sz": 76,
+		"ox": 0,
+		"oy": -2,
+		"oz": 40,
+		"typeA": "Other"
+	},
+	"JapaneseStyle_DoorWall_03": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 184,
+		"ox": 0,
+		"oy": 0,
+		"oz": 158.80435,
+		"typeA": "Foundation"
+	},
+	"DamagableRock0019": {
+		"sx": 440,
+		"sy": 320,
+		"sz": 300,
+		"ox": -5,
+		"oy": 5,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"Byobu": {
+		"sx": 55.501094,
+		"sy": 302.88708,
+		"sz": 191.865112,
+		"ox": -9.943816,
+		"oy": 1.958669e-7,
+		"oz": 105.935036,
+		"typeA": "Furniture"
+	},
+	"Kakejiku": {
+		"sx": 1,
+		"sy": 26.767862,
+		"sz": 40.734944,
+		"ox": 0.9999994,
+		"oy": 0,
+		"oz": 81.01902,
+		"typeA": "Furniture"
+	},
+	"Zaisu": {
+		"sx": 103.059472,
+		"sy": 112.093094,
+		"sz": 70,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Furniture"
+	},
+	"Zabuton": {
+		"sx": 80.142052,
+		"sy": 85.21872,
+		"sz": 35.669284,
+		"ox": -2.5839537e-7,
+		"oy": 2.4485377e-8,
+		"oz": 24.68534,
+		"typeA": "Furniture"
+	},
+	"Irori": {
+		"sx": 133.811692,
+		"sy": 126.91022,
+		"sz": 70,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Furniture"
+	},
+	"Toro": {
+		"sx": 43.211434,
+		"sy": 39.602826,
+		"sz": 80.315292,
+		"ox": -2.583954e-7,
+		"oy": -3.0961672e-8,
+		"oz": 50.09712,
+		"typeA": "Furniture"
+	},
+	"Andon": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 70,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Light"
+	},
+	"Shishiodoshi": {
+		"sx": 127.66004,
+		"sy": 153.75174,
+		"sz": 70,
+		"ox": 0.0000015993588,
+		"oy": -6.504416,
+		"oz": 45,
+		"typeA": "Furniture"
+	},
+	"Bonsai": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 70,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Furniture"
+	},
+	"Koro": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 70,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Furniture"
+	},
+	"Seika": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 70,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Furniture"
+	},
+	"Tansu": {
+		"sx": 83.659668,
+		"sy": 131.16462,
+		"sz": 183.07868,
+		"ox": -2.583954e-7,
+		"oy": -9.627883e-9,
+		"oz": 103.8087,
+		"typeA": "Storage"
+	},
+	"Fudukue": {
+		"sx": 98.08979,
+		"sy": 157.947052,
+		"sz": 47.934914,
+		"ox": -2.5839518e-7,
+		"oy": 2.6618667e-7,
+		"oz": 32.617805,
+		"typeA": "Furniture"
+	},
+	"CompositeDesk": {
+		"sx": 171.85378,
+		"sy": 156,
+		"sz": 95,
+		"ox": 33.275246,
+		"oy": -2.0000002,
+		"oz": 60,
+		"typeA": "Product"
+	},
+	"GlobalPalStorage": {
+		"sx": 280,
+		"sy": 440,
+		"sz": 90,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 50,
+		"typeA": "Pal"
+	},
+	"DimensionPalStorage": {
+		"sx": 110,
+		"sy": 214,
+		"sz": 90,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 50,
+		"typeA": "Pal"
+	},
+	"Wire_Fence": {
+		"sx": 20,
+		"sy": 246,
+		"sz": 260,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 137,
+		"typeA": "Furniture"
+	},
+	"SF_foundation": {
+		"sx": 320,
+		"sy": 320,
+		"sz": 400,
+		"ox": 0.0000013193637,
+		"oy": -6.5938366e-12,
+		"oz": -195,
+		"typeA": "Foundation"
+	},
+	"SF_wall": {
+		"sx": 0.02,
+		"sy": 312,
+		"sz": 194,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 152.5,
+		"typeA": "Foundation"
+	},
+	"SF_roof": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 25,
+		"ox": 0,
+		"oy": 0,
+		"oz": -7.5,
+		"typeA": "Foundation"
+	},
+	"SF_stair": {
+		"sx": 312,
+		"sy": 312,
+		"sz": 260,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Foundation"
+	},
+	"SF_DoorWall": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 184,
+		"ox": 0,
+		"oy": 0,
+		"oz": 158.80435,
+		"typeA": "Foundation"
+	},
+	"SF_TriangleWall": {
+		"sx": 0.2,
+		"sy": 120,
+		"sz": 72.207108,
+		"ox": 0,
+		"oy": 100.50986,
+		"oz": 79.11247,
+		"typeA": "Foundation"
+	},
+	"SF_SlantedRoof": {
+		"sx": 260,
+		"sy": 260,
+		"sz": 200,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Foundation"
+	},
+	"SF_WindowWall": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 214,
+		"ox": 0,
+		"oy": 0,
+		"oz": 157.5,
+		"typeA": "Foundation"
+	},
+	"SF_Pillars": {
+		"sx": 0.2,
+		"sy": 0.2,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"LilyQueenStatue": {
+		"sx": 36,
+		"sy": 52,
+		"sz": 230,
+		"ox": 0,
+		"oy": 0,
+		"oz": 120,
+		"typeA": "Furniture"
+	},
+	"ConservationGroupBannerA": {
+		"sx": 24,
+		"sy": 168,
+		"sz": 190,
+		"ox": 0,
+		"oy": 0,
+		"oz": 100,
+		"typeA": "Furniture"
+	},
+	"ConservationGroupBannerB": {
+		"sx": 1,
+		"sy": 26.767862,
+		"sz": 40.734944,
+		"ox": 0.9999994,
+		"oy": 0,
+		"oz": 81.01902,
+		"typeA": "Furniture"
+	},
+	"Banyan_Big": {
+		"sx": 0.2,
+		"sy": 0.2,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Furniture"
+	},
+	"Hunter_GangFlag": {
+		"sx": 10,
+		"sy": 64,
+		"sz": 600,
+		"ox": 0,
+		"oy": 0,
+		"oz": 322,
+		"typeA": "Furniture"
+	},
+	"PalCage": {
+		"sx": 220,
+		"sy": 220,
+		"sz": 320,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 170,
+		"typeA": "Furniture"
+	},
+	"WoodenBarricade": {
+		"sx": 88,
+		"sy": 240,
+		"sz": 100,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 55,
+		"typeA": "Furniture"
+	},
+	"WallTorch02": {
+		"sx": 30,
+		"sy": 30,
+		"sz": 60,
+		"ox": 10,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Light"
+	},
+	"CandleStand": {
+		"sx": 30,
+		"sy": 30,
+		"sz": 110,
+		"ox": 0,
+		"oy": -4,
+		"oz": 57.5,
+		"typeA": "Light"
+	},
+	"FireStand": {
+		"sx": 30,
+		"sy": 30,
+		"sz": 110,
+		"ox": 0,
+		"oy": -4,
+		"oz": 57.5,
+		"typeA": "Light"
+	},
+	"Wood_Fence": {
+		"sx": 6,
+		"sy": 310,
+		"sz": 104,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 57,
+		"typeA": "Foundation"
+	},
+	"Stone_Fence": {
+		"sx": 6,
+		"sy": 310,
+		"sz": 104,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 57,
+		"typeA": "Foundation"
+	},
+	"Iron_Fence": {
+		"sx": 6,
+		"sy": 310,
+		"sz": 104,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 57,
+		"typeA": "Foundation"
+	},
+	"Glass_Fence": {
+		"sx": 6,
+		"sy": 310,
+		"sz": 104,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 57,
+		"typeA": "Foundation"
+	},
+	"JapaneseStyle_Fence": {
+		"sx": 6,
+		"sy": 310,
+		"sz": 104,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 57,
+		"typeA": "Foundation"
+	},
+	"SF_Fence": {
+		"sx": 6,
+		"sy": 310,
+		"sz": 104,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 57,
+		"typeA": "Foundation"
+	},
+	"DestroyableWall_Rock01": {
+		"sx": 100,
+		"sy": 600,
+		"sz": 400,
+		"ox": 0,
+		"oy": 0,
+		"oz": 250,
+		"typeA": "Other"
+	},
+	"DestroyableWall_Rock02": {
+		"sx": 100,
+		"sy": 600,
+		"sz": 400,
+		"ox": 0,
+		"oy": 0,
+		"oz": 250,
+		"typeA": "Other"
+	},
+	"CrystalPit": {
+		"sx": 480,
+		"sy": 650,
+		"sz": 190,
+		"ox": 0,
+		"oy": 0,
+		"oz": 100,
+		"typeA": "Product"
+	},
+	"Spa3": {
+		"sx": 500,
+		"sy": 600,
+		"sz": 75,
+		"ox": 0,
+		"oy": 0,
+		"oz": 45,
+		"typeA": "Infrastructure"
+	},
+	"MultiHatchingPalEgg": {
+		"sx": 240,
+		"sy": 330,
+		"sz": 120,
+		"ox": 0,
+		"oy": 0,
+		"oz": 70,
+		"typeA": "Pal"
+	},
+	"FishingPond1": {
+		"sx": 122,
+		"sy": 180,
+		"sz": 164,
+		"ox": -20.214886,
+		"oy": -6.82121e-13,
+		"oz": 87.00001,
+		"typeA": "Product"
+	},
+	"FishingPond2": {
+		"sx": 235.04068,
+		"sy": 244.72824,
+		"sz": 324.66564,
+		"ox": -20.214886,
+		"oy": 4.4337867e-12,
+		"oz": 167,
+		"typeA": "Product"
+	},
+	"BaseCampWorkerExtraStation": {
+		"sx": 60,
+		"sy": 100,
+		"sz": 90,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 50,
+		"typeA": "Pal"
+	},
+	"SF_Desk": {
+		"sx": 180,
+		"sy": 280,
+		"sz": 90,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 50,
+		"typeA": "Furniture"
+	},
+	"SF_Chair": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 96,
+		"ox": 0,
+		"oy": 0,
+		"oz": 54,
+		"typeA": "Furniture"
+	},
+	"DamagableTree_Yakushima001": {
+		"sx": 40,
+		"sy": 40,
+		"sz": 380,
+		"ox": 0,
+		"oy": 0,
+		"oz": 200,
+		"typeA": "Other"
+	},
+	"DamagableTree_Yakushima002": {
+		"sx": 40,
+		"sy": 40,
+		"sz": 380,
+		"ox": 0,
+		"oy": 0,
+		"oz": 200,
+		"typeA": "Other"
+	},
+	"DamagableTree_Yakushima003": {
+		"sx": 40,
+		"sy": 40,
+		"sz": 380,
+		"ox": 0,
+		"oy": 0,
+		"oz": 200,
+		"typeA": "Other"
+	},
+	"LanternTop": {
+		"sx": 50,
+		"sy": 50,
+		"sz": 80,
+		"ox": 0,
+		"oy": 0,
+		"oz": -47.84705,
+		"typeA": "Light"
+	},
+	"Shrine_Lantern": {
+		"sx": 30,
+		"sy": 30,
+		"sz": 220,
+		"ox": 0,
+		"oy": 0,
+		"oz": 115,
+		"typeA": "Light"
+	},
+	"GuardianDogStatue": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 240,
+		"ox": 0,
+		"oy": 0,
+		"oz": 130,
+		"typeA": "Furniture"
+	},
+	"Yakushima_Crystal": {
+		"sx": 120,
+		"sy": 120,
+		"sz": 120,
+		"ox": 0,
+		"oy": 0,
+		"oz": 65,
+		"typeA": "Other"
+	},
+	"Yakushima_Pot": {
+		"sx": 120,
+		"sy": 120,
+		"sz": 120,
+		"ox": 0,
+		"oy": 0,
+		"oz": 65,
+		"typeA": "Other"
+	},
+	"Hunter_Flag": {
+		"sx": 10,
+		"sy": 64,
+		"sz": 1300,
+		"ox": 0,
+		"oy": 0,
+		"oz": 670,
+		"typeA": "Furniture"
+	},
+	"Hunter_Banner": {
+		"sx": 1,
+		"sy": 26.767862,
+		"sz": 40.734944,
+		"ox": 0.9999994,
+		"oy": 0,
+		"oz": 81.01902,
+		"typeA": "Furniture"
+	},
+	"Believer_Flag": {
+		"sx": 10,
+		"sy": 64,
+		"sz": 1300,
+		"ox": 0,
+		"oy": 0,
+		"oz": 670,
+		"typeA": "Furniture"
+	},
+	"Believer_Banner": {
+		"sx": 1,
+		"sy": 26.767862,
+		"sz": 40.734944,
+		"ox": 0.9999994,
+		"oy": 0,
+		"oz": 81.01902,
+		"typeA": "Furniture"
+	},
+	"FireCult_Flag": {
+		"sx": 10,
+		"sy": 64,
+		"sz": 1300,
+		"ox": 0,
+		"oy": 0,
+		"oz": 670,
+		"typeA": "Furniture"
+	},
+	"FireCult_Banner": {
+		"sx": 1,
+		"sy": 26.767862,
+		"sz": 40.734944,
+		"ox": 0.9999994,
+		"oy": 0,
+		"oz": 81.01902,
+		"typeA": "Furniture"
+	},
+	"Police_Flag": {
+		"sx": 10,
+		"sy": 64,
+		"sz": 1300,
+		"ox": 0,
+		"oy": 0,
+		"oz": 670,
+		"typeA": "Furniture"
+	},
+	"Police_Banner": {
+		"sx": 1,
+		"sy": 26.767862,
+		"sz": 40.734944,
+		"ox": 0.9999994,
+		"oy": 0,
+		"oz": 81.01902,
+		"typeA": "Furniture"
+	},
+	"Scientist_Flag": {
+		"sx": 10,
+		"sy": 64,
+		"sz": 1300,
+		"ox": 0,
+		"oy": 0,
+		"oz": 670,
+		"typeA": "Furniture"
+	},
+	"Scientist_Banner": {
+		"sx": 1,
+		"sy": 26.767862,
+		"sz": 40.734944,
+		"ox": 0.9999994,
+		"oy": 0,
+		"oz": 81.01902,
+		"typeA": "Furniture"
+	},
+	"Ninja_Flag": {
+		"sx": 10,
+		"sy": 64,
+		"sz": 1300,
+		"ox": 0,
+		"oy": 0,
+		"oz": 670,
+		"typeA": "Furniture"
+	},
+	"Ninja_Banner": {
+		"sx": 1,
+		"sy": 26.767862,
+		"sz": 40.734944,
+		"ox": 0.9999994,
+		"oy": 0,
+		"oz": 81.01902,
+		"typeA": "Furniture"
+	},
+	"YakushimaBoss002_Relic": {
+		"sx": 36,
+		"sy": 52,
+		"sz": 230,
+		"ox": 0,
+		"oy": 0,
+		"oz": 120,
+		"typeA": "Furniture"
+	},
+	"Wooden_TriangleFoundation": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 400,
+		"ox": 100,
+		"oy": 100,
+		"oz": -195,
+		"typeA": "Foundation"
+	},
+	"Wooden_DiagonalWall": {
+		"sx": 20,
+		"sy": 436.8,
+		"sz": 214,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 169,
+		"typeA": "Foundation"
+	},
+	"Wooden_TriangleRoof": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 25,
+		"ox": 100,
+		"oy": 100,
+		"oz": -7.5,
+		"typeA": "Foundation"
+	},
+	"Wooden_TriangleStairsCorner": {
+		"sx": 80,
+		"sy": 80,
+		"sz": 80,
+		"ox": 20,
+		"oy": 20,
+		"oz": 102.5,
+		"typeA": "Foundation"
+	},
+	"Wood_TriangleWallReverse": {
+		"sx": 0.2,
+		"sy": 120,
+		"sz": 78.207108,
+		"ox": -3.9790393e-13,
+		"oy": -100.50986,
+		"oz": 227.61247,
+		"typeA": "Foundation"
+	},
+	"Wooden_WallGate": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 510,
+		"ox": 2,
+		"oy": 1.5592703e-7,
+		"oz": 310,
+		"typeA": "Foundation"
+	},
+	"DamagedScarecrow_Test": {
+		"sx": 600,
+		"sy": 600,
+		"sz": 200,
+		"ox": 2.9841019e-9,
+		"oy": 0,
+		"oz": 105,
+		"typeA": "Other"
+	},
+	"Wooden_SlopedRoofCorner": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 60,
+		"ox": -100,
+		"oy": -100,
+		"oz": 92.5,
+		"typeA": "Foundation"
+	},
+	"Wooden_PyramidRoof": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 52,
+		"ox": 0,
+		"oy": 0,
+		"oz": 35,
+		"typeA": "Foundation"
+	},
+	"Stone_TriangleFoundation": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 400,
+		"ox": 100,
+		"oy": 100,
+		"oz": -195,
+		"typeA": "Foundation"
+	},
+	"Stone_DiagonalWall": {
+		"sx": 20,
+		"sy": 436.8,
+		"sz": 214,
+		"ox": 0,
+		"oy": 0,
+		"oz": 169,
+		"typeA": "Foundation"
+	},
+	"Stone_TriangleRoof": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 25,
+		"ox": 100,
+		"oy": 100,
+		"oz": -7.5,
+		"typeA": "Foundation"
+	},
+	"Stone_TriangleStairsCorner": {
+		"sx": 80,
+		"sy": 80,
+		"sz": 80,
+		"ox": 20,
+		"oy": 20,
+		"oz": 102.5,
+		"typeA": "Foundation"
+	},
+	"Stone_TriangleWallReverse": {
+		"sx": 0.2,
+		"sy": 120,
+		"sz": 78.207108,
+		"ox": 0,
+		"oy": -100.50986,
+		"oz": 227.61247,
+		"typeA": "Foundation"
+	},
+	"Stone_WallGate": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 510,
+		"ox": 2,
+		"oy": 0,
+		"oz": 310,
+		"typeA": "Foundation"
+	},
+	"Stone_SlopedRoofCorner": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 60,
+		"ox": -100,
+		"oy": -100,
+		"oz": 92.5,
+		"typeA": "Foundation"
+	},
+	"Stone_PyramidRoof": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 80,
+		"ox": 0,
+		"oy": 0,
+		"oz": 21,
+		"typeA": "Foundation"
+	},
+	"Iron_TriangleFoundation": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 400,
+		"ox": 100,
+		"oy": 100,
+		"oz": -195,
+		"typeA": "Foundation"
+	},
+	"Iron_DiagonalWall": {
+		"sx": 20,
+		"sy": 436.8,
+		"sz": 214,
+		"ox": 0,
+		"oy": 0,
+		"oz": 169,
+		"typeA": "Foundation"
+	},
+	"Iron_TriangleRoof": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 25,
+		"ox": 100,
+		"oy": 100,
+		"oz": -7.5,
+		"typeA": "Foundation"
+	},
+	"Iron_TriangleStairsCorner": {
+		"sx": 80,
+		"sy": 80,
+		"sz": 80,
+		"ox": 20,
+		"oy": 20,
+		"oz": 102.5,
+		"typeA": "Foundation"
+	},
+	"Iron_TriangleWallReverse": {
+		"sx": 0.2,
+		"sy": 120,
+		"sz": 78.207108,
+		"ox": 0,
+		"oy": -100.50986,
+		"oz": 227.61247,
+		"typeA": "Foundation"
+	},
+	"Iron_WallGate": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 510,
+		"ox": 2,
+		"oy": 0,
+		"oz": 310,
+		"typeA": "Foundation"
+	},
+	"Iron_SlopedRoofCorner": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 60,
+		"ox": -100,
+		"oy": -100,
+		"oz": 92.5,
+		"typeA": "Foundation"
+	},
+	"Iron_PyramidRoof": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 52,
+		"ox": 0,
+		"oy": 0,
+		"oz": 35,
+		"typeA": "Foundation"
+	},
+	"Glass_TriangleFoundation": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 400,
+		"ox": 100,
+		"oy": 100,
+		"oz": -195,
+		"typeA": "Foundation"
+	},
+	"Glass_DiagonalWall": {
+		"sx": 20,
+		"sy": 436.8,
+		"sz": 214,
+		"ox": 0,
+		"oy": 0,
+		"oz": 169,
+		"typeA": "Foundation"
+	},
+	"Glass_TriangleRoof": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 25,
+		"ox": 100,
+		"oy": 100,
+		"oz": -7.5,
+		"typeA": "Foundation"
+	},
+	"Glass_TriangleStairsCorner": {
+		"sx": 80,
+		"sy": 80,
+		"sz": 80,
+		"ox": 20,
+		"oy": 20,
+		"oz": 102.5,
+		"typeA": "Foundation"
+	},
+	"Glass_TriangleWallReverse": {
+		"sx": 0.2,
+		"sy": 120,
+		"sz": 78.207108,
+		"ox": 0,
+		"oy": -100.50986,
+		"oz": 227.61247,
+		"typeA": "Foundation"
+	},
+	"Glass_WallGate": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 510,
+		"ox": 2,
+		"oy": 0,
+		"oz": 310,
+		"typeA": "Foundation"
+	},
+	"Glass_SlopedRoofCorner": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 60,
+		"ox": -100,
+		"oy": -100,
+		"oz": 92.5,
+		"typeA": "Foundation"
+	},
+	"Glass_PyramidRoof": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 52,
+		"ox": 0,
+		"oy": 0,
+		"oz": 35,
+		"typeA": "Foundation"
+	},
+	"JapaneseStyle_TriangleFoundation": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 400,
+		"ox": 100,
+		"oy": 100,
+		"oz": -195,
+		"typeA": "Foundation"
+	},
+	"JapaneseStyle_DiagonalWall": {
+		"sx": 20,
+		"sy": 436.8,
+		"sz": 214,
+		"ox": 0,
+		"oy": 0,
+		"oz": 169,
+		"typeA": "Foundation"
+	},
+	"JapaneseStyle_TriangleRoof_01": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 25,
+		"ox": 100,
+		"oy": 100,
+		"oz": -7.5,
+		"typeA": "Foundation"
+	},
+	"JapaneseStyle_TriangleRoof_02": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 25,
+		"ox": 100,
+		"oy": 100,
+		"oz": -7.5,
+		"typeA": "Foundation"
+	},
+	"JapaneseStyle_TriangleStairsCorner_01": {
+		"sx": 80,
+		"sy": 80,
+		"sz": 80,
+		"ox": 20,
+		"oy": 20,
+		"oz": 102.5,
+		"typeA": "Foundation"
+	},
+	"JapaneseStyle_TriangleStairsCorner_02": {
+		"sx": 80,
+		"sy": 80,
+		"sz": 80,
+		"ox": 20,
+		"oy": 20,
+		"oz": 102.5,
+		"typeA": "Foundation"
+	},
+	"JapaneseStyle_TriangleWallReverse": {
+		"sx": 0.2,
+		"sy": 120,
+		"sz": 78.207108,
+		"ox": 0,
+		"oy": -100.50986,
+		"oz": 227.61247,
+		"typeA": "Foundation"
+	},
+	"JapaneseStyle_WallGate": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 510,
+		"ox": 2,
+		"oy": 0,
+		"oz": 310,
+		"typeA": "Foundation"
+	},
+	"JapaneseStyle_SlopedRoofCorner": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 60,
+		"ox": -100,
+		"oy": -100,
+		"oz": 92.5,
+		"typeA": "Foundation"
+	},
+	"JapaneseStyle_PyramidRoof": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 52,
+		"ox": 0,
+		"oy": 0,
+		"oz": 35,
+		"typeA": "Foundation"
+	},
+	"SF_TriangleFoundation": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 400,
+		"ox": 100,
+		"oy": 100,
+		"oz": -195,
+		"typeA": "Foundation"
+	},
+	"SF_DiagonalWall": {
+		"sx": 20,
+		"sy": 436.8,
+		"sz": 214,
+		"ox": 0,
+		"oy": 0,
+		"oz": 169,
+		"typeA": "Foundation"
+	},
+	"SF_TriangleRoof": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 25,
+		"ox": 100,
+		"oy": 100,
+		"oz": -7.5,
+		"typeA": "Foundation"
+	},
+	"SF_TriangleStairsCorner": {
+		"sx": 80,
+		"sy": 80,
+		"sz": 80,
+		"ox": 20,
+		"oy": 20,
+		"oz": 102.5,
+		"typeA": "Foundation"
+	},
+	"SF_TriangleWallReverse": {
+		"sx": 0.2,
+		"sy": 120,
+		"sz": 78.207108,
+		"ox": 0,
+		"oy": -100.50986,
+		"oz": 227.61247,
+		"typeA": "Foundation"
+	},
+	"SF_WallGate": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 510,
+		"ox": 2,
+		"oy": 0,
+		"oz": 310,
+		"typeA": "Foundation"
+	},
+	"SF_SlopedRoofCorner": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 60,
+		"ox": -100,
+		"oy": -100,
+		"oz": 92.5,
+		"typeA": "Foundation"
+	},
+	"SF_PyramidRoof": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 52,
+		"ox": 0,
+		"oy": 0,
+		"oz": 35,
+		"typeA": "Foundation"
+	},
+	"PalBox_RaidBossArea": {
+		"sx": 500,
+		"sy": 400,
+		"sz": 390,
+		"ox": -150,
+		"oy": 0,
+		"oz": 200,
+		"typeA": "Other"
+	},
+	"Altar_RaidBossArea": {
+		"sx": 1400,
+		"sy": 1400,
+		"sz": 480,
+		"ox": -2.5839722e-7,
+		"oy": -0.000003014147,
+		"oz": 310,
+		"typeA": "Other"
+	},
+	"DamagableRock0020": {
+		"sx": 440,
+		"sy": 320,
+		"sz": 300,
+		"ox": -5,
+		"oy": 5,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"DamagableRock0021": {
+		"sx": 495.75442,
+		"sy": 480.14126,
+		"sz": 300,
+		"ox": 0,
+		"oy": -40,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"Wooden_SlopedRoofCornerReverse": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 60,
+		"ox": 110,
+		"oy": 110,
+		"oz": 92.5,
+		"typeA": "Foundation"
+	},
+	"Stone_SlopedRoofCornerReverse": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 60,
+		"ox": 110,
+		"oy": 110,
+		"oz": 92.5,
+		"typeA": "Foundation"
+	},
+	"Iron_SlopedRoofCornerReverse": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 60,
+		"ox": 110,
+		"oy": 110,
+		"oz": 92.5,
+		"typeA": "Foundation"
+	},
+	"Glass_SlopedRoofCornerReverse": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 60,
+		"ox": 110,
+		"oy": 110,
+		"oz": 92.5,
+		"typeA": "Foundation"
+	},
+	"JapaneseStyle_SlopedRoofCornerReverse": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 60,
+		"ox": 110,
+		"oy": 110,
+		"oz": 92.5,
+		"typeA": "Foundation"
+	},
+	"SF_SlopedRoofCornerReverse": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 60,
+		"ox": 110,
+		"oy": 110,
+		"oz": 92.5,
+		"typeA": "Foundation"
+	},
+	"Ancient_SlopedRoofCornerReverse": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 60,
+		"ox": 110,
+		"oy": 110,
+		"oz": 92.5,
+		"typeA": "Foundation"
+	},
+	"DamagableBone0001": {
+		"sx": 440,
+		"sy": 320,
+		"sz": 300,
+		"ox": -5,
+		"oy": 5,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"DamagableRock0022": {
+		"sx": 440,
+		"sy": 320,
+		"sz": 300,
+		"ox": 10,
+		"oy": 10,
+		"oz": 100,
+		"typeA": "Other"
+	},
+	"DamagableWood0001": {
+		"sx": 440,
+		"sy": 320,
+		"sz": 300,
+		"ox": 0,
+		"oy": 5,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"AncientWorkBench": {
+		"sx": 148.71756,
+		"sy": 433.53788,
+		"sz": 95,
+		"ox": 3.2752442,
+		"oy": -2.0000002,
+		"oz": 60,
+		"typeA": "Product"
+	},
+	"AncientElectricGenerator": {
+		"sx": 250,
+		"sy": 250,
+		"sz": 360,
+		"ox": 0,
+		"oy": 0,
+		"oz": 185,
+		"typeA": "Infrastructure"
+	},
+	"AncientBlastFurnace": {
+		"sx": 240,
+		"sy": 360,
+		"sz": 82.34652,
+		"ox": -1.4188595,
+		"oy": -1.1544296e-7,
+		"oz": 45.045177,
+		"typeA": "Product"
+	},
+	"AncientCookingStove": {
+		"sx": 150,
+		"sy": 330,
+		"sz": 170,
+		"ox": -5.684342e-14,
+		"oy": -46.693558,
+		"oz": 114.257034,
+		"typeA": "Food"
+	},
+	"AncientMultiProduct": {
+		"sx": 400,
+		"sy": 400,
+		"sz": 480,
+		"ox": 0,
+		"oy": 0,
+		"oz": 245,
+		"typeA": "Product"
+	},
+	"AncientFarmBlock": {
+		"sx": 270,
+		"sy": 220,
+		"sz": 170,
+		"ox": 0,
+		"oy": 0,
+		"oz": 90,
+		"typeA": "Food"
+	},
+	"DefenseMachinegun_AutoTurret": {
+		"sx": 400,
+		"sy": 400,
+		"sz": 155,
+		"ox": 0,
+		"oy": 0,
+		"oz": 80,
+		"typeA": "Defense"
+	},
+	"MultiElectricHatchingPalEggWithBreed": {
+		"sx": 260,
+		"sy": 190,
+		"sz": 200,
+		"ox": 35,
+		"oy": 0,
+		"oz": 105,
+		"typeA": "Pal"
+	},
+	"AncientRelicRecycler": {
+		"sx": 250,
+		"sy": 340,
+		"sz": 95,
+		"ox": 33.275246,
+		"oy": 1.4941657,
+		"oz": 60,
+		"typeA": "Product"
+	},
+	"SkyIslandOrePit": {
+		"sx": 480,
+		"sy": 650,
+		"sz": 190,
+		"ox": 0,
+		"oy": 0,
+		"oz": 100,
+		"typeA": "Product"
+	},
+	"FurnitureTree01_Green": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 1060,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 570,
+		"typeA": "Furniture"
+	},
+	"FurnitureTree02_Green": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 1060,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 570,
+		"typeA": "Furniture"
+	},
+	"FurnitureTree03_Green": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 1360,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 720,
+		"typeA": "Furniture"
+	},
+	"FurnitureTree01_Red": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 1060,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 570,
+		"typeA": "Furniture"
+	},
+	"FurnitureTree02_Red": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 1060,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 570,
+		"typeA": "Furniture"
+	},
+	"FurnitureTree03_Red": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 960,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 520,
+		"typeA": "Furniture"
+	},
+	"FurnitureTree01_Yellow": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 1060,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 570,
+		"typeA": "Furniture"
+	},
+	"FurnitureTree02_Yellow": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 1060,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 570,
+		"typeA": "Furniture"
+	},
+	"FurnitureTree03_Yellow": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 960,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 520,
+		"typeA": "Furniture"
+	},
+	"FurnitureTree01_Cherry": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 660,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 370,
+		"typeA": "Furniture"
+	},
+	"FurnitureTree02_Cherry": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 560,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 320,
+		"typeA": "Furniture"
+	},
+	"FurnitureTree03_Cherry": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 1060,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 570,
+		"typeA": "Furniture"
+	},
+	"FurnitureTree01_Tropical": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 460,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 270,
+		"typeA": "Furniture"
+	},
+	"FurnitureTree02_Tropical": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 360,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 220,
+		"typeA": "Furniture"
+	},
+	"FurnitureTree03_Tropical": {
+		"sx": 120,
+		"sy": 120,
+		"sz": 400,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 240,
+		"typeA": "Furniture"
+	},
+	"FurnitureTree01_Snow": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 1360,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 720,
+		"typeA": "Furniture"
+	},
+	"FurnitureTree02_Snow": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 1060,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 570,
+		"typeA": "Furniture"
+	},
+	"FurnitureTree03_Snow": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 1360,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 720,
+		"typeA": "Furniture"
+	},
+	"FurnitureTree01_Desert": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 140,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 90,
+		"typeA": "Furniture"
+	},
+	"FurnitureTree02_Desert": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 560,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 320,
+		"typeA": "Furniture"
+	},
+	"FurnitureTree03_Desert": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 460,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 270,
+		"typeA": "Furniture"
+	},
+	"FurnitureTree01_Bamboo": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 760,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 420,
+		"typeA": "Furniture"
+	},
+	"FurnitureTree02_Bamboo": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 400,
+		"ox": -2.583954e-7,
+		"oy": 0,
+		"oz": 240,
+		"typeA": "Furniture"
+	},
+	"FurnitureTree03_Bamboo": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 50,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 35,
+		"typeA": "Furniture"
+	},
+	"FurnitureBush01_Green": {
+		"sx": 140,
+		"sy": 140,
+		"sz": 90,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 55,
+		"typeA": "Furniture"
+	},
+	"FurnitureBush01_Yellow": {
+		"sx": 360,
+		"sy": 360,
+		"sz": 250,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 175,
+		"typeA": "Furniture"
+	},
+	"FurnitureBush01_Flower": {
+		"sx": 140,
+		"sy": 140,
+		"sz": 120,
+		"ox": -2.583954e-7,
+		"oy": 0,
+		"oz": 80,
+		"typeA": "Furniture"
+	},
+	"FurnitureBush02_Flower": {
+		"sx": 120,
+		"sy": 120,
+		"sz": 70,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Furniture"
+	},
+	"FurnitureBush01_Tropical": {
+		"sx": 200,
+		"sy": 200,
+		"sz": 150,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 85,
+		"typeA": "Furniture"
+	},
+	"FurnitureBush01_Snow": {
+		"sx": 360,
+		"sy": 360,
+		"sz": 260,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 170,
+		"typeA": "Furniture"
+	},
+	"FurnitureStone01": {
+		"sx": 340,
+		"sy": 500,
+		"sz": 150,
+		"ox": -2.583954e-7,
+		"oy": 0,
+		"oz": 85,
+		"typeA": "Furniture"
+	},
+	"TableCircular_Wood_None": {
+		"sx": 160,
+		"sy": 160,
+		"sz": 80,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Furniture"
+	},
+	"TableSquare_Wood_None": {
+		"sx": 154,
+		"sy": 290,
+		"sz": 70,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Furniture"
+	},
+	"JetDragonStatue": {
+		"sx": 260,
+		"sy": 390,
+		"sz": 280,
+		"ox": 0,
+		"oy": 0,
+		"oz": 160,
+		"typeA": "Furniture"
+	},
+	"IceHorseStatue": {
+		"sx": 260,
+		"sy": 390,
+		"sz": 280,
+		"ox": 0,
+		"oy": 0,
+		"oz": 160,
+		"typeA": "Furniture"
+	},
+	"ArcadeVideoGame": {
+		"sx": 96,
+		"sy": 116,
+		"sz": 200,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 120,
+		"typeA": "Furniture"
+	},
+	"Ancient_foundation": {
+		"sx": 320,
+		"sy": 320,
+		"sz": 400,
+		"ox": 0.0000013193637,
+		"oy": -6.5938366e-12,
+		"oz": -195,
+		"typeA": "Foundation"
+	},
+	"Ancient_wall": {
+		"sx": 0.02,
+		"sy": 312,
+		"sz": 194,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 152.5,
+		"typeA": "Foundation"
+	},
+	"Ancient_roof": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 25,
+		"ox": 0,
+		"oy": 0,
+		"oz": -7.5,
+		"typeA": "Foundation"
+	},
+	"Ancient_stair": {
+		"sx": 312,
+		"sy": 312,
+		"sz": 260,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Foundation"
+	},
+	"Ancient_DoorWall": {
+		"sx": 20,
+		"sy": 312,
+		"sz": 184,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 141.30435,
+		"typeA": "Foundation"
+	},
+	"Ancient_TriangleWall": {
+		"sx": 0.2,
+		"sy": 120,
+		"sz": 72.207108,
+		"ox": 0,
+		"oy": 100.50986,
+		"oz": 79.11247,
+		"typeA": "Foundation"
+	},
+	"Ancient_SlantedRoof": {
+		"sx": 260,
+		"sy": 260,
+		"sz": 200,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Foundation"
+	},
+	"Ancient_WindowWall": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 214,
+		"ox": 0,
+		"oy": 0,
+		"oz": 157.5,
+		"typeA": "Foundation"
+	},
+	"Ancient_Pillars": {
+		"sx": 0.2,
+		"sy": 0.2,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Foundation"
+	},
+	"Ancient_Fence": {
+		"sx": 6,
+		"sy": 310,
+		"sz": 104,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 57,
+		"typeA": "Foundation"
+	},
+	"Ancient_TriangleFoundation": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 400,
+		"ox": 100,
+		"oy": 100,
+		"oz": -195,
+		"typeA": "Foundation"
+	},
+	"Ancient_DiagonalWall": {
+		"sx": 20,
+		"sy": 436.8,
+		"sz": 214,
+		"ox": 0,
+		"oy": 0,
+		"oz": 169,
+		"typeA": "Foundation"
+	},
+	"Ancient_TriangleRoof": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 25,
+		"ox": 100,
+		"oy": 100,
+		"oz": -7.5,
+		"typeA": "Foundation"
+	},
+	"Ancient_TriangleStairsCorner": {
+		"sx": 80,
+		"sy": 80,
+		"sz": 80,
+		"ox": 20,
+		"oy": 20,
+		"oz": 102.5,
+		"typeA": "Foundation"
+	},
+	"Ancient_TriangleWallReverse": {
+		"sx": 0.2,
+		"sy": 120,
+		"sz": 78.207108,
+		"ox": 0,
+		"oy": -100.50986,
+		"oz": 227.61247,
+		"typeA": "Foundation"
+	},
+	"Ancient_WallGate": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 510,
+		"ox": 2,
+		"oy": 0,
+		"oz": 310,
+		"typeA": "Foundation"
+	},
+	"Ancient_SlopedRoofCorner": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 60,
+		"ox": -100,
+		"oy": -100,
+		"oz": 92.5,
+		"typeA": "Foundation"
+	},
+	"Ancient_PyramidRoof": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 52,
+		"ox": 0,
+		"oy": 0,
+		"oz": 35,
+		"typeA": "Foundation"
+	},
+	"DarkIsland_Flag": {
+		"sx": 10,
+		"sy": 64,
+		"sz": 1300,
+		"ox": 0,
+		"oy": 0,
+		"oz": 670,
+		"typeA": "Furniture"
+	},
+	"DarkIsland_Banner": {
+		"sx": 1,
+		"sy": 26.767862,
+		"sz": 40.734944,
+		"ox": 0.9999994,
+		"oy": 0,
+		"oz": 81.01902,
+		"typeA": "Furniture"
+	},
+	"SkyIsland_Flag": {
+		"sx": 10,
+		"sy": 64,
+		"sz": 1300,
+		"ox": 0,
+		"oy": 0,
+		"oz": 670,
+		"typeA": "Furniture"
+	},
+	"SkyIsland_Banner": {
+		"sx": 1,
+		"sy": 26.767862,
+		"sz": 40.734944,
+		"ox": 0.9999994,
+		"oy": 0,
+		"oz": 81.01902,
+		"typeA": "Furniture"
+	},
+	"BaseCampWorkHard02": {
+		"sx": 190,
+		"sy": 186.369308,
+		"sz": 160,
+		"ox": 15.892151,
+		"oy": -2,
+		"oz": 83,
+		"typeA": "Pal"
+	},
+	"BaseCampWorkHard03": {
+		"sx": 190,
+		"sy": 186.369308,
+		"sz": 160,
+		"ox": 15.892151,
+		"oy": -2,
+		"oz": 83,
+		"typeA": "Pal"
+	},
+	"StationDeforest3": {
+		"sx": 480,
+		"sy": 650,
+		"sz": 190,
+		"ox": 0,
+		"oy": 0,
+		"oz": 100,
+		"typeA": "Product"
+	},
+	"Clinic": {
+		"sx": 190,
+		"sy": 186.369308,
+		"sz": 160,
+		"ox": 15.892151,
+		"oy": -2,
+		"oz": 83,
+		"typeA": "Infrastructure"
+	},
+	"Ancient_Clinic": {
+		"sx": 240,
+		"sy": 320,
+		"sz": 160,
+		"ox": 15.892151,
+		"oy": -2,
+		"oz": 83,
+		"typeA": "Infrastructure"
+	},
+	"Ancient_Spa": {
+		"sx": 500,
+		"sy": 600,
+		"sz": 75,
+		"ox": 0,
+		"oy": 0,
+		"oz": 45,
+		"typeA": "Infrastructure"
+	},
+	"Ancient_AirConditioner": {
+		"sx": 120,
+		"sy": 120,
+		"sz": 240,
+		"ox": 0.0000025840409,
+		"oy": 2.7122408e-7,
+		"oz": 117.70143,
+		"typeA": "Infrastructure"
+	},
+	"Ancient_MedicalPalBed": {
+		"sx": 469.09536,
+		"sy": 441.0252,
+		"sz": 100,
+		"ox": -1.04343314e-7,
+		"oy": 1.1368684e-13,
+		"oz": 55,
+		"typeA": "Infrastructure"
+	},
+	"OilPump02": {
+		"sx": 480,
+		"sy": 480,
+		"sz": 500,
+		"ox": 0,
+		"oy": 0,
+		"oz": 300,
+		"typeA": "Product"
+	},
+	"EnemyCamp_Wooden_foundation": {
+		"sx": 320,
+		"sy": 320,
+		"sz": 60,
+		"ox": 0.0000013193637,
+		"oy": -6.5938366e-12,
+		"oz": -32.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Wooden_wall": {
+		"sx": 20,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Wood_WindowWall": {
+		"sx": 20,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Wood_TriangleWall": {
+		"sx": 0.2,
+		"sy": 140.40822,
+		"sz": 98.207108,
+		"ox": -3.9790393e-13,
+		"oy": 100.50986,
+		"oz": 72.61247,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Wooden_roof": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 52,
+		"ox": 0,
+		"oy": 0,
+		"oz": 6.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Wood_SlantedRoof": {
+		"sx": 260,
+		"sy": 260,
+		"sz": 200,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Wooden_stair": {
+		"sx": 312,
+		"sy": 312,
+		"sz": 260,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Wooden_DoorWall": {
+		"sx": 20,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 141.30435,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Wooden_Pillar": {
+		"sx": 0.2,
+		"sy": 0.2,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_DefenseWall_Wood": {
+		"sx": 2,
+		"sy": 220,
+		"sz": 1400,
+		"ox": 1.1368684e-13,
+		"oy": 2.1937177e-7,
+		"oz": 110,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Wood_Gate": {
+		"sx": 100,
+		"sy": 800,
+		"sz": 640,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 325,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Wooden_ladder": {
+		"sx": 4,
+		"sy": 20,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stone_foundation": {
+		"sx": 320,
+		"sy": 320,
+		"sz": 60,
+		"ox": 0,
+		"oy": 0,
+		"oz": -32.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stone_wall": {
+		"sx": 26,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stone_WindowWall": {
+		"sx": 26,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stone_TriangleWall": {
+		"sx": 0.2,
+		"sy": 140.40822,
+		"sz": 98.207108,
+		"ox": 0,
+		"oy": 100.50986,
+		"oz": 72.61247,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stone_roof": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 52,
+		"ox": 0,
+		"oy": 0,
+		"oz": 6.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stone_SlantedRoof": {
+		"sx": 260,
+		"sy": 260,
+		"sz": 200,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stone_stair": {
+		"sx": 312,
+		"sy": 312,
+		"sz": 260,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stone_DoorWall": {
+		"sx": 20,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 141.30435,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stone_Pillar": {
+		"sx": 0.2,
+		"sy": 0.2,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_DefenseWall": {
+		"sx": 2,
+		"sy": 220,
+		"sz": 1400,
+		"ox": 0,
+		"oy": 0,
+		"oz": 110,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stone_Gate": {
+		"sx": 100,
+		"sy": 800,
+		"sz": 640,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 325,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Metal_foundation": {
+		"sx": 320,
+		"sy": 320,
+		"sz": 60,
+		"ox": 0,
+		"oy": 0,
+		"oz": -32.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Metal_wall": {
+		"sx": 26,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Metal_WindowWall": {
+		"sx": 20,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Metal_TriangleWall": {
+		"sx": 0.2,
+		"sy": 140.40822,
+		"sz": 98.207108,
+		"ox": 0,
+		"oy": 100.50986,
+		"oz": 72.61247,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Metal_roof": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 40,
+		"ox": 3.0432517e-7,
+		"oy": 0,
+		"oz": -6.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Metal_SlantedRoof": {
+		"sx": 260,
+		"sy": 260,
+		"sz": 200,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Metal_stair": {
+		"sx": 312,
+		"sy": 312,
+		"sz": 260,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Metal_DoorWall": {
+		"sx": 20,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 141.30435,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Metal_Pillars": {
+		"sx": 0.2,
+		"sy": 0.2,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_DefenseWall_Metal": {
+		"sx": 2,
+		"sy": 220,
+		"sz": 1400,
+		"ox": 0,
+		"oy": 0,
+		"oz": 110,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Metal_Gate": {
+		"sx": 100,
+		"sy": 800,
+		"sz": 640,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 325,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Glass_foundation": {
+		"sx": 320,
+		"sy": 320,
+		"sz": 60,
+		"ox": 0.0000013193637,
+		"oy": -6.5938366e-12,
+		"oz": -32.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Glass_wall": {
+		"sx": 20,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Glass_WindowWall": {
+		"sx": 20,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Glass_TriangleWall": {
+		"sx": 0.2,
+		"sy": 140.40822,
+		"sz": 98.207108,
+		"ox": -3.9790393e-13,
+		"oy": 100.50986,
+		"oz": 72.61247,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Glass_roof": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 52,
+		"ox": 0,
+		"oy": 0,
+		"oz": 6.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Glass_SlantedRoof": {
+		"sx": 260,
+		"sy": 260,
+		"sz": 200,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Glass_stair": {
+		"sx": 312,
+		"sy": 312,
+		"sz": 260,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Glass_DoorWall": {
+		"sx": 20,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 141.30435,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Glass_Pillars": {
+		"sx": 0.2,
+		"sy": 0.2,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_JapaneseStyle_foundation": {
+		"sx": 320,
+		"sy": 320,
+		"sz": 60,
+		"ox": 0.0000013193637,
+		"oy": -6.5938366e-12,
+		"oz": -32.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_JapaneseStyle_wall_01": {
+		"sx": 20,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_JapaneseStyle_WindowWall": {
+		"sx": 20,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_JapaneseStyle_TriangleWall": {
+		"sx": 0.2,
+		"sy": 140.40822,
+		"sz": 98.207108,
+		"ox": -3.9790393e-13,
+		"oy": 100.50986,
+		"oz": 72.61247,
+		"typeA": "Other"
+	},
+	"EnemyCamp_JapaneseStyle_roof_01": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 52,
+		"ox": 0,
+		"oy": 0,
+		"oz": 6.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_JapaneseStyle_roof_02": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 52,
+		"ox": 0,
+		"oy": 0,
+		"oz": 6.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_JapaneseStyle_SlantedRoof": {
+		"sx": 260,
+		"sy": 260,
+		"sz": 200,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_JapaneseStyle_stair": {
+		"sx": 312,
+		"sy": 312,
+		"sz": 260,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_JapaneseStyle_DoorWall_01": {
+		"sx": 20,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 141.30435,
+		"typeA": "Other"
+	},
+	"EnemyCamp_JapaneseStyle_DoorWall_02": {
+		"sx": 20,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 141.30435,
+		"typeA": "Other"
+	},
+	"EnemyCamp_JapaneseStyle_DoorWall_03": {
+		"sx": 20,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 141.30435,
+		"typeA": "Other"
+	},
+	"EnemyCamp_JapaneseStyle_Pillar": {
+		"sx": 2,
+		"sy": 2,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Wooden_wall_Destructable": {
+		"sx": 20,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stone_wall_Destructable": {
+		"sx": 26,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Metal_wall_Destructable": {
+		"sx": 26,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Glass_wall_Destructable": {
+		"sx": 20,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_JapaneseStyle_wall_01_Destructable": {
+		"sx": 20,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SF_Wall_Destructable": {
+		"sx": 20,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_WorkBench": {
+		"sx": 108.740448,
+		"sy": 156,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Other"
+	},
+	"EnemyCamp_RepairBench": {
+		"sx": 95,
+		"sy": 144.07906,
+		"sz": 116.3156,
+		"ox": 8.069157,
+		"oy": -7.013227e-8,
+		"oz": 65,
+		"typeA": "Other"
+	},
+	"EnemyCamp_WorkBench_SkillUnlock": {
+		"sx": 121.989852,
+		"sy": 138,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Other"
+	},
+	"EnemyCamp_BlastFurnace": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 82.34652,
+		"ox": 0,
+		"oy": -1.1544029e-7,
+		"oz": 45.04518,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Factory_Hard_01": {
+		"sx": 169.40388,
+		"sy": 220,
+		"sz": 137.76825,
+		"ox": 29.931633,
+		"oy": 1.2710642e-7,
+		"oz": 75.152756,
+		"typeA": "Other"
+	},
+	"EnemyCamp_MedicineFacility_01": {
+		"sx": 189.919892,
+		"sy": 122.96051,
+		"sz": 118.254006,
+		"ox": 37.717472,
+		"oy": -2.5187643,
+		"oz": 61.130417,
+		"typeA": "Other"
+	},
+	"EnemyCamp_WeaponFactory_Dirty_01": {
+		"sx": 172.13904,
+		"sy": 230.3005,
+		"sz": 170,
+		"ox": 29.797054,
+		"oy": -2,
+		"oz": 98,
+		"typeA": "Other"
+	},
+	"EnemyCamp_WeaponFactory_Dirty_02": {
+		"sx": 195,
+		"sy": 1000,
+		"sz": 95,
+		"ox": 0,
+		"oy": -10,
+		"oz": 60,
+		"typeA": "Other"
+	},
+	"EnemyCamp_BlastFurnace2": {
+		"sx": 170.87259,
+		"sy": 108.758172,
+		"sz": 213.62709,
+		"ox": 32.79647,
+		"oy": 0,
+		"oz": 115.51743,
+		"typeA": "Other"
+	},
+	"EnemyCamp_MedicineFacility_02": {
+		"sx": 100,
+		"sy": 180,
+		"sz": 170,
+		"ox": -0.18455674,
+		"oy": -2.518765,
+		"oz": 90,
+		"typeA": "Other"
+	},
+	"EnemyCamp_BlastFurnace3": {
+		"sx": 255.89038,
+		"sy": 160,
+		"sz": 305.99918,
+		"ox": 28.065083,
+		"oy": -3.4296468e-7,
+		"oz": 162.75034,
+		"typeA": "Other"
+	},
+	"EnemyCamp_OilPump": {
+		"sx": 480,
+		"sy": 480,
+		"sz": 500,
+		"ox": 0,
+		"oy": 0,
+		"oz": 300,
+		"typeA": "Other"
+	},
+	"EnemyCamp_BlastFurnace4": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 400,
+		"ox": 4.0472295e-7,
+		"oy": -3.410605e-13,
+		"oz": 205,
+		"typeA": "Other"
+	},
+	"EnemyCamp_MedicineFacility_03": {
+		"sx": 120,
+		"sy": 240,
+		"sz": 170,
+		"ox": -0.18455674,
+		"oy": -2.518765,
+		"oz": 90,
+		"typeA": "Other"
+	},
+	"EnemyCamp_BuildableGoddessStatue": {
+		"sx": 160,
+		"sy": 160,
+		"sz": 240,
+		"ox": 0,
+		"oy": 0,
+		"oz": 130,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SphereFactory_Black_01": {
+		"sx": 172.13269,
+		"sy": 241.8908,
+		"sz": 160,
+		"ox": 30.813251,
+		"oy": 0,
+		"oz": 103,
+		"typeA": "Other"
+	},
+	"EnemyCamp_CharacterRankUp": {
+		"sx": 540,
+		"sy": 400,
+		"sz": 105,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Lab": {
+		"sx": 270,
+		"sy": 220,
+		"sz": 170,
+		"ox": 0,
+		"oy": 0,
+		"oz": 90,
+		"typeA": "Other"
+	},
+	"EnemyCamp_HatchingPalEgg": {
+		"sx": 195,
+		"sy": 195,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Other"
+	},
+	"EnemyCamp_ElectricHatchingPalEgg": {
+		"sx": 195,
+		"sy": 195,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Other"
+	},
+	"EnemyCamp_DismantlingConveyor": {
+		"sx": 195,
+		"sy": 1600,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Other"
+	},
+	"EnemyCamp_MultiElectricHatchingPalEgg": {
+		"sx": 240,
+		"sy": 330,
+		"sz": 120,
+		"ox": 0,
+		"oy": 0,
+		"oz": 70,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SphereFactory_Black_04": {
+		"sx": 195,
+		"sy": 1200,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Other"
+	},
+	"EnemyCamp_ItemChest": {
+		"sx": 66,
+		"sy": 88,
+		"sz": 72,
+		"ox": 0,
+		"oy": -1,
+		"oz": 38,
+		"typeA": "Other"
+	},
+	"EnemyCamp_CoolerBox": {
+		"sx": 80,
+		"sy": 71.791054,
+		"sz": 74.111694,
+		"ox": 6.398531,
+		"oy": -0.99999994,
+		"oz": 46.614,
+		"typeA": "Other"
+	},
+	"EnemyCamp_ItemChest_02": {
+		"sx": 88,
+		"sy": 120,
+		"sz": 80,
+		"ox": 0,
+		"oy": 0,
+		"oz": 42,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Refrigerator": {
+		"sx": 140,
+		"sy": 110,
+		"sz": 180,
+		"ox": 3.897719,
+		"oy": -1.0000007,
+		"oz": 109.19514,
+		"typeA": "Other"
+	},
+	"EnemyCamp_ItemChest_03": {
+		"sx": 103.5437,
+		"sy": 140,
+		"sz": 200,
+		"ox": 0,
+		"oy": 0,
+		"oz": 105,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Barrel_Wood": {
+		"sx": 88,
+		"sy": 88,
+		"sz": 90,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 55,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Box_Wood": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 90,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 55,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Shelf_Wood": {
+		"sx": 60,
+		"sy": 140,
+		"sz": 230,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 123,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Shelf_Cask_Wood": {
+		"sx": 96,
+		"sy": 276,
+		"sz": 220,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 115,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Shelf_Hang01_Wood": {
+		"sx": 42,
+		"sy": 146,
+		"sz": 66,
+		"ox": 23,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Shelf01_Stone": {
+		"sx": 50,
+		"sy": 180,
+		"sz": 314,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 162,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Shelf02_Stone": {
+		"sx": 80,
+		"sy": 140,
+		"sz": 222,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 116,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Shelf03_Stone": {
+		"sx": 64,
+		"sy": 120,
+		"sz": 84,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 47,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Shelf04_Stone": {
+		"sx": 50,
+		"sy": 54,
+		"sz": 76,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 43,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Shelf01_Wall_Iron": {
+		"sx": 46,
+		"sy": 212,
+		"sz": 144.62218,
+		"ox": 24,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Shelf05_Stone": {
+		"sx": 46,
+		"sy": 170,
+		"sz": 106,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 57,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Shelf06_Stone": {
+		"sx": 54,
+		"sy": 250,
+		"sz": 106,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 57,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Shelf07_Stone": {
+		"sx": 90,
+		"sy": 160,
+		"sz": 256,
+		"ox": 0,
+		"oy": 0,
+		"oz": 133,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Shelf01_Wall_Stone": {
+		"sx": 68,
+		"sy": 130,
+		"sz": 100,
+		"ox": 35,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Shelf01_Iron": {
+		"sx": 40,
+		"sy": 180,
+		"sz": 190,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 105,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Shelf02_Iron": {
+		"sx": 52,
+		"sy": 250,
+		"sz": 66,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 40,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Shelf03_Iron": {
+		"sx": 46,
+		"sy": 136,
+		"sz": 200,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 109,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Shelf04_Iron": {
+		"sx": 48,
+		"sy": 86,
+		"sz": 200,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 109,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Container01_Iron": {
+		"sx": 610,
+		"sy": 244,
+		"sz": 250,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 135,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Box01_Iron": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 90,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 55,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Box02_Iron": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 90,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 55,
+		"typeA": "Other"
+	},
+	"EnemyCamp_BaseCampItemDispenser": {
+		"sx": 400,
+		"sy": 860,
+		"sz": 390,
+		"ox": 0,
+		"oy": 0,
+		"oz": 200,
+		"typeA": "Other"
+	},
+	"EnemyCamp_ItemChest_04": {
+		"sx": 150,
+		"sy": 331.12222,
+		"sz": 130,
+		"ox": -6.97812e-8,
+		"oy": 1.3073986e-12,
+		"oz": 75,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Tansu": {
+		"sx": 83.659668,
+		"sy": 131.16462,
+		"sz": 183.07868,
+		"ox": -2.583954e-7,
+		"oy": -9.627883e-9,
+		"oz": 103.8087,
+		"typeA": "Other"
+	},
+	"EnemyCamp_CampFire": {
+		"sx": 95,
+		"sy": 195,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 30,
+		"typeA": "Other"
+	},
+	"EnemyCamp_CookingStove": {
+		"sx": 57,
+		"sy": 58.5,
+		"sz": 70,
+		"ox": 0,
+		"oy": 0,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"EnemyCamp_ElectricKitchen": {
+		"sx": 76.311112,
+		"sy": 164.29457,
+		"sz": 176.3333,
+		"ox": 1.8284812,
+		"oy": 0,
+		"oz": 95.263535,
+		"typeA": "Other"
+	},
+	"EnemyCamp_FarmBlockV2_wheet": {
+		"sx": 495,
+		"sy": 495,
+		"sz": 11,
+		"ox": 0,
+		"oy": 0,
+		"oz": 8,
+		"typeA": "Other"
+	},
+	"EnemyCamp_HugeKitchen": {
+		"sx": 160,
+		"sy": 164.29457,
+		"sz": 176.3333,
+		"ox": 1.8284812,
+		"oy": 0,
+		"oz": 95.263535,
+		"typeA": "Other"
+	},
+	"EnemyCamp_PlayerBed_02": {
+		"sx": 250,
+		"sy": 174,
+		"sz": 115,
+		"ox": 0,
+		"oy": 0,
+		"oz": 65,
+		"typeA": "Other"
+	},
+	"EnemyCamp_MedicalPalBed_02": {
+		"sx": 230,
+		"sy": 230,
+		"sz": 75,
+		"ox": 0,
+		"oy": 0,
+		"oz": 45,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Spa": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 75,
+		"ox": 0,
+		"oy": 0,
+		"oz": 45,
+		"typeA": "Other"
+	},
+	"EnemyCamp_ManualElectricGenerator": {
+		"sx": 260,
+		"sy": 560,
+		"sz": 354,
+		"ox": 0,
+		"oy": 0,
+		"oz": 180,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Heater": {
+		"sx": 70,
+		"sy": 70,
+		"sz": 100,
+		"ox": 0,
+		"oy": -0.0000011530103,
+		"oz": 141.65514,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Cooler": {
+		"sx": 70,
+		"sy": 70,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 44.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_PalMedicineBox": {
+		"sx": 30,
+		"sy": 80,
+		"sz": 160,
+		"ox": 0,
+		"oy": 0,
+		"oz": 82,
+		"typeA": "Other"
+	},
+	"EnemyCamp_MedicalPalBed_03": {
+		"sx": 230,
+		"sy": 230,
+		"sz": 75,
+		"ox": 0,
+		"oy": 0,
+		"oz": 45,
+		"typeA": "Other"
+	},
+	"EnemyCamp_ElectricGenerator": {
+		"sx": 270,
+		"sy": 270,
+		"sz": 230,
+		"ox": 0,
+		"oy": 0,
+		"oz": 120,
+		"typeA": "Other"
+	},
+	"EnemyCamp_PlayerBed_03": {
+		"sx": 250,
+		"sy": 174,
+		"sz": 115,
+		"ox": 0,
+		"oy": 0,
+		"oz": 65,
+		"typeA": "Other"
+	},
+	"EnemyCamp_EnergyStorage_Electric": {
+		"sx": 105.665032,
+		"sy": 110.025368,
+		"sz": 210,
+		"ox": 0,
+		"oy": 2.3794655e-9,
+		"oz": 108,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SanityDecrease1": {
+		"sx": 120,
+		"sy": 120,
+		"sz": 90,
+		"ox": 0,
+		"oy": 0,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"EnemyCamp_ElectricHeater": {
+		"sx": 240,
+		"sy": 240,
+		"sz": 460,
+		"ox": 0,
+		"oy": 0,
+		"oz": 230,
+		"typeA": "Other"
+	},
+	"EnemyCamp_ElectricCooler": {
+		"sx": 240,
+		"sy": 240,
+		"sz": 480,
+		"ox": 0,
+		"oy": 0,
+		"oz": 240,
+		"typeA": "Other"
+	},
+	"EnemyCamp_WorkSpeedIncrease1": {
+		"sx": 120,
+		"sy": 120,
+		"sz": 90,
+		"ox": 0,
+		"oy": 0,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"EnemyCamp_ElectricGenerator_Large": {
+		"sx": 400,
+		"sy": 400,
+		"sz": 640,
+		"ox": -0.0000045007264,
+		"oy": -1.4779289e-12,
+		"oz": 330,
+		"typeA": "Other"
+	},
+	"EnemyCamp_MedicalPalBed_05": {
+		"sx": 190,
+		"sy": 190,
+		"sz": 290,
+		"ox": -1.04343314e-7,
+		"oy": 1.1368684e-13,
+		"oz": 160,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Torch": {
+		"sx": 30,
+		"sy": 30,
+		"sz": 110,
+		"ox": 0,
+		"oy": -5,
+		"oz": 57.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_WallTorch": {
+		"sx": 30,
+		"sy": 30,
+		"sz": 60,
+		"ox": 0,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Lamp": {
+		"sx": 50,
+		"sy": 50,
+		"sz": 160,
+		"ox": 0,
+		"oy": -5,
+		"oz": 85,
+		"typeA": "Other"
+	},
+	"EnemyCamp_CeilingLamp": {
+		"sx": 50,
+		"sy": 50,
+		"sz": 40,
+		"ox": 0,
+		"oy": 0,
+		"oz": -20,
+		"typeA": "Other"
+	},
+	"EnemyCamp_LargeLamp": {
+		"sx": 50,
+		"sy": 50,
+		"sz": 220,
+		"ox": 5.5112986e-7,
+		"oy": -5,
+		"oz": 115,
+		"typeA": "Other"
+	},
+	"EnemyCamp_LargeCeilingLamp": {
+		"sx": 80,
+		"sy": 50,
+		"sz": 20,
+		"ox": 0,
+		"oy": 0,
+		"oz": -15,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Light_FirePlace01": {
+		"sx": 64,
+		"sy": 164,
+		"sz": 120,
+		"ox": 0,
+		"oy": 0,
+		"oz": 65,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Light_FirePlace02": {
+		"sx": 64,
+		"sy": 164,
+		"sz": 120,
+		"ox": 0,
+		"oy": 0,
+		"oz": 65,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Light_LightPole01": {
+		"sx": 36,
+		"sy": 36,
+		"sz": 280,
+		"ox": 0,
+		"oy": 0,
+		"oz": 145,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Light_LightPole02": {
+		"sx": 50,
+		"sy": 50,
+		"sz": 350,
+		"ox": 0,
+		"oy": 0,
+		"oz": 180,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Light_LightPole03": {
+		"sx": 40,
+		"sy": 40,
+		"sz": 360,
+		"ox": 0,
+		"oy": 0,
+		"oz": 185,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Light_LightPole04": {
+		"sx": 30,
+		"sy": 30,
+		"sz": 340,
+		"ox": 0,
+		"oy": 0,
+		"oz": 175,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Light_FloorLamp01": {
+		"sx": 30,
+		"sy": 30,
+		"sz": 220,
+		"ox": 0,
+		"oy": 0,
+		"oz": 115,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Light_FloorLamp02": {
+		"sx": 30,
+		"sy": 30,
+		"sz": 170,
+		"ox": 0,
+		"oy": 0,
+		"oz": 90,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Light_CandleSticks_Top": {
+		"sx": 120,
+		"sy": 120,
+		"sz": 150,
+		"ox": 0,
+		"oy": 0,
+		"oz": -80,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Light_CandleSticks_Wall": {
+		"sx": 40,
+		"sy": 50,
+		"sz": 100,
+		"ox": 21,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Other"
+	},
+	"EnemyCamp_BaseCampBattleDirector": {
+		"sx": 56,
+		"sy": 174,
+		"sz": 260,
+		"ox": 0,
+		"oy": 0,
+		"oz": 135,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Trap_Noose": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 100,
+		"ox": 0,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Other"
+	},
+	"EnemyCamp_DefenseWait": {
+		"sx": 195,
+		"sy": 195,
+		"sz": 5,
+		"ox": 0,
+		"oy": 0,
+		"oz": 5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_DefenseBowGun": {
+		"sx": 400,
+		"sy": 400,
+		"sz": 155,
+		"ox": 0,
+		"oy": 0,
+		"oz": 80,
+		"typeA": "Other"
+	},
+	"EnemyCamp_DefenseMachinegun": {
+		"sx": 400,
+		"sy": 400,
+		"sz": 155,
+		"ox": 0,
+		"oy": 0,
+		"oz": 130,
+		"typeA": "Other"
+	},
+	"EnemyCamp_DamagedScarecrow": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 200,
+		"ox": 2.9841019e-9,
+		"oy": 0,
+		"oz": 105,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Headstone": {
+		"sx": 80,
+		"sy": 120,
+		"sz": 80,
+		"ox": 0,
+		"oy": -2,
+		"oz": 40,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Fountain": {
+		"sx": 140,
+		"sy": 142,
+		"sz": 95,
+		"ox": 0,
+		"oy": -2,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"EnemyCamp_FlowerBed": {
+		"sx": 120,
+		"sy": 180,
+		"sz": 80,
+		"ox": 2.842171e-14,
+		"oy": 4.052501,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Silo": {
+		"sx": 110,
+		"sy": 110,
+		"sz": 90,
+		"ox": 0,
+		"oy": -2,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stump": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 90,
+		"ox": 0,
+		"oy": -2,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Cauldron": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 95,
+		"ox": 0,
+		"oy": -2,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"EnemyCamp_TableSquare_Wood": {
+		"sx": 154,
+		"sy": 290,
+		"sz": 70,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Other"
+	},
+	"EnemyCamp_TableCircular_Wood": {
+		"sx": 160,
+		"sy": 160,
+		"sz": 80,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Bench_Wood": {
+		"sx": 52,
+		"sy": 200,
+		"sz": 40,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 30,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stool_Wood": {
+		"sx": 40,
+		"sy": 40,
+		"sz": 40,
+		"ox": 0,
+		"oy": 0,
+		"oz": 30,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stool_High_Wood": {
+		"sx": 36,
+		"sy": 36,
+		"sz": 76,
+		"ox": 0,
+		"oy": 0,
+		"oz": 48,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Chair01_Wood": {
+		"sx": 60,
+		"sy": 56,
+		"sz": 96,
+		"ox": 0,
+		"oy": 0,
+		"oz": 52,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Shelf_Hang02_Wood": {
+		"sx": 30,
+		"sy": 150,
+		"sz": 56,
+		"ox": 16,
+		"oy": 0,
+		"oz": 11,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Counter_Wood": {
+		"sx": 300,
+		"sy": 590,
+		"sz": 90,
+		"ox": 0,
+		"oy": 0,
+		"oz": 55,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Plant01_Plant": {
+		"sx": 46,
+		"sy": 46,
+		"sz": 66,
+		"ox": 0,
+		"oy": 0,
+		"oz": 38,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Plant02_Plant": {
+		"sx": 46,
+		"sy": 46,
+		"sz": 102,
+		"ox": 0,
+		"oy": 0,
+		"oz": 56,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Plant03_Plant": {
+		"sx": 40,
+		"sy": 40,
+		"sz": 102,
+		"ox": 0,
+		"oy": 0,
+		"oz": 56,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Plant04_Plant": {
+		"sx": 32,
+		"sy": 32,
+		"sz": 28,
+		"ox": 0,
+		"oy": 0,
+		"oz": 19,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Ivy01": {
+		"sx": 1,
+		"sy": 60,
+		"sz": 100,
+		"ox": 1,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Ivy02": {
+		"sx": 1,
+		"sy": 40,
+		"sz": 100,
+		"ox": 1,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Ivy03": {
+		"sx": 1,
+		"sy": 170,
+		"sz": 30,
+		"ox": 1,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Rug01_Stone": {
+		"sx": 442,
+		"sy": 596,
+		"sz": 1,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Rug02_Stone": {
+		"sx": 310,
+		"sy": 410,
+		"sz": 1,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Rug03_Stone": {
+		"sx": 250,
+		"sy": 500,
+		"sz": 1,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Rug04_Stone": {
+		"sx": 90,
+		"sy": 240,
+		"sz": 1,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Chair01_Stone": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 96,
+		"ox": 0,
+		"oy": 0,
+		"oz": 54,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Chair02_Stone": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 102,
+		"ox": 0,
+		"oy": 0,
+		"oz": 57,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stool01_Stone": {
+		"sx": 40,
+		"sy": 40,
+		"sz": 40,
+		"ox": 0,
+		"oy": 0,
+		"oz": 30,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Desk01_Stone": {
+		"sx": 110,
+		"sy": 214,
+		"sz": 90,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"EnemyCamp_TableCircular01_Stone": {
+		"sx": 160,
+		"sy": 200,
+		"sz": 86,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"EnemyCamp_TableDresser01_Stone": {
+		"sx": 110,
+		"sy": 214,
+		"sz": 90,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Sofa01_Stone": {
+		"sx": 100,
+		"sy": 120,
+		"sz": 164,
+		"ox": 0,
+		"oy": 0,
+		"oz": 87,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Sofa02_Stone": {
+		"sx": 80,
+		"sy": 250,
+		"sz": 120,
+		"ox": 0,
+		"oy": 0,
+		"oz": 65,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Sofa03_Stone": {
+		"sx": 72,
+		"sy": 98,
+		"sz": 44,
+		"ox": 0,
+		"oy": 0,
+		"oz": 27,
+		"typeA": "Other"
+	},
+	"EnemyCamp_BathTub_Stone": {
+		"sx": 120,
+		"sy": 250,
+		"sz": 290,
+		"ox": 0,
+		"oy": 0,
+		"oz": 150,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Box01_Stone": {
+		"sx": 42,
+		"sy": 54,
+		"sz": 68,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 39,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Partition_Stone": {
+		"sx": 24,
+		"sy": 168,
+		"sz": 190,
+		"ox": 0,
+		"oy": 0,
+		"oz": 100,
+		"typeA": "Other"
+	},
+	"EnemyCamp_TowlRack01_Stone": {
+		"sx": 48,
+		"sy": 122,
+		"sz": 130,
+		"ox": 0,
+		"oy": 0,
+		"oz": 70,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Mirror01_Stone": {
+		"sx": 42,
+		"sy": 116,
+		"sz": 210,
+		"ox": 0,
+		"oy": 0,
+		"oz": 110,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Mirror02_Stone": {
+		"sx": 22,
+		"sy": 60,
+		"sz": 162,
+		"ox": 0,
+		"oy": 0,
+		"oz": 86,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Mirror01_Wall_Stone": {
+		"sx": 8,
+		"sy": 104,
+		"sz": 246,
+		"ox": 5,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Piano01_Stone": {
+		"sx": 220,
+		"sy": 180,
+		"sz": 230,
+		"ox": 0,
+		"oy": 0,
+		"oz": 120,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Piano02_Stone": {
+		"sx": 122,
+		"sy": 180,
+		"sz": 164,
+		"ox": 0,
+		"oy": 0,
+		"oz": 87,
+		"typeA": "Other"
+	},
+	"EnemyCamp_TableSink01_Stone": {
+		"sx": 80,
+		"sy": 150,
+		"sz": 230,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 120,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Toilet01_Stone": {
+		"sx": 84,
+		"sy": 64,
+		"sz": 282,
+		"ox": 0,
+		"oy": 0,
+		"oz": 146,
+		"typeA": "Other"
+	},
+	"EnemyCamp_ToiletHolder01_Stone": {
+		"sx": 20,
+		"sy": 28,
+		"sz": 60,
+		"ox": 0,
+		"oy": 0,
+		"oz": 35,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Curtain01_Wall_Stone": {
+		"sx": 52,
+		"sy": 258,
+		"sz": 298,
+		"ox": 27,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Globe01_Stone": {
+		"sx": 140,
+		"sy": 140,
+		"sz": 130,
+		"ox": 0,
+		"oy": 0,
+		"oz": 70,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stove01_Stone": {
+		"sx": 160,
+		"sy": 80,
+		"sz": 90,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Clock01_Wall_Iron": {
+		"sx": 4,
+		"sy": 120,
+		"sz": 76,
+		"ox": 3,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Clock01_Stone": {
+		"sx": 36,
+		"sy": 52,
+		"sz": 230,
+		"ox": 0,
+		"oy": 0,
+		"oz": 120,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Chair02_Iron": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 64,
+		"ox": 0,
+		"oy": 0,
+		"oz": 37,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stool01_Iron": {
+		"sx": 50,
+		"sy": 50,
+		"sz": 52,
+		"ox": 0,
+		"oy": 0,
+		"oz": 31,
+		"typeA": "Other"
+	},
+	"EnemyCamp_TableCircular01_Iron": {
+		"sx": 110,
+		"sy": 110,
+		"sz": 90,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Desk01_Iron": {
+		"sx": 96,
+		"sy": 234,
+		"sz": 84,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 47,
+		"typeA": "Other"
+	},
+	"EnemyCamp_TableSide01_Iron": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 64,
+		"ox": 0,
+		"oy": 0,
+		"oz": 37,
+		"typeA": "Other"
+	},
+	"EnemyCamp_TableSquare01_Iron": {
+		"sx": 110,
+		"sy": 240,
+		"sz": 74,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Other"
+	},
+	"EnemyCamp_TableSquare02_Iron": {
+		"sx": 110,
+		"sy": 170,
+		"sz": 44,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 27,
+		"typeA": "Other"
+	},
+	"EnemyCamp_CableCoil01_Iron": {
+		"sx": 150,
+		"sy": 150,
+		"sz": 128,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 69,
+		"typeA": "Other"
+	},
+	"EnemyCamp_GarbageBag_Iron": {
+		"sx": 20,
+		"sy": 20,
+		"sz": 20,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"EnemyCamp_PipeClay01_Iron": {
+		"sx": 420,
+		"sy": 140,
+		"sz": 132,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 72,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Tire01_Iron": {
+		"sx": 96,
+		"sy": 96,
+		"sz": 40,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 25,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Barrel01_Iron": {
+		"sx": 72,
+		"sy": 72,
+		"sz": 96,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 55,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Barrel02_Iron": {
+		"sx": 72,
+		"sy": 72,
+		"sz": 96,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 55,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Barrel03_Iron": {
+		"sx": 72,
+		"sy": 72,
+		"sz": 96,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 55,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Chair01_Iron": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 96,
+		"ox": 0,
+		"oy": 0,
+		"oz": 54,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Sofa01_Iron": {
+		"sx": 126,
+		"sy": 120,
+		"sz": 86,
+		"ox": 0,
+		"oy": 0,
+		"oz": 48,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Sofa02_Iron": {
+		"sx": 104,
+		"sy": 250,
+		"sz": 90,
+		"ox": 0,
+		"oy": 0,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Chair01_Pal": {
+		"sx": 86,
+		"sy": 80,
+		"sz": 100,
+		"ox": 0,
+		"oy": 0,
+		"oz": 55,
+		"typeA": "Other"
+	},
+	"EnemyCamp_MachineGame01_Iron": {
+		"sx": 110,
+		"sy": 132,
+		"sz": 210,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 110,
+		"typeA": "Other"
+	},
+	"EnemyCamp_MachineVending01_Iron": {
+		"sx": 80,
+		"sy": 126,
+		"sz": 210,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 110,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Television01_Iron": {
+		"sx": 60,
+		"sy": 90,
+		"sz": 60,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 35,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SignExit_Ceiling_Iron": {
+		"sx": 16,
+		"sy": 40,
+		"sz": 50,
+		"ox": 0,
+		"oy": 0,
+		"oz": -26,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SignExit_Wall_Iron": {
+		"sx": 18,
+		"sy": 84,
+		"sz": 42,
+		"ox": 10,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Other"
+	},
+	"EnemyCamp_TrafficCone01_Iron": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 96,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 55,
+		"typeA": "Other"
+	},
+	"EnemyCamp_TrafficCone02_Iron": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 116,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 63,
+		"typeA": "Other"
+	},
+	"EnemyCamp_TrafficCone03_Iron": {
+		"sx": 30,
+		"sy": 30,
+		"sz": 80,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Other"
+	},
+	"EnemyCamp_TrafficSign01_Iron": {
+		"sx": 10,
+		"sy": 64,
+		"sz": 234,
+		"ox": 0,
+		"oy": 0,
+		"oz": 125,
+		"typeA": "Other"
+	},
+	"EnemyCamp_TrafficSign02_Iron": {
+		"sx": 10,
+		"sy": 64,
+		"sz": 244,
+		"ox": 0,
+		"oy": 0,
+		"oz": 132,
+		"typeA": "Other"
+	},
+	"EnemyCamp_TrafficBarricade01_Iron": {
+		"sx": 44,
+		"sy": 156,
+		"sz": 100,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 55,
+		"typeA": "Other"
+	},
+	"EnemyCamp_TrafficBarricade02_Iron": {
+		"sx": 110,
+		"sy": 80,
+		"sz": 156,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 85,
+		"typeA": "Other"
+	},
+	"EnemyCamp_TrafficBarricade03_Iron": {
+		"sx": 56,
+		"sy": 170,
+		"sz": 80,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Other"
+	},
+	"EnemyCamp_TrafficBarricade04_Iron": {
+		"sx": 56,
+		"sy": 170,
+		"sz": 80,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Other"
+	},
+	"EnemyCamp_TrafficBarricade05_Iron": {
+		"sx": 20,
+		"sy": 246,
+		"sz": 104,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 57,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Byobu": {
+		"sx": 55.501094,
+		"sy": 302.88708,
+		"sz": 191.865112,
+		"ox": -9.943816,
+		"oy": 1.958669e-7,
+		"oz": 105.935036,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Kakejiku": {
+		"sx": 1,
+		"sy": 26.767862,
+		"sz": 40.734944,
+		"ox": 0.9999994,
+		"oy": 0,
+		"oz": 81.01902,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Zaisu": {
+		"sx": 103.059472,
+		"sy": 112.093094,
+		"sz": 70,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Zabuton": {
+		"sx": 80.142052,
+		"sy": 85.21872,
+		"sz": 35.669284,
+		"ox": -2.5839537e-7,
+		"oy": 2.4485377e-8,
+		"oz": 24.68534,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Irori": {
+		"sx": 133.811692,
+		"sy": 126.91022,
+		"sz": 70,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Toro": {
+		"sx": 43.211434,
+		"sy": 39.602826,
+		"sz": 80.315292,
+		"ox": -2.583954e-7,
+		"oy": -3.0961672e-8,
+		"oz": 50.09712,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Andon": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 70,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Shishiodoshi": {
+		"sx": 127.66004,
+		"sy": 153.75174,
+		"sz": 70,
+		"ox": 0.0000015993588,
+		"oy": -6.504416,
+		"oz": 45,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Bonsai": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 70,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Koro": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 70,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Seika": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 70,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 45,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Fudukue": {
+		"sx": 98.08979,
+		"sy": 157.947052,
+		"sz": 47.934914,
+		"ox": -2.5839518e-7,
+		"oy": 2.6618667e-7,
+		"oz": 32.617805,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Wire_Fence": {
+		"sx": 20,
+		"sy": 246,
+		"sz": 260,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 137,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SF_foundation": {
+		"sx": 320,
+		"sy": 320,
+		"sz": 60,
+		"ox": 0.0000013193637,
+		"oy": -6.5938366e-12,
+		"oz": -32.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SF_wall": {
+		"sx": 20,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SF_roof": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 52,
+		"ox": 0,
+		"oy": 0,
+		"oz": 6.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SF_stair": {
+		"sx": 312,
+		"sy": 312,
+		"sz": 260,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SF_DoorWall": {
+		"sx": 20,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 141.30435,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SF_TriangleWall": {
+		"sx": 0.2,
+		"sy": 140.40822,
+		"sz": 98.207108,
+		"ox": -3.9790393e-13,
+		"oy": 100.50986,
+		"oz": 72.61247,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SF_SlantedRoof": {
+		"sx": 260,
+		"sy": 260,
+		"sz": 200,
+		"ox": 0,
+		"oy": 0,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SF_WindowWall": {
+		"sx": 20,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SF_Pillars": {
+		"sx": 0.2,
+		"sy": 0.2,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_LilyQueenStatue": {
+		"sx": 36,
+		"sy": 52,
+		"sz": 230,
+		"ox": 0,
+		"oy": 0,
+		"oz": 120,
+		"typeA": "Other"
+	},
+	"EnemyCamp_ConservationGroupBannerA": {
+		"sx": 24,
+		"sy": 168,
+		"sz": 190,
+		"ox": 0,
+		"oy": 0,
+		"oz": 100,
+		"typeA": "Other"
+	},
+	"EnemyCamp_ConservationGroupBannerB": {
+		"sx": 1,
+		"sy": 26.767862,
+		"sz": 40.734944,
+		"ox": 0.9999994,
+		"oy": 0,
+		"oz": 81.01902,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Banyan_Big": {
+		"sx": 0.2,
+		"sy": 0.2,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Hunter_GangFlag": {
+		"sx": 10,
+		"sy": 64,
+		"sz": 600,
+		"ox": 0,
+		"oy": 0,
+		"oz": 322,
+		"typeA": "Other"
+	},
+	"EnemyCamp_PalCage": {
+		"sx": 220,
+		"sy": 220,
+		"sz": 320,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 170,
+		"typeA": "Other"
+	},
+	"EnemyCamp_WoodenBarricade": {
+		"sx": 88,
+		"sy": 240,
+		"sz": 100,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 55,
+		"typeA": "Other"
+	},
+	"EnemyCamp_OlympicCauldron": {
+		"sx": 70,
+		"sy": 142,
+		"sz": 95,
+		"ox": 0,
+		"oy": -2,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Crusher": {
+		"sx": 240,
+		"sy": 240,
+		"sz": 240,
+		"ox": -55.468987,
+		"oy": 31.115536,
+		"oz": 125,
+		"typeA": "Other"
+	},
+	"EnemyCamp_FlourMill": {
+		"sx": 252.94096,
+		"sy": 220,
+		"sz": 240,
+		"ox": -53.02954,
+		"oy": 5.8337398,
+		"oz": 124.99999,
+		"typeA": "Other"
+	},
+	"EnemyCamp_CompositeDesk": {
+		"sx": 171.85378,
+		"sy": 156,
+		"sz": 95,
+		"ox": 33.275246,
+		"oy": -2.0000002,
+		"oz": 60,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Factory_Money": {
+		"sx": 195,
+		"sy": 1000,
+		"sz": 95,
+		"ox": 0,
+		"oy": -10,
+		"oz": 60,
+		"typeA": "Other"
+	},
+	"EnemyCamp_IceCrusher": {
+		"sx": 240,
+		"sy": 360,
+		"sz": 240,
+		"ox": -79.29096,
+		"oy": -17.533031,
+		"oz": 125,
+		"typeA": "Other"
+	},
+	"EnemyCamp_BaseCampWorkHard": {
+		"sx": 190,
+		"sy": 186.369308,
+		"sz": 160,
+		"ox": 15.892151,
+		"oy": -2,
+		"oz": 83,
+		"typeA": "Other"
+	},
+	"EnemyCamp_ToolBoxV1": {
+		"sx": 120,
+		"sy": 120,
+		"sz": 90,
+		"ox": 0,
+		"oy": 0,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"EnemyCamp_MiningTool": {
+		"sx": 120,
+		"sy": 142,
+		"sz": 95,
+		"ox": -15.580169,
+		"oy": -2,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Snowman": {
+		"sx": 80,
+		"sy": 120,
+		"sz": 95,
+		"ox": 0,
+		"oy": -2,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"EnemyCamp_TransmissionTower": {
+		"sx": 120,
+		"sy": 120,
+		"sz": 90,
+		"ox": 0,
+		"oy": -2,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"EnemyCamp_WallTorch02": {
+		"sx": 30,
+		"sy": 30,
+		"sz": 60,
+		"ox": 10,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Other"
+	},
+	"EnemyCamp_FireStand": {
+		"sx": 30,
+		"sy": 30,
+		"sz": 110,
+		"ox": 0,
+		"oy": -4,
+		"oz": 57.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_CandleStand": {
+		"sx": 30,
+		"sy": 30,
+		"sz": 110,
+		"ox": 0,
+		"oy": -4,
+		"oz": 57.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_ItemBooth": {
+		"sx": 404,
+		"sy": 420,
+		"sz": 274,
+		"ox": -15,
+		"oy": 0,
+		"oz": 139,
+		"typeA": "Other"
+	},
+	"EnemyCamp_PalBooth": {
+		"sx": 404,
+		"sy": 420,
+		"sz": 274,
+		"ox": -15,
+		"oy": -22,
+		"oz": 139,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Wood_Fence": {
+		"sx": 6,
+		"sy": 350,
+		"sz": 104,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 57,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stone_Fence": {
+		"sx": 6,
+		"sy": 350,
+		"sz": 104,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 57,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Iron_Fence": {
+		"sx": 6,
+		"sy": 350,
+		"sz": 104,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 57,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Glass_Fence": {
+		"sx": 6,
+		"sy": 350,
+		"sz": 104,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 57,
+		"typeA": "Other"
+	},
+	"EnemyCamp_JapaneseStyle_Fence": {
+		"sx": 6,
+		"sy": 350,
+		"sz": 104,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 57,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SF_Fence": {
+		"sx": 6,
+		"sy": 350,
+		"sz": 104,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 57,
+		"typeA": "Other"
+	},
+	"EnemyCamp_WallSignboard_No101": {
+		"sx": 80,
+		"sy": 120,
+		"sz": 80,
+		"ox": 0,
+		"oy": -2,
+		"oz": 40,
+		"typeA": "Other"
+	},
+	"EnemyCamp_WallSignboard_No102": {
+		"sx": 80,
+		"sy": 120,
+		"sz": 80,
+		"ox": 0,
+		"oy": -2,
+		"oz": 40,
+		"typeA": "Other"
+	},
+	"EnemyCamp_WallSignboard_No103": {
+		"sx": 80,
+		"sy": 120,
+		"sz": 80,
+		"ox": 0,
+		"oy": -2,
+		"oz": 40,
+		"typeA": "Other"
+	},
+	"EnemyCamp_WallSignboard_No104": {
+		"sx": 80,
+		"sy": 120,
+		"sz": 80,
+		"ox": 0,
+		"oy": -2,
+		"oz": 40,
+		"typeA": "Other"
+	},
+	"EnemyCamp_WallSignboard_No105": {
+		"sx": 80,
+		"sy": 120,
+		"sz": 80,
+		"ox": 0,
+		"oy": -2,
+		"oz": 40,
+		"typeA": "Other"
+	},
+	"EnemyCamp_WallSignboard_No106": {
+		"sx": 80,
+		"sy": 120,
+		"sz": 80,
+		"ox": 0,
+		"oy": -2,
+		"oz": 40,
+		"typeA": "Other"
+	},
+	"EnemyCamp_WallSignboard_No107": {
+		"sx": 80,
+		"sy": 120,
+		"sz": 80,
+		"ox": 0,
+		"oy": -2,
+		"oz": 40,
+		"typeA": "Other"
+	},
+	"EnemyCamp_WallSignboard_No108": {
+		"sx": 80,
+		"sy": 120,
+		"sz": 80,
+		"ox": 0,
+		"oy": -2,
+		"oz": 40,
+		"typeA": "Other"
+	},
+	"EnemyCamp_WallSignboard_No109": {
+		"sx": 80,
+		"sy": 120,
+		"sz": 80,
+		"ox": 0,
+		"oy": -2,
+		"oz": 40,
+		"typeA": "Other"
+	},
+	"EnemyCamp_WallSignboard_No110": {
+		"sx": 80,
+		"sy": 120,
+		"sz": 80,
+		"ox": 0,
+		"oy": -2,
+		"oz": 40,
+		"typeA": "Other"
+	},
+	"EnemyCamp_GlobalPalStorage": {
+		"sx": 280,
+		"sy": 440,
+		"sz": 90,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Factory_Hard_02": {
+		"sx": 195,
+		"sy": 1000,
+		"sz": 95,
+		"ox": 0,
+		"oy": -10,
+		"oz": 60,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Factory_Hard_03": {
+		"sx": 195,
+		"sy": 1460,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Other"
+	},
+	"EnemyCamp_WeaponFactory_Dirty_03": {
+		"sx": 195,
+		"sy": 1460,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SkinChange": {
+		"sx": 90,
+		"sy": 90,
+		"sz": 170,
+		"ox": 0,
+		"oy": -7.013227e-8,
+		"oz": 90,
+		"typeA": "Other"
+	},
+	"EnemyCamp_MonsterFarm": {
+		"sx": 1000,
+		"sy": 1000,
+		"sz": 190,
+		"ox": 0,
+		"oy": 0,
+		"oz": 100,
+		"typeA": "Other"
+	},
+	"EnemyCamp_BreedFarm": {
+		"sx": 1600,
+		"sy": 1600,
+		"sz": 190,
+		"ox": 0,
+		"oy": 0,
+		"oz": 100,
+		"typeA": "Other"
+	},
+	"EnemyCamp_DisplayCharacter": {
+		"sx": 1000,
+		"sy": 900,
+		"sz": 795,
+		"ox": 0,
+		"oy": 0,
+		"oz": 420,
+		"typeA": "Other"
+	},
+	"EnemyCamp_DimensionPalStorage": {
+		"sx": 110,
+		"sy": 214,
+		"sz": 90,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SphereFactory_Black_02": {
+		"sx": 195,
+		"sy": 1000,
+		"sz": 95,
+		"ox": 0,
+		"oy": -10,
+		"oz": 60,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SphereFactory_Black_03": {
+		"sx": 195,
+		"sy": 1460,
+		"sz": 95,
+		"ox": 0,
+		"oy": 0,
+		"oz": 60,
+		"typeA": "Other"
+	},
+	"EnemyCamp_GuildChest": {
+		"sx": 90,
+		"sy": 88,
+		"sz": 72,
+		"ox": 0,
+		"oy": -1,
+		"oz": 38,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Spa2": {
+		"sx": 500,
+		"sy": 600,
+		"sz": 75,
+		"ox": 0,
+		"oy": 0,
+		"oz": 45,
+		"typeA": "Other"
+	},
+	"EnemyCamp_MedicalPalBed_04": {
+		"sx": 380,
+		"sy": 380,
+		"sz": 75,
+		"ox": 0,
+		"oy": 0,
+		"oz": 45,
+		"typeA": "Other"
+	},
+	"EnemyCamp_GoalSoccer_Iron": {
+		"sx": 282,
+		"sy": 740,
+		"sz": 244,
+		"ox": 0,
+		"oy": 0,
+		"oz": 127,
+		"typeA": "Other"
+	},
+	"EnemyCamp_TrafficSign03_Iron": {
+		"sx": 10,
+		"sy": 64,
+		"sz": 244,
+		"ox": 0,
+		"oy": 0,
+		"oz": 132,
+		"typeA": "Other"
+	},
+	"EnemyCamp_TrafficSign04_Iron": {
+		"sx": 10,
+		"sy": 64,
+		"sz": 244,
+		"ox": 0,
+		"oy": 0,
+		"oz": 132,
+		"typeA": "Other"
+	},
+	"EnemyCamp_StonePit": {
+		"sx": 480,
+		"sy": 650,
+		"sz": 190,
+		"ox": 0,
+		"oy": 0,
+		"oz": 100,
+		"typeA": "Other"
+	},
+	"EnemyCamp_StationDeforest2": {
+		"sx": 480,
+		"sy": 650,
+		"sz": 190,
+		"ox": 0,
+		"oy": 0,
+		"oz": 100,
+		"typeA": "Other"
+	},
+	"EnemyCamp_CopperPit": {
+		"sx": 480,
+		"sy": 650,
+		"sz": 190,
+		"ox": 0,
+		"oy": 0,
+		"oz": 100,
+		"typeA": "Other"
+	},
+	"EnemyCamp_CopperPit_2": {
+		"sx": 960.08026,
+		"sy": 1249.32946,
+		"sz": 190,
+		"ox": 0,
+		"oy": 0,
+		"oz": 100,
+		"typeA": "Other"
+	},
+	"EnemyCamp_FarmBlockV2_Berries": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 11,
+		"ox": 0,
+		"oy": 0,
+		"oz": 8,
+		"typeA": "Other"
+	},
+	"EnemyCamp_FarmBlockV2_tomato": {
+		"sx": 495,
+		"sy": 495,
+		"sz": 11,
+		"ox": 0,
+		"oy": 0,
+		"oz": 8,
+		"typeA": "Other"
+	},
+	"EnemyCamp_FarmBlockV2_Lettuce": {
+		"sx": 495,
+		"sy": 495,
+		"sz": 11,
+		"ox": 0,
+		"oy": 0,
+		"oz": 8,
+		"typeA": "Other"
+	},
+	"EnemyCamp_FarmBlockV2_Carrot": {
+		"sx": 495,
+		"sy": 495,
+		"sz": 11,
+		"ox": 0,
+		"oy": 0,
+		"oz": 8,
+		"typeA": "Other"
+	},
+	"EnemyCamp_FarmBlockV2_Onion": {
+		"sx": 495,
+		"sy": 495,
+		"sz": 11,
+		"ox": 0,
+		"oy": 0,
+		"oz": 8,
+		"typeA": "Other"
+	},
+	"EnemyCamp_FarmBlockV2_Potato": {
+		"sx": 495,
+		"sy": 495,
+		"sz": 11,
+		"ox": 0,
+		"oy": 0,
+		"oz": 8,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Altar": {
+		"sx": 1400,
+		"sy": 1400,
+		"sz": 480,
+		"ox": -2.5839722e-7,
+		"oy": -0.000003014147,
+		"oz": 310,
+		"typeA": "Other"
+	},
+	"EnemyCamp_LanternTop": {
+		"sx": 50,
+		"sy": 50,
+		"sz": 80,
+		"ox": 0,
+		"oy": 0,
+		"oz": -50,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Shrine_Lantern": {
+		"sx": 30,
+		"sy": 30,
+		"sz": 220,
+		"ox": 0,
+		"oy": 0,
+		"oz": 115,
+		"typeA": "Other"
+	},
+	"EnemyCamp_GuardianDogStatue": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 240,
+		"ox": 0,
+		"oy": 0,
+		"oz": 130,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Hunter_Flag": {
+		"sx": 10,
+		"sy": 64,
+		"sz": 1300,
+		"ox": 0,
+		"oy": 0,
+		"oz": 670,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Hunter_Banner": {
+		"sx": 20,
+		"sy": 120,
+		"sz": 320,
+		"ox": 20,
+		"oy": 0,
+		"oz": -220,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Believer_Flag": {
+		"sx": 10,
+		"sy": 64,
+		"sz": 1300,
+		"ox": 0,
+		"oy": 0,
+		"oz": 670,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Believer_Banner": {
+		"sx": 20,
+		"sy": 120,
+		"sz": 320,
+		"ox": 20,
+		"oy": 0,
+		"oz": -220,
+		"typeA": "Other"
+	},
+	"EnemyCamp_FireCult_Flag": {
+		"sx": 10,
+		"sy": 64,
+		"sz": 1300,
+		"ox": 0,
+		"oy": 0,
+		"oz": 670,
+		"typeA": "Other"
+	},
+	"EnemyCamp_FireCult_Banner": {
+		"sx": 20,
+		"sy": 120,
+		"sz": 320,
+		"ox": 20,
+		"oy": 0,
+		"oz": -220,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Police_Flag": {
+		"sx": 10,
+		"sy": 64,
+		"sz": 1300,
+		"ox": 0,
+		"oy": 0,
+		"oz": 670,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Police_Banner": {
+		"sx": 20,
+		"sy": 120,
+		"sz": 320,
+		"ox": 20,
+		"oy": 0,
+		"oz": -220,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Scientist_Flag": {
+		"sx": 10,
+		"sy": 64,
+		"sz": 1300,
+		"ox": 0,
+		"oy": 0,
+		"oz": 670,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Scientist_Banner": {
+		"sx": 20,
+		"sy": 120,
+		"sz": 320,
+		"ox": 20,
+		"oy": 0,
+		"oz": -220,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Ninja_Flag": {
+		"sx": 10,
+		"sy": 64,
+		"sz": 1300,
+		"ox": 0,
+		"oy": 0,
+		"oz": 670,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Ninja_Banner": {
+		"sx": 20,
+		"sy": 120,
+		"sz": 320,
+		"ox": 20,
+		"oy": 0,
+		"oz": -220,
+		"typeA": "Other"
+	},
+	"EnemyCamp_OperatingTable": {
+		"sx": 320,
+		"sy": 320,
+		"sz": 260,
+		"ox": 0,
+		"oy": 0,
+		"oz": 130,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SF_Chair": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 96,
+		"ox": 0,
+		"oy": 0,
+		"oz": 54,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SF_Desk": {
+		"sx": 180,
+		"sy": 280,
+		"sz": 90,
+		"ox": -2.583954e-7,
+		"oy": -1.2522605e-10,
+		"oz": 50,
+		"typeA": "Other"
+	},
+	"EnemyCamp_JapaneseStyle_DoorWall_03_OneSide": {
+		"sx": 20,
+		"sy": 312,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 141.30435,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Wooden_TriangleFoundation": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 400,
+		"ox": 100,
+		"oy": 100,
+		"oz": -195,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Wooden_DiagonalWall": {
+		"sx": 20,
+		"sy": 436.8,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Wooden_TriangleRoof": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 52,
+		"ox": 100,
+		"oy": 100,
+		"oz": 6.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Wooden_TriangleStairsCorner": {
+		"sx": 80,
+		"sy": 80,
+		"sz": 80,
+		"ox": 20,
+		"oy": 20,
+		"oz": 102.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Wood_TriangleWallReverse": {
+		"sx": 0.2,
+		"sy": 140.40822,
+		"sz": 98.207108,
+		"ox": -3.9790393e-13,
+		"oy": 100.50986,
+		"oz": 232.61247,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Iron_TriangleFoundation": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 400,
+		"ox": 100,
+		"oy": 100,
+		"oz": -195,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Iron_DiagonalWall": {
+		"sx": 20,
+		"sy": 436.8,
+		"sz": 234,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 162.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Iron_TriangleRoof": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 52,
+		"ox": 100,
+		"oy": 100,
+		"oz": 6.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Iron_TriangleStairsCorner": {
+		"sx": 80,
+		"sy": 80,
+		"sz": 80,
+		"ox": 20,
+		"oy": 20,
+		"oz": 102.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Iron_TriangleWallReverse": {
+		"sx": 0.2,
+		"sy": 140.40822,
+		"sz": 98.207108,
+		"ox": 0,
+		"oy": 100.50986,
+		"oz": 232.61247,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Iron_WallGate": {
+		"sx": 20,
+		"sy": 312,
+		"sz": 580,
+		"ox": 0,
+		"oy": 1.5592703e-7,
+		"oz": 312.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Iron_SlopedRoofCorner": {
+		"sx": 40,
+		"sy": 40,
+		"sz": 60,
+		"ox": -100,
+		"oy": -100,
+		"oz": 92.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Iron_PyramidRoof": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 52,
+		"ox": 0,
+		"oy": 0,
+		"oz": 6.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stone_TriangleFoundation": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 400,
+		"ox": 100,
+		"oy": 100,
+		"oz": -195,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stone_DiagonalWall": {
+		"sx": 20,
+		"sy": 436.8,
+		"sz": 214,
+		"ox": 0,
+		"oy": 0,
+		"oz": 169,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stone_TriangleRoof": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 25,
+		"ox": 100,
+		"oy": 100,
+		"oz": -7.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stone_TriangleStairsCorner": {
+		"sx": 80,
+		"sy": 80,
+		"sz": 80,
+		"ox": 20,
+		"oy": 20,
+		"oz": 102.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stone_TriangleWallReverse": {
+		"sx": 0.2,
+		"sy": 120,
+		"sz": 78.207108,
+		"ox": 0,
+		"oy": -100.50986,
+		"oz": 227.61247,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stone_WallGate": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 510,
+		"ox": 2,
+		"oy": 0,
+		"oz": 310,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stone_SlopedRoofCorner": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 60,
+		"ox": -100,
+		"oy": -100,
+		"oz": 92.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Stone_PyramidRoof": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 80,
+		"ox": 0,
+		"oy": 0,
+		"oz": 21,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Glass_TriangleFoundation": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 400,
+		"ox": 100,
+		"oy": 100,
+		"oz": -195,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Glass_DiagonalWall": {
+		"sx": 20,
+		"sy": 436.8,
+		"sz": 214,
+		"ox": 0,
+		"oy": 0,
+		"oz": 169,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Glass_TriangleRoof": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 25,
+		"ox": 100,
+		"oy": 100,
+		"oz": -7.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Glass_TriangleStairsCorner": {
+		"sx": 80,
+		"sy": 80,
+		"sz": 80,
+		"ox": 20,
+		"oy": 20,
+		"oz": 102.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Glass_TriangleWallReverse": {
+		"sx": 0.2,
+		"sy": 120,
+		"sz": 78.207108,
+		"ox": 0,
+		"oy": -100.50986,
+		"oz": 227.61247,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Glass_WallGate": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 510,
+		"ox": 2,
+		"oy": 0,
+		"oz": 310,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Glass_SlopedRoofCorner": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 60,
+		"ox": -100,
+		"oy": -100,
+		"oz": 92.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_Glass_PyramidRoof": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 52,
+		"ox": 0,
+		"oy": 0,
+		"oz": 35,
+		"typeA": "Other"
+	},
+	"EnemyCamp_JapaneseStyle_TriangleFoundation": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 400,
+		"ox": 100,
+		"oy": 100,
+		"oz": -195,
+		"typeA": "Other"
+	},
+	"EnemyCamp_JapaneseStyle_DiagonalWall": {
+		"sx": 20,
+		"sy": 436.8,
+		"sz": 214,
+		"ox": 0,
+		"oy": 0,
+		"oz": 169,
+		"typeA": "Other"
+	},
+	"EnemyCamp_JapaneseStyle_TriangleRoof_01": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 25,
+		"ox": 100,
+		"oy": 100,
+		"oz": -7.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_JapaneseStyle_TriangleRoof_02": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 25,
+		"ox": 100,
+		"oy": 100,
+		"oz": -7.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_JapaneseStyle_TriangleStairsCorner_01": {
+		"sx": 80,
+		"sy": 80,
+		"sz": 80,
+		"ox": 20,
+		"oy": 20,
+		"oz": 102.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_JapaneseStyle_TriangleWallReverse": {
+		"sx": 0.2,
+		"sy": 120,
+		"sz": 78.207108,
+		"ox": 0,
+		"oy": -100.50986,
+		"oz": 227.61247,
+		"typeA": "Other"
+	},
+	"EnemyCamp_JapaneseStyle_WallGate": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 510,
+		"ox": 2,
+		"oy": 0,
+		"oz": 310,
+		"typeA": "Other"
+	},
+	"EnemyCamp_JapaneseStyle_SlopedRoofCorner": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 60,
+		"ox": -100,
+		"oy": -100,
+		"oz": 92.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_JapaneseStyle_PyramidRoof": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 52,
+		"ox": 0,
+		"oy": 0,
+		"oz": 35,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SF_TriangleFoundation": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 400,
+		"ox": 100,
+		"oy": 100,
+		"oz": -195,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SF_DiagonalWall": {
+		"sx": 20,
+		"sy": 436.8,
+		"sz": 214,
+		"ox": 0,
+		"oy": 0,
+		"oz": 169,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SF_TriangleRoof": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 25,
+		"ox": 100,
+		"oy": 100,
+		"oz": -7.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SF_TriangleStairsCorner": {
+		"sx": 80,
+		"sy": 80,
+		"sz": 80,
+		"ox": 20,
+		"oy": 20,
+		"oz": 102.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SF_TriangleWallReverse": {
+		"sx": 0.2,
+		"sy": 120,
+		"sz": 78.207108,
+		"ox": 0,
+		"oy": -100.50986,
+		"oz": 227.61247,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SF_WallGate": {
+		"sx": 10,
+		"sy": 312,
+		"sz": 510,
+		"ox": 2,
+		"oy": 0,
+		"oz": 310,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SF_SlopedRoofCorner": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 60,
+		"ox": -100,
+		"oy": -100,
+		"oz": 92.5,
+		"typeA": "Other"
+	},
+	"EnemyCamp_SF_PyramidRoof": {
+		"sx": 300,
+		"sy": 300,
+		"sz": 52,
+		"ox": 0,
+		"oy": 0,
+		"oz": 35,
+		"typeA": "Other"
+	},
+	"EnemyCamp_JapaneseStyle_SlopedRoofCornerReverse": {
+		"sx": 60,
+		"sy": 60,
+		"sz": 60,
+		"ox": 110,
+		"oy": 110,
+		"oz": 92.5,
+		"typeA": "Other"
+	},
+	"PalFoodBox": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 100,
+		"ox": 0,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Food"
+	},
+	"Wooden_pillar": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 100,
+		"ox": 0,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Foundation"
+	},
+	"Stone_pillar": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 100,
+		"ox": 0,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Foundation"
+	},
+	"Metal_pillars": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 100,
+		"ox": 0,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Foundation"
+	},
+	"Trap_LegHold": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 100,
+		"ox": 0,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Defense"
+	},
+	"Trap_MovingPanel": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 100,
+		"ox": 0,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Defense"
+	},
+	"ElectricHatchingPalEgg": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 100,
+		"ox": 0,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Pal"
+	},
+	"CoolerPalFoodBox": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 100,
+		"ox": 0,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Food"
+	},
+	"Glass_pillars": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 100,
+		"ox": 0,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Foundation"
+	},
+	"SF_pillars": {
+		"sx": 100,
+		"sy": 100,
+		"sz": 100,
+		"ox": 0,
+		"oy": 0,
+		"oz": 0,
+		"typeA": "Foundation"
+	}
+}

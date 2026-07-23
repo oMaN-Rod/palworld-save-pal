@@ -41,3 +41,10 @@ export function pixelCirclePolygon(
 	}
 	return ring;
 }
+
+export const EARTH_CIRCUMFERENCE_M = 40075016.686;
+
+export function verticalScaleFactor(centerLat: number, cmPerPx: number): number {
+	const worldSpanCm = cmPerPx * MAP_SIZE;
+	return (Math.cos((centerLat * Math.PI) / 180) * EARTH_CIRCUMFERENCE_M) / worldSpanCm;
+}

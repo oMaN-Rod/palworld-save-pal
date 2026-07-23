@@ -124,6 +124,12 @@ async fn route(
         MessageType::GetItems => handlers::game_data::handle_get_items(ctx).await,
         MessageType::GetMissions => handlers::game_data::handle_get_missions(ctx).await,
         MessageType::GetBuildings => handlers::game_data::handle_get_buildings(ctx).await,
+        MessageType::GetMapObjectFootprints => {
+            handlers::game_data::handle_get_map_object_footprints(ctx).await
+        }
+        MessageType::GetBaseStructures => {
+            handlers::game_data::handle_get_base_structures(data, ctx).await
+        }
         MessageType::GetWorkSuitability => {
             handlers::game_data::handle_get_work_suitability(ctx).await
         }
