@@ -113,3 +113,60 @@ impl ExtRouter for ServerExtRouter {
         })
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::handlers::servers::test_env::TestEnv;
+
+    /// The 18 wire names `ServerExtRouter` is meant to own.
+    const OWNED_WIRE_TYPES: &[&str] = &[
+        "open_folder",
+        "open_in_browser",
+        "open_url",
+        "list_servers",
+        "get_server",
+        "detect_workshop_dir",
+        "get_server_stats",
+        "create_server",
+        "import_server",
+        "update_server",
+        "delete_server",
+        "start_server",
+        "stop_server",
+        "server_api_call",
+        "list_server_mods",
+        "toggle_server_mod",
+        "install_server_mod",
+        "load_server_save",
+    ];
+
+    /// Asserts ownership, not behavior: every wire name above must come back
+    /// `Some(_)` from `route` (Null payloads mostly fail to deserialize, which
+    /// is fine — the point is that this router claims the type at all), and at
+    /// least one type it does not own must come back `None`.
+    #[tokio::test]
+    async fn owns_exactly_the_documented_native_types() {
+        let mut env = TestEnv::new().await;
+        let router = ServerExtRouter {
+            services: env.services.clone(),
+        };
+
+        for wire in OWNED_WIRE_TYPES {
+            let message_type = MessageType::from_wire(wire)
+                .unwrap_or_else(|| panic!("{wire} is not a known MessageType"));
+            let mut ctx = env.ctx();
+            let result = router.route(message_type, Value::Null, &mut ctx).await;
+            assert!(result.is_some(), "{wire} must be owned by ServerExtRouter");
+        }
+
+        let mut ctx = env.ctx();
+        let result = router
+            .route(MessageType::GetSettings, Value::Null, &mut ctx)
+            .await;
+        assert!(
+            result.is_none(),
+            "get_settings must NOT be owned by ServerExtRouter"
+        );
+    }
+}

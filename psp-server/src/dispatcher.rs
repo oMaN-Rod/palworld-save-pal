@@ -113,8 +113,8 @@ pub async fn dispatch(envelope: Envelope, mut ctx: HandlerCtx<'_>) {
 /// Runs `handler` to completion, converting any panic it raises into an `error`
 /// frame so a bad handler cannot tear down the connection. A separate function
 /// (rather than inline in `dispatch`) so the containment path is unit-testable:
-/// `route`'s dispatch table is a fixed `match`, so no test can push a panicking
-/// handler through `dispatch` itself.
+/// `route`'s own arms are a fixed `match`, but a test can still inject a
+/// panicking handler through `dispatch` itself via a custom `ExtRouter`.
 async fn catch_handler_panic<F>(
     handler: F,
     message_type: &str,
