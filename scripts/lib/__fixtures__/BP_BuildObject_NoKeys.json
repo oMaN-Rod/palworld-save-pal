@@ -1,7 +1,0 @@
-[
-  {
-    "Type": "BoxComponent",
-    "Name": "CheckOverlapCollision_GEN_VARIABLE",
-    "Properties": { "bDynamicObstacle": true }
-  }
-]

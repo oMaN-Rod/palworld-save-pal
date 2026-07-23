@@ -8,6 +8,7 @@ import {
 	buildRelicFC,
 	buildStructureFC,
 	emptyFC,
+	lookupFootprint,
 	structureCentroid,
 	type StructureFC
 } from './features';
@@ -305,5 +306,34 @@ describe('buildStructureFC identity', () => {
 			'MainMap'
 		);
 		expect(fc.features.map((f) => f.properties.key)).toEqual(['aaa', 'bbb']);
+	});
+});
+
+describe('lookupFootprint', () => {
+	const fp = (sx: number) => ({ sx, sy: 1, sz: 1, ox: 0, oy: 0, oz: 0, typeA: 'Foundation' });
+	// Saves spell some ids with different casing than the data table row key.
+	const registry = { Stone_foundation: fp(320), Stone_Pillar: fp(50), Stone_pillar: fp(60) };
+
+	it('finds an exact match', () => {
+		expect(lookupFootprint(registry, 'Stone_foundation')?.sx).toBe(320);
+	});
+
+	it('falls back to a case-insensitive match', () => {
+		expect(lookupFootprint(registry, 'Stone_Foundation')?.sx).toBe(320);
+	});
+
+	it('prefers the exact match when ids collide only by case', () => {
+		expect(lookupFootprint(registry, 'Stone_Pillar')?.sx).toBe(50);
+		expect(lookupFootprint(registry, 'Stone_pillar')?.sx).toBe(60);
+	});
+
+	it('returns undefined for an unknown id', () => {
+		expect(lookupFootprint(registry, 'NotAThing')).toBeUndefined();
+	});
+
+	it('rebuilds its index when given a different registry', () => {
+		expect(lookupFootprint(registry, 'Stone_Foundation')?.sx).toBe(320);
+		expect(lookupFootprint({ Other_thing: fp(7) }, 'OTHER_THING')?.sx).toBe(7);
+		expect(lookupFootprint({ Other_thing: fp(7) }, 'Stone_Foundation')).toBeUndefined();
 	});
 });

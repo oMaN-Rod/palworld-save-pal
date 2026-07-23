@@ -1,4 +1,4 @@
-import { DEFAULT_STRUCTURE_FOOTPRINT } from './features';
+import { DEFAULT_STRUCTURE_FOOTPRINT, lookupFootprint } from './features';
 import type { BaseStructure, Building, Footprint, PlayerSummary } from '$types';
 
 export type StructureInfo = {
@@ -20,7 +20,7 @@ export function structureInfo(
 	buildings: Record<string, Building>,
 	summaries: Record<string, PlayerSummary>
 ): StructureInfo {
-	const fp = footprints[s.map_object_id] ?? DEFAULT_STRUCTURE_FOOTPRINT;
+	const fp = lookupFootprint(footprints, s.map_object_id) ?? DEFAULT_STRUCTURE_FOOTPRINT;
 	const key = s.map_object_id.toLowerCase();
 	const building = Object.entries(buildings).find(([k]) => k.toLowerCase() === key)?.[1];
 	const uid = s.build_player_uid?.toLowerCase();

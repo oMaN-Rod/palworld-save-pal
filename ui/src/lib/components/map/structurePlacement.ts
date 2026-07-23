@@ -15,6 +15,17 @@ export type StructurePlacement = {
 	yaw: number;
 };
 
+export type StructureAnchor = { lng: number; lat: number; altitudeCm: number; yaw: number };
+
+// The raw actor transform, with no footprint offset applied. Real game meshes
+// already sit correctly relative to the actor origin, unlike the collision-box
+// proxy geometry that structurePlacement's fp.ox/oy/oz centers.
+export function structureAnchor(s: BaseStructure, area: MapArea): StructureAnchor {
+	const [px, py] = worldToPixel(s.x, s.y, area);
+	const [lng, lat] = pixelToLngLat(px, py);
+	return { lng, lat, altitudeCm: s.z, yaw: s.yaw };
+}
+
 export function structurePlacement(
 	s: BaseStructure,
 	fp: Footprint,

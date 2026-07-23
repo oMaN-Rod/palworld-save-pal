@@ -45,6 +45,7 @@
 		buildRelicFC,
 		buildStructureFC,
 		emptyFC,
+		lookupFootprint,
 		structureCentroid,
 		type MapFeatureType,
 		type StructureFC,
@@ -500,7 +501,8 @@
 			const loc = base.location;
 			if (!loc) continue;
 			for (const s of baseStructuresData.for(base.id)) {
-				const typeA = baseStructuresData.footprints[s.map_object_id]?.typeA ?? 'Other';
+				const typeA =
+					lookupFootprint(baseStructuresData.footprints, s.map_object_id)?.typeA ?? 'Other';
 				if (structureTypes[typeA] === false) continue;
 				all.push(s);
 			}
@@ -635,7 +637,9 @@
 		const structureType = (key: string) => {
 			const data = byKey.get(`structure:${key}`)?.data;
 			if (!data) return undefined;
-			return baseStructuresData.footprints[data.map_object_id]?.typeA ?? 'Other';
+			return (
+				lookupFootprint(baseStructuresData.footprints, data.map_object_id)?.typeA ?? 'Other'
+			);
 		};
 		if (selected?.type === 'structure') {
 			const type = structureType(selected.key);

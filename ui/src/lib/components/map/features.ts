@@ -288,6 +288,30 @@ export const DEFAULT_STRUCTURE_FOOTPRINT: Footprint = {
 	sx: 100, sy: 100, sz: 100, ox: 0, oy: 0, oz: 0, typeA: 'Other'
 };
 
+// A save's map_object_id does not always match the data table row key's casing
+// ("Stone_Foundation" vs "Stone_foundation"), which silently drops the structure
+// to the default footprint. Exact matches must still win: a few pillar ids exist
+// in both casings as genuinely distinct rows.
+let ciIndex = new Map<string, Footprint>();
+let ciSource: Record<string, Footprint> | null = null;
+
+export function lookupFootprint(
+	footprints: Record<string, Footprint>,
+	mapObjectId: string
+): Footprint | undefined {
+	const exact = footprints[mapObjectId];
+	if (exact) return exact;
+	if (ciSource !== footprints) {
+		ciIndex = new Map();
+		for (const [key, value] of Object.entries(footprints)) {
+			const lower = key.toLowerCase();
+			if (!ciIndex.has(lower)) ciIndex.set(lower, value);
+		}
+		ciSource = footprints;
+	}
+	return ciIndex.get(mapObjectId.toLowerCase());
+}
+
 export function buildStructureFC(
 	structures: BaseStructure[],
 	footprints: Record<string, Footprint>,
@@ -295,7 +319,7 @@ export function buildStructureFC(
 	area: MapArea
 ): StructureFC {
 	const features = structures.map((s) => {
-		const fp = footprints[s.map_object_id] ?? DEFAULT_STRUCTURE_FOOTPRINT;
+		const fp = lookupFootprint(footprints, s.map_object_id) ?? DEFAULT_STRUCTURE_FOOTPRINT;
 		const cos = Math.cos(s.yaw);
 		const sin = Math.sin(s.yaw);
 
