@@ -10,7 +10,17 @@
 	import PalPopup from './PalPopup.svelte';
 	import StructurePopup from './StructurePopup.svelte';
 
-	let { type, data, guildName }: { type: MapFeatureType; data: any; guildName?: string } = $props();
+	let {
+		type,
+		data,
+		guildName,
+		onExportBase
+	}: {
+		type: MapFeatureType;
+		data: any;
+		guildName?: string;
+		onExportBase?: (base: any) => void;
+	} = $props();
 </script>
 
 {#if type === 'origin'}
@@ -18,7 +28,7 @@
 {:else if type === 'player'}
 	<PlayerPopup player={data} />
 {:else if type === 'base'}
-	<BasePopup base={data} {guildName} />
+	<BasePopup base={data} {guildName} onExport={onExportBase} />
 {:else if type === 'fast_travel'}
 	<FastTravelPopup point={data} />
 {:else if type === 'relic'}

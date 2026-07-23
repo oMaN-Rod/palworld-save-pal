@@ -100,6 +100,7 @@
 		onToggleStructureType,
 		onToggleRenderMode,
 		onEditBase,
+		onExportBase,
 		onToggleFastTravel,
 		onToggleRelic,
 		onUnlockAllFastTravel,
@@ -130,6 +131,7 @@
 		onToggleStructureType?: (type: string) => void;
 		onToggleRenderMode?: () => void;
 		onEditBase?: (base: any) => void;
+		onExportBase?: (base: any) => void;
 		onToggleFastTravel?: (point: MapUnlockPoint) => void;
 		onToggleRelic?: (point: RelicPoint) => void;
 		onUnlockAllFastTravel?: () => void;
@@ -1004,7 +1006,12 @@
 			class="map-anchored-card map-popup-card"
 			style="left: {selectedPoint.x}px; top: {selectedPoint.y}px;"
 		>
-			<MapPopup type={selected.type} data={entry?.data} guildName={entry?.guildName} />
+			<MapPopup
+				type={selected.type}
+				data={entry?.data}
+				guildName={entry?.guildName}
+				{onExportBase}
+			/>
 			<button type="button" class="map-popup-close" onclick={() => (selected = null)}>×</button>
 		</div>
 	{/if}

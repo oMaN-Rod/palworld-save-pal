@@ -1,3 +1,4 @@
+export * from './blueprint';
 export * from './game';
 export * from './select';
 export * from './settings';

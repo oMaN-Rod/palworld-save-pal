@@ -34,7 +34,7 @@
 		RelicPoint
 	} from '$types';
 	import { assetLoader } from '$utils';
-	import { EditBaseModal } from '$components/modals';
+	import { EditBaseModal, ExportBlueprintModal } from '$components/modals';
 	import { EntryState, MessageType } from '$types';
 	import { staticIcons } from '$types/icons';
 	import { persistedState } from 'svelte-persisted-state';
@@ -278,6 +278,14 @@
 				guild.state = EntryState.MODIFIED;
 			}
 		}
+	}
+
+	async function handleExportBlueprint(base: Base) {
+		// @ts-ignore  Component typing
+		await modal.showModal<boolean>(ExportBlueprintModal, {
+			baseId: base.id,
+			baseName: base.name || ''
+		});
 	}
 
 	function updateRelicCount(player: Player, delta: number) {
@@ -846,6 +854,7 @@
 						(mapOptions.structureRenderMode =
 							(mapOptions.structureRenderMode ?? 'detailed') === 'detailed' ? 'flat' : 'detailed')}
 					onEditBase={handleEditBase}
+					onExportBase={handleExportBlueprint}
 					onToggleFastTravel={handleToggleFastTravel}
 					onToggleRelic={handleToggleRelic}
 					onUnlockAllFastTravel={handleUnlockAllFastTravel}

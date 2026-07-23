@@ -1,5 +1,6 @@
 import type { Component } from 'svelte';
 import {
+	Blocks,
 	BookOpen,
 	Bug,
 	ChevronsLeft,
@@ -123,6 +124,13 @@ export const navItems: NavItem[] = [
 		icon: () => FileHeart,
 		label: () => c.presets,
 		href: '/presets'
+	},
+	{
+		id: 'blueprints',
+		section: 'tiles',
+		icon: () => Blocks,
+		label: () => 'Blueprints',
+		href: '/blueprints'
 	},
 	{
 		id: 'gps',

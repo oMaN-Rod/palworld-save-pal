@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card } from '$components/ui';
+	import { Button, Card } from '$components/ui';
 	import type { Base } from '$types';
 	import { worldToMap } from './utils';
 	import { Home, Globe, Map } from 'lucide-svelte';
@@ -9,10 +9,12 @@
 
 	let {
 		base,
-		guildName
+		guildName,
+		onExport
 	}: {
 		base: Base;
 		guildName?: string;
+		onExport?: (base: Base) => void;
 	} = $props();
 
 	const mapCoords = $derived(worldToMap(base.location.x, base.location.y));
@@ -84,5 +86,9 @@
 				</div>
 			</div>
 		</div>
+
+		{#if onExport}
+			<Button variant="secondary" onclick={() => onExport?.(base)}>Export blueprint</Button>
+		{/if}
 	</div>
 </Card>
