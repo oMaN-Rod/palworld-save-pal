@@ -3484,8 +3484,12 @@ dependencies = [
 name = "psp-app"
 version = "1.2.0"
 dependencies = [
+ "psp-core",
+ "psp-db",
  "serde",
  "serde_json",
+ "thiserror 2.0.18",
+ "tokio",
  "tracing",
 ]
 
