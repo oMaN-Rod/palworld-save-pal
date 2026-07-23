@@ -69,6 +69,11 @@ class Blueprints {
 		this.exportFile(res.handle, format);
 	}
 
+	async remove(id: string): Promise<void> {
+		await sendAndWait(MessageType.DELETE_BLUEPRINT, { id });
+		await this.list();
+	}
+
 	async requestGeometry(handle: string): Promise<BlueprintGeometry> {
 		return sendAndWait<BlueprintGeometry>(MessageType.REQUEST_BLUEPRINT_GEOMETRY, { handle });
 	}

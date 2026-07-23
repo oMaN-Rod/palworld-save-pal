@@ -19,17 +19,21 @@
 
 	const anchor = $derived(placementState.anchor);
 
-	let yawDeg: number[] = $state([(placementState.anchor.yaw * 180) / Math.PI]);
-	let zCm: number[] = $state([placementState.anchor.z]);
+	// Derived (not seeded once) so the sliders reflect the origin default applied
+	// after geometry loads, and any later anchor change.
+	const yawDeg = $derived([(anchor.yaw * 180) / Math.PI]);
+	const zCm = $derived([anchor.z]);
 
 	function handleYawChange(e: ValueChangeDetails) {
-		yawDeg = e.value;
 		placementState.setAnchor({ ...anchor, yaw: (e.value[0] * Math.PI) / 180 });
 	}
 
 	function handleZChange(e: ValueChangeDetails) {
-		zCm = e.value;
 		placementState.setAnchor({ ...anchor, z: e.value[0] });
+	}
+
+	function setZ(z: number) {
+		if (!Number.isNaN(z)) placementState.setAnchor({ ...anchor, z });
 	}
 
 	const placeDisabled = $derived(
@@ -70,8 +74,19 @@
 	</div>
 
 	<div class="flex flex-col gap-2">
-		<span class="label-text">Height (Z): {Math.round(zCm[0])} cm</span>
-		<Slider value={zCm} min={-50000} max={50000} step={100} onValueChange={handleZChange} />
+		<div class="flex items-center justify-between gap-2">
+			<span class="label-text">Height (Z)</span>
+			<input
+				type="number"
+				step="1"
+				value={Math.round(anchor.z)}
+				oninput={(e) => setZ(Number((e.currentTarget as HTMLInputElement).value))}
+				class="input w-28 text-right"
+				aria-label="Height Z in centimeters"
+			/>
+			<span class="label-text">cm</span>
+		</div>
+		<Slider value={zCm} min={-50000} max={50000} step={10} onValueChange={handleZChange} />
 	</div>
 
 	<Checkbox

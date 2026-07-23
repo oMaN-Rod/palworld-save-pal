@@ -446,4 +446,52 @@ async fn geometry_returns_one_entry_per_structure_with_a_transform() {
     assert!(first["translation"]["x"].as_f64().is_some(), "carries a translation");
     assert!(first["rotation"]["w"].as_f64().is_some(), "carries a rotation quat");
     assert!(first["scale"]["x"].as_f64().is_some(), "carries a scale");
+
+    let origin = &frames.last().unwrap()["data"]["origin"];
+    assert!(origin["x"].as_f64().is_some(), "origin carries an x");
+    assert!(origin["y"].as_f64().is_some(), "origin carries a y");
+    assert!(origin["z"].as_f64().is_some(), "origin carries a z");
+    assert!(origin["yaw"].as_f64().is_some(), "origin carries a yaw");
+    // world1's base is not at the world origin -- the origin reflects the real
+    // source location, not a default zero.
+    assert!(
+        origin["x"].as_f64().unwrap().abs() > 1.0 || origin["y"].as_f64().unwrap().abs() > 1.0,
+        "origin reflects the base's real world position, not (0,0)"
+    );
+}
+
+#[tokio::test]
+async fn delete_removes_the_blueprint_from_the_library() {
+    let (server, _scratch) = start_test_server().await;
+    let mut socket = connect(server.addr).await;
+    let (_guild_id, base_id) = load_and_find_base(&mut socket).await;
+
+    send(&mut socket, json!({"type": "capture_base_blueprint", "data": {
+        "base_id": base_id,
+        "options": {"production_config": true, "structure_condition": false,
+                    "container_contents": false, "worker_pals": false, "housed_pals": false,
+                    "production_progress": false, "access_config": false, "base_identity": true},
+        "name": "Deletable"
+    }})).await;
+    let capture = recv_until_type_or_error(&mut socket, "capture_base_blueprint").await;
+    let handle = capture.last().unwrap()["data"]["handle"].as_str().unwrap().to_string();
+
+    send(&mut socket, json!({"type": "store_blueprint", "data": {"handle": handle}})).await;
+    let store = recv_until_type_or_error(&mut socket, "store_blueprint").await;
+    let id = store.last().unwrap()["data"]["id"].as_str().unwrap().to_string();
+
+    send(&mut socket, json!({"type": "list_blueprints", "data": null})).await;
+    let list = recv_until_type_or_error(&mut socket, "list_blueprints").await;
+    assert_eq!(list.last().unwrap()["data"]["blueprints"].as_array().unwrap().len(), 1);
+
+    send(&mut socket, json!({"type": "delete_blueprint", "data": {"id": id}})).await;
+    recv_until_type_or_error(&mut socket, "delete_blueprint").await;
+
+    send(&mut socket, json!({"type": "list_blueprints", "data": null})).await;
+    let list2 = recv_until_type_or_error(&mut socket, "list_blueprints").await;
+    assert_eq!(
+        list2.last().unwrap()["data"]["blueprints"].as_array().unwrap().len(),
+        0,
+        "the deleted blueprint no longer appears in the library"
+    );
 }

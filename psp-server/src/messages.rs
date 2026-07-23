@@ -196,6 +196,7 @@ define_message_types! {
     ValidateBlueprintPlacement => "validate_blueprint_placement",
     PlaceBlueprint => "place_blueprint",
     RequestBlueprintGeometry => "request_blueprint_geometry",
+    DeleteBlueprint => "delete_blueprint",
 }
 
 #[cfg(test)]
@@ -355,6 +356,7 @@ mod tests {
         "validate_blueprint_placement",
         "place_blueprint",
         "request_blueprint_geometry",
+        "delete_blueprint",
     ];
 
     #[test]

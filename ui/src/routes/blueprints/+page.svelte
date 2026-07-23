@@ -6,6 +6,7 @@
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { ExportBlueprintModal, SelectBaseModal } from '$components/modals';
 	import { Button, Card, FileDropzone } from '$components/ui';
+	import { Trash2 } from '@lucide/svelte';
 	import type { BlueprintRow } from '$types';
 
 	const appState = getAppState();
@@ -90,6 +91,17 @@
 		placementState.enter(res.handle, res.header);
 		await goto('/worldmap');
 	}
+
+	async function deleteRow(row: BlueprintRow) {
+		const ok = await modal.showConfirmModal({
+			title: `Delete blueprint "${row.name}"?`,
+			confirmText: 'Delete',
+			cancelText: 'Cancel'
+		});
+		if (!ok) return;
+		await blueprintsData.remove(row.id);
+		toast.add(`Deleted ${row.name}.`, 'Blueprint', 'success');
+	}
 </script>
 
 <div class="flex flex-col gap-4 p-4">
@@ -135,6 +147,9 @@
 						<Button variant="ghost" onclick={() => blueprintsData.exportRow(row.id, 'json')}
 							>.json</Button
 						>
+						<Button variant="ghost" title="Delete" onclick={() => deleteRow(row)}>
+							<Trash2 size={16} />
+						</Button>
 					</div>
 				</Card>
 			{/each}

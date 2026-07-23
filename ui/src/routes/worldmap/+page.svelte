@@ -478,6 +478,7 @@
 		if (placementState.active && placementState.handle && placementState.geometry.length === 0) {
 			blueprintsData.requestGeometry(placementState.handle).then((res) => {
 				placementState.geometry = res.structures;
+				placementState.setAnchor(res.origin);
 			});
 		}
 	});

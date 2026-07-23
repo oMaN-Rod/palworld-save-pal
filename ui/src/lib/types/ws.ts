@@ -73,6 +73,7 @@ export enum MessageType {
 	VALIDATE_BLUEPRINT_PLACEMENT = 'validate_blueprint_placement',
 	PLACE_BLUEPRINT = 'place_blueprint',
 	REQUEST_BLUEPRINT_GEOMETRY = 'request_blueprint_geometry',
+	DELETE_BLUEPRINT = 'delete_blueprint',
 	GET_LAB_RESEARCH = 'get_lab_research',
 	UPDATE_LAB_RESEARCH = 'update_lab_research',
 	RENAME_WORLD = 'rename_world',

@@ -355,10 +355,28 @@ pub async fn handle_request_blueprint_geometry(
     };
     let structures: Vec<serde_json::Value> =
         blueprint.structures.iter().map(structure_geometry_json).collect();
+    let origin = psp_core::domain::blueprint::capture::source_origin(blueprint)
+        .map(|(x, y, z, yaw)| serde_json::json!({ "x": x, "y": y, "z": z, "yaw": yaw }))
+        .unwrap_or_else(|| serde_json::json!({ "x": 0.0, "y": 0.0, "z": 0.0, "yaw": 0.0 }));
     ctx.emitter.emit(
         MessageType::RequestBlueprintGeometry,
-        &serde_json::json!({ "structures": structures }),
+        &serde_json::json!({ "structures": structures, "origin": origin }),
     );
+    Ok(())
+}
+
+#[derive(Debug, serde::Deserialize)]
+pub struct DeleteBlueprintData {
+    pub id: String,
+}
+
+pub async fn handle_delete_blueprint(
+    data: DeleteBlueprintData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    psp_db::blueprints::delete(&ctx.app.db, &data.id).await?;
+    ctx.emitter
+        .emit(MessageType::DeleteBlueprint, &serde_json::json!({ "id": data.id }));
     Ok(())
 }
 

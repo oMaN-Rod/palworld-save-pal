@@ -440,6 +440,9 @@ async fn route(
             )
             .await
         }
+        MessageType::DeleteBlueprint => {
+            handlers::blueprints::handle_delete_blueprint(serde_json::from_value(data)?, ctx).await
+        }
         other => {
             tracing::warn!(
                 message_type = other.as_wire(),

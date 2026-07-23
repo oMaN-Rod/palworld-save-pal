@@ -538,6 +538,22 @@ pub fn container_entry_id(entry: &MapEntry) -> Option<Uuid> {
     props::get(props::struct_props(&entry.key)?, &["ID"]).and_then(props::as_uuid)
 }
 
+/// The source base's origin world position and yaw, read from the captured
+/// `base_camp` transform. Yaw comes from the Z-axis rotation quat; a base
+/// carrying pitch/roll (none do) would lose those, which is acceptable -- the
+/// full per-structure rotations still travel in `structures`.
+pub fn source_origin(blueprint: &BaseBlueprint) -> Option<(f64, f64, f64, f64)> {
+    let base_camp = blueprint.base_camp.as_ref()?;
+    let Some(Property::Struct(StructValue::Game(PalStruct::BaseCamp(raw)))) =
+        base_camp.0.get(&PropertyKey::from("RawData"))
+    else {
+        return None;
+    };
+    let t = &raw.transform;
+    let yaw = 2.0 * t.rotation.z.0.atan2(t.rotation.w.0);
+    Some((t.translation.x.0, t.translation.y.0, t.translation.z.0, yaw))
+}
+
 /// The non-nil `local_id_in_created_world` of every occupied slot in an
 /// `ItemContainerSaveData` entry.
 pub fn container_slot_dynamic_item_ids(entry: &MapEntry) -> Vec<Uuid> {

@@ -82,8 +82,12 @@ describe('blueprintsData.exportRow', () => {
 
 describe('blueprintsData.requestGeometry', () => {
 	it('sends the handle and returns the structures', async () => {
-		sendAndWait.mockResolvedValueOnce({ structures: [{ map_object_id: 'Foundation' }] });
+		sendAndWait.mockResolvedValueOnce({
+			structures: [{ map_object_id: 'Foundation' }],
+			origin: { x: 1, y: 2, z: 3, yaw: 0.5 }
+		});
 		const geo = await blueprintsData.requestGeometry('h1');
+		expect(geo.origin).toEqual({ x: 1, y: 2, z: 3, yaw: 0.5 });
 		expect(sendAndWait).toHaveBeenCalledWith(MessageType.REQUEST_BLUEPRINT_GEOMETRY, {
 			handle: 'h1'
 		});
@@ -121,5 +125,17 @@ describe('blueprintsData.place', () => {
 		});
 		expect(res.base_id).toBe('base-1');
 		expect(res.structures_placed).toBe(12);
+	});
+});
+
+describe('blueprintsData.remove', () => {
+	it('deletes by id then refreshes the row list', async () => {
+		sendAndWait
+			.mockResolvedValueOnce({ id: 'row-1' })
+			.mockResolvedValueOnce({ blueprints: [] });
+		await blueprintsData.remove('row-1');
+		expect(sendAndWait).toHaveBeenNthCalledWith(1, MessageType.DELETE_BLUEPRINT, { id: 'row-1' });
+		expect(sendAndWait).toHaveBeenNthCalledWith(2, MessageType.LIST_BLUEPRINTS, undefined);
+		expect(blueprintsData.rows).toEqual([]);
 	});
 });

@@ -100,6 +100,14 @@ pub async fn get(pool: &SqlitePool, id: &str) -> Result<Option<StoredBlueprint>,
     }
 }
 
+pub async fn delete(pool: &SqlitePool, id: &str) -> Result<bool, DbError> {
+    let result = sqlx::query("DELETE FROM blueprints WHERE id = ?")
+        .bind(id)
+        .execute(pool)
+        .await?;
+    Ok(result.rows_affected() > 0)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -161,5 +169,16 @@ mod tests {
         );
 
         assert!(get(&pool, "no-such-id").await.unwrap().is_none());
+    }
+
+    #[tokio::test]
+    async fn delete_removes_the_row() {
+        let pool = test_pool().await;
+        let id = insert(&pool, sample("Farm", &[1, 2, 3])).await.unwrap();
+
+        assert!(delete(&pool, &id).await.unwrap(), "deleting an existing row reports success");
+        assert!(get(&pool, &id).await.unwrap().is_none(), "the row is gone");
+        assert!(list(&pool).await.unwrap().is_empty(), "list no longer shows it");
+        assert!(!delete(&pool, "no-such-id").await.unwrap(), "deleting a missing row reports false");
     }
 }

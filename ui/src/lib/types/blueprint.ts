@@ -62,6 +62,7 @@ export interface BlueprintStructureGeometry {
 
 export interface BlueprintGeometry {
 	structures: BlueprintStructureGeometry[];
+	origin: PlacementAnchor;
 }
 
 export interface PlacementAnchor {
