@@ -250,6 +250,56 @@ pub fn first_player_with_relics(session: &mut SaveSession, data: &GameData) -> U
 #[allow(dead_code)]
 pub const CAPTURE_POWER_RELIC: &str = "EPalRelicType::CapturePower";
 
+/// The base camp with the most placed structures, so capture tests exercise a
+/// real base. `v1_relics` has 15 base camps and the first is nearly empty --
+/// keying on entry order would let every capture assertion pass vacuously.
+/// Ties break on the uuid string so the choice is stable across runs.
+#[allow(dead_code)]
+pub fn fixture_base_id(session: &SaveSession) -> Uuid {
+    use psp_core::ue::{PalStruct, Property, PropertyKey, StructValue};
+
+    let mut counts: std::collections::HashMap<Uuid, usize> = std::collections::HashMap::new();
+    let map_objects = psp_core::domain::world::map_object_values(&session.level)
+        .expect("map object values")
+        .expect("the fixture must have MapObjectSaveData");
+    for value in map_objects {
+        let StructValue::Struct(object_props) = value else { continue };
+        let Some(model) = object_props
+            .0
+            .get(&PropertyKey::from("Model"))
+            .and_then(psp_core::props::struct_props)
+        else {
+            continue;
+        };
+        let Some(Property::Struct(StructValue::Game(PalStruct::MapModel(raw)))) =
+            model.0.get(&PropertyKey::from("RawData"))
+        else {
+            continue;
+        };
+        let base_id = psp_core::props::guid_to_uuid(&raw.base_camp_id_belong_to);
+        if base_id.is_nil() {
+            continue;
+        }
+        *counts.entry(base_id).or_default() += 1;
+    }
+
+    let base_camps = psp_core::domain::world::base_camp_map(&session.level)
+        .expect("base camp map")
+        .expect("the fixture must have BaseCampSaveData");
+    let known: std::collections::HashSet<Uuid> = base_camps
+        .iter()
+        .filter_map(|entry| psp_core::props::as_uuid(&entry.key))
+        .collect();
+
+    let (base_id, count) = counts
+        .into_iter()
+        .filter(|(id, _)| known.contains(id))
+        .max_by(|a, b| a.1.cmp(&b.1).then_with(|| a.0.to_string().cmp(&b.0.to_string())))
+        .expect("the fixture must have a base camp with structures");
+    assert!(count > 1, "the chosen fixture base must have real structures, got {count}");
+    base_id
+}
+
 /// The first fixture player carrying a *non*-CapturePower relic type with at least one
 /// true flag. Only such a player can witness a regression that wipes the other relic
 /// types' flag sets: an effigy unlock touches CapturePower alone, so every other type's

@@ -168,6 +168,7 @@ world_optional_struct_array_accessors!(
     map_object_values_mut,
     "MapObjectSaveData"
 );
+world_optional_struct_array_accessors!(work_values, work_values_mut, "WorkSaveData");
 
 /// A `CharacterSaveParameterMap` entry's key bag (`PlayerUId`, `InstanceId`).
 pub fn entry_key_props(entry: &MapEntry) -> Option<&Properties> {

@@ -1,4 +1,5 @@
 //! Domain logic that operates on an already-parsed `SaveSession`.
+pub mod blueprint;
 pub mod containers;
 pub mod gps;
 pub mod guild;
