@@ -5,6 +5,7 @@ pub mod dispatcher;
 pub mod handlers;
 pub use psp_app::{emitter, envelope, handler_error, messages};
 pub mod router;
+pub mod server_ext;
 pub mod services;
 pub mod static_files;
 pub mod ws;
@@ -90,9 +91,9 @@ pub struct AppState {
     /// axum runs the upgraded socket on its own spawned task, decoupled from the
     /// HTTP connection future that `ServerHandle::shutdown` waits on.
     pub live_connections: tokio::sync::watch::Sender<usize>,
-    /// Docker + Palworld REST clients used by the server-management handlers.
-    /// Real `BollardDocker` in production; `mock::MockDocker` in tests.
-    pub server_services: Arc<crate::services::ServerServices>,
+    /// Transport-owned router for native-only message types (server
+    /// management, shell-open). NullExtRouter on targets without them.
+    pub ext: Arc<dyn crate::dispatcher::ExtRouter>,
     /// Parsed sessions keyed by id, so a session survives a WS reconnect. A
     /// connection registers its session here on load; reattach/eject read it.
     pub sessions: std::sync::Mutex<SessionStore>,
@@ -174,7 +175,9 @@ pub async fn start_server_with(
         db,
         dialogs,
         live_connections,
-        server_services: Arc::new(crate::services::ServerServices::real()),
+        ext: Arc::new(crate::server_ext::ServerExtRouter {
+            services: Arc::new(crate::services::ServerServices::real()),
+        }),
         sessions: std::sync::Mutex::new(SessionStore::default()),
     });
 
@@ -282,16 +285,13 @@ pub(crate) mod test_support {
             let db = psp_db::open(&config.db_path).await.unwrap();
             let game_data = Arc::new(GameData::load(&json_dir).unwrap());
             let (live_connections, _live_connections_rx) = tokio::sync::watch::channel(0usize);
-            let server_services = Arc::new(crate::services::ServerServices::with_docker(Arc::new(
-                crate::services::docker::mock::MockDocker::default(),
-            )));
             let app = Arc::new(AppState {
                 config,
                 game_data,
                 db,
                 dialogs: Arc::new(crate::desktop_dialogs::NullDialogProvider),
                 live_connections,
-                server_services,
+                ext: Arc::new(crate::dispatcher::NullExtRouter),
                 sessions: std::sync::Mutex::new(crate::SessionStore::default()),
             });
             let (sender, frames) = tokio::sync::mpsc::unbounded_channel();
@@ -303,6 +303,18 @@ pub(crate) mod test_support {
                 frames,
                 _temp_dir: temp_dir,
             }
+        }
+
+        pub async fn with_ext(
+            populate_data_dir: impl FnOnce(&std::path::Path),
+            ext: std::sync::Arc<dyn crate::dispatcher::ExtRouter>,
+        ) -> Self {
+            let mut test = Self::new(populate_data_dir).await;
+            // AppState is behind an Arc with no other clones yet, so rebuild it.
+            let app =
+                std::sync::Arc::get_mut(&mut test.app).expect("fresh TestContext app is unshared");
+            app.ext = ext;
+            test
         }
 
         pub fn next_frame_json(&mut self) -> serde_json::Value {

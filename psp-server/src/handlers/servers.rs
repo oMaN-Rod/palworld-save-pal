@@ -18,8 +18,8 @@ use crate::handlers::save_file;
 use crate::messages::MessageType;
 use crate::services::{
     docker, docker_mods, native_config, native_mods, native_process, ServerProcessStatus,
+    ServerServices,
 };
-use crate::AppState;
 
 #[derive(Debug, serde::Deserialize)]
 pub struct ServerIdData {
@@ -90,19 +90,19 @@ pub fn count_total_players(saves_path: &str) -> u64 {
 }
 
 pub(crate) async fn server_status(
-    app: &AppState,
+    services: &ServerServices,
     record: &ServerRecord,
 ) -> Option<ServerProcessStatus> {
     if record.server_type == "native" {
         Some(native_process::process_status(record.pid))
     } else {
-        docker::container_status(app.server_services.docker.as_ref(), &record.container_name).await
+        docker::container_status(services.docker.as_ref(), &record.container_name).await
     }
 }
 
 /// Online player count via the REST API when the status says running, else 0.
 pub(crate) async fn online_player_count(
-    app: &AppState,
+    services: &ServerServices,
     record: &ServerRecord,
     status: &Option<ServerProcessStatus>,
 ) -> u64 {
@@ -111,7 +111,7 @@ pub(crate) async fn online_player_count(
         .map(|current| current.running)
         .unwrap_or(false)
     {
-        app.server_services
+        services
             .palworld_api
             .get_player_count(
                 "127.0.0.1",
@@ -124,16 +124,20 @@ pub(crate) async fn online_player_count(
     }
 }
 
-async fn server_entry_with_runtime_fields(app: &AppState, record: &ServerRecord) -> Value {
-    let status = server_status(app, record).await;
+async fn server_entry_with_runtime_fields(
+    services: &ServerServices,
+    record: &ServerRecord,
+) -> Value {
+    let status = server_status(services, record).await;
     let mut entry = server_to_wire_json(record);
     entry["status"] = serde_json::to_value(&status).expect("status serializes");
     entry["total_players"] = Value::from(count_total_players(&record.saves_path));
-    entry["player_count"] = Value::from(online_player_count(app, record, &status).await);
+    entry["player_count"] = Value::from(online_player_count(services, record, &status).await);
     entry
 }
 
 pub async fn handle_list_servers(
+    services: &ServerServices,
     _data: Value,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
@@ -141,7 +145,7 @@ pub async fn handle_list_servers(
         Ok(records) => {
             let mut server_list = Vec::with_capacity(records.len());
             for record in &records {
-                server_list.push(server_entry_with_runtime_fields(ctx.app, record).await);
+                server_list.push(server_entry_with_runtime_fields(services, record).await);
             }
             ctx.emitter.emit(
                 MessageType::ListServers,
@@ -156,12 +160,13 @@ pub async fn handle_list_servers(
 }
 
 pub async fn handle_get_server(
+    services: &ServerServices,
     data: ServerIdData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     match psp_db::servers::get_server(&ctx.app.db, data.server_id).await {
         Ok(Some(record)) => {
-            let entry = server_entry_with_runtime_fields(ctx.app, &record).await;
+            let entry = server_entry_with_runtime_fields(services, &record).await;
             ctx.emitter.emit(MessageType::GetServer, &entry);
         }
         Ok(None) => emit_business_error(ctx.emitter, "Server not found".to_string()),
@@ -185,6 +190,7 @@ pub async fn handle_detect_workshop_dir(
 }
 
 pub async fn handle_get_server_stats(
+    services: &ServerServices,
     data: ServerIdData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
@@ -193,11 +199,7 @@ pub async fn handle_get_server_stats(
             let stats = if record.server_type == "native" {
                 native_process::process_stats(record.pid)
             } else {
-                docker::container_stats(
-                    ctx.app.server_services.docker.as_ref(),
-                    &record.container_name,
-                )
-                .await
+                docker::container_stats(services.docker.as_ref(), &record.container_name).await
             };
             ctx.emitter.emit(
                 MessageType::GetServerStats,
@@ -306,6 +308,7 @@ async fn persist_steamcmd_path(
 /// "Failed to create server: {e}"; every business rejection emits its own
 /// `error` frame and returns `Ok(())`.
 async fn create_server_impl(
+    services: &ServerServices,
     data: CreateServerData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), String> {
@@ -502,17 +505,14 @@ async fn create_server_impl(
             emitter,
             &format!("Pulling Docker image {}...", data.image_name),
         );
-        docker::create_server_container(ctx.app.server_services.docker.as_ref(), &record)
+        docker::create_server_container(services.docker.as_ref(), &record)
             .await
             .map_err(|error| error.to_string())?;
         emit_creation_progress(emitter, "Container started successfully");
         emit_creation_progress(emitter, "");
 
-        let status = docker::container_status(
-            ctx.app.server_services.docker.as_ref(),
-            &record.container_name,
-        )
-        .await;
+        let status =
+            docker::container_status(services.docker.as_ref(), &record.container_name).await;
         let mut result = server_to_wire_json(&record);
         result["status"] = serde_json::to_value(&status).expect("serializes");
         result["player_count"] = Value::from(0);
@@ -522,10 +522,11 @@ async fn create_server_impl(
 }
 
 pub async fn handle_create_server(
+    services: &ServerServices,
     data: CreateServerData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    if let Err(message) = create_server_impl(data, ctx).await {
+    if let Err(message) = create_server_impl(services, data, ctx).await {
         emit_business_error(ctx.emitter, format!("Failed to create server: {message}"));
     }
     Ok(())
@@ -708,6 +709,7 @@ pub async fn handle_import_server(
 }
 
 async fn update_server_impl(
+    services: &ServerServices,
     data: UpdateServerData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), String> {
@@ -753,11 +755,7 @@ async fn update_server_impl(
             if record.pid.is_some() {
                 let status = native_process::process_status(record.pid);
                 if status.running {
-                    native_process::stop_server_process(
-                        &record,
-                        &ctx.app.server_services.palworld_api,
-                    )
-                    .await;
+                    native_process::stop_server_process(&record, &services.palworld_api).await;
                     if let Some(new_pid) = native_process::start_server_process(&record) {
                         let mut pid_update = serde_json::Map::new();
                         pid_update.insert("pid".to_string(), Value::from(new_pid));
@@ -773,7 +771,7 @@ async fn update_server_impl(
             }
         }
     } else if needs_apply {
-        let docker_api = ctx.app.server_services.docker.as_ref();
+        let docker_api = services.docker.as_ref();
         docker::stop_server_container(docker_api, &old_record.container_name).await;
         docker::remove_server_container(docker_api, &old_record.container_name, false).await;
         docker::create_server_container(docker_api, &record)
@@ -781,7 +779,7 @@ async fn update_server_impl(
             .map_err(|error| error.to_string())?;
     }
 
-    let status = server_status(ctx.app, &record).await;
+    let status = server_status(services, &record).await;
     let mut result = server_to_wire_json(&record);
     result["status"] = serde_json::to_value(&status).expect("serializes");
     emitter.emit(MessageType::UpdateServer, &result);
@@ -789,16 +787,18 @@ async fn update_server_impl(
 }
 
 pub async fn handle_update_server(
+    services: &ServerServices,
     data: UpdateServerData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    if let Err(message) = update_server_impl(data, ctx).await {
+    if let Err(message) = update_server_impl(services, data, ctx).await {
         emit_business_error(ctx.emitter, format!("Failed to update server: {message}"));
     }
     Ok(())
 }
 
 pub async fn handle_delete_server(
+    services: &ServerServices,
     data: ServerIdData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
@@ -814,12 +814,11 @@ pub async fn handle_delete_server(
         };
         if record.server_type == "native" {
             if record.pid.is_some() {
-                native_process::stop_server_process(&record, &ctx.app.server_services.palworld_api)
-                    .await;
+                native_process::stop_server_process(&record, &services.palworld_api).await;
             }
             // Native installs keep their files on disk; only the DB row goes.
         } else {
-            let docker_api = ctx.app.server_services.docker.as_ref();
+            let docker_api = services.docker.as_ref();
             docker::stop_server_container(docker_api, &record.container_name).await;
             // Removal result is deliberately ignored: a Docker-side failure must
             // not block deleting the DB row or change the response.
@@ -842,6 +841,7 @@ pub async fn handle_delete_server(
 }
 
 pub async fn handle_start_server(
+    services: &ServerServices,
     data: ServerIdData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
@@ -867,7 +867,7 @@ pub async fn handle_start_server(
             let status = native_process::process_status(new_pid.map(i64::from));
             (new_pid.is_some(), Some(status))
         } else {
-            let docker_api = ctx.app.server_services.docker.as_ref();
+            let docker_api = services.docker.as_ref();
             let success = docker::start_server_container(docker_api, &record.container_name).await;
             let status = docker::container_status(docker_api, &record.container_name).await;
             (success, status)
@@ -886,6 +886,7 @@ pub async fn handle_start_server(
 }
 
 pub async fn handle_stop_server(
+    services: &ServerServices,
     data: ServerIdData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
@@ -903,8 +904,7 @@ pub async fn handle_stop_server(
         let (success, status) = if record.server_type == "native" {
             emit_creation_progress(emitter, "Sending shutdown command to server...");
             let success =
-                native_process::stop_server_process(&record, &ctx.app.server_services.palworld_api)
-                    .await;
+                native_process::stop_server_process(&record, &services.palworld_api).await;
             if success {
                 let mut pid_update = serde_json::Map::new();
                 pid_update.insert("pid".to_string(), Value::Null);
@@ -915,7 +915,7 @@ pub async fn handle_stop_server(
             (success, Some(native_process::process_status(None)))
         } else {
             emit_creation_progress(emitter, "Stopping Docker container...");
-            let docker_api = ctx.app.server_services.docker.as_ref();
+            let docker_api = services.docker.as_ref();
             let success = docker::stop_server_container(docker_api, &record.container_name).await;
             let status = docker::container_status(docker_api, &record.container_name).await;
             (success, status)
@@ -971,6 +971,7 @@ pub struct InstallServerModData {
 /// Proxies to the Palworld dedicated-server REST API at
 /// 127.0.0.1:{rest_api_port} using the server's admin_password.
 pub async fn handle_server_api_call(
+    services: &ServerServices,
     data: ServerApiCallData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
@@ -986,9 +987,7 @@ pub async fn handle_server_api_call(
             return Ok(());
         }
     };
-    match ctx
-        .app
-        .server_services
+    match services
         .palworld_api
         .rest_api_call(
             "127.0.0.1",
@@ -1146,7 +1145,11 @@ pub async fn handle_install_server_mod(
 /// "Failed to load server save: {e}"; every business rejection (server not
 /// found, still running, no save data, no Level.sav, invalid steam directory)
 /// emits its own `error` frame and returns `Ok(())`.
-async fn load_server_save_impl(data: ServerIdData, ctx: &mut HandlerCtx<'_>) -> Result<(), String> {
+async fn load_server_save_impl(
+    services: &ServerServices,
+    data: ServerIdData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), String> {
     let emitter = ctx.emitter;
     let db = &ctx.app.db;
     let Some(record) = psp_db::servers::get_server(db, data.server_id)
@@ -1159,7 +1162,7 @@ async fn load_server_save_impl(data: ServerIdData, ctx: &mut HandlerCtx<'_>) -> 
 
     // A running server holds the save file open and will overwrite whatever we
     // write back, so refuse to load from it.
-    let status = server_status(ctx.app, &record).await;
+    let status = server_status(services, &record).await;
     if status
         .as_ref()
         .map(|current| current.running)
@@ -1269,10 +1272,11 @@ async fn load_server_save_impl(data: ServerIdData, ctx: &mut HandlerCtx<'_>) -> 
 }
 
 pub async fn handle_load_server_save(
+    services: &ServerServices,
     data: ServerIdData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    if let Err(message) = load_server_save_impl(data, ctx).await {
+    if let Err(message) = load_server_save_impl(services, data, ctx).await {
         emit_business_error(
             ctx.emitter,
             format!("Failed to load server save: {message}"),
@@ -1291,6 +1295,9 @@ pub(crate) mod test_env {
 
     pub(crate) struct TestEnv {
         pub app: Arc<AppState>,
+        /// Passed explicitly to the handler under test, the way `ServerExtRouter`
+        /// does in production.
+        pub services: Arc<ServerServices>,
         pub docker: Arc<MockDocker>,
         pub session: psp_core::session::Session,
         pub emitter: crate::emitter::Emitter,
@@ -1322,12 +1329,13 @@ pub(crate) mod test_env {
                 db,
                 dialogs: Arc::new(crate::desktop_dialogs::NullDialogProvider),
                 live_connections,
-                server_services: Arc::new(ServerServices::with_docker(docker.clone())),
+                ext: Arc::new(crate::dispatcher::NullExtRouter),
                 sessions: std::sync::Mutex::new(crate::SessionStore::default()),
             });
             let (emitter, receiver) = crate::emitter::Emitter::test_channel();
             Self {
                 app,
+                services: Arc::new(ServerServices::with_docker(docker.clone())),
                 docker,
                 session: psp_core::session::Session::new(),
                 emitter,
@@ -1354,7 +1362,7 @@ pub(crate) mod test_env {
                     folders,
                 )),
                 live_connections,
-                server_services: env.app.server_services.clone(),
+                ext: Arc::new(crate::dispatcher::NullExtRouter),
                 sessions: std::sync::Mutex::new(crate::SessionStore::default()),
             });
             env.app = app;
@@ -1417,8 +1425,9 @@ mod tests {
     #[tokio::test]
     async fn list_servers_returns_empty_list() {
         let mut env = TestEnv::new().await;
+        let services = env.services.clone();
         let mut ctx = env.ctx();
-        handle_list_servers(serde_json::Value::Null, &mut ctx)
+        handle_list_servers(&services, serde_json::Value::Null, &mut ctx)
             .await
             .unwrap();
         let messages = env.drain();
@@ -1438,8 +1447,9 @@ mod tests {
             "alpha".to_string(),
             serde_json::json!({"State": {"Status": "exited", "Running": false, "StartedAt": null}}),
         );
+        let services = env.services.clone();
         let mut ctx = env.ctx();
-        handle_list_servers(serde_json::Value::Null, &mut ctx)
+        handle_list_servers(&services, serde_json::Value::Null, &mut ctx)
             .await
             .unwrap();
         let messages = env.drain();
@@ -1459,8 +1469,9 @@ mod tests {
     #[tokio::test]
     async fn get_server_unknown_id_emits_business_error() {
         let mut env = TestEnv::new().await;
+        let services = env.services.clone();
         let mut ctx = env.ctx();
-        handle_get_server(ServerIdData { server_id: 999 }, &mut ctx)
+        handle_get_server(&services, ServerIdData { server_id: 999 }, &mut ctx)
             .await
             .unwrap();
         let messages = env.drain();
@@ -1491,8 +1502,10 @@ mod tests {
         let record = psp_db::servers::create_server(&env.app.db, new_server)
             .await
             .unwrap();
+        let services = env.services.clone();
         let mut ctx = env.ctx();
         handle_get_server(
+            &services,
             ServerIdData {
                 server_id: record.id,
             },
@@ -1526,8 +1539,10 @@ mod tests {
         let record = psp_db::servers::create_server(&env.app.db, docker_new_server("gamma"))
             .await
             .unwrap();
+        let services = env.services.clone();
         let mut ctx = env.ctx();
         handle_get_server_stats(
+            &services,
             ServerIdData {
                 server_id: record.id,
             },
@@ -1561,8 +1576,11 @@ mod tests {
         assert_eq!(data.admin_password, "admin");
         assert_eq!(data.max_players, 16);
 
+        let services = env.services.clone();
         let mut ctx = env.ctx();
-        handle_create_server(data, &mut ctx).await.unwrap();
+        handle_create_server(&services, data, &mut ctx)
+            .await
+            .unwrap();
         let messages = env.drain();
         let types: Vec<&str> = messages
             .iter()
@@ -1614,8 +1632,11 @@ mod tests {
             "container_name": "second"
         }))
         .unwrap();
+        let services = env.services.clone();
         let mut ctx = env.ctx();
-        handle_create_server(data, &mut ctx).await.unwrap();
+        handle_create_server(&services, data, &mut ctx)
+            .await
+            .unwrap();
         let messages = env.drain();
         assert_eq!(messages.len(), 1);
         assert_eq!(messages[0]["type"], "error");
@@ -1634,8 +1655,11 @@ mod tests {
             "server_type": "native"
         }))
         .unwrap();
+        let services = env.services.clone();
         let mut ctx = env.ctx();
-        handle_create_server(data, &mut ctx).await.unwrap();
+        handle_create_server(&services, data, &mut ctx)
+            .await
+            .unwrap();
         let messages = env.drain();
         assert_eq!(messages[0]["type"], "error");
         assert_eq!(
@@ -1652,8 +1676,10 @@ mod tests {
             .unwrap();
         let mut updates = serde_json::Map::new();
         updates.insert("server_name".to_string(), serde_json::json!("Renamed"));
+        let services = env.services.clone();
         let mut ctx = env.ctx();
         handle_update_server(
+            &services,
             UpdateServerData {
                 server_id: record.id,
                 updates,
@@ -1683,8 +1709,10 @@ mod tests {
             .unwrap();
         let mut updates = serde_json::Map::new();
         updates.insert("name".to_string(), serde_json::json!("Display Only"));
+        let services = env.services.clone();
         let mut ctx = env.ctx();
         handle_update_server(
+            &services,
             UpdateServerData {
                 server_id: record.id,
                 updates,
@@ -1702,8 +1730,10 @@ mod tests {
     #[tokio::test]
     async fn update_unknown_server_emits_not_found() {
         let mut env = TestEnv::new().await;
+        let services = env.services.clone();
         let mut ctx = env.ctx();
         handle_update_server(
+            &services,
             UpdateServerData {
                 server_id: 42,
                 updates: serde_json::Map::new(),
@@ -1723,8 +1753,10 @@ mod tests {
         let record = psp_db::servers::create_server(&env.app.db, docker_new_server("alpha"))
             .await
             .unwrap();
+        let services = env.services.clone();
         let mut ctx = env.ctx();
         handle_delete_server(
+            &services,
             ServerIdData {
                 server_id: record.id,
             },
@@ -1752,8 +1784,10 @@ mod tests {
         let record = psp_db::servers::create_server(&env.app.db, docker_new_server("alpha"))
             .await
             .unwrap();
+        let services = env.services.clone();
         let mut ctx = env.ctx();
         handle_start_server(
+            &services,
             ServerIdData {
                 server_id: record.id,
             },
@@ -1779,8 +1813,10 @@ mod tests {
             "alpha".to_string(),
             serde_json::json!({"State": {"Status": "running", "Running": true, "StartedAt": "x"}}),
         );
+        let services = env.services.clone();
         let mut ctx = env.ctx();
         handle_stop_server(
+            &services,
             ServerIdData {
                 server_id: record.id,
             },
@@ -1835,8 +1871,10 @@ mod tests {
         let record = psp_db::servers::create_server(&env.app.db, new_server)
             .await
             .unwrap();
+        let services = env.services.clone();
         let mut ctx = env.ctx();
         handle_server_api_call(
+            &services,
             ServerApiCallData {
                 server_id: record.id,
                 endpoint: "players".to_string(),
@@ -1869,8 +1907,10 @@ mod tests {
         let record = psp_db::servers::create_server(&env.app.db, new_server)
             .await
             .unwrap();
+        let services = env.services.clone();
         let mut ctx = env.ctx();
         handle_server_api_call(
+            &services,
             ServerApiCallData {
                 server_id: record.id,
                 endpoint: "info".to_string(),
@@ -2022,8 +2062,10 @@ mod tests {
             "running".to_string(),
             serde_json::json!({"State": {"Status": "running", "Running": true, "StartedAt": "x"}}),
         );
+        let services = env.services.clone();
         let mut ctx = env.ctx();
         handle_load_server_save(
+            &services,
             ServerIdData {
                 server_id: record.id,
             },
@@ -2052,8 +2094,10 @@ mod tests {
         let record = psp_db::servers::create_server(&env.app.db, new_server)
             .await
             .unwrap();
+        let services = env.services.clone();
         let mut ctx = env.ctx();
         handle_load_server_save(
+            &services,
             ServerIdData {
                 server_id: record.id,
             },
@@ -2099,6 +2143,7 @@ mod tests {
         let mut session_arc: crate::SharedSession =
             std::sync::Arc::new(tokio::sync::Mutex::new(psp_core::session::Session::new()));
         let mut current_id: Option<uuid::Uuid> = None;
+        let services = env.services.clone();
         let mut ctx = crate::dispatcher::HandlerCtx {
             session: &mut env.session,
             app: &env.app,
@@ -2110,6 +2155,7 @@ mod tests {
             }),
         };
         handle_load_server_save(
+            &services,
             ServerIdData {
                 server_id: record.id,
             },

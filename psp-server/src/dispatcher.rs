@@ -54,6 +54,36 @@ impl HandlerCtx<'_> {
     }
 }
 
+/// Routes the message types the platform-agnostic dispatcher does not own —
+/// server management and native shell-open — so they can live in the transport
+/// crate instead of the message layer.
+#[async_trait::async_trait]
+pub trait ExtRouter: Send + Sync {
+    /// Returns None when this router does not own `message_type`;
+    /// the dispatcher then falls through to its unrouted warn-and-drop path.
+    async fn route(
+        &self,
+        message_type: MessageType,
+        data: serde_json::Value,
+        ctx: &mut HandlerCtx<'_>,
+    ) -> Option<Result<(), HandlerError>>;
+}
+
+/// Owns nothing, so every native-only type takes the unrouted path.
+pub struct NullExtRouter;
+
+#[async_trait::async_trait]
+impl ExtRouter for NullExtRouter {
+    async fn route(
+        &self,
+        _message_type: MessageType,
+        _data: serde_json::Value,
+        _ctx: &mut HandlerCtx<'_>,
+    ) -> Option<Result<(), HandlerError>> {
+        None
+    }
+}
+
 /// Routes one envelope to its handler. Wire contract:
 /// - unknown or unrouted message type → warn log, nothing sent;
 /// - handler Err → `error` message {message, trace};
@@ -345,60 +375,8 @@ async fn route(
         MessageType::UnlockMap => {
             handlers::save_file::handle_unlock_map(serde_json::from_value(data)?, ctx).await
         }
-        MessageType::OpenFolder => {
-            handlers::system::handle_open_folder(serde_json::from_value(data)?, ctx).await
-        }
-        MessageType::OpenInBrowser => {
-            handlers::system::handle_open_in_browser(serde_json::from_value(data)?, ctx).await
-        }
-        MessageType::OpenUrl => {
-            handlers::system::handle_open_url(serde_json::from_value(data)?, ctx).await
-        }
-        MessageType::ListServers => handlers::servers::handle_list_servers(data, ctx).await,
-        MessageType::GetServer => {
-            handlers::servers::handle_get_server(serde_json::from_value(data)?, ctx).await
-        }
-        MessageType::DetectWorkshopDir => {
-            handlers::servers::handle_detect_workshop_dir(data, ctx).await
-        }
-        MessageType::GetServerStats => {
-            handlers::servers::handle_get_server_stats(serde_json::from_value(data)?, ctx).await
-        }
-        MessageType::CreateServer => {
-            handlers::servers::handle_create_server(serde_json::from_value(data)?, ctx).await
-        }
-        MessageType::ImportServer => {
-            handlers::servers::handle_import_server(serde_json::from_value(data)?, ctx).await
-        }
-        MessageType::UpdateServer => {
-            handlers::servers::handle_update_server(serde_json::from_value(data)?, ctx).await
-        }
-        MessageType::DeleteServer => {
-            handlers::servers::handle_delete_server(serde_json::from_value(data)?, ctx).await
-        }
-        MessageType::StartServer => {
-            handlers::servers::handle_start_server(serde_json::from_value(data)?, ctx).await
-        }
-        MessageType::StopServer => {
-            handlers::servers::handle_stop_server(serde_json::from_value(data)?, ctx).await
-        }
-        MessageType::ServerApiCall => {
-            handlers::servers::handle_server_api_call(serde_json::from_value(data)?, ctx).await
-        }
-        MessageType::ListServerMods => {
-            handlers::servers::handle_list_server_mods(serde_json::from_value(data)?, ctx).await
-        }
-        MessageType::ToggleServerMod => {
-            handlers::servers::handle_toggle_server_mod(serde_json::from_value(data)?, ctx).await
-        }
-        MessageType::InstallServerMod => {
-            handlers::servers::handle_install_server_mod(serde_json::from_value(data)?, ctx).await
-        }
         // ServerPlayerCount has no arm on purpose: it is a permanently dead
         // wire type.
-        MessageType::LoadServerSave => {
-            handlers::servers::handle_load_server_save(serde_json::from_value(data)?, ctx).await
-        }
         // session_not_found is emit-only, so it has no inbound arm.
         MessageType::ReattachSession => {
             handlers::session::handle_reattach_session(serde_json::from_value(data)?, ctx).await
@@ -447,6 +425,12 @@ async fn route(
             handlers::blueprints::handle_delete_blueprint(serde_json::from_value(data)?, ctx).await
         }
         other => {
+            // Native-only types (server management, shell-open) are owned by the
+            // transport's ExtRouter; clone the Arc first so `ctx` is free to reborrow.
+            let ext = std::sync::Arc::clone(&ctx.app.ext);
+            if let Some(result) = ext.route(other, data, ctx).await {
+                return result;
+            }
             tracing::warn!(
                 message_type = other.as_wire(),
                 "handler not implemented yet (Phase 0)"
@@ -577,6 +561,47 @@ mod tests {
         )
         .await;
         assert_eq!(test.next_frame_json()["type"], "get_settings");
+    }
+
+    #[tokio::test]
+    async fn ext_router_receives_unmatched_native_types() {
+        use std::sync::atomic::{AtomicBool, Ordering};
+
+        struct RecordingExt(std::sync::Arc<AtomicBool>);
+
+        #[async_trait::async_trait]
+        impl ExtRouter for RecordingExt {
+            async fn route(
+                &self,
+                message_type: MessageType,
+                _data: serde_json::Value,
+                _ctx: &mut HandlerCtx<'_>,
+            ) -> Option<Result<(), HandlerError>> {
+                assert_eq!(message_type, MessageType::ListServers);
+                self.0.store(true, Ordering::SeqCst);
+                Some(Ok(()))
+            }
+        }
+
+        let hit = std::sync::Arc::new(AtomicBool::new(false));
+        let mut test = TestContext::with_ext(
+            |_| {},
+            std::sync::Arc::new(RecordingExt(std::sync::Arc::clone(&hit))),
+        )
+        .await;
+        dispatch(
+            envelope("list_servers", serde_json::Value::Null),
+            HandlerCtx {
+                session: &mut test.session,
+                app: &test.app,
+                emitter: &test.emitter,
+                blueprints: &mut test.blueprints,
+                attachment: None,
+            },
+        )
+        .await;
+        assert!(hit.load(Ordering::SeqCst), "ext router was not consulted");
+        test.assert_no_more_frames();
     }
 
     #[tokio::test]
