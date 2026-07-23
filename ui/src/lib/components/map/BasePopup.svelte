@@ -10,11 +10,13 @@
 	let {
 		base,
 		guildName,
-		onExport
+		onExport,
+		onDeleteBase
 	}: {
 		base: Base;
 		guildName?: string;
 		onExport?: (base: Base) => void;
+		onDeleteBase?: (base: Base) => void;
 	} = $props();
 
 	const mapCoords = $derived(worldToMap(base.location.x, base.location.y));
@@ -89,6 +91,9 @@
 
 		{#if onExport}
 			<Button variant="secondary" onclick={() => onExport?.(base)}>Export blueprint</Button>
+		{/if}
+		{#if onDeleteBase}
+			<Button variant="danger" onclick={() => onDeleteBase?.(base)}>Delete base</Button>
 		{/if}
 	</div>
 </Card>

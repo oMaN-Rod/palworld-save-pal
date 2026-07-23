@@ -31,30 +31,29 @@ export const mapImg = {
 
 /** Fixed rather than theme-derived: no theme palette carries ten distinguishable hues. */
 export const STRUCTURE_COLORS: Record<string, string> = {
-	Foundation: '#8d99ae',
-	Furniture: '#c98b5e',
-	Product: '#4d8fac',
-	Storage: '#7a6a9c',
-	Infrastructure: '#5c8a68',
-	Pal: '#d4a13a',
-	Light: '#d9cf6b',
-	Defense: '#b5544a',
-	Food: '#7fa84e',
-	Other: '#6b7280'
+	Foundation: '#9fa3a9', 
+	Furniture: '#e07a5f',  
+	Product: '#f4a261',    
+	Storage: '#8d99ae',    
+	Infrastructure: '#3d5a80', 
+	Pal: '#00b4d8',        
+	Light: '#f4d35e',      
+	Defense: '#e63946',    
+	Food: '#81b29a',       
+	Other: '#6c757d'       
 };
-
 /** Per-type relic icon, reusing the relic-stat art (`relic_<type>.webp`). */
 export function relicTypeIcon(relicType: string): string {
 	return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/relic_${relicType}.webp`);
 }
 
 const MATERIAL_TINT: Record<string, string> = {
-	Wood: '#8a6f4d',
-	Stone: '#8d8d94',
-	Metal: '#6e7f8d',
-	PalMetal: '#5a6b78',
-	Ancient: '#7d9187',
-	Glass: '#bfe8ea'
+	Wood: '#8b5a2b',    
+	Stone: '#9ba4b5',   
+	Metal: '#393e46',   
+	PalMetal: '#0077b6',
+	Ancient: '#ffffff', 
+	Glass: '#90e0ef'    
 };
 
 function mix(a: string, b: string, t: number): string {

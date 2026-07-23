@@ -122,7 +122,7 @@
 	{#if blueprintsData.rows.length === 0}
 		<p class="opacity-70">No blueprints yet. Capture one from a base, or import a .psp/.json file.</p>
 	{:else}
-		<div class="flex flex-col gap-2">
+		<div class="flex flex-col gap-2 max-h-100 2xl:max-h-164 overflow-y-auto">
 			{#each blueprintsData.rows as row (row.id)}
 				<Card class="flex items-center justify-between gap-4">
 					<div class="min-w-0">

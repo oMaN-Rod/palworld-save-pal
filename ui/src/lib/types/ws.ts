@@ -60,6 +60,7 @@ export enum MessageType {
 	GET_FAST_TRAVEL_POINTS = 'get_fast_travel_points',
 	GET_RELICS = 'get_relics',
 	DELETE_GUILD = 'delete_guild',
+	DELETE_BASE = 'delete_base',
 	DELETE_PLAYER = 'delete_player',
 	NUKE_PRESETS = 'nuke_presets',
 	EXPORT_PRESET = 'export_preset',

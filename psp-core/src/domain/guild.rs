@@ -814,6 +814,120 @@ pub fn delete_guild_and_players(
     Ok(())
 }
 
+/// Deletes one base -- its structures, item/character containers, pals, and
+/// work entries, plus the `BaseCampSaveData` entry itself -- without touching
+/// the guild that owns it or any of that guild's other bases or players.
+///
+/// `Err` when `base_id` names no `BaseCampSaveData` entry (or one whose owning
+/// guild doesn't resolve). The owning guild is loaded via
+/// [`get_guild_details`] (a no-op if it's already loaded) so `guild.base_ids`
+/// and `guild.map_object_instance_ids_base_camp_points` -- the two guild-tail
+/// lists `place::register_with_guild` writes into on founding a base -- can be
+/// pruned of this base's ids. Skipping that step would leave the guild
+/// pointing at a base camp and Pal Box that no longer exist: the same
+/// dangling-reference class that crashes the game.
+pub fn delete_base(
+    session: &mut SaveSession,
+    game_data: &GameData,
+    base_id: uuid::Uuid,
+) -> Result<(), CoreError> {
+    let not_found = || CoreError::Other(format!("Base {base_id} not found in the save file."));
+
+    let (guild_id, pal_box_instance_id) = {
+        let entries = world::base_camp_map(&session.level)?
+            .map(|entries| entries.as_slice())
+            .unwrap_or(&[]);
+        let entry = entries
+            .iter()
+            .find(|entry| props::as_uuid(&entry.key) == Some(base_id))
+            .ok_or_else(not_found)?;
+        let (guild_id, _) = base_guild_and_container(entry).ok_or_else(not_found)?;
+        let pal_box_instance_id = props::struct_props(&entry.value)
+            .and_then(|value_props| value_props.0.get(&PropertyKey::from("RawData")))
+            .and_then(|raw_data| match raw_data {
+                Property::Struct(StructValue::Game(crate::ue::PalStruct::BaseCamp(base_camp))) => {
+                    Some(props::guid_to_uuid(&base_camp.owner_map_object_instance_id))
+                }
+                _ => None,
+            });
+        (guild_id, pal_box_instance_id)
+    };
+
+    let dto = get_guild_details(session, game_data, guild_id)?
+        .ok_or_else(|| CoreError::GuildNotFound(guild_id))?;
+    let base = dto
+        .bases
+        .as_ref()
+        .and_then(|bases| bases.get(&base_id))
+        .ok_or_else(not_found)?;
+    let item_container_ids: Vec<uuid::Uuid> =
+        base.storage_containers.iter().map(|(id, _)| *id).collect();
+    let character_container_ids: Vec<uuid::Uuid> = base.container_id.into_iter().collect();
+    let base_pal_ids: Vec<uuid::Uuid> = base.pals.iter().map(|(id, _)| *id).collect();
+
+    if let Some(values) = world::map_object_values_mut(&mut session.level)? {
+        values.retain(|map_object| {
+            let StructValue::Struct(object_props) = map_object else {
+                return true;
+            };
+            match map_object_model(object_props) {
+                Some(model) => props::guid_to_uuid(&model.base_camp_id_belong_to) != base_id,
+                None => true,
+            }
+        });
+    }
+
+    if let Some(values) = world::work_values_mut(&mut session.level)? {
+        values.retain(|value| {
+            let StructValue::Struct(work_props) = value else {
+                return true;
+            };
+            let Some(Property::Struct(StructValue::Game(crate::ue::PalStruct::Work(raw)))) =
+                work_props.0.get(&PropertyKey::from("RawData"))
+            else {
+                return true;
+            };
+            match &raw.base_data {
+                Some(base_data) => {
+                    props::guid_to_uuid(&base_data.base_camp_id_belong_to) != base_id
+                }
+                None => true,
+            }
+        });
+    }
+
+    // `delete_guild_pals` (not a raw `delete_pal_entry` per id) so each base
+    // pal's `individual_character_handle_ids` entry in the guild tail is
+    // removed too.
+    super::pal::delete_guild_pals(session, guild_id, base_id, &base_pal_ids)?;
+
+    if let Some(entries) = world::base_camp_map_mut(&mut session.level)? {
+        entries.retain(|entry| props::as_uuid(&entry.key) != Some(base_id));
+    }
+
+    super::containers::delete_item_containers(session, &item_container_ids)?;
+    super::containers::delete_character_containers(session, &character_container_ids)?;
+
+    if let Some(entry_index) = guild_entry_index(session, guild_id)? {
+        let entries = world::group_map_mut(&mut session.level)?;
+        if let Some(group_data) = guild_tail::entry_group_data_mut(&mut entries[entry_index]) {
+            if let Some(guild) = guild_tail::as_guild_mut(group_data) {
+                guild
+                    .base_ids
+                    .retain(|id| props::guid_to_uuid(id) != base_id);
+                if let Some(pal_box_id) = pal_box_instance_id.filter(|id| !id.is_nil()) {
+                    guild
+                        .map_object_instance_ids_base_camp_points
+                        .retain(|id| props::guid_to_uuid(id) != pal_box_id);
+                }
+            }
+        }
+    }
+
+    session.invalidate_performance_caches();
+    Ok(())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

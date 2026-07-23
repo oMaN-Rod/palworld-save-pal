@@ -1,5 +1,6 @@
 //! Guild-management WS handlers: request_guild_details, update_lab_research,
-//! delete_guild. (`get_lab_research` lives in `handlers::game_data`.)
+//! delete_guild, delete_base. (`get_lab_research` lives in
+//! `handlers::game_data`.)
 
 use serde::Deserialize;
 use serde_json::json;
@@ -12,6 +13,11 @@ use crate::messages::MessageType;
 pub struct DeleteGuildData {
     pub guild_id: uuid::Uuid,
     pub origin: String,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct DeleteBaseData {
+    pub base_id: uuid::Uuid,
 }
 
 #[derive(Debug, Deserialize)]
@@ -81,6 +87,26 @@ pub async fn handle_update_lab_research(
             );
         }
     }
+    Ok(())
+}
+
+/// Deletes one base -- never the guild that owns it or any other base --
+/// via `psp_core::domain::guild::delete_base`.
+pub async fn handle_delete_base(
+    data: DeleteBaseData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let game_data = std::sync::Arc::clone(&ctx.app.game_data);
+    let Ok(session) = ctx.session.save_mut() else {
+        ctx.emitter
+            .emit(MessageType::Warning, &"No save file loaded");
+        return Ok(());
+    };
+    psp_core::domain::guild::delete_base(session, &game_data, data.base_id)?;
+    ctx.emitter.emit(
+        MessageType::DeleteBase,
+        &json!({ "base_id": data.base_id }),
+    );
     Ok(())
 }
 

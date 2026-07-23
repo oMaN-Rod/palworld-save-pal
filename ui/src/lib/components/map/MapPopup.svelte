@@ -14,12 +14,14 @@
 		type,
 		data,
 		guildName,
-		onExportBase
+		onExportBase,
+		onDeleteBase
 	}: {
 		type: MapFeatureType;
 		data: any;
 		guildName?: string;
 		onExportBase?: (base: any) => void;
+		onDeleteBase?: (base: any) => void;
 	} = $props();
 </script>
 
@@ -28,7 +30,7 @@
 {:else if type === 'player'}
 	<PlayerPopup player={data} />
 {:else if type === 'base'}
-	<BasePopup base={data} {guildName} onExport={onExportBase} />
+	<BasePopup base={data} {guildName} onExport={onExportBase} {onDeleteBase} />
 {:else if type === 'fast_travel'}
 	<FastTravelPopup point={data} />
 {:else if type === 'relic'}

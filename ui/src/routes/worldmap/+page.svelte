@@ -215,13 +215,14 @@
 	const anubisImg = $derived(assetLoader.loadMenuImage('anubis'));
 	const starryonImg = $derived(assetLoader.loadMenuImage('nightbluehorse'));
 
-	function panTo(x: number, y: number) {
+	function panTo(x: number, y: number, zoom = 4) {
 		const area = mapOf(x, y);
 		if (!area) return;
 		mapOptions.area = area;
 		const [px, py] = worldToPixel(x, y, area);
-		map?.flyTo({ center: pixelToLngLat(px, py), zoom: 4, duration: 500 });
+		map?.flyTo({ center: pixelToLngLat(px, py), zoom, duration: 500 });
 	}
+
 	function handlePlayerFocus(player: Player) {
 		if (!player.location) return;
 		panTo(player.location.x, player.location.y);
@@ -290,6 +291,35 @@
 			baseId: base.id,
 			baseName: base.name || ''
 		});
+	}
+
+	async function handleDeleteBase(base: Base) {
+		const baseName = base.name || 'Unnamed Base';
+		const confirmed = await modal.showConfirmModal({
+			title: `Delete base "${baseName}"?`,
+			message: 'This removes its structures and pals.',
+			confirmText: 'Delete',
+			cancelText: 'Cancel'
+		});
+		if (!confirmed) return;
+
+		const guildEntry = Object.entries(appState.guilds || {}).find(
+			([, guild]) => guild.bases && Object.values(guild.bases).some((b) => b.id === base.id)
+		);
+		if (!guildEntry) return;
+		const [guildId] = guildEntry;
+
+		try {
+			await sendAndWait(MessageType.DELETE_BASE, { base_id: base.id });
+		} catch (e) {
+			toast.add(String(e instanceof Error ? e.message : e), 'Failed to delete base', 'error');
+			return;
+		}
+
+		delete appState.guilds[guildId];
+		await appState.loadGuildLazy(guildId);
+		baseStructuresData.reset();
+		toast.add(`Deleted base "${baseName}".`, 'Base deleted', 'success');
 	}
 
 	function updateRelicCount(player: Player, delta: number) {
@@ -475,11 +505,17 @@
 	);
 
 	$effect(() => {
+		let panToLoc: { x: number; y: number; radius: number } = { x: 0, y: 0, radius: 3500 };
 		if (placementState.active && placementState.handle && placementState.geometry.length === 0) {
 			blueprintsData.requestGeometry(placementState.handle).then((res) => {
 				placementState.geometry = res.structures;
 				placementState.setAnchor(res.origin);
-			});
+				panToLoc = { x: res.origin.x, y: res.origin.y, radius: placementState.header?.footprint_radius ?? 3500 };
+			}).finally(() => {
+				setTimeout(() => {
+					panTo(panToLoc.x, panToLoc.y, 7);
+				}, 100);
+			})
 		}
 	});
 
@@ -921,6 +957,7 @@
 							(mapOptions.structureRenderMode ?? 'detailed') === 'detailed' ? 'flat' : 'detailed')}
 					onEditBase={handleEditBase}
 					onExportBase={handleExportBlueprint}
+					onDeleteBase={handleDeleteBase}
 					onToggleFastTravel={handleToggleFastTravel}
 					onToggleRelic={handleToggleRelic}
 					onUnlockAllFastTravel={handleUnlockAllFastTravel}

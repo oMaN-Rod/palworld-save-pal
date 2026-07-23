@@ -225,6 +225,9 @@ async fn route(
         MessageType::DeleteGuild => {
             handlers::guilds::handle_delete_guild(serde_json::from_value(data)?, ctx).await
         }
+        MessageType::DeleteBase => {
+            handlers::guilds::handle_delete_base(serde_json::from_value(data)?, ctx).await
+        }
         MessageType::UpdateSaveFile => {
             handlers::save_file::handle_update_save_file(serde_json::from_value(data)?, ctx).await
         }

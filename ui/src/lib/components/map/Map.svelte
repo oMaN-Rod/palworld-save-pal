@@ -74,6 +74,7 @@
 	import StructureFilterControl from './StructureFilterControl.svelte';
 	import { createStructureLayer, type StructureLayer } from './structureLayer';
 	import { createGhostLayer, type GhostLayer } from './ghostLayer';
+	import { composeWorld } from './ghostTransform';
 	import type {
 		BaseStructure,
 		BlueprintStructureGeometry,
@@ -108,6 +109,7 @@
 		onToggleRenderMode,
 		onEditBase,
 		onExportBase,
+		onDeleteBase,
 		onToggleFastTravel,
 		onToggleRelic,
 		onUnlockAllFastTravel,
@@ -143,6 +145,7 @@
 		onToggleRenderMode?: () => void;
 		onEditBase?: (base: any) => void;
 		onExportBase?: (base: any) => void;
+		onDeleteBase?: (base: any) => void;
 		onToggleFastTravel?: (point: MapUnlockPoint) => void;
 		onToggleRelic?: (point: RelicPoint) => void;
 		onUnlockAllFastTravel?: () => void;
@@ -428,10 +431,42 @@
 
 	let ghostDragging = false;
 
-	function handleMouseDown() {
+	// A click counts as "on the blueprint" when it lands within this many cm of
+	// any ghost structure's world position -- so dragging the base requires
+	// clicking a structure, while empty-map clicks pan and right-drag rotates.
+	const STRUCTURE_HIT_CM = 800;
+
+	function clickIsOnGhost(worldX: number, worldY: number): boolean {
+		const base = placementAnchor ?? { x: 0, y: 0, z: 0, yaw: 0 };
+		return (placementGeometry ?? []).some((s) => {
+			const w = composeWorld(base, {
+				translation: s.translation,
+				rotation: s.rotation,
+				scale: s.scale
+			});
+			return Math.hypot(worldX - w.translation.x, worldY - w.translation.y) <= STRUCTURE_HIT_CM;
+		});
+	}
+
+	function handleMouseDown(ev: maplibregl.MapMouseEvent) {
 		if (!placement) return;
-		ghostDragging = true;
-		map?.dragPan.disable();
+		const oe = ev.originalEvent;
+		// Right button rotates the camera; only the left button interacts with the ghost.
+		if (oe.button !== 0) return;
+		const [px, py] = lngLatToPixel(ev.lngLat.lng, ev.lngLat.lat);
+		const { worldX, worldY } = pixelToWorld(px, py, area);
+		const base = placementAnchor ?? { x: 0, y: 0, z: 0, yaw: 0 };
+		if (oe.ctrlKey) {
+			// Ctrl + left click: teleport the blueprint to the cursor.
+			onPlacementAnchorChange?.({ ...base, x: worldX, y: worldY });
+			return;
+		}
+		// Drag only when the click lands on a structure; otherwise fall through so
+		// the map pans normally.
+		if (clickIsOnGhost(worldX, worldY)) {
+			ghostDragging = true;
+			map?.dragPan.disable();
+		}
 	}
 
 	// Idempotent: safe to call whether or not a drag is in progress. A window-level
@@ -457,6 +492,9 @@
 			if (ghostDragging) {
 				const base = placementAnchor ?? { x: 0, y: 0, z: 0, yaw: 0 };
 				onPlacementAnchorChange?.({ ...base, x: worldX, y: worldY });
+			} else {
+				const canvas = map?.getCanvas();
+				if (canvas) canvas.style.cursor = clickIsOnGhost(worldX, worldY) ? 'move' : '';
 			}
 			return;
 		}
@@ -498,6 +536,8 @@
 	}
 
 	function handleClick(ev: maplibregl.MapMouseEvent) {
+		// Placement owns clicks (drag / ctrl-teleport); don't also select map features.
+		if (placement) return;
 		const top = topFeatureAt(ev, INTERACTIVE_LAYERS);
 		if (!top && detailed && hovered?.type === 'structure') {
 			const structure = lookup('structure', hovered.key)?.data;
@@ -1126,6 +1166,13 @@
 				data={entry?.data}
 				guildName={entry?.guildName}
 				{onExportBase}
+				onDeleteBase={(base) => {
+					// Close the popup up front: the base it points at is about to
+					// stop existing in appState, and `entry` would otherwise
+					// resolve to undefined on the next reactive read.
+					selected = null;
+					onDeleteBase?.(base);
+				}}
 			/>
 			<button type="button" class="map-popup-close" onclick={() => (selected = null)}>×</button>
 		</div>

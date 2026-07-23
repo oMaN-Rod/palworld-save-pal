@@ -45,7 +45,7 @@
 </script>
 
 <aside
-	class="bg-surface-900/95 absolute top-2 right-12 bottom-2 z-10 flex w-[360px] flex-col gap-4 overflow-y-auto rounded-lg p-4 shadow-lg"
+	class="bg-surface-900/95 absolute top-2 right-14 bottom-2 z-10 flex w-90 h-[calc(100vh-80px)] flex-col gap-4 overflow-y-auto rounded-lg p-4 shadow-lg"
 >
 	<div class="flex flex-col gap-1">
 		<h2 class="text-lg font-bold">Place Blueprint</h2>
@@ -100,7 +100,7 @@
 	{#if placementState.findings.length > 0}
 		<div class="flex flex-col gap-1">
 			<span class="label-text">Findings</span>
-			<ul class="flex flex-col gap-1">
+			<ul class="flex flex-col gap-1 max-h-36 2xl:max-h-90 overflow-y-auto">
 				{#each placementState.findings as finding, i (i)}
 					<li
 						class="rounded-sm border p-2 text-xs {finding.severity === 'blocking'
