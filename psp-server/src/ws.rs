@@ -59,7 +59,7 @@ async fn connection_loop(socket: WebSocket, client_id: String, app: Arc<AppState
     let _live_connection_guard = LiveConnectionGuard::new(app.live_connections.clone());
 
     let (mut outgoing_sink, mut incoming_stream) = socket.split();
-    let (frame_sender, mut frame_receiver) = tokio::sync::mpsc::unbounded_channel::<Message>();
+    let (frame_sender, mut frame_receiver) = tokio::sync::mpsc::unbounded_channel::<String>();
 
     // Drains the mpsc channel onto the socket so handlers never block on I/O.
     // Exits when the channel closes (all Emitters dropped) or the send fails
@@ -67,7 +67,7 @@ async fn connection_loop(socket: WebSocket, client_id: String, app: Arc<AppState
     // `None` or the loop `break`s, so this task always terminates.
     let writer_task = tokio::spawn(async move {
         while let Some(frame) = frame_receiver.recv().await {
-            if outgoing_sink.send(frame).await.is_err() {
+            if outgoing_sink.send(Message::Text(frame.into())).await.is_err() {
                 break;
             }
         }

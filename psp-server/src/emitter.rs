@@ -1,4 +1,3 @@
-use axum::extract::ws::Message;
 use tokio::sync::mpsc::{UnboundedReceiver, UnboundedSender};
 
 use psp_core::progress::ProgressSink;
@@ -9,11 +8,11 @@ use crate::messages::MessageType;
 /// writer task, each wrapped in the wire envelope {"type": ..., "data": ...}.
 #[derive(Clone)]
 pub struct Emitter {
-    sender: UnboundedSender<Message>,
+    sender: UnboundedSender<String>,
 }
 
 impl Emitter {
-    pub fn new(sender: UnboundedSender<Message>) -> Self {
+    pub fn new(sender: UnboundedSender<String>) -> Self {
         Self { sender }
     }
 
@@ -32,7 +31,7 @@ impl Emitter {
         let text =
             serde_json::to_string(&frame).expect("envelope of a Value cannot fail to serialize");
         // Send failure just means the client disconnected — drop silently.
-        let _ = self.sender.send(Message::Text(text.into()));
+        let _ = self.sender.send(text);
     }
 
     /// Emits {"type": "error", "data": {"message": ..., "trace": ...}}.
@@ -52,7 +51,7 @@ impl Emitter {
     }
 
     /// Test-only: an Emitter whose frames land in a receiver instead of a socket.
-    pub fn test_channel() -> (Self, UnboundedReceiver<Message>) {
+    pub fn test_channel() -> (Self, UnboundedReceiver<String>) {
         let (sender, receiver) = tokio::sync::mpsc::unbounded_channel();
         (Self::new(sender), receiver)
     }
@@ -63,11 +62,8 @@ mod tests {
     use super::*;
     use serde_json::Value;
 
-    fn text_frame_as_json(frame: Message) -> Value {
-        match frame {
-            Message::Text(text) => serde_json::from_str(text.as_str()).unwrap(),
-            other => panic!("expected text frame, got {other:?}"),
-        }
+    fn text_frame_as_json(frame: String) -> Value {
+        serde_json::from_str(&frame).unwrap()
     }
 
     #[test]
@@ -151,10 +147,7 @@ mod phase6_tests {
             &serde_json::json!({"workshop_dir": ""}),
         );
         let frame = receiver.recv().await.unwrap();
-        let axum::extract::ws::Message::Text(text) = frame else {
-            panic!("expected text frame");
-        };
-        let envelope: serde_json::Value = serde_json::from_str(text.as_str()).unwrap();
+        let envelope: serde_json::Value = serde_json::from_str(&frame).unwrap();
         assert_eq!(envelope["type"], "detect_workshop_dir");
         assert_eq!(envelope["data"]["workshop_dir"], "");
     }

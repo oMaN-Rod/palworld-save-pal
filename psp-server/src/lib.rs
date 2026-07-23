@@ -244,7 +244,6 @@ mod session_store_tests {
 pub(crate) mod test_support {
     use std::sync::Arc;
 
-    use axum::extract::ws::Message;
     use tokio::sync::mpsc::UnboundedReceiver;
 
     use psp_core::gamedata::GameData;
@@ -260,7 +259,7 @@ pub(crate) mod test_support {
         pub session: Session,
         pub emitter: Emitter,
         pub blueprints: crate::blueprint_registry::BlueprintRegistry,
-        pub frames: UnboundedReceiver<Message>,
+        pub frames: UnboundedReceiver<String>,
         /// Held for RAII only: deletes the temp tree on drop.
         pub _temp_dir: tempfile::TempDir,
     }
@@ -319,10 +318,8 @@ pub(crate) mod test_support {
 
     /// Also usable by tests that drive a raw `UnboundedReceiver` without a full
     /// `TestContext`.
-    pub fn next_frame_json_from(receiver: &mut UnboundedReceiver<Message>) -> serde_json::Value {
-        match receiver.try_recv().expect("expected an emitted frame") {
-            Message::Text(text) => serde_json::from_str(text.as_str()).unwrap(),
-            other => panic!("expected text frame, got {other:?}"),
-        }
+    pub fn next_frame_json_from(receiver: &mut UnboundedReceiver<String>) -> serde_json::Value {
+        let text = receiver.try_recv().expect("expected an emitted frame");
+        serde_json::from_str(&text).unwrap()
     }
 }

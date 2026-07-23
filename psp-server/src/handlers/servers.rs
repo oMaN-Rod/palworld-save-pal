@@ -1295,7 +1295,7 @@ pub(crate) mod test_env {
         pub session: psp_core::session::Session,
         pub emitter: crate::emitter::Emitter,
         pub blueprints: crate::blueprint_registry::BlueprintRegistry,
-        pub receiver: tokio::sync::mpsc::UnboundedReceiver<axum::extract::ws::Message>,
+        pub receiver: tokio::sync::mpsc::UnboundedReceiver<String>,
         pub _scratch: tempfile::TempDir,
     }
 
@@ -1375,9 +1375,7 @@ pub(crate) mod test_env {
         pub(crate) fn drain(&mut self) -> Vec<serde_json::Value> {
             let mut envelopes = Vec::new();
             while let Ok(frame) = self.receiver.try_recv() {
-                if let axum::extract::ws::Message::Text(text) = frame {
-                    envelopes.push(serde_json::from_str(text.as_str()).unwrap());
-                }
+                envelopes.push(serde_json::from_str(&frame).unwrap());
             }
             envelopes
         }
