@@ -15,6 +15,8 @@ import { structureFillColor } from './styles';
 import { DEFAULT_STRUCTURE_FOOTPRINT, lookupFootprint } from './features';
 import { structureParts, requestMesh, meshFailed, onMeshLoaded, type ManifestPart } from './meshLibrary';
 import { partLocalMatrix, type MeshPart } from './meshPlacement';
+import { PickIndex } from './pickIndex';
+import { decodePickBytes } from './pickEncoding';
 
 // Both mesh and proxy geometry are authored Y-up; MapLibre's mercator world
 // (fed through mainMatrix with an identity camera view) is Z-up. A naive
@@ -32,7 +34,37 @@ const MESH_FLIP = new THREE.Matrix4().makeBasis(
 	new THREE.Vector3(1, 0, 0)
 );
 
-type Group = { mesh: THREE.InstancedMesh; keys: string[]; colorHex: string };
+// Identity comes from gl_InstanceID plus a per-group base rather than a
+// per-instance attribute: geometries are shared between buckets, so attaching an
+// InstancedBufferAttribute would corrupt the sibling bucket or leak a fresh
+// buffer on every update. The colour is computed per vertex and passed flat so
+// interpolation cannot corrupt it, and a raw ShaderMaterial keeps three's colour
+// management off the value.
+const PICK_VERT = `
+uniform float uPickBase;
+flat out vec3 vPick;
+void main() {
+	float id = uPickBase + float(gl_InstanceID) + 1.0;
+	float r = floor(id / 65536.0);
+	float g = floor(mod(id, 65536.0) / 256.0);
+	float b = mod(id, 256.0);
+	vPick = vec3(r, g, b) / 255.0;
+	gl_Position = projectionMatrix * modelViewMatrix * instanceMatrix * vec4(position, 1.0);
+}
+`;
+
+// Under glslVersion GLSL3, three does not alias gl_FragColor to a declared out
+// variable (that shim is only emitted for GLSL1 output) -- see WebGLProgram.js's
+// pc_fragColor handling -- so the output must be declared explicitly here.
+const PICK_FRAG = `
+flat in vec3 vPick;
+layout(location = 0) out vec4 pc_fragColor;
+void main() {
+	pc_fragColor = vec4(vPick, 1.0);
+}
+`;
+
+export type Group = { mesh: THREE.InstancedMesh; keys: string[]; colorHex: string; pickBase: number };
 
 type MeshItem = { s: BaseStructure; fp: Footprint; part: ManifestPart };
 type MeshBucket = { colorHex: string; mesh: string; items: MeshItem[] };
@@ -84,6 +116,23 @@ export function proxyInstanceMatrix(
 		.multiply(scale);
 }
 
+// Pure CSS-pixel -> device-pixel conversion for the GPU colour-pick read, split
+// out of runPick() for the same reason meshInstanceMatrix/proxyInstanceMatrix
+// above are: it's exercised without a live WebGL context. WebGL's framebuffer
+// origin is bottom-left; the canvas/CSS origin is top-left, hence the Y flip.
+export function pickPixelCoords(
+	cssX: number,
+	cssY: number,
+	ratio: number,
+	width: number,
+	height: number
+): { x: number; y: number } | null {
+	const x = Math.round(cssX * ratio);
+	const y = Math.round(height - 1 - cssY * ratio);
+	if (x < 0 || y < 0 || x >= width || y >= height) return null;
+	return { x, y };
+}
+
 // Shared across layer instances (Map.svelte tears down and recreates this
 // CustomLayerInterface on every detailed-mode toggle) because the renderer
 // wraps MapLibre's own GL context/canvas, not one this layer owns. Disposing
@@ -117,7 +166,14 @@ export type StructureLayer = CustomLayerInterface & {
 		verticalScale: number
 	): void;
 	setHover(key: string | null): void;
+	requestPick(x: number, y: number, cb: (key: string | null) => void): void;
 	dispose(): void;
+	// Test-only introspection: onAdd's renderer setup needs a live GL context, but
+	// update()'s bucket/group building does not, so tests attach a stub map
+	// directly rather than going through onAdd.
+	attachMapForTest(map: MLMap): void;
+	groupsForTest(): Group[];
+	keyAtForTest(index: number): string | null;
 };
 
 export function createStructureLayer(opts: { id: string }): StructureLayer {
@@ -126,12 +182,24 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 	let renderer: THREE.WebGLRenderer | null = null;
 	let map: MLMap | null = null;
 	const groups: Group[] = [];
+	const pickIndex = new PickIndex();
 	let hoverKey: string | null = null;
 	const color = new THREE.Color();
 
 	let lastArgs: Parameters<StructureLayer['update']> | null = null;
 	let rebuildQueued = false;
 	let disposed = false;
+	let isWebGL2 = false;
+	let pickTarget: THREE.WebGLRenderTarget | null = null;
+	let pendingPick: { x: number; y: number; cb: (key: string | null) => void } | null = null;
+	const pickBuffer = new Uint8Array(4);
+	const pickMaterial = new THREE.ShaderMaterial({
+		glslVersion: THREE.GLSL3,
+		uniforms: { uPickBase: { value: 0 } },
+		vertexShader: PICK_VERT,
+		fragmentShader: PICK_FRAG,
+		side: THREE.DoubleSide
+	});
 
 	scene.add(new THREE.AmbientLight(0xffffff, 0.7));
 	const dir = new THREE.DirectionalLight(0xffffff, 0.9);
@@ -151,6 +219,64 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 			g.mesh.dispose();
 		}
 		groups.length = 0;
+		pickIndex.reset();
+	}
+
+	function ensurePickTarget(width: number, height: number): THREE.WebGLRenderTarget {
+		if (pickTarget && pickTarget.width === width && pickTarget.height === height) return pickTarget;
+		pickTarget?.dispose();
+		pickTarget = new THREE.WebGLRenderTarget(width, height, {
+			type: THREE.UnsignedByteType,
+			colorSpace: THREE.NoColorSpace,
+			depthBuffer: true
+		});
+		return pickTarget;
+	}
+
+	function runPick() {
+		const request = pendingPick;
+		pendingPick = null;
+		if (!renderer || !request) return;
+
+		// Taken from the live canvas, not renderer.getDrawingBufferSize(): that getter
+		// returns width * pixelRatio captured at construction time and is only kept
+		// current by setSize/setDrawingBufferSize, neither of which this layer calls
+		// (the shared renderer wraps MapLibre's own canvas). After any canvas resize
+		// it would go stale while `ratio` below -- already read from the live canvas
+		// -- stays correct, displacing every pick.
+		const canvas = renderer.domElement;
+		const width = canvas.width;
+		const height = canvas.height;
+		// Derived from the canvas rather than renderer.getPixelRatio(): the shared
+		// renderer wraps MapLibre's own canvas/context and is never told its ratio
+		// (setPixelRatio is never called), so that getter is always 1 regardless of
+		// the canvas's actual device-pixel size.
+		const ratio = canvas.clientWidth > 0 ? canvas.width / canvas.clientWidth : 1;
+		const coords = pickPixelCoords(request.x, request.y, ratio, width, height);
+		if (!coords) {
+			request.cb(null);
+			return;
+		}
+		const { x: px, y: py } = coords;
+
+		const target = ensurePickTarget(width, height);
+		scene.overrideMaterial = pickMaterial;
+		try {
+			renderer.setRenderTarget(target);
+			renderer.setScissorTest(true);
+			renderer.setScissor(px, py, 1, 1);
+			renderer.setClearColor(0x000000, 1);
+			renderer.clear(true, true, false);
+			renderer.render(scene, camera);
+			renderer.readRenderTargetPixels(target, px, py, 1, 1, pickBuffer);
+		} finally {
+			renderer.setScissorTest(false);
+			renderer.setRenderTarget(null);
+			scene.overrideMaterial = null;
+		}
+
+		const index = decodePickBytes(pickBuffer[0], pickBuffer[1], pickBuffer[2]);
+		request.cb(index < 0 ? null : pickIndex.keyAt(index));
 	}
 
 	const layer: StructureLayer = {
@@ -160,6 +286,7 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 
 		onAdd(m, gl) {
 			map = m;
+			isWebGL2 = typeof WebGL2RenderingContext !== 'undefined' && gl instanceof WebGL2RenderingContext;
 			renderer = getSharedRenderer(m.getCanvas(), gl as WebGLRenderingContext);
 		},
 
@@ -247,10 +374,21 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 			}
 
 			function finalizeGroup(inst: THREE.InstancedMesh, keys: string[], colorHex: string) {
+				const pickBase = pickIndex.add(keys);
 				inst.instanceMatrix.needsUpdate = true;
 				if (inst.instanceColor) inst.instanceColor.needsUpdate = true;
 				scene.add(inst);
-				groups.push({ mesh: inst, keys, colorHex });
+				groups.push({ mesh: inst, keys, colorHex, pickBase });
+				inst.onBeforeRender = (_renderer, _scene, _camera, _geometry, material) => {
+					const sm = material as THREE.ShaderMaterial;
+					// scene.overrideMaterial substitutes one shared ShaderMaterial instance for
+					// every render item, so three only re-uploads its uniforms when the program
+					// or material identity changes -- never between instances sharing this
+					// material. uniformsNeedUpdate forces the upload for every group's draw call.
+					if (!sm.uniforms?.uPickBase) return;
+					sm.uniforms.uPickBase.value = pickBase;
+					sm.uniformsNeedUpdate = true;
+				};
 			}
 
 			for (const b of meshBuckets.values()) {
@@ -294,19 +432,51 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 			const m = new THREE.Matrix4().fromArray(args.defaultProjectionData.mainMatrix);
 			camera.projectionMatrix = m;
 			renderer.resetState();
+			// The pick pass shares MapLibre's context, so it runs here rather than from a
+			// standalone call: issuing draws and a readPixels outside MapLibre's own render
+			// loop risks leaving the context in a state it does not expect.
+			if (pendingPick) {
+				runPick();
+				renderer.resetState();
+			}
 			// MapLibre's shared depth buffer isn't cleared for us; without this, three's
 			// meshes inherit stale depth state and don't occlude each other correctly.
 			renderer.clearDepth();
 			renderer.render(scene, camera);
 		},
 
+		requestPick(x, y, cb) {
+			if (!isWebGL2 || disposed) {
+				cb(null);
+				return;
+			}
+			pendingPick = { x, y, cb };
+			map?.triggerRepaint();
+		},
+
 		dispose() {
 			disposed = true;
 			unsubscribeMeshLoaded();
+			pendingPick = null;
+			pickTarget?.dispose();
+			pickTarget = null;
+			pickMaterial.dispose();
 			clearGroups();
 			// renderer is the module-level shared renderer (see getSharedRenderer) --
 			// it is intentionally not disposed here, only released by this instance.
 			renderer = null;
+		},
+
+		attachMapForTest(m) {
+			map = m;
+		},
+
+		groupsForTest() {
+			return groups;
+		},
+
+		keyAtForTest(index) {
+			return pickIndex.keyAt(index);
 		}
 	};
 

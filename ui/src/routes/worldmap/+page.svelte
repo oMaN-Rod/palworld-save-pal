@@ -18,7 +18,6 @@
 	import Users from '@lucide/svelte/icons/users';
 	import MapIcon from '@lucide/svelte/icons/map';
 	import Building from '@lucide/svelte/icons/building';
-	import Boxes from '@lucide/svelte/icons/boxes';
 	import PanelLeft from '@lucide/svelte/icons/panel-left';
 	import PanelLeftClose from '@lucide/svelte/icons/panel-left-close';
 	import { fly } from 'svelte/transition';
@@ -567,23 +566,6 @@
 									<span class="text-surface-500 text-xs">{loadedBaseCount}/{totalBaseCount}</span>
 								</button>
 							{/if}
-							{#if mapOptions.enable3d}
-								<button
-									class="flex items-center space-x-2 {(mapOptions.structureRenderMode ?? 'detailed') ===
-									'detailed'
-										? ''
-										: 'opacity-25'}"
-									onclick={() =>
-										(mapOptions.structureRenderMode =
-											(mapOptions.structureRenderMode ?? 'detailed') === 'detailed'
-												? 'flat'
-												: 'detailed')}
-								>
-									<Boxes class="mr-2 h-6 w-6" />
-									<span>Detailed structures</span>
-								</button>
-							{/if}
-
 							<button
 								class="flex items-center space-x-2 {mapOptions.showDungeons ? '' : 'opacity-25'}"
 								onclick={() => (mapOptions.showDungeons = !mapOptions.showDungeons)}

@@ -70,6 +70,7 @@
 	import MapTooltip from './MapTooltip.svelte';
 	import MapPopup from './MapPopup.svelte';
 	import Toggle3dControl from './Toggle3dControl.svelte';
+	import ToggleDetailedControl from './ToggleDetailedControl.svelte';
 	import StructureFilterControl from './StructureFilterControl.svelte';
 	import { createStructureLayer, type StructureLayer } from './structureLayer';
 	import type { BaseStructure, MapUnlockPoint, RelicPoint } from '$types';
@@ -323,8 +324,8 @@
 	let hovered = $state<{
 		type: MapFeatureType;
 		key: string;
-		source: string;
-		id: string | number;
+		source?: string;
+		id?: string | number;
 		point: ScreenPoint | null;
 	} | null>(null);
 	let selected = $state<{
@@ -371,9 +372,41 @@
 	function topFeatureAt(ev: maplibregl.MapMouseEvent, layerIds: string[]) {
 		const instance = map;
 		if (!instance) return null;
-		const layers = layerIds.filter((id) => instance.getLayer(id));
+		const usable = detailed ? layerIds.filter((id) => id !== 'structure-extrusions') : layerIds;
+		const layers = usable.filter((id) => instance.getLayer(id));
 		if (layers.length === 0) return null;
 		return instance.queryRenderedFeatures(ev.point, { layers })[0] ?? null;
+	}
+
+	let pickSeq = 0;
+	let pickScheduled = false;
+	let pendingPoint: { x: number; y: number } | null = null;
+
+	// Coalesced to one pick per frame: the pass re-renders the scene, so a pick per
+	// mousemove event would be wasteful.
+	function schedulePick(x: number, y: number) {
+		pendingPoint = { x, y };
+		if (pickScheduled) return;
+		pickScheduled = true;
+		requestAnimationFrame(() => {
+			pickScheduled = false;
+			const point = pendingPoint;
+			pendingPoint = null;
+			if (!point || !structureLayer) return;
+			const seq = ++pickSeq;
+			structureLayer.requestPick(point.x, point.y, (key) => {
+				if (seq !== pickSeq) return; // a newer pick superseded this one
+				if (key) {
+					if (hovered?.key !== key) hovered = { type: 'structure', key, point };
+				} else if (hovered) {
+					// A MapLibre miss plus a pick miss means nothing is under the cursor,
+					// regardless of what was hovered before (structure, pal, base icon, ...).
+					hovered = null;
+				}
+				const canvas = map?.getCanvas();
+				if (canvas) canvas.style.cursor = key ? 'pointer' : '';
+			});
+		});
 	}
 
 	function handleMouseMove(ev: maplibregl.MapMouseEvent) {
@@ -384,6 +417,10 @@
 
 		const top = topFeatureAt(ev, INTERACTIVE_LAYERS);
 		if (top) {
+			// A pick resolves a frame later, so one already in flight would otherwise
+			// land after this hit and stomp it; bumping the sequence discards it.
+			pickSeq++;
+			pendingPoint = null;
 			const source = top.source;
 			const id = top.id as string | number;
 			if (hovered?.source !== source || hovered?.id !== id) {
@@ -396,6 +433,8 @@
 					point: lngLat ? projectLngLat(lngLat) : { x: ev.point.x, y: ev.point.y }
 				};
 			}
+		} else if (detailed && structureLayer) {
+			schedulePick(ev.point.x, ev.point.y);
 		} else if (hovered) {
 			hovered = null;
 		}
@@ -404,6 +443,8 @@
 	}
 
 	function handleMouseOut() {
+		pickSeq++;
+		pendingPoint = null;
 		hovered = null;
 		const canvas = map?.getCanvas();
 		if (canvas) canvas.style.cursor = '';
@@ -411,6 +452,14 @@
 
 	function handleClick(ev: maplibregl.MapMouseEvent) {
 		const top = topFeatureAt(ev, INTERACTIVE_LAYERS);
+		if (!top && detailed && hovered?.type === 'structure') {
+			const structure = lookup('structure', hovered.key)?.data;
+			if (structure) {
+				const [px, py] = worldToPixel(structure.x, structure.y, area);
+				selected = { type: 'structure', key: hovered.key, lngLat: pixelToLngLat(px, py) };
+				return;
+			}
+		}
 		if (!top) {
 			selected = null;
 			return;
@@ -683,6 +732,12 @@
 			onchange={onToggle3d}
 		/>
 		{#if show3d}
+			<ToggleDetailedControl
+				position="top-right"
+				active={renderMode === 'detailed'}
+				title="Detailed {m.structures()}"
+				onchange={onToggleRenderMode}
+			/>
 			<StructureFilterControl
 				position="top-right"
 				types={structureTypeList}
@@ -762,13 +817,14 @@
 					<Layer.FillExtrusion
 						id="structure-extrusions"
 						beforeId="origin-icons"
+						visible={!detailed}
 						minzoom={STRUCTURE_MIN_ZOOM}
 						filter={structureFilter}
 						paint={{
 							'fill-extrusion-color': structureColor,
 							'fill-extrusion-base': ['*', ['get', 'b'], verticalScale],
 							'fill-extrusion-height': ['*', ['get', 'h'], verticalScale],
-							'fill-extrusion-opacity': detailed ? 0.01 : 0.9
+							'fill-extrusion-opacity': 0.9
 						}}
 					/>
 				</Source.GeoJSON>
@@ -929,7 +985,9 @@
 		</ImageLoader>
 
 		{#if hovered}
-			<FeatureState source={hovered.source} id={hovered.id} state={HOVER_STATE} />
+			{#if hovered?.source !== undefined && hovered?.id !== undefined}
+				<FeatureState source={hovered.source} id={hovered.id} state={HOVER_STATE} />
+			{/if}
 		{/if}
 	</MLMap>
 
