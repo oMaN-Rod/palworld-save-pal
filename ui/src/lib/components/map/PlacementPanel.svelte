@@ -1,0 +1,106 @@
+<script lang="ts">
+	import { Button, Checkbox, Select } from '$components/ui';
+	import { Slider } from '@skeletonlabs/skeleton-svelte';
+	import type { ValueChangeDetails } from '@zag-js/slider';
+	import { placementState } from '$lib/data/placement.svelte';
+	import type { SelectOption } from '$types';
+
+	let {
+		guildOptions,
+		playerOptions,
+		onPlace,
+		onCancel
+	}: {
+		guildOptions: SelectOption[];
+		playerOptions: SelectOption[];
+		onPlace: () => void;
+		onCancel: () => void;
+	} = $props();
+
+	const anchor = $derived(placementState.anchor);
+
+	let yawDeg: number[] = $state([(placementState.anchor.yaw * 180) / Math.PI]);
+	let zCm: number[] = $state([placementState.anchor.z]);
+
+	function handleYawChange(e: ValueChangeDetails) {
+		yawDeg = e.value;
+		placementState.setAnchor({ ...anchor, yaw: (e.value[0] * Math.PI) / 180 });
+	}
+
+	function handleZChange(e: ValueChangeDetails) {
+		zCm = e.value;
+		placementState.setAnchor({ ...anchor, z: e.value[0] });
+	}
+
+	const placeDisabled = $derived(
+		placementState.hasBlocking ||
+			!placementState.targetGuild ||
+			!placementState.targetPlayer ||
+			(placementState.findings.length > 0 && !placementState.overrideWarnings)
+	);
+</script>
+
+<aside
+	class="bg-surface-900/95 absolute top-2 right-12 bottom-2 z-10 flex w-[360px] flex-col gap-4 overflow-y-auto rounded-lg p-4 shadow-lg"
+>
+	<div class="flex flex-col gap-1">
+		<h2 class="text-lg font-bold">Place Blueprint</h2>
+		<p class="text-surface-400 text-sm">{placementState.header?.name ?? ''}</p>
+	</div>
+
+	<Select
+		label="Guild"
+		options={guildOptions}
+		value={placementState.targetGuild}
+		placeholder="Select a guild"
+		onChange={(v) => (placementState.targetGuild = v.toString())}
+	/>
+
+	<Select
+		label="Player"
+		options={playerOptions}
+		value={placementState.targetPlayer}
+		placeholder="Select a player"
+		onChange={(v) => (placementState.targetPlayer = v.toString())}
+	/>
+
+	<div class="flex flex-col gap-2">
+		<span class="label-text">Rotation (yaw): {Math.round(yawDeg[0])}°</span>
+		<Slider value={yawDeg} min={0} max={360} step={1} onValueChange={handleYawChange} />
+	</div>
+
+	<div class="flex flex-col gap-2">
+		<span class="label-text">Height (Z): {Math.round(zCm[0])} cm</span>
+		<Slider value={zCm} min={-50000} max={50000} step={100} onValueChange={handleZChange} />
+	</div>
+
+	<Checkbox
+		label="Override warnings"
+		bind:checked={placementState.overrideWarnings}
+	/>
+	<p class="text-surface-500 text-xs">
+		Allows placement to proceed despite non-blocking warnings.
+	</p>
+
+	{#if placementState.findings.length > 0}
+		<div class="flex flex-col gap-1">
+			<span class="label-text">Findings</span>
+			<ul class="flex flex-col gap-1">
+				{#each placementState.findings as finding, i (i)}
+					<li
+						class="rounded-sm border p-2 text-xs {finding.severity === 'blocking'
+							? 'border-error-500 bg-error-500/10 text-error-400'
+							: 'border-warning-500 bg-warning-500/10 text-warning-400'}"
+					>
+						{finding.message}
+					</li>
+				{/each}
+			</ul>
+		</div>
+	{/if}
+
+	<div class="mt-auto flex justify-end gap-2">
+		<Button variant="neutral" onclick={onCancel}>Cancel</Button>
+		<Button variant="primary" disabled={placeDisabled} onclick={onPlace}>Place</Button>
+	</div>
+</aside>

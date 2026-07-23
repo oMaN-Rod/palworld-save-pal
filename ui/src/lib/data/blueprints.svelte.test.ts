@@ -79,3 +79,47 @@ describe('blueprintsData.exportRow', () => {
 		});
 	});
 });
+
+describe('blueprintsData.requestGeometry', () => {
+	it('sends the handle and returns the structures', async () => {
+		sendAndWait.mockResolvedValueOnce({ structures: [{ map_object_id: 'Foundation' }] });
+		const geo = await blueprintsData.requestGeometry('h1');
+		expect(sendAndWait).toHaveBeenCalledWith(MessageType.REQUEST_BLUEPRINT_GEOMETRY, {
+			handle: 'h1'
+		});
+		expect(geo.structures).toHaveLength(1);
+	});
+});
+
+describe('blueprintsData.validate', () => {
+	it('sends handle, anchor, new_base mode and the target guild (snake_case)', async () => {
+		sendAndWait.mockResolvedValueOnce({ findings: [], has_blocking: false });
+		const anchor = { x: 1, y: 2, z: 3, yaw: 0.5 };
+		const res = await blueprintsData.validate('h1', anchor, 'guild-7');
+		expect(sendAndWait).toHaveBeenCalledWith(MessageType.VALIDATE_BLUEPRINT_PLACEMENT, {
+			handle: 'h1',
+			anchor,
+			mode: 'new_base',
+			target_guild: 'guild-7'
+		});
+		expect(res.has_blocking).toBe(false);
+	});
+});
+
+describe('blueprintsData.place', () => {
+	it('sends handle, anchor, target guild+player and override_warnings (snake_case)', async () => {
+		sendAndWait.mockResolvedValueOnce({ base_id: 'base-1', structures_placed: 12, findings: [] });
+		const anchor = { x: 1, y: 2, z: 3, yaw: 0.5 };
+		const res = await blueprintsData.place('h1', anchor, 'guild-7', 'player-3', true);
+		expect(sendAndWait).toHaveBeenCalledWith(MessageType.PLACE_BLUEPRINT, {
+			handle: 'h1',
+			anchor,
+			mode: 'new_base',
+			target_guild: 'guild-7',
+			target_player: 'player-3',
+			override_warnings: true
+		});
+		expect(res.base_id).toBe('base-1');
+		expect(res.structures_placed).toBe(12);
+	});
+});

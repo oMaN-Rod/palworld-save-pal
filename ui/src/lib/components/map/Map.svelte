@@ -73,7 +73,14 @@
 	import ToggleDetailedControl from './ToggleDetailedControl.svelte';
 	import StructureFilterControl from './StructureFilterControl.svelte';
 	import { createStructureLayer, type StructureLayer } from './structureLayer';
-	import type { BaseStructure, MapUnlockPoint, RelicPoint } from '$types';
+	import { createGhostLayer, type GhostLayer } from './ghostLayer';
+	import type {
+		BaseStructure,
+		BlueprintStructureGeometry,
+		MapUnlockPoint,
+		PlacementAnchor,
+		RelicPoint
+	} from '$types';
 	import * as m from '$i18n/messages';
 	import 'maplibre-gl/dist/maplibre-gl.css';
 
@@ -105,7 +112,11 @@
 		onToggleRelic,
 		onUnlockAllFastTravel,
 		onUnlockAllWatchtowers,
-		onCollectAllRelics
+		onCollectAllRelics,
+		placement = false,
+		placementGeometry,
+		placementAnchor,
+		onPlacementAnchorChange
 	}: {
 		map?: maplibregl.Map;
 		area?: MapArea;
@@ -137,6 +148,10 @@
 		onUnlockAllFastTravel?: () => void;
 		onUnlockAllWatchtowers?: () => void;
 		onCollectAllRelics?: () => void;
+		placement?: boolean;
+		placementGeometry?: BlueprintStructureGeometry[];
+		placementAnchor?: PlacementAnchor;
+		onPlacementAnchorChange?: (anchor: PlacementAnchor) => void;
 	} = $props();
 
 	const appState = getAppState();
@@ -411,11 +426,40 @@
 		});
 	}
 
+	let ghostDragging = false;
+
+	function handleMouseDown() {
+		if (!placement) return;
+		ghostDragging = true;
+		map?.dragPan.disable();
+	}
+
+	// Idempotent: safe to call whether or not a drag is in progress. A window-level
+	// mouseup mirrors MapLibre's own binding so releasing over the PlacementPanel (or
+	// off-window) still ends the drag - the map's own mouseup only fires over the canvas.
+	function endGhostDrag() {
+		if (!ghostDragging) return;
+		ghostDragging = false;
+		map?.dragPan.enable();
+	}
+
+	function handleMouseUp() {
+		endGhostDrag();
+	}
+
 	function handleMouseMove(ev: maplibregl.MapMouseEvent) {
 		const [px, py] = lngLatToPixel(ev.lngLat.lng, ev.lngLat.lat);
 		const { worldX, worldY } = pixelToWorld(px, py, area);
 		const { gameX, gameY } = pixelToGameCoords(px, py, area);
 		coordDisplayText = `World: ${Math.round(worldX)}, ${Math.round(worldY)}<br>Map: ${gameX}, ${gameY}<br>Zoom: ${zoom.toFixed(2)}`;
+
+		if (placement) {
+			if (ghostDragging) {
+				const base = placementAnchor ?? { x: 0, y: 0, z: 0, yaw: 0 };
+				onPlacementAnchorChange?.({ ...base, x: worldX, y: worldY });
+			}
+			return;
+		}
 
 		const top = topFeatureAt(ev, INTERACTIVE_LAYERS);
 		if (top) {
@@ -448,6 +492,7 @@
 		pickSeq++;
 		pendingPoint = null;
 		hovered = null;
+		endGhostDrag();
 		const canvas = map?.getCanvas();
 		if (canvas) canvas.style.cursor = '';
 	}
@@ -545,6 +590,9 @@
 	let pendingStyleHandler: (() => void) | null = null;
 	const detailed = $derived(show3d && renderMode === 'detailed');
 
+	let ghostLayer: GhostLayer | null = null;
+	let pendingGhostStyleHandler: (() => void) | null = null;
+
 	function populateStructureLayer() {
 		if (!structureLayer) return;
 		const all: BaseStructure[] = [];
@@ -603,6 +651,71 @@
 			instance.off('styledata', pendingStyleHandler);
 			pendingStyleHandler = null;
 		}
+	});
+
+	$effect(() => {
+		const instance = map;
+		if (!instance) return;
+		if (placement && !ghostLayer) {
+			const add = () => {
+				if (!instance.isStyleLoaded()) return false;
+				const layer = createGhostLayer({ id: 'blueprint-ghost' });
+				instance.addLayer(layer);
+				ghostLayer = layer;
+				ghostLayer.update(
+					placementGeometry ?? [],
+					placementAnchor ?? { x: 0, y: 0, z: 0, yaw: 0 },
+					area,
+					verticalScale
+				);
+				return true;
+			};
+			if (!add() && !pendingGhostStyleHandler) {
+				const onStyle = () => {
+					if (!placement || ghostLayer) {
+						instance.off('styledata', onStyle);
+						pendingGhostStyleHandler = null;
+						return;
+					}
+					if (add()) {
+						instance.off('styledata', onStyle);
+						pendingGhostStyleHandler = null;
+					}
+				};
+				pendingGhostStyleHandler = onStyle;
+				instance.on('styledata', onStyle);
+			}
+		}
+		if (!placement && ghostLayer) {
+			if (instance.getLayer('blueprint-ghost')) instance.removeLayer('blueprint-ghost');
+			ghostLayer.dispose();
+			ghostLayer = null;
+			endGhostDrag();
+		}
+		if (!placement && pendingGhostStyleHandler) {
+			instance.off('styledata', pendingGhostStyleHandler);
+			pendingGhostStyleHandler = null;
+		}
+	});
+
+	// Placement is the only mode that disables dragPan mid-drag, so the window-level
+	// fallback only needs to exist while placement is active; the effect's own cleanup
+	// removes it the moment placement ends (exit or unmount), leaving normal map
+	// mouseup handling as the sole path otherwise.
+	$effect(() => {
+		if (!placement) return;
+		window.addEventListener('mouseup', endGhostDrag);
+		return () => window.removeEventListener('mouseup', endGhostDrag);
+	});
+
+	$effect(() => {
+		const isPlacement = placement;
+		const geometry = placementGeometry ?? [];
+		const anchor = placementAnchor ?? { x: 0, y: 0, z: 0, yaw: 0 };
+		const currentArea = area;
+		const vScale = verticalScale;
+		if (!isPlacement || !ghostLayer) return;
+		ghostLayer.update(geometry, anchor, currentArea, vScale);
 	});
 
 	$effect(() => {
@@ -722,6 +835,8 @@
 		onmove={() => moveTick++}
 		onmousemove={handleMouseMove}
 		onmouseout={handleMouseOut}
+		onmousedown={handleMouseDown}
+		onmouseup={handleMouseUp}
 		onclick={handleClick}
 		oncontextmenu={handleContextMenu}
 	>

@@ -195,6 +195,7 @@ define_message_types! {
     ExportBlueprintFile => "export_blueprint_file",
     ValidateBlueprintPlacement => "validate_blueprint_placement",
     PlaceBlueprint => "place_blueprint",
+    RequestBlueprintGeometry => "request_blueprint_geometry",
 }
 
 #[cfg(test)]
@@ -353,6 +354,7 @@ mod tests {
         "export_blueprint_file",
         "validate_blueprint_placement",
         "place_blueprint",
+        "request_blueprint_geometry",
     ];
 
     #[test]

@@ -5,7 +5,7 @@
 use uuid::Uuid;
 
 use psp_core::domain::blueprint::validate::{Anchor, Finding, PlacementMode, Severity};
-use psp_core::domain::blueprint::{capture, CaptureOptions};
+use psp_core::domain::blueprint::{capture, BlueprintStructure, CaptureOptions};
 
 use crate::dispatcher::HandlerCtx;
 use crate::handler_error::HandlerError;
@@ -329,6 +329,35 @@ pub async fn handle_place_blueprint(
             "structures_placed": result.structures_placed,
             "findings": findings,
         }),
+    );
+    Ok(())
+}
+
+/// `BlueprintStructure` has no serde derive; the wire form is this small object.
+fn structure_geometry_json(structure: &BlueprintStructure) -> serde_json::Value {
+    let t = &structure.relative_transform;
+    serde_json::json!({
+        "map_object_id": structure.map_object_id,
+        "translation": { "x": t.translation.x.0, "y": t.translation.y.0, "z": t.translation.z.0 },
+        "rotation": {
+            "x": t.rotation.x.0, "y": t.rotation.y.0, "z": t.rotation.z.0, "w": t.rotation.w.0
+        },
+        "scale": { "x": t.scale.x.0, "y": t.scale.y.0, "z": t.scale.z.0 },
+    })
+}
+
+pub async fn handle_request_blueprint_geometry(
+    data: HandleData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let Some(blueprint) = ctx.blueprints.get(&data.handle) else {
+        return Err(HandlerError::Other(format!("Unknown blueprint handle {}", data.handle)));
+    };
+    let structures: Vec<serde_json::Value> =
+        blueprint.structures.iter().map(structure_geometry_json).collect();
+    ctx.emitter.emit(
+        MessageType::RequestBlueprintGeometry,
+        &serde_json::json!({ "structures": structures }),
     );
     Ok(())
 }

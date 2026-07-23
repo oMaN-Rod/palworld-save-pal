@@ -1,9 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 	import { blueprintsData, type BlueprintFormat } from '$lib/data/blueprints.svelte';
+	import { placementState } from '$lib/data/placement.svelte';
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { ExportBlueprintModal, SelectBaseModal } from '$components/modals';
 	import { Button, Card, FileDropzone } from '$components/ui';
+	import type { BlueprintRow } from '$types';
 
 	const appState = getAppState();
 	const modal = getModalState();
@@ -81,6 +84,12 @@
 	function fmtDate(unixSeconds: number): string {
 		return new Date(unixSeconds * 1000).toLocaleString();
 	}
+
+	async function placeRow(row: BlueprintRow) {
+		const res = await blueprintsData.loadFromId(row.id);
+		placementState.enter(res.handle, res.header);
+		await goto('/worldmap');
+	}
 </script>
 
 <div class="flex flex-col gap-4 p-4">
@@ -113,6 +122,13 @@
 						</div>
 					</div>
 					<div class="flex shrink-0 gap-2">
+						<Button
+							onclick={() => placeRow(row)}
+							disabled={!appState.saveFile}
+							title={appState.saveFile ? undefined : 'Load a save first'}
+						>
+							Place
+						</Button>
 						<Button variant="secondary" onclick={() => blueprintsData.exportRow(row.id, 'psp')}
 							>Export .psp</Button
 						>

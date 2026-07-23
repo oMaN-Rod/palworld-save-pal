@@ -28,7 +28,7 @@ import { decodePickBytes } from './pickEncoding';
 // replacement -- local +X -> world -y, +Z -> world +x, +Y (up) unchanged --
 // verified against flat mode by meshOrientation.test.ts and
 // proxyOrientation.test.ts. Shared by both the mesh and proxy paths.
-const MESH_FLIP = new THREE.Matrix4().makeBasis(
+export const MESH_FLIP = new THREE.Matrix4().makeBasis(
 	new THREE.Vector3(0, -1, 0),
 	new THREE.Vector3(0, 0, 1),
 	new THREE.Vector3(1, 0, 0)
@@ -147,7 +147,7 @@ const reportedProxy = new Set<string>();
 let sharedRenderer: THREE.WebGLRenderer | null = null;
 let sharedContext: WebGLRenderingContext | WebGL2RenderingContext | null = null;
 
-function getSharedRenderer(
+export function getSharedRenderer(
 	canvas: HTMLCanvasElement,
 	gl: WebGLRenderingContext | WebGL2RenderingContext
 ): THREE.WebGLRenderer {

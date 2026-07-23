@@ -69,9 +69,17 @@ fn the_blueprint_preset_drops_container_contents() {
     let blueprint =
         capture::capture(&session, base_id, CaptureOptions::blueprint(), "Home").expect("capture");
 
+    // Containers a structure references still travel (referential integrity --
+    // an absent container crashes the game), but they carry no items.
+    for entry in &blueprint.item_containers {
+        assert!(
+            capture::container_slot_dynamic_item_ids(entry).is_empty(),
+            "the blueprint preset must drop container contents (containers travel empty)"
+        );
+    }
     assert!(
-        blueprint.item_containers.is_empty(),
-        "the blueprint preset must not carry container contents"
+        blueprint.dynamic_items.is_empty(),
+        "no dynamic items ship when the blueprint preset drops container contents"
     );
     assert!(
         !blueprint.header.manifest.container_contents,
@@ -283,11 +291,22 @@ fn asking_for_workers_does_not_capture_caged_pals() {
         .filter_map(capture::container_entry_id)
         .collect();
 
-    assert_eq!(
-        captured_container_ids,
-        vec![worker_container_id],
-        "workers_only capture must contain exactly the base's worker container and no housed container"
+    // The worker container travels and, with `worker_pals`, keeps its pals.
+    // Housed containers a structure references also travel (referential
+    // integrity), but emptied -- no caged pals come along.
+    assert!(
+        captured_container_ids.contains(&worker_container_id),
+        "workers_only capture must contain the base's worker container"
     );
+    for entry in &blueprint.character_containers {
+        if capture::container_entry_id(entry) == Some(worker_container_id) {
+            continue;
+        }
+        assert!(
+            capture::character_container_slot_instance_ids(entry).is_empty(),
+            "a housed container captured for referential integrity must carry no caged pals"
+        );
+    }
 }
 
 /// The base camp's `WorkerDirector` is the only thing naming the base's worker
@@ -384,6 +403,53 @@ fn the_source_world_is_withheld_unless_base_identity_is_requested() {
             blueprint.header.source_world,
             if options.base_identity { world_name.clone() } else { String::new() },
             "{layer}: the source world name must travel only with the base identity"
+        );
+    }
+}
+
+#[test]
+fn structure_container_refs_resolve_when_contents_and_pals_off() {
+    use std::collections::HashSet;
+
+    let session = common::load_fixture_session("v1_relics");
+    let base_id = common::fixture_base_id(&session);
+    // `blueprint()` captures production_config only, so container_contents AND
+    // housed_pals are both OFF -- the preset that left dangling container
+    // references and crashed Palworld on `IsWorkable`.
+    let bp = capture::capture(&session, base_id, CaptureOptions::blueprint(), "Home").expect("capture");
+
+    let item_containers: HashSet<Uuid> =
+        bp.item_containers.iter().filter_map(capture::container_entry_id).collect();
+    let character_containers: HashSet<Uuid> =
+        bp.character_containers.iter().filter_map(capture::container_entry_id).collect();
+
+    let mut refs = 0usize;
+    for structure in &bp.structures {
+        let (item_ids, character_ids) = capture::module_target_container_ids(&structure.properties);
+        for id in item_ids.into_iter().filter(|id| *id != Uuid::nil()) {
+            refs += 1;
+            assert!(
+                item_containers.contains(&id),
+                "structure {} references item container {id} absent from the blueprint",
+                structure.map_object_id
+            );
+        }
+        for id in character_ids.into_iter().filter(|id| *id != Uuid::nil()) {
+            refs += 1;
+            assert!(
+                character_containers.contains(&id),
+                "structure {} references character container {id} absent from the blueprint",
+                structure.map_object_id
+            );
+        }
+    }
+    assert!(refs > 0, "fixture base must reference at least one container for this test to be meaningful");
+
+    // container_contents off: every captured item container is emptied.
+    for entry in &bp.item_containers {
+        assert!(
+            capture::container_slot_dynamic_item_ids(entry).is_empty(),
+            "container_contents off must leave item containers empty"
         );
     }
 }

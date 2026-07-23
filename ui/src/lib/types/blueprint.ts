@@ -39,3 +39,51 @@ export interface CaptureBlueprintResponse {
 	handle: string;
 	header: BlueprintHeader;
 }
+
+export interface Vec3 {
+	x: number;
+	y: number;
+	z: number;
+}
+
+export interface Quat {
+	x: number;
+	y: number;
+	z: number;
+	w: number;
+}
+
+export interface BlueprintStructureGeometry {
+	map_object_id: string;
+	translation: Vec3;
+	rotation: Quat;
+	scale: Vec3;
+}
+
+export interface BlueprintGeometry {
+	structures: BlueprintStructureGeometry[];
+}
+
+export interface PlacementAnchor {
+	x: number;
+	y: number;
+	z: number;
+	yaw: number;
+}
+
+export interface BlueprintFinding {
+	severity: string;
+	code: string;
+	message: string;
+}
+
+export interface ValidatePlacementResponse {
+	findings: BlueprintFinding[];
+	has_blocking: boolean;
+}
+
+export interface PlaceBlueprintResponse {
+	base_id: string | null;
+	structures_placed: number;
+	findings: BlueprintFinding[];
+}

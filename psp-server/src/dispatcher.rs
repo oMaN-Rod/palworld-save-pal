@@ -433,6 +433,13 @@ async fn route(
         MessageType::PlaceBlueprint => {
             handlers::blueprints::handle_place_blueprint(serde_json::from_value(data)?, ctx).await
         }
+        MessageType::RequestBlueprintGeometry => {
+            handlers::blueprints::handle_request_blueprint_geometry(
+                serde_json::from_value(data)?,
+                ctx,
+            )
+            .await
+        }
         other => {
             tracing::warn!(
                 message_type = other.as_wire(),

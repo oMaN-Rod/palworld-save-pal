@@ -372,12 +372,13 @@ fn capture_inner(
                 transform::to_relative(&anchor, &model.initial_transform_cache);
 
             let (module_item_ids, module_character_ids) = module_target_container_ids(object_props);
-            if options.container_contents {
-                push_unique(&mut item_container_ids, &module_item_ids);
-            }
-            if options.housed_pals {
-                push_unique(&mut housed_container_ids, &module_character_ids);
-            }
+            // Referential integrity: a captured structure that references a
+            // container must ship with that container, or the game crashes
+            // dereferencing it (UPalMapObjectProductItemModel::IsWorkable). The
+            // container_contents / housed_pals options decide only whether the
+            // stored items / pals survive, not whether the container exists.
+            push_unique(&mut item_container_ids, &module_item_ids);
+            push_unique(&mut housed_container_ids, &module_character_ids);
 
             let mut properties = object_props.clone();
             apply_layer_gating(&mut properties, options);
@@ -394,15 +395,20 @@ fn capture_inner(
 
     let mut item_containers = Vec::new();
     let mut dynamic_item_ids: Vec<Uuid> = Vec::new();
-    if options.container_contents {
+    if !item_container_ids.is_empty() {
         let entries = world::item_container_map(&session.level)?;
         for container_id in &item_container_ids {
             let Some(entry) = entries.iter().find(|entry| container_entry_id(entry) == Some(*container_id))
             else {
                 continue;
             };
-            push_unique(&mut dynamic_item_ids, &container_slot_dynamic_item_ids(entry));
-            item_containers.push(entry.clone());
+            let mut entry = entry.clone();
+            if options.container_contents {
+                push_unique(&mut dynamic_item_ids, &container_slot_dynamic_item_ids(&entry));
+            } else {
+                empty_item_container_slots(&mut entry);
+            }
+            item_containers.push(entry);
         }
     }
 
@@ -441,7 +447,7 @@ fn capture_inner(
             }
         }
     }
-    if options.housed_pals {
+    if !housed_container_ids.is_empty() {
         let entries = world::character_container_map(&session.level)?;
         for container_id in &housed_container_ids {
             if character_containers.iter().any(|entry| container_entry_id(entry) == Some(*container_id)) {
@@ -451,8 +457,13 @@ fn capture_inner(
             else {
                 continue;
             };
-            push_unique(&mut character_instance_ids, &character_container_slot_instance_ids(entry));
-            character_containers.push(entry.clone());
+            let mut entry = entry.clone();
+            if options.housed_pals {
+                push_unique(&mut character_instance_ids, &character_container_slot_instance_ids(&entry));
+            } else {
+                empty_character_container_slots(&mut entry);
+            }
+            character_containers.push(entry);
         }
     }
 
@@ -506,7 +517,7 @@ fn push_unique(target: &mut Vec<Uuid>, ids: &[Uuid]) {
 /// `target_container_id` from every `ItemContainer`/`CharacterContainer`
 /// module in a structure's `ConcreteModel.ModuleMap`, as `(item_ids,
 /// character_ids)`.
-fn module_target_container_ids(properties: &Properties) -> (Vec<Uuid>, Vec<Uuid>) {
+pub fn module_target_container_ids(properties: &Properties) -> (Vec<Uuid>, Vec<Uuid>) {
     let mut item_ids = Vec::new();
     let mut character_ids = Vec::new();
     for_each_module_raw(properties, |raw| match &raw.data {
@@ -551,7 +562,7 @@ pub fn container_slot_dynamic_item_ids(entry: &MapEntry) -> Vec<Uuid> {
 
 /// The non-nil `instance_id` of every occupied slot in a
 /// `CharacterContainerSaveData` entry.
-pub(crate) fn character_container_slot_instance_ids(entry: &MapEntry) -> Vec<Uuid> {
+pub fn character_container_slot_instance_ids(entry: &MapEntry) -> Vec<Uuid> {
     let mut ids = Vec::new();
     let Some(value_props) = props::struct_props(&entry.value) else { return ids };
     let Some(slots) = props::get(value_props, &["Slots"]).and_then(props::struct_values) else {
@@ -586,6 +597,28 @@ fn empty_character_container_slots(entry: &mut MapEntry) {
             slot_props.0.get_mut(&PropertyKey::from("RawData"))
         {
             raw.instance_id = FGuid::nil();
+        }
+    }
+}
+
+/// Empties every slot in an `ItemContainerSaveData` entry: the container still
+/// travels with the blueprint (a structure that references it must find it in
+/// the placed save), but carries no items when `container_contents` is off.
+fn empty_item_container_slots(entry: &mut MapEntry) {
+    let Some(value_props) = props::struct_props_mut(&mut entry.value) else { return };
+    let Some(slots) = props::get_mut(value_props, &["Slots"]).and_then(props::struct_values_mut)
+    else {
+        return;
+    };
+    for slot in slots {
+        let StructValue::Struct(slot_props) = slot else { continue };
+        if let Some(Property::Struct(StructValue::Game(PalStruct::ItemContainerSlots(raw)))) =
+            slot_props.0.get_mut(&PropertyKey::from("RawData"))
+        {
+            raw.count = 0;
+            raw.item.static_id.clear();
+            raw.item.dynamic_id.created_world_id = FGuid::nil();
+            raw.item.dynamic_id.local_id_in_created_world = FGuid::nil();
         }
     }
 }

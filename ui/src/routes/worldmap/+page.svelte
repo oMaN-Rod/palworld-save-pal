@@ -33,8 +33,12 @@
 		Player,
 		RelicPoint
 	} from '$types';
-	import { assetLoader } from '$utils';
+	import { assetLoader, debounce } from '$utils';
 	import { EditBaseModal, ExportBlueprintModal } from '$components/modals';
+	import PlacementPanel from '$components/map/PlacementPanel.svelte';
+	import { placementState } from '$lib/data/placement.svelte';
+	import { blueprintsData } from '$lib/data/blueprints.svelte';
+	import { baseStructuresData } from '$lib/data/baseStructures.svelte';
 	import { EntryState, MessageType } from '$types';
 	import { staticIcons } from '$types/icons';
 	import { persistedState } from 'svelte-persisted-state';
@@ -456,6 +460,67 @@
 			cancelled = true;
 		};
 	});
+
+	const guildOptions = $derived(
+		Object.entries(appState.guildSummaries ?? {}).map(([id, summary]) => ({
+			value: id,
+			label: (summary as GuildSummary).name
+		}))
+	);
+	const playerOptions = $derived(
+		Object.values(appState.players ?? {}).map((player) => ({
+			value: player.uid,
+			label: player.nickname
+		}))
+	);
+
+	$effect(() => {
+		if (placementState.active && placementState.handle && placementState.geometry.length === 0) {
+			blueprintsData.requestGeometry(placementState.handle).then((res) => {
+				placementState.geometry = res.structures;
+			});
+		}
+	});
+
+	const debouncedValidate = debounce(() => placementState.runValidate(), 200);
+
+	$effect(() => {
+		if (!placementState.active) return;
+		void placementState.targetGuild;
+		void placementState.anchor;
+		debouncedValidate();
+	});
+
+	async function handlePlace() {
+		let res: Awaited<ReturnType<typeof placementState.commit>>;
+		try {
+			res = await placementState.commit();
+		} catch (e) {
+			toast.add(String(e instanceof Error ? e.message : e), 'Placement failed', 'error');
+			return;
+		}
+
+		const guild = placementState.targetGuild;
+		placementState.exit();
+		delete appState.guilds[guild];
+		await appState.loadGuildLazy(guild);
+		baseStructuresData.reset();
+		toast.add(`Placed ${res.structures_placed} structures.`, 'Blueprint placed', 'success');
+
+		try {
+			await appState.writeSave();
+		} catch (e) {
+			toast.add(
+				String(e instanceof Error ? e.message : e),
+				'Placed, but saving to disk failed - use Save to write it.',
+				'error'
+			);
+		}
+	}
+
+	function handleCancel() {
+		placementState.exit();
+	}
 </script>
 
 <div class="relative h-full overflow-hidden">
@@ -860,7 +925,17 @@
 					onUnlockAllFastTravel={handleUnlockAllFastTravel}
 					onUnlockAllWatchtowers={handleUnlockAllWatchtowers}
 					onCollectAllRelics={handleCollectAllRelics}
+					placement={placementState.active}
+					placementGeometry={placementState.geometry}
+					placementAnchor={placementState.anchor}
+					onPlacementAnchorChange={(a) => {
+						placementState.setAnchor(a);
+						debouncedValidate();
+					}}
 				/>
+			{/if}
+			{#if placementState.active}
+				<PlacementPanel {guildOptions} {playerOptions} onPlace={handlePlace} onCancel={handleCancel} />
 			{/if}
 		</div>
 	</div>

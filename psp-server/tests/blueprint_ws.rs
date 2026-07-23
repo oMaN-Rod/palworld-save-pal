@@ -415,3 +415,35 @@ async fn load_of_malformed_base64_content_is_an_error_frame() {
     let frame = recv(&mut socket).await;
     assert_eq!(frame["type"], "error", "undecodable content is refused, not decoded to garbage");
 }
+
+#[tokio::test]
+async fn geometry_returns_one_entry_per_structure_with_a_transform() {
+    let (server, _scratch) = start_test_server().await;
+    let mut socket = connect(server.addr).await;
+    let (_guild_id, base_id) = load_and_find_base(&mut socket).await;
+
+    send(&mut socket, json!({"type": "capture_base_blueprint", "data": {
+        "base_id": base_id,
+        "options": {"production_config": true, "structure_condition": false,
+                    "container_contents": false, "worker_pals": false, "housed_pals": false,
+                    "production_progress": false, "access_config": false, "base_identity": true},
+        "name": "Geometry"
+    }})).await;
+    let capture = recv_until_type_or_error(&mut socket, "capture_base_blueprint").await;
+    let cap = capture.last().unwrap();
+    let handle = cap["data"]["handle"].as_str().unwrap().to_string();
+    let structure_count = cap["data"]["header"]["structure_count"].as_u64().unwrap();
+    assert!(structure_count >= 1, "world1 base has structures");
+
+    send(&mut socket, json!({"type": "request_blueprint_geometry", "data": {"handle": handle}})).await;
+    let frames = recv_until_type_or_error(&mut socket, "request_blueprint_geometry").await;
+    let structures = frames.last().unwrap()["data"]["structures"].as_array().unwrap();
+
+    assert_eq!(structures.len() as u64, structure_count,
+        "one geometry entry per captured structure");
+    let first = &structures[0];
+    assert!(first["map_object_id"].as_str().is_some(), "carries a map_object_id");
+    assert!(first["translation"]["x"].as_f64().is_some(), "carries a translation");
+    assert!(first["rotation"]["w"].as_f64().is_some(), "carries a rotation quat");
+    assert!(first["scale"]["x"].as_f64().is_some(), "carries a scale");
+}

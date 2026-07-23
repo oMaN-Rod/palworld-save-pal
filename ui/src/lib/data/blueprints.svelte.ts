@@ -1,6 +1,14 @@
 import { send, sendAndWait } from '$lib/utils/websocketUtils';
 import { MessageType } from '$types';
-import type { BlueprintRow, CaptureBlueprintResponse, CaptureOptions } from '$types';
+import type {
+	BlueprintRow,
+	CaptureBlueprintResponse,
+	CaptureOptions,
+	BlueprintGeometry,
+	PlacementAnchor,
+	ValidatePlacementResponse,
+	PlaceBlueprintResponse
+} from '$types';
 
 export type BlueprintFormat = 'psp' | 'json';
 
@@ -59,6 +67,40 @@ class Blueprints {
 	async exportRow(id: string, format: BlueprintFormat): Promise<void> {
 		const res = await this.loadFromId(id);
 		this.exportFile(res.handle, format);
+	}
+
+	async requestGeometry(handle: string): Promise<BlueprintGeometry> {
+		return sendAndWait<BlueprintGeometry>(MessageType.REQUEST_BLUEPRINT_GEOMETRY, { handle });
+	}
+
+	async validate(
+		handle: string,
+		anchor: PlacementAnchor,
+		targetGuild: string
+	): Promise<ValidatePlacementResponse> {
+		return sendAndWait<ValidatePlacementResponse>(MessageType.VALIDATE_BLUEPRINT_PLACEMENT, {
+			handle,
+			anchor,
+			mode: 'new_base',
+			target_guild: targetGuild
+		});
+	}
+
+	async place(
+		handle: string,
+		anchor: PlacementAnchor,
+		targetGuild: string,
+		targetPlayer: string,
+		overrideWarnings: boolean
+	): Promise<PlaceBlueprintResponse> {
+		return sendAndWait<PlaceBlueprintResponse>(MessageType.PLACE_BLUEPRINT, {
+			handle,
+			anchor,
+			mode: 'new_base',
+			target_guild: targetGuild,
+			target_player: targetPlayer,
+			override_warnings: overrideWarnings
+		});
 	}
 
 	reset(): void {
