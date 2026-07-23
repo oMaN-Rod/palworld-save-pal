@@ -10,6 +10,7 @@ edition.workspace = true
 desktop = ["dep:rfd"]
 
 [dependencies]
+psp-app = { workspace = true }
 psp-core = { workspace = true }
 psp-db = { workspace = true }
 uesave = { workspace = true }

@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["psp-core", "psp-db", "psp-server", "psp-desktop"]
+members = ["psp-core", "psp-db", "psp-app", "psp-server", "psp-desktop"]
 
 [workspace.package]
 # Single source of truth for the project version (get_version, Tauri bundle,
@@ -15,6 +15,7 @@ opt-level = 1
 opt-level = 3
 
 [workspace.dependencies]
+psp-app = { path = "psp-app" }
 psp-core = { path = "psp-core" }
 psp-db = { path = "psp-db" }
 uesave = { git = "https://github.com/oMaN-Rod/uesave-rs.git", branch = "pluggable-game-support", features = ["oodle"] }

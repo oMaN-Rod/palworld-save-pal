@@ -3481,6 +3481,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "psp-app"
+version = "1.2.0"
+dependencies = [
+ "serde",
+ "serde_json",
+ "tracing",
+]
+
+[[package]]
 name = "psp-core"
 version = "1.2.0"
 dependencies = [
@@ -3542,6 +3551,7 @@ dependencies = [
  "opener",
  "percent-encoding",
  "pretty_assertions",
+ "psp-app",
  "psp-core",
  "psp-db",
  "reqwest 0.12.28",
