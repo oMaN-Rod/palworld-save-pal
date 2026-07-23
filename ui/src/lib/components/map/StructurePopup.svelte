@@ -31,11 +31,11 @@
 				></span>
 				<div class="min-w-0 flex-1">
 					<h3 class="text-foreground truncate text-lg font-bold">{info.name}</h3>
-					<span class="text-muted-foreground truncate text-xs font-light">{info.typeA}</span>
+					<span class="truncate text-xs font-light">{info.typeA}</span>
 				</div>
 			</div>
 			{#if info.description}
-				<p class="text-muted-foreground mt-2 text-xs">{info.description}</p>
+				<p class="mt-2 text-xs">{info.description}</p>
 			{/if}
 		</div>
 
@@ -43,14 +43,14 @@
 			<div class="flex items-start gap-2">
 				<Heart class="mt-0.5 h-4 w-4 shrink-0 text-red-500" />
 				<div class="min-w-0 flex-1">
-					<div class="text-muted-foreground mb-1 text-xs font-medium">HP</div>
+					<div class="mb-1 text-xs font-medium">HP</div>
 					<div class="text-foreground font-mono text-xs">{info.hp} / {info.hpMax}</div>
 				</div>
 			</div>
 			<div class="flex items-start gap-2">
 				<Ruler class="text-primary mt-0.5 h-4 w-4 shrink-0" />
 				<div class="min-w-0 flex-1">
-					<div class="text-muted-foreground mb-1 text-xs font-medium">Dimensions</div>
+					<div class="mb-1 text-xs font-medium">Dimensions</div>
 					<div class="text-foreground font-mono text-xs">
 						{info.sizeM.x.toFixed(2)} x {info.sizeM.y.toFixed(2)} x {info.sizeM.z.toFixed(2)} m
 					</div>
@@ -60,7 +60,7 @@
 				<div class="flex items-start gap-2">
 					<Award class="text-primary mt-0.5 h-4 w-4 shrink-0" />
 					<div class="min-w-0 flex-1">
-						<div class="text-muted-foreground mb-1 text-xs font-medium">Rank</div>
+						<div class="mb-1 text-xs font-medium">Rank</div>
 						<div class="text-foreground font-mono text-xs">{info.rank}</div>
 					</div>
 				</div>
@@ -69,7 +69,7 @@
 				<div class="flex items-start gap-2">
 					<User class="text-primary mt-0.5 h-4 w-4 shrink-0" />
 					<div class="min-w-0 flex-1">
-						<div class="text-muted-foreground mb-1 text-xs font-medium">Builder</div>
+						<div class="mb-1 text-xs font-medium">Builder</div>
 						<div class="text-foreground font-mono text-xs">{info.builder}</div>
 					</div>
 				</div>

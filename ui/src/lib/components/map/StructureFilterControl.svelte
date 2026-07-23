@@ -2,6 +2,8 @@
 	import type { IControl } from 'maplibre-gl';
 	import { untrack } from 'svelte';
 	import { getMapContext, type ControlPosition } from '$components/maplibre';
+	import { Switch } from '@skeletonlabs/skeleton-svelte';
+	import { Eye, EyeClosed } from '@lucide/svelte';
 
 	let {
 		types,
@@ -96,10 +98,11 @@
 
 <div bind:this={panel} class="structure-filter-panel" class:open>
 	{#each types as type (type)}
-		<label class="structure-filter-row">
-			<input type="checkbox" checked={enabled[type] !== false} onchange={() => ontoggle(type)} />
+		<Switch checked={enabled[type] !== false} onCheckedChange={() => ontoggle(type)} compact classes="h-6 w-6">
 			<span>{type}</span>
-		</label>
+			{#snippet inactiveChild()}<EyeClosed class="w-4 h-4" />{/snippet}
+			{#snippet activeChild()}<Eye class="w-4 h-4" />{/snippet}
+		</Switch>
 	{/each}
 </div>
 
@@ -111,7 +114,6 @@
 		right: 0;
 		margin-top: 4px;
 		min-width: 160px;
-		max-height: 260px;
 		overflow-y: auto;
 		padding: 6px;
 		background: var(--svlibre-ctrl-bg, #fff);
@@ -151,7 +153,9 @@
 
 	/* Matches maplibre's own convention for an inactive icon. Theme inversion is
 	   handled centrally by the map wrapper, alongside the built-in controls. */
-	:global(.maplibregl-ctrl button.maplibregl-ctrl-structure-filter:not(.is-active) .maplibregl-ctrl-icon) {
+	:global(
+		.maplibregl-ctrl button.maplibregl-ctrl-structure-filter:not(.is-active) .maplibregl-ctrl-icon
+	) {
 		opacity: 0.25;
 	}
 </style>

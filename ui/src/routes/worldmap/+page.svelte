@@ -11,7 +11,7 @@
 	} from '$components/map/utils';
 	import { collectRelics, relicsByType, toggleRelic } from '$components/map/relics';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
-	import { mapImg, relicTypeIcon } from '$components/map/styles';
+	import { mapImg, relicTypeIcon, STRUCTURE_COLORS } from '$components/map/styles';
 	import { isWatchtower } from '$components/map/fastTravel';
 	import Target from '@lucide/svelte/icons/target';
 	import Unlock from '@lucide/svelte/icons/unlock';
@@ -80,7 +80,7 @@
 		showWatchtower: true,
 		showRelics: true,
 		relicTypes: {},
-		structureTypes: {},
+		structureTypes: Object.fromEntries(Object.keys(STRUCTURE_COLORS).map((key) => [key, true])),
 		showDungeons: true,
 		showBosses: true,
 		showAlphaPals: true,
@@ -396,12 +396,14 @@
 	}
 
 	async function handleToggleAll(show: boolean) {
-		function toggleRecursive(obj: Record<string, any>) {
+		const skip = ['enable3d', 'panelOpen', 'structureTypes'];
+		function toggleRecursive(obj: Record<string, any>, nested = false) {
 			for (const key in obj) {
-				if (typeof obj[key] === 'boolean' && key.includes('show')) {
+				if (skip.includes(key)) continue;
+				if (typeof obj[key] === 'boolean') {
 					obj[key] = show;
 				} else if (obj[key] !== null && typeof obj[key] === 'object') {
-					toggleRecursive(obj[key]);
+					toggleRecursive(obj[key], true);
 				}
 			}
 		}
