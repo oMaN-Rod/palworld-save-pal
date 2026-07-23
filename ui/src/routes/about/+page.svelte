@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { getAppState } from '$states';
-	import { Card, Tooltip } from '$components/ui';
-	import Saitama from '$lib/assets/img/app/saitama.webp';
+	import { Card } from '$components/ui';
 	import githubIcon from '$lib/assets/img/app/github.svg';
 	import discordIcon from '$lib/assets/img/app/discord.svg';
 	import buyMeACoffee from '$lib/assets/img/app/buymeacoffee.png';
@@ -10,15 +9,22 @@
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';
-	
+
 	const appState = getAppState();
 	const isDesktopMode = PUBLIC_DESKTOP_MODE === 'true';
 
-	function openLink(event: MouseEvent, url: string) {
-		if (isDesktopMode) {
-			event.preventDefault();
-			send(MessageType.OPEN_URL, url);
-		}
+	let hoveringTop = $state(false);
+	let easterEgg = $state(false);
+
+	function trackHover(node: HTMLElement) {
+		node.addEventListener('mouseenter', () => (hoveringTop = true));
+		node.addEventListener('mouseleave', () => (hoveringTop = false));
+		return {
+			destroy() {
+				node.removeEventListener('mouseenter', () => (hoveringTop = false));
+				node.removeEventListener('mouseleave', () => (hoveringTop = false));
+			}
+		};
 	}
 
 	function tilt(node: HTMLElement) {
@@ -29,8 +35,8 @@
 			const rect = node.getBoundingClientRect();
 			const x = e.clientX - rect.left;
 			const y = e.clientY - rect.top;
-			const rx = ((y - rect.height / 2) / rect.height) * -8;
-			const ry = ((x - rect.width / 2) / rect.width) * 8;
+			const rx = ((y - rect.height / 2) / rect.height) * -3;
+			const ry = ((x - rect.width / 2) / rect.width) * 3;
 			node.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg)`;
 		}
 		function onLeave() {
@@ -50,9 +56,46 @@
 	}
 </script>
 
+<svelte:window onkeydown={(e) => {
+	if (hoveringTop && e.code === 'KeyC') easterEgg = true;
+}} />
+
+{#if easterEgg}
+	<div
+		class="fixed inset-0 z-[100] flex items-start justify-end p-4"
+		onclick={() => (easterEgg = false)}
+	>
+		<div
+			class="rotate-2 rounded-lg border-2 border-primary-400/60 bg-surface-900/95 px-5 py-4 shadow-glow-paldium backdrop-blur-md animate-fade-in"
+			onclick={(e) => e.stopPropagation()}
+			role="dialog"
+		>
+			<p class="heading-gradient text-sm font-bold">🥚 Easter Egg!</p>
+			<a
+				href="https://github.com/CyrixJD115"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="mt-1 flex items-center gap-2 text-sm font-semibold text-primary-300 underline hover:text-primary-200"
+				onclick={(it) => {
+					if (isDesktopMode) { it.preventDefault(); send(MessageType.OPEN_URL, 'https://github.com/CyrixJD115'); }
+				}}
+			>
+				CyrixJD115
+			</a>
+			<p class="mt-0.5 text-[11px] text-muted">Did the GUI overhaul :)</p>
+			<button
+				class="mt-2 text-[10px] text-muted underline hover:text-surface-50"
+				onclick={() => (easterEgg = false)}
+			>
+				✕ dismiss
+			</button>
+		</div>
+	</div>
+{/if}
+
 <div class="animate-fade-in flex h-full w-full items-center justify-center space-x-2 p-2">
 	<div class="flex flex-col space-y-2">
-		<div use:tilt class="card-tilt">
+		<div use:trackHover use:tilt class="card-tilt">
 			<Card>
 				<div class="flex space-x-2">
 					<img src={staticIcons.pspWhite} alt="Palworld Save Pal" class="mb-2" />
@@ -60,12 +103,7 @@
 				</div>
 				<hr class="border-surface-500" />
 				<div class="mt-2 flex flex-col space-y-2">
-					<Tooltip position="left" background="bg-transparent">
-						{@html m.about_built_by()}
-						{#snippet popup()}
-							<img src={Saitama} alt="Saitama" class="inline-block h-48 w-48" />
-						{/snippet}
-					</Tooltip>
+					<p>{@html m.about_built_by()}</p>
 				</div>
 			</Card>
 		</div>
@@ -77,7 +115,9 @@
 						target="_blank"
 						rel="noopener noreferrer"
 						class="z-10 flex flex-col items-center gap-2 transition-opacity hover:opacity-80"
-						onclick={(event) => openLink(event, 'https://github.com/oMaN-Rod/palworld-save-pal')}
+						onclick={(event) => {
+							if (isDesktopMode) { event.preventDefault(); send(MessageType.OPEN_URL, 'https://github.com/oMaN-Rod/palworld-save-pal'); }
+						}}
 					>
 						<img src={githubIcon} alt="GitHub" class="h-8 w-8" />
 						<span class="text-xs align-bottom">{m.about_link_github()}</span>
@@ -87,7 +127,9 @@
 						target="_blank"
 						rel="noopener noreferrer"
 						class="z-10 flex flex-col items-center gap-2 transition-opacity hover:opacity-80"
-						onclick={(event) => openLink(event, 'https://discord.gg/YWZFPy9G8J')}
+						onclick={(event) => {
+							if (isDesktopMode) { event.preventDefault(); send(MessageType.OPEN_URL, 'https://discord.gg/YWZFPy9G8J'); }
+						}}
 					>
 						<img src={discordIcon} alt="Discord" class="h-8 w-8" />
 						<span class="text-xs align-bottom">{m.about_link_discord()}</span>
@@ -97,7 +139,9 @@
 						target="_blank"
 						rel="noopener noreferrer"
 						class="z-10 flex flex-col items-center gap-2 transition-opacity hover:opacity-80"
-						onclick={(event) => openLink(event, 'https://buymeacoffee.com/i_am_o')}
+						onclick={(event) => {
+							if (isDesktopMode) { event.preventDefault(); send(MessageType.OPEN_URL, 'https://buymeacoffee.com/i_am_o'); }
+						}}
 					>
 						<img src={buyMeACoffee} alt="Buy me a coffee" class="h-8" />
 						<span class="text-xs align-bottom">{m.about_link_support()}</span>
