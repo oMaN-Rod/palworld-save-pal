@@ -21,3 +21,58 @@ pub fn write_sav_bytes(save: &crate::ue::Save) -> Result<Vec<u8>, CoreError> {
         .map_err(|error| CoreError::Other(error.to_string()))?;
     Ok(buffer)
 }
+
+/// Parses already-decompressed GVAS bytes. Like `read_sav_bytes`, this MUST go
+/// through `session::parse_palworld_save`: it installs the Palworld type
+/// registry, without which the RawData codecs parse as opaque bytes.
+pub fn read_gvas_bytes(bytes: &[u8]) -> Result<crate::ue::Save, CoreError> {
+    crate::session::parse_palworld_save(bytes)
+}
+
+/// Serializes a `Save` to uncompressed GVAS, leaving compression to the caller.
+/// The web worker compresses with a vendored `ooz.wasm`; native callers use
+/// `write_sav_bytes`, which emits PlM/Oodle directly.
+pub fn write_gvas_bytes(save: &crate::ue::Save) -> Result<Vec<u8>, CoreError> {
+    let mut buffer = Vec::new();
+    save.write(&mut buffer)
+        .map_err(|error| CoreError::Other(error.to_string()))?;
+    Ok(buffer)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::domain::player::{container_id_from, save_data_props};
+    use crate::gamepass::fixture::reference_saves_dir;
+
+    /// The GVAS pair must round-trip a save without touching compression, and
+    /// `read_gvas_bytes` must install the Palworld type registry exactly as
+    /// `read_sav_bytes` does — otherwise typed accessors silently come back
+    /// empty and the failure surfaces far from here.
+    #[test]
+    fn gvas_pair_round_trips_without_compression() {
+        let sav = std::fs::read(
+            reference_saves_dir().join("00000000000000000000000000000001.sav"),
+        )
+        .expect("committed fixture is readable");
+        let save = read_sav_bytes(&sav).expect("fixture parses");
+
+        let gvas = write_gvas_bytes(&save).expect("serializes to GVAS");
+        assert!(!gvas.is_empty(), "GVAS output is non-empty");
+        assert_ne!(gvas, sav, "GVAS is the uncompressed form, not the .sav bytes");
+
+        let reparsed = read_gvas_bytes(&gvas).expect("GVAS re-parses");
+        let regvas = write_gvas_bytes(&reparsed).expect("re-serializes");
+        assert_eq!(gvas, regvas, "GVAS round-trips byte-for-byte");
+
+        // A byte-identical round-trip alone would also pass for opaque RawData
+        // bytes; this proves the type registry actually installed by
+        // `read_gvas_bytes`, not just that the reader is a no-op passthrough.
+        let save_data = save_data_props(&reparsed).expect("player SaveData present");
+        assert!(
+            container_id_from(save_data, "OtomoCharacterContainerId").is_some()
+                || container_id_from(save_data, "PalStorageContainerId").is_some(),
+            "typed container id readable after read_gvas_bytes"
+        );
+    }
+}
