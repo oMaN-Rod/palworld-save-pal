@@ -22,8 +22,8 @@ fn presets_seed(ctx: &HandlerCtx<'_>) -> serde_json::Value {
 /// with every preset as an id-keyed object (not an array).
 pub async fn handle_get_presets(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let seed = presets_seed(ctx);
-    psp_db::presets::populate_from_json(&ctx.app.db, &seed).await?;
-    let presets = psp_db::presets::get_all(&ctx.app.db).await?;
+    psp_db::presets::populate_from_json(&*ctx.app.driver, &seed).await?;
+    let presets = psp_db::presets::get_all(&*ctx.app.driver).await?;
     ctx.emitter.emit(MessageType::GetPresets, &presets);
     Ok(())
 }
@@ -32,7 +32,7 @@ pub async fn handle_add_preset(
     data: serde_json::Value,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    let preset_id = psp_db::presets::add(&ctx.app.db, data).await?;
+    let preset_id = psp_db::presets::add(&*ctx.app.driver, data).await?;
     ctx.emitter.emit(
         MessageType::AddPreset,
         &serde_json::json!({"message": "Preset added successfully", "id": preset_id}),
@@ -44,7 +44,7 @@ pub async fn handle_update_preset(
     data: UpdatePresetData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    let success = psp_db::presets::update_name(&ctx.app.db, &data.id, &data.name).await?;
+    let success = psp_db::presets::update_name(&*ctx.app.driver, &data.id, &data.name).await?;
     if success {
         ctx.emitter.emit(
             MessageType::UpdatePreset,
@@ -66,7 +66,7 @@ pub async fn handle_delete_presets(
 ) -> Result<(), HandlerError> {
     let mut success = true;
     for preset_id in &data {
-        if !psp_db::presets::delete(&ctx.app.db, preset_id).await? {
+        if !psp_db::presets::delete(&*ctx.app.driver, preset_id).await? {
             success = false;
         }
     }
@@ -81,7 +81,7 @@ pub async fn handle_delete_presets(
 }
 
 pub async fn handle_nuke_presets(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
-    psp_db::presets::nuke(&ctx.app.db).await?;
+    psp_db::presets::nuke(&*ctx.app.driver).await?;
     ctx.emitter
         .emit(MessageType::NukePresets, &"Presets nuked successfully");
     Ok(())
@@ -100,7 +100,7 @@ pub async fn handle_export_preset(
     data: ExportPresetData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    let presets = psp_db::presets::get_all(&ctx.app.db).await?;
+    let presets = psp_db::presets::get_all(&*ctx.app.driver).await?;
     let Some(preset) = presets.get(&data.preset_id) else {
         ctx.emitter.emit(
             MessageType::Error,
@@ -180,7 +180,7 @@ pub async fn handle_export_presets(
             .emit(MessageType::Error, &"File dialog not available");
         return Ok(());
     }
-    let presets = psp_db::presets::get_all(&ctx.app.db).await?;
+    let presets = psp_db::presets::get_all(&*ctx.app.driver).await?;
 
     let request = crate::desktop_dialogs::FileSaveRequest {
         filter_name: "Preset Archives",
@@ -250,7 +250,7 @@ fn strip_preset_ids(preset: &mut serde_json::Value) {
 /// stripping identifiers so each is added with a fresh id. Non-object entries
 /// are skipped. Returns the number of presets added.
 async fn import_preset_value(
-    db: &sqlx::SqlitePool,
+    db: &dyn psp_db::DbDriver,
     value: serde_json::Value,
 ) -> Result<usize, HandlerError> {
     let items = match value {
@@ -301,7 +301,7 @@ pub async fn handle_import_preset(ctx: &mut HandlerCtx<'_>) -> Result<(), Handle
             .map(|ext| ext.eq_ignore_ascii_case("zip"))
             .unwrap_or(false);
         if is_zip {
-            match import_zip(&ctx.app.db, path).await {
+            match import_zip(&*ctx.app.driver, path).await {
                 Ok((added, bad)) => {
                     imported += added;
                     skipped += bad;
@@ -313,7 +313,7 @@ pub async fn handle_import_preset(ctx: &mut HandlerCtx<'_>) -> Result<(), Handle
                 .ok()
                 .and_then(|contents| serde_json::from_str::<serde_json::Value>(&contents).ok());
             match parsed {
-                Some(value) => match import_preset_value(&ctx.app.db, value).await {
+                Some(value) => match import_preset_value(&*ctx.app.driver, value).await {
                     Ok(added) => imported += added,
                     Err(_) => skipped += 1,
                 },
@@ -338,7 +338,7 @@ pub async fn handle_import_preset(ctx: &mut HandlerCtx<'_>) -> Result<(), Handle
 /// `(imported, skipped)`. Entries are fully read before any async add so no
 /// non-`Send` zip handle is held across an await point.
 async fn import_zip(
-    db: &sqlx::SqlitePool,
+    db: &dyn psp_db::DbDriver,
     path: &std::path::Path,
 ) -> Result<(usize, usize), HandlerError> {
     use std::io::Read;
@@ -432,10 +432,10 @@ mod tests {
         let value = serde_json::json!({
             "id": "old-id", "name": "Solo", "type": "inventory"
         });
-        let added = import_preset_value(&test.app.db, value).await.unwrap();
+        let added = import_preset_value(&*test.app.driver, value).await.unwrap();
         assert_eq!(added, 1);
 
-        let presets = psp_db::presets::get_all(&test.app.db).await.unwrap();
+        let presets = psp_db::presets::get_all(&*test.app.driver).await.unwrap();
         assert_eq!(presets.len(), 1);
         let (new_id, preset) = presets.iter().next().unwrap();
         assert_ne!(new_id, "old-id");
@@ -449,9 +449,9 @@ mod tests {
             {"name": "A", "type": "inventory"},
             {"name": "B", "type": "inventory"},
         ]);
-        let added = import_preset_value(&test.app.db, value).await.unwrap();
+        let added = import_preset_value(&*test.app.driver, value).await.unwrap();
         assert_eq!(added, 2);
-        assert_eq!(psp_db::presets::get_all(&test.app.db).await.unwrap().len(), 2);
+        assert_eq!(psp_db::presets::get_all(&*test.app.driver).await.unwrap().len(), 2);
     }
 
     #[test]
