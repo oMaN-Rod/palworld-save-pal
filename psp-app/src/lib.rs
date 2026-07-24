@@ -70,9 +70,7 @@ pub struct AppConfig {
 pub struct AppState {
     pub config: AppConfig,
     pub game_data: Arc<GameData>,
-    pub db: sqlx::SqlitePool,
-    /// Transitional: the DbDriver seam. Domain calls migrate from `db` (pool) to
-    /// this field module-by-module; the pool field is removed once none remain.
+    /// The DbDriver seam: every domain call runs its SQL through this handle.
     pub driver: std::sync::Arc<dyn psp_db::DbDriver>,
     pub dialogs: Arc<dyn crate::desktop_dialogs::FileDialogProvider>,
     /// Count of currently-open `/ws/{client_id}` connections. The transport
@@ -159,7 +157,7 @@ pub mod test_support {
             populate_data_dir(&json_dir);
 
             let db_path = temp_dir.path().join("test.db");
-            let db = psp_db::open(&db_path).await.unwrap();
+            let pool = psp_db::open(&db_path).await.unwrap();
             let game_data = Arc::new(GameData::load(&json_dir).unwrap());
             let (live_connections, _live_connections_rx) = tokio::sync::watch::channel(0usize);
             let app = Arc::new(AppState {
@@ -167,8 +165,7 @@ pub mod test_support {
                     desktop_mode: false,
                 },
                 game_data,
-                db: db.clone(),
-                driver: Arc::new(psp_db::SqlxSqliteDriver::new(db)),
+                driver: Arc::new(psp_db::SqlxSqliteDriver::new(pool)),
                 dialogs: Arc::new(crate::desktop_dialogs::NullDialogProvider),
                 live_connections,
                 ext: Arc::new(crate::dispatcher::NullExtRouter),

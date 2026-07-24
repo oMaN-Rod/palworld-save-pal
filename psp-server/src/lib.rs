@@ -109,7 +109,6 @@ pub async fn start_server_with(
             desktop_mode: config.desktop_mode,
         },
         game_data,
-        db: db.clone(),
         driver: Arc::new(psp_db::SqlxSqliteDriver::new(db)),
         dialogs,
         live_connections,
