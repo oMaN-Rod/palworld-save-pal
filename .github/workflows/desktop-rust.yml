@@ -62,9 +62,14 @@ jobs:
           prefix-key: "v0-rust-${{ matrix.os }}"
 
       - name: psp-app stays transport-free
+        working-directory: palworld-save-pal
         shell: bash
         run: |
-          if cargo tree -p psp-app -e normal | grep -E "axum|rfd|opener|bollard|sysinfo|reqwest|tower-http|clap"; then
+          if ! tree_output=$(cargo tree -p psp-app -e normal); then
+            echo "::error::cargo tree failed to run for psp-app; dependency guard could not verify anything"
+            exit 1
+          fi
+          if echo "$tree_output" | grep -E "axum|rfd|opener|bollard|sysinfo|reqwest|tower-http|clap"; then
             echo "::error::forbidden native dependency in psp-app tree"
             exit 1
           fi
