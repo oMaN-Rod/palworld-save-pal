@@ -139,6 +139,16 @@ impl Separated<'_> {
     }
 }
 
+/// The database seam. All domain functions run SQL through this. `execute`
+/// returns rows-affected; `query` returns rows with their column names so
+/// callers can read by name. Send+Sync with Send futures — native tokio needs
+/// it; psp-web will satisfy it by awaiting a Send channel to a wa-sqlite worker.
+#[async_trait::async_trait]
+pub trait DbDriver: Send + Sync {
+    async fn execute(&self, sql: &str, params: &[DbValue]) -> Result<u64, DbError>;
+    async fn query(&self, sql: &str, params: &[DbValue]) -> Result<Vec<DbRow>, DbError>;
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

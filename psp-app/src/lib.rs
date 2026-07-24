@@ -71,6 +71,9 @@ pub struct AppState {
     pub config: AppConfig,
     pub game_data: Arc<GameData>,
     pub db: sqlx::SqlitePool,
+    /// Transitional: the DbDriver seam. Domain calls migrate from `db` (pool) to
+    /// this field module-by-module; the pool field is removed once none remain.
+    pub driver: std::sync::Arc<dyn psp_db::DbDriver>,
     pub dialogs: Arc<dyn crate::desktop_dialogs::FileDialogProvider>,
     /// Count of currently-open `/ws/{client_id}` connections. The transport
     /// (psp-server's `ws` module) maintains it with a `Drop` guard around each
@@ -164,7 +167,8 @@ pub mod test_support {
                     desktop_mode: false,
                 },
                 game_data,
-                db,
+                db: db.clone(),
+                driver: Arc::new(psp_db::SqlxSqliteDriver::new(db)),
                 dialogs: Arc::new(crate::desktop_dialogs::NullDialogProvider),
                 live_connections,
                 ext: Arc::new(crate::dispatcher::NullExtRouter),

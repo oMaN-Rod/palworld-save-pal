@@ -1321,7 +1321,8 @@ pub(crate) mod test_env {
                     desktop_mode: false,
                 },
                 game_data,
-                db,
+                db: db.clone(),
+                driver: Arc::new(psp_db::SqlxSqliteDriver::new(db)),
                 dialogs: Arc::new(crate::desktop_dialogs::NullDialogProvider),
                 live_connections,
                 ext: Arc::new(crate::dispatcher::NullExtRouter),
@@ -1353,6 +1354,7 @@ pub(crate) mod test_env {
                 config,
                 game_data: env.app.game_data.clone(),
                 db: env.app.db.clone(),
+                driver: env.app.driver.clone(),
                 dialogs: Arc::new(crate::desktop_dialogs::QueuedDialogProvider::new_with_folders(
                     folders,
                 )),

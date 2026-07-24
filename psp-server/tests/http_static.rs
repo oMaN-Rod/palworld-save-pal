@@ -30,7 +30,8 @@ async fn test_router(temp_dir: &tempfile::TempDir) -> axum::Router {
                 desktop_mode: false,
             },
             game_data,
-            db,
+            db: db.clone(),
+            driver: Arc::new(psp_db::SqlxSqliteDriver::new(db)),
             dialogs: Arc::new(psp_server::desktop_dialogs::NullDialogProvider),
             live_connections,
             ext: Arc::new(psp_server::server_ext::ServerExtRouter {

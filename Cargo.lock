@@ -3521,6 +3521,7 @@ dependencies = [
 name = "psp-db"
 version = "1.2.0"
 dependencies = [
+ "async-trait",
  "chrono",
  "serde",
  "serde_json",

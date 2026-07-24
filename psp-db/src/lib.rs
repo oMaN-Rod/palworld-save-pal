@@ -6,10 +6,12 @@ pub mod meta;
 pub mod presets;
 pub mod servers;
 pub mod settings;
+pub mod sqlx_driver;
 pub mod time;
 pub mod ups;
 
-pub use driver::{DbRow, DbValue, SqlBuilder};
+pub use driver::{DbDriver, DbRow, DbValue, SqlBuilder};
+pub use sqlx_driver::SqlxSqliteDriver;
 
 use std::path::Path;
 
