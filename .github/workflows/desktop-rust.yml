@@ -61,6 +61,14 @@ jobs:
           workspaces: palworld-save-pal
           prefix-key: "v0-rust-${{ matrix.os }}"
 
+      - name: psp-app stays transport-free
+        shell: bash
+        run: |
+          if cargo tree -p psp-app -e normal | grep -E "axum|rfd|opener|bollard|sysinfo|reqwest|tower-http|clap"; then
+            echo "::error::forbidden native dependency in psp-app tree"
+            exit 1
+          fi
+
       - name: Install Tauri CLI
         run: cargo install tauri-cli --version "^2" --locked --force
 
