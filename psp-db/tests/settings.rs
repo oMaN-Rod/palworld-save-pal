@@ -8,8 +8,9 @@ async fn first_get_inserts_python_default_row() {
     let pool = psp_db::open(&temp_dir.path().join("test.db"))
         .await
         .unwrap();
+    let db = psp_db::SqlxSqliteDriver::new(pool);
 
-    let settings = get_settings(&pool).await.unwrap();
+    let settings = get_settings(&db).await.unwrap();
 
     assert_eq!(settings.language, "en");
     assert_eq!(settings.clone_prefix, "©️");
@@ -31,8 +32,8 @@ async fn concurrent_first_calls_all_return_ok_with_same_default_row() {
 
     let mut handles = Vec::new();
     for _ in 0..8 {
-        let pool = pool.clone();
-        handles.push(tokio::spawn(async move { get_settings(&pool).await }));
+        let db = psp_db::SqlxSqliteDriver::new(pool.clone());
+        handles.push(tokio::spawn(async move { get_settings(&db).await }));
     }
 
     for handle in handles {
@@ -58,7 +59,8 @@ async fn update_persists_everything_except_save_dir() {
     let temp_dir = tempfile::tempdir().unwrap();
     let db_path = temp_dir.path().join("test.db");
     let pool = psp_db::open(&db_path).await.unwrap();
-    get_settings(&pool).await.unwrap();
+    let db = psp_db::SqlxSqliteDriver::new(pool.clone());
+    get_settings(&db).await.unwrap();
 
     // update_settings always binds default_steam_save_dir() to its save_dir placeholder,
     // so only a custom value can prove the ON CONFLICT branch left the column alone —
@@ -71,7 +73,7 @@ async fn update_persists_everything_except_save_dir() {
         .unwrap();
 
     let updated = update_settings(
-        &pool,
+        &db,
         &SettingsUpdate {
             language: "fr".into(),
             clone_prefix: "copy-".into(),
@@ -92,8 +94,10 @@ async fn update_persists_everything_except_save_dir() {
 
     // Survives reopen (persistence, migrations idempotent).
     drop(pool);
+    drop(db);
     let reopened = psp_db::open(&db_path).await.unwrap();
-    let reloaded = get_settings(&reopened).await.unwrap();
+    let reopened_db = psp_db::SqlxSqliteDriver::new(reopened);
+    let reloaded = get_settings(&reopened_db).await.unwrap();
     assert_eq!(reloaded.language, "fr");
     assert_eq!(reloaded.save_dir, custom_save_dir);
 }
@@ -104,9 +108,10 @@ async fn update_on_empty_db_creates_row_with_default_save_dir() {
     let pool = psp_db::open(&temp_dir.path().join("test.db"))
         .await
         .unwrap();
+    let db = psp_db::SqlxSqliteDriver::new(pool);
 
     let created = update_settings(
-        &pool,
+        &db,
         &SettingsUpdate {
             language: "de".into(),
             clone_prefix: "©️".into(),
@@ -128,17 +133,18 @@ async fn saved_save_dir_round_trips_through_update_save_dir() {
     let pool = psp_db::open(&temp_dir.path().join("test.db"))
         .await
         .unwrap();
+    let db = psp_db::SqlxSqliteDriver::new(pool);
 
     assert_eq!(
-        saved_save_dir(&pool).await.unwrap(),
+        saved_save_dir(&db).await.unwrap(),
         None,
         "fresh DB has no settings row yet"
     );
 
-    update_save_dir(&pool, "/saves/world-1").await.unwrap();
+    update_save_dir(&db, "/saves/world-1").await.unwrap();
 
     assert_eq!(
-        saved_save_dir(&pool).await.unwrap(),
+        saved_save_dir(&db).await.unwrap(),
         Some("/saves/world-1".to_string())
     );
 }

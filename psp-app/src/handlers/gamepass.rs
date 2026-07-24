@@ -232,7 +232,7 @@ pub async fn handle_select_gamepass_save(
     // can still find the original containers if this load returns early.
     ctx.session.selected_gamepass_save = ctx.session.gamepass_saves.get(&save_id).cloned();
 
-    let container_dir = PathBuf::from(psp_db::settings::get_settings(&ctx.app.db).await?.save_dir);
+    let container_dir = PathBuf::from(psp_db::settings::get_settings(&*ctx.app.driver).await?.save_dir);
     let index = ContainerIndex::read_from_dir(&container_dir)?;
     let containers = index.latest_save_containers(&save_id);
 
@@ -383,7 +383,7 @@ async fn resolve_convert_dir(
     save_type: &str,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<Option<String>, String> {
-    let saved_dir = psp_db::settings::saved_save_dir(&ctx.app.db)
+    let saved_dir = psp_db::settings::saved_save_dir(&*ctx.app.driver)
         .await
         .map_err(|error| error.to_string())?;
     let request = crate::desktop_dialogs::dialog_request_for(save_type, saved_dir.as_deref());
@@ -403,7 +403,7 @@ async fn resolve_convert_dir(
 }
 
 async fn resolve_convert_output_dir(ctx: &mut HandlerCtx<'_>) -> Result<Option<PathBuf>, String> {
-    let saved_dir = psp_db::settings::saved_save_dir(&ctx.app.db)
+    let saved_dir = psp_db::settings::saved_save_dir(&*ctx.app.driver)
         .await
         .map_err(|error| error.to_string())?;
     Ok(ctx.app.dialogs.pick_folder(saved_dir.map(PathBuf::from)).await)

@@ -72,7 +72,8 @@ pub async fn import_legacy_if_needed(
     legacy_db_path: &Path,
     validate_pal_data: PalDataValidator<'_>,
 ) -> Result<Option<LegacyImportReport>, DbError> {
-    if crate::meta::get(pool, LEGACY_IMPORT_META_KEY)
+    let driver = crate::SqlxSqliteDriver::new(pool.clone());
+    if crate::meta::get(&driver, LEGACY_IMPORT_META_KEY)
         .await?
         .is_some()
     {
@@ -534,7 +535,7 @@ pub async fn import_legacy_if_needed(
         "ups_pals_skipped": report.ups_pals_skipped,
         "servers": report.servers_imported,
     });
-    crate::meta::set(pool, LEGACY_IMPORT_META_KEY, &guard_value.to_string()).await?;
+    crate::meta::set(&driver, LEGACY_IMPORT_META_KEY, &guard_value.to_string()).await?;
 
     Ok(Some(report))
 }

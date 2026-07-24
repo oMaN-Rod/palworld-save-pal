@@ -281,7 +281,7 @@ async fn pick_save_file_via_dialog(
     save_type: &str,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<Option<std::path::PathBuf>, HandlerError> {
-    let saved_dir = psp_db::settings::saved_save_dir(&ctx.app.db).await?;
+    let saved_dir = psp_db::settings::saved_save_dir(&*ctx.app.driver).await?;
     let request = crate::desktop_dialogs::dialog_request_for(save_type, saved_dir.as_deref());
     let Some(selected) = ctx.app.dialogs.pick_file(request).await else {
         ctx.emitter
@@ -309,7 +309,7 @@ pub async fn handle_select_save(
         if let Some(parent_dir) = selected.parent() {
             // Persist BEFORE loading: a load failure must not lose the dir the
             // user just picked.
-            psp_db::settings::update_save_dir(&ctx.app.db, &parent_dir.to_string_lossy()).await?;
+            psp_db::settings::update_save_dir(&*ctx.app.driver, &parent_dir.to_string_lossy()).await?;
         }
         resolved_path = Some(selected.to_string_lossy().into_owned());
     }
@@ -1029,7 +1029,7 @@ pub async fn handle_save_modded_save(
 }
 
 async fn save_modded_steam_save(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
-    let save_dir = psp_db::settings::get_settings(&ctx.app.db).await?.save_dir;
+    let save_dir = psp_db::settings::get_settings(&*ctx.app.driver).await?.save_dir;
     let progress = ctx.emitter.progress_sink();
 
     let Some(session) = ctx.session.save.as_ref() else {
@@ -1096,7 +1096,7 @@ async fn write_modded_gamepass_containers(
         .selected_gamepass_save
         .clone()
         .ok_or_else(|| HandlerError::Other("No GamePass save selected".to_string()))?;
-    let container_dir = PathBuf::from(psp_db::settings::get_settings(&ctx.app.db).await?.save_dir);
+    let container_dir = PathBuf::from(psp_db::settings::get_settings(&*ctx.app.driver).await?.save_dir);
     let progress = ctx.emitter.progress_sink();
 
     progress("Creating backup of container path...");

@@ -17,7 +17,7 @@ pub fn settings_dto_from_row(row: SettingsRow) -> SettingsDto {
 }
 
 pub async fn handle_get_settings(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
-    let row = get_settings(&ctx.app.db).await?;
+    let row = get_settings(&*ctx.app.driver).await?;
     ctx.emitter
         .emit(MessageType::GetSettings, &settings_dto_from_row(row));
     Ok(())
@@ -30,7 +30,7 @@ pub async fn handle_update_settings(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     let row = update_settings(
-        &ctx.app.db,
+        &*ctx.app.driver,
         &SettingsUpdate {
             language: update.language,
             clone_prefix: update.clone_prefix,

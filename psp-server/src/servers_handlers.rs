@@ -1241,7 +1241,7 @@ async fn load_server_save_impl(
     .map_err(|error| error.to_string())?;
 
     // Point save_dir at the loaded world so a later write-back lands there.
-    psp_db::settings::update_save_dir(db, &world_dir.to_string_lossy())
+    psp_db::settings::update_save_dir(&*ctx.app.driver, &world_dir.to_string_lossy())
         .await
         .map_err(|error| error.to_string())?;
 

@@ -10,7 +10,7 @@ use crate::handler_error::HandlerError;
 use crate::messages::MessageType;
 
 async fn current_language(ctx: &HandlerCtx<'_>) -> Result<String, HandlerError> {
-    Ok(psp_db::settings::get_settings(&ctx.app.db).await?.language)
+    Ok(psp_db::settings::get_settings(&*ctx.app.driver).await?.language)
 }
 
 fn object_table(game_data: &GameData, key: &str) -> Map<String, Value> {

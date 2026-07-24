@@ -1,8 +1,6 @@
-use sqlx::SqlitePool;
-
 use crate::error::DbError;
 
-#[derive(Debug, Clone, sqlx::FromRow)]
+#[derive(Debug, Clone)]
 pub struct SettingsRow {
     pub language: String,
     pub save_dir: String,
@@ -26,15 +24,23 @@ pub struct SettingsUpdate {
 const SELECT_SETTINGS: &str = "SELECT language, save_dir, clone_prefix, new_pal_prefix, \
                                debug_mode, cheat_mode FROM settings WHERE id = 1";
 
-/// Returns the settings row, inserting the default row on first access.
-pub async fn get_settings(pool: &SqlitePool) -> Result<SettingsRow, DbError> {
-    if let Some(row) = sqlx::query_as::<_, SettingsRow>(SELECT_SETTINGS)
-        .fetch_optional(pool)
-        .await?
-    {
-        return Ok(row);
-    }
+fn map_settings(r: &crate::DbRow) -> Result<SettingsRow, DbError> {
+    Ok(SettingsRow {
+        language: r.get_string("language")?,
+        save_dir: r.get_string("save_dir")?,
+        clone_prefix: r.get_string("clone_prefix")?,
+        new_pal_prefix: r.get_string("new_pal_prefix")?,
+        debug_mode: r.get_bool("debug_mode")?,
+        cheat_mode: r.get_bool("cheat_mode")?,
+    })
+}
 
+/// Returns the settings row, inserting the default row on first access.
+pub async fn get_settings(db: &dyn crate::DbDriver) -> Result<SettingsRow, DbError> {
+    let rows = db.query(SELECT_SETTINGS, &[]).await?;
+    if let Some(row) = rows.first() {
+        return map_settings(row);
+    }
     let defaults = SettingsRow {
         language: "en".into(),
         save_dir: default_steam_save_dir(),
@@ -45,68 +51,57 @@ pub async fn get_settings(pool: &SqlitePool) -> Result<SettingsRow, DbError> {
     };
     // ON CONFLICT DO NOTHING makes concurrent first calls race-safe: a loser of the
     // insert falls through to the re-select instead of failing the id = 1 primary key.
-    sqlx::query(
+    db.execute(
         "INSERT INTO settings (id, language, save_dir, clone_prefix, new_pal_prefix, debug_mode, cheat_mode) \
          VALUES (1, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO NOTHING",
-    )
-    .bind(&defaults.language)
-    .bind(&defaults.save_dir)
-    .bind(&defaults.clone_prefix)
-    .bind(&defaults.new_pal_prefix)
-    .bind(defaults.debug_mode)
-    .bind(defaults.cheat_mode)
-    .execute(pool)
-    .await?;
-
+        &[
+            defaults.language.clone().into(),
+            defaults.save_dir.clone().into(),
+            defaults.clone_prefix.clone().into(),
+            defaults.new_pal_prefix.clone().into(),
+            defaults.debug_mode.into(),
+            defaults.cheat_mode.into(),
+        ],
+    ).await?;
     // Re-select rather than return `defaults`: the committed row may be a racer's, and a
     // still-missing row is a real error worth surfacing as RowNotFound.
-    let row = sqlx::query_as::<_, SettingsRow>(SELECT_SETTINGS)
-        .fetch_one(pool)
-        .await?;
-    Ok(row)
+    let rows = db.query(SELECT_SETTINGS, &[]).await?;
+    map_settings(rows.first().ok_or_else(|| DbError::Backend("settings row missing after insert".into()))?)
 }
 
 /// Upserts every column except save_dir: the DO UPDATE branch omits it, so the bound
 /// default only lands when this call is the one creating the row.
-pub async fn update_settings(
-    pool: &SqlitePool,
-    update: &SettingsUpdate,
-) -> Result<SettingsRow, DbError> {
-    sqlx::query(
+pub async fn update_settings(db: &dyn crate::DbDriver, update: &SettingsUpdate) -> Result<SettingsRow, DbError> {
+    db.execute(
         "INSERT INTO settings (id, language, save_dir, clone_prefix, new_pal_prefix, debug_mode, cheat_mode) \
          VALUES (1, ?1, ?2, ?3, ?4, ?5, ?6) \
          ON CONFLICT(id) DO UPDATE SET language = ?1, clone_prefix = ?3, new_pal_prefix = ?4, \
          debug_mode = ?5, cheat_mode = ?6",
-    )
-    .bind(&update.language)
-    .bind(default_steam_save_dir())
-    .bind(&update.clone_prefix)
-    .bind(&update.new_pal_prefix)
-    .bind(update.debug_mode)
-    .bind(update.cheat_mode)
-    .execute(pool)
-    .await?;
-    get_settings(pool).await
+        &[
+            update.language.clone().into(),
+            default_steam_save_dir().into(),
+            update.clone_prefix.clone().into(),
+            update.new_pal_prefix.clone().into(),
+            update.debug_mode.into(),
+            update.cheat_mode.into(),
+        ],
+    ).await?;
+    get_settings(db).await
 }
 
 /// Sets the singleton settings row's `save_dir`, leaning on `get_settings` to create
 /// the row (with defaults) first so the UPDATE always has something to hit.
-pub async fn update_save_dir(pool: &SqlitePool, save_dir: &str) -> Result<(), DbError> {
-    get_settings(pool).await?;
-    sqlx::query("UPDATE settings SET save_dir = ?1 WHERE id = 1")
-        .bind(save_dir)
-        .execute(pool)
-        .await?;
+pub async fn update_save_dir(db: &dyn crate::DbDriver, save_dir: &str) -> Result<(), DbError> {
+    get_settings(db).await?;
+    db.execute("UPDATE settings SET save_dir = ?1 WHERE id = 1", &[save_dir.into()]).await?;
     Ok(())
 }
 
 /// Reads the singleton settings row's save_dir. None means the row does not exist yet
 /// (fresh DB, before `get_settings` seeds it).
-pub async fn saved_save_dir(pool: &SqlitePool) -> Result<Option<String>, DbError> {
-    let row: Option<(String,)> = sqlx::query_as("SELECT save_dir FROM settings WHERE id = 1")
-        .fetch_optional(pool)
-        .await?;
-    Ok(row.map(|(save_dir,)| save_dir))
+pub async fn saved_save_dir(db: &dyn crate::DbDriver) -> Result<Option<String>, DbError> {
+    let rows = db.query("SELECT save_dir FROM settings WHERE id = 1", &[]).await?;
+    rows.first().map(|r| r.get_string("save_dir")).transpose()
 }
 
 /// Platform-specific location where the Steam release of the game keeps its saves.

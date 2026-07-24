@@ -20,7 +20,7 @@ struct SyncLoadedSaveFilesData {
 /// Frame order is the contract: `get_settings` first, then — only when a save
 /// is loaded — `loaded_save_files` followed by both summary messages.
 pub async fn handle_sync_app_state(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
-    let row = psp_db::settings::get_settings(&ctx.app.db).await?;
+    let row = psp_db::settings::get_settings(&*ctx.app.driver).await?;
     ctx.emitter
         .emit(MessageType::GetSettings, &settings_dto_from_row(row));
 

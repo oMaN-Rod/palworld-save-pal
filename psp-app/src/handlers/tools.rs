@@ -165,7 +165,7 @@ fn load_steam_save_for_transfer(
 }
 
 async fn resolve_transfer_source_path(ctx: &mut HandlerCtx<'_>) -> Result<Option<String>, String> {
-    let saved_dir = psp_db::settings::saved_save_dir(&ctx.app.db)
+    let saved_dir = psp_db::settings::saved_save_dir(&*ctx.app.driver)
         .await
         .map_err(|error| error.to_string())?;
     let request = crate::desktop_dialogs::dialog_request_for("steam", saved_dir.as_deref());
@@ -179,7 +179,7 @@ async fn resolve_transfer_source_path(ctx: &mut HandlerCtx<'_>) -> Result<Option
     )?;
 
     if let Some(parent_dir) = selected.parent() {
-        psp_db::settings::update_save_dir(&ctx.app.db, &parent_dir.to_string_lossy())
+        psp_db::settings::update_save_dir(&*ctx.app.driver, &parent_dir.to_string_lossy())
             .await
             .map_err(|error| error.to_string())?;
     }
