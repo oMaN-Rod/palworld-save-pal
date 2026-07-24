@@ -11,13 +11,28 @@ pub mod ws;
 
 pub use psp_app::{
     blueprint_registry, desktop_dialogs, dispatcher, emitter, envelope, handler_error, handlers,
-    messages, AppState, ServerConfig, SessionStore, SharedSession,
+    messages, AppState, SessionStore, SharedSession,
 };
 
-use std::net::SocketAddr;
+use std::net::{IpAddr, SocketAddr};
+use std::path::PathBuf;
 use std::sync::Arc;
 
 use psp_core::gamedata::GameData;
+
+#[derive(Debug, Clone)]
+pub struct ServerConfig {
+    /// Web default 0.0.0.0; desktop 127.0.0.1.
+    pub host: IpAddr,
+    /// 0 picks a free port (tests).
+    pub port: u16,
+    pub ui_dir: PathBuf,
+    /// Directory holding "json/" with the game data.
+    pub data_dir: PathBuf,
+    pub db_path: PathBuf,
+    /// Enables native file dialogs and the local folder/browser handlers.
+    pub desktop_mode: bool,
+}
 
 pub struct ServerHandle {
     pub addr: SocketAddr,
@@ -90,7 +105,9 @@ pub async fn start_server_with(
     }
     let (live_connections, live_connections_rx) = tokio::sync::watch::channel(0usize);
     let state = Arc::new(AppState {
-        config: config.clone(),
+        config: psp_app::AppConfig {
+            desktop_mode: config.desktop_mode,
+        },
         game_data,
         db,
         dialogs,
@@ -106,7 +123,7 @@ pub async fn start_server_with(
     tracing::info!(%addr, desktop_mode = config.desktop_mode, "psp-server listening");
 
     let (shutdown_sender, shutdown_receiver) = tokio::sync::oneshot::channel::<()>();
-    let application = router::build_router(Arc::clone(&state));
+    let application = router::build_router(Arc::clone(&state), &config.ui_dir);
     let serve_task = tokio::spawn(async move {
         axum::serve(listener, application)
             .with_graceful_shutdown(async {

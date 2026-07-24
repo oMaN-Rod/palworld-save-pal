@@ -1291,7 +1291,8 @@ pub(crate) mod test_env {
 
     use crate::services::docker::mock::MockDocker;
     use crate::services::ServerServices;
-    use crate::{AppState, ServerConfig};
+    use crate::AppState;
+    use psp_app::AppConfig;
 
     pub(crate) struct TestEnv {
         pub app: Arc<AppState>,
@@ -1314,17 +1315,9 @@ pub(crate) mod test_env {
             let game_data =
                 Arc::new(psp_core::gamedata::GameData::load(&data_dir).expect("repo data dir"));
             let docker = Arc::new(MockDocker::default());
-            let config = ServerConfig {
-                host: "127.0.0.1".parse().unwrap(),
-                port: 0,
-                ui_dir: scratch.path().join("ui"),
-                data_dir,
-                db_path: scratch.path().join("test.db"),
-                desktop_mode: false,
-            };
             let (live_connections, _live_connections_rx) = tokio::sync::watch::channel(0usize);
             let app = Arc::new(AppState {
-                config,
+                config: AppConfig { desktop_mode: false },
                 game_data,
                 db,
                 dialogs: Arc::new(crate::desktop_dialogs::NullDialogProvider),

@@ -8,8 +8,6 @@ pub mod handlers;
 pub mod messages;
 
 use std::collections::{HashMap, VecDeque};
-use std::net::IpAddr;
-use std::path::PathBuf;
 use std::sync::Arc;
 
 use psp_core::gamedata::GameData;
@@ -64,21 +62,13 @@ impl SessionStore {
 }
 
 #[derive(Debug, Clone)]
-pub struct ServerConfig {
-    /// Web default 0.0.0.0; desktop 127.0.0.1.
-    pub host: IpAddr,
-    /// 0 picks a free port (tests).
-    pub port: u16,
-    pub ui_dir: PathBuf,
-    /// Directory holding "json/" with the game data.
-    pub data_dir: PathBuf,
-    pub db_path: PathBuf,
+pub struct AppConfig {
     /// Enables native file dialogs and the local folder/browser handlers.
     pub desktop_mode: bool,
 }
 
 pub struct AppState {
-    pub config: ServerConfig,
+    pub config: AppConfig,
     pub game_data: Arc<GameData>,
     pub db: sqlx::SqlitePool,
     pub dialogs: Arc<dyn crate::desktop_dialogs::FileDialogProvider>,
@@ -142,7 +132,7 @@ pub mod test_support {
     use psp_core::session::Session;
 
     use crate::emitter::Emitter;
-    use crate::{AppState, ServerConfig};
+    use crate::{AppConfig, AppState};
 
     /// Everything a handler unit test needs: an AppState over a temp DB and a
     /// synthetic game-data dir, plus an Emitter whose frames land in `frames`.
@@ -165,19 +155,12 @@ pub mod test_support {
             std::fs::create_dir_all(&json_dir).unwrap();
             populate_data_dir(&json_dir);
 
-            let config = ServerConfig {
-                host: "127.0.0.1".parse().unwrap(),
-                port: 0,
-                ui_dir: temp_dir.path().join("ui"),
-                data_dir: temp_dir.path().join("data"),
-                db_path: temp_dir.path().join("test.db"),
-                desktop_mode: false,
-            };
-            let db = psp_db::open(&config.db_path).await.unwrap();
+            let db_path = temp_dir.path().join("test.db");
+            let db = psp_db::open(&db_path).await.unwrap();
             let game_data = Arc::new(GameData::load(&json_dir).unwrap());
             let (live_connections, _live_connections_rx) = tokio::sync::watch::channel(0usize);
             let app = Arc::new(AppState {
-                config,
+                config: AppConfig { desktop_mode: false },
                 game_data,
                 db,
                 dialogs: Arc::new(crate::desktop_dialogs::NullDialogProvider),

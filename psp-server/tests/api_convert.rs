@@ -6,8 +6,9 @@ use axum::http::{Request, StatusCode};
 use http_body_util::BodyExt;
 use tower::ServiceExt;
 
+use psp_app::AppConfig;
 use psp_server::router::build_router;
-use psp_server::{AppState, ServerConfig};
+use psp_server::AppState;
 
 /// A plain-GVAS (non-Palworld) save, vendored so this test needs no external
 /// checkout.
@@ -18,32 +19,30 @@ fn sample_save_bytes() -> Vec<u8> {
 }
 
 async fn test_router(temp_dir: &tempfile::TempDir) -> axum::Router {
-    let config = ServerConfig {
-        host: "127.0.0.1".parse().unwrap(),
-        port: 0,
-        ui_dir: temp_dir.path().join("ui"),
-        data_dir: PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data"),
-        db_path: temp_dir.path().join("test.db"),
-        desktop_mode: false,
-    };
-    let db = psp_db::open(&config.db_path).await.unwrap();
+    let ui_dir = temp_dir.path().join("ui");
+    let data_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data");
+    let db_path = temp_dir.path().join("test.db");
+    let db = psp_db::open(&db_path).await.unwrap();
     let game_data =
-        Arc::new(psp_core::gamedata::GameData::load(&config.data_dir.join("json")).unwrap());
+        Arc::new(psp_core::gamedata::GameData::load(&data_dir.join("json")).unwrap());
     let (live_connections, _live_connections_rx) = tokio::sync::watch::channel(0usize);
     let server_services = Arc::new(psp_server::services::ServerServices::with_docker(Arc::new(
         psp_server::services::docker::mock::MockDocker::default(),
     )));
-    build_router(Arc::new(AppState {
-        config,
-        game_data,
-        db,
-        dialogs: Arc::new(psp_server::desktop_dialogs::NullDialogProvider),
-        live_connections,
-        ext: Arc::new(psp_server::server_ext::ServerExtRouter {
-            services: server_services,
+    build_router(
+        Arc::new(AppState {
+            config: AppConfig { desktop_mode: false },
+            game_data,
+            db,
+            dialogs: Arc::new(psp_server::desktop_dialogs::NullDialogProvider),
+            live_connections,
+            ext: Arc::new(psp_server::server_ext::ServerExtRouter {
+                services: server_services,
+            }),
+            sessions: std::sync::Mutex::new(psp_server::SessionStore::default()),
         }),
-        sessions: std::sync::Mutex::new(psp_server::SessionStore::default()),
-    }))
+        &ui_dir,
+    )
 }
 
 fn multipart_file_request(uri: &str, file_bytes: &[u8]) -> Request<Body> {
