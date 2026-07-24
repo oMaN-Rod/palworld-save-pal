@@ -3,12 +3,16 @@ name = "psp-db"
 version.workspace = true
 edition.workspace = true
 
+[features]
+default = ["sqlx-driver"]
+sqlx-driver = ["dep:sqlx"]
+
 [dependencies]
 async-trait = { workspace = true }
 chrono = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
-sqlx = { workspace = true }
+sqlx = { workspace = true, optional = true }
 thiserror = { workspace = true }
 tracing = { workspace = true }
 uuid = { workspace = true }

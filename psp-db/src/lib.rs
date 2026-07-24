@@ -1,26 +1,35 @@
 pub mod blueprints;
 pub mod driver;
 pub mod error;
-pub mod import_legacy;
 pub mod meta;
 pub mod presets;
 pub mod servers;
 pub mod settings;
-pub mod sqlx_driver;
 pub mod time;
 pub mod ups;
 
 pub use driver::{DbDriver, DbRow, DbValue, SqlBuilder};
+
+#[cfg(feature = "sqlx-driver")]
+pub mod sqlx_driver;
+#[cfg(feature = "sqlx-driver")]
 pub use sqlx_driver::SqlxSqliteDriver;
 
+#[cfg(feature = "sqlx-driver")]
+pub mod import_legacy;
+
+#[cfg(feature = "sqlx-driver")]
 use std::path::Path;
 
+#[cfg(feature = "sqlx-driver")]
 use sqlx::sqlite::{SqliteConnectOptions, SqlitePool, SqlitePoolOptions};
 
+#[cfg(feature = "sqlx-driver")]
 use crate::error::DbError;
 
 /// Opens (creating if missing) the SQLite database at `db_path` and runs the
 /// embedded migrations.
+#[cfg(feature = "sqlx-driver")]
 pub async fn open(db_path: &Path) -> Result<SqlitePool, DbError> {
     let options = SqliteConnectOptions::new()
         .filename(db_path)

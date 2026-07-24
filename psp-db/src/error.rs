@@ -1,7 +1,9 @@
 #[derive(Debug, thiserror::Error)]
 pub enum DbError {
+    #[cfg(feature = "sqlx-driver")]
     #[error(transparent)]
     Sqlx(#[from] sqlx::Error),
+    #[cfg(feature = "sqlx-driver")]
     #[error(transparent)]
     Migrate(#[from] sqlx::migrate::MigrateError),
     #[error(transparent)]
