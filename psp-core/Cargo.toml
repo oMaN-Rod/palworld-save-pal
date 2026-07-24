@@ -20,4 +20,8 @@ tempfile = { workspace = true }
 psp-core = { path = ".", features = ["test-fixtures"] }
 
 [features]
+default = ["oodle"]
+# Pulls uesave's C++ ooz-rs Oodle codec. OFF for wasm32: ooz-rs compiles 11 C++
+# files against libstdc++, which wasm32-unknown-unknown has no toolchain for.
+oodle = ["uesave/oodle"]
 test-fixtures = []
