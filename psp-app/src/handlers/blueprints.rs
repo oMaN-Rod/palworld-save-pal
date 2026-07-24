@@ -108,14 +108,14 @@ pub async fn handle_store_blueprint(
             preview: None,
         }
     };
-    let id = psp_db::blueprints::insert(&ctx.app.db, row).await?;
+    let id = psp_db::blueprints::insert(&*ctx.app.driver, row).await?;
     ctx.emitter
         .emit(MessageType::StoreBlueprint, &serde_json::json!({ "id": id }));
     Ok(())
 }
 
 pub async fn handle_list_blueprints(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
-    let blueprints = psp_db::blueprints::list(&ctx.app.db).await?;
+    let blueprints = psp_db::blueprints::list(&*ctx.app.driver).await?;
     ctx.emitter.emit(
         MessageType::ListBlueprints,
         &serde_json::json!({ "blueprints": blueprints }),
@@ -141,7 +141,7 @@ pub async fn handle_load_blueprint(
     use psp_core::domain::blueprint::gvas;
 
     let blueprint = if let Some(id) = &data.id {
-        let stored = psp_db::blueprints::get(&ctx.app.db, id)
+        let stored = psp_db::blueprints::get(&*ctx.app.driver, id)
             .await?
             .ok_or_else(|| HandlerError::Other(format!("Blueprint {id} not found")))?;
         gvas::from_psp_bytes(&stored.payload)?
@@ -374,7 +374,7 @@ pub async fn handle_delete_blueprint(
     data: DeleteBlueprintData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    psp_db::blueprints::delete(&ctx.app.db, &data.id).await?;
+    psp_db::blueprints::delete(&*ctx.app.driver, &data.id).await?;
     ctx.emitter
         .emit(MessageType::DeleteBlueprint, &serde_json::json!({ "id": data.id }));
     Ok(())
