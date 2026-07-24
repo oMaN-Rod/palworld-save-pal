@@ -52,11 +52,11 @@ pub async fn start_server(config: ServerConfig) -> anyhow::Result<ServerHandle> 
     let dialogs: Arc<dyn crate::desktop_dialogs::FileDialogProvider> = if config.desktop_mode {
         Arc::new(crate::rfd_dialogs::RfdDialogProvider)
     } else {
-        Arc::new(psp_app::desktop_dialogs::NullDialogProvider)
+        Arc::new(crate::desktop_dialogs::NullDialogProvider)
     };
     #[cfg(not(feature = "desktop"))]
     let dialogs: Arc<dyn crate::desktop_dialogs::FileDialogProvider> =
-        Arc::new(psp_app::desktop_dialogs::NullDialogProvider);
+        Arc::new(crate::desktop_dialogs::NullDialogProvider);
     start_server_with(config, dialogs).await
 }
 
