@@ -7,5 +7,9 @@ pub enum DbError {
     #[error(transparent)]
     Io(#[from] std::io::Error),
     #[error("{0}")]
+    Backend(String),
+    #[error("{0}")]
+    Decode(String),
+    #[error("{0}")]
     Other(String),
 }
