@@ -1317,7 +1317,9 @@ pub(crate) mod test_env {
             let docker = Arc::new(MockDocker::default());
             let (live_connections, _live_connections_rx) = tokio::sync::watch::channel(0usize);
             let app = Arc::new(AppState {
-                config: AppConfig { desktop_mode: false },
+                config: AppConfig {
+                    desktop_mode: false,
+                },
                 game_data,
                 db,
                 dialogs: Arc::new(crate::desktop_dialogs::NullDialogProvider),

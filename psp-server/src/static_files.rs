@@ -1,7 +1,8 @@
 //! SPA fallback middleware for the built UI: serves a matching file or
 //! directory index, otherwise redirects unmatched paths to the SPA root
 //! with the original path preserved as a query parameter.
-use std::path::{Component, PathBuf};
+use std::path::{Component, Path};
+use std::sync::Arc;
 
 use axum::extract::{Request, State};
 use axum::http::{StatusCode, Uri};
@@ -19,7 +20,7 @@ const QUOTE_SET: &AsciiSet = &NON_ALPHANUMERIC
     .remove(b'~');
 
 pub async fn spa_fallback_redirect(
-    State(ui_dir): State<PathBuf>,
+    State(ui_dir): State<Arc<Path>>,
     mut request: Request,
     next: Next,
 ) -> Response {

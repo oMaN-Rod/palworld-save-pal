@@ -11,7 +11,7 @@ pub mod ws;
 
 pub use psp_app::{
     blueprint_registry, desktop_dialogs, dispatcher, emitter, envelope, handler_error, handlers,
-    messages, AppState, SessionStore, SharedSession,
+    messages, AppConfig, AppState, SessionStore, SharedSession,
 };
 
 use std::net::{IpAddr, SocketAddr};
@@ -105,7 +105,7 @@ pub async fn start_server_with(
     }
     let (live_connections, live_connections_rx) = tokio::sync::watch::channel(0usize);
     let state = Arc::new(AppState {
-        config: psp_app::AppConfig {
+        config: AppConfig {
             desktop_mode: config.desktop_mode,
         },
         game_data,
