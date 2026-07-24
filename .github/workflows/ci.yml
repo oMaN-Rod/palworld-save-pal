@@ -40,5 +40,11 @@ jobs:
       - name: psp-db core compiles without sqlx
         run: cargo check -p psp-db --no-default-features
 
+      - name: Add wasm32 target
+        run: rustup target add wasm32-unknown-unknown
+
+      - name: Core crates compile for wasm32
+        run: cargo check --target wasm32-unknown-unknown --no-default-features -p psp-core -p psp-db -p psp-app
+
       - name: Test workspace
         run: cargo test --workspace
