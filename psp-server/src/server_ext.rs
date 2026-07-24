@@ -7,9 +7,10 @@ use serde_json::Value;
 
 use crate::dispatcher::{ExtRouter, HandlerCtx};
 use crate::handler_error::HandlerError;
-use crate::handlers;
 use crate::messages::MessageType;
+use crate::servers_handlers as servers;
 use crate::services::ServerServices;
+use crate::system_native;
 
 pub struct ServerExtRouter {
     pub services: Arc<ServerServices>,
@@ -28,84 +29,84 @@ impl ExtRouter for ServerExtRouter {
         // payload parse spells out its own error conversion.
         Some(match message_type {
             MessageType::OpenFolder => match serde_json::from_value(data) {
-                Ok(payload) => handlers::system::handle_open_folder(payload, ctx).await,
+                Ok(payload) => system_native::handle_open_folder(payload, ctx).await,
                 Err(error) => Err(error.into()),
             },
             MessageType::OpenInBrowser => match serde_json::from_value(data) {
-                Ok(payload) => handlers::system::handle_open_in_browser(payload, ctx).await,
+                Ok(payload) => system_native::handle_open_in_browser(payload, ctx).await,
                 Err(error) => Err(error.into()),
             },
             MessageType::OpenUrl => match serde_json::from_value(data) {
-                Ok(payload) => handlers::system::handle_open_url(payload, ctx).await,
+                Ok(payload) => system_native::handle_open_url(payload, ctx).await,
                 Err(error) => Err(error.into()),
             },
             MessageType::ListServers => {
-                handlers::servers::handle_list_servers(services, data, ctx).await
+                servers::handle_list_servers(services, data, ctx).await
             }
             MessageType::GetServer => match serde_json::from_value(data) {
-                Ok(payload) => handlers::servers::handle_get_server(services, payload, ctx).await,
+                Ok(payload) => servers::handle_get_server(services, payload, ctx).await,
                 Err(error) => Err(error.into()),
             },
             MessageType::DetectWorkshopDir => {
-                handlers::servers::handle_detect_workshop_dir(data, ctx).await
+                servers::handle_detect_workshop_dir(data, ctx).await
             }
             MessageType::GetServerStats => match serde_json::from_value(data) {
                 Ok(payload) => {
-                    handlers::servers::handle_get_server_stats(services, payload, ctx).await
+                    servers::handle_get_server_stats(services, payload, ctx).await
                 }
                 Err(error) => Err(error.into()),
             },
             MessageType::CreateServer => match serde_json::from_value(data) {
                 Ok(payload) => {
-                    handlers::servers::handle_create_server(services, payload, ctx).await
+                    servers::handle_create_server(services, payload, ctx).await
                 }
                 Err(error) => Err(error.into()),
             },
             MessageType::ImportServer => match serde_json::from_value(data) {
-                Ok(payload) => handlers::servers::handle_import_server(payload, ctx).await,
+                Ok(payload) => servers::handle_import_server(payload, ctx).await,
                 Err(error) => Err(error.into()),
             },
             MessageType::UpdateServer => match serde_json::from_value(data) {
                 Ok(payload) => {
-                    handlers::servers::handle_update_server(services, payload, ctx).await
+                    servers::handle_update_server(services, payload, ctx).await
                 }
                 Err(error) => Err(error.into()),
             },
             MessageType::DeleteServer => match serde_json::from_value(data) {
                 Ok(payload) => {
-                    handlers::servers::handle_delete_server(services, payload, ctx).await
+                    servers::handle_delete_server(services, payload, ctx).await
                 }
                 Err(error) => Err(error.into()),
             },
             MessageType::StartServer => match serde_json::from_value(data) {
-                Ok(payload) => handlers::servers::handle_start_server(services, payload, ctx).await,
+                Ok(payload) => servers::handle_start_server(services, payload, ctx).await,
                 Err(error) => Err(error.into()),
             },
             MessageType::StopServer => match serde_json::from_value(data) {
-                Ok(payload) => handlers::servers::handle_stop_server(services, payload, ctx).await,
+                Ok(payload) => servers::handle_stop_server(services, payload, ctx).await,
                 Err(error) => Err(error.into()),
             },
             MessageType::ServerApiCall => match serde_json::from_value(data) {
                 Ok(payload) => {
-                    handlers::servers::handle_server_api_call(services, payload, ctx).await
+                    servers::handle_server_api_call(services, payload, ctx).await
                 }
                 Err(error) => Err(error.into()),
             },
             MessageType::ListServerMods => match serde_json::from_value(data) {
-                Ok(payload) => handlers::servers::handle_list_server_mods(payload, ctx).await,
+                Ok(payload) => servers::handle_list_server_mods(payload, ctx).await,
                 Err(error) => Err(error.into()),
             },
             MessageType::ToggleServerMod => match serde_json::from_value(data) {
-                Ok(payload) => handlers::servers::handle_toggle_server_mod(payload, ctx).await,
+                Ok(payload) => servers::handle_toggle_server_mod(payload, ctx).await,
                 Err(error) => Err(error.into()),
             },
             MessageType::InstallServerMod => match serde_json::from_value(data) {
-                Ok(payload) => handlers::servers::handle_install_server_mod(payload, ctx).await,
+                Ok(payload) => servers::handle_install_server_mod(payload, ctx).await,
                 Err(error) => Err(error.into()),
             },
             MessageType::LoadServerSave => match serde_json::from_value(data) {
                 Ok(payload) => {
-                    handlers::servers::handle_load_server_save(services, payload, ctx).await
+                    servers::handle_load_server_save(services, payload, ctx).await
                 }
                 Err(error) => Err(error.into()),
             },
@@ -117,7 +118,7 @@ impl ExtRouter for ServerExtRouter {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::handlers::servers::test_env::TestEnv;
+    use crate::servers_handlers::test_env::TestEnv;
 
     /// The 18 wire names `ServerExtRouter` is meant to own.
     const OWNED_WIRE_TYPES: &[&str] = &[

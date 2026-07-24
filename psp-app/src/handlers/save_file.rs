@@ -87,7 +87,7 @@ pub(crate) fn emit_reattach_overview(session: &SaveSession, session_id: Uuid, em
 
 /// `get_player_summaries` then `get_guild_summaries`, in that order, every time
 /// a load completes — the frontend relies on both arriving, and on the order.
-pub(crate) fn emit_summary_messages(session: &SaveSession, emitter: &Emitter) {
+pub fn emit_summary_messages(session: &SaveSession, emitter: &Emitter) {
     emitter.emit(MessageType::GetPlayerSummaries, &session.player_summaries);
     emitter.emit(MessageType::GetGuildSummaries, &session.guild_summaries);
 }
@@ -103,21 +103,21 @@ fn parse_player_file_stem(stem: &str) -> Option<(Uuid, bool)> {
         .map(|uid| (uid, is_dps))
 }
 
-/// `pub(crate)` so `handlers::tools`'s `load_source_save` reuses this exact
-/// layout and validation rather than re-implementing it with its own,
-/// necessarily divergent, error strings.
+/// Public so `handlers::tools`'s `load_source_save` and psp-server's
+/// server-save loader reuse this exact layout and validation rather than
+/// re-implementing it with their own, necessarily divergent, error strings.
 #[derive(Debug)]
-pub(crate) struct SteamSaveLayout {
-    pub(crate) level_sav: PathBuf,
-    pub(crate) level_meta: Option<PathBuf>,
-    pub(crate) world_option: Option<PathBuf>,
-    pub(crate) players_dir: PathBuf,
-    pub(crate) global_pal_storage_sav: Option<PathBuf>,
+pub struct SteamSaveLayout {
+    pub level_sav: PathBuf,
+    pub level_meta: Option<PathBuf>,
+    pub world_option: Option<PathBuf>,
+    pub players_dir: PathBuf,
+    pub global_pal_storage_sav: Option<PathBuf>,
 }
 
 /// Error strings AND check order are wire-visible: the frontend shows the first
 /// failure it gets back, so a reordering changes what the user is told.
-pub(crate) fn validate_steam_save_directory(
+pub fn validate_steam_save_directory(
     save_path: &str,
 ) -> Result<SteamSaveLayout, HandlerError> {
     let save_dir = Path::new(save_path)
@@ -181,7 +181,7 @@ pub(crate) fn validate_steam_save_directory(
 /// the type `SaveSession::player_file_refs` requires) and the order in which
 /// players were first encountered — `handle_select_save` builds the wire
 /// `players` array from the discovery order, NOT from the sorted map.
-pub(crate) fn discover_player_file_refs(
+pub fn discover_player_file_refs(
     players_dir: &Path,
 ) -> Result<(BTreeMap<Uuid, PlayerFileData>, Vec<Uuid>), HandlerError> {
     let dir_entries = std::fs::read_dir(players_dir).map_err(CoreError::Io)?;

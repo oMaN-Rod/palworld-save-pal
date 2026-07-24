@@ -7,7 +7,6 @@ pub mod pals;
 pub mod players;
 pub mod presets;
 pub mod save_file;
-pub mod servers;
 pub mod session;
 pub mod settings;
 pub mod system;

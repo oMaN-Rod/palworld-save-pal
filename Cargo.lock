@@ -3484,13 +3484,24 @@ dependencies = [
 name = "psp-app"
 version = "1.2.0"
 dependencies = [
+ "anyhow",
+ "async-trait",
+ "base64 0.22.1",
+ "chrono",
+ "futures",
+ "percent-encoding",
  "psp-core",
  "psp-db",
  "serde",
  "serde_json",
+ "sqlx",
+ "tempfile",
  "thiserror 2.0.18",
  "tokio",
  "tracing",
+ "uesave",
+ "uuid",
+ "zip",
 ]
 
 [[package]]
