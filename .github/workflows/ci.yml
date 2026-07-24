@@ -32,7 +32,7 @@ jobs:
             echo "::error::cargo tree failed to run for psp-app; dependency guard could not verify anything"
             exit 1
           fi
-          if echo "$tree_output" | grep -E "axum|rfd|opener|bollard|sysinfo|reqwest|tower-http|clap"; then
+          if echo "$tree_output" | grep -E "axum|rfd|opener|bollard|sysinfo|reqwest|tower-http|clap|sqlx"; then
             echo "::error::forbidden native dependency in psp-app tree"
             exit 1
           fi
