@@ -40,26 +40,18 @@ impl ExtRouter for ServerExtRouter {
                 Ok(payload) => system_native::handle_open_url(payload, ctx).await,
                 Err(error) => Err(error.into()),
             },
-            MessageType::ListServers => {
-                servers::handle_list_servers(services, data, ctx).await
-            }
+            MessageType::ListServers => servers::handle_list_servers(services, data, ctx).await,
             MessageType::GetServer => match serde_json::from_value(data) {
                 Ok(payload) => servers::handle_get_server(services, payload, ctx).await,
                 Err(error) => Err(error.into()),
             },
-            MessageType::DetectWorkshopDir => {
-                servers::handle_detect_workshop_dir(data, ctx).await
-            }
+            MessageType::DetectWorkshopDir => servers::handle_detect_workshop_dir(data, ctx).await,
             MessageType::GetServerStats => match serde_json::from_value(data) {
-                Ok(payload) => {
-                    servers::handle_get_server_stats(services, payload, ctx).await
-                }
+                Ok(payload) => servers::handle_get_server_stats(services, payload, ctx).await,
                 Err(error) => Err(error.into()),
             },
             MessageType::CreateServer => match serde_json::from_value(data) {
-                Ok(payload) => {
-                    servers::handle_create_server(services, payload, ctx).await
-                }
+                Ok(payload) => servers::handle_create_server(services, payload, ctx).await,
                 Err(error) => Err(error.into()),
             },
             MessageType::ImportServer => match serde_json::from_value(data) {
@@ -67,15 +59,11 @@ impl ExtRouter for ServerExtRouter {
                 Err(error) => Err(error.into()),
             },
             MessageType::UpdateServer => match serde_json::from_value(data) {
-                Ok(payload) => {
-                    servers::handle_update_server(services, payload, ctx).await
-                }
+                Ok(payload) => servers::handle_update_server(services, payload, ctx).await,
                 Err(error) => Err(error.into()),
             },
             MessageType::DeleteServer => match serde_json::from_value(data) {
-                Ok(payload) => {
-                    servers::handle_delete_server(services, payload, ctx).await
-                }
+                Ok(payload) => servers::handle_delete_server(services, payload, ctx).await,
                 Err(error) => Err(error.into()),
             },
             MessageType::StartServer => match serde_json::from_value(data) {
@@ -87,9 +75,7 @@ impl ExtRouter for ServerExtRouter {
                 Err(error) => Err(error.into()),
             },
             MessageType::ServerApiCall => match serde_json::from_value(data) {
-                Ok(payload) => {
-                    servers::handle_server_api_call(services, payload, ctx).await
-                }
+                Ok(payload) => servers::handle_server_api_call(services, payload, ctx).await,
                 Err(error) => Err(error.into()),
             },
             MessageType::ListServerMods => match serde_json::from_value(data) {
@@ -105,9 +91,7 @@ impl ExtRouter for ServerExtRouter {
                 Err(error) => Err(error.into()),
             },
             MessageType::LoadServerSave => match serde_json::from_value(data) {
-                Ok(payload) => {
-                    servers::handle_load_server_save(services, payload, ctx).await
-                }
+                Ok(payload) => servers::handle_load_server_save(services, payload, ctx).await,
                 Err(error) => Err(error.into()),
             },
             _ => return None,
@@ -144,8 +128,11 @@ mod tests {
 
     /// Asserts ownership, not behavior: every wire name above must come back
     /// `Some(_)` from `route` (Null payloads mostly fail to deserialize, which
-    /// is fine — the point is that this router claims the type at all), and at
-    /// least one type it does not own must come back `None`.
+    /// is fine — the point is that this router claims the type at all), and
+    /// every OTHER `MessageType` variant must come back `None`. Iterating
+    /// `MessageType::ALL` (rather than spot-checking one type) means a new
+    /// arm added to `route` without a matching entry in `OWNED_WIRE_TYPES`
+    /// fails this test.
     #[tokio::test]
     async fn owns_exactly_the_documented_native_types() {
         let mut env = TestEnv::new().await;
@@ -153,21 +140,18 @@ mod tests {
             services: env.services.clone(),
         };
 
-        for wire in OWNED_WIRE_TYPES {
-            let message_type = MessageType::from_wire(wire)
-                .unwrap_or_else(|| panic!("{wire} is not a known MessageType"));
+        for message_type in MessageType::ALL {
+            let wire = message_type.as_wire();
             let mut ctx = env.ctx();
-            let result = router.route(message_type, Value::Null, &mut ctx).await;
-            assert!(result.is_some(), "{wire} must be owned by ServerExtRouter");
+            let result = router.route(*message_type, Value::Null, &mut ctx).await;
+            if OWNED_WIRE_TYPES.contains(&wire) {
+                assert!(result.is_some(), "{wire} must be owned by ServerExtRouter");
+            } else {
+                assert!(
+                    result.is_none(),
+                    "{wire} must NOT be claimed by ServerExtRouter"
+                );
+            }
         }
-
-        let mut ctx = env.ctx();
-        let result = router
-            .route(MessageType::GetSettings, Value::Null, &mut ctx)
-            .await;
-        assert!(
-            result.is_none(),
-            "get_settings must NOT be owned by ServerExtRouter"
-        );
     }
 }

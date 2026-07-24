@@ -1,7 +1,7 @@
 use std::panic::AssertUnwindSafe;
 use std::sync::Arc;
 
-use futures::FutureExt;
+use futures_util::FutureExt;
 use serde_json::Value;
 
 use psp_core::session::Session;
@@ -433,7 +433,7 @@ async fn route(
             }
             tracing::warn!(
                 message_type = other.as_wire(),
-                "handler not implemented yet (Phase 0)"
+                "no dispatcher handler and no ExtRouter claimed this message type"
             );
             Ok(())
         }

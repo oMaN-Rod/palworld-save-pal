@@ -2,7 +2,7 @@
 
 use std::path::PathBuf;
 
-use psp_app::desktop_dialogs::{
+use crate::desktop_dialogs::{
     DialogFilesFuture, DialogFuture, FileDialogProvider, FileDialogRequest, FileSaveRequest,
 };
 

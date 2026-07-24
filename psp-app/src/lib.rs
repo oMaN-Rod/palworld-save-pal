@@ -82,11 +82,10 @@ pub struct AppState {
     pub game_data: Arc<GameData>,
     pub db: sqlx::SqlitePool,
     pub dialogs: Arc<dyn crate::desktop_dialogs::FileDialogProvider>,
-    /// Count of currently-open `/ws/{client_id}` connections, maintained by a
-    /// `Drop` guard in `ws::connection_loop` so it also decrements on panic or
-    /// early return. Makes reader-loop/writer-task teardown observable in tests:
-    /// axum runs the upgraded socket on its own spawned task, decoupled from the
-    /// HTTP connection future that `ServerHandle::shutdown` waits on.
+    /// Count of currently-open `/ws/{client_id}` connections. The transport
+    /// (psp-server's `ws` module) maintains it with a `Drop` guard around each
+    /// connection so it also decrements on panic or early return, making
+    /// reader-loop/writer-task teardown observable in tests.
     pub live_connections: tokio::sync::watch::Sender<usize>,
     /// Transport-owned router for native-only message types (server
     /// management, shell-open). NullExtRouter on targets without them.

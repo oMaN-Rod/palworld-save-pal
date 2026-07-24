@@ -3487,7 +3487,7 @@ dependencies = [
  "async-trait",
  "base64 0.22.1",
  "chrono",
- "futures",
+ "futures-util",
  "psp-core",
  "psp-db",
  "serde",
