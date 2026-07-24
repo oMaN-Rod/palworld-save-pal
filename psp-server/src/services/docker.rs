@@ -35,7 +35,6 @@ fn upsert_env(env: &mut Vec<(String, String)>, key: &str, value: String) {
 pub fn build_environment(record: &ServerRecord) -> Vec<String> {
     let mut env: Vec<(String, String)> = record
         .env_vars
-        .0
         .iter()
         .map(|(key, value)| (key.clone(), python_str(value)))
         .collect();
@@ -656,7 +655,7 @@ pub(crate) mod test_support {
             server_password: "pw".to_string(),
             admin_password: "admin".to_string(),
             max_players: 16,
-            env_vars: sqlx::types::Json(env_vars),
+            env_vars,
             created_at: timestamp.clone(),
             updated_at: timestamp,
         }
@@ -700,7 +699,6 @@ mod tests {
         let mut record = test_support::docker_record();
         record
             .env_vars
-            .0
             .insert("PORT".to_string(), serde_json::json!("9999"));
         let env = build_environment(&record);
         let port_entries: Vec<_> = env.iter().filter(|e| e.starts_with("PORT=")).collect();

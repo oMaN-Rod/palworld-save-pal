@@ -58,7 +58,7 @@ pub fn server_to_wire_json(record: &ServerRecord) -> Value {
         "admin_password": record.admin_password,
         "max_players": record.max_players,
         "workshop_dir": record.workshop_dir,
-        "env_vars": Value::Object(record.env_vars.0.clone()),
+        "env_vars": Value::Object(record.env_vars.clone()),
         "created_at": record.created_at,
         "updated_at": record.updated_at,
     })
@@ -141,7 +141,7 @@ pub async fn handle_list_servers(
     _data: Value,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    match psp_db::servers::list_servers(&ctx.app.db).await {
+    match psp_db::servers::list_servers(&*ctx.app.driver).await {
         Ok(records) => {
             let mut server_list = Vec::with_capacity(records.len());
             for record in &records {
@@ -164,7 +164,7 @@ pub async fn handle_get_server(
     data: ServerIdData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    match psp_db::servers::get_server(&ctx.app.db, data.server_id).await {
+    match psp_db::servers::get_server(&*ctx.app.driver, data.server_id).await {
         Ok(Some(record)) => {
             let entry = server_entry_with_runtime_fields(services, &record).await;
             ctx.emitter.emit(MessageType::GetServer, &entry);
@@ -194,7 +194,7 @@ pub async fn handle_get_server_stats(
     data: ServerIdData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    match psp_db::servers::get_server(&ctx.app.db, data.server_id).await {
+    match psp_db::servers::get_server(&*ctx.app.driver, data.server_id).await {
         Ok(Some(record)) => {
             let stats = if record.server_type == "native" {
                 native_process::process_stats(record.pid)
@@ -289,7 +289,7 @@ fn emit_creation_progress(emitter: &Emitter, message: &str) {
 }
 
 async fn persist_steamcmd_path(
-    db: &sqlx::SqlitePool,
+    db: &dyn psp_db::DbDriver,
     server_id: i64,
     steamcmd_path: &str,
 ) -> Result<(), String> {
@@ -313,7 +313,7 @@ async fn create_server_impl(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), String> {
     let emitter = ctx.emitter;
-    let db = &ctx.app.db;
+    let db = &*ctx.app.driver;
     let is_native = data.server_type == "native";
 
     let allocated = psp_db::servers::allocated_ports(db)
@@ -595,7 +595,7 @@ fn import_slug(name: &str) -> String {
 
 async fn import_server_impl(data: ImportServerData, ctx: &mut HandlerCtx<'_>) -> Result<(), String> {
     let emitter = ctx.emitter;
-    let db = &ctx.app.db;
+    let db = &*ctx.app.driver;
 
     // 1. Resolve the install folder (native dialog in desktop mode).
     let install_path = if data.install_path == "__select__" {
@@ -714,7 +714,7 @@ async fn update_server_impl(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), String> {
     let emitter = ctx.emitter;
-    let db = &ctx.app.db;
+    let db = &*ctx.app.driver;
     let Some(old_record) = psp_db::servers::get_server(db, data.server_id)
         .await
         .map_err(|error| error.to_string())?
@@ -803,7 +803,7 @@ pub async fn handle_delete_server(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     let emitter = ctx.emitter;
-    let db = &ctx.app.db;
+    let db = &*ctx.app.driver;
     let result: Result<(), String> = async {
         let Some(record) = psp_db::servers::get_server(db, data.server_id)
             .await
@@ -846,7 +846,7 @@ pub async fn handle_start_server(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     let emitter = ctx.emitter;
-    let db = &ctx.app.db;
+    let db = &*ctx.app.driver;
     let result: Result<(), String> = async {
         let Some(record) = psp_db::servers::get_server(db, data.server_id)
             .await
@@ -891,7 +891,7 @@ pub async fn handle_stop_server(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     let emitter = ctx.emitter;
-    let db = &ctx.app.db;
+    let db = &*ctx.app.driver;
     let result: Result<(), String> = async {
         let Some(record) = psp_db::servers::get_server(db, data.server_id)
             .await
@@ -976,7 +976,7 @@ pub async fn handle_server_api_call(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     let emitter = ctx.emitter;
-    let record = match psp_db::servers::get_server(&ctx.app.db, data.server_id).await {
+    let record = match psp_db::servers::get_server(&*ctx.app.driver, data.server_id).await {
         Ok(Some(record)) => record,
         Ok(None) => {
             emit_business_error(emitter, "Server not found".to_string());
@@ -1019,7 +1019,7 @@ pub async fn handle_list_server_mods(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     let emitter = ctx.emitter;
-    let record = match psp_db::servers::get_server(&ctx.app.db, data.server_id).await {
+    let record = match psp_db::servers::get_server(&*ctx.app.driver, data.server_id).await {
         Ok(Some(record)) => record,
         Ok(None) => {
             emit_business_error(emitter, "Server not found".to_string());
@@ -1061,7 +1061,7 @@ pub async fn handle_toggle_server_mod(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     let emitter = ctx.emitter;
-    let record = match psp_db::servers::get_server(&ctx.app.db, data.server_id).await {
+    let record = match psp_db::servers::get_server(&*ctx.app.driver, data.server_id).await {
         Ok(Some(record)) => record,
         Ok(None) => {
             emit_business_error(emitter, "Server not found".to_string());
@@ -1099,7 +1099,7 @@ pub async fn handle_install_server_mod(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     let emitter = ctx.emitter;
-    let record = match psp_db::servers::get_server(&ctx.app.db, data.server_id).await {
+    let record = match psp_db::servers::get_server(&*ctx.app.driver, data.server_id).await {
         Ok(Some(record)) => record,
         Ok(None) => {
             emit_business_error(emitter, "Server not found".to_string());
@@ -1151,7 +1151,7 @@ async fn load_server_save_impl(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), String> {
     let emitter = ctx.emitter;
-    let db = &ctx.app.db;
+    let db = &*ctx.app.driver;
     let Some(record) = psp_db::servers::get_server(db, data.server_id)
         .await
         .map_err(|error| error.to_string())?
@@ -1436,7 +1436,7 @@ mod tests {
     #[tokio::test]
     async fn list_servers_includes_status_and_counts() {
         let mut env = TestEnv::new().await;
-        let record = psp_db::servers::create_server(&env.app.db, docker_new_server("alpha"))
+        let record = psp_db::servers::create_server(&*env.app.driver, docker_new_server("alpha"))
             .await
             .unwrap();
         // Mock: container exists but is exited → running=false → player_count 0
@@ -1496,7 +1496,7 @@ mod tests {
         std::fs::write(players_dir.join("b_dps.sav"), b"x").unwrap();
         let mut new_server = docker_new_server("beta");
         new_server.saves_path = saves_root.to_string_lossy().to_string();
-        let record = psp_db::servers::create_server(&env.app.db, new_server)
+        let record = psp_db::servers::create_server(&*env.app.driver, new_server)
             .await
             .unwrap();
         let services = env.services.clone();
@@ -1533,7 +1533,7 @@ mod tests {
     #[tokio::test]
     async fn get_server_stats_returns_null_for_stopped_docker_server() {
         let mut env = TestEnv::new().await;
-        let record = psp_db::servers::create_server(&env.app.db, docker_new_server("gamma"))
+        let record = psp_db::servers::create_server(&*env.app.driver, docker_new_server("gamma"))
             .await
             .unwrap();
         let services = env.services.clone();
@@ -1609,7 +1609,7 @@ mod tests {
         assert_eq!(created["player_count"], 0);
         assert!(created.get("total_players").is_none()); // create has no total_players
                                                          // DB row exists
-        let listed = psp_db::servers::list_servers(&env.app.db).await.unwrap();
+        let listed = psp_db::servers::list_servers(&*env.app.driver).await.unwrap();
         assert_eq!(listed.len(), 1);
         // Host mount dirs are under <cwd>/servers/alpha
         assert!(listed[0].saves_path.ends_with(&format!(
@@ -1621,7 +1621,7 @@ mod tests {
     #[tokio::test]
     async fn create_server_rejects_allocated_ports() {
         let mut env = TestEnv::new().await;
-        psp_db::servers::create_server(&env.app.db, docker_new_server("first"))
+        psp_db::servers::create_server(&*env.app.driver, docker_new_server("first"))
             .await
             .unwrap();
         let data: CreateServerData = serde_json::from_value(serde_json::json!({
@@ -1668,7 +1668,7 @@ mod tests {
     #[tokio::test]
     async fn update_server_recreates_docker_container_when_identity_changes() {
         let mut env = TestEnv::new().await;
-        let record = psp_db::servers::create_server(&env.app.db, docker_new_server("alpha"))
+        let record = psp_db::servers::create_server(&*env.app.driver, docker_new_server("alpha"))
             .await
             .unwrap();
         let mut updates = serde_json::Map::new();
@@ -1701,7 +1701,7 @@ mod tests {
     #[tokio::test]
     async fn update_server_without_relevant_keys_skips_recreation() {
         let mut env = TestEnv::new().await;
-        let record = psp_db::servers::create_server(&env.app.db, docker_new_server("alpha"))
+        let record = psp_db::servers::create_server(&*env.app.driver, docker_new_server("alpha"))
             .await
             .unwrap();
         let mut updates = serde_json::Map::new();
@@ -1747,7 +1747,7 @@ mod tests {
     #[tokio::test]
     async fn delete_docker_server_stops_removes_with_volumes_and_deletes_row() {
         let mut env = TestEnv::new().await;
-        let record = psp_db::servers::create_server(&env.app.db, docker_new_server("alpha"))
+        let record = psp_db::servers::create_server(&*env.app.driver, docker_new_server("alpha"))
             .await
             .unwrap();
         let services = env.services.clone();
@@ -1769,7 +1769,7 @@ mod tests {
         );
         let calls = env.docker.calls.lock().unwrap().clone();
         assert!(calls.contains(&"remove_volume:psp-alpha-data".to_string()));
-        assert!(psp_db::servers::get_server(&env.app.db, record.id)
+        assert!(psp_db::servers::get_server(&*env.app.driver, record.id)
             .await
             .unwrap()
             .is_none());
@@ -1778,7 +1778,7 @@ mod tests {
     #[tokio::test]
     async fn start_docker_server_emits_server_status_update() {
         let mut env = TestEnv::new().await;
-        let record = psp_db::servers::create_server(&env.app.db, docker_new_server("alpha"))
+        let record = psp_db::servers::create_server(&*env.app.driver, docker_new_server("alpha"))
             .await
             .unwrap();
         let services = env.services.clone();
@@ -1803,7 +1803,7 @@ mod tests {
     #[tokio::test]
     async fn stop_docker_server_emits_progress_then_status_update() {
         let mut env = TestEnv::new().await;
-        let record = psp_db::servers::create_server(&env.app.db, docker_new_server("alpha"))
+        let record = psp_db::servers::create_server(&*env.app.driver, docker_new_server("alpha"))
             .await
             .unwrap();
         env.docker.statuses.lock().unwrap().insert(
@@ -1865,7 +1865,7 @@ mod tests {
         let stub_port = spawn_players_stub().await;
         let mut new_server = docker_new_server("api");
         new_server.rest_api_port = stub_port as i64;
-        let record = psp_db::servers::create_server(&env.app.db, new_server)
+        let record = psp_db::servers::create_server(&*env.app.driver, new_server)
             .await
             .unwrap();
         let services = env.services.clone();
@@ -1901,7 +1901,7 @@ mod tests {
         let mut env = TestEnv::new().await;
         let mut new_server = docker_new_server("dead-api");
         new_server.rest_api_port = 1; // nothing listens here
-        let record = psp_db::servers::create_server(&env.app.db, new_server)
+        let record = psp_db::servers::create_server(&*env.app.driver, new_server)
             .await
             .unwrap();
         let services = env.services.clone();
@@ -1943,7 +1943,7 @@ mod tests {
         new_server.mods_path = mods_dir.to_string_lossy().to_string();
         new_server.logicmods_path = logic_dir.to_string_lossy().to_string();
         new_server.nativemods_path = native_dir.to_string_lossy().to_string();
-        let record = psp_db::servers::create_server(&env.app.db, new_server)
+        let record = psp_db::servers::create_server(&*env.app.driver, new_server)
             .await
             .unwrap();
         let mut ctx = env.ctx();
@@ -1975,7 +1975,7 @@ mod tests {
         std::fs::create_dir_all(&mods_dir).unwrap();
         let mut new_server = docker_new_server("toggler");
         new_server.mods_path = mods_dir.to_string_lossy().to_string();
-        let record = psp_db::servers::create_server(&env.app.db, new_server)
+        let record = psp_db::servers::create_server(&*env.app.driver, new_server)
             .await
             .unwrap();
         let mut ctx = env.ctx();
@@ -2006,7 +2006,7 @@ mod tests {
         std::fs::create_dir_all(&mods_dir).unwrap();
         let mut new_server = docker_new_server("installer");
         new_server.mods_path = mods_dir.to_string_lossy().to_string();
-        let record = psp_db::servers::create_server(&env.app.db, new_server)
+        let record = psp_db::servers::create_server(&*env.app.driver, new_server)
             .await
             .unwrap();
         let zip_b64 = crate::services::docker_mods::zip_fixture::base64_zip(&[(
@@ -2052,7 +2052,7 @@ mod tests {
     #[tokio::test]
     async fn load_server_save_requires_stopped_server() {
         let mut env = TestEnv::new().await;
-        let record = psp_db::servers::create_server(&env.app.db, docker_new_server("running"))
+        let record = psp_db::servers::create_server(&*env.app.driver, docker_new_server("running"))
             .await
             .unwrap();
         env.docker.statuses.lock().unwrap().insert(
@@ -2088,7 +2088,7 @@ mod tests {
             .join("nosaves")
             .to_string_lossy()
             .to_string();
-        let record = psp_db::servers::create_server(&env.app.db, new_server)
+        let record = psp_db::servers::create_server(&*env.app.driver, new_server)
             .await
             .unwrap();
         let services = env.services.clone();
@@ -2131,7 +2131,7 @@ mod tests {
         }
         let mut new_server = docker_new_server("world-host");
         new_server.saves_path = saves_root.to_string_lossy().to_string();
-        let record = psp_db::servers::create_server(&env.app.db, new_server)
+        let record = psp_db::servers::create_server(&*env.app.driver, new_server)
             .await
             .unwrap();
         // The full load path registers the loaded session in the store, which
@@ -2257,7 +2257,7 @@ mod tests {
         assert!(ini.contains("MyCustomKey=42"));
         assert!(ini.contains("PublicPort=9911"));
 
-        let listed = psp_db::servers::list_servers(&env.app.db).await.unwrap();
+        let listed = psp_db::servers::list_servers(&*env.app.driver).await.unwrap();
         assert_eq!(listed.len(), 1);
         assert_eq!(listed[0].server_type, "native");
         assert!(listed[0].pid.is_none());
@@ -2294,7 +2294,7 @@ mod tests {
         let mut existing = docker_new_server("dup");
         existing.server_type = "native".to_string();
         existing.install_path = install.clone();
-        psp_db::servers::create_server(&env.app.db, existing).await.unwrap();
+        psp_db::servers::create_server(&*env.app.driver, existing).await.unwrap();
 
         let data = ImportServerData {
             install_path: install.clone(),
@@ -2318,7 +2318,7 @@ mod tests {
         occupant.game_port = 9911;
         occupant.query_port = 27015;
         occupant.rest_api_port = 9912;
-        psp_db::servers::create_server(&env.app.db, occupant).await.unwrap();
+        psp_db::servers::create_server(&*env.app.driver, occupant).await.unwrap();
 
         let install_dir = env._scratch.path().join("Conflict");
         let install = write_importable_install(
