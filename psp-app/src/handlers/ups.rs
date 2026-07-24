@@ -223,7 +223,7 @@ pub async fn handle_get_ups_pals(
         data.pal_types,
     );
     match psp_db::ups::get_pals(
-        &ctx.app.db,
+        &*ctx.app.driver,
         &filter,
         &data.sort_by,
         &data.sort_order,
@@ -267,7 +267,7 @@ pub async fn handle_get_ups_all_filtered_ids(
         data.element_types,
         data.pal_types,
     );
-    match psp_db::ups::get_all_filtered_ids(&ctx.app.db, &filter).await {
+    match psp_db::ups::get_all_filtered_ids(&*ctx.app.driver, &filter).await {
         Ok(pal_ids) => ctx.emitter.emit(
             MessageType::GetUpsAllFilteredIds,
             &serde_json::json!({"pal_ids": pal_ids, "total_count": pal_ids.len()}),
@@ -303,7 +303,7 @@ pub async fn handle_add_ups_pal(
 ) -> Result<(), HandlerError> {
     let pals_data = pals_game_data(ctx);
     let new_pal = new_ups_pal_from_dto(data)?;
-    match psp_db::ups::add_pal(&ctx.app.db, new_pal, &pals_data).await {
+    match psp_db::ups::add_pal(&*ctx.app.driver, new_pal, &pals_data).await {
         // The whole record goes out, WITHOUT the derived `character_key` that
         // `get_ups_pals` adds.
         Ok(record) => ctx.emitter.emit(MessageType::AddUpsPal, &record),
@@ -316,7 +316,7 @@ pub async fn handle_update_ups_pal(
     data: UpdateUpsPalData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    match psp_db::ups::update_pal(&ctx.app.db, data.pal_id, &data.updates).await {
+    match psp_db::ups::update_pal(&*ctx.app.driver, data.pal_id, &data.updates).await {
         Ok(Some(record)) => ctx.emitter.emit(
             MessageType::UpdateUpsPal,
             &serde_json::json!({"pal": {
@@ -342,7 +342,7 @@ pub async fn handle_delete_ups_pals(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     let pals_data = pals_game_data(ctx);
-    match psp_db::ups::delete_pals(&ctx.app.db, &data.pal_ids, &pals_data).await {
+    match psp_db::ups::delete_pals(&*ctx.app.driver, &data.pal_ids, &pals_data).await {
         Ok(deleted_count) => ctx.emitter.emit(
             MessageType::DeleteUpsPals,
             &serde_json::json!({
@@ -360,7 +360,7 @@ pub async fn handle_clone_ups_pal(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     let pals_data = pals_game_data(ctx);
-    match psp_db::ups::clone_pal(&ctx.app.db, data.pal_id, &pals_data).await {
+    match psp_db::ups::clone_pal(&*ctx.app.driver, data.pal_id, &pals_data).await {
         Ok(Some(clone)) => ctx.emitter.emit(
             MessageType::CloneUpsPal,
             &serde_json::json!({
@@ -385,7 +385,7 @@ pub async fn handle_clone_ups_pal(
 
 pub async fn handle_get_ups_stats(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let pals_data = pals_game_data(ctx);
-    match psp_db::ups::get_stats(&ctx.app.db, &pals_data).await {
+    match psp_db::ups::get_stats(&*ctx.app.driver, &pals_data).await {
         Ok(stats) => ctx.emitter.emit(
             MessageType::GetUpsStats,
             &serde_json::json!({ "stats": stats }),
@@ -398,7 +398,7 @@ pub async fn handle_get_ups_stats(ctx: &mut HandlerCtx<'_>) -> Result<(), Handle
 pub async fn handle_nuke_ups_pals(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let pals_data = pals_game_data(ctx);
     let (_, total_count) = match psp_db::ups::get_pals(
-        &ctx.app.db,
+        &*ctx.app.driver,
         &UpsFilter::default(),
         "created_at",
         "desc",
@@ -420,7 +420,7 @@ pub async fn handle_nuke_ups_pals(ctx: &mut HandlerCtx<'_>) -> Result<(), Handle
         );
         return Ok(());
     }
-    match psp_db::ups::nuke_all_pals(&ctx.app.db, &pals_data).await {
+    match psp_db::ups::nuke_all_pals(&*ctx.app.driver, &pals_data).await {
         Ok(deleted_count) => ctx.emitter.emit(
             MessageType::NukeUpsPals,
             &serde_json::json!({
@@ -471,7 +471,7 @@ pub struct DeleteUpsTagData {
 }
 
 pub async fn handle_get_ups_collections(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
-    match psp_db::ups::get_collections(&ctx.app.db).await {
+    match psp_db::ups::get_collections(&*ctx.app.driver).await {
         Ok(collections) => ctx.emitter.emit(
             MessageType::GetUpsCollections,
             &serde_json::json!({ "collections": collections }),
@@ -486,7 +486,7 @@ pub async fn handle_create_ups_collection(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     match psp_db::ups::create_collection(
-        &ctx.app.db,
+        &*ctx.app.driver,
         &data.name,
         data.description.as_deref(),
         data.color.as_deref(),
@@ -506,7 +506,8 @@ pub async fn handle_update_ups_collection(
     data: UpdateUpsCollectionData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    match psp_db::ups::update_collection(&ctx.app.db, data.collection_id, &data.updates).await {
+    match psp_db::ups::update_collection(&*ctx.app.driver, data.collection_id, &data.updates).await
+    {
         Ok(Some(collection)) => ctx.emitter.emit(
             MessageType::UpdateUpsCollection,
             &serde_json::json!({ "collection": collection }),
@@ -524,7 +525,7 @@ pub async fn handle_delete_ups_collection(
     data: DeleteUpsCollectionData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    match psp_db::ups::delete_collection(&ctx.app.db, data.collection_id).await {
+    match psp_db::ups::delete_collection(&*ctx.app.driver, data.collection_id).await {
         Ok(success) => ctx.emitter.emit(
             MessageType::DeleteUpsCollection,
             &serde_json::json!({"success": success, "collection_id": data.collection_id}),
@@ -535,7 +536,7 @@ pub async fn handle_delete_ups_collection(
 }
 
 pub async fn handle_get_ups_tags(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
-    match psp_db::ups::get_available_tags(&ctx.app.db).await {
+    match psp_db::ups::get_available_tags(&*ctx.app.driver).await {
         Ok(tags) => ctx.emitter.emit(
             MessageType::GetUpsTags,
             &serde_json::json!({ "tags": tags }),
@@ -550,7 +551,7 @@ pub async fn handle_create_ups_tag(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     match psp_db::ups::create_or_update_tag(
-        &ctx.app.db,
+        &*ctx.app.driver,
         &data.name,
         data.description.as_deref(),
         data.color.as_deref(),
@@ -570,7 +571,7 @@ pub async fn handle_update_ups_tag(
     data: UpdateUpsTagData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    match psp_db::ups::update_tag(&ctx.app.db, data.tag_id, &data.updates).await {
+    match psp_db::ups::update_tag(&*ctx.app.driver, data.tag_id, &data.updates).await {
         Ok(Some(tag)) => ctx.emitter.emit(
             MessageType::UpdateUpsTag,
             &serde_json::json!({ "tag": tag }),
@@ -585,7 +586,7 @@ pub async fn handle_delete_ups_tag(
     data: DeleteUpsTagData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    match psp_db::ups::delete_tag(&ctx.app.db, data.tag_id).await {
+    match psp_db::ups::delete_tag(&*ctx.app.driver, data.tag_id).await {
         Ok(success) => ctx.emitter.emit(
             MessageType::DeleteUpsTag,
             &serde_json::json!({"success": success, "tag_id": data.tag_id}),
@@ -830,7 +831,7 @@ pub async fn handle_clone_to_ups(
             data.notes.clone(),
         )?;
         let pals_data = pals_game_data(ctx);
-        match psp_db::ups::add_pal(&ctx.app.db, new_pal, &pals_data).await {
+        match psp_db::ups::add_pal(&*ctx.app.driver, new_pal, &pals_data).await {
             Ok(_) => cloned_count += 1,
             Err(error) => errors.push(format!("Failed to clone {pal_id_text}: {error}")),
         }
@@ -919,7 +920,7 @@ pub async fn handle_import_to_ups(
     };
     let new_pal = new_ups_pal_for_source(resolved, data.collection_id, data.tags, data.notes)?;
     let pals_data = pals_game_data(ctx);
-    match psp_db::ups::add_pal(&ctx.app.db, new_pal, &pals_data).await {
+    match psp_db::ups::add_pal(&*ctx.app.driver, new_pal, &pals_data).await {
         Ok(record) => ctx.emitter.emit(
             MessageType::ImportToUps,
             &serde_json::json!({"success": true, "pal": {
@@ -961,7 +962,7 @@ pub async fn handle_export_ups_pal(
         emit_ups_error(ctx, "No save file loaded".to_string());
         return Ok(());
     }
-    let Some(ups_pal) = psp_db::ups::get_pal_by_id(&ctx.app.db, data.pal_id).await? else {
+    let Some(ups_pal) = psp_db::ups::get_pal_by_id(&*ctx.app.driver, data.pal_id).await? else {
         emit_ups_error(ctx, format!("UPS Pal with ID {} not found", data.pal_id));
         return Ok(());
     };
@@ -1061,7 +1062,7 @@ pub async fn handle_export_ups_pal(
 
     if exported {
         psp_db::ups::export_pal_to_save(
-            &ctx.app.db,
+            &*ctx.app.driver,
             data.pal_id,
             &data.destination_type,
             &psp_db::ups::ExportDestinationInfo {

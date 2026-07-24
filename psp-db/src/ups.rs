@@ -1,15 +1,12 @@
-use sqlx::{QueryBuilder, Sqlite, SqlitePool};
-
 use crate::error::DbError;
 
-#[derive(Debug, Clone, serde::Serialize, sqlx::FromRow)]
+#[derive(Debug, Clone, serde::Serialize)]
 pub struct UpsPalRecord {
     pub id: i64,
     pub instance_id: String,
     pub character_id: String,
     pub nickname: Option<String>,
     pub level: i64,
-    #[sqlx(json)]
     pub pal_data: serde_json::Value,
     pub source_save_file: Option<String>,
     pub source_player_uid: Option<String>,
@@ -17,7 +14,6 @@ pub struct UpsPalRecord {
     pub source_storage_type: Option<String>,
     pub source_storage_slot: Option<i64>,
     pub collection_id: Option<i64>,
-    #[sqlx(json)]
     pub tags: serde_json::Value,
     pub notes: Option<String>,
     pub created_at: String,
@@ -25,6 +21,30 @@ pub struct UpsPalRecord {
     pub last_accessed_at: Option<String>,
     pub transfer_count: i64,
     pub clone_count: i64,
+}
+
+fn map_pal(r: &crate::DbRow) -> Result<UpsPalRecord, DbError> {
+    Ok(UpsPalRecord {
+        id: r.get_i64("id")?,
+        instance_id: r.get_string("instance_id")?,
+        character_id: r.get_string("character_id")?,
+        nickname: r.get_opt_str("nickname")?,
+        level: r.get_i64("level")?,
+        pal_data: r.get_json("pal_data")?,
+        source_save_file: r.get_opt_str("source_save_file")?,
+        source_player_uid: r.get_opt_str("source_player_uid")?,
+        source_player_name: r.get_opt_str("source_player_name")?,
+        source_storage_type: r.get_opt_str("source_storage_type")?,
+        source_storage_slot: r.get_opt_i64("source_storage_slot")?,
+        collection_id: r.get_opt_i64("collection_id")?,
+        tags: r.get_json("tags")?,
+        notes: r.get_opt_str("notes")?,
+        created_at: r.get_string("created_at")?,
+        updated_at: r.get_string("updated_at")?,
+        last_accessed_at: r.get_opt_str("last_accessed_at")?,
+        transfer_count: r.get_i64("transfer_count")?,
+        clone_count: r.get_i64("clone_count")?,
+    })
 }
 
 #[derive(Debug, Clone, Default)]
@@ -77,7 +97,7 @@ impl ConditionWriter {
     fn new() -> Self {
         Self { any: false }
     }
-    fn next(&mut self, builder: &mut QueryBuilder<'_, Sqlite>) {
+    fn next(&mut self, builder: &mut crate::SqlBuilder) {
         if self.any {
             builder.push(" AND ");
         } else {
@@ -87,7 +107,7 @@ impl ConditionWriter {
     }
 }
 
-fn push_filter(builder: &mut QueryBuilder<'_, Sqlite>, filter: &UpsFilter) {
+fn push_filter(builder: &mut crate::SqlBuilder, filter: &UpsFilter) {
     let mut writer = ConditionWriter::new();
 
     if let Some(query) = filter.search_query.as_deref().filter(|q| !q.is_empty()) {
@@ -205,50 +225,57 @@ fn sort_clause(sort_by: &str, sort_order: &str) -> String {
 }
 
 pub async fn get_pals(
-    pool: &SqlitePool,
+    db: &dyn crate::DbDriver,
     filter: &UpsFilter,
     sort_by: &str,
     sort_order: &str,
     offset: i64,
     limit: i64,
 ) -> Result<(Vec<UpsPalRecord>, i64), DbError> {
-    let mut count_builder = QueryBuilder::new("SELECT COUNT(*) FROM ups_pals");
+    let mut count_builder = crate::SqlBuilder::new("SELECT COUNT(*) FROM ups_pals");
     push_filter(&mut count_builder, filter);
-    let total_count: i64 = count_builder.build_query_scalar().fetch_one(pool).await?;
+    let (count_sql, count_params) = count_builder.into_parts();
+    let total_count = db.query(&count_sql, &count_params).await?[0].get_i64_at(0)?;
 
-    let mut builder = QueryBuilder::new("SELECT * FROM ups_pals");
+    let mut builder = crate::SqlBuilder::new("SELECT * FROM ups_pals");
     push_filter(&mut builder, filter);
-    builder.push(sort_clause(sort_by, sort_order));
+    builder.push(&sort_clause(sort_by, sort_order));
     builder.push(" LIMIT ");
     builder.push_bind(limit);
     builder.push(" OFFSET ");
     builder.push_bind(offset);
-    let pals = builder
-        .build_query_as::<UpsPalRecord>()
-        .fetch_all(pool)
-        .await?;
+    let (sql, params) = builder.into_parts();
+    let pals = db
+        .query(&sql, &params)
+        .await?
+        .iter()
+        .map(map_pal)
+        .collect::<Result<Vec<_>, _>>()?;
     Ok((pals, total_count))
 }
 
 pub async fn get_all_filtered_ids(
-    pool: &SqlitePool,
+    db: &dyn crate::DbDriver,
     filter: &UpsFilter,
 ) -> Result<Vec<i64>, DbError> {
-    let mut builder = QueryBuilder::new("SELECT id FROM ups_pals");
+    let mut builder = crate::SqlBuilder::new("SELECT id FROM ups_pals");
     push_filter(&mut builder, filter);
-    let ids: Vec<i64> = builder.build_query_scalar().fetch_all(pool).await?;
-    Ok(ids)
+    let (sql, params) = builder.into_parts();
+    db.query(&sql, &params)
+        .await?
+        .iter()
+        .map(|r| r.get_i64_at(0))
+        .collect()
 }
 
 pub async fn get_pal_by_id(
-    pool: &SqlitePool,
+    db: &dyn crate::DbDriver,
     pal_id: i64,
 ) -> Result<Option<UpsPalRecord>, DbError> {
-    let record = sqlx::query_as::<_, UpsPalRecord>("SELECT * FROM ups_pals WHERE id = ?")
-        .bind(pal_id)
-        .fetch_optional(pool)
+    let rows = db
+        .query("SELECT * FROM ups_pals WHERE id = ?", &[pal_id.into()])
         .await?;
-    Ok(record)
+    rows.first().map(map_pal).transpose()
 }
 
 #[derive(Debug, Clone)]
@@ -279,62 +306,71 @@ pub struct TransferLogEntry<'a> {
     pub success: bool,
 }
 
-pub async fn log_transfer(pool: &SqlitePool, entry: TransferLogEntry<'_>) -> Result<(), DbError> {
-    sqlx::query(
+pub async fn log_transfer(
+    db: &dyn crate::DbDriver,
+    entry: TransferLogEntry<'_>,
+) -> Result<(), DbError> {
+    db.execute(
         "INSERT INTO ups_transfer_log
          (pal_id, operation_type, source_type, destination_type, save_file_name,
           player_name, player_uid, success, timestamp)
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        &[
+            entry.pal_id.into(),
+            entry.operation_type.into(),
+            entry.source_type.into(),
+            entry.destination_type.into(),
+            entry.save_file_name.into(),
+            entry.player_name.into(),
+            entry.player_uid.into(),
+            entry.success.into(),
+            crate::time::now_iso_naive_utc().into(),
+        ],
     )
-    .bind(entry.pal_id)
-    .bind(entry.operation_type)
-    .bind(entry.source_type)
-    .bind(entry.destination_type)
-    .bind(entry.save_file_name)
-    .bind(entry.player_name)
-    .bind(entry.player_uid)
-    .bind(entry.success)
-    .bind(crate::time::now_iso_naive_utc())
-    .execute(pool)
     .await?;
     Ok(())
 }
 
 pub async fn add_pal(
-    pool: &SqlitePool,
+    db: &dyn crate::DbDriver,
     new_pal: NewUpsPal,
     pals_game_data: &serde_json::Value,
 ) -> Result<UpsPalRecord, DbError> {
     let now = crate::time::now_iso_naive_utc();
-    let pal_id: i64 = sqlx::query_scalar(
-        "INSERT INTO ups_pals
+    let pal_id: i64 = db
+        .query(
+            "INSERT INTO ups_pals
          (instance_id, character_id, nickname, level, pal_data, source_save_file,
           source_player_uid, source_player_name, source_storage_type, source_storage_slot,
           collection_id, tags, notes, created_at, updated_at)
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id",
-    )
-    .bind(uuid::Uuid::new_v4().to_string())
-    .bind(&new_pal.character_id)
-    .bind(&new_pal.nickname)
-    .bind(new_pal.level)
-    .bind(new_pal.pal_data.to_string())
-    .bind(&new_pal.source_save_file)
-    .bind(&new_pal.source_player_uid)
-    .bind(&new_pal.source_player_name)
-    .bind(&new_pal.source_storage_type)
-    .bind(new_pal.source_storage_slot)
-    .bind(new_pal.collection_id)
-    .bind(serde_json::to_string(&new_pal.tags).expect("tags encode"))
-    .bind(&new_pal.notes)
-    .bind(&now)
-    .bind(&now)
-    .fetch_one(pool)
-    .await?;
+            &[
+                uuid::Uuid::new_v4().to_string().into(),
+                new_pal.character_id.clone().into(),
+                new_pal.nickname.clone().into(),
+                new_pal.level.into(),
+                new_pal.pal_data.to_string().into(),
+                new_pal.source_save_file.clone().into(),
+                new_pal.source_player_uid.clone().into(),
+                new_pal.source_player_name.clone().into(),
+                new_pal.source_storage_type.clone().into(),
+                new_pal.source_storage_slot.into(),
+                new_pal.collection_id.into(),
+                serde_json::to_string(&new_pal.tags)
+                    .expect("tags encode")
+                    .into(),
+                new_pal.notes.clone().into(),
+                now.clone().into(),
+                now.clone().into(),
+            ],
+        )
+        .await?[0]
+        .get_i64_at(0)?;
 
-    recompute_stats(pool, pals_game_data).await?;
-    update_collection_counts(pool).await?;
+    recompute_stats(db, pals_game_data).await?;
+    update_collection_counts(db).await?;
     log_transfer(
-        pool,
+        db,
         TransferLogEntry {
             pal_id,
             operation_type: "import",
@@ -348,12 +384,10 @@ pub async fn add_pal(
     )
     .await?;
 
-    Ok(get_pal_by_id(pool, pal_id)
-        .await?
-        .expect("row just inserted"))
+    Ok(get_pal_by_id(db, pal_id).await?.expect("row just inserted"))
 }
 
-#[derive(Debug, Clone, serde::Serialize, sqlx::FromRow)]
+#[derive(Debug, Clone, serde::Serialize)]
 pub struct UpsStatsRecord {
     pub total_pals: i64,
     pub total_collections: i64,
@@ -374,62 +408,105 @@ pub struct UpsStatsRecord {
     pub last_updated: String,
 }
 
-async fn ensure_stats_row(pool: &SqlitePool) -> Result<(), DbError> {
-    sqlx::query("INSERT OR IGNORE INTO ups_stats (id, last_updated) VALUES (1, ?)")
-        .bind(crate::time::now_iso_naive_utc())
-        .execute(pool)
-        .await?;
+fn map_stats(r: &crate::DbRow) -> Result<UpsStatsRecord, DbError> {
+    Ok(UpsStatsRecord {
+        total_pals: r.get_i64("total_pals")?,
+        total_collections: r.get_i64("total_collections")?,
+        total_tags: r.get_i64("total_tags")?,
+        total_transfers: r.get_i64("total_transfers")?,
+        total_clones: r.get_i64("total_clones")?,
+        storage_size_mb: r.get_f64("storage_size_mb")?,
+        most_transferred_pal_id: r.get_opt_i64("most_transferred_pal_id")?,
+        most_cloned_pal_id: r.get_opt_i64("most_cloned_pal_id")?,
+        most_popular_character_id: r.get_opt_str("most_popular_character_id")?,
+        element_distribution: r.get_string("element_distribution")?,
+        alpha_count: r.get_i64("alpha_count")?,
+        lucky_count: r.get_i64("lucky_count")?,
+        human_count: r.get_i64("human_count")?,
+        predator_count: r.get_i64("predator_count")?,
+        oilrig_count: r.get_i64("oilrig_count")?,
+        summon_count: r.get_i64("summon_count")?,
+        last_updated: r.get_string("last_updated")?,
+    })
+}
+
+async fn ensure_stats_row(db: &dyn crate::DbDriver) -> Result<(), DbError> {
+    db.execute(
+        "INSERT OR IGNORE INTO ups_stats (id, last_updated) VALUES (1, ?)",
+        &[crate::time::now_iso_naive_utc().into()],
+    )
+    .await?;
     Ok(())
 }
 
 pub async fn recompute_stats(
-    pool: &SqlitePool,
+    db: &dyn crate::DbDriver,
     pals_game_data: &serde_json::Value,
 ) -> Result<(), DbError> {
-    ensure_stats_row(pool).await?;
+    ensure_stats_row(db).await?;
 
-    let total_pals: i64 = sqlx::query_scalar("SELECT COUNT(id) FROM ups_pals")
-        .fetch_one(pool)
-        .await?;
-    let total_collections: i64 = sqlx::query_scalar("SELECT COUNT(id) FROM ups_collections")
-        .fetch_one(pool)
-        .await?;
-    let total_tags: i64 = sqlx::query_scalar("SELECT COUNT(id) FROM ups_tags")
-        .fetch_one(pool)
-        .await?;
-    let total_transfers: i64 =
-        sqlx::query_scalar("SELECT COALESCE(SUM(transfer_count), 0) FROM ups_pals")
-            .fetch_one(pool)
-            .await?;
-    let total_clones: i64 =
-        sqlx::query_scalar("SELECT COALESCE(SUM(clone_count), 0) FROM ups_pals")
-            .fetch_one(pool)
-            .await?;
-    let most_transferred: Option<i64> =
-        sqlx::query_scalar("SELECT id FROM ups_pals ORDER BY transfer_count DESC LIMIT 1")
-            .fetch_optional(pool)
-            .await?;
-    let most_cloned: Option<i64> =
-        sqlx::query_scalar("SELECT id FROM ups_pals ORDER BY clone_count DESC LIMIT 1")
-            .fetch_optional(pool)
-            .await?;
-    let most_popular: Option<String> = sqlx::query_scalar(
-        "SELECT character_id FROM ups_pals GROUP BY character_id
+    let total_pals: i64 =
+        db.query("SELECT COUNT(id) FROM ups_pals", &[]).await?[0].get_i64_at(0)?;
+    let total_collections: i64 = db
+        .query("SELECT COUNT(id) FROM ups_collections", &[])
+        .await?[0]
+        .get_i64_at(0)?;
+    let total_tags: i64 =
+        db.query("SELECT COUNT(id) FROM ups_tags", &[]).await?[0].get_i64_at(0)?;
+    let total_transfers: i64 = db
+        .query("SELECT COALESCE(SUM(transfer_count), 0) FROM ups_pals", &[])
+        .await?[0]
+        .get_i64_at(0)?;
+    let total_clones: i64 = db
+        .query("SELECT COALESCE(SUM(clone_count), 0) FROM ups_pals", &[])
+        .await?[0]
+        .get_i64_at(0)?;
+    let most_transferred: Option<i64> = db
+        .query(
+            "SELECT id FROM ups_pals ORDER BY transfer_count DESC LIMIT 1",
+            &[],
+        )
+        .await?
+        .first()
+        .map(|r| r.get_i64_at(0))
+        .transpose()?;
+    let most_cloned: Option<i64> = db
+        .query(
+            "SELECT id FROM ups_pals ORDER BY clone_count DESC LIMIT 1",
+            &[],
+        )
+        .await?
+        .first()
+        .map(|r| r.get_i64_at(0))
+        .transpose()?;
+    let most_popular: Option<String> = db
+        .query(
+            "SELECT character_id FROM ups_pals GROUP BY character_id
          ORDER BY COUNT(character_id) DESC LIMIT 1",
-    )
-    .fetch_optional(pool)
-    .await?;
+            &[],
+        )
+        .await?
+        .first()
+        .map(|r| r.get_opt_str_at(0))
+        .transpose()?
+        .flatten();
     // CAST to BLOB so LENGTH() returns the UTF-8 byte count; on TEXT it counts characters,
     // which under-reports storage for any multi-byte pal_data.
-    let total_bytes: i64 =
-        sqlx::query_scalar("SELECT COALESCE(SUM(LENGTH(CAST(pal_data AS BLOB))), 0) FROM ups_pals")
-            .fetch_one(pool)
-            .await?;
+    let total_bytes: i64 = db
+        .query(
+            "SELECT COALESCE(SUM(LENGTH(CAST(pal_data AS BLOB))), 0) FROM ups_pals",
+            &[],
+        )
+        .await?[0]
+        .get_i64_at(0)?;
     let storage_size_mb = total_bytes as f64 / (1024.0 * 1024.0);
 
-    let rows: Vec<(String, String)> = sqlx::query_as("SELECT character_id, pal_data FROM ups_pals")
-        .fetch_all(pool)
-        .await?;
+    let rows: Vec<(String, String)> = db
+        .query("SELECT character_id, pal_data FROM ups_pals", &[])
+        .await?
+        .iter()
+        .map(|r| Ok((r.get_str_at(0)?.to_string(), r.get_str_at(1)?.to_string())))
+        .collect::<Result<Vec<_>, DbError>>()?;
     let mut element_counts: serde_json::Map<String, serde_json::Value> = serde_json::Map::new();
     let (mut alpha, mut lucky, mut human, mut predator, mut oilrig, mut summon) =
         (0i64, 0i64, 0i64, 0i64, 0i64, 0i64);
@@ -483,7 +560,7 @@ pub async fn recompute_stats(
 
     // COALESCE keeps the last known most_* ids when the table is empty rather than
     // nulling them out.
-    sqlx::query(
+    db.execute(
         "UPDATE ups_stats SET
            total_pals = ?, total_collections = ?, total_tags = ?, total_transfers = ?,
            total_clones = ?, storage_size_mb = ?,
@@ -493,60 +570,64 @@ pub async fn recompute_stats(
            element_distribution = ?, alpha_count = ?, lucky_count = ?, human_count = ?,
            predator_count = ?, oilrig_count = ?, summon_count = ?, last_updated = ?
          WHERE id = 1",
+        &[
+            total_pals.into(),
+            total_collections.into(),
+            total_tags.into(),
+            total_transfers.into(),
+            total_clones.into(),
+            storage_size_mb.into(),
+            most_transferred.into(),
+            most_cloned.into(),
+            most_popular.into(),
+            serde_json::Value::Object(element_counts).to_string().into(),
+            alpha.into(),
+            lucky.into(),
+            human.into(),
+            predator.into(),
+            oilrig.into(),
+            summon.into(),
+            crate::time::now_iso_utc_offset().into(),
+        ],
     )
-    .bind(total_pals)
-    .bind(total_collections)
-    .bind(total_tags)
-    .bind(total_transfers)
-    .bind(total_clones)
-    .bind(storage_size_mb)
-    .bind(most_transferred)
-    .bind(most_cloned)
-    .bind(most_popular)
-    .bind(serde_json::Value::Object(element_counts).to_string())
-    .bind(alpha)
-    .bind(lucky)
-    .bind(human)
-    .bind(predator)
-    .bind(oilrig)
-    .bind(summon)
-    .bind(crate::time::now_iso_utc_offset())
-    .execute(pool)
     .await?;
     Ok(())
 }
 
 pub async fn get_stats(
-    pool: &SqlitePool,
+    db: &dyn crate::DbDriver,
     pals_game_data: &serde_json::Value,
 ) -> Result<UpsStatsRecord, DbError> {
-    ensure_stats_row(pool).await?;
-    recompute_stats(pool, pals_game_data).await?;
-    let stats = sqlx::query_as::<_, UpsStatsRecord>(
-        "SELECT total_pals, total_collections, total_tags, total_transfers, total_clones,
+    ensure_stats_row(db).await?;
+    recompute_stats(db, pals_game_data).await?;
+    let rows = db
+        .query(
+            "SELECT total_pals, total_collections, total_tags, total_transfers, total_clones,
                 storage_size_mb, most_transferred_pal_id, most_cloned_pal_id,
                 most_popular_character_id, element_distribution, alpha_count, lucky_count,
                 human_count, predator_count, oilrig_count, summon_count, last_updated
          FROM ups_stats WHERE id = 1",
-    )
-    .fetch_one(pool)
-    .await?;
-    Ok(stats)
+            &[],
+        )
+        .await?;
+    rows.first()
+        .map(map_stats)
+        .transpose()?
+        .ok_or_else(|| DbError::Other("ups_stats row 1 missing".to_string()))
 }
 
-pub async fn update_collection_counts(pool: &SqlitePool) -> Result<(), DbError> {
-    sqlx::query(
+pub async fn update_collection_counts(db: &dyn crate::DbDriver) -> Result<(), DbError> {
+    db.execute(
         "UPDATE ups_collections SET
            pal_count = (SELECT COUNT(*) FROM ups_pals WHERE ups_pals.collection_id = ups_collections.id),
            updated_at = ?",
+        &[crate::time::now_iso_naive_utc().into()],
     )
-    .bind(crate::time::now_iso_naive_utc())
-    .execute(pool)
     .await?;
     Ok(())
 }
 
-#[derive(Debug, Clone, serde::Serialize, sqlx::FromRow)]
+#[derive(Debug, Clone, serde::Serialize)]
 pub struct UpsCollectionRecord {
     pub id: i64,
     pub name: String,
@@ -560,47 +641,67 @@ pub struct UpsCollectionRecord {
     pub updated_at: String,
 }
 
+fn map_collection(r: &crate::DbRow) -> Result<UpsCollectionRecord, DbError> {
+    Ok(UpsCollectionRecord {
+        id: r.get_i64("id")?,
+        name: r.get_string("name")?,
+        description: r.get_opt_str("description")?,
+        color: r.get_opt_str("color")?,
+        icon: r.get_opt_str("icon")?,
+        is_favorite: r.get_bool("is_favorite")?,
+        is_archived: r.get_bool("is_archived")?,
+        pal_count: r.get_i64("pal_count")?,
+        created_at: r.get_string("created_at")?,
+        updated_at: r.get_string("updated_at")?,
+    })
+}
+
 pub async fn create_collection(
-    pool: &SqlitePool,
+    db: &dyn crate::DbDriver,
     name: &str,
     description: Option<&str>,
     color: Option<&str>,
 ) -> Result<UpsCollectionRecord, DbError> {
     let now = crate::time::now_iso_naive_utc();
-    let id: i64 = sqlx::query_scalar(
-        "INSERT INTO ups_collections (name, description, color, created_at, updated_at)
+    let id: i64 = db
+        .query(
+            "INSERT INTO ups_collections (name, description, color, created_at, updated_at)
          VALUES (?, ?, ?, ?, ?) RETURNING id",
-    )
-    .bind(name)
-    .bind(description)
-    .bind(color)
-    .bind(&now)
-    .bind(&now)
-    .fetch_one(pool)
-    .await?;
-    Ok(get_collection_by_id(pool, id)
+            &[
+                name.into(),
+                description.into(),
+                color.into(),
+                now.clone().into(),
+                now.clone().into(),
+            ],
+        )
+        .await?[0]
+        .get_i64_at(0)?;
+    Ok(get_collection_by_id(db, id)
         .await?
         .expect("row just inserted"))
 }
 
 pub async fn get_collection_by_id(
-    pool: &SqlitePool,
+    db: &dyn crate::DbDriver,
     collection_id: i64,
 ) -> Result<Option<UpsCollectionRecord>, DbError> {
-    let record =
-        sqlx::query_as::<_, UpsCollectionRecord>("SELECT * FROM ups_collections WHERE id = ?")
-            .bind(collection_id)
-            .fetch_optional(pool)
-            .await?;
-    Ok(record)
+    let rows = db
+        .query(
+            "SELECT * FROM ups_collections WHERE id = ?",
+            &[collection_id.into()],
+        )
+        .await?;
+    rows.first().map(map_collection).transpose()
 }
 
-pub async fn get_collections(pool: &SqlitePool) -> Result<Vec<UpsCollectionRecord>, DbError> {
-    let records =
-        sqlx::query_as::<_, UpsCollectionRecord>("SELECT * FROM ups_collections ORDER BY name")
-            .fetch_all(pool)
-            .await?;
-    Ok(records)
+pub async fn get_collections(
+    db: &dyn crate::DbDriver,
+) -> Result<Vec<UpsCollectionRecord>, DbError> {
+    let rows = db
+        .query("SELECT * FROM ups_collections ORDER BY name", &[])
+        .await?;
+    rows.iter().map(map_collection).collect()
 }
 
 const SYNCED_COLUMNS: [&str; 3] = ["character_id", "nickname", "level"];
@@ -624,11 +725,11 @@ const UPDATABLE_COLUMNS: [&str; 16] = [
 ];
 
 pub async fn update_pal(
-    pool: &SqlitePool,
+    db: &dyn crate::DbDriver,
     pal_id: i64,
     updates: &serde_json::Map<String, serde_json::Value>,
 ) -> Result<Option<UpsPalRecord>, DbError> {
-    let Some(mut record) = get_pal_by_id(pool, pal_id).await? else {
+    let Some(mut record) = get_pal_by_id(db, pal_id).await? else {
         return Ok(None);
     };
 
@@ -720,50 +821,51 @@ pub async fn update_pal(
 
     record.updated_at = crate::time::now_iso_utc_offset();
 
-    sqlx::query(
+    db.execute(
         "UPDATE ups_pals SET instance_id = ?, character_id = ?, nickname = ?, level = ?,
            pal_data = ?, source_save_file = ?, source_player_uid = ?, source_player_name = ?,
            source_storage_type = ?, source_storage_slot = ?, collection_id = ?, tags = ?,
            notes = ?, updated_at = ?, last_accessed_at = ?, transfer_count = ?, clone_count = ?
          WHERE id = ?",
+        &[
+            record.instance_id.clone().into(),
+            record.character_id.clone().into(),
+            record.nickname.clone().into(),
+            record.level.into(),
+            record.pal_data.to_string().into(),
+            record.source_save_file.clone().into(),
+            record.source_player_uid.clone().into(),
+            record.source_player_name.clone().into(),
+            record.source_storage_type.clone().into(),
+            record.source_storage_slot.into(),
+            record.collection_id.into(),
+            record.tags.to_string().into(),
+            record.notes.clone().into(),
+            record.updated_at.clone().into(),
+            record.last_accessed_at.clone().into(),
+            record.transfer_count.into(),
+            record.clone_count.into(),
+            pal_id.into(),
+        ],
     )
-    .bind(&record.instance_id)
-    .bind(&record.character_id)
-    .bind(&record.nickname)
-    .bind(record.level)
-    .bind(record.pal_data.to_string())
-    .bind(&record.source_save_file)
-    .bind(&record.source_player_uid)
-    .bind(&record.source_player_name)
-    .bind(&record.source_storage_type)
-    .bind(record.source_storage_slot)
-    .bind(record.collection_id)
-    .bind(record.tags.to_string())
-    .bind(&record.notes)
-    .bind(&record.updated_at)
-    .bind(&record.last_accessed_at)
-    .bind(record.transfer_count)
-    .bind(record.clone_count)
-    .bind(pal_id)
-    .execute(pool)
     .await?;
 
     if updates.contains_key("collection_id") {
-        update_collection_counts(pool).await?;
+        update_collection_counts(db).await?;
     }
     Ok(Some(record))
 }
 
 pub async fn delete_pals(
-    pool: &SqlitePool,
+    db: &dyn crate::DbDriver,
     pal_ids: &[i64],
     pals_game_data: &serde_json::Value,
 ) -> Result<i64, DbError> {
     let mut deleted = 0i64;
     for pal_id in pal_ids {
-        if get_pal_by_id(pool, *pal_id).await?.is_some() {
+        if get_pal_by_id(db, *pal_id).await?.is_some() {
             log_transfer(
-                pool,
+                db,
                 TransferLogEntry {
                     pal_id: *pal_id,
                     operation_type: "delete",
@@ -773,24 +875,22 @@ pub async fn delete_pals(
                 },
             )
             .await?;
-            sqlx::query("DELETE FROM ups_pals WHERE id = ?")
-                .bind(pal_id)
-                .execute(pool)
+            db.execute("DELETE FROM ups_pals WHERE id = ?", &[(*pal_id).into()])
                 .await?;
             deleted += 1;
         }
     }
-    recompute_stats(pool, pals_game_data).await?;
-    update_collection_counts(pool).await?;
+    recompute_stats(db, pals_game_data).await?;
+    update_collection_counts(db).await?;
     Ok(deleted)
 }
 
 pub async fn clone_pal(
-    pool: &SqlitePool,
+    db: &dyn crate::DbDriver,
     pal_id: i64,
     pals_game_data: &serde_json::Value,
 ) -> Result<Option<UpsPalRecord>, DbError> {
-    let Some(original) = get_pal_by_id(pool, pal_id).await? else {
+    let Some(original) = get_pal_by_id(db, pal_id).await? else {
         return Ok(None);
     };
     let clone_nickname = original.nickname.as_ref().map(|n| format!("{n} (Clone)"));
@@ -802,37 +902,41 @@ pub async fn clone_pal(
             .unwrap_or_else(|| original.character_id.clone())
     );
     let now = crate::time::now_iso_naive_utc();
-    let clone_id: i64 = sqlx::query_scalar(
-        "INSERT INTO ups_pals
+    let clone_id: i64 = db
+        .query(
+            "INSERT INTO ups_pals
          (instance_id, character_id, nickname, level, pal_data, source_save_file,
           source_player_uid, source_player_name, source_storage_type, collection_id,
           tags, notes, created_at, updated_at)
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'ups_clone', ?, ?, ?, ?, ?) RETURNING id",
-    )
-    .bind(uuid::Uuid::new_v4().to_string())
-    .bind(&original.character_id)
-    .bind(&clone_nickname)
-    .bind(original.level)
-    .bind(original.pal_data.to_string())
-    .bind(&original.source_save_file)
-    .bind(&original.source_player_uid)
-    .bind(&original.source_player_name)
-    .bind(original.collection_id)
-    .bind(original.tags.to_string())
-    .bind(&clone_notes)
-    .bind(&now)
-    .bind(&now)
-    .fetch_one(pool)
-    .await?;
+            &[
+                uuid::Uuid::new_v4().to_string().into(),
+                original.character_id.clone().into(),
+                clone_nickname.clone().into(),
+                original.level.into(),
+                original.pal_data.to_string().into(),
+                original.source_save_file.clone().into(),
+                original.source_player_uid.clone().into(),
+                original.source_player_name.clone().into(),
+                original.collection_id.into(),
+                original.tags.to_string().into(),
+                clone_notes.clone().into(),
+                now.clone().into(),
+                now.clone().into(),
+            ],
+        )
+        .await?[0]
+        .get_i64_at(0)?;
 
-    sqlx::query("UPDATE ups_pals SET clone_count = clone_count + 1 WHERE id = ?")
-        .bind(pal_id)
-        .execute(pool)
-        .await?;
-    recompute_stats(pool, pals_game_data).await?;
-    update_collection_counts(pool).await?;
+    db.execute(
+        "UPDATE ups_pals SET clone_count = clone_count + 1 WHERE id = ?",
+        &[pal_id.into()],
+    )
+    .await?;
+    recompute_stats(db, pals_game_data).await?;
+    update_collection_counts(db).await?;
     log_transfer(
-        pool,
+        db,
         TransferLogEntry {
             pal_id: clone_id,
             operation_type: "clone",
@@ -843,22 +947,25 @@ pub async fn clone_pal(
         },
     )
     .await?;
-    get_pal_by_id(pool, clone_id).await
+    get_pal_by_id(db, clone_id).await
 }
 
 pub async fn nuke_all_pals(
-    pool: &SqlitePool,
+    db: &dyn crate::DbDriver,
     pals_game_data: &serde_json::Value,
 ) -> Result<i64, DbError> {
-    let all_ids: Vec<i64> = sqlx::query_scalar("SELECT id FROM ups_pals")
-        .fetch_all(pool)
-        .await?;
+    let all_ids: Vec<i64> = db
+        .query("SELECT id FROM ups_pals", &[])
+        .await?
+        .iter()
+        .map(|r| r.get_i64_at(0))
+        .collect::<Result<Vec<_>, _>>()?;
     if all_ids.is_empty() {
         return Ok(0);
     }
     for pal_id in &all_ids {
         log_transfer(
-            pool,
+            db,
             TransferLogEntry {
                 pal_id: *pal_id,
                 operation_type: "nuke_delete",
@@ -869,12 +976,13 @@ pub async fn nuke_all_pals(
         )
         .await?;
     }
-    sqlx::query("DELETE FROM ups_pals").execute(pool).await?;
-    sqlx::query("UPDATE ups_collections SET pal_count = 0, updated_at = ?")
-        .bind(crate::time::now_iso_naive_utc())
-        .execute(pool)
-        .await?;
-    recompute_stats(pool, pals_game_data).await?;
+    db.execute("DELETE FROM ups_pals", &[]).await?;
+    db.execute(
+        "UPDATE ups_collections SET pal_count = 0, updated_at = ?",
+        &[crate::time::now_iso_naive_utc().into()],
+    )
+    .await?;
+    recompute_stats(db, pals_game_data).await?;
     Ok(all_ids.len() as i64)
 }
 
@@ -886,23 +994,21 @@ pub struct ExportDestinationInfo {
 }
 
 pub async fn export_pal_to_save(
-    pool: &SqlitePool,
+    db: &dyn crate::DbDriver,
     pal_id: i64,
     destination_type: &str,
     destination: &ExportDestinationInfo,
 ) -> Result<bool, DbError> {
-    if get_pal_by_id(pool, pal_id).await?.is_none() {
+    if get_pal_by_id(db, pal_id).await?.is_none() {
         return Ok(false);
     }
-    sqlx::query(
+    db.execute(
         "UPDATE ups_pals SET last_accessed_at = ?, transfer_count = transfer_count + 1 WHERE id = ?",
+        &[crate::time::now_iso_utc_offset().into(), pal_id.into()],
     )
-    .bind(crate::time::now_iso_utc_offset())
-    .bind(pal_id)
-    .execute(pool)
     .await?;
     log_transfer(
-        pool,
+        db,
         TransferLogEntry {
             pal_id,
             operation_type: "export",
@@ -919,11 +1025,11 @@ pub async fn export_pal_to_save(
 }
 
 pub async fn update_collection(
-    pool: &SqlitePool,
+    db: &dyn crate::DbDriver,
     collection_id: i64,
     updates: &serde_json::Map<String, serde_json::Value>,
 ) -> Result<Option<UpsCollectionRecord>, DbError> {
-    let Some(mut record) = get_collection_by_id(pool, collection_id).await? else {
+    let Some(mut record) = get_collection_by_id(db, collection_id).await? else {
         return Ok(None);
     };
     for (key, value) in updates {
@@ -955,40 +1061,46 @@ pub async fn update_collection(
         }
     }
     record.updated_at = crate::time::now_iso_utc_offset();
-    sqlx::query(
+    db.execute(
         "UPDATE ups_collections SET name = ?, description = ?, color = ?, icon = ?,
            is_favorite = ?, is_archived = ?, pal_count = ?, updated_at = ? WHERE id = ?",
+        &[
+            record.name.clone().into(),
+            record.description.clone().into(),
+            record.color.clone().into(),
+            record.icon.clone().into(),
+            record.is_favorite.into(),
+            record.is_archived.into(),
+            record.pal_count.into(),
+            record.updated_at.clone().into(),
+            collection_id.into(),
+        ],
     )
-    .bind(&record.name)
-    .bind(&record.description)
-    .bind(&record.color)
-    .bind(&record.icon)
-    .bind(record.is_favorite)
-    .bind(record.is_archived)
-    .bind(record.pal_count)
-    .bind(&record.updated_at)
-    .bind(collection_id)
-    .execute(pool)
     .await?;
     Ok(Some(record))
 }
 
-pub async fn delete_collection(pool: &SqlitePool, collection_id: i64) -> Result<bool, DbError> {
-    if get_collection_by_id(pool, collection_id).await?.is_none() {
+pub async fn delete_collection(
+    db: &dyn crate::DbDriver,
+    collection_id: i64,
+) -> Result<bool, DbError> {
+    if get_collection_by_id(db, collection_id).await?.is_none() {
         return Ok(false);
     }
-    sqlx::query("UPDATE ups_pals SET collection_id = NULL WHERE collection_id = ?")
-        .bind(collection_id)
-        .execute(pool)
-        .await?;
-    sqlx::query("DELETE FROM ups_collections WHERE id = ?")
-        .bind(collection_id)
-        .execute(pool)
-        .await?;
+    db.execute(
+        "UPDATE ups_pals SET collection_id = NULL WHERE collection_id = ?",
+        &[collection_id.into()],
+    )
+    .await?;
+    db.execute(
+        "DELETE FROM ups_collections WHERE id = ?",
+        &[collection_id.into()],
+    )
+    .await?;
     Ok(true)
 }
 
-#[derive(Debug, Clone, serde::Serialize, sqlx::FromRow)]
+#[derive(Debug, Clone, serde::Serialize)]
 pub struct UpsTagRecord {
     pub id: i64,
     pub name: String,
@@ -999,88 +1111,107 @@ pub struct UpsTagRecord {
     pub updated_at: String,
 }
 
-pub async fn get_tag_by_id(
-    pool: &SqlitePool,
-    tag_id: i64,
-) -> Result<Option<UpsTagRecord>, DbError> {
-    let record = sqlx::query_as::<_, UpsTagRecord>("SELECT * FROM ups_tags WHERE id = ?")
-        .bind(tag_id)
-        .fetch_optional(pool)
-        .await?;
-    Ok(record)
+fn map_tag(r: &crate::DbRow) -> Result<UpsTagRecord, DbError> {
+    Ok(UpsTagRecord {
+        id: r.get_i64("id")?,
+        name: r.get_string("name")?,
+        description: r.get_opt_str("description")?,
+        color: r.get_opt_str("color")?,
+        usage_count: r.get_i64("usage_count")?,
+        created_at: r.get_string("created_at")?,
+        updated_at: r.get_string("updated_at")?,
+    })
 }
 
-pub async fn get_available_tags(pool: &SqlitePool) -> Result<Vec<UpsTagRecord>, DbError> {
-    let records = sqlx::query_as::<_, UpsTagRecord>("SELECT * FROM ups_tags ORDER BY name")
-        .fetch_all(pool)
+pub async fn get_tag_by_id(
+    db: &dyn crate::DbDriver,
+    tag_id: i64,
+) -> Result<Option<UpsTagRecord>, DbError> {
+    let rows = db
+        .query("SELECT * FROM ups_tags WHERE id = ?", &[tag_id.into()])
         .await?;
-    Ok(records)
+    rows.first().map(map_tag).transpose()
+}
+
+pub async fn get_available_tags(db: &dyn crate::DbDriver) -> Result<Vec<UpsTagRecord>, DbError> {
+    let rows = db
+        .query("SELECT * FROM ups_tags ORDER BY name", &[])
+        .await?;
+    rows.iter().map(map_tag).collect()
 }
 
 pub async fn create_or_update_tag(
-    pool: &SqlitePool,
+    db: &dyn crate::DbDriver,
     name: &str,
     description: Option<&str>,
     color: Option<&str>,
 ) -> Result<UpsTagRecord, DbError> {
-    let existing: Option<i64> = sqlx::query_scalar("SELECT id FROM ups_tags WHERE name = ?")
-        .bind(name)
-        .fetch_optional(pool)
-        .await?;
+    let existing: Option<i64> = db
+        .query("SELECT id FROM ups_tags WHERE name = ?", &[name.into()])
+        .await?
+        .first()
+        .map(|r| r.get_opt_i64_at(0))
+        .transpose()?
+        .flatten();
     match existing {
         Some(tag_id) => {
             if let Some(description) = description {
-                sqlx::query("UPDATE ups_tags SET description = ? WHERE id = ?")
-                    .bind(description)
-                    .bind(tag_id)
-                    .execute(pool)
-                    .await?;
+                db.execute(
+                    "UPDATE ups_tags SET description = ? WHERE id = ?",
+                    &[description.into(), tag_id.into()],
+                )
+                .await?;
             }
             if let Some(color) = color {
-                sqlx::query("UPDATE ups_tags SET color = ? WHERE id = ?")
-                    .bind(color)
-                    .bind(tag_id)
-                    .execute(pool)
-                    .await?;
-            }
-            sqlx::query("UPDATE ups_tags SET updated_at = ? WHERE id = ?")
-                .bind(crate::time::now_iso_utc_offset())
-                .bind(tag_id)
-                .execute(pool)
+                db.execute(
+                    "UPDATE ups_tags SET color = ? WHERE id = ?",
+                    &[color.into(), tag_id.into()],
+                )
                 .await?;
-            Ok(get_tag_by_id(pool, tag_id).await?.expect("existing tag"))
+            }
+            db.execute(
+                "UPDATE ups_tags SET updated_at = ? WHERE id = ?",
+                &[crate::time::now_iso_utc_offset().into(), tag_id.into()],
+            )
+            .await?;
+            Ok(get_tag_by_id(db, tag_id).await?.expect("existing tag"))
         }
         None => {
             let now = crate::time::now_iso_naive_utc();
-            let tag_id: i64 = sqlx::query_scalar(
-                "INSERT INTO ups_tags (name, description, color, created_at, updated_at)
+            let tag_id: i64 = db
+                .query(
+                    "INSERT INTO ups_tags (name, description, color, created_at, updated_at)
                  VALUES (?, ?, ?, ?, ?) RETURNING id",
-            )
-            .bind(name)
-            .bind(description)
-            .bind(color)
-            .bind(&now)
-            .bind(&now)
-            .fetch_one(pool)
-            .await?;
-            Ok(get_tag_by_id(pool, tag_id)
-                .await?
-                .expect("row just inserted"))
+                    &[
+                        name.into(),
+                        description.into(),
+                        color.into(),
+                        now.clone().into(),
+                        now.clone().into(),
+                    ],
+                )
+                .await?[0]
+                .get_i64_at(0)?;
+            Ok(get_tag_by_id(db, tag_id).await?.expect("row just inserted"))
         }
     }
 }
 
 async fn rewrite_pal_tags(
-    pool: &SqlitePool,
+    db: &dyn crate::DbDriver,
     tag_name: &str,
     replacement: Option<&str>,
 ) -> Result<(), DbError> {
     let encoded = serde_json::to_string(tag_name).expect("tag encodes");
-    let rows: Vec<(i64, String)> =
-        sqlx::query_as("SELECT id, tags FROM ups_pals WHERE tags LIKE ?")
-            .bind(format!("%{encoded}%"))
-            .fetch_all(pool)
-            .await?;
+    let rows: Vec<(i64, String)> = db
+        .query(
+            "SELECT id, tags FROM ups_pals WHERE tags LIKE ?",
+            &[format!("%{encoded}%").into()],
+        )
+        .await?
+        .iter()
+        .map(|r| Ok((r.get_i64_at(0)?, r.get_str_at(1)?.to_string())))
+        .collect::<Result<Vec<_>, DbError>>()?;
     for (pal_id, tags_text) in rows {
         let Ok(serde_json::Value::Array(tags)) = serde_json::from_str(&tags_text) else {
             continue;
@@ -1097,22 +1228,25 @@ async fn rewrite_pal_tags(
                 _ => Some(tag),
             })
             .collect();
-        sqlx::query("UPDATE ups_pals SET tags = ?, updated_at = ? WHERE id = ?")
-            .bind(serde_json::Value::Array(rewritten).to_string())
-            .bind(crate::time::now_iso_utc_offset())
-            .bind(pal_id)
-            .execute(pool)
-            .await?;
+        db.execute(
+            "UPDATE ups_pals SET tags = ?, updated_at = ? WHERE id = ?",
+            &[
+                serde_json::Value::Array(rewritten).to_string().into(),
+                crate::time::now_iso_utc_offset().into(),
+                pal_id.into(),
+            ],
+        )
+        .await?;
     }
     Ok(())
 }
 
 pub async fn update_tag(
-    pool: &SqlitePool,
+    db: &dyn crate::DbDriver,
     tag_id: i64,
     updates: &serde_json::Map<String, serde_json::Value>,
 ) -> Result<Option<UpsTagRecord>, DbError> {
-    let Some(mut record) = get_tag_by_id(pool, tag_id).await? else {
+    let Some(mut record) = get_tag_by_id(db, tag_id).await? else {
         return Ok(None);
     };
     let old_name = record.name.clone();
@@ -1134,32 +1268,31 @@ pub async fn update_tag(
         }
     }
     record.updated_at = crate::time::now_iso_utc_offset();
-    sqlx::query(
+    db.execute(
         "UPDATE ups_tags SET name = ?, description = ?, color = ?, usage_count = ?, updated_at = ?
          WHERE id = ?",
+        &[
+            record.name.clone().into(),
+            record.description.clone().into(),
+            record.color.clone().into(),
+            record.usage_count.into(),
+            record.updated_at.clone().into(),
+            tag_id.into(),
+        ],
     )
-    .bind(&record.name)
-    .bind(&record.description)
-    .bind(&record.color)
-    .bind(record.usage_count)
-    .bind(&record.updated_at)
-    .bind(tag_id)
-    .execute(pool)
     .await?;
     if updates.contains_key("name") && old_name != record.name {
-        rewrite_pal_tags(pool, &old_name, Some(&record.name)).await?;
+        rewrite_pal_tags(db, &old_name, Some(&record.name)).await?;
     }
     Ok(Some(record))
 }
 
-pub async fn delete_tag(pool: &SqlitePool, tag_id: i64) -> Result<bool, DbError> {
-    let Some(record) = get_tag_by_id(pool, tag_id).await? else {
+pub async fn delete_tag(db: &dyn crate::DbDriver, tag_id: i64) -> Result<bool, DbError> {
+    let Some(record) = get_tag_by_id(db, tag_id).await? else {
         return Ok(false);
     };
-    rewrite_pal_tags(pool, &record.name, None).await?;
-    sqlx::query("DELETE FROM ups_tags WHERE id = ?")
-        .bind(tag_id)
-        .execute(pool)
+    rewrite_pal_tags(db, &record.name, None).await?;
+    db.execute("DELETE FROM ups_tags WHERE id = ?", &[tag_id.into()])
         .await?;
     Ok(true)
 }
