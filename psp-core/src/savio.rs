@@ -45,10 +45,11 @@ mod tests {
     use crate::domain::player::{container_id_from, save_data_props};
     use crate::gamepass::fixture::reference_saves_dir;
 
-    /// The GVAS pair must round-trip a save without touching compression, and
-    /// `read_gvas_bytes` must install the Palworld type registry exactly as
-    /// `read_sav_bytes` does — otherwise typed accessors silently come back
-    /// empty and the failure surfaces far from here.
+    /// The GVAS pair must round-trip a save without touching compression:
+    /// `write_gvas_bytes` produces uncompressed bytes distinct from the `.sav`
+    /// payload, and reading them back through `read_gvas_bytes` yields usable
+    /// typed output (a resolvable container id), with a second write matching
+    /// the first byte-for-byte.
     #[test]
     fn gvas_pair_round_trips_without_compression() {
         let sav = std::fs::read(
@@ -65,9 +66,8 @@ mod tests {
         let regvas = write_gvas_bytes(&reparsed).expect("re-serializes");
         assert_eq!(gvas, regvas, "GVAS round-trips byte-for-byte");
 
-        // A byte-identical round-trip alone would also pass for opaque RawData
-        // bytes; this proves the type registry actually installed by
-        // `read_gvas_bytes`, not just that the reader is a no-op passthrough.
+        // Smoke check that parsing yields usable typed output, not just bytes
+        // that happen to round-trip.
         let save_data = save_data_props(&reparsed).expect("player SaveData present");
         assert!(
             container_id_from(save_data, "OtomoCharacterContainerId").is_some()
