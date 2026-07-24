@@ -36,11 +36,31 @@ impl GameData {
     pub fn load(data_dir: &Path) -> Result<Self, CoreError> {
         let mut entries = HashMap::new();
         load_json_directory(data_dir, data_dir, &mut entries)?;
-        Ok(Self {
+        Ok(Self::from_parsed(entries))
+    }
+
+    /// Builds game data from already-fetched JSON, for targets without a
+    /// filesystem. Keys are extension-less relative paths; they are normalized
+    /// the same way the directory loader normalizes them (`\` -> `/`,
+    /// lower-cased) so `get` resolves identically.
+    pub fn from_entries(
+        entries: impl IntoIterator<Item = (String, String)>,
+    ) -> Result<Self, CoreError> {
+        let mut parsed = HashMap::new();
+        for (key, text) in entries {
+            let value: Value = serde_json::from_str(&text)
+                .map_err(|parse_error| CoreError::Parse(format!("{key}: {parse_error}")))?;
+            parsed.insert(key.replace('\\', "/").to_lowercase(), value);
+        }
+        Ok(Self::from_parsed(parsed))
+    }
+
+    fn from_parsed(entries: HashMap<String, Value>) -> Self {
+        Self {
             entries,
             version: env!("CARGO_PKG_VERSION").to_string(),
             pal_lookup: OnceLock::new(),
-        })
+        }
     }
 
     /// Looks a file up by its extension-less path, case-insensitively.
@@ -176,5 +196,33 @@ mod tests {
         fs::write(temp_dir.path().join("broken.json"), "{ not json").unwrap();
         let error = GameData::load(temp_dir.path()).unwrap_err();
         assert!(error.to_string().contains("broken.json"), "got: {error}");
+    }
+
+    #[test]
+    fn from_entries_matches_load_and_normalizes_keys() {
+        let data = GameData::from_entries([
+            ("pals".to_string(), r#"{"Foxparks":{"id":1}}"#.to_string()),
+            // Mixed case + backslashes must normalize the same way the
+            // directory loader does, or `get` (which lowercases) misses.
+            (r"l10n\es-MX\pals".to_string(), r#"{"a":"b"}"#.to_string()),
+        ])
+        .expect("entries parse");
+
+        assert!(data.get("pals").is_some(), "plain key resolves");
+        assert!(
+            data.get("l10n/es-mx/pals").is_some(),
+            "backslashes and casing normalize like the directory loader"
+        );
+        assert_eq!(data.version(), env!("CARGO_PKG_VERSION"));
+    }
+
+    #[test]
+    fn from_entries_reports_the_offending_key_on_bad_json() {
+        let error = GameData::from_entries([("pals".to_string(), "not json".to_string())])
+            .expect_err("invalid JSON is an error");
+        assert!(
+            error.to_string().contains("pals"),
+            "error names the entry that failed: {error}"
+        );
     }
 }
