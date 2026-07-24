@@ -164,6 +164,24 @@ pub trait DbDriver: Send + Sync {
     async fn query(&self, sql: &str, params: &[DbValue]) -> Result<Vec<DbRow>, DbError>;
 }
 
+/// Reads column 0 of row 0 as an integer. The queries that use this are
+/// `COUNT`/`SUM`/`INSERT … RETURNING`, which always yield a row on SQLite — but
+/// an empty result must surface as an error, not a panic: on wasm `panic =
+/// abort` means a panic aborts the module with no error frame.
+pub fn scalar_i64(rows: &[DbRow]) -> Result<i64, DbError> {
+    rows.first()
+        .ok_or_else(|| DbError::Backend("expected one row, got none".into()))?
+        .get_i64_at(0)
+}
+
+/// Like `scalar_i64`, but a missing row OR a NULL cell reads as `None`.
+pub fn opt_scalar_i64(rows: &[DbRow]) -> Result<Option<i64>, DbError> {
+    match rows.first() {
+        Some(row) => row.get_opt_i64_at(0),
+        None => Ok(None),
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -219,5 +237,22 @@ mod tests {
         let (sql, params) = b.into_parts();
         assert_eq!(sql, "SELECT * FROM t WHERE id IN (?, ?) LIMIT ?");
         assert_eq!(params.len(), 3);
+    }
+
+    #[test]
+    fn scalar_helpers_error_instead_of_panicking_on_empty() {
+        assert!(scalar_i64(&[]).is_err(), "empty result is a DbError, not a panic");
+        assert_eq!(opt_scalar_i64(&[]).unwrap(), None, "empty result reads as None");
+    }
+
+    #[test]
+    fn scalar_helpers_read_the_first_column_of_the_first_row() {
+        let rows = [row(&["n"], vec![DbValue::Integer(7)])];
+        assert_eq!(scalar_i64(&rows).unwrap(), 7);
+        assert_eq!(opt_scalar_i64(&rows).unwrap(), Some(7));
+
+        let nulls = [row(&["n"], vec![DbValue::Null])];
+        assert_eq!(opt_scalar_i64(&nulls).unwrap(), None, "a NULL cell reads as None");
+        assert!(scalar_i64(&nulls).is_err(), "a NULL cell is an error for the non-opt helper");
     }
 }

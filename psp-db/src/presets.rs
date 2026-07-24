@@ -154,7 +154,7 @@ pub async fn populate_from_json(
     db: &dyn crate::DbDriver,
     presets_seed: &serde_json::Value,
 ) -> Result<(), DbError> {
-    let count = db.query("SELECT COUNT(*) FROM presets", &[]).await?[0].get_i64_at(0)?;
+    let count = crate::scalar_i64(&db.query("SELECT COUNT(*) FROM presets", &[]).await?)?;
     if count > 0 {
         return Ok(());
     }

@@ -235,7 +235,7 @@ pub async fn get_pals(
     let mut count_builder = crate::SqlBuilder::new("SELECT COUNT(*) FROM ups_pals");
     push_filter(&mut count_builder, filter);
     let (count_sql, count_params) = count_builder.into_parts();
-    let total_count = db.query(&count_sql, &count_params).await?[0].get_i64_at(0)?;
+    let total_count = crate::scalar_i64(&db.query(&count_sql, &count_params).await?)?;
 
     let mut builder = crate::SqlBuilder::new("SELECT * FROM ups_pals");
     push_filter(&mut builder, filter);
@@ -337,8 +337,8 @@ pub async fn add_pal(
     pals_game_data: &serde_json::Value,
 ) -> Result<UpsPalRecord, DbError> {
     let now = crate::time::now_iso_naive_utc();
-    let pal_id: i64 = db
-        .query(
+    let pal_id: i64 = crate::scalar_i64(
+        &db.query(
             "INSERT INTO ups_pals
          (instance_id, character_id, nickname, level, pal_data, source_save_file,
           source_player_uid, source_player_name, source_storage_type, source_storage_slot,
@@ -364,8 +364,8 @@ pub async fn add_pal(
                 now.clone().into(),
             ],
         )
-        .await?[0]
-        .get_i64_at(0)?;
+        .await?,
+    )?;
 
     recompute_stats(db, pals_game_data).await?;
     update_collection_counts(db).await?;
@@ -446,39 +446,34 @@ pub async fn recompute_stats(
     ensure_stats_row(db).await?;
 
     let total_pals: i64 =
-        db.query("SELECT COUNT(id) FROM ups_pals", &[]).await?[0].get_i64_at(0)?;
-    let total_collections: i64 = db
-        .query("SELECT COUNT(id) FROM ups_collections", &[])
-        .await?[0]
-        .get_i64_at(0)?;
+        crate::scalar_i64(&db.query("SELECT COUNT(id) FROM ups_pals", &[]).await?)?;
+    let total_collections: i64 = crate::scalar_i64(
+        &db.query("SELECT COUNT(id) FROM ups_collections", &[]).await?,
+    )?;
     let total_tags: i64 =
-        db.query("SELECT COUNT(id) FROM ups_tags", &[]).await?[0].get_i64_at(0)?;
-    let total_transfers: i64 = db
-        .query("SELECT COALESCE(SUM(transfer_count), 0) FROM ups_pals", &[])
-        .await?[0]
-        .get_i64_at(0)?;
-    let total_clones: i64 = db
-        .query("SELECT COALESCE(SUM(clone_count), 0) FROM ups_pals", &[])
-        .await?[0]
-        .get_i64_at(0)?;
-    let most_transferred: Option<i64> = db
-        .query(
+        crate::scalar_i64(&db.query("SELECT COUNT(id) FROM ups_tags", &[]).await?)?;
+    let total_transfers: i64 = crate::scalar_i64(
+        &db.query("SELECT COALESCE(SUM(transfer_count), 0) FROM ups_pals", &[])
+            .await?,
+    )?;
+    let total_clones: i64 = crate::scalar_i64(
+        &db.query("SELECT COALESCE(SUM(clone_count), 0) FROM ups_pals", &[])
+            .await?,
+    )?;
+    let most_transferred: Option<i64> = crate::opt_scalar_i64(
+        &db.query(
             "SELECT id FROM ups_pals ORDER BY transfer_count DESC LIMIT 1",
             &[],
         )
-        .await?
-        .first()
-        .map(|r| r.get_i64_at(0))
-        .transpose()?;
-    let most_cloned: Option<i64> = db
-        .query(
+        .await?,
+    )?;
+    let most_cloned: Option<i64> = crate::opt_scalar_i64(
+        &db.query(
             "SELECT id FROM ups_pals ORDER BY clone_count DESC LIMIT 1",
             &[],
         )
-        .await?
-        .first()
-        .map(|r| r.get_i64_at(0))
-        .transpose()?;
+        .await?,
+    )?;
     let most_popular: Option<String> = db
         .query(
             "SELECT character_id FROM ups_pals GROUP BY character_id
@@ -492,13 +487,13 @@ pub async fn recompute_stats(
         .flatten();
     // CAST to BLOB so LENGTH() returns the UTF-8 byte count; on TEXT it counts characters,
     // which under-reports storage for any multi-byte pal_data.
-    let total_bytes: i64 = db
-        .query(
+    let total_bytes: i64 = crate::scalar_i64(
+        &db.query(
             "SELECT COALESCE(SUM(LENGTH(CAST(pal_data AS BLOB))), 0) FROM ups_pals",
             &[],
         )
-        .await?[0]
-        .get_i64_at(0)?;
+        .await?,
+    )?;
     let storage_size_mb = total_bytes as f64 / (1024.0 * 1024.0);
 
     let rows: Vec<(String, String)> = db
@@ -663,8 +658,8 @@ pub async fn create_collection(
     color: Option<&str>,
 ) -> Result<UpsCollectionRecord, DbError> {
     let now = crate::time::now_iso_naive_utc();
-    let id: i64 = db
-        .query(
+    let id: i64 = crate::scalar_i64(
+        &db.query(
             "INSERT INTO ups_collections (name, description, color, created_at, updated_at)
          VALUES (?, ?, ?, ?, ?) RETURNING id",
             &[
@@ -675,8 +670,8 @@ pub async fn create_collection(
                 now.clone().into(),
             ],
         )
-        .await?[0]
-        .get_i64_at(0)?;
+        .await?,
+    )?;
     Ok(get_collection_by_id(db, id)
         .await?
         .expect("row just inserted"))
@@ -902,8 +897,8 @@ pub async fn clone_pal(
             .unwrap_or_else(|| original.character_id.clone())
     );
     let now = crate::time::now_iso_naive_utc();
-    let clone_id: i64 = db
-        .query(
+    let clone_id: i64 = crate::scalar_i64(
+        &db.query(
             "INSERT INTO ups_pals
          (instance_id, character_id, nickname, level, pal_data, source_save_file,
           source_player_uid, source_player_name, source_storage_type, collection_id,
@@ -925,8 +920,8 @@ pub async fn clone_pal(
                 now.clone().into(),
             ],
         )
-        .await?[0]
-        .get_i64_at(0)?;
+        .await?,
+    )?;
 
     db.execute(
         "UPDATE ups_pals SET clone_count = clone_count + 1 WHERE id = ?",
@@ -1146,13 +1141,9 @@ pub async fn create_or_update_tag(
     description: Option<&str>,
     color: Option<&str>,
 ) -> Result<UpsTagRecord, DbError> {
-    let existing: Option<i64> = db
-        .query("SELECT id FROM ups_tags WHERE name = ?", &[name.into()])
-        .await?
-        .first()
-        .map(|r| r.get_opt_i64_at(0))
-        .transpose()?
-        .flatten();
+    let existing: Option<i64> = crate::opt_scalar_i64(
+        &db.query("SELECT id FROM ups_tags WHERE name = ?", &[name.into()]).await?,
+    )?;
     match existing {
         Some(tag_id) => {
             if let Some(description) = description {
@@ -1178,8 +1169,8 @@ pub async fn create_or_update_tag(
         }
         None => {
             let now = crate::time::now_iso_naive_utc();
-            let tag_id: i64 = db
-                .query(
+            let tag_id: i64 = crate::scalar_i64(
+                &db.query(
                     "INSERT INTO ups_tags (name, description, color, created_at, updated_at)
                  VALUES (?, ?, ?, ?, ?) RETURNING id",
                     &[
@@ -1190,8 +1181,8 @@ pub async fn create_or_update_tag(
                         now.clone().into(),
                     ],
                 )
-                .await?[0]
-                .get_i64_at(0)?;
+                .await?,
+            )?;
             Ok(get_tag_by_id(db, tag_id).await?.expect("row just inserted"))
         }
     }

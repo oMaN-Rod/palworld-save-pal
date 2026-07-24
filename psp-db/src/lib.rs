@@ -8,7 +8,7 @@ pub mod settings;
 pub mod time;
 pub mod ups;
 
-pub use driver::{DbDriver, DbRow, DbValue, SqlBuilder};
+pub use driver::{opt_scalar_i64, scalar_i64, DbDriver, DbRow, DbValue, SqlBuilder};
 
 #[cfg(feature = "sqlx-driver")]
 pub mod sqlx_driver;

@@ -123,7 +123,17 @@ pub fn default_steam_save_dir() -> String {
             "/System/Volumes/Data/Users/{user}/Library/Containers/com.pocketpair.palworld.mac/Data/Library/Application Support/Epic/Pal/Saved/SaveGames"
         )
     }
-    #[cfg(all(not(target_os = "windows"), not(target_os = "macos")))]
+    #[cfg(target_arch = "wasm32")]
+    {
+        // No filesystem in the browser; the web build never auto-discovers a
+        // save directory.
+        String::new()
+    }
+    #[cfg(all(
+        not(target_arch = "wasm32"),
+        not(target_os = "windows"),
+        not(target_os = "macos")
+    ))]
     {
         "~".to_string()
     }

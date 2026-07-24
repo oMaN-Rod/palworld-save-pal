@@ -134,8 +134,8 @@ pub async fn create_server(
 ) -> Result<ServerRecord, DbError> {
     let now = crate::time::now_iso_naive_utc();
     let env_vars_text = Value::Object(new_server.env_vars).to_string();
-    let server_id = db
-        .query(
+    let server_id = crate::scalar_i64(
+        &db.query(
             "INSERT INTO servers (name, container_name, image_name, server_type, game_port, \
              query_port, rest_api_port, data_volume_name, saves_path, mods_path, logicmods_path, \
              nativemods_path, install_path, steamcmd_path, pid, launch_args, workshop_dir, \
@@ -170,8 +170,8 @@ pub async fn create_server(
                 now.clone().into(),
             ],
         )
-        .await?[0]
-        .get_i64_at(0)?;
+        .await?,
+    )?;
     get_server(db, server_id)
         .await?
         .ok_or_else(|| DbError::Other(format!("server {server_id} vanished after insert")))
