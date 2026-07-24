@@ -11,7 +11,7 @@ desktop = ["dep:rfd"]
 
 [dependencies]
 psp-app = { workspace = true }
-psp-core = { workspace = true }
+psp-core = { workspace = true, features = ["oodle"] }
 psp-db = { workspace = true, features = ["sqlx-driver"] }
 uesave = { workspace = true }
 axum = { workspace = true }
