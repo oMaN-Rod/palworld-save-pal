@@ -68,7 +68,10 @@ pub async fn list(db: &dyn crate::DbDriver) -> Result<Vec<BlueprintRow>, DbError
     let rows = db.query(
         "SELECT id, name, source_world, source_base, created_at, schema_version,
                 structure_count, manifest, footprint_radius
-         FROM blueprints ORDER BY created_at DESC, rowid DESC", &[]).await?;
+         FROM blueprints
+         ORDER BY created_at DESC, rowid DESC",
+        &[],
+    ).await?;
     rows.iter().map(row_from).collect()
 }
 

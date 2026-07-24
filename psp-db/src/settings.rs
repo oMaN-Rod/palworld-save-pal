@@ -64,9 +64,9 @@ pub async fn get_settings(db: &dyn crate::DbDriver) -> Result<SettingsRow, DbErr
         ],
     ).await?;
     // Re-select rather than return `defaults`: the committed row may be a racer's, and a
-    // still-missing row is a real error worth surfacing as RowNotFound.
+    // still-missing row after the insert is a real error, surfaced as a DbError.
     let rows = db.query(SELECT_SETTINGS, &[]).await?;
-    map_settings(rows.first().ok_or_else(|| DbError::Backend("settings row missing after insert".into()))?)
+    map_settings(rows.first().ok_or_else(|| DbError::Other("settings row missing after insert".into()))?)
 }
 
 /// Upserts every column except save_dir: the DO UPDATE branch omits it, so the bound

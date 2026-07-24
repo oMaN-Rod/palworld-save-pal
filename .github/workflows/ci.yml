@@ -37,5 +37,8 @@ jobs:
             exit 1
           fi
 
+      - name: psp-db core compiles without sqlx
+        run: cargo check -p psp-db --no-default-features
+
       - name: Test workspace
         run: cargo test --workspace

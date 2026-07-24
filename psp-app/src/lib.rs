@@ -71,7 +71,7 @@ pub struct AppState {
     pub config: AppConfig,
     pub game_data: Arc<GameData>,
     /// The DbDriver seam: every domain call runs its SQL through this handle.
-    pub driver: std::sync::Arc<dyn psp_db::DbDriver>,
+    pub driver: Arc<dyn psp_db::DbDriver>,
     pub dialogs: Arc<dyn crate::desktop_dialogs::FileDialogProvider>,
     /// Count of currently-open `/ws/{client_id}` connections. The transport
     /// (psp-server's `ws` module) maintains it with a `Drop` guard around each
@@ -184,12 +184,11 @@ pub mod test_support {
 
         pub async fn with_ext(
             populate_data_dir: impl FnOnce(&std::path::Path),
-            ext: std::sync::Arc<dyn crate::dispatcher::ExtRouter>,
+            ext: Arc<dyn crate::dispatcher::ExtRouter>,
         ) -> Self {
             let mut test = Self::new(populate_data_dir).await;
             // AppState is behind an Arc with no other clones yet, so rebuild it.
-            let app =
-                std::sync::Arc::get_mut(&mut test.app).expect("fresh TestContext app is unshared");
+            let app = Arc::get_mut(&mut test.app).expect("fresh TestContext app is unshared");
             app.ext = ext;
             test
         }

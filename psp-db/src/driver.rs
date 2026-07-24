@@ -72,6 +72,10 @@ impl DbRow {
 fn int(v: &DbValue, col: &str) -> Result<i64, DbError> {
     match v {
         DbValue::Integer(i) => Ok(*i),
+        // A non-sqlx driver (wa-sqlite via JS numbers) can hand back a whole
+        // REAL where SQLite stored an INTEGER; `real()` already tolerates the
+        // mirror case.
+        DbValue::Real(r) if r.fract() == 0.0 => Ok(*r as i64),
         DbValue::Null => Err(DbError::Decode(format!("column `{col}` is NULL"))),
         _ => Err(DbError::Decode(format!("column `{col}` is not an integer"))),
     }
@@ -143,6 +147,17 @@ impl Separated<'_> {
 /// returns rows-affected; `query` returns rows with their column names so
 /// callers can read by name. Send+Sync with Send futures — native tokio needs
 /// it; psp-web will satisfy it by awaiting a Send channel to a wa-sqlite worker.
+///
+/// A second (non-sqlx) implementation must satisfy:
+/// 1. `query()` must EXECUTE writes, not just read — several call sites pass
+///    `INSERT … RETURNING id` to `query()`.
+/// 2. Parameters bind by 1-based index, and a placeholder may repeat (e.g.
+///    `settings::update_settings` reuses `?1..?6` across 11 occurrences of 6
+///    params); binding positionally by occurrence would corrupt the data.
+/// 3. `execute()` returns the statement's own changed-row count
+///    (`sqlite3_changes()`), not a cumulative total and not a last-insert rowid.
+/// 4. `DbValue::Integer` and `Real` must round-trip; a whole number may arrive
+///    as either (see the `int()`/`real()` coercions above).
 #[async_trait::async_trait]
 pub trait DbDriver: Send + Sync {
     async fn execute(&self, sql: &str, params: &[DbValue]) -> Result<u64, DbError>;
@@ -182,6 +197,13 @@ mod tests {
         assert!(r.get_i64("name").is_err(), "type mismatch is a Decode error");
         assert!(r.get_i64("missing").is_err(), "unknown column is a Decode error");
         assert!(r.get_i64("note").is_err(), "NULL via non-opt getter is a Decode error");
+    }
+
+    #[test]
+    fn int_coerces_whole_real_but_rejects_fractional() {
+        let r = row(&["a", "b"], vec![DbValue::Real(5.0), DbValue::Real(5.5)]);
+        assert_eq!(r.get_i64("a").unwrap(), 5);
+        assert!(r.get_i64("b").is_err(), "fractional Real is not a valid integer");
     }
 
     #[test]

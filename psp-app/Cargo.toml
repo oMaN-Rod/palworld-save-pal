@@ -13,7 +13,7 @@ psp-core = { workspace = true }
 psp-db = { workspace = true, default-features = false }
 serde = { workspace = true }
 serde_json = { workspace = true }
-tokio = { workspace = true }
+tokio = { version = "1", default-features = false, features = ["sync"] }
 thiserror = { workspace = true }
 tracing = { workspace = true }
 futures-util = { workspace = true }
@@ -28,3 +28,4 @@ tempfile = { workspace = true, optional = true }
 tempfile = { workspace = true }
 psp-core = { path = "../psp-core", features = ["test-fixtures"] }
 psp-db = { workspace = true, features = ["sqlx-driver"] }
+tokio = { version = "1", features = ["macros", "rt", "rt-multi-thread", "sync", "time"] }
