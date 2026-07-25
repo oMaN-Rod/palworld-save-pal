@@ -120,20 +120,31 @@ if (typeof WorkerGlobalScope !== 'undefined' && self instanceof (WorkerGlobalSco
 		return wasmReady;
 	}
 
+	function postError(err: unknown) {
+		const e = err instanceof Error ? err : new Error(String(err));
+		self.postMessage(
+			JSON.stringify({ type: 'error', data: { message: e.message, trace: e.stack ?? '' } })
+		);
+	}
+
 	self.onmessage = async (ev: MessageEvent<string>) => {
-		const frame = JSON.parse(ev.data) as { type: string; data: unknown };
-		const mod = await wasm();
-		if (frame.type === 'load_zip_file') {
-			const zip = Uint8Array.from(frame.data as number[]);
-			const bundle = await savZipToGvasBundle(zip);
-			await mod.dispatch_frame(JSON.stringify({ type: 'load_save_gvas', data: bundle }));
-			return;
+		try {
+			const frame = JSON.parse(ev.data) as { type: string; data: unknown };
+			const mod = await wasm();
+			if (frame.type === 'load_zip_file') {
+				const zip = Uint8Array.from(frame.data as number[]);
+				const bundle = await savZipToGvasBundle(zip);
+				await mod.dispatch_frame(JSON.stringify({ type: 'load_save_gvas', data: bundle }));
+				return;
+			}
+			if (frame.type === 'download_save_file') {
+				await mod.dispatch_frame(JSON.stringify({ type: 'download_save_gvas', data: null }));
+				return;
+			}
+			await mod.dispatch_frame(ev.data);
+		} catch (err) {
+			postError(err);
 		}
-		if (frame.type === 'download_save_file') {
-			await mod.dispatch_frame(JSON.stringify({ type: 'download_save_gvas', data: null }));
-			return;
-		}
-		await mod.dispatch_frame(ev.data);
 	};
 
 	// Turns the engine's save_gvas_bundle emission into the download_save_file
@@ -143,11 +154,13 @@ if (typeof WorkerGlobalScope !== 'undefined' && self instanceof (WorkerGlobalSco
 		try {
 			const parsed = JSON.parse(message) as { type: string; data: SaveBundleOut };
 			if (parsed.type === 'save_gvas_bundle') {
-				void gvasBundleToSavZip(parsed.data).then(({ name, zip }) => {
-					origPost(
-						JSON.stringify({ type: 'download_save_file', data: [{ name, content: toB64(zip) }] })
-					);
-				});
+				void gvasBundleToSavZip(parsed.data)
+					.then(({ name, zip }) => {
+						origPost(
+							JSON.stringify({ type: 'download_save_file', data: [{ name, content: toB64(zip) }] })
+						);
+					})
+					.catch(postError);
 				return;
 			}
 		} catch {
