@@ -1,5 +1,6 @@
 import { send } from '$lib/utils/websocketUtils';
 import { getStoredSessionId, markReattachPending } from '$lib/utils/sessionPersistence';
+import { isWebBuild } from '$lib/utils/platform';
 import { getUpsState } from '$states/upsState.svelte';
 import { MessageType } from '$types';
 import { activeSkillsData } from './activeSkills.svelte';
@@ -22,7 +23,11 @@ import { technologiesData } from './technologies.svelte';
 import { workSuitabilityData } from './workSuitability.svelte';
 
 export const bootstrap = async () => {
-	await presetsData.reset();
+	// Presets are DB-backed; the web build's stub DB has no rows and erroring here
+	// would stall the rest of bootstrap. Deferred with the other DB features.
+	if (!isWebBuild) {
+		await presetsData.reset();
+	}
 	await palsData.reset();
 	await activeSkillsData.reset();
 	await passiveSkillsData.reset();
@@ -40,8 +45,10 @@ export const bootstrap = async () => {
 	await labResearchData.reset();
 	await missionsData.reset();
 	await relicData.reset();
-	const upsState = getUpsState();
-	await upsState.loadAll();
+	if (!isWebBuild) {
+		const upsState = getUpsState();
+		await upsState.loadAll();
+	}
 
 	send(MessageType.GET_VERSION);
 

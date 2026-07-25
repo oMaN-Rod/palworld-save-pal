@@ -26,6 +26,7 @@ import {
 import type { AppState } from '$states';
 import * as m from '$i18n/messages';
 import { c } from '$lib/utils/commonTranslations';
+import { isWebBuild } from '$lib/utils/platform';
 
 export type NavSection = 'header' | 'tiles' | 'footer';
 
@@ -123,14 +124,17 @@ export const navItems: NavItem[] = [
 		section: 'tiles',
 		icon: () => FileHeart,
 		label: () => c.presets,
-		href: '/presets'
+		href: '/presets',
+		// DB-backed; the browser build's stub DB has no persistence yet.
+		visible: () => !isWebBuild
 	},
 	{
 		id: 'blueprints',
 		section: 'tiles',
 		icon: () => Blocks,
 		label: () => 'Blueprints',
-		href: '/blueprints'
+		href: '/blueprints',
+		visible: () => !isWebBuild
 	},
 	{
 		id: 'gps',
@@ -145,7 +149,8 @@ export const navItems: NavItem[] = [
 		section: 'tiles',
 		icon: () => Database,
 		label: () => m.ups(),
-		href: '/ups'
+		href: '/ups',
+		visible: () => !isWebBuild
 	},
 	{
 		id: 'debug',
@@ -160,7 +165,9 @@ export const navItems: NavItem[] = [
 		section: 'tiles',
 		icon: () => Server,
 		label: () => 'Servers',
-		href: '/servers'
+		href: '/servers',
+		// Server management drives Docker/native services the browser build cannot reach.
+		visible: () => !isWebBuild
 	},
 	{
 		id: 'editor',

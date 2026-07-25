@@ -2,16 +2,35 @@
 	import { FileDropzone, Card, Tooltip, Button } from '$components/ui';
 	import { MessageType } from '$types';
 	import { getAppState } from '$states';
-	import { Download, Settings2 } from 'lucide-svelte';
+	import { Download, Settings2, FolderOpen } from 'lucide-svelte';
 	import { goto } from '$app/navigation';
 	import { send, pushProgressMessage } from '$lib/utils/websocketUtils';
 	import { openWorldOptionModal } from '$components/worldoption';
+	import {
+		readInputFolder,
+		readDroppedItems,
+		zipEntries,
+		hasLevelSav,
+		type ZipEntry
+	} from '$lib/utils/folderUpload';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
 	let appState = getAppState();
 
 	let files: FileList | undefined = $state();
+	let folderInput: HTMLInputElement | undefined = $state();
+	let folderDragOver = $state(false);
+	let folderError = $state('');
+
+	// Set the non-standard directory-picker flags via the property; some browsers
+	// ignore the bare attribute.
+	$effect(() => {
+		if (folderInput) {
+			folderInput.webkitdirectory = true;
+			(folderInput as HTMLInputElement & { directory?: boolean }).directory = true;
+		}
+	});
 
 	async function handleOnUpload() {
 		if (!files) return;
@@ -25,6 +44,39 @@
 			send(MessageType.LOAD_ZIP_FILE, Array.from(uint8Array));
 		};
 		reader.readAsArrayBuffer(files[0]);
+	}
+
+	async function loadEntries(entries: ZipEntry[]) {
+		if (!hasLevelSav(entries)) {
+			folderError =
+				'That folder has no Level.sav — choose the world save folder itself (the one containing Level.sav and Players/).';
+			return;
+		}
+		folderError = '';
+		await goto('/loading');
+		appState.resetState();
+		pushProgressMessage('Reading save folder...');
+		const zip = zipEntries(entries);
+		send(MessageType.LOAD_ZIP_FILE, Array.from(zip));
+	}
+
+	async function onFolderChange(event: Event) {
+		const input = event.currentTarget as HTMLInputElement;
+		if (!input.files || input.files.length === 0) return;
+		await loadEntries(await readInputFolder(input.files));
+	}
+
+	async function onFolderDrop(event: DragEvent) {
+		event.preventDefault();
+		folderDragOver = false;
+		if (!event.dataTransfer) return;
+		const entries = await readDroppedItems(event.dataTransfer.items);
+		if (entries.length === 0) {
+			folderError =
+				'Could not read that drop — try the "Choose folder" button, or drop the save folder itself.';
+			return;
+		}
+		await loadEntries(entries);
 	}
 
 	async function handleDownloadSaveFile() {
@@ -89,6 +141,46 @@
 						{/snippet}
 					</Tooltip>
 				</div>
+			{/if}
+
+			<div class="mt-4 flex w-full items-center gap-2 opacity-60">
+				<div class="bg-surface-500 h-px flex-1"></div>
+				<span class="text-sm">or</span>
+				<div class="bg-surface-500 h-px flex-1"></div>
+			</div>
+
+			<div
+				role="button"
+				tabindex="0"
+				class="textarea rounded-container-token relative mt-4 flex w-full flex-col items-center justify-center border-2 border-dashed p-4 py-8 {folderDragOver
+					? 'bg-surface-800'
+					: 'hover:bg-surface-800'}"
+				ondragover={(e) => {
+					e.preventDefault();
+					folderDragOver = true;
+				}}
+				ondragleave={() => (folderDragOver = false)}
+				ondrop={onFolderDrop}
+				onclick={() => folderInput?.click()}
+				onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && folderInput?.click()}
+			>
+				<FolderOpen class="h-16 w-16" />
+				<h3 class="h3 mt-2">Drop a save folder</h3>
+				<span>Drag your world folder here (Level.sav, Players/, …), or</span>
+				<Button
+					variant="secondary"
+					class="mt-2"
+					onclick={(e: MouseEvent) => {
+						e.stopPropagation();
+						folderInput?.click();
+					}}
+				>
+					Choose folder
+				</Button>
+			</div>
+			<input bind:this={folderInput} type="file" multiple class="hidden" onchange={onFolderChange} />
+			{#if folderError}
+				<p class="text-error-400 mt-2 text-sm">{folderError}</p>
 			{/if}
 		</div>
 	</div>
