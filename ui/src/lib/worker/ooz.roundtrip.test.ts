@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { oozCompress, oozDecompress } from '../src/lib/worker/ooz';
+import { oozCompress, oozDecompress } from './ooz';
 
 describe('ooz.wasm', () => {
 	it('compress → decompress round-trips exactly', async () => {
