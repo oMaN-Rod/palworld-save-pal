@@ -1,0 +1,7 @@
+{
+	"name": "psp",
+	"type": "module",
+	"main": "psp.js",
+	"module": "psp.js",
+	"types": "psp.d.ts"
+}

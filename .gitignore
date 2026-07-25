@@ -56,3 +56,7 @@ data/json/settings.json
 # Rust workspace build output
 /target
 /contract/tmp/
+
+# wasm-pack binary output (overwrites the committed placeholder module locally)
+/ui/src/lib/wasm/psp/psp_bg.wasm
+/ui/src/lib/wasm/psp/*_bg.js

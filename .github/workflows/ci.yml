@@ -51,3 +51,14 @@ jobs:
 
       - name: Test workspace
         run: cargo test --workspace
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install frontend dependencies
+        working-directory: ui
+        run: bun install
+
+      - name: Desktop web build succeeds
+        working-directory: ui
+        run: bun run build

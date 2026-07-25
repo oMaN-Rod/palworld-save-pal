@@ -12,6 +12,9 @@ export default defineConfig({
 		tailwindcss(),
 		sveltekit()
 	],
+	worker: {
+		format: 'es'
+	},
 	server: {
 		// tauri.conf.json devUrl points here; fail loudly rather than drifting to
 		// another port and leaving the desktop webview on a dead URL.
