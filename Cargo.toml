@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["psp-core", "psp-db", "psp-app", "psp-server", "psp-desktop"]
+members = ["psp-core", "psp-db", "psp-app", "psp-server", "psp-desktop", "psp-web"]
 
 [workspace.package]
 # Single source of truth for the project version (get_version, Tauri bundle,

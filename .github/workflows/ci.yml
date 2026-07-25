@@ -46,5 +46,8 @@ jobs:
       - name: Core crates compile for wasm32
         run: cargo check --target wasm32-unknown-unknown --no-default-features -p psp-core -p psp-db -p psp-app
 
+      - name: psp-web builds for wasm32
+        run: cargo build --target wasm32-unknown-unknown -p psp-web -j 2
+
       - name: Test workspace
         run: cargo test --workspace
