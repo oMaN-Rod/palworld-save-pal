@@ -62,3 +62,18 @@ async fn world_save_round_trips_through_wasm() {
         .unwrap();
     assert_eq!(out, gvas.to_vec(), "round-trip GVAS is byte-identical");
 }
+
+#[wasm_bindgen_test]
+async fn sql_bridge_marshals_and_migrations_call_through() {
+    use wasm_bindgen::JsCast;
+    // exec: record calls; return 1. query: return [] for the applied-versions
+    // read so run_migrations applies all six.
+    let exec = js_sys::Function::new_with_args("sql, params", "globalThis.__execs = globalThis.__execs || []; globalThis.__execs.push(sql); return 1;");
+    let query = js_sys::Function::new_with_args("sql, params", "return [];");
+    psp_web::set_sql_bridge(exec.clone().unchecked_into(), query.unchecked_into());
+    psp_web::run_migrations().await.unwrap();
+    let execs = js_sys::Reflect::get(&js_sys::global(), &"__execs".into()).unwrap();
+    let arr = js_sys::Array::from(&execs);
+    // tracker + 6 migrations + 6 inserts = 13 execute calls.
+    assert!(arr.length() >= 13, "expected >=13 execs, got {}", arr.length());
+}

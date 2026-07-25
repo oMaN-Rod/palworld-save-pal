@@ -1,4 +1,4 @@
-mod stub_driver;
+mod opfs_driver;
 
 use std::cell::RefCell;
 use std::sync::Arc;
@@ -38,7 +38,7 @@ pub fn init() {
     let app = Arc::new(AppState {
         config: AppConfig { desktop_mode: false },
         game_data: Arc::new(GameData::from_entries(Vec::new()).expect("empty game data")),
-        driver: Arc::new(stub_driver::StubDriver),
+        driver: Arc::new(opfs_driver::OpfsSqlDriver),
         dialogs: Arc::new(psp_app::desktop_dialogs::NullDialogProvider),
         live_connections,
         ext: Arc::new(NullExtRouter),
@@ -57,6 +57,21 @@ pub fn init() {
 #[wasm_bindgen]
 pub fn set_emit_callback(cb: js_sys::Function) {
     EMIT.with(|e| *e.borrow_mut() = Some(cb));
+}
+
+#[wasm_bindgen]
+pub fn set_sql_bridge(exec: js_sys::Function, query: js_sys::Function) {
+    opfs_driver::SQL_EXEC.with(|c| *c.borrow_mut() = Some(exec));
+    opfs_driver::SQL_QUERY.with(|c| *c.borrow_mut() = Some(query));
+}
+
+/// Runs the schema migrations through the driver. The worker calls this after
+/// `set_sql_bridge` and before dispatching frames.
+#[wasm_bindgen]
+pub async fn run_migrations() -> Result<(), JsValue> {
+    psp_db::run_migrations(&opfs_driver::OpfsSqlDriver)
+        .await
+        .map_err(|e| JsValue::from_str(&e.to_string()))
 }
 
 /// `entries` is a JS array of `[filename, jsonText]` pairs.
