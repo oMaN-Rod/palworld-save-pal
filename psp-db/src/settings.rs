@@ -63,10 +63,15 @@ pub async fn get_settings(db: &dyn crate::DbDriver) -> Result<SettingsRow, DbErr
             defaults.cheat_mode.into(),
         ],
     ).await?;
-    // Re-select rather than return `defaults`: the committed row may be a racer's, and a
-    // still-missing row after the insert is a real error, surfaced as a DbError.
+    // Re-select rather than return `defaults`: the committed row may be a racer's. A
+    // driver that cannot persist (the wasm stub: empty reads, dropped writes) has no
+    // row to re-select, so fall back to the in-memory defaults rather than erroring —
+    // native drivers always persist, so the fallback is unreachable there.
     let rows = db.query(SELECT_SETTINGS, &[]).await?;
-    map_settings(rows.first().ok_or_else(|| DbError::Other("settings row missing after insert".into()))?)
+    match rows.first() {
+        Some(row) => map_settings(row),
+        None => Ok(defaults),
+    }
 }
 
 /// Upserts every column except save_dir: the DO UPDATE branch omits it, so the bound
@@ -136,5 +141,33 @@ pub fn default_steam_save_dir() -> String {
     ))]
     {
         "~".to_string()
+    }
+}
+
+#[cfg(test)]
+mod fallback_tests {
+    use super::*;
+    use crate::{DbDriver, DbError, DbRow};
+
+    /// A driver whose writes are dropped and whose reads are always empty — the
+    /// shape of the wasm M1 stub. `get_settings` must degrade to defaults, not error.
+    struct EmptyDriver;
+
+    #[async_trait::async_trait]
+    impl DbDriver for EmptyDriver {
+        async fn execute(&self, _sql: &str, _params: &[crate::DbValue]) -> Result<u64, DbError> {
+            Ok(0)
+        }
+        async fn query(&self, _sql: &str, _params: &[crate::DbValue]) -> Result<Vec<DbRow>, DbError> {
+            Ok(Vec::new())
+        }
+    }
+
+    #[tokio::test]
+    async fn get_settings_falls_back_to_defaults_when_row_never_persists() {
+        let row = get_settings(&EmptyDriver).await.expect("must not error");
+        assert_eq!(row.language, "en");
+        assert_eq!(row.clone_prefix, "©️");
+        assert!(!row.debug_mode);
     }
 }
