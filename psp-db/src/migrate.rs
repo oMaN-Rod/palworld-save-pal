@@ -1,5 +1,5 @@
 use crate::error::DbError;
-use crate::{DbDriver, DbRow, DbValue};
+use crate::{DbDriver, DbValue};
 
 pub struct Migration {
     pub version: i64,
@@ -50,6 +50,7 @@ pub async fn run_migrations(db: &dyn DbDriver) -> Result<(), DbError> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::DbRow;
     use std::sync::{Arc, Mutex};
 
     /// Records executes; answers the version-check with a script-controlled set.
