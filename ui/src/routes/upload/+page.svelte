@@ -272,6 +272,10 @@
 				</div>
 				<input bind:this={folderInput} type="file" multiple class="hidden" onchange={onFolderChange} />
 			{/if}
+			<p class="mt-2 max-w-md text-center text-xs opacity-60">
+				Pick the world save folder that contains Level.sav and a Players/ folder. On Steam this is usually
+				…/Steam/steamapps/common/Palworld/Pal/Saved/SaveGames/&lt;id&gt;/&lt;world&gt;.
+			</p>
 			{#if folderError}
 				<p class="text-error-400 mt-2 text-sm">{folderError}</p>
 			{/if}
