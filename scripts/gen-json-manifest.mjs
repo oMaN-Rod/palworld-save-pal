@@ -1,5 +1,5 @@
-import { cpSync, rmSync, readdirSync, writeFileSync, existsSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
+import { cpSync, rmSync, readdirSync, writeFileSync, existsSync, statSync } from 'node:fs';
+import { dirname, resolve, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 // Anchor to the repo root from this file's own location, so the result does not
@@ -11,6 +11,22 @@ const destDir = resolve(repoRoot, 'ui/static/data/json');
 if (existsSync(destDir)) rmSync(destDir, { recursive: true, force: true });
 cpSync(srcDir, destDir, { recursive: true });
 
-const files = readdirSync(destDir).filter((f) => f.endsWith('.json') && f !== 'manifest.json');
+// Recurse the tree: GameData needs the l10n/ and ui/ subtrees, not just the
+// top-level tables. Paths are relative to destDir with forward slashes; the
+// worker fetches each and keys it extension-less to match GameData's keys.
+function listJson(dir) {
+	const out = [];
+	for (const name of readdirSync(dir)) {
+		const full = join(dir, name);
+		if (statSync(full).isDirectory()) {
+			out.push(...listJson(full));
+		} else if (name.endsWith('.json') && name !== 'manifest.json') {
+			out.push(relative(destDir, full).split('\\').join('/'));
+		}
+	}
+	return out;
+}
+
+const files = listJson(destDir);
 writeFileSync(resolve(destDir, 'manifest.json'), JSON.stringify(files, null, 0));
 console.log(`web assets: ${files.length} json files + manifest → ui/static/data/json`);

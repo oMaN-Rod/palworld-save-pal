@@ -111,7 +111,15 @@ if (typeof WorkerGlobalScope !== 'undefined' && self instanceof (WorkerGlobalSco
 				mod.set_emit_callback((frame: string) => self.postMessage(frame));
 				const manifest: string[] = await (await fetch('/data/json/manifest.json')).json();
 				const entries: [string, string][] = await Promise.all(
-					manifest.map(async (f) => [f, await (await fetch(`/data/json/${f}`)).text()] as [string, string])
+					// Key is the fetch path minus the .json extension — GameData keys
+					// are extension-less (e.g. "items", "l10n/en/pals").
+					manifest.map(
+						async (f) =>
+							[f.replace(/\.json$/, ''), await (await fetch(`/data/json/${f}`)).text()] as [
+								string,
+								string
+							]
+					)
 				);
 				mod.init_game_data(entries);
 				return mod;
