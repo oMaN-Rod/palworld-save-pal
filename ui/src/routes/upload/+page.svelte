@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { FileDropzone, Card, Tooltip, Button } from '$components/ui';
 	import { MessageType } from '$types';
-	import { getAppState } from '$states';
+	import { getAppState, getToastState } from '$states';
 	import { Download, Settings2, FolderOpen } from 'lucide-svelte';
 	import { goto } from '$app/navigation';
 	import { send, pushProgressMessage } from '$lib/utils/websocketUtils';
@@ -29,6 +29,7 @@
 	import { c } from '$lib/utils/commonTranslations';
 
 	let appState = getAppState();
+	let toast = getToastState();
 
 	let files: FileList | undefined = $state();
 	let folderInput: HTMLInputElement | undefined = $state();
@@ -37,7 +38,6 @@
 
 	const canUseFsa = isWebBuild && fsaSupported();
 	let recentName = $state<string | null>(null);
-	let quotaNotice = $state(false);
 
 	$effect(() => {
 		if (isWebBuild) hasRecent().then((r) => (recentName = r?.worldName ?? null));
@@ -68,7 +68,13 @@
 			handle: source?.handle,
 			writable: source?.writable
 		});
-		quotaNotice = res.quota;
+		if (res.quota) {
+			toast.add(
+				'This save is too large to keep across reloads in this browser.',
+				'Heads up',
+				'warning'
+			);
+		}
 	}
 
 	async function handleOnUpload() {
@@ -113,9 +119,13 @@
 		const r = await restoreMostRecent((bytes) => send(MessageType.LOAD_ZIP_FILE, Array.from(bytes)));
 		if (!r.restored) {
 			await goto('/upload');
-			folderError = r.needsPermission
-				? 'Click "Open save folder" to reconnect your save folder.'
-				: 'Could not restore the last save.';
+			toast.add(
+				r.needsPermission
+					? 'Click "Open save folder" to reconnect your save folder.'
+					: 'Could not restore the last save.',
+				'Heads up',
+				'warning'
+			);
 		}
 	}
 
@@ -151,18 +161,6 @@
 </script>
 
 <div class="animate-fade-in flex h-full w-full flex-col items-center justify-center space-y-4">
-	{#if quotaNotice}
-		<div class="w-full max-w-xl px-4 sm:w-3/4 md:w-1/2 lg:w-1/3">
-			<div
-				class="border-warning-500 text-warning-500 flex items-center justify-between rounded border p-2 text-sm"
-			>
-				<span>This save is too large to keep across reloads in this browser.</span>
-				<button type="button" class="ml-2 underline" onclick={() => (quotaNotice = false)}>
-					Dismiss
-				</button>
-			</div>
-		</div>
-	{/if}
 	{#if recentName && !appState.saveFile}
 		<Button variant="secondary" onclick={resume}>
 			<FolderOpen size={16} />

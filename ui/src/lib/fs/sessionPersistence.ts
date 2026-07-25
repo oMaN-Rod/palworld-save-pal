@@ -55,6 +55,7 @@ export async function restoreMostRecent(
 		if (!ok) return { restored: false, needsPermission: true };
 		try {
 			const entries = await readSaveFolder(rec.handle);
+			setActiveDirectory(rec.handle, true);
 			loadZip(zipEntries(entries));
 			return { restored: true, needsPermission: false };
 		} catch {
