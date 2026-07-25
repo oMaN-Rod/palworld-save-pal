@@ -15,7 +15,7 @@ fi
 if [ ! -f "$SRC_DIR/simde/simde/x86/sse2.h" ]; then
   git -C "$SRC_DIR" submodule update --init --depth 1 simde
 fi
-mkdir -p vendor/ooz
+mkdir -p ui/vendor/ooz
 
 # Docker Desktop on Windows needs a Windows-style host path, and MSYS path
 # mangling must be disabled so container paths like /work survive intact.
@@ -40,7 +40,7 @@ MSYS_NO_PATHCONV=1 docker run --rm -v "$HOST_DIR:/work" -w /work emscripten/emsd
   -s EXPORTED_FUNCTIONS='["_Ooz_Decompress","_Ooz_Compress","_malloc","_free"]' \
   -s EXPORTED_RUNTIME_METHODS='["HEAPU8","ccall"]' \
   -s INITIAL_MEMORY=64MB -s ALLOW_MEMORY_GROWTH=1 -s MAXIMUM_MEMORY=4GB \
-  -s MODULARIZE=1 -s EXPORT_ES6=1 -s ENVIRONMENT=web,worker \
+  -s MODULARIZE=1 -s EXPORT_ES6=1 -s ENVIRONMENT=web,worker,node \
   -o ui/vendor/ooz/ooz.mjs
 
 ls -la ui/vendor/ooz

@@ -60,3 +60,7 @@ data/json/settings.json
 # wasm-pack binary output (overwrites the committed placeholder module locally)
 /ui/src/lib/wasm/psp/psp_bg.wasm
 /ui/src/lib/wasm/psp/*_bg.js
+
+# ooz wasm build scratch (cloned source + emcc intermediates); the vendored
+# artifact lives under ui/vendor/ooz and IS committed.
+/vendor/
