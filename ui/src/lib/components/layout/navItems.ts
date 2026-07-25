@@ -124,17 +124,14 @@ export const navItems: NavItem[] = [
 		section: 'tiles',
 		icon: () => FileHeart,
 		label: () => c.presets,
-		href: '/presets',
-		// DB-backed; the browser build's stub DB has no persistence yet.
-		visible: () => !isWebBuild
+		href: '/presets'
 	},
 	{
 		id: 'blueprints',
 		section: 'tiles',
 		icon: () => Blocks,
 		label: () => 'Blueprints',
-		href: '/blueprints',
-		visible: () => !isWebBuild
+		href: '/blueprints'
 	},
 	{
 		id: 'gps',
@@ -149,8 +146,7 @@ export const navItems: NavItem[] = [
 		section: 'tiles',
 		icon: () => Database,
 		label: () => m.ups(),
-		href: '/ups',
-		visible: () => !isWebBuild
+		href: '/ups'
 	},
 	{
 		id: 'debug',
