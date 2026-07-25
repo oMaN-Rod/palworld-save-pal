@@ -40,6 +40,7 @@
 		"eslint": "^9.32.0",
 		"eslint-config-prettier": "^9.1.2",
 		"eslint-plugin-svelte": "^2.46.1",
+		"fake-indexeddb": "^6.2.5",
 		"globals": "^15.15.0",
 		"mdsvex": "^0.12.7",
 		"prettier": "~3.6.2",
