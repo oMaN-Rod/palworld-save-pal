@@ -368,7 +368,7 @@ mod tests {
     ];
 
     #[test]
-    fn exactly_129_message_types() {
+    fn message_type_count_is_expected() {
         assert_eq!(EXPECTED_WIRE_NAMES.len(), 132);
         assert_eq!(
             MessageType::ALL.len(),

@@ -1,6 +1,6 @@
-//! Web-worker save flow (M1): the browser decompresses `.sav` to raw GVAS
-//! before handing it to the engine, and re-compresses on download. These two
-//! handlers ingest/emit raw GVAS bundles instead of `.sav`/zip bytes.
+//! Web-worker save flow: decompressed GVAS in on load, a GVAS bundle out on
+//! download; the worker owns (de)compression. These two handlers ingest/emit
+//! raw GVAS bundles instead of `.sav`/zip bytes.
 
 use std::collections::BTreeMap;
 
@@ -69,7 +69,7 @@ pub async fn handle_load_save_gvas(
         level_meta.as_deref(),
         world_option.as_deref(),
         player_file_refs,
-        None, // GPS deferred within M1
+        None, // GPS is not yet wired for the web GVAS load path
         true,
         &progress,
     )?;
