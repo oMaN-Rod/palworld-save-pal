@@ -7,6 +7,8 @@ import {
 	getStoredSelectedPlayerUid,
 	setStoredSessionId
 } from '$lib/utils/sessionPersistence';
+import { unzipSync } from 'fflate';
+import { takeSaveTarget, getActiveDirectory, writeSaveInPlace } from '$lib/fs';
 import type { WSMessageHandler } from '../types';
 
 export const noFileSelectedHandler: WSMessageHandler = {
@@ -69,19 +71,39 @@ export const saveModdedSaveHandler: WSMessageHandler = {
 	}
 };
 
+export async function handleSaveOutput(
+	files: Array<{ name: string; content: string }>,
+	download: (name: string, content: string) => void,
+	now: number
+): Promise<'folder' | 'download'> {
+	if (takeSaveTarget() === 'folder') {
+		const { handle, writable } = getActiveDirectory();
+		if (handle && writable && files.length > 0) {
+			const bin = atob(files[0].content);
+			const zip = new Uint8Array(bin.length);
+			for (let i = 0; i < bin.length; i++) zip[i] = bin.charCodeAt(i);
+			const unzipped = unzipSync(zip);
+			const out = Object.entries(unzipped).map(([path, bytes]) => ({ path, bytes }));
+			await writeSaveInPlace(handle, out, now);
+			return 'folder';
+		}
+	}
+	for (const { name, content } of files) download(name, content);
+	return 'download';
+}
+
 export const downloadSaveFileHandler: WSMessageHandler = {
 	type: MessageType.DOWNLOAD_SAVE_FILE,
 	async handle(data, { goto }) {
 		console.log('Download save files', data);
 		const files = data as Array<{ name: string; content: string }>;
-
-		for (const { name, content } of files) {
+		const toast = getToastState();
+		const download = (name: string, content: string) => {
 			const binaryString = atob(content);
 			const bytes = new Uint8Array(binaryString.length);
 			for (let i = 0; i < binaryString.length; i++) {
 				bytes[i] = binaryString.charCodeAt(i);
 			}
-
 			const blob = new Blob([bytes], { type: 'application/octet-stream' });
 			const url = URL.createObjectURL(blob);
 			const a = document.createElement('a');
@@ -89,9 +111,13 @@ export const downloadSaveFileHandler: WSMessageHandler = {
 			a.download = name;
 			a.click();
 			URL.revokeObjectURL(url);
+		};
+		const mode = await handleSaveOutput(files, download, Date.now());
+		if (mode === 'folder') {
+			toast.add('Saved to your folder (originals backed up).', 'Saved!', 'success');
+		} else {
+			await goto('/file');
 		}
-
-		await goto('/file');
 	}
 };
 
