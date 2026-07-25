@@ -29,7 +29,10 @@ function tx<T>(mode: IDBTransactionMode, run: (s: IDBObjectStore) => IDBRequest<
 			const req = run(t.objectStore(STORE));
 			req.onsuccess = () => resolve(req.result);
 			req.onerror = () => reject(req.error);
-			t.oncomplete = () => db.close();
+			const settle = () => db.close();
+			t.oncomplete = settle;
+			t.onabort = settle;
+			t.onerror = settle;
 		}, reject);
 	});
 }
