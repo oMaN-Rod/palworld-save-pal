@@ -2,9 +2,9 @@ use async_trait::async_trait;
 use psp_db::error::DbError;
 use psp_db::{DbDriver, DbRow, DbValue};
 
-/// The M1 web driver: reads are always empty, writes are dropped. DB-backed
-/// features (presets, UPS, blueprints) show empty; `get_settings` degrades to
-/// defaults (see psp-db). Real persistence is M2 (wa-sqlite/OPFS).
+/// A no-op DB driver: reads are always empty, writes are dropped. DB-backed
+/// features (presets, UPS, blueprints) show empty until a persistent driver
+/// replaces this one.
 pub struct StubDriver;
 
 #[async_trait]
