@@ -18,3 +18,11 @@ export function init_game_data() {
 export async function dispatch_frame() {
 	throw new Error(NOT_BUILT);
 }
+
+export function set_sql_bridge() {
+	throw new Error(NOT_BUILT);
+}
+
+export async function run_migrations() {
+	throw new Error(NOT_BUILT);
+}

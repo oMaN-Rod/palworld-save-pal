@@ -1,6 +1,7 @@
 import { unzipSync, zipSync } from 'fflate';
 import { oozCompress, oozDecompress } from './ooz';
 import { parseSavHeader, buildSav, getMagic, checkSavFormat, SaveType } from './savframe';
+import { openSqlite } from './sqlite';
 
 function toB64(bytes: Uint8Array): string {
 	let s = '';
@@ -109,6 +110,23 @@ if (typeof WorkerGlobalScope !== 'undefined' && self instanceof (WorkerGlobalSco
 				await mod.default();
 				mod.init();
 				mod.set_emit_callback((frame: string) => self.postMessage(frame));
+				const sqlite = await openSqlite();
+				mod.set_sql_bridge(
+					(sql: string, params: unknown[]) => sqlite.exec(sql, params),
+					(sql: string, params: unknown[]) => sqlite.query(sql, params)
+				);
+				await mod.run_migrations();
+				if (!sqlite.persistent) {
+					self.postMessage(
+						JSON.stringify({
+							type: 'error',
+							data: {
+								message: 'This browser cannot persist data; changes will be lost on reload.',
+								trace: ''
+							}
+						})
+					);
+				}
 				const manifest: string[] = await (await fetch('/data/json/manifest.json')).json();
 				const entries: [string, string][] = await Promise.all(
 					// Key is the fetch path minus the .json extension — GameData keys
