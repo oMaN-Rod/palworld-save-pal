@@ -92,6 +92,37 @@ pub fn emit_summary_messages(session: &SaveSession, emitter: &Emitter) {
     emitter.emit(MessageType::GetGuildSummaries, &session.guild_summaries);
 }
 
+/// The tail every load path shares: register the session in the store, emit
+/// `loaded_save_files`, emit the player/guild summaries, and attach the session
+/// to the connection. `players` is in load (zip/steam encounter) order.
+pub(crate) fn emit_loaded_save(
+    ctx: &mut HandlerCtx<'_>,
+    session: SaveSession,
+    players: Vec<Uuid>,
+    has_gps: bool,
+) -> Result<(), HandlerError> {
+    let world_name_display = if session.world_name.is_empty() {
+        "Unknown".to_string()
+    } else {
+        session.world_name.clone()
+    };
+    let session_id = ctx.register_current_session();
+    let payload = LoadedSaveFilesData {
+        level: session.save_id.clone(),
+        players: players.iter().map(|uid| uid.to_string()).collect(),
+        world_name: world_name_display,
+        r#type: "steam",
+        size: session.size,
+        has_gps,
+        world_option_present: session.world_option.is_some(),
+        session_id: session_id.to_string(),
+    };
+    ctx.emitter.emit(MessageType::LoadedSaveFiles, &payload);
+    emit_summary_messages(&session, ctx.emitter);
+    ctx.session.save = Some(session);
+    Ok(())
+}
+
 /// A `Players/*.sav` or `Players/*_dps.sav` file stem, split into its player id
 /// and whether it's the "_dps" companion file. `None` for anything that doesn't
 /// parse as a UUID once "_dps" is stripped; callers skip those.
@@ -606,29 +637,8 @@ pub async fn handle_load_zip_file(
         &progress,
     )?;
 
-    let world_name_display = if session.world_name.is_empty() {
-        "Unknown".to_string()
-    } else {
-        session.world_name.clone()
-    };
-
     progress("Zip file uploaded and processed successfully, results coming right up!");
-
-    let session_id = ctx.register_current_session();
-    let payload = LoadedSaveFilesData {
-        level: layout.save_id,
-        players: player_order.iter().map(|uid| uid.to_string()).collect(),
-        world_name: world_name_display,
-        r#type: "steam",
-        size: session.size,
-        has_gps: gps_file_path.is_some(),
-        world_option_present: session.world_option.is_some(),
-        session_id: session_id.to_string(),
-    };
-    ctx.emitter.emit(MessageType::LoadedSaveFiles, &payload);
-    emit_summary_messages(&session, ctx.emitter);
-
-    ctx.session.save = Some(session);
+    emit_loaded_save(ctx, session, player_order, gps_file_path.is_some())?;
     Ok(())
 }
 

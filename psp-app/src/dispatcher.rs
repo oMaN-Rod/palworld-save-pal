@@ -208,6 +208,10 @@ async fn route(
         MessageType::LoadZipFile => {
             handlers::save_file::handle_load_zip_file(serde_json::from_value(data)?, ctx).await
         }
+        MessageType::LoadSaveGvas => {
+            handlers::web_save::handle_load_save_gvas(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::DownloadSaveGvas => handlers::web_save::handle_download_save_gvas(ctx).await,
         MessageType::RequestPlayerDetails => {
             handlers::players::handle_request_player_details(serde_json::from_value(data)?, ctx)
                 .await

@@ -12,4 +12,5 @@ pub mod settings;
 pub mod system;
 pub mod tools;
 pub mod ups;
+pub mod web_save;
 pub mod world_option;
