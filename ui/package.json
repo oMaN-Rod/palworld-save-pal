@@ -8,7 +8,7 @@
 		"dev:vite": "vite dev",
 		"build": "vite build",
 		"build:desktop": "node scripts/ensure-desktop-env.mjs --force && vite build",
-		"build:web": "node ../scripts/gen-json-manifest.mjs && wasm-pack build ../psp-web --target web --out-dir ui/src/lib/wasm/psp && cp -r ../data/json static/data/json && cross-env VITE_TRANSPORT=worker vite build",
+		"build:web": "node ../scripts/gen-json-manifest.mjs && cd ../psp-web && wasm-pack build --target web --out-dir ../ui/src/lib/wasm/psp && cd ../ui && cross-env VITE_TRANSPORT=worker vite build",
 		"preview": "vite preview",
 		"test": "npm run test:integration && npm run test:unit",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
