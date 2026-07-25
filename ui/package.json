@@ -16,6 +16,7 @@
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
 		"test:integration": "playwright test",
+		"test:e2e:web": "playwright test --config playwright.web.config.ts",
 		"test:unit": "vitest",
 		"machine-translate": "inlang machine translate --project project.inlang"
 	},
