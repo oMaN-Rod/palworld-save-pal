@@ -3,11 +3,10 @@
 	import { goto } from '$app/navigation';
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { isWebBuild } from '$lib/utils/platform';
-	import { Hero, MapHighlight, Values, Features, HowItWorks, Faq, Cta } from '$components/landing';
+	import { Hero, Features, Cta } from '$components/landing';
 	import { restoreMostRecent, hasRecent } from '$lib/fs';
 	import { send, pushProgressMessage } from '$lib/utils/websocketUtils';
 	import { MessageType } from '$types';
-	import { startSaveLoad } from '$lib/data/loadSave';
 
 	const appState = getAppState();
 	const toast = getToastState();
@@ -25,6 +24,10 @@
 		hasRecent().then((r) => (resumeName = r?.worldName ?? null));
 	} else {
 		goto('/upload'); // Docker/self-hosted: unchanged prior behavior
+	}
+
+	function openSave() {
+		goto('/upload');
 	}
 
 	async function resume() {
@@ -61,12 +64,8 @@
 
 {#if isWebBuild && !appState.saveFile}
 	<main class="animate-fade-in flex w-full flex-col items-center">
-		<Hero onLoad={startSaveLoad} onResume={resume} {resumeName} />
-		<MapHighlight />
-		<Values />
+		<Hero onOpen={openSave} onResume={resume} {resumeName} />
 		<Features />
-		<HowItWorks />
-		<Faq />
 		<Cta />
 	</main>
 {/if}
