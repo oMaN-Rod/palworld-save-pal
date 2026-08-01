@@ -73,3 +73,15 @@ export function zipEntries(entries: ZipEntry[]): Uint8Array {
 export function hasLevelSav(entries: ZipEntry[]): boolean {
 	return entries.some((e) => e.path.toLowerCase().endsWith('level.sav'));
 }
+
+/** True when a drop contains at least one directory entry (a world folder),
+ *  vs. only files (e.g. a .zip). Uses the non-standard webkitGetAsEntry API. */
+export function hasDirectoryEntry(items: DataTransferItemList): boolean {
+	for (const item of Array.from(items)) {
+		const entry = (
+			item as DataTransferItem & { webkitGetAsEntry?: () => { isDirectory: boolean } | null }
+		).webkitGetAsEntry?.();
+		if (entry?.isDirectory) return true;
+	}
+	return false;
+}
