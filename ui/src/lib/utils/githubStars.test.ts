@@ -1,6 +1,22 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { fetchGithubStars, formatStars } from './githubStars';
 
+function installFakeSessionStorage() {
+	const store = new Map<string, string>();
+	vi.stubGlobal('sessionStorage', {
+		getItem: (k: string) => (store.has(k) ? store.get(k)! : null),
+		setItem: (k: string, v: string) => {
+			store.set(k, v);
+		},
+		removeItem: (k: string) => {
+			store.delete(k);
+		},
+		clear: () => store.clear(),
+		key: () => null,
+		length: 0
+	} as Storage);
+}
+
 describe('formatStars', () => {
 	it('formats counts below 1000 as-is', () => {
 		expect(formatStars(0)).toBe('0');
@@ -17,10 +33,10 @@ describe('formatStars', () => {
 
 describe('fetchGithubStars', () => {
 	beforeEach(() => {
-		sessionStorage.clear();
-		vi.restoreAllMocks();
+		installFakeSessionStorage();
 	});
 	afterEach(() => {
+		vi.unstubAllGlobals();
 		vi.restoreAllMocks();
 	});
 
