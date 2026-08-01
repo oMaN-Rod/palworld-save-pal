@@ -56,6 +56,18 @@ export async function ensureReadWrite(dir: FileSystemDirectoryHandle): Promise<b
 	return (await h.requestPermission?.({ mode: 'readwrite' })) === 'granted';
 }
 
+async function findCaseInsensitive(
+	dir: FileSystemDirectoryHandle,
+	name: string
+): Promise<FileSystemHandle | null> {
+	for await (const [entryName, handle] of (dir as unknown as {
+		entries(): AsyncIterableIterator<[string, FileSystemHandle]>;
+	}).entries()) {
+		if (entryName.toLowerCase() === name.toLowerCase()) return handle;
+	}
+	return null;
+}
+
 async function fileHandleFor(
 	dir: FileSystemDirectoryHandle,
 	path: string,
@@ -64,9 +76,16 @@ async function fileHandleFor(
 	const segs = path.split('/');
 	let cur = dir;
 	for (let i = 0; i < segs.length - 1; i++) {
-		cur = await cur.getDirectoryHandle(segs[i], { create });
+		const existing = await findCaseInsensitive(cur, segs[i]);
+		cur =
+			existing?.kind === 'directory'
+				? (existing as FileSystemDirectoryHandle)
+				: await cur.getDirectoryHandle(segs[i], { create });
 	}
-	return cur.getFileHandle(segs[segs.length - 1], { create });
+	const last = segs[segs.length - 1];
+	const existingFile = await findCaseInsensitive(cur, last);
+	if (existingFile?.kind === 'file') return existingFile as FileSystemFileHandle;
+	return cur.getFileHandle(last, { create });
 }
 
 async function readIfExists(dir: FileSystemDirectoryHandle, path: string): Promise<Uint8Array | null> {

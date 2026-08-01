@@ -102,4 +102,34 @@ describe('fileSystemAccess', () => {
 		const orig = (await bdir.getFileHandle('Level.sav')) as FakeFileHandle;
 		expect(Array.from((await orig.getFile()).bytes)).toEqual([1, 2, 3]);
 	});
+
+	it('resolves an existing uppercase file case-insensitively instead of creating a duplicate', async () => {
+		const caseRoot = new FakeDirHandle('caseworld');
+		caseRoot.entries_.set('Level.sav', new FakeFileHandle('Level.sav', new FakeFile(new Uint8Array([1]))));
+		const players = new FakeDirHandle('Players');
+		players.entries_.set('ABC.sav', new FakeFileHandle('ABC.sav', new FakeFile(new Uint8Array([7, 7, 7]))));
+		caseRoot.entries_.set('Players', players);
+
+		const backup = await writeSaveInPlace(
+			caseRoot as unknown as FileSystemDirectoryHandle,
+			[{ path: 'Players/abc.sav', bytes: new Uint8Array([8, 8]) }],
+			2000
+		);
+
+		// Original uppercase file overwritten in place; no lowercase duplicate.
+		expect(players.entries_.size).toBe(1);
+		expect(players.entries_.has('abc.sav')).toBe(false);
+		const target = players.entries_.get('ABC.sav') as FakeFileHandle;
+		expect(target).toBeDefined();
+		expect(Array.from((await target.getFile()).bytes)).toEqual([8, 8]);
+
+		// Backup preserves the original bytes.
+		let bdir: FakeDirHandle = caseRoot;
+		for (const seg of backup.split('/')) {
+			bdir = (await bdir.getDirectoryHandle(seg)) as FakeDirHandle;
+		}
+		const backupPlayers = (await bdir.getDirectoryHandle('Players')) as FakeDirHandle;
+		const backedUp = Array.from(backupPlayers.entries_.values())[0] as FakeFileHandle;
+		expect(Array.from((await backedUp.getFile()).bytes)).toEqual([7, 7, 7]);
+	});
 });
