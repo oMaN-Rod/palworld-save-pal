@@ -1,13 +1,15 @@
 <script lang="ts">
-	import { getAppState } from '$states';
+	import { getAppState, getToastState } from '$states';
 	import { goto } from '$app/navigation';
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
+	import { isWebBuild } from '$lib/utils/platform';
 	import { Hero, Features, Cta } from '$components/landing';
 	import { restoreMostRecent, hasRecent } from '$lib/fs';
 	import { send, pushProgressMessage } from '$lib/utils/websocketUtils';
 	import { MessageType } from '$types';
 
 	const appState = getAppState();
+	const toast = getToastState();
 	const desktop = PUBLIC_DESKTOP_MODE === 'true';
 
 	let resumeName = $state<string | null>(null);
@@ -18,8 +20,10 @@
 	} else if (appState.saveFile) {
 		// Mid-session on web → go straight back to editing.
 		goto('/edit');
-	} else {
+	} else if (isWebBuild) {
 		hasRecent().then((r) => (resumeName = r?.worldName ?? null));
+	} else {
+		goto('/upload'); // Docker/self-hosted: unchanged prior behavior
 	}
 
 	function openSave() {
@@ -31,7 +35,16 @@
 		appState.resetState();
 		pushProgressMessage('Restoring your last save...');
 		const r = await restoreMostRecent((bytes) => send(MessageType.LOAD_ZIP_FILE, Array.from(bytes)));
-		if (!r.restored) await goto('/upload');
+		if (!r.restored) {
+			await goto('/upload');
+			toast.add(
+				r.needsPermission
+					? 'Click "Open save folder" to reconnect your save folder.'
+					: 'Could not restore the last save.',
+				'Heads up',
+				'warning'
+			);
+		}
 	}
 </script>
 
@@ -49,7 +62,7 @@
 	<meta property="og:type" content="website" />
 </svelte:head>
 
-{#if !desktop && !appState.saveFile}
+{#if isWebBuild && !appState.saveFile}
 	<main class="animate-fade-in flex w-full flex-col items-center">
 		<Hero onOpen={openSave} onResume={resume} {resumeName} />
 		<Features />
