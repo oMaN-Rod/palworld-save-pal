@@ -5,6 +5,7 @@
 	import { Download, Settings2, FolderOpen } from 'lucide-svelte';
 	import { goto } from '$app/navigation';
 	import { send, pushProgressMessage } from '$lib/utils/websocketUtils';
+	import { startSaveLoad } from '$lib/data/loadSave';
 	import { openWorldOptionModal } from '$components/worldoption';
 	import {
 		readInputFolder,
@@ -18,7 +19,6 @@
 		pickSaveDirectory,
 		readSaveFolder,
 		ensureReadWrite,
-		recordSession,
 		restoreMostRecent,
 		hasRecent,
 		setSaveTarget,
@@ -57,24 +57,7 @@
 		name: string,
 		source?: { handle?: FileSystemDirectoryHandle; writable?: boolean }
 	) {
-		await goto('/loading');
-		appState.resetState();
-		pushProgressMessage('Loading save...');
-		send(MessageType.LOAD_ZIP_FILE, Array.from(zip));
-		const res = await recordSession({
-			zipBytes: zip,
-			name,
-			savedAt: Date.now(),
-			handle: source?.handle,
-			writable: source?.writable
-		});
-		if (res.quota) {
-			toast.add(
-				'This save is too large to keep across reloads in this browser.',
-				'Heads up',
-				'warning'
-			);
-		}
+		await startSaveLoad(zip, name, source);
 	}
 
 	async function handleOnUpload() {
