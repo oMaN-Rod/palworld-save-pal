@@ -16,6 +16,7 @@
 		setStoredSelectedPlayerUid,
 		clearStoredSelectedPlayerUid
 	} from '$lib/utils/sessionPersistence';
+	import { isWebBuild } from '$lib/utils/platform';
 
 	const { children } = $props();
 	const ws = getSocketState();
@@ -62,7 +63,9 @@
 <Toast position="bottom-center" transition={{ type: 'fly', params: { y: 300 } }} />
 <Modal>
 	<div class="flex h-screen w-full overflow-hidden">
-		<NavBar />
+		{#if !(isWebBuild && !appState.saveFile)}
+			<NavBar />
+		{/if}
 		{#if appState.autoSave}
 			<div class="auto-save-indicator" transition:fade>
 				<span class="text-primary-400 text-sm font-bold">{m.syncing()}</span>
