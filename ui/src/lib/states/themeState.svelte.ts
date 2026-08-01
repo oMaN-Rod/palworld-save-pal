@@ -30,3 +30,11 @@ export const themeOptions: SelectOption[] = [
  * in sync from the root layout, which is what actually swaps the color palette.
  */
 export const theme = persistedState<ThemeName>('psp-theme', DEFAULT_THEME);
+
+// Light-background themes (by --color-surface-950 in ui/src/themes/*.css); all
+// others are dark. Drives the logo variant so the wordmark stays legible.
+export const LIGHT_THEMES: ReadonlySet<ThemeName> = new Set<ThemeName>(['light', 'lamball']);
+
+export function isLightTheme(name: ThemeName): boolean {
+	return LIGHT_THEMES.has(name);
+}
