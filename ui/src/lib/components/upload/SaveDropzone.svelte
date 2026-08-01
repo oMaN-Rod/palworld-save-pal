@@ -10,6 +10,7 @@
 		type ZipEntry
 	} from '$lib/utils/folderUpload';
 	import { fsaSupported, pickSaveDirectory, readSaveFolder, ensureReadWrite } from '$lib/fs';
+	import { isWebBuild } from '$lib/utils/platform';
 
 	let {
 		onLoad
@@ -83,7 +84,7 @@
 	// Prefer the File System Access picker (yields a handle → enables save-in-place);
 	// fall back to a webkitdirectory input where FSA is unavailable.
 	async function chooseFolder() {
-		if (fsaSupported()) {
+		if (isWebBuild && fsaSupported()) {
 			const dir = await pickSaveDirectory();
 			if (!dir) return;
 			let entries: ZipEntry[];
