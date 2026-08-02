@@ -3,7 +3,7 @@
 	import type { Component } from 'svelte';
 	import Logo from '$components/layout/Logo.svelte';
 	import { SaveDropzone } from '$components/upload';
-	import { Button } from '$components/ui';
+	import { Button, Tooltip } from '$components/ui';
 	import { RotateCcw, Lock } from 'lucide-svelte';
 
 	interface Props {
@@ -47,9 +47,11 @@
 			<Lock size={14} /> Your files never leave your device.
 		</p>
 		{#if resumeName && onResume}
-			<Button variant="secondary" class="mt-4" onclick={onResume}>
-				<RotateCcw size={16} /> Resume {resumeName}
-			</Button>
+			<Tooltip label={resumeName}>
+				<Button variant="secondary" class="mt-4" onclick={onResume}>
+					<RotateCcw size={16} /> Resume Previous Save
+				</Button>
+			</Tooltip>
 		{/if}
 	</div>
 </section>
@@ -64,7 +66,11 @@
 		);
 	}
 	.hero-aurora {
-		background: radial-gradient(700px 240px at 50% -10%, rgba(125, 211, 252, 0.16), transparent 70%);
+		background: radial-gradient(
+			700px 240px at 50% -10%,
+			rgba(125, 211, 252, 0.16),
+			transparent 70%
+		);
 	}
 	.glass {
 		background: rgba(9, 13, 20, 0.55);
