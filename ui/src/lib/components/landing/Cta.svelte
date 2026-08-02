@@ -1,16 +1,9 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import discordIcon from '$lib/assets/img/app/discord.svg';
-	import { fetchGithubStars } from '$lib/utils/githubStars';
 	import SectionGlow from './SectionGlow.svelte';
 	import { GithubLink } from '.';
 
 	const DISCORD = 'https://discord.gg/YWZFPy9G8J';
-
-	let stars = $state<number | null>(null);
-	onMount(async () => {
-		stars = await fetchGithubStars();
-	});
 </script>
 
 <footer class="border-surface-700/50 relative w-full overflow-hidden border-t px-4 py-14 text-center">

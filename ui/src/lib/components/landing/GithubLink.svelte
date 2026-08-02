@@ -13,7 +13,7 @@
 	});
 </script>
 
-<Link href={GITHUB}>
+<Link href={GITHUB} label="GitHub">
 	<img src={githubIcon} alt="GitHub" class="h-8 w-8" />
 	{#if stars !== null}
 		<span class="text-surface-200 flex items-center gap-1 text-sm font-semibold">
