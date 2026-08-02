@@ -104,6 +104,10 @@ describe('limitations', () => {
 	});
 
 	it('never lists hard requirements', () => {
-		expect(limitations(detectCapabilities(without(['WebAssembly'])))).toEqual([]);
+		// Missing WebAssembly AND FSA: without the hard-block short-circuit
+		// this would return ['fsa'].
+		expect(
+			limitations(detectCapabilities(without(['WebAssembly', 'showDirectoryPicker'])))
+		).toEqual([]);
 	});
 });
