@@ -3,10 +3,20 @@
 	import { goto } from '$app/navigation';
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { isWebBuild } from '$lib/utils/platform';
-	import { Hero, Features, Cta } from '$components/landing';
+	import {
+		Hero,
+		MapAdvantage,
+		Values,
+		Features,
+		HowItWorks,
+		DesktopApp,
+		Faq,
+		Cta
+	} from '$components/landing';
 	import { restoreMostRecent, hasRecent } from '$lib/fs';
 	import { send, pushProgressMessage } from '$lib/utils/websocketUtils';
 	import { MessageType } from '$types';
+	import { startSaveLoad } from '$lib/data/loadSave';
 
 	const appState = getAppState();
 	const toast = getToastState();
@@ -15,18 +25,12 @@
 	let resumeName = $state<string | null>(null);
 
 	if (desktop) {
-		// Desktop keeps its existing boot behavior into the editor.
 		if (!appState.saveFile) goto('/file');
 	} else if (appState.saveFile) {
-		// Mid-session on web → go straight back to editing.
 		goto('/edit');
 	} else if (isWebBuild) {
 		hasRecent().then((r) => (resumeName = r?.worldName ?? null));
 	} else {
-		goto('/upload'); // Docker/self-hosted: unchanged prior behavior
-	}
-
-	function openSave() {
 		goto('/upload');
 	}
 
@@ -49,23 +53,28 @@
 </script>
 
 <svelte:head>
-	<title>Palworld Save Pal — edit Palworld saves in your browser</title>
+	<title>Palworld Save Pal: edit Palworld saves in your browser</title>
 	<meta
 		name="description"
-		content="Open, edit and save Palworld saves entirely in your browser — pals, bases, blueprints and presets. Free and open source."
+		content="Open, edit and save Palworld saves entirely in your browser. Pals, bases, blueprints and presets. Free and open source, with a full 3D world map."
 	/>
 	<meta property="og:title" content="Palworld Save Pal" />
 	<meta
 		property="og:description"
-		content="Edit Palworld saves in your browser — pals, bases, blueprints and presets."
+		content="Edit Palworld saves in your browser, with a full 3D world map. Pals, bases, blueprints and presets."
 	/>
 	<meta property="og:type" content="website" />
 </svelte:head>
 
 {#if isWebBuild && !appState.saveFile}
 	<main class="animate-fade-in flex w-full flex-col items-center">
-		<Hero onOpen={openSave} onResume={resume} {resumeName} />
+		<Hero onLoad={startSaveLoad} onResume={resume} {resumeName} />
+		<MapAdvantage />
+		<Values />
 		<Features />
+		<HowItWorks />
+		<DesktopApp />
+		<Faq />
 		<Cta />
 	</main>
 {/if}
