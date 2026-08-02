@@ -13,7 +13,13 @@ const STORE = 'saves';
 
 function open(): Promise<IDBDatabase> {
 	return new Promise((resolve, reject) => {
-		const req = indexedDB.open(DB, 1);
+		let req: IDBOpenDBRequest;
+		try {
+			req = indexedDB.open(DB, 1);
+		} catch (e) {
+			reject(e);
+			return;
+		}
 		req.onupgradeneeded = () => {
 			req.result.createObjectStore(STORE, { keyPath: 'id' });
 		};
@@ -42,8 +48,14 @@ export async function putRecent(rec: RecentSave): Promise<void> {
 }
 
 export async function listRecent(): Promise<RecentSave[]> {
-	const all = (await tx<RecentSave[]>('readonly', (s) => s.getAll())) ?? [];
-	return all.sort((a, b) => b.savedAt - a.savedAt);
+	// IndexedDB is absent or blocked in some private windows; the recents list
+	// is a convenience, so degrade to empty rather than rejecting into callers.
+	try {
+		const all = (await tx<RecentSave[]>('readonly', (s) => s.getAll())) ?? [];
+		return all.sort((a, b) => b.savedAt - a.savedAt);
+	} catch {
+		return [];
+	}
 }
 
 export async function getMostRecent(): Promise<RecentSave | null> {
@@ -51,5 +63,9 @@ export async function getMostRecent(): Promise<RecentSave | null> {
 }
 
 export async function removeRecent(id: string): Promise<void> {
-	await tx('readwrite', (s) => s.delete(id));
+	try {
+		await tx('readwrite', (s) => s.delete(id));
+	} catch {
+		// Nothing to clean up if the store was never reachable.
+	}
 }

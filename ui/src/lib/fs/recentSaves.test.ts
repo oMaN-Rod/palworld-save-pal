@@ -1,10 +1,14 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import 'fake-indexeddb/auto';
 import { putRecent, listRecent, getMostRecent, removeRecent, type RecentSave } from './recentSaves';
 
 function rec(id: string, savedAt: number): RecentSave {
 	return { id, kind: 'opfs', opfsPath: `${id}.zip`, worldName: id, sizeBytes: 10, savedAt };
 }
+
+afterEach(() => {
+	vi.unstubAllGlobals();
+});
 
 describe('recentSaves', () => {
 	beforeEach(async () => {
@@ -36,5 +40,25 @@ describe('recentSaves', () => {
 		await putRecent(rec('a', 100));
 		await removeRecent('a');
 		expect(await getMostRecent()).toBeNull();
+	});
+});
+
+describe('recentSaves when IndexedDB is unavailable', () => {
+	it('resolves to an empty list instead of rejecting', async () => {
+		vi.stubGlobal('indexedDB', {
+			open: () => {
+				throw new DOMException('blocked', 'SecurityError');
+			}
+		});
+		await expect(listRecent()).resolves.toEqual([]);
+	});
+
+	it('resolves getMostRecent to null instead of rejecting', async () => {
+		vi.stubGlobal('indexedDB', {
+			open: () => {
+				throw new DOMException('blocked', 'SecurityError');
+			}
+		});
+		await expect(getMostRecent()).resolves.toBeNull();
 	});
 });

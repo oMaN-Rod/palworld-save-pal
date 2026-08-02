@@ -11,13 +11,18 @@ vi.mock('./recentSaves', () => ({
 		recent.store = recent.store.filter((x) => x.id !== id);
 	})
 }));
-const blobs = vi.hoisted(() => ({ map: new Map<string, Uint8Array>(), fail: false }));
+const blobs = vi.hoisted(() => ({
+	map: new Map<string, Uint8Array>(),
+	failMode: 'none' as 'none' | 'quota' | 'unavailable'
+}));
 vi.mock('./opfsBlobStore', () => {
 	class QuotaError extends Error {}
 	return {
 		QuotaError,
 		putBlob: vi.fn(async (p: string, b: Uint8Array) => {
-			if (blobs.fail) throw new QuotaError();
+			if (blobs.failMode === 'quota') throw new QuotaError();
+			// Simulates private mode / embedded webview where OPFS throws a non-quota error.
+			if (blobs.failMode === 'unavailable') throw new DOMException('no OPFS', 'SecurityError');
 			blobs.map.set(p, b);
 		}),
 		getBlob: vi.fn(async (p: string) => blobs.map.get(p) ?? null),
@@ -40,7 +45,7 @@ import { recordSession, restoreMostRecent } from './sessionPersistence';
 beforeEach(() => {
 	recent.store = [];
 	blobs.map.clear();
-	blobs.fail = false;
+	blobs.failMode = 'none';
 	active.set.mockClear();
 });
 
@@ -67,12 +72,38 @@ describe('sessionPersistence', () => {
 	});
 
 	it('returns quota:false persisted:false and no throw when OPFS is full', async () => {
-		blobs.fail = true;
+		blobs.failMode = 'quota';
 		const res = await recordSession({ zipBytes: new Uint8Array([1]), name: 'big', savedAt: 3 });
 		expect(res).toEqual({ persisted: false, quota: true });
 	});
 
 	it('restoreMostRecent returns restored:false when nothing is stored', async () => {
 		expect(await restoreMostRecent(() => {})).toEqual({ restored: false, needsPermission: false });
+	});
+});
+
+describe('recordSession when storage is unavailable', () => {
+	it('reports not-persisted instead of throwing when OPFS is missing', async () => {
+		// putBlob is mocked at the module boundary in this file, so we drive the
+		// same failure through the mock rather than stubbing navigator.storage
+		// (which the mocked opfsBlobStore never touches).
+		blobs.failMode = 'unavailable';
+		const res = await recordSession({
+			zipBytes: new Uint8Array([1, 2, 3]),
+			name: 'world',
+			savedAt: 1
+		});
+		expect(res).toEqual({ persisted: false, quota: false });
+	});
+
+	it('still reports quota separately so the caller can warn about size', async () => {
+		blobs.failMode = 'quota';
+		const res = await recordSession({
+			zipBytes: new Uint8Array([1, 2, 3]),
+			name: 'world',
+			savedAt: 1
+		});
+		expect(res.persisted).toBe(false);
+		expect(res.quota).toBe(true);
 	});
 });
