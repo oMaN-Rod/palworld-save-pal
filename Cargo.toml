@@ -7,6 +7,7 @@ members = ["psp-core", "psp-db", "psp-app", "psp-server", "psp-desktop", "psp-we
 # all crates). Bump with scripts/bump.ps1.
 version = "1.2.0"
 edition = "2021"
+license = "GPL-3.0-only"
 
 [profile.dev]
 opt-level = 1

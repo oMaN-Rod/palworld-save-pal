@@ -2,6 +2,7 @@
 	"name": "palworld-save-pal",
 	"version": "0.0.1",
 	"private": true,
+	"license": "GPL-3.0-only",
 	"scripts": {
 		"dev:desktop": "node scripts/ensure-desktop-env.mjs && vite dev",
 		"dev:web": "concurrently \"vite dev\" \"cd .. && cargo run -p psp-server -- --dev\"",
