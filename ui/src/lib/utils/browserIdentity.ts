@@ -29,6 +29,12 @@ export function detectBrowser(
 	}
 
 	const ua = nav.userAgent ?? '';
+	// iOS Chrome (CriOS) and iOS Firefox (FxiOS) must be identified before
+	// checking for /Safari\//. Both have Safari in their UA but run on WebKit,
+	// so family is 'safari' (the engine that determines capabilities), not
+	// 'chromium' or 'firefox'. The product name goes in the name field.
+	if (/CriOS\//.test(ua)) return { family: 'safari', name: 'Chrome' };
+	if (/FxiOS\//.test(ua)) return { family: 'safari', name: 'Firefox' };
 	if (/Firefox\//.test(ua)) return { family: 'firefox', name: 'Firefox' };
 	// Every Chromium UA also ends in "Safari/537.36", so Safari must be
 	// identified by the ABSENCE of Chrome/Chromium.
