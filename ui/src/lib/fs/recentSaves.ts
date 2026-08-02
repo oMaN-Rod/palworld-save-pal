@@ -13,13 +13,7 @@ const STORE = 'saves';
 
 function open(): Promise<IDBDatabase> {
 	return new Promise((resolve, reject) => {
-		let req: IDBOpenDBRequest;
-		try {
-			req = indexedDB.open(DB, 1);
-		} catch (e) {
-			reject(e);
-			return;
-		}
+		const req = indexedDB.open(DB, 1);
 		req.onupgradeneeded = () => {
 			req.result.createObjectStore(STORE, { keyPath: 'id' });
 		};

@@ -47,6 +47,8 @@ export async function recordSession(args: {
 		sizeBytes: args.zipBytes.length,
 		savedAt: args.savedAt
 	};
+	// The bytes are already safely in OPFS; losing the recents entry only
+	// costs Resume, so don't fail the whole save over it.
 	try {
 		await putRecent(rec);
 	} catch {
