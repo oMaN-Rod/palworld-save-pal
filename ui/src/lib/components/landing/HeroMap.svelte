@@ -18,7 +18,7 @@
 	let center = $state<[number, number]>([0, 0]);
 	let zoom = $state(2.6);
 	let pitch = $state(52);
-	const show3d = $derived(pitch > 5);
+	let show3d = $state(true);
 
 	const verticalScale = verticalScaleFactor(0, cmPerPx('MainMap'));
 
@@ -39,22 +39,31 @@
 	const canRender = webglAvailable();
 
 	let raf = 0;
-	let paused = false;
+	let stopped = false;
 	let lastTs = 0;
 	const DEG_PER_MS = 0.0012;
+	const MAX_DT = 100;
+
+	function stopOrbit() {
+		stopped = true;
+		if (raf) {
+			cancelAnimationFrame(raf);
+			raf = 0;
+		}
+	}
 
 	function startOrbit() {
-		if (reduceMotion || !map) return;
+		if (reduceMotion || !map || stopped) return;
 		lastTs = 0;
 		const step = (ts: number) => {
-			if (!map || failed) {
+			if (!map || failed || stopped) {
 				raf = 0;
 				return;
 			}
 			if (lastTs === 0) lastTs = ts;
-			const dt = ts - lastTs;
+			const dt = Math.min(ts - lastTs, MAX_DT);
 			lastTs = ts;
-			if (!paused) map.setBearing((map.getBearing() + dt * DEG_PER_MS) % 360);
+			map.setBearing((map.getBearing() + dt * DEG_PER_MS) % 360);
 			raf = requestAnimationFrame(step);
 		};
 		raf = requestAnimationFrame(step);
@@ -62,20 +71,21 @@
 
 	function handleLoad() {
 		if (!map) return;
-		map.on('dragstart', () => (paused = true));
-		map.on('dragend', () => (paused = false));
+		// Hand full control to the user on first interaction; the ambient spin's
+		// per-frame camera writes otherwise fight native pan/zoom/pitch gestures.
+		map.on('mousedown', stopOrbit);
+		map.on('touchstart', stopOrbit);
+		map.on('wheel', stopOrbit);
 		startOrbit();
 	}
 
 	function toggle3d() {
-		pitch = show3d ? 0 : 52;
+		show3d = !show3d;
+		pitch = show3d ? 52 : 0;
 	}
 
 	onMount(() => {
-		const onVisibility = () => (paused = document.hidden);
-		document.addEventListener('visibilitychange', onVisibility);
 		return () => {
-			document.removeEventListener('visibilitychange', onVisibility);
 			if (raf) cancelAnimationFrame(raf);
 		};
 	});
