@@ -40,11 +40,21 @@
 
 	let raf = 0;
 	let paused = false;
+	let lastTs = 0;
+	const DEG_PER_MS = 0.0012;
 
 	function startOrbit() {
 		if (reduceMotion || !map) return;
-		const step = () => {
-			if (map && !paused) map.setBearing((map.getBearing() + 0.02) % 360);
+		lastTs = 0;
+		const step = (ts: number) => {
+			if (!map || failed) {
+				raf = 0;
+				return;
+			}
+			if (lastTs === 0) lastTs = ts;
+			const dt = ts - lastTs;
+			lastTs = ts;
+			if (!paused) map.setBearing((map.getBearing() + dt * DEG_PER_MS) % 360);
 			raf = requestAnimationFrame(step);
 		};
 		raf = requestAnimationFrame(step);
@@ -90,7 +100,7 @@
 			touchZoomRotate={true}
 			attributionControl={false}
 			onload={handleLoad}
-			onerror={() => (failed = true)}
+			onwebglcontextlost={() => (failed = true)}
 		>
 			<Control.Navigation position="top-right" showCompass={false} />
 			<Source.Raster tiles={['/maps/mainmap/{z}/{x}/{y}.webp']} tileSize={512} maxzoom={4}>
