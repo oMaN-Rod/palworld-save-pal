@@ -19,7 +19,6 @@
 </script>
 
 <section class="relative w-full overflow-hidden px-4 py-16">
-	<SectionGlow />
 	<h2 class="h2 mb-8 text-center font-bold">Built different, on purpose</h2>
 	<div class="mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
 		{#each values as v (v.title)}

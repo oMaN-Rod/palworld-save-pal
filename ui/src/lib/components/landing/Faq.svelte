@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { ChevronDown } from 'lucide-svelte';
-	import SectionGlow from './SectionGlow.svelte';
 
 	const faqs = [
 		{
@@ -31,7 +30,6 @@
 </script>
 
 <section class="relative w-full overflow-hidden px-4 py-16">
-	<SectionGlow />
 	<h2 class="h2 mb-8 text-center font-bold">Questions</h2>
 	<div class="mx-auto flex max-w-3xl flex-col gap-3">
 		{#each faqs as item (item.q)}

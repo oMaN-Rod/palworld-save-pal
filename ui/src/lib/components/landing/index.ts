@@ -6,3 +6,6 @@ export { default as HowItWorks } from './HowItWorks.svelte';
 export { default as DesktopApp } from './DesktopApp.svelte';
 export { default as Faq } from './Faq.svelte';
 export { default as Cta } from './Cta.svelte';
+export { default as GithubLink } from './GithubLink.svelte';
+export { default as NexusModsLink } from './NexusModsLink.svelte';
+export { default as Link } from './Link.svelte';
