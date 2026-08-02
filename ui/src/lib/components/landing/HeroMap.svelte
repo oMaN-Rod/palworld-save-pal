@@ -3,7 +3,7 @@
 	import 'maplibre-gl/dist/maplibre-gl.css';
 	import type maplibregl from 'maplibre-gl';
 	import type { StyleSpecification } from 'maplibre-gl';
-	import { Map as MLMap, Source, Layer, Terrain, Control } from '$components/maplibre';
+	import { Map as MLMap, Source, Layer, Terrain } from '$components/maplibre';
 	import { MAP_MAX_BOUNDS, verticalScaleFactor } from '$components/map/mercator';
 	import { cmPerPx } from '$components/map/utils';
 
@@ -39,24 +39,15 @@
 	const canRender = webglAvailable();
 
 	let raf = 0;
-	let stopped = false;
 	let lastTs = 0;
 	const DEG_PER_MS = 0.0012;
 	const MAX_DT = 100;
 
-	function stopOrbit() {
-		stopped = true;
-		if (raf) {
-			cancelAnimationFrame(raf);
-			raf = 0;
-		}
-	}
-
 	function startOrbit() {
-		if (reduceMotion || !map || stopped) return;
+		if (reduceMotion || !map) return;
 		lastTs = 0;
 		const step = (ts: number) => {
-			if (!map || failed || stopped) {
+			if (!map || failed) {
 				raf = 0;
 				return;
 			}
@@ -71,11 +62,6 @@
 
 	function handleLoad() {
 		if (!map) return;
-		// Hand full control to the user on first interaction; the ambient spin's
-		// per-frame camera writes otherwise fight native pan/zoom/pitch gestures.
-		map.on('mousedown', stopOrbit);
-		map.on('touchstart', stopOrbit);
-		map.on('wheel', stopOrbit);
 		startOrbit();
 	}
 
@@ -105,14 +91,11 @@
 			maxZoom={6}
 			maxBounds={MAP_MAX_BOUNDS}
 			renderWorldCopies={false}
-			dragRotate={true}
-			pitchWithRotate={true}
-			touchZoomRotate={true}
+			interactive={false}
 			attributionControl={false}
 			onload={handleLoad}
 			onwebglcontextlost={() => (failed = true)}
 		>
-			<Control.Navigation position="top-right" showCompass={false} />
 			<Source.Raster tiles={['/maps/mainmap/{z}/{x}/{y}.webp']} tileSize={512} maxzoom={4}>
 				<Layer.Raster paint={{ 'raster-fade-duration': 300 }} />
 			</Source.Raster>

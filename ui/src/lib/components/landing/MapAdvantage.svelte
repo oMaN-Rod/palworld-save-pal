@@ -26,5 +26,5 @@
 			</div>
 		{/each}
 	</div>
-	<p class="text-surface-400 mt-8 text-sm">The map above is live. Drag it.</p>
+	<p class="text-surface-400 mt-8 text-sm">The map above is live, rendered right in your browser.</p>
 </section>
