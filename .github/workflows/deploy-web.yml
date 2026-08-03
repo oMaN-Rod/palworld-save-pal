@@ -38,7 +38,7 @@ jobs:
           prefix-key: "v0-web"
 
       - name: Install wasm-pack
-        uses: jetli/wasm-pack-action@v0.4
+        uses: jetli/wasm-pack-action@v0.4.0
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
