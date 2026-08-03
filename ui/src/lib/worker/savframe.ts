@@ -13,8 +13,20 @@ export interface SavHeader {
 	uncompressedLength: number;
 	compressedLength: number;
 	magicBytes: Uint8Array;
+	/** Container identity, from the magic. Dispatch compression on this. */
+	format: number;
+	/** Byte 11: the compression variant within the container. Shares values
+	 * with `format` (0x31 means both PlM and single-zlib), so it can never
+	 * stand in for it. */
 	saveType: number;
 	dataOffset: number;
+}
+
+function formatOf(magicBytes: Uint8Array): number | null {
+	if (magicEquals(magicBytes, MAGIC.PLZ)) return SaveType.PLZ;
+	if (magicEquals(magicBytes, MAGIC.PLM)) return SaveType.PLM;
+	if (magicEquals(magicBytes, MAGIC.CNK)) return SaveType.CNK;
+	return null;
 }
 
 export function parseSavHeader(savData: Uint8Array): SavHeader {
@@ -32,14 +44,9 @@ export function parseSavHeader(savData: Uint8Array): SavHeader {
 		saveType = savData[23];
 		dataOffset = 24;
 	}
-	if (
-		!magicEquals(magicBytes, MAGIC.PLZ) &&
-		!magicEquals(magicBytes, MAGIC.PLM) &&
-		!magicEquals(magicBytes, MAGIC.CNK)
-	) {
-		throw new Error(`Unknown magic bytes: ${magicBytes}`);
-	}
-	return { uncompressedLength, compressedLength, magicBytes, saveType, dataOffset };
+	const format = formatOf(magicBytes);
+	if (format === null) throw new Error(`Unknown magic bytes: ${magicBytes}`);
+	return { uncompressedLength, compressedLength, magicBytes, format, saveType, dataOffset };
 }
 
 export function getMagic(saveType: number): Uint8Array | null {
@@ -51,11 +58,7 @@ export function getMagic(saveType: number): Uint8Array | null {
 
 export function checkSavFormat(savData: Uint8Array): number | null {
 	if (savData.length < 12) return null;
-	const magic = savData.subarray(8, 11);
-	if (magicEquals(magic, MAGIC.PLZ)) return SaveType.PLZ;
-	if (magicEquals(magic, MAGIC.PLM)) return SaveType.PLM;
-	if (magicEquals(magic, MAGIC.CNK)) return SaveType.CNK;
-	return null;
+	return formatOf(savData.subarray(8, 11));
 }
 
 export function buildSav(

@@ -1,5 +1,6 @@
-import { unzipSync, zipSync } from 'fflate';
+import { unzipSync, unzlibSync, zipSync } from 'fflate';
 import { oozCompress, oozDecompress } from './ooz';
+import type { SavHeader } from './savframe';
 import { parseSavHeader, buildSav, getMagic, checkSavFormat, SaveType } from './savframe';
 import { openSqlite } from './sqlite';
 
@@ -17,10 +18,28 @@ function fromB64(b64: string): Uint8Array {
 	return out;
 }
 
-async function savToGvas(sav: Uint8Array): Promise<Uint8Array> {
+const ZLIB_DOUBLE = 0x32;
+
+function zlibToGvas(h: SavHeader, sav: Uint8Array): Uint8Array {
+	const first = unzlibSync(sav.subarray(h.dataOffset));
+	let gvas = first;
+	if (h.saveType === ZLIB_DOUBLE) {
+		// compressedLength describes the intermediate stream here, not the disk bytes.
+		if (h.compressedLength !== first.length) {
+			throw new Error(`incorrect compressed length: ${h.compressedLength} != ${first.length}`);
+		}
+		gvas = unzlibSync(first);
+	}
+	if (h.uncompressedLength !== gvas.length) {
+		throw new Error(`incorrect uncompressed length: ${h.uncompressedLength} != ${gvas.length}`);
+	}
+	return gvas;
+}
+
+export async function savToGvas(sav: Uint8Array): Promise<Uint8Array> {
 	if (checkSavFormat(sav) === null) return sav;
 	const h = parseSavHeader(sav);
-	if (h.saveType !== SaveType.PLM) throw new Error('Only PLM (Oodle) saves are supported');
+	if (h.format !== SaveType.PLM) return zlibToGvas(h, sav);
 	const payload = sav.subarray(h.dataOffset, h.dataOffset + h.compressedLength);
 	return oozDecompress(payload, h.uncompressedLength);
 }
