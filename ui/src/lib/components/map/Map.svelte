@@ -962,7 +962,7 @@
 					layout={{
 						'icon-image': ['get', 'icon'],
 						'icon-allow-overlap': true,
-						'icon-size': ['interpolate', ['linear'], ['zoom'], 2, 0.6, 7, 1.0]
+						'icon-size': zoomScaledIconSize(0.6, 1.0)
 					}}
 				/>
 			</Source.GeoJSON>

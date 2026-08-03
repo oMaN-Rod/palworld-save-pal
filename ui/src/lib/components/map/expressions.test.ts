@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { ExpressionSpecification } from 'maplibre-gl';
-import { ICON_ZOOM_MAX, ICON_ZOOM_MIN, zoomScaledIconSize } from './expressions';
+import { ICON_SCALE, ICON_ZOOM_MAX, ICON_ZOOM_MIN, zoomScaledIconSize } from './expressions';
 
 const build = (...args: Parameters<typeof zoomScaledIconSize>): unknown[] =>
 	zoomScaledIconSize(...args) as unknown as unknown[];
@@ -39,14 +39,20 @@ describe('zoomScaledIconSize', () => {
 	it('interpolates between the two zoom stops', () => {
 		const expr = build(0.6, 1.0);
 		expect(expr[3]).toBe(ICON_ZOOM_MIN);
-		expect(expr[4]).toBe(0.6);
+		expect(expr[4]).toBeCloseTo(0.6 * ICON_SCALE);
 		expect(expr[5]).toBe(ICON_ZOOM_MAX);
-		expect(expr[6]).toBe(1.0);
+		expect(expr[6]).toBeCloseTo(1.0 * ICON_SCALE);
 	});
 
-	it('passes data expressions through as stop values', () => {
+	it('wraps data expressions in a scale multiply', () => {
 		const watchtower: ExpressionSpecification = ['case', ['get', 'watchtower'], 0.36, 0.45];
 		const expr = build(watchtower, ['case', ['get', 'watchtower'], 0.6, 0.75]);
-		expect(expr[4]).toEqual(watchtower);
+		expect(expr[4]).toEqual(['*', watchtower, ICON_SCALE]);
+	});
+
+	it('scales every marker by the same factor', () => {
+		const relic = build(0.4, 0.6);
+		const player = build(0.6, 1.0);
+		expect((relic[4] as number) / 0.4).toBeCloseTo((player[4] as number) / 0.6);
 	});
 });
