@@ -1,4 +1,5 @@
 import type { ZipEntry } from '$lib/utils/folderUpload';
+import { detectCapabilities } from '$lib/utils/browserCapabilities';
 import * as m from '$i18n/messages';
 
 type Perm = 'granted' | 'denied' | 'prompt';
@@ -8,7 +9,7 @@ interface PermHandle {
 }
 
 export function fsaSupported(): boolean {
-	return typeof (globalThis as { showDirectoryPicker?: unknown }).showDirectoryPicker === 'function';
+	return detectCapabilities().fsa;
 }
 
 export async function pickSaveDirectory(): Promise<FileSystemDirectoryHandle | null> {

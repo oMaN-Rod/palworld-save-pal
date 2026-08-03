@@ -52,4 +52,9 @@ test('web landing shows the Adventure Atlas redesign', async ({ page }) => {
 
 	// No sidebar/nav rail on the landing
 	await expect(page.locator('.nav-rail')).toHaveCount(0);
+
+	// No compatibility banner on a healthy desktop Chromium run. The unit tests
+	// only prove detection matches hand-written fake scopes; this is the only
+	// check that a real browser is not told it is broken.
+	await expect(page.getByRole('status')).toHaveCount(0);
 });

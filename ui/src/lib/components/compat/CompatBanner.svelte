@@ -22,19 +22,27 @@
 	// storage APIs are absent — detecting there would bake a bogus warning into
 	// the shipped HTML. Only ever detect on the client.
 	const losses = browser ? limitations(detectCapabilities()) : [];
-	const agent = browser ? detectBrowser() : { family: 'unknown' as const, name: 'this browser' };
+	const agent = browser
+		? detectBrowser()
+		: { family: 'unknown' as const, name: 'this browser', mobile: false };
 
 	const COPY: Record<LimitationKey, () => string> = {
 		fsa: m.compat_loss_fsa,
 		opfs: m.compat_loss_opfs,
-		opfsSyncAccess: m.compat_loss_opfs_sync,
 		indexedDb: m.compat_loss_indexed_db
 	};
+
+	// Phones and tablets are not a supported target at all, so the per-capability
+	// breakdown is beside the point — and on iOS every browser is WebKit, which
+	// makes "try Chrome" actively wrong. Send them to a computer instead.
+	const isMobile = agent.mobile;
 
 	// Re-surface the banner when the set of limitations changes rather than
 	// letting an old dismissal hide a new problem. persistedState may hold a
 	// legacy/absent value, so treat anything unexpected as "not dismissed".
-	const signature = losses.join(',');
+	// Mobile needs its own signature: its loss list can be empty, which would
+	// otherwise collide with the "nothing dismissed yet" default.
+	const signature = isMobile ? 'mobile' : losses.join(',');
 	const dismissed = persistedState<string>('psp-compat-dismissed', '');
 	const isDismissed = $derived(dismissed.current === signature);
 
@@ -47,15 +55,16 @@
 	// wrongly told they're in a private window.
 	const isChromiumEngine = agent.family === 'chromium';
 	const showPrivateNote =
-		isChromiumEngine && (losses.includes('opfs') || losses.includes('indexedDb'));
+		!isMobile && isChromiumEngine && (losses.includes('opfs') || losses.includes('indexedDb'));
 
 	// The "try Chromium" suggestion suppresses on brand name too, so an iOS
 	// Chrome user (family 'safari', name 'Chrome') isn't told to switch to the
 	// browser they're already using.
 	const isChromiumBrand = isChromiumEngine || CHROMIUM_NAMES.includes(agent.name);
+	const showChromiumHint = !isMobile && !isChromiumBrand;
 </script>
 
-{#if losses.length > 0 && !isDismissed}
+{#if (isMobile || losses.length > 0) && !isDismissed}
 	<div
 		class="card border-warning-500/40 bg-surface-900/95 fixed top-4 left-1/2 z-50 w-[min(28rem,calc(100vw-2rem))] -translate-x-1/2 border p-4 shadow-xl backdrop-blur"
 		role="status"
@@ -63,16 +72,21 @@
 		<div class="flex items-start gap-3">
 			<TriangleAlert class="text-warning-400 mt-0.5 h-5 w-5 shrink-0" />
 			<div class="min-w-0 flex-1">
-				<h3 class="h4 font-semibold">{m.compat_limited_title({ browser: agent.name })}</h3>
-				<ul class="text-surface-300 mt-2 list-disc space-y-1 pl-4 text-sm">
-					{#each losses as loss (loss)}
-						<li>{COPY[loss]()}</li>
-					{/each}
-				</ul>
-				{#if showPrivateNote}
-					<p class="text-surface-400 mt-2 text-xs">{m.compat_private_note()}</p>
+				{#if isMobile}
+					<h3 class="h4 font-semibold">{m.compat_mobile_title()}</h3>
+					<p class="text-surface-300 mt-2 text-sm">{m.compat_mobile_body()}</p>
+				{:else}
+					<h3 class="h4 font-semibold">{m.compat_limited_title({ browser: agent.name })}</h3>
+					<ul class="text-surface-300 mt-2 list-disc space-y-1 pl-4 text-sm">
+						{#each losses as loss (loss)}
+							<li>{COPY[loss]()}</li>
+						{/each}
+					</ul>
+					{#if showPrivateNote}
+						<p class="text-surface-400 mt-2 text-xs">{m.compat_private_note()}</p>
+					{/if}
+					<p class="text-surface-400 mt-2 text-xs">{m.compat_desktop_note()}</p>
 				{/if}
-				<p class="text-surface-400 mt-2 text-xs">{m.compat_desktop_note()}</p>
 				<div class="mt-3 flex flex-wrap items-center gap-3">
 					<a
 						href={DESKTOP_URL}
@@ -83,7 +97,7 @@
 						<MonitorDown size={14} />
 						{m.compat_desktop_cta()}
 					</a>
-					{#if !isChromiumBrand}
+					{#if showChromiumHint}
 						<span class="text-surface-400 text-xs">{m.compat_try_chromium()}</span>
 					{/if}
 				</div>

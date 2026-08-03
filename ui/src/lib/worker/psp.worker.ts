@@ -117,11 +117,16 @@ if (typeof WorkerGlobalScope !== 'undefined' && self instanceof (WorkerGlobalSco
 				);
 				await mod.run_migrations();
 				if (!sqlite.persistent) {
+					// Untranslated: paraglide resolves the locale from a cookie or a
+					// module-scoped variable set by setLocale, and a dedicated worker
+					// has neither `document` nor the main thread's module instance, so
+					// importing $i18n/messages here would always render baseLocale.
 					self.postMessage(
 						JSON.stringify({
 							type: 'error',
 							data: {
-								message: 'This browser cannot persist data; changes will be lost on reload.',
+								message:
+									'This browser cannot store data; presets, blueprints and stored pals will not be saved between visits.',
 								trace: ''
 							}
 						})

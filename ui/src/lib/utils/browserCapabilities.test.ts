@@ -11,7 +11,6 @@ const fullSupport: CapabilityScope = {
 	Worker: function () {},
 	showDirectoryPicker: function () {},
 	navigator: { storage: { getDirectory: function () {} } },
-	FileSystemFileHandle: { prototype: { createSyncAccessHandle: function () {} } },
 	indexedDB: {}
 };
 
@@ -28,26 +27,25 @@ describe('detectCapabilities', () => {
 			workers: true,
 			fsa: true,
 			opfs: true,
-			opfsSyncAccess: true,
 			indexedDb: true
 		});
 	});
 
-	it('detects a Safari-like scope: no FSA, no sync access handle', () => {
-		const safari = without(['showDirectoryPicker']);
-		safari.FileSystemFileHandle = { prototype: {} };
-		const c = detectCapabilities(safari);
-		expect(c.fsa).toBe(false);
-		expect(c.opfsSyncAccess).toBe(false);
-		expect(c.opfs).toBe(true);
-		expect(hardBlocked(c)).toBe(false);
-	});
-
-	it('detects a Firefox-like scope: no FSA only', () => {
+	it('detects a Safari-like scope: no FSA, storage intact', () => {
 		const c = detectCapabilities(without(['showDirectoryPicker']));
 		expect(c.fsa).toBe(false);
 		expect(c.opfs).toBe(true);
+		expect(c.indexedDb).toBe(true);
 		expect(hardBlocked(c)).toBe(false);
+		expect(limitations(c)).toEqual(['fsa']);
+	});
+
+	it('ignores a FileSystemFileHandle without a sync access handle', () => {
+		// createSyncAccessHandle is [Exposed=DedicatedWorker], so it is absent on
+		// the main thread in EVERY browser. Detection must not read anything off
+		// FileSystemFileHandle, or every web user is told storage is broken.
+		const scope = { ...fullSupport, FileSystemFileHandle: { prototype: {} } };
+		expect(limitations(detectCapabilities(scope))).toEqual([]);
 	});
 
 	it('detects a private-mode-like scope with no storage APIs', () => {
@@ -94,13 +92,7 @@ describe('limitations', () => {
 	it('lists each degradable loss in a stable order', () => {
 		const priv = without(['showDirectoryPicker', 'indexedDB']);
 		priv.navigator = {};
-		priv.FileSystemFileHandle = { prototype: {} };
-		expect(limitations(detectCapabilities(priv))).toEqual([
-			'fsa',
-			'opfs',
-			'opfsSyncAccess',
-			'indexedDb'
-		]);
+		expect(limitations(detectCapabilities(priv))).toEqual(['fsa', 'opfs', 'indexedDb']);
 	});
 
 	it('never lists hard requirements', () => {

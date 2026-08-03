@@ -119,9 +119,7 @@
 	>
 		<FolderArchive class="h-16 w-16 opacity-80" />
 		<h3 class="h3 mt-3">{m.upload_drop_heading()}</h3>
-		<span class="text-surface-300"
-			>{m.upload_drop_hint_prefix()} <strong>.zip</strong> {m.upload_drop_hint_suffix()}</span
-		>
+		<span class="text-surface-300">{m.upload_drop_hint()}</span>
 		<div class="mt-4 flex flex-wrap items-center justify-center gap-3">
 			<Button variant="secondary" onclick={() => zipInput?.click()}>
 				<FileArchive size={16} />
