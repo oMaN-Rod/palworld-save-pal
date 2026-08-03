@@ -11,6 +11,7 @@
 	} from '$lib/utils/folderUpload';
 	import { fsaSupported, pickSaveDirectory, readSaveFolder, ensureReadWrite } from '$lib/fs';
 	import { isWebBuild } from '$lib/utils/platform';
+	import * as m from '$i18n/messages';
 
 	let {
 		onLoad
@@ -37,8 +38,7 @@
 
 	function loadEntries(entries: ZipEntry[]) {
 		if (!hasLevelSav(entries)) {
-			error =
-				'That folder has no Level.sav — choose the world save folder itself (the one with Level.sav and Players/).';
+			error = m.upload_error_no_level_sav();
 			return;
 		}
 		error = '';
@@ -58,7 +58,7 @@
 		if (hasDirectoryEntry(dt.items)) {
 			const entries = await readDroppedItems(dt.items);
 			if (entries.length === 0) {
-				error = 'Could not read that folder — try the "Choose folder" button.';
+				error = m.upload_error_folder_read();
 				return;
 			}
 			loadEntries(entries);
@@ -69,7 +69,7 @@
 			await loadZipFile(file);
 			return;
 		}
-		error = 'Drop a .zip file or your world folder.';
+		error = m.upload_error_drop_type();
 	}
 
 	async function onZipChange(event: Event) {
@@ -118,16 +118,18 @@
 		ondrop={onDrop}
 	>
 		<FolderArchive class="h-16 w-16 opacity-80" />
-		<h3 class="h3 mt-3">Drop your save here</h3>
-		<span class="text-surface-300">A <strong>.zip</strong> file or your world folder (Level.sav + Players/)</span>
+		<h3 class="h3 mt-3">{m.upload_drop_heading()}</h3>
+		<span class="text-surface-300"
+			>{m.upload_drop_hint_prefix()} <strong>.zip</strong> {m.upload_drop_hint_suffix()}</span
+		>
 		<div class="mt-4 flex flex-wrap items-center justify-center gap-3">
 			<Button variant="secondary" onclick={() => zipInput?.click()}>
 				<FileArchive size={16} />
-				Choose .zip
+				{m.upload_choose_zip()}
 			</Button>
 			<Button variant="secondary" onclick={chooseFolder}>
 				<FolderOpen size={16} />
-				Choose folder
+				{m.upload_choose_folder()}
 			</Button>
 		</div>
 	</div>

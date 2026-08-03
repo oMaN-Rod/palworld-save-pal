@@ -1,4 +1,5 @@
 import type { ZipEntry } from '$lib/utils/folderUpload';
+import * as m from '$i18n/messages';
 
 type Perm = 'granted' | 'denied' | 'prompt';
 interface PermHandle {
@@ -44,7 +45,7 @@ export async function readSaveFolder(dir: FileSystemDirectoryHandle): Promise<Zi
 	const out: ZipEntry[] = [];
 	await collect(dir, '', out);
 	if (!out.some((e) => e.path.endsWith('Level.sav'))) {
-		throw new Error("That folder has no Level.sav — choose the world save folder itself.");
+		throw new Error(m.upload_error_no_level_sav_short());
 	}
 	return out;
 }

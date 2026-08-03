@@ -30,15 +30,13 @@
 	async function resume() {
 		await goto('/loading');
 		appState.resetState();
-		pushProgressMessage('Restoring your last save...');
+		pushProgressMessage(m.upload_restoring());
 		const r = await restoreMostRecent((bytes) => send(MessageType.LOAD_ZIP_FILE, Array.from(bytes)));
 		if (!r.restored) {
 			await goto('/upload');
 			toast.add(
-				r.needsPermission
-					? 'Click "Open save folder" to reconnect your save folder.'
-					: 'Could not restore the last save.',
-				'Heads up',
+				r.needsPermission ? m.upload_reconnect_folder() : m.upload_restore_failed(),
+				m.toast_heads_up(),
 				'warning'
 			);
 		}
@@ -60,7 +58,7 @@
 	{#if recentName && !appState.saveFile}
 		<Button variant="secondary" onclick={resume}>
 			<FolderOpen size={16} />
-			Resume {recentName}
+			{m.upload_resume({ name: recentName })}
 		</Button>
 	{/if}
 	{#if appState.saveFile}
@@ -89,7 +87,7 @@
 					{#if isWebBuild && getActiveDirectory().writable}
 						<Button variant="secondary" onclick={saveToFolder}>
 							<FolderOpen size={16} />
-							Save to folder
+							{m.upload_save_to_folder()}
 						</Button>
 					{/if}
 					{#if appState.saveFile.world_option_present}
@@ -105,8 +103,7 @@
 	<div class="flex w-full max-w-xl flex-col items-center px-4 sm:w-3/4 md:w-1/2 lg:w-1/3">
 		<SaveDropzone onLoad={startSaveLoad} />
 		<p class="mt-2 max-w-md text-center text-xs opacity-60">
-			Pick the world save folder that contains Level.sav and a Players/ folder. On Steam this is
-			usually …/Steam/steamapps/common/Palworld/Pal/Saved/SaveGames/&lt;id&gt;/&lt;world&gt;.
+			{m.upload_path_hint()}
 		</p>
 	</div>
 </div>

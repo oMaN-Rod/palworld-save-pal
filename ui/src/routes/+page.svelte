@@ -38,15 +38,13 @@
 	async function resume() {
 		await goto('/loading');
 		appState.resetState();
-		pushProgressMessage('Restoring your last save...');
+		pushProgressMessage(m.upload_restoring());
 		const r = await restoreMostRecent((bytes) => send(MessageType.LOAD_ZIP_FILE, Array.from(bytes)));
 		if (!r.restored) {
 			await goto('/upload');
 			toast.add(
-				r.needsPermission
-					? 'Click "Open save folder" to reconnect your save folder.'
-					: 'Could not restore the last save.',
-				'Heads up',
+				r.needsPermission ? m.upload_reconnect_folder() : m.upload_restore_failed(),
+				m.toast_heads_up(),
 				'warning'
 			);
 		}

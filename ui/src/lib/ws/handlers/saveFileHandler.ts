@@ -10,12 +10,13 @@ import {
 import { unzipSync } from 'fflate';
 import { takeSaveTarget, getActiveDirectory, writeSaveInPlace } from '$lib/fs';
 import type { WSMessageHandler } from '../types';
+import * as m from '$i18n/messages';
 
 export const noFileSelectedHandler: WSMessageHandler = {
 	type: MessageType.NO_FILE_SELECTED,
 	async handle(_: string, { goto }) {
 		const toast = getToastState();
-		toast.add('No file was selected', 'Warning', 'warning');
+		toast.add(m.save_no_file_selected(), m.warning(), 'warning');
 		await goto('/file');
 	}
 };
@@ -66,7 +67,7 @@ export const saveModdedSaveHandler: WSMessageHandler = {
 	type: MessageType.SAVE_MODDED_SAVE,
 	async handle(data, { goto }) {
 		const toast = getToastState();
-		toast.add(data, 'Saved!', 'success');
+		toast.add(data, m.toast_saved(), 'success');
 		await goto('/file');
 	}
 };
@@ -114,7 +115,7 @@ export const downloadSaveFileHandler: WSMessageHandler = {
 		};
 		const mode = await handleSaveOutput(files, download, Date.now());
 		if (mode === 'folder') {
-			toast.add('Saved to your folder (originals backed up).', 'Saved!', 'success');
+			toast.add(m.save_saved_to_folder(), m.toast_saved(), 'success');
 		} else {
 			await goto('/file');
 		}

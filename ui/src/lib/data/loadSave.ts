@@ -3,6 +3,7 @@ import { send, pushProgressMessage } from '$lib/utils/websocketUtils';
 import { recordSession } from '$lib/fs';
 import { getAppState, getToastState } from '$states';
 import { MessageType } from '$types';
+import * as m from '$i18n/messages';
 
 export async function startSaveLoad(
 	zip: Uint8Array,
@@ -12,7 +13,7 @@ export async function startSaveLoad(
 	const appState = getAppState();
 	await goto('/loading');
 	appState.resetState();
-	pushProgressMessage('Loading save...');
+	pushProgressMessage(m.upload_loading_save());
 	send(MessageType.LOAD_ZIP_FILE, Array.from(zip));
 	const res = await recordSession({
 		zipBytes: zip,
@@ -22,10 +23,6 @@ export async function startSaveLoad(
 		writable: source?.writable
 	});
 	if (res.quota) {
-		getToastState().add(
-			'This save is too large to keep across reloads in this browser.',
-			'Heads up',
-			'warning'
-		);
+		getToastState().add(m.upload_too_large(), m.toast_heads_up(), 'warning');
 	}
 }
