@@ -11,6 +11,12 @@
 	import { detectBrowser } from '$lib/utils/browserIdentity';
 
 	const DESKTOP_URL = 'https://github.com/oMaN-Rod/palworld-save-pal/releases';
+	// The suggestion is suppressed on brand name as well as engine family:
+	// iOS Chrome reports family 'safari' (iOS forces WebKit) but name 'Chrome',
+	// and telling a Chrome user to switch to Chrome discredits the whole banner.
+	// Desktop Chromium browsers already match via `family`, so this list only
+	// needs the UA-string brand names that iOS-forced-WebKit browsers report.
+	const CHROMIUM_NAMES = ['Chrome', 'Microsoft Edge', 'Brave', 'Opera'];
 
 	// adapter-static prerenders this route in Node, where `Worker` and the
 	// storage APIs are absent — detecting there would bake a bogus warning into
@@ -32,10 +38,21 @@
 	const dismissed = persistedState<string>('psp-compat-dismissed', '');
 	const isDismissed = $derived(dismissed.current === signature);
 
-	// A Chromium browser missing storage is almost certainly a private window —
-	// telling that user to switch to Chrome would be nonsense.
-	const isChromium = agent.family === 'chromium';
-	const showPrivateNote = isChromium && (losses.includes('opfs') || losses.includes('indexedDb'));
+	// The private-window heuristic only holds for the real Chromium engine:
+	// desktop Chromium reliably supports OPFS/IndexedDB outside private mode, so
+	// their absence there signals private browsing. Safari-family browsers
+	// (including iOS Chrome/Firefox, which iOS forces onto WebKit) can lack
+	// these in ordinary browsing depending on OS version, so this stays keyed on
+	// engine family, not brand name — otherwise a normal iOS user would be
+	// wrongly told they're in a private window.
+	const isChromiumEngine = agent.family === 'chromium';
+	const showPrivateNote =
+		isChromiumEngine && (losses.includes('opfs') || losses.includes('indexedDb'));
+
+	// The "try Chromium" suggestion suppresses on brand name too, so an iOS
+	// Chrome user (family 'safari', name 'Chrome') isn't told to switch to the
+	// browser they're already using.
+	const isChromiumBrand = isChromiumEngine || CHROMIUM_NAMES.includes(agent.name);
 </script>
 
 {#if losses.length > 0 && !isDismissed}
@@ -66,7 +83,7 @@
 						<MonitorDown size={14} />
 						{m.compat_desktop_cta()}
 					</a>
-					{#if !isChromium}
+					{#if !isChromiumBrand}
 						<span class="text-surface-400 text-xs">{m.compat_try_chromium()}</span>
 					{/if}
 				</div>
