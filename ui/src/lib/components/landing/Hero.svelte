@@ -5,6 +5,7 @@
 	import { SaveDropzone } from '$components/upload';
 	import { Button, Tooltip } from '$components/ui';
 	import { RotateCcw, Lock } from 'lucide-svelte';
+	import * as m from '$i18n/messages';
 
 	interface Props {
 		onLoad: (
@@ -38,18 +39,18 @@
 	<div class="glass relative z-10 mx-4 w-full max-w-md rounded-2xl p-6 text-center sm:p-8">
 		<Logo class="mx-auto mb-5 w-full max-w-xs" />
 		<p class="text-surface-200 text-lg">
-			The free, open-source Palworld save editor. In your browser.
+			{m.landing_hero_tagline()}
 		</p>
 		<div class="mt-6">
 			<SaveDropzone {onLoad} />
 		</div>
 		<p class="text-surface-300 mt-4 flex items-center justify-center gap-2 text-sm">
-			<Lock size={14} /> Your files never leave your device.
+			<Lock size={14} /> {m.landing_hero_privacy()}
 		</p>
 		{#if resumeName && onResume}
 			<Tooltip label={resumeName}>
 				<Button variant="secondary" class="mt-4" onclick={onResume}>
-					<RotateCcw size={16} /> Resume Previous Save
+					<RotateCcw size={16} /> {m.landing_hero_resume()}
 				</Button>
 			</Tooltip>
 		{/if}

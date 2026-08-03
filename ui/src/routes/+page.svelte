@@ -17,6 +17,7 @@
 	import { send, pushProgressMessage } from '$lib/utils/websocketUtils';
 	import { MessageType } from '$types';
 	import { startSaveLoad } from '$lib/data/loadSave';
+	import * as m from '$i18n/messages';
 
 	const appState = getAppState();
 	const toast = getToastState();
@@ -53,16 +54,10 @@
 </script>
 
 <svelte:head>
-	<title>Palworld Save Pal: edit Palworld saves in your browser</title>
-	<meta
-		name="description"
-		content="Open, edit and save Palworld saves entirely in your browser. Pals, bases, blueprints and presets. Free and open source, with a full 3D world map."
-	/>
-	<meta property="og:title" content="Palworld Save Pal" />
-	<meta
-		property="og:description"
-		content="Edit Palworld saves in your browser, with a full 3D world map. Pals, bases, blueprints and presets."
-	/>
+	<title>{m.landing_meta_title()}</title>
+	<meta name="description" content={m.landing_meta_description()} />
+	<meta property="og:title" content={m.landing_og_title()} />
+	<meta property="og:description" content={m.landing_og_description()} />
 	<meta property="og:type" content="website" />
 </svelte:head>
 
