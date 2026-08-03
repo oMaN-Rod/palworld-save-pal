@@ -889,6 +889,17 @@
 		}
 	});
 
+	// A click can mutate the very feature it's hovering (e.g. collecting a relic while a
+	// "hide collected" filter is active), removing its byKey entry without any mousemove
+	// to clear `hovered` first. Left stale, the tooltip below would render with undefined
+	// data and throw. `has` (not a truthy `data` check) matters here: the origin entry is
+	// legitimately present with `data: null`.
+	$effect(() => {
+		const current = hovered;
+		if (!current) return;
+		if (!byKey.has(`${current.type}:${current.key}`)) hovered = null;
+	});
+
 </script>
 
 <div class="relative h-full w-full">
