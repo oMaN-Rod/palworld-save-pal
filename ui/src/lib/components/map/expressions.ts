@@ -3,7 +3,7 @@ import type { ExpressionSpecification } from 'maplibre-gl';
 export const ICON_ZOOM_MIN = 2;
 export const ICON_ZOOM_MAX = 7;
 
-type StopValue = number | ExpressionSpecification;
+export type StopValue = number | ExpressionSpecification;
 
 /** Every marker renders this much larger than the size its call site declares. */
 export const ICON_SCALE = 1.15;
@@ -26,4 +26,23 @@ export function zoomScaledIconSize(small: StopValue, large: StopValue): Expressi
 		ICON_ZOOM_MAX,
 		scaleStop(large)
 	];
+}
+
+/** Gap in px between the icon's edge and its halo ring. */
+export const HALO_PAD = 3;
+
+/**
+ * Halo radius in px for a marker. Source art resolution differs per marker
+ * (48/64/100 px), so icon-size alone does not describe rendered size.
+ */
+export function haloRadiusPx(sourcePx: number, iconSize: number): number {
+	return (sourcePx * iconSize * ICON_SCALE) / 2 + HALO_PAD;
+}
+
+/**
+ * Zoom interpolation for circle-radius. Unlike zoomScaledIconSize this does not
+ * apply ICON_SCALE -- haloRadiusPx already has.
+ */
+export function zoomScaledRadius(small: StopValue, large: StopValue): ExpressionSpecification {
+	return ['interpolate', ['linear'], ['zoom'], ICON_ZOOM_MIN, small, ICON_ZOOM_MAX, large];
 }
