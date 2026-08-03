@@ -28,7 +28,7 @@ logs/
 /ui/node_modules
 /ui/.output
 /ui/.vercel
-/ui/.svelte-kit
+.svelte-kit
 /ui/build
 /ui/.env
 /ui/.env.*
