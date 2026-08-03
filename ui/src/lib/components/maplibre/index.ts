@@ -16,6 +16,7 @@ import LineLayer from './layers/line/line-layer.svelte';
 import FillLayer from './layers/fill/fill-layer.svelte';
 import FillExtrusionLayer from './layers/fill-extrusion/fill-extrusion-layer.svelte';
 import RasterLayer from './layers/raster/raster-layer.svelte';
+import CircleLayer from './layers/circle/circle-layer.svelte';
 
 export const Layer = {
 	Raw: RawLayer,
@@ -23,7 +24,8 @@ export const Layer = {
 	Line: LineLayer,
 	Fill: FillLayer,
 	FillExtrusion: FillExtrusionLayer,
-	Raster: RasterLayer
+	Raster: RasterLayer,
+	Circle: CircleLayer
 };
 
 import NavigationControl from './controls/navigation/navigation-control.svelte';
