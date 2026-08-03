@@ -1,6 +1,10 @@
 <script module lang="ts">
 	const HOVER_STATE = { hover: true };
 	const STRUCTURE_MIN_ZOOM = 5;
+	const HALO_COLOR = '#f59e0b';
+	const RELIC_ART_PX = 42;
+	const FAST_TRAVEL_ART_PX = 52;
+	const WATCHTOWER_ART_PX = 77;
 </script>
 
 <script lang="ts">
@@ -32,7 +36,7 @@
 		type MapArea
 	} from './utils';
 	import { MAP_MAX_BOUNDS, lngLatToPixel, pixelToLngLat, verticalScaleFactor } from './mercator';
-	import { zoomScaledIconSize } from './expressions';
+	import { haloRadiusPx, zoomScaledIconSize, zoomScaledRadius } from './expressions';
 	import {
 		buildBaseFC,
 		buildBaseRadiusFC,
@@ -828,6 +832,29 @@
 		return ['!', ['in', ['get', 'typeA'], ['literal', hidden]]];
 	});
 
+	const relicHaloRadius = zoomScaledRadius(
+		haloRadiusPx(RELIC_ART_PX, 0.4),
+		haloRadiusPx(RELIC_ART_PX, 0.6)
+	);
+
+	// Watchtowers share this layer with fast travel points but differ in both art
+	// extent and icon size, so the per-class split lives inside the interpolate
+	// stops -- a `case` wrapping two interpolates would nest zoom and fail validation.
+	const fastTravelHaloRadius = zoomScaledRadius(
+		[
+			'case',
+			['get', 'watchtower'],
+			haloRadiusPx(WATCHTOWER_ART_PX, 0.36),
+			haloRadiusPx(FAST_TRAVEL_ART_PX, 0.45)
+		],
+		[
+			'case',
+			['get', 'watchtower'],
+			haloRadiusPx(WATCHTOWER_ART_PX, 0.6),
+			haloRadiusPx(FAST_TRAVEL_ART_PX, 0.75)
+		]
+	);
+
 	// A selected/hovered structure can stop being rendered three ways - 3D toggled off,
 	// its type filtered out, or the underlying data reset by a save load - so both refs
 	// are re-validated together whenever any of those can happen.
@@ -1015,6 +1042,34 @@
 			     layer-level `minzoom`, because MapLibre gates a symbol layer's icon and text
 			     together — a `minzoom` here would hide the icon along with the label. -->
 			<Source.GeoJSON id="fast-travel-src" data={fastTravelFC}>
+				<Layer.Circle
+					id="fast-travel-glow"
+					beforeId="origin-icons"
+					visible={showFastTravel || showWatchtower}
+					filter={['==', ['get', 'locked'], true]}
+					paint={{
+						'circle-color': HALO_COLOR,
+						'circle-radius': fastTravelHaloRadius,
+						'circle-blur': 0.7,
+						'circle-opacity': 0.55,
+						'circle-pitch-scale': 'viewport'
+					}}
+				/>
+				<Layer.Circle
+					id="fast-travel-ring"
+					beforeId="origin-icons"
+					visible={showFastTravel || showWatchtower}
+					filter={['==', ['get', 'locked'], true]}
+					paint={{
+						'circle-color': HALO_COLOR,
+						'circle-opacity': 0,
+						'circle-radius': fastTravelHaloRadius,
+						'circle-stroke-color': HALO_COLOR,
+						'circle-stroke-width': 1.5,
+						'circle-stroke-opacity': 0.95,
+						'circle-pitch-scale': 'viewport'
+					}}
+				/>
 				<Layer.Symbol
 					id="fast-travel-icons"
 					visible={showFastTravel || showWatchtower}
@@ -1050,6 +1105,34 @@
 			</Source.GeoJSON>
 
 			<Source.GeoJSON id="relic-src" data={relicFC}>
+				<Layer.Circle
+					id="relic-glow"
+					beforeId="origin-icons"
+					visible={showRelics}
+					filter={['==', ['get', 'collected'], false]}
+					paint={{
+						'circle-color': HALO_COLOR,
+						'circle-radius': relicHaloRadius,
+						'circle-blur': 0.7,
+						'circle-opacity': 0.55,
+						'circle-pitch-scale': 'viewport'
+					}}
+				/>
+				<Layer.Circle
+					id="relic-ring"
+					beforeId="origin-icons"
+					visible={showRelics}
+					filter={['==', ['get', 'collected'], false]}
+					paint={{
+						'circle-color': HALO_COLOR,
+						'circle-opacity': 0,
+						'circle-radius': relicHaloRadius,
+						'circle-stroke-color': HALO_COLOR,
+						'circle-stroke-width': 1.5,
+						'circle-stroke-opacity': 0.95,
+						'circle-pitch-scale': 'viewport'
+					}}
+				/>
 				<Layer.Symbol
 					id="relic-icons"
 					visible={showRelics}

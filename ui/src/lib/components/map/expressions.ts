@@ -32,11 +32,12 @@ export function zoomScaledIconSize(small: StopValue, large: StopValue): Expressi
 export const HALO_PAD = 3;
 
 /**
- * Halo radius in px for a marker. Source art resolution differs per marker
- * (48/64/100 px), so icon-size alone does not describe rendered size.
+ * Halo radius in px for a marker. Callers pass the artwork's measured visible
+ * extent, not the source canvas -- every icon carries transparent padding, so
+ * the canvas overstates how much space the art occupies.
  */
-export function haloRadiusPx(sourcePx: number, iconSize: number): number {
-	return (sourcePx * iconSize * ICON_SCALE) / 2 + HALO_PAD;
+export function haloRadiusPx(artPx: number, iconSize: number): number {
+	return (artPx * iconSize * ICON_SCALE) / 2 + HALO_PAD;
 }
 
 /**
