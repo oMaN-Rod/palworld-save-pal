@@ -40,6 +40,10 @@ export default defineConfig({
 		}
 	},
 	test: {
-		include: ['src/**/*.{test,spec}.{js,ts}', '../scripts/**/*.test.mjs']
+		include: [
+			'src/**/*.{test,spec}.{js,ts}',
+			'scripts/**/*.test.mjs',
+			'../scripts/**/*.test.mjs'
+		]
 	}
 });
