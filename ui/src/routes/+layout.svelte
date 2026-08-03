@@ -17,11 +17,20 @@
 		clearStoredSelectedPlayerUid
 	} from '$lib/utils/sessionPersistence';
 	import { isWebBuild } from '$lib/utils/platform';
+	import { browser } from '$app/environment';
+	import { CompatBanner, UnsupportedBrowser } from '$components/compat';
+	import { detectCapabilities, hardBlocked } from '$lib/utils/browserCapabilities';
 
 	const { children } = $props();
 	const ws = getSocketState();
 	const dispatcher = getDispatcher();
 	const appState = getAppState();
+
+	// Web build only: desktop and Docker ship a real backend and native file
+	// access, so none of these browser limits apply there. The `browser` guard
+	// matters because adapter-static prerenders in Node, where `Worker` is not a
+	// global — detecting there would bake the block screen into shipped HTML.
+	const blocked = browser && isWebBuild && hardBlocked(detectCapabilities());
 
 	handlers.forEach((handler) => {
 		dispatcher.register(handler);
@@ -54,31 +63,39 @@
 	});
 
 	onMount(async () => {
+		if (blocked) return;
 		ws.connect({ goto });
 
 		await bootstrap();
 	});
 </script>
 
-<Toast position="bottom-center" transition={{ type: 'fly', params: { y: 300 } }} />
-<Modal>
-	<div class="flex h-screen w-full overflow-hidden">
-		{#if !(isWebBuild && !appState.saveFile)}
-			<NavBar />
-		{/if}
-		{#if appState.autoSave}
-			<div class="auto-save-indicator" transition:fade>
-				<span class="text-primary-400 text-sm font-bold">{m.syncing()}</span>
-				<Spinner size="size-5" />
+{#if blocked}
+	<UnsupportedBrowser />
+{:else}
+	<Toast position="bottom-center" transition={{ type: 'fly', params: { y: 300 } }} />
+	{#if isWebBuild && !appState.saveFile}
+		<CompatBanner />
+	{/if}
+	<Modal>
+		<div class="flex h-screen w-full overflow-hidden">
+			{#if !(isWebBuild && !appState.saveFile)}
+				<NavBar />
+			{/if}
+			{#if appState.autoSave}
+				<div class="auto-save-indicator" transition:fade>
+					<span class="text-primary-400 text-sm font-bold">{m.syncing()}</span>
+					<Spinner size="size-5" />
+				</div>
+			{/if}
+			<div class="relative flex-1 overflow-hidden">
+				{#key page.url.pathname}
+					<main class="absolute inset-0 overflow-y-auto" transition:fade={{ duration: 150 }}>
+						{@render children()}
+					</main>
+				{/key}
 			</div>
-		{/if}
-		<div class="relative flex-1 overflow-hidden">
-			{#key page.url.pathname}
-				<main class="absolute inset-0 overflow-y-auto" transition:fade={{ duration: 150 }}>
-					{@render children()}
-				</main>
-			{/key}
 		</div>
-	</div>
-</Modal>
-<PalEditorOverlay />
+	</Modal>
+	<PalEditorOverlay />
+{/if}
