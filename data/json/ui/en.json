@@ -957,7 +957,7 @@
   "upload_error_no_level_sav": "That folder has no Level.sav — choose the world save folder itself (the one with Level.sav and Players/).",
   "upload_error_no_level_sav_short": "That folder has no Level.sav — choose the world save folder itself.",
   "upload_loading_save": "Loading save...",
-  "upload_path_hint": "Pick the world save folder that contains Level.sav and a Players/ folder. On Steam this is usually …/Steam/steamapps/common/Palworld/Pal/Saved/SaveGames/<id>/<world>.",
+  "upload_path_hint": "Pick the world save folder that contains Level.sav and a Players/ folder. On Steam this is usually %localappdata%/Pal/Saved/SaveGames/<id>/<world>.",
   "upload_reconnect_folder": "Click \"Open save folder\" to reconnect your save folder.",
   "upload_restore_failed": "Could not restore the last save.",
   "upload_restoring": "Restoring your last save...",
