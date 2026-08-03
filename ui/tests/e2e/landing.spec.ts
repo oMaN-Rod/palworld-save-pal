@@ -39,7 +39,9 @@ test('web landing shows the Adventure Atlas redesign', async ({ page }) => {
 		'href',
 		'https://github.com/oMaN-Rod/palworld-save-pal'
 	);
-	await expect(page.getByRole('button', { name: /nexusmods/i })).toHaveAttribute(
+	// Renders as an anchor with aria-label "Nexus Mods" (see landing/Link.svelte),
+	// so it is a link, not a button, and the accessible name contains a space.
+	await expect(page.getByRole('link', { name: /nexus\s*mods/i }).first()).toHaveAttribute(
 		'href',
 		'https://www.nexusmods.com/palworld/mods/1827'
 	);

@@ -121,9 +121,12 @@ if (typeof WorkerGlobalScope !== 'undefined' && self instanceof (WorkerGlobalSco
 					// module-scoped variable set by setLocale, and a dedicated worker
 					// has neither `document` nor the main thread's module instance, so
 					// importing $i18n/messages here would always render baseLocale.
+					// 'warning', not 'error': errorHandler navigates to /error, which
+					// would eject the user out of an app that still works fine without
+					// persistence.
 					self.postMessage(
 						JSON.stringify({
-							type: 'error',
+							type: 'warning',
 							data: {
 								message:
 									'This browser cannot store data; presets, blueprints and stored pals will not be saved between visits.',

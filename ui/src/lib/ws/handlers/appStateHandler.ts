@@ -1,7 +1,8 @@
 import { goto } from '$app/navigation';
 import { UpdateAvailableModal } from '$components/modals';
+import * as m from '$i18n/messages';
 import { setLocale } from '$i18n/runtime';
-import { getAppState, getModalState } from '$states';
+import { getAppState, getModalState, getToastState } from '$states';
 import { MessageType } from '$types';
 import { isUpdateAvailableOnGitHub } from '$utils/appVersion';
 import type { WSMessageHandler } from '../types';
@@ -43,6 +44,17 @@ export const errorHandler: WSMessageHandler = {
 	}
 };
 
+/** Non-fatal counterpart to errorHandler: surfaces the problem without
+ *  navigating away from an app that still works. */
+export const warningHandler: WSMessageHandler = {
+	type: MessageType.WARNING,
+	async handle(data) {
+		const raw = typeof data === 'string' ? data : (data as { message?: unknown })?.message;
+		if (!raw) return;
+		getToastState().add(String(raw), m.warning(), 'warning');
+	}
+};
+
 export const settingsHandler: WSMessageHandler = {
 	type: MessageType.GET_SETTINGS,
 	async handle(data) {
@@ -56,5 +68,6 @@ export const appStateHandlers = [
 	getVersionHandler,
 	progressMessageHandler,
 	errorHandler,
+	warningHandler,
 	settingsHandler
 ];
