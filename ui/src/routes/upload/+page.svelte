@@ -50,7 +50,7 @@
 	async function handleDownloadSaveFile() {
 		send(MessageType.DOWNLOAD_SAVE_FILE);
 		await goto('/loading');
-		pushProgressMessage('Starting to cook...');
+		pushProgressMessage(m.upload_starting_to_cook());
 	}
 </script>
 
