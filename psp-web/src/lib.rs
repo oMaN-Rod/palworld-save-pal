@@ -65,6 +65,53 @@ pub fn set_sql_bridge(exec: js_sys::Function, query: js_sys::Function) {
     opfs_driver::SQL_QUERY.with(|c| *c.borrow_mut() = Some(query));
 }
 
+/// Lends the engine the worker's `ooz.wasm` Oodle codec, which wasm32 cannot
+/// link for itself. `compress(Uint8Array) -> Uint8Array` and
+/// `decompress(Uint8Array, uncompressedLength) -> Uint8Array`, both synchronous:
+/// the engine calls them from inside a save encode, so the module behind them
+/// must already be up.
+#[wasm_bindgen]
+pub fn set_oodle_bridge(compress: js_sys::Function, decompress: js_sys::Function) {
+    psp_core::oodle::set_bridge(
+        move |data| {
+            let bytes = js_sys::Uint8Array::from(data);
+            call_codec(&compress, &[bytes.into()])
+        },
+        move |payload, uncompressed_len| {
+            let bytes = js_sys::Uint8Array::from(payload);
+            call_codec(
+                &decompress,
+                &[bytes.into(), JsValue::from_f64(uncompressed_len as f64)],
+            )
+        },
+    );
+}
+
+/// Applies a JS codec function and takes the `Uint8Array` it returns. A throw
+/// and a wrong return type both surface as the engine's own error, since a
+/// silently empty payload would be written into a save.
+fn call_codec(codec: &js_sys::Function, args: &[JsValue]) -> Result<Vec<u8>, String> {
+    let arguments = args.iter().collect::<js_sys::Array>();
+    let returned = codec
+        .apply(&JsValue::NULL, &arguments)
+        .map_err(|error| js_error_message(&error))?;
+    returned
+        .dyn_into::<js_sys::Uint8Array>()
+        .map(|bytes| bytes.to_vec())
+        .map_err(|_| "the oodle bridge returned something other than a Uint8Array".to_string())
+}
+
+fn js_error_message(error: &JsValue) -> String {
+    error
+        .as_string()
+        .or_else(|| {
+            js_sys::Reflect::get(error, &JsValue::from_str("message"))
+                .ok()
+                .and_then(|message| message.as_string())
+        })
+        .unwrap_or_else(|| "the oodle bridge threw a non-Error value".to_string())
+}
+
 /// Runs the schema migrations through the driver. The worker calls this after
 /// `set_sql_bridge` and before dispatching frames.
 #[wasm_bindgen]

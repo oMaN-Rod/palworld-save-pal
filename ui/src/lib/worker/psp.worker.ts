@@ -1,5 +1,5 @@
 import { unzipSync, unzlibSync, zipSync } from 'fflate';
-import { oozCompress, oozDecompress } from './ooz';
+import { initOoz, oozCompress, oozCompressSync, oozDecompress, oozDecompressSync } from './ooz';
 import type { SavHeader } from './savframe';
 import { parseSavHeader, buildSav, getMagic, checkSavFormat, SaveType } from './savframe';
 import { openSqlite } from './sqlite';
@@ -129,6 +129,11 @@ if (typeof WorkerGlobalScope !== 'undefined' && self instanceof (WorkerGlobalSco
 				await mod.default();
 				mod.init();
 				mod.set_emit_callback((frame: string) => self.postMessage(frame));
+				// The engine links no Oodle codec on wasm32; without this every
+				// `.sav`/`.psp` it writes for itself — blueprints, above all —
+				// fails with "Compression support not enabled".
+				await initOoz();
+				mod.set_oodle_bridge(oozCompressSync, oozDecompressSync);
 				const sqlite = await openSqlite();
 				mod.set_sql_bridge(
 					(sql: string, params: unknown[]) => sqlite.exec(sql, params),
