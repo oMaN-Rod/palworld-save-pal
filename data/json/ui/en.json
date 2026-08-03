@@ -343,6 +343,8 @@
   "heal_all_in_entity": "Heal all in {entity}",
   "heal_selected_pals": "Heal selected {pals}",
   "health": "Health",
+  "hide_collected": "Hide collected",
+  "hide_unlocked": "Hide unlocked",
   "how_many_clones": "How many clones?",
   "hp": "HP",
   "human": [

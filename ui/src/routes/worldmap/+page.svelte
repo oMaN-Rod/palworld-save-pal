@@ -62,6 +62,10 @@
 		showFastTravel: boolean;
 		showWatchtower: boolean;
 		showRelics: boolean;
+		/** Hide relics the selected player has already collected. */
+		hideCollectedRelics: boolean;
+		/** Hide fast travel points and watchtowers the selected player has already unlocked. */
+		hideUnlockedFastTravel: boolean;
 		/** Per-relic-type visibility; a missing key means visible. */
 		relicTypes: Record<string, boolean>;
 		/** Per-structure-type visibility; a missing key means visible. */
@@ -84,6 +88,8 @@
 		showFastTravel: true,
 		showWatchtower: true,
 		showRelics: true,
+		hideCollectedRelics: false,
+		hideUnlockedFastTravel: false,
 		relicTypes: {},
 		structureTypes: Object.fromEntries(Object.keys(STRUCTURE_COLORS).map((key) => [key, true])),
 		showDungeons: true,
@@ -440,7 +446,13 @@
 	}
 
 	async function handleToggleAll(show: boolean) {
-		const skip = ['enable3d', 'panelOpen', 'structureTypes'];
+		const skip = [
+			'enable3d',
+			'panelOpen',
+			'structureTypes',
+			'hideCollectedRelics',
+			'hideUnlockedFastTravel'
+		];
 		function toggleRecursive(obj: Record<string, any>, nested = false) {
 			for (const key in obj) {
 				if (skip.includes(key)) continue;
@@ -722,6 +734,32 @@
 								<span>{m.map_labels()}</span>
 							</button>
 						</div>
+						{#if appState.selectedPlayer}
+							<div class="border-surface-700 grid grid-cols-2 gap-2 rounded-sm border p-2">
+								<button
+									class="flex items-center space-x-2 {(mapOptions.hideUnlockedFastTravel ?? false)
+										? ''
+										: 'opacity-25'}"
+									onclick={() =>
+										(mapOptions.hideUnlockedFastTravel = !(
+											mapOptions.hideUnlockedFastTravel ?? false
+										))}
+								>
+									<img src={mapImg.fastTravel} alt={m.fast_travel()} class="mr-1 h-5 w-5" />
+									<span class="truncate text-xs">{m.hide_unlocked()}</span>
+								</button>
+								<button
+									class="flex items-center space-x-2 {(mapOptions.hideCollectedRelics ?? false)
+										? ''
+										: 'opacity-25'}"
+									onclick={() =>
+										(mapOptions.hideCollectedRelics = !(mapOptions.hideCollectedRelics ?? false))}
+								>
+									<img src={mapImg.effigy} alt={m.relics()} class="mr-1 h-5 w-5" />
+									<span class="truncate text-xs">{m.hide_collected()}</span>
+								</button>
+							</div>
+						{/if}
 						{#if (mapOptions.showRelics ?? true) && relicTypeList.length > 0}
 							<div class="border-surface-700 grid grid-cols-2 gap-2 rounded-sm border p-2">
 								{#each relicTypeList as relicType (relicType)}
@@ -941,6 +979,8 @@
 					showFastTravel={mapOptions.showFastTravel}
 					showWatchtower={mapOptions.showWatchtower ?? true}
 					showRelics={mapOptions.showRelics ?? true}
+					hideCollectedRelics={mapOptions.hideCollectedRelics ?? false}
+					hideUnlockedFastTravel={mapOptions.hideUnlockedFastTravel ?? false}
 					relicTypes={mapOptions.relicTypes ?? {}}
 					showDungeons={mapOptions.showDungeons}
 					showBosses={mapOptions.showBosses ?? true}

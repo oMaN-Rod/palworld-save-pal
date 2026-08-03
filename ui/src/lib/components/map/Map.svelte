@@ -99,6 +99,8 @@
 		showFastTravel = true,
 		showWatchtower = true,
 		showRelics = true,
+		hideCollectedRelics = false,
+		hideUnlockedFastTravel = false,
 		relicTypes = {},
 		showDungeons = true,
 		showBosses = true,
@@ -133,6 +135,8 @@
 		showFastTravel?: boolean;
 		showWatchtower?: boolean;
 		showRelics?: boolean;
+		hideCollectedRelics?: boolean;
+		hideUnlockedFastTravel?: boolean;
 		/** Per-relic-type visibility; a missing key means visible. */
 		relicTypes?: Record<string, boolean>;
 		showDungeons?: boolean;
@@ -214,7 +218,9 @@
 	// watchtowers follow showWatchtower. Both keep type: 'fast_travel' so the
 	// click/toggle path is shared.
 	const visibleFastTravelPoints = $derived(
-		fastTravelPointList.filter((p) => (isWatchtower(p) ? showWatchtower : showFastTravel))
+		fastTravelPointList
+			.filter((p) => (isWatchtower(p) ? showWatchtower : showFastTravel))
+			.filter((p) => !(hideUnlockedFastTravel && p.unlocked === true))
 	);
 
 	const collectedRelicGuids = $derived.by(() => {
@@ -238,7 +244,8 @@
 					? (collectedRelicGuids[point.relic_type]?.has(guid.toUpperCase()) ?? false)
 					: undefined
 			}))
-			.filter((p) => mapOf(p.x, p.y) === area);
+			.filter((p) => mapOf(p.x, p.y) === area)
+			.filter((p) => !(hideCollectedRelics && p.unlocked === true));
 	});
 
 	const dungeonPoints = $derived(
