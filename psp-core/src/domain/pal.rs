@@ -529,6 +529,21 @@ pub fn apply_pal_dto(
         }
     }
 
+    if let Some(is_awakened) = dto.is_awakened {
+        set_or_remove(
+            save_parameter,
+            "bIsAwakening",
+            is_awakened.then(|| props::bool_property(true)),
+        );
+    }
+    if let Some(is_imported) = dto.is_imported {
+        set_or_remove(
+            save_parameter,
+            "bImportedCharacter",
+            is_imported.then(|| props::bool_property(true)),
+        );
+    }
+
     save_parameter.insert("Gender", props::enum_property(&dto.gender.prefixed()));
 
     // Soul-upgrade ranks are absent from the save at 0, not written as 0.
@@ -2791,5 +2806,102 @@ mod tests {
         let dto = read_save_parameter_dto(&save_parameter, instance_id, false, &data);
 
         assert_eq!(dto.stomach, 150.0);
+    }
+
+    fn sample_pal_dto() -> PalDto {
+        let mut work_suitability = OrderedMap::new();
+        work_suitability.insert("Handcraft".to_string(), 2);
+        PalDto {
+            instance_id: uuid::Uuid::nil(),
+            character_id: "SheepBall".to_string(),
+            character_key: "sheepball".to_string(),
+            owner_uid: None,
+            is_lucky: Some(false),
+            is_boss: Some(false),
+            is_predator: false,
+            is_awakened: Some(false),
+            is_imported: Some(false),
+            is_tower: false,
+            gender: PalGender::Female,
+            nickname: None,
+            filtered_nickname: None,
+            group_id: None,
+            stomach: 150.0,
+            sanity: 100.0,
+            hp: 12345,
+            level: 10,
+            exp: 0,
+            rank: 1,
+            rank_hp: 0,
+            rank_attack: 0,
+            rank_defense: 0,
+            rank_craftspeed: 0,
+            talent_hp: 0,
+            talent_shot: 0,
+            talent_defense: 0,
+            max_hp: 0,
+            storage_slot: 0,
+            storage_id: props::EMPTY_UUID,
+            learned_skills: vec![],
+            active_skills: vec![],
+            passive_skills: vec![],
+            work_suitability,
+            is_sick: false,
+            friendship_point: 0,
+        }
+    }
+
+    #[test]
+    fn apply_pal_dto_writes_removes_and_preserves_the_awakened_flag() {
+        let data = game_data();
+        let mut dto = sample_pal_dto();
+
+        let mut writes_it = Properties::default();
+        dto.is_awakened = Some(true);
+        apply_pal_dto(&mut writes_it, &dto, false, &data);
+        assert_eq!(param(&writes_it, "bIsAwakening").and_then(props::as_bool), Some(true));
+
+        let mut removes_it = Properties::default();
+        removes_it.insert("bIsAwakening", Property::Bool(true));
+        dto.is_awakened = Some(false);
+        apply_pal_dto(&mut removes_it, &dto, false, &data);
+        assert!(param(&removes_it, "bIsAwakening").is_none(), "Some(false) removes");
+
+        let mut leaves_it = Properties::default();
+        leaves_it.insert("bIsAwakening", Property::Bool(true));
+        dto.is_awakened = None;
+        apply_pal_dto(&mut leaves_it, &dto, false, &data);
+        assert_eq!(
+            param(&leaves_it, "bIsAwakening").and_then(props::as_bool),
+            Some(true),
+            "None leaves the save's existing flag alone"
+        );
+    }
+
+    #[test]
+    fn apply_pal_dto_writes_removes_and_preserves_the_imported_flag() {
+        let data = game_data();
+        let mut dto = sample_pal_dto();
+
+        let mut writes_it = Properties::default();
+        dto.is_imported = Some(true);
+        apply_pal_dto(&mut writes_it, &dto, false, &data);
+        assert_eq!(param(&writes_it, "bImportedCharacter").and_then(props::as_bool), Some(true));
+
+        let mut removes_it = Properties::default();
+        removes_it.insert("bImportedCharacter", Property::Bool(true));
+        dto.is_imported = Some(false);
+        apply_pal_dto(&mut removes_it, &dto, false, &data);
+        assert!(param(&removes_it, "bImportedCharacter").is_none(), "Some(false) removes");
+
+        let mut leaves_it = Properties::default();
+        leaves_it.insert("bImportedCharacter", Property::Bool(true));
+        dto.is_imported = None;
+        apply_pal_dto(&mut leaves_it, &dto, false, &data);
+        assert_eq!(
+            param(&leaves_it, "bImportedCharacter").and_then(props::as_bool),
+            Some(true),
+            "None leaves the save's existing flag alone"
+        );
     }
 }
