@@ -8306,7 +8306,7 @@
   },
   "CubeTurtle": {
     "is_pal": true,
-    "tribe": "PyramidTurtle",
+    "tribe": "CubeTurtle",
     "pal_deck_index": 142,
     "size": "XL",
     "rarity": 8,
@@ -8370,7 +8370,7 @@
       "Tremor": 22,
       "RockLance": 30,
       "SandTwister": 40,
-      "Unique_PyramidTurtle_PyramidPress": 50,
+      "Unique_CubeTurtle_CubePress": 50,
       "RockBeat": 70
     },
     "passive_skills": [],
@@ -8379,7 +8379,7 @@
   },
   "CubeTurtle_Neutral": {
     "is_pal": true,
-    "tribe": "NONE",
+    "tribe": "CubeTurtle_Neutral",
     "pal_deck_index": 142,
     "size": "XL",
     "rarity": 8,
@@ -8444,7 +8444,7 @@
       "HyperBeam": 30,
       "DiamondFall": 40,
       "HolyBlast": 50,
-      "Unique_PyramidTurtle_Neutral_HolyPress": 70
+      "Unique_CubeTurtle_Neutral_HolyPress": 70
     },
     "passive_skills": [],
     "disabled": false,
@@ -9538,7 +9538,7 @@
   },
   "DomeArmorDragon": {
     "is_pal": true,
-    "tribe": "NONE",
+    "tribe": "DomeArmorDragon",
     "pal_deck_index": 184,
     "size": "XL",
     "rarity": 8,
@@ -10266,7 +10266,7 @@
   },
   "ElecSnail_Ground": {
     "is_pal": true,
-    "tribe": "NONE",
+    "tribe": "ElecSnail_Ground",
     "pal_deck_index": 163,
     "size": "S",
     "rarity": 3,
@@ -15511,7 +15511,7 @@
   },
   "FlowerDoll_Fire": {
     "is_pal": true,
-    "tribe": "NONE",
+    "tribe": "FlowerDoll_Fire",
     "pal_deck_index": 89,
     "size": "M",
     "rarity": 9,
@@ -15585,7 +15585,7 @@
   },
   "FlowerPrince": {
     "is_pal": true,
-    "tribe": "NONE",
+    "tribe": "FlowerPrince",
     "pal_deck_index": 194,
     "size": "M",
     "rarity": 8,
@@ -17583,7 +17583,7 @@
   },
   "GYM_WorldTreeDragon": {
     "is_pal": true,
-    "tribe": "NONE",
+    "tribe": "WorldTreeDragon",
     "pal_deck_index": -1,
     "size": "XL",
     "rarity": 8,
@@ -17654,7 +17654,7 @@
   },
   "GYM_WorldTreeDragon_2": {
     "is_pal": true,
-    "tribe": "NONE",
+    "tribe": "WorldTreeDragon",
     "pal_deck_index": -1,
     "size": "XL",
     "rarity": 8,
@@ -18149,7 +18149,7 @@
   },
   "GhostDragon": {
     "is_pal": true,
-    "tribe": "NONE",
+    "tribe": "GhostDragon",
     "pal_deck_index": 171,
     "size": "L",
     "rarity": 7,
@@ -18223,7 +18223,7 @@
   },
   "GhostDragon_Fire": {
     "is_pal": true,
-    "tribe": "NONE",
+    "tribe": "GhostDragon_Fire",
     "pal_deck_index": 171,
     "size": "L",
     "rarity": 8,
@@ -18871,7 +18871,7 @@
   },
   "GrassGolem_Dark": {
     "is_pal": true,
-    "tribe": "NONE",
+    "tribe": "GrassGolem_Dark",
     "pal_deck_index": 138,
     "size": "XL",
     "rarity": 8,
@@ -19172,7 +19172,7 @@
   },
   "GrassMinotaur_Ice": {
     "is_pal": true,
-    "tribe": "NONE",
+    "tribe": "GrassMinotaur_Ice",
     "pal_deck_index": 81,
     "size": "L",
     "rarity": 7,
@@ -24959,7 +24959,7 @@
   },
   "IceSeal_Ground": {
     "is_pal": true,
-    "tribe": "NONE",
+    "tribe": "IceSeal_Ground",
     "pal_deck_index": 72,
     "size": "S",
     "rarity": 6,
@@ -25393,7 +25393,7 @@
   },
   "KabukiMan": {
     "is_pal": true,
-    "tribe": "NONE",
+    "tribe": "KabukiMan",
     "pal_deck_index": 183,
     "size": "L",
     "rarity": 7,
@@ -26135,7 +26135,7 @@
   },
   "KingSunfish_Thunder": {
     "is_pal": true,
-    "tribe": "NONE",
+    "tribe": "KingSunfish_Thunder",
     "pal_deck_index": 169,
     "size": "M",
     "rarity": 5,
@@ -32842,7 +32842,7 @@
   },
   "Monkey_Fire": {
     "is_pal": true,
-    "tribe": "NONE",
+    "tribe": "Monkey_Fire",
     "pal_deck_index": 23,
     "size": "None",
     "rarity": 2,
@@ -33283,7 +33283,7 @@
   },
   "Mothman": {
     "is_pal": true,
-    "tribe": "NONE",
+    "tribe": "Mothman",
     "pal_deck_index": 193,
     "size": "L",
     "rarity": 8,
@@ -36853,7 +36853,7 @@
   },
   "PREDATOR_GrassMinotaur_Ice": {
     "is_pal": true,
-    "tribe": "NONE",
+    "tribe": "GrassMinotaur_Ice",
     "pal_deck_index": -1,
     "size": "XL",
     "rarity": 8,
@@ -49855,7 +49855,7 @@
   },
   "SwordCutlassfish_Fire": {
     "is_pal": true,
-    "tribe": "NONE",
+    "tribe": "SwordCutlassfish_Fire",
     "pal_deck_index": 128,
     "size": "M",
     "rarity": 5,
@@ -50223,7 +50223,7 @@
   },
   "ThunderBird_Ice": {
     "is_pal": true,
-    "tribe": "NONE",
+    "tribe": "ThunderBird_Ice",
     "pal_deck_index": 96,
     "size": "L",
     "rarity": 7,
@@ -52000,7 +52000,7 @@
   },
   "VolcanoDragon_Ice": {
     "is_pal": true,
-    "tribe": "NONE",
+    "tribe": "VolcanoDragon_Ice",
     "pal_deck_index": 105,
     "size": "L",
     "rarity": 8,
@@ -52579,7 +52579,7 @@
   },
   "WhiteDeer_Dark": {
     "is_pal": true,
-    "tribe": "NONE",
+    "tribe": "WhiteDeer_Dark",
     "pal_deck_index": 157,
     "size": "M",
     "rarity": 7,
@@ -52725,7 +52725,7 @@
   },
   "WhiteMoth_Neutral": {
     "is_pal": true,
-    "tribe": "NONE",
+    "tribe": "WhiteMoth_Neutral",
     "pal_deck_index": 116,
     "size": "L",
     "rarity": 8,
@@ -53366,7 +53366,7 @@
   },
   "WingGolem_Fire": {
     "is_pal": true,
-    "tribe": "NONE",
+    "tribe": "WingGolem_Fire",
     "pal_deck_index": 159,
     "size": "L",
     "rarity": 10,
@@ -53661,7 +53661,7 @@
   },
   "WorldTreeDragon": {
     "is_pal": true,
-    "tribe": "NONE",
+    "tribe": "WorldTreeDragon",
     "pal_deck_index": 204,
     "size": "XL",
     "rarity": 10,
