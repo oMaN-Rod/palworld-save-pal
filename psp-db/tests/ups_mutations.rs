@@ -140,7 +140,10 @@ async fn stats_count_awakened_and_imported_pals() {
     psp_db::ups::add_pal(&db, new_flagged_pal("SheepBall", true, false), &game_data)
         .await
         .unwrap();
-    psp_db::ups::add_pal(&db, new_flagged_pal("Kitsunebi", false, true), &game_data)
+    psp_db::ups::add_pal(&db, new_flagged_pal("Kitsunebi", true, false), &game_data)
+        .await
+        .unwrap();
+    psp_db::ups::add_pal(&db, new_flagged_pal("SheepBall", false, true), &game_data)
         .await
         .unwrap();
     psp_db::ups::add_pal(&db, new_flagged_pal("SheepBall", false, false), &game_data)
@@ -149,8 +152,8 @@ async fn stats_count_awakened_and_imported_pals() {
 
     let stats = psp_db::ups::get_stats(&db, &game_data).await.unwrap();
 
-    assert_eq!(stats.total_pals, 3);
-    assert_eq!(stats.awakened_count, 1);
+    assert_eq!(stats.total_pals, 4);
+    assert_eq!(stats.awakened_count, 2);
     assert_eq!(stats.imported_count, 1);
 }
 
