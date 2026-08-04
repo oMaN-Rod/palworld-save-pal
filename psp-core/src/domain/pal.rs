@@ -72,6 +72,13 @@ pub fn read_save_parameter_dto(
     // A lucky pal is never also reported as a boss.
     let is_boss = character_id.to_uppercase().starts_with("BOSS_") && !is_lucky;
 
+    let is_awakened = param(save_parameter, "bIsAwakening")
+        .and_then(props::as_bool)
+        .unwrap_or(false);
+    let is_imported = param(save_parameter, "bImportedCharacter")
+        .and_then(props::as_bool)
+        .unwrap_or(false);
+
     // Gender is absent for pals that never had one assigned; Female is the
     // contract's default.
     let gender = param(save_parameter, "Gender")
@@ -174,8 +181,8 @@ pub fn read_save_parameter_dto(
         is_lucky: Some(is_lucky),
         is_boss: Some(is_boss),
         is_predator: character_id.starts_with("PREDATOR_"),
-        is_awakened: None,
-        is_imported: None,
+        is_awakened: Some(is_awakened),
+        is_imported: Some(is_imported),
         gender,
         rank_hp: param(save_parameter, "Rank_HP")
             .and_then(props::as_byte_number)
@@ -868,6 +875,11 @@ fn save_parameter_schemas() -> Vec<(String, crate::ue::PropertyTagDataPartial)> 
         ("CharacterID".into(), other(PropertyType::NameProperty)),
         ("Gender".into(), Data::Enum("EPalGenderType".into(), None)),
         ("IsRarePal".into(), other(PropertyType::BoolProperty)),
+        ("bIsAwakening".into(), other(PropertyType::BoolProperty)),
+        (
+            "bImportedCharacter".into(),
+            other(PropertyType::BoolProperty),
+        ),
         ("IsPlayer".into(), other(PropertyType::BoolProperty)),
         ("Level".into(), byte()),
         ("Rank".into(), byte()),
@@ -2474,6 +2486,42 @@ mod tests {
             "is_boss is false when is_lucky is true"
         );
         assert_eq!(lucky_dto.is_lucky, Some(true));
+    }
+
+    #[test]
+    fn read_save_parameter_dto_reads_awakened_and_imported_flags() {
+        let data = game_data();
+        let mut save_parameter = Properties::default();
+        save_parameter.insert("CharacterID", Property::Name("SheepBall".to_string()));
+        save_parameter.insert("bIsAwakening", Property::Bool(true));
+        save_parameter.insert("bImportedCharacter", Property::Bool(true));
+
+        let dto = read_save_parameter_dto(&save_parameter, uuid::Uuid::nil(), false, &data);
+
+        assert_eq!(dto.is_awakened, Some(true));
+        assert_eq!(dto.is_imported, Some(true));
+    }
+
+    #[test]
+    fn read_save_parameter_dto_absent_flags_read_as_some_false() {
+        let data = game_data();
+        let mut save_parameter = Properties::default();
+        save_parameter.insert("CharacterID", Property::Name("SheepBall".to_string()));
+
+        let dto = read_save_parameter_dto(&save_parameter, uuid::Uuid::nil(), false, &data);
+
+        assert_eq!(dto.is_awakened, Some(false));
+        assert_eq!(dto.is_imported, Some(false));
+    }
+
+    #[test]
+    fn save_parameter_schemas_registers_both_new_bool_flags() {
+        let names: Vec<String> = save_parameter_schemas()
+            .into_iter()
+            .map(|(name, _)| name)
+            .collect();
+        assert!(names.contains(&"bIsAwakening".to_string()));
+        assert!(names.contains(&"bImportedCharacter".to_string()));
     }
 
     #[test]
