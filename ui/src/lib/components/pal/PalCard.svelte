@@ -48,6 +48,11 @@
 		)
 	);
 	const sickClass = $derived(pal && pal.is_sick ? 'animate-pulse ring-4 ring-red-500' : '');
+	const awakenedClass = $derived(
+		pal && pal.is_awakened
+			? 'ring-4 ring-amber-400 rounded-full shadow-[0_0_12px_2px_rgba(251,191,36,0.7)]'
+			: ''
+	);
 	const palData = $derived(palsData.getByKey(pal.character_key));
 	const levelSyncTxt = $derived(
 		appState.selectedPlayer!.level < pal.level
@@ -125,7 +130,7 @@
 				position="right"
 				useArrow={false}
 			>
-				<div class={cn('grid grid-cols-[1fr_auto] overflow-hidden', sickClass)}>
+				<div class={cn('grid grid-cols-[1fr_auto] overflow-hidden', awakenedClass, sickClass)}>
 					<div class="ml-4 flex min-w-0 flex-col">
 						<div class="flex flex-wrap items-center gap-x-2">
 							<Tooltip label={levelSyncTxt}>
@@ -159,6 +164,13 @@
 							{/if}
 							{#if pal.is_lucky}
 								<img src={staticIcons.luckyIcon} alt="Lucky" class="h-4 w-4 2xl:h-6 2xl:w-6" />
+							{/if}
+							{#if pal.is_imported}
+								<img
+									src={staticIcons.importedIcon}
+									alt="Imported"
+									class="h-4 w-4 2xl:h-6 2xl:w-6"
+								/>
 							{/if}
 						</div>
 						<StatusBadge
