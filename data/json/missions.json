@@ -235,7 +235,13 @@
       "z": 823.6899
     },
     "rewards": {
-      "exp": 63882
+      "exp": 63882,
+      "items": [
+        {
+          "id": "WorkSuitability_AddTicket_Watering",
+          "count": 1
+        }
+      ]
     }
   },
   "Main_DefeatSakurajimaBoss": {
@@ -623,31 +629,61 @@
   "Sub_DeliveryQuartz": {
     "quest_type": "EPalQuestType::Sub",
     "rewards": {
-      "exp": 12170
+      "exp": 12170,
+      "items": [
+        {
+          "id": "Money",
+          "count": 5000
+        }
+      ]
     }
   },
   "Sub_DeliveryRainbowCrystal": {
     "quest_type": "EPalQuestType::Sub",
     "rewards": {
-      "exp": 25350
+      "exp": 25350,
+      "items": [
+        {
+          "id": "Money",
+          "count": 10000
+        }
+      ]
     }
   },
   "Sub_DeliverySkyIslandOre": {
     "quest_type": "EPalQuestType::Sub",
     "rewards": {
-      "exp": 48165
+      "exp": 48165,
+      "items": [
+        {
+          "id": "Money",
+          "count": 20000
+        }
+      ]
     }
   },
   "Sub_DeliverySulfur": {
     "quest_type": "EPalQuestType::Sub",
     "rewards": {
-      "exp": 3550
+      "exp": 3550,
+      "items": [
+        {
+          "id": "Money",
+          "count": 3000
+        }
+      ]
     }
   },
   "Sub_DeliveryWood_Fine": {
     "quest_type": "EPalQuestType::Sub",
     "rewards": {
-      "exp": 3550
+      "exp": 3550,
+      "items": [
+        {
+          "id": "Money",
+          "count": 3000
+        }
+      ]
     }
   },
   "Sub_Farmer01": {
@@ -798,7 +834,21 @@
   "Sub_LoneWolf03": {
     "quest_type": "EPalQuestType::Sub",
     "rewards": {
-      "exp": 35490
+      "exp": 35490,
+      "items": [
+        {
+          "id": "AffectionFruit_01",
+          "count": 1
+        },
+        {
+          "id": "Fruit__defense_01",
+          "count": 3
+        },
+        {
+          "id": "Rankup_Arbitrary",
+          "count": 1
+        }
+      ]
     }
   },
   "Sub_Nomad01": {
@@ -1023,7 +1073,21 @@
   "Sub_RookieExpeditionTeam04": {
     "quest_type": "EPalQuestType::Sub",
     "rewards": {
-      "exp": 35490
+      "exp": 35490,
+      "items": [
+        {
+          "id": "AffectionFruit_01",
+          "count": 1
+        },
+        {
+          "id": "Fruit_hp_01",
+          "count": 3
+        },
+        {
+          "id": "Rankup_Arbitrary",
+          "count": 1
+        }
+      ]
     }
   },
   "Sub_Scholar01": {
@@ -1133,7 +1197,17 @@
   "Sub_StrongOldMan03": {
     "quest_type": "EPalQuestType::Sub",
     "rewards": {
-      "exp": 48165
+      "exp": 48165,
+      "items": [
+        {
+          "id": "Money",
+          "count": 30000
+        },
+        {
+          "id": "Elixir_attack_02",
+          "count": 1
+        }
+      ]
     }
   },
   "Sub_StrongOldMan04": {
@@ -1145,7 +1219,21 @@
   "Sub_StrongOldMan05": {
     "quest_type": "EPalQuestType::Sub",
     "rewards": {
-      "exp": 65910
+      "exp": 65910,
+      "items": [
+        {
+          "id": "AffectionFruit_01",
+          "count": 1
+        },
+        {
+          "id": "Fruit_attack_01",
+          "count": 3
+        },
+        {
+          "id": "Rankup_Arbitrary",
+          "count": 1
+        }
+      ]
     }
   },
   "Sub_Zoe01": {
