@@ -227,8 +227,7 @@
 			if (addNormalPals) {
 				await addPal(character_id, nickname, palData.localized_name || character_id);
 			}
-			if (addLuckyPals) {
-				if (!canBeLucky(character_id)[1]) continue;
+			if (addLuckyPals && canBeLucky(character_id)[1]) {
 				const pal = await addPal(character_id, nickname, palData.localized_name || character_id);
 				if (!pal) {
 					console.error(`Failed to add lucky pal for ${character_id}`);
@@ -237,8 +236,7 @@
 				pal.is_lucky = true;
 				pal.state = EntryState.MODIFIED;
 			}
-			if (addAlphaPals) {
-				if (!canBeAlpha(character_id)[1]) continue;
+			if (addAlphaPals && canBeAlpha(character_id)[1]) {
 				const pal = await addPal(character_id, nickname, palData.localized_name || character_id);
 				if (!pal) {
 					console.error(`Failed to add alpha pal for ${character_id}`);
