@@ -7,8 +7,10 @@ vi.mock('$lib/data', () => ({
 vi.mock('$lib/utils', () => ({ getStats: vi.fn() }));
 vi.mock('$states', () => ({ getAppState: vi.fn() }));
 
+import { expData, palsData } from '$lib/data';
+import { getAppState } from '$states';
 import { EntryState } from '$types';
-import { editAwakened, editImported } from './pals';
+import { editAwakened, editImported, handleMaxOutPal } from './pals';
 
 function pal() {
 	return {
@@ -58,5 +60,30 @@ describe('editImported', () => {
 		expect(target.is_boss).toBe(false);
 		expect(target.is_lucky).toBe(false);
 		expect(target.character_id).toBe('SheepBall');
+	});
+});
+
+describe('handleMaxOutPal', () => {
+	it('sets awakened but leaves imported alone', async () => {
+		vi.mocked(getAppState).mockReturnValue({
+			settings: { cheat_mode: false }
+		} as any);
+		vi.mocked(expData.getExpDataByLevel).mockResolvedValue({
+			PalTotalEXP: 1_000_000,
+			PalNextEXP: 0
+		} as any);
+		vi.mocked(palsData.getByKey).mockReturnValue({
+			max_full_stomach: 300,
+			work_suitability: {}
+		} as any);
+
+		const target = pal();
+		target.character_key = 'sheepball';
+		target.work_suitability = {};
+
+		await handleMaxOutPal(target, { level: 80 } as any);
+
+		expect(target.is_awakened).toBe(true);
+		expect(target.is_imported).toBe(false);
 	});
 });

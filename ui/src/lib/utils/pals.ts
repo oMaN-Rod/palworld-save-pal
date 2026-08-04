@@ -108,6 +108,7 @@ export async function handleMaxOutPal(pal: Pal, player: Player): Promise<void> {
 	const maxLevelData = await expData.getExpDataByLevel(pal.level + 1);
 	pal.exp = maxLevelData.PalTotalEXP - maxLevelData.PalNextEXP;
 	editAlpha(pal, true);
+	pal.is_awakened = true;
 	pal.talent_hp = appState.settings.cheat_mode ? 255 : 100;
 	pal.talent_shot = appState.settings.cheat_mode ? 255 : 100;
 	pal.talent_defense = appState.settings.cheat_mode ? 255 : 100;

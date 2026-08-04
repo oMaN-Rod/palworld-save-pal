@@ -38,6 +38,7 @@
 	let addNormalPals = $state(true);
 	let addLuckyPals = $state(true);
 	let addAlphaPals = $state(true);
+	let addAwakenedPals = $state(false);
 	let addBossPals = $state(true);
 	let addPredatorPals = $state(true);
 	let addRaidPals = $state(true);
@@ -96,6 +97,7 @@
 		if (addNormalPals) count += normalPals.length;
 		if (addLuckyPals) count += normalPals.filter((p) => canBeLucky(p[0])[1]).length;
 		if (addAlphaPals) count += normalPals.filter((p) => canBeAlpha(p[0])[1]).length;
+		if (addAwakenedPals) count += normalPals.length;
 		if (addBossPals) count += bossPals.length;
 		if (addPredatorPals) count += predatorPals.length;
 		if (addRaidPals) count += raidPals.length;
@@ -124,6 +126,7 @@
 		{ label: m.normal(), count: normalPals.length, checked: addNormalPals, onChange: (v: boolean) => (addNormalPals = v) },
 		{ label: m.lucky(), count: normalPals.length, checked: addLuckyPals, onChange: (v: boolean) => (addLuckyPals = v) },
 		{ label: m.alpha(), count: normalPals.length, checked: addAlphaPals, onChange: (v: boolean) => (addAlphaPals = v) },
+		{ label: m.awakened(), count: normalPals.length, checked: addAwakenedPals, onChange: (v: boolean) => (addAwakenedPals = v) },
 		{ label: m.boss(), count: bossPals.length, checked: addBossPals, onChange: (v: boolean) => (addBossPals = v) },
 		{ label: m.predator(), count: predatorPals.length, checked: addPredatorPals, onChange: (v: boolean) => (addPredatorPals = v) },
 		{ label: m.raid(), count: raidPals.length, checked: addRaidPals, onChange: (v: boolean) => (addRaidPals = v) },
@@ -242,6 +245,15 @@
 					continue;
 				}
 				pal.is_boss = true;
+				pal.state = EntryState.MODIFIED;
+			}
+			if (addAwakenedPals) {
+				const pal = await addPal(character_id, nickname, palData.localized_name || character_id);
+				if (!pal) {
+					console.error(`Failed to add awakened pal for ${character_id}`);
+					continue;
+				}
+				pal.is_awakened = true;
 				pal.state = EntryState.MODIFIED;
 			}
 		}
