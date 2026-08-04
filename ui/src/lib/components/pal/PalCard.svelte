@@ -50,7 +50,7 @@
 	const sickClass = $derived(pal && pal.is_sick ? 'animate-pulse ring-4 ring-red-500' : '');
 	const awakenedClass = $derived(
 		pal && pal.is_awakened
-			? 'ring-4 ring-amber-400 rounded-full shadow-[0_0_12px_2px_rgba(251,191,36,0.7)]'
+			? 'ring-4 ring-amber-400 shadow-[0_0_12px_2px_rgba(251,191,36,0.7)]'
 			: ''
 	);
 	const palData = $derived(palsData.getByKey(pal.character_key));
