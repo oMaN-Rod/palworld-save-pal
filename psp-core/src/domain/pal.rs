@@ -2924,9 +2924,10 @@ mod tests {
         apply_pal_dto(&mut awakened, &dto, false, &data);
         let awakened_hp = param(&awakened, "Hp").and_then(props::fixed_point64).unwrap();
 
+        let expected =
+            (((unawakened_hp / 1000) as f64) * AWAKENING_STATUS_MULTIPLY).floor() as i64 * 1000;
         assert_eq!(
-            awakened_hp,
-            ((unawakened_hp as f64) * AWAKENING_STATUS_MULTIPLY).floor() as i64,
+            awakened_hp, expected,
             "bIsAwakening must be read back off the save (not the DTO) before Hp is computed"
         );
     }
