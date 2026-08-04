@@ -1,6 +1,9 @@
 <script module lang="ts">
 	const HOVER_STATE = { hover: true };
 	const STRUCTURE_MIN_ZOOM = 5;
+	const MAX_PITCH_DETAILED = 90;
+	const MAX_PITCH_FLAT = 85;
+	const BOUNDS_PITCH_LIMIT = 85;
 	const HALO_COLOR = '#f59e0b';
 	const RELIC_ART_PX = 42;
 	const FAST_TRAVEL_ART_PX = 52;
@@ -497,7 +500,7 @@
 		const [px, py] = lngLatToPixel(ev.lngLat.lng, ev.lngLat.lat);
 		const { worldX, worldY } = pixelToWorld(px, py, area);
 		const { gameX, gameY } = pixelToGameCoords(px, py, area);
-		coordDisplayText = `World: ${Math.round(worldX)}, ${Math.round(worldY)}<br>Map: ${gameX}, ${gameY}<br>Zoom: ${zoom.toFixed(2)}`;
+		coordDisplayText = `World: ${Math.round(worldX)}, ${Math.round(worldY)}<br>Map: ${gameX}, ${gameY}<br>Zoom: ${zoom.toFixed(2)}<br>Pitch: ${pitch.toFixed(1)}	`;
 
 		if (placement) {
 			if (ghostDragging) {
@@ -599,6 +602,7 @@
 
 	let center = $state<[number, number]>(untrack(() => areaCenter(area)));
 	let zoom = $state(2);
+	let pitch = $state(0);
 
 	$effect(() => {
 		center = areaCenter(area);
@@ -606,12 +610,18 @@
 
 	const verticalScale = $derived(verticalScaleFactor(center[1], cmPerPx(area)));
 
+	let lastGroundBounds: maplibregl.LngLatBounds | null = null;
+
 	$effect(() => {
 		if (!show3d || zoom < STRUCTURE_MIN_ZOOM) return;
 		const instance = map;
 		if (!instance) return;
 		void center;
-		const bounds = instance.getBounds();
+		let bounds = lastGroundBounds;
+		if (!bounds || pitch <= BOUNDS_PITCH_LIMIT) {
+			bounds = instance.getBounds();
+			lastGroundBounds = bounds;
+		}
 		baseStructuresData.loadFootprints();
 		buildingsData.ensureLoaded().catch(() => {});
 		for (const { base } of bases) {
@@ -805,7 +815,7 @@
 		const instance = map;
 		if (!instance) return;
 		instance.setMaxZoom(show3d ? 11 : 7);
-		instance.setMaxPitch(show3d ? 60 : 0);
+		instance.setMaxPitch(show3d ? (detailed ? MAX_PITCH_DETAILED : MAX_PITCH_FLAT) : 0);
 		if (show3d) {
 			instance.dragRotate.enable();
 		} else {
@@ -909,6 +919,7 @@
 		style={EMPTY_STYLE}
 		bind:center
 		bind:zoom
+		bind:pitch
 		minZoom={0}
 		maxZoom={7}
 		maxBounds={MAP_MAX_BOUNDS}
@@ -925,7 +936,7 @@
 		onclick={handleClick}
 		oncontextmenu={handleContextMenu}
 	>
-		<Control.Navigation position="top-right" showCompass={false} />
+		<Control.Navigation position="top-right" visualizePitch />
 		<Control.Fullscreen position="top-right" />
 		<Toggle3dControl
 			position="top-right"
