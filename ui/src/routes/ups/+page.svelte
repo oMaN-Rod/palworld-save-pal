@@ -738,6 +738,20 @@
 													<img src={staticIcons.luckyIcon} alt="Lucky" />
 												</TooltipButton>
 												<TooltipButton
+													popupLabel={m.awakened()}
+													onclick={() => handlePalTypeFilter('awakened')}
+													buttonClass={getPalTypeButtonClass('awakened')}
+												>
+													<img src={staticIcons.awakeningIcon} alt="Awakened" />
+												</TooltipButton>
+												<TooltipButton
+													popupLabel={m.imported()}
+													onclick={() => handlePalTypeFilter('imported')}
+													buttonClass={getPalTypeButtonClass('imported')}
+												>
+													<img src={staticIcons.importedIcon} alt="Imported" />
+												</TooltipButton>
+												<TooltipButton
 													popupLabel={m.human({ count: 2 })}
 													buttonClass={getPalTypeButtonClass('human')}
 													onclick={() => handlePalTypeFilter('human')}
