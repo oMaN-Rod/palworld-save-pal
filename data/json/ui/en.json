@@ -54,7 +54,6 @@
   "alpha": "Alpha",
   "alpha_pal": "Alpha {pals}",
   "ammo": "Ammo",
-  "awakened": "Awakened",
   "ancient_technology_points": "Ancient Technology Points",
   "and_more_count": "+{count} more",
   "appearance": "Appearance",
@@ -74,6 +73,7 @@
   "avg_level": "Avg Level",
   "avg_pals_per_collection": "Avg. {pals} per collection:",
   "avg_transfers_per_pal": "Avg. transfers per {pal}:",
+  "awakened": "Awakened",
   "base": [
     {
       "declarations": [
