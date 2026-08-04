@@ -9,9 +9,32 @@ export interface SqliteBridge {
 	exec(sql: string, params: unknown[]): number;
 	query(sql: string, params: unknown[]): Record<string, unknown>[];
 	persistent: boolean;
+	opfsSupported: boolean;
 }
 
-const noopBridge: SqliteBridge = {
+// createSyncAccessHandle, not navigator.storage.getDirectory: Safari below 16.4
+// exposes OPFS without sync handles, and the SAH pool needs the handles. This
+// module only ever runs in a dedicated worker, where the interface is exposed.
+function sahSupported(): boolean {
+	const fh = (globalThis as { FileSystemFileHandle?: { prototype?: object } }).FileSystemFileHandle;
+	return typeof (fh?.prototype as { createSyncAccessHandle?: unknown })?.createSyncAccessHandle ===
+		'function';
+}
+
+// The SAH pool takes exclusive access handles on its files for the lifetime of
+// the worker, so only one page per origin can hold it. A second tab therefore
+// lands here with OPFS fully supported — telling that user their browser can't
+// store data sends them chasing a browser problem that does not exist.
+export function storageWarning(
+	bridge: Pick<SqliteBridge, 'persistent' | 'opfsSupported'>
+): string | null {
+	if (bridge.persistent) return null;
+	return bridge.opfsSupported
+		? 'Another tab has Palworld Save Pal open and is using the database; presets, blueprints and stored pals will not be saved from this tab. Close the other tab and reload.'
+		: 'This browser cannot store data; presets, blueprints and stored pals will not be saved between visits.';
+}
+
+const noopBridge: Omit<SqliteBridge, 'opfsSupported'> = {
 	exec: () => 0,
 	query: () => [],
 	persistent: false
@@ -32,7 +55,8 @@ export async function openSqlite(): Promise<SqliteBridge> {
 			const pool = await sqlite3.installOpfsSAHPoolVfs({ name: 'psp-sahpool' });
 			db = new pool.OpfsSAHPoolDb('/psp.db');
 			persistent = true;
-		} catch {
+		} catch (e) {
+			console.error('[psp] OPFS SAH pool unavailable; sqlite is in-memory for this session:', e);
 			db = new sqlite3.oo1.DB(':memory:');
 			persistent = false;
 		}
@@ -56,8 +80,9 @@ export async function openSqlite(): Promise<SqliteBridge> {
 			});
 			return rows;
 		};
-		return { exec, query, persistent };
-	} catch {
-		return noopBridge;
+		return { exec, query, persistent, opfsSupported: sahSupported() };
+	} catch (e) {
+		console.error('[psp] sqlite failed to initialise; database features are disabled:', e);
+		return { ...noopBridge, opfsSupported: sahSupported() };
 	}
 }
