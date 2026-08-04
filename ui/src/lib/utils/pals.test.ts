@@ -8,6 +8,7 @@ vi.mock('$lib/utils', () => ({ getStats: vi.fn() }));
 vi.mock('$states', () => ({ getAppState: vi.fn() }));
 
 import { expData, palsData } from '$lib/data';
+import { getStats } from '$lib/utils';
 import { getAppState } from '$states';
 import { EntryState } from '$types';
 import { editAwakened, editImported, handleMaxOutPal } from './pals';
@@ -76,6 +77,10 @@ describe('handleMaxOutPal', () => {
 			max_full_stomach: 300,
 			work_suitability: {}
 		} as any);
+		vi.mocked(getStats).mockImplementation((p: any) => {
+			p.max_hp = p.is_awakened ? 990_000 : 900_000;
+			return undefined;
+		});
 
 		const target = pal();
 		target.character_key = 'sheepball';
@@ -85,5 +90,6 @@ describe('handleMaxOutPal', () => {
 
 		expect(target.is_awakened).toBe(true);
 		expect(target.is_imported).toBe(false);
+		expect(target.hp).toBe(990_000);
 	});
 });
