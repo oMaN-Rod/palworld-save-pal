@@ -856,11 +856,11 @@
     "description": "Zur Aufbewahrung von Gegenständen. Ist aus Holz und nicht sonderlich stabil. Nicht als Aufbewahrungsort für Wertsachen zu empfehlen."
   },
   "ItemChest_02": {
-    "localized_name": "Eisentruhe",
+    "localized_name": "Metalltruhe",
     "description": "Zur Aufbewahrung von Gegenständen. Mit Metall verstärkt und dadurch recht robust. Hat außerdem ein höheres Fassungsvermögen."
   },
   "ItemChest_03": {
-    "localized_name": "Stahltruhe",
+    "localized_name": "Hochwertige Metalltruhe",
     "description": "Zur Aufbewahrung von Gegenständen. Aus hochwertigem Metall und extrem solide. Ist riesig und perfekt geeignet zur sicheren Lagerung all deiner Habseligkeiten."
   },
   "ItemChest_04": {
@@ -1060,11 +1060,11 @@
     "description": "Eine Anlage, die Drehbewegung in elektrische Energie umsetzt. Ist ineffizient und senkt die GEI der hier beschäftigten Pals, bringt jedoch EP ein."
   },
   "MedicalPalBed_02": {
-    "localized_name": "Metalltruhe",
+    "localized_name": "Pal-Strohbett",
     "description": "Ein Strohbett für Pals. Wird als nächtliche Schlafstätte oder zum Ausruhen für verletzte Pals verwendet. Ist ziemlich hart, aber allemal besser als nichts."
   },
   "MedicalPalBed_03": {
-    "localized_name": "Hochwertige Metalltruhe",
+    "localized_name": "Pal-Flauschbett",
     "description": "Ein gemütliches Bett für Pals. Wird als nächtliche Schlafstätte oder zum Ausruhen für verletzte Pals verwendet. Flauschig weich für schönste Träume."
   },
   "MedicalPalBed_04": {
