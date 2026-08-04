@@ -547,6 +547,14 @@
     "localized_name": "Pertunjukan Tipu Daya",
     "description": "Kemampuan spesialDupin. Menciptakan 2 bayangan untuk memperdaya musuh, sembari tubuh asli menembakkan burung api dari topi tingginya untuk menyerang."
   },
+  "EPalWazaID::Unique_CubeTurtle_CubePress": {
+    "localized_name": "Tekanan Batu",
+    "description": "Kemampuan spesialTetroise . Melompat seolah melayang di udara, kemudian menindas musuh dengan bobot yang luar biasa."
+  },
+  "EPalWazaID::Unique_CubeTurtle_Neutral_HolyPress": {
+    "localized_name": "Tekanan Suci",
+    "description": "Kemampuan spesialTetroise Primo. Melompat seolah melayang di udara lalu menghempas musuh. Kemudian menebarkan cahaya dan menyerang balik dengan pilar cahaya tersebut."
+  },
   "EPalWazaID::Unique_CuteMole_DiggingAttack": {
     "localized_name": "Mog Pengangkut",
     "description": "Kemampuan spesialFuddler. Masuk ke dalam tanah dan melompat keluar dengan kuat dari bawah kaki musuh."

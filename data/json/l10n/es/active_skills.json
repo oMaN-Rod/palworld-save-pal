@@ -547,6 +547,14 @@
     "localized_name": "Trick Show",
     "description": "Técnica exclusiva de Dupin. Crea 2 espejismos para despistar al enemigo y, mientras tanto, su cuerpo real lanza un pájaro de fuego para atacar."
   },
+  "EPalWazaID::Unique_CubeTurtle_CubePress": {
+    "localized_name": "Prensa de piedra",
+    "description": "Técnica exclusiva de Tetroise . Salta como si flotara en el aire y aplasta al enemigo con todo su peso."
+  },
+  "EPalWazaID::Unique_CubeTurtle_Neutral_HolyPress": {
+    "localized_name": "Presión sagrada",
+    "description": "Técnica exclusiva de Tetroise Primo. Salta como si flotara en el aire y aplasta al enemigo. A continuación, la luz se expande y ataca con un pilar de luz."
+  },
   "EPalWazaID::Unique_CuteMole_DiggingAttack": {
     "localized_name": "Avanzadilla terrestre",
     "description": "Técnica exclusiva de Fuddler. Se esconde bajo tierra y sale disparado para atacar con fuerza bajo las patas del enemigo."
