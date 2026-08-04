@@ -84,6 +84,16 @@ export function editAlpha(pal: Pal, force: boolean = false): [string, boolean] {
 		return [type, true];
 	}
 
+export function editAwakened(pal: Pal): void {
+	pal.is_awakened = !pal.is_awakened;
+	pal.state = EntryState.MODIFIED;
+}
+
+export function editImported(pal: Pal): void {
+	pal.is_imported = !pal.is_imported;
+	pal.state = EntryState.MODIFIED;
+}
+
 export function formatNickname(nickname: string, prefix: string | undefined) {
 	if (prefix && !nickname.startsWith(prefix)) {
 		return `${prefix} ${nickname}`;
