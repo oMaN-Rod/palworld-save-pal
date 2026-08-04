@@ -174,6 +174,8 @@ pub fn read_save_parameter_dto(
         is_lucky: Some(is_lucky),
         is_boss: Some(is_boss),
         is_predator: character_id.starts_with("PREDATOR_"),
+        is_awakened: None,
+        is_imported: None,
         gender,
         rank_hp: param(save_parameter, "Rank_HP")
             .and_then(props::as_byte_number)
@@ -2641,6 +2643,8 @@ mod tests {
             is_lucky: Some(false),
             is_boss: Some(false),
             is_predator: false,
+            is_awakened: None,
+            is_imported: None,
             is_tower: false,
             gender: PalGender::Female,
             nickname: None,
