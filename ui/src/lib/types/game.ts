@@ -87,6 +87,8 @@ export type Pal = {
 	is_lucky: boolean;
 	is_boss: boolean;
 	is_predator: boolean;
+	is_awakened: boolean;
+	is_imported: boolean;
 	friendship_point: number;
 	gender: PalGender;
 	rank_hp: number;

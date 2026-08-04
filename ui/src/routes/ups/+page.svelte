@@ -486,6 +486,8 @@
 				is_lucky: false,
 				is_boss: false,
 				is_predator: false,
+				is_awakened: false,
+				is_imported: false,
 				is_tower: false,
 				is_sick: false,
 				gender: PalGender.MALE,
