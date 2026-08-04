@@ -31,11 +31,12 @@ describe('editAwakened', () => {
 		expect(target.is_awakened).toBe(false);
 	});
 
-	it('leaves boss, lucky and character_id alone', () => {
+	it('leaves boss, lucky, imported and character_id alone', () => {
 		const target = pal();
 		editAwakened(target);
 		expect(target.is_boss).toBe(false);
 		expect(target.is_lucky).toBe(false);
+		expect(target.is_imported).toBe(false);
 		expect(target.character_id).toBe('SheepBall');
 	});
 });
@@ -48,5 +49,14 @@ describe('editImported', () => {
 		expect(target.state).toBe(EntryState.MODIFIED);
 		editImported(target);
 		expect(target.is_imported).toBe(false);
+	});
+
+	it('leaves awakened, boss, lucky and character_id alone', () => {
+		const target = pal();
+		editImported(target);
+		expect(target.is_awakened).toBe(false);
+		expect(target.is_boss).toBe(false);
+		expect(target.is_lucky).toBe(false);
+		expect(target.character_id).toBe('SheepBall');
 	});
 });
