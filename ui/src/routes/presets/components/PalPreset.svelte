@@ -97,6 +97,16 @@
 									<img src={staticIcons.luckyIcon} alt="Lucky" class="pal-element-badge" />
 								</div>
 							{/if}
+							{#if preset.pal_preset.is_awakened}
+								<div class="absolute -top-1 -left-4 h-6 w-6 xl:h-8 xl:w-8">
+									<img src={staticIcons.awakeningIcon} alt="Awakened" class="pal-element-badge" />
+								</div>
+							{/if}
+							{#if preset.pal_preset.is_imported}
+								<div class="absolute -top-1 -left-4 h-6 w-6 xl:h-8 xl:w-8">
+									<img src={staticIcons.importedIcon} alt="Imported" class="pal-element-badge" />
+								</div>
+							{/if}
 							<img
 								src={assetLoader.loadMenuImage(preset.pal_preset.character_id as string)}
 								alt={preset.pal_preset.character_id}
@@ -139,6 +149,8 @@
 						<div class="grid grid-cols-2 gap-2">
 							{@render label('Lucky', preset.pal_preset!.is_lucky ? 'Yes' : 'No')}
 							{@render label('Alpha', preset.pal_preset!.is_boss ? 'Yes' : 'No')}
+							{@render label('Awakened', preset.pal_preset!.is_awakened ? 'Yes' : 'No')}
+							{@render label('Imported', preset.pal_preset!.is_imported ? 'Yes' : 'No')}
 							{#if preset.pal_preset!.gender}
 								{@render label('Gender', preset.pal_preset!.gender)}
 							{/if}

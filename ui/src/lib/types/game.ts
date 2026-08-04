@@ -446,6 +446,8 @@ export type PalPresetNameDescriptionText = { label: string; description: string 
 export const palPresetNameDescriptionMap: Record<keyof PalPreset, PalPresetNameDescriptionText> = {
 	is_lucky: { label: 'Lucky', description: 'Apply Lucky to preset' },
 	is_boss: { label: 'Boss', description: 'Apply Boss to preset' },
+	is_awakened: { label: 'Awakened', description: 'Apply Awakened to preset' },
+	is_imported: { label: 'Imported', description: 'Apply Imported to preset' },
 	gender: { label: 'Gender', description: 'Apply Gender to preset' },
 	rank_hp: { label: 'HP Souls', description: 'Apply HP Souls to preset' },
 	rank_attack: { label: 'Attack Souls', description: 'Apply Attack Souls to preset' },
@@ -491,6 +493,8 @@ export const defaultPresetConfig: PalPresetConfig = {
 	character_id: false,
 	is_lucky: true,
 	is_boss: true,
+	is_awakened: true,
+	is_imported: true,
 	gender: true,
 	rank_hp: true,
 	rank_attack: true,
@@ -521,6 +525,8 @@ export type PalPreset = {
 	character_id?: string;
 	is_lucky?: boolean;
 	is_boss?: boolean;
+	is_awakened?: boolean;
+	is_imported?: boolean;
 	gender?: PalGender;
 	rank_hp?: number;
 	rank_attack?: number;

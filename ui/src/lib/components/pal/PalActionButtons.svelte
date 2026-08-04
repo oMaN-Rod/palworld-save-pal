@@ -158,6 +158,8 @@
 				character_id: pal.character_id,
 				is_lucky: config.is_lucky ? pal.is_lucky : null,
 				is_boss: config.is_boss ? pal.is_boss : null,
+				is_awakened: config.is_awakened ? pal.is_awakened : null,
+				is_imported: config.is_imported ? pal.is_imported : null,
 				gender: config.gender ? pal.gender : null,
 				rank_hp: config.rank_hp ? pal.rank_hp : null,
 				rank_attack: config.rank_attack ? pal.rank_attack : null,
