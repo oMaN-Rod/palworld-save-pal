@@ -201,6 +201,12 @@ define_message_types! {
     RequestBlueprintGeometry => "request_blueprint_geometry",
     DeleteBlueprint => "delete_blueprint",
     DeleteBase => "delete_base",
+    // Breeding calculator
+    GetBreedingPals => "get_breeding_pals",
+    BreedingDirectChild => "breeding_direct_child",
+    BreedingDirectPartners => "breeding_direct_partners",
+    BreedingDirectParents => "breeding_direct_parents",
+    BreedingChain => "breeding_chain",
 }
 
 #[cfg(test)]
@@ -365,6 +371,11 @@ mod tests {
         "request_blueprint_geometry",
         "delete_blueprint",
         "delete_base",
+        "get_breeding_pals",
+        "breeding_direct_child",
+        "breeding_direct_partners",
+        "breeding_direct_parents",
+        "breeding_chain",
     ];
 
     #[test]

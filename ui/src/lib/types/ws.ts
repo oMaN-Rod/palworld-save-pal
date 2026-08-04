@@ -158,7 +158,14 @@ export enum MessageType {
 
 	// World Options
 	GET_WORLD_OPTION = 'get_world_option',
-	UPDATE_WORLD_OPTION = 'update_world_option'
+	UPDATE_WORLD_OPTION = 'update_world_option',
+
+	// Breeding Calculator
+	GET_BREEDING_PALS = 'get_breeding_pals',
+	BREEDING_DIRECT_CHILD = 'breeding_direct_child',
+	BREEDING_DIRECT_PARTNERS = 'breeding_direct_partners',
+	BREEDING_DIRECT_PARENTS = 'breeding_direct_parents',
+	BREEDING_CHAIN = 'breeding_chain'
 }
 
 interface UpdateSaveFileData {

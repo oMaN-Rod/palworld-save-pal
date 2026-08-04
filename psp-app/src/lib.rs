@@ -84,6 +84,34 @@ pub struct AppState {
     /// Parsed sessions keyed by id, so a session survives a WS reconnect. A
     /// connection registers its session here on load; reattach/eject read it.
     pub sessions: std::sync::Mutex<SessionStore>,
+    /// Lazily-built breeding database (indexes over `game_data`). Built on
+    /// first handler call so wasm — where `game_data` is populated post-init —
+    /// doesn't race construction.
+    pub breeding_db: std::sync::OnceLock<Arc<psp_core::breeding::BreedingDB>>,
+}
+
+impl AppState {
+    /// Lazily builds and caches the breeding database from `game_data`.
+    /// Subsequent calls return the cached `Arc`. Built on first handler call
+    /// so wasm — where `game_data` is populated post-init — doesn't race
+    /// construction.
+    pub fn breeding_db(
+        &self,
+    ) -> Result<&Arc<psp_core::breeding::BreedingDB>, psp_core::breeding::BreedingError> {
+        // Fast path: already built by a prior call.
+        if let Some(cached) = self.breeding_db.get() {
+            return Ok(cached);
+        }
+        let db = Arc::new(psp_core::breeding::BreedingDB::from_game_data(&self.game_data)?);
+        // `set` succeeds on the first writer; on a race the cell already holds
+        // a valid Arc. Either way the cell now owns it, so re-fetch and borrow
+        // against `&self`.
+        let _ = self.breeding_db.set(db);
+        Ok(self
+            .breeding_db
+            .get()
+            .expect("breeding_db was just initialized"))
+    }
 }
 
 #[cfg(test)]
@@ -170,6 +198,7 @@ pub mod test_support {
                 live_connections,
                 ext: Arc::new(crate::dispatcher::NullExtRouter),
                 sessions: std::sync::Mutex::new(crate::SessionStore::default()),
+                breeding_db: Default::default(),
             });
             let (sender, frames) = tokio::sync::mpsc::unbounded_channel();
             Self {

@@ -36,4 +36,11 @@ describe('resolvePlayerDetailsRouting', () => {
 			navigateTo: null
 		});
 	});
+
+	it('routes the breeding origin to the selected player without navigating (Save Mode stays on the breeding page)', () => {
+		expect(resolvePlayerDetailsRouting('breeding')).toEqual({
+			target: 'selected',
+			navigateTo: null
+		});
+	});
 });

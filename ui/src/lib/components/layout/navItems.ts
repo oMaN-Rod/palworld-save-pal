@@ -10,6 +10,7 @@ import {
 	Download,
 	File,
 	FileHeart,
+	FlaskConical,
 	Folder,
 	Globe,
 	Info,
@@ -178,6 +179,13 @@ export const navItems: NavItem[] = [
 		icon: () => Wrench,
 		label: () => m.tools(),
 		href: '/tools'
+	},
+	{
+		id: 'breeding',
+		section: 'tiles',
+		icon: () => FlaskConical,
+		label: () => m.breeding(),
+		href: '/breeding'
 	},
 	{
 		id: 'docs',

@@ -43,6 +43,7 @@ pub fn init() {
         live_connections,
         ext: Arc::new(NullExtRouter),
         sessions: std::sync::Mutex::new(SessionStore::default()),
+        breeding_db: Default::default(),
     });
     STATE.with(|s| {
         *s.borrow_mut() = Some(WebState {
