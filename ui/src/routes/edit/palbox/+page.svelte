@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { elementsData, palsData, presetsData } from '$lib/data';
 	import { getAppState, getModalState, getToastState, getUpsState } from '$states';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
@@ -11,27 +10,19 @@
 		FillPalsModal,
 		CloneToUpsModal
 	} from '$components/modals';
+	import { type Pal, type PalData, MessageType, type CloneToUpsModalProps } from '$types';
 	import {
-		type ElementType,
-		type Pal,
-		type PalData,
-		MessageType,
-		type CloneToUpsModalProps
-	} from '$types';
-	import {
-		assetLoader,
 		debounce,
-		calculateFilters,
 		deepCopy,
 		handleMaxOutPal,
 		formatNickname,
-		applyPalPreset
+		applyPalPreset,
+		palMatchesFilter
 	} from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
 	import {
 		Search,
-		GalleryVerticalEnd,
 		ArrowDown01,
 		ArrowDown10,
 		ArrowDownAZ,
@@ -53,7 +44,7 @@
 		Upload
 	} from 'lucide-svelte';
 	import { Card } from '$components/ui';
-	import { PalCard, PalBadge, PalContainerStats } from '$components/pal';
+	import { PalCard, PalBadge, PalContainerStats, PalFilterButtons } from '$components/pal';
 	import { send } from '$lib/utils/websocketUtils';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
 	import * as m from '$i18n/messages';
@@ -169,31 +160,8 @@
 		return paddedPals.slice(startIndex, endIndex);
 	});
 
-	// Derived classes for filters
-	const sortLuckyClass = $derived(
-		cn('btn', selectedFilter === 'lucky' ? 'bg-secondary-500/25' : '')
-	);
-	const sortAlphaClass = $derived(
-		cn('btn', selectedFilter === 'alpha' ? 'bg-secondary-500/25' : '')
-	);
-	const sortHumanClass = $derived(
-		cn('btn', selectedFilter === 'human' ? 'bg-secondary-500/25' : '')
-	);
-	const sortPredatorClass = $derived(
-		cn('btn', selectedFilter === 'predator' ? 'bg-secondary-500/25' : '')
-	);
-	const sortOilrigClass = $derived(
-		cn('btn', selectedFilter === 'oilrig' ? 'bg-secondary-500/25' : '')
-	);
-	const sortSummonClass = $derived(
-		cn('btn', selectedFilter === 'summon' ? 'bg-secondary-500/25' : '')
-	);
-
 	const sortButtonClass = (currentSortBy: SortBy) =>
 		cn('btn', sortBy === currentSortBy ? 'bg-secondary-500/25' : '');
-
-	const elementClass = (element: string) =>
-		cn('btn', selectedFilter === element ? 'bg-secondary-500/25' : '');
 
 	const pals = $derived.by(() => {
 		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return;
@@ -208,18 +176,6 @@
 	});
 
 	const elementTypes = $derived(Object.keys(elementsData.elements));
-	const elementIcons = $derived.by(() => {
-		let elementIcons: Record<string, string> = {};
-		for (const element of elementTypes) {
-			const elementData = elementsData.elements[element];
-			if (elementData) {
-				elementIcons[element] = assetLoader.loadImage(
-					`${ASSET_DATA_PATH}/img/${elementData.icon}.webp`
-				) as string;
-			}
-		}
-		return elementIcons;
-	});
 
 	const LevelSortIcon = $derived.by(() => {
 		if (sortBy !== 'level') {
@@ -304,30 +260,7 @@
 				pal.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
 				pal.nickname?.toLowerCase().includes(searchQuery.toLowerCase()) ||
 				pal.character_id.toLowerCase().includes(searchQuery.toLowerCase());
-			const matchesElement = elementTypes.includes(selectedFilter)
-				? palData.element_types
-						.map((e: ElementType) => e.toString()!.toLowerCase())
-						.includes(selectedFilter.toLowerCase())
-				: true;
-			const matchesAlpha = selectedFilter === 'alpha' ? pal.is_boss : true;
-			const matchesLucky = selectedFilter === 'lucky' ? pal.is_lucky : true;
-			const matchesHuman = selectedFilter === 'human' ? !palData?.is_pal : true;
-			const matchesPredator =
-				selectedFilter === 'predator' ? pal.character_id.toLowerCase().includes('predator_') : true;
-			const matchesOilrig =
-				selectedFilter === 'oilrig' ? pal.character_id.toLowerCase().includes('_oilrig') : true;
-			const matchesSummon =
-				selectedFilter === 'summon' ? pal.character_id.toLowerCase().includes('summon_') : true;
-			return (
-				matchesSearch &&
-				matchesElement &&
-				matchesAlpha &&
-				matchesLucky &&
-				matchesHuman &&
-				matchesPredator &&
-				matchesOilrig &&
-				matchesSummon
-			);
+			return matchesSearch && palMatchesFilter(pal, palData, selectedFilter);
 		});
 
 		sortPals();
@@ -932,93 +865,7 @@
 									</Tooltip>
 								</div>
 							</div>
-							<div>
-								<legend class="font-bold">{m.element_and_type()}</legend>
-								<hr />
-								<div class="mt-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 2xl:grid-cols-6">
-									<Tooltip>
-										<button class={elementClass('All')} onclick={() => (selectedFilter = 'All')}>
-											<GalleryVerticalEnd />
-										</button>
-										{#snippet popup()}{m.all_entity({ entity: c.pals })}{/snippet}
-									</Tooltip>
-									{#each [...elementTypes] as element}
-										{@const localizedName = elementsData.getByKey(element)?.localized_name}
-										<Tooltip label={localizedName}>
-											<button
-												class={elementClass(element)}
-												onclick={() => (selectedFilter = element)}
-												aria-label={localizedName}
-											>
-												<img
-													src={elementIcons[element]}
-													alt={localizedName}
-													class="pal-element-badge"
-												/>
-											</button>
-										</Tooltip>
-									{/each}
-									<Tooltip label={c.alphaPals}>
-										<button
-											type="button"
-											class={sortAlphaClass}
-											onclick={() => (selectedFilter = 'alpha')}
-										>
-											<img src={staticIcons.alphaIcon} alt="Alpha" class="pal-element-badge" />
-										</button>
-									</Tooltip>
-									<Tooltip label={c.luckyPals}>
-										<button
-											type="button"
-											class={sortLuckyClass}
-											onclick={() => (selectedFilter = 'lucky')}
-										>
-											<img src={staticIcons.luckyIcon} alt="Alpha" class="pal-element-badge" />
-										</button>
-									</Tooltip>
-									<Tooltip label={c.humans}>
-										<button
-											type="button"
-											class={sortHumanClass}
-											onclick={() => (selectedFilter = 'human')}
-										>
-											<User />
-										</button>
-									</Tooltip>
-									<Tooltip label={c.predatorPals}>
-										<button
-											type="button"
-											class={sortPredatorClass}
-											onclick={() => (selectedFilter = 'predator')}
-										>
-											<img
-												src={staticIcons.predatorIcon}
-												alt="Predator"
-												class="pal-element-badge"
-												style="filter: {calculateFilters('#FF0000')};"
-											/>
-										</button>
-									</Tooltip>
-									<Tooltip label={c.oilRigPals}>
-										<button
-											type="button"
-											class={sortOilrigClass}
-											onclick={() => (selectedFilter = 'oilrig')}
-										>
-											<img src={staticIcons.oilrigIcon} alt="Oil Rig" class="pal-element-badge" />
-										</button>
-									</Tooltip>
-									<Tooltip label={c.summonedPals}>
-										<button
-											type="button"
-											class={sortSummonClass}
-											onclick={() => (selectedFilter = 'summon')}
-										>
-											<img src={staticIcons.altarIcon} alt="Summoned" class="pal-element-badge" />
-										</button>
-									</Tooltip>
-								</div>
-							</div>
+							<PalFilterButtons bind:selectedFilter />
 						{/snippet}
 					</Accordion.Item>
 					<Accordion.Item
