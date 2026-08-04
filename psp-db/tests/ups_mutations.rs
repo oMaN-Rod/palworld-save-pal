@@ -119,6 +119,41 @@ async fn storage_size_mb_counts_bytes_not_chars() {
     );
 }
 
+fn new_flagged_pal(character_id: &str, is_awakened: bool, is_imported: bool) -> NewUpsPal {
+    let mut pal = new_pal(character_id, false);
+    pal.pal_data = serde_json::json!({
+        "character_id": character_id,
+        "is_boss": false,
+        "is_lucky": false,
+        "is_awakened": is_awakened,
+        "is_imported": is_imported,
+        "level": 12,
+        "nickname": "Fluffy"
+    });
+    pal
+}
+
+#[tokio::test]
+async fn stats_count_awakened_and_imported_pals() {
+    let (db, _) = test_db().await;
+    let game_data = pals_game_data();
+    psp_db::ups::add_pal(&db, new_flagged_pal("SheepBall", true, false), &game_data)
+        .await
+        .unwrap();
+    psp_db::ups::add_pal(&db, new_flagged_pal("Kitsunebi", false, true), &game_data)
+        .await
+        .unwrap();
+    psp_db::ups::add_pal(&db, new_flagged_pal("SheepBall", false, false), &game_data)
+        .await
+        .unwrap();
+
+    let stats = psp_db::ups::get_stats(&db, &game_data).await.unwrap();
+
+    assert_eq!(stats.total_pals, 3);
+    assert_eq!(stats.awakened_count, 1);
+    assert_eq!(stats.imported_count, 1);
+}
+
 #[tokio::test]
 async fn collection_counts_follow_membership() {
     let (db, _) = test_db().await;
