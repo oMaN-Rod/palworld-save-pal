@@ -251,18 +251,23 @@ pub fn read_save_parameter_dto(
             .unwrap_or(0) as i64,
         character_id,
     };
-    dto.max_hp = max_hp_for(&dto, is_boss || is_lucky, game_data);
+    dto.max_hp = max_hp_for(&dto, is_boss || is_lucky, is_awakened, game_data);
     dto
 }
+
+/// `PalGameSetting.AwakeningStatusMultiply`.
+pub const AWAKENING_STATUS_MULTIPLY: f64 = 1.1;
 
 /// Computed max HP, falling back to `dto.hp` for a pal with no `scaling.hp`
 /// entry in `pals.json`.
 ///
-/// `boosted` (boss or lucky, worth a 1.2x multiplier) is a parameter rather
-/// than read off `dto`: on the write path `dto.is_boss` may be stale and
-/// `dto.is_lucky` may be `None` ("leave `IsRarePal` alone", not "false"), so
-/// only the caller can resolve it against the save's current state.
-pub fn max_hp_for(dto: &PalDto, boosted: bool, game_data: &GameData) -> i64 {
+/// `boosted` (boss or lucky, worth a 1.2x multiplier) and `awakened` (worth
+/// `AWAKENING_STATUS_MULTIPLY`) are parameters rather than read off `dto`:
+/// on the write path `dto.is_boss` may be stale and `dto.is_lucky`/
+/// `dto.is_awakened` may be `None` ("leave `IsRarePal`/`bIsAwakening` alone",
+/// not "false"), so only the caller can resolve them against the save's
+/// current state.
+pub fn max_hp_for(dto: &PalDto, boosted: bool, awakened: bool, game_data: &GameData) -> i64 {
     let keys = known_pal_keys(game_data);
     let pal_key = format_character_key(&dto.character_id, keys);
     let Some(pal_data) = pal_data_for(&pal_key, game_data) else {
@@ -279,7 +284,13 @@ pub fn max_hp_for(dto: &PalDto, boosted: bool, game_data: &GameData) -> i64 {
         + 5.0 * dto.level as f64
         + hp_scaling * 0.5 * dto.level as f64 * (1.0 + hp_iv) * alpha_scaling)
         .floor();
-    ((base * (1.0 + condenser_bonus) * (1.0 + hp_soul_bonus)).floor() as i64) * 1000
+    let awakening_multiplier = if awakened {
+        AWAKENING_STATUS_MULTIPLY
+    } else {
+        1.0
+    };
+    ((base * (1.0 + condenser_bonus) * (1.0 + hp_soul_bonus) * awakening_multiplier).floor() as i64)
+        * 1000
 }
 
 /// Reads a `CharacterSaveParameterMap` entry. `None` when the entry isn't
@@ -685,8 +696,11 @@ pub fn apply_pal_dto(
     let current_is_lucky = param(save_parameter, "IsRarePal")
         .and_then(props::as_bool)
         .unwrap_or(false);
+    let current_is_awakened = param(save_parameter, "bIsAwakening")
+        .and_then(props::as_bool)
+        .unwrap_or(false);
     let boosted = dto.character_id.to_uppercase().starts_with("BOSS_") || current_is_lucky;
-    let max_hp = max_hp_for(dto, boosted, game_data);
+    let max_hp = max_hp_for(dto, boosted, current_is_awakened, game_data);
     save_parameter.insert("Hp", props::fixed_point64_property(max_hp));
     // Drop the older "HP" spelling: it is now redundant with the "Hp" written
     // above, and leaving both would let the stale one win on the next read.
@@ -1943,9 +1957,10 @@ pub fn add_player_dps_pal(
         );
         let dto = read_save_parameter_dto(save_parameter, new_instance_id, true, game_data);
         let boosted = dto.is_boss.unwrap_or(false) || dto.is_lucky.unwrap_or(false);
+        let awakened = dto.is_awakened.unwrap_or(false);
         save_parameter.insert(
             "Hp",
-            props::fixed_point64_property(max_hp_for(&dto, boosted, game_data)),
+            props::fixed_point64_property(max_hp_for(&dto, boosted, awakened, game_data)),
         );
     }
     let loaded = session.loaded_players.get(&player_id).expect("checked");
@@ -2082,9 +2097,10 @@ pub fn clone_dps_pal(
         );
         let reread = read_save_parameter_dto(save_parameter, new_instance_id, true, game_data);
         let boosted = reread.is_boss.unwrap_or(false) || reread.is_lucky.unwrap_or(false);
+        let awakened = reread.is_awakened.unwrap_or(false);
         save_parameter.insert(
             "Hp",
-            props::fixed_point64_property(max_hp_for(&reread, boosted, game_data)),
+            props::fixed_point64_property(max_hp_for(&reread, boosted, awakened, game_data)),
         );
     }
     let loaded = session.loaded_players.get(&owner_id).expect("checked");
@@ -2736,7 +2752,22 @@ mod tests {
             is_sick: false,
             friendship_point: 0,
         };
-        assert_eq!(max_hp_for(&dto, false, &data), 12345);
+        assert_eq!(max_hp_for(&dto, false, false, &data), 12345);
+    }
+
+    #[test]
+    fn max_hp_for_applies_the_awakening_multiplier() {
+        let data = game_data();
+        let mut dto = sample_pal_dto();
+        dto.character_id = "SheepBall".to_string();
+        dto.level = 10;
+        dto.rank = 1;
+        dto.rank_hp = 0;
+        dto.talent_hp = 0;
+
+        // Sheepball scaling.hp is 70: floor(500 + 5*10 + 70*0.5*10) = 900.
+        assert_eq!(max_hp_for(&dto, false, false, &data), 900_000);
+        assert_eq!(max_hp_for(&dto, false, true, &data), 990_000);
     }
 
     #[test]
@@ -2875,6 +2906,28 @@ mod tests {
             param(&leaves_it, "bIsAwakening").and_then(props::as_bool),
             Some(true),
             "None leaves the save's existing flag alone"
+        );
+    }
+
+    #[test]
+    fn apply_pal_dto_writes_awakened_boosted_hp() {
+        let data = game_data();
+        let mut dto = sample_pal_dto();
+
+        dto.is_awakened = Some(false);
+        let mut unawakened = Properties::default();
+        apply_pal_dto(&mut unawakened, &dto, false, &data);
+        let unawakened_hp = param(&unawakened, "Hp").and_then(props::fixed_point64).unwrap();
+
+        dto.is_awakened = Some(true);
+        let mut awakened = Properties::default();
+        apply_pal_dto(&mut awakened, &dto, false, &data);
+        let awakened_hp = param(&awakened, "Hp").and_then(props::fixed_point64).unwrap();
+
+        assert_eq!(
+            awakened_hp,
+            ((unawakened_hp as f64) * AWAKENING_STATUS_MULTIPLY).floor() as i64,
+            "bIsAwakening must be read back off the save (not the DTO) before Hp is computed"
         );
     }
 

@@ -206,9 +206,10 @@ impl SaveSession {
             let dto =
                 pal::read_save_parameter_dto(save_parameter, new_instance_id, true, game_data);
             let boosted = dto.is_boss.unwrap_or(false) || dto.is_lucky.unwrap_or(false);
+            let awakened = dto.is_awakened.unwrap_or(false);
             save_parameter.insert(
                 "Hp",
-                props::fixed_point64_property(pal::max_hp_for(&dto, boosted, game_data)),
+                props::fixed_point64_property(pal::max_hp_for(&dto, boosted, awakened, game_data)),
             );
         }
         let slots = gps_slots(save).expect("just wrote to it");
