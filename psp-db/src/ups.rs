@@ -460,7 +460,8 @@ pub async fn recompute_stats(
     let total_pals: i64 =
         crate::scalar_i64(&db.query("SELECT COUNT(id) FROM ups_pals", &[]).await?)?;
     let total_collections: i64 = crate::scalar_i64(
-        &db.query("SELECT COUNT(id) FROM ups_collections", &[]).await?,
+        &db.query("SELECT COUNT(id) FROM ups_collections", &[])
+            .await?,
     )?;
     let total_tags: i64 =
         crate::scalar_i64(&db.query("SELECT COUNT(id) FROM ups_tags", &[]).await?)?;
@@ -515,8 +516,16 @@ pub async fn recompute_stats(
         .map(|r| Ok((r.get_str_at(0)?.to_string(), r.get_str_at(1)?.to_string())))
         .collect::<Result<Vec<_>, DbError>>()?;
     let mut element_counts: serde_json::Map<String, serde_json::Value> = serde_json::Map::new();
-    let (mut alpha, mut lucky, mut awakened, mut imported, mut human, mut predator, mut oilrig, mut summon) =
-        (0i64, 0i64, 0i64, 0i64, 0i64, 0i64, 0i64, 0i64);
+    let (
+        mut alpha,
+        mut lucky,
+        mut awakened,
+        mut imported,
+        mut human,
+        mut predator,
+        mut oilrig,
+        mut summon,
+    ) = (0i64, 0i64, 0i64, 0i64, 0i64, 0i64, 0i64, 0i64);
     for (character_id, pal_data_text) in rows {
         if let Some(character_info) = pals_game_data.get(&character_id) {
             if let Some(elements) = character_info
@@ -1172,7 +1181,8 @@ pub async fn create_or_update_tag(
     color: Option<&str>,
 ) -> Result<UpsTagRecord, DbError> {
     let existing: Option<i64> = crate::opt_scalar_i64(
-        &db.query("SELECT id FROM ups_tags WHERE name = ?", &[name.into()]).await?,
+        &db.query("SELECT id FROM ups_tags WHERE name = ?", &[name.into()])
+            .await?,
     )?;
     match existing {
         Some(tag_id) => {

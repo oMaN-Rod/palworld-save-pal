@@ -250,5 +250,9 @@ async fn pal_type_filter_selects_awakened_and_imported_pals() {
     let ids = psp_db::ups::get_all_filtered_ids(&db, &either_filter)
         .await
         .unwrap();
-    assert_eq!(ids, vec![awakened_id, imported_id], "the group is OR-joined");
+    assert_eq!(
+        ids,
+        vec![awakened_id, imported_id],
+        "the group is OR-joined"
+    );
 }

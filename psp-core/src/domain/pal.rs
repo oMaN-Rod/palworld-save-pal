@@ -850,7 +850,9 @@ pub fn new_pal_entry(
     let mut value_props = Properties::default();
     value_props.insert(
         "RawData",
-        Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(character_data))),
+        Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(
+            character_data,
+        ))),
     );
     value_props.insert(
         "CustomVersionData",
@@ -1089,12 +1091,12 @@ fn append_guild_handle(
     };
     let entries = world::group_map_mut(&mut session.level)?;
     if let Some(group_data) = super::guild_tail::entry_group_data_mut(&mut entries[entry_index]) {
-        group_data
-            .individual_character_handle_ids
-            .push(crate::ue::games::palworld::PalInstanceId {
+        group_data.individual_character_handle_ids.push(
+            crate::ue::games::palworld::PalInstanceId {
                 guid: props::uuid_to_guid(props::EMPTY_UUID),
                 instance_id: props::uuid_to_guid(instance_id),
-            });
+            },
+        );
     }
     Ok(())
 }
@@ -2275,7 +2277,9 @@ mod tests {
         let mut value_properties = Properties::default();
         value_properties.insert(
             "RawData",
-            Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(character_data))),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(
+                character_data,
+            ))),
         );
 
         MapEntry {
@@ -2708,7 +2712,9 @@ mod tests {
     #[test]
     fn pal_dto_from_dps_slot_returns_none_for_a_non_struct_slot() {
         let data = game_data();
-        assert!(pal_dto_from_dps_slot(&StructValue::Guid(crate::ue::FGuid::nil()), &data).is_none());
+        assert!(
+            pal_dto_from_dps_slot(&StructValue::Guid(crate::ue::FGuid::nil()), &data).is_none()
+        );
     }
 
     #[test]
@@ -2809,7 +2815,10 @@ mod tests {
             "CharacterID",
             Property::Name("TotallyMadeUpCreature".to_string()),
         );
-        save_parameter.insert("FullStomach", Property::Float(crate::ue::Float(f32::INFINITY)));
+        save_parameter.insert(
+            "FullStomach",
+            Property::Float(crate::ue::Float(f32::INFINITY)),
+        );
         let instance_id = uuid::Uuid::nil();
 
         let dto = read_save_parameter_dto(&save_parameter, instance_id, false, &data);
@@ -2890,13 +2899,19 @@ mod tests {
         let mut writes_it = Properties::default();
         dto.is_awakened = Some(true);
         apply_pal_dto(&mut writes_it, &dto, false, &data);
-        assert_eq!(param(&writes_it, "bIsAwakening").and_then(props::as_bool), Some(true));
+        assert_eq!(
+            param(&writes_it, "bIsAwakening").and_then(props::as_bool),
+            Some(true)
+        );
 
         let mut removes_it = Properties::default();
         removes_it.insert("bIsAwakening", Property::Bool(true));
         dto.is_awakened = Some(false);
         apply_pal_dto(&mut removes_it, &dto, false, &data);
-        assert!(param(&removes_it, "bIsAwakening").is_none(), "Some(false) removes");
+        assert!(
+            param(&removes_it, "bIsAwakening").is_none(),
+            "Some(false) removes"
+        );
 
         let mut leaves_it = Properties::default();
         leaves_it.insert("bIsAwakening", Property::Bool(true));
@@ -2917,12 +2932,16 @@ mod tests {
         dto.is_awakened = Some(false);
         let mut unawakened = Properties::default();
         apply_pal_dto(&mut unawakened, &dto, false, &data);
-        let unawakened_hp = param(&unawakened, "Hp").and_then(props::fixed_point64).unwrap();
+        let unawakened_hp = param(&unawakened, "Hp")
+            .and_then(props::fixed_point64)
+            .unwrap();
 
         dto.is_awakened = Some(true);
         let mut awakened = Properties::default();
         apply_pal_dto(&mut awakened, &dto, false, &data);
-        let awakened_hp = param(&awakened, "Hp").and_then(props::fixed_point64).unwrap();
+        let awakened_hp = param(&awakened, "Hp")
+            .and_then(props::fixed_point64)
+            .unwrap();
 
         let expected =
             (((unawakened_hp / 1000) as f64) * AWAKENING_STATUS_MULTIPLY).floor() as i64 * 1000;
@@ -2940,13 +2959,19 @@ mod tests {
         let mut writes_it = Properties::default();
         dto.is_imported = Some(true);
         apply_pal_dto(&mut writes_it, &dto, false, &data);
-        assert_eq!(param(&writes_it, "bImportedCharacter").and_then(props::as_bool), Some(true));
+        assert_eq!(
+            param(&writes_it, "bImportedCharacter").and_then(props::as_bool),
+            Some(true)
+        );
 
         let mut removes_it = Properties::default();
         removes_it.insert("bImportedCharacter", Property::Bool(true));
         dto.is_imported = Some(false);
         apply_pal_dto(&mut removes_it, &dto, false, &data);
-        assert!(param(&removes_it, "bImportedCharacter").is_none(), "Some(false) removes");
+        assert!(
+            param(&removes_it, "bImportedCharacter").is_none(),
+            "Some(false) removes"
+        );
 
         let mut leaves_it = Properties::default();
         leaves_it.insert("bImportedCharacter", Property::Bool(true));
