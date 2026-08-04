@@ -61,6 +61,24 @@
 				<img src={staticIcons.luckyIcon} alt="Lucky" class="pal-element-badge" />
 			</button>
 		</Tooltip>
+		<Tooltip label={m.awakened()}>
+			<button
+				type="button"
+				class={filterClass('awakened')}
+				onclick={() => (selectedFilter = 'awakened')}
+			>
+				<img src={staticIcons.awakeningIcon} alt="Awakened" class="pal-element-badge" />
+			</button>
+		</Tooltip>
+		<Tooltip label={m.imported()}>
+			<button
+				type="button"
+				class={filterClass('imported')}
+				onclick={() => (selectedFilter = 'imported')}
+			>
+				<img src={staticIcons.importedIcon} alt="Imported" class="pal-element-badge" />
+			</button>
+		</Tooltip>
 		<Tooltip label={c.humans}>
 			<button type="button" class={filterClass('human')} onclick={() => (selectedFilter = 'human')}>
 				<User />

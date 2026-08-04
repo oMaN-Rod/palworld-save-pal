@@ -11,6 +11,8 @@ const pal = (over: Record<string, unknown> = {}) =>
 		character_id: 'SheepBall',
 		is_boss: false,
 		is_lucky: false,
+		is_awakened: false,
+		is_imported: false,
 		...over
 	}) as any;
 
@@ -45,5 +47,12 @@ describe('palMatchesFilter', () => {
 		expect(palMatchesFilter(pal({ character_id: 'Sheep_oilrig' }), palData(), 'oilrig')).toBe(true);
 		expect(palMatchesFilter(pal({ character_id: 'SUMMON_Rock' }), palData(), 'summon')).toBe(true);
 		expect(palMatchesFilter(pal(), palData(), 'predator')).toBe(false);
+	});
+
+	it('matches awakened and imported off the pal flags', () => {
+		expect(palMatchesFilter(pal({ is_awakened: true }), palData(), 'awakened')).toBe(true);
+		expect(palMatchesFilter(pal(), palData(), 'awakened')).toBe(false);
+		expect(palMatchesFilter(pal({ is_imported: true }), palData(), 'imported')).toBe(true);
+		expect(palMatchesFilter(pal(), palData(), 'imported')).toBe(false);
 	});
 });

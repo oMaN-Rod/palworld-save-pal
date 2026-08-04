@@ -18,6 +18,10 @@ export function palMatchesFilter(
 			return pal.is_boss;
 		case 'lucky':
 			return pal.is_lucky;
+		case 'awakened':
+			return pal.is_awakened;
+		case 'imported':
+			return pal.is_imported;
 		case 'human':
 			return !palData.is_pal;
 		case 'predator':
