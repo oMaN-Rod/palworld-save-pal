@@ -45,12 +45,14 @@
 			<SaveDropzone {onLoad} />
 		</div>
 		<p class="text-surface-300 mt-4 flex items-center justify-center gap-2 text-sm">
-			<Lock size={14} /> {m.landing_hero_privacy()}
+			<Lock size={14} />
+			{m.landing_hero_privacy()}
 		</p>
 		{#if resumeName && onResume}
 			<Tooltip label={resumeName}>
 				<Button variant="secondary" class="mt-4" onclick={onResume}>
-					<RotateCcw size={16} /> {m.landing_hero_resume()}
+					<RotateCcw size={16} />
+					{m.landing_hero_resume()}
 				</Button>
 			</Tooltip>
 		{/if}
@@ -61,22 +63,22 @@
 	.hero-scrim {
 		background: linear-gradient(
 			180deg,
-			rgba(6, 10, 16, 0.35) 0%,
-			rgba(6, 10, 16, 0.15) 40%,
-			rgba(6, 10, 16, 0.85) 100%
+			color-mix(in srgb, var(--color-surface-950) 35%, transparent) 0%,
+			color-mix(in srgb, var(--color-surface-950) 15%, transparent) 40%,
+			color-mix(in srgb, var(--color-surface-950) 85%, transparent) 100%
 		);
 	}
 	.hero-aurora {
 		background: radial-gradient(
 			700px 240px at 50% -10%,
-			rgba(125, 211, 252, 0.16),
+			color-mix(in srgb, var(--color-primary-300) 16%, transparent),
 			transparent 70%
 		);
 	}
 	.glass {
-		background: rgba(9, 13, 20, 0.55);
+		background: color-mix(in srgb, var(--color-surface-950) 55%, transparent);
 		backdrop-filter: blur(10px);
-		border: 1px solid rgba(148, 163, 184, 0.16);
+		border: 1px solid color-mix(in srgb, var(--color-surface-400) 16%, transparent);
 	}
 	@media (prefers-reduced-motion: no-preference) {
 		.hero-aurora {

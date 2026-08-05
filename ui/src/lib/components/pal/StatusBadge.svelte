@@ -139,7 +139,7 @@
 					max={levelProgress.max}
 					height={healthHeight}
 					trailingLabel={`Lv.${currentLevel}`}
-					color="bg-[#db7c90]"
+					color="tertiary"
 				/>
 				{#snippet popup()}
 					<span>{m.trust()}: {trustCurrent.toLocaleString()}</span>

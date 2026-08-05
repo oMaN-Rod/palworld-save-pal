@@ -55,9 +55,9 @@
 
 	const inputClass = $derived(
 		cn(
-			'input p-2 my-2 focus:outline-hidden ring-surface-200-800 focus-within:ring-secondary-500 ring rounded-xs bg-surface-900',
+			'input p-2 my-2 rounded-xs',
 			error ? 'border-error' : '',
-			disabled ? 'text-surface-400 cursor-not-allowed' : '',
+			disabled ? 'text-surface-400 cursor-not-allowed opacity-60' : '',
 			_inputClass
 		)
 	);

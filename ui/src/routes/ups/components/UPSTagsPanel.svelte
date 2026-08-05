@@ -102,7 +102,7 @@
 				type="text"
 				bind:value={searchTags}
 				placeholder={m.search_placeholder({ entity: c.tags })}
-				class="border-surface-300 dark:border-surface-600 dark:bg-surface-800 w-full rounded-md border bg-white py-2 pr-3 pl-8 text-sm"
+				class="border-surface-300 dark:border-surface-600 dark:bg-surface-800 bg-surface-900 w-full rounded-md border py-2 pr-3 pl-8 text-sm"
 			/>
 			<Tag class="text-surface-500 absolute top-1/2 left-2.5 h-3 w-3 -translate-y-1/2" />
 		</div>
@@ -175,7 +175,7 @@
 									e.stopPropagation();
 									editTag(tag);
 								}}
-								class="rounded bg-black/20 p-1 text-white hover:bg-black/40"
+								class="bg-surface-900/60 text-surface-200 hover:bg-surface-700/60 rounded p-1"
 								popupLabel={m.edit_entity({ entity: c.tag })}
 								size="sm"
 							>
@@ -186,7 +186,7 @@
 									e.stopPropagation();
 									deleteTag(tag);
 								}}
-								class="rounded bg-red-500/80 p-1 text-white hover:bg-red-600/80"
+								class="bg-error-500/20 text-error-300 hover:bg-error-500/40 rounded p-1"
 								popupLabel={m.delete_entity({ entity: c.tag })}
 								size="sm"
 							>

@@ -96,7 +96,7 @@
 			<div class="grid grid-cols-2 gap-3">
 				<!-- Total Pals -->
 				<div
-					class="hover-lift dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border bg-white p-3"
+					class="hover-lift dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border p-3"
 				>
 					<div class="mb-1 flex items-center justify-between">
 						<span class="text-surface-600 dark:text-surface-400 text-sm">{c.pals}</span>
@@ -109,7 +109,7 @@
 
 				<!-- Collections -->
 				<div
-					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border bg-white p-3"
+					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border p-3"
 				>
 					<div class="mb-1 flex items-center justify-between">
 						<span class="text-surface-600 dark:text-surface-400 text-sm">{c.collections}</span>
@@ -122,7 +122,7 @@
 
 				<!-- Tags -->
 				<div
-					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border bg-white p-3"
+					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border p-3"
 				>
 					<div class="mb-1 flex items-center justify-between">
 						<span class="text-surface-600 dark:text-surface-400 text-sm">{c.tags}</span>
@@ -135,7 +135,7 @@
 
 				<!-- Storage Size -->
 				<div
-					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border bg-white p-3"
+					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border p-3"
 				>
 					<div class="mb-1 flex items-center justify-between">
 						<span class="text-surface-600 dark:text-surface-400 text-sm">{c.storage}</span>
@@ -149,7 +149,7 @@
 
 			<!-- Activity Stats -->
 			<div
-				class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border bg-white p-4"
+				class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border p-4"
 			>
 				<h3 class="text-surface-900 dark:text-surface-100 mb-3 text-sm font-medium">
 					{m.activity()}
@@ -176,7 +176,7 @@
 			<!-- Most Popular -->
 			{#if stats.most_popular_character_id}
 				<div
-					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border bg-white p-4"
+					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border p-4"
 				>
 					<h3 class="text-surface-900 dark:text-surface-100 mb-3 text-sm font-medium">
 						{m.most_popular()}
@@ -193,7 +193,7 @@
 			<!-- Distribution -->
 			{#if totalPals > 0}
 				<div
-					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border bg-white p-4"
+					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border p-4"
 				>
 					<h3 class="text-surface-900 dark:text-surface-100 mb-3 text-sm font-medium">
 						{m.distribution()}
@@ -226,7 +226,7 @@
 			<!-- Elemental Distribution -->
 			{#if Object.keys(elementDistribution).length > 0}
 				<div
-					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border bg-white p-4"
+					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border p-4"
 				>
 					<h3 class="text-surface-900 dark:text-surface-100 mb-3 text-sm font-medium">
 						{m.elemental_distribution()}
@@ -251,7 +251,7 @@
 			<!-- Special Categories -->
 			{#if totalPals > 0}
 				<div
-					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border bg-white p-4"
+					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border p-4"
 				>
 					<h3 class="text-surface-900 dark:text-surface-100 mb-3 text-sm font-medium">
 						{m.special_categories()}

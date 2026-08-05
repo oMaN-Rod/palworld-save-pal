@@ -10,6 +10,8 @@
 	const EMPTY_STYLE: StyleSpecification = {
 		version: 8,
 		sources: {},
+		// MapLibre WebGL paint property — can't take CSS custom properties, only
+		// concrete hex. Visible only before raster tiles load.
 		layers: [{ id: 'background', type: 'background', paint: { 'background-color': '#0a1220' } }]
 	};
 
@@ -128,13 +130,25 @@
 <style>
 	.hero-poster {
 		background:
-			radial-gradient(200px 150px at 26% 40%, #2f6b3a, transparent 68%),
-			radial-gradient(240px 180px at 76% 66%, #3b7d47, transparent 70%),
-			radial-gradient(150px 120px at 60% 20%, #6b8f3a, transparent 68%),
-			linear-gradient(160deg, #0b2a3a, #08101a 74%);
+			radial-gradient(
+				200px 150px at 26% 40%,
+				color-mix(in srgb, var(--color-success-700) 70%, transparent),
+				transparent 68%
+			),
+			radial-gradient(
+				240px 180px at 76% 66%,
+				color-mix(in srgb, var(--color-success-600) 70%, transparent),
+				transparent 70%
+			),
+			radial-gradient(
+				150px 120px at 60% 20%,
+				color-mix(in srgb, var(--color-success-500) 60%, transparent),
+				transparent 68%
+			),
+			linear-gradient(160deg, var(--color-surface-900), var(--color-surface-950) 74%);
 	}
 	.hero-3d-toggle {
-		background: rgba(14, 165, 233, 0.9);
-		color: #04121c;
+		background: color-mix(in srgb, var(--color-primary-500) 90%, transparent);
+		color: var(--color-surface-50);
 	}
 </style>

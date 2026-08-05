@@ -47,11 +47,9 @@
 				: 'hover:ring-4 hover:ring-secondary-500 outline-surface-600'
 		)
 	);
-	const sickClass = $derived(pal && pal.is_sick ? 'animate-pulse ring-4 ring-red-500' : '');
+	const sickClass = $derived(pal && pal.is_sick ? 'animate-pulse ring-4 ring-error-500' : '');
 	const awakenedClass = $derived(
-		pal && pal.is_awakened
-			? 'ring-4 ring-amber-400 shadow-[0_0_12px_2px_rgba(251,191,36,0.7)]'
-			: ''
+		pal && pal.is_awakened ? 'ring-4 ring-secondary-500 shadow-[var(--shadow-glow-gold)]' : ''
 	);
 	const palData = $derived(palsData.getByKey(pal.character_key));
 	const levelSyncTxt = $derived(

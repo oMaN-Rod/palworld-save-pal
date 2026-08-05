@@ -7,7 +7,7 @@
 		max = $bindable(100),
 		height = 'h-2',
 		rounded = 'rounded-none',
-		color = 'bg-[#34f1fd]',
+		color = 'primary',
 		dividend = 1,
 		showLabel = true,
 		trailingLabel,
@@ -82,7 +82,7 @@
 			{/if}
 		</div>
 		{#if trailingLabel}
-			<span class="absolute top-1 right-2 text-xs font-bold text-surface-50">{trailingLabel}</span>
+			<span class="text-surface-50 absolute top-1 right-2 text-xs font-bold">{trailingLabel}</span>
 		{/if}
 	</div>
 	{#snippet popup()}

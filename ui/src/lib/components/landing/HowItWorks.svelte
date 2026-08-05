@@ -8,13 +8,15 @@
 	];
 </script>
 
-<section class="relative w-full overflow-hidden px-4 py-16">
-	<h2 class="h2 mb-8 text-center font-bold">{m.landing_steps_heading()}</h2>
+<section class="relative w-full px-4 py-16">
+	<h2 class="heading-gradient h2 mb-8 text-center font-bold">
+		{m.landing_steps_heading()}
+	</h2>
 	<div class="mx-auto grid max-w-4xl grid-cols-1 gap-6 sm:grid-cols-3">
 		{#each steps as s (s.n)}
 			<div class="card flex flex-col items-center gap-3 p-6 text-center">
 				<div
-					class="bg-primary-500 text-on-primary-token flex h-10 w-10 items-center justify-center rounded-full text-lg font-bold"
+					class="bg-primary-500 text-primary-contrast-500 flex h-10 w-10 items-center justify-center rounded-full text-lg font-bold"
 				>
 					{s.n}
 				</div>

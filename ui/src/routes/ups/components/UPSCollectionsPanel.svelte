@@ -151,7 +151,7 @@
 										e.stopPropagation();
 										toggleFavorite(collection);
 									}}
-									class="rounded bg-black/20 p-1 text-white hover:bg-black/40"
+									class="bg-surface-900/60 text-surface-200 hover:bg-surface-700/60 rounded p-1"
 									popupLabel={m.remove_from_favorites()}
 									size="sm"
 								>
@@ -162,7 +162,7 @@
 										e.stopPropagation();
 										editCollection(collection);
 									}}
-									class="rounded bg-black/20 p-1 text-white hover:bg-black/40"
+									class="bg-surface-900/60 text-surface-200 hover:bg-surface-700/60 rounded p-1"
 									popupLabel={m.edit_entity({ entity: c.collection })}
 									size="sm"
 								>
@@ -215,7 +215,7 @@
 										e.stopPropagation();
 										toggleFavorite(collection);
 									}}
-									class="rounded bg-black/20 p-1 text-white hover:bg-black/40"
+									class="bg-surface-900/60 text-surface-200 hover:bg-surface-700/60 rounded p-1"
 									popupLabel={m.add_to_favorites()}
 									size="sm"
 								>
@@ -226,7 +226,7 @@
 										e.stopPropagation();
 										editCollection(collection);
 									}}
-									class="rounded bg-black/20 p-1 text-white hover:bg-black/40"
+									class="bg-surface-900/60 text-surface-200 hover:bg-surface-700/60 rounded p-1"
 									popupLabel={m.edit_entity({ entity: c.collection })}
 									size="sm"
 								>
@@ -237,7 +237,7 @@
 										e.stopPropagation();
 										toggleArchived(collection);
 									}}
-									class="rounded bg-black/20 p-1 text-white hover:bg-black/40"
+									class="bg-surface-900/60 text-surface-200 hover:bg-surface-700/60 rounded p-1"
 									popupLabel={m.archive_entity({ entity: c.collection })}
 									size="sm"
 								>
@@ -248,7 +248,7 @@
 										e.stopPropagation();
 										deleteCollection(collection);
 									}}
-									class="rounded bg-red-500/80 p-1 text-white hover:bg-red-600/80"
+									class="bg-error-500/20 text-error-300 hover:bg-error-500/40 rounded p-1"
 									popupLabel={m.delete_entity({ entity: c.collection })}
 									size="sm"
 								>

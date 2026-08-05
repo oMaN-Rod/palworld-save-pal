@@ -12,7 +12,6 @@
 
 	let { pal = $bindable() }: { pal: Pal | undefined } = $props();
 
-
 	let workSuitabilities = $derived.by(() => {
 		if (pal) {
 			let suitability: Record<WorkSuitability, number> = {
@@ -89,7 +88,7 @@
 				<button
 					class="border-l-surface-600 bg-surface-900 relative w-full overflow-hidden rounded-none border-l-2 p-0 shadow-none {value ===
 					0
-						? 'text-[#646464]'
+						? 'text-surface-700'
 						: ''}"
 					disabled={value === 0}
 					onclick={() => handleEditSuitability(ws, value)}

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../app.css';
-	import { NavBar } from '$components/layout';
+	import { Sidebar } from '$components/layout';
 	import { Toast, Modal, Spinner, PalEditorOverlay } from '$components/ui';
 	import { bootstrap } from '$lib/data/bootstrap';
 	import { getAppState, getSocketState, theme } from '$states';
@@ -78,22 +78,24 @@
 		<CompatBanner />
 	{/if}
 	<Modal>
-		<div class="flex h-screen w-full overflow-hidden">
+		<div class="relative z-[1] flex h-screen w-full overflow-hidden">
 			{#if !(isWebBuild && !appState.saveFile)}
-				<NavBar />
+				<Sidebar />
 			{/if}
-			{#if appState.autoSave}
-				<div class="auto-save-indicator" transition:fade>
-					<span class="text-primary-400 text-sm font-bold">{m.syncing()}</span>
-					<Spinner size="size-5" />
+			<div class="relative flex flex-1 flex-col overflow-hidden">
+				{#if appState.autoSave}
+					<div class="auto-save-indicator" transition:fade>
+						<span class="text-primary-400 text-sm font-bold">{m.syncing()}</span>
+						<Spinner size="size-5" />
+					</div>
+				{/if}
+				<div class="relative flex-1 overflow-hidden">
+					{#key page.url.pathname}
+						<main class="absolute inset-0 overflow-y-auto" transition:fade={{ duration: 150 }}>
+							{@render children()}
+						</main>
+					{/key}
 				</div>
-			{/if}
-			<div class="relative flex-1 overflow-hidden">
-				{#key page.url.pathname}
-					<main class="absolute inset-0 overflow-y-auto" transition:fade={{ duration: 150 }}>
-						{@render children()}
-					</main>
-				{/key}
 			</div>
 		</div>
 	</Modal>
