@@ -55,12 +55,12 @@
 	);
 
 	const sickClass = $derived(
-		pal && pal.is_sick ? 'animate-pulse ring-4 ring-red-500 rounded-full' : ''
+		pal && pal.is_sick ? 'animate-pulse ring-4 ring-error-500 rounded-full' : ''
 	);
 
 	const awakenedClass = $derived(
 		pal && pal.is_awakened
-			? 'ring-4 ring-amber-400 rounded-full shadow-[0_0_12px_2px_rgba(251,191,36,0.7)]'
+			? 'ring-4 ring-secondary-500 rounded-full shadow-[var(--shadow-glow-gold)]'
 			: ''
 	);
 
@@ -112,7 +112,7 @@
 		appState.selectedPlayer?.level! < pal.level ? appState.selectedPlayer?.level : pal.level
 	);
 	const levelSyncClass = $derived(
-		appState.selectedPlayer?.level! < pal.level ? 'text-red-500' : ''
+		appState.selectedPlayer?.level! < pal.level ? 'text-error-500' : ''
 	);
 
 	function handleClick(event: MouseEvent) {
@@ -174,7 +174,7 @@
 						<div
 							class={cn(
 								'absolute -top-1 -right-4 h-6 w-6 xl:h-8 xl:w-8',
-								pal.gender == PalGender.MALE ? 'text-primary-300' : 'text-tertiary-300'
+								pal.gender == PalGender.MALE ? 'text-primary-300' : 'text-tertiary-400'
 							)}
 						>
 							<img src={genderIcon} alt={pal.gender} />

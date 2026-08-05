@@ -1,4 +1,7 @@
-import type { Component } from 'svelte';
+import * as m from '$i18n/messages';
+import { c } from '$lib/utils/commonTranslations';
+import { isWebBuild } from '$lib/utils/platform';
+import type { AppState } from '$states';
 import {
 	Blocks,
 	BookOpen,
@@ -7,28 +10,26 @@ import {
 	ChevronsRight,
 	CircleX,
 	Database,
-	Download,
-	File,
 	FileHeart,
 	Folder,
 	Globe,
 	Info,
 	Layers,
+	LayoutGrid,
 	Map,
 	NotebookPen,
 	Pencil,
 	Save,
 	Server,
 	Settings,
-	Upload,
 	Wrench
 } from '@lucide/svelte';
-import type { AppState } from '$states';
-import * as m from '$i18n/messages';
-import { c } from '$lib/utils/commonTranslations';
-import { isWebBuild } from '$lib/utils/platform';
+import type { Component } from 'svelte';
 
 export type NavSection = 'header' | 'tiles' | 'footer';
+
+/** Sidebar grouping for `tiles` items. Determines which labelled cluster an item belongs to. */
+export type NavGroup = 'main' | 'tools' | 'help';
 
 export type NavAction = 'toggle-expanded' | 'save' | 'eject' | 'open-folder' | 'settings';
 
@@ -41,19 +42,28 @@ export type NavContext = {
 export type NavItem = {
 	id: string;
 	section: NavSection;
+	/** Sidebar cluster for tiles. Defaults to `'main'`; ignored for header/footer items. */
+	group?: NavGroup;
 	/** Resolves the icon component, given runtime context (e.g. upload vs download). */
 	icon: (ctx: NavContext) => Component;
 	/** Expanded label text. Omit for icon-only tiles (e.g. the menu toggle). */
 	label?: () => string;
 	/** Tooltip text. Defaults to `label` when omitted. */
 	title?: () => string;
-	/** Navigation target for link tiles. */
-	href?: string;
-	/** Stateful action for non-link tiles. Handled by NavBar's action map. */
+	/** Navigation target for link tiles. Static, or resolved from runtime context. */
+	href?: string | ((ctx: NavContext) => string);
+	/** Stateful action for non-link tiles. Handled by Sidebar's action map. */
 	action?: NavAction;
 	/** Runtime visibility predicate. Visible when omitted. */
 	visible?: (ctx: NavContext) => boolean;
 };
+
+/** Ordered sidebar groups. Labels resolve lazily so a locale switch re-reads them. */
+export const navGroups: { id: NavGroup; label: () => string }[] = [
+	{ id: 'main', label: () => m.nav_group_main() },
+	{ id: 'tools', label: () => m.tools() },
+	{ id: 'help', label: () => m.nav_group_help() }
+];
 
 export const navItems: NavItem[] = [
 	// --- header ---
@@ -81,10 +91,19 @@ export const navItems: NavItem[] = [
 		visible: (ctx) => Boolean(ctx.appState.saveFile)
 	},
 
-	// --- tiles ---
+	// --- tiles: main ---
+	{
+		id: 'files',
+		section: 'tiles',
+		group: 'main',
+		icon: () => LayoutGrid,
+		label: () => m.file({ count: 2 }),
+		href: (ctx) => (ctx.desktop ? '/file' : '/upload')
+	},
 	{
 		id: 'edit',
 		section: 'tiles',
+		group: 'main',
 		icon: () => Pencil,
 		label: () => m.edit(),
 		href: '/edit'
@@ -92,29 +111,15 @@ export const navItems: NavItem[] = [
 	{
 		id: 'bulk',
 		section: 'tiles',
+		group: 'main',
 		icon: () => Layers,
 		label: () => m.bulk_actions(),
 		href: '/bulk'
 	},
 	{
-		id: 'file',
-		section: 'tiles',
-		icon: () => File,
-		label: () => m.file({ count: 2 }),
-		href: '/file',
-		visible: (ctx) => ctx.desktop
-	},
-	{
-		id: 'upload',
-		section: 'tiles',
-		icon: (ctx) => (ctx.appState.saveFile ? Download : Upload),
-		label: () => m.transfer({ count: 1 }),
-		href: '/upload',
-		visible: (ctx) => !ctx.desktop
-	},
-	{
 		id: 'map',
 		section: 'tiles',
+		group: 'main',
 		icon: () => Map,
 		label: () => m.map(),
 		href: '/worldmap'
@@ -122,13 +127,17 @@ export const navItems: NavItem[] = [
 	{
 		id: 'presets',
 		section: 'tiles',
+		group: 'main',
 		icon: () => FileHeart,
 		label: () => c.presets,
 		href: '/presets'
 	},
+
+	// --- tiles: tools ---
 	{
 		id: 'blueprints',
 		section: 'tiles',
+		group: 'tools',
 		icon: () => Blocks,
 		label: () => 'Blueprints',
 		href: '/blueprints'
@@ -136,6 +145,7 @@ export const navItems: NavItem[] = [
 	{
 		id: 'gps',
 		section: 'tiles',
+		group: 'tools',
 		icon: () => Globe,
 		label: () => m.gps(),
 		href: '/gps',
@@ -144,21 +154,15 @@ export const navItems: NavItem[] = [
 	{
 		id: 'ups',
 		section: 'tiles',
+		group: 'tools',
 		icon: () => Database,
 		label: () => m.ups(),
 		href: '/ups'
 	},
 	{
-		id: 'debug',
-		section: 'tiles',
-		icon: () => Bug,
-		label: () => m.debug(),
-		href: '/debug',
-		visible: (ctx) => Boolean(ctx.appState.settings.debug_mode)
-	},
-	{
 		id: 'servers',
 		section: 'tiles',
+		group: 'tools',
 		icon: () => Server,
 		label: () => 'Servers',
 		href: '/servers',
@@ -168,13 +172,26 @@ export const navItems: NavItem[] = [
 	{
 		id: 'editor',
 		section: 'tiles',
+		group: 'tools',
 		icon: () => NotebookPen,
 		label: () => m.editor(),
 		href: '/editor'
 	},
 	{
+		id: 'debug',
+		section: 'tiles',
+		group: 'tools',
+		icon: () => Bug,
+		label: () => m.debug(),
+		href: '/debug',
+		visible: (ctx) => Boolean(ctx.appState.settings.debug_mode)
+	},
+
+	// --- tiles: help ---
+	{
 		id: 'tools',
 		section: 'tiles',
+		group: 'help',
 		icon: () => Wrench,
 		label: () => m.tools(),
 		href: '/tools'
@@ -182,6 +199,7 @@ export const navItems: NavItem[] = [
 	{
 		id: 'docs',
 		section: 'tiles',
+		group: 'help',
 		icon: () => BookOpen,
 		label: () => m.docs(),
 		href: '/docs'
@@ -189,6 +207,7 @@ export const navItems: NavItem[] = [
 	{
 		id: 'about',
 		section: 'tiles',
+		group: 'help',
 		icon: () => Info,
 		label: () => m.about(),
 		href: '/about'
@@ -215,16 +234,19 @@ export const navItems: NavItem[] = [
 /**
  * Resolves the active nav id for a given pathname by longest-matching `href`
  * on a route-segment boundary. The longest match wins, so `/editor` beats `/edit`.
+ * Function hrefs are resolved against the runtime context (e.g. Files → /file on
+ * desktop vs /upload on the web build).
  */
-export function activeNavId(pathname: string): string {
+export function activeNavId(pathname: string, ctx: NavContext): string {
 	let bestId = '';
 	let bestLen = 0;
 	for (const item of navItems) {
 		if (!item.href) continue;
-		if (pathname === item.href || pathname.startsWith(`${item.href}/`)) {
-			if (item.href.length > bestLen) {
+		const href = typeof item.href === 'string' ? item.href : item.href(ctx);
+		if (pathname === href || pathname.startsWith(`${href}/`)) {
+			if (href.length > bestLen) {
 				bestId = item.id;
-				bestLen = item.href.length;
+				bestLen = href.length;
 			}
 		}
 	}

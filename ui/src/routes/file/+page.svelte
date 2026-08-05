@@ -88,7 +88,7 @@
 >
 	<div class="flex w-full max-w-3xl flex-col gap-12">
 		<section class="w-full">
-			<h1 class="text-primary-400 mb-6 text-center text-4xl font-extrabold tracking-tight">
+			<h1 class="heading-gradient mb-6 text-center text-4xl font-extrabold tracking-tight">
 				{m.select_entity({ entity: m.save_platform() })}
 			</h1>
 			<div class="grid w-full grid-cols-1 justify-center gap-8 sm:grid-cols-2">
@@ -96,17 +96,17 @@
 					<button
 						type="button"
 						class={cn(
-							'bg-surface-800 flex flex-col items-center justify-between rounded-xl border-2 p-8 shadow-md transition-all',
+							'group bg-surface-800 flex flex-col items-center justify-between rounded-xl border-2 p-8 shadow-md transition-all duration-200',
 							option.disabled
 								? 'border-surface-700 cursor-not-allowed opacity-50'
-								: 'hover:border-primary-500 border-surface-700 cursor-pointer'
+								: 'border-surface-700 hover:border-primary-400/60 cursor-pointer hover:-translate-y-0.5 hover:shadow-lg'
 						)}
 						onclick={() => !option.disabled && handleSelectSave(option.type)}
 						disabled={option.disabled}
 					>
 						<div class="flex flex-col items-center gap-2">
 							<div
-								class="bg-surface-900 mb-2 flex h-24 w-24 items-center justify-center rounded-full p-4 shadow"
+								class="bg-surface-900 group-hover:shadow-glow-paldium mb-2 flex h-24 w-24 items-center justify-center rounded-full p-4 shadow transition-all duration-200"
 							>
 								{@html option.icon}
 							</div>
@@ -133,7 +133,7 @@
 						</Button>
 					</div>
 				{/if}
-				<Card class="w-full min-w-0 sm:min-w-96">
+				<Card hover class="w-full min-w-0 sm:min-w-96">
 					<div class="grid grid-cols-[auto_1fr] gap-2">
 						<span class="font-bold">{c.players}:</span>
 						<span class="text-end">{appState.playerSaveFiles.length}</span>

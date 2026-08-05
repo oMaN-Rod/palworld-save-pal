@@ -2,7 +2,13 @@
 	import { cn } from '$theme';
 	import type { Snippet } from 'svelte';
 
-	let { text, baseClass, textClass, borderClass, action }:{
+	let {
+		text,
+		baseClass,
+		textClass,
+		borderClass,
+		action
+	}: {
 		baseClass?: string;
 		textClass?: string;
 		borderClass?: string;
@@ -11,10 +17,11 @@
 	} = $props();
 </script>
 
-<div class={cn('relative inline-block w-full text-start mb-2', baseClass)}>
+<div class={cn('relative mb-2 inline-block w-full text-start', baseClass)}>
 	<span
-		class={cn('relative z-50 items-start px-2 text-lg font-bold', textClass)}
-		style="text-shadow: 0 0 20px rgba(0, 210, 255, 0.1);">{text}</span
+		class={cn('heading-gradient relative z-50 items-start px-2 text-lg font-bold', textClass)}
+		style="text-shadow: 0 0 20px color-mix(in srgb, var(--color-primary-300) 10%, transparent);"
+		>{text}</span
 	>
 	<div class={cn('bg-surface-900 absolute inset-x-0 bottom-0 -z-50 h-1/2', borderClass)}></div>
 	{#if action}

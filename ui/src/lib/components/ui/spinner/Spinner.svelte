@@ -10,7 +10,7 @@
 
 <figure
 	class={cn('spinner aspect-square rounded-full', size)}
-	style="filter: drop-shadow(0 0 8px rgba(0, 210, 255, 0.3));"
+	style="filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-primary-300) 30%, transparent));"
 	{...additionalProps}
 >
 	<img src={staticIcons.lamball} alt="Loading" class="absolute inset-0 m-auto" />
