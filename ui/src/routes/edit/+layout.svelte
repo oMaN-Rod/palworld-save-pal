@@ -3,6 +3,8 @@
 	import { PlayerList } from '$components/player';
 	import { getAppState, getModalState, getPalEditorState } from '$states';
 	import { goto } from '$app/navigation';
+	import { page } from '$app/state';
+	import { fade } from 'svelte/transition';
 	import { MessageType, type Player } from '$types';
 	import { KeyboardShortcut, Nuke, Tooltip } from '$components/ui';
 	import { send } from '$utils/websocketUtils';
@@ -115,7 +117,12 @@
 		<div id="player-tabs" class="flex gap-4">
 			{#if appState.saveFile && appState.selectedPlayer}
 				<KeyboardShortcut id="loadout-tab" text={m.loadout()} key="L" href="/edit/player" />
-				<KeyboardShortcut id="technology-tab" text={m.technology({ count: 2 })} key="T" href="/edit/technologies" />
+				<KeyboardShortcut
+					id="technology-tab"
+					text={m.technology({ count: 2 })}
+					key="T"
+					href="/edit/technologies"
+				/>
 				<KeyboardShortcut id="palbox-tab" text={m.palbox()} key="B" href="/edit/palbox" />
 			{/if}
 			{#if appState.selectedPlayer?.dps}
@@ -128,7 +135,11 @@
 		</div>
 		<div></div>
 	</div>
-	<div class="overflow-y-auto">
-		{@render children()}
+	<div class="relative flex-1 overflow-hidden">
+		{#key page.url.pathname}
+			<div class="absolute inset-0 overflow-y-auto" transition:fade={{ duration: 150 }}>
+				{@render children()}
+			</div>
+		{/key}
 	</div>
 </div>

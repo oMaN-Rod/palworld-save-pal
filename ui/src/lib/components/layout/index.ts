@@ -1,5 +1,5 @@
 import DebugButton from './DebugButton.svelte';
 import Drawer from './Drawer.svelte';
-import NavBar from './NavBar.svelte';
+import Sidebar from './Sidebar.svelte';
 
-export { DebugButton, Drawer, NavBar };
+export { DebugButton, Drawer, Sidebar };
