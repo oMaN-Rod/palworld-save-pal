@@ -25,27 +25,29 @@
 	const shown = $derived(display || tribe);
 	const iconSrc = $derived(assetLoader.loadPalImage(characterId ?? tribe));
 	const GenderIcon = $derived(gender === 'Male' ? Mars : gender === 'Female' ? Venus : null);
-	const genderColor = $derived(gender === 'Male' ? 'text-sky-400' : gender === 'Female' ? 'text-pink-400' : '');
+	const genderColor = $derived(
+		gender === 'Male' ? 'text-primary-300' : gender === 'Female' ? 'text-tertiary-400' : ''
+	);
 </script>
 
-<div class="flex items-center gap-1.5 min-w-0">
+<div class="flex min-w-0 items-center gap-1.5">
 	<div class="relative shrink-0">
 		<img
 			src={iconSrc}
 			alt={shown}
-			class="{dims} object-contain rounded-2 border border-surface-600 bg-surface-900"
+			class="{dims} rounded-sm border-surface-600 bg-surface-900 border object-contain"
 			loading="lazy"
 		/>
 		{#if GenderIcon}
-			<div class="absolute -bottom-0.5 -right-0.5 {genderColor} bg-surface-900 rounded-full">
+			<div class="absolute -right-0.5 -bottom-0.5 {genderColor} bg-surface-900 rounded-full">
 				<GenderIcon size={10} />
 			</div>
 		{/if}
 	</div>
 	<div class="min-w-0">
-		<p class="{textSize} font-medium text-surface-50 truncate leading-tight">{shown}</p>
+		<p class="{textSize} text-surface-50 truncate leading-tight font-medium">{shown}</p>
 		{#if display && display !== tribe}
-			<p class="text-[9px] text-surface-400 font-mono truncate leading-tight">{tribe}</p>
+			<p class="text-surface-400 truncate font-mono text-[9px] leading-tight">{tribe}</p>
 		{/if}
 	</div>
 </div>

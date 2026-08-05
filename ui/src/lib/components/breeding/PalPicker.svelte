@@ -128,7 +128,7 @@
 			<img
 				src={assetLoader.loadPalImage(selectedPal.tribe)}
 				alt={selectedPal.display_name}
-				class="w-5 h-5 object-contain rounded-2 bg-surface-900"
+				class="w-5 h-5 object-contain rounded-sm bg-surface-900"
 			/>
 			<span class="text-xs font-medium text-surface-50 truncate flex-1">
 				{selectedPal.display_name}
@@ -144,7 +144,7 @@
 		<div
 			bind:this={floatingEl}
 			{@attach portal()}
-			class="bg-surface-900 border border-surface-700 rounded-4 shadow-xl flex flex-col max-h-80 min-w-56"
+			class="bg-surface-900 border border-surface-700 rounded-md shadow-xl flex flex-col max-h-80 min-w-56"
 			style="position: fixed; z-index: 99999;"
 			role="listbox"
 		>
@@ -170,7 +170,7 @@
 							<img
 								src={assetLoader.loadPalImage(pal.tribe)}
 								alt={pal.display_name}
-								class="w-5 h-5 object-contain rounded-2 bg-surface-900 shrink-0"
+								class="w-5 h-5 object-contain rounded-sm bg-surface-900 shrink-0"
 								loading="lazy"
 							/>
 							<span class="font-medium text-surface-50 truncate flex-1"

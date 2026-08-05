@@ -13,7 +13,7 @@
  * toBlob + ClipboardItem are both browser built-ins. Only works on the SVG
  * rendered by `DendrogramEngine` (its `g.dendro-zoom-layer` holds the tree).
  */
-import { DENDRO_COLORS } from './constants';
+import { resolveDendroColors } from './constants';
 
 export interface ExportBounds {
 	x: number;
@@ -110,13 +110,16 @@ export async function exportTreeToPng(
 	clone.setAttribute('height', String(fit.height));
 	clone.setAttribute('viewBox', `0 0 ${fit.width} ${fit.height}`);
 
-	// Opaque background so the PNG is readable on any viewer.
+	// Opaque background so the PNG is readable on any viewer. Uses the active
+	// theme's surface color (resolved concrete value — the cloned SVG has no
+	// CSS, so `var()` references would rasterize as black).
+	const colors = resolveDendroColors();
 	const background = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
 	background.setAttribute('x', '0');
 	background.setAttribute('y', '0');
 	background.setAttribute('width', '100%');
 	background.setAttribute('height', '100%');
-	background.setAttribute('fill', DENDRO_COLORS.bgCard);
+	background.setAttribute('fill', colors.bgCard);
 	clone.insertBefore(background, clone.firstChild);
 
 	// Inline the bundled pal-icon assets so the SVG document is self-contained
@@ -135,7 +138,9 @@ export async function exportTreeToPng(
 	);
 
 	const svgString = new XMLSerializer().serializeToString(clone);
-	const svgUrl = URL.createObjectURL(new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' }));
+	const svgUrl = URL.createObjectURL(
+		new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' })
+	);
 	try {
 		const image = await loadImage(svgUrl);
 		const canvas = document.createElement('canvas');

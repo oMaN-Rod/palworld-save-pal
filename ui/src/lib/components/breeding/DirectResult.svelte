@@ -9,10 +9,8 @@
 	import Venus from '@lucide/svelte/icons/venus';
 	import PalSlot from './PalSlot.svelte';
 
-	let {
-		result,
-		palMap
-	}: { result: DirectResultItem; palMap: Map<string, BreedablePal> } = $props();
+	let { result, palMap }: { result: DirectResultItem; palMap: Map<string, BreedablePal> } =
+		$props();
 
 	const palA = $derived(palMap.get(result.parent_a));
 	const palB = $derived(palMap.get(result.parent_b));
@@ -22,37 +20,50 @@
 </script>
 
 <div
-	class="flex items-center gap-3 p-3 rounded-4 bg-surface-900/40 border border-surface-700/30 hover:border-surface-700/60 transition-colors"
+	class="rounded-sm bg-surface-900/40 border-surface-700/30 hover:border-surface-700/60 flex items-center gap-3 border p-3 transition-colors"
 >
-	<PalSlot tribe={result.parent_a} display={palA?.display_name} characterId={result.parent_a} size="sm" />
+	<PalSlot
+		tribe={result.parent_a}
+		display={palA?.display_name}
+		characterId={result.parent_a}
+		size="sm"
+	/>
 
 	<Plus size={14} class="text-surface-400 shrink-0" />
 
-	<PalSlot tribe={result.parent_b} display={palB?.display_name} characterId={result.parent_b} size="sm" />
+	<PalSlot
+		tribe={result.parent_b}
+		display={palB?.display_name}
+		characterId={result.parent_b}
+		size="sm"
+	/>
 
 	<ArrowRight size={16} class="text-primary-400 shrink-0" />
 
-	<div class="flex items-center gap-2 min-w-0 flex-1">
+	<div class="flex min-w-0 flex-1 items-center gap-2">
 		<PalSlot tribe={result.child} display={childDisplay} characterId={result.child} size="md" />
-{#if result.combo_type === 'unique'}
-				<span class="chip chip-amber text-[9px] px-1.5 py-0 shrink-0">{m.breeding_special()}</span>
+		{#if result.combo_type === 'unique'}
+			<span class="chip chip-warning shrink-0 px-1.5 py-0 text-[9px]">{m.breeding_special()}</span>
+		{/if}
+	</div>
+
+	{#if result.child_gender_prob}
+		<div
+			class="flex shrink-0 items-center gap-1 text-[10px]"
+			title={m.breeding_gender_probability()}
+		>
+			{#if result.child_gender_prob.male > 0}
+				<span class="text-primary-300 flex items-center gap-0.5" title={m.breeding_male()}>
+					<Mars size={11} />
+					{Math.round(result.child_gender_prob.male * 100)}%
+				</span>
+			{/if}
+			{#if result.child_gender_prob.female > 0}
+				<span class="text-tertiary-400 flex items-center gap-0.5" title={m.breeding_female()}>
+					<Venus size={11} />
+					{Math.round(result.child_gender_prob.female * 100)}%
+				</span>
 			{/if}
 		</div>
-
-		{#if result.child_gender_prob}
-			<div class="flex items-center gap-1 shrink-0 text-[10px]" title={m.breeding_gender_probability()}>
-				{#if result.child_gender_prob.male > 0}
-					<span class="text-sky-400 flex items-center gap-0.5" title={m.breeding_male()}>
-						<Mars size={11} />
-						{Math.round(result.child_gender_prob.male * 100)}%
-					</span>
-				{/if}
-				{#if result.child_gender_prob.female > 0}
-					<span class="text-pink-400 flex items-center gap-0.5" title={m.breeding_female()}>
-						<Venus size={11} />
-						{Math.round(result.child_gender_prob.female * 100)}%
-					</span>
-				{/if}
-			</div>
-		{/if}
+	{/if}
 </div>

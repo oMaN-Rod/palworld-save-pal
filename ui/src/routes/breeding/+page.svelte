@@ -27,6 +27,7 @@
 	import AlertTriangle from '@lucide/svelte/icons/triangle-alert';
 	import Ban from '@lucide/svelte/icons/ban';
 	import SearchX from '@lucide/svelte/icons/search-x';
+	import X from '@lucide/svelte/icons/x';
 	import PalPicker from '$lib/components/breeding/PalPicker.svelte';
 	import OwnerSelect from '$lib/components/breeding/OwnerSelect.svelte';
 	import DirectResult from '$lib/components/breeding/DirectResult.svelte';
@@ -156,9 +157,7 @@
 			return chainToTree(c, palMap, depth);
 		})
 	);
-	const maxDepth = $derived(
-		chains.length > 0 ? Math.max(...chains.map((c) => c.generations)) : 1
-	);
+	const maxDepth = $derived(chains.length > 0 ? Math.max(...chains.map((c) => c.generations)) : 1);
 
 	const directTrees = $derived.by<TreeNode[]>(() => {
 		if (directSub === 'forward' && directResult?.result) {
@@ -208,7 +207,10 @@
 		parentsResult = null;
 		try {
 			if (directSub === 'forward' && parentA && parentB) {
-				directResult = await breedingApi.breedingDirectChild({ parent_a: parentA, parent_b: parentB });
+				directResult = await breedingApi.breedingDirectChild({
+					parent_a: parentA,
+					parent_b: parentB
+				});
 			} else if (directSub === 'reverse' && parentA && directTarget) {
 				partnersResult = await breedingApi.breedingDirectPartners({
 					parent_a: parentA,
@@ -236,9 +238,7 @@
 			if (mode === 'save') {
 				const loaded = await ensurePlayerLoaded(ownerUid);
 				if (!loaded) {
-					error = ownerUid
-						? m.breeding_loading_player_failed()
-						: m.breeding_no_loaded_players();
+					error = ownerUid ? m.breeding_loading_player_failed() : m.breeding_no_loaded_players();
 					computing = false;
 					return;
 				}
@@ -353,6 +353,13 @@
 		selectedTreeNode = null;
 	}
 
+	// Shared active/inactive recipe for the mode + view-mode toggle pills.
+	function tabPill(active: boolean): string {
+		return active
+			? 'bg-primary-500/15 text-primary-300 border-primary-500/40 border'
+			: 'text-surface-300 hover:bg-surface-800 border border-transparent';
+	}
+
 	$effect(() => {
 		void directSub;
 		directResult = null;
@@ -382,10 +389,7 @@
 				? [playerMap[ownerUid]]
 				: []
 			: Object.values(playerMap);
-		return players.reduce(
-			(sum, p) => sum + Object.keys(p?.pals ?? {}).length,
-			0
-		);
+		return players.reduce((sum, p) => sum + Object.keys(p?.pals ?? {}).length, 0);
 	});
 
 	const tabs: { id: Mode; icon: typeof ArrowRightLeft; label: () => string }[] = [
@@ -396,27 +400,27 @@
 </script>
 
 <div
-	class="p-5 space-y-5 {chainViewMode === 'graph'
-		? 'max-w-full flex flex-col h-full min-h-0'
-		: 'max-w-5xl mx-auto'}"
+	class="animate-fade-in space-y-5 p-5 {chainViewMode === 'graph'
+		? 'flex h-full min-h-0 max-w-full flex-col'
+		: 'mx-auto max-w-5xl'}"
 >
 	<!-- header -->
-	<div class="flex items-center justify-between gap-3 flex-wrap">
+	<div class="flex flex-wrap items-center justify-between gap-3">
 		<div class="flex items-center gap-2">
 			<GitMerge size={20} class="text-primary-400" />
-			<h1 class="text-xl font-bold text-surface-50">{m.breeding_title()}</h1>
+			<h1 class="heading-gradient text-xl font-bold">{m.breeding_title()}</h1>
 		</div>
 		{#if chainElapsedMs !== null}
-			<span class="text-xs text-surface-400 font-mono">{chainElapsedMs}ms</span>
+			<span class="text-surface-400 font-mono text-xs">{chainElapsedMs}ms</span>
 		{/if}
 	</div>
 
 	<!-- tab pills + list/graph toggle -->
-	<div class="flex gap-1.5 items-center">
+	<div class="flex items-center gap-1.5">
 		{#each tabs as tab}
 			{@const TabIcon = tab.icon}
 			<button
-				class="flex items-center gap-1.5 px-3.5 py-2 rounded-4 text-sm font-medium transition-all {mode === tab.id ? 'bg-primary-500/15 text-primary-300 border border-primary-500/40' : 'text-surface-300 hover:bg-surface-800 border border-transparent'}"
+				class="rounded-sm flex items-center gap-1.5 px-3.5 py-2 text-sm font-medium transition-all {tabPill(mode === tab.id)}"
 				onclick={() => switchMode(tab.id)}
 			>
 				<TabIcon size={15} />
@@ -424,19 +428,19 @@
 			</button>
 		{/each}
 		<div
-			class="flex gap-1 p-0.5 rounded-4 bg-surface-950/50 border border-surface-700/40 ml-auto"
+			class="rounded-sm bg-surface-950/50 border-surface-700/40 ml-auto flex gap-1 border p-0.5"
 			role="group"
 			aria-label="View mode"
 		>
 			<button
-				class="flex items-center gap-1 px-2.5 py-1 rounded-4 text-[11px] font-medium transition-all {chainViewMode === 'list' ? 'bg-primary-500/15 text-primary-300 border border-primary-500/40' : 'text-surface-400 hover:text-surface-200 border border-transparent'}"
+				class="rounded-sm flex items-center gap-1 px-2.5 py-1 text-[11px] font-medium transition-all {tabPill(chainViewMode === 'list')}"
 				onclick={() => (chainViewMode = 'list')}
 			>
 				<List size={12} />
 				{m.breeding_view_list()}
 			</button>
 			<button
-				class="flex items-center gap-1 px-2.5 py-1 rounded-4 text-[11px] font-medium transition-all {chainViewMode === 'graph' ? 'bg-primary-500/15 text-primary-300 border border-primary-500/40' : 'text-surface-400 hover:text-surface-200 border border-transparent'}"
+				class="rounded-sm flex items-center gap-1 px-2.5 py-1 text-[11px] font-medium transition-all {tabPill(chainViewMode === 'graph')}"
 				onclick={() => (chainViewMode = 'graph')}
 			>
 				<GitMerge size={12} />
@@ -446,7 +450,7 @@
 	</div>
 
 	<!-- body -->
-	<div class="{chainViewMode === 'graph' ? 'flex-1 min-h-0 flex flex-col' : ''}">
+	<div class={chainViewMode === 'graph' ? 'flex min-h-0 flex-1 flex-col' : ''}>
 		{#if palsLoading}
 			<div class="flex justify-center py-12"><Spinner size="size-6" /></div>
 		{:else if mode === 'direct' && chainViewMode === 'list'}
@@ -455,7 +459,10 @@
 				<div class="flex gap-1.5">
 					{#each [{ id: 'forward', label: m.breeding_parent_a_b() }, { id: 'reverse', label: m.breeding_parent_a_target() }, { id: 'parents', label: m.breeding_target_only() }] as sub}
 						<button
-							class="px-3.5 py-1.5 rounded-4 text-xs font-medium transition-all {directSub === sub.id ? 'bg-surface-800 text-surface-50 border border-surface-600/60' : 'text-surface-400 hover:text-surface-200 border border-transparent'}"
+							class="rounded-sm px-3.5 py-1.5 text-xs font-medium transition-all {directSub ===
+							sub.id
+								? 'bg-surface-800 text-surface-50 border-surface-600/60 border'
+								: 'text-surface-400 hover:text-surface-200 border border-transparent'}"
 							onclick={() => (directSub = sub.id as DirectSub)}
 						>
 							{sub.label}
@@ -464,10 +471,12 @@
 				</div>
 
 				<div class="card space-y-3">
-					<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+					<div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
 						{#if directSub !== 'parents'}
 							<div>
-								<span class="block text-[10px] font-semibold text-surface-400 uppercase tracking-wider mb-1">
+								<span
+									class="text-surface-400 mb-1 block text-[10px] font-semibold tracking-wider uppercase"
+								>
 									{m.breeding_parent_a()}
 								</span>
 								<PalPicker {pals} value={parentA} onselect={(t) => (parentA = t)} />
@@ -475,35 +484,54 @@
 						{/if}
 						{#if directSub === 'forward'}
 							<div>
-								<span class="block text-[10px] font-semibold text-surface-400 uppercase tracking-wider mb-1">
+								<span
+									class="text-surface-400 mb-1 block text-[10px] font-semibold tracking-wider uppercase"
+								>
 									{m.breeding_parent_b()}
 								</span>
-								<PalPicker {pals} value={parentB} onselect={(t) => (parentB = t)} exclude={parentA ? [parentA] : []} />
+								<PalPicker
+									{pals}
+									value={parentB}
+									onselect={(t) => (parentB = t)}
+									exclude={parentA ? [parentA] : []}
+								/>
 							</div>
 						{:else if directSub === 'reverse' || directSub === 'parents'}
 							<div>
-								<span class="block text-[10px] font-semibold text-surface-400 uppercase tracking-wider mb-1">
+								<span
+									class="text-surface-400 mb-1 block text-[10px] font-semibold tracking-wider uppercase"
+								>
 									{m.breeding_target_child()}
 								</span>
 								<PalPicker {pals} value={directTarget} onselect={(t) => (directTarget = t)} />
 							</div>
 						{/if}
 					</div>
-					<button class="btn btn-primary text-sm" disabled={!canRunDirect || directLoading} onclick={runDirect}>
+					<button
+						class="btn btn-primary text-sm"
+						disabled={!canRunDirect || directLoading}
+						onclick={runDirect}
+					>
 						{#if directLoading}<Spinner size="size-4" />{:else}<Play size={15} />{/if}
 						{m.breeding_compute()}
 					</button>
 				</div>
 
-				{#if error}<div class="flex items-center gap-1.5 px-3 py-2 rounded-4 bg-rose-500/10 border border-rose-500/30 text-xs text-rose-300"><AlertTriangle size={13} class="shrink-0" /><span>{error}</span></div>{/if}
+				{#if error}<div
+						class="rounded-md bg-error-500/10 border-error-500/30 text-error-300 flex items-center gap-1.5 border px-3 py-2 text-xs"
+					>
+						<AlertTriangle size={13} class="shrink-0" /><span>{error}</span>
+					</div>{/if}
 
 				{#if directSub === 'forward' && directResult}
 					<div class="space-y-2">
-						<h3 class="text-xs font-semibold text-surface-400 uppercase tracking-wider">{m.breeding_result()}</h3>
+						<h3 class="text-surface-400 text-xs font-semibold tracking-wider uppercase">
+							{m.breeding_result()}
+						</h3>
 						{#if directResult.result}
 							<DirectResult result={directResult.result} {palMap} />
 						{:else}
-							<div class="flex flex-col items-center justify-center py-8 text-surface-400 gap-2">
+							<div class="text-surface-400 flex flex-col items-center justify-center gap-2 py-8">
 								<Ban size={24} />
 								<span class="text-xs">{m.breeding_no_combo()}</span>
 							</div>
@@ -513,7 +541,7 @@
 
 				{#if directSub === 'reverse' && partnersResult}
 					<div class="space-y-2">
-						<h3 class="text-xs font-semibold text-surface-400 uppercase tracking-wider">
+						<h3 class="text-surface-400 text-xs font-semibold tracking-wider uppercase">
 							{m.breeding_partners()} ({partnersResult.partners.length})
 						</h3>
 						{#if partnersResult.partners.length}
@@ -523,7 +551,7 @@
 								{/each}
 							</div>
 						{:else}
-							<div class="flex flex-col items-center justify-center py-8 text-surface-400 gap-2">
+							<div class="text-surface-400 flex flex-col items-center justify-center gap-2 py-8">
 								<Ban size={24} />
 								<span class="text-xs">{m.breeding_no_combo()}</span>
 							</div>
@@ -533,7 +561,7 @@
 
 				{#if directSub === 'parents' && parentsResult}
 					<div class="space-y-2">
-						<h3 class="text-xs font-semibold text-surface-400 uppercase tracking-wider">
+						<h3 class="text-surface-400 text-xs font-semibold tracking-wider uppercase">
 							{m.breeding_partners()} ({parentsResult.parents.length})
 						</h3>
 						{#if parentsResult.parents.length}
@@ -543,7 +571,7 @@
 								{/each}
 							</div>
 						{:else}
-							<div class="flex flex-col items-center justify-center py-8 text-surface-400 gap-2">
+							<div class="text-surface-400 flex flex-col items-center justify-center gap-2 py-8">
 								<Ban size={24} />
 								<span class="text-xs">{m.breeding_no_combo()}</span>
 							</div>
@@ -553,10 +581,16 @@
 			</div>
 		{:else if mode === 'direct' && chainViewMode === 'graph'}
 			{#if error && !directTrees.length}
-				<div class="flex items-center gap-1.5 px-3 py-2 rounded-4 bg-rose-500/10 border border-rose-500/30 text-xs text-rose-300"><AlertTriangle size={13} class="shrink-0" /><span>{error}</span></div>
+				<div
+					class="rounded-md bg-error-500/10 border-error-500/30 text-error-300 flex items-center gap-1.5 border px-3 py-2 text-xs"
+				>
+					<AlertTriangle size={13} class="shrink-0" /><span>{error}</span>
+				</div>
 			{/if}
-			<div class="flex gap-4 flex-1 min-h-0">
-				<div class="flex-1 min-w-0 min-h-0 rounded-6 border border-surface-700/30 bg-surface-950/20 overflow-hidden">
+			<div class="flex min-h-0 flex-1 gap-4">
+				<div
+					class="rounded-md border-surface-700/30 bg-surface-950/20 min-h-0 min-w-0 flex-1 overflow-hidden border"
+				>
 					{#if directTrees.length}
 						<GraphView
 							trees={directTrees}
@@ -569,19 +603,23 @@
 							onselect={(node) => (selectedTreeNode = node)}
 						/>
 					{:else}
-						<div class="flex-1 flex items-center justify-center h-full text-xs text-surface-400 italic">
+						<div
+							class="text-surface-400 flex h-full flex-1 items-center justify-center text-xs italic"
+						>
 							{m.breeding_select_parents_hint()}
 						</div>
 					{/if}
 				</div>
 				<div class="w-64 shrink-0">
-					<div class="rounded-8 border border-surface-700/20 bg-surface-900/90 shadow-xl overflow-hidden h-full backdrop-blur-sm">
+					<div
+						class="rounded-md border-surface-700/20 bg-surface-900/90 h-full overflow-hidden border shadow-xl backdrop-blur-sm"
+					>
 						<BreedingSidePanel
 							mode="direct"
 							chains={[]}
 							{pals}
 							activeChainIndex={0}
-							directSub={directSub}
+							{directSub}
 							ondirectSubChange={(s) => (directSub = s as DirectSub)}
 							{parentA}
 							onparentAChange={(t) => (parentA = t)}
@@ -594,8 +632,8 @@
 							oncomputeDirect={runDirect}
 							chainTarget={null}
 							chainGender={null}
-							chainGens={chainGens}
-							chainMaxResults={chainMaxResults}
+							{chainGens}
+							{chainMaxResults}
 							selectedPool={[]}
 							players={[]}
 							ownerUid={null}
@@ -617,22 +655,26 @@
 			<!-- LIST MODE -->
 			<div class="space-y-4">
 				{#if mode === 'save' && !appState.saveFile}
-					<div class="flex flex-col items-center justify-center py-12 text-surface-400 gap-2">
+					<div class="text-surface-400 flex flex-col items-center justify-center gap-2 py-12">
 						<Database size={32} />
 						<span class="text-sm font-medium">{m.breeding_save_required()}</span>
 						<p class="text-xs">{m.breeding_save_required_hint()}</p>
 					</div>
 				{:else}
 					<div class="card space-y-3">
-						<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+						<div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
 							<div>
-								<span class="block text-[10px] font-semibold text-surface-400 uppercase tracking-wider mb-1">
+								<span
+									class="text-surface-400 mb-1 block text-[10px] font-semibold tracking-wider uppercase"
+								>
 									{m.breeding_target()}
 								</span>
 								<PalPicker {pals} value={chainTarget} onselect={(t) => (chainTarget = t)} />
 							</div>
 							<div>
-								<span class="block text-[10px] font-semibold text-surface-400 uppercase tracking-wider mb-1">
+								<span
+									class="text-surface-400 mb-1 block text-[10px] font-semibold tracking-wider uppercase"
+								>
 									{m.breeding_gender()}
 								</span>
 								<select bind:value={chainGender} class="input text-xs">
@@ -645,22 +687,34 @@
 
 						<div class="grid grid-cols-2 gap-3">
 							<div>
-								<span class="block text-[10px] font-semibold text-surface-400 uppercase tracking-wider mb-1">
+								<span
+									class="text-surface-400 mb-1 block text-[10px] font-semibold tracking-wider uppercase"
+								>
 									{m.breeding_max_generations()}
 								</span>
 								<input type="number" min="1" max="6" bind:value={chainGens} class="input text-xs" />
 							</div>
 							<div>
-								<span class="block text-[10px] font-semibold text-surface-400 uppercase tracking-wider mb-1">
+								<span
+									class="text-surface-400 mb-1 block text-[10px] font-semibold tracking-wider uppercase"
+								>
 									{m.breeding_max_results()}
 								</span>
-								<input type="number" min="1" max="10" bind:value={chainMaxResults} class="input text-xs" />
+								<input
+									type="number"
+									min="1"
+									max="10"
+									bind:value={chainMaxResults}
+									class="input text-xs"
+								/>
 							</div>
 						</div>
 
 						{#if mode === 'selection'}
 							<div>
-								<span class="block text-[10px] font-semibold text-surface-400 uppercase tracking-wider mb-1">
+								<span
+									class="text-surface-400 mb-1 block text-[10px] font-semibold tracking-wider uppercase"
+								>
 									{m.breeding_pool()} ({selectedPool.length})
 								</span>
 								<PalPicker
@@ -670,19 +724,35 @@
 									exclude={selectedPool.map((p) => p.tribe)}
 								/>
 								{#if selectedPool.length}
-									<div class="flex flex-wrap gap-1.5 mt-2">
+									<div class="mt-2 flex flex-wrap gap-1.5">
 										{#each selectedPool as member (member.tribe)}
-											<div class="flex items-center gap-1 px-1.5 py-0.5 rounded-4 bg-surface-950/50 border border-surface-700/30">
-<button
-						class="text-xs flex items-center gap-1"
-						onclick={() => setPoolGender(member.tribe, member.gender === 'Male' ? 'Female' : member.gender === 'Female' ? null : 'Male')}
-						title={m.breeding_toggle_gender()}
-					>
-						{member.gender ?? m.breeding_any()}
-					</button>
-					<span class="text-[10px] text-surface-200">{palMap.get(member.tribe)?.display_name ?? member.tribe}</span>
-					<button class="text-surface-400 hover:text-rose-400 transition-colors" onclick={() => removeFromPool(member.tribe)} title={m.breeding_remove()}>
-													×
+											<div
+												class="rounded-sm bg-surface-950/50 border-surface-700/30 flex items-center gap-1 border px-1.5 py-0.5"
+											>
+												<button
+													class="flex items-center gap-1 text-xs"
+													onclick={() =>
+														setPoolGender(
+															member.tribe,
+															member.gender === 'Male'
+																? 'Female'
+																: member.gender === 'Female'
+																	? null
+																	: 'Male'
+														)}
+													title={m.breeding_toggle_gender()}
+												>
+													{member.gender ?? m.breeding_any()}
+												</button>
+												<span class="text-surface-200 text-[10px]"
+													>{palMap.get(member.tribe)?.display_name ?? member.tribe}</span
+												>
+												<button
+													class="text-surface-400 hover:text-error-400 transition-colors"
+													onclick={() => removeFromPool(member.tribe)}
+													title={m.breeding_remove()}
+												>
+													<X size={10} />
 												</button>
 											</div>
 										{/each}
@@ -691,14 +761,21 @@
 							</div>
 						{:else}
 							<!-- Save Mode: owner selector + wild toggle -->
-							<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-								<OwnerSelect {players} {ownerUid} onownerUidChange={(uid) => { ownerUid = uid; clearSaveResults(); }} />
+							<div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+								<OwnerSelect
+									{players}
+									{ownerUid}
+									onownerUidChange={(uid) => {
+										ownerUid = uid;
+										clearSaveResults();
+									}}
+								/>
 								<div class="flex flex-col gap-1">
-									<label class="flex items-center gap-2 text-xs text-surface-200 cursor-pointer">
+									<label class="text-surface-200 flex cursor-pointer items-center gap-2 text-xs">
 										<input type="checkbox" bind:checked={includeWild} class="accent-primary-500" />
 										{m.breeding_include_wild()}
 									</label>
-									<p class="text-[10px] text-surface-400">
+									<p class="text-surface-400 text-[10px]">
 										{ownedPalCount > 0
 											? m.breeding_owned_count({ n: ownedPalCount })
 											: m.breeding_no_pals_loaded()}
@@ -707,27 +784,35 @@
 							</div>
 						{/if}
 
-						<button class="btn btn-primary text-sm" disabled={!canRunChain || computing} onclick={runChain}>
+						<button
+							class="btn btn-primary text-sm"
+							disabled={!canRunChain || computing}
+							onclick={runChain}
+						>
 							{#if computing}<Spinner size="size-4" />{:else}<Route size={15} />{/if}
 							{m.breeding_find_chains()}
 						</button>
 					</div>
 
-					{#if error}<div class="flex items-center gap-1.5 px-3 py-2 rounded-4 bg-rose-500/10 border border-rose-500/30 text-xs text-rose-300"><AlertTriangle size={13} class="shrink-0" /><span>{error}</span></div>{/if}
+					{#if error}<div
+							class="rounded-md bg-error-500/10 border-error-500/30 text-error-300 flex items-center gap-1.5 border px-3 py-2 text-xs"
+						>
+							<AlertTriangle size={13} class="shrink-0" /><span>{error}</span>
+						</div>{/if}
 					{#each chainWarnings as w, i (i)}
-						<p class="text-xs text-amber-400 flex items-center gap-1">
+						<p class="text-warning-400 flex items-center gap-1 text-xs">
 							<AlertTriangle size={13} />{w}
 						</p>
 					{/each}
 
 					{#if computing && !chains.length}
-						<div class="flex items-center justify-center gap-2 py-12 text-surface-400">
+						<div class="text-surface-400 flex items-center justify-center gap-2 py-12">
 							<Spinner size="size-5" />
 							<span class="text-sm">{m.breeding_computing()}</span>
 						</div>
 					{:else if chains.length}
 						<div class="space-y-3">
-							<h3 class="text-xs font-semibold text-surface-400 uppercase tracking-wider">
+							<h3 class="text-surface-400 text-xs font-semibold tracking-wider uppercase">
 								{m.breeding_chains()} ({chains.length})
 							</h3>
 							{#each chains as chain, i (i)}
@@ -735,7 +820,7 @@
 							{/each}
 						</div>
 					{:else if !computing && chainElapsedMs !== null}
-						<div class="flex flex-col items-center justify-center py-12 text-surface-400 gap-2">
+						<div class="text-surface-400 flex flex-col items-center justify-center gap-2 py-12">
 							<SearchX size={28} />
 							<span class="text-sm">{m.breeding_no_chains()}</span>
 						</div>
@@ -745,21 +830,27 @@
 		{:else}
 			<!-- CHAIN GRAPH MODE -->
 			{#if mode === 'save' && !appState.saveFile}
-				<div class="flex flex-col items-center justify-center py-12 text-surface-400 gap-2">
+				<div class="text-surface-400 flex flex-col items-center justify-center gap-2 py-12">
 					<Database size={32} />
 					<span class="text-sm font-medium">{m.breeding_save_required()}</span>
 					<p class="text-xs">{m.breeding_save_required_hint()}</p>
 				</div>
 			{:else}
-				{#if error}<div class="flex items-center gap-1.5 px-3 py-2 rounded-4 bg-rose-500/10 border border-rose-500/30 text-xs text-rose-300"><AlertTriangle size={13} class="shrink-0" /><span>{error}</span></div>{/if}
+				{#if error}<div
+						class="rounded-md bg-error-500/10 border-error-500/30 text-error-300 flex items-center gap-1.5 border px-3 py-2 text-xs"
+					>
+						<AlertTriangle size={13} class="shrink-0" /><span>{error}</span>
+					</div>{/if}
 				{#each chainWarnings as w, i (i)}
-					<p class="text-xs text-amber-400 flex items-center gap-1">
+					<p class="text-warning-400 flex items-center gap-1 text-xs">
 						<AlertTriangle size={13} />{w}
 					</p>
 				{/each}
 
-				<div class="flex gap-4 flex-1 min-h-0">
-					<div class="flex-1 min-w-0 min-h-0 rounded-6 border border-surface-700/30 bg-surface-950/20 overflow-hidden">
+				<div class="flex min-h-0 flex-1 gap-4">
+					<div
+						class="rounded-md border-surface-700/30 bg-surface-950/20 min-h-0 min-w-0 flex-1 overflow-hidden border"
+					>
 						<GraphView
 							trees={chainTrees}
 							{chains}
@@ -776,14 +867,16 @@
 						/>
 					</div>
 					<div class="{sidePanelCollapsed ? 'w-10' : 'w-80'} shrink-0 transition-all duration-200">
-						<div class="rounded-8 border border-surface-700/20 bg-surface-900/90 shadow-xl overflow-hidden h-full backdrop-blur-sm">
+						<div
+							class="rounded-md border-surface-700/20 bg-surface-900/90 h-full overflow-hidden border shadow-xl backdrop-blur-sm"
+						>
 							<BreedingSidePanel
 								mode={mode === 'save' ? 'save' : 'selection'}
 								{pals}
 								collapsed={sidePanelCollapsed}
 								oncollapsedChange={(v) => (sidePanelCollapsed = v)}
 								{chains}
-								activeChainIndex={activeChainIndex}
+								{activeChainIndex}
 								onactiveChainIndexChange={(idx) => (activeChainIndex = idx)}
 								{chainTarget}
 								onchainTargetChange={(t) => (chainTarget = t)}

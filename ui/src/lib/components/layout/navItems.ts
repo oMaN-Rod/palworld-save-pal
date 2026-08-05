@@ -187,6 +187,14 @@ export const navItems: NavItem[] = [
 		href: '/debug',
 		visible: (ctx) => Boolean(ctx.appState.settings.debug_mode)
 	},
+	{
+		id: 'breeding',
+		section: 'tiles',
+		group: 'tools',
+		icon: () => FlaskConical,
+		label: () => m.breeding(),
+		href: '/breeding'
+	},
 
 	// --- tiles: help ---
 	{
@@ -196,13 +204,6 @@ export const navItems: NavItem[] = [
 		icon: () => Wrench,
 		label: () => m.tools(),
 		href: '/tools'
-	},
-	{
-		id: 'breeding',
-		section: 'tiles',
-		icon: () => FlaskConical,
-		label: () => m.breeding(),
-		href: '/breeding'
 	},
 	{
 		id: 'docs',

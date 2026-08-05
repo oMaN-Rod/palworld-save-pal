@@ -12,7 +12,7 @@
 	import Copy from '@lucide/svelte/icons/copy';
 	import Check from '@lucide/svelte/icons/check';
 	import * as m from '$i18n/messages';
-	import { getToastState } from '$states';
+	import { getToastState, theme } from '$states';
 	import type { BreedablePal, Chain } from '$lib/breeding/types';
 	import { DendrogramEngine } from '$lib/breeding/dendrogram/DendrogramEngine';
 	import { chainToTree } from '$lib/breeding/dendrogram/treeBuilder';
@@ -148,6 +148,7 @@
 		void palMap;
 		void matchedPassives;
 		void onselect;
+		void theme.current;
 		if (!engine) return;
 		const tree = treeNode ?? chainToTree(chain!, palMap);
 		engine.passiveName = passiveName;
@@ -187,37 +188,51 @@
 
 <div
 	bind:this={containerEl}
-	class="relative w-full overflow-hidden bg-surface-950/80 border border-surface-700/40 {fullHeight ? 'h-full' : 'rounded-6'}"
+	class="bg-surface-950/80 border-surface-700/40 relative w-full overflow-hidden border {fullHeight
+		? 'h-full'
+		: 'rounded-md'}"
 	style={fullHeight ? '' : 'height: {height}px;'}
 >
 	<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 	<svg
 		bind:this={svgEl}
-		class="block w-full h-full"
+		class="block h-full w-full"
 		style="touch-action: none;"
 		role="application"
 		tabindex="0"
 		aria-label="Breeding chain tree for {treeNode?.tribe ?? chain?.target ?? 'unknown'}"
-onpointerdown={handlePointerDown}
-			onpointermove={handlePointerMove}
-			onpointerup={handlePointerUp}
-			onpointerleave={handlePointerLeave}
+		onpointerdown={handlePointerDown}
+		onpointermove={handlePointerMove}
+		onpointerup={handlePointerUp}
+		onpointerleave={handlePointerLeave}
 	></svg>
 
-	<div class="absolute top-2 right-2 flex flex-col gap-1 z-10">
-		<button class="btn btn-secondary p-1.5 rounded-4 text-surface-200 hover:text-surface-50" title={m.breeding_zoom_in()} onclick={() => engine?.zoomBy(1.25)}>
+	<div class="absolute top-2 right-2 z-10 flex flex-col gap-1">
+		<button
+			class="btn btn-secondary rounded-sm text-surface-200 hover:text-surface-50 p-1.5"
+			title={m.breeding_zoom_in()}
+			onclick={() => engine?.zoomBy(1.25)}
+		>
 			<Plus size={14} />
 		</button>
-		<button class="btn btn-secondary p-1.5 rounded-4 text-surface-200 hover:text-surface-50" title={m.breeding_zoom_out()} onclick={() => engine?.zoomBy(0.8)}>
+		<button
+			class="btn btn-secondary rounded-sm text-surface-200 hover:text-surface-50 p-1.5"
+			title={m.breeding_zoom_out()}
+			onclick={() => engine?.zoomBy(0.8)}
+		>
 			<Minus size={14} />
 		</button>
-		<button class="btn btn-secondary p-1.5 rounded-4 text-surface-200 hover:text-surface-50" title={m.breeding_fit_view()} onclick={() => engine?.fit()}>
+		<button
+			class="btn btn-secondary rounded-sm text-surface-200 hover:text-surface-50 p-1.5"
+			title={m.breeding_fit_view()}
+			onclick={() => engine?.fit()}
+		>
 			<Maximize2 size={14} />
 		</button>
-		<div class="my-0.5 h-px bg-surface-700/40"></div>
+		<div class="bg-surface-700/40 my-0.5 h-px"></div>
 		<button
-			class="btn btn-secondary p-1.5 rounded-4 text-surface-200 hover:text-surface-50 disabled:opacity-40 disabled:cursor-not-allowed"
+			class="btn btn-secondary rounded-sm text-surface-200 hover:text-surface-50 p-1.5 disabled:cursor-not-allowed disabled:opacity-40"
 			title={m.breeding_export_png()}
 			disabled={exporting}
 			onclick={() => handleExport('download')}
@@ -225,12 +240,12 @@ onpointerdown={handlePointerDown}
 			<Download size={14} class={exporting ? 'animate-pulse' : ''} />
 		</button>
 		<button
-			class="btn btn-secondary p-1.5 rounded-4 text-surface-200 hover:text-surface-50 disabled:opacity-40 disabled:cursor-not-allowed"
+			class="btn btn-secondary rounded-sm text-surface-200 hover:text-surface-50 p-1.5 disabled:cursor-not-allowed disabled:opacity-40"
 			title={copied ? m.breeding_png_copied() : m.breeding_copy_png()}
 			disabled={exporting}
 			onclick={() => handleExport('copy')}
 		>
-			{#if copied}<Check size={14} class="text-emerald-400" />{:else}<Copy size={14} />{/if}
+			{#if copied}<Check size={14} class="text-success-400" />{:else}<Copy size={14} />{/if}
 		</button>
 	</div>
 

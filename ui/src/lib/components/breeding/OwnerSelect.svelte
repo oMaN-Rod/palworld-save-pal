@@ -106,7 +106,7 @@
 			<div
 				bind:this={floatingEl}
 				{@attach portal()}
-				class="bg-surface-950 border border-surface-700/40 rounded-6 shadow-xl flex flex-col max-h-48 overflow-y-auto min-w-52"
+				class="bg-surface-950 border border-surface-700/40 rounded-md shadow-xl flex flex-col max-h-48 overflow-y-auto min-w-52"
 				style="position: fixed; z-index: 99999;"
 				role="listbox"
 				id="owner-listbox"

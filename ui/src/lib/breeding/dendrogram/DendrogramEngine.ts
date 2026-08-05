@@ -10,14 +10,14 @@
  * (Reingold-Tilford), rotated 90° so depth → X and sibling axis → Y. Edges are
  * orthogonal elbow connectors with unique midpoints.
  */
-import { select, type Selection } from 'd3-selection';
 import { hierarchy, tree, type HierarchyPointNode } from 'd3-hierarchy';
-import { zoom, zoomIdentity, zoomTransform, type D3ZoomEvent, type ZoomBehavior } from 'd3-zoom';
+import { select, type Selection } from 'd3-selection';
 import { transition } from 'd3-transition';
+import { zoom, zoomIdentity, zoomTransform, type D3ZoomEvent, type ZoomBehavior } from 'd3-zoom';
 
-import { DENDRO_CONFIG, DENDRO_COLORS } from './constants';
-import type { NodeHoverCallback, NodeSelectCallback, TreeNode } from './types';
 import { assetLoader } from '$lib/utils/assetLoader';
+import { DENDRO_COLORS, DENDRO_CONFIG, resolveDendroColors, type DendroColors } from './constants';
+import type { NodeHoverCallback, NodeSelectCallback, TreeNode } from './types';
 
 interface PositionedNode {
 	node: TreeNode;
@@ -47,6 +47,7 @@ export class DendrogramEngine {
 	private layoutLinks: PositionedLink[] = [];
 	private layoutIndex = new Map<string, PositionedNode>();
 	private currentTransform = zoomIdentity;
+	private colors: DendroColors = DENDRO_COLORS;
 
 	selectedId: string | null = null;
 	hoveredId: string | null = null;
@@ -76,6 +77,7 @@ export class DendrogramEngine {
 	}
 
 	render(treeRoot: TreeNode): void {
+		this.colors = resolveDendroColors();
 		this.selectedId = null;
 		this.hoveredId = null;
 		this.layoutIndex.clear();
@@ -133,8 +135,7 @@ export class DendrogramEngine {
 			const tIdx = targetLinkIdx.get(targetData.id) ?? 0;
 			targetLinkIdx.set(targetData.id, tIdx + 1);
 			const totalIncoming = targetLinkCount.get(targetData.id) ?? 1;
-			const entryOffset =
-				totalIncoming > 1 ? (tIdx / (totalIncoming - 1) - 0.5) * 8 : 0;
+			const entryOffset = totalIncoming > 1 ? (tIdx / (totalIncoming - 1) - 0.5) * 8 : 0;
 			const tyAdj = ty + entryOffset;
 
 			this.layoutLinks.push({ source, target, sx, sy, tx, ty: tyAdj, midX });
@@ -156,7 +157,7 @@ export class DendrogramEngine {
 			.append('path')
 			.attr('class', 'dendro-link')
 			.attr('fill', 'none')
-			.attr('stroke', DENDRO_COLORS.link)
+			.attr('stroke', this.colors.link)
 			.attr('stroke-width', 1.5)
 			.attr('stroke-linecap', 'round')
 			.attr('stroke-linejoin', 'round');
@@ -166,9 +167,9 @@ export class DendrogramEngine {
 			.attr('d', (d) => orthogonalPath(d.sx, d.sy, d.tx, d.ty, d.midX))
 			.attr('stroke', (d) => {
 				if (d.source.node.id === this.selectedId || d.target.node.id === this.selectedId) {
-					return DENDRO_COLORS.linkHighlight;
+					return this.colors.linkHighlight;
 				}
-				return DENDRO_COLORS.link;
+				return this.colors.link;
 			})
 			.attr('stroke-width', (d) => {
 				if (d.source.node.id === this.selectedId || d.target.node.id === this.selectedId) {
@@ -235,7 +236,7 @@ export class DendrogramEngine {
 			.attr('class', 'dendro-name')
 			.attr('x', DENDRO_CONFIG.iconPadding * 2 + DENDRO_CONFIG.iconSize + 5)
 			.attr('y', 20)
-			.attr('fill', DENDRO_COLORS.inkPrimary)
+			.attr('fill', this.colors.inkPrimary)
 			.attr('font-size', 11)
 			.attr('font-weight', 600)
 			.attr('dominant-baseline', 'middle');
@@ -263,7 +264,7 @@ export class DendrogramEngine {
 			.attr('y', 13)
 			.attr('text-anchor', 'end')
 			.attr('font-size', 8)
-			.attr('fill', DENDRO_COLORS.inkDim)
+			.attr('fill', this.colors.inkDim)
 			.attr('dominant-baseline', 'middle');
 
 		enter
@@ -274,30 +275,27 @@ export class DendrogramEngine {
 			.attr('text-anchor', 'end')
 			.attr('font-size', 8)
 			.attr('font-weight', 700)
-			.attr('fill', DENDRO_COLORS.accentTarget)
+			.attr('fill', this.colors.accentTarget)
 			.attr('dominant-baseline', 'middle')
 			.attr('opacity', 0);
 
 		const merged = enter.merge(sel);
 
-		merged.attr(
-			'transform',
-			(d) => `translate(${d.x},${d.y - DENDRO_CONFIG.nodeHeight / 2})`
-		);
+		merged.attr('transform', (d) => `translate(${d.x},${d.y - DENDRO_CONFIG.nodeHeight / 2})`);
 
 		merged
 			.select<SVGRectElement>('.dendro-card')
 			.attr('fill', (d) => {
-				if (d.node.id === this.selectedId) return DENDRO_COLORS.bgCardSelected;
-				if (d.node.id === this.hoveredId) return DENDRO_COLORS.bgCardHover;
-				if (d.node.isBred && !d.node.isTarget) return DENDRO_COLORS.bgCardBred;
-				return DENDRO_COLORS.bgCard;
+				if (d.node.id === this.selectedId) return this.colors.bgCardSelected;
+				if (d.node.id === this.hoveredId) return this.colors.bgCardHover;
+				if (d.node.isBred && !d.node.isTarget) return this.colors.bgCardBred;
+				return this.colors.bgCard;
 			})
 			.attr('stroke', (d) => {
-				if (d.node.isTarget) return DENDRO_COLORS.accentTarget;
-				if (d.node.id === this.selectedId) return DENDRO_COLORS.accent;
-				if (d.node.id === this.hoveredId) return DENDRO_COLORS.accentLight;
-				return DENDRO_COLORS.line;
+				if (d.node.isTarget) return this.colors.accentTarget;
+				if (d.node.id === this.selectedId) return this.colors.accent;
+				if (d.node.id === this.hoveredId) return this.colors.accentLight;
+				return this.colors.line;
 			})
 			.attr('stroke-width', (d) => (d.node.isTarget ? 2.5 : 2));
 
@@ -308,93 +306,90 @@ export class DendrogramEngine {
 			.text((d) => (d.node.isTarget ? 'TARGET' : ''))
 			.attr('opacity', (d) => (d.node.isTarget ? 1 : 0));
 
-const passiveName = this.passiveName;
-			const matchedPassives = this.matchedPassives;
-			const glyphX = this.genderGlyphX.bind(this);
-			const iconTextX = DENDRO_CONFIG.iconPadding * 2 + DENDRO_CONFIG.iconSize + 5;
-			merged.each(function (this: SVGGElement, d: PositionedNode) {
-				// --- Name + gender glyph ---------------------------------------
-				// Fit the display name to the card's usable width (measured, not
-				// a char-count guess — CJK/wide glyphs are wider than an ASCII
-				// estimate), reserving a slot for the gender glyph and the
-				// right-edge step/target badges. Long names shrink instead of
-				// overlapping the glyph or spilling past the card.
-				const cardW = d.w;
-				const rightReserve = 30;
-				const genderSlot = genderGlyph(d.node.gender) ? 16 : 0;
-				const nameMaxW = Math.max(cardW - iconTextX - rightReserve - genderSlot, 20);
+		const passiveName = this.passiveName;
+		const matchedPassives = this.matchedPassives;
+		const colors = this.colors;
+		const glyphX = this.genderGlyphX.bind(this);
+		const iconTextX = DENDRO_CONFIG.iconPadding * 2 + DENDRO_CONFIG.iconSize + 5;
+		merged.each(function (this: SVGGElement, d: PositionedNode) {
+			// --- Name + gender glyph ---------------------------------------
+			// Fit the display name to the card's usable width (measured, not
+			// a char-count guess — CJK/wide glyphs are wider than an ASCII
+			// estimate), reserving a slot for the gender glyph and the
+			// right-edge step/target badges. Long names shrink instead of
+			// overlapping the glyph or spilling past the card.
+			const cardW = d.w;
+			const rightReserve = 30;
+			const genderSlot = genderGlyph(d.node.gender) ? 16 : 0;
+			const nameMaxW = Math.max(cardW - iconTextX - rightReserve - genderSlot, 20);
 
-				const nameEl = select(this).select<SVGTextElement>('.dendro-name');
-				const nameNode = nameEl.node();
-				if (nameNode) {
+			const nameEl = select(this).select<SVGTextElement>('.dendro-name');
+			const nameNode = nameEl.node();
+			if (nameNode) {
+				try {
+					fitWidth(nameNode, nameMaxW);
+				} catch {
+					// not laid out yet — keep the unmeasured text
+				}
+			}
+			const nameW = nameNode ? nameNode.getComputedTextLength() : 0;
+			const genderEl = select(this).select<SVGTextElement>('.dendro-gender');
+			const genderX = iconTextX + (nameW > 0 ? nameW + 5 : glyphX(d.node.display) - iconTextX);
+			genderEl
+				.attr('x', genderX)
+				.text(genderGlyph(d.node.gender))
+				.attr('fill', genderColor(colors, d.node.gender));
+
+			// --- Passive chips line -----------------------------------------
+			const g = select(this).select<SVGGElement>('g.dendro-passives');
+			const chipX0 = iconTextX;
+			const chipY = 38;
+			const passiveMaxW = Math.max(cardW - chipX0 - rightReserve, 30);
+			const visible = d.node.passives.slice(0, 3);
+			const overflow = d.node.passives.length - visible.length;
+
+			g.selectAll<SVGTextElement, string>('text').remove();
+			let label = '';
+			let allMatched = false;
+			if (overflow > 0) {
+				const first = visible[0];
+				const name = first ? passiveName(first) : '';
+				const short = name && name.length > 10 ? name.slice(0, 9) + '…' : name;
+				label = short ? `${short} +${overflow}` : '';
+				allMatched = visible.every((p) => matchedPassives.has(p));
+			} else if (visible.length) {
+				const parts = visible.map((p) => {
+					const name = passiveName(p);
+					return name.length > 10 ? name.slice(0, 9) + '…' : name;
+				});
+				label = parts.join(', ');
+				allMatched = visible.every((p) => matchedPassives.has(p));
+			}
+			if (label) {
+				const t = g
+					.append('text')
+					.attr('x', chipX0)
+					.attr('y', chipY)
+					.attr('font-size', 8)
+					.attr('font-weight', allMatched ? 600 : 400)
+					.attr('fill', allMatched ? colors.passiveMatched : colors.inkSecondary)
+					.attr('dominant-baseline', 'middle')
+					.text(label)
+					.node();
+				if (t) {
 					try {
-						fitWidth(nameNode, nameMaxW);
+						fitWidth(t, passiveMaxW);
 					} catch {
-						// not laid out yet — keep the unmeasured text
+						// not laid out yet
 					}
 				}
-				const nameW = nameNode ? nameNode.getComputedTextLength() : 0;
-				const genderEl = select(this).select<SVGTextElement>('.dendro-gender');
-				const genderX =
-					iconTextX + (nameW > 0 ? nameW + 5 : glyphX(d.node.display) - iconTextX);
-				genderEl
-					.attr('x', genderX)
-					.text(genderGlyph(d.node.gender))
-					.attr('fill', genderColor(d.node.gender));
-
-				// --- Passive chips line -----------------------------------------
-				const g = select(this).select<SVGGElement>('g.dendro-passives');
-				const chipX0 = iconTextX;
-				const chipY = 38;
-				const passiveMaxW = Math.max(cardW - chipX0 - rightReserve, 30);
-				const visible = d.node.passives.slice(0, 3);
-				const overflow = d.node.passives.length - visible.length;
-
-				g.selectAll<SVGTextElement, string>('text').remove();
-				let label = '';
-				let allMatched = false;
-				if (overflow > 0) {
-					const first = visible[0];
-					const name = first ? passiveName(first) : '';
-					const short = name && name.length > 10 ? name.slice(0, 9) + '…' : name;
-					label = short ? `${short} +${overflow}` : '';
-					allMatched = visible.every((p) => matchedPassives.has(p));
-				} else if (visible.length) {
-					const parts = visible.map((p) => {
-						const name = passiveName(p);
-						return name.length > 10 ? name.slice(0, 9) + '…' : name;
-					});
-					label = parts.join(', ');
-					allMatched = visible.every((p) => matchedPassives.has(p));
-				}
-				if (label) {
-					const t = g
-						.append('text')
-						.attr('x', chipX0)
-						.attr('y', chipY)
-						.attr('font-size', 8)
-						.attr('font-weight', allMatched ? 600 : 400)
-						.attr(
-							'fill',
-							allMatched ? DENDRO_COLORS.passiveMatched : DENDRO_COLORS.inkSecondary
-						)
-						.attr('dominant-baseline', 'middle')
-						.text(label)
-						.node();
-					if (t) {
-						try {
-							fitWidth(t, passiveMaxW);
-						} catch {
-							// not laid out yet
-						}
-					}
-				}
-			});
+			}
+		});
 
 		merged
 			.select<SVGCircleElement>('.dendro-source-dot')
 			.attr('fill', (d) =>
-				d.node.sourceType ? DENDRO_COLORS[d.node.sourceType] : DENDRO_COLORS.bgDeep
+				d.node.sourceType ? this.colors[d.node.sourceType] : this.colors.bgDeep
 			)
 			.attr('opacity', (d) => (d.node.sourceType ? 1 : 0));
 
@@ -418,12 +413,7 @@ const passiveName = this.passiveName;
 		for (const positioned of this.layoutNodes) {
 			const nx = positioned.x;
 			const ny = positioned.y - DENDRO_CONFIG.nodeHeight / 2;
-			if (
-				lx >= nx &&
-				lx <= nx + positioned.w &&
-				ly >= ny &&
-				ly <= ny + DENDRO_CONFIG.nodeHeight
-			) {
+			if (lx >= nx && lx <= nx + positioned.w && ly >= ny && ly <= ny + DENDRO_CONFIG.nodeHeight) {
 				return positioned.node;
 			}
 		}
@@ -434,14 +424,14 @@ const passiveName = this.passiveName;
 		if (this.hoveredId === id) return;
 		this.hoveredId = id;
 		this.refreshNodeStyles();
-		const node = id ? this.layoutIndex.get(id)?.node ?? null : null;
+		const node = id ? (this.layoutIndex.get(id)?.node ?? null) : null;
 		this.callbacks.onHover?.(node as any, 0, 0);
 	}
 
 	setSelected(id: string | null): void {
 		this.selectedId = id;
 		this.refreshNodeStyles();
-		const node = id ? this.layoutIndex.get(id)?.node ?? null : null;
+		const node = id ? (this.layoutIndex.get(id)?.node ?? null) : null;
 		this.callbacks.onSelect?.(node as any);
 	}
 
@@ -451,16 +441,16 @@ const passiveName = this.passiveName;
 			.selectAll<SVGGElement, PositionedNode>('g.dendro-node')
 			.select<SVGRectElement>('.dendro-card')
 			.attr('fill', (d) => {
-				if (d.node.id === this.selectedId) return DENDRO_COLORS.bgCardSelected;
-				if (d.node.id === this.hoveredId) return DENDRO_COLORS.bgCardHover;
-				if (d.node.isBred && !d.node.isTarget) return DENDRO_COLORS.bgCardBred;
-				return DENDRO_COLORS.bgCard;
+				if (d.node.id === this.selectedId) return this.colors.bgCardSelected;
+				if (d.node.id === this.hoveredId) return this.colors.bgCardHover;
+				if (d.node.isBred && !d.node.isTarget) return this.colors.bgCardBred;
+				return this.colors.bgCard;
 			})
 			.attr('stroke', (d) => {
-				if (d.node.isTarget) return DENDRO_COLORS.accentTarget;
-				if (d.node.id === this.selectedId) return DENDRO_COLORS.accent;
-				if (d.node.id === this.hoveredId) return DENDRO_COLORS.accentLight;
-				return DENDRO_COLORS.line;
+				if (d.node.isTarget) return this.colors.accentTarget;
+				if (d.node.id === this.selectedId) return this.colors.accent;
+				if (d.node.id === this.hoveredId) return this.colors.accentLight;
+				return this.colors.line;
 			})
 			.attr('stroke-width', (d) => (d.node.isTarget ? 2.5 : 2));
 
@@ -468,9 +458,9 @@ const passiveName = this.passiveName;
 			.selectAll<SVGPathElement, PositionedLink>('path.dendro-link')
 			.attr('stroke', (d) => {
 				if (d.source.node.id === this.selectedId || d.target.node.id === this.selectedId) {
-					return DENDRO_COLORS.linkHighlight;
+					return this.colors.linkHighlight;
 				}
-				return DENDRO_COLORS.link;
+				return this.colors.link;
 			})
 			.attr('stroke-width', (d) => {
 				if (d.source.node.id === this.selectedId || d.target.node.id === this.selectedId) {
@@ -595,14 +585,14 @@ function genderGlyph(gender?: string | null): string {
 	}
 }
 
-function genderColor(gender?: string | null): string {
+function genderColor(colors: DendroColors, gender?: string | null): string {
 	switch (gender) {
 		case 'Male':
-			return DENDRO_COLORS.male;
+			return colors.male;
 		case 'Female':
-			return DENDRO_COLORS.female;
+			return colors.female;
 		default:
-			return DENDRO_COLORS.wildcard;
+			return colors.wildcard;
 	}
 }
 

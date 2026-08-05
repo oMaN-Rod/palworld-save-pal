@@ -55,24 +55,26 @@
 	}
 </script>
 
-<div class="flex flex-col h-full min-h-0">
-	<div class="flex items-center justify-between gap-2 px-3 py-1.5 shrink-0 border-b border-surface-700/30">
-		<div class="flex items-center gap-2 min-w-0">
+<div class="flex h-full min-h-0 flex-col">
+	<div
+		class="border-surface-700/30 flex shrink-0 items-center justify-between gap-2 border-b px-3 py-1.5"
+	>
+		<div class="flex min-w-0 items-center gap-2">
 			{#if totalTrees > 0}
-				<div class="flex items-center gap-0.5 mr-1">
+				<div class="mr-1 flex items-center gap-0.5">
 					<button
-						class="btn btn-secondary p-1 rounded-3 text-surface-400 hover:text-surface-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+						class="btn btn-secondary rounded-sm text-surface-400 hover:text-surface-50 p-1 transition-colors disabled:cursor-not-allowed disabled:opacity-30"
 						onclick={prev}
 						disabled={activeIndex <= 0}
 						title={m.breeding_previous()}
 					>
 						<ChevronLeft size={12} />
 					</button>
-					<span class="text-[10px] text-surface-400 font-mono px-1 tabular-nums shrink-0">
+					<span class="text-surface-400 shrink-0 px-1 font-mono text-[10px] tabular-nums">
 						{totalTrees > 0 ? `${activeIndex + 1}/${totalTrees}` : '0/0'}
 					</span>
 					<button
-						class="btn btn-secondary p-1 rounded-3 text-surface-400 hover:text-surface-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+						class="btn btn-secondary rounded-sm text-surface-400 hover:text-surface-50 p-1 transition-colors disabled:cursor-not-allowed disabled:opacity-30"
 						onclick={next}
 						disabled={activeIndex >= totalTrees - 1}
 						title={m.breeding_next()}
@@ -84,40 +86,46 @@
 
 			{#if activeChain}
 				<GitMerge size={14} class="text-primary-400 shrink-0" />
-				<h3 class="text-sm font-semibold text-surface-50 truncate">
+				<h3 class="text-surface-50 truncate text-sm font-semibold">
 					{palMap.get(activeChain.target)?.display_name ?? activeChain.target}
 				</h3>
-<span class="chip text-[9px] px-1.5 py-0.5 chip-blue shrink-0"
-						>{m.breeding_gens({ n: activeChain.generations })}</span
-					>
+				<span class="chip chip-primary shrink-0 px-1.5 py-0.5 text-[9px]"
+					>{m.breeding_gens({ n: activeChain.generations })}</span
+				>
 				{#if activeChain.gender_feasible}
-					<CheckCircle2 size={11} class="text-emerald-400 shrink-0" />
+					<CheckCircle2 size={11} class="text-success-400 shrink-0" />
 				{:else}
-					<XCircle size={11} class="text-rose-400 shrink-0" />
+					<XCircle size={11} class="text-error-400 shrink-0" />
 				{/if}
 				{#if activeChain.matched_passives.length}
-					<div class="flex flex-wrap gap-1 shrink-0 ml-1">
+					<div class="ml-1 flex shrink-0 flex-wrap gap-1">
 						{#each activeChain.matched_passives as passive}
-							<span class="chip chip-green text-[8px] px-1.5 py-0">{passiveName(passive)}</span>
+							<span class="chip chip-success px-1.5 py-0 text-[8px]">{passiveName(passive)}</span>
 						{/each}
 					</div>
 				{/if}
 			{:else if activeTree}
 				<ArrowRightLeft size={14} class="text-primary-400 shrink-0" />
-				<h3 class="text-sm font-semibold text-surface-50 truncate">{activeTree.display}</h3>
+				<h3 class="text-surface-50 truncate text-sm font-semibold">{activeTree.display}</h3>
 			{/if}
 		</div>
 
 		{#if chains.length > 0 && maxDepth !== undefined && maxDepth > 1}
-			<div class="flex items-center gap-1.5 shrink-0">
-				<div class="flex gap-0.5 p-0.5 rounded-3 bg-surface-950/50 border border-surface-700/30">
+			<div class="flex shrink-0 items-center gap-1.5">
+				<div class="rounded-sm bg-surface-950/50 border-surface-700/30 flex gap-0.5 border p-0.5">
 					<button
-						class="px-1.5 py-0.5 rounded-2 text-[10px] font-medium transition-all {graphLayout === 'all-in-one' ? 'bg-primary-500/15 text-primary-300 border border-primary-500/40' : 'text-surface-400 hover:text-surface-200 border border-transparent'}"
+						class="rounded-sm px-1.5 py-0.5 text-[10px] font-medium transition-all {graphLayout ===
+						'all-in-one'
+							? 'bg-primary-500/15 text-primary-300 border-primary-500/40 border'
+							: 'text-surface-400 hover:text-surface-200 border border-transparent'}"
 						onclick={() => ongraphLayoutChange?.('all-in-one')}
 						title={m.breeding_show_all_generations()}>{m.breeding_all()}</button
 					>
 					<button
-						class="px-1.5 py-0.5 rounded-2 text-[10px] font-medium transition-all {graphLayout === 'per-gen' ? 'bg-primary-500/15 text-primary-300 border border-primary-500/40' : 'text-surface-400 hover:text-surface-200 border border-transparent'}"
+						class="rounded-sm px-1.5 py-0.5 text-[10px] font-medium transition-all {graphLayout ===
+						'per-gen'
+							? 'bg-primary-500/15 text-primary-300 border-primary-500/40 border'
+							: 'text-surface-400 hover:text-surface-200 border border-transparent'}"
 						onclick={() => ongraphLayoutChange?.('per-gen')}
 						title={m.breeding_show_single_generation()}>{m.breeding_per_gen()}</button
 					>
@@ -125,19 +133,17 @@
 
 				{#if graphLayout === 'per-gen'}
 					<div class="flex items-center gap-1">
-						<span class="text-[9px] text-surface-400 whitespace-nowrap">{m.breeding_gen()}</span>
+						<span class="text-surface-400 text-[9px] whitespace-nowrap">{m.breeding_gen()}</span>
 						<input
 							type="range"
 							min="1"
 							max={maxDepth}
-							class="w-16 h-1 accent-primary-500 cursor-pointer"
+							class="accent-primary-500 h-1 w-16 cursor-pointer"
 							value={currentGen}
 							oninput={(e) =>
-								oncurrentGenChange?.(
-									parseInt((e.currentTarget as HTMLInputElement).value) || 1
-								)}
+								oncurrentGenChange?.(parseInt((e.currentTarget as HTMLInputElement).value) || 1)}
 						/>
-						<span class="text-[10px] text-surface-50 font-mono w-4 text-right tabular-nums"
+						<span class="text-surface-50 w-4 text-right font-mono text-[10px] tabular-nums"
 							>{currentGen}</span
 						>
 					</div>
@@ -147,11 +153,11 @@
 	</div>
 
 	{#if activeTree}
-		<div class="flex-1 min-h-0">
+		<div class="min-h-0 flex-1">
 			<ChainDendrogram treeNode={activeTree} {palMap} {passiveName} fullHeight={true} {onselect} />
 		</div>
 	{:else}
-		<div class="flex-1 flex items-center justify-center text-xs text-surface-400 italic">
+		<div class="text-surface-400 flex flex-1 items-center justify-center text-xs italic">
 			{m.breeding_no_tree()}
 		</div>
 	{/if}
